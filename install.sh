@@ -106,7 +106,7 @@ while [[ $# -gt 0 ]]; do
   key="$1"
   case $key in 
     -g|--generator) generator="$2"; shift;;
-    -h|--help) ShowUsage, exit;;
+    -h|--help) ShowUsage; exit;;
     -t|--targets) targets=$2; shift;;
     -v|--version) ShowVersion; exit;;
     *) ShowUsage; exit;;
