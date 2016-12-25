@@ -1,15 +1,12 @@
 # Pcf
 Portable C++ Framework
 
-The Pcf Libraries are...
-
-- a collection of C++ classes libraries, similar in concept to the .NET Framework;
-- focused on "internet-age" network-centric applications;
-- written in efficient, modern ANSI/ISO Standard C++ and based on the C++ Standard Library/STL;
-- and highly portable and available on many different platforms;
+#The Pcf Libraries are...
+- a collection of C++ classes libraries, similar to the .NET Framework;
+- written in efficient, modern C++14;
+- and highly portable and available on many different platforms (Windows, Mac Os X, Linux);
 
 #Features
-
 - Cache framework
 - Date and Time classes
 - Delegates for events (signal/slot mechanism) and notifications
