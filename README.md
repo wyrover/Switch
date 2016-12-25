@@ -6,7 +6,14 @@ Portable C++ Framework
 - written in efficient, modern C++14;
 - and highly portable and available on many different platforms (Windows, Mac Os X, Linux);
 
-#Features
+# Libraries
+The framework is composed of 3 libraries :
+- Pcf.Core : The Pcf.Core library is a library of classes, interfaces, and value types that provide access to system functionality. It is the foundation on which c++ applications, components, and controls are built.
+- Pcf.Drawing : The Pcf.Drawing library contains types that support basic GDI+ graphics functionality. Child namespaces support advanced two-dimensional and vector graphics functionality, advanced imaging functionality, and print-related and typographical services. A child namespace also contains types that extend design-time user-interface logic and drawing.
+- Pcf.Forms : The Pcf.Forms library contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system.
+- Pcf.TUnit : The Pcf.TUnit library contains unit testing framework.
+
+#Namespace
 - Pcf::System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
 - Pcf::System::Collections namespace contain types that define various standard, specialized, and generic collection objects.
 - Pcf::System::Collections::Concurrent provides several thread-safe collection classes that should be used in place of the corresponding types in the System.Collections and System.Collections.Generic namespaces whenever multiple threads are accessing the collection concurrently.
@@ -31,6 +38,12 @@ Portable C++ Framework
 - Contains classes that represent ASCII and Unicode character encodings; abstract base classes for converting blocks of characters to and from blocks of bytes; and a helper class that manipulates and formats String objects without creating intermediate instances of String.
 - Provides classes and interfaces that enable multithreaded programming.
 - Provides types that simplify the work of writing concurrent and asynchronous code. The main types are System::Threading::Tasks::Task which represents an asynchronous operation that can be waited on and cancelled, and System::Threading::Tasks::Task<TResult>, which is a task that can return a value. The System::Threading::Tasks::TaskFactory class provides static methods for creating and starting tasks, and the System::Threading::Tasks::TaskScheduler class provides the default thread scheduling infrastructure.
+- Provides several important Windows Presentation Foundation (WPF) base element classes, various classes that support the WPF property system and event logic, and other types that are more broadly consumed by the WPF core and framework.
+- Contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system.
+- Contains classes for rendering controls and other Windows user interface (UI) elements with visual styles in operating systems that support them.
+- Provide Microsoft specific classes.
+- Provides two types of classes: those that handle events raised by the operating system and those that manipulate the system registry.
+- Contains a unit test framework.
 
 #Objectives and Mission
 
