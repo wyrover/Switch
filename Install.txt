@@ -1,0 +1,33 @@
+Linux
+-----
+
+For example, if your build directory is ../Build from Sources you can run the folowing line:
+../Sources/Install.sh -g "Eclipse CDT4 - Unix Makefiles" -t All
+
+
+For more information about install.sh run :
+./Install.sh --help
+
+_______________________________________________________________________________________________________
+
+Mac Os X
+--------
+
+For example, if your build directory is ../Build from Sources you can run the folowing line:
+../Sources/Install.sh -g "Xcode" -t All
+
+
+For more information about install.sh run :
+./Install.sh --help
+
+_______________________________________________________________________________________________________
+
+Windows
+-------
+
+For example, if your build directory is ../Build from Sources you can run the folowing line:
+../Sources/Install.ps1 -g "Visual Studio 2015 Win64" -t All
+
+
+For more information about install.sh run :
+Install.ps1 --help
