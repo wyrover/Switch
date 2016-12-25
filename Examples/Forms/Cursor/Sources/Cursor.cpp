@@ -1,7 +1,7 @@
 #include <Pcf/Pcf>
 
 using namespace System;
-using namespace System::Windows::FormsD;
+using namespace System::Windows::Forms;
 
 namespace CursorExample {
   class Form1 : public Form {
@@ -67,7 +67,7 @@ namespace CursorExample {
     class CursorNamePair : public object {
     public:
       CursorNamePair() {}
-      CursorNamePair(const System::Windows::FormsD::Cursor& cursor, const string& name) : cursor(cursor), name(name) {}
+      CursorNamePair(const System::Windows::Forms::Cursor& cursor, const string& name) : cursor(cursor), name(name) {}
       CursorNamePair(const CursorNamePair& cursorNamePair) : cursor(cursorNamePair.cursor), name(cursorNamePair.name) {}
       CursorNamePair& operator =(const CursorNamePair& cursorNamePair) {
         this->cursor = cursorNamePair.cursor;
@@ -75,7 +75,7 @@ namespace CursorExample {
         return *this;
       }
       
-      Property<System::Windows::FormsD::Cursor, ReadOnly> Cursor {
+      Property<System::Windows::Forms::Cursor, ReadOnly> Cursor {
         pcf_get {return this->cursor;}
       };
       
@@ -86,7 +86,7 @@ namespace CursorExample {
       string ToString() const override {return this->Name;}
       
     private:
-      System::Windows::FormsD::Cursor cursor = Cursors::Default;
+      System::Windows::Forms::Cursor cursor = Cursors::Default;
       string name = "Default";
     };
     

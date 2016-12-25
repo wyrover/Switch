@@ -1,7 +1,7 @@
 #include <Pcf/Pcf>
 
 using namespace System;
-using namespace System::Windows::FormsD;
+using namespace System::Windows::Forms;
 
 namespace ColorsExample {
   class Form1 : public Form {

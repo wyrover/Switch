@@ -3,7 +3,7 @@
 using namespace System;
 using namespace System::Diagnostics;
 using namespace System::Threading;
-using namespace System::Windows::FormsD;
+using namespace System::Windows::Forms;
 
 class Form1 : public Form {
 public:

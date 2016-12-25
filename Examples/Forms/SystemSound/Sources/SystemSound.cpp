@@ -2,7 +2,7 @@
 
 using namespace System;
 using namespace System::Media;
-using namespace System::Windows::FormsD;
+using namespace System::Windows::Forms;
 
 namespace SystemSoundExample {
   class Form1 : public Form {
