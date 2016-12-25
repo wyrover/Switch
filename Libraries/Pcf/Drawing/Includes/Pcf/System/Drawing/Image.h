@@ -7,7 +7,6 @@
 #include <Pcf/SharedPointer.h>
 #include <Pcf/System/Array.h>
 #include <Pcf/System/IComparable.h>
-#include <Pcf/System/IHashable.h>
 #include <Pcf/System/IO/Stream.h>
 
 #include "Imaging/ColorPalette.h"
@@ -17,6 +16,7 @@
 #include "Size.h"
 #include "SizeF.h"
 
+/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Pcf {
   /// @cond
   /// TODO : To remove as soon as possible...
@@ -25,7 +25,9 @@ namespace Pcf {
   }
   /// @endcond
   
+  /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
+    /// @brief The System::Drawing namespace provides access to GDI+ basic graphics functionality. More advanced functionality is provided in the System::Drawing::Drawing2D, System::Drawing::Imaging, and System::Drawing::Text namespaces.
     namespace Drawing {
       /// @cond
       class Bmp;
@@ -36,7 +38,7 @@ namespace Pcf {
       
       /// @brief An abstract base class that provides functionality for the System::Drawing::Bitmap and System::Drawing::Imaging::Metafile descended classes.
       /// @remarks To draw an System::Drawing::Image on a Windows Form, you should use one of the Graphics::DrawImage(Image, Point) methods.
-      class Image : public object, public IComparable, public IHashable {
+      class Image : public object, public IComparable {
       public:
         /// @cond
         Image();
@@ -47,7 +49,7 @@ namespace Pcf {
           pcf_get {return this->rawData.Data();}
         };
         
-        static const Image None;
+        static Property<Image, ReadOnly> None;
 
         /// @brief Gets attribute flags for the pixel data of this System::Drawing::Image.
         /// @return a value of System::Drawing::Imaging::ImageFlags.
@@ -131,9 +133,9 @@ namespace Pcf {
           return CompareTo(as<Image>(obj));
         }
 
-        virtual int32 CompareTo(const Image& value) const {return IntPtr((void*)&rawData).CompareTo(IntPtr((void*)&rawData));}
+        virtual int32 CompareTo(const Image& value) const {return IntPtr((intptr)&rawData).CompareTo(IntPtr((intptr)&rawData));}
 
-        virtual int32 GetHashCode() const {return IntPtr((void*)&rawData).GetHashCode();}
+        virtual int32 GetHashCode() const {return IntPtr((intptr)&rawData).GetHashCode();}
 
       protected:
         /// @cond

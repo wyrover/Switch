@@ -180,147 +180,569 @@ Color::KnownColors Color::knownColors {
   {(int32)KnownColor::MenuHighlight, (int32)0xFF316AC5}
 };
 
-const Color Color::Transparent = Color::FromKnownColor(KnownColor::Transparent);
-const Color Color::AliceBlue = Color::FromKnownColor(KnownColor::AliceBlue);
-const Color Color::AntiqueWhite = Color::FromKnownColor(KnownColor::AntiqueWhite);
-const Color Color::Aqua = Color::FromKnownColor(KnownColor::Aqua);
-const Color Color::Aquamarine = Color::FromKnownColor(KnownColor::Aquamarine);
-const Color Color::Azure = Color::FromKnownColor(KnownColor::Azure);
-const Color Color::Beige = Color::FromKnownColor(KnownColor::Beige);
-const Color Color::Bisque = Color::FromKnownColor(KnownColor::Bisque);
-const Color Color::Black = Color::FromKnownColor(KnownColor::Black);
-const Color Color::BlanchedAlmond = Color::FromKnownColor(KnownColor::BlanchedAlmond);
-const Color Color::Blue = Color::FromKnownColor(KnownColor::Blue);
-const Color Color::BlueViolet = Color::FromKnownColor(KnownColor::BlueViolet);
-const Color Color::Brown = Color::FromKnownColor(KnownColor::Brown);
-const Color Color::BurlyWood = Color::FromKnownColor(KnownColor::BurlyWood);
-const Color Color::CadetBlue = Color::FromKnownColor(KnownColor::CadetBlue);
-const Color Color::Chartreuse = Color::FromKnownColor(KnownColor::Chartreuse);
-const Color Color::Chocolate = Color::FromKnownColor(KnownColor::Chocolate);
-const Color Color::Coral = Color::FromKnownColor(KnownColor::Coral);
-const Color Color::CornflowerBlue = Color::FromKnownColor(KnownColor::CornflowerBlue);
-const Color Color::Cornsilk = Color::FromKnownColor(KnownColor::Cornsilk);
-const Color Color::Crimson = Color::FromKnownColor(KnownColor::Crimson);
-const Color Color::Cyan = Color::FromKnownColor(KnownColor::Cyan);
-const Color Color::DarkBlue = Color::FromKnownColor(KnownColor::DarkBlue);
-const Color Color::DarkCyan = Color::FromKnownColor(KnownColor::DarkCyan);
-const Color Color::DarkGoldenrod = Color::FromKnownColor(KnownColor::DarkGoldenrod);
-const Color Color::DarkGray = Color::FromKnownColor(KnownColor::DarkGray);
-const Color Color::DarkGreen = Color::FromKnownColor(KnownColor::DarkGreen);
-const Color Color::DarkKhaki = Color::FromKnownColor(KnownColor::DarkKhaki);
-const Color Color::DarkMagenta = Color::FromKnownColor(KnownColor::DarkMagenta);
-const Color Color::DarkOliveGreen = Color::FromKnownColor(KnownColor::DarkOliveGreen);
-const Color Color::DarkOrange = Color::FromKnownColor(KnownColor::DarkOrange);
-const Color Color::DarkOrchid = Color::FromKnownColor(KnownColor::DarkOrchid);
-const Color Color::DarkRed = Color::FromKnownColor(KnownColor::DarkRed);
-const Color Color::DarkSalmon = Color::FromKnownColor(KnownColor::DarkSalmon);
-const Color Color::DarkSeaGreen = Color::FromKnownColor(KnownColor::DarkSeaGreen);
-const Color Color::DarkSlateBlue = Color::FromKnownColor(KnownColor::DarkSlateBlue);
-const Color Color::DarkSlateGray = Color::FromKnownColor(KnownColor::DarkSlateGray);
-const Color Color::DarkTurquoise = Color::FromKnownColor(KnownColor::DarkTurquoise);
-const Color Color::DarkViolet = Color::FromKnownColor(KnownColor::DarkViolet);
-const Color Color::DeepPink = Color::FromKnownColor(KnownColor::DeepPink);
-const Color Color::DeepSkyBlue = Color::FromKnownColor(KnownColor::DeepSkyBlue);
-const Color Color::DimGray = Color::FromKnownColor(KnownColor::DimGray);
-const Color Color::DodgerBlue = Color::FromKnownColor(KnownColor::DodgerBlue);
-const Color Color::Firebrick = Color::FromKnownColor(KnownColor::Firebrick);
-const Color Color::FloralWhite = Color::FromKnownColor(KnownColor::FloralWhite);
-const Color Color::ForestGreen = Color::FromKnownColor(KnownColor::ForestGreen);
-const Color Color::Fuchsia = Color::FromKnownColor(KnownColor::Fuchsia);
-const Color Color::Gainsboro = Color::FromKnownColor(KnownColor::Gainsboro);
-const Color Color::GhostWhite = Color::FromKnownColor(KnownColor::GhostWhite);
-const Color Color::Gold = Color::FromKnownColor(KnownColor::Gold);
-const Color Color::Goldenrod = Color::FromKnownColor(KnownColor::Goldenrod);
-const Color Color::Gray = Color::FromKnownColor(KnownColor::Gray);
-const Color Color::Green = Color::FromKnownColor(KnownColor::Green);
-const Color Color::GreenYellow = Color::FromKnownColor(KnownColor::GreenYellow);
-const Color Color::Honeydew = Color::FromKnownColor(KnownColor::Honeydew);
-const Color Color::HotPink = Color::FromKnownColor(KnownColor::HotPink);
-const Color Color::IndianRed = Color::FromKnownColor(KnownColor::IndianRed);
-const Color Color::Indigo = Color::FromKnownColor(KnownColor::Indigo);
-const Color Color::Ivory = Color::FromKnownColor(KnownColor::Ivory);
-const Color Color::Khaki = Color::FromKnownColor(KnownColor::Khaki);
-const Color Color::Lavender = Color::FromKnownColor(KnownColor::Lavender);
-const Color Color::LavenderBlush = Color::FromKnownColor(KnownColor::LavenderBlush);
-const Color Color::LawnGreen = Color::FromKnownColor(KnownColor::LawnGreen);
-const Color Color::LemonChiffon = Color::FromKnownColor(KnownColor::LemonChiffon);
-const Color Color::LightBlue = Color::FromKnownColor(KnownColor::LightBlue);
-const Color Color::LightCoral = Color::FromKnownColor(KnownColor::LightCoral);
-const Color Color::LightCyan = Color::FromKnownColor(KnownColor::LightCyan);
-const Color Color::LightGoldenrodYellow = Color::FromKnownColor(KnownColor::LightGoldenrodYellow);
-const Color Color::LightGray = Color::FromKnownColor(KnownColor::LightGray);
-const Color Color::LightGreen = Color::FromKnownColor(KnownColor::LightGreen);
-const Color Color::LightPink = Color::FromKnownColor(KnownColor::LightPink);
-const Color Color::LightSalmon = Color::FromKnownColor(KnownColor::LightSalmon);
-const Color Color::LightSeaGreen = Color::FromKnownColor(KnownColor::LightSeaGreen);
-const Color Color::LightSkyBlue = Color::FromKnownColor(KnownColor::LightSkyBlue);
-const Color Color::LightSlateGray = Color::FromKnownColor(KnownColor::LightSlateGray);
-const Color Color::LightSteelBlue = Color::FromKnownColor(KnownColor::LightSteelBlue);
-const Color Color::LightYellow = Color::FromKnownColor(KnownColor::LightYellow);
-const Color Color::Lime = Color::FromKnownColor(KnownColor::Lime);
-const Color Color::LimeGreen = Color::FromKnownColor(KnownColor::LimeGreen);
-const Color Color::Linen = Color::FromKnownColor(KnownColor::Linen);
-const Color Color::Magenta = Color::FromKnownColor(KnownColor::Magenta);
-const Color Color::Maroon = Color::FromKnownColor(KnownColor::Maroon);
-const Color Color::MediumAquamarine = Color::FromKnownColor(KnownColor::MediumAquamarine);
-const Color Color::MediumBlue = Color::FromKnownColor(KnownColor::MediumBlue);
-const Color Color::MediumOrchid = Color::FromKnownColor(KnownColor::MediumOrchid);
-const Color Color::MediumPurple = Color::FromKnownColor(KnownColor::MediumPurple);
-const Color Color::MediumSeaGreen = Color::FromKnownColor(KnownColor::MediumSeaGreen);
-const Color Color::MediumSlateBlue = Color::FromKnownColor(KnownColor::MediumSlateBlue);
-const Color Color::MediumSpringGreen = Color::FromKnownColor(KnownColor::MediumSpringGreen);
-const Color Color::MediumTurquoise = Color::FromKnownColor(KnownColor::MediumTurquoise);
-const Color Color::MediumVioletRed = Color::FromKnownColor(KnownColor::MediumVioletRed);
-const Color Color::MidnightBlue = Color::FromKnownColor(KnownColor::MidnightBlue);
-const Color Color::MintCream = Color::FromKnownColor(KnownColor::MintCream);
-const Color Color::MistyRose = Color::FromKnownColor(KnownColor::MistyRose);
-const Color Color::Moccasin = Color::FromKnownColor(KnownColor::Moccasin);
-const Color Color::NavajoWhite = Color::FromKnownColor(KnownColor::NavajoWhite);
-const Color Color::Navy = Color::FromKnownColor(KnownColor::Navy);
-const Color Color::OldLace = Color::FromKnownColor(KnownColor::OldLace);
-const Color Color::Olive = Color::FromKnownColor(KnownColor::Olive);
-const Color Color::OliveDrab = Color::FromKnownColor(KnownColor::OliveDrab);
-const Color Color::Orange = Color::FromKnownColor(KnownColor::Orange);
-const Color Color::OrangeRed = Color::FromKnownColor(KnownColor::OrangeRed);
-const Color Color::Orchid = Color::FromKnownColor(KnownColor::Orchid);
-const Color Color::PaleGoldenrod = Color::FromKnownColor(KnownColor::PaleGoldenrod);
-const Color Color::PaleGreen = Color::FromKnownColor(KnownColor::PaleGreen);
-const Color Color::PaleTurquoise = Color::FromKnownColor(KnownColor::PaleTurquoise);
-const Color Color::PaleVioletRed = Color::FromKnownColor(KnownColor::PaleVioletRed);
-const Color Color::PapayaWhip = Color::FromKnownColor(KnownColor::PapayaWhip);
-const Color Color::PeachPuff = Color::FromKnownColor(KnownColor::PeachPuff);
-const Color Color::Peru = Color::FromKnownColor(KnownColor::Peru);
-const Color Color::Pink = Color::FromKnownColor(KnownColor::Pink);
-const Color Color::Plum = Color::FromKnownColor(KnownColor::Plum);
-const Color Color::PowderBlue = Color::FromKnownColor(KnownColor::PowderBlue);
-const Color Color::Purple = Color::FromKnownColor(KnownColor::Purple);
-const Color Color::Red = Color::FromKnownColor(KnownColor::Red);
-const Color Color::RosyBrown = Color::FromKnownColor(KnownColor::RosyBrown);
-const Color Color::RoyalBlue = Color::FromKnownColor(KnownColor::RoyalBlue);
-const Color Color::SaddleBrown = Color::FromKnownColor(KnownColor::SaddleBrown);
-const Color Color::Salmon = Color::FromKnownColor(KnownColor::Salmon);
-const Color Color::SandyBrown = Color::FromKnownColor(KnownColor::SandyBrown);
-const Color Color::SeaGreen = Color::FromKnownColor(KnownColor::SeaGreen);
-const Color Color::SeaShell = Color::FromKnownColor(KnownColor::SeaShell);
-const Color Color::Sienna = Color::FromKnownColor(KnownColor::Sienna);
-const Color Color::Silver = Color::FromKnownColor(KnownColor::Silver);
-const Color Color::SkyBlue = Color::FromKnownColor(KnownColor::SkyBlue);
-const Color Color::SlateBlue = Color::FromKnownColor(KnownColor::SlateBlue);
-const Color Color::SlateGray = Color::FromKnownColor(KnownColor::SlateGray);
-const Color Color::Snow = Color::FromKnownColor(KnownColor::Snow);
-const Color Color::SpringGreen = Color::FromKnownColor(KnownColor::SpringGreen);
-const Color Color::SteelBlue = Color::FromKnownColor(KnownColor::SteelBlue);
-const Color Color::Tan = Color::FromKnownColor(KnownColor::Tan);
-const Color Color::Teal = Color::FromKnownColor(KnownColor::Teal);
-const Color Color::Thistle = Color::FromKnownColor(KnownColor::Thistle);
-const Color Color::Tomato = Color::FromKnownColor(KnownColor::Tomato);
-const Color Color::Turquoise = Color::FromKnownColor(KnownColor::Turquoise);
-const Color Color::Violet = Color::FromKnownColor(KnownColor::Violet);
-const Color Color::Wheat = Color::FromKnownColor(KnownColor::Wheat);
-const Color Color::White = Color::FromKnownColor(KnownColor::White);
-const Color Color::WhiteSmoke = Color::FromKnownColor(KnownColor::WhiteSmoke);
-const Color Color::Yellow = Color::FromKnownColor(KnownColor::Yellow);
-const Color Color::YellowGreen = Color::FromKnownColor(KnownColor::YellowGreen);
+Property<Color, ReadOnly> Color::Transparent {
+  [] {return Color::FromKnownColor(KnownColor::Transparent);}
+};
+
+Property<Color, ReadOnly> Color::AliceBlue {
+  [] {return Color::FromKnownColor(KnownColor::AliceBlue);}
+};
+
+Property<Color, ReadOnly> Color::AntiqueWhite {
+  [] {return Color::FromKnownColor(KnownColor::AntiqueWhite);}
+};
+
+Property<Color, ReadOnly> Color::Aqua {
+  [] {return Color::FromKnownColor(KnownColor::Aqua);}
+};
+
+Property<Color, ReadOnly> Color::Aquamarine {
+  [] {return Color::FromKnownColor(KnownColor::Aquamarine);}
+};
+
+Property<Color, ReadOnly> Color::Azure {
+  [] {return Color::FromKnownColor(KnownColor::Azure);}
+};
+
+Property<Color, ReadOnly> Color::Beige {
+  [] {return Color::FromKnownColor(KnownColor::Beige);}
+};
+
+Property<Color, ReadOnly> Color::Bisque {
+  [] {return Color::FromKnownColor(KnownColor::Bisque);}
+};
+
+Property<Color, ReadOnly> Color::Black {
+  [] {return Color::FromKnownColor(KnownColor::Black);}
+};
+
+Property<Color, ReadOnly> Color::BlanchedAlmond {
+  [] {return Color::FromKnownColor(KnownColor::BlanchedAlmond);}
+};
+
+Property<Color, ReadOnly> Color::Blue {
+  [] {return Color::FromKnownColor(KnownColor::Blue);}
+};
+
+Property<Color, ReadOnly> Color::BlueViolet {
+  [] {return Color::FromKnownColor(KnownColor::BlueViolet);}
+};
+
+Property<Color, ReadOnly> Color::Brown {
+  [] {return Color::FromKnownColor(KnownColor::Brown);}
+};
+
+Property<Color, ReadOnly> Color::BurlyWood {
+  [] {return Color::FromKnownColor(KnownColor::BurlyWood);}
+};
+
+Property<Color, ReadOnly> Color::CadetBlue {
+  [] {return Color::FromKnownColor(KnownColor::CadetBlue);}
+};
+
+Property<Color, ReadOnly> Color::Chartreuse {
+  [] {return Color::FromKnownColor(KnownColor::Chartreuse);}
+};
+
+Property<Color, ReadOnly> Color::Chocolate {
+  [] {return Color::FromKnownColor(KnownColor::Chocolate);}
+};
+
+Property<Color, ReadOnly> Color::Coral {
+  [] {return Color::FromKnownColor(KnownColor::Coral);}
+};
+
+Property<Color, ReadOnly> Color::CornflowerBlue {
+  [] {return Color::FromKnownColor(KnownColor::CornflowerBlue);}
+};
+
+Property<Color, ReadOnly> Color::Cornsilk {
+  [] {return Color::FromKnownColor(KnownColor::Cornsilk);}
+};
+
+Property<Color, ReadOnly> Color::Crimson {
+  [] {return Color::FromKnownColor(KnownColor::Crimson);}
+};
+
+Property<Color, ReadOnly> Color::Cyan {
+  [] {return Color::FromKnownColor(KnownColor::Cyan);}
+};
+
+Property<Color, ReadOnly> Color::DarkBlue {
+  [] {return Color::FromKnownColor(KnownColor::DarkBlue);}
+};
+
+Property<Color, ReadOnly> Color::DarkCyan {
+  [] {return Color::FromKnownColor(KnownColor::DarkCyan);}
+};
+
+Property<Color, ReadOnly> Color::DarkGoldenrod {
+  [] {return Color::FromKnownColor(KnownColor::DarkGoldenrod);}
+};
+
+Property<Color, ReadOnly> Color::DarkGray {
+  [] {return Color::FromKnownColor(KnownColor::DarkGray);}
+};
+
+Property<Color, ReadOnly> Color::DarkGreen {
+  [] {return Color::FromKnownColor(KnownColor::DarkGreen);}
+};
+
+Property<Color, ReadOnly> Color::DarkKhaki {
+  [] {return Color::FromKnownColor(KnownColor::DarkKhaki);}
+};
+
+Property<Color, ReadOnly> Color::DarkMagenta {
+  [] {return Color::FromKnownColor(KnownColor::DarkMagenta);}
+};
+
+Property<Color, ReadOnly> Color::DarkOliveGreen {
+  [] {return Color::FromKnownColor(KnownColor::DarkOliveGreen);}
+};
+
+Property<Color, ReadOnly> Color::DarkOrange {
+  [] {return Color::FromKnownColor(KnownColor::DarkOrange);}
+};
+
+Property<Color, ReadOnly> Color::DarkOrchid {
+  [] {return Color::FromKnownColor(KnownColor::DarkOrchid);}
+};
+
+Property<Color, ReadOnly> Color::DarkRed {
+  [] {return Color::FromKnownColor(KnownColor::DarkRed);}
+};
+
+Property<Color, ReadOnly> Color::DarkSalmon {
+  [] {return Color::FromKnownColor(KnownColor::DarkSalmon);}
+};
+
+Property<Color, ReadOnly> Color::DarkSeaGreen {
+  [] {return Color::FromKnownColor(KnownColor::DarkSeaGreen);}
+};
+
+Property<Color, ReadOnly> Color::DarkSlateBlue {
+  [] {return Color::FromKnownColor(KnownColor::DarkSlateBlue);}
+};
+
+Property<Color, ReadOnly> Color::DarkSlateGray {
+  [] {return Color::FromKnownColor(KnownColor::DarkSlateGray);}
+};
+
+Property<Color, ReadOnly> Color::DarkTurquoise {
+  [] {return Color::FromKnownColor(KnownColor::DarkTurquoise);}
+};
+
+Property<Color, ReadOnly> Color::DarkViolet {
+  [] {return Color::FromKnownColor(KnownColor::DarkViolet);}
+};
+
+Property<Color, ReadOnly> Color::DeepPink {
+  [] {return Color::FromKnownColor(KnownColor::DeepPink);}
+};
+
+Property<Color, ReadOnly> Color::DeepSkyBlue {
+  [] {return Color::FromKnownColor(KnownColor::DeepSkyBlue);}
+};
+
+Property<Color, ReadOnly> Color::DimGray {
+  [] {return Color::FromKnownColor(KnownColor::DimGray);}
+};
+
+Property<Color, ReadOnly> Color::DodgerBlue {
+  [] {return Color::FromKnownColor(KnownColor::DodgerBlue);}
+};
+
+Property<Color, ReadOnly> Color::Firebrick {
+  [] {return Color::FromKnownColor(KnownColor::Firebrick);}
+};
+
+Property<Color, ReadOnly> Color::FloralWhite {
+  [] {return Color::FromKnownColor(KnownColor::FloralWhite);}
+};
+
+Property<Color, ReadOnly> Color::ForestGreen {
+  [] {return Color::FromKnownColor(KnownColor::ForestGreen);}
+};
+
+Property<Color, ReadOnly> Color::Fuchsia {
+  [] {return Color::FromKnownColor(KnownColor::Fuchsia);}
+};
+
+Property<Color, ReadOnly> Color::Gainsboro {
+  [] {return Color::FromKnownColor(KnownColor::Gainsboro);}
+};
+
+Property<Color, ReadOnly> Color::GhostWhite {
+  [] {return Color::FromKnownColor(KnownColor::GhostWhite);}
+};
+
+Property<Color, ReadOnly> Color::Gold {
+  [] {return Color::FromKnownColor(KnownColor::Gold);}
+};
+
+Property<Color, ReadOnly> Color::Goldenrod {
+  [] {return Color::FromKnownColor(KnownColor::Goldenrod);}
+};
+
+Property<Color, ReadOnly> Color::Gray {
+  [] {return Color::FromKnownColor(KnownColor::Gray);}
+};
+
+Property<Color, ReadOnly> Color::Green {
+  [] {return Color::FromKnownColor(KnownColor::Green);}
+};
+
+Property<Color, ReadOnly> Color::GreenYellow {
+  [] {return Color::FromKnownColor(KnownColor::GreenYellow);}
+};
+
+Property<Color, ReadOnly> Color::Honeydew {
+  [] {return Color::FromKnownColor(KnownColor::Honeydew);}
+};
+
+Property<Color, ReadOnly> Color::HotPink {
+  [] {return Color::FromKnownColor(KnownColor::HotPink);}
+};
+
+Property<Color, ReadOnly> Color::IndianRed {
+  [] {return Color::FromKnownColor(KnownColor::IndianRed);}
+};
+
+Property<Color, ReadOnly> Color::Indigo {
+  [] {return Color::FromKnownColor(KnownColor::Indigo);}
+};
+
+Property<Color, ReadOnly> Color::Ivory {
+  [] {return Color::FromKnownColor(KnownColor::Ivory);}
+};
+
+Property<Color, ReadOnly> Color::Khaki {
+  [] {return Color::FromKnownColor(KnownColor::Khaki);}
+};
+
+Property<Color, ReadOnly> Color::Lavender {
+  [] {return Color::FromKnownColor(KnownColor::Lavender);}
+};
+
+Property<Color, ReadOnly> Color::LavenderBlush {
+  [] {return Color::FromKnownColor(KnownColor::LavenderBlush);}
+};
+
+Property<Color, ReadOnly> Color::LawnGreen {
+  [] {return Color::FromKnownColor(KnownColor::LawnGreen);}
+};
+
+Property<Color, ReadOnly> Color::LemonChiffon {
+  [] {return Color::FromKnownColor(KnownColor::LemonChiffon);}
+};
+
+Property<Color, ReadOnly> Color::LightBlue {
+  [] {return Color::FromKnownColor(KnownColor::LightBlue);}
+};
+
+Property<Color, ReadOnly> Color::LightCoral {
+  [] {return Color::FromKnownColor(KnownColor::LightCoral);}
+};
+
+Property<Color, ReadOnly> Color::LightCyan {
+  [] {return Color::FromKnownColor(KnownColor::LightCyan);}
+};
+
+Property<Color, ReadOnly> Color::LightGoldenrodYellow {
+  [] {return Color::FromKnownColor(KnownColor::LightGoldenrodYellow);}
+};
+
+Property<Color, ReadOnly> Color::LightGray {
+  [] {return Color::FromKnownColor(KnownColor::LightGray);}
+};
+
+Property<Color, ReadOnly> Color::LightGreen {
+  [] {return Color::FromKnownColor(KnownColor::LightGreen);}
+};
+
+Property<Color, ReadOnly> Color::LightPink {
+  [] {return Color::FromKnownColor(KnownColor::LightPink);}
+};
+
+Property<Color, ReadOnly> Color::LightSalmon {
+  [] {return Color::FromKnownColor(KnownColor::LightSalmon);}
+};
+
+Property<Color, ReadOnly> Color::LightSeaGreen {
+  [] {return Color::FromKnownColor(KnownColor::LightSeaGreen);}
+};
+
+Property<Color, ReadOnly> Color::LightSkyBlue {
+  [] {return Color::FromKnownColor(KnownColor::LightSkyBlue);}
+};
+
+Property<Color, ReadOnly> Color::LightSlateGray {
+  [] {return Color::FromKnownColor(KnownColor::LightSlateGray);}
+};
+
+Property<Color, ReadOnly> Color::LightSteelBlue {
+  [] {return Color::FromKnownColor(KnownColor::LightSteelBlue);}
+};
+
+Property<Color, ReadOnly> Color::LightYellow {
+  [] {return Color::FromKnownColor(KnownColor::LightYellow);}
+};
+
+Property<Color, ReadOnly> Color::Lime {
+  [] {return Color::FromKnownColor(KnownColor::Lime);}
+};
+
+Property<Color, ReadOnly> Color::LimeGreen {
+  [] {return Color::FromKnownColor(KnownColor::LimeGreen);}
+};
+
+Property<Color, ReadOnly> Color::Linen {
+  [] {return Color::FromKnownColor(KnownColor::Linen);}
+};
+
+Property<Color, ReadOnly> Color::Magenta {
+  [] {return Color::FromKnownColor(KnownColor::Magenta);}
+};
+
+Property<Color, ReadOnly> Color::Maroon {
+  [] {return Color::FromKnownColor(KnownColor::Maroon);}
+};
+
+Property<Color, ReadOnly> Color::MediumAquamarine {
+  [] {return Color::FromKnownColor(KnownColor::MediumAquamarine);}
+};
+
+Property<Color, ReadOnly> Color::MediumBlue {
+  [] {return Color::FromKnownColor(KnownColor::MediumBlue);}
+};
+
+Property<Color, ReadOnly> Color::MediumOrchid {
+  [] {return Color::FromKnownColor(KnownColor::MediumOrchid);}
+};
+
+Property<Color, ReadOnly> Color::MediumPurple {
+  [] {return Color::FromKnownColor(KnownColor::MediumPurple);}
+};
+
+Property<Color, ReadOnly> Color::MediumSeaGreen {
+  [] {return Color::FromKnownColor(KnownColor::MediumSeaGreen);}
+};
+
+Property<Color, ReadOnly> Color::MediumSlateBlue {
+  [] {return Color::FromKnownColor(KnownColor::MediumSlateBlue);}
+};
+
+Property<Color, ReadOnly> Color::MediumSpringGreen {
+  [] {return Color::FromKnownColor(KnownColor::MediumSpringGreen);}
+};
+
+Property<Color, ReadOnly> Color::MediumTurquoise {
+  [] {return Color::FromKnownColor(KnownColor::MediumTurquoise);}
+};
+
+Property<Color, ReadOnly> Color::MediumVioletRed {
+  [] {return Color::FromKnownColor(KnownColor::MediumVioletRed);}
+};
+
+Property<Color, ReadOnly> Color::MidnightBlue {
+  [] {return Color::FromKnownColor(KnownColor::MidnightBlue);}
+};
+
+Property<Color, ReadOnly> Color::MintCream {
+  [] {return Color::FromKnownColor(KnownColor::MintCream);}
+};
+
+Property<Color, ReadOnly> Color::MistyRose {
+  [] {return Color::FromKnownColor(KnownColor::MistyRose);}
+};
+
+Property<Color, ReadOnly> Color::Moccasin {
+  [] {return Color::FromKnownColor(KnownColor::Moccasin);}
+};
+
+Property<Color, ReadOnly> Color::NavajoWhite {
+  [] {return Color::FromKnownColor(KnownColor::NavajoWhite);}
+};
+
+Property<Color, ReadOnly> Color::Navy {
+  [] {return Color::FromKnownColor(KnownColor::Navy);}
+};
+
+Property<Color, ReadOnly> Color::OldLace {
+  [] {return Color::FromKnownColor(KnownColor::OldLace);}
+};
+
+Property<Color, ReadOnly> Color::Olive {
+  [] {return Color::FromKnownColor(KnownColor::Olive);}
+};
+
+Property<Color, ReadOnly> Color::OliveDrab {
+  [] {return Color::FromKnownColor(KnownColor::OliveDrab);}
+};
+
+Property<Color, ReadOnly> Color::Orange {
+  [] {return Color::FromKnownColor(KnownColor::Orange);}
+};
+
+Property<Color, ReadOnly> Color::OrangeRed {
+  [] {return Color::FromKnownColor(KnownColor::OrangeRed);}
+};
+
+Property<Color, ReadOnly> Color::Orchid {
+  [] {return Color::FromKnownColor(KnownColor::Orchid);}
+};
+
+Property<Color, ReadOnly> Color::PaleGoldenrod {
+  [] {return Color::FromKnownColor(KnownColor::PaleGoldenrod);}
+};
+
+Property<Color, ReadOnly> Color::PaleGreen {
+  [] {return Color::FromKnownColor(KnownColor::PaleGreen);}
+};
+
+Property<Color, ReadOnly> Color::PaleTurquoise {
+  [] {return Color::FromKnownColor(KnownColor::PaleTurquoise);}
+};
+
+Property<Color, ReadOnly> Color::PaleVioletRed {
+  [] {return Color::FromKnownColor(KnownColor::PaleVioletRed);}
+};
+
+Property<Color, ReadOnly> Color::PapayaWhip {
+  [] {return Color::FromKnownColor(KnownColor::PapayaWhip);}
+};
+
+Property<Color, ReadOnly> Color::PeachPuff {
+  [] {return Color::FromKnownColor(KnownColor::PeachPuff);}
+};
+
+Property<Color, ReadOnly> Color::Peru {
+  [] {return Color::FromKnownColor(KnownColor::Peru);}
+};
+
+Property<Color, ReadOnly> Color::Pink {
+  [] {return Color::FromKnownColor(KnownColor::Pink);}
+};
+
+Property<Color, ReadOnly> Color::Plum {
+  [] {return Color::FromKnownColor(KnownColor::Plum);}
+};
+
+Property<Color, ReadOnly> Color::PowderBlue {
+  [] {return Color::FromKnownColor(KnownColor::PowderBlue);}
+};
+
+Property<Color, ReadOnly> Color::Purple {
+  [] {return Color::FromKnownColor(KnownColor::Purple);}
+};
+
+Property<Color, ReadOnly> Color::Red {
+  [] {return Color::FromKnownColor(KnownColor::Red);}
+};
+
+Property<Color, ReadOnly> Color::RosyBrown {
+  [] {return Color::FromKnownColor(KnownColor::RosyBrown);}
+};
+
+Property<Color, ReadOnly> Color::RoyalBlue {
+  [] {return Color::FromKnownColor(KnownColor::RoyalBlue);}
+};
+
+Property<Color, ReadOnly> Color::SaddleBrown {
+  [] {return Color::FromKnownColor(KnownColor::SaddleBrown);}
+};
+
+Property<Color, ReadOnly> Color::Salmon {
+  [] {return Color::FromKnownColor(KnownColor::Salmon);}
+};
+
+Property<Color, ReadOnly> Color::SandyBrown {
+  [] {return Color::FromKnownColor(KnownColor::SandyBrown);}
+};
+
+Property<Color, ReadOnly> Color::SeaGreen {
+  [] {return Color::FromKnownColor(KnownColor::SeaGreen);}
+};
+
+Property<Color, ReadOnly> Color::SeaShell {
+  [] {return Color::FromKnownColor(KnownColor::SeaShell);}
+};
+
+Property<Color, ReadOnly> Color::Sienna {
+  [] {return Color::FromKnownColor(KnownColor::Sienna);}
+};
+
+Property<Color, ReadOnly> Color::Silver {
+  [] {return Color::FromKnownColor(KnownColor::Silver);}
+};
+
+Property<Color, ReadOnly> Color::SkyBlue {
+  [] {return Color::FromKnownColor(KnownColor::SkyBlue);}
+};
+
+Property<Color, ReadOnly> Color::SlateBlue {
+  [] {return Color::FromKnownColor(KnownColor::SlateBlue);}
+};
+
+Property<Color, ReadOnly> Color::SlateGray {
+  [] {return Color::FromKnownColor(KnownColor::SlateGray);}
+};
+
+Property<Color, ReadOnly> Color::Snow {
+  [] {return Color::FromKnownColor(KnownColor::Snow);}
+};
+
+Property<Color, ReadOnly> Color::SpringGreen {
+  [] {return Color::FromKnownColor(KnownColor::SpringGreen);}
+};
+
+Property<Color, ReadOnly> Color::SteelBlue {
+  [] {return Color::FromKnownColor(KnownColor::SteelBlue);}
+};
+
+Property<Color, ReadOnly> Color::Tan {
+  [] {return Color::FromKnownColor(KnownColor::Tan);}
+};
+
+Property<Color, ReadOnly> Color::Teal {
+  [] {return Color::FromKnownColor(KnownColor::Teal);}
+};
+
+Property<Color, ReadOnly> Color::Thistle {
+  [] {return Color::FromKnownColor(KnownColor::Thistle);}
+};
+
+Property<Color, ReadOnly> Color::Tomato {
+  [] {return Color::FromKnownColor(KnownColor::Tomato);}
+};
+
+Property<Color, ReadOnly> Color::Turquoise {
+  [] {return Color::FromKnownColor(KnownColor::Turquoise);}
+};
+
+Property<Color, ReadOnly> Color::Violet {
+  [] {return Color::FromKnownColor(KnownColor::Violet);}
+};
+
+Property<Color, ReadOnly> Color::Wheat {
+  [] {return Color::FromKnownColor(KnownColor::Wheat);}
+};
+
+Property<Color, ReadOnly> Color::White {
+  [] {return Color::FromKnownColor(KnownColor::White);}
+};
+
+Property<Color, ReadOnly> Color::WhiteSmoke {
+  [] {return Color::FromKnownColor(KnownColor::WhiteSmoke);}
+};
+
+Property<Color, ReadOnly> Color::Yellow {
+  [] {return Color::FromKnownColor(KnownColor::Yellow);}
+};
+
+Property<Color, ReadOnly> Color::YellowGreen {
+  [] {return Color::FromKnownColor(KnownColor::YellowGreen);}
+};
 
 bool Color::GetIsSystemColor() const {
   return this->knownColor != (KnownColor)0 && (this->knownColor <= KnownColor::WindowText || this->knownColor >= KnownColor::ButtonFace);
@@ -378,4 +800,3 @@ string Color::ToString() const {
   
   return string::Format("Color [A={0}, R={1}, G={2}, B={3}]", A(), R(), G(), B());
 }
-

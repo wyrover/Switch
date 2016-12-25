@@ -9,7 +9,7 @@ namespace Pcf {
   /// pcf_var i = 10; // implicitly typed
   /// int i = 10; //explicitly typed
   /// @endcode
-  /// @section sectionExample Example
+  /// @par Example
   /// The following example show hot to use pcf_var
   /// @include Var.cpp
   /// @ingroup Pcf

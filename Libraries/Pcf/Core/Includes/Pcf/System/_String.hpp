@@ -12,13 +12,6 @@
 /// @cond
 class __opaque_format_item__ {
   friend class Pcf::System::String;
-#if __linux__ && _LP64
-  using llint = long long int;
-  using ullint = unsigned long long int;
-#else
-  using llint = long;
-  using ullint = unsigned long;
-#endif
   template <typename T, typename Bool>
   struct EnumOrOtherToAny {};
   
@@ -30,7 +23,7 @@ class __opaque_format_item__ {
   
   template <typename T>
   struct EnumOrOtherToAny<T, std::false_type> {
-    SharedPointer<object> operator()(T value) {return new System::IntPtr(*((int64**)&value));}
+    SharedPointer<object> operator()(T value) {return new System::IntPtr(*((intptr*)&value));}
   };
   
   template <typename T, typename Bool>
@@ -91,9 +84,9 @@ private:
   __opaque_format_item__(uint16 value) : value(new System::UInt16(value)) {}
   __opaque_format_item__(uint32 value) : value(new System::UInt32(value)) {}
   __opaque_format_item__(uint64 value) : value(new System::UInt64(value)) {}
-  __opaque_format_item__(void* value) : value(new System::IntPtr(value)) {}
-  __opaque_format_item__(llint value) : value(sizeof(long) == 8 ? (object*)new System::Int64(value) : (object*)new System::Int32(value)) {}
-  __opaque_format_item__(ullint value) : value(sizeof(long) == 8 ? (object*)new System::UInt64(value) : (object*)new System::UInt32(value)) {}
+  __opaque_format_item__(void* value) : value(new System::IntPtr((intptr)value)) {}
+  __opaque_format_item__(llong value) : value(sizeof(long) == 8 ? (object*)new System::Int64(value) : (object*)new System::Int32(value)) {}
+  __opaque_format_item__(ullong value) : value(sizeof(long) == 8 ? (object*)new System::UInt64(value) : (object*)new System::UInt32(value)) {}
   __opaque_format_item__(Any value) : value(new Any(value)) {}
   template<typename T, typename Attribute>
   __opaque_format_item__(const Property<T, Attribute>& value) : __opaque_format_item__(value()) {}
@@ -140,9 +133,16 @@ System::String System::String::Concat(const T (&objs)[length]) {
 
 template<typename T>
 System::String System::String::Join(const System::String& separator, const System::Array<T>& objs) {
+  return Join(separator, objs, 0, objs.Length);
+}
+
+template<typename T>
+System::String System::String::Join(const System::String& separator, const System::Array<T>& objs, int32 startIndex, int32 count) {
+  if (startIndex < 0 || count < 0 || startIndex + count > objs.Length)
+    throw ArgumentOutOfRangeException(pcf_current_information);
   System::String str;
   bool first = true;
-  for (int32 i = 0; i < objs.Length; i++) {
+  for (int32 i = startIndex; i < startIndex + count; i++) {
     if (first)
       first = false;
     else
@@ -158,6 +158,25 @@ System::String System::String::Join(const System::String& separator, const Syste
   bool first = true;
   System::Collections::Generic::Enumerator<T> enumerator = objs.GetEnumerator();
   while (enumerator.MoveNext()) {
+    if (!first)
+      str += separator;
+    str += System::Convert::ToString(enumerator.Current);
+    first = false;
+  }
+  return str;
+}
+
+template<typename T>
+System::String System::String::Join(const System::String& separator, const System::Collections::Generic::IEnumerable<T>& objs, int32 startIndex, int32 count) {
+  if (startIndex < 0 || count < 0 || startIndex + count > objs.Length)
+    throw ArgumentOutOfRangeException(pcf_current_information);
+  System::String str;
+  bool first = true;
+  int32 index = 0;
+  System::Collections::Generic::Enumerator<T> enumerator = objs.GetEnumerator();
+  while (enumerator.MoveNext()) {
+    if (index < startIndex) continue;
+    if (index++ > startIndex + count) break;
     if (!first)
       str += separator;
     str += System::Convert::ToString(enumerator.Current);

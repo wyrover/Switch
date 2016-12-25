@@ -5,6 +5,7 @@
 #include "../../../Includes/Pcf/System/NumericalFormat.h"
 #include "../../../Includes/Pcf/System/Collections/Generic/List.h"
 #include "../../../Includes/Pcf/System/SystemException.h"
+#include "../../__OS/CoreApi.h"
 
 using namespace System;
 
@@ -88,8 +89,10 @@ namespace Pcf {
     
     String NumericalFormat::Format_D(int64 value, int32 precision) {
       char cout[192];
-      if (precision > 0) sprintf(cout, "%0*lld", precision, value);
-      else              sprintf(cout, "%lld",value);
+      if (precision > 0)
+        sprintf(cout, __OS::CoreApi::Format::IntegerWithPrecision().Data, precision, value);
+      else
+        sprintf(cout, __OS::CoreApi::Format::Integer().Data, value);
       if (cout[0] == '-') {
         int32 pad = precision - static_cast<int32>(strlen(cout));
         if (pad == 0)
@@ -100,8 +103,10 @@ namespace Pcf {
     
     String NumericalFormat::Format_D(uint64 value, int32 precision) {
       char cout[192];
-      if (precision > 0) sprintf(cout, "%0*llu",precision, value);
-      else              sprintf(cout, "%llu",value);
+      if (precision > 0)
+        sprintf(cout, __OS::CoreApi::Format::UnsignedIntegerWithPrecision().Data, precision, value);
+      else
+        sprintf(cout, __OS::CoreApi::Format::UnsignedInteger().Data, value);
       return cout;
     }
     
@@ -166,7 +171,7 @@ namespace Pcf {
       char cout[192];
       sprintf(cout, "%.*g",precision, (double)value);
       if (strchr(cout,'e') == null) {
-        sprintf(cout, "%llu",value);
+        sprintf(cout, __OS::CoreApi::Format::UnsignedInteger().Data, value);
         return cout;
       }
       return controlLengthExp(cout,upper,2);
@@ -177,7 +182,7 @@ namespace Pcf {
       sprintf(cout, "%.*g",precision, (double)value);
       
       if (strchr(cout,'e') == null) {
-        sprintf(cout, "%lld",value);
+        sprintf(cout, __OS::CoreApi::Format::Integer().Data, value);
         return cout;
       }
       return controlLengthExp(cout,upper,2);
@@ -280,8 +285,10 @@ namespace Pcf {
     String NumericalFormat::Format_X(uint64 value, int32 precision, bool upper, int32 size) {
       char cout[192];
       char* trimmed = cout;
-      if (upper) sprintf(cout, "%0*llX", precision, value);
-      else      sprintf(cout, "%0*llx", precision, value);
+      if (upper)
+        sprintf(cout, __OS::CoreApi::Format::HexadecimalWithPrecision().Data, precision, value);
+      else
+        sprintf(cout, __OS::CoreApi::Format::LowerHexadecimalWithPrecision().Data, precision, value);
       String output = cout;
       int32 excess = static_cast<int32>(strlen(cout)) - size;
       if (excess > 0) trimmed = &cout[excess];
@@ -293,8 +300,10 @@ namespace Pcf {
     String NumericalFormat::Format_X(int64 value, int32 precision, bool upper, int32 size) {
       char cout[192];
       char* trimmed = cout;
-      if (upper) sprintf(cout, "%0*llX",precision, value);
-      else      sprintf(cout, "%0*llx",precision, value);
+      if (upper)
+        sprintf(cout, __OS::CoreApi::Format::HexadecimalWithPrecision().Data, precision, value);
+      else
+        sprintf(cout, __OS::CoreApi::Format::LowerHexadecimalWithPrecision().Data, precision, value);
       String output = cout;
       int32 excess = static_cast<int32>(strlen(cout)) - size;
       if (excess > 0) trimmed = &cout[excess];
@@ -303,15 +312,15 @@ namespace Pcf {
       return trimmed;
     }
     
-    String NumericalFormat::Format_Custom(int64 /*value*/, const string& /*format*/) {
+    String NumericalFormat::Format_Custom(int64 value, const string& format) {
       return "";
     }
     
-    String NumericalFormat::Format_Custom(uint64 /*value*/, const string& /*format*/) {
+    String NumericalFormat::Format_Custom(uint64 value, const string& format) {
       return "";
     }
     
-    String NumericalFormat::Format_Custom(double /*value*/, const string& /*format*/) {
+    String NumericalFormat::Format_Custom(double value, const string& format) {
       return "";
     }
     

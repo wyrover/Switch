@@ -72,8 +72,8 @@ namespace PcfUnitTests {
       Assert::IsInstanceOf<UInt64>(Box(uint64(42)), pcf_current_information);
     }
     
-    void BoxingUIntPtr() {
-      Assert::IsInstanceOf<UIntPtr>(Box((void*)42), pcf_current_information);
+    void BoxingVoidPointer() {
+      Assert::IsInstanceOf<IntPtr>(Box((void*)42), pcf_current_information);
     }
     
     void BoxingConstCharPointer() {
@@ -122,7 +122,7 @@ namespace PcfUnitTests {
   pcf_test(BoxTest, BoxingUInt16);
   pcf_test(BoxTest, BoxingUInt32);
   pcf_test(BoxTest, BoxingUInt64);
-  pcf_test(BoxTest, BoxingUIntPtr);
+  pcf_test(BoxTest, BoxingVoidPointer);
   pcf_test(BoxTest, BoxingConstCharPointer);
   pcf_test(BoxTest, BoxingConstWCharPointer);
   pcf_test(BoxTest, BoxingConstChar16Pointer);

@@ -1,3 +1,4 @@
+#include <limits>
 #include "../../../Includes/Pcf/System/Int32.h"
 #include "../../../Includes/Pcf/System/Convert.h"
 #include "../../../Includes/Pcf/System/DivideByZeroException.h"
@@ -6,10 +7,13 @@
 
 using namespace System;
 
-#if !_WIN32
-constexpr int32 Int32::MaxValue;
-constexpr int32 Int32::MinValue;
-#endif
+Property<int32, ReadOnly> Int32::MaxValue {
+  [] {return std::numeric_limits<int32>::max();}
+};
+
+Property<int32, ReadOnly> Int32::MinValue {
+  [] {return std::numeric_limits<int32>::min();}
+};
 
 int32 Int32::Parse(const string& value) {
   return Parse(value, 10);

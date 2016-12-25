@@ -15,6 +15,11 @@ namespace Pcf {
     /// @brief The System::Net namespace provides a simple programming interface for many of the protocols used on networks today.
     /// The WebRequest and WebResponse classes form the basis of what are called pluggable protocols, an implementation of network services that enables you to develop applications that use Internet resources without worrying about the specific details of the individual protocols.
     namespace Net {
+      /// @cond
+      class IPEndPoint;
+      namespace Sockets {class Socket;}
+      /// @endcond
+      
       /// @brief Stores serialized information from EndPoint derived classes.
       /// @remarks The first 2 bytes of the underlying buffer are reserved for the AddressFamily enumerated value.
       /// @remarks When the SocketAddress is used to store a serialized IPEndPoint, the third and fourth bytes are
@@ -26,20 +31,17 @@ namespace Pcf {
       class SocketAddress : public Object {
       public:
         /// @brief Creates a new instance of the SocketAddress class for the given address family.
-        SocketAddress(Sockets::AddressFamily addressFamily);
+        SocketAddress(Sockets::AddressFamily addressFamily) : SocketAddress(addressFamily, 32) {}
 
         /// @brief Creates a new instance of the SocketAddress class using the specified address family and buffer size.
         SocketAddress(Sockets::AddressFamily addressFamily, int32 bufferSize);
 
-        /// @brief Creates a new instance of the SocketAddress class using the specified byte buffer and buffer size.
-        SocketAddress(byte* buffer, int32 bufferSize);
+        /// @brief Creates a new instance of the SocketAddress class using the specified byte buffer .
+        SocketAddress(const Array<byte>& buffer);
         
         /// @cond
         SocketAddress(const SocketAddress& socketAddress): bytes(socketAddress.bytes) {}
-        SocketAddress& operator =(const SocketAddress& socketAddress) {
-          this->bytes = socketAddress.bytes;
-          return *this;
-        }
+        SocketAddress& operator =(const SocketAddress& socketAddress) {this->bytes = socketAddress.bytes; return *this;}
         /// @endcond
         
         /// @brief Gets the address family to which the endpoint belongs.
@@ -57,7 +59,7 @@ namespace Pcf {
         /// @brief Gets or sets the specified index element in the underlying buffer.
         /// @param index The array index element of the desired information.
         /// @return byte The value of the specified index element in the underlying buffer.
-        byte& operator[](int32 index) { return bytes[index]; }
+        byte& operator[](int32 index) { return this->bytes[index]; }
 
         /// @brief Gets the specified index element in the underlying buffer.
         /// @param index The array index element of the desired information.
@@ -66,19 +68,16 @@ namespace Pcf {
         /// @remarks This property gets or sets the specified byte position in the underlying buffer.
         /// @note Be sure to call GetSize before referring to elements in the underlying buffer. Referring to an index that does not exist will cause the SocketAddress to throw an ArgumentOutOfRangeException.
         const byte& operator[](int32 index) const { return bytes[index]; }
-
-        /// @brief Get access to raw data of the SocketAddress
-        /// @return A pointer to raw data of the SocketAddress
-        Property<const byte*, ReadOnly> Data {
-          pcf_get->const byte* {return bytes.Data;}
-        };
-
+        
+        /// @brief Returns information about the socket address.(
+        /// @return string A string that contains information about the SocketAddress.
+        /// @remarks The ToString method returns a string that contains the AddressFamily enumerated value, the size of the underlying buffer of the SocketAddress structure, and the remaining contents of the buffer.
         virtual String ToString() const;
 
       private :
+        friend class IPEndPoint;
+        friend class Sockets::Socket;
         Sockets::AddressFamily GetAddressFamily() const;
-
-        static const int32 DefaultBufferSize = 32;
         Array<byte> bytes;
      };
     }

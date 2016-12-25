@@ -2235,9 +2235,7 @@ namespace Pcf {
       static System::String ValueToString(int16 value) {return string::Format("{0}", value);}
       static System::String ValueToString(int32 value) {return string::Format("{0}", value);}
       static System::String ValueToString(int64 value) {return System::Int64(value).ToString();}
-#if __APPLE__
-      static System::String ValueToString(const intptr& value) {return string::Format("{0}", value);}
-#endif
+      static System::String ValueToString(const llong& value) {return string::Format("{0}", value);}
       static System::String ValueToString(const void* value) {return string::Format("0x{0:X}", value);}
       static System::String ValueToString(void* value) {return string::Format("0x{0:X}", value);}
       static System::String ValueToString(sbyte value) {return string::Format("{0}", value);}
@@ -2249,6 +2247,7 @@ namespace Pcf {
       static System::String ValueToString(uint16 value) {return string::Format("{0}", value);}
       static System::String ValueToString(uint32 value) {return string::Format("{0}", value);}
       static System::String ValueToString(uint64 value) {return string::Format("{0}", value);}
+      static System::String ValueToString(const ullong& value) {return string::Format("{0}", value);}
       
       static System::String ValueToString(const System::Boolean& value) {return string::Format("{0}", value);}
       static System::String ValueToString(const System::Byte& value) {return string::Format("{0}", value);}

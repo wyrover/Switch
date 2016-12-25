@@ -540,7 +540,7 @@ namespace Pcf {
       /// @exception ArgumentNullException The parameters value or a String of value is null.
       /// @remarks For example if separator is ", " and the elements of value are "red", "blue", "green", and "yellow", Join(separator, value) returns "red, blue, green, yellow".
       static String Join(const String& separator, const Array<String>& values);
-
+      
       /// @brief Concatenates a specified separator String between each element of a specified Object array, yielding a single concatenated String.
       /// @param separator A String separator.
       /// @param values An array of Object.
@@ -550,6 +550,18 @@ namespace Pcf {
       /// @remarks ToString() method is called on each object to generate the content.
       template<typename T>
       static String Join(const String& separator, const Array<T>& values);
+      
+      /// @brief Concatenates a specified separator String between each element of a specified Object array, yielding a single concatenated String.
+      /// @param separator A String separator.
+      /// @param values An array of Object.
+      /// @param startIndex The first array element in value to use.
+      /// @param count The number of elements of value to use.
+      /// @return A String consisting of the elements of value interspersed with the separator String.
+      /// @exception ArgumentNullException The parameters value or a String of value is null.
+      /// @remarks For example if separator is ", " and the elements of value are "red", "blue", "green", and "yellow", Join(separator, value) returns "red, blue, green, yellow".
+      /// @remarks ToString() method is called on each object to generate the content.
+      template<typename T>
+      static String Join(const String& separator, const Array<T>& values, int32 startIndex, int32 count);
 
       /// @brief Concatenates a specified separator String between each element of a specified Object array, yielding a single concatenated String.
       /// @param separator A String separator.
@@ -560,6 +572,18 @@ namespace Pcf {
       /// @remarks ToString() method is called on each object to generate the content.
       template<typename T>
       static String Join(const String& separator, const System::Collections::Generic::IEnumerable<T>& values);
+      
+      /// @brief Concatenates a specified separator String between each element of a specified Object array, yielding a single concatenated String.
+      /// @param separator A String separator.
+      /// @param values An array of Object.
+      /// @param startIndex The first array element in value to use.
+      /// @param count The number of elements of value to use.
+      /// @return A String consisting of the elements of value interspersed with the separator String.
+      /// @exception ArgumentNullException The parameters value or a String of value is null.
+      /// @remarks For example if separator is ", " and the elements of value are "red", "blue", "green", and "yellow", Join(separator, value) returns "red, blue, green, yellow".
+      /// @remarks ToString() method is called on each object to generate the content.
+      template<typename T>
+      static String Join(const String& separator, const System::Collections::Generic::IEnumerable<T>& values, int32 startIndex, int32 count);
       
       /// @brief Concatenates a specified separator String between each element of a specified Object array, yielding a single concatenated String.
       /// @param separator A String separator.
@@ -932,8 +956,9 @@ namespace Pcf {
       reverse_iterator rbegin() {return this->string.rbegin();}
       const_reverse_iterator rend() const {return this->string.rend();}
       reverse_iterator rend() {return this->string.rend();}
-      const char* c_str()  const {return this->string.c_str();};
-      
+      const char* c_str() const { return this->string.c_str(); }
+      std::wstring w_str() const;
+
       /// @endcond
 
     private:
@@ -1041,19 +1066,13 @@ namespace Pcf {
     String operator +(const String& str, int16 value);
     String operator +(const String& str, int32 value);
     String operator +(const String& str, int64 value);
-    //String operator +(const String& str, void* value);
     String operator +(const String& str, sbyte value);
     String operator +(const String& str, float value);
     String operator +(const String& str, uint16 value);
     String operator +(const String& str, uint32 value);
     String operator +(const String& str, uint64 value);
-#if __linux__ && _LP64
-    String operator +(const String& str, long long int value);
-    String operator +(const String& str, unsigned long long int value);
-#else
-    String operator +(const String& str, long value);
-    String operator +(const String& str, unsigned long value);
-#endif
+    String operator +(const String& str, llong value);
+    String operator +(const String& str, ullong value);
 
     /// @endcond
   }

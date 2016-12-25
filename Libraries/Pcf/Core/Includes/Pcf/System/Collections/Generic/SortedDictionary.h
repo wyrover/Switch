@@ -175,7 +175,7 @@ namespace Pcf {
           ///         an element with the specified value; otherwise, false.
           bool ContainsValue(const TValue& value) const {
             for (auto p : *this) {
-              if (System::Compare::Equals(p.Value(),value))
+              if (p.Value() == value)
                 return true;
             }
 

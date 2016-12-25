@@ -10,7 +10,7 @@ endfunction()
 function(AddFormTool APPLICATION_NAME APPLICATION_FILE APPLICATION_PATH)
 add_executable(${APPLICATION_NAME} WIN32 ${APPLICATION_FILE})
 set_target_properties(${APPLICATION_NAME} PROPERTIES FOLDER Tools/${APPLICATION_PATH})
-target_link_libraries(${APPLICATION_NAME} Pcf Uxtheme)
+target_link_libraries(${APPLICATION_NAME} Pcf)
 endfunction()
 
 function(AddStandardTool APPLICATION_NAME APPLICATION_FILE APPLICATION_PATH)

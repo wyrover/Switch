@@ -1,22 +1,17 @@
+#include <csignal>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
 #include <thread>
 
+#include "../../../Includes/Pcf/System/Console.h"
 #include "../../../Includes/Pcf/System/Environment.h"
 #include "../../../Includes/Pcf/System/SystemVersion.h"
 #include "../../../Includes/Pcf/System/IO/Directory.h"
 #include "../../../Includes/Pcf/System/IO/DirectoryNotFoundException.h"
 #include "../../../Includes/Pcf/System/Diagnostics/StackTrace.h"
 #include "../../../Includes/Pcf/System/Threading/Thread.h"
-#include "../Os/Directory.h"
-#include "../Os/Drive.h"
-#include "../Os/Information.h"
-
-#if _WIN32
-#pragma warning(push)
-#pragma warning(disable:4459)
-#endif
+#include "../../__OS/CoreApi.h"
 
 using namespace System;
 using namespace System::Collections::Generic;
@@ -24,15 +19,47 @@ using namespace System::Collections::Generic;
 extern char** environ;
 
 namespace {
-#if WIN32
-  int setenv(const char name[], const char value[], int overwrite) {
-    return _putenv(String::Format("{0}={1}", name, value).Data());
-  }
-
-  int unsetenv(const char *name) {
-    return _putenv(String::Format("{0}=", name).Data());
-  }
-#endif
+  class ConsoleChangeCodePage {
+  public:
+    ConsoleChangeCodePage() {
+      __OS::CoreApi::Console::SetInputCodePage(65001);
+      __OS::CoreApi::Console::SetOutputCodePage(65001);
+    }
+    
+    ~ConsoleChangeCodePage() {
+      __OS::CoreApi::Console::SetInputCodePage(previousInputCodePage);
+      __OS::CoreApi::Console::SetOutputCodePage(previousOutputCodePage);
+    }
+    
+  private:
+    int32 previousInputCodePage = __OS::CoreApi::Console::GetInputCodePage();
+    int32 previousOutputCodePage = __OS::CoreApi::Console::GetOutputCodePage();
+  };
+  
+  class ConsoleInterceptSignals {
+  public:
+    ConsoleInterceptSignals() {
+      auto signalKeys =__OS::CoreApi::Console::GetSignalKeys();
+      for(auto signal : signalKeys)
+        ::signal(signal.Key, ConsoleInterceptSignals::SignalHandler);
+    }
+    
+    ~ConsoleInterceptSignals() {
+      auto signalKeys =__OS::CoreApi::Console::GetSignalKeys();
+      for(auto signal : signalKeys)
+        ::signal(signal.Key, SIG_DFL);
+    }
+    
+  private:
+    static void SignalHandler(int32 signal) {
+      static auto signalKeys =__OS::CoreApi::Console::GetSignalKeys();
+      ::signal(signal, ConsoleInterceptSignals::SignalHandler);
+      System::ConsoleCancelEventArgs consoleCancel = System::ConsoleCancelEventArgs(false, signalKeys[signal]);
+      System::Console::CancelKeyPress(Reference<object>::Null(), consoleCancel);
+      if (consoleCancel.Cancel == false)
+        Environment::Exit(-1);
+    }
+  };
   
   Collections::Specialized::StringDictionary GetEnvironmentVariables() {
     Collections::Specialized::StringDictionary envs;
@@ -44,13 +71,17 @@ namespace {
   };
 
   System::Array<String> commandLineArgs;
-  Collections::Specialized::StringDictionary environmentVariables = GetEnvironmentVariables();
+  Property<Collections::Specialized::StringDictionary&, ReadOnly> EnvironmentVariables {
+    []()->Collections::Specialized::StringDictionary& {
+      static Collections::Specialized::StringDictionary environmentVariables = GetEnvironmentVariables();
+      return environmentVariables;
+    }
+  };
+  
   int32 exitCode;
-}
+  UniquePointer<ConsoleChangeCodePage> consoleChangeCodePage;
+}  UniquePointer<ConsoleInterceptSignals> consoleInterceptSignals;
 
-#if !PATH_MAX
-const int32 PATH_MAX = 1024;
-#endif
 
 Property<String, ReadOnly> Environment::CommandLine {
   [] {
@@ -65,13 +96,13 @@ Property<String, ReadOnly> Environment::CommandLine {
 };
 
 Property<string> Environment::CurrentDirectory {
-  [] {return Os::Directory::GetCurrentDirectory();},
+  [] {return __OS::CoreApi::Directory::GetCurrentDirectory();},
   [](string value) {
     if (String::IsNullOrEmpty(value))
       throw ArgumentException(pcf_current_information);
     if (!System::IO::Directory::Exists(value))
       throw IO::DirectoryNotFoundException(pcf_current_information);
-    if (Os::Directory::SetCurrentDirectory(value) != 0)
+    if (__OS::CoreApi::Directory::SetCurrentDirectory(value) != 0)
       throw IO::IOException(pcf_current_information);
   }
 };
@@ -90,7 +121,7 @@ Property<bool, ReadOnly> Environment::HasShutdownStarted {
 };
 
 Property<bool, ReadOnly> Environment::Is64BitOperatingSystem {
-  [] {return Pcf::Os::Information::IsOs64Bit();}
+  [] {return __OS::CoreApi::Environment::IsOs64Bit();}
 };
 
 Property<bool, ReadOnly> Environment::Is64BitProcess {
@@ -98,11 +129,11 @@ Property<bool, ReadOnly> Environment::Is64BitProcess {
 };
 
 Property<String, ReadOnly> Environment::MachineName {
-  [] {return Pcf::Os::Information::GetMachineName();}
+  [] {return __OS::CoreApi::Environment::GetMachineName();}
 };
 
 Property<String, ReadOnly> Environment::NewLine {
-  [] {return Os::Information::NewLine();}
+  [] {return __OS::CoreApi::Environment::NewLine();}
 };
 
 Property<const OperatingSystem&, ReadOnly> Environment::OSVersion {
@@ -110,8 +141,8 @@ Property<const OperatingSystem&, ReadOnly> Environment::OSVersion {
     static OperatingSystem os(PlatformID::Unknown, System::Version());
     if (os.Platform == PlatformID::Unknown) {
       int32 major, minor, build, revision;
-      Pcf::Os::Information::GetOsVersion(major, minor, build, revision);
-      os = OperatingSystem(Os::Information::GetOsPlatformID(), System::Version(major, minor, build, revision));
+      __OS::CoreApi::Environment::GetOsVersion(major, minor, build, revision);
+      os = OperatingSystem(__OS::CoreApi::Environment::GetOsPlatformID(), System::Version(major, minor, build, revision));
     }
     return os;
   }
@@ -133,19 +164,19 @@ Property<String, ReadOnly> Environment::SystemDirectory {
 };
 
 Property<int32, ReadOnly> Environment::TickCount {
-  [] {return Pcf::Os::Information::GetTickCount();}
+  [] {return __OS::CoreApi::Environment::GetTickCount();}
 };
 
 Property<String, ReadOnly> Environment::UserDomainName {
-  [] {return Pcf::Os::Information::GetUserDomainName();}
+  [] {return __OS::CoreApi::Environment::GetUserDomainName();}
 };
 
 Property<bool, ReadOnly> Environment::UserInteractive {
-  [] {return Pcf::Os::Information::GetUserInteractive();}
+  [] {return __OS::CoreApi::Environment::GetUserInteractive();}
 };
 
 Property<String, ReadOnly> Environment::UserName {
-  [] {return Pcf::Os::Information::GetUserName();}
+  [] {return __OS::CoreApi::Environment::GetUserName();}
 };
 
 Property<const System::Version&, ReadOnly> Environment::Version {
@@ -153,11 +184,11 @@ Property<const System::Version&, ReadOnly> Environment::Version {
 };
 
 Property<int64, ReadOnly> Environment::WorkingSet {
-  [] {return Pcf::Os::Information::GetWorkingSet();}
+  [] {return __OS::CoreApi::Environment::GetWorkingSet();}
 };
 
-void Environment::Exit(int32 exitCode) {
-  exit(exitCode);
+void Environment::Exit(int32 ec) {
+  exit(ec);
 }
 
 String Environment::ExpandEnvironmentVariables(const String& name) {
@@ -194,15 +225,15 @@ String Environment::GetEnvironmentVariable(const String& variable) {
 }
 
 const Collections::Generic::IDictionary<String, String>& Environment::GetEnvironmentVariables() {
-  return environmentVariables;
+  return EnvironmentVariables;
 }
 
 String Environment::GetFolderPath(Environment::SpecialFolder folder) {
-  return Os::Directory::GetKnowFolderPath(folder);
+  return __OS::CoreApi::Directory::GetKnowFolderPath(folder);
 }
 
 Array<String> Environment::GetLogicalDrives() {
-  return Os::Drive::GetDrives();
+  return __OS::CoreApi::Drive::GetDrives();
 }
 
 void Environment::SetEnvironmentVariable(const String& name, const String& value) {
@@ -210,12 +241,12 @@ void Environment::SetEnvironmentVariable(const String& name, const String& value
     throw ArgumentException(pcf_current_information);
   
   if (value.IsEmpty()) {
-    environmentVariables.Remove(name);
-    if (unsetenv(name.Data()) != 0)
+    EnvironmentVariables().Remove(name);
+    if (__OS::CoreApi::Environment::UnsetEnv(name) != 0)
       throw ArgumentException(pcf_current_information);
   } else {
-    environmentVariables[name] = value;
-    if (setenv(name.Data(), value.Data(), 1) != 0)
+    EnvironmentVariables()[name] = value;
+    if (__OS::CoreApi::Environment::SetEnv(name, value) != 0)
       throw ArgumentException(pcf_current_information);
   }
 }
@@ -224,12 +255,10 @@ Array<string> Environment::SetCommandLineArgs(char* argv[], int argc) {
   if (commandLineArgs.Length != 0)
     throw InvalidOperationException("Can be called only once", pcf_current_information);
   
+  consoleChangeCodePage = UniquePointer<ConsoleChangeCodePage>::Create();
+  consoleInterceptSignals = UniquePointer<ConsoleInterceptSignals>::Create();
   System::Threading::Thread::RegisterCurrentThread();
   commandLineArgs = Array<string>(std::vector<string>(argv, argv+argc));
   return Array<string>(std::vector<string>(argv+1, argv+argc));
 }
-
-#if _WIN32
-#pragma warning(pop)
-#endif
 

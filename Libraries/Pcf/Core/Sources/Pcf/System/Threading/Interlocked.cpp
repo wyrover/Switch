@@ -1,11 +1,6 @@
-#if defined(_WIN32)
-#pragma warning(disable:4201)
-#include <windows.h>
-#pragma warning(default:4201)
-#endif
-
 #include "../../../../Includes/Pcf/System/Array.h"
 #include "../../../../Includes/Pcf/System/Threading/Interlocked.h"
+#include "../../../__OS/CoreApi.h"
 
 using namespace System;
 using namespace System::Threading;
@@ -13,22 +8,11 @@ using namespace System::Threading;
 std::mutex Interlocked::guard;
 
 int32 Interlocked::Add(int32& location, int32 value) {
-#if _WIN32
-  InterlockedExchange((long*)&location, location + value);
-#else
-  __sync_fetch_and_add(&location, value);
-#endif
-  return location;
+  return __OS::CoreApi::Interlocked::Add(location, value);
 }
 
 int64 Interlocked::Add(int64& location, int64 value) {
-#if _WIN32
-  InterlockedExchange64((long long*)&location, location + value);
-  return location;
-#else
-  __sync_fetch_and_add(&location, value);
-#endif
-  return location;
+  return __OS::CoreApi::Interlocked::Add(location, value);
 }
 
 double Interlocked::CompareExchange(double& location, double value, double comparand) {
@@ -40,33 +24,19 @@ double Interlocked::CompareExchange(double& location, double value, double compa
 }
 
 int32 Interlocked::CompareExchange(int32& location, int32 value, int32 comparand) {
-#if _WIN32
-  return InterlockedCompareExchange((long*)&location, value, comparand);
-#else
-  return __sync_val_compare_and_swap(&location, comparand, value);
-#endif
+  return __OS::CoreApi::Interlocked::CompareExchange(location, value, comparand);
 }
 
 int64 Interlocked::CompareExchange(int64& location, int64 value, int64 comparand) {
-#if _WIN32
-  return InterlockedCompareExchange64((long long*)&location, value, comparand);
-#else
-  return __sync_val_compare_and_swap(&location, comparand, value);
-#endif
+  return __OS::CoreApi::Interlocked::CompareExchange(location, value, comparand);
 }
 
-#if __APPLE__
-intptr Interlocked::CompareExchange(intptr& location, intptr value, intptr comparand) {
-  return __sync_val_compare_and_swap(&location, comparand, value);
+llong Interlocked::CompareExchange(llong& location, llong value, llong comparand) {
+  return __OS::CoreApi::Interlocked::CompareExchange(location, value, comparand);
 }
-#endif
 
 void* Interlocked::CompareExchange(void*& location, void* value, void* comparand) {
-#if _WIN32
-  return (void*)InterlockedCompareExchange64((long long*)&location, (long long)value, (long long)comparand);
-#else
-  return __sync_val_compare_and_swap(&location, comparand, value);
-#endif
+  return __OS::CoreApi::Interlocked::CompareExchange(location, value, comparand);
 }
 
 float Interlocked::CompareExchange(float& location, float value, float comparand) {
@@ -78,21 +48,11 @@ float Interlocked::CompareExchange(float& location, float value, float comparand
 }
 
 int32 Interlocked::Decrement(int32& location) {
-#if _WIN32
-  return InterlockedDecrement((long*)&location);
-#else
-  __sync_fetch_and_sub(&location, 1);
-  return location;
-#endif
+  return __OS::CoreApi::Interlocked::Decrement(location);
 }
 
 int64 Interlocked::Decrement(int64& location) {
-#if _WIN32
-  return InterlockedDecrement64((long long*)&location);
-#else
-  __sync_fetch_and_sub(&location, 1);
-  return location;
-#endif
+  return __OS::CoreApi::Interlocked::Decrement(location);
 }
 
 double Interlocked::Exchange(double& location, double value) {
@@ -103,33 +63,19 @@ double Interlocked::Exchange(double& location, double value) {
 }
 
 int32 Interlocked::Exchange(int32& location, int32 value) {
-#if _WIN32
-  return InterlockedExchange((long*)&location, value);
-#else
-  return __sync_val_compare_and_swap(&location, location, value);
-#endif
+  return __OS::CoreApi::Interlocked::Exchange(location, value);
 }
 
 int64 Interlocked::Exchange(int64& location, int64 value) {
-#if _WIN32
-  return InterlockedExchange64((long long*)&location, value);
-#else
-  return __sync_val_compare_and_swap(&location, location, value);
-#endif
+  return __OS::CoreApi::Interlocked::Exchange(location, value);
 }
 
-#if __APPLE__
-intptr Interlocked::Exchange(intptr& location, intptr value) {
-  return __sync_val_compare_and_swap(&location, location, value);
+llong Interlocked::Exchange(llong& location, llong value) {
+  return __OS::CoreApi::Interlocked::Exchange(location, value);
 }
-#endif
 
 void* Interlocked::Exchange(void*& location, void* value) {
-#if _WIN32
-  return (void*)InterlockedExchange64((long long*)&location, (long long)value);
-#else
-  return __sync_val_compare_and_swap(&location, location, value);
-#endif
+  return __OS::CoreApi::Interlocked::Exchange(location, value);
 }
 
 float Interlocked::Exchange(float& location, float value) {
@@ -140,21 +86,11 @@ float Interlocked::Exchange(float& location, float value) {
 }
 
 int32 Interlocked::Increment(int32& location) {
-#if _WIN32
-  return InterlockedIncrement((long*)&location);
-#else
-  __sync_fetch_and_add(&location, 1);
-  return location;
-#endif
+  return __OS::CoreApi::Interlocked::Increment(location);
 }
 
 int64 Interlocked::Increment(int64& location) {
-#if _WIN32
-  return InterlockedIncrement64((long long*)&location);
-#else
-  __sync_fetch_and_add(&location, 1);
-  return location;
-#endif
+  return __OS::CoreApi::Interlocked::Increment(location);
 }
 
 void Interlocked::MemoryBarrier() {

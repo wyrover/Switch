@@ -7,7 +7,9 @@
 using namespace System;
 using namespace System::Drawing;
 
-const Point Point::Empty;
+Property<Point, ReadOnly> Point::Empty {
+  [] {return Point();}
+};
 
 Point::Point(const Size& sz) {
   this->x = sz.Width();

@@ -6,7 +6,9 @@
 #include <Pcf/System/String.h>
 #include <Pcf/System/SystemException.h>
 
+/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Pcf {
+  /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The System::Drawing namespace provides access to GDI+ basic graphics functionality. More advanced functionality is provided in the System::Drawing::Drawing2D, System::Drawing::Imaging, and System::Drawing::Text namespaces.
     namespace Drawing {
@@ -18,7 +20,7 @@ namespace Pcf {
       class PointF : public object {
       public:
         /// @brief Gets a PointF class that has a X and Y value of 0. This field is constant.
-        static const PointF Empty;
+        static Property<PointF, ReadOnly> Empty;
 
         /// @brief Initializes a new instance of the PointF class that has a X and Y value of 0.0f.
         PointF() {}
@@ -66,7 +68,7 @@ namespace Pcf {
 
         /// @brief Tests whether this PointF class has X and Y of 0.
         /// @return bool Returns true  when this PointF class has both a X and Y of 0; otherwise, false.
-        bool IsEmpty() const { return this->x == Empty.x && this->y == Empty.y; }
+        bool IsEmpty() const { return this->x == Empty().x && this->y == Empty().y; }
 
         /// @brief Creates a human-readable string that represents this PointF class.
         /// @return string A string that represents this PointF.

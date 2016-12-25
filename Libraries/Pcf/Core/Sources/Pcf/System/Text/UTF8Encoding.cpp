@@ -1,5 +1,5 @@
 #include "../../../../Includes/Pcf/System/Text/UTF8Encoding.h"
-#include "../../Os/UnicodeEncodings.h"
+#include "../../../__OS/CoreApi.h"
 
 using namespace System;
 using namespace System::Text;
@@ -10,11 +10,11 @@ UTF8Encoding::Encoder& UTF8Encoding::Encoder::operator =(const UTF8Encoding::Enc
 }
 
 int32 UTF8Encoding::Encoder::GetNbBytes(char32 c) const {
-  return Os::UnicodeEncodings::UTF8::GetByteCount(c);
+  return __OS::CoreApi::UnicodeEncodings::UTF8::GetByteCount(c);
 }
 
 void UTF8Encoding::Encoder::Encode(char32 c, byte bytes[]) const {
-  Os::UnicodeEncodings::UTF8::Encode(c, bytes);
+  __OS::CoreApi::UnicodeEncodings::UTF8::Encode(c, bytes);
 }
 
 String UTF8Encoding::Encoder::ToString() const {
@@ -29,18 +29,18 @@ UTF8Encoding::Decoder& UTF8Encoding::Decoder::operator =(const UTF8Encoding::Dec
 
 void UTF8Encoding::Decoder::Add(byte b) {
   // first, if we are in a multibyte situation, check that we receive a valid continuation byte
-  if (finished || (count > 0 && Os::UnicodeEncodings::UTF8::GetFormat(b) != 0))
+  if (finished || (count > 0 && __OS::CoreApi::UnicodeEncodings::UTF8::GetFormat(b) != 0))
     Reset();
   Encoding::Decoder::Add(b);
   if (count == 1) {
-    format = Os::UnicodeEncodings::UTF8::GetFormat(b);
+    format = __OS::CoreApi::UnicodeEncodings::UTF8::GetFormat(b);
     if (format == 0xFF || format == 0) {
       Reset();
       return;
     }
   }
   if (format == count) {
-    codePoint = Os::UnicodeEncodings::UTF8::GetCode(bytes,static_cast<byte>(count));
+    codePoint = __OS::CoreApi::UnicodeEncodings::UTF8::GetCode(bytes,static_cast<byte>(count));
     finished = true;
   } else {
     if (count == 4) Reset();
@@ -86,7 +86,7 @@ UniquePointer<Encoding::Encoder> UTF8Encoding::CreateEncoder() const {
 }
 
 int32 UTF8Encoding::GetByteCount(char32 c) const {
-  return Os::UnicodeEncodings::UTF8::GetByteCount(c);
+  return __OS::CoreApi::UnicodeEncodings::UTF8::GetByteCount(c);
 }
 
 int32 UTF8Encoding::GetCharCount(const byte bytes[], int32 bytesSize, int32 index, int32 count) const {
@@ -97,7 +97,7 @@ int32 UTF8Encoding::GetCharCount(const byte bytes[], int32 bytesSize, int32 inde
   for ( int32 i = 0 ; i < count ; i += 1 )
     s.push_back(bytes[index + i]);
   
-  return Os::UnicodeEncodings::UTF8::GetLength(s);
+  return __OS::CoreApi::UnicodeEncodings::UTF8::GetLength(s);
 }
 
 int32 UTF8Encoding::GetMaxByteCount(int32 charCount) const {

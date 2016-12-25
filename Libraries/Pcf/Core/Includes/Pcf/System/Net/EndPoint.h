@@ -20,11 +20,8 @@ namespace Pcf {
       class EndPoint : public Object {
       public:
         /// @cond
+        EndPoint() {}
         EndPoint(const EndPoint& endPoint) : addressFamily(endPoint.addressFamily) {}
-        EndPoint& operator =(const EndPoint& endPoint) {
-          this->addressFamily = endPoint.addressFamily;
-          return *this;
-        }
         /// @endcond
         
         /// @brief Creates an EndPoint instance from a SocketAddress instance.
@@ -49,7 +46,6 @@ namespace Pcf {
 
       protected:
         /// @brief Initializes a new instance of the EndPoint class.
-        EndPoint() {}
         EndPoint(Sockets::AddressFamily addressFamily) : addressFamily(addressFamily) {}
 
         /// @cond

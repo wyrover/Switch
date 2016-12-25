@@ -10,13 +10,17 @@
 #include "../../../Includes/Pcf/System/SByte.h"
 #include "../../../Includes/Pcf/System/SystemException.h"
 #include "../../../Includes/Pcf/System/TypeCode.h"
-#include "../Os/UnicodeCharacters.h"
-#include "../Os/UnicodeEncodings.h"
+#include "../../__OS/CoreApi.h"
 
 using namespace System;
 
-const char32 Char::MaxValue = 0x0010FFFFu;
-const char32 Char::MinValue = 0;
+Property<char32, ReadOnly> Char::MaxValue {
+  [] {return 0x0010FFFFu;}
+};
+
+Property<char32, ReadOnly> Char::MinValue = {
+  [] {return 0;}
+};
 
 bool Char::IsControl(char32 value) {
   return iscntrl(value) != 0;
@@ -30,7 +34,7 @@ bool Char::IsControl(const String& value, int32 index) {
 }
 
 bool Char::IsDigit(char32 value) {
-  return Os::UnicodeCharacters::IsDigit(value);
+  return __OS::CoreApi::UnicodeCharacters::IsDigit(value);
 }
 
 bool Char::IsDigit(const String& value, int32 index) {
@@ -41,7 +45,7 @@ bool Char::IsDigit(const String& value, int32 index) {
 }
 
 bool Char::IsLetter(char32 value) {
-  return Os::UnicodeCharacters::IsAlpha(value);
+  return __OS::CoreApi::UnicodeCharacters::IsAlpha(value);
 }
 
 bool Char::IsLetter(const String& value, int32 index) {
@@ -63,7 +67,7 @@ bool Char::IsLetterOrDigit(const String& value, int32 index) {
 }
 
 bool Char::IsLower(char32 value) {
-  return Os::UnicodeEncodings::to_lower(value) == value;
+  return __OS::CoreApi::UnicodeEncodings::to_lower(value) == value;
 }
 
 bool Char::IsLower(const String& value, int32 index) {
@@ -74,7 +78,7 @@ bool Char::IsLower(const String& value, int32 index) {
 }
 
 bool Char::IsPunctuation(char32 value) {
-  return Os::UnicodeCharacters::IsPunctuation(value);
+  return __OS::CoreApi::UnicodeCharacters::IsPunctuation(value);
 }
 
 bool Char::IsPunctuation(const String& value, int32 index) {
@@ -107,7 +111,7 @@ bool Char::IsSymbol(const String& value, int32 index) {
 }
 
 bool Char::IsUpper(char32 value) {
-  return Os::UnicodeEncodings::to_upper(value) == value;
+  return __OS::CoreApi::UnicodeEncodings::to_upper(value) == value;
 }
 
 bool Char::IsUpper(const String& value, int32 index) {
@@ -161,7 +165,7 @@ int32 Char::GetHashCode() const {
 
 String Char::ToString() const { 
   byte bytes[5];
-  int32 count = Os::UnicodeEncodings::UTF8::Encode(this->value, bytes);
+  int32 count = __OS::CoreApi::UnicodeEncodings::UTF8::Encode(this->value, bytes);
   bytes[count] = 0;
   return String((char*)bytes);
 }

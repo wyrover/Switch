@@ -1,62 +1,52 @@
-#include <FL/Fltk.h>
+#include <Pcf/System/Collections/Generic/List.h>
 #include "../../../../Includes/Pcf/System/Drawing/FontFamily.h"
+#include "../../../../Includes/Pcf/System/Drawing/Text/InstalledFontCollection.h"
+#include "../../../__OS/DrawingApi.h"
 
-using namespace System;
-using namespace System::Drawing;
+namespace {
+  const string genericFontFamilySerifName = "Times New Roman";
+  const string genericFontFamilySansSerifName = "Microsoft Sans Serif";
+  const string genericFontFamilyMonospaceName = "Courier New";
+}
 
-Property<Array<FontFamily>, ReadOnly> FontFamily::Families {
-  [] {return __Families__();}
+System::Drawing::FontFamily::FontFamily(const string& name) {
+  *this = __OS::DrawingApi::FontFamily::GetFontFamilyFromName(name);
+}
+
+System::Drawing::FontFamily::FontFamily(System::Drawing::Text::GenericFontFamilies genericFamily) {
+  if (genericFamily == System::Drawing::Text::GenericFontFamilies::Serif)
+    *this = System::Drawing::FontFamily(genericFontFamilySerifName);
+  else if (genericFamily == System::Drawing::Text::GenericFontFamilies::SansSerif)
+    *this = System::Drawing::FontFamily(genericFontFamilySansSerifName);
+  else
+    *this = System::Drawing::FontFamily(genericFontFamilyMonospaceName);
+}
+
+System::Drawing::FontFamily::~FontFamily() {
+  if (this->data.IsUnique())
+    __OS::DrawingApi::FontFamily::ReleaseResource(this->data().handle);
+}
+
+Property<System::Array<System::Drawing::FontFamily>, ReadOnly> System::Drawing::FontFamily::Families {
+  [] {return System::Drawing::Text::InstalledFontCollection().Families();}
 };
 
-const Property<FontFamily, ReadOnly> FontFamily::GenericMonospace {
-  [] {return FontFamily("Courier New");}
+Property<System::Drawing::FontFamily, ReadOnly> System::Drawing::FontFamily::GenericMonospace {
+  [] {return FontFamily(System::Drawing::Text::GenericFontFamilies::Monospace);}
 };
 
-const Property<FontFamily, ReadOnly> FontFamily::GenericSansSerif {
-  [] {return FontFamily("Arial");}
+Property<System::Drawing::FontFamily, ReadOnly> System::Drawing::FontFamily::GenericSansSerif {
+  [] {return FontFamily(System::Drawing::Text::GenericFontFamilies::SansSerif);}
 };
 
-const Property<FontFamily, ReadOnly> FontFamily::GenericSerif {
-  [] {return FontFamily("Georgia");}
+Property<System::Drawing::FontFamily, ReadOnly> System::Drawing::FontFamily::GenericSerif {
+  [] {return FontFamily(System::Drawing::Text::GenericFontFamilies::Serif);}
 };
 
-Array<FontFamily> FontFamily::__Families__() {
-  static UniquePointer<Pcf::System::Array<FontFamily>> families;
+string System::Drawing::FontFamily::GetName() const {
+  return __OS::DrawingApi::FontFamily::GetName(this->data().handle);
+}
 
-  if(families.IsNull()) {
-    int32 count = Fl::set_fonts();
-    System::Collections::Generic::SortedDictionary<string, int32> familyNames;
-    string name;
-    FontStyle style = FontStyle::Regular;
-    for(int32 i = 0; i < count; i++) {
-      name = Fl::get_font_name((Fl_Font)i, (int*)&style);
-
-      if(name.StartsWith("@"))
-        continue;
-      if(style != FontStyle::Regular) {
-        if(name.EndsWith(" Italic"))
-          name = name.Replace(" Italic", "");
-        if(name.EndsWith(" italic"))
-          name = name.Replace(" italic", "");
-        if(name.EndsWith(" Bold"))
-          name = name.Replace(" Bold", "");
-        if(name.EndsWith(" bold"))
-          name = name.Replace(" bold", "");
-      }
-      if(!familyNames.ContainsKey(name))
-        familyNames[name] = (int32)FontStyle::Regular;
-      if(style != FontStyle(0))
-        familyNames[name] = familyNames[name] | int32(style);
-    }
-    families = new Pcf::System::Array<FontFamily>(familyNames.Count());
-    count = 0;
-    for(auto kvp : familyNames) {
-      (*families)[count].name = kvp.Key();
-      (*families)[count].id = count;
-      (*families)[count].style = (FontStyle)kvp.Value();
-      count++;
-    }
-  }
-
-  return *families;
+bool System::Drawing::FontFamily::IsStyleAvailable(System::Drawing::FontStyle style) const {
+  return __OS::DrawingApi::FontFamily::IsStyleAvailable(this->data().handle, style);
 }

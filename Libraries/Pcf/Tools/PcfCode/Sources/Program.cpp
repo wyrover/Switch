@@ -1,5 +1,4 @@
-#include <Corelib.h>
-#include <Forms/System/Windows/Forms/Application.h>
+#include <Pcf.h>
 
 #include "../Includes/MainForm.h"
 

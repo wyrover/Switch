@@ -2,6 +2,7 @@
 #include "../../../Includes/Pcf/System/Array.h"
 #include "../../../Includes/Pcf/System/Convert.h"
 #include "../../../Includes/Pcf/System/Int32.h"
+#include "../../../Includes/Pcf/System/Int64.h"
 #include "../../../Includes/Pcf/System/Math.h"
 #include "../../../Includes/Pcf/System/String.h"
 #include "../../../Includes/Pcf/System/StringSplitOptions.h"
@@ -10,14 +11,37 @@
 
 using namespace System;
 
-TimeSpan TimeSpan::MaxValue(std::numeric_limits<int64>::max());
-TimeSpan TimeSpan::MinValue(std::numeric_limits<int64>::min());
-constexpr int64 TimeSpan::TicksPerDay;
-constexpr int64 TimeSpan::TicksPerHour;
-constexpr int64 TimeSpan::TicksPerMillisecond;
-constexpr int64 TimeSpan::TicksPerMinute;
-constexpr int64 TimeSpan::TicksPerSecond;
-TimeSpan TimeSpan::Zero;
+Property<TimeSpan, ReadOnly> TimeSpan::MaxValue {
+  [] {return TimeSpan(Int64::MaxValue());}
+};
+
+Property<TimeSpan, ReadOnly> TimeSpan::MinValue {
+  [] {return TimeSpan(Int64::MinValue());}
+};
+
+Property<int64, ReadOnly> TimeSpan::TicksPerDay {
+  [] {return 864000000000LL;}
+};
+
+Property<int64, ReadOnly> TimeSpan::TicksPerHour {
+  [] {return 36000000000LL;}
+};
+
+Property<int64, ReadOnly> TimeSpan::TicksPerMillisecond {
+  [] {return 10000LL;}
+};
+
+Property<int64, ReadOnly> TimeSpan::TicksPerMinute {
+  [] {return 600000000LL;}
+};
+
+Property<int64, ReadOnly> TimeSpan::TicksPerSecond{
+  [] {return 10000000LL;}
+};
+
+Property<TimeSpan, ReadOnly> TimeSpan::Zero {
+  [] {return TimeSpan(0);}
+};
 
 TimeSpan::TimeSpan(const TimeSpan& timeSpan) {
   this->value = timeSpan.value;

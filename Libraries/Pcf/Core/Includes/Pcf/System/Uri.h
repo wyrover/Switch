@@ -76,37 +76,37 @@ namespace Pcf {
       /// @endcond
 
       /// @brief Specifies the characters that separate the communication protocol scheme from the address portion of the URI. This field is read-only.
-      static const String SchemeDelimiter;
+      static Property<string, ReadOnly> SchemeDelimiter;
       
       /// @brief Specifies that the URI is a pointer to a file. This field is read-only.
-      static const String UriSchemeFile;
+      static Property<string, ReadOnly> UriSchemeFile;
       
       /// @brief Specifies that the URI is accessed through the File Transfer Protocol (FTP). This field is read-only.
-      static const String UriSchemeFtp;
+      static Property<string, ReadOnly> UriSchemeFtp;
       
       /// @brief Specifies that the URI is accessed through the Gopher protocol. This field is read-only.
-      static const String UriSchemeGopher;
+      static Property<string, ReadOnly> UriSchemeGopher;
       
       /// @brief Specifies that the URI is accessed through the Hypertext Transfer Protocol (HTTP). This field is read-only.
-      static const String UriSchemeHttp;
+      static Property<string, ReadOnly> UriSchemeHttp;
       
       /// @brief Specifies that the URI is accessed through the Hypertext Transfer Protocol (HTTPS). This field is read-only.
-      static const String UriSchemeHttps;
+      static Property<string, ReadOnly> UriSchemeHttps;
       
       /// @brief Specifies that the URI is an e-mail address && is accessed through the Simple Mail Transport Protocol (SMTP). This field is read-only.
-      static const String UriSchemeMailto;
+      static Property<string, ReadOnly> UriSchemeMailto;
       
       /// @brief Specifies that the URI is accessed through the NetPipe scheme used by Windows Communication Foundation (WCF). This field is read-only.
-      static const String UriSchemeNetPipe;
+      static Property<string, ReadOnly> UriSchemeNetPipe;
       
       /// @brief Specifies that the URI is accessed through the NetTcp scheme used by Windows Communication Foundation (WCF). This field is read-only.
-      static const String UriSchemeNetTcp;
+      static Property<string, ReadOnly> UriSchemeNetTcp;
       
       /// @brief Specifies that the URI is an Internet news group && is accessed through the Network News Transport Protocol (NNTP). This field is read-only.
-      static const String UriSchemeNews;
+      static Property<string, ReadOnly> UriSchemeNews;
       
       /// @brief Specifies that the URI is an Internet news group && is accessed through the Network News Transport Protocol (NNTP). This field is read-only.
-      static const String UriSchemeNntp;
+      static Property<string, ReadOnly> UriSchemeNntp;
       
       /// @brief Initializes a new instance of the Uri class.
       Uri() {}
@@ -262,7 +262,7 @@ namespace Pcf {
           if (this->kind != UriKind::Absolute)
             throw InvalidOperationException(pcf_current_information);
             
-          return this->Host() == System::Net::IPAddress::Loopback.ToString() || this->Host() == System::Net::IPAddress::IPv6Loopback.ToString() || this->Host() == "loopback" || this->Host() == "localhost" || String::IsNullOrEmpty(this->Host());
+          return this->Host() == System::Net::IPAddress::Loopback().ToString() || this->Host() == System::Net::IPAddress::IPv6Loopback().ToString() || this->Host() == "loopback" || this->Host() == "localhost" || String::IsNullOrEmpty(this->Host());
         }
       };
 

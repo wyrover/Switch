@@ -19,6 +19,7 @@ namespace Pcf {
   }
 }
 
+/// @cond
 template<>
 class EnumToStrings<System::Windows::Forms::BorderStyle > {
 public:

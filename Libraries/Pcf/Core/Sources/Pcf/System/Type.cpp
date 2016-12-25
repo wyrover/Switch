@@ -4,46 +4,9 @@
 
 #include "../../../Includes/Pcf/System/Array.h"
 #include "../../../Includes/Pcf/System/Type.h"
+#include "../../__OS/CoreApi.h"
 
 using namespace System;
-
-#if _WIN32
-#pragma warning(push)
-#pragma warning(disable:4996)
-  
-namespace {
-  std::string demangle(const char* str) {
-    const std::string types[4] = {"enum ", "class ", "union ", "struct "};
-    std::string demangledStr = str;
-    
-    for(std::string item : types) {
-      size_t pos = std::string::npos;
-      while((pos = demangledStr.find(item)) != std::string::npos) {
-        demangledStr.replace(pos, item.length(), "");
-      }
-    }
-    
-    return demangledStr;
-  }
-}
-
-#pragma warning(pop)
-  
-#else
-#include <cxxabi.h>
-  
-namespace {
-  std::string demangle(const char* str) {
-    int status = 0;
-    char* tmp = abi::__cxa_demangle(str, 0, 0, &status);
-    std::string demangledStr = tmp;
-    free(tmp);
-    tmp = null;
-    return demangledStr;
-  }
-}
-  
-#endif
 
 Type::Type(const Type& type) : FullName(pcf_delegate {return this->GetFullName();}),  Name(pcf_delegate {return this->GetName();}), Namespace(pcf_delegate {return this->GetNamespace();}), type(type.type) {
 }
@@ -64,7 +27,7 @@ bool Type::Equals(const Type& type) const {
 }
 
 String Type::GetFullName() const {
-  String fullName = demangle(this->type.name()).c_str();
+  String fullName = __OS::CoreApi::Type::Demangle(this->type.name());
   Array<string> containsNullPtrTypes = {"Pcf::Fp", "System::Action", "System::Delegate", "System::Func", "std::tuple"};
   for (string item : containsNullPtrTypes) {
     if (fullName.StartsWith(item)) {

@@ -1,6 +1,4 @@
-#include <Corelib.h>
-#include <Forms/System/Windows/Forms/Control.h>
-#include <Forms/System/Windows/Forms/Button.h>
+#include <Pcf.h>
 
 namespace Pcf {
   namespace PcfCode {

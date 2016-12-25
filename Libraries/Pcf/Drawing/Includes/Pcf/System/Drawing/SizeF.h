@@ -9,9 +9,9 @@
 
 #include "Size.h"
 
+/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Pcf {
-  /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types,
-  /// events and event handlers, interfaces, attributes, and processing exceptions.
+  /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The System::Drawing namespace provides access to GDI+ basic graphics functionality. More advanced functionality is provided in the System::Drawing::Drawing2D, System::Drawing::Imaging, and System::Drawing::Text namespaces.
     namespace Drawing {
@@ -23,7 +23,7 @@ namespace Pcf {
       class SizeF : public object {
       public:
         /// @brief Gets a SizeF class that has a Height and Width value of 0.0f. This field is constant.
-        static const SizeF Empty;
+        static Property<SizeF, ReadOnly> Empty;
 
         /// @brief Initializes a new instance of the SizeF class that has a Height and Width value of 0.0f.
         SizeF() {}

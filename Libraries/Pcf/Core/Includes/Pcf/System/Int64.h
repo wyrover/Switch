@@ -26,13 +26,11 @@ namespace Pcf {
     /// @brief Represents a 64-bit signed integer.
     struct Int64 : public ValueType, public IComparable, public IConvertible, public IFormattable {
     public:
-      #undef max
       /// @brief Represents the largest possible value of an Int64 9223372036854775807 (0x7FFFFFFFFFFFFFFF). This field is constant.
-      constexpr static int64 MaxValue = std::numeric_limits<int64>::max();
+      static Property<int64, ReadOnly> MaxValue;
 
-      #undef min
       /// @brief Represents the smallest possible value of Int64 -9223372036854775808 (0x8000000000000000). This field is constant.
-      constexpr static int64 MinValue = std::numeric_limits<int64>::min();
+      static Property<int64, ReadOnly> MinValue;
 
       /// @brief Create a new instance of struct Int64
       /// @remarks Int64 initialized by default to 0.

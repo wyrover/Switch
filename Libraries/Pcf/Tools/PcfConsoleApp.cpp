@@ -1,7 +1,7 @@
+#include <libproc.h>
 #include <Pcf/Pcf>
 
 using namespace System;
-using namespace System::Collections::Generic;
 using namespace System::Diagnostics;
 using namespace System::Threading;
 
@@ -9,15 +9,35 @@ namespace Examples {
   class Program {
   public:
     static void Main(const Array<string>& args) {
-      //Console::WriteLine("Hello, World!");
+      //Process process = Process::Start("http://www.google.com");
+      //Console::WriteLine(process.StandardOutput().ReadToEnd());
+      
+      //intptr processId = StartProcess("/Users/yves/Projects/Pcf/Build/0.1.0/Examples/Debug/Calculator", "");
+      //intptr childPid = StartProcess("echo", "Hello, World!");
+      //intptr childPid = StartProcess("open", "-a /Applications/calculator.app");
+      
+      //Console::WriteLine("[Process {0}] Wait {1}", GetCurrentProcess(), processId);
+      //int32 exitCode = WaitEndProcess(processId);
+      //Console::WriteLine("[Process {0}] End with exitCode = {1}", GetCurrentProcess(), exitCode);
+      
+      for (auto process : Process::GetProcesses()) {
+        try {
+          Console::WriteLine(process);
+        }  catch(...) {
+        }
+      }
 
-      int counter = 0;
-      TimerCallback tc = pcf_delegate(const object&) {
-        Debug::WriteLine("ThreadId = {0}, counter= {1}", Thread::CurrentThread().ManagedThreadId, ++counter);
-      };
+      Console::WriteLine("__________________________________");
+      Console::WriteLine(Process::GetCurrentProcess());
+      Console::WriteLine("__________________________________");
 
-      Timer timer(tc, 100, 100);
-      Console::ReadKey(true);
+      /*
+      Console::WriteLine("[Process {0}] Create", GetCurrentProcess());
+      Process process = Process::Start("/Users/yves/Projects/Pcf/Build/0.1.0/Examples/Debug/Calculator", "");
+      Console::WriteLine("[Process {0}] Wait", GetCurrentProcess());
+      process.WaitForExit();
+      Console::WriteLine("[Process {0}] End", GetCurrentProcess());
+       */
     }
   };
 }

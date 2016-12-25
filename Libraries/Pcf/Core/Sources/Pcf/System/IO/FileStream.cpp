@@ -150,7 +150,6 @@ void FileStream::Write(const Array<byte>& buffer, int32 offset, int32 count) {
     throw IOException(pcf_current_information);
 }
 
-
 int32 FileStream::Peek() {
   if (!CanRead())
     throw NotSupportedException(pcf_current_information);

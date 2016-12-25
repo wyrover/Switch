@@ -21,11 +21,7 @@ class __opaque_task_id_generator__ {
     taskIdCounter = taskIdCounter == System::Int32::MaxValue ? 1 : taskIdCounter + 1;
     return taskIdCounter;
   }
-#if __clang__
-  static __thread int32 currentId;
-#else
   static thread_local int32 currentId;
-#endif
 };
 /// @endcond
 

@@ -11,7 +11,9 @@ namespace {
   Text::UTF8Encoding utf8Encoding(false);
 }
 
-const StreamWriter StreamWriter::Null;
+Property<StreamWriter, ReadOnly> StreamWriter::Null {
+  [] {return StreamWriter();}
+};
 
 StreamWriter::StreamWriter() : TextWriter(utf8Encoding) {
   this->data->stream = new NullStream();

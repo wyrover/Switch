@@ -33,7 +33,7 @@ SharedPointer<Stream> WebResponse::GetResponseStream() {
   return this->responseStream.ChangeType<Stream>();
 }
 
-size_t WebResponse::WriteNullStream(void* /*buffer*/, size_t size, size_t nmemb, void* /*_pStream*/) {
+size_t WebResponse::WriteNullStream(void* buffer, size_t size, size_t nmemb, void* stream) {
   return nmemb*size;
 }
 

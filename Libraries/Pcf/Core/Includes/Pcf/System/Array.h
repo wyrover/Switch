@@ -205,6 +205,12 @@ namespace Pcf {
         this->upperBound.push_back(length-1);
       }
 
+      /// @brief Get access to raw data of the Array.
+      /// @return A pointer to raw data of the array.
+      Property<const T*, ReadOnly> Data{
+        pcf_get{ return this->array.data(); }
+      };
+
       /// @brief Gets a 32-bit integer that represents the total number of elements in all the dimensions of the Array.
       /// @return int32 A 32-bit integer that represents the total number of elements in all the dimensions of the Array; zero if there are no elements in the array.
       /// The following code example demonstrates methods to get the length of an array.
@@ -590,12 +596,6 @@ namespace Pcf {
       /// @exception ArgumentException The current Array does ! have exactly three dimension.
       /// @exception IndexOutOfRangeException index1 || index2 || index3 is outside the range of valid indexes for the current Array.
       void SetValue(const T& value, int32 index1, int32 index2, int32 index3)  { (*this)(index1, index2, index3) = value; }
-
-      /// @brief Get access to raw data of the Array.
-      /// @return A pointer to raw data of the array.
-      Property<const T*, ReadOnly> Data {
-        pcf_get {return this->array.data();}
-      };
 
       /// @brief Sets a value to the element at the specified position in the one-dimensional Array. The index is specified as a 32-bit integer.
       /// @param value The new value for the specified element.

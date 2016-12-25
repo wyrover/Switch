@@ -5,8 +5,13 @@
 
 using namespace System;
 
-constexpr double Math::E;
-constexpr double Math::PI;
+Property<double, ReadOnly> Math::E {
+  [] {return 2.7182818284590452354;}
+};
+
+Property<double, ReadOnly> Math::PI {
+  [] {return 3.14159265358979323846;}
+};
 
 double Math::Acos(double value) {
   return acos(value);

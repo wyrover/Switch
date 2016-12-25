@@ -59,12 +59,6 @@ namespace Pcf {
     System::String functionName;
   };
   
-  /// @cond
-  #if _WIN32
-    #define __PRETTY_FUNCTION__ __FUNCSIG__
-  #endif
-  /// @endcond
-  
   /// @brief Get Current informations
   /// @return CurrentInformation Current informations.
   /// @code
@@ -74,7 +68,7 @@ namespace Pcf {
   /// Console::WriteLine("Function = {0}", currentInformation.FunctionName);
   /// @endcode
   /// @ingroup Pcf
-  #define pcf_current_information CurrentInformation(__FILE__, __LINE__, __PRETTY_FUNCTION__)
+  #define pcf_current_information CurrentInformation(__FILE__, __LINE__, __func__)
 }
 
 using namespace Pcf;

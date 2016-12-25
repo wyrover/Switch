@@ -420,7 +420,7 @@ inline System::IO::TextWriter& operator<<(System::IO::TextWriter& textWriter, in
 }
 
 inline System::IO::TextWriter& operator<<(System::IO::TextWriter& textWriter, void* value) {
-  textWriter << System::IntPtr(value).ToString();
+  textWriter << System::IntPtr((intptr)value).ToString();
   return textWriter;
 }
 

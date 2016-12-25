@@ -96,7 +96,7 @@ namespace Pcf {
       ///
       /// The following code example demonstrates simple threading functionality.
       /// @include Thread.cpp
-      class Thread : public IHashable, public object {
+      class Thread : public object {
       public:
         using ThreadId = std::thread::id;
         using NativeHandle = std::thread::native_handle_type;

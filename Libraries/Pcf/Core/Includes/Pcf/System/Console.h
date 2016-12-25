@@ -221,12 +221,6 @@ namespace Pcf {
       /// @param value The value to write
       static void Write(uint64 value);
       
-#if __APPLE__
-      /// @brief Writes the specified size value to the standard output stream.
-      /// @param value The value to write
-      static void Write(size value);
-#endif
-
       /// @brief Writes the specified uint64 value to the standard output stream.
       /// @param value The value to write
       /// @exception ArgumentNullException The parameters value is null.
@@ -247,12 +241,8 @@ namespace Pcf {
       /// @exception ArgumentNullException The parameters value is null.
       static void Write(const wchar value[]);
       
-#if __linux__ && _LP64
-      static void Write(long long int value);
-      static void Write(unsigned long long int value);
-#else
-      static void Write(long value);
-#endif
+      static void Write(llong value);
+      static void Write(ullong value);
 
       static void Write(unsigned char* value);
       
@@ -366,12 +356,11 @@ namespace Pcf {
       /// @brief Writes the specified UInt64 value, followed by the current line terminator, to the standard output stream.
       /// @param value The value to write
       static void WriteLine(uint64 value);
-      
-#if __APPLE__
-      /// @brief Writes the specified size value, followed by the current line terminator, to the standard output stream.
-      /// @param value The value to write
-      static void WriteLine(size value);
-#endif
+
+      /// @cond
+      static void WriteLine(llong value);
+      static void WriteLine(ullong value);
+      /// @endcond
 
       /// @brief Writes the specified Format-control String value, followed by the current line terminator, to the standard output stream.
       /// @param format The value to write

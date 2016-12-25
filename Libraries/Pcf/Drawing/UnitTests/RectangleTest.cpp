@@ -10,10 +10,10 @@ namespace PcfUnitTests {
   class RectangleTest : public TestFixture {
   public:
     void Empty() {
-      Assert::AreEqual(0, Rectangle::Empty.X(), pcf_current_information);
-      Assert::AreEqual(0, Rectangle::Empty.Y(), pcf_current_information);
-      Assert::AreEqual(0, Rectangle::Empty.Width(), pcf_current_information);
-      Assert::AreEqual(0, Rectangle::Empty.Height(), pcf_current_information);
+      Assert::AreEqual(0, Rectangle::Empty().X(), pcf_current_information);
+      Assert::AreEqual(0, Rectangle::Empty().Y(), pcf_current_information);
+      Assert::AreEqual(0, Rectangle::Empty().Width(), pcf_current_information);
+      Assert::AreEqual(0, Rectangle::Empty().Height(), pcf_current_information);
     }
     
     void CreateEmpty() {
@@ -71,7 +71,7 @@ namespace PcfUnitTests {
     }
     
     void EmptyRectangleIsEmpty() {
-      Assert::IsTrue(Rectangle::Empty.IsEmpty(), pcf_current_information);
+      Assert::IsTrue(Rectangle::Empty().IsEmpty(), pcf_current_information);
     }
     
     void RectangleIsEmpty() {
@@ -79,7 +79,7 @@ namespace PcfUnitTests {
     }
     
     void EmptyRectangleToString() {
-      Assert::AreEqual("{X=0,Y=0,Width=0,Height=0}", Rectangle::Empty.ToString(), pcf_current_information);
+      Assert::AreEqual("{X=0,Y=0,Width=0,Height=0}", Rectangle::Empty().ToString(), pcf_current_information);
     }
     
     void RectangleToString() {

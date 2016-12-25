@@ -14,6 +14,7 @@ set(tests_files
 ./System/Collections/ObjectModel/ReadOnlyCollectionUT.cpp
 ./System/Collections/ArrayListUT.cpp
 ./System/Collections/BitArrayUT.cpp
+./System/Diagnostics/ProcessStartInfoUnitTests.cpp
 ./System/Diagnostics/StackFrameUT.cpp
 ./System/Diagnostics/TraceUT.cpp
 ./System/IO/Ports/SerialPortUT.cpp

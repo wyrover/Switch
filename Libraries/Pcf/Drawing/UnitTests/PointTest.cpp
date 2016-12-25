@@ -10,8 +10,8 @@ namespace PcfUnitTests {
   class Point : public TestFixture {
   public:
     void Empty() {
-      Assert::AreEqual(0, Drawing::Point::Empty.X(), pcf_current_information);
-      Assert::AreEqual(0, Drawing::Point::Empty.Y(), pcf_current_information);
+      Assert::AreEqual(0, Drawing::Point::Empty().X(), pcf_current_information);
+      Assert::AreEqual(0, Drawing::Point::Empty().Y(), pcf_current_information);
     }
     
     void CreateEmpty() {
@@ -55,7 +55,7 @@ namespace PcfUnitTests {
     }
     
     void EmptyPointIsEmpty() {
-      Assert::IsTrue(Drawing::Point::Empty.IsEmpty(), pcf_current_information);
+      Assert::IsTrue(Drawing::Point::Empty().IsEmpty(), pcf_current_information);
     }
     
     void PointIsEmpty() {
@@ -63,7 +63,7 @@ namespace PcfUnitTests {
     }
     
     void EmptyPointToString() {
-      Assert::AreEqual("{X=0,Y=0}", Drawing::Point::Empty.ToString(), pcf_current_information);
+      Assert::AreEqual("{X=0,Y=0}", Drawing::Point::Empty().ToString(), pcf_current_information);
     }
     
     void PointToString() {

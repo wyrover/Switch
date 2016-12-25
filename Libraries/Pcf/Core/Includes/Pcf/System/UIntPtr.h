@@ -17,10 +17,12 @@ namespace Pcf {
     namespace Threading {
       class Interlocked;
     }
+    struct UInt32;
+    struct UInt64;
     /// @endcond
     
     /// @brief A platform-specific type that is used to represent a pointer or a handle.
-    struct UIntPtr : public object, public IComparable, public IFormattable, public IHashable {
+    struct UIntPtr : public object, public IComparable, public IFormattable {
     public:
       /// @brief A read-only field that represents a pointer or handle that has been initialized to zero.
       static UIntPtr Zero;
@@ -31,16 +33,16 @@ namespace Pcf {
 
       /// @brief Create a new instance of class UIntPtr
       /// @param value A pointer or handle contained in a 32-bit signed integer.
-      UIntPtr(uint32 value);
+      UIntPtr(const UInt32& value);
 
       /// @brief Create a new instance of class UIntPtr
       /// @param value A pointer or handle contained in a 64-bit signed integer.
       /// @exception OverflowException On a 32-bit platform, value is too large or too small to represent as an UIntPtr
-      UIntPtr(uint64 value);
+      UIntPtr(const UInt64& value);
 
       /// @brief Create a new instance of class UIntPtr
       /// @param value A pointer to an unspecified type.
-      UIntPtr(const void* value);
+      UIntPtr(uintptr value);
 
       /// @brief Gets the size of this instance.
       /// @return Int32 The size of a pointer or handle on this platform, measured in bytes. The value of this property is 4 on a 32-bit platform, and 8 on a 64-bit platform.
@@ -112,12 +114,12 @@ namespace Pcf {
       friend class System::Threading::Interlocked;
       /// @endcond
 
-      void* value = null;
+      uintptr value = 0;
 
     public:
       /// @cond
       UIntPtr(const UIntPtr& value) : value(value.value) {}
-      operator void*() const;
+      operator uintptr() const;
       UIntPtr& operator =(const UIntPtr& value);
       /// @endcond
    };

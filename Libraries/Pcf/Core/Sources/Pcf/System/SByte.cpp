@@ -1,3 +1,4 @@
+#include <limits>
 #include "../../../Includes/Pcf/System/SByte.h"
 #include "../../../Includes/Pcf/System/Convert.h"
 #include "../../../Includes/Pcf/System/DivideByZeroException.h"
@@ -6,10 +7,13 @@
 
 using namespace System;
 
-#if !_WIN32
-constexpr sbyte SByte::MaxValue;
-constexpr sbyte SByte::MinValue;
-#endif
+Property<sbyte, ReadOnly> SByte::MaxValue {
+  [] {return std::numeric_limits<sbyte>::max();}
+};
+
+Property<sbyte, ReadOnly> SByte::MinValue {
+  [] {return std::numeric_limits<sbyte>::min();}
+};
 
 sbyte SByte::Parse(const string& str) {
   return Parse(str, 10);

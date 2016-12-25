@@ -95,7 +95,7 @@ namespace Pcf {
   /// * Being swapped, and being destructed.
   /// @remarks The type is also required to not be implicitly convertible to an arithmetic, enumeration, or pointer type.
   /// @remarks Performing any other operation on the object (such as dereferencing it), if at all supported by the library implementation, causes undefined behavior.
-  /// @section Examples Examples
+  /// @par Examples
   /// This example show how to use ExceptionPointer, ExceptionPointer::CurrentExeption and Rethrow() :
   /// @include ExceptionPointer.Cpp
   class ExceptionPointer {

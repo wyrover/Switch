@@ -191,7 +191,7 @@ namespace Pcf {
         }
 
         /// @brief Retrieves an array of strings that contains all the value names associated with this key..
-        UniquePointer< System::Array<System::String>> GetValueNames() { return new System::Array<System::String>(values.Keys()); }
+        System::Array<System::String> GetValueNames() { return System::Array<System::String>(values.Keys()); }
 
         /// @brief Writes all the attributes of the specified open registry key into the registry.
         /// @remarks It is ! necessary to call Flush to write out changes to a key. Registry changes are flushed to disk when the registry uses its lazy flusher. Lazy flushing occurs automatically && regularly after a system-specified time interval. Registry changes are also flushed to disk at system shutdown.

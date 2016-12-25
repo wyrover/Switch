@@ -17,7 +17,7 @@ namespace PcfUnitTests {
     void CatchExecptionWithTimeoutSocketErrorOnReceive() {
       Socket socket(AddressFamily::InterNetwork, SocketType::Dgram, ProtocolType::Udp);
       socket.ReceiveTimeout = 1;
-      socket.Bind(new IPEndPoint(IPAddress::Loopback, 8111));
+      socket.Bind(IPEndPoint(IPAddress::Loopback, 8111));
       Array<byte> bytes(512);
       try {
         socket.Receive(bytes);

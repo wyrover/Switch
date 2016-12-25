@@ -111,7 +111,7 @@ namespace Pcf {
         if (dateTime.Kind() == DateTimeKind::Utc)
           return dateTime;
         
-        return DateTime::SpecifyKind(dateTime.ToUniversalTime (), DateTimeKind::Utc);
+        return DateTime::SpecifyKind(dateTime.ToUniversalTime(), DateTimeKind::Utc);
       }
       
       /// @brief Returns a sorted collection of all the time zones about which information is available on the local system.

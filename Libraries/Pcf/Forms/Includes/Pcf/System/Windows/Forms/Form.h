@@ -2,14 +2,12 @@
 /// @brief Contains Pcf::System::Windows::Forms::Form class.
 #pragma once
 
-#include "Button.h"
+#include <Pcf/System/Diagnostics/Debug.h>
 #include "ContainerControl.h"
-#include "DialogResult.h"
+#include "FormBorderStyle.h"
 #include "FormClosedEventHandler.h"
 #include "FormClosingEventHandler.h"
 #include "FormStartPosition.h"
-#include "KeyEventArgs.h"
-#include "MainMenu.h"
 
 /// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Pcf {
@@ -22,112 +20,66 @@ namespace Pcf {
         /// @brief Represents a window or dialog box that makes up an application's user interface.
         class Form : public ContainerControl {
         public:
-          Form();
+          Form() {
+            this->data->visible = false;
+            this->SetStyle(ControlStyles::UserPaint, false);
+          }
 
-          Property<const Button&> AcceptButton {
-            pcf_get->const Button& {return this->acceptButton();},
-            pcf_set {return this->SetAcceptButton(value);}
-          };
+          /// @cond
+          Form(const Form& form) : ContainerControl(form), formData(form.formData) {}
+          /// @endcond
 
-          Property<const Button&> CancelButton {
-            pcf_get->const Button& {return this->cancelButton();},
-            pcf_set {return this->SetCancelButton(value);}
-          };
-          
-          Property<bool> KeyPreview {
-            pcf_get {return this->keyPreview;},
-            pcf_set {this->keyPreview = value;}
+          Property<System::Windows::Forms::FormBorderStyle> FormBorderStyle {
+            pcf_get{return this->formData->formBorderStyle;},
+            pcf_set{this->formData->formBorderStyle = value;}
           };
           
           Property<bool> MaximizeBox {
-            pcf_get {return this->GetMaximizeBox();},
-            pcf_set {this->SetMaximizeBox(value);}
+            pcf_get {return this->formData->maximizeBox;},
+            pcf_set {this->formData->maximizeBox = value;}
           };
           
-          Property<MainMenu&> Menu {
-            pcf_get->MainMenu& {return this->GetMenu();},
-            [&](MainMenu& value) {return this->SetMenu(value);}
+          Property<bool> MinimizeBox {
+            pcf_get {return this->formData->minimizeBox;},
+            pcf_set {this->formData->minimizeBox = value;}
           };
           
-          Property<FormStartPosition> StartPosition {
-            pcf_get {return this->startPosition;},
-            pcf_set {this->SetStartPosition(value);}
-          };
-          
-          FormClosingEventHandler FormClosing;
-          FormClosedEventHandler FormClosed;
+		      Property<FormStartPosition> StartPosition{
+			      pcf_get{return this->formData->startPosition;},
+			      pcf_set{this->formData->startPosition = value;}
+		      };
 
-          void CenterToParent();
-          
-          void CenterToScreen();
-          
           void Close() override;
 
-          void Show() override;
-          
-          virtual DialogResult ShowDialog();
-          
-         protected:
-          virtual void OnFormClosing(FormClosingEventArgs& e) {
-            this->FormClosing(*this, e);
-          }
-        
-          virtual void OnFormClosed(const FormClosedEventArgs& e) {
-            this->FormClosed(*this, e);
-          }
-          
-          virtual void OnKeyDown(KeyEventArgs& e) override {
-            if (this->keyPreview == false)
-              return;
-            this->Control::KeyDown(*this, e);}
+          void WndProc(Message& message) override;
 
-          virtual void OnKeyPress(KeyPressEventArgs& e) override {
-            if (this->keyPreview == false)
-              return;
-            this->Control::KeyPress(*this, e);
-          }
-          
-          virtual void OnKeyUp(KeyEventArgs& e) override {
-            if(!this->acceptButton.IsNull() && e.KeyCode == Keys::Enter)
-              this->acceptButton().PerformClick();
-            if (!this->cancelButton.IsNull() && e.KeyCode == Keys::Escape)
-              this->cancelButton().PerformClick();
-            if (this->keyPreview == false)
-              return;
-            this->Control::KeyUp(*this, e);
-          }
-          
-          void SetAcceptButton(const Button& button);
-          
-          void SetCancelButton(const Button& button);
-          
-          Drawing::Size GetDecorationSize() const override;
-          
-          System::Drawing::Size GetDefaultSize() const override {return System::Drawing::Size(300, 300);}
+          FormClosedEventHandler FormClosed;
 
-          bool SetFocus(Control& control);
-          
-          virtual bool GetMaximizeBox() const;
-          virtual void SetMaximizeBox(bool maximize);
-          
-          virtual void SetStartPosition(FormStartPosition startPosition);
+          FormClosingEventHandler FormClosing;
 
-          void SetText(const string& text) override;
+        protected:
+          void CreateHandle() override;
 
-          MainMenu& GetMenu();
-          void SetMenu(MainMenu& mainMenu);
-          
-          int32 GetMenuHeight() const;
+          System::Drawing::Size GetDefaultSize() const override { return System::Drawing::Size(300, 300); }
 
-          Reference<Button> acceptButton;
-          Reference<Button> cancelButton;
-          UniquePointer<MainMenu> menu;
-          CloseReason closeReason = CloseReason::None;
-          DialogResult dialogResult = DialogResult::OK;
-          bool keyPreview = false;
-          FormStartPosition startPosition = FormStartPosition::WindowsDefaultLocation;
-          mutable int32 borderWidth;
-          mutable int32 titleHeight;
+          virtual void OnFormClosed(const FormClosedEventArgs& e) { this->FormClosed(*this, e); }
+
+          virtual void OnFormClosing(FormClosingEventArgs& e) { this->FormClosing(*this, e); }
+
+          /// @cond
+          struct FormData {
+            System::Windows::Forms::FormBorderStyle formBorderStyle = System::Windows::Forms::FormBorderStyle::Sizable;
+            bool maximizeBox = true;
+            bool minimizeBox = true;
+            System::Windows::Forms::FormStartPosition startPosition = FormStartPosition::WindowsDefaultLocation;
+            System::Collections::Generic::Dictionary<int32, Action<Message&>> messageActions;
+          };
+
+          SharedPointer<FormData> formData = SharedPointer<FormData>::Create();
+          /// @endcond
+
+        private:
+          void WmClose(Message& message);
         };
       }
     }

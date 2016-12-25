@@ -52,12 +52,14 @@ set(includeFiles
 ./Includes/Pcf/System/Collections/Queue.h
 ./Includes/Pcf/System/Collections/Specialized.h
 ./Includes/Pcf/System/Collections/Stack.h
+./Includes/Pcf/System/ComponentModel/InvalidEnumArgumentException.h
 ./Includes/Pcf/System/Diagnostics/ConsoleTraceListener.h
 ./Includes/Pcf/System/Diagnostics/Debug.h
 ./Includes/Pcf/System/Diagnostics/DefaultTraceListener.h
 ./Includes/Pcf/System/Diagnostics/NullTraceListener.h
 ./Includes/Pcf/System/Diagnostics/Process.h
 ./Includes/Pcf/System/Diagnostics/ProcessStartInfo.h
+./Includes/Pcf/System/Diagnostics/ProcessWindowStyle.h
 ./Includes/Pcf/System/Diagnostics/StackFrame.h
 ./Includes/Pcf/System/Diagnostics/StackTrace.h
 ./Includes/Pcf/System/Diagnostics/Stopwatch.h
@@ -186,6 +188,7 @@ set(includeFiles
 ./Includes/Pcf/System/Runtime/Serialization/SerializationInfo.h
 ./Includes/Pcf/System/Runtime/Serialization.h
 ./Includes/Pcf/System/Security/HostProtectionException.h
+./Includes/Pcf/System/Security/SecureString.h
 ./Includes/Pcf/System/Security/SecurityException.h
 ./Includes/Pcf/System/Security/VerificationException.h
 ./Includes/Pcf/System/Security/XmlSyntaxException.h
@@ -265,8 +268,8 @@ set(includeFiles
 ./Includes/Pcf/System/Char.h
 ./Includes/Pcf/System/CharEnumerator.h
 ./Includes/Pcf/System/Collections.h
-./Includes/Pcf/System/Compare.h
 ./Includes/Pcf/System/Comparison.h
+./Includes/Pcf/System/ComponentModel.h
 ./Includes/Pcf/System/Console.h
 ./Includes/Pcf/System/ConsoleCancelEventArgs.h
 ./Includes/Pcf/System/ConsoleCancelEventHandler.h
@@ -308,7 +311,6 @@ set(includeFiles
 ./Includes/Pcf/System/ICustomFormatter.h
 ./Includes/Pcf/System/IFormatProvider.h
 ./Includes/Pcf/System/IFormattable.h
-./Includes/Pcf/System/IHashable.h
 ./Includes/Pcf/System/IndexOutOfRangeException.h
 ./Includes/Pcf/System/InsufficientExecutionStackException.h
 ./Includes/Pcf/System/InsufficientMemoryException.h
@@ -354,7 +356,6 @@ set(includeFiles
 ./Includes/Pcf/System/Random.h
 ./Includes/Pcf/System/RankException.h
 ./Includes/Pcf/System/Runtime.h
-./Includes/Pcf/System/SafeMath.h
 ./Includes/Pcf/System/SByte.h
 ./Includes/Pcf/System/Security.h
 ./Includes/Pcf/System/Single.h
@@ -424,61 +425,47 @@ set(includeFiles
 
 # Add source files here:
 set(sourceFiles
+./Sources/__OS/CoreApi.h
+./Sources/__OS/ConsoleGcc.cpp
+./Sources/__OS/ConsoleW32.cpp
+./Sources/__OS/DateTimeGcc.cpp
+./Sources/__OS/DateTimeW32.cpp
+./Sources/__OS/DebuggerGcc.cpp
+./Sources/__OS/DebuggerW32.cpp
+./Sources/__OS/DirectoryGcc.cpp
+./Sources/__OS/DirectoryW32.cpp
+./Sources/__OS/Dns.cpp
+./Sources/__OS/DriveGcc.cpp
+./Sources/__OS/DriveW32.cpp
+./Sources/__OS/EnvironmentGcc.cpp
+./Sources/__OS/EnvironmentW32.cpp
+./Sources/__OS/Format.cpp
+./Sources/__OS/InterlockedGcc.cpp
+./Sources/__OS/InterlockedW32.cpp
+./Sources/__OS/ProcessGcc.cpp
+./Sources/__OS/ProcessW32.cpp
+./Sources/__OS/RegistryGcc.cpp
+./Sources/__OS/RegistryW32.cpp
+./Sources/__OS/Security.cpp
+./Sources/__OS/SocketGcc.cpp
+./Sources/__OS/SocketW32.cpp
+./Sources/__OS/ThreadGcc.cpp
+./Sources/__OS/ThreadW32.cpp
+./Sources/__OS/TypeGcc.cpp
+./Sources/__OS/TypeW32.cpp
+./Sources/__OS/UnicodeCharacters.cpp
+./Sources/__OS/UnicodeEncodings.cpp
 ./Sources/Pcf/Microsoft/Win32/RegistryKeyWin.cpp
 ./Sources/Pcf/Microsoft/Win32/RegistryKeyAll.cpp
-./Sources/Pcf/Os/Gcc/ConsoleGcc.cpp
-./Sources/Pcf/Os/Gcc/DateTimeGcc.cpp
-./Sources/Pcf/Os/Gcc/DirectoryGcc.cpp
-./Sources/Pcf/Os/Gcc/DriveGcc.cpp
-./Sources/Pcf/Os/Gcc/InformationGcc.cpp
-./Sources/Pcf/Os/Gcc/RegistryGcc.cpp
-./Sources/Pcf/Os/Gcc/SocketGcc.cpp
-./Sources/Pcf/Os/Win32/ConsoleW32.cpp
-./Sources/Pcf/Os/Win32/DateTimeW32.cpp
-./Sources/Pcf/Os/Win32/DirectoryW32.cpp
-./Sources/Pcf/Os/Win32/DriveW32.cpp
-./Sources/Pcf/Os/Win32/InformationW32.cpp
-./Sources/Pcf/Os/Win32/RegistryW32.cpp
-./Sources/Pcf/Os/Win32/SocketW32.cpp
-./Sources/Pcf/Os/Console.h
-./Sources/Pcf/Os/DateTime.h
-./Sources/Pcf/Os/Directory.h
-./Sources/Pcf/Os/Drive.h
-./Sources/Pcf/Os/Information.h
-./Sources/Pcf/Os/Registry.h
-./Sources/Pcf/Os/Socket.h
-./Sources/Pcf/Os/UnicodeCharacters.h
-./Sources/Pcf/Os/UnicodeCharacters.cpp
-./Sources/Pcf/Os/UnicodeEncodings.h
-./Sources/Pcf/Os/UnicodeEncodings.cpp
-./Sources/Pcf/System/ArrayAlgorithms.h
-./Sources/Pcf/System/BitConverter.cpp
-./Sources/Pcf/System/Boolean.cpp
-./Sources/Pcf/System/Buffer.cpp
-./Sources/Pcf/System/Byte.cpp
-./Sources/Pcf/System/Char.cpp
-./Sources/Pcf/System/Compare.cpp
-./Sources/Pcf/System/Console.cpp
-./Sources/Pcf/System/Convert.cpp
-./Sources/Pcf/System/DateTime.cpp
 ./Sources/Pcf/System/Diagnostics/Debug.cpp
 ./Sources/Pcf/System/Diagnostics/DefaultTraceListener.cpp
 ./Sources/Pcf/System/Diagnostics/Process.cpp
+./Sources/Pcf/System/Diagnostics/ProcessStartInfo.cpp
 ./Sources/Pcf/System/Diagnostics/StackFrame.cpp
 ./Sources/Pcf/System/Diagnostics/StackTrace.cpp
 ./Sources/Pcf/System/Diagnostics/Stopwatch.cpp
 ./Sources/Pcf/System/Diagnostics/Trace.cpp
 ./Sources/Pcf/System/Diagnostics/TraceSource.cpp
-./Sources/Pcf/System/Double.cpp
-./Sources/Pcf/System/Environment.cpp
-./Sources/Pcf/System/EventArgs.cpp
-./Sources/Pcf/System/Exception.cpp
-./Sources/Pcf/System/Guid.cpp
-./Sources/Pcf/System/Hash.cpp
-./Sources/Pcf/System/Int16.cpp
-./Sources/Pcf/System/Int32.cpp
-./Sources/Pcf/System/Int64.cpp
-./Sources/Pcf/System/IntPtr.cpp
 ./Sources/Pcf/System/IO/BinaryReader.cpp
 ./Sources/Pcf/System/IO/BinaryWriter.cpp
 ./Sources/Pcf/System/IO/Directory.cpp
@@ -498,7 +485,6 @@ set(sourceFiles
 ./Sources/Pcf/System/IO/StreamWriter.cpp
 ./Sources/Pcf/System/IO/TextReader.cpp
 ./Sources/Pcf/System/IO/TextWriter.cpp
-./Sources/Pcf/System/Math.cpp
 ./Sources/Pcf/System/Net/Dns.cpp
 ./Sources/Pcf/System/Net/DnsEndPoint.cpp
 ./Sources/Pcf/System/Net/EndPoint.cpp
@@ -522,16 +508,7 @@ set(sourceFiles
 ./Sources/Pcf/System/Net/Sockets/TcpListener.cpp
 ./Sources/Pcf/System/Net/WebSockets/ClientWebSocket.cpp
 ./Sources/Pcf/System/Net/WebSockets/WebSocket.cpp
-./Sources/Pcf/System/NumericalFormat.cpp
-./Sources/Pcf/System/NumericalParsing.cpp
-./Sources/Pcf/System/Object.cpp
-./Sources/Pcf/System/Random.cpp
-./Sources/Pcf/System/Runtime/Serialization/SerializationInfo.cpp
-./Sources/Pcf/System/SafeMath.cpp
-./Sources/Pcf/System/SByte.cpp
-./Sources/Pcf/System/Single.cpp
-./Sources/Pcf/System/String.cpp
-./Sources/Pcf/System/SystemVersion.cpp
+./Sources/Pcf/System/Security/SecureString.cpp
 ./Sources/Pcf/System/Text/ANSIEncoding.cpp
 ./Sources/Pcf/System/Text/ASCIIEncoding.cpp
 ./Sources/Pcf/System/Text/Decoder.cpp
@@ -551,6 +528,35 @@ set(sourceFiles
 ./Sources/Pcf/System/Threading/TryLockGuard.cpp
 ./Sources/Pcf/System/Threading/WaitHandle.cpp
 ./Sources/Pcf/System/Threading/Tasks/Task.cpp
+./Sources/Pcf/System/ArrayAlgorithms.h
+./Sources/Pcf/System/BitConverter.cpp
+./Sources/Pcf/System/Boolean.cpp
+./Sources/Pcf/System/Buffer.cpp
+./Sources/Pcf/System/Byte.cpp
+./Sources/Pcf/System/Char.cpp
+./Sources/Pcf/System/Console.cpp
+./Sources/Pcf/System/Convert.cpp
+./Sources/Pcf/System/DateTime.cpp
+./Sources/Pcf/System/Double.cpp
+./Sources/Pcf/System/Environment.cpp
+./Sources/Pcf/System/EventArgs.cpp
+./Sources/Pcf/System/Exception.cpp
+./Sources/Pcf/System/Guid.cpp
+./Sources/Pcf/System/Hash.cpp
+./Sources/Pcf/System/Int16.cpp
+./Sources/Pcf/System/Int32.cpp
+./Sources/Pcf/System/Int64.cpp
+./Sources/Pcf/System/IntPtr.cpp
+./Sources/Pcf/System/Math.cpp
+./Sources/Pcf/System/NumericalFormat.cpp
+./Sources/Pcf/System/NumericalParsing.cpp
+./Sources/Pcf/System/Object.cpp
+./Sources/Pcf/System/Random.cpp
+./Sources/Pcf/System/Runtime/Serialization/SerializationInfo.cpp
+./Sources/Pcf/System/SByte.cpp
+./Sources/Pcf/System/Single.cpp
+./Sources/Pcf/System/String.cpp
+./Sources/Pcf/System/SystemVersion.cpp
 ./Sources/Pcf/System/TimeSpan.cpp
 ./Sources/Pcf/System/TimeZoneInfo.cpp
 ./Sources/Pcf/System/Type.cpp
@@ -576,18 +582,13 @@ source_group(Documentations\\FrameworkDesignGuidelines\\MemberDesignGuidelines R
 source_group(Documentations\\Tutorials REGULAR_EXPRESSION "/Includes/Pcf/Documentations/Tutorials/[-_,A-Za-z0-9]+\\.h*")
 source_group(Includes\\Pcf\\Microsoft\\Win32 REGULAR_EXPRESSION "/Includes/Pcf/Microsoft/Win32/[-_,A-Za-z0-9]+\\.h*")
 source_group(Includes\\Pcf\\Microsoft REGULAR_EXPRESSION "/Includes/Pcf/Microsoft/[-_,A-Za-z0-9]+\\.h*")
-source_group(Includes\\Pcf\\Os\\Android REGULAR_EXPRESSION "/Includes/Pcf/Os/Android/[-_,A-Za-z0-9]+\\.h*")
-source_group(Includes\\Pcf\\Os\\Linux REGULAR_EXPRESSION "/Includes/Pcf/Os/Linux/[-_,A-Za-z0-9]+\\.h*")
-source_group(Includes\\Pcf\\Os\\MacOs REGULAR_EXPRESSION "/Includes/Pcf/Os/MacOs/[-_,A-Za-z0-9]+\\.h*")
-source_group(Includes\\Pcf\\Os\\Win32 REGULAR_EXPRESSION "/Includes/Pcf/Os/Win32/[-_,A-Za-z0-9]+\\.h*")
-source_group(Includes\\Pcf\\Os\\WinCE REGULAR_EXPRESSION "/Includes/Pcf/Os/WinCE/[-_,A-Za-z0-9]+\\.h*")
-source_group(Includes\\Pcf\\Os REGULAR_EXPRESSION "/Includes/Pcf/Os/[-_,A-Za-z0-9]+\\.h*")
 source_group(Includes\\Pcf\\System\\Collections\\Concurrent REGULAR_EXPRESSION "/Includes/Pcf/System/Collections/Concurrent/[-_,A-Za-z0-9]+\\.h*")
 source_group(Includes\\Pcf\\System\\Collections\\Internal REGULAR_EXPRESSION "/Includes/Pcf/System/Collections/Internal/[-_,A-Za-z0-9]+\\.h*")
 source_group(Includes\\Pcf\\System\\Collections\\Generic REGULAR_EXPRESSION "/Includes/Pcf/System/Collections/Generic/[-_,A-Za-z0-9]+\\.h*")
 source_group(Includes\\Pcf\\System\\Collections\\ObjectModel REGULAR_EXPRESSION "/Includes/Pcf/System/Collections/ObjectModel/[-_,A-Za-z0-9]+\\.h*")
 source_group(Includes\\Pcf\\System\\Collections\\Specialized REGULAR_EXPRESSION "/Includes/Pcf/System/Collections/Specialized/[-_,A-Za-z0-9]+\\.h*")
 source_group(Includes\\Pcf\\System\\Collections REGULAR_EXPRESSION "/Includes/Pcf/System/Collections/[-_,A-Za-z0-9]+\\.h*")
+source_group(Includes\\Pcf\\System\\ComponentModel REGULAR_EXPRESSION "/Includes/Pcf/System/ComponentModel/[-_,A-Za-z0-9]+\\.h*")
 source_group(Includes\\Pcf\\System\\Diagnostics REGULAR_EXPRESSION "/Includes/Pcf/System/Diagnostics/[-_,A-Za-z0-9]+\\.h*")
 source_group(Includes\\Pcf\\System\\Globalization REGULAR_EXPRESSION "/Includes/Pcf/System/Globalization/[-_,A-Za-z0-9]+\\.h*")
 source_group(Includes\\Pcf\\System\\IO\\Ports REGULAR_EXPRESSION "/Includes/Pcf/System/IO/Ports/[-_,A-Za-z0-9]+\\.h*")
@@ -610,12 +611,10 @@ source_group(Includes REGULAR_EXPRESSION "/Includes/[-_,A-Za-z0-9]+\\.h*")
 #Add source groups here:
 source_group(Sources\\Pcf\\Microsoft\\Win32 REGULAR_EXPRESSION "/Sources/Pcf/Microsoft/Win32/[-_,A-Za-z0-9]+\\.c*")
 source_group(Sources\\Pcf\\Microsoft REGULAR_EXPRESSION "/Sources/Pcf/Microsoft/[-_,A-Za-z0-9]+\\.c*")
-source_group(Sources\\Pcf\\Os\\Android REGULAR_EXPRESSION "/Sources/Pcf/Os/Android/[-_,A-Za-z0-9]+\\.c*")
-source_group(Sources\\Pcf\\Os\\Gcc REGULAR_EXPRESSION "/Sources/Pcf/Os/Gcc/[-_,A-Za-z0-9]+\\.c*")
-source_group(Sources\\Pcf\\Os\\Win32 REGULAR_EXPRESSION "/Sources/Pcf/Os/Win32/[-_,A-Za-z0-9]+\\.c*")
-source_group(Sources\\Pcf\\Os REGULAR_EXPRESSION "/Sources/Pcf/Os/[-_,A-Za-z0-9]+\\.c*")
+source_group(Sources\\__OS REGULAR_EXPRESSION "/Sources/__OS/[-_,A-Za-z0-9]+\\.*")
 source_group(Sources\\Pcf\\System\\Collections\\Internal REGULAR_EXPRESSION "/Sources/Pcf/System/Collections/Internal/[-_,A-Za-z0-9]+\\.c*")
 source_group(Sources\\Pcf\\System\\Collections REGULAR_EXPRESSION "/Sources/Pcf/System/Collections/[-_,A-Za-z0-9]+\\.c*")
+source_group(Sources\\Pcf\\System\\ComponentModel REGULAR_EXPRESSION "/Sources/Pcf/System/ComponentModel/[-_,A-Za-z0-9]+\\.c*")
 source_group(Sources\\Pcf\\System\\Diagnostics REGULAR_EXPRESSION "/Sources/Pcf/System/Diagnostics/[-_,A-Za-z0-9]+\\.c*")
 source_group(Sources\\Pcf\\System\\IO\\Ports REGULAR_EXPRESSION "/Sources/Pcf/System/IO/Ports/[-_,A-Za-z0-9]+\\.c*")
 source_group(Sources\\Pcf\\System\\IO REGULAR_EXPRESSION "/Sources/Pcf/System/IO/[-_,A-Za-z0-9]+\\.c*")

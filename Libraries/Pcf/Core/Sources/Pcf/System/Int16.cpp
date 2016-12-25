@@ -1,3 +1,4 @@
+#include <limits>
 #include "../../../Includes/Pcf/System/Int16.h"
 #include "../../../Includes/Pcf/System/Convert.h"
 #include "../../../Includes/Pcf/System/DivideByZeroException.h"
@@ -6,10 +7,13 @@
 
 using namespace System;
 
-#if !_WIN32
-constexpr int16 Int16::MaxValue;
-constexpr int16 Int16::MinValue;
-#endif
+Property<int16, ReadOnly> Int16::MaxValue {
+  [] {return std::numeric_limits<int16>::max();}
+};
+
+Property<int16, ReadOnly> Int16::MinValue {
+  [] {return std::numeric_limits<int16>::min();}
+};
 
 int16 Int16::Parse(const string& value) {
   return Parse(value,10);

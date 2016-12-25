@@ -3,16 +3,58 @@
 using namespace System;
 using namespace System::Net;
 
-const string WebRequestMethods::Ftp::DownloadFile = "FtpDownloadFile";
-const string WebRequestMethods::Ftp::UploadFile = "FtpUploadFile";
-const string WebRequestMethods::Ftp::ListDirectory = "ListDirectory";
-const string WebRequestMethods::Ftp::ListDirectoryDetails = "ListDirectoryDetails";
-const string WebRequestMethods::Ftp::MakeDirectory = "MakeDirectory";
+Property<string, ReadOnly> WebRequestMethods::File::DownloadFile {
+  [] {return "GET";}
+};
 
-const string WebRequestMethods::Http::Get = "GET";
-const string WebRequestMethods::Http::Head = "HEAD";
-const string WebRequestMethods::Http::Post = "POST";
-const string WebRequestMethods::Http::Put = "PUT";
-const string WebRequestMethods::Http::Delete = "DELETE";
-const string WebRequestMethods::Http::Trace = "TRACE";
-const string WebRequestMethods::Http::Options = "OPTIONS";
+Property<string, ReadOnly> WebRequestMethods::File::UploadFile {
+  [] {return "PUT";}
+};
+
+Property<string, ReadOnly> WebRequestMethods::Ftp::DownloadFile {
+  [] {return "FtpDownloadFile";}
+};
+
+Property<string, ReadOnly> WebRequestMethods::Ftp::UploadFile {
+  [] {return "FtpUploadFile";}
+};
+
+Property<string, ReadOnly> WebRequestMethods::Ftp::ListDirectory {
+  [] {return "ListDirectory";}
+};
+
+Property<string, ReadOnly> WebRequestMethods::Ftp::ListDirectoryDetails {
+  [] {return "ListDirectoryDetails";}
+};
+
+Property<string, ReadOnly> WebRequestMethods::Ftp::MakeDirectory {
+  [] {return "MakeDirectory";}
+};
+
+Property<string, ReadOnly> WebRequestMethods::Http::Get {
+  [] {return "GET";}
+};
+
+Property<string, ReadOnly> WebRequestMethods::Http::Head {
+  [] {return "HEAD";}
+};
+
+Property<string, ReadOnly> WebRequestMethods::Http::Post {
+  [] {return "POST";}
+};
+
+Property<string, ReadOnly> WebRequestMethods::Http::Put {
+  [] {return "PUT";}
+};
+
+Property<string, ReadOnly> WebRequestMethods::Http::Delete {
+  [] {return "DELETE";}
+};
+
+Property<string, ReadOnly> WebRequestMethods::Http::Trace {
+  [] {return "TRACE";}
+};
+
+Property<string, ReadOnly> WebRequestMethods::Http::Options {
+  [] {return "OPTIONS";}
+};

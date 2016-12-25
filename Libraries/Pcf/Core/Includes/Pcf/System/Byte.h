@@ -2,8 +2,6 @@
 /// @brief Contains Pcf::System::Byte struct.
 #pragma once
 
-#include <limits>
-
 #include "../Property.h"
 #include "../Types.h"
 #include "IComparable.h"
@@ -37,13 +35,11 @@ namespace Pcf {
       /// @param value Value for the Byte.
       Byte(byte value) : value(value) {}
       
-      #undef max
       /// @brief Represents the largest possible value of an Byte 255 (0xFF). This field is constant.
-      constexpr static byte MaxValue = std::numeric_limits<byte>::max();
+      static Property<byte, ReadOnly> MaxValue;
 
-      #undef min
       /// @brief Represents the smallest possible value of Byte 0 (0x00). This field is constant.
-      constexpr static byte MinValue = std::numeric_limits<byte>::min();
+      static Property<byte, ReadOnly> MinValue;
 
       /// @brief Converts the specified String representation of a logical value to its 8-bit unsigned integer equivalent.
       /// @param str A String containing the value to convert.

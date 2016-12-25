@@ -6,24 +6,26 @@
 
 using namespace System;
 
-const IntPtr IntPtr::Zero;
-
-Property<int32, ReadOnly> IntPtr::Size {
-  [] {return static_cast<int32>(sizeof(void*));}
+Property<IntPtr, ReadOnly> IntPtr::Zero {
+  [] {return IntPtr();}
 };
 
-IntPtr::IntPtr(int32 value) {
-  this->value = reinterpret_cast<void*>(value);
+Property<int32, ReadOnly> IntPtr::Size {
+  [] {return static_cast<int32>(sizeof(intptr));}
+};
+
+IntPtr::IntPtr(const Int32& value) {
+  this->value = (int32)value;
 }
 
-IntPtr::IntPtr(int64 value) {
+IntPtr::IntPtr(const Int64& value) {
   if (Size == 4 && (value < Int32::MinValue || value > Int32::MaxValue))
     throw OverflowException(pcf_current_information);
 
-  this->value = reinterpret_cast<void*>(value);
+  this->value = (int64)value;
 }
 
-IntPtr::IntPtr(void* value) {
+IntPtr::IntPtr(intptr value) {
   this->value = value;
 }
 
@@ -36,7 +38,7 @@ bool IntPtr::Equals(const object& obj) const {
 }
 
 int32 IntPtr::GetHashCode() const {
-  int64 handleValue = reinterpret_cast<size_t>(this->value);
+  int64 handleValue = (int64)this->value;
   int32 hash = 0;
 
   hash = static_cast<int32>(handleValue & 0x00000000FFFFFFFF);
@@ -46,7 +48,7 @@ int32 IntPtr::GetHashCode() const {
 }
 
 int32 IntPtr::CompareTo(const IntPtr& value) const {
-  return static_cast<int32>(reinterpret_cast<int64>(this->value) - reinterpret_cast<int64>(value.value));
+  return static_cast<int32>(this->value - value.value);
 }
 
 int32 IntPtr::CompareTo(const IComparable& obj) const {
@@ -56,22 +58,20 @@ int32 IntPtr::CompareTo(const IComparable& obj) const {
 }
 
 int32 IntPtr::ToInt32() const {
-  if (Size == 8 && (reinterpret_cast<int64>(this->value) < static_cast<int64>(Int32::MinValue) || reinterpret_cast<int64>(this->value) > static_cast<int64>(Int32::MaxValue)))
+  if (Size == 8 && (this->value < Int32::MinValue || this->value > Int32::MaxValue))
     throw OverflowException(pcf_current_information);
 
   return *((int32*)&this->value);
 }
 
 int64 IntPtr::ToInt64() const {
-#if !(_WIN64 || _LP64)
-  return reinterpret_cast<int32>(value);
-#else
-  return reinterpret_cast<int64>(value);
-#endif
+  if (IntPtr::Size == 4)
+    return *((int32*)&value);
+  return int64(value);
 }
 
 void* IntPtr::ToPointer() const {
-  return this->value;
+  return (void*)this->value;
 }
 
 string IntPtr::ToString() const {
@@ -86,7 +86,7 @@ string IntPtr::ToString(const string& format, const IFormatProvider& formatProvi
   return Int64(ToInt64()).ToString(format);
 }
 
-IntPtr::operator void*() const {
+IntPtr::operator intptr() const {
   return this->value;
 }
 

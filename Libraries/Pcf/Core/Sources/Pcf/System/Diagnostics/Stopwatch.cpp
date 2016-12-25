@@ -3,10 +3,13 @@
 
 using namespace System::Diagnostics;
 
-#if !_WIN32
-constexpr int64 Stopwatch::Frequency;
-constexpr bool Stopwatch::IsHighResolution;
-#endif
+Property<int64, ReadOnly> Stopwatch::Frequency {
+  [] {return 10000000;}
+};
+
+Property<bool, ReadOnly> Stopwatch::IsHighResolution {
+  [] {return true;}
+};
 
 int64 Stopwatch::GetTimestamp() {
   return std::chrono::high_resolution_clock::now().time_since_epoch().count()/100;

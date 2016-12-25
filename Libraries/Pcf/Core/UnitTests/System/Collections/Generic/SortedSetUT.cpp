@@ -650,17 +650,17 @@ TEST(SortedSet, Reverse) {
   for (int32 i = 1; i <= 10; i++)
     set.Add(i);
   
-  SharedPointer< SortedSet<int32>> setr = set.Reverse();
-  EXPECT_TRUE(set.SetEquals(*setr));
-  EXPECT_EQ(10,setr->Count);
+  SortedSet<int32> setr = set.Reverse();
+  EXPECT_TRUE(set.SetEquals(setr));
+  EXPECT_EQ(10,setr.Count);
 
   int k = 0;
-  for (int32 i : *setr)
+  for (int32 i : setr)
     EXPECT_EQ(decompte[k++],i);
 
   k=0;
-  SharedPointer< SortedSet<int32>> setrr = setr->Reverse();
-  for (int32 i : *setrr)
+  SortedSet<int32> setrr = setr.Reverse();
+  for (int32 i : setrr)
     EXPECT_EQ(compte[k++],i);
 }
 

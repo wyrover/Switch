@@ -12,13 +12,33 @@ using namespace System;
 using namespace System::Net;
 using namespace System::Net::Sockets;
 
-const IPAddress IPAddress::Any(0x0000000000000000LL);
-const IPAddress IPAddress::Broadcast(0x00000000FFFFFFFFLL);
-const IPAddress IPAddress::IPv6Any(std::vector<byte> {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0});
-const IPAddress IPAddress::IPv6Loopback(std::vector<byte> {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1});
-const IPAddress IPAddress::IPv6None(std::vector<byte> {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0});
-const IPAddress IPAddress::Loopback(0x000000000100007FLL);
-const IPAddress IPAddress::None(0x00000000FFFFFFFFLL);
+Property<IPAddress, ReadOnly> IPAddress::Any {
+  [] {return IPAddress(0x0000000000000000LL);}
+};
+
+Property<IPAddress, ReadOnly> IPAddress::Broadcast {
+  [] {return IPAddress(0x00000000FFFFFFFFLL);}
+};
+
+Property<IPAddress, ReadOnly> IPAddress::IPv6Any {
+  [] {return IPAddress(Array<byte> {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0});}
+};
+
+Property<IPAddress, ReadOnly> IPAddress::IPv6Loopback {
+  [] {return IPAddress(Array<byte> {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1});}
+};
+
+Property<IPAddress, ReadOnly> IPAddress::IPv6None {
+  [] {return IPAddress(Array<byte> {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0});}
+};
+
+Property<IPAddress, ReadOnly> IPAddress::Loopback {
+  [] {return IPAddress(0x000000000100007FLL);}
+};
+
+Property<IPAddress, ReadOnly> IPAddress::None {
+  [] {return IPAddress(0x00000000FFFFFFFFLL);}
+};
 
 IPAddress::IPAddress() {
 }
@@ -109,9 +129,14 @@ Array<byte> IPAddress::GetAddressBytes() const {
   if (this->family == Sockets::AddressFamily::InterNetwork)
     return BitConverter::GetBytes(this->address);
 
-  Array<byte> addressBytes(16);
-  Buffer::BlockCopy(this->numbers, 0, addressBytes, 0, 16);
-  return addressBytes;
+  //Array<byte> addressBytes(16);
+  //Buffer::BlockCopy(this->numbers, 0, addressBytes, 0, 16);
+  //return addressBytes;
+  
+  System::Collections::Generic::List<byte> bytes;
+  for (auto number : this->numbers)
+    bytes.AddRange(BitConverter::GetBytes(number));
+  return bytes.ToArray();
 }
 
 void IPAddress::GetAddressBytes(byte& quadPartAddress1, byte& quadPartAddress2, byte& quadPartAddress3, byte& quadPartAddress4) const {

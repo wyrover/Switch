@@ -52,22 +52,17 @@ namespace Pcf {
         /// @param Comparand The value that is compared to the value at location.
         /// @return The original value in location.
         static int32 CompareExchange(int32& location, int32 value, int32 comparand);
-
+        
         /// @brief Compares two 64-bit signed integers for equality and, if they are equal, replaces one of the values.
         /// @param location The destination, whose value is compared with comparand and possibly replaced.
         /// @param value The value that replaces the destination value if the comparison results in equality.
         /// @param comparand The value that is compared to the value at location.
         /// @return The original value in location.
         static int64 CompareExchange(int64& location, int64 value, int64 comparand);
-
-#if __APPLE__
-        /// @brief Compares two platform-specific handles or pointers for equality and, if they are equal, replaces one of them.
-        /// @param location The destination, whose value is compared with comparand and possibly replaced.
-        /// @param value The value that replaces the destination value if the comparison results in equality.
-        /// @param comparand The value that is compared to the value at location.
-        /// @return The original value in location.
-        static intptr CompareExchange(intptr& location, intptr value, intptr comparand);
-#endif
+        
+        /// @cond
+        static llong CompareExchange(llong& location, llong value, llong comparand);
+        /// @endcond
 
         /// @brief Compares two platform-specific handles or pointers for equality and, if they are equal, replaces one of them.
         /// @param location The destination, whose value is compared with comparand and possibly replaced.
@@ -75,7 +70,7 @@ namespace Pcf {
         /// @param comparand The value that is compared to the value at location.
         /// @return The original value in location.
         static void* CompareExchange(void*& location, void* value, void* comparand);
-
+        
         /// @brief Compares two Objects for equality and, if they are equal, replaces one of them.
         /// @param location The destination, whose value is compared with comparand and possibly replaced.
         /// @param value The value that replaces the destination value if the comparison results in equality.
@@ -153,13 +148,9 @@ namespace Pcf {
         /// @return The original value of location.
         static int64 Exchange(int64& location, int64 value);
 
-#if __APPLE__
-        /// @brief Sets a platform-specific handles or pointers to a specified value and returns the original value, as an atomic operation.
-        /// @param location The variable to set to the specified value.
-        /// @param value The value to which the location parameter is set.
-        /// @return The original value of location.
-        static intptr Exchange(intptr& location, intptr value);
-#endif
+        /// @cond
+        static llong Exchange(llong& location, llong value);
+        /// @endcond
 
         /// @brief Sets a platform-specific handles or pointers to a specified value and returns the original value, as an atomic operation.
         /// @param location The variable to set to the specified value.

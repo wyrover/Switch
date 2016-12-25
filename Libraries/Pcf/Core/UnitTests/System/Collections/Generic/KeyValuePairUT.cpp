@@ -34,10 +34,10 @@ TEST(KeyValuePair, GetValue) {
 
 TEST(KeyValuePair, ToString) {
   EXPECT_EQ(String("[12, Eleven]"), (KeyValuePair<Int32, string>(12, "Eleven").ToString()));
-  EXPECT_EQ(String("[Byte::MinValue, " + Byte(Byte::MinValue).ToString() + "]"), (KeyValuePair<string, Byte>("Byte::MinValue", Byte::MinValue).ToString()));
-  EXPECT_EQ(String("[Byte::MaxValue, " + Byte(Byte::MaxValue).ToString() + "]"), (KeyValuePair<string, Byte>("Byte::MaxValue", Byte::MaxValue).ToString()));
-  EXPECT_EQ(String("[Char::MinValue, " + Char(Char::MinValue).ToString() + "]"), (KeyValuePair<string, Char>("Char::MinValue", Char::MinValue).ToString()));
-  EXPECT_EQ(String("[Char::MaxValue, " + Char(Char::MaxValue).ToString() + "]"), (KeyValuePair<string, Char>("Char::MaxValue", Char::MaxValue).ToString()));
+  EXPECT_EQ(String("[Byte::MinValue, " + Byte(Byte::MinValue).ToString() + "]"), (KeyValuePair<string, byte>("Byte::MinValue", Byte::MinValue).ToString()));
+  EXPECT_EQ(String("[Byte::MaxValue, " + Byte(Byte::MaxValue).ToString() + "]"), (KeyValuePair<string, byte>("Byte::MaxValue", Byte::MaxValue).ToString()));
+  EXPECT_EQ(String("[Char::MinValue, " + Char(Char::MinValue).ToString() + "]"), (KeyValuePair<string, char32>("Char::MinValue", Char::MinValue).ToString()));
+  EXPECT_EQ(String("[Char::MaxValue, " + Char(Char::MaxValue).ToString() + "]"), (KeyValuePair<string, char32>("Char::MaxValue", Char::MaxValue).ToString()));
 }
 
 }

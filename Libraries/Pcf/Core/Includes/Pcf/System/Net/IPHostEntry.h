@@ -49,14 +49,15 @@ namespace Pcf {
  
       private:
         friend class Dns;
+        IPHostEntry(const Array<IPAddress>& addresses, const Array<string>& aliases, const string& hostName) : addresses(addresses), aliases(aliases), hostName(hostName) {}
 
         const Array<IPAddress>& GetAddressList() const;
-        const Array<String>& GetAliases() const;
+        const Array<string>& GetAliases() const;
         const String& GetHostName() const;
 
         Array<IPAddress> addresses;
-        Array<String> aliases;
-        String hostName;
+        Array<string> aliases;
+        string hostName;
       };
     }
   }

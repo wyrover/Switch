@@ -41,12 +41,6 @@ namespace Pcf {
         
         /// @cond
         DnsEndPoint(const DnsEndPoint& dnsEndPoint) : EndPoint(dnsEndPoint), host(dnsEndPoint.host), port(dnsEndPoint.port) {}
-        DnsEndPoint& operator = (const DnsEndPoint& dnsEndPoint) {
-          this->addressFamily = dnsEndPoint.addressFamily;
-          this->host = dnsEndPoint.host;
-          this->port = dnsEndPoint.port;
-          return *this;
-        }
         /// @endcond
 
         /// @brief Gets or sets the host name or string representation of the Internet Protocol (IP) address of the host.
@@ -59,7 +53,7 @@ namespace Pcf {
         };
 
         /// @brief Gets the port number of the endpoint.
-        /// @param value An integer value in the range IPEndPoint::MinPort() to IPEndPoint::MaxPort() indicating the port number of the endpoint.
+        /// @param value An integer value in the range IPEndPoint::MinPort to IPEndPoint::MaxPort indicating the port number of the endpoint.
         /// @exception ArgumentOutOfRangeException port is less than IPEndPoint::MinPort. -or- port is greater than IPEndPoint::MaxPort.
         Property<int32> Port {
           pcf_get {return this->port;},

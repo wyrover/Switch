@@ -77,7 +77,7 @@ namespace Pcf {
         /// @remarks If the barrier is currently executing a post phase action, this call is blocked until the post phase action completes and the barrier has moved on to the next phase.
         int64 AddParticipants(int32 participantCount) {
           pcf_lock(*this) {
-            if (participantCount < 0 || as<int64>(this->data->participantCount) + participantCount > as<int64>(Int32::MaxValue))
+            if (participantCount < 0 || as<int64>(this->data->participantCount) + participantCount > as<int64>(Int32::MaxValue()))
               throw ArgumentOutOfRangeException(pcf_current_information);
             if (this->data->runPostPhaseAction)
               throw InvalidOperationException(pcf_current_information);

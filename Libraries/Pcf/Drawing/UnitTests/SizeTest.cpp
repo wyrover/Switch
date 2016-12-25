@@ -10,8 +10,8 @@ namespace PcfUnitTests {
   class Size : public TestFixture {
   public:
     void Empty() {
-      Assert::AreEqual(0, Drawing::Size::Empty.Width(), pcf_current_information);
-      Assert::AreEqual(0, Drawing::Size::Empty.Height(), pcf_current_information);
+      Assert::AreEqual(0, Drawing::Size::Empty().Width(), pcf_current_information);
+      Assert::AreEqual(0, Drawing::Size::Empty().Height(), pcf_current_information);
     }
     
     void CreateEmpty() {
@@ -55,7 +55,7 @@ namespace PcfUnitTests {
     }
     
     void EmptySizeIsEmpty() {
-      Assert::IsTrue(Drawing::Size::Empty.IsEmpty(), pcf_current_information);
+      Assert::IsTrue(Drawing::Size::Empty().IsEmpty(), pcf_current_information);
     }
     
     void SizeIsEmpty() {
@@ -63,7 +63,7 @@ namespace PcfUnitTests {
     }
     
     void EmptySizeToString() {
-      Assert::AreEqual("{Width=0, Height=0}", Drawing::Size::Empty.ToString(), pcf_current_information);
+      Assert::AreEqual("{Width=0, Height=0}", Drawing::Size::Empty().ToString(), pcf_current_information);
     }
     
     void SizeToString() {

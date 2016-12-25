@@ -2,8 +2,6 @@
 /// @brief Contains Pcf::System::Double struct.
 #pragma once
 
-#include <limits>
-
 #include "../Property.h"
 #include "Object.h"
 #include "../Types.h"
@@ -27,23 +25,22 @@ namespace Pcf {
     struct Double : public ValueType, public IComparable, public IConvertible, public IFormattable {
     public:
       /// @brief Represents the smallest positive Double value greater than zero. This field is constant.
-      constexpr static double Epsilon = 4.94066e-324;
+      static Property<double, ReadOnly> Epsilon;
 
-      #undef max
       /// @brief Represents the largest possible value of an Double 1.7976931348623157E+308. This field is constant.
-      constexpr static double MaxValue = std::numeric_limits<double>::max();
+      static Property<double, ReadOnly> MaxValue;
 
       /// @brief Represents the smallest possible value of Double -1.7976931348623157E+308. This field is constant.
-      constexpr static double MinValue = -std::numeric_limits<double>::max();
+      static Property<double, ReadOnly> MinValue;
 
       /// @brief Represents not a number (NaN). This field is constant.
-      const static double NaN;
+      static Property<double, ReadOnly> NaN;
 
       /// @brief Represents negative infinity. This field is constant.
-      constexpr static double NegativeInfinity = -std::numeric_limits<double>::infinity();
+      static Property<double, ReadOnly> NegativeInfinity;
 
       /// @brief Represents positive infinity. This field is constant.
-      constexpr static double PositiveInfinity = std::numeric_limits<double>::infinity();
+      static Property<double, ReadOnly> PositiveInfinity;
 
       /// @brief Create a new instance of struct Double
       Double() {}

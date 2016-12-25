@@ -43,6 +43,10 @@ namespace Pcf {
       /// @include ObjectEquals2.cpp
       static bool Equals(const Object& objectA, const Object& objectB) { return objectA.Equals(objectB); }
 
+      /// @brief Serves as a hash function for a particular type.
+      /// @return int32 A hash code for the current Object.
+      virtual int32 GetHashCode() const {return static_cast<int32>(reinterpret_cast<int64>(this) & 0x00000000FFFFFFFF) ^ static_cast<int32>((reinterpret_cast<int64>(this)>>32) & 0x00000000FFFFFFFF);}
+      
       /// @brief Gets the Type of the current instance.
       /// @return Type The Type instance that represents the exact runtime type of the current instance.
       /// The following code example demonstrates that GetType returns the runtime type of the current instance.

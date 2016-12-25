@@ -17,14 +17,14 @@ namespace Pcf {
     /// @remarks This problem can be avoided by creating a single Random object rather than multiple ones.
     /// @remarks To improve performance, create one Random object to generate many random numbers over time, instead of repeatedly creating a new Random objects to generate one random number.
     /// @remarks To generate a cryptographically secure random number suitable for creating a random password, for example, use a class derived from System::Security::Cryptography.RandomNumberGenerator such as System::Security::Cryptography.RNGCryptoServiceProvider.
-    /// @section s1 Notes to Callers
-    /// @remarks The implementation of the random number generator in the Random class is not guaranteed to remain the same across major versions of the Pcf. As a result, your application code should not assume that the same seed will result in the same pseudo-random sequence in different versions of the Pcf.
-    /// @section s2 Notes to Inheritors
-    /// @remarks In tPcf, the behavior of the Random.Next(), Random::Next(int32, int32), and NextBytes methods have changed so that these methods do not necessarily call the derived class implementation of the Sample method. As a result, classes derived from Random that target the Pcf should also virtual these three methods.
-    /// @section s3 Examples
-    /// @remarks The following example creates a single random number generator and calls its NextBytes, Next, and NextDouble methods to generate sequences of random numbers within different ranges.
+    /// @par Notes to Callers
+    /// The implementation of the random number generator in the Random class is not guaranteed to remain the same across major versions of the Pcf. As a result, your application code should not assume that the same seed will result in the same pseudo-random sequence in different versions of the Pcf.
+    /// @par Notes to Inheritors
+    /// In tPcf, the behavior of the Random.Next(), Random::Next(int32, int32), and NextBytes methods have changed so that these methods do not necessarily call the derived class implementation of the Sample method. As a result, classes derived from Random that target the Pcf should also virtual these three methods.
+    /// @par Examples
+    /// The following example creates a single random number generator and calls its NextBytes, Next, and NextDouble methods to generate sequences of random numbers within different ranges.
     /// @include Random2.cpp
-    /// @remarks The following example generates a random integer that it uses as an index to retrieve a string value from an array.
+    /// The following example generates a random integer that it uses as an index to retrieve a string value from an array.
     /// @include Random3.cpp
     class Random : public Object {
     public:

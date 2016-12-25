@@ -175,8 +175,8 @@ TEST(MemoryStream, Seek_NotDynamic_NotWritable) {
   EXPECT_EQ(20, ms.Seek(20, IO::SeekOrigin::Begin));
   EXPECT_EQ(20, ms.Position());
   EXPECT_EQ(-1, ms.ReadByte());
-  EXPECT_EQ(Int32::MaxValue, ms.Seek(Int32::MaxValue, IO::SeekOrigin::Begin));
-  EXPECT_EQ(Int32::MaxValue, ms.Position());
+  EXPECT_EQ(Int32::MaxValue(), ms.Seek(Int32::MaxValue, IO::SeekOrigin::Begin));
+  EXPECT_EQ(Int32::MaxValue(), ms.Position());
   EXPECT_EQ(-1, ms.ReadByte());
 }
 

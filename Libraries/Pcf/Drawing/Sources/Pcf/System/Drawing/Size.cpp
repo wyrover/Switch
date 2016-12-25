@@ -4,7 +4,9 @@
 using namespace System;
 using namespace System::Drawing;
 
-const Size Size::Empty;
+Property<Size, ReadOnly> Size::Empty {
+  [] {return Size();}
+};
 
 Size::Size(const Point& point) : width(point.X), height(point.Y) {
 }
@@ -18,7 +20,7 @@ bool Size::Equals(const object& obj) const {
 }
 
 bool Size::IsEmpty() const {
-  return this->height == Empty.height && this->width == Empty.width;
+  return this->height == Empty().height && this->width == Empty().width;
 }
 
 Size Size::Add(const Size &sz1, const Size &sz2) {

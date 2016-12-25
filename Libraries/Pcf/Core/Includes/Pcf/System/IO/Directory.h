@@ -20,7 +20,7 @@ namespace Pcf {
         /// @return A System::IO::DirectoryInfo as specified by path.
         /// @exception ArgumentException path is null -or- path contains one or more of the invalid characters -or- The system could not retrieve the absolute path.
         /// @exception IO::IOException The subdirectory cannot be created.
-        static const DirectoryInfo CreateDirectory(const String& path);
+        static DirectoryInfo CreateDirectory(const String& path);
 
         /// @brief Deletes the specified Directory.
         /// @param path The name of the Directory to be deleted.
@@ -94,12 +94,12 @@ namespace Pcf {
         /// @brief Gets the current working directory of the application.
         /// @return A string containing the path of the current working directory.
         /// @exception IOError An I/O error occurred.
-        static const String GetCurrentDirectory();
+        static String GetCurrentDirectory();
 
         /// @brief Retrieves the parent directory of the specified path.
         /// @return The parent directory, or null if path is the root directory
         /// @exception ArgumentException path is null -or- path contains one or more of the invalid characters -or- The system could not retrieve the absolute path.
-        static const DirectoryInfo GetParent(const String& path);
+        static DirectoryInfo GetParent(const String& path);
 
         /// @brief Moves a file or a directory and its contents to a new location.
         /// @param srcDir The path of the file or directory to move.

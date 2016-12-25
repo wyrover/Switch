@@ -15,12 +15,12 @@ namespace Pcf {
     /// @brief The System::IO namespace contains types that allow reading and writing to files and data streams, and types that provide basic file and directory support.
     namespace IO {
       /// @brief Implements a System::IO::TextReader for writing characters to a stream in a particular encoding.
-      /// @section Example Example
+      /// @par Example
       /// The following example uses an instance of StreamReader to read text from a file.
       /// @include StreamReader.cpp
       class StreamReader: public TextReader {
       public:
-        static const StreamReader Null;
+        static Property<StreamReader, ReadOnly> Null;
 
         /// @brief Initializes a new instance of the System::IO::StreamReader class for the specified Sream pointer.
         /// @param stream The stream pointer to be read.
@@ -112,7 +112,7 @@ namespace Pcf {
         /// @return The next line from the input stream, or an empty System::String if the end of the input stream is reached.
         /// @exception ObjectClosedException The stream is closed.
         /// @exception IO::IOException An I/O error occurs.
-        /// @section Example Example
+        /// @par Example
         /// The following code example reads lines from a file until the end of the file is reached.
         /// @include StreamReaderReadLine.cpp
         System::String ReadLine() override;
@@ -121,7 +121,7 @@ namespace Pcf {
         /// @return A System::String containing all characters from the current position to the end of the TextReader.
         /// @exception ObjectClosedException: The stream is closed.
         /// @exception IO::IOException An I/O error occurs.
-        /// @section Example Example
+        /// @par Example
         /// The following code example reads all the way to the end of a file in one operation.
         /// @include StreamReaderReadToEnd.cpp
         System::String ReadToEnd() override;

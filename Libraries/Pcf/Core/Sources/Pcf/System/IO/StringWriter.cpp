@@ -11,7 +11,9 @@ namespace {
   Text::UTF8Encoding utf8Encoding(false);
 }
 
-const StringWriter StringWriter::Null;
+Property<StringWriter, ReadOnly> StringWriter::Null {
+  [] {return StringWriter();}
+};
 
 StringWriter::StringWriter() : TextWriter(utf8Encoding) {
 }
@@ -21,19 +23,19 @@ StringWriter::~StringWriter() {
 }
 
 void StringWriter::Close() {
-  if (this->close == false) {
-    this->close = true;
-    this->str = "";
+  if (this->data->close == false) {
+    this->data->close = true;
+    this->data->str = "";
   }
 }
 
 void StringWriter::Write(const String& value) {
-  if (this->close)
+  if (this->data->close)
     throw ObjectClosedException(pcf_current_information);
-  this->str += value;
+  this->data->str += value;
   
 }
 
 string StringWriter::ToString() const {
-  return this->str;
+  return this->data->str;
 }

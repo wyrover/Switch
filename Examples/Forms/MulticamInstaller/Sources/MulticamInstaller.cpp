@@ -2,7 +2,7 @@
 #include "XT3.h"
 
 using namespace System;
-using namespace System::Windows::Forms;
+using namespace System::Windows::FormsD;
 
 namespace MulticamInstaller {
   class InstallerDialog : public Form {
@@ -34,7 +34,7 @@ namespace MulticamInstaller {
       this->messages.Parent = *this;
       this->messages.Location = System::Drawing::Point(10, 140);
       this->messages.Size = System::Drawing::Size(580, 0);
-      this->messages.Anchor = Pcf::System::Windows::Forms::AnchorStyles::Top | Pcf::System::Windows::Forms::AnchorStyles::Bottom;
+      this->messages.Anchor = Pcf::System::Windows::FormsD::AnchorStyles::Top | Pcf::System::Windows::FormsD::AnchorStyles::Bottom;
       
       this->cancel.Parent = *this;
       this->cancel.Location = System::Drawing::Point(510, 50);
@@ -175,10 +175,10 @@ namespace MulticamInstaller {
       this->textBox.Width = 120;
       this->textBox.TextChanged += {*this, &InputIpAddressDialog::OnTextBoxChanged};
      
-      this->dialogResult = System::Windows::Forms::DialogResult::Cancel;
+      this->dialogResult = System::Windows::FormsD::DialogResult::Cancel;
     }
     
-    Property<System::Windows::Forms::DialogResult, ReadOnly> DialogResult {
+    Property<System::Windows::FormsD::DialogResult, ReadOnly> DialogResult {
       pcf_get {return this->dialogResult;}
     };
     
@@ -193,12 +193,12 @@ namespace MulticamInstaller {
     }
     
     void OnCancelClick(const object& sender, const EventArgs& e) {
-      this->dialogResult = System::Windows::Forms::DialogResult::Cancel;
+      this->dialogResult = System::Windows::FormsD::DialogResult::Cancel;
       this->Hide();
     }
     
     void OnOkClick(const object& sender, const EventArgs& e) {
-      this->dialogResult = System::Windows::Forms::DialogResult::OK;
+      this->dialogResult = System::Windows::FormsD::DialogResult::OK;
       this->Hide();
     }
     
@@ -206,7 +206,7 @@ namespace MulticamInstaller {
     TextBox textBox;
     Button cancel;
     Button ok;
-    System::Windows::Forms::DialogResult dialogResult;
+    System::Windows::FormsD::DialogResult dialogResult;
   };
   
   class MainForm : public Form {

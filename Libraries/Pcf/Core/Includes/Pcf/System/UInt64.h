@@ -2,8 +2,6 @@
 /// @brief Contains Pcf::System::UInt64 struct.
 #pragma once
 
-#include <limits>
-
 #include "Object.h"
 #include "../Types.h"
 #include "_String.h"
@@ -25,13 +23,11 @@ namespace Pcf {
     /// @brief Represents a 64-bit unsigned integer.
     struct UInt64 : public ValueType, public IComparable, public IConvertible, public IFormattable {
     public:
-      #undef max
       /// @brief Represents the largest possible value of an UInt64 18446744073709551615 (0xFFFFFFFFFFFFFFFF). This field is constant.
-      constexpr static uint64 MaxValue = std::numeric_limits<uint64>::max();
+      static Property<uint64, ReadOnly> MaxValue;
 
-      #undef min
       /// @brief Represents the smallest possible value of UInt64 0 (0x0000000000000000). This field is constant.
-      constexpr static uint64 MinValue = std::numeric_limits<uint64>::min();
+      static Property<uint64, ReadOnly> MinValue;
 
       /// @brief Create a new instance of struct UInt64
       /// @remarks UInt64 is initialized with default value 0.

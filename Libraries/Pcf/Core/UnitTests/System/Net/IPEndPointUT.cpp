@@ -11,13 +11,8 @@ namespace {
   
   TEST(IPEndPoint, Constructor) {
     EXPECT_EQ(IPEndPoint(IPAddress(172, 16, 10, 30), 11000).ToString(), "172.16.10.30:11000");
-    EXPECT_THROW(IPEndPoint(IPAddress(172, 16, 10, 30), IPEndPoint::MinPort()-1), ArgumentOutOfRangeException);
-    EXPECT_THROW(IPEndPoint(IPAddress(172, 16, 10, 30), IPEndPoint::MaxPort()+1), ArgumentOutOfRangeException);
-  }
-  
-  TEST(IPEndPoint, MaxMinPort) {
-    EXPECT_EQ(IPEndPoint::MinPort(), 0x0000);
-    EXPECT_EQ(IPEndPoint::MaxPort(), 0xFFFF);
+    EXPECT_THROW(IPEndPoint(IPAddress(172, 16, 10, 30), IPEndPoint::MinPort - 1), ArgumentOutOfRangeException);
+    EXPECT_THROW(IPEndPoint(IPAddress(172, 16, 10, 30), IPEndPoint::MaxPort + 1), ArgumentOutOfRangeException);
   }
   
   TEST(IPEndPoint, GetAddress) {
@@ -35,23 +30,26 @@ namespace {
     EXPECT_EQ(IPEndPoint(IPAddress::IPv6Loopback, 8080).Port(), 8080);
   }
   
-  TEST(IPEndPoint, Serialize) {
-    SocketAddress socketAddress1 = IPEndPoint(IPAddress(172, 16, 10, 30), 11000).Serialize();
-    Byte data0 = socketAddress1[0];
-    Byte data1 = socketAddress1[1];
-    EXPECT_EQ("InterNetwork:16:{42, 248, 172, 16, 10, 30, 0, 0, 0, 0, 0, 0, 0, 0}", socketAddress1.ToString());
-    SocketAddress socketAddress2 = IPEndPoint(IPAddress::IPv6Loopback, 8080).Serialize();
-    EXPECT_EQ("InterNetworkV6:28:{31, 144, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0}", socketAddress2.ToString());
+  TEST(IPEndPoint, SerializeIPv4) {
+    SocketAddress socketAddress = IPEndPoint(IPAddress(172, 16, 10, 30), 11000).Serialize();
+    EXPECT_EQ("InterNetwork:16:{42,248,172,16,10,30,0,0,0,0,0,0,0,0}", socketAddress.ToString());
+  }
+  
+  TEST(IPEndPoint, SerializeIPv6) {
+    SocketAddress socketAddress = IPEndPoint(IPAddress::IPv6Loopback, 8080).Serialize();
+    EXPECT_EQ("InterNetworkV6:28:{31,144,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0}", socketAddress.ToString());
+    //                           {31,144,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0}
+    //                     30:28:{31,144,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0}
   }
   
   TEST(IPEndPoint, Create) {
-    byte buffer[16] = {2, 0, 42, 248, 172, 16, 10, 30, 0, 0, 0, 0, 0, 0, 0, 0};
-    SocketAddress address(buffer, 16);
+    Array<byte> buffer = {2, 0, 42, 248, 172, 16, 10, 30, 0, 0, 0, 0, 0, 0, 0, 0};
+    SocketAddress address(buffer);
     
     IPEndPoint dummyEndPoint(0, 0);
-    SharedPointer<IPEndPoint> endPoint = static_cast<IPEndPoint*>(dummyEndPoint.Create(address).Release());
-    ASSERT_EQ(IPAddress(172, 16, 10, 30), endPoint->Address());
-    ASSERT_EQ(11000, endPoint->Port());
+    IPEndPoint endPoint = *as<IPEndPoint>(dummyEndPoint.Create(address));
+    ASSERT_EQ(IPAddress(172, 16, 10, 30), endPoint.Address());
+    ASSERT_EQ(11000, endPoint.Port());
   }
   
   TEST(IPEndPoint, SetAddress) {
@@ -66,8 +64,8 @@ namespace {
     EXPECT_EQ(IPEndPoint.Port(), 11000);
     IPEndPoint.Port(8080);
     EXPECT_EQ(IPEndPoint.Port(), 8080);
-    EXPECT_THROW(IPEndPoint.Port(IPEndPoint::MinPort()-1), ArgumentOutOfRangeException);
-    EXPECT_THROW(IPEndPoint.Port(IPEndPoint::MaxPort()+1), ArgumentOutOfRangeException);
+    EXPECT_THROW(IPEndPoint.Port(IPEndPoint::MinPort - 1), ArgumentOutOfRangeException);
+    EXPECT_THROW(IPEndPoint.Port(IPEndPoint::MaxPort + 1), ArgumentOutOfRangeException);
   }
   
   TEST(IPEndPoint, OperatorEqual) {

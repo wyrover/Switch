@@ -1,7 +1,7 @@
 #include <Pcf/Pcf>
 
 using namespace System;
-using namespace System::Windows::Forms;
+using namespace System::Windows::FormsD;
 
 namespace HelloWorld {
   class MainForm : public Form {

@@ -6,28 +6,6 @@
 using namespace TUnit;
 using namespace System;
 
-namespace {
-#if _WIN32
-  static bool Isatty(FILE* file) { return _isatty(_fileno(file)) != 0; }
-#else
-  static bool Isatty(FILE* file) {return isatty(fileno(file));}
-#endif
-  
-  static bool UseColor() {
-    String gtestColor(testing::FLAGS_gtest_color);
-    if (gtestColor.Equals("auto", true)) {
-      if (System::Environment::OSVersion().Platform() == PlatformID::Win32NT || System::Environment::OSVersion().Platform() == PlatformID::Win32S || System::Environment::OSVersion().Platform() == PlatformID::Win32Windows || System::Environment::OSVersion().Platform() == PlatformID::WinCE)
-        return Isatty(stdout);
-      else {
-        String term = System::Environment::GetEnvironmentVariable("TERM");
-        return Isatty(stdout) && (term.Equals("xterm") || term.Equals("xterm-color") || term.Equals("xterm-256color") || term.Equals("screen") || term.Equals("screen-256color") || term.Equals("linux") || term.Equals("cygwin"));
-      }
-    }
-    
-    return gtestColor.Equals("yes", true) || gtestColor.Equals("true", true) || gtestColor.Equals(gtestColor, "t", true) || gtestColor.Equals("1");
-  }
-}
-
 ConsoleEventListener::ConsoleEventListener() {
 }
 
@@ -285,7 +263,8 @@ void ConsoleEventListener::ShowVersion() {
 }
 
 void ConsoleEventListener::Write(ConsoleColor color, const String& value) {
-  static bool useColor = UseColor();
+  static String gtestColor(testing::FLAGS_gtest_color);
+  static bool useColor = gtestColor.Equals("auto", true) || gtestColor.Equals("yes", true) || gtestColor.Equals("true", true) || gtestColor.Equals(gtestColor, "t", true) || gtestColor.Equals("1");
   if (!useColor) {
     Console::Write(value);
     return;

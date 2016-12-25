@@ -1,9 +1,10 @@
 #include "../../../../../Includes/Pcf/System/NotImplementedException.h"
 #include "../../../../../Includes/Pcf/System/ObjectClosedException.h"
+#include "../../../../../Includes/Pcf/System/Net/Dns.h"
 #include "../../../../../Includes/Pcf/System/Net/Sockets/Socket.h"
 #include "../../../../../Includes/Pcf/System/Net/Sockets/MulticastOption.h"
 #include "../../../../../Includes/Pcf/System/Net/Sockets/SocketException.h"
-#include "../../../Os/Socket.h"
+#include "../../../../__OS/CoreApi.h"
 
 using namespace System;
 using namespace System::Net;
@@ -11,100 +12,80 @@ using namespace System::Net::Sockets;
 using namespace System::Collections::Generic;
 
 Property<bool, ReadOnly> Socket::OSSupportsIPv4 {
-  [] {return Pcf::Os::Socket::GetOSSupportsIPv4();}
+  [] {return __OS::CoreApi::Socket::GetOSSupportsIPv4();}
 };
 
 Property<bool, ReadOnly> Socket::OSSupportsIPv6 {
-  [] {return Pcf::Os::Socket::GetOSSupportsIPv6();}
+  [] {return __OS::CoreApi::Socket::GetOSSupportsIPv6();}
 };
 
-Socket::Socket(const SocketInformation& /*socketInformation*/) : socket(null), addressFamily(System::Net::Sockets::AddressFamily::Unspecified), protocolType(System::Net::Sockets::ProtocolType::Unspecified), socketType(System::Net::Sockets::SocketType::Unknown), connected(false), listening(false), nonBlocking(false), bound(false) {
-}
-
-Socket::Socket(System::Net::Sockets::AddressFamily addressFamily, System::Net::Sockets::SocketType socketType, System::Net::Sockets::ProtocolType protocolType) : socket(null), addressFamily(addressFamily), protocolType(protocolType), socketType(socketType), connected(false), listening(false), nonBlocking(false), bound(false) {
-  void* socket = null;
-  if (Os::Socket::Open(this->addressFamily, this->socketType, this->protocolType, &socket) != 0)
-    throw SocketException(Os::Socket::GetLastError(), pcf_current_information);
+Socket::Socket(System::Net::Sockets::AddressFamily addressFamily, System::Net::Sockets::SocketType socketType, System::Net::Sockets::ProtocolType protocolType) {
+  this->data->addressFamily = addressFamily;
+  this->data->protocolType = protocolType;
+  this->data->socketType = socketType;
   
-  this->socket = socket;
+  if (__OS::CoreApi::Socket::Open(this->data->addressFamily, this->data->socketType, this->data->protocolType, &this->data->socket) != 0)
+    throw SocketException(__OS::CoreApi::Socket::GetLastError(), pcf_current_information);
 }
 
-Socket::Socket(void* socket) : socket(socket), addressFamily(System::Net::Sockets::AddressFamily::Unspecified), protocolType(System::Net::Sockets::ProtocolType::Unspecified), socketType(System::Net::Sockets::SocketType::Unknown), connected(false), listening(false), nonBlocking(false), bound(false) {}
+Socket::Socket(intptr socket) {
+  this->data->socket = socket;
+}
 
 Socket::~Socket() {
-  Close();
+  if (this->data.IsUnique())
+    Close();
 }
 
-UniquePointer<Socket>  Socket::Accept() {
-  if (this->socket == IntPtr::Zero)
+Socket Socket::Accept() {
+  if (this->data->socket == 0)
     throw ObjectClosedException(pcf_current_information);
-  if (this->bound == false || this->listening == false)
+  if (this->data->bound == false || this->data->listening == false)
     throw InvalidOperationException(pcf_current_information);
  
-  UniquePointer<byte[]> array(new byte[32]); // SocketAddress::defaultBufferSize
-  void* socket = null;
-
-  SocketAddress peerAddr(this->addressFamily);
-  int32 arrayLength = peerAddr.Size;
+  SocketAddress socketAddress(this->data->addressFamily);
+  intptr socketHandle = 0;
+  if (__OS::CoreApi::Socket::Accept(this->data->socket, (byte*)socketAddress.bytes.Data(), socketAddress.Size, &socketHandle) != 0)
+    throw SocketException(__OS::CoreApi::Socket::GetLastError(), pcf_current_information);
   
-  if (Os::Socket::Accept(this->socket, array.ToPointer(), &arrayLength, &socket) != 0)
-    throw SocketException(Os::Socket::GetLastError(), pcf_current_information);
-  
-  UniquePointer<Socket> socketAccepted = new Socket(socket);
-  SocketAddress SocketAddress(array.ToPointer(), arrayLength);
-  socketAccepted->addressFamily = this->addressFamily;
-  socketAccepted->socketType = this->socketType;
-  socketAccepted->protocolType = this->protocolType;
-  socketAccepted->localEndPoint = IPEndPoint(0, 0).Create(SocketAddress);
-	socketAccepted->connected = true;
-  this->connected = true;
-  return socketAccepted;
+  Socket socketNewlyCreated(socketHandle);
+  socketNewlyCreated.data->addressFamily = this->data->addressFamily;
+  socketNewlyCreated.data->socketType = this->data->socketType;
+  socketNewlyCreated.data->protocolType = this->data->protocolType;
+  socketNewlyCreated.data->localEndPoint = IPEndPoint(0, 0).Create(socketAddress);
+	socketNewlyCreated.data->connected = true;
+  this->data->connected = true;
+  return socketNewlyCreated;
 }
 
-void Socket::Bind(const SharedPointer<EndPoint>& localEndPoint) {
-  if (SharedPointer<EndPoint>::IsNullOrInvalid(localEndPoint))
-    throw ArgumentNullException(pcf_current_information);
-  if (this->socket == IntPtr::Zero)
-    throw ObjectClosedException(pcf_current_information);
-  
-  this->localEndPoint = localEndPoint;
-  SocketAddress socketAddress = localEndPoint->Serialize();
+void Socket::InnerBind() {
+  SocketAddress socketAddress = this->data->localEndPoint->Serialize();
+  if (__OS::CoreApi::Socket::Bind(this->data->socket, (byte*)socketAddress.bytes.Data(), socketAddress.Size()) != 0)
+    throw SocketException(__OS::CoreApi::Socket::GetLastError(), pcf_current_information);
 
-  if (Pcf::Os::Socket::Bind(this->socket, (byte*)socketAddress.Data(), socketAddress.Size) != 0)
-    throw SocketException(Os::Socket::GetLastError(), pcf_current_information);
-
-  this->bound = true;
+  this->data->bound = true;
 }
 
 void Socket::Close() {
-  this->connected = false;
-  this->bound = false;
-  this->listening = false;
-  if (this->socket != IntPtr::Zero) {
-    Pcf::Os::Socket::Close(this->socket);
-    this->socket = IntPtr::Zero;
+  this->data->connected = false;
+  this->data->bound = false;
+  this->data->listening = false;
+  if (this->data->socket != IntPtr::Zero()) {
+    __OS::CoreApi::Socket::Close(this->data->socket);
+    this->data->socket = IntPtr::Zero();
   }
 }
 
-void Socket::Connect(SharedPointer<EndPoint> endPoint) {
-  if (SharedPointer<EndPoint>::IsNullOrInvalid(endPoint))
-    throw ArgumentNullException(pcf_current_information);
-  if (this->socket == IntPtr::Zero)
-    throw ObjectClosedException(pcf_current_information);
-  if (this->listening == true)
-    throw InvalidOperationException(pcf_current_information);
-  
-  this->remoteEndPoint = endPoint;
-  SocketAddress socketAddress = endPoint->Serialize();
+void Socket::InnerConnect() {
+  SocketAddress socketAddress = this->data->remoteEndPoint->Serialize();
+  if (__OS::CoreApi::Socket::Connect(this->data->socket, (byte*)socketAddress.bytes.Data(), socketAddress.Size) != 0)
+    throw SocketException(__OS::CoreApi::Socket::GetLastError(), pcf_current_information);
 
-  if (Pcf::Os::Socket::Connect(this->socket, (byte*)socketAddress.Data(), socketAddress.Size) != 0)
-    throw SocketException(Os::Socket::GetLastError(), pcf_current_information);
-
-  this->connected = true;
+  this->data->connected = true;
 }
 
 void Socket::Connect(const IPAddress& address, int32 port) {
-  Connect(new IPEndPoint(address, port));
+  Connect(IPEndPoint(address, port));
 }
 
 void Socket::Connect(const Array<IPAddress>& addresses, int32 port) {
@@ -114,15 +95,19 @@ void Socket::Connect(const Array<IPAddress>& addresses, int32 port) {
   }
 }
 
+void Socket::Connect(const string &host, int32 port) {
+  Connect(Dns::GetHostAddresses(host), port);
+}
+
 void Socket::Disconnect(bool reuseSocket) {
-  if (this->connected == false)
+  if (this->data->connected == false)
     throw ObjectClosedException(pcf_current_information);
 
-  if (Os::Socket::Connect(this->socket, null, 0) != 0)
-    throw SocketException(Os::Socket::GetLastError(), pcf_current_information);
+  if (__OS::CoreApi::Socket::Connect(this->data->socket, null, 0) != 0)
+    throw SocketException(__OS::CoreApi::Socket::GetLastError(), pcf_current_information);
 
-  this->connected = false;
-  this->bound = false;
+  this->data->connected = false;
+  this->data->bound = false;
 
   if (reuseSocket == false)
     Close();
@@ -133,140 +118,140 @@ SocketInformation Socket::DuplicateAndClose(int32 targetProcessId) {
 }
 
 int32 Socket::GetAvailable() const {
-  if (this->socket == IntPtr::Zero)
+  if (this->data->socket == IntPtr::Zero())
     throw ObjectClosedException(pcf_current_information);
   
   int32 nbrBytesAvailable = 0;
-  Pcf::Os::Socket::GetAvailable(this->socket, &nbrBytesAvailable);
+  __OS::CoreApi::Socket::GetAvailable(this->data->socket, &nbrBytesAvailable);
   return nbrBytesAvailable;
 }
 
 bool Socket::GetBlocking() const {
-  if (this->socket == IntPtr::Zero)
+  if (this->data->socket == IntPtr::Zero())
     throw ObjectClosedException(pcf_current_information);
   
-  return !this->nonBlocking;
+  return !this->data->nonBlocking;
 }
 
 bool Socket::GetDontFragment() const {
-  if (this->socket == IntPtr::Zero)
+  if (this->data->socket == IntPtr::Zero())
     throw ObjectClosedException(pcf_current_information);
   
   return GetSocketOption(SocketOptionLevel::Socket, SocketOptionName::DontFragment).ChangeType<Int32>().ToObject() == 1;
 }
 
+bool Socket::GetDualMode() const {
+  if (this->data->socket == IntPtr::Zero())
+    throw ObjectClosedException(pcf_current_information);
+  
+  return GetSocketOption(SocketOptionLevel::Socket, SocketOptionName::IPv6Only).ChangeType<Int32>().ToObject() == 0;
+}
+
 bool Socket::GetEnableBroadcast() const {
-  if (this->socket == IntPtr::Zero)
+  if (this->data->socket == IntPtr::Zero())
     throw ObjectClosedException(pcf_current_information);
   
   return GetSocketOption(SocketOptionLevel::Socket, SocketOptionName::Broadcast).ChangeType<Int32>().ToObject() == 1;
 }
 
 bool Socket::GetExclusiveAddressUse() const {
-  if (this->socket == IntPtr::Zero)
+  if (this->data->socket == IntPtr::Zero())
     throw ObjectClosedException(pcf_current_information);
   
   return GetSocketOption(SocketOptionLevel::Socket, SocketOptionName::ExclusiveAddressUse).ChangeType<Int32>().ToObject() == 1;
 }
 
 LingerOption Socket::GetLingerState() const {
-  if (this->socket == IntPtr::Zero)
+  if (this->data->socket == IntPtr::Zero())
     throw ObjectClosedException(pcf_current_information);
   
   return LingerOption(GetSocketOption(SocketOptionLevel::Socket, SocketOptionName::Linger).ChangeType<LingerOption>().ToObject());
 }
 
-SharedPointer<EndPoint> Socket::GetLocalEndPoint() const {
-  if (this->socket == IntPtr::Zero)
+const EndPoint& Socket::GetLocalEndPoint() const {
+  if (this->data->socket == IntPtr::Zero())
     throw ObjectClosedException(pcf_current_information);
   
-  return this->localEndPoint;
+  return *this->data->localEndPoint;
 }
 
 bool Socket::GetMulticastLoopback() const {
-  if (this->socket == IntPtr::Zero)
+  if (this->data->socket == IntPtr::Zero())
     throw ObjectClosedException(pcf_current_information);
   
   return GetSocketOption(SocketOptionLevel::IP, SocketOptionName::MulticastLoopback).ChangeType<Int32>().ToObject() == 1;
 }
 
 bool Socket::GetNoDelay() const {
-  if (this->socket == IntPtr::Zero)
+  if (this->data->socket == IntPtr::Zero())
     throw ObjectClosedException(pcf_current_information);
   
   return GetSocketOption(SocketOptionLevel::Tcp, SocketOptionName::NoDelay).ChangeType<Int32>().ToObject() == 1;
 }
 
 int32 Socket::GetReceiveBufferSize() const {
-  if (this->socket == IntPtr::Zero)
+  if (this->data->socket == IntPtr::Zero())
     throw ObjectClosedException(pcf_current_information);
   
   return GetSocketOption(SocketOptionLevel::Socket, SocketOptionName::ReceiveBuffer).ChangeType<Int32>().ToObject();
 }
 
 int32 Socket::GetReceiveTimeout() const {
-  if (this->socket == IntPtr::Zero)
+  if (this->data->socket == IntPtr::Zero())
     throw ObjectClosedException(pcf_current_information);
   
   return GetSocketOption(SocketOptionLevel::Socket, SocketOptionName::ReceiveTimeout).ChangeType<Int32>().ToObject();
 }
 
-void Socket::SetReceiveTimeout(int32 value) {
-  if (this->socket == IntPtr::Zero)
-    throw ObjectClosedException(pcf_current_information);
-  
-  SetSocketOption(SocketOptionLevel::Socket, SocketOptionName::ReceiveTimeout, value);
-}
-
 const EndPoint& Socket::GetRemoteEndPoint() const {
-  if (this->socket == IntPtr::Zero)
+  if (this->data->socket == IntPtr::Zero())
     throw ObjectClosedException(pcf_current_information);
   
-  return *this->remoteEndPoint;
+  return *this->data->remoteEndPoint;
 }
 
 int32 Socket::GetSendBufferSize() const {
-  if (this->socket == IntPtr::Zero)
+  if (this->data->socket == IntPtr::Zero())
     throw ObjectClosedException(pcf_current_information);
   
   return GetSocketOption(SocketOptionLevel::Socket, SocketOptionName::SendBuffer).ChangeType<Int32>().ToObject();
 }
 
 int32 Socket::GetSendTimeout() const {
-  if (this->socket == IntPtr::Zero)
+  if (this->data->socket == IntPtr::Zero())
     throw ObjectClosedException(pcf_current_information);
   
   return GetSocketOption(SocketOptionLevel::Socket, SocketOptionName::SendTimeout).ChangeType<Int32>().ToObject();
 }
 
 UniquePointer<object> Socket::GetSocketOption(SocketOptionLevel socketOptionLevel, SocketOptionName socketOptionName) const {
-  if (this->socket == IntPtr::Zero)
+  if (this->data->socket == IntPtr::Zero())
     throw ObjectClosedException(pcf_current_information);
 
   if (socketOptionName == SocketOptionName::MaxConnections)
     throw SocketException((int32)SocketError::ProtocolOption, pcf_current_information);
   
   if (socketOptionName == SocketOptionName::Linger) {
+    /// @todo
     //retValue = new LingerOption(false, 0);
-    // [YFI] TODO
     throw NotImplementedException(pcf_current_information);
   }
   
   if (socketOptionName == SocketOptionName::AddMembership || socketOptionName == SocketOptionName::DropMembership) {
+    /// @todo
     //retValue = new MulticastOption(IPAddress());
-    // [YFI] TODO
     throw NotImplementedException(pcf_current_information);
   }
 
   int32 socketOption = 0;
   int32 size = sizeof(int32);
-  if (Os::Socket::GetSocketOption(this->socket, socketOptionLevel, socketOptionName, &socketOption, &size) == -1)
-    throw SocketException(Os::Socket::GetLastError(), pcf_current_information);
+  if (__OS::CoreApi::Socket::GetSocketOption(this->data->socket, socketOptionLevel, socketOptionName, &socketOption, &size) == -1)
+    throw SocketException(__OS::CoreApi::Socket::GetLastError(), pcf_current_information);
   return new Int32(socketOption);
 }
 
 int32 Socket::GetTtl() const {
-  if (this->socket == IntPtr::Zero)
+  if (this->data->socket == IntPtr::Zero())
     throw ObjectClosedException(pcf_current_information);
   
   return GetSocketOption(SocketOptionLevel::Socket, SocketOptionName::SendTimeout).ChangeType<Int32>().ToObject();
@@ -276,294 +261,172 @@ int32 Socket::IOControl(System::Net::Sockets::IOControlCode /*ioControlCode*/, c
   throw NotImplementedException(pcf_current_information);
 }
 
-void Socket::Listen(int32 backLog) {
-  if (this->bound == false)
+void Socket::Listen(int32 backlog) {
+  if (this->data->bound == false)
     throw SocketException((int32)SocketError::NotConnected, pcf_current_information);
   
-  if (this->socket == IntPtr::Zero)
+  if (this->data->socket == IntPtr::Zero())
     throw ObjectClosedException(pcf_current_information);
   
-  Pcf::Os::Socket::Listen(this->socket, backLog);
+  if (backlog > (int32)SocketOptionName::MaxConnections || backlog < 0)
+    throw ArgumentOutOfRangeException(pcf_current_information);
 
-  this->listening = true;
+  __OS::CoreApi::Socket::Listen(this->data->socket, backlog);
+
+  this->data->listening = true;
 }
 
 bool Socket::Poll(int32 microseconds, SelectMode mode) {
-  int32 status = Pcf::Os::Socket::Poll(this->socket, microseconds, (int32)mode);
+  int32 status = __OS::CoreApi::Socket::Poll(this->data->socket, microseconds, (int32)mode);
 
   if (status < 0)
-    throw SocketException(Os::Socket::GetLastError(), pcf_current_information);
+    throw SocketException(__OS::CoreApi::Socket::GetLastError(), pcf_current_information);
   
   return (status > 0);
 }
 
-int32 Socket::Select(IList<SharedPointer<Socket>>& checkRead, IList<SharedPointer<Socket>>& checkWrite, IList<SharedPointer<Socket>>& checkError, int32 microseconds) {
-  if (checkRead.Count == 0 && checkWrite.Count == 0 && checkError.Count == 0)
-    throw ArgumentNullException(pcf_current_information);
-
-  int32 nbCheckRead = checkRead.Count;
-  UniquePointer<void*[]> checkReadHandles(new void*[nbCheckRead]);
-  for (int32 i = 0; i < nbCheckRead; i++)
-    checkReadHandles[i] = (SharedPointer<Socket>(checkRead[i]))->socket;
-
-  int32 nbCheckWrite = checkWrite.Count;
-  UniquePointer<void*[]> checkWriteHandles(new void*[nbCheckWrite]);
-  for (int32 i = 0; i < nbCheckWrite; i++)
-    checkWriteHandles[i] = (SharedPointer<Socket>(checkWrite[i]))->socket;
-
-  int32 nbCheckError = checkError.Count;
-  UniquePointer<void*[]> checkErrorHandles(new void*[nbCheckError]);
-  for (int32 i = 0; i < nbCheckError; i++)
-    checkErrorHandles[i] = (SharedPointer<Socket>(checkError[i]))->socket;
-
-  int32 status = Pcf::Os::Socket::Select(checkReadHandles.ToPointer(), nbCheckRead, checkWriteHandles.ToPointer(), nbCheckWrite, checkErrorHandles.ToPointer(), nbCheckError, microseconds);
-
-  if (status < 0)
-    throw SocketException(Os::Socket::GetLastError(), pcf_current_information);
-  
-  // List the null sockets
-  List<SharedPointer<Socket>> readToRemove;
-  for (int32 i = 0; i < nbCheckRead; i++)
-    if (checkReadHandles[i] == null)
-      readToRemove.Add(checkRead[i]);
-
-  // Remove the null sockets
-  for (SharedPointer<Socket> item : readToRemove)
-    if (checkRead.Contains(item))
-      checkRead.Remove(item);
-
-  // List the null sockets
-  List<SharedPointer<Socket>> writeToRemove;
-  for (int32 i = 0; i < nbCheckWrite; i++)
-    if (checkWriteHandles[i] == null)
-      writeToRemove.Add(checkWrite[i]);
-
-  // Remove the null sockets
-  for (SharedPointer<Socket> item : writeToRemove)
-    if (checkWrite.Contains(item))
-      checkWrite.Remove(item);
-
-  // List the null sockets
-  List<SharedPointer<Socket>> errorToRemove;
-  for (int32 i = 0; i < nbCheckError; i++)
-    if (checkErrorHandles[i] == null)
-      errorToRemove.Add(checkError[i]);
-
-  // Remove the null sockets
-  for (SharedPointer<Socket> item : errorToRemove)
-    if (checkError.Contains(item))
-      checkError.Remove(item);
-
-  return status;
-}
-
-int32 Socket::Receive(Array<byte>& buffer) {
-  return Receive((byte*)buffer.Data(), buffer.Length, 0, buffer.Length, SocketFlags::None);
-}
-
-int32 Socket::Receive(byte buffer[], int32 length) {
-  return Receive(buffer, length, 0, length, SocketFlags::None);
-}
-
-int32 Socket::Receive(Array<byte>& buffer, SocketFlags socketFlags) {
-  return Receive((byte*)buffer.Data(), buffer.Length, 0, buffer.Length, socketFlags);
-}
-
-int32 Socket::Receive(byte buffer[], int32 length, SocketFlags socketFlags) {
-  return Receive(buffer, length, 0, length, socketFlags);
-}
-
-int32 Socket::Receive(Array<byte>& buffer, int32 size, SocketFlags socketFlags) {
-  return Receive((byte*)buffer.Data(), buffer.Length, 0, size, socketFlags);
-}
-
-int32 Socket::Receive(byte buffer[], int32 length, int32 size, SocketFlags socketFlags) {
-  return Receive(buffer, length, 0, size, socketFlags);
-}
-
 int32 Socket::Receive(Array<byte>& buffer, int32 offset, int32 size, SocketFlags socketFlags) {
-  return Receive((byte*)buffer.Data(), buffer.Length, offset, size, socketFlags);
+  SocketError errorCode = SocketError::Success;
+  int32 numberOfBytesReceived = this->Receive(buffer, offset, size, socketFlags, errorCode);
+  if (errorCode != SocketError::Success)
+    throw SocketException((int32)errorCode, pcf_current_information);
+  return numberOfBytesReceived;
 }
 
-int32 Socket::Receive(byte buffer[], int32 length, int32 offset, int32 size, SocketFlags socketFlags) {
-  if (buffer == null)
-    throw ArgumentNullException(pcf_current_information);
-
-  if (offset < 0 || offset >= length || size < 0 || size > (length - offset))
+int32 Socket::Receive(Array<byte>& buffer, int32 offset, int32 size, SocketFlags socketFlags, SocketError& errorCode) {
+  if (offset < 0 || size < 0 || offset + size > buffer.Length)
     throw IndexOutOfRangeException(pcf_current_information);
-
-  if (this->socket == IntPtr::Zero)
+  if (this->data->socket == 0)
     throw ObjectClosedException(pcf_current_information);
-
-  int32 nbrReceive = Pcf::Os::Socket::Receive(this->socket, buffer, size, (int32)socketFlags);
-
-  if (nbrReceive == -1)
-    throw SocketException(Pcf::Os::Socket::GetLastError(), pcf_current_information);
-
-  return nbrReceive;
-}
-
-int32 Socket::ReceiveFrom(Array<byte>& buffer, IPEndPoint& endPoint) {
-  return ReceiveFrom((byte*)buffer.Data(), buffer.Length, 0, buffer.Length, SocketFlags::None, endPoint);
-}
-
-int32 Socket::ReceiveFrom(byte buffer[], int32 length, IPEndPoint& endPoint) {
-  return ReceiveFrom(buffer, length, 0, length, SocketFlags::None, endPoint);
-}
-
-int32 Socket::ReceiveFrom(Array<byte>& buffer, SocketFlags socketFlags, IPEndPoint& endPoint) {
-  return ReceiveFrom((byte*)buffer.Data(), buffer.Length, 0, buffer.Length, socketFlags, endPoint);
-}
-
-int32 Socket::ReceiveFrom(byte buffer[], int32 length, SocketFlags socketFlags, IPEndPoint& endPoint) {
-  return ReceiveFrom(buffer, length, 0, length, socketFlags, endPoint);
-}
-
-int32 Socket::ReceiveFrom(Array<byte>& buffer, int32 size, SocketFlags socketFlags, IPEndPoint& endPoint) {
-  return ReceiveFrom((byte*)buffer.Data(), buffer.Length, 0, size, socketFlags, endPoint);
-}
-
-int32 Socket::ReceiveFrom(byte buffer[], int32 length, int32 size, SocketFlags socketFlags, IPEndPoint& endPoint) {
-  return ReceiveFrom(buffer, length, 0, size, socketFlags, endPoint);
+  
+  int32 numberOfBytesReceived = __OS::CoreApi::Socket::Receive(this->data->socket, (byte*)&buffer.Data()[offset], size, (int32)socketFlags);
+  errorCode = numberOfBytesReceived == -1 ? (SocketError)__OS::CoreApi::Socket::GetLastError() : SocketError::Success;
+  return numberOfBytesReceived;
 }
 
 int32 Socket::ReceiveFrom(Array<byte>& buffer, int32 offset, int32 size, SocketFlags socketFlags, IPEndPoint& endPoint) {
-  return ReceiveFrom((byte*)buffer.Data(), buffer.Length, offset, size, socketFlags, endPoint);
-}
-
-int32 Socket::ReceiveFrom(byte buffer[], int32 length, int32 offset, int32 size, SocketFlags socketFlags, IPEndPoint& endPoint) {
-  if (buffer == null)
-    throw ArgumentNullException(pcf_current_information);
-
-  if (offset < 0 || offset >= length || size < 0 || size > (length - offset))
+  if (offset < 0 || size < 0 || offset + size > buffer.Length)
     throw IndexOutOfRangeException(pcf_current_information);
-
-  if (this->socket == IntPtr::Zero)
+  if (this->data->socket == 0)
     throw ObjectClosedException(pcf_current_information);
 
-  int32 addressBytesLength = 32; // SocketAddress::defaultBufferSize
-  UniquePointer<byte[]> addressBytes(new byte[addressBytesLength]);
-  int32 nbrReceive = Pcf::Os::Socket::ReceiveFrom(this->socket, buffer, size, (int32)socketFlags, addressBytes.ToPointer(), &addressBytesLength);
+  SocketAddress socketAddress(this->data->addressFamily);
+  int32 numberOfBytesReceived = __OS::CoreApi::Socket::ReceiveFrom(this->data->socket, (byte*)&buffer.Data()[offset], size, (int32)socketFlags, (byte*)socketAddress.bytes.Data(), socketAddress.Size);
+  if (numberOfBytesReceived == -1)
+    throw SocketException(__OS::CoreApi::Socket::GetLastError(), pcf_current_information);
+  endPoint = endPoint.Create(socketAddress).ChangeType<IPEndPoint>().ToObject();
 
-  if (nbrReceive == -1)
-    throw SocketException(Pcf::Os::Socket::GetLastError(), pcf_current_information);
-
-  if (addressBytesLength >= 8)
-    endPoint = endPoint.Create(SocketAddress(addressBytes.ToPointer(), addressBytesLength)).ChangeType<IPEndPoint>().ToObject();
-
-  return nbrReceive;
+  return numberOfBytesReceived;
 }
 
-int32 Socket::Send(const Array<byte>& buffer) {
-  return Send((byte*)buffer.Data(), buffer.Length, 0, buffer.Length, SocketFlags::None);
-}
-
-int32 Socket::Send(byte buffer[], int32 length) {
-  return Send(buffer, length, 0, length, SocketFlags::None);
-}
-
-int32 Socket::Send(const Array<byte>& buffer, SocketFlags socketFlags) {
-  return Send((byte*)buffer.Data(), buffer.Length, 0, buffer.Length, socketFlags);
-}
-
-int32 Socket::Send(byte buffer[], int32 length, SocketFlags socketFlags) {
-  return Send(buffer, length, 0, length, socketFlags);
-}
-
-int32 Socket::Send(const Array<byte>& buffer, int32 size, SocketFlags socketFlags) {
-  return Send((byte*)buffer.Data(), buffer.Length, 0, size, socketFlags);
-}
-
-int32 Socket::Send(byte buffer[], int32 length, int32 size, SocketFlags socketFlags) {
-  return Send(buffer, length, 0, size, socketFlags);
+int32 Socket::Select(IList<Socket>& checkRead, IList<Socket>& checkWrite, IList<Socket>& checkError, int32 microseconds) {
+  if (checkRead.Count == 0 && checkWrite.Count == 0 && checkError.Count == 0)
+    throw ArgumentNullException(pcf_current_information);
+  
+  int32 nbCheckRead = checkRead.Count;
+  UniquePointer<intptr[]> checkReadHandles(new intptr[nbCheckRead]);
+  for (int32 i = 0; i < nbCheckRead; i++)
+    checkReadHandles[i] = checkRead[i].data->socket;
+  
+  int32 nbCheckWrite = checkWrite.Count;
+  UniquePointer<intptr[]> checkWriteHandles(new intptr[nbCheckWrite]);
+  for (int32 i = 0; i < nbCheckWrite; i++)
+    checkWriteHandles[i] = checkWrite[i].data->socket;
+  
+  int32 nbCheckError = checkError.Count;
+  UniquePointer<intptr[]> checkErrorHandles(new intptr[nbCheckError]);
+  for (int32 i = 0; i < nbCheckError; i++)
+    checkErrorHandles[i] = checkError[i].data->socket;
+  
+  int32 status = __OS::CoreApi::Socket::Select(checkReadHandles.ToPointer(), nbCheckRead, checkWriteHandles.ToPointer(), nbCheckWrite, checkErrorHandles.ToPointer(), nbCheckError, microseconds);
+  
+  if (status < 0)
+    throw SocketException(__OS::CoreApi::Socket::GetLastError(), pcf_current_information);
+  
+  // List the null sockets
+  List<Socket> readToRemove;
+  for (int32 i = 0; i < nbCheckRead; i++)
+    if (checkReadHandles[i] == 0)
+      readToRemove.Add(checkRead[i]);
+  
+  // Remove the null sockets
+  for (Socket item : readToRemove)
+    if (checkRead.Contains(item))
+      checkRead.Remove(item);
+  
+  // List the null sockets
+  List<Socket> writeToRemove;
+  for (int32 i = 0; i < nbCheckWrite; i++)
+    if (checkWriteHandles[i] == 0)
+      writeToRemove.Add(checkWrite[i]);
+  
+  // Remove the null sockets
+  for (Socket item : writeToRemove)
+    if (checkWrite.Contains(item))
+      checkWrite.Remove(item);
+  
+  // List the null sockets
+  List<Socket> errorToRemove;
+  for (int32 i = 0; i < nbCheckError; i++)
+    if (checkErrorHandles[i] == 0)
+      errorToRemove.Add(checkError[i]);
+  
+  // Remove the null sockets
+  for (Socket item : errorToRemove)
+    if (checkError.Contains(item))
+      checkError.Remove(item);
+  
+  return status;
 }
 
 int32 Socket::Send(const Array<byte>& buffer, int32 offset, int32 size, SocketFlags socketFlags) {
-  return Send((byte*)buffer.Data(), buffer.Length, offset, size, socketFlags);
+  SocketError errorCode = SocketError::Success;
+  int32 numberOfBytesSended = this->Send(buffer, offset, size, socketFlags, errorCode);
+  if (errorCode != SocketError::Success)
+    throw SocketException((int32)errorCode, pcf_current_information);
+  return numberOfBytesSended;
 }
 
-int32 Socket::Send(byte buffer[], int32 length, int32 offset, int32 size, SocketFlags socketFlags) {
-  if (buffer == null)
-    throw ArgumentNullException(pcf_current_information);
-
-  if (offset < 0 || offset >= length || size < 0 || size > (length - offset))
+int32 Socket::Send(const Array<byte>& buffer, int32 offset, int32 size, SocketFlags socketFlags, SocketError& errorCode) {
+  if (offset < 0 || size < 0 || offset + size > buffer.Length)
     throw IndexOutOfRangeException(pcf_current_information);
-
-  if (this->socket == IntPtr::Zero)
+  if (this->data->socket == 0)
     throw ObjectClosedException(pcf_current_information);
-
-  int32 nbrSend = Pcf::Os::Socket::Send(this->socket, (buffer + offset), size, (int32)socketFlags);
-
-  if (nbrSend == -1)
-    throw SocketException(Os::Socket::GetLastError(), pcf_current_information);  
-
-  return nbrSend;
-}
-
-int32 Socket::SendTo(const Array<byte>& buffer, const IPEndPoint& endPoint) {
-  return SendTo((byte*)buffer.Data(), buffer.Length, 0, buffer.Length, SocketFlags::None, endPoint);
-}
-
-int32 Socket::SendTo(byte buffer[], int32 length, const IPEndPoint& endPoint) {
-  return SendTo(buffer, length, 0, length, SocketFlags::None, endPoint);
-}
-
-int32 Socket::SendTo(const Array<byte>& buffer, SocketFlags socketFlags, const IPEndPoint& endPoint) {
-  return SendTo((byte*)buffer.Data(), buffer.Length, 0, buffer.Length, socketFlags, endPoint);
-}
-
-int32 Socket::SendTo(byte buffer[], int32 length, SocketFlags socketFlags, const IPEndPoint& endPoint) {
-  return SendTo(buffer, length, 0, length, socketFlags, endPoint);
-}
-
-int32 Socket::SendTo(const Array<byte>& buffer, int32 size, SocketFlags socketFlags, const IPEndPoint& endPoint) {
-  return SendTo((byte*)buffer.Data(), buffer.Length, 0, size, socketFlags, endPoint);
-}
-
-int32 Socket::SendTo(byte buffer[], int32 length, int32 size, SocketFlags socketFlags, const IPEndPoint& endPoint) {
-  return SendTo(buffer, length, 0, size, socketFlags, endPoint);
+  
+  int32 numberOfBytesSended = __OS::CoreApi::Socket::Send(this->data->socket, (byte*)&buffer.Data()[offset], size, (int32)socketFlags);
+  errorCode = numberOfBytesSended == -1 ? (SocketError)__OS::CoreApi::Socket::GetLastError() : SocketError::Success;
+  return numberOfBytesSended;
 }
 
 int32 Socket::SendTo(const Array<byte>& buffer, int32 offset, int32 size, SocketFlags socketFlags, const IPEndPoint& endPoint) {
-  return SendTo((byte*)buffer.Data(), buffer.Length, offset, size, socketFlags, endPoint);
-}
-
-int32 Socket::SendTo(byte buffer[], int32 length, int32 offset, int32 size, SocketFlags socketFlags, const IPEndPoint& endPoint) {
-  if (buffer == null)
-    throw ArgumentNullException(pcf_current_information);
-
-  if (offset < 0 || offset >= length || size < 0 || size > (length - offset))
+  if (offset < 0 || size < 0 || offset + size > buffer.Length)
     throw IndexOutOfRangeException(pcf_current_information);
-
-  if (this->socket == IntPtr::Zero)
+  if (this->data->socket == 0)
     throw ObjectClosedException(pcf_current_information);
 
   SocketAddress socketAddress = endPoint.Serialize();
-  UniquePointer<byte[]> addressBytes(new byte[static_cast<int32>(socketAddress.Size())]);
-
-  for (int32 i =0; i < socketAddress.Size; i++)
-    addressBytes[i] = socketAddress[i];
-
-  int32 nbrSend = Pcf::Os::Socket::SendTo(this->socket, buffer, size, (int32)socketFlags, addressBytes.ToPointer(), socketAddress.Size);
-
-  if (nbrSend == -1)
-    throw SocketException(Os::Socket::GetLastError(), pcf_current_information);
-
-  return nbrSend;
+  int32 numberOfBytesSended = __OS::CoreApi::Socket::SendTo(this->data->socket, (byte*)&buffer.Data()[offset], size, (int32)socketFlags, (byte*)socketAddress.bytes.Data(), socketAddress.Size);
+  if (numberOfBytesSended == -1)
+    throw SocketException(__OS::CoreApi::Socket::GetLastError(), pcf_current_information);
+  return numberOfBytesSended;
 }
 
 void Socket::SetBlocking(bool blocking) {
-  if (this->socket == IntPtr::Zero)
+  if (this->data->socket == IntPtr::Zero())
     throw ObjectClosedException(pcf_current_information);
   
-  if (Os::Socket::SetBlocking(this->socket, blocking) == -1)
-    throw SocketException(Os::Socket::GetLastError(), pcf_current_information);
+  if (__OS::CoreApi::Socket::SetBlocking(this->data->socket, blocking) == -1)
+    throw SocketException(__OS::CoreApi::Socket::GetLastError(), pcf_current_information);
 
-  this->nonBlocking = !blocking;
+  this->data->nonBlocking = !blocking;
 }
 
 void Socket::SetDontFragment(bool dontFragment) {
   SetSocketOption(SocketOptionLevel::Socket, SocketOptionName::DontFragment, dontFragment);
+}
+
+void Socket::SetDualMode(bool dualMode) {
+  SetSocketOption(SocketOptionLevel::Socket, SocketOptionName::IPv6Only, !dualMode);
 }
 
 void Socket::SetEnableBroadcast(bool enableBroadcast) {
@@ -587,52 +450,43 @@ void Socket::SetNoDelay(bool noDelay) {
 }
 
 void Socket::SetSocketOption(SocketOptionLevel socketOptionLevel, SocketOptionName socketOptionName, bool optionValue) {
-  if (this->socket == IntPtr::Zero)
+  if (this->data->socket == IntPtr::Zero())
     throw ObjectClosedException(pcf_current_information);
   
   int32 option = 0;
   if (optionValue)
     option = 0xFFFFFFFF;
 
-  if (Os::Socket::SetSocketOption(this->socket, socketOptionLevel, socketOptionName, (int32 *)&option, sizeof(option)) == -1)
-    throw SocketException(Os::Socket::GetLastError(), pcf_current_information);
+  if (__OS::CoreApi::Socket::SetSocketOption(this->data->socket, socketOptionLevel, socketOptionName, (int32 *)&option, sizeof(option)) == -1)
+    throw SocketException(__OS::CoreApi::Socket::GetLastError(), pcf_current_information);
 }
 
 void Socket::SetSocketOption(SocketOptionLevel socketOptionLevel, SocketOptionName socketOptionName, const Array<byte>& optionValue) {
-  SetSocketOption(socketOptionLevel, socketOptionName, optionValue.Data(), optionValue.Length);
-}
-
-void Socket::SetSocketOption(SocketOptionLevel socketOptionLevel, SocketOptionName socketOptionName, const byte optionValue[], int32 length) {
-  if (optionValue == null)
-    throw ArgumentNullException(pcf_current_information);
-  
-  if (this->socket == IntPtr::Zero)
+  if (this->data->socket == IntPtr::Zero())
     throw ObjectClosedException(pcf_current_information);
-  
-  if (Os::Socket::SetSocketOption(this->socket, socketOptionLevel, socketOptionName, (byte*)optionValue, length) == -1)
-    throw SocketException(Os::Socket::GetLastError(), pcf_current_information);
+  if (__OS::CoreApi::Socket::SetSocketOption(this->data->socket, socketOptionLevel, socketOptionName, (byte*)optionValue.Data(), optionValue.Length) == -1)
+    throw SocketException(__OS::CoreApi::Socket::GetLastError(), pcf_current_information);
 }
 
 void Socket::SetSocketOption(SocketOptionLevel socketOptionLevel, SocketOptionName socketOptionName, int32 optionValue) {
-  if (this->socket == IntPtr::Zero)
+  if (this->data->socket == IntPtr::Zero())
     throw ObjectClosedException(pcf_current_information);
-  
-  if (Os::Socket::SetSocketOption(this->socket, socketOptionLevel, socketOptionName, (byte *)&optionValue, sizeof(optionValue)) == -1)
-    throw SocketException(Os::Socket::GetLastError(), pcf_current_information);
+  if (__OS::CoreApi::Socket::SetSocketOption(this->data->socket, socketOptionLevel, socketOptionName, (byte *)&optionValue, sizeof(optionValue)) == -1)
+    throw SocketException(__OS::CoreApi::Socket::GetLastError(), pcf_current_information);
 }
 
 void Socket::SetSocketOption(SocketOptionLevel socketOptionLevel, SocketOptionName socketOptionName, const object& optionValue) {
-  if (this->socket == IntPtr::Zero)
+  if (this->data->socket == IntPtr::Zero())
     throw ObjectClosedException(pcf_current_information);
   
   if (is<MulticastOption>(optionValue)) {
+    /// @todo
     // Array<byte> optionValue;
-    // [YFI] TODO
     // SetSocketOption(socketOptionLevel, socketOptionName, optionValue);
     throw NotImplementedException(pcf_current_information);
   } else if (is<LingerOption>(optionValue)) {
+    /// @todo
     // Array<byte> optionValue;
-    // [YFI] TODO
     // SetSocketOption(socketOptionLevel, socketOptionName, optionValue);
     throw NotImplementedException(pcf_current_information);
   } else
@@ -642,38 +496,38 @@ void Socket::SetSocketOption(SocketOptionLevel socketOptionLevel, SocketOptionNa
 void Socket::SetReceiveBufferSize(int32 bufferSize) {
   if (bufferSize < 0)
     throw IndexOutOfRangeException(pcf_current_information);
-  
   SetSocketOption(SocketOptionLevel::Socket, SocketOptionName::ReceiveBuffer, bufferSize);
+}
+
+void Socket::SetReceiveTimeout(int32 timeout) {
+  if (timeout < -1)
+    throw IndexOutOfRangeException(pcf_current_information);
+  SetSocketOption(SocketOptionLevel::Socket, SocketOptionName::ReceiveTimeout, timeout);
 }
 
 void Socket::SetSendBufferSize(int32 bufferSize) {
   if (bufferSize < 0)
     throw IndexOutOfRangeException(pcf_current_information);
-  
   SetSocketOption(SocketOptionLevel::Socket, SocketOptionName::SendBuffer, bufferSize);
 }
 
 void Socket::SetSendTimeout(int32 timeout) {
   if (timeout < -1)
     throw IndexOutOfRangeException(pcf_current_information);
-  
   SetSocketOption(SocketOptionLevel::Socket, SocketOptionName::SendTimeout, timeout);
 }
 
 void Socket::SetTtl(int32 ttl) {
-  if (this->addressFamily != System::Net::Sockets::AddressFamily::InterNetwork && this->addressFamily != System::Net::Sockets::AddressFamily::InterNetworkV6)
+  if (this->data->addressFamily != System::Net::Sockets::AddressFamily::InterNetwork && this->data->addressFamily != System::Net::Sockets::AddressFamily::InterNetworkV6)
     throw NotSupportedException(pcf_current_information);
-  
   if (ttl < 0)
     throw IndexOutOfRangeException(pcf_current_information);
-  
   SetSocketOption(SocketOptionLevel::IP, SocketOptionName::IpTimeToLive, ttl);
 }
 
 void Socket::Shutdown(SocketShutdown how) {
-  if (this->socket == null)
+  if (this->data->socket == 0)
     throw ObjectClosedException(pcf_current_information);
-  
-  if (Os::Socket::Shutdown(this->socket, Enum<SocketShutdown>::ToInt32(how)) != 0)
-    throw SocketException(Os::Socket::GetLastError(), pcf_current_information);
+  if (__OS::CoreApi::Socket::Shutdown(this->data->socket, Enum<SocketShutdown>::ToInt32(how)) != 0)
+    throw SocketException(__OS::CoreApi::Socket::GetLastError(), pcf_current_information);
 }

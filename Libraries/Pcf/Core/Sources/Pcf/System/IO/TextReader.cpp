@@ -5,7 +5,9 @@
 using namespace System;
 using namespace System::IO;
 
-const NullTextReader TextReader::Null;
+Property<NullTextReader, ReadOnly> TextReader::Null {
+  [] {return NullTextReader();}
+};
 
 string TextReader::ReadLine() {
   string line;

@@ -20,7 +20,7 @@
 /// uchar Func(uchar);
 /// class String { ... };
 ///
-/// // Corelib.h
+/// // Pcf.h
 /// class String : public object { ... };
 /// @endcode
 /// With these definitions, it is impossible to use both header files in a single program; the String classes will clash.
@@ -33,7 +33,7 @@
 ///   class String { ... };
 /// }
 ///
-/// // Corelib.h
+/// // Pcf.h
 /// namespace System {
 ///   class String : public object { ... };
 /// }

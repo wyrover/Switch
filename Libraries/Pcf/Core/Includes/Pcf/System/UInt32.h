@@ -2,8 +2,6 @@
 /// @brief Contains Pcf::System::UInt32 struct.
 #pragma once
 
-#include <limits>
-
 #include "Object.h"
 #include "../Types.h"
 #include "_String.h"
@@ -25,13 +23,11 @@ namespace Pcf {
     /// @brief Represents a 32-bit unsigned integer.
     struct UInt32 : public ValueType, public IComparable, public IConvertible, public IFormattable {
     public:
-      #undef max
       /// @brief Represents the largest possible value of an UInt32 4294967295 (0xFFFFFFFF). This field is constant.
-      constexpr static uint32 MaxValue = std::numeric_limits<uint32>::max();
+      static Property<uint32, ReadOnly> MaxValue;
 
-      #undef min
       /// @brief Represents the smallest possible value of UInt32 0 (0x00000000). This field is constant.
-      constexpr static uint32 MinValue = std::numeric_limits<uint32>::min();
+      static Property<uint32, ReadOnly> MinValue;
 
       /// @brief Create a new instance of struct UInt32
       /// @remarks UInt32 is initialized with default value 0.

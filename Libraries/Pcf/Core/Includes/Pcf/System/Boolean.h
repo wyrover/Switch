@@ -52,31 +52,22 @@ namespace Pcf {
 
       /// @cond
       Boolean(const Boolean& value) : value(value.value) {}
-
-      virtual Boolean& operator =(const Boolean& value) {
-        this->value= value;
-        return *this;
-      }
-      
-      virtual Boolean& operator =(int32 value) {
-        this->value= value!=0;
-        return *this;
-      }
-
+      virtual Boolean& operator =(const Boolean& value) {this->value= value; return *this;}
+      virtual Boolean& operator =(int32 value) {this->value= value!=0; return *this;}
       operator bool() const { return this->value; }
       /// @endcond
       
       /// @brief Represent false bool value
-      constexpr static bool False = false;
+      static Property<bool, ReadOnly> False;
       
       /// @brief Represent true bool value
-      constexpr static bool True = true;
+      static Property<bool, ReadOnly> True;
       
       /// @brief Returns a string that represents true value.
-      const static String FalseString;
+      static Property<String, ReadOnly> FalseString;
       
       /// @brief Returns a string that represents false value.
-      const static String TrueString;
+      static Property<String, ReadOnly> TrueString;
       
       /// @brief Converts the specified string representation of a logical value to its Boolean equivalent.
       /// @param str A string containing the value to convert.

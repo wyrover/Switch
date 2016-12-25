@@ -2,8 +2,6 @@
 /// @brief Contains Pcf::System::SByte struct.
 #pragma once
 
-#include <limits>
-
 #include "../Property.h"
 #include "Object.h"
 #include "../Types.h"
@@ -26,13 +24,11 @@ namespace Pcf {
     /// @brief Represents a 8-bit signed integer.
     struct SByte : public ValueType, public IComparable, public IConvertible, public IFormattable {
     public:
-      #undef max
       /// @brief Represents the largest possible value of an SByte 127 (0x7F). This field is constant.
-      constexpr static sbyte MaxValue = std::numeric_limits<sbyte>::max();
+      static Property<sbyte, ReadOnly> MaxValue;
 
-      #undef min
       /// @brief Represents the smallest possible value of SByte -128 (0x80). This field is constant.
-      constexpr static sbyte MinValue = std::numeric_limits<sbyte>::min();
+      static Property<sbyte, ReadOnly> MinValue;
 
       /// @brief Create a new instance of struct SByte
       /// @remarks SByte is initialized with default value 0.

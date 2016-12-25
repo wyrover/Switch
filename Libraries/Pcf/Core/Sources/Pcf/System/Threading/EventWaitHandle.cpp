@@ -11,7 +11,7 @@ namespace {
 EventWaitHandle::EventWaitHandle(bool initialState, EventResetMode mode, const string& name) {
   bool createdNew = true;
   if (name != "")
-    this->operator =(events.Add(name, createdNew));
+    this->operator =(events.AddOrCreate(name, createdNew));
   if (createdNew) {
     *this->mode = mode;
     *this->name = name;
@@ -23,7 +23,7 @@ EventWaitHandle::EventWaitHandle(bool initialState, EventResetMode mode, const s
 EventWaitHandle::EventWaitHandle(bool initialState, EventResetMode mode, const string& name, bool& createdNew) {
   createdNew = true;
   if (name != "")
-    this->operator =(events.Add(name, createdNew));
+    this->operator =(events.AddOrCreate(name, createdNew));
   if (createdNew) {
     *this->mode = mode;
     *this->name = name;
@@ -48,6 +48,6 @@ EventWaitHandle EventWaitHandle::OpenExisting(const string& name) {
   if (!events.Conatains(name))
     throw WaitHandleCannotBeOpenedException(pcf_current_information);
   bool createNew;
-  EventWaitHandle value = events.Add(name, createNew);
+  EventWaitHandle value = events.AddOrCreate(name, createNew);
   return value;
 }

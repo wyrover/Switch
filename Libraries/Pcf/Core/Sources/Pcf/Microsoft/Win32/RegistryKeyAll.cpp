@@ -1,4 +1,4 @@
-#if !_WIN32
+#if __linux__ || __APPLE__
 
 #include "../../../../Includes/Pcf/Microsoft/Win32/Registry.h"
 #include "../../../../Includes/Pcf/Microsoft/Win32/RegistryKey.h"

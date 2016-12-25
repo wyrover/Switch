@@ -16,10 +16,11 @@ namespace Pcf {
       /// @remarks The IPEndPoint class contains the host and local or remote port information needed by an application to connect to a service on a host. By combining the host's IP address and port number of a service, the IPEndPoint class forms a connection point to a service.
       class IPEndPoint : public EndPoint {
       public:
-        /// @brief Specifies the minimum value that can be assigned to the Port property. The MaxPort value is set to 0x00000000. This field is read-only.
-        static int32 MinPort() { return 0; }
+        /// @brief Specifies the minimum value that can be assigned to the Port property. The MinPort value is set to 0x00000000. This field is read-only.
+        static Property<int32, ReadOnly> MinPort;
+        
         /// @brief Specifies the maximum value that can be assigned to the Port property. The MaxPort value is set to 0x0000FFFF. This field is read-only.
-        static int32 MaxPort() { return 0x0000FFFF; }
+        static Property<int32, ReadOnly> MaxPort;
 
         /// @brief Initializes a new instance of the EndPoint class.
         /// @param address The IP address of the Internet host.
@@ -35,13 +36,8 @@ namespace Pcf {
         IPEndPoint(const IPAddress& address, int32 port);
 
         /// @cond
+        IPEndPoint() {}
         IPEndPoint(const IPEndPoint& ipEndPoint) : EndPoint(ipEndPoint), address(ipEndPoint.address), port(ipEndPoint.port) {}
-        IPEndPoint& operator = (const IPEndPoint& ipEndPoint) {
-          this->addressFamily = ipEndPoint.addressFamily;
-          this->address = ipEndPoint.address;
-          this->port = ipEndPoint.port;
-          return *this;
-        }
         /// @endcond
 
         /// @brief Creates an EndPoint instance from a SocketAddress instance.
@@ -79,7 +75,7 @@ namespace Pcf {
         void SetPort(int32 port);
 
         IPAddress address;
-        int32 port;
+        int32 port = 0;
      };
     }
   }

@@ -9,6 +9,7 @@
 #include "System/DateTime.h"
 #include "System/Decimal.h"
 #include "System/Double.h"
+#include "System/IComparable.h"
 #include "System/Int16.h"
 #include "System/Int32.h"
 #include "System/Int64.h"
@@ -24,17 +25,63 @@
 
 /// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Pcf {
+  template<typename T>
+  int32 CompareBoxedType(const T& a, const T& b) {
+    return memcmp(&a, &b, sizeof(T));
+  }
+  
+  template<typename T>
+  int32 GetHashCodeFromBoxedType(const T& value) {
+    using const_iterator = const byte*;
+    const_iterator begin = (const_iterator)&value;
+    const_iterator end = begin + sizeof(T);
+    int32 hash = 0;
+    for (const_iterator it = begin; it != end; ++it)
+      hash = 5 * hash + *it;
+    return hash;
+  }
+  
+  /// @cond
+  template<typename T>
+  struct hash {
+    size_t operator()(const T& key) const { return GetHashCode(key); }
+  };
+  
+  template<typename T>
+  struct equal_to {
+    bool operator()(const T& a, const T& b) const {return Pcf::CompareBoxedType(a, b) == 0; }
+  };
+  /// @endcond
+  
+  template<typename T>
+  struct Boxer : public T, public object, public System::IComparable {
+  public:
+    Boxer() {}
+    Boxer(const T& value) : T(value) {}
+    Boxer(const Boxer& value) : T(value) {}
+    
+    int32 CompareTo(const IComparable& value) const override {return is<T>(value) ? this->CompareTo((const T&)value) : 1;}
+    int32 CompareTo(const Boxer& value) const {return this->CompareTo((const T&)value);}
+    int32 CompareTo(const T& value) const {return CompareBoxedType((const T&)*this, value);}
+    
+    bool Equals(const object& value) const override {return is<T>(value) && this->Equals((const T&)value);}
+    bool Equals(const Boxer& value) const {return this->Equals((const T&)value);}
+    bool Equals(const T& value) const {return this->CompareTo(value) == 0;}
+    
+    int32 GetHashCode() const override {return Pcf::GetHashCodeFromBoxedType((const T&)*this);}
+  };
+  
   /// @brief Support boxing of type
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
   /// @code
   /// bool ready = true;
   /// Console::WriteLine("ready = {0}", ready);                 // console output : ready = 1
-  /// Console::WriteLine("ready = {0}", Boxer::Boxing(ready));  // console output : ready = true
+  /// Console::WriteLine("ready = {0}", TypeBoxer::Boxing(ready));  // console output : ready = true
   /// @endcode
-  class Boxer {
+  class TypeBoxer {
   public:
     /// @cond
-    Boxer() = delete;
+    TypeBoxer() = delete;
     /// @endcond
 
     /// @brief Boxing a bool to a Boolean
@@ -66,7 +113,7 @@ namespace Pcf {
     /// @param value int64 to Boxing.
     /// @return Int64 boxed value
     static System::Int64 Boxing(int64 value) {return value;}
-    
+
     /// @brief Boxing a sbyte to a SByte
     /// @param value sbyte to Boxing.
     /// @return SByte boxed value
@@ -132,10 +179,15 @@ namespace Pcf {
     /// @return UInt64 boxed value
     static System::UInt64 Boxing(uint64 value) {return value;}
     
+    /// @cond
+    static System::Int64 Boxing(llong value) {return value;}
+    static System::UInt64 Boxing(ullong value) {return value;}
+    /// @endcond
+
     /// @brief Boxing an void* to an UIntPtr
     /// @param value void* to Boxing.
     /// @return UIntPtr boxed value
-    static System::UIntPtr Boxing(void* value) {return value;}
+    static System::IntPtr Boxing(void* value) {return (intptr)value;}
     
     /// @cond
     template<typename T>
@@ -151,12 +203,12 @@ namespace Pcf {
   /// @code
   /// Boolean ready = true;
   /// Console::WriteLine("ready = {0}", ready);                     // console output : ready = true
-  /// Console::WriteLine("ready = {0}", Unboxer::Unboxing(ready));  // console output : ready = 1
+  /// Console::WriteLine("ready = {0}", TypeUnboxer::Unboxing(ready));  // console output : ready = 1
   /// @endcode
-  class Unboxer {
+  class TypeUnboxer {
   public:
     /// @cond
-    Unboxer() = delete;
+    TypeUnboxer() = delete;
     /// @endcond
     
     /// @brief Unboxing a Boolean type to a bool Type
@@ -202,7 +254,7 @@ namespace Pcf {
     /// @brief Unboxing a Boolean type to a bool Type
     /// @param value Boolean to Unboxing.
     /// @return bool unboxed value
-    static void* Unboxing(const System::IntPtr& value) {return value;}
+    static intptr Unboxing(const System::IntPtr& value) {return value;}
     
     /// @brief Unboxing a Boolean type to a bool Type
     /// @param value Boolean to Unboxing.
@@ -242,7 +294,7 @@ namespace Pcf {
     /// @brief Unboxing a UIntPtr type to a void* Type
     /// @param value UIntPtr to Unboxing.
     /// @return void* unboxed value
-    static void* Unboxing(const System::UIntPtr& value) {return value;}
+    static uintptr Unboxing(const System::UIntPtr& value) {return value;}
     
     /// @cond
     template<typename T>
@@ -252,207 +304,212 @@ namespace Pcf {
   
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
-  /// @remarks Is an alias on Pcf::Boxer.
+  /// @remarks Is an alias on Pcf::TypeBoxer.
   /// @code
   /// bool ready = true;
   /// Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
   /// Console::WriteLine("ready = {0}", Box(ready));  // console output : ready = true
   /// @endcode
-  inline System::Boolean Box(bool value) {return Boxer::Boxing(value);}
+  inline System::Boolean Box(bool value) {return TypeBoxer::Boxing(value);}
   
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
-  /// @remarks Is an alias on Pcf::Boxer.
+  /// @remarks Is an alias on Pcf::TypeBoxer.
   /// @code
   /// bool ready = true;
   /// Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
   /// Console::WriteLine("ready = {0}", Box(ready));  // console output : ready = true
   /// @endcode
-  inline System::Byte Box(byte value) {return Boxer::Boxing(value);}
+  inline System::Byte Box(byte value) {return TypeBoxer::Boxing(value);}
   
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
-  /// @remarks Is an alias on Pcf::Boxer.
+  /// @remarks Is an alias on Pcf::TypeBoxer.
   /// @code
   /// bool ready = true;
   /// Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
   /// Console::WriteLine("ready = {0}", Box(ready));  // console output : ready = true
   /// @endcode
-  inline System::Double Box(double value) {return Boxer::Boxing(value);}
+  inline System::Double Box(double value) {return TypeBoxer::Boxing(value);}
   
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
-  /// @remarks Is an alias on Pcf::Boxer.
+  /// @remarks Is an alias on Pcf::TypeBoxer.
   /// @code
   /// bool ready = true;
   /// @remarks Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
   /// Console::WriteLine("ready = {0}", Box(ready));  // console output : ready = true
   /// @endcode
-  inline System::Int16 Box(int16 value) {return Boxer::Boxing(value);}
+  inline System::Int16 Box(int16 value) {return TypeBoxer::Boxing(value);}
   
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
-  /// @remarks Is an alias on Pcf::Boxer.
+  /// @remarks Is an alias on Pcf::TypeBoxer.
   /// @code
   /// bool ready = true;
   /// Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
   /// Console::WriteLine("ready = {0}", Box(ready));  // console output : ready = true
   /// @endcode
-  inline System::Int32 Box(int32 value) {return Boxer::Boxing(value);}
+  inline System::Int32 Box(int32 value) {return TypeBoxer::Boxing(value);}
   
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
-  /// @remarks Is an alias on Pcf::Boxer.
+  /// @remarks Is an alias on Pcf::TypeBoxer.
   /// @code
   /// bool ready = true;
   /// Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
   /// Console::WriteLine("ready = {0}", Box(ready));  // console output : ready = true
   /// @endcode
-  inline System::Int64 Box(int64 value) {return Boxer::Boxing(value);}
+  inline System::Int64 Box(int64 value) {return TypeBoxer::Boxing(value);}
   
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
-  /// @remarks Is an alias on Pcf::Boxer.
+  /// @remarks Is an alias on Pcf::TypeBoxer.
   /// @code
   /// bool ready = true;
   /// Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
   /// Console::WriteLine("ready = {0}", Box(ready));  // console output : ready = true
   /// @endcode
-  inline System::SByte Box(sbyte value) {return Boxer::Boxing(value);}
+  inline System::SByte Box(sbyte value) {return TypeBoxer::Boxing(value);}
   
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
-  /// @remarks Is an alias on Pcf::Boxer.
+  /// @remarks Is an alias on Pcf::TypeBoxer.
   /// @code
   /// bool ready = true;
   /// @remarks Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
   /// @remarks Console::WriteLine("ready = {0}", Box(ready));  // console output : ready = true
   /// @endcode
-  inline System::Single Box(float value) {return Boxer::Boxing(value);}
+  inline System::Single Box(float value) {return TypeBoxer::Boxing(value);}
   
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
-  /// @remarks Is an alias on Pcf::Boxer.
+  /// @remarks Is an alias on Pcf::TypeBoxer.
   /// @code
   /// bool ready = true;
   /// @remarks Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
   /// Console::WriteLine("ready = {0}", Box(ready));  // console output : ready = true
   /// @endcode
-  inline System::String Box(const char* value) {return Boxer::Boxing(value);}
+  inline System::String Box(const char* value) {return TypeBoxer::Boxing(value);}
   
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
-  /// @remarks Is an alias on Pcf::Boxer.
+  /// @remarks Is an alias on Pcf::TypeBoxer.
   /// @code
   /// bool ready = true;
   /// @remarks Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
   /// Console::WriteLine("ready = {0}", Box(ready));  // console output : ready = true
   /// @endcode
-  inline System::String Box(const wchar* value) {return Boxer::Boxing(value);}
+  inline System::String Box(const wchar* value) {return TypeBoxer::Boxing(value);}
   
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
-  /// @remarks Is an alias on Pcf::Boxer.
+  /// @remarks Is an alias on Pcf::TypeBoxer.
   /// @code
   /// bool ready = true;
   /// @remarks Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
   /// Console::WriteLine("ready = {0}", Box(ready));  // console output : ready = true
   /// @endcode
-  inline System::String Box(const char16* value) {return Boxer::Boxing(value);}
+  inline System::String Box(const char16* value) {return TypeBoxer::Boxing(value);}
   
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
-  /// @remarks Is an alias on Pcf::Boxer.
+  /// @remarks Is an alias on Pcf::TypeBoxer.
   /// @code
   /// bool ready = true;
   /// @remarks Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
   /// Console::WriteLine("ready = {0}", Box(ready));  // console output : ready = true
   /// @endcode
-  inline System::String Box(const char32* value) {return Boxer::Boxing(value);}
+  inline System::String Box(const char32* value) {return TypeBoxer::Boxing(value);}
   
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
-  /// @remarks Is an alias on Pcf::Boxer.
+  /// @remarks Is an alias on Pcf::TypeBoxer.
   /// @code
   /// bool ready = true;
   /// Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
   /// Console::WriteLine("ready = {0}", Box(ready));  // console output : ready = true
   /// @endcode
-  inline System::Char Box(char value) {return Boxer::Boxing(value);}
+  inline System::Char Box(char value) {return TypeBoxer::Boxing(value);}
   
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
-  /// @remarks Is an alias on Pcf::Boxer.
+  /// @remarks Is an alias on Pcf::TypeBoxer.
   /// @code
   /// bool ready = true;
   /// Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
   /// Console::WriteLine("ready = {0}", Box(ready));  // console output : ready = true
   /// @endcode
-  inline System::Char Box(wchar value) {return Boxer::Boxing(value);}
+  inline System::Char Box(wchar value) {return TypeBoxer::Boxing(value);}
   
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
-  /// @remarks Is an alias on Pcf::Boxer.
+  /// @remarks Is an alias on Pcf::TypeBoxer.
   /// @code
   /// bool ready = true;
   /// Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
   /// Console::WriteLine("ready = {0}", Box(ready));  // console output : ready = true
   /// @endcode
-  inline System::Char Box(char16 value) {return Boxer::Boxing(value);}
+  inline System::Char Box(char16 value) {return TypeBoxer::Boxing(value);}
   
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
-  /// @remarks Is an alias on Pcf::Boxer.
+  /// @remarks Is an alias on Pcf::TypeBoxer.
   /// @code
   /// bool ready = true;
   /// Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
   /// Console::WriteLine("ready = {0}", Box(ready));  // console output : ready = true
   /// @endcode
-  inline System::Char Box(char32 value) {return Boxer::Boxing(value);}
+  inline System::Char Box(char32 value) {return TypeBoxer::Boxing(value);}
   
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
-  /// @remarks Is an alias on Pcf::Boxer.
+  /// @remarks Is an alias on Pcf::TypeBoxer.
   /// @code
   /// bool ready = true;
   /// Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
   /// Console::WriteLine("ready = {0}", Box(ready));  // console output : ready = true
   /// @endcode
-  inline System::UInt16 Box(uint16 value) {return Boxer::Boxing(value);}
+  inline System::UInt16 Box(uint16 value) {return TypeBoxer::Boxing(value);}
   
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
-  /// @remarks Is an alias on Pcf::Boxer.
+  /// @remarks Is an alias on Pcf::TypeBoxer.
   /// @code
   /// bool ready = true;
   /// Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
   /// Console::WriteLine("ready = {0}", Box(ready));  // console output : ready = true
   /// @endcode
-  inline System::UInt32 Box(uint32 value) {return Boxer::Boxing(value);}
+  inline System::UInt32 Box(uint32 value) {return TypeBoxer::Boxing(value);}
   
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
-  /// @remarks Is an alias on Pcf::Boxer.
+  /// @remarks Is an alias on Pcf::TypeBoxer.
   /// @code
   /// bool ready = true;
   /// Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
   /// Console::WriteLine("ready = {0}", Box(ready));  // console output : ready = true
   /// @endcode
-  inline System::UInt64 Box(uint64 value) {return Boxer::Boxing(value);}
+  inline System::UInt64 Box(uint64 value) {return TypeBoxer::Boxing(value);}
+
+  /// @cond
+  inline System::Int64 Box(llong value) {return TypeBoxer::Boxing(value);}
+  inline System::UInt64 Box(ullong value) {return TypeBoxer::Boxing(value);}
+  /// @endcond
   
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
-  /// @remarks Is an alias on Pcf::Boxer.
+  /// @remarks Is an alias on Pcf::TypeBoxer.
   /// @code
   /// bool ready = true;
   /// @remarks Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
   /// Console::WriteLine("ready = {0}", Box(ready));  // console output : ready = true
   /// @endcode
-  inline System::UIntPtr Box(void* value) {return Boxer::Boxing(value);}
+  inline System::IntPtr Box(void* value) {return TypeBoxer::Boxing(value);}
   
   /// @cond
   template<typename T>
-  inline const T& Box(const T& value) {return Boxer::Boxing(value);}
+  inline const T& Box(const T& value) {return TypeBoxer::Boxing(value);}
 
   template<typename T, typename Attribute>
   inline T Box(const Property<T, Attribute>& value) {return T(Box(value()));}
@@ -460,180 +517,180 @@ namespace Pcf {
   
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
-  /// @remarks Is an alias on Pcf::Unboxer.
+  /// @remarks Is an alias on Pcf::TypeUnboxer.
   /// @code
   /// Boolean ready = true;
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true
   /// Console::WriteLine("ready = {0}", Unbox(ready));  // console output : ready = 1
   /// @endcode
-  inline bool Unbox(const System::Boolean& value) {return Unboxer::Unboxing(value);}
+  inline bool Unbox(const System::Boolean& value) {return TypeUnboxer::Unboxing(value);}
   
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
-  /// @remarks Is an alias on Pcf::Unboxer.
+  /// @remarks Is an alias on Pcf::TypeUnboxer.
   /// @code
   /// Boolean ready = true;
   /// @remarks Console::WriteLine("ready = {0}", ready);         // console output : ready = true
   /// @remarks Console::WriteLine("ready = {0}", Unbox(ready));  // console output : ready = 1
   /// @endcode
-  inline byte Unbox(const System::Byte& value) {return Unboxer::Unboxing(value);}
+  inline byte Unbox(const System::Byte& value) {return TypeUnboxer::Unboxing(value);}
   
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
-  /// @remarks Is an alias on Pcf::Unboxer.
+  /// @remarks Is an alias on Pcf::TypeUnboxer.
   /// @code
   /// Boolean ready = true;
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true
   /// Console::WriteLine("ready = {0}", Unbox(ready));  // console output : ready = 1
   /// @endcode
-  inline double Unbox(const System::Double& value) {return Unboxer::Unboxing(value);}
+  inline double Unbox(const System::Double& value) {return TypeUnboxer::Unboxing(value);}
   
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
-  /// @remarks Is an alias on Pcf::Unboxer.
+  /// @remarks Is an alias on Pcf::TypeUnboxer.
   /// @code
   /// Boolean ready = true;
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true
   /// Console::WriteLine("ready = {0}", Unbox(ready));  // console output : ready = 1
   /// @endcode
-  inline System::DateTime Unbox(const System::DateTime& value) {return Unboxer::Unboxing(value);}
+  inline System::DateTime Unbox(const System::DateTime& value) {return TypeUnboxer::Unboxing(value);}
   
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
-  /// @remarks Is an alias on Pcf::Unboxer.
+  /// @remarks Is an alias on Pcf::TypeUnboxer.
   /// @code
   /// Boolean ready = true;
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true
   /// Console::WriteLine("ready = {0}", Unbox(ready));  // console output : ready = 1
   /// @endcode
-  inline int16 Unbox(const System::Int16& value) {return Unboxer::Unboxing(value);}
+  inline int16 Unbox(const System::Int16& value) {return TypeUnboxer::Unboxing(value);}
   
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
-  /// @remarks Is an alias on Pcf::Unboxer.
+  /// @remarks Is an alias on Pcf::TypeUnboxer.
   /// @code
   /// Boolean ready = true;
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true
   /// Console::WriteLine("ready = {0}", Unbox(ready));  // console output : ready = 1
   /// @endcode
-  inline int32 Unbox(System::Int32& value) {return Unboxer::Unboxing(value);}
+  inline int32 Unbox(System::Int32& value) {return TypeUnboxer::Unboxing(value);}
   
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
-  /// @remarks Is an alias on Pcf::Unboxer.
+  /// @remarks Is an alias on Pcf::TypeUnboxer.
   /// @code
   /// Boolean ready = true;
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true
   /// Console::WriteLine("ready = {0}", Unbox(ready));  // console output : ready = 1
   /// @endcode
-  inline int32 Unbox(const System::Int32& value) {return Unboxer::Unboxing(value);}
+  inline int32 Unbox(const System::Int32& value) {return TypeUnboxer::Unboxing(value);}
   
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
-  /// @remarks Is an alias on Pcf::Unboxer.
+  /// @remarks Is an alias on Pcf::TypeUnboxer.
   /// @code
   /// Boolean ready = true;
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true
   /// Console::WriteLine("ready = {0}", Unbox(ready));  // console output : ready = 1
   /// @endcode
-  inline int64 Unbox(const System::Int64& value) {return Unboxer::Unboxing(value);}
+  inline int64 Unbox(const System::Int64& value) {return TypeUnboxer::Unboxing(value);}
   
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
-  /// @remarks Is an alias on Pcf::Unboxer.
+  /// @remarks Is an alias on Pcf::TypeUnboxer.
   /// @code
   /// Boolean ready = true;
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true
   /// Console::WriteLine("ready = {0}", Unbox(ready));  // console output : ready = 1
   /// @endcode
-  inline void* Unbox(const System::IntPtr& value) {return Unboxer::Unboxing(value);}
+  inline intptr Unbox(const System::IntPtr& value) {return TypeUnboxer::Unboxing(value);}
   
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
-  /// @remarks Is an alias on Pcf::Unboxer.
+  /// @remarks Is an alias on Pcf::TypeUnboxer.
   /// @code
   /// Boolean ready = true;
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true
   /// Console::WriteLine("ready = {0}", Unbox(ready));  // console output : ready = 1
   /// @endcode
-  inline sbyte Unbox(const System::SByte& value) {return Unboxer::Unboxing(value);}
+  inline sbyte Unbox(const System::SByte& value) {return TypeUnboxer::Unboxing(value);}
   
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
-  /// @remarks Is an alias on Pcf::Unboxer.
+  /// @remarks Is an alias on Pcf::TypeUnboxer.
   /// @code
   /// Boolean ready = true;
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true
   /// Console::WriteLine("ready = {0}", Unbox(ready));  // console output : ready = 1
   /// @endcode
-  inline float Unbox(const System::Single& value) {return Unboxer::Unboxing(value);}
+  inline float Unbox(const System::Single& value) {return TypeUnboxer::Unboxing(value);}
   
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
-  /// @remarks Is an alias on Pcf::Unboxer.
+  /// @remarks Is an alias on Pcf::TypeUnboxer.
   /// @code
   /// Boolean ready = true;
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true
   /// Console::WriteLine("ready = {0}", Unbox(ready));  // console output : ready = 1
   /// @endcode
-  inline const char* Unbox(const System::String& value) {return Unboxer::Unboxing(value);}
+  inline const char* Unbox(const System::String& value) {return TypeUnboxer::Unboxing(value);}
   
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
-  /// @remarks Is an alias on Pcf::Unboxer.
+  /// @remarks Is an alias on Pcf::TypeUnboxer.
   /// @code
   /// Boolean ready = true;
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true
   /// Console::WriteLine("ready = {0}", Unbox(ready));  // console output : ready = 1
   /// @endcode
-  inline char32 Unbox(const System::Char& value) {return Unboxer::Unboxing(value);}
+  inline char32 Unbox(const System::Char& value) {return TypeUnboxer::Unboxing(value);}
   
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
-  /// @remarks Is an alias on Pcf::Unboxer.
+  /// @remarks Is an alias on Pcf::TypeUnboxer.
   /// @code
   /// Boolean ready = true;
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true
   /// Console::WriteLine("ready = {0}", Unbox(ready));  // console output : ready = 1
   /// @endcode
-  inline uint16 Unbox(const System::UInt16& value) {return Unboxer::Unboxing(value);}
+  inline uint16 Unbox(const System::UInt16& value) {return TypeUnboxer::Unboxing(value);}
   
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
-  /// @remarks Is an alias on Pcf::Unboxer.
+  /// @remarks Is an alias on Pcf::TypeUnboxer.
   /// @code
   /// Boolean ready = true;
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true
   /// Console::WriteLine("ready = {0}", Unbox(ready));  // console output : ready = 1
   /// @endcode
-  inline uint32 Unbox(const System::UInt32& value) {return Unboxer::Unboxing(value);}
+  inline uint32 Unbox(const System::UInt32& value) {return TypeUnboxer::Unboxing(value);}
   
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
-  /// @remarks Is an alias on Pcf::Unboxer.
+  /// @remarks Is an alias on Pcf::TypeUnboxer.
   /// @code
   /// Boolean ready = true;
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true
   /// Console::WriteLine("ready = {0}", Unbox(ready));  // console output : ready = 1
   /// @endcode
-  inline uint64 Unbox(const System::UInt64& value) {return Unboxer::Unboxing(value);}
+  inline uint64 Unbox(const System::UInt64& value) {return TypeUnboxer::Unboxing(value);}
   
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
-  /// @remarks Is an alias on Pcf::Unboxer.
+  /// @remarks Is an alias on Pcf::TypeUnboxer.
   /// @code
   /// Boolean ready = true;
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true
   /// Console::WriteLine("ready = {0}", Unbox(ready));  // console output : ready = 1
   /// @endcode
-  inline void* Unbox(const System::UIntPtr& value) {return Unboxer::Unboxing(value);}
+  inline uintptr Unbox(const System::UIntPtr& value) {return TypeUnboxer::Unboxing(value);}
   
   /// @cond
   template<typename T>
-  inline T& Unbox(T& value) {return Unboxer::Unboxing(value);}
+  inline T& Unbox(T& value) {return TypeUnboxer::Unboxing(value);}
 
   template<typename T>
-  inline const T& Unbox(const T& value)  {return Unboxer::Unboxing(value);}
+  inline const T& Unbox(const T& value)  {return TypeUnboxer::Unboxing(value);}
 /// @endcond
 }
 

@@ -49,14 +49,7 @@ namespace Pcf {
         /// @remarks The Socket class allows you to configure your Socket using the SetSocketOption method. Retrieve these settings using the GetSocketOption method.
         /// @note If you are writing a relatively simple application and do not require maximum performance, consider using TcpClient, TcpListener, and UdpClient. These classes provide a simpler and more user-friendly interface to Socket communications.
         class Socket : public Object {
-          /// @brief Initializes a new instance of the Socket class using the specified value returned from DuplicateAndClose.
-          /// @param socketInformation The socket information returned by DuplicateAndClose.
-          /// @remarks If you call the Socket constructor multiple times with the same byte array as the argument for each call, you will create multiple managed Sockets with the same underlying socket. This practice is strongly discouraged.
-          Socket(const SocketInformation& socketInformation);
-
-        public:
-          using SocketHandle = void*;
-          
+        public:          
           /// @brief Initializes a new instance of the Socket class using the specified address family, socket type and protocol.
           /// @param addressFamily One of the AddressFamily values.
           /// @param socketType One of the SocketType values.
@@ -66,20 +59,261 @@ namespace Pcf {
           /// @note If this constructor throws a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
           Socket(System::Net::Sockets::AddressFamily addressFamily, System::Net::Sockets::SocketType socketType, System::Net::Sockets::ProtocolType protocolType);
-
+          
+          /// @brief Initializes a new instance of the Socket class using the specified value returned from DuplicateAndClose.
+          /// @param socketInformation The socket information returned by DuplicateAndClose.
+          /// @remarks If you call the Socket constructor multiple times with the same byte array as the argument for each call, you will create multiple managed Sockets with the same underlying socket. This practice is strongly discouraged.
+          Socket(const SocketInformation& socketInformation)  {}
+          
           /// @cond
-          Socket(const Socket& socket) = delete;
-          Socket& operator =(const Socket& socket) = delete;
+          Socket() {}
+          Socket(const Socket& socket) : data(socket.data) {}
+          Socket& operator=(const Socket& socket) {this->data = socket.data; return *this;}
           ~Socket();
           /// @endcond
+          
+          /// @brief Gets the address family of the Socket.
+          /// @return AddressFamily One of the AddressFamily values.
+          /// @remarks The AddressFamily specifies the addressing scheme that an instance of the Socket class can use. This property is read-only and is set when the Socket is created.
+          Property<System::Net::Sockets::AddressFamily, ReadOnly> AddressFamily {
+            pcf_get {return this->data->addressFamily;}
+          };
+          
+          /// @brief Gets the amount of data that has been received from the network and is available to be read.
+          /// @return int32 The number of bytes of data received from the network and available to be read.
+          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
+          /// @exception ObjectClosedException The Socket has been closed.
+          /// @remarks If you are using a non-blocking Socket, Available is a good way to determine whether data is queued for reading, before calling Receive. The available data is the total amount of data queued in the network buffer for reading. If no data is queued in the network buffer, Available returns 0.
+          /// @remarks If the remote host shuts down or closes the connection, Available can throw a SocketException. If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
+          Property<int32, ReadOnly> Available {
+            pcf_get {return this->GetAvailable();}
+          };
+          
+          /// @brief Gets a value that indicates whether the Socket is in blocking mode.
+          /// @return bool true if the Socket will block; otherwise, false. The default is true
+          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
+          /// @exception ObjectClosedException The Socket has been closed.
+          /// @remarks The Blocking property indicates whether a Socket is in blocking mode.
+          /// @remarks If you are in blocking mode, and you make a method call which does not complete immediately, your application will block execution until the requested operation completes. If you want execution to continue even though the requested operation is not complete, change the Blocking property to false. The Blocking property has no effect on asynchronous methods. If you are sending and receiving data asynchronously and want to block execution, use the ManualResetEvent class.
+          /// @note If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
+          /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
+          Property<bool> Blocking {
+            pcf_get {return this->GetBlocking();},
+            pcf_set {this->SetBlocking(value);}
+          };
+          
+          /// @brief Gets a value that indicates whether a Socket is connected to a remote host as of the last Send or Receive operation.
+          /// @return bool true if the Socket was connected to a remote resource as of the most recent operation; otherwise, false.
+          Property<bool, ReadOnly> Connected {
+            pcf_get {return this->data->connected;}
+          };
+          
+          /// @brief Gets a Boolean value that specifies whether the Socket allows Internet Protocol (IP) datagrams to be fragmented.
+          /// @return bool true if the Socket allows datagram fragmentation; otherwise, false. The default is true.
+          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
+          /// @exception ObjectClosedException The Socket has been closed.
+          /// @remarks Datagrams require fragmentation when their size exceeds the Maximum Transfer Unit (MTU) of the transmission medium. Datagrams may be fragmented by the sending host (all Internet Protocol versions) or an intermediate router (Internet Protocol Version 4 only). If a datagram must be fragmented, and the DontFragment option is set, the datagram is discarded, and an Internet Control Message Protocol (ICMP) error message is sent back to the sender of the datagram.
+          /// @remarks Setting this property on a Transmission Control Protocol (TCP) socket will have no effect.
+          Property<bool> DontFragment {
+            pcf_get {return this->GetDontFragment();},
+            pcf_set {this->SetDontFragment(value);}
+          };
+          
+          /// @brief Gets or sets a Boolean value that specifies whether the Socket is a dual-mode socket used for both IPv4 and IPv6.
+          /// @return bool true if the Socket is a dual-mode socket; otherwise, false. The default is false.
+          Property<bool> DualMode {
+            pcf_get {return this->GetDualMode();},
+            pcf_set {this->SetDualMode(value);}
+          };
+          
+          /// @brief Gets a Boolean value that specifies whether the Socket can send or receive broadcast packets.
+          /// @return bool true if the Socket allows only one socket to bind to a specific port; otherwise, false. The default is true.
+          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
+          /// @exception ObjectClosedException The Socket has been closed.
+          /// @remarks Broadcasting is limited to a specific subnet, and must use User Datagram Protocol (UDP.) For Internet Protocol version 4, you can broadcast to your local subnet by sending a packet to 255.255.255.255; or you can use the directed broadcast address, which is the network portion of an Internet Protocol (IP) address with all bits set in the host portion. For example, if your IP address is 192.168.1.40 (a Class C address, with a netmask of 255.255.255.0 -- the network portion is the first three octets, and the host portion is the last octet), your directed broadcast address is 192.168.1.255.
+          /// @remarks Setting this property on a Transmission Control Protocol (TCP) socket will have no effect.
+          Property<bool> EnableBroadcast {
+            pcf_get {return this->GetEnableBroadcast();},
+            pcf_set {this->SetEnableBroadcast(value);}
+          };
+          
+          /// @brief Gets or sets a Boolean value that specifies whether the Socket allows only one process to bind to a port.
+          /// @return bool true if the Socket allows broadcast packets; otherwise, false. The default is false.
+          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
+          /// @exception ObjectClosedException The Socket has been closed.
+          /// @remarks If ExclusiveAddressUse is false, multiple sockets can use the Bind method to bind to a specific port; however only one of the sockets can perform operations on the network traffic sent to the port. If more than one socket attempts to use the Bind(EndPoint) method to bind to a particular port, then the one with the more specific IP address will handle the network traffic sent to that port.
+          /// @remarks If ExclusiveAddressUse is true, the first use of the Bind method to attempt to bind to a particular port, regardless of Internet Protocol (IP) address, will succeed; all subsequent uses of the Bind method to attempt to bind to that port will fail until the original bound socket is destroyed.
+          /// @remarks This property must be set before Bind is called; otherwise an InvalidOperationException will be thrown.
+          Property<bool> ExclusiveAddressUse {
+            pcf_get {return this->GetExclusiveAddressUse();},
+            pcf_set {this->SetExclusiveAddressUse(value);}
+          };
+          
+          /// @brief Gets the operating system handle for the Socket.
+          /// @return IntPtr An IntPtr that represents the operating system handle for the Socket.
+          Property<intptr, ReadOnly> Handle {
+            pcf_get {return (intptr)this->data->socket;}
+          };
+
+          /// @brief Gets a value that indicates whether the Socket is bound to a specific local port.
+          /// @return bool true if the Socket is bound to a local port; otherwise, false.
+          /// @remarks A socket is considered bound to a local port if it is explicitly bound by calling the Bind method, or implicitly bound by calling members like Connect, SendTo, or ReceiveFrom, which use an ephemeral local port (a free port greater than 1024, selected by the operating system.) Servers use the Bind method to bind to a well-known port so that clients may connect to them.
+          Property<bool, ReadOnly> IsBound {
+            pcf_get {return this->data->bound;}
+          };
+          
+          /// @brief Gets os sets a value that specifies whether the Socket will delay closing a socket in an attempt to send all pending data.
+          /// @return A LingerOption that specifies how to linger while closing a socket.
+          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
+          /// @exception ObjectClosedException The Socket has been closed.
+          /// @remarks The LingerState property changes the way Close method behaves. This property when set modifies the conditions under which the connection can be reset by Winsock. Connection resets can still occur based on the IP protocol behavior.
+          /// @remarks This property controls the length of time that a connection-oriented connection will remain open after a call to Close when data remains to be sent.
+          /// @remarks When you call methods to send data to a peer, this data is placed in the outgoing network buffer. This property can be used to ensure that this data is sent to the remote host before the Close method drops the connection.
+          /// @remarks To enable lingering, create a LingerOption instance containing the desired values, and set the LingerState property to this instance.
+          /// @remarks The following table describes the behavior of the Close method for the possible values of the Enabled property and the LingerTime property stored in the LingerState property.
+          /// | enable                              | seconds                                    | Behavior                                                                                                                          |
+          /// |-------------------------------------|--------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
+          /// | false (disabled), the default value | The time-out is not applicable, (default). | Attempts to send pending data for a connection-oriented socket (TCP, for example) until the default IP protocol time-out expires. |
+          /// | true (enabled)                      | A nonzero time-out                         | Attempts to send pending data until the specified time-out expires, and if the attempt fails, then Winsock resets the connection. |
+          /// | true (enabled)                      | A zero timeout.                            | Discards any pending data. For connection-oriented socket (TCP, for example), Winsock resets the connection.                      |
+          /// @remarks he IP stack computes the default IP protocol time-out period to use based on the round trip time of the connection. In most cases, the time-out computed by the stack is more relevant than one defined by an application. This is the default behavior for a socket when the LingerState property is not set.
+          /// @remarks When the LingerTime property stored in the LingerState property is set greater than the default IP protocol time-out, the default IP protocol time-out will still apply and virtual.
+          Property<LingerOption> LingerState {
+            pcf_get {return this->GetLingerState();},
+            pcf_set {this->SetLingerState(value);}
+          };
+          
+          /// @brief Gets the local endpoint.
+          /// @return The EndPoint that the Socket is using for communications.
+          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
+          /// @exception ObjectClosedException The Socket has been closed.
+          /// @remarks The LocalEndPoint property gets an EndPoint that contains the local IP address and port number to which your Socket is bound. You must cast this EndPoint to an IPEndPoint before retrieving any information. You can then call the IPEndPoint.Address method to retrieve the local IPAddress, and the IPEndPoint.Port method to retrieve the local port number.
+          /// @remarks The LocalEndPoint property is usually set after you make a call to the Bind method. If you allow the system to assign your socket's local IP address and port number, the LocalEndPoint property will be set after the first I/O operation. For connection-oriented protocols, the first I/O operation would be a call to the Connect or Accept method. For connectionless protocols, the first I/O operation would be any of the send or receive calls.
+          /// @note If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
+          /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
+          Property<const EndPoint&, ReadOnly> LocalEndPoint {
+            pcf_get->const EndPoint& {return this->GetLocalEndPoint();}
+          };
+          
+          /// @brief Gets a value that specifies whether outgoing multicast packets are delivered to the sending application.
+          /// @return bool true if the Socket receives outgoing multicast packets; otherwise, false.
+          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
+          /// @exception ObjectClosedException The Socket has been closed.
+          /// @remarks Multicast is a scalable method for many-to-many communication on the Internet. A process subscribes to a multicast address; then, any packets sent by a subscribed process are received by every other process subscribed to the multicast address.
+          /// @remarks Setting this property on a Transmission Control Protocol (TCP) socket will have no effect.
+          Property<bool> MulticastLoopback {
+            pcf_get {return this->GetMulticastLoopback();},
+            pcf_set {this->SetMulticastLoopback(value);}
+          };
+          
+          /// @brief Gets a Boolean value that specifies whether the stream Socket is using the Nagle algorithm.
+          /// @return bool false if the Socket uses the Nagle algorithm; otherwise, true. The default is false.
+          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
+          /// @exception ObjectClosedException The Socket has been closed.
+          /// @remarks The Nagle algorithm is designed to reduce network traffic by causing the socket to buffer small packets and then combine and send them in one packet under certain circumstances. A TCP packet consists of 40 bytes of header plus the data being sent. When small packets of data are sent with TCP, the overhead resulting from the TCP header can become a significant part of the network traffic. On heavily loaded networks, the congestion resulting from this overhead can result in lost datagrams and retransmissions, as well as excessive propagation time caused by congestion. The Nagle algorithm inhibits the sending of new TCP segments when new outgoing data arrives from the user if any previouslytransmitted data on the connection remains unacknowledged.
+          /// @remarks The majority of network applications should use the Nagle algorithm.
+          /// @remarks Setting this property on a User Datagram Protocol (UDP) socket will have no effect.
+          Property<bool> NoDelay {
+            pcf_get {return this->GetNoDelay();},
+            pcf_set {this->SetNoDelay(value);}
+          };
+          
+          /// @brief Indicates whether the underlying operating system and network adaptors support Internet Protocol version 4 (IPv4).
+          /// @return bool true if the operating system and network adaptors support the IPv4 protocol; otherwise, false.
+          /// @remarks The majority of operating system may support both IPv4 and IPv6 protocols.
+          static Property<bool, ReadOnly> OSSupportsIPv4;
+          
+          /// @brief Indicates whether the underlying operating system and network adaptors support Internet Protocol version 6 (IPv6).
+          /// @return bool true if the operating system and network adaptors support the IPv6 protocol; otherwise, false.
+          /// @remarks The majority of operating system may support both IPv4 and IPv6 protocols.
+          static Property<bool, ReadOnly> OSSupportsIPv6;
+          
+          /// @brief Gets the protocol type of the Socket.
+          /// @return One of the ProtocolType values.
+          /// @remarks The ProtocolType property is set when the Socket is created, and specifies the protocol used by that Socket.
+          Property<System::Net::Sockets::ProtocolType, ReadOnly> ProtocolType {
+            pcf_get {return this->data->protocolType;}
+          };
+          
+          /// @brief Gets a value that specifies the size of the receive buffer of the Socket.
+          /// @return An int32 that contains the size, in bytes, of the receive buffer. The default is 8192.
+          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
+          /// @exception ObjectClosedException The Socket has been closed.
+          /// @remarks A larger buffer size potentially reduces the number of empty acknowledgements (TCP packets with no data portion), but might also delay the recognition of connection difficulties. Consider increasing the buffer size if you are transferring large files, or you are using a high bandwidth, high latency connection (such as a satellite broadband provider.)
+          Property<int32> ReceiveBufferSize {
+            pcf_get {return this->GetReceiveBufferSize();},
+            pcf_set {this->SetReceiveBufferSize(value);}
+          };
+          
+          /// @brief Gets a value that specifies the amount of time after which a synchronous Receive call will time out.
+          /// @return The time-out value, in milliseconds. The default value is 0, which indicates an infinite time-out period. Specifying -1 also indicates an infinite time-out period.
+          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
+          /// @exception ObjectClosedException The Socket has been closed.
+          /// @remarks This option applies to synchronous Receive calls only. If the time-out period is exceeded, the Receive method will throw a SocketException.
+          Property<int32> ReceiveTimeout {
+            pcf_get {return this->GetReceiveTimeout();},
+            pcf_set {this->SetReceiveTimeout(value);}
+          };
+          
+          /// @brief Gets the remote endpoint.
+          /// @return The EndPoint with which the Socket is communicating.
+          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
+          /// @exception ObjectClosedException The Socket has been closed.
+          /// @remarks If you are using a connection-oriented protocol, the RemoteEndPoint property gets the EndPoint that contains the remote IP address and port number to which the Socket is connected. If you are using a connectionless protocol, RemoteEndPoint contains the default remote IP address and port number with which the Socket will communicate. You must cast this EndPoint to an IPEndPoint before retrieving any information. You can then call the IPEndPoint.Address method to retrieve the remote IPAddress, and the IPEndPoint.Port method to retrieve the remote port number.
+          /// @remarks The RemoteEndPoint is set after a call to either Accept or Connect. If you try to access this property earlier, RemoteEndPoint will throw a SocketException. If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
+          /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
+          Property<const EndPoint&, ReadOnly> RemoteEndPoint {
+            pcf_get->const EndPoint& {return this->GetRemoteEndPoint();}
+          };
+          
+          /// @brief Gets a value that specifies the size of the send buffer of the Socket.
+          /// @return An int32 that contains the size, in bytes, of the send buffer. The default is 8192.
+          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
+          /// @exception ObjectClosedException The Socket has been closed.
+          /// @remarks A larger buffer size potentially reduces the number of empty acknowledgements (TCP packets with no data portion), but might also delay the recognition of connection difficulties. Consider increasing the buffer size if you are transferring large files, or you are using a high bandwidth, high latency connection (such as a satellite broadband provider.)
+          Property<int32> SendBufferSize {
+            pcf_get {return this->GetSendBufferSize();},
+            pcf_set {this->SetSendBufferSize(value);}
+          };
+          
+          /// @brief Gets a value that specifies the amount of time after which a synchronous Send call will time out.
+          /// @return The time-out value, in milliseconds. The default value is 0, which indicates an infinite time-out period. Specifying -1 also indicates an infinite time-out period.
+          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
+          /// @exception ObjectClosedException The Socket has been closed.
+          /// @remarks This option applies to synchronous Receive calls only. If the time-out period is exceeded, the Receive method will throw a SocketException.
+          Property<int32> SendTimeout {
+            pcf_get {return this->GetSendTimeout();},
+            pcf_set {this->SetSendTimeout(value);}
+          };
+          
+          /// @brief Gets the type of the Socket.
+          /// @return SocketType One of the SocketType values.
+          /// @remarks SocketType is read-only and is set when the Socket is created.
+          Property<System::Net::Sockets::SocketType, ReadOnly> SocketType {
+            pcf_get {return this->data->socketType;}
+          };
+          
+          /// @brief Gets a value that specifies the Time To Live (TTL) value of Internet Protocol (IP) packets sent by the Socket.
+          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information. - or - socketOptionName was set to the unsupported value SocketOptionNameMaxConnections.
+          /// @exception ObjectClosedException The Socket has been closed.
+          /// @return The TTL value.
+          /// @remarks The TTL value indicates the maximum number of routers the packet can traverse before the router discards the packet and an Internet Control Message Protocol (ICMP) "TTL exceeded" error message is returned to the sender.
+          /// @remarks The TTL value may be set to a value from 0 to 255. When this property is not set, the default TTL value for a socket is 32.
+          /// @remarks Setting this property on a Transmission Control Protocol (TCP) socket is ignored by the TCP/IP stack if a successful connection has been established using the socket.
+          /// @remarks If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
+          Property<int32> Ttl {
+            pcf_get {return this->GetTtl();},
+            pcf_set {this->SetTtl(value);}
+          };
 
           /// @brief Creates a new Socket for a newly created connection.
+          /// @return Socket A Socket for a newly created connection.
           /// @remarks Accept synchronously extracts the first pending connection request from the connection request queue of the listening socket, and then creates and returns a new Socket. You cannot use this returned Socket to accept any additional connections from the connection queue. However, you can call the RemoteEndPoint method of the returned Socket to identify the remote host's network address and port number.
           /// @remarks In blocking mode, Accept blocks until an incoming connection attempt is queued. Once a connection is accepted, the original Socket continues queuing incoming connection requests until you close it.
           /// @remarks If you call this method using a non-blocking Socket, and no connection requests are queued, Accept throws a SocketException. If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
           /// @note Before calling the Accept method, you must first call the Listen method to listen for and queue incoming connection requests.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
-          UniquePointer<Socket> Accept();
+          Socket Accept();
 
           /// @brief Associates a Socket with a local endpoint.
           /// @param localEndPoint The local EndPoint to associate with the Socket.
@@ -94,7 +328,14 @@ namespace Pcf {
           /// @note You must call the Bind method if you intend to receive connectionless datagrams using the ReceiveFrom method.
           /// @note If you receive a SocketException when calling the Bind method, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
-          void Bind(const SharedPointer<EndPoint>& localEndPoint);
+          template<typename TEndPoint>
+          void Bind(const TEndPoint& localEndPoint) {
+            if (this->data->socket == 0)
+              throw ObjectClosedException(pcf_current_information);
+            
+            this->data->localEndPoint = as<EndPoint>(localEndPoint.template MemberwiseClone<TEndPoint>());
+            InnerBind();
+          }
 
           /// @brief Closes the Socket connection and releases all associated resources.
           /// @remarks The Close method closes the remote host connection and releases all managed and unmanaged resources associated with the Socket. Upon closing, the Connected property is set to false.
@@ -116,7 +357,16 @@ namespace Pcf {
           /// @note If you are using a connection-oriented protocol and did not call Bind before calling Connect, the underlying service provider will assign the local network address and port number. If you are using a connectionless protocol, the service provider will not assign a local network address and port number until you complete a send or receive operation. If you want to change the default remote host, call Connect again with the desired endpoint.
           /// @note If the socket has been previously disconnected, then you cannot use this method to restore the connection. Use one of the asynchronous BeginConnect methods to reconnect. This is a limitation of the underlying provider.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
-          void Connect(SharedPointer<EndPoint> endPoint);
+          template<typename TEndPoint>
+          void Connect(const TEndPoint& endPoint) {
+            if (this->data->socket == 0)
+              throw ObjectClosedException(pcf_current_information);
+            if (this->data->listening == true)
+              throw InvalidOperationException(pcf_current_information);
+            
+            this->data->remoteEndPoint = as<EndPoint>(endPoint.template MemberwiseClone<TEndPoint>());
+            InnerConnect();
+          }
 
           /// @brief Establishes a connection to a remote host. The host is specified by an IP address and a port number.
           /// @param address The IP address of the remote host.
@@ -151,6 +401,8 @@ namespace Pcf {
           /// @note If the socket has been previously disconnected, then you cannot use this method to restore the connection. Use one of the asynchronous BeginConnect methods to reconnect. This is a limitation of the underlying provider.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
           void Connect(const Array<IPAddress>& addresses, int32 port);
+          
+          void Connect(const string& host, int32 port);
 
           /// @brief Closes the socket connection and allows reuse of the socket.
           /// @param reuseSocket true if this socket can be reused after the current connection is closed; otherwise, false.
@@ -172,219 +424,10 @@ namespace Pcf {
           /// @remarks If the process creating the socket uses asynchronous methods (BeginReceive or BeginSend), the process must first set the UseOnlyOverlappedIO property to true; otherwise, the socket is bound to the completion port of the creating process, which may cause an ArgumentNullException to be thrown on the target process.
           SocketInformation DuplicateAndClose(int32 targetProcessId);
 
-          /// @brief Gets the address family of the Socket.
-          /// @return AddressFamily One of the AddressFamily values.
-          /// @remarks The AddressFamily specifies the addressing scheme that an instance of the Socket class can use. This property is read-only and is set when the Socket is created.
-          Property<System::Net::Sockets::AddressFamily, ReadOnly> AddressFamily {
-            pcf_get->System::Net::Sockets::AddressFamily {return this->addressFamily;}
-          };
-
-          /// @brief Gets the amount of data that has been received from the network and is available to be read.
-          /// @return int32 The number of bytes of data received from the network and available to be read.
-          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @remarks If you are using a non-blocking Socket, Available is a good way to determine whether data is queued for reading, before calling Receive. The available data is the total amount of data queued in the network buffer for reading. If no data is queued in the network buffer, Available returns 0.
-          /// @remarks If the remote host shuts down or closes the connection, Available can throw a SocketException. If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
-          Property<int32, ReadOnly> Available {
-            pcf_get {return this->GetAvailable();}
-          };
-
-          /// @brief Gets a value that indicates whether the Socket is in blocking mode.
-          /// @return Boolean true if the Socket will block; otherwise, false. The default is true
-          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @remarks The Blocking property indicates whether a Socket is in blocking mode.
-          /// @remarks If you are in blocking mode, and you make a method call which does not complete immediately, your application will block execution until the requested operation completes. If you want execution to continue even though the requested operation is not complete, change the Blocking property to false. The Blocking property has no effect on asynchronous methods. If you are sending and receiving data asynchronously and want to block execution, use the ManualResetEvent class.
-          /// @note If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
-          /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
-          Property<bool, ReadOnly> Blocking {
-            pcf_get {return this->GetBlocking();}
-          };
-
-          /// @brief Gets a value that indicates whether a Socket is connected to a remote host as of the last Send or Receive operation.
-          /// @return Boolean true if the Socket was connected to a remote resource as of the most recent operation; otherwise, false.
-          Property<bool, ReadOnly> Connected {
-            pcf_get {return this->connected;}
-          };
-
-          /// @brief Gets a Boolean value that specifies whether the Socket allows Internet Protocol (IP) datagrams to be fragmented.
-          /// @return Boolean true if the Socket allows datagram fragmentation; otherwise, false. The default is true.
-          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @remarks Datagrams require fragmentation when their size exceeds the Maximum Transfer Unit (MTU) of the transmission medium. Datagrams may be fragmented by the sending host (all Internet Protocol versions) or an intermediate router (Internet Protocol Version 4 only). If a datagram must be fragmented, and the DontFragment option is set, the datagram is discarded, and an Internet Control Message Protocol (ICMP) error message is sent back to the sender of the datagram.
-          /// @remarks Setting this property on a Transmission Control Protocol (TCP) socket will have no effect.
-          Property<bool, ReadOnly> DontFragment {
-            pcf_get {return this->GetDontFragment();}
-          };
-
-          /// @brief Gets a Boolean value that specifies whether the Socket can send or receive broadcast packets.
-          /// @return Boolean true if the Socket allows only one socket to bind to a specific port; otherwise, false. The default is true.
-          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @remarks Broadcasting is limited to a specific subnet, and must use User Datagram Protocol (UDP.) For Internet Protocol version 4, you can broadcast to your local subnet by sending a packet to 255.255.255.255; or you can use the directed broadcast address, which is the network portion of an Internet Protocol (IP) address with all bits set in the host portion. For example, if your IP address is 192.168.1.40 (a Class C address, with a netmask of 255.255.255.0 -- the network portion is the first three octets, and the host portion is the last octet), your directed broadcast address is 192.168.1.255.
-          /// @remarks Setting this property on a Transmission Control Protocol (TCP) socket will have no effect.
-          Property<bool, ReadOnly> EnableBroadcast {
-            pcf_get {return this->GetEnableBroadcast();}
-          };
-
-          /// @brief Gets a Boolean value that specifies whether the Socket allows only one process to bind to a port.
-          /// @return Boolean true if the Socket allows broadcast packets; otherwise, false. The default is false.
-          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @remarks If ExclusiveAddressUse is false, multiple sockets can use the Bind method to bind to a specific port; however only one of the sockets can perform operations on the network traffic sent to the port. If more than one socket attempts to use the Bind(EndPoint) method to bind to a particular port, then the one with the more specific IP address will handle the network traffic sent to that port.
-          /// @remarks If ExclusiveAddressUse is true, the first use of the Bind method to attempt to bind to a particular port, regardless of Internet Protocol (IP) address, will succeed; all subsequent uses of the Bind method to attempt to bind to that port will fail until the original bound socket is destroyed.
-          /// @remarks This property must be set before Bind is called; otherwise an InvalidOperationException will be thrown.
-          Property<bool, ReadOnly> ExclusiveAddressUse {
-            pcf_get {return this->GetExclusiveAddressUse();}
-          };
-
-          /// @brief Gets the operating system handle for the Socket.
-          /// @return IntPtr An IntPtr that represents the operating system handle for the Socket.
-          Property<SocketHandle, ReadOnly> Handle {
-            pcf_get {return this->socket;}
-          };
-
-          /// @brief Gets a value that specifies whether the Socket will delay closing a socket in an attempt to send all pending data.
-          /// @return A LingerOption that specifies how to linger while closing a socket.
-          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @remarks The LingerState property changes the way Close method behaves. This property when set modifies the conditions under which the connection can be reset by Winsock. Connection resets can still occur based on the IP protocol behavior.
-          /// @remarks This property controls the length of time that a connection-oriented connection will remain open after a call to Close when data remains to be sent.
-          /// @remarks When you call methods to send data to a peer, this data is placed in the outgoing network buffer. This property can be used to ensure that this data is sent to the remote host before the Close method drops the connection.
-          /// @remarks To enable lingering, create a LingerOption instance containing the desired values, and set the LingerState property to this instance.
-          /// @remarks The following table describes the behavior of the Close method for the possible values of the Enabled property and the LingerTime property stored in the LingerState property.
-          /// | enable                              | seconds                                    | Behavior                                                                                                                          |
-          /// |-------------------------------------|--------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
-          /// | false (disabled), the default value | The time-out is not applicable, (default). | Attempts to send pending data for a connection-oriented socket (TCP, for example) until the default IP protocol time-out expires. |
-          /// | true (enabled)                      | A nonzero time-out                         | Attempts to send pending data until the specified time-out expires, and if the attempt fails, then Winsock resets the connection. |
-          /// | true (enabled)                      | A zero timeout.                            | Discards any pending data. For connection-oriented socket (TCP, for example), Winsock resets the connection.                      |
-          /// @remarks he IP stack computes the default IP protocol time-out period to use based on the round trip time of the connection. In most cases, the time-out computed by the stack is more relevant than one defined by an application. This is the default behavior for a socket when the LingerState property is not set.
-          /// @remarks When the LingerTime property stored in the LingerState property is set greater than the default IP protocol time-out, the default IP protocol time-out will still apply and virtual.
-          Property<LingerOption, ReadOnly> LingerState {
-            pcf_get {return this->GetLingerState();}
-          };
-
-          /// @brief Gets the local endpoint.
-          /// @return The EndPoint that the Socket is using for communications.
-          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @remarks The LocalEndPoint property gets an EndPoint that contains the local IP address and port number to which your Socket is bound. You must cast this EndPoint to an IPEndPoint before retrieving any information. You can then call the IPEndPoint.Address method to retrieve the local IPAddress, and the IPEndPoint.Port method to retrieve the local port number.
-          /// @remarks The LocalEndPoint property is usually set after you make a call to the Bind method. If you allow the system to assign your socket's local IP address and port number, the LocalEndPoint property will be set after the first I/O operation. For connection-oriented protocols, the first I/O operation would be a call to the Connect or Accept method. For connectionless protocols, the first I/O operation would be any of the send or receive calls.
-          /// @note If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
-          /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
-          Property<SharedPointer<EndPoint>, ReadOnly> LocalEndPoint {
-            pcf_get {return this->GetLocalEndPoint();}
-          };
-
-          /// @brief Gets a value that specifies whether outgoing multicast packets are delivered to the sending application.
-          /// @return Boolean true if the Socket receives outgoing multicast packets; otherwise, false.
-          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @remarks Multicast is a scalable method for many-to-many communication on the Internet. A process subscribes to a multicast address; then, any packets sent by a subscribed process are received by every other process subscribed to the multicast address.
-          /// @remarks Setting this property on a Transmission Control Protocol (TCP) socket will have no effect.
-          Property<bool, ReadOnly> MulticastLoopback {
-            pcf_get {return this->GetMulticastLoopback();}
-          };
-
-          /// @brief Gets a Boolean value that specifies whether the stream Socket is using the Nagle algorithm.
-          /// @return Boolean false if the Socket uses the Nagle algorithm; otherwise, true. The default is false.
-          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @remarks The Nagle algorithm is designed to reduce network traffic by causing the socket to buffer small packets and then combine and send them in one packet under certain circumstances. A TCP packet consists of 40 bytes of header plus the data being sent. When small packets of data are sent with TCP, the overhead resulting from the TCP header can become a significant part of the network traffic. On heavily loaded networks, the congestion resulting from this overhead can result in lost datagrams and retransmissions, as well as excessive propagation time caused by congestion. The Nagle algorithm inhibits the sending of new TCP segments when new outgoing data arrives from the user if any previouslytransmitted data on the connection remains unacknowledged.
-          /// @remarks The majority of network applications should use the Nagle algorithm.
-          /// @remarks Setting this property on a User Datagram Protocol (UDP) socket will have no effect.
-          Property<bool, ReadOnly> NoDelay {
-            pcf_get {return this->GetNoDelay();}
-          };
-
-          /// @brief Indicates whether the underlying operating system and network adaptors support Internet Protocol version 4 (IPv4).
-          /// @return Boolean true if the operating system and network adaptors support the IPv4 protocol; otherwise, false.
-          /// @remarks The majority of operating system may support both IPv4 and IPv6 protocols.
-          static Property<bool, ReadOnly> OSSupportsIPv4;
-
-          /// @brief Indicates whether the underlying operating system and network adaptors support Internet Protocol version 6 (IPv6).
-          /// @return Boolean true if the operating system and network adaptors support the IPv6 protocol; otherwise, false.
-          /// @remarks The majority of operating system may support both IPv4 and IPv6 protocols.
-          static Property<bool, ReadOnly> OSSupportsIPv6;
-
-          /// @brief Gets the protocol type of the Socket.
-          /// @return One of the ProtocolType values.
-          /// @remarks The ProtocolType property is set when the Socket is created, and specifies the protocol used by that Socket.
-          Property<System::Net::Sockets::ProtocolType, ReadOnly> ProtocolType {
-            pcf_get {return this->protocolType;}
-          };
-
-          /// @brief Gets a value that specifies the size of the receive buffer of the Socket.
-          /// @return An int32 that contains the size, in bytes, of the receive buffer. The default is 8192.
-          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @remarks A larger buffer size potentially reduces the number of empty acknowledgements (TCP packets with no data portion), but might also delay the recognition of connection difficulties. Consider increasing the buffer size if you are transferring large files, or you are using a high bandwidth, high latency connection (such as a satellite broadband provider.)
-          Property<int32, ReadOnly> ReceiveBufferSize {
-            pcf_get {return this->GetReceiveBufferSize();}
-          };
-
-          /// @brief Gets a value that specifies the amount of time after which a synchronous Receive call will time out.
-          /// @return The time-out value, in milliseconds. The default value is 0, which indicates an infinite time-out period. Specifying -1 also indicates an infinite time-out period.
-          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @remarks This option applies to synchronous Receive calls only. If the time-out period is exceeded, the Receive method will throw a SocketException.
-          Property<int32> ReceiveTimeout {
-            pcf_get {return this->GetReceiveTimeout();},
-            pcf_set {this->SetReceiveTimeout(value);}
-          };
-
-          /// @brief Gets the remote endpoint.
-          /// @return The EndPoint with which the Socket is communicating.
-          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @remarks If you are using a connection-oriented protocol, the RemoteEndPoint property gets the EndPoint that contains the remote IP address and port number to which the Socket is connected. If you are using a connectionless protocol, RemoteEndPoint contains the default remote IP address and port number with which the Socket will communicate. You must cast this EndPoint to an IPEndPoint before retrieving any information. You can then call the IPEndPoint.Address method to retrieve the remote IPAddress, and the IPEndPoint.Port method to retrieve the remote port number.
-          /// @remarks The RemoteEndPoint is set after a call to either Accept or Connect. If you try to access this property earlier, RemoteEndPoint will throw a SocketException. If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
-          /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
-          Property<const EndPoint&, ReadOnly> RemoteEndPoint {
-            pcf_get->const EndPoint& {return this->GetRemoteEndPoint();}
-          };
-
-          /// @brief Gets a value that specifies the size of the send buffer of the Socket.
-          /// @return An int32 that contains the size, in bytes, of the send buffer. The default is 8192.
-          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @remarks A larger buffer size potentially reduces the number of empty acknowledgements (TCP packets with no data portion), but might also delay the recognition of connection difficulties. Consider increasing the buffer size if you are transferring large files, or you are using a high bandwidth, high latency connection (such as a satellite broadband provider.)
-          Property<int32, ReadOnly> SendBufferSize {
-            pcf_get {return this->GetSendBufferSize();}
-          };
-
-          /// @brief Gets a value that specifies the amount of time after which a synchronous Send call will time out.
-          /// @return The time-out value, in milliseconds. The default value is 0, which indicates an infinite time-out period. Specifying -1 also indicates an infinite time-out period.
-          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @remarks This option applies to synchronous Receive calls only. If the time-out period is exceeded, the Receive method will throw a SocketException.
-          Property<int32, ReadOnly> SendTimeout {
-            pcf_get {return this->GetSendTimeout();}
-          };
-          
-          /// @brief Gets the type of the Socket.
-          /// @return SocketType One of the SocketType values.
-          /// @remarks SocketType is read-only and is set when the Socket is created.
-          Property<System::Net::Sockets::SocketType, ReadOnly> SocketType {
-            pcf_get {return this->socketType;}
-          };
-          
-          /// @brief Gets a value that specifies the Time To Live (TTL) value of Internet Protocol (IP) packets sent by the Socket.
-          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information. - or - socketOptionName was set to the unsupported value SocketOptionNameMaxConnections.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @return The TTL value.
-          /// @remarks The TTL value indicates the maximum number of routers the packet can traverse before the router discards the packet and an Internet Control Message Protocol (ICMP) "TTL exceeded" error message is returned to the sender.
-          /// @remarks The TTL value may be set to a value from 0 to 255. When this property is not set, the default TTL value for a socket is 32.
-          /// @remarks Setting this property on a Transmission Control Protocol (TCP) socket is ignored by the TCP/IP stack if a successful connection has been established using the socket.
-          /// @remarks If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
-          Property<int32, ReadOnly> Ttl {
-            pcf_get {return this->GetTtl();}
-          };
-
           /// @brief Returns the value of a specified Socket option, represented as an object.
           /// @param socketOptionLevel One of the SocketOptionLevel values.
           /// @param socketOptionName One of the SocketOptionName values.
-          /// @return object* An object that represents the value of the option. When the socketOptionName parameter is set to SocketoptionNameLinger the return value is an instance of the LingerOption class. When socketOptionName is set to SocketOptionNameAddMembership or SocketOptionDropMembership, the return value is an instance of the MulticastOption class. When socketOptionName is any other value, the return value is an int32.
+          /// @return object An object that represents the value of the option. When the socketOptionName parameter is set to SocketoptionNameLinger the return value is an instance of the LingerOption class. When socketOptionName is set to SocketOptionNameAddMembership or SocketOptionDropMembership, the return value is an instance of the MulticastOption class. When socketOptionName is any other value, the return value is an int32.
           /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information. - or - socketOptionName was set to the unsupported value SocketOptionNameMaxConnections.
           /// @exception ObjectClosedException The Socket has been closed.
           /// @remarks Socket options determine the behavior of the current Socket. Use this overload to get the SocketOptionNameLinger, SocketOptionNameAddMembership, and SocketOptionNameDropMembership Socket options. For the SocketOptionNameLinger option, use Socket for the socketOptionLevel parameter. For SocketOptionNameAddMembership and SocketOptionNameDropMembership, use IP. If you want to set the value of any of the options listed above, use the SetSocketOption method.
@@ -402,13 +445,8 @@ namespace Pcf {
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
           int32 IOControl(IOControlCode ioControlCode, const Array<byte>& optionInValue, Array<byte>& optionOutValue);
 
-          /// @brief Gets a value that indicates whether the Socket is bound to a specific local port.
-          /// @return true if the Socket is bound to a local port; otherwise, false.
-          /// @remarks A socket is considered bound to a local port if it is explicitly bound by calling the Bind method, or implicitly bound by calling members like Connect, SendTo, or ReceiveFrom, which use an ephemeral local port (a free port greater than 1024, selected by the operating system.) Servers use the Bind method to bind to a well-known port so that clients may connect to them.
-          bool IsBound() const { return this->bound; }
-
           /// @brief Places a Socket in a listening state.
-          /// @param backLog The maximum length of the pending connections queue.
+          /// @param backlog The maximum length of the pending connections queue.
           /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
           /// @exception ObjectClosedException The Socket has been closed.
           /// @remarks Listen causes a connection-oriented Socket to listen for incoming connection attempts. The backlog parameter specifies the number of incoming connections that can be queued for acceptance. To determine the maximum number of connections you can specify, retrieve the MaxConnections value. Listen does not block.
@@ -416,7 +454,7 @@ namespace Pcf {
           /// @note You must call the Bind method before calling Listen, or Listen will throw a SocketException.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
           /// @note The backlog parameter is limited to different values depending on the Operating System. You may specify a higher value, but the backlog will be limited based on the Operating System::
-          void Listen(int32 backLog);
+          void Listen(int32 backlog);
 
           /// @brief Determines the status of the Socket.
           /// @param microseconds The time to wait for a response, in microseconds.
@@ -436,6 +474,175 @@ namespace Pcf {
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
           bool Poll(int32 microseconds, SelectMode mode);
 
+          /// @brief Receives data from a bound Socket into a receive buffer.
+          /// @param buffer An array of type Byte that is the storage location for the received data.
+          /// @return int32 The number of bytes received.
+          /// @exception ArgumentNullException bufer is null
+          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
+          /// @exception ObjectClosedException The Socket has been closed.
+          /// @remarks The Receive method reads data into the buffer parameter and returns the number of bytes successfully read. You can call Receive from both connection-oriented and connectionless sockets.
+          /// @remarks This overload only requires you to provide a receive buffer. The buffer offset defaults to 0, the size defaults to the length of the buffer parameter, and the SocketFlags value defaults to None.
+          /// @remarks If you are using a connection-oriented protocol, you must either call Connect to establish a remote host connection, or Accept to accept an incoming connection prior to calling Receive. The Receive method will only read data that arrives from the remote host established in the Connect or Accept method. If you are using a connectionless protocol, you can also use the ReceiveFrom method. ReceiveFrom will allow you to receive data arriving from any host.
+          /// @remarks If no data is available for reading, the Receive method will block until data is available, unless a time-out value was set by using Socket.ReceiveTimeout. If the time-out value was exceeded, the Receive call will throw a SocketException. If you are in non-blocking mode, and there is no data available in the in the protocol stack buffer, the Receive method will complete immediately and throw a SocketException. You can use the Available property to determine if data is available for reading. When Available is non-zero, retry the receive operation.
+          /// @remarks If you are using a connection-oriented Socket, the Receive method will read as much data as is available, up to the size of the buffer. If the remote host shuts down the Socket connection with the Shutdown method, and all available data has been received, the Receive method will complete immediately and return zero bytes.
+          /// @remarks If you are using a connectionless Socket, Receive will read the first queued datagram from the destination address you specify in the Connect method. If the datagram you receive is larger than the size of the buffer parameter, buffer gets filled with the first part of the message, the excess data is lost and a SocketException is thrown.
+          /// @note If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
+          /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
+          int32 Receive(Array<byte>& buffer) {return this->Receive(buffer, 0, buffer.Length, SocketFlags::None);}
+          
+          /// @brief Receives data from a bound Socket into a receive buffer, using the specified SocketFlags.
+          /// @param buffer An array of type Byte that is the storage location for the received data.
+          /// @param socketFlags A bitwise combination of the SocketFlags values.
+          /// @return int32 The number of bytes received.
+          /// @exception ArgumentNullException bufer is null
+          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
+          /// @exception ObjectClosedException The Socket has been closed.
+          /// @remarks The Receive method reads data into the buffer parameter and returns the number of bytes successfully read. You can call Receive from both connection-oriented and connectionless sockets.
+          /// @remarks This overload only requires you to provide a receive buffer. The buffer offset defaults to 0, the size defaults to the length of the buffer parameter, and the SocketFlags value defaults to None.
+          /// @remarks If you are using a connection-oriented protocol, you must either call Connect to establish a remote host connection, or Accept to accept an incoming connection prior to calling Receive. The Receive method will only read data that arrives from the remote host established in the Connect or Accept method. If you are using a connectionless protocol, you can also use the ReceiveFrom method. ReceiveFrom will allow you to receive data arriving from any host.
+          /// @remarks If no data is available for reading, the Receive method will block until data is available, unless a time-out value was set by using Socket.ReceiveTimeout. If the time-out value was exceeded, the Receive call will throw a SocketException. If you are in non-blocking mode, and there is no data available in the in the protocol stack buffer, the Receive method will complete immediately and throw a SocketException. You can use the Available property to determine if data is available for reading. When Available is non-zero, retry the receive operation.
+          /// @remarks If you are using a connection-oriented Socket, the Receive method will read as much data as is available, up to the size of the buffer. If the remote host shuts down the Socket connection with the Shutdown method, and all available data has been received, the Receive method will complete immediately and return zero bytes.
+          /// @remarks If you are using a connectionless Socket, Receive will read the first queued datagram from the destination address you specify in the Connect method. If the datagram you receive is larger than the size of the buffer parameter, buffer gets filled with the first part of the message, the excess data is lost and a SocketException is thrown.
+          /// @note If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
+          /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
+          int32 Receive(Array<byte>& buffer, SocketFlags socketFlags) {return this->Receive(buffer, 0, buffer.Length, socketFlags);}
+
+          /// @brief Receives the specified number of bytes of data from a bound Socket into a receive buffer, using the specified SocketFlags.
+          /// @param buffer An array of type Byte that is the storage location for the received data.
+          /// @param size The number of bytes to receive.
+          /// @param socketFlags A bitwise combination of the SocketFlags values.
+          /// @return int32 The number of bytes received.
+          /// @exception ArgumentNullException bufer is null
+          /// @exception ArgumentOutOfRangeException size is less than 0 or exceeds the size of the buffer.
+          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
+          /// @exception ObjectClosedException The Socket has been closed.
+          /// @remarks The Receive method reads data into the buffer parameter and returns the number of bytes successfully read. You can call Receive from both connection-oriented and connectionless sockets.
+          /// @remarks This overload only requires you to provide a receive buffer. The buffer offset defaults to 0, the size defaults to the length of the buffer parameter, and the SocketFlags value defaults to None.
+          /// @remarks If you are using a connection-oriented protocol, you must either call Connect to establish a remote host connection, or Accept to accept an incoming connection prior to calling Receive. The Receive method will only read data that arrives from the remote host established in the Connect or Accept method. If you are using a connectionless protocol, you can also use the ReceiveFrom method. ReceiveFrom will allow you to receive data arriving from any host.
+          /// @remarks If no data is available for reading, the Receive method will block until data is available, unless a time-out value was set by using Socket.ReceiveTimeout. If the time-out value was exceeded, the Receive call will throw a SocketException. If you are in non-blocking mode, and there is no data available in the in the protocol stack buffer, the Receive method will complete immediately and throw a SocketException. You can use the Available property to determine if data is available for reading. When Available is non-zero, retry the receive operation.
+          /// @remarks If you are using a connection-oriented Socket, the Receive method will read as much data as is available, up to the size of the buffer. If the remote host shuts down the Socket connection with the Shutdown method, and all available data has been received, the Receive method will complete immediately and return zero bytes.
+          /// @remarks If you are using a connectionless Socket, Receive will read the first queued datagram from the destination address you specify in the Connect method. If the datagram you receive is larger than the size of the buffer parameter, buffer gets filled with the first part of the message, the excess data is lost and a SocketException is thrown.
+          /// @note If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
+          /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
+          int32 Receive(Array<byte>& buffer, int32 size, SocketFlags socketFlags) {return this->Receive(buffer, 0, size, socketFlags);}
+
+          /// @brief Receives the specified number of bytes from a bound Socket into the specified offset position of the receive buffer, using the specified SocketFlags.
+          /// @param buffer An array of type Byte that is the storage location for the received data.
+          /// @param offset The location in buffer to store the received data.
+          /// @param size The number of bytes to receive.
+          /// @param socketFlags A bitwise combination of the SocketFlags values.
+          /// @return int32 The number of bytes received.
+          /// @exception ArgumentNullException bufer is null
+          /// @exception ArgumentOutOfRangeException offset is less than 0. -or- offset is greater than the length of buffer. -or- size is less than 0. -or- size is greater than the length of buffer minus the value of the offset parameter.
+          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
+          /// @exception ObjectClosedException The Socket has been closed.
+          /// @remarks The Receive method reads data into the buffer parameter and returns the number of bytes successfully read. You can call Receive from both connection-oriented and connectionless sockets.
+          /// @remarks This overload only requires you to provide a receive buffer. The buffer offset defaults to 0, the size defaults to the length of the buffer parameter, and the SocketFlags value defaults to None.
+          /// @remarks If you are using a connection-oriented protocol, you must either call Connect to establish a remote host connection, or Accept to accept an incoming connection prior to calling Receive. The Receive method will only read data that arrives from the remote host established in the Connect or Accept method. If you are using a connectionless protocol, you can also use the ReceiveFrom method. ReceiveFrom will allow you to receive data arriving from any host.
+          /// @remarks If no data is available for reading, the Receive method will block until data is available, unless a time-out value was set by using Socket.ReceiveTimeout. If the time-out value was exceeded, the Receive call will throw a SocketException. If you are in non-blocking mode, and there is no data available in the in the protocol stack buffer, the Receive method will complete immediately and throw a SocketException. You can use the Available property to determine if data is available for reading. When Available is non-zero, retry the receive operation.
+          /// @remarks If you are using a connection-oriented Socket, the Receive method will read as much data as is available, up to the size of the buffer. If the remote host shuts down the Socket connection with the Shutdown method, and all available data has been received, the Receive method will complete immediately and return zero bytes.
+          /// @remarks If you are using a connectionless Socket, Receive will read the first queued datagram from the destination address you specify in the Connect method. If the datagram you receive is larger than the size of the buffer parameter, buffer gets filled with the first part of the message, the excess data is lost and a SocketException is thrown.
+          /// @note If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
+          /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
+          int32 Receive(Array<byte>& buffer, int32 offset, int32 size, SocketFlags socketFlags);
+          
+          /// @brief Receives the specified number of bytes from a bound Socket into the specified offset position of the receive buffer, using the specified SocketFlags.
+          /// @param buffer An array of type Byte that is the storage location for the received data.
+          /// @param offset The location in buffer to store the received data.
+          /// @param size The number of bytes to receive.
+          /// @param socketFlags A bitwise combination of the SocketFlags values.
+          /// @param errorCode A SocketError object that stores the socket error.
+          /// @return int32 The number of bytes received.
+          /// @exception ArgumentNullException bufer is null
+          /// @exception ArgumentOutOfRangeException offset is less than 0. -or- offset is greater than the length of buffer. -or- size is less than 0. -or- size is greater than the length of buffer minus the value of the offset parameter.
+          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
+          /// @exception ObjectClosedException The Socket has been closed.
+          /// @remarks The Receive method reads data into the buffer parameter and returns the number of bytes successfully read. You can call Receive from both connection-oriented and connectionless sockets.
+          /// @remarks This overload only requires you to provide a receive buffer. The buffer offset defaults to 0, the size defaults to the length of the buffer parameter, and the SocketFlags value defaults to None.
+          /// @remarks If you are using a connection-oriented protocol, you must either call Connect to establish a remote host connection, or Accept to accept an incoming connection prior to calling Receive. The Receive method will only read data that arrives from the remote host established in the Connect or Accept method. If you are using a connectionless protocol, you can also use the ReceiveFrom method. ReceiveFrom will allow you to receive data arriving from any host.
+          /// @remarks If no data is available for reading, the Receive method will block until data is available, unless a time-out value was set by using Socket.ReceiveTimeout. If the time-out value was exceeded, the Receive call will throw a SocketException. If you are in non-blocking mode, and there is no data available in the in the protocol stack buffer, the Receive method will complete immediately and throw a SocketException. You can use the Available property to determine if data is available for reading. When Available is non-zero, retry the receive operation.
+          /// @remarks If you are using a connection-oriented Socket, the Receive method will read as much data as is available, up to the size of the buffer. If the remote host shuts down the Socket connection with the Shutdown method, and all available data has been received, the Receive method will complete immediately and return zero bytes.
+          /// @remarks If you are using a connectionless Socket, Receive will read the first queued datagram from the destination address you specify in the Connect method. If the datagram you receive is larger than the size of the buffer parameter, buffer gets filled with the first part of the message, the excess data is lost and a SocketException is thrown.
+          /// @note If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
+          /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
+          int32 Receive(Array<byte>& buffer, int32 offset, int32 size, SocketFlags socketFlags, SocketError& error);
+
+          /// @brief Receives data from a bound Socket into a receive buffer.
+          /// @param buffer An array of type Byte that is the storage location for the received data.
+          /// @param endPoint: the remote host
+          /// @return int32 The number of bytes received.
+          /// @exception ArgumentNullException bufer is null
+          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
+          /// @exception ObjectClosedException The Socket has been closed.
+          /// @remarks The Receive method reads data into the buffer parameter and returns the number of bytes successfully read. You can call Receive from both connection-oriented and connectionless sockets.
+          /// @remarks This overload only requires you to provide a receive buffer. The buffer offset defaults to 0, the size defaults to the length of the buffer parameter, and the SocketFlags value defaults to None.
+          /// @remarks If you are using a connection-oriented protocol, you must either call Connect to establish a remote host connection, or Accept to accept an incoming connection prior to calling Receive. The Receive method will only read data that arrives from the remote host established in the Connect or Accept method. If you are using a connectionless protocol, you can also use the ReceiveFrom method. ReceiveFrom will allow you to receive data arriving from any host.
+          /// @remarks If no data is available for reading, the Receive method will block until data is available, unless a time-out value was set by using Socket.ReceiveTimeout. If the time-out value was exceeded, the Receive call will throw a SocketException. If you are in non-blocking mode, and there is no data available in the in the protocol stack buffer, the Receive method will complete immediately and throw a SocketException. You can use the Available property to determine if data is available for reading. When Available is non-zero, retry the receive operation.
+          /// @remarks If you are using a connection-oriented Socket, the Receive method will read as much data as is available, up to the size of the buffer. If the remote host shuts down the Socket connection with the Shutdown method, and all available data has been received, the Receive method will complete immediately and return zero bytes.
+          /// @remarks If you are using a connectionless Socket, Receive will read the first queued datagram from the destination address you specify in the Connect method. If the datagram you receive is larger than the size of the buffer parameter, buffer gets filled with the first part of the message, the excess data is lost and a SocketException is thrown.
+          /// @note If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
+          /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
+          int32 ReceiveFrom(Array<byte>& buffer, IPEndPoint& endPoint) {return this->ReceiveFrom(buffer, 0, buffer.Length, SocketFlags::None, endPoint);}
+
+          /// @brief Receives data from a bound Socket into a receive buffer, using the specified SocketFlags.
+          /// @param buffer An array of type Byte that is the storage location for the received data.
+          /// @param socketFlags A bitwise combination of the SocketFlags values.
+          /// @param endPoint: the remote host
+          /// @return int32 The number of bytes received.
+          /// @exception ArgumentNullException bufer is null
+          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
+          /// @exception ObjectClosedException The Socket has been closed.
+          /// @remarks The Receive method reads data into the buffer parameter and returns the number of bytes successfully read. You can call Receive from both connection-oriented and connectionless sockets.
+          /// @remarks This overload only requires you to provide a receive buffer. The buffer offset defaults to 0, the size defaults to the length of the buffer parameter, and the SocketFlags value defaults to None.
+          /// @remarks If you are using a connection-oriented protocol, you must either call Connect to establish a remote host connection, or Accept to accept an incoming connection prior to calling Receive. The Receive method will only read data that arrives from the remote host established in the Connect or Accept method. If you are using a connectionless protocol, you can also use the ReceiveFrom method. ReceiveFrom will allow you to receive data arriving from any host.
+          /// @remarks If no data is available for reading, the Receive method will block until data is available, unless a time-out value was set by using Socket.ReceiveTimeout. If the time-out value was exceeded, the Receive call will throw a SocketException. If you are in non-blocking mode, and there is no data available in the in the protocol stack buffer, the Receive method will complete immediately and throw a SocketException. You can use the Available property to determine if data is available for reading. When Available is non-zero, retry the receive operation.
+          /// @remarks If you are using a connection-oriented Socket, the Receive method will read as much data as is available, up to the size of the buffer. If the remote host shuts down the Socket connection with the Shutdown method, and all available data has been received, the Receive method will complete immediately and return zero bytes.
+          /// @remarks If you are using a connectionless Socket, Receive will read the first queued datagram from the destination address you specify in the Connect method. If the datagram you receive is larger than the size of the buffer parameter, buffer gets filled with the first part of the message, the excess data is lost and a SocketException is thrown.
+          /// @note If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
+          /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
+          int32 ReceiveFrom(Array<byte>& buffer, SocketFlags socketFlags, IPEndPoint& endPoint) {return this->ReceiveFrom(buffer, 0, buffer.Length, socketFlags, endPoint);}
+
+          /// @brief Receives the specified number of bytes of data from a bound Socket into a receive buffer, using the specified SocketFlags.
+          /// @param buffer An array of type Byte that is the storage location for the received data.
+          /// @param size The number of bytes to receive.
+          /// @param socketFlags A bitwise combination of the SocketFlags values.
+          /// @param endPoint: the remote host
+          /// @return int32 The number of bytes received.
+          /// @exception ArgumentNullException bufer is null
+          /// @exception ArgumentOutOfRangeException size is less than 0 or exceeds the size of the buffer.
+          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
+          /// @exception ObjectClosedException The Socket has been closed.
+          /// @remarks The Receive method reads data into the buffer parameter and returns the number of bytes successfully read. You can call Receive from both connection-oriented and connectionless sockets.
+          /// @remarks This overload only requires you to provide a receive buffer. The buffer offset defaults to 0, the size defaults to the length of the buffer parameter, and the SocketFlags value defaults to None.
+          /// @remarks If you are using a connection-oriented protocol, you must either call Connect to establish a remote host connection, or Accept to accept an incoming connection prior to calling Receive. The Receive method will only read data that arrives from the remote host established in the Connect or Accept method. If you are using a connectionless protocol, you can also use the ReceiveFrom method. ReceiveFrom will allow you to receive data arriving from any host.
+          /// @remarks If no data is available for reading, the Receive method will block until data is available, unless a time-out value was set by using Socket.ReceiveTimeout. If the time-out value was exceeded, the Receive call will throw a SocketException. If you are in non-blocking mode, and there is no data available in the in the protocol stack buffer, the Receive method will complete immediately and throw a SocketException. You can use the Available property to determine if data is available for reading. When Available is non-zero, retry the receive operation.
+          /// @remarks If you are using a connection-oriented Socket, the Receive method will read as much data as is available, up to the size of the buffer. If the remote host shuts down the Socket connection with the Shutdown method, and all available data has been received, the Receive method will complete immediately and return zero bytes.
+          /// @remarks If you are using a connectionless Socket, Receive will read the first queued datagram from the destination address you specify in the Connect method. If the datagram you receive is larger than the size of the buffer parameter, buffer gets filled with the first part of the message, the excess data is lost and a SocketException is thrown.
+          /// @note If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
+          /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
+          int32 ReceiveFrom(Array<byte>& buffer, int32 size, SocketFlags socketFlags, IPEndPoint& endPoint) {return this->ReceiveFrom(buffer, 0, size, socketFlags, endPoint);}
+
+          /// @brief Receives the specified number of bytes from a bound Socket into the specified offset position of the receive buffer, using the specified SocketFlags.
+          /// @param buffer An array of type Byte that is the storage location for the received data.
+          /// @param offset The location in buffer to store the received data.
+          /// @param size The number of bytes to receive.
+          /// @param socketFlags A bitwise combination of the SocketFlags values.
+          /// @param endPoint: the remote host
+          /// @return int32 The number of bytes received.
+          /// @exception ArgumentNullException bufer is null
+          /// @exception ArgumentOutOfRangeException offset is less than 0. -or- offset is greater than the length of buffer. -or- size is less than 0. -or- size is greater than the length of buffer minus the value of the offset parameter.
+          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
+          /// @exception ObjectClosedException The Socket has been closed.
+          /// @remarks The Receive method reads data into the buffer parameter and returns the number of bytes successfully read. You can call Receive from both connection-oriented and connectionless sockets.
+          /// @remarks This overload only requires you to provide a receive buffer. The buffer offset defaults to 0, the size defaults to the length of the buffer parameter, and the SocketFlags value defaults to None.
+          /// @remarks If you are using a connection-oriented protocol, you must either call Connect to establish a remote host connection, or Accept to accept an incoming connection prior to calling Receive. The Receive method will only read data that arrives from the remote host established in the Connect or Accept method. If you are using a connectionless protocol, you can also use the ReceiveFrom method. ReceiveFrom will allow you to receive data arriving from any host.
+          /// @remarks If no data is available for reading, the Receive method will block until data is available, unless a time-out value was set by using Socket.ReceiveTimeout. If the time-out value was exceeded, the Receive call will throw a SocketException. If you are in non-blocking mode, and there is no data available in the in the protocol stack buffer, the Receive method will complete immediately and throw a SocketException. You can use the Available property to determine if data is available for reading. When Available is non-zero, retry the receive operation.
+          /// @remarks If you are using a connection-oriented Socket, the Receive method will read as much data as is available, up to the size of the buffer. If the remote host shuts down the Socket connection with the Shutdown method, and all available data has been received, the Receive method will complete immediately and return zero bytes.
+          /// @remarks If you are using a connectionless Socket, Receive will read the first queued datagram from the destination address you specify in the Connect method. If the datagram you receive is larger than the size of the buffer parameter, buffer gets filled with the first part of the message, the excess data is lost and a SocketException is thrown.
+          /// @note If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
+          /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
+          int32 ReceiveFrom(Array<byte>& buffer, int32 offset, int32 size, SocketFlags socketFlags, IPEndPoint& endPoint);
+          
           /// @brief Determines the status of one or more sockets.
           /// @param checkRead An IList of Socket instances to check for readability.
           /// @param checkWrite An IList of Socket instances to check for writability.
@@ -459,311 +666,7 @@ namespace Pcf {
           /// @note You must attempt to send or receive data to detect these kinds of errors.
           /// @note If you receive a SocketException, use the SocketException::ErrorCode property to obtain the specific error code. After you have obtained this code,
           /// @note refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
-          static int32 Select(Collections::Generic::IList< SharedPointer<Socket>>& checkRead, Collections::Generic::IList< SharedPointer<Socket>>& checkWrite, Collections::Generic::IList<SharedPointer<Socket>>& checkError, int32 microseconds);
-
-          /// @brief Receives data from a bound Socket into a receive buffer.
-          /// @param buffer An array of type Byte that is the storage location for the received data.
-          /// @return int32 The number of bytes received.
-          /// @exception ArgumentNullException bufer is null
-          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @remarks The Receive method reads data into the buffer parameter and returns the number of bytes successfully read. You can call Receive from both connection-oriented and connectionless sockets.
-          /// @remarks This overload only requires you to provide a receive buffer. The buffer offset defaults to 0, the size defaults to the length of the buffer parameter, and the SocketFlags value defaults to None.
-          /// @remarks If you are using a connection-oriented protocol, you must either call Connect to establish a remote host connection, or Accept to accept an incoming connection prior to calling Receive. The Receive method will only read data that arrives from the remote host established in the Connect or Accept method. If you are using a connectionless protocol, you can also use the ReceiveFrom method. ReceiveFrom will allow you to receive data arriving from any host.
-          /// @remarks If no data is available for reading, the Receive method will block until data is available, unless a time-out value was set by using Socket.ReceiveTimeout. If the time-out value was exceeded, the Receive call will throw a SocketException. If you are in non-blocking mode, and there is no data available in the in the protocol stack buffer, the Receive method will complete immediately and throw a SocketException. You can use the Available property to determine if data is available for reading. When Available is non-zero, retry the receive operation.
-          /// @remarks If you are using a connection-oriented Socket, the Receive method will read as much data as is available, up to the size of the buffer. If the remote host shuts down the Socket connection with the Shutdown method, and all available data has been received, the Receive method will complete immediately and return zero bytes.
-          /// @remarks If you are using a connectionless Socket, Receive will read the first queued datagram from the destination address you specify in the Connect method. If the datagram you receive is larger than the size of the buffer parameter, buffer gets filled with the first part of the message, the excess data is lost and a SocketException is thrown.
-          /// @note If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
-          /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
-          int32 Receive(Array<byte>& buffer);
-
-          /// @brief Receives data from a bound Socket into a receive buffer.
-          /// @param buffer An array of type Byte that is the storage location for the received data.
-          /// @param length The buffer length.
-          /// @return int32 The number of bytes received.
-          /// @exception ArgumentNullException bufer is null
-          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @remarks The Receive method reads data into the buffer parameter and returns the number of bytes successfully read. You can call Receive from both connection-oriented and connectionless sockets.
-          /// @remarks This overload only requires you to provide a receive buffer. The buffer offset defaults to 0, the size defaults to the length of the buffer parameter, and the SocketFlags value defaults to None.
-          /// @remarks If you are using a connection-oriented protocol, you must either call Connect to establish a remote host connection, or Accept to accept an incoming connection prior to calling Receive. The Receive method will only read data that arrives from the remote host established in the Connect or Accept method. If you are using a connectionless protocol, you can also use the ReceiveFrom method. ReceiveFrom will allow you to receive data arriving from any host.
-          /// @remarks If no data is available for reading, the Receive method will block until data is available, unless a time-out value was set by using Socket.ReceiveTimeout. If the time-out value was exceeded, the Receive call will throw a SocketException. If you are in non-blocking mode, and there is no data available in the in the protocol stack buffer, the Receive method will complete immediately and throw a SocketException. You can use the Available property to determine if data is available for reading. When Available is non-zero, retry the receive operation.
-          /// @remarks If you are using a connection-oriented Socket, the Receive method will read as much data as is available, up to the size of the buffer. If the remote host shuts down the Socket connection with the Shutdown method, and all available data has been received, the Receive method will complete immediately and return zero bytes.
-          /// @remarks If you are using a connectionless Socket, Receive will read the first queued datagram from the destination address you specify in the Connect method. If the datagram you receive is larger than the size of the buffer parameter, buffer gets filled with the first part of the message, the excess data is lost and a SocketException is thrown.
-          /// @note If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
-          /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
-          int32 Receive(byte buffer[], int32 length);
-
-          /// @brief Receives data from a bound Socket into a receive buffer, using the specified SocketFlags.
-          /// @param buffer An array of type Byte that is the storage location for the received data.
-          /// @param socketFlags A bitwise combination of the SocketFlags values.
-          /// @return int32 The number of bytes received.
-          /// @exception ArgumentNullException bufer is null
-          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @remarks The Receive method reads data into the buffer parameter and returns the number of bytes successfully read. You can call Receive from both connection-oriented and connectionless sockets.
-          /// @remarks This overload only requires you to provide a receive buffer. The buffer offset defaults to 0, the size defaults to the length of the buffer parameter, and the SocketFlags value defaults to None.
-          /// @remarks If you are using a connection-oriented protocol, you must either call Connect to establish a remote host connection, or Accept to accept an incoming connection prior to calling Receive. The Receive method will only read data that arrives from the remote host established in the Connect or Accept method. If you are using a connectionless protocol, you can also use the ReceiveFrom method. ReceiveFrom will allow you to receive data arriving from any host.
-          /// @remarks If no data is available for reading, the Receive method will block until data is available, unless a time-out value was set by using Socket.ReceiveTimeout. If the time-out value was exceeded, the Receive call will throw a SocketException. If you are in non-blocking mode, and there is no data available in the in the protocol stack buffer, the Receive method will complete immediately and throw a SocketException. You can use the Available property to determine if data is available for reading. When Available is non-zero, retry the receive operation.
-          /// @remarks If you are using a connection-oriented Socket, the Receive method will read as much data as is available, up to the size of the buffer. If the remote host shuts down the Socket connection with the Shutdown method, and all available data has been received, the Receive method will complete immediately and return zero bytes.
-          /// @remarks If you are using a connectionless Socket, Receive will read the first queued datagram from the destination address you specify in the Connect method. If the datagram you receive is larger than the size of the buffer parameter, buffer gets filled with the first part of the message, the excess data is lost and a SocketException is thrown.
-          /// @note If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
-          /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
-          int32 Receive(Array<byte>& buffer, SocketFlags socketFlags);
-
-          /// @brief Receives data from a bound Socket into a receive buffer, using the specified SocketFlags.
-          /// @param buffer An array of type Byte that is the storage location for the received data.
-          /// @param length The buffer length.
-          /// @param socketFlags A bitwise combination of the SocketFlags values.
-          /// @return int32 The number of bytes received.
-          /// @exception ArgumentNullException bufer is null
-          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @remarks The Receive method reads data into the buffer parameter and returns the number of bytes successfully read. You can call Receive from both connection-oriented and connectionless sockets.
-          /// @remarks This overload only requires you to provide a receive buffer. The buffer offset defaults to 0, the size defaults to the length of the buffer parameter, and the SocketFlags value defaults to None.
-          /// @remarks If you are using a connection-oriented protocol, you must either call Connect to establish a remote host connection, or Accept to accept an incoming connection prior to calling Receive. The Receive method will only read data that arrives from the remote host established in the Connect or Accept method. If you are using a connectionless protocol, you can also use the ReceiveFrom method. ReceiveFrom will allow you to receive data arriving from any host.
-          /// @remarks If no data is available for reading, the Receive method will block until data is available, unless a time-out value was set by using Socket.ReceiveTimeout. If the time-out value was exceeded, the Receive call will throw a SocketException. If you are in non-blocking mode, and there is no data available in the in the protocol stack buffer, the Receive method will complete immediately and throw a SocketException. You can use the Available property to determine if data is available for reading. When Available is non-zero, retry the receive operation.
-          /// @remarks If you are using a connection-oriented Socket, the Receive method will read as much data as is available, up to the size of the buffer. If the remote host shuts down the Socket connection with the Shutdown method, and all available data has been received, the Receive method will complete immediately and return zero bytes.
-          /// @remarks If you are using a connectionless Socket, Receive will read the first queued datagram from the destination address you specify in the Connect method. If the datagram you receive is larger than the size of the buffer parameter, buffer gets filled with the first part of the message, the excess data is lost and a SocketException is thrown.
-          /// @note If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
-          /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
-          int32 Receive(byte buffer[], int32 length, SocketFlags socketFlags);
-
-          /// @brief Receives the specified number of bytes of data from a bound Socket into a receive buffer, using the specified SocketFlags.
-          /// @param buffer An array of type Byte that is the storage location for the received data.
-          /// @param size The number of bytes to receive.
-          /// @param socketFlags A bitwise combination of the SocketFlags values.
-          /// @return int32 The number of bytes received.
-          /// @exception ArgumentNullException bufer is null
-          /// @exception ArgumentOutOfRangeException size is less than 0 or exceeds the size of the buffer.
-          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @remarks The Receive method reads data into the buffer parameter and returns the number of bytes successfully read. You can call Receive from both connection-oriented and connectionless sockets.
-          /// @remarks This overload only requires you to provide a receive buffer. The buffer offset defaults to 0, the size defaults to the length of the buffer parameter, and the SocketFlags value defaults to None.
-          /// @remarks If you are using a connection-oriented protocol, you must either call Connect to establish a remote host connection, or Accept to accept an incoming connection prior to calling Receive. The Receive method will only read data that arrives from the remote host established in the Connect or Accept method. If you are using a connectionless protocol, you can also use the ReceiveFrom method. ReceiveFrom will allow you to receive data arriving from any host.
-          /// @remarks If no data is available for reading, the Receive method will block until data is available, unless a time-out value was set by using Socket.ReceiveTimeout. If the time-out value was exceeded, the Receive call will throw a SocketException. If you are in non-blocking mode, and there is no data available in the in the protocol stack buffer, the Receive method will complete immediately and throw a SocketException. You can use the Available property to determine if data is available for reading. When Available is non-zero, retry the receive operation.
-          /// @remarks If you are using a connection-oriented Socket, the Receive method will read as much data as is available, up to the size of the buffer. If the remote host shuts down the Socket connection with the Shutdown method, and all available data has been received, the Receive method will complete immediately and return zero bytes.
-          /// @remarks If you are using a connectionless Socket, Receive will read the first queued datagram from the destination address you specify in the Connect method. If the datagram you receive is larger than the size of the buffer parameter, buffer gets filled with the first part of the message, the excess data is lost and a SocketException is thrown.
-          /// @note If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
-          /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
-          int32 Receive(Array<byte>& buffer, int32 size, SocketFlags socketFlags);
-
-          /// @brief Receives the specified number of bytes of data from a bound Socket into a receive buffer, using the specified SocketFlags.
-          /// @param buffer An array of type Byte that is the storage location for the received data.
-          /// @param length The buffer length.
-          /// @param size The number of bytes to receive.
-          /// @param socketFlags A bitwise combination of the SocketFlags values.
-          /// @return int32 The number of bytes received.
-          /// @exception ArgumentNullException bufer is null
-          /// @exception ArgumentOutOfRangeException size is less than 0 or exceeds the size of the buffer.
-          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @remarks The Receive method reads data into the buffer parameter and returns the number of bytes successfully read. You can call Receive from both connection-oriented and connectionless sockets.
-          /// @remarks This overload only requires you to provide a receive buffer. The buffer offset defaults to 0, the size defaults to the length of the buffer parameter, and the SocketFlags value defaults to None.
-          /// @remarks If you are using a connection-oriented protocol, you must either call Connect to establish a remote host connection, or Accept to accept an incoming connection prior to calling Receive. The Receive method will only read data that arrives from the remote host established in the Connect or Accept method. If you are using a connectionless protocol, you can also use the ReceiveFrom method. ReceiveFrom will allow you to receive data arriving from any host.
-          /// @remarks If no data is available for reading, the Receive method will block until data is available, unless a time-out value was set by using Socket.ReceiveTimeout. If the time-out value was exceeded, the Receive call will throw a SocketException. If you are in non-blocking mode, and there is no data available in the in the protocol stack buffer, the Receive method will complete immediately and throw a SocketException. You can use the Available property to determine if data is available for reading. When Available is non-zero, retry the receive operation.
-          /// @remarks If you are using a connection-oriented Socket, the Receive method will read as much data as is available, up to the size of the buffer. If the remote host shuts down the Socket connection with the Shutdown method, and all available data has been received, the Receive method will complete immediately and return zero bytes.
-          /// @remarks If you are using a connectionless Socket, Receive will read the first queued datagram from the destination address you specify in the Connect method. If the datagram you receive is larger than the size of the buffer parameter, buffer gets filled with the first part of the message, the excess data is lost and a SocketException is thrown.
-          /// @note If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
-          /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
-          int32 Receive(byte buffer[], int32 length, int32 size, SocketFlags socketFlags);
-
-          /// @brief Receives the specified number of bytes from a bound Socket into the specified offset position of the receive buffer, using the specified SocketFlags.
-          /// @param buffer An array of type Byte that is the storage location for the received data.
-          /// @param offset The location in buffer to store the received data.
-          /// @param size The number of bytes to receive.
-          /// @param socketFlags A bitwise combination of the SocketFlags values.
-          /// @return int32 The number of bytes received.
-          /// @exception ArgumentNullException bufer is null
-          /// @exception ArgumentOutOfRangeException offset is less than 0. -or- offset is greater than the length of buffer. -or- size is less than 0. -or- size is greater than the length of buffer minus the value of the offset parameter.
-          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @remarks The Receive method reads data into the buffer parameter and returns the number of bytes successfully read. You can call Receive from both connection-oriented and connectionless sockets.
-          /// @remarks This overload only requires you to provide a receive buffer. The buffer offset defaults to 0, the size defaults to the length of the buffer parameter, and the SocketFlags value defaults to None.
-          /// @remarks If you are using a connection-oriented protocol, you must either call Connect to establish a remote host connection, or Accept to accept an incoming connection prior to calling Receive. The Receive method will only read data that arrives from the remote host established in the Connect or Accept method. If you are using a connectionless protocol, you can also use the ReceiveFrom method. ReceiveFrom will allow you to receive data arriving from any host.
-          /// @remarks If no data is available for reading, the Receive method will block until data is available, unless a time-out value was set by using Socket.ReceiveTimeout. If the time-out value was exceeded, the Receive call will throw a SocketException. If you are in non-blocking mode, and there is no data available in the in the protocol stack buffer, the Receive method will complete immediately and throw a SocketException. You can use the Available property to determine if data is available for reading. When Available is non-zero, retry the receive operation.
-          /// @remarks If you are using a connection-oriented Socket, the Receive method will read as much data as is available, up to the size of the buffer. If the remote host shuts down the Socket connection with the Shutdown method, and all available data has been received, the Receive method will complete immediately and return zero bytes.
-          /// @remarks If you are using a connectionless Socket, Receive will read the first queued datagram from the destination address you specify in the Connect method. If the datagram you receive is larger than the size of the buffer parameter, buffer gets filled with the first part of the message, the excess data is lost and a SocketException is thrown.
-          /// @note If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
-          /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
-          int32 Receive(Array<byte>& buffer, int32 offset, int32 size, SocketFlags socketFlags);
-
-          /// @brief Receives the specified number of bytes from a bound Socket into the specified offset position of the receive buffer, using the specified SocketFlags.
-          /// @param buffer An array of type Byte that is the storage location for the received data.
-          /// @param length The buffer length.
-          /// @param offset The location in buffer to store the received data.
-          /// @param size The number of bytes to receive.
-          /// @param socketFlags A bitwise combination of the SocketFlags values.
-          /// @return int32 The number of bytes received.
-          /// @exception ArgumentNullException bufer is null
-          /// @exception ArgumentOutOfRangeException offset is less than 0. -or- offset is greater than the length of buffer. -or- size is less than 0. -or- size is greater than the length of buffer minus the value of the offset parameter.
-          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @remarks The Receive method reads data into the buffer parameter and returns the number of bytes successfully read. You can call Receive from both connection-oriented and connectionless sockets.
-          /// @remarks This overload only requires you to provide a receive buffer. The buffer offset defaults to 0, the size defaults to the length of the buffer parameter, and the SocketFlags value defaults to None.
-          /// @remarks If you are using a connection-oriented protocol, you must either call Connect to establish a remote host connection, or Accept to accept an incoming connection prior to calling Receive. The Receive method will only read data that arrives from the remote host established in the Connect or Accept method. If you are using a connectionless protocol, you can also use the ReceiveFrom method. ReceiveFrom will allow you to receive data arriving from any host.
-          /// @remarks If no data is available for reading, the Receive method will block until data is available, unless a time-out value was set by using Socket.ReceiveTimeout. If the time-out value was exceeded, the Receive call will throw a SocketException. If you are in non-blocking mode, and there is no data available in the in the protocol stack buffer, the Receive method will complete immediately and throw a SocketException. You can use the Available property to determine if data is available for reading. When Available is non-zero, retry the receive operation.
-          /// @remarks If you are using a connection-oriented Socket, the Receive method will read as much data as is available, up to the size of the buffer. If the remote host shuts down the Socket connection with the Shutdown method, and all available data has been received, the Receive method will complete immediately and return zero bytes.
-          /// @remarks If you are using a connectionless Socket, Receive will read the first queued datagram from the destination address you specify in the Connect method. If the datagram you receive is larger than the size of the buffer parameter, buffer gets filled with the first part of the message, the excess data is lost and a SocketException is thrown.
-          /// @note If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
-          /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
-          int32 Receive(byte buffer[], int32 length, int32 offset, int32 size, SocketFlags socketFlags);
-
-          /// @brief Receives data from a bound Socket into a receive buffer.
-          /// @param buffer An array of type Byte that is the storage location for the received data.
-          /// @param endPoint: the remote host
-          /// @return int32 The number of bytes received.
-          /// @exception ArgumentNullException bufer is null
-          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @remarks The Receive method reads data into the buffer parameter and returns the number of bytes successfully read. You can call Receive from both connection-oriented and connectionless sockets.
-          /// @remarks This overload only requires you to provide a receive buffer. The buffer offset defaults to 0, the size defaults to the length of the buffer parameter, and the SocketFlags value defaults to None.
-          /// @remarks If you are using a connection-oriented protocol, you must either call Connect to establish a remote host connection, or Accept to accept an incoming connection prior to calling Receive. The Receive method will only read data that arrives from the remote host established in the Connect or Accept method. If you are using a connectionless protocol, you can also use the ReceiveFrom method. ReceiveFrom will allow you to receive data arriving from any host.
-          /// @remarks If no data is available for reading, the Receive method will block until data is available, unless a time-out value was set by using Socket.ReceiveTimeout. If the time-out value was exceeded, the Receive call will throw a SocketException. If you are in non-blocking mode, and there is no data available in the in the protocol stack buffer, the Receive method will complete immediately and throw a SocketException. You can use the Available property to determine if data is available for reading. When Available is non-zero, retry the receive operation.
-          /// @remarks If you are using a connection-oriented Socket, the Receive method will read as much data as is available, up to the size of the buffer. If the remote host shuts down the Socket connection with the Shutdown method, and all available data has been received, the Receive method will complete immediately and return zero bytes.
-          /// @remarks If you are using a connectionless Socket, Receive will read the first queued datagram from the destination address you specify in the Connect method. If the datagram you receive is larger than the size of the buffer parameter, buffer gets filled with the first part of the message, the excess data is lost and a SocketException is thrown.
-          /// @note If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
-          /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
-          int32 ReceiveFrom(Array<byte>& buffer, IPEndPoint& endPoint);
-
-          /// @brief Receives data from a bound Socket into a receive buffer.
-          /// @param buffer An array of type Byte that is the storage location for the received data.
-          /// @param length The buffer length.
-          /// @param endPoint: the remote host
-          /// @return int32 The number of bytes received.
-          /// @exception ArgumentNullException bufer is null
-          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @remarks The Receive method reads data into the buffer parameter and returns the number of bytes successfully read. You can call Receive from both connection-oriented and connectionless sockets.
-          /// @remarks This overload only requires you to provide a receive buffer. The buffer offset defaults to 0, the size defaults to the length of the buffer parameter, and the SocketFlags value defaults to None.
-          /// @remarks If you are using a connection-oriented protocol, you must either call Connect to establish a remote host connection, or Accept to accept an incoming connection prior to calling Receive. The Receive method will only read data that arrives from the remote host established in the Connect or Accept method. If you are using a connectionless protocol, you can also use the ReceiveFrom method. ReceiveFrom will allow you to receive data arriving from any host.
-          /// @remarks If no data is available for reading, the Receive method will block until data is available, unless a time-out value was set by using Socket.ReceiveTimeout. If the time-out value was exceeded, the Receive call will throw a SocketException. If you are in non-blocking mode, and there is no data available in the in the protocol stack buffer, the Receive method will complete immediately and throw a SocketException. You can use the Available property to determine if data is available for reading. When Available is non-zero, retry the receive operation.
-          /// @remarks If you are using a connection-oriented Socket, the Receive method will read as much data as is available, up to the size of the buffer. If the remote host shuts down the Socket connection with the Shutdown method, and all available data has been received, the Receive method will complete immediately and return zero bytes.
-          /// @remarks If you are using a connectionless Socket, Receive will read the first queued datagram from the destination address you specify in the Connect method. If the datagram you receive is larger than the size of the buffer parameter, buffer gets filled with the first part of the message, the excess data is lost and a SocketException is thrown.
-          /// @note If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
-          /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
-          int32 ReceiveFrom(byte buffer[], int32 length, IPEndPoint& endPoint);
-
-          /// @brief Receives data from a bound Socket into a receive buffer, using the specified SocketFlags.
-          /// @param buffer An array of type Byte that is the storage location for the received data.
-          /// @param socketFlags A bitwise combination of the SocketFlags values.
-          /// @param endPoint: the remote host
-          /// @return int32 The number of bytes received.
-          /// @exception ArgumentNullException bufer is null
-          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @remarks The Receive method reads data into the buffer parameter and returns the number of bytes successfully read. You can call Receive from both connection-oriented and connectionless sockets.
-          /// @remarks This overload only requires you to provide a receive buffer. The buffer offset defaults to 0, the size defaults to the length of the buffer parameter, and the SocketFlags value defaults to None.
-          /// @remarks If you are using a connection-oriented protocol, you must either call Connect to establish a remote host connection, or Accept to accept an incoming connection prior to calling Receive. The Receive method will only read data that arrives from the remote host established in the Connect or Accept method. If you are using a connectionless protocol, you can also use the ReceiveFrom method. ReceiveFrom will allow you to receive data arriving from any host.
-          /// @remarks If no data is available for reading, the Receive method will block until data is available, unless a time-out value was set by using Socket.ReceiveTimeout. If the time-out value was exceeded, the Receive call will throw a SocketException. If you are in non-blocking mode, and there is no data available in the in the protocol stack buffer, the Receive method will complete immediately and throw a SocketException. You can use the Available property to determine if data is available for reading. When Available is non-zero, retry the receive operation.
-          /// @remarks If you are using a connection-oriented Socket, the Receive method will read as much data as is available, up to the size of the buffer. If the remote host shuts down the Socket connection with the Shutdown method, and all available data has been received, the Receive method will complete immediately and return zero bytes.
-          /// @remarks If you are using a connectionless Socket, Receive will read the first queued datagram from the destination address you specify in the Connect method. If the datagram you receive is larger than the size of the buffer parameter, buffer gets filled with the first part of the message, the excess data is lost and a SocketException is thrown.
-          /// @note If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
-          /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
-          int32 ReceiveFrom(Array<byte>& buffer, SocketFlags socketFlags, IPEndPoint& endPoint);
-
-          /// @brief Receives data from a bound Socket into a receive buffer, using the specified SocketFlags.
-          /// @param buffer An array of type Byte that is the storage location for the received data.
-          /// @param length The buffer length.
-          /// @param socketFlags A bitwise combination of the SocketFlags values.
-          /// @param endPoint: the remote host
-          /// @return int32 The number of bytes received.
-          /// @exception ArgumentNullException bufer is null
-          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @remarks The Receive method reads data into the buffer parameter and returns the number of bytes successfully read. You can call Receive from both connection-oriented and connectionless sockets.
-          /// @remarks This overload only requires you to provide a receive buffer. The buffer offset defaults to 0, the size defaults to the length of the buffer parameter, and the SocketFlags value defaults to None.
-          /// @remarks If you are using a connection-oriented protocol, you must either call Connect to establish a remote host connection, or Accept to accept an incoming connection prior to calling Receive. The Receive method will only read data that arrives from the remote host established in the Connect or Accept method. If you are using a connectionless protocol, you can also use the ReceiveFrom method. ReceiveFrom will allow you to receive data arriving from any host.
-          /// @remarks If no data is available for reading, the Receive method will block until data is available, unless a time-out value was set by using Socket.ReceiveTimeout. If the time-out value was exceeded, the Receive call will throw a SocketException. If you are in non-blocking mode, and there is no data available in the in the protocol stack buffer, the Receive method will complete immediately and throw a SocketException. You can use the Available property to determine if data is available for reading. When Available is non-zero, retry the receive operation.
-          /// @remarks If you are using a connection-oriented Socket, the Receive method will read as much data as is available, up to the size of the buffer. If the remote host shuts down the Socket connection with the Shutdown method, and all available data has been received, the Receive method will complete immediately and return zero bytes.
-          /// @remarks If you are using a connectionless Socket, Receive will read the first queued datagram from the destination address you specify in the Connect method. If the datagram you receive is larger than the size of the buffer parameter, buffer gets filled with the first part of the message, the excess data is lost and a SocketException is thrown.
-          /// @note If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
-          /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
-          int32 ReceiveFrom(byte buffer[], int32 length, SocketFlags socketFlags, IPEndPoint& endPoint);
-
-          /// @brief Receives the specified number of bytes of data from a bound Socket into a receive buffer, using the specified SocketFlags.
-          /// @param buffer An array of type Byte that is the storage location for the received data.
-          /// @param size The number of bytes to receive.
-          /// @param socketFlags A bitwise combination of the SocketFlags values.
-          /// @param endPoint: the remote host
-          /// @return int32 The number of bytes received.
-          /// @exception ArgumentNullException bufer is null
-          /// @exception ArgumentOutOfRangeException size is less than 0 or exceeds the size of the buffer.
-          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @remarks The Receive method reads data into the buffer parameter and returns the number of bytes successfully read. You can call Receive from both connection-oriented and connectionless sockets.
-          /// @remarks This overload only requires you to provide a receive buffer. The buffer offset defaults to 0, the size defaults to the length of the buffer parameter, and the SocketFlags value defaults to None.
-          /// @remarks If you are using a connection-oriented protocol, you must either call Connect to establish a remote host connection, or Accept to accept an incoming connection prior to calling Receive. The Receive method will only read data that arrives from the remote host established in the Connect or Accept method. If you are using a connectionless protocol, you can also use the ReceiveFrom method. ReceiveFrom will allow you to receive data arriving from any host.
-          /// @remarks If no data is available for reading, the Receive method will block until data is available, unless a time-out value was set by using Socket.ReceiveTimeout. If the time-out value was exceeded, the Receive call will throw a SocketException. If you are in non-blocking mode, and there is no data available in the in the protocol stack buffer, the Receive method will complete immediately and throw a SocketException. You can use the Available property to determine if data is available for reading. When Available is non-zero, retry the receive operation.
-          /// @remarks If you are using a connection-oriented Socket, the Receive method will read as much data as is available, up to the size of the buffer. If the remote host shuts down the Socket connection with the Shutdown method, and all available data has been received, the Receive method will complete immediately and return zero bytes.
-          /// @remarks If you are using a connectionless Socket, Receive will read the first queued datagram from the destination address you specify in the Connect method. If the datagram you receive is larger than the size of the buffer parameter, buffer gets filled with the first part of the message, the excess data is lost and a SocketException is thrown.
-          /// @note If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
-          /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
-          int32 ReceiveFrom(Array<byte>& buffer, int32 size, SocketFlags socketFlags, IPEndPoint& endPoint);
-
-          /// @brief Receives the specified number of bytes of data from a bound Socket into a receive buffer, using the specified SocketFlags.
-          /// @param buffer An array of type Byte that is the storage location for the received data.
-          /// @param length The buffer length.
-          /// @param size The number of bytes to receive.
-          /// @param socketFlags A bitwise combination of the SocketFlags values.
-          /// @param endPoint: the remote host
-          /// @return int32 The number of bytes received.
-          /// @exception ArgumentNullException bufer is null
-          /// @exception ArgumentOutOfRangeException size is less than 0 or exceeds the size of the buffer.
-          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @remarks The Receive method reads data into the buffer parameter and returns the number of bytes successfully read. You can call Receive from both connection-oriented and connectionless sockets.
-          /// @remarks This overload only requires you to provide a receive buffer. The buffer offset defaults to 0, the size defaults to the length of the buffer parameter, and the SocketFlags value defaults to None.
-          /// @remarks If you are using a connection-oriented protocol, you must either call Connect to establish a remote host connection, or Accept to accept an incoming connection prior to calling Receive. The Receive method will only read data that arrives from the remote host established in the Connect or Accept method. If you are using a connectionless protocol, you can also use the ReceiveFrom method. ReceiveFrom will allow you to receive data arriving from any host.
-          /// @remarks If no data is available for reading, the Receive method will block until data is available, unless a time-out value was set by using Socket.ReceiveTimeout. If the time-out value was exceeded, the Receive call will throw a SocketException. If you are in non-blocking mode, and there is no data available in the in the protocol stack buffer, the Receive method will complete immediately and throw a SocketException. You can use the Available property to determine if data is available for reading. When Available is non-zero, retry the receive operation.
-          /// @remarks If you are using a connection-oriented Socket, the Receive method will read as much data as is available, up to the size of the buffer. If the remote host shuts down the Socket connection with the Shutdown method, and all available data has been received, the Receive method will complete immediately and return zero bytes.
-          /// @remarks If you are using a connectionless Socket, Receive will read the first queued datagram from the destination address you specify in the Connect method. If the datagram you receive is larger than the size of the buffer parameter, buffer gets filled with the first part of the message, the excess data is lost and a SocketException is thrown.
-          /// @note If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
-          /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
-          int32 ReceiveFrom(byte buffer[], int32 length, int32 size, SocketFlags socketFlags, IPEndPoint& endPoint);
-
-          /// @brief Receives the specified number of bytes from a bound Socket into the specified offset position of the receive buffer, using the specified SocketFlags.
-          /// @param buffer An array of type Byte that is the storage location for the received data.
-          /// @param offset The location in buffer to store the received data.
-          /// @param size The number of bytes to receive.
-          /// @param socketFlags A bitwise combination of the SocketFlags values.
-          /// @param endPoint: the remote host
-          /// @return int32 The number of bytes received.
-          /// @exception ArgumentNullException bufer is null
-          /// @exception ArgumentOutOfRangeException offset is less than 0. -or- offset is greater than the length of buffer. -or- size is less than 0. -or- size is greater than the length of buffer minus the value of the offset parameter.
-          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @remarks The Receive method reads data into the buffer parameter and returns the number of bytes successfully read. You can call Receive from both connection-oriented and connectionless sockets.
-          /// @remarks This overload only requires you to provide a receive buffer. The buffer offset defaults to 0, the size defaults to the length of the buffer parameter, and the SocketFlags value defaults to None.
-          /// @remarks If you are using a connection-oriented protocol, you must either call Connect to establish a remote host connection, or Accept to accept an incoming connection prior to calling Receive. The Receive method will only read data that arrives from the remote host established in the Connect or Accept method. If you are using a connectionless protocol, you can also use the ReceiveFrom method. ReceiveFrom will allow you to receive data arriving from any host.
-          /// @remarks If no data is available for reading, the Receive method will block until data is available, unless a time-out value was set by using Socket.ReceiveTimeout. If the time-out value was exceeded, the Receive call will throw a SocketException. If you are in non-blocking mode, and there is no data available in the in the protocol stack buffer, the Receive method will complete immediately and throw a SocketException. You can use the Available property to determine if data is available for reading. When Available is non-zero, retry the receive operation.
-          /// @remarks If you are using a connection-oriented Socket, the Receive method will read as much data as is available, up to the size of the buffer. If the remote host shuts down the Socket connection with the Shutdown method, and all available data has been received, the Receive method will complete immediately and return zero bytes.
-          /// @remarks If you are using a connectionless Socket, Receive will read the first queued datagram from the destination address you specify in the Connect method. If the datagram you receive is larger than the size of the buffer parameter, buffer gets filled with the first part of the message, the excess data is lost and a SocketException is thrown.
-          /// @note If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
-          /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
-          int32 ReceiveFrom(Array<byte>& buffer, int32 offset, int32 size, SocketFlags socketFlags, IPEndPoint& endPoint);
-
-          /// @brief Receives the specified number of bytes from a bound Socket into the specified offset position of the receive buffer, using the specified SocketFlags.
-          /// @param buffer An array of type Byte that is the storage location for the received data.
-          /// @param length The buffer length.
-          /// @param offset The location in buffer to store the received data.
-          /// @param size The number of bytes to receive.
-          /// @param socketFlags A bitwise combination of the SocketFlags values.
-          /// @param endPoint: the remote host
-          /// @return int32 The number of bytes received.
-          /// @exception ArgumentNullException bufer is null
-          /// @exception ArgumentOutOfRangeException offset is less than 0. -or- offset is greater than the length of buffer. -or- size is less than 0. -or- size is greater than the length of buffer minus the value of the offset parameter.
-          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @remarks The Receive method reads data into the buffer parameter and returns the number of bytes successfully read. You can call Receive from both connection-oriented and connectionless sockets.
-          /// @remarks This overload only requires you to provide a receive buffer. The buffer offset defaults to 0, the size defaults to the length of the buffer parameter, and the SocketFlags value defaults to None.
-          /// @remarks If you are using a connection-oriented protocol, you must either call Connect to establish a remote host connection, or Accept to accept an incoming connection prior to calling Receive. The Receive method will only read data that arrives from the remote host established in the Connect or Accept method. If you are using a connectionless protocol, you can also use the ReceiveFrom method. ReceiveFrom will allow you to receive data arriving from any host.
-          /// @remarks If no data is available for reading, the Receive method will block until data is available, unless a time-out value was set by using Socket.ReceiveTimeout. If the time-out value was exceeded, the Receive call will throw a SocketException. If you are in non-blocking mode, and there is no data available in the in the protocol stack buffer, the Receive method will complete immediately and throw a SocketException. You can use the Available property to determine if data is available for reading. When Available is non-zero, retry the receive operation.
-          /// @remarks If you are using a connection-oriented Socket, the Receive method will read as much data as is available, up to the size of the buffer. If the remote host shuts down the Socket connection with the Shutdown method, and all available data has been received, the Receive method will complete immediately and return zero bytes.
-          /// @remarks If you are using a connectionless Socket, Receive will read the first queued datagram from the destination address you specify in the Connect method. If the datagram you receive is larger than the size of the buffer parameter, buffer gets filled with the first part of the message, the excess data is lost and a SocketException is thrown.
-          /// @note If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
-          /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
-          int32 ReceiveFrom(byte buffer[], int32 length, int32 offset, int32 size, SocketFlags socketFlags, IPEndPoint& endPoint);
+          static int32 Select(Collections::Generic::IList<Socket>& checkRead, Collections::Generic::IList<Socket>& checkWrite, Collections::Generic::IList<Socket>& checkError, int32 microseconds);
 
           /// @brief Sends data to a connected Socket.
           /// @param buffer An array of type Byte that contains the data to be sent.
@@ -778,22 +681,7 @@ namespace Pcf {
           /// @remarks If you are using a connection-oriented protocol, Send will block until all of the bytes in the buffer are sent, unless a time-out was set by using Socket.SendTimeout. If the time-out value was exceeded, the Send call will throw a SocketException. In nonblocking mode, Send may complete successfully even if it sends less than the number of bytes in the buffer. It is your application's responsibility to keep track of the number of bytes sent and to retry the operation until the application sends the bytes in the buffer. There is also no guarantee that the data you send will appear on the network immediately. To increase network efficiency, the underlying system may delay transmission until a significant amount of outgoing data is collected. A successful completion of the Send method means that the underlying system has had room to buffer your data for a network send.
           /// @note The successful completion of a send does not indicate that the data was successfully delivered. If no buffer space is available within the transport system to hold the data to be transmitted, send will block unless the socket has been placed in nonblocking mode.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
-          int32 Send(const Array<byte>& buffer);
-
-          /// @brief Sends data to a connected Socket.
-          /// @param buffer An array of type Byte that contains the data to be sent.
-          /// @return int32 The number of bytes sent to the Socket.
-          /// @exception ArgumentNullException bufer is null
-          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @remarks Send synchronously sends data to the remote host specified in the Connect or Accept method and returns the number of bytes successfully sent. Send can be used for both connection-oriented and connectionless protocols.
-          /// @remarks This overload requires a buffer that contains the data you want to send. The SocketFlags value defaults to 0, the buffer offset defaults to 0, and the number of bytes to send defaults to the size of the buffer.
-          /// @remarks If you are using a connectionless protocol, you must call Connect before calling this method, or Send will throw a SocketException. If you are using a connection-oriented protocol, you must either use Connect to establish a remote host connection, or use Accept to accept an incoming connection.
-          /// @remarks If you are using a connectionless protocol and plan to send data to several different hosts, you should use the SendTo method. If you do not use the SendTo method, you will have to call Connect before each call to Send. You can use SendTo even after you have established a default remote host with Connect. You can also change the default remote host prior to calling Send by making another call to Connect.
-          /// @remarks If you are using a connection-oriented protocol, Send will block until all of the bytes in the buffer are sent, unless a time-out was set by using Socket.SendTimeout. If the time-out value was exceeded, the Send call will throw a SocketException. In nonblocking mode, Send may complete successfully even if it sends less than the number of bytes in the buffer. It is your application's responsibility to keep track of the number of bytes sent and to retry the operation until the application sends the bytes in the buffer. There is also no guarantee that the data you send will appear on the network immediately. To increase network efficiency, the underlying system may delay transmission until a significant amount of outgoing data is collected. A successful completion of the Send method means that the underlying system has had room to buffer your data for a network send.
-          /// @note The successful completion of a send does not indicate that the data was successfully delivered. If no buffer space is available within the transport system to hold the data to be transmitted, send will block unless the socket has been placed in nonblocking mode.
-          /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
-          int32 Send(byte buffer[], int32 length);
+          int32 Send(const Array<byte>& buffer) {return this->Send(buffer, 0, buffer.Length, SocketFlags::None);}
 
           /// @brief Sends data to a connected Socket using the specified SocketFlags.
           /// @param buffer An array of type Byte that contains the data to be sent.
@@ -809,23 +697,7 @@ namespace Pcf {
           /// @remarks If you are using a connection-oriented protocol, Send will block until all of the bytes in the buffer are sent, unless a time-out was set by using Socket.SendTimeout. If the time-out value was exceeded, the Send call will throw a SocketException. In nonblocking mode, Send may complete successfully even if it sends less than the number of bytes in the buffer. It is your application's responsibility to keep track of the number of bytes sent and to retry the operation until the application sends the bytes in the buffer. There is also no guarantee that the data you send will appear on the network immediately. To increase network efficiency, the underlying system may delay transmission until a significant amount of outgoing data is collected. A successful completion of the Send method means that the underlying system has had room to buffer your data for a network send.
           /// @note The successful completion of a send does not indicate that the data was successfully delivered. If no buffer space is available within the transport system to hold the data to be transmitted, send will block unless the socket has been placed in nonblocking mode.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
-          int32 Send(const Array<byte>& buffer, SocketFlags socketFlags);
-
-          /// @brief Sends data to a connected Socket using the specified SocketFlags.
-          /// @param buffer An array of type Byte that contains the data to be sent.
-          /// @param socketFlags A bitwise combination of the SocketFlags values.
-          /// @return int32 The number of bytes sent to the Socket.
-          /// @exception ArgumentNullException bufer is null
-          /// @exception SocketException socketFlags is not a valid combination of values. -or- An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @remarks Send synchronously sends data to the remote host specified in the Connect or Accept method and returns the number of bytes successfully sent. Send can be used for both connection-oriented and connectionless protocols.
-          /// @remarks This overload requires a buffer that contains the data you want to send. The SocketFlags value defaults to 0, the buffer offset defaults to 0, and the number of bytes to send defaults to the size of the buffer.
-          /// @remarks If you are using a connectionless protocol, you must call Connect before calling this method, or Send will throw a SocketException. If you are using a connection-oriented protocol, you must either use Connect to establish a remote host connection, or use Accept to accept an incoming connection.
-          /// @remarks If you are using a connectionless protocol and plan to send data to several different hosts, you should use the SendTo method. If you do not use the SendTo method, you will have to call Connect before each call to Send. You can use SendTo even after you have established a default remote host with Connect. You can also change the default remote host prior to calling Send by making another call to Connect.
-          /// @remarks If you are using a connection-oriented protocol, Send will block until all of the bytes in the buffer are sent, unless a time-out was set by using Socket.SendTimeout. If the time-out value was exceeded, the Send call will throw a SocketException. In nonblocking mode, Send may complete successfully even if it sends less than the number of bytes in the buffer. It is your application's responsibility to keep track of the number of bytes sent and to retry the operation until the application sends the bytes in the buffer. There is also no guarantee that the data you send will appear on the network immediately. To increase network efficiency, the underlying system may delay transmission until a significant amount of outgoing data is collected. A successful completion of the Send method means that the underlying system has had room to buffer your data for a network send.
-          /// @note The successful completion of a send does not indicate that the data was successfully delivered. If no buffer space is available within the transport system to hold the data to be transmitted, send will block unless the socket has been placed in nonblocking mode.
-          /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
-          int32 Send(byte buffer[], int32 length, SocketFlags socketFlags);
+          int32 Send(const Array<byte>& buffer, SocketFlags socketFlags) {return this->Send(buffer, 0, buffer.Length, socketFlags);}
 
           /// @brief Sends the specified number of bytes of data to a connected Socket, using the specified SocketFlags.
           /// @param buffer An array of type Byte that contains the data to be sent.
@@ -843,26 +715,8 @@ namespace Pcf {
           /// @remarks If you are using a connection-oriented protocol, Send will block until all of the bytes in the buffer are sent, unless a time-out was set by using Socket.SendTimeout. If the time-out value was exceeded, the Send call will throw a SocketException. In nonblocking mode, Send may complete successfully even if it sends less than the number of bytes in the buffer. It is your application's responsibility to keep track of the number of bytes sent and to retry the operation until the application sends the bytes in the buffer. There is also no guarantee that the data you send will appear on the network immediately. To increase network efficiency, the underlying system may delay transmission until a significant amount of outgoing data is collected. A successful completion of the Send method means that the underlying system has had room to buffer your data for a network send.
           /// @note The successful completion of a send does not indicate that the data was successfully delivered. If no buffer space is available within the transport system to hold the data to be transmitted, send will block unless the socket has been placed in nonblocking mode.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
-          int32 Send(const Array<byte>& buffer, int32 size, SocketFlags socketFlags);
-
-          /// @brief Sends the specified number of bytes of data to a connected Socket, using the specified SocketFlags.
-          /// @param buffer An array of type Byte that contains the data to be sent.
-          /// @param size The number of bytes to send.
-          /// @param socketFlags A bitwise combination of the SocketFlags values.
-          /// @return int32 The number of bytes sent to the Socket.
-          /// @exception ArgumentNullException bufer is null
-          /// @exception ArgumentOutOfRangeException size is less than 0 or exceeds the size of the buffer.
-          /// @exception SocketException socketFlags is not a valid combination of values. -or- An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @remarks Send synchronously sends data to the remote host specified in the Connect or Accept method and returns the number of bytes successfully sent. Send can be used for both connection-oriented and connectionless protocols.
-          /// @remarks This overload requires a buffer that contains the data you want to send. The SocketFlags value defaults to 0, the buffer offset defaults to 0, and the number of bytes to send defaults to the size of the buffer.
-          /// @remarks If you are using a connectionless protocol, you must call Connect before calling this method, or Send will throw a SocketException. If you are using a connection-oriented protocol, you must either use Connect to establish a remote host connection, or use Accept to accept an incoming connection.
-          /// @remarks If you are using a connectionless protocol and plan to send data to several different hosts, you should use the SendTo method. If you do not use the SendTo method, you will have to call Connect before each call to Send. You can use SendTo even after you have established a default remote host with Connect. You can also change the default remote host prior to calling Send by making another call to Connect.
-          /// @remarks If you are using a connection-oriented protocol, Send will block until all of the bytes in the buffer are sent, unless a time-out was set by using Socket.SendTimeout. If the time-out value was exceeded, the Send call will throw a SocketException. In nonblocking mode, Send may complete successfully even if it sends less than the number of bytes in the buffer. It is your application's responsibility to keep track of the number of bytes sent and to retry the operation until the application sends the bytes in the buffer. There is also no guarantee that the data you send will appear on the network immediately. To increase network efficiency, the underlying system may delay transmission until a significant amount of outgoing data is collected. A successful completion of the Send method means that the underlying system has had room to buffer your data for a network send.
-          /// @note The successful completion of a send does not indicate that the data was successfully delivered. If no buffer space is available within the transport system to hold the data to be transmitted, send will block unless the socket has been placed in nonblocking mode.
-          /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
-          int32 Send(byte buffer[], int32 length, int32 size, SocketFlags socketFlags);
-
+          int32 Send(const Array<byte>& buffer, int32 size, SocketFlags socketFlags) {return this->Send(buffer, 0, size, socketFlags);}
+          
           /// @brief Sends the specified number of bytes of data to a connected Socket, starting at the specified offset, and using the specified SocketFlags.
           /// @param buffer An array of type Byte that contains the data to be sent.
           /// @param offset TThe position in the data buffer at which to begin sending data.
@@ -881,12 +735,13 @@ namespace Pcf {
           /// @note The successful completion of a send does not indicate that the data was successfully delivered. If no buffer space is available within the transport system to hold the data to be transmitted, send will block unless the socket has been placed in nonblocking mode.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
           int32 Send(const Array<byte>& buffer, int32 offset, int32 size, SocketFlags socketFlags);
-
+          
           /// @brief Sends the specified number of bytes of data to a connected Socket, starting at the specified offset, and using the specified SocketFlags.
           /// @param buffer An array of type Byte that contains the data to be sent.
           /// @param offset TThe position in the data buffer at which to begin sending data.
           /// @param size The number of bytes to send.
           /// @param socketFlags A bitwise combination of the SocketFlags values.
+          /// @param errorCode A SocketError object that stores the socket error.
           /// @return int32 The number of bytes sent to the Socket.
           /// @exception ArgumentNullException bufer is null
           /// @exception ArgumentOutOfRangeException offset is less than 0. -or- offset is greater than the length of buffer. -or- size is less than 0. -or- size is greater than the length of buffer minus the value of the offset parameter.
@@ -899,7 +754,7 @@ namespace Pcf {
           /// @remarks If you are using a connection-oriented protocol, Send will block until all of the bytes in the buffer are sent, unless a time-out was set by using Socket.SendTimeout. If the time-out value was exceeded, the Send call will throw a SocketException. In nonblocking mode, Send may complete successfully even if it sends less than the number of bytes in the buffer. It is your application's responsibility to keep track of the number of bytes sent and to retry the operation until the application sends the bytes in the buffer. There is also no guarantee that the data you send will appear on the network immediately. To increase network efficiency, the underlying system may delay transmission until a significant amount of outgoing data is collected. A successful completion of the Send method means that the underlying system has had room to buffer your data for a network send.
           /// @note The successful completion of a send does not indicate that the data was successfully delivered. If no buffer space is available within the transport system to hold the data to be transmitted, send will block unless the socket has been placed in nonblocking mode.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
-          int32 Send(byte buffer[], int32 length, int32 offset, int32 size, SocketFlags socketFlags);
+          int32 Send(const Array<byte>& buffer, int32 offset, int32 size, SocketFlags socketFlags, SocketError& errorCode);
 
           /// @brief Sends data to a connected Socket.
           /// @param buffer An array of type Byte that contains the data to be sent.
@@ -915,23 +770,7 @@ namespace Pcf {
           /// @remarks If you are using a connection-oriented protocol, Send will block until all of the bytes in the buffer are sent, unless a time-out was set by using Socket.SendTimeout. If the time-out value was exceeded, the Send call will throw a SocketException. In nonblocking mode, Send may complete successfully even if it sends less than the number of bytes in the buffer. It is your application's responsibility to keep track of the number of bytes sent and to retry the operation until the application sends the bytes in the buffer. There is also no guarantee that the data you send will appear on the network immediately. To increase network efficiency, the underlying system may delay transmission until a significant amount of outgoing data is collected. A successful completion of the Send method means that the underlying system has had room to buffer your data for a network send.
           /// @note The successful completion of a send does not indicate that the data was successfully delivered. If no buffer space is available within the transport system to hold the data to be transmitted, send will block unless the socket has been placed in nonblocking mode.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
-          int32 SendTo(const Array<byte>& buffer, const IPEndPoint& endPoint);
-
-          /// @brief Sends data to a connected Socket.
-          /// @param buffer An array of type Byte that contains the data to be sent.
-          /// @param endPoint: the remote host
-          /// @return int32 The number of bytes sent to the Socket.
-          /// @exception ArgumentNullException bufer is null
-          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @remarks Send synchronously sends data to the remote host specified in the Connect or Accept method and returns the number of bytes successfully sent. Send can be used for both connection-oriented and connectionless protocols.
-          /// @remarks This overload requires a buffer that contains the data you want to send. The SocketFlags value defaults to 0, the buffer offset defaults to 0, and the number of bytes to send defaults to the size of the buffer.
-          /// @remarks If you are using a connectionless protocol, you must call Connect before calling this method, or Send will throw a SocketException. If you are using a connection-oriented protocol, you must either use Connect to establish a remote host connection, or use Accept to accept an incoming connection.
-          /// @remarks If you are using a connectionless protocol and plan to send data to several different hosts, you should use the SendTo method. If you do not use the SendTo method, you will have to call Connect before each call to Send. You can use SendTo even after you have established a default remote host with Connect. You can also change the default remote host prior to calling Send by making another call to Connect.
-          /// @remarks If you are using a connection-oriented protocol, Send will block until all of the bytes in the buffer are sent, unless a time-out was set by using Socket.SendTimeout. If the time-out value was exceeded, the Send call will throw a SocketException. In nonblocking mode, Send may complete successfully even if it sends less than the number of bytes in the buffer. It is your application's responsibility to keep track of the number of bytes sent and to retry the operation until the application sends the bytes in the buffer. There is also no guarantee that the data you send will appear on the network immediately. To increase network efficiency, the underlying system may delay transmission until a significant amount of outgoing data is collected. A successful completion of the Send method means that the underlying system has had room to buffer your data for a network send.
-          /// @note The successful completion of a send does not indicate that the data was successfully delivered. If no buffer space is available within the transport system to hold the data to be transmitted, send will block unless the socket has been placed in nonblocking mode.
-          /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
-          int32 SendTo(byte buffer[], int32 length, const IPEndPoint& endPoint);
+          int32 SendTo(const Array<byte>& buffer, const IPEndPoint& endPoint) {return this->SendTo(buffer, 0, buffer.Length, SocketFlags::None, endPoint);}
 
           /// @brief Sends data to a connected Socket using the specified SocketFlags.
           /// @param buffer An array of type Byte that contains the data to be sent.
@@ -948,24 +787,7 @@ namespace Pcf {
           /// @remarks If you are using a connection-oriented protocol, Send will block until all of the bytes in the buffer are sent, unless a time-out was set by using Socket.SendTimeout. If the time-out value was exceeded, the Send call will throw a SocketException. In nonblocking mode, Send may complete successfully even if it sends less than the number of bytes in the buffer. It is your application's responsibility to keep track of the number of bytes sent and to retry the operation until the application sends the bytes in the buffer. There is also no guarantee that the data you send will appear on the network immediately. To increase network efficiency, the underlying system may delay transmission until a significant amount of outgoing data is collected. A successful completion of the Send method means that the underlying system has had room to buffer your data for a network send.
           /// @note The successful completion of a send does not indicate that the data was successfully delivered. If no buffer space is available within the transport system to hold the data to be transmitted, send will block unless the socket has been placed in nonblocking mode.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
-          int32 SendTo(const Array<byte>& buffer, SocketFlags socketFlags, const IPEndPoint& endPoint);
-
-          /// @brief Sends data to a connected Socket using the specified SocketFlags.
-          /// @param buffer An array of type Byte that contains the data to be sent.
-          /// @param socketFlags A bitwise combination of the SocketFlags values.
-          /// @param endPoint: the remote host
-          /// @return int32 The number of bytes sent to the Socket.
-          /// @exception ArgumentNullException bufer is null
-          /// @exception SocketException socketFlags is not a valid combination of values. -or- An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @remarks Send synchronously sends data to the remote host specified in the Connect or Accept method and returns the number of bytes successfully sent. Send can be used for both connection-oriented and connectionless protocols.
-          /// @remarks This overload requires a buffer that contains the data you want to send. The SocketFlags value defaults to 0, the buffer offset defaults to 0, and the number of bytes to send defaults to the size of the buffer.
-          /// @remarks If you are using a connectionless protocol, you must call Connect before calling this method, or Send will throw a SocketException. If you are using a connection-oriented protocol, you must either use Connect to establish a remote host connection, or use Accept to accept an incoming connection.
-          /// @remarks If you are using a connectionless protocol and plan to send data to several different hosts, you should use the SendTo method. If you do not use the SendTo method, you will have to call Connect before each call to Send. You can use SendTo even after you have established a default remote host with Connect. You can also change the default remote host prior to calling Send by making another call to Connect.
-          /// @remarks If you are using a connection-oriented protocol, Send will block until all of the bytes in the buffer are sent, unless a time-out was set by using Socket.SendTimeout. If the time-out value was exceeded, the Send call will throw a SocketException. In nonblocking mode, Send may complete successfully even if it sends less than the number of bytes in the buffer. It is your application's responsibility to keep track of the number of bytes sent and to retry the operation until the application sends the bytes in the buffer. There is also no guarantee that the data you send will appear on the network immediately. To increase network efficiency, the underlying system may delay transmission until a significant amount of outgoing data is collected. A successful completion of the Send method means that the underlying system has had room to buffer your data for a network send.
-          /// @note The successful completion of a send does not indicate that the data was successfully delivered. If no buffer space is available within the transport system to hold the data to be transmitted, send will block unless the socket has been placed in nonblocking mode.
-          /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
-          int32 SendTo(byte buffer[], int32 length, SocketFlags socketFlags, const IPEndPoint& endPoint);
+          int32 SendTo(const Array<byte>& buffer, SocketFlags socketFlags, const IPEndPoint& endPoint) {return this->SendTo(buffer, 0, buffer.Length, socketFlags, endPoint);}
 
           /// @brief Sends the specified number of bytes of data to a connected Socket, using the specified SocketFlags.
           /// @param buffer An array of type Byte that contains the data to be sent.
@@ -984,26 +806,7 @@ namespace Pcf {
           /// @remarks If you are using a connection-oriented protocol, Send will block until all of the bytes in the buffer are sent, unless a time-out was set by using Socket.SendTimeout. If the time-out value was exceeded, the Send call will throw a SocketException. In nonblocking mode, Send may complete successfully even if it sends less than the number of bytes in the buffer. It is your application's responsibility to keep track of the number of bytes sent and to retry the operation until the application sends the bytes in the buffer. There is also no guarantee that the data you send will appear on the network immediately. To increase network efficiency, the underlying system may delay transmission until a significant amount of outgoing data is collected. A successful completion of the Send method means that the underlying system has had room to buffer your data for a network send.
           /// @note The successful completion of a send does not indicate that the data was successfully delivered. If no buffer space is available within the transport system to hold the data to be transmitted, send will block unless the socket has been placed in nonblocking mode.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
-          int32 SendTo(const Array<byte>& buffer, int32 size, SocketFlags socketFlags, const IPEndPoint& endPoint);
-
-          /// @brief Sends the specified number of bytes of data to a connected Socket, using the specified SocketFlags.
-          /// @param buffer An array of type Byte that contains the data to be sent.
-          /// @param size The number of bytes to send.
-          /// @param socketFlags A bitwise combination of the SocketFlags values.
-          /// @param endPoint: the remote host
-          /// @return int32 The number of bytes sent to the Socket.
-          /// @exception ArgumentNullException bufer is null
-          /// @exception ArgumentOutOfRangeException size is less than 0 or exceeds the size of the buffer.
-          /// @exception SocketException socketFlags is not a valid combination of values. -or- An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @remarks Send synchronously sends data to the remote host specified in the Connect or Accept method and returns the number of bytes successfully sent. Send can be used for both connection-oriented and connectionless protocols.
-          /// @remarks This overload requires a buffer that contains the data you want to send. The SocketFlags value defaults to 0, the buffer offset defaults to 0, and the number of bytes to send defaults to the size of the buffer.
-          /// @remarks If you are using a connectionless protocol, you must call Connect before calling this method, or Send will throw a SocketException. If you are using a connection-oriented protocol, you must either use Connect to establish a remote host connection, or use Accept to accept an incoming connection.
-          /// @remarks If you are using a connectionless protocol and plan to send data to several different hosts, you should use the SendTo method. If you do not use the SendTo method, you will have to call Connect before each call to Send. You can use SendTo even after you have established a default remote host with Connect. You can also change the default remote host prior to calling Send by making another call to Connect.
-          /// @remarks If you are using a connection-oriented protocol, Send will block until all of the bytes in the buffer are sent, unless a time-out was set by using Socket.SendTimeout. If the time-out value was exceeded, the Send call will throw a SocketException. In nonblocking mode, Send may complete successfully even if it sends less than the number of bytes in the buffer. It is your application's responsibility to keep track of the number of bytes sent and to retry the operation until the application sends the bytes in the buffer. There is also no guarantee that the data you send will appear on the network immediately. To increase network efficiency, the underlying system may delay transmission until a significant amount of outgoing data is collected. A successful completion of the Send method means that the underlying system has had room to buffer your data for a network send.
-          /// @note The successful completion of a send does not indicate that the data was successfully delivered. If no buffer space is available within the transport system to hold the data to be transmitted, send will block unless the socket has been placed in nonblocking mode.
-          /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
-          int32 SendTo(byte buffer[], int32 length, int32 size, SocketFlags socketFlags, const IPEndPoint& endPoint);
+          int32 SendTo(const Array<byte>& buffer, int32 size, SocketFlags socketFlags, const IPEndPoint& endPoint) {return this->SendTo(buffer, 0, size, socketFlags, endPoint);}
 
           /// @brief Sends the specified number of bytes of data to a connected Socket, starting at the specified offset, and using the specified SocketFlags.
           /// @param buffer An array of type Byte that contains the data to be sent.
@@ -1024,91 +827,7 @@ namespace Pcf {
           /// @note The successful completion of a send does not indicate that the data was successfully delivered. If no buffer space is available within the transport system to hold the data to be transmitted, send will block unless the socket has been placed in nonblocking mode.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
           int32 SendTo(const Array<byte>& buffer, int32 offset, int32 size, SocketFlags socketFlags, const IPEndPoint& endPoint);
-
-          /// @brief Sends the specified number of bytes of data to a connected Socket, starting at the specified offset, and using the specified SocketFlags.
-          /// @param buffer An array of type Byte that contains the data to be sent.
-          /// @param offset TThe position in the data buffer at which to begin sending data.
-          /// @param size The number of bytes to send.
-          /// @param socketFlags A bitwise combination of the SocketFlags values.
-          /// @param endPoint: the remote host
-          /// @return int32 The number of bytes sent to the Socket.
-          /// @exception ArgumentNullException bufer is null
-          /// @exception ArgumentOutOfRangeException offset is less than 0. -or- offset is greater than the length of buffer. -or- size is less than 0. -or- size is greater than the length of buffer minus the value of the offset parameter.
-          /// @exception SocketException socketFlags is not a valid combination of values. -or- An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @remarks Send synchronously sends data to the remote host specified in the Connect or Accept method and returns the number of bytes successfully sent. Send can be used for both connection-oriented and connectionless protocols.
-          /// @remarks This overload requires a buffer that contains the data you want to send. The SocketFlags value defaults to 0, the buffer offset defaults to 0, and the number of bytes to send defaults to the size of the buffer.
-          /// @remarks If you are using a connectionless protocol, you must call Connect before calling this method, or Send will throw a SocketException. If you are using a connection-oriented protocol, you must either use Connect to establish a remote host connection, or use Accept to accept an incoming connection.
-          /// @remarks If you are using a connectionless protocol and plan to send data to several different hosts, you should use the SendTo method. If you do not use the SendTo method, you will have to call Connect before each call to Send. You can use SendTo even after you have established a default remote host with Connect. You can also change the default remote host prior to calling Send by making another call to Connect.
-          /// @remarks If you are using a connection-oriented protocol, Send will block until all of the bytes in the buffer are sent, unless a time-out was set by using Socket.SendTimeout. If the time-out value was exceeded, the Send call will throw a SocketException. In nonblocking mode, Send may complete successfully even if it sends less than the number of bytes in the buffer. It is your application's responsibility to keep track of the number of bytes sent and to retry the operation until the application sends the bytes in the buffer. There is also no guarantee that the data you send will appear on the network immediately. To increase network efficiency, the underlying system may delay transmission until a significant amount of outgoing data is collected. A successful completion of the Send method means that the underlying system has had room to buffer your data for a network send.
-          /// @note The successful completion of a send does not indicate that the data was successfully delivered. If no buffer space is available within the transport system to hold the data to be transmitted, send will block unless the socket has been placed in nonblocking mode.
-          /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
-          int32 SendTo(byte buffer[], int32 length, int32 offset, int32 size, SocketFlags socketFlags, const IPEndPoint& endPoint);
-
-          /// @brief Sets a value that indicates whether the Socket is in blocking mode.
-          /// @param blocking true if the Socket will block; otherwise, false. The default is true
-          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @remarks The Blocking property indicates whether a Socket is in blocking mode.
-          /// @remarks If you are in blocking mode, and you make a method call which does not complete immediately, your application will block execution until the requested operation completes. If you want execution to continue even though the requested operation is not complete, change the Blocking property to false. The Blocking property has no effect on asynchronous methods. If you are sending and receiving data asynchronously and want to block execution, use the ManualResetEvent class.
-          /// @note If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
-          /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
-          void SetBlocking(bool blocking);
-
-          /// @brief Sets a Boolean value that specifies whether the Socket allows Internet Protocol (IP) datagrams to be fragmented.
-          /// param dontFragment true if the Socket allows datagram fragmentation; otherwise, false. The default is true.
-          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @remarks Datagrams require fragmentation when their size exceeds the Maximum Transfer Unit (MTU) of the transmission medium. Datagrams may be fragmented by the sending host (all Internet Protocol versions) or an intermediate router (Internet Protocol Version 4 only). If a datagram must be fragmented, and the DontFragment option is set, the datagram is discarded, and an Internet Control Message Protocol (ICMP) error message is sent back to the sender of the datagram.
-          /// @remarks Setting this property on a Transmission Control Protocol (TCP) socket will have no effect.
-          void SetDontFragment(bool dontFragment);
-          /// @brief Sets a Boolean value that specifies whether the Socket can send or receive broadcast packets.
-          /// @param enableBroadcast true if the Socket allows broadcast packets; otherwise, false. The default is false.
-          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @remarks Broadcasting is limited to a specific subnet, and must use User Datagram Protocol (UDP.) For Internet Protocol version 4, you can broadcast to your local subnet by sending a packet to 255.255.255.255; or you can use the directed broadcast address, which is the network portion of an Internet Protocol (IP) address with all bits set in the host portion. For example, if your IP address is 192.168.1.40 (a Class C address, with a netmask of 255.255.255.0 -- the network portion is the first three octets, and the host portion is the last octet), your directed broadcast address is 192.168.1.255.
-          /// @remarks Setting this property on a Transmission Control Protocol (TCP) socket will have no effect.
-          void SetEnableBroadcast(bool enableBroadcast);
-          /// @brief Sets a Boolean value that specifies whether the Socket allows only one process to bind to a port.
-          /// @param exclusiveAddressUse true if the Socket allows broadcast packets; otherwise, false. The default is false.
-          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @remarks If ExclusiveAddressUse is false, multiple sockets can use the Bind method to bind to a specific port; however only one of the sockets can perform operations on the network traffic sent to the port. If more than one socket attempts to use the Bind(EndPoint) method to bind to a particular port, then the one with the more specific IP address will handle the network traffic sent to that port.
-          /// @remarks If ExclusiveAddressUse is true, the first use of the Bind method to attempt to bind to a particular port, regardless of Internet Protocol (IP) address, will succeed; all subsequent uses of the Bind method to attempt to bind to that port will fail until the original bound socket is destroyed.
-          /// @remarks This property must be set before Bind is called; otherwise an InvalidOperationException will be thrown.
-          void SetExclusiveAddressUse(bool exclusiveAddressUse);
-          /// @brief Sets a value that specifies whether the Socket will delay closing a socket in an attempt to send all pending data.
-          /// @param lingerOption A LingerOption that specifies how to linger while closing a socket.
-          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @remarks The LingerState property changes the way Close method behaves. This property when set modifies the conditions under which the connection can be reset by Winsock. Connection resets can still occur based on the IP protocol behavior.
-          /// @remarks This property controls the length of time that a connection-oriented connection will remain open after a call to Close when data remains to be sent.
-          /// @remarks When you call methods to send data to a peer, this data is placed in the outgoing network buffer. This property can be used to ensure that this data is sent to the remote host before the Close method drops the connection.
-          /// @remarks To enable lingering, create a LingerOption instance containing the desired values, and set the LingerState property to this instance.
-          /// @remarks The following table describes the behavior of the Close method for the possible values of the Enabled property and the LingerTime property stored in the LingerState property.
-          /// | enable                              | seconds                                    | Behavior                                                                                                                          |
-          /// |-------------------------------------|--------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
-          /// | false (disabled), the default value | The time-out is not applicable, (default). | Attempts to send pending data for a connection-oriented socket (TCP, for example) until the default IP protocol time-out expires. |
-          /// | true (enabled)                      | A nonzero time-out                         | Attempts to send pending data until the specified time-out expires, and if the attempt fails, then Winsock resets the connection. |
-          /// | true (enabled)                      | A zero timeout.                            | Discards any pending data. For connection-oriented socket (TCP, for example), Winsock resets the connection.                      |
-          /// @remarks he IP stack computes the default IP protocol time-out period to use based on the round trip time of the connection. In most cases, the time-out computed by the stack is more relevant than one defined by an application. This is the default behavior for a socket when the LingerState property is not set.
-          /// @remarks When the LingerTime property stored in the LingerState property is set greater than the default IP protocol time-out, the default IP protocol time-out will still apply and virtual.
-          void SetLingerState(const LingerOption& lingerOption);
-          /// @brief Sets a value that specifies whether outgoing multicast packets are delivered to the sending application.
-          /// @param multicastLoopback true if the Socket receives outgoing multicast packets; otherwise, false.
-          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @remarks Multicast is a scalable method for many-to-many communication on the Internet. A process subscribes to a multicast address; then, any packets sent by a subscribed process are received by every other process subscribed to the multicast address.
-          /// @remarks Setting this property on a Transmission Control Protocol (TCP) socket will have no effect.
-          void SetMulticastLoopback(bool multicastLoopback);
-          /// @brief Sets a Boolean value that specifies whether the stream Socket is using the Nagle algorithm.
-          /// @param noDelay Boolean true if the Socket receives outgoing multicast packets; otherwise, false.
-          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @remarks The Nagle algorithm is designed to reduce network traffic by causing the socket to buffer small packets and then combine and send them in one packet under certain circumstances. A TCP packet consists of 40 bytes of header plus the data being sent. When small packets of data are sent with TCP, the overhead resulting from the TCP header can become a significant part of the network traffic. On heavily loaded networks, the congestion resulting from this overhead can result in lost datagrams and retransmissions, as well as excessive propagation time caused by congestion. The Nagle algorithm inhibits the sending of new TCP segments when new outgoing data arrives from the user if any previouslytransmitted data on the connection remains unacknowledged.
-          /// @remarks The majority of network applications should use the Nagle algorithm.
-          /// @remarks Setting this property on a User Datagram Protocol (UDP) socket will have no effect.
-          void SetNoDelay(bool noDelay);
+          
           /// @brief Sets the specified Socket option to the specified Boolean value.
           /// @param socketOptionLevel One of the SocketOptionLevel values.
           /// @param socketOptionName One of the SocketOptionName values.
@@ -1139,6 +858,7 @@ namespace Pcf {
           /// @remarks <br />For more information on these options, refer to the SocketOptionName enumeration.
           /// @note If you receive a SocketException exception, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
           void SetSocketOption(SocketOptionLevel socketOptionLevel, SocketOptionName socketOptionName, bool optionValue);
+          
           /// @brief Sets the specified Socket option to the specified value, represented as a byte array.
           /// @param socketOptionLevel One of the SocketOptionLevel values.
           /// @param socketOptionName One of the SocketOptionName values.
@@ -1151,20 +871,6 @@ namespace Pcf {
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
           /// @note You must call the Bind method before using SocketOptionNameAddMembership as the socketOptionName parameter.
           void SetSocketOption(SocketOptionLevel socketOptionLevel, SocketOptionName socketOptionName, const Array<byte>& optionValue);
-
-          /// @brief Sets the specified Socket option to the specified value, represented as a byte array.
-          /// @param socketOptionLevel One of the SocketOptionLevel values.
-          /// @param socketOptionName One of the SocketOptionName values.
-          /// @param optionValue An array of type Byte that represents the value of the option.
-          /// @param legnth The optionValue length.
-          /// @exception ArgumentNullException optionValue is null.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @remarks Socket options determine the behavior of the current Socket. Use this overload to set those Socket options that require a byte array as an option value.
-          /// @note If you receive a SocketException, use the SocketException::ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
-          /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
-          /// @note You must call the Bind method before using SocketOptionNameAddMembership as the socketOptionName parameter.
-          void SetSocketOption(SocketOptionLevel socketOptionLevel, SocketOptionName socketOptionName, const byte optionValue[], int32 length);
 
           /// @brief Sets the specified Socket option to the specified integer value.
           /// @param socketOptionLevel One of the SocketOptionLevel values.
@@ -1208,6 +914,7 @@ namespace Pcf {
           /// @remarks <br />For more information on these options, refer to the SocketOptionName enumeration.
           /// @note If you receive a SocketException exception, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
           void SetSocketOption(SocketOptionLevel socketOptionLevel, SocketOptionName socketOptionName, int32 optionValue);
+          
           /// @brief Sets the specified Socket option to the specified value, represented as an object.
           /// @param socketOptionLevel One of the SocketOptionLevel values.
           /// @param socketOptionName One of the SocketOptionName values.
@@ -1220,38 +927,7 @@ namespace Pcf {
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
           /// @note You must call the Bind method before using SocketOptionNameAddMembership as the socketOptionName parameter.
           void SetSocketOption(SocketOptionLevel socketOptionLevel, SocketOptionName socketOptionName, const Object& optionValue);
-          /// @brief Sets a value that specifies the size of the receive buffer of the Socket.
-          /// @param  An int32 that contains the size, in bytes, of the receive buffer. The default is 8192.
-          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @exception ArgumentOutOfRangeException TThe value specified for a set operation is less than 0.
-          /// @remarks A larger buffer size potentially reduces the number of empty acknowledgements (TCP packets with no data portion), but might also delay the recognition of connection difficulties. Consider increasing the buffer size if you are transferring large files, or you are using a high bandwidth, high latency connection (such as a satellite broadband provider.)
-          void SetReceiveBufferSize(int32 bufferSize);
-          /// @brief Sets a value that specifies the size of the send buffer of the Socket.
-          /// @param  An int32 that contains the size, in bytes, of the send buffer. The default is 8192.
-          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @exception ArgumentOutOfRangeException TThe value specified for a set operation is less than 0.
-          /// @remarks A larger buffer size potentially reduces the number of empty acknowledgements (TCP packets with no data portion), but might also delay the recognition of connection difficulties. Consider increasing the buffer size if you are transferring large files, or you are using a high bandwidth, high latency connection (such as a satellite broadband provider.)
-          void SetSendBufferSize(int32 bufferSize);
-          /// @brief Sets a value that specifies the amount of time after which a synchronous Send call will time out.
-          /// @param timeout An int32 that contains the size, in bytes, of the send buffer. The default is 8192.
-          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @exception ArgumentOutOfRangeException The value specified for a set operation is less than -1.
-          /// @remarks This option applies to synchronous Receive calls only. If the time-out period is exceeded, the Send method will throw a SocketException.
-          void SetSendTimeout(int32 timeout);
-          /// @brief Sets a value that specifies the Time To Live (TTL) value of Internet Protocol (IP) packets sent by the Socket.
-          /// @param ttl The TTL value.
-          /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information. - or - socketOptionName was set to the unsupported value SocketOptionNameMaxConnections.
-          /// @exception ObjectClosedException The Socket has been closed.
-          /// @exception ArgumentOutOfRangeException The TTL value can't be set to a negative number.
-          /// @exception NotSupportedException This property can be set only for sockets in the AddressFamilyInterNetwork or AddressFamilyInterNetworkV6 families.
-          /// @remarks The TTL value indicates the maximum number of routers the packet can traverse before the router discards the packet and an Internet Control Message Protocol (ICMP) "TTL exceeded" error message is returned to the sender.
-          /// @remarks The TTL value may be set to a value from 0 to 255. When this property is not set, the default TTL value for a socket is 32.
-          /// @remarks Setting this property on a Transmission Control Protocol (TCP) socket is ignored by the TCP/IP stack if a successful connection has been established using the socket.
-          /// @remarks If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
-          void SetTtl(int32 ttl);
+          
           /// @brief Disables sends and receives on a Socket.
           /// @param how One of the SocketShutdown values that specifies the operation that will no longer be allowed.
           /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
@@ -1273,36 +949,55 @@ namespace Pcf {
           /// @note If you receive a SocketException when calling the Shutdown method, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
           void Shutdown(SocketShutdown how);
-
+          
         private :
+          Socket(intptr socket);
+          void InnerBind();
+          void InnerConnect();
           int32 GetAvailable() const;
           bool GetBlocking() const;
           bool GetDontFragment() const;
+          bool GetDualMode() const;
           bool GetEnableBroadcast() const;
           bool GetExclusiveAddressUse() const;
           LingerOption GetLingerState() const;
-          SharedPointer<EndPoint> GetLocalEndPoint() const;
+          const EndPoint& GetLocalEndPoint() const;
           bool GetMulticastLoopback() const;
           bool GetNoDelay() const;
           int32 GetReceiveBufferSize() const;
           int32 GetReceiveTimeout() const;
-          void SetReceiveTimeout(int32 value);
           const EndPoint& GetRemoteEndPoint() const;
           int32 GetSendBufferSize() const;
           int32 GetSendTimeout() const;
           int32 GetTtl() const;
+          void SetBlocking(bool blocking);
+          void SetDontFragment(bool dontFragment);
+          void SetDualMode(bool dualMode);
+          void SetEnableBroadcast(bool enableBroadcast);
+          void SetExclusiveAddressUse(bool exclusiveAddressUse);
+          void SetLingerState(const LingerOption& lingerOption);
+          void SetMulticastLoopback(bool multicastLoopback);
+          void SetNoDelay(bool noDelay);
+          void SetReceiveBufferSize(int32 bufferSize);
+          void SetReceiveTimeout(int32 value);
+          void SetSendBufferSize(int32 bufferSize);
+          void SetSendTimeout(int32 timeout);
+          void SetTtl(int32 ttl);
           
-          Socket(SocketHandle socket);
-          SocketHandle socket;
-          System::Net::Sockets::AddressFamily addressFamily;
-          System::Net::Sockets::ProtocolType protocolType;
-          System::Net::Sockets::SocketType socketType;
-          SharedPointer<EndPoint> localEndPoint;
-          SharedPointer<EndPoint> remoteEndPoint;
-          bool connected;
-          bool listening;
-          bool nonBlocking;
-          bool bound;
+          struct SocketData {
+            intptr socket = 0;
+            System::Net::Sockets::AddressFamily addressFamily = System::Net::Sockets::AddressFamily::Unspecified;
+            System::Net::Sockets::ProtocolType protocolType = System::Net::Sockets::ProtocolType::Unspecified;
+            System::Net::Sockets::SocketType socketType = System::Net::Sockets::SocketType::Unknown;
+            UniquePointer<EndPoint> localEndPoint;
+            UniquePointer<EndPoint> remoteEndPoint;
+            bool connected = false;
+            bool listening = false;
+            bool nonBlocking = false;
+            bool bound = false;
+          };
+          SharedPointer<SocketData> data = SharedPointer<SocketData>::Create();
+          
         };
       }
     }

@@ -454,7 +454,7 @@ inline System::IO::Stream& operator<<(System::IO::Stream& stream, int64 value) {
 }
 
 inline System::IO::Stream& operator<<(System::IO::Stream& stream, void* value) {
-  stream << System::IntPtr(value).ToString();
+  stream << System::IntPtr((intptr)value).ToString();
   return stream;
 }
 

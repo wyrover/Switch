@@ -3,6 +3,7 @@
 #pragma once
 
 #include "Drawing/Imaging.h"
+#include "Drawing/Text.h"
 
 #include "Drawing/Bitmap.h"
 #include "Drawing/Brush.h"

@@ -165,7 +165,7 @@ namespace PcfUnitTests {
     
     void ExchangeTemplate() {
       string location = "str1";
-      Assert::AreEqual("str1", Interlocked::Exchange(location, "str2"_S), pcf_current_information);
+      Assert::AreEqual("str1", Interlocked::Exchange(location, "str2"_s), pcf_current_information);
       Assert::AreEqual("str2", location, pcf_current_information);
     }
     

@@ -9,7 +9,6 @@
 #include "System/Char.h"
 #include "System/Double.h"
 #include "System/Enum.h"
-#include "System/IHashable.h"
 #include "System/Int16.h"
 #include "System/Int32.h"
 #include "System/Int64.h"
@@ -27,14 +26,7 @@ namespace Pcf {
   /// @brief Represent a polymorphic wrapper capable of holding any type.
   /// This example sho ho to use Any:
   /// @include Any.cpp
-  class Any : public object, public System::IHashable {
-#if __linux__ && _LP64
-    using llint = long long int;
-    using ullint = unsigned long long int;
-#else
-    using llint = long;
-    using ullint = unsigned long;
-#endif
+  class Any : public object {
     template <typename T, typename Bool>
     struct EnumOrOtherToAny {};
     
@@ -45,7 +37,7 @@ namespace Pcf {
     
     template <typename T>
     struct EnumOrOtherToAny<T, std::false_type> {
-      SharedPointer<object> operator()(T value) {return new System::IntPtr(*((int64**)&value));}
+      SharedPointer<object> operator()(T value) {return new System::IntPtr((intptr)&value);}
     };
     
     template <typename T, typename Bool>
@@ -105,9 +97,9 @@ namespace Pcf {
     Any(uint16 value) : value(new System::UInt16(value)) {}
     Any(uint32 value) : value(new System::UInt32(value)) {}
     Any(uint64 value) : value(new System::UInt64(value)) {}
-    Any(void* value) : value(new System::IntPtr(value)) {}
-    Any(llint value) : value(sizeof(long) == 8 ? (object*)new System::Int64(value) : (object*)new System::Int32(value)) {}
-    Any(ullint value) : value(sizeof(long) == 8 ? (object*)new System::UInt64(value) : (object*)new System::UInt32(value)) {}
+    Any(void* value) : value(new System::IntPtr((intptr)value)) {}
+    Any(llong value) : value(sizeof(long) == 8 ? (object*)new System::Int64(value) : (object*)new System::Int32(value)) {}
+    Any(ullong value) : value(sizeof(long) == 8 ? (object*)new System::UInt64(value) : (object*)new System::UInt32(value)) {}
     template<typename T, typename Attribute>
     Any(const Property<T, Attribute>& value) : value(ObjectOrEnumOrOtherToAny<T>()(value())) {}
     template <typename T>
@@ -144,9 +136,9 @@ namespace Pcf {
     bool operator==(uint16 value) const {return As<System::UInt16>() == value;}
     bool operator==(uint32 value) const {return As<System::UInt32>() == value;}
     bool operator==(uint64 value) const {return As<System::UInt64>() == value;}
-    bool operator==(void* value) const {return As<System::IntPtr>() == value;}
-    bool operator==(llint value) const {return sizeof(long) == 8 ? As<System::Int64>() == value : As<System::Int32>() == value;}
-    bool operator==(ullint value) const {return sizeof(long) == 8 ? As<System::UInt64>() == value : As<System::UInt32>() == value;}
+    bool operator==(void* value) const {return As<System::IntPtr>() == (intptr)value;}
+    bool operator==(llong value) const {return sizeof(long) == 8 ? As<System::Int64>() == value : As<System::Int32>() == value;}
+    bool operator==(ullong value) const {return sizeof(long) == 8 ? As<System::UInt64>() == value : As<System::UInt32>() == value;}
     template<typename T>
     bool operator==(const T& value) const {return As<T>() == value;}
     template<typename T>
@@ -207,7 +199,7 @@ namespace Pcf {
     /// @return Int32 A hash code for the current Object.
     int32 GetHashCode() const override {
       if(!this->HasValue) return 0;
-      return As<System::IHashable>().GetHashCode();
+      return As<object>().GetHashCode();
     }
     
     /// @brief Determines whether this instance of Any and a specified Object, which must also be a Any Object, have the same value.

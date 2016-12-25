@@ -1,5 +1,5 @@
 #include "../../../../Includes/Pcf/System/Text/UnicodeEncoding.h"
-#include "../../Os/UnicodeEncodings.h"
+#include "../../../__OS/CoreApi.h"
 
 using namespace System;
 using namespace System::Text;
@@ -14,11 +14,11 @@ UnicodeEncoding::Encoder& UnicodeEncoding::Encoder::operator =(const UnicodeEnco
 }
 
 int32 UnicodeEncoding::Encoder::GetNbBytes(char32 c) const {
-  return Os::UnicodeEncodings::UTF16::GetByteCount(c);
+  return __OS::CoreApi::UnicodeEncodings::UTF16::GetByteCount(c);
 }
 
 void UnicodeEncoding::Encoder::Encode(char32 c, byte bytes[]) const {
-  Os::UnicodeEncodings::UTF16::Encode(c, bytes, this->bigEndian);
+  __OS::CoreApi::UnicodeEncodings::UTF16::Encode(c, bytes, this->bigEndian);
 }
 
 String UnicodeEncoding::Encoder::ToString() const {
@@ -41,7 +41,7 @@ void UnicodeEncoding::Decoder::Add(byte b) {
   Encoding::Decoder::Add(b);
   if (count == 2) {
     uint32 cp;
-    if (Os::UnicodeEncodings::UTF16::Decode(bytes, count, bigEndian, cp) == 2) {
+    if (__OS::CoreApi::UnicodeEncodings::UTF16::Decode(bytes, count, bigEndian, cp) == 2) {
       codePoint = char32(cp);
       finished = true;
       return;
@@ -50,7 +50,7 @@ void UnicodeEncoding::Decoder::Add(byte b) {
   
   if (count == 4) {
     uint32 cp;
-    if (Os::UnicodeEncodings::UTF16::Decode(bytes, count, bigEndian, cp) == 4) {
+    if (__OS::CoreApi::UnicodeEncodings::UTF16::Decode(bytes, count, bigEndian, cp) == 4) {
       codePoint = char32(cp);
       finished = true;
       return;
@@ -109,14 +109,14 @@ UniquePointer<Encoding::Encoder> UnicodeEncoding::CreateEncoder() const {
 }
 
 int32 UnicodeEncoding::GetByteCount(char32 c) const {
-  return Os::UnicodeEncodings::UTF16::GetByteCount(c);
+  return __OS::CoreApi::UnicodeEncodings::UTF16::GetByteCount(c);
 }
 
 int32 UnicodeEncoding::GetCharCount(const byte bytes[], int32 bytesSize, int32 index, int32 count) const {
   if (bytes == null && bytesSize != 0) throw ArgumentNullException(pcf_current_information);
   ValidateGCC(bytesSize, index, count);
   if (bytesSize == 0) return 0;
-  return Os::UnicodeEncodings::UTF16::GetLength(&bytes[index], count, this->bigEndian);
+  return __OS::CoreApi::UnicodeEncodings::UTF16::GetLength(&bytes[index], count, this->bigEndian);
 }
 
 int32 UnicodeEncoding::GetMaxByteCount(int32 charCount) const {

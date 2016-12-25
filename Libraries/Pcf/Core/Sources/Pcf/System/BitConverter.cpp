@@ -5,6 +5,7 @@
 #include "../../../Includes/Pcf/System/Text/StringBuilder.h"
 
 using namespace System;
+using namespace System::Text;
 
 Property<bool, ReadOnly> BitConverter::IsLittleEndian {
   [] {
@@ -57,24 +58,13 @@ Array<byte> BitConverter::GetBytes(uint64 value) {
   return {Convert::ToByte(value&0x00000000000000FF), Convert::ToByte((value&0x000000000000FF00)>> 8), Convert::ToByte((value&0x0000000000FF0000)>> 16), Convert::ToByte((value&0x00000000FF000000)>> 24), Convert::ToByte((value&0x000000FF00000000)>> 32), Convert::ToByte((value&0x0000FF0000000000)>> 40), Convert::ToByte((value&0x00FF000000000000)>> 48), Convert::ToByte((value&0xFF00000000000000)>> 56)};
 }
 
-#if __linux__ && _LP64
-Array<byte> BitConverter::GetBytes(long long int value) {
-  return GetBytes(uint64(value));
-}
-
-Array<byte> BitConverter::GetBytes(unsigned long long int value) {
-  return GetBytes(uint64(value));
-}
-
-#else
-Array<byte> BitConverter::GetBytes(long value) {
+Array<byte> BitConverter::GetBytes(llong value) {
   return GetBytes(uint32(value));
 }
 
-Array<byte> BitConverter::GetBytes(unsigned long value) {
+Array<byte> BitConverter::GetBytes(ullong value) {
   return GetBytes(uint32(value));
 }
-#endif
 
 float BitConverter::Int32BitsToSingle(int32 value) {
   return *((float*)&value);

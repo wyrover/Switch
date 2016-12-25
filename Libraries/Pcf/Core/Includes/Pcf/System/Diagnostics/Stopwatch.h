@@ -27,12 +27,12 @@ namespace Pcf {
         /// @remarks The timer frequency indicates the timer precision and resolution. For example, a timer frequency of 2 million ticks per second equals a timer resolution of 500 nanoseconds per tick. In other words, because one second equals 1 billion nanoseconds, a timer frequency of 2 million ticks per second is equivalent to 2 million ticks per 1 billion nanoseconds, which can be further simplified to 1 tick per 500 nanoseconds.
         /// @remarks The Frequency value depends on the resolution of the underlying timing mechanism. If the installed hardware and operating system support a high-resolution performance counter, then the Frequency value reflects the frequency of that counter. Otherwise, the Frequency value is based on the system timer frequency.
         /// @remarks Because the Stopwatch frequency depends on the installed hardware and operating system, the Frequency value remains constant while the system is running.
-        constexpr static int64 Frequency = 10000000;
+        static Property<int64, ReadOnly> Frequency;
         
         /// @brief Indicates whether the timer is based on a high-resolution performance counter. This field is read-only.
         /// @return true if the timer is based on a high-resolution performance counte; otherwise, false.
         /// @remarks The timer used by the Stopwatch class depends on the system hardware and operating system. IsHighResolution is true if the Stopwatch timer is based on a high-resolution performance counter. Otherwise, IsHighResolution is false, which indicates that the Stopwatch timer is based on the system timer.
-        constexpr static bool IsHighResolution = true;
+        static Property<bool, ReadOnly> IsHighResolution;
         
         /// @brief Initializes a new instance of the Stopwatch class.
         /// @remarks The returned Stopwatch instance is stopped, and the elapsed time property of the instance is zero.

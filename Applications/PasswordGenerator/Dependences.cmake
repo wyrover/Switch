@@ -33,4 +33,4 @@ macro(FindPackage PACKAGENAME REVISIONNUMBER)
   endif ()
 endmacro()
 
-FindPackage(Pcf 0.1.0)
+FindPackage(Pcf 0.2.0)

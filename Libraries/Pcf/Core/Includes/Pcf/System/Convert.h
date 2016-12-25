@@ -381,13 +381,11 @@ namespace Pcf {
       /// @exception OverflowException value is less than System::Byte::MinValue or greater than System::Byte::MaxValue.
       static byte ToByte(const Int64& value) { return value.ToByte(*provider); }
       
-#if __linux__ && _LP64
       /// @brief Convert uint64 to byte
       /// @param value uint64 to convert
       /// @return byte A new byte object converted from value
       /// @exception OverflowException value is less than System::Byte::MinValue or greater than System::Byte::MaxValue.
-      static byte ToByte(long long value) { return Int64(value).ToByte(*provider); }
-#endif
+      static byte ToByte(llong value) { return Int64(value).ToByte(*provider); }
       
       /// @brief Convert sbyte to byte
       /// @param value sbyte to convert
@@ -478,13 +476,11 @@ namespace Pcf {
       /// @exception OverflowException value is less than System::Byte::MinValue or greater than System::Byte::MaxValue.
       static byte ToByte(const UInt64& value) { return value.ToByte(*provider); }
       
-#if __linux__ && _LP64
       /// @brief Convert uint64 to byte
       /// @param value uint64 to convert
       /// @return byte A new byte object converted from value
       /// @exception OverflowException value is less than System::Byte::MinValue or greater than System::Byte::MaxValue.
-      static byte ToByte(unsigned long long value) { return UInt64(value).ToByte(*provider); }
-#endif
+      static byte ToByte(ullong value) { return UInt64(value).ToByte(*provider); }
       
       /// @brief Convert T to byte
       /// @param value T to convert
@@ -1275,7 +1271,7 @@ namespace Pcf {
       /// @param value void* to convert
       
       /// @return int16 A new int16 object converted from value
-      static int16 ToInt16(void* value) { return Int32(IntPtr(value).ToInt32()).ToInt16(*provider); }
+      static int16 ToInt16(void* value) { return Int32(IntPtr((intptr)value).ToInt32()).ToInt16(*provider); }
       
       /// @brief Convert void* to int16
       /// @param value void* to convert
@@ -1519,7 +1515,7 @@ namespace Pcf {
       /// @brief Convert void* to int64
       /// @param value void* to convert
       /// @return int32 A new int32 object converted from value
-      static int32 ToInt32(void* value) { return IntPtr(value).ToInt32(); }
+      static int32 ToInt32(void* value) { return IntPtr((intptr)value).ToInt32(); }
       
       /// @brief Convert void* to int64
       /// @param value void* to convert
@@ -1609,14 +1605,11 @@ namespace Pcf {
       /// @return int32 A new int32 object converted from value
       /// @exception OverflowException value is greater than System::Int32::MaxValue.
       static int32 ToInt32(const UInt64& value) { return value.ToInt32(*provider); }
-      
-#if __APPLE__
-      /// @brief Convert size_t to int32
-      /// @param value uint64 to convert
-      /// @return int32 A new int32 object converted from value
-      /// @exception OverflowException value is greater than System::Int32::MaxValue.
-      static int32 ToInt32(size_t value) { return UInt64(value).ToInt32(*provider); }
-#endif
+
+      /// @cond
+      static int32 ToInt32(llong value) { return Int64(value).ToInt32(*provider); }
+      static int32 ToInt32(ullong value) { return UInt64(value).ToInt32(*provider); }
+      /// @endcond
 
       /// @brief Convert T to int32
       /// @param value T to convert
@@ -1763,7 +1756,7 @@ namespace Pcf {
       /// @brief Convert void* to int64
       /// @param value void* to convert
       /// @return int64 A new int64 object converted from value
-      static int64 ToInt64(void* value) { return IntPtr(value).ToInt64(); }
+      static int64 ToInt64(void* value) { return IntPtr((intptr)value).ToInt64(); }
       
       /// @brief Convert void* to int64
       /// @param value void* to convert
@@ -2969,6 +2962,11 @@ namespace Pcf {
       /// @return uint32 A new uint32 object converted from value
       /// @exception OverflowException value is greater than System::UInt32::MaxValue.
       static uint32 ToUInt32(const UInt64& value) { return value.ToUInt32(*provider); }
+      
+      /// @cond
+      static uint32 ToUInt32(llong value) { return Int64(value).ToUInt32(*provider); }
+      static uint32 ToUInt32(ullong value) { return UInt64(value).ToUInt32(*provider); }
+      /// @endcond
       
       /// @brief Convert T to uint32
       /// @param value T to convert

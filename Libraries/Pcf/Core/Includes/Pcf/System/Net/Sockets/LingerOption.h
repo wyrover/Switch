@@ -91,10 +91,8 @@ namespace Pcf {
           };
 
         private:
-          /// @cond
           bool enabled = false;
           int32 lingerTime = 0;
-          /// @endcond
         };
       }
     }

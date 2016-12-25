@@ -2,8 +2,6 @@
 /// @brief Contains Pcf::System::Single struct.
 #pragma once
 
-#include <limits>
-
 #include "Object.h"
 #include "../Property.h"
 #include "../Types.h"
@@ -27,23 +25,22 @@ namespace Pcf {
     struct Single : public ValueType, public IComparable, public IConvertible, public IFormattable {
     public:
       /// @brief Represents the smallest positive Single value greater than zero. This field is constant.
-      constexpr static float Epsilon = 1.401298E-45F;
+      static Property<float, ReadOnly> Epsilon;
 
-      #undef max
       /// @brief Represents the largest possible value of an Single 3.40282e+038f. This field is constant.
-      constexpr static float MaxValue = std::numeric_limits<float>::max();
+      static Property<float, ReadOnly> MaxValue;
 
       /// @brief Represents the smallest possible value of Single -3.40282e+038f. This field is constant.
-      constexpr static float MinValue = -std::numeric_limits<float>::max();
+      static Property<float, ReadOnly> MinValue;
 
       /// @brief Represents not a number (NaN). This field is constant.
-      const static float NaN;
+      static Property<float, ReadOnly> NaN;
 
       /// @brief Represents negative infinity. This field is constant.
-      constexpr static float NegativeInfinity = -std::numeric_limits<float>::infinity();
+      static Property<float, ReadOnly> NegativeInfinity;
 
       /// @brief Represents positive infinity. This field is constant.
-      constexpr static float PositiveInfinity = std::numeric_limits<float>::infinity();
+      static Property<float, ReadOnly> PositiveInfinity;
 
       /// @brief Create a new instance of struct Single
       /// @remarks Single is initialized with the default value 0.

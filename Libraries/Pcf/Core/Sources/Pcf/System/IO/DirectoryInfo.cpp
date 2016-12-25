@@ -4,12 +4,14 @@
 #include "../../../../Includes/Pcf/System/IO/Path.h"
 #include "../../../../Includes/Pcf/System/Security/SecurityException.h"
 #include "../../../../Includes/Pcf/System/Text/StringBuilder.h"
-#include "../../Os/Directory.h"
+#include "../../../__OS/CoreApi.h"
 
 using namespace System;
 using namespace System::IO;
 
-const DirectoryInfo DirectoryInfo::Empty;
+Property<DirectoryInfo, ReadOnly> DirectoryInfo::Empty {
+  [] {return DirectoryInfo();}
+};
 
 DirectoryInfo::DirectoryInfo(const string& path) {
   this->fullPath = Path::GetFullPath(path);
@@ -17,7 +19,7 @@ DirectoryInfo::DirectoryInfo(const string& path) {
 
 bool DirectoryInfo::GetExists() const {
   System::IO::FileAttributes fileAttributes = (System::IO::FileAttributes)0;
-  return (Os::Directory::GetFileAttributes(this->fullPath.Data(), fileAttributes) == 0 && Enum<FileAttributes>(fileAttributes).HasFlag(FileAttributes::Directory));
+  return (__OS::CoreApi::Directory::GetFileAttributes(this->fullPath.Data(), fileAttributes) == 0 && Enum<FileAttributes>(fileAttributes).HasFlag(FileAttributes::Directory));
 }
 
 string DirectoryInfo::GetName() const {
@@ -38,7 +40,7 @@ DirectoryInfo DirectoryInfo::GetRoot() const {
 }
 
 void DirectoryInfo::Create() {
-  if (Os::Directory::CreateDirectory(this->fullPath) != 0)
+  if (__OS::CoreApi::Directory::CreateDirectory(this->fullPath) != 0)
     throw IOException(pcf_current_information);
 }
 
@@ -54,26 +56,26 @@ void DirectoryInfo::Delete(bool recursive) {
     throw Security::SecurityException(pcf_current_information);
   
   if (recursive) {
-    for (string item : Os::Directory::EnumerateFiles(this->fullPath, "*"))
+    for (string item : __OS::CoreApi::Directory::EnumerateFiles(this->fullPath, "*"))
       File::Delete(Path::Combine(this->fullPath, item));
-    for (string item : Os::Directory::EnumerateDirectories(this->fullPath, "*"))
+    for (string item : __OS::CoreApi::Directory::EnumerateDirectories(this->fullPath, "*"))
       Directory::Delete(Path::Combine(this->fullPath, item), true);
   }
   
-  if (Os::Directory::RemoveDirectory(this->fullPath) != 0)
+  if (__OS::CoreApi::Directory::RemoveDirectory(this->fullPath) != 0)
     throw IOException(pcf_current_information);
 }
 
 Array<FileInfo> DirectoryInfo::GetFiles(const string& searchPattern) const {
   System::Collections::Generic::List<FileInfo> files;
-  for (string item : Os::Directory::EnumerateFiles(this->fullPath, searchPattern))
+  for (string item : __OS::CoreApi::Directory::EnumerateFiles(this->fullPath, searchPattern))
     files.Add(FileInfo(Path::Combine(this->fullPath, item)));
   return files.ToArray();
 }
 
 Array<DirectoryInfo> DirectoryInfo::GetDirectories(const string& searchPattern) const {
   System::Collections::Generic::List<DirectoryInfo> directories;
-  for (string item : Os::Directory::EnumerateDirectories(this->fullPath, searchPattern))
+  for (string item : __OS::CoreApi::Directory::EnumerateDirectories(this->fullPath, searchPattern))
     directories.Add(DirectoryInfo(Path::Combine(this->fullPath, item)));
   return directories.ToArray();
 }
@@ -90,9 +92,9 @@ void DirectoryInfo::MoveTo(const string& destDirName) {
   string targetDirName = Path::Combine(destDirName, this->fullPath.Substring(this->fullPath.LastIndexOf(Path::DirectorySeparatorChar) + 1));
   Directory::CreateDirectory(targetDirName);
   
-  for (string item : Os::Directory::EnumerateFiles(this->fullPath, "*"))
+  for (string item : __OS::CoreApi::Directory::EnumerateFiles(this->fullPath, "*"))
     File::Move(Path::Combine(this->fullPath, item), Path::Combine(targetDirName, item));
-  for (string item : Os::Directory::EnumerateDirectories(this->fullPath, "*"))
+  for (string item : __OS::CoreApi::Directory::EnumerateDirectories(this->fullPath, "*"))
     Directory::Move(Path::Combine(this->fullPath, item), Path::Combine(targetDirName, item));
 
   Delete();

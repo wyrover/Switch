@@ -16,7 +16,7 @@ namespace Pcf {
       /// @brief Implements a System::IO::TextWriter for writing characters to a stream in a particular encoding.
       class StreamWriter : public TextWriter {
       public:
-        static const StreamWriter Null;
+        static Property<StreamWriter, ReadOnly> Null;
 
         /// @brief Initializes a new instance of the System::IO::StreamWriter class for the specified file on the specified stream pointer.
         /// @param stream The stream pointer to write to.

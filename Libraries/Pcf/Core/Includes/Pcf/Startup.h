@@ -7,7 +7,7 @@
 namespace Pcf {
   /// @brief Defines the entry point to be called when the application loads. Generally this is set either to the main form in your application or to the Main procedure that should run when the application starts.
   /// @param mainClass The class that contains the static Main method.
-  /// @section Examples
+  /// @par Examples
   /// This example show a Main method without arguments and without return code
   /// @code
   /// #include <Pcf/Pcf>

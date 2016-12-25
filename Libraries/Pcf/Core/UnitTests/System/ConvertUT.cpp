@@ -341,7 +341,7 @@ namespace {
     ASSERT_EQ(0, Convert::ToByte((char32)0));
     ASSERT_EQ(1, Convert::ToByte((char32)1));
     ASSERT_EQ(84, Convert::ToByte((char32)'T'));
-    ASSERT_EQ(Char::MinValue, Convert::ToByte(Char::MinValue));
+    ASSERT_EQ(Char::MinValue(), Convert::ToByte(Char::MinValue));
     ASSERT_THROW(Convert::ToByte(Char::MaxValue), OverflowException);
   }
   
@@ -387,7 +387,7 @@ namespace {
     ASSERT_EQ(1, Convert::ToByte((sbyte)1));
     ASSERT_EQ(112, Convert::ToByte((sbyte)112));
     ASSERT_THROW(Convert::ToByte(SByte::MinValue), OverflowException);
-    ASSERT_EQ(SByte::MaxValue, Convert::ToByte(SByte::MaxValue));
+    ASSERT_EQ(SByte::MaxValue(), Convert::ToByte(SByte::MaxValue));
   }
   
   TEST(Convert, ToByteFromSingle) {
@@ -421,7 +421,7 @@ namespace {
     ASSERT_EQ(0, Convert::ToByte((uint16)0));
     ASSERT_EQ(1, Convert::ToByte((uint16)1));
     ASSERT_EQ(167, Convert::ToByte((uint16)167));
-    ASSERT_EQ(UInt16::MinValue, Convert::ToByte(UInt16::MinValue));
+    ASSERT_EQ(UInt16::MinValue(), Convert::ToByte(UInt16::MinValue));
     ASSERT_THROW(Convert::ToByte(UInt16::MaxValue), OverflowException);
   }
   
@@ -429,7 +429,7 @@ namespace {
     ASSERT_EQ(0, Convert::ToByte((uint32)0));
     ASSERT_EQ(1, Convert::ToByte((uint32)1));
     ASSERT_EQ(189, Convert::ToByte((uint32)189));
-    ASSERT_EQ(UInt32::MinValue, Convert::ToByte(UInt32::MinValue));
+    ASSERT_EQ(UInt32::MinValue(), Convert::ToByte(UInt32::MinValue));
     ASSERT_THROW(Convert::ToByte(UInt32::MaxValue), OverflowException);
   }
   
@@ -437,7 +437,7 @@ namespace {
     ASSERT_EQ(0, Convert::ToByte((uint64)0));
     ASSERT_EQ(1, Convert::ToByte((uint64)1));
     ASSERT_EQ(255, Convert::ToByte((uint64)255));
-    ASSERT_EQ(UInt64::MinValue, Convert::ToByte(UInt64::MinValue));
+    ASSERT_EQ(UInt64::MinValue(), Convert::ToByte(UInt64::MinValue));
     ASSERT_THROW(Convert::ToByte(UInt64::MaxValue), OverflowException);
   }
   
@@ -458,8 +458,8 @@ namespace {
     ASSERT_EQ(0, Convert::ToChar((byte)0));
     ASSERT_EQ(1, Convert::ToChar((byte)1));
     ASSERT_EQ('T', Convert::ToChar((byte)84));
-    ASSERT_EQ(Byte::MinValue, Convert::ToChar(Byte::MinValue));
-    ASSERT_EQ(Byte::MaxValue, Convert::ToChar(Byte::MaxValue));
+    ASSERT_EQ(Byte::MinValue(), Convert::ToChar(Byte::MinValue));
+    ASSERT_EQ(Byte::MaxValue(), Convert::ToChar(Byte::MaxValue));
   }
   
   TEST(Convert, ToCharFromChar) {
@@ -487,7 +487,7 @@ namespace {
     ASSERT_EQ(1, Convert::ToChar((int16)1));
     ASSERT_EQ(167, Convert::ToChar((int16)167));
     ASSERT_THROW(Convert::ToChar(Int16::MinValue), OverflowException);
-    ASSERT_EQ(Int16::MaxValue, Convert::ToInt32(Convert::ToChar(Int16::MaxValue)));
+    ASSERT_EQ(Int16::MaxValue(), Convert::ToInt32(Convert::ToChar(Int16::MaxValue)));
   }
   
   TEST(Convert, ToCharFromInt32) {
@@ -514,7 +514,7 @@ namespace {
    ASSERT_EQ(1, Convert::ToChar((sbyte)1));
    ASSERT_EQ(112, Convert::ToChar((sbyte)112));
    ASSERT_THROW(Convert::ToChar(SByte::MinValue), OverflowException);
-   ASSERT_EQ(SByte::MaxValue, Convert::ToChar(SByte::MaxValue));
+   ASSERT_EQ(SByte::MaxValue(), Convert::ToChar(SByte::MaxValue));
    }
    
    TEST(Convert, ToCharFromSingle)

@@ -2022,7 +2022,7 @@ namespace Pcf {
     __function_ptr__ method = null;
     TResult(*invoker)(const __function_ptr__&, const __function_ptr__&) = StaticFunctionInvoker::Invoke;
   };
-  
+
   template<typename TResult = void, typename T1 = std::nullptr_t, typename T2 = std::nullptr_t, typename T3 = std::nullptr_t, typename T4 = std::nullptr_t, typename T5 = std::nullptr_t, typename T6 = std::nullptr_t, typename T7 = std::nullptr_t, typename T8 = std::nullptr_t, typename T9 = std::nullptr_t, typename T10 = std::nullptr_t, typename T11 = std::nullptr_t, typename T12 = std::nullptr_t, typename T13 = std::nullptr_t, typename T14 = std::nullptr_t, typename T15 = std::nullptr_t, typename T16 = std::nullptr_t>
   using fp = FunctionPointer<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>;
 }

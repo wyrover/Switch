@@ -329,12 +329,12 @@ namespace Pcf {
         private:
           class Hasher {
           public:
-            size_t operator()(const T& value) const { return Hash::GetHashCode(value); }
+            size_t operator()(const T& value) const { return Pcf::GetHashCode(value); }
           };
           
           class EqualTo {
           public:
-            bool operator()(const T& a, const T& b) const {return Compare::Equals(a, b); }
+            bool operator()(const T& a, const T& b) const {return a == b; }
           };
           
           int32 GetCount() const override {return static_cast<int32>(this->hashset.size());}

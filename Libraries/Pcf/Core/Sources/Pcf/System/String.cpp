@@ -16,7 +16,7 @@ using namespace System;
 
 String String::Empty;
 
-String::String() { }
+String::String() {}
 
 String::String(const char* str) {
   if (str == null)
@@ -136,27 +136,17 @@ String::String(const std::string& str) : string(str.c_str()) {
 String::String(const std::wstring& str) : string(std::wstring_convert<std::codecvt_utf8<wchar_t>, wchar_t>().to_bytes(str).c_str()) {
 }
 
-#if ! _WIN32
-String::String(const std::u16string& str) : string(std::wstring_convert<std::codecvt_utf8_utf16<char16>, char16>().to_bytes(str).c_str()) {
-}
-#else
 String::String(const std::u16string& str) {
-    // Know bug on VS2015 : https://social.msdn.microsoft.com/Forums/vstudio/en-US/8f40dcd8-c67f-4eba-9134-a19b9178e481/vs-2015-rc-linker-stdcodecvt-error?forum=vcgeneral
+  // Know bug on VS2015 : https://social.msdn.microsoft.com/Forums/vstudio/en-US/8f40dcd8-c67f-4eba-9134-a19b9178e481/vs-2015-rc-linker-stdcodecvt-error?forum=vcgeneral
   for (char32 c : str)
     this->string.append(c);
 }
-#endif
 
-#if !_WIN32
-String::String(const std::u32string& str) : string(std::wstring_convert<std::codecvt_utf8<char32>, char32>().to_bytes(str).c_str()) {
-}
-#else
 String::String(const std::u32string& str) {
   // Know bug on VS2015 : https://social.msdn.microsoft.com/Forums/vstudio/en-US/8f40dcd8-c67f-4eba-9134-a19b9178e481/vs-2015-rc-linker-stdcodecvt-error?forum=vcgeneral
   for (char32 c : str)
     this->string.append(c);
 }
-#endif
 
 String::String(char32 c, int32 length) {
   this->string.reserve(length*4);
@@ -1290,26 +1280,14 @@ String System::operator +(const String& str, uint64 value) {
   return String(str, UInt64(value).ToString());
 }
 
-#if __linux__ && _LP64
-String System::operator +(const String& str, long long int value) {
+String System::operator +(const String& str, llong value) {
   return String(str, Int64(value).ToString());
 }
 
-String System::operator +(const String& str, unsigned long long int value) {
+String System::operator +(const String& str, ullong value) {
   return String(str, UInt64(value).ToString());
   
 }
-#else
-
-String System::operator +(const String& str, long value) {
-  return String(str, Int64(value).ToString());
-  
-}
-
-String System::operator +(const String& str, unsigned long value) {
-  return String(str, UInt64(value).ToString());
-}
-#endif
 
 //_____________________________________________________________________________
 //                                                                   Enumerator
@@ -1443,15 +1421,10 @@ bool String::ReverseEnumerator::Equals(const Object& obj) const {
 }
 
 std::ostream& operator<<(std::ostream& output, const System::String& value) {
-#if _WIN32
-  output << value.ToCCharArray().Data;
-#else
-  /*
-   UniquePointer<System::Array<byte>> bytes = System::Text::UTF8Encoding(false).GetBytes(value);
-   for (int32 index = 0; index < bytes->Length; ++index)
-   output << bytes->GetData()[index];
-   */
   output << value.Data();
-#endif
   return output;
+}
+
+std::wstring string::w_str() const {
+  return std::wstring_convert<std::codecvt_utf8<wchar_t>, wchar_t>().from_bytes(this->string.c_str());
 }

@@ -3,7 +3,7 @@
 #include "HomeHighlight32.h"
 
 using namespace System;
-using namespace System::Windows::Forms;
+using namespace System::Windows::FormsD;
 
 namespace Sudoku {
   enum class Level {
@@ -13,7 +13,7 @@ namespace Sudoku {
     Impossible
   };
   
-  class Cell : public System::Windows::Forms::Control {
+  class Cell : public System::Windows::FormsD::Control {
   public:
     Cell() {}
     Cell(const Cell& cell) : value(cell.value), readOnly(cell.readOnly) {}
@@ -36,7 +36,7 @@ namespace Sudoku {
       pcf_set {this->readOnly = value;}
     };
     
-    void OnPaint(System::Windows::Forms::PaintEventArgs& e) override {
+    void OnPaint(System::Windows::FormsD::PaintEventArgs& e) override {
       if (this->ReadOnly)
         e.Graphics().FillBox(System::Drawing::BoxType::Up, System::Drawing::SolidBrush(this->BackColor), e.ClipRectangle);
       else
@@ -53,10 +53,10 @@ namespace Sudoku {
       }
     }
     
-    void OnKeyPress(System::Windows::Forms::KeyPressEventArgs& e) override {
+    void OnKeyPress(System::Windows::FormsD::KeyPressEventArgs& e) override {
       if (e.KeyChar >= '0' && e.KeyChar <= '9')
         this->Value = e.KeyChar - '0';
-      else if (e.KeyChar == (char32)System::Windows::Forms::Keys::Back || e.KeyChar == (char32)System::Windows::Forms::Keys::Delete)
+      else if (e.KeyChar == (char32)System::Windows::FormsD::Keys::Back || e.KeyChar == (char32)System::Windows::FormsD::Keys::Delete)
         this->Value = 0;
       this->KeyPress(*this, e);
     }
@@ -74,7 +74,7 @@ namespace Sudoku {
     bool readOnly = true;
   };
 
-  class Chrono : public System::Windows::Forms::Label {
+  class Chrono : public System::Windows::FormsD::Label {
   public:
     Chrono() {
       this->timer.Interval = 31;
@@ -124,12 +124,12 @@ namespace Sudoku {
     
   private:
     System::Diagnostics::Stopwatch chrono;
-    System::Windows::Forms::Timer timer;
+    System::Windows::FormsD::Timer timer;
     bool isRunning = false;
     bool showMilliseconds = false;
   };
   
-  class MenuPanel : public System::Windows::Forms::Panel {
+  class MenuPanel : public System::Windows::FormsD::Panel {
   public:
     MenuPanel() {}
     

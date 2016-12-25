@@ -2,8 +2,6 @@
 /// @brief Contains Pcf::System::Int32 struct.
 #pragma once
 
-#include <limits>
-
 #include "../Property.h"
 #include "../Types.h"
 #include "IComparable.h"
@@ -26,13 +24,11 @@ namespace Pcf {
     /// @brief Represents a 32-bit signed integer.
     struct Int32 : public ValueType, public IComparable, public IConvertible, public IFormattable {
     public:
-      #undef max
       /// @brief Represents the largest possible value of an Int32 2147483647 (0x7FFFFFFF). This field is constant.
-      constexpr static int32 MaxValue = std::numeric_limits<int32>::max();
+      static Property<int32, ReadOnly> MaxValue;
 
-      #undef min
       /// @brief Represents the smallest possible value of Int32 -2147483648 (0x80000000). This field is constant.
-      constexpr static int32 MinValue = std::numeric_limits<int32>::min();
+      static Property<int32, ReadOnly> MinValue;
 
       /// @brief Create a new instance of struct Int32
       /// @remarks Int32 is initialized by default to 0.

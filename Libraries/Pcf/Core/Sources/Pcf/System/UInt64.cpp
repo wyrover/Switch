@@ -1,3 +1,4 @@
+#include <limits>
 #include "../../../Includes/Pcf/System/UInt64.h"
 #include "../../../Includes/Pcf/System/Byte.h"
 #include "../../../Includes/Pcf/System/Char.h"
@@ -14,10 +15,13 @@
 
 using namespace System;
 
-#if !_WIN32
-constexpr uint64 UInt64::MaxValue;
-constexpr uint64 UInt64::MinValue;
-#endif
+Property<uint64, ReadOnly> UInt64::MaxValue{
+  [] {return std::numeric_limits<uint64>::max();}
+};
+
+Property<uint64, ReadOnly> UInt64::MinValue{
+  [] {return std::numeric_limits<uint64>::min();}
+};
 
 uint64 UInt64::Parse(const string& str) {
   return Parse(str,10);

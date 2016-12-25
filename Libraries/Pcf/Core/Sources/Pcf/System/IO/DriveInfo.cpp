@@ -3,7 +3,7 @@
 #include "../../../../Includes/Pcf/System/UnauthorizedAccessException.h"
 #include "../../../../Includes/Pcf/System/IO/DriveInfo.h"
 #include "../../../../Includes/Pcf/System/IO/IOException.h"
-#include "../../Os/Drive.h"
+#include "../../../__OS/CoreApi.h"
 
 using namespace System;
 using namespace System::IO;
@@ -16,7 +16,7 @@ DriveInfo::DriveInfo(const String& name) {
 
 int64 DriveInfo::GetAvailableFreeSpace() const {
   int64 freeBytes = 0, dummy;
-  if (!Os::Drive::GetAvailableFreeSpace(this->driveName.Data(), freeBytes, dummy, dummy))
+  if (!__OS::CoreApi::Drive::GetAvailableFreeSpace(this->driveName.Data(), freeBytes, dummy, dummy))
     throw IOException(pcf_current_information);
   
   return freeBytes;
@@ -24,19 +24,19 @@ int64 DriveInfo::GetAvailableFreeSpace() const {
 
 String DriveInfo::GetDriveFormat() const {
   string volumeName, fileSystemName;
-  if (!Os::Drive::GetVolumeInformation(this->driveName, volumeName, fileSystemName))
+  if (!__OS::CoreApi::Drive::GetVolumeInformation(this->driveName, volumeName, fileSystemName))
     throw IOException(pcf_current_information);
   
   return fileSystemName;
 }
 
 System::IO::DriveType DriveInfo::GetDriveType() const {
-  return (System::IO::DriveType)Os::Drive::GetDriveType(this->driveName);
+  return (System::IO::DriveType)__OS::CoreApi::Drive::GetDriveType(this->driveName);
 }
 
 bool DriveInfo::GetIsReady() const {
   string volumeName, fileSystemName;
-  return Pcf::Os::Drive::GetVolumeInformation(this->driveName, volumeName, fileSystemName);
+  return __OS::CoreApi::Drive::GetVolumeInformation(this->driveName, volumeName, fileSystemName);
 }
 
 String DriveInfo::GetName() const {
@@ -49,7 +49,7 @@ DirectoryInfo DriveInfo::GetRootDirectory() const {
 
 int64 DriveInfo::GetTotalFreeSpace() const {
   int64 totalNumberOfFreeBytes = 0, dummy;
-  if (!Os::Drive::GetAvailableFreeSpace(this->driveName.Data(), dummy, dummy, totalNumberOfFreeBytes))
+  if (!__OS::CoreApi::Drive::GetAvailableFreeSpace(this->driveName.Data(), dummy, dummy, totalNumberOfFreeBytes))
     throw IOException(pcf_current_information);
   
   return totalNumberOfFreeBytes;
@@ -57,7 +57,7 @@ int64 DriveInfo::GetTotalFreeSpace() const {
 
 int64 DriveInfo::GetTotalSize() const {
   int64 totalNumberOfBytes = 0, dummy;
-  if (!Os::Drive::GetAvailableFreeSpace(this->driveName.Data(), dummy, totalNumberOfBytes, dummy))
+  if (!__OS::CoreApi::Drive::GetAvailableFreeSpace(this->driveName.Data(), dummy, totalNumberOfBytes, dummy))
     throw IOException(pcf_current_information);
   
   return totalNumberOfBytes;
@@ -65,7 +65,7 @@ int64 DriveInfo::GetTotalSize() const {
 
 string DriveInfo::GetVolumeLabel() const {
   string volumeName, fileSystemName;
-  if (!Os::Drive::GetVolumeInformation(this->driveName, volumeName, fileSystemName))
+  if (!__OS::CoreApi::Drive::GetVolumeInformation(this->driveName, volumeName, fileSystemName))
     throw IOException(pcf_current_information);
   return volumeName;
 }
@@ -75,13 +75,13 @@ void DriveInfo::SetVolumeLabel(const String& label) {
   if (drive == System::IO::DriveType::CDRom || drive == System::IO::DriveType::Network)
     throw UnauthorizedAccessException(pcf_current_information);
 
-  if (!Os::Drive::SetVolumeLabel(this->driveName.Data(), label.Data()))
+  if (!__OS::CoreApi::Drive::SetVolumeLabel(this->driveName.Data(), label.Data()))
     throw IOException(pcf_current_information);
 }
 
 Array<DriveInfo> DriveInfo::GetDrives() {
   System::Collections::Generic::List<DriveInfo> drives;
-  for (string drive : Os::Drive::GetDrives())
+  for (string drive : __OS::CoreApi::Drive::GetDrives())
     drives.Add(DriveInfo(drive));
   return drives.ToArray();
 }

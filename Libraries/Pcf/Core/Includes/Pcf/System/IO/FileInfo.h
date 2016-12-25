@@ -26,7 +26,7 @@ namespace Pcf {
       class FileInfo final : public FileSystemInfo {
       public:
         /// @brief Represents the uninitialized file object. This field is constant.
-        static const FileInfo Empty;
+        static Property<FileInfo, ReadOnly> Empty;
 
         /// @brief Initializes a new instance of the System::IO::FileInfo class, which acts as a wrapper for a file path.
         FileInfo();

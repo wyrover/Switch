@@ -8,7 +8,7 @@
 #include "../Object.h"
 #include "../ObjectClosedException.h"
 #include "../String.h"
-#include "../IO/Stream.h"
+#include "../IO/StreamReader.h"
 #include "ProcessStartInfo.h"
 
 /// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
@@ -20,89 +20,66 @@ namespace Pcf {
       /// @brief Provides access to local and remote processes and enables you to start and stop local system processes.
       class Process : public Object {
         SharedPointer<IO::Stream> GetStandardOutput() const;
-        
       public:
-        class ProcessOutputStream : public IO::Stream {
-          bool GetCanRead() const override {return true;}
-          bool GetCanSeek() const override {return false;}
-          bool GetCanWrite() const override {return false;}
-          int64 GetLength() const override {return 0;}
-          int64 GetPosition() const override {return 0;}
-          bool GetIsClosed() const override {return this->isClosed;}
-          
-        public:
-          ProcessOutputStream() {}
-          ProcessOutputStream(FILE* stream) : stream(stream), isClosed(stream == null) {}
-          
-          /// @cond
-          ProcessOutputStream(const ProcessOutputStream& pos) : stream(pos.stream), isClosed(pos.isClosed), exitCode(pos.exitCode) {}
-          ProcessOutputStream& operator=(const ProcessOutputStream& pos) {
-            this->stream = pos.stream;
-            this->isClosed = pos.isClosed;
-            this->exitCode = pos.exitCode;
-            return *this;
-          }
-          /// @endcond
-          
-          Property<int32, ReadOnly> ExitCode {
-            pcf_get {return this->exitCode;}
-          };
-          
-          void Close() override  {
-            this->exitCode = Process::CloseProcess(this->stream);
-            this->isClosed = true;
-          }
-          
-          int32 Read(Array<byte>& buffer, int32 offset, int32 count) override {
-            if (count < 0 || offset < 0)
-              throw ArgumentOutOfRangeException(pcf_current_information);
-              if (offset + count > buffer.Length)
-                throw ArgumentException(pcf_current_information);
-                if (IsClosed())
-                  throw ObjectClosedException(pcf_current_information);
-                  
-                  if (feof(this->stream))
-                    return 0;
-            
-            return static_cast<int32>(fread((char*)&buffer[offset], sizeof(char), count, this->stream));
-          }
-          
-          void Write(const Array<byte>&, int32, int32) override { }
-          int64 Seek(int64 , System::IO::SeekOrigin ) override { return 0; };
-          
-        private:
-          FILE* stream;
-          bool isClosed;
-          int32 exitCode = -1;
-        };
-        
         /// @cond
+        Process() {}
+        Process(const Process& process) : data(process.data) {}
+        Process& operator=(const Process& process) {this->data = process.data; return *this;}
         virtual ~Process();
         /// @endcond
         
-        static UniquePointer<Process> Start(const String& fileName);
-        
-        static UniquePointer<Process> Start(const String& fileName, const String& argument);
-        
-        static UniquePointer<Process> Start(const ProcessStartInfo& startInfo);
-        
         Property<int32, ReadOnly> ExitCode {
-          pcf_get {return this->outputStream->ExitCode();}
+          pcf_get {return this->data->exitCode;}
         };
         
-        Property<const ProcessOutputStream&, ReadOnly> StandardOutput {
-          pcf_get->const ProcessOutputStream& {return *this->outputStream;}
+        Property<string, ReadOnly> Name {
+          pcf_get {return this->GetName();}
         };
+        
+        Property<string, ReadOnly> Path {
+          pcf_get {return this->GetPath();}
+        };
+        
+        Property<ProcessStartInfo&> StartInfo {
+          pcf_get->ProcessStartInfo& {return this->data->startInfo;},
+          pcf_set {this->data->startInfo = value;}
+        };
+        
+        Property<System::IO::StreamReader, ReadOnly> StandardOutput {
+          pcf_get {return this->GetStreamReader();}
+        };
+        
+        void Close();
+        
+        void Kill();
+        
+        static Process GetCurrentProcess();
+        
+        static Array<Process> GetProcesses();
+        
+        static Process Start(const String& fileName);
+        
+        static Process Start(const String& fileName, const String& argument);
+        
+        static Process Start(const ProcessStartInfo& startInfo);
+        
+        string ToString() const override {return string::Format("{0} ({1})", this->GetType(), this->Name);};
         
         void WaitForExit();
         
       private:
-        Process(SharedPointer<ProcessOutputStream> stream) : outputStream(stream) {}
+        Process(intptr handle) {this->data->handle = handle;}
+        string GetName();
+        string GetPath();
+        System::IO::StreamReader GetStreamReader();
         
-        static FILE* OpenProcess(const String& command, const String& mode);
-        static int32 CloseProcess(FILE* process);
-        
-        SharedPointer<ProcessOutputStream> outputStream;
+        struct ProcessData {
+          int32 exitCode = 0;
+          intptr handle = 0;
+          SharedPointer<System::IO::Stream> outputStream;
+          ProcessStartInfo startInfo;
+        };
+        SharedPointer<ProcessData> data = SharedPointer<ProcessData>::Create();
       };
     }
   }

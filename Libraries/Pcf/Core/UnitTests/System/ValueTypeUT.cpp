@@ -7,13 +7,6 @@
 #include <Pcf/TUnit/Assert.h>
 #include <Pcf/TUnit/TestFixture.h>
 
-#if _WIN32
-#pragma warning(push)
-#pragma warning(disable:4244)
-#pragma warning(disable:4245)
-#pragma warning(disable:4389)
-#endif
-
 using namespace System;
 using namespace TUnit;
 
@@ -471,7 +464,3 @@ namespace {
     }
   }
 }
-
-#if _WIN32
-#pragma warning(pop)
-#endif

@@ -5,7 +5,7 @@
 using namespace System;
 using namespace System::IO;
 using namespace System::Drawing;
-using namespace System::Windows::Forms;
+using namespace System::Windows::FormsD;
 
 /// @cond
 namespace Pcf {
@@ -169,7 +169,7 @@ namespace ImageList {
       this->pictureBox.Bounds = System::Drawing::Rectangle(75, 25, 152, 152);
     }
     
-    Pcf::System::Windows::Forms::PictureBox pictureBox;
+    Pcf::System::Windows::FormsD::PictureBox pictureBox;
   };
 }
 

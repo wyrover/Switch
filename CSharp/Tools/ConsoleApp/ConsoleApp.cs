@@ -6,19 +6,25 @@ using System.Threading.Tasks;
 namespace ConsoleApp {
   class Prgoram {
     public static void Main() {
-      Console.WriteLine("Hello, World!");
+      System.Security.SecureString password = new System.Security.SecureString();
+      password.AppendChar('M');
+      password.AppendChar('y');
+      password.AppendChar(' ');
+      password.AppendChar('P');
+      password.AppendChar('a');
+      password.AppendChar('s');
+      password.AppendChar('s');
+      password.AppendChar('w');
+      password.AppendChar('o');
+      password.AppendChar('r');
+      password.AppendChar('d');
+      ProcessStartInfo si = new ProcessStartInfo();
+      si.UseShellExecute = false;
+      si.FileName = "C:\\WINDOWS\\system32\\Notepad.exe";
+      //si.Arguments = "/C echo \"Hello, World!\"";
+      Process process = Process.Start(si);
+      process.WaitForExit();
       Console.ReadKey(true);
-    }
-  }
-
-  class Program2 {
-    public static void Main() {
-      int counter = 0;
-      Action action = delegate {
-        Console.WriteLine("counter -> {0}", ++counter);
-      };
-
-      var t = Task.Factory.StartNew(action);
     }
   }
 }

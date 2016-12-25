@@ -7,14 +7,6 @@ using namespace TUnit;
 namespace PcfUnitTests {
   class Cpp11Test : public TestFixture {
   protected:
-    void Version() {
-#if !_WIN32
-      Assert::GreaterOrEqual(__cplusplus, 201103, pcf_current_information);
-#else
-      Assert::GreaterOrEqual(__cplusplus, 199711L, pcf_current_information);
-#endif
-    }
-    
     void Auto() {
       String str = "Test string";
       const char chars[] = "Test string";
@@ -26,6 +18,5 @@ namespace PcfUnitTests {
     }
   };
   
-  pcf_test(Cpp11Test, Version);
   pcf_test(Cpp11Test, Auto);
 }

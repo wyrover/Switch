@@ -3,7 +3,7 @@
 #include "../../../../Includes/Pcf/Microsoft/Win32/Registry.h"
 #include "../../../../Includes/Pcf/Microsoft/Win32/RegistryKey.h"
 #include "../../../../Includes/Pcf/System/IO/IOException.h"
-#include "../../Os/Registry.h"
+#include "../../../__OS/CoreApi.h"
 
 using namespace System;
 using namespace Microsoft::Win32;
@@ -33,7 +33,7 @@ namespace {
     int32 length = 32768;
     UniquePointer<char[]> expandedString(new char[length]);
 
-    if (Pcf::Os::Registry::ExpandString(valueBytes, expandedString.ToPointer(), length) == 0)
+    if (__OS::CoreApi::Registry::ExpandString(valueBytes, expandedString.ToPointer(), length) == 0)
       throw IO::IOException(pcf_current_information);
 
     return SharedPointer<object>(new string(expandedString.ToPointer()));
@@ -69,16 +69,16 @@ namespace {
 };
 
 RegistryKey::RegistryHandle::RegistryHandle(void* key, const string& name) {
-  if (Pcf::Os::Registry::CreateSubKey(key, name.Data(), &this->handle) != 0)
+  if (__OS::CoreApi::Registry::CreateSubKey(key, name.Data(), &this->handle) != 0)
     throw IO::IOException(pcf_current_information);
 }
 
 RegistryKey::RegistryHandle::RegistryHandle(RegistryHive rhive) {
-  Pcf::Os::Registry::GetHandleBaseKey((int32)rhive, &this->handle);
+  __OS::CoreApi::Registry::GetHandleBaseKey((int32)rhive, &this->handle);
 }
 
 RegistryKey::RegistryHandle::~RegistryHandle() {
-  Pcf::Os::Registry::CloseKey(this->handle);
+  __OS::CoreApi::Registry::CloseKey(this->handle);
 }
 
 RegistryKey::RegistryKey(RegistryHive rhive) : name(ToName(rhive)), permission(RegistryKeyPermissionCheck::ReadWriteSubTree) {
@@ -93,7 +93,7 @@ RegistryKey::~RegistryKey() {
 }
 
 int32 RegistryKey::SubKeyCount() const {
-  return Pcf::Os::Registry::NumberOfSubKey((void*)this->handle->Handle());
+  return __OS::CoreApi::Registry::NumberOfSubKey((void*)this->handle->Handle());
 }
 
 void RegistryKey::Close() {
@@ -122,9 +122,9 @@ void  RegistryKey::DeleteSubKey(const string& subKey, bool throwOnMissingSubKey)
   if (IsBaseKey(subKey))
     throw ArgumentException(pcf_current_information);
 
-  //if (Pcf::Os::Registry::NumberOfSubKey)
+  //if (__OS::CoreApi::Registry::NumberOfSubKey)
 
-  int32 result = Pcf::Os::Registry::DeleteSubKey(this->handle->Handle(), subKey.Data());
+  int32 result = __OS::CoreApi::Registry::DeleteSubKey(this->handle->Handle(), subKey.Data());
 
   if (result == 2 && throwOnMissingSubKey)
     throw ArgumentException(pcf_current_information);
@@ -137,7 +137,7 @@ void  RegistryKey::DeleteSubKeyTree(const string& subKey, bool throwOnMissingSub
   if (subKey == "" || IsBaseKey(subKey))
     throw ArgumentException(pcf_current_information);
 
-  int32 result = Pcf::Os::Registry::DeleteTree(this->handle->Handle(), subKey.Data());
+  int32 result = __OS::CoreApi::Registry::DeleteTree(this->handle->Handle(), subKey.Data());
 
   if (result == 2 && throwOnMissingSubKey)
     throw ArgumentException(pcf_current_information);
@@ -155,7 +155,7 @@ RegistryKey RegistryKey::OpenSubKey(const string& subKeyName, RegistryKeyPermiss
   if (this->handle == null)
     throw ArgumentNullException(pcf_current_information);
 
-  if (Pcf::Os::Registry::OpenSubKey(this->handle->Handle(), subKeyName.Data(), &handle) != 0)
+  if (__OS::CoreApi::Registry::OpenSubKey(this->handle->Handle(), subKeyName.Data(), &handle) != 0)
     return RegistryKey::Null();
 
   RegistryKey key;
@@ -169,7 +169,7 @@ RegistryKey RegistryKey::OpenSubKey(const string& subKeyName, RegistryKeyPermiss
 Array<string> RegistryKey::GetSubKeyNames() {
   int32 nbsubKey = 0;
   int32 nbkeyvalue = 0;
-  if (Pcf::Os::Registry::QueryInfoKey(this->handle->Handle(), nbsubKey, nbkeyvalue) != 0)
+  if (__OS::CoreApi::Registry::QueryInfoKey(this->handle->Handle(), nbsubKey, nbkeyvalue) != 0)
     return Array<string>();
 
   Array<string> ars(nbsubKey);
@@ -177,7 +177,7 @@ Array<string> RegistryKey::GetSubKeyNames() {
   while (index < nbsubKey) {
     char key[256];
     int keySize = 256;
-    if (Pcf::Os::Registry::EnumKey(this->handle->Handle(), index, key, keySize) != 0)
+    if (__OS::CoreApi::Registry::EnumKey(this->handle->Handle(), index, key, keySize) != 0)
       break;
     
     ars[index++] = key;

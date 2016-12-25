@@ -695,7 +695,7 @@ namespace Pcf {
   
   /// @brief Manages the storage of a pointer, providing a limited garbage-collection facility, with little to no overhead over built-in pointers.
   /// @see Pcf::Up
-  /// @ingroup Corelib
+  /// @ingroup Pcf
   template<typename T>
   using up = UniquePointer<T>;
 }

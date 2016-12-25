@@ -58,7 +58,17 @@ namespace Pcf {
   using uint64 = uint64_t;
   
   /// @brief Represent a pointer or a handle.
-  using uinptr = uintptr_t;
+  using uintptr = uintptr_t;
+
+  /// @cond
+#if __linux__ && _LP64
+  using llong = long long int;
+  using ullong = unsigned long long int;
+#else
+  using llong = long;
+  using ullong = unsigned long;
+#endif
+/// @endcond
 }
 
 // On windows byte and boolean have definition (with different type for boolean) in global scope so if a new definition in Pcf namespace and "using namepsace Pcf" activate in header file, there are a confict.

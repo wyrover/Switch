@@ -1,3 +1,4 @@
+#include <limits>
 #include "../../../Includes/Pcf/System/Single.h"
 #include "../../../Includes/Pcf/System/Convert.h"
 #include "../../../Includes/Pcf/System/DivideByZeroException.h"
@@ -7,14 +8,29 @@
 
 using namespace System;
 
-#if ! _WIN32
-constexpr float Single::Epsilon;
-constexpr float Single::MaxValue;
-constexpr float Single::MinValue;
-constexpr float Single::NegativeInfinity;
-constexpr float Single::PositiveInfinity;
-#endif
-const float Single::NaN = std::numeric_limits<float>::quiet_NaN();
+Property<float, ReadOnly> Single::Epsilon {
+  [] {return 1.401298E-45F;}
+};
+
+Property<float, ReadOnly> Single::MaxValue {
+  [] {return std::numeric_limits<float>::max();}
+};
+
+Property<float, ReadOnly> Single::MinValue {
+  [] {return -std::numeric_limits<float>::max();}
+};
+
+Property<float, ReadOnly> Single::NaN {
+  [] {return std::numeric_limits<float>::quiet_NaN();}
+};
+
+Property<float, ReadOnly> Single::NegativeInfinity {
+  [] {return -std::numeric_limits<float>::infinity();}
+};
+
+Property<float, ReadOnly> Single::PositiveInfinity {
+  [] {return std::numeric_limits<float>::infinity();}
+};
 
 float Single::Parse(const string& str) {
   return Convert::ToSingle(atof(str.ToCCharArray().Data()));

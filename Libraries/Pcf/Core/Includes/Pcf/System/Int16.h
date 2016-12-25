@@ -2,8 +2,6 @@
 /// @brief Contains Pcf::System::Int16 struct.
 #pragma once
 
-#include <limits>
-
 #include "../Property.h"
 #include "../Types.h"
 #include "IComparable.h"
@@ -26,13 +24,11 @@ namespace Pcf {
     /// @brief Represents a 16-bit signed integer.
     struct Int16 : public ValueType, public IComparable, public IConvertible, public IFormattable {
     public:
-      #undef max
       /// @brief Represents the largest possible value of an Int16 32767 (0x7FFF). This field is constant.
-      constexpr static int16 MaxValue = std::numeric_limits<int16>::max();
+      static Property<int16, ReadOnly> MaxValue;
 
-      #undef min
       /// @brief Represents the smallest possible value of Int16 -32768 (0x8000). This field is constant.
-      constexpr static int16 MinValue = std::numeric_limits<int16>::min();
+      static Property<int16, ReadOnly> MinValue;
 
       /// @brief Create a new instance of struct Int16
       /// @remarks Int16 is initialized by default to 0.

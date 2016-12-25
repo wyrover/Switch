@@ -75,7 +75,7 @@ Exception& Exception::operator =(const Exception& value) {
 }
 
 string Exception::GetDefaultMessage() const {
-  return string::Format("Exception of type '{0}' was throw.", GetType());
+  return string::Format("Exception of type '{0}' was thrown.", GetType());
 }
 
 void Exception::SetStackTrace(const Exception& exception) {

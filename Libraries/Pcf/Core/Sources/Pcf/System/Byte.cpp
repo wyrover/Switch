@@ -1,3 +1,4 @@
+#include <limits>
 #include "../../../Includes/Pcf/System/Byte.h"
 #include "../../../Includes/Pcf/System/Convert.h"
 #include "../../../Includes/Pcf/System/DateTime.h"
@@ -9,10 +10,13 @@
 
 using namespace System;
 
-#if !_WIN32
-constexpr byte Byte::MaxValue;
-constexpr byte Byte::MinValue;
-#endif
+Property<byte, ReadOnly> Byte::MaxValue {
+  [] {return std::numeric_limits<byte>::max();}
+};
+
+Property<byte, ReadOnly> Byte::MinValue {
+  [] {return std::numeric_limits<byte>::min();}
+};
 
 byte Byte::Parse(const String& str) {
   return Parse(str, 10);

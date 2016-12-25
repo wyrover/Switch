@@ -572,6 +572,9 @@ namespace Pcf {
           this->Append(String(value));
           return *this;
         }
+
+        template<typename T, typename Attribute>
+        StringBuilder& Append(const Property<T, Attribute>& value) {return this->Append(value());}        
         /// @endcond
         
         /// @brief Appends the string representation of a specified 16-bit unsigned integer to this instance.
@@ -690,4 +693,4 @@ namespace Pcf {
   }
 }
 
-using namespace System::Text;
+using namespace Pcf;

@@ -13,24 +13,19 @@ Property<int32, ReadOnly> UIntPtr::Size {
   [] {return static_cast<int32>(sizeof(void*));}
 };
 
-UIntPtr::UIntPtr(uint32 value) {
-#if !(_WIN64 || _LP64)
-  uint32 u = value;
-#else
-  uint64 u = value;
-#endif
-   this->value = reinterpret_cast<void*>(u);
+UIntPtr::UIntPtr(const UInt32& value) {
+  this->value = (uint32)value;
 }
 
-UIntPtr::UIntPtr(uint64 value) {
-  if (Size == 4 && ((int32)value < Int32::MinValue || (int32)value > Int32::MaxValue))
+UIntPtr::UIntPtr(const UInt64& value) {
+  if (Size == 4 && value > UInt32::MaxValue)
     throw OverflowException(pcf_current_information);
 
-  this->value = *((void**)&value);
+  this->value = (uint64)value;
 }
 
-UIntPtr::UIntPtr(const void* value) {
-  this->value = (void*)value;
+UIntPtr::UIntPtr(uintptr value) {
+  this->value = value;
 }
 
 bool UIntPtr::Equals(const UIntPtr& value) const {
@@ -42,7 +37,7 @@ bool UIntPtr::Equals(const object& obj) const {
 }
 
 int32 UIntPtr::GetHashCode() const {
-  uint64 handleValue = reinterpret_cast<size_t>(this->value);
+  uint64 handleValue = this->value;
   int32 hash = 0;
 
   hash = static_cast<int32>(handleValue & 0x00000000FFFFFFFF);
@@ -52,7 +47,7 @@ int32 UIntPtr::GetHashCode() const {
 }
 
 int32 UIntPtr::CompareTo(const UIntPtr& value) const {
-  return static_cast<int32>(reinterpret_cast<int64>(this->value) - reinterpret_cast<int64>(static_cast<const UIntPtr&>(value).value));
+  return static_cast<int32>(this->value - value.value);
 }
 
 int32 UIntPtr::CompareTo(const IComparable& obj) const {
@@ -63,22 +58,20 @@ int32 UIntPtr::CompareTo(const IComparable& obj) const {
 }
 
 uint32 UIntPtr::ToUInt32() const {
-  if (Size == 8 && reinterpret_cast<int64>(this->value) > static_cast<int64>(UInt32::MaxValue))
+  if (Size == 8 && this->value > UInt32::MaxValue)
     throw OverflowException(pcf_current_information);
 
   return *((uint32*)&this->value);
 }
 
 uint64 UIntPtr::ToUInt64() const {
-#if !(_WIN64 || _LP64)
-  return reinterpret_cast<uint32>(this->value);
-#else
-  return reinterpret_cast<uint64>(this->value);
-#endif
+  if (UIntPtr::Size == 4)
+    return *((int32*)&this->value);
+  return this->value;
 }
 
 void* UIntPtr::ToPointer() const {
-  return this->value;
+  return (void*)this->value;
 }
 
 string UIntPtr::ToString() const {
@@ -93,7 +86,7 @@ string UIntPtr::ToString(const string& format, const IFormatProvider& formatProv
   return UInt64(ToUInt64()).ToString(format);
 }
 
-UIntPtr::operator void*() const {
+UIntPtr::operator uintptr() const {
   return this->value;
 }
 

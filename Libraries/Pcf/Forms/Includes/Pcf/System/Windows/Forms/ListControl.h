@@ -17,7 +17,6 @@ namespace Pcf {
         public:
           /// @brief Initializes a new instance of the ListControl class with default settings.
           ListControl() {}
-          ListControl(UniquePointer<IWidget> widget) : Control(widget) {}
 
           /// @brief Initializes a new instance of the ListControl class with specific text, size, and location.
           /// @param text The text displayed by the control.
@@ -28,7 +27,7 @@ namespace Pcf {
           /// @remarks The Control class is the base class for all controls used in a Windows Forms application. Because this class is not typically used to create an instance of the class, this constructor is typically not called directly but is instead called by a derived class.
           /// @remarks This version of the Control constructor sets the initial Text property value to the text parameter value. The initial Size and Location of the control are determined by the left, top, width and height parameter values.
           /// @note To maintain better performance, do not set the size of a control in its constructor. The preferred method is to virtual the DefaultSize property.
-          ListControl(const string& text, int32 left, int32 top, int32 width, int32 height) : Control(text, left, top, width, height) {
+          ListControl(const string& text, int32 left, int32 top, int32 width, int32 height) /*: Control(text, left, top, width, height)*/ {
           }
 
           const string& ValueMember() const {

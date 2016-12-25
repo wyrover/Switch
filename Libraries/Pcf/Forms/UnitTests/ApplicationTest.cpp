@@ -9,7 +9,6 @@ namespace PcfUnitTests {
   class ApplicationTest : public TestFixture {
   protected:
     void EnableVisualStyles() {
-      Assert::DoesNotThrows([] {Application::EnableVisualStyles();}, pcf_current_information);
     }
   };
   

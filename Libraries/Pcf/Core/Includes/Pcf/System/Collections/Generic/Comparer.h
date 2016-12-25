@@ -8,7 +8,6 @@
 #include "../../../SharedPointer.h"
 #include "../../../UniquePointer.h"
 #include "../../ArgumentNullException.h"
-#include "../../Compare.h"
 #include "../../Object.h"
 #include "IComparer.h"
 
@@ -25,7 +24,7 @@ namespace Pcf {
         class Comparer : public Object, public IComparer<T> {
         public:
           /// @brief Returns a default sort order comparer for the type specified by the generic argument
-          static Property<UniquePointer<IComparer<T>>, ReadOnly> Default;
+          static Property<const IComparer<T>&, ReadOnly> Default;
 
           /// @brief Create a new instance of class Comparer
           Comparer() {}
@@ -40,9 +39,7 @@ namespace Pcf {
           /// Less than zero      x is less than y.
           /// Zero                x equals y.
           /// Greater than zero   x is greater than y.
-          virtual int32 Compare(const T& x, const T& y) const {
-            return System::Compare::CompareTo(x, y);
-          }
+          virtual int32 Compare(const T& x, const T& y) const {return x < y ? -1 : (x == y ? 0 : 1);}
         };
 
         template<typename T>
@@ -63,10 +60,13 @@ namespace Pcf {
         
         /// @cond
         template<class T>
-        inline UniquePointer< IComparer<T> > __get_default_comparer__() { return new Comparer<T>(); }
+        inline const IComparer<T>& __get_default_comparer__() {
+          static Comparer<T> comparer;
+          return comparer;
+        }
 
         template <typename T>
-        Property<UniquePointer< IComparer<T> >, ReadOnly> Comparer<T>::Default = {&__get_default_comparer__<T>};
+        Property<const IComparer<T>&, ReadOnly> Comparer<T>::Default = {&__get_default_comparer__<T>};
         /// @endcond
       }
     }

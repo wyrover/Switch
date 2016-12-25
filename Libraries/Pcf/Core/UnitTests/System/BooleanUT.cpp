@@ -196,11 +196,11 @@ namespace PcfUnitTests {
     TUnit::Assert::AreEqual(Boolean(false).GetHashCode(), int32(0));
     
     Boolean bool1(true);
-    IHashable* obj = &bool1;
+    object* obj = &bool1;
     TUnit::Assert::AreEqual(obj->GetHashCode(), int32(1));
     
     Boolean bool2(false);
-    IHashable* obj1 = &bool2;
+    object* obj1 = &bool2;
     TUnit::Assert::AreEqual(obj1->GetHashCode(), int32(0));
   }
   

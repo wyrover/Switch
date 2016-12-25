@@ -333,9 +333,9 @@ namespace Pcf {
           BitArray* bitArray = null;
         };
 
-        static const int32 BitsPerByte   = 8;
-        static const int32 BitsPerInt32  = 32;
-        static const int32 BytesPerInt32 = 4;
+        static constexpr int32 BitsPerByte   = 8;
+        static constexpr int32 BitsPerInt32  = 32;
+        static constexpr int32 BytesPerInt32 = 4;
 
         inline int32 GetListPosition(int32 index) const {return index/BitsPerInt32;}
 

@@ -1,7 +1,7 @@
 #include <Pcf/Pcf>
 
 using namespace System;
-using namespace System::Windows::Forms;
+using namespace System::Windows::FormsD;
 
 namespace CheckBoxExample {
   class Form1 : public Form {

@@ -182,7 +182,7 @@ namespace {
   }
   
   TEST(Exception, GetMessage) {
-    try { throw Exception(pcf_current_information); } catch (const Exception& e) { EXPECT_EQ( "Exception of type 'Pcf::System::Exception' was throw.", e.Message()); }
+    try { throw Exception(pcf_current_information); } catch (const Exception& e) { EXPECT_EQ( "Exception of type 'Pcf::System::Exception' was thrown.", e.Message()); }
     try { throw SystemException(pcf_current_information); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "System error."); }
     try { throw AccessViolationException(pcf_current_information); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "Attempted to read or write protected memory. This is often an indication that other memory is corrupt."); }
     //try { throw AggregateException(pcf_current_information); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "One or more errors occured."); }
@@ -264,7 +264,7 @@ namespace {
   
     try { throw AbandonedMutexException(pcf_current_information); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "The wait completed due to an abandoned mutex."); }
     try { throw BarrierPostPhaseException(pcf_current_information); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "The postPhaseAction failed with an exception."); }
-    try { throw LockRecursionException(pcf_current_information); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "Exception of type 'System::Threading::LockRecursionException' was throw."); }
+    try { throw LockRecursionException(pcf_current_information); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "Exception of type 'Pcf::System::Threading::LockRecursionException' was thrown."); }
     try { throw SemaphoreFullException(pcf_current_information); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "Adding the specified countto the semaphore wold cause it to exceed its maximum count."); }
     try { throw SynchronizationLockException(pcf_current_information); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "Object synchronization method was called from an unsynchronized block of code."); }
     try { throw ThreadAbortException(pcf_current_information); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "Thread was aborted."); }
@@ -288,7 +288,7 @@ namespace {
     } catch (const MyFirstGroupException& /*e*/) {
       EXPECT_TRUE(false);
     } catch (const Exception& /*e*/) {
-      //EXPECT_EQ(e.Message(), "Exception of type 'System::Exception' was throw.");
+      //EXPECT_EQ(e.Message(), "Exception of type 'System::Exception' was thrown.");
     }
     
     try {

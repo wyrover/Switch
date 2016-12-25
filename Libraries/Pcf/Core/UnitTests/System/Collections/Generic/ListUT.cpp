@@ -1000,7 +1000,7 @@ namespace {
     for (Dinosaur d : dinosaurs)
       EXPECT_TRUE(d.GetName().Equals(names[k++]));
     
-    dinosaurs.Sort(new DinosaurComparer());
+    dinosaurs.Sort(DinosaurComparer());
     
     k=0;
     for (Dinosaur d : dinosaurs)

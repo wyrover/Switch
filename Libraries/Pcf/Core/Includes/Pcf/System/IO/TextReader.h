@@ -25,7 +25,7 @@ namespace Pcf {
         /// @remarks Read and Peek methods return -1.
         /// @remarks ReadBlock method returns zero.
         /// @remarks ReadLine and ReadToEnd methods return a string Empty.
-        static const NullTextReader Null;
+        static Property<NullTextReader, ReadOnly> Null;
 
         /// @brief Closes the System::IO::TextReader and releases any system resources associated with the TextReader
         virtual void Close() {}
@@ -60,10 +60,8 @@ namespace Pcf {
 
       class NullTextReader : public TextReader {
       public:
-        int32 Read() override {return -1;}
-      private:
-        friend class TextReader;
         NullTextReader() {}
+        int32 Read() override {return -1;}
       };
 
       class SynchronizedTextReader : public TextReader {

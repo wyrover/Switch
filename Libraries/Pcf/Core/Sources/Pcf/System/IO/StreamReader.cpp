@@ -8,7 +8,9 @@
 using namespace System;
 using namespace System::IO;
 
-const StreamReader StreamReader::Null;
+Property<StreamReader, ReadOnly> StreamReader::Null {
+  [] {return StreamReader();}
+};
 
 Text::UTF8Encoding StreamReader::utf8Encoding {false};
 

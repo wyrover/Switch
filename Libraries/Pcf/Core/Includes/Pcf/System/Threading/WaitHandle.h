@@ -29,7 +29,7 @@ namespace Pcf {
         /// @endcond
       public:
         /// @brief Represents an invalid native operating system handle. This field is constant.
-        static const IntPtr& InvalidHandle() {return IntPtr::Zero;}
+        static IntPtr InvalidHandle() {return IntPtr::Zero;}
 
         /// @brief Indicates that a System::Threading::WaitHandle::WaitAny(const System::Threading::WaitHandle[], int32, bool)
         /// operation timed out before any of the wait handles were signaled. This field is constant.

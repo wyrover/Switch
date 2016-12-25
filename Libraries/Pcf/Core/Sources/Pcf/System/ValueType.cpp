@@ -4,11 +4,6 @@
 
 using namespace System;
 
-#if _WIN32
-#pragma warning(push)
-#pragma warning(disable:4389)
-#endif
-
 bool ValueType::Equals(const ValueType& valueType) const {
   const IConvertible* first = dynamic_cast<const IConvertible*>(this);
   const IConvertible* second = dynamic_cast<const IConvertible*>(&valueType);
@@ -34,7 +29,3 @@ bool ValueType::Equals(const ValueType& valueType) const {
 bool ValueType::Equals(const object& obj) const {
   return is<ValueType>(obj) && Equals((const ValueType&)obj);
 }
-
-#if _WIN32
-#pragma warning(pop)
-#endif

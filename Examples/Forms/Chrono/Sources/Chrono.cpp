@@ -2,7 +2,7 @@
 
 using namespace System;
 using namespace System::Diagnostics;
-using namespace System::Windows::Forms;
+using namespace System::Windows::FormsD;
 
 namespace Chrono {
   class Form1 : public Form {

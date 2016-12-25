@@ -10,7 +10,9 @@
 #include "PointF.h"
 #include "SizeF.h"
 
+/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Pcf {
+  /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The System::Drawing namespace provides access to GDI+ basic graphics functionality. More advanced functionality is provided in the System::Drawing::Drawing2D, System::Drawing::Imaging, and System::Drawing::Text namespaces.
     namespace Drawing {
@@ -22,7 +24,7 @@ namespace Pcf {
       class RectangleF : public object {
       public:
         /// @brief Represents a Rectangle structure with its properties left uninitialized.
-        static const RectangleF Empty;
+        static Property<RectangleF, ReadOnly> Empty;
 
         /// @brief Initializes a new instance of the Point class that has a X and Y value of 0.
         RectangleF() {}

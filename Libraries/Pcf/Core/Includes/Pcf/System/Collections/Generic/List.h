@@ -135,7 +135,7 @@ namespace Pcf {
           /// @remarks The following code example demonstrates several properties && methods of the List<T> generic class, including the Add method. The default constructor is used to create a list of strings with a capacity of 0. The Capacity property is displayed, && then the Add method is used to add several items. The items are listed, && the Capacity property is displayed again, along with the Count property, to show that the capacity has been increased as needed.
           /// @remarks Other properties && methods are used to search for, insert, && remove elements from the list, && finally to clear the list.
           /// @include List.cpp
-          virtual void Add(const T& value) override {
+          void Add(const T& value) override {
             this->list.push_back(value);
           }
 
@@ -151,12 +151,12 @@ namespace Pcf {
             if (&enumerable == this) { // if enumerable is the same object : infinite loop
               Array<T> a(enumerable);
               for (const T& value : a)
-                this->list.push_back(value);
+                this->Add(value);
               return;
             }
               
             for (const T& value : enumerable)
-              this->list.push_back(value);
+              this->Add(value);
           }
           
           /// @brief Adds copy of elements from the specified collection to the end of the List<T>.
@@ -195,7 +195,7 @@ namespace Pcf {
           /// @remarks The following code example demonstrates the Sort() method overload && the BinarySearch(T) method overload. A List<T> of strings is created && populated with four strings, in no particular order. The list is displayed, sorted, && displayed again.
           /// @remarks The BinarySearch(T) method overload is then used to search for two strings that are ! in the list, && the Insert method is used to insert them. The return value of the BinarySearch(T) method is negative in each case, because the strings are ! in the list. Taking the bitwise complement of this negative number produces the index of the first element in the list that is larger than the search string, && inserting at this location preserves the sort order. The second search string is larger than any element in the list, so the insertion position is at the end of the list.
           /// @include ListBinarySearch.cpp
-          int32 BinarySearch(const T& item) const {return BinarySearch(0, this->Count, item, System::Collections::Generic::Comparer<T>::Default().Release());}
+          int32 BinarySearch(const T& item) const {return BinarySearch(0, this->Count, item, System::Collections::Generic::Comparer<T>::Default());}
 
           /// @brief Searches the entire sorted List<T> for an element using the specified comparer && returns the zero-based index of the element.
           /// @param item The object to locate. The value can be null for reference types.
@@ -210,7 +210,7 @@ namespace Pcf {
           /// @remarks If the List<T> contains more than one element with the same value, the method returns only one of the occurrences, && it might return any one of the occurrences, ! necessarily the first one.
           /// @remarks If the List<T> does ! contain the specified value, the method returns a negative integer. You can apply the bitwise complement operation (~) to this negative integer to get the index of the first element that is larger than the search value. When inserting the value into the List<T>, this index should be used as the insertion point to maintain the sort order.
           /// @remarks This method is an O(log n) operation, where n is the number of elements in the range.
-          int32 BinarySearch(const T& item, const SharedPointer<IComparer<T>>& comparer) const {return BinarySearch(0, this->Count, item, comparer);}
+          int32 BinarySearch(const T& item, const IComparer<T>& comparer) const {return BinarySearch(0, this->Count, item, comparer);}
 
           /// @brief Searches a range of elements in the sorted List<T> for an element using the specified comparer and returns the zero-based index of the element.
           /// @param index The zero-based starting index of the range to search.
@@ -229,7 +229,7 @@ namespace Pcf {
           /// @remarks If the List<T> contains more than one element with the same value, the method returns only one of the occurrences, and it might return any one of the occurrences, not necessarily the first one.
           /// @remarks If the List<T> does not contain the specified value, the method returns a negative integer. You can apply the bitwise complement operation (~) to this negative integer to get the index of the first element that is larger than the search value. When inserting the value into the List<T>, this index should be used as the insertion point to maintain the sort order.
           /// @remarks This method is an O(log n) operation, where n is the number of elements in the range.
-          int32 BinarySearch(int32 index, int32 count, const T& item, const SharedPointer<IComparer<T>>& comparer) const {
+          int32 BinarySearch(int32 index, int32 count, const T& item, const IComparer<T>& comparer) const {
             if (index < 0 || count < 0)
               throw ArgumentOutOfRangeException(pcf_current_information);
             if (index + count > this->Count)
@@ -238,9 +238,9 @@ namespace Pcf {
             typename std::vector<T, TAllocator>::iterator last = const_cast<List*>(this)->list.begin();
             std::advance(first, index);
             std::advance(last, index+count);
-            typename std::vector<T, TAllocator>::iterator position = std::lower_bound(first, last, item, List::Comparer(comparer.ToPointer()));
+            typename std::vector<T, TAllocator>::iterator position = std::lower_bound(first, last, item, List::Comparer(&comparer));
 
-            if (position != this->list.end() && !comparer->Compare(item, *position))
+            if (position != this->list.end() && !comparer.Compare(item, *position))
               return static_cast<int32>(std::distance(const_cast<List*>(this)->list.begin(), position));
 
             return static_cast<int32>(~std::distance(const_cast<List*>(this)->list.begin(), position));
@@ -778,7 +778,7 @@ namespace Pcf {
           /// @remarks The Find, FindLast, && FindAll methods are used to search the list with the search predicate method.
           /// @remarks The RemoveAll method is used to remove all entries ending with "saurus". It traverses the list from the beginning, passing each element in turn to the EndsWithSaurus method. The element is removed if the EndsWithSaurus method returns true.
           /// @include ListExists.cpp
-          int32 RemoveAll(const Predicate<const T&>& match) {
+          virtual int32 RemoveAll(const Predicate<const T&>& match) {
             int32 count = 0;
             typename std::vector<T, TAllocator>::const_iterator it = this->list.begin();
             while (it != this->list.end()) {
@@ -816,7 +816,7 @@ namespace Pcf {
           /// @return None.
           /// @exception ArgumentOutOfRangeException index || count is less than 0 || index + count is greater than Count.
           /// @remarks The items are removed && all the elements following them in the List<T> have their indexes reduced by count.
-          void RemoveRange(int32 index, int32 count) {
+          virtual void RemoveRange(int32 index, int32 count) {
             if (index < 0 || index + count > this->Count)
               throw ArgumentOutOfRangeException(pcf_current_information);
 
@@ -868,7 +868,7 @@ namespace Pcf {
           /// @remarks The following code example demonstrates the Sort() method overload && the BinarySearch(T) method overload. A List<T> of strings is created && populated with four strings, in no particular order. The list is displayed, sorted, && displayed again.
           /// @remarks The BinarySearch(T) method overload is then used to search for two strings that are ! in the list, && the Insert method is used to insert them. The return value of the BinarySearch(T) method is negative in each case, because the strings are ! in the list. Taking the bitwise complement of this negative number produces the index of the first element in the list that is larger than the search string, && inserting at this location preserves the sort order. The second search string is larger than any element in the list, so the insertion position is at the end of the list.
           /// @include ListBinarySearch.cpp
-          void Sort() {this->Sort(System::Collections::Generic::Comparer<T>::Default().Release());}
+          void Sort() {this->Sort(System::Collections::Generic::Comparer<T>::Default());}
 
           void Sort(Comparison<const T&> comparison) {
             this->operationNumber++;
@@ -882,16 +882,11 @@ namespace Pcf {
           /// @remarks If comparer is null, an exception ArgumentNullException is thrown;
           /// @remarks This method uses Array.Sort, which uses the QuickSort algorithm. This implementation performs an unstable sort; that is, if two elements are equal, their order might ! be preserved. In contrast, a stable sort preserves the order of elements that are equal.
           /// @remarks On average, this method is an O(n log n) operation, where n is Count; in the worst case it is an O(n ^ 2) operation.
-          void Sort(SharedPointer<IComparer<T>> comparer) {
+          void Sort(const IComparer<T>& comparer) {
             this->operationNumber++;
-            std::sort(this->list.begin(), this->list.end(), List::Comparer(comparer.ToPointer()));
+            std::sort(this->list.begin(), this->list.end(), List::Comparer(&comparer));
           }
 
-          /// @cond
-          /// Necessary to remove build ambiguity.
-          void Sort(IComparer<T>* comparer) {Sort(SharedPointer<IComparer<T>>(comparer));}
-          /// @endcond
-          
           /// @brief Copies the elements of the List<T> to a new array.
           /// @return An array containing copies of the elements of the List<T>.
           /// @remarks The elements are copied using Array.Copy, which is an O(n) operation, where n is Count.

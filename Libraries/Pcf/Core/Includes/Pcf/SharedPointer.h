@@ -384,17 +384,17 @@ namespace Pcf {
     }
     
     template<typename T1>
-    static SharedPointer<T> Create(T1 a1) {
+    static SharedPointer<T> Create(const T1& a1) {
       return SharedPointer<T>(new T(a1));
     }
     
     template<class TT, typename T1>
-    static SharedPointer<T> Create(T1 a1) {
+    static SharedPointer<T> Create(const T1& a1) {
       return SharedPointer<T>(new TT(a1));
     }
     
     template<typename T1, typename T2>
-    static SharedPointer<T> Create(T1 a1, T2 a2) {
+    static SharedPointer<T> Create(const T1& a1, const T2& a2) {
       return SharedPointer<T>(new T(a1, a2));
     }
     
@@ -414,132 +414,132 @@ namespace Pcf {
     }
     
     template<typename T1, typename T2, typename T3, typename T4>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4) {
+    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4) {
       return SharedPointer<T>(new T(a1, a2, a3, a4));
     }
     
     template<class TT, typename T1, typename T2, typename T3, typename T4>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4) {
+    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4) {
       return SharedPointer<T>(new TT(a1, a2, a3, a4));
     }
     
     template<typename T1, typename T2, typename T3, typename T4, typename T5>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5) {
+    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5) {
       return SharedPointer<T>(new T(a1, a2, a3, a4, a5));
     }
     
     template<class TT, typename T1, typename T2, typename T3, typename T4, typename T5>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5) {
+    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5) {
       return SharedPointer<T>(new TT(a1, a2, a3, a4, a5));
     }
     
     template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6) {
+    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5, const T6& a6) {
       return SharedPointer<T>(new T(a1, a2, a3, a4, a5, a6));
     }
     
     template<class TT, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6) {
+    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5, const T6& a6) {
       return SharedPointer<T>(new TT(a1, a2, a3, a4, a5, a6));
     }
     
     template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7) {
+    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5, const T6& a6, const T7& a7) {
       return SharedPointer<T>(new T(a1, a2, a3, a4, a5, a6, a7));
     }
     
     template<class TT, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7) {
+    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5, const T6& a6, const T7& a7) {
       return SharedPointer<T>(new TT(a1, a2, a3, a4, a5, a6, a7));
     }
     
     template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8) {
+    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5, const T6& a6, const T7& a7, const T8& a8) {
       return SharedPointer<T>(new T(a1, a2, a3, a4, a5, a6, a7, a8));
     }
     
     template<class TT, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8) {
+    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5, const T6& a6, const T7& a7, const T8& a8) {
       return SharedPointer<T>(new TT(a1, a2, a3, a4, a5, a6, a7, a8));
     }
     
     template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9) {
+    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5, const T6& a6, const T7& a7, const T8& a8, const T9& a9) {
       return SharedPointer<T>(new T(a1, a2, a3, a4, a5, a6, a7, a8, a9));
     }
     
     template<class TT, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9) {
+    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5, const T6& a6, const T7& a7, const T8& a8, const T9& a9) {
       return SharedPointer<T>(new TT(a1, a2, a3, a4, a5, a6, a7, a8, a9));
     }
     
     template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10) {
+    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5, const T6& a6, const T7& a7, const T8& a8, const T9& a9, const T10& a10) {
       return SharedPointer<T>(new T(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10));
     }
     
     template<class TT, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10) {
+    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5, const T6& a6, const T7& a7, const T8& a8, const T9& a9, const T10& a10) {
       return SharedPointer<T>(new TT(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10));
     }
     
     template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11) {
+    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5, const T6& a6, const T7& a7, const T8& a8, const T9& a9, const T10& a10, const T11& a11) {
       return SharedPointer<T>(new T(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11));
     }
     
     template<class TT, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11) {
+    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5, const T6& a6, const T7& a7, const T8& a8, const T9& a9, const T10& a10, const T11& a11) {
       return SharedPointer<T>(new TT(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11));
     }
     
     template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12) {
+    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5, const T6& a6, const T7& a7, const T8& a8, const T9& a9, const T10& a10, const T11& a11, const T12& a12) {
       return SharedPointer<T>(new T(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12));
     }
     
     template<class TT, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12) {
+    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5, const T6& a6, const T7& a7, const T8& a8, const T9& a9, const T10& a10, const T11& a11, const T12& a12) {
       return SharedPointer<T>(new TT(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12));
     }
     
     template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12, typename T13>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13) {
+    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5, const T6& a6, const T7& a7, const T8& a8, const T9& a9, const T10& a10, const T11& a11, const T12& a12, const T13& a13) {
       return SharedPointer<T>(new T(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13));
     }
     
     template<class TT, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12, typename T13>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13) {
+    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5, const T6& a6, const T7& a7, const T8& a8, const T9& a9, const T10& a10, const T11& a11, const T12& a12, const T13& a13) {
       return SharedPointer<T>(new TT(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13));
     }
     
     template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12, typename T13, typename T14>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13, T14 a14) {
+    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5, const T6& a6, const T7& a7, const T8& a8, const T9& a9, const T10& a10, const T11& a11, const T12& a12, const T13& a13, const T14& a14) {
       return SharedPointer<T>(new T(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14));
     }
     
     template<class TT, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12, typename T13, typename T14>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13, T14 a14) {
+    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5, const T6& a6, const T7& a7, const T8& a8, const T9& a9, const T10& a10, const T11& a11, const T12& a12, const T13& a13, const T14& a14) {
       return SharedPointer<T>(new TT(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14));
     }
     
     template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12, typename T13, typename T14, typename T15>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13, T14 a14, T15 a15) {
+    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5, const T6& a6, const T7& a7, const T8& a8, const T9& a9, const T10& a10, const T11& a11, const T12& a12, const T13& a13, const T14& a14, const T15& a15) {
       return SharedPointer<T>(new T(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15));
     }
     
     template<class TT, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12, typename T13, typename T14, typename T15>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13, T14 a14, T15 a15) {
+    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5, const T6& a6, const T7& a7, const T8& a8, const T9& a9, const T10& a10, const T11& a11, const T12& a12, const T13& a13, const T14& a14, const T15& a15) {
       return SharedPointer<T>(new TT(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15));
     }
     
     template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12, typename T13, typename T14, typename T15, typename T16>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13, T14 a14, T15 a15, T16 a16) {
+    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5, const T6& a6, const T7& a7, const T8& a8, const T9& a9, const T10& a10, const T11& a11, const T12& a12, const T13& a13, const T14& a14, const T15& a15, const T16& a16) {
       return SharedPointer<T>(new T(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16));
     }
     
     template<class TT, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12, typename T13, typename T14, typename T15, typename T16>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13, T14 a14, T15 a15, T16 a16) {
+    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5, const T6& a6, const T7& a7, const T8& a8, const T9& a9, const T10& a10, const T11& a11, const T12& a12, const T13& a13, const T14& a14, const T15& a15, const T16& a16) {
       return SharedPointer<T>(new TT(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16));
     }
     

@@ -31,7 +31,7 @@ void DnsEndPoint::SetHost(const string& host) {
 }
 
 void DnsEndPoint::SetPort(int32 port) {
-  if (port < IPEndPoint::MinPort() || port > IPEndPoint::MaxPort())
+  if (port < IPEndPoint::MinPort || port > IPEndPoint::MaxPort)
     throw ArgumentOutOfRangeException(pcf_current_information);
   
   this->port = port;

@@ -4,446 +4,445 @@
 
 #include <Pcf/System/Object.h>
 #include <Pcf/System/IComparable.h>
-#include <Pcf/System/IHashable.h>
 #include <Pcf/System/String.h>
 #include <Pcf/System/Collections/Generic/Dictionary.h>
 
 #include "KnownColor.h"
 
+/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Pcf {
-  /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types,
-  /// events and event handlers, interfaces, attributes, and processing exceptions.
+  /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The System::Drawing namespace provides access to GDI+ basic graphics functionality. More advanced functionality is provided in the System::Drawing::Drawing2D, System::Drawing::Imaging, and System::Drawing::Text namespaces.
     namespace Drawing {
       /// @brief Represents an ARGB (alpha, red, green, blue) color.
-      class Color : public object, public IComparable, public IHashable {
+      class Color : public object, public IComparable {
         using KnownColors = Collections::Generic::Dictionary<int32, int32>;
         static KnownColors knownColors;
 
       public:
         /// @brief Gets a system-defined color that has an ARGB value of 0x00FFFFFF. This field is constant.
-        const static Color Transparent;
+        static Property<Color, ReadOnly> Transparent;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFF0F8FF. This field is constant.
-        const static Color AliceBlue;
+        static Property<Color, ReadOnly> AliceBlue;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFAEBD7. This field is constant.
-        const static Color AntiqueWhite;
+        static Property<Color, ReadOnly> AntiqueWhite;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF00FFFF. This field is constant.
-        const static Color Aqua;
+        static Property<Color, ReadOnly> Aqua;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF7FFFD4. This field is constant.
-        const static Color Aquamarine;
+        static Property<Color, ReadOnly> Aquamarine;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFF0FFFF. This field is constant.
-        const static Color Azure;
+        static Property<Color, ReadOnly> Azure;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFF5F5DC. This field is constant.
-        const static Color Beige;
+        static Property<Color, ReadOnly> Beige;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFFE4C4. This field is constant.
-        const static Color Bisque;
+        static Property<Color, ReadOnly> Bisque;
         
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF000000. This field is constant.
-        const static Color Black;
+        static Property<Color, ReadOnly> Black;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFFEBCD. This field is constant.
-        const static Color BlanchedAlmond;
+        static Property<Color, ReadOnly> BlanchedAlmond;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF0000FF. This field is constant.
-        const static Color Blue;
+        static Property<Color, ReadOnly> Blue;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF8A2BE2. This field is constant.
-        const static Color BlueViolet;
+        static Property<Color, ReadOnly> BlueViolet;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFA52A2A. This field is constant.
-        const static Color Brown;
+        static Property<Color, ReadOnly> Brown;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFDEB887. This field is constant.
-        const static Color BurlyWood;
+        static Property<Color, ReadOnly> BurlyWood;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF5F9EA0. This field is constant.
-        const static Color CadetBlue;
+        static Property<Color, ReadOnly> CadetBlue;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF7FFF00. This field is constant.
-        const static Color Chartreuse;
+        static Property<Color, ReadOnly> Chartreuse;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFD2691E. This field is constant.
-        const static Color Chocolate;
+        static Property<Color, ReadOnly> Chocolate;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFF7F50. This field is constant.
-        const static Color Coral;
+        static Property<Color, ReadOnly> Coral;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF6495ED. This field is constant.
-        const static Color CornflowerBlue;
+        static Property<Color, ReadOnly> CornflowerBlue;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFFF8DC. This field is constant.
-        const static Color Cornsilk;
+        static Property<Color, ReadOnly> Cornsilk;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFDC143C. This field is constant.
-        const static Color Crimson;
+        static Property<Color, ReadOnly> Crimson;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF00FFFF. This field is constant.
-        const static Color Cyan;
+        static Property<Color, ReadOnly> Cyan;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF00008B. This field is constant.
-        const static Color DarkBlue;
+        static Property<Color, ReadOnly> DarkBlue;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF008B8B. This field is constant.
-        const static Color DarkCyan;
+        static Property<Color, ReadOnly> DarkCyan;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFB8860B. This field is constant.
-        const static Color DarkGoldenrod;
+        static Property<Color, ReadOnly> DarkGoldenrod;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFA9A9A9. This field is constant.
-        const static Color DarkGray;
+        static Property<Color, ReadOnly> DarkGray;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF006400. This field is constant.
-        const static Color DarkGreen;
+        static Property<Color, ReadOnly> DarkGreen;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFBDB76B. This field is constant.
-        const static Color DarkKhaki;
+        static Property<Color, ReadOnly> DarkKhaki;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF8B008B. This field is constant.
-        const static Color DarkMagenta;
+        static Property<Color, ReadOnly> DarkMagenta;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF556B2F. This field is constant.
-        const static Color DarkOliveGreen;
+        static Property<Color, ReadOnly> DarkOliveGreen;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFF8C00. This field is constant.
-        const static Color DarkOrange;
+        static Property<Color, ReadOnly> DarkOrange;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF9932CC. This field is constant.
-        const static Color DarkOrchid;
+        static Property<Color, ReadOnly> DarkOrchid;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF8B0000. This field is constant.
-        const static Color DarkRed;
+        static Property<Color, ReadOnly> DarkRed;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFE9967A. This field is constant.
-        const static Color DarkSalmon;
+        static Property<Color, ReadOnly> DarkSalmon;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF8FBC8B. This field is constant.
-        const static Color DarkSeaGreen;
+        static Property<Color, ReadOnly> DarkSeaGreen;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF483D8B. This field is constant.
-        const static Color DarkSlateBlue;
+        static Property<Color, ReadOnly> DarkSlateBlue;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF2F4F4F. This field is constant.
-        const static Color DarkSlateGray;
+        static Property<Color, ReadOnly> DarkSlateGray;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF00CED1. This field is constant.
-        const static Color DarkTurquoise;
+        static Property<Color, ReadOnly> DarkTurquoise;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF9400D3. This field is constant.
-        const static Color DarkViolet;
+        static Property<Color, ReadOnly> DarkViolet;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFF1493. This field is constant.
-        const static Color DeepPink;
+        static Property<Color, ReadOnly> DeepPink;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF00BFFF. This field is constant.
-        const static Color DeepSkyBlue;
+        static Property<Color, ReadOnly> DeepSkyBlue;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF696969. This field is constant.
-        const static Color DimGray;
+        static Property<Color, ReadOnly> DimGray;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF1E90FF. This field is constant.
-        const static Color DodgerBlue;
+        static Property<Color, ReadOnly> DodgerBlue;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFB22222. This field is constant.
-        const static Color Firebrick;
+        static Property<Color, ReadOnly> Firebrick;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFFFAF0. This field is constant.
-        const static Color FloralWhite;
+        static Property<Color, ReadOnly> FloralWhite;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF228B22. This field is constant.
-        const static Color ForestGreen;
+        static Property<Color, ReadOnly> ForestGreen;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFF00FF. This field is constant.
-        const static Color Fuchsia;
+        static Property<Color, ReadOnly> Fuchsia;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFDCDCDC. This field is constant.
-        const static Color Gainsboro;
+        static Property<Color, ReadOnly> Gainsboro;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFF8F8FF. This field is constant.
-        const static Color GhostWhite;
+        static Property<Color, ReadOnly> GhostWhite;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFFD700. This field is constant.
-        const static Color Gold;
+        static Property<Color, ReadOnly> Gold;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFDAA520. This field is constant.
-        const static Color Goldenrod;
+        static Property<Color, ReadOnly> Goldenrod;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF808080. This field is constant.
-        const static Color Gray;
+        static Property<Color, ReadOnly> Gray;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF008000. This field is constant.
-        const static Color Green;
+        static Property<Color, ReadOnly> Green;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFADFF2F. This field is constant.
-        const static Color GreenYellow;
+        static Property<Color, ReadOnly> GreenYellow;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFF0FFF0. This field is constant.
-        const static Color Honeydew;
+        static Property<Color, ReadOnly> Honeydew;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFF69B4. This field is constant.
-        const static Color HotPink;
+        static Property<Color, ReadOnly> HotPink;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFCD5C5C. This field is constant.
-        const static Color IndianRed;
+        static Property<Color, ReadOnly> IndianRed;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF4B0082. This field is constant.
-        const static Color Indigo;
+        static Property<Color, ReadOnly> Indigo;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFFFFF0. This field is constant.
-        const static Color Ivory;
+        static Property<Color, ReadOnly> Ivory;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFF0E68C. This field is constant.
-        const static Color Khaki;
+        static Property<Color, ReadOnly> Khaki;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFE6E6FA. This field is constant.
-        const static Color Lavender;
+        static Property<Color, ReadOnly> Lavender;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFFF0F5. This field is constant.
-        const static Color LavenderBlush;
+        static Property<Color, ReadOnly> LavenderBlush;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF7CFC00. This field is constant.
-        const static Color LawnGreen;
+        static Property<Color, ReadOnly> LawnGreen;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFFFACD. This field is constant.
-        const static Color LemonChiffon;
+        static Property<Color, ReadOnly> LemonChiffon;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFADD8E6. This field is constant.
-        const static Color LightBlue;
+        static Property<Color, ReadOnly> LightBlue;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFF08080. This field is constant.
-        const static Color LightCoral;
+        static Property<Color, ReadOnly> LightCoral;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFE0FFFF. This field is constant.
-        const static Color LightCyan;
+        static Property<Color, ReadOnly> LightCyan;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFAFAD2. This field is constant.
-        const static Color LightGoldenrodYellow;
+        static Property<Color, ReadOnly> LightGoldenrodYellow;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFD3D3D3. This field is constant.
-        const static Color LightGray;
+        static Property<Color, ReadOnly> LightGray;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF90EE90. This field is constant.
-        const static Color LightGreen;
+        static Property<Color, ReadOnly> LightGreen;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFFB6C1. This field is constant.
-        const static Color LightPink;
+        static Property<Color, ReadOnly> LightPink;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFFA07A. This field is constant.
-        const static Color LightSalmon;
+        static Property<Color, ReadOnly> LightSalmon;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF20B2AA. This field is constant.
-        const static Color LightSeaGreen;
+        static Property<Color, ReadOnly> LightSeaGreen;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF87CEFA. This field is constant.
-        const static Color LightSkyBlue;
+        static Property<Color, ReadOnly> LightSkyBlue;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF778899. This field is constant.
-        const static Color LightSlateGray;
+        static Property<Color, ReadOnly> LightSlateGray;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFB0C4DE. This field is constant.
-        const static Color LightSteelBlue;
+        static Property<Color, ReadOnly> LightSteelBlue;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFFFFE0. This field is constant.
-        const static Color LightYellow;
+        static Property<Color, ReadOnly> LightYellow;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF00FF00. This field is constant.
-        const static Color Lime;
+        static Property<Color, ReadOnly> Lime;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF32CD32. This field is constant.
-        const static Color LimeGreen;
+        static Property<Color, ReadOnly> LimeGreen;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFAF0E6. This field is constant.
-        const static Color Linen;
+        static Property<Color, ReadOnly> Linen;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFF00FF. This field is constant.
-        const static Color Magenta;
+        static Property<Color, ReadOnly> Magenta;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF800000. This field is constant.
-        const static Color Maroon;
+        static Property<Color, ReadOnly> Maroon;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF66CDAA. This field is constant.
-        const static Color MediumAquamarine;
+        static Property<Color, ReadOnly> MediumAquamarine;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF0000CD. This field is constant.
-        const static Color MediumBlue;
+        static Property<Color, ReadOnly> MediumBlue;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFBA55D3. This field is constant.
-        const static Color MediumOrchid;
+        static Property<Color, ReadOnly> MediumOrchid;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF9370DB. This field is constant.
-        const static Color MediumPurple;
+        static Property<Color, ReadOnly> MediumPurple;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF3CB371. This field is constant.
-        const static Color MediumSeaGreen;
+        static Property<Color, ReadOnly> MediumSeaGreen;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF7B68EE. This field is constant.
-        const static Color MediumSlateBlue;
+        static Property<Color, ReadOnly> MediumSlateBlue;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF00FA9A. This field is constant.
-        const static Color MediumSpringGreen;
+        static Property<Color, ReadOnly> MediumSpringGreen;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF48D1CC. This field is constant.
-        const static Color MediumTurquoise;
+        static Property<Color, ReadOnly> MediumTurquoise;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFC71585. This field is constant.
-        const static Color MediumVioletRed;
+        static Property<Color, ReadOnly> MediumVioletRed;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF191970. This field is constant.
-        const static Color MidnightBlue;
+        static Property<Color, ReadOnly> MidnightBlue;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFF5FFFA. This field is constant.
-        const static Color MintCream;
+        static Property<Color, ReadOnly> MintCream;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFFE4E1. This field is constant.
-        const static Color MistyRose;
+        static Property<Color, ReadOnly> MistyRose;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFFE4B5. This field is constant.
-        const static Color Moccasin;
+        static Property<Color, ReadOnly> Moccasin;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFFDEAD. This field is constant.
-        const static Color NavajoWhite;
+        static Property<Color, ReadOnly> NavajoWhite;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF000080. This field is constant.
-        const static Color Navy;
+        static Property<Color, ReadOnly> Navy;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFDF5E6. This field is constant.
-        const static Color OldLace;
+        static Property<Color, ReadOnly> OldLace;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF808000. This field is constant.
-        const static Color Olive;
+        static Property<Color, ReadOnly> Olive;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF6B8E23. This field is constant.
-        const static Color OliveDrab;
+        static Property<Color, ReadOnly> OliveDrab;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFFA500. This field is constant.
-        const static Color Orange;
+        static Property<Color, ReadOnly> Orange;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFF4500. This field is constant.
-        const static Color OrangeRed;
+        static Property<Color, ReadOnly> OrangeRed;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFDA70D6. This field is constant.
-        const static Color Orchid;
+        static Property<Color, ReadOnly> Orchid;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFEEE8AA. This field is constant.
-        const static Color PaleGoldenrod;
+        static Property<Color, ReadOnly> PaleGoldenrod;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF98FB98. This field is constant.
-        const static Color PaleGreen;
+        static Property<Color, ReadOnly> PaleGreen;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFAFEEEE. This field is constant.
-        const static Color PaleTurquoise;
+        static Property<Color, ReadOnly> PaleTurquoise;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFDB7093. This field is constant.
-        const static Color PaleVioletRed;
+        static Property<Color, ReadOnly> PaleVioletRed;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFFEFD5. This field is constant.
-        const static Color PapayaWhip;
+        static Property<Color, ReadOnly> PapayaWhip;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFFDAB9. This field is constant.
-        const static Color PeachPuff;
+        static Property<Color, ReadOnly> PeachPuff;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFCD853F. This field is constant.
-        const static Color Peru;
+        static Property<Color, ReadOnly> Peru;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFFC0CB. This field is constant.
-        const static Color Pink;
+        static Property<Color, ReadOnly> Pink;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFDDA0DD. This field is constant.
-        const static Color Plum;
+        static Property<Color, ReadOnly> Plum;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFB0E0E6. This field is constant.
-        const static Color PowderBlue;
+        static Property<Color, ReadOnly> PowderBlue;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF800080. This field is constant.
-        const static Color Purple;
+        static Property<Color, ReadOnly> Purple;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFF0000. This field is constant.
-        const static Color Red;
+        static Property<Color, ReadOnly> Red;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFBC8F8F. This field is constant.
-        const static Color RosyBrown;
+        static Property<Color, ReadOnly> RosyBrown;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF4169E1. This field is constant.
-        const static Color RoyalBlue;
+        static Property<Color, ReadOnly> RoyalBlue;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF8B4513. This field is constant.
-        const static Color SaddleBrown;
+        static Property<Color, ReadOnly> SaddleBrown;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFA8072. This field is constant.
-        const static Color Salmon;
+        static Property<Color, ReadOnly> Salmon;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFF4A460. This field is constant.
-        const static Color SandyBrown;
+        static Property<Color, ReadOnly> SandyBrown;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF2E8B57. This field is constant.
-        const static Color SeaGreen;
+        static Property<Color, ReadOnly> SeaGreen;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFFF5EE. This field is constant.
-        const static Color SeaShell;
+        static Property<Color, ReadOnly> SeaShell;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFA0522D. This field is constant.
-        const static Color Sienna;
+        static Property<Color, ReadOnly> Sienna;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFC0C0C0. This field is constant.
-        const static Color Silver;
+        static Property<Color, ReadOnly> Silver;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF87CEEB. This field is constant.
-        const static Color SkyBlue;
+        static Property<Color, ReadOnly> SkyBlue;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF6A5ACD. This field is constant.
-        const static Color SlateBlue;
+        static Property<Color, ReadOnly> SlateBlue;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF708090. This field is constant.
-        const static Color SlateGray;
+        static Property<Color, ReadOnly> SlateGray;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFFFAFA. This field is constant.
-        const static Color Snow;
+        static Property<Color, ReadOnly> Snow;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF00FF7F. This field is constant.
-        const static Color SpringGreen;
+        static Property<Color, ReadOnly> SpringGreen;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF4682B4. This field is constant.
-        const static Color SteelBlue;
+        static Property<Color, ReadOnly> SteelBlue;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFD2B48C. This field is constant.
-        const static Color Tan;
+        static Property<Color, ReadOnly> Tan;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF008080. This field is constant.
-        const static Color Teal;
+        static Property<Color, ReadOnly> Teal;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFD8BFD8. This field is constant.
-        const static Color Thistle;
+        static Property<Color, ReadOnly> Thistle;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFF6347. This field is constant.
-        const static Color Tomato;
+        static Property<Color, ReadOnly> Tomato;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF40E0D0. This field is constant.
-        const static Color Turquoise;
+        static Property<Color, ReadOnly> Turquoise;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFEE82EE. This field is constant.
-        const static Color Violet;
+        static Property<Color, ReadOnly> Violet;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFF5DEB3. This field is constant.
-        const static Color Wheat;
+        static Property<Color, ReadOnly> Wheat;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFFFFFF. This field is constant.
-        const static Color White;
+        static Property<Color, ReadOnly> White;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFF5F5F5. This field is constant.
-        const static Color WhiteSmoke;
+        static Property<Color, ReadOnly> WhiteSmoke;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFFFF00. This field is constant.
-        const static Color Yellow;
+        static Property<Color, ReadOnly> Yellow;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF9ACD32. This field is constant.
-        const static Color YellowGreen;
+        static Property<Color, ReadOnly> YellowGreen;
 
         /// @brief Create a new instance of class Color. The default value is Black.
         Color() {}

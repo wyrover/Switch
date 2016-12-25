@@ -1,6 +1,6 @@
 /// @page TypesPage Types
 ///
-/// The Corelib define Unboxed and Boxed types listed below. The Unboxed types is same as the native type. The Boxed type is a Pcf::System::ValueType inherited from object.
+/// The Pcf define Unboxed and Boxed types listed below. The Unboxed types is same as the native type. The Boxed type is a Pcf::System::ValueType inherited from object.
 ///
 /// @section RemarksSection Remarks
 /// For more performance prefere used Unboxed type. Used Boxed type when necessary, e.g., to parse, polymorphism, ...

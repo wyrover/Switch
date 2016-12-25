@@ -31,11 +31,6 @@ namespace Pcf {
 
           /// @cond
           IPv6MulticastOption(const IPv6MulticastOption& ipv6MulticastOption) : group(ipv6MulticastOption.group), interfaceIndex(ipv6MulticastOption.interfaceIndex) {}
-          IPv6MulticastOption& operator =(const IPv6MulticastOption& ipv6MulticastOption) {
-            group = ipv6MulticastOption.group;
-            interfaceIndex = ipv6MulticastOption.interfaceIndex;
-            return *this;
-          }
           /// @endcond
 
           /// @brief Gets or Set the IP address of a multicast group.

@@ -42,9 +42,6 @@ namespace Pcf {
         /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
         /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #pcf_current_information.
         LockRecursionException(const System::String& message, const System::Exception& innerException, const CurrentInformation& information) : Exception(message, innerException, information) {}
-        
-      private:
-        System::String GetDefaultMessage() const override {return "Exception of type 'System::Threading::LockRecursionException' was throw."; }
       };
     }
   }

@@ -10,7 +10,7 @@
 /// The Pcf @subpage PcfFrameworkNamespacesPage list.
 ///
 /// @section TypesSection Types
-/// The Corelib define Unboxed and Boxed @subpage TypesPage.
+/// The Pcf define Unboxed and Boxed @subpage TypesPage.
 ///
 /// @section TutorialsSection Tutorials
 /// @subpage TutorialsPage provide an overview of the basics of the language and identify important language features. Each tutorial includes one or more sample programs. The tutorials discuss the sample code plus provide additional background information. They also link to the corresponding sample abstract topics, where you can download and run the sample programs.

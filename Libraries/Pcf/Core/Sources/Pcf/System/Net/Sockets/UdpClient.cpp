@@ -19,19 +19,19 @@ UdpClient::UdpClient(AddressFamily addressFamily) {
 
 UdpClient::UdpClient(int32 port) {
   this->client = SharedPointer<Socket>::Create(AddressFamily::InterNetwork, SocketType::Dgram, ProtocolType::Udp);
-  this->client->Bind(new IPEndPoint(IPAddress::Any, port));
+  this->client->Bind(IPEndPoint(IPAddress::Any, port));
 }
 
-UdpClient::UdpClient(SharedPointer<IPEndPoint> endPoint) {
+UdpClient::UdpClient(const IPEndPoint& endPoint) {
   this->client = SharedPointer<Socket>::Create(AddressFamily::InterNetwork, SocketType::Dgram, ProtocolType::Udp);
-  this->client->Bind(endPoint.ChangeType<EndPoint>());
+  this->client->Bind(endPoint);
 }
 
 UdpClient::UdpClient(int32 port, AddressFamily addressFamily) {
   this->client = SharedPointer<Socket>::Create(addressFamily, SocketType::Dgram, ProtocolType::Udp);
 
   // Retrieve local IPAddress and use the 1st one
-  this->client->Bind(new IPEndPoint(Dns::GetHostAddresses(Dns::GetHostName())[0], port));
+  this->client->Bind(IPEndPoint(Dns::GetHostAddresses(Dns::GetHostName())[0], port));
 }
 
 UdpClient::UdpClient(const string& hostname, int32 port) {
@@ -76,7 +76,7 @@ void UdpClient::SetDontFragment(bool dontFragment) {
   if (this->client.IsNull())
     throw NullReferenceException(pcf_current_information);
 
-  this->client->SetDontFragment(dontFragment);
+  this->client->DontFragment = dontFragment;
 }
 
 bool UdpClient::GetEnableBroadcast() const {
@@ -90,7 +90,7 @@ void UdpClient::SetEnableBroadcast(bool enableBroadcast) {
   if (this->client.IsNull())
     throw NullReferenceException(pcf_current_information);
 
-  this->client->SetEnableBroadcast(enableBroadcast);
+  this->client->EnableBroadcast = enableBroadcast;
 }
 
 bool UdpClient::GetExclusiveAddressUse() const
@@ -105,7 +105,7 @@ void UdpClient::SetExclusiveAddressUse(bool exclusiveAddressUse) {
   if (this->client.IsNull())
     throw NullReferenceException(pcf_current_information);
 
-  this->client->SetExclusiveAddressUse(exclusiveAddressUse);
+  this->client->ExclusiveAddressUse = exclusiveAddressUse;
 }
 
 bool UdpClient::GetMulticastLoopback() const {
@@ -119,7 +119,7 @@ void UdpClient::SetMulticastLoopback(bool multicastLoopback) {
   if (this->client.IsNull())
     throw NullReferenceException(pcf_current_information);
 
-  this->client->SetMulticastLoopback(multicastLoopback);
+  this->client->MulticastLoopback = multicastLoopback;
 }
 
 int32 UdpClient::GetTtl() const {
@@ -133,7 +133,7 @@ void UdpClient::SetTtl(int32 ttl) {
   if (this->client.IsNull())
     throw NullReferenceException(pcf_current_information);
 
-  this->client->SetTtl(ttl);
+  this->client->Ttl = ttl;
 }
 
 void UdpClient::Close() {
@@ -143,13 +143,11 @@ void UdpClient::Close() {
   this->client->Close();
 }
 
-void UdpClient::Connect(SharedPointer<IPEndPoint> endPoint) {
+void UdpClient::Connect(const IPEndPoint& endPoint) {
   if (this->client.IsNull())
     throw NullReferenceException(pcf_current_information);
-  if (SharedPointer<IPEndPoint>::IsNullOrInvalid(endPoint))
-    throw NullReferenceException(pcf_current_information);
 
-  this->client->Connect(endPoint.ChangeType<EndPoint>());
+  this->client->Connect(endPoint);
 }
 
 void UdpClient::Connect(const IPAddress& ipAddress, int32 port) {
@@ -196,13 +194,6 @@ int32 UdpClient::Receive(Array<byte>& buffer, IPEndPoint& endPoint) {
   return this->client->ReceiveFrom(buffer, endPoint);
 }
 
-int32 UdpClient::Receive(byte buffer[], int32 bufferLength, IPEndPoint& endPoint) {
-  if (this->client.IsNull())
-    throw NullReferenceException(pcf_current_information);
-
-  return this->client->ReceiveFrom(buffer, bufferLength, endPoint);
-}
-
 int32 UdpClient::Send(const Array<byte>& data) {
   if (this->client.IsNull())
     throw NullReferenceException(pcf_current_information);
@@ -212,15 +203,6 @@ int32 UdpClient::Send(const Array<byte>& data) {
   return this->client->Send(data);
 }
 
-int32 UdpClient::Send(byte buffer[], int32 bufferLength) {
-  if (this->client.IsNull() || buffer == null)
-    throw NullReferenceException(pcf_current_information);
-  if (!GetConnected())
-    throw SocketException((int32)SocketError::NotConnected, pcf_current_information);
-
-  return this->client->Send(buffer, bufferLength);
-}
-
 int32 UdpClient::Send(const Array<byte>& data, const IPEndPoint& endPoint) {
   if (this->client.IsNull())
     throw NullReferenceException(pcf_current_information);
@@ -228,21 +210,9 @@ int32 UdpClient::Send(const Array<byte>& data, const IPEndPoint& endPoint) {
     throw InvalidOperationException(pcf_current_information);
 
   if (endPoint.Address() == IPAddress::Broadcast)
-    this->client->SetEnableBroadcast(true);
+    this->client->EnableBroadcast = true;
 
   return this->client->SendTo(data, endPoint);
-}
-
-int32 UdpClient::Send(byte buffer[], int32 bufferLength, const IPEndPoint& endPoint) {
-  if (this->client.IsNull() || buffer == null)
-    throw NullReferenceException(pcf_current_information);
-  if (GetConnected())
-    throw InvalidOperationException(pcf_current_information);
-
-  if (endPoint.Address() == IPAddress::Broadcast)
-    this->client->SetEnableBroadcast(true);
-
-  return this->client->SendTo(buffer, bufferLength, endPoint);
 }
 
 int32 UdpClient::Send(const Array<byte>& data, const string& hostname, int32 port) {
@@ -251,31 +221,14 @@ int32 UdpClient::Send(const Array<byte>& data, const string& hostname, int32 por
   if (GetConnected())
     throw InvalidOperationException(pcf_current_information);
 
-  if (hostname == IPAddress::Broadcast.ToString()) {
+  if (hostname == IPAddress::Broadcast().ToString()) {
     // hostname can be 255.255.255.255
-    this->client->SetEnableBroadcast(true);
+    this->client->EnableBroadcast = true;
     return this->client->SendTo(data, IPEndPoint(IPAddress::Broadcast, port));
   }
   else {
     // Use the 1st IPAddress corresponding to the hostname
     return this->client->SendTo(data, IPEndPoint(Dns::GetHostAddresses(hostname)[0], port));
-  }
-}
-
-int32 UdpClient::Send(byte buffer[], int32 bufferLength, const string& hostname, int32 port) {
-  if (this->client.IsNull())
-    throw NullReferenceException(pcf_current_information);
-  if (GetConnected())
-    throw InvalidOperationException(pcf_current_information);
-
-  if (hostname == IPAddress::Broadcast.ToString()) {
-    // hostname can be 255.255.255.255
-    this->client->SetEnableBroadcast(true);
-    return this->client->SendTo(buffer, bufferLength, IPEndPoint(IPAddress::Broadcast, port));
-  }
-  else {
-    // Use the 1st IPAddress corresponding to the hostname
-    return this->client->SendTo(buffer, bufferLength, IPEndPoint(Dns::GetHostAddresses(hostname)[0], port));
   }
 }
 

@@ -15,39 +15,39 @@ namespace Pcf {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief Represents a time interval.
-    struct TimeSpan : public object, public IComparable, public IHashable {
+    struct TimeSpan : public object, public IComparable {
     public:
       /// @brief Represents the maximum TimeSpan value. This field is constant.
       /// @remarks The value of this field is equivalent to Int64::MaxValue ticks. The String representation of this value is positive 106751990248054775807
-      static TimeSpan MaxValue;
+      static Property<TimeSpan, ReadOnly> MaxValue;
 
       /// @brief Represents the minimum TimeSpan value. This field is constant.
       /// @remarks The value of this field is equivalent to Int64::MinValue ticks. The String representation of this value is negative 106751990248054775808
-      static TimeSpan MinValue;
+      static Property<TimeSpan, ReadOnly> MinValue;
 
       /// @brief Represents the number of ticks in 1 day. This field is constant.
       /// @remarks The value of this constant is 864 billion; that is 864000000000.
-      constexpr static int64 TicksPerDay = 864000000000LL;
+      static Property<int64, ReadOnly> TicksPerDay;
 
       /// @brief Represents the number of ticks in 1 hour. This field is constant.
       /// @remarks The value of this constant is 36 billion; that is 36000000000.
-      constexpr static int64 TicksPerHour = 36000000000LL;
+      static Property<int64, ReadOnly> TicksPerHour;
 
       /// @brief Represents the number of ticks in 1 millisecond. This field is constant.
       /// @remarks The value of this constant is 10 thousand; that is 10000.
-      constexpr static int64 TicksPerMillisecond = 10000LL;
+      static Property<int64, ReadOnly> TicksPerMillisecond;
 
       /// @brief Represents the number of ticks in 1 minute. This field is constant.
       /// @remarks The value of this constant is 600 million; that is 600000000.
-      constexpr static int64 TicksPerMinute = 600000000LL;
+      static Property<int64, ReadOnly> TicksPerMinute;
 
       /// @brief Represents the number of ticks in 1 second. This field is constant.
       /// @remarks The value of this constant is 10 million; that is 10000000.
-      constexpr static int64 TicksPerSecond = 10000000LL;
+      static Property<int64, ReadOnly> TicksPerSecond;
 
       /// @brief Represents the zero TimeSpan value. This field is constant.
       /// @remarks Because it returns a TimeSpan object that represents a zero time value, the Zero constant can be compared with other TimeSpan objects to determine whether the latter represent positive, non-zero, or negative time spans.
-      static TimeSpan Zero;
+      static Property<TimeSpan, ReadOnly> Zero;
 
       /// @brief Create a new instance of struct TimeSpan
       /// @remarks TimeSpan is initialized with default value 0.

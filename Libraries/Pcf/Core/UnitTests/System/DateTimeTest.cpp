@@ -13,8 +13,8 @@ namespace Pcf {
   namespace System {
     class DateTime2 : public object {
     public:
-      static const DateTime2 MinValue;
-      static const DateTime2 MaxValue;
+      static Property<DateTime2, ReadOnly> MinValue;
+      static Property<DateTime2, ReadOnly> MaxValue;
       
       DateTime2() {}
       
@@ -323,8 +323,13 @@ using namespace Pcf;
 
 using namespace System;
 
-const DateTime2 DateTime2::MinValue = DateTime2(DateTime2::MinTicks, DateTimeKind::Unspecified);
-const DateTime2 DateTime2::MaxValue = DateTime2(DateTime2::MaxTicks, DateTimeKind::Unspecified);
+Property<DateTime2, ReadOnly> DateTime2::MinValue { 
+  [] {return DateTime2(0, DateTimeKind::Unspecified);}
+};
+
+Property<DateTime2, ReadOnly> DateTime2::MaxValue{
+  [] { return DateTime2((int64)3652059*10000*1000*60*60*24-1, DateTimeKind::Unspecified);}
+};
 
 int64 GetSystemTimeAsFileTime() {
   static constexpr int64 TicksSince1601To1970 =  116444736000000000LL;
@@ -369,31 +374,31 @@ namespace {
   class DateTimeTest : public TestFixture {
   protected:
     void MinValue() {
-      Assert::AreEqual(DateTimeKind::Unspecified, DateTime2::MinValue.Kind(), pcf_current_information);
-      Assert::AreEqual(0, DateTime2::MinValue.Ticks(), pcf_current_information);
-      Assert::AreEqual(1, DateTime2::MinValue.Year(), pcf_current_information);
-      Assert::AreEqual(1, DateTime2::MinValue.Month(), pcf_current_information);
-      Assert::AreEqual(1, DateTime2::MinValue.Day(), pcf_current_information);
-      Assert::AreEqual(0, DateTime2::MinValue.Hour(), pcf_current_information);
-      Assert::AreEqual(0, DateTime2::MinValue.Minute(), pcf_current_information);
-      Assert::AreEqual(0, DateTime2::MinValue.Second(), pcf_current_information);
-      Assert::AreEqual(0, DateTime2::MinValue.Millisecond(), pcf_current_information);
-      Assert::AreEqual(DayOfWeek::Monday, DateTime2::MinValue.DayOfWeek(), pcf_current_information);
-      Assert::IsFalse(DateTime2::MinValue.IsDaylightSavingTime(), pcf_current_information);
+      Assert::AreEqual(DateTimeKind::Unspecified, DateTime2::MinValue().Kind(), pcf_current_information);
+      Assert::AreEqual(0, DateTime2::MinValue().Ticks(), pcf_current_information);
+      Assert::AreEqual(1, DateTime2::MinValue().Year(), pcf_current_information);
+      Assert::AreEqual(1, DateTime2::MinValue().Month(), pcf_current_information);
+      Assert::AreEqual(1, DateTime2::MinValue().Day(), pcf_current_information);
+      Assert::AreEqual(0, DateTime2::MinValue().Hour(), pcf_current_information);
+      Assert::AreEqual(0, DateTime2::MinValue().Minute(), pcf_current_information);
+      Assert::AreEqual(0, DateTime2::MinValue().Second(), pcf_current_information);
+      Assert::AreEqual(0, DateTime2::MinValue().Millisecond(), pcf_current_information);
+      Assert::AreEqual(DayOfWeek::Monday, DateTime2::MinValue().DayOfWeek(), pcf_current_information);
+      Assert::IsFalse(DateTime2::MinValue().IsDaylightSavingTime(), pcf_current_information);
     }
 
     void MaxValue() {
-      Assert::AreEqual(DateTimeKind::Unspecified, DateTime2::MaxValue.Kind(), pcf_current_information);
-      Assert::AreEqual(3155378975999999999LL, DateTime2::MaxValue.Ticks(), pcf_current_information);
-      Assert::AreEqual(9999, DateTime2::MaxValue.Year(), pcf_current_information);
-      Assert::AreEqual(12, DateTime2::MaxValue.Month(), pcf_current_information);
-      Assert::AreEqual(31, DateTime2::MaxValue.Day(), pcf_current_information);
-      Assert::AreEqual(23, DateTime2::MaxValue.Hour(), pcf_current_information);
-      Assert::AreEqual(59, DateTime2::MaxValue.Minute(), pcf_current_information);
-      Assert::AreEqual(59, DateTime2::MaxValue.Second(), pcf_current_information);
-      Assert::AreEqual(999, DateTime2::MaxValue.Millisecond(), pcf_current_information);
-      Assert::AreEqual(DayOfWeek::Friday, DateTime2::MaxValue.DayOfWeek(), pcf_current_information);
-      Assert::IsFalse(DateTime2::MaxValue.IsDaylightSavingTime(), pcf_current_information);
+      Assert::AreEqual(DateTimeKind::Unspecified, DateTime2::MaxValue().Kind(), pcf_current_information);
+      Assert::AreEqual(3155378975999999999LL, DateTime2::MaxValue().Ticks(), pcf_current_information);
+      Assert::AreEqual(9999, DateTime2::MaxValue().Year(), pcf_current_information);
+      Assert::AreEqual(12, DateTime2::MaxValue().Month(), pcf_current_information);
+      Assert::AreEqual(31, DateTime2::MaxValue().Day(), pcf_current_information);
+      Assert::AreEqual(23, DateTime2::MaxValue().Hour(), pcf_current_information);
+      Assert::AreEqual(59, DateTime2::MaxValue().Minute(), pcf_current_information);
+      Assert::AreEqual(59, DateTime2::MaxValue().Second(), pcf_current_information);
+      Assert::AreEqual(999, DateTime2::MaxValue().Millisecond(), pcf_current_information);
+      Assert::AreEqual(DayOfWeek::Friday, DateTime2::MaxValue().DayOfWeek(), pcf_current_information);
+      Assert::IsFalse(DateTime2::MaxValue().IsDaylightSavingTime(), pcf_current_information);
     }
     
     void DefaultConstructor() {
@@ -600,8 +605,8 @@ namespace {
     }
     
     void Constructor() {
-      EXPECT_THROW(DateTime2(DateTime2::MaxValue.Ticks()+TimeSpan::TicksPerSecond), ArgumentOutOfRangeException);
-      EXPECT_THROW(DateTime2(DateTime2::MinValue.Ticks()-TimeSpan::TicksPerSecond), ArgumentOutOfRangeException);
+      EXPECT_THROW(DateTime2(DateTime2::MaxValue().Ticks()+TimeSpan::TicksPerSecond), ArgumentOutOfRangeException);
+      EXPECT_THROW(DateTime2(DateTime2::MinValue().Ticks()-TimeSpan::TicksPerSecond), ArgumentOutOfRangeException);
     }
     
     void Now() {

@@ -26,10 +26,10 @@ namespace Pcf {
       Char(char32 value) : value(value) { }
 
       /// @brief Represents the largest possible value of an Char (code point 0x0010FFFFu). This field is constant.
-      const static char32 MaxValue;
+      static Property<char32, ReadOnly> MaxValue;
       
       /// @brief Represents the smallest possible value of Char 0 (0). This field is constant.
-      const static char32 MinValue;
+      static Property<char32, ReadOnly> MinValue;
       
       /// @brief Indicates whether the specified Unicode character is categorized as a control character.
       /// @param value A Unicode character.

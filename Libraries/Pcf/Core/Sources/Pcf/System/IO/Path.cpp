@@ -7,18 +7,26 @@
 #include "../../../../Includes/Pcf/System/IO/FileAttributes.h"
 #include "../../../../Includes/Pcf/System/Char.h"
 #include "../../../../Includes/Pcf/System/Random.h"
-#include "../../Os/Directory.h"
+#include "../../../__OS/CoreApi.h"
 
 using namespace System;
 using namespace System::IO;
 
-const char32 Path::AltDirectorySeparatorChar = Os::Directory::AltDirectorySeparatorChar();
+Property<char32, ReadOnly> Path::AltDirectorySeparatorChar {
+  [] {return __OS::CoreApi::Directory::AltDirectorySeparatorChar();}
+};
 
-const char32 Path::DirectorySeparatorChar = Os::Directory::DirectorySeparatorChar();
+Property<char32, ReadOnly> Path::DirectorySeparatorChar {
+  [] {return __OS::CoreApi::Directory::DirectorySeparatorChar();}
+};
 
-const char32 Path::PathSeparator = Os::Directory::PathSeparator();
+Property<char32, ReadOnly> Path::PathSeparator {
+  [] {return __OS::CoreApi::Directory::PathSeparator();}
+};
 
-const char32 Path::VolumeSeparatorChar = Os::Directory::VolumeSeparator();
+Property<char32, ReadOnly> Path::VolumeSeparatorChar {
+  [] {return __OS::CoreApi::Directory::VolumeSeparator();}
+};
 
 Array<char32> DirectorySeparatorChars = {'/', '\\'};
 
@@ -58,11 +66,11 @@ string Path::GetFullPath(const string& path) {
   if (path.IndexOfAny(GetInvalidPathChars()) != -1)
     throw ArgumentException(pcf_current_information);
   
-  return Os::Directory::GetFullPath(path);
+  return __OS::CoreApi::Directory::GetFullPath(path);
 }
 
 Array<char32> Path::GetInvalidPathChars() {
-  return Array<char32>(Os::Directory::InvalidPathChars());
+  return Array<char32>(__OS::CoreApi::Directory::InvalidPathChars());
 }
 
 namespace {
@@ -98,7 +106,7 @@ string Path::GetRandomFileName() {
 }
 
 string Path::GetTempPath() {
-  return Os::Directory::GetTempPath();
+  return __OS::CoreApi::Directory::GetTempPath();
 }
 
 string Path::GetTempFileName() {

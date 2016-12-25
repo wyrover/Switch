@@ -148,7 +148,7 @@ namespace Pcf {
           /// @param value The object to be added to the end of the Dictionary<TKey,TValue>. The value can ! be null for reference types.
           bool ContainsValue(const TValue& value) const {
             for (Item item : *this)
-              if (System::Compare::Equals(value, item.Value()))
+              if (value == item.Value)
                 return true;
 
             return false;
@@ -275,12 +275,12 @@ namespace Pcf {
           /// @cond
           class Hasher {
           public:
-            size_t operator()(const TKey& key) const { return Hash::GetHashCode(key); }
+            size_t operator()(const TKey& key) const { return Pcf::GetHashCode(key); }
           };
           
           class EqualTo {
           public:
-            bool operator()(const TKey& a, const TKey& b) const {return Compare::Equals(a, b); }
+            bool operator()(const TKey& a, const TKey& b) const {return a == b; }
           };
           /// @endcond
           

@@ -9,6 +9,6 @@
 ///   DateTime GetDate() const { return Date(); }
 ///   ...
 /// };
-/// @ingroup Corelib
+/// @ingroup Pcf
 #define Deprecated \
   pcf_deprecated

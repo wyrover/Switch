@@ -5,6 +5,9 @@ set(include_files
 ./Includes/Pcf/System/Drawing/Imaging/ImageFlags.h
 ./Includes/Pcf/System/Drawing/Imaging/ImageFormat.h
 ./Includes/Pcf/System/Drawing/Imaging/PixelFormat.h
+./Includes/Pcf/System/Drawing/Text/FontCollection.h
+./Includes/Pcf/System/Drawing/Text/GenericFontFamilies.h
+./Includes/Pcf/System/Drawing/Text/InstalledFontCollection.h
 ./Includes/Pcf/System/Drawing/Bitmap.h
 ./Includes/Pcf/System/Drawing/Brush.h
 ./Includes/Pcf/System/Drawing/CharacterRange.h
@@ -14,6 +17,7 @@ set(include_files
 ./Includes/Pcf/System/Drawing/FontFamily.h
 ./Includes/Pcf/System/Drawing/FontStyle.h
 ./Includes/Pcf/System/Drawing/Graphics.h
+./Includes/Pcf/System/Drawing/GraphicsUnit.h
 ./Includes/Pcf/System/Drawing/Image.h
 ./Includes/Pcf/System/Drawing/Imaging.h
 ./Includes/Pcf/System/Drawing/KnownColor.h
@@ -26,6 +30,7 @@ set(include_files
 ./Includes/Pcf/System/Drawing/Size.h
 ./Includes/Pcf/System/Drawing/SizeF.h
 ./Includes/Pcf/System/Drawing/SystemColors.h
+./Includes/Pcf/System/Drawing/Text.h
 ./Includes/Pcf/System/Drawing.h
 ./Includes/Pcf/Drawing.h
 ./Includes/Pcf/Pcf
@@ -34,8 +39,13 @@ set(include_files
 
 # Add source files here:
 set(source_files
+./Sources/__OS/DrawingApi.h
+./Sources/__OS/DrawingApiWin32.cpp
+./Sources/__OS/DrawingApiX.cpp
 ./Sources/Pcf/System/Drawing/Imaging/FrameDimension.cpp
 ./Sources/Pcf/System/Drawing/Imaging/ImageFormat.cpp
+./Sources/Pcf/System/Drawing/Text/FontCollection.cpp
+./Sources/Pcf/System/Drawing/Text/InstalledFontCollection.cpp
 ./Sources/Pcf/System/Drawing/Bmp.h
 ./Sources/Pcf/System/Drawing/Bitmap.cpp
 ./Sources/Pcf/System/Drawing/Color.cpp
@@ -56,10 +66,17 @@ set(source_files
 ./Sources/Pcf/System/Drawing/Tif.h
 )
 
+if (APPLE)
+set(source_apple_files
+./Sources/__OS/DrawingApiCocoa.mm
+)
+endif ()
+
 #Add include groups here:
 source_group(Includes\\Pcf\\System REGULAR_EXPRESSION "/Includes/Pcf/System/[-_,A-Za-z0-9]+\\.h*")
 source_group(Includes\\Pcf\\System\\Drawing REGULAR_EXPRESSION "/Includes/Pcf/System/Drawing/[-_,A-Za-z0-9]+\\.h*")
 source_group(Includes\\Pcf\\System\\Drawing\\Imaging REGULAR_EXPRESSION "/Includes/Pcf/System/Drawing/Imaging/[-_,A-Za-z0-9]+\\.h*")
+source_group(Includes\\Pcf\\System\\Drawing\\Text REGULAR_EXPRESSION "/Includes/Pcf/System/Drawing/Text/[-_,A-Za-z0-9]+\\.h*")
 source_group(Includes\\Pcf REGULAR_EXPRESSION "/Includes/Pcf/[-_,A-Za-z0-9]+\\.h*")
 source_group(Includes\\Pcf REGULAR_EXPRESSION "/Includes/Pcf/[-_,A-Za-z0-9]")
 source_group(Includes REGULAR_EXPRESSION "/Includes/[-_,A-Za-z0-9]+\\.h*")
@@ -68,16 +85,18 @@ source_group(Includes REGULAR_EXPRESSION "/Includes/[-_,A-Za-z0-9]+\\.h*")
 source_group(Sources\\Pcf\\System REGULAR_EXPRESSION "/Sources/Pcf/System/[-_,A-Za-z0-9]+\\.c*")
 source_group(Sources\\Pcf\\System\\Drawing REGULAR_EXPRESSION "/Sources/Pcf/System/Drawing/[-_,A-Za-z0-9]+\\.*")
 source_group(Sources\\Pcf\\System\\Drawing\\Imaging REGULAR_EXPRESSION "/Sources/Pcf/System/Drawing/Imaging/[-_,A-Za-z0-9]+\\.*")
+source_group(Sources\\Pcf\\System\\Drawing\\Text REGULAR_EXPRESSION "/Sources/Pcf/System/Drawing/Text/[-_,A-Za-z0-9]+\\.*")
 source_group(Sources\\Pcf REGULAR_EXPRESSION "/Sources/Pcf/[-_,A-Za-z0-9]+\\.c*")
+source_group(Sources\\__OS REGULAR_EXPRESSION "/Sources/__OS/[-_,A-Za-z0-9]+\\.*")
 source_group(Sources REGULAR_EXPRESSION "/Sources/[-_,A-Za-z0-9]+\\.c*")
 
 if (BUILD_DRAWING_UNIT_TESTS)
   add_subdirectory("UnitTests")
 endif ()
 
-add_library(Pcf.Drawing STATIC ${include_files} ${source_files})
+add_library(Pcf.Drawing STATIC ${include_files} ${source_files} ${source_apple_files})
 target_include_directories(Pcf.Drawing PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Includes> $<INSTALL_INTERFACE:include>)
-target_link_libraries(Pcf.Drawing jpeglib libpng zlib gel_button Fl_Gel_Tabs fltk Pcf.TUnit)
+target_link_libraries(Pcf.Drawing jpeglib libpng zlib Pcf.TUnit)
 
 set_target_properties(Pcf.Drawing PROPERTIES FOLDER Pcf/Drawing)
 

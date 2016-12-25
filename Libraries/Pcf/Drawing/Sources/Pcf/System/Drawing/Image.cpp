@@ -1,9 +1,9 @@
 #include <csetjmp>
 #include <cstdio>
 
-#include <zlib/zlib.h> // Must be include the first because Byte definition is ambigous...
+#include <zlib/zlib.h> // Must be include first because Byte definition is ambigous...
 extern "C" {
-#include <jpeglib/jpeglib.h> // Must be include the first because boolean definition is ambigous...
+#include <jpeglib/jpeglib.h> // Must be include second because boolean definition is ambigous...
 }
 
 #include <Pcf/System/IO/File.h>
@@ -11,23 +11,21 @@ extern "C" {
 
 #include "Bmp.h"
 #include "Gif.h"
-#if _WIN32
 #pragma warning(push)
 #pragma warning(disable:4324)
 #pragma warning(disable:4611)
-#endif
 #include "Jpg.h"
 #include "Png.h"
-#if _WIN32
 #pragma warning(pop)
-#endif
 #include "Tif.h"
 
 using namespace System;
 using namespace System::Drawing;
 using namespace System::IO;
 
-const Image Image::None;
+Property<Image, ReadOnly> Image::None {
+  [] {return Image();}
+};
 
 Image::Image() {
 }

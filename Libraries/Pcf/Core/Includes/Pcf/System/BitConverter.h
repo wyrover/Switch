@@ -112,13 +112,8 @@ namespace Pcf {
        static Array<byte> GetBytes(uint64 value);
 
       /// @cond
-#if __linux__ && _LP64
-       static Array<byte> GetBytes(long long int value);
-       static Array<byte> GetBytes(unsigned long long int value);
-#else
-       static Array<byte> GetBytes(long value);
-       static Array<byte> GetBytes(unsigned long value);
-#endif
+       static Array<byte> GetBytes(llong value);
+       static Array<byte> GetBytes(ullong value);
       /// @endcond
 
       /// @brief Converts the specified 32-bit signed integer to a single-precision floating point number.

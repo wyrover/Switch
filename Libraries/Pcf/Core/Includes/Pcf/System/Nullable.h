@@ -5,7 +5,6 @@
 #include "../Property.h"
 #include "Convert.h"
 #include "Hash.h"
-#include "IHashable.h"
 #include "InvalidOperationException.h"
 #include "Object.h"
 
@@ -15,7 +14,7 @@ namespace Pcf {
     /// The following code example defines three rows of a table in the Microsoft Pubs sample database. The table contains two columns that are not nullable and two columns that are nullable.
     /// @include Nullable.cpp
     template <class T>
-    struct Nullable : public object, public IHashable {
+    struct Nullable : public object {
     public:
       /// @brief Initializes a new instance of the Nullable<T> structure to the specified value. 
       /// @param value A vlue type.
@@ -56,8 +55,8 @@ namespace Pcf {
       /// @return The value of the current Nullable<T> object if the HasValue property is true. An exception is thrown if the HasValue property is false.
       /// @exception InvalidOperationException The HasValue property is false.
       /// @remarks If a value of type T has not been assigned to the Nullable<T> object, you can compare it to null and retrieve its HasValue property, but you cannot access its Value property or call its other members.
-      Property<T, ReadOnly> Value {
-        pcf_get {
+      Property<T&, ReadOnly> Value {
+        pcf_get->T& {
           if(!this->hasValue)
             throw System::InvalidOperationException(pcf_current_information);
           return this->value;
@@ -81,7 +80,7 @@ namespace Pcf {
       /// @brief Serves as a hash function for a particular type.
       /// @return Int32 A hash code for the current Object.
       int32 GetHashCode() const override {
-        return Hash::GetHashCode(this->value);
+        return ::GetHashCode(this->value);
       }
 
       /// @brief Retrieves the value of the current Nullable<T> object, or the object's default value.

@@ -1,19 +1,12 @@
-#include "FltkWidget.h"
+#include "../../../../../Includes/Pcf/System/Windows/Forms/Application.h"
 #include "../../../../../Includes/Pcf/System/Windows/Forms/RadioButton.h"
+#include "../../../../__OS/FormsApi.h"
 
 using namespace System;
 using namespace System::Drawing;
 using namespace System::Windows::Forms;
 
-using WidgetRadioButton = Fltk::Widget<Fl_Radio_Round_Button>;
-
-RadioButton::RadioButton() : ButtonBase(UniquePointer<IWidget>::Create<WidgetRadioButton>()) {
-  this->Size = this->DefaultSize;
-}
-
-void RadioButton::SetChecked(bool checked) {
-  if (this->checked != checked) {
-    this->checked = checked;
-    WidgetRadioButton::ToWidget(this->widget()).value(checked);
-  }
+void RadioButton::CreateHandle() {
+  this->data->handle = __OS::FormsApi::Control::Create(*this);
+  this->Control::CreateHandle();
 }

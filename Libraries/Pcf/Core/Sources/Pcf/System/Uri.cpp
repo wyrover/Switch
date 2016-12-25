@@ -2,14 +2,46 @@
 
 using namespace System;
 
-const String Uri::SchemeDelimiter = "://";
-const String Uri::UriSchemeFile = "file";
-const String Uri::UriSchemeFtp = "ftp";
-const String Uri::UriSchemeGopher = "gopher";
-const String Uri::UriSchemeHttp = "http";
-const String Uri::UriSchemeHttps = "https";
-const String Uri::UriSchemeMailto = "mailto";
-const String Uri::UriSchemeNetPipe = "net.pipe";
-const String Uri::UriSchemeNetTcp = "net.tcp";
-const String Uri::UriSchemeNews = "news";
-const String Uri::UriSchemeNntp = "nntp";
+Property<string, ReadOnly> Uri::SchemeDelimiter {
+  [] {return "://";}
+};
+
+Property<string, ReadOnly> Uri::UriSchemeFile {
+  [] {return "file";}
+};
+
+Property<string, ReadOnly> Uri::UriSchemeFtp {
+  [] {return "ftp";}
+};
+
+Property<string, ReadOnly> Uri::UriSchemeGopher {
+  [] {return "gopher";}
+};
+
+Property<string, ReadOnly> Uri::UriSchemeHttp {
+  [] {return "http";}
+};
+
+Property<string, ReadOnly> Uri::UriSchemeHttps {
+  [] {return "https";}
+};
+
+Property<string, ReadOnly> Uri::UriSchemeMailto {
+  [] {return "mailto";}
+};
+
+Property<string, ReadOnly> Uri::UriSchemeNetPipe {
+  [] {return "net.pipe";}
+};
+
+Property<string, ReadOnly> Uri::UriSchemeNetTcp {
+  [] {return "net.tcp";}
+};
+
+Property<string, ReadOnly> Uri::UriSchemeNews {
+  [] {return "news";}
+};
+
+Property<string, ReadOnly> Uri::UriSchemeNntp {
+  [] {return "nntp";}
+};

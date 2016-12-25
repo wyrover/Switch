@@ -1,10 +1,35 @@
 #include "../../../Includes/Pcf/System/NumericalParsing.h"
 #include "../../../Includes/Pcf/System/Convert.h"
 #include "../../../Includes/Pcf/System/NumberRepresentationBase.h"
-#include "../../../Includes/Pcf/System/SafeMath.h"
 #include "../../../Includes/Pcf/System/SystemException.h"
 
 using namespace System;
+
+namespace {
+  uint64 Add(uint64 x, uint64 y) {
+    if (x == 0) return y;
+    if (y == 0) return x;
+    
+    uint64 value = x + y;
+    if (value < x)
+      throw OverflowException(pcf_current_information);
+    return value;
+  }
+  
+  uint64 Mul(uint64 x, uint64 y) {
+    if (x == 0 || y == 0) return 0;
+    uint64 value = 0;
+    while (y-- > 0)
+      value = Add(value, x);
+    return value;
+  }
+  
+  uint64 PositivePower(uint32 x, uint32 p) {
+    uint64 value = 1;
+    while (p-- > 0) value = Mul(value,x);
+    return value;
+  }
+}
 
 namespace Pcf {
   namespace System {
@@ -110,7 +135,7 @@ namespace Pcf {
           uint32 curDigit = ToDigit(c);
           oneDigitSeen = true;
           if (curDigit != 0)
-            value = SafeMath::Add(value, SafeMath::Mul(SafeMath::PositivePower(base, power),curDigit));
+            value = Add(value, Mul(PositivePower(base, power),curDigit));
           power += 1;
         }
         ++it;

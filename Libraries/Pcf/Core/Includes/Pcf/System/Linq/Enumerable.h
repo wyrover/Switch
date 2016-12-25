@@ -6,7 +6,6 @@
 
 #include "../../As.h"
 #include "../../Types.h"
-#include "../Compare.h"
 #include "../Func.h"
 #include "../Object.h"
 #include "../_String.h"
@@ -218,7 +217,7 @@ namespace Pcf {
           const TSource* max = null;
           System::Collections::Generic::Enumerator<TSource> enumerator = source.GetEnumerator();
           while (enumerator.MoveNext()) {
-            if (max == null || System::Compare::CompareTo(enumerator.Current(), *max) > 0)
+            if (max == null || enumerator.Current() > *max)
               max = &enumerator.Current();
           }
           return *max;
@@ -232,7 +231,7 @@ namespace Pcf {
           const TSource* min = null;
           System::Collections::Generic::Enumerator<TSource> enumerator = source.GetEnumerator();
           while (enumerator.MoveNext()) {
-            if (min == null || System::Compare::CompareTo(enumerator.Current(), *min) < 0)
+            if (min == null || enumerator.Current() < *min)
               min = &enumerator.Current();
           }
           return *min;

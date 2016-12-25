@@ -20,22 +20,22 @@ namespace Pcf {
         /// @brief Provides a platform-specific alternate character used to separate directory levels in a path string that reflects a hierarchical file system organization.
         /// The following code example demonstrates the use of the AltDirectorySeparatorChar() property.
         /// @include DirectorySeparatorChar.cpp
-        const static char32 AltDirectorySeparatorChar;
+        static Property<char32, ReadOnly> AltDirectorySeparatorChar;
 
         /// @brief Provides a platform-specific character used to separate directory levels in a path string that reflects a hierarchical file system organization.
         /// The following code example demonstrates the use of the DirectorySeparatorChar() property.
         /// @include DirectorySeparatorChar.cpp
-        const static char32 DirectorySeparatorChar;
+        static Property<char32, ReadOnly> DirectorySeparatorChar;
 
         /// @brief A platform-specific separator character used to separate path strings in environment variables.
         /// The following code example demonstrates the use of the PathSeparator() property.
         /// @include DirectorySeparatorChar.cpp
-        const static char32 PathSeparator;
+        static Property<char32, ReadOnly> PathSeparator;
 
         /// @brief Provides a platform-specific volume separator character.
         /// The following code example demonstrates the use of the VolumeSeparatorChar() property.
         /// @include DirectorySeparatorChar.cpp
-        const static char32 VolumeSeparatorChar;
+        static Property<char32, ReadOnly> VolumeSeparatorChar;
 
         /// @brief Changes the extension of a path string.
         /// @param path The path information to modify. The path cannot contain any of the characters defined in GetInvalidPathChars.

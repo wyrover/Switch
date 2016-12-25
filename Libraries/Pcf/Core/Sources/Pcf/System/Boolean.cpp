@@ -6,10 +6,21 @@
 
 using namespace System;
 
-const bool Boolean::False;
-const bool Boolean::True;
-const String Boolean::FalseString = "False";
-const String Boolean::TrueString = "True";
+Property<bool, ReadOnly> Boolean::False {
+  [] {return false;}
+};
+
+Property<bool, ReadOnly> Boolean::True {
+  [] {return true;}
+};
+
+Property<String, ReadOnly> Boolean::FalseString{
+  [] {return "False";}
+};
+
+Property<String, ReadOnly> Boolean::TrueString {
+  [] {return "True";}
+};
 
 bool Boolean::Parse(const String& str) {
   bool value;

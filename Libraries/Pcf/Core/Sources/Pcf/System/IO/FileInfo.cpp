@@ -5,12 +5,14 @@
 #include "../../../../Includes/Pcf/System/IO/File.h"
 #include "../../../../Includes/Pcf/System/IO/FileNotFoundException.h"
 #include "../../../../Includes/Pcf/System/IO/Path.h"
-#include "../../Os/Directory.h"
+#include "../../../__OS/CoreApi.h"
 
 using namespace System;
 using namespace System::IO;
 
-const FileInfo FileInfo::Empty;
+Property<FileInfo, ReadOnly> FileInfo::Empty {
+  [] {return FileInfo();}
+};
 
 FileInfo::FileInfo() : Directory(pcf_delegate {return this->GetDirectory();}) {
 }
@@ -23,7 +25,7 @@ FileInfo::FileInfo(const FileInfo& fileInfo) : FileSystemInfo(fileInfo), Directo
 
 bool FileInfo::GetExists() const {
   System::IO::FileAttributes fileAttributes = (System::IO::FileAttributes)0;
-  return (Os::Directory::GetFileAttributes(this->fullPath.ToCCharArray().Data(), fileAttributes) == 0 && !Enum<FileAttributes>(fileAttributes).HasFlag(FileAttributes::Directory));
+  return (__OS::CoreApi::Directory::GetFileAttributes(this->fullPath.ToCCharArray().Data(), fileAttributes) == 0 && !Enum<FileAttributes>(fileAttributes).HasFlag(FileAttributes::Directory));
 }
 
 DirectoryInfo FileInfo::GetDirectory() const {
@@ -39,7 +41,7 @@ string FileInfo::GetName() const {
 }
 
 void FileInfo::Delete() {
-  if (Os::Directory::RemoveFile(this->fullPath.ToCCharArray().Data()) != 0)
+  if (__OS::CoreApi::Directory::RemoveFile(this->fullPath.ToCCharArray().Data()) != 0)
     throw System::Security::SecurityException(pcf_current_information);
 }
 
@@ -93,14 +95,14 @@ void FileInfo::MoveTo(const string& destFileName) {
     throw ArgumentException(pcf_current_information);
   
   string fullPathDestFileName = Path::GetFullPath(destFileName);
-  if (Os::Directory::RenameFile(this->fullPath, fullPathDestFileName) != 0)
+  if (__OS::CoreApi::Directory::RenameFile(this->fullPath, fullPathDestFileName) != 0)
     throw IOException(pcf_current_information);
   
   this->fullPath = fullPathDestFileName;
 }
 
 int64 FileInfo::GetLength() const {
-  return Os::Directory::GetFileSize(this->fullPath);
+  return __OS::CoreApi::Directory::GetFileSize(this->fullPath);
 }
 
 FileStream FileInfo::Open(FileMode mode, FileAccess access) {

@@ -36,6 +36,10 @@ namespace PcfUnitTests {
       Assert::IsTrue(IsInt64(Unbox(Int64(42))), pcf_current_information);
     }
     
+    void UnboxingIntPtr() {
+      Assert::IsTrue(IsIntPtr(Unbox(IntPtr((intptr)42))), pcf_current_information);
+    }
+    
     void UnboxingSByte() {
       Assert::IsTrue(IsSByte(Unbox(SByte(42))), pcf_current_information);
     }
@@ -61,7 +65,7 @@ namespace PcfUnitTests {
     }
     
     void UnboxingUIntPtr() {
-      Assert::IsTrue(IsVoidPointer(Unbox(UIntPtr((void*)42))), pcf_current_information);
+      Assert::IsTrue(IsUIntPtr(Unbox(UIntPtr((uintptr)42))), pcf_current_information);
     }
     
     void UnboxingConstCharPointer() {
@@ -113,6 +117,8 @@ namespace PcfUnitTests {
     template<typename T> bool IsInt32(T) {return false;}
     bool IsInt64(int64) {return true;}
     template<typename T> bool IsInt64(T) {return false;}
+    bool IsIntPtr(intptr) {return true;}
+    template<typename T> bool IsIntPtr(T) {return false;}
     bool IsSByte(sbyte) {return true;}
     template<typename T> bool IsSByte(T) {return false;}
     bool IsSingle(float) {return true;}
@@ -131,6 +137,8 @@ namespace PcfUnitTests {
     template<typename T> bool IsUInt32(T) {return false;}
     bool IsUInt64(uint64) {return true;}
     template<typename T> bool IsUInt64(T) {return false;}
+    bool IsUIntPtr(uintptr) {return true;}
+    template<typename T> bool IsUIntPtr(T) {return false;}
     bool IsVoidPointer(void*) {return true;}
     template<typename T> bool IsVoidPointer(T) {return false;}
   };
@@ -142,6 +150,7 @@ namespace PcfUnitTests {
   pcf_test(UnboxTest, UnboxingInt16);
   pcf_test(UnboxTest, UnboxingInt32);
   pcf_test(UnboxTest, UnboxingInt64);
+  pcf_test(UnboxTest, UnboxingIntPtr);
   pcf_test(UnboxTest, UnboxingSByte);
   pcf_test(UnboxTest, UnboxingSingle);
   pcf_test(UnboxTest, UnboxingString);

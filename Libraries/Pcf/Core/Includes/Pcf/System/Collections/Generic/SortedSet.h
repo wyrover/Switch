@@ -47,12 +47,7 @@ namespace Pcf {
           /// @param collection The elements to copy
           SortedSet(const IEnumerable<T>& collection) : comparer(new System::Collections::Generic::Comparer<T>()), set(new std::set<T,SetComparer, TAllocator>(SetComparer(this->comparer.ToPointer()))), operationNumber(0) {
             for (T item : collection)
-              Add(item);
-          }
-
-          SortedSet(const SortedSet& s) : comparer(s.comparer), set(new std::set<T,SetComparer, TAllocator>(SetComparer(this->comparer.ToPointer()))), operationNumber(0) {
-            for (const T& item : s)
-              Add(item);
+              this->Add(item);
           }
 
           /// @brief Initializes a new instance of the SortedSet<T> class that contains elements copied from a specified enumerable collection && that uses a specified comparer.
@@ -60,7 +55,7 @@ namespace Pcf {
           /// @param comparer an instance of IComparer<T> used to determine the sort order of the set.
           SortedSet(const IEnumerable<T>& collection, const SharedPointer<IComparer<T>>& comparer) : comparer(comparer), set(new std::set<T,SetComparer, TAllocator>(SetComparer(this->comparer.ToPointer()))), operationNumber(0) {
             for (const T& item : collection)
-              Add(item);
+              this->Add(item);
           }
           
           /// @brief Initializes a new instance of the SortedSet && copy array[] T.
@@ -73,21 +68,20 @@ namespace Pcf {
           }
           
           /// @cond
+          SortedSet(const SortedSet& s) : comparer(s.comparer), set(new std::set<T,SetComparer, TAllocator>(SetComparer(this->comparer.ToPointer()))), operationNumber(0) {*set = *s.set;}
+          
           SortedSet(InitializerList<T> il) : comparer(new System::Collections::Generic::Comparer<T>()), set(new std::set<T, SetComparer, TAllocator>(SetComparer(this->comparer.ToPointer()))), operationNumber(0) {
             for (typename InitializerList<Item>::const_iterator iterator = il.begin(); iterator != il.end(); ++iterator)
               this->Add(*iterator);
           }
-          /// @endcond
-
-          /// @brief Change the current SortedSet<T> so that it become a copy of another provided SortedSet<T> s.
-          /// @param s The source SortedSet<T> to copy from.
-          /// @return A reference to the current (modified) SortedSet<T>.
+          
           SortedSet& operator =(const SortedSet& s) {
             this->comparer = s.comparer;
             *this->set = *s.set;
             this->operationNumber++;
             return *this;
           }
+          /// @endcond
           
           /// @brief Adds an element to the set && returns a value that indicates if it was successfully added. If the element is already prensent, the value is ! replaced.
           /// @param item The emement to add.
@@ -158,12 +152,10 @@ namespace Pcf {
           /// @exception ArgumentNullException	other is null.
           void ExceptWith(const IEnumerable<T>& other) override {
             this->operationNumber++;
-
             if (&other == this) {
               Clear();
               return;
             }
-
             for (T item : other)
               Remove(item);
           }
@@ -259,9 +251,7 @@ namespace Pcf {
 
           /// @brief Returns a new set defined in reverse order.
           /// @return a new set defined in reverse order.
-          UniquePointer<SortedSet> Reverse() const {
-            return new SortedSet(*this, ReversedComparer<T>::Create(this->comparer));
-          }
+          SortedSet Reverse() const {return SortedSet(*this, ReversedComparer<T>::Create(this->comparer));}
 
           /// @brief Removes a specified item from the SortedSet<T>.
           /// @param item The element to remove.
@@ -334,15 +324,15 @@ namespace Pcf {
 
           class SetComparer : public std::binary_function<T, T, bool> {
           private:
-              const IComparer<T>* comparer;
+             const IComparer<T>* comparer;
 
-            public:
-              SetComparer(const IComparer<T>* c) : comparer(c) { }
-              SetComparer(const SetComparer& mc) { *this = mc; }
-              ~SetComparer() { }
+          public:
+            SetComparer(const IComparer<T>* c) : comparer(c) { }
+            SetComparer(const SetComparer& mc) { *this = mc; }
+            ~SetComparer() { }
 
-              SetComparer& operator =(const SetComparer& mc) { comparer = mc.comparer; return *this; }
-              bool operator()(const T& e1, const T& e2) const { return comparer->Compare(e1,e2) < 0; }
+            SetComparer& operator =(const SetComparer& mc) { comparer = mc.comparer; return *this; }
+            bool operator()(const T& e1, const T& e2) const { return comparer->Compare(e1,e2) < 0; }
           };
 
           bool SubSet(const SortedSet& set) const {
@@ -471,7 +461,7 @@ namespace Pcf {
 
         private:
           SharedPointer< IComparer<T>> comparer;
-          UniquePointer< std::set<T, SetComparer, TAllocator>> set;
+          SharedPointer< std::set<T, SetComparer, TAllocator>> set;
           int64 operationNumber;
           /// @endcond
 		    };

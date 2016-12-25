@@ -14,7 +14,7 @@ namespace Pcf {
       /// @brief The System::Net::Sockets namespace provides a managed implementation of the Berkeley Sockets interface for developers who need to tightly control access to the network.
       namespace Sockets {
         /// @brief Provides User Datagram Protocol (UDP) network services.
-        /// @section ExamplesSubsection Examples
+        /// @par Examples
         /// This example show how to use UdpClient class as listener :
         /// @include UdpClientListener.cpp
         /// This example show how to use UdpClient class as talker :
@@ -38,7 +38,7 @@ namespace Pcf {
           UdpClient(int32 port);
 
           /// @brief Initializes a new instance of the UdpClient class and binds it to the specified local endpoint.
-          UdpClient(SharedPointer<IPEndPoint> endPoint);
+          UdpClient(const IPEndPoint& endPoint);
 
           /// @brief Initializes a new instance of the UdpClient class and binds to the provided local port
           /// @param port: the local port number to use.
@@ -115,7 +115,7 @@ namespace Pcf {
 
           /// @brief Establishes a default remote host using the specified network endpoint
           /// @param endPoint: An IPEndPoint that specifies the network endpoint to which you intend to send data
-          void Connect(SharedPointer<IPEndPoint> endPoint);
+          void Connect(const IPEndPoint& endPoint);
 
           /// @brief Establishes a default remote host using the specified IP address and port number
           /// @param ipAddress: The IPAddress of the remote host to which you intend to send data
@@ -147,7 +147,6 @@ namespace Pcf {
           /// @remarks If you specify a default remote host in the Connect method, the Receive
           /// @remarks method will accept datagrams from that host only. All other datagrams will be discarded.
           int32 Receive(Array<byte>& buffer, IPEndPoint& endPoint);
-          int32 Receive(byte buffer[], int32 bufferLength, IPEndPoint& endPoint);
 
           /// @brief Sends a UDP datagram to a remote host
           /// @param data: the data to send
@@ -162,14 +161,12 @@ namespace Pcf {
           /// @remarks and specify the desired remote host. Use either of the other Send method overloads to send
           /// @remarks datagrams to a broadcast address.
           int32 Send(const Array<byte>& data);
-          int32 Send(byte buffer[], int32 bufferLength);
 
           /// @brief Sends a UDP datagram to the specified end point
           /// @param data: the data to send
           /// @param endPoint: the end point to send data to
           /// @return the number of bytes successfully sent
           int32 Send(const Array<byte>& data, const IPEndPoint& endPoint);
-          int32 Send(byte buffer[], int32 bufferLength, const IPEndPoint& endPoint);
 
           /// @brief Sends a UDP datagram to the specified end point
           /// @param data: the data to send
@@ -177,7 +174,6 @@ namespace Pcf {
           /// @param port: The port number to which you intend send data
           /// @return the number of bytes successfully sent
           int32 Send(const Array<byte>& data, const String& hostname, int32 port);
-          int32 Send(byte buffer[], int32 bufferLength, const String& hostname, int32 port);
 
         private:
           SharedPointer<Socket> client;

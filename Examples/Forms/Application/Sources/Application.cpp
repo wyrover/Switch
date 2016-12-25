@@ -1,6 +1,6 @@
 #include <Pcf/Pcf>
 
-using namespace System::Windows::Forms;
+using namespace System::Windows::FormsD;
 
 namespace Examples {
   class Program {

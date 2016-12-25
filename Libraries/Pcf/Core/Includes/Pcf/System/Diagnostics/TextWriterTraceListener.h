@@ -59,10 +59,6 @@ namespace Pcf {
           init(textWriterOrStream, *this);
         }
 
-#if __NOT_USED__
-        TextWriterTraceListener(System::IO::Stream& stream) {this->textWriter = new System::IO::StreamWriter(stream);}
-#endif
-        
         TextWriterTraceListener(const string& path) {this->textWriter = new System::IO::StreamWriter(path);}
         
         /// @cond

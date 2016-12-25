@@ -59,11 +59,6 @@ namespace {
 }
 
 #if _WIN32
-#pragma warning(disable : 4996)
-#endif
-
-
-#if _MSC_VER >= 1900
 int daylight = 0;
 long timezone = 0;
 char* tzname[2] = {"Local", "Local"};
@@ -96,10 +91,6 @@ Property<const TimeZoneInfo&, ReadOnly> TimeZoneInfo::Local {
 Property<const TimeZoneInfo&, ReadOnly> TimeZoneInfo::Utc{
   []()->const TimeZoneInfo& {return utc;}
 };
-
-#if _WIN32
-#pragma warning(default : 4996)
-#endif
 
 const Collections::Generic::List<TimeZoneInfo>& TimeZoneInfo::GetSystemTimeZones() {
   FillSystemTimeZones(systemTimeZones);

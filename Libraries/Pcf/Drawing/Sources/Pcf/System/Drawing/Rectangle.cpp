@@ -3,4 +3,6 @@
 using namespace System;
 using namespace System::Drawing;
 
-const Rectangle Rectangle::Empty;
+Property<Rectangle, ReadOnly> Rectangle::Empty {
+  [] {return Rectangle();}
+};

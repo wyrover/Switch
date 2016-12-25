@@ -4,11 +4,9 @@
 
 #include "../Types.h"
 #include "../Interface.h"
-#include "Compare.h"
 #include "Convert.h"
 #include "Hash.h"
 #include "IComparable.h"
-#include "IHashable.h"
 #include "NullType.h"
 #include "Object.h"
 #include "String.h"
@@ -41,7 +39,7 @@ namespace Pcf {
     /// @brief Base class for n Tuple classes.
     /// Internal used only.
     template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8>
-    class TupleImpl : public Object, public ITuple, public IComparable, public IHashable {
+    class TupleImpl : public Object, public ITuple, public IComparable {
     protected:
       /// @cond
       TupleImpl() { }
@@ -84,33 +82,25 @@ namespace Pcf {
       ///  - Zero                This instance is equal to obj.
       ///  - Greater than zero   This instance is greater than obj.
       int32 CompareTo(const TupleImpl<T1, T2, T3, T4, T5, T6, T7, T8>& tuple) const {
-        int32 ret  = -1;
-        if ((ret = System::Compare::CompareTo(item1, tuple.item1)) != 0)
-          return ret;
-
-        if ((ret = System::Compare::CompareTo(item2, tuple.item2)) != 0)
-          return ret;
-
-        if ((ret = System::Compare::CompareTo(item3, tuple.item3)) != 0)
-          return ret;
-
-        if ((ret = System::Compare::CompareTo(item4, tuple.item4)) != 0)
-          return ret;
-
-        if ((ret = System::Compare::CompareTo(item5, tuple.item5)) != 0)
-          return ret;
-
-        if ((ret = System::Compare::CompareTo(item6, tuple.item6)) != 0)
-          return ret;
-
-        if ((ret = System::Compare::CompareTo(item7, tuple.item7)) != 0)
-          return ret;
-
-        if ((ret = System::Compare::CompareTo(item8, tuple.item8)) != 0)
-          return ret;
-
-        return ret;
+        if (item1 < tuple.item1) return -1;
+        if (item1 > tuple.item1) return 1;
+        if (item2 < tuple.item2) return -1;
+        if (item2 > tuple.item2) return 1;
+        if (item3 < tuple.item3) return -1;
+        if (item3 > tuple.item3) return 1;
+        if (item4 < tuple.item4) return -1;
+        if (item4 > tuple.item4) return 1;
+        if (item5 < tuple.item5) return -1;
+        if (item5 > tuple.item5) return 1;
+        if (item6 < tuple.item6) return -1;
+        if (item6 > tuple.item6) return 1;
+        if (item7 < tuple.item7) return -1;
+        if (item7 > tuple.item7) return 1;
+        if (item8 < tuple.item8) return -1;
+        if (item8 > tuple.item8) return 1;
+        return 0;
       }
+      
       /// @brief Determines whether this instance of Version and a specified object, which must also be a Version object, have the same value.
       /// @param obj The object to compare with the current object.
       /// @return bool true if the specified object is equal to the current object. otherwise, false.
@@ -124,36 +114,12 @@ namespace Pcf {
       /// @return bool true if the specified object is equal to the current object. otherwise, false.
       /// @exception ArgumentNullException The parameters obj is null.
       bool Equals(const TupleImpl<T1, T2, T3, T4, T5, T6, T7, T8>& tuple) const {
-        if (System::Compare::Equals(item1, tuple.item1) == false)
-          return false;
-
-        if (System::Compare::Equals(item2, tuple.item2) == false)
-          return false;
-
-        if (System::Compare::Equals(item3, tuple.item3) == false)
-          return false;
-
-        if (System::Compare::Equals(item4, tuple.item4) == false)
-          return false;
-
-        if (System::Compare::Equals(item5, tuple.item5) == false)
-          return false;
-
-        if (System::Compare::Equals(item6, tuple.item6) == false)
-          return false;
-
-        if (System::Compare::Equals(item7, tuple.item7) == false)
-          return false;
-
-        if (System::Compare::Equals(item8, tuple.item8) == false)
-          return false;
-
-        return true;
+        return  item1 == tuple.item1 && item2 == tuple.item2 && item3 == tuple.item3 && item4 == tuple.item4 && item5 == tuple.item5 && item6 == tuple.item6 && item7 == tuple.item7 && item8 == tuple.item8;
       }
 
       /// @brief Serves as a hash function for a particular type.
       /// @return Int32 A hash code for the current object.
-      int32 GetHashCode() const override { return System::Hash::GetHashCode(item1) ^ System::Hash::GetHashCode(item2) ^ System::Hash::GetHashCode(item3) ^ System::Hash::GetHashCode(item4) ^ System::Hash::GetHashCode(item5)  ^ System::Hash::GetHashCode(item6) ^ System::Hash::GetHashCode(item7)  ^ System::Hash::GetHashCode(item8); }
+      int32 GetHashCode() const override { return ::GetHashCode(item1) ^ ::GetHashCode(item2) ^ ::GetHashCode(item3) ^ ::GetHashCode(item4) ^ ::GetHashCode(item5)  ^ ::GetHashCode(item6) ^ ::GetHashCode(item7)  ^ ::GetHashCode(item8); }
 
       /// @brief Returns a string that represents the current object.
       /// @return string A string that represents the current object.

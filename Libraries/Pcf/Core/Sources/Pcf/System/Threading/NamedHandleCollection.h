@@ -14,7 +14,7 @@ namespace {
     
     bool Conatains(const string& name) {return this->handles.find(name) != this->handles.end();}
     
-    const T& Add(const string& name, bool& createNew) {
+    const T& AddOrCreate(const string& name, bool& createNew) {
       std::lock_guard<std::recursive_mutex> lock(this->guard);
       typename std::map<string, NamedHandleCountPair>::iterator iterator = this->handles.find(name);
       createNew = iterator == this->handles.end();

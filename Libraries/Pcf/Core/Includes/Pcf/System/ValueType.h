@@ -3,7 +3,6 @@
 #pragma once
 
 #include "Object.h"
-#include "IHashable.h"
 
 /// @brief The Pcf namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Pcf {
@@ -14,7 +13,7 @@ namespace Pcf {
     /// @endcond
 
     /// @brief Provides the base class for value types.
-    class ValueType : public Object, public IHashable {
+    class ValueType : public Object {
     public:
       /// @brief Determines whether the specified object is equal to the current object.
       /// @param obj The object to compare with the current object.

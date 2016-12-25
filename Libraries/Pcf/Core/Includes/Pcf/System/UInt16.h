@@ -2,8 +2,6 @@
 /// @brief Contains Pcf::System::UInt16 struct.
 #pragma once
 
-#include <limits>
-
 #include "../Property.h"
 #include "Object.h"
 #include "../Types.h"
@@ -26,13 +24,11 @@ namespace Pcf {
     /// @brief Represents a 16-bit unsigned integer.
     struct UInt16 : public ValueType, public IComparable, public IConvertible, public IFormattable {
     public:
-      #undef max
       /// @brief Represents the largest possible value of an UInt16 65535 (0xFFFF). This field is constant.
-      constexpr static uint16 MaxValue = std::numeric_limits<uint16>::max();
+      static Property<uint16, ReadOnly> MaxValue;
 
-      #undef min
       /// @brief Represents the smallest possible value of UInt16 0 (0x0000). This field is constant.
-      constexpr static uint16 MinValue = std::numeric_limits<uint16>::min();
+      static Property<uint16, ReadOnly> MinValue;
 
       /// @brief Create a new instance of struct UInt16
       /// @remarks UInt16 is initialized by default value 0.

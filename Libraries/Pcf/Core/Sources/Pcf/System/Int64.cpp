@@ -1,3 +1,4 @@
+#include <limits>
 #include "../../../Includes/Pcf/System/Int64.h"
 #include "../../../Includes/Pcf/System/Convert.h"
 #include "../../../Includes/Pcf/System/DivideByZeroException.h"
@@ -6,10 +7,13 @@
 
 using namespace System;
 
-#if !_WIN32
-constexpr int64 Int64::MaxValue;
-constexpr int64 Int64::MinValue;
-#endif
+Property<int64, ReadOnly> Int64::MaxValue{
+  [] {return std::numeric_limits<int64>::max();}
+};
+
+Property<int64, ReadOnly> Int64::MinValue{
+  [] {return std::numeric_limits<int64>::min();}
+};
 
 int64 Int64::Parse(const string& value) {
   return Parse(value,10);

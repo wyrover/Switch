@@ -1,15 +1,6 @@
 #include "../../../../Includes/Pcf/System/Threading/Thread.h"
 #include "../../../../Includes/Pcf/System/Environment.h"
-
-#if _WIN32
-#pragma warning(push)
-#pragma warning(disable: 4201)
-#include <windows.h>
-#pragma warning(pop)
-#else
-#include <cmath>
-#include <pthread.h>
-#endif
+#include "../../../__OS/CoreApi.h"
 
 using namespace System;
 using namespace System::Threading;
@@ -71,45 +62,8 @@ void Thread::ThreadItem::RunWithOrWithoutParam(const object* obj, bool withParam
   }
 }
 
-#if _WIN32
-namespace {
-  // https://msdn.microsoft.com/en-us/library/xcb2z8hs.aspx
-  void SetThreadName(DWORD dwThreadID, const char* threadName) {
-#pragma pack(push, 8)
-    struct THREADNAME_INFO {
-      DWORD dwType;
-      LPCSTR szName;
-      DWORD dwThreadID;
-      DWORD dwFlags;
-    };
-#pragma pack(pop)
-
-#pragma warning(push)
-#pragma warning(disable: 6320 6322)
-    __try {
-      THREADNAME_INFO info {0x1000, threadName, dwThreadID, 0};
-      RaiseException(0x406D1388, 0, sizeof(info) / sizeof(ULONG_PTR), (ULONG_PTR*)&info);
-    } __except (EXCEPTION_EXECUTE_HANDLER) {
-    }
-#pragma warning(pop)
-  }
-}
-#endif
-
 void Thread::ThreadItem::SetNameThreadForDebugger() {
-  Action<string> currentName = pcf_delegate(string n) {
-#if _WIN32
-#pragma warning(push)
-#pragma warning(disable: 4302 4311)
-    ::SetThreadName(GetCurrentThreadId(), n.Data());
-#pragma warning(pop)
-#elif __APPLE__
-    pthread_setname_np(n.Data());
-#else
-    pthread_setname_np(pthread_self(), n.Data());
-#endif
-  };
-  currentName(this->name);
+  __OS::CoreApi::Thread::SetNameOfCurrentThread(this->name);
 }
 
 bool Thread::ThreadItem::SetPriority() {
@@ -117,20 +71,7 @@ bool Thread::ThreadItem::SetPriority() {
 }
 
 bool Thread::ThreadItem::SetPriority(Thread::NativeHandle handle, ThreadPriority priority) {
-  Func<NativeHandle, ThreadPriority, bool> setPriority = pcf_delegate(NativeHandle handle, ThreadPriority p) {
-#if _WIN32
-    return SetThreadPriority(handle, (int)p - 2) != FALSE;
-#else
-    int32 policy;
-    sched_param schedParam;
-    if (::pthread_getschedparam(handle, &policy, &schedParam) != 0)
-      return false;
-    
-    schedParam.sched_priority = (int32)ceil(((double)p * (sched_get_priority_max(policy) - sched_get_priority_min(policy)) / 4) + sched_get_priority_min(policy));
-    return pthread_setschedparam(handle, policy, &schedParam) == 0;
-#endif
-  };
-  return setPriority(handle, priority);
+  return __OS::CoreApi::Thread::SetPriority((intptr)handle, (int32)priority);
 }
 
 Property<Thread&, ReadOnly> Thread::CurrentThread {
@@ -158,11 +99,7 @@ void Thread::Abort() {
 }
 
 bool Thread::Cancel() {
-#if _WIN32
-    return TerminateThread(this->data->thread.native_handle(), -1) != FALSE;
-#else
-    return pthread_cancel(this->data->thread.native_handle()) == 0;
-#endif
+  return __OS::CoreApi::Thread::Cancel((intptr)this->data->thread.native_handle());
 }
 
 bool Thread::DoWait(WaitHandle& waitHandle, int32 millisecondsTimeOut) {
@@ -207,15 +144,7 @@ void Thread::Resume() {
   if (!Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Suspended))
     throw ThreadStateException(pcf_current_information);
   
-  Action<NativeHandle> resume = pcf_delegate(NativeHandle handle) {
-#if _WNI32
-    ResumeThread(handle)
-#else
-    // The POSIX standard provides no mechanism by which a thread A can suspend the execution of another thread B, without cooperation from B. The only way to implement a suspend/resume mechanism is to have B check periodically some global variable for a suspend request and then suspend itself on a condition variable, which another thread can signal later to restart B.
-#endif
-  };
-  
-  resume(this->data->thread.native_handle());
+  __OS::CoreApi::Thread::Resume((intptr)this->data->thread.native_handle());
   this->data->state &= ~System::Threading::ThreadState::Suspended;
 }
 
@@ -233,17 +162,8 @@ void Thread::SetPriority(ThreadPriority priority) {
     throw ThreadStateException(pcf_current_information);
   
   this->data->priority = priority;
-  
-  Func<ThreadPriority, bool> setCurrentPriority = pcf_delegate(ThreadPriority p) {
-#if _WIN32
-    return ThreadItem::SetPriority(GetCurrentThread(), p);
-#else
-    return ThreadItem::SetPriority(pthread_self(), p);
-#endif
-  };
-  
   if (this->data->managedThreadId == MainManagedThreadId && CurrentThread().ManagedThreadId == MainManagedThreadId) {
-    if (setCurrentPriority(priority) != true)
+    if (ThreadItem::SetPriority((Thread::NativeHandle)__OS::CoreApi::Thread::GetCurrent(), priority) != true)
       throw ThreadStateException(pcf_current_information);
     return;
   }
@@ -258,16 +178,8 @@ void Thread::Suspend() {
   if (!this->IsAlive())
     throw ThreadStateException(pcf_current_information);
   
-  Action<NativeHandle> suspend = pcf_delegate(NativeHandle handle) {
-#if _WNI32
-    SuspendThread(handle)
-#else
-    // The POSIX standard provides no mechanism by which a thread A can suspend the execution of another thread B, without cooperation from B. The only way to implement a suspend/resume mechanism is to have B check periodically some global variable for a suspend request and then suspend itself on a condition variable, which another thread can signal later to restart B.
-#endif
-  };
-  
   this->data->state |= System::Threading::ThreadState::SuspendRequested;
-  suspend(this->data->thread.native_handle());
+  __OS::CoreApi::Thread::Suspend((intptr)this->data->thread.native_handle());
   this->data->state |= System::Threading::ThreadState::Suspended;
   this->data->state &= ~System::Threading::ThreadState::SuspendRequested;
 }

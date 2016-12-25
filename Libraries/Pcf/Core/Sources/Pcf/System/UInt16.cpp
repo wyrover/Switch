@@ -1,3 +1,4 @@
+#include <limits>
 #include "../../../Includes/Pcf/System/UInt16.h"
 #include "../../../Includes/Pcf/System/Convert.h"
 #include "../../../Includes/Pcf/System/DivideByZeroException.h"
@@ -6,10 +7,13 @@
 
 using namespace System;
 
-#if !_WIN32
-constexpr uint16 UInt16::MaxValue;
-constexpr uint16 UInt16::MinValue;
-#endif
+Property<uint16, ReadOnly> UInt16::MaxValue {
+  [] {return std::numeric_limits<uint16>::max();}
+};
+
+Property<uint16, ReadOnly> UInt16::MinValue {
+  [] {return std::numeric_limits<uint16>::min();}
+};
 
 uint16 UInt16::Parse(const string& str) {
   return Parse(str,10);

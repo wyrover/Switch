@@ -3,12 +3,12 @@
 #include "../../../../Includes/Pcf/System/Environment.h"
 #include "../../../../Includes/Pcf/System/IO/File.h"
 #include "../../../../Includes/Pcf/System/IO/Path.h"
-#include "../../Os/Directory.h"
+#include "../../../__OS/CoreApi.h"
 
 using namespace System;
 using namespace System::IO;
 
-const DirectoryInfo Directory::CreateDirectory(const string& path) {
+DirectoryInfo Directory::CreateDirectory(const string& path) {
   DirectoryInfo dirInfo(path);
   if (!dirInfo.Exists()) {
     if (!dirInfo.Parent().FullName().IsEmpty())
@@ -27,19 +27,19 @@ void Directory::Delete(const string& path, bool recursive) {
 }
 
 System::Collections::Generic::Enumerator<string> Directory::EnumerateDirectories(const string& path) {
-  return Os::Directory::EnumerateDirectories(path, "*");
+  return __OS::CoreApi::Directory::EnumerateDirectories(path, "*");
 }
 
 System::Collections::Generic::Enumerator<string> Directory::EnumerateDirectories(const string& path, const string& pattern) {
-  return Os::Directory::EnumerateDirectories(path, pattern);
+  return __OS::CoreApi::Directory::EnumerateDirectories(path, pattern);
 }
 
 System::Collections::Generic::Enumerator<string> Directory::EnumerateFiles(const string& path) {
-  return Os::Directory::EnumerateFiles(path, "*");
+  return __OS::CoreApi::Directory::EnumerateFiles(path, "*");
 }
 
 System::Collections::Generic::Enumerator<string> Directory::EnumerateFiles(const string& path, const string& pattern) {
-  return Os::Directory::EnumerateFiles(path, pattern);
+  return __OS::CoreApi::Directory::EnumerateFiles(path, pattern);
 }
 
 bool Directory::Exists(const string& path) {
@@ -94,11 +94,11 @@ DateTime Directory::GetLastWriteTime(const string& path) {
   return DirectoryInfo(path).LastWriteTime();
 }
 
-const string Directory::GetCurrentDirectory() {
+string Directory::GetCurrentDirectory() {
   return Environment::CurrentDirectory();
 }
 
-const DirectoryInfo Directory::GetParent(const string& path) {
+DirectoryInfo Directory::GetParent(const string& path) {
   return DirectoryInfo(path).Parent();
 }
 

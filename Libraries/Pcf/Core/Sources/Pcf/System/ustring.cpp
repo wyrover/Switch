@@ -2,7 +2,7 @@
 #include "../../../Includes/Pcf/System/Array.h"
 #include "../../../Includes/Pcf/System/ArgumentNullException.h"
 #include "../../../Includes/Pcf/System/ArgumentOutOfRangeException.h"
-#include "../Os/UnicodeEncodings.h"
+#include "../../__OS/CoreApi.h"
 
 namespace std {
   size_t ustring::npos = std::string::npos;
@@ -10,7 +10,7 @@ namespace std {
   ustring::ustring() {
   }
 
-  ustring::ustring(const char* str) : string(str), stringSize(Os::UnicodeEncodings::UTF8::GetLength(string)) {
+  ustring::ustring(const char* str) : string(str), stringSize(__OS::CoreApi::UnicodeEncodings::UTF8::GetLength(string)) {
   }
 
   ustring::ustring(const char32_t* str) {
@@ -62,7 +62,7 @@ namespace std {
       this->stringSize = other.size() - startIndex;
     } else {
       this->string = other.string.substr(begin, end - begin);
-      this->stringSize = Os::UnicodeEncodings::UTF8::GetLength(this->string);
+      this->stringSize = __OS::CoreApi::UnicodeEncodings::UTF8::GetLength(this->string);
     }
   }
   // todo clean code and optimize size calculation
@@ -84,7 +84,7 @@ namespace std {
    if (wanted == 0) { // if section is finished
    end += index;
    this->string.append(begin, end);
-   this->size = Os::UnicodeEncodings::UTF8::GetLength(this->string);
+   this->size = __OS::CoreApi::UnicodeEncodings::UTF8::GetLength(this->string);
    return;
    }
    if (size_t(length) != npos) wanted -= 1;
@@ -93,7 +93,7 @@ namespace std {
    }
    
    if (abstractIndex == startIndex) {
-   this->size = Os::UnicodeEncodings::UTF8::GetLength(this->string);
+   this->size = __OS::CoreApi::UnicodeEncodings::UTF8::GetLength(this->string);
    return;
    }
    
@@ -102,7 +102,7 @@ namespace std {
    
    if (end == other.begin()) { // is has not finished
    this->string.append(begin, other.end());
-   this->size = Os::UnicodeEncodings::UTF8::GetLength(this->string);
+   this->size = __OS::CoreApi::UnicodeEncodings::UTF8::GetLength(this->string);
    return;
    }
    
@@ -189,7 +189,7 @@ namespace std {
     // if erase all from pos
     if (len == npos) {
       this->string.erase(byteIndexIn);
-      this->stringSize = Os::UnicodeEncodings::UTF8::GetLength(this->string);
+      this->stringSize = __OS::CoreApi::UnicodeEncodings::UTF8::GetLength(this->string);
       return *this;
     }
     
@@ -197,14 +197,14 @@ namespace std {
     int byteIndexOut = static_cast<int>(this->string.size());
     for ( ; it != end(); it++) {
       if (--len == 0) {
-        int next = Os::UnicodeEncodings::UTF8::GetNextCodeIndex(this->string, it.get_byte_index());
+        int next = __OS::CoreApi::UnicodeEncodings::UTF8::GetNextCodeIndex(this->string, it.get_byte_index());
         if (next != -1)
           byteIndexOut = next;
       }
     }
     
     this->string.erase(byteIndexIn, byteIndexOut-byteIndexIn);
-    this->stringSize = Os::UnicodeEncodings::UTF8::GetLength(this->string);
+    this->stringSize = __OS::CoreApi::UnicodeEncodings::UTF8::GetLength(this->string);
     return *this;
   }
   
@@ -243,19 +243,19 @@ namespace std {
       return *this;
     
     this->string.erase(byteIndex);
-    this->stringSize = Os::UnicodeEncodings::UTF8::GetLength(this->string);
+    this->stringSize = __OS::CoreApi::UnicodeEncodings::UTF8::GetLength(this->string);
     return *this;
   }
   
   ustring& ustring::append(size_t n, char32_t code) {
     for (size_t i = 0; i < n; i++)
-      Os::UnicodeEncodings::UTF8::Encode(code, string);
+      __OS::CoreApi::UnicodeEncodings::UTF8::Encode(code, string);
     this->stringSize += n;
     return *this;
   }
   
   ustring& ustring::append(char32_t code) {
-    Os::UnicodeEncodings::UTF8::Encode(code, string);
+    __OS::CoreApi::UnicodeEncodings::UTF8::Encode(code, string);
     this->stringSize += 1;
     return *this;
   }
@@ -391,14 +391,14 @@ namespace std {
   ustring ustring::to_lower() const {
     ustring lower;
     for (std::ustring::const_iterator it = (*this).begin(); it != (*this).end(); it++)
-      lower.append(Os::UnicodeEncodings::to_lower(*it));
+      lower.append(__OS::CoreApi::UnicodeEncodings::to_lower(*it));
     return lower;
   }
   
   ustring ustring::to_upper() const {
     ustring upper;
     for (std::ustring::const_iterator it = (*this).begin(); it != (*this).end(); it++)
-    upper.append(Os::UnicodeEncodings::to_upper(*it));
+    upper.append(__OS::CoreApi::UnicodeEncodings::to_upper(*it));
     return upper;
   }
   
@@ -439,7 +439,7 @@ namespace std {
       this->format = 0;
     } else {
       this->index = this->position = 0;
-      this->format = Os::UnicodeEncodings::UTF8::GetFormat((uint8_t)string_pointer->operator[](this->position));
+      this->format = __OS::CoreApi::UnicodeEncodings::UTF8::GetFormat((uint8_t)string_pointer->operator[](this->position));
     }
   }
   
@@ -459,7 +459,7 @@ namespace std {
   
   char32_t ustring::const_iterator::operator*() const {
     const uint8_t* data = (const uint8_t*)string_pointer->data();
-    return Os::UnicodeEncodings::UTF8::GetCode(&data[this->position],format);
+    return __OS::CoreApi::UnicodeEncodings::UTF8::GetCode(&data[this->position],format);
   }
   
   ustring::const_iterator::const_iterator(const const_iterator& it) {
@@ -473,7 +473,7 @@ namespace std {
     if (this->position == -1) return *this;
     for (size_t i = this->position+1; i < string_pointer->size() ; i += 1) {
       uint8_t b = (uint8_t)(*string_pointer)[i];
-      this->format = Os::UnicodeEncodings::UTF8::GetFormat(b);
+      this->format = __OS::CoreApi::UnicodeEncodings::UTF8::GetFormat(b);
       if (this->format > 0) {
         this->index += 1;
         this->position = (int)i;
@@ -495,7 +495,7 @@ namespace std {
       this->format = 0;
     } else {
       this->index = this->position = 0;
-      this->format = Os::UnicodeEncodings::UTF8::GetFormat((uint8_t)string_pointer->operator[](this->position));
+      this->format = __OS::CoreApi::UnicodeEncodings::UTF8::GetFormat((uint8_t)string_pointer->operator[](this->position));
     }
   }
   
@@ -515,14 +515,14 @@ namespace std {
   
   char32_t ustring::iterator::operator*() const {
     const uint8_t* data = (const uint8_t*)string_pointer->data();
-    return Os::UnicodeEncodings::UTF8::GetCode(&data[this->position],format);
+    return __OS::CoreApi::UnicodeEncodings::UTF8::GetCode(&data[this->position],format);
   }
   
   char32_t& ustring::iterator::operator*() {
     //TODO If usicode length is greater than 1 byte, there are probably a crash
     uint8_t* data = (uint8_t*)string_pointer->data();
     static char32 value;
-    value = Os::UnicodeEncodings::UTF8::GetCode(&data[this->position],format);
+    value = __OS::CoreApi::UnicodeEncodings::UTF8::GetCode(&data[this->position],format);
     return value;
   }
   
@@ -537,7 +537,7 @@ namespace std {
     if (this->position == -1) return *this;
     for (size_t i = this->position+1; i < string_pointer->size() ; i += 1) {
       uint8_t b = (uint8_t)(*string_pointer)[i];
-      this->format = Os::UnicodeEncodings::UTF8::GetFormat(b);
+      this->format = __OS::CoreApi::UnicodeEncodings::UTF8::GetFormat(b);
       if (this->format > 0) {
         this->index += 1;
         this->position = (int)i;
@@ -565,12 +565,12 @@ namespace std {
       this->index = -1;
       this->format = 0;
     } else {
-      this->index = Os::UnicodeEncodings::UTF8::GetLength(*str)-1;
-      this->position = Os::UnicodeEncodings::UTF8::GetLastIndex(*str);
+      this->index = __OS::CoreApi::UnicodeEncodings::UTF8::GetLength(*str)-1;
+      this->position = __OS::CoreApi::UnicodeEncodings::UTF8::GetLastIndex(*str);
       if (this->position == -1) {
         this->format = 0;
       } else {
-        this->format = Os::UnicodeEncodings::UTF8::GetFormat((uint8_t)string_pointer->operator[](this->position));
+        this->format = __OS::CoreApi::UnicodeEncodings::UTF8::GetFormat((uint8_t)string_pointer->operator[](this->position));
       }
     }
   }
@@ -591,14 +591,14 @@ namespace std {
   
   char32_t ustring::const_reverse_iterator::operator*() const {
     const uint8_t* data = (const uint8_t*)string_pointer->data();
-    return Os::UnicodeEncodings::UTF8::GetCode(&data[this->position],format);
+    return __OS::CoreApi::UnicodeEncodings::UTF8::GetCode(&data[this->position],format);
   }
   
   ustring::const_reverse_iterator& ustring::const_reverse_iterator::operator++() {
     if (this->position == -1) return *this;
     for (int32_t i = this->position-1 ; i >= 0 ; i -= 1) {
       uint8_t b = (uint8_t)(*string_pointer)[i];
-      this->format = Os::UnicodeEncodings::UTF8::GetFormat(b);
+      this->format = __OS::CoreApi::UnicodeEncodings::UTF8::GetFormat(b);
       if (this->format > 0) {
         this->index -= 1;
         this->position = i;
@@ -626,12 +626,12 @@ namespace std {
       this->index = -1;
       this->format = 0;
     } else {
-      this->index = Os::UnicodeEncodings::UTF8::GetLength(*str)-1;
-      this->position = Os::UnicodeEncodings::UTF8::GetLastIndex(*str);
+      this->index = __OS::CoreApi::UnicodeEncodings::UTF8::GetLength(*str)-1;
+      this->position = __OS::CoreApi::UnicodeEncodings::UTF8::GetLastIndex(*str);
       if (this->position == -1) {
         this->format = 0;
       } else {
-        this->format = Os::UnicodeEncodings::UTF8::GetFormat((uint8_t)string_pointer->operator[](this->position));
+        this->format = __OS::CoreApi::UnicodeEncodings::UTF8::GetFormat((uint8_t)string_pointer->operator[](this->position));
       }
     }
   }
@@ -652,7 +652,7 @@ namespace std {
   
   char32_t ustring::reverse_iterator::operator*() const {
     const uint8_t* data = (const uint8_t*)string_pointer->data();
-    return Os::UnicodeEncodings::UTF8::GetCode(&data[this->position],format);
+    return __OS::CoreApi::UnicodeEncodings::UTF8::GetCode(&data[this->position],format);
   }
   
   char32_t& ustring::reverse_iterator::operator*() {
@@ -665,7 +665,7 @@ namespace std {
     if (this->position == -1) return *this;
     for (int32_t i = this->position-1 ; i >= 0 ; i -= 1) {
       uint8_t b = (uint8_t)(*string_pointer)[i];
-      this->format = Os::UnicodeEncodings::UTF8::GetFormat(b);
+      this->format = __OS::CoreApi::UnicodeEncodings::UTF8::GetFormat(b);
       if (this->format > 0) {
         this->index -= 1;
         this->position = i;

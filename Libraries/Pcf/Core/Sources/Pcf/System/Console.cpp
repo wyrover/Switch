@@ -1,4 +1,3 @@
-#include <csignal>
 #include <cstdio>
 #include <cstring>
 #include <cwchar>
@@ -6,92 +5,25 @@
 
 #include "../../../Includes/Pcf/System/Console.h"
 #include "../../../Includes/Pcf/System/Environment.h"
-#include "../Os/Console.h"
 #include "../../../Includes/Pcf/System/Text/UTF8Encoding.h"
-
-#if _WIN32
-#pragma warning(push)
-#pragma warning(disable:4459)
-#endif
+#include "../../__OS/CoreApi.h"
 
 namespace {
-  class ConsoleChangeCodePage {
-  public:
-    ConsoleChangeCodePage() {
-      this->previousInputCodePage = Os::Console::GetInputCodePage();
-      Os::Console::SetInputCodePage(65001);
-      this->previousOutputCodePage = Os::Console::GetOutputCodePage();
-      Os::Console::SetOutputCodePage(65001);
-    }
-
-    ~ConsoleChangeCodePage() {
-      Os::Console::SetInputCodePage(previousInputCodePage);
-      Os::Console::SetOutputCodePage(previousOutputCodePage);
-    }
-
-  private:
-    int32 previousInputCodePage;
-    int32 previousOutputCodePage;
-  };
-
-  class ConsoleInterceptSignals {
-  public:
-    ConsoleInterceptSignals() {
-      for(auto signal : signalKeys)
-        ::signal(signal.Key, ConsoleInterceptSignals::SignalHandler);
-    }
-    
-    ~ConsoleInterceptSignals() {
-      for(auto signal : signalKeys)
-        ::signal(signal.Key, SIG_DFL);
-    }
-    
-    static void SignalHandler(int32 signal) {
-      ::signal(signal, ConsoleInterceptSignals::SignalHandler);
-      System::ConsoleCancelEventArgs consoleCancel = System::ConsoleCancelEventArgs(false, signalKeys[signal]);
-      System::Console::CancelKeyPress(Reference<object>::Null(), consoleCancel);
-      if (consoleCancel.Cancel == false) 
-        exit(-1);
-    }
-    
-    static const System::Collections::Generic::SortedDictionary<int32, System::ConsoleSpecialKey> signalKeys;
-  };
-  
-#if _WIN32
   // This is hack is necessary in windows because std::cout does not work properly with Utf8 and unicode code page
   // Moreover std::cout on Windows is very slow.
   // printf work correctly...
   std::ostream& operator<<(std::ostream& output, const char* value) {
-    printf(value);
+    printf("%s", value);
     return output;
   }
-#endif
   
   SharedPointer<System::Text::Encoding> inputEncoding = SharedPointer<System::Text::Encoding>::Create<System::Text::UTF8Encoding>(false);
   SharedPointer<System::Text::Encoding> outputEncoding = SharedPointer<System::Text::Encoding>::Create<System::Text::UTF8Encoding>(false);
 
-  System::ConsoleColor __backgroundColor = static_cast<System::ConsoleColor>(Os::Console::GetBackgroundColor());
-  System::ConsoleColor __foregroundColor = static_cast<System::ConsoleColor>(Os::Console::GetForegroundColor());
+  System::ConsoleColor __backgroundColor = static_cast<System::ConsoleColor>(__OS::CoreApi::Console::GetBackgroundColor());
+  System::ConsoleColor __foregroundColor = static_cast<System::ConsoleColor>(__OS::CoreApi::Console::GetForegroundColor());
   bool treatControlCAsInput = false;
-  
 }
-
-static ConsoleChangeCodePage consoleChangeCodePage;
-
-#if _WIN32
-const System::Collections::Generic::SortedDictionary<int32, System::ConsoleSpecialKey> ConsoleInterceptSignals::signalKeys {
-  {SIGBREAK, System::ConsoleSpecialKey::ControlBreak},
-  {SIGINT, System::ConsoleSpecialKey::ControlC}
-};
-#else
-const System::Collections::Generic::SortedDictionary<int32, System::ConsoleSpecialKey> ConsoleInterceptSignals::signalKeys {
-  {SIGQUIT, System::ConsoleSpecialKey::ControlBackslash},
-  {SIGTSTP, System::ConsoleSpecialKey::ControlZ},
-  {SIGINT, System::ConsoleSpecialKey::ControlC}
-};
-#endif
-
-static ConsoleInterceptSignals consoleInterceptSignals;
 
 using namespace System;
 
@@ -145,16 +77,16 @@ namespace {
 };
 
 Property<ConsoleColor> Console::BackgroundColor {
-  []()->ConsoleColor {return static_cast<ConsoleColor>(Os::Console::GetBackgroundColor());},
+  []()->ConsoleColor {return static_cast<ConsoleColor>(__OS::CoreApi::Console::GetBackgroundColor());},
   [](ConsoleColor value) {
-    Pcf::Os::Console::SetBackgroundColor(static_cast<int32>(value));
+    __OS::CoreApi::Console::SetBackgroundColor(static_cast<int32>(value));
   }
 };
 
 Property<int32> Console::CursorLeft {
   [] {
     int32 left, top;
-    Pcf::Os::Console::Wherexy(left, top);
+    __OS::CoreApi::Console::Wherexy(left, top);
     return left;
   },
   [](int32 value) {
@@ -162,25 +94,25 @@ Property<int32> Console::CursorLeft {
       throw ArgumentOutOfRangeException(pcf_current_information);
       
     int32 left, top;
-    Pcf::Os::Console::Wherexy(left, top);
-    Pcf::Os::Console::Gotoxy(value, top);
+    __OS::CoreApi::Console::Wherexy(left, top);
+    __OS::CoreApi::Console::Gotoxy(value, top);
   }
 };
 
 Property<int32> Console::CursorSize {
-  [] {return Pcf::Os::Console::GetCursorSize();},
+  [] {return __OS::CoreApi::Console::GetCursorSize();},
   [](int32 value) {
     if (value < 1 || value > 100)
       throw ArgumentOutOfRangeException(pcf_current_information);
       
-    Pcf::Os::Console::SetCursorSize(value);
+    __OS::CoreApi::Console::SetCursorSize(value);
   }
 };
 
 Property<int32> Console::CursorTop {
   [] {
     int32 left, top;
-    Pcf::Os::Console::Wherexy(left, top);
+    __OS::CoreApi::Console::Wherexy(left, top);
     return top;
   },
   [](int32 value) {
@@ -188,34 +120,34 @@ Property<int32> Console::CursorTop {
       throw ArgumentOutOfRangeException(pcf_current_information);
       
     int32 left, top;
-    Pcf::Os::Console::Wherexy(left, top);
-    Pcf::Os::Console::Gotoxy(left, value);
+    __OS::CoreApi::Console::Wherexy(left, top);
+    __OS::CoreApi::Console::Gotoxy(left, value);
   }
 };
 
 Property<bool> Console::CursorVisible {
-  [] {return Pcf::Os::Console::GetCursorVisible();},
-  [](bool value) {Pcf::Os::Console::SetCursorVisible(value);}
+  [] {return __OS::CoreApi::Console::GetCursorVisible();},
+  [](bool value) {__OS::CoreApi::Console::SetCursorVisible(value);}
 };
 
 Property<Console::StandardErrorOutput&, ReadOnly> Console::Error {
   []()->Console::StandardErrorOutput& {
-    static StandardErrorOutput error;
-    return error;
+    static StandardErrorOutput e;
+    return e;
   }
 };
 
 Property<ConsoleColor> Console::ForegroundColor {
-  [] {return static_cast<ConsoleColor>(Os::Console::GetForegroundColor());},
+  [] {return static_cast<ConsoleColor>(__OS::CoreApi::Console::GetForegroundColor());},
   [](ConsoleColor value) {
-    Pcf::Os::Console::SetForegroundColor(static_cast<int32>(value));
+    __OS::CoreApi::Console::SetForegroundColor(static_cast<int32>(value));
   }
 };
 
 Property<Console::StandardInput&, ReadOnly> Console::In {
   []()->Console::StandardInput& {
-    static StandardInput in;
-    return in;
+    static StandardInput i;
+    return i;
   }
 };
 
@@ -223,18 +155,18 @@ Property<const SharedPointer<System::Text::Encoding>&> Console::InputEncoding {
   []()->const SharedPointer<System::Text::Encoding>& {return inputEncoding;},
   [](const SharedPointer<System::Text::Encoding>& value) {
     inputEncoding = value;
-    Pcf::Os::Console::SetInputCodePage(inputEncoding->GetCodePage());
+    __OS::CoreApi::Console::SetInputCodePage(inputEncoding->GetCodePage());
   }
 };
 
 Property<bool, ReadOnly> Console::KeyAvailable {
-  [] {return Pcf::Os::Console::KeyAvailable();}
+  [] {return __OS::CoreApi::Console::KeyAvailable();}
 };
 
 Property<Console::StandardOutput&, ReadOnly> Console::Out {
   []()->Console::StandardOutput& {
-    static StandardOutput out;
-    return out;
+    static StandardOutput o;
+    return o;
   }
 };
 
@@ -242,7 +174,7 @@ Property<const SharedPointer<System::Text::Encoding>&> Console::OutputEncoding {
   []()->const SharedPointer<System::Text::Encoding>& {return outputEncoding;},
   [](const SharedPointer<System::Text::Encoding>& value) {
     outputEncoding = value;
-    Pcf::Os::Console::SetOutputCodePage(outputEncoding->GetCodePage());
+    __OS::CoreApi::Console::SetOutputCodePage(outputEncoding->GetCodePage());
   }
 };
 
@@ -261,11 +193,11 @@ void Console::Beep(int32 frequency, int32 duration) {
   if (frequency < 37 || frequency > 32767 || duration <= 0)
     throw ArgumentOutOfRangeException(pcf_current_information);
   
-  Pcf::Os::Console::Beep(frequency, duration);
+  __OS::CoreApi::Console::Beep(frequency, duration);
 }
 
 void Console::Clear() {
-  Pcf::Os::Console::Clrscr();
+  __OS::CoreApi::Console::Clrscr();
 }
 
 int32 Console::Read() {
@@ -274,8 +206,8 @@ int32 Console::Read() {
 }
 
 struct AutoEchoVisible {
-  AutoEchoVisible() {Os::Console::SetEchoVisible(true);}
-  ~AutoEchoVisible() {Os::Console::SetEchoVisible(false);}
+  AutoEchoVisible() {__OS::CoreApi::Console::SetEchoVisible(true);}
+  ~AutoEchoVisible() {__OS::CoreApi::Console::SetEchoVisible(false);}
 };
 
 String Console::ReadLine() {
@@ -297,7 +229,7 @@ ConsoleKeyInfo Console::ReadKey(bool intercept) {
   ConsoleKeyInfo keyInfo;
   
   out->Flush();
-  Pcf::Os::Console::ReadKey(KeyChar, KeyCode, alt, shift, ctrl);
+  __OS::CoreApi::Console::ReadKey(KeyChar, KeyCode, alt, shift, ctrl);
   keyInfo = ConsoleKeyInfo(KeyChar, (ConsoleKey)KeyCode, shift, alt, ctrl);
 
   if (intercept == false)
@@ -307,25 +239,25 @@ ConsoleKeyInfo Console::ReadKey(bool intercept) {
 }
 
 void Console::ResetColor() {
-  Pcf::Os::Console::SetForegroundColor(static_cast<uint16>(::__foregroundColor));
-  Pcf::Os::Console::SetBackgroundColor(static_cast<uint16>(::__backgroundColor));
+  __OS::CoreApi::Console::SetForegroundColor(static_cast<uint16>(::__foregroundColor));
+  __OS::CoreApi::Console::SetBackgroundColor(static_cast<uint16>(::__backgroundColor));
 }
 
 void Console::SetCursorPosition(int32 left, int32 top) {
   int32 width = 0;
   int32 height = 0;
-  Pcf::Os::Console::GetBufferSize(width, height);
+  __OS::CoreApi::Console::GetBufferSize(width, height);
   if (left < 1 || left > width || top < 1 || top > height)
     throw ArgumentOutOfRangeException(pcf_current_information);
 
-  Pcf::Os::Console::Gotoxy(left, top);
+  __OS::CoreApi::Console::Gotoxy(left, top);
 }
 
-void Console::SetError(System::IO::TextWriter& error) { ::error = &error; }
+void Console::SetError(System::IO::TextWriter& e) { error = &e; }
 
-void Console::SetInt(System::IO::TextReader& in) { ::in = &in; }
+void Console::SetInt(System::IO::TextReader& i) { in = &i; }
 
-void Console::SetOut(System::IO::TextWriter& out) { ::out = &out; }
+void Console::SetOut(System::IO::TextWriter& o) { out = &o; }
 
 
 void Console::Write(bool value) {
@@ -381,12 +313,6 @@ void Console::Write(uint64 value) {
   Write(string::Format("{0}", value));
 }
 
-#if __APPLE__
-void Console::Write(size value) {
-  Write(string::Format("{0}", value));
-}
-#endif
-
 void Console::Write(const char value[]) {
   Write(string::Format("{0}", value));
 }
@@ -403,20 +329,13 @@ void Console::Write(const wchar value[]) {
   Write(string::Format("{0}", value));
 }
 
-#if __linux__ && _LP64
-void Console::Write(long long int value) {
+void Console::Write(llong value) {
   Write(String::Format("{0}", value));
 }
 
-void Console::Write(unsigned long long int value) {
+void Console::Write(ullong value) {
   Write(String::Format("{0}", value));
 }
-
-#else
-void Console::Write(long value) {
-  Write(String::Format("{0}", value));
-}
-#endif
 
 void Console::Write(unsigned char* value) {
   Write(String::Format("{0}", value));
@@ -478,11 +397,13 @@ void Console::WriteLine(uint64 value) {
   Write(string::Format("{0}{1}", value, Environment::NewLine));
 }
 
-#if __APPLE__
-void Console::WriteLine(size value) {
-  Write(string::Format("{0}{1}", value, Environment::NewLine));
+void Console::WriteLine(llong value) {
+  Write(String::Format("{0}{1}", value, Environment::NewLine));
 }
-#endif
+
+void Console::WriteLine(ullong value) {
+  Write(String::Format("{0}{1}", value, Environment::NewLine));
+}
 
 void Console::WriteLine(const char value[]) {
   Write(string::Format("{0}{1}", value, Environment::NewLine));
@@ -499,8 +420,3 @@ void Console::WriteLine(const char32 value[]) {
 void Console::WriteLine(const wchar value[]) {
   Write(string::Format("{0}{1}", value, Environment::NewLine));
 }
-
-#if _WIN32
-#pragma warning(pop)
-#endif
-

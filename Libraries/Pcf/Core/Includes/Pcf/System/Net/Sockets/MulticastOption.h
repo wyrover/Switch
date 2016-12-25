@@ -49,12 +49,6 @@ namespace Pcf {
           
           /// @cond
           MulticastOption(const MulticastOption& multicastOption) : group(multicastOption.group), interfaceIndex(multicastOption.interfaceIndex), localAddress(multicastOption.localAddress) {}
-          MulticastOption& operator =(const MulticastOption& multicastOption) {
-            this->group = multicastOption.group;
-            this->interfaceIndex = multicastOption.interfaceIndex;
-            this->localAddress = multicastOption.localAddress;
-            return *this;
-          }
           /// @endcond
 
           /// @brief Gets or sets the IP address of a multicast group.
@@ -74,8 +68,7 @@ namespace Pcf {
             pcf_set {
               if (value < 0)
                 throw ArgumentOutOfRangeException(pcf_current_information);
-                
-                this->interfaceIndex = value;
+              this->interfaceIndex = value;
             }
           };
 

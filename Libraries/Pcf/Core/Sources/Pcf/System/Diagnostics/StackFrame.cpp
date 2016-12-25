@@ -5,8 +5,11 @@
 using namespace System;
 using namespace System::Diagnostics;
 
+Property<int32, ReadOnly> StackFrame::METHODS_TO_SKIP {
+  [] {return 0;}
+};
+
 void StackFrame::FillFrame(int32 skipFrames, bool needFileInfo) {
-  
   if (skipFrames < 0)
     throw ArgumentOutOfRangeException(pcf_current_information);
   

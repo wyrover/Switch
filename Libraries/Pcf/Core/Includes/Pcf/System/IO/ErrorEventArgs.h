@@ -20,12 +20,16 @@ namespace Pcf {
         template<typename T>
         ErrorEventArgs(const T& exception) : exception(as<T>(exception.template MemberwiseClone<T>())) {}
         
+        /// @cond
+        ErrorEventArgs(const ErrorEventArgs& e) : exception(e.exception) {}
+        /// @endcond
+        
         /// @brief Gets the Exception that represents the error that occurred.
         /// @return Exception An Exception that represents the error that occurred.
         const Exception& GetException() const {return this->exception();}
         
       private:
-        UniquePointer<Exception> exception;
+        SharedPointer<Exception> exception;
       };
     }
   }

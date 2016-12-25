@@ -9,13 +9,13 @@ using namespace TUnit;
 
 namespace {
   TEST(IPAddress, Constructor) {
-    EXPECT_EQ("0.0.0.0", IPAddress::Any.ToString());
-    EXPECT_EQ("255.255.255.255", IPAddress::Broadcast.ToString());
-    EXPECT_EQ("[0:0:0:0:0:0:0:0]", IPAddress::IPv6Any.ToString());
-    EXPECT_EQ("[0:0:0:0:0:0:0:1]", IPAddress::IPv6Loopback.ToString());
-    EXPECT_EQ("[0:0:0:0:0:0:0:0]", IPAddress::IPv6None.ToString());
-    EXPECT_EQ("127.0.0.1", IPAddress::Loopback.ToString());
-    EXPECT_EQ("255.255.255.255", IPAddress::None.ToString());
+    EXPECT_EQ("0.0.0.0", IPAddress::Any().ToString());
+    EXPECT_EQ("255.255.255.255", IPAddress::Broadcast().ToString());
+    EXPECT_EQ("[0:0:0:0:0:0:0:0]", IPAddress::IPv6Any().ToString());
+    EXPECT_EQ("[0:0:0:0:0:0:0:1]", IPAddress::IPv6Loopback().ToString());
+    EXPECT_EQ("[0:0:0:0:0:0:0:0]", IPAddress::IPv6None().ToString());
+    EXPECT_EQ("127.0.0.1", IPAddress::Loopback().ToString());
+    EXPECT_EQ("255.255.255.255", IPAddress::None().ToString());
     
     EXPECT_EQ("255.255.255.255", IPAddress().ToString());
     

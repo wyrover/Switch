@@ -15,7 +15,7 @@ namespace {
     return set;
   }
 
-  class Person : public Object, public IComparable, public IHashable {
+  class Person : public Object, public IComparable {
   public:
     Person() {}
     Person(const string& n, const string& sn) : name(n), surname(sn) {}

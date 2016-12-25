@@ -20,8 +20,6 @@ namespace Pcf {
           /// @brief Initializes a new instance of the ContainerControl class with default settings.
           ContainerControl() {}
 
-          ContainerControl(UniquePointer<IWidget> widget) : ScrollableControl(widget) {}
-          
           /// @brief Initializes a new instance of the ContainerControl class with specific text, size, and location.
           /// @param text The text displayed by the control.
           /// @param left The X position of the control, in pixels, from the left edge of the control's container. The value is assigned to the Left property.
@@ -33,6 +31,10 @@ namespace Pcf {
           /// @note To maintain better performance, do not set the size of a control in its constructor. The preferred method is to virtual the DefaultSize property.
           ContainerControl(const string& text, int32 left, int32 top, int32 width, int32 height) : ScrollableControl(text, left, top, width, height) {
           }
+
+          /// @cond
+          ContainerControl(const ContainerControl& containerControl) : ScrollableControl(containerControl) {}
+          /// @endcond
 
           Property<const System::ComponentModel::IContainer&, ReadOnly> Container {
             pcf_get->const System::ComponentModel::IContainer& {return this->GetContainer();}

@@ -2,7 +2,7 @@
 
 using namespace System;
 using namespace System::Drawing;
-using namespace System::Windows::Forms;
+using namespace System::Windows::FormsD;
 
 namespace UserControlExample {
   enum class OperationStatus {

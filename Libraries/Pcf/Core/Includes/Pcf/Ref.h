@@ -30,7 +30,9 @@ namespace Pcf {
     /// @brief Copy a Reference specified
     /// @param ref Reference to copy.
     Reference(const Reference& ref) : ptr(ref.ptr) {}
-    
+
+    Reference(std::nullptr_t) : ptr(null) {}
+
     /// @brief Return true if this instance is null.
     /// @return true if this instance is null; otherwise false.
     bool IsNull() const { return this->ptr == null; }
@@ -240,13 +242,13 @@ namespace Pcf {
       return *this;
     }
     
-    bool operator ==(const T& ref) { return this->ptr == &ref; }
+    bool operator ==(const T& ref) const { return this->ptr == &ref; }
     
-    bool operator ==(const Reference<T>& ref) { return this->ptr == ref.ptr; }
+    bool operator ==(const Reference<T>& ref) const { return this->ptr == ref.ptr; }
     
-    bool operator !=(const T& ref) { return this->ptr != &ref; }
+    bool operator !=(const T& ref) const { return this->ptr != &ref; }
     
-    bool operator !=(const Reference<T>& ref) { return this->ptr != ref.ptr; }
+    bool operator !=(const Reference<T>& ref) const { return this->ptr != ref.ptr; }
     
     operator bool() const { return this->ptr != null; }
     

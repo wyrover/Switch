@@ -1,3 +1,4 @@
+#include <limits>
 #include "../../../Includes/Pcf/System/Double.h"
 #include "../../../Includes/Pcf/System/Byte.h"
 #include "../../../Includes/Pcf/System/Char.h"
@@ -18,14 +19,29 @@
 
 using namespace System;
 
-#if ! _WIN32
-constexpr double Double::Epsilon;
-constexpr double Double::MaxValue;
-constexpr double Double::MinValue;
-constexpr double Double::NegativeInfinity;
-constexpr double Double::PositiveInfinity;
-#endif
-const double Double::NaN = std::numeric_limits<double>::quiet_NaN();
+Property<double, ReadOnly> Double::Epsilon {
+  [] {return 4.94066e-324;}
+};
+
+Property<double, ReadOnly> Double::MaxValue {
+  [] {return std::numeric_limits<double>::max();}
+};
+
+Property<double, ReadOnly> Double::MinValue {
+  [] {return -std::numeric_limits<double>::max();}
+};
+
+Property<double, ReadOnly> Double::NaN {
+  [] {return std::numeric_limits<double>::quiet_NaN();}
+};
+
+Property<double, ReadOnly> Double::NegativeInfinity {
+  [] {return -std::numeric_limits<double>::infinity();}
+};
+
+Property<double, ReadOnly> Double::PositiveInfinity {
+  [] {return std::numeric_limits<double>::infinity();}
+};
 
 double Double::Parse(const String& str) {
   return atof(str.Data());

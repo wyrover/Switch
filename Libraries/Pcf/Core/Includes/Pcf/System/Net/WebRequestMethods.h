@@ -2,6 +2,7 @@
 /// @brief Contains Pcf::System::Net::WebRequestMethods class.
 #pragma once
 
+#include "../../Static.h"
 #include "../../Types.h"
 #include "../Object.h"
 #include "../String.h"
@@ -13,32 +14,74 @@ namespace Pcf {
     /// @brief The System::Net namespace provides a simple programming interface for many of the protocols used on networks today.
     /// The WebRequest and WebResponse classes form the basis of what are called pluggable protocols, an implementation of network services that enables you to develop applications that use Internet resources without worrying about the specific details of the individual protocols.
     namespace Net {
-      class WebRequestMethods {
+      /// @brief Container class for WebRequestMethods.Ftp, WebRequestMethods.File, and WebRequestMethods.Http classes. This class cannot be inherited
+      class WebRequestMethods pcf_static {
       public:
-        WebRequestMethods() = delete;
-
-        class Ftp {
+        class File pcf_static {
         public:
-          Ftp() = delete;
-          static const String UploadFile;
-          static const String DownloadFile;
-          static const String ListDirectory;
-          static const String ListDirectoryDetails;
-          static const String MakeDirectory;
+          /// @brief Represents the FILE GET protocol method that is used to retrieve a file from a specified location.
+          /// @return string
+          static Property<string, ReadOnly> DownloadFile;
+          
+          /// @brief Represents the FILE PUT protocol method that is used to copy a file to a specified location.
+          /// @return string
+          static Property<string, ReadOnly> UploadFile;
+        };
+        
+        /// @brief Represents the types of FTP protocol methods that can be used with an FTP request. This class cannot be inherited.
+        class Ftp pcf_static {
+        public:
+          /// @brief
+          /// @return string
+          static Property<string, ReadOnly> UploadFile;
 
-        private:
+          /// @brief
+          /// @return string
+          static Property<string, ReadOnly> DownloadFile;
+          
+          /// @brief
+          /// @return string
+          static Property<string, ReadOnly> ListDirectory;
+          
+          /// @brief
+          /// @return string
+          static Property<string, ReadOnly> ListDirectoryDetails;
+          
+          /// @brief
+          /// @return string
+          static Property<string, ReadOnly> MakeDirectory;
         };
 
-        class Http : public Object {
+        /// @brief Represents the types of HTTP protocol methods that can be used with an HTTP request.
+        class Http pcf_static {
         public:
-          Http() = delete;
-          static const String Get;
-          static const String Head;
-          static const String Post;
-          static const String Put;
-          static const String Delete;
-          static const String Trace;
-          static const String Options;
+          /// @brief
+          /// @return string
+          static Property<string, ReadOnly> Get;
+          
+          /// @brief
+          /// @return string
+          static Property<string, ReadOnly> Head;
+          
+          /// @brief
+          /// @return string
+          static Property<string, ReadOnly> Post;
+          
+          /// @brief
+          /// @return string
+          static Property<string, ReadOnly> Put;
+          
+          /// @brief
+          /// @return string
+          static Property<string, ReadOnly> Delete;
+          
+          /// @brief
+          /// @return string
+          static Property<string, ReadOnly> Trace;
+          
+          /// @brief
+          /// @return string
+          static Property<string, ReadOnly> Options;
         };
       };
     }

@@ -33,4 +33,4 @@ macro(FindPackage PACKAGENAME REVISIONNUMBER)
   endif ()
 endmacro()
 
-FindPackage(Toolbox 0.1.0)
+FindPackage(Toolbox 0.2.0)

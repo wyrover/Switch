@@ -632,7 +632,7 @@ namespace Pcf {
 
             for (int32 i = 0; i < count; i += 1) {
               enumerator.MoveNext();
-              if (System::Compare::Equals(value,enumerator.Current))
+              if (value == enumerator.Current)
                 return index - i;
             }
 

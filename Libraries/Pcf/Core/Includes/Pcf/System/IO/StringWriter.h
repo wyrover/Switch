@@ -19,10 +19,11 @@ namespace Pcf {
       /// @include StringReader.cpp
       class StringWriter : public TextWriter {
       public:
-        static const StringWriter Null;
+        static Property<StringWriter, ReadOnly> Null;
         
         /// @brief Initializes a new instance of the System::IO::StreamWriter class for the specified file on the specified stream pointer.
         StringWriter();
+        StringWriter(const StringWriter& sw) : data(sw.data) {}
 
         /// @cond
         ~StringWriter();
@@ -45,8 +46,12 @@ namespace Pcf {
         string ToString() const override;
         
       private:
-        String str;
-        bool close = false;
+        struct StringWriterData {
+          String str;
+          bool close = false;
+        };
+        
+        SharedPointer<StringWriterData> data = SharedPointer<StringWriterData>();
       };
     }
   }

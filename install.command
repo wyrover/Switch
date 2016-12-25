@@ -1,2 +1,2 @@
-cd Projects/Pcf/Sources
+cd Projects/Pcf/Sources/trunk
 ./install.sh "$@"

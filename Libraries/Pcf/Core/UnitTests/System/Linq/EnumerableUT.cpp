@@ -33,7 +33,7 @@ namespace {
     return Math::Abs(value1 - value2)/divisor <= epsilon;
   }
   
-  class Pet : public object, public IComparable, public IHashable {
+  class Pet : public object, public IComparable {
   public:
     Pet() : age(0) {}
     Pet(const Pet& pet) : name(pet.name), age(pet.age), vaccinated(pet.vaccinated) {}
