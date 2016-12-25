@@ -14,9 +14,9 @@ The framework is composed of 3 libraries :
 - **Pcf.TUnit** : The Pcf.TUnit library contains unit testing framework.
 
 #Namespace
-- Pcf::System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
-- Pcf::System::Collections namespace contain types that define various standard, specialized, and generic collection objects.
-- Pcf::System::Collections::Concurrent provides several thread-safe collection classes that should be used in place of the corresponding types in the System.Collections and System.Collections.Generic namespaces whenever multiple threads are accessing the collection concurrently.
+- **Pcf::System** namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
+- **Pcf::System::Collections** namespace contain types that define various standard, specialized, and generic collection objects.
+- **Pcf::System::Collections::Concurrent** provides several thread-safe collection classes that should be used in place of the corresponding types in the System.Collections and System.Collections.Generic namespaces whenever multiple threads are accessing the collection concurrently.
 - Contains interfaces and classes that define generic collections, which allow users to create strongly typed collections that provide better type safety and performance than non-generic strongly typed collections.
 - Contains classes that can be used as collections in the object model of a reusable library.
 - Contains specialized and strongly-typed collections; for example, a linked list dictionary, a bit vector, and collections that contain only strings.
