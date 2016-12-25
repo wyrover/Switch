@@ -1,0 +1,26 @@
+CREDITS - Fl_Gel_Tabs
+---------------------
+    This file lists the people responsible for the toolkit you
+    are now using.  If you've looking for your name in lights
+    but we've forgotten you here, please send an email to
+    "fltk-bugs@fltk.org" and we'll update this file accordingly.
+
+CORE DEVELOPERS
+
+    Greg Ercolano     05/29/2005 - initial implementation 05/29/2005
+    				   Fl_Gel_Tabs, geltabs-test, docs.
+
+    'Bill Spitzak and others'; Core FLTK 'Fl_Tabs' authors, from which 
+    this widget is highly derived, and would not otherwise be possible.
+
+WIDGET'S IMAGE DESIGN
+    
+    With nods to Apple's Aqua, I never the less drew the gradient used
+    in these widgets myself using Gimp, using some simple brush strokes,
+    and a bit of pixel editing. NO, I DID NOT SCREEN GRAB APPLE'S BUTTONS.
+    I purposefully drew the gradients myself to avoid any possible
+    copyright infringement on Apple's own aqua designs.
+
+OTHER CONTRIBUTORS
+    Your name in lights here.
+

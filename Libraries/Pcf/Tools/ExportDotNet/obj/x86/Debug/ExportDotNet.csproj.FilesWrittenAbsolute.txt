@@ -1,0 +1,5 @@
+/Users/yves/Projects/Pcf/Sources/Tools/ExportDotNet/obj/x86/Debug/.NETFramework,Version=v4.0.AssemblyAttribute.cs
+/Users/yves/Projects/Pcf/Sources/Tools/ExportDotNet/bin/Debug/ExportDotNet.exe.mdb
+/Users/yves/Projects/Pcf/Sources/Tools/ExportDotNet/bin/Debug/ExportDotNet.exe
+/Users/yves/Projects/Pcf/Sources/Tools/ExportDotNet/obj/x86/Debug/ExportDotNet.exe
+/Users/yves/Projects/Pcf/Sources/Tools/ExportDotNet/obj/x86/Debug/ExportDotNet.exe.mdb

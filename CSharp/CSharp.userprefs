@@ -1,0 +1,53 @@
+﻿<Properties StartupItem="Core/UnitTests/Core.UnitTests.csproj">
+  <MonoDevelop.Ide.ItemProperties..Net.Forms.Forms.Examples.GroupBox PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties..Net.Forms.Forms.Examples.Cursor PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties..Net.Forms.Forms.Examples.FormHelloWrold PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties..Net.Forms.Forms.Examples.PictureBox PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties..Net.Forms.Forms.Examples.Label PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties..Net.Forms.Forms.Examples.FormTimer PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties..Net.Forms.Forms.Examples.Panel PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench>
+    <Files>
+      <File FileName="Tools/ConsoleApp/ConsoleApp.cs" Line="19" Column="7" />
+      <File FileName="Core/UnitTests/System/ConvertTest.cs" Line="10" Column="19" />
+      <File FileName="Core/UnitTests/System/StringTest.cs" Line="12" Column="10" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties..Net.Forms.Forms.Examples.MainMenu PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties..Net.Forms.Forms.Examples.DragAndDrop PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties..Net.Forms.Forms.Examples.FontFamily PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties..Net.Forms.Forms.Examples.NumericUpDown PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties..Net.Forms.Forms.Examples.CheckedListBox PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties..Net.Forms.Forms.Examples.RadioButton PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties..Net.Forms.Forms.Examples.MouseEvents PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties..Net.Forms.Forms.Examples.SystemSound PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties.Tools.ConsoleApp PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties..Net.Forms.Forms.Examples.Chrono PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties..Net.Forms.Forms.Examples.CheckBox PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties..Net.Forms.Forms.Examples.TabControl PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties..Net.Forms.Forms.Examples.Form PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties..Net.Forms.Forms.Examples.ProgressBar PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties..Net.Forms.Forms.Examples.MaskedTextBox PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties..Net.Forms.Forms.Examples.MessageBox PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties..Net.Forms.Forms.Examples.FolderBrowserDialog PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties..Net.Forms.Forms.Examples.KeyEvents PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties..Net.Forms.Forms.Examples.FormAndThread PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties.Tools.FormApp PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties..Net.Forms.Forms.Examples.Button PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties..Net.Forms.Forms.Examples.Paint PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties..Net.Core.Core.UnitTests PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties..Net.Forms.Forms.Examples.DockedControls PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties..Net.Forms.Forms.Examples.Font PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties..Net.Forms.Forms.Examples.FormExcpetion PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties..Net.Forms.Forms.Examples.Colors PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties..Net.Forms.Forms.Examples.OpenFileDialog PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties..Net.Forms.Forms.Examples.ImageList PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties..Net.Forms.Forms.Examples.ListBox PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties..Net.Forms.Forms.Examples.SaveFileDialog PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties..Net.Forms.Forms.Examples.Controls PreferredExecutionTarget="MonoDevelop.Default" />
+</Properties>

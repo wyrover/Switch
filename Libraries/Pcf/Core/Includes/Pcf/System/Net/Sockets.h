@@ -1,0 +1,26 @@
+/// @file
+/// @brief Contains Pcf::System::Net::Sockets namespace.
+#pragma once
+
+#include "Sockets/AddressFamily.h"
+#include "Sockets/IOControlCode.h"
+#include "Sockets/IPv6MulticastOption.h"
+#include "Sockets/LingerOption.h"
+#include "Sockets/MulticastOption.h"
+#include "Sockets/NetworkStream.h"
+#include "Sockets/ProtocolFamily.h"
+#include "Sockets/ProtocolType.h"
+#include "Sockets/SelectMode.h"
+#include "Sockets/Socket.h"
+#include "Sockets/SocketError.h"
+#include "Sockets/SocketException.h"
+#include "Sockets/SocketFlags.h"
+#include "Sockets/SocketInformation.h"
+#include "Sockets/SocketInformationOptions.h"
+#include "Sockets/SocketOptionLevel.h"
+#include "Sockets/SocketOptionName.h"
+#include "Sockets/SocketShutdown.h"
+#include "Sockets/SocketType.h"
+#include "Sockets/TcpClient.h"
+#include "Sockets/TcpListener.h"
+#include "Sockets/UdpClient.h"

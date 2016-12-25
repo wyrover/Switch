@@ -1,0 +1,74 @@
+#include <Pcf/System/IO/StreamWriter.h>
+#include <Pcf/System/IO/StreamReader.h>
+#include <Pcf/System/IO/StringReader.h>
+#include <Pcf/System/IO/MemoryStream.h>
+#include <Pcf/TUnit/Assert.h>
+#include <Pcf/TUnit/TestFixture.h>
+
+
+#include <Pcf/System/IO/Path.h>
+
+using namespace System;
+using namespace System::IO;
+using namespace TUnit;
+
+namespace {
+  
+  TEST(StreamWriter, WriteIn32) {
+		IO::MemoryStream s(10);
+		IO::StreamWriter writer(s);
+
+    Array<int32> data = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+    for (int32 item : data)
+			writer.Write(item);
+
+		IO::StreamReader reader(s);
+		int32 index = 0;
+    for (int32 current = reader.Read(); current != -1; current = reader.Read()) {
+      EXPECT_EQ(data[index++], Int32::Parse(Char(current).ToString()));
+		}
+	}
+
+	TEST(StreamWriter, WriteUTF8) {
+		string unicodeString = "Pi " + Char(928) + " ma " + Char(931) + " KOALA " + Char(128040);
+    SharedPointer<Text::Encoding> encoding = Text::Encoding::UTF8();
+		//IO::MemoryStream s;
+    pcf_using (IO::FileStream s(Path::Combine(Environment::GetFolderPath(Environment::SpecialFolder::Desktop), "UnitTest.txt"), FileMode::OpenOrCreate, FileAccess::ReadWrite)) {
+      IO::StreamWriter writer(s, *encoding);
+      writer.Write(unicodeString);
+    }
+    
+    pcf_using (IO::FileStream s(Path::Combine(Environment::GetFolderPath(Environment::SpecialFolder::Desktop), "UnitTest.txt"), FileMode::OpenOrCreate, FileAccess::ReadWrite)) {
+      StringReader sreader(unicodeString);
+  		IO::StreamReader reader(s, *encoding);
+		
+      for (int32 data = sreader.Read(), current = reader.Read(); current != -1 && data!=-1; data = sreader.Read(), current = reader.Read()) {
+  			EXPECT_EQ(data, current);
+	  	}
+    }
+	}
+
+	TEST(StreamWriter, Write437) {
+		string unicodeString = "a" + Char(0XE6) + "\n" + Char(0x3A3) + Char(0x2588);
+		IO::MemoryStream s;
+		SharedPointer<Text::Encoding> encoding = Text::Encoding::CreateEncoding(437);
+		IO::StreamWriter writer(s, *encoding);
+
+		writer.Write(unicodeString);
+
+		s.Position = 0;
+		EXPECT_EQ(0x61, s.ReadByte());
+		EXPECT_EQ(0x91, s.ReadByte());
+		EXPECT_EQ('\n', s.ReadByte());
+		EXPECT_EQ(0xE4, s.ReadByte());
+		EXPECT_EQ(0xDB, s.ReadByte());
+
+		StringReader sreader(unicodeString);
+		IO::StreamReader reader(s, *encoding);
+
+    for (int32 data = sreader.Read(), current = reader.Read(); current != -1 && data!=-1; data = sreader.Read(), current = reader.Read()) {
+      EXPECT_EQ(data, current);
+		}
+	}
+
+}

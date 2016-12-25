@@ -1,0 +1,69 @@
+Fl_Gel_Tabs -- FLTK 'Gel Tab' Widget
+------------------------------------
+
+WHAT IS "Fl_Gel_Tabs"?
+
+    Fl_Gel_Tabs is a 'tab' widget that is similar to the Mac OSX
+    tabs widgets, and is aimed at becoming part of the FLTK's core,
+    or fltk extensions library.
+
+LICENSING
+
+    Fl_Gel_Tabs comes with complete free source code. 
+    Fl_Gel_Tabs is available under the terms of the GNU Library 
+    General Public License. See COPYING for more info.
+
+    Contrary to popular belief, it can be used in commercial
+    software!
+
+BUILD INSTRUCTIONS
+
+    Tested under Linux, Mac OSX and Windows with fltk 1.1.6.
+
+    The Makefiles use fltk-config now, so all platform-specific
+    stuff should be handled automatically.
+
+    For builds with the Microsoft compilers, you'll have to manage
+    Makefile.MICROSOFT by hand; you'll need to edit the FLTKDIR=xxx
+    and possibly other values, depending on your compiler and FLTK verison.
+
+    To build the test programs and related Fl_Gel_Tabs object files:
+
+	make
+
+   These test programs are created:
+
+       	geltabs-simple-example -- Simple example of how to use the Fl_Gel_Tabs widget
+       	geltabs-test           -- A more complex 'real world scenario' with multiple instances
+       	geltabs-test-value     -- Test the value() method via
+
+WHERE'S THE DOCUMENTATION?
+
+    See documentation/index.html.
+
+FEATURES
+
+    It looks nice.
+
+RELEASE NOTES/VERSION INFORMATION
+    
+    See ./CHANGES.
+
+LIMITATIONS
+
+    The tabs are of fixed vertical size. This kinda follows 
+    Mac's human interface standards (I think) to prevent people
+    from getting too nutty. Think of it as divine in this limitation.
+
+    You can't make tabs wider than the parent widget, or they'll clip.
+    This is in keeping with the Mac OSX's tab widget default behavior.
+    Basically, you should design your interface so that never happens.
+
+    If you want a lot of tabs, do not use this widget.
+    Tabs are not a good abstraction for handling large numbers of panels.
+    Better to use a combo of a browser and a group/panel, similar to mail 
+    readers. (Browser on the left, panel on the right)
+
+BUGS?
+    
+    Send them to erco at seriss dot com

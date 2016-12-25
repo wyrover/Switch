@@ -1,0 +1,41 @@
+1.02 to 1.03
+------------
+
+- Pcf
+  * Rename System::Interface to Interface
+
+- DateTime :
+  * Rename Pcf::System::DateTime::GetNow() to PcfSystem::DateTime::Now()
+  * Rename Pcf::System::DateTime::GetToday() to PcfSystem::DateTime::Today()
+  * Rename Pcf::System::DateTime::GetUtcNow() to PcfSystem::DateTime::UtcNow()
+
+- Pcf::System::Array :
+  * Array<...>::Build(...) return a Array<...> instead Sp<Array<...> >
+
+- Pcf::System::SmartPointer to Pcf::System::SharedPointer
+  * Rename Pcf::System::SmartPointer to Pcf::System::SharePointer
+
+- Pcf::System::Object
+  * Rename String ToString() const by override String ToString() const
+  * Rename Int32 GetHashCode() const by override int32 GetHashCode() const
+
+- Pcdf::System::IAsyncResult
+  * Rename Boolean GetCompletedSynchronously() const by override boolean GetCompletedSynchronously() const
+  * Rename Boolean IsCompleted() const by override boolean IsCompleted() const
+
+- Pcf::System::IComparable
+  * Rename Int32 CompareTo(const Object& obj) const by override int32 CompareTo(const object& obj) const
+
+- Pcf::System::Collections::Generic::ICollection<T>
+  * Rename Int32 GetCount() const to int32 GetCount() const
+  * Rename Boolean IsSynchronized() const to boolean IsSynchronized() const
+  * Rename Boolean Contains(const T& value) const to boolean Contains(const T& value) const
+  * Rename void CopyTo(System::Array<T>& array, Int32 index) const to void CopyTo(System::Array<T>& array, int32 index) const
+  * Rename Boolean Remove(const T& value) to boolean Remove(const T& value)
+  
+- Pcf::System::Collections::Generic::IComparer
+  * Rename Int32 Compare(const T& x, const T& y) const to int32 Compare(const T& x, const T& y) const
+  
+- Replace all Type by type (e.g. Int32 by int32) in all methods
+- Replace some Sp by Up
+- Replace throw Exception(Error::…) by Throw(CorrespondingException)

@@ -1,0 +1,127 @@
+/// @file
+/// @brief Contains Pcf::System::Windows::Forms::Application class.
+#pragma once
+
+#include <Pcf/System/EventHandler.h>
+
+#include "Form.h"
+
+/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Pcf {
+  /// @brief The Pcf::System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
+  namespace System {
+    /// @brief The Pcf::System::Windows namespaces including animation clients, user interface controls, data binding, and type conversion. Pcf::System::Windows::Forms and its child namespaces are used for developing Windows Forms applications.
+    namespace Windows {
+      /// @brief The Pcf::System::Windows::Forms namespace contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system, Apple Mac Os X and Linux like Ubuntu operating system.
+      namespace Forms {
+        /// @cond
+        class Form;
+        /// @endcond
+
+        /// @brief Provides static methods and properties to manage an application, such as methods to start and stop an application, to process Windows messages, and properties to get information about an application. This class cannot be inherited.
+        class Application final {
+          class IdleEventHandler : public EventHandler {
+          public:
+            EventHandler& operator +=(const EventHandler& delegate) {
+              bool registerIdle = this->IsEmpty();
+              *((EventHandler*)this) = EventHandler::Combine(*this, delegate);
+              if (registerIdle)
+                RegisterIdle();
+              return *this;
+            }
+            
+            EventHandler& operator -=(const EventHandler& delegate) {
+              *((EventHandler*)this) = EventHandler::Remove(*this, delegate);
+              if (this->IsEmpty())
+                UnregisterIdle();
+              return *this;
+            }
+          };
+          
+        public:
+          /// @brief Gets a value indicating whether the caller can quit this application.
+          /// @return true if the caller can quit this application; otherwise, false.
+          /// @remarks This method returns false if it is called from a Control being hosted within a Web browser. Thus, the Control cannot quit the Application.
+          static bool AllowQuit();
+
+          /// @brief Processes all Windows messages currently in the message queue.
+          /// @remarks When you run a Windows Form, it creates the new form, which then waits for events to handle. Each time the form handles an event, it processes all the code associated with that event. All other events wait in the queue. While your code handles the event, your application does not respond. For example, the window does not repaint if another window is dragged on top.
+          /// @remarks If you call DoEvents in your code, your application can handle the other events. For example, if you have a form that adds data to a ListBox and add DoEvents to your code, your form repaints when another window is dragged over it. If you remove DoEvents from your code, your form will not repaint until the click event handler of the button is finished executing. For more information on messaging, see User Input in Windows Forms::
+          /// @remarks Unlike Visual Basic 6.0, the DoEvents method does not call the Thread.Sleep method.
+          /// @remarks Typically, you use this method in a loop to process messages.
+          /// @warning Calling this method causes the current thread to be suspended while all waiting window messages are processed. If a message causes an event to be triggered, then other areas of your application code may execute. This can cause your application to exhibit unexpected behaviors that are difficult to debug. If you perform operations or computations that take a long time, it is often preferable to perform those operations on a new thread. For more information about asynchronous programming, see Asynchronous Programming Model (APM).
+          static void DoEvent();
+
+          /// @brief Enables visual styles for the application.
+          /// @remarks This method enables visual styles for the application. Visual styles are the colors, fonts, and other visual elements that form an operating system theme. Controls will draw with visual styles if the control and the operating system support it. To have an effect, EnableVisualStyles() must be called before creating any controls in the application; typically, EnableVisualStyles() is the first line in the Main function. A separate manifest is not required to enable visual styles when calling EnableVisualStyles().
+          static void EnableVisualStyles();
+
+          /// @brief Informs all message pumps that they must terminate, and then closes all application windows after the messages have been processed.
+          /// @remarks The Exit method stops all running message loops on all threads and closes all windows of the application. This method does not necessarily force the application to exit. The Exit method is typically called from within a message loop, and forces Run to return. To exit a message loop for the current thread only, call ExitThread.
+          /// @remarks Exit raises the following events and performs the associated conditional actions:
+          /// * A FormClosing event is raised for every form represented by the OpenForms property. This event can be canceled by setting the Cancel property of their FormClosingEventArgs parameter to true.
+          /// * If one of more of the handlers cancels the event, then Exit returns without further action. Otherwise, a FormClosed event is raised for every open form, then all running message loops and forms are closed.
+          /// @note The Exit method does not raise the Closed and Closing events
+          static void Exit();
+
+          /// @brief Begins running a standard application message loop on the current thread, without a form.
+          /// @exception InvalidOperationException A main message loop is already running on this thread.
+          /// @remarks In a Win32-based or Windows Forms application, a message loop is a routine in code that processes user events, such as mouse clicks and keyboard strokes. Every running Windows-based application requires an active message loop, called the main message loop. When the main message loop is closed, the application exits. In Windows Forms, this loop is closed when the Exit method is called, or when the ExitThread method is called on the thread that is running the main message loop.
+          /// @remarks Most Windows Forms developers will not need to use this version of the method. You should use the Run(Form) overload to start an application with a main form, so that the application terminates when the main form is closed. For all other situations, use the Run(ApplicationContext) overload, which supports supplying an ApplicationContext object for better control over the lifetime of the application.
+          static void Run();
+          
+          /// @brief Begins running a standard application message loop on the current thread, without a form.
+          /// @exception InvalidOperationException A main message loop is already running on this thread.
+          /// @remarks In a Win32-based or Windows Forms application, a message loop is a routine in code that processes user events, such as mouse clicks and keyboard strokes. Every running Windows-based application requires an active message loop, called the main message loop. When the main message loop is closed, the application exits. In Windows Forms, this loop is closed when the Exit method is called, or when the ExitThread method is called on the thread that is running the main message loop.
+          /// @remarks Most Windows Forms developers will not need to use this version of the method. You should use the Run(Form) overload to start an application with a main form, so that the application terminates when the main form is closed. For all other situations, use the Run(ApplicationContext) overload, which supports supplying an ApplicationContext object for better control over the lifetime of the application.
+          static void Run(char* argv[], int argc) {
+            Environment::SetCommandLineArgs(argv, argc);
+            Run();
+          }
+          
+          /// @brief Begins running a standard application message loop on the current thread, and makes the specified form visible.
+          /// @param mainForm A Form that represents the form to make visible.
+          /// @remarks Typically, the main function of an application calls this method and passes to it the main window of the application.
+          /// @remarks This method adds an event handler to the mainForm parameter for the Closed event. The event handler calls ExitThread to clean up the application.
+          static void Run(const Form& form);
+          
+          /// @brief Begins running a standard application message loop on the current thread, and makes the specified form visible.
+          /// @param mainForm A Form that represents the form to make visible.
+          /// @remarks Typically, the main function of an application calls this method and passes to it the main window of the application.
+          /// @remarks This method adds an event handler to the mainForm parameter for the Closed event. The event handler calls ExitThread to clean up the application.
+          static void Run(const Form& form, char* argv[], int argc) {
+            Environment::SetCommandLineArgs(argv, argc);
+            Run(form);
+          }
+          
+          /// @brief Begins running a standard application message loop on the current thread, and makes the specified form visible.
+          /// @param mainForm A Form that represents the form to make visible.
+          /// @remarks Typically, the main function of an application calls this method and passes to it the main window of the application.
+          /// @remarks This method adds an event handler to the mainForm parameter for the Closed event. The event handler calls ExitThread to clean up the application.
+          static void Run(Form& form);
+          
+          /// @brief Begins running a standard application message loop on the current thread, and makes the specified form visible.
+          /// @param mainForm A Form that represents the form to make visible.
+          /// @remarks Typically, the main function of an application calls this method and passes to it the main window of the application.
+          /// @remarks This method adds an event handler to the mainForm parameter for the Closed event. The event handler calls ExitThread to clean up the application.
+          static void Run(Form& form, char* argv[], int argc) {
+            Environment::SetCommandLineArgs(argv, argc);
+            Run(form);
+          }
+          
+          /// @brief Occurs when the application finishes processing and is about to enter the idle state.
+          static IdleEventHandler Idle;
+
+        private:
+          Application() {}
+          static void OnApplicationIdle(const object& sender, const EventArgs& e);
+          static void RegisterIdle();
+          static void UnregisterIdle();
+          static int Handler(int event);
+          static void ApplicationIdle(void* idle);
+          static Control* control;
+        };
+      }
+    }
+  }
+}

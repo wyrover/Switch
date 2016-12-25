@@ -1,0 +1,38 @@
+#include <Pcf/Pcf>
+
+using namespace System;
+
+namespace PcfConsoleApp {
+  class Program {
+    /// @brief The main entry point for the application.
+    pcf_public static void Main() {
+<<<<<<< .mine
+      try {
+        Up<System::Net::WebRequest> httpRequest = System::Net::HttpWebRequest::Create("http://10.129.150.8:8080/RequestClipDatabase");
+        System::Net::WebResponse& httpResponse = httpRequest->GetResponse();
+        Sp<System::IO::Stream> streamResponse = httpResponse.GetResponseStream();
+        string stringResponse = System::IO::StreamReader(streamResponse).ReadToEnd();
+        streamResponse->Close();
+        Console::WriteLine(stringResponse);
+      } catch (const Exception& ex) {
+        Console::WriteLine(ex);
+      }
+
+      Console::ReadKey(true);
+=======
+      //Console::WriteLine("Hello, World!");
+      //Console::WriteLine(System::IO::StreamReader(System::Net::HttpWebRequest::Create("http://localhost:8080/Start")->GetResponse().GetResponseStream()).ReadToEnd());
+      //Console::WriteLine(System::IO::StreamReader(System::Net::HttpWebRequest::Create("http://httpbin.org/encoding/utf8")->GetResponse().GetResponseStream()).ReadToEnd());
+      //Console::WriteLine(System::IO::StreamReader(System::Net::HttpWebRequest::Create("http://10.129.150.8:8080/RequestClipDatabase")->GetResponse().GetResponseStream()).ReadToEnd());
+      
+      Array<int> ints = {0, 1, 2, 3, 4, 5, 6};
+      System::Collections::Generic::Enumerator<int> enumerator = ints.GetEnumerator();
+      while (enumerator.MoveNext())
+        Console::WriteLine(enumerator.Current);
+      
+>>>>>>> .r280
+    }
+  };
+}
+
+pcf_startup(&PcfConsoleApp::Program::Main)

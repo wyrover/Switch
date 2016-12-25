@@ -1,0 +1,56 @@
+#include "../../../../Includes/Pcf/System/Threading/Mutex.h"
+#include "NamedHandleCollection.h"
+
+using namespace System;
+using namespace System::Threading;
+
+namespace {
+  NamedHandleCollection<Mutex> mutexes;
+}
+
+Mutex::Mutex(bool initiallyOwned, const string& name) {
+  bool createdNew = true;
+  if (name != "")
+    this->operator =(mutexes.Add(name, createdNew));
+  if (createdNew) {
+    *this->name = name;
+    if (initiallyOwned)
+      this->WaitOne();
+  }
+}
+
+Mutex::Mutex(bool initiallyOwned, const string& name, bool& createdNew) {
+  createdNew = true;
+  if (name != "")
+    this->operator =(mutexes.Add(name, createdNew));
+  if (createdNew) {
+    *this->name = name;
+    if (initiallyOwned)
+      this->WaitOne();
+  }
+}
+
+void Mutex::Close() {
+  if (this->mutex.IsNull())
+    return;
+  if (*this->name != "")
+    mutexes.Remove(*this->name);
+  this->name.Reset();
+  this->mutex.Reset();
+}
+
+Mutex Mutex::OpenExisting(const string& name) {
+  if (!mutexes.Conatains(name))
+    throw WaitHandleCannotBeOpenedException(pcf_current_information);
+  bool createNew;
+  Mutex value = mutexes.Add(name, createNew);
+  return value;
+}
+
+bool Mutex::TryOpenExisting(const string& name, Mutex& result) {
+  if (!mutexes.Conatains(name))
+    return false;
+  bool createNew;
+  result = mutexes.Add(name, createNew);
+  return true;
+}

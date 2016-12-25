@@ -1,0 +1,151 @@
+/// @file
+/// @brief Contains Pcf::System::IO::StreamReader class.
+#pragma once
+
+#include "../../UniquePointer.h"
+#include "../Text/Encoding.h"
+#include "../Text/UTF8Encoding.h"
+#include "FileStream.h"
+#include "TextReader.h"
+
+/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Pcf {
+  /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
+  namespace System {
+    /// @brief The System::IO namespace contains types that allow reading and writing to files and data streams, and types that provide basic file and directory support.
+    namespace IO {
+      /// @brief Implements a System::IO::TextReader for writing characters to a stream in a particular encoding.
+      /// @section Example Example
+      /// The following example uses an instance of StreamReader to read text from a file.
+      /// @include StreamReader.cpp
+      class StreamReader: public TextReader {
+      public:
+        static const StreamReader Null;
+
+        /// @brief Initializes a new instance of the System::IO::StreamReader class for the specified Sream pointer.
+        /// @param stream The stream pointer to be read.
+        /// @exception ArgumentException The stream to be read.
+        template<typename TStream>
+        StreamReader(const TStream& stream) {
+          static_assert(!std::is_same<System::IO::Stream, TStream>::value, "Must not be System::IO::Stream but inherited");
+          static_assert(std::is_base_of<System::IO::Stream, TStream>::value, "Is not inherited from System::IO::Stream");
+          if (stream.CanRead() == false)
+            throw ArgumentException(pcf_current_information);
+          this->data->stream = stream.template MemberwiseClone<TStream>().template As<Stream>();
+          this->data->encoding = &utf8Encoding;
+          
+          if (this->data->stream->CanSeek())
+            this->data->stream->Seek(0, System::IO::SeekOrigin::Begin);
+        }
+        
+        /// @brief Initializes a new instance of the System::IO::StreamReader class for the specified Sream pointer.
+        /// @param stream The stream pointer to be read.
+        /// @param encoding The character encoding to use.
+        /// @exception ArgumentException The stream to be read.
+        template<typename TStream>
+        StreamReader(const TStream& stream, Text::Encoding& encoding) {
+          static_assert(!std::is_same<System::IO::Stream, TStream>::value, "Must not be System::IO::Stream but inherited");
+          static_assert(std::is_base_of<System::IO::Stream, TStream>::value, "Is not inherited from System::IO::Stream");
+          if (stream.CanRead() == false)
+            throw ArgumentException(pcf_current_information);
+          this->data->stream = stream.template MemberwiseClone<TStream>().template As<Stream>();
+          this->data->encoding = &encoding;
+         
+          if (this->data->stream->CanSeek())
+            this->data->stream->Seek(0, System::IO::SeekOrigin::Begin);
+        }
+
+        /// @brief Initializes a new instance of the System::IO::StreamReader class for the specified file name.
+        /// @param path The complete file path to be read.
+        /// @exception ArgumentException path contains one or more of the invalid characters -or- The system could not retrieve the absolute path.
+        /// @exception DirectoryNotFoundException the file specified by path does not exist
+        StreamReader(const System::String& path);
+
+        /// @brief Initializes a new instance of the System::IO::StreamReader class for the specified file name.
+        /// @param path The complete file path to be read.
+        /// @param encoding The character encoding to use.
+        /// @exception ArgumentException path is null -or- path contains one or more of the invalid characters -or- The system could not retrieve the absolute path.
+        /// @exception DirectoryNotFoundException the file specified by path does not exist
+        StreamReader(const System::String& path, Text::Encoding& encoding);
+        
+        /// @cond
+        StreamReader();
+        StreamReader(const char path[]) : StreamReader(string(path)) {}
+        StreamReader(const StreamReader& streamReader) : data(streamReader.data) {}
+        StreamReader& operator=(const StreamReader& streamReader) {this->data = streamReader.data; return *this;}
+        ~StreamReader() {this->Close();}
+        /// @endcond
+
+        /// @brief Gets the underlying stream that interfaces with a backing store.
+        /// @return SharedPointer<Stream> The stream this StreamReader is writing to.
+        Property<Stream&, ReadOnly> BaseStream {
+          pcf_get->Stream& {return *this->data->stream;}
+        };
+
+        /// @brief Gets the current character encoding that the current StreamReader object is using.
+        /// @return SharedPointer<Text::Encoding> The current character encoding used by the current reader. The value can be different after the first call to any Read method of StreamReader, since encoding autodetection is not done until the first call to a Read method.
+        Property<Text::Encoding&, ReadOnly> CurrentEncoding {
+          pcf_get->Text::Encoding& {return *this->data->encoding;}
+        };
+
+        /// @brief Gets a value that indicates whether the current stream position is at the end of the stream.
+        /// @return true if the current stream position is at the end of the stream; otherwise false.
+        Property<bool, ReadOnly> EndOfStream {
+          pcf_get {return this->Peek() == -1;}
+        };
+
+        /// @brief Closes the current StreamReader object and the underlying stream. (Overrides TextReader::Close().).
+        /// @exception IO::IOException an error occurred while the file is being closed
+        void Close() override;
+
+        /// @brief Reads the next character without changing the state of the reader or the character source. Returns the next available character without actually reading it from the input stream.
+        /// @return int32 An integer representing the next character to be read, or -1 if no more characters are available or the stream does not support seeking.
+        int32 Peek() const override;
+
+        /// @brief Reads the next character from the input stream and advances the character position by one character.
+        /// @return The next character from the input stream, or -1 if no more characters are available.
+        /// @exception ObjectClosedException The stream is closed.
+        /// @exception IO::IOException An I/O error occurs.
+        int32 Read() override;
+
+        /// @brief Reads a line of characters from the current stream and returns the data as a System::String.
+        /// @return The next line from the input stream, or an empty System::String if the end of the input stream is reached.
+        /// @exception ObjectClosedException The stream is closed.
+        /// @exception IO::IOException An I/O error occurs.
+        /// @section Example Example
+        /// The following code example reads lines from a file until the end of the file is reached.
+        /// @include StreamReaderReadLine.cpp
+        System::String ReadLine() override;
+
+        /// @brief Reads all characters from the current position to the end of the TextReader and returns them as one System::String.
+        /// @return A System::String containing all characters from the current position to the end of the TextReader.
+        /// @exception ObjectClosedException: The stream is closed.
+        /// @exception IO::IOException An I/O error occurs.
+        /// @section Example Example
+        /// The following code example reads all the way to the end of a file in one operation.
+        /// @include StreamReaderReadToEnd.cpp
+        System::String ReadToEnd() override;
+
+        virtual bool EndOfText() { return EndOfStream(); }
+
+        protected:
+        int32 Read(Text::Encoding::Decoder& decoder);
+        int32 ReadCodePoint(Text::Encoding::Decoder& decoder);
+        
+        /// @cond
+        struct StreamReaderData {
+          int32 peekByte {0};
+          bool hasPeekByte {false};
+          SharedPointer<Stream> stream;
+          Text::Encoding* encoding {null};
+       };
+        
+        SharedPointer<StreamReaderData> data {new StreamReaderData()};
+        static Text::UTF8Encoding utf8Encoding;
+        /// @endcond
+      };
+    }
+  }
+}
+
+using namespace Pcf;
