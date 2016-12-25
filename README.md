@@ -1,4 +1,4 @@
-# Pcf
+#Pcf
 Portable C++ Framework
 
 #The Pcf Libraries are...
@@ -6,7 +6,7 @@ Portable C++ Framework
 - written in efficient, modern C++14;
 - and highly portable and available on many different platforms (Windows, Mac Os X, Linux);
 
-# Libraries
+#Libraries
 The framework is composed of 3 libraries :
 - **Pcf.Core** : The Pcf.Core library is a library of classes, interfaces, and value types that provide access to system functionality. It is the foundation on which c++ applications, components, and controls are built.
 - **Pcf.Drawing** : The Pcf.Drawing library contains types that support basic GDI+ graphics functionality. Child namespaces support advanced two-dimensional and vector graphics functionality, advanced imaging functionality, and print-related and typographical services. A child namespace also contains types that extend design-time user-interface logic and drawing.
@@ -46,7 +46,6 @@ The framework is composed of 3 libraries :
 - **Pcf::TUnit** namepsace contains a unit test framework.
 
 #Objectives and Mission
-
 - Pcf is a powerful, yet easy to use platform to build your applications upon
 - Pcf allows you to build highly portable applications (write once – compile and run anywhere)
 - Pcf is modular and scalable from embedded applications
