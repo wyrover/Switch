@@ -1,0 +1,28 @@
+var class_pcf_1_1_unique_pointer =
+[
+    [ "UniquePointer", "class_pcf_1_1_unique_pointer_a9f6fc2057e06bcaa963c0ebd2af53165.html#a9f6fc2057e06bcaa963c0ebd2af53165", null ],
+    [ "UniquePointer", "class_pcf_1_1_unique_pointer_a7f1802e976f98c927501eeb8032a68dc.html#a7f1802e976f98c927501eeb8032a68dc", null ],
+    [ "UniquePointer", "class_pcf_1_1_unique_pointer_a22451ea2a10dfc5c8570da6fd1a8684e.html#a22451ea2a10dfc5c8570da6fd1a8684e", null ],
+    [ "As", "class_pcf_1_1_unique_pointer_ada3d64361d6cc9b93d565ae23bc7920b.html#ada3d64361d6cc9b93d565ae23bc7920b", null ],
+    [ "ChangeType", "class_pcf_1_1_unique_pointer_a7e0a77e6f16156bcb8d4db04925d77d4.html#a7e0a77e6f16156bcb8d4db04925d77d4", null ],
+    [ "Delete", "class_pcf_1_1_unique_pointer_af7fff6a65458ca03d59932e779ebd691.html#af7fff6a65458ca03d59932e779ebd691", null ],
+    [ "Is", "class_pcf_1_1_unique_pointer_a1493256c04177df16abec08bf70d91ab.html#a1493256c04177df16abec08bf70d91ab", null ],
+    [ "IsNull", "class_pcf_1_1_unique_pointer_a4608daaa632a34aeb678f9d63d299851.html#a4608daaa632a34aeb678f9d63d299851", null ],
+    [ "Release", "class_pcf_1_1_unique_pointer_af24f9407471289530cba6a3e96b71408.html#af24f9407471289530cba6a3e96b71408", null ],
+    [ "Reset", "class_pcf_1_1_unique_pointer_aa66dc91d4d006de47c203d8a42444b66.html#aa66dc91d4d006de47c203d8a42444b66", null ],
+    [ "Reset", "class_pcf_1_1_unique_pointer_ad18660332fbc012b8cec5f8f5ab022dd.html#ad18660332fbc012b8cec5f8f5ab022dd", null ],
+    [ "Swap", "class_pcf_1_1_unique_pointer_ab6ddf6e3bc8c0eada355c9d11abb4a9d.html#ab6ddf6e3bc8c0eada355c9d11abb4a9d", null ],
+    [ "ToObject", "class_pcf_1_1_unique_pointer_a3c27c82726b0532ee09e44f5d567bda8.html#a3c27c82726b0532ee09e44f5d567bda8", null ],
+    [ "ToObject", "class_pcf_1_1_unique_pointer_af50f013bbf16134bb9cb068ebf1a854d.html#af50f013bbf16134bb9cb068ebf1a854d", null ],
+    [ "ToObject", "class_pcf_1_1_unique_pointer_a0af7816df1ca0329900e5da196617aee.html#a0af7816df1ca0329900e5da196617aee", null ],
+    [ "ToObject", "class_pcf_1_1_unique_pointer_a62261fe6b3daad21b491acd1cca600d6.html#a62261fe6b3daad21b491acd1cca600d6", null ],
+    [ "ToPointer", "class_pcf_1_1_unique_pointer_af734b06241feb853998ceef77b255194.html#af734b06241feb853998ceef77b255194", null ],
+    [ "ToPointer", "class_pcf_1_1_unique_pointer_aa9a885a6652c07341ab9fef46ce26caa.html#aa9a885a6652c07341ab9fef46ce26caa", null ],
+    [ "ToPointer", "class_pcf_1_1_unique_pointer_a05e15fdfed94ce022606cefdc5f2467e.html#a05e15fdfed94ce022606cefdc5f2467e", null ],
+    [ "ToPointer", "class_pcf_1_1_unique_pointer_a370a269efe5f027a273051f6f0c3377e.html#a370a269efe5f027a273051f6f0c3377e", null ],
+    [ "ToReference", "class_pcf_1_1_unique_pointer_af82d598121721ec6daec7a39f27f36f2.html#af82d598121721ec6daec7a39f27f36f2", null ],
+    [ "ToReference", "class_pcf_1_1_unique_pointer_afd75bf271467a3b2e660a7819e61b16d.html#afd75bf271467a3b2e660a7819e61b16d", null ],
+    [ "ToReference", "class_pcf_1_1_unique_pointer_a1957cc939235880c116720cd4a4a964c.html#a1957cc939235880c116720cd4a4a964c", null ],
+    [ "ToReference", "class_pcf_1_1_unique_pointer_a205b344d7d0bb20e74cc008f5440977a.html#a205b344d7d0bb20e74cc008f5440977a", null ],
+    [ "ToString", "class_pcf_1_1_unique_pointer_a83f990a7e89af6e2bc3571d7a1ab64d7.html#a83f990a7e89af6e2bc3571d7a1ab64d7", null ]
+];

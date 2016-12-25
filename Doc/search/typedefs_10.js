@@ -1,0 +1,19 @@
+var searchData=
+[
+  ['sbyte',['sbyte',['../namespace_pcf_ab753a6e606389f53263f1226aef1d4b3.html#ab753a6e606389f53263f1226aef1d4b3',1,'Pcf']]],
+  ['serialdatareceivedeventhandler',['SerialDataReceivedEventHandler',['../namespace_pcf_1_1_system_1_1_i_o_1_1_ports_a6bf49af48f8e569ad5928e5a6a7b4f42.html#a6bf49af48f8e569ad5928e5a6a7b4f42',1,'Pcf::System::IO::Ports']]],
+  ['serialerrorreceivedeventhandler',['SerialErrorReceivedEventHandler',['../namespace_pcf_1_1_system_1_1_i_o_1_1_ports_af8f74008eb7670eb7158347389d47f8b.html#af8f74008eb7670eb7158347389d47f8b',1,'Pcf::System::IO::Ports']]],
+  ['serialpinchangedeventhandler',['SerialPinChangedEventHandler',['../namespace_pcf_1_1_system_1_1_i_o_1_1_ports_a0774cb460f86729aa83a19a88833caf1.html#a0774cb460f86729aa83a19a88833caf1',1,'Pcf::System::IO::Ports']]],
+  ['setter',['Setter',['../class_pcf_1_1_property_a2ba5e7a6a2702f12c79309778d3af86c.html#a2ba5e7a6a2702f12c79309778d3af86c',1,'Pcf::Property']]],
+  ['size',['size',['../namespace_pcf_a4b94a9d4e43bb755091a1673dd17d8ab.html#a4b94a9d4e43bb755091a1673dd17d8ab',1,'Pcf']]],
+  ['sizetype',['SizeType',['../class_pcf_1_1_system_1_1_allocator_a1a0dda59e2e42489207b556c4be2c5c5.html#a1a0dda59e2e42489207b556c4be2c5c5',1,'Pcf::System::Allocator']]],
+  ['sp',['sp',['../namespace_pcf_a540111e63b2c067d407d9516a88c6a56.html#a540111e63b2c067d407d9516a88c6a56',1,'Pcf']]],
+  ['stack',['Stack',['../namespace_pcf_1_1_system_1_1_collections_a5fff6befab82e27445f5dd920d4ccabe.html#a5fff6befab82e27445f5dd920d4ccabe',1,'Pcf::System::Collections']]],
+  ['string',['string',['../namespace_pcf_ad56d6ad6120456ed1339d085d2c7a6b5.html#ad56d6ad6120456ed1339d085d2c7a6b5',1,'Pcf']]],
+  ['stringcollection',['StringCollection',['../namespace_pcf_1_1_system_1_1_collections_1_1_specialized_ae7097004613ac0cda1ac671e4a5c0094.html#ae7097004613ac0cda1ac671e4a5c0094',1,'Pcf::System::Collections::Specialized']]],
+  ['stringdictionary',['StringDictionary',['../namespace_pcf_1_1_system_1_1_collections_1_1_specialized_a63a799db71582a72ea470f4a564ddc26.html#a63a799db71582a72ea470f4a564ddc26',1,'Pcf::System::Collections::Specialized']]],
+  ['stringenumerator',['StringEnumerator',['../namespace_pcf_1_1_system_1_1_collections_1_1_specialized_a420cdbd682cab9af9477dba5e85bdede.html#a420cdbd682cab9af9477dba5e85bdede',1,'Pcf::System::Collections::Specialized']]],
+  ['stringkeyvaluepair',['StringKeyValuePair',['../namespace_pcf_1_1_system_1_1_collections_1_1_specialized_a90a8f468c65fca95c9a743437dacf88f.html#a90a8f468c65fca95c9a743437dacf88f',1,'Pcf::System::Collections::Specialized']]],
+  ['stringkeyvaluepairenumerator',['StringKeyValuePairEnumerator',['../namespace_pcf_1_1_system_1_1_collections_1_1_specialized_a939a0b35848eb11778e0ed89dbc66420.html#a939a0b35848eb11778e0ed89dbc66420',1,'Pcf::System::Collections::Specialized']]],
+  ['stringtype',['StringType',['../class_pcf_1_1_system_1_1_string_af9f719108dc1fb62535a13f1eebda0d0.html#af9f719108dc1fb62535a13f1eebda0d0',1,'Pcf::System::String']]]
+];
