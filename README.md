@@ -6,6 +6,8 @@ Portable C++ Framework
 - written in efficient, modern C++14;
 - and highly portable and available on many different platforms (Windows, Mac Os X, Linux);
 
+![GitHub Logo](Libraries/Pcf/Core/Images/Pcf.png)
+
 #Libraries
 The framework is composed of 4 libraries :
 - **Pcf.Core** : The Pcf.Core library is a library of classes, interfaces, and value types that provide access to system functionality. It is the foundation on which c++ applications, components, and controls are built.
