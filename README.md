@@ -61,5 +61,4 @@ The framework is composed of 4 libraries :
 - Strong focus on tests (automated unit tests with high coverage)
 - Build on top of solid foundations – use existing proven C libraries (e.g. libcurl, icu, zlib, SQLite) where it makes sense
 
-For more information see Doc https://github.com/yfiumefreddo/Pcf/blob/develop/Doc/Index.html
 
