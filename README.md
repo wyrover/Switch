@@ -18,7 +18,7 @@ The framework is composed of 4 libraries :
 #Examples
 The classic first application 'Hello World'.
 
-Console::
+Console:
 ```
 #include <Pcf/Pcf>
 
