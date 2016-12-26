@@ -16,8 +16,9 @@ The framework is composed of 4 libraries :
 - **Pcf.TUnit** : The Pcf.TUnit library contains unit testing framework.
 
 #Examples
-Hello World
-'''
+Hello World  : The classic first application.
+
+```
 #include <Pcf/Pcf>
 
 using namespace System;
@@ -36,7 +37,7 @@ pcf_startup (HelloWorld::Program)
 // This code produces the following output if 3 is entered on command line:
 //
 // Hello, World!
-'''
+```
 
 #Namespace
 - **Pcf::System** namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
