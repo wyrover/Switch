@@ -1,4 +1,0 @@
-var dir_53bc680c37b602e6b4c0cde1d277e414 =
-[
-    [ "0.1.0", "dir_383c9435e313719ac03d87843fb81c5c.html", "dir_383c9435e313719ac03d87843fb81c5c" ]
-];

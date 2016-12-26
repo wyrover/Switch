@@ -1,0 +1,22 @@
+var searchData=
+[
+  ['g',['G',['../class_pcf_1_1_system_1_1_drawing_1_1_color_abc9c2bbb023f715e701d8476ae7304ec.html#abc9c2bbb023f715e701d8476ae7304ec',1,'Pcf::System::Drawing::Color']]],
+  ['gainsboro',['Gainsboro',['../class_pcf_1_1_system_1_1_drawing_1_1_color_a997c8054eeda901810a353289fcf9be2.html#a997c8054eeda901810a353289fcf9be2',1,'Pcf::System::Drawing::Color']]],
+  ['genericmonospace',['GenericMonospace',['../class_pcf_1_1_system_1_1_drawing_1_1_font_family_af9487db9e707e678a76cbb760322c639.html#af9487db9e707e678a76cbb760322c639',1,'Pcf::System::Drawing::FontFamily']]],
+  ['genericsansserif',['GenericSansSerif',['../class_pcf_1_1_system_1_1_drawing_1_1_font_family_a32ebce4d5b8155fb53b5a01dcf6bc615.html#a32ebce4d5b8155fb53b5a01dcf6bc615',1,'Pcf::System::Drawing::FontFamily']]],
+  ['genericserif',['GenericSerif',['../class_pcf_1_1_system_1_1_drawing_1_1_font_family_a453a43b4e6a16deb8b01e17eaa77635c.html#a453a43b4e6a16deb8b01e17eaa77635c',1,'Pcf::System::Drawing::FontFamily']]],
+  ['get',['Get',['../class_pcf_1_1_system_1_1_net_1_1_web_request_methods_1_1_http_aec7d7f29dbd78b2b336958788d3b548b.html#aec7d7f29dbd78b2b336958788d3b548b',1,'Pcf::System::Net::WebRequestMethods::Http']]],
+  ['ghostwhite',['GhostWhite',['../class_pcf_1_1_system_1_1_drawing_1_1_color_af61e998b405c70aad37400e1004072be.html#af61e998b405c70aad37400e1004072be',1,'Pcf::System::Drawing::Color']]],
+  ['gif',['Gif',['../class_pcf_1_1_system_1_1_drawing_1_1_imaging_1_1_image_format_a574ace34e95799875ce05da78d7f5361.html#a574ace34e95799875ce05da78d7f5361',1,'Pcf::System::Drawing::Imaging::ImageFormat']]],
+  ['gold',['Gold',['../class_pcf_1_1_system_1_1_drawing_1_1_color_ab26a1b1dcf9e71b9f2924b5495aa40bd.html#ab26a1b1dcf9e71b9f2924b5495aa40bd',1,'Pcf::System::Drawing::Color']]],
+  ['goldenrod',['Goldenrod',['../class_pcf_1_1_system_1_1_drawing_1_1_color_ac8ff4049b3eb4644a92326776ae51e98.html#ac8ff4049b3eb4644a92326776ae51e98',1,'Pcf::System::Drawing::Color']]],
+  ['gradientactivecaption',['GradientActiveCaption',['../class_pcf_1_1_system_1_1_drawing_1_1_system_colors_a16c523932084b0ae9902fd29276fff40.html#a16c523932084b0ae9902fd29276fff40',1,'Pcf::System::Drawing::SystemColors']]],
+  ['gradientinactivecaption',['GradientInactiveCaption',['../class_pcf_1_1_system_1_1_drawing_1_1_system_colors_acb499b2542be3937018185c4ecf05161.html#acb499b2542be3937018185c4ecf05161',1,'Pcf::System::Drawing::SystemColors']]],
+  ['graphics',['Graphics',['../class_pcf_1_1_system_1_1_windows_1_1_forms_1_1_paint_event_args_a8ae041e3c35ad3f58722408d18f22be6.html#a8ae041e3c35ad3f58722408d18f22be6',1,'Pcf::System::Windows::Forms::PaintEventArgs']]],
+  ['gray',['Gray',['../class_pcf_1_1_system_1_1_drawing_1_1_color_a3e3ca634d0560298de3d0f9d4a68cc20.html#a3e3ca634d0560298de3d0f9d4a68cc20',1,'Pcf::System::Drawing::Color']]],
+  ['graytext',['GrayText',['../class_pcf_1_1_system_1_1_drawing_1_1_system_colors_ac03a2a7fc4cdeff3ded13503b1bb1396.html#ac03a2a7fc4cdeff3ded13503b1bb1396',1,'Pcf::System::Drawing::SystemColors']]],
+  ['green',['Green',['../class_pcf_1_1_system_1_1_drawing_1_1_color_ad9566c3fa12e1156af71dde9f0c47052.html#ad9566c3fa12e1156af71dde9f0c47052',1,'Pcf::System::Drawing::Color']]],
+  ['greenyellow',['GreenYellow',['../class_pcf_1_1_system_1_1_drawing_1_1_color_a1d5d8cfbda2f897eae72770ab0b7ce3d.html#a1d5d8cfbda2f897eae72770ab0b7ce3d',1,'Pcf::System::Drawing::Color']]],
+  ['group',['Group',['../class_pcf_1_1_system_1_1_net_1_1_sockets_1_1_i_pv6_multicast_option_ad5473502a555d0fcd807ec63022395ef.html#ad5473502a555d0fcd807ec63022395ef',1,'Pcf::System::Net::Sockets::IPv6MulticastOption::Group()'],['../class_pcf_1_1_system_1_1_net_1_1_sockets_1_1_multicast_option_afb23d7a10f6703ac900399229ee2e97e.html#afb23d7a10f6703ac900399229ee2e97e',1,'Pcf::System::Net::Sockets::MulticastOption::Group()']]],
+  ['guid',['Guid',['../class_pcf_1_1_system_1_1_drawing_1_1_imaging_1_1_frame_dimension_a4e6d2d6d39b9b51f7f184447e0a40b07.html#a4e6d2d6d39b9b51f7f184447e0a40b07',1,'Pcf::System::Drawing::Imaging::FrameDimension::Guid()'],['../class_pcf_1_1_system_1_1_drawing_1_1_imaging_1_1_image_format_a5b22df8f710726c5b59d62e35f2511df.html#a5b22df8f710726c5b59d62e35f2511df',1,'Pcf::System::Drawing::Imaging::ImageFormat::Guid()']]]
+];
