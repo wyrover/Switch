@@ -27,6 +27,7 @@ using namespace System;
 namespace HelloWorld {
   class Program {
   public:
+    // The main entry point for the application.
     static void Main() {
       Console::WriteLine("Hello, World!");
     }
@@ -70,6 +71,7 @@ namespace HelloWorld {
     Label label;
   };
 }
+
 pcf_startup (HelloWorld::MainForm)
 ```
 
