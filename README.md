@@ -15,6 +15,94 @@ The framework is composed of 4 libraries :
 - **Pcf.Forms** : The Pcf.Forms library contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system.
 - **Pcf.TUnit** : The Pcf.TUnit library contains unit testing framework.
 
+#Examples
+The classic first application 'Hello World'.
+
+Console:
+```
+#include <Pcf/Pcf>
+
+using namespace System;
+
+namespace HelloWorld {
+  class Program {
+  public:
+    // The main entry point for the application.
+    static void Main() {
+      Console::WriteLine("Hello, World!");
+    }
+  };
+}
+
+pcf_startup (HelloWorld::Program)
+```
+
+Forms:
+```
+#include <Pcf/Pcf>
+
+using namespace System;
+using namespace System::Windows::Forms;
+
+namespace HelloWorld {
+  class MainForm : public Form {
+  public:
+    // The main entry point for the application.
+    static void Main() {
+      Application::EnableVisualStyles();
+      Application::Run(MainForm());
+    }
+    
+    MainForm() {
+      this->StartPosition = FormStartPosition::Manual;
+      this->Location = System::Drawing::Point(400, 200);
+      this->ClientSize = System::Drawing::Size(300, 300);
+      this->Text = "My first application";
+      
+      this->label.Parent = *this;
+      this->label.Text = "Hello, World!";
+      this->label.AutoSize = true;
+      this->label.Font = System::Drawing::Font("Arial", 46, System::Drawing::FontStyle::Bold|System::Drawing::FontStyle::Italic);
+      this->label.ForeColor = System::Drawing::Color::Green;
+      this->label.Location = System::Drawing::Point(5, 100);
+    }
+    
+  private:
+    Label label;
+  };
+}
+
+pcf_startup (HelloWorld::MainForm)
+```
+
+TUnit :
+```
+#include <Pcf/Pcf>
+
+using namespace System;
+using namespace TUnit;
+
+namespace UnitTests {
+  class HelloWorldTest : public TestFixture {
+  public:
+    // The main entry point for the application.
+    static int Main(const Array<string>& args) {
+      return TUnit::UnitTest(args).Run();
+    }
+    
+  protected:
+    void SetString() {
+      string s = "Hello, World!";
+      Assert::AreEqual("Hello, World!", s, pcf_current_information);
+    }
+  };
+
+  pcf_test(HelloWorldTest, SetString);
+}
+
+pcf_startup (UnitTests::HelloWorldTest)
+```
+
 #Namespace
 - **Pcf::System** namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
 - **Pcf::System::Collections** namespace contain types that define various standard, specialized, and generic collection objects.
