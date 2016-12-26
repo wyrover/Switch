@@ -75,6 +75,34 @@ namespace HelloWorld {
 pcf_startup (HelloWorld::MainForm)
 ```
 
+TUnit :
+```
+#include <Pcf/Pcf>
+
+using namespace System;
+using namespace TUnit;
+
+namespace UnitTests {
+  class HelloWorldTest : public TestFixture {
+  public:
+    // The main entry point for the application.
+    static int Main(const Array<string>& args) {
+      return TUnit::UnitTest(args).Run();
+    }
+    
+  protected:
+    void SetString() {
+      string s = "Hello, World!";
+      Assert::AreEquals("Hello, World!", s, pcf_current_information);
+    }
+  };
+
+  pcf_test(HelloWorldTest, SetString);
+}
+
+pcf_startup (UnitTests::HelloWorldTest)
+```
+
 #Namespace
 - **Pcf::System** namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
 - **Pcf::System::Collections** namespace contain types that define various standard, specialized, and generic collection objects.
