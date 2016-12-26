@@ -93,7 +93,7 @@ namespace UnitTests {
   protected:
     void SetString() {
       string s = "Hello, World!";
-      Assert::AreEquals("Hello, World!", s, pcf_current_information);
+      Assert::AreEqual("Hello, World!", s, pcf_current_information);
     }
   };
 
