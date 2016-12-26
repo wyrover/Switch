@@ -15,6 +15,29 @@ The framework is composed of 4 libraries :
 - **Pcf.Forms** : The Pcf.Forms library contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system.
 - **Pcf.TUnit** : The Pcf.TUnit library contains unit testing framework.
 
+#Examples
+Hello World
+'''
+#include <Pcf/Pcf>
+
+using namespace System;
+
+namespace HelloWorld {
+  class Program {
+  public:
+    static void Main() {
+      Console::WriteLine("Hello, World!");
+    }
+  };
+}
+
+pcf_startup (HelloWorld::Program)
+
+// This code produces the following output if 3 is entered on command line:
+//
+// Hello, World!
+'''
+
 #Namespace
 - **Pcf::System** namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
 - **Pcf::System::Collections** namespace contain types that define various standard, specialized, and generic collection objects.
