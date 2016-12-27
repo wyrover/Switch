@@ -1,8 +1,0 @@
-var searchData=
-[
-  ['x',['X',['../namespace_pcf_1_1_system_a89fbd6505869d901a61d5df9635a82a1.html#a89fbd6505869d901a61d5df9635a82a1a02129bb861061d1a052c592e2dc6b383',1,'Pcf::System::X()'],['../namespace_pcf_1_1_system_1_1_windows_1_1_forms_a37ff2f7715f5c412391bf338a9f31c2c.html#a37ff2f7715f5c412391bf338a9f31c2ca02129bb861061d1a052c592e2dc6b383',1,'Pcf::System::Windows::Forms::X()']]],
-  ['xbox',['Xbox',['../namespace_pcf_1_1_system_a972ed99c85c3d4c8077be935fd3c5ee3.html#a972ed99c85c3d4c8077be935fd3c5ee3a183709ebe3a1d675014d32b94ad7ed94',1,'Pcf::System']]],
-  ['xbutton1',['XButton1',['../namespace_pcf_1_1_system_1_1_windows_1_1_forms_a37ff2f7715f5c412391bf338a9f31c2c.html#a37ff2f7715f5c412391bf338a9f31c2caac8e5aa1a680bd64e6fb9313db5b4428',1,'Pcf::System::Windows::Forms::XButton1()'],['../namespace_pcf_1_1_system_1_1_windows_1_1_forms_a3529914c22a65b6e1f80ce2222ef4a7b.html#a3529914c22a65b6e1f80ce2222ef4a7baac8e5aa1a680bd64e6fb9313db5b4428',1,'Pcf::System::Windows::Forms::XButton1()']]],
-  ['xbutton2',['XButton2',['../namespace_pcf_1_1_system_1_1_windows_1_1_forms_a37ff2f7715f5c412391bf338a9f31c2c.html#a37ff2f7715f5c412391bf338a9f31c2ca7af9d9a16f813c045a3dbe8068a13f4d',1,'Pcf::System::Windows::Forms::XButton2()'],['../namespace_pcf_1_1_system_1_1_windows_1_1_forms_a3529914c22a65b6e1f80ce2222ef4a7b.html#a3529914c22a65b6e1f80ce2222ef4a7ba7af9d9a16f813c045a3dbe8068a13f4d',1,'Pcf::System::Windows::Forms::XButton2()']]],
-  ['xonxoff',['XOnXOff',['../namespace_pcf_1_1_system_1_1_i_o_1_1_ports_a30184b9f37de02de4a902835f9abd3bc.html#a30184b9f37de02de4a902835f9abd3bcab62069d38e6336d2dd84568fded2f144',1,'Pcf::System::IO::Ports']]]
-];
