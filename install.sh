@@ -88,7 +88,7 @@ function MakeDocumentation() {
   echo ""
   MakeProject Libraries Pcf doc debug
   local currentFolder=`pwd`
-  CheckError open $sources_path/Doc/html/index.html
+  CheckError open $sources_path/Help/html/index.html
   cd $currentFolder
 }
 
@@ -136,14 +136,6 @@ if [[ "$targets" == "All" || "$targets" == "Libraries" || "$targets" == "Applica
   for library in ${libraries[@]}; do
     MakeInstall Libraries $library Debug
     MakeInstall Libraries $library Release
-  done
-fi
-
-if [[ "$targets" == "All" || "$targets" == "Libraries" || "$targets" == "Applications" ]]; then
-  local examples=( Example ) 
-  for example in ${examples[@]}; do
-    MakeInstall Examples $exemple Debug
-    MakeInstall Examples $exemple Release
   done
 fi
 

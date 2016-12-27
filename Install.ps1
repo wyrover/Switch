@@ -71,7 +71,7 @@ function MakeDocumentation() {
   $currentFolder = Get-Location
   Set-Location Libraries/Pcf/Documentations/
   doxygen Pcf.Doxyfile
-  Invoke-Item ../../../../Help/html/index.html
+  Invoke-Item ../../Help/html/index.html
   Set-Location $currentFolder
 }
 
