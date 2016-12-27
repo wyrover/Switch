@@ -111,16 +111,9 @@ if ($targets.Equals("All") -Or $targets.Equals("Applications") -Or $targets.Equa
   }
 }
 
-if ($targets.Equals("All") -Or $targets.Equals("Applications") -Or $targets.Equals("Libraries")) {
-  $examples = @("Examples") 
-  ForEach ($example In $examples) {
-    MakeInstall Examples $example Debug
-    MakeInstall Examples $example Release
-  }
-}
-
 if ($targets.Equals("All") -Or $targets.Equals("Applications")) {
-  $applications = @("ConsoleApp", "CountsLines", "FormHelloWorld", "PasswordGenerator", "TUnit") 
+  $applications = @("ConsoleApp", "CountsLines") 
+  #$applications = @("ConsoleApp", "CountsLines", "FormHelloWorld", "PasswordGenerator", "TUnit") 
   ForEach ($application In $applications) {
     MakeTarget Applications $application Debug
     MakeTarget Applications $application Release
