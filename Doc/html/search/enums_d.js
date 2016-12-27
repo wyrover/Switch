@@ -1,0 +1,20 @@
+var searchData=
+[
+  ['seekorigin',['SeekOrigin',['../namespace_pcf_1_1_system_1_1_i_o_a6812baecd9b47115089fc30a873a06de.html#a6812baecd9b47115089fc30a873a06de',1,'Pcf::System::IO']]],
+  ['selectmode',['SelectMode',['../namespace_pcf_1_1_system_1_1_net_1_1_sockets_a9c422d6abfb956b08c373ce0f3f773f0.html#a9c422d6abfb956b08c373ce0f3f773f0',1,'Pcf::System::Net::Sockets']]],
+  ['serialdata',['SerialData',['../namespace_pcf_1_1_system_1_1_i_o_1_1_ports_a58c313525b42ff4814ba5ab0a8414d21.html#a58c313525b42ff4814ba5ab0a8414d21',1,'Pcf::System::IO::Ports']]],
+  ['serialerror',['SerialError',['../namespace_pcf_1_1_system_1_1_i_o_1_1_ports_aef37811ae1316e6e89dd568fa9b7c5da.html#aef37811ae1316e6e89dd568fa9b7c5da',1,'Pcf::System::IO::Ports']]],
+  ['serialpinchange',['SerialPinChange',['../namespace_pcf_1_1_system_1_1_i_o_1_1_ports_a8c93101eb791d82843f4324f302bfa6a.html#a8c93101eb791d82843f4324f302bfa6a',1,'Pcf::System::IO::Ports']]],
+  ['shortcut',['Shortcut',['../namespace_pcf_1_1_system_1_1_windows_1_1_forms_a4d0f1da388cbe68c51db7ad78f1e887e.html#a4d0f1da388cbe68c51db7ad78f1e887e',1,'Pcf::System::Windows::Forms']]],
+  ['socketerror',['SocketError',['../namespace_pcf_1_1_system_1_1_net_1_1_sockets_aab51737e53ad3183810ed6f90b1b3d7b.html#aab51737e53ad3183810ed6f90b1b3d7b',1,'Pcf::System::Net::Sockets']]],
+  ['socketflags',['SocketFlags',['../namespace_pcf_1_1_system_1_1_net_1_1_sockets_a1e58a32fa0f6eb658bcaaadce1ff980b.html#a1e58a32fa0f6eb658bcaaadce1ff980b',1,'Pcf::System::Net::Sockets']]],
+  ['socketinformationoptions',['SocketInformationOptions',['../namespace_pcf_1_1_system_1_1_net_1_1_sockets_a6783fe5a9004a3e8c94fef999bd07d87.html#a6783fe5a9004a3e8c94fef999bd07d87',1,'Pcf::System::Net::Sockets']]],
+  ['socketoptionlevel',['SocketOptionLevel',['../namespace_pcf_1_1_system_1_1_net_1_1_sockets_aa36d6b738a5375473656beac5467e3ee.html#aa36d6b738a5375473656beac5467e3ee',1,'Pcf::System::Net::Sockets']]],
+  ['socketoptionname',['SocketOptionName',['../namespace_pcf_1_1_system_1_1_net_1_1_sockets_a5c9170af07f52305ecb4884f500ba05b.html#a5c9170af07f52305ecb4884f500ba05b',1,'Pcf::System::Net::Sockets']]],
+  ['socketshutdown',['SocketShutdown',['../namespace_pcf_1_1_system_1_1_net_1_1_sockets_a5a01356ab1bccf70f53f0562657c2541.html#a5a01356ab1bccf70f53f0562657c2541',1,'Pcf::System::Net::Sockets']]],
+  ['sockettype',['SocketType',['../namespace_pcf_1_1_system_1_1_net_1_1_sockets_a0cab27ef5545f4fc92bc3f4ce4bd9e3e.html#a0cab27ef5545f4fc92bc3f4ce4bd9e3e',1,'Pcf::System::Net::Sockets']]],
+  ['specialfolder',['SpecialFolder',['../class_pcf_1_1_system_1_1_environment_ab7ffd7aae45c9a97dcbae40a1115adc9.html#ab7ffd7aae45c9a97dcbae40a1115adc9',1,'Pcf::System::Environment']]],
+  ['stopbits',['StopBits',['../namespace_pcf_1_1_system_1_1_i_o_1_1_ports_ad355d4b373a0da98bb4be2cd9b6da17e.html#ad355d4b373a0da98bb4be2cd9b6da17e',1,'Pcf::System::IO::Ports']]],
+  ['stringalignment',['StringAlignment',['../namespace_pcf_1_1_system_1_1_drawing_a4be87fcf5bac56ceb7660ac5b10bd282.html#a4be87fcf5bac56ceb7660ac5b10bd282',1,'Pcf::System::Drawing']]],
+  ['stringsplitoptions',['StringSplitOptions',['../namespace_pcf_1_1_system_a428151851412250d0e544235b112c1f5.html#a428151851412250d0e544235b112c1f5',1,'Pcf::System']]]
+];
