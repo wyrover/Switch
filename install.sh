@@ -88,7 +88,7 @@ function MakeDocumentation() {
   echo ""
   MakeProject Libraries Pcf doc debug
   local currentFolder=`pwd`
-  CheckError open $sources_path/../../Help/html/index.html
+  CheckError open $sources_path/Doc/html/index.html
   cd $currentFolder
 }
 
