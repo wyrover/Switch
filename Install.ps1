@@ -33,9 +33,9 @@ function ShowUsage() {
 # $3 target the target to build
 function MakeProject($category, $project, $target, $configuration) {
   $currentFolder = Get-Location
-  New-Item -force -ItemType Directory ..\Build\$category\$project
-  Set-Location ..\Build\$category\$project
-  cmake -G "$generator" ..\..\..\Sources\$category\$project\
+  New-Item -force -ItemType Directory Build\$category\$project
+  Set-Location Build\$category\$project
+  cmake -G "$generator" ..\..\..\$category\$project\
   Devenv "$project.sln" /build $configuration /project $target
   Set-Location $currentFolder
 }
@@ -71,7 +71,7 @@ function MakeDocumentation() {
   $currentFolder = Get-Location
   Set-Location Libraries/Pcf/Documentations/
   doxygen Pcf.Doxyfile
-  Invoke-Item ../../../../Help/html/index.html
+  Invoke-Item ../../../Help/html/index.html
   Set-Location $currentFolder
 }
 
@@ -96,7 +96,7 @@ if ($targets.Equals("All") -Or $targets.Equals("Applications") -Or $targets.Equa
 }
 
 if ($targets.Equals("All") -Or $targets.Equals("Applications") -Or $targets.Equals("Libraries") -Or $targets.Equals("ThirdParties")) {
-  $thirdParties = @("fltk", "zlib", "call_stack", "easywsclient", "Fl_Gel_Tabs", "gel_button", "gtest", "jpeglib", "libcurl", "libpng", "Rs232") 
+  $thirdParties = @("zlib", "call_stack", "easywsclient", "gtest", "jpeglib", "libcurl", "libpng", "Rs232") 
   ForEach ($thirdParty In $thirdParties) {
     MakeInstall ThirdParties $thirdParty Debug
     MakeInstall ThirdParties $thirdParty Release
