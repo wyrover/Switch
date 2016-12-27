@@ -1741,4 +1741,80 @@ The command that should end the block seems to be missing!
 /Users/yves/Projects/Pcf/Sources/Libraries/Pcf/TUnit/Includes/Pcf/TUnit/Expect.h:600: warning: The following parameters of Pcf::TUnit::Expect::IsEmpty(const System::Collections::Generic::IEnumerable< TItem > &collection) are not documented:
   parameter 'collection'
 /Users/yves/Projects/Pcf/Sources/Libraries/Pcf/TUnit/Includes/Pcf/TUnit/Expect.h:612: warning: argument 'value' of command @param is not found in the argument list of Pcf::TUnit::Expect::IsEmpty(const System::Collections::Generic::IEnumerable< TItem > &collection, const string &message)
-/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/TUnit/Includes/Pcf/TUnit/Expect.h:612: warning: The following parameters of Pcf::TUn
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/TUnit/Includes/Pcf/TUnit/Expect.h:612: warning: The following parameters of Pcf::TUnit::Expect::IsEmpty(const System::Collections::Generic::IEnumerable< TItem > &collection, const string &message) are not documented:
+  parameter 'collection'
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/TUnit/Includes/Pcf/TUnit/Expect.h:625: warning: argument 'value' of command @param is not found in the argument list of Pcf::TUnit::Expect::IsEmpty(const System::Collections::Generic::IEnumerable< TItem > &collection, const CurrentInformation &currentInformation)
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/TUnit/Includes/Pcf/TUnit/Expect.h:625: warning: The following parameters of Pcf::TUnit::Expect::IsEmpty(const System::Collections::Generic::IEnumerable< TItem > &collection, const CurrentInformation &currentInformation) are not documented:
+  parameter 'collection'
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/TUnit/Includes/Pcf/TUnit/Expect.h:638: warning: argument 'value' of command @param is not found in the argument list of Pcf::TUnit::Expect::IsEmpty(const System::Collections::Generic::IEnumerable< TItem > &collection, const string &message, const CurrentInformation &currentInformation)
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/TUnit/Includes/Pcf/TUnit/Expect.h:638: warning: The following parameters of Pcf::TUnit::Expect::IsEmpty(const System::Collections::Generic::IEnumerable< TItem > &collection, const string &message, const CurrentInformation &currentInformation) are not documented:
+  parameter 'collection'
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/TUnit/Includes/Pcf/TUnit/Expect.h:978: warning: argument 'value' of command @param is not found in the argument list of Pcf::TUnit::Expect::IsNotEmpty(const System::Collections::Generic::IEnumerable< TItem > &collection)
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/TUnit/Includes/Pcf/TUnit/Expect.h:978: warning: The following parameters of Pcf::TUnit::Expect::IsNotEmpty(const System::Collections::Generic::IEnumerable< TItem > &collection) are not documented:
+  parameter 'collection'
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/TUnit/Includes/Pcf/TUnit/Expect.h:990: warning: argument 'value' of command @param is not found in the argument list of Pcf::TUnit::Expect::IsNotEmpty(const System::Collections::Generic::IEnumerable< TItem > &collection, const string &message)
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/TUnit/Includes/Pcf/TUnit/Expect.h:990: warning: The following parameters of Pcf::TUnit::Expect::IsNotEmpty(const System::Collections::Generic::IEnumerable< TItem > &collection, const string &message) are not documented:
+  parameter 'collection'
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/TUnit/Includes/Pcf/TUnit/Expect.h:1003: warning: argument 'value' of command @param is not found in the argument list of Pcf::TUnit::Expect::IsNotEmpty(const System::Collections::Generic::IEnumerable< TItem > &collection, const CurrentInformation &currentInformation)
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/TUnit/Includes/Pcf/TUnit/Expect.h:1003: warning: The following parameters of Pcf::TUnit::Expect::IsNotEmpty(const System::Collections::Generic::IEnumerable< TItem > &collection, const CurrentInformation &currentInformation) are not documented:
+  parameter 'collection'
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/TUnit/Includes/Pcf/TUnit/Expect.h:1016: warning: argument 'value' of command @param is not found in the argument list of Pcf::TUnit::Expect::IsNotEmpty(const System::Collections::Generic::IEnumerable< TItem > &collection, const string &message, const CurrentInformation &currentInformation)
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/TUnit/Includes/Pcf/TUnit/Expect.h:1016: warning: The following parameters of Pcf::TUnit::Expect::IsNotEmpty(const System::Collections::Generic::IEnumerable< TItem > &collection, const string &message, const CurrentInformation &currentInformation) are not documented:
+  parameter 'collection'
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/TUnit/Includes/Pcf/TUnit/Expect.h:2030: warning: argument 'exceptionType' of command @param is not found in the argument list of Pcf::TUnit::Expect::Throws(const System::Delegate< void > &statement)
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/TUnit/Includes/Pcf/TUnit/Expect.h:2042: warning: argument 'exceptionType' of command @param is not found in the argument list of Pcf::TUnit::Expect::Throws(const System::Delegate< void > &statement, const string &message)
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/TUnit/Includes/Pcf/TUnit/Expect.h:2055: warning: argument 'exceptionType' of command @param is not found in the argument list of Pcf::TUnit::Expect::Throws(const System::Delegate< void > &statement, const CurrentInformation &currentInformation)
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/TUnit/Includes/Pcf/TUnit/Expect.h:2068: warning: argument 'exceptionType' of command @param is not found in the argument list of Pcf::TUnit::Expect::Throws(const System::Delegate< void > &statement, const string &message, const CurrentInformation &currentInformation)
+</Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/System/Collections/Generic/>:1: warning: Unsupported xml/html tag <T> found
+</Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/System/Collections/Generic/>:1: warning: Unsupported xml/html tag <T> found
+</Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/System/Collections/Generic/>:1: warning: Unsupported xml/html tag <T> found
+</Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/System/Collections/Generic/>:1: warning: Unsupported xml/html tag <T> found
+</Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/System/Collections/Generic/>:1: warning: Unsupported xml/html tag <T> found
+</Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/System/Collections/Generic/>:1: warning: Unsupported xml/html tag <T> found
+</Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/System/Collections/Generic/>:1: warning: Unsupported xml/html tag <T> found
+</Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/System/Collections/Generic/>:1: warning: Unsupported xml/html tag <T> found
+</Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/System/Collections/Generic/>:1: warning: Unsupported xml/html tag <T> found
+</Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/System/Collections/Generic/>:1: warning: Unsupported xml/html tag <T> found
+</Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/System/Collections/Generic/>:1: warning: Unsupported xml/html tag <T> found
+</Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/System/Collections/Generic/>:1: warning: Unsupported xml/html tag <T> found
+</Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/System/Collections/Generic/>:1: warning: Unsupported xml/html tag <T> found
+</Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/System/Collections/ObjectModel/>:1: warning: Unsupported xml/html tag <T> found
+</Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/System/Collections/ObjectModel/>:1: warning: Unsupported xml/html tag <T> found
+</Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/>:1: warning: Unsupported xml/html tag <T> found
+</Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/>:1: warning: Unsupported xml/html tag <T> found
+</Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/>:1: warning: Unsupported xml/html tag <T> found
+</Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/System/>:1: warning: Unsupported xml/html tag <T> found
+</Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/System/>:1: warning: Unsupported xml/html tag <T> found
+</Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/System/Threading/Tasks/>:1: warning: Unsupported xml/html tag <TResult> found
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Documentations/Reference Guide/Main.h:31: warning: unable to resolve reference to `You' for \ref command
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/System/Buffer.h:20: warning: explicit link request to 'bool' could not be resolved
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/System/Buffer.h:20: warning: explicit link request to 'char' could not be resolved
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/System/Buffer.h:20: warning: explicit link request to 'void' could not be resolved
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/System/Buffer.h:20: warning: explicit link request to 'float' could not be resolved
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/System/Buffer.h:20: warning: explicit link request to 'double' could not be resolved
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/System/Buffer.h:20: warning: explicit link request to 'bool' could not be resolved
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/System/Buffer.h:20: warning: explicit link request to 'char' could not be resolved
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/System/Buffer.h:20: warning: explicit link request to 'void' could not be resolved
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/System/Buffer.h:20: warning: explicit link request to 'float' could not be resolved
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/System/Buffer.h:20: warning: explicit link request to 'double' could not be resolved
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/System/Collections/Generic/Comparer.h:2: warning: Unsupported xml/html tag <T> found
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/System/Collections/Generic/HashSet.h:2: warning: Unsupported xml/html tag <T> found
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/System/Collections/Generic/ICollection.h:2: warning: Unsupported xml/html tag <T> found
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/System/Collections/Generic/IComparer.h:2: warning: Unsupported xml/html tag <T> found
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/System/Collections/Generic/IEnumerable.h:2: warning: Unsupported xml/html tag <T> found
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/System/Collections/Generic/IEnumerator.h:2: warning: Unsupported xml/html tag <T> found
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/System/Collections/Generic/IList.h:2: warning: Unsupported xml/html tag <T> found
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/System/Collections/Generic/ISet.h:2: warning: Unsupported xml/html tag <T> found
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/System/Collections/Generic/LinkedList.h:2: warning: Unsupported xml/html tag <T> found
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/System/Collections/Generic/List.h:2: warning: Unsupported xml/html tag <T> found
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/System/Collections/Generic/Queue.h:2: warning: Unsupported xml/html tag <T> found
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/System/Collections/Generic/SortedSet.h:2: warning: Unsupported xml/html tag <T> found
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/System/Collections/Generic/Stack.h:2: warning: Unsupported xml/html tag <T> found
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/System/Collections/ObjectModel/Collection.h:2: warning: Unsupported xml/html tag <T> found
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/System/Collections/ObjectModel/ReadOnlyCollection.h:2: warning: Unsupported xml/html tag <T> found
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/System/Threading/Tasks/TaskTResult.h:2: warning: Unsupported xml/html tag <TResult> found
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/System/Allocator.h:2: warning: Unsupported xml/html tag <T> found
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/System/Predicate.h:2: warning: Unsupported xml/html tag <T> found
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/InitializerList.h:2: warning: Unsupported xml/html tag <T> found
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/SharedPointer.h:2: warning: Unsupported xml/html tag <T> found
+/Users/yves/Projects/Pcf/Sources/Libraries/Pcf/Core/Includes/Pcf/UniquePointer.h:2: warning: Unsupported xml/html tag <T> found
