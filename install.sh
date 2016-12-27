@@ -124,7 +124,7 @@ if [[ "$targets" == "All" || "$targets" == "Applications" || "$targets" == "Libr
 fi
 
 if [[ "$targets" == "All" || "$targets" == "ThirdParties" || "$targets" == "Libraries" || "$targets" == "Applications" ]]; then
-  local thirdParties=( fltk zlib call_stack easywsclient Fl_Gel_Tabs gel_button gtest jpeglib libcurl libpng Rs232 ) 
+  local thirdParties=( zlib call_stack easywsclient gtest jpeglib libcurl libpng Rs232 ) 
   for thirdParty in ${thirdParties[@]}; do
     MakeInstall ThirdParties $thirdParty Debug
     MakeInstall ThirdParties $thirdParty Release
@@ -139,16 +139,9 @@ if [[ "$targets" == "All" || "$targets" == "Libraries" || "$targets" == "Applica
   done
 fi
 
-if [[ "$targets" == "All" || "$targets" == "Libraries" || "$targets" == "Applications" ]]; then
-  local examples=( Example ) 
-  for example in ${examples[@]}; do
-    MakeInstall Examples $exemple Debug
-    MakeInstall Examples $exemple Release
-  done
-fi
-
 if [[ "$targets" == "All" || "$targets" == "Applications" ]]; then
-  local applications=( ConsoleApp CountsLines FormHelloWorld PasswordGenerator TUnit )
+  #local applications=( ConsoleApp CountsLines FormHelloWorld PasswordGenerator TUnit )
+  local applications=( ConsoleApp CountsLines )
   for application in ${applications[@]}; do
     MakeTarget Applications $application Debug
     MakeTarget Applications $application Release
