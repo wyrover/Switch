@@ -18,14 +18,14 @@ namespace PcfUnitTests {
     }
     
     void CreateDirectory() {
-      string testPath = System::IO::Path::Combine(workingDirectory, "Test");
+      string testPath = System::IO::Path::Combine(workingDirectory, "TestFolder");
       TUnit::Assert::IsFalse(System::IO::Directory::Exists(testPath));
       System::IO::Directory::CreateDirectory(testPath);
       TUnit::Assert::IsTrue(System::IO::Directory::Exists(testPath));
     }
     
     void CreateAndDeleteAnEmptyDirectory() {
-      string testPath = System::IO::Path::Combine(workingDirectory, "Test");
+      string testPath = System::IO::Path::Combine(workingDirectory, "TestFolder");
       TUnit::Assert::IsFalse(System::IO::Directory::Exists(testPath));
       System::IO::Directory::CreateDirectory(testPath);
       TUnit::Assert::IsTrue(System::IO::Directory::Exists(testPath));
@@ -34,7 +34,7 @@ namespace PcfUnitTests {
     }
     
     void CreateAndDeleteANonEmptyDirectory() {
-      string testPath = System::IO::Path::Combine(workingDirectory, "Test");
+      string testPath = System::IO::Path::Combine(workingDirectory, "TestFolder");
       TUnit::Assert::IsFalse(System::IO::Directory::Exists(testPath));
       System::IO::Directory::CreateDirectory(testPath);
       System::IO::Directory::CreateDirectory(System::IO::Path::Combine(testPath, "Directory 1"));

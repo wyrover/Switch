@@ -182,6 +182,10 @@ source_group(Sources\\Pcf\\System\\Windows REGULAR_EXPRESSION "/Sources/Pcf/Syst
 source_group(Sources\\Pcf\\System\\Windows\\Forms REGULAR_EXPRESSION "/Sources/Pcf/System/Windows/Forms/[-_,A-Za-z0-9]+\\.(c*|h*|m*)")
 source_group(Sources\\Pcf\\System\\Windows\\Forms\\VisualStyles REGULAR_EXPRESSION "/Sources/Pcf/System/Windows/Forms/VisualStyles/[-_,A-Za-z0-9]+\\.c*")
 
+if (BUILD_FORMS_MANUAL_TESTS)
+  add_subdirectory("ManualTests")
+endif ()
+
 if (BUILD_FORMS_UNIT_TESTS)
   add_subdirectory("UnitTests")
 endif ()
