@@ -33,6 +33,10 @@ void Thread::ThreadItem::RunWithOrWithoutParam(const object* obj, bool withParam
     this->state |= System::Threading::ThreadState::Stopped;
     this->endThreadEvent.Set();
     if (Enum<System::Threading::ThreadState>(this->state).HasFlag(System::Threading::ThreadState::Background)) {
+      if (this->thread.joinable()) {
+        this->detachedThreadId = this->thread.get_id();
+        this->thread.detach();
+      }
       std::lock_guard<std::recursive_mutex> lock(mutex);
       for (int i = 0; i < threads.Count; i++) {
         if (threads[i].data->managedThreadId == this->managedThreadId) {
@@ -46,8 +50,10 @@ void Thread::ThreadItem::RunWithOrWithoutParam(const object* obj, bool withParam
   try {
     this->SetNameThreadForDebugger();
     if (Enum<System::Threading::ThreadState>(this->state).HasFlag(ThreadState::Background) && this->thread.joinable()) {
-      this->detachedThreadId = this->thread.get_id();
-      this->thread.detach();
+      if (this->thread.joinable()) {
+        this->detachedThreadId = this->thread.get_id();
+        this->thread.detach();
+      }
     }
     if (this->priority != ThreadPriority::Normal)
       SetPriority();

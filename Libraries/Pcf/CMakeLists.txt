@@ -3,12 +3,12 @@ cmake_minimum_required(VERSION 3.0.2)
 project(Pcf VERSION 0.2.0)
 
 option(BUILD_CORE_INTEGRATION_TESTS "Build Core integration tests" OFF)
+option(BUILD_CORE_MANUAL_TESTS "Build Core manual unit tests" ON)
 option(BUILD_CORE_UNIT_TESTS "Build Core unit tests" ON)
 option(BUILD_DRAWING_UNIT_TESTS "Build Drawing unit tests" ON)
 option(BUILD_FORMS_MANUAL_TESTS "Build Forms manual unit tests" OFF)
 option(BUILD_FORMS_UNIT_TESTS "Build Forms unit tests" ON)
 option(BUILD_TUNIT_UNIT_TESTS "Build TUnit unit tests" ON)
-option(BUILD_TOOLS "Build tools" ON)
 
 include(Dependences.cmake)
 
@@ -60,10 +60,6 @@ add_subdirectory("Drawing")
 add_subdirectory("Forms")
 add_subdirectory("TUnit")
 add_subdirectory("Pcf")
-
-if (BUILD_TOOLS)
-  add_subdirectory("Tools")
-endif ()
 
 install(EXPORT ${PROJECT_NAME} DESTINATION cmake)
 install(FILES ${PROJECT_NAME}Config.cmake Dependences.cmake DESTINATION cmake)

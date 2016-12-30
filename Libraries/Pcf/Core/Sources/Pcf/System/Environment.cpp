@@ -4,13 +4,16 @@
 #include <cstring>
 #include <thread>
 
+#include "../../../Includes/Pcf/System/AccessViolationException.h"
 #include "../../../Includes/Pcf/System/Console.h"
 #include "../../../Includes/Pcf/System/Environment.h"
 #include "../../../Includes/Pcf/System/SystemVersion.h"
 #include "../../../Includes/Pcf/System/IO/Directory.h"
 #include "../../../Includes/Pcf/System/IO/DirectoryNotFoundException.h"
 #include "../../../Includes/Pcf/System/Diagnostics/StackTrace.h"
+#include "../../../Includes/Pcf/System/SystemException.h"
 #include "../../../Includes/Pcf/System/Threading/Thread.h"
+#include "../../../Includes/Pcf/System/Threading/AbandonedMutexException.h"
 #include "../../__OS/CoreApi.h"
 
 using namespace System;
@@ -61,6 +64,44 @@ namespace {
     }
   };
   
+  class SignalCatcher {
+  public:
+    SignalCatcher() {
+      signal(SIGILL, SignalCatcher::SignalIllegalInstructionHandler);
+      signal(SIGABRT, SignalCatcher::SignalAbortExceptionHandler);
+      signal(SIGFPE, SignalCatcher::SignalFloatingPointExceptionHandler);
+      signal(SIGSEGV, SignalCatcher::SignalSegmentationViolationHandler);
+    }
+    
+    ~SignalCatcher() {
+      signal(SIGILL, SIG_DFL);
+      signal(SIGABRT, SIG_DFL);
+      signal(SIGFPE, SIG_DFL);
+      signal(SIGSEGV, SIG_DFL);
+    }
+    
+    static void SignalIllegalInstructionHandler(int32 signal) {
+      ::signal(signal, SignalCatcher::SignalIllegalInstructionHandler);
+      throw System::InvalidOperationException(pcf_current_information);
+    }
+    
+    static void SignalAbortExceptionHandler(int32 signal) {
+      ::signal(signal, SignalCatcher::SignalAbortExceptionHandler);
+      //throw System::Threading::ThreadAbortException(pcf_current_information);
+      exit(-1);
+    }
+    
+    static void SignalFloatingPointExceptionHandler(int32 signal) {
+      ::signal(signal, SignalCatcher::SignalFloatingPointExceptionHandler);
+      throw System::ArithmeticException(pcf_current_information);
+    }
+    
+    static void SignalSegmentationViolationHandler(int32 signal) {
+      ::signal(signal, SignalCatcher::SignalSegmentationViolationHandler);
+      throw System::AccessViolationException(pcf_current_information);
+    }
+  };
+
   Collections::Specialized::StringDictionary GetEnvironmentVariables() {
     Collections::Specialized::StringDictionary envs;
     for (int32 index = 0; environ[index] != null; index++) {
@@ -80,8 +121,9 @@ namespace {
   
   int32 exitCode;
   UniquePointer<ConsoleChangeCodePage> consoleChangeCodePage;
-}  UniquePointer<ConsoleInterceptSignals> consoleInterceptSignals;
-
+  UniquePointer<ConsoleInterceptSignals> consoleInterceptSignals;
+  UniquePointer<SignalCatcher> signalCatcher;
+}
 
 Property<String, ReadOnly> Environment::CommandLine {
   [] {
@@ -257,6 +299,7 @@ Array<string> Environment::SetCommandLineArgs(char* argv[], int argc) {
   
   consoleChangeCodePage = UniquePointer<ConsoleChangeCodePage>::Create();
   consoleInterceptSignals = UniquePointer<ConsoleInterceptSignals>::Create();
+  signalCatcher = UniquePointer<SignalCatcher>::Create();
   System::Threading::Thread::RegisterCurrentThread();
   commandLineArgs = Array<string>(std::vector<string>(argv, argv+argc));
   return Array<string>(std::vector<string>(argv+1, argv+argc));

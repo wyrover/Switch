@@ -1,4 +1,3 @@
-#include <csignal>
 #include "../../../Includes/Pcf/System/Exception.h"
 #include "../../../Includes/Pcf/System/Environment.h"
 #include "../../../Includes/Pcf/System/Diagnostics/StackTrace.h"
@@ -125,49 +124,3 @@ string Exception::GetStackTrace(const string& filter) const {
   }
   return output;
 }
-
-#include "../../../Includes/Pcf/System/AccessViolationException.h"
-#include "../../../Includes/Pcf/System/SystemException.h"
-#include "../../../Includes/Pcf/System/Threading/AbandonedMutexException.h"
-
-namespace {
-  class SignalCatcher {
-  public:
-    SignalCatcher() {
-      signal(SIGILL, SignalCatcher::SignalIllegalInstructionHandler);
-      signal(SIGABRT, SignalCatcher::SignalAbortExceptionHandler);
-      signal(SIGFPE, SignalCatcher::SignalFloatingPointExceptionHandler);
-      signal(SIGSEGV, SignalCatcher::SignalSegmentationViolationHandler);
-    }
-    
-    ~SignalCatcher() {
-      signal(SIGILL, SIG_DFL);
-      signal(SIGABRT, SIG_DFL);
-      signal(SIGFPE, SIG_DFL);
-      signal(SIGSEGV, SIG_DFL);
-    }
-    
-    static void SignalIllegalInstructionHandler(int32 signal) {
-      ::signal(signal, SignalCatcher::SignalIllegalInstructionHandler);
-      throw System::InvalidOperationException(pcf_current_information);
-    }
-    
-    static void SignalAbortExceptionHandler(int32 signal) {
-      ::signal(signal, SignalCatcher::SignalAbortExceptionHandler);
-      //throw System::Threading::ThreadAbortException(pcf_current_information);
-      exit(-1);
-    }
-    
-    static void SignalFloatingPointExceptionHandler(int32 signal) {
-      ::signal(signal, SignalCatcher::SignalFloatingPointExceptionHandler);
-      throw System::ArithmeticException(pcf_current_information);
-    }
-    
-    static void SignalSegmentationViolationHandler(int32 signal) {
-      ::signal(signal, SignalCatcher::SignalSegmentationViolationHandler);
-      throw System::AccessViolationException(pcf_current_information);
-    }
-  };
-}
-
-static SignalCatcher signalCatcher;
