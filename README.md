@@ -62,7 +62,7 @@ namespace HelloWorld {
       this->label.Parent = *this;
       this->label.Text = "Hello, World!";
       this->label.AutoSize = true;
-      this->label.Font = System::Drawing::Font("Arial", 46, System::Drawing::FontStyle::Bold|System::Drawing::FontStyle::Italic);
+      this->label.Font = System::Drawing::Font("Arial", 46, System::Drawing::FontStyle::Bold | System::Drawing::FontStyle::Italic);
       this->label.ForeColor = System::Drawing::Color::Green;
       this->label.Location = System::Drawing::Point(5, 100);
     }
