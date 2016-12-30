@@ -6,7 +6,7 @@ Portable C++ Framework
 - written in efficient, modern C++14;
 - and highly portable and available on many different platforms (Windows, Mac Os X, Linux);
 
-![GitHub Logo](Libraries/Pcf/Core/Images/Pcf.png)
+![GitHub Logo](Documentations/Images/Pcf.png)
 
 #Libraries
 The framework is composed of 4 libraries :
