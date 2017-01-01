@@ -14,6 +14,6 @@ namespace HelloWorld {
 
 pcf_startup (HelloWorld::Program)
 
-// This code produces the following output if 3 is entered on command line:
+// This code produces the following output:
 //
 // Hello, World!

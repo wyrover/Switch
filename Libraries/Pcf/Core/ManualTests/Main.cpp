@@ -9,15 +9,6 @@ namespace Examples {
   class Program {
   public:
     static void Main(const Array<string>& args) {
-      UniquePointer<HttpWebRequest> httpWebRequest = as<HttpWebRequest>(WebRequest::Create("http://httpbin.org/encoding/utf8"));
-      //string str = System::IO::StreamReader(httpWebRequest->GetResponse().GetResponseStream()).ReadToEnd();
-      //Console::WriteLine(str);
-      
-      System::IO::StreamReader sr(httpWebRequest->GetResponse().GetResponseStream());
-      while (!sr.EndOfStream) {
-        Console::WriteLine("// {0}", sr.ReadLine());
-      }
-      
       //Process process = Process::Start("http://www.google.com");
       //Console::WriteLine(process.StandardOutput().ReadToEnd());
       
@@ -29,7 +20,6 @@ namespace Examples {
       //int32 exitCode = WaitEndProcess(processId);
       //Console::WriteLine("[Process {0}] End with exitCode = {1}", GetCurrentProcess(), exitCode);
       
-      /*
       for (auto process : Process::GetProcesses()) {
         try {
           Console::WriteLine(process);
@@ -40,7 +30,6 @@ namespace Examples {
       Console::WriteLine("__________________________________");
       Console::WriteLine(Process::GetCurrentProcess());
       Console::WriteLine("__________________________________");
-       */
 
       /*
       Console::WriteLine("[Process {0}] Create", GetCurrentProcess());
