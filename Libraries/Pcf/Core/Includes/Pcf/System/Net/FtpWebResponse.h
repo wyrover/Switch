@@ -22,7 +22,7 @@ namespace Pcf {
           pcf_get {return this->GetStatusDescription();}
         };
         
-        SharedPointer<System::IO::Stream> GetResponseStream() override;
+        WebResponse::WebResponseStream GetResponseStream() override;
 
       protected:
         FtpWebResponse();

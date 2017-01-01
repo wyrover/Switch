@@ -24,7 +24,7 @@ namespace Pcf {
           pcf_get {return this->GetStatusDescription();}
         };
         
-        SharedPointer<System::IO::Stream> GetResponseStream();
+        WebResponse::WebResponseStream GetResponseStream() override;
         
       protected:
         HttpWebResponse();

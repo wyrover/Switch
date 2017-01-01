@@ -19,7 +19,7 @@ HttpWebRequest::~HttpWebRequest() {
   Curl::FreeList(this->header);
 }
 
-SharedPointer<System::IO::Stream> HttpWebRequest::GetRequestStream() {
+WebRequest::WebRequestStream HttpWebRequest::GetRequestStream() {
   if (!this->contentType.IsEmpty()) {
     string contentType = string::Format("Content-Type: {0}", this->contentType);
     this->header = Curl::AppendToList(this->header, contentType.Data());

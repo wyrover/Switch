@@ -20,9 +20,9 @@ namespace Pcf {
           pcf_set {this->SetUseBinary(value);}
         };
         
-        WebResponse& GetResponse();
+        WebResponse& GetResponse() override;
 
-        SharedPointer<System::IO::Stream> GetRequestStream();
+        WebRequest::WebRequestStream GetRequestStream() override;
         
       protected:
         FtpWebRequest(const string& uri);
@@ -30,8 +30,8 @@ namespace Pcf {
         FtpWebRequest(const FtpWebRequest& ftpWebRequest) = delete;
         FtpWebRequest operator =(const FtpWebRequest& ftpWebRequest) = delete;
 
-        WebResponse& GetInternalResponse();
-        void Finished(int32 error);
+        WebResponse& GetInternalResponse() override;
+        void Finished(int32 error) override;
 
         System::Net::FtpWebResponse ftpWebResponse;
 

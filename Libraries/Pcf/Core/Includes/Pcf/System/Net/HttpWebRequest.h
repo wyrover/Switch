@@ -26,9 +26,9 @@ namespace Pcf {
           pcf_set {this->SetContentType(value);}
         };
         
-        WebResponse& GetResponse();
+        WebResponse& GetResponse() override;
         
-        SharedPointer<System::IO::Stream> GetRequestStream();
+        WebRequest::WebRequestStream GetRequestStream() override;
         
       protected:
         HttpWebRequest(const string& uri);
@@ -36,8 +36,8 @@ namespace Pcf {
         HttpWebRequest(const HttpWebRequest&) = delete;
         HttpWebRequest& operator =(const HttpWebRequest&) = delete;
 
-        void Finished(int32 error);
-        WebResponse& GetInternalResponse();
+        void Finished(int32 error) override;
+        WebResponse& GetInternalResponse() override;
 
         System::Net::HttpWebResponse httpWebResponse;
         bool allowAutoRedirect = true;

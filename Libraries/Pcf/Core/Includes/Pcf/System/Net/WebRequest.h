@@ -32,6 +32,42 @@ namespace Pcf {
         friend class System::Net::WebResponse;
         /// @endcond
       public:
+        class WebRequestStream: public System::IO::Stream {
+        public:
+          WebRequestStream() {}
+          WebRequestStream(WebRequest* webRequest) {this->data->webRequest = webRequest;}
+          WebRequestStream(const WebRequestStream& wrs) {}
+
+          void Write(const void* handle, int32 count);
+          void Write(const Array<byte>& buffzer, int32 offset, int32 count) override;
+          int32 Read(Array<byte>& buffer, int32 offset, int32 count) override { return 0; }
+          int64 Seek(int64, System::IO::SeekOrigin) override;
+          int32 Send(void* handle, int32 count);
+          void Close() override;
+          
+        protected:
+          friend class WebRequest;
+          bool GetCanRead() const override {return false;}
+          bool GetCanSeek()  const override {return false;}
+          bool GetCanTimeout() const override {return true;}
+          bool GetCanWrite() const override {return true;}
+          int64 GetLength() const override {return 0;}
+          int64 GetPosition() const override {return 0;}
+          
+        private:
+          struct WebRequestStreamData {
+            bool started = false;
+            void* buffer = null;
+            System::Net::WebRequest* webRequest = null;
+            System::Threading::ManualResetEvent writeEvent {false};
+            System::Threading::AutoResetEvent readEvent {false};
+            int32 bufferSize = 0;
+            int32 bufferOffset = 0;
+          };
+          SharedPointer<WebRequestStreamData> data = SharedPointer<WebRequestStreamData>::Create();
+        };
+        
+
         /// @brief Initializes a new WebRequest instance for the specified URI scheme.
         /// @param requestUriString The URI that identifies the Internet resource.
         /// @return WebRequest A WebRequest descendant for the specified URI scheme.
@@ -85,7 +121,7 @@ namespace Pcf {
         };
         
         virtual WebResponse& GetResponse() = 0;
-        virtual SharedPointer<System::IO::Stream> GetRequestStream();
+        virtual WebRequestStream GetRequestStream();
 
         virtual ~WebRequest();
 
@@ -104,34 +140,6 @@ namespace Pcf {
 
         virtual WebResponse& GetInternalResponse() = 0;
 
-        class WebRequestStream: public System::IO::Stream {
-        protected:
-          void Write(const void* handle, int32 count);
-          void Write(const Array<byte>& buffzer, int32 offset, int32 count) override;
-          int32 Read(Array<byte>& buffer, int32 offset, int32 count) override { return 0; }
-          int64 Seek(int64, System::IO::SeekOrigin) override;
-          int32 Send(void* handle, int32 count);
-          void Close() override;
-
-        private:
-          friend class WebRequest;
-          WebRequestStream(WebRequest* webRequest) : webRequest(webRequest) {}
-          bool GetCanRead() const override {return false;}
-          bool GetCanSeek()  const override {return false;}
-          bool GetCanTimeout() const override {return true;}
-          bool GetCanWrite() const override {return true;}
-          int64 GetLength() const override {return 0;}
-          int64 GetPosition() const override {return 0;}
-
-          bool started = false;
-          void* buffer = null;
-          System::Net::WebRequest* webRequest = null;
-          System::Threading::ManualResetEvent writeEvent {false};
-          System::Threading::AutoResetEvent readEvent {false};
-          int32 bufferSize = 0;
-          int32 bufferOffset = 0;
-        };
-
         /// @brief Initializes a new instance of the WebRequest class.
         /// @param uri : A Uri containing the URI of the requested resource.
         /// @remarks Use the Create method to initialize new WebRequest instances. Do not use the constructor.
@@ -147,7 +155,7 @@ namespace Pcf {
         int64 contentLength = 0;
         int32 timeout = 300000;
         System::Uri uri;
-        SharedPointer<System::Net::WebRequest::WebRequestStream>  requestStream = new WebRequest::WebRequestStream(this);
+        System::Net::WebRequest::WebRequestStream  requestStream {this};
         int32 internalError = 0;
 
         void ProccessRequest();

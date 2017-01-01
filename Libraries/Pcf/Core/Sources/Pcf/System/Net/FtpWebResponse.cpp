@@ -11,7 +11,7 @@ using namespace System::Net;
 FtpWebResponse::FtpWebResponse():WebResponse() {
 }
 
-SharedPointer<System::IO::Stream> FtpWebResponse::GetResponseStream() {
+WebResponse::WebResponseStream FtpWebResponse::GetResponseStream() {
   if (this->webRequest->Method() == WebRequestMethods::Ftp::DownloadFile || this->webRequest->Method() == WebRequestMethods::Ftp::ListDirectory || this->webRequest->Method() == WebRequestMethods::Ftp::ListDirectoryDetails)
     return WebResponse::GetResponseStream();
   

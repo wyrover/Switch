@@ -15,7 +15,7 @@ FtpWebRequest::FtpWebRequest(const Uri& uri): WebRequest(uri) {
   SetUseBinary(true);
 }
 
-SharedPointer<System::IO::Stream> FtpWebRequest::GetRequestStream() {
+WebRequest::WebRequestStream FtpWebRequest::GetRequestStream() {
   if (GetMethod()==WebRequestMethods::Ftp::UploadFile)
     return WebRequest::GetRequestStream();
 

@@ -22,6 +22,48 @@ namespace Pcf {
 
       class WebResponse : public Object {
       public:
+        class WebResponseStream: public System::IO::Stream {
+        public:
+          WebResponseStream() : Stream(1000, 1000) {}
+          WebResponseStream(const WebResponseStream& wrs) : data(wrs.data) {}
+          void SetWebRequest(System::Net::WebRequest* webRequest);
+          
+          void StartTransfert();
+          
+          int32 Read(void* handle, int32 count);
+          int32 Read(Array<byte>& buffer, int32 offset, int32 count) override;
+          void Write(const Array<byte>& buffer, int32 offset, int32 count) override { }
+          int64 Seek(int64, System::IO::SeekOrigin) override;
+          
+          int32 Receive(const void* handle, int32 count);
+          
+          void EndTransfert();
+          
+          virtual void Close() override;
+          
+        protected:
+          friend class WebResponse;
+          bool GetCanRead() const override {return true;}
+          bool GetCanSeek()  const override {return false;}
+          bool GetCanTimeout() const override {return true;}
+          bool GetCanWrite() const override {return false;}
+          int64 GetLength() const override {return 0;}
+          int64 GetPosition() const override {return 0;}
+          
+        private:
+          struct WebRequestStreamData {
+            void* buffer = null;
+            System::Net::WebRequest* webRequest = null;
+            System::Threading::ManualResetEvent writeEvent {false};
+            System::Threading::ManualResetEvent readEvent {true};
+            int32 bufferSize = 0;
+            int32 bufferOffset = 0;
+            bool started = false;
+            bool finished = false;
+          };
+          SharedPointer<WebRequestStreamData> data = SharedPointer<WebRequestStreamData>::Create();
+        };
+        
         Property<int64> ContentLength {
           pcf_get {return this->GetContentLength();},
           pcf_set {this->SetContentLength(value);}
@@ -33,7 +75,7 @@ namespace Pcf {
         
         virtual ~WebResponse();
 
-        virtual SharedPointer<System::IO::Stream> GetResponseStream();
+        virtual WebResponseStream GetResponseStream();
         
       protected:
         virtual int64 GetContentLength() const {return this->contentLength;}
@@ -44,44 +86,6 @@ namespace Pcf {
         friend class WebRequest;
         friend class FtpWebRequest;
         
-        class WebResponseStream: public System::IO::Stream {
-        protected:
-          void SetWebRequest(System::Net::WebRequest* webRequest);
-
-          void StartTransfert();
-
-          int32 Read(void* handle, int32 count);
-          int32 Read(Array<byte>& buffer, int32 offset, int32 count) override;
-          void Write(const Array<byte>& buffer, int32 offset, int32 count) override { }
-          int64 Seek(int64, System::IO::SeekOrigin) override;
-
-          int32 Receive(const void* handle, int32 count);
-
-          void EndTransfert();
-
-          virtual void Close() override;
-
-          bool finished = false;
-
-        private:
-          friend class WebResponse;
-          WebResponseStream();
-          bool GetCanRead() const override {return true;}
-          bool GetCanSeek()  const override {return false;}
-          bool GetCanTimeout() const override {return true;}
-          bool GetCanWrite() const override {return false;}
-          int64 GetLength() const override {return 0;}
-          int64 GetPosition() const override {return 0;}
-          
-          void* buffer = null;
-          System::Net::WebRequest* webRequest = null;
-          System::Threading::ManualResetEvent writeEvent {false};
-          System::Threading::ManualResetEvent readEvent {true};
-          int32 bufferSize = 0;
-          int32 bufferOffset = 0;
-          bool started = false;
-        };
-
         WebResponse();
         WebResponse(const WebResponse& webResponse) = delete;
         WebResponse& operator =(const WebResponse& webResponse) = delete;
@@ -92,7 +96,7 @@ namespace Pcf {
 
         void SetWebRequest(System::Net::WebRequest& webRequest);
         System::Net::WebRequest* webRequest = null;
-        SharedPointer<System::Net::WebResponse::WebResponseStream> responseStream = new WebResponseStream();
+        System::Net::WebResponse::WebResponseStream responseStream;
 
         static size_t WriteNullStream(void* buffer, size_t size, size_t nmemb, void* stream);
         static size_t WriteStream(void* buffer, size_t size, size_t nmemb, void* stream);

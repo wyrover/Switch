@@ -2,12 +2,22 @@
 
 using namespace System;
 using namespace System::Diagnostics;
+using namespace System::Net;
 using namespace System::Threading;
 
 namespace Examples {
   class Program {
   public:
     static void Main(const Array<string>& args) {
+      UniquePointer<HttpWebRequest> httpWebRequest = as<HttpWebRequest>(WebRequest::Create("http://httpbin.org/encoding/utf8"));
+      //string str = System::IO::StreamReader(httpWebRequest->GetResponse().GetResponseStream()).ReadToEnd();
+      //Console::WriteLine(str);
+      
+      System::IO::StreamReader sr(httpWebRequest->GetResponse().GetResponseStream());
+      while (!sr.EndOfStream) {
+        Console::WriteLine("// {0}", sr.ReadLine());
+      }
+      
       //Process process = Process::Start("http://www.google.com");
       //Console::WriteLine(process.StandardOutput().ReadToEnd());
       
@@ -39,13 +49,6 @@ namespace Examples {
       process.WaitForExit();
       Console::WriteLine("[Process {0}] End", GetCurrentProcess());
        */
-      
-      Thread thread(ThreadStart(pcf_delegate {
-        Thread::Sleep(100);
-        Console::WriteLine("Background thread");
-      }));
-      thread.Start();
-      thread.IsBackground = true;
     }
   };
 }

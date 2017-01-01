@@ -13,7 +13,7 @@ HttpWebResponse::HttpWebResponse():WebResponse() {
 HttpWebResponse::~HttpWebResponse() {
 }
 
-SharedPointer<System::IO::Stream> HttpWebResponse::GetResponseStream() {
+WebResponse::WebResponseStream HttpWebResponse::GetResponseStream() {
   if (this->webRequest->Method() == WebRequestMethods::Http::Get || this->webRequest->Method() == WebRequestMethods::Http::Post) {
     return WebResponse::GetResponseStream();
   } else {
