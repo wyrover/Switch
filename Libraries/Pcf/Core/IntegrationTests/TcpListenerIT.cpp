@@ -18,7 +18,7 @@ namespace {
 class TcpListener : public testing::Test {
 public :
   void SetUp() {
-    mLastException = Sp<Exception>::Null();
+    mLastException = sp<Exception>::Null();
   }
 
   void TearDown() {
@@ -44,11 +44,11 @@ protected:
         // Waiting for a connection... 
         // Perform a blocking call to accept requests. 
         // You could also user server.AcceptSocket() here.
-        Sp<Sockets::TcpClient> tcpclient = server.AcceptTcpClient();
+        sp<Sockets::TcpClient> tcpclient = server.AcceptTcpClient();
 
         // Connected
         // Get a stream Object* for reading and writing
-        Sp<Sockets::NetworkStream> pstream = tcpclient->GetStream();
+        sp<Sockets::NetworkStream> pstream = tcpclient->GetStream();
 
         // Loop to receive all the data sent by the client. 
         int32 i=0;
@@ -68,10 +68,10 @@ protected:
       for (int32 index = 0; index < mDataLength; index++)
         mResponse += Char(Convert::ToChar(Byte(tableau[index]))).ToString();
     } catch (Sockets::SocketException& e) {
-      mLastException = Sp<Exception>::Create<Sockets::SocketException, Sockets::SocketException>(e);
+      mLastException = sp<Exception>::Create<Sockets::SocketException, Sockets::SocketException>(e);
     }
     catch (ObjectClosedException& e) {
-      mLastException = Sp<Exception>::Create<ObjectClosedException, ObjectClosedException>(e);
+      mLastException = sp<Exception>::Create<ObjectClosedException, ObjectClosedException>(e);
     } catch (Exception& e)  {
       Console::WriteLine(e.Message());
     }
@@ -91,8 +91,8 @@ protected:
         // Waiting for a connection... 
         // Perform a blocking call to accept requests. 
         // You could also user server.AcceptSocket() here.
-        Sp<Sockets::TcpClient> tcpclient = server.AcceptTcpClient();
-        Sp<Stream> pstream = tcpclient->GetStream().ChangeType<Stream>(); // class Networkstream
+        sp<Sockets::TcpClient> tcpclient = server.AcceptTcpClient();
+        sp<Stream> pstream = tcpclient->GetStream().ChangeType<Stream>(); // class Networkstream
         StreamReader serverStreamReader(pstream);
         mResponse = serverStreamReader.ReadLine(); 
         tcpclient->Close();
@@ -100,10 +100,10 @@ protected:
       }
       server.Stop();
     } catch (Sockets::SocketException& e) {
-      mLastException = Sp<Exception>::Create<Sockets::SocketException, Sockets::SocketException>(e);
+      mLastException = sp<Exception>::Create<Sockets::SocketException, Sockets::SocketException>(e);
       Console::WriteLine(e.Message());
     } catch (ObjectClosedException& e) {
-      mLastException = Sp<Exception>::Create<ObjectClosedException, ObjectClosedException>(e);
+      mLastException = sp<Exception>::Create<ObjectClosedException, ObjectClosedException>(e);
       Console::WriteLine(e.Message());
     } catch (Exception& e) {
       Console::WriteLine(e.Message());
@@ -124,16 +124,16 @@ protected:
         // Waiting for a connection... 
         // Perform a blocking call to accept requests. 
         // You could also user server.AcceptSocket() here.
-        Sp<Sockets::TcpClient> tcpclient = server.AcceptTcpClient();
+        sp<Sockets::TcpClient> tcpclient = server.AcceptTcpClient();
         tcpclient->Close();
         run = false;
       }
       server.Stop();
     } catch (Sockets::SocketException& e) {
-      mLastException = Sp<Exception>::Create<Sockets::SocketException, Sockets::SocketException>(e);
+      mLastException = sp<Exception>::Create<Sockets::SocketException, Sockets::SocketException>(e);
       Console::WriteLine(e.Message());
     } catch (ObjectClosedException& e) {
-      mLastException = Sp<Exception>::Create<ObjectClosedException, ObjectClosedException>(e);
+      mLastException = sp<Exception>::Create<ObjectClosedException, ObjectClosedException>(e);
       Console::WriteLine(e.Message());
     } catch (Exception& e) {
       Console::WriteLine(e.Message());
@@ -154,8 +154,8 @@ protected:
         // Waiting for a connection... 
         // Perform a blocking call to accept requests. 
         // You could also user server.AcceptSocket() here.
-        Sp<Sockets::TcpClient> tcpclient = server.AcceptTcpClient();
-        Sp<Stream> pstream = tcpclient->GetStream().ChangeType<Stream>(); // class Networkstream
+        sp<Sockets::TcpClient> tcpclient = server.AcceptTcpClient();
+        sp<Stream> pstream = tcpclient->GetStream().ChangeType<Stream>(); // class Networkstream
         StreamWriter serverStreamWriter(pstream);
         serverStreamWriter.WriteLine(string("Hein? Papuche?! Makemana papuche? - Na, na, na, na, na, na... Papuuuuuche! - Ahhhhh Papuche!")); 
         tcpclient->Close();
@@ -163,10 +163,10 @@ protected:
       }
       server.Stop();
     } catch (Sockets::SocketException& e) {
-      mLastException = Sp<Exception>::Create<Sockets::SocketException, Sockets::SocketException>(e);
+      mLastException = sp<Exception>::Create<Sockets::SocketException, Sockets::SocketException>(e);
       Console::WriteLine(e.Message());
     } catch (ObjectClosedException& e) {
-      mLastException = Sp<Exception>::Create<ObjectClosedException, ObjectClosedException>(e);
+      mLastException = sp<Exception>::Create<ObjectClosedException, ObjectClosedException>(e);
       Console::WriteLine(e.Message());
     } catch (Exception& e) {
       Console::WriteLine(e.Message());
@@ -175,27 +175,27 @@ protected:
 
   static int32 mDataLength;
   static string mResponse;
-  static Sp<Exception> mLastException;
+  static sp<Exception> mLastException;
   static int32 mPort;
 };
 
 int32 TcpListener::mDataLength = 0;
 string TcpListener::mResponse = "";
-Sp<Exception> TcpListener::mLastException = Sp<Exception>::Null();
+sp<Exception> TcpListener::mLastException = sp<Exception>::Null();
 int32 TcpListener::mPort = 51000;
 
 #if 0
 TEST_F(TcpListener,  ClientServer) {
   mResponse = string::Empty;
-  Sp<Sockets::TcpListener> tcpListener = new Sockets::TcpListener(IPAddress::Any(),mPort); 
+  sp<Sockets::TcpListener> tcpListener = new Sockets::TcpListener(IPAddress::Any(),mPort); 
   EventWaitHandle EventWaitServeurStart(false, EventResetMode::AutoReset, "ServerEvent");
   Thread receivingThread(ServerThreadReceive);
   receivingThread.Start(tcpListener.ToObject());
   EventWaitServeurStart.WaitOne();
-  Sp<Sockets::TcpClient> client = new Sockets::TcpClient();
+  sp<Sockets::TcpClient> client = new Sockets::TcpClient();
   byte data[128] = "Hein? Papuche?! Makemana papuche? - Na, na, na, na, na, na... Papuuuuuche! - Ahhhhh Papuche!\r\n";
   client->Connect(string("localhost"),mPort);
-  Sp<Sockets::NetworkStream>  netStream = client->GetStream(); 
+  sp<Sockets::NetworkStream>  netStream = client->GetStream(); 
   netStream->Write(data,128, 0, 128); 
   client->Close();
   // Blocks the calling thread until end of thread
@@ -210,15 +210,15 @@ TEST_F(TcpListener,  ClientServer) {
 }
 
 TEST_F(TcpListener,  ClientServerWithStream) {
-  Sp<Sockets::TcpListener> tcpListener = new Sockets::TcpListener(IPAddress::Any(),++mPort); 
+  sp<Sockets::TcpListener> tcpListener = new Sockets::TcpListener(IPAddress::Any(),++mPort); 
   EventWaitHandle EventWaitServeurStart(false, EventResetMode::AutoReset, "ServerEvent");
   Thread receivingThread(ServerThreadReceiveWithStream);
   receivingThread.Start(tcpListener.ToObject());
   EventWaitServeurStart.WaitOne();
-  Sp<Sockets::TcpClient> client = new Sockets::TcpClient();
+  sp<Sockets::TcpClient> client = new Sockets::TcpClient();
   string data("Hein? Papuche?! Makemana papuche? - Na, na, na, na, na, na... Papuuuuuche! - Ahhhhh Papuche!");
   client->Connect(string("localhost"),mPort);
-  Sp<Stream>  netStream = client->GetStream().ChangeType<Stream>(); // class Networkstream
+  sp<Stream>  netStream = client->GetStream().ChangeType<Stream>(); // class Networkstream
   StreamWriter clientStreamWriter(netStream);
   clientStreamWriter.WriteLine(data);
   clientStreamWriter.Flush();
@@ -232,30 +232,30 @@ TEST_F(TcpListener,  ClientServerWithStream) {
 #endif
 
 TEST_F(TcpListener, ConnectWithHostnameAndPortAfterCreation) {
-  Sp<Sockets::TcpListener> tcpListener = new Sockets::TcpListener(IPAddress::Any,++mPort);
+  sp<Sockets::TcpListener> tcpListener = new Sockets::TcpListener(IPAddress::Any,++mPort);
   EventWaitHandle EventWaitServeurStart(false, EventResetMode::AutoReset, "ServerEvent");
   Thread receivingThread((ParameterizedThreadStart)ServerThreadWithNoAction);
   receivingThread.Start(tcpListener.ToObject());
   EventWaitServeurStart.WaitOne();
-  Sp<Sockets::TcpClient> tcpClient = new Sockets::TcpClient();
+  sp<Sockets::TcpClient> tcpClient = new Sockets::TcpClient();
   tcpClient->Connect(string("localhost"),mPort);
   receivingThread.Join();
 }
 
 TEST_F(TcpListener, GetStreamWithSP) {
-  Sp<Sockets::TcpListener> tcpListener = new Sockets::TcpListener(IPAddress::Any,++mPort);
+  sp<Sockets::TcpListener> tcpListener = new Sockets::TcpListener(IPAddress::Any,++mPort);
   EventWaitHandle EventWaitServeurStart(false, EventResetMode::AutoReset, "ServerEvent");
   Thread receivingThread((ParameterizedThreadStart)ServerThreadWithNoAction);
   receivingThread.Start(tcpListener.ToObject());
   EventWaitServeurStart.WaitOne();
-  Sp<Sockets::TcpClient> tcpClient = new Sockets::TcpClient();
+  sp<Sockets::TcpClient> tcpClient = new Sockets::TcpClient();
   tcpClient->Connect(string("localhost"),mPort);
   tcpClient->GetStream();
   receivingThread.Join();
 }
 
 TEST_F(TcpListener, GetStream) {
-  Sp<Sockets::TcpListener> tcpListener = new Sockets::TcpListener(IPAddress::Any,++mPort); 
+  sp<Sockets::TcpListener> tcpListener = new Sockets::TcpListener(IPAddress::Any,++mPort); 
   EventWaitHandle EventWaitServeurStart(false, EventResetMode::AutoReset, "ServerEvent");
   Thread receivingThread((ParameterizedThreadStart)ServerThreadWithNoAction);
   receivingThread.Start(tcpListener.ToObject());
@@ -267,28 +267,28 @@ TEST_F(TcpListener, GetStream) {
 }
 
 TEST_F(TcpListener, Close) {
-  Sp<Sockets::TcpListener> tcpListener = new Sockets::TcpListener(IPAddress::Any,++mPort);
+  sp<Sockets::TcpListener> tcpListener = new Sockets::TcpListener(IPAddress::Any,++mPort);
   EventWaitHandle EventWaitServeurStart(false, EventResetMode::AutoReset, "ServerEvent");
   Thread receivingThread((ParameterizedThreadStart)ServerThreadWithNoAction);
   receivingThread.Start(tcpListener.ToObject());
   EventWaitServeurStart.WaitOne();
   Sockets::TcpClient tcpclient;
   tcpclient.Connect(string("localhost"),mPort);
-  Sp<Sockets::NetworkStream> clientstream = tcpclient.GetStream();
+  sp<Sockets::NetworkStream> clientstream = tcpclient.GetStream();
   clientstream->Close();
   tcpclient.Close();
   receivingThread.Join();
 }
 
 TEST_F(TcpListener, CloseStream) {
-  Sp<Sockets::TcpListener> tcpListener = new Sockets::TcpListener(IPAddress::Any,++mPort);
+  sp<Sockets::TcpListener> tcpListener = new Sockets::TcpListener(IPAddress::Any,++mPort);
   EventWaitHandle EventWaitServeurStart(false, EventResetMode::AutoReset, "ServerEvent");
   Thread receivingThread((ParameterizedThreadStart)ServerThreadWithNoAction);
   receivingThread.Start(tcpListener.ToObject());
   EventWaitServeurStart.WaitOne();
   Sockets::TcpClient tcpclient;
   tcpclient.Connect(string("localhost"),mPort);
-  Sp<Sockets::NetworkStream> clientstream = tcpclient.GetStream();
+  sp<Sockets::NetworkStream> clientstream = tcpclient.GetStream();
   tcpclient.Close();
   clientstream->Close();
   receivingThread.Join();
@@ -296,7 +296,7 @@ TEST_F(TcpListener, CloseStream) {
 
 #if 0
 TEST_F(TcpListener, StopWithoutConnect) {
-  Sp<Sockets::TcpListener> tcpListener = new Sockets::TcpListener(IPAddress::Any,++mPort);
+  sp<Sockets::TcpListener> tcpListener = new Sockets::TcpListener(IPAddress::Any,++mPort);
   EventWaitHandle EventWaitServeurStart(false, EventResetMode::AutoReset, "ServerEvent");
   Thread receivingThread(ServerThreadWithNoAction);
   receivingThread.Start(tcpListener.ToObject());
@@ -307,58 +307,58 @@ TEST_F(TcpListener, StopWithoutConnect) {
 #endif
 
 TEST_F(TcpListener, ConnectWithIPEndPointAfterCreation) {
-  Sp<Sockets::TcpListener> tcpListener = new Sockets::TcpListener(IPAddress::Any,++mPort);
+  sp<Sockets::TcpListener> tcpListener = new Sockets::TcpListener(IPAddress::Any,++mPort);
   EventWaitHandle EventWaitServeurStart(false, EventResetMode::AutoReset, "ServerEvent");
   Thread receivingThread((ParameterizedThreadStart)ServerThreadWithNoAction);
   receivingThread.Start(tcpListener.ToObject());
   EventWaitServeurStart.WaitOne();
-  Sp<Sockets::TcpClient> tcpClient   = new Sockets::TcpClient();
-  Sp<IPEndPoint> ipEndPoint = new IPEndPoint(IPAddress::Loopback, mPort);
+  sp<Sockets::TcpClient> tcpClient   = new Sockets::TcpClient();
+  sp<IPEndPoint> ipEndPoint = new IPEndPoint(IPAddress::Loopback, mPort);
   ASSERT_FALSE(ipEndPoint.IsNull());
   tcpClient->Connect(ipEndPoint); 
   receivingThread.Join();
 }
 
 TEST_F(TcpListener, ConnectWithIPAddressAndPortAfterCreation) {
-  Sp<Sockets::TcpListener> tcpListener = new Sockets::TcpListener(IPAddress::Any,++mPort);
+  sp<Sockets::TcpListener> tcpListener = new Sockets::TcpListener(IPAddress::Any,++mPort);
   EventWaitHandle EventWaitServeurStart(false, EventResetMode::AutoReset, "ServerEvent");
   Thread receivingThread((ParameterizedThreadStart)ServerThreadWithNoAction);
   receivingThread.Start(tcpListener.ToObject());
   EventWaitServeurStart.WaitOne();
-  Sp<Sockets::TcpClient> tcpClient = new Sockets::TcpClient();
-  Sp<IPEndPoint> ipEndPoint = new IPEndPoint(IPAddress::Loopback, mPort);
+  sp<Sockets::TcpClient> tcpClient = new Sockets::TcpClient();
+  sp<IPEndPoint> ipEndPoint = new IPEndPoint(IPAddress::Loopback, mPort);
   ASSERT_FALSE(ipEndPoint.IsNull());
   tcpClient->Connect(ipEndPoint);
   receivingThread.Join();
 }
 
 TEST_F(TcpListener, ConnectWithNoWrite) {
-  Sp<Sockets::TcpListener> tcpListener = new Sockets::TcpListener(IPAddress::Any,++mPort);
+  sp<Sockets::TcpListener> tcpListener = new Sockets::TcpListener(IPAddress::Any,++mPort);
   EventWaitHandle EventWaitServeurStart(false, EventResetMode::AutoReset, "ServerEvent");
   Thread receivingThread((ParameterizedThreadStart)ServerThreadWithWrite);
   receivingThread.Start(tcpListener.ToObject());
   EventWaitServeurStart.WaitOne();
-  Sp<Sockets::TcpClient> tcpClient = new Sockets::TcpClient();
-  Sp<IPEndPoint> ipEndPoint = new IPEndPoint(IPAddress::Loopback, mPort);
+  sp<Sockets::TcpClient> tcpClient = new Sockets::TcpClient();
+  sp<IPEndPoint> ipEndPoint = new IPEndPoint(IPAddress::Loopback, mPort);
   ASSERT_FALSE(ipEndPoint.IsNull());
   tcpClient->Connect(ipEndPoint);
-  Sp<Stream> netStream = tcpClient->GetStream().ChangeType<Stream>();
+  sp<Stream> netStream = tcpClient->GetStream().ChangeType<Stream>();
   StreamReader clientStreamReader(netStream);
   string txt = clientStreamReader.ReadLine();
   receivingThread.Join();
 }
 
 TEST_F(TcpListener, ConnectWithNoWriteAction) {
-  Sp<Sockets::TcpListener> tcpListener = new Sockets::TcpListener(IPAddress::Any,++mPort);
+  sp<Sockets::TcpListener> tcpListener = new Sockets::TcpListener(IPAddress::Any,++mPort);
   EventWaitHandle EventWaitServeurStart(false, EventResetMode::AutoReset, "ServerEvent");
   Thread receivingThread((ParameterizedThreadStart)ServerThreadWithNoAction);
   receivingThread.Start(tcpListener.ToObject());
   EventWaitServeurStart.WaitOne();
-  Sp<Sockets::TcpClient> tcpClient = new Sockets::TcpClient();
-  Sp<IPEndPoint> ipEndPoint = new IPEndPoint(IPAddress::Loopback, mPort);
+  sp<Sockets::TcpClient> tcpClient = new Sockets::TcpClient();
+  sp<IPEndPoint> ipEndPoint = new IPEndPoint(IPAddress::Loopback, mPort);
   ASSERT_FALSE(ipEndPoint.IsNull());
   tcpClient->Connect(ipEndPoint);
-  Sp<Stream> netStream = tcpClient->GetStream().ChangeType<Stream>();
+  sp<Stream> netStream = tcpClient->GetStream().ChangeType<Stream>();
   StreamReader clientStreamReader(netStream);
   string txt = clientStreamReader.ReadLine();
   receivingThread.Join();
@@ -366,16 +366,16 @@ TEST_F(TcpListener, ConnectWithNoWriteAction) {
 
 #if 0
 TEST_F(TcpListener, DefaultConstructorIPEndPoint) {
-	Sp<IPEndPoint> endPoint = new IPEndPoint(IPAddress::Loopback, 51000);
+	sp<IPEndPoint> endPoint = new IPEndPoint(IPAddress::Loopback, 51000);
   ASSERT_FALSE(endPoint.IsNull());
-	Sp<Sockets::TcpListener> tcpListener = new Sockets::TcpListener(endPoint); 
+	sp<Sockets::TcpListener> tcpListener = new Sockets::TcpListener(endPoint); 
   ASSERT_FALSE(tcpListener.IsNull());
 	tcpListener->Start();
 	tcpListener->Stop();
 }
 
 TEST_F(TcpListener, DefaultConstructorIPAddressAndport) {
-	Sp<Sockets::TcpListener> tcpListener = new Sockets::TcpListener(IPAddress::Loopback,51000);
+	sp<Sockets::TcpListener> tcpListener = new Sockets::TcpListener(IPAddress::Loopback,51000);
   ASSERT_FALSE(tcpListener.IsNull());
 	tcpListener->Start();
 	tcpListener->Stop();
@@ -383,35 +383,35 @@ TEST_F(TcpListener, DefaultConstructorIPAddressAndport) {
 #endif
 
 TEST_F(TcpListener, GetServer) {
-	Sp<Sockets::TcpListener> tcpListener = new Sockets::TcpListener(IPAddress::Loopback,51000); 
+	sp<Sockets::TcpListener> tcpListener = new Sockets::TcpListener(IPAddress::Loopback,51000); 
   ASSERT_FALSE(tcpListener.IsNull());
-	Sp<Sockets::Socket> socket1 = tcpListener->GetServer();
+	sp<Sockets::Socket> socket1 = tcpListener->GetServer();
   ASSERT_FALSE(socket1.IsNull());
-	const Sp<Sockets::Socket> socket2 = tcpListener->GetServer();
+	const sp<Sockets::Socket> socket2 = tcpListener->GetServer();
   ASSERT_FALSE(socket2.IsNull());
 }
 
 // TODO __APPLE__
 TEST_F(TcpListener, DISABLED_GetExclusiveAddressUse) {
-	Sp<Sockets::TcpListener> tcpListener = new Sockets::TcpListener(IPAddress::Loopback,51000);
+	sp<Sockets::TcpListener> tcpListener = new Sockets::TcpListener(IPAddress::Loopback,51000);
   ASSERT_FALSE(tcpListener.IsNull());
 	EXPECT_EQ(tcpListener->GetExclusiveAddressUse(),false);
 }
 
 // TODO __APPLE__
 TEST_F(TcpListener, DISABLED_SetGetExclusiveAddressUse) {
-	Sp<Sockets::TcpListener> tcpListener = new Sockets::TcpListener(IPAddress::Loopback,51000);
+	sp<Sockets::TcpListener> tcpListener = new Sockets::TcpListener(IPAddress::Loopback,51000);
   ASSERT_FALSE(tcpListener.IsNull());
 	tcpListener->SetExclusiveAddressUse(true);
 	EXPECT_EQ(tcpListener->GetExclusiveAddressUse(),true);
 }
 
 TEST_F(TcpListener, GetLocalEndPoint) {
-	Sp<Sockets::TcpListener> tcpListener = new Sockets::TcpListener(IPAddress::Loopback,51000); 
+	sp<Sockets::TcpListener> tcpListener = new Sockets::TcpListener(IPAddress::Loopback,51000); 
   ASSERT_FALSE(tcpListener.IsNull());
-	Sp<EndPoint> endPoint1 = tcpListener->GetLocalEndPoint();
+	sp<EndPoint> endPoint1 = tcpListener->GetLocalEndPoint();
   ASSERT_FALSE(endPoint1.IsNull());
-	const Sp<EndPoint> endPoint2 = tcpListener->GetLocalEndPoint();
+	const sp<EndPoint> endPoint2 = tcpListener->GetLocalEndPoint();
   ASSERT_FALSE(endPoint2.IsNull());
 }
 

@@ -36,7 +36,7 @@ protected:
     IO::Directory::Delete(PathWorkDir, true);
   }
 
-  void Test_StreamReader_With_Encoding(const string& raw, Sp<Text::Encoding> encoding) {
+  void Test_StreamReader_With_Encoding(const string& raw, sp<Text::Encoding> encoding) {
     string decoded;
 
     pcf_using(StreamReader sr(fileName, encoding)) {
@@ -59,7 +59,7 @@ protected:
     EXPECT_TRUE(raw.Equals(decoded));
   }
 
-  void CreateMultiLineBytes(Array<byte>& bytes, const Array<byte>& src, Sp<Text::Encoding> encoding) {
+  void CreateMultiLineBytes(Array<byte>& bytes, const Array<byte>& src, sp<Text::Encoding> encoding) {
     int32 index = bytes.Length;
     Array<byte> eolBytes = encoding->GetBytes(Environment::NewLine);
     Array<byte>::Resize(bytes, index + src.Length + eolBytes.Length);
@@ -76,7 +76,7 @@ protected:
     in.seekg(0, std::ios::end);
     std::fstream::streamoff rawSize = in.tellg();
     EXPECT_EQ(bytes.Length, (int32)rawSize);
-    Up<byte[]> raw(new byte[static_cast<uint32>(rawSize)]);
+    up<byte[]> raw(new byte[static_cast<uint32>(rawSize)]);
     in.seekg(0, std::ios::beg);
     in.read((char*)(byte*)raw.ToPointer(), rawSize);
     in.close();
@@ -85,7 +85,7 @@ protected:
       ASSERT_EQ(bytes[i], raw[i]);
   }
 
-  void Test_StreamWriter_With_Encoding(const Array<byte>& raw, Sp<Text::Encoding> encoding) {
+  void Test_StreamWriter_With_Encoding(const Array<byte>& raw, sp<Text::Encoding> encoding) {
     //string unicode("Pi (" + Char(928) + ")\nSigma (" + Char(931) + ")\n Koala (" + Char(128040) + ")");
   
     string piString("Pi (" + Char(928) + ")");
@@ -183,8 +183,8 @@ void DrawRect(CharBuffer& chars, const RectCharPattern& pattern, const Rect& rec
 } // namespace
 
 TEST_F(StreamReaderWriter, Create_CodePage437_File) {
-  Sp<FileStream> fs = new FileStream(fileName, FileMode(FileMode::Create), FileAccess(FileAccess::Write), FileShare(FileShare::None));
-  StreamWriter sw(fs.ChangeType<Stream>(), Sp<Text::Encoding>(Text::Encoding::CreateEncoding(437).Release()));
+  sp<FileStream> fs = new FileStream(fileName, FileMode(FileMode::Create), FileAccess(FileAccess::Write), FileShare(FileShare::None));
+  StreamWriter sw(fs.ChangeType<Stream>(), sp<Text::Encoding>(Text::Encoding::CreateEncoding(437).Release()));
 
   RectCharPattern doubleLine(0x2554, 0x2550, 0x2557, 0x2551, 0x2551, 0x255A, 0x2550, 0x255D);
   RectCharPattern simpleLine(0x250C, 0x2500, 0x2510, 0x2502, 0x2502, 0x2514, 0x2500, 0x2518);
@@ -203,7 +203,7 @@ TEST_F(StreamReaderWriter, Create_CodePage437_File) {
 }
 
 TEST_F(StreamReaderWriter, Create_UTF8_File)  {
-  Sp<Text::Encoding> encoding(Text::Encoding::UTF8());
+  sp<Text::Encoding> encoding(Text::Encoding::UTF8());
 
   byte piBytes[]    = { 0x50, 0x69, 0x20,                     0x28,   0xCE, 0xA0,               0x29 };
   byte sigmaBytes[] = { 0x53, 0x69, 0x67, 0x6D, 0x61, 0x20,   0x28,   0xCE, 0xA3,               0x29 };
@@ -227,7 +227,7 @@ TEST_F(StreamReaderWriter, Create_UTF8_File)  {
 }
 
 TEST_F(StreamReaderWriter, Create_UTF16_File)  {
-  Sp<Text::Encoding> encoding(Text::Encoding::Unicode());
+  sp<Text::Encoding> encoding(Text::Encoding::Unicode());
 
   //string unicode("Pi (" + Char(928) + ")\nSigma (" + Char(931) + ")\n Koala (" + Char(128040) + ")");
   byte piBytes[]    = { 80, 0, 105, 0, 32, 0, 40, 0, 160, 3, 41, 0 };
@@ -253,7 +253,7 @@ TEST_F(StreamReaderWriter, Create_UTF16_File)  {
 }
 
 TEST_F(StreamReaderWriter, Create_UTF16BE_File)  {
-  Sp<Text::Encoding> encoding = new Text::UnicodeEncoding(true,true);
+  sp<Text::Encoding> encoding = new Text::UnicodeEncoding(true,true);
 
   //string unicode("Pi (" + Char(928) + ")\nSigma (" + Char(931) + ")\n Koala (" + Char(128040) + ")");
   byte piBytes[]    = { 0, 80, 0, 105, 0, 32, 0, 40, 3, 160, 0, 41 };
@@ -279,7 +279,7 @@ TEST_F(StreamReaderWriter, Create_UTF16BE_File)  {
 }
 
 TEST_F(StreamReaderWriter, Create_UTF32_File)  {
-  Sp<Text::Encoding> encoding = new Text::UTF32Encoding(false,true);
+  sp<Text::Encoding> encoding = new Text::UTF32Encoding(false,true);
 
   //string unicode("Pi (" + Char(928) + ")\nSigma (" + Char(931) + ")\n Koala (" + Char(128040) + ")");
   byte piBytes[]    = { 80, 0, 0, 0, 105, 0, 0, 0, 32, 0, 0, 0, 40, 0, 0, 0, 160, 3, 0, 0, 41, 0, 0, 0 };
@@ -306,7 +306,7 @@ TEST_F(StreamReaderWriter, Create_UTF32_File)  {
 }
 
 TEST_F(StreamReaderWriter, Create_UTF32BE_File)  {
-  Sp<Text::Encoding> encoding = new Text::UTF32Encoding(true,true);
+  sp<Text::Encoding> encoding = new Text::UTF32Encoding(true,true);
 
   //string unicode("Pi (" + Char(928) + ")\nSigma (" + Char(931) + ")\n Koala (" + Char(128040) + ")");
   byte piBytes[]    = { 0, 0, 0, 80, 0, 0, 0, 105, 0, 0, 0, 32, 0, 0, 0, 40, 0, 0, 3, 160, 0, 0, 0, 41 };
@@ -333,7 +333,7 @@ TEST_F(StreamReaderWriter, Create_UTF32BE_File)  {
 }
 
 TEST_F(StreamReaderWriter, Create_ASCII_File)  {
-  Sp<Text::Encoding> encoding = new Text::ASCIIEncoding();
+  sp<Text::Encoding> encoding = new Text::ASCIIEncoding();
 
   //string unicode("Pi (" + Char(928) + ")\nSigma (" + Char(931) + ")\n Koala (" + Char(128040) + ")");
   byte piBytes[]    = { 80, 105, 32, 40, 63, 41 };
@@ -358,7 +358,7 @@ TEST_F(StreamReaderWriter, Create_ASCII_File)  {
 }
 
 TEST_F(StreamReaderWriter, Create_CP437_File)  {
-  Sp<Text::Encoding> encoding(Text::Encoding::CreateEncoding(437));
+  sp<Text::Encoding> encoding(Text::Encoding::CreateEncoding(437));
 
   //string unicode("Pi (" + Char(928) + ")\nSigma (" + Char(931) + ")\n Koala (" + Char(128040) + ")");
   byte piBytes[]    = { 80, 105, 32, 40, 227, 41 };
@@ -383,7 +383,7 @@ TEST_F(StreamReaderWriter, Create_CP437_File)  {
 }
 
 TEST_F(StreamReaderWriter, Create_ISO_8859_1_File)  {
-  Sp<Text::Encoding> encoding(Text::Encoding::CreateEncoding("iso-8859-1"));
+  sp<Text::Encoding> encoding(Text::Encoding::CreateEncoding("iso-8859-1"));
 
   //string unicode("Pi (" + Char(928) + ")\nSigma (" + Char(931) + ")\n Koala (" + Char(128040) + ")");
   byte piBytes[]    = { 80, 105, 32, 40, 63, 41 };

@@ -14,8 +14,8 @@ public:
     info.AddValue("Flags", this->Flags);
   }
 
-  static Sp<Role> Deserialize(const System::Runtime::Serialization::SerializationInfo& info) {
-    Sp<Role> role = new Role();
+  static sp<Role> Deserialize(const System::Runtime::Serialization::SerializationInfo& info) {
+    sp<Role> role = new Role();
     role->RoleName = info.GetString("RoleName");
     role->Flags = info.GetByte("Flags");
     return role;
@@ -36,8 +36,8 @@ public:
     info.AddValue("PrsRole", this->Role);
   }
   
-  static Sp<Person> Deserialize(const System::Runtime::Serialization::SerializationInfo& info) {
-    Sp<Person> person = new Person();
+  static sp<Person> Deserialize(const System::Runtime::Serialization::SerializationInfo& info) {
+    sp<Person> person = new Person();
 
     person->FirstName = info.GetString("PrsFirstName");
     person->LastName = info.GetString("PrsLastName");
@@ -57,10 +57,10 @@ public:
 
 class TestSerializer : public System::Runtime::Serialization::IFormatter {
 public:
-  virtual void Deserialize(const Sp<System::IO::Stream>& serializationStream, System::Runtime::Serialization::ISerializable& graph) {
+  void Deserialize(const sp<System::IO::Stream>& serializationStream, System::Runtime::Serialization::ISerializable& graph) override {
     System::Runtime::Serialization::SerializationInfo serializationInfo;
     as<System::Runtime::Serialization::ISerializable>(graph).GetObjectData(serializationInfo);
-    IO::StreamReader SerializeStreamReader(serializationStream);
+    IO::StreamReader SerializeStreamReader(*serializationStream);
     while (!SerializeStreamReader.EndOfStream()) {
       string line = SerializeStreamReader.ReadLine();
       string key = line.Remove(line.IndexOf('='));
@@ -70,10 +70,10 @@ public:
 
   using IFormatter::Deserialize;
   
-  virtual void Serialize(const Sp<System::IO::Stream>& serializationStream, const Object& graph) {
+  void Serialize(const sp<System::IO::Stream>& serializationStream, const Object& graph) override {
     System::Runtime::Serialization::SerializationInfo serializationInfo;
     as<System::Runtime::Serialization::ISerializable>(graph).GetObjectData(serializationInfo);
-    IO::StreamWriter SerializeStreamWriter(serializationStream);
+    IO::StreamWriter SerializeStreamWriter(*serializationStream);
     
     System::Collections::Generic::Enumerator<System::Collections::Generic::KeyValuePair<string, System::Runtime::Serialization::SerializationEntry >> enumerator = serializationInfo.GetEnumerator();
     while (enumerator.MoveNext())
@@ -97,7 +97,7 @@ TEST(Serialization, Serialize) {
 
   person.GetObjectData(serializationInfo);
 
-  Sp<Person> newPerson = Person::Deserialize(serializationInfo);
+  sp<Person> newPerson = Person::Deserialize(serializationInfo);
 
   EXPECT_EQ(person.Age, newPerson->Age);
   EXPECT_EQ(person.Role.Flags, newPerson->Role.Flags);

@@ -20,7 +20,7 @@ namespace {
     void TearDown() {
     }
     
-    static void MyThread(Object&) {
+    static void MyThread(const Object&) {
       for (int32 index = 0; index < 100; index++) {
         _mutex.WaitOne();
         EXPECT_EQ(index, index);
@@ -28,15 +28,15 @@ namespace {
       }
     }
     
-    static void MyThread2(Object& _param) {
+    static void MyThread2(const Object& _param) {
       for (int32 index = 0; index < 100; index++) {
-        static_cast<Threading::Mutex&>(_param).WaitOne();
+        static_cast<Threading::Mutex&>(const_cast<Object&>(_param)).WaitOne();
         EXPECT_EQ(index, index);
-        static_cast<Threading::Mutex&>(_param).ReleaseMutex();
+        static_cast<Threading::Mutex&>(const_cast<Object&>(_param)).ReleaseMutex();
       }
     }
     
-    static void MyThread3(Object&) {
+    static void MyThread3(const Object&) {
       for (int32 index = 0; index < 10000; index++) {
         System::Threading::LockGuard lock(_sync);
         int32 cpt = _counter;
@@ -45,9 +45,9 @@ namespace {
       }
     }
     
-    static void MyThread4(Object& _param) {
+    static void MyThread4(const Object& _param) {
       for ( ; ; ) {
-        static_cast<Threading::Mutex&>(_param).WaitOne();
+        static_cast<Threading::Mutex&>(const_cast<Object&>(_param)).WaitOne();
         if (_stoppingTest)
           return;
         _counter++;

@@ -10,8 +10,8 @@ using namespace System::Threading;
 using namespace TUnit;
 
 TEST(SocketAddress, CtorTest) {
-  uint8_t buffer[16] = {2, 0, 42, 248, 172, 16, 10, 30, 0, 0, 0, 0, 0, 0, 0, 0};
-  SocketAddress address(buffer, 16);
+  Array<byte> buffer = {2, 0, 42, 248, 172, 16, 10, 30, 0, 0, 0, 0, 0, 0, 0, 0};
+  SocketAddress address(buffer);
   ASSERT_EQ(address.ToString(), "InterNetwork:16:{42, 248, 172, 16, 10, 30, 0, 0, 0, 0, 0, 0, 0, 0}");
 }
 

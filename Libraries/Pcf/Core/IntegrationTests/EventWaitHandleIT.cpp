@@ -20,7 +20,7 @@ namespace TestCtor_Unnamed {
 }
 
 namespace TestConcurrentThread {
-  static Up<EventWaitHandle> sync;
+  static up<EventWaitHandle> sync;
   static bool quit = false;
   static int32 nbEventRaised = 0;
   static int32 nbEventLowered = 0;
@@ -42,8 +42,8 @@ namespace TestConcurrentThread {
   }
   
   TEST(EventWaitHandle, ConcurrentThread) {
-    Up<Thread> eventRaiser = new Thread((ThreadStart)&EventRaiser);
-    Up<Thread> eventLower = new Thread((ThreadStart)&EventLower);
+    up<Thread> eventRaiser = new Thread((ThreadStart)&EventRaiser);
+    up<Thread> eventLower = new Thread((ThreadStart)&EventLower);
 
     sync = new EventWaitHandle(false, EventResetMode::AutoReset);
 
@@ -63,7 +63,7 @@ namespace TestConcurrentThread {
 
 namespace TestConcurrentQueue {
   static int32 nbCount = 3000;
-  static Up<EventWaitHandle> sync;
+  static up<EventWaitHandle> sync;
   static int32 nbEventRaised = 0;
   static int32 nbEventLowered = 0;
   static Queue<int32> items;
@@ -89,8 +89,8 @@ namespace TestConcurrentQueue {
   }
   
   TEST(EventWaitHandle, ConcurrentQueue) {
-    Up<Thread> eventRaiser = new Thread((ThreadStart)&EventRaiser);
-    Up<Thread> eventLower = new Thread((ThreadStart)&EventLower);
+    up<Thread> eventRaiser = new Thread((ThreadStart)&EventRaiser);
+    up<Thread> eventLower = new Thread((ThreadStart)&EventLower);
 
     sync = new EventWaitHandle(false, EventResetMode::AutoReset);
 
@@ -129,13 +129,13 @@ namespace {
   }
   
   TEST(AutoResetEvent, ConcurrentThread) {
-    Up<Thread> eventRaiser = new Thread((ThreadStart)&EventRaiser);
-    Array<Sp<Thread>> eventLowers(nbThreadLower);
+    up<Thread> eventRaiser = new Thread((ThreadStart)&EventRaiser);
+    Array<sp<Thread>> eventLowers(nbThreadLower);
     
     for (int32 i = 0; i < nbThreadLower; i++)
-      eventLowers[i] = Sp<Thread>::Create((ThreadStart)&EventLower);
+      eventLowers[i] = sp<Thread>::Create((ThreadStart)&EventLower);
     
-    for (Sp<Thread> thread : eventLowers)
+    for (sp<Thread> thread : eventLowers)
       thread->Start();
     eventRaiser->Start();
 
@@ -143,7 +143,7 @@ namespace {
     quit = true;
     
     eventRaiser->Join(100);
-    for (Sp<Thread> thread : eventLowers)
+    for (sp<Thread> thread : eventLowers)
       thread->Join(100);
     
     Console::WriteLine("nbEventRaised = {0}", nbEventRaised);

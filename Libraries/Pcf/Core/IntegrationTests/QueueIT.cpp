@@ -18,32 +18,32 @@ public:
   void TearDown() override { }
   void TestBody() override { }
 
-  static void EnqueueThread(Object& args);
-  static void DequeueThread(Object& args);
+  static void EnqueueThread(const Object& args);
+  static void DequeueThread(const Object& args);
   
 protected:
   Generic::Queue<Int32> _queue;
   Semaphore _semaphore;
 };
 
-void Queue::EnqueueThread(Object& args) {
+void Queue::EnqueueThread(const Object& args) {
   int32 index = 0;
   while (index < 10) {
     pcf_lock(as<Queue>(args)._queue.SyncRoot) {
       Thread::Sleep(20 + index); // Simulate threatment
-      as<Queue>(args)._queue.Enqueue(index++);
+      as<Queue>(const_cast<object&>(args))._queue.Enqueue(index++);
     }
-    as<Queue>(args)._semaphore.Release(1);
+    as<Queue>(const_cast<object&>(args))._semaphore.Release(1);
   }
   EXPECT_EQ(10, index);
 }
 
-void Queue::DequeueThread(Object& args) {
+void Queue::DequeueThread(const Object& args) {
   int32 index = 0;
   while (index < 10) {
-    as<Queue>(args)._semaphore.WaitOne();
+    as<Queue>(const_cast<object&>(args))._semaphore.WaitOne();
     pcf_lock(as<Queue>(args)._queue.SyncRoot) {
-      EXPECT_EQ(as<Queue>(args)._queue.Dequeue(), index++);
+      EXPECT_EQ(as<Queue>(const_cast<object&>(args))._queue.Dequeue(), index++);
       Thread::Sleep(10 + index); // Simulate threatment
     }
   }

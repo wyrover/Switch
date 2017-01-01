@@ -17,7 +17,7 @@ namespace {
 class Socket : public testing::Test {
   public :
   void SetUp() {    
-    mLastException = Sp<Exception>::Null();
+    mLastException = sp<Exception>::Null();
   }
   
   void TearDown() {
@@ -26,28 +26,20 @@ class Socket : public testing::Test {
   }
   
 protected:
-  static void BuildStringRequest(string& request, IPAddress& ipAddress) {
-    string server = "www.google.com";
-    Array<IPAddress> hostAddresses = Dns::GetHostAddresses(server);
-    ipAddress = hostAddresses[0];
-    request = "GET / HTTP/1.1\r\nHost: " + ipAddress + "\r\nConnection: Close\r\n\r\n";
+  static IPAddress GetIPAddressFromServer(const string& server) {
+    return Dns::GetHostAddresses(server)[0];
   }
   
-  static void BuildHttpRequest(uint8_t* request, int32& requestLength, IPAddress& ipAddress) {
-    string requestStr;
-    BuildStringRequest(requestStr, ipAddress);
-    ASSERT_LT(requestStr.Length(), mBufferLength);
-    Buffer::BlockCopy(IntPtr((void*)requestStr.ToCCharArray().Data()), requestStr.Length(), 0, request, mBufferLength, 0, requestStr.Length());
-    requestLength = requestStr.Length();
+  static string BuildStringRequest(const IPAddress& ipAddress) {
+    return string::Format("GET / HTTP/1.1\r\nHost: {0}\r\nConnection: Close\r\n\r\n", ipAddress);
+  }
+
+  static Array<byte> BuildHttpRequest() {
+    return Text::Encoding::UTF8()->GetBytes(BuildStringRequest(GetIPAddressFromServer("www.google.com")));
   }
   
-  static void BuildHttpRequest(Array<byte>& request, IPAddress& ipAddress) {
-    string requestStr;
-    BuildStringRequest(requestStr, ipAddress);
-    Array<byte>::Resize(request, requestStr.Length());
-    
-    for (Int32 index= 0; index < requestStr.Length(); index++)
-      request[index] = Convert::ToByte(Char(requestStr[index]));
+  static Array<byte> BuildHttpRequest(const IPAddress& ipAddress) {
+    return Text::Encoding::UTF8()->GetBytes(BuildStringRequest(ipAddress));
   }
   
   static void ReceiveThread(Object& data) {
@@ -58,9 +50,9 @@ protected:
     try {
       mDataLength = receivingSocket.Receive(response);
     } catch (const Sockets::SocketException& ex) {
-      mLastException = Sp<Exception>::Create<Sockets::SocketException, Sockets::SocketException>(ex);
+      mLastException = sp<Exception>::Create<Sockets::SocketException, Sockets::SocketException>(ex);
     } catch (ObjectClosedException& ex) {
-      mLastException = Sp<Exception>::Create<ObjectClosedException, ObjectClosedException>(ex);
+      mLastException = sp<Exception>::Create<ObjectClosedException, ObjectClosedException>(ex);
     }
     
     for (Int32 index = 0; index < mDataLength; index++) {
@@ -76,9 +68,9 @@ protected:
     try {
       mDataLength = receivingSocket.ReceiveFrom(response, mFromEndPoint);
     } catch (Sockets::SocketException& ex) {
-      mLastException = Sp<Exception>::Create<Sockets::SocketException, Sockets::SocketException>(ex);
+      mLastException = sp<Exception>::Create<Sockets::SocketException, Sockets::SocketException>(ex);
     } catch (ObjectClosedException& ex) {
-      mLastException = Sp<Exception>::Create<ObjectClosedException, ObjectClosedException>(ex);
+      mLastException = sp<Exception>::Create<ObjectClosedException, ObjectClosedException>(ex);
     }
     
     for (Int32 index = 0; index < mDataLength; index++) {
@@ -93,7 +85,7 @@ protected:
   static IPEndPoint mFromEndPoint;
   static const int32_t mBufferLength;
   
-  static Sp<Exception> mLastException;
+  static sp<Exception> mLastException;
 };
 
 Int32 Socket::mDataLength = 0;
@@ -101,13 +93,13 @@ string Socket::mResponse = "";
 IPEndPoint Socket::mFromEndPoint(0, 0);
 const int32_t Socket::mBufferLength = 256;
 
-Sp<Exception> Socket::mLastException = Sp<Exception>::Null();
+sp<Exception> Socket::mLastException = sp<Exception>::Null();
 
 void Socket::ReceiveFromUsingNativeArrayThread(Object& data) {
   mResponse = "";
   Sockets::Socket& receivingSocket = as<Sockets::Socket>(data);
-  uint8_t response[mBufferLength] = {0};
-  mDataLength = receivingSocket.ReceiveFrom(response, mBufferLength, mFromEndPoint);
+  Array<byte> response(mBufferLength);
+  mDataLength = receivingSocket.ReceiveFrom(response, mFromEndPoint);
   for (Int32 index = 0; index < mDataLength; index++)
   {
     mResponse += Char(Convert::ToChar(Byte(response[index]))).ToString();
@@ -115,27 +107,26 @@ void Socket::ReceiveFromUsingNativeArrayThread(Object& data) {
 }
 
 TEST_F(Socket, ConnectTest) {
-  Sp<Sockets::Socket> mySocket1;
-  mySocket1 = Sp<Sockets::Socket>::Create(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Stream, Sockets::ProtocolType::Tcp);
+  sp<Sockets::Socket> mySocket1;
+  mySocket1 = sp<Sockets::Socket>::Create(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Stream, Sockets::ProtocolType::Tcp);
   mySocket1->Connect(new IPEndPoint(IPAddress(209, 164, 60, 154), 80));
 }
 
 TEST_F(Socket, SendTest_ArrayOfBytes) {
-  Array<byte> request;
-  IPAddress address;
-  BuildHttpRequest(request, address);
+  IPAddress address = GetIPAddressFromServer("www.google.com");
+  Array<byte> request = BuildHttpRequest(address);
   
-  Sp<Sockets::Socket> mySocket1 = new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Stream, Sockets::ProtocolType::Tcp);
+  sp<Sockets::Socket> mySocket1 = new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Stream, Sockets::ProtocolType::Tcp);
   mySocket1->Connect(new IPEndPoint(address, 80));
   EXPECT_EQ(mySocket1->Send(request), request.Length);
 }
 
 TEST_F(Socket, Sendest_NativeArray) {
-  uint8_t request[mBufferLength] = {0};
+  Array<byte> request(mBufferLength);
   int32 requestLength = 0;
   IPAddress address;
   BuildHttpRequest(request, requestLength, address);
-  Sp<Sockets::Socket> mySocket = new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Stream, Sockets::ProtocolType::Tcp);
+  sp<Sockets::Socket> mySocket = new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Stream, Sockets::ProtocolType::Tcp);
   mySocket->Connect(new IPEndPoint(address, 80));
   ASSERT_EQ(mySocket->Send(request, mBufferLength, 0, requestLength, Sockets::SocketFlags::None), requestLength);
 }
@@ -145,7 +136,7 @@ TEST_F(Socket, ReceiveTest_ArrayOfBytes) {
   IPAddress address;
   BuildHttpRequest(request, address);
   
-  Sp<Sockets::Socket> mySocket = new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Stream, Sockets::ProtocolType::Tcp);
+  sp<Sockets::Socket> mySocket = new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Stream, Sockets::ProtocolType::Tcp);
   mySocket->Connect(new IPEndPoint(address, 80));
   mySocket->Send(request);
   
@@ -164,7 +155,7 @@ TEST_F(Socket, ReceiveTest_NativeArray) {
   int32 requestLength = 0;
   IPAddress address;
   BuildHttpRequest(request, requestLength, address);
-  Sp<Sockets::Socket> mySocket = new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Stream, Sockets::ProtocolType::Tcp);
+  sp<Sockets::Socket> mySocket = new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Stream, Sockets::ProtocolType::Tcp);
   mySocket->Connect(new IPEndPoint(address, 80));
   ASSERT_EQ(mySocket->Send(request, mBufferLength, 0, requestLength, Sockets::SocketFlags::None), requestLength);
   uint8_t response[mBufferLength] = {0};
@@ -179,7 +170,7 @@ TEST_F(Socket, ReceiveTest_NativeArray) {
 TEST_F(Socket, ReceiveTest_ReceiveAfterShutdown) {
   // Create socket on loopback address and create receiving thread
   IPEndPoint endPoint(IPAddress::Loopback(), ++TestUtils::mPort);
-  Sp<Sockets::Socket> receivingSocket =new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Dgram, Sockets::ProtocolType::Udp);
+  sp<Sockets::Socket> receivingSocket =new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Dgram, Sockets::ProtocolType::Udp);
   receivingSocket->Bind(new IPEndPoint(endPoint));
   
   Thread receivingThread(ReceiveThread);
@@ -191,10 +182,10 @@ TEST_F(Socket, ReceiveTest_ReceiveAfterShutdown) {
   receivingThread.Join();
 
   //In Linux there are no error when calling receive after shutdown it return 0
-  ASSERT_FALSE(Sp<Exception>::IsNullOrEmpty(mLastException));
+  ASSERT_FALSE(sp<Exception>::IsNullOrEmpty(mLastException));
   Console::WriteLine("Error = " + mLastException->GetError());
   ASSERT_TRUE(mLastException->GetError() == Error::Sockets::Socket);
-  ASSERT_TRUE((Sp<Sockets::SocketException>(mLastException))->GetSocketError() == SocketError::Shutdown);
+  ASSERT_TRUE((sp<Sockets::SocketException>(mLastException))->GetSocketError() == SocketError::Shutdown);
 }
 */
 
@@ -204,7 +195,7 @@ TEST_F(Socket, ReceiveTest_ReceiveAfterShutdown) {
 TEST_F(Socket, ReceiveTest_ReceiveBeforeClose) {
   // Create socket on loopback address and create receiving thread
   IPEndPoint endPoint(IPAddress::Loopback(), TestUtils::mPort);
-  Sp<Sockets::Socket> receivingSocket =new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Dgram, Sockets::ProtocolType::Udp);
+  sp<Sockets::Socket> receivingSocket =new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Dgram, Sockets::ProtocolType::Udp);
   receivingSocket->Bind(new IPEndPoint(endPoint));
   
   Thread receivingThread(ReceiveFromThread);
@@ -219,16 +210,16 @@ TEST_F(Socket, ReceiveTest_ReceiveBeforeClose) {
   receivingThread.Join();
   
   
-  ASSERT_FALSE(Sp<Exception>::IsNullOrEmpty(mLastException));
+  ASSERT_FALSE(sp<Exception>::IsNullOrEmpty(mLastException));
   ASSERT_TRUE(mLastException->GetError() == Error::Sockets::Socket);
-  ASSERT_EQ((Sp<Sockets::SocketException>(mLastException))->GetSocketError().ToInt32(), SocketError::Interrupted);
+  ASSERT_EQ((sp<Sockets::SocketException>(mLastException))->GetSocketError().ToInt32(), SocketError::Interrupted);
 }
 */
 
 TEST_F(Socket, ReceiveTest_ReceiveBeforeShutdownAndClose) {
   // Create socket on loopback address and create receiving thread
   IPEndPoint endPoint(IPAddress::Loopback, ++TestUtils::mPort);
-  Sp<Sockets::Socket> receivingSocket =new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Dgram, Sockets::ProtocolType::Udp);
+  sp<Sockets::Socket> receivingSocket =new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Dgram, Sockets::ProtocolType::Udp);
   receivingSocket->Bind(new IPEndPoint(endPoint));
   Thread receivingThread((ParameterizedThreadStart)ReceiveThread);
   receivingThread.Start(receivingSocket.ToObject());
@@ -243,7 +234,7 @@ TEST_F(Socket, ReceiveTest_ReceiveBeforeShutdownAndClose) {
 TEST_F(Socket, ReceiveTest_ReceiveAfterClose) {
   // Create socket on loopback address and create receiving thread
   IPEndPoint endPoint(IPAddress::Loopback, ++TestUtils::mPort);
-  Sp<Sockets::Socket> receivingSocket =new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Dgram, Sockets::ProtocolType::Udp);
+  sp<Sockets::Socket> receivingSocket =new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Dgram, Sockets::ProtocolType::Udp);
   receivingSocket->Bind(new IPEndPoint(endPoint));
   Thread receivingThread((ParameterizedThreadStart)ReceiveThread);
   receivingSocket->Close();
@@ -254,14 +245,14 @@ TEST_F(Socket, ReceiveTest_ReceiveAfterClose) {
 }
 
 TEST_F(Socket, SendToTest_ArrayOfBytes) {
-  Sp<Sockets::Socket> socket =new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Dgram, Sockets::ProtocolType::Udp);
+  sp<Sockets::Socket> socket =new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Dgram, Sockets::ProtocolType::Udp);
   IPEndPoint endPoint(TestUtils::GetRemoteIPAddress(), 80);
   Array<byte> data = TestUtils::GetDataArray("Hello World!");
   EXPECT_EQ(socket->SendTo(data, endPoint), data.Length);
 }
 
 TEST_F(Socket, SendToTest_NativeArray) {
-  Sp<Sockets::Socket> socket = new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Dgram, Sockets::ProtocolType::Udp);
+  sp<Sockets::Socket> socket = new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Dgram, Sockets::ProtocolType::Udp);
   IPEndPoint endPoint(TestUtils::GetRemoteIPAddress(), 80);
   string messageStr("Hello World!");
   uint8_t buffer[mBufferLength] = {0};
@@ -272,12 +263,12 @@ TEST_F(Socket, SendToTest_NativeArray) {
 TEST_F(Socket, ReceiveFromTest_ArrayOfBytes) {
   // Create socket on loopback address and create receiving thread
   IPEndPoint endPoint(IPAddress::Loopback, ++TestUtils::mPort);
-  Sp<Sockets::Socket> receivingSocket =new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Dgram, Sockets::ProtocolType::Udp);
+  sp<Sockets::Socket> receivingSocket =new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Dgram, Sockets::ProtocolType::Udp);
   receivingSocket->Bind(new IPEndPoint(endPoint));
   Thread receivingThread((ParameterizedThreadStart)ReceiveFromThread);
   receivingThread.Start(receivingSocket.ToObject());
   // Send data to loopback address
-  Sp<Sockets::Socket> sendingSocket =new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Dgram, Sockets::ProtocolType::Udp);
+  sp<Sockets::Socket> sendingSocket =new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Dgram, Sockets::ProtocolType::Udp);
   string dataStr = "Hello World!";
   Array<byte> data = TestUtils::GetDataArray(dataStr);
   EXPECT_EQ(sendingSocket->SendTo(data, endPoint), data.Length);
@@ -291,12 +282,12 @@ TEST_F(Socket, ReceiveFromTest_ArrayOfBytes) {
 TEST_F(Socket, ReceiveFromTest_NativeArray) {
   // Create socket on loopback address and create receiving thread
   IPEndPoint endPoint(IPAddress::Loopback, ++TestUtils::mPort);
-  Sp<Sockets::Socket> receivingSocket =new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Dgram, Sockets::ProtocolType::Udp);
+  sp<Sockets::Socket> receivingSocket =new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Dgram, Sockets::ProtocolType::Udp);
   receivingSocket->Bind(new IPEndPoint(endPoint));
   Thread receivingThread((ParameterizedThreadStart)ReceiveFromUsingNativeArrayThread);
   receivingThread.Start(receivingSocket.ToObject());
   // Send data to loopback address
-  Sp<Sockets::Socket> sendingSocket =new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Dgram, Sockets::ProtocolType::Udp);
+  sp<Sockets::Socket> sendingSocket =new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Dgram, Sockets::ProtocolType::Udp);
   string dataStr = "Hello World!";
   Array<byte> data = TestUtils::GetDataArray(dataStr);
   EXPECT_EQ(sendingSocket->SendTo(data, endPoint), data.Length);
@@ -313,7 +304,7 @@ TEST_F(Socket, ReceiveFromTest_ReceiveFromAfterShutdown)
 {
   // Create socket on loopback address and create receiving thread
   IPEndPoint endPoint(IPAddress::Loopback(), ++TestUtils::mPort);
-  Sp<Sockets::Socket> receivingSocket =new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Dgram, Sockets::ProtocolType::Udp);
+  sp<Sockets::Socket> receivingSocket =new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Dgram, Sockets::ProtocolType::Udp);
   receivingSocket->Bind(new IPEndPoint(endPoint));
   
   Thread receivingThread(ReceiveFromThread);
@@ -325,9 +316,9 @@ TEST_F(Socket, ReceiveFromTest_ReceiveFromAfterShutdown)
   receivingThread.Join();
   
   //There are no exception in linux when shutdown during recv
-  ASSERT_FALSE(Sp<Exception>::IsNullOrEmpty(mLastException));
+  ASSERT_FALSE(sp<Exception>::IsNullOrEmpty(mLastException));
   ASSERT_TRUE(mLastException->GetError() == Error::Sockets::Socket);
-  ASSERT_TRUE((Sp<Sockets::SocketException>(mLastException))->GetSocketError() == SocketError::Shutdown);
+  ASSERT_TRUE((sp<Sockets::SocketException>(mLastException))->GetSocketError() == SocketError::Shutdown);
 }
 */
 
@@ -338,7 +329,7 @@ TEST_F(Socket, ReceiveFromTest_ReceiveFromBeforeClose)
 {
   // Create socket on loopback address and create receiving thread
   IPEndPoint endPoint(IPAddress::Loopback(), TestUtils::mPort);
-  Sp<Sockets::Socket> receivingSocket =new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Dgram, Sockets::ProtocolType::Udp);
+  sp<Sockets::Socket> receivingSocket =new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Dgram, Sockets::ProtocolType::Udp);
   receivingSocket->Bind(new IPEndPoint(endPoint));
   
   Thread receivingThread(ReceiveFromThread);
@@ -352,15 +343,15 @@ TEST_F(Socket, ReceiveFromTest_ReceiveFromBeforeClose)
   
   receivingThread.Join();
   
-  ASSERT_FALSE(Sp<Exception>::IsNullOrEmpty(mLastException));
+  ASSERT_FALSE(sp<Exception>::IsNullOrEmpty(mLastException));
   ASSERT_TRUE(mLastException->GetError() == Error::Sockets::Socket);
-  ASSERT_TRUE((Sp<Sockets::SocketException>(mLastException))->GetSocketError() == SocketError::Interrupted);
+  ASSERT_TRUE((sp<Sockets::SocketException>(mLastException))->GetSocketError() == SocketError::Interrupted);
 }
 */
 TEST_F(Socket, ReceiveFromTest_ReceiveFromBeforeShutdownAndClose) {
   // Create socket on loopback address and create receiving thread
   IPEndPoint endPoint(IPAddress::Loopback, ++TestUtils::mPort);
-  Sp<Sockets::Socket> receivingSocket =new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Dgram, Sockets::ProtocolType::Udp);
+  sp<Sockets::Socket> receivingSocket =new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Dgram, Sockets::ProtocolType::Udp);
   receivingSocket->Bind(new IPEndPoint(endPoint));
   Thread receivingThread((ParameterizedThreadStart)ReceiveFromThread);
   receivingThread.Start(receivingSocket.ToObject());
@@ -373,7 +364,7 @@ TEST_F(Socket, ReceiveFromTest_ReceiveFromBeforeShutdownAndClose) {
 TEST_F(Socket, ReceiveFromTest_ReceiveFromAfterClose) {
   // Create socket on loopback address and create receiving thread
   IPEndPoint endPoint(IPAddress::Loopback, ++TestUtils::mPort);
-  Sp<Sockets::Socket> receivingSocket =new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Dgram, Sockets::ProtocolType::Udp);
+  sp<Sockets::Socket> receivingSocket =new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Dgram, Sockets::ProtocolType::Udp);
   receivingSocket->Bind(new IPEndPoint(endPoint));
   Thread receivingThread((ParameterizedThreadStart)ReceiveFromThread);
   receivingSocket->Close();
@@ -384,15 +375,15 @@ TEST_F(Socket, ReceiveFromTest_ReceiveFromAfterClose) {
 }
 
 TEST_F(Socket, SelectTrivialIntegrationTest) {
-  Sp<Sockets::Socket> socket =new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Dgram, Sockets::ProtocolType::Udp);
+  sp<Sockets::Socket> socket =new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Dgram, Sockets::ProtocolType::Udp);
   IPEndPoint endPoint(IPAddress::Loopback, ++TestUtils::mPort);
   socket->Bind(new IPEndPoint(endPoint));
   socket->Listen(64);
-  List<Sp<Sockets::Socket>> checkRead;
+  List<sp<Sockets::Socket>> checkRead;
   checkRead.Add(socket);
-  List<Sp<Sockets::Socket>> checkWrite;
+  List<sp<Sockets::Socket>> checkWrite;
   checkWrite.Add(socket);
-  List<Sp<Sockets::Socket>> checkError;
+  List<sp<Sockets::Socket>> checkError;
   checkError.Add(socket);
   EXPECT_TRUE(checkRead.Count == 1 && checkWrite.Count == 1 && checkError.Count == 1);
   Sockets::Socket::Select(checkRead, checkWrite, checkError, 0);
@@ -401,24 +392,24 @@ TEST_F(Socket, SelectTrivialIntegrationTest) {
 }
 
 TEST_F(Socket, DISABLED_SelectAndReceive) {
-  Sp<Sockets::Socket> socket = new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Dgram, Sockets::ProtocolType::Udp);
+  sp<Sockets::Socket> socket = new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Dgram, Sockets::ProtocolType::Udp);
   IPEndPoint endPoint(IPAddress::Loopback, ++TestUtils::mPort);
   socket->Bind(new IPEndPoint(endPoint));
   socket->Listen(64);
-  Sp<Sockets::Socket> socket2 = new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Dgram, Sockets::ProtocolType::Udp);
+  sp<Sockets::Socket> socket2 = new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Dgram, Sockets::ProtocolType::Udp);
   IPEndPoint endPoint2(IPAddress::Loopback, TestUtils::mPort + 1);
   socket2->Bind(new IPEndPoint(endPoint2));
   socket2->Listen(64);
-  Sp<Sockets::Socket> sendingSocket = new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Dgram, Sockets::ProtocolType::Udp);
+  sp<Sockets::Socket> sendingSocket = new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Dgram, Sockets::ProtocolType::Udp);
   string dataStr = "Hello World!";
   Array<byte> data = TestUtils::GetDataArray(dataStr);
   sendingSocket->SendTo(data, endPoint);
-  List<Sp<Sockets::Socket>> checkRead;
+  List<sp<Sockets::Socket>> checkRead;
   checkRead.Add(socket);
   checkRead.Add(socket2);
-  List<Sp<Sockets::Socket>> checkWrite;
+  List<sp<Sockets::Socket>> checkWrite;
   checkWrite.Add(socket);
-  List<Sp<Sockets::Socket>> checkError;
+  List<sp<Sockets::Socket>> checkError;
   checkError.Add(socket);
   EXPECT_TRUE(checkRead.Count == 2 && checkWrite.Count == 1 && checkError.Count == 1);
   Sockets::Socket::Select(checkRead, checkWrite, checkError, -1);
@@ -440,7 +431,7 @@ TEST_F(Socket, DISABLED_SelectAndReceive) {
 }
 
 TEST_F(Socket, PollAndNoReceiveIntegrationTest) {
-  Sp<Sockets::Socket> socket = new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Dgram, Sockets::ProtocolType::Udp);
+  sp<Sockets::Socket> socket = new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Dgram, Sockets::ProtocolType::Udp);
   IPEndPoint endPoint(IPAddress::Loopback, ++TestUtils::mPort);
   socket->Bind(new IPEndPoint(endPoint));
   socket->Listen(64);
@@ -449,11 +440,11 @@ TEST_F(Socket, PollAndNoReceiveIntegrationTest) {
 }
 
 TEST_F(Socket, PollAndReceiveIntegrationTest) {
-  Sp<Sockets::Socket> socket =new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Dgram, Sockets::ProtocolType::Udp);
+  sp<Sockets::Socket> socket =new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Dgram, Sockets::ProtocolType::Udp);
   IPEndPoint endPoint(IPAddress::Loopback, ++TestUtils::mPort);
   socket->Bind(new IPEndPoint(endPoint));
   socket->Listen(64);
-  Sp<Sockets::Socket> sendingSocket =new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Dgram, Sockets::ProtocolType::Udp);
+  sp<Sockets::Socket> sendingSocket =new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Dgram, Sockets::ProtocolType::Udp);
   string dataStr = "Hello World!";
   Array<byte> data = TestUtils::GetDataArray(dataStr);
   sendingSocket->SendTo(data, endPoint);
@@ -463,18 +454,18 @@ TEST_F(Socket, PollAndReceiveIntegrationTest) {
 }
 
 TEST_F(Socket, EnableBroadcastTest) {
-  Sp<Sockets::Socket> socket = new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Dgram, Sockets::ProtocolType::Udp);
+  sp<Sockets::Socket> socket = new Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Dgram, Sockets::ProtocolType::Udp);
   try {
     socket->SetEnableBroadcast(true);
   } catch (Sockets::SocketException& ex) {
-    mLastException = Sp<Exception>::Create(ex);
+    mLastException = sp<Exception>::Create(ex);
   }
   ASSERT_TRUE(mLastException.IsNull());
 }
 
 TEST_F(Socket, ConstructorTest_TCP) { 
-  Sp<Sockets::Socket> mySocket1;
-  mySocket1 = Sp<Sockets::Socket>::Create(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Stream, Sockets::ProtocolType::Tcp);
+  sp<Sockets::Socket> mySocket1;
+  mySocket1 = sp<Sockets::Socket>::Create(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Stream, Sockets::ProtocolType::Tcp);
   EXPECT_EQ(mySocket1->AddressFamily(), Sockets::AddressFamily::InterNetwork);
   EXPECT_EQ(mySocket1->SocketType(), Sockets::SocketType::Stream);
   EXPECT_EQ(mySocket1->ProtocolType(), Sockets::ProtocolType::Tcp);
@@ -482,8 +473,8 @@ TEST_F(Socket, ConstructorTest_TCP) {
 
 TEST_F(Socket, ConstructorTest_UDP)
 {
-  Sp<Sockets::Socket> mySocket2;
-  mySocket2 = Sp<Sockets::Socket>::Create(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Dgram, Sockets::ProtocolType::Udp);
+  sp<Sockets::Socket> mySocket2;
+  mySocket2 = sp<Sockets::Socket>::Create(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Dgram, Sockets::ProtocolType::Udp);
   EXPECT_EQ(mySocket2->AddressFamily(), Sockets::AddressFamily::InterNetwork);
   EXPECT_EQ(mySocket2->SocketType(), Sockets::SocketType::Dgram);
   EXPECT_EQ(mySocket2->ProtocolType(), Sockets::ProtocolType::Udp);

@@ -121,7 +121,7 @@ namespace {
   TEST_F(ThreadSynchro, Lock) {
     int32 index = 0;
     
-    //Sp<TimeSpan> duration;
+    //sp<TimeSpan> duration;
     //profile(duration)
     {
       Object sync;

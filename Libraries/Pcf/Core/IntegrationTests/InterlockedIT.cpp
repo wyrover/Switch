@@ -34,13 +34,13 @@ const int32 addEnd = 5;
 
 class Interlocked: public testing::Test {  
 protected: 
-  static void ThreadProc(Object&) {
+  static void ThreadProc(const object&) {
     // Create 100000 instances of CountClass.
     for (int i = 0; i < 100000; i++)
       CountClass cClass;
   }
 
-  static void ThreadProc2(Object&) {
+  static void ThreadProc2(const object&) {
     for (int i = 0; i < 5; i++) {
       UseResource();
       //Wait 0.1 second before next attempt.
@@ -63,8 +63,8 @@ protected:
     return false;
   }
 
-  static void ThreadProc3(Object& _data) {
-    for (int i = 0; i < static_cast<Int32&>(_data); i++) {
+  static void ThreadProc3(const Object& _data) {
+    for (int i = 0; i < static_cast<const Int32&>(_data); i++) {
       SafeAddToTotal(addEnd);
       UnsafeAddToTotal(addEnd);
     }
@@ -101,11 +101,11 @@ TEST_F(Interlocked, IncrementDecrement) {
 
 TEST_F(Interlocked, DISABLED_Exchange) { // problem under CE
   const int32_t maxThread = 9;
-  Sp<Threading::Thread> threads[maxThread];
+  sp<Threading::Thread> threads[maxThread];
   System::Random myRandom(1000);
 
   for (Int32 index = 0; index < maxThread; index++) {
-    threads[index] = Sp<Threading::Thread>::Create((Threading::ParameterizedThreadStart)&ThreadProc2);
+    threads[index] = sp<Threading::Thread>::Create((Threading::ParameterizedThreadStart)&ThreadProc2);
 	  threads[index]->Name = string::Format("Thread{0}", index+1);
     //Wait a random amount of time before starting next thread.
     Threading::Thread::Sleep(myRandom.Next(0, 100));
@@ -120,10 +120,10 @@ TEST_F(Interlocked, DISABLED_CompareExchange) { // problem under CE
   safeTotalValue = 0;
   unsafeTotalValue = 0;
   const int32_t maxThread = 9;
-  Sp<Threading::Thread>threads[maxThread];
+  sp<Threading::Thread>threads[maxThread];
   static Int32 loopCount = 10000;
   for (Int32 index = 0; index < maxThread; index++) {
-    threads[index] = Sp<Threading::Thread>::Create((Threading::ParameterizedThreadStart)&ThreadProc3);
+    threads[index] = sp<Threading::Thread>::Create((Threading::ParameterizedThreadStart)&ThreadProc3);
     threads[index]->Name = string::Format("Thread{0}", index+1);
     threads[index]->Start(loopCount);
   }

@@ -111,14 +111,14 @@ TEST_F(Directory, DISABLED_MoveAndListDirectoriesFiles) {
   IO::DirectoryInfo subDirInfo2 = subDirInfo.CreateSubdirectory("DirTest4");
 
   // Create a file
-  pcf_using(Up<IO::StreamWriter> streamWriter1 = IO::File::CreateText(IO::Path::Combine(subDirInfo2.FullName(), "TestFile.txt"))) {
-    streamWriter1->WriteLine(string("Test1"));
-    streamWriter1->WriteLine(string("Test2"));
+  pcf_using(IO::StreamWriter streamWriter1 = IO::File::CreateText(IO::Path::Combine(subDirInfo2.FullName(), "TestFile.txt"))) {
+    streamWriter1.WriteLine(string("Test1"));
+    streamWriter1.WriteLine(string("Test2"));
   }
 
-  pcf_using(Up<IO::StreamWriter> streamWriter2 = IO::File::CreateText(IO::Path::Combine(subDirInfo2.FullName(), "TestFile2.txt"))) {
-    streamWriter2->WriteLine(string("Test1"));
-    streamWriter2->WriteLine(string("Test2"));
+  pcf_using(IO::StreamWriter streamWriter2 = IO::File::CreateText(IO::Path::Combine(subDirInfo2.FullName(), "TestFile2.txt"))) {
+    streamWriter2.WriteLine(string("Test1"));
+    streamWriter2.WriteLine(string("Test2"));
   }
 
   subDirInfo.MoveTo(IO::Directory::GetCurrentDirectory());

@@ -15,11 +15,11 @@ namespace {
 class UdpClient : public testing::Test {
 
 protected:
-  void CheckUdpSocket(const Sp<Sockets::Socket>& socket) {
+  void CheckUdpSocket(const sp<Sockets::Socket>& socket) {
     CheckUdpSocket(socket, Sockets::AddressFamily::InterNetwork);
   }
 
-  void CheckUdpSocket(const Sp<Sockets::Socket>& socket, Sockets::AddressFamily addressFamily) {
+  void CheckUdpSocket(const sp<Sockets::Socket>& socket, Sockets::AddressFamily addressFamily) {
     ASSERT_EQ(socket->AddressFamily(), addressFamily);
     ASSERT_EQ(socket->SocketType(), Sockets::SocketType::Dgram);
     ASSERT_EQ(socket->ProtocolType(), Sockets::ProtocolType::Udp);
@@ -37,9 +37,9 @@ protected:
 
   class IncomingData : public object {
   public:
-    explicit IncomingData(const Sp<Sockets::UdpClient>& client) : mUdpClient(client), mDataLength(0), mResponse(""), mFromEndPoint(0, 0) {}
+    explicit IncomingData(const sp<Sockets::UdpClient>& client) : mUdpClient(client), mDataLength(0), mResponse(""), mFromEndPoint(0, 0) {}
 
-    Sp<Sockets::UdpClient> mUdpClient;
+    sp<Sockets::UdpClient> mUdpClient;
     int32 mDataLength;
     string mResponse;
     IPEndPoint mFromEndPoint;
@@ -63,20 +63,20 @@ void UdpClient::ReceiveUsingNativeArrayThread(Object& data) {
 void UdpClient::DoReceiveTest(Boolean nativeArray) {
   // Create an endpoint on loopback address and create receiving thread
   IPEndPoint endPoint(IPAddress::Loopback, TestUtils::mPort);
-  Sp<Sockets::UdpClient> receivingClient = new Sockets::UdpClient(new IPEndPoint(endPoint));
+  sp<Sockets::UdpClient> receivingClient = new Sockets::UdpClient(new IPEndPoint(endPoint));
 
   IncomingData incomingData(receivingClient);
-  Sp<Thread> receivingThread;
+  sp<Thread> receivingThread;
   if (nativeArray) {
-    receivingThread = Sp<Thread>::Create((ParameterizedThreadStart)ReceiveUsingNativeArrayThread);
+    receivingThread = sp<Thread>::Create((ParameterizedThreadStart)ReceiveUsingNativeArrayThread);
   } else { 
-    receivingThread = Sp<Thread>::Create((ParameterizedThreadStart)ReceiveThread);
+    receivingThread = sp<Thread>::Create((ParameterizedThreadStart)ReceiveThread);
   }
   
   receivingThread->Start(incomingData);
 
   // Send data to loopback address
-  Sp<Sockets::UdpClient> sendingClient = new Sockets::UdpClient();
+  sp<Sockets::UdpClient> sendingClient = new Sockets::UdpClient();
   string dataStr = "Hello World!";
   Array<byte> data = TestUtils::GetDataArray(dataStr);
   EXPECT_EQ(sendingClient->Send(data, endPoint), data.Length);
@@ -310,7 +310,7 @@ TEST_F(UdpClient, ReceiveTest_NativeArray) {
 TEST_F(UdpClient, SendReceiveTest_SameClient) {
   // Create an endpoint on loopback address and create receiving thread
   IPEndPoint endPoint(IPAddress::Loopback, TestUtils::mPort);
-  Sp<Sockets::UdpClient> client = new Sockets::UdpClient(new IPEndPoint(endPoint));
+  sp<Sockets::UdpClient> client = new Sockets::UdpClient(new IPEndPoint(endPoint));
 
   IncomingData incomingData(client);
   Thread receivingThread((ParameterizedThreadStart)ReceiveThread);

@@ -10,7 +10,7 @@ using namespace TUnit;
 class Dns : public object, public testing::Test {
   
 public:
-  static void Run(Object& /*obj*/) {
+  static void Run(const Object& obj) {
     string hostName = Net::Dns::GetHostName();
     Array<Net::IPAddress> addresses = Net::Dns::GetHostAddresses(hostName);
 

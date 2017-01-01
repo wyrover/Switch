@@ -40,10 +40,10 @@ TEST(Semaphore, DISABLED_SemaphoreFunctions) {
   static Threading::Semaphore sem(0, 3, "MySempaphore", createdNew);
   EXPECT_TRUE(createdNew);
   const int32_t numThread = 5;
-  Sp<Thread> threads[numThread];
+  sp<Thread> threads[numThread];
   for (Int32 i = 0; i < numThread; i++) {
-    threads[i] = Sp<Thread>::Create((ParameterizedThreadStart)&ThreadProc);
-    threads[i]->SetName("Thread" + Int32(i+1));
+    threads[i] = sp<Thread>::Create((ParameterizedThreadStart)&ThreadProc);
+    threads[i]->Name("Thread" + Int32(i+1));
     threads[i]->Start(sem);
   }
 

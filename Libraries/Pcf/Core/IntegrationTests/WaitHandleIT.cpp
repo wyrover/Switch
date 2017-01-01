@@ -15,10 +15,10 @@ namespace {
 
 	TEST_F(WaitHandleTests, WaitingForAnyEventTimesOutIfEventNotSignalled) {
 		// GIVEN an Event that is not signalled
-		Sp<System::Threading::AutoResetEvent> triggerStop = new System::Threading::AutoResetEvent(false);
+		sp<System::Threading::AutoResetEvent> triggerStop = new System::Threading::AutoResetEvent(false);
 
 		// WHEN waiting for the event with a timeout of 500 ms
-		System::Collections::Generic::List<Sp<System::Threading::WaitHandle>> events;
+		System::Collections::Generic::List<sp<System::Threading::WaitHandle>> events;
 		events.Add(triggerStop.ChangeType<System::Threading::WaitHandle>());
 
 		DateTime time = DateTime::Now;
@@ -42,10 +42,10 @@ namespace {
 
 	TEST_F(WaitHandleTests, WaitingForAllEventsTimesOutIfEventNotSignalled) {
 		// GIVEN an Event that is not signalled
-		Sp<System::Threading::AutoResetEvent> triggerStop = new System::Threading::AutoResetEvent(false);
+		sp<System::Threading::AutoResetEvent> triggerStop = new System::Threading::AutoResetEvent(false);
 
 		// WHEN waiting for the event with a timeout of 500 ms
-		System::Collections::Generic::List<Sp<System::Threading::WaitHandle>> events;
+		System::Collections::Generic::List<sp<System::Threading::WaitHandle>> events;
 		events.Add(triggerStop.ChangeType<System::Threading::WaitHandle>());
 
 		DateTime time = DateTime::Now;

@@ -30,7 +30,7 @@ protected:
   
   static void DoWork(Object& _data) {
     UInt32 DataU32 = (UInt32&)(_data);
-    Sp<Threading::Thread> CurrentThread = Threading::Thread::GetCurrentThread();
+    sp<Threading::Thread> CurrentThread = Threading::Thread::GetCurrentThread();
     EXPECT_TRUE(CurrentThread->GetName() == string("ThreadUnitTest"));
     Threading::Thread::Sleep(50);
     Threading::Thread::Sleep(TimeSpan(500000)); // 500 msec
@@ -136,8 +136,8 @@ protected:
 TEST_F(Thread, SimpleThread) {
   EXPECT_EQ(string("MainThread"), Threading::Thread::GetCurrentThread()->GetName());
   EXPECT_EQ(Threading::ThreadState(Threading::ThreadState::Running), Threading::Thread::GetCurrentThread()->GetState());
-  Sp<Threading::Thread> thread = new Threading::Thread((Threading::ParameterizedThreadStart)SimpleThread);
-  EXPECT_NE(thread, Sp<Threading::Thread>::Null());
+  sp<Threading::Thread> thread = new Threading::Thread((Threading::ParameterizedThreadStart)SimpleThread);
+  EXPECT_NE(thread, sp<Threading::Thread>::Null());
   thread->SetName("SimpleThread");
   EXPECT_EQ(string("SimpleThread"), thread->GetName());
   EXPECT_EQ(Threading::ThreadState(Threading::ThreadState::Unstarted), thread->GetState());
@@ -198,7 +198,7 @@ TEST_F(Thread, Thread) {
 TEST_F(Thread, ThreadPriorityCanBeSetBeforeStartingAThread) {
   Threading::ThreadPriority wanted = Threading::ThreadPriority::AboveNormal;
   Threading::ThreadPriority expected = Threading::ThreadPriority::Normal;
-  Sp<Threading::Thread> thread = new Threading::Thread((Threading::ThreadStart)[&]() {
+  sp<Threading::Thread> thread = new Threading::Thread((Threading::ThreadStart)[&]() {
     expected = Threading::Thread::GetCurrentThread()->GetPriority();
   });
 
@@ -214,13 +214,13 @@ TEST_F(Thread, ThreadPriorityCanBeSetBeforeStartingAThread) {
  {
  const int32_t nbMaxThreads = 50;
  const int32_t nbCount = 42;
- Up<Threading::Thread> threads[nbMaxThreads];
+ up<Threading::Thread> threads[nbMaxThreads];
  
  for (Int32 count = 0; count < nbCount; count++)
  {
  for (Int32 index=0; index < nbMaxThreads; index++)
  {
- threads[index] = Up<Threading::Thread>::Create(MyThreadProcs);
+ threads[index] = up<Threading::Thread>::Create(MyThreadProcs);
  threads[index]->SetName("Threading::Thread " + Int32(index+1));
  threads[index]->Start(index);
  }
@@ -242,7 +242,7 @@ TEST_F(Thread, ThreadPriorityCanBeSetBeforeStartingAThread) {
 TEST_F(Thread, UnnamedMutex) {
   const Int32 nbMaxThreads = 3;
   Threading::Mutex mutex(false);
-  Collections::Generic::List<Sp<Threading::Thread>> threads;
+  Collections::Generic::List<sp<Threading::Thread>> threads;
   
   // Create the threads that will use the protected resource.
   Int32 count;
@@ -260,13 +260,13 @@ TEST_F(Thread, UnnamedMutex) {
 
 TEST_F(Thread, NamedMutex) {
   const int32_t nbMaxThreads = 3;
-  Up<Threading::Thread> threads[nbMaxThreads];
+  up<Threading::Thread> threads[nbMaxThreads];
   bool createdNew = false;
   Threading::Mutex mutex(false, "MyMutex", createdNew);
   EXPECT_TRUE(createdNew);
   // Create the threads that will use the protected resource.
   for (Int32 index = 0; index < nbMaxThreads; index++) {
-    threads[index] = Up<Threading::Thread>::Create((Threading::ParameterizedThreadStart)MyThreadProc2);
+    threads[index] = up<Threading::Thread>::Create((Threading::ParameterizedThreadStart)MyThreadProc2);
     threads[index]->SetName("Threading::Thread " + Int32(index+1));
     threads[index]->Start(index);
   }
@@ -284,10 +284,10 @@ TEST_F(Thread, DISABLED_ManualResetEvent) {
   Int32 index = 0;
   threadCount = 0;
   const int32_t nbMaxThreads = 5;
-  Up<Threading::Thread> threads[nbMaxThreads];
+  up<Threading::Thread> threads[nbMaxThreads];
   
   for (index = 0; index < nbMaxThreads; index++) {
-    threads[index] = Up<Threading::Thread>::Create((Threading::ParameterizedThreadStart)MyThreadProc3);
+    threads[index] = up<Threading::Thread>::Create((Threading::ParameterizedThreadStart)MyThreadProc3);
     threads[index]->SetName("Threading::Thread " + Int32(index+1));
     threads[index]->Start(index);
   }
@@ -313,11 +313,11 @@ TEST_F(Thread, DISABLED_ManualResetEvent) {
 
 TEST_F(Thread, DISABLED_AutoResetEvent) {
   const int32_t nbMaxThreads = 5;
-  Up<Threading::Thread> threads[nbMaxThreads];
+  up<Threading::Thread> threads[nbMaxThreads];
   bool createdNew = false;
   Threading::EventWaitHandle evh(false, Threading::EventResetMode::ManualReset, "evh", createdNew);
   for (Int32 index = 0; index < nbMaxThreads; index++) {
-    threads[index] = Up<Threading::Thread>::Create((Threading::ParameterizedThreadStart)MyThreadProc3);
+    threads[index] = up<Threading::Thread>::Create((Threading::ParameterizedThreadStart)MyThreadProc3);
     threads[index]->SetName("Threading::Thread " + Int32(index+1));
     threads[index]->Start(index);
   }
@@ -345,7 +345,7 @@ TEST_F(Thread, DISABLED_AutoResetEvent) {
 TEST_F(Thread, WaitHandleWaitOne) {
   Threading::EventWaitHandle evh(false, Threading::EventResetMode::AutoReset, "evh");
   UInt32 obj = 0;
-  Sp<Threading::Thread> thread = new Threading::Thread((Threading::ParameterizedThreadStart)MyThreadProc4);
+  sp<Threading::Thread> thread = new Threading::Thread((Threading::ParameterizedThreadStart)MyThreadProc4);
   thread->Start(obj);
   EXPECT_FALSE(evh.WaitOne(00));
   EXPECT_FALSE(evh.WaitOne(TimeSpan(500000)));
@@ -364,7 +364,7 @@ TEST_F(Thread, WaitHandleWaitAll)
   
   
   UInt32 Object = 0;
-  Sp<Threading::Thread> thread = new Threading::Thread(MyThreadProc5);
+  sp<Threading::Thread> thread = new Threading::Thread(MyThreadProc5);
   thread->Start(Object);
   
   // Release the mutex
@@ -425,7 +425,7 @@ TEST_F(Thread, WaitHandleWaitAll)
 
 TEST_F(Thread, Timer) {
   Int32 count;
-  Sp<Threading::Timer> timer = new Threading::Timer(TimerThreadProc, count, TimeSpan::FromMilliseconds(40.0), TimeSpan::FromMilliseconds(20.0));
+  sp<Threading::Timer> timer = new Threading::Timer(TimerThreadProc, count, TimeSpan::FromMilliseconds(40.0), TimeSpan::FromMilliseconds(20.0));
   Threading::Thread::Sleep(115); // Attente de 1,1 Seconde
   timer.Reset();
   EXPECT_EQ(count, 4);

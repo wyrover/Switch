@@ -35,7 +35,7 @@ namespace {
     explicit DinosaurTest(int32 size) {names.Resize(size);}
 
     List<Dinosaur> list;
-    Sp<System::Collections::Generic::IComparer<Dinosaur>> comparer;
+    sp<System::Collections::Generic::IComparer<Dinosaur>> comparer;
     System::Array<string> names;
   };
   
@@ -62,17 +62,17 @@ namespace {
     }
   };
 
-  static void ThreadSort(Object& obj) {
+  static void ThreadSort(const Object& obj) {
     DinosaurTest test = as<DinosaurTest>(obj);
-    test.list.Sort(test.comparer);
+    test.list.Sort(*test.comparer);
     int k = 0;
     for (Dinosaur d : test.list)
       EXPECT_TRUE(d.GetName().Equals(test.names[k++]));
   }
 
 TEST(List, Sort) {
-  Sp<DinosaurTest> test1 = new DinosaurTest(9);
-  Sp<DinosaurTest> test2 = new DinosaurTest(9);
+  sp<DinosaurTest> test1 = new DinosaurTest(9);
+  sp<DinosaurTest> test2 = new DinosaurTest(9);
 
   test1->names[0] = "Amargasaurus";
   test1->names[1] = "Compsognathus";
@@ -108,11 +108,11 @@ TEST(List, Sort) {
   for (Dinosaur d : test1->list)
     test2->list.Add(d);
 
-  test1->comparer = Sp<System::Collections::Generic::IComparer<Dinosaur>>::Create<DinosaurComparer>();
-  test2->comparer = Sp<System::Collections::Generic::IComparer<Dinosaur>>::Create<DinosaurComparerByLegs>();
+  test1->comparer = sp<System::Collections::Generic::IComparer<Dinosaur>>::Create<DinosaurComparer>();
+  test2->comparer = sp<System::Collections::Generic::IComparer<Dinosaur>>::Create<DinosaurComparerByLegs>();
 
-  Sp<Thread> thread1 = new Thread((ParameterizedThreadStart)&ThreadSort);
-  Sp<Thread> thread2 = new Thread((ParameterizedThreadStart)&ThreadSort);
+  sp<Thread> thread1 = new Thread((ParameterizedThreadStart)&ThreadSort);
+  sp<Thread> thread2 = new Thread((ParameterizedThreadStart)&ThreadSort);
   
   thread1->Start(*test1);
   Thread::Sleep(2);

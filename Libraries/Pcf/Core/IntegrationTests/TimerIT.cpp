@@ -52,7 +52,7 @@ namespace {
   
   TEST_F(TimerIT, CreateTimer) {
     TimerTest test;
-    Up<Timer> timer = new Timer(TimerCallback(test, &TimerTest::Run), test, 20, 10);
+    up<Timer> timer = new Timer(TimerCallback(test, &TimerTest::Run), test, 20, 10);
     ASSERT_FALSE(test.event.WaitOne(100));
     ASSERT_TRUE(test.event.WaitOne(200));
     ASSERT_EQ(10, test.number);

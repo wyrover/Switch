@@ -56,10 +56,10 @@ protected:
     str.close();
   }
 
-  static void TestSizeAndDispose(const String& file, Sp<IO::FileStream>& fs, int64_t size) {
+  static void TestSizeAndDispose(const String& file, sp<IO::FileStream>& fs, int64_t size) {
     int64_t fsSize = fs->Length();
     fs->Close();
-    fs = Sp<IO::FileStream>::Null();
+    fs = sp<IO::FileStream>::Null();
     EXPECT_TRUE(IO::File::Exists(file));
     std::fstream str;
     str.open(file.ToCCharArray().Data(), std::fstream::binary | std::fstream::in);
@@ -70,19 +70,18 @@ protected:
   }
 
 
-  static void TestAndDelete(const String& file, Sp<IO::FileStream>& fs) {
+  static void TestAndDelete(const String& file, sp<IO::FileStream>& fs) {
     fs->Close();
-    fs = Sp<IO::FileStream>::Null();
+    fs = sp<IO::FileStream>::Null();
     EXPECT_TRUE(IO::File::Exists(file));
     IO::File::Delete(file);
   }
 
-  static void CreateNotEmptyTextFile( String fileName) {
-    Up<IO::StreamWriter> streamWriter = IO::File::CreateText(fileName);
-    streamWriter.Reset();
+  static void CreateNotEmptyTextFile(const string& fileName) {
+    EXPECT_NO_THROW(IO::StreamWriter streamWriter(fileName));
   }
 
-  static void TestProperties(const Sp<IO::FileStream>& fs, bool seek, bool read, bool write, bool closed) {
+  static void TestProperties(const sp<IO::FileStream>& fs, bool seek, bool read, bool write, bool closed) {
     EXPECT_EQ(seek, fs->CanSeek());
     EXPECT_EQ(read, fs->CanRead());
     EXPECT_EQ(write, fs->CanWrite());
@@ -113,197 +112,197 @@ protected:
 
 
 TEST_F(FileStream, Constructor_Append_Read_Unexisting_File) {
-  Sp<IO::FileStream> fs;
+  sp<IO::FileStream> fs;
   mAccess = IO::FileAccess::Read;
   mMode = IO::FileMode::Append;
-  EXPECT_THROW(fs = Sp<IO::FileStream>::Create(mDoesNotExistFile, mMode, mAccess, mShare), ArgumentException);
+  EXPECT_THROW(fs = sp<IO::FileStream>::Create(mDoesNotExistFile, mMode, mAccess, mShare), ArgumentException);
 }
 
 TEST_F(FileStream, Constructor_Create_Read_Unexisting_File) {
-  Sp<IO::FileStream> fs;
+  sp<IO::FileStream> fs;
   mAccess = IO::FileAccess::Read;
   mMode = IO::FileMode::Create;
-  EXPECT_THROW(fs = Sp<IO::FileStream>::Create(mDoesNotExistFile, mMode, mAccess, mShare),ArgumentException);
+  EXPECT_THROW(fs = sp<IO::FileStream>::Create(mDoesNotExistFile, mMode, mAccess, mShare),ArgumentException);
 }
 
 TEST_F(FileStream, Constructor_CreateNew_Read_Unexisting_File) {
-  Sp<IO::FileStream> fs;
+  sp<IO::FileStream> fs;
   mAccess = IO::FileAccess::Read;
   mMode = IO::FileMode::CreateNew;
-  EXPECT_THROW(fs = Sp<IO::FileStream>::Create(mDoesNotExistFile, mMode, mAccess, mShare),ArgumentException);
+  EXPECT_THROW(fs = sp<IO::FileStream>::Create(mDoesNotExistFile, mMode, mAccess, mShare),ArgumentException);
 }
 
 TEST_F(FileStream, Constructor_Open_Read_Unexisting_File) {
-  Sp<IO::FileStream> fs;
+  sp<IO::FileStream> fs;
   mAccess = IO::FileAccess::Read;
   mMode = IO::FileMode::Open;
-  EXPECT_THROW(fs = Sp<IO::FileStream>::Create(mDoesNotExistFile, mMode, mAccess, mShare), IO::FileNotFoundException);
+  EXPECT_THROW(fs = sp<IO::FileStream>::Create(mDoesNotExistFile, mMode, mAccess, mShare), IO::FileNotFoundException);
 }
 
 TEST_F(FileStream, Constructor_OpenOrCreate_Read_Unexisting_File) {
-  Sp<IO::FileStream> fs;
+  sp<IO::FileStream> fs;
   mAccess = IO::FileAccess::Read;
   mMode = IO::FileMode::OpenOrCreate;
-  fs = Sp<IO::FileStream>::Create(mDoesNotExistFile, mMode, mAccess, mShare);
+  fs = sp<IO::FileStream>::Create(mDoesNotExistFile, mMode, mAccess, mShare);
   TestProperties(fs,true, true, false, false);
   TestAndDelete(mDoesNotExistFile, fs);
 }
 
 TEST_F(FileStream, Constructor_Truncate_Read_Unexisting_File) {
-  Sp<IO::FileStream> fs;
+  sp<IO::FileStream> fs;
   mAccess = IO::FileAccess::Read;
   mMode = IO::FileMode::Truncate;
-  EXPECT_THROW(fs = Sp<IO::FileStream>::Create(mDoesNotExistFile, mMode, mAccess, mShare), IO::FileNotFoundException);
+  EXPECT_THROW(fs = sp<IO::FileStream>::Create(mDoesNotExistFile, mMode, mAccess, mShare), IO::FileNotFoundException);
 }
 
 TEST_F(FileStream, Constructor_Append_Write_Unexisting_File) {
-  Sp<IO::FileStream> fs;
+  sp<IO::FileStream> fs;
   mAccess = IO::FileAccess::Write;
   mMode = IO::FileMode::Append;
-  fs = Sp<IO::FileStream>::Create(mDoesNotExistFile, mMode, mAccess, mShare);
+  fs = sp<IO::FileStream>::Create(mDoesNotExistFile, mMode, mAccess, mShare);
   TestProperties(fs,true, false, true, false);
   TestAndDelete(mDoesNotExistFile,fs);
 }
 
 TEST_F(FileStream, Constructor_Create_Write_Unexisting_File) {
-  Sp<IO::FileStream> fs;
+  sp<IO::FileStream> fs;
   mAccess = IO::FileAccess::Write;
   mMode = IO::FileMode::Create;
-  fs = Sp<IO::FileStream>::Create(mDoesNotExistFile, mMode, mAccess, mShare);
+  fs = sp<IO::FileStream>::Create(mDoesNotExistFile, mMode, mAccess, mShare);
   TestProperties(fs,true, false, true, false);
   TestAndDelete(mDoesNotExistFile,fs);
 }
 
 TEST_F(FileStream, Constructor_CreateNew_Write_Unexisting_File) {
-  Sp<IO::FileStream> fs;
+  sp<IO::FileStream> fs;
   mAccess = IO::FileAccess::Write;
   mMode = IO::FileMode::CreateNew;
-  fs = Sp<IO::FileStream>::Create(mDoesNotExistFile, mMode, mAccess, mShare);
+  fs = sp<IO::FileStream>::Create(mDoesNotExistFile, mMode, mAccess, mShare);
   TestProperties(fs,true, false, true, false);
   TestAndDelete(mDoesNotExistFile,fs);
 }
 
 TEST_F(FileStream, Constructor_Open_Write_Unexisting_File) {
-  Sp<IO::FileStream> fs;
+  sp<IO::FileStream> fs;
   mAccess = IO::FileAccess::Write;
   mMode = IO::FileMode::Open;
-  EXPECT_THROW(fs = Sp<IO::FileStream>::Create(mDoesNotExistFile, mMode, mAccess, mShare), IO::FileNotFoundException);
+  EXPECT_THROW(fs = sp<IO::FileStream>::Create(mDoesNotExistFile, mMode, mAccess, mShare), IO::FileNotFoundException);
 }
 
 TEST_F(FileStream, Constructor_OpenOrCreate_Write_Unexisting_File) {
-  Sp<IO::FileStream> fs;
+  sp<IO::FileStream> fs;
   mAccess = IO::FileAccess::Write;
   mMode = IO::FileMode::OpenOrCreate;
-  fs = Sp<IO::FileStream>::Create(mDoesNotExistFile, mMode, mAccess, mShare);
+  fs = sp<IO::FileStream>::Create(mDoesNotExistFile, mMode, mAccess, mShare);
   TestProperties(fs,true, false, true, false);
   TestAndDelete(mDoesNotExistFile,fs);
 }
 
 TEST_F(FileStream, Constructor_Truncate_Write_Unexisting_File) {
-  Sp<IO::FileStream> fs;
+  sp<IO::FileStream> fs;
   mAccess = IO::FileAccess::Write;
   mMode = IO::FileMode::Truncate;
-  EXPECT_THROW(fs = Sp<IO::FileStream>::Create(mDoesNotExistFile, mMode, mAccess, mShare), IO::FileNotFoundException);
+  EXPECT_THROW(fs = sp<IO::FileStream>::Create(mDoesNotExistFile, mMode, mAccess, mShare), IO::FileNotFoundException);
 }
 
 TEST_F(FileStream, Constructor_Append_ReadWrite_Unexisting_File) {
-  Sp<IO::FileStream> fs;
+  sp<IO::FileStream> fs;
   mAccess = IO::FileAccess::ReadWrite;
   mMode = IO::FileMode::Append;
-  EXPECT_THROW(fs = Sp<IO::FileStream>::Create(mDoesNotExistFile, mMode, mAccess, mShare), ArgumentException);
+  EXPECT_THROW(fs = sp<IO::FileStream>::Create(mDoesNotExistFile, mMode, mAccess, mShare), ArgumentException);
 }
 
 TEST_F(FileStream, Constructor_Create_ReadWrite_Unexisting_File) {
-  Sp<IO::FileStream> fs;
+  sp<IO::FileStream> fs;
   mAccess = IO::FileAccess::ReadWrite;  
   mMode = IO::FileMode::Create;
-  fs = Sp<IO::FileStream>::Create(mDoesNotExistFile, mMode, mAccess, mShare);
+  fs = sp<IO::FileStream>::Create(mDoesNotExistFile, mMode, mAccess, mShare);
   TestProperties(fs,true, true, true, false);
   TestAndDelete(mDoesNotExistFile,fs);
 }
 
 TEST_F(FileStream, Constructor_CreateNew_ReadWrite_Unexisting_File) {
-  Sp<IO::FileStream> fs;
+  sp<IO::FileStream> fs;
   mAccess = IO::FileAccess::ReadWrite;
   mMode = IO::FileMode::CreateNew;
-  fs = Sp<IO::FileStream>::Create(mDoesNotExistFile, mMode, mAccess, mShare);
+  fs = sp<IO::FileStream>::Create(mDoesNotExistFile, mMode, mAccess, mShare);
   TestProperties(fs,true, true, true, false);
   TestAndDelete(mDoesNotExistFile,fs);
 }
 
 TEST_F(FileStream, Constructor_Open_ReadWrite_Unexisting_File) {
-  Sp<IO::FileStream> fs;
+  sp<IO::FileStream> fs;
   mAccess = IO::FileAccess::ReadWrite;
   mMode = IO::FileMode::Open;
-  EXPECT_THROW(fs = Sp<IO::FileStream>::Create(mDoesNotExistFile, mMode, mAccess, mShare), IO::FileNotFoundException);
+  EXPECT_THROW(fs = sp<IO::FileStream>::Create(mDoesNotExistFile, mMode, mAccess, mShare), IO::FileNotFoundException);
 }
 
 TEST_F(FileStream, Constructor_OpenOrCreate_ReadWrite_Unexisting_File) {
-  Sp<IO::FileStream> fs;
+  sp<IO::FileStream> fs;
   mAccess = IO::FileAccess::ReadWrite;
   mMode = IO::FileMode::OpenOrCreate;
-  fs = Sp<IO::FileStream>::Create(mDoesNotExistFile, mMode, mAccess, mShare);
+  fs = sp<IO::FileStream>::Create(mDoesNotExistFile, mMode, mAccess, mShare);
   TestProperties(fs,true, true, true, false);
   TestAndDelete(mDoesNotExistFile,fs);
 }
 
 TEST_F(FileStream, Constructor_Truncate_ReadWrite_Unexisting_File) {
-  Sp<IO::FileStream> fs;
+  sp<IO::FileStream> fs;
   mAccess = IO::FileAccess::ReadWrite;
   mMode = IO::FileMode::Truncate;
-  EXPECT_THROW(fs = Sp<IO::FileStream>::Create(mDoesNotExistFile, mMode, mAccess, mShare), IO::FileNotFoundException);
+  EXPECT_THROW(fs = sp<IO::FileStream>::Create(mDoesNotExistFile, mMode, mAccess, mShare), IO::FileNotFoundException);
 }
 
 TEST_F(FileStream, Constructor_Append_Read_Existing_File) {
   CreateExistingFile();
-  Sp<IO::FileStream> fs;
+  sp<IO::FileStream> fs;
   mAccess = IO::FileAccess::Read;
   mMode = IO::FileMode::Append;
-  EXPECT_THROW(fs = Sp<IO::FileStream>::Create(mExistingFile, mMode, mAccess, mShare), ArgumentException);
+  EXPECT_THROW(fs = sp<IO::FileStream>::Create(mExistingFile, mMode, mAccess, mShare), ArgumentException);
 }
 
 TEST_F(FileStream, Constructor_Create_Read_Existing_File) {
   CreateExistingFile();
-  Sp<IO::FileStream> fs;
+  sp<IO::FileStream> fs;
   mAccess = IO::FileAccess::Read;
   mMode = IO::FileMode::Create;
-  EXPECT_THROW(fs = Sp<IO::FileStream>::Create(mExistingFile, mMode, mAccess, mShare), ArgumentException);
+  EXPECT_THROW(fs = sp<IO::FileStream>::Create(mExistingFile, mMode, mAccess, mShare), ArgumentException);
 }
 
 TEST_F(FileStream, Constructor_CreateNew_Read_Existing_File) {
   CreateExistingFile();
-  Sp<IO::FileStream> fs;
+  sp<IO::FileStream> fs;
   mAccess = IO::FileAccess::Read;
   mMode = IO::FileMode::CreateNew;
-  EXPECT_THROW(fs = Sp<IO::FileStream>::Create(mExistingFile, mMode, mAccess, mShare), ArgumentException);
+  EXPECT_THROW(fs = sp<IO::FileStream>::Create(mExistingFile, mMode, mAccess, mShare), ArgumentException);
 }
 
 TEST_F(FileStream, Constructor_Open_Read_Existing_File) {
   CreateExistingFile();
-  Sp<IO::FileStream> fs;
+  sp<IO::FileStream> fs;
   mAccess = IO::FileAccess::Read;
   mMode = IO::FileMode::Open;
-  fs = Sp<IO::FileStream>::Create(mExistingFile, mMode, mAccess, mShare);
+  fs = sp<IO::FileStream>::Create(mExistingFile, mMode, mAccess, mShare);
   TestProperties(fs,true, true, false, false);
   TestSizeAndDispose(mExistingFile,fs,4L);
 }
 
 TEST_F(FileStream, Constructor_OpenOrCreate_Read_Existing_File) {
   CreateExistingFile();
-  Sp<IO::FileStream> fs;
+  sp<IO::FileStream> fs;
   mAccess = IO::FileAccess::Read;
   mMode = IO::FileMode::OpenOrCreate;
-  fs = Sp<IO::FileStream>::Create(mExistingFile, mMode, mAccess, mShare);
+  fs = sp<IO::FileStream>::Create(mExistingFile, mMode, mAccess, mShare);
   TestProperties(fs,true, true, false, false);
   TestSizeAndDispose(mExistingFile, fs,4L);
 }
 
 TEST_F(FileStream, Constructor_Truncate_Write_Existing_File) {
   CreateExistingFile();
-  Sp<IO::FileStream> fs;
+  sp<IO::FileStream> fs;
   mAccess = IO::FileAccess::Write;
   mMode = IO::FileMode::Truncate;
-  fs = Sp<IO::FileStream>::Create(mExistingFile, mMode, mAccess, mShare);
+  fs = sp<IO::FileStream>::Create(mExistingFile, mMode, mAccess, mShare);
   TestProperties(fs, true, false, true, false);
   TestSizeAndDispose(mExistingFile,fs,0L);
 }
@@ -311,56 +310,56 @@ TEST_F(FileStream, Constructor_Truncate_Write_Existing_File) {
 
 TEST_F(FileStream, Constructor_Append_ReadWrite_Existing_File) {
   CreateExistingFile();
-  Sp<IO::FileStream> fs;
+  sp<IO::FileStream> fs;
   mAccess = IO::FileAccess::ReadWrite;
   mMode = IO::FileMode::Append;
-  EXPECT_THROW(fs = Sp<IO::FileStream>::Create(mExistingFile, mMode, mAccess, mShare), ArgumentException);
+  EXPECT_THROW(fs = sp<IO::FileStream>::Create(mExistingFile, mMode, mAccess, mShare), ArgumentException);
 }
 
 TEST_F(FileStream, Constructor_Create_ReadWrite_Existing_File) {
   CreateExistingFile();
-  Sp<IO::FileStream> fs;
+  sp<IO::FileStream> fs;
   mAccess = IO::FileAccess::ReadWrite;
   mMode = IO::FileMode::Create;
-  fs = Sp<IO::FileStream>::Create(mExistingFile, mMode, mAccess, mShare);
+  fs = sp<IO::FileStream>::Create(mExistingFile, mMode, mAccess, mShare);
   TestProperties(fs, true, true, true, false);
   TestSizeAndDispose(mExistingFile,fs,0L);
 }
 
 TEST_F(FileStream, Constructor_CreateNew_ReadWrite_Existing_File) {
   CreateExistingFile();
-  Sp<IO::FileStream> fs;
+  sp<IO::FileStream> fs;
   mAccess = IO::FileAccess::ReadWrite;
   mMode = IO::FileMode::CreateNew;
-  EXPECT_THROW(fs = Sp<IO::FileStream>::Create(mExistingFile, mMode, mAccess, mShare), IO::IOException);
+  EXPECT_THROW(fs = sp<IO::FileStream>::Create(mExistingFile, mMode, mAccess, mShare), IO::IOException);
 }
 
 TEST_F(FileStream, Constructor_Open_ReadWrite_Existing_File) {
   CreateExistingFile();
-  Sp<IO::FileStream> fs;
+  sp<IO::FileStream> fs;
   mAccess = IO::FileAccess::ReadWrite;
   mMode = IO::FileMode::Open;
-  fs = Sp<IO::FileStream>::Create(mExistingFile, mMode, mAccess, mShare);
+  fs = sp<IO::FileStream>::Create(mExistingFile, mMode, mAccess, mShare);
   TestProperties(fs, true, true, true, false);
   TestSizeAndDispose(mExistingFile,fs,4L);
 }
 
 TEST_F(FileStream, Constructor_OpenOrCreate_ReadWrite_Existing_File) {
   CreateExistingFile();
-  Sp<IO::FileStream> fs;
+  sp<IO::FileStream> fs;
   mAccess = IO::FileAccess::ReadWrite;
   mMode = IO::FileMode::OpenOrCreate;
-  fs = Sp<IO::FileStream>::Create(mExistingFile, mMode, mAccess, mShare);
+  fs = sp<IO::FileStream>::Create(mExistingFile, mMode, mAccess, mShare);
   TestProperties(fs, true, true, true, false);
   TestSizeAndDispose(mExistingFile,fs,4L);
 }
 
 TEST_F(FileStream, Constructor_Truncate_ReadWrite_Existing_File) {
   CreateExistingFile();
-  Sp<IO::FileStream> fs;
+  sp<IO::FileStream> fs;
   mAccess = IO::FileAccess::ReadWrite;
   mMode = IO::FileMode::Truncate;
-  fs = Sp<IO::FileStream>::Create(mExistingFile, mMode, mAccess, mShare);
+  fs = sp<IO::FileStream>::Create(mExistingFile, mMode, mAccess, mShare);
   TestProperties(fs, true, true, true, false);
   TestSizeAndDispose(mExistingFile,fs,0L);
 }
@@ -371,17 +370,17 @@ TEST_F(FileStream, StreamReader_FileStream_Peek_Read) {
   mMode = IO::FileMode::Open;
   mAccess = IO::FileAccess::Read;
 
-  Sp<IO::StreamReader> sr = new IO::StreamReader(new IO::FileStream(mExistingFile, mMode, mAccess));
-  EXPECT_EQ('t', sr->Peek());
-  EXPECT_EQ('t', sr->Read());
-  EXPECT_EQ('e', sr->Peek());
-  EXPECT_EQ('e', sr->Read());
-  EXPECT_EQ('s', sr->Read());
-  EXPECT_EQ('t', sr->Peek());
-  EXPECT_EQ('t', sr->Read());
-  EXPECT_EQ( -1, sr->Peek());
-  EXPECT_EQ( -1, sr->Read());
-  EXPECT_EQ( -1, sr->Peek());
+  IO::StreamReader sr(IO::FileStream(mExistingFile, mMode, mAccess));
+  EXPECT_EQ('t', sr.Peek());
+  EXPECT_EQ('t', sr.Read());
+  EXPECT_EQ('e', sr.Peek());
+  EXPECT_EQ('e', sr.Read());
+  EXPECT_EQ('s', sr.Read());
+  EXPECT_EQ('t', sr.Peek());
+  EXPECT_EQ('t', sr.Read());
+  EXPECT_EQ( -1, sr.Peek());
+  EXPECT_EQ( -1, sr.Read());
+  EXPECT_EQ( -1, sr.Peek());
 }
 
 TEST_F(FileStream, StreamReader_FileStream_ReadLine) {
@@ -389,11 +388,11 @@ TEST_F(FileStream, StreamReader_FileStream_ReadLine) {
   mAccess = IO::FileAccess::Read;
 
   CreateExistingFile2Lines();
-  Sp<IO::StreamReader> sr = new IO::StreamReader(new IO::FileStream(mExistingFile, mMode, mAccess));
+  IO::StreamReader sr(IO::FileStream(mExistingFile, mMode, mAccess));
 
-  EXPECT_TRUE(sr->ReadLine().Equals("test"));
-  EXPECT_TRUE(sr->ReadLine().Equals("second line"));
-  EXPECT_TRUE(sr->ReadLine().Equals(""));
+  EXPECT_TRUE(sr.ReadLine().Equals("test"));
+  EXPECT_TRUE(sr.ReadLine().Equals("second line"));
+  EXPECT_TRUE(sr.ReadLine().Equals(""));
 }
 
 
@@ -403,8 +402,8 @@ TEST_F(FileStream, FileStreamMethods) {
   EXPECT_TRUE(Stream.CanWrite());
   EXPECT_TRUE(Stream.CanSeek());
 
-  char buffer[] = {'a','b','c','d','e','f','g','h','i','j'};
-  Stream.Write((uint8_t*)buffer, sizeof(buffer), 0, sizeof(buffer));
+  Array<byte> buffer = {'a','b','c','d','e','f','g','h','i','j'};
+  Stream.Write(buffer, 0, buffer.Length);
   Stream.Flush();
   EXPECT_EQ(Stream.Length(), (int32_t)sizeof(buffer));
   EXPECT_EQ(Stream.Position(), (int32_t)sizeof(buffer));
@@ -422,10 +421,9 @@ TEST_F(FileStream, FileStreamMethods) {
 
   Stream.Position = 0;
   EXPECT_EQ(Stream.Position(),0);
-  char readBuffer[100];
-  memset(readBuffer, 0, sizeof(readBuffer));
-  EXPECT_EQ(Stream.Read((uint8_t*)readBuffer, sizeof(readBuffer), 0, sizeof(buffer)), (int32_t)sizeof(buffer));
-  for (int32_t k = 0; k < (int32_t)sizeof(buffer); k++)
+  Array<byte> readBuffer(100);
+  EXPECT_EQ(Stream.Read(readBuffer, 0, readBuffer.Length), buffer.Length);
+  for (int32_t k = 0; k < buffer.Length; k++)
     EXPECT_EQ(readBuffer[k],buffer[k]);
   Stream.Close();
 }
@@ -437,27 +435,27 @@ TEST_F(FileStream, StreamReaderWriterConstructor) {
   }
   {
     IO::StreamWriter streamWriter(mFileName, false);
-    Sp<IO::Stream> stream = streamWriter.BaseStream();
-    EXPECT_TRUE(stream->CanWrite());
+    IO::Stream& stream = streamWriter.BaseStream();
+    EXPECT_TRUE(stream.CanWrite());
     EXPECT_FALSE(streamWriter.AutoFlush());
     streamWriter.WriteLine(mLine1);
     //EXPECT_TRUE(stream->GetLength() == 0);
     streamWriter.AutoFlush = true;
     EXPECT_TRUE(streamWriter.AutoFlush());
     streamWriter.WriteLine(mLine1);
-    EXPECT_TRUE(stream->Length() > 0);
+    EXPECT_TRUE(stream.Length() > 0);
     streamWriter.Close();
   }
   {
     IO::StreamWriter streamWriter(mFileName, true);
-    Sp<IO::Stream> stream = streamWriter.BaseStream();
-    EXPECT_TRUE(stream->CanWrite());
+    IO::Stream& stream = streamWriter.BaseStream();
+    EXPECT_TRUE(stream.CanWrite());
     streamWriter.Close();
   }
   {
     IO::StreamReader streamReader(mFileName);
-    Sp<IO::Stream> stream = streamReader.BaseStream();
-    EXPECT_TRUE(stream->CanRead());
+    IO::Stream& stream = streamReader.BaseStream();
+    EXPECT_TRUE(stream.CanRead());
     streamReader.Close();
   }
   {
@@ -474,75 +472,75 @@ TEST_F(FileStream, StreamReaderWriterConstructor) {
 
 
 TEST_F(FileStream, StreamReaderWriterOperations) {
-  pcf_using(Up<IO::StreamWriter> streamWriter1 = IO::File::CreateText(mFileName)) {
-    streamWriter1->WriteLine(mLine1);
-    streamWriter1->WriteLine(mLine2);
+  pcf_using(IO::StreamWriter streamWriter1 = IO::File::CreateText(mFileName)) {
+    streamWriter1.WriteLine(mLine1);
+    streamWriter1.WriteLine(mLine2);
   }
 
-  pcf_using(Up<IO::StreamWriter> streamWriter2 = IO::File::AppendText(mFileName)) {
-    streamWriter2->WriteLine(mLine3);
+  pcf_using(IO::StreamWriter streamWriter2 = IO::File::AppendText(mFileName)) {
+    streamWriter2.WriteLine(mLine3);
     // Test Byte operation
     for (int32_t k=0; k<mLine4.Length(); k++)
-      streamWriter2->Write(mLine4[k]);
+      streamWriter2.Write(mLine4[k]);
   }
 
-  pcf_using(Up<IO::StreamReader> streamReader = IO::File::OpenText(mFileName)) {
-    String readLine = streamReader->ReadLine();
+  pcf_using(IO::StreamReader streamReader = IO::File::OpenText(mFileName)) {
+    String readLine = streamReader.ReadLine();
     EXPECT_EQ(mLine1, readLine);
-    readLine = streamReader->ReadLine();
+    readLine = streamReader.ReadLine();
     EXPECT_EQ(mLine2, readLine);
-    readLine = streamReader->ReadLine();
+    readLine = streamReader.ReadLine();
     EXPECT_EQ(mLine3, readLine);
     
     char buffer[2048];
     int32_t charRead = 0;
     int32_t k=0;
-    for (; k<mLine4.Length() && (charRead = streamReader->Read()) >= 0; k++)
+    for (; k<mLine4.Length() && (charRead = streamReader.Read()) >= 0; k++)
       buffer[k] = (char)charRead;
     buffer[k] = 0;
     readLine = buffer;
     EXPECT_EQ(mLine4, readLine);
     
-    readLine = streamReader->ReadLine();
+    readLine = streamReader.ReadLine();
     EXPECT_EQ(String::Empty, readLine);
-    EXPECT_TRUE(streamReader->EndOfStream());
+    EXPECT_TRUE(streamReader.EndOfStream());
   }
 }
 
 TEST_F(FileStream, ReadToEnd) {
-  pcf_using(Up<IO::StreamWriter> streamWriter = IO::File::CreateText(mFileName)) {
-    streamWriter->WriteLine(mLine1);
-    streamWriter->WriteLine(mLine2);
+  pcf_using(IO::StreamWriter streamWriter = IO::File::CreateText(mFileName)) {
+    streamWriter.WriteLine(mLine1);
+    streamWriter.WriteLine(mLine2);
   }
 
-  pcf_using(Up<IO::StreamReader> streamReader = IO::File::OpenText(mFileName)) {
-    String allContent = streamReader->ReadToEnd();
+  pcf_using(IO::StreamReader streamReader = IO::File::OpenText(mFileName)) {
+    String allContent = streamReader.ReadToEnd();
     EXPECT_TRUE(allContent.Contains(mLine1) && allContent.Contains(mLine2));
   }
 }
 
 TEST_F(FileStream, FileSize) {
-  pcf_using(Up<IO::StreamWriter> streamWriter = IO::File::CreateText(mFileName)) {
-    streamWriter->AutoFlush = true;
-    streamWriter->Write(mLine1);
-    Sp<IO::Stream> stream = streamWriter->BaseStream();
-    EXPECT_EQ(mLine1.Length(), stream->Length());
+  pcf_using(IO::StreamWriter streamWriter = IO::File::CreateText(mFileName)) {
+    streamWriter.AutoFlush = true;
+    streamWriter.Write(mLine1);
+    IO::Stream& stream = streamWriter.BaseStream();
+    EXPECT_EQ(mLine1.Length(), stream.Length());
   }
 }
 
 // todo JVI ?
 /*TEST_F(FileStream, GetFilePosition)
 {
-  Sp<IO::StreamWriter> streamWriter = IO::File::CreateText(mFileName);
+  sp<IO::StreamWriter> streamWriter = IO::File::CreateText(mFileName);
   streamWriter->SetAutoFlush(true);
   streamWriter->Write(mLine1);
   streamWriter.Release();
 
   char buffer[64];
   Int32 position = 3;
-  Sp<IO::StreamReader> streamReader = IO::File::OpenText(mFileName);
+  sp<IO::StreamReader> streamReader = IO::File::OpenText(mFileName);
   streamReader->ReadBlock(buffer, sizeof(buffer), 0, position);
-  Sp<IO::Stream> stream = streamReader->GetBaseStream();
+  sp<IO::Stream> stream = streamReader->GetBaseStream();
   Int64 streamPos = stream->GetPosition();
   EXPECT_EQ(position,streamPos);
   streamReader.Release();
@@ -553,8 +551,8 @@ TEST_F(FileStream, SetFilePosition) {
   int64 position = 10;
 
   // Write the line in the file
-  pcf_using(Up<IO::StreamWriter> streamWriter = IO::File::CreateText(mFileName)) {
-    streamWriter->WriteLine(str);
+  pcf_using(IO::StreamWriter streamWriter = IO::File::CreateText(mFileName)) {
+    streamWriter.WriteLine(str);
   }
 
   // Open a read stream, set file position et check the read character
@@ -615,46 +613,44 @@ TEST_F(FileStream, FileAttributes) {
 TEST_F(FileStream, OpenCloseWriteAppend) {
   mAccess = IO::FileAccess::Write;
   mMode = IO::FileMode::Append;
-  Sp<IO::FileStream> fs = new IO::FileStream(mFileName, mMode, mAccess, mShare);
+  IO::FileStream fs(mFileName, mMode, mAccess, mShare);
   
-  pcf_using(Sp<IO::StreamWriter> sw = new IO::StreamWriter(fs.ChangeType<IO::Stream>())) {
-    sw->WriteLine("first line");
-    fs->Close();
-    EXPECT_THROW(sw->WriteLine(String("Bad line")), ObjectClosedException);
-    fs->Open();
-    sw->WriteLine(String("second line"));
-    fs->Close();
+  pcf_using(IO::StreamWriter sw(fs)) {
+    sw.WriteLine("first line");
+    fs.Close();
+    EXPECT_THROW(sw.WriteLine(String("Bad line")), ObjectClosedException);
+    sw.WriteLine(String("second line"));
+    fs.Close();
   }
 
   mMode = IO::FileMode::Open;
   mAccess = IO::FileAccess::Read;
-  pcf_using(Sp<IO::StreamReader> sr = new IO::StreamReader(new IO::FileStream(mFileName, mMode, mAccess, mShare))) {
-    EXPECT_EQ("first line", sr->ReadLine());
-    EXPECT_EQ("second line", sr->ReadLine());
-    EXPECT_TRUE(sr->EndOfStream());
+  pcf_using(IO::StreamReader sr(IO::FileStream(mFileName, mMode, mAccess, mShare))) {
+    EXPECT_EQ("first line", sr.ReadLine());
+    EXPECT_EQ("second line", sr.ReadLine());
+    EXPECT_TRUE(sr.EndOfStream());
   }
 }
 
 TEST_F(FileStream, OpenCloseWriteCreate) {
   mMode = IO::FileMode::Create;
   mAccess = IO::FileAccess::Write;
-  Sp<IO::FileStream> fs = new IO::FileStream(mFileName, mMode, mAccess, mShare);
+  IO::FileStream fs(mFileName, mMode, mAccess, mShare);
   
-  pcf_using(Sp<IO::StreamWriter> sw = new IO::StreamWriter(fs.ChangeType<IO::Stream>())) {
-    sw->WriteLine("first line");
-    fs->Close();
-    EXPECT_THROW(sw->WriteLine(String("Bad line")), ObjectClosedException);
-    fs->Open();
-    sw->WriteLine(String("second line"));
-    fs->Close();
+  pcf_using(IO::StreamWriter sw(fs)) {
+    sw.WriteLine("first line");
+    fs.Close();
+    EXPECT_THROW(sw.WriteLine(String("Bad line")), ObjectClosedException);
+    sw.WriteLine(String("second line"));
+    fs.Close();
   }
 
   mMode = IO::FileMode::Open;
   mAccess = IO::FileAccess::Read;
-  Sp<IO::StreamReader> sr = new IO::StreamReader(new IO::FileStream(mFileName, mMode, mAccess, mShare));
-  EXPECT_EQ(sr->ReadLine(), "first line");
-  EXPECT_EQ(sr->ReadLine(), "second line");
-  EXPECT_TRUE(sr->EndOfStream());
+  IO::StreamReader sr(IO::FileStream(mFileName, mMode, mAccess, mShare));
+  EXPECT_EQ(sr.ReadLine(), "first line");
+  EXPECT_EQ(sr.ReadLine(), "second line");
+  EXPECT_TRUE(sr.EndOfStream());
 }
 
 
@@ -662,17 +658,16 @@ TEST_F(FileStream, OpenCloseRead) {
   CreateExistingFile2Lines();
   mMode = IO::FileMode::Open;
   mAccess = IO::FileAccess::Read;
-  Sp<IO::FileStream> fs = new IO::FileStream(mExistingFile, mMode,mAccess,mShare);
-  IO::StreamReader sw(fs.ChangeType<IO::Stream>());
+  IO::FileStream fs(mExistingFile, mMode,mAccess,mShare);
+  IO::StreamReader sw(fs);
 
   String line;
 
   line = sw.ReadLine();
   EXPECT_EQ(line,"test");
-  fs->Close();
+  fs.Close();
   EXPECT_THROW(sw.ReadLine(), ObjectClosedException);
-  fs->Open();
   line = sw.ReadLine();
   EXPECT_EQ(line,"second line");
-  fs->Close();
+  fs.Close();
 }
