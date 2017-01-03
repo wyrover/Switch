@@ -32,7 +32,11 @@ namespace Pcf {
           pcf_get {return this->data->exitCode;}
         };
         
-        Property<string, ReadOnly> Name {
+        Property<int32, ReadOnly> Id {
+          pcf_get {return *((int32*)&this->data->handle);}
+        };
+        
+        Property<string, ReadOnly> ProcessName {
           pcf_get {return this->GetName();}
         };
         
@@ -63,12 +67,13 @@ namespace Pcf {
         
         static Process Start(const ProcessStartInfo& startInfo);
         
-        string ToString() const override {return string::Format("{0} ({1})", this->GetType(), this->Name);};
+        string ToString() const override {return string::Format("{0} ({1})", this->GetType(), this->ProcessName);};
         
         void WaitForExit();
         
       private:
         Process(intptr handle) {this->data->handle = handle;}
+        int32 GetId();
         string GetName();
         string GetPath();
         System::IO::StreamReader GetStreamReader();

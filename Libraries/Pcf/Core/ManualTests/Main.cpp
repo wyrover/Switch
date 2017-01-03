@@ -20,9 +20,13 @@ namespace Examples {
       //int32 exitCode = WaitEndProcess(processId);
       //Console::WriteLine("[Process {0}] End with exitCode = {1}", GetCurrentProcess(), exitCode);
       
-      for (auto process : Process::GetProcesses()) {
+      Array<Process> processes = Process::GetProcesses();
+      Console::WriteLine("Count = {0}", processes.Length);
+      
+      for (auto process : processes) {
         try {
-          Console::WriteLine(process);
+          Console::WriteLine("{{Id={0}, ProcessName={1}}}", process.Id, process.ProcessName);
+          //Console::WriteLine("{0}", process);
         }  catch(...) {
         }
       }
