@@ -591,7 +591,7 @@ namespace Pcf {
 
         virtual int32 GetHashCode() const { return this->argb; }
 
-        private :
+      private :
         Color(int32 argb) : argb(argb), knownColor((KnownColor)0) {}
         Color(const KnownColor& color) : argb(knownColors[(int32)color]), knownColor(color) {}
 

@@ -163,23 +163,20 @@ namespace Pcf {
       private:
         struct TimerData : public object {
           TimerCallback callback;
-          Object* state {this};
-          int32 dueTime {-1};
-          int32 period {-1};
+          bool closed{false};
+          int32 dueTime{-1};
           AutoResetEvent event {false};
-          bool closed {false};
-          ThreadStart timer {
-            pcf_delegate {
-              bool runOnce = false;
-              while (!this->closed) {
-                if (!this->event.WaitOne(runOnce ? this->period : this->dueTime)) {
-                  runOnce = true;
-                  ThreadPool::QueueUserWorkItem(this->callback, *this->state);
-                }
+          int32 period {-1};
+          Object* state{this};
+          Thread thread {ThreadStart {pcf_delegate {
+            bool runOnce = false;
+            while (!this->closed) {
+              if (!this->event.WaitOne(runOnce ? this->period : this->dueTime)) {
+                runOnce = true;
+                ThreadPool::QueueUserWorkItem(this->callback, *this->state);
               }
             }
-          };
-          Thread thread {ThreadStart{this->timer}};
+          }}};
         };
         
         SharedPointer<TimerData> data = new TimerData();

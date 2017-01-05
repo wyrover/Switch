@@ -97,11 +97,7 @@ namespace Pcf {
       /// The following code example demonstrates simple threading functionality.
       /// @include Thread.cpp
       class Thread : public object {
-      public:
-        using ThreadId = std::thread::id;
-        using NativeHandle = std::thread::native_handle_type;
-        using ThreadCollection = System::Collections::Generic::List<Thread>;
-        
+      public:        
         /// @brief Initializes a new instance of the Thread class.
         /// @param start A ThreadStart delegate that represents the methods to be invoked when this thread begins executing.
         explicit Thread(ThreadStart start) : data(new ThreadItem(start)) {}
@@ -136,11 +132,11 @@ namespace Pcf {
         /// @return thread.
         static Property<Thread&, ReadOnly> CurrentThread;
         
-        Property<NativeHandle, ReadOnly> Handle {
+        Property<intptr, ReadOnly> Handle {
           pcf_get {
             if (this->data->managedThreadId == NoneManagedThreadId)
-              return NativeHandle(-1);
-            return this->data->thread.native_handle();}
+              return (intptr)-1;
+            return (intptr)this->data->thread.native_handle();}
         };
         
         /// @brief Gets a value indicating the execution status of the current thread.
@@ -350,6 +346,10 @@ namespace Pcf {
         /// @endcond
         
       private:
+        using NativeHandle = std::thread::native_handle_type;
+        using ThreadId = std::thread::id;
+        using ThreadCollection = System::Collections::Generic::List<Thread>;
+
         struct ThreadItem {
           ThreadItem() {};
           ThreadItem(ThreadStart threadStart) : threadStart(threadStart), managedThreadId(GenerateManagedThreadId()) {}
