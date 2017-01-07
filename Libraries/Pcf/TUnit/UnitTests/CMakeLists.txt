@@ -1,7 +1,6 @@
 set(tests_files
 ./AssertTest.cpp
 ./ExpectTest.cpp
-./Main.cpp
 ./CMakeLists.txt
 )
 

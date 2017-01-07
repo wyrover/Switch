@@ -24,6 +24,7 @@ set(includeFiles
 set(sourceFiles
 ./Sources/Pcf/TUnit/AssertionResult.cpp
 ./Sources/Pcf/TUnit/ConsoleEventListener.cpp
+./Sources/Pcf/TUnit/Main.cpp
 ./Sources/Pcf/TUnit/UnitTest.cpp
 )
 
@@ -54,10 +55,8 @@ install(TARGETS Pcf.TUnit EXPORT Pcf DESTINATION lib)
 install(DIRECTORY "./Includes/."  DESTINATION include)
 
 if(MSVC)
-  set(DEBUG_PDB "$<TARGET_FILE_DIR:Pcf.TUnit>/Pcf.TUnit${CMAKE_DEBUG_POSTFIX}.pdb")
-  set(RELEASE_PDB "$<TARGET_FILE_DIR:Pcf.TUnit>/Pcf.TUnit.pdb")
-  target_compile_options(Pcf.TUnit PRIVATE "$<$<CONFIG:Debug>:/Fd${DEBUG_PDB}>")
-  target_compile_options(Pcf.TUnit PRIVATE "$<$<CONFIG:Release>:/Fd${RELEASE_PDB}>")
-  install(FILES "$<TARGET_FILE_DIR:Pcf.TUnit>/Pcf.TUnit${CMAKE_DEBUG_POSTFIX}.pdb" DESTINATION bin CONFIGURATIONS Debug OPTIONAL)
-  install(FILES "$<TARGET_FILE_DIR:Pcf.TUnit>Pcf.TUnit.pdb" DESTINATION bin CONFIGURATIONS Release OPTIONAL)
+  target_compile_options(Pcf.TUnit PRIVATE "$<$<CONFIG:Debug>:/Fd$<TARGET_FILE_DIR:Pcf.TUnit>/Pcf.TUnit${CMAKE_DEBUG_POSTFIX}.pdb>")
+  target_compile_options(Pcf.TUnit PRIVATE "$<$<CONFIG:Release>:/Fd$<TARGET_FILE_DIR:Pcf.TUnit>/Pcf.TUnit.pdb>")
+  install(FILES "$<TARGET_FILE_DIR:Pcf.TUnit>/Pcf.TUnit${CMAKE_DEBUG_POSTFIX}.pdb" DESTINATION lib CONFIGURATIONS Debug OPTIONAL)
+  install(FILES "$<TARGET_FILE_DIR:Pcf.TUnit>Pcf.TUnit.pdb" DESTINATION lib CONFIGURATIONS Release OPTIONAL)
 endif()

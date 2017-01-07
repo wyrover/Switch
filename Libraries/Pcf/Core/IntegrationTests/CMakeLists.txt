@@ -10,7 +10,6 @@ set(tests_files
 ./FileStreamIT.cpp
 ./InterlockedIT.cpp
 ./ListIT.cpp
-./Main.cpp
 ./MutexIT.cpp
 ./NetworkStreamIT.cpp
 ./PathIT.cpp

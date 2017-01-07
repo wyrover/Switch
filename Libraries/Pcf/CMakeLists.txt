@@ -1,25 +1,25 @@
-cmake_minimum_required(VERSION 3.0.2)
-
+cmake_minimum_required(VERSION 3.6)
 project(Pcf VERSION 0.2.0)
 
 option(BUILD_CORE_INTEGRATION_TESTS "Build Core integration tests" OFF)
-option(BUILD_CORE_MANUAL_TESTS "Build Core manual unit tests" ON)
+option(BUILD_CORE_MANUAL_TESTS "Build Core manual tests" ON)
 option(BUILD_CORE_UNIT_TESTS "Build Core unit tests" ON)
 option(BUILD_DRAWING_UNIT_TESTS "Build Drawing unit tests" ON)
-option(BUILD_FORMS_MANUAL_TESTS "Build Forms manual unit tests" OFF)
+option(BUILD_FORMS_MANUAL_TESTS "Build Forms manual tests" ON)
 option(BUILD_FORMS_UNIT_TESTS "Build Forms unit tests" ON)
 option(BUILD_TUNIT_UNIT_TESTS "Build TUnit unit tests" ON)
 
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 include(Dependences.cmake)
 
-enable_testing()
-
 if (APPLE)
-  SET(CMAKE_CXX_FLAGS "-std=c++14 -Wall -Wextra -Wpedantic -Wdeprecated-declarations -Wno-unknown-pragmas -Wno-unused-parameter")
+  SET(CMAKE_CXX_FLAGS "-Wall -Wextra -Wpedantic -Wdeprecated-declarations -Wno-unknown-pragmas -Wno-unused-parameter")
   set(CMAKE_CXX_FLAGS_DEBUG "-g -o -D_DEBUG -DDEBUG")
   set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG -DRELEASE")
 elseif (UNIX)
-  SET(CMAKE_CXX_FLAGS "-std=c++14 -Wall -Wextra -Wpedantic -Wdeprecated-declarations -Wno-unknown-pragmas -Wno-unused-parameter")
+  SET(CMAKE_CXX_FLAGS "-Wall -Wextra -Wpedantic -Wdeprecated-declarations -Wno-unknown-pragmas -Wno-unused-parameter")
   set(CMAKE_CXX_FLAGS_DEBUG "-g -o -D_DEBUG -DDEBUG")
   set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG -DRELEASE")
 elseif (MSVC)
@@ -55,14 +55,16 @@ else ()
   set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/${CMAKE_BUILD_TYPE})
 endif ()
 
+install(EXPORT ${PROJECT_NAME} DESTINATION cmake)
+install(FILES ${PROJECT_NAME}Config.cmake Dependences.cmake DESTINATION cmake)
+
+enable_testing()
+
 add_subdirectory("Core")
 add_subdirectory("Drawing")
 add_subdirectory("Forms")
 add_subdirectory("TUnit")
 add_subdirectory("Pcf")
-
-install(EXPORT ${PROJECT_NAME} DESTINATION cmake)
-install(FILES ${PROJECT_NAME}Config.cmake Dependences.cmake DESTINATION cmake)
 
 # add a target to generate API documentation with Doxygen
 #find_package(Doxygen)

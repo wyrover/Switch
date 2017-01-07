@@ -96,7 +96,7 @@ endif ()
 
 add_library(Pcf.Drawing STATIC ${include_files} ${source_files} ${source_apple_files})
 target_include_directories(Pcf.Drawing PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Includes> $<INSTALL_INTERFACE:include>)
-target_link_libraries(Pcf.Drawing jpeglib libpng zlib Pcf.TUnit)
+target_link_libraries(Pcf.Drawing jpeglib libpng zlib Pcf.Core)
 
 set_target_properties(Pcf.Drawing PROPERTIES FOLDER Pcf/Drawing)
 
@@ -104,10 +104,8 @@ install(TARGETS Pcf.Drawing EXPORT Pcf DESTINATION lib)
 install(DIRECTORY "./Includes/." DESTINATION include)
 
 if(MSVC)
-  set(DEBUG_PDB "$<TARGET_FILE_DIR:Pcf.Drawing>/Pcf.Drawing${CMAKE_DEBUG_POSTFIX}.pdb")
-  set(RELEASE_PDB "$<TARGET_FILE_DIR:Pcf.Drawing>/Pcf.Drawing::pdb")
-  target_compile_options(Pcf.Drawing PRIVATE "$<$<CONFIG:Debug>:/Fd${DEBUG_PDB}>")
-  target_compile_options(Pcf.Drawing PRIVATE "$<$<CONFIG:Release>:/Fd${RELEASE_PDB}>")
+  target_compile_options(Pcf.Drawing PRIVATE "$<$<CONFIG:Debug>:/Fd$<TARGET_FILE_DIR:Pcf.Drawing>/Pcf.Drawing${CMAKE_DEBUG_POSTFIX}.pdb>")
+  target_compile_options(Pcf.Drawing PRIVATE "$<$<CONFIG:Release>:/Fd$<TARGET_FILE_DIR:Pcf.Drawing>/Pcf.Drawing::pdb>")
   install(FILES "$<TARGET_FILE_DIR:Pcf.Drawing>/Pcf.Drawing${CMAKE_DEBUG_POSTFIX}.pdb" DESTINATION lib CONFIGURATIONS Debug OPTIONAL)
   install(FILES "$<TARGET_FILE_DIR:Pcf.Drawing>/Pcf.Drawing::pdb" DESTINATION lib CONFIGURATIONS Release OPTIONAL)
 endif()

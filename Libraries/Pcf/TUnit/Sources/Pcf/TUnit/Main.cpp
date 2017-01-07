@@ -1,5 +1,5 @@
-#include <Pcf/Pcf>
-#include <Pcf/TUnit/UnitTest.h>
+#include <Pcf/Startup.h>
+#include "../../../Includes/Pcf/TUnit/UnitTest.h"
 
 using namespace System;
 

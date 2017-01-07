@@ -19,7 +19,7 @@ namespace {
     
     void GetMainThreadThenGetHandle() {
       Thread thread = Thread::CurrentThread;
-      Assert::AreNotEqual(Thread::NativeHandle(-1), thread.Handle, pcf_current_information);
+      Assert::AreNotEqual(intptr(-1), thread.Handle, pcf_current_information);
     }
     
     void GetMainThreadThenIsAlive() {
@@ -150,7 +150,7 @@ namespace {
     void CreateUnmanagedThreadThenGetHandle() {
       delegate<void> threadStart = pcf_delegate {
         Thread thread = Thread::CurrentThread;
-        Assert::AreEqual(Thread::NativeHandle(-1), thread.Handle, pcf_current_information);
+        Assert::AreEqual(intptr(-1), thread.Handle, pcf_current_information);
       };
       std::thread thread(threadStart);
       thread.join();
@@ -345,7 +345,7 @@ namespace {
     
     void CreateEmptyThreadThenGetHandle() {
       Thread thread;
-      Assert::AreEqual(Thread::NativeHandle(-1), thread.Handle, pcf_current_information);
+      Assert::AreEqual(intptr(-1), thread.Handle, pcf_current_information);
     }
     
     void CreateEmptyThreadThenIsAlive() {
@@ -467,7 +467,7 @@ namespace {
         counter++;
       };
       Thread thread(threadStart);
-      Assert::AreNotEqual(Thread::NativeHandle(-1), thread.Handle, pcf_current_information);
+      Assert::AreNotEqual(intptr(-1), thread.Handle, pcf_current_information);
     }
     
     void CreateThreadWithThreadStartThenIsAlive() {
@@ -819,7 +819,7 @@ namespace {
         counter++;
       };
       Thread thread(parameterizedThreadStart);
-      Assert::AreNotEqual(Thread::NativeHandle(-1), thread.Handle, pcf_current_information);
+      Assert::AreNotEqual(intptr(-1), thread.Handle, pcf_current_information);
     }
     
     void CreateThreadWithParameterizedThreadStartThenIsAlive() {

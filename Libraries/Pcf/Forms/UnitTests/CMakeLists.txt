@@ -1,7 +1,6 @@
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 set(tests_files
-./Main.cpp
 ./ApplicationTest.cpp
 )
 
@@ -13,5 +12,5 @@ set_target_properties(Pcf.Forms.UnitTests PROPERTIES FOLDER Pcf/Forms)
 
 add_test(NAME Pcf.Forms.UnitTests COMMAND $<TARGET_FILE_NAME:Pcf.Forms.UnitTests> --tunit_filter=*.* --tunit_output=xml:Pcf.Forms.UnitTests.xml WORKING_DIRECTORY $<TARGET_FILE_DIR:Pcf.Forms.UnitTests>)
 
-target_link_libraries(Pcf.Forms.UnitTests Pcf.Forms)
+target_link_libraries(Pcf.Forms.UnitTests Pcf.Forms Pcf.TUnit)
 
