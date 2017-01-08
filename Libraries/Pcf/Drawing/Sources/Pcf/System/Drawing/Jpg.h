@@ -1,7 +1,7 @@
 #include <setjmp.h>
 
 extern "C" {
-#include <jpeglib/jpeglib.h>
+#include <jpeglib.h>
 }
 
 #include <Pcf/System/Object.h>

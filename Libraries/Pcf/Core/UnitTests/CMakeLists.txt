@@ -129,10 +129,8 @@ source_group(UnitTests\\Pcf\\System\\Text REGULAR_EXPRESSION "/UnitTests/Pcf/Sys
 source_group(UnitTests\\Pcf\\System\\Threading REGULAR_EXPRESSION "/UnitTests/Pcf/System/Threading/[-_,A-Za-z0-9]+\\.(c|h)*")
 
 add_executable(Pcf.Core.UnitTests ${SOURCE_FILES})
-
 target_link_libraries(Pcf.Core.UnitTests Pcf.Core Pcf.TUnit)
-
-add_test(NAME Pcf.Core.UnitTests COMMAND $<TARGET_FILE_NAME:Pcf.Core.UnitTests> --tunit_filter=*.* --tunit_output=xml:Pcf.Core.UnitTests.xml WORKING_DIRECTORY $<TARGET_FILE_DIR:Pcf.Core.UnitTests>)
-
 set_target_properties(Pcf.Core.UnitTests PROPERTIES FOLDER Pcf/Core)
 
+enable_testing()
+add_test(NAME Pcf.Core.UnitTests COMMAND $<TARGET_FILE_NAME:Pcf.Core.UnitTests> --tunit_filter=*.* --tunit_output=xml:Pcf.Core.UnitTests.xml WORKING_DIRECTORY $<TARGET_FILE_DIR:Pcf.Core.UnitTests>)

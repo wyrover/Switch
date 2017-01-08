@@ -41,6 +41,10 @@
 cmake_minimum_required(VERSION 2.6.2 FATAL_ERROR)
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMake;${CMAKE_MODULE_PATH}")
 
+if(POLICY CMP0048)
+  cmake_policy(SET CMP0048 OLD)
+endif()
+
 if(POLICY CMP0054)
   cmake_policy(SET CMP0054 OLD)
 endif()
@@ -885,13 +889,9 @@ endif()
 
 # Installation.
 # First, install generated curlbuild.h
-install(FILES "${CMAKE_CURRENT_BINARY_DIR}/include/curl/curlbuild.h"
-    DESTINATION include/curl )
+#install(FILES "${CMAKE_CURRENT_BINARY_DIR}/include/curl/curlbuild.h" DESTINATION include/curl )
 # Next, install other headers excluding curlbuild.h
-install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/curl"
-    DESTINATION include
-    FILES_MATCHING PATTERN "*.h"
-    PATTERN "curlbuild.h" EXCLUDE)
+#install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/curl" DESTINATION include FILES_MATCHING PATTERN "*.h" PATTERN "curlbuild.h" EXCLUDE)
 
 
 # Workaround for MSVS10 to avoid the Dialog Hell

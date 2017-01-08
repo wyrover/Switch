@@ -12,7 +12,11 @@ option(BUILD_TUNIT_UNIT_TESTS "Build TUnit unit tests" ON)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-include(Dependences.cmake)
+#include(Dependences.cmake)
+
+SET(PCF_CXX_FLAGS_BACKUP ${CMAKE_CXX_FLAGS})
+SET(PCF_CXX_FLAGS_DEBUG_BACKUP ${CMAKE_CXX_FLAGS_DEBUG})
+SET(PCF_CXX_FLAGS_RELEASE_BACKUP ${CMAKE_CXX_FLAGS_RELEASE})
 
 if (APPLE)
   SET(CMAKE_CXX_FLAGS "-Wall -Wextra -Wpedantic -Wdeprecated-declarations -Wno-unknown-pragmas -Wno-unused-parameter")
@@ -55,16 +59,14 @@ else ()
   set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/${CMAKE_BUILD_TYPE})
 endif ()
 
-install(EXPORT ${PROJECT_NAME} DESTINATION cmake)
-install(FILES ${PROJECT_NAME}Config.cmake Dependences.cmake DESTINATION cmake)
-
-enable_testing()
-
 add_subdirectory("Core")
 add_subdirectory("Drawing")
 add_subdirectory("Forms")
 add_subdirectory("TUnit")
 add_subdirectory("Pcf")
+
+install(EXPORT ${PROJECT_NAME} DESTINATION cmake)
+install(FILES ${PROJECT_NAME}Config.cmake Dependences.cmake DESTINATION cmake)
 
 # add a target to generate API documentation with Doxygen
 #find_package(Doxygen)

@@ -631,13 +631,19 @@ source_group(Sources\\Pcf\\System REGULAR_EXPRESSION "/Sources/Pcf/System/[-_,A-
 source_group(Sources\\Pcf REGULAR_EXPRESSION "/Sources/Pcf/[-_,A-Za-z0-9]+\\.c*")
 source_group(Sources REGULAR_EXPRESSION "/Sources/[-_,A-Za-z0-9]+\\.c*")
 
+add_subdirectory("Sources/__ThirdParties/call_stack")
+add_subdirectory("Sources/__ThirdParties/easywsclient")
+add_subdirectory("Sources/__ThirdParties/libcurl")
+add_subdirectory("Sources/__ThirdParties/Rs232")
+add_subdirectory("Sources/__ThirdParties/zlib")
+
 add_library(Pcf.Core STATIC ${INCLUDE_FILES} ${SOURCE_FILES})
 target_include_directories(Pcf.Core PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Includes> $<INSTALL_INTERFACE:include>)
-target_link_libraries(Pcf.Core call_stack easywsclient Rs232 libcurl)
+target_link_libraries(Pcf.Core Rs232 libcurl easywsclient call_stack)
 set_target_properties(Pcf.Core PROPERTIES FOLDER Pcf/Core)
 
 install(TARGETS Pcf.Core EXPORT Pcf DESTINATION lib)
-install(DIRECTORY "  Includes/."  DESTINATION include)
+install(DIRECTORY "Includes/."  DESTINATION include)
 if(MSVC)
   target_compile_options(Pcf.Core PRIVATE "$<$<CONFIG:Debug>:/Fd$<TARGET_FILE_DIR:Pcf.Core>/Pcf.Core${CMAKE_DEBUG_POSTFIX}.pdb>")
   target_compile_options(Pcf.Core PRIVATE "$<$<CONFIG:Release>:/Fd$<TARGET_FILE_DIR:Pcf.Core>/Pcf.Core.pdb>")

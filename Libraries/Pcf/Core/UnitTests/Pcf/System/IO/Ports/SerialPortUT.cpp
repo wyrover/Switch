@@ -1,4 +1,3 @@
-#include <Rs232/rs232.h>
 #include <Pcf/System/IO/IOException.h>
 #include <Pcf/System/Threading/Thread.h>
 #include <Pcf/TUnit/Assert.h>

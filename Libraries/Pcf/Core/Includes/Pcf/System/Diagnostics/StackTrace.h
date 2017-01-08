@@ -2,8 +2,6 @@
 /// @brief Contains Pcf::System::Diagnostics::StackTrace class.
 #pragma once
 
-#include <call_stack/call_stack.hpp>
-
 #include "../../Types.h"
 #include "../../UniquePointer.h"
 #include "../Exception.h"
@@ -11,6 +9,12 @@
 #include "../String.h"
 #include "../Collections/Generic/List.h"
 #include "StackFrame.h"
+
+/// @cond
+namespace stacktrace {
+  class call_stack;
+}
+/// @endcond
 
 /// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Pcf {
@@ -134,7 +138,13 @@ namespace Pcf {
         void FillFrames(const String& str, int32 skipFrames, bool needFileInfo);
         void FillFrames(void* callStack, int32 skipFrames, bool needFileInfo);
 
-        SharedPointer<stacktrace::call_stack> stackTrace;
+        struct CallStack {
+          CallStack();
+          ~CallStack();
+          intptr handle;
+        };
+
+        SharedPointer<CallStack> stackTrace;
         System::Collections::Generic::List<SharedPointer<StackFrame>> frames;
       };
     }

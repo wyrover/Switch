@@ -119,4 +119,4 @@ if(WIN32)
   endif()
 endif()
 
-install(TARGETS ${LIB_NAME} EXPORT libcurl DESTINATION bin${COMPILER_SUBDIR}) 
+install(TARGETS ${LIB_NAME} EXPORT Pcf DESTINATION lib) 

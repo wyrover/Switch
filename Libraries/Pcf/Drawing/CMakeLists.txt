@@ -1,5 +1,4 @@
-# Add include files here:
-set(include_files
+set(INCLUDE_FILES
 ./Includes/Pcf/System/Drawing/Imaging/ColorPalette.h
 ./Includes/Pcf/System/Drawing/Imaging/FrameDimension.h
 ./Includes/Pcf/System/Drawing/Imaging/ImageFlags.h
@@ -37,8 +36,7 @@ set(include_files
 ./Includes/Pcf/Pcf.h
 )
 
-# Add source files here:
-set(source_files
+set(SOURCE_FILES
 ./Sources/__OS/DrawingApi.h
 ./Sources/__OS/DrawingApiWin32.cpp
 ./Sources/__OS/DrawingApiX.cpp
@@ -67,12 +65,11 @@ set(source_files
 )
 
 if (APPLE)
-set(source_apple_files
+set(COCOA_SOURCE_FILES
 ./Sources/__OS/DrawingApiCocoa.mm
 )
 endif ()
 
-#Add include groups here:
 source_group(Includes\\Pcf\\System REGULAR_EXPRESSION "/Includes/Pcf/System/[-_,A-Za-z0-9]+\\.h*")
 source_group(Includes\\Pcf\\System\\Drawing REGULAR_EXPRESSION "/Includes/Pcf/System/Drawing/[-_,A-Za-z0-9]+\\.h*")
 source_group(Includes\\Pcf\\System\\Drawing\\Imaging REGULAR_EXPRESSION "/Includes/Pcf/System/Drawing/Imaging/[-_,A-Za-z0-9]+\\.h*")
@@ -81,7 +78,6 @@ source_group(Includes\\Pcf REGULAR_EXPRESSION "/Includes/Pcf/[-_,A-Za-z0-9]+\\.h
 source_group(Includes\\Pcf REGULAR_EXPRESSION "/Includes/Pcf/[-_,A-Za-z0-9]")
 source_group(Includes REGULAR_EXPRESSION "/Includes/[-_,A-Za-z0-9]+\\.h*")
 
-#Add source groups here:
 source_group(Sources\\Pcf\\System REGULAR_EXPRESSION "/Sources/Pcf/System/[-_,A-Za-z0-9]+\\.c*")
 source_group(Sources\\Pcf\\System\\Drawing REGULAR_EXPRESSION "/Sources/Pcf/System/Drawing/[-_,A-Za-z0-9]+\\.*")
 source_group(Sources\\Pcf\\System\\Drawing\\Imaging REGULAR_EXPRESSION "/Sources/Pcf/System/Drawing/Imaging/[-_,A-Za-z0-9]+\\.*")
@@ -90,22 +86,23 @@ source_group(Sources\\Pcf REGULAR_EXPRESSION "/Sources/Pcf/[-_,A-Za-z0-9]+\\.c*"
 source_group(Sources\\__OS REGULAR_EXPRESSION "/Sources/__OS/[-_,A-Za-z0-9]+\\.*")
 source_group(Sources REGULAR_EXPRESSION "/Sources/[-_,A-Za-z0-9]+\\.c*")
 
-if (BUILD_DRAWING_UNIT_TESTS)
-  add_subdirectory("UnitTests")
-endif ()
+add_subdirectory("Sources/__ThirdParties/jpeglib")
+add_subdirectory("Sources/__ThirdParties/libpng")
 
-add_library(Pcf.Drawing STATIC ${include_files} ${source_files} ${source_apple_files})
+add_library(Pcf.Drawing STATIC ${INCLUDE_FILES} ${SOURCE_FILES} ${COCOA_SOURCE_FILES})
 target_include_directories(Pcf.Drawing PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Includes> $<INSTALL_INTERFACE:include>)
-target_link_libraries(Pcf.Drawing jpeglib libpng zlib Pcf.Core)
-
+target_link_libraries(Pcf.Drawing jpeglib libpng Pcf.Core)
 set_target_properties(Pcf.Drawing PROPERTIES FOLDER Pcf/Drawing)
 
 install(TARGETS Pcf.Drawing EXPORT Pcf DESTINATION lib)
 install(DIRECTORY "./Includes/." DESTINATION include)
-
 if(MSVC)
   target_compile_options(Pcf.Drawing PRIVATE "$<$<CONFIG:Debug>:/Fd$<TARGET_FILE_DIR:Pcf.Drawing>/Pcf.Drawing${CMAKE_DEBUG_POSTFIX}.pdb>")
   target_compile_options(Pcf.Drawing PRIVATE "$<$<CONFIG:Release>:/Fd$<TARGET_FILE_DIR:Pcf.Drawing>/Pcf.Drawing::pdb>")
   install(FILES "$<TARGET_FILE_DIR:Pcf.Drawing>/Pcf.Drawing${CMAKE_DEBUG_POSTFIX}.pdb" DESTINATION lib CONFIGURATIONS Debug OPTIONAL)
   install(FILES "$<TARGET_FILE_DIR:Pcf.Drawing>/Pcf.Drawing::pdb" DESTINATION lib CONFIGURATIONS Release OPTIONAL)
 endif()
+
+if (BUILD_DRAWING_UNIT_TESTS)
+  add_subdirectory("UnitTests")
+endif ()

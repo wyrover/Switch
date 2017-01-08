@@ -1,31 +1,40 @@
+#include "../../../__ThirdParties/call_stack/Sources/call_stack.hpp"
 #include "../../../../Includes/Pcf/System/Diagnostics/StackTrace.h"
 #include "../../../../Includes/Pcf/System/Environment.h"
 
 using namespace System;
 using namespace System::Diagnostics;
 
+StackTrace::CallStack::CallStack() {
+  this->handle = (intptr)new stacktrace::call_stack();
+}
+
+StackTrace::CallStack::~CallStack() {
+  delete (stacktrace::call_stack*)this->handle;
+}
+
 int32 StackTrace::FrameCount() const {
   return this->frames.Count;
 }
 
 void StackTrace::FillFrames(int32 skipFrames, bool needFileInfo) {
-  this->stackTrace = new stacktrace::call_stack();
-  FillFrames(this->stackTrace.ToPointer(), skipFrames, needFileInfo);
+  this->stackTrace = SharedPointer<CallStack>::Create();
+  FillFrames(((stacktrace::call_stack*)this->stackTrace->handle), skipFrames, needFileInfo);
 }
 
 void StackTrace::FillFrames(const String& str, int32 skipFrames, bool needFileInfo) {
   if (skipFrames < 0 )
     throw ArgumentOutOfRangeException(pcf_current_information);
   
-  this->stackTrace = UniquePointer<stacktrace::call_stack>::Create();
+  this->stackTrace = SharedPointer<CallStack>::Create();
 
   int32 skipFramesBeforeStr = 0;
-  for (int32 index = 0; index < StackFrame::GetFrameCount(this->stackTrace.ToPointer()); index++) {
-    if (StackFrame(this->stackTrace.ToPointer(), index, needFileInfo).GetMethod().StartsWith(str))
+  for (int32 index = 0; index < StackFrame::GetFrameCount(((stacktrace::call_stack*)this->stackTrace->handle)); index++) {
+    if (StackFrame(((stacktrace::call_stack*)this->stackTrace->handle), index, needFileInfo).GetMethod().StartsWith(str))
       skipFramesBeforeStr = index;
   }
 
-  FillFrames(this->stackTrace.ToPointer(), skipFrames + skipFramesBeforeStr, needFileInfo);
+  FillFrames(((stacktrace::call_stack*)this->stackTrace->handle), skipFrames + skipFramesBeforeStr, needFileInfo);
 }
 
 void StackTrace::FillFrames(void* stackTrace, int32 skipFrames, bool needFileInfo) {

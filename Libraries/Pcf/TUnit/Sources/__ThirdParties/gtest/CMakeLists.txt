@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.0.2)
 project(gtest VERSION 1.7.2)
 
 #Create the list of source files
-set(source_files
+set(SOURCE_FILES
 ./src/gtest-death-test.cc
 ./src/gtest-filepath.cc
 ./src/gtest-internal-inl.h
@@ -15,7 +15,7 @@ set(source_files
 )
 
 #Create the list of include files
-set(include_files
+set(INCLUDE_FILES
 ./include/gtest/gtest
 ./include/gtest/gtest-death-test.h
 ./include/gtest/gtest-message.h
@@ -66,41 +66,21 @@ endif ()
 if(NOT CMAKE_DEBUG_POSTFIX)
   set(CMAKE_DEBUG_POSTFIX d)
 endif()
-
-if (APPLE)
-  set(STANDARD_LINK_LIBRARIES pthread)
-elseif(UNIX)
-  set(STANDARD_LINK_LIBRARIES dl pthread rt)
-elseif(MSVC)
-  set(STANDARD_LINK_LIBRARIES Ws2_32.lib Iphlpapi.lib Rpcrt4.lib)
-endif ()
-
-enable_testing()
  
-add_library(${PROJECT_NAME} STATIC ${include_files} ${source_files})
+add_library(gtest STATIC ${INCLUDE_FILES} ${SOURCE_FILES})
+target_include_directories(gtest PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}> $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include> $<INSTALL_INTERFACE:include>)
+set_target_properties(gtest PROPERTIES FOLDER Pcf/TUnit/__ThirdParties)
 
-target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}> $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include> $<INSTALL_INTERFACE:include>)
 
-if(NOT CMAKE_DEBUG_POSTFIX)
-  set(CMAKE_DEBUG_POSTFIX d)
-endif()
-
-if (APPLE OR UNIX)
-  set(HOME $ENV{HOME})
-elseif (MSVC)
-  set(HOME $ENV{HOMEDRIVE}$ENV{HOMEPATH} CACHE PATH "Home path")
-endif()
 set(CMAKE_INSTALL_PREFIX "${HOME}/Libraries/${PROJECT_NAME}/${PROJECT_VERSION}${INSTALL_REV}")
-install(EXPORT ${PROJECT_NAME} DESTINATION cmake/)
-install(FILES ${PROJECT_NAME}Config.cmake DESTINATION cmake) 
-install(TARGETS ${PROJECT_NAME} EXPORT ${PROJECT_NAME} DESTINATION lib) 
+#install(EXPORT ${PROJECT_NAME} DESTINATION cmake/)
+#install(FILES ${PROJECT_NAME}Config.cmake DESTINATION cmake) 
+install(TARGETS gtest EXPORT Pcf DESTINATION lib) 
 install(DIRECTORY "./include/."  DESTINATION include PATTERN ".svn" EXCLUDE)
 
 if(MSVC)
-  set(DEBUG_PDB "$<TARGET_FILE_DIR:${PROJECT_NAME}>/${PROJECT_NAME}${CMAKE_DEBUG_POSTFIX}.pdb")
-  set(RELEASE_PDB "$<TARGET_FILE_DIR:${PROJECT_NAME}>/${PROJECT_NAME}.pdb")
-  target_compile_options(${PROJECT_NAME} PRIVATE "$<$<CONFIG:Debug>:/Fd${DEBUG_PDB}>")
-  target_compile_options(${PROJECT_NAME} PRIVATE "$<$<CONFIG:Release>:/Fd${RELEASE_PDB}>")
-  install(FILES "$<TARGET_FILE_DIR:${PROJECT_NAME}>/${PROJECT_NAME}${CMAKE_DEBUG_POSTFIX}.pdb" DESTINATION lib CONFIGURATIONS Debug OPTIONAL)
-  install(FILES "$<TARGET_FILE_DIR:${PROJECT_NAME}>/${PROJECT_NAME}.pdb" DESTINATION lib CONFIGURATIONS Release OPTIONAL)
+  target_compile_options(gtest PRIVATE "$<$<CONFIG:Debug>:/Fd$<TARGET_FILE_DIR:gtest>/gtest${CMAKE_DEBUG_POSTFIX}.pdb>")
+  target_compile_options(gtest PRIVATE "$<$<CONFIG:Release>:/Fd$<TARGET_FILE_DIR:gtest>/gtest.pdb>")
+  install(FILES "$<TARGET_FILE_DIR:gtest>/gtest${CMAKE_DEBUG_POSTFIX}.pdb" DESTINATION lib CONFIGURATIONS Debug OPTIONAL)
+  install(FILES "$<TARGET_FILE_DIR:gtest>/gtest.pdb" DESTINATION lib CONFIGURATIONS Release OPTIONAL)
 endif()

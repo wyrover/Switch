@@ -1,5 +1,5 @@
-#include <zlib/zlib.h>
-#include <libpng/png.h>
+#include <zlib.h>
+#include <png.h>
 #include <Pcf/System/Object.h>
 #include <Pcf/UniquePointer.h>
 #include <Pcf/System/IO//BinaryReader.h>
