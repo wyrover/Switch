@@ -28,7 +28,7 @@ namespace HelloWorld {
   class Program {
   public:
     // The main entry point for the application.
-    static void Main() {
+    static void Main(const Array<string>& args) {
       Console::WriteLine("Hello, World!");
     }
   };
