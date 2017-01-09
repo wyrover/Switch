@@ -84,16 +84,10 @@ using namespace TUnit;
 
 namespace UnitTests {
   class HelloWorldTest : public TestFixture {
-  public:
-    // The main entry point for the application.
-    static int Main(const Array<string>& args) {
-      return TUnit::UnitTest(args).Run();
-    }
-    
   protected:
     void SetString() {
       string s = "Hello, World!";
-      Assert::AreEqual("Hello, World!", s, pcf_current_information);
+      Assert::AreEqual("Hello, World!", s);
     }
   };
 
