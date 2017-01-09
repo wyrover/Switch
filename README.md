@@ -91,7 +91,7 @@ namespace UnitTests {
     }
   };
 
-  pcf_test(HelloWorldTest, SetString);
+  pcf_test (HelloWorldTest, SetString)
 }
 ```
 
