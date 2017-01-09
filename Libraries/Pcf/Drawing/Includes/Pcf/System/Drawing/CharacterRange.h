@@ -12,7 +12,7 @@ namespace Pcf {
     /// @brief The System::Drawing namespace provides access to GDI+ basic graphics functionality. More advanced functionality is provided in the System::Drawing::Drawing2D, System::Drawing::Imaging, and System::Drawing::Text namespaces.
     namespace Drawing {
       /// @brief Specifies a range of character positions within a string.
-      class CharacterRange : public object {
+      class pcf_public CharacterRange : public object {
       public:
         /// @brief Initializes a new instance of the CharacterRange structure, with default value (0, 0).
         CharacterRange() {}

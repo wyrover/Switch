@@ -14,7 +14,7 @@ namespace Pcf {
   namespace System {
     /// @brief The System::Drawing namespace provides access to GDI+ basic graphics functionality. More advanced functionality is provided in the System::Drawing::Drawing2D, System::Drawing::Imaging, and System::Drawing::Text namespaces.
     namespace Drawing {
-      class Pen : public object {
+      class pcf_public Pen : public object {
       public:
         Pen() {}
 

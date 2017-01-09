@@ -17,7 +17,7 @@ namespace Pcf {
       /// @endcond
 
       /// @brief Stores an ordered pair of singles, which specify a X and Y.
-      class PointF : public object {
+      class pcf_public PointF : public object {
       public:
         /// @brief Gets a PointF class that has a X and Y value of 0. This field is constant.
         static Property<PointF, ReadOnly> Empty;

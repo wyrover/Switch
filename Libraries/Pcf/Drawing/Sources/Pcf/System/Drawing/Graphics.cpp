@@ -13,9 +13,6 @@ void Graphics::DrawArc(const Pen& pen, int32 x, int32 y, int32 w, int32 h, float
 void Graphics::DrawBezier(const Pen& pen, double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4) {
 }
 
-void Graphics::DrawFrame(FrameType type, int32 x, int32 y, int32 w, int32 h) {
-}
-
 void Graphics::DrawLine(const Pen& pen, int32 x1, int32 y1, int32 x2, int32 y2) {
 }
 
@@ -26,9 +23,6 @@ void Graphics::DrawRectangle(const Pen& pen, int32 x, int32 y, int32 w, int32 h)
 }
 
 void Graphics::DrawString(const string& str, const Font& font, const Brush& brush, const RectangleF& layoutRectangle, const StringFormat& format) {
-}
-
-void Graphics::FillBox(BoxType type, const Brush& brush, int32 x, int32 y, int32 w, int32 h) {
 }
 
 void Graphics::FillPie(const Brush& brush, int32 x, int32 y, int32 w, int32 h, float startAngle, float sweepAngle) {

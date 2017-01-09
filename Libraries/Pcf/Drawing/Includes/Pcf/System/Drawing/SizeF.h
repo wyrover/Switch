@@ -20,7 +20,7 @@ namespace Pcf {
       /// @endcond
 
       /// @brief Stores an ordered pair of singles, which specify a Height and Width.
-      class SizeF : public object {
+      class pcf_public SizeF : public object {
       public:
         /// @brief Gets a SizeF class that has a Height and Width value of 0.0f. This field is constant.
         static Property<SizeF, ReadOnly> Empty;

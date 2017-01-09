@@ -38,7 +38,7 @@ namespace Pcf {
       
       /// @brief An abstract base class that provides functionality for the System::Drawing::Bitmap and System::Drawing::Imaging::Metafile descended classes.
       /// @remarks To draw an System::Drawing::Image on a Windows Form, you should use one of the Graphics::DrawImage(Image, Point) methods.
-      class Image : public object, public IComparable {
+      class pcf_public Image : public object, public IComparable {
       public:
         /// @cond
         Image();

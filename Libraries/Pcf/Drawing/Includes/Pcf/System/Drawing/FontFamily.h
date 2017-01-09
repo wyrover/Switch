@@ -14,7 +14,7 @@ namespace Pcf {
     /// @brief The System::Drawing namespace provides access to GDI+ basic graphics functionality. More advanced functionality is provided in the System::Drawing::Drawing2D, System::Drawing::Imaging, and System::Drawing::Text namespaces.
     namespace Drawing {
       /// @brief Defines a group of type faces having a similar basic design and certain variations in styles. This class cannot be inherited.
-      class FontFamily final : public object {
+      class pcf_public FontFamily final : public object {
       public:
         FontFamily(const string& name);
         FontFamily(System::Drawing::Text::GenericFontFamilies genericFamily);

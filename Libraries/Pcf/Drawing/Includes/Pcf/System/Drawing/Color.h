@@ -16,7 +16,7 @@ namespace Pcf {
     /// @brief The System::Drawing namespace provides access to GDI+ basic graphics functionality. More advanced functionality is provided in the System::Drawing::Drawing2D, System::Drawing::Imaging, and System::Drawing::Text namespaces.
     namespace Drawing {
       /// @brief Represents an ARGB (alpha, red, green, blue) color.
-      class Color : public object, public IComparable {
+      class pcf_public Color : public object, public IComparable {
         using KnownColors = Collections::Generic::Dictionary<int32, int32>;
         static KnownColors knownColors;
 

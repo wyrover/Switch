@@ -14,7 +14,7 @@ namespace Pcf {
     namespace Drawing {
       /// @brief The System::Drawing::Imaging namespace provides advanced GDI+ imaging functionality. Basic graphics functionality is provided by the System::Drawing namespace.
       namespace Imaging {
-        class FrameDimension : public object {
+        class pcf_public FrameDimension : public object {
         public:
           static Property<FrameDimension, ReadOnly> Page;
           

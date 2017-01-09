@@ -18,7 +18,7 @@ namespace Pcf {
       /// @endcond
 
       /// @brief Stores an ordered pair of integers, which specify a X and Y.
-      class Point : public object {
+      class pcf_public Point : public object {
       public:
         /// @brief Gets a Point class that has a X and Y value of 0. This field is constant.
         static Property<Point, ReadOnly> Empty;

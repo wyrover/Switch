@@ -30,68 +30,14 @@ namespace Pcf {
     /// @endcond
     
     /// @brief The System::Drawing namespace provides access to GDI+ basic graphics functionality. More advanced functionality is provided in the System::Drawing::Drawing2D, System::Drawing::Imaging, and System::Drawing::Text namespaces.
-    namespace Drawing {
-      enum class BoxType {
-        Flat,
-        Up,
-        Down,
-        ThinUp,
-        ThinDown,
-        Engraved,
-        Embossed,
-        Border,
-        Shadow,
-        Rounded,
-        RoundedFlat,
-        RoundedShadow,
-        Oval,
-        OvalFlat,
-        OvalShadow,
-        RoundUp,
-        RoundDown,
-        Diamond,
-        DiamondUp,
-        DiamondDown,
-        PlasticUp,
-        PlasticDown,
-        PlasticThinUp,
-        PlasticThinDown,
-        PlasticRoundUp,
-        PlasticRoundDown,
-        GtkUp,
-        GtkDown,
-        GtkThinUp,
-        GtkThinDown,
-        GtkRoundUp,
-        GtkRoundDown,
-      };
-      
-      enum class FrameType {
-        Up,
-        Down,
-        ThinUp,
-        ThinDown,
-        Engraved,
-        Embossed,
-        Border,
-        Shadow,
-        Rounded,
-        Oval,
-        PlasticUp,
-        PlasticDown,
-        GtkUp,
-        GtkDown,
-        GtkThinUp,
-        GtkThinDown,
-      };
-      
+    namespace Drawing {      
       enum class StringAlignment {
         Near,
         Center,
         Far
       };
       
-      class StringFormat {
+      class pcf_public StringFormat {
       public:
         StringFormat() {}
         StringFormat(const StringFormat& stringFormat) : alignment(stringFormat.alignment), lineAlignment(stringFormat.lineAlignment) {}
@@ -111,7 +57,7 @@ namespace Pcf {
         StringAlignment lineAlignment = StringAlignment::Near;
       };
       
-      class Graphics : public Object {
+      class pcf_public pcf_public Graphics : public Object {
       public:
         void Clear(const Color& color);
 
@@ -122,10 +68,6 @@ namespace Pcf {
         void DrawBezier(const Pen& pen, double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4);
 
         void DrawBezier(const Pen& pen, int32 x1, int32 y1, int32 x2, int32 y2, int32 x3, int32 y3, int32 x4, int32 y4) {this->DrawBezier(pen, Convert::ToDouble(x1), Convert::ToDouble(y1), Convert::ToDouble(x2), Convert::ToDouble(y2), Convert::ToDouble(x3), Convert::ToDouble(y3), Convert::ToDouble(x4), Convert::ToDouble(y4));}
-
-        void DrawFrame(FrameType type, int32 x, int32 y, int32 w, int32 h);
-
-        void DrawFrame(FrameType type, const Rectangle& r) {this->DrawFrame(type, r.Left(), r.Top(), r.Width(), r.Height());}
         
         void DrawEllipse(const Pen& pen, int32 x, int32 y, int32 w, int32 h) {this->DrawArc(pen, x, y, w, h, 0.0f, 360.0f);}
 
@@ -160,10 +102,6 @@ namespace Pcf {
         void DrawString(const string& str, const Font& font, const Brush& brush, const RectangleF& layoutRectangle) {DrawString(str, font, brush, layoutRectangle, StringFormat());}
         
         void DrawString(const string& str, const Font& font, const Brush& brush, const RectangleF& layoutRectangle, const StringFormat& format);
-        
-        void FillBox(BoxType type, const Brush& brush, int32 x, int32 y, int32 w, int32 h);
-
-        void FillBox(BoxType type, const Brush& brush, const Rectangle& r) {this->FillBox(type, brush, r.Left(), r.Top(), r.Width(), r.Height());}
         
         void FillPie(const Brush& brush, int32 x, int32 y, int32 w, int32 h, float startAngle, float sweepAngle);
 
