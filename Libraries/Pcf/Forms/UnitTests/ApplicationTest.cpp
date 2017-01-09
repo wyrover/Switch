@@ -12,5 +12,5 @@ namespace PcfUnitTests {
     }
   };
   
-  pcf_test(ApplicationTest, EnableVisualStyles)
+  pcf_test (ApplicationTest, EnableVisualStyles)
 }
