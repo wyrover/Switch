@@ -10,7 +10,7 @@ namespace Pcf {
       class IComponenent;
       /// @interface IContainer
       /// @brief Provides functionality for containers. Containers are objects that logically contain zero or more components.
-      class IContainer pcf_interface {
+      class pcf_public IContainer pcf_interface {
       public:
       };
     }

@@ -10,7 +10,7 @@ namespace Pcf {
     namespace Windows {
       namespace Forms {
         /// @brief Provides data for the Invalidated event.
-        class InvalidateEventArgs : public EventArgs {
+        class pcf_public InvalidateEventArgs : public EventArgs {
         public:
           /// @brief Initializes a new instance of the InvalidateEventArgs class.
           InvalidateEventArgs() {}

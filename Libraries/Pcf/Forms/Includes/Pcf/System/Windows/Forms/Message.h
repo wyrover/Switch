@@ -12,7 +12,7 @@ namespace Pcf {
     namespace Windows {
       /// @brief The Pcf::System::Windows::Forms namespace contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system, Apple Mac Os X and Linux like Ubuntu operating system.
       namespace Forms {
-        struct Message : public object {
+        struct pcf_public Message : public object {
         public:
           /// @cond
           Message() {}

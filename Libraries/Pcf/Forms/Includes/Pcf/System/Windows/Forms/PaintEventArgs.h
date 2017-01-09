@@ -16,7 +16,7 @@ namespace Pcf {
         class Control;
         /// @endcond
 
-        class PaintEventArgs : public EventArgs {
+        class pcf_public PaintEventArgs : public EventArgs {
         public:
           PaintEventArgs() {}
           PaintEventArgs(const System::Drawing::Rectangle& clipRectangle, System::Drawing::Graphics& graphics) : clipRectangle(clipRectangle), graphics(&graphics) {}

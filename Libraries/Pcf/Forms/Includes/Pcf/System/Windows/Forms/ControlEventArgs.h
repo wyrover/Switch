@@ -60,7 +60,7 @@ namespace Pcf {
         ///   }
         /// }
         /// @endcode
-        class ControlEventArgs : public EventArgs {
+        class pcf_public ControlEventArgs : public EventArgs {
         public:
           /// @brief nitializes a new instance of the ControlEventArgs class.
           ControlEventArgs() {}

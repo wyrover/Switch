@@ -18,7 +18,7 @@ namespace Pcf {
       /// @brief The Pcf::System::Windows::Forms namespace contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system, Apple Mac Os X and Linux like Ubuntu operating system.
       namespace Forms {
         /// @brief Represents a window or dialog box that makes up an application's user interface.
-        class Form : public ContainerControl {
+        class pcf_public Form : public ContainerControl {
         public:
           Form() {
             this->data->visible = false;

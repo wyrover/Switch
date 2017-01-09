@@ -15,7 +15,7 @@ namespace Pcf {
         class Control;
         /// @endcond
 
-        class MouseEventArgs : public EventArgs {
+        class pcf_public MouseEventArgs : public EventArgs {
         public:
           MouseEventArgs() {}
 

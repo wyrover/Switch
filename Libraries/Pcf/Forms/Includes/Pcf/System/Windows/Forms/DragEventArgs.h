@@ -60,7 +60,7 @@ namespace Pcf {
         ///   }
         /// }
         /// @endcode
-        class DragEventArgs : public EventArgs {
+        class pcf_public DragEventArgs : public EventArgs {
         public:
           /// @brief Initializes a new instance of the DragEventArgs class.
           DragEventArgs() {}

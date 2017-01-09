@@ -15,7 +15,7 @@ namespace Pcf {
       /// @brief The Pcf::System::Windows::Forms namespace contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system, Apple Mac Os X and Linux like Ubuntu operating system.
       namespace Forms {
         /// @brief Provides focus-management functionality for controls that can function as a container for other controls.
-        class ContainerControl: public ScrollableControl {
+        class pcf_public ContainerControl: public ScrollableControl {
         public:
           /// @brief Initializes a new instance of the ContainerControl class with default settings.
           ContainerControl() {}

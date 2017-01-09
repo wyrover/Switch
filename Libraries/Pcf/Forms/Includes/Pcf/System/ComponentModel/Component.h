@@ -18,7 +18,7 @@ namespace Pcf {
     /// * Type converters. See the TypeConverter class.
     namespace ComponentModel {
       /// @brief Provides the base implementation for the IComponent interface and enables object sharing between applications.
-      class Component : public object, public IComponent {
+      class pcf_public Component : public object, public IComponent {
       public:
         /// @brief Initializes a new instance of the Component class.
         Component() {}

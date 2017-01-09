@@ -13,7 +13,7 @@ namespace Pcf {
       /// @brief The Pcf::System::Windows::Forms namespace contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system, Apple Mac Os X and Linux like Ubuntu operating system.
       namespace Forms {
         /// @brief Provides a common implementation of members for the ListBox and ComboBox classes.
-        class ListControl: public Control {
+        class pcf_public ListControl: public Control {
         public:
           /// @brief Initializes a new instance of the ListControl class with default settings.
           ListControl() {}

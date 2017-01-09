@@ -10,7 +10,7 @@ namespace Pcf {
     namespace ComponentModel {
       /// @interface IComponent
       /// @brief Provides the base implementation for the IComponent interface and enables object sharing between applications.
-      class IComponent pcf_interface {
+      class pcf_public IComponent pcf_interface {
       public:
         /// @brief Performs application-defined tasks associated with freeing, releasing, or resetting resources.
         virtual void Close() = 0;

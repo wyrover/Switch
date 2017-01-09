@@ -14,7 +14,7 @@ namespace Pcf {
     namespace Windows {
       /// @brief The Pcf::System::Windows::Forms namespace contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system, Apple Mac Os X and Linux like Ubuntu operating system.
       namespace Forms {
-        class FormClosedEventArgs : public EventArgs {
+        class pcf_public FormClosedEventArgs : public EventArgs {
         public:
           FormClosedEventArgs(System::Windows::Forms::CloseReason closeReason) : closeReason(closeReason) {}
           FormClosedEventArgs(const FormClosedEventArgs& e) : closeReason(e.closeReason) {}

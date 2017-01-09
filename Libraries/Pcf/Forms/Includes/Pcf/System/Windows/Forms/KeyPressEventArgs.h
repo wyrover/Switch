@@ -14,7 +14,7 @@ namespace Pcf {
         class Control;
         /// @endcond
 
-        class KeyPressEventArgs : public EventArgs {
+        class pcf_public KeyPressEventArgs : public EventArgs {
         public:
           KeyPressEventArgs() {}
           KeyPressEventArgs(char32 keyChar) : keyChar(keyChar), handled(false) {}

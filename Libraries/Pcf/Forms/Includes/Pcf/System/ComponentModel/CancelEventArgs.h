@@ -7,7 +7,7 @@
 namespace Pcf {
   namespace System {
     namespace ComponentModel {
-      class CancelEventArgs : public EventArgs {
+      class pcf_public CancelEventArgs : public EventArgs {
       public:
         CancelEventArgs() {}
         CancelEventArgs(const CancelEventArgs& ce) : cancel(ce.cancel) {}
