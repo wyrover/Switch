@@ -12,9 +12,7 @@ set(INCLUDE_FILES
   Includes/Pcf/TUnit/Constraints.h
   Includes/Pcf/TUnit/Expect.h
   Includes/Pcf/TUnit/Is.h
-  Includes/Pcf/TUnit/ConsoleEventListener.h
   Includes/Pcf/TUnit/TestFixture.h
-  Includes/Pcf/TUnit/UnitTest.h
   Includes/Pcf/Pcf
   Includes/Pcf/Pcf.h
   Includes/Pcf/TUnit.h
@@ -23,9 +21,9 @@ set(INCLUDE_FILES
 # Add source files here:
 set(SOURCE_FILES
   Sources/Pcf/TUnit/AssertionResult.cpp
+  Sources/Pcf/TUnit/ConsoleEventListener.h
   Sources/Pcf/TUnit/ConsoleEventListener.cpp
   Sources/Pcf/TUnit/Main.cpp
-  Sources/Pcf/TUnit/UnitTest.cpp
 )
 
 #Add include groups here:
@@ -38,12 +36,12 @@ source_group(Includes\\Pcf\\TUnit\\Constraints REGULAR_EXPRESSION "/Includes/Pcf
 #Add source groups here:
 source_group(Sources REGULAR_EXPRESSION "/Sources/[-_,A-Za-z0-9]+\\.c*")
 source_group(Sources\\Pcf REGULAR_EXPRESSION "/Sources/Pcf/[-_,A-Za-z0-9]+\\.c*")
-source_group(Sources\\Pcf\\TUnit REGULAR_EXPRESSION "/Sources/Pcf/TUnit/[-_,A-Za-z0-9]+\\.c*")
+source_group(Sources\\Pcf\\TUnit REGULAR_EXPRESSION "/Sources/Pcf/TUnit/[-_,A-Za-z0-9]+\\.(c|h)*")
 source_group(Sources\\Pcf\\TUnit\\Constraints REGULAR_EXPRESSION "/Sources/Pcf/TUnit/Constraints/[-_,A-Za-z0-9]+\\.c*")
 
 add_subdirectory("Sources/__ThirdParties/gtest")
 
-add_library(Pcf.TUnit STATIC ${INCLUDE_FILES} ${SPURCE_FILES})
+add_library(Pcf.TUnit STATIC ${INCLUDE_FILES} ${SOURCE_FILES})
 target_include_directories(Pcf.TUnit PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Includes> $<INSTALL_INTERFACE:include>)
 target_link_libraries(Pcf.TUnit Pcf.Core gtest)
 

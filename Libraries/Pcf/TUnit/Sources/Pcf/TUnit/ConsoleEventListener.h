@@ -15,7 +15,7 @@ namespace Pcf {
   /// @include Expect.cpp
   namespace TUnit {
     /// @brief The ConsoleEventListener class is used to tracing execution of tests. The methods are organized in the order the corresponding events are fired.
-    class ConsoleEventListener : public testing::TestEventListener {
+    class pcf_public ConsoleEventListener : public testing::TestEventListener {
     public:
       ConsoleEventListener();
       

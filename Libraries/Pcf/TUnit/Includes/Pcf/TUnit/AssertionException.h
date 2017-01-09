@@ -13,7 +13,7 @@ namespace Pcf {
   /// @include Expect.cpp
   namespace TUnit {
     /// @brief Thrown when an assertion failed.
-    class AssertionException : public System::Exception {
+    class pcf_public AssertionException : public System::Exception {
     public:
       /// @brief Create a new instance of class AssertionException
       /// @remarks Message is set with the default message associate to the error.

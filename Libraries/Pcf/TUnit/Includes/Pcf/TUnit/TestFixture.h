@@ -18,7 +18,7 @@ namespace Pcf {
     /// @brief The base class that all unit tests inherit from.
     /// This example how to use TestFixture class:
     /// @include Assert.cpp
-    class TestFixture : public testing::Test {
+    class pcf_public TestFixture : public testing::Test, public object {
     protected:
       /// @cond
       TestFixture() {}

@@ -23,7 +23,7 @@ namespace Pcf {
     /// @brief The Assert class contains a collection of static methods that implement the most common assertions used in Pcf::TUnit.
     /// This example show how to used some methods :
     /// @include Assert.cpp
-    class Assert : private object {
+    class pcf_public Assert : private object {
     public:
       /// @brief Verifies that two type are equal. If they are not, then an Pcf::TUnit::AssertionException is thrown.
       /// @param expected the expected value.

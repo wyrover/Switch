@@ -15,7 +15,7 @@ namespace Pcf {
   namespace TUnit {
     /// @brief The TUnit::Constrains conatains ConstraintValue that contain vaule to verify, the base class Contraints, the base class ConstraintExpression, all Constraint inherited classes and all ContraintExpression inherited classes.
     namespace Constraints {
-      class ConstraintValue : public object {
+      class pcf_public ConstraintValue : public object {
       public:
         ConstraintValue() {}
         template <typename T>

@@ -23,7 +23,7 @@ namespace Pcf {
     /// @brief The Expect class contains a collection of static methods that implement the most common assertions used in Pcf::TUnit.
     /// This example show how to used some methods :
     /// @include Expect.cpp
-    class Expect : private object {
+    class pcf_public Expect : private object {
     public:
       /// @brief Verifies that two type are equal. If they are, then an error message is show.
       /// @param expected the expected value.
