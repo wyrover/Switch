@@ -93,8 +93,6 @@ namespace UnitTests {
 
   pcf_test(HelloWorldTest, SetString);
 }
-
-pcf_startup (UnitTests::HelloWorldTest)
 ```
 
 #Namespace
