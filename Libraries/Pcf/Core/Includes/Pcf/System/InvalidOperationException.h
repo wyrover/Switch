@@ -9,7 +9,7 @@ namespace Pcf {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The exception that is thrown when a method call is invalid for the object's current state.
-    class InvalidOperationException : public SystemException {
+    class pcf_public InvalidOperationException : public SystemException {
     public:
       /// @brief Create a new instance of class InvalidOperationException
       /// @remarks Message is set with the default message associate to the error.

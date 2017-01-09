@@ -8,7 +8,7 @@
 /// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Pcf {
   /// @brief Represent an interface class.
-  struct Interface {
+  struct pcf_public Interface {
     /// @cond
     virtual ~Interface() {}
     /// @endcond

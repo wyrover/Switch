@@ -25,7 +25,7 @@ namespace Pcf {
     /// @remarks Use the Environment class to retrieve information such as command-line arguments, the exit code, environment variable settings, contents of the call stack, time since last system boot, and the version of the Pcf.
     /// @remarks The following example demonstrates displays a list of information about the current environment.
     /// @include Environment.cpp
-    class Environment pcf_static {
+    class pcf_public Environment pcf_static {
     public:
       /// @enum SpecialFolder
       /// @brief Specifies enumerated constants used to retrieve directory paths to system special folders.

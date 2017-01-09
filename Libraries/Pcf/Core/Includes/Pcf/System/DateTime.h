@@ -56,7 +56,7 @@ namespace Pcf {
     /// @endcode
     /// The following example demonstrates how to compare roughly equivalent DateTime values, accepting a small margin of difference when declaring them equal.
     /// @include DateTime.cpp
-    struct DateTime : public ValueType, public IComparable, public IConvertible {
+    struct pcf_public DateTime : public ValueType, public IComparable, public IConvertible {
     public:
       /// @brief Represents the largest possible value of an DateTime (03:14:07, Janyaury 19, 2038). This field is constant.
       static DateTime MaxValue;

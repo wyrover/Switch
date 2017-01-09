@@ -22,7 +22,7 @@ namespace Pcf {
     /// In addition to classes for synchronizing thread activities and access to data ( Mutex, Monitor, Interlocked, AutoResetEvent, and so on), this namespace includes a ThreadPool class that allows you to use a pool of system-supplied threads, and a Timer class that executes callback methods on thread pool threads.
     namespace Threading {
       /// @brief Limits the number of threads that can access a resource or pool of resources concurrently.
-      class Semaphore: public WaitHandle {
+      class pcf_public Semaphore: public WaitHandle {
       public:
         /// @brief Initializes a new instance of the System::Threading::Semaphore class
         /// @remarks The count is equals to 0 and the maximumCount is equal to Int32::MaxValue.

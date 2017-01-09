@@ -26,7 +26,7 @@ namespace Pcf {
   /// @brief Represent a polymorphic wrapper capable of holding any type.
   /// This example sho ho to use Any:
   /// @include Any.cpp
-  class Any : public object {
+  class pcf_public Any : public object {
     template <typename T, typename Bool>
     struct EnumOrOtherToAny {};
     

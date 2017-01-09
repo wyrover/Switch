@@ -15,7 +15,7 @@ namespace Pcf {
     /// @brief The System::Diagnostics namespace provides classes that allow you to interact with system processes, event logs, and performance counters.
     namespace Diagnostics {
       /// @brief Provides a set of methods and properties that enable applications to trace the execution of code and associate trace messages with their source.
-      class TraceSource :  public Object {
+      class pcf_public TraceSource :  public Object {
       public:
         TraceSource() {}
 

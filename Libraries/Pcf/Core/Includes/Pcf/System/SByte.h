@@ -22,7 +22,7 @@ namespace Pcf {
     /// @endcond
     
     /// @brief Represents a 8-bit signed integer.
-    struct SByte : public ValueType, public IComparable, public IConvertible, public IFormattable {
+    struct pcf_public SByte : public ValueType, public IComparable, public IConvertible, public IFormattable {
     public:
       /// @brief Represents the largest possible value of an SByte 127 (0x7F). This field is constant.
       static Property<sbyte, ReadOnly> MaxValue;

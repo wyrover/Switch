@@ -27,7 +27,7 @@ namespace Pcf {
       /// @end cond
       
       ///@brief Makes a request to a Uniform Resource Identifier (URI). This is an abstract class.
-      class WebRequest pcf_abstract {
+      class pcf_public WebRequest pcf_abstract {
         /// @cond
         friend class System::Net::WebResponse;
         /// @endcond

@@ -12,7 +12,7 @@
 namespace Pcf {
   namespace System {
     namespace Threading {
-      class TryLockGuard : public object {
+      class pcf_public TryLockGuard : public object {
       public:
         explicit TryLockGuard(const object& lock);
         TryLockGuard(const object& lock, int32 timeout);

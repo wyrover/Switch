@@ -12,7 +12,7 @@ namespace Pcf {
     /// SystemException addition to classes for synchronizing thread activities and access to data ( Mutex, Monitor, Interlocked, AutoResetEvent, and so on), this namespace includes a ThreadPool class that allows you to use a pool of system-supplied threads, and a Timer class that executes callback methods on thread pool threads.
     namespace Threading {
       /// @brief The exception that is thrown when a Thread is interrupted while it is in a waiting state.
-      class ThreadInterruptedException : public SystemException {
+      class pcf_public ThreadInterruptedException : public SystemException {
       public:
         /// @brief Create a new instance of class ThreadInterruptedException
         /// @remarks Message is set with the default message associate to the error.

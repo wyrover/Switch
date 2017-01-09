@@ -12,7 +12,7 @@ namespace Pcf {
     /// Exception addition to classes for synchronizing thread activities and access to data ( Mutex, Monitor, Interlocked, AutoResetEvent, and so on), this namespace includes a ThreadPool class that allows you to use a pool of system-supplied threads, and a Timer class that executes callback methods on thread pool threads.
     namespace Threading {
       /// @brief The exception that is thrown when the post-phase action of a Barrier fails
-      class LockRecursionException : public Exception {
+      class pcf_public LockRecursionException : public Exception {
       public:
         /// @brief Create a new instance of class LockRecursionException
         /// @remarks Message is set with the default message associate to the error.

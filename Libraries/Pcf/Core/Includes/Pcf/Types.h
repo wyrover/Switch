@@ -6,6 +6,8 @@
 #include <cstdint>
 #include <typeinfo>
 
+#include "Public.h"
+
 /// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Pcf {
   /// @brief Represents a 16-bit unicode character.

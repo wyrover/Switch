@@ -11,7 +11,7 @@ namespace Pcf {
     /// @brief The System::IO namespace contains types that allow reading and writing to files and data streams, and types that provide basic file and directory support.
     namespace IO {
       /// @brief The exception that is thrown when a path or file name is longer than the system-defined maximum length.
-      class PathTooLongException : public IOException {
+      class pcf_public PathTooLongException : public IOException {
       public:
         /// @brief Create a new instance of class PathTooLongException
         /// @remarks Message is set with the default message associate to the error.

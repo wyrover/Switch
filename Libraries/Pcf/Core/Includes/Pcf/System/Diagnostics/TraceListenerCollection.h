@@ -19,7 +19,7 @@ namespace Pcf {
       /// @endcond
       
       /// @brief Provides a thread-safe list of TraceListener objects.
-      class TraceListenerCollection : public System::Collections::Generic::IList<TraceListener>, public object {
+      class pcf_public TraceListenerCollection : public System::Collections::Generic::IList<TraceListener>, public object {
         friend class Trace;
         friend class TraceSource;
         TraceListenerCollection() {}

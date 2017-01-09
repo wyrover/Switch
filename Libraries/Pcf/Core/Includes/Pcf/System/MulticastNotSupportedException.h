@@ -9,7 +9,7 @@ namespace Pcf {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The exception that is thrown when there is an attempt to combine two delegates based on the Delegate type instead of the MulticastDelegate type.
-    class MulticastNotSupportedException : public SystemException {
+    class pcf_public MulticastNotSupportedException : public SystemException {
     public:
       /// @brief Create a new instance of class MulticastNotSupportedException
       /// @remarks Message is set with the default message associate to the error.

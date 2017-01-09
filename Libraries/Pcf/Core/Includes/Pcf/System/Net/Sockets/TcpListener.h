@@ -28,7 +28,7 @@ namespace Pcf {
         /// @remarks Call the Stop method to close the TcpListener.
         /// @note The Stop method does not close any accepted connections. You are responsible for closing these separately.
         /// @note The 0 for local port functionality is not available.
-        class TcpListener : public Object {
+        class pcf_public TcpListener : public Object {
         public:
           /// @brief Initializes a new instance of the TcpListener class with the specified local endpoint.
           /// @param ipEndPoint An IPEndPoint that represents the local endpoint to which to bind the listener Socket.

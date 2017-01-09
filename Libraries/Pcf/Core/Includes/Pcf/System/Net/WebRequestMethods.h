@@ -15,7 +15,7 @@ namespace Pcf {
     /// The WebRequest and WebResponse classes form the basis of what are called pluggable protocols, an implementation of network services that enables you to develop applications that use Internet resources without worrying about the specific details of the individual protocols.
     namespace Net {
       /// @brief Container class for WebRequestMethods.Ftp, WebRequestMethods.File, and WebRequestMethods.Http classes. This class cannot be inherited
-      class WebRequestMethods pcf_static {
+      class pcf_public WebRequestMethods pcf_static {
       public:
         class File pcf_static {
         public:

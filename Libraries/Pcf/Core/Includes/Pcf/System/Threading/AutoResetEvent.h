@@ -13,7 +13,7 @@ namespace Pcf {
     /// In addition to classes for synchronizing thread activities and access to data ( Mutex, Monitor, Interlocked, AutoResetEvent, and so on), this namespace includes a ThreadPool class that allows you to use a pool of system-supplied threads, and a Timer class that executes callback methods on thread pool threads.
     namespace Threading {
       /// @brief Notifies a waiting thread that an event has occurred.
-      class AutoResetEvent final : public EventWaitHandle {
+      class pcf_public AutoResetEvent final : public EventWaitHandle {
       public:
         /// @brief Initializes a new instance of the AutoResetEvent class with a Boolean value indicating whether to set the initial state to signaled.
         /// @param initialState true to set the initial state to signaled if the named event is created as a result of this call; false to set it to nonsignaled.

@@ -19,7 +19,7 @@ namespace Pcf {
     /// @brief Provides constants and static methods for trigonometric, logarithmic, and other common mathematical functions.
     /// This class cannot be inherited.
     /// @include Math.cpp
-    class Math pcf_static {
+    class pcf_public Math pcf_static {
     public:
       /// @brief Represents the natural logarithmic base, specified by the constant, e. This field is constant.
       /// @remarks The value of this field is 2.7182818284590452354.

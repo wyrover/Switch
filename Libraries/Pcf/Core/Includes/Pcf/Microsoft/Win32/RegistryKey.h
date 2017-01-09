@@ -18,7 +18,7 @@ namespace Pcf {
   namespace Microsoft {
     namespace Win32 {
       /// @brief Represents a key-level node in the Windows registry. This class is a registry encapsulation.
-      class RegistryKey : public object {
+      class pcf_public RegistryKey : public object {
       private:
         friend class Registry;
         RegistryKey();

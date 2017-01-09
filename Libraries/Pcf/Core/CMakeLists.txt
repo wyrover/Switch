@@ -411,6 +411,7 @@ set(INCLUDE_FILES
   Includes/Pcf/Lock.h
   Includes/Pcf/Move.h
   Includes/Pcf/Property.h
+  Includes/Pcf/Public.h
   Includes/Pcf/Ref.h
   Includes/Pcf/Startup.h
   Includes/Pcf/Static.h

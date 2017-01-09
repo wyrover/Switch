@@ -96,7 +96,7 @@ namespace Pcf {
       ///
       /// The following code example demonstrates simple threading functionality.
       /// @include Thread.cpp
-      class Thread : public object {
+      class pcf_public Thread : public object {
       public:        
         /// @brief Initializes a new instance of the Thread class.
         /// @param start A ThreadStart delegate that represents the methods to be invoked when this thread begins executing.

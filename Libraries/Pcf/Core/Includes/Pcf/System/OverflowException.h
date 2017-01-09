@@ -9,7 +9,7 @@ namespace Pcf {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The exception that is thrown when an arithmetic, casting, or conversion operation in a checked context results in an overflow.
-    class OverflowException : public ArithmeticException {
+    class pcf_public OverflowException : public ArithmeticException {
     public:
       /// @brief Create a new instance of class OverflowException
       /// @remarks Message is set with the default message associate to the error.

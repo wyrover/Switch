@@ -11,7 +11,7 @@ namespace Pcf {
     /// @brief The System::IO namespace contains types that allow reading and writing to files and data streams, and types that provide basic file and directory support.
     namespace IO {
       /// @brief The exception that is thrown when a data stream is in an invalid format.
-      class InvalidDataException : public IOException {
+      class pcf_public InvalidDataException : public IOException {
       public:
         /// @brief Create a new instance of class InvalidDataException
         /// @remarks Message is set with the default message associate to the error.

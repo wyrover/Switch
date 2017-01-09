@@ -28,7 +28,7 @@ namespace Pcf {
     namespace Text {
       /// @brief Represents a mutable string of characters. This class cannot be inherited.
       /// @remarks This class represents a string-like object whose value is a mutable sequence of characters.
-      class StringBuilder final : public Object {
+      class pcf_public StringBuilder final : public Object {
 #if _WIN32
         using __char32 = __int32;
 #else

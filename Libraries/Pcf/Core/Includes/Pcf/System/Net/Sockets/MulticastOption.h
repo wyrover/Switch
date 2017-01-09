@@ -25,7 +25,7 @@ namespace Pcf {
         /// | SocketOptionName  | AddMembership        |
         /// | object            | MulticastOption      |
         /// @remarks Use DropMembership to drop a multicast group.
-        class MulticastOption : public Object {
+        class pcf_public MulticastOption : public Object {
         public:
           /// @brief Initializes a new version of the MulticastOption class for the specified IP multicast group.
           /// @param group The IPAddress of the multicast group.

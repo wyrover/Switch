@@ -21,7 +21,7 @@ namespace Pcf {
       ///
       /// This example show how to use Timer class
       /// @include Timer.cpp
-      class Timer: public Object {
+      class pcf_public Timer: public Object {
       public:
         /// @brief Initializes a new instance of the Timer class with an infinite period and an infinite due time, using the newly created Timer object as the state object.
         /// @param callback the address of a method to be executed

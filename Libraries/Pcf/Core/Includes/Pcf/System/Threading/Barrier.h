@@ -20,7 +20,7 @@ namespace Pcf {
       /// @remarks A group of tasks cooperate by moving through a series of phases, where each in the group signals it has arrived at the Barrier in a given phase and implicitly waits for all others to arrive. The same Barrier can be used for multiple phases.
       /// The following example shows how to use a barrier:
       /// @include Barrier.cpp
-      class Barrier : public object {
+      class pcf_public Barrier : public object {
       public:
         /// @brief Initializes a new instance of the Barrier class.
         /// @param participantCount The number of participating threads.

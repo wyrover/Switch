@@ -15,7 +15,7 @@ namespace Pcf {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief Represents a time interval.
-    struct TimeSpan : public object, public IComparable {
+    struct pcf_public TimeSpan : public object, public IComparable {
     public:
       /// @brief Represents the maximum TimeSpan value. This field is constant.
       /// @remarks The value of this field is equivalent to Int64::MaxValue ticks. The String representation of this value is positive 106751990248054775807

@@ -18,7 +18,7 @@ namespace Pcf {
       /// The namespace includes enumerations that simplify the control of serial ports, such as Handshake, Parity, SerialPinChange, and StopBits.
       namespace Ports {
         /// @brief Represents a serial port resource.
-        class SerialPort : public Object {
+        class pcf_public SerialPort : public Object {
         public:
           SerialPort() {}
           /// @cond

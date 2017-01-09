@@ -14,7 +14,7 @@ namespace Pcf {
     namespace IO {
       /// @brief rovides data for the FileSystemWatcher.Error event.
       /// @remarks ErrorEventArgs contains the Exception that caused the FileSystemWatcher.Error event. This class provides the GetException method to retrieve the exception.
-      class ErrorEventArgs : public EventArgs {
+      class pcf_public ErrorEventArgs : public EventArgs {
       public:
         /// @brief Initializes a new instance of the ErrorEventArgs class.
         template<typename T>

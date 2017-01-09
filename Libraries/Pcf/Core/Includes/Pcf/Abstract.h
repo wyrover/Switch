@@ -7,7 +7,7 @@
 /// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Pcf {
   /// @brief Represent an abstract class.
-  struct Abstract : public System::Object {};
+  struct pcf_public Abstract : public System::Object {};
   
   /// @brief This keyword is used to represents an abstract class.
   /// @code

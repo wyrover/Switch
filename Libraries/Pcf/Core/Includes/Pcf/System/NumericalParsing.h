@@ -9,7 +9,7 @@ namespace Pcf {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @cond
-    class NumericalParsing {
+    class pcf_public NumericalParsing {
     public:
       NumericalParsing() = delete;
       

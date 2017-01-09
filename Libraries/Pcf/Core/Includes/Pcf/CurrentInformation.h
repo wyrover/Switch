@@ -16,7 +16,7 @@ namespace Pcf {
   /// Console::WriteLine("Line = {0}", currentInformation.Line);
   /// Console::WriteLine("Function = {0}", currentInformation.FunctionName);
   /// @endcode
-  class CurrentInformation : public System::Object {
+  class pcf_public CurrentInformation : public System::Object {
   public:
     CurrentInformation() {}
     CurrentInformation(const System::String& fileName, int32 line) : fileName(fileName), line(line) {}

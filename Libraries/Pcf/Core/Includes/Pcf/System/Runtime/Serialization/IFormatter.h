@@ -21,7 +21,7 @@ namespace Pcf {
       namespace Serialization{
         /// @interface IFormatter
         /// @brief Provides functionality for formatting serialized objects.
-        class IFormatter pcf_interface {
+        class pcf_public IFormatter pcf_interface {
         public:
           /// @cond
           template<typename T>

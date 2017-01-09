@@ -36,7 +36,7 @@ namespace Pcf {
       /// @endcond
       
       /// @brief Represents a writer that can write a sequential series of characters.
-      class TextWriter: public Object {
+      class pcf_public TextWriter: public Object {
       public:
         /// @brief Provides a TextWriter with no backing store that can be written to, but not read from.
         /// @remarks Use cNull to redirect output to a stream that will not consume any operating system resources.

@@ -12,7 +12,7 @@ namespace Pcf {
     /// The WebRequest and WebResponse classes form the basis of what are called pluggable protocols, an implementation of network services that enables you to develop applications that use Internet resources without worrying about the specific details of the individual protocols.
     namespace Net {
       /// @brief The exception that is thrown when an error occurs while accessing the network through a pluggable protocol.
-      class WebException : public InvalidOperationException {
+      class pcf_public WebException : public InvalidOperationException {
       public:
         /// @brief Create a new instance of class WebException
         /// @remarks Message is set with the default message associate to the error.

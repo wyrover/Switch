@@ -18,7 +18,7 @@ namespace Pcf {
 
     /// @interface IConvertible
     /// @brief Defines a generalized comparison method that a value type or class implements to create a type-specific comparison method.
-    class IConvertible pcf_interface {
+    class pcf_public IConvertible pcf_interface {
     public:
       /// @brief Returns the TypeCode for this instance.
       /// @return TypeCode The enumerated constant that is the TypeCode of the class or value type that implements this interface.

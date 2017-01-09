@@ -18,7 +18,7 @@ namespace Pcf {
       /// @par Example
       /// The following example uses an instance of StreamReader to read text from a file.
       /// @include StreamReader.cpp
-      class StreamReader: public TextReader {
+      class pcf_public StreamReader: public TextReader {
       public:
         static Property<StreamReader, ReadOnly> Null;
 

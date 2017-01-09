@@ -9,7 +9,7 @@ namespace Pcf {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The exception that is thrown when a null reference is passed to a method that does not accept it as a valid argument.
-    class ArgumentNullException : public ArgumentException {
+    class pcf_public ArgumentNullException : public ArgumentException {
     public:
       /// @brief Create a new instance of class ArgumentNullException
       /// @remarks Message is set with the default message associate to the error.

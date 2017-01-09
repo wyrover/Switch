@@ -15,7 +15,7 @@ namespace Pcf {
       /// @brief Provides instance methods for the creation, copying, deletion, moving, and
       /// opening of files, and aids in the creation of System::IO::FileStream objects.
       /// This class cannot be inherited.
-      class DriveInfo final : public Object {
+      class pcf_public DriveInfo final : public Object {
       public:
         /// @brief Provides access to information on drive.
         DriveInfo() { }

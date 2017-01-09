@@ -18,7 +18,7 @@ namespace Pcf {
       /// @endcond
       
       /// @brief Represents a reader that can read a sequential series of characters.
-      class TextReader: public Object {
+      class pcf_public TextReader: public Object {
       public:
         /// @brief Provides a TextReader with no data to read from.
         /// @remarks Reading from the cNull text reader is similar to reading from the end of a stream:

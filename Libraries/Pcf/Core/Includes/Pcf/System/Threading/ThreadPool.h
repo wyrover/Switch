@@ -26,7 +26,7 @@ namespace Pcf {
       using WaitOrTimerCallback = Delegate<void, Object&, bool>;
       
       /// @brief Provides a pool of threads that can be used to post work items, process asynchronous I/O, wait on behalf of other threads, and process timers.
-      class ThreadPool pcf_static {
+      class pcf_public ThreadPool pcf_static {
       public:
         /// @brief Retrieves the difference between the maximum number of thread pool threads returned by the GetMaxThreads method, and the number currently active.
         /// @param workerThreads The number of available worker threads

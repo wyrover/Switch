@@ -12,7 +12,7 @@ namespace Pcf {
     namespace Win32 {
       //class Pcf::Microsoft::Win32::RegistryKey  ClassesRoot;
       /// @brief Provides RegistryKey objects that represent the root keys in the Windows registry, and static methods to access key/value pairs.
-      class Registry : public object {
+      class pcf_public Registry : public object {
       private:
         Registry() {}
 

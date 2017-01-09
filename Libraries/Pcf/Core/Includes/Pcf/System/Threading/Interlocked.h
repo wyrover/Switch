@@ -25,7 +25,7 @@ namespace Pcf {
       /// @remarks The Exchange method atomically exchanges the values of the specified variables. The CompareExchange method combines two operations: comparing two values and storing a third value in one of the variables, based on the outcome of the comparison. The compare and exchange operations are performed as an atomic operation.
       /// @remarks The following code example shows a thread-safe resource locking mechanism.
       /// @include Interlocked.cpp
-      class Interlocked pcf_static {
+      class pcf_public Interlocked pcf_static {
       public:
         /// @brief Adds two 32-bit integers and replaces the first integer with the sum, as an atomic operation.
         /// @param location A variable containing the first value to be added. The sum of the two values is stored in location.

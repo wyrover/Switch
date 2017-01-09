@@ -26,7 +26,7 @@ namespace Pcf {
       ///  * To enable debugging with cmake, add the add_definitions(-DDEBUG) command line in the CMakeLists.txt of your porject, or you can add #define DEBUG to the top of your file but in this case, the compiler options for debug is not activated.
       ///  * To enable tracing with cmake, add the add_definitions(-DTRACE) command line in the CMakeLists.txt of your porject, or you can add #define TRACE to the top of your file.
       /// @note <b>to Inheritors:</b> Inherit from this class to implement a custom listener for the Debug and Trace classes. At a minimum, you must implement the Write and WriteLine methods. Additionally, you can implement the Fail, Close and Flush methods.
-      class TraceListener pcf_abstract {
+      class pcf_public TraceListener pcf_abstract {
       public:
         /// @brief Initializes a new instance of the TraceListener class.
         /// @remarks The following table shows initial property values for an instance of TraceListener.

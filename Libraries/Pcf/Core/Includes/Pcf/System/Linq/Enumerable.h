@@ -5,6 +5,7 @@
 #include <iostream>
 
 #include "../../As.h"
+#include "../../Static.h"
 #include "../../Types.h"
 #include "../Func.h"
 #include "../Object.h"
@@ -20,7 +21,7 @@ namespace Pcf {
     /// @brief The System::Linq namespace provides classes and interfaces that support queries that use Language-Integrated Query (LINQ).
     namespace Linq {
       /// @brief Provides a set of static methods for querying objects that implement IEnumerable<T>.
-      class Enumerable {
+      class pcf_public Enumerable pcf_static {
       public:
         /// @brief Applies an accumulator function over a sequence.
         /// @param source An IEnumerable<T> to aggregate over.
@@ -263,8 +264,6 @@ namespace Pcf {
         }
         
       protected:
-        Enumerable() {}
-        
         template<typename TResult, typename TSource>
         static void As(SharedPointer<TResult>& result, SharedPointer<TSource> source) {
           result = source.template As<TResult>();

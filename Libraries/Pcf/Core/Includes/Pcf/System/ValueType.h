@@ -13,7 +13,7 @@ namespace Pcf {
     /// @endcond
 
     /// @brief Provides the base class for value types.
-    class ValueType : public Object {
+    class pcf_public ValueType : public Object {
     public:
       /// @brief Determines whether the specified object is equal to the current object.
       /// @param obj The object to compare with the current object.

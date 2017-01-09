@@ -78,7 +78,7 @@ namespace Pcf {
   /// Console::WriteLine("ready = {0}", ready);                 // console output : ready = 1
   /// Console::WriteLine("ready = {0}", TypeBoxer::Boxing(ready));  // console output : ready = true
   /// @endcode
-  class TypeBoxer {
+  class pcf_public TypeBoxer {
   public:
     /// @cond
     TypeBoxer() = delete;
@@ -205,7 +205,7 @@ namespace Pcf {
   /// Console::WriteLine("ready = {0}", ready);                     // console output : ready = true
   /// Console::WriteLine("ready = {0}", TypeUnboxer::Unboxing(ready));  // console output : ready = 1
   /// @endcode
-  class TypeUnboxer {
+  class pcf_public TypeUnboxer {
   public:
     /// @cond
     TypeUnboxer() = delete;

@@ -8,7 +8,7 @@
 /// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Pcf {
   /// @brief Represent a static class.
-  struct Static {
+  struct pcf_public Static {
     /// @cond
     Static() = delete;
     Static(const Static&) = delete;

@@ -15,7 +15,7 @@ namespace Pcf {
     /// @brief The System::IO namespace contains types that allow reading and writing to files and data streams, and types that provide basic file and directory support.
     namespace IO {
       /// @brief Provides the base class for both System::IO::FileInfo and System::IO::DirectoryInfo objects.
-      class FileSystemInfo pcf_abstract {
+      class pcf_public FileSystemInfo pcf_abstract {
       protected:
         /// @brief Initializes a new instance of the System::IO::FileSystemInfo class.
         FileSystemInfo() { }

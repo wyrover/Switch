@@ -9,7 +9,7 @@ namespace Pcf {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The exception that is thrown in a thread upon cancellation of an operation that the thread was executing.
-    class OperationCanceledException : public SystemException {
+    class pcf_public OperationCanceledException : public SystemException {
     public:
       /// @brief Create a new instance of class OperationCanceledException
       /// @remarks Message is set with the default message associate to the error.

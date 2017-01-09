@@ -17,7 +17,7 @@ namespace Pcf {
 
     /// @interface ICustomFormatter
     /// @brief Defines a method that supports custom, user-defined formatting of the value of an object.
-    class ICustomFormatter pcf_interface {
+    class pcf_public ICustomFormatter pcf_interface {
     public:
       /// @brief Converts the value of a specified object to an equivalent string representation using specified format and culture-specific formatting information.
       /// @param format A format string containing formatting specifications.

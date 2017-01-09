@@ -16,7 +16,7 @@ namespace Pcf {
       /// @endcond
 
       /// @brief Represents a handle that has been registered when calling RegisterWaitForSingleObject. This class cannot be inherited.
-      class RegisteredWaitHandle final : public Object {
+      class pcf_public RegisteredWaitHandle final : public Object {
         /// @cond
         friend class ThreadPool;
         /// @endcond

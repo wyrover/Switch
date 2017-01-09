@@ -24,7 +24,7 @@ namespace Pcf {
       ///
       /// After running this sample, you can open the TestFile.txt file to see the output.
       /// @include TextWriterTraceListener.cpp
-      class TextWriterTraceListener : public TraceListener {
+      class pcf_public TextWriterTraceListener : public TraceListener {
         struct InitTextWriter {
           template<typename TTextWriter>
           void operator()(const TTextWriter& textWriter, TextWriterTraceListener& twtl) {

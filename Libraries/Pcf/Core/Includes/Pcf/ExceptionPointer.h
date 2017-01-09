@@ -98,7 +98,7 @@ namespace Pcf {
   /// @par Examples
   /// This example show how to use ExceptionPointer, ExceptionPointer::CurrentExeption and Rethrow() :
   /// @include ExceptionPointer.Cpp
-  class ExceptionPointer {
+  class pcf_public ExceptionPointer {
   public:
     /// @cond
     ExceptionPointer() {}

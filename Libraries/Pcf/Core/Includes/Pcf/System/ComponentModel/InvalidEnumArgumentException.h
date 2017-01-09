@@ -11,7 +11,7 @@ namespace Pcf {
     /// @brief The Pcf::System::ComponentModel namespace provides classes that are used to implement the run-time and design-time behavior of components and controls. This namespace includes the base classes and interfaces for implementing attributes and type converters, binding to data sources, and licensing components.
     namespace ComponentModel {
       /// @brief The exception thrown when using invalid arguments that are enumerators.
-      class InvalidEnumArgumentException : public ArgumentException {
+      class pcf_public InvalidEnumArgumentException : public ArgumentException {
       public:
         /// @brief Create a new instance of class InvalidEnumArgumentException
         /// @remarks Message is set with the default message associate to the error.

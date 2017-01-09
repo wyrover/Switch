@@ -15,7 +15,7 @@ namespace Pcf {
     namespace IO {
       /// @brief Performs operations on System::string instances that contain file or directory
       /// path information. These operations are performed in a cross-platform manner.
-      class Path final {
+      class pcf_public Path pcf_static {
       public:
         /// @brief Provides a platform-specific alternate character used to separate directory levels in a path string that reflects a hierarchical file system organization.
         /// The following code example demonstrates the use of the AltDirectorySeparatorChar() property.
@@ -192,9 +192,6 @@ namespace Pcf {
         /// @return true if path contains an absolute path; otherwise, false.
         /// @exception ArgumentException path contains one or more of the invalid characters
         static bool IsPathRooted(const string& path);
-
-      private :
-        Path() = delete;
       };
     }
   }

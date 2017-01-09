@@ -19,7 +19,7 @@ namespace Pcf {
         /// @include UdpClientListener.cpp
         /// This example show how to use UdpClient class as talker :
         /// @include UdpClientTalker.cpp
-        class UdpClient : public Object {
+        class pcf_public UdpClient : public Object {
         public:
           /// @brief Initializes a new instance of the UdpClient class
           /// This constructor creates a new UdpClient and allows the underlying service

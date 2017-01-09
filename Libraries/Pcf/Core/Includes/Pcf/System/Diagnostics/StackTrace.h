@@ -25,7 +25,7 @@ namespace Pcf {
       /// @brief Provides information about a StackFrame, which represents a function call on the call stack for the current thread.
       /// @remarks StackTrace information will be most informative with Debug build configurations. By default, Debug builds include debug symbols, while Release builds do not. The debug symbols contain most of the file, method name, line number, and column information used in constructing StackFrame and StackTrace objects.
       /// @remarks StackTrace might not report as many method calls as expected, due to code transformations that occur during optimization.
-      class StackTrace : public Object {
+      class pcf_public StackTrace : public Object {
       private:
         friend class System::Exception;
 

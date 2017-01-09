@@ -18,7 +18,7 @@ namespace Pcf {
       /// Formatters that serialize and deserialize objects to and from a particular format can be found in the System::Runtime::Serialization::Formatters namespace.
       namespace Serialization {
         /// @brief Holds the value, Type, and name of a serialized object.
-        class SerializationEntry : public Object {
+        class pcf_public SerializationEntry : public Object {
         public:
           /// @brief Gets the value contained in the object.
           /// @param value The value contained in the object.

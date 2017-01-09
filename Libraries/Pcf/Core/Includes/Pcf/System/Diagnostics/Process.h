@@ -18,7 +18,7 @@ namespace Pcf {
     /// @brief The System::Diagnostics namespace provides classes that allow you to interact with system processes, event logs, and performance counters.
     namespace Diagnostics {
       /// @brief Provides access to local and remote processes and enables you to start and stop local system processes.
-      class Process : public Object {
+      class pcf_public Process : public Object {
         SharedPointer<IO::Stream> GetStandardOutput() const;
       public:
         /// @cond

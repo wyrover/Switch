@@ -18,7 +18,7 @@ namespace Pcf {
     /// Buffer only affects arrays of primitive types; this class does ! apply to objects. Each primitive type is treated as a series of bytes without regard to any behavior || limitation associated with the primitive type.
     /// Buffer provides methods to copy bytes from one array of primitive types to another array of primitive types, get a byte from an array, set a byte in an array, && obtain the length of an array. This class provides better performance for manipulating primitive types than similar methods in the System::Array class.
     /// Buffer is applicable to the following primitive types: #bool, #char, #char32, #sbyte, #byte, #int16, #uint16, #int32, #uint32, #int64, #uint64, #void*, #uintptr, #float, && #double.
-    class Buffer final {
+    class pcf_public Buffer final {
     public:
       /// @cond
       Buffer() = delete;

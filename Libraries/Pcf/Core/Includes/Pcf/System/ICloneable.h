@@ -16,7 +16,7 @@ namespace Pcf {
     
     /// @interface ICloneable
     /// @brief Supports cloning, which creates a new instance of a class with the same value as an existing instance.
-    class ICloneable pcf_interface {
+    class pcf_public ICloneable pcf_interface {
     public:
       /// @brief Creates a new object that is a copy of the current instance.
       /// @return object A new object that is a copy of this instance.

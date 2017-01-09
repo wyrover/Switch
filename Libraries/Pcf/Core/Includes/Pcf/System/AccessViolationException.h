@@ -27,7 +27,7 @@ namespace Pcf {
     /// &nbsp;Make sure that the memory that you are attempting to access has not been corrupted.
     ///
     /// If several read or write operations have occurred through bad pointers, memory may be corrupted. This typically occurs when reading or writing to addresses outside of a predefined buffer.
-    class AccessViolationException : public SystemException {
+    class pcf_public AccessViolationException : public SystemException {
     public:
       /// @brief Create a new instance of class AccessViolationException
       /// @remarks Message is set with the default message associate to the error.

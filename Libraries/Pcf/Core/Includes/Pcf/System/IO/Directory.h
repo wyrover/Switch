@@ -12,7 +12,7 @@ namespace Pcf {
     /// @brief The System::IO namespace contains types that allow reading and writing to files and data streams, and types that provide basic file and directory support.
     namespace IO {
       /// @brief Provides static methods for the creation, copying, deletion, moving, and opening of Directories, and aids in the creation of System::IO::DirectoryStream objects.
-      class Directory {
+      class pcf_public Directory pcf_static {
       public:
         #undef CreateDirectory
         /// @brief Creates all directories and subdirectories as specified by path.
@@ -111,11 +111,6 @@ namespace Pcf {
         /// @exception DirectoryNotFoundException The destination directory cannot be found.
         /// @exception IO::IOException An I/O error occurs, such as the destination file already exists -or- The directory being moved and the destination directory have the same name -or- The directory cannot be created.
         static void Move(const String& srcDir, const String& destDir);
-
-      private :
-        /// @cond
-        Directory() { }
-        /// @endcond
       };
     }
   }

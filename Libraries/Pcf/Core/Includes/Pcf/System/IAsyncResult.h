@@ -18,7 +18,7 @@ namespace Pcf {
 
     /// @interface IAsyncResult
     /// @brief Represents the status of an asynchronous operation.
-    class IAsyncResult pcf_interface {
+    class pcf_public IAsyncResult pcf_interface {
     public:
       /// @brief Gets a user-defined object that qualifies or contains information about an asynchronous operation.
       /// @return A user-defined object that qualifies or contains information about an asynchronous operation.

@@ -24,7 +24,7 @@ namespace Pcf {
         /// @brief Provides a client for connecting to WebSocket services.
         /// This example show how to receive and send with ClientWebSocket :
         /// @include ClientWebSocket.cpp
-        class ClientWebSocket : public WebSocket {
+        class pcf_public ClientWebSocket : public WebSocket {
         public:
           /// @brief Creates an instance of the ClientWebSocket class.
           ClientWebSocket();

@@ -11,7 +11,7 @@ namespace Pcf {
     /// @brief The exception that is thrown when one of the arguments provided to a method is not valid.
     /// The following example demonstrates how to throw and catch an ArgumentException.
     /// @include ArgumentException.cpp
-    class ArgumentException : public SystemException {
+    class pcf_public ArgumentException : public SystemException {
     public:
       /// @brief Create a new instance of class ArgumentException
       /// @remarks Message is set with the default message associate to the error.

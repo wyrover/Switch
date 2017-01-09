@@ -12,7 +12,7 @@ namespace Pcf {
     /// ApplicationException addition to classes for synchronizing thread activities and access to data ( Mutex, Monitor, Interlocked, AutoResetEvent, and so on), this namespace includes a ThreadPool class that allows you to use a pool of system-supplied threads, and a Timer class that executes callback methods on thread pool threads.
     namespace Threading {
       /// @brief The exception that is thrown when an attempt is made to open a system mutex or semaphore that does not exist.
-      class WaitHandleCannotBeOpenedException : public ApplicationException {
+      class pcf_public WaitHandleCannotBeOpenedException : public ApplicationException {
       public:
         /// @brief Create a new instance of class WaitHandleCannotBeOpenedException
         /// @remarks Message is set with the default message associate to the error.

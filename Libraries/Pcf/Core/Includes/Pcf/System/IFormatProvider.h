@@ -16,7 +16,7 @@ namespace Pcf {
 
     /// @interface IFormatProvider
     /// @brief Provides a mechanism for retrieving an object to control formatting.
-    class IFormatProvider pcf_interface {
+    class pcf_public IFormatProvider pcf_interface {
     public:
       /// @brief Returns an object that provides formatting services for the specified type.
       /// @param type An object that specifies the type of format object to return.

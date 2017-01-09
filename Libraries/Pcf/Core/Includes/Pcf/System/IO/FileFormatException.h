@@ -11,7 +11,7 @@ namespace Pcf {
     /// @brief The System::IO namespace contains types that allow reading and writing to files and data streams, and types that provide basic file and directory support.
     namespace IO {
       /// @brief The exception that is thrown when an input file or a data stream that is supposed to conform to a certain file format specification is malformed.
-      class FileFormatException : public FormatException {
+      class pcf_public FileFormatException : public FormatException {
       public:
         /// @brief Create a new instance of class FileFormatException
         /// @remarks Message is set with the default message associate to the error.

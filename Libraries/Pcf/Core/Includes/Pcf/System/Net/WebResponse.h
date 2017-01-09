@@ -20,7 +20,7 @@ namespace Pcf {
     namespace Net {
       class WebRequest;
 
-      class WebResponse : public Object {
+      class pcf_public WebResponse : public Object {
       public:
         class WebResponseStream: public System::IO::Stream {
         public:

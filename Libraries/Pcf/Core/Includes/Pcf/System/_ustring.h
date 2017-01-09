@@ -7,9 +7,11 @@
 #include <string>
 #include <vector>
 
+#include "../Public.h"
+
 /// @cond
 namespace std {
-  class ustring {
+  class pcf_public ustring {
   public:
     ustring();
     ustring(const char* str);

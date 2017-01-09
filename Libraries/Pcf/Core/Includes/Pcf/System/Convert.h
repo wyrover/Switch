@@ -36,7 +36,7 @@ namespace Pcf {
   namespace System {
     /// @brief Represents API to convert base TypeCode.
     /// This class cannot be inherited.
-    class Convert final {
+    class pcf_public Convert final {
     public:
       /// @cond
       Convert() = delete;

@@ -26,7 +26,7 @@ namespace Pcf {
     /// | #uint16  | GetBytes(uint16)                                  | ToUInt16(const Array< byte >&, int32)                                 |
     /// | #uint32  | GetBytes(uint32)                                  | ToUInt32(const Array< byte >&, int32)                                 |
     /// | #uint64  | GetBytes(uint64)                                  | ToUInt64(const Array< byte >&, int32)                                 |
-    class BitConverter {
+    class pcf_public BitConverter {
     public:
       /// @brief Converts the specified double-precision floating point number to a 64-bit signed integer.
       /// @param value The number to convert.

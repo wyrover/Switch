@@ -18,7 +18,7 @@ namespace Pcf {
     /// @brief The System::Diagnostics namespace provides classes that allow you to interact with system processes, event logs, and performance counters.
     namespace Diagnostics {
       /// @brief Specifies a set of values that are used when you start a process.
-      class ProcessStartInfo final : public Object {
+      class pcf_public ProcessStartInfo final : public Object {
       public:
         /// @brief Initializes a new instance of the ProcessStartInfo class without specifying a file name with which to start the process.
         /// @remarks You must set at least the SetFileName() property before you start the process. The file name is any application or document. In this case, a document is defined to be any file type that has an open or default action associated with it. You can view registered file types and their associated applications for your computer by using the Folder Options dialog box, which is available through the operating system. The Advanced button leads to a dialog box that shows whether there is an open action associated with a specific registered file type.

@@ -9,7 +9,7 @@ namespace Pcf {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The exception that is thrown when there is insufficient execution stack available to allow most methods to execute.
-    class InsufficientExecutionStackException : public SystemException {
+    class pcf_public InsufficientExecutionStackException : public SystemException {
     public:
       /// @brief Create a new instance of class InsufficientExecutionStackException
       /// @remarks Message is set with the default message associate to the error.

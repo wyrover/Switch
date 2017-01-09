@@ -15,7 +15,7 @@ namespace Pcf {
   template<typename T>
   class SharedPointer;
 }
-class __opaque_sub_object__ {
+class pcf_public __opaque_sub_object__ {
   template<typename T>
   friend class Pcf::SharedPointer;
   __opaque_sub_object__() : UseCount(0) {}

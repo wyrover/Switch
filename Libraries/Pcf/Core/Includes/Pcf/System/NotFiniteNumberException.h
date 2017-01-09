@@ -9,7 +9,7 @@ namespace Pcf {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The exception that is thrown when a floating-point value is positive infinity, negative infinity, or Not-a-Number (NaN).
-    class NotFiniteNumberException : public ArithmeticException {
+    class pcf_public NotFiniteNumberException : public ArithmeticException {
     public:
       /// @brief Create a new instance of class NotFiniteNumberException
       /// @remarks Message is set with the default message associate to the error.

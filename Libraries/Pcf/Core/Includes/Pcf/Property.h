@@ -5,19 +5,19 @@
 #include "FunctionPointer.h"
 
 namespace Pcf {
-  class ReadOnly {
+  class pcf_public ReadOnly {
   public:
     static constexpr bool CanRead = true;
     static constexpr bool CanWrite = false;
   };
   
-  class WriteOnly {
+  class pcf_public WriteOnly {
   public:
     static constexpr bool CanRead = false;
     static constexpr bool CanWrite = true;
   };
 
-  class ReadWrite {
+  class pcf_public ReadWrite {
   public:
     static constexpr bool CanRead = true;
     static constexpr bool CanWrite = true;

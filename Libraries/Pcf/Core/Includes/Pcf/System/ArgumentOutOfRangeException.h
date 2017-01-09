@@ -9,7 +9,7 @@ namespace Pcf {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The exception that is thrown when the value of an argument is outside the allowable range of values as defined by the invoked method.
-    class ArgumentOutOfRangeException : public ArgumentException {
+    class pcf_public ArgumentOutOfRangeException : public ArgumentException {
     public:
       /// @brief Create a new instance of class ArgumentOutOfRangeException
       /// @remarks Message is set with the default message associate to the error.

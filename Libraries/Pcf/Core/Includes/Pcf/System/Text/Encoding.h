@@ -17,7 +17,7 @@ namespace Pcf {
     /// @brief The System::Text namespace contains classes that represent ASCII and Unicode character encodings; abstract base classes for converting blocks of characters to and from blocks of bytes; and a helper class that manipulates and formats String objects without creating intermediate instances of String.
     namespace Text {
     /// @brief Represents a character encoding
-      class Encoding pcf_abstract {
+      class pcf_public Encoding pcf_abstract {
       public:
         static char Unknown() { return '?'; }
 

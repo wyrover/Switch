@@ -16,7 +16,7 @@ namespace Pcf {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief Provides methods for creating, manipulating, searching, and sorting arrays, thereby serving as the base class for all arrays.
-    class Version : public Object, public ICloneable, public IComparable, public Runtime::Serialization::ISerializable {
+    class pcf_public Version : public Object, public ICloneable, public IComparable, public Runtime::Serialization::ISerializable {
     public:
       /// @brief Initializes a new instance of the Version class.
       /// @remarks Version is initialized with default values :

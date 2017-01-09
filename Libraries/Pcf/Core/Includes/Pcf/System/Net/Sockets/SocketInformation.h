@@ -19,7 +19,7 @@ namespace Pcf {
       namespace Sockets {
         /// @brief Encapsulates the information that is necessary to duplicate a Socket.
         /// @remarks Socket::DuplicateAndClose creates a SocketInformation instance for use with the Socket::Socket(SocketInformation) constructor.
-        class SocketInformation : public Object {
+        class pcf_public SocketInformation : public Object {
         public:
           /// @brief Create a new instance of SocketInformation class.
           SocketInformation() {}

@@ -9,7 +9,7 @@ namespace Pcf {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The exception that is thrown when an attempt is made to access an element of an array with an index that is outside the bounds of the array.
-    class IndexOutOfRangeException : public SystemException {
+    class pcf_public IndexOutOfRangeException : public SystemException {
     public:
       /// @brief Create a new instance of class IndexOutOfRangeException
       /// @remarks Message is set with the default message associate to the error.

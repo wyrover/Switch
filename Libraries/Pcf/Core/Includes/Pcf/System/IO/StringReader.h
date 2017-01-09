@@ -17,7 +17,7 @@ namespace Pcf {
       /// @remarks StringReader enables you to read a string synchronously or asynchronously. You can read a character at a time with the Read or the ReadAsync method, a line at a time using the ReadLine or the ReadLineAsync method and an entire string using the ReadToEnd or the ReadToEndAsync method.
       /// The following code example demonstrates the creation of a continuous paragraph from a group of double-spaced sentences, and then the conversion of the paragraph back to the original text.
       /// @include StringReader.cpp
-      class StringReader: public TextReader {
+      class pcf_public StringReader: public TextReader {
       public:
         /// @brief Initializes a new instance of the StringReader class that reads from the specified string.
         /// @param s The string to which the StringReader should be initialized.

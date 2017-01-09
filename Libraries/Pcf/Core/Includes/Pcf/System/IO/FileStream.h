@@ -19,7 +19,7 @@ namespace Pcf {
     /// @brief The System::IO namespace contains types that allow reading and writing to files and data streams, and types that provide basic file and directory support.
     namespace IO {
       /// @brief Exposes a System::IO::Stream around a file, supporting both synchronous and asynchronous read and write operations.
-      class FileStream: public Stream {
+      class pcf_public FileStream: public Stream {
       public:
         /// @brief Initializes a new instance of the System::IO::FileStream class.
         /// @param path A relative or absolute path for the file that the current FileStream object will encapsulate

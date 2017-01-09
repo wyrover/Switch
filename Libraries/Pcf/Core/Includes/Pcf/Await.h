@@ -9,7 +9,7 @@ namespace Pcf {
   /// @brief The await object is applied to a task in an asynchronous method to suspend the execution of the method until the awaited task completes.
   /// This example demontrate how to use async and await
   /// @include Async1.cpp
-  class Await {
+  class pcf_public Await {
   public:
     Await() {}
    

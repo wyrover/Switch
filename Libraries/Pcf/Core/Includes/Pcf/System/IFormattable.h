@@ -16,7 +16,7 @@ namespace Pcf {
 
     /// @interface IFormattable
     /// @brief Provides functionality to format the value of an object into a string representation.
-    class IFormattable pcf_interface {
+    class pcf_public IFormattable pcf_interface {
     public:
       /// @brief Formats the value of the current instance using the specified format.
       /// @param format The string specifying the format to use -or-  null to use the default format defined for the type of the IFormattable implementation.

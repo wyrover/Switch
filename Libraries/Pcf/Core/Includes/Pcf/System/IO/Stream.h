@@ -26,7 +26,7 @@ namespace Pcf {
       /// @endcond
       
       /// @brief Provides a generic view of a sequence of bytes. This is an abstract class.
-      class Stream pcf_abstract {
+      class pcf_public Stream pcf_abstract {
       public:
         static Property<NullStream&, ReadOnly> Null;
 

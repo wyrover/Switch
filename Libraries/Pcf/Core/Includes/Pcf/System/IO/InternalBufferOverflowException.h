@@ -11,7 +11,7 @@ namespace Pcf {
     /// @brief The System::IO namespace contains types that allow reading and writing to files and data streams, and types that provide basic file and directory support.
     namespace IO {
       /// @brief The exception thrown when the internal buffer overflows.
-      class InternalBufferOverflowException : public IOException {
+      class pcf_public InternalBufferOverflowException : public IOException {
       public:
         /// @brief Create a new instance of class InternalBufferOverflowException
         /// @remarks Message is set with the default message associate to the error.

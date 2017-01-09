@@ -17,7 +17,7 @@ namespace Pcf {
     /// @brief The System::IO namespace contains types that allow reading and writing to files and data streams, and types that provide basic file and directory support.
     namespace IO {
       /// @brief Exposes instance methods for creating, moving, and enumerating through directories and subdirectories. This class cannot be inherited.
-      class DirectoryInfo final : public FileSystemInfo {
+      class pcf_public DirectoryInfo final : public FileSystemInfo {
       public:
         /// @brief Represents the uninitialized directory object. This field is constant.
         static Property<DirectoryInfo, ReadOnly> Empty;

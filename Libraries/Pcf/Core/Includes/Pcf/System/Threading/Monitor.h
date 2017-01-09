@@ -22,7 +22,7 @@ namespace Pcf {
     /// In addition to classes for synchronizing thread activities and access to data ( Mutex, Monitor, Interlocked, AutoResetEvent, and so on), this namespace includes a ThreadPool class that allows you to use a pool of system-supplied threads, and a Timer class that executes callback methods on thread pool threads.
     namespace Threading {
       /// @brief Provides a mechanism that synchronizes access to objects.
-      class Monitor pcf_static {
+      class pcf_public Monitor pcf_static {
       public:
         /// @brief Acquires an exclusive lock on the specified obj.
         /// @param obj The object on which to acquire the monitor lock.

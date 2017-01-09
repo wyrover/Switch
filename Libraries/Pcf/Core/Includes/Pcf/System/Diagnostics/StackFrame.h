@@ -17,7 +17,7 @@ namespace Pcf {
       /// @endcond
 
       /// @brief Provides information about a StackFrame, which represents a function call on the call stack for the current thread.
-      class StackFrame : public Object {
+      class pcf_public StackFrame : public Object {
         /// @cond
         friend class StackTrace;
         /// @endcond

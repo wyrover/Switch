@@ -21,7 +21,7 @@ namespace Pcf {
       /// @brief Manages a compact array of bit values, which are represented as Booleans, where true indicates that the bit is on (1) and false indicates the bit is off (0).
       /// The following code example shows how to create and initialize a BitArray and how to print out its values.
       /// @include BitArray.cpp
-      class BitArray : public Object, public Generic::ICollection<bool>, public System::ICloneable {
+      class pcf_public BitArray : public Object, public Generic::ICollection<bool>, public System::ICloneable {
       public:
         /// @brief Initializes a new instance of the BitArray class that contains bit values copied from the specified array of bytes.
         /// @param values An array of bytes containing the values to copy, where each byte represents eight consecutive bits.

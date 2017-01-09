@@ -17,7 +17,7 @@ namespace Pcf {
     namespace IO {
       /// @brief Exposes a System::IO::Stream in memory, supporting synchronous
       /// read && write operations.
-      class MemoryStream : public Stream {
+      class pcf_public MemoryStream : public Stream {
         int64 GetLength() const override;
         void SetLength(int64 len) override;
         bool GetCanRead() const override {return ! IsClosed();}

@@ -41,7 +41,7 @@ namespace Pcf {
         /// @endcond
         
         /// @brief Provides functionality for formatting serialized objects.
-        class SerializationInfo : public Object, public System::Collections::Generic::IEnumerable<System::Collections::Generic::KeyValuePair<System::String, SerializationEntry>> {
+        class pcf_public SerializationInfo : public Object, public System::Collections::Generic::IEnumerable<System::Collections::Generic::KeyValuePair<System::String, SerializationEntry>> {
         public:
           /// @brief Initializes a new instance of the SerializationInfo interface.
           SerializationInfo() {}

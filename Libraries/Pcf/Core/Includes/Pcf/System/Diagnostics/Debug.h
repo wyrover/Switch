@@ -23,7 +23,7 @@ namespace Pcf {
       ///
       /// The following example uses Debug to indicate the beginning and the end of a program's execution. The example also uses the Debug.Indent and Debug.Unindent methods to distinguish the tracing output.
       /// @include Debug.cpp
-      class Debug pcf_static {
+      class pcf_public Debug pcf_static {
       public:
         /// @brief Gets or sets whether Flush should be called on the Listeners after every write.
         /// @return bool true if Flush is called on the Listeners after every write; otherwise, false.

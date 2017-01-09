@@ -15,7 +15,7 @@ namespace Pcf {
     /// @brief The System::IO namespace contains types that allow reading and writing to files and data streams, and types that provide basic file and directory support.
     namespace IO {
       /// @brief Writes primitive types in binary to a stream and supports writing strings in a specific encoding.
-      class BinaryWriter : public Object {
+      class pcf_public BinaryWriter : public Object {
       public:
         /// @brief Initializes a new instance of the System::IO::BinaryWriter class.
         BinaryWriter();

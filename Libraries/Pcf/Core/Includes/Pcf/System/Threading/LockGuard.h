@@ -9,7 +9,7 @@ namespace Pcf {
   namespace System {
     namespace Threading {
       /// @cond
-      class LockGuard : public object {
+      class pcf_public LockGuard : public object {
       public:
         explicit LockGuard(const object& lock);
         ~LockGuard();

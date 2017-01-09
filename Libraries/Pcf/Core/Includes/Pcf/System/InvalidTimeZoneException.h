@@ -9,7 +9,7 @@ namespace Pcf {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The exception that is thrown when time zone information is invalid.
-    class InvalidTimeZoneException : public Exception {
+    class pcf_public InvalidTimeZoneException : public Exception {
     public:
       /// @brief Create a new instance of class InvalidTimeZoneException
       /// @remarks Message is set with the default message associate to the error.

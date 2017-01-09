@@ -10,7 +10,7 @@
 #include "Types.h"
 
 /// @cond
-class __function_ptr__ {
+class pcf_public __function_ptr__ {
 public:
   __function_ptr__() {}
   

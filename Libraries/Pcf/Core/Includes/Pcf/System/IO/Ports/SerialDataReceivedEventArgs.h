@@ -17,7 +17,7 @@ namespace Pcf {
       namespace Ports {
         /// @brief Provides data for the DataReceived event.
         /// @remarks This class is used with the DataReceived event.
-        class SerialDataReceivedEventArgs : public System::EventArgs {
+        class pcf_public SerialDataReceivedEventArgs : public System::EventArgs {
         public:
           SerialDataReceivedEventArgs(SerialData eventType) : eventType(eventType) {}
           SerialDataReceivedEventArgs(const SerialDataReceivedEventArgs& sdrea) : eventType(sdrea.eventType) {}

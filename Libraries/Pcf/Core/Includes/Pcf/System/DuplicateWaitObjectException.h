@@ -9,7 +9,7 @@ namespace Pcf {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The exception that is thrown when an object appears more than once in an array of synchronization objects.
-    class DuplicateWaitObjectException : public ArgumentException {
+    class pcf_public DuplicateWaitObjectException : public ArgumentException {
     public:
       /// @brief Create a new instance of class DuplicateWaitObjectException
       /// @remarks Message is set with the default message associate to the error.
