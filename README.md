@@ -28,7 +28,7 @@ namespace HelloWorld {
   class Program {
   public:
     // The main entry point for the application.
-    static void Main() {
+    static void Main(const Array<string>& args) {
       Console::WriteLine("Hello, World!");
     }
   };
@@ -84,23 +84,15 @@ using namespace TUnit;
 
 namespace UnitTests {
   class HelloWorldTest : public TestFixture {
-  public:
-    // The main entry point for the application.
-    static int Main(const Array<string>& args) {
-      return TUnit::UnitTest(args).Run();
-    }
-    
   protected:
-    void SetString() {
-      string s = "Hello, World!";
-      Assert::AreEqual("Hello, World!", s, pcf_current_information);
+    void CreateStringFromChar32Array() {
+      string s = string(Array<char32> {'H', 'e', 'l', 'l', 'o', ',', ' ', 'W', 'o', 'r', 'l', 'd', '!'});
+      Assert::AreEqual("Hello, World!", s);
     }
   };
 
-  pcf_test(HelloWorldTest, SetString);
+  pcf_test (HelloWorldTest, CreateStringFromChar32Array)
 }
-
-pcf_startup (UnitTests::HelloWorldTest)
 ```
 
 #Namespace
