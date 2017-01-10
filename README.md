@@ -86,7 +86,7 @@ namespace UnitTests {
   class HelloWorldTest : public TestFixture {
   protected:
     void CreateStringFromChar32Array() {
-      string s = Array<char32> {'H', 'e', 'l', 'l', 'o', ',', ' ', 'W', 'o', 'r', 'l', 'd', '!'};
+      string s = string(Array<char32> {'H', 'e', 'l', 'l', 'o', ',', ' ', 'W', 'o', 'r', 'l', 'd', '!'});
       Assert::AreEqual("Hello, World!", s);
     }
   };
