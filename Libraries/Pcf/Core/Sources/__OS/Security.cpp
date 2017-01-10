@@ -13,7 +13,7 @@ namespace {
 }
 
 string __OS::CoreApi::Security::ToUnsecureString(const System::Security::SecureString& secureString) {
-  return EncryptDecryptString(secureString.data.ToArray());
+  return EncryptDecryptString(string(secureString.data.ToArray()));
 }
 
 string __OS::CoreApi::Security::ToUnsecureString(const string& secureString) {

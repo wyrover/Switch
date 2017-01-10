@@ -73,20 +73,20 @@ namespace Pcf {
       /// @brief Create a new instance of class String
       /// @param str Value for the String.
       /// @exception ArgumentNullException The parameters str is null.
-      String(const Array<sbyte>& str);
+      explicit String(const Array<sbyte>& str);
       
       /// @brief Create a new instance of class String
       /// @param str Value for the String.
       /// @exception ArgumentNullException The parameters str is null.
-      String(const sbyte* str);
+      explicit String(const sbyte* str);
       
       /// @brief Create a new instance of class String
       /// @param chars char array.
-      String(const Array<char>& chars);
+      explicit String(const Array<char>& chars);
       
       /// @brief Create a new instance of class String
       /// @param chars char32 array.
-      String(const Array<char32>& chars);
+      explicit String(const Array<char32>& chars);
 
       /// @brief Initializes a new instance of the String class to the value indicated by a specified pointer to an array of characters, a starting character position within that array, and a length.
       /// @param str Value for the String (not null terminated).

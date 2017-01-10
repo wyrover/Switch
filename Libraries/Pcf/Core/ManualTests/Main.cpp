@@ -9,6 +9,9 @@ namespace Examples {
   class Program {
   public:
     static void Main(const Array<string>& args) {
+      string s  = string(Array<char32> {'H', 'e', 'l', 'l', 'o', ',', ' ', 'W', 'o', 'r', 'l', 'd', '!'});
+      Console::WriteLine(s);
+      Console::ReadKey(true);
       //Process process = Process::Start("http://www.google.com");
       //Console::WriteLine(process.StandardOutput().ReadToEnd());
       
