@@ -35,7 +35,9 @@ uncompr.c
 zutil.c 
 )
 
-if (MSVC)
+if (APPLE)
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-implicit-function-declaration -Wno-shift-negative-value")
+elseif (MSVC)
   set(CMAKE_C_FLAGS_DEBUG "/D_DEBUG /DDEBUG /MTd /MP /Oy- /Zi /Od /Zi /Oy- /RTC1 /wd4996")
   set(CMAKE_C_FLAGS_RELEASE "/MT /O2 /Ob2 /Oy- /D NDEBUG /DRELEASE /wd4996")
 endif ()

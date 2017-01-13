@@ -50,7 +50,7 @@ source_group(include\\${PROJECT_NAME}\\internal REGULAR_EXPRESSION "/include/${P
 source_group(src REGULAR_EXPRESSION "/src/[-_,A-Za-z0-9]+\\.(c*|h*)")
 
 if (APPLE)
-  SET(CMAKE_CXX_FLAGS "-std=c++14 -Wall -Wextra -Wpedantic -Wdeprecated-declarations -Wno-unknown-pragmas -Wno-unused-parameter")
+  SET(CMAKE_CXX_FLAGS "-std=c++14 -Wall -Wextra -Wpedantic -Wdeprecated-declarations -Wno-unknown-pragmas -Wno-unused-parameter -Wno-missing-field-initializers")
   set(CMAKE_CXX_FLAGS_DEBUG "-g -o0 -D_DEBUG -DDEBUG")
   set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG -DRELEASE")
 elseif (UNIX)
