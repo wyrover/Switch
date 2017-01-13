@@ -18,7 +18,7 @@ The framework is composed of 4 libraries :
 #Examples
 The classic first application 'Hello World'.
 
-Console:
+##Console:
 ```
 #include <Pcf/Pcf>
 
@@ -37,7 +37,7 @@ namespace HelloWorld {
 pcf_startup (HelloWorld::Program)
 ```
 
-Forms:
+##Forms:
 ```
 #include <Pcf/Pcf>
 
@@ -75,7 +75,7 @@ namespace HelloWorld {
 pcf_startup (HelloWorld::MainForm)
 ```
 
-TUnit :
+##TUnit:
 ```
 #include <Pcf/Pcf>
 
@@ -103,7 +103,7 @@ namespace UnitTests {
 - **Pcf::System::Collections::ObjectModel** namespace contains classes that can be used as collections in the object model of a reusable library.
 - **Pcf::System::Collections::Specialized** namespace contains specialized and strongly-typed collections; for example, a linked list dictionary, a bit vector, and collections that contain only strings.
 - **Pcf::System::ComponentModel** namepsace provides classes that are used to implement the run-time and design-time behavior of components and controls.
-- **Pcf::System::Diagnostics** namespace contains types that enable you to interact with system processes, event logs, and performance counters. Child namespaces contain types to interact with code analysis tools, to support contracts, to extend design-time support for application monitoring and instrumentation, to log event data using the Event Tracing for Windows (ETW) tracing subsystem, to read to and write from event logs and collect performance data, and to read and write debug symbol information.￼￼
+- **Pcf::System::Diagnostics** namespace contains types that enable you to interact with system processes, event logs, and performance counters. Child namespaces contain types to interact with code analysis tools, to support contracts, to extend design-time support for application monitoring and instrumentation, to log event data using the Event Tracing for Windows (ETW) tracing subsystem, to read to and write from event logs and collect performance data, and to read and write debug symbol information.
 - **Pcf::System::Drawing** namespace contains types that support basic GDI+ graphics functionality. Child namespaces support advanced two-dimensional and vector graphics functionality, advanced imaging functionality, and print-related and typographical services. A child namespace also contains types that extend design-time user-interface logic and drawing.
 - **Pcf::System::Drawing::Imaging** namepsace provides advanced GDI+ imaging functionality. Basic graphics functionality is provided by the Pcf::System::Drawing namespace.
 - **Pcf::System::Globalization** namepsace contains classes that define culture-related information, including language, country/region, calendars in use, format patterns for dates, currency, and numbers, and sort order for strings. These classes are useful for writing globalized (internationalized) applications. Classes such as StringInfo and TextInfo provide advanced globalization functionalities, including surrogate support and text element processing.
@@ -128,15 +128,17 @@ namespace UnitTests {
 - **Pcf::TUnit** namepsace contains a unit test framework.
 
 #Objectives and Mission
-- Pcf is a powerful, yet easy to use platform to build your applications upon
-- Pcf allows you to build highly portable applications (write once – compile and run anywhere)
-- Pcf is modular and scalable from embedded applications
-- Pcf provides consistent, comprehensive and comprehensible programming interfaces
-- Pcf is written in fast, efficient C++14.
-- Pcf favors simplicity over complexity ("as simple as possible, but not simpler")
-- Pcf aims for consistency in design, coding style and documentation
-- Pcf emphasizes source code quality, in terms of readability, comprehensiveness, consistency, style and testability
-- Pcf aims to make C++ programming fun again Guiding Principles
+- **Pcf** is a powerful, yet easy to use platform to build your applications upon
+- **Pcf** allows you to build highly portable applications (write once – compile and run anywhere)
+- **Pcf** is modular and scalable from embedded applications
+- **Pcf** provides consistent, comprehensive and comprehensible programming interfaces
+- **Pcf** is written in fast, efficient C++14.
+- **Pcf** favors simplicity over complexity ("as simple as possible, but not simpler")
+- **Pcf** aims for consistency in design, coding style and documentation
+- **Pcf** emphasizes source code quality, in terms of readability, comprehensiveness, consistency, style and testability
+- **Pcf** aims to make C++ programming fun again Guiding Principles
 - Strong focus on code quality, style, consistency and code readability –all code must satisfy our coding style guide
 - Strong focus on tests (automated unit tests with high coverage)
-- Build on top of solid foundations – use existing proven C libraries (e.g. libcurl, icu, zlib, SQLite) where it makes sense
+- Build on top of solid foundations – use existing proven C libraries (e.g. Curl, rs232, zlib,...) where it makes sense
+
+

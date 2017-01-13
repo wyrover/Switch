@@ -831,7 +831,9 @@ EXCLUDE_SYMBOLS        = pcf_public
 # command).
 
 EXAMPLE_PATH           = ../../Examples \
-                         ../../DesignPattern
+                         ../../DesignPattern \
+                         @CMAKE_CURRENT_SOURCE_DIR@/../../Examples \
+                         @CMAKE_CURRENT_SOURCE_DIR@/../../DesignPattern
 
 # If the value of the EXAMPLE_PATH tag contains directories, you can use the
 # EXAMPLE_PATTERNS tag to specify one or more wildcard pattern (like *.cpp and
@@ -851,7 +853,8 @@ EXAMPLE_RECURSIVE      = YES
 # that contain images that are to be included in the documentation (see the
 # \image command).
 
-IMAGE_PATH             = Dlcumentations/Images
+IMAGE_PATH             = Documentations/Images \
+                         @CMAKE_CURRENT_SOURCE_DIR@/Documentations/Images
 
 # The INPUT_FILTER tag can be used to specify a program that doxygen should
 # invoke to filter for each input file. Doxygen will invoke the filter program
