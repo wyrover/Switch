@@ -78,7 +78,7 @@ include_regular_expression("^.*$")    # Sukender: Is it necessary?
 # Setup package meta-data
 # SET(PACKAGE "curl")
 set(CURL_VERSION ${CURL_MAJOR_VERSION}.${CURL_MINOR_VERSION}.${CURL_PATCH_VERSION})
-message(STATUS "curl version=[${CURL_VERSION}]")
+#message(STATUS "curl version=[${CURL_VERSION}]")
 # SET(PACKAGE_TARNAME "curl")
 # SET(PACKAGE_NAME "curl")
 # SET(PACKAGE_VERSION "-")

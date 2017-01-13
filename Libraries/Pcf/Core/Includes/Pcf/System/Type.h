@@ -21,8 +21,8 @@ namespace Pcf {
     class Object;
   }
   
-  template<typename T> System::Type typeof();
-  template<typename T> System::Type typeof(const T& value);
+  template<typename T> System::Type pcf_typeof();
+  template<typename T> System::Type pcf_typeof(const T& value);
   /// @endcond
   
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
@@ -87,8 +87,8 @@ namespace Pcf {
       String GetName() const;
       String GetNamespace() const;
       
-      template<typename T> friend Type Pcf::typeof();
-      template<typename T> friend Type Pcf::typeof(const T& value);
+      template<typename T> friend Type Pcf::pcf_typeof();
+      template<typename T> friend Type Pcf::pcf_typeof(const T& value);
       friend class Object;
       
       Type();
@@ -99,35 +99,35 @@ namespace Pcf {
     };
   }
   
-  /// @brief Used to obtain the type Object for a type. A typeof expression takes the following form:
+  /// @brief Used to obtain the type Object for a type. A pcf_typeof expression takes the following form:
   /// @code
-  /// Type type = typeof<Int32>;
+  /// Type type = pcf_typeof<Int32>;
   /// @endcode
   /// @remarks To obtain the run-time type of an expression, you can use the Pcf method GetType, as in the following example:
   /// @code
   /// Int32 i = 0;
   /// System::Type type = i.GetType();
   /// @endcode
-  /// @remarks The typeof operator cannot be overloaded.
+  /// @remarks The pcf_typeof operator cannot be overloaded.
   template<typename T>
-  System::Type typeof() {
+  System::Type pcf_typeof() {
     return System::Type(typeid(T));
   }
   
-  /// @brief Used to obtain the type Object for a type. A typeof expression takes the following form:
+  /// @brief Used to obtain the type Object for a type. A pcf_typeof expression takes the following form:
   /// @code
   /// @Int32 i = 42;
-  /// type atype& = typeof(i);
+  /// type atype& = pcf_typeof(i);
   /// @endcode
   /// @remarks To obtain the run-time type of an expression, you can use the Pcf method GetType, as in the following example:
   /// @code
   /// Int32 42 = 0;
   /// System::Type Type = i.GetType();
   /// @endcode
-  /// @remarks The typeof operator cannot be overloaded.
+  /// @remarks The pcf_typeof operator cannot be overloaded.
   /// @see System::Type
   template<typename T>
-  System::Type typeof(const T& value) {
+  System::Type pcf_typeof(const T& value) {
     return System::Type(typeid(value));
   }
 }

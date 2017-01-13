@@ -778,7 +778,7 @@ namespace Pcf {
         if (is<TT>(value))
           Succeed(message, currentInformation);
         else
-          Fail(string::Format("Expected: instance of <{0}>{1}But was:  <{2}>", typeof(value), System::Environment::NewLine, typeof<TT>()), message, currentInformation);
+          Fail(string::Format("Expected: instance of <{0}>{1}But was:  <{2}>", pcf_typeof(value), System::Environment::NewLine, pcf_typeof<TT>()), message, currentInformation);
       }
       
       /// @brief Verify that an object is of the type supplied or a derived type. If they are not, then an Pcf::TUnit::AssertionException is thrown.
@@ -1103,7 +1103,7 @@ namespace Pcf {
         if (!is<TT>(value))
           Succeed(message, currentInformation);
         else
-          Fail(string::Format("Expected: not instance of <{0}>{1}But was:  <{2}>", typeof(value), System::Environment::NewLine, typeof<TT>()), message, currentInformation);
+          Fail(string::Format("Expected: not instance of <{0}>{1}But was:  <{2}>", pcf_typeof(value), System::Environment::NewLine, pcf_typeof<TT>()), message, currentInformation);
       }
       
       /// @brief Verify that an object is not of the type supplied or a derived type. If they are not, then an Pcf::TUnit::AssertionException is thrown.

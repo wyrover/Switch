@@ -761,7 +761,7 @@ namespace Pcf {
         if (is<TT>(value))
           Succeed(message, currentInformation);
         else
-          Fail(string::Format("Expected: instance of <{0}>{1}But was:  <{2}>", typeof(value), System::Environment::NewLine, typeof<TT>()), message, currentInformation);
+          Fail(string::Format("Expected: instance of <{0}>{1}But was:  <{2}>", pcf_typeof(value), System::Environment::NewLine, pcf_typeof<TT>()), message, currentInformation);
       }
       
       /// @brief Expect that an object is of the type supplied or a derived type. If they are not, then a message is shown.

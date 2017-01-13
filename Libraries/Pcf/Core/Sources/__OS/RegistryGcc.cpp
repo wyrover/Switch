@@ -40,7 +40,7 @@ int32 __OS::CoreApi::Registry::CreateSubKey(const void* hrootKey, const char* su
   return 0;
 }
 
-int32  __OS::CoreApi::Registry::EnumValues(void* hkey, int32 dwIndex,char *avaluenamey,char* val, int32 &typeofvalue,int32& sizekey,int32& sizeval) {
+int32  __OS::CoreApi::Registry::EnumValues(void* hkey, int32 dwIndex,char *avaluenamey,char* val, int32 &pcf_typeofvalue,int32& sizekey,int32& sizeval) {
   return 0;
 }
 

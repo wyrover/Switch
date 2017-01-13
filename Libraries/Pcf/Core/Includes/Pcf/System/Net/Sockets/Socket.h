@@ -900,7 +900,7 @@ namespace Pcf {
           ///   - SocketOptionNameMulticastInterface
           ///   - SocketOptionNameMulticastLoopback
           ///   - SocketOptionNameMulticastTimeToLive
-          ///   - SocketOptionNameTypeOfService
+          ///   - SocketOptionNamepcf_typeofService
           ///   - SocketOptionNameUseLoopback
           /// - SocketOptionLevelTcp options that can be set using this overload:
           ///   - SocketOptionNameBsdUrgent

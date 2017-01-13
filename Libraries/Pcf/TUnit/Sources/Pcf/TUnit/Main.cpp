@@ -2,7 +2,7 @@
 #include <Pcf/System/Environment.h>
 #include <Pcf/System/String.h>
 #include <Pcf/Startup.h>
-#include <gtest\gtest.h>
+#include <gtest/gtest.h>
 #include "ConsoleEventListener.h"
 
 namespace {

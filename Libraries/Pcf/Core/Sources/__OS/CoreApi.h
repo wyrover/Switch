@@ -190,7 +190,7 @@ namespace __OS {
       static int32 DeleteSubKey(void* hKey, const char* subkeyName);
       static int32 DeleteValue(void* hKey, const char* subkeyName);
       static int32 ExpandString(const char *strtoexpand, char *result, int32 cbData);
-      static int32 EnumValues(void* hkey, int32 dwIndex, char *avaluenamey, char* val, int32 &typeofvalue, int32& sizekey, int32& sizeval);
+      static int32 EnumValues(void* hkey, int32 dwIndex, char *avaluenamey, char* val, int32 &pcf_typeofvalue, int32& sizekey, int32& sizeval);
       static int32 EnumKey(void* hKey, int32 dwIndex, char *subkeyname, int32& sizesubkey);
       static int32 NumberOfSubKey(void* hkey);
       static int32 NumberOfValue(void* hkey);

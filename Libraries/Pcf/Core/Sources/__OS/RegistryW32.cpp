@@ -102,13 +102,13 @@ int32  __OS::CoreApi::Registry::EnumKey(void* hkey, int32 dwIndex, char *subkeyn
 /*
  char  avaluenamey[256];//le nom de la cl�
  BYTE val[256];//la valeur de la cl�
- DWORD  typeofvalue
+ DWORD  pcf_typeofvalue
  */
-int32  __OS::CoreApi::Registry::EnumValues(void* hkey, int32 dwIndex, char *avaluename, char* val, int32 & typeofvalue, int32& sizekey, int32& sizeval) {
+int32  __OS::CoreApi::Registry::EnumValues(void* hkey, int32 dwIndex, char *avaluename, char* val, int32 & pcf_typeofvalue, int32& sizekey, int32& sizeval) {
   int32 rcl = 0;
   int32 si = sizekey, cbData = sizeval;
   
-  rcl = RegEnumValueA((HKEY)hkey, dwIndex, avaluename, (LPDWORD)&si, null, (LPDWORD)&typeofvalue, (LPBYTE)val, (LPDWORD)&cbData);
+  rcl = RegEnumValueA((HKEY)hkey, dwIndex, avaluename, (LPDWORD)&si, null, (LPDWORD)&pcf_typeofvalue, (LPBYTE)val, (LPDWORD)&cbData);
   if (rcl == ERROR_SUCCESS) {
     sizekey = si;
     sizeval = cbData;

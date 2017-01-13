@@ -173,19 +173,19 @@ namespace PcfUnitTests {
     }
     
     void OperatorLitteralChar() {
-      TUnit::Assert::AreEqual("Pcf::System::String", typeof("Test"_S).ToString(), pcf_current_information);
+      TUnit::Assert::AreEqual("Pcf::System::String", pcf_typeof("Test"_S).ToString(), pcf_current_information);
     }
     
     void OperatorLitteralChar16() {
-      TUnit::Assert::AreEqual("Pcf::System::String", typeof(u"Test"_S).ToString(), pcf_current_information);
+      TUnit::Assert::AreEqual("Pcf::System::String", pcf_typeof(u"Test"_S).ToString(), pcf_current_information);
     }
     
     void OperatorLitteralChar32() {
-      TUnit::Assert::AreEqual("Pcf::System::String", typeof(U"Test"_S).ToString(), pcf_current_information);
+      TUnit::Assert::AreEqual("Pcf::System::String", pcf_typeof(U"Test"_S).ToString(), pcf_current_information);
     }
     
     void OperatorLitteralWChar() {
-      TUnit::Assert::AreEqual("Pcf::System::String", typeof(L"Test"_S).ToString(), pcf_current_information);
+      TUnit::Assert::AreEqual("Pcf::System::String", pcf_typeof(L"Test"_S).ToString(), pcf_current_information);
     }
     
     void OperatorAddConstCharPointer() {

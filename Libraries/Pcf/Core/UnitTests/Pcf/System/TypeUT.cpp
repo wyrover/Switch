@@ -14,8 +14,8 @@ namespace {
     //EXPECT_EQ("Object", type.Name());
     //EXPECT_EQ("System", type.Namespace());
   
-    //EXPECT_TRUE(type == typeof<Object>());
-    //EXPECT_TRUE(type != typeof<ValueType>());
+    //EXPECT_TRUE(type == pcf_typeof<Object>());
+    //EXPECT_TRUE(type != pcf_typeof<ValueType>());
 
     EXPECT_TRUE(type == Object().GetType());
 
@@ -44,8 +44,8 @@ namespace {
     //EXPECT_EQ(type.GetType().GetNamespace(), "System");
     //EXPECT_EQ(type.GetType().ToString(), "System::Type");
   
-    //EXPECT_TRUE(type.GetType() == TypeOf<Type>());
-    //EXPECT_TRUE(type.GetType() != TypeOf<ValueType>());
+    //EXPECT_TRUE(type.GetType() == pcf_typeof<Type>());
+    //EXPECT_TRUE(type.GetType() != pcf_typeof<ValueType>());
   
     EXPECT_EQ(Type::GetTypeCode(obj), TypeCode::Object);
   
@@ -74,8 +74,8 @@ namespace {
     //EXPECT_EQ(string("System"), i32.GetType().GetNamespace());
     //EXPECT_EQ(string("System::Int32"), i32.GetType().ToString());
   
-    //EXPECT_TRUE(i32.GetType() == TypeOf<Int32>());
-    //EXPECT_TRUE(i32.GetType() != TypeOf<ValueType>());
+    //EXPECT_TRUE(i32.GetType() == pcf_typeof<Int32>());
+    //EXPECT_TRUE(i32.GetType() != pcf_typeof<ValueType>());
 
     EXPECT_TRUE(i32.GetType() == Int32().GetType());
 
