@@ -10,8 +10,8 @@ using namespace System::Threading;
 
 int32 ThreadPool::maxThreads = 800;
 int32 ThreadPool::maxAsynchronousIOThreads = 800;
-int32 ThreadPool::minThreads = Environment::ProcessorCount;
-int32 ThreadPool::minAsynchronousIOThreads = Environment::ProcessorCount;
+int32 ThreadPool::minThreads = int32(std::thread::hardware_concurrency());
+int32 ThreadPool::minAsynchronousIOThreads = int32(std::thread::hardware_concurrency());
 bool ThreadPool::closed = false;
 ThreadPool::ThreadPoolItemCollection ThreadPool::threadPoolItems;
 ThreadPool::ThreadPoolAsynchronousIOItemCollection ThreadPool::threadPoolAsynchronousIOItems;

@@ -111,7 +111,6 @@ namespace {
     return envs;
   }
 
-  System::Array<String> commandLineArgs;
   Property<Collections::Specialized::StringDictionary&, ReadOnly> EnvironmentVariables {
     []()->Collections::Specialized::StringDictionary& {
       static Collections::Specialized::StringDictionary environmentVariables = GetEnvironmentVariables();
@@ -120,6 +119,7 @@ namespace {
   };
   
   int32 exitCode;
+  UniquePointer<System::Array<String>> commandLineArgs;
   UniquePointer<ConsoleChangeCodePage> consoleChangeCodePage;
   UniquePointer<ConsoleInterceptSignals> consoleInterceptSignals;
   UniquePointer<SignalCatcher> signalCatcher;
@@ -127,12 +127,12 @@ namespace {
 
 Property<String, ReadOnly> Environment::CommandLine {
   [] {
-    if (commandLineArgs.Length == 0)
+    if (commandLineArgs->Length == 0)
       throw InvalidOperationException("You must call Environment::SetCommandLineArgs() method in main before.", pcf_current_information);
       
-    string commandLine = commandLineArgs[0];
-    for (int i = 1; i < commandLineArgs.Length; i++)
-      commandLine += " " + (commandLineArgs[i].Contains(" ") ? string::Format("\"{0}\"", commandLineArgs[i]) : commandLineArgs[i]);
+    string commandLine = commandLineArgs.ToObject()[0];
+    for (int i = 1; i < commandLineArgs->Length; i++)
+      commandLine += " " + (commandLineArgs.ToObject()[i].Contains(" ") ? string::Format("\"{0}\"", commandLineArgs.ToObject()[i]) : commandLineArgs.ToObject()[i]);
     return commandLine;
   }
 };
@@ -254,7 +254,7 @@ String Environment::ExpandEnvironmentVariables(const String& name) {
 }
 
 const Array<String>& Environment::GetCommandLineArgs() {
-  return commandLineArgs;
+  return commandLineArgs.ToObject();
 }
 
 String Environment::GetEnvironmentVariable(const String& variable) {
@@ -294,14 +294,14 @@ void Environment::SetEnvironmentVariable(const String& name, const String& value
 }
 
 Array<string> Environment::SetCommandLineArgs(char* argv[], int argc) {
-  if (commandLineArgs.Length != 0)
+  if (commandLineArgs != null)
     throw InvalidOperationException("Can be called only once", pcf_current_information);
-  
+
   consoleChangeCodePage = UniquePointer<ConsoleChangeCodePage>::Create();
-  consoleInterceptSignals = UniquePointer<ConsoleInterceptSignals>::Create();
+  //consoleInterceptSignals = UniquePointer<ConsoleInterceptSignals>::Create();
   signalCatcher = UniquePointer<SignalCatcher>::Create();
   System::Threading::Thread::RegisterCurrentThread();
-  commandLineArgs = Array<string>(std::vector<string>(argv, argv+argc));
+  commandLineArgs = UniquePointer<Array<string>>::Create(std::vector<string>(argv, argv+argc));
   return Array<string>(std::vector<string>(argv+1, argv+argc));
 }
 
