@@ -37,7 +37,7 @@ namespace {
     }
   };
   
-  pcf_test(PrediacateTest, Static);
-  pcf_test(PrediacateTest, Member);
-  pcf_test(PrediacateTest, Empty);
+  pcf_test(PrediacateTest, Static)
+  pcf_test(PrediacateTest, Member)
+  pcf_test(PrediacateTest, Empty)
 }
