@@ -100,14 +100,14 @@ namespace Pcf {
       public:        
         /// @brief Initializes a new instance of the Thread class.
         /// @param start A ThreadStart delegate that represents the methods to be invoked when this thread begins executing.
-        explicit Thread(ThreadStart start) : data(new ThreadItem(start)) {}
+        explicit Thread(System::Threading::ThreadStart start) : data(new ThreadItem(start)) {}
         
         /// @brief nitializes a new instance of the Thread class, specifying the maximum stack size for the thread.
         /// @param start A ThreadStart delegate that represents the methods to be invoked when this thread begins executing.
         /// @param maxStackSize The maximum stack size, in bytes, to be used by the thread, or 0 to use the default maximum stack size specified in the header for the executable.
         /// @note Important: For partially trusted code, maxStackSize is ignored if it is greater than the default stack size. No exception is thrown.
         /// @note maxStackSize is ignored.
-        Thread(ThreadStart start, int32 maxStackSize) : data(new ThreadItem(start)) {}
+        Thread(System::Threading::ThreadStart start, int32 maxStackSize) : data(new ThreadItem(start)) {}
         
         /// @brief Initializes a new instance of the Thread class, specifying a delegate that allows an object to be passed to the thread when the thread is started.
         /// @param start A delegate that represents the methods to be invoked when this thread begins executing.
@@ -352,7 +352,7 @@ namespace Pcf {
 
         struct ThreadItem {
           ThreadItem() {};
-          ThreadItem(ThreadStart threadStart) : threadStart(threadStart), managedThreadId(GenerateManagedThreadId()) {}
+          ThreadItem(System::Threading::ThreadStart threadStart) : threadStart(threadStart), managedThreadId(GenerateManagedThreadId()) {}
           ThreadItem(ParameterizedThreadStart parameterizedThreadStart) : parameterizedThreadStart(parameterizedThreadStart), managedThreadId(GenerateManagedThreadId()) {}
           ThreadItem(const ThreadItem& threadItem) = delete;
           ThreadItem& operator=(const ThreadItem& threadItem) = delete;
@@ -363,7 +363,7 @@ namespace Pcf {
           string name;
           bool criticalRegion {false};
           bool interrupted {false};
-          ThreadStart threadStart;
+          System::Threading::ThreadStart threadStart;
           ParameterizedThreadStart parameterizedThreadStart;
           ManualResetEvent endThreadEvent {false};
           int32 managedThreadId {NoneManagedThreadId};

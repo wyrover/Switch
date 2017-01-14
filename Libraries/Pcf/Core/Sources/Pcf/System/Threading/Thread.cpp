@@ -9,7 +9,7 @@ Thread::ThreadCollection Thread::threads;
 std::recursive_mutex Thread::mutex;
 
 Thread::~Thread() {
-  if (Enum<System::Threading::ThreadState>(this->data->state).HasFlag(ThreadState::Background)) {
+  if (Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Background)) {
     if (this->data->thread.joinable()) {
       this->data->detachedThreadId = this->data->thread.get_id();
       this->data->thread.detach();
@@ -49,7 +49,7 @@ void Thread::ThreadItem::RunWithOrWithoutParam(const object* obj, bool withParam
 
   try {
     this->SetNameThreadForDebugger();
-    if (Enum<System::Threading::ThreadState>(this->state).HasFlag(ThreadState::Background) && this->thread.joinable()) {
+    if (Enum<System::Threading::ThreadState>(this->state).HasFlag(System::Threading::ThreadState::Background) && this->thread.joinable()) {
       if (this->thread.joinable()) {
         this->detachedThreadId = this->thread.get_id();
         this->thread.detach();

@@ -7,6 +7,6 @@
 namespace Pcf {
   template<typename T>
   using InitializerList = std::initializer_list<T>;
-};
+}
 
 using namespace Pcf;

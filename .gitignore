@@ -1,4 +1,5 @@
 .DS_Store
 /Build
 /Libraries/Pcf/Help
+/Libraries/Pcf-build
 /Libraries/Pcf/Documentations/warning.txt

@@ -138,6 +138,8 @@ namespace Pcf {
 #pragma clang diagnostic ignored "-Wkeyword-macro"
 #define typeof pcf_typeof
 #pragma clang diagnostic pop
+#elif __linux__
+#define typeof pcf_typeof
 #else
   using typeof = pcf_typeof;
 #endif

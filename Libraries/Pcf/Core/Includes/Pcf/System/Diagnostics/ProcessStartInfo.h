@@ -126,8 +126,8 @@ namespace Pcf {
         /// @brief Gets or sets the user password in clear text to use when starting the process.
         /// @return string The user password in clear text.
         Property<string> PasswordInClearText {
-          pcf_get {return GetPasswordInClearText();},
-          pcf_set {SetPasswordInClearText(value);}
+          pcf_get {return this->GetPasswordInClearText();},
+          pcf_set {this->SetPasswordInClearText(value);}
         };
         
         /// @brief Gets or sets a value that indicates whether the error output of an application is written to the Process.StandardError stream.

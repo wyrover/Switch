@@ -34,7 +34,7 @@ namespace Pcf {
           pcf_get{ return (this->data().fontStyle & System::Drawing::FontStyle::Bold) == System::Drawing::FontStyle::Bold; }
         };
 
-        Property<FontFamily, ReadOnly> FontFamily{
+        Property<System::Drawing::FontFamily, ReadOnly> FontFamily{
           pcf_get{ return this->data().fontFamily; }
         };
 

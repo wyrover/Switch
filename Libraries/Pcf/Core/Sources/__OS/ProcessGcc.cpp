@@ -1,6 +1,7 @@
 #if __linux__ || __APPLE__
 
 #include <sys/types.h>
+#include <sys/wait.h>
 #include <signal.h>
 #include <unistd.h>
 #include "CoreApi.h"
@@ -66,6 +67,24 @@ namespace {
         processes.Add(pids[index]);
     return processes.ToArray();
   }
+}
+#else
+string GetProcessPath(pid_t id) {
+  return "";
+}
+
+string GetProcessName(pid_t id) {
+  return "";
+}
+
+/*
+ProcessInfo GetProcessInfo(pid_t id) {
+  return {id, GetProcessName(id), GetProcessPath(id)};
+}*/
+
+System::Array<intptr> GetProcesses() {
+  System::Collections::Generic::List<intptr> processes;
+  return processes.ToArray();
 }
 #endif
 

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.6)
+cmake_minimum_required(VERSION 3.1)
 project(Pcf VERSION 0.2.0)
 
 option(BUILD_CORE_INTEGRATION_TESTS "Build Core integration tests" OFF)
