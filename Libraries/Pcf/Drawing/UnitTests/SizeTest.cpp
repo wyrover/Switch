@@ -81,17 +81,17 @@ namespace PcfUnitTests {
     }
   };
   
-  pcf_test(Size, Empty);
-  pcf_test(Size, CreateEmpty);
-  pcf_test(Size, CreateSizeFromWidthHeight);
-  pcf_test(Size, CreateSizeFromEmptySize);
-  pcf_test(Size, CreateSizeFromSize);
-  pcf_test(Size, CreateSizeFromEmptyPoint);
-  pcf_test(Size, CreateSizeFromPoint);
-  pcf_test(Size, EmptySizeIsEmpty);
-  pcf_test(Size, SizeIsEmpty);
-  pcf_test(Size, EmptySizeToString);
-  pcf_test(Size, SizeToString);
-  pcf_test(Size, AddASize);
-  pcf_test(Size, SubtractASize);
+  pcf_test(Size, Empty)
+  pcf_test(Size, CreateEmpty)
+  pcf_test(Size, CreateSizeFromWidthHeight)
+  pcf_test(Size, CreateSizeFromEmptySize)
+  pcf_test(Size, CreateSizeFromSize)
+  pcf_test(Size, CreateSizeFromEmptyPoint)
+  pcf_test(Size, CreateSizeFromPoint)
+  pcf_test(Size, EmptySizeIsEmpty)
+  pcf_test(Size, SizeIsEmpty)
+  pcf_test(Size, EmptySizeToString)
+  pcf_test(Size, SizeToString)
+  pcf_test(Size, AddASize)
+  pcf_test(Size, SubtractASize)
 }

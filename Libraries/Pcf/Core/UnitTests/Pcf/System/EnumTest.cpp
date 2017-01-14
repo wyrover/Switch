@@ -456,17 +456,17 @@ namespace PcfUnitTests {
     }
   };
   
-  pcf_test(EnumTest, Constructor);
-  pcf_test(EnumTest, Equality);
-  pcf_test(EnumTest, SwitchCase);
-  pcf_test(EnumTest, GetName);
-  pcf_test(EnumTest, GetNames);
-  pcf_test(EnumTest, GetValues);
-  pcf_test(EnumTest, HasFlag);
-  pcf_test(EnumTest, IsDefined);
-  pcf_test(EnumTest, FromInt32);
-  pcf_test(EnumTest, Parse);
-  pcf_test(EnumTest, ToInt32);
-  pcf_test(EnumTest, ToString);
-  pcf_test(EnumTest, TryParse);
+  pcf_test(EnumTest, Constructor)
+  pcf_test(EnumTest, Equality)
+  pcf_test(EnumTest, SwitchCase)
+  pcf_test(EnumTest, GetName)
+  pcf_test(EnumTest, GetNames)
+  pcf_test(EnumTest, GetValues)
+  pcf_test(EnumTest, HasFlag)
+  pcf_test(EnumTest, IsDefined)
+  pcf_test(EnumTest, FromInt32)
+  pcf_test(EnumTest, Parse)
+  pcf_test(EnumTest, ToInt32)
+  pcf_test(EnumTest, ToString)
+  pcf_test(EnumTest, TryParse)
 }

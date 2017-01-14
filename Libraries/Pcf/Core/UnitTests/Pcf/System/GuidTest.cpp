@@ -140,19 +140,19 @@ namespace PcfUnitTests {
     }
   };
   
-  pcf_test(GuidTest, CreateGuid);
-  pcf_test(GuidTest, CreateGuidFromNativeByteArray);
-  pcf_test(GuidTest, CreateGuidFromByteArray);
-  pcf_test(GuidTest, Constructor);
-  pcf_test(GuidTest, Constructor2);
-  pcf_test(GuidTest, Equals);
-  pcf_test(GuidTest, NewGuid);
-  pcf_test(GuidTest, ToString);
-  pcf_test(GuidTest, CompareTo);
-  pcf_test(GuidTest, LessThanOperator);
-  pcf_test(GuidTest, LessEqualOperator);
-  pcf_test(GuidTest, GreateThanOperator);
-  pcf_test(GuidTest, GreaterEqualOperator);
-  pcf_test(GuidTest, EqualOperator);
-  pcf_test(GuidTest, DifferentOperator);
+  pcf_test(GuidTest, CreateGuid)
+  pcf_test(GuidTest, CreateGuidFromNativeByteArray)
+  pcf_test(GuidTest, CreateGuidFromByteArray)
+  pcf_test(GuidTest, Constructor)
+  pcf_test(GuidTest, Constructor2)
+  pcf_test(GuidTest, Equals)
+  pcf_test(GuidTest, NewGuid)
+  pcf_test(GuidTest, ToString)
+  pcf_test(GuidTest, CompareTo)
+  pcf_test(GuidTest, LessThanOperator)
+  pcf_test(GuidTest, LessEqualOperator)
+  pcf_test(GuidTest, GreateThanOperator)
+  pcf_test(GuidTest, GreaterEqualOperator)
+  pcf_test(GuidTest, EqualOperator)
+  pcf_test(GuidTest, DifferentOperator)
 }

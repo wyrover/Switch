@@ -77,16 +77,16 @@ namespace PcfUnitTests {
     }
   };
  
-  pcf_test(NativeTest, SizeOfBool);
-  pcf_test(NativeTest, SizeOfChar);
-  pcf_test(NativeTest, SizeOfByte);
-  pcf_test(NativeTest, SizeOfInt16);
-  pcf_test(NativeTest, SizeOfInt32);
-  pcf_test(NativeTest, SizeOfInt64);
-  pcf_test(NativeTest, SizeOfSByte);
-  pcf_test(NativeTest, SizeOfUInt16);
-  pcf_test(NativeTest, SizeOfUInt32);
-  pcf_test(NativeTest, SizeOfUInt64);
-  pcf_test(NativeTest, SizeOfFloat);
-  pcf_test(NativeTest, SizeOfDouble);
+  pcf_test(NativeTest, SizeOfBool)
+  pcf_test(NativeTest, SizeOfChar)
+  pcf_test(NativeTest, SizeOfByte)
+  pcf_test(NativeTest, SizeOfInt16)
+  pcf_test(NativeTest, SizeOfInt32)
+  pcf_test(NativeTest, SizeOfInt64)
+  pcf_test(NativeTest, SizeOfSByte)
+  pcf_test(NativeTest, SizeOfUInt16)
+  pcf_test(NativeTest, SizeOfUInt32)
+  pcf_test(NativeTest, SizeOfUInt64)
+  pcf_test(NativeTest, SizeOfFloat)
+  pcf_test(NativeTest, SizeOfDouble)
 }

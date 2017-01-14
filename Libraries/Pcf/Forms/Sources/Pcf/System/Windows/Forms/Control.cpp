@@ -37,7 +37,7 @@ namespace {
     Array<byte> bytes = BitConverter::GetBytes(lParam);
     return System::Drawing::Point(BitConverter::ToInt16(bytes, 0), BitConverter::ToInt16(bytes, 2));
   }
-};
+}
 
 Reference<Control> Control::controlEntered;
 

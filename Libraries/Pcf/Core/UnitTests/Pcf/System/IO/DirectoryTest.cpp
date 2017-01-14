@@ -47,7 +47,7 @@ namespace PcfUnitTests {
     string workingDirectory = System::IO::Path::Combine(System::IO::Directory::GetCurrentDirectory(), "UnitTest");
   };
   
-  pcf_test(DirectoryTest, CreateDirectory);
-  pcf_test(DirectoryTest, CreateAndDeleteAnEmptyDirectory);
-  pcf_test(DirectoryTest, CreateAndDeleteANonEmptyDirectory);
+  pcf_test(DirectoryTest, CreateDirectory)
+  pcf_test(DirectoryTest, CreateAndDeleteAnEmptyDirectory)
+  pcf_test(DirectoryTest, CreateAndDeleteANonEmptyDirectory)
 }

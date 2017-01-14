@@ -25,7 +25,7 @@ namespace PcfUnitTests {
     }
   };
   
-  //pcf_test(EnvironmentTest, GetEnvironmentVariables);
-  pcf_test(EnvironmentTest, GetEnvironmentVariable);
-  //pcf_test(EnvironmentTest, SetEnvironmentVariable);
+  //pcf_test(EnvironmentTest, GetEnvironmentVariables)
+  pcf_test(EnvironmentTest, GetEnvironmentVariable)
+  //pcf_test(EnvironmentTest, SetEnvironmentVariable)
 }

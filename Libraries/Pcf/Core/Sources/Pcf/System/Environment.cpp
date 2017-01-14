@@ -109,7 +109,7 @@ namespace {
       envs[keyValue[0]] = keyValue[1];
     }
     return envs;
-  };
+  }
 
   System::Array<String> commandLineArgs;
   Property<Collections::Specialized::StringDictionary&, ReadOnly> EnvironmentVariables {

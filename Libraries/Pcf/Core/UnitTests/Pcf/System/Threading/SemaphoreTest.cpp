@@ -149,25 +149,25 @@ namespace PcfUnitTests {
     }
   };
 
-  pcf_test(SemaphoreTest, CreateSemaphore);
-  pcf_test(SemaphoreTest, CreateTwoSemaphore);
-  pcf_test(SemaphoreTest, CreateSemaphoreByCopy);
-  pcf_test(SemaphoreTest, CreateSemaphoreAndCopy);
-  pcf_test(SemaphoreTest, CreateSemaphoreWithCountToZero);
-  pcf_test(SemaphoreTest, CreateSemaphoreWithCountToOne);
-  pcf_test(SemaphoreTest, CreateSemaphoreWithSameName);
-  pcf_test(SemaphoreTest, CreateSemaphoreWithSameNameAndCreatedNew);
-  pcf_test(SemaphoreTest, CreateSemaphoreWithDifferentName);
-  pcf_test(SemaphoreTest, CreateSemaphoreWithDifferentNameAndCreatedNew);
-  pcf_test(SemaphoreTest, Close);
-  pcf_test(SemaphoreTest, OpenExistingWithSameName);
-  pcf_test(SemaphoreTest, OpenExistingWithDifferentName);
-  pcf_test(SemaphoreTest, TryOpenExistingWithSameName);
-  pcf_test(SemaphoreTest, TryOpenExistingWithDifferentName);
-  pcf_test(SemaphoreTest, WaitAndRealese);
-  pcf_test(SemaphoreTest, InitialCountTo0AndWait);
-  pcf_test(SemaphoreTest, InitialCountTo1AndWait);
-  pcf_test(SemaphoreTest, InitialCountTo2AndWait);
-  pcf_test(SemaphoreTest, MaximumCountTo2AndRelease);
-  pcf_test(SemaphoreTest, ReleaseAndWait);
+  pcf_test(SemaphoreTest, CreateSemaphore)
+  pcf_test(SemaphoreTest, CreateTwoSemaphore)
+  pcf_test(SemaphoreTest, CreateSemaphoreByCopy)
+  pcf_test(SemaphoreTest, CreateSemaphoreAndCopy)
+  pcf_test(SemaphoreTest, CreateSemaphoreWithCountToZero)
+  pcf_test(SemaphoreTest, CreateSemaphoreWithCountToOne)
+  pcf_test(SemaphoreTest, CreateSemaphoreWithSameName)
+  pcf_test(SemaphoreTest, CreateSemaphoreWithSameNameAndCreatedNew)
+  pcf_test(SemaphoreTest, CreateSemaphoreWithDifferentName)
+  pcf_test(SemaphoreTest, CreateSemaphoreWithDifferentNameAndCreatedNew)
+  pcf_test(SemaphoreTest, Close)
+  pcf_test(SemaphoreTest, OpenExistingWithSameName)
+  pcf_test(SemaphoreTest, OpenExistingWithDifferentName)
+  pcf_test(SemaphoreTest, TryOpenExistingWithSameName)
+  pcf_test(SemaphoreTest, TryOpenExistingWithDifferentName)
+  pcf_test(SemaphoreTest, WaitAndRealese)
+  pcf_test(SemaphoreTest, InitialCountTo0AndWait)
+  pcf_test(SemaphoreTest, InitialCountTo1AndWait)
+  pcf_test(SemaphoreTest, InitialCountTo2AndWait)
+  pcf_test(SemaphoreTest, MaximumCountTo2AndRelease)
+  pcf_test(SemaphoreTest, ReleaseAndWait)
 }

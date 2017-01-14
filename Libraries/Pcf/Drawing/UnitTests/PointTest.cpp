@@ -95,19 +95,19 @@ namespace PcfUnitTests {
     }
   };
   
-  pcf_test(Point, Empty);
-  pcf_test(Point, CreateEmpty);
-  pcf_test(Point, CreatePointFromXY);
-  pcf_test(Point, CreatePointFromEmptyPoint);
-  pcf_test(Point, CreatePointFromPoint);
-  pcf_test(Point, CreatePointFromEmptySize);
-  pcf_test(Point, CreatePointFromSize);
-  pcf_test(Point, EmptyPointIsEmpty);
-  pcf_test(Point, PointIsEmpty);
-  pcf_test(Point, EmptyPointToString);
-  pcf_test(Point, PointToString);
-  pcf_test(Point, OffsetPoint);
-  pcf_test(Point, OffsetAmount);
-  pcf_test(Point, AddASize);
-  pcf_test(Point, SubtractASize);
+  pcf_test(Point, Empty)
+  pcf_test(Point, CreateEmpty)
+  pcf_test(Point, CreatePointFromXY)
+  pcf_test(Point, CreatePointFromEmptyPoint)
+  pcf_test(Point, CreatePointFromPoint)
+  pcf_test(Point, CreatePointFromEmptySize)
+  pcf_test(Point, CreatePointFromSize)
+  pcf_test(Point, EmptyPointIsEmpty)
+  pcf_test(Point, PointIsEmpty)
+  pcf_test(Point, EmptyPointToString)
+  pcf_test(Point, PointToString)
+  pcf_test(Point, OffsetPoint)
+  pcf_test(Point, OffsetAmount)
+  pcf_test(Point, AddASize)
+  pcf_test(Point, SubtractASize)
 }

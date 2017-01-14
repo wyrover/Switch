@@ -84,10 +84,10 @@ namespace UnitTests {
     }
   };
   
-  pcf_test(ProcessStartInfoUnitTest, Constructor);
-  pcf_test(ProcessStartInfoUnitTest, ConstructorWithFileName);
-  pcf_test(ProcessStartInfoUnitTest, ConstructorWithFileNameAndArgument);
-  pcf_test(ProcessStartInfoUnitTest, ConstructorByCopy);
-  pcf_test(ProcessStartInfoUnitTest, SetPasswordThenCheckPasswordInClearText);
-  pcf_test(ProcessStartInfoUnitTest, SetPasswordInClearTextThenCheckPasswordInClearText);
+  pcf_test(ProcessStartInfoUnitTest, Constructor)
+  pcf_test(ProcessStartInfoUnitTest, ConstructorWithFileName)
+  pcf_test(ProcessStartInfoUnitTest, ConstructorWithFileNameAndArgument)
+  pcf_test(ProcessStartInfoUnitTest, ConstructorByCopy)
+  pcf_test(ProcessStartInfoUnitTest, SetPasswordThenCheckPasswordInClearText)
+  pcf_test(ProcessStartInfoUnitTest, SetPasswordInClearTextThenCheckPasswordInClearText)
 }

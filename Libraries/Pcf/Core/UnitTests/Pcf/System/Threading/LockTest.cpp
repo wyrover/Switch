@@ -63,8 +63,8 @@ namespace PcfUnitTests {
     }
   };
   
-  pcf_test(LockTest, SingleLock);
-  pcf_test(LockTest, DoubleLockOnDifferentObjects);
-  pcf_test(LockTest, DoubleLockOnSameObject);
-  pcf_test(LockTest, LockDuration);
+  pcf_test(LockTest, SingleLock)
+  pcf_test(LockTest, DoubleLockOnDifferentObjects)
+  pcf_test(LockTest, DoubleLockOnSameObject)
+  pcf_test(LockTest, LockDuration)
 }

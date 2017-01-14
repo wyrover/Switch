@@ -18,7 +18,7 @@ namespace {
     }
     return LOG_NOTICE;
   }
-};
+}
 
 void __OS::CoreApi::Debugger::Log(int32 level, const string& category, const string &message) {
   if (category.IsEmpty())

@@ -617,23 +617,23 @@ namespace {
     }
   };
   
-  pcf_test(DateTimeTest, MinValue);
-  pcf_test(DateTimeTest, MaxValue);
-  pcf_test(DateTimeTest, DefaultConstructor);
-  pcf_test(DateTimeTest, ConstructorByTicksWith0);
-  pcf_test(DateTimeTest, ConstructorByTicksWith0AndDateTimeKindUnspecified);
-  pcf_test(DateTimeTest, ConstructorByTicksWith0AndDateTimeKindLocal);
-  pcf_test(DateTimeTest, ConstructorByTicksWith0AndDateTimeKindUtc);
-  pcf_test(DateTimeTest, ConstructorByTicksWith31241376000000000LL);
-  pcf_test(DateTimeTest, ConstructorByTicksWith504911232000000000LL);
-  //pcf_ignore_test(DateTimeTest, ConstructorByTicksWith633452274520000000LLAndKindSetToLocal);
-  pcf_test(DateTimeTest, ConstructorByTicksWith633452274520000000LLAndKindSetToUtc);
-  pcf_test(DateTimeTest, ConstructorByYearMonthDayWithValue);
-  pcf_test(DateTimeTest, ConstructorByYearMonthDayHourMinuteSecondWithValue);
-  //pcf_ignore_test(DateTimeTest, ConstructorByYearMonthDayHourMinuteSecondKindWithkindToLocalAndValueWithDayligthSet);
-  pcf_test(DateTimeTest, ConstructorByYearMonthDayHourMinuteSecondKindWithkindToUtcAndValueWithDayligthSet);
-  pcf_test(DateTimeTest, ConstructorByYearMonthDayHourMinuteSecondKindWithkindToLocalAndValueWithoutDayligthSet);
-  pcf_test(DateTimeTest, ConstructorByYearMonthDayHourMinuteSecondKindWithkindToUtcAndValueWithoutDayligthSet);
-  pcf_test(DateTimeTest, Constructor);
-  //pcf_ignore_test(DateTimeTest, Now);
+  pcf_test(DateTimeTest, MinValue)
+  pcf_test(DateTimeTest, MaxValue)
+  pcf_test(DateTimeTest, DefaultConstructor)
+  pcf_test(DateTimeTest, ConstructorByTicksWith0)
+  pcf_test(DateTimeTest, ConstructorByTicksWith0AndDateTimeKindUnspecified)
+  pcf_test(DateTimeTest, ConstructorByTicksWith0AndDateTimeKindLocal)
+  pcf_test(DateTimeTest, ConstructorByTicksWith0AndDateTimeKindUtc)
+  pcf_test(DateTimeTest, ConstructorByTicksWith31241376000000000LL)
+  pcf_test(DateTimeTest, ConstructorByTicksWith504911232000000000LL)
+  //pcf_ignore_test(DateTimeTest, ConstructorByTicksWith633452274520000000LLAndKindSetToLocal)
+  pcf_test(DateTimeTest, ConstructorByTicksWith633452274520000000LLAndKindSetToUtc)
+  pcf_test(DateTimeTest, ConstructorByYearMonthDayWithValue)
+  pcf_test(DateTimeTest, ConstructorByYearMonthDayHourMinuteSecondWithValue)
+  //pcf_ignore_test(DateTimeTest, ConstructorByYearMonthDayHourMinuteSecondKindWithkindToLocalAndValueWithDayligthSet)
+  pcf_test(DateTimeTest, ConstructorByYearMonthDayHourMinuteSecondKindWithkindToUtcAndValueWithDayligthSet)
+  pcf_test(DateTimeTest, ConstructorByYearMonthDayHourMinuteSecondKindWithkindToLocalAndValueWithoutDayligthSet)
+  pcf_test(DateTimeTest, ConstructorByYearMonthDayHourMinuteSecondKindWithkindToUtcAndValueWithoutDayligthSet)
+  pcf_test(DateTimeTest, Constructor)
+  //pcf_ignore_test(DateTimeTest, Now)
 }

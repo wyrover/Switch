@@ -159,26 +159,26 @@ namespace PcfUnitTests {
     }
   };
   
-  pcf_test(EventTest, CreateEventWithoutName);
-  pcf_test(EventTest, CreateEventWitName);
-  pcf_test(EventTest, CreateEventWithDifferentName);
-  pcf_test(EventTest, CreateEventWithSameName);
-  pcf_test(EventTest, CreateEventWithFalseInitialState);
-  pcf_test(EventTest, CreateEventWithTrueInitialState);
-  pcf_test(EventTest, CloseEventWithoutName);
-  pcf_test(EventTest, CloseEventWithName);
-  pcf_test(EventTest, CloseEventWithDifferentName);
-  pcf_test(EventTest, CloseEventWithSameName);
-  pcf_test(EventTest, SetEvent);
-  pcf_test(EventTest, ResetEvent);
-  pcf_test(EventTest, WaitManualResetEvent);
-  pcf_test(EventTest, WaitManualResetEventAfterSet);
-  pcf_test(EventTest, WaitAutoResetEvent);
-  pcf_test(EventTest, WaitAutoResetEventAfterSet);
-  pcf_test(EventTest, WaitManualResetEventAfterReseSet);
-  pcf_test(EventTest, WaitAutoResetEventAfterReseSet);
-  pcf_test(EventTest, OpenExistingWithoutCreatingEventBebore);
-  pcf_test(EventTest, OpenExistingWithCreatingAnotherEventBebore);
-  pcf_test(EventTest, OpenExistingWithCreatingEventBebore);
-  pcf_test(EventTest, DoubleAutoResesetEvent);
+  pcf_test(EventTest, CreateEventWithoutName)
+  pcf_test(EventTest, CreateEventWitName)
+  pcf_test(EventTest, CreateEventWithDifferentName)
+  pcf_test(EventTest, CreateEventWithSameName)
+  pcf_test(EventTest, CreateEventWithFalseInitialState)
+  pcf_test(EventTest, CreateEventWithTrueInitialState)
+  pcf_test(EventTest, CloseEventWithoutName)
+  pcf_test(EventTest, CloseEventWithName)
+  pcf_test(EventTest, CloseEventWithDifferentName)
+  pcf_test(EventTest, CloseEventWithSameName)
+  pcf_test(EventTest, SetEvent)
+  pcf_test(EventTest, ResetEvent)
+  pcf_test(EventTest, WaitManualResetEvent)
+  pcf_test(EventTest, WaitManualResetEventAfterSet)
+  pcf_test(EventTest, WaitAutoResetEvent)
+  pcf_test(EventTest, WaitAutoResetEventAfterSet)
+  pcf_test(EventTest, WaitManualResetEventAfterReseSet)
+  pcf_test(EventTest, WaitAutoResetEventAfterReseSet)
+  pcf_test(EventTest, OpenExistingWithoutCreatingEventBebore)
+  pcf_test(EventTest, OpenExistingWithCreatingAnotherEventBebore)
+  pcf_test(EventTest, OpenExistingWithCreatingEventBebore)
+  pcf_test(EventTest, DoubleAutoResesetEvent)
 }

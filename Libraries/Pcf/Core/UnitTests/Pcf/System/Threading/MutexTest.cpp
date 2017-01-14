@@ -131,21 +131,21 @@ namespace PcfUnitTests {
     }
   };
   
-  pcf_test(MutexTest, CreateMutex);
-  pcf_test(MutexTest, CreateTwoMutex);
-  pcf_test(MutexTest, CreateMutexByCopy);
-  pcf_test(MutexTest, CreateMutexAndCopy);
-  pcf_test(MutexTest, CreateMutexWithInitiallyOwnedToFalse);
-  pcf_test(MutexTest, CreateMutexWithInitiallyOwnedToTrue);
-  pcf_test(MutexTest, CreateMutexWithSameName);
-  pcf_test(MutexTest, CreateMutexWithSameNameAndCreatedNew);
-  pcf_test(MutexTest, CreateMutexWithDifferentName);
-  pcf_test(MutexTest, CreateMutexWithDifferentNameAndCreatedNew);
-  pcf_test(MutexTest, Close);
-  pcf_test(MutexTest, OpenExistingWithSameName);
-  pcf_test(MutexTest, OpenExistingWithDifferentName);
-  pcf_test(MutexTest, TryOpenExistingWithSameName);
-  pcf_test(MutexTest, TryOpenExistingWithDifferentName);
-  pcf_test(MutexTest, WaitAndRealese);
-  pcf_test(MutexTest, MulitpleWaitAndRealese);
+  pcf_test(MutexTest, CreateMutex)
+  pcf_test(MutexTest, CreateTwoMutex)
+  pcf_test(MutexTest, CreateMutexByCopy)
+  pcf_test(MutexTest, CreateMutexAndCopy)
+  pcf_test(MutexTest, CreateMutexWithInitiallyOwnedToFalse)
+  pcf_test(MutexTest, CreateMutexWithInitiallyOwnedToTrue)
+  pcf_test(MutexTest, CreateMutexWithSameName)
+  pcf_test(MutexTest, CreateMutexWithSameNameAndCreatedNew)
+  pcf_test(MutexTest, CreateMutexWithDifferentName)
+  pcf_test(MutexTest, CreateMutexWithDifferentNameAndCreatedNew)
+  pcf_test(MutexTest, Close)
+  pcf_test(MutexTest, OpenExistingWithSameName)
+  pcf_test(MutexTest, OpenExistingWithDifferentName)
+  pcf_test(MutexTest, TryOpenExistingWithSameName)
+  pcf_test(MutexTest, TryOpenExistingWithDifferentName)
+  pcf_test(MutexTest, WaitAndRealese)
+  pcf_test(MutexTest, MulitpleWaitAndRealese)
 }

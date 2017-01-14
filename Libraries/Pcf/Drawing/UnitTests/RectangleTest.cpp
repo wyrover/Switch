@@ -150,20 +150,20 @@ namespace PcfUnitTests {
     }
   };
   
-  pcf_test(RectangleTest, Empty);
-  pcf_test(RectangleTest, CreateEmpty);
-  pcf_test(RectangleTest, CreateRectangleFromXYWidthHeight);
-  pcf_test(RectangleTest, CreateRectangleFromEmptyRectangle);
-  pcf_test(RectangleTest, CreateRectangleFromRectangle);
-  pcf_test(RectangleTest, CreateRectangleFromEmptyPointAndEmtpySize);
-  pcf_test(RectangleTest, CreateRectangleFromPointAndSize);
-  pcf_test(RectangleTest, EmptyRectangleIsEmpty);
-  pcf_test(RectangleTest, RectangleIsEmpty);
-  pcf_test(RectangleTest, EmptyRectangleToString);
-  pcf_test(RectangleTest, RectangleToString);
-  pcf_test(RectangleTest, FromLTRB);
-  pcf_test(RectangleTest, GetLeftTopRightBottom);
-  pcf_test(RectangleTest, RectangleInflateFromXY);
-  pcf_test(RectangleTest, RectangleInflateFromSize);
-  pcf_test(RectangleTest, Intersect);
+  pcf_test(RectangleTest, Empty)
+  pcf_test(RectangleTest, CreateEmpty)
+  pcf_test(RectangleTest, CreateRectangleFromXYWidthHeight)
+  pcf_test(RectangleTest, CreateRectangleFromEmptyRectangle)
+  pcf_test(RectangleTest, CreateRectangleFromRectangle)
+  pcf_test(RectangleTest, CreateRectangleFromEmptyPointAndEmtpySize)
+  pcf_test(RectangleTest, CreateRectangleFromPointAndSize)
+  pcf_test(RectangleTest, EmptyRectangleIsEmpty)
+  pcf_test(RectangleTest, RectangleIsEmpty)
+  pcf_test(RectangleTest, EmptyRectangleToString)
+  pcf_test(RectangleTest, RectangleToString)
+  pcf_test(RectangleTest, FromLTRB)
+  pcf_test(RectangleTest, GetLeftTopRightBottom)
+  pcf_test(RectangleTest, RectangleInflateFromXY)
+  pcf_test(RectangleTest, RectangleInflateFromSize)
+  pcf_test(RectangleTest, Intersect)
 }

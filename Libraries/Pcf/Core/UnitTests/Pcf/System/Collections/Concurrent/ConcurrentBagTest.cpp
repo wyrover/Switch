@@ -68,8 +68,8 @@ namespace PcfUnitTests {
     
   };
   
-  pcf_test(ConcurrentBagTest, Add);
-  pcf_test(ConcurrentBagTest, GetEnumerator);
-  pcf_test(ConcurrentBagTest, TryPeek);
-  pcf_test(ConcurrentBagTest, TryTake);
+  pcf_test(ConcurrentBagTest, Add)
+  pcf_test(ConcurrentBagTest, GetEnumerator)
+  pcf_test(ConcurrentBagTest, TryPeek)
+  pcf_test(ConcurrentBagTest, TryTake)
 }

@@ -39,6 +39,6 @@ namespace PcfUnitTests {
     }
   };
   
-  pcf_test(AbstractTest, CreateClassInheritedFromAnAbstract);
-  pcf_test(AbstractTest, CreateClassInheritedFromNotAnAbstract);
+  pcf_test(AbstractTest, CreateClassInheritedFromAnAbstract)
+  pcf_test(AbstractTest, CreateClassInheritedFromNotAnAbstract)
 }

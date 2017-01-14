@@ -18,5 +18,5 @@ namespace PcfUnitTests {
     }
   };
   
-  pcf_test(Cpp11Test, Auto);
+  pcf_test(Cpp11Test, Auto)
 }

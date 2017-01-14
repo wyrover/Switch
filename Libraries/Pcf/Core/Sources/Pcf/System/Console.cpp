@@ -74,7 +74,7 @@ namespace {
   System::IO::TextReader* in = &sin;
   System::IO::TextWriter* error = &serror;
   System::IO::TextWriter* out = &sout;
-};
+}
 
 Property<ConsoleColor> Console::BackgroundColor {
   []()->ConsoleColor {return static_cast<ConsoleColor>(__OS::CoreApi::Console::GetBackgroundColor());},

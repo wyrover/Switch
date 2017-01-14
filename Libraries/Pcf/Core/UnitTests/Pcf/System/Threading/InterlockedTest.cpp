@@ -182,29 +182,29 @@ namespace PcfUnitTests {
     }
   };
   
-  pcf_test(InterlockedTest, AddInt32);
-  pcf_test(InterlockedTest, AddInt64);
-  pcf_test(InterlockedTest, CompareExchangeDoubleIfComparandEqual);
-  pcf_test(InterlockedTest, CompareExchangeDoubleIfComparandDifferent);
-  pcf_test(InterlockedTest, CompareExchangeInt32IfComparandEqual);
-  pcf_test(InterlockedTest, CompareExchangeInt32IfComparandDifferent);
-  pcf_test(InterlockedTest, CompareExchangeInt64IfComparandEqual);
-  pcf_test(InterlockedTest, CompareExchangeInt64IfComparandDifferent);
-  pcf_test(InterlockedTest, CompareExchangeIntPtrIfComparandEqual);
-  pcf_test(InterlockedTest, CompareExchangeIntPtrIfComparandDifferent);
-  pcf_test(InterlockedTest, CompareExchangeVoidPointerIfComparandEqual);
-  pcf_test(InterlockedTest, CompareExchangeVoidPointerIfComparandDifferent);
-  pcf_test(InterlockedTest, CompareExchangeSingleIfComparandEqual);
-  pcf_test(InterlockedTest, CompareExchangeSingleIfComparandDifferent);
-  pcf_test(InterlockedTest, CompareExchangeTemplateIfComparandEqual);
-  pcf_test(InterlockedTest, CompareExchangeTemplateIfComparandDifferent);
-  pcf_test(InterlockedTest, DecrementInt32);
-  pcf_test(InterlockedTest, DecrementInt64);
-  pcf_test(InterlockedTest, ExchangeDouble);
-  pcf_test(InterlockedTest, ExchangeInt32);
-  pcf_test(InterlockedTest, ExchangeInt64);
-  pcf_test(InterlockedTest, ExchangeIntPtr);
-  pcf_test(InterlockedTest, ExchangeVoidPointer);
-  pcf_test(InterlockedTest, ExchangeSingle);
-  pcf_test(InterlockedTest, ExchangeTemplate);
+  pcf_test(InterlockedTest, AddInt32)
+  pcf_test(InterlockedTest, AddInt64)
+  pcf_test(InterlockedTest, CompareExchangeDoubleIfComparandEqual)
+  pcf_test(InterlockedTest, CompareExchangeDoubleIfComparandDifferent)
+  pcf_test(InterlockedTest, CompareExchangeInt32IfComparandEqual)
+  pcf_test(InterlockedTest, CompareExchangeInt32IfComparandDifferent)
+  pcf_test(InterlockedTest, CompareExchangeInt64IfComparandEqual)
+  pcf_test(InterlockedTest, CompareExchangeInt64IfComparandDifferent)
+  pcf_test(InterlockedTest, CompareExchangeIntPtrIfComparandEqual)
+  pcf_test(InterlockedTest, CompareExchangeIntPtrIfComparandDifferent)
+  pcf_test(InterlockedTest, CompareExchangeVoidPointerIfComparandEqual)
+  pcf_test(InterlockedTest, CompareExchangeVoidPointerIfComparandDifferent)
+  pcf_test(InterlockedTest, CompareExchangeSingleIfComparandEqual)
+  pcf_test(InterlockedTest, CompareExchangeSingleIfComparandDifferent)
+  pcf_test(InterlockedTest, CompareExchangeTemplateIfComparandEqual)
+  pcf_test(InterlockedTest, CompareExchangeTemplateIfComparandDifferent)
+  pcf_test(InterlockedTest, DecrementInt32)
+  pcf_test(InterlockedTest, DecrementInt64)
+  pcf_test(InterlockedTest, ExchangeDouble)
+  pcf_test(InterlockedTest, ExchangeInt32)
+  pcf_test(InterlockedTest, ExchangeInt64)
+  pcf_test(InterlockedTest, ExchangeIntPtr)
+  pcf_test(InterlockedTest, ExchangeVoidPointer)
+  pcf_test(InterlockedTest, ExchangeSingle)
+  pcf_test(InterlockedTest, ExchangeTemplate)
 }

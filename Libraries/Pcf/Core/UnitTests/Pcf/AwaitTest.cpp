@@ -42,7 +42,7 @@ namespace PcfUnitTests {
     }
   };
   
-  pcf_test(AwaitTest, RunningAsyncTaskAndAwait);
-  pcf_test(AwaitTest, RunningAsyncTaskInt32AndAwait);
-  pcf_test(AwaitTest, RunningAsyncTaskStringAndAwait);
+  pcf_test(AwaitTest, RunningAsyncTaskAndAwait)
+  pcf_test(AwaitTest, RunningAsyncTaskInt32AndAwait)
+  pcf_test(AwaitTest, RunningAsyncTaskStringAndAwait)
 }

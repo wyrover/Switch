@@ -27,5 +27,5 @@ namespace PcfUnitTests {
     }
   };
   
-  pcf_test(SocketTest, CatchExecptionWithTimeoutSocketErrorOnReceive);
+  pcf_test(SocketTest, CatchExecptionWithTimeoutSocketErrorOnReceive)
 }

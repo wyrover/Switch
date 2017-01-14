@@ -143,30 +143,30 @@ namespace PcfUnitTests {
     }
   };
   
-  pcf_test(ObjectTest, EqualsWithAnotherObject);
-  pcf_test(ObjectTest, EqualsWithSameObject);
-  pcf_test(ObjectTest, EqualsWithNullObject);
-  pcf_test(ObjectTest, EqualsOnDifferentObjects);
-  pcf_test(ObjectTest, EqualsOnSameObjects);
-  pcf_test(ObjectTest, EqualsDifferentStrings);
-  pcf_test(ObjectTest, EqualsSameStrings);
-  pcf_test(ObjectTest, EqualityOperatorToAnotherObject);
-  pcf_test(ObjectTest, EqualityOperatorTheSameObject);
-  pcf_test(ObjectTest, EqualityOperatorDifferentStrings);
-  pcf_test(ObjectTest, EqualityOperatorSameStrings);
-  pcf_test(ObjectTest, InequalityOperatorToAnotherObject);
-  pcf_test(ObjectTest, InequalityOperatorTheSameObject);
-  pcf_test(ObjectTest, InequalityOperatorDifferentStrings);
-  pcf_test(ObjectTest, InequalityOperatorSameStrings);
-  pcf_test(ObjectTest, GetTypeOnObject);
-  pcf_test(ObjectTest, GetTypeOnString);
-  pcf_test(ObjectTest, MemberwiseCloneOnString);
-  pcf_test(ObjectTest, MemberwiseCloneOnStringAsString);
-  pcf_test(ObjectTest, ReferenceEqualsOnDifferentObjects);
-  pcf_test(ObjectTest, ReferenceEqualsOnSameObjects);
-  pcf_test(ObjectTest, ReferenceEqualsOnNullAndObject);
-  pcf_test(ObjectTest, ReferenceEqualsOnTwoDifferentObjects);
-  pcf_test(ObjectTest, ObjectToString);
-  pcf_test(ObjectTest, ObjectStringToString);
-  pcf_test(ObjectTest, ObjectInt32ToString);
+  pcf_test(ObjectTest, EqualsWithAnotherObject)
+  pcf_test(ObjectTest, EqualsWithSameObject)
+  pcf_test(ObjectTest, EqualsWithNullObject)
+  pcf_test(ObjectTest, EqualsOnDifferentObjects)
+  pcf_test(ObjectTest, EqualsOnSameObjects)
+  pcf_test(ObjectTest, EqualsDifferentStrings)
+  pcf_test(ObjectTest, EqualsSameStrings)
+  pcf_test(ObjectTest, EqualityOperatorToAnotherObject)
+  pcf_test(ObjectTest, EqualityOperatorTheSameObject)
+  pcf_test(ObjectTest, EqualityOperatorDifferentStrings)
+  pcf_test(ObjectTest, EqualityOperatorSameStrings)
+  pcf_test(ObjectTest, InequalityOperatorToAnotherObject)
+  pcf_test(ObjectTest, InequalityOperatorTheSameObject)
+  pcf_test(ObjectTest, InequalityOperatorDifferentStrings)
+  pcf_test(ObjectTest, InequalityOperatorSameStrings)
+  pcf_test(ObjectTest, GetTypeOnObject)
+  pcf_test(ObjectTest, GetTypeOnString)
+  pcf_test(ObjectTest, MemberwiseCloneOnString)
+  pcf_test(ObjectTest, MemberwiseCloneOnStringAsString)
+  pcf_test(ObjectTest, ReferenceEqualsOnDifferentObjects)
+  pcf_test(ObjectTest, ReferenceEqualsOnSameObjects)
+  pcf_test(ObjectTest, ReferenceEqualsOnNullAndObject)
+  pcf_test(ObjectTest, ReferenceEqualsOnTwoDifferentObjects)
+  pcf_test(ObjectTest, ObjectToString)
+  pcf_test(ObjectTest, ObjectStringToString)
+  pcf_test(ObjectTest, ObjectInt32ToString)
 }

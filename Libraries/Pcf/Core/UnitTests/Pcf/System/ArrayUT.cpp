@@ -98,11 +98,11 @@ namespace PcfUnitTests {
     
   };
   
-  pcf_test(ArrayTest, ConstructorEmpty);
-  pcf_test(ArrayTest, Length);
-  pcf_test(ArrayTest, AccessExceptions);
-  pcf_test(ArrayTest, ConstructorFromNative);
-  pcf_test(ArrayTest, ConstructorFromInitializerList);
+  pcf_test(ArrayTest, ConstructorEmpty)
+  pcf_test(ArrayTest, Length)
+  pcf_test(ArrayTest, AccessExceptions)
+  pcf_test(ArrayTest, ConstructorFromNative)
+  pcf_test(ArrayTest, ConstructorFromInitializerList)
   
   
   class MyType : public System::Object {

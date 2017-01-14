@@ -18,7 +18,7 @@ void SecureString::AppendChar(char32 c) {
 void SecureString::Clear() {
   if (this->readOnly)
     throw InvalidOperationException(pcf_current_information);
-  for (auto c : this->data)
+  for (auto& c : this->data)
     c = 0;
   this->data.Clear();
 }

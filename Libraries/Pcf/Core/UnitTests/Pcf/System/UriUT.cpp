@@ -46,15 +46,15 @@ namespace {
 
   };
 
-  pcf_test(UriTest, ConstructorWithAbsoluteUri);
-  pcf_test(UriTest, ConstructorWithAbsoluteUriAndUriKindRelativeOrAbsoluteSpecified);
-  pcf_test(UriTest, ConstructorWithAbsoluteUriAndUriKindAbsoluteSpecified);
-  pcf_test(UriTest, ConstructorWithAbsoluteUriAndUriKindRelativeSpecified);
-  pcf_test(UriTest, ConstructorWithRelativeUri);
-  pcf_test(UriTest, ConstructorWithRelativeUriAndUriKindRelativeOrAbsoluteSpecified);
-  pcf_test(UriTest, ConstructorWithRelativeUriAndUriKindAbsoluteSpecified);
-  pcf_test(UriTest, ConstructorWithRelativeUriAndUriKindRelativeSpecified);
-  pcf_test(UriTest, ConstructorWithInvalidUri);
+  pcf_test(UriTest, ConstructorWithAbsoluteUri)
+  pcf_test(UriTest, ConstructorWithAbsoluteUriAndUriKindRelativeOrAbsoluteSpecified)
+  pcf_test(UriTest, ConstructorWithAbsoluteUriAndUriKindAbsoluteSpecified)
+  pcf_test(UriTest, ConstructorWithAbsoluteUriAndUriKindRelativeSpecified)
+  pcf_test(UriTest, ConstructorWithRelativeUri)
+  pcf_test(UriTest, ConstructorWithRelativeUriAndUriKindRelativeOrAbsoluteSpecified)
+  pcf_test(UriTest, ConstructorWithRelativeUriAndUriKindAbsoluteSpecified)
+  pcf_test(UriTest, ConstructorWithRelativeUriAndUriKindRelativeSpecified)
+  pcf_test(UriTest, ConstructorWithInvalidUri)
 
   TEST(Uri, Constructor) {
     ASSERT_TRUE(Uri("http://www.contoso.com").IsAbsoluteUri());

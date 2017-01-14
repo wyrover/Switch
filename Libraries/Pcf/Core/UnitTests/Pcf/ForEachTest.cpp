@@ -297,17 +297,17 @@ namespace PcfUnitTests {
     }
   };
   
-  pcf_test(ForeachTest, Vector);
-  pcf_test(ForeachTest, List);
-  pcf_test(ForeachTest, LinkedList);
-  pcf_test(ForeachTest, HashSet);
-  pcf_test(ForeachTest, SortedSet);
-  pcf_test(ForeachTest, SortedDictionary);
-  pcf_test(ForeachTest, ListT);
-  pcf_test(ForeachTest, Array);
-  pcf_test(ForeachTest, Array2);
-  pcf_test(ForeachTest, Dictionary);
-  pcf_test(ForeachTest, Dictionary2);
-  pcf_test(ForeachTest, String);
-  pcf_test(ForeachTest, NativeArray);
+  pcf_test(ForeachTest, Vector)
+  pcf_test(ForeachTest, List)
+  pcf_test(ForeachTest, LinkedList)
+  pcf_test(ForeachTest, HashSet)
+  pcf_test(ForeachTest, SortedSet)
+  pcf_test(ForeachTest, SortedDictionary)
+  pcf_test(ForeachTest, ListT)
+  pcf_test(ForeachTest, Array)
+  pcf_test(ForeachTest, Array2)
+  pcf_test(ForeachTest, Dictionary)
+  pcf_test(ForeachTest, Dictionary2)
+  pcf_test(ForeachTest, String)
+  pcf_test(ForeachTest, NativeArray)
 }

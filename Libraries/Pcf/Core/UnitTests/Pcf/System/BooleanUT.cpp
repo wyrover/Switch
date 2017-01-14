@@ -118,32 +118,32 @@ namespace PcfUnitTests {
     
   };
   
-  pcf_test(BooleanTest, ConstructorDefault);
-  pcf_test(BooleanTest, ConstructorWithFalse);
-  pcf_test(BooleanTest, ConstructorWithTrue);
-  pcf_test(BooleanTest, ConstructorWith0);
-  pcf_test(BooleanTest, ConstructorWith1);
-  pcf_test(BooleanTest, ConstructorWithBooleanFalse);
-  pcf_test(BooleanTest, ConstructorWithBooleanTrue);
-  pcf_test(BooleanTest, ConstructorByCopyWithBooleanFalse);
-  pcf_test(BooleanTest, ConstructorByCopyWithBooleanTrue);
-  pcf_test(BooleanTest, ParseBooleanFalseString);
-  pcf_test(BooleanTest, ParseBooleanTrueString);
-  pcf_test(BooleanTest, ParseFalseString);
-  pcf_test(BooleanTest, ParseTrueString);
-  pcf_test(BooleanTest, ParseTrailedWithSpaceFalseString);
-  pcf_test(BooleanTest, ParseTrailedWithSpaceTrueString);
-  pcf_test(BooleanTest, ParsePrecededWithSpaceFalseString);
-  pcf_test(BooleanTest, ParsePrecededWithSpaceTrueString);
-  pcf_test(BooleanTest, ParseLowerCaseFalseString);
-  pcf_test(BooleanTest, ParseLowerCaseTrueString);
-  pcf_test(BooleanTest, ParseUpperCaseFalseString);
-  pcf_test(BooleanTest, ParseUpperCaseTrueString);
-  pcf_test(BooleanTest, ParseAnyCaseFalseString);
-  pcf_test(BooleanTest, ParseAnyCaseTrueString);
-  pcf_test(BooleanTest, ParseBadFormatFalseString);
-  pcf_test(BooleanTest, ParseABadFormatTrueString);
-  pcf_test(BooleanTest, ParseABadFormatString);
+  pcf_test(BooleanTest, ConstructorDefault)
+  pcf_test(BooleanTest, ConstructorWithFalse)
+  pcf_test(BooleanTest, ConstructorWithTrue)
+  pcf_test(BooleanTest, ConstructorWith0)
+  pcf_test(BooleanTest, ConstructorWith1)
+  pcf_test(BooleanTest, ConstructorWithBooleanFalse)
+  pcf_test(BooleanTest, ConstructorWithBooleanTrue)
+  pcf_test(BooleanTest, ConstructorByCopyWithBooleanFalse)
+  pcf_test(BooleanTest, ConstructorByCopyWithBooleanTrue)
+  pcf_test(BooleanTest, ParseBooleanFalseString)
+  pcf_test(BooleanTest, ParseBooleanTrueString)
+  pcf_test(BooleanTest, ParseFalseString)
+  pcf_test(BooleanTest, ParseTrueString)
+  pcf_test(BooleanTest, ParseTrailedWithSpaceFalseString)
+  pcf_test(BooleanTest, ParseTrailedWithSpaceTrueString)
+  pcf_test(BooleanTest, ParsePrecededWithSpaceFalseString)
+  pcf_test(BooleanTest, ParsePrecededWithSpaceTrueString)
+  pcf_test(BooleanTest, ParseLowerCaseFalseString)
+  pcf_test(BooleanTest, ParseLowerCaseTrueString)
+  pcf_test(BooleanTest, ParseUpperCaseFalseString)
+  pcf_test(BooleanTest, ParseUpperCaseTrueString)
+  pcf_test(BooleanTest, ParseAnyCaseFalseString)
+  pcf_test(BooleanTest, ParseAnyCaseTrueString)
+  pcf_test(BooleanTest, ParseBadFormatFalseString)
+  pcf_test(BooleanTest, ParseABadFormatTrueString)
+  pcf_test(BooleanTest, ParseABadFormatString)
   
   TEST(Boolean, TryParse) {
     bool result;

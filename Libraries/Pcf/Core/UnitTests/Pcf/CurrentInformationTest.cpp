@@ -80,18 +80,18 @@ namespace PcfUnitTests {
     }
   };
   
-  pcf_test(CurrentInformationTest, CreateAnEmptyCurrentInformationThenToString);
-  pcf_test(CurrentInformationTest, CreateAnEmptyCurrentInformationThenGetFileName);
-  pcf_test(CurrentInformationTest, CreateAnEmptyCurrentInformationThenGetFunctionName);
-  pcf_test(CurrentInformationTest, CreateAnEmptyCurrentInformationThenGetLine);
-  pcf_test(CurrentInformationTest, CreateCurrentInformationWithFileNameAndLineThenToString);
-  pcf_test(CurrentInformationTest, CreateCurrentInformationWithFileNameAndLineThenGetFileName);
-  pcf_test(CurrentInformationTest, CreateCurrentInformationWithFileNameAndLineThenGetFunctionName);
-  pcf_test(CurrentInformationTest, CreateCurrentInformationWithFileNameAndLineThenGetLine);
-  pcf_test(CurrentInformationTest, CreateCurrentInformationWithFileNameLineAndFunctionNameThenToString);
-  pcf_test(CurrentInformationTest, CreateCurrentInformationWithFileNameLineAndFunctionNameThenGetFileName);
-  pcf_test(CurrentInformationTest, CreateCurrentInformationWithFileNameLineAndFunctionNameThenGetFunctionName);
-  pcf_test(CurrentInformationTest, CreateCurrentInformationWithFileNameLineAndFunctionNameThenGetLine);
-  pcf_test(CurrentInformationTest, CreateCurrentInformationByCopyConstructorThenToString);
-  pcf_test(CurrentInformationTest, CreateCurrentInformationByCopyOperatorThenToString);
+  pcf_test(CurrentInformationTest, CreateAnEmptyCurrentInformationThenToString)
+  pcf_test(CurrentInformationTest, CreateAnEmptyCurrentInformationThenGetFileName)
+  pcf_test(CurrentInformationTest, CreateAnEmptyCurrentInformationThenGetFunctionName)
+  pcf_test(CurrentInformationTest, CreateAnEmptyCurrentInformationThenGetLine)
+  pcf_test(CurrentInformationTest, CreateCurrentInformationWithFileNameAndLineThenToString)
+  pcf_test(CurrentInformationTest, CreateCurrentInformationWithFileNameAndLineThenGetFileName)
+  pcf_test(CurrentInformationTest, CreateCurrentInformationWithFileNameAndLineThenGetFunctionName)
+  pcf_test(CurrentInformationTest, CreateCurrentInformationWithFileNameAndLineThenGetLine)
+  pcf_test(CurrentInformationTest, CreateCurrentInformationWithFileNameLineAndFunctionNameThenToString)
+  pcf_test(CurrentInformationTest, CreateCurrentInformationWithFileNameLineAndFunctionNameThenGetFileName)
+  pcf_test(CurrentInformationTest, CreateCurrentInformationWithFileNameLineAndFunctionNameThenGetFunctionName)
+  pcf_test(CurrentInformationTest, CreateCurrentInformationWithFileNameLineAndFunctionNameThenGetLine)
+  pcf_test(CurrentInformationTest, CreateCurrentInformationByCopyConstructorThenToString)
+  pcf_test(CurrentInformationTest, CreateCurrentInformationByCopyOperatorThenToString)
 }

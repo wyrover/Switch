@@ -106,27 +106,27 @@ namespace PcfUnitTests {
     }
   };
   
-  pcf_test(BoxTest, BoxingBoolean);
-  pcf_test(BoxTest, BoxingByte);
-  pcf_test(BoxTest, BoxingChar);
-  pcf_test(BoxTest, BoxingWChar);
-  pcf_test(BoxTest, BoxingChar16);
-  pcf_test(BoxTest, BoxingChar32);
-  pcf_test(BoxTest, BoxingDouble);
-  pcf_test(BoxTest, BoxingInt16);
-  pcf_test(BoxTest, BoxingInt32);
-  pcf_test(BoxTest, BoxingInt64);
-  pcf_test(BoxTest, BoxingSByte);
-  pcf_test(BoxTest, BoxingSingle);
-  pcf_test(BoxTest, BoxingString);
-  pcf_test(BoxTest, BoxingUInt16);
-  pcf_test(BoxTest, BoxingUInt32);
-  pcf_test(BoxTest, BoxingUInt64);
-  pcf_test(BoxTest, BoxingVoidPointer);
-  pcf_test(BoxTest, BoxingConstCharPointer);
-  pcf_test(BoxTest, BoxingConstWCharPointer);
-  pcf_test(BoxTest, BoxingConstChar16Pointer);
-  pcf_test(BoxTest, BoxingConstChar32Pointer);
-  pcf_test(BoxTest, BoxingAny);
-  pcf_test(BoxTest, BoxingMyStruct);
+  pcf_test(BoxTest, BoxingBoolean)
+  pcf_test(BoxTest, BoxingByte)
+  pcf_test(BoxTest, BoxingChar)
+  pcf_test(BoxTest, BoxingWChar)
+  pcf_test(BoxTest, BoxingChar16)
+  pcf_test(BoxTest, BoxingChar32)
+  pcf_test(BoxTest, BoxingDouble)
+  pcf_test(BoxTest, BoxingInt16)
+  pcf_test(BoxTest, BoxingInt32)
+  pcf_test(BoxTest, BoxingInt64)
+  pcf_test(BoxTest, BoxingSByte)
+  pcf_test(BoxTest, BoxingSingle)
+  pcf_test(BoxTest, BoxingString)
+  pcf_test(BoxTest, BoxingUInt16)
+  pcf_test(BoxTest, BoxingUInt32)
+  pcf_test(BoxTest, BoxingUInt64)
+  pcf_test(BoxTest, BoxingVoidPointer)
+  pcf_test(BoxTest, BoxingConstCharPointer)
+  pcf_test(BoxTest, BoxingConstWCharPointer)
+  pcf_test(BoxTest, BoxingConstChar16Pointer)
+  pcf_test(BoxTest, BoxingConstChar32Pointer)
+  pcf_test(BoxTest, BoxingAny)
+  pcf_test(BoxTest, BoxingMyStruct)
 }

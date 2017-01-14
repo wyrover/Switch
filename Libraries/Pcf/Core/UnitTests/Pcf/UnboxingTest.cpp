@@ -143,25 +143,25 @@ namespace PcfUnitTests {
     template<typename T> bool IsVoidPointer(T) {return false;}
   };
   
-  pcf_test(UnboxTest, UnboxingBoolean);
-  pcf_test(UnboxTest, UnboxingByte);
-  pcf_test(UnboxTest, UnboxingChar);
-  pcf_test(UnboxTest, UnboxingDouble);
-  pcf_test(UnboxTest, UnboxingInt16);
-  pcf_test(UnboxTest, UnboxingInt32);
-  pcf_test(UnboxTest, UnboxingInt64);
-  pcf_test(UnboxTest, UnboxingIntPtr);
-  pcf_test(UnboxTest, UnboxingSByte);
-  pcf_test(UnboxTest, UnboxingSingle);
-  pcf_test(UnboxTest, UnboxingString);
-  pcf_test(UnboxTest, UnboxingUInt16);
-  pcf_test(UnboxTest, UnboxingUInt32);
-  pcf_test(UnboxTest, UnboxingUInt64);
-  pcf_test(UnboxTest, UnboxingUIntPtr);
-  pcf_test(UnboxTest, UnboxingConstCharPointer);
-  pcf_test(UnboxTest, UnboxingConstWCharPointer);
-  pcf_test(UnboxTest, UnboxingConstChar16Pointer);
-  pcf_test(UnboxTest, UnboxingConstChar32Pointer);
-  pcf_test(UnboxTest, UnboxingAny);
-  pcf_test(UnboxTest, UnboxingMyStruct);
+  pcf_test(UnboxTest, UnboxingBoolean)
+  pcf_test(UnboxTest, UnboxingByte)
+  pcf_test(UnboxTest, UnboxingChar)
+  pcf_test(UnboxTest, UnboxingDouble)
+  pcf_test(UnboxTest, UnboxingInt16)
+  pcf_test(UnboxTest, UnboxingInt32)
+  pcf_test(UnboxTest, UnboxingInt64)
+  pcf_test(UnboxTest, UnboxingIntPtr)
+  pcf_test(UnboxTest, UnboxingSByte)
+  pcf_test(UnboxTest, UnboxingSingle)
+  pcf_test(UnboxTest, UnboxingString)
+  pcf_test(UnboxTest, UnboxingUInt16)
+  pcf_test(UnboxTest, UnboxingUInt32)
+  pcf_test(UnboxTest, UnboxingUInt64)
+  pcf_test(UnboxTest, UnboxingUIntPtr)
+  pcf_test(UnboxTest, UnboxingConstCharPointer)
+  pcf_test(UnboxTest, UnboxingConstWCharPointer)
+  pcf_test(UnboxTest, UnboxingConstChar16Pointer)
+  pcf_test(UnboxTest, UnboxingConstChar32Pointer)
+  pcf_test(UnboxTest, UnboxingAny)
+  pcf_test(UnboxTest, UnboxingMyStruct)
 }
