@@ -55,7 +55,7 @@ namespace {
     }
   };
   
-  pcf_test(RandomTest, Next);
-  pcf_test(RandomTest, NextWithRange0To10);
-  pcf_test(RandomTest, NextBytes);
-};
+  pcf_test(RandomTest, Next)
+  pcf_test(RandomTest, NextWithRange0To10)
+  pcf_test(RandomTest, NextBytes)
+}
