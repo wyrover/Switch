@@ -109,6 +109,7 @@ namespace Pcf {
   /// System::Type type = i.GetType();
   /// @endcode
   /// @remarks The pcf_typeof operator cannot be overloaded.
+  /// @ingroup Pcf
   template<typename T>
   System::Type pcf_typeof() {
     return System::Type(typeid(T));
@@ -126,10 +127,20 @@ namespace Pcf {
   /// @endcode
   /// @remarks The pcf_typeof operator cannot be overloaded.
   /// @see System::Type
+  /// @ingroup Pcf
   template<typename T>
   System::Type pcf_typeof(const T& value) {
     return System::Type(typeid(value));
   }
+  
+#if __APPLE__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wkeyword-macro"
+#define typeof pcf_typeof
+#pragma clang diagnostic pop
+#else
+  using typeof = pcf_typeof;
+#endif
 }
 
 using namespace Pcf;

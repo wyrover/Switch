@@ -1,13 +1,13 @@
+#include <Pcf/System/IO/File.h>
+#include "../../../../Includes/Pcf/System/Drawing/Image.h"
+
 #include <csetjmp>
 #include <cstdio>
 
-#include <zlib.h> // Must be include first because Byte definition is ambigous...
-extern "C" {
-#include <jpeglib.h> // Must be include second because boolean definition is ambigous...
-}
-
-#include <Pcf/System/IO/File.h>
-#include "../../../../Includes/Pcf/System/Drawing/Image.h"
+#include <zlib.h>
+#define HAVE_BOOLEAN  // Must be define because boolean definition is ambigous...
+#include <jpeglib.h>
+#undef HAVE_BOOLEAN
 
 #include "Bmp.h"
 #include "Gif.h"

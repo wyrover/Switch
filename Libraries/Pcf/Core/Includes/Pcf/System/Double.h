@@ -22,7 +22,7 @@ namespace Pcf {
     }
     /// @endcond
     /// @brief Represents a double-precision floating-point number.
-    struct pcf_public Double : public ValueType, public IComparable, public IConvertible, public IFormattable {
+    struct pcf_public Double final : public ValueType, public IComparable, public IConvertible, public IFormattable {
     public:
       /// @brief Represents the smallest positive Double value greater than zero. This field is constant.
       static Property<double, ReadOnly> Epsilon;

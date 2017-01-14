@@ -1,14 +1,11 @@
 #include <Pcf/Pcf>
 
 using namespace System;
-using namespace System::Diagnostics;
-using namespace System::Net;
-using namespace System::Threading;
 
 namespace Examples {
   class Program {
   public:
-    static void Main(const Array<string>& args) {
+    static void Main() {
       Console::WriteLine("Hello, World!");
     }
   };

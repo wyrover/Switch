@@ -612,6 +612,7 @@ namespace Pcf {
   /// @remarks For more information see also  http://stlplus.sourceforge.net/stlplus3/docs/smart_ptr.html
   /// This example show how to used SharedPointer :
   /// @include SharedPointer.cpp
+  /// @ingroup Pcf
   template<typename T>
   using sp = SharedPointer<T>;
 }

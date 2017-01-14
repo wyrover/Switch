@@ -22,7 +22,7 @@ namespace Pcf {
     /// @endcond
 
     /// @brief Represents a 32-bit signed integer.
-    struct pcf_public Int32 : public ValueType, public IComparable, public IConvertible, public IFormattable {
+    struct pcf_public Int32 final : public ValueType, public IComparable, public IConvertible, public IFormattable {
     public:
       /// @brief Represents the largest possible value of an Int32 2147483647 (0x7FFFFFFF). This field is constant.
       static Property<int32, ReadOnly> MaxValue;

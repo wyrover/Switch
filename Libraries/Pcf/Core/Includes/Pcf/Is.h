@@ -13,6 +13,7 @@ namespace Pcf {
   /// bool isInt32 = is<System::Int32>(i);
   /// @endcode
   /// @see Pcf::System::Type
+  /// @ingroup Pcf
   template<typename TT, typename T>
   bool is(const Reference<T>& value) {
     return value.template Is<TT>();
@@ -24,6 +25,7 @@ namespace Pcf {
   /// bool isInt32 = is<System::Int32>(i);
   /// @endcode
   /// @see Pcf::System::Type
+  /// @ingroup Pcf
   template<typename TT, typename T>
   bool is(Reference<T>& value) {
     return value.template Is<TT>();
@@ -35,6 +37,7 @@ namespace Pcf {
   /// bool isInt32 = is<System::Int32>(i);
   /// @endcode
   /// @see Pcf::System::Type
+  /// @ingroup Pcf
   template<typename TT, typename T>
   bool is(const SharedPointer<T>& value) {
     return value.template Is<TT>();
@@ -46,6 +49,7 @@ namespace Pcf {
   /// bool isInt32 = is<System::Int32>(i);
   /// @endcode
   /// @see Pcf::System::Type
+  /// @ingroup Pcf
   template<typename TT, typename T>
   bool is(SharedPointer<T>& value) {
     return value.template Is<TT>();
@@ -57,6 +61,7 @@ namespace Pcf {
   /// bool isInt32 = is<System::Int32>(i);
   /// @endcode
   /// @see Pcf::System::Type
+  /// @ingroup Pcf
   template<typename TT, typename T>
   bool is(UniquePointer<T>& value) {
     return value.template Is<TT>();
@@ -68,6 +73,7 @@ namespace Pcf {
   /// bool isInt32 = is<System::Int32>(i);
   /// @endcode
   /// @see Pcf::System::Type
+  /// @ingroup Pcf
   template<typename TT, typename T>
   bool is(const T& value) {
     try {
@@ -83,6 +89,7 @@ namespace Pcf {
   /// bool isInt32 = is<System::Int32>(i);
   /// @endcode
   /// @see Pcf::System::Type
+  /// @ingroup Pcf
   template<typename TT, typename T>
   bool is(T& value) {
     try {
@@ -98,6 +105,7 @@ namespace Pcf {
   /// bool isInt32 = is<System::Int32>(i);
   /// @endcode
   /// @see Pcf::System::Type
+  /// @ingroup Pcf
   template<typename TT, typename T>
   bool is(const T* value) {
     try {

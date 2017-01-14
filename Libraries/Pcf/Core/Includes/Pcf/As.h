@@ -17,6 +17,7 @@ namespace Pcf {
   /// SharedPointer<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
   /// @endcode
   /// @exception ArgumentNullException The parameters is null.
+  /// @ingroup Pcf
   template<typename TT, typename T>
   Reference<TT> as(const Reference<T>& value) {
     return value.template As<TT>();
@@ -28,6 +29,7 @@ namespace Pcf {
   /// SharedPointer<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
   /// @endcode
   /// @exception ArgumentNullException The parameters is null.
+  /// @ingroup Pcf
   template<typename TT, typename T>
   Reference<TT> as(Reference<T>& value) {
     return value.template As<TT>();
@@ -39,6 +41,7 @@ namespace Pcf {
   /// SharedPointer<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
   /// @endcode
   /// @exception ArgumentNullException The parameters is null.
+  /// @ingroup Pcf
   template<typename TT, typename T>
   SharedPointer<TT> as(const SharedPointer<T>& value) {
     return value.template As<TT>();
@@ -50,6 +53,7 @@ namespace Pcf {
   /// SharedPointer<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
   /// @endcode
   /// @exception ArgumentNullException The parameters is null.
+  /// @ingroup Pcf
   template<typename TT, typename T>
   SharedPointer<TT> as(SharedPointer<T>& value) {
     return value.template As<TT>();
@@ -61,6 +65,7 @@ namespace Pcf {
   /// SharedPointer<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
   /// @endcode
   /// @exception ArgumentNullException The parameters is null.
+  /// @ingroup Pcf
   template<typename TT, typename T>
   UniquePointer<TT> as(UniquePointer<T>& value) {
     return value.template As<TT>();
@@ -72,6 +77,7 @@ namespace Pcf {
   /// SharedPointer<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
   /// @endcode
   /// @exception ArgumentNullException The parameters is null.
+  /// @ingroup Pcf
   template<typename TT, typename T>
   UniquePointer<TT> as(UniquePointer<T>&& value) {
     return value.template As<TT>();
@@ -83,6 +89,7 @@ namespace Pcf {
   /// SharedPointer<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
   /// @endcode
   /// @exception ArgumentNullException The parameters is null.
+  /// @ingroup Pcf
   template<typename TT, typename T>
   const TT& as(const T& value) {
     try {
@@ -99,6 +106,7 @@ namespace Pcf {
   /// SharedPointer<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
   /// @endcode
   /// @exception ArgumentNullException The parameters is null.
+  /// @ingroup Pcf
   template<typename TT, typename T>
   TT& as(T& value) {
     try {
@@ -115,6 +123,7 @@ namespace Pcf {
   /// SharedPointer<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
   /// @endcode
   /// @exception ArgumentNullException The parameters is null.
+  /// @ingroup Pcf
   template<typename TT, typename T>
   const TT* as(const T* value) {
     if (value == null)
@@ -128,6 +137,7 @@ namespace Pcf {
   /// SharedPointer<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
   /// @endcode
   /// @exception ArgumentNullException The parameters is null.
+  /// @ingroup Pcf
   template<typename TT, typename T>
   TT* as(T* value) {
     if (value == null)
