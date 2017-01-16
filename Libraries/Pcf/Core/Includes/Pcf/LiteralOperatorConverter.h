@@ -34,7 +34,7 @@ namespace Pcf {
   /// @code
   /// System::Console::WriteLine(u'a'_C);
   /// @endcode
-  inline char32 operator""_c(char16_t c) {return c;}
+  inline char32 operator""_c(char16 c) {return c;}
   
   /// @brief Used to convert specified value into char32:
   /// @code
@@ -46,7 +46,7 @@ namespace Pcf {
   /// @code
   /// System::Console::WriteLine(L'a'_c);
   /// @endcode
-  inline char32 operator""_c(wchar_t c) {return c;}
+  inline char32 operator""_c(wchar c) {return c;}
   
   /// @brief Used to convert specified value into char32:
   /// @code
@@ -244,7 +244,7 @@ namespace Pcf {
   /// @code
   /// System::Console::WriteLine(u'a'_C);
   /// @endcode
-  inline System::Char operator""_C(char16_t c) {return System::Char(c);}
+  inline System::Char operator""_C(char16 c) {return System::Char(c);}
   
   /// @brief Used to convert specified value into System::Char:
   /// @code
@@ -256,7 +256,7 @@ namespace Pcf {
   /// @code
   /// System::Console::WriteLine(L'a'_C);
   /// @endcode
-  inline System::Char operator""_C(wchar_t c) {return System::Char(c);}
+  inline System::Char operator""_C(wchar c) {return System::Char(c);}
   
   /// @brief Used to convert specified value into System::Char:
   /// @code
@@ -294,7 +294,7 @@ namespace Pcf {
   /// Pcf::string s = u"This is a "_S + "simple test"_S;
   /// System::Console::WriteLine(s);
   /// @endcode
-  inline System::String operator""_s(const char16_t* s, size_t) {return System::String(s);}
+  inline System::String operator""_s(const char16* s, size_t) {return System::String(s);}
   
   /// @brief Used to convert specified value into System::String:
   /// @code
@@ -308,7 +308,7 @@ namespace Pcf {
   /// Pcf::string s = L"This is a "_S + "simple test"_S;
   /// System::Console::WriteLine(s);
   /// @endcode
-  inline System::String operator""_s(const wchar_t* s, size_t) {return System::String(s);}
+  inline System::String operator""_s(const wchar* s, size_t) {return System::String(s);}
 
   /// @brief Used to convert specified value into System::String:
   /// @code
@@ -322,7 +322,7 @@ namespace Pcf {
   /// Pcf::string s = u"This is a "_S + "simple test"_S;
   /// System::Console::WriteLine(s);
   /// @endcode
-  inline System::String operator""_S(const char16_t* s, size_t) {return System::String(s);}
+  inline System::String operator""_S(const char16* s, size_t) {return System::String(s);}
   
   /// @brief Used to convert specified value into System::String:
   /// @code
@@ -336,7 +336,7 @@ namespace Pcf {
   /// Pcf::string s = L"This is a "_S + "simple test"_S;
   /// System::Console::WriteLine(s);
   /// @endcode
-  inline System::String operator""_S(const wchar_t* s, size_t) {return System::String(s);}
+  inline System::String operator""_S(const wchar* s, size_t) {return System::String(s);}
   
   /// @brief Used to convert specified value into System::Int16:
   /// @code

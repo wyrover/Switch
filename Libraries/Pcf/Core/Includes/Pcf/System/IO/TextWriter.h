@@ -213,7 +213,7 @@ namespace Pcf {
 
         /// @cond
         void WriteLine(const char* value) {this->WriteLine(String(value));}
-        void WriteLine(const wchar_t* value) {this->WriteLine(String(value));}
+        void WriteLine(const wchar* value) {this->WriteLine(String(value));}
         void WriteLine(const char16* value) {this->WriteLine(String(value));}
         void WriteLine(const char32* value) {this->WriteLine(String(value));}
         void WriteLine(const std::string& value) {this->WriteLine(String(value));}

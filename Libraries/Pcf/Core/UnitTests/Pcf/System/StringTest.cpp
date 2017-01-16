@@ -66,7 +66,7 @@ namespace PcfUnitTests {
     }
     
     void StringCreatedWithConstWCharPointerNull() {
-      TUnit::Assert::Throws<ArgumentNullException>(pcf_delegate {string(static_cast<const wchar_t*>(null));}, pcf_current_information);
+      TUnit::Assert::Throws<ArgumentNullException>(pcf_delegate {string(static_cast<const wchar*>(null));}, pcf_current_information);
     }
     
     void StringCreatedWithConstCharPointerAndNegativeStartIndexConstructor() {

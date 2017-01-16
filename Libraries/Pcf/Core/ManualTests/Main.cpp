@@ -18,6 +18,8 @@ namespace Examples {
       Array<Guid> vals = {Guid::NewGuid(), Guid::NewGuid(), Guid::NewGuid(), Guid::NewGuid()};
       //Array<string> vals = {string("One"), string("Two"), string("Three")};
       Print(vals);
+      
+      Console::WriteLine("A={0}", int32('A'));
     }
   };
 }

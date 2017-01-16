@@ -133,7 +133,7 @@ String::String(const String& str) : string(str.string) {
 String::String(const std::string& str) : string(str.c_str()) {
 }
 
-String::String(const std::wstring& str) : string(std::wstring_convert<std::codecvt_utf8<wchar_t>, wchar_t>().to_bytes(str).c_str()) {
+String::String(const std::wstring& str) : string(std::wstring_convert<std::codecvt_utf8<wchar>, wchar>().to_bytes(str).c_str()) {
 }
 
 String::String(const std::u16string& str) {
@@ -1426,5 +1426,5 @@ std::ostream& operator<<(std::ostream& output, const System::String& value) {
 }
 
 std::wstring string::w_str() const {
-  return std::wstring_convert<std::codecvt_utf8<wchar_t>, wchar_t>().from_bytes(this->string.c_str());
+  return std::wstring_convert<std::codecvt_utf8<wchar>, wchar>().from_bytes(this->string.c_str());
 }

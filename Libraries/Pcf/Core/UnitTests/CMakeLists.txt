@@ -103,7 +103,8 @@ set(SOURCE_FILES
   Pcf/FunctionPointerTest.cpp
   Pcf/InitializerListTest.cpp
   Pcf/InterfaceTest.cpp
-  Pcf/IsUT.cpp
+  Pcf/IsTest.cpp
+  Pcf/LiteralOperatorConverterTest.cpp
   Pcf/NativesTest.cpp
   Pcf/ReferenceUT.cpp
   Pcf/SharedPointerUT.cpp
