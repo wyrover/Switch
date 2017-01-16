@@ -105,6 +105,7 @@ set(SOURCE_FILES
   Pcf/InterfaceTest.cpp
   Pcf/IsTest.cpp
   Pcf/LiteralOperatorConverterTest.cpp
+  Pcf/LockTest.cpp
   Pcf/NativesTest.cpp
   Pcf/ReferenceUT.cpp
   Pcf/SharedPointerUT.cpp
