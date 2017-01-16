@@ -10,17 +10,17 @@ namespace PcfUnitTests {
   protected:
     void CreateAnEmptyCurrentInformationThenToString() {
       CurrentInformation ci;
-      Assert::AreEqual("{Empty}", ci.ToString());
+      Assert::AreEqual("{Empty}", ci.ToString(), pcf_current_information);
     }
     
     void CreateAnEmptyCurrentInformationThenGetFileName() {
       CurrentInformation ci;
-      Assert::AreEqual("", ci.FileName);
+      Assert::AreEqual("", ci.FileName, pcf_current_information);
     }
     
     void CreateAnEmptyCurrentInformationThenGetFunctionName() {
       CurrentInformation ci;
-      Assert::AreEqual("", ci.FunctionName);
+      Assert::AreEqual("", ci.FunctionName, pcf_current_information);
     }
     
     void CreateAnEmptyCurrentInformationThenGetLine() {
@@ -30,53 +30,53 @@ namespace PcfUnitTests {
     
     void CreateCurrentInformationWithFileNameAndLineThenToString() {
       CurrentInformation ci("MyFile.txt", 42);
-      Assert::AreEqual("{File=\"MyFile.txt\", Line=42}", ci.ToString());
+      Assert::AreEqual("{File=\"MyFile.txt\", Line=42}", ci.ToString(), pcf_current_information);
     }
     
     void CreateCurrentInformationWithFileNameAndLineThenGetFileName() {
       CurrentInformation ci("MyFile.txt", 42);
-      Assert::AreEqual("MyFile.txt", ci.FileName);
+      Assert::AreEqual("MyFile.txt", ci.FileName, pcf_current_information);
     }
     
     void CreateCurrentInformationWithFileNameAndLineThenGetFunctionName() {
       CurrentInformation ci("MyFile.txt", 42);
-      Assert::AreEqual("", ci.FunctionName);
+      Assert::AreEqual("", ci.FunctionName, pcf_current_information);
     }
     
     void CreateCurrentInformationWithFileNameAndLineThenGetLine() {
       CurrentInformation ci("MyFile.txt", 42);
-      Assert::AreEqual(42, ci.Line);
+      Assert::AreEqual(42, ci.Line, pcf_current_information);
     }
     
     void CreateCurrentInformationWithFileNameLineAndFunctionNameThenToString() {
       CurrentInformation ci("MyFile.txt", 42, "void MyFunction()");
-      Assert::AreEqual("{File=\"MyFile.txt\", Line=42, Function=\"void MyFunction()\"}", ci.ToString());
+      Assert::AreEqual("{File=\"MyFile.txt\", Line=42, Function=\"void MyFunction()\"}", ci.ToString(), pcf_current_information);
     }
     
     void CreateCurrentInformationWithFileNameLineAndFunctionNameThenGetFileName() {
       CurrentInformation ci("MyFile.txt", 42, "void MyFunction()");
-      Assert::AreEqual("MyFile.txt", ci.FileName);
+      Assert::AreEqual("MyFile.txt", ci.FileName, pcf_current_information);
     }
     
     void CreateCurrentInformationWithFileNameLineAndFunctionNameThenGetFunctionName() {
       CurrentInformation ci("MyFile.txt", 42, "void MyFunction()");
-      Assert::AreEqual("void MyFunction()", ci.FunctionName);
+      Assert::AreEqual("void MyFunction()", ci.FunctionName, pcf_current_information);
     }
     
     void CreateCurrentInformationWithFileNameLineAndFunctionNameThenGetLine() {
       CurrentInformation ci("MyFile.txt", 42, "void MyFunction()");
-      Assert::AreEqual(42, ci.Line);
+      Assert::AreEqual(42, ci.Line, pcf_current_information);
     }
     
     void CreateCurrentInformationByCopyConstructorThenToString() {
       CurrentInformation ci = CurrentInformation("MyFile.txt", 42, "void MyFunction()");
-      Assert::AreEqual("{File=\"MyFile.txt\", Line=42, Function=\"void MyFunction()\"}", ci.ToString());
+      Assert::AreEqual("{File=\"MyFile.txt\", Line=42, Function=\"void MyFunction()\"}", ci.ToString(), pcf_current_information);
     }
     
     void CreateCurrentInformationByCopyOperatorThenToString() {
       CurrentInformation ci;
       ci = CurrentInformation("MyFile.txt", 42, "void MyFunction()");
-      Assert::AreEqual("{File=\"MyFile.txt\", Line=42, Function=\"void MyFunction()\"}", ci.ToString());
+      Assert::AreEqual("{File=\"MyFile.txt\", Line=42, Function=\"void MyFunction()\"}", ci.ToString(), pcf_current_information);
     }
   };
   

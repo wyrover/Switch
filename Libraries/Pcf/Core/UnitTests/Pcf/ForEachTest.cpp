@@ -23,10 +23,10 @@ namespace PcfUnitTests {
       for (Int32 item : collection) {
         checksum1 += 100 + index;
         checksum2 += item;
-        EXPECT_EQ(100 + index++, item);
+        Assert::AreEqual(100 + index++, item, pcf_current_information);
       }
       
-      EXPECT_EQ(checksum1, checksum2);
+      Assert::AreEqual(checksum1, checksum2, pcf_current_information);
     }
     
     void List() {
@@ -42,10 +42,10 @@ namespace PcfUnitTests {
       for (int32 item : collection) {
         checksum1 += 100 + index;
         checksum2 += item;
-        EXPECT_EQ(100 + index++, item);
+        Assert::AreEqual(100 + index++, item, pcf_current_information);
       }
       
-      EXPECT_EQ(checksum1, checksum2);
+      Assert::AreEqual(checksum1, checksum2, pcf_current_information);
     }
     
     void LinkedList() {
@@ -61,10 +61,10 @@ namespace PcfUnitTests {
       for (int32 item : collection) {
         checksum1 += 100 + index;
         checksum2 += item;
-        EXPECT_EQ(100 + index++, item);
+        Assert::AreEqual(100 + index++, item, pcf_current_information);
       }
       
-      EXPECT_EQ(checksum1, checksum2);
+      Assert::AreEqual(checksum1, checksum2, pcf_current_information);
     }
     
     void HashSet() {
@@ -78,7 +78,7 @@ namespace PcfUnitTests {
         checksum2 += item;
       }
       
-      EXPECT_EQ(checksum1, checksum2);
+      Assert::AreEqual(checksum1, checksum2, pcf_current_information);
     }
     
     void SortedSet() {
@@ -92,7 +92,7 @@ namespace PcfUnitTests {
         checksum2 += item;
       }
       
-      EXPECT_EQ(checksum1, checksum2);
+      Assert::AreEqual(checksum1, checksum2, pcf_current_information);
     }
     
     void SortedDictionary() {
@@ -106,7 +106,7 @@ namespace PcfUnitTests {
         checksum2 += item.Value();
       }
       
-      EXPECT_EQ(checksum1, checksum2);
+      Assert::AreEqual(checksum1, checksum2, pcf_current_information);
     }
     
     void ListT() {
@@ -122,29 +122,29 @@ namespace PcfUnitTests {
       // test foreach without scope
       index = 1;
       for (Int32 i : testList)
-        EXPECT_EQ(index++, i);
+        Assert::AreEqual(index++, i, pcf_current_information);
       
-      EXPECT_EQ(index, 6);
+      Assert::AreEqual(index, 6, pcf_current_information);
       
       // test full enumeration
       index = 0;
       count = 0;
       for (Int32 i : testList)  {
-        EXPECT_EQ(++index, i);
+        Assert::AreEqual(++index, i, pcf_current_information);
         count++;
       }
-      EXPECT_EQ(count, 5);
+      Assert::AreEqual(count, 5, pcf_current_information);
       
       // test break
       index = 0;
       count = 0;
       for (Int32 i : testList) {
-        EXPECT_EQ(++index, i);
+        Assert::AreEqual(++index, i, pcf_current_information);
         count++;
         if (count == 2)
           break;
       }
-      EXPECT_EQ(count, 2);
+      Assert::AreEqual(count, 2, pcf_current_information);
       
       // test modification
       for (Int32& i : testList) {
@@ -153,7 +153,7 @@ namespace PcfUnitTests {
       
       index = 1;
       for (Int32 i : testList) {
-        EXPECT_EQ(++index, i);
+        Assert::AreEqual(++index, i, pcf_current_information);
       }
     }
     
@@ -170,10 +170,10 @@ namespace PcfUnitTests {
       for (int32 item : collection) {
         checksum1 += 100 + index;
         checksum2 += item;
-        EXPECT_EQ(100 + index++, item);
+        Assert::AreEqual(100 + index++, item, pcf_current_information);
       }
       
-      EXPECT_EQ(checksum1, checksum2);
+      Assert::AreEqual(checksum1, checksum2, pcf_current_information);
     }
     
     void Array2() {
@@ -190,27 +190,27 @@ namespace PcfUnitTests {
       for (uint32 i : testArray)
         index = i;
       
-      EXPECT_EQ(index, 5u);
+      Assert::AreEqual(index, 5u, pcf_current_information);
       
       // test full enumeration
       index = 0;
       count = 0;
       for (uint32 i : testArray) {
-        EXPECT_EQ(++index, i);
+        Assert::AreEqual(++index, i, pcf_current_information);
         count++;
       }
-      EXPECT_EQ(count, 5u);
+      Assert::AreEqual(count, 5u, pcf_current_information);
       
       // test break
       index = 0;
       count = 0;
       for (uint32 i : testArray) {
-        EXPECT_EQ(++index, i);
+        Assert::AreEqual(++index, i, pcf_current_information);
         count++;
         if (count == 2)
           break;
       }
-      EXPECT_EQ(count, 2u);
+      Assert::AreEqual(count, 2u, pcf_current_information);
       
       // test modification
       for (uint32& i : testArray) {
@@ -219,7 +219,7 @@ namespace PcfUnitTests {
       
       index = 1;
       for (uint32 i : testArray) {
-        EXPECT_EQ(++index, i);
+        Assert::AreEqual(++index, i, pcf_current_information);
       }
     }
     
@@ -234,7 +234,7 @@ namespace PcfUnitTests {
         checksum2 += item.Value();
       }
       
-      EXPECT_EQ(checksum1, checksum2);
+      Assert::AreEqual(checksum1, checksum2, pcf_current_information);
     }
     
     void Dictionary2() {
@@ -250,17 +250,17 @@ namespace PcfUnitTests {
       // test foreach without scope
       for (auto i : testDictionary)
         count += i.Key();
-      EXPECT_EQ(15u, count);
+      Assert::AreEqual(15u, count, pcf_current_information);
       
       // test full enumeration
       count = 0u;
       for (auto i : testDictionary) {
-        EXPECT_GE(i.Key(), 1u);
-        EXPECT_LE(i.Key(), 5u);
-        EXPECT_EQ(UInt32(i.Key()).ToString(), i.Value());
+        Assert::GreaterOrEqual(i.Key(), 1u, pcf_current_information);
+        Assert::LessOrEqual(i.Key(), 5u, pcf_current_information);
+        Assert::AreEqual(UInt32(i.Key()).ToString(), i.Value(), pcf_current_information);
         count++;
       }
-      EXPECT_EQ(5u, count);
+      Assert::AreEqual(5u, count, pcf_current_information);
       
       // test break
       count = 0u;
@@ -269,7 +269,7 @@ namespace PcfUnitTests {
           break;
       }
       
-      EXPECT_EQ(count, 2u);
+      Assert::AreEqual(count, 2u, pcf_current_information);
     }
     
     void String() {
@@ -283,7 +283,7 @@ namespace PcfUnitTests {
         checksum2 += item;
       }
       
-      EXPECT_EQ(checksum1, checksum2);
+      Assert::AreEqual(checksum1, checksum2, pcf_current_information);
     }
     
     
@@ -292,7 +292,7 @@ namespace PcfUnitTests {
       
       byte i = 0;
       for (byte b : bytes) {
-        EXPECT_EQ(i++, b);
+        Assert::AreEqual(i++, b, pcf_current_information);
       }
     }
   };

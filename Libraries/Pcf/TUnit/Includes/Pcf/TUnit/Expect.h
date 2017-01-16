@@ -2080,15 +2080,15 @@ namespace Pcf {
       static inline void Throws(const System::Delegate<void>& statement, const string& message, const CurrentInformation& currentInformation) {
         try {
           statement();
-          Fail(string::Format("Expected: <{0}>{1}But was:  <nothing>", ExceptionType().GetType().FullName(), System::Environment::NewLine), message, currentInformation);
+          Fail(string::Format("Expected: <{0}>{1}But was:  <nothing>",  pcf_typeof<ExceptionType>().FullName(), System::Environment::NewLine), message, currentInformation);
         } catch (const AssertionException&) {
           throw;
         } catch(const ExceptionType&) {
           Succeed(message, currentInformation);
         } catch (const System::Exception& exception) {
-          Fail(string::Format("Expected: <{0}>{1}But was:  <{2}>", ExceptionType().GetType().FullName(), System::Environment::NewLine, exception.GetType().FullName()), message, currentInformation);
+          Fail(string::Format("Expected: <{0}>{1}But was:  <{2}>",  pcf_typeof<ExceptionType>().FullName(), System::Environment::NewLine, exception.GetType().FullName()), message, currentInformation);
         } catch (...) {
-          Fail(string::Format("Expected: <{0}>{1}But was:  <exception>", ExceptionType().GetType().FullName(), System::Environment::NewLine), message, currentInformation);
+          Fail(string::Format("Expected: <{0}>{1}But was:  <exception>",  pcf_typeof<ExceptionType>().FullName(), System::Environment::NewLine), message, currentInformation);
         }
       }
       

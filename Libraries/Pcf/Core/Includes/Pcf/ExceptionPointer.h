@@ -241,7 +241,11 @@ namespace Pcf {
     }
     
     /// @brief Throw the current ExceptionPointer.
-    void Rethrow() const {std::rethrow_exception(this->exception);}
+    /// @remarks If is null, it throws nothing.
+    void Rethrow() const {
+      if (this->exception)
+        std::rethrow_exception(this->exception);
+    }
     
   private:
     std::exception_ptr exception;

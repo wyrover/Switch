@@ -98,7 +98,11 @@ set(SOURCE_FILES
   Pcf/BoxingTest.cpp
   Pcf/CurrentInformationTest.cpp
   Pcf/Cpp11Test.cpp
+  Pcf/ExceptionPointerTest.cpp
   Pcf/ForEachTest.cpp
+  Pcf/FunctionPointerTest.cpp
+  Pcf/InitializerListTest.cpp
+  Pcf/InterfaceTest.cpp
   Pcf/IsUT.cpp
   Pcf/NativesTest.cpp
   Pcf/ReferenceUT.cpp

@@ -8,72 +8,72 @@ namespace PcfUnitTests {
   class NativeTest : public TestFixture {
   protected:
     void SizeOfBool() {
-      EXPECT_EQ(1u, sizeof(bool));
-      EXPECT_EQ(1u, sizeof(bool));
+      Assert::AreEqual(1u, sizeof(bool), pcf_current_information);
+      Assert::AreEqual(1u, sizeof(bool), pcf_current_information);
     }
     
     void SizeOfChar() {
-      EXPECT_EQ(4u, sizeof(char32));
-      EXPECT_EQ(2u, sizeof(char16));
-      EXPECT_EQ(1u, sizeof(char));
+      Assert::AreEqual(4u, sizeof(char32), pcf_current_information);
+      Assert::AreEqual(2u, sizeof(char16), pcf_current_information);
+      Assert::AreEqual(1u, sizeof(char), pcf_current_information);
     }
     
     void SizeOfByte() {
-      EXPECT_EQ(1u, sizeof(byte));
-      EXPECT_EQ(1u, sizeof(unsigned char));
-      EXPECT_EQ(1u, sizeof(uint8_t));
+      Assert::AreEqual(1u, sizeof(byte), pcf_current_information);
+      Assert::AreEqual(1u, sizeof(unsigned char), pcf_current_information);
+      Assert::AreEqual(1u, sizeof(uint8_t), pcf_current_information);
     }
     
     void SizeOfInt16() {
-      EXPECT_EQ(2u, sizeof(int16));
-      EXPECT_EQ(2u, sizeof(short));
-      EXPECT_EQ(2u, sizeof(int16_t));
+      Assert::AreEqual(2u, sizeof(int16), pcf_current_information);
+      Assert::AreEqual(2u, sizeof(short), pcf_current_information);
+      Assert::AreEqual(2u, sizeof(int16_t), pcf_current_information);
     }
     
     void SizeOfInt32() {
-      EXPECT_EQ(4u, sizeof(int32));
-      EXPECT_EQ(4u, sizeof(int));
-      EXPECT_EQ(4u, sizeof(int32_t));
+      Assert::AreEqual(4u, sizeof(int32), pcf_current_information);
+      Assert::AreEqual(4u, sizeof(int), pcf_current_information);
+      Assert::AreEqual(4u, sizeof(int32_t), pcf_current_information);
     }
     
     void SizeOfInt64() {
-      EXPECT_EQ(8u, sizeof(int64));
-      //EXPECT_EQ(8u, sizeof(long));
-      EXPECT_EQ(8u, sizeof(long long));
-      EXPECT_EQ(8u, sizeof(int64_t));
+      Assert::AreEqual(8u, sizeof(int64), pcf_current_information);
+      //Assert::AreEqual(8u, sizeof(long), pcf_current_information);
+      Assert::AreEqual(8u, sizeof(long long), pcf_current_information);
+      Assert::AreEqual(8u, sizeof(int64_t), pcf_current_information);
     }
     
     void SizeOfSByte() {
-      EXPECT_EQ(1u, sizeof(sbyte));
-      EXPECT_EQ(1u, sizeof(char));
-      EXPECT_EQ(1u, sizeof(int8_t));
+      Assert::AreEqual(1u, sizeof(sbyte), pcf_current_information);
+      Assert::AreEqual(1u, sizeof(char), pcf_current_information);
+      Assert::AreEqual(1u, sizeof(int8_t), pcf_current_information);
     }
     
     void SizeOfUInt16() {
-      EXPECT_EQ(2u, sizeof(uint16));
-      EXPECT_EQ(2u, sizeof(unsigned short));
-      EXPECT_EQ(2u, sizeof(uint16_t));
+      Assert::AreEqual(2u, sizeof(uint16), pcf_current_information);
+      Assert::AreEqual(2u, sizeof(unsigned short), pcf_current_information);
+      Assert::AreEqual(2u, sizeof(uint16_t), pcf_current_information);
     }
     
     void SizeOfUInt32() {
-      EXPECT_EQ(4u, sizeof(uint32));
-      EXPECT_EQ(4u, sizeof(unsigned int));
-      EXPECT_EQ(4u, sizeof(uint32_t));
+      Assert::AreEqual(4u, sizeof(uint32), pcf_current_information);
+      Assert::AreEqual(4u, sizeof(unsigned int), pcf_current_information);
+      Assert::AreEqual(4u, sizeof(uint32_t), pcf_current_information);
     }
     
     void SizeOfUInt64() {
-      EXPECT_EQ(8u, sizeof(uint64));
-      //EXPECT_EQ(8u, sizeof(unsigned long));
-      EXPECT_EQ(8u, sizeof(unsigned long long));
-      EXPECT_EQ(8u, sizeof(uint64_t));
+      Assert::AreEqual(8u, sizeof(uint64), pcf_current_information);
+      //Assert::AreEqual(8u, sizeof(unsigned long), pcf_current_information);
+      Assert::AreEqual(8u, sizeof(unsigned long long), pcf_current_information);
+      Assert::AreEqual(8u, sizeof(uint64_t), pcf_current_information);
     }
     
     void SizeOfFloat() {
-      EXPECT_EQ(4u, sizeof(float));
+      Assert::AreEqual(4u, sizeof(float), pcf_current_information);
     }
     
     void SizeOfDouble() {
-      EXPECT_EQ(8u, sizeof(double));
+      Assert::AreEqual(8u, sizeof(double), pcf_current_information);
     }
   };
  
