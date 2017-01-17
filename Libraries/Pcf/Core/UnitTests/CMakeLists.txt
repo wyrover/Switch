@@ -41,7 +41,7 @@ set(SOURCE_FILES
   Pcf/System/Text/UTF8EncodingUT.cpp
   Pcf/System/Threading/EventTest.cpp
   Pcf/System/Threading/InterlockedTest.cpp
-  Pcf/System/Threading/LockTest.cpp
+  Pcf/System/Threading/LockGuardTest.cpp
   Pcf/System/Threading/MutexTest.cpp
   Pcf/System/Threading/SemaphoreTest.cpp
   Pcf/System/Threading/ThreadTest.cpp
@@ -106,6 +106,7 @@ set(SOURCE_FILES
   Pcf/IsTest.cpp
   Pcf/LiteralOperatorConverterTest.cpp
   Pcf/LockTest.cpp
+  Pcf/MoveTest.cpp
   Pcf/NativesTest.cpp
   Pcf/ReferenceUT.cpp
   Pcf/SharedPointerUT.cpp

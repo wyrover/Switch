@@ -1,4 +1,4 @@
-﻿#include <Pcf/Lock.h>
+#include <Pcf/Lock.h>
 #include <Pcf/System/Diagnostics/Stopwatch.h>
 #include <Pcf/TUnit/Assert.h>
 #include <Pcf/TUnit/TestFixture.h>
@@ -9,15 +9,14 @@ using namespace System::Diagnostics;
 using namespace TUnit;
 
 namespace PcfUnitTests {
-  class LockTest : public TestFixture {
+  class LockGuardTest : public TestFixture {
   protected:
     void SingleLock() {
       int value = 0;
       object lock;
       
-      pcf_lock (lock) {
-        ++value;
-      }
+      LockGuard lockGuard(lock);
+      ++value;
       
       Assert::AreEqual(1, value, pcf_current_information);
     }
@@ -27,12 +26,10 @@ namespace PcfUnitTests {
       object lock;
       object lock2;
       
-      pcf_lock (lock) {
-        ++value;
-        pcf_lock (lock2) {
-          ++value;
-        }
-      }
+      LockGuard lockGuard(lock);
+      ++value;
+      LockGuard lockGuard2(lock2);
+      ++value;
       
       Assert::AreEqual(2, value, pcf_current_information);
     }
@@ -41,12 +38,10 @@ namespace PcfUnitTests {
       int value = 0;
       object lock;
       
-      pcf_lock (lock) {
-        ++value;
-        pcf_lock (lock) {
-          ++value;
-        }
-      }
+      LockGuard lockGuard(lock);
+      ++value;
+      LockGuard lockGuard2(lock);
+      ++value;
       
       Assert::AreEqual(2, value, pcf_current_information);
     }
@@ -55,26 +50,25 @@ namespace PcfUnitTests {
       object lock;
       int value = 0;
       Stopwatch duration = Stopwatch::StartNew();
-      pcf_lock (lock) {
+      {
+        LockGuard lockGuard(lock);
         ++value;
       }
       duration.Stop();
       Assert::LessOrEqual(duration.ElapsedMilliseconds(), 1, pcf_current_information);
     }
-    
+ 
     void Thread() {
       string s;
       std::thread t1(pcf_delegate {
-        pcf_lock(s) {
-          for (int i = 0; i < 500; i++)
-            s += '1';
-        }
+        LockGuard lockGuard(s);
+        for (int i = 0; i < 500; i++)
+          s += '1';
       });
       std::thread t2(pcf_delegate {
-        pcf_lock(s) {
-          for (int i = 0; i < 500; i++)
-            s += '2';
-        }
+        LockGuard lockGuard(s);
+        for (int i = 0; i < 500; i++)
+          s += '2';
       });
       
       if (t1.joinable())
@@ -88,13 +82,12 @@ namespace PcfUnitTests {
         if (o == 0) o = c;
         Assert::IsFalse(++i < 500 && o != c, pcf_current_information);
       }
-      
     }
   };
   
-  pcf_test(LockTest, SingleLock)
-  pcf_test(LockTest, DoubleLockOnDifferentObjects)
-  pcf_test(LockTest, DoubleLockOnSameObject)
-  pcf_test(LockTest, LockDuration)
-  pcf_test(LockTest, Thread)
+  pcf_test(LockGuardTest, SingleLock)
+  pcf_test(LockGuardTest, DoubleLockOnDifferentObjects)
+  pcf_test(LockGuardTest, DoubleLockOnSameObject)
+  pcf_test(LockGuardTest, LockDuration)
+  pcf_test(LockGuardTest, Thread)
 }
