@@ -291,7 +291,6 @@ namespace Pcf {
           /// @brief Clear the SortedDictionary && insert the element of the SortedDictionary given in argument.
           /// @param dictionnary the SortedDictionary which elements will be inserted from
           /// @return a reference to the current SortedDictionary
-          /// Exceptions
           /// @exception ArgumentNullException dictionary is null.
           SortedDictionary& operator =(const SortedDictionary& dictionary) {
             this->comparer = dictionary.comparer;

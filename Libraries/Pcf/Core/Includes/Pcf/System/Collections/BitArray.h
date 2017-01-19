@@ -283,8 +283,7 @@ namespace Pcf {
 
         /// @brief Gets the element at the specified index.
         /// @param index The zero-based index of the element to get.
-        /// ReturnsB
-        /// bool The element at the specified index.
+        /// @return bool The element at the specified index.
         /// @exception ArgumentOutOfRangeException index is less than 0 or index is equal to or greater than Count.
         const bool& operator[](int32 index) const {
           if (index >= this->length || index < 0)
@@ -297,8 +296,7 @@ namespace Pcf {
 
         /// @brief Gets the element at the specified index.
         /// @param index The zero-based index of the element to get.
-        /// ReturnsB
-        /// bool The element at the specified index.
+        /// @return bool The element at the specified index.
         /// @exception ArgumentOutOfRangeException index is less than 0 or index is equal to or greater than Count.
         bool& operator[](int32 index)
         {

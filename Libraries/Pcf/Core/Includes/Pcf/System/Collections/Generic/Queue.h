@@ -46,7 +46,7 @@ namespace Pcf {
           /// @param collection The collection whose elements are copied to the new System::Collections::Generic::Queue<T>.
           /// @exception System::ArgumentNullException collection is null.
           Queue(const IEnumerable<T>& collection) : capacity(0), operationNumber(0) {
-            for (T item : collection)
+            for (const T& item : collection)
               Enqueue(item);
           }
 

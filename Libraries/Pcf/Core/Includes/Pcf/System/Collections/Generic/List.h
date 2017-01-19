@@ -934,10 +934,8 @@ namespace Pcf {
 
           /// @brief Gets the element at the specified index.
           /// @param index The zero-based index of the element to get.
-          /// ReturnsB
-          /// T The element at the specified index.
-          /// Exceptions
-          /// @param ArgumentOutOfRangeException index is less than 0 || index is equal to || greater than Count.
+          /// @return T The element at the specified index.
+          /// @exception ArgumentOutOfRangeException index is less than 0 || index is equal to || greater than Count.
           T& operator[](int32 index) override {
             if (index < 0 || index > this->Count)
               throw ArgumentOutOfRangeException(pcf_current_information);

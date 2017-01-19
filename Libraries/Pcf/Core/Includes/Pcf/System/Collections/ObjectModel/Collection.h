@@ -206,18 +206,14 @@ namespace Pcf {
 
           /// @brief Gets the element at the specified index.
           /// @param index The zero-based index of the element to get.
-          /// ReturnsB
-          /// T The element at the specified index.
-          /// Exceptions
-          /// @param ArgumentOutOfRangeException index is less than 0 or index is equal to or greater than Count.
+          /// @return T The element at the specified index.
+          /// @exception ArgumentOutOfRangeException index is less than 0 or index is equal to or greater than Count.
           const T& operator[](int32 index) const {return this->collection[index];}
 
           /// @brief Gets the element at the specified index.
           /// @param index The zero-based index of the element to get.
-          /// ReturnsB
-          /// T The element at the specified index.
-          /// Exceptions
-          /// @param ArgumentOutOfRangeException index is less than 0 or index is equal to or greater than Count.
+          /// @return T The element at the specified index.
+          /// @exception ArgumentOutOfRangeException index is less than 0 or index is equal to or greater than Count.
           T& operator[](int32 index) {return this->collection[index];}
           
           /// @brief Clear the Collection and insert the element of the Collection given in argument.
