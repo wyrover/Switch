@@ -68,12 +68,14 @@ namespace Pcf {
           }
           
           /// @cond
-          SortedSet(const SortedSet& s) : comparer(s.comparer), set(new std::set<T,SetComparer, TAllocator>(SetComparer(this->comparer.ToPointer()))), operationNumber(0) {*set = *s.set;}
-          
           SortedSet(InitializerList<T> il) : comparer(new System::Collections::Generic::Comparer<T>()), set(new std::set<T, SetComparer, TAllocator>(SetComparer(this->comparer.ToPointer()))), operationNumber(0) {
             for (typename InitializerList<Item>::const_iterator iterator = il.begin(); iterator != il.end(); ++iterator)
               this->Add(*iterator);
           }
+          
+          SortedSet(const SortedSet& s) : comparer(s.comparer), set(new std::set<T,SetComparer, TAllocator>(SetComparer(this->comparer.ToPointer()))), operationNumber(0) {*set = *s.set;}
+          
+          SortedSet(SortedSet&& s) : comparer(s.comparer), set(Move(s.set)), operationNumber(s.operationNumber) {s.operationNumber= 0; s.set = new std::set<T, SetComparer, TAllocator>(SetComparer(s.comparer.ToPointer()));}
           
           SortedSet& operator =(const SortedSet& s) {
             this->comparer = s.comparer;

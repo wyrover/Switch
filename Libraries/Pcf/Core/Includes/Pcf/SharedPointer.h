@@ -57,6 +57,8 @@ namespace Pcf {
     /// @exception ArgumentNullException sp is null.
     /// @remarks the current object is equal to smartPointer and UseCount of both is incremented.
     SharedPointer(const SharedPointer<T>& sp) { Reset(sp); }
+ 
+    SharedPointer(SharedPointer<T>&& sp) { Reset(sp); sp.Reset();}
     
     /// @brief Create a new instance of class SharedPointer with a specified obj pointer T
     /// @param obj Pointer T object to assign the current object. It can be null.

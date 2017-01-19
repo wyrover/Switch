@@ -53,7 +53,7 @@ namespace PcfUnitTests {
     
     void MoveConcurrentQueue() {
       ConcurrentQueue<int32> cq1 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-      ConcurrentBag<int32> cq2 = Move(cq1);
+      ConcurrentQueue<int32> cq2 = Move(cq1);
       Assert::AreEqual(0, cq1.Count, pcf_current_information);
       Assert::AreEqual(10, cq2.Count, pcf_current_information);
     }
@@ -102,14 +102,14 @@ namespace PcfUnitTests {
     
     void MoveSortedDictionary() {
       SortedDictionary<string, int32> sd1 = {{"One", 1}, {"Two", 2}, {"Three", 3}, {"Four", 4}, {"Five", 5}, {"Six", 6}, {"Seven", 7}, {"Eigth", 8}, {"Nine", 9}, {"Ten", 10}};
-      Dictionary<string, int32> sd2 = Move(sd1);
+      SortedDictionary<string, int32> sd2 = Move(sd1);
       Assert::AreEqual(0, sd1.Count, pcf_current_information);
       Assert::AreEqual(10, sd2.Count, pcf_current_information);
     }
     
     void MoveSortedSet() {
       SortedSet<int32> ss1 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-      HashSet<int32> ss2 = Move(ss1);
+      SortedSet<int32> ss2 = Move(ss1);
       Assert::AreEqual(0, ss1.Count, pcf_current_information);
       Assert::AreEqual(10, ss2.Count, pcf_current_information);
     }

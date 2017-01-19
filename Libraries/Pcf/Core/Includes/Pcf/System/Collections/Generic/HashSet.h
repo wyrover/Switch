@@ -33,17 +33,25 @@ namespace Pcf {
           /// @param comparer an instance of IComparer<T> used to determine the sort order of the set.
           HashSet(const SharedPointer< IComparer<T>>& comparer) : comparer(comparer) {}
 
-          /// @brief Default copy constructor
-          /// @param s the HashSet<T> which elements will be inserted from
+          /// @cond
+          HashSet(InitializerList<T> il) : operationNumber(0), comparer(new System::Collections::Generic::Comparer<T>()) {
+            for (typename InitializerList<Item>::const_iterator iterator = il.begin(); iterator != il.end(); ++iterator)
+              this->Add(*iterator);
+          }
+          
           HashSet(const HashSet& s) : operationNumber(s.operationNumber), comparer(s.comparer) {
             for (const T& item : s)
               Add(item);
           }
   
-          /// @cond
-          HashSet(HashSet&& s) : hashset(Move(s.hashset)), operationNumber(s.operationNumber), comparer(s.comparer) {
-            s.operationNumber= 0;
-            s.comparer.Reset();
+          HashSet(HashSet&& s) : hashset(Move(s.hashset)), operationNumber(s.operationNumber), comparer(Move(s.comparer)) {s.operationNumber= 0;}
+          
+          HashSet& operator =(const HashSet& s) {
+            this->operationNumber = s.operationNumber;
+            this->comparer = s._comparer;
+            for (T elem : s)
+              Add(elem);
+            return *this;
           }
           /// @endcond
           
@@ -69,25 +77,6 @@ namespace Pcf {
           HashSet(const T (&array)[len]) : operationNumber(0), comparer(new System::Collections::Generic::Comparer<T>()) {
             for (int32 index = 0; index < len; index++)
               this->Add(array[index]);
-          }
-          
-          /// @cond
-          HashSet(InitializerList<T> il) : operationNumber(0), comparer(new System::Collections::Generic::Comparer<T>()) {
-            for (typename InitializerList<Item>::const_iterator iterator = il.begin(); iterator != il.end(); ++iterator)
-              this->Add(*iterator);
-          }
-          /// @endcond
-          
-          /// @brief Change the current HashSet<T> so that it become a copy of another provided HashSet<T> s.
-          /// @param s The source HashSet<T> to copy from.
-          /// ReturnsB
-          /// A reference to the current (modified) HashSet<T>.
-          HashSet& operator =(const HashSet& s) {
-            this->operationNumber = s.operationNumber;
-            this->comparer = s._comparer;
-            for (T elem : s)
-              Add(elem);
-            return *this;
           }
           
           /// @brief Adds an element to the set && returns a value that indicates if it was successfully added. If the element is already prensent, the value is ! replaced.
