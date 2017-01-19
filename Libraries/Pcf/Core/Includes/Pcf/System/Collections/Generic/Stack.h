@@ -42,6 +42,11 @@ namespace Pcf {
           Stack(const Stack& stack) : stack(stack.stack) {}
           
           /// @cond
+          Stack(InitializerList<T> il) {
+            for (const T& item : il)
+              this->Push(item);
+          }
+
           Stack(Stack&& stack) : stack(Move(stack.stack)) {}
           /// @endcond
           

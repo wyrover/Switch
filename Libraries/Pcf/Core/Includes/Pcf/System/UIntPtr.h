@@ -14,9 +14,6 @@ namespace Pcf {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @cond
-    namespace Threading {
-      class Interlocked;
-    }
     struct UInt32;
     struct UInt64;
     /// @endcond
@@ -109,10 +106,7 @@ namespace Pcf {
       int32 CompareTo(const IComparable& obj) const override;
 
     private:
-      /// @cond
       friend class String;
-      friend class System::Threading::Interlocked;
-      /// @endcond
 
       uintptr value = 0;
 

@@ -9,9 +9,7 @@
 namespace Pcf {
   /// @brief Represent an interface class.
   template< class T >
-  inline constexpr typename std::remove_reference<T>::type&& Move(T&& t) {
-    return std::move(t);
-  }
+  inline constexpr typename std::remove_reference<T>::type&& Move(T&& t) {return std::move(t);}
 }
 
 using namespace Pcf;

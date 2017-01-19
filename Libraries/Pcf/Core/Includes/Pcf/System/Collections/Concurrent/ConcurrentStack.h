@@ -40,7 +40,7 @@ namespace Pcf {
           
           /// @cond
           ConcurrentStack(InitializerList<T> il)  {
-            System::Threading::LockGuard lock(this->list.SyncRoot);
+            System::Threading::LockGuard lock(this->stack.SyncRoot);
             for (T item : il)
               this->stack.Push(item);
           }

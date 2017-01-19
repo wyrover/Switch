@@ -18,12 +18,6 @@
 namespace Pcf {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
-    /// @cond
-    namespace Threading {
-      class Interlocked;
-    }
-    /// @endcond
-
     /// @brief Represents a 8-bit unsigned integer.
     struct pcf_public Byte final : public ValueType, public IComparable, public IConvertible, public IFormattable {
     public:
@@ -115,10 +109,7 @@ namespace Pcf {
       TypeCode GetTypeCode() const override;
 
     private:
-      /// @cond
       friend class Convert;
-      friend class System::Threading::Interlocked;
-      /// @endcond
 
       bool IsSigned() const override { return false; }
 

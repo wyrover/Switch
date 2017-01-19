@@ -62,6 +62,11 @@ namespace Pcf {
           Queue(const Queue& queue) : queue(queue.queue), capacity(queue.capacity), operationNumber(queue.operationNumber) {}
           
           /// @cond
+          Queue(InitializerList<T> il) : operationNumber(0) {
+            for (const T& item : il)
+              this->Enqueue(item);
+          }
+
           Queue(Queue&& queue) : queue(Move(queue.queue)), capacity(queue.capacity), operationNumber(queue.operationNumber) {
             queue.capacity = 0;
             queue.operationNumber = 0;
