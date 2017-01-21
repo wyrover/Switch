@@ -15,12 +15,15 @@
 /// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Pcf {
   /// @brief The TUnit namespace contains a unit test framework.
-  /// @remarks This example how to use TestFixture class, Assert class and #pcf_test method:
+  /// @par Examples
+  /// This example how to use TestFixture class, Assert class and #pcf_test method:
   /// @include Assert.cpp
-  /// @remarks This example how to use TestFixture class, Expect class and #pcf_test method:
+  /// @par Examples
+  /// This example how to use TestFixture class, Expect class and #pcf_test method:
   /// @include Expect.cpp
   namespace TUnit {
     /// @brief The Assert class contains a collection of static methods that implement the most common assertions used in Pcf::TUnit.
+    /// @par Examples
     /// This example show how to used some methods :
     /// @include Assert.cpp
     class pcf_public Assert : private object {
@@ -28,7 +31,7 @@ namespace Pcf {
       /// @brief Verifies that two type are equal. If they are not, then an Pcf::TUnit::AssertionException is thrown.
       /// @param expected the expected value.
       /// @param actual the actual value.
-      ///
+      /// @par Examples
       /// @code
       /// TUnit::Assert::AreEqual(24, int32(24)); // test ok
       /// TUnit::Assert::AreEqual(23, int32(24)); // test throws an AssertionException.
@@ -40,7 +43,7 @@ namespace Pcf {
       /// @param expected the expected value.
       /// @param actual the actual value.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      ///
+      /// @par Examples
       /// @code
       /// TUnit::Assert::AreEqual(24, int32(24), "User message..."); // test ok
       /// TUnit::Assert::AreEqual(23, int32(24), "User message..."); // test throws an AssertionException.
@@ -52,7 +55,7 @@ namespace Pcf {
       /// @param expected the expected value.
       /// @param actual the actual value.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// TUnit::Assert::AreEqual(24, int32(24), pcf_current_information); // test ok
       /// TUnit::Assert::AreEqual(23, int32(24), pcf_current_information); // test throws an AssertionException.
@@ -65,7 +68,7 @@ namespace Pcf {
       /// @param actual the actual value.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// TUnit::Assert::AreEqual(24, int32(24), "User message...", pcf_current_information); // test ok
       /// TUnit::Assert::AreEqual(23, int32(24), "User message...", pcf_current_information); // test throws an AssertionException.
@@ -81,7 +84,7 @@ namespace Pcf {
       /// @brief Verifies that two type are not equal. If they are, then an Pcf::TUnit::AssertionException is thrown.
       /// @param expected the expected value.
       /// @param actual the actual value.
-      ///
+      /// @par Examples
       /// @code
       /// TUnit::Assert::AreNotEqual(23, int32(24)); // test ok
       /// TUnit::Assert::AreNotEqual(24, int32(24)); // test throws an AssertionException.
@@ -93,7 +96,7 @@ namespace Pcf {
       /// @param expected the expected value.
       /// @param actual the actual value.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      ///
+      /// @par Examples
       /// @code
       /// TUnit::Assert::AreNotEqual(23, int32(24), "User message...", pcf_current_information); // test ok
       /// TUnit::Assert::AreNotEqual(24, int32(24), "User message...", pcf_current_information); // test throws an AssertionException.
@@ -105,7 +108,7 @@ namespace Pcf {
       /// @param expected the expected value.
       /// @param actual the actual value.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// TUnit::Assert::AreNotEqual(23, int32(24), "User message...", pcf_current_information); // test ok
       /// TUnit::Assert::AreNotEqual(24, int32(24), "User message...", pcf_current_information); // test throws an AssertionException.
@@ -118,7 +121,7 @@ namespace Pcf {
       /// @param actual the actual value.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// TUnit::Assert::AreNotEqual(23, int32(24), "User message...", pcf_current_information); // test ok
       /// TUnit::Assert::AreNotEqual(24, int32(24), "User message...", pcf_current_information); // test throws an AssertionException.
@@ -134,7 +137,7 @@ namespace Pcf {
       /// @brief Asserts that two objects do refer to differents objects. If they are the same an Pcf::TUnit::AssertionException is thrown.
       /// @param expected the expected value.
       /// @param actual the actual value.
-      ///
+      /// @par Examples
       /// @code
       /// int32 a = 24;
       /// int32& b = a;
@@ -149,7 +152,7 @@ namespace Pcf {
       /// @param expected the expected value.
       /// @param actual the actual value.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      ///
+      /// @par Examples
       /// @code
       /// int32 a = 24;
       /// int32& b = a;
@@ -164,7 +167,7 @@ namespace Pcf {
       /// @param expected the expected value.
       /// @param actual the actual value.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// int32 a = 24;
       /// int32& b = a;
@@ -180,7 +183,7 @@ namespace Pcf {
       /// @param actual the actual value.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// int32 a = 24;
       /// int32& b = a;
@@ -199,7 +202,7 @@ namespace Pcf {
       /// @brief Asserts that two objects do refer to the same object. If they are the same an Pcf::TUnit::AssertionException is thrown.
       /// @param expected the expected value.
       /// @param actual the actual value.
-      ///
+      /// @par Examples
       /// @code
       /// int32 a = 24;
       /// int32& b = a;
@@ -214,7 +217,7 @@ namespace Pcf {
       /// @param expected the expected value.
       /// @param actual the actual value.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      ///
+      /// @par Examples
       /// @code
       /// int32 a = 24;
       /// int32& b = a;
@@ -229,7 +232,7 @@ namespace Pcf {
       /// @param expected the expected value.
       /// @param actual the actual value.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// int32 a = 24;
       /// int32& b = a;
@@ -245,7 +248,7 @@ namespace Pcf {
       /// @param actual the actual value.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// int32 a = 24;
       /// int32& b = a;
@@ -264,7 +267,7 @@ namespace Pcf {
       /// @brief Verifies that collection contains an item. If they are not, then an Pcf::TUnit::AssertionException is thrown.
       /// @param item object to verify.
       /// @param collection ICollection that contains object.
-      ///
+      /// @par Examples
       /// @code
       /// Array<int> a1 = {0, 1, 2, 3};
       /// TUnit::Assert::Contains(2, a1); // test ok
@@ -277,7 +280,7 @@ namespace Pcf {
       /// @param item object to verify.
       /// @param collection ICollection that contains object.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      ///
+      /// @par Examples
       /// @code
       /// Array<int> a1 = {0, 1, 2, 3};
       /// TUnit::Assert::Contains(2, a1, "User message..."); // test ok
@@ -290,7 +293,7 @@ namespace Pcf {
       /// @param item object to verify.
       /// @param collection ICollection that contains object.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// Array<int> a1 = {0, 1, 2, 3};
       /// TUnit::Assert::Contains(2, a1, pcf_current_information); // test ok
@@ -304,7 +307,7 @@ namespace Pcf {
       /// @param collection ICollection that contains object.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// Array<int> a1 = {0, 1, 2, 3};
       /// TUnit::Assert::Contains(2, a1, "User message...", pcf_current_information); // test ok
@@ -320,7 +323,7 @@ namespace Pcf {
       
       /// @brief Verifies that the staement does not throw an exception.
       /// @param statement The statement that verify.
-      ///
+      /// @par Examples
       /// @code
       /// Array<int32> a = {1, 2 ,3, 4};
       /// Assert::DoesNotThrows(pcf_delegate {a[2];}); // test ok
@@ -331,7 +334,7 @@ namespace Pcf {
       /// @brief Verifies that the staement does not throw an exception.
       /// @param statement The statement that verify.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      ///
+      /// @par Examples
       /// @code
       /// Array<int32> a = {1, 2 ,3, 4};
       /// Assert::DoesNotThrows(pcf_delegate {a[2];}, "User message..."); // test ok
@@ -342,7 +345,7 @@ namespace Pcf {
       /// @brief Verifies that the staement does not throw an exception.
       /// @param statement The statement that verify.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// Array<int32> a = {1, 2 ,3, 4};
       /// Assert::DoesNotThrows(pcf_delegate {a[2];}, pcf_current_information); // test ok
@@ -354,7 +357,7 @@ namespace Pcf {
       /// @param statement The statement that verify.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// Array<int32> a = {1, 2 ,3, 4};
       /// Assert::DoesNotThrows(pcf_delegate {a[2];}, "User message...", pcf_current_information); // test ok
@@ -405,7 +408,7 @@ namespace Pcf {
       
       /// @brief Asserts that a condition is false. If the condition is true the method throws an Pcf::TUnit::AssertionException.
       /// @param condition The condition to check is false.
-      ///
+      /// @par Examples
       /// @code
       /// string s1 = "Anything";
       /// string s2;
@@ -417,7 +420,7 @@ namespace Pcf {
       /// @brief Asserts that a condition is false. If the condition is true the method throws an Pcf::TUnit::AssertionException.
       /// @param condition The condition to check is false.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      ///
+      /// @par Examples
       /// @code
       /// string s1 = "Anything";
       /// string s2;
@@ -429,7 +432,7 @@ namespace Pcf {
       /// @brief Asserts that a condition is false. If the condition is true the method throws an Pcf::TUnit::AssertionException.
       /// @param condition The condition to check is false.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// string s1 = "Anything";
       /// string s2;
@@ -442,7 +445,7 @@ namespace Pcf {
       /// @param condition The condition to check is false.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// string s1 = "Anything";
       /// string s2;
@@ -454,7 +457,7 @@ namespace Pcf {
       /// @brief Verifies that the first value is greater than the second value. If they are not, then an Pcf::TUnit::AssertionException is thrown.
       /// @param val1 the first value.
       /// @param val2 the second value.
-      ///
+      /// @par Examples
       /// @code
       /// TUnit::Assert::Greater(24, 12); // test ok
       /// TUnit::Assert::Greater(24, 48); // test throws an AssertionException.
@@ -466,7 +469,7 @@ namespace Pcf {
       /// @param val1 the first value.
       /// @param val2 the second value.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      ///
+      /// @par Examples
       /// @code
       /// TUnit::Assert::Greater(24, 12, "User message..."); // test ok
       /// TUnit::Assert::Greater(24, 48, "User message..."); // test throws an AssertionException.
@@ -478,7 +481,7 @@ namespace Pcf {
       /// @param val1 the first value.
       /// @param val2 the second value.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// TUnit::Assert::Greater(24, 12, pcf_current_information); // test ok
       /// TUnit::Assert::Greater(24, 48, pcf_current_information); // test throws an AssertionException.
@@ -491,7 +494,7 @@ namespace Pcf {
       /// @param val2 the second value.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// TUnit::Assert::Greater(24, 12, "User message...", pcf_current_information); // test ok
       /// TUnit::Assert::Greater(24, 48, "User message...", pcf_current_information); // test throws an AssertionException.
@@ -507,7 +510,7 @@ namespace Pcf {
       /// @brief Verifies that the first value is greater or equal than the second value. If they are not, then an Pcf::TUnit::AssertionException is thrown.
       /// @param val1 the first value.
       /// @param val2 the second value.
-      ///
+      /// @par Examples
       /// @code
       /// TUnit::Assert::GreaterOrEqual(24, 12); // test ok
       /// TUnit::Assert::GreaterOrEqual(24, 24); // test ok
@@ -520,7 +523,7 @@ namespace Pcf {
       /// @param val1 the first value.
       /// @param val2 the second value.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      ///
+      /// @par Examples
       /// @code
       /// TUnit::Assert::GreaterOrEqual(24, 12, "User message..."); // test ok
       /// TUnit::Assert::GreaterOrEqual(24, 24, "User message..."); // test ok
@@ -533,7 +536,7 @@ namespace Pcf {
       /// @param val1 the first value.
       /// @param val2 the second value.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// TUnit::Assert::GreaterOrEqual(24, 12, pcf_current_information); // test ok
       /// TUnit::Assert::GreaterOrEqual(24, 24, pcf_current_information); // test ok
@@ -547,7 +550,7 @@ namespace Pcf {
       /// @param val2 the second value.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// TUnit::Assert::GreaterOrEqual(24, 12, "User message...", pcf_current_information); // test ok
       /// TUnit::Assert::GreaterOrEqual(24, 24, "User message...", pcf_current_information); // test ok
@@ -563,7 +566,7 @@ namespace Pcf {
       
       /// @brief Asserts that a value is empty. If the value is not Empty the method throws an Pcf::TUnit::AssertionException.
       /// @param value The value to check is empty.
-      ///
+      /// @par Examples
       /// @code
       /// string v1;
       /// string v2 = "Not empty";
@@ -575,7 +578,7 @@ namespace Pcf {
       /// @brief Asserts that a value is empty. If the value is not Empty the method throws an Pcf::TUnit::AssertionException.
       /// @param value The value to check is empty.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      ///
+      /// @par Examples
       /// @code
       /// string v1;
       /// string v2 = "Not empty";
@@ -587,7 +590,7 @@ namespace Pcf {
       /// @brief Asserts that a value is empty. If the value is not Empty the method throws an Pcf::TUnit::AssertionException.
       /// @param value The value to check is empty.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// string v1;
       /// string v2 = "Not empty";
@@ -600,7 +603,7 @@ namespace Pcf {
       /// @param value The value to check is empty.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// string v1;
       /// string v2 = "Not empty";
@@ -616,7 +619,7 @@ namespace Pcf {
       
       /// @brief Asserts that a value is empty. If the value is not Empty the method throws an Pcf::TUnit::AssertionException.
       /// @param value The value to check is empty.
-      ///
+      /// @par Examples
       /// @code
       /// Array<int> c1;
       /// Array<int> v2 = {0, 1, 2};
@@ -629,7 +632,7 @@ namespace Pcf {
       /// @brief Asserts that a value is empty. If the value is not Empty the method throws an Pcf::TUnit::AssertionException.
       /// @param value The value to check is empty.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      ///
+      /// @par Examples
       /// @code
       /// Array<int> c1;
       /// Array<int> v2 = {0, 1, 2};
@@ -642,7 +645,7 @@ namespace Pcf {
       /// @brief Asserts that a value is empty. If the value is not Empty the method throws an Pcf::TUnit::AssertionException.
       /// @param value The value to check is empty.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// Array<int> c1;
       /// Array<int> c2 = {0, 1, 2};
@@ -656,7 +659,7 @@ namespace Pcf {
       /// @param value The value to check is empty.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// Array<int> c1;
       /// Array<int> c2 = {0, 1, 2};
@@ -673,7 +676,7 @@ namespace Pcf {
       
       /// @brief Asserts that a condition is false. If the condition is true the method throws an Pcf::TUnit::AssertionException.
       /// @param condition The condition to check is false.
-      ///
+      /// @par Examples
       /// @code
       /// string s1 = "Anything";
       /// string s2;
@@ -685,7 +688,7 @@ namespace Pcf {
       /// @brief Asserts that a condition is false. If the condition is true the method throws an Pcf::TUnit::AssertionException.
       /// @param condition The condition to check is false.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      ///
+      /// @par Examples
       /// @code
       /// string s1 = "Anything";
       /// string s2;
@@ -697,7 +700,7 @@ namespace Pcf {
       /// @brief Asserts that a condition is false. If the condition is true the method throws an Pcf::TUnit::AssertionException.
       /// @param condition The condition to check is false.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// string s1 = "Anything";
       /// string s2;
@@ -710,7 +713,7 @@ namespace Pcf {
       /// @param condition The condition to check is false.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// string s1 = "Anything";
       /// string s2;
@@ -726,7 +729,7 @@ namespace Pcf {
       
       /// @brief Verify that an object is of the type supplied or a derived type. If they are not, then an Pcf::TUnit::AssertionException is thrown.
       /// @param value The object to verify
-      ///
+      /// @par Examples
       /// @code
       /// string str;
       /// TUnit::Assert::IsInstanceOf<string>(str); // test ok
@@ -739,7 +742,7 @@ namespace Pcf {
       /// @brief Verify that an object is of the type supplied or a derived type. If they are not, then an Pcf::TUnit::AssertionException is thrown.
       /// @param value The object to verify
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      ///
+      /// @par Examples
       /// @code
       /// string str;
       /// TUnit::Assert::IsInstanceOf<string>(str); // test ok
@@ -752,7 +755,7 @@ namespace Pcf {
       /// @brief Verify that an object is of the type supplied or a derived type. If they are not, then an Pcf::TUnit::AssertionException is thrown.
       /// @param value The object to verify
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// string str;
       /// TUnit::Assert::IsInstanceOf<string>(str); // test ok
@@ -766,7 +769,7 @@ namespace Pcf {
       /// @param value The object to verify
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// string str;
       /// TUnit::Assert::IsInstanceOf<string>(str); // test ok
@@ -783,7 +786,7 @@ namespace Pcf {
       
       /// @brief Verify that an object is of the type supplied or a derived type. If they are not, then an Pcf::TUnit::AssertionException is thrown.
       /// @param value The object to verify
-      ///
+      /// @par Examples
       /// @code
       /// string str;
       /// TUnit::Assert::IsInstanceOfType<string>(str); // test ok
@@ -796,7 +799,7 @@ namespace Pcf {
       /// @brief Verify that an object is of the type supplied or a derived type. If they are not, then an Pcf::TUnit::AssertionException is thrown.
       /// @param value The object to verify
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      ///
+      /// @par Examples
       /// @code
       /// string str;
       /// TUnit::Assert::IsInstanceOfType<string>(str); // test ok
@@ -809,7 +812,7 @@ namespace Pcf {
       /// @brief Verify that an object is of the type supplied or a derived type. If they are not, then an Pcf::TUnit::AssertionException is thrown.
       /// @param value The object to verify
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// string str;
       /// TUnit::Assert::IsInstanceOfType<string>(str); // test ok
@@ -823,7 +826,7 @@ namespace Pcf {
       /// @param value The object to verify
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// string str;
       /// TUnit::Assert::IsInstanceOfType<string>(str); // test ok
@@ -835,7 +838,7 @@ namespace Pcf {
       
       /// @brief Asserts that a value is NaN. If the value is not NaN the method throws an Pcf::TUnit::AssertionException.
       /// @param value The value to check is NaN.
-      ///
+      /// @par Examples
       /// @code
       /// double v1 = Double::NaN;
       /// double v2 = Math::PI;
@@ -847,7 +850,7 @@ namespace Pcf {
       /// @brief Asserts that a value is NaN. If the value is not NaN the method throws an Pcf::TUnit::AssertionException.
       /// @param value The value to check is NaN.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      ///
+      /// @par Examples
       /// @code
       /// double v1 = Double::NaN;
       /// double v2 = Math::PI;
@@ -859,7 +862,7 @@ namespace Pcf {
       /// @brief Asserts that a value is NaN. If the value is not NaN the method throws an Pcf::TUnit::AssertionException.
       /// @param value The value to check is NaN.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// double v1 = Double::NaN;
       /// double v2 = Math::PI;
@@ -872,7 +875,7 @@ namespace Pcf {
       /// @param value The value to check is NaN.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// double v1 = Double::NaN;
       /// double v2 = Math::PI;
@@ -888,7 +891,7 @@ namespace Pcf {
       
       /// @brief Asserts that a value is NaN. If the value is not NaN the method throws an Pcf::TUnit::AssertionException.
       /// @param value The value to check is NaN.
-      ///
+      /// @par Examples
       /// @code
       /// float v1 = Single::NaN;
       /// float v2 = Math::PI;
@@ -900,7 +903,7 @@ namespace Pcf {
       /// @brief Asserts that a value is NaN. If the value is not NaN the method throws an Pcf::TUnit::AssertionException.
       /// @param value The value to check is NaN.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      ///
+      /// @par Examples
       /// @code
       /// float v1 = Single::NaN;
       /// float v2 = Math::PI;
@@ -912,7 +915,7 @@ namespace Pcf {
       /// @brief Asserts that a value is NaN. If the value is not NaN the method throws an Pcf::TUnit::AssertionException.
       /// @param value The value to check is NaN.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// float v1 = Single::NaN;
       /// float v2 = Math::PI;
@@ -925,7 +928,7 @@ namespace Pcf {
       /// @param value The value to check is NaN.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// float v1 = Single::NaN;
       /// float v2 = Math::PI;
@@ -941,7 +944,7 @@ namespace Pcf {
       
       /// @brief Asserts that a value is empty. If the value is not Empty the method throws an Pcf::TUnit::AssertionException.
       /// @param value The value to check is empty.
-      ///
+      /// @par Examples
       /// @code
       /// string v1 = "Not empty";
       /// string v2;
@@ -953,7 +956,7 @@ namespace Pcf {
       /// @brief Asserts that a value is empty. If the value is not Empty the method throws an Pcf::TUnit::AssertionException.
       /// @param value The value to check is empty.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      ///
+      /// @par Examples
       /// @code
       /// string v1 = "Not empty";
       /// string v2;
@@ -965,7 +968,7 @@ namespace Pcf {
       /// @brief Asserts that a value is empty. If the value is not Empty the method throws an Pcf::TUnit::AssertionException.
       /// @param value The value to check is empty.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// string v1 = "Not empty";
       /// string v2;
@@ -978,7 +981,7 @@ namespace Pcf {
       /// @param value The value to check is empty.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// string v1 = "Not empty";
       /// string v2;
@@ -994,7 +997,7 @@ namespace Pcf {
       
       /// @brief Asserts that a value is empty. If the value is not Empty the method throws an Pcf::TUnit::AssertionException.
       /// @param value The value to check is empty.
-      ///
+      /// @par Examples
       /// @code
       /// Array<int> c1 = {0, 1, 2};
       /// Array<int> v2;
@@ -1007,7 +1010,7 @@ namespace Pcf {
       /// @brief Asserts that a value is empty. If the value is not Empty the method throws an Pcf::TUnit::AssertionException.
       /// @param value The value to check is empty.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      ///
+      /// @par Examples
       /// @code
       /// Array<int> c1 = {0, 1, 2};
       /// Array<int> v2;
@@ -1020,7 +1023,7 @@ namespace Pcf {
       /// @brief Asserts that a value is empty. If the value is not Empty the method throws an Pcf::TUnit::AssertionException.
       /// @param value The value to check is empty.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// Array<int> c1 = {0, 1, 2};
       /// Array<int> c2;
@@ -1034,7 +1037,7 @@ namespace Pcf {
       /// @param value The value to check is empty.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// Array<int> c1 = {0, 1, 2};
       /// Array<int> c2;
@@ -1051,7 +1054,7 @@ namespace Pcf {
       
       /// @brief Verify that an object is not of the type supplied or a derived type. If they are not, then an Pcf::TUnit::AssertionException is thrown.
       /// @param value The object to verify
-      ///
+      /// @par Examples
       /// @code
       /// string str;
       /// TUnit::Assert::IsNotInstanceOf<Int32>(str); // test ok
@@ -1064,7 +1067,7 @@ namespace Pcf {
       /// @brief Verify that an object is not of the type supplied or a derived type. If they are not, then an Pcf::TUnit::AssertionException is thrown.
       /// @param value The object to verify
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      ///
+      /// @par Examples
       /// @code
       /// string str;
       /// TUnit::Assert::IsNotInstanceOf<Int32>(str); // test ok
@@ -1077,7 +1080,7 @@ namespace Pcf {
       /// @brief Verify that an object is not of the type supplied or a derived type. If they are not, then an Pcf::TUnit::AssertionException is thrown.
       /// @param value The object to verify
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// string str;
       /// TUnit::Assert::IsNotInstanceOf<string>(str); // test ok
@@ -1091,7 +1094,7 @@ namespace Pcf {
       /// @param value The object to verify
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// string str;
       /// TUnit::Assert::IsNotInstanceOf<Int32>(str); // test ok
@@ -1108,7 +1111,7 @@ namespace Pcf {
       
       /// @brief Verify that an object is not of the type supplied or a derived type. If they are not, then an Pcf::TUnit::AssertionException is thrown.
       /// @param value The object to verify
-      ///
+      /// @par Examples
       /// @code
       /// string str;
       /// TUnit::Assert::IsNotInstanceOfType<Int32>(str); // test ok
@@ -1121,7 +1124,7 @@ namespace Pcf {
       /// @brief Verify that an object is not of the type supplied or a derived type. If they are not, then an Pcf::TUnit::AssertionException is thrown.
       /// @param value The object to verify
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      ///
+      /// @par Examples
       /// @code
       /// string str;
       /// TUnit::Assert::IsNotInstanceOfType<Int32>(str); // test ok
@@ -1134,7 +1137,7 @@ namespace Pcf {
       /// @brief Verify that an object is not of the type supplied or a derived type. If they are not, then an Pcf::TUnit::AssertionException is thrown.
       /// @param value The object to verify
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// string str;
       /// TUnit::Assert::IsNotInstanceOfType<Int32>(str); // test ok
@@ -1148,7 +1151,7 @@ namespace Pcf {
       /// @param value The object to verify
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// string str;
       /// TUnit::Assert::IsNotInstanceOfType<Int32>(str); // test ok
@@ -1160,7 +1163,7 @@ namespace Pcf {
       
       /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
-      ///
+      /// @par Examples
       /// @code
       /// string str = "Anything";
       /// ...
@@ -1175,7 +1178,7 @@ namespace Pcf {
       /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      ///
+      /// @par Examples
       /// @code
       /// string str = "Anything";
       /// ...
@@ -1190,7 +1193,7 @@ namespace Pcf {
       /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// string str = "Anything";
       /// ...
@@ -1206,7 +1209,7 @@ namespace Pcf {
       /// @param pointer The pointer to check is null.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// string str = "Anything";
       /// ...
@@ -1225,7 +1228,7 @@ namespace Pcf {
       
       /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
-      ///
+      /// @par Examples
       /// @code
       /// UniquePointer<string> s1(new string("A string"));
       /// UniquePointer<string> s2;
@@ -1238,7 +1241,7 @@ namespace Pcf {
       /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      ///
+      /// @par Examples
       /// @code
       /// UniquePointer<string> s1(new string("A string"));
       /// UniquePointer<string> s2;
@@ -1251,7 +1254,7 @@ namespace Pcf {
       /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// UniquePointer<string> s1(new string("A string"));
       /// UniquePointer<string> s2;
@@ -1265,7 +1268,7 @@ namespace Pcf {
       /// @param pointer The pointer to check is null.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// UniquePointer<string> s1(new string("A string"));
       /// UniquePointer<string> s2;
@@ -1282,7 +1285,7 @@ namespace Pcf {
       
       /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
-      ///
+      /// @par Examples
       /// @code
       /// SharedPointer<string> s1(new string("A string"));
       /// SharedPointer<string> s2;
@@ -1295,7 +1298,7 @@ namespace Pcf {
       /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      ///
+      /// @par Examples
       /// @code
       /// SharedPointer<string> s1(new string("A string"));
       /// SharedPointer<string> s2;
@@ -1308,7 +1311,7 @@ namespace Pcf {
       /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// SharedPointer<string> s1(new string("A string"));
       /// SharedPointer<string> s2;
@@ -1322,7 +1325,7 @@ namespace Pcf {
       /// @param pointer The pointer to check is null.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// SharedPointer<string> s1(new string("A string"));
       /// SharedPointer<string> s2;
@@ -1339,7 +1342,7 @@ namespace Pcf {
       
       /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
-      ///
+      /// @par Examples
       /// @code
       /// string str = "Anything";
       /// ...
@@ -1354,7 +1357,7 @@ namespace Pcf {
       /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      ///
+      /// @par Examples
       /// @code
       /// string str = "Anything";
       /// ...
@@ -1369,7 +1372,7 @@ namespace Pcf {
       /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// string str = "Anything";
       /// ...
@@ -1385,7 +1388,7 @@ namespace Pcf {
       /// @param pointer The pointer to check is null.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// string str = "Anything";
       /// ...
@@ -1404,7 +1407,7 @@ namespace Pcf {
       
       /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
-      ///
+      /// @par Examples
       /// @code
       /// UniquePointer<string> s1;
       /// UniquePointer<string> s2(new string("A string"));
@@ -1417,7 +1420,7 @@ namespace Pcf {
       /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      ///
+      /// @par Examples
       /// @code
       /// UniquePointer<string> s1;
       /// UniquePointer<string> s2(new string("A string"));
@@ -1430,7 +1433,7 @@ namespace Pcf {
       /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// UniquePointer<string> s1;
       /// UniquePointer<string> s2(new string("A string"));
@@ -1444,7 +1447,7 @@ namespace Pcf {
       /// @param pointer The pointer to check is null.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// UniquePointer<string> s1;
       /// UniquePointer<string> s2(new string("A string"));
@@ -1461,7 +1464,7 @@ namespace Pcf {
       
       /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
-      ///
+      /// @par Examples
       /// @code
       /// SharedPointer<string> s1;
       /// SharedPointer<string> s2(new string("A string"));
@@ -1474,7 +1477,7 @@ namespace Pcf {
       /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      ///
+      /// @par Examples
       /// @code
       /// SharedPointer<string> s1;
       /// SharedPointer<string> s2(new string("A string"));
@@ -1487,7 +1490,7 @@ namespace Pcf {
       /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// SharedPointer<string> s1;
       /// SharedPointer<string> s2(new string("A string"));
@@ -1501,7 +1504,7 @@ namespace Pcf {
       /// @param pointer The pointer to check is null.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// SharedPointer<string> s1;
       /// SharedPointer<string> s2(new string("A string"));
@@ -1518,7 +1521,7 @@ namespace Pcf {
       
       /// @brief Asserts that a condition is true. If the condition is true the method throws an Pcf::TUnit::AssertionException.
       /// @param condition The condition to check is false.
-      ///
+      /// @par Examples
       /// @code
       /// string s1;
       /// string s2 = "Anything";
@@ -1530,7 +1533,7 @@ namespace Pcf {
       /// @brief Asserts that a condition is true. If the condition is true the method throws an Pcf::TUnit::AssertionException.
       /// @param condition The condition to check is false.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      ///
+      /// @par Examples
       /// @code
       /// string s1;
       /// string s2 = "Anything";
@@ -1542,7 +1545,7 @@ namespace Pcf {
       /// @brief Asserts that a condition is true. If the condition is true the method throws an Pcf::TUnit::AssertionException.
       /// @param condition The condition to check is false.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// string s1;
       /// string s2 = "Anything";
@@ -1555,7 +1558,7 @@ namespace Pcf {
       /// @param condition The condition to check is false.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// string s1;
       /// string s2 = "Anything";
@@ -1572,7 +1575,7 @@ namespace Pcf {
       /// @brief Verifies that the first value is less than the second value. If they are not, then an Pcf::TUnit::AssertionException is thrown.
       /// @param val1 the first value.
       /// @param val2 the second value.
-      ///
+      /// @par Examples
       /// @code
       /// TUnit::Assert::Less(12, 24); // test ok
       /// TUnit::Assert::Less(48, 24); // test throws an AssertionException.
@@ -1584,7 +1587,7 @@ namespace Pcf {
       /// @param val1 the first value.
       /// @param val2 the second value.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      ///
+      /// @par Examples
       /// @code
       /// TUnit::Assert::Less(24, 12, "User message..."); // test ok
       /// TUnit::Assert::Less(24, 48, "User message..."); // test throws an AssertionException.
@@ -1596,7 +1599,7 @@ namespace Pcf {
       /// @param val1 the first value.
       /// @param val2 the second value.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// TUnit::Assert::Less(12, 24, pcf_current_information); // test ok
       /// TUnit::Assert::Less(48, 24, pcf_current_information); // test throws an AssertionException.
@@ -1609,7 +1612,7 @@ namespace Pcf {
       /// @param val2 the second value.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// TUnit::Assert::Less(24, 12, "User message...", pcf_current_information); // test ok
       /// TUnit::Assert::Less(24, 48, "User message...", pcf_current_information); // test throws an AssertionException.
@@ -1625,7 +1628,7 @@ namespace Pcf {
       /// @brief Verifies that the first value is less or equal than the second value. If they are not, then an Pcf::TUnit::AssertionException is thrown.
       /// @param val1 the first value.
       /// @param val2 the second value.
-      ///
+      /// @par Examples
       /// @code
       /// TUnit::Assert::LessOrEqual(12, 24); // test ok
       /// TUnit::Assert::LessOrEqual(24, 24); // test ok
@@ -1638,7 +1641,7 @@ namespace Pcf {
       /// @param val1 the first value.
       /// @param val2 the second value.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      ///
+      /// @par Examples
       /// @code
       /// TUnit::Assert::LessOrEqual(24, 12, "User message..."); // test ok
       /// TUnit::Assert::LessOrEqual(24, 24, "User message..."); // test ok
@@ -1651,7 +1654,7 @@ namespace Pcf {
       /// @param val1 the first value.
       /// @param val2 the second value.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// TUnit::Assert::LessOrEqual(12, 24, pcf_current_information); // test ok
       /// TUnit::Assert::LessOrEqual(24, 24, pcf_current_information); // test ok
@@ -1665,7 +1668,7 @@ namespace Pcf {
       /// @param val2 the second value.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// TUnit::Assert::LessOrEqual(12, 24, "User message...", pcf_current_information); // test ok
       /// TUnit::Assert::LessOrEqual(24, 24, "User message...", pcf_current_information); // test ok
@@ -1681,7 +1684,7 @@ namespace Pcf {
       
       /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
-      ///
+      /// @par Examples
       /// @code
       /// string str = "Anything";
       /// ...
@@ -1696,7 +1699,7 @@ namespace Pcf {
       /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      ///
+      /// @par Examples
       /// @code
       /// string str = "Anything";
       /// ...
@@ -1711,7 +1714,7 @@ namespace Pcf {
       /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// string str = "Anything";
       /// ...
@@ -1727,7 +1730,7 @@ namespace Pcf {
       /// @param pointer The pointer to check is null.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// string str = "Anything";
       /// ...
@@ -1741,7 +1744,7 @@ namespace Pcf {
       
       /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
-      ///
+      /// @par Examples
       /// @code
       /// UniquePointer<string> s1(new string("A string"));
       /// UniquePointer<string> s2;
@@ -1754,7 +1757,7 @@ namespace Pcf {
       /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      ///
+      /// @par Examples
       /// @code
       /// UniquePointer<string> s1(new string("A string"));
       /// UniquePointer<string> s2;
@@ -1767,7 +1770,7 @@ namespace Pcf {
       /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// UniquePointer<string> s1(new string("A string"));
       /// UniquePointer<string> s2;
@@ -1781,7 +1784,7 @@ namespace Pcf {
       /// @param pointer The pointer to check is null.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// UniquePointer<string> s1(new string("A string"));
       /// UniquePointer<string> s2;
@@ -1793,7 +1796,7 @@ namespace Pcf {
       
       /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
-      ///
+      /// @par Examples
       /// @code
       /// SharedPointer<string> s1(new string("A string"));
       /// SharedPointer<string> s2;
@@ -1806,7 +1809,7 @@ namespace Pcf {
       /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      ///
+      /// @par Examples
       /// @code
       /// SharedPointer<string> s1(new string("A string"));
       /// SharedPointer<string> s2;
@@ -1819,7 +1822,7 @@ namespace Pcf {
       /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// SharedPointer<string> s1(new string("A string"));
       /// SharedPointer<string> s2;
@@ -1833,7 +1836,7 @@ namespace Pcf {
       /// @param pointer The pointer to check is null.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// SharedPointer<string> s1(new string("A string"));
       /// SharedPointer<string> s2;
@@ -1845,7 +1848,7 @@ namespace Pcf {
       
       /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
-      ///
+      /// @par Examples
       /// @code
       /// string str = "Anything";
       /// ...
@@ -1860,7 +1863,7 @@ namespace Pcf {
       /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      ///
+      /// @par Examples
       /// @code
       /// string str = "Anything";
       /// ...
@@ -1875,7 +1878,7 @@ namespace Pcf {
       /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// string str = "Anything";
       /// ...
@@ -1891,7 +1894,7 @@ namespace Pcf {
       /// @param pointer The pointer to check is null.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// string str = "Anything";
       /// ...
@@ -1905,7 +1908,7 @@ namespace Pcf {
       
       /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
-      ///
+      /// @par Examples
       /// @code
       /// UniquePointer<string> s1;
       /// UniquePointer<string> s2(new string("A string"));
@@ -1918,7 +1921,7 @@ namespace Pcf {
       /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      ///
+      /// @par Examples
       /// @code
       /// UniquePointer<string> s1;
       /// UniquePointer<string> s2(new string("A string"));
@@ -1931,7 +1934,7 @@ namespace Pcf {
       /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// UniquePointer<string> s1;
       /// UniquePointer<string> s2(new string("A string"));
@@ -1945,7 +1948,7 @@ namespace Pcf {
       /// @param pointer The pointer to check is null.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// UniquePointer<string> s1;
       /// UniquePointer<string> s2(new string("A string"));
@@ -1957,7 +1960,7 @@ namespace Pcf {
       
       /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
-      ///
+      /// @par Examples
       /// @code
       /// SharedPointer<string> s1;
       /// SharedPointer<string> s2(new string("A string"));
@@ -1970,7 +1973,7 @@ namespace Pcf {
       /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      ///
+      /// @par Examples
       /// @code
       /// SharedPointer<string> s1;
       /// SharedPointer<string> s2(new string("A string"));
@@ -1983,7 +1986,7 @@ namespace Pcf {
       /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// SharedPointer<string> s1;
       /// SharedPointer<string> s2(new string("A string"));
@@ -1997,7 +2000,7 @@ namespace Pcf {
       /// @param pointer The pointer to check is null.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// SharedPointer<string> s1;
       /// SharedPointer<string> s2(new string("A string"));
@@ -2049,7 +2052,7 @@ namespace Pcf {
       /// @brief Verifies that the statement throws a particular exception when called.
       /// @param exceptionType The exception type that must be throw.
       /// @param statement The statement that verify.
-      ///
+      /// @par Examples
       /// @code
       /// Array<int32> a = {1, 2 ,3, 4};
       /// Assert::Throws<ArgumentOutOfRangeException>(pcf_delegate {a[5];}); // test ok
@@ -2062,7 +2065,7 @@ namespace Pcf {
       /// @param exceptionType The exception type that must be throw.
       /// @param statement The statement that verify.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      ///
+      /// @par Examples
       /// @code
       /// Array<int32> a = {1, 2 ,3, 4};
       /// Assert::Throws<ArgumentOutOfRangeException>(pcf_delegate {a[5];}, "User message..."); // test ok
@@ -2075,7 +2078,7 @@ namespace Pcf {
       /// @param exceptionType The exception type that must be throw.
       /// @param statement The statement that verify.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// Array<int32> a = {1, 2 ,3, 4};
       /// Assert::Throws<ArgumentOutOfRangeException>(pcf_delegate {a[5];}, pcf_current_information); // test ok
@@ -2089,7 +2092,7 @@ namespace Pcf {
       /// @param statement The statement that verify.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// Array<int32> a = {1, 2 ,3, 4};
       /// Assert::Throws<ArgumentOutOfRangeException>(pcf_delegate {a[5];}, "User message...", pcf_current_information); // test ok
@@ -2113,7 +2116,7 @@ namespace Pcf {
       
       /// @brief Verifies that the statement throws any exception when called.
       /// @param statement The statement that verify.
-      ///
+      /// @par Examples
       /// @code
       /// Array<int32> a = {1, 2 ,3, 4};
       /// Assert::ThrowsAny(pcf_delegate {a[5];}); // test ok
@@ -2124,7 +2127,7 @@ namespace Pcf {
       /// @brief Verifies that the statement throws any exception when called.
       /// @param statement The statement that verify.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      ///
+      /// @par Examples
       /// @code
       /// Array<int32> a = {1, 2 ,3, 4};
       /// Assert::ThrowsAny(pcf_delegate {a[5];}, "User message..."); // test ok
@@ -2135,7 +2138,7 @@ namespace Pcf {
       /// @brief Verifies that the statement throws any exception when called.
       /// @param statement The statement that verify.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// Array<int32> a = {1, 2 ,3, 4};
       /// Assert::ThrowsAny(pcf_delegate {a[5];}, pcf_current_information); // test ok
@@ -2147,7 +2150,7 @@ namespace Pcf {
       /// @param statement The statement that verify.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// Array<int32> a = {1, 2 ,3, 4};
       /// Assert::ThrowsAny(pcf_delegate {a[5];}, "User message...", pcf_current_information); // test ok
@@ -2166,7 +2169,7 @@ namespace Pcf {
       
       /// @brief Asserts that a condition is true. If the condition is true the method throws an Pcf::TUnit::AssertionException.
       /// @param condition The condition to check is false.
-      ///
+      /// @par Examples
       /// @code
       /// string s1;
       /// string s2 = "Anything";
@@ -2178,7 +2181,7 @@ namespace Pcf {
       /// @brief Asserts that a condition is true. If the condition is true the method throws an Pcf::TUnit::AssertionException.
       /// @param condition The condition to check is false.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      ///
+      /// @par Examples
       /// @code
       /// string s1;
       /// string s2 = "Anything";
@@ -2190,7 +2193,7 @@ namespace Pcf {
       /// @brief Asserts that a condition is true. If the condition is true the method throws an Pcf::TUnit::AssertionException.
       /// @param condition The condition to check is false.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// string s1;
       /// string s2 = "Anything";
@@ -2203,7 +2206,7 @@ namespace Pcf {
       /// @param condition The condition to check is false.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @param currentInformation Contains information about current file and current line.
-      ///
+      /// @par Examples
       /// @code
       /// string s1;
       /// string s2 = "Anything";

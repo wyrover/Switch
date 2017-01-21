@@ -18,7 +18,7 @@ namespace Pcf {
     namespace Threading {
       /// @brief Provides a mechanism for executing a method at specified intervals.
       /// @remarks The callback method executed by the timer should be reentrant, because it is called on ThreadPool threads. The callback can be executed simultaneously on two thread pool threads if the timer interval is less than the time required to execute the callback, or if all thread pool threads are in use and the callback is queued multiple times.
-      ///
+      /// @par Examples
       /// This example show how to use Timer class
       /// @include Timer.cpp
       class pcf_public Timer: public Object {

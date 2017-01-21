@@ -8,6 +8,7 @@
 
 namespace Pcf {
   /// @brief Return true if specified value is the specified Type. A Is expression takes the following form:
+  /// @par Examples
   /// @code
   /// System::Int32 i = 0;
   /// bool isInt32 = is<System::Int32>(i);
@@ -20,6 +21,7 @@ namespace Pcf {
   }
   
   /// @brief Return true if specified value is the specified Type. A Is expression takes the following form:
+  /// @par Examples
   /// @code
   /// System::Int32 i = 0;
   /// bool isInt32 = is<System::Int32>(i);
@@ -32,6 +34,7 @@ namespace Pcf {
   }
   
   /// @brief Return true if specified value is the specified Type. A Is expression takes the following form:
+  /// @par Examples
   /// @code
   /// System::Int32 i = 0;
   /// bool isInt32 = is<System::Int32>(i);
@@ -44,6 +47,7 @@ namespace Pcf {
   }
   
   /// @brief Return true if specified value is the specified Type. A Is expression takes the following form:
+  /// @par Examples
   /// @code
   /// System::Int32 i = 0;
   /// bool isInt32 = is<System::Int32>(i);
@@ -56,6 +60,7 @@ namespace Pcf {
   }
   
   /// @brief Return true if specified value is the specified Type. A Is expression takes the following form:
+  /// @par Examples
   /// @code
   /// System::Int32 i = 0;
   /// bool isInt32 = is<System::Int32>(i);
@@ -68,6 +73,7 @@ namespace Pcf {
   }
   
   /// @brief Return true if specified value is the specified Type. A Is expression takes the following form:
+  /// @par Examples
   /// @code
   /// System::Int32 i = 0;
   /// bool isInt32 = is<System::Int32>(i);
@@ -84,6 +90,7 @@ namespace Pcf {
   }
   
   /// @brief Return true if specified value is the specified Type. A Is expression takes the following form:
+  /// @par Examples
   /// @code
   /// System::Int32 i = 0;
   /// bool isInt32 = is<System::Int32>(i);
@@ -100,6 +107,7 @@ namespace Pcf {
   }
   
   /// @brief Return true if specified value is the specified Type. A Is expression takes the following form:
+  /// @par Examples
   /// @code
   /// System::Int32 i = 0;
   /// bool isInt32 = is<System::Int32>(i);
@@ -118,6 +126,7 @@ namespace Pcf {
   }
   
   /// @brief Return true if specified value is the specified Type. A Is expression takes the following form:
+  /// @par Examples
   /// @code
   /// System::Int32 i = 0;
   /// bool isInt32 = is<System::Int32>(i);

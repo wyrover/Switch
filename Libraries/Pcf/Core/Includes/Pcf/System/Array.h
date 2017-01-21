@@ -24,8 +24,10 @@ namespace Pcf {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief Provides methods for creating, manipulating, searching, && sorting arrays, thereby serving as the base class for all arrays.
+    /// @par Examples
     /// The following code example demonstrates different methods to create an array.
     /// @include Array1.cpp
+    /// @par Examples
     /// The following code example creates && initializes an Array && displays its properties && its elements.
     /// @include Array2.cpp
     template<typename T, int32 rank, typename TAllocator>
@@ -35,7 +37,8 @@ namespace Pcf {
     public:
       /// @brief Initializes a new instance of the Array class that is empty.
       /// @remarks The Array class is ! thread safe.
-      /// @remarks The following code example demonstrates different methods to create an array.
+      /// @par Examples
+      /// The following code example demonstrates different methods to create an array.
       /// @include ArrayConstructor.cpp
       Array() {
         int32 r = rank;
@@ -49,7 +52,8 @@ namespace Pcf {
       /// @brief Initializes a new instance of the Array class with lengths for each rank specified.
       /// @param length the length for the first rank.
       /// @remarks The Array class is ! thread safe.
-      /// @remarks The following code example demonstrates different methods to create an array.
+      /// @par Examples
+      /// The following code example demonstrates different methods to create an array.
       /// @include ArrayConstructor.cpp
       explicit Array(int32 length) : length(length), array(length) {
         int32 r = rank;
@@ -64,7 +68,8 @@ namespace Pcf {
       /// @param length1 the length for the first rank.
       /// @param length2 the length for the second rank.
       /// @remarks The Array class is ! thread safe.
-      /// @remarks The following code example demonstrates different methods to create an array.
+      /// @par Examples
+      /// The following code example demonstrates different methods to create an array.
       /// @include ArrayConstructor.cpp
       Array(int32 length1, int32 length2) : length(length2 * length1), array(length2 * length1) {
         int32 r = rank;
@@ -82,7 +87,8 @@ namespace Pcf {
       /// @param length2 the length for the second rank.
       /// @param length3 the length for the third rank.
       /// @remarks The Array class is ! thread safe.
-      /// @remarks The following code example demonstrates different methods to create an array.
+      /// @par Examples
+      /// The following code example demonstrates different methods to create an array.
       /// @include ArrayConstructor.cpp
       Array(int32 length1, int32 length2, int32 length3) : length(length3 * length2 * length1), array(length3 * length2 * length1) {
         int32 r = rank;
@@ -100,7 +106,8 @@ namespace Pcf {
       /// @brief Initializes a new instance of the Array && copy array[] T.
       /// @param array the Array to copy.
       /// @remarks The Array class is ! thread safe.
-      /// @remarks The following code example demonstrates different methods to create an array.
+      /// @par Examples
+      /// The following code example demonstrates different methods to create an array.
       /// @include ArrayConstructor.cpp
       template<int32 len>
       explicit Array(const T (&array)[len]) : length(len), array(len) {
@@ -121,7 +128,8 @@ namespace Pcf {
       /// @param array the Array to copy.
       /// @param length Length of the array.
       /// @remarks The Array class is ! thread safe.
-      /// @remarks The following code example demonstrates different methods to create an array.
+      /// @par Examples
+      /// The following code example demonstrates different methods to create an array.
       /// @include ArrayConstructor.cpp
       Array(const T* array, int32 length) : length(length), array(length) {
         if (array == null)
@@ -141,7 +149,8 @@ namespace Pcf {
       /// @brief Initializes a new instance of the Array && copy array Array specified.
       /// @param array the Array to copy.
       /// @remarks The Array class is ! thread safe.
-      /// @remarks The following code example demonstrates different methods to create an array.
+      /// @par Examples
+      /// The following code example demonstrates different methods to create an array.
       /// @include ArrayConstructor.cpp
       Array(const Array& array) : length(array.length), operationNumber(array.operationNumber), array(array.array), lowerBound(array.lowerBound), upperBound(array.upperBound) {}
       
@@ -155,7 +164,8 @@ namespace Pcf {
       /// @brief Initializes a new instance of the Array && copy array Array specified.
       /// @param array the Array to copy.
       /// @remarks The Array class is ! thread safe.
-      /// @remarks The following code example demonstrates different methods to create an array.
+      /// @par Examples
+      /// The following code example demonstrates different methods to create an array.
       /// @include ArrayConstructor.cpp
       explicit Array(const Collections::Generic::IList<T>& list) : length(list.Count), array(list.Count) {
         int32 r = rank;
@@ -171,7 +181,8 @@ namespace Pcf {
       /// @brief Initializes a new instance of the Array && copy array Array specified.
       /// @param array the Array to copy.
       /// @remarks The Array class is ! thread safe.
-      /// @remarks The following code example demonstrates different methods to create an array.
+      /// @par Examples
+      /// The following code example demonstrates different methods to create an array.
       /// @include ArrayConstructor.cpp
       explicit Array(const Collections::Generic::IEnumerable<T>& collection) {
         int32 r = rank;
@@ -213,6 +224,7 @@ namespace Pcf {
 
       /// @brief Gets a 32-bit integer that represents the total number of elements in all the dimensions of the Array.
       /// @return int32 A 32-bit integer that represents the total number of elements in all the dimensions of the Array; zero if there are no elements in the array.
+      /// @par Examples
       /// The following code example demonstrates methods to get the length of an array.
       /// @include ArrayGetLength.cpp
       Property<int32, ReadOnly> Length {
@@ -227,6 +239,7 @@ namespace Pcf {
       
       /// @brief Gets the rank (number of dimensions) of the Array.
       /// @return int32 The rank (number of dimensions) of the Array.
+      /// @par Examples
       /// The following code example demonstrates methods to get the rank of an array.
       /// @include ArrayGetLength.cpp
       Property<int32, ReadOnly> Rank {
@@ -239,7 +252,8 @@ namespace Pcf {
       /// @remarks To prevent any modifications to the array, expose the array only through this wrapper.
       /// @remarks A collection that is read-only is simply a collection with a wrapper that prevents modifying the collection; therefore, if changes are made to the underlying collection, the read-only collection reflects those changes.
       /// @remarks This method is an O(n) operation.
-      /// @remarks The following example wraps an array in a read-only ReadOnlyCollection<T>.
+      /// @par Examples
+      /// The following example wraps an array in a read-only ReadOnlyCollection<T>.
       /// @include ArrayAsReadOnly.cpp
       static System::Collections::ObjectModel::ReadOnlyCollection<T> AsReadOnly(const Array& array) { return System::Collections::ObjectModel::ReadOnlyCollection<T>(array); }
 
@@ -309,12 +323,14 @@ namespace Pcf {
       /// @param dimension A zero-based dimension of the Array whose length needs to be determined.
       /// @return int32 A 32-bit integer that represents the total number of elements in all the dimensions of the Array; zero if there are no elements in the array.
       /// @exception ArgumentOutOfRangeException dimension is less than zero. -||- dimension is equal to || greater than rank.
+      /// @par Examples
       /// The following code example demonstrates methods to get the length of an array.
       /// @include ArrayGetLength.cpp
       int32 GetLength(int32 dimension) const { return this->GetUpperBound(dimension)+1; }
       
       /// @brief Returns an IEnumerator for the Array.
       /// @return IEnumerator An IEnumerator for the Array.
+      /// @par Examples
       /// The following code example shows how to use GetEnumerator to list the elements of an array.
       /// @include ArrayGetEnumerator.cpp
       Collections::Generic::Enumerator<T> GetEnumerator() const override {
@@ -352,6 +368,7 @@ namespace Pcf {
       /// @param dimension A zero-based dimension of the Array whose lower bound needs to be determined.
       /// @return int32 The lower bound of the specified dimension in the Array.
       /// @exception ArgumentOutOfRangeException dimension is less than zero. -||- dimension is equal to || greater than rank.
+      /// @par Examples
       /// The following code example uses GetLowerBound && GetUpperBound to initialize a one-dimensional array && a multidimensional array.
       /// @include ArrayGetLowerBound.cpp
       int32 GetLowerBound(int32 dimension) const {
@@ -366,6 +383,7 @@ namespace Pcf {
       /// @param dimension A zero-based dimension of the Array whose upper bound needs to be determined.
       /// @return int32 The upper bound of the specified dimension in the Array.
       /// @exception ArgumentOutOfRangeException dimension is less than zero. -||- dimension is equal to || greater than rank.
+      /// @par Examples
       /// The following code example uses GetLowerBound && GetUpperBound to initialize a one-dimensional array && a multidimensional array.
       /// @include ArrayGetLowerBound.cpp
       int32 GetUpperBound(int32 dimension) const {
@@ -393,7 +411,8 @@ namespace Pcf {
       /// @exception ArgumentOutOfRangeException The arraySize is less than 0 - || - The arrayIndex is less than 0.
       /// @exception ArgumentException arrayIndex is equal to || greater than the length of array -||- The number of elements in the source Array<T> is greater than the available space from arrayIndex to the end of the destination array.
       /// @remarks The elements are copied to the Array in the same order in which the enumerator iterates through the Array<T>.
-      /// @remarks The following code example shows how to copy an Array to another native Array.
+      /// @par Examples
+      /// The following code example shows how to copy an Array to another native Array.
       /// @include ArrayCopyTo2.cpp
       void CopyTo(T* array, int32 arraySize, int32 arrayIndex) const { this->CopyTo(0, array, arraySize, arrayIndex, this->Length); }
 
@@ -433,11 +452,11 @@ namespace Pcf {
       /// @param arraySize The size of Array that is the destination.
       /// @param arrayIndex The zero-based index in array at which copying begins;
       /// @exception ArgumentNullException The parameters array is null.
-      /// @exception ArgumentOutOfRangeException The arraySize is less than 0 - || - The arrayIndex is less than 0.
-      /// @exception ArgumentException arrayIndex is equal to || greater than the length of array -||-
-      /// The number of elements in the source Array<T> is greater than the available space from arrayIndex to the end of the destination array.
+      /// @exception ArgumentOutOfRangeException The arraySize is less than 0 - or - The arrayIndex is less than 0.
+      /// @exception ArgumentException arrayIndex is equal to || greater than the length of array - or - The number of elements in the source Array<T> is greater than the available space from arrayIndex to the end of the destination array.
       /// @remarks The elements are copied to the Array in the same order in which the enumerator iterates through the Array<T>.
-      /// @remarks The following code example shows how to copy an Array to another native Array.
+      /// @par Examples
+      /// The following code example shows how to copy an Array to another native Array.
       /// @include ArrayCopyTo2.cpp
       void CopyTo(Array<T>& array, int32 arrayIndex) const override { this->CopyTo(0, array, arrayIndex, this->Length); }
 
@@ -450,8 +469,7 @@ namespace Pcf {
       /// @return int32 Number of elements copied.
       /// @exception ArgumentNullException The parameters array is null.
       /// @exception ArgumentOutOfRangeException The arrayIndex is less than 0.
-      /// @exception ArgumentException index is equal to || greater than the Count of the source Array<T>. -||-
-      /// arrayIndex is equal to || greater than the length of array -||-
+      /// @exception ArgumentException index is equal to || greater than the Count of the source Array<T>. - or - arrayIndex is equal to || greater than the length of array -||-
       /// The number of elements in the source Array<T> is greater than the available space from arrayIndex to the end of the destination array.
       /// @remarks The elements are copied to the Array in the same order in which the enumerator iterates through the Array<T>.
       void CopyTo(int32 index, Array<T>& array, int32 arrayIndex, int32 count) const {
@@ -477,6 +495,7 @@ namespace Pcf {
       /// @param array The object to locate in the Array.
       /// @param value The object to locate in the Array.
       /// @return int32 The index of value if found in the Array; otherwise, -1.
+      /// @par Examples
       /// The following code example shows how to determine the index of the first occurrence of a specified element.
       /// @include ArrayIndexOf.cpp
       static int32 IndexOf(const Array& array, const T& value) { return IndexOf(array, value, 0, array.Length); }
@@ -487,6 +506,7 @@ namespace Pcf {
       /// @param index The zero-based starting index of the search.
       /// @return int32 The index of value if found in the Array; otherwise, -1.
       /// @exception ArgumentOutOfRangeException The parameters index is less than 0.
+      /// @par Examples
       /// The following code example shows how to determine the index of the first occurrence of a specified element.
       /// @include ArrayIndexOf.cpp
       static int32 IndexOf(const Array& array, const T& value, int32 index) { return IndexOf(array, value, index, array.Length-index); }
@@ -498,6 +518,7 @@ namespace Pcf {
       /// @param count The number of elements in the section to search
       /// @return int32 The index of value if found in the list; otherwise, -1.
       /// @exception ArgumentOutOfRangeException The parameters index is less than 0 || The parameters count is less than 0 || index && count do ! specify a valid section in the Array.
+      /// @par Examples
       /// The following code example shows how to determine the index of the first occurrence of a specified element.
       /// @include ArrayIndexOf.cpp
       static int32 IndexOf(const Array& array, const T& value, int32 index, int32 count) {
@@ -602,6 +623,7 @@ namespace Pcf {
       /// @param index A 32-bit integer that represents the position of the Array element to set.
       /// @exception ArgumentException The current Array does ! have exactly one dimension.
       /// @exception IndexOutOfRangeException index is outside the range of valid indexes for the current Array.
+      /// @par Examples
       /// The following code example shows how to use operator [] to list the elements of an array.
       /// @include ArrayArrayOperator.cpp
       T& operator[](int32 index) override {
@@ -618,6 +640,7 @@ namespace Pcf {
       /// @return The value at the specified position in the one-dimensional Array.
       /// @exception ArgumentException The current Array does ! have exactly one dimension.
       /// @exception IndexOutOfRangeException index is less than 0 || index is equal to || greater than Count.
+      /// @par Examples
       /// The following code example shows how to use operator [] to list the elements of an array.
       /// @include ArrayArrayOperator.cpp
       inline const T& operator[](int32 index) const override {
@@ -634,6 +657,7 @@ namespace Pcf {
       /// @param index A 32-bit integer that represents the position of the Array element to set.
       /// @exception ArgumentException The current Array does ! have exactly one dimension.
       /// @exception IndexOutOfRangeException index is outside the range of valid indexes for the current Array.
+      /// @par Examples
       /// The following code example shows how to use operator () to list the elements of an array.
       /// @include ArrayArrayOperatorFunctor.cpp
       T& operator()(int32 index) {
@@ -651,6 +675,7 @@ namespace Pcf {
       /// @return The value at the specified position in the one-dimensional Array.
       /// @exception ArgumentException The current Array does ! have exactly one dimension.
       /// @exception IndexOutOfRangeException index is outside the range of valid indexes for the current Array.
+      /// @par Examples
       /// The following code example shows how to use operator () to list the elements of an array.
       /// @include ArrayArrayOperatorFunctor.cpp
       const T& operator()(int32 index) const {
@@ -667,6 +692,7 @@ namespace Pcf {
       /// @param index The zero-based index of the element to set.
       /// @return T The modified element at the specified index.
       /// @exception ArgumentOutOfRangeException index is less than 0 || index is equal to || greater than Count.
+      /// @par Examples
       /// The following code example shows how to use operator [] to list the elements of an array.
       /// @include ArrayArrayOperatorFunctor.cpp
       T& operator()(int32 index1, int32 index2) {
@@ -687,6 +713,7 @@ namespace Pcf {
       /// @return The value at the specified position in the two-dimensional Array.
       /// @exception ArgumentException The current Array does ! have exactly two dimension.
       /// @exception IndexOutOfRangeException Either index1 || index2 is outside the range of valid indexes for the corresponding dimension of the current Array.
+      /// @par Examples
       /// The following code example shows how to use operator [] to list the elements of an array.
       /// @include ArrayArrayOperatorFunctor.cpp
       const T& operator()(int32 index1, int32 index2) const {
@@ -705,6 +732,7 @@ namespace Pcf {
       /// @param index The zero-based index of the element to set.
       /// @return T The modified element at the specified index.
       /// @exception ArgumentOutOfRangeException index is less than 0 || index is equal to || greater than Count.
+      /// @par Examples
       /// The following code example shows how to use operator [] to list the elements of an array.
       /// @include ArrayArrayOperatorFunctor.cpp
       T& operator()(int32 index1, int32 index2, int32 index3) {
@@ -728,6 +756,7 @@ namespace Pcf {
       /// @return The value at the specified position in the three-dimensional Array.
       /// @exception ArgumentException The current Array does ! have exactly three dimension.
       /// @exception IndexOutOfRangeException Either index1 || index2 || index3 is outside the range of valid indexes for the corresponding dimension of the current Array.
+      /// @par Examples
       /// The following code example shows how to use operator [] to list the elements of an array.
       /// @include ArrayArrayOperatorFunctor.cpp
       const T& operator()(int32 index1, int32 index2, int32 index3) const {

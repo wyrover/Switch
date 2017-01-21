@@ -9,6 +9,7 @@ namespace Pcf {
   /// This is accomplished by obtaining a mutual-exclusion lock for a given object for the duration of the code block.
   /// @param object The object on which to acquire the lock.
   /// @see System::Threading::Monitor
+  /// @par Examples
   /// The following code example shows how to use lock keyword.
   /// @include ArrayGetSyncRoot.cpp
   /// @ingroup Pcf

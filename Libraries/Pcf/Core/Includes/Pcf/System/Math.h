@@ -17,6 +17,7 @@ namespace Pcf {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief Provides constants and static methods for trigonometric, logarithmic, and other common mathematical functions.
+    /// @par Examples
     /// This class cannot be inherited.
     /// @include Math.cpp
     class pcf_public Math pcf_static {

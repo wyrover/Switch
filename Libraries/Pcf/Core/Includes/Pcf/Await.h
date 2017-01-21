@@ -7,6 +7,7 @@
 /// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Pcf {
   /// @brief The await object is applied to a task in an asynchronous method to suspend the execution of the method until the awaited task completes.
+  /// @par Examples
   /// This example demontrate how to use async and await
   /// @include Async1.cpp
   class pcf_public Await {
@@ -42,11 +43,13 @@ namespace Pcf {
   };
   
   /// @brief The await object is applied to a task in an asynchronous method to suspend the execution of the method until the awaited task completes.
+  /// @par Examples
   /// This example demontrate how to use async and await
   /// @include Async1.cpp
   using await = Await;
   
   /// @brief The await operator is applied to a task in an asynchronous method to suspend the execution of the method until the awaited task completes.
+  /// @par Examples
   /// This example demontrate how to use async and await
   /// @include Async2.cpp
   /// @ingroup Pcf

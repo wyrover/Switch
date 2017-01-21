@@ -23,7 +23,8 @@ namespace Pcf {
       /// @remarks   3. Store the value in the instance variable.
       /// @remarks If you do not use Increment and Decrement, a thread can be preempted after executing the first two steps. Another thread can then execute all three steps. When the first thread resumes execution, it overwrites the value in the instance variable, and the effect of the increment or decrement performed by the second thread is lost.
       /// @remarks The Exchange method atomically exchanges the values of the specified variables. The CompareExchange method combines two operations: comparing two values and storing a third value in one of the variables, based on the outcome of the comparison. The compare and exchange operations are performed as an atomic operation.
-      /// @remarks The following code example shows a thread-safe resource locking mechanism.
+      /// @par Examples
+      /// The following code example shows a thread-safe resource locking mechanism.
       /// @include Interlocked.cpp
       class pcf_public Interlocked pcf_static {
       public:
@@ -109,6 +110,7 @@ namespace Pcf {
         /// @brief Decrements a specified variable and stores the result, as an atomic operation.
         /// @param location The variable whose value is to be decremented.
         /// @return The decremented value.
+        /// @par Examples
         /// The following code example shows a thread-safe way to increment and decrement an integer value. SafeInstanceCount will always be zero. However, UnsafeInstanceCount will not necessarily be zero because a race condition occurs between incrementing and decrementing the count. This effect is especially marked on a multiprocessor computer.
         /// @include Interlocked.Decrement.cpp
         static int32 Decrement(int32& location);
@@ -179,6 +181,7 @@ namespace Pcf {
         /// @brief Increments a specified variable and stores the result, as an atomic operation.
         /// @param location The variable whose value is to be incremented.
         /// @return The incremented value.
+        /// @par Examples
         /// The following code example shows a thread-safe way to increment and decrement an integer value. SafeInstanceCount will always be zero. However, UnsafeInstanceCount will not necessarily be zero because a race condition occurs between incrementing and decrementing the count. This effect is especially marked on a multiprocessor computer.
         /// @include Interlocked.Decrement.cpp
         static int32 Increment(int32& location);

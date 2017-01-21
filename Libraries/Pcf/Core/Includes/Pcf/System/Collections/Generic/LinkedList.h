@@ -43,7 +43,8 @@ namespace Pcf {
           /// @remarks The capacity can be decreased by calling the TrimExcess method or by setting the Capacity property explicitly. Decreasing the capacity reallocates memory and copies all the elements in the LinkedList<T>.
           /// @remarks This constructor is an O(1) operation.
           /// @remarks The following code example demonstrates the default constructor of the LinkedList<T> generic class. The default constructor creates a list with the default capacity, as demonstrated by displaying the Capacity property.
-          /// @remarks The code example adds, inserts, and removes items, showing how the capacity changes as these methods are used.
+          /// @par Examples
+          /// The code example adds, inserts, and removes items, showing how the capacity changes as these methods are used.
           /// @include LinkedList.cpp
           LinkedList() : operationNumber(0) {}
 
@@ -52,7 +53,8 @@ namespace Pcf {
           /// @exception ArgumentNullException The parameters collection is null or element reference null in collection.
           /// @remarks The elements are copied onto the LinkedList<T> in the same order they are read by the enumerator of the collection.
           /// @remarks This constructor is an O(n) operation, where n is the number of elements in collection.
-          /// @remarks The following code example demonstrates the LinkedList<T> constructor and various methods of the LinkedList<T> class that act on ranges. An array of strings is created and passed to the constructor, populating the list with the elements of the array. The Capacity property is then displayed, to show that the initial capacity is exactly what is required to hold the input elements.
+          /// @par Examples
+          /// The following code example demonstrates the LinkedList<T> constructor and various methods of the LinkedList<T> class that act on ranges. An array of strings is created and passed to the constructor, populating the list with the elements of the array. The Capacity property is then displayed, to show that the initial capacity is exactly what is required to hold the input elements.
           /// @include List2.cpp
           LinkedList(const IEnumerable<T>& collection) : operationNumber(0) {
             for (T value : collection)
@@ -89,7 +91,8 @@ namespace Pcf {
           /// @remarks If Count already equals Capacity, the capacity of the LinkedList<T> is increased by automatically reallocating the internal array, and the existing elements are copied to the new array before the new element is added.
           /// @remarks If Count is less than Capacity, this method is an O(1) operation. If the capacity needs to be increased to accommodate the new element, this method becomes an O(n) operation, where n is Count.
           /// @remarks The following code example demonstrates several properties and methods of the LinkedList<T> generic class, including the Add method. The default constructor is used to create a list of strings with a capacity of 0. The Capacity property is displayed, and then the Add method is used to add several items. The items are listed, and the Capacity property is displayed again, along with the Count property, to show that the capacity has been increased as needed.
-          /// @remarks Other properties and methods are used to search for, insert, and remove elements from the list, and finally to clear the list.
+          /// @par Examples
+          /// Other properties and methods are used to search for, insert, and remove elements from the list, and finally to clear the list.
           /// @include LinkedList.cpp
           void Add(const T& value) override {
             this->list.push_back(value);
@@ -101,7 +104,8 @@ namespace Pcf {
           /// @remarks The order of the elements in the collection is preserved in the LinkedList<T>.
           /// @remarks If the new Count (the current Count plus the size of the collection) will be greater than Capacity, the capacity of the LinkedList<T> is increased by automatically reallocating the internal array to accommodate the new elements, and the existing elements are copied to the new array before the new elements are added.
           /// @remarks If the LinkedList<T> can accommodate the new elements without increasing the Capacity, this method is an O(n) operation, where n is the number of elements to be added. If the capacity needs to be increased to accommodate the new elements, this method becomes an O(n + m) operation, where n is the number of elements to be added and m is Count.
-          /// @remarks The following code example demonstrates the LinkedList<T> constructor and various methods of the LinkedList<T> class that act on ranges. An array of strings is created and passed to the constructor, populating the list with the elements of the array. The Capacity property is then displayed, to show that the initial capacity is exactly what is required to hold the input elements.
+          /// @par Examples
+          /// The following code example demonstrates the LinkedList<T> constructor and various methods of the LinkedList<T> class that act on ranges. An array of strings is created and passed to the constructor, populating the list with the elements of the array. The Capacity property is then displayed, to show that the initial capacity is exactly what is required to hold the input elements.
           /// @include List2.cpp
           void AddRange(const IEnumerable<T>& enumerable) {
             for (T value : enumerable)
@@ -114,7 +118,8 @@ namespace Pcf {
           /// @remarks The order of the elements in the collection is preserved in the LinkedList<T>.
           /// @remarks If the new Count (the current Count plus the size of the collection) will be greater than Capacity, the capacity of the LinkedList<T> is increased by automatically reallocating the internal array to accommodate the new elements, and the existing elements are copied to the new array before the new elements are added.
           /// @remarks If the LinkedList<T> can accommodate the new elements without increasing the Capacity, this method is an O(n) operation, where n is the number of elements to be added. If the capacity needs to be increased to accommodate the new elements, this method becomes an O(n + m) operation, where n is the number of elements to be added and m is Count.
-          /// @remarks The following code example demonstrates the LinkedList<T> constructor and various methods of the LinkedList<T> class that act on ranges. An array of strings is created and passed to the constructor, populating the list with the elements of the array. The Capacity property is then displayed, to show that the initial capacity is exactly what is required to hold the input elements.
+          /// @par Examples
+          /// The following code example demonstrates the LinkedList<T> constructor and various methods of the LinkedList<T> class that act on ranges. An array of strings is created and passed to the constructor, populating the list with the elements of the array. The Capacity property is then displayed, to show that the initial capacity is exactly what is required to hold the input elements.
           /// @include List2.cpp
           void AddRange(InitializerList<T> il) {
             for (T item : il)
@@ -126,7 +131,8 @@ namespace Pcf {
           /// @remarks Capacity remains unchanged. To reset the capacity of the LinkedList<T>, call the TrimExcess method or set the Capacity property directly. Decreasing the capacity reallocates memory and copies all the elements in the LinkedList<T>. Trimming an empty LinkedList<T> sets the capacity of the LinkedList<T> to the default capacity.
           /// @remarks This method is an O(n) operation, where n is Count.
           /// @remarks The following code example demonstrates several properties and methods of the LinkedList<T> generic class, including the Add method. The default constructor is used to create a list of strings with a capacity of 0. The Capacity property is displayed, and then the Add method is used to add several items. The items are listed, and the Capacity property is displayed again, along with the Count property, to show that the capacity has been increased as needed.
-          /// @remarks Other properties and methods are used to search for, insert, and remove elements from the list, and finally to clear the list.
+          /// @par Examples
+          /// Other properties and methods are used to search for, insert, and remove elements from the list, and finally to clear the list.
           /// @include LinkedList.cpp
           void Clear() override {
             this->list.clear();
@@ -152,7 +158,8 @@ namespace Pcf {
           /// @remarks TThis method uses Array.Copy to copy the elements.
           /// @remarks The elements are copied to the Array in the same order in which the enumerator iterates through the LinkedList<T>.
           /// @remarks This method is an O(n) operation, where n is Count.
-          /// @remarks The following code example demonstrates all three overloads of the CopyTo method. A LinkedList<T> of strings is created and populated with 5 strings. An empty string array of 15 elements is created, and the CopyTo(T[]) method overload is used to copy all the elements of the list to the array beginning at the first element of the array. The CopyTo(T[], Int32) method overload is used to copy all the elements of the list to the array beginning at array index 6 (leaving index 5 empty). Finally, the CopyTo(Int32, T[], Int32, Int32) method overload is used to copy 3 elements from the list, beginning with index 2, to the array beginning at array index 12 (leaving index 11 empty). The contents of the array are then displayed.
+          /// @par Examples
+          /// The following code example demonstrates all three overloads of the CopyTo method. A LinkedList<T> of strings is created and populated with 5 strings. An empty string array of 15 elements is created, and the CopyTo(T[]) method overload is used to copy all the elements of the list to the array beginning at the first element of the array. The CopyTo(T[], Int32) method overload is used to copy all the elements of the list to the array beginning at array index 6 (leaving index 5 empty). Finally, the CopyTo(Int32, T[], Int32, Int32) method overload is used to copy 3 elements from the list, beginning with index 2, to the array beginning at array index 12 (leaving index 11 empty). The contents of the array are then displayed.
           /// @include LinkedList.CopyTo.cpp
           void CopyTo(Array<T>& array) const {
             this->CopyTo(0, array, 0, this->Count);
@@ -167,7 +174,8 @@ namespace Pcf {
           /// @remarks TThis method uses Array.Copy to copy the elements.
           /// @remarks The elements are copied to the Array in the same order in which the enumerator iterates through the LinkedList<T>.
           /// @remarks This method is an O(n) operation, where n is Count.
-          /// @remarks The following code example demonstrates all three overloads of the CopyTo method. A LinkedList<T> of strings is created and populated with 5 strings. An empty string array of 15 elements is created, and the CopyTo(T[]) method overload is used to copy all the elements of the list to the array beginning at the first element of the array. The CopyTo(T[], Int32) method overload is used to copy all the elements of the list to the array beginning at array index 6 (leaving index 5 empty). Finally, the CopyTo(Int32, T[], Int32, Int32) method overload is used to copy 3 elements from the list, beginning with index 2, to the array beginning at array index 12 (leaving index 11 empty). The contents of the array are then displayed.
+          /// @par Examples
+          /// The following code example demonstrates all three overloads of the CopyTo method. A LinkedList<T> of strings is created and populated with 5 strings. An empty string array of 15 elements is created, and the CopyTo(T[]) method overload is used to copy all the elements of the list to the array beginning at the first element of the array. The CopyTo(T[], Int32) method overload is used to copy all the elements of the list to the array beginning at array index 6 (leaving index 5 empty). Finally, the CopyTo(Int32, T[], Int32, Int32) method overload is used to copy 3 elements from the list, beginning with index 2, to the array beginning at array index 12 (leaving index 11 empty). The contents of the array are then displayed.
           /// @include LinkedList.CopyTo.cpp
           void CopyTo(Array<T>& array, int32 arrayIndex) const override {
             this->CopyTo(0, array, arrayIndex, this->Count);
@@ -184,7 +192,8 @@ namespace Pcf {
           /// @remarks TThis method uses Array.Copy to copy the elements.
           /// @remarks The elements are copied to the Array in the same order in which the enumerator iterates through the LinkedList<T>.
           /// @remarks This method is an O(n) operation, where n is Count.
-          /// @remarks The following code example demonstrates all three overloads of the CopyTo method. A LinkedList<T> of strings is created and populated with 5 strings. An empty string array of 15 elements is created, and the CopyTo(T[]) method overload is used to copy all the elements of the list to the array beginning at the first element of the array. The CopyTo(T[], Int32) method overload is used to copy all the elements of the list to the array beginning at array index 6 (leaving index 5 empty). Finally, the CopyTo(Int32, T[], Int32, Int32) method overload is used to copy 3 elements from the list, beginning with index 2, to the array beginning at array index 12 (leaving index 11 empty). The contents of the array are then displayed.
+          /// @par Examples
+          /// The following code example demonstrates all three overloads of the CopyTo method. A LinkedList<T> of strings is created and populated with 5 strings. An empty string array of 15 elements is created, and the CopyTo(T[]) method overload is used to copy all the elements of the list to the array beginning at the first element of the array. The CopyTo(T[], Int32) method overload is used to copy all the elements of the list to the array beginning at array index 6 (leaving index 5 empty). Finally, the CopyTo(Int32, T[], Int32, Int32) method overload is used to copy 3 elements from the list, beginning with index 2, to the array beginning at array index 12 (leaving index 11 empty). The contents of the array are then displayed.
           /// @include LinkedList.CopyTo.cpp
           void CopyTo(int32 index, Array<T>& array, int32 arrayIndex, int32 count) const {
 
@@ -215,7 +224,8 @@ namespace Pcf {
           /// @remarks The following code example demonstrates the RemoveAll method and several other methods that use the Predicate<T> generic delegate.
           /// @remarks A LinkedList<T> of strings is created, containing 8 dinosaur names, two of which (at positions 1 and 5) end with "saurus". The code example also defines a search predicate method named EndsWithSaurus, which accepts a string parameter and returns a Boolean value indicating whether the input string ends in "saurus".
           /// @remarks The Find, FindLast, and FindAll methods are used to search the list with the search predicate method.
-          /// @remarks The RemoveAll method is used to remove all entries ending with "saurus". It traverses the list from the beginning, passing each element in turn to the EndsWithSaurus method. The element is removed if the EndsWithSaurus method returns true.
+          /// @par Examples
+          /// The RemoveAll method is used to remove all entries ending with "saurus". It traverses the list from the beginning, passing each element in turn to the EndsWithSaurus method. The element is removed if the EndsWithSaurus method returns true.
           /// @include LinkedList.Exists.cpp
           bool Exists(const Predicate<const T&>& match) {
             for (T elem : *this)
@@ -243,6 +253,7 @@ namespace Pcf {
           /// |FindLastIndex(Predicate<T>)               | Finds the index of the last computer book using the FindComputer predicate delegate.                                    |
           /// |FindIndex(Int32, Int32, Predicate<T>)     | Finds the index of first computer book in the second half of the collection, using the FindComputer predicate delegate. |
           /// |FindLastIndex(Int32, Int32, Predicate<T>) | Finds the index of last computer book in the second half of the collection, using the FindComputer predicate delegate.  |
+          /// @par Examples
           /// @include LinkedList.Find.cpp
           const T Find(const Predicate<const T&>& match) {
             for (T elem : *this)
@@ -269,6 +280,7 @@ namespace Pcf {
           /// |FindLastIndex(Predicate<T>)               | Finds the index of the last computer book using the FindComputer predicate delegate.                                    |
           /// |FindIndex(Int32, Int32, Predicate<T>)     | Finds the index of first computer book in the second half of the collection, using the FindComputer predicate delegate. |
           /// |FindLastIndex(Int32, Int32, Predicate<T>) | Finds the index of last computer book in the second half of the collection, using the FindComputer predicate delegate.  |
+          /// @par Examples
           /// @include LinkedList.Find.cpp
           LinkedList FindAll(const Predicate<const T&>& match) {
             LinkedList list;
@@ -295,6 +307,7 @@ namespace Pcf {
           /// |FindLastIndex(Predicate<T>)               | Finds the index of the last computer book using the FindComputer predicate delegate.                                    |
           /// |FindIndex(Int32, Int32, Predicate<T>)     | Finds the index of first computer book in the second half of the collection, using the FindComputer predicate delegate. |
           /// |FindLastIndex(Int32, Int32, Predicate<T>) | Finds the index of last computer book in the second half of the collection, using the FindComputer predicate delegate.  |
+          /// @par Examples
           /// @include LinkedList.Find.cpp
           int32 FindIndex(const Predicate<const T&>& match) {
             return this->FindIndex(0, this->Count, match);
@@ -317,6 +330,7 @@ namespace Pcf {
           /// |FindLastIndex(Predicate<T>)               | Finds the index of the last computer book using the FindComputer predicate delegate.                                    |
           /// |FindIndex(Int32, Int32, Predicate<T>)     | Finds the index of first computer book in the second half of the collection, using the FindComputer predicate delegate. |
           /// |FindLastIndex(Int32, Int32, Predicate<T>) | Finds the index of last computer book in the second half of the collection, using the FindComputer predicate delegate.  |
+          /// @par Examples
           /// @include LinkedList.Find.cpp
           int32 FindIndex(int32 startIndex, const Predicate<const T&>& match) {
             return this->FindIndex(startIndex, this->Count-startIndex, match);
@@ -340,6 +354,7 @@ namespace Pcf {
           /// |FindLastIndex(Predicate<T>)               | Finds the index of the last computer book using the FindComputer predicate delegate.                                    |
           /// |FindIndex(Int32, Int32, Predicate<T>)     | Finds the index of first computer book in the second half of the collection, using the FindComputer predicate delegate. |
           /// |FindLastIndex(Int32, Int32, Predicate<T>) | Finds the index of last computer book in the second half of the collection, using the FindComputer predicate delegate.  |
+          /// @par Examples
           /// @include LinkedList.Find.cpp
           int32 FindIndex(int32 startIndex, int32 count, const Predicate<const T&>& match) {
             if (startIndex < 0 || count < 0)
@@ -378,6 +393,7 @@ namespace Pcf {
           /// |FindLastIndex(Predicate<T>)               | Finds the index of the last computer book using the FindComputer predicate delegate.                                    |
           /// |FindIndex(Int32, Int32, Predicate<T>)     | Finds the index of first computer book in the second half of the collection, using the FindComputer predicate delegate. |
           /// |FindLastIndex(Int32, Int32, Predicate<T>) | Finds the index of last computer book in the second half of the collection, using the FindComputer predicate delegate.  |
+          /// @par Examples
           /// @include LinkedList.Find.cpp
           const T FindLast(const Predicate<const T&>& match) {
             Generic::Enumerator<T> reverseEnumerator(new ReverseEnumerator(*this));
@@ -403,6 +419,7 @@ namespace Pcf {
           /// |FindLastIndex(Predicate<T>)               | Finds the index of the last computer book using the FindComputer predicate delegate.                                    |
           /// |FindIndex(Int32, Int32, Predicate<T>)     | Finds the index of first computer book in the second half of the collection, using the FindComputer predicate delegate. |
           /// |FindLastIndex(Int32, Int32, Predicate<T>) | Finds the index of last computer book in the second half of the collection, using the FindComputer predicate delegate.  |
+          /// @par Examples
           /// @include LinkedList.Find.cpp
           int32 FindLastIndex(const Predicate<const T&>& match) {
             return this->FindLastIndex(this->Count-1, this->Count, match);
@@ -425,6 +442,7 @@ namespace Pcf {
           /// |FindLastIndex(Predicate<T>)               | Finds the index of the last computer book using the FindComputer predicate delegate.                                    |
           /// |FindIndex(Int32, Int32, Predicate<T>)     | Finds the index of first computer book in the second half of the collection, using the FindComputer predicate delegate. |
           /// |FindLastIndex(Int32, Int32, Predicate<T>) | Finds the index of last computer book in the second half of the collection, using the FindComputer predicate delegate.  |
+          /// @par Examples
           /// @include LinkedList.Find.cpp
           int32 FindLastIndex(int32 startIndex, const Predicate<const T&>& match) {
             return this->FindLastIndex(startIndex, startIndex+1, match);
@@ -448,6 +466,7 @@ namespace Pcf {
           /// |FindLastIndex(Predicate<T>)               | Finds the index of the last computer book using the FindComputer predicate delegate.                                    |
           /// |FindIndex(Int32, Int32, Predicate<T>)     | Finds the index of first computer book in the second half of the collection, using the FindComputer predicate delegate. |
           /// |FindLastIndex(Int32, Int32, Predicate<T>) | Finds the index of last computer book in the second half of the collection, using the FindComputer predicate delegate.  |
+          /// @par Examples
           /// @include LinkedList.Find.cpp
           int32 FindLastIndex(int32 startIndex, int32 count, const Predicate<const T&>& match) {
             if (startIndex < 0 || count < 0 || startIndex >= this->Count)
@@ -496,7 +515,8 @@ namespace Pcf {
           /// @remarks A shallow copy of a collection of value types, or a subset of that collection, contains the elements of the collection. However, if the elements of the collection contain references to other objects, those objects are not copied. The references in the elements of the new collection point to the same objects as the references in the elements of the original collection.
           /// @remarks In contrast, a deep copy of a collection copies the elements and everything directly or indirectly referenced by the elements.
           /// @remarks This method is an O(n) operation, where n is count.
-          /// @remarks The following code example demonstrates the GetRange method and other methods of the LinkedList<T> class that act on ranges. At the end of the code example, the GetRange method is used to get three items from the list, beginning with index location 2. The ToArray method is called on the resulting LinkedList<T>, creating an array of three elements. The elements of the array are displayed.
+          /// @par Examples
+          /// The following code example demonstrates the GetRange method and other methods of the LinkedList<T> class that act on ranges. At the end of the code example, the GetRange method is used to get three items from the list, beginning with index location 2. The ToArray method is called on the resulting LinkedList<T>, creating an array of three elements. The elements of the array are displayed.
           /// @include List2.cpp
           LinkedList GetRange(int32 index, int32 count) {
 
@@ -664,7 +684,8 @@ namespace Pcf {
           /// @remarks The following code example demonstrates the RemoveAll method and several other methods that use the Predicate<T> generic delegate.
           /// @remarks A LinkedList<T> of strings is created, containing 8 dinosaur names, two of which (at positions 1 and 5) end with "saurus". The code example also defines a search predicate method named EndsWithSaurus, which accepts a string parameter and returns a Boolean value indicating whether the input string ends in "saurus".
           /// @remarks The Find, FindLast, and FindAll methods are used to search the list with the search predicate method.
-          /// @remarks The RemoveAll method is used to remove all entries ending with "saurus". It traverses the list from the beginning, passing each element in turn to the EndsWithSaurus method. The element is removed if the EndsWithSaurus method returns true.
+          /// @par Examples
+          /// The RemoveAll method is used to remove all entries ending with "saurus". It traverses the list from the beginning, passing each element in turn to the EndsWithSaurus method. The element is removed if the EndsWithSaurus method returns true.
           /// @include LinkedList.Exists.cpp
           int32 RemoveAll(const Predicate<const T&>& match) {
             int32 count = 0;
@@ -717,7 +738,8 @@ namespace Pcf {
           /// @brief Reverses the order of the elements in the entire LinkedList<T>.
           /// @remarks This method uses Array.Reverse to reverse the order of the elements, such that the element at LinkedList<T>[i], where i is any index within the range, moves to LinkedList<T>[j], where j equals index plus index plus count minus i minus 1.
           /// @remarks This method is an O(n) operation, where n is Count.
-          /// @remarks The following code example demonstrates both overloads of the Reverse method. The code example creates a LinkedList<T> of strings and adds six strings. The Reverse() method overload is used to reverse the list, and then the Reverse(Int32, Int32) method overload is used to reverse the middle of the list, beginning with element 1 and encompassing four elements.
+          /// @par Examples
+          /// The following code example demonstrates both overloads of the Reverse method. The code example creates a LinkedList<T> of strings and adds six strings. The Reverse() method overload is used to reverse the list, and then the Reverse(Int32, Int32) method overload is used to reverse the middle of the list, beginning with element 1 and encompassing four elements.
           /// @include LinkedList.Reverse.cpp
           void Reverse() {
             this->operationNumber++;
@@ -731,7 +753,8 @@ namespace Pcf {
           /// @exception ArgumentException ndex and count do not denote a valid range of elements in the LinkedList<T>.
           /// @remarks This method uses Array.Reverse to reverse the order of the elements, such that the element at LinkedList<T>[i], where i is any index within the range, moves to LinkedList<T>[j], where j equals index plus index plus count minus i minus 1.
           /// @remarks This method is an O(n) operation, where n is Count.
-          /// @remarks The following code example demonstrates both overloads of the Reverse method. The code example creates a LinkedList<T> of strings and adds six strings. The Reverse() method overload is used to reverse the list, and then the Reverse(int32, int32) method overload is used to reverse the middle of the list, beginning with element 1 and encompassing four elements.
+          /// @par Examples
+          /// The following code example demonstrates both overloads of the Reverse method. The code example creates a LinkedList<T> of strings and adds six strings. The Reverse() method overload is used to reverse the list, and then the Reverse(int32, int32) method overload is used to reverse the middle of the list, beginning with element 1 and encompassing four elements.
           /// @include LinkedList.Reverse.cpp
           void Reverse(int32 index, int32 count) {
             if (index < 0 || count < 0)
@@ -754,7 +777,8 @@ namespace Pcf {
           /// @return An array containing copies of the elements of the LinkedList<T>.
           /// @remarks The elements are copied using Array.Copy, which is an O(n) operation, where n is Count.
           /// @remarks This method is an O(n) operation, where n is Count.
-          /// @remarks The following code example demonstrates the ToArray method and other methods of the LinkedList<T> class that act on ranges. At the end of the code example, the GetRange method is used to get three items from the list, beginning with index location 2. The ToArray method is called on the resulting LinkedList<T>, creating an array of three elements. The elements of the array are displayed.
+          /// @par Examples
+          /// The following code example demonstrates the ToArray method and other methods of the LinkedList<T> class that act on ranges. At the end of the code example, the GetRange method is used to get three items from the list, beginning with index location 2. The ToArray method is called on the resulting LinkedList<T>, creating an array of three elements. The elements of the array are displayed.
           /// @include List2.cpp
           Array<T> ToArray() const {
             Array<T> array(this->Count);

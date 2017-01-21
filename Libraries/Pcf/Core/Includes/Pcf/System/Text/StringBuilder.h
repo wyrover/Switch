@@ -61,7 +61,7 @@ namespace Pcf {
         /// @brief Initializes a new instance of the StringBuilder class using the specified capacity.
         /// @param capacity The suggested starting size of this instance.
         /// @exception ArguemntOutOfRangeException capacity is less than zero.
-        ///
+        /// @par Examples
         /// The following example demonstrates how to call the StringBuilder constructor with a specified capacity.
         /// @code
         /// int capacity = 255;
@@ -77,7 +77,7 @@ namespace Pcf {
         /// @param capacity The suggested starting size of this instance.
         /// @param maxCapacity The maximum number of characters the current string can contain.
         /// @exception ArguemntOutOfRangeException maxCapacity is less than one, capacity is less than zero, or capacity is greater than maxCapacity.
-        ///
+        /// @par Examples
         /// The following example demonstrates how to call the StringBuilder constructor with a specified capacity and maximum capacity.
         /// @code
         /// int capacity = 255;
@@ -92,7 +92,7 @@ namespace Pcf {
         
         /// @brief Initializes a new instance of the System::Text::StringBuilder class using the specified string.
         /// @param value The string used to initialize the value of the instance.
-        ///
+        /// @par Examples
         /// The following example demonstrates how to call the StringBuilder constructor with the specified string.
         /// @code
         /// string initialString = "Initial string.";
@@ -104,7 +104,7 @@ namespace Pcf {
         /// @param value The string used to initialize the value of the instance.
         /// @param capacity The suggested starting size of this instance.
         /// @exception ArguemntOutOfRangeException capacity is less than zero.
-        ///
+        /// @par Examples
         /// The following example demonstrates how to call the StringBuilder constructor with the specified string and capacity.
         /// @code
         /// string initialString = "Initial string.";
@@ -122,7 +122,7 @@ namespace Pcf {
         /// @param startIndex The position within value where the substring begins.
         /// @param length The number of characters in the substring.
         /// @exception System::ArgumentOutOfRangeException capacity is less than zero. or  startIndex plus length is not a position within value.
-        ///
+        /// @par Examples
         /// The following example demonstrates how to call the StringBuilder constructor with the specified string.
         /// @code
         /// string initialString = "Initial string for stringbuilder.";
@@ -149,7 +149,8 @@ namespace Pcf {
         /// @exception ArgumentOutOfRangeException index is outside the bounds of this instance while setting a character.
         /// @exception IndexOutOfRangeException index is outside the bounds of this instance while getting a character.
         /// @remarks The index parameter is the position of a character within the StringBuilder. The first character in the string is at index 0. The length of a string is the number of characters it contains. The last accessible character of a StringBuilder instance is at index Length - 1.
-        /// @remarks Chars is the default property of the StringBuilder class. In C++, it is an indexer. This means that individual characters can be retrieved from the Chars property as shown in the following example, which counts the number of alphabetic, white-space, and punctuation characters in a string.
+        /// @par Examples
+        /// Chars is the default property of the StringBuilder class. In C++, it is an indexer. This means that individual characters can be retrieved from the Chars property as shown in the following example, which counts the number of alphabetic, white-space, and punctuation characters in a string.
         /// @include StringBuilder.cpp
         char32 operator [](int32 index) const {
           if (index < 0 || index >= static_cast<int32>(this->string.size()))
@@ -163,7 +164,8 @@ namespace Pcf {
         /// @exception ArgumentOutOfRangeException index is outside the bounds of this instance while setting a character.
         /// @exception IndexOutOfRangeException index is outside the bounds of this instance while getting a character.
         /// @remarks The index parameter is the position of a character within the StringBuilder. The first character in the string is at index 0. The length of a string is the number of characters it contains. The last accessible character of a StringBuilder instance is at index Length - 1.
-        /// @remarks Chars is the default property of the StringBuilder class. In C++, it is an indexer. This means that individual characters can be retrieved from the Chars property as shown in the following example, which counts the number of alphabetic, white-space, and punctuation characters in a string.
+        /// @par Examples
+        /// Chars is the default property of the StringBuilder class. In C++, it is an indexer. This means that individual characters can be retrieved from the Chars property as shown in the following example, which counts the number of alphabetic, white-space, and punctuation characters in a string.
         /// @include StringBuilder.cpp
         char32& operator [](int32 index) {
           if (index < 0 || index >= static_cast<int32>(this->string.size()))
@@ -176,7 +178,7 @@ namespace Pcf {
         /// @exception ArgumentOutOfRangeException The value specified for a set operation is less than the current length of this instance. -or- The value specified for a set operation is greater than the maximum capacity.
         /// @remarks Capacity does not affect the string value of the current instance. Capacity can be decreased as long as it is not less than Length.
         /// @remarks The StringBuilder dynamically allocates more space when required and increases Capacity accordingly. For performance reasons, a StringBuilder might allocate more memory than needed. The amount of memory allocated is implementation-specific.
-        ///
+        /// @par Examples
         /// The following example demonstrates the Capacity property.
         /// @include StringBuilder.Capacity.cpp
         Property<int32> Capacity {
@@ -195,7 +197,7 @@ namespace Pcf {
         /// @remarks Like the String.Length property, the Length property indicates the length of the current string object. Unlike the String.Length property, which is read-only, the Length property allows you to modify the length of the string stored to the StringBuilder object.
         /// @remarks If the specified length is less than the current length, the current StringBuilder object is truncated to the specified length. If the specified length is greater than the current length, the end of the string value of the current StringBuilder object is padded with the Unicode null character (U+0000).
         /// @remarks If the specified length is greater than the current capacity, Capacity increases so that it is greater than or equal to the specified length.
-        ///
+        /// @par Examples
         /// The following example demonstrates the Legnth property.
         /// @include StringBuilder.Capacity.cpp
         Property<int32> Length {
@@ -223,6 +225,7 @@ namespace Pcf {
         /// @return A reference to this instance after the append operation has completed.
         /// @exception Enlarging the value of this instance would exceed MaxCapacity.
         /// @remarks The Append(Boolean) method modifies the existing instance of this class; it does not return a new class instance. Because of this, you can call a method or property on the existing reference and you do not have to assign the return value to a StringBuilder object, as the following example illustrates.
+        /// @par Examples
         /// @code
         /// bool flag = false;
         /// System::Text::StringBuilder sb;
@@ -239,6 +242,7 @@ namespace Pcf {
         /// @return A reference to this instance after the append operation has completed.
         /// @exception Enlarging the value of this instance would exceed MaxCapacity.
         /// @remarks The Append(Byte) method modifies the existing instance of this class; it does not return a new class instance. Because of this, you can call a method or property on the existing reference and you do not have to assign the return value to a StringBuilder object, as the following example illustrates.
+        /// @par Examples
         /// @code
         /// Array<Byte> bytes = { 16, 132, 27, 253 };
         /// System::Text::StringBuilder sb;
@@ -257,6 +261,7 @@ namespace Pcf {
         /// @return A reference to this instance after the append operation has completed.
         /// @exception Enlarging the value of this instance would exceed MaxCapacity.
         /// @remarks The Append(Char) method modifies the existing instance of this class; it does not return a new class instance. Because of this, you can call a method or property on the existing reference and you do not have to assign the return value to a StringBuilder object, as the following example illustrates.
+        /// @par Examples
         /// @code
         /// string str = "Characters in a string.";
         /// System::Text::StringBuilder sb;
@@ -277,6 +282,7 @@ namespace Pcf {
         /// @return A reference to this instance after the append operation has completed.
         /// @exception Enlarging the value of this instance would exceed MaxCapacity.
         /// @remarks The Append(Char) method modifies the existing instance of this class; it does not return a new class instance. Because of this, you can call a method or property on the existing reference and you do not have to assign the return value to a StringBuilder object, as the following example illustrates.
+        /// @par Examples
         /// @code
         /// string str = "Characters in a string.";
         /// System::Text::StringBuilder sb;
@@ -331,6 +337,7 @@ namespace Pcf {
         /// @exception ArgumentOutOfRange repeatCount is less than zero. -or- Enlarging the value of this instance would exceed MaxCapacity.
         /// @exception OutOfMemoryException Out of memory.
         /// @remarks The Append(Char, Int32) method modifies the existing instance of this class; it does not return a new class instance. Because of this, you can call a method or property on the existing reference and you do not have to assign the return value to a StringBuilder object, as the following example illustrates.
+        /// @par Examples
         /// @code
         /// decimal value = 1346.19;
         /// System::Text::StringBuilder sb;
@@ -355,6 +362,7 @@ namespace Pcf {
         /// @exception ArgumentOutOfRange Enlarging the value of this instance would exceed MaxCapacity.
         /// @remarks This method appends all the characters in the specified array to the current instance in the same order as they appear in value. If value is null, no changes are made.
         /// @remarks The Append(Char[]) method modifies the existing instance of this class; it does not return a new class instance. Because of this, you can call a method or property on the existing reference and you do not have to assign the return value to a StringBuilder object, as the following example illustrates.
+        /// @par Examples
         /// @code
         /// Array<char32> chars = { 'a', 'e', 'i', 'o', 'u' };
         /// System::Text::StringBuilder sb;
@@ -373,6 +381,7 @@ namespace Pcf {
         /// @exception ArgumentOutOfRange Enlarging the value of this instance would exceed MaxCapacity.
         /// @remarks This method appends all the characters in the specified array to the current instance in the same order as they appear in value. If value is null, no changes are made.
         /// @remarks The Append(Char[]) method modifies the existing instance of this class; it does not return a new class instance. Because of this, you can call a method or property on the existing reference and you do not have to assign the return value to a StringBuilder object, as the following example illustrates.
+        /// @par Examples
         /// @code
         /// Array<char32> chars = { 'a', 'e', 'i', 'o', 'u' };
         /// System::Text::StringBuilder sb;
@@ -397,6 +406,7 @@ namespace Pcf {
         /// @exception Enlarging the value of this instance would exceed MaxCapacity.
         /// @return A reference to this instance after the append operation has completed.
         /// @remarks The Append(Char, Int32) method modifies the existing instance of this class; it does not return a new class instance.Because of this, you can call a method or property on the existing reference and you do not have to assign the return value to a StringBuilder object, as the following example illustrates.
+        /// @par Examples
         /// @code
         /// decimal value = 1346.19;
         /// System::Text::StringBuilder sb;
@@ -414,6 +424,7 @@ namespace Pcf {
         /// @exception Enlarging the value of this instance would exceed MaxCapacity.
         /// @return A reference to this instance after the append operation has completed.
         /// @remarks The Append(Char, Int32) method modifies the existing instance of this class; it does not return a new class instance.Because of this, you can call a method or property on the existing reference and you do not have to assign the return value to a StringBuilder object, as the following example illustrates.
+        /// @par Examples
         /// @code
         /// double value = 1346.19;
         /// System::Text::StringBuilder sb;
@@ -431,6 +442,7 @@ namespace Pcf {
         /// @exception Enlarging the value of this instance would exceed MaxCapacity.
         /// @return A reference to this instance after the append operation has completed.
         /// @remarks The Append(Int16) method modifies the existing instance of this class; it does not return a new class instance. Because of this, you can call a method or property on the existing reference and you do not have to assign the return value to a StringBuilder object, as the following example illustrates.
+        /// @par Examples
         /// @code
         /// System::Text::StringBuilder sb("The range of a 16-bit integer: ");
         /// sb.Append(Int16::MinValue).Append(" to ").Append(Int16::MaxValue);
@@ -446,6 +458,7 @@ namespace Pcf {
         /// @exception Enlarging the value of this instance would exceed MaxCapacity.
         /// @return A reference to this instance after the append operation has completed.
         /// @remarks The Append(Int32) method modifies the existing instance of this class; it does not return a new class instance. Because of this, you can call a method or property on the existing reference and you do not have to assign the return value to a StringBuilder object, as the following example illustrates.
+        /// @par Examples
         /// @code
         /// System::Text::StringBuilder sb("The range of a 32-bit integer: ");
         /// sb.Append(Int32::MinValue).Append(" to ").Append(Int32::MaxValue);
@@ -461,6 +474,7 @@ namespace Pcf {
         /// @exception Enlarging the value of this instance would exceed MaxCapacity.
         /// @return A reference to this instance after the append operation has completed.
         /// @remarks The Append(Int64) method modifies the existing instance of this class; it does not return a new class instance. Because of this, you can call a method or property on the existing reference and you do not have to assign the return value to a StringBuilder object, as the following example illustrates.
+        /// @par Examples
         /// @code
         /// System::Text::StringBuilder sb("The range of a 64-bit integer: ");
         /// sb.Append(Int64::MinValue).Append(" to ").Append(Int64::MaxValue);
@@ -489,6 +503,7 @@ namespace Pcf {
         /// @return A reference to this instance after the append operation has completed.
         /// @exception Enlarging the value of this instance would exceed MaxCapacity.
         /// @remarks The Append(Byte) method modifies the existing instance of this class; it does not return a new class instance. Because of this, you can call a method or property on the existing reference and you do not have to assign the return value to a StringBuilder object, as the following example illustrates.
+        /// @par Examples
         /// @code
         /// Array<Byte> bytes = { 16, 132, 27, 253 };
         /// System::Text::StringBuilder sb;
@@ -507,6 +522,7 @@ namespace Pcf {
         /// @exception Enlarging the value of this instance would exceed MaxCapacity.
         /// @return A reference to this instance after the append operation has completed.
         /// @remarks The Append(Char, Int32) method modifies the existing instance of this class; it does not return a new class instance.Because of this, you can call a method or property on the existing reference and you do not have to assign the return value to a StringBuilder object, as the following example illustrates.
+        /// @par Examples
         /// @code
         /// float value = 1346.19;
         /// System::Text::StringBuilder sb;
@@ -524,6 +540,7 @@ namespace Pcf {
         /// @exception Enlarging the value of this instance would exceed MaxCapacity.
         /// @return A reference to this instance after the append operation has completed.
         /// @remarks The Append(Char, Int32) method modifies the existing instance of this class; it does not return a new class instance.Because of this, you can call a method or property on the existing reference and you do not have to assign the return value to a StringBuilder object, as the following example illustrates.
+        /// @par Examples
         /// @code
         /// bool flag = false;
         /// System::Text::StringBuilder sb;
@@ -582,6 +599,7 @@ namespace Pcf {
         /// @exception Enlarging the value of this instance would exceed MaxCapacity.
         /// @return A reference to this instance after the append operation has completed.
         /// @remarks The Append(UInt16) method modifies the existing instance of this class; it does not return a new class instance. Because of this, you can call a method or property on the existing reference and you do not have to assign the return value to a StringBuilder object, as the following example illustrates.
+        /// @par Examples
         /// @code
         /// System::Text::StringBuilder sb("The range of a 16-bit unsigned integer: ");
         /// sb.Append(UInt16::MinValue).Append(" to ").Append(UInt16::MaxValue);
@@ -597,6 +615,7 @@ namespace Pcf {
         /// @exception Enlarging the value of this instance would exceed MaxCapacity.
         /// @return A reference to this instance after the append operation has completed.
         /// @remarks The Append(UInt32) method modifies the existing instance of this class; it does not return a new class instance. Because of this, you can call a method or property on the existing reference and you do not have to assign the return value to a StringBuilder object, as the following example illustrates.
+        /// @par Examples
         /// @code
         /// System::Text::StringBuilder sb("The range of a 32-bit unsigned integer: ");
         /// sb.Append(UInt32::MinValue).Append(" to ").Append(UInt32::MaxValue);
@@ -612,6 +631,7 @@ namespace Pcf {
         /// @exception Enlarging the value of this instance would exceed MaxCapacity.
         /// @return A reference to this instance after the append operation has completed.
         /// @remarks The Append(UInt64) method modifies the existing instance of this class; it does not return a new class instance. Because of this, you can call a method or property on the existing reference and you do not have to assign the return value to a StringBuilder object, as the following example illustrates.
+        /// @par Examples
         /// @code
         /// System::Text::StringBuilder sb("The range of a 64-bit unsigned integer: ");
         /// sb.Append(UInt64::MinValue).Append(" to ").Append(UInt64::MaxValue);

@@ -11,6 +11,7 @@
 namespace Pcf {
   namespace System {
     /// @brief Represents a value type that can be assigned null.
+    /// @par Examples
     /// The following code example defines three rows of a table in the Microsoft Pubs sample database. The table contains two columns that are not nullable and two columns that are nullable.
     /// @include Nullable.cpp
     template <class T>

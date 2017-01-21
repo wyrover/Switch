@@ -18,6 +18,7 @@ namespace Pcf {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief Represents a delegate, which is a data structure that refers to a static method or to a class instance && an instance method of that class.
+    /// @par Examples
     /// The following example shows how to define a delegate named myMethodDelegate. Instances of this delegate are created for an instance method && a static method of the nested mySampleClass class. The delegate for the instance method requires an instance of mySampleClass. The mySampleClass instance is saved in a variable named mySC.
     /// @include Delegate.cpp
     template<typename Result, typename... Arguments>
@@ -299,12 +300,14 @@ namespace Pcf {
   }
 
   /// @brief Represents a delegate, which is a data structure that refers to a static method or to a class instance && an instance method of that class.
+  /// @par Examples
   /// The following example shows how to define a delegate named myMethodDelegate. Instances of this delegate are created for an instance method && a static method of the nested mySampleClass class. The delegate for the instance method requires an instance of mySampleClass. The mySampleClass instance is saved in a variable named mySC.
   /// @include Delegate.cpp
   template<typename Result, typename... Arguments>
   using delegate = System::Delegate<Result, Arguments...>;
   
   /// @brief The declaration of a delegate type is similar to a method signature. It has a return value and any number of parameters of any type
+  /// @par Examples
   /// @code
   /// button.Click += pcf_delegate(const object& sender, const EventArgs& e) {
   ///   MessageBox::Show("Button click!", "Message", MessageBoxButtons::OK);

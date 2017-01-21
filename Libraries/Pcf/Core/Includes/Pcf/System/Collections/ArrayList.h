@@ -13,6 +13,7 @@ namespace Pcf {
     /// @brief The System::Collections namespace contains interfaces and classes that define various collections of objects, such as lists, queues, bit arrays, hash tables and dictionaries.
     namespace Collections {
       /// @brief Implements the IList interface using an array whose size is dynamically increased as required.
+      /// @par Examples
       /// The following code example shows how to create and initialize an ArrayList and how to print out its values.
       /// @include ArrayList.cpp
       using ArrayList = Generic::List<Any>;

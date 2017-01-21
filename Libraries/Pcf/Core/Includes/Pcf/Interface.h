@@ -23,6 +23,7 @@ namespace Pcf {
   }
   
   /// @brief This keyword is use to represent an interface.
+  /// @par Examples
   /// @code
   /// class IStringable pcf_interface {
   /// public:

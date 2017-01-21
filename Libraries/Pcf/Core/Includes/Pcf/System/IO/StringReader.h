@@ -15,6 +15,7 @@ namespace Pcf {
     namespace IO {
       /// @brief Implements a TextReader that reads from a string.
       /// @remarks StringReader enables you to read a string synchronously or asynchronously. You can read a character at a time with the Read or the ReadAsync method, a line at a time using the ReadLine or the ReadLineAsync method and an entire string using the ReadToEnd or the ReadToEndAsync method.
+      /// @par Examples
       /// The following code example demonstrates the creation of a continuous paragraph from a group of double-spaced sentences, and then the conversion of the paragraph back to the original text.
       /// @include StringReader.cpp
       class pcf_public StringReader: public TextReader {
@@ -47,7 +48,7 @@ namespace Pcf {
         /// @brief Reads the next character from the input string and advances the character position by one character.(Overrides TextReader.Read().)
         /// @return int32 The next character from the underlying string, or -1 if no more characters are available.
         /// @remarks This method overrides the TextReader.Read method.
-        ///
+        /// @par Examples
         /// This code example is part of a larger example provided for the StringReader class.
         /// @code
         /// convertedCharacter = Convert.ToChar(intCharacter);
@@ -66,7 +67,7 @@ namespace Pcf {
         /// @remarks This method overrides the TextReader.ReadLine method.
         /// @remarks A line is defined as a sequence of characters followed by a line feed ("\n"), a carriage return ("\r"), or a carriage return immediately followed by a line feed ("\r\n"). The string that is returned does not contain the terminating carriage return or line feed. The returned value is null if the end of the string has been reached.
         /// @remarks If the current method throws an OutOfMemoryException, the reader's position in the underlying string is advanced by the number of characters the method was able to read, but the characters already read into the internal ReadLine buffer are discarded. Because the position of the reader in the string cannot be changed, the characters already read are unrecoverable, and can be accessed only by reinitializing the StringReader. To avoid such a situation, use the Read method and store the read characters in a preallocated buffer.
-        ///
+        /// @par Examples
         /// This code example is part of a larger example provided for the StringReader class.
         /// @code
         /// // From textReaderText, create a continuous paragraph
@@ -89,7 +90,7 @@ namespace Pcf {
         /// @return string The content from the current position to the end of the underlying string.
         /// @remarks This method overrides the TextReader.ReadToEnd method.
         /// @remarks If the current method throws an OutOfMemoryException, the reader's position in the underlying string is advanced by the number of characters the method was able to read, but the characters already read into the internal ReadToEnd buffer are discarded. Because the position of the reader in the string cannot be changed, the characters already read are unrecoverable, and can be accessed only by reinitializing the StringReader. To avoid such a situation, use the Read method and store the read characters in a preallocated buffer
-        ///
+        /// @par Examples
         /// This code example is part of a larger example provided for the TextReader class.
         /// @code
         /// static void ReadText(TextReader textReader) {

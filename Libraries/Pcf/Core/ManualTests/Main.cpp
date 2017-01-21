@@ -1,22 +1,24 @@
 #include <Pcf/Pcf>
 
 using namespace System;
+using namespace System::Collections;
 
 namespace Examples {
   class Program {
   public:
     static void Main() {
       Console::WriteLine("Hello, World!");
-      std::shared_ptr<int> i1 = std::make_shared<int>(42);
-      std::shared_ptr<int> i2 = std::move(i1);
-      Console::WriteLine("i1 = {0}", i1.use_count());
-      Console::WriteLine("i2 = {0}", i2.use_count());
-
-      SharedPointer<int> i3 = SharedPointer<int>::Create(42);
-      SharedPointer<int> i4 = Move(i3);
-      Console::WriteLine("i3 = {0}", i3.GetUseCount());
-      Console::WriteLine("i4 = {0}", i4.GetUseCount());
-
+      ArrayList al = {"Hello"_s.ToUpper(), 42, 12345_s, 4.2, Version(10, 7, 4), Guid::NewGuid(), Environment::CurrentDirectory, true, ConsoleColor::DarkBlue};
+      for (auto item : al)
+        Console::WriteLine(item);
+      
+      Nullable<int> n1;
+      Nullable<int> n2 = 42;
+      Console::WriteLine("n1 = {0}", n1.HasValue ? n1.ToString() : "<empty>");
+      Console::WriteLine("n2 = {0}", n2.HasValue ? n2.ToString() : "<empty>");
+      
+      //std::shared_ptr<IComparable> s = std::make_shared<string>("Value");
+      SharedPointer<IComparable> s = SharedPointer<IComparable>::Create<string>("Value");
     }
   };
 }

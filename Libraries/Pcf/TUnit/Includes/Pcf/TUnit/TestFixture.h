@@ -10,9 +10,11 @@
 /// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Pcf {
   /// @brief The TUnit namespace contains a unit test framework.
-  /// @remarks This example how to use TestFixture class, Assert class and #pcf_test method:
+  /// @par Examples
+  /// This example how to use TestFixture class, Assert class and #pcf_test method:
   /// @include Assert.cpp
-  /// @remarks This example how to use TestFixture class, Expect class and #pcf_test method:
+  /// @par Examples
+  /// This example how to use TestFixture class, Expect class and #pcf_test method:
   /// @include Expect.cpp
   namespace TUnit {
     /// @brief The base class that all unit tests inherit from.
@@ -36,7 +38,8 @@ namespace Pcf {
     /// @brief Add spacified unit test to execute at the unit test suit.
     /// @param fixture The class inerited from TestFixture class that contains the unit test method to execute
     /// @param method The method that contains the unit test to execute
-    /// @remarks This example how to use TestFixture class, Expect class and #pcf_test method:
+    /// @par Examples
+    /// This example how to use TestFixture class, Expect class and #pcf_test method:
     /// @include Expect.cpp
     /// @ingroup Pcf
     #define pcf_test(fixture, method) \
@@ -51,7 +54,8 @@ namespace Pcf {
     /// @brief Add specified ignored unit test to execute at the unit test suit.
     /// @param fixture The class inerited from TestFixture class that contains the unit test method to execute
     /// @param method The method that contains the unit test to execute
-    /// @remarks This example how to use TestFixture class, Expect class and #pcf_test method:
+    /// @par Examples
+    /// This example how to use TestFixture class, Expect class and #pcf_test method:
     /// @include Expect.cpp
     /// @ingroup Pcf
     #define pcf_ignore_test(fixture, method) \

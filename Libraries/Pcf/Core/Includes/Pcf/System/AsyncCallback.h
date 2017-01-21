@@ -13,9 +13,11 @@ namespace Pcf {
     /// @brief References a method to be called when a corresponding asynchronous operation completes.
     /// @param ar The result of the asynchronous operation.
     /// @remarks Use an AsyncCallback delegate to process the results of an asynchronous operation in a separate thread. The AsyncCallback delegate represents a callback method that is called when the asynchronous operation completes. The callback method takes an IAsyncResult parameter, which is subsequently used to obtain the results of the asynchronous operation.
-    /// @remarks The following code example demonstrates using asynchronous methods in the Dns class to retrieve Domain Name System (DNS) information for user-specified computers. This example creates an AsyncCallback delegate that references the ProcessDnsInformation method. This method is called once for each asynchronous request for DNS information.
+    /// @par Examples
+    /// The following code example demonstrates using asynchronous methods in the Dns class to retrieve Domain Name System (DNS) information for user-specified computers. This example creates an AsyncCallback delegate that references the ProcessDnsInformation method. This method is called once for each asynchronous request for DNS information.
     /// @include EventHandler.cpp
-    /// @remarks This example show how to used a specialized EventHandler.
+    /// @par Examples
+    /// This example show how to used a specialized EventHandler.
     /// @include AsyncCallback.cpp
     using AsyncCallback = Delegate<void, const IAsyncResult&>;
   }

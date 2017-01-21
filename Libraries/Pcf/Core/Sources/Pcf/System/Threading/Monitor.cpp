@@ -10,7 +10,7 @@ namespace {
 using namespace System;
 using namespace System::Threading;
 
-Monitor::MonitorItemCollection Monitor::monitorItems;
+System::Collections::Generic::SortedDictionary<const object*, Monitor::MonitorItem> Monitor::monitorItems;
 
 void Monitor::Pulse(const Object& obj) {
   MonitorItem* monitorItem = null;
@@ -64,8 +64,10 @@ bool Monitor::Add(const Object& obj, int32 millisecondsTimeout) {
 void Monitor::Remove(const Object& obj) {
   MonitorItem saved;
   mutex.lock();
-  if (!IsEntered(obj))
+  if (!IsEntered(obj)) {
+    mutex.unlock();
     throw InvalidOperationException(pcf_current_information);
+  }
 
   MonitorItem* monitorData = &monitorItems[&obj];
   if (--monitorData->usedCounter == 0) {

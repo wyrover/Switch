@@ -100,10 +100,12 @@ namespace Pcf {
   }
   
   /// @brief Used to obtain the type Object for a type. A pcf_typeof expression takes the following form:
+  /// @par Examples
   /// @code
   /// Type type = pcf_typeof<Int32>;
   /// @endcode
-  /// @remarks To obtain the run-time type of an expression, you can use the Pcf method GetType, as in the following example:
+  /// @par Examples
+  /// To obtain the run-time type of an expression, you can use the Pcf method GetType, as in the following example:
   /// @code
   /// Int32 i = 0;
   /// System::Type type = i.GetType();
@@ -116,11 +118,13 @@ namespace Pcf {
   }
   
   /// @brief Used to obtain the type Object for a type. A pcf_typeof expression takes the following form:
+  /// @par Examples
   /// @code
   /// @Int32 i = 42;
   /// type atype& = pcf_typeof(i);
   /// @endcode
-  /// @remarks To obtain the run-time type of an expression, you can use the Pcf method GetType, as in the following example:
+  /// @par Examples
+  /// To obtain the run-time type of an expression, you can use the Pcf method GetType, as in the following example:
   /// @code
   /// Int32 42 = 0;
   /// System::Type Type = i.GetType();

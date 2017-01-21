@@ -207,6 +207,7 @@ namespace Pcf {
     }
     
     /// @brief Dynamic cast this type to another specified type.
+    /// @par Examples
     /// @code
     /// UniquePointer<string> s = new string("Test string");
     /// UniquePointer<IComparable> comparable = s.ToDynamicInstanceOfType<IComparable>();
@@ -224,6 +225,7 @@ namespace Pcf {
       }
     }
     /// @brief Dynamic cast specified pointer to another specified type.
+    /// @par Examples
     /// @code
     /// UniquePointer<string> s = new string("Test string");
     /// UniquePointer<IComparable> comparables = Pointer<string>::ChangeType<IComparable>(s);
@@ -232,6 +234,7 @@ namespace Pcf {
     static UniquePointer<TT> As(UniquePointer<T>& up) { return up.As<TT>(); }
     
     /// @brief Dynamic cast this type to another specified type.
+    /// @par Examples
     /// @code
     /// UniquePointer<string> s = new string("Test string");
     /// UniquePointer<IComparable> comparable = s.ToDynamicInstanceOfType<IComparable>();
@@ -247,6 +250,7 @@ namespace Pcf {
       }
     }
     /// @brief Dynamic cast specified pointer to another specified type.
+    /// @par Examples
     /// @code
     /// UniquePointer<string> s = new string("Test string");
     /// UniquePointer<IComparable> comparables = Pointer<string>::ChangeType<IComparable>(s);
@@ -255,6 +259,7 @@ namespace Pcf {
     static bool Is(UniquePointer<T>& up) { return up.Is<TT>(); }
     
     /// @brief Dynamic cast this type to another specified type.
+    /// @par Examples
     /// @code
     /// UniquePointer<string> s = new string("Test string");
     /// UniquePointer<IComparable> comparable = s.ToDynamicInstanceOfType<IComparable>();
@@ -267,6 +272,7 @@ namespace Pcf {
     }
 
     /// @brief Dynamic cast specified pointer to another specified type.
+    /// @par Examples
     /// @code
     /// UniquePointer<string> s = new string("Test string");
     /// UniquePointer<IComparable> comparables = Pointer<string>::ChangeType<IComparable>(s);
@@ -276,6 +282,7 @@ namespace Pcf {
     
     /*
     /// @brief Creates a shared pointer out of the current unique pointer, which looses the ownership of the pointed data.
+    /// @par Examples
     /// @code
     /// UniquePointer<string> uniqueString = new string("Test string");
     /// SharedPointer<string> sharedString = uniqueString.Share();
@@ -287,6 +294,7 @@ namespace Pcf {
     
     /*
     /// @brief Creates a shared pointer out of the up unique pointer, which looses the ownership of the pointed data.
+    /// @par Examples
     /// @code
     /// UniquePointer<string> uniqueString = new string("Test string");
     /// SharedPointer<string> sharedString = UniquePointer<string>::Share(uniqueString);
@@ -304,6 +312,16 @@ namespace Pcf {
       std::stringstream s;
       s << "Pcf::UniquePointer [Pointer=" << this->ptr << "]";
       return s.str();
+    }
+    
+    template<typename ...Arguments>
+    static UniquePointer<T> Create(Arguments... arguments) {
+      return UniquePointer<T>(new T(arguments...));
+    }
+    
+    template<typename TT, typename ...Arguments>
+    static UniquePointer<T> Create(Arguments... arguments) {
+      return UniquePointer<T>(new TT(arguments...));
     }
     
     /// @cond
@@ -326,175 +344,6 @@ namespace Pcf {
     UniquePointer<T>& operator =(const UniquePointer<T>& ptr) {
       Swap(const_cast<UniquePointer<T>&>(ptr));
       return *this;
-    }
-    
-    template<typename TT>
-    static UniquePointer<T> Create() {
-      return UniquePointer<T>(new TT());
-    }
-    
-    static UniquePointer<T> Create() {
-      return UniquePointer<T>(new T());
-    }
-    
-    template<typename T1>
-    static UniquePointer<T> Create(T1 a1) {
-      return UniquePointer<T>(new T(a1));
-    }
-    
-    template<class TT, typename T1>
-    static UniquePointer<T> Create(T1 a1) {
-      return UniquePointer<T>(new TT(a1));
-    }
-    
-    template<typename T1, typename T2>
-    static UniquePointer<T> Create(T1 a1, T2 a2) {
-      return UniquePointer<T>(new T(a1, a2));
-    }
-    
-    template<class TT, typename T1, typename T2>
-    static UniquePointer<T> Create(T1 a1, T2 a2) {
-      return UniquePointer<T>(new TT(a1, a2));
-    }
-    
-    template<typename T1, typename T2, typename T3>
-    static UniquePointer<T> Create(T1 a1, T2 a2, T3 a3) {
-      return UniquePointer<T>(new T(a1, a2, a3));
-    }
-    
-    template<class TT, typename T1, typename T2, typename T3>
-    static UniquePointer<T> Create(T1 a1, T2 a2, T3 a3) {
-      return UniquePointer<T>(new TT(a1, a2, a3));
-    }
-    
-    template<typename T1, typename T2, typename T3, typename T4>
-    static UniquePointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4) {
-      return UniquePointer<T>(new T(a1, a2, a3, a4));
-    }
-    
-    template<class TT, typename T1, typename T2, typename T3, typename T4>
-    static UniquePointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4) {
-      return UniquePointer<T>(new TT(a1, a2, a3, a4));
-    }
-    
-    template<typename T1, typename T2, typename T3, typename T4, typename T5>
-    static UniquePointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5) {
-      return UniquePointer<T>(new T(a1, a2, a3, a4, a5));
-    }
-    
-    template<class TT, typename T1, typename T2, typename T3, typename T4, typename T5>
-    static UniquePointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5) {
-      return UniquePointer<T>(new TT(a1, a2, a3, a4, a5));
-    }
-    
-    template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6>
-    static UniquePointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6) {
-      return UniquePointer<T>(new T(a1, a2, a3, a4, a5, a6));
-    }
-    
-    template<class TT, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6>
-    static UniquePointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6) {
-      return UniquePointer<T>(new TT(a1, a2, a3, a4, a5, a6));
-    }
-    
-    template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7>
-    static UniquePointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7) {
-      return UniquePointer<T>(new T(a1, a2, a3, a4, a5, a6, a7));
-    }
-    
-    template<class TT, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7>
-    static UniquePointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7) {
-      return UniquePointer<T>(new TT(a1, a2, a3, a4, a5, a6, a7));
-    }
-    
-    template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8>
-    static UniquePointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8) {
-      return UniquePointer<T>(new T(a1, a2, a3, a4, a5, a6, a7, a8));
-    }
-    
-    template<class TT, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8>
-    static UniquePointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8) {
-      return UniquePointer<T>(new TT(a1, a2, a3, a4, a5, a6, a7, a8));
-    }
-    
-    template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9>
-    static UniquePointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9) {
-      return UniquePointer<T>(new T(a1, a2, a3, a4, a5, a6, a7, a8, a9));
-    }
-    
-    template<class TT, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9>
-    static UniquePointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9) {
-      return UniquePointer<T>(new TT(a1, a2, a3, a4, a5, a6, a7, a8, a9));
-    }
-    
-    template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10>
-    static UniquePointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10) {
-      return UniquePointer<T>(new T(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10));
-    }
-    
-    template<class TT, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10>
-    static UniquePointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10) {
-      return UniquePointer<T>(new TT(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10));
-    }
-    
-    template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11>
-    static UniquePointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11) {
-      return UniquePointer<T>(new T(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11));
-    }
-    
-    template<class TT, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11>
-    static UniquePointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11) {
-      return UniquePointer<T>(new TT(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11));
-    }
-    
-    template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12>
-    static UniquePointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12) {
-      return UniquePointer<T>(new T(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12));
-    }
-    
-    template<class TT, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12>
-    static UniquePointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12) {
-      return UniquePointer<T>(new TT(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12));
-    }
-    
-    template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12, typename T13>
-    static UniquePointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13) {
-      return UniquePointer<T>(new T(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13));
-    }
-    
-    template<class TT, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12, typename T13>
-    static UniquePointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13) {
-      return UniquePointer<T>(new TT(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13));
-    }
-    
-    template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12, typename T13, typename T14>
-    static UniquePointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13, T14 a14) {
-      return UniquePointer<T>(new T(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14));
-    }
-    
-    template<class TT, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12, typename T13, typename T14>
-    static UniquePointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13, T14 a14) {
-      return UniquePointer<T>(new TT(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14));
-    }
-    
-    template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12, typename T13, typename T14, typename T15>
-    static UniquePointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13, T14 a14, T15 a15) {
-      return UniquePointer<T>(new T(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15));
-    }
-    
-    template<class TT, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12, typename T13, typename T14, typename T15>
-    static UniquePointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13, T14 a14, T15 a15) {
-      return UniquePointer<T>(new TT(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15));
-    }
-    
-    template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12, typename T13, typename T14, typename T15, typename T16>
-    static UniquePointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13, T14 a14, T15 a15, T16 a16) {
-      return UniquePointer<T>(new T(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16));
-    }
-    
-    template<class TT, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12, typename T13, typename T14, typename T15, typename T16>
-    static UniquePointer<T> Create(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13, T14 a14, T15 a15, T16 a16) {
-      return UniquePointer<T>(new TT(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16));
     }
     
     bool operator ==(const T* ptr) { return this->ptr == ptr; }
@@ -623,6 +472,7 @@ namespace Pcf {
     }
     
     /// @brief Dynamic cast this type to another specified type.
+    /// @par Examples
     /// @code
     /// UniquePointer<string> s = new string("Test string");
     /// UniquePointer<IComparable> comparable = s.ToDynamicInstanceOfType<IComparable>();
@@ -634,6 +484,7 @@ namespace Pcf {
       return UniquePointer<TT[]>(ptr);
     }
     /// @brief Dynamic cast specified pointer to another specified type.
+    /// @par Examples
     /// @code
     /// Pointer<string[]> strings = new string[23];
     /// Pointer<IComparable[]> comparables = Pointer<string[]>::ChangeType<IComparable[]>(strings);

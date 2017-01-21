@@ -92,8 +92,7 @@ namespace Pcf {
       /// * The read-only IsThreadPoolThread property, which indicates whether a thread is a thread pool thread.
       /// * The IsBackground property. For more information, see the Foreground and background threads section.
       ///
-      /// <b>Examples</b>
-      ///
+      /// @par Examples
       /// The following code example demonstrates simple threading functionality.
       /// @include Thread.cpp
       class pcf_public Thread : public object {

@@ -108,6 +108,7 @@ set(SOURCE_FILES
   Pcf/LockTest.cpp
   Pcf/MoveTest.cpp
   Pcf/NativesTest.cpp
+  Pcf/PropertyTest.cpp
   Pcf/ReferenceUT.cpp
   Pcf/SharedPointerUT.cpp
   Pcf/TestTest.cpp

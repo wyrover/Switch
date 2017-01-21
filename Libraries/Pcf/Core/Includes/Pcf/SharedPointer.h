@@ -25,7 +25,12 @@ class pcf_public __opaque_sub_object__ {
 };
 /// @endcond
 
-namespace Pcf {  
+namespace Pcf {
+  /// @cond
+  template <typename T=void>
+  class SharedPointer;
+  /// @endcond
+
   /// @brief Represents a Share Pointer class. A SharedPointer is a memory-managing pointer to an object.
   /// @remarks A share pointer is basically a pointer with a destructor. The destructor ensures that the object pointed to is deleted when it is no longer being used. You can have multiple pointers to the same object, so the object is only deleted when the last pointer is destroyed.
   /// @remarks A share pointer has to have slightly different characteristics to a conventional C pointer. These differences show up in the behaviour of the pointer on assignment and when the pointer's address (i.e. the object being pointed to) is changed. Deciding the exact behaviour is difficult and very subjective. This could be solved by having a range of different classes with slightly different behaviour. You could then choose which one suits your problem. However, I don't agree with this approach - I think you get quickly bogged down with the subtle differences and lose sight of the program you are actually trying to write. So I provide just one kind of share pointer which I believe is the most general-purpose. I think this is consistent with the STL, which provides just one kind of vector, map, list etc.
@@ -37,6 +42,7 @@ namespace Pcf {
   /// A consequence of the share pointer design is that if you change the object pointed to by one SharedPointer, you change the object pointed to by its aliases too. In other words, if you change the address of one SharedPointer, you are actually changing the address stored in the sub-object, which is visible to all other aliases, so these appear to change their stored address too. The result is that all aliases end up still being aliases and all pointing to the new object, whilst the old object gets deleted automatically because it is no longer pointed to.
   /// This behaviour is unlike conventional C pointers - if you allocate a new object to a pointer variable, you don't expect other pointer variables to change too. However, it can have very significant advantages in data structure design. It is common when designing large and complex data structures to have several different ways of accessing objects - for example you might store an object in a map which allows access to objects sorted in alphabetical order, but also store it in a vector which allows access to objects in the order in which they were created. Traditionally this could lead to problems in memory managing the object when removing it from one or other since it could become ambiguous which data structure is the container responsible for deallocating its memory. However, with share pointers this problem disappears - put a share pointer in both map and vector pointing to the same object, i.e. aliases. The object will persist until both share pointers are deallocated. Furthermore, if the object pointed to needs to be changed, it can be changed by changing either alias. So, you can look it up in the map, change the address and the address pointed to by the other alias in the vector will automatically change to the new object - they remain consistent.
   /// For more information see also  http://stlplus.sourceforge.net/stlplus3/docs/smart_ptr.html
+  /// @par Examples
   /// This example show how to used SharedPointer :
   /// @include SharedPointer.cpp
   template<typename T>
@@ -376,173 +382,14 @@ namespace Pcf {
       return s.str();
     }
     
-    template<typename TT>
-    static SharedPointer<T> Create() {
-      return SharedPointer<T>(new TT());
+    template<typename ...Arguments>
+    static SharedPointer<T> Create(Arguments... arguments) {
+      return SharedPointer<T>(new T(arguments...));
     }
-    
-    static SharedPointer<T> Create() {
-      return SharedPointer<T>(new T());
-    }
-    
-    template<typename T1>
-    static SharedPointer<T> Create(const T1& a1) {
-      return SharedPointer<T>(new T(a1));
-    }
-    
-    template<class TT, typename T1>
-    static SharedPointer<T> Create(const T1& a1) {
-      return SharedPointer<T>(new TT(a1));
-    }
-    
-    template<typename T1, typename T2>
-    static SharedPointer<T> Create(const T1& a1, const T2& a2) {
-      return SharedPointer<T>(new T(a1, a2));
-    }
-    
-    template<class TT, typename T1, typename T2>
-    static SharedPointer<T> Create(T1 a1, T2 a2) {
-      return SharedPointer<T>(new TT(a1, a2));
-    }
-    
-    template<typename T1, typename T2, typename T3>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3) {
-      return SharedPointer<T>(new T(a1, a2, a3));
-    }
-    
-    template<class TT, typename T1, typename T2, typename T3>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3) {
-      return SharedPointer<T>(new TT(a1, a2, a3));
-    }
-    
-    template<typename T1, typename T2, typename T3, typename T4>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4) {
-      return SharedPointer<T>(new T(a1, a2, a3, a4));
-    }
-    
-    template<class TT, typename T1, typename T2, typename T3, typename T4>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4) {
-      return SharedPointer<T>(new TT(a1, a2, a3, a4));
-    }
-    
-    template<typename T1, typename T2, typename T3, typename T4, typename T5>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5) {
-      return SharedPointer<T>(new T(a1, a2, a3, a4, a5));
-    }
-    
-    template<class TT, typename T1, typename T2, typename T3, typename T4, typename T5>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5) {
-      return SharedPointer<T>(new TT(a1, a2, a3, a4, a5));
-    }
-    
-    template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5, const T6& a6) {
-      return SharedPointer<T>(new T(a1, a2, a3, a4, a5, a6));
-    }
-    
-    template<class TT, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5, const T6& a6) {
-      return SharedPointer<T>(new TT(a1, a2, a3, a4, a5, a6));
-    }
-    
-    template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5, const T6& a6, const T7& a7) {
-      return SharedPointer<T>(new T(a1, a2, a3, a4, a5, a6, a7));
-    }
-    
-    template<class TT, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5, const T6& a6, const T7& a7) {
-      return SharedPointer<T>(new TT(a1, a2, a3, a4, a5, a6, a7));
-    }
-    
-    template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5, const T6& a6, const T7& a7, const T8& a8) {
-      return SharedPointer<T>(new T(a1, a2, a3, a4, a5, a6, a7, a8));
-    }
-    
-    template<class TT, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5, const T6& a6, const T7& a7, const T8& a8) {
-      return SharedPointer<T>(new TT(a1, a2, a3, a4, a5, a6, a7, a8));
-    }
-    
-    template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5, const T6& a6, const T7& a7, const T8& a8, const T9& a9) {
-      return SharedPointer<T>(new T(a1, a2, a3, a4, a5, a6, a7, a8, a9));
-    }
-    
-    template<class TT, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5, const T6& a6, const T7& a7, const T8& a8, const T9& a9) {
-      return SharedPointer<T>(new TT(a1, a2, a3, a4, a5, a6, a7, a8, a9));
-    }
-    
-    template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5, const T6& a6, const T7& a7, const T8& a8, const T9& a9, const T10& a10) {
-      return SharedPointer<T>(new T(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10));
-    }
-    
-    template<class TT, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5, const T6& a6, const T7& a7, const T8& a8, const T9& a9, const T10& a10) {
-      return SharedPointer<T>(new TT(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10));
-    }
-    
-    template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5, const T6& a6, const T7& a7, const T8& a8, const T9& a9, const T10& a10, const T11& a11) {
-      return SharedPointer<T>(new T(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11));
-    }
-    
-    template<class TT, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5, const T6& a6, const T7& a7, const T8& a8, const T9& a9, const T10& a10, const T11& a11) {
-      return SharedPointer<T>(new TT(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11));
-    }
-    
-    template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5, const T6& a6, const T7& a7, const T8& a8, const T9& a9, const T10& a10, const T11& a11, const T12& a12) {
-      return SharedPointer<T>(new T(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12));
-    }
-    
-    template<class TT, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5, const T6& a6, const T7& a7, const T8& a8, const T9& a9, const T10& a10, const T11& a11, const T12& a12) {
-      return SharedPointer<T>(new TT(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12));
-    }
-    
-    template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12, typename T13>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5, const T6& a6, const T7& a7, const T8& a8, const T9& a9, const T10& a10, const T11& a11, const T12& a12, const T13& a13) {
-      return SharedPointer<T>(new T(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13));
-    }
-    
-    template<class TT, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12, typename T13>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5, const T6& a6, const T7& a7, const T8& a8, const T9& a9, const T10& a10, const T11& a11, const T12& a12, const T13& a13) {
-      return SharedPointer<T>(new TT(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13));
-    }
-    
-    template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12, typename T13, typename T14>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5, const T6& a6, const T7& a7, const T8& a8, const T9& a9, const T10& a10, const T11& a11, const T12& a12, const T13& a13, const T14& a14) {
-      return SharedPointer<T>(new T(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14));
-    }
-    
-    template<class TT, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12, typename T13, typename T14>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5, const T6& a6, const T7& a7, const T8& a8, const T9& a9, const T10& a10, const T11& a11, const T12& a12, const T13& a13, const T14& a14) {
-      return SharedPointer<T>(new TT(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14));
-    }
-    
-    template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12, typename T13, typename T14, typename T15>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5, const T6& a6, const T7& a7, const T8& a8, const T9& a9, const T10& a10, const T11& a11, const T12& a12, const T13& a13, const T14& a14, const T15& a15) {
-      return SharedPointer<T>(new T(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15));
-    }
-    
-    template<class TT, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12, typename T13, typename T14, typename T15>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5, const T6& a6, const T7& a7, const T8& a8, const T9& a9, const T10& a10, const T11& a11, const T12& a12, const T13& a13, const T14& a14, const T15& a15) {
-      return SharedPointer<T>(new TT(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15));
-    }
-    
-    template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12, typename T13, typename T14, typename T15, typename T16>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5, const T6& a6, const T7& a7, const T8& a8, const T9& a9, const T10& a10, const T11& a11, const T12& a12, const T13& a13, const T14& a14, const T15& a15, const T16& a16) {
-      return SharedPointer<T>(new T(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16));
-    }
-    
-    template<class TT, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12, typename T13, typename T14, typename T15, typename T16>
-    static SharedPointer<T> Create(T1 a1, T2 a2, T3 a3, const T4& a4, const T5& a5, const T6& a6, const T7& a7, const T8& a8, const T9& a9, const T10& a10, const T11& a11, const T12& a12, const T13& a13, const T14& a14, const T15& a15, const T16& a16) {
-      return SharedPointer<T>(new TT(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16));
+
+    template<typename TT, typename ...Arguments>
+    static SharedPointer<T> Create(Arguments... arguments) {
+      return SharedPointer<T>(new TT(arguments...));
     }
     
     /// @cond
@@ -601,6 +448,20 @@ namespace Pcf {
     __opaque_sub_object__* subObject = null;
   };
   
+  template <>
+  class SharedPointer<void> {
+  public:
+    template<typename T, typename ...Arguments>
+    static SharedPointer<T> Create(Arguments... arguments) {
+      return SharedPointer<T>::Create(arguments...);
+    }
+
+    template<typename TCreate, typename TResult, typename ...Arguments>
+    static SharedPointer<TResult> Create(Arguments... arguments) {
+      return SharedPointer<TResult>::template Create<TCreate>(arguments...);
+    }
+  };
+
   /// @brief Represents a Share Pointer class. A SharedPointer is a memory-managing pointer to an object.
   /// @remarks A share pointer is basically a pointer with a destructor. The destructor ensures that the object pointed to is deleted when it is no longer being used. You can have multiple pointers to the same object, so the object is only deleted when the last pointer is destroyed.
   /// @remarks A share pointer has to have slightly different characteristics to a conventional C pointer. These differences show up in the behaviour of the pointer on assignment and when the pointer's address (i.e. the object being pointed to) is changed. Deciding the exact behaviour is difficult and very subjective. This could be solved by having a range of different classes with slightly different behaviour. You could then choose which one suits your problem. However, I don't agree with this approach - I think you get quickly bogged down with the subtle differences and lose sight of the program you are actually trying to write. So I provide just one kind of share pointer which I believe is the most general-purpose. I think this is consistent with the STL, which provides just one kind of vector, map, list etc.
@@ -612,6 +473,7 @@ namespace Pcf {
   /// @remarks A consequence of the share pointer design is that if you change the object pointed to by one SharedPointer, you change the object pointed to by its aliases too. In other words, if you change the address of one SharedPointer, you are actually changing the address stored in the sub-object, which is visible to all other aliases, so these appear to change their stored address too. The result is that all aliases end up still being aliases and all pointing to the new object, whilst the old object gets deleted automatically because it is no longer pointed to.
   /// @remarks This behaviour is unlike conventional C pointers - if you allocate a new object to a pointer variable, you don't expect other pointer variables to change too. However, it can have very significant advantages in data structure design. It is common when designing large and complex data structures to have several different ways of accessing objects - for example you might store an object in a map which allows access to objects sorted in alphabetical order, but also store it in a vector which allows access to objects in the order in which they were created. Traditionally this could lead to problems in memory managing the object when removing it from one or other since it could become ambiguous which data structure is the container responsible for deallocating its memory. However, with share pointers this problem disappears - put a share pointer in both map and vector pointing to the same object, i.e. aliases. The object will persist until both share pointers are deallocated. Furthermore, if the object pointed to needs to be changed, it can be changed by changing either alias. So, you can look it up in the map, change the address and the address pointed to by the other alias in the vector will automatically change to the new object - they remain consistent.
   /// @remarks For more information see also  http://stlplus.sourceforge.net/stlplus3/docs/smart_ptr.html
+  /// @par Examples
   /// This example show how to used SharedPointer :
   /// @include SharedPointer.cpp
   /// @ingroup Pcf

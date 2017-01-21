@@ -119,7 +119,7 @@ namespace Pcf {
           /// @param delay The time span to wait before completing the returned task, or TimeSpan.FromMilliseconds(-1) to wait indefinitely.
           /// @return A task that represents the time delay.
           /// @exception ArgumentOutOfRangeException The millisecondsDelay argument is less than -1.
-          ///
+          /// @par Examples
           /// The following example shows a simple use of the Delay method.
           /// @include TaskDelay.cpp
           static Task<TResult> Delay(const TimeSpan& delay) {return Delay(as<int32>(delay.TotalMilliseconds()));}
@@ -128,7 +128,7 @@ namespace Pcf {
           /// @param millisecondsDelay The number of milliseconds to wait before completing the returned task, or -1 to wait indefinitely.
           /// @return A task that represents the time delay.
           /// @exception ArgumentOutOfRangeException The millisecondsDelay argument is less than -1.
-          ///
+          /// @par Examples
           /// The following example shows a simple use of the Delay method.
           /// @include TaskDelay.cpp
           static Task<TResult> Delay(int32 millisecondsDelay) {

@@ -38,6 +38,7 @@ namespace Pcf {
           /// @brief Represents a collection of Control objects.
           /// @remarks The Add, Remove, and RemoveAt methods enable you to add and remove individual controls from the collection. You can also use the AddRange or Clear methods to add or remove all the controls from the collection.
           /// @remarks You can determine if a Control is a member of the collection by passing the control into the Contains method. To get the index value of the location of a Control in the collection, pass the control into the IndexOf method. The collection can be copied into an array by calling the CopyTo method.
+          /// @par Examples
           /// @code
           /// // Remove the RadioButton control if it exists.
           /// void RemoveButtonClick(const object& sender, const System::EventArgs& e) {

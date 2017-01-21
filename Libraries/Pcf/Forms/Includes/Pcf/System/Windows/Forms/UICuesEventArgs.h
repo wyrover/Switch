@@ -23,6 +23,7 @@ namespace Pcf {
 
           /// @brief Gets the bitwise combination of the UICues values.
           /// @return A bitwise combination of the UICues values. The default is Changed.
+          /// @par Examples
           /// The following code example demonstrates the use of this member. In the example, an event handler reports on the occurrence of the Control.ChangeUICues event. This report helps you to learn when the event occurs and can assist you in debugging. To report on multiple events or on events that occur frequently, consider replacing MessageBox.Show with Console.WriteLine or appending the message to a multiline TextBox.
           /// To run the example code, paste it into a project that contains an instance of a type that inherits from Control, such as a Button or ComboBox. Then name the instance Control1 and ensure that the event handler is associated with the Control.ChangeUICues event.
           /// @code
@@ -45,6 +46,7 @@ namespace Pcf {
 
           /// @brief Gets a value indicating whether the state of the focus cues has changed.
           /// @return A bitwise combination of the UICues values. The default is Changed.
+          /// @par Examples
           /// The following code example demonstrates the use of this member. In the example, an event handler reports on the occurrence of the Control.ChangeUICues event. This report helps you to learn when the event occurs and can assist you in debugging. To report on multiple events or on events that occur frequently, consider replacing MessageBox.Show with Console.WriteLine or appending the message to a multiline TextBox.
           /// To run the example code, paste it into a project that contains an instance of a type that inherits from Control, such as a Button or ComboBox. Then name the instance Control1 and ensure that the event handler is associated with the Control.ChangeUICues event.
           /// @code
@@ -67,6 +69,7 @@ namespace Pcf {
 
           /// @brief Gets a value indicating whether the state of the keyboard cues has changed.
           /// @return true if the state of the keyboard cues has changed; otherwise, false.
+          /// @par Examples
           /// The following code example demonstrates the use of this member. In the example, an event handler reports on the occurrence of the Control.ChangeUICues event. This report helps you to learn when the event occurs and can assist you in debugging. To report on multiple events or on events that occur frequently, consider replacing MessageBox.Show with Console.WriteLine or appending the message to a multiline TextBox.
           /// To run the example code, paste it into a project that contains an instance of a type that inherits from Control, such as a Button or ComboBox. Then name the instance Control1 and ensure that the event handler is associated with the Control.ChangeUICues event.
           /// @code
@@ -89,6 +92,7 @@ namespace Pcf {
 
           /// @brief Gets a value indicating whether focus rectangles are shown after the change.
           /// @return true if focus rectangles are shown after the change; otherwise, false.
+          /// @par Examples
           /// The following code example demonstrates the use of this member. In the example, an event handler reports on the occurrence of the Control.ChangeUICues event. This report helps you to learn when the event occurs and can assist you in debugging. To report on multiple events or on events that occur frequently, consider replacing MessageBox.Show with Console.WriteLine or appending the message to a multiline TextBox.
           /// To run the example code, paste it into a project that contains an instance of a type that inherits from Control, such as a Button or ComboBox. Then name the instance Control1 and ensure that the event handler is associated with the Control.ChangeUICues event.
           /// @code
@@ -111,6 +115,7 @@ namespace Pcf {
 
           /// @brief Gets a value indicating whether keyboard cues are underlined after the change.
           /// @return true if keyboard cues are underlined after the change; otherwise, false.
+          /// @par Examples
           /// The following code example demonstrates the use of this member. In the example, an event handler reports on the occurrence of the Control.ChangeUICues event. This report helps you to learn when the event occurs and can assist you in debugging. To report on multiple events or on events that occur frequently, consider replacing MessageBox.Show with Console.WriteLine or appending the message to a multiline TextBox.
           /// To run the example code, paste it into a project that contains an instance of a type that inherits from Control, such as a Button or ComboBox. Then name the instance Control1 and ensure that the event handler is associated with the Control.ChangeUICues event.
           /// @code

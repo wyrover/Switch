@@ -23,7 +23,8 @@ namespace Pcf {
     /// @brief Provides information about, and means to manipulate, the current environment
     /// and platform. This class cannot be inherited.
     /// @remarks Use the Environment class to retrieve information such as command-line arguments, the exit code, environment variable settings, contents of the call stack, time since last system boot, and the version of the Pcf.
-    /// @remarks The following example demonstrates displays a list of information about the current environment.
+    /// @par Examples
+    /// The following example demonstrates displays a list of information about the current environment.
     /// @include Environment.cpp
     class pcf_public Environment pcf_static {
     public:

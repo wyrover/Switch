@@ -14,8 +14,10 @@ namespace Pcf {
     /// @brief Represents the method that will handle an event that has no event data.
     /// @param sender The source of the event.
     /// @param e An System::EventArgs that contains no event data.
+    /// @par Examples
     /// This example show how to use EventHandler for two instance method.
     /// @include EventHandler.cpp
+    /// @par Examples
     /// This example show how to used a specialized EventHandler.
     /// @include SpecializedEventHandler.cpp
     using EventHandler = Delegate<void, const Object&, const EventArgs&>;

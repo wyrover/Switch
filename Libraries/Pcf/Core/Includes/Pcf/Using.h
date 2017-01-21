@@ -5,6 +5,7 @@
 /// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Pcf {
   /// @brief The specified expression is cleared automaticaly when the scope is ended.
+  /// @par Examples
   /// @code
   /// // sr is released automatically after the end cosure }.
   /// pcf_using(SharedPointer<StreamReader> sr = SharedPointer<StreamReader>::Create(path)) {

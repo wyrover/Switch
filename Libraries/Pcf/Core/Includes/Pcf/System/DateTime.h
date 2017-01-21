@@ -54,6 +54,7 @@ namespace Pcf {
     /// // The following method call displays true.
     /// Console::WriteLine(dat1.Equals(DateTime::MinValue));
     /// @endcode
+    /// @par Examples
     /// The following example demonstrates how to compare roughly equivalent DateTime values, accepting a small margin of difference when declaring them equal.
     /// @include DateTime.cpp
     struct pcf_public DateTime : public ValueType, public IComparable, public IConvertible {
@@ -354,6 +355,7 @@ namespace Pcf {
       /// @remarks !!! NOT YET ENDED !!!
       /// @remarks A DateTime object consists of a Kind field that indicates whether the time value is based on local time, Coordinated Universal Time (UTC), or neither, and a Ticks field that contains a time value measured in 100-nanosecond ticks. The SpecifyKind method creates a new DateTime object using the specified kind parameter and the original time value.
       /// @remarks The SpecifyKind method is useful in interoperability scenarios where you receive a DateTime object with an unspecified Kind field, but you can determine by independent means that the Ticks field represents local time or UTC.
+      /// @par Examples
       /// The following example uses the SpecifyKind method to demonstrate how the Kind property influences the ToLocalTime and ToUniversalTime conversion methods.
       /// @include DateTimeSpecifyKind.cpp
       static DateTime SpecifyKind(DateTime value, DateTimeKind kind);
@@ -386,6 +388,7 @@ namespace Pcf {
       /// @remarks DateTimeKindUtc           This instance of DateTime is converted to local time.
       /// @remarks DateTimeKindLocal         No conversion is performed.
       /// @remarks DateTimeKindUnspecified   This instance of DateTime is assumed to be a UTC time, and the conversion is performed as if Kind were Utc.
+      /// @par Examples
       /// The following example uses the SpecifyKind method to demonstrate how the Kind property influences the ToLocalTime and ToUniversalTime conversion methods.
       /// @include DateTimeSpecifyKind.cpp
       DateTime ToLocalTime() const;
@@ -416,6 +419,7 @@ namespace Pcf {
       /// @remarks DateTimeKindUtc           No conversion is performed.
       /// @remarks DateTimeKindLocal         This instance of DateTime is converted to universal time.
       /// @remarks DateTimeKindUnspecified   The current DateTime object is assumed to be a local time, and the conversion is performed as if Kind were Local.
+      /// @par Examples
       /// The following example uses the SpecifyKind method to demonstrate how the Kind property influences the ToLocalTime and ToUniversalTime conversion methods.
       /// @include DateTimeSpecifyKind.cpp
       DateTime ToUniversalTime() const;

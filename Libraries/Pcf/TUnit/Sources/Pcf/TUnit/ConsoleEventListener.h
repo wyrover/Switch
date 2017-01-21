@@ -11,7 +11,8 @@ namespace Pcf {
   /// @brief The TUnit namespace contains a unit test framework.
   /// @remarks This example how to use TestFixture class, Assert class and #pcf_test method:
   /// @include Assert.cpp
-  /// @remarks This example how to use TestFixture class, Expect class and #pcf_test method:
+  /// @par Examples
+  /// This example how to use TestFixture class, Expect class and #pcf_test method:
   /// @include Expect.cpp
   namespace TUnit {
     /// @brief The ConsoleEventListener class is used to tracing execution of tests. The methods are organized in the order the corresponding events are fired.

@@ -216,7 +216,6 @@ namespace Pcf {
         static bool Wait(const object& obj, const TimeSpan& timeout) {return Wait(obj, as<int32>(timeout.TotalMilliseconds()));}
 
       private:
-        /// @cond
         struct MonitorItem {
           bool operator==(const MonitorItem& monitorItem) const {return this->event == monitorItem.event && this->usedCounter == monitorItem.usedCounter;}
           bool operator!=(const MonitorItem& monitorItem) const {return !this->operator==(monitorItem);}
@@ -225,12 +224,10 @@ namespace Pcf {
           int32 usedCounter {0};
         };
 
-        using MonitorItemCollection = System::Collections::Generic::SortedDictionary<const object*, MonitorItem>;
-        static MonitorItemCollection monitorItems;
+        static System::Collections::Generic::SortedDictionary<const object*, MonitorItem> monitorItems;
 
         static bool Add(const object& obj, int32 millisecondsTimeout);
         static void Remove(const object& obj);
-        /// @endcond
       };
     }
   }

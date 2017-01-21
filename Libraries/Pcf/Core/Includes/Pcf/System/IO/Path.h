@@ -18,21 +18,25 @@ namespace Pcf {
       class pcf_public Path pcf_static {
       public:
         /// @brief Provides a platform-specific alternate character used to separate directory levels in a path string that reflects a hierarchical file system organization.
+        /// @par Examples
         /// The following code example demonstrates the use of the AltDirectorySeparatorChar() property.
         /// @include DirectorySeparatorChar.cpp
         static Property<char32, ReadOnly> AltDirectorySeparatorChar;
 
         /// @brief Provides a platform-specific character used to separate directory levels in a path string that reflects a hierarchical file system organization.
+        /// @par Examples
         /// The following code example demonstrates the use of the DirectorySeparatorChar() property.
         /// @include DirectorySeparatorChar.cpp
         static Property<char32, ReadOnly> DirectorySeparatorChar;
 
         /// @brief A platform-specific separator character used to separate path strings in environment variables.
+        /// @par Examples
         /// The following code example demonstrates the use of the PathSeparator() property.
         /// @include DirectorySeparatorChar.cpp
         static Property<char32, ReadOnly> PathSeparator;
 
         /// @brief Provides a platform-specific volume separator character.
+        /// @par Examples
         /// The following code example demonstrates the use of the VolumeSeparatorChar() property.
         /// @include DirectorySeparatorChar.cpp
         static Property<char32, ReadOnly> VolumeSeparatorChar;

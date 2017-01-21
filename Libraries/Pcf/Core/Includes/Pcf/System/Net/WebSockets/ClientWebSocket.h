@@ -22,6 +22,7 @@ namespace Pcf {
       /// @brief The System::Net::WebSockets namespace provides a managed implementation of the WebSocket interface for developers.
       namespace WebSockets {
         /// @brief Provides a client for connecting to WebSocket services.
+        /// @par Examples
         /// This example show how to receive and send with ClientWebSocket :
         /// @include ClientWebSocket.cpp
         class pcf_public ClientWebSocket : public WebSocket {

@@ -18,7 +18,8 @@ namespace Pcf {
         /// @remarks The example also demonstrates using custom cursors for the drag-and-drop operation. The example assumes that two cursor files, 3dwarro.cur and 3dwno.cur, exist in the application directory, for the custom drag and no-drop cursors, respectively. The custom cursors will be used if the UseCustomCursorsCheck CheckBox is checked. The custom cursors are set in the GiveFeedback event handler.
         /// @remarks The keyboard state is evaluated in the DragOver event handler for the right ListBox, to determine what the drag operation will be based upon state of the SHIFT, CTRL, ALT, or CTRL+ALT keys. The location in the ListBox where the drop would occur is also determined during the DragOver event. If the data to drop is not a String, then the DragEventArgs.Effect is set to DragDropEffects.None. Finally, the status of the drop is displayed in the DropLocationLabel Label.
         /// @remarks The data to drop for the right ListBox is determined in the DragDrop event handler and the String value is added at the appropriate place in the ListBox. If the drag operation moves outside the bounds of the form, then the drag-and-drop operation is canceled in the QueryContinueDrag event handler.
-        /// @remarks This code excerpt demonstrates using the DragEventArgs class. See the DoDragDrop method for the complete code example.
+        /// @par Examples
+        /// This code excerpt demonstrates using the DragEventArgs class. See the DoDragDrop method for the complete code example.
         /// @code
         /// void ListDragTarget_DragOver(const object& sender, System::Windows::Forms::DragEventArgs& e) {
         ///   // Determine whether string data exists in the drop data. If not, then
@@ -98,7 +99,8 @@ namespace Pcf {
           /// @remarks The example also demonstrates using custom cursors for the drag-and-drop operation. The example assumes that two cursor files, 3dwarro.cur and 3dwno.cur, exist in the application directory, for the custom drag and no-drop cursors, respectively. The custom cursors will be used if the UseCustomCursorsCheck CheckBox is checked. The custom cursors are set in the GiveFeedback event handler.
           /// @remarks The keyboard state is evaluated in the DragOver event handler for the right ListBox, to determine what the drag operation will be based upon state of the SHIFT, CTRL, ALT, or CTRL+ALT keys. The location in the ListBox where the drop would occur is also determined during the DragOver event. If the data to drop is not a String, then the DragEventArgs.Effect is set to DragDropEffects.None. Finally, the status of the drop is displayed in the DropLocationLabel Label.
           /// @remarks The data to drop for the right ListBox is determined in the DragDrop event handler and the String value is added at the appropriate place in the ListBox. If the drag operation moves outside the bounds of the form, then the drag-and-drop operation is canceled in the QueryContinueDrag event handler.
-          /// @remarks This code excerpt demonstrates using the DragEventArgs class. See the DoDragDrop method for the complete code example.
+          /// @par Examples
+          /// This code excerpt demonstrates using the DragEventArgs class. See the DoDragDrop method for the complete code example.
           /// @code
           /// void ListDragTarget_DragOver(const object& sender, System::Windows::Forms::DragEventArgs& e) {
           ///   // Determine whether string data exists in the drop data. If not, then
@@ -163,7 +165,8 @@ namespace Pcf {
           /// @remarks The example also demonstrates using custom cursors for the drag-and-drop operation. The example assumes that two cursor files, 3dwarro.cur and 3dwno.cur, exist in the application directory, for the custom drag and no-drop cursors, respectively. The custom cursors will be used if the UseCustomCursorsCheck CheckBox is checked. The custom cursors are set in the GiveFeedback event handler.
           /// @remarks The keyboard state is evaluated in the DragOver event handler for the right ListBox, to determine what the drag operation will be based upon state of the SHIFT, CTRL, ALT, or CTRL+ALT keys. The location in the ListBox where the drop would occur is also determined during the DragOver event. If the data to drop is not a String, then the DragEventArgs.Effect is set to DragDropEffects.None. Finally, the status of the drop is displayed in the DropLocationLabel Label.
           /// @remarks The data to drop for the right ListBox is determined in the DragDrop event handler and the String value is added at the appropriate place in the ListBox. If the drag operation moves outside the bounds of the form, then the drag-and-drop operation is canceled in the QueryContinueDrag event handler.
-          /// @remarks This code excerpt demonstrates using the DragEventArgs class. See the DoDragDrop method for the complete code example.
+          /// @par Examples
+          /// This code excerpt demonstrates using the DragEventArgs class. See the DoDragDrop method for the complete code example.
           /// @code
           /// void ListDragTarget_DragOver(const object& sender, System::Windows::Forms::DragEventArgs& e) {
           ///   // Determine whether string data exists in the drop data. If not, then

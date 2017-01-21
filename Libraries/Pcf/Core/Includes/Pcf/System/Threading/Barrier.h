@@ -18,6 +18,7 @@ namespace Pcf {
     namespace Threading {
       /// @brief Enables multiple tasks to cooperatively work on an algorithm in parallel through multiple phases.
       /// @remarks A group of tasks cooperate by moving through a series of phases, where each in the group signals it has arrived at the Barrier in a given phase and implicitly waits for all others to arrive. The same Barrier can be used for multiple phases.
+      /// @par Examples
       /// The following example shows how to use a barrier:
       /// @include Barrier.cpp
       class pcf_public Barrier : public object {

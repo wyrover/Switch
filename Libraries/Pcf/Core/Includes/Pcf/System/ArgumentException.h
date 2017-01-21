@@ -9,6 +9,7 @@ namespace Pcf {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The exception that is thrown when one of the arguments provided to a method is not valid.
+    /// @par Examples
     /// The following example demonstrates how to throw and catch an ArgumentException.
     /// @include ArgumentException.cpp
     class pcf_public ArgumentException : public SystemException {

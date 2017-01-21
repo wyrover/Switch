@@ -143,7 +143,7 @@ namespace Pcf {
         SharedPointer<std::mutex> guard = SharedPointer<std::mutex>::Create();
         SharedPointer<std::condition_variable> signal = SharedPointer<std::condition_variable>::Create();
         SharedPointer<int32> count = SharedPointer<int32>::Create(0);
-        SharedPointer<int32> maxCount = SharedPointer<int32>::Create(Int32::MaxValue);
+        SharedPointer<int32> maxCount = SharedPointer<int32>::Create(Int32::MaxValue());
         SharedPointer<string> name = SharedPointer<string>::Create();
       };
     }

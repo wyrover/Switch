@@ -31,6 +31,7 @@ namespace Pcf {
 
       /// @brief Creates a shallow copy of the current object.
       /// @return ValueType* A shallow copy of the current object.
+      /// @par Examples
       /// The following code example shows how to copy an instance of a class using MemberwiseClone.
       /// @include ObjectMemberwiseClone.cpp
       //template<typename T>

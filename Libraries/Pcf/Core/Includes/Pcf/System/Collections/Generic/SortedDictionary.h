@@ -25,6 +25,7 @@ namespace Pcf {
       /// @brief The System::Collections::Generic namespace contains interfaces and classes that define generic collections, which allow users to create strongly typed collections that provide better type safety and performance than non-generic strongly typed collections.
       namespace Generic {
         /// @brief Represents a collection of key/value pairs that are sorted on the key.
+        /// @par Examples
         /// The following code example creates an empty SortedDictionary<TKey, TValue> of strings with string keys && uses the Add method to add some elements. The example demonstrates that the Add method throws an ArgumentException when attempting to add a duplicate key.
         /// The example uses the Item property to retrieve values, demonstrating that a KeyNotFoundException is thrown when a requested key is ! present, && showing that the value associated with a key can be replaced.
         /// The example shows how to use the TryGetValue method as a more efficient way to retrieve values if a program often must try key values that are ! in the dictionary, && it shows how to use the ContainsKey method to test whether a key exists before calling the Add method.
@@ -125,7 +126,8 @@ namespace Pcf {
           /// @exception ArgumentNullException The parameters keyValue is null.
           /// @exception ArgumentException An element with the same key already exists in the SortedDictionary<TKey, TValue>.
           /// @remarks Every key in a SortedDictionary<TKey, TValue> must be unique according to the default equality comparer.
-          /// @remarks The following sample show how to use Add function:
+          /// @par Examples
+          /// The following sample show how to use Add function:
           /// @include SortedDictionaryAdd.cpp
           void Add(const KeyValuePair<TKey,TValue>& keyValue) override {
             Add(keyValue.Key(), keyValue.Value());
@@ -267,8 +269,9 @@ namespace Pcf {
           /// @param key The key of the element to set.
           /// @return TValue The element at the specified key.
           /// @exception ArgumentNullException key is null.
-          /// @return The following sample show how to use [] operators:
-          /// @return @include SortedDictionaryOperators.cpp
+          /// @par Examples
+          /// The following sample show how to use [] operators:
+          /// @include SortedDictionaryOperators.cpp
           TValue& operator[](const TKey& key) override {
             this->operationNumber++;
             return this->map[key];
@@ -279,8 +282,9 @@ namespace Pcf {
           /// @return TValue The element at the specified key.
           /// @exception ArgumentNullException key is null.
           /// @exception ArgumentException key is ! present.
-          /// @return The following sample show how to use [] operators:
-          /// @return @include SortedDictionaryOperators.cpp
+          /// @par Examples
+          /// The following sample show how to use [] operators:
+          /// @include SortedDictionaryOperators.cpp
           const TValue& operator[](const TKey& key) const override {
             if (! ContainsKey(key))
               throw ArgumentException(pcf_current_information);

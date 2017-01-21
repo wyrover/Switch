@@ -19,7 +19,7 @@ namespace Pcf {
       ///  * To enable debugging with cmake, add the add_definitions(-DDEBUG) command line in the CMakeLists.txt of your porject, or you can add #define DEBUG to the top of your file but in this case, the compiler options for debug is not activated.
       ///  * To enable tracing with cmake, add the add_definitions(-DTRACE) command line in the CMakeLists.txt of your porject, or you can add #define TRACE to the top of your file.
       /// @note If an attempt is made to write to a file that is in use or unavailable, the file name is automatically prefixed by a GUID.
-      ///
+      /// @par Examples
       /// The following example implements an instance of the TextWriterTraceListener class that uses a StreamWriter called myOutputWriter to write to a file named TestFile.txt. First the example creates a file for output. Then it creates the StreamWriter for the first text writer, assigns it the output file, and adds it to the Listeners. Then, the code outputs one line of text to the file. Finally, the example flushes the output buffer.
       ///
       /// After running this sample, you can open the TestFile.txt file to see the output.

@@ -17,6 +17,7 @@ namespace Pcf {
   };
 
   /// @brief This keyword is use to represent a static class.
+  /// @par Examples
   /// @code
   /// class Foo pcf_static {
   /// public:

@@ -17,7 +17,8 @@ namespace Pcf {
         /// @remarks StringCollection allows duplicate elements.
         /// @remarks string comparisons are case-sensitive.
         /// @remarks Elements in this collection can be accessed using an integer index. Indexes in this collection are zero-based.
-        /// @remarks The following code example demonstrates several of the properties and methods of StringCollection.
+        /// @par Examples
+        /// The following code example demonstrates several of the properties and methods of StringCollection.
         /// @include StringCollection.cpp
         using StringCollection = Generic::List<String>;
       }

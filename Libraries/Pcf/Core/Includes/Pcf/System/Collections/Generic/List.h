@@ -40,7 +40,8 @@ namespace Pcf {
         /// @remarks Elements in this collection can be accessed using an integer index. Indexes in this collection are zero-based.
         /// @remarks For very large List<T> objects, you can increase the maximum capacity to 2 billion elements on a 64-bit system by setting the enabled attribute of the gcAllowVeryLargeObjects configuration element to true in the run-time environment.
         /// @remarks List<T> accepts null as a valid value for reference types && allows duplicate elements.
-        /// @remarks The following code example demonstrates the TrimExcess method. Several properties && methods of the List<T> class are used to add, insert, && remove items from a list of strings. Then the TrimExcess method is used to reduce the capacity to match the count, && the Capacity && Count properties are displayed. If the unused capacity had been less than 10 percent of total capacity, the list would ! have been resized. Finally, the contents of the list are cleared.
+        /// @par Examples
+        /// The following code example demonstrates the TrimExcess method. Several properties && methods of the List<T> class are used to add, insert, && remove items from a list of strings. Then the TrimExcess method is used to reduce the capacity to match the count, && the Capacity && Count properties are displayed. If the unused capacity had been less than 10 percent of total capacity, the list would ! have been resized. Finally, the contents of the list are cleared.
         /// @include List.cpp
         template<typename T, typename TAllocator>
         class List : public Object, public System::Linq::Extension::Enumerable<List<T, TAllocator>, T>, public IList<T> {
@@ -52,7 +53,8 @@ namespace Pcf {
           /// @remarks The capacity can be decreased by calling the TrimExcess method || by setting the Capacity property explicitly. Decreasing the capacity reallocates memory && copies all the elements in the List<T>.
           /// @remarks This constructor is an O(1) operation.
           /// @remarks The following code example demonstrates the default constructor of the List<T> generic class. The default constructor creates a list with the default capacity, as demonstrated by displaying the Capacity property.
-          /// @remarks The code example adds, inserts, and removes items, showing how the capacity changes as these methods are used.
+          /// @par Examples
+          /// The code example adds, inserts, and removes items, showing how the capacity changes as these methods are used.
           /// @include List.cpp
           List() {}
           
@@ -69,7 +71,8 @@ namespace Pcf {
           /// @exception ArgumentNullException The parameters collection is null || element reference null in collection.
           /// @remarks The elements are copied onto the List<T> in the same order they are read by the enumerator of the collection.
           /// @remarks This constructor is an O(n) operation, where n is the number of elements in collection.
-          /// @remarks The following code example demonstrates the List<T> constructor and various methods of the List<T> class that act on ranges. An array of strings is created && passed to the constructor, populating the list with the elements of the array. The Capacity property is then displayed, to show that the initial capacity is exactly what is required to hold the input elements.
+          /// @par Examples
+          /// The following code example demonstrates the List<T> constructor and various methods of the List<T> class that act on ranges. An array of strings is created && passed to the constructor, populating the list with the elements of the array. The Capacity property is then displayed, to show that the initial capacity is exactly what is required to hold the input elements.
           /// @include List2.cpp
           List(const IEnumerable<T>& collection) : operationNumber(0) {
             for (const T& value : collection)
@@ -84,7 +87,8 @@ namespace Pcf {
           /// @remarks The capacity can be decreased by calling the TrimExcess method || by setting the Capacity property explicitly. Decreasing the capacity reallocates memory && copies all the elements in the List<T>.
           /// @remarks This constructor is an O(n) operation, where n is capacity.
           /// @remarks The following code example demonstrates the AsReadOnly method. A List<T> of strings with a capacity of 4 is created, because the ultimate size of the list is known to be exactly 4. The list is populated with four strings, && the AsReadOnly method is used to get a read-only IList<T> generic interface implementation that wraps the original list.
-          /// @remarks An element of the original list is set to "Coelophysis" using the Item property, && the contents of the read-only list are displayed again to demonstrate that it is just a wrapper for the original list.
+          /// @par Examples
+          /// An element of the original list is set to "Coelophysis" using the Item property, && the contents of the read-only list are displayed again to demonstrate that it is just a wrapper for the original list.
           /// @include List3.cpp
           List(int32 capacity) : operationNumber(0) {
             if (capacity < 0)
@@ -133,7 +137,8 @@ namespace Pcf {
           /// @remarks If Count already equals Capacity, the capacity of the List<T> is increased by automatically reallocating the internal array, && the existing elements are copied to the new array before the new element is added.
           /// @remarks If Count is less than Capacity, this method is an O(1) operation. If the capacity needs to be increased to accommodate the new element, this method becomes an O(n) operation, where n is Count.
           /// @remarks The following code example demonstrates several properties && methods of the List<T> generic class, including the Add method. The default constructor is used to create a list of strings with a capacity of 0. The Capacity property is displayed, && then the Add method is used to add several items. The items are listed, && the Capacity property is displayed again, along with the Count property, to show that the capacity has been increased as needed.
-          /// @remarks Other properties && methods are used to search for, insert, && remove elements from the list, && finally to clear the list.
+          /// @par Examples
+          /// Other properties && methods are used to search for, insert, && remove elements from the list, && finally to clear the list.
           /// @include List.cpp
           void Add(const T& value) override {
             this->list.push_back(value);
@@ -145,7 +150,8 @@ namespace Pcf {
           /// @remarks The order of the elements in the collection is preserved in the List<T>.
           /// @remarks If the new Count (the current Count plus the size of the collection) will be greater than Capacity, the capacity of the List<T> is increased by automatically reallocating the internal array to accommodate the new elements, && the existing elements are copied to the new array before the new elements are added.
           /// @remarks If the List<T> can accommodate the new elements without increasing the Capacity, this method is an O(n) operation, where n is the number of elements to be added. If the capacity needs to be increased to accommodate the new elements, this method becomes an O(n + m) operation, where n is the number of elements to be added && m is Count.
-          /// @remarks The following code example demonstrates the List<T> constructor && various methods of the List<T> class that act on ranges. An array of strings is created && passed to the constructor, populating the list with the elements of the array. The Capacity property is then displayed, to show that the initial capacity is exactly what is required to hold the input elements.
+          /// @par Examples
+          /// The following code example demonstrates the List<T> constructor && various methods of the List<T> class that act on ranges. An array of strings is created && passed to the constructor, populating the list with the elements of the array. The Capacity property is then displayed, to show that the initial capacity is exactly what is required to hold the input elements.
           /// @include List2.cpp
           void AddRange(const IEnumerable<T>& enumerable) {
             if (&enumerable == this) { // if enumerable is the same object : infinite loop
@@ -165,7 +171,8 @@ namespace Pcf {
           /// @remarks The order of the elements in the collection is preserved in the List<T>.
           /// @remarks If the new Count (the current Count plus the size of the collection) will be greater than Capacity, the capacity of the List<T> is increased by automatically reallocating the internal array to accommodate the new elements, && the existing elements are copied to the new array before the new elements are added.
           /// @remarks If the List<T> can accommodate the new elements without increasing the Capacity, this method is an O(n) operation, where n is the number of elements to be added. If the capacity needs to be increased to accommodate the new elements, this method becomes an O(n + m) operation, where n is the number of elements to be added && m is Count.
-          /// @remarks The following code example demonstrates the List<T> constructor && various methods of the List<T> class that act on ranges. An array of strings is created && passed to the constructor, populating the list with the elements of the array. The Capacity property is then displayed, to show that the initial capacity is exactly what is required to hold the input elements.
+          /// @par Examples
+          /// The following code example demonstrates the List<T> constructor && various methods of the List<T> class that act on ranges. An array of strings is created && passed to the constructor, populating the list with the elements of the array. The Capacity property is then displayed, to show that the initial capacity is exactly what is required to hold the input elements.
           /// @include List2.cpp
           void AddRange(InitializerList<T> il) {
             for (const T& item : il)
@@ -178,7 +185,8 @@ namespace Pcf {
           /// @remarks A collection that is read-only is simply a collection with a wrapper that prevents modifying the collection; therefore, if changes are made to the underlying collection, the read-only collection reflects those changes.
           /// @remarks This method is an O(1) operation.
           /// @remarks The following code example demonstrates the AsReadOnly method. A List<T> of strings with a capacity of 4 is created, because the ultimate size of the list is known to be exactly 4. The list is populated with four strings, && the AsReadOnly method is used to get a read-only IList<T> generic interface implementation that wraps the original list.
-          /// @remarks An element of the original list is set to "Coelophysis" using the Item property, && the contents of the read-only list are displayed again to demonstrate that it is just a wrapper for the original list.
+          /// @par Examples
+          /// An element of the original list is set to "Coelophysis" using the Item property, && the contents of the read-only list are displayed again to demonstrate that it is just a wrapper for the original list.
           /// @include List3.cpp
           ObjectModel::ReadOnlyCollection<T> AsReadOnly() {return ObjectModel::ReadOnlyCollection<T>(*this);}
 
@@ -193,7 +201,8 @@ namespace Pcf {
           /// @remarks If the List<T> does ! contain the specified value, the method returns a negative integer. You can apply the bitwise complement operation (~) to this negative integer to get the index of the first element that is larger than the search value. When inserting the value into the List<T>, this index should be used as the insertion point to maintain the sort order.
           /// @remarks This method is an O(log n) operation, where n is the number of elements in the range.
           /// @remarks The following code example demonstrates the Sort() method overload && the BinarySearch(T) method overload. A List<T> of strings is created && populated with four strings, in no particular order. The list is displayed, sorted, && displayed again.
-          /// @remarks The BinarySearch(T) method overload is then used to search for two strings that are ! in the list, && the Insert method is used to insert them. The return value of the BinarySearch(T) method is negative in each case, because the strings are ! in the list. Taking the bitwise complement of this negative number produces the index of the first element in the list that is larger than the search string, && inserting at this location preserves the sort order. The second search string is larger than any element in the list, so the insertion position is at the end of the list.
+          /// @par Examples
+          /// The BinarySearch(T) method overload is then used to search for two strings that are ! in the list, && the Insert method is used to insert them. The return value of the BinarySearch(T) method is negative in each case, because the strings are ! in the list. Taking the bitwise complement of this negative number produces the index of the first element in the list that is larger than the search string, && inserting at this location preserves the sort order. The second search string is larger than any element in the list, so the insertion position is at the end of the list.
           /// @include ListBinarySearch.cpp
           int32 BinarySearch(const T& item) const {return BinarySearch(0, this->Count, item, System::Collections::Generic::Comparer<T>::Default());}
 
@@ -251,7 +260,8 @@ namespace Pcf {
           /// @remarks Capacity remains unchanged. To reset the capacity of the List<T>, call the TrimExcess method || set the Capacity property directly. Decreasing the capacity reallocates memory && copies all the elements in the List<T>. Trimming an empty List<T> sets the capacity of the List<T> to the default capacity.
           /// @remarks This method is an O(n) operation, where n is Count.
           /// @remarks The following code example demonstrates several properties && methods of the List<T> generic class, including the Add method. The default constructor is used to create a list of strings with a capacity of 0. The Capacity property is displayed, && then the Add method is used to add several items. The items are listed, && the Capacity property is displayed again, along with the Count property, to show that the capacity has been increased as needed.
-          /// @remarks Other properties && methods are used to search for, insert, && remove elements from the list, && finally to clear the list.
+          /// @par Examples
+          /// Other properties && methods are used to search for, insert, && remove elements from the list, && finally to clear the list.
           /// @include List.cpp
           void Clear() override {this->list.clear();}
 
@@ -275,7 +285,8 @@ namespace Pcf {
           /// @remarks TThis method uses Array.Copy to copy the elements.
           /// @remarks The elements are copied to the Array in the same order in which the enumerator iterates through the List<T>.
           /// @remarks This method is an O(n) operation, where n is Count.
-          /// @remarks The following code example demonstrates all three overloads of the CopyTo method. A List<T> of strings is created && populated with 5 strings. An empty string array of 15 elements is created, && the CopyTo(T[]) method overload is used to copy all the elements of the list to the array beginning at the first element of the array. The CopyTo(T[], Int32) method overload is used to copy all the elements of the list to the array beginning at array index 6 (leaving index 5 empty). Finally, the CopyTo(Int32, T[], Int32, Int32) method overload is used to copy 3 elements from the list, beginning with index 2, to the array beginning at array index 12 (leaving index 11 empty). The contents of the array are then displayed.
+          /// @par Examples
+          /// The following code example demonstrates all three overloads of the CopyTo method. A List<T> of strings is created && populated with 5 strings. An empty string array of 15 elements is created, && the CopyTo(T[]) method overload is used to copy all the elements of the list to the array beginning at the first element of the array. The CopyTo(T[], Int32) method overload is used to copy all the elements of the list to the array beginning at array index 6 (leaving index 5 empty). Finally, the CopyTo(Int32, T[], Int32, Int32) method overload is used to copy 3 elements from the list, beginning with index 2, to the array beginning at array index 12 (leaving index 11 empty). The contents of the array are then displayed.
           /// @include ListCopyTo.cpp
           void CopyTo(Array<T>& array) const {this->CopyTo(0, array, 0, this->Count);}
 
@@ -288,7 +299,8 @@ namespace Pcf {
           /// @remarks TThis method uses Array.Copy to copy the elements.
           /// @remarks The elements are copied to the Array in the same order in which the enumerator iterates through the List<T>.
           /// @remarks This method is an O(n) operation, where n is Count.
-          /// @remarks The following code example demonstrates all three overloads of the CopyTo method. A List<T> of strings is created && populated with 5 strings. An empty string array of 15 elements is created, && the CopyTo(T[]) method overload is used to copy all the elements of the list to the array beginning at the first element of the array. The CopyTo(T[], Int32) method overload is used to copy all the elements of the list to the array beginning at array index 6 (leaving index 5 empty). Finally, the CopyTo(Int32, T[], Int32, Int32) method overload is used to copy 3 elements from the list, beginning with index 2, to the array beginning at array index 12 (leaving index 11 empty). The contents of the array are then displayed.
+          /// @par Examples
+          /// The following code example demonstrates all three overloads of the CopyTo method. A List<T> of strings is created && populated with 5 strings. An empty string array of 15 elements is created, && the CopyTo(T[]) method overload is used to copy all the elements of the list to the array beginning at the first element of the array. The CopyTo(T[], Int32) method overload is used to copy all the elements of the list to the array beginning at array index 6 (leaving index 5 empty). Finally, the CopyTo(Int32, T[], Int32, Int32) method overload is used to copy 3 elements from the list, beginning with index 2, to the array beginning at array index 12 (leaving index 11 empty). The contents of the array are then displayed.
           /// @include ListCopyTo.cpp
           virtual void CopyTo(Array<T>& array, int32 arrayIndex) const override {this->CopyTo(0, array, arrayIndex, this->Count);}
 
@@ -303,7 +315,8 @@ namespace Pcf {
           /// @remarks TThis method uses Array.Copy to copy the elements.
           /// @remarks The elements are copied to the Array in the same order in which the enumerator iterates through the List<T>.
           /// @remarks This method is an O(n) operation, where n is Count.
-          /// @remarks The following code example demonstrates all three overloads of the CopyTo method. A List<T> of strings is created && populated with 5 strings. An empty string array of 15 elements is created, && the CopyTo(T[]) method overload is used to copy all the elements of the list to the array beginning at the first element of the array. The CopyTo(T[], Int32) method overload is used to copy all the elements of the list to the array beginning at array index 6 (leaving index 5 empty). Finally, the CopyTo(Int32, T[], Int32, Int32) method overload is used to copy 3 elements from the list, beginning with index 2, to the array beginning at array index 12 (leaving index 11 empty). The contents of the array are then displayed.
+          /// @par Examples
+          /// The following code example demonstrates all three overloads of the CopyTo method. A List<T> of strings is created && populated with 5 strings. An empty string array of 15 elements is created, && the CopyTo(T[]) method overload is used to copy all the elements of the list to the array beginning at the first element of the array. The CopyTo(T[], Int32) method overload is used to copy all the elements of the list to the array beginning at array index 6 (leaving index 5 empty). Finally, the CopyTo(Int32, T[], Int32, Int32) method overload is used to copy 3 elements from the list, beginning with index 2, to the array beginning at array index 12 (leaving index 11 empty). The contents of the array are then displayed.
           /// @include ListCopyTo.cpp
           void CopyTo(int32 index, Array<T>& array, int32 arrayIndex, int32 count) const {
             if (index < 0 || array.Length < 0 || arrayIndex < 0 || count < 0)
@@ -333,7 +346,8 @@ namespace Pcf {
           /// @remarks The following code example demonstrates the RemoveAll method && several other methods that use the Predicate<T> generic delegate.
           /// @remarks A List<T> of strings is created, containing 8 dinosaur names, two of which (at positions 1 && 5) end with "saurus". The code example also defines a search predicate method named EndsWithSaurus, which accepts a string parameter && returns a Boolean value indicating whether the input string ends in "saurus".
           /// @remarks The Find, FindLast, && FindAll methods are used to search the list with the search predicate method.
-          /// @remarks The RemoveAll method is used to remove all entries ending with "saurus". It traverses the list from the beginning, passing each element in turn to the EndsWithSaurus method. The element is removed if the EndsWithSaurus method returns true.
+          /// @par Examples
+          /// The RemoveAll method is used to remove all entries ending with "saurus". It traverses the list from the beginning, passing each element in turn to the EndsWithSaurus method. The element is removed if the EndsWithSaurus method returns true.
           /// @include ListExists.cpp
           bool Exists(const Predicate<const T&>& match) const {
             for (const T& elem : *this)
@@ -361,6 +375,7 @@ namespace Pcf {
           /// |FindLastIndex(Predicate<T>)               | Finds the index of the last computer book using the FindComputer predicate delegate.                                    |
           /// |FindIndex(Int32, Int32, Predicate<T>)     | Finds the index of first computer book in the second half of the collection, using the FindComputer predicate delegate. |
           /// |FindLastIndex(Int32, Int32, Predicate<T>) | Finds the index of last computer book in the second half of the collection, using the FindComputer predicate delegate.  |
+          /// @par Examples
           /// @include ListFind.cpp
           const T Find(const Predicate<const T&>& match) const {
             for (const T& elem : *this)
@@ -387,6 +402,7 @@ namespace Pcf {
           /// |FindLastIndex(Predicate<T>)               | Finds the index of the last computer book using the FindComputer predicate delegate.                                    |
           /// |FindIndex(Int32, Int32, Predicate<T>)     | Finds the index of first computer book in the second half of the collection, using the FindComputer predicate delegate. |
           /// |FindLastIndex(Int32, Int32, Predicate<T>) | Finds the index of last computer book in the second half of the collection, using the FindComputer predicate delegate.  |
+          /// @par Examples
           /// @include ListFind.cpp
           List FindAll(const Predicate<const T&>& match) const {
             List list;
@@ -414,6 +430,7 @@ namespace Pcf {
           /// |FindLastIndex(Predicate<T>)               | Finds the index of the last computer book using the FindComputer predicate delegate.                                    |
           /// |FindIndex(Int32, Int32, Predicate<T>)     | Finds the index of first computer book in the second half of the collection, using the FindComputer predicate delegate. |
           /// |FindLastIndex(Int32, Int32, Predicate<T>) | Finds the index of last computer book in the second half of the collection, using the FindComputer predicate delegate.  |
+          /// @par Examples
           /// @include ListFind.cpp
           int32 FindIndex(const Predicate<const T&>& match) const {return this->FindIndex(0, this->Count, match);}
 
@@ -434,6 +451,7 @@ namespace Pcf {
           /// |FindLastIndex(Predicate<T>)               | Finds the index of the last computer book using the FindComputer predicate delegate.                                    |
           /// |FindIndex(Int32, Int32, Predicate<T>)     | Finds the index of first computer book in the second half of the collection, using the FindComputer predicate delegate. |
           /// |FindLastIndex(Int32, Int32, Predicate<T>) | Finds the index of last computer book in the second half of the collection, using the FindComputer predicate delegate.  |
+          /// @par Examples
           /// @include ListFind.cpp
           int32 FindIndex(int32 startIndex, const Predicate<const T&>& match) const {return this->FindIndex(startIndex, this->Count-startIndex, match);}
 
@@ -455,6 +473,7 @@ namespace Pcf {
           /// |FindLastIndex(Predicate<T>)               | Finds the index of the last computer book using the FindComputer predicate delegate.                                    |
           /// |FindIndex(Int32, Int32, Predicate<T>)     | Finds the index of first computer book in the second half of the collection, using the FindComputer predicate delegate. |
           /// |FindLastIndex(Int32, Int32, Predicate<T>) | Finds the index of last computer book in the second half of the collection, using the FindComputer predicate delegate.  |
+          /// @par Examples
           /// @include ListFind.cpp
           int32 FindIndex(int32 startIndex, int32 count, const Predicate<const T&>& match) const {
             if (startIndex < 0 || count < 0)
@@ -486,6 +505,7 @@ namespace Pcf {
           /// |FindLastIndex(Predicate<T>)               | Finds the index of the last computer book using the FindComputer predicate delegate.                                    |
           /// |FindIndex(Int32, Int32, Predicate<T>)     | Finds the index of first computer book in the second half of the collection, using the FindComputer predicate delegate. |
           /// |FindLastIndex(Int32, Int32, Predicate<T>) | Finds the index of last computer book in the second half of the collection, using the FindComputer predicate delegate.  |
+          /// @par Examples
           /// @include ListFind.cpp
           const T FindLast(const Predicate<const T&>& match) const {
             if (this->list.size() > 0) {
@@ -517,6 +537,7 @@ namespace Pcf {
           /// |FindLastIndex(Predicate<T>)               | Finds the index of the last computer book using the FindComputer predicate delegate.                                    |
           /// |FindIndex(Int32, Int32, Predicate<T>)     | Finds the index of first computer book in the second half of the collection, using the FindComputer predicate delegate. |
           /// |FindLastIndex(Int32, Int32, Predicate<T>) | Finds the index of last computer book in the second half of the collection, using the FindComputer predicate delegate.  |
+          /// @par Examples
           /// @include ListFind.cpp
           int32 FindLastIndex(const Predicate<const T&>& match) const {return this->FindLastIndex(this->Count-1, this->Count, match);}
 
@@ -537,6 +558,7 @@ namespace Pcf {
           /// |FindLastIndex(Predicate<T>)               | Finds the index of the last computer book using the FindComputer predicate delegate.                                    |
           /// |FindIndex(Int32, Int32, Predicate<T>)     | Finds the index of first computer book in the second half of the collection, using the FindComputer predicate delegate. |
           /// |FindLastIndex(Int32, Int32, Predicate<T>) | Finds the index of last computer book in the second half of the collection, using the FindComputer predicate delegate.  |
+          /// @par Examples
           /// @include ListFind.cpp
           int32 FindLastIndex(int32 startIndex, const Predicate<const T&>& match) const {return this->FindLastIndex(startIndex, startIndex+1, match);}
 
@@ -558,6 +580,7 @@ namespace Pcf {
           /// |FindLastIndex(Predicate<T>)               | Finds the index of the last computer book using the FindComputer predicate delegate.                                    |
           /// |FindIndex(Int32, Int32, Predicate<T>)     | Finds the index of first computer book in the second half of the collection, using the FindComputer predicate delegate. |
           /// |FindLastIndex(Int32, Int32, Predicate<T>) | Finds the index of last computer book in the second half of the collection, using the FindComputer predicate delegate.  |
+          /// @par Examples
           /// @include ListFind.cpp
           int32 FindLastIndex(int32 startIndex, int32 count, const Predicate<const T&>& match) const {
             if (startIndex < 0 || count < 0)
@@ -628,7 +651,8 @@ namespace Pcf {
           /// @remarks A shallow copy of a collection of value types, || a subset of that collection, contains the elements of the collection. However, if the elements of the collection contain references to other objects, those objects are ! copied. The references in the elements of the new collection point to the same objects as the references in the elements of the original collection.
           /// @remarks In contrast, a deep copy of a collection copies the elements && everything directly || indirectly referenced by the elements.
           /// @remarks This method is an O(n) operation, where n is count.
-          /// @remarks The following code example demonstrates the GetRange method && other methods of the List<T> class that act on ranges. At the end of the code example, the GetRange method is used to get three items from the list, beginning with index location 2. The ToArray method is called on the resulting List<T>, creating an array of three elements. The elements of the array are displayed.
+          /// @par Examples
+          /// The following code example demonstrates the GetRange method && other methods of the List<T> class that act on ranges. At the end of the code example, the GetRange method is used to get three items from the list, beginning with index location 2. The ToArray method is called on the resulting List<T>, creating an array of three elements. The elements of the array are displayed.
           /// @include List2.cpp
           List GetRange(int32 index, int32 count) {
             if (index < 0 || count < 0)
@@ -776,7 +800,8 @@ namespace Pcf {
           /// @remarks The following code example demonstrates the RemoveAll method && several other methods that use the Predicate<T> generic delegate.
           /// @remarks A List<T> of strings is created, containing 8 dinosaur names, two of which (at positions 1 && 5) end with "saurus". The code example also defines a search predicate method named EndsWithSaurus, which accepts a string parameter && returns a Boolean value indicating whether the input string ends in "saurus".
           /// @remarks The Find, FindLast, && FindAll methods are used to search the list with the search predicate method.
-          /// @remarks The RemoveAll method is used to remove all entries ending with "saurus". It traverses the list from the beginning, passing each element in turn to the EndsWithSaurus method. The element is removed if the EndsWithSaurus method returns true.
+          /// @par Examples
+          /// The RemoveAll method is used to remove all entries ending with "saurus". It traverses the list from the beginning, passing each element in turn to the EndsWithSaurus method. The element is removed if the EndsWithSaurus method returns true.
           /// @include ListExists.cpp
           virtual int32 RemoveAll(const Predicate<const T&>& match) {
             int32 count = 0;
@@ -829,7 +854,8 @@ namespace Pcf {
           /// @brief Reverses the order of the elements in the entire List<T>.
           /// @remarks This method uses Array.Reverse to reverse the order of the elements, such that the element at List<T>[i], where i is any index within the range, moves to List<T>[j], where j equals index plus index plus count minus i minus 1.
           /// @remarks This method is an O(n) operation, where n is Count.
-          /// @remarks The following code example demonstrates both overloads of the Reverse method. The code example creates a List<T> of strings && adds six strings. The Reverse() method overload is used to reverse the list, && then the Reverse(Int32, Int32) method overload is used to reverse the middle of the list, beginning with element 1 && encompassing four elements.
+          /// @par Examples
+          /// The following code example demonstrates both overloads of the Reverse method. The code example creates a List<T> of strings && adds six strings. The Reverse() method overload is used to reverse the list, && then the Reverse(Int32, Int32) method overload is used to reverse the middle of the list, beginning with element 1 && encompassing four elements.
           /// @include ListReverse.cpp
           void Reverse() {
             this->operationNumber++;
@@ -843,7 +869,8 @@ namespace Pcf {
           /// @exception ArgumentException ndex && count do ! denote a valid range of elements in the List<T>.
           /// @remarks This method uses Array.Reverse to reverse the order of the elements, such that the element at List<T>[i], where i is any index within the range, moves to List<T>[j], where j equals index plus index plus count minus i minus 1.
           /// @remarks This method is an O(n) operation, where n is Count.
-          /// @remarks The following code example demonstrates both overloads of the Reverse method. The code example creates a List<T> of strings && adds six strings. The Reverse() method overload is used to reverse the list, && then the Reverse(Int32, Int32) method overload is used to reverse the middle of the list, beginning with element 1 && encompassing four elements.
+          /// @par Examples
+          /// The following code example demonstrates both overloads of the Reverse method. The code example creates a List<T> of strings && adds six strings. The Reverse() method overload is used to reverse the list, && then the Reverse(Int32, Int32) method overload is used to reverse the middle of the list, beginning with element 1 && encompassing four elements.
           /// @include ListReverse.cpp
           void Reverse(int32 index, int32 count) {
             if (index < 0 || count < 0)
@@ -866,7 +893,8 @@ namespace Pcf {
           /// @remarks This method uses Array.Sort, which uses the QuickSort algorithm. This implementation performs an unstable sort; that is, if two elements are equal, their order might ! be preserved. In contrast, a stable sort preserves the order of elements that are equal.
           /// @remarks On average, this method is an O(n log n) operation, where n is Count; in the worst case it is an O(n ^ 2) operation.
           /// @remarks The following code example demonstrates the Sort() method overload && the BinarySearch(T) method overload. A List<T> of strings is created && populated with four strings, in no particular order. The list is displayed, sorted, && displayed again.
-          /// @remarks The BinarySearch(T) method overload is then used to search for two strings that are ! in the list, && the Insert method is used to insert them. The return value of the BinarySearch(T) method is negative in each case, because the strings are ! in the list. Taking the bitwise complement of this negative number produces the index of the first element in the list that is larger than the search string, && inserting at this location preserves the sort order. The second search string is larger than any element in the list, so the insertion position is at the end of the list.
+          /// @par Examples
+          /// The BinarySearch(T) method overload is then used to search for two strings that are ! in the list, && the Insert method is used to insert them. The return value of the BinarySearch(T) method is negative in each case, because the strings are ! in the list. Taking the bitwise complement of this negative number produces the index of the first element in the list that is larger than the search string, && inserting at this location preserves the sort order. The second search string is larger than any element in the list, so the insertion position is at the end of the list.
           /// @include ListBinarySearch.cpp
           void Sort() {this->Sort(System::Collections::Generic::Comparer<T>::Default());}
 
@@ -891,7 +919,8 @@ namespace Pcf {
           /// @return An array containing copies of the elements of the List<T>.
           /// @remarks The elements are copied using Array.Copy, which is an O(n) operation, where n is Count.
           /// @remarks This method is an O(n) operation, where n is Count.
-          /// @remarks The following code example demonstrates the ToArray method && other methods of the List<T> class that act on ranges. At the end of the code example, the GetRange method is used to get three items from the list, beginning with index location 2. The ToArray method is called on the resulting List<T>, creating an array of three elements. The elements of the array are displayed.
+          /// @par Examples
+          /// The following code example demonstrates the ToArray method && other methods of the List<T> class that act on ranges. At the end of the code example, the GetRange method is used to get three items from the list, beginning with index location 2. The ToArray method is called on the resulting List<T>, creating an array of three elements. The elements of the array are displayed.
           /// @include List2.cpp
           Array<T> ToArray() const {
             return Array<T>(this->list);

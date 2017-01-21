@@ -15,6 +15,7 @@ namespace Pcf {
     namespace IO {
       /// @brief Implements a TextWriter for writing information to a string. The information is stored in an underlying StringBuilder.
       /// @remarks tringWriter enables you to write to a string synchronously or asynchronously. You can write a character at a time with the Write(Char) or the WriteAsync(Char) method, a string at a time using the Write(String) or the WriteAsync(String) method. In addition, you can write a character, an array of characters or a string followed by the line terminator asynchronously with one of the WriteLineAsync methods.
+      /// @par Examples
       /// The following code example demonstrates the creation of a continuous paragraph from a group of double-spaced sentences, and then the conversion of the paragraph back to the original text.
       /// @include StringReader.cpp
       class pcf_public StringWriter : public TextWriter {

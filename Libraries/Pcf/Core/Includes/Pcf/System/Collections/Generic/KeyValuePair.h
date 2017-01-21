@@ -18,6 +18,10 @@ namespace Pcf {
     namespace Collections {
       /// @brief The System::Collections::Generic namespace contains interfaces and classes that define generic collections, which allow users to create strongly typed collections that provide better type safety and performance than non-generic strongly typed collections.
       namespace Generic {
+        /// @cond
+        template<typename TKey=void, typename TValue=void>
+        class KeyValuePair;
+        /// @endcond
         /// @brief Defines a key/value pair that can be set || retrieved.
         template<typename TKey, typename TValue>
         class KeyValuePair : public Object {
@@ -71,6 +75,13 @@ namespace Pcf {
         private:
           TKey key;
           TValue value;
+        };
+        
+        template<>
+        class KeyValuePair<void, void> : public object {
+        public:
+          template<typename TKey, typename TValue>
+          static KeyValuePair<TKey, TValue> Create(TKey key, TValue value) {return KeyValuePair<TKey, TValue>(key, value);}
         };
       }
     }

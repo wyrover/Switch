@@ -16,7 +16,8 @@ namespace Pcf {
 
         /// @brief Provides data for the ControlAdded and ControlRemoved events.
         /// @remarks For more information about handling events, see Handling and Raising Events.
-        /// @remarks The following code example demonstrates the use of the ControlAdded and ControlRemoved events. The example requires that two Button controls are added to the form and connected to the addControl_Click and removeControl_Click event handling methods.
+        /// @par Examples
+        /// The following code example demonstrates the use of the ControlAdded and ControlRemoved events. The example requires that two Button controls are added to the form and connected to the addControl_Click and removeControl_Click event handling methods.
         /// @code
         /// // This example demonstrates the use of the ControlAdded and
         /// // ControlRemoved events. This example assumes that two Button controls
@@ -66,6 +67,7 @@ namespace Pcf {
           ControlEventArgs() {}
           /// @brief nitializes a new instance of the ControlEventArgs class for the specified control.
           /// @param control The Control to store in this event.
+          /// @par Examples
           /// The following code example demonstrates the use of the ControlAdded and ControlRemoved events. The example requires that two Button controls are added to the form and connected to the addControl_Click and removeControl_Click event handling methods.
           /// @code
           /// // This example demonstrates the use of the ControlAdded and
@@ -114,6 +116,7 @@ namespace Pcf {
 
           /// @brief Gets the control object used by this event.
           /// @return The Control used by this event.
+          /// @par Examples
           /// The following code example demonstrates the use of the ControlAdded and ControlRemoved events. The example requires that two Button controls are added to the form and connected to the addControl_Click and removeControl_Click event handling methods.
           /// @code
           /// // This example demonstrates the use of the ControlAdded and

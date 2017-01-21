@@ -19,6 +19,7 @@ namespace Pcf {
     /// @brief The System::Collections namespace contains interfaces and classes that define various collections of objects, such as lists, queues, bit arrays, hash tables and dictionaries.
     namespace Collections {
       /// @brief Manages a compact array of bit values, which are represented as Booleans, where true indicates that the bit is on (1) and false indicates the bit is off (0).
+      /// @par Examples
       /// The following code example shows how to create and initialize a BitArray and how to print out its values.
       /// @include BitArray.cpp
       class pcf_public BitArray : public Object, public Generic::ICollection<bool>, public System::ICloneable {

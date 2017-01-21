@@ -19,6 +19,7 @@ namespace Pcf {
           /// @param An array of Action to execute.
           /// @remarks This method can be used to execute a set of operations, potentially in parallel.
           /// @remarks No guarantees are made about the order in which the operations execute or whether they execute in parallel. This method does not return until each of the provided operations has completed, regardless of whether completion occurs due to normal or exceptional termination.
+          /// @par Examples
           /// This example demonstrates how to use the Invokemethod with other methods, anonymous delegates, and lambda expressions.
           /// @include ParallelInvoke.cpp
           static void Invoke(const Array<Action<>> & actions) {

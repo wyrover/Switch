@@ -24,6 +24,7 @@ namespace Pcf {
     /// @par Examples
     /// The following example creates a single random number generator and calls its NextBytes, Next, and NextDouble methods to generate sequences of random numbers within different ranges.
     /// @include Random2.cpp
+    /// @par Examples
     /// The following example generates a random integer that it uses as an index to retrieve a string value from an array.
     /// @include Random3.cpp
     class pcf_public Random : public Object {

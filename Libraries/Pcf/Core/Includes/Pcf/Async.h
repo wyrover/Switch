@@ -7,6 +7,7 @@
 /// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Pcf {
   /// @brief Represent an asynchronous task
+  /// @par Examples
   /// This example demontrate how to use async and await
   /// @include Async1.cpp
   template<typename Task>
@@ -26,12 +27,14 @@ namespace Pcf {
   };
   
   /// @brief Represent an asynchronous task
+  /// @par Examples
   /// This example demontrate how to use async and await
   /// @include Async1.cpp
   template<typename Task>
   using async = Async<Task>;
   
   /// @brief Represent an asynchronous task
+  /// @par Examples
   /// This example demontrate how to use async and await
   /// @include Async2.cpp
   /// @ingroup Pcf

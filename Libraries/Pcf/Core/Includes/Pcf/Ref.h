@@ -135,6 +135,7 @@ namespace Pcf {
     }
     
     /// @brief Dynamic cast this type to another specified type.
+    /// @par Examples
     /// @code
     /// string str = "Test string";
     /// ...
@@ -155,6 +156,7 @@ namespace Pcf {
     }
     
     /// @brief Dynamic cast specified pointer to another specified type.
+    /// @par Examples
     /// @code
     /// string str = "Test string";
     /// ...
@@ -165,6 +167,7 @@ namespace Pcf {
     static Reference<TT> As(const Reference<T>& p) { return p.As<TT>(); }
     
     /// @brief Dynamic cast this type to another specified type.
+    /// @par Examples
     /// @code
     /// string str = "Test string";
     /// ...
@@ -184,6 +187,7 @@ namespace Pcf {
     }
     
     /// @brief Dynamic cast specified pointer to another specified type.
+    /// @par Examples
     /// @code
     /// string str = "Test string";
     /// ...
@@ -194,6 +198,7 @@ namespace Pcf {
     static bool Is(const Reference<T>& p) { return p.Is<TT>(); }
     
     /// @brief Dynamic cast this type to another specified type.
+    /// @par Examples
     /// @code
     /// string str = "Test string";
     /// ...
@@ -204,6 +209,7 @@ namespace Pcf {
     Reference<TT> ChangeType() const { return Reference<TT>(this->ToPointer<TT>()); }
     
     /// @brief Dynamic cast specified pointer to another specified type.
+    /// @par Examples
     /// @code
     /// string str = "Test string";
     /// ...

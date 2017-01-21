@@ -138,7 +138,7 @@ namespace Pcf {
         /// @remarks In contrast, BeginErrorReadLine starts asynchronous read operations on the StandardError stream. This method enables a designated event handler for the stream output and immediately returns to the caller, which can perform other work while the stream output is directed to the event handler.
         /// @note The application that is processing the asynchronous output should call the WaitForExit method to ensure that the output buffer has been flushed.
         /// @remarks Synchronous read operations introduce a dependency between the caller reading from the StandardError stream and the child process writing to that stream. These dependencies can cause deadlock conditions. When the caller reads from the redirected stream of a child process, it is dependent on the child. The caller waits for the read operation until the child writes to the stream or closes the stream. When the child process writes enough data to fill its redirected stream, it is dependent on the parent. The child process waits for the next write operation until the parent reads from the full stream or closes the stream. The deadlock condition results when the caller and child process wait for each other to complete an operation, and neither can continue. You can avoid deadlocks by evaluating dependencies between the caller and child process.
-        /// @remarks For example, the following code shows how to read from a redirected stream and wait for the child process to exit.
+        /// For example, the following code shows how to read from a redirected stream and wait for the child process to exit.
         /// @code
         /// // Start the child process.
         /// Process p;

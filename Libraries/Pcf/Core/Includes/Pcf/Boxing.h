@@ -73,9 +73,10 @@ namespace Pcf {
   
   /// @brief Support boxing of type
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
+  /// @par Examples
   /// @code
   /// bool ready = true;
-  /// Console::WriteLine("ready = {0}", ready);                 // console output : ready = 1
+  /// Console::WriteLine("ready = {0}", ready);                     // console output : ready = 1
   /// Console::WriteLine("ready = {0}", TypeBoxer::Boxing(ready));  // console output : ready = true
   /// @endcode
   class pcf_public TypeBoxer {
@@ -200,9 +201,10 @@ namespace Pcf {
   
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
+  /// @par Examples
   /// @code
   /// Boolean ready = true;
-  /// Console::WriteLine("ready = {0}", ready);                     // console output : ready = true
+  /// Console::WriteLine("ready = {0}", ready);                         // console output : ready = true
   /// Console::WriteLine("ready = {0}", TypeUnboxer::Unboxing(ready));  // console output : ready = 1
   /// @endcode
   class pcf_public TypeUnboxer {
@@ -305,6 +307,7 @@ namespace Pcf {
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
   /// @remarks Is an alias on Pcf::TypeBoxer.
+  /// @par Examples
   /// @code
   /// bool ready = true;
   /// Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
@@ -315,6 +318,7 @@ namespace Pcf {
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
   /// @remarks Is an alias on Pcf::TypeBoxer.
+  /// @par Examples
   /// @code
   /// bool ready = true;
   /// Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
@@ -325,6 +329,7 @@ namespace Pcf {
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
   /// @remarks Is an alias on Pcf::TypeBoxer.
+  /// @par Examples
   /// @code
   /// bool ready = true;
   /// Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
@@ -335,6 +340,7 @@ namespace Pcf {
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
   /// @remarks Is an alias on Pcf::TypeBoxer.
+  /// @par Examples
   /// @code
   /// bool ready = true;
   /// @remarks Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
@@ -345,6 +351,7 @@ namespace Pcf {
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
   /// @remarks Is an alias on Pcf::TypeBoxer.
+  /// @par Examples
   /// @code
   /// bool ready = true;
   /// Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
@@ -355,6 +362,7 @@ namespace Pcf {
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
   /// @remarks Is an alias on Pcf::TypeBoxer.
+  /// @par Examples
   /// @code
   /// bool ready = true;
   /// Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
@@ -365,6 +373,7 @@ namespace Pcf {
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
   /// @remarks Is an alias on Pcf::TypeBoxer.
+  /// @par Examples
   /// @code
   /// bool ready = true;
   /// Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
@@ -375,6 +384,7 @@ namespace Pcf {
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
   /// @remarks Is an alias on Pcf::TypeBoxer.
+  /// @par Examples
   /// @code
   /// bool ready = true;
   /// @remarks Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
@@ -385,6 +395,7 @@ namespace Pcf {
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
   /// @remarks Is an alias on Pcf::TypeBoxer.
+  /// @par Examples
   /// @code
   /// bool ready = true;
   /// @remarks Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
@@ -395,6 +406,7 @@ namespace Pcf {
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
   /// @remarks Is an alias on Pcf::TypeBoxer.
+  /// @par Examples
   /// @code
   /// bool ready = true;
   /// @remarks Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
@@ -405,6 +417,7 @@ namespace Pcf {
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
   /// @remarks Is an alias on Pcf::TypeBoxer.
+  /// @par Examples
   /// @code
   /// bool ready = true;
   /// @remarks Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
@@ -415,6 +428,7 @@ namespace Pcf {
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
   /// @remarks Is an alias on Pcf::TypeBoxer.
+  /// @par Examples
   /// @code
   /// bool ready = true;
   /// @remarks Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
@@ -425,6 +439,7 @@ namespace Pcf {
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
   /// @remarks Is an alias on Pcf::TypeBoxer.
+  /// @par Examples
   /// @code
   /// bool ready = true;
   /// Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
@@ -435,6 +450,7 @@ namespace Pcf {
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
   /// @remarks Is an alias on Pcf::TypeBoxer.
+  /// @par Examples
   /// @code
   /// bool ready = true;
   /// Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
@@ -445,6 +461,7 @@ namespace Pcf {
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
   /// @remarks Is an alias on Pcf::TypeBoxer.
+  /// @par Examples
   /// @code
   /// bool ready = true;
   /// Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
@@ -455,6 +472,7 @@ namespace Pcf {
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
   /// @remarks Is an alias on Pcf::TypeBoxer.
+  /// @par Examples
   /// @code
   /// bool ready = true;
   /// Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
@@ -465,6 +483,7 @@ namespace Pcf {
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
   /// @remarks Is an alias on Pcf::TypeBoxer.
+  /// @par Examples
   /// @code
   /// bool ready = true;
   /// Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
@@ -475,6 +494,7 @@ namespace Pcf {
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
   /// @remarks Is an alias on Pcf::TypeBoxer.
+  /// @par Examples
   /// @code
   /// bool ready = true;
   /// Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
@@ -485,6 +505,7 @@ namespace Pcf {
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
   /// @remarks Is an alias on Pcf::TypeBoxer.
+  /// @par Examples
   /// @code
   /// bool ready = true;
   /// Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
@@ -500,6 +521,7 @@ namespace Pcf {
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
   /// @remarks Is an alias on Pcf::TypeBoxer.
+  /// @par Examples
   /// @code
   /// bool ready = true;
   /// @remarks Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
@@ -518,6 +540,7 @@ namespace Pcf {
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
   /// @remarks Is an alias on Pcf::TypeUnboxer.
+  /// @par Examples
   /// @code
   /// Boolean ready = true;
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true
@@ -528,6 +551,7 @@ namespace Pcf {
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
   /// @remarks Is an alias on Pcf::TypeUnboxer.
+  /// @par Examples
   /// @code
   /// Boolean ready = true;
   /// @remarks Console::WriteLine("ready = {0}", ready);         // console output : ready = true
@@ -538,6 +562,7 @@ namespace Pcf {
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
   /// @remarks Is an alias on Pcf::TypeUnboxer.
+  /// @par Examples
   /// @code
   /// Boolean ready = true;
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true
@@ -548,6 +573,7 @@ namespace Pcf {
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
   /// @remarks Is an alias on Pcf::TypeUnboxer.
+  /// @par Examples
   /// @code
   /// Boolean ready = true;
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true
@@ -558,6 +584,7 @@ namespace Pcf {
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
   /// @remarks Is an alias on Pcf::TypeUnboxer.
+  /// @par Examples
   /// @code
   /// Boolean ready = true;
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true
@@ -568,6 +595,7 @@ namespace Pcf {
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
   /// @remarks Is an alias on Pcf::TypeUnboxer.
+  /// @par Examples
   /// @code
   /// Boolean ready = true;
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true
@@ -578,6 +606,7 @@ namespace Pcf {
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
   /// @remarks Is an alias on Pcf::TypeUnboxer.
+  /// @par Examples
   /// @code
   /// Boolean ready = true;
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true
@@ -588,6 +617,7 @@ namespace Pcf {
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
   /// @remarks Is an alias on Pcf::TypeUnboxer.
+  /// @par Examples
   /// @code
   /// Boolean ready = true;
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true
@@ -598,6 +628,7 @@ namespace Pcf {
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
   /// @remarks Is an alias on Pcf::TypeUnboxer.
+  /// @par Examples
   /// @code
   /// Boolean ready = true;
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true
@@ -608,6 +639,7 @@ namespace Pcf {
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
   /// @remarks Is an alias on Pcf::TypeUnboxer.
+  /// @par Examples
   /// @code
   /// Boolean ready = true;
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true
@@ -618,6 +650,7 @@ namespace Pcf {
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
   /// @remarks Is an alias on Pcf::TypeUnboxer.
+  /// @par Examples
   /// @code
   /// Boolean ready = true;
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true
@@ -628,6 +661,7 @@ namespace Pcf {
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
   /// @remarks Is an alias on Pcf::TypeUnboxer.
+  /// @par Examples
   /// @code
   /// Boolean ready = true;
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true
@@ -638,6 +672,7 @@ namespace Pcf {
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
   /// @remarks Is an alias on Pcf::TypeUnboxer.
+  /// @par Examples
   /// @code
   /// Boolean ready = true;
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true
@@ -648,6 +683,7 @@ namespace Pcf {
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
   /// @remarks Is an alias on Pcf::TypeUnboxer.
+  /// @par Examples
   /// @code
   /// Boolean ready = true;
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true
@@ -658,6 +694,7 @@ namespace Pcf {
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
   /// @remarks Is an alias on Pcf::TypeUnboxer.
+  /// @par Examples
   /// @code
   /// Boolean ready = true;
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true
@@ -668,6 +705,7 @@ namespace Pcf {
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
   /// @remarks Is an alias on Pcf::TypeUnboxer.
+  /// @par Examples
   /// @code
   /// Boolean ready = true;
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true
@@ -678,6 +716,7 @@ namespace Pcf {
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
   /// @remarks Is an alias on Pcf::TypeUnboxer.
+  /// @par Examples
   /// @code
   /// Boolean ready = true;
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true

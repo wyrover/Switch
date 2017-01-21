@@ -21,7 +21,7 @@ namespace Pcf {
   ///
   /// pcf_startup (Hello1);
   /// @endcode
-  ///
+  /// @par
   /// This example show a Main method with a return code without arguments
   /// @code
   /// #include <Pcf/Pcf>
@@ -36,7 +36,7 @@ namespace Pcf {
   ///
   /// pcf_startup (Hello2);
   /// @endcode
-  ///
+  /// @par
   /// This example show a Main method with argument and without return code
   /// @code
   /// #include <Pcf/Pcf>
@@ -51,7 +51,7 @@ namespace Pcf {
   ///
   /// pcf_startup (Arguments1);
   /// @endcode
-  ///
+  /// @par
   /// This example show a Main method with argument and return code
   /// @code
   /// #include <Pcf/Pcf>

@@ -10,6 +10,7 @@ namespace Pcf {
   struct pcf_public Abstract : public System::Object {};
   
   /// @brief This keyword is used to represents an abstract class.
+  /// @par Examples
   /// @code
   /// #include <Pcf/Pcf>
   ///

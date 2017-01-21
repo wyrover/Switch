@@ -35,8 +35,11 @@ namespace Pcf {
   using intptr = intptr_t;
   
   /// @brief Represents a null pointer value.
+  /// @par Examples
   /// @code
-  /// UniquePointer<Foo> t = null; // release the unique pointer.
+  /// UniquePointer<Foo> foo = UniquePointer<Foo>::Create();
+  /// ...
+  /// foo = null; // release the unique pointer.
   /// @endcode
   /// @ingroup Pcf
   static std::nullptr_t null;

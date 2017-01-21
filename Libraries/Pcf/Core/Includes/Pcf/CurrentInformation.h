@@ -9,7 +9,8 @@
 /// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Pcf {
   /// @brief Current information class is used to store current file, current line and current function information.
-  /// @remarks Use #pcf_current_information to get current information.
+  /// @par Examples
+  /// Use #pcf_current_information to get current information.
   /// @code
   /// CurrentInformation currentInformation = pcf_current_information;
   /// Console::WriteLine("File = {0}", currentInformation.FileName);
@@ -61,6 +62,7 @@ namespace Pcf {
   
   /// @brief Get Current informations
   /// @return CurrentInformation Current informations.
+  /// @par Examples
   /// @code
   /// CurrentInformation currentInformation = pcf_current_information;
   /// Console::WriteLine("File = {0}", currentInformation.FileName);

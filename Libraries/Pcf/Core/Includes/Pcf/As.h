@@ -12,6 +12,7 @@ void __throw_cast_exception__();
 
 namespace Pcf {
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
+  /// @par Examples
   /// @code
   /// SharedPointer<string> str = new Pcf::string("A new string");
   /// SharedPointer<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
@@ -24,6 +25,7 @@ namespace Pcf {
   }
   
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
+  /// @par Examples
   /// @code
   /// SharedPointer<string> str = new Pcf::string("A new string");
   /// SharedPointer<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
@@ -36,6 +38,7 @@ namespace Pcf {
   }
   
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
+  /// @par Examples
   /// @code
   /// SharedPointer<string> str = new Pcf::string("A new string");
   /// SharedPointer<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
@@ -48,6 +51,7 @@ namespace Pcf {
   }
   
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
+  /// @par Examples
   /// @code
   /// SharedPointer<string> str = new Pcf::string("A new string");
   /// SharedPointer<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
@@ -60,6 +64,7 @@ namespace Pcf {
   }
   
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
+  /// @par Examples
   /// @code
   /// SharedPointer<string> str = new Pcf::string("A new string");
   /// SharedPointer<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
@@ -72,6 +77,7 @@ namespace Pcf {
   }
   
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
+  /// @par Examples
   /// @code
   /// SharedPointer<string> str = new Pcf::string("A new string");
   /// SharedPointer<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
@@ -84,6 +90,7 @@ namespace Pcf {
   }
   
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
+  /// @par Examples
   /// @code
   /// SharedPointer<string> str = new Pcf::string("A new string");
   /// SharedPointer<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
@@ -101,6 +108,7 @@ namespace Pcf {
   }
   
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
+  /// @par Examples
   /// @code
   /// SharedPointer<string> str = new Pcf::string("A new string");
   /// SharedPointer<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
@@ -118,6 +126,7 @@ namespace Pcf {
   }
   
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
+  /// @par Examples
   /// @code
   /// SharedPointer<string> str = new Pcf::string("A new string");
   /// SharedPointer<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
@@ -132,6 +141,7 @@ namespace Pcf {
   }
   
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
+  /// @par Examples
   /// @code
   /// SharedPointer<string> str = new Pcf::string("A new string");
   /// SharedPointer<System::IComparable> comparable = as<Pcf::System::IComparable>(str);

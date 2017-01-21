@@ -23,8 +23,10 @@ namespace Pcf {
         public:
           /// @brief Represents a Clipboard format type.
           /// @remarks A format type consists of a text-based format name and an ID number. The format name/ID number pair can define a system Clipboard or other format.
-          /// @remarks The following code example shows how to retrieve a DataFormats.Format representing a format name/ID pair. The UnicodeText format is requested, and the contents of the retrieved DataFormats.Format are displayed in a text box.
-          /// @remarks This code requires that textBox1 has been created.
+          /// @par Examples
+          ///  The following code example shows how to retrieve a DataFormats.Format representing a format name/ID pair. The UnicodeText format is requested, and the contents of the retrieved DataFormats.Format are displayed in a text box.
+          ///
+          ///  This code requires that textBox1 has been created.
           /// @code
           /// void GetMyFormatInfomation() {
           ///   // Creates a DataFormats.Format for the Unicode data format.

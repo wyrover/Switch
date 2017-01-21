@@ -15,6 +15,7 @@ namespace Pcf {
       /// @brief The System::Collections::Concurrent namespace provides several thread-safe collection classes that should be used in place of the corresponding types in the System::Collections and System::Collections::Generic namespaces whenever multiple threads are accessing the collection concurrently.
       namespace Concurrent {
         /// @brief Represents a thread-safe last in-first out (LIFO) collection.
+        /// @par Examples
         /// The following example shows how to use a ConcurrentStack<T> to push and pop individual items:
         /// @include ConcurrentStack.cpp
         template<typename T, typename TAllocator=System::Allocator<T>>

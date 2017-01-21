@@ -24,6 +24,7 @@
 /// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Pcf {
   /// @brief Represent a polymorphic wrapper capable of holding any type.
+  /// @par Examples
   /// This example sho ho to use Any:
   /// @include Any.cpp
   class pcf_public Any : public object {
@@ -170,6 +171,7 @@ namespace Pcf {
     };
     
     /// @brief Used to static cast a type into another type. A To expression takes the following form:
+    /// @par Examples
     /// @code
     /// SharedPointer<string> str = new Pcf::string("A new string");
     /// SharedPointer<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
@@ -183,6 +185,7 @@ namespace Pcf {
     }
     
     /// @brief Used to static cast a type into another type. A To expression takes the following form:
+    /// @par Examples
     /// @code
     /// SharedPointer<string> str = new Pcf::string("A new string");
     /// SharedPointer<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
@@ -229,6 +232,7 @@ namespace Pcf {
     }
     
     /// @brief Return true if specified value is the specified Type. A Is expression takes the following form:
+    /// @par Examples
     /// @code
     /// System::Int32 i = 0;
     /// bool isInt32 = is<System::Int32>(i);
@@ -241,6 +245,7 @@ namespace Pcf {
     }
     
     /// @brief Return true if specified value is the specified Type. A Is expression takes the following form:
+    /// @par Examples
     /// @code
     /// System::Int32 i = 0;
     /// bool isInt32 = is<System::Int32>(i);
@@ -354,6 +359,7 @@ namespace Pcf {
   /// @endcond
 
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
+  /// @par Examples
   /// @code
   /// SharedPointer<string> str = new Pcf::string("A new string");
   /// SharedPointer<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
@@ -365,6 +371,7 @@ namespace Pcf {
   }
   
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
+  /// @par Examples
   /// @code
   /// SharedPointer<string> str = new Pcf::string("A new string");
   /// SharedPointer<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
@@ -376,6 +383,7 @@ namespace Pcf {
   }
   
   /// @brief Return true if specified value is the specified Type. A Is expression takes the following form:
+  /// @par Examples
   /// @code
   /// System::Int32 i = 0;
   /// bool isInt32 = is<System::Int32>(i);
@@ -387,6 +395,7 @@ namespace Pcf {
   }
   
   /// @brief Return true if specified value is the specified Type. A Is expression takes the following form:
+  /// @par Examples
   /// @code
   /// System::Int32 i = 0;
   /// bool isInt32 = is<System::Int32>(i);

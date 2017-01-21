@@ -20,7 +20,7 @@ namespace Pcf {
       /// @remarks You must enable debug mode to use a trace listener. The syntax is compiler specific. If you use other than cmake to manage your build, refer to the documentation of your build nanager.
       ///  * To enable debug mode with cmake, add the add_definitions(-DDEBUG) command line in the CMakeLists.txt of your porject, or you can add #define DEBUG to the top of your file.
       /// @remarks To activete your code if DEBUG is defined, you must enclose calls to the methods of Debug in an #if defined(DEBUG) ... #endif block, and add the /DDEBUG option to the compiler command line or add #define DEBUG to the file.
-      ///
+      /// @par Examples
       /// The following example uses Debug to indicate the beginning and the end of a program's execution. The example also uses the Debug.Indent and Debug.Unindent methods to distinguish the tracing output.
       /// @include Debug.cpp
       class pcf_public Debug pcf_static {

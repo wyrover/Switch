@@ -415,14 +415,16 @@ namespace Pcf {
       /// @brief Retrieves an object that can iterate through the individual characters in this String.
       /// @return CharEnumerator An enumerator object.
       /// @remarks This method enables you to iterate the individual characters in a String. For example, the foreach statements invoke this method to return a CharEnumerator object that can provide read-only access to the characters in this String instance.
-      /// @remarks The following example iterates the characters in several Strings and displays information about their individual characters.
+      /// @par Examples
+      /// The following example iterates the characters in several Strings and displays information about their individual characters.
       /// @include String.GetEnumerator.cpp
       CharEnumerator GetEnumerator() const override;
 
       /// @brief Retrieves an object that can iterate through the individual characters in this String.
       /// @return CharEnumerator An enumerator object.
       /// @remarks This method enables you to iterate the individual characters in a String. For example, the foreach statements invoke this method to return a CharEnumerator object that can provide read-only access to the characters in this String instance.
-      /// @remarks The following example iterates the characters in several Strings and displays information about their individual characters.
+      /// @par Examples
+      /// The following example iterates the characters in several Strings and displays information about their individual characters.
       /// @include String.GetEnumerator.cpp
       CharEnumerator GetReverseEnumerator() const;
 

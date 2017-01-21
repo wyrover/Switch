@@ -14,7 +14,8 @@ namespace Pcf {
         /// @param sender The source of the event.
         /// @param e A ControlEventArgs that contains the event data.
         /// @remarks When you create a ControlEventArgs delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event handler delegates, see Handling and Raising Events.
-        /// @remarks The following code example demonstrates the use of the ControlAdded and ControlRemoved events. The example requires that two Button controls are added to the form and connected to the addControl_Click and removeControl_Click event handling methods.
+        /// @par Examples
+        /// The following code example demonstrates the use of the ControlAdded and ControlRemoved events. The example requires that two Button controls are added to the form and connected to the addControl_Click and removeControl_Click event handling methods.
         /// @code
         /// // This example demonstrates the use of the ControlAdded and
         /// // ControlRemoved events. This example assumes that two Button controls

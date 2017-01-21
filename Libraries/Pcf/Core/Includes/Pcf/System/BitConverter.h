@@ -16,16 +16,16 @@ namespace Pcf {
     /// @remarks The BitConverter class helps manipulate value types in their fundamental form, as a series of bytes. A byte is defined as an 8-bit unsigned integer. The BitConverter class includes static methods to convert each of the primitive types to and from an array of bytes, as the following table illustrates.
     /// | Type     | To byte conversion                                | From byte conversion                                                  |
     /// |----------|---------------------------------------------------|-----------------------------------------------------------------------|
-    /// | #bool    | GetBytes(Boolean)                                 | ToBoolean(const Array< byte >&, int32)                                |
-    /// | #char32  | GetBytes(Char)                                    | ToChar(const Array< byte >&, int32)                                  |
-    /// | #double  | GetBytes(double) - or - DoubleToInt64Bits(double) | ToDouble(const Array< byte >&, int32) - or - Int64BitsToDouble(int64) |
-    /// | #int16   | GetBytes(int16)                                   | ToInt16(const Array< byte >&, int32)                                  |
-    /// | #int32   | GetBytes(int32)                                   | ToInt32(const Array< byte >&, int32)                                  |
-    /// | #int64   | GetBytes(int64)                                   | ToInt64(const Array< byte >&, int32)                                  |
-    /// | #float   | GetBytes(float) - or - SingleToInt32Bits(float)   | ToSingle(const Array< byte >&, int32) - or - Int32BitsToSingle(int32) |
-    /// | #uint16  | GetBytes(uint16)                                  | ToUInt16(const Array< byte >&, int32)                                 |
-    /// | #uint32  | GetBytes(uint32)                                  | ToUInt32(const Array< byte >&, int32)                                 |
-    /// | #uint64  | GetBytes(uint64)                                  | ToUInt64(const Array< byte >&, int32)                                 |
+    /// | bool     | GetBytes(Boolean)                                 | ToBoolean(const Array< byte >&, int32)                                |
+    /// | char32   | GetBytes(Char)                                    | ToChar(const Array< byte >&, int32)                                  |
+    /// | double   | GetBytes(double) - or - DoubleToInt64Bits(double) | ToDouble(const Array< byte >&, int32) - or - Int64BitsToDouble(int64) |
+    /// | int16    | GetBytes(int16)                                   | ToInt16(const Array< byte >&, int32)                                  |
+    /// | int32    | GetBytes(int32)                                   | ToInt32(const Array< byte >&, int32)                                  |
+    /// | int64    | GetBytes(int64)                                   | ToInt64(const Array< byte >&, int32)                                  |
+    /// | float    | GetBytes(float) - or - SingleToInt32Bits(float)   | ToSingle(const Array< byte >&, int32) - or - Int32BitsToSingle(int32) |
+    /// | uint16   | GetBytes(uint16)                                  | ToUInt16(const Array< byte >&, int32)                                 |
+    /// | uint32   | GetBytes(uint32)                                  | ToUInt32(const Array< byte >&, int32)                                 |
+    /// | uint64   | GetBytes(uint64)                                  | ToUInt64(const Array< byte >&, int32)                                 |
     class pcf_public BitConverter {
     public:
       /// @brief Converts the specified double-precision floating point number to a 64-bit signed integer.
@@ -37,13 +37,15 @@ namespace Pcf {
       /// @brief Indicates the byte order ("endianness") in which data is stored in this computer architecture.
       /// @return Returns true if the architecture is little-endian; false if it is big-endian.
       /// @remarks Different computer architectures store data using different byte orders. "Big-endian" means the most significant byte is on the left end of a word. "Little-endian" means the most significant byte is on the right end of a word.
-      /// @remarks The following code example illustrates the use of the IsLittleEndian field.
+      /// @par Examples
+      /// The following code example illustrates the use of the IsLittleEndian field.
       /// @include BitConverter.IsLittleEndian.cpp
        static Property<bool, ReadOnly> IsLittleEndian;
 
       /// @brief Returns the specified Boolean value as an array of bytes.
       /// @param value A Boolean value.
       /// @return An array of bytes with length 1.
+      /// @par Examples
       /// The following code example converts the bit patterns of Boolean values to byte arrays with the GetBytes method.
       /// @include BitConverterGetBytesBoolean.cpp
        static Array<byte> GetBytes(Boolean value);
@@ -51,6 +53,7 @@ namespace Pcf {
       /// @brief Returns the specified Char value as an array of bytes.
       /// @param value A Char value.
       /// @return An array of bytes with length 4.
+      /// @par Examples
       /// The following code example converts the bit patterns of Char values to byte arrays with the GetBytes method.
       /// @include BitConverterGetBytesChar.cpp
        static Array<byte> GetBytes(Char value);
@@ -58,6 +61,7 @@ namespace Pcf {
       /// @brief Returns the specified double value as an array of bytes.
       /// @param value A double value.
       /// @return An array of bytes with length 8.
+      /// @par Examples
       /// The following code example converts the bit patterns of double values to byte arrays with the GetBytes method.
       /// @include BitConverterGetBytesDouble.cpp
        static Array<byte> GetBytes(double value);
@@ -65,6 +69,7 @@ namespace Pcf {
       /// @brief Returns the specified int16 value as an array of bytes.
       /// @param value A int16 value.
       /// @return An array of bytes with length 2.
+      /// @par Examples
       /// The following code example converts the bit patterns of int16 values to byte arrays with the GetBytes method.
       /// @include BitConverterGetBytesInt16.cpp
        static Array<byte> GetBytes(int16 value);
@@ -72,6 +77,7 @@ namespace Pcf {
       /// @brief Returns the specified int32 value as an array of bytes.
       /// @param value A int32 value.
       /// @return An array of bytes with length 4.
+      /// @par Examples
       /// The following code example converts the bit patterns of int32 values to byte arrays with the GetBytes method.
       /// @include BitConverterGetBytesInt32.cpp
        static Array<byte> GetBytes(int32 value);
@@ -79,6 +85,7 @@ namespace Pcf {
       /// @brief Returns the specified int64 value as an array of bytes.
       /// @param value A int64 value.
       /// @return An array of bytes with length 8.
+      /// @par Examples
       /// The following code example converts the bit patterns of int64 values to byte arrays with the GetBytes method.
       /// @include BitConverterGetBytesInt64.cpp
        static Array<byte> GetBytes(int64 value);
@@ -86,6 +93,7 @@ namespace Pcf {
       /// @brief Returns the specified single value as an array of bytes.
       /// @param value A single value.
       /// @return An array of bytes with length 4.
+      /// @par Examples
       /// The following code example converts the bit patterns of single values to byte arrays with the GetBytes method.
       /// @include BitConverterGetBytesSingle.cpp
        static Array<byte> GetBytes(float value);
@@ -93,6 +101,7 @@ namespace Pcf {
       /// @brief Returns the specified uint16 value as an array of bytes.
       /// @param value A uint16 value.
       /// @return An array of bytes with length 2.
+      /// @par Examples
       /// The following code example converts the bit patterns of uint16 values to byte arrays with the GetBytes method.
       /// @include BitConverterGetBytesUInt16.cpp
        static Array<byte> GetBytes(uint16 value);
@@ -100,6 +109,7 @@ namespace Pcf {
       /// @brief Returns the specified uint32 value as an array of bytes.
       /// @param value A uint32 value.
       /// @return An array of bytes with length 4.
+      /// @par Examples
       /// The following code example converts the bit patterns of uint32 values to byte arrays with the GetBytes method.
       /// @include BitConverterGetBytesUInt32.cpp
        static Array<byte> GetBytes(uint32 value);
@@ -107,6 +117,7 @@ namespace Pcf {
       /// @brief Returns the specified uint64 value as an array of bytes.
       /// @param value A uint64 value.
       /// @return An array of bytes with length 8.
+      /// @par Examples
       /// The following code example converts the bit patterns of uint64 values to byte arrays with the GetBytes method.
       /// @include BitConverterGetBytesUInt64.cpp
        static Array<byte> GetBytes(uint64 value);
@@ -140,6 +151,7 @@ namespace Pcf {
       /// @return bool true if the byte at startIndex in value is nonzero; otherwise, false.
       /// @exception ArgumentNullException value is null
       /// @exception ArgumentOutOfRangeException startIndex is less than zero or greater than the length of value minus 1.
+      /// @par Examples
       /// The following code example converts elements of Byte arrays to Boolean values with the ToBoolean method.
       /// @include BitConverterToBoolean.cpp
        static bool ToBoolean(const Array<byte>& value, int32 startIndex);
@@ -239,7 +251,8 @@ namespace Pcf {
       /// @return String A String of hexadecimal pairs separated by hyphens, where each pair represents the corresponding element in value; for example, "7F-2C-4A-00".
       /// @exception ArgumentNullException value is null.
       /// @remarks All the elements of value are converted. The order of hexadecimal strings returned by the ToString method depends on whether the computer architecture is little-endian or big-endian.
-      /// @remarks The following code example converts Byte arrays to String objects with the ToString method.
+      /// @par Examples
+      /// The following code example converts Byte arrays to String objects with the ToString method.
       /// @include BitConverterToString.cpp
        static String ToString(const Array<byte>& value);
 
@@ -250,7 +263,8 @@ namespace Pcf {
       /// @exception ArgumentNullException value is null.
       /// @exception ArgumentOutOfRangeException startIndex is less than zero or greater than the length of value minus 1.
       /// @remarks The elements from array position startIndex to the end of the array are converted. The order of hexadecimal strings returned by the ToString method depends on whether the computer architecture is little-endian or big-endian.
-      /// @remarks The following code example converts Byte arrays to String objects with the ToString method.
+      /// @par Examples
+      /// The following code example converts Byte arrays to String objects with the ToString method.
       /// @include BitConverterToString2.cpp
        static String ToString(const Array<byte>& value, int32 startIndex);
 
@@ -264,7 +278,8 @@ namespace Pcf {
       /// @exception ArgumentException The combination of startIndex and length does not specify a position within value; that is, the startIndex parameter is greater than the length of value minus the length parameter.
       /// @remarks AThe length elements from array position startIndex are converted. If length equals zero, the method returns String.Empty.
       /// @remarks The order of hexadecimal strings returned by the ToString method depends on whether the computer architecture is little-endian or big-endian.
-      /// @remarks The following code example converts Byte arrays to String objects with the ToString method.
+      /// @par Examples
+      /// The following code example converts Byte arrays to String objects with the ToString method.
       /// @include BitConverterToString3.cpp
        static String ToString(const Array<byte>& value, int32 startIndex, int32 length);
       
