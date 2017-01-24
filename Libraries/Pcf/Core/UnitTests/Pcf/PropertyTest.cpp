@@ -21,12 +21,25 @@ using namespace System::Collections::Generic;
 using namespace TUnit;
 
 namespace PcfUnitTests {
+  class PropertyReadOnly {
+  public:
+    PropertyReadOnly() {}
+    PropertyReadOnly(const PropertyReadOnly& propertyReadOnly) : name(propertyReadOnly.name) {}
+    
+    Property<string, ReadOnly> Name {
+      pcf_get {return this->name;}
+    };
+    
+  private:
+    string name = "Test property";
+  };
+  
   class PropertyTest : public TestFixture {
   protected:
     void ReadOnlyCanRead() {
       Assert::IsTrue(ReadOnly::CanRead, pcf_current_information);
     }
-   
+    
     void ReadOnlyCanWrite() {
       Assert::IsFalse(ReadOnly::CanWrite, pcf_current_information);
     }
@@ -111,44 +124,18 @@ namespace PcfUnitTests {
     }
     
     void PropertyReadOnlyAndCopyConstructor() {
-      class Foo {
-      public:
-        Foo() {}
-        Foo(const Foo& foo) : name(foo.name) {}
-        
-        Property<string, ReadOnly> Name {
-          pcf_get {return this->name;}
-        };
-        
-      private:
-        string name = "Test property";
-      };
-      
-      UniquePointer<Foo> foo1 = UniquePointer<Foo>::Create();
-      UniquePointer<Foo> foo2 = UniquePointer<Foo>::Create(*foo1);
-      foo1 = null;
-      Assert::AreEqual("Test property", foo2->Name, pcf_current_information);
+      UniquePointer<PropertyReadOnly> propertyReadOnly1 = UniquePointer<PropertyReadOnly>::Create();
+      UniquePointer<PropertyReadOnly> propertyReadOnly2 = UniquePointer<PropertyReadOnly>::Create(*propertyReadOnly1);
+      propertyReadOnly1 = null;
+      Assert::AreEqual("Test property", propertyReadOnly2->Name, pcf_current_information);
     }
     
     void PropertyReadOnlyAndEqualOperator() {
-      class Foo {
-      public:
-        Foo() {}
-        Foo(const Foo& foo) : name(foo.name) {}
-        
-        Property<string, ReadOnly> Name {
-          pcf_get {return this->name;}
-        };
-        
-      private:
-        string name = "Test property";
-      };
-      
-      UniquePointer<Foo> foo1 = UniquePointer<Foo>::Create();
-      UniquePointer<Foo> foo2 = UniquePointer<Foo>::Create();
-      *foo2 = *foo1;
-      foo1 = null;
-      Assert::AreEqual("Test property", foo2->Name, pcf_current_information);
+      UniquePointer<PropertyReadOnly> propertyReadOnly1 = UniquePointer<PropertyReadOnly>::Create();
+      UniquePointer<PropertyReadOnly> propertyReadOnly2 = UniquePointer<PropertyReadOnly>::Create();
+      *propertyReadOnly2 = *propertyReadOnly1;
+      propertyReadOnly1 = null;
+      Assert::AreEqual("Test property", propertyReadOnly2->Name, pcf_current_information);
     }
   };
   

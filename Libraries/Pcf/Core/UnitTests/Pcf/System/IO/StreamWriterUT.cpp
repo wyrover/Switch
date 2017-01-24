@@ -32,19 +32,15 @@ namespace {
 	TEST(StreamWriter, WriteUTF8) {
 		string unicodeString = "Pi " + Char(928) + " ma " + Char(931) + " KOALA " + Char(128040);
     SharedPointer<Text::Encoding> encoding = Text::Encoding::UTF8();
-		//IO::MemoryStream s;
-    pcf_using (IO::FileStream s(Path::Combine(Environment::GetFolderPath(Environment::SpecialFolder::Desktop), "UnitTest.txt"), FileMode::OpenOrCreate, FileAccess::ReadWrite)) {
-      IO::StreamWriter writer(s, *encoding);
-      writer.Write(unicodeString);
-    }
+		IO::MemoryStream s;
+    IO::StreamWriter writer(s, *encoding);
+    writer.Write(unicodeString);
     
-    pcf_using (IO::FileStream s(Path::Combine(Environment::GetFolderPath(Environment::SpecialFolder::Desktop), "UnitTest.txt"), FileMode::OpenOrCreate, FileAccess::ReadWrite)) {
-      StringReader sreader(unicodeString);
-  		IO::StreamReader reader(s, *encoding);
-		
-      for (int32 data = sreader.Read(), current = reader.Read(); current != -1 && data!=-1; data = sreader.Read(), current = reader.Read()) {
-  			EXPECT_EQ(data, current);
-	  	}
+    StringReader sreader(unicodeString);
+		IO::StreamReader reader(s, *encoding);
+
+    for (int32 data = sreader.Read(), current = reader.Read(); current != -1 && data!=-1; data = sreader.Read(), current = reader.Read()) {
+			EXPECT_EQ(data, current);
     }
 	}
 
