@@ -1,5 +1,7 @@
 .DS_Store
-/Build
-/Libraries/Pcf/Help
-/Libraries/Pcf-build
-/Libraries/Pcf/Documentations/warning.txt
+Build
+Libraries/Pcf/Help
+Libraries/Pcf-build
+Libraries/Pcf/Documentations/warning.txt
+Libraries/Pcf/CMakeLists.txt.user
+Libraries/build-Pcf-Desktop_Qt_5_7_1_GCC_64bit-Debug
