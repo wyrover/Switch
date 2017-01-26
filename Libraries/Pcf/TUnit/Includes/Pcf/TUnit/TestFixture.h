@@ -2,7 +2,7 @@
 /// @brief Contains Pcf::TUnit::TestFixture class.
 #pragma once
 
-#include <gtest/gtest>
+#include <gtest/gtest.h>
 #include <Pcf/System/Object.h>
 #include <Pcf/System/String.h>
 #include <Pcf/System/SystemException.h>

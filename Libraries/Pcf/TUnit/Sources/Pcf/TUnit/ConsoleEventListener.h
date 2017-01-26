@@ -2,7 +2,7 @@
 /// @brief Contains Pcf::TUnit::ConsoleEventListener class.
 #pragma once
 
-#include <gtest/gtest>
+#include <gtest/gtest.h>
 #include <Pcf/System/ConsoleColor.h>
 #include <Pcf/System/String.h>
 

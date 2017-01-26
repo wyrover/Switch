@@ -26,7 +26,7 @@ namespace testing {
   }
 }
 
-#include <gtest/gtest>
+#include <gtest/gtest.h>
 
 ::testing::AssertionResult AssertObjectEqStr(const char* expectedExpression,const char* actualExpression,const System::String& expected,const char* actual);
 ::testing::AssertionResult AssertObjectEqStr(const char* expectedExpression,const char* actualExpression,const char* expected,const System::String& actual);

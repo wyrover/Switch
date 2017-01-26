@@ -1,72 +1,72 @@
 set(INCLUDE_FILES
-./Includes/Pcf/System/Drawing/Imaging/ColorPalette.h
-./Includes/Pcf/System/Drawing/Imaging/FrameDimension.h
-./Includes/Pcf/System/Drawing/Imaging/ImageFlags.h
-./Includes/Pcf/System/Drawing/Imaging/ImageFormat.h
-./Includes/Pcf/System/Drawing/Imaging/PixelFormat.h
-./Includes/Pcf/System/Drawing/Text/FontCollection.h
-./Includes/Pcf/System/Drawing/Text/GenericFontFamilies.h
-./Includes/Pcf/System/Drawing/Text/InstalledFontCollection.h
-./Includes/Pcf/System/Drawing/Bitmap.h
-./Includes/Pcf/System/Drawing/Brush.h
-./Includes/Pcf/System/Drawing/CharacterRange.h
-./Includes/Pcf/System/Drawing/Color.h
-./Includes/Pcf/System/Drawing/ContentAlignment.h
-./Includes/Pcf/System/Drawing/Font.h
-./Includes/Pcf/System/Drawing/FontFamily.h
-./Includes/Pcf/System/Drawing/FontStyle.h
-./Includes/Pcf/System/Drawing/Graphics.h
-./Includes/Pcf/System/Drawing/GraphicsUnit.h
-./Includes/Pcf/System/Drawing/Image.h
-./Includes/Pcf/System/Drawing/Imaging.h
-./Includes/Pcf/System/Drawing/KnownColor.h
-./Includes/Pcf/System/Drawing/Pen.h
-./Includes/Pcf/System/Drawing/Point.h
-./Includes/Pcf/System/Drawing/PointF.h
-./Includes/Pcf/System/Drawing/Rectangle.h
-./Includes/Pcf/System/Drawing/RectangleF.h
-./Includes/Pcf/System/Drawing/SolidBrush.h
-./Includes/Pcf/System/Drawing/Size.h
-./Includes/Pcf/System/Drawing/SizeF.h
-./Includes/Pcf/System/Drawing/SystemColors.h
-./Includes/Pcf/System/Drawing/Text.h
-./Includes/Pcf/System/Drawing.h
-./Includes/Pcf/Drawing.h
-./Includes/Pcf/Pcf
-./Includes/Pcf/Pcf.h
+  Includes/Pcf/System/Drawing/Imaging/ColorPalette.h
+  Includes/Pcf/System/Drawing/Imaging/FrameDimension.h
+  Includes/Pcf/System/Drawing/Imaging/ImageFlags.h
+  Includes/Pcf/System/Drawing/Imaging/ImageFormat.h
+  Includes/Pcf/System/Drawing/Imaging/PixelFormat.h
+  Includes/Pcf/System/Drawing/Text/FontCollection.h
+  Includes/Pcf/System/Drawing/Text/GenericFontFamilies.h
+  Includes/Pcf/System/Drawing/Text/InstalledFontCollection.h
+  Includes/Pcf/System/Drawing/Bitmap.h
+  Includes/Pcf/System/Drawing/Brush.h
+  Includes/Pcf/System/Drawing/CharacterRange.h
+  Includes/Pcf/System/Drawing/Color.h
+  Includes/Pcf/System/Drawing/ContentAlignment.h
+  Includes/Pcf/System/Drawing/Font.h
+  Includes/Pcf/System/Drawing/FontFamily.h
+  Includes/Pcf/System/Drawing/FontStyle.h
+  Includes/Pcf/System/Drawing/Graphics.h
+  Includes/Pcf/System/Drawing/GraphicsUnit.h
+  Includes/Pcf/System/Drawing/Image.h
+  Includes/Pcf/System/Drawing/Imaging.h
+  Includes/Pcf/System/Drawing/KnownColor.h
+  Includes/Pcf/System/Drawing/Pen.h
+  Includes/Pcf/System/Drawing/Point.h
+  Includes/Pcf/System/Drawing/PointF.h
+  Includes/Pcf/System/Drawing/Rectangle.h
+  Includes/Pcf/System/Drawing/RectangleF.h
+  Includes/Pcf/System/Drawing/SolidBrush.h
+  Includes/Pcf/System/Drawing/Size.h
+  Includes/Pcf/System/Drawing/SizeF.h
+  Includes/Pcf/System/Drawing/SystemColors.h
+  Includes/Pcf/System/Drawing/Text.h
+  Includes/Pcf/System/Drawing.h
+  Includes/Pcf/Drawing.h
+  Includes/Pcf/Pcf
+  Includes/Pcf/Pcf.h
 )
 
 set(SOURCE_FILES
-./Sources/__OS/DrawingApi.h
-./Sources/__OS/DrawingApiWin32.cpp
-./Sources/__OS/DrawingApiX.cpp
-./Sources/Pcf/System/Drawing/Imaging/FrameDimension.cpp
-./Sources/Pcf/System/Drawing/Imaging/ImageFormat.cpp
-./Sources/Pcf/System/Drawing/Text/FontCollection.cpp
-./Sources/Pcf/System/Drawing/Text/InstalledFontCollection.cpp
-./Sources/Pcf/System/Drawing/Bmp.h
-./Sources/Pcf/System/Drawing/Bitmap.cpp
-./Sources/Pcf/System/Drawing/Color.cpp
-./Sources/Pcf/System/Drawing/Font.cpp
-./Sources/Pcf/System/Drawing/FontFamily.cpp
-./Sources/Pcf/System/Drawing/Gif.h
-./Sources/Pcf/System/Drawing/Graphics.cpp
-./Sources/Pcf/System/Drawing/Image.cpp
-./Sources/Pcf/System/Drawing/Jpg.h
-./Sources/Pcf/System/Drawing/Png.h
-./Sources/Pcf/System/Drawing/Point.cpp
-./Sources/Pcf/System/Drawing/PointF.cpp
-./Sources/Pcf/System/Drawing/Rectangle.cpp
-./Sources/Pcf/System/Drawing/RectangleF.cpp
-./Sources/Pcf/System/Drawing/Size.cpp
-./Sources/Pcf/System/Drawing/SizeF.cpp
-./Sources/Pcf/System/Drawing/SystemColor.cpp
-./Sources/Pcf/System/Drawing/Tif.h
+  Sources/__OS/DrawingApi.h
+  Sources/__OS/DrawingApiWin32.cpp
+  Sources/__OS/DrawingApiX.cpp
+  Sources/Pcf/System/Drawing/Imaging/FrameDimension.cpp
+  Sources/Pcf/System/Drawing/Imaging/ImageFormat.cpp
+  Sources/Pcf/System/Drawing/Text/FontCollection.cpp
+  Sources/Pcf/System/Drawing/Text/InstalledFontCollection.cpp
+  Sources/Pcf/System/Drawing/Bmp.h
+  Sources/Pcf/System/Drawing/Bitmap.cpp
+  Sources/Pcf/System/Drawing/Color.cpp
+  Sources/Pcf/System/Drawing/Font.cpp
+  Sources/Pcf/System/Drawing/FontFamily.cpp
+  Sources/Pcf/System/Drawing/Gif.h
+  Sources/Pcf/System/Drawing/Graphics.cpp
+  Sources/Pcf/System/Drawing/Image.cpp
+  Sources/Pcf/System/Drawing/Jpg.h
+  Sources/Pcf/System/Drawing/Png.h
+  Sources/Pcf/System/Drawing/Point.cpp
+  Sources/Pcf/System/Drawing/PointF.cpp
+  Sources/Pcf/System/Drawing/Rectangle.cpp
+  Sources/Pcf/System/Drawing/RectangleF.cpp
+  Sources/Pcf/System/Drawing/Size.cpp
+  Sources/Pcf/System/Drawing/SizeF.cpp
+  Sources/Pcf/System/Drawing/SystemColor.cpp
+  Sources/Pcf/System/Drawing/Tif.h
 )
 
 if (APPLE)
 set(COCOA_SOURCE_FILES
-./Sources/__OS/DrawingApiCocoa.mm
+  Sources/__OS/DrawingApiCocoa.mm
 )
 endif ()
 

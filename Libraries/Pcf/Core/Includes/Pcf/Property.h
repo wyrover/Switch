@@ -95,7 +95,7 @@ namespace Pcf {
  
   public:
     Property(const Setter& setter) : setter(setter) {}
-    Property& operator =(const Property& property) {this->setter(property.getter()); return *this;}
+    Property& operator =(const Property& property) {return *this;}
     
     void Set(T value) {this->setter(value);}
     void operator ()(T value) {this->setter(value);}

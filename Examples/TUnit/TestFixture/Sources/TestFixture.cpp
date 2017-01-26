@@ -6,12 +6,6 @@ using namespace TUnit;
 namespace UnitTests {
   // The class DirectoryTest must be inherited from TestFixture
   class DirectoryTest : public TestFixture {
-  public:
-    // The main entry point for the application.
-    static int Main(const Array<string>& args) {
-      return TUnit::UnitTest(args).Run();
-    }
-    
   protected:
     // This is the method that is called before any tests in a fixture are run.
     void SetUp() override {
@@ -39,8 +33,6 @@ namespace UnitTests {
   pcf_test(DirectoryTest, ChangeCurrentDirecoryWithDownloads);
   pcf_test(DirectoryTest, ChangeCurrentDirecoryWithPotatos);
 }
-
-pcf_startup (UnitTests::DirectoryTest)
 
 // This code produces the following output if directory Downloads exists and Potatos doesn't exist in your home direcory:
 //

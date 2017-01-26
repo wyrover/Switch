@@ -645,7 +645,7 @@ set_target_properties(Pcf.Core PROPERTIES FOLDER Pcf/Core)
 
 install(TARGETS Pcf.Core EXPORT Pcf DESTINATION lib)
 install(DIRECTORY "Includes/."  DESTINATION include)
-if(MSVC)
+if (MSVC)
   target_compile_options(Pcf.Core PRIVATE "$<$<CONFIG:Debug>:/Fd$<TARGET_FILE_DIR:Pcf.Core>/Pcf.Core${CMAKE_DEBUG_POSTFIX}.pdb>")
   target_compile_options(Pcf.Core PRIVATE "$<$<CONFIG:Release>:/Fd$<TARGET_FILE_DIR:Pcf.Core>/Pcf.Core.pdb>")
   install(FILES $<TARGET_FILE_DIR:Pcf.Core>/Pcf.Core${CMAKE_DEBUG_POSTFIX}.pdb DESTINATION lib CONFIGURATIONS Debug OPTIONAL)

@@ -1,4 +1,5 @@
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.5)
+
 project(Pcf VERSION 0.2.0)
 
 option(BUILD_CORE_INTEGRATION_TESTS "Build Core integration tests" OFF)
@@ -9,14 +10,10 @@ option(BUILD_FORMS_MANUAL_TESTS "Build Forms manual tests" ON)
 option(BUILD_FORMS_UNIT_TESTS "Build Forms unit tests" ON)
 option(BUILD_TUNIT_UNIT_TESTS "Build TUnit unit tests" ON)
 
+enable_testing()
+
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-#include(Dependences.cmake)
-
-SET(PCF_CXX_FLAGS_BACKUP ${CMAKE_CXX_FLAGS})
-SET(PCF_CXX_FLAGS_DEBUG_BACKUP ${CMAKE_CXX_FLAGS_DEBUG})
-SET(PCF_CXX_FLAGS_RELEASE_BACKUP ${CMAKE_CXX_FLAGS_RELEASE})
 
 if (APPLE)
   SET(CMAKE_CXX_FLAGS "-Wall -Wextra -Wpedantic -Wdeprecated-declarations -Wno-unknown-pragmas -Wno-unused-parameter")
@@ -40,13 +37,6 @@ elseif(MSVC)
   set(STANDARD_LINK_LIBRARIES Ws2_32.lib Iphlpapi.lib Rpcrt4.lib)    
 endif ()	
 
-if (APPLE OR UNIX)
-  set(HOME $ENV{HOME})
-elseif (MSVC)
-  set(HOME $ENV{HOMEDRIVE}$ENV{HOMEPATH} CACHE PATH "Home path")
-endif()
-set(CMAKE_INSTALL_PREFIX "${HOME}/Libraries/${PLATFORM_NAME}/${PROJECT_NAME}/${PROJECT_VERSION}${INSTALL_REV}")
-
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 if(NOT CMAKE_DEBUG_POSTFIX)
@@ -66,11 +56,10 @@ add_subdirectory("TUnit")
 add_subdirectory("Pcf")
 
 install(EXPORT ${PROJECT_NAME} DESTINATION cmake)
-install(FILES ${PROJECT_NAME}Config.cmake Dependences.cmake DESTINATION cmake)
+install(FILES ${PROJECT_NAME}Config.cmake DESTINATION cmake)
 
-# add a target to generate API documentation with Doxygen
 find_package(Doxygen)
 if(DOXYGEN_FOUND)
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Pcf.Doxyfile ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
-add_custom_target(documentation ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} COMMENT "Generating API documentation with Doxygen" VERBATIM)
+  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Pcf.Doxyfile ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
+  add_custom_target(documentation ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} COMMENT "Generating API documentation with Doxygen" VERBATIM)
 endif(DOXYGEN_FOUND)

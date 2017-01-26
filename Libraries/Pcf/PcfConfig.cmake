@@ -1,8 +1,7 @@
-include(${CMAKE_CURRENT_LIST_DIR}/Pcf.cmake)
-get_filename_component(PCF_INCLUDE_DIRS "${CMAKE_CURRENT_LIST_DIR}/../include" ABSOLUTE)
-
-include(${CMAKE_CURRENT_LIST_DIR}/Dependences.cmake)
-set(PCF_INCLUDE_DIRS ${PCF_INCLUDE_DIRS} )
+get_filename_component(SELF_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
+include(${SELF_DIR}/Pcf.cmake)
+get_filename_component(Pcf_INCLUDE_DIRS "${SELF_DIR}/../../include/Pcf" ABSOLUTE)
+#get_filename_component(Pcf_LIBRARIES_DIRS "${SELF_DIR}/../../lib/Pcf" ABSOLUTE)
 
 if (APPLE)
   set(STANDARD_LINK_LIBRARIES pthread)	
@@ -12,7 +11,6 @@ elseif(MSVC)
   set(STANDARD_LINK_LIBRARIES Ws2_32.lib Iphlpapi.lib Rpcrt4.lib)    
 endif ()	
 
-SET(PCF_LIBRARIES Pcf Pcf.Forms Pcf.Drawing Pcf.Gal Pcf.Core call_stack gtest jpeglib pnglib zlibd fltk libcurl ${STANDARD_LINK_LIBRARIES})    
+SET(Pcf_LIBRARIES Pcf.Forms Pcf.Drawing Pcf.Core call_stack curl easywsclient gtest jpeglib libpng Rs232 zlib ${STANDARD_LINK_LIBRARIES})    
 
 set(Pcf_FOUND TRUE)
-set(PCF_FOUND TRUE)
