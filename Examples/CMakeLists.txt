@@ -1,35 +1,11 @@
 cmake_minimum_required(VERSION 3.0.2)
 
-project(Examples VERSION 1.0.0)
+project(Examples VERSION 0.2.0)
 
 set(CORE_EXAMPLES Action Action1 Action2 Action3 AggregateException Any ArgumentException Array1 Array2 ArrayArrayOperator ArrayArrayOperatorFunctor ArrayAsReadOnly ArrayConstructor ArrayCopyTo ArrayCopyTo2 ArrayGetEnumerator ArrayGetLength ArrayGetLowerBound ArrayGetSyncRoot ArrayIndexOf ArrayList Async1 Async2 Barrier BitArray BitConverterGetBytesBoolean BitConverterGetBytesChar BitConverterIsLittleEndian BitConverterToString Boolean1 Boolean2 Boolean3 Boolean4 Boolean5 Boolean6 Boolean8 Boxing ClientWebSocket ConcurrentBag ConcurrentQueue ConcurrentStack Console ConsoleOut ConsoleReadKey DateTime DateTimeSpecifyKind Debug Delegate Delegate2 Dictionary DictionaryAdd DictionaryOperators DirectorySeparatorChar Enum Enum2 Environment EventHandler Exception ExceptionPointer Factorial FlagsEnum Foreach1 Foreach2 Foreach3 Foreach4 Format FunctionPointer HashSet HelloWorld HttpWebRequest Interlocked InterlockedDecrement List List2 List3 ListBinarySearch ListCopyTo ListExists ListFind ListReverse Main Math Nullable Object ParallelInvoke Process Profile Properties  Random1 Random2 Random3 Socket SortedDictionary SortedDictionaryAdd SortedDictionaryOperators SortedSet Stopwatch StreamReader StreamReaderReadLine StreamReaderReadToEnd StringCollection StringDictionary StringReader Task TaskDelay TcpClient Thread Thread1 Thread2 Thread3 Thread4 ThreadLocal TextWriterTraceListener Timer Timer2 Trace UdpClient UdpClientListener UdpClientTalker Unused Var)
 set(DRAWING_EXAMPLES Color)
 #set(FORMS_EXAMPLES Application Button Calculator CheckBox CheckedListBox Chrono Colors Controls Cursor DockedControls DragAndDrop FolderBrowserDialog Font FontFamily Form FormAndThread FormException FormHelloWorld FormTimer GroupBox ImageList KeyEvents Label ListBox MainMenu MaskedTextBox MessageBox MouseEvents MulticamInstaller NumericUpDown OpenFileDialog Paint Panel PictureBox ProgressBar RadioButton Resource RichTextBox SaveFileDialog Sudoku SystemSound TabControl TextBox UserControl)
 set(TUNIT_EXAMPLES Assert Expect TestFixture)
-
-foreach(EXAMPLE ${CORE_EXAMPLES}) 
-  option(BuildCore${EXAMPLE} "Build Core examples ${EXAMPLE}" ON)
-endforeach()
-
-foreach(EXAMPLE ${DRAWING_EXAMPLES}) 
-  option(BuildDrawing${EXAMPLE} "Build Drawing examples ${EXAMPLE}" ON)
-endforeach()
-
-foreach(EXAMPLE ${FORMS_EXAMPLES}) 
-  option(BuildForms${EXAMPLE} "Build Forms examples ${EXAMPLE}" ON)
-endforeach()
-
-foreach(EXAMPLE ${TUNIT_EXAMPLES}) 
-  option(BuildTUnit${EXAMPLE} "Build TUnit examples ${EXAMPLE}" ON)
-endforeach()
-
-if ("${CMAKE_BUILD_TYPE}" STREQUAL "")
-  set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR})
-else ()
-  set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/${CMAKE_BUILD_TYPE})
-endif ()
-
-set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 add_subdirectory("Core")
 add_subdirectory("Drawing")

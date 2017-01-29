@@ -1,0 +1,27 @@
+var struct_progress =
+[
+    [ "callback", "struct_progress_a8e42a40221d7569b019c62e9510a68ec.html#a8e42a40221d7569b019c62e9510a68ec", null ],
+    [ "current_speed", "struct_progress_a145e233b3588391b5829ec303b4727c4.html#a145e233b3588391b5829ec303b4727c4", null ],
+    [ "dlspeed", "struct_progress_a6e2053d65992a539b7a62154d10d43f8.html#a6e2053d65992a539b7a62154d10d43f8", null ],
+    [ "downloaded", "struct_progress_a99eac3c3295b70992c0ae8eede4a2dbc.html#a99eac3c3295b70992c0ae8eede4a2dbc", null ],
+    [ "flags", "struct_progress_ad357437f30808334dfc80994e5481fdd.html#ad357437f30808334dfc80994e5481fdd", null ],
+    [ "lastshow", "struct_progress_a7a9d2753ad63c38ba469a37345fef5ac.html#a7a9d2753ad63c38ba469a37345fef5ac", null ],
+    [ "size_dl", "struct_progress_a22daf85fd375653f1c639b53867737f1.html#a22daf85fd375653f1c639b53867737f1", null ],
+    [ "size_ul", "struct_progress_a94ef48f98bf0dd6ad12a699591f46a73.html#a94ef48f98bf0dd6ad12a699591f46a73", null ],
+    [ "speeder", "struct_progress_ad51866026ff8663c7ac534e4aae37284.html#ad51866026ff8663c7ac534e4aae37284", null ],
+    [ "speeder_c", "struct_progress_a551997fb8fb4fffc55b04bf06e73eb28.html#a551997fb8fb4fffc55b04bf06e73eb28", null ],
+    [ "speeder_time", "struct_progress_a7e7a46588fecab1fd479e5299aa59444.html#a7e7a46588fecab1fd479e5299aa59444", null ],
+    [ "start", "struct_progress_a120cc24636d3952d99ca1684edd8a4a6.html#a120cc24636d3952d99ca1684edd8a4a6", null ],
+    [ "t_acceptdata", "struct_progress_ad13d789b638211d2fa68488863e55b9d.html#ad13d789b638211d2fa68488863e55b9d", null ],
+    [ "t_appconnect", "struct_progress_a82aca76832774c41edd27b071a8288dd.html#a82aca76832774c41edd27b071a8288dd", null ],
+    [ "t_connect", "struct_progress_ad8114af11b4b47eba86457f26917a6d0.html#ad8114af11b4b47eba86457f26917a6d0", null ],
+    [ "t_nslookup", "struct_progress_ac797e1fb430431eb47c6ca544f91e796.html#ac797e1fb430431eb47c6ca544f91e796", null ],
+    [ "t_pretransfer", "struct_progress_aaa10febca52c14dfc36fa51d4dc72eb2.html#aaa10febca52c14dfc36fa51d4dc72eb2", null ],
+    [ "t_redirect", "struct_progress_a9635f436319aeaccebdbf57f581da805.html#a9635f436319aeaccebdbf57f581da805", null ],
+    [ "t_startsingle", "struct_progress_a45dd93b6b43f6b23320918c1bdd84dfb.html#a45dd93b6b43f6b23320918c1bdd84dfb", null ],
+    [ "t_starttransfer", "struct_progress_a3f90c05b24bf21652f490ffe4a8cda43.html#a3f90c05b24bf21652f490ffe4a8cda43", null ],
+    [ "timespent", "struct_progress_a10b908c2b411bb93e42b89bdaa8bf7f0.html#a10b908c2b411bb93e42b89bdaa8bf7f0", null ],
+    [ "ulspeed", "struct_progress_abfd3e609ed13177904e6a80133bf77d4.html#abfd3e609ed13177904e6a80133bf77d4", null ],
+    [ "uploaded", "struct_progress_a17621fae7e49719056fa07c0c327706a.html#a17621fae7e49719056fa07c0c327706a", null ],
+    [ "width", "struct_progress_a8cf3564ce458e9f3cdda45081f9bc930.html#a8cf3564ce458e9f3cdda45081f9bc930", null ]
+];
