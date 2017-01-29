@@ -1,0 +1,53 @@
+CentOS
+------
+  
+______________________________________________________________________________________________________________
+
+Mac Os X
+--------
+
+  1. Install pre-requisites
+
+     In order to build Pcf, you first need to install the latest version curl, jpeg, pnglib and zlib. 
+     The easiest way to get this is from Homebrew (http://brew.sh/).
+
+  2. After installing brew, do the following:
+
+     ~$ brew install curl
+     ~$ brew install jpeg
+     ~$ brew install pnglib
+     ~$ brew install zlib
+
+  3. Install CMake
+
+     To build Pcf in your favvorite IDE, download and install CMake from https://cmake.org/
+     Remarks: The minimum version of used is 3.5.
+
+  4. Create cmake folder in usr/local with administrator privilege:
+
+     ~$ sudo mkdir /usr/local/cmake
+
+  5. Create you project for your prefered ide or unix makefile (in this case Xcode) with CMake gui or with
+     the next command lines.
+     Remarks: type "cmake --help" for more information.
+    
+     ~$ mkdir Build
+     ~$ cd Build
+     ~$ cmake -G "Xcode" ..
+     
+  6. Bu!ld and install in Xcode or like this:
+  
+     ~$ xcodebuild -target install -configuration Release
+  
+  7. Enjoy and be creative with Pcf ;-)
+  
+______________________________________________________________________________________________________________
+
+Ubuntu
+------
+
+______________________________________________________________________________________________________________
+
+Windows
+-------
+

@@ -1,7 +1,7 @@
-get_filename_component(SELF_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
-include(${SELF_DIR}/Pcf.cmake)
-get_filename_component(Pcf_INCLUDE_DIRS "${SELF_DIR}/../../include/Pcf" ABSOLUTE)
-#get_filename_component(Pcf_LIBRARIES_DIRS "${SELF_DIR}/../../lib/Pcf" ABSOLUTE)
+include(${CMAKE_CURRENT_LIST_DIR}/Pcf.cmake)  
+
+get_filename_component(Pcf_INCLUDE_DIRS "${CMAKE_CURRENT_LIST_DIR}/../include" ABSOLUTE)
+get_filename_component(Pcf_LIBRARIES_DIRS "${CMAKE_CURRENT_LIST_DIR}/../lib" ABSOLUTE)
 
 if (APPLE)
   set(STANDARD_LINK_LIBRARIES pthread)	
@@ -11,6 +11,15 @@ elseif(MSVC)
   set(STANDARD_LINK_LIBRARIES Ws2_32.lib Iphlpapi.lib Rpcrt4.lib)    
 endif ()	
 
-SET(Pcf_LIBRARIES Pcf.Forms Pcf.Drawing Pcf.Core call_stack curl easywsclient gtest jpeglib libpng Rs232 zlib ${STANDARD_LINK_LIBRARIES})    
+find_package(call_stack REQUIRED)
+find_package(CURL REQUIRED)
+find_package(easywsclient REQUIRED)
+find_package(Rs232 REQUIRED)
+find_package(ZLIB REQUIRED)
+find_package(JPEG REQUIRED)
+find_package(PNG REQUIRED)
+find_package(GTest REQUIRED)
+
+SET(Pcf_LIBRARIES ${GTEST_LIBRARIES} Pcf.Forms Pcf.Drawing ${JPEG_LIBRARIES} ${PNG_LIBRARIES} Pcf.Core ${call_stack_LIBRARIES} ${CURL_LIBRARIES} ${easywsclient_LIBRARIES} ${Rs232_LIBRARIES} ${ZLIB_LIBRARIES} ${STANDARD_LINK_LIBRARIES})
 
 set(Pcf_FOUND TRUE)

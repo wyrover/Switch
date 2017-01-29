@@ -7,6 +7,4 @@
 #include "TUnit/Constraints.h"
 #include "TUnit/Expect.h"
 #include "TUnit/Is.h"
-#include "TUnit/ConsoleEventListener.h"
 #include "TUnit/TestFixture.h"
-#include "TUnit/UnitTest.h"

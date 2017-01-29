@@ -1,4 +1,4 @@
-#include "../../../__ThirdParties/call_stack/Sources/call_stack.hpp"
+#include <call_stack/call_stack.hpp>
 #include "../../../../Includes/Pcf/System/Diagnostics/StackTrace.h"
 #include "../../../../Includes/Pcf/System/Environment.h"
 

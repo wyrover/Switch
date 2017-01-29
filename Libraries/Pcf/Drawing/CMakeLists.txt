@@ -86,12 +86,12 @@ source_group(Sources\\Pcf REGULAR_EXPRESSION "/Sources/Pcf/[-_,A-Za-z0-9]+\\.c*"
 source_group(Sources\\__OS REGULAR_EXPRESSION "/Sources/__OS/[-_,A-Za-z0-9]+\\.*")
 source_group(Sources REGULAR_EXPRESSION "/Sources/[-_,A-Za-z0-9]+\\.c*")
 
-add_subdirectory("Sources/__ThirdParties/jpeglib")
-add_subdirectory("Sources/__ThirdParties/libpng")
+find_package(JPEG REQUIRED)
+find_package(PNG REQUIRED)
 
 add_library(Pcf.Drawing STATIC ${INCLUDE_FILES} ${SOURCE_FILES} ${COCOA_SOURCE_FILES})
 target_include_directories(Pcf.Drawing PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Includes> $<INSTALL_INTERFACE:include>)
-target_link_libraries(Pcf.Drawing jpeglib libpng Pcf.Core)
+target_link_libraries(Pcf.Drawing ${JPEG_LIBRARIES} ${PNG_LIBRARIES} Pcf.Core)
 set_target_properties(Pcf.Drawing PROPERTIES FOLDER Pcf/Drawing)
 
 install(TARGETS Pcf.Drawing EXPORT Pcf DESTINATION lib)

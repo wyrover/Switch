@@ -7,7 +7,8 @@ namespace HelloWorld {
   public:
     /// @brief The main entry point for the application.
     static void Main() {
-      Console::WriteLine("Hello, World!");
+      //Console::WriteLine("Hello, World!");
+      Console::WriteLine("\u00df\u6c34\U0001f34c");
     }
   };
 }

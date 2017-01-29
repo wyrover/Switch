@@ -39,11 +39,11 @@ source_group(Sources\\Pcf REGULAR_EXPRESSION "/Sources/Pcf/[-_,A-Za-z0-9]+\\.c*"
 source_group(Sources\\Pcf\\TUnit REGULAR_EXPRESSION "/Sources/Pcf/TUnit/[-_,A-Za-z0-9]+\\.(c|h)*")
 source_group(Sources\\Pcf\\TUnit\\Constraints REGULAR_EXPRESSION "/Sources/Pcf/TUnit/Constraints/[-_,A-Za-z0-9]+\\.c*")
 
-add_subdirectory("Sources/__ThirdParties/gtest")
+find_package(GTest REQUIRED)
 
 add_library(Pcf.TUnit STATIC ${INCLUDE_FILES} ${SOURCE_FILES})
 target_include_directories(Pcf.TUnit PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Includes> $<INSTALL_INTERFACE:include>)
-target_link_libraries(Pcf.TUnit Pcf.Core gtest)
+target_link_libraries(Pcf.TUnit ${GTEST_LIBRARIES} Pcf.Core)
 
 set_target_properties(Pcf.TUnit PROPERTIES FOLDER Pcf/TUnit)
 

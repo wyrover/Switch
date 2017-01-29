@@ -1,4 +1,4 @@
-#include <easywsclient.hpp>
+#include <easywsclient/easywsclient.hpp>
 #include "../../../../../Includes/Pcf/System/Net/WebSockets/ClientWebSocket.h"
 #include "../../../../../Includes/Pcf/System/Threading/Thread.h"
 
