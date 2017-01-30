@@ -19,6 +19,7 @@ The framework is composed of 4 libraries :
 The classic first application 'Hello World'.
 
 ##Console:
+Console.cpp
 ```
 #include <Pcf/Pcf>
 
@@ -35,6 +36,19 @@ namespace HelloWorld {
 }
 
 pcf_startup (HelloWorld::Program)
+```
+
+CMakeLists.txt
+```
+cmake_minimum_required(VERSION 3.5)
+
+project(Console)
+
+set(CMAKE_CXX_STANDARD 14)
+
+find_package(Pcf REQUIRED)
+add_executable(${PROJECT_NAME} Sources/${PROJECT_NAME}.cpp)
+target_link_libraries(${PROJECT_NAME} ${Pcf_LIBRARIES})
 ```
 
 ##Forms:
