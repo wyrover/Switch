@@ -18,8 +18,8 @@ The framework is composed of 4 libraries :
 #Examples
 The classic first application 'Hello World'.
 
-##Console:
-Console.cpp
+##Console
+HelloWorld.cpp:
 ```
 #include <Pcf/Pcf>
 
@@ -38,11 +38,11 @@ namespace HelloWorld {
 pcf_startup (HelloWorld::Program)
 ```
 
-CMakeLists.txt
+CMakeLists.txt:
 ```
 cmake_minimum_required(VERSION 3.5)
 
-project(Console)
+project(HelloWorld)
 
 set(CMAKE_CXX_STANDARD 14)
 
@@ -51,14 +51,15 @@ add_executable(${PROJECT_NAME} Sources/${PROJECT_NAME}.cpp)
 target_link_libraries(${PROJECT_NAME} ${Pcf_LIBRARIES})
 ```
 
-##Forms:
+##Forms
+HelloWorldGui.cpp:
 ```
 #include <Pcf/Pcf>
 
 using namespace System;
 using namespace System::Windows::Forms;
 
-namespace HelloWorld {
+namespace HelloWorldGui {
   class MainForm : public Form {
   public:
     // The main entry point for the application.
@@ -86,10 +87,24 @@ namespace HelloWorld {
   };
 }
 
-pcf_startup (HelloWorld::MainForm)
+pcf_startup (HelloWorldGui::MainForm)
 ```
 
-##TUnit:
+CMakeLists.txt:
+```
+cmake_minimum_required(VERSION 3.5)
+
+project(HelloWorldGui)
+
+set(CMAKE_CXX_STANDARD 14)
+
+find_package(Pcf REQUIRED)
+add_executable(${PROJECT_NAME} Sources/${PROJECT_NAME}.cpp)
+target_link_libraries(${PROJECT_NAME} ${Pcf_LIBRARIES})
+```
+
+##TUnit
+HelloWorldTest.cpp:
 ```
 #include <Pcf/Pcf>
 
@@ -113,6 +128,19 @@ namespace UnitTests {
   pcf_test (HelloWorldTest, CreateStringFromLiteral)
   pcf_test (HelloWorldTest, CreateStringFromChar32Array)
 }
+```
+
+CMakeLists.txt:
+```
+cmake_minimum_required(VERSION 3.5)
+
+project(HelloWorldTest)
+
+set(CMAKE_CXX_STANDARD 14)
+
+find_package(Pcf REQUIRED)
+add_executable(${PROJECT_NAME} Sources/${PROJECT_NAME}.cpp)
+target_link_libraries(${PROJECT_NAME} ${Pcf_LIBRARIES})
 ```
 
 #Namespace
