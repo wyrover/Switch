@@ -53,6 +53,7 @@ else ()
   set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/${CMAKE_BUILD_TYPE})
 endif ()
 
+add_subdirectory("ThirdParties")
 add_subdirectory("Core")
 add_subdirectory("Drawing")
 add_subdirectory("Forms")
