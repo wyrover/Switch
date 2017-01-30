@@ -85,12 +85,18 @@ using namespace TUnit;
 namespace UnitTests {
   class HelloWorldTest : public TestFixture {
   protected:
+    void CreateStringFromLiteral() {
+      string s = "Hello, World!";
+      Assert::AreEqual("Hello, World!", s);
+    }
+
     void CreateStringFromChar32Array() {
       string s = string(Array<char32> {'H', 'e', 'l', 'l', 'o', ',', ' ', 'W', 'o', 'r', 'l', 'd', '!'});
       Assert::AreEqual("Hello, World!", s);
     }
   };
 
+  pcf_test (HelloWorldTest, CreateStringFromLiteral)
   pcf_test (HelloWorldTest, CreateStringFromChar32Array)
 }
 ```
