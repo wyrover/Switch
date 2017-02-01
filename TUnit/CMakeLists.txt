@@ -23,7 +23,7 @@ set(SOURCE_FILES
   Sources/Pcf/TUnit/AssertionResult.cpp
   Sources/Pcf/TUnit/ConsoleEventListener.h
   Sources/Pcf/TUnit/ConsoleEventListener.cpp
-  Sources/Pcf/TUnit/Main.cpp
+  Sources/Pcf/TUnit/UnitTest.cpp
 )
 
 #Add include groups here:

@@ -40,7 +40,7 @@ source_group(Sources REGULAR_EXPRESSION "/Sources/[-_,A-Za-z0-9]+\\.c*")
 source_group(Sources\\StackWalker REGULAR_EXPRESSION "/Sources/StackWalker/[-_,A-Za-z0-9]+\\.c*")
 
 add_library(call_stack STATIC ${INCLUDE_FILES} ${SOURCE_FILES})
-target_link_libraries(call_stack ${STANDARD_LINK_LIBRARIES})
+target_link_libraries(call_stack)
 target_include_directories(call_stack PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}> $<INSTALL_INTERFACE:include>)
 
 install(EXPORT call_stack DESTINATION cmake)  

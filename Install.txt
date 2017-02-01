@@ -18,6 +18,7 @@ Mac Os X
 
   3. After installing brew, do the following:
 
+     ~$ brew update
      ~$ brew install curl
      ~$ brew install jpeg
      ~$ brew install libpng
@@ -27,19 +28,32 @@ Mac Os X
 
      ~$ sudo mkdir /usr/local/cmake
 
-  5. Create you project for your prefered ide or unix makefile (in this case Xcode) with CMake gui or with
+  5. Create ThirdParties project for your prefered ide or unix makefile (in this case Xcode) with CMake gui or with
      the next command lines.
      Remarks: type "cmake --help" for more information.
     
      ~$ mkdir Build
      ~$ cd Build
-     ~$ cmake -G "Xcode" ..
+     ~$ mkdir ThirdParties
+     ~$ cd ThirdParties
+     ~$ cmake -G "Xcode" ../../ThirdParties
      
   6. Bu!ld and install in Xcode or like this:
   
      ~$ xcodebuild -target install -configuration Release
   
-  7. Enjoy and be creative with Pcf ;-)
+  7. Create Pcf project for your prefered ide or unix makefile (in this case Xcode) with CMake gui or with
+     the next command lines.
+     Remarks: type "cmake --help" for more information.
+    
+     ~$ cd ..
+     ~$ cmake -G "Xcode" ..
+     
+  8. Bu!ld and install in Xcode or like this:
+  
+     ~$ xcodebuild -target install -configuration Release
+  
+  9. Enjoy and be creative with Pcf ;-)
   
 ______________________________________________________________________________________________________________
 
