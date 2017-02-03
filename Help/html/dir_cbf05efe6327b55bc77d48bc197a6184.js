@@ -1,0 +1,45 @@
+var dir_cbf05efe6327b55bc77d48bc197a6184 =
+[
+    [ "CoreApi.h", "_core_api_8h.html", [
+      [ "CoreApi", "class_____o_s_1_1_core_api.html", [
+        [ "Console", "class_____o_s_1_1_core_api_1_1_console.html", null ],
+        [ "DateTime", "struct_____o_s_1_1_core_api_1_1_date_time.html", null ],
+        [ "Debugger", "struct_____o_s_1_1_core_api_1_1_debugger.html", null ],
+        [ "Directory", "class_____o_s_1_1_core_api_1_1_directory.html", null ],
+        [ "Dns", "class_____o_s_1_1_core_api_1_1_dns.html", null ],
+        [ "Drive", "class_____o_s_1_1_core_api_1_1_drive.html", null ],
+        [ "Environment", "class_____o_s_1_1_core_api_1_1_environment.html", null ],
+        [ "Format", "class_____o_s_1_1_core_api_1_1_format.html", null ],
+        [ "Interlocked", "class_____o_s_1_1_core_api_1_1_interlocked.html", null ],
+        [ "Process", "class_____o_s_1_1_core_api_1_1_process.html", null ],
+        [ "Registry", "class_____o_s_1_1_core_api_1_1_registry.html", null ],
+        [ "Security", "class_____o_s_1_1_core_api_1_1_security.html", null ],
+        [ "Socket", "class_____o_s_1_1_core_api_1_1_socket.html", null ],
+        [ "Thread", "class_____o_s_1_1_core_api_1_1_thread.html", null ],
+        [ "Type", "class_____o_s_1_1_core_api_1_1_type.html", null ],
+        [ "UnicodeCharacters", "class_____o_s_1_1_core_api_1_1_unicode_characters.html", null ],
+        [ "UnicodeEncodings", "class_____o_s_1_1_core_api_1_1_unicode_encodings.html", "class_____o_s_1_1_core_api_1_1_unicode_encodings" ]
+      ] ],
+      [ "Console", "class_____o_s_1_1_core_api_1_1_console.html", null ],
+      [ "DateTime", "struct_____o_s_1_1_core_api_1_1_date_time.html", null ],
+      [ "Debugger", "struct_____o_s_1_1_core_api_1_1_debugger.html", null ],
+      [ "Directory", "class_____o_s_1_1_core_api_1_1_directory.html", null ],
+      [ "Dns", "class_____o_s_1_1_core_api_1_1_dns.html", null ],
+      [ "Drive", "class_____o_s_1_1_core_api_1_1_drive.html", null ],
+      [ "Environment", "class_____o_s_1_1_core_api_1_1_environment.html", null ],
+      [ "Format", "class_____o_s_1_1_core_api_1_1_format.html", null ],
+      [ "Interlocked", "class_____o_s_1_1_core_api_1_1_interlocked.html", null ],
+      [ "Process", "class_____o_s_1_1_core_api_1_1_process.html", null ],
+      [ "Registry", "class_____o_s_1_1_core_api_1_1_registry.html", null ],
+      [ "Security", "class_____o_s_1_1_core_api_1_1_security.html", null ],
+      [ "Socket", "class_____o_s_1_1_core_api_1_1_socket.html", null ],
+      [ "Thread", "class_____o_s_1_1_core_api_1_1_thread.html", null ],
+      [ "Type", "class_____o_s_1_1_core_api_1_1_type.html", null ],
+      [ "UnicodeCharacters", "class_____o_s_1_1_core_api_1_1_unicode_characters.html", null ],
+      [ "UnicodeEncodings", "class_____o_s_1_1_core_api_1_1_unicode_encodings.html", "class_____o_s_1_1_core_api_1_1_unicode_encodings" ],
+      [ "ASCII", "class_____o_s_1_1_core_api_1_1_unicode_encodings_1_1_a_s_c_i_i.html", null ],
+      [ "UTF16", "class_____o_s_1_1_core_api_1_1_unicode_encodings_1_1_u_t_f16.html", null ],
+      [ "UTF32", "class_____o_s_1_1_core_api_1_1_unicode_encodings_1_1_u_t_f32.html", null ],
+      [ "UTF8", "class_____o_s_1_1_core_api_1_1_unicode_encodings_1_1_u_t_f8.html", null ]
+    ] ]
+];

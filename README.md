@@ -18,7 +18,8 @@ The framework is composed of 4 libraries :
 #Examples
 The classic first application 'Hello World'.
 
-##Console:
+##Console
+HelloWorld.cpp:
 ```
 #include <Pcf/Pcf>
 
@@ -37,14 +38,28 @@ namespace HelloWorld {
 pcf_startup (HelloWorld::Program)
 ```
 
-##Forms:
+CMakeLists.txt:
+```
+cmake_minimum_required(VERSION 3.5)
+
+project(HelloWorld)
+
+set(CMAKE_CXX_STANDARD 14)
+
+find_package(Pcf REQUIRED)
+add_executable(${PROJECT_NAME} Sources/${PROJECT_NAME}.cpp)
+target_link_libraries(${PROJECT_NAME} ${Pcf_LIBRARIES})
+```
+
+##Forms
+HelloWorldGui.cpp:
 ```
 #include <Pcf/Pcf>
 
 using namespace System;
 using namespace System::Windows::Forms;
 
-namespace HelloWorld {
+namespace HelloWorldGui {
   class MainForm : public Form {
   public:
     // The main entry point for the application.
@@ -72,10 +87,24 @@ namespace HelloWorld {
   };
 }
 
-pcf_startup (HelloWorld::MainForm)
+pcf_startup (HelloWorldGui::MainForm)
 ```
 
-##TUnit:
+CMakeLists.txt:
+```
+cmake_minimum_required(VERSION 3.5)
+
+project(HelloWorldGui)
+
+set(CMAKE_CXX_STANDARD 14)
+
+find_package(Pcf REQUIRED)
+add_executable(${PROJECT_NAME} Sources/${PROJECT_NAME}.cpp)
+target_link_libraries(${PROJECT_NAME} ${Pcf_LIBRARIES})
+```
+
+##TUnit
+HelloWorldTest.cpp:
 ```
 #include <Pcf/Pcf>
 
@@ -85,14 +114,33 @@ using namespace TUnit;
 namespace UnitTests {
   class HelloWorldTest : public TestFixture {
   protected:
+    void CreateStringFromLiteral() {
+      string s = "Hello, World!";
+      Assert::AreEqual("Hello, World!", s);
+    }
+
     void CreateStringFromChar32Array() {
       string s = string(Array<char32> {'H', 'e', 'l', 'l', 'o', ',', ' ', 'W', 'o', 'r', 'l', 'd', '!'});
       Assert::AreEqual("Hello, World!", s);
     }
   };
 
+  pcf_test (HelloWorldTest, CreateStringFromLiteral)
   pcf_test (HelloWorldTest, CreateStringFromChar32Array)
 }
+```
+
+CMakeLists.txt:
+```
+cmake_minimum_required(VERSION 3.5)
+
+project(HelloWorldTest)
+
+set(CMAKE_CXX_STANDARD 14)
+
+find_package(Pcf REQUIRED)
+add_executable(${PROJECT_NAME} Sources/${PROJECT_NAME}.cpp)
+target_link_libraries(${PROJECT_NAME} ${Pcf_WITH_TUNIT_MAIN_LIBRARIES})
 ```
 
 #Namespace

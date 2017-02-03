@@ -1,0 +1,26 @@
+var structftp__conn =
+[
+    [ "count1", "structftp__conn_a66569c61f61185dfcc2220f731eba91b.html#a66569c61f61185dfcc2220f731eba91b", null ],
+    [ "count2", "structftp__conn_a203982dfa2c975ba4d9c20a0509eba48.html#a203982dfa2c975ba4d9c20a0509eba48", null ],
+    [ "count3", "structftp__conn_a831bd86495d87bc074d9b94cdd5c3efc.html#a831bd86495d87bc074d9b94cdd5c3efc", null ],
+    [ "ctl_valid", "structftp__conn_a65a81fe9976947ff339081c5f83077c0.html#a65a81fe9976947ff339081c5f83077c0", null ],
+    [ "cwddone", "structftp__conn_ae6de82dcc76af4ea97e828e326606561.html#ae6de82dcc76af4ea97e828e326606561", null ],
+    [ "cwdfail", "structftp__conn_a5899ffca5f9760f9e0109f126d0167fd.html#a5899ffca5f9760f9e0109f126d0167fd", null ],
+    [ "diralloc", "structftp__conn_a6e3efa129313fb94346e7ecff8d6ab87.html#a6e3efa129313fb94346e7ecff8d6ab87", null ],
+    [ "dirdepth", "structftp__conn_a008ec248827badcb60d8243e0b717120.html#a008ec248827badcb60d8243e0b717120", null ],
+    [ "dirs", "structftp__conn_a17df3aea99fb9a9af5128274354c4321.html#a17df3aea99fb9a9af5128274354c4321", null ],
+    [ "dont_check", "structftp__conn_a678c7789979434e2a2212b3177ed9eb8.html#a678c7789979434e2a2212b3177ed9eb8", null ],
+    [ "entrypath", "structftp__conn_aca1e36474c6b5ed4b9e998add6fd0ca4.html#aca1e36474c6b5ed4b9e998add6fd0ca4", null ],
+    [ "file", "structftp__conn_a8c3cde6cac2101bcc33471a69ebf8998.html#a8c3cde6cac2101bcc33471a69ebf8998", null ],
+    [ "known_filesize", "structftp__conn_aa54a94f33093241f936fc99510d2631a.html#aa54a94f33093241f936fc99510d2631a", null ],
+    [ "newhost", "structftp__conn_af1bfa4a6c5be7a95f6db483cbf5f696f.html#af1bfa4a6c5be7a95f6db483cbf5f696f", null ],
+    [ "newport", "structftp__conn_a52af6638576b3f069c72a23c3d531793.html#a52af6638576b3f069c72a23c3d531793", null ],
+    [ "pp", "structftp__conn_ab98ebc40c5fa6a685da919de5b06a96f.html#ab98ebc40c5fa6a685da919de5b06a96f", null ],
+    [ "prevpath", "structftp__conn_a3963dc806ac74b8d6fae8005d06f7283.html#a3963dc806ac74b8d6fae8005d06f7283", null ],
+    [ "retr_size_saved", "structftp__conn_a2cf7ba1957a627d4c956c11df54a1602.html#a2cf7ba1957a627d4c956c11df54a1602", null ],
+    [ "server_os", "structftp__conn_ae2660b015c55aec7c79f619b00ed8098.html#ae2660b015c55aec7c79f619b00ed8098", null ],
+    [ "state", "structftp__conn_a2068379f1421acf8658b1bb75bfd30de.html#a2068379f1421acf8658b1bb75bfd30de", null ],
+    [ "state_saved", "structftp__conn_afe0772034a72ef6799a141b877dcef0d.html#afe0772034a72ef6799a141b877dcef0d", null ],
+    [ "transfertype", "structftp__conn_ab0970f16c847f1cbf177ea0f31087612.html#ab0970f16c847f1cbf177ea0f31087612", null ],
+    [ "wait_data_conn", "structftp__conn_a537292f9d1482a4a1dd44d3203e37fac.html#a537292f9d1482a4a1dd44d3203e37fac", null ]
+];

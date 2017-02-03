@@ -1,0 +1,58 @@
+cmake_minimum_required(VERSION 3.5)
+
+project(Pcf VERSION 0.2.0)
+
+option(BUILD_CORE_INTEGRATION_TESTS "Build Core integration tests" OFF)
+option(BUILD_CORE_MANUAL_TESTS "Build Core manual tests" OFF)
+option(BUILD_CORE_UNIT_TESTS "Build Core unit tests" OFF)
+option(BUILD_DRAWING_UNIT_TESTS "Build Drawing unit tests" OFF)
+option(BUILD_FORMS_MANUAL_TESTS "Build Forms manual tests" OFF)
+option(BUILD_FORMS_UNIT_TESTS "Build Forms unit tests" OFF)
+option(BUILD_TUNIT_UNIT_TESTS "Build TUnit unit tests" OFF)
+
+enable_testing()
+
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+if (APPLE)
+  SET(CMAKE_CXX_FLAGS "-Wall -Wextra -Wpedantic -Wdeprecated-declarations -Wno-unknown-pragmas -Wno-unused-parameter")
+  set(CMAKE_CXX_FLAGS_DEBUG "-g -o -D_DEBUG -DDEBUG")
+  set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG -DRELEASE")
+elseif (UNIX)
+  SET(CMAKE_CXX_FLAGS "-Wall -Wpedantic -Wdeprecated-declarations -Wno-unknown-pragmas -Wno-unused-parameter")
+  set(CMAKE_CXX_FLAGS_DEBUG "-g -o -D_DEBUG -DDEBUG")
+  set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG -DRELEASE")
+elseif (MSVC)
+  set(CMAKE_CXX_FLAGS "/D_WINSOCK_DEPRECATED_NO_WARNINGS /DCURL_STATICLIB /DWIN32 /D_WINDOWS /DUNICODE /D_UNICODE /D_CRT_SECURE_NO_WARNINGS /D_CRT_NON_CONFORMING_SWPRINTFS /Zm1000 /bigobj /EHsc /GR /MP /Oy- /W4 /wd4100 /wd4127 /wd4132 /wd4133 /wd4189 /wd4244 /wd4245 /wd4310 /wd4312 /wd4355 /wd4389 /wd4456 /wd4458 /wd4505 /wd4510 /wd4512 /wd4610 /wd4701 /wd4702 /wd4706 /wd4996")
+  set(CMAKE_CXX_FLAGS_DEBUG "/MTd /Od /Zi /RTC1 /D_DEBUG /DDEBUG")
+  set(CMAKE_CXX_FLAGS_RELEASE "/MT /Gy /O2 /Oi /GL- /DNDEBUG /DRELEASE")
+endif ()
+
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+
+if(NOT CMAKE_DEBUG_POSTFIX)
+  set(CMAKE_DEBUG_POSTFIX d)
+endif()
+
+if ("${CMAKE_BUILD_TYPE}" STREQUAL "")
+  set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR})
+else ()
+  set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/${CMAKE_BUILD_TYPE})
+endif ()
+
+add_subdirectory("Core")
+add_subdirectory("Drawing")
+add_subdirectory("Forms")
+add_subdirectory("TUnit")
+add_subdirectory("TUnit.Main")
+add_subdirectory("Pcf")
+
+install(EXPORT ${PROJECT_NAME} DESTINATION cmake)
+install(FILES ${PROJECT_NAME}Config.cmake DESTINATION cmake)
+
+find_package(Doxygen)
+if(DOXYGEN_FOUND)
+  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Pcf.Doxyfile ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
+  add_custom_target(documentation ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} COMMENT "Generating API documentation with Doxygen" VERBATIM)
+endif(DOXYGEN_FOUND)

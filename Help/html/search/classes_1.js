@@ -1,0 +1,28 @@
+var searchData=
+[
+  ['back',['back',['../struct_h_t_t_p_1_1back.html',1,'HTTP']]],
+  ['backing_5fstore_5fstruct',['backing_store_struct',['../structbacking__store__struct.html',1,'']]],
+  ['badimageformatexception',['BadImageFormatException',['../class_pcf_1_1_system_1_1_bad_image_format_exception.html',1,'Pcf::System']]],
+  ['barrier',['Barrier',['../class_pcf_1_1_system_1_1_threading_1_1_barrier.html',1,'Pcf::System::Threading']]],
+  ['barrierpostphaseexception',['BarrierPostPhaseException',['../class_pcf_1_1_system_1_1_threading_1_1_barrier_post_phase_exception.html',1,'Pcf::System::Threading']]],
+  ['binaryreader',['BinaryReader',['../class_pcf_1_1_system_1_1_i_o_1_1_binary_reader.html',1,'Pcf::System::IO']]],
+  ['binarywriter',['BinaryWriter',['../class_pcf_1_1_system_1_1_i_o_1_1_binary_writer.html',1,'Pcf::System::IO']]],
+  ['bitarray',['BitArray',['../class_pcf_1_1_system_1_1_collections_1_1_bit_array.html',1,'Pcf::System::Collections']]],
+  ['bitconverter',['BitConverter',['../class_pcf_1_1_system_1_1_bit_converter.html',1,'Pcf::System']]],
+  ['bitmap',['Bitmap',['../class_pcf_1_1_system_1_1_drawing_1_1_bitmap.html',1,'Pcf::System::Drawing']]],
+  ['bitmapfileheader',['BitmapFileHeader',['../struct_pcf_1_1_system_1_1_drawing_1_1_bitmap_file_header.html',1,'Pcf::System::Drawing']]],
+  ['bitmapinfoheader',['BitmapInfoHeader',['../struct_pcf_1_1_system_1_1_drawing_1_1_bitmap_info_header.html',1,'Pcf::System::Drawing']]],
+  ['bmp',['Bmp',['../class_pcf_1_1_system_1_1_drawing_1_1_bmp.html',1,'Pcf::System::Drawing']]],
+  ['bool_5fconstant',['bool_constant',['../structtesting_1_1internal_1_1bool__constant.html',1,'testing::internal']]],
+  ['bool_5fconstant_3c_20implicitlyconvertible_3c_20const_20t_20_2a_2c_20const_20_3a_3aprotocolmessage_20_2a_20_3e_3a_3avalue_7c_7cimplicitlyconvertible_3c_20const_20t_20_2a_2c_20const_20_3a_3aproto2_3a_3amessage_20_2a_20_3e_3a_3avalue_20_3e',['bool_constant&lt; ImplicitlyConvertible&lt; const T *, const ::ProtocolMessage * &gt;::value||ImplicitlyConvertible&lt; const T *, const ::proto2::Message * &gt;::value &gt;',['../structtesting_1_1internal_1_1bool__constant.html',1,'testing::internal']]],
+  ['boolean',['Boolean',['../struct_pcf_1_1_system_1_1_boolean.html',1,'Pcf::System']]],
+  ['boxenum',['BoxEnum',['../class_pcf_1_1_system_1_1_box_enum.html',1,'Pcf::System']]],
+  ['boxer',['Boxer',['../struct_pcf_1_1_boxer.html',1,'Pcf']]],
+  ['brush',['Brush',['../class_pcf_1_1_system_1_1_drawing_1_1_brush.html',1,'Pcf::System::Drawing']]],
+  ['buffer',['Buffer',['../class_pcf_1_1_system_1_1_buffer.html',1,'Pcf::System']]],
+  ['button',['Button',['../class_pcf_1_1_system_1_1_windows_1_1_forms_1_1_button.html',1,'Pcf::System::Windows::Forms']]],
+  ['buttonbase',['ButtonBase',['../class_pcf_1_1_system_1_1_windows_1_1_forms_1_1_button_base.html',1,'Pcf::System::Windows::Forms']]],
+  ['byref',['ByRef',['../structstd_1_1tr1_1_1gtest__internal_1_1_by_ref.html',1,'std::tr1::gtest_internal']]],
+  ['byref_3c_20t_20_26_20_3e',['ByRef&lt; T &amp; &gt;',['../structstd_1_1tr1_1_1gtest__internal_1_1_by_ref_3_01_t_01_6_01_4.html',1,'std::tr1::gtest_internal']]],
+  ['byte',['Byte',['../struct_pcf_1_1_system_1_1_byte.html',1,'Pcf::System']]]
+];
