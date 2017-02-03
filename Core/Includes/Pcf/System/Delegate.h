@@ -26,6 +26,9 @@ namespace Pcf {
     public:
       /// @brief Function pointer type
       using Function = std::function<Result(Arguments...)>;
+
+      /// @brief Function pointer type
+      using FunctionPointer = Result(*)(Arguments...);
       
       /// @brief Initializes an empty delegate.
       Delegate() {}

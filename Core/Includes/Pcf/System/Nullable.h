@@ -5,6 +5,7 @@
 #include "../Property.h"
 #include "Convert.h"
 #include "Hash.h"
+#include "IComparable.h"
 #include "InvalidOperationException.h"
 #include "Object.h"
 
@@ -15,7 +16,7 @@ namespace Pcf {
     /// The following code example defines three rows of a table in the Microsoft Pubs sample database. The table contains two columns that are not nullable and two columns that are nullable.
     /// @include Nullable.cpp
     template <class T>
-    struct Nullable : public object {
+    struct Nullable : public IComparable, public object {
     public:
       /// @brief Initializes a new instance of the Nullable<T> structure to the specified value. 
       /// @param value A vlue type.
@@ -63,6 +64,35 @@ namespace Pcf {
           return this->value;
         }
       };
+      
+      /// @brief Compares the current instance with another object of the same type.
+      /// @param obj An object to compare with this instance.
+      /// @return int32 A 32-bit signed integer that indicates the relative order of the objects being compared.
+      /// The return value has these meanings:
+      /// | Value             | Condition                          |
+      /// |-------------------|------------------------------------|
+      /// | Less than zero    | This instance is less than obj.    |
+      /// | Zero              | This instance is equal to obj.     |
+      /// | Greater than zero | This instance is greater than obj. |
+      int32 CompareTo(const IComparable& obj) const override {
+        if (!is<Nullable>(obj)) return -1;
+        return CompareTo(as<Nullable<T>>(obj));
+      }
+      
+      /// @brief Compares the current instance with another object of the same type.
+      /// @param obj An object to compare with this instance.
+      /// @return int32 A 32-bit signed integer that indicates the relative order of the objects being compared.
+      /// The return value has these meanings:
+      /// | Value             | Condition                          |
+      /// |-------------------|------------------------------------|
+      /// | Less than zero    | This instance is less than obj.    |
+      /// | Zero              | This instance is equal to obj.     |
+      /// | Greater than zero | This instance is greater than obj. |
+      int32 CompareTo(const Nullable& obj) const {
+        if (this->value < obj.value) return -1;
+        if (this->value > obj.value) return 1;
+        return 0;
+      }
       
       /// @brief Determines whether this instance of Any and a specified Object, which must also be a Nullable<T> Object, have the same value.
       /// @param obj The Object to compare with the current Object.

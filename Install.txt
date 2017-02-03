@@ -6,54 +6,22 @@ ________________________________________________________________________________
 Mac Os X
 --------
 
-  1. Install CMake
+  1. Install Xcode
 
-     in order to build Pcf in your favvorite IDE, you first need download and install CMake from https://cmake.org/
-     Remarks: The minimum version of used is 3.5.
+     in order to build Pcf, you first need download and install Xcode from App Store and install "Commands line tools"
+     Remarks: Verify if you can execute clang --version in terminal.
 
   2. Install Homebrew
 
-     After cmake, to build Pcf, you need to install the latest version curl, jpeg, pnglib and zlib. 
+     After Xcode, to build Pcf, you need to install the latest version cmake, curl, doxygen, jpeg, pnglib and zlib, ... 
      The easiest way to get this is from Homebrew (http://brew.sh/).
 
-  3. After installing brew, do the following:
-
-     ~$ brew update
-     ~$ brew install curl
-     ~$ brew install jpeg
-     ~$ brew install libpng
-     ~$ brew install zlib
-
-  4. Create cmake folder in usr/local with administrator privilege:
-
-     ~$ sudo mkdir /usr/local/cmake
-
-  5. Create ThirdParties project for your prefered ide or unix makefile (in this case Xcode) with CMake gui or with
-     the next command lines.
-     Remarks: type "cmake --help" for more information.
-    
-     ~$ mkdir Build
-     ~$ cd Build
-     ~$ mkdir ThirdParties
-     ~$ cd ThirdParties
-     ~$ cmake -G "Xcode" ../../ThirdParties
-     
-  6. Bu!ld and install in Xcode or like this:
+  3. After installing brew, do the following in terminal to Bu!ld and install Pcf :
+     Remarks, this operation depand of your hardware and can be very long
   
-     ~$ xcodebuild -target install -configuration Release
+     ~$ ./install_mac_os_x
   
-  7. Create Pcf project for your prefered ide or unix makefile (in this case Xcode) with CMake gui or with
-     the next command lines.
-     Remarks: type "cmake --help" for more information.
-    
-     ~$ cd ..
-     ~$ cmake -G "Xcode" ..
-     
-  8. Bu!ld and install in Xcode or like this:
-  
-     ~$ xcodebuild -target install -configuration Release
-  
-  9. Enjoy and be creative with Pcf ;-)
+  4. Enjoy and be creative with Pcf ;-)
   
 ______________________________________________________________________________________________________________
 

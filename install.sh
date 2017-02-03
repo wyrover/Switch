@@ -4,27 +4,6 @@ function ShowVersion() {
   echo ""
 }
 
-# Show install parameters usage
-ShowUsage() {
-  echo ""
-  echo "Usage"
-  echo ""
-  echo "  install [options]"
-  echo ""
-  echo "options"
-  echo "  -g, --generator <Generator> = cmake generator (for more information type 'cmake --help')"
-  echo "  -t, --targets <Targets>     = targets to install with specified Targets:"
-  echo "                                  * All           = All projects"
-  echo "                                  * Applications  = Applications projects"
-  echo "                                  * Libraries     = Libraries projects"
-  echo "                                  * ThirdParties  = ThirdParties projects"
-  echo "                                  * Documentation = Pcf Documentation"
-  echo ""
-  echo "Example:"
-  echo "  ../Sources/install.sh -g \"Eclipse CDT4 - Unix Makefiles\" -t All"
-  echo ""
-}
-
 # Check if an error occurred. If true exit with error.
 function CheckError() {
   "$@"
@@ -39,25 +18,54 @@ function CheckError() {
   return $status
 }
 
-# Make Project. Create build directory, generate project and build the specified target
-# $1 category (e.g. ThirdParties, Libraries, ...) that specify subdirectory for the target
-# $2 project the project name
-# $3 target the target to build
-function MakeProject() {
-  local category=$1
-  local project=$2
-  local target=$3
-  local configuration=$4
-  local currentFolder=`pwd`
-  mkdir -p $output_pah/$category/$project
-  cd $output_pah/$category/$project
-  CheckError cmake -G "$generator" ../../$sources_path/$category/$project/
-    case "$generator" in
-      "Xcode") CheckError xcodebuild -target $target -configuration $configuration;;
-      "Unix Makefiles") CheckError make $target;;
-    esac
-  cd $currentFolder
+function RemoveDirectory() {
+  CheckError rm -r $1
 }
+
+function CreateDirectory() {
+  CheckError mkdir -p $1
+}
+
+# Make Project. Create build directory, generate project and build the specified target
+function CreateDirectoryWithPermission() {
+  CheckError sudo mkdir -p $1
+  CheckError sudo chmod 777 $1
+}
+
+function Build() {
+  CheckError cmake -G "Xcode" $1
+  CheckError xcodebuild -target install -configuration Debug
+  CheckError xcodebuild -target install -configuration Release
+}
+
+function BuildDoc() {
+  CheckError cmake -G "Xcode" $1
+  CheckError xcodebuild -target documentation -configuration Debug
+  CheckError open Help/html/index.html
+}
+
+function InstallPackage {
+  brew update
+  brew install cmake
+  brew install curl
+  brew install doxygen
+  brew install jpeg
+  brew install libpng
+  brew install zlib
+}
+
+MakeDirectoryWithPermission usr/local/cmake
+installPackage
+RemoveDirectory Build
+CreateDirectory Build/ThirdParties
+CreateDirectory Build/Examples
+cd Build/ThirdParties
+Build ../../ThirdParties
+cd ..
+
+
+
+
 
 # Make target. Create build directory, generate project and build the specified project
 # $1 category (e.g. ThirdParties, Libraries, ...) that specify subdirectory for the target
