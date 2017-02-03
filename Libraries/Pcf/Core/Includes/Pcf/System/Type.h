@@ -145,7 +145,11 @@ namespace Pcf {
 #elif __linux__
 #define typeof pcf_typeof
 #else
-  using typeof = pcf_typeof;
+  template<typename T>
+  System::Type typeof() {return pcf_typeof<T>();}
+
+  template<typename T>
+  System::Type typeof(const T& value) {return pcf_typeof(value);}
 #endif
 }
 

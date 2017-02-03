@@ -79,8 +79,10 @@ namespace Pcf {
 // On windows byte and boolean have definition (with different type for boolean) in global scope so if a new definition in Pcf namespace and "using namepsace Pcf" activate in header file, there are a confict.
 // The solution remove using namespace Pcf, but it's not that I want to mimic .net Framework.
 
+/*
 /// @brief Represents a boolean.
 using boolean = bool;
+*/
 
 /// @brief Represents a 8-bit unsigned integer.
 using byte = uint8_t;
