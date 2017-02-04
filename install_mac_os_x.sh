@@ -18,8 +18,8 @@ function CheckError() {
 rm  -r Build
 sudo mkdir /usr/local/cmake
 sudo chmod 777 /usr/local/cmake
-mkdir -p Build/ThirdParties
 mkdir -p Build/Examples
+mkdir -p Build/ThirdParties
 
 brew update
 brew install cmake
