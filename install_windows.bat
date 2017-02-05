@@ -1,4 +1,7 @@
 @echo off
+echo "Install Pcf libraries version 0.2.0, copyright GAMMA Soft, 2017"
+echo ""
+
 del /q /s Build
 mkdir Build\Examples
 mkdir Build\ThirdParties
@@ -17,9 +20,8 @@ start Help/html/index.html
 "%VS140COMNTOOLS%\..\IDE\devenv" "Pcf.sln" /project install /build Release
 
 cd Build\Examples
-cd Build\ThirdParties
 cmake -G "Visual Studio 14 2015 Win64" -D CMAKE_INSTALL_PREFIX:STRING="C:/usr/local" ../../Examples
 "%VS140COMNTOOLS%\..\IDE\devenv" "Examples.sln" /project ALL_BUILD /build Release
-start Examples.xcodeproj
+start Examples.sln
 cd ..\..
 

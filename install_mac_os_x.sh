@@ -1,20 +1,6 @@
 echo "Install Pcf libraries version 0.2.0, copyright GAMMA Soft, 2017"
 echo ""
 
-function CheckError() {
-  "$@"
-  local status=$?
-  if [ $status -ne 0 ]; then
-    echo ""
-    echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" >&2
-    echo "! error $status with $1 $2 $3" >&2
-    echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" >&2
-    echo ""
-    exit
-  fi
-  return $status
-}
-
 rm  -r Build
 sudo mkdir /usr/local/cmake
 sudo chmod 777 /usr/local/cmake
@@ -35,14 +21,14 @@ xcodebuild -target install -configuration Debug
 xcodebuild -target install -configuration Release
 
 cd ..
-CheckError cmake -G "Xcode" ..
-CheckError xcodebuild -target documentation -configuration Debug
-CheckError open Help/html/index.html
-CheckError xcodebuild -target install -configuration Debug
-CheckError xcodebuild -target install -configuration Release
+cmake -G "Xcode" ..
+xcodebuild -target documentation -configuration Debug
+open Help/html/index.html
+xcodebuild -target install -configuration Debug
+xcodebuild -target install -configuration Release
 
 cd Examples
-CheckError cmake -G "Xcode" ../../Examples
-CheckError xcodebuild -target ALL_BUILD -configuration Release
-CheckError open Examples.xcodeproj
-CheckError cd ../..
+cmake -G "Xcode" ../../Examples
+xcodebuild -target ALL_BUILD -configuration Release
+open Examples.xcodeproj
+cd ../..
