@@ -123,7 +123,7 @@ namespace Pcf {
         /// @brief Signals that a participant has reached the barrier and waits for all other participants to reach the barrier as well, using a TimeSpan object to measure the time interval.
         /// @param timeout A TimeSpan that represents the number of milliseconds to wait, or a TimeSpan that represents -1 milliseconds to wait indefinitely.
         /// @return true if all other participants reached the barrier; otherwise, false.
-        bool SignalAndWait(const TimeSpan& timeout) {return this->SignalAndWait(as<int32>(timeout.TotalMilliseconds));}
+        bool SignalAndWait(const TimeSpan& timeout) {return this->SignalAndWait(as<int32>(timeout.TotalMilliseconds()));}
         
         /// @brief Signals that a participant has reached the barrier and waits for all other participants to reach the barrier as well, using a 32-bit signed integer to measure the timeout.
         /// @param millisecondsTimeout The number of milliseconds to wait, or Infinite(-1) to wait indefinitely.

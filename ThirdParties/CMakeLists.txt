@@ -6,6 +6,10 @@ if (APPLE)
   set(CMAKE_MACOSX_RPATH 1)
 endif()
 
+if(NOT CMAKE_DEBUG_POSTFIX)
+  set(CMAKE_DEBUG_POSTFIX d)
+endif()
+
 #________________________________________________________________________________
 #                                                                      call_stack
 find_package(call_stack QUIET)
