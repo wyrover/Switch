@@ -59,10 +59,9 @@ find_package(ZLIB QUIET)
 if (NOT ZLIB_FOUND)
   message(STATUS "Add ThirdParty zlib")
   add_subdirectory(zlib)
-  set(ZLIB_LIBRARIES zlibstatic)
-  set(ZLIB_LIBRARY zlibstatic)
+  set(ZLIB_LIBRARIES zlib)
+  set(ZLIB_LIBRARY zlib)
   set_target_properties(zlib PROPERTIES FOLDER ThirdParty)
-  set_target_properties(zlibstatic PROPERTIES FOLDER ThirdParty)
 endif()
 
 #________________________________________________________________________________
