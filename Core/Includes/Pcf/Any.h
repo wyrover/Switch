@@ -27,7 +27,7 @@ namespace Pcf {
   /// @par Examples
   /// This example sho ho to use Any:
   /// @include Any.cpp
-  class pcf_public Any : public object {
+  class pcf_public Any : public System::IComparable, public object {
     template <typename T, typename Bool>
     struct EnumOrOtherToAny {};
     
@@ -196,6 +196,35 @@ namespace Pcf {
       if(!this->HasValue)
         throw System::InvalidOperationException(pcf_current_information);
       return as<T>(this->value.ToObject());
+    }
+    
+    /// @brief Compares the current instance with another object of the same type.
+    /// @param obj An object to compare with this instance.
+    /// @return int32 A 32-bit signed integer that indicates the relative order of the objects being compared.
+    /// The return value has these meanings:
+    /// | Value             | Condition                          |
+    /// |-------------------|------------------------------------|
+    /// | Less than zero    | This instance is less than obj.    |
+    /// | Zero              | This instance is equal to obj.     |
+    /// | Greater than zero | This instance is greater than obj. |
+    int32 CompareTo(const IComparable& obj) const override {
+      if (!is<Any>(obj)) return -1;
+      return CompareTo(as<Any>(obj));
+    }
+    
+    /// @brief Compares the current instance with another object of the same type.
+    /// @param obj An object to compare with this instance.
+    /// @return int32 A 32-bit signed integer that indicates the relative order of the objects being compared.
+    /// The return value has these meanings:
+    /// | Value             | Condition                          |
+    /// |-------------------|------------------------------------|
+    /// | Less than zero    | This instance is less than obj.    |
+    /// | Zero              | This instance is equal to obj.     |
+    /// | Greater than zero | This instance is greater than obj. |
+    int32 CompareTo(const Any& obj) const {
+      if (this->value < obj.value) return -1;
+      if (this->value > obj.value) return 1;
+      return 0;
     }
     
     /// @brief Serves as a hash function for a particular type.
