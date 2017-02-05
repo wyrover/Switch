@@ -288,7 +288,7 @@ namespace Pcf {
         /// @exception ThreadStateExceptionError The caller attempted to join a thread that is in the ThreadStateUnstarted state.
         /// @exception ArgumentException timeout is a negative number other than -1 milliseconds, which represents
         /// @return an infinite time-out.  -or- timeout is greater than System::Int32.MaxValue.
-        bool Join(const TimeSpan& timeout) {return this->Join(timeout.TotalMilliseconds);}
+        bool Join(const TimeSpan& timeout) {return this->Join(as<int32>(inttimeout.TotalMilliseconds()));}
         
         /// @brief Resumes a thread that has been suspended (Should not be used).
         /// @exception ThreadStateException The thread has not been started, is dead, or is not in the suspended state.
@@ -315,7 +315,7 @@ namespace Pcf {
         /// @brief Suspends the current thread for a specified time.
         /// @param timeout A System::TimeSpan set to the amount of time for which the thread is blocked. Specify zero to indicate that this thread should be suspended to allow other waiting threads to execute. Specify System::Threading::Timeout.Infinite to block the thread indefinitely.
         /// @exception ArgumentException The value of timeout is negative and is not equal to System::Threading::Timeout.Infinite in milliseconds, or is greater than System::Int32.MaxValue milliseconds.
-        static void Sleep(const TimeSpan& timeout) {Sleep(timeout.TotalMilliseconds);}
+        static void Sleep(const TimeSpan& timeout) {Sleep(as<int32>(timeout.TotalMilliseconds()));}
         
         /// @brief Causes the operating system to change the state of the current instance to
         /// System::Threading::ThreadState.Running.

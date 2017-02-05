@@ -19,7 +19,7 @@ start Help/html/index.html
 "%VS140COMNTOOLS%\..\IDE\devenv" "Pcf.sln" /project install /build Debug
 "%VS140COMNTOOLS%\..\IDE\devenv" "Pcf.sln" /project install /build Release
 
-cd Build\Examples
+cd Examples
 cmake -G "Visual Studio 14 2015 Win64" -D CMAKE_INSTALL_PREFIX:STRING="C:/usr/local" ../../Examples
 "%VS140COMNTOOLS%\..\IDE\devenv" "Examples.sln" /project ALL_BUILD /build Release
 start Examples.sln

@@ -1,5 +1,0 @@
-var classtesting_1_1internal_1_1_default_per_thread_test_part_result_reporter =
-[
-    [ "DefaultPerThreadTestPartResultReporter", "classtesting_1_1internal_1_1_default_per_thread_test_part_result_reporter_a968a846e5a90d2ffea8b2ce2746099bd.html#a968a846e5a90d2ffea8b2ce2746099bd", null ],
-    [ "ReportTestPartResult", "classtesting_1_1internal_1_1_default_per_thread_test_part_result_reporter_a7e1f4fa56b88fc4f07c75eedc2ca3013.html#a7e1f4fa56b88fc4f07c75eedc2ca3013", null ]
-];

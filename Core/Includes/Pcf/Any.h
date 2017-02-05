@@ -318,12 +318,12 @@ namespace Pcf {
   
   template <>
   inline char Any::To<char>() const {
-    return as<System::Char>(this->value.ToObject());
+    return as<System::Char>((char32)this->value.ToObject());
   }
   
   template <>
   inline char16 Any::To<char16>() const {
-    return as<System::Char>(this->value.ToObject());
+    return as<System::Char>((char32)this->value.ToObject());
   }
   
   template <>
@@ -333,7 +333,7 @@ namespace Pcf {
   
   template <>
   inline wchar Any::To<wchar>() const {
-    return as<System::Char>(this->value.ToObject());
+    return as<System::Char>((char32)this->value.ToObject());
   }
   
   template <>

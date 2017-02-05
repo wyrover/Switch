@@ -224,7 +224,7 @@ namespace Pcf {
           /// @param timeout A TimeSpan that represents the number of milliseconds to wait, or a TimeSpan that represents -1 milliseconds to wait indefinitely.
           /// @return true if the Task completed execution within the allotted time; otherwise, false.
           /// @exception ArgumentOutOfRangeException timeout is a negative number other than -1 milliseconds, which represents an infinite time-out.
-          bool Wait(const TimeSpan& timeout) override {return this->Wait(timeout.TotalMilliseconds);}
+          bool Wait(const TimeSpan& timeout) override {return this->Wait(as<int32>(timeout.TotalMilliseconds()));}
           
           /// @brief Waits for all of the provided Task objects to complete execution.
           /// @param tasks An array of ITask instances on which to wait.
