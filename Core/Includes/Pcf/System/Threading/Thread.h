@@ -288,7 +288,7 @@ namespace Pcf {
         /// @exception ThreadStateExceptionError The caller attempted to join a thread that is in the ThreadStateUnstarted state.
         /// @exception ArgumentException timeout is a negative number other than -1 milliseconds, which represents
         /// @return an infinite time-out.  -or- timeout is greater than System::Int32.MaxValue.
-        bool Join(const TimeSpan& timeout) {return this->Join(as<int32>(inttimeout.TotalMilliseconds()));}
+        bool Join(const TimeSpan& timeout) {return this->Join(as<int32>(timeout.TotalMilliseconds()));}
         
         /// @brief Resumes a thread that has been suspended (Should not be used).
         /// @exception ThreadStateException The thread has not been started, is dead, or is not in the suspended state.
