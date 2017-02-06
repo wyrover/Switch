@@ -5,7 +5,7 @@ project(jpeg)
 if(PLATFORM_NAME STREQUAL "DESKTOP_OSX64")
   SET(CMAKE_C_FLAGS "-Wno-deprecated")
 elseif(MSVC)
-  set(CMAKE_C_FLAGS_DEBUG "/D_DEBUG /DDEBUG /MP /Oy- /Zi /Od /Zi /Oy- /RTC1 /wd4996")
+  set(CMAKE_C_FLAGS_DEBUG "/MDd /D_DEBUG /DDEBUG /MP /Oy- /Zi /Od /Zi /Oy- /RTC1 /wd4996")
   set(CMAKE_C_FLAGS_RELEASE "/O2 /Ob2 /Oy- /D NDEBUG /DRELEASE /wd4996")
 endif()
 
