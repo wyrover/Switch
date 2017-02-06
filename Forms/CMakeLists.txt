@@ -205,8 +205,7 @@ target_link_libraries(Pcf.Forms Pcf.Drawing ${STANDARD_GRAPHIC_LINK_LIBRARIES})
 set_target_properties(Pcf.Forms PROPERTIES FOLDER Pcf/Forms)
 
 install(TARGETS Pcf.Forms EXPORT Pcf DESTINATION lib)
-install(DIRECTORY "./Includes/."  DESTINATION include)
-
+install(DIRECTORY "Includes/Pcf/." DESTINATION include/Pcf)
 if(MSVC)
   target_compile_options(Pcf.Forms PRIVATE "$<$<CONFIG:Debug>:/Fd$<TARGET_FILE_DIR:Pcf.Forms>/Pcf.Forms${CMAKE_DEBUG_POSTFIX}.pdb>")
   target_compile_options(Pcf.Forms PRIVATE "$<$<CONFIG:Release>:/Fd$<TARGET_FILE_DIR:Pcf.Forms>/Pcf.Forms::pdb>")

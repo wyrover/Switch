@@ -48,8 +48,7 @@ target_link_libraries(Pcf.TUnit ${GTEST_LIBRARIES} Pcf.Core)
 set_target_properties(Pcf.TUnit PROPERTIES FOLDER Pcf/TUnit)
 
 install(TARGETS Pcf.TUnit EXPORT Pcf DESTINATION lib)
-install(DIRECTORY "Includes/."  DESTINATION include)
-
+install(DIRECTORY "Includes/Pcf/." DESTINATION include/Pcf)
 if(MSVC)
   target_compile_options(Pcf.TUnit PRIVATE "$<$<CONFIG:Debug>:/Fd$<TARGET_FILE_DIR:Pcf.TUnit>/Pcf.TUnit${CMAKE_DEBUG_POSTFIX}.pdb>")
   target_compile_options(Pcf.TUnit PRIVATE "$<$<CONFIG:Release>:/Fd$<TARGET_FILE_DIR:Pcf.TUnit>/Pcf.TUnit.pdb>")

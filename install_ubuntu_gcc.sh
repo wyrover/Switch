@@ -26,11 +26,11 @@ make install -j6
 cd ..
 cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ..
 make documentation -j6
-open Help/html/index.html
+xdg-open Help/html/index.html
 make install -j6
 
 cd Examples
 cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ../../Examples
-make ALL_BUILD -j6
+make -j6
 cd ../..
 

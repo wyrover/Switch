@@ -95,7 +95,7 @@ target_link_libraries(Pcf.Drawing ${JPEG_LIBRARIES} ${PNG_LIBRARIES} Pcf.Core)
 set_target_properties(Pcf.Drawing PROPERTIES FOLDER Pcf/Drawing)
 
 install(TARGETS Pcf.Drawing EXPORT Pcf DESTINATION lib)
-install(DIRECTORY "./Includes/." DESTINATION include)
+install(DIRECTORY "Includes/Pcf/." DESTINATION include/Pcf)
 if(MSVC)
   target_compile_options(Pcf.Drawing PRIVATE "$<$<CONFIG:Debug>:/Fd$<TARGET_FILE_DIR:Pcf.Drawing>/Pcf.Drawing${CMAKE_DEBUG_POSTFIX}.pdb>")
   target_compile_options(Pcf.Drawing PRIVATE "$<$<CONFIG:Release>:/Fd$<TARGET_FILE_DIR:Pcf.Drawing>/Pcf.Drawing::pdb>")
