@@ -5,9 +5,9 @@
 #include <cstdio>
 
 #include <zlib.h>
-#define HAVE_BOOLEAN  // Must be define because boolean definition is ambigous...
+//#define HAVE_BOOLEAN  // Must be define because boolean definition is ambigous...
 #include <jpeglib.h>
-#undef HAVE_BOOLEAN
+//#undef HAVE_BOOLEAN
 
 #include "Bmp.h"
 #include "Gif.h"
