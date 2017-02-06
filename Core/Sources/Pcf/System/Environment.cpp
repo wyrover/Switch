@@ -19,8 +19,11 @@
 using namespace System;
 using namespace System::Collections::Generic;
 
-//extern char** environ;
-__declspec(dllimport) extern char** environ;
+#if _WIN32
+  __declspec(dllimport) extern char** environ;
+#else
+  extern char** environ;
+#endif
 
 namespace {
   class ConsoleChangeCodePage {
