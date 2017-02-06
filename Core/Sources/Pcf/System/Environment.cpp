@@ -19,7 +19,8 @@
 using namespace System;
 using namespace System::Collections::Generic;
 
-extern char** environ;
+//extern char** environ;
+__declspec(dllimport) extern char** environ;
 
 namespace {
   class ConsoleChangeCodePage {

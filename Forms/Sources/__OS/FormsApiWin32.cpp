@@ -18,8 +18,10 @@ using namespace System::Windows::Forms;
 using namespace __OS;
 
 extern int main(int argc, char* argv[]);
-extern int __argc;
-extern char** __argv;
+//extern int __argc;
+//extern char** __argv;
+__declspec(dllimport) extern int __argc;
+__declspec(dllimport) extern char** __argv;
 
 namespace {
   Drawing::Rectangle GetFormBounds(const System::Windows::Forms::Form& form);
