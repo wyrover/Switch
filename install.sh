@@ -5,13 +5,9 @@ if [[ "$OSTYPE" == *"Darwin"* ]]; then
 else
   OSTYPE=`lsb_release -si`
   case "$OSTYPE" in
-    *"Ubuntu"*) echo "Install on Ubuntu";;
-    *"CentOS"*) echo "Install on CentOs";;
-    *) echo "Install on Generic linux";;
+    *"Ubuntu"*) ./install_ubuntu_gcc.sh;;
+    *"CentOS"*) ./install_centos_gcc.sh;;
+    *) ./install_linux_gcc.sh;;
   esac
 fi
-
-#    *"Ubuntu"*) ./install_ubuntu_gcc.sh;;
-#    *"CentOS"*) ./install_centos_gcc.sh;;
-#    *) ./install_linux_gcc.sh;;
 
