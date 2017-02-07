@@ -21,7 +21,7 @@ start Help/html/index.html
 
 cd Examples
 cmake -G "Visual Studio 14 2015 Win64" -D CMAKE_INSTALL_PREFIX:STRING="C:/usr/local" ../../Examples
-"%VS140COMNTOOLS%\..\IDE\devenv" "Examples.sln" /project ALL_BUILD /build Release
+rem "%VS140COMNTOOLS%\..\IDE\devenv" "Examples.sln" /project ALL_BUILD /build Release
 start Examples.sln
 cd ..\..
 

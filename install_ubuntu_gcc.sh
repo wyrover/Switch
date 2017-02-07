@@ -30,7 +30,7 @@ xdg-open Help/html/index.html
 make install -j6
 
 cd Examples
-cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ../../Examples
+#cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ../../Examples
 make -j6
 cd ../..
 
