@@ -1,5 +1,5 @@
-CentOS
-------
+CentOS 7 or later
+-----------------
 
   1. Install Gcc 6.1 or later
 
