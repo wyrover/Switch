@@ -1,5 +1,5 @@
 OSTYPE=`uname -a`
-if [[ $OSTYPE == *"darwin"* ]]; then
+if [[ "$OSTYPE" == *"darwin"* ]]; then
   echo "Install on Mac os X"
   #./install_macosx_xcode.sh
 else
