@@ -1,9 +1,9 @@
 CentOS
 ------
 
-  1. Install Gcc 6.1
+  1. Install Gcc 6.1 or later
 
-     In order to build Pcf, you first need download and install Gcc 6.1.
+     In order to build Pcf, you first need download and install Gcc 6.1 or later.
      Remarks: Verify if you can execute gcc --version in terminal.
 
   2. After installing Gcc, do the following in "Terminal" to Build and install Pcf :
@@ -42,9 +42,9 @@ ________________________________________________________________________________
 Ubuntu 16.04 or later
 ---------------------
 
-  1. Install Gcc 6.1
+  1. Install Gcc 6.1 or later
 
-     In order to build Pcf, you first need download and install Gcc 6.1.
+     In order to build Pcf, you first need download and install Gcc 6.1 or later.
      Remarks: Verify if you can execute gcc --version in terminal.
 
   2. After installing Gcc, do the following in "Terminal" to Build and install Pcf :
