@@ -21,13 +21,13 @@ cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ../../ThirdParties
 make install -j6
 
 cd ..
-#cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ..
-#make documentation -j6
-#xdg-open Help/html/index.html
-#make install -j6
+cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ..
+make documentation -j6
+xdg-open Help/html/index.html
+make install -j6
 
 cd Examples
-#cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ../../Examples
+cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ../../Examples
 #make -j6
 cd ../..
 

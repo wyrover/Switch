@@ -29,6 +29,6 @@ xcodebuild -target install -configuration Release
 
 cd Examples
 cmake -G "Xcode" ../../Examples
-xcodebuild -target ALL_BUILD -configuration Release
+#xcodebuild -target ALL_BUILD -configuration Release
 open Examples.xcodeproj
 cd ../..
