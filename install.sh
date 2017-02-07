@@ -1,7 +1,6 @@
 OSTYPE=`uname -a`
 if [[ "$OSTYPE" == *"Darwin"* ]]; then
-  echo "Install on Mac os X"
-  #./install_macosx_xcode.sh
+  ./install_macosx_xcode.sh
 else
   OSTYPE=`lsb_release -si`
   case "$OSTYPE" in
