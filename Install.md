@@ -1,53 +1,84 @@
-CentOS
-------
+CentOS 7 or later
+-----------------
+
+  1. Install Gcc 6.1 or later
+
+     In order to build Pcf, you first need download and install Gcc 6.1 or later.
+     Remarks: Verify if you can execute gcc --version in terminal.
+
+  2. After installing Gcc, do the following in "Terminal" to Build and install Pcf :
+     Remarks, this operation depand of your hardware and can be very long
   
+     ~$ cd FolderWherePcfIsDownloaded/
+     ~$ ./install.sh
+  
+  4. Enjoy and be creative with Pcf ;-)
+
 ______________________________________________________________________________________________________________
 
-Mac Os X
---------
+Mac Os X 10.12 or later
+-----------------------
 
-  1. Install pre-requisites
+  1. Install Xcode
 
-     In order to build Pcf, you first need to install the latest version curl, jpeg, pnglib and zlib. 
+     In order to build Pcf, you first need download and install Xcode from App Store and install "Commands line tools".
+     Remarks: Verify if you can execute clang --version in terminal.
+
+  2. Install Homebrew
+
+     After Xcode, to build Pcf, you need to install the latest version cmake, curl, doxygen, jpeg, pnglib and zlib, ... 
      The easiest way to get this is from Homebrew (http://brew.sh/).
 
-  2. After installing brew, do the following:
-
-     ~$ brew install curl
-     ~$ brew install jpeg
-     ~$ brew install pnglib
-     ~$ brew install zlib
-
-  3. Install CMake
-
-     To build Pcf in your favvorite IDE, download and install CMake from https://cmake.org/
-     Remarks: The minimum version of used is 3.5.
-
-  4. Create cmake folder in usr/local with administrator privilege:
-
-     ~$ sudo mkdir /usr/local/cmake
-
-  5. Create you project for your prefered ide or unix makefile (in this case Xcode) with CMake gui or with
-     the next command lines.
-     Remarks: type "cmake --help" for more information.
-    
-     ~$ mkdir Build
-     ~$ cd Build
-     ~$ cmake -G "Xcode" ..
-     
-  6. Bu!ld and install in Xcode or like this:
+  3. After installing brew, do the following in "Terminal" to Build and install Pcf :
+     Remarks, this operation depand of your hardware and can be very long
   
-     ~$ xcodebuild -target install -configuration Release
+     ~$ cd FolderWherePcfIsDownloaded/
+     ~$ ./install.sh
   
-  7. Enjoy and be creative with Pcf ;-)
+  4. Enjoy and be creative with Pcf ;-)
   
 ______________________________________________________________________________________________________________
 
-Ubuntu
-------
+Ubuntu 16.04 or later
+---------------------
+
+  1. Install Gcc 6.1 or later
+
+     In order to build Pcf, you first need download and install Gcc 6.1 or later.
+     Remarks: Verify if you can execute gcc --version in terminal.
+
+  2. After installing Gcc, do the following in "Terminal" to Build and install Pcf :
+     Remarks, this operation depand of your hardware and can be very long
+  
+     ~$ cd FolderWherePcfIsDownloaded/
+     ~$ ./install.sh
+  
+  4. Enjoy and be creative with Pcf ;-)
 
 ______________________________________________________________________________________________________________
 
-Windows
--------
+Windows 10 or later
+-------------------
 
+  1. Install Microsoft Visual Studio 2015
+
+     In order to build Pcf, you first need download and install Microsoft Visual Studio 2015 from https://www.microsoft.com/en-us/download/details.aspx?id=48146.
+
+  2. Install CMake
+
+     After Microsoft Visual Studio 2015, to build Pcf, you need to install the latest version cmake from https://cmake.org/download/
+     Remarks: Verify if you can execute cmake --version in "Command Prompt", if it's no, add cmake install directory to your path.
+
+  2. Install Doxygen
+
+     After CMake, to generate Pcf documentation, you need to install the latest version Doxygen from https://cmake.org/download/
+     Remarks: Verify if you can execute doxygen --version in "Command Prompt", if it's no, add doxygen install directory to your path.
+
+  3. After installing Microsoft Visual Studio, Cmake and Doxygen, do the following in "Command prompt" to Build and install Pcf :
+     Remarks, this operation depand of your hardware and can be very long
+  
+     C:\Users\You> cd FolderWherePcfIsDownloaded\
+     C:\Users\You\FolderWherePcfIsDownloaded> install.bat
+  
+  4. Enjoy and be creative with Pcf ;-)
+  
