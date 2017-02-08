@@ -109,6 +109,8 @@ set(SOURCE_FILES
   Pcf/MoveTest.cpp
   Pcf/NativesTest.cpp
   Pcf/PropertyTest.cpp
+  Pcf/PropertyReadOnlyTest.cpp
+  Pcf/PropertyWriteOnlyTest.cpp
   Pcf/ReferenceUT.cpp
   Pcf/SharedPointerUT.cpp
   Pcf/TestTest.cpp
