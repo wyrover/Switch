@@ -77,7 +77,7 @@ namespace PcfUnitTests {
     class PropertyTestClass {
     public:
       PropertyTestClass() {}
-      PropertyTestClass(const PropertyTestClass& propertyReadOnly) : name(propertyReadOnly.name) {}
+      PropertyTestClass(const PropertyTestClass& property) : name(property.name) {}
       
       Property<string, ReadOnly> Name {
         pcf_get {return this->name;}

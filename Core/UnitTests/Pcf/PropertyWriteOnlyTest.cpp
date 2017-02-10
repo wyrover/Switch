@@ -24,82 +24,64 @@ namespace PcfUnitTests {
       Assert::IsTrue(Property<int, WriteOnly>::CanWrite, pcf_current_information);
     }
     
-    void CreatePropertyAndGetItWithImplicitCastOperator() {
+    void CreatePropertyAndSetItWithEqualOperator() {
       int32 v = 42;
-      Property<int32, ReadOnly> Value {
-        pcf_get {return v;}
+      Property<int32, WriteOnly> Value {
+        pcf_set {v = value;}
       };
-      
-      Assert::AreEqual(42, v, pcf_current_information);
-      Assert::AreEqual(42, Value, pcf_current_information);
+
+      Value = 24;
+      Assert::AreEqual(24, v, pcf_current_information);
     }
     
-    void CreatePropertyAndGetItWithGetFunction() {
+    void CreatePropertyAndSetItWithSetFunction() {
       int32 v = 42;
-      Property<int32, ReadOnly> Value {
-        pcf_get {return v;}
+      Property<int32, WriteOnly> Value {
+        pcf_set {v = value;}
       };
       
-      Assert::AreEqual(42, v, pcf_current_information);
-      Assert::AreEqual(42, Value.Get(), pcf_current_information);
+      Value.Set(24);
+      Assert::AreEqual(24, v, pcf_current_information);
     }
     
-    void CreatePropertyAndGetItWithFunctor() {
+    void CreatePropertyAndSetItWithFunctor() {
       int32 v = 42;
-      Property<int32, ReadOnly> Value {
-        pcf_get {return v;}
+      Property<int32, WriteOnly> Value {
+        pcf_set {v = value;}
       };
       
-      Assert::AreEqual(42, v, pcf_current_information);
-      Assert::AreEqual(42, Value(), pcf_current_information);
-    }
-    
-    void PropertyEqualityOperator() {
-      int32 v = 42;
-      Property<int32, ReadOnly> Value {
-        pcf_get {return v;}
-      };
-      
-      Assert::IsTrue(Value == 42, pcf_current_information);
-      Assert::IsFalse(Value == 24, pcf_current_information);
-    }
-    
-    void PropertyInequalityOperator() {
-      int32 v = 42;
-      Property<int32, ReadOnly> Value {
-        pcf_get {return v;}
-      };
-      
-      Assert::IsTrue(Value != 24, pcf_current_information);
-      Assert::IsFalse(Value != 42, pcf_current_information);
+      Value(24);
+      Assert::AreEqual(24, v, pcf_current_information);
     }
     
     class PropertyTestClass {
     public:
       PropertyTestClass() {}
-      PropertyTestClass(const PropertyTestClass& propertyReadOnly) : name(propertyReadOnly.name) {}
+      PropertyTestClass(const PropertyTestClass& property) : name(property.name) {}
       
-      Property<string, ReadOnly> Name {
-        pcf_get {return this->name;}
+      Property<string, WriteOnly> Name {
+        pcf_set {this->name = value;}
       };
       
-    private:
+    public:
       string name = "Test property";
     };
     
     void PropertyCopyConstructor() {
       UniquePointer<PropertyTestClass> p1 = UniquePointer<PropertyTestClass>::Create();
       UniquePointer<PropertyTestClass> p2 = UniquePointer<PropertyTestClass>::Create(*p1);
+      p2->Name = "Other Value";
       p1 = null;
-      Assert::AreEqual("Test property", p2->Name, pcf_current_information);
+      Assert::AreEqual("Other Value", p2->name, pcf_current_information);
     }
     
     void PropertyEqualOperator() {
       UniquePointer<PropertyTestClass> p1 = UniquePointer<PropertyTestClass>::Create();
       UniquePointer<PropertyTestClass> p2 = UniquePointer<PropertyTestClass>::Create();
       *p2 = *p1;
+      p2->Name = "Other Value";
       p1 = null;
-      Assert::AreEqual("Test property", p2->Name, pcf_current_information);
+      Assert::AreEqual("Other Value", p2->name, pcf_current_information);
     }
   };
   
@@ -107,11 +89,9 @@ namespace PcfUnitTests {
   pcf_test(PropertyWriteOnlyTest, WriteOnlyCanWrite)
   pcf_test(PropertyWriteOnlyTest, PropertyCanRead)
   pcf_test(PropertyWriteOnlyTest, PropertyCanWrite)
-  pcf_test(PropertyWriteOnlyTest, CreatePropertyAndGetItWithImplicitCastOperator)
-  pcf_test(PropertyWriteOnlyTest, CreatePropertyAndGetItWithGetFunction)
-  pcf_test(PropertyWriteOnlyTest, CreatePropertyAndGetItWithFunctor)
-  pcf_test(PropertyWriteOnlyTest, PropertyEqualityOperator)
-  pcf_test(PropertyWriteOnlyTest, PropertyInequalityOperator)
+  pcf_test(PropertyWriteOnlyTest, CreatePropertyAndSetItWithEqualOperator)
+  pcf_test(PropertyWriteOnlyTest, CreatePropertyAndSetItWithSetFunction)
+  pcf_test(PropertyWriteOnlyTest, CreatePropertyAndSetItWithFunctor)
   pcf_test(PropertyWriteOnlyTest, PropertyCopyConstructor)
   pcf_test(PropertyWriteOnlyTest, PropertyEqualOperator)
 }
