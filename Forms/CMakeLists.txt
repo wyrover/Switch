@@ -104,8 +104,6 @@ set(include_files
 ./Includes/Pcf/System/Windows.h
 ./Includes/Pcf/System.h
 ./Includes/Pcf/Forms.h
-./Includes/Pcf/Pcf
-./Includes/Pcf/Pcf.h
 )
 
 # Add source files here:

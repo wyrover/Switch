@@ -32,8 +32,6 @@ set(INCLUDE_FILES
   Includes/Pcf/System/Drawing/Text.h
   Includes/Pcf/System/Drawing.h
   Includes/Pcf/Drawing.h
-  Includes/Pcf/Pcf
-  Includes/Pcf/Pcf.h
 )
 
 set(SOURCE_FILES

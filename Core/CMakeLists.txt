@@ -422,8 +422,6 @@ set(INCLUDE_FILES
   Includes/Pcf/Using.h
   Includes/Pcf/Var.h
   Includes/Pcf/Core.h
-  Includes/Pcf/Pcf
-  Includes/Pcf/Pcf.h
 )
 
 set(SOURCE_FILES

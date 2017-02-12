@@ -1,4 +1,11 @@
-#include <Pcf/Pcf>
+#include <Pcf/System/Windows/Forms/Application.h>
+#include <Pcf/System/Windows/Forms/Button.h>
+#include <Pcf/System/Windows/Forms/CheckBox.h>
+#include <Pcf/System/Windows/Forms/Form.h>
+#include <Pcf/System/Windows/Forms/Label.h>
+#include <Pcf/System/Windows/Forms/RadioButton.h>
+#include <Pcf/System/Windows/Forms/SystemInformation.h>
+#include <Pcf/Startup.h>
 
 using namespace System;
 using namespace System::Windows::Forms;

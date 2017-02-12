@@ -13,8 +13,6 @@ set(INCLUDE_FILES
   Includes/Pcf/TUnit/Expect.h
   Includes/Pcf/TUnit/Is.h
   Includes/Pcf/TUnit/TestFixture.h
-  Includes/Pcf/Pcf
-  Includes/Pcf/Pcf.h
   Includes/Pcf/TUnit.h
 )
 
