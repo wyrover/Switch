@@ -71,41 +71,7 @@ namespace Pcf {
   bool is(UniquePointer<T>& value) {
     return value.template Is<TT>();
   }
-  
-  /// @brief Return true if specified value is the specified Type. A Is expression takes the following form:
-  /// @par Examples
-  /// @code
-  /// System::Int32 i = 0;
-  /// bool isInt32 = is<System::Int32>(i);
-  /// @endcode
-  /// @see Pcf::System::Type
-  /// @ingroup Pcf
-  template<typename TT, typename T>
-  bool is(const T& value) {
-    try {
-      return dynamic_cast<const TT*>(&value) != null;
-    } catch (const std::bad_cast&) {
-      return false;
-    }
-  }
-  
-  /// @brief Return true if specified value is the specified Type. A Is expression takes the following form:
-  /// @par Examples
-  /// @code
-  /// System::Int32 i = 0;
-  /// bool isInt32 = is<System::Int32>(i);
-  /// @endcode
-  /// @see Pcf::System::Type
-  /// @ingroup Pcf
-  template<typename TT, typename T>
-  bool is(T& value) {
-    try {
-      return dynamic_cast<TT*>(&value) != null;
-    } catch (const std::bad_cast&) {
-      return false;
-    }
-  }
-  
+
   /// @brief Return true if specified value is the specified Type. A Is expression takes the following form:
   /// @par Examples
   /// @code
@@ -124,7 +90,7 @@ namespace Pcf {
       return false;
     }
   }
-  
+
   /// @brief Return true if specified value is the specified Type. A Is expression takes the following form:
   /// @par Examples
   /// @code
@@ -141,6 +107,32 @@ namespace Pcf {
     } catch(const std::bad_cast&) {
       return false;
     }
+  }
+
+  /// @brief Return true if specified value is the specified Type. A Is expression takes the following form:
+  /// @par Examples
+  /// @code
+  /// System::Int32 i = 0;
+  /// bool isInt32 = is<System::Int32>(i);
+  /// @endcode
+  /// @see Pcf::System::Type
+  /// @ingroup Pcf
+  template<typename TT, typename T>
+  bool is(const T& value) {
+    return is<TT>(&value);
+  }
+  
+  /// @brief Return true if specified value is the specified Type. A Is expression takes the following form:
+  /// @par Examples
+  /// @code
+  /// System::Int32 i = 0;
+  /// bool isInt32 = is<System::Int32>(i);
+  /// @endcode
+  /// @see Pcf::System::Type
+  /// @ingroup Pcf
+  template<typename TT, typename T>
+  bool is(T& value) {
+    return is<TT>(&value);
   }
 }
 

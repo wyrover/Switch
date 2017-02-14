@@ -183,6 +183,7 @@ namespace {
     AutoResetEvent mEvent;
   };
 
+  /*
   void ThreadingHelper::PushThread(const Object& args) {
     int32 index = 0;
     ThreadingHelper *threadingHelper = &(ThreadingHelper&)args;
@@ -210,7 +211,6 @@ namespace {
     EXPECT_EQ(index, 10);
   }
 
-  /*
   TEST(Stack, Threading) {
     ThreadingHelper threadingHelper;
   

@@ -143,7 +143,7 @@ byte Single::ToByte(const IFormatProvider&) const {
   if (this->value > Byte::MaxValue)
     throw OverflowException(pcf_current_information);
   
-    return (sbyte)Math::Round(this->value);
+  return (sbyte)Math::Round(this->value);
 }
 
 char32 Single::ToChar(const IFormatProvider&) const {

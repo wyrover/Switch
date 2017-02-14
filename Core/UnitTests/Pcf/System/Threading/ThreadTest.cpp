@@ -57,9 +57,10 @@ namespace {
         Assert::DoesNotThrows(pcf_delegate {thread.Name = "Main";}, pcf_current_information);
         Assert::AreEqual("Main", thread.Name, pcf_current_information);
         hasMainThreadNamedOnlyOnce = true;
-      } else
+      } else {
         Assert::AreEqual("Main", thread.Name, pcf_current_information);
         Assert::Throws<InvalidOperationException>(pcf_delegate {thread.Name = "";}, pcf_current_information);
+      }
     }
     
     void GetMainThreadThenSetPriority() {

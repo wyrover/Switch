@@ -116,14 +116,14 @@ namespace Pcf {
         }
         
         bool Wait(int32 millisecondsTimeOut) override {
-          if (this->mutex.IsNull())
+          if (this->mutex.IsNull() == true)
             throw ObjectClosedException(pcf_current_information);
-            if (millisecondsTimeOut < -1)
-              throw ArgumentOutOfRangeException(pcf_current_information);
-              if (millisecondsTimeOut == -1) {
-                this->mutex->lock();
-                return true;
-              }
+          if (millisecondsTimeOut < -1)
+            throw ArgumentOutOfRangeException(pcf_current_information);
+          if (millisecondsTimeOut == -1) {
+            this->mutex->lock();
+            return true;
+          }
           return this->mutex->try_lock_for(std::chrono::milliseconds(millisecondsTimeOut));
         }
 

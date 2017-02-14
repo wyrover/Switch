@@ -531,8 +531,8 @@ namespace Pcf { namespace System { namespace Threading { namespace Tasks {
     [] {
       if (__opaque_task_id_generator__::currentId == 0)
         return Nullable<int32>();
-        return Nullable<int32>(__opaque_task_id_generator__::currentId);
-        }
+      return Nullable<int32>(__opaque_task_id_generator__::currentId);
+    }
   };
   
   template<typename TResult>

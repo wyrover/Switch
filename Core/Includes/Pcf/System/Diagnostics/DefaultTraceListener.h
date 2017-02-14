@@ -24,19 +24,19 @@ namespace Pcf {
         ~DefaultTraceListener() {this->Flush();}
         /// @endcond
 
-        void Flush() override  {
-          if (this->data->messageLine != "")
+        void Flush() override {
+          if (!this->data->messageLine.IsEmpty())
             this->WriteLine("");
-            if (this->data->logWriter != null)
-              this->data->logWriter->Flush();
+          if (this->data->logWriter != null)
+            this->data->logWriter->Flush();
          }
         
         /// @brief When overridden in a derived class, writes the specified msg to the listener you create in the derived class.
-        void Write(const String& message) override  {
+        void Write(const String& message) override {
 #if defined(DEBUG) || defined(TRACE)
-          if (this->NeedIndent)
+          if (this->NeedIndent == true)
             this->WriteIndent();
-            this->data->messageLine += message;
+          this->data->messageLine += message;
           if (this->data->logWriter != null)
             this->data->logWriter->Write(message);
 #endif
@@ -45,13 +45,13 @@ namespace Pcf {
         /// @brief When overridden in a derived class, writes a msg to the listener you create in the derived class, followed by a line terminator.
         void WriteLine(const String& message) override {
 #if defined(DEBUG) || defined(TRACE)
-          if (this->NeedIndent)
+          if (this->NeedIndent == true)
             this->WriteIndent();
-            WriteToOutputDebug(string::Format("{0}{1}{2}", this->data->messageLine, message, Environment::NewLine));
-            this->data->messageLine = "";
+          WriteToOutputDebug(string::Format("{0}{1}{2}", this->data->messageLine, message, Environment::NewLine));
+          this->data->messageLine = "";
           if (this->data->logWriter != null)
             this->data->logWriter->WriteLine(message);
-            this->NeedIndent = true;
+          this->NeedIndent = true;
 #endif
         }
         

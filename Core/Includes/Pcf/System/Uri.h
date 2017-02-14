@@ -401,28 +401,28 @@ namespace Pcf {
       Property<Array<String>, ReadOnly> Segments {
         pcf_get {
           String absolutePath = this->AbsolutePath();
-          if (String::IsNullOrEmpty(absolutePath))
+          if (string::IsNullOrEmpty(absolutePath) == true)
             return Array<String>();
 
-            Array<String> segments;
-            int32 startIndex = 0;
-            int32 length = 1;
+          Array<String> segments;
+          int32 startIndex = 0;
+          int32 length = 1;
             
-            if (absolutePath[startIndex] == '/') {
-              Array<String>::Resize(segments, segments.Length+1);
-              segments[segments.Length-1] = absolutePath.Substring(startIndex, length);
-              startIndex += length;
-            }
+          if (absolutePath[startIndex] == '/') {
+            Array<String>::Resize(segments, segments.Length+1);
+            segments[segments.Length-1] = absolutePath.Substring(startIndex, length);
+            startIndex += length;
+          }
             
-            while (startIndex < absolutePath.Length()) {
-              length = absolutePath.IndexOf('/', startIndex);
-              if (length == -1)
-                length = absolutePath.Length() - startIndex;
+          while (startIndex < absolutePath.Length()) {
+            length = absolutePath.IndexOf('/', startIndex);
+            if (length == -1)
+              length = absolutePath.Length() - startIndex;
                 
-              Array<String>::Resize(segments, segments.Length+1);
-              segments[segments.Length-1] = absolutePath.Substring(startIndex, length);
-              startIndex += length;
-           }
+            Array<String>::Resize(segments, segments.Length+1);
+            segments[segments.Length-1] = absolutePath.Substring(startIndex, length);
+            startIndex += length;
+          }
           return segments;
         }
       };
