@@ -9,7 +9,7 @@
 #include "../../__OS/CoreApi.h"
 
 namespace {
-  // This is hack is necessary in windows because std::cout does not work properly with Utf8 and unicode code page
+  // This hack is necessary in windows because std::cout does not work properly with Utf8 and unicode code page
   // Moreover std::cout on Windows is very slow.
   // printf work correctly...
   std::ostream& operator<<(std::ostream& output, const char* value) {

@@ -4,6 +4,8 @@
 
 #include "../Property.h"
 #include "../Types.h"
+#include "ArgumentException.h"
+#include "ArgumentOutOfRangeException.h"
 #include "ICloneable.h"
 #include "IComparable.h"
 #include "Runtime/Serialization/ISerializable.h"
@@ -22,7 +24,7 @@ namespace Pcf {
       /// @remarks Version is initialized with default values :
       /// - Major = 0,
       /// - Minor = 0,
-      Version();
+      Version() {}
 
       #undef major
       #undef minor
@@ -30,22 +32,31 @@ namespace Pcf {
       /// @param major The major version number.
       /// @param minor The minor version number.
       /// @exception ArgumentOutOfRangeException major or minor is less than zero.
-      Version(int32 major, int32 minor);
-
+      Version(int32 major, int32 minor) : major(major), minor(minor) {
+        if (major < 0 || minor < 0)
+          throw ArgumentOutOfRangeException(pcf_current_information);
+      }
+      
       /// @brief Initializes a new instance of the Version class using the specified major, minor and build values.
       /// @param major The major version number.
       /// @param minor The minor version number.
       /// @param build The build version number.
       /// @exception ArgumentOutOfRangeException major, minor or build is less than zero.
-      Version(int32 major, int32 minor, int32 build);
-
+      Version(int32 major, int32 minor, int32 build) : major(major), minor(minor), build(build) {
+        if (major < 0 || minor < 0 || build < 0)
+          throw ArgumentOutOfRangeException(pcf_current_information);
+      }
+      
       /// @brief Initializes a new instance of the Version class using the specified major, minor, build and revision values.
       /// @param major The major version number.
       /// @param minor The minor version number.
       /// @param build The build version number.
       /// @param revision The revision version number.
       /// @exception ArgumentOutOfRangeException major, minor, build or revision is less than zero.
-      Version(int32 major, int32 minor, int32 build, int32 revision);
+      Version(int32 major, int32 minor, int32 build, int32 revision) : major(major), minor(minor), build(build), revision(revision) {
+        if (major < 0 || minor < 0 || build < 0 || revision < 0)
+          throw ArgumentOutOfRangeException(pcf_current_information);
+      }
       
       /// @cond
       Version(const Version& version) : major(version.major), minor(version.minor), build(version.build), revision(version.revision) {}
@@ -104,7 +115,7 @@ namespace Pcf {
 
       /// @brief Returns a new Version object whose value is the same as the current Version object.
       /// @return object* A new object whose values are a copy of the current Version object.
-      up<object> Clone() const override;
+      up<object> Clone() const override {return new Version(*this);}
 
       /// @brief Compares the current Version object to a specified object and returns an indication of their relative values.
       /// @param obj An object to compare with this instance.
@@ -112,8 +123,12 @@ namespace Pcf {
       /// Less than zero      This instance is less than obj.
       /// Zero                This instance is equal to obj.
       /// Greater than zero   This instance is greater than obj.
-      int32 CompareTo(const IComparable& obj) const override;
-
+      int32 CompareTo(const IComparable& obj) const override {
+        if (!is<Version>(obj))
+          return 1;
+        return CompareTo((const Version &)obj);
+      }
+      
       /// @brief Compares the current Version object to a specified object and returns an indication of their relative values.
       /// @param value An Version to compare with this instance.
       /// @return int32 A 32-bit signed integer that indicates the relative order of the objects being compared. The return value has these meanings:
@@ -125,25 +140,53 @@ namespace Pcf {
       /// @brief Determines whether this instance of Version and a specified object, which must also be a Version object, have the same value.
       /// @param value The Version to compare with the current object.
       /// @return bool true if the specified value is equal to the current object. otherwise, false.
-      bool Equals(const Version& value) const;
+      bool Equals(const Version& value) const {return CompareTo(value) == 0;}
 
       /// @brief Determines whether this instance of Version and a specified object, which must also be a Version object, have the same value.
       /// @param obj The object to compare with the current object.
       /// @return bool true if the specified object is equal to the current object. otherwise, false.
-      bool Equals(const object& obj) const override;
-
+      bool Equals(const object& obj) const override {
+        if (!is<Version>(obj))
+          return false;
+        return Equals((const Version&)obj);
+      }
+      
       /// @brief Serves as a hash function for a particular type.
       /// @return int32 A hash code for the current object.
       int32 GetHashCode() const override;
-
-      /// @brief Returns a string that represents the current object.
-      /// @return string A string that represents the current object.
-      String ToString() const override;
-
+      
       /// @brief Parse a version string and fill the object
       /// @param version The string version
       /// @return Version a Version object
-      static Version Parse(const String& version);
+      static Version Parse(const String& version) {
+        Array<String> versions = version.Split('.', StringSplitOptions(StringSplitOptions::RemoveEmptyEntries));
+        switch (versions.Length()) {
+          case 2: return Version(Convert::ToInt32(versions[0]), Convert::ToInt32(versions[1]));
+          case 3: return Version(Convert::ToInt32(versions[0]), Convert::ToInt32(versions[1]), Convert::ToInt32(versions[2]));;
+          case 4: return Version(Convert::ToInt32(versions[0]), Convert::ToInt32(versions[1]), Convert::ToInt32(versions[2]), Convert::ToInt32(versions[3]));
+        }
+        throw ArgumentException(pcf_current_information);
+      }
+      
+      /// @brief Returns a string that represents the current object.
+      /// @return string A string that represents the current object.
+      String ToString() const override {return ToString(2 + (this->build != -1 ? 1 : 0) + (this->revision != -1 ? 1 : 0));}
+      
+      String ToString(int32 fieldCount) const {
+        if (fieldCount < 0 || fieldCount> 4 || (fieldCount >= 3 && this->build == -1) || (fieldCount == 4 && this->revision == -1))
+          throw ArgumentOutOfRangeException(pcf_current_information);
+        string result;
+        if (fieldCount >= 1)
+          result += string::Format("{0}", this->major);
+        if (fieldCount >= 2)
+          result += string::Format(".{0}", this->minor);
+        if (fieldCount >= 3)
+          result += string::Format(".{0}", this->build);
+        if (fieldCount == 4)
+          result += string::Format(".{0}", this->revision);
+        return result;
+      }
+
 
       void GetObjectData(System::Runtime::Serialization::SerializationInfo& info) const override;
 
