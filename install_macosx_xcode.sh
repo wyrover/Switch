@@ -8,6 +8,7 @@ mkdir -p Build/Examples
 mkdir -p Build/ThirdParties
 
 brew update
+brew upgrade
 brew install cmake
 brew install curl
 brew install doxygen

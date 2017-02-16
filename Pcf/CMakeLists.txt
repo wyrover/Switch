@@ -13,6 +13,6 @@ target_include_directories(Pcf INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURC
 
 add_custom_target(Pcf.Includes ALL SOURCES ${INCLUDE_FILES})
 
-install(FILES Includes/Pcf/Pcf.h DESTINATION include/Pcf)
+install(FILES Includes/Pcf/Pcf Includes/Pcf/Pcf.h DESTINATION include/Pcf)
 
 set_target_properties(Pcf.Includes PROPERTIES FOLDER Pcf/Pcf)
