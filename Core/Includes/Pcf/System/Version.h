@@ -135,8 +135,18 @@ namespace Pcf {
       /// Less than zero      This instance is less than value.
       /// Zero                This instance is equal to value.
       /// Greater than zero   This instance is greater than value.
-      int32 CompareTo(const Version& value) const;
-
+      int32 CompareTo(const Version& value) const {
+        if (this->major < value.major) return -1;
+        if (this->major > value.major) return 1;
+        if (this->minor < value.minor) return -1;
+        if (this->minor > value.minor) return 1;
+        if (this->build < value.build) return -1;
+        if (this->build > value.build) return 1;
+        if (this->revision < value.revision) return -1;
+        if (this->revision > value.revision) return 1;
+        return 0;
+      }
+      
       /// @brief Determines whether this instance of Version and a specified object, which must also be a Version object, have the same value.
       /// @param value The Version to compare with the current object.
       /// @return bool true if the specified value is equal to the current object. otherwise, false.
@@ -153,7 +163,14 @@ namespace Pcf {
       
       /// @brief Serves as a hash function for a particular type.
       /// @return int32 A hash code for the current object.
-      int32 GetHashCode() const override;
+      int32 GetHashCode() const override {
+        int32 hash = this->major ^ this->minor;
+        if (this->build != -1)
+          hash ^= this->build;
+        if (this->revision != -1)
+          hash ^= this->revision;
+        return hash;
+      }
       
       /// @brief Parse a version string and fill the object
       /// @param version The string version
@@ -187,9 +204,18 @@ namespace Pcf {
         return result;
       }
 
-
-      void GetObjectData(System::Runtime::Serialization::SerializationInfo& info) const override;
-
+      /// @brief Populates a SerializationInfo with the data needed to serialize the target object.
+      /// @param info The SerializationInfo to populate with data.
+      /// @remarks Any objects that are included in the SerializationInfo are automatically tracked and serialized by the formatter.
+      /// @remarks Code that calls GetObjectData requires the SecurityPermission for providing serialization services. Associated enumeration: SecurityPermissionFlag.SerializationFormatter.
+      /// @note It is not guaranteed that this method will be called only once per object instance during serialization. Therefore, the method should be implemented in such a way that its behavior will be the same regardless of the number of times it is called.
+      void GetObjectData(System::Runtime::Serialization::SerializationInfo& info) const override {
+        info.AddValue("Major", this->major);
+        info.AddValue("Minor", this->minor);
+        info.AddValue("Build", this->build);
+        info.AddValue("Revision", this->revision);
+      }
+      
     private :
       int32 major = 0;
       int32 minor = 0;
