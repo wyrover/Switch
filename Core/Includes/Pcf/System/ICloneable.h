@@ -20,7 +20,7 @@ namespace Pcf {
     public:
       /// @brief Creates a new object that is a copy of the current instance.
       /// @return object A new object that is a copy of this instance.
-      virtual up<Object> Clone() const = 0;
+      virtual UniquePointer<Object> Clone() const = 0;
     };
   }
 }

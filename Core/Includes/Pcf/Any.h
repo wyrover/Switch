@@ -25,7 +25,7 @@
 namespace Pcf {
   /// @brief Represent a polymorphic wrapper capable of holding any type.
   /// @par Examples
-  /// This example sho ho to use Any:
+  /// This example show how to use Any:
   /// @include Any.cpp
   class pcf_public Any : public System::IComparable, public object {
     template <typename T, typename Bool>

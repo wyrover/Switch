@@ -23,27 +23,19 @@ using namespace TUnit;
 namespace PcfUnitTests {
   class PropertyTest : public TestFixture {
   protected:
-    void ReadOnlyCanRead() {
-      Assert::IsTrue(ReadOnly::CanRead, pcf_current_information);
-    }
-    
-    void ReadOnlyCanWrite() {
-      Assert::IsFalse(ReadOnly::CanWrite, pcf_current_information);
-    }
-
-    void WriteOnlyCanRead() {
-      Assert::IsFalse(WriteOnly::CanRead, pcf_current_information);
-    }
-    
-    void WriteOnlyCanWrite() {
-      Assert::IsTrue(WriteOnly::CanWrite, pcf_current_information);
-    }
-    
     void ReadWriteCanRead() {
       Assert::IsTrue(ReadWrite::CanRead, pcf_current_information);
     }
     
     void ReadWriteCanWrite() {
+      Assert::IsTrue(ReadWrite::CanWrite, pcf_current_information);
+    }
+    
+    void PropertyCanRead() {
+      Assert::IsTrue(Property<int>::CanRead, pcf_current_information);
+    }
+    
+    void PropertyCanWrite() {
       Assert::IsTrue(ReadWrite::CanWrite, pcf_current_information);
     }
     
@@ -99,7 +91,7 @@ namespace PcfUnitTests {
       };
       
       Assert::AreEqual(42, v, pcf_current_information);
-
+      
       Value = 24;
       Assert::AreEqual(24, v, pcf_current_information);
       
@@ -201,12 +193,10 @@ namespace PcfUnitTests {
     }
   };
   
-  pcf_test(PropertyTest, ReadOnlyCanRead)
-  pcf_test(PropertyTest, ReadOnlyCanWrite)
-  pcf_test(PropertyTest, WriteOnlyCanRead)
-  pcf_test(PropertyTest, WriteOnlyCanWrite)
   pcf_test(PropertyTest, ReadWriteCanRead)
   pcf_test(PropertyTest, ReadWriteCanWrite)
+  pcf_test(PropertyTest, PropertyCanRead)
+  pcf_test(PropertyTest, PropertyCanWrite)
   pcf_test(PropertyTest, CreateReadWritePropertyAndGetIt)
   pcf_test(PropertyTest, CreateReadWritePropertyAndSetItAndGetIt)
   pcf_test(PropertyTest, CreateReadOnlyPropertyAndGetIt)
