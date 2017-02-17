@@ -6,7 +6,7 @@ get_filename_component(Pcf_LIBRARIES_DIRS "${CMAKE_CURRENT_LIST_DIR}/../lib" ABS
 if (APPLE)
   set(STANDARD_LINK_LIBRARIES dl)	
 elseif(UNIX)
-  set(STANDARD_LINK_LIBRARIES dl rt)
+  set(STANDARD_LINK_LIBRARIES dl rt uuid)
 elseif(MSVC)
   set(STANDARD_LINK_LIBRARIES Ws2_32.lib Iphlpapi.lib Rpcrt4.lib)    
 endif ()	
