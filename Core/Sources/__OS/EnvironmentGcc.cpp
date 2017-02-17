@@ -15,7 +15,7 @@ namespace {
     FILE* fs = popen(command.Data(), "r");
     string result;
     while (!feof(fs)) {
-      char buf[512];
+      char buf[513];
       int32 l = (int32)fread(buf, 1, 512, fs);
       buf[l] = 0;
       result += buf;
@@ -56,6 +56,10 @@ int32 __OS::CoreApi::Environment::GetOsVersion(int32& major, int32& minor, int32
 
 bool __OS::CoreApi::Environment::IsOs64Bit() {
   return CreateProcess("uname -m").EndsWith("64");
+}
+
+string __OS::CoreApi::Environment::GetMacAddress() {
+  return CreateProcess("ifconfig -a | awk '/ether/{print $2}'").Substring(0, 17);
 }
 
 string __OS::CoreApi::Environment::GetMachineName() {

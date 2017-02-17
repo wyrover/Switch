@@ -124,6 +124,7 @@ namespace __OS {
       static System::PlatformID GetOsPlatformID();
       static int32 GetOsVersion(int32& major, int32& minor, int32& build, int32& revision);
       static bool IsOs64Bit();
+      static string GetMacAddress();
       static string GetMachineName();
       static int32 GetTickCount();
       static string GetUserDomainName();

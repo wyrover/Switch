@@ -1,9 +1,22 @@
 #include "../../../Includes/Pcf/System/Guid.h"
 #include "../../../Includes/Pcf/System/Random.h"
+#include "../../__OS/CoreApi.h"
 
 using namespace System;
 
 Guid Guid::Empty;
+
+namespace  {
+  static Array<byte> MacAddressToBytes(const string& macAddress) {
+    Array<string> substrings = macAddress.Split(':');
+    Array<byte> bytes(substrings.Length);
+    
+    for(int i = 0; i < substrings.Length; i++)
+      bytes[i] = Byte::Parse(substrings[i], 16);
+    
+    return bytes;
+  }
+}
 
 Guid Guid::NewGuid() {
   // http://tools.ietf.org/html/rfc4122
@@ -30,13 +43,15 @@ Guid Guid::NewGuid() {
   //  o  Set the four most significant bits (bits 12 through 15) of the time_hi_and_version field to the 4-bit version number from Section 4.1.3.
   //  o  Set all the other bits to randomly (or pseudo-randomly) chosen values.
   static Random rand;
+  static Array<byte> macAddress = MacAddressToBytes(__OS::CoreApi::Environment::GetMacAddress());
   Guid guid;
   
   rand.NextBytes(guid.data);
-  guid.data[8] &= 0xDF;
-  guid.data[8] |= 0x40;
-  guid.data[7] &= 0x0F;
-  guid.data[7] |= 0x40;
-  
+  guid.data[8] &= 0b11011111;
+  guid.data[8] |= 0b01000000;
+  guid.data[7] &= 0b00001111;
+  guid.data[7] |= 0x01000000;
+  Buffer::BlockCopy(macAddress, 0, guid.data, 10, macAddress.Length);
+
   return guid;
 }
