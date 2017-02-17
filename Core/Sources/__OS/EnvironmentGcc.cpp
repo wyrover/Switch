@@ -5,6 +5,7 @@
 #include <cstring>
 
 #include <time.h>
+#include <uuid/uuid.h>
 #include <sys/time.h>
 
 #include "CoreApi.h"
@@ -98,5 +99,12 @@ int32 __OS::CoreApi::Environment::SetEnv(const string& name, const string& value
 int32 __OS::CoreApi::Environment::UnsetEnv(const string& name) {
   return unsetenv(name.Data);
 }
+
+System::Array<byte> __OS::CoreApi::Environment::GenerateGuid() {
+  byte guid[16];
+  uuid_generate(guid);
+  return System::Array<byte>(guid);
+}
+
 
 #endif

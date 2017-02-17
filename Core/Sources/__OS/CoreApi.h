@@ -134,6 +134,7 @@ namespace __OS {
       static int64 GetWorkingSet();
       static int32 SetEnv(const string& name, const string& value);
       static int32 UnsetEnv(const string& name);
+      static System::Array<byte> GenerateGuid();
     };
     
     class Format pcf_static {
