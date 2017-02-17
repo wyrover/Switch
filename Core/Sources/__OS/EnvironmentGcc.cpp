@@ -100,11 +100,10 @@ int32 __OS::CoreApi::Environment::UnsetEnv(const string& name) {
   return unsetenv(name.Data);
 }
 
-System::Array<byte> __OS::CoreApi::Environment::GenerateGuid() {
+System::Guid __OS::CoreApi::Environment::NewGuid() {
   byte guid[16];
   uuid_generate(guid);
-  return System::Array<byte>(guid);
+  return System::Guid(guid);
 }
-
 
 #endif
