@@ -5,6 +5,8 @@
 using namespace System;
 
 bool ValueType::Equals(const ValueType& valueType) const {
+  if (this->GetType() != valueType.GetType())
+    return false;
   const IConvertible* first = dynamic_cast<const IConvertible*>(this);
   const IConvertible* second = dynamic_cast<const IConvertible*>(&valueType);
   

@@ -47,10 +47,6 @@ bool __OS::CoreApi::Environment::IsOs64Bit() {
   return string(getenv("PROCESSOR_ARCHITECTURE")).EndsWith("64");
 }
 
-string __OS::CoreApi::Environment::GetMacAddress() {
-  throw System::NotImplementedException(pcf_current_information);
-}
-
 string __OS::CoreApi::Environment::GetMachineName() {
   char name[512];
   strcpy_s(name, 512, getenv("COMPUTERNAME"));

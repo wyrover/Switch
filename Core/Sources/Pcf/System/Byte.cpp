@@ -53,10 +53,6 @@ bool Byte::TryParse(const String& str, int32 base, Byte& value) {
   return true;
 }
 
-int32 Byte::GetHashCode() const {
-  return this->value;
-}
-
 String Byte::ToString() const {
   return ToString("g", Reference<IFormatProvider>::Null());
 }

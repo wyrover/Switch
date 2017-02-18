@@ -15,7 +15,6 @@
 #include "../../Includes/Pcf/System/ConsoleSpecialKey.h"
 #include "../../Includes/Pcf/System/Environment.h"
 #include "../../Includes/Pcf/System/Guid.h"
-#include "../../Includes/Pcf/System/NotImplementedException.h"
 #include "../../Includes/Pcf/System/PlatformID.h"
 #include "../../Includes/Pcf/System/String.h"
 #include "../../Includes/Pcf/Static.h"
@@ -126,7 +125,6 @@ namespace __OS {
       static System::PlatformID GetOsPlatformID();
       static int32 GetOsVersion(int32& major, int32& minor, int32& build, int32& revision);
       static bool IsOs64Bit();
-      static string GetMacAddress();
       static string GetMachineName();
       static int32 GetTickCount();
       static string GetUserDomainName();

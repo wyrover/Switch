@@ -59,10 +59,6 @@ bool __OS::CoreApi::Environment::IsOs64Bit() {
   return CreateProcess("uname -m").EndsWith("64");
 }
 
-string __OS::CoreApi::Environment::GetMacAddress() {
-  return CreateProcess("ifconfig -a | awk '/ether/{print $2}'").Substring(0, 17);
-}
-
 string __OS::CoreApi::Environment::GetMachineName() {
   return CreateProcess("uname -n");
 }

@@ -38,7 +38,7 @@ namespace Pcf {
       //ValueType* MemberwiseClone() const;
 
     private:
-      virtual bool IsSigned() const { return false; }
+      virtual bool IsSigned() const {return false;}
     };
   }
 }
