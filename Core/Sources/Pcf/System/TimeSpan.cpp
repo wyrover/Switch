@@ -165,7 +165,7 @@ int32 TimeSpan::CompareTo(const TimeSpan& value) const {
   return 1;
 }
 
-int32 TimeSpan::CompareTo(const IComparable& obj) const {
+int32 TimeSpan::CompareTo(const IComparable& obj) const noexcept {
   if (!is<TimeSpan>(obj))
     return 1;
 

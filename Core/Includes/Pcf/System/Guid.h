@@ -244,7 +244,7 @@ namespace Pcf {
         return 0;
       }
 
-      int32 CompareTo(const IComparable& obj) const override {
+      int32 CompareTo(const IComparable& obj) const noexcept override {
         if (!is<Guid>(obj))
           return 1;
         return CompareTo(static_cast<const Guid&>(obj));

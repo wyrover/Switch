@@ -578,7 +578,7 @@ namespace Pcf {
         /// @return string A string that represents this Size.
         String ToString() const noexcept override;
 
-        int32 CompareTo(const IComparable& obj) const override {
+        int32 CompareTo(const IComparable& obj) const noexcept override {
           if (!is<Color>(obj))
             return 1;
 

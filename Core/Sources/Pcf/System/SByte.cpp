@@ -89,7 +89,7 @@ int32 SByte::CompareTo(const SByte& value) const {
   return (this->value - value.value);
 }
 
-int32 SByte::CompareTo(const IComparable& obj) const {
+int32 SByte::CompareTo(const IComparable& obj) const noexcept {
   if (!is<SByte>(obj))
     return 1;
   return CompareTo(static_cast<const SByte&>(obj));

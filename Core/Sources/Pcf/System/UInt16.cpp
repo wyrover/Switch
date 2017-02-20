@@ -89,7 +89,7 @@ int32 UInt16::CompareTo(const UInt16& value) const {
   return this->value - value.value;
 }
 
-int32 UInt16::CompareTo(const IComparable& obj) const {
+int32 UInt16::CompareTo(const IComparable& obj) const noexcept {
   if (!is<UInt16>(obj))
     return 1;
 

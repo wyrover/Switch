@@ -117,7 +117,7 @@ int32 Single::CompareTo(const Single& value) const {
   return 0;
 }
 
-int32 Single::CompareTo(const IComparable& obj) const {
+int32 Single::CompareTo(const IComparable& obj) const noexcept {
   if (!is<Single>(obj))
     return 1;
 

@@ -117,7 +117,7 @@ namespace Pcf {
       /// Greater than zero   This instance is greater than value.
       /// -or-
       /// obj is nullNothingnullptra null reference.
-      int32 CompareTo(const IComparable& obj) const override;
+      int32 CompareTo(const IComparable& obj) const noexcept override;
 
       /// @brief Returns the TypeCode for this instance.
       /// @return TypeCode The enumerated constant that is the TypeCode of the class or value type that implements this interface.
@@ -162,7 +162,7 @@ namespace Pcf {
       const SByte operator ++(int);
       SByte& operator --();
       const SByte operator --(int);
-      template<typename T> bool operator==(T value) const {return this->value == value;}
+      template<typename T> bool operator==(T value) const {return (T)this->value == value;}
       template<typename T> bool operator!=(T value) const {return !this->operator==(value);}
       /// @endcond
    };

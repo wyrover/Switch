@@ -492,7 +492,7 @@ namespace Pcf {
       /// -or-
       /// @return obj is nullNothingnullptra null reference.
       /// @remarks Before comparing DateTime objects, make sure that the objects represent times in the same time zone. You can do this by comparing the values of their Kind() function.
-      int32 CompareTo(const IComparable& obj) const override;
+      int32 CompareTo(const IComparable& obj) const noexcept override;
 
       /// @brief Returns the TypeCode for this instance.
       /// @return TypeCode The enumerated constant that is the TypeCode of the class or value type that implements this interface.

@@ -50,7 +50,7 @@ namespace {
       return name.GetHashCode() ^ age ^ (int)vaccinated;
     }
     
-    int32 CompareTo(const IComparable& other) const override {
+    int32 CompareTo(const IComparable& other) const noexcept override {
       if (!is<Pet>(other))
         return 1;
       

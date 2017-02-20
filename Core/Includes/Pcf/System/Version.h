@@ -123,7 +123,7 @@ namespace Pcf {
       /// Less than zero      This instance is less than obj.
       /// Zero                This instance is equal to obj.
       /// Greater than zero   This instance is greater than obj.
-      int32 CompareTo(const IComparable& obj) const override {
+      int32 CompareTo(const IComparable& obj) const noexcept override {
         if (!is<Version>(obj))
           return 1;
         return CompareTo((const Version &)obj);

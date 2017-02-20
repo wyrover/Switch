@@ -170,7 +170,7 @@ int32 Char::CompareTo(const Char& value) const {
   return this->value - value.value;
 }
 
-int32 Char::CompareTo(const IComparable& obj) const {
+int32 Char::CompareTo(const IComparable& obj) const noexcept {
   if (!is<Char>(obj))
     return 1;
   

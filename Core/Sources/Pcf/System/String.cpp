@@ -1028,7 +1028,7 @@ int32 String::CompareTo(const String& value) const {
   return strcmp(this->string.c_str(), value.string.c_str());
 }
 
-int32 String::CompareTo(const IComparable& obj) const {
+int32 String::CompareTo(const IComparable& obj) const noexcept {
   if (!is<String>(obj))
     return 1;
 

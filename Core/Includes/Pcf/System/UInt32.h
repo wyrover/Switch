@@ -116,7 +116,7 @@ namespace Pcf {
       /// Greater than zero   This instance is greater than value.
       /// -or-
       /// obj is nullNothingnullptra null reference.
-      int32 CompareTo(const IComparable& obj) const override;
+      int32 CompareTo(const IComparable& obj) const noexcept override;
 
 
       /// @brief Returns the TypeCode for this instance.
@@ -162,7 +162,7 @@ namespace Pcf {
       const UInt32 operator ++(int);
       UInt32& operator --();
       const UInt32 operator --(int);
-      template<typename T> bool operator==(T value) const {return this->value == value;}
+      template<typename T> bool operator==(T value) const {return (T)this->value == value;}
       template<typename T> bool operator!=(T value) const {return !this->operator==(value);}
       /// @endcond
     };

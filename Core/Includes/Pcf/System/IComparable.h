@@ -22,7 +22,7 @@ namespace Pcf {
       /// | Less than zero    | This instance is less than obj.    |
       /// | Zero              | This instance is equal to obj.     |
       /// | Greater than zero | This instance is greater than obj. |
-      virtual int32 CompareTo(const IComparable& obj) const = 0;
+      virtual int32 CompareTo(const IComparable& obj) const noexcept = 0;
 
       ///@cond
       // Not correct for an interface but necessary for C++ language.

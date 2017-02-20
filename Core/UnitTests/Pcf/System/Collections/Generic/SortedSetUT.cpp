@@ -28,14 +28,12 @@ namespace {
       return *this;
     }
 
-    virtual ~Person() { }
-    
     const string& GetName() const { return this->name; }
     const string& GetSurname() const { return this->surname; }
   
-    virtual int32 CompareTo(const IComparable& obj) const  {
+    int32 CompareTo(const IComparable& obj) const noexcept override {
       if (!is<Person>(obj))
-        throw System::ArgumentException(pcf_current_information);
+        return 1;
       const Person* p = as<Person>(&obj);
       int32 r = this->surname.CompareTo(p->surname);
       if (r != 0) return r;

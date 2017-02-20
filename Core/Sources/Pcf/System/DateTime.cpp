@@ -333,7 +333,7 @@ int32 DateTime::CompareTo(const DateTime& value) const {
   return 0;
 }
 
-int32 DateTime::CompareTo(const IComparable& obj) const {
+int32 DateTime::CompareTo(const IComparable& obj) const noexcept {
   if (!is<DateTime>(obj))
     return 1;
   

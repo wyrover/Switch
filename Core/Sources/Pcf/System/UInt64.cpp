@@ -106,7 +106,7 @@ int32 UInt64::CompareTo(const UInt64& value) const {
   return 1;
 }
 
-int32 UInt64::CompareTo(const IComparable& obj) const {
+int32 UInt64::CompareTo(const IComparable& obj) const noexcept {
   if (!is<UInt64>(obj))
     return 1;
 

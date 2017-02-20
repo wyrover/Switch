@@ -51,7 +51,7 @@ int32 IntPtr::CompareTo(const IntPtr& value) const {
   return static_cast<int32>(this->value - value.value);
 }
 
-int32 IntPtr::CompareTo(const IComparable& obj) const {
+int32 IntPtr::CompareTo(const IComparable& obj) const noexcept {
   if (!is<IntPtr>(obj))
     return 1;
   return CompareTo(static_cast<const IntPtr&>(obj));

@@ -112,7 +112,7 @@ int32 Double::CompareTo(const Double& value) const {
   return 0;
 }
 
-int32 Double::CompareTo(const IComparable& obj) const {
+int32 Double::CompareTo(const IComparable& obj) const noexcept {
   if (!is<Double>(obj))
     return 1;
   

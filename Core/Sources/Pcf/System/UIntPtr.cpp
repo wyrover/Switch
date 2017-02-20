@@ -50,7 +50,7 @@ int32 UIntPtr::CompareTo(const UIntPtr& value) const {
   return static_cast<int32>(this->value - value.value);
 }
 
-int32 UIntPtr::CompareTo(const IComparable& obj) const {
+int32 UIntPtr::CompareTo(const IComparable& obj) const noexcept {
   if (!is<UIntPtr>(obj))
     return 1;
 

@@ -25,7 +25,7 @@ namespace Pcf {
       ///  * <b>Less than zero</b> This instance is less than obj.
       ///  * <b>Zero</b> This instance is equal to obj.
       ///  * <b>Greater than zero</b> This instance is greater than obj.
-      virtual int32 CompareTo(const IComparable& obj) const = 0;
+      virtual int32 CompareTo(const IComparable& obj) const noexcept = 0;
 
       /// @brief Determines whether this instance of Version and a specified object, which must also be a Version object, have the same value.
       /// @param obj The object to compare with the current object.
@@ -69,7 +69,7 @@ namespace Pcf {
       ///  - Less than zero      This instance is less than obj.
       ///  - Zero                This instance is equal to obj.
       ///  - Greater than zero   This instance is greater than obj.
-      int32 CompareTo(const IComparable& obj) const override {
+      int32 CompareTo(const IComparable& obj) const noexcept override {
         if (!is<TupleImpl<T1, T2, T3, T4, T5, T6, T7, T8>>(obj))
           return 1;
         return CompareTo(static_cast<const TupleImpl<T1, T2, T3, T4, T5, T6, T7, T8>&>(obj));

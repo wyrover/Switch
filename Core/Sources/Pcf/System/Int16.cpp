@@ -91,7 +91,7 @@ int32 Int16::CompareTo(const Int16& value) const {
   return this->value - value.value;
 }
 
-int32 Int16::CompareTo(const IComparable& obj) const {
+int32 Int16::CompareTo(const IComparable& obj) const noexcept {
   if (!is<Int16>(obj))
     return 1;
  return CompareTo(static_cast<const Int16&>(obj));

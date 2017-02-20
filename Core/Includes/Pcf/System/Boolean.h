@@ -88,7 +88,7 @@ namespace Pcf {
       /// | Less than zero    | This instance is false and obj is true.                                   |
       /// | Zero              | This instance and obj are equal (either both are true or both are false). |
       /// | Greater than zero | This instance is true and obj is false.  -or- obj is null reference.      |
-      int32 CompareTo(const IComparable& obj) const override {
+      int32 CompareTo(const IComparable& obj) const noexcept override {
         if (!is<Boolean>(obj)) return 1;
         return CompareTo(static_cast<const Boolean&>(obj));
       }

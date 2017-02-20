@@ -90,7 +90,7 @@ int32 Int64::CompareTo(const Int64& value) const {
   return 1;
 }
 
-int32 Int64::CompareTo(const IComparable& obj) const {
+int32 Int64::CompareTo(const IComparable& obj) const noexcept {
   if (!is<Int64>(obj))
     return 1;
   return CompareTo(static_cast<const Int64&>(obj));

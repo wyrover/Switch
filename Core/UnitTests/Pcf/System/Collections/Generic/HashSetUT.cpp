@@ -35,7 +35,7 @@ namespace {
     const string& GetSurname() const { return this->surname; }
   
     // surname compare
-    int32 CompareTo(const IComparable& obj) const override {
+    int32 CompareTo(const IComparable& obj) const noexcept override {
       if (!is<Person>(obj))
         throw System::ArgumentException(pcf_current_information);
       const Person& p = as<Person>(obj);
