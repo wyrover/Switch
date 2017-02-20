@@ -74,7 +74,7 @@ void* UIntPtr::ToPointer() const {
   return (void*)this->value;
 }
 
-string UIntPtr::ToString() const {
+string UIntPtr::ToString() const noexcept {
   return UInt64(ToUInt64()).ToString();
 }
 

@@ -576,7 +576,7 @@ namespace Pcf {
 
         /// @brief reates a human-readable string that represents this Size class.
         /// @return string A string that represents this Size.
-        string ToString() const override;
+        String ToString() const noexcept override;
 
         int32 CompareTo(const IComparable& obj) const override {
           if (!is<Color>(obj))

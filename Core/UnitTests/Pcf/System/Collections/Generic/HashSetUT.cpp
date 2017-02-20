@@ -52,7 +52,7 @@ namespace {
       return this->name == p.name && this->surname == p.surname;
     }
 
-    string ToString() const override { return this->name + " " + this->surname; }
+    String ToString() const noexcept override { return this->name + " " + this->surname; }
   
   private:
     string name, surname;

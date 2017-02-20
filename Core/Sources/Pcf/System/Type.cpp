@@ -65,6 +65,6 @@ String Type::GetNamespace() const {
   return fullName.Remove(fullName.LastIndexOf("::", 0, length));
 }
 
-String Type::ToString() const {
+String Type::ToString() const noexcept {
   return FullName;
 }

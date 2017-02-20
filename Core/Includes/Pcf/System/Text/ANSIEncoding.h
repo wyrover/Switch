@@ -73,7 +73,7 @@ namespace Pcf {
           Decoder& operator =(const Decoder& b);
           virtual void Add(byte b);
           virtual void Reset();
-          virtual String ToString() const;
+          virtual String ToString() const noexcept;
           virtual char32 GetCodePoint(byte b) = 0;
           
         protected:
@@ -90,7 +90,7 @@ namespace Pcf {
           Encoder& operator =(const Encoder& b);
           virtual int32 GetNbBytes(char32) const;
           virtual void Encode(char32 codePoint, byte* bytes) const;
-          virtual String ToString() const;
+          virtual String ToString() const noexcept;
           virtual byte GetByte(char32 cp) = 0;
           
         private:

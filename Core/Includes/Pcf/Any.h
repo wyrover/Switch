@@ -289,7 +289,7 @@ namespace Pcf {
     /// @brief Returns the text representation of the value of the current Nullable<T> object.
     /// @return The text representation of the value of the current Nullable<T> object if the HasValue property is true, or an empty string ("") if the HasValue property is false.
     /// @remarks The ToString property returns the string yielded by calling the ToString property of the object returned by the Value property.
-    string ToString() const override {
+    string ToString() const noexcept override {
       if (this->HasValue == false)
         return "";
       return value->ToString();

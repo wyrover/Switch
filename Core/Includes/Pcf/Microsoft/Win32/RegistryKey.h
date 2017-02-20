@@ -253,7 +253,7 @@ namespace Pcf {
 
         /// @brief Retrieves a string representation of this key.
         /// @return A string representing the key. If the specified key is invalid (cannot be found) then "" is returned.
-        System::String ToString() const override { return this->name; }
+        System::String ToString() const noexcept override { return this->name; }
 
       private:
         void Load();
@@ -338,7 +338,7 @@ namespace Pcf {
             }
           }
 
-          System::String ToString() const {
+          System::String ToString() const noexcept {
             System::String value;
             if (this->kind == RegistryValueKind::Binary) {
               for (byte item : as<System::Array<byte>>(*this->value))

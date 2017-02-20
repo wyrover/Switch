@@ -82,7 +82,7 @@ namespace Pcf {
           
           virtual void Add(byte b);
           virtual void Reset();
-          virtual String ToString() const;
+          virtual String ToString() const noexcept;
         };
         
         class Encoder : public Encoding::Encoder {
@@ -92,7 +92,7 @@ namespace Pcf {
           Encoder& operator =(const Encoder& b);
           virtual int32 GetNbBytes(char32) const;
           virtual void Encode(char32 c, byte* bytes) const;
-          virtual String ToString() const;
+          virtual String ToString() const noexcept;
         };
       };
     }

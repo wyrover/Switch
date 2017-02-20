@@ -342,7 +342,7 @@ namespace Pcf {
 
         /// @brief Converts an Internet address to its standard notation.
         /// @return string A string that contains the IP address in either IPv4 dotted-quad or in IPv6 colon-hexadecimal notation.
-        string ToString() const override;
+        String ToString() const noexcept override;
 
         /// @brief Determines whether a string is a valid IP address.
         /// @param str The string to validate.

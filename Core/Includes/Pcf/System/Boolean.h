@@ -125,7 +125,7 @@ namespace Pcf {
 
       /// @brief Returns a string that represents the current Boolean.
       /// @return const string A string that represents the current Boolean.
-      String ToString() const override;
+      String ToString() const noexcept override;
 
     protected:
       /// @cond

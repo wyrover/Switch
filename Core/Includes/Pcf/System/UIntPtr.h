@@ -74,7 +74,7 @@ namespace Pcf {
 
       /// @brief Converts the numeric value of the current UIntPtr object to its equivalent String representation.
       /// @return const String The String representation of the value of this instance.
-      virtual String ToString() const override;
+      virtual String ToString() const noexcept override;
 
       /// @brief Converts the numeric value of the current UIntPtr object to its equivalent String representation.
       /// @param format Format-control String.

@@ -88,7 +88,7 @@ namespace Pcf {
 
       /// @brief Returns a String that represents the current Double.
       /// @return String A String that represents the current Double.
-      String ToString() const override;
+      String ToString() const noexcept override;
       String ToString(const String& format, const IFormatProvider& formatProvider) const override;
 
       /// @brief Returns a String that represents the current Double.

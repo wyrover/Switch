@@ -64,7 +64,7 @@ int32 Single::GetHashCode() const noexcept {
   return *((int32*)&this->value);
 }
 
-string Single::ToString() const {
+string Single::ToString() const noexcept {
   return ToString("G", Reference<IFormatProvider>::Null());
 }
 

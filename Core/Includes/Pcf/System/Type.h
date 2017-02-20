@@ -80,7 +80,7 @@ namespace Pcf {
       
       /// @brief Returns a String representing the name of the current Type.
       /// @return A String representing the name of the current Type.
-      String ToString() const override;
+      String ToString() const noexcept override;
       
     private:
       String GetFullName() const;

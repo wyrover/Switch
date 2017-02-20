@@ -333,7 +333,7 @@ bool Encoding::IsAlwaysNormalized() const {
   return false;
 }
 
-string Encoding::ToString() const { 
+string Encoding::ToString() const noexcept { 
   return GetEncodingName();
 }
 

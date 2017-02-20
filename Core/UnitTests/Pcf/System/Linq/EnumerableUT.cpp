@@ -66,7 +66,7 @@ namespace {
       return 1;
     }
     
-    string ToString() const override {
+    String ToString() const noexcept override {
       return String::Format("{{{0}, {1}, {2}}}", this->name, this->age, this-vaccinated);
     }
     

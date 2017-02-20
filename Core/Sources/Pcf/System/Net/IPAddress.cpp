@@ -312,7 +312,7 @@ void IPAddress::SetScopeId(int64 scopeId) {
   this->scopeId = Convert::ToUInt32(scopeId);
 }
 
-string IPAddress::ToString() const {
+string IPAddress::ToString() const noexcept {
   if (this->family == Sockets::AddressFamily::InterNetwork)
     return String::Join(".", GetAddressBytes());
 

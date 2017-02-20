@@ -109,7 +109,7 @@ namespace Pcf {
       
       /// @brief Returns a string that represents the current DelegateItem.
       /// @return string A string that represents the current DelegateItem.
-      String ToString() const override;
+      String ToString() const noexcept override;
       
       /// @brief Explicit operator equal between Exception
       /// @param value Value to assign this instance.

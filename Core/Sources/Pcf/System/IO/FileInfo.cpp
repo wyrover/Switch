@@ -125,7 +125,7 @@ bool FileInfo::Equals(const object& obj) const noexcept {
   return is<FileInfo>(obj) && Equals((const FileInfo&)obj);
 }
 
-string FileInfo::ToString() const {
+string FileInfo::ToString() const noexcept {
   return FullName();
 }
 

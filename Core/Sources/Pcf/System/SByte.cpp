@@ -49,7 +49,7 @@ int32 SByte::GetHashCode() const noexcept {
   return this->value;
 }
 
-string SByte::ToString() const {
+string SByte::ToString() const noexcept {
   return ToString("g3", Reference<IFormatProvider>::Null());
 }
 

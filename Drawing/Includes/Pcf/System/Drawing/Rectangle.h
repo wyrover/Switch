@@ -233,7 +233,7 @@ namespace Pcf {
         
         /// @brief Creates a human-readable string that represents this Point class.
         /// @return string A string that represents this Point.
-        string ToString() const override {return String::Format("{{X={0},Y={1},Width={2},Height={3}}}", this->x, this->y, this->width, this->height);}
+        String ToString() const noexcept override {return String::Format("{{X={0},Y={1},Width={2},Height={3}}}", this->x, this->y, this->width, this->height);}
         
         /// @brief Returns a third Rectangle structure that represents the union of two other Rectangle structures.
         /// @param a A rectangle to union.

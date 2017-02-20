@@ -374,7 +374,7 @@ namespace Pcf {
     
     /// @brief Returns a string that represents the current SharedPointer.
     /// @return string A string that represents the current SharedPointer.
-    std::string ToString() const {
+    std::string ToString() const noexcept {
       if (this->ptr == null)
         return "Pcf::SharedPointer [Pointer=null]";
       std::stringstream s;

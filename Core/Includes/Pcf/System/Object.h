@@ -87,7 +87,7 @@ namespace Pcf {
       /// @par Examples
       /// The following code example demonstrates what ToString returns.
       /// @include ObjectToString.cpp
-      virtual String ToString() const;
+      virtual String ToString() const noexcept;
     };
   }
 

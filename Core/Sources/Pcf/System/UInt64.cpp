@@ -61,7 +61,7 @@ int32 UInt64::GetHashCode() const noexcept {
   return hash;
 }
 
-string UInt64::ToString() const {
+string UInt64::ToString() const noexcept {
   return ToString("g", Reference<IFormatProvider>::Null());
 }
 

@@ -211,7 +211,7 @@ const String DateTime::ToShortTimeString() const {
   return ToString("%H:%M");
 }
 
-String DateTime::ToString() const {
+String DateTime::ToString() const noexcept {
   return ToString("%d/%m/%Y %H:%M:%S");
 }
 

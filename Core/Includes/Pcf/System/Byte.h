@@ -116,7 +116,7 @@ namespace Pcf {
       
       /// @brief Returns a String that represents the current Byte.
       /// @return String A String that represents the current Byte.
-      String ToString() const override {return ToString("g", Reference<IFormatProvider>::Null());}
+      String ToString() const noexcept override {return ToString("g", Reference<IFormatProvider>::Null());}
       
       /// @brief Returns a String that represents the current Byte.
       /// @param format Format-control String.

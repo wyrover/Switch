@@ -88,7 +88,7 @@ namespace Pcf {
 
       /// @brief Returns a String that represents the current SByte.
       /// @return String A String that represents the current SByte.
-      String ToString() const override;
+      String ToString() const noexcept override;
 
       /// @brief Returns a String that represents the current SByte.
       /// @param format Format-control String.

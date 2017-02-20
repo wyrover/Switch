@@ -20,7 +20,7 @@ namespace Pcf {
       public:
         Empty() {}
         
-        string ToString() const override {return "<empty>";}
+        string ToString() const noexcept override {return "<empty>";}
         
       private:
         bool Verify(const ConstraintValue& actual) const override {

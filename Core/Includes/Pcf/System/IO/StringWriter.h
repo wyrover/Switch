@@ -44,7 +44,7 @@ namespace Pcf {
         
         /// @brief Returns a string containing the characters written to the current StringWriter so far.
         /// @return string The string containing the characters written to the current StringWriter.
-        string ToString() const override;
+        String ToString() const noexcept override;
         
       private:
         struct StringWriterData {

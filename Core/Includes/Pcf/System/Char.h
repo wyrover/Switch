@@ -191,7 +191,7 @@ namespace Pcf {
 
       /// @brief Returns a String that represents the current Char.
       /// @return String A String that represents the current Char.
-      String ToString() const override;
+      String ToString() const noexcept override;
 
       /// @brief Compares this instance to a specified Char Object and returns an indication of their relative values.
       /// @param value An Char Object to compare with this instance.

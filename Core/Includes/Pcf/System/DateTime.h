@@ -442,7 +442,7 @@ namespace Pcf {
 
       /// @brief Returns a String that represents the current DateTime.
       /// @return String A String that represents the current DateTime.
-      String ToString() const override;
+      String ToString() const noexcept override;
 
       /// @brief Returns a String that represents the current DateTime.
       /// @param format Format-control String.

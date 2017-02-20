@@ -155,7 +155,7 @@ namespace Pcf {
       static int32 ToInt32(T value);
       static int64 ToInt64(T value);
 
-      String ToString() const override {
+      String ToString() const noexcept override {
         Values();
         if (flags)
           return ToStringFlags();

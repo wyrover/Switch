@@ -90,7 +90,7 @@ namespace Pcf {
           Encoder& operator =(const Encoder& b);
           virtual int32 GetNbBytes(char32 c) const;
           virtual void Encode(char32 c, byte bytes[]) const;
-          virtual String ToString() const;
+          virtual String ToString() const noexcept;
           /// @cond
         private:
           //bool shouldEmitPreamble;
@@ -107,7 +107,7 @@ namespace Pcf {
           virtual void Add(byte b);
           virtual void Reset();
           virtual char32 GetCodePoint() const { return codePoint; }
-          virtual String ToString() const;
+          virtual String ToString() const noexcept;
           
         private:
           byte format;

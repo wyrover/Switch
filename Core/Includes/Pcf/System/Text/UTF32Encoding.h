@@ -96,7 +96,7 @@ namespace Pcf {
           
           virtual int32 GetNbBytes(char32) const { return 4; }
           virtual void Encode(char32 c, byte bytes[]) const;
-          virtual String ToString() const;
+          virtual String ToString() const noexcept;
           
         private:
           bool bigEndian;
@@ -110,7 +110,7 @@ namespace Pcf {
           Decoder& operator =(const Decoder& b);
           virtual void Add(byte b);
           virtual char32 GetCodePoint() const { return codePoint; }
-          virtual String ToString() const;
+          virtual String ToString() const noexcept;
           
         private:
           bool bigEndian;

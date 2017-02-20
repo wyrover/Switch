@@ -159,7 +159,7 @@ int32 Char::GetHashCode() const noexcept {
   return this->value;
 }
 
-String Char::ToString() const { 
+String Char::ToString() const noexcept { 
   byte bytes[5];
   int32 count = __OS::CoreApi::UnicodeEncodings::UTF8::Encode(this->value, bytes);
   bytes[count] = 0;

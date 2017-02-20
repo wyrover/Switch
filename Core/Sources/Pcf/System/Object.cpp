@@ -8,7 +8,7 @@ Type Object::GetType() const noexcept {
   return Type(typeid(*this));
 }
 
-String Object::ToString() const {
+String Object::ToString() const noexcept {
   return GetType().ToString();
 }
 

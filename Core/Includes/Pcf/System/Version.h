@@ -187,7 +187,7 @@ namespace Pcf {
       
       /// @brief Returns a string that represents the current object.
       /// @return string A string that represents the current object.
-      String ToString() const override {return ToString(2 + (this->build != -1 ? 1 : 0) + (this->revision != -1 ? 1 : 0));}
+      String ToString() const noexcept override {return ToString(2 + (this->build != -1 ? 1 : 0) + (this->revision != -1 ? 1 : 0));}
       
       String ToString(int32 fieldCount) const {
         if (fieldCount < 0 || fieldCount> 4 || (fieldCount >= 3 && this->build == -1) || (fieldCount == 4 && this->revision == -1))

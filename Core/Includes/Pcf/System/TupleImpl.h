@@ -123,7 +123,7 @@ namespace Pcf {
 
       /// @brief Returns a string that represents the current object.
       /// @return string A string that represents the current object.
-      String ToString() const override {
+      String ToString() const noexcept override {
         String str = "(";
 
         if (!IsNullType(item1))

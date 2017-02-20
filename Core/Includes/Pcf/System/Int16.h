@@ -88,7 +88,7 @@ namespace Pcf {
 
       /// @brief Returns a String that represents the current Int16.
       /// @return tring A String that represents the current Int16.
-      String ToString() const override;
+      String ToString() const noexcept override;
 
       /// @brief Returns a String that represents the current Int16 with a specified format and specified formatProvider.
       /// @param format Format-control String.

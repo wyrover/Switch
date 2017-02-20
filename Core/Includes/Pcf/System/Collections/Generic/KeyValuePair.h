@@ -66,7 +66,7 @@ namespace Pcf {
           /// @brief Returns a String representation of the KeyValuePair<TKey, TValue>, using the String representations of the key && value.
           /// @return const String A String representation of the KeyValuePair<TKey, TValue>, which includes the String representations of the key && value.
           /// @return String
-          String ToString() const override {return String::Format("[{0}, {1}]", this->key, this->value);}
+          String ToString() const noexcept override {return String::Format("[{0}, {1}]", this->key, this->value);}
 
           bool Equals(const KeyValuePair& value) const {return this->value == value.value;}
 

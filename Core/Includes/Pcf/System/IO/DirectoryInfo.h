@@ -107,7 +107,7 @@ namespace Pcf {
 
         /// @brief Returns the original path that was passed by the user.
         /// @return the original path that was passed by the user.
-        String ToString() const override {return this->Name;}
+        String ToString() const noexcept override {return this->Name;}
 
       private:
         bool GetExists() const override;

@@ -87,7 +87,7 @@ namespace Pcf {
 
       /// @brief Returns a String that represents the current UInt64.
       /// @return String A String that represents the current UInt64.
-      String ToString() const override;
+      String ToString() const noexcept override;
 
       /// @brief Returns a String that represents the current UInt64.
       /// @param format Format-control String.

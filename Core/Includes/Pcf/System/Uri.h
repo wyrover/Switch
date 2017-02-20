@@ -814,7 +814,7 @@ namespace Pcf {
       /// @brief Gets a canonical string representation for the specified Uri instance.
       /// @return string A string instance that contains the unescaped canonical representation of the Uri instance. All characters are unescaped except #, ?, && %.
       /// @remarks The string returned by this method does ! contain port information when the port is the default port for the scheme.
-      String ToString() const override { return GetComponents(UriComponents::AbsoluteUri, UriFormat::Unescaped); }
+      String ToString() const noexcept override { return GetComponents(UriComponents::AbsoluteUri, UriFormat::Unescaped); }
 
     private :
       void SetScheme(String& escapeUri) {

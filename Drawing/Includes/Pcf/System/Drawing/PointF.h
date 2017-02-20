@@ -72,7 +72,7 @@ namespace Pcf {
 
         /// @brief Creates a human-readable string that represents this PointF class.
         /// @return string A string that represents this PointF.
-        string ToString() const override { return String::Format("{{X={0},Y={1}}}", this->x, this->y); }
+        String ToString() const noexcept override { return String::Format("{{X={0},Y={1}}}", this->x, this->y); }
 
         /// @brief Translates this PointF by the specified PointF.
         /// @param pt The PointF used offset this PointF.

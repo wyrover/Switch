@@ -907,7 +907,7 @@ namespace Pcf {
       
       /// @brief Returns a String that represents the current String.
       /// @return const String A String that represents the current String.
-      String ToString() const override;
+      String ToString() const noexcept override;
       
       /// @brief Creates a new object that is a copy of the current instance.
       /// @return Object* A new object that is a copy of this instance.

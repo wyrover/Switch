@@ -138,7 +138,7 @@ int32 TimeSpan::GetHashCode() const noexcept {
   return hash;
 }
 
-string TimeSpan::ToString() const {
+string TimeSpan::ToString() const noexcept {
   string retValue;
 
   if (this->value < 0)

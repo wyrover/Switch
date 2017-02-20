@@ -247,7 +247,7 @@ namespace Pcf {
 
       /// @brief Returns a String that represents the current MyObj.
       /// @return String A String that represents the current MyObj.
-      String ToString() const override;
+      String ToString() const noexcept override;
 
       /// @brief Compares this instance to a specified Int16 object and returns an indication of their relative values.
       /// @param value An TimeSpan object to compare with this instance.

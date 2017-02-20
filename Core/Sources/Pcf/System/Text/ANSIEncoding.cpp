@@ -171,7 +171,7 @@ void ANSIEncoding::Encoder::Encode(char32 codePoint, byte* bytes) const {
   bytes[0] = encoder->GetByte(codePoint);
 }
 
-String ANSIEncoding::Encoder::ToString() const {
+String ANSIEncoding::Encoder::ToString() const noexcept {
   return String::Format("Code Page {0} Encoder", codePage);
 }
 
@@ -493,7 +493,7 @@ void ANSIEncoding::Decoder::Reset() {
   Encoding::Decoder::Reset();
 }
 
-String ANSIEncoding::Decoder::ToString() const {
+String ANSIEncoding::Decoder::ToString() const noexcept {
   return String::Format("Code Page {0} Decoder", codePage);
 }
 

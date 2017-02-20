@@ -86,7 +86,7 @@ Array<DriveInfo> DriveInfo::GetDrives() {
   return drives.ToArray();
 }
 
-String DriveInfo::ToString() const {
+String DriveInfo::ToString() const noexcept {
   return this->driveName;
 }
 

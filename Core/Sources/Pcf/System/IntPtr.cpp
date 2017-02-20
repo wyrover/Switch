@@ -74,7 +74,7 @@ void* IntPtr::ToPointer() const {
   return (void*)this->value;
 }
 
-string IntPtr::ToString() const {
+string IntPtr::ToString() const noexcept {
   return Int64(ToInt64()).ToString();
 }
 

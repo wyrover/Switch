@@ -1016,7 +1016,7 @@ int32 String::GetHashCode() const noexcept {
   return hash;
 }
 
-string String::ToString() const {
+string String::ToString() const noexcept {
   return *this;
 }
 

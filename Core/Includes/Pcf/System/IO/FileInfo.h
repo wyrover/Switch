@@ -133,7 +133,7 @@ namespace Pcf {
 
         /// @brief Returns the full path.
         /// @return the full path.
-        String ToString() const override;
+        String ToString() const noexcept override;
 
       private:
         DirectoryInfo GetDirectory() const;

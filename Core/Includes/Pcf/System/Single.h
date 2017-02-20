@@ -87,7 +87,7 @@ namespace Pcf {
 
       /// @brief Returns a String that represents the current Single.
       /// @return String A String that represents the current Single.
-      String ToString() const override;
+      String ToString() const noexcept override;
 
       /// @brief Returns a String that represents the current Single.
       /// @param format Format-control String.

@@ -49,7 +49,7 @@ int32 UInt32::GetHashCode() const noexcept {
   return this->value;
 }
 
-string UInt32::ToString() const {
+string UInt32::ToString() const noexcept {
   return ToString("g", Reference<IFormatProvider>::Null());
 }
 

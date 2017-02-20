@@ -71,7 +71,7 @@ namespace Pcf {
 
         /// @brief Creates a human-readable string that represents this Size class.
         /// @return string A string that represents this Size.
-        string ToString() const override { return String::Format("{{Width={0}, Height={1}}}", this->width, this->height); }
+        String ToString() const noexcept override { return String::Format("{{Width={0}, Height={1}}}", this->width, this->height); }
 
         /// @brief Adds the width and height of one Size class to the width and height of another Size class.
         /// @param size1 The first Size class to add.

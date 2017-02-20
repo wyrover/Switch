@@ -59,7 +59,7 @@ int32 Double::GetHashCode() const noexcept {
   return Int64(*((int64*)&this->value)).GetHashCode();
 }
 
-String Double::ToString() const {
+String Double::ToString() const noexcept {
   return ToString("G", Reference<IFormatProvider>::Null());
 }
 

@@ -1547,7 +1547,7 @@ namespace {
   }
   
   //_____________________________________________________________________________________________
-  //                                                              virtual string ToString() const
+  //                                                              virtual String ToString() const noexcept
   
   TYPED_TEST(Encoding, ToString) {
     EXPECT_EQ(TypeParam::encodingName, TypeParam::encoding.GetEncodingName());

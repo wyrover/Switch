@@ -60,7 +60,7 @@ bool Exception::Equals(const object& obj) const noexcept {
   return is<Exception>(obj) && Equals(static_cast<const Exception&>(obj));
 }
 
-string Exception::ToString() const {
+string Exception::ToString() const noexcept {
   return string::Format("{0}: {1}{2}{3}", GetType(), GetMessage(), Environment::NewLine, GetStackTrace(GetType().ToString()));
 }
 

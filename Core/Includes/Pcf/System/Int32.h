@@ -88,7 +88,7 @@ namespace Pcf {
 
       /// @brief Returns a String that represents the current Int32.
       /// @return String A String that represents the current Int32.
-      String ToString() const override;
+      String ToString() const noexcept override;
 
       /// @brief Returns a String that represents the current Int32.
       /// @param format Format-control String.

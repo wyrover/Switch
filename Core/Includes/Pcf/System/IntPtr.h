@@ -74,7 +74,7 @@ namespace Pcf {
 
       /// @brief Converts the numeric value of the current IntPtr object to its equivalent String representation.
       /// @return const String The String representation of the value of this instance.
-      String ToString() const override;
+      String ToString() const noexcept override;
 
       /// @brief Converts the numeric value of the current IntPtr object to its equivalent String representation.
       /// @param format Format-control String.

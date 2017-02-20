@@ -48,7 +48,7 @@ int32 Int64::GetHashCode() const noexcept {
   return (int32)(this->value & 0x00000000FFFFFFFF) ^ (int32)((this->value>>32) & 0x00000000FFFFFFFF);
 }
 
-string Int64::ToString() const {
+string Int64::ToString() const noexcept {
   return ToString("d", Reference<IFormatProvider>::Null());
 }
 
