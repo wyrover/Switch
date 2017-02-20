@@ -52,7 +52,7 @@ bool UInt64::TryParse(const string& str, int32 base, UInt64& value) {
   return TryParse(str, base, value.value);
 }
 
-int32 UInt64::GetHashCode() const {
+int32 UInt64::GetHashCode() const noexcept {
   int32 hash = 0;
 
   hash += (int32)(this->value & 0x00000000FFFFFFFF);

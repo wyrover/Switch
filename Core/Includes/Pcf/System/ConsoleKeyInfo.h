@@ -82,7 +82,7 @@ namespace Pcf {
 
       /// @brief Serves as a hash function for a particular type.
       /// @return int32 A hash code for the current object.
-      virtual int32 GetHashCode() const override { return (int32)this->key ^ (this->keyChar << 16) ^ ((int32)this->modifiers << 24); }
+      virtual int32 GetHashCode() const noexcept override { return (int32)this->key ^ (this->keyChar << 16) ^ ((int32)this->modifiers << 24); }
 
     private:
       char32 keyChar = 0;

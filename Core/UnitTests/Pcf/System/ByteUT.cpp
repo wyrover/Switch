@@ -156,20 +156,6 @@ TEST(Byte, TryParse) {
   EXPECT_EQ(255, b);
 }
 
-TEST(Byte, TryParse_Byte) {
-  Byte b;
-  EXPECT_TRUE(Byte::TryParse("0", b));
-  EXPECT_EQ(0, b);
-  EXPECT_TRUE(Byte::TryParse("1", b));
-  EXPECT_EQ(1, b);
-  EXPECT_TRUE(Byte::TryParse("18", b));
-  EXPECT_EQ(18, b);
-  EXPECT_TRUE(Byte::TryParse("127", b));
-  EXPECT_EQ(127, b);
-  EXPECT_TRUE(Byte::TryParse("255", b));
-  EXPECT_EQ(255, b);
-}
-
 TEST(Byte, TryParse_Sign) {
   byte b;
   EXPECT_TRUE(Byte::TryParse("+0", b));
@@ -182,36 +168,8 @@ TEST(Byte, TryParse_Sign) {
   EXPECT_EQ(255, b);
 }
 
-TEST(Byte, TryParse_Sign_Byte) {
-  Byte b;
-  EXPECT_TRUE(Byte::TryParse("+0", b));
-  EXPECT_EQ(0, b);
-  EXPECT_TRUE(Byte::TryParse("-0", b));
-  EXPECT_EQ(0, b);
-  EXPECT_TRUE(Byte::TryParse("+12", b));
-  EXPECT_EQ(12, b);
-  EXPECT_TRUE(Byte::TryParse("+255", b));
-  EXPECT_EQ(255, b);
-}
-
 TEST(Byte, TryParse_Leading_Zeros) {
   byte b;
-  EXPECT_TRUE(Byte::TryParse("0", b));
-  EXPECT_EQ(0, b);
-  EXPECT_TRUE(Byte::TryParse("00", b));
-  EXPECT_EQ(0, b);
-  EXPECT_TRUE(Byte::TryParse("000", b));
-  EXPECT_EQ(0, b);
-  EXPECT_TRUE(Byte::TryParse("01", b));
-  EXPECT_EQ(1, b);
-  EXPECT_TRUE(Byte::TryParse("0001", b));
-  EXPECT_EQ(1, b);
-  EXPECT_TRUE(Byte::TryParse("099", b));
-  EXPECT_EQ(99, b);
-}
-
-TEST(Byte, TryParse_Leading_Zeros_Byte) {
-  Byte b;
   EXPECT_TRUE(Byte::TryParse("0", b));
   EXPECT_EQ(0, b);
   EXPECT_TRUE(Byte::TryParse("00", b));
@@ -242,38 +200,8 @@ TEST(Byte, TryParse_Spaces) {
   EXPECT_EQ(52, b);
 }
 
-TEST(Byte, TryParse_Spaces_Byte) {
-  Byte b;
-  EXPECT_TRUE(Byte::TryParse(" 5", b));
-  EXPECT_EQ(5, b);
-  EXPECT_TRUE(Byte::TryParse("     5", b));
-  EXPECT_EQ(5, b);
-  EXPECT_TRUE(Byte::TryParse("5 ", b));
-  EXPECT_EQ(5, b);
-  EXPECT_TRUE(Byte::TryParse("51     ", b));
-  EXPECT_EQ(51, b);
-  EXPECT_TRUE(Byte::TryParse(" 5      ", b));
-  EXPECT_EQ(5, b);
-  EXPECT_TRUE(Byte::TryParse("        52 ", b));  
-  EXPECT_EQ(52, b);
-}
-
 TEST(Byte, TryParse_Fail_Format) {
   byte b;
-  EXPECT_FALSE(Byte::TryParse("", b));
-  EXPECT_FALSE(Byte::TryParse("a56", b));
-  EXPECT_FALSE(Byte::TryParse("0 0", b));
-  EXPECT_FALSE(Byte::TryParse("++000", b));
-  EXPECT_FALSE(Byte::TryParse("+", b));
-  EXPECT_FALSE(Byte::TryParse("-", b));
-  EXPECT_FALSE(Byte::TryParse("--5", b));
-  EXPECT_FALSE(Byte::TryParse("0x53", b));
-  EXPECT_FALSE(Byte::TryParse("100a", b));
-  EXPECT_FALSE(Byte::TryParse("10u", b));
-}
-
-TEST(Byte, TryParse_Fail_Format_Byte) {
-  Byte b;
   EXPECT_FALSE(Byte::TryParse("", b));
   EXPECT_FALSE(Byte::TryParse("a56", b));
   EXPECT_FALSE(Byte::TryParse("0 0", b));
@@ -298,34 +226,8 @@ TEST(Byte, TryParse_Fail_Overflow) {
   EXPECT_FALSE(Byte::TryParse("-300", b));
 }
 
-TEST(Byte, TryParse_Fail_Overflow_Byte) {
-  Byte b;
-  EXPECT_TRUE(Byte::TryParse("255",b));
-  EXPECT_EQ(0xFF, b);
-  EXPECT_FALSE(Byte::TryParse("256", b));
-  EXPECT_FALSE(Byte::TryParse("1233", b));
-  EXPECT_FALSE(Byte::TryParse("-1", b));
-  EXPECT_FALSE(Byte::TryParse("-2", b));
-  EXPECT_FALSE(Byte::TryParse("-256", b));
-  EXPECT_FALSE(Byte::TryParse("-300", b));
-}
-
 TEST(Byte, TryParse_Binary) {
   byte b;
-  EXPECT_TRUE(Byte::TryParse("0b", (int32)NumberRepresentationBase::Binary, b));
-  EXPECT_EQ(0, b);
-  EXPECT_TRUE(Byte::TryParse("1", (int32)NumberRepresentationBase::Binary, b));
-  EXPECT_EQ(1, b);
-  EXPECT_TRUE(Byte::TryParse("10b", (int32)NumberRepresentationBase::Binary, b));
-  EXPECT_EQ(2, b);
-  EXPECT_TRUE(Byte::TryParse("11", (int32)NumberRepresentationBase::Binary, b));
-  EXPECT_EQ(3, b);
-  EXPECT_TRUE(Byte::TryParse("110", (int32)NumberRepresentationBase::Binary, b));
-  EXPECT_EQ(6, b);
-}
-
-TEST(Byte, TryParse_Binary_Byte) {
-  Byte b;
   EXPECT_TRUE(Byte::TryParse("0b", (int32)NumberRepresentationBase::Binary, b));
   EXPECT_EQ(0, b);
   EXPECT_TRUE(Byte::TryParse("1", (int32)NumberRepresentationBase::Binary, b));
@@ -352,34 +254,8 @@ TEST(Byte, TryParse_Binary_Fail) {
   EXPECT_FALSE(Byte::TryParse("10u",2, b));
 }
 
-TEST(Byte, TryParse_Binary_Fail_Byte) {
-  Byte b;
-  EXPECT_FALSE(Byte::TryParse("",2, b));
-  EXPECT_FALSE(Byte::TryParse("2",2, b));
-  EXPECT_FALSE(Byte::TryParse("103",2, b));
-  EXPECT_FALSE(Byte::TryParse("++0",2, b));
-  EXPECT_FALSE(Byte::TryParse("+",2, b));
-  EXPECT_FALSE(Byte::TryParse("-",2, b));
-  EXPECT_FALSE(Byte::TryParse("--1",2, b));
-  EXPECT_FALSE(Byte::TryParse("0x53",2, b));
-  EXPECT_FALSE(Byte::TryParse("100a",2, b));
-  EXPECT_FALSE(Byte::TryParse("10u",2, b));
-}
-
 TEST(Byte, TryParse_Octal) {
   byte b;
-  EXPECT_TRUE(Byte::TryParse("0", (int32)NumberRepresentationBase::Octal, b));
-  EXPECT_EQ(0, b);
-  EXPECT_TRUE(Byte::TryParse("1", (int32)NumberRepresentationBase::Octal, b));
-  EXPECT_EQ(1, b);
-  EXPECT_TRUE(Byte::TryParse("14", (int32)NumberRepresentationBase::Octal, b));
-  EXPECT_EQ(12, b);
-  EXPECT_TRUE(Byte::TryParse("70", (int32)NumberRepresentationBase::Octal, b));
-  EXPECT_EQ(56, b);
-}
-
-TEST(Byte, TryParse_Octal_Byte) {
-  Byte b;
   EXPECT_TRUE(Byte::TryParse("0", (int32)NumberRepresentationBase::Octal, b));
   EXPECT_EQ(0, b);
   EXPECT_TRUE(Byte::TryParse("1", (int32)NumberRepresentationBase::Octal, b));
@@ -410,44 +286,8 @@ TEST(Byte, TryParse_Hexadecimal) {
   EXPECT_EQ(0x3C, b);
 }
 
-TEST(Byte, TryParse_Hexadecimal_Byte) {
-  Byte b;
-  EXPECT_TRUE(Byte::TryParse("0x0", (int32)NumberRepresentationBase::Hexadecimal,b));
-  EXPECT_EQ(0, b);
-  EXPECT_TRUE(Byte::TryParse(" 0x0", (int32)NumberRepresentationBase::Hexadecimal,b));
-  EXPECT_EQ(0, b);
-  EXPECT_TRUE(Byte::TryParse(" 0x000", (int32)NumberRepresentationBase::Hexadecimal,b));
-  EXPECT_EQ(0, b);
-  EXPECT_TRUE(Byte::TryParse("1", (int32)NumberRepresentationBase::Hexadecimal,b));
-  EXPECT_EQ(1, b);
-  EXPECT_TRUE(Byte::TryParse("C", (int32)NumberRepresentationBase::Hexadecimal,b));
-  EXPECT_EQ(0xC, b);
-  EXPECT_TRUE(Byte::TryParse("3c", (int32)NumberRepresentationBase::Hexadecimal,b));
-  EXPECT_EQ(0x3C, b);
-  EXPECT_TRUE(Byte::TryParse("0x3c", (int32)NumberRepresentationBase::Hexadecimal,b));
-  EXPECT_EQ(0x3C, b);
-  EXPECT_TRUE(Byte::TryParse("0x3C", (int32)NumberRepresentationBase::Hexadecimal,b));
-  EXPECT_EQ(0x3C, b);
-}
-
 TEST(Byte, TryParse_Hexadecimal_Fail) {
   byte b;
-  EXPECT_FALSE(Byte::TryParse("x", (int32)NumberRepresentationBase::Hexadecimal, b));
-  EXPECT_FALSE(Byte::TryParse("x0", (int32)NumberRepresentationBase::Hexadecimal, b));
-  EXPECT_FALSE(Byte::TryParse("0x", (int32)NumberRepresentationBase::Hexadecimal, b));
-  EXPECT_FALSE(Byte::TryParse("00x0", (int32)NumberRepresentationBase::Hexadecimal, b));
-  EXPECT_FALSE(Byte::TryParse("0 x0", (int32)NumberRepresentationBase::Hexadecimal, b));
-  EXPECT_FALSE(Byte::TryParse("0x 0", (int32)NumberRepresentationBase::Hexadecimal, b));
-  EXPECT_FALSE(Byte::TryParse("X", (int32)NumberRepresentationBase::Hexadecimal, b));
-  EXPECT_FALSE(Byte::TryParse("X0", (int32)NumberRepresentationBase::Hexadecimal, b));
-  EXPECT_FALSE(Byte::TryParse("0X", (int32)NumberRepresentationBase::Hexadecimal, b));
-  EXPECT_FALSE(Byte::TryParse("00X0", (int32)NumberRepresentationBase::Hexadecimal, b));
-  EXPECT_FALSE(Byte::TryParse("0 X0", (int32)NumberRepresentationBase::Hexadecimal, b));
-  EXPECT_FALSE(Byte::TryParse("0X 0", (int32)NumberRepresentationBase::Hexadecimal,b));
-}
-
-TEST(Byte, TryParse_Hexadecimal_Fail_Byte) {
-  Byte b;
   EXPECT_FALSE(Byte::TryParse("x", (int32)NumberRepresentationBase::Hexadecimal, b));
   EXPECT_FALSE(Byte::TryParse("x0", (int32)NumberRepresentationBase::Hexadecimal, b));
   EXPECT_FALSE(Byte::TryParse("0x", (int32)NumberRepresentationBase::Hexadecimal, b));

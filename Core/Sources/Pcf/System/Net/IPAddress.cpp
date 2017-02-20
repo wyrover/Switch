@@ -151,7 +151,7 @@ AddressFamily IPAddress::GetAddressFamily() const {
   return this->family;
 }
 
-int32 IPAddress::GetHashCode() const {
+int32 IPAddress::GetHashCode() const noexcept {
   if (this->family == Sockets::AddressFamily::InterNetwork)
     return Int64(this->address).GetHashCode();
 

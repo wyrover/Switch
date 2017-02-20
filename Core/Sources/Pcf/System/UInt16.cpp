@@ -45,7 +45,7 @@ bool UInt16::TryParse(const string& str, int32 base, UInt16& value) {
   return TryParse(str, base, value.value);
 }
 
-int32 UInt16::GetHashCode() const {
+int32 UInt16::GetHashCode() const noexcept {
   return this->value;
 }
 

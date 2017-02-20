@@ -29,7 +29,7 @@ namespace {
 
     virtual ~Person() { }
     
-    virtual int32 GetHashCode() const { return this->name.GetHashCode() ^ this->surname.GetHashCode(); }
+    virtual int32 GetHashCode() const noexcept { return this->name.GetHashCode() ^ this->surname.GetHashCode(); }
     
     const string& GetName() const { return this->name; }
     const string& GetSurname() const { return this->surname; }

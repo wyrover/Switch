@@ -56,15 +56,11 @@ bool Single::Equals(const Single& value) const {
   return (this->value == value.value);
 }
 
-bool Single::Equals(const ValueType& valueType) const {
-  return is<Single>(valueType) && Equals((const Single&)valueType);
-}
-
 bool Single::Equals(const object& obj) const {
   return is<Single>(obj) && Equals(static_cast<const Single&>(obj));
 }
 
-int32 Single::GetHashCode() const {
+int32 Single::GetHashCode() const noexcept {
   return *((int32*)&this->value);
 }
 

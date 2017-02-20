@@ -229,7 +229,7 @@ namespace Pcf {
     
     /// @brief Serves as a hash function for a particular type.
     /// @return Int32 A hash code for the current Object.
-    int32 GetHashCode() const override {
+    int32 GetHashCode() const noexcept override {
       if(!this->HasValue) return 0;
       return As<object>().GetHashCode();
     }

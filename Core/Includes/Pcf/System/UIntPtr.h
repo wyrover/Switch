@@ -57,7 +57,7 @@ namespace Pcf {
 
       /// @brief Serves as a hash function for a particular type.
       /// @return Int32 A hash code for the current object.
-      int32 GetHashCode() const override;
+      int32 GetHashCode() const noexcept override;
 
       /// @brief Converts the value of this instance to a 32-bit signed integer.
       /// @return Int32 A 32-bit signed integer equal to the value of this instance.

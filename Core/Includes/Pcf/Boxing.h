@@ -68,7 +68,7 @@ namespace Pcf {
     bool Equals(const Boxer& value) const {return this->Equals((const T&)value);}
     bool Equals(const T& value) const {return this->CompareTo(value) == 0;}
     
-    int32 GetHashCode() const override {return Pcf::GetHashCodeFromBoxedType((const T&)*this);}
+    int32 GetHashCode() const noexcept override {return Pcf::GetHashCodeFromBoxedType((const T&)*this);}
   };
   
   /// @brief Support boxing of type

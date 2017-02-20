@@ -895,11 +895,6 @@ namespace Pcf {
       /// @exception ArgumentNullException The parameters trimChars is null.
       String TrimStart(const Array<char32>& trimChars) const;
 
-      /// @brief Determines whether this instance of ValueType and a specified object, which must also be a ValueType object, have the same value.
-      /// @param valueType The ValueType to compare with the current Object.
-      /// @return bool true if the specified ValueType is equal to the current ValueType. otherwise, false.
-      bool Equals(const ValueType& valueType) const override;
-
       /// @brief Determines whether this instance of String and a specified object, which must also be a String object, have the same value.
       /// @param obj The Object to compare with the current Object.
       /// @return bool true if the specified Object is equal to the current Object. otherwise, false.
@@ -908,7 +903,7 @@ namespace Pcf {
       /// @brief Serves as a hash function for a particular type.
       /// @return int32 A hash code for the current Object.
       /// @return @see Object
-      int32 GetHashCode() const override;
+      int32 GetHashCode() const noexcept override;
       
       /// @brief Returns a String that represents the current String.
       /// @return const String A String that represents the current String.

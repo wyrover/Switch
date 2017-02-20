@@ -119,7 +119,7 @@ namespace Pcf {
 
       /// @brief Serves as a hash function for a particular type.
       /// @return Int32 A hash code for the current object.
-      int32 GetHashCode() const override { return ::GetHashCode(item1) ^ ::GetHashCode(item2) ^ ::GetHashCode(item3) ^ ::GetHashCode(item4) ^ ::GetHashCode(item5)  ^ ::GetHashCode(item6) ^ ::GetHashCode(item7)  ^ ::GetHashCode(item8); }
+      int32 GetHashCode() const noexcept override { return ::GetHashCode(item1) ^ ::GetHashCode(item2) ^ ::GetHashCode(item3) ^ ::GetHashCode(item4) ^ ::GetHashCode(item5)  ^ ::GetHashCode(item6) ^ ::GetHashCode(item7)  ^ ::GetHashCode(item8); }
 
       /// @brief Returns a string that represents the current object.
       /// @return string A string that represents the current object.

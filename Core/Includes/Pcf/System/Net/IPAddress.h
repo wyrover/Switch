@@ -144,7 +144,7 @@ namespace Pcf {
 
         /// @brief Serves as a hash function for a particular type.
         /// @return int32 A hash code for the current object.
-        virtual int32 GetHashCode() const;
+        virtual int32 GetHashCode() const noexcept;
 
         /// @brief Converts a Double value from host byte order to network byte order.
         /// @param host The number to convert, expressed in host byte order.

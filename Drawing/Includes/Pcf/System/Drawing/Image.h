@@ -135,7 +135,7 @@ namespace Pcf {
 
         virtual int32 CompareTo(const Image& value) const {return IntPtr((intptr)&rawData).CompareTo(IntPtr((intptr)&rawData));}
 
-        virtual int32 GetHashCode() const {return IntPtr((intptr)&rawData).GetHashCode();}
+        virtual int32 GetHashCode() const noexcept {return IntPtr((intptr)&rawData).GetHashCode();}
 
       protected:
         /// @cond

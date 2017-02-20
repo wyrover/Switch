@@ -151,15 +151,11 @@ bool Char::Equals(const Char& value) const {
   return this->value == value.value;
 }
 
-bool Char::Equals(const ValueType& valueType) const {
-  return is<Char>(valueType) && Equals((const Char&)valueType);
-}
-
 bool Char::Equals(const object& obj) const {
   return is<Char>(obj) && Equals((const Char&)obj);
 }
 
-int32 Char::GetHashCode() const {
+int32 Char::GetHashCode() const noexcept {
   return this->value;
 }
 

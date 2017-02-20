@@ -243,7 +243,7 @@ namespace Pcf {
 
       /// @brief Serves as a hash function for a particular type.
       /// @return int32 A hash code for the current object.
-      int32 GetHashCode() const override;
+      int32 GetHashCode() const noexcept override;
 
       /// @brief Returns a String that represents the current MyObj.
       /// @return String A String that represents the current MyObj.

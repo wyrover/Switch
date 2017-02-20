@@ -589,7 +589,7 @@ namespace Pcf {
           return Int32(this->argb).CompareTo(color);
         }
 
-        virtual int32 GetHashCode() const { return this->argb; }
+        virtual int32 GetHashCode() const noexcept { return this->argb; }
 
       private :
         Color(int32 argb) : argb(argb), knownColor((KnownColor)0) {}

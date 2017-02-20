@@ -1002,10 +1002,6 @@ String String::TrimStart(const Array<char32>& trimChars) const {
   return String();
 }
 
-bool String::Equals(const ValueType& valueType) const {
-  return is<String>(valueType) && Equals((const String&)valueType);
-}
-
 bool String::Equals(const object& obj) const {
   if (GetType() == obj.GetType())
     return Equals(static_cast<const String&>(obj));
@@ -1013,7 +1009,7 @@ bool String::Equals(const object& obj) const {
   return false;
 }
 
-int32 String::GetHashCode() const {
+int32 String::GetHashCode() const noexcept {
   int32 hash = 0;
   for (StringType::const_iterator it = (this->string).begin(); it != (this->string).end(); it++)
     hash = 5 * hash + *it;

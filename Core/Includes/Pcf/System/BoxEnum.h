@@ -84,7 +84,7 @@ namespace Pcf {
       
       /// @brief Serves as a hash function for a particular type.
       /// @return int32 A hash code for the current object.
-      virtual int32 GetHashCode() const override {return Int64((int64)this->value).GetHashCode();}
+      virtual int32 GetHashCode() const noexcept override {return Int64((int64)this->value).GetHashCode();}
       
       /// @brief Retrieves the name of the constant in the specified enumeration that has the specified value.
       /// @param value The value of a particular enumerated constant in terms of its underlying type.

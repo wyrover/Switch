@@ -46,7 +46,7 @@ namespace {
       return is<Pet>(other) && name == as<Pet>(other).name && age == as<Pet>(other).age && vaccinated == as<Pet>(other).vaccinated;
     }
 
-    virtual int32 GetHashCode() const {
+    virtual int32 GetHashCode() const noexcept {
       return name.GetHashCode() ^ age ^ (int)vaccinated;
     }
     

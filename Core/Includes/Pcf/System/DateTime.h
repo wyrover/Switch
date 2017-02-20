@@ -430,11 +430,6 @@ namespace Pcf {
       /// @exception ArgumentNullException The parameters value is null.
       bool Equals(const DateTime& value) const;
 
-      /// @brief Determines whether this instance of ValueType and a specified object, which must also be a ValueType object, have the same value.
-      /// @param valueType The ValueType to compare with the current Object.
-      /// @return bool true if the specified ValueType is equal to the current ValueType. otherwise, false.
-      bool Equals(const ValueType& valueType) const override;
-
       /// @brief Determines whether this instance of DateTime and a specified object, which must also be a DateTime object, have the same value.
       /// @param obj The object to compare with the current object.
       /// @return bool true if the specified object is equal to the current object. otherwise, false.
@@ -443,7 +438,7 @@ namespace Pcf {
 
       /// @brief Serves as a hash function for a particular type.
       /// @return Int32 A hash code for the current object.
-      int32 GetHashCode() const override;
+      int32 GetHashCode() const noexcept override;
 
       /// @brief Returns a String that represents the current DateTime.
       /// @return String A String that represents the current DateTime.

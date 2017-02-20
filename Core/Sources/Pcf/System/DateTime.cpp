@@ -306,15 +306,11 @@ bool DateTime::Equals(const DateTime& value) const {
   return this->value == value.value;
 }
 
-bool DateTime::Equals(const ValueType& valueType) const {
-  return is<DateTime>(valueType) && Equals((const DateTime&)valueType);
-}
-
 bool DateTime::Equals(const object& obj) const {
   return is<DateTime>(obj) && Equals((const DateTime&)obj);
 }
 
-int32 DateTime::GetHashCode() const {
+int32 DateTime::GetHashCode() const noexcept {
   return (int32)(this->value & 0x00000000FFFFFFFF) ^ (int32)((this->value>>32) & 0x00000000FFFFFFFF);
 }
 

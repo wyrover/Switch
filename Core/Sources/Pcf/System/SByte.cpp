@@ -45,7 +45,7 @@ bool SByte::TryParse(const string& str, int32 base, SByte& value) {
   return TryParse(str, base, value.value);
 }
 
-int32 SByte::GetHashCode() const {
+int32 SByte::GetHashCode() const noexcept {
   return this->value;
 }
 

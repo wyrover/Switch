@@ -44,7 +44,7 @@ bool Int64::TryParse(const string& str, int32 base, Int64& value) {
   return TryParse(str, base, value.value);
 }
 
-int32 Int64::GetHashCode() const {
+int32 Int64::GetHashCode() const noexcept {
   return (int32)(this->value & 0x00000000FFFFFFFF) ^ (int32)((this->value>>32) & 0x00000000FFFFFFFF);
 }
 

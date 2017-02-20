@@ -37,7 +37,7 @@ bool IntPtr::Equals(const object& obj) const {
   return is<IntPtr>(obj) && Equals(static_cast<const IntPtr&>(obj));
 }
 
-int32 IntPtr::GetHashCode() const {
+int32 IntPtr::GetHashCode() const noexcept {
   int64 handleValue = (int64)this->value;
   int32 hash = 0;
 

@@ -129,7 +129,7 @@ bool TimeSpan::Equals(const object& obj) const {
   return is<TimeSpan>(obj) && Equals(static_cast<const TimeSpan&>(obj));
 }
 
-int32 TimeSpan::GetHashCode() const {
+int32 TimeSpan::GetHashCode() const noexcept {
   int32 hash = 0;
 
   hash = (int32)(this->value & 0x00000000FFFFFFFF);

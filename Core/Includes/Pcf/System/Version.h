@@ -163,7 +163,7 @@ namespace Pcf {
       
       /// @brief Serves as a hash function for a particular type.
       /// @return int32 A hash code for the current object.
-      int32 GetHashCode() const override {
+      int32 GetHashCode() const noexcept override {
         int32 hash = this->major ^ this->minor;
         if (this->build != -1)
           hash ^= this->build;

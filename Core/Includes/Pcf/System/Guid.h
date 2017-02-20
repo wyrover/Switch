@@ -252,7 +252,7 @@ namespace Pcf {
 
       /// @brief Serves as a hash function for a particular type.
       /// @return Int32 A hash code for the current object.
-      int32 GetHashCode() const override {
+      int32 GetHashCode() const noexcept override {
         int32 hashCode = 0;
 
         for (int32 i = 0; i< this->data.Length; i++)

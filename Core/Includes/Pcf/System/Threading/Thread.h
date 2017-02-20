@@ -212,7 +212,7 @@ namespace Pcf {
         
         /// @brief Serves as a hash function for a particular type.
         /// @return int32 A hash code for the current Object.
-        int32 GetHashCode() const override {return this->data->managedThreadId;}
+        int32 GetHashCode() const noexcept override {return this->data->managedThreadId;}
         
         /// @brief Determines whether this instance and another specified Thread object have the same value.
         /// @param value The Thread to compare.

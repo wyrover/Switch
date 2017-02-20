@@ -96,21 +96,16 @@ namespace Pcf {
       /// @brief Determines whether this instance of Boolean and a specified Object, which must also be a Boolean Object, have the same value.
       /// @param value The Boolean to compare with the current Object.
       /// @return Boolean true if the specified value is equal to the current Object. otherwise, false.
-      bool Equals(const Boolean& value) const { return this->value == value.value; }
-      
-      /// @brief Determines whether this instance of ValueType and a specified Object, which must also be a ValueType Object, have the same value.
-      /// @param valueType The ValueType to compare with the current Object.
-      /// @return bool true if the specified ValueType is equal to the current ValueType. otherwise, false.
-      bool Equals(const ValueType& valueType) const override {return is<Boolean>(valueType) && Equals((const Boolean&)valueType);}
+      bool Equals(bool value) const { return this->value == value; }
       
       /// @brief Determines whether this instance of Boolean and a specified Object, which must also be a Boolean Object, have the same value.
       /// @param obj The Object to compare with the current Object.
       /// @return Boolean true if the specified Object is equal to the current Object. otherwise, false.
-      bool Equals(const Object& obj) const override {return is<Boolean>(obj) && Equals((const Boolean&)obj);}
+      bool Equals(const Object& obj) const override {return is<Boolean>(obj) && Equals(((const Boolean&)obj).value);}
       
       /// @brief Serves as a hash function for a particular type.
       /// @return Int32 A hash code for the current Object.
-      int32 GetHashCode() const override { return this->value; }
+      int32 GetHashCode() const noexcept override { return this->value; }
       
       /// @brief Returns the TypeCode for this instance.
       /// @return TypeCode The enumerated constant that is the TypeCode of the class or value type that implements this interface.
