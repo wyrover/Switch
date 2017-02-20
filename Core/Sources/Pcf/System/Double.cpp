@@ -51,7 +51,7 @@ bool Double::Equals(const Double& value) const {
   return this->value == value;
 }
 
-bool Double::Equals(const object& obj) const {
+bool Double::Equals(const object& obj) const noexcept {
   return is<Double>(obj) && Equals(static_cast<const Double&>(obj));
 }
 

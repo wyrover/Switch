@@ -155,7 +155,7 @@ namespace Pcf {
       /// @brief Determines whether this instance of Version and a specified object, which must also be a Version object, have the same value.
       /// @param obj The object to compare with the current object.
       /// @return bool true if the specified object is equal to the current object. otherwise, false.
-      bool Equals(const object& obj) const override {
+      bool Equals(const object& obj) const noexcept override {
         if (!is<Version>(obj))
           return false;
         return Equals((const Version&)obj);

@@ -62,7 +62,7 @@ namespace Pcf {
       /// @param obj The object to compare with the current object.
       /// @return Boolean true if the specified object is equal to the current object. otherwise, false.
       /// @exception ArgumentNullException The parameters obj is null.
-      virtual bool Equals(const object& obj) const override { return is<BoxEnum<T>>(obj) && Equals(static_cast<const BoxEnum<T>&>(obj)); }
+      bool Equals(const object& obj) const noexcept override { return is<BoxEnum<T>>(obj) && Equals(static_cast<const BoxEnum<T>&>(obj)); }
       
       /// @brief Set this Enum class with specified value.
       /// @param value An int32 as value.

@@ -56,7 +56,7 @@ bool Single::Equals(const Single& value) const {
   return (this->value == value.value);
 }
 
-bool Single::Equals(const object& obj) const {
+bool Single::Equals(const object& obj) const noexcept {
   return is<Single>(obj) && Equals(static_cast<const Single&>(obj));
 }
 

@@ -64,7 +64,7 @@ namespace Pcf {
         /// @brief Determines whether this instance of PointF and a specified object, which must also be a PointF object, have the same value.
         /// @param obj The object to compare with the current object.
         /// @return bool true if the specified object is equal to the current object. otherwise, false.
-        virtual bool Equals(const object& obj) const;
+        bool Equals(const object& obj) const noexcept override;
 
         /// @brief Tests whether this PointF class has X and Y of 0.
         /// @return bool Returns true  when this PointF class has both a X and Y of 0; otherwise, false.
@@ -72,7 +72,7 @@ namespace Pcf {
 
         /// @brief Creates a human-readable string that represents this PointF class.
         /// @return string A string that represents this PointF.
-        virtual string ToString() const { return String::Format("{{X={0},Y={1}}}", this->x, this->y); }
+        string ToString() const override { return String::Format("{{X={0},Y={1}}}", this->x, this->y); }
 
         /// @brief Translates this PointF by the specified PointF.
         /// @param pt The PointF used offset this PointF.

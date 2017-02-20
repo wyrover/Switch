@@ -101,7 +101,7 @@ namespace Pcf {
       /// @brief Determines whether this instance of Boolean and a specified Object, which must also be a Boolean Object, have the same value.
       /// @param obj The Object to compare with the current Object.
       /// @return Boolean true if the specified Object is equal to the current Object. otherwise, false.
-      bool Equals(const Object& obj) const override {return is<Boolean>(obj) && Equals(((const Boolean&)obj).value);}
+      bool Equals(const Object& obj) const noexcept override {return is<Boolean>(obj) && Equals(((const Boolean&)obj).value);}
       
       /// @brief Serves as a hash function for a particular type.
       /// @return Int32 A hash code for the current Object.

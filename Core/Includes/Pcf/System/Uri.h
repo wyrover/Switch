@@ -807,7 +807,7 @@ namespace Pcf {
         return this->scheme == uri.scheme && this->schemeDelimiter == uri.schemeDelimiter && this->host == uri.host && this->port == uri.port && this->path == uri.path && this->query == uri.query && this->kind == uri.kind;
       }
       
-      bool Equals(const Object& obj) const override {
+      bool Equals(const Object& obj) const noexcept override {
         return is<Uri>(obj) && Equals((const Uri&)obj);
       }
       

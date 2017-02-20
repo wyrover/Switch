@@ -39,7 +39,7 @@ namespace Pcf {
           
           void EndTransfert();
           
-          virtual void Close() override;
+          void Close() override;
           
         protected:
           friend class WebResponse;

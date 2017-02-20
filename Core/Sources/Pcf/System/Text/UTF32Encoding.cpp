@@ -120,7 +120,7 @@ Array<byte> UTF32Encoding::GetPreamble() const {
       return {};
 }
 
-bool UTF32Encoding::Equals(const object& obj) const {
+bool UTF32Encoding::Equals(const object& obj) const noexcept {
   const UTF32Encoding* ue = dynamic_cast<const UTF32Encoding*>(&obj);
   if (ue == null)
     return false;

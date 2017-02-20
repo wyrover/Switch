@@ -235,12 +235,12 @@ namespace Pcf {
     }
     
     /// @brief Determines whether this instance of Any and a specified Object, which must also be a Any Object, have the same value.
-    /// @param value The Object to compare with the current Object.
+    /// @param obj The Object to compare with the current Object.
     /// @return true if the specified Object is equal to the current Object. otherwise, false.
-    bool Equals(const object& value) const override {
-      if (is<Any>(value))
-        return Equals(as<Any>(value));
-      return *this->value == value;
+    bool Equals(const object& obj) const noexcept override {
+      if (is<Any>(obj))
+        return Equals(as<Any>(obj));
+      return *this->value == obj;
     }
     
     /// @brief Determines whether this instance of Any and a specified Object, which must also be an Any Object, have the same value.

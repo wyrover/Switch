@@ -82,7 +82,7 @@ namespace Pcf {
        /// @brief Determines whether the specified System::Object is equal to the current instance.
        /// @param value The System::Object to compare with the current instance.
        /// @return true if value is an instance of System::Text::Encoding and is equal to the current instance; otherwise, false.
-        virtual bool Equals(const object& obj) const;
+        bool Equals(const object& obj) const noexcept;
 
         virtual UniquePointer<Decoder> CreateDecoder() const;
         virtual UniquePointer<Encoder> CreateEncoder() const;

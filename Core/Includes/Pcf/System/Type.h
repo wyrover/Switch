@@ -52,7 +52,7 @@ namespace Pcf {
       /// @brief Determines whether the specified Object is equal to the current Object.
       /// @param obj The Object to compare with the current Object.
       /// @return bool true if the specified Object is equal to the current Object. otherwise, false.
-      bool Equals(const Object& obj) const override;
+      bool Equals(const Object& obj) const noexcept override;
       
       /// @brief Determines whether the specified Type is equal to the current Type.
       /// @param type The Type to compare with the current Object.

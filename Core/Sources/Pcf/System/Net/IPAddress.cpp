@@ -121,7 +121,7 @@ bool IPAddress::Equals(const IPAddress& value) const {
   return true;
 }
 
-bool IPAddress::Equals(const object& obj) const {
+bool IPAddress::Equals(const object& obj) const noexcept {
   return is<IPAddress>(obj) && Equals(static_cast<const IPAddress&>(obj));
 }
 

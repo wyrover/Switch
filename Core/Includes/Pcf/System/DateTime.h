@@ -434,7 +434,7 @@ namespace Pcf {
       /// @param obj The object to compare with the current object.
       /// @return bool true if the specified object is equal to the current object. otherwise, false.
       /// @exception ArgumentNullException The parameters obj is null.
-      bool Equals(const object& obj) const override;
+      bool Equals(const object& obj) const noexcept override;
 
       /// @brief Serves as a hash function for a particular type.
       /// @return Int32 A hash code for the current object.

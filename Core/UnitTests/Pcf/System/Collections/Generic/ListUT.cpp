@@ -43,10 +43,10 @@ namespace {
       return *this;
     }
     
-    string ToString() const { return this->name; }
+    string ToString() const override { return this->name; }
     const string& GetName() const { return this->name; }
     
-    virtual bool Equals(const object& obj) const {
+    bool Equals(const object& obj) const noexcept override {
       if (!is<Dinosaur>(obj))
         return false;
       

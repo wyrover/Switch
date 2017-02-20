@@ -18,7 +18,7 @@ Type::Type(const ::type& type) : FullName(pcf_delegate {return this->GetFullName
 }
 
 Type& Type::operator =(const Type& type) {memcpy((void*)&this->type, (void*)&type.type, sizeof(type.type)); return *this;}
-bool Type::Equals(const Object& obj) const {
+bool Type::Equals(const Object& obj) const noexcept {
   return is<Type>(obj) && Equals(static_cast<const Type&>(obj));
 }
 

@@ -97,7 +97,7 @@ namespace Pcf {
       /// @brief Determines whether this instance of Any and a specified Object, which must also be a Nullable<T> Object, have the same value.
       /// @param obj The Object to compare with the current Object.
       /// @return true if the specified Object is equal to the current Object. otherwise, false.
-      bool Equals(const object& value) const override {return is<Nullable<T>>(value) && Equals(as<Nullable<T>>(value));}
+      bool Equals(const object& obj) const noexcept override {return is<Nullable<T>>(obj) && Equals(as<Nullable<T>>(obj));}
       
       /// @brief Determines whether this instance of Nullable<T> and a specified Object, which must also be a Nullable<T> Object, have the same value.
       /// @param value The Nullable<T> to compare with the current Object.

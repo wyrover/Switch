@@ -51,7 +51,7 @@ namespace Pcf {
         /// @brief Determines whether this instance of CharacterRange and a specified object, which must also be a CharacterRange object, have the same value.
         /// @param obj The CharacterRange to compare with the current object.
         /// @return bool true if the specified obj is equal to the current object. otherwise, false.
-        virtual bool Equals(const object& obj) const {
+        bool Equals(const object& obj) const noexcept override {
           return is<CharacterRange>(obj) && Equals(as<CharacterRange>(obj));
         }
 

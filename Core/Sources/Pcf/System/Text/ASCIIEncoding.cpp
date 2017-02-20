@@ -99,7 +99,7 @@ int32 ASCIIEncoding::GetMaxCharCount(int32 byteCount) const {
   return byteCount;
 }
 
-bool ASCIIEncoding::Equals(const object& obj) const {
+bool ASCIIEncoding::Equals(const object& obj) const noexcept {
   return is<ASCIIEncoding>(obj);
 }
 

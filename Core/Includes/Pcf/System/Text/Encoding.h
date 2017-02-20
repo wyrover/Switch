@@ -105,7 +105,7 @@ namespace Pcf {
         /// @brief Determines whether the specified System::Object is equal to the current instance.
         /// @param value The System::Object to compare with the current instance.
         /// @return true if value is an instance of System::Text::Encoding and is equal to the current instance; otherwise, false.
-        virtual bool Equals(const object& obj) const;
+        bool Equals(const object& obj) const noexcept override;
 
         /// @brief When overridden in a derived class, calculates the number of bytes produced
         /// by encoding all the characters in the specified character array.
@@ -284,7 +284,7 @@ namespace Pcf {
 
         /// @brief Returns a String that represents the current object.
         /// @return a String that represents the current object.
-        virtual String ToString() const;
+        virtual String ToString() const override;
 
         /// @brief Initializes a new instance of the System::Text::Encoding class that corresponds to a copy of the specified encoding.
         /// @param encoding The encoding from which the copy is created.

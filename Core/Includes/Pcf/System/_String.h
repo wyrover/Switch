@@ -898,7 +898,7 @@ namespace Pcf {
       /// @brief Determines whether this instance of String and a specified object, which must also be a String object, have the same value.
       /// @param obj The Object to compare with the current Object.
       /// @return bool true if the specified Object is equal to the current Object. otherwise, false.
-      bool Equals(const Object& obj) const override;
+      bool Equals(const Object& obj) const noexcept override;
       
       /// @brief Serves as a hash function for a particular type.
       /// @return int32 A hash code for the current Object.
@@ -970,14 +970,14 @@ namespace Pcf {
         explicit Enumerator(const String& str);
         Enumerator(const Enumerator& other);
         ~Enumerator();
-        void Reset();
-        virtual bool MoveNext();
+        void Reset() override;
+        bool MoveNext() override;
         
         Enumerator& operator =(const Enumerator& other);
-        bool Equals(const Object& other) const;
+        bool Equals(const Object& other) const noexcept override;
         
       protected:
-        const char32& GetCurrent() const;
+        const char32& GetCurrent() const override;
         bool IsFinished() const;
         int64 operationNumber;
         bool beforeFirst;
@@ -991,14 +991,14 @@ namespace Pcf {
         explicit ReverseEnumerator(const String& str);
         ReverseEnumerator(const ReverseEnumerator& other);
         ~ReverseEnumerator();
-        void Reset();
-        virtual bool MoveNext();
+        void Reset() override;
+        bool MoveNext() override;
         
         ReverseEnumerator& operator =(const ReverseEnumerator& other);
-        bool Equals(const Object& other) const;
+        bool Equals(const Object& other) const noexcept override;
         
       protected:
-        const char32& GetCurrent() const;
+        const char32& GetCurrent() const override;
         bool IsFinished() const;
         int64 operationNumber;
         bool beforeFirst;

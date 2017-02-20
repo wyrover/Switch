@@ -42,15 +42,15 @@ namespace {
     int Age() const { return age; }
     bool IsVaccinated() const { return vaccinated; }
     
-    virtual bool Equals(const object& other) const {
+    bool Equals(const object& other) const noexcept override {
       return is<Pet>(other) && name == as<Pet>(other).name && age == as<Pet>(other).age && vaccinated == as<Pet>(other).vaccinated;
     }
 
-    virtual int32 GetHashCode() const noexcept {
+    int32 GetHashCode() const noexcept override {
       return name.GetHashCode() ^ age ^ (int)vaccinated;
     }
     
-    virtual int32 CompareTo(const IComparable& other) const {
+    int32 CompareTo(const IComparable& other) const override {
       if (!is<Pet>(other))
         return 1;
       
@@ -66,7 +66,7 @@ namespace {
       return 1;
     }
     
-    string ToString() const {
+    string ToString() const override {
       return String::Format("{{{0}, {1}, {2}}}", this->name, this->age, this-vaccinated);
     }
     

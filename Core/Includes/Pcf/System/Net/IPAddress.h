@@ -128,7 +128,7 @@ namespace Pcf {
         /// @brief Determines whether this instance of IPAddress and a specified object, which must also be a IPAddress object, have the same value.
         /// @param obj The object to compare with the current object.
         /// @return bool true if the specified object is equal to the current object. otherwise, false.
-        virtual bool Equals(const object& obj) const;
+        bool Equals(const object& obj) const noexcept override;
 
         /// @brief Provides a copy of the IPAddress as an array of bytes.
         /// @return  A Byte array.
@@ -144,7 +144,7 @@ namespace Pcf {
 
         /// @brief Serves as a hash function for a particular type.
         /// @return int32 A hash code for the current object.
-        virtual int32 GetHashCode() const noexcept;
+        int32 GetHashCode() const noexcept override;
 
         /// @brief Converts a Double value from host byte order to network byte order.
         /// @param host The number to convert, expressed in host byte order.
@@ -342,7 +342,7 @@ namespace Pcf {
 
         /// @brief Converts an Internet address to its standard notation.
         /// @return string A string that contains the IP address in either IPv4 dotted-quad or in IPv6 colon-hexadecimal notation.
-        virtual string ToString() const;
+        string ToString() const override;
 
         /// @brief Determines whether a string is a valid IP address.
         /// @param str The string to validate.

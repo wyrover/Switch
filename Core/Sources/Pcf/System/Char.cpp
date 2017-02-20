@@ -151,7 +151,7 @@ bool Char::Equals(const Char& value) const {
   return this->value == value.value;
 }
 
-bool Char::Equals(const object& obj) const {
+bool Char::Equals(const object& obj) const noexcept {
   return is<Char>(obj) && Equals((const Char&)obj);
 }
 

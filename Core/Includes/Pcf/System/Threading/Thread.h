@@ -226,7 +226,7 @@ namespace Pcf {
         /// @exception ArgumentNullException The parameters obj is null.
         /// @return @see object
         /// @return @see Boolean
-        virtual bool Equals(const Object& obj) const override {return is<Thread>(obj) && Equals((const Thread&)obj);}
+        bool Equals(const Object& obj) const noexcept override {return is<Thread>(obj) && Equals((const Thread&)obj);}
         
         /// @brief Notifies a host that execution is about to leave a region of code in which the effects of a thread abort.
         static void EndCriticalRegion() {

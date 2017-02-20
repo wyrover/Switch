@@ -53,7 +53,7 @@ namespace Pcf {
       /// @brief Determines whether this instance of UIntPtr and a specified object, which must also be a UIntPtr object, have the same value.
       /// @param obj The object to compare with the current object.
       /// @return bool true if the specified object is equal to the current object. otherwise, false.
-      bool Equals(const object& obj) const override;
+      bool Equals(const object& obj) const noexcept override;
 
       /// @brief Serves as a hash function for a particular type.
       /// @return Int32 A hash code for the current object.

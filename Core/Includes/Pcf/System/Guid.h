@@ -263,7 +263,7 @@ namespace Pcf {
 
       bool Equals(const Guid& value) const {return this->data == value.data;}
 
-      bool Equals(const object& obj) const override {return is<Guid>(obj) && Equals(static_cast<const Guid&>(obj));}
+      bool Equals(const object& obj) const noexcept override {return is<Guid>(obj) && Equals(static_cast<const Guid&>(obj));}
 
       /// @brief Initializes a new instance of the Guid structure.
       /// @return Guid A new GUID object.

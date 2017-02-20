@@ -33,7 +33,7 @@ namespace Pcf {
       /// @exception ArgumentNullException The parameters obj is null.
       /// @return @see object
       /// @return @see Boolean
-      virtual bool Equals(const Object& obj) const = 0;
+      virtual bool Equals(const Object& obj) const noexcept = 0;
     };
 
     /// @brief Base class for n Tuple classes.
@@ -105,7 +105,7 @@ namespace Pcf {
       /// @param obj The object to compare with the current object.
       /// @return bool true if the specified object is equal to the current object. otherwise, false.
       /// @exception ArgumentNullException The parameters obj is null.
-      bool Equals(const Object& obj) const override {
+      bool Equals(const Object& obj) const noexcept override {
         return is<TupleImpl<T1, T2, T3, T4, T5, T6, T7, T8>>(obj) && Equals(static_cast<const TupleImpl<T1, T2, T3, T4, T5, T6, T7, T8>&>(obj));
       }
 

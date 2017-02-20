@@ -40,7 +40,7 @@ namespace Pcf {
       /// @brief Determines whether this instance of Exception and a specified object, which must also be a Exception object, have the same value.
       /// @param obj The object to compare with the current object.
       /// @return bool true if the specified object is equal to the current object. otherwise, false.
-      bool Equals(const object& obj) const override {return is<UInt64>(obj) && Equals(((const UInt64&)obj).value);}
+      bool Equals(const object& obj) const noexcept override {return is<UInt64>(obj) && Equals(((const UInt64&)obj).value);}
 
       /// @brief Converts the specified String representation of a logical value to its 64-bit unsigned integer equivalent.
       /// @param str A String containing the value to convert.

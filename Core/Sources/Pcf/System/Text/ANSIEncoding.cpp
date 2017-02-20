@@ -52,7 +52,7 @@ int32 ANSIEncoding::GetMaxCharCount(int32 byteCount) const {
   return byteCount;
 }
 
-bool ANSIEncoding::Equals(const object& obj) const {
+bool ANSIEncoding::Equals(const object& obj) const noexcept {
   const ANSIEncoding* enc = dynamic_cast<const ANSIEncoding*>(&obj);
   if (enc == null)
     return false;

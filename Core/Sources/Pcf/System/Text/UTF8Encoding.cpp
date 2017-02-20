@@ -117,7 +117,7 @@ Array<byte> UTF8Encoding::GetPreamble() const {
     return {};
 }
 
-bool UTF8Encoding::Equals(const object& obj) const {
+bool UTF8Encoding::Equals(const object& obj) const noexcept {
   const UTF8Encoding* utf8 = dynamic_cast<const UTF8Encoding*>(&obj);
   if (utf8 == null)
     return false;

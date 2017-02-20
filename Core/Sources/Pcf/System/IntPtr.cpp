@@ -33,7 +33,7 @@ bool IntPtr::Equals(const IntPtr& value) const {
   return this->value == value.value;
 }
 
-bool IntPtr::Equals(const object& obj) const {
+bool IntPtr::Equals(const object& obj) const noexcept {
   return is<IntPtr>(obj) && Equals(static_cast<const IntPtr&>(obj));
 }
 

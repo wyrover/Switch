@@ -32,7 +32,7 @@ bool UIntPtr::Equals(const UIntPtr& value) const {
   return this->value == value.value;
 }
 
-bool UIntPtr::Equals(const object& obj) const {
+bool UIntPtr::Equals(const object& obj) const noexcept {
   return is<UIntPtr>(obj) && Equals(static_cast<const UIntPtr&>(obj));
 }
 

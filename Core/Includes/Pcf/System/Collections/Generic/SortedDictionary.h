@@ -206,7 +206,7 @@ namespace Pcf {
           /// @exception System::ArgumentException The number of elements in the source System::Collections::Generic::SortedDictionary<TKey,TValue>
           ///            is greater than the available space from index to the end of the destination
           ///            array.
-          virtual void CopyTo(System::Array<KeyValuePair<TKey,TValue>>& array, int32 index) const override {
+          void CopyTo(System::Array<KeyValuePair<TKey,TValue>>& array, int32 index) const override {
             if (index < 0 || array.Length < index + this->Count)
               throw ArgumentOutOfRangeException(pcf_current_information);
 
@@ -229,7 +229,7 @@ namespace Pcf {
           /// @return true if the element is successfully removed; otherwise, false. This method
           ///         also returns false if key is ! found in the System::Collections::Generic::SortedDictionary<TKey,TValue>.
           /// @exception System::ArgumentNullException key is null.
-          virtual bool Remove(const KeyValuePair<TKey,TValue>& kvp) override {
+          bool Remove(const KeyValuePair<TKey,TValue>& kvp) override {
             if (!Contains(kvp))
               return false;
 
@@ -411,11 +411,11 @@ namespace Pcf {
           /// @endcond
           
         private:
-          virtual int32 GetCount() const override {return static_cast<int32>(this->map.size());}
+          int32 GetCount() const override {return static_cast<int32>(this->map.size());}
           
-          virtual bool GetIsReadOnly() const override {return false;}
+          bool GetIsReadOnly() const override {return false;}
           
-          virtual bool GetIsSynchronized() const override {return false;}
+          bool GetIsSynchronized() const override {return false;}
 
           KeyCollection GetKeys() const override {
             KeyCollection keys;

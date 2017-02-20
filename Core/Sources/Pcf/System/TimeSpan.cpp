@@ -125,7 +125,7 @@ bool TimeSpan::TryParse(const string& str, TimeSpan& value) {
   return true;
 }
 
-bool TimeSpan::Equals(const object& obj) const {
+bool TimeSpan::Equals(const object& obj) const noexcept {
   return is<TimeSpan>(obj) && Equals(static_cast<const TimeSpan&>(obj));
 }
 

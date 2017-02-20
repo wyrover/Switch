@@ -1002,7 +1002,7 @@ String String::TrimStart(const Array<char32>& trimChars) const {
   return String();
 }
 
-bool String::Equals(const object& obj) const {
+bool String::Equals(const object& obj) const noexcept {
   if (GetType() == obj.GetType())
     return Equals(static_cast<const String&>(obj));
 
@@ -1342,7 +1342,7 @@ String::Enumerator& String::Enumerator::operator =(const String::Enumerator& oth
   return *this;
 }
 
-bool String::Enumerator::Equals(const Object& obj) const {
+bool String::Enumerator::Equals(const Object& obj) const noexcept {
   const String::Enumerator* other = dynamic_cast<const String::Enumerator*>(&obj);
   if (other == null) return false;
   
@@ -1408,7 +1408,7 @@ String::ReverseEnumerator& String::ReverseEnumerator::operator =(const String::R
   return *this;
 }
 
-bool String::ReverseEnumerator::Equals(const Object& obj) const {
+bool String::ReverseEnumerator::Equals(const Object& obj) const noexcept {
   const String::ReverseEnumerator* other = dynamic_cast<const String::ReverseEnumerator*>(&obj);
   if (other == null) return false;
   

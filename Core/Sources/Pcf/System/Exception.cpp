@@ -56,7 +56,7 @@ bool Exception::Equals(const Exception& value) const {
   return this->hresult == value.hresult && this->message == value.message && this->currentInformation == value.currentInformation && this->innerException == value.innerException;
 }
 
-bool Exception::Equals(const object& obj) const {
+bool Exception::Equals(const object& obj) const noexcept {
   return is<Exception>(obj) && Equals(static_cast<const Exception&>(obj));
 }
 

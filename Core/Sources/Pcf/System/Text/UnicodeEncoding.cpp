@@ -139,7 +139,7 @@ Array<byte> UnicodeEncoding::GetPreamble() const {
       return {};
 }
 
-bool UnicodeEncoding::Equals(const object& obj) const {
+bool UnicodeEncoding::Equals(const object& obj) const noexcept {
   const UnicodeEncoding* ue = dynamic_cast<const UnicodeEncoding*>(&obj);
   if (ue == null)
     return false;

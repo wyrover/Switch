@@ -64,7 +64,7 @@ namespace Pcf {
     int32 CompareTo(const Boxer& value) const {return this->CompareTo((const T&)value);}
     int32 CompareTo(const T& value) const {return CompareBoxedType((const T&)*this, value);}
     
-    bool Equals(const object& value) const override {return is<T>(value) && this->Equals((const T&)value);}
+    bool Equals(const object& obj) const noexcept override {return is<T>(obj) && this->Equals((const T&)obj);}
     bool Equals(const Boxer& value) const {return this->Equals((const T&)value);}
     bool Equals(const T& value) const {return this->CompareTo(value) == 0;}
     

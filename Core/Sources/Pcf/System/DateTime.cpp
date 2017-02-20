@@ -306,7 +306,7 @@ bool DateTime::Equals(const DateTime& value) const {
   return this->value == value.value;
 }
 
-bool DateTime::Equals(const object& obj) const {
+bool DateTime::Equals(const object& obj) const noexcept {
   return is<DateTime>(obj) && Equals((const DateTime&)obj);
 }
 

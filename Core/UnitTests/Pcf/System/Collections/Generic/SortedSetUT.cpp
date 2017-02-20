@@ -42,7 +42,7 @@ namespace {
       return this->name.CompareTo(p->name);
     }
 
-    virtual bool Equals(const object& obj) const  {
+    bool Equals(const object& obj) const noexcept override {
       if (!is<Person>(obj))
         return false;
     
@@ -50,7 +50,7 @@ namespace {
       return this->name == p->name && this->surname == p->surname;
     }
 
-    string ToString() const { return this->name + " " + this->surname; }
+    string ToString() const override { return this->name + " " + this->surname; }
     
   private:
     string name, surname;
