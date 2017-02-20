@@ -52,7 +52,7 @@ namespace Pcf {
       /// @par Examples
       /// The following code example compares different objects.
       /// @include ObjectEquals2.cpp
-      static bool Equals(const Object& objectA, const Object& objectB) { return objectA.Equals(objectB); }
+      static bool Equals(const Object& objectA, const Object& objectB) noexcept { return objectA.Equals(objectB); }
 
       /// @brief Serves as a hash function for a particular type.
       /// @return int32 A hash code for the current Object.
@@ -63,7 +63,7 @@ namespace Pcf {
       /// @par Examples
       /// The following code example demonstrates that GetType returns the runtime type of the current instance.
       /// @include ObjectGetType.cpp
-      virtual Type GetType() const;
+      virtual Type GetType() const noexcept;
 
       /// @brief Creates a shallow copy of the current Object.
       /// @return UniquePointer<Object> A shallow copy of the current Object.
@@ -96,7 +96,7 @@ namespace Pcf {
   using object = System::Object;
 }
 
-std::ostream& operator<<(std::ostream& os, const System::Object& value);
+std::ostream& operator<<(std::ostream& os, const System::Object& value) noexcept;
 
 #include "_String.h"
 #include "Type.h"

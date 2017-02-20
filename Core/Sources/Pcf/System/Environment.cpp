@@ -15,6 +15,7 @@
 #include "../../../Includes/Pcf/System/Threading/Thread.h"
 #include "../../../Includes/Pcf/System/Threading/AbandonedMutexException.h"
 #include "../../__OS/CoreApi.h"
+#include "SocketInit.h"
 
 using namespace System;
 using namespace System::Collections::Generic;
@@ -123,6 +124,7 @@ namespace {
   };
   
   int32 exitCode;
+  UniquePointer<SocketInit> socketInit;
   UniquePointer<System::Array<String>> commandLineArgs;
   UniquePointer<ConsoleChangeCodePage> consoleChangeCodePage;
   UniquePointer<ConsoleInterceptSignals> consoleInterceptSignals;
@@ -301,6 +303,7 @@ Array<string> Environment::SetCommandLineArgs(char* argv[], int argc) {
   if (commandLineArgs != null)
     throw InvalidOperationException("Can be called only once", pcf_current_information);
 
+  socketInit = UniquePointer<SocketInit>();
   consoleChangeCodePage = UniquePointer<ConsoleChangeCodePage>::Create();
   //consoleInterceptSignals = UniquePointer<ConsoleInterceptSignals>::Create();
   signalCatcher = UniquePointer<SignalCatcher>::Create();
