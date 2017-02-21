@@ -200,7 +200,7 @@ UInt32& UInt32::operator *=(const UInt32& value) {
 }
 
 UInt32& UInt32::operator /=(const UInt32& value) {
-  if (value == 0)
+  if (value.value == 0)
     throw DivideByZeroException(pcf_current_information);
 
   this->value /= value.value;
@@ -208,7 +208,7 @@ UInt32& UInt32::operator /=(const UInt32& value) {
 }
 
 UInt32& UInt32::operator %=(const UInt32& value) {
-  if (value == 0)
+  if (value.value == 0)
     throw DivideByZeroException(pcf_current_information);
 
   this->value %= value;

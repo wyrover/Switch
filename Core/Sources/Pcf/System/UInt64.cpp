@@ -225,7 +225,7 @@ UInt64& UInt64::operator *=(const UInt64& value) {
 }
 
 UInt64& UInt64::operator /=(const UInt64& value) {
-  if (value == 0)
+  if (value.value == 0)
     throw DivideByZeroException(pcf_current_information);
 
   this->value /= value.value;
@@ -233,7 +233,7 @@ UInt64& UInt64::operator /=(const UInt64& value) {
 }
 
 UInt64& UInt64::operator %=(const UInt64& value) {
-  if (value == 0)
+  if (value.value == 0)
     throw DivideByZeroException(pcf_current_information);
 
   this->value %= value;
