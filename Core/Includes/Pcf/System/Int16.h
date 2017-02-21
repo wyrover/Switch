@@ -162,7 +162,7 @@ namespace Pcf {
       const Int16 operator ++(int);
       Int16& operator --();
       const Int16 operator --(int value);
-      template<typename T> bool operator==(T value) const {return (T)this->value == value;}
+      template<typename T> bool operator==(T value) const {return this->value == value;}
       template<typename T> bool operator!=(T value) const {return !this->operator==(value);}
       /// @endcond
     };

@@ -162,7 +162,7 @@ namespace Pcf {
       const UInt32 operator ++(int);
       UInt32& operator --();
       const UInt32 operator --(int);
-      template<typename T> bool operator==(T value) const {return (T)this->value == value;}
+      template<typename T> bool operator==(T value) const {return this->value == value;}
       template<typename T> bool operator!=(T value) const {return !this->operator==(value);}
       /// @endcond
     };

@@ -162,7 +162,7 @@ namespace Pcf {
       const SByte operator ++(int);
       SByte& operator --();
       const SByte operator --(int);
-      template<typename T> bool operator==(T value) const {return (T)this->value == value;}
+      template<typename T> bool operator==(T value) const {return this->value == value;}
       template<typename T> bool operator!=(T value) const {return !this->operator==(value);}
       /// @endcond
    };

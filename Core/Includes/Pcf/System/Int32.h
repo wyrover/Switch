@@ -162,7 +162,7 @@ namespace Pcf {
       const Int32 operator ++(int);
       Int32& operator --();
       const Int32 operator --(int);
-      template<typename T> bool operator==(T value) const {return (T)this->value == value;}
+      template<typename T> bool operator==(T value) const {return this->value == value;}
       template<typename T> bool operator!=(T value) const {return !this->operator==(value);}
       /// @endcond
     };
