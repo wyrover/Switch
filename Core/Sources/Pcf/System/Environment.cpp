@@ -4,6 +4,8 @@
 #include <cstring>
 #include <thread>
 
+#include "SocketInit.h"
+
 #include "../../../Includes/Pcf/System/AccessViolationException.h"
 #include "../../../Includes/Pcf/System/Console.h"
 #include "../../../Includes/Pcf/System/Environment.h"
@@ -15,7 +17,6 @@
 #include "../../../Includes/Pcf/System/Threading/Thread.h"
 #include "../../../Includes/Pcf/System/Threading/AbandonedMutexException.h"
 #include "../../__OS/CoreApi.h"
-#include "SocketInit.h"
 
 using namespace System;
 using namespace System::Collections::Generic;
