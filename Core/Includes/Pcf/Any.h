@@ -399,7 +399,7 @@ namespace Pcf {
   /// @endcode
   /// @exception ArgumentNullException The parameters is null.
   template<typename T>
-  const T& as(const Any& value) {
+  T as(const Any& value) {
     return value.As<T>();
   }
   
@@ -411,7 +411,7 @@ namespace Pcf {
   /// @endcode
   /// @exception ArgumentNullException The parameters is null.
   template<typename T>
-  T& as(Any& value) {
+  T as(Any& value) {
     return value.As<T>();
   }
   
@@ -438,7 +438,129 @@ namespace Pcf {
   bool is(Any& value) {
     return value.Is<T>();
   }
+
+  /// @cond
+  template<>
+  inline bool as<bool>(const Any& value) {
+    return value.As<System::Boolean>();
+  }
   
+  template<>
+  inline byte as<byte>(const Any& value) {
+    return value.As<System::Byte>();
+  }
+  
+  template<>
+  inline char32 as<char32>(const Any& value) {
+    return value.As<System::Char>();
+  }
+  
+  template<>
+  inline int16 as<int16>(const Any& value) {
+    return value.As<System::Int16>();
+  }
+  
+  template<>
+  inline int32 as<int32>(const Any& value) {
+    return value.As<System::Int32>();
+  }
+  
+  template<>
+  inline int64 as<int64>(const Any& value) {
+    return value.As<System::Int64>();
+  }
+  
+  template<>
+  inline intptr as<intptr>(const Any& value) {
+    return value.As<System::IntPtr>();
+  }
+  
+  template<>
+  inline sbyte as<sbyte>(const Any& value) {
+    return value.As<System::SByte>();
+  }
+  
+  template<>
+  inline uint16 as<uint16>(const Any& value) {
+    return value.As<System::UInt16>();
+  }
+  
+  template<>
+  inline uint32 as<uint32>(const Any& value) {
+    return value.As<System::UInt32>();
+  }
+  
+  template<>
+  inline uint64 as<uint64>(const Any& value) {
+    return value.As<System::UInt64>();
+  }
+  
+  template<>
+  inline uintptr as<uintptr>(const Any& value) {
+    return value.As<System::UIntPtr>();
+  }
+
+  template<>
+  inline bool as<bool>(Any& value) {
+    return value.As<System::Boolean>();
+  }
+  
+  template<>
+  inline byte as<byte>(Any& value) {
+    return value.As<System::Byte>();
+  }
+  
+  template<>
+  inline char32 as<char32>(Any& value) {
+    return value.As<System::Char>();
+  }
+  
+  template<>
+  inline int16 as<int16>(Any& value) {
+    return value.As<System::Int16>();
+  }
+  
+  template<>
+  inline int32 as<int32>(Any& value) {
+    return value.As<System::Int32>();
+  }
+  
+  template<>
+  inline int64 as<int64>(Any& value) {
+    return value.As<System::Int64>();
+  }
+  
+  template<>
+  inline intptr as<intptr>(Any& value) {
+    return value.As<System::IntPtr>();
+  }
+  
+  template<>
+  inline sbyte as<sbyte>(Any& value) {
+    return value.As<System::SByte>();
+  }
+  
+  template<>
+  inline uint16 as<uint16>(Any& value) {
+    return value.As<System::UInt16>();
+  }
+  
+  template<>
+  inline uint32 as<uint32>(Any& value) {
+    return value.As<System::UInt32>();
+  }
+  
+  template<>
+  inline uint64 as<uint64>(Any& value) {
+    return value.As<System::UInt64>();
+  }
+  
+  template<>
+  inline uintptr as<uintptr>(Any& value) {
+    return value.As<System::UIntPtr>();
+  }
+  /// @endcond
+
   using any = Any;
 }
 
