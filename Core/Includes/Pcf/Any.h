@@ -71,6 +71,7 @@ namespace Pcf {
     Any() {}
     Any(const Any& any) : value(any.value) {}
     Any& operator=(const Any& any) {this->value = any.value; return *this;}
+    Any(std::nullptr_t value) {}
     Any(bool value) : value(new System::Boolean(value)) {}
     Any(byte value) : value(new System::Byte(value)) {}
     Any(char value) : value(new System::Char(value)) {}
@@ -112,6 +113,7 @@ namespace Pcf {
       return To<T>();
     }
     
+    bool operator==(std::nullptr_t value) const {return this->value.IsNull();}
     bool operator==(bool value) const {return As<System::Boolean>() == value;}
     bool operator==(byte value) const {return As<System::Byte>() == value;}
     bool operator==(char value) const {return As<System::Char>() == char32(value);}
