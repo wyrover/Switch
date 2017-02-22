@@ -42,8 +42,11 @@ find_package(GTest REQUIRED)
 add_library(Pcf.TUnit STATIC ${INCLUDE_FILES} ${SOURCE_FILES})
 target_include_directories(Pcf.TUnit PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Includes> $<INSTALL_INTERFACE:include>)
 target_link_libraries(Pcf.TUnit ${GTEST_LIBRARIES} Pcf.Core)
-
 set_target_properties(Pcf.TUnit PROPERTIES FOLDER Pcf/TUnit)
+
+if (BUILD_TUNIT_UNIT_TESTS)
+add_subdirectory("UnitTests")
+endif ()
 
 install(TARGETS Pcf.TUnit EXPORT Pcf DESTINATION lib)
 install(DIRECTORY "Includes/Pcf/." DESTINATION include/Pcf)
@@ -53,7 +56,3 @@ if(MSVC)
   install(FILES "$<TARGET_FILE_DIR:Pcf.TUnit>/Pcf.TUnit${CMAKE_DEBUG_POSTFIX}.pdb" DESTINATION lib CONFIGURATIONS Debug OPTIONAL)
   install(FILES "$<TARGET_FILE_DIR:Pcf.TUnit>Pcf.TUnit.pdb" DESTINATION lib CONFIGURATIONS Release OPTIONAL)
 endif()
-
-if (BUILD_TUNIT_UNIT_TESTS)
-  add_subdirectory("UnitTests")
-endif ()

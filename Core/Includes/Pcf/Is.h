@@ -137,32 +137,32 @@ namespace Pcf {
   }
 
   template<typename T>
-  bool is(int32 value) {
+  inline bool is(int32 value) {
     return false;
   }
   
   template<>
-  bool is<int32>(int32 value) {
+  inline bool is<int32>(int32 value) {
     return true;
   }
   
   template<typename T>
-  bool is(double value) {
+  inline bool is(double value) {
     return false;
   }
   
   template<>
-  bool is<double>(double value) {
+  inline bool is<double>(double value) {
     return true;
   }
   
   template<typename T>
-  bool is(float value) {
+  inline bool is(float value) {
     return false;
   }
   
   template<>
-  bool is<float>(float value) {
+  inline bool is<float>(float value) {
     return true;
   }
 }

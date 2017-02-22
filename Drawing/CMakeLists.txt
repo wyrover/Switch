@@ -92,6 +92,10 @@ target_include_directories(Pcf.Drawing PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_
 target_link_libraries(Pcf.Drawing ${JPEG_LIBRARIES} ${PNG_LIBRARIES} Pcf.Core)
 set_target_properties(Pcf.Drawing PROPERTIES FOLDER Pcf/Drawing)
 
+if (BUILD_DRAWING_UNIT_TESTS)
+  add_subdirectory("UnitTests")
+endif ()
+
 install(TARGETS Pcf.Drawing EXPORT Pcf DESTINATION lib)
 install(DIRECTORY "Includes/Pcf/." DESTINATION include/Pcf)
 if(MSVC)
@@ -100,7 +104,3 @@ if(MSVC)
   install(FILES "$<TARGET_FILE_DIR:Pcf.Drawing>/Pcf.Drawing${CMAKE_DEBUG_POSTFIX}.pdb" DESTINATION lib CONFIGURATIONS Debug OPTIONAL)
   install(FILES "$<TARGET_FILE_DIR:Pcf.Drawing>/Pcf.Drawing::pdb" DESTINATION lib CONFIGURATIONS Release OPTIONAL)
 endif()
-
-if (BUILD_DRAWING_UNIT_TESTS)
-  add_subdirectory("UnitTests")
-endif ()
