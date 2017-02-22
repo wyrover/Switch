@@ -68,7 +68,7 @@ namespace Pcf {
 
         /// @brief Returns a string that represents the current object.
         /// @return string A string that represents the current object.
-        string ToString() const override;
+        String ToString() const noexcept override;
 
       private :
         void SetAddress(const IPAddress& address);

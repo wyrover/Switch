@@ -76,24 +76,19 @@ namespace Pcf {
       /// @return bool true if the specified value is equal to the current Object. otherwise, false.
       bool Equals(const Double& value) const;
 
-      /// @brief Determines whether this instance of ValueType and a specified Object, which must also be a ValueType Object, have the same value.
-      /// @param valueType The ValueType to compare with the current Object.
-      /// @return bool true if the specified ValueType is equal to the current ValueType. otherwise, false.
-      bool Equals(const ValueType& valueType) const override;
-
       /// @brief Determines whether this instance of Double and a specified Object, which must also be a Double Object, have the same value.
       /// @param obj The Object to compare with the current Object.
       /// @return bool true if the specified Object is equal to the current Object. otherwise, false.
       /// @exception ArgumentNullException The parameters obj is null.
-      bool Equals(const Object& obj) const override;
+      bool Equals(const Object& obj) const noexcept override;
 
       /// @brief Serves as a hash function for a particular type.
       /// @return Int32 A hash code for the current Object.
-      int32 GetHashCode() const override;
+      int32 GetHashCode() const noexcept override;
 
       /// @brief Returns a String that represents the current Double.
       /// @return String A String that represents the current Double.
-      String ToString() const override;
+      String ToString() const noexcept override;
       String ToString(const String& format, const IFormatProvider& formatProvider) const override;
 
       /// @brief Returns a String that represents the current Double.
@@ -117,7 +112,7 @@ namespace Pcf {
       /// Greater than zero   This instance is greater than value.
       /// -or-
       /// obj is nullNothingnullptra null reference.
-      virtual int32 CompareTo(const IComparable& obj) const override;
+      virtual int32 CompareTo(const IComparable& obj) const noexcept override;
 
       /// @brief Returns the TypeCode for this instance.
       /// @return TypeCode The enumerated constant that is the TypeCode of the class or value type that implements this interface.

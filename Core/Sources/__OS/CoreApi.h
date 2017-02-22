@@ -14,6 +14,7 @@
 #include "../../Includes/Pcf/System/Array.h"
 #include "../../Includes/Pcf/System/ConsoleSpecialKey.h"
 #include "../../Includes/Pcf/System/Environment.h"
+#include "../../Includes/Pcf/System/Guid.h"
 #include "../../Includes/Pcf/System/PlatformID.h"
 #include "../../Includes/Pcf/System/String.h"
 #include "../../Includes/Pcf/Static.h"
@@ -133,6 +134,7 @@ namespace __OS {
       static int64 GetWorkingSet();
       static int32 SetEnv(const string& name, const string& value);
       static int32 UnsetEnv(const string& name);
+      static System::Guid NewGuid();
     };
     
     class Format pcf_static {

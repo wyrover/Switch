@@ -82,7 +82,7 @@ namespace Pcf {
        /// @brief Determines whether the specified System::Object is equal to the current instance.
        /// @param value The System::Object to compare with the current instance.
        /// @return true if value is an instance of System::Text::Encoding and is equal to the current instance; otherwise, false.
-        virtual bool Equals(const object& obj) const;
+        bool Equals(const object& obj) const noexcept;
 
         virtual UniquePointer<Decoder> CreateDecoder() const;
         virtual UniquePointer<Encoder> CreateEncoder() const;
@@ -95,7 +95,7 @@ namespace Pcf {
           Encoder& operator =(const Encoder& b);
           virtual int32 GetNbBytes(char32 c) const;
           virtual void Encode(char32 c, byte bytes[]) const;
-          virtual String ToString() const;
+          virtual String ToString() const noexcept;
 
         private:
           bool bigEndian;
@@ -109,7 +109,7 @@ namespace Pcf {
           Decoder& operator =(const Decoder& b);
           virtual void Add(byte b);
           virtual char32 GetCodePoint() const { return codePoint; }
-          virtual String ToString() const;
+          virtual String ToString() const noexcept;
 
         private:
           bool bigEndian;

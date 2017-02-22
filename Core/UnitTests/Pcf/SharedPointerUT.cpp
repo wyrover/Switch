@@ -43,7 +43,7 @@ namespace {
     static void ResetCpt() { cpt = 0; }
     static int GetCpt() { return cpt; }
     
-    string ToString() const { return this->str; }
+    String ToString() const noexcept { return this->str; }
     
   private:
     static int cpt;

@@ -67,7 +67,7 @@ namespace Pcf {
         
         static Process Start(const ProcessStartInfo& startInfo);
         
-        string ToString() const override {return string::Format("{0} ({1})", this->GetType(), this->ProcessName);};
+        String ToString() const noexcept override {return string::Format("{0} ({1})", this->GetType(), this->ProcessName);};
         
         void WaitForExit();
         

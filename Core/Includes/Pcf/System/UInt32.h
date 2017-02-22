@@ -30,6 +30,17 @@ namespace Pcf {
       /// @brief Create a new instance of struct UInt32
       /// @param value Value for the UInt32.
       UInt32(uint32 value) : value(value) {}
+      
+      /// @brief Determines whether two specified DateTime objects have the same value.
+      /// @param dateTimeA The first DateTime to compare.
+      /// @param dateTimeB The second DateTime to compare.
+      /// @return Boolean true if the value of dateTimenA is the same as the value of dateTimeB; otherwise, false.
+      bool Equals(uint32 value) const {return this->value == value;}
+      
+      /// @brief Determines whether this instance of Exception and a specified object, which must also be a Exception object, have the same value.
+      /// @param obj The object to compare with the current object.
+      /// @return bool true if the specified object is equal to the current object. otherwise, false.
+      bool Equals(const object& obj) const noexcept override {return is<UInt32>(obj) && Equals(((const UInt32&)obj).value);}
 
       /// @brief Converts the specified String representation of a logical value to its 32-bit unsigned integer equivalent.
       /// @param str A String containing the value to convert.
@@ -72,11 +83,11 @@ namespace Pcf {
 
       /// @brief Serves as a hash function for a particular type.
       /// @return  Int32 A hash code for the current object.
-      int32 GetHashCode() const override;
+      int32 GetHashCode() const noexcept override;
 
       /// @brief Returns a String that represents the current UInt32.
       /// @return String A String that represents the current UInt32.
-      String ToString() const override;
+      String ToString() const noexcept override;
 
       /// @brief Returns a String that represents the current UInt32.
       /// @param format Format-control String.
@@ -105,7 +116,7 @@ namespace Pcf {
       /// Greater than zero   This instance is greater than value.
       /// -or-
       /// obj is nullNothingnullptra null reference.
-      int32 CompareTo(const IComparable& obj) const override;
+      int32 CompareTo(const IComparable& obj) const noexcept override;
 
 
       /// @brief Returns the TypeCode for this instance.
@@ -116,8 +127,6 @@ namespace Pcf {
       friend class Convert;
 
       uint32 value = 0;
-
-      bool IsSigned() const override { return false; }
 
       bool ToBoolean(const IFormatProvider& provider) const override;
       byte ToByte(const IFormatProvider& provider) const override;
@@ -153,6 +162,8 @@ namespace Pcf {
       const UInt32 operator ++(int);
       UInt32& operator --();
       const UInt32 operator --(int);
+      template<typename T> bool operator==(T value) const {return this->value == value;}
+      template<typename T> bool operator!=(T value) const {return !this->operator==(value);}
       /// @endcond
     };
   }

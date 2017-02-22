@@ -212,7 +212,7 @@ namespace Pcf {
         
         /// @brief Serves as a hash function for a particular type.
         /// @return int32 A hash code for the current Object.
-        int32 GetHashCode() const override {return this->data->managedThreadId;}
+        int32 GetHashCode() const noexcept override {return this->data->managedThreadId;}
         
         /// @brief Determines whether this instance and another specified Thread object have the same value.
         /// @param value The Thread to compare.
@@ -226,7 +226,7 @@ namespace Pcf {
         /// @exception ArgumentNullException The parameters obj is null.
         /// @return @see object
         /// @return @see Boolean
-        virtual bool Equals(const Object& obj) const override {return is<Thread>(obj) && Equals((const Thread&)obj);}
+        bool Equals(const Object& obj) const noexcept override {return is<Thread>(obj) && Equals((const Thread&)obj);}
         
         /// @brief Notifies a host that execution is about to leave a region of code in which the effects of a thread abort.
         static void EndCriticalRegion() {

@@ -895,24 +895,19 @@ namespace Pcf {
       /// @exception ArgumentNullException The parameters trimChars is null.
       String TrimStart(const Array<char32>& trimChars) const;
 
-      /// @brief Determines whether this instance of ValueType and a specified object, which must also be a ValueType object, have the same value.
-      /// @param valueType The ValueType to compare with the current Object.
-      /// @return bool true if the specified ValueType is equal to the current ValueType. otherwise, false.
-      bool Equals(const ValueType& valueType) const override;
-
       /// @brief Determines whether this instance of String and a specified object, which must also be a String object, have the same value.
       /// @param obj The Object to compare with the current Object.
       /// @return bool true if the specified Object is equal to the current Object. otherwise, false.
-      bool Equals(const Object& obj) const override;
+      bool Equals(const Object& obj) const noexcept override;
       
       /// @brief Serves as a hash function for a particular type.
       /// @return int32 A hash code for the current Object.
       /// @return @see Object
-      int32 GetHashCode() const override;
+      int32 GetHashCode() const noexcept override;
       
       /// @brief Returns a String that represents the current String.
       /// @return const String A String that represents the current String.
-      String ToString() const override;
+      String ToString() const noexcept override;
       
       /// @brief Creates a new object that is a copy of the current instance.
       /// @return Object* A new object that is a copy of this instance.
@@ -935,7 +930,7 @@ namespace Pcf {
       /// @return Greater than zero   This instance is greater than value.
       /// -or-
       /// @return obj is nullNothingnullptra null reference.
-      int32 CompareTo(const IComparable& obj) const override;
+      int32 CompareTo(const IComparable& obj) const noexcept override;
       
       /// @brief Returns the TypeCode for this instance.
       /// @return TypeCode The enumerated constant that is the TypeCode of the class or value type that implements this interface.
@@ -975,14 +970,14 @@ namespace Pcf {
         explicit Enumerator(const String& str);
         Enumerator(const Enumerator& other);
         ~Enumerator();
-        void Reset();
-        virtual bool MoveNext();
+        void Reset() override;
+        bool MoveNext() override;
         
         Enumerator& operator =(const Enumerator& other);
-        bool Equals(const Object& other) const;
+        bool Equals(const Object& other) const noexcept override;
         
       protected:
-        const char32& GetCurrent() const;
+        const char32& GetCurrent() const override;
         bool IsFinished() const;
         int64 operationNumber;
         bool beforeFirst;
@@ -996,14 +991,14 @@ namespace Pcf {
         explicit ReverseEnumerator(const String& str);
         ReverseEnumerator(const ReverseEnumerator& other);
         ~ReverseEnumerator();
-        void Reset();
-        virtual bool MoveNext();
+        void Reset() override;
+        bool MoveNext() override;
         
         ReverseEnumerator& operator =(const ReverseEnumerator& other);
-        bool Equals(const Object& other) const;
+        bool Equals(const Object& other) const noexcept override;
         
       protected:
-        const char32& GetCurrent() const;
+        const char32& GetCurrent() const override;
         bool IsFinished() const;
         int64 operationNumber;
         bool beforeFirst;

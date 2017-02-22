@@ -53,11 +53,11 @@ namespace Pcf {
       /// @brief Determines whether this instance of IntPtr and a specified object, which must also be a IntPtr object, have the same value.
       /// @param obj The object to compare with the current object.
       /// @return bool true if the specified object is equal to the current object. otherwise, false.
-      bool Equals(const object& obj) const override;
+      bool Equals(const object& obj) const noexcept override;
 
       /// @brief Serves as a hash function for a particular type.
       /// @return Int32 A hash code for the current object.
-      int32 GetHashCode() const override;
+      int32 GetHashCode() const noexcept override;
 
       /// @brief Converts the value of this instance to a 32-bit signed integer.
       /// @return Int32 A 32-bit signed integer equal to the value of this instance.
@@ -74,7 +74,7 @@ namespace Pcf {
 
       /// @brief Converts the numeric value of the current IntPtr object to its equivalent String representation.
       /// @return const String The String representation of the value of this instance.
-      String ToString() const override;
+      String ToString() const noexcept override;
 
       /// @brief Converts the numeric value of the current IntPtr object to its equivalent String representation.
       /// @param format Format-control String.
@@ -103,7 +103,7 @@ namespace Pcf {
       /// Greater than zero   This instance is greater than value.
       /// -or-
       /// obj is nullNothingnullptra null reference.
-      int32 CompareTo(const IComparable& obj) const override;
+      int32 CompareTo(const IComparable& obj) const noexcept override;
 
     private:
       friend class String;

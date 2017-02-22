@@ -74,7 +74,7 @@ namespace Pcf {
       /// @exception ArgumentNullException blk1 || blk2 is null
       /// @exception ArgumentOutOfRangeException blk1Length, blk1Offset, blk2Length, blk2Offset, || count is less than 0.
       /// @exception ArgumentException The number of bytes in blk1 is less than blk1Offset plus count -||- The number of bytes in blk2 is less than blk2Offset plus count.
-      static int32 BlockCompare(void* blk1, int64 blk1Length, int64 blk1Offset, void* blk2, int64 blk2Length, int64 blk2Offset, int64 count);
+      static int32 BlockCompare(const void* blk1, int64 blk1Length, int64 blk1Offset, const void* blk2, int64 blk2Length, int64 blk2Offset, int64 count);
       
       /// @brief Copies a specified number of bytes from a source array starting at a particular offset to a destination array starting at a particular offset.
       /// @param src The source buffer.

@@ -51,19 +51,15 @@ bool Double::Equals(const Double& value) const {
   return this->value == value;
 }
 
-bool Double::Equals(const ValueType& valueType) const {
-  return is<Double>(valueType) && Equals((const Double&)valueType);
-}
-
-bool Double::Equals(const object& obj) const {
+bool Double::Equals(const object& obj) const noexcept {
   return is<Double>(obj) && Equals(static_cast<const Double&>(obj));
 }
 
-int32 Double::GetHashCode() const {
+int32 Double::GetHashCode() const noexcept {
   return Int64(*((int64*)&this->value)).GetHashCode();
 }
 
-String Double::ToString() const {
+String Double::ToString() const noexcept {
   return ToString("G", Reference<IFormatProvider>::Null());
 }
 
@@ -116,7 +112,7 @@ int32 Double::CompareTo(const Double& value) const {
   return 0;
 }
 
-int32 Double::CompareTo(const IComparable& obj) const {
+int32 Double::CompareTo(const IComparable& obj) const noexcept {
   if (!is<Double>(obj))
     return 1;
   

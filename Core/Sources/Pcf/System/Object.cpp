@@ -4,17 +4,15 @@
 
 using namespace System;
 
-Type Object::GetType() const {
+Type Object::GetType() const noexcept {
   return Type(typeid(*this));
 }
 
-String Object::ToString() const {
+String Object::ToString() const noexcept {
   return GetType().ToString();
 }
 
-std::ostream& operator<<(std::ostream& output, const System::Object& value) {
+std::ostream& operator<<(std::ostream& output, const System::Object& value) noexcept {
   output << value.ToString();
   return output;
 }
-
-#include "WinsockDll.h"

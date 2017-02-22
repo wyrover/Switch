@@ -33,6 +33,17 @@ namespace Pcf {
       /// @brief Create a new instance of struct Int64
       /// @param value Value for the Int64.
       Int64(int64 value) : value(value) {}
+      
+      /// @brief Determines whether two specified DateTime objects have the same value.
+      /// @param dateTimeA The first DateTime to compare.
+      /// @param dateTimeB The second DateTime to compare.
+      /// @return Boolean true if the value of dateTimenA is the same as the value of dateTimeB; otherwise, false.
+      bool Equals(int64 value) const {return this->value == value;}
+      
+      /// @brief Determines whether this instance of Exception and a specified object, which must also be a Exception object, have the same value.
+      /// @param obj The object to compare with the current object.
+      /// @return bool true if the specified object is equal to the current object. otherwise, false.
+      bool Equals(const object& obj) const noexcept override {return is<Int64>(obj) && Equals(((const Int64&)obj).value);}
 
       /// @brief Converts the specified String representation of a logical value to its 64-bit signed integer equivalent.
       /// @param value A String containing the value to convert.
@@ -76,10 +87,10 @@ namespace Pcf {
       /// @brief Serves as a hash function for a particular type.
       /// @return Int32 A hash code for the current object.
       /// @return @see object
-      int32 GetHashCode() const override;
+      int32 GetHashCode() const noexcept override;
       /// @brief Returns a String that represents the current Int64.
       /// @return String A String that represents the current Int64.
-      String ToString() const override;
+      String ToString() const noexcept override;
 
       /// @brief Returns a String that represents the current Int64.
       /// @param format Format-control String.
@@ -108,7 +119,7 @@ namespace Pcf {
       /// Greater than zero   This instance is greater than value.
       /// -or-
       /// obj is nullNothingnullptra null reference.
-      int32 CompareTo(const IComparable& obj) const override;
+      int32 CompareTo(const IComparable& obj) const noexcept override;
       
       /// @brief Returns the TypeCode for this instance.
       /// @return TypeCode The enumerated constant that is the TypeCode of the class or value type that implements this interface.
@@ -116,8 +127,6 @@ namespace Pcf {
 
     private:
       friend class Convert;
-
-      bool IsSigned() const override { return true; }
 
       bool ToBoolean(const IFormatProvider& provider) const override;
       byte ToByte(const IFormatProvider& provider) const override;
@@ -155,6 +164,8 @@ namespace Pcf {
       const Int64 operator ++(int);
       Int64& operator --();
       const Int64 operator --(int);
+      template<typename T> bool operator==(T value) const {return this->value == value;}
+      template<typename T> bool operator!=(T value) const {return !this->operator==(value);}
       /// @endcond
     };
   }

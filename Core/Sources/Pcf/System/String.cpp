@@ -1002,25 +1002,21 @@ String String::TrimStart(const Array<char32>& trimChars) const {
   return String();
 }
 
-bool String::Equals(const ValueType& valueType) const {
-  return is<String>(valueType) && Equals((const String&)valueType);
-}
-
-bool String::Equals(const object& obj) const {
+bool String::Equals(const object& obj) const noexcept {
   if (GetType() == obj.GetType())
     return Equals(static_cast<const String&>(obj));
 
   return false;
 }
 
-int32 String::GetHashCode() const {
+int32 String::GetHashCode() const noexcept {
   int32 hash = 0;
   for (StringType::const_iterator it = (this->string).begin(); it != (this->string).end(); it++)
     hash = 5 * hash + *it;
   return hash;
 }
 
-string String::ToString() const {
+string String::ToString() const noexcept {
   return *this;
 }
 
@@ -1032,7 +1028,7 @@ int32 String::CompareTo(const String& value) const {
   return strcmp(this->string.c_str(), value.string.c_str());
 }
 
-int32 String::CompareTo(const IComparable& obj) const {
+int32 String::CompareTo(const IComparable& obj) const noexcept {
   if (!is<String>(obj))
     return 1;
 
@@ -1346,7 +1342,7 @@ String::Enumerator& String::Enumerator::operator =(const String::Enumerator& oth
   return *this;
 }
 
-bool String::Enumerator::Equals(const Object& obj) const {
+bool String::Enumerator::Equals(const Object& obj) const noexcept {
   const String::Enumerator* other = dynamic_cast<const String::Enumerator*>(&obj);
   if (other == null) return false;
   
@@ -1412,7 +1408,7 @@ String::ReverseEnumerator& String::ReverseEnumerator::operator =(const String::R
   return *this;
 }
 
-bool String::ReverseEnumerator::Equals(const Object& obj) const {
+bool String::ReverseEnumerator::Equals(const Object& obj) const noexcept {
   const String::ReverseEnumerator* other = dynamic_cast<const String::ReverseEnumerator*>(&obj);
   if (other == null) return false;
   

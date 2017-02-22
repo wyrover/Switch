@@ -787,11 +787,11 @@ bool Color::Equals(const Color& value) const {
   return this->argb == value.argb && this->knownColor == value.knownColor;
 }
 
-bool Color::Equals(const object& obj) const {
+bool Color::Equals(const object& obj) const noexcept {
   return is<Color>(obj) && Equals((const Color&)obj);
 }
 
-string Color::ToString() const {
+string Color::ToString() const noexcept {
   if (this->knownColor == (KnownColor)0 &&this->argb == 0)
     return "Color [Empty]";
   

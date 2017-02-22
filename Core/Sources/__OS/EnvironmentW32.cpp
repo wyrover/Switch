@@ -3,6 +3,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <rpc.h>
 #include <Windows.h>
 
 #include "CoreApi.h"
@@ -82,6 +83,12 @@ int32 __OS::CoreApi::Environment::SetEnv(const string& name, const string& value
 
 int32 __OS::CoreApi::Environment::UnsetEnv(const string& name) {
   return _putenv(string::Format("{0}=", name).Data);
+}
+
+System::Guid __OS::CoreApi::Environment::NewGuid() {
+  UUID guid;
+  UuidCreate(&guid);
+  return System::Guid(guid.Data1, guid.Data2, guid.Data3, guid.Data4);
 }
 
 #endif

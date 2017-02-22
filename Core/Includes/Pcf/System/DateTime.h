@@ -430,24 +430,19 @@ namespace Pcf {
       /// @exception ArgumentNullException The parameters value is null.
       bool Equals(const DateTime& value) const;
 
-      /// @brief Determines whether this instance of ValueType and a specified object, which must also be a ValueType object, have the same value.
-      /// @param valueType The ValueType to compare with the current Object.
-      /// @return bool true if the specified ValueType is equal to the current ValueType. otherwise, false.
-      bool Equals(const ValueType& valueType) const override;
-
       /// @brief Determines whether this instance of DateTime and a specified object, which must also be a DateTime object, have the same value.
       /// @param obj The object to compare with the current object.
       /// @return bool true if the specified object is equal to the current object. otherwise, false.
       /// @exception ArgumentNullException The parameters obj is null.
-      bool Equals(const object& obj) const override;
+      bool Equals(const object& obj) const noexcept override;
 
       /// @brief Serves as a hash function for a particular type.
       /// @return Int32 A hash code for the current object.
-      int32 GetHashCode() const override;
+      int32 GetHashCode() const noexcept override;
 
       /// @brief Returns a String that represents the current DateTime.
       /// @return String A String that represents the current DateTime.
-      String ToString() const override;
+      String ToString() const noexcept override;
 
       /// @brief Returns a String that represents the current DateTime.
       /// @param format Format-control String.
@@ -497,7 +492,7 @@ namespace Pcf {
       /// -or-
       /// @return obj is nullNothingnullptra null reference.
       /// @remarks Before comparing DateTime objects, make sure that the objects represent times in the same time zone. You can do this by comparing the values of their Kind() function.
-      int32 CompareTo(const IComparable& obj) const override;
+      int32 CompareTo(const IComparable& obj) const noexcept override;
 
       /// @brief Returns the TypeCode for this instance.
       /// @return TypeCode The enumerated constant that is the TypeCode of the class or value type that implements this interface.

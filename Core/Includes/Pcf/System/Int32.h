@@ -31,6 +31,17 @@ namespace Pcf {
       /// @brief Create a new instance of struct Int32
       /// @param value Value for the Int32.
       Int32(int32 value) : value(value) {}
+      
+      /// @brief Determines whether two specified DateTime objects have the same value.
+      /// @param dateTimeA The first DateTime to compare.
+      /// @param dateTimeB The second DateTime to compare.
+      /// @return Boolean true if the value of dateTimenA is the same as the value of dateTimeB; otherwise, false.
+      bool Equals(int32 value) const {return this->value == value;}
+      
+      /// @brief Determines whether this instance of Exception and a specified object, which must also be a Exception object, have the same value.
+      /// @param obj The object to compare with the current object.
+      /// @return bool true if the specified object is equal to the current object. otherwise, false.
+      bool Equals(const object& obj) const noexcept override {return is<Int32>(obj) && Equals(((const Int32&)obj).value);}
 
       /// @brief Converts the specified String representation of a logical value to its 32-bit signed integer equivalent.
       /// @param str A String containing the value to convert.
@@ -73,11 +84,11 @@ namespace Pcf {
 
       /// @brief Serves as a hash function for a particular type.
       /// @return Int32 A hash code for the current object.
-      int32 GetHashCode() const override;
+      int32 GetHashCode() const noexcept override;
 
       /// @brief Returns a String that represents the current Int32.
       /// @return String A String that represents the current Int32.
-      String ToString() const override;
+      String ToString() const noexcept override;
 
       /// @brief Returns a String that represents the current Int32.
       /// @param format Format-control String.
@@ -106,7 +117,7 @@ namespace Pcf {
       /// @return Greater than zero   This instance is greater than value.
       /// -or-
       /// @return obj is nullNothingnullptra null reference.
-      int32 CompareTo(const IComparable& obj) const override;
+      int32 CompareTo(const IComparable& obj) const noexcept override;
 
       /// @brief Returns the TypeCode for this instance.
       /// @return TypeCode The enumerated constant that is the TypeCode of the class or value type that implements this interface.
@@ -115,8 +126,6 @@ namespace Pcf {
     private:
       friend class Convert;
  
-      virtual bool IsSigned() const override { return true; }
-
       bool ToBoolean(const IFormatProvider& provider) const override;
       byte ToByte(const IFormatProvider& provider) const override;
       char32 ToChar(const IFormatProvider& provider) const override;
@@ -153,8 +162,58 @@ namespace Pcf {
       const Int32 operator ++(int);
       Int32& operator --();
       const Int32 operator --(int);
+      template<typename T> bool operator==(T value) const {return this->value == value;}
+      template<typename T> bool operator!=(T value) const {return !this->operator==(value);}
       /// @endcond
     };
+  }
+  
+  /// @brief Return true if specified value is the specified Type. A Is expression takes the following form:
+  /// @par Examples
+  /// @code
+  /// System::Int32 i = 0;
+  /// bool isInt32 = is<System::Int32>(i);
+  /// @endcode
+  /// @see Pcf::System::Type
+  template<>
+  inline bool is<int32, object>(const object& value) {
+    return is<System::Int32>(value);
+  }
+  
+  /// @brief Return true if specified value is the specified Type. A Is expression takes the following form:
+  /// @par Examples
+  /// @code
+  /// System::Int32 i = 0;
+  /// bool isInt32 = is<System::Int32>(i);
+  /// @endcode
+  /// @see Pcf::System::Type
+  template<>
+  inline bool is<int32, object>(object& value) {
+    return is<System::Int32>(value);
+  }
+  
+  /// @brief Return true if specified value is the specified Type. A Is expression takes the following form:
+  /// @par Examples
+  /// @code
+  /// System::Int32 i = 0;
+  /// bool isInt32 = is<System::Int32>(i);
+  /// @endcode
+  /// @see Pcf::System::Type
+  template<>
+  inline bool is<int32, object>(const object* value) {
+    return is<System::Int32>(value);
+  }
+  
+  /// @brief Return true if specified value is the specified Type. A Is expression takes the following form:
+  /// @par Examples
+  /// @code
+  /// System::Int32 i = 0;
+  /// bool isInt32 = is<System::Int32>(i);
+  /// @endcode
+  /// @see Pcf::System::Type
+  template<>
+  inline bool is<int32, object>(object* value) {
+    return is<System::Int32>(value);
   }
 }
 

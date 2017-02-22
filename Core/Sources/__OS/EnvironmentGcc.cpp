@@ -5,6 +5,7 @@
 #include <cstring>
 
 #include <time.h>
+#include <uuid/uuid.h>
 #include <sys/time.h>
 
 #include "CoreApi.h"
@@ -15,7 +16,7 @@ namespace {
     FILE* fs = popen(command.Data(), "r");
     string result;
     while (!feof(fs)) {
-      char buf[512];
+      char buf[513];
       int32 l = (int32)fread(buf, 1, 512, fs);
       buf[l] = 0;
       result += buf;
@@ -93,6 +94,12 @@ int32 __OS::CoreApi::Environment::SetEnv(const string& name, const string& value
 
 int32 __OS::CoreApi::Environment::UnsetEnv(const string& name) {
   return unsetenv(name.Data);
+}
+
+System::Guid __OS::CoreApi::Environment::NewGuid() {
+  byte guid[16];
+  uuid_generate(guid);
+  return System::Guid(guid);
 }
 
 #endif

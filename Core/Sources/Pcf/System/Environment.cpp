@@ -4,6 +4,8 @@
 #include <cstring>
 #include <thread>
 
+#include "SocketInit.h"
+
 #include "../../../Includes/Pcf/System/AccessViolationException.h"
 #include "../../../Includes/Pcf/System/Console.h"
 #include "../../../Includes/Pcf/System/Environment.h"
@@ -123,6 +125,7 @@ namespace {
   };
   
   int32 exitCode;
+  UniquePointer<SocketInit> socketInit;
   UniquePointer<System::Array<String>> commandLineArgs;
   UniquePointer<ConsoleChangeCodePage> consoleChangeCodePage;
   UniquePointer<ConsoleInterceptSignals> consoleInterceptSignals;
@@ -301,6 +304,7 @@ Array<string> Environment::SetCommandLineArgs(char* argv[], int argc) {
   if (commandLineArgs != null)
     throw InvalidOperationException("Can be called only once", pcf_current_information);
 
+  socketInit = UniquePointer<SocketInit>();
   consoleChangeCodePage = UniquePointer<ConsoleChangeCodePage>::Create();
   //consoleInterceptSignals = UniquePointer<ConsoleInterceptSignals>::Create();
   signalCatcher = UniquePointer<SignalCatcher>::Create();

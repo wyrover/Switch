@@ -63,7 +63,7 @@ namespace Pcf {
         /// @brief Determines whether this instance of Size and a specified object, which must also be a Size object, have the same value.
         /// @param obj The object to compare with the current object.
         /// @return bool true if the specified object is equal to the current object. otherwise, false.
-        virtual bool Equals(const object& obj) const;
+        bool Equals(const object& obj) const noexcept override;
 
         /// @brief Tests whether this Size class has width and height of 0.
         /// @return bool Returns true  when this Size class has both a width and height of 0; otherwise, false.
@@ -71,7 +71,7 @@ namespace Pcf {
 
         /// @brief Creates a human-readable string that represents this Size class.
         /// @return string A string that represents this Size.
-        virtual string ToString() const { return String::Format("{{Width={0}, Height={1}}}", this->width, this->height); }
+        String ToString() const noexcept override { return String::Format("{{Width={0}, Height={1}}}", this->width, this->height); }
 
         /// @brief Adds the width and height of one Size class to the width and height of another Size class.
         /// @param size1 The first Size class to add.

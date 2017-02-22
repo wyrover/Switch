@@ -33,11 +33,11 @@ bool IntPtr::Equals(const IntPtr& value) const {
   return this->value == value.value;
 }
 
-bool IntPtr::Equals(const object& obj) const {
+bool IntPtr::Equals(const object& obj) const noexcept {
   return is<IntPtr>(obj) && Equals(static_cast<const IntPtr&>(obj));
 }
 
-int32 IntPtr::GetHashCode() const {
+int32 IntPtr::GetHashCode() const noexcept {
   int64 handleValue = (int64)this->value;
   int32 hash = 0;
 
@@ -51,7 +51,7 @@ int32 IntPtr::CompareTo(const IntPtr& value) const {
   return static_cast<int32>(this->value - value.value);
 }
 
-int32 IntPtr::CompareTo(const IComparable& obj) const {
+int32 IntPtr::CompareTo(const IComparable& obj) const noexcept {
   if (!is<IntPtr>(obj))
     return 1;
   return CompareTo(static_cast<const IntPtr&>(obj));
@@ -74,7 +74,7 @@ void* IntPtr::ToPointer() const {
   return (void*)this->value;
 }
 
-string IntPtr::ToString() const {
+string IntPtr::ToString() const noexcept {
   return Int64(ToInt64()).ToString();
 }
 

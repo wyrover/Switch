@@ -95,11 +95,11 @@ EXPECT_EQ(b16, bytes[8]);\
 
 namespace {
   TEST(BitConverter, GetBytesBoolean) {
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(Boolean(false))) {
+    pcf_using(Array<byte> bytes = BitConverter::GetBytes(false)) {
      EXPECT_B1(0, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(Boolean(true))) {
+    pcf_using(Array<byte> bytes = BitConverter::GetBytes(true)) {
       EXPECT_B1(1, bytes);
     }
   }

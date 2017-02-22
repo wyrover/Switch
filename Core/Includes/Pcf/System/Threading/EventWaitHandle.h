@@ -110,7 +110,7 @@ namespace Pcf {
         /// @param obj The object to compare with the current object.
         /// @return bool true if the specified object is equal to the current object. otherwise, false.
         /// @exception ArgumentNullException The parameters obj is null.
-        bool Equals(const object& obj) const override {return is<EventWaitHandle>(obj) && this->Equals((const EventWaitHandle&)obj);}
+        bool Equals(const object& obj) const noexcept override {return is<EventWaitHandle>(obj) && this->Equals((const EventWaitHandle&)obj);}
 
       private:
         bool Signal() override {return this->Set();}

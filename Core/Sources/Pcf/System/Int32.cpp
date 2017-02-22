@@ -45,11 +45,11 @@ bool Int32::TryParse(const string& str, int32 base, Int32& value) {
   return TryParse(str, base, value.value);
 }
 
-int32 Int32::GetHashCode() const {
+int32 Int32::GetHashCode() const noexcept {
   return this->value;
 }
 
-string Int32::ToString() const {
+string Int32::ToString() const noexcept {
   return ToString("d", Reference<IFormatProvider>::Null());
 }
 
@@ -89,7 +89,7 @@ int32 Int32::CompareTo(const Int32& value) const {
   return this->value - value.value;
 }
 
-int32 Int32::CompareTo(const IComparable& obj) const {
+int32 Int32::CompareTo(const IComparable& obj) const noexcept {
   if (!is<Int32>(obj))
     return 1;
   return CompareTo(static_cast<const Int32&>(obj));

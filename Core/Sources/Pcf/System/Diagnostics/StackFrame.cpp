@@ -39,7 +39,7 @@ int32 StackFrame::GetFrameCount(void* callStack) {
     return 0;
 }
 
-String StackFrame::ToString() const {
+String StackFrame::ToString() const noexcept {
   return String::Format("{0} at {1}  in file:line:column {2} : {3} : {4}", (String::IsNullOrEmpty(this->method) ? String("<unknown method>") : this->method), (String::IsNullOrEmpty(this->fileName) ? String("<unknown offset>") : Int32(this->offset).ToString()), (String::IsNullOrEmpty(this->fileName) ? String("<filename unknown>") : this->fileName), this->fileLineNumber, this->fileColumnNumber);
 }
 

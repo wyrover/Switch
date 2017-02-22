@@ -125,11 +125,11 @@ bool TimeSpan::TryParse(const string& str, TimeSpan& value) {
   return true;
 }
 
-bool TimeSpan::Equals(const object& obj) const {
+bool TimeSpan::Equals(const object& obj) const noexcept {
   return is<TimeSpan>(obj) && Equals(static_cast<const TimeSpan&>(obj));
 }
 
-int32 TimeSpan::GetHashCode() const {
+int32 TimeSpan::GetHashCode() const noexcept {
   int32 hash = 0;
 
   hash = (int32)(this->value & 0x00000000FFFFFFFF);
@@ -138,7 +138,7 @@ int32 TimeSpan::GetHashCode() const {
   return hash;
 }
 
-string TimeSpan::ToString() const {
+string TimeSpan::ToString() const noexcept {
   string retValue;
 
   if (this->value < 0)
@@ -165,7 +165,7 @@ int32 TimeSpan::CompareTo(const TimeSpan& value) const {
   return 1;
 }
 
-int32 TimeSpan::CompareTo(const IComparable& obj) const {
+int32 TimeSpan::CompareTo(const IComparable& obj) const noexcept {
   if (!is<TimeSpan>(obj))
     return 1;
 

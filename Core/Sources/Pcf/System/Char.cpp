@@ -151,19 +151,15 @@ bool Char::Equals(const Char& value) const {
   return this->value == value.value;
 }
 
-bool Char::Equals(const ValueType& valueType) const {
-  return is<Char>(valueType) && Equals((const Char&)valueType);
-}
-
-bool Char::Equals(const object& obj) const {
+bool Char::Equals(const object& obj) const noexcept {
   return is<Char>(obj) && Equals((const Char&)obj);
 }
 
-int32 Char::GetHashCode() const {
+int32 Char::GetHashCode() const noexcept {
   return this->value;
 }
 
-String Char::ToString() const { 
+String Char::ToString() const noexcept { 
   byte bytes[5];
   int32 count = __OS::CoreApi::UnicodeEncodings::UTF8::Encode(this->value, bytes);
   bytes[count] = 0;
@@ -174,7 +170,7 @@ int32 Char::CompareTo(const Char& value) const {
   return this->value - value.value;
 }
 
-int32 Char::CompareTo(const IComparable& obj) const {
+int32 Char::CompareTo(const IComparable& obj) const noexcept {
   if (!is<Char>(obj))
     return 1;
   

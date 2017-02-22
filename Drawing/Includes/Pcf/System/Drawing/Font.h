@@ -80,7 +80,7 @@ namespace Pcf {
           return System::Drawing::FontStyle(int(this->data().fontStyle) & int(style)) == style;
         }
 
-        string ToString() const override { return string::Format("[{0}: Name={1}, Size={2}, Units={3}, GdiCharSet={4}, GdiVerticalFont={5}]", this->GetType().Name, this->data().fontFamily.Name, this->data().size, (int32)this->data().fontUnit, this->data().gdiCharSet, this->data().gdiVerticalFont); }
+        String ToString() const noexcept override { return string::Format("[{0}: Name={1}, Size={2}, Units={3}, GdiCharSet={4}, GdiVerticalFont={5}]", this->GetType().Name, this->data().fontFamily.Name, this->data().size, (int32)this->data().fontUnit, this->data().gdiCharSet, this->data().gdiVerticalFont); }
 
       private:
         void FromName(const string& name, float size, System::Drawing::FontStyle style);

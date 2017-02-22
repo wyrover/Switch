@@ -160,7 +160,7 @@ namespace Pcf {
         /// @brief Determines whether this instance of Point and a specified object, which must also be a Point object, have the same value.
         /// @param obj The object to compare with the current object.
         /// @return bool true if the specified object is equal to the current object. otherwise, false.
-        virtual bool Equals(const object& obj) const {return is<Rectangle>(obj) && Equals((const Rectangle&)obj);}
+        bool Equals(const object& obj) const noexcept override {return is<Rectangle>(obj) && Equals((const Rectangle&)obj);}
         
         /// @brief Creates a Rectangle structure with the specified edge locations.
         /// @param left The x-coordinate of the upper-left corner of this Rectangle structure.
@@ -233,7 +233,7 @@ namespace Pcf {
         
         /// @brief Creates a human-readable string that represents this Point class.
         /// @return string A string that represents this Point.
-        virtual string ToString() const {return String::Format("{{X={0},Y={1},Width={2},Height={3}}}", this->x, this->y, this->width, this->height);}
+        String ToString() const noexcept override {return String::Format("{{X={0},Y={1},Width={2},Height={3}}}", this->x, this->y, this->width, this->height);}
         
         /// @brief Returns a third Rectangle structure that represents the union of two other Rectangle structures.
         /// @param a A rectangle to union.

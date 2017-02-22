@@ -239,15 +239,15 @@ namespace Pcf {
       /// @param obj The object to compare with the current object.
       /// @return bool true if the specified object is equal to the current object. otherwise, false.
       /// @exception ArgumentNullException The parameters obj is null.
-      bool Equals(const object& obj) const override;
+      bool Equals(const object& obj) const noexcept override;
 
       /// @brief Serves as a hash function for a particular type.
       /// @return int32 A hash code for the current object.
-      int32 GetHashCode() const override;
+      int32 GetHashCode() const noexcept override;
 
       /// @brief Returns a String that represents the current MyObj.
       /// @return String A String that represents the current MyObj.
-      String ToString() const override;
+      String ToString() const noexcept override;
 
       /// @brief Compares this instance to a specified Int16 object and returns an indication of their relative values.
       /// @param value An TimeSpan object to compare with this instance.
@@ -255,7 +255,7 @@ namespace Pcf {
       /// Less than zero      This instance is less than value.
       /// Zero                This instance is equal to value.
       /// Greater than zero   This instance is greater than value.
-      int32 CompareTo(const IComparable& obj) const override;
+      int32 CompareTo(const IComparable& obj) const noexcept override;
 
       /// @brief Compares the current instance with another object of the same type.
       /// @param obj An object to compare with this instance.

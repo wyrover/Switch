@@ -114,7 +114,7 @@ namespace {
       
       bool IsEmpty() const {return this->chars.empty();}
       
-      std::string ToString() const {
+      std::string ToString() const noexcept {
         std::stringstream result;
         std::list<int32>::const_iterator iterator = this->chars.begin();
         while (iterator != this->chars.end()) {
@@ -192,7 +192,7 @@ namespace {
     
     bool HasShiftModifier() const {return this->hasShiftModifier;}
     
-    std::string ToString() const {
+    std::string ToString() const noexcept {
       std::stringstream result;
       result << "{Key=" << std::hex << this->key << ", KeyChar=" << std::dec << static_cast<char>(this->keyChar) << ", HasAltModifier=" << ToString(this->hasAltModifier) << ", HasControlModifier=" << ToString(this->hasControlModifier) << ", HasShiftModifier=" << ToString(this->hasShiftModifier) << "}";
       return result.str();

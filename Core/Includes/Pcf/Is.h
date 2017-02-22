@@ -5,6 +5,7 @@
 #include "Ref.h"
 #include "SharedPointer.h"
 #include "UniquePointer.h"
+#include "Types.h"
 
 namespace Pcf {
   /// @brief Return true if specified value is the specified Type. A Is expression takes the following form:
@@ -133,6 +134,36 @@ namespace Pcf {
   template<typename TT, typename T>
   bool is(T& value) {
     return is<TT>(&value);
+  }
+
+  template<typename T>
+  bool is(int32 value) {
+    return false;
+  }
+  
+  template<>
+  bool is<int32>(int32 value) {
+    return true;
+  }
+  
+  template<typename T>
+  bool is(double value) {
+    return false;
+  }
+  
+  template<>
+  bool is<double>(double value) {
+    return true;
+  }
+  
+  template<typename T>
+  bool is(float value) {
+    return false;
+  }
+  
+  template<>
+  bool is<float>(float value) {
+    return true;
   }
 }
 

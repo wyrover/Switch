@@ -37,7 +37,7 @@ void DnsEndPoint::SetPort(int32 port) {
   this->port = port;
 }
 
-string DnsEndPoint::ToString() const {
+string DnsEndPoint::ToString() const noexcept {
   return string::Format("{0}:{1}", this->host, this->port);
 }
 

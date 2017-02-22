@@ -129,11 +129,11 @@ namespace Pcf {
         /// @brief Determines whether this instance of FileInfo and a specified object, which must also be a FileInfo object, have the same value.
         /// @param obj The object to compare with the current object.
         /// @return bool true if the specified object is equal to the current object. otherwise, false.
-        bool Equals(const object& obj) const override;
+        bool Equals(const object& obj) const noexcept override;
 
         /// @brief Returns the full path.
         /// @return the full path.
-        String ToString() const override;
+        String ToString() const noexcept override;
 
       private:
         DirectoryInfo GetDirectory() const;

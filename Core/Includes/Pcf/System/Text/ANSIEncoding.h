@@ -19,14 +19,14 @@ namespace Pcf {
         
         /// @brief Gets a value indicating whether the current encoding uses single-byte code points.
         /// @return This property is always true.
-        virtual bool IsSingleByte() const { return true; }
+        bool IsSingleByte() const override { return true; }
         
         using Encoding::GetByteCount;
         
         /// @brief Calculates the number of bytes produced by encoding a character.
         /// @param c The character to encode.
         /// @return The number of bytes produced by encoding the specified character.
-        virtual int32 GetByteCount(char32 c) const;
+        int32 GetByteCount(char32 c) const override;
         
         using Encoding::GetBytes;
         using Encoding::GetCharCount;
@@ -38,7 +38,7 @@ namespace Pcf {
         /// @return The number of characters produced by decoding the specified sequence of bytes.
         /// @exception System::ArgumentNullException bytes is null.
         /// @exception System::ArgumentOutOfRangeException index or count is less than zero. -or-  index and count do not denote a valid range in bytes. -or-  The resulting number of bytes is greater than the maximum number that can be returned as an integer.
-        virtual int32 GetCharCount(const byte bytes[], int32 bytesSize, int32 index, int32 count) const;
+        int32 GetCharCount(const byte bytes[], int32 bytesSize, int32 index, int32 count) const override;
         
         using Encoding::GetChars;
         
@@ -46,15 +46,15 @@ namespace Pcf {
         /// @param charCount The number of characters to encode.
         /// @return The maximum number of bytes produced by encoding the specified number of characters.
         /// @exception System::ArgumentOutOfRangeException charCount is less than zero. -or-  The resulting number of bytes is greater than the maximum number that can be returned as an integer.
-        virtual int32 GetMaxByteCount(int32 charCount) const;
+        int32 GetMaxByteCount(int32 charCount) const override;
         
         /// @brief Calculates the maximum number of characters produced by decoding the specified number of bytes.
         /// @param byteCount The number of bytes to decode.
         /// @return The maximum number of characters produced by decoding the specified number of bytes.
         /// @exception System::ArgumentOutOfRangeException byteCount is less than zero. -or- The resulting number of bytes is greater than the maximum number that can be returned as an integer.
-        virtual int32 GetMaxCharCount(int32 byteCount) const;
+        int32 GetMaxCharCount(int32 byteCount) const override;
         
-        virtual bool Equals(const object& obj) const;
+        bool Equals(const object& obj) const noexcept override;
         
         /// @brief Converts the given code point into its representing byte.
         /// @param codePoint The codePoint to encode.
@@ -73,7 +73,7 @@ namespace Pcf {
           Decoder& operator =(const Decoder& b);
           virtual void Add(byte b);
           virtual void Reset();
-          virtual String ToString() const;
+          virtual String ToString() const noexcept;
           virtual char32 GetCodePoint(byte b) = 0;
           
         protected:
@@ -90,7 +90,7 @@ namespace Pcf {
           Encoder& operator =(const Encoder& b);
           virtual int32 GetNbBytes(char32) const;
           virtual void Encode(char32 codePoint, byte* bytes) const;
-          virtual String ToString() const;
+          virtual String ToString() const noexcept;
           virtual byte GetByte(char32 cp) = 0;
           
         private:
@@ -102,7 +102,7 @@ namespace Pcf {
         ANSIEncoding();
         ANSIEncoding(const ANSIEncoding& encoding);
         virtual ANSIEncoding& operator =(const ANSIEncoding& encoding);
-        virtual Encoding& operator =(const Encoding& encoding);
+        Encoding& operator =(const Encoding& encoding) override;
         /// @endcond
       };
       

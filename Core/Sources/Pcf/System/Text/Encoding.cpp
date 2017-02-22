@@ -122,7 +122,7 @@ Array<byte> Encoding::Convert(const Encoding& srcEncoding, const Encoding& dstEn
   return dstEncoding.GetBytes(chars.Data, chars.Length);
 }
 
-bool Encoding::Equals(const object& obj) const { 
+bool Encoding::Equals(const object& obj) const noexcept { 
   const Encoding* enc = dynamic_cast<const Encoding*>(&obj);
   if (enc == null) return false;
   return this->codePage == enc->codePage;
@@ -333,7 +333,7 @@ bool Encoding::IsAlwaysNormalized() const {
   return false;
 }
 
-string Encoding::ToString() const { 
+string Encoding::ToString() const noexcept { 
   return GetEncodingName();
 }
 

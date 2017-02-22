@@ -60,7 +60,7 @@ namespace Pcf {
           template<typename Type>
           SharedPointer<Type> GetLParam() { return (SharedPointer<Type>)this->lParam; }
 
-          string ToString() const override;
+          String ToString() const noexcept override;
 
         private:
           Message(intptr hwnd, int32 msg, intptr wParam, intptr lParam, int32 result) : hwnd(hwnd), msg(msg), wParam(wParam), lParam(lParam), result(result) {}

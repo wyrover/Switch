@@ -17,7 +17,7 @@ bool PointF::Equals(const PointF& value) const {
   return this->x == value.x && this->y == value.y;
 }
 
-bool PointF::Equals(const object& obj) const {
+bool PointF::Equals(const object& obj) const noexcept {
   return is<PointF>(obj) && Equals((const PointF&)obj);
 }
 

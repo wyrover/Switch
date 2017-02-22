@@ -45,9 +45,9 @@ namespace {
     UInt16 e = 10;
     
     EXPECT_TRUE(a.Equals(b));
-    EXPECT_TRUE(a.Equals(c));
-    EXPECT_TRUE(a.Equals(d));
-    EXPECT_TRUE(a.Equals(e));
+    EXPECT_FALSE(a.Equals(c));
+    EXPECT_FALSE(a.Equals(d));
+    EXPECT_FALSE(a.Equals(e));
   }
   
   TEST(ValueType, ByteZeroValueEqualOperator) {
@@ -121,8 +121,8 @@ namespace {
     EXPECT_TRUE(Int16(-30) == Int64(-30));
     EXPECT_TRUE(Int16(-30) == SByte(-30));
     EXPECT_FALSE(Int16(-30) == UInt16(-30));
-    EXPECT_FALSE(Int16(-30) == UInt32(-30));
-    EXPECT_FALSE(Int16(-30) == UInt64(-30));
+    EXPECT_TRUE(Int16(-30) == UInt32(-30));
+    EXPECT_TRUE(Int16(-30) == UInt64(-30));
 }
   
   TEST(ValueType, Int16MinValueEqualOperator) {
@@ -130,8 +130,8 @@ namespace {
     EXPECT_TRUE(Int16(Int16::MinValue) == Int32(Int16::MinValue));
     EXPECT_TRUE(Int16(Int16::MinValue) == Int64(Int16::MinValue));
     EXPECT_FALSE(Int16(Int16::MinValue) == UInt16(Int16::MinValue));
-    EXPECT_FALSE(Int16(Int16::MinValue) == UInt32(Int16::MinValue));
-    EXPECT_FALSE(Int16(Int16::MinValue) == UInt64(Int16::MinValue));
+    EXPECT_TRUE(Int16(Int16::MinValue) == UInt32(Int16::MinValue));
+    EXPECT_TRUE(Int16(Int16::MinValue) == UInt64(Int16::MinValue));
   }
   
   TEST(ValueType, Int16MaxValueEqualOperator) {
@@ -170,15 +170,15 @@ namespace {
     EXPECT_TRUE(Int32(-30) == Int64(-30));
     EXPECT_TRUE(Int32(-30) == SByte(-30));
     EXPECT_FALSE(Int32(-30) == UInt16(-30));
-    EXPECT_FALSE(Int32(-30) == UInt32(-30));
-    EXPECT_FALSE(Int32(-30) == UInt64(-30));
+    EXPECT_TRUE(Int32(-30) == UInt32(-30));
+    EXPECT_TRUE(Int32(-30) == UInt64(-30));
   }
   
   TEST(ValueType, Int32MinValueEqualOperator) {
     EXPECT_TRUE(Int32(Int32::MinValue) == Int32(Int32::MinValue));
     EXPECT_TRUE(Int32(Int32::MinValue) == Int64(Int32::MinValue));
-    EXPECT_FALSE(Int32(Int32::MinValue) == UInt32(Int32::MinValue));
-    EXPECT_FALSE(Int32(Int32::MinValue) == UInt64(Int32::MinValue));
+    EXPECT_TRUE(Int32(Int32::MinValue) == UInt32(Int32::MinValue));
+    EXPECT_TRUE(Int32(Int32::MinValue) == UInt64(Int32::MinValue));
   }
   
   TEST(ValueType, Int32MaxValueEqualOperator) {
@@ -216,12 +216,12 @@ namespace {
     EXPECT_TRUE(Int64(-30) == SByte(-30));
     EXPECT_FALSE(Int64(-30) == UInt16(-30));
     EXPECT_FALSE(Int64(-30) == UInt32(-30));
-    EXPECT_FALSE(Int64(-30) == UInt64(-30));
+    EXPECT_TRUE(Int64(-30) == UInt64(-30));
   }
   
   TEST(ValueType, Int64MinValueEqualOperator) {
     EXPECT_TRUE(Int64(Int64::MinValue) == Int64(Int64::MinValue));
-    EXPECT_FALSE(Int64(Int64::MinValue) == UInt64(Int64::MinValue));
+    EXPECT_TRUE(Int64(Int64::MinValue) == UInt64(Int64::MinValue));
   }
   
   TEST(ValueType, Int64MaxValueEqualOperator) {
@@ -256,8 +256,8 @@ namespace {
     EXPECT_TRUE(SByte(-30) == Int64(-30));
     EXPECT_TRUE(SByte(-30) == SByte(-30));
     EXPECT_FALSE(SByte(-30) == UInt16(-30));
-    EXPECT_FALSE(SByte(-30) == UInt32(-30));
-    EXPECT_FALSE(SByte(-30) == UInt64(-30));
+    EXPECT_TRUE(SByte(-30) == UInt32(-30));
+    EXPECT_TRUE(SByte(-30) == UInt64(-30));
 }
   
   TEST(ValueType, SByteMinValueEqualOperator) {
@@ -267,8 +267,8 @@ namespace {
     EXPECT_TRUE(SByte(SByte::MinValue) == Int64(SByte::MinValue));
     EXPECT_TRUE(SByte(SByte::MinValue) == SByte(SByte::MinValue));
     EXPECT_FALSE(SByte(SByte::MinValue) == UInt16(SByte::MinValue));
-    EXPECT_FALSE(SByte(SByte::MinValue) == UInt32(SByte::MinValue));
-    EXPECT_FALSE(SByte(SByte::MinValue) == UInt64(SByte::MinValue));
+    EXPECT_TRUE(SByte(SByte::MinValue) == UInt32(SByte::MinValue));
+    EXPECT_TRUE(SByte(SByte::MinValue) == UInt64(SByte::MinValue));
   }
   
   TEST(ValueType, SByteMaxValueEqualOperator) {

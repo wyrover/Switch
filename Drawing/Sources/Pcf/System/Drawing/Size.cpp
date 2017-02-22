@@ -15,7 +15,7 @@ bool Size::Equals(const Size& value) const {
   return this->width == value.width && this->height == value.height;
 }
 
-bool Size::Equals(const object& obj) const {
+bool Size::Equals(const object& obj) const noexcept {
   return is<Size>(obj) && Equals((const Size&)obj);
 }
 

@@ -48,7 +48,7 @@ namespace EncodingUT {
 
     bool operator==(const UnicodeCharacter& c) const;
 
-    Pcf::System::String ToString() const {
+    Pcf::System::String ToString() const noexcept {
       return string() + character;
     }
 
@@ -94,7 +94,7 @@ namespace EncodingUT {
     UnicodeSequence operator+(const UnicodeSequence& info) const;
     UnicodeSequence& operator+=(const UnicodeSequence& info);
 
-    Pcf::System::String ToString() const {
+    Pcf::System::String ToString() const noexcept {
       return Pcf::System::String(chars.Data(), chars.Count);
     }
 

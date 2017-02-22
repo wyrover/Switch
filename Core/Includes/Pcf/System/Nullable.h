@@ -74,7 +74,7 @@ namespace Pcf {
       /// | Less than zero    | This instance is less than obj.    |
       /// | Zero              | This instance is equal to obj.     |
       /// | Greater than zero | This instance is greater than obj. |
-      int32 CompareTo(const IComparable& obj) const override {
+      int32 CompareTo(const IComparable& obj) const noexcept override {
         if (!is<Nullable>(obj)) return -1;
         return CompareTo(as<Nullable<T>>(obj));
       }
@@ -97,7 +97,7 @@ namespace Pcf {
       /// @brief Determines whether this instance of Any and a specified Object, which must also be a Nullable<T> Object, have the same value.
       /// @param obj The Object to compare with the current Object.
       /// @return true if the specified Object is equal to the current Object. otherwise, false.
-      bool Equals(const object& value) const override {return is<Nullable<T>>(value) && Equals(as<Nullable<T>>(value));}
+      bool Equals(const object& obj) const noexcept override {return is<Nullable<T>>(obj) && Equals(as<Nullable<T>>(obj));}
       
       /// @brief Determines whether this instance of Nullable<T> and a specified Object, which must also be a Nullable<T> Object, have the same value.
       /// @param value The Nullable<T> to compare with the current Object.
@@ -110,7 +110,7 @@ namespace Pcf {
 
       /// @brief Serves as a hash function for a particular type.
       /// @return Int32 A hash code for the current Object.
-      int32 GetHashCode() const override {
+      int32 GetHashCode() const noexcept override {
         return ::GetHashCode(this->value);
       }
 
@@ -134,7 +134,7 @@ namespace Pcf {
       /// @brief Returns the text representation of the value of the current Nullable<T> object.
       /// @return The text representation of the value of the current Nullable<T> object if the HasValue property is true, or an empty string ("") if the HasValue property is false.
       /// @remarks The ToString property returns the string yielded by calling the ToString property of the object returned by the Value property.
-      string ToString() const override {
+      String ToString() const noexcept override {
         if (!this->hasValue)
           return "";
         return Convert::ToString(this->value);

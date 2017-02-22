@@ -13,32 +13,7 @@ namespace Pcf {
     /// @endcond
 
     /// @brief Provides the base class for value types.
-    class pcf_public ValueType : public Object {
-    public:
-      /// @brief Determines whether the specified object is equal to the current object.
-      /// @param obj The object to compare with the current object.
-      /// @return bool true if the specified object is equal to the current object. otherwise, false.
-      virtual bool Equals(const ValueType& valueType) const;
-
-      /// @brief Determines whether the specified object is equal to the current object.
-      /// @param obj The object to compare with the current object.
-      /// @return bool true if the specified object is equal to the current object. otherwise, false.
-      bool Equals(const Object& obj) const override;
-
-      /// @brief Returns a string that represents the current object.
-      /// @return string A string that represents the current object.
-      String ToString() const override = 0;
-
-      /// @brief Creates a shallow copy of the current object.
-      /// @return ValueType* A shallow copy of the current object.
-      /// @par Examples
-      /// The following code example shows how to copy an instance of a class using MemberwiseClone.
-      /// @include ObjectMemberwiseClone.cpp
-      //template<typename T>
-      //ValueType* MemberwiseClone() const;
-
-    private:
-      virtual bool IsSigned() const { return false; }
+    struct pcf_public ValueType : public Object {
     };
   }
 }

@@ -166,7 +166,7 @@ namespace Pcf {
         /// @brief Determines whether this instance of RegistryKey && a specified object, which must also be a RegistryKey object, have the same value.
         /// @param obj The object to compare with the current object.
         /// @return bool true if the specified object is equal to the current object. otherwise, false.
-        virtual bool Equals(const object& obj) const { return is<RegistryKey>(obj) && Equals(static_cast<const RegistryKey&>(obj)); }
+        bool Equals(const object& obj) const noexcept override { return is<RegistryKey>(obj) && Equals(static_cast<const RegistryKey&>(obj)); }
 
         /// @brief Retrieves an array of strings that contains all the subkey names.
         System::Array<System::String> GetSubKeyNames();
@@ -253,7 +253,7 @@ namespace Pcf {
 
         /// @brief Retrieves a string representation of this key.
         /// @return A string representing the key. If the specified key is invalid (cannot be found) then "" is returned.
-        virtual System::String ToString() const { return this->name; }
+        System::String ToString() const noexcept override { return this->name; }
 
       private:
         void Load();
@@ -338,7 +338,7 @@ namespace Pcf {
             }
           }
 
-          System::String ToString() const {
+          System::String ToString() const noexcept {
             System::String value;
             if (this->kind == RegistryValueKind::Binary) {
               for (byte item : as<System::Array<byte>>(*this->value))
@@ -404,7 +404,7 @@ namespace Pcf {
 
           bool Equals(const RegistryHandle& value) const { return this->handle == value.handle; }
 
-          virtual bool Equals(const object& obj) const { return is<RegistryHandle>(obj) && Equals(static_cast<const RegistryHandle&>(obj)); }
+          bool Equals(const object& obj) const noexcept override { return is<RegistryHandle>(obj) && Equals(static_cast<const RegistryHandle&>(obj)); }
 
         private:
           void* handle;

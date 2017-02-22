@@ -27,7 +27,7 @@
 namespace Pcf {
   template<typename T>
   int32 CompareBoxedType(const T& a, const T& b) {
-    return memcmp(&a, &b, sizeof(T));
+    return memcmp((const void*)&a, (const void*)&b, sizeof(T));
   }
   
   template<typename T>
@@ -60,15 +60,15 @@ namespace Pcf {
     Boxer(const T& value) : T(value) {}
     Boxer(const Boxer& value) : T(value) {}
     
-    int32 CompareTo(const IComparable& value) const override {return is<T>(value) ? this->CompareTo((const T&)value) : 1;}
+    int32 CompareTo(const IComparable& value) const noexcept override {return is<T>(value) ? this->CompareTo((const T&)value) : 1;}
     int32 CompareTo(const Boxer& value) const {return this->CompareTo((const T&)value);}
     int32 CompareTo(const T& value) const {return CompareBoxedType((const T&)*this, value);}
     
-    bool Equals(const object& value) const override {return is<T>(value) && this->Equals((const T&)value);}
+    bool Equals(const object& obj) const noexcept override {return is<T>(obj) && this->Equals((const T&)obj);}
     bool Equals(const Boxer& value) const {return this->Equals((const T&)value);}
     bool Equals(const T& value) const {return this->CompareTo(value) == 0;}
     
-    int32 GetHashCode() const override {return Pcf::GetHashCodeFromBoxedType((const T&)*this);}
+    int32 GetHashCode() const noexcept override {return Pcf::GetHashCodeFromBoxedType((const T&)*this);}
   };
   
   /// @brief Support boxing of type

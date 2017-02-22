@@ -244,7 +244,7 @@ namespace Pcf {
         return 0;
       }
 
-      int32 CompareTo(const IComparable& obj) const override {
+      int32 CompareTo(const IComparable& obj) const noexcept override {
         if (!is<Guid>(obj))
           return 1;
         return CompareTo(static_cast<const Guid&>(obj));
@@ -252,7 +252,7 @@ namespace Pcf {
 
       /// @brief Serves as a hash function for a particular type.
       /// @return Int32 A hash code for the current object.
-      int32 GetHashCode() const override {
+      int32 GetHashCode() const noexcept override {
         int32 hashCode = 0;
 
         for (int32 i = 0; i< this->data.Length; i++)
@@ -263,7 +263,7 @@ namespace Pcf {
 
       bool Equals(const Guid& value) const {return this->data == value.data;}
 
-      bool Equals(const object& obj) const override {return is<Guid>(obj) && Equals(static_cast<const Guid&>(obj));}
+      bool Equals(const object& obj) const noexcept override {return is<Guid>(obj) && Equals(static_cast<const Guid&>(obj));}
 
       /// @brief Initializes a new instance of the Guid structure.
       /// @return Guid A new GUID object.
@@ -282,7 +282,7 @@ namespace Pcf {
       /// xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
       /// where the value of the GUID is represented as a series of lowercase hexadecimal digits in groups of 8, 4, 4, 4, and 12 digits and separated by hyphens. An example of a return value is "382c74c3-721d-4f34-80e5-57657b6cbc27". To convert the hexadecimal digits from a through f to uppercase, call the string.ToString method on the returned string.
       /// @remarks This method provides a default GUID format that is sufficient for typical use; however, other versions of this method that take a format parameter provide a few common format variations.
-      string ToString() const override { return ToString("D"); }
+      String ToString() const noexcept override { return ToString("D"); }
 
       /// @brief Returns a string representation of the value of this Guid instance, according to the provided format specifier.
       /// @param format A single format specifier that indicates how to format the value of this Guid. The format parameter can be "N", "D", "B", "P", or "X". If format is null or an empty string (""), "D" is used.

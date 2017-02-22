@@ -31,12 +31,24 @@ namespace Pcf {
        /// @brief Create a new instance of struct Int16
        /// @param value Value for the Int16.
       Int16(int16 value) : value(value) {}
+      
+      /// @brief Determines whether two specified DateTime objects have the same value.
+      /// @param dateTimeA The first DateTime to compare.
+      /// @param dateTimeB The second DateTime to compare.
+      /// @return Boolean true if the value of dateTimenA is the same as the value of dateTimeB; otherwise, false.
+      bool Equals(int16 value) const {return this->value == value;}
+      
+      /// @brief Determines whether this instance of Exception and a specified object, which must also be a Exception object, have the same value.
+      /// @param obj The object to compare with the current object.
+      /// @return bool true if the specified object is equal to the current object. otherwise, false.
+      bool Equals(const object& obj) const noexcept override {return is<Int16>(obj) && Equals(((const Int16&)obj).value);}
 
       /// @brief Converts the specified String representation of a logical value to its 16-bit signed integer equivalent.
       /// @param value A String containing the value to convert.
       /// @return A 16-bit signed integer equivalent to the number contained in value.
       /// @exception ArgumentNullException The parameters value is null.
       static int16 Parse(const String& value);
+
       /// @brief Converts the specified String representation of a logical value to its 16-bit signed integer equivalent.
       /// @param value A String containing the value to convert.
       /// @param base The base of number to parse
@@ -72,11 +84,11 @@ namespace Pcf {
 
       /// @brief Serves as a hash function for a particular type.
       /// @return Int32 A hash code for the current object.
-      int32 GetHashCode() const override;
+      int32 GetHashCode() const noexcept override;
 
       /// @brief Returns a String that represents the current Int16.
       /// @return tring A String that represents the current Int16.
-      String ToString() const override;
+      String ToString() const noexcept override;
 
       /// @brief Returns a String that represents the current Int16 with a specified format and specified formatProvider.
       /// @param format Format-control String.
@@ -105,7 +117,7 @@ namespace Pcf {
       /// Greater than zero   This instance is greater than value.
       /// -or-
       /// obj is nullNothingnullptra null reference.
-      int32 CompareTo(const IComparable& obj) const override;
+      int32 CompareTo(const IComparable& obj) const noexcept override;
 
       /// @brief Returns the TypeCode for this instance.
       /// @return TypeCode The enumerated constant that is the TypeCode of the class or value type that implements this interface.
@@ -114,8 +126,6 @@ namespace Pcf {
     private:
       friend class Convert;
  
-      virtual bool IsSigned() const override { return true; }
-
       bool ToBoolean(const IFormatProvider& provider) const override;
       byte ToByte(const IFormatProvider& provider) const override;
       char32 ToChar(const IFormatProvider& provider) const override;
@@ -152,6 +162,8 @@ namespace Pcf {
       const Int16 operator ++(int);
       Int16& operator --();
       const Int16 operator --(int value);
+      template<typename T> bool operator==(T value) const {return this->value == value;}
+      template<typename T> bool operator!=(T value) const {return !this->operator==(value);}
       /// @endcond
     };
   }

@@ -30,7 +30,7 @@ namespace {
       pcf_get {return this->path;}
     };
     
-    string ToString() const override {return string::Format("{{pid={0}, Name={1}, Path={2}}}", this->pid, this->name, this->path);}
+    String ToString() const noexcept override {return string::Format("{{pid={0}, Name={1}, Path={2}}}", this->pid, this->name, this->path);}
     
   private:
     intptr pid = 0;

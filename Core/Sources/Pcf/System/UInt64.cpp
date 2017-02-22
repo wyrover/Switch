@@ -52,7 +52,7 @@ bool UInt64::TryParse(const string& str, int32 base, UInt64& value) {
   return TryParse(str, base, value.value);
 }
 
-int32 UInt64::GetHashCode() const {
+int32 UInt64::GetHashCode() const noexcept {
   int32 hash = 0;
 
   hash += (int32)(this->value & 0x00000000FFFFFFFF);
@@ -61,7 +61,7 @@ int32 UInt64::GetHashCode() const {
   return hash;
 }
 
-string UInt64::ToString() const {
+string UInt64::ToString() const noexcept {
   return ToString("g", Reference<IFormatProvider>::Null());
 }
 
@@ -106,7 +106,7 @@ int32 UInt64::CompareTo(const UInt64& value) const {
   return 1;
 }
 
-int32 UInt64::CompareTo(const IComparable& obj) const {
+int32 UInt64::CompareTo(const IComparable& obj) const noexcept {
   if (!is<UInt64>(obj))
     return 1;
 
@@ -225,7 +225,7 @@ UInt64& UInt64::operator *=(const UInt64& value) {
 }
 
 UInt64& UInt64::operator /=(const UInt64& value) {
-  if (value == 0)
+  if (value.value == 0)
     throw DivideByZeroException(pcf_current_information);
 
   this->value /= value.value;
@@ -233,7 +233,7 @@ UInt64& UInt64::operator /=(const UInt64& value) {
 }
 
 UInt64& UInt64::operator %=(const UInt64& value) {
-  if (value == 0)
+  if (value.value == 0)
     throw DivideByZeroException(pcf_current_information);
 
   this->value %= value;

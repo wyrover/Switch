@@ -200,7 +200,7 @@ namespace Pcf {
       /// @brief Convert uint16 to bool
       /// @param value uint16 to convert
       /// @return bool A new bool object converted from value
-      static bool ToBoolean(const UInt16& value) { return value != 0; }
+      static bool ToBoolean(const UInt16& value) { return value.value != 0; }
       
       /// @brief Convert uint32 to bool
       /// @param value uint32 to convert
@@ -210,7 +210,7 @@ namespace Pcf {
       /// @brief Convert uint32 to bool
       /// @param value uint32 to convert
       /// @return bool A new bool object converted from value
-      static bool ToBoolean(const UInt32& value) { return value != 0; }
+      static bool ToBoolean(const UInt32& value) { return value.value != 0; }
       
       /// @brief Convert uint64 to bool
       /// @param value uint64 to convert
@@ -220,7 +220,7 @@ namespace Pcf {
       /// @brief Convert uint64 to bool
       /// @param value uint64 to convert
       /// @return bool A new bool object converted from value
-      static bool ToBoolean(const UInt64& value) { return value != 0; }
+      static bool ToBoolean(const UInt64& value) { return value.value != 0; }
       
       /// @brief Calling this method always throws InvalidCastException.
       template<typename T>

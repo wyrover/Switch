@@ -572,13 +572,13 @@ namespace Pcf {
         /// @brief Determines whether this instance of Int32 and a specified object, which must also be a Int32 object, have the same value.
         /// @param obj The object to compare with the current object.
         /// @return bool true if the specified object is equal to the current object. otherwise, false.
-        virtual bool Equals(const object& obj) const;
+        bool Equals(const object& obj) const noexcept override;
 
         /// @brief reates a human-readable string that represents this Size class.
         /// @return string A string that represents this Size.
-        virtual string ToString() const;
+        String ToString() const noexcept override;
 
-        virtual int32 CompareTo(const IComparable& obj) const {
+        int32 CompareTo(const IComparable& obj) const noexcept override {
           if (!is<Color>(obj))
             return 1;
 
@@ -589,7 +589,7 @@ namespace Pcf {
           return Int32(this->argb).CompareTo(color);
         }
 
-        virtual int32 GetHashCode() const { return this->argb; }
+        int32 GetHashCode() const noexcept override { return this->argb; }
 
       private :
         Color(int32 argb) : argb(argb), knownColor((KnownColor)0) {}

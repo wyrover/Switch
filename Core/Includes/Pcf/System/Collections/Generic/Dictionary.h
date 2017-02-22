@@ -36,7 +36,7 @@ namespace Pcf {
         class Dictionary : public Object, public Linq::Extension::Enumerable<Dictionary<TKey, TValue, TAllocator>, KeyValuePair<TKey,TValue>>, public IDictionary<TKey, TValue> {
         public:
           using Item = KeyValuePair<TKey,TValue>;
-
+          
           /// @brief Represents the collection of keys in a Dictionary<TKey, TValue>. This class cannot be inherited.
           using KeyCollection = typename IDictionary<TKey, TValue>::KeyCollection;
           
@@ -47,7 +47,7 @@ namespace Pcf {
           /// @remarks Every key in a Dictionary<TKey, TValue> must be unique according to the default equality comparer.
           /// @remarks The Dictionary<TKey, TValue> class is ! thread safe.
           Dictionary() : operationNumber(0) {}
-
+          
           /// @brief Initializes a new instance of the Dictionary<TKey, TValue> class that contains elements copied from the specified IDictionary<TKey, TValue>.
           /// @param dictionary The IDictionary<TKey, TValue> whose elements are copied to the new Dictionary<TKey, TValue>.
           /// @remarks Every key in a Dictionary<TKey, TValue> must be unique according to the default equality comparer.
@@ -56,14 +56,14 @@ namespace Pcf {
             for (const auto& item : dictionary)
               Add(item);
           }
-
+          
           /// @cond
           Dictionary(Dictionary&& dictionary) : hashmap(Move(dictionary.hashmap)), comparer(dictionary.comparer), operationNumber(dictionary.operationNumber) {
             dictionary.comparer.Reset();
             dictionary.operationNumber = 0;
           }
           /// @endcond
-
+          
           /// @brief Initializes a new instance of the Dictionary<TKey, TValue> class that contains elements copied from the specified IDictionary<TKey, TValue>.
           /// @param dictionary The IDictionary<TKey, TValue> whose elements are copied to the new Dictionary<TKey, TValue>.
           /// @exception ArgumentNullException The parameters dictionary is null.
@@ -73,7 +73,7 @@ namespace Pcf {
             for (const auto& item : dictionary)
               Add(item);
           }
-
+          
           /// @brief Initializes a new instance of the Dictionary<TKey, TValue> class with Tkey && TValue array specified.
           /// @param array An array of Tkey && TValue to initialize Dictionnary.
           /// @param capacity The number of elements that the new list can initially store (maximum 512 items).
@@ -99,7 +99,7 @@ namespace Pcf {
               this->Add(*iterator);
           }
           /// @endcond
-
+          
           /// @brief Adds an KeyValuePair<TKey, TValue> object to the end of the Dictionary<TKey, TValue>.
           /// @param keyValue The pointer object to be added to the end of the Dictionary<TKey, TValue>. The value can ! be null for reference types.
           /// @exception ArgumentNullException The parameters keyValue is null.
@@ -109,7 +109,7 @@ namespace Pcf {
           /// The following sample show how to use Add function:
           /// @include DictionaryAdd.cpp
           void Add(const Item& item) override {Add(item.Key(), item.Value());}
-
+          
           /// @brief Adds an element with the provided key && value to the Dictionary<TKey,TValue>.
           /// @param key The object to use as the key of the element to add.
           /// @param value The object to use as the value of the element to add.
@@ -123,23 +123,23 @@ namespace Pcf {
               throw ArgumentException(pcf_current_information);
             (*this)[key] = value;
           }
-
+          
           /// @brief Removes all elements from the List<T>.
           void Clear() override {this->hashmap.clear();}
-
+          
           /// @brief Determines whether an element is in the Dictionary<TKey,TValue>.
           /// @param keyValue The object to be added to the end of the Dictionary<TKey,TValue>. The value can ! be null for reference types.
           bool Contains(const KeyValuePair<TKey,TValue>& item) const override {
             if (!ContainsKey(item.Key()))
               return false;
-
+            
             return (*this)[item.Key()] == item.Value();
           }
-
+          
           /// @brief Determines whether an element is in the Dictionary<TKey,TValue>.
           /// @param key The object to be added to the end of the Dictionary<TKey,TValue>. The value can ! be null for reference types.
-          virtual bool ContainsKey(const TKey& key) const override {return this->hashmap.find(key) != this->hashmap.end();}
-
+          bool ContainsKey(const TKey& key) const override {return this->hashmap.find(key) != this->hashmap.end();}
+          
           /// @brief Determines whether an element is in the Dictionary<TKey,TValue>.
           /// @param value The object to be added to the end of the Dictionary<TKey,TValue>. The value can ! be null for reference types.
           bool ContainsValue(const TValue& value) const {
@@ -148,7 +148,7 @@ namespace Pcf {
                 return true;
             return false;
           }
-
+          
           /// @brief Copies the entire Dictionary<TKey,TValue> to a compatible one-dimensional array.
           /// @param array The one-dimensional Array that is the destination of the elements copied from ICollection. The Array must have zero-based indexing.
           /// @return Int32 Number of elements copied.
@@ -156,7 +156,7 @@ namespace Pcf {
           /// @exception ArgumentOutOfRangeException The index is greater then number elements of Dictionary<TKey,TValue>
           /// @remarks The elements are copied to the Array in the same order in which the enumerator iterates through the List<T>.
           void CopyTo(System::Array<KeyValuePair<TKey,TValue>>& array) const {CopyTo(array, 0);}
-
+          
           /// @brief Copies the entire Dictionary<TKey,TValue> to a compatible one-dimensional array, starting at the specified index of the target array.
           /// @param array The one-dimensional Array that is the destination of the elements copied from ICollection. The Array must have zero-based indexing.
           /// @param index The zero-based index in array at which copying begins;
@@ -171,51 +171,51 @@ namespace Pcf {
             for (const Item& item : *this)
               array[count++] = Item(item);
           }
-
+          
           /// @brief Gets the total number of elements the internal data structure.
           /// @return Int32 The number of elements that the Dictionary<TKey,TValue> can contain.
           int32 GetCapacity() const {return static_cast<int32>(this->hashmap.size());}
-
+          
           /// @brief Returns an enumerator that iterates through the Dictionary<TKey,TValue>.
           /// @return Int32 A Dictionary<TKey,TValue>::Enumerator for the Dictionary<TKey,TValue>.
           System::Collections::Generic::Enumerator<KeyValuePair<TKey, TValue>> GetEnumerator() const override {return System::Collections::Generic::Enumerator<KeyValuePair<TKey, TValue>>(new Dictionary::Enumerator(*((Dictionary*)this)));}
-
+          
           /// @brief Removes the first occurrence of a specific object from the Dictionary<TKey, TValue>.
           /// @param keyValue The object to remove from the Dictionary<TKey, TValue>. The value can ! be null.
           /// @return true if item is successfully removed; otherwise, false. This method also returns false if item was ! found in the Dictionary<TKey, TValue>.
           /// @exception ArgumentNullException The parameters keyValue is null.
-          virtual bool Remove(const KeyValuePair<TKey, TValue>& item) override {
+          bool Remove(const KeyValuePair<TKey, TValue>& item) override {
             if (! Contains(item))
               return false;
             this->operationNumber++;
             this->hashmap.erase(item.Key());
             return true;
           }
-
+          
           /// @brief Removes the first occurrence of a specific object from the Dictionary<TKey, TValue>.
           /// @param key The object to remove from the Dictionary<TKey, TValue>. The value can ! be null.
           /// @return Boolean true if item is successfully removed; otherwise, false. This method also returns false if item was ! found in the Dictionary<TKey, TValue>.
           /// @exception ArgumentNullException The parameters key is null.
-          virtual bool Remove(const TKey& key) override {
+          bool Remove(const TKey& key) override {
             if (! ContainsKey(key))
               return false;
             this->operationNumber++;
             this->hashmap.erase(key);
             return true;
           }
-
-        /// @brief Gets the value associated with the specified key.
-        /// @param key The key of the value to get.
-        /// @param value When this method returns, contains the value associated with the specified key, if the key is found; otherwise, the default value for the type of the value parameter. This parameter is passed uninitialized.
-        /// @return true if the System::Collections::Generic::Dictionary<TKey,TValue> contains an element with the specified key; otherwise, false.
-        /// @exception System::ArgumentNullException key is null.
-          virtual bool TryGetValue(const TKey& key, TValue& value) const override {
+          
+          /// @brief Gets the value associated with the specified key.
+          /// @param key The key of the value to get.
+          /// @param value When this method returns, contains the value associated with the specified key, if the key is found; otherwise, the default value for the type of the value parameter. This parameter is passed uninitialized.
+          /// @return true if the System::Collections::Generic::Dictionary<TKey,TValue> contains an element with the specified key; otherwise, false.
+          /// @exception System::ArgumentNullException key is null.
+          bool TryGetValue(const TKey& key, TValue& value) const override {
             if (!ContainsKey(key))
               return false;
             value = (*this)[key];
             return true;
           }
-
+          
           /// @brief Set the element at the specified key. If the key is ! found, the element is added at the specified key.
           /// @param key The key of the element to set.
           /// @return TValue The element at the specified key.
@@ -227,7 +227,7 @@ namespace Pcf {
             this->operationNumber++;
             return this->hashmap[key];
           }
-
+          
           /// @brief Gets the element at the specified index.
           /// @param key The key of the element to get.
           /// @return TValue The element at the specified key.
@@ -241,7 +241,7 @@ namespace Pcf {
               throw ArgumentException(pcf_current_information);
             return const_cast<std::unordered_map<TKey, TValue, Hasher, EqualTo, TAllocator>&>(this->hashmap)[key];
           }
-
+          
           /// @brief Clears the list && insert the elements of the list given in argument.
           /// @param dictionnary the list which elements will be inserted from
           /// @return List<T> the list
@@ -251,7 +251,7 @@ namespace Pcf {
             this->operationNumber++;
             return *this;
           }
-
+          
         private:
           class Hasher {
           public:
@@ -299,38 +299,38 @@ namespace Pcf {
           const_iterator begin() const {return const_iterator(this->hashmap.begin());}
           iterator end() {return iterator(this->hashmap.end());}
           const_iterator end() const {return const_iterator(this->hashmap.end());}
-
+          
           class Enumerator : public Object, public IEnumerator<KeyValuePair<TKey, TValue>> {
           public:
             Enumerator(Dictionary& dictionary) : dictionary(dictionary) {Reset();}
-
+            
             Enumerator(const Enumerator& enumerator) : operationNumber(enumerator.operationNumber), dictionary(enumerator.dictionary), currentKeyValuePair(enumerator.currentKeyValuePair), iterator(enumerator.iterator), beforeFirst(enumerator.beforeFirst) {}
-
+            
             void Reset() {
               this->operationNumber = this->dictionary.operationNumber;
               this->iterator = this->dictionary.hashmap.begin();
-               this->beforeFirst = true;
+              this->beforeFirst = true;
             }
-
+            
             virtual bool MoveNext() {
               if (this->operationNumber != this->dictionary.operationNumber)
                 throw System::InvalidOperationException(pcf_current_information);
-
+              
               if (IsFinished())
                 return false;
-
+              
               if (this->beforeFirst)
                 this->beforeFirst = false;
               else
                 this->iterator++;
-
+              
               if (IsFinished())
                 return false;
-
+              
               this->currentKeyValuePair = SharedPointer<Item>::Create((*this->iterator).first,(*this->iterator).second);
               return true;
             }
-
+            
           protected:
             const KeyValuePair<TKey, TValue>& GetCurrent() const {
               if (this->beforeFirst || IsFinished())
@@ -345,14 +345,14 @@ namespace Pcf {
             typename std::unordered_map<TKey, TValue, Hasher, EqualTo, TAllocator>::iterator iterator;
             bool beforeFirst;
           };
-
+          
         protected:
           std::unordered_map<TKey, TValue, Hasher, EqualTo, TAllocator> hashmap;
           SharedPointer< IComparer<TKey>> comparer;
           int64 operationNumber;
           Object syncRoot;
           /// @endcond
-
+          
         private:
           int32 GetCount() const override {return static_cast<int32>(this->hashmap.size());}
           bool GetIsReadOnly() const override {return false;}

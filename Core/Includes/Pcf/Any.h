@@ -2,6 +2,7 @@
 /// @brief Contains Pcf::Any class.
 #pragma once
 
+#include "Boxing.h"
 #include "SharedPointer.h"
 #include "Types.h"
 #include "System/Boolean.h"
@@ -38,7 +39,8 @@ namespace Pcf {
     
     template <typename T>
     struct EnumOrOtherToAny<T, std::false_type> {
-      SharedPointer<object> operator()(T value) {return new System::IntPtr((intptr)&value);}
+      //SharedPointer<object> operator()(T value) {return new System::IntPtr((intptr)&value);}
+      SharedPointer<object> operator()(T value) {return new Boxer<T>(value);}
     };
     
     template <typename T, typename Bool>
@@ -207,7 +209,7 @@ namespace Pcf {
     /// | Less than zero    | This instance is less than obj.    |
     /// | Zero              | This instance is equal to obj.     |
     /// | Greater than zero | This instance is greater than obj. |
-    int32 CompareTo(const IComparable& obj) const override {
+    int32 CompareTo(const IComparable& obj) const noexcept override {
       if (!is<Any>(obj)) return -1;
       return CompareTo(as<Any>(obj));
     }
@@ -229,18 +231,18 @@ namespace Pcf {
     
     /// @brief Serves as a hash function for a particular type.
     /// @return Int32 A hash code for the current Object.
-    int32 GetHashCode() const override {
+    int32 GetHashCode() const noexcept override {
       if(!this->HasValue) return 0;
       return As<object>().GetHashCode();
     }
     
     /// @brief Determines whether this instance of Any and a specified Object, which must also be a Any Object, have the same value.
-    /// @param value The Object to compare with the current Object.
+    /// @param obj The Object to compare with the current Object.
     /// @return true if the specified Object is equal to the current Object. otherwise, false.
-    bool Equals(const object& value) const override {
-      if (is<Any>(value))
-        return Equals(as<Any>(value));
-      return *this->value == value;
+    bool Equals(const object& obj) const noexcept override {
+      if (is<Any>(obj))
+        return Equals(as<Any>(obj));
+      return *this->value == obj;
     }
     
     /// @brief Determines whether this instance of Any and a specified Object, which must also be an Any Object, have the same value.
@@ -289,7 +291,7 @@ namespace Pcf {
     /// @brief Returns the text representation of the value of the current Nullable<T> object.
     /// @return The text representation of the value of the current Nullable<T> object if the HasValue property is true, or an empty string ("") if the HasValue property is false.
     /// @remarks The ToString property returns the string yielded by calling the ToString property of the object returned by the Value property.
-    string ToString() const override {
+    string ToString() const noexcept override {
       if (this->HasValue == false)
         return "";
       return value->ToString();
