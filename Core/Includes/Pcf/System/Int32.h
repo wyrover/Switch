@@ -167,6 +167,54 @@ namespace Pcf {
       /// @endcond
     };
   }
+  
+  /// @brief Return true if specified value is the specified Type. A Is expression takes the following form:
+  /// @par Examples
+  /// @code
+  /// System::Int32 i = 0;
+  /// bool isInt32 = is<System::Int32>(i);
+  /// @endcode
+  /// @see Pcf::System::Type
+  template<>
+  inline bool is<int32, object>(const object& value) {
+    return is<System::Int32>(value);
+  }
+  
+  /// @brief Return true if specified value is the specified Type. A Is expression takes the following form:
+  /// @par Examples
+  /// @code
+  /// System::Int32 i = 0;
+  /// bool isInt32 = is<System::Int32>(i);
+  /// @endcode
+  /// @see Pcf::System::Type
+  template<>
+  inline bool is<int32, object>(object& value) {
+    return is<System::Int32>(value);
+  }
+  
+  /// @brief Return true if specified value is the specified Type. A Is expression takes the following form:
+  /// @par Examples
+  /// @code
+  /// System::Int32 i = 0;
+  /// bool isInt32 = is<System::Int32>(i);
+  /// @endcode
+  /// @see Pcf::System::Type
+  template<>
+  inline bool is<int32, object>(const object* value) {
+    return is<System::Int32>(value);
+  }
+  
+  /// @brief Return true if specified value is the specified Type. A Is expression takes the following form:
+  /// @par Examples
+  /// @code
+  /// System::Int32 i = 0;
+  /// bool isInt32 = is<System::Int32>(i);
+  /// @endcode
+  /// @see Pcf::System::Type
+  template<>
+  inline bool is<int32, object>(object* value) {
+    return is<System::Int32>(value);
+  }
 }
 
 using namespace Pcf;

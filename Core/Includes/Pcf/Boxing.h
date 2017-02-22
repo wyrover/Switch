@@ -27,7 +27,7 @@
 namespace Pcf {
   template<typename T>
   int32 CompareBoxedType(const T& a, const T& b) {
-    return memcmp(&a, &b, sizeof(T));
+    return memcmp((const void*)&a, (const void*)&b, sizeof(T));
   }
   
   template<typename T>

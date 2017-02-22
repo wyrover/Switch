@@ -2,6 +2,7 @@
 /// @brief Contains Pcf::Any class.
 #pragma once
 
+#include "Boxing.h"
 #include "SharedPointer.h"
 #include "Types.h"
 #include "System/Boolean.h"
@@ -38,7 +39,8 @@ namespace Pcf {
     
     template <typename T>
     struct EnumOrOtherToAny<T, std::false_type> {
-      SharedPointer<object> operator()(T value) {return new System::IntPtr((intptr)&value);}
+      //SharedPointer<object> operator()(T value) {return new System::IntPtr((intptr)&value);}
+      SharedPointer<object> operator()(T value) {return new Boxer<T>(value);}
     };
     
     template <typename T, typename Bool>

@@ -249,7 +249,7 @@ namespace {
     arrayList.Add("Deinonychus");
     arrayList.Add("Compsognathus");
     
-    ASSERT_FALSE(arrayList.Contains(new String("Snowcat")));
+    ASSERT_FALSE(arrayList.Contains(String("Snowcat")));
   }
   
   TEST(ArrayList, ContainsObjectFound) {
