@@ -113,7 +113,7 @@ namespace Pcf {
       return To<T>();
     }
     
-    bool operator==(std::nullptr_t value) const {return this->value.IsNull();}
+    bool operator==(std::nullptr_t value) const {return !this->HasValue();}
     bool operator==(bool value) const {return As<System::Boolean>() == value;}
     bool operator==(byte value) const {return As<System::Byte>() == value;}
     bool operator==(char value) const {return As<System::Char>() == char32(value);}
