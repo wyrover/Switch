@@ -150,4 +150,25 @@ namespace Pcf {
       bool hasValue = false;
     };
   }
+
+  /// @brief Represents a value type that can be assigned null.
+  /// @par Examples
+  /// The following code example defines three rows of a table in the Microsoft Pubs sample database. The table contains two columns that are not nullable and two columns that are nullable.
+  /// @include Nullable.cpp
+  template<typename T>
+  using n = System::Nullable<T>;
+  
+  template<typename TT, typename T>
+  bool is(const System::Nullable<T>& value) {
+    if (!value.HasValue)
+      return false;
+    return is<TT>(value.Value());
+  }
+  
+  template<typename TT, typename T>
+  bool is(System::Nullable<T>& value) {
+    if (!value.HasValue)
+      return false;
+    return is<TT>(value.Value());
+  }
 }
