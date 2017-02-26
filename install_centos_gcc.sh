@@ -11,10 +11,10 @@ mkdir -p Build/Examples
 mkdir -p Build/ThirdParties
 
 sudo yum update
-sudo yum install libcurl-devel
-sudo yum install libjpeg-devel
-sudo yum install zlib-devel
-sudo yum install libpng-devel
+sudo yum install libcurl-devel libjpeg-devel zlib-devel libpng-devel
+
+ln -s /usr/bin/cmake3 /usr/local/bin/cmake
+ln -s /usr/bin/cpack3 /usr/local/bin/cpack
 
 cd Build/ThirdParties
 cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ../../ThirdParties 
