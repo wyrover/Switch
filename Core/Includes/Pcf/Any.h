@@ -470,10 +470,12 @@ namespace Pcf {
     return value.As<System::Int64>();
   }
   
+#if __APPLE__
   template<>
   inline intptr as<intptr>(const Any& value) {
     return value.As<System::IntPtr>();
   }
+#endif
   
   template<>
   inline sbyte as<sbyte>(const Any& value) {
@@ -495,10 +497,12 @@ namespace Pcf {
     return value.As<System::UInt64>();
   }
   
+#if __APPLE__
   template<>
   inline uintptr as<uintptr>(const Any& value) {
     return value.As<System::UIntPtr>();
   }
+#endif
 
   template<>
   inline bool as<bool>(Any& value) {
@@ -530,10 +534,12 @@ namespace Pcf {
     return value.As<System::Int64>();
   }
   
+#if __APPLE__
   template<>
   inline intptr as<intptr>(Any& value) {
     return value.As<System::IntPtr>();
   }
+#endif
   
   template<>
   inline sbyte as<sbyte>(Any& value) {
@@ -555,10 +561,12 @@ namespace Pcf {
     return value.As<System::UInt64>();
   }
   
+#if __APPLE__
   template<>
   inline uintptr as<uintptr>(Any& value) {
     return value.As<System::UIntPtr>();
   }
+#endif
   /// @endcond
 
   using any = Any;

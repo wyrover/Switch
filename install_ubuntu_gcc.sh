@@ -11,13 +11,7 @@ mkdir -p Build/Examples
 mkdir -p Build/ThirdParties
 
 sudo apt update
-sudo apt install cmake
-sudo apt install libssl-dev
-sudo apt install libcurlpp-dev
-sudo apt install doxygen
-sudo apt install libjpeg8-dev
-sudo apt install zlibc
-sudo apt install libpng-dev
+sudo apt install cmake libssl-dev libcurlpp-dev doxygen libjpeg8-dev zlibc libpng-dev uuid-dev
 
 cd Build/ThirdParties
 cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ../../ThirdParties 

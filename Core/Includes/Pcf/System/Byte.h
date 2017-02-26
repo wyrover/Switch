@@ -2,6 +2,7 @@
 /// @brief Contains Pcf::System::Byte struct.
 #pragma once
 
+#include <limits>
 #include "../Property.h"
 #include "../Types.h"
 #include "IComparable.h"
