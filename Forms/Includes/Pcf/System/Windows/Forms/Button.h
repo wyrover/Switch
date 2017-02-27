@@ -23,7 +23,7 @@ namespace Pcf {
           Button() : ButtonBase("", 0, 0, 75, 25) { this->SetStyle(ControlStyles::UserPaint, false); }
 
           /// @cond
-          Button(const Button& button) : ButtonBase(button) {}
+          //Button(const Button& button) : ButtonBase(button) {}
           /// @endcond
 
         protected:

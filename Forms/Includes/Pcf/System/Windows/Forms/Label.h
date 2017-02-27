@@ -21,7 +21,7 @@ namespace Pcf {
           Label() : Control("", 0, 0, 100, 25) { this->SetStyle(ControlStyles::UserPaint, false); }
 
           /// @cond
-          Label(const Label& label) : Control(label) {}
+          //Label(const Label& label) : Control(label) {}
           /// @endcond
 
         protected:

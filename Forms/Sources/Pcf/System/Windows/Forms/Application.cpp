@@ -5,7 +5,8 @@ using namespace System;
 using namespace System::Windows::Forms;
 using namespace __OS;
 
-UniquePointer<Form> Application::mainForm;
+//UniquePointer<Form> Application::mainForm;
+Reference<Form> Application::mainForm;
 bool Application::enableVisualStyles = false;
 EventHandler Application::Idle;
 

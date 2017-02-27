@@ -147,7 +147,7 @@ namespace PcfFormApp {
       for(auto family : families)
         System::Diagnostics::Debug::WriteLine("System::Drawing::FontFamily::Familes[{0}].Name={1}", count++, family.Name);
       System::Diagnostics::Debug::WriteLine("_________________________________________________________________________________________________________");
-      System::Diagnostics::Debug::WriteLine("System::Drawing::FontFamily(\"Consolas\")={0}", System::Drawing::FontFamily("Consolas").Name, null);
+      //System::Diagnostics::Debug::WriteLine("System::Drawing::FontFamily(\"Consolas\")={0}", System::Drawing::FontFamily("Consolas").Name, null);
       System::Diagnostics::Debug::WriteLine("System::Drawing::FontFamily::GenericMonospace().Name={0}", System::Drawing::FontFamily::GenericMonospace().Name, null);
       System::Diagnostics::Debug::WriteLine("System::Drawing::FontFamily::GenericSansSerif().Name={0}", System::Drawing::FontFamily::GenericSansSerif().Name, null);
       System::Diagnostics::Debug::WriteLine("System::Drawing::FontFamily::GenericSerif().Name={0}", System::Drawing::FontFamily::GenericSerif().Name, null);

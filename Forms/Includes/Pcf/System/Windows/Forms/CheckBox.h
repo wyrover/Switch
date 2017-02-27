@@ -23,7 +23,7 @@ namespace Pcf {
           CheckBox() : ButtonBase("", 0, 0, 105, 25) { this->SetStyle(ControlStyles::UserPaint, false); }
 
           /// @cond
-          CheckBox(const CheckBox& checkBox) : ButtonBase(checkBox) {}
+          //CheckBox(const CheckBox& checkBox) : ButtonBase(checkBox) {}
           /// @endcond
 
         protected:

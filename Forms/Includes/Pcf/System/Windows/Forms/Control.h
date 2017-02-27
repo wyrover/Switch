@@ -114,7 +114,8 @@ namespace Pcf {
           }
 
           /// @cond
-          Control(const Control& control) : data(control.data) {}
+          //Control(const Control& control) : data(control.data) {}
+          Control(const Control& control) = delete;
           ~Control() {
             if (this->Parent() != null)
               this->Parent()().data->controls.Remove(*this);
@@ -376,8 +377,9 @@ namespace Pcf {
             ControlStyles style = (ControlStyles)0;
           };
           friend class __OS::FormsApi;
-          SharedPointer<ControlData> data = SharedPointer<ControlData>::Create(*this);
-    		  static System::Collections::Generic::Dictionary<intptr, Reference<Control>> handles;
+          //SharedPointer<ControlData> data = SharedPointer<ControlData>::Create(*this);
+          SharedPointer<ControlData> data {new ControlData(*this)};
+          static System::Collections::Generic::Dictionary<intptr, Reference<Control>> handles;
           /// @endcond
 
         private:

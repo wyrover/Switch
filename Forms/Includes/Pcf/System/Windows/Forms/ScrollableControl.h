@@ -30,7 +30,7 @@ namespace Pcf {
           ScrollableControl(const string& text, int32 left, int32 top, int32 width, int32 height) : Control(text, left, top, width, height) {}
 
           /// @cond
-          ScrollableControl(const ScrollableControl& scrollableControl) : Control(scrollableControl) {}
+          //ScrollableControl(const ScrollableControl& scrollableControl) : Control(scrollableControl) {}
           /// @endcond
 
         private:

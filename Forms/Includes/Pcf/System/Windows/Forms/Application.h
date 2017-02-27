@@ -40,7 +40,8 @@ namespace Pcf {
           /// @remarks This method adds an event handler to the mainForm parameter for the Closed event. The event handler calls ExitThread to clean up the application.
           template <typename TForm>
           static void Run(const TForm& mainForm) {
-            Application::mainForm = as<Form>(mainForm.template MemberwiseClone<TForm>());
+            //Application::mainForm = as<Form>(mainForm.template MemberwiseClone<TForm>());
+            Application::mainForm = as<Form>(mainForm);
             Run();
           }
 
@@ -48,7 +49,8 @@ namespace Pcf {
           static EventHandler Idle;
 
         private:
-          static UniquePointer<Form> mainForm;
+          //static UniquePointer<Form> mainForm;
+          static Reference<Form> mainForm;
           static bool enableVisualStyles;
         };
       }

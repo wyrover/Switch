@@ -116,14 +116,12 @@ namespace Pcf {
         /// @cond
         Timer() {}
         Timer(const Timer& timer) : data(timer.data) {}
-        Timer& operator =(const Timer& timer) {this->data = timer.data; return *this;}
-        ~Timer() {
-          if (this->data.GetUseCount() == 1) {
-            this->data->closed = true;
-            this->data->event.Set();
-            this->data->thread.Join();
-          }
+        Timer& operator=(const Timer& timer) {
+          this->Close();
+          this->data = timer.data;
+          return *this;
         }
+        ~Timer() {this->Close();}
         /// @endcond
 
         /// @brief Changes the start time and the interval between method invocations for a timer, using 32-bit signed integers to measure time intervals.
@@ -161,6 +159,13 @@ namespace Pcf {
         void Change(uint32 dueTime, uint32 period) {this->Change(as<int32>(dueTime), as<int32>(period));}
 
       private:
+        void Close() {
+          if (this->data.GetUseCount() == 1) {
+            this->data->closed = true;
+            this->data->event.Set();
+            this->data->thread.Join();
+          }
+        }
         struct TimerData : public object {
           TimerCallback callback;
           bool closed{false};
@@ -178,7 +183,7 @@ namespace Pcf {
             }
           }}};
         };
-        
+
         SharedPointer<TimerData> data = new TimerData();
       };
     }

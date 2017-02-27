@@ -23,7 +23,7 @@ namespace Pcf {
           RadioButton() : ButtonBase("", 0, 0, 105, 25) { this->SetStyle(ControlStyles::UserPaint, false); }
 
           /// @cond
-          RadioButton(const RadioButton& radioButton) : ButtonBase(radioButton) {}
+          //RadioButton(const RadioButton& radioButton) : ButtonBase(radioButton) {}
           /// @endcond
 
         protected:

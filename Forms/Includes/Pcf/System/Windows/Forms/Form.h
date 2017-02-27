@@ -26,7 +26,7 @@ namespace Pcf {
           }
 
           /// @cond
-          Form(const Form& form) : ContainerControl(form), formData(form.formData) {}
+          //Form(const Form& form) : ContainerControl(form), formData(form.formData) {}
           /// @endcond
 
           Property<System::Windows::Forms::FormBorderStyle> FormBorderStyle {

@@ -33,7 +33,7 @@ namespace Pcf {
           }
 
           /// @cond
-          ContainerControl(const ContainerControl& containerControl) : ScrollableControl(containerControl) {}
+          //ContainerControl(const ContainerControl& containerControl) : ScrollableControl(containerControl) {}
           /// @endcond
 
           Property<const System::ComponentModel::IContainer&, ReadOnly> Container {
