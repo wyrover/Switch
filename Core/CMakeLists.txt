@@ -566,7 +566,6 @@ set(SOURCE_FILES
   Sources/Pcf/System/UIntPtr.cpp
   Sources/Pcf/System/Uri.cpp
   Sources/Pcf/System/ustring.cpp
-  Sources/Pcf/System/ValueType.cpp
   Sources/Pcf/ExceptionPointer.cpp
 )
 

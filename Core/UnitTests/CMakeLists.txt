@@ -142,5 +142,4 @@ add_executable(Pcf.Core.UnitTests ${SOURCE_FILES})
 target_link_libraries(Pcf.Core.UnitTests Pcf.TUnit.Main Pcf.TUnit Pcf.Core)
 set_target_properties(Pcf.Core.UnitTests PROPERTIES FOLDER Pcf/Core)
 
-enable_testing()
 add_test(NAME Pcf.Core.UnitTests COMMAND $<TARGET_FILE_NAME:Pcf.Core.UnitTests> --tunit_filter=*.* --tunit_output=xml:Pcf.Core.UnitTests.xml WORKING_DIRECTORY $<TARGET_FILE_DIR:Pcf.Core.UnitTests>)

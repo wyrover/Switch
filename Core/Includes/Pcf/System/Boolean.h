@@ -146,7 +146,7 @@ namespace Pcf {
       uint32 ToUInt32(const IFormatProvider& provider) const override {return this->value ? 1 : 0;}
       uint64 ToUInt64(const IFormatProvider& provider) const override {return this->value ? 1 : 0;}
       sbyte ToSByte(const IFormatProvider& provider) const override {return this->value ? 1 : 0;}
-      float ToSingle(const IFormatProvider& provider) const override {return this->value ? 1 : 0;}
+      float ToSingle(const IFormatProvider& provider) const override {return this->value ? 1.0f : 0.0f;}
       String ToString(const IFormatProvider& provider) const override;
     };
   }
