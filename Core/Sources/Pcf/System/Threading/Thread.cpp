@@ -8,26 +8,6 @@ using namespace System::Threading;
 Thread::ThreadCollection Thread::threads;
 std::recursive_mutex Thread::mutex;
 
-Thread::~Thread() {
-  if (Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Background)) {
-    if (this->data->thread.joinable()) {
-      this->data->detachedThreadId = this->data->thread.get_id();
-      this->data->thread.detach();
-    }
-  } else if (this->data->managedThreadId != NoneManagedThreadId && this->data->managedThreadId != MainManagedThreadId && !Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Unstarted) && this->data.GetUseCount() == 2) {
-    int32 managedThreadId = this->data->managedThreadId;
-    this->Join();
-    this->data.Reset();
-    std::lock_guard<std::recursive_mutex> lock(mutex);
-    for (int i = 0; i < threads.Count; i++) {
-      if (threads[i].data->managedThreadId == managedThreadId) {
-        threads.RemoveAt(i);
-        break;
-      }
-    }
-  }
-}
-
 void Thread::ThreadItem::RunWithOrWithoutParam(const object* obj, bool withParam) {
   auto endThread = pcf_delegate {
     this->state |= System::Threading::ThreadState::Stopped;
@@ -106,6 +86,26 @@ void Thread::Abort() {
 
 bool Thread::Cancel() {
   return __OS::CoreApi::Thread::Cancel((intptr)this->data->thread.native_handle());
+}
+
+void Thread::Close() {
+  if (Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Background)) {
+    if (this->data->thread.joinable()) {
+      this->data->detachedThreadId = this->data->thread.get_id();
+      this->data->thread.detach();
+    }
+  } else if (this->data->managedThreadId != NoneManagedThreadId && this->data->managedThreadId != MainManagedThreadId && !Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Unstarted) && this->data.GetUseCount() == 2) {
+    int32 managedThreadId = this->data->managedThreadId;
+    this->Join();
+    this->data.Reset();
+    std::lock_guard<std::recursive_mutex> lock(mutex);
+    for (int i = 0; i < threads.Count; i++) {
+      if (threads[i].data->managedThreadId == managedThreadId) {
+        threads.RemoveAt(i);
+        break;
+      }
+    }
+  }
 }
 
 bool Thread::DoWait(WaitHandle& waitHandle, int32 millisecondsTimeOut) {

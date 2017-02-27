@@ -122,8 +122,12 @@ namespace Pcf {
         /// @cond
         Thread() : data(new ThreadItem()) {}
         Thread(const Thread& thread) : data(thread.data) {}
-        Thread& operator=(const Thread& thread) {this->data = thread.data; return *this;}
-        ~Thread();
+        Thread& operator=(const Thread& thread) {
+          Close();
+          this->data = thread.data;
+          return *this;
+        }
+        ~Thread() {Close();}
         /// @endcond
         
         /// @brief Gets the currently running thread.
@@ -387,6 +391,7 @@ namespace Pcf {
         Thread(const SharedPointer<ThreadItem>& data) : data(data) {}
         
         bool Cancel();
+        void Close();
         static bool DoWait(WaitHandle& waitHandle, int32 millisecondsTimeOut);
 
         static void RegisterCurrentThread() {
