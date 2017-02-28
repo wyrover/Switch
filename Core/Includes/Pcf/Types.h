@@ -8,6 +8,12 @@
 
 #include "Public.h"
 
+#if defined(NDEBUG)
+#  define RELEASE 1
+#else
+#  define DEBUG 1
+#endif
+
 /// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Pcf {
   /// @brief Represents a 16-bit unicode character.
