@@ -91,7 +91,7 @@ namespace {
   }
 }
 
-int WINAPI WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR commandLine, int cmdShow) {
+INT WINAPI WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR commandLine, INT cmdShow) {
   __instance = instance;
   __prevInstance = prevInstance;
   __commandLine = commandLine;
@@ -221,6 +221,7 @@ void FormsApi::Control::SetSize(const System::Windows::Forms::Control& control) 
 
 void FormsApi::Control::SetText(const System::Windows::Forms::Control& control) {
   if (control.data->handle)
+    //SetWindowTextA((HWND)control.data->handle, control.data->text.c_str());
     SetWindowText((HWND)control.data->handle, control.data->text.w_str().c_str());
 }
 
