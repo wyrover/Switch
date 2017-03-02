@@ -12,6 +12,14 @@
 #include "../../../Includes/Pcf/Boxing.h"
 #include "ArrayAlgorithms.h"
 
+#if _WIN32
+using __char16 = __int16;
+using __char32 = __int32;
+#else
+using __char16 = char16;
+using __char32 = char32;
+#endif
+
 using namespace System;
 
 String String::Empty;
@@ -25,6 +33,11 @@ String::String(const char* str) {
   this->string = str;
 }
 
+String::String(const char16* str) : string(std::wstring_convert<std::codecvt_utf8<__char16>, __char16>().to_bytes((const __char16*)str).c_str()) {}
+
+String::String(const char32* str) : string(std::wstring_convert<std::codecvt_utf8<__char32>, __char32>().to_bytes((const __char32*)str).c_str()) {}
+
+/*
 String::String(const char16* str) {
   if (str == null)
     throw ArgumentNullException(pcf_current_information);
@@ -41,7 +54,7 @@ String::String(const char32* str) {
   int i = 0;
   while (str[i] != 0)
     this->string.append(str[i++]);
-}
+}*/
 
 String::String(const wchar* str) {
   if (str == null)
@@ -136,16 +149,10 @@ String::String(const std::string& str) : string(str.c_str()) {
 String::String(const std::wstring& str) : string(std::wstring_convert<std::codecvt_utf8<wchar>, wchar>().to_bytes(str).c_str()) {
 }
 
-String::String(const std::u16string& str) {
-  // Know bug on VS2015 : https://social.msdn.microsoft.com/Forums/vstudio/en-US/8f40dcd8-c67f-4eba-9134-a19b9178e481/vs-2015-rc-linker-stdcodecvt-error?forum=vcgeneral
-  for (char32 c : str)
-    this->string.append(c);
+String::String(const std::u16string& str) : string((const char*)std::wstring_convert<std::codecvt_utf8<__char16>, __char16>().to_bytes((const __char16*)str.c_str()).c_str()) {
 }
 
-String::String(const std::u32string& str) {
-  // Know bug on VS2015 : https://social.msdn.microsoft.com/Forums/vstudio/en-US/8f40dcd8-c67f-4eba-9134-a19b9178e481/vs-2015-rc-linker-stdcodecvt-error?forum=vcgeneral
-  for (char32 c : str)
-    this->string.append(c);
+String::String(const std::u32string& str) : string((const char*)std::wstring_convert<std::codecvt_utf8<__char32>, __char32>().to_bytes((const __char32*)str.c_str()).c_str()) {
 }
 
 String::String(char32 c, int32 length) {

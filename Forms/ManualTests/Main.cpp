@@ -39,7 +39,7 @@ namespace PcfFormApp {
       this->button1.Parent = *this;
       this->button1.Name = "button1";
       //this->button1.Text = "Button";
-      this->button1.Text = U"こんにちは世界！";
+      this->button1.Text = "Привет мир!";
       this->button1.Location = System::Drawing::Point(10, 10);
       this->button1.MouseClick += pcf_delegate(const object& sender, const MouseEventArgs& e) {
         System::Diagnostics::Debug::WriteLine("Button::MouseClick at {0}", e.Location);
@@ -68,8 +68,8 @@ namespace PcfFormApp {
       this->label1.Parent = *this;
       this->label1.Name = "label1";
       //this->label1.Text = "Text label";
-      this->label1.Text = U"こんにちは世界！";
-      //this->label1.Text = U"Привет мир!";
+      //this->label1.Text = "Привет мир!";
+      this->label1.Text = "こんにちは世界!";
       this->label1.Location = System::Drawing::Point(10, 130);
       this->label1.Size = System::Drawing::Size(200, 23);
       this->label1.Click += pcf_delegate(const object& sender, const EventArgs& e) {
