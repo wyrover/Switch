@@ -7,7 +7,7 @@
 
 #include <Pcf/Types.h>
 #include <Pcf/System/Object.h>
-#include <Pcf/System/_String.h>
+#include <Pcf/System/String.h>
 
 /// @cond
 namespace testing {
