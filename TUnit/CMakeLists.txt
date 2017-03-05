@@ -9,7 +9,6 @@ set(INCLUDE_FILES
   Includes/Pcf/TUnit/Assert.h
   Includes/Pcf/TUnit/AssertionException.h
   Includes/Pcf/TUnit/AssertionResult.h
-  Includes/Pcf/TUnit/Constraints.h
   Includes/Pcf/TUnit/Expect.h
   Includes/Pcf/TUnit/Is.h
   Includes/Pcf/TUnit/TestFixture.h

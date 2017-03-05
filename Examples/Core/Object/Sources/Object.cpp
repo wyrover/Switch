@@ -8,7 +8,7 @@ namespace ObjectTest {
   public:
     Point(int x, int y) : x(x), y(y) { }
 
-    virtual bool Equals(const object& obj) const {
+    bool Equals(const object& obj) const noexcept override {
       // If this and obj do not refer to the same type, then they are not equal.
       if (obj.GetType() != this->GetType()) return false;
 
@@ -18,10 +18,10 @@ namespace ObjectTest {
     }
 
     // Return the XOR of the x and y fields.
-    virtual int GetHashCode() const { return this->x ^ this->y; }
+    int GetHashCode() const noexcept override { return this->x ^ this->y; }
 
     // Return the point's value as a string.
-    string ToString() const { return string::Format("({0}, {1})", this->x, this->y); }
+    string ToString() const noexcept override { return string::Format("({0}, {1})", this->x, this->y); }
 
     // Return a copy of this point object by making a simple field copy.
     up<Point> Copy() { return as<Point>(this->MemberwiseClone<Point>()); }

@@ -47,6 +47,8 @@ namespace Pcf {
       
       bool operator==(std::nullptr_t value) const {return !this->HasValue();}
       bool operator!=(std::nullptr_t value) const {return !this->operator==(value);}
+      bool operator==(const Nullable& value) const {return this->HasValue() == value.HasValue() && this->value == value.value;}
+      bool operator!=(const Nullable& value) const {return !this->operator==(value);}
       bool operator==(T value) const {return this->HasValue() && this->value == value;}
       bool operator!=(T value) const {return !this->operator==(value);}
       /// @endcond

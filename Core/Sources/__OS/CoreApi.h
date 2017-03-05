@@ -277,6 +277,7 @@ namespace __OS {
         static std::string Encode(uint32 code);
         static int Encode(uint32 code, byte bytes[]);
         static int Encode(uint32 code, std::string& utf8_encoding);
+        static System::Array<byte> ToBytes(uint32 code);
       };
 
       class UTF16 pcf_static {

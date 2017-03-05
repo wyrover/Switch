@@ -20,7 +20,7 @@ public:
     pcf_set {this->age = value;}
   };
   
-  string ToString() const override {
+  string ToString() const noexcept override {
     return "Name = " + this->Name + ", this->Age = " + Age;
   }
   

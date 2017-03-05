@@ -117,6 +117,22 @@ int __OS::CoreApi::UnicodeEncodings::UTF8::Encode(uint32 code, byte bytes[]) {
   }  
 }
 
+System::Array<byte> __OS::CoreApi::UnicodeEncodings::UTF8::ToBytes(uint32 code) {
+  if (!UnicodeCharacters::ValidateCodePoint(code))
+    return {};
+  
+  if (code < 0x80)
+    return System::Array<byte> {static_cast<byte>(code)};
+  
+  if (code < 0x800)
+    return System::Array<byte> {static_cast<byte>((code >> 6) | 0xc0), static_cast<byte>((code & 0x3f) | 0x80)};
+  
+  if (code < 0x10000)
+    return System::Array<byte> {static_cast<byte>((code >> 12) | 0xe0), static_cast<byte>(((code >> 6) & 0x3f) | 0x80), static_cast<byte>((code & 0x3f) | 0x80)};
+
+  return System::Array<byte> {static_cast<byte>((code >> 18) | 0xf0), static_cast<byte>(((code >> 12) & 0x3f) | 0x80), static_cast<byte>(((code >> 6) & 0x3f) | 0x80), static_cast<byte>((code & 0x3f) | 0x80)};
+}
+
 int __OS::CoreApi::UnicodeEncodings::UTF8::Encode(uint32 code, std::string& utf8_encoding) {
   if (!UnicodeCharacters::ValidateCodePoint(code)) return 0;
 

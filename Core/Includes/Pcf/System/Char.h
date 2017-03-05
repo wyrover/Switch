@@ -19,12 +19,22 @@ namespace Pcf {
     public:
       /// @brief Create a new instance of struct Char
       /// @remarks Char is initialized by default with character 0.
-      Char() { }
+      Char() = default;
 
       /// @brief Create a new instance of struct Char
       /// @param value Value for the Char.
-      Char(char32 value) : value(value) { }
+      Char(char32 value) : value(value) {}
 
+      /// @cond
+      Char(const Char& value) = default;
+      Char& operator=(const Char& value) = default;
+      operator char32() const {return this->value;}
+      Char& operator++() {++this->value; return *this;}
+      Char operator++(int) {return this->value++;}
+      Char& operator--() {--this->value; return *this;}
+      Char operator--(int) {return this->value--;}
+      /// @endcond
+      
       /// @brief Represents the largest possible value of an Char (code point 0x0010FFFFu). This field is constant.
       static Property<char32, ReadOnly> MaxValue;
       
@@ -67,7 +77,7 @@ namespace Pcf {
       /// @brief Indicates whether the specified Unicode character is categorized as a letter or digit character.
       /// @param value A Unicode character.
       /// @return Boolean true if value is a letter or digit character; otherwise, false.
-      static bool IsLetterOrDigit(char32 value);
+      static bool IsLetterOrDigit(char32 value){return IsLetter(value) || IsDigit(value);}
 
       /// @brief Indicates whether the character at the specified position in a specified String is categorized as a letter or digit character.
       /// @param value A String.
@@ -111,7 +121,7 @@ namespace Pcf {
       /// @brief Indicates whether the specified Unicode character is categorized as a symbol character.
       /// @param value A Unicode character.
       /// @return Boolean true if value is a symbol character; otherwise, false.
-      static bool IsSymbol(char32 value);
+      static bool IsSymbol(char32 value) {return (value == '+' || value == '-' || value == '*' || value == '/' || value == '%' || value == '$' || value == 0x9C);}
 
       /// @brief Indicates whether the character at the specified position in a specified String is categorized as a symbol character.
       /// @param value A String.
@@ -176,18 +186,18 @@ namespace Pcf {
       /// @param value The Char to compare with the current Object.
       /// @return Boolean true if the specified value is equal to the current Object. otherwise, false.
       /// @exception ArgumentNullException The parameters value is null.
-      bool Equals(const Char& value) const;
+      bool Equals(const Char& value) const {return this->value == value.value;}
 
       /// @brief Determines whether this instance of Char and a specified Object, which must also be a Char Object, have the same value.
       /// @param obj The Object to compare with the current Object.
       /// @return Boolean true if the specified Object is equal to the current Object. otherwise, false.
       /// @exception ArgumentNullException The parameters obj is null.
-      bool Equals(const Object& obj) const noexcept override;
+      bool Equals(const Object& obj) const noexcept override {return is<Char>(obj) && Equals((const Char&)obj);}
 
       /// @brief Serves as a hash function for a particular type.
       /// @return Int32 A hash code for the current Object.
       /// @see Object
-      int32 GetHashCode() const noexcept override;
+      int32 GetHashCode() const noexcept override {return this->value;}
 
       /// @brief Returns a String that represents the current Char.
       /// @return String A String that represents the current Char.
@@ -201,7 +211,7 @@ namespace Pcf {
       /// | Less than zero    | This instance is false and value is true.                                   |
       /// | Zero              | This instance and value are equal (either both are true or both are false). |
       /// | Greater than zero | This instance is true and value is false.  -or- value is null reference.    |
-      int32 CompareTo(const Char& value) const;
+      int32 CompareTo(const Char& value) const {return this->value - value.value;}
 
       /// @brief Compares the current instance with another Object of the same type.
       /// @param obj An Object to compare with this instance.
@@ -211,56 +221,33 @@ namespace Pcf {
       /// | Less than zero    | This instance is false and obj is true.                                   |
       /// | Zero              | This instance and obj are equal (either both are true or both are false). |
       /// | Greater than zero | This instance is true and obj is false.  -or- obj is null reference.      |
-      int32 CompareTo(const IComparable& obj) const noexcept override;
+      int32 CompareTo(const IComparable& obj) const noexcept override {
+        if (!is<Char>(obj)) return 1;
+        return CompareTo(static_cast<const Char&>(obj));
+      }
 
       /// @brief Returns the TypeCode for this instance.
       /// @return TypeCode The enumerated constant that is the TypeCode of the class or value type that implements this interface.
-      TypeCode GetTypeCode() const override;
+      TypeCode GetTypeCode() const override {return TypeCode::Char;}
 
     private:
-      /// @cond
       friend class Convert;
-      /// @endcond
       bool ToBoolean(const IFormatProvider& provider) const override;
       byte ToByte(const IFormatProvider& provider) const override;
-      char32 ToChar(const IFormatProvider& provider) const override;
+      char32 ToChar(const IFormatProvider& provider) const override {return this->value;}
       DateTime ToDateTime(const IFormatProvider& provider) const override;
-      double ToDouble(const IFormatProvider& provider) const override;
+      double ToDouble(const IFormatProvider& provider) const override{return static_cast<double>(this->value);}
       int16 ToInt16(const IFormatProvider& provider) const override;
-      int32 ToInt32(const IFormatProvider& provider) const override;
-      int64 ToInt64(const IFormatProvider& provider) const override;
+      int32 ToInt32(const IFormatProvider& provider) const override {return this->value;}
+      int64 ToInt64(const IFormatProvider& provider) const override {return this->value;};
       uint16 ToUInt16(const IFormatProvider& provider) const override;
-      uint32 ToUInt32(const IFormatProvider& provider) const override;
-      uint64 ToUInt64(const IFormatProvider& provider) const override;
+      uint32 ToUInt32(const IFormatProvider& provider) const override {return this->value;};
+      uint64 ToUInt64(const IFormatProvider& provider) const override {return this->value;};
       sbyte ToSByte(const IFormatProvider& provider) const override;
       float ToSingle(const IFormatProvider& provider) const override;
-      String ToString(const IFormatProvider& provider) const override;
+      String ToString(const IFormatProvider& provider) const override {return this->ToString();}
 
       char32 value = 0;
-
-    public:
-      /// @cond
-      Char(const Char& value) : value(value.value) {}
-      Char& operator =(const Char& value) {this->value= value.value; return *this;}
-      //uint32 GetCode() const { return value; }
-      char ToCChar() const { return static_cast<char>(this->value); }
-
-      operator const char32() const { return this->value; }
-
-      Char& operator++() {
-        ++this->value;
-        return *this;
-      }
-
-      const Char operator++(int) { return this->value++; }
-
-      Char& operator--() {
-        --this->value;
-        return *this;
-      }
-
-      const Char operator--(int) { return this->value--; }
-      /// @endcond
     };
   }
 }

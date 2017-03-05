@@ -2,7 +2,6 @@ project(Pcf.Core)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 set(INCLUDE_FILES
-  Includes/Pcf/Microsoft/Win32.h
   Includes/Pcf/Microsoft/Win32/Registry.h
   Includes/Pcf/Microsoft/Win32/RegistryKey.h
   Includes/Pcf/Microsoft/Win32/RegistryKeyPermissionCheck.h
@@ -40,9 +39,7 @@ set(INCLUDE_FILES
   Includes/Pcf/System/Collections/ArrayList.h
   Includes/Pcf/System/Collections/BitArray.h
   Includes/Pcf/System/Collections/Comparer.h
-  Includes/Pcf/System/Collections/Concurrent.h
   Includes/Pcf/System/Collections/DictionaryEntry.h
-  Includes/Pcf/System/Collections/Generic.h
   Includes/Pcf/System/Collections/Hashtable.h
   Includes/Pcf/System/Collections/ICollection.h
   Includes/Pcf/System/Collections/IComparer.h
@@ -50,9 +47,7 @@ set(INCLUDE_FILES
   Includes/Pcf/System/Collections/IEnumerable.h
   Includes/Pcf/System/Collections/IEnumerator.h
   Includes/Pcf/System/Collections/IList.h
-  Includes/Pcf/System/Collections/ObjectModel.h
   Includes/Pcf/System/Collections/Queue.h
-  Includes/Pcf/System/Collections/Specialized.h
   Includes/Pcf/System/Collections/Stack.h
   Includes/Pcf/System/ComponentModel/InvalidEnumArgumentException.h
   Includes/Pcf/System/Diagnostics/ConsoleTraceListener.h
@@ -121,7 +116,6 @@ set(INCLUDE_FILES
   Includes/Pcf/System/IO/PathTooLongException.h
   Includes/Pcf/System/IO/Pipes.h
   Includes/Pcf/System/IO/PipeException.h
-  Includes/Pcf/System/IO/Ports.h
   Includes/Pcf/System/IO/SeekOrigin.h
   Includes/Pcf/System/IO/Stream.h
   Includes/Pcf/System/IO/StreamReader.h
@@ -176,19 +170,16 @@ set(INCLUDE_FILES
   Includes/Pcf/System/Net/NetworkCredential.h
   Includes/Pcf/System/Net/ProtocolViolationException.h
   Includes/Pcf/System/Net/SocketAddress.h
-  Includes/Pcf/System/Net/Sockets.h
   Includes/Pcf/System/Net/WebException.h
   Includes/Pcf/System/Net/WebRequest.h
   Includes/Pcf/System/Net/WebRequestMethods.h
   Includes/Pcf/System/Net/WebResponse.h
-  Includes/Pcf/System/Net/WebSockets.h
   Includes/Pcf/System/Runtime/Serialization/Formatter.h
   Includes/Pcf/System/Runtime/Serialization/IFormatter.h
   Includes/Pcf/System/Runtime/Serialization/ISerializable.h
   Includes/Pcf/System/Runtime/Serialization/SerializationException.h
   Includes/Pcf/System/Runtime/Serialization/SerializationEntry.h
   Includes/Pcf/System/Runtime/Serialization/SerializationInfo.h
-  Includes/Pcf/System/Runtime/Serialization.h
   Includes/Pcf/System/Security/HostProtectionException.h
   Includes/Pcf/System/Security/SecureString.h
   Includes/Pcf/System/Security/SecurityException.h
@@ -220,7 +211,6 @@ set(INCLUDE_FILES
   Includes/Pcf/System/Threading/Semaphore.h
   Includes/Pcf/System/Threading/SemaphoreFullException.h
   Includes/Pcf/System/Threading/SynchronizationLockException.h
-  Includes/Pcf/System/Threading/Tasks.h
   Includes/Pcf/System/Threading/Thread.h
   Includes/Pcf/System/Threading/ThreadLocal.h
   Includes/Pcf/System/Threading/ThreadAbortException.h
@@ -269,9 +259,7 @@ set(INCLUDE_FILES
   Includes/Pcf/System/CannotUnloadAppDomainException.h
   Includes/Pcf/System/Char.h
   Includes/Pcf/System/CharEnumerator.h
-  Includes/Pcf/System/Collections.h
   Includes/Pcf/System/Comparison.h
-  Includes/Pcf/System/ComponentModel.h
   Includes/Pcf/System/Console.h
   Includes/Pcf/System/ConsoleCancelEventArgs.h
   Includes/Pcf/System/ConsoleCancelEventHandler.h
@@ -288,7 +276,6 @@ set(INCLUDE_FILES
   Includes/Pcf/System/DayOfWeek.h
   Includes/Pcf/System/Decimal.h
   Includes/Pcf/System/Delegate.h
-  Includes/Pcf/System/Diagnostics.h
   Includes/Pcf/System/DivideByZeroException.h
   Includes/Pcf/System/DllNotFoundException.h
   Includes/Pcf/System/DuplicateWaitObjectException.h
@@ -303,7 +290,6 @@ set(INCLUDE_FILES
   Includes/Pcf/System/FieldAccessException.h
   Includes/Pcf/System/FormatException.h
   Includes/Pcf/System/Func.h
-  Includes/Pcf/System/Globalization.h
   Includes/Pcf/System/Guid.h
   Includes/Pcf/System/Hash.h
   Includes/Pcf/System/IAsyncResult.h
@@ -324,8 +310,6 @@ set(INCLUDE_FILES
   Includes/Pcf/System/InvalidOperationException.h
   Includes/Pcf/System/InvalidProgramException.h
   Includes/Pcf/System/InvalidTimeZoneException.h
-  Includes/Pcf/System/IO.h
-  Includes/Pcf/System/Linq.h
   Includes/Pcf/System/Math.h
   Includes/Pcf/System/MemberAccessException.h
   Includes/Pcf/System/MethodAccessException.h
@@ -333,7 +317,6 @@ set(INCLUDE_FILES
   Includes/Pcf/System/MissingFieldException.h
   Includes/Pcf/System/MissingMethodException.h
   Includes/Pcf/System/MulticastNotSupportedException.h
-  Includes/Pcf/System/Net.h
   Includes/Pcf/System/NotFiniteNumberException.h
   Includes/Pcf/System/NotImplementedException.h
   Includes/Pcf/System/NotSupportedException.h
@@ -357,17 +340,13 @@ set(INCLUDE_FILES
   Includes/Pcf/System/Predicate.h
   Includes/Pcf/System/Random.h
   Includes/Pcf/System/RankException.h
-  Includes/Pcf/System/Runtime.h
   Includes/Pcf/System/SByte.h
-  Includes/Pcf/System/Security.h
   Includes/Pcf/System/Single.h
   Includes/Pcf/System/String.h
   Includes/Pcf/System/StackOverflowException.h
   Includes/Pcf/System/StringSplitOptions.h
   Includes/Pcf/System/SystemException.h
   Includes/Pcf/System/SystemVersion.h
-  Includes/Pcf/System/Text.h
-  Includes/Pcf/System/Threading.h
   Includes/Pcf/System/TimeoutException.h
   Includes/Pcf/System/TimeSpan.h
   Includes/Pcf/System/TimeZoneInfo.h

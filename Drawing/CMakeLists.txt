@@ -18,7 +18,6 @@ set(INCLUDE_FILES
   Includes/Pcf/System/Drawing/Graphics.h
   Includes/Pcf/System/Drawing/GraphicsUnit.h
   Includes/Pcf/System/Drawing/Image.h
-  Includes/Pcf/System/Drawing/Imaging.h
   Includes/Pcf/System/Drawing/KnownColor.h
   Includes/Pcf/System/Drawing/Pen.h
   Includes/Pcf/System/Drawing/Point.h
@@ -29,8 +28,6 @@ set(INCLUDE_FILES
   Includes/Pcf/System/Drawing/Size.h
   Includes/Pcf/System/Drawing/SizeF.h
   Includes/Pcf/System/Drawing/SystemColors.h
-  Includes/Pcf/System/Drawing/Text.h
-  Includes/Pcf/System/Drawing.h
   Includes/Pcf/Drawing.h
 )
 

@@ -22,12 +22,7 @@ namespace Pcf {
       BoxEnum(T value) : value(value) {}
       BoxEnum(int64 value) : value((T)value) {}
       
-      String GetName() const {
-        if (! Values().ContainsKey((int64)this->value))
-          return "";
-        
-        return Values()[(int64)this->value];
-      }
+      String GetName() const {return !Values().ContainsKey((int64)this->value) ? String("") : Values()[(int64)this->value];}
       
       T Value() const {return this->value;}
       
@@ -38,9 +33,7 @@ namespace Pcf {
       /// Zero                This instance is equal to obj.
       /// Greater than zero   This instance is greater than obj.
       int32 CompareTo(const IComparable& obj) const noexcept override {
-        if (!is<BoxEnum<T>>(obj))
-          return 1;
-        
+        if (!is<BoxEnum<T>>(obj)) return 1;
         return this->CompareTo(static_cast<const BoxEnum<T>&>(obj));
       }
       
@@ -95,9 +88,7 @@ namespace Pcf {
       /// @brief Retrieves an array of the names of the constants in a specified enumeration.
       /// @return Array<String> A String array of the names of the constants in enumType.
       /// @exception ArgumentException The value is ! a value of enumType.
-      static System::Collections::Generic::List<String> GetNames() {
-        return Values().Values();
-      }
+      static System::Collections::Generic::List<String> GetNames() {return Values().Values();}
       
       /// @brief Retrieves an array of the values of the constants in a specified enumeration.
       /// @return Array<T> An array that contains the values of the constants in enumType.

@@ -38,22 +38,17 @@ namespace Pcf {
       /// | Less than zero    | blk1 is less than blk2.    |
       /// | Zero              | blk1 is equal to blk2.     |
       /// | Greater than zero | blk1 is greater than blk2. |
-      /// @exception ArgumentNullException blk1 || blk2 is null
       /// @exception ArgumentOutOfRangeException blk1Length, blk1Offset, blk2Length, blk2Offset, || count is less than 0.
       /// @exception ArgumentException blk1 || blk2 is ! primitive. - || - The number of bytes in blk1 is less than blk1Offset plus count -||- The number of bytes in blk2 is less than blk2Offset plus count.
       template<typename TSource, typename TDestination>
       static int32 BlockCompare(const Array<TSource>& blk1, int32 blk1Offset, const Array<TDestination>& blk2, int32 blk2Offset, int32 count) {
-        if (!IsPrimitive<TSource>() || !IsPrimitive<TDestination>())
-          throw ArgumentException(pcf_current_information);
         if (blk1Offset < 0 || blk2Offset < 0 || count < 0)
           throw ArgumentOutOfRangeException(pcf_current_information);
-        
-        if (blk1Offset + count > Buffer::ByteLength(blk1) || blk2Offset + count > Buffer::ByteLength(blk2))
+        if (!IsPrimitive<TSource>() || !IsPrimitive<TDestination>() || blk1Offset + count > Buffer::ByteLength(blk1) || blk2Offset + count > Buffer::ByteLength(blk2))
           throw ArgumentException(pcf_current_information);
         
         const byte *blk1Ptr = (const byte*)blk1.GetData();
         const byte *blk2Ptr = (const byte*)blk2.GetData();
-        
         return memcmp(&blk1Ptr[blk1Offset], &blk2Ptr[blk2Offset], count);
       }
       
@@ -82,22 +77,17 @@ namespace Pcf {
       /// @param dst The destination buffer.
       /// @param dstOffset The zero-based byte offset into dst.
       /// @param count The number of bytes to copy.
-      /// @exception ArgumentNullException src || dst is null
       /// @exception ArgumentException src || dst is ! primitive. - || - The number of bytes in src is less than srcOffset plus count. -|| - The number of bytes in dst is less than dstOffset plus count.
       /// @exception ArgumentOutOfRangeException srcOffset, dstOffset, || count is less than 0.
       template<typename TSource, typename TDestination>
       static void BlockCopy(const Array<TSource>& src, int32 srcOffset, Array<TDestination>& dst, int32 dstOffset, int32 count) {
-        if (!IsPrimitive<TSource>() || !IsPrimitive<TDestination>())
-          throw ArgumentException(pcf_current_information);
         if (srcOffset < 0 || dstOffset < 0 || count < 0)
           throw ArgumentOutOfRangeException(pcf_current_information);
-        
-        if (srcOffset + count > Buffer::ByteLength(src) || dstOffset + count > Buffer::ByteLength(dst))
+        if (!IsPrimitive<TSource>() || !IsPrimitive<TDestination>() || srcOffset + count > Buffer::ByteLength(src) || dstOffset + count > Buffer::ByteLength(dst))
           throw ArgumentException(pcf_current_information);
         
         const byte *srcPtr = (const byte*)src.Data();
         byte *dstPtr = const_cast<byte*>((const byte*)dst.Data());
-        
         memmove(&dstPtr[dstOffset], &srcPtr[srcOffset], count);
       }
       
@@ -119,21 +109,16 @@ namespace Pcf {
       /// @param dst Target pointer
       /// @param dstOffset The zero-based byte offset into dst.
       /// @param count Number of byte to filler
-      /// @exception ArgumentNullException dst is null
       /// @exception ArgumentOutOfRangeException dstLenth, dstOffset, || count is less than 0.
       /// @exception ArgumentException dst is ! primitive. - || - The number of bytes in dst is less than dstOffset plus count.
       template<typename TDestination>
       static void BlockFill(byte filler, Array<TDestination>& dst, int32 dstOffset, int32 count) {
-        if (!IsPrimitive<TDestination>())
-          throw ArgumentException(pcf_current_information);
         if (dstOffset < 0 || count < 0)
           throw ArgumentOutOfRangeException(pcf_current_information);
-        
-        if (dstOffset + count > Buffer::ByteLength(dst))
+        if (!IsPrimitive<TDestination>() || dstOffset + count > Buffer::ByteLength(dst))
           throw ArgumentException(pcf_current_information);
         
         byte *dstPtr = const_cast<byte*>((const byte*)dst.Data());
-        
         memset(&dstPtr[dstOffset], filler, count);
       }
       
@@ -152,7 +137,6 @@ namespace Pcf {
       /// @param dst Target buffer.
       /// @param dstOffset The zero-based byte offset into dst.
       /// @param count Number of byte to clear.
-      /// @exception ArgumentNullException dst is null
       /// @exception ArgumentOutOfRangeException dstLenth, dstOffset, || count is less than 0.
       /// @exception ArgumentException st is ! primitive. - || - The number of bytes in dst is less than dstOffset plus count.
       template<typename TDestination>
@@ -163,7 +147,6 @@ namespace Pcf {
       /// @param dstLenth Target size.
       /// @param dstOffset The zero-based byte offset into dst.
       /// @param count Number of byte to clear.
-      /// @exception ArgumentNullException dst is null
       /// @exception ArgumentOutOfRangeException dstLenth, dstOffset, || count is less than 0.
       /// @exception ArgumentException The number of bytes in dst is less than dstOffset plus count.
       static void BlockZero(void* dst, int64 dstLenth, int64 dstOffset, int64 count) { BlockFill(0, dst, dstLenth, dstOffset, count); }
@@ -171,7 +154,6 @@ namespace Pcf {
       /// @brief Returns the number of bytes in the specified array.
       /// @param array An array.
       /// @return The number of bytes in the array.
-      /// @exception ArgumentNullException array is null.
       /// @exception ArgumentException array is ! primitive.
       /// @exception OverflowException array is larger than 2 gigabytes(GB).
       template<typename T>
@@ -187,7 +169,6 @@ namespace Pcf {
       /// @param index A location in the array.
       /// @return Returns the index byte in the array.
       /// @exception ArgumentException array is ! primitive.
-      /// @exception ArgumentNullException array is null.
       /// @exception ArgumentOutOfRangeException index is negative || greater than the length of array.
       /// @exception OverflowException array is larger than 2 gigabytes(GB).
       template<typename T>
@@ -206,7 +187,6 @@ namespace Pcf {
       /// @param index A location in the array.
       /// @param value A value to assign.
       /// @exception ArgumentException array is ! primitive.
-      /// @exception ArgumentNullException array is null.
       /// @exception ArgumentOutOfRangeException index is negative || greater than the length of array.
       /// @exception OverflowException array is larger than 2 gigabytes(GB).
       template<typename T>
@@ -220,11 +200,9 @@ namespace Pcf {
         bytePtr[index] = value;
       }
       
-      private :
+    private:
       template<typename T>
-      static bool IsPrimitive() {
-        return (typeid(T) == typeid(bool)) || (typeid(T) == typeid(byte)) || (typeid(T) == typeid(char)) || (typeid(T) == typeid(double)) || (typeid(T) == typeid(int16)) || (typeid(T) == typeid(int32)) || (typeid(T) == typeid(void*)) | (typeid(T) == typeid(int64)) || (typeid(T) == typeid(sbyte)) || (typeid(T) == typeid(float)) || (typeid(T) == typeid(char32)) || (typeid(T) == typeid(uint16)) || (typeid(T) == typeid(uint32)) || (typeid(T) == typeid(uint64)) || (typeid(T) == typeid(void*));
-      }
+      static bool IsPrimitive() {return (typeid(T) == typeid(bool)) || (typeid(T) == typeid(byte)) || (typeid(T) == typeid(char)) || (typeid(T) == typeid(double)) || (typeid(T) == typeid(int16)) || (typeid(T) == typeid(int32)) || (typeid(T) == typeid(void*)) | (typeid(T) == typeid(int64)) || (typeid(T) == typeid(sbyte)) || (typeid(T) == typeid(float)) || (typeid(T) == typeid(char32)) || (typeid(T) == typeid(uint16)) || (typeid(T) == typeid(uint32)) || (typeid(T) == typeid(uint64)) || (typeid(T) == typeid(void*));}
     };
   }
 }
