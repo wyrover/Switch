@@ -1,6 +1,7 @@
 #if __APPLE__
 #import <Cocoa/Cocoa.h>
 #import <Foundation/Foundation.h>
+#include <Pcf/System/Collections/Generic/SortedDictionary.h>
 #include <Pcf/System/Console.h>
 #include <Pcf/System/Convert.h>
 #include <Pcf/System/NotImplementedException.h>
@@ -12,6 +13,7 @@
 #include "FormsApi.h"
 
 using namespace System;
+using namespace System::Collections::Generic;
 using namespace System::Drawing;
 using namespace System::Windows::Forms;
 using namespace __OS;
@@ -193,8 +195,86 @@ void FormsApi::Application::MessageLoop(EventHandler idle) {
 void FormsApi::Application::RegisterClasses() {
 }
 
+namespace {
+  void MessageBoxAddButtonsOK(NSAlert *alert) {
+    [alert addButtonWithTitle:@"OK"];
+  }
+  
+  void MessageBoxAddButtonsOKCancel(NSAlert *alert) {
+    [alert addButtonWithTitle:@"OK"];
+    [alert addButtonWithTitle:@"Cancel"];
+  }
+  
+  void MessageBoxAddButtonsAbortRetryIgnore(NSAlert *alert) {
+    [alert addButtonWithTitle:@"Abort"];
+    [alert addButtonWithTitle:@"Retry"];
+    [alert addButtonWithTitle:@"Ignore"];
+  }
+  
+  void MessageBoxAddButtonsYesNoCancel(NSAlert *alert) {
+    [alert addButtonWithTitle:@"Yes"];
+    [alert addButtonWithTitle:@"No"];
+    [alert addButtonWithTitle:@"Cancel"];
+  }
+  
+  void MessageBoxAddButtonsYesNo(NSAlert *alert) {
+    [alert addButtonWithTitle:@"Yes"];
+    [alert addButtonWithTitle:@"No"];
+  }
+  
+  void MessageBoxAddButtonsRetryCancel(NSAlert *alert) {
+    [alert addButtonWithTitle:@"Retry"];
+    [alert addButtonWithTitle:@"Cancel"];
+  }
+  
+  DialogResult MessageBoxShowModalOK(NSAlert *alert) {
+    [alert runModal];
+    return DialogResult::OK;
+  }
+  
+  DialogResult MessageBoxShowModalOKCancel(NSAlert *alert) {
+    return [alert runModal] == NSAlertFirstButtonReturn ? DialogResult::OK : DialogResult::Cancel;
+  }
+  
+  DialogResult MessageBoxShowModalAbortRetryIgnore(NSAlert *alert) {
+    int result = [alert runModal];
+    if (result == NSAlertFirstButtonReturn)
+      return DialogResult::Abort;
+    if (result == NSAlertSecondButtonReturn)
+      return DialogResult::Retry;
+    return DialogResult::Ignore;
+  }
+  
+  DialogResult MessageBoxShowModalYesNoCancel(NSAlert *alert) {
+    int result = [alert runModal];
+    if (result == NSAlertFirstButtonReturn)
+      return DialogResult::Yes;
+    if (result == NSAlertSecondButtonReturn)
+      return DialogResult::No;
+    return DialogResult::Cancel;
+  }
+  
+  DialogResult MessageBoxShowModalYesNo(NSAlert *alert) {
+    return [alert runModal] == NSAlertFirstButtonReturn ? DialogResult::Yes : DialogResult::No;
+  }
+  
+  DialogResult MessageBoxShowModalRetryCancel(NSAlert *alert) {
+    return [alert runModal] == NSAlertFirstButtonReturn ? DialogResult::Retry : DialogResult::Cancel;
+  }
+}
+
 DialogResult FormsApi::Application::ShowMessageBox(const string& message, const string& caption, MessageBoxButtons buttons, MessageBoxIcon icon) {
-  return DialogResult::None;
+  static SortedDictionary<MessageBoxButtons, delegate<void, NSAlert*>> addButtons = {{MessageBoxButtons::OK, MessageBoxAddButtonsOK}, {MessageBoxButtons::OKCancel, MessageBoxAddButtonsOKCancel}, {MessageBoxButtons::AbortRetryIgnore, MessageBoxAddButtonsAbortRetryIgnore}, {MessageBoxButtons::YesNoCancel, MessageBoxAddButtonsYesNoCancel}, {MessageBoxButtons::YesNo, MessageBoxAddButtonsYesNo}, {MessageBoxButtons::RetryCancel, MessageBoxAddButtonsRetryCancel}};
+  static SortedDictionary<MessageBoxIcon, NSAlertStyle>  messageBoxIcon = {{MessageBoxIcon::None, NSAlertStyleWarning}, {MessageBoxIcon::Asterisk, NSAlertStyleInformational}, {MessageBoxIcon::Error, NSAlertStyleCritical}, {MessageBoxIcon::Exclamation, NSAlertStyleCritical}, {MessageBoxIcon::Hand, NSAlertStyleInformational}, {MessageBoxIcon::Information, NSAlertStyleInformational}, {MessageBoxIcon::Question, NSAlertStyleInformational}, {MessageBoxIcon::Stop, NSAlertStyleCritical}, {MessageBoxIcon::Warning, NSAlertStyleCritical}};
+  static SortedDictionary<MessageBoxButtons, delegate<DialogResult, NSAlert*>> showModal = {{MessageBoxButtons::OK, MessageBoxShowModalOK}, {MessageBoxButtons::OKCancel, MessageBoxShowModalOKCancel}, {MessageBoxButtons::AbortRetryIgnore, MessageBoxShowModalAbortRetryIgnore}, {MessageBoxButtons::YesNoCancel, MessageBoxShowModalYesNoCancel}, {MessageBoxButtons::YesNo, MessageBoxShowModalYesNo}, {MessageBoxButtons::RetryCancel, MessageBoxShowModalRetryCancel}};
+  @autoreleasepool {
+    NSAlert *alert = [[NSAlert alloc] init];
+    addButtons[buttons](alert);
+    [alert setMessageText:[NSString stringWithUTF8String:caption.c_str()]];
+    [alert setInformativeText:[NSString stringWithUTF8String:message.c_str()]];
+    [alert setAlertStyle:messageBoxIcon[icon]];
+    return showModal[buttons](alert);
+  }
 }
 
 void FormsApi::Application::UnregisterClasses() {
