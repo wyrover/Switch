@@ -8,7 +8,7 @@ namespace Examples {
   public:
     // The main entry point for the application.
     static void Main() {
-      List<String> names;
+      List<string> names;
       names.Add("Bruce");
       names.Add("Alfred");
       names.Add("Tim");
@@ -18,7 +18,7 @@ namespace Examples {
       names.ForEach(Print);
       
       // The following demonstrates the lambda of C++ to display the contents of the list to the console.
-      names.ForEach(pcf_delegate(const String& name) {
+      names.ForEach(pcf_delegate(const string& name) {
         Console::WriteLine(name);
       });
     }

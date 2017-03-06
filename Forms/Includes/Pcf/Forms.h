@@ -67,7 +67,7 @@
 //#include "System/Windows/Forms/Menu.h"
 //#include "System/Windows/Forms/MenuItem.h"
 #include "System/Windows/Forms/Message.h"
-//#include "System/Windows/Forms/MessageBox.h"
+#include "System/Windows/Forms/MessageBox.h"
 #include "System/Windows/Forms/MessageBoxButtons.h"
 #include "System/Windows/Forms/MessageBoxIcon.h"
 #include "System/Windows/Forms/MethodInvoker.h"

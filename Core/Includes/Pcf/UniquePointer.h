@@ -7,7 +7,7 @@
 #include <sstream>
 
 #include "Types.h"
-#include "Ref.h"
+#include "Reference.h"
 
 namespace Pcf {
   /// @brief Manages the storage of a pointer, providing a limited garbage-collection facility, with little to no overhead over built-in pointers.

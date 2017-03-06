@@ -69,7 +69,7 @@ set(include_files
 #  Includes/Pcf/System/Windows/Forms/Menu.h
 #  Includes/Pcf/System/Windows/Forms/MenuItem.h
   Includes/Pcf/System/Windows/Forms/Message.h
-#  Includes/Pcf/System/Windows/Forms/MessageBox.h
+  Includes/Pcf/System/Windows/Forms/MessageBox.h
   Includes/Pcf/System/Windows/Forms/MessageBoxButtons.h
   Includes/Pcf/System/Windows/Forms/MessageBoxIcon.h
   Includes/Pcf/System/Windows/Forms/MethodInvoker.h
@@ -128,7 +128,7 @@ set(source_files
 #  Sources/Pcf/System/Windows/Forms/Menu.cpp
 #  Sources/Pcf/System/Windows/Forms/MenuItem.cpp
   Sources/Pcf/System/Windows/Forms/Message.cpp
-#  Sources/Pcf/System/Windows/Forms/MessageBox.cpp
+  Sources/Pcf/System/Windows/Forms/MessageBox.cpp
 #  Sources/Pcf/System/Windows/Forms/NumericUpDown.cpp
 #  Sources/Pcf/System/Windows/Forms/OpenFileDialog.cpp
 #  Sources/Pcf/System/Windows/Forms/Panel.cpp

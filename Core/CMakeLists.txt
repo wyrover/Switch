@@ -391,7 +391,7 @@ set(INCLUDE_FILES
   Includes/Pcf/Move.h
   Includes/Pcf/Property.h
   Includes/Pcf/Public.h
-  Includes/Pcf/Ref.h
+  Includes/Pcf/Reference.h
   Includes/Pcf/Startup.h
   Includes/Pcf/Static.h
   Includes/Pcf/SharedPointer.h

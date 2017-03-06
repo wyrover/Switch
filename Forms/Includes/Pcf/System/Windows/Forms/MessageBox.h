@@ -1,0 +1,35 @@
+/// @file
+/// @brief Contains Pcf::System::Windows::Forms::MessageBox class.
+#pragma once
+
+#include "DialogResult.h"
+#include "Form.h"
+#include "MessageBoxButtons.h"
+#include "MessageBoxIcon.h"
+
+/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Pcf {
+  /// @brief The Pcf::System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
+  namespace System {
+    /// @brief The Pcf::System::Windows namespaces including animation clients, user interface controls, data binding, and type conversion. Pcf::System::Windows::Forms and its child namespaces are used for developing Windows Forms applications.
+    namespace Windows {
+      /// @brief The Pcf::System::Windows::Forms namespace contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system, Apple Mac Os X and Linux like Ubuntu operating system.
+      namespace Forms {
+        /// @brief Represents a window or dialog box that makes up an application's user interface.
+        class MessageBox : public Form {
+        public:
+          static DialogResult Show(const string& message) {return MessageBox::Show(message, "", MessageBoxButtons::OK, MessageBoxIcon::None);}
+ 
+          static DialogResult Show(const string& message, const string& caption) {return Show(message, caption, MessageBoxButtons::OK, MessageBoxIcon::None);}
+          
+          static DialogResult Show(const string& message, const string& caption, MessageBoxButtons buttons) {return Show(message, caption, buttons, MessageBoxIcon::None);}
+          
+          static DialogResult Show(const string& message, const string& caption, MessageBoxButtons buttons, MessageBoxIcon icon);
+
+        private:
+          MessageBox() = delete;
+        };
+      }
+    }
+  }
+}

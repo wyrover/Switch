@@ -19,7 +19,7 @@ namespace Examples {
     
   private:
     static void ShowWindowsMessage(const string& message) {
-      //MessageBox::Show(message);
+      MessageBox::Show(message);
     }
     
     static void WriteLine(const string& message) {
