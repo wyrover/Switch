@@ -12,8 +12,8 @@ namespace Examples {
       Console::WriteLine('H');
       //Console::WriteLine(u8'П'); // C++17 only
       Console::WriteLine(L'ם');
-      Console::WriteLine(u'こ');
-      Console::WriteLine(U'🐨');
+      //Console::WriteLine(u'こ'); // No build on Windows
+      //Console::WriteLine(U'🐨'); // No build on Windows
       Console::WriteLine();
       Console::WriteLine("String literals");
       Console::WriteLine("Hello, World!");

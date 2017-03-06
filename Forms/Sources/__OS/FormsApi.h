@@ -8,9 +8,12 @@
 #include "../../Includes/Pcf/System/Windows/Forms/Button.h"
 #include "../../Includes/Pcf/System/Windows/Forms/CheckBox.h"
 #include "../../Includes/Pcf/System/Windows/Forms/Control.h"
+#include "../../Includes/Pcf/System/Windows/Forms/DialogResult.h"
 #include "../../Includes/Pcf/System/Windows/Forms/Form.h"
 #include "../../Includes/Pcf/System/Windows/Forms/InvalidateEventArgs.h"
 #include "../../Includes/Pcf/System/Windows/Forms/Label.h"
+#include "../../Includes/Pcf/System/Windows/Forms/MessageBoxButtons.h"
+#include "../../Includes/Pcf/System/Windows/Forms/MessageBoxIcon.h"
 #include "../../Includes/Pcf/System/Windows/Forms/RadioButton.h"
 #include "WindowMessages.h"
 
@@ -24,6 +27,7 @@ namespace __OS {
       static void Exit();
       static void MessageLoop(System::EventHandler idle);
       static void RegisterClasses();
+      static System::Windows::Forms::DialogResult ShowMessageBox(const string& message, const string& caption, System::Windows::Forms::MessageBoxButtons buttons, System::Windows::Forms::MessageBoxIcon icon);
       static void UnregisterClasses();
 
     private:

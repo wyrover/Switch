@@ -5,6 +5,7 @@
 #include <Windowsx.h>
 #include <Uxtheme.h>
 
+#include <Pcf/System/Collections/Generic/SortedDictionary.h>
 #include <Pcf/System/Diagnostics/Debug.h>
 #include <Pcf/System/NotImplementedException.h>
 #include "../../Includes/Pcf/System/Windows/Forms/Application.h"
@@ -18,8 +19,6 @@ using namespace System::Windows::Forms;
 using namespace __OS;
 
 extern int main(int argc, char* argv[]);
-//extern int __argc;
-//extern char** __argv;
 __declspec(dllimport) extern int __argc;
 __declspec(dllimport) extern char** __argv;
 
@@ -138,6 +137,13 @@ void FormsApi::Application::MessageLoop(EventHandler idle) {
 
 void FormsApi::Application::RegisterClasses() {
   RegisterClassControl();
+}
+
+DialogResult FormsApi::Application::ShowMessageBox(const string& message, const string& caption, MessageBoxButtons buttons, MessageBoxIcon icon) {
+  static SortedDictionary<MessageBoxButtons, uint32> messageBoxButtons = {{MessageBoxButtons::OK, 0x00000000}, {MessageBoxButtons::OKCancel, 0x00000001}, {MessageBoxButtons::AbortRetryIgnore, 0x00000002}, {MessageBoxButtons::YesNoCancel, 0x00000003}, {MessageBoxButtons::YesNo, 0x00000004}};
+  static SortedDictionary<MessageBoxIcon, uint32> messageBoxIcon = {{MessageBoxIcon::None, 0x00000000}, {MessageBoxIcon::Asterisk, 0x00000040}, {MessageBoxIcon::Error, 0x00000010}, {MessageBoxIcon::Exclamation, 0x00000030}, {MessageBoxIcon::Hand, 0x00000010}, {MessageBoxIcon::Information, 0x00000040}, {MessageBoxIcon::Question, 0x00000020}, {MessageBoxIcon::Stop, 0x00000010}, {MessageBoxIcon::Warning, 0x00000030}};
+  static SortedDictionary<int, DialogResult> dialogResult = {{3, DialogResult::Abort}, {2, DialogResult::Cancel}, {11, DialogResult::None}, {5, DialogResult::Ignore}, {7, DialogResult::No}, {1, DialogResult::OK}, {4, DialogResult::Retry}, {10, DialogResult::Retry}, {6, DialogResult::Yes}};
+  return dialogResult[MessageBox(null, message.w_str().c_str(), caption.w_str().c_str(), messageBoxButtons[buttons] + messageBoxIcon[icon])];
 }
 
 void FormsApi::Application::UnregisterClasses() {

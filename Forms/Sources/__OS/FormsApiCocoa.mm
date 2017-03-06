@@ -193,6 +193,10 @@ void FormsApi::Application::MessageLoop(EventHandler idle) {
 void FormsApi::Application::RegisterClasses() {
 }
 
+DialogResult FormsApi::Application::ShowMessageBox(const string& message, const string& caption, MessageBoxButtons buttons, MessageBoxIcon icon) {
+  return DialogResult::None;
+}
+
 void FormsApi::Application::UnregisterClasses() {
 }
 
