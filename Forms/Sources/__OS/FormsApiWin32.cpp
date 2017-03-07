@@ -139,7 +139,7 @@ void FormsApi::Application::RegisterClasses() {
   RegisterClassControl();
 }
 
-DialogResult FormsApi::Application::ShowMessageBox(const string& message, const string& caption, MessageBoxButtons buttons, MessageBoxIcon icon) {
+DialogResult FormsApi::Application::ShowMessageBox(const string& message, const string& caption, MessageBoxButtons buttons, MessageBoxIcon icon, MessageBoxDefaultButton defaultButton, MessageBoxOptions options, bool displayHelpButton) {
   static SortedDictionary<MessageBoxButtons, uint32> messageBoxButtons = {{MessageBoxButtons::OK, 0x00000000}, {MessageBoxButtons::OKCancel, 0x00000001}, {MessageBoxButtons::AbortRetryIgnore, 0x00000002}, {MessageBoxButtons::YesNoCancel, 0x00000003}, {MessageBoxButtons::YesNo, 0x00000004}};
   static SortedDictionary<MessageBoxIcon, uint32> messageBoxIcon = {{MessageBoxIcon::None, 0x00000000}, {MessageBoxIcon::Asterisk, 0x00000040}, {MessageBoxIcon::Error, 0x00000010}, {MessageBoxIcon::Exclamation, 0x00000030}, {MessageBoxIcon::Hand, 0x00000010}, {MessageBoxIcon::Information, 0x00000040}, {MessageBoxIcon::Question, 0x00000020}, {MessageBoxIcon::Stop, 0x00000010}, {MessageBoxIcon::Warning, 0x00000030}};
   static SortedDictionary<int, DialogResult> dialogResult = {{3, DialogResult::Abort}, {2, DialogResult::Cancel}, {11, DialogResult::None}, {5, DialogResult::Ignore}, {7, DialogResult::No}, {1, DialogResult::OK}, {4, DialogResult::Retry}, {10, DialogResult::Retry}, {6, DialogResult::Yes}};

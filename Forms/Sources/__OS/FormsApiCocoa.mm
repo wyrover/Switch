@@ -263,7 +263,7 @@ namespace {
   }
 }
 
-DialogResult FormsApi::Application::ShowMessageBox(const string& message, const string& caption, MessageBoxButtons buttons, MessageBoxIcon icon) {
+DialogResult FormsApi::Application::ShowMessageBox(const string& message, const string& caption, MessageBoxButtons buttons, MessageBoxIcon icon, MessageBoxDefaultButton defaultButton, MessageBoxOptions options, bool displayHelpButton) {
   static SortedDictionary<MessageBoxButtons, delegate<void, NSAlert*>> addButtons = {{MessageBoxButtons::OK, MessageBoxAddButtonsOK}, {MessageBoxButtons::OKCancel, MessageBoxAddButtonsOKCancel}, {MessageBoxButtons::AbortRetryIgnore, MessageBoxAddButtonsAbortRetryIgnore}, {MessageBoxButtons::YesNoCancel, MessageBoxAddButtonsYesNoCancel}, {MessageBoxButtons::YesNo, MessageBoxAddButtonsYesNo}, {MessageBoxButtons::RetryCancel, MessageBoxAddButtonsRetryCancel}};
   static SortedDictionary<MessageBoxIcon, NSAlertStyle>  messageBoxIcon = {{MessageBoxIcon::None, NSAlertStyleWarning}, {MessageBoxIcon::Asterisk, NSAlertStyleInformational}, {MessageBoxIcon::Error, NSAlertStyleCritical}, {MessageBoxIcon::Exclamation, NSAlertStyleCritical}, {MessageBoxIcon::Hand, NSAlertStyleInformational}, {MessageBoxIcon::Information, NSAlertStyleInformational}, {MessageBoxIcon::Question, NSAlertStyleInformational}, {MessageBoxIcon::Stop, NSAlertStyleCritical}, {MessageBoxIcon::Warning, NSAlertStyleCritical}};
   static SortedDictionary<MessageBoxButtons, delegate<DialogResult, NSAlert*>> showModal = {{MessageBoxButtons::OK, MessageBoxShowModalOK}, {MessageBoxButtons::OKCancel, MessageBoxShowModalOKCancel}, {MessageBoxButtons::AbortRetryIgnore, MessageBoxShowModalAbortRetryIgnore}, {MessageBoxButtons::YesNoCancel, MessageBoxShowModalYesNoCancel}, {MessageBoxButtons::YesNo, MessageBoxShowModalYesNo}, {MessageBoxButtons::RetryCancel, MessageBoxShowModalRetryCancel}};
@@ -273,6 +273,8 @@ DialogResult FormsApi::Application::ShowMessageBox(const string& message, const 
     [alert setMessageText:[NSString stringWithUTF8String:caption.c_str()]];
     [alert setInformativeText:[NSString stringWithUTF8String:message.c_str()]];
     [alert setAlertStyle:messageBoxIcon[icon]];
+    if (displayHelpButton)
+      [alert setShowsHelp:YES];
     return showModal[buttons](alert);
   }
 }

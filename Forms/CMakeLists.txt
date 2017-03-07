@@ -71,7 +71,9 @@ set(include_files
   Includes/Pcf/System/Windows/Forms/Message.h
   Includes/Pcf/System/Windows/Forms/MessageBox.h
   Includes/Pcf/System/Windows/Forms/MessageBoxButtons.h
+  Includes/Pcf/System/Windows/Forms/MessageBoxDefaultButton.h
   Includes/Pcf/System/Windows/Forms/MessageBoxIcon.h
+  Includes/Pcf/System/Windows/Forms/MessageBoxOptions.h
   Includes/Pcf/System/Windows/Forms/MethodInvoker.h
   Includes/Pcf/System/Windows/Forms/MouseButtons.h
   Includes/Pcf/System/Windows/Forms/MouseEventArgs.h

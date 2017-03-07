@@ -12,21 +12,15 @@ namespace Pcf {
     namespace Windows {
       /// @brief The Pcf::System::Windows::Forms namespace contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system, Apple Mac Os X and Linux like Ubuntu operating system.
       namespace Forms {
-        /// @brief Specifies constants defining which buttons to display on a MessageBox.
+        /// @brief Specifies constants defining the default button on a MessageBox.
         /// @remarks This enumeration is used by the MessageBox class.
-        enum class MessageBoxButtons {
-          /// @brief The message box contains an OK button.
-          OK,
-          /// @brief The message box contains OK and Cancel buttons.
-          OKCancel,
-          /// &brief The message box contains Abort, Retry, and Ignore buttons
-          AbortRetryIgnore,
-          /// @brief The message box contains Yes, No, and Cancel buttons.
-          YesNoCancel,
-          /// @brief The message box contains Yes and No buttons.
-          YesNo,
-          /// @brief The message box contains Retry and Cancel buttons.
-          RetryCancel
+        enum class MessageBoxDefaultButton {
+          /// @brief The first button on the message box is the default button.
+          Button1,
+          /// @brief The second button on the message box is the default button.
+          Button2,
+          /// @brief The third button on the message box is the default button.
+          Button3
         };
       }
     }
@@ -35,10 +29,10 @@ namespace Pcf {
 
 /// @cond
 template<>
-class EnumToStrings<System::Windows::Forms::MessageBoxButtons> {
+class EnumToStrings<System::Windows::Forms::MessageBoxDefaultButton> {
 public:
   void operator ()(System::Collections::Generic::SortedDictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Windows::Forms::MessageBoxButtons::OK, "OK"}, {(int64)System::Windows::Forms::MessageBoxButtons::OKCancel, "OKCancel"}, {(int64)System::Windows::Forms::MessageBoxButtons::AbortRetryIgnore, "AbortRetryIgnore"}, {(int64)System::Windows::Forms::MessageBoxButtons::YesNoCancel, "YesNoCancel"}, {(int64)System::Windows::Forms::MessageBoxButtons::YesNo, "YesNo"}, {(int64)System::Windows::Forms::MessageBoxButtons::RetryCancel, "RetryCancel"}};
+    values = {{(int64)System::Windows::Forms::MessageBoxDefaultButton::Button1, "Button1"}, {(int64)System::Windows::Forms::MessageBoxDefaultButton::Button2, "Button2"}, {(int64)System::Windows::Forms::MessageBoxDefaultButton::Button3, "Button3"}};
     flags = false;
   }
 };

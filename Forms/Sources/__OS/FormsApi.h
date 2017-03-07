@@ -13,7 +13,9 @@
 #include "../../Includes/Pcf/System/Windows/Forms/InvalidateEventArgs.h"
 #include "../../Includes/Pcf/System/Windows/Forms/Label.h"
 #include "../../Includes/Pcf/System/Windows/Forms/MessageBoxButtons.h"
+#include "../../Includes/Pcf/System/Windows/Forms/MessageBoxDefaultButton.h"
 #include "../../Includes/Pcf/System/Windows/Forms/MessageBoxIcon.h"
+#include "../../Includes/Pcf/System/Windows/Forms/MessageBoxOptions.h"
 #include "../../Includes/Pcf/System/Windows/Forms/RadioButton.h"
 #include "WindowMessages.h"
 
@@ -27,7 +29,7 @@ namespace __OS {
       static void Exit();
       static void MessageLoop(System::EventHandler idle);
       static void RegisterClasses();
-      static System::Windows::Forms::DialogResult ShowMessageBox(const string& message, const string& caption, System::Windows::Forms::MessageBoxButtons buttons, System::Windows::Forms::MessageBoxIcon icon);
+      static System::Windows::Forms::DialogResult ShowMessageBox(const string& message, const string& caption, System::Windows::Forms::MessageBoxButtons buttons, System::Windows::Forms::MessageBoxIcon icon, System::Windows::Forms::MessageBoxDefaultButton defaultButton, System::Windows::Forms::MessageBoxOptions options, bool displayHelpButton);
       static void UnregisterClasses();
 
     private:

@@ -5,7 +5,9 @@
 #include "DialogResult.h"
 #include "Form.h"
 #include "MessageBoxButtons.h"
+#include "MessageBoxDefaultButton.h"
 #include "MessageBoxIcon.h"
+#include "MessageBoxoptions.h"
 
 /// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Pcf {
@@ -18,14 +20,20 @@ namespace Pcf {
         /// @brief Represents a window or dialog box that makes up an application's user interface.
         class MessageBox : public Form {
         public:
-          static DialogResult Show(const string& message) {return MessageBox::Show(message, "", MessageBoxButtons::OK, MessageBoxIcon::None);}
+          static DialogResult Show(const string& message) {return MessageBox::Show(message, "", MessageBoxButtons::OK, MessageBoxIcon::None, MessageBoxDefaultButton::Button1, (MessageBoxOptions)0, false);}
  
-          static DialogResult Show(const string& message, const string& caption) {return Show(message, caption, MessageBoxButtons::OK, MessageBoxIcon::None);}
+          static DialogResult Show(const string& message, const string& caption) {return Show(message, caption, MessageBoxButtons::OK, MessageBoxIcon::None, MessageBoxDefaultButton::Button1, (MessageBoxOptions)0, false);}
           
-          static DialogResult Show(const string& message, const string& caption, MessageBoxButtons buttons) {return Show(message, caption, buttons, MessageBoxIcon::None);}
+          static DialogResult Show(const string& message, const string& caption, MessageBoxButtons buttons) {return Show(message, caption, buttons, MessageBoxIcon::None, MessageBoxDefaultButton::Button1, (MessageBoxOptions)0, false);}
           
-          static DialogResult Show(const string& message, const string& caption, MessageBoxButtons buttons, MessageBoxIcon icon);
-
+          static DialogResult Show(const string& message, const string& caption, MessageBoxButtons buttons, MessageBoxIcon icon) {return Show(message, caption, buttons, icon, MessageBoxDefaultButton::Button1, (MessageBoxOptions)0, false);}
+          
+          static DialogResult Show(const string& message, const string& caption, MessageBoxButtons buttons, MessageBoxIcon icon, MessageBoxDefaultButton defaultButton) {return Show(message, caption, buttons, icon, defaultButton, (MessageBoxOptions)0, false);}
+          
+          static DialogResult Show(const string& message, const string& caption, MessageBoxButtons buttons, MessageBoxIcon icon, MessageBoxDefaultButton defaultButton, MessageBoxOptions options) {return Show(message, caption, buttons, icon, defaultButton, options, false);}
+          
+          static DialogResult Show(const string& message, const string& caption, MessageBoxButtons buttons, MessageBoxIcon icon, MessageBoxDefaultButton defaultButton, MessageBoxOptions options, bool displayHelpButton);
+          
         private:
           MessageBox() = delete;
         };

@@ -60,7 +60,7 @@ void FormsApi::Application::RegisterClasses() {
   throw NotImplementedException(pcf_current_information);
 }
 
-DialogResult FormsApi::Application::ShowMessageBox(const string& message, const string& caption, MessageBoxButtons buttons, MessageBoxIcon icon) {
+DialogResult FormsApi::Application::ShowMessageBox(const string& message, const string& caption, MessageBoxButtons buttons, MessageBoxIcon icon, MessageBoxDefaultButton defaultButton, MessageBoxOptions options, bool displayHelpButton) {
   return DialogResult::None;
 }
 

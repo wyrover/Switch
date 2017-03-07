@@ -12,21 +12,19 @@ namespace Pcf {
     namespace Windows {
       /// @brief The Pcf::System::Windows::Forms namespace contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system, Apple Mac Os X and Linux like Ubuntu operating system.
       namespace Forms {
-        /// @brief Specifies constants defining which buttons to display on a MessageBox.
+        /// @brief Specifies options on a MessageBox.
+        /// This enumeration has a FlagsAttribute attribute that allows a bitwise combination of its member values.
         /// @remarks This enumeration is used by the MessageBox class.
-        enum class MessageBoxButtons {
-          /// @brief The message box contains an OK button.
-          OK,
-          /// @brief The message box contains OK and Cancel buttons.
-          OKCancel,
-          /// &brief The message box contains Abort, Retry, and Ignore buttons
-          AbortRetryIgnore,
-          /// @brief The message box contains Yes, No, and Cancel buttons.
-          YesNoCancel,
-          /// @brief The message box contains Yes and No buttons.
-          YesNo,
-          /// @brief The message box contains Retry and Cancel buttons.
-          RetryCancel
+        /// @remarks If you do not want to specify this parameter when calling methods on MessageBox, you can pass in 0 instead.
+        enum class MessageBoxOptions {
+          /// @brief The message box is displayed on the active desktop.
+          DefaultDesktopOnly = 131072,
+          /// @brief The message box text is right-aligned.
+          RightAlign = 524288,
+          /// @brief Specifies that the message box text is displayed with right to left reading order.
+          RtlReading = 1048576,
+          /// @brief The message box is displayed on the active desktop.
+          ServiceNotification = 2097152
         };
       }
     }
@@ -35,11 +33,11 @@ namespace Pcf {
 
 /// @cond
 template<>
-class EnumToStrings<System::Windows::Forms::MessageBoxButtons> {
+class EnumToStrings<System::Windows::Forms::MessageBoxOptions> {
 public:
   void operator ()(System::Collections::Generic::SortedDictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Windows::Forms::MessageBoxButtons::OK, "OK"}, {(int64)System::Windows::Forms::MessageBoxButtons::OKCancel, "OKCancel"}, {(int64)System::Windows::Forms::MessageBoxButtons::AbortRetryIgnore, "AbortRetryIgnore"}, {(int64)System::Windows::Forms::MessageBoxButtons::YesNoCancel, "YesNoCancel"}, {(int64)System::Windows::Forms::MessageBoxButtons::YesNo, "YesNo"}, {(int64)System::Windows::Forms::MessageBoxButtons::RetryCancel, "RetryCancel"}};
-    flags = false;
+    values = {{(int64)System::Windows::Forms::MessageBoxOptions::DefaultDesktopOnly, "DefaultDesktopOnly"}, {(int64)System::Windows::Forms::MessageBoxOptions::RightAlign, "RightAlign"}, {(int64)System::Windows::Forms::MessageBoxOptions::RtlReading, "RtlReading"}, {(int64)System::Windows::Forms::MessageBoxOptions::ServiceNotification, "ServiceNotification"}};
+    flags = true;
   }
 };
 /// @endcond
