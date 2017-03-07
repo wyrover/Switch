@@ -16,11 +16,11 @@ namespace Pcf {
         /// @remarks This enumeration is used by the MessageBox class.
         enum class MessageBoxDefaultButton {
           /// @brief The first button on the message box is the default button.
-          Button1,
+          Button1 = 0,
           /// @brief The second button on the message box is the default button.
-          Button2,
+          Button2 = 0x00000100L,
           /// @brief The third button on the message box is the default button.
-          Button3
+          Button3 = 0x00000200L
         };
       }
     }

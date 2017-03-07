@@ -16,17 +16,17 @@ namespace Pcf {
         /// @remarks This enumeration is used by the MessageBox class.
         enum class MessageBoxButtons {
           /// @brief The message box contains an OK button.
-          OK,
+          OK = 0,
           /// @brief The message box contains OK and Cancel buttons.
-          OKCancel,
+          OKCancel = 1,
           /// &brief The message box contains Abort, Retry, and Ignore buttons
-          AbortRetryIgnore,
+          AbortRetryIgnore = 2,
           /// @brief The message box contains Yes, No, and Cancel buttons.
-          YesNoCancel,
+          YesNoCancel = 3,
           /// @brief The message box contains Yes and No buttons.
-          YesNo,
+          YesNo = 4,
           /// @brief The message box contains Retry and Cancel buttons.
-          RetryCancel
+          RetryCancel = 5
         };
       }
     }

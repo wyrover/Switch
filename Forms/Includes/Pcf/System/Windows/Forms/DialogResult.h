@@ -15,14 +15,14 @@ namespace Pcf {
       /// @brief The Pcf::System::Windows::Forms namespace contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system, Apple Mac Os X and Linux like Ubuntu operating system.
       namespace Forms {
         enum class DialogResult {
-          None,
-          OK,
-          Cancel,
-          Abort,
-          Retry,
-          Ignore,
-          Yes,
-          No
+          None = 0,
+          OK = 1,
+          Cancel = 2,
+          Abort = 3,
+          Retry = 4,
+          Ignore = 5,
+          Yes = 6,
+          No = 7
         };
       }
     }

@@ -18,13 +18,13 @@ namespace Pcf {
         /// @remarks If you do not want to specify this parameter when calling methods on MessageBox, you can pass in 0 instead.
         enum class MessageBoxOptions {
           /// @brief The message box is displayed on the active desktop.
-          DefaultDesktopOnly = 131072,
+          DefaultDesktopOnly = 0x00020000L,
           /// @brief The message box text is right-aligned.
-          RightAlign = 524288,
+          RightAlign = 0x00080000L,
           /// @brief Specifies that the message box text is displayed with right to left reading order.
-          RtlReading = 1048576,
+          RtlReading = 0x00100000L,
           /// @brief The message box is displayed on the active desktop.
-          ServiceNotification = 2097152
+          ServiceNotification = 0x00200000L
         };
       }
     }
