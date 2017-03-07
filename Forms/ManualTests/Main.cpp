@@ -28,6 +28,7 @@ namespace PcfFormApp {
       this->Name = "form1";
       this->Text = "First Application";
       this->Location = System::Drawing::Point(200, 100);
+      this->BackColor = System::Drawing::Color::Red;
       //this->Size = System::Drawing::Size(640, 480);
       this->MouseClick += pcf_delegate(const object& sender, const MouseEventArgs& e) {
         System::Diagnostics::Debug::WriteLine("form1 Clicked at {0}", e.Location);
@@ -78,6 +79,7 @@ namespace PcfFormApp {
       
       this->userControl1.Parent = *this;
       this->userControl1.Name = "userControl1";
+      this->userControl1.BackColor = System::Drawing::Color::SpringGreen;
       this->userControl1.Bounds = System::Drawing::Rectangle(10, 160, 200, 200);
       
       //this->FormBorderStyle = FormBorderStyle::None;

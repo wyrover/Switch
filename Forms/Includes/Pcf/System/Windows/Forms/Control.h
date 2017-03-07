@@ -4,6 +4,8 @@
 
 #include <Pcf/System/Collections/Generic/Dictionary.h>
 #include <Pcf/System/Collections/Generic/List.h>
+#include <Pcf/System/Drawing/Color.h>
+#include <Pcf/System/Drawing/SystemColors.h>
 #include <Pcf/System/Drawing/Font.h>
 #include "../../ComponentModel/Component.h"
 #include "ControlStyles.h"
@@ -124,6 +126,14 @@ namespace Pcf {
           }
           /// @endcond
 
+          Property<System::Drawing::Color> BackColor {
+            pcf_get {return this->data->backColor;},
+            pcf_set {
+            this->data->backColor = value;
+            this->Invalidate();
+          }
+		  };
+
           /// @brief Gets or sets the size and location of the control including its nonclient elements, in pixels, relative to the parent control.
           /// @param value A Rectangle in pixels relative to the parent control that represents the size and location of the control including its nonclient elements.
           /// @remarks The bounds of the control include the nonclient elements such as scroll bars, borders, title bars, and menus. The SetBoundsCore method is called to set the Bounds property. The Bounds property is not always changed through its set method so you should override the SetBoundsCore method to ensure that your code is executed when the Bounds property is set.
@@ -135,9 +145,11 @@ namespace Pcf {
             }
           };
 
-		      /// @brief Gets the window handle that the control is bound to.
-		      /// @return intptr An IntPtr that contains the window handle (HWND) of the control.
-		      /// @remarks The value of the Handle property is a Windows HWND. If the handle has not yet been created, referencing this property will force the handle to be created.
+		  static Property<System::Drawing::Color, ReadOnly> DefaultBackColor;
+
+          /// @brief Gets the window handle that the control is bound to.
+	      /// @return intptr An IntPtr that contains the window handle (HWND) of the control.
+	      /// @remarks The value of the Handle property is a Windows HWND. If the handle has not yet been created, referencing this property will force the handle to be created.
           Property<intptr, ReadOnly> Handle{
             pcf_get{
               if (this->data->handle == 0)
@@ -364,8 +376,12 @@ namespace Pcf {
           /// @cond
           struct ControlData {
             ControlData(Reference<Control> control) : controls(control) {}
+			System::Drawing::Color backColor;
             ControlCollection controls;
-            intptr handle = 0;
+			System::Drawing::Color defaultBackColor;
+			System::Drawing::Color defaultForeColor;
+			System::Drawing::Color foreColor;
+			intptr handle = 0;
             System::Drawing::Point location;
             string name;
             Reference<Control> parent;

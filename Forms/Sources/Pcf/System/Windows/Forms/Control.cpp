@@ -49,6 +49,10 @@ Control::Control() {
   SetStyle(ControlStyles::AllPaintingInWmPaint |ControlStyles::UserPaint | ControlStyles::StandardClick | ControlStyles::StandardDoubleClick | ControlStyles::UseTextForAccessibility | ControlStyles::Selectable, true);
 }
 
+static Property<System::Drawing::Color, ReadOnly> DefaultBackColor{
+  [] { return System::Drawing::SystemColors::Control(); },
+};
+
 void Control::CreateHandle() {
   if (!this->data->handle)
     this->data->handle = FormsApi::Control::Create(*this);
@@ -163,9 +167,17 @@ void Control::WmDrawItem(Message& message) {
   this->DefWndProc(message);
 }
 
+//#include <Windows.h>
+
 void Control::WmEraseBkgnd(Message& message) {
   System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmEraseBkgnd message=" + message + ", name=" + this->data->name);
   this->DefWndProc(message);
+/*
+  RECT rc;
+  GetClientRect((HWND)this->data->handle, &rc);
+  SetBkColor((HDC)message.WParam(), RGB(this->data->backColor.R(), this->data->backColor.G(), this->data->backColor.B())); // red
+  ExtTextOut((HDC)message.WParam(), 0, 0, ETO_OPAQUE, &rc, 0, 0, 0);
+  */
 }
 
 void Control::WmExitMenuLoop(Message& message) {
@@ -313,12 +325,15 @@ void Control::WmNotifyFormat(Message& message) {
   this->DefWndProc(message);
 }
 
+//#include <Windows.h>
+
 void Control::WmPaint(Message& message) {
   System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmPaint message=" + message + ", name=" + this->data->name);
 
   if (this->GetStyle(ControlStyles::UserPaint)) {
-  } else
+  } else {
     this->DefWndProc(message);
+  }
 }
 
 void Control::WmParentNotify(Message& message) {
