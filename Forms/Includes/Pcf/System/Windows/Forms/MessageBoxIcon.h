@@ -14,15 +14,26 @@ namespace Pcf {
     namespace Windows {
       /// @brief The Pcf::System::Windows::Forms namespace contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system, Apple Mac Os X and Linux like Ubuntu operating system.
       namespace Forms {
+        /// @brief Specifies constants defining which information to display.
+        /// @remarks This enumeration is used by the MessageBox class. The description of each member of this enumeration contains a typical representation of the symbol. The actual graphic displayed is a function of the operating system constants. In current implementations there are four unique symbols with multiple values assigned to them.
         enum class MessageBoxIcon {
+          /// @brief The message box contain no symbols.
           None,
+          /// @brief The message box contains a symbol consisting of a lowercase letter i in a circle.
           Asterisk,
+          /// @brief The message box contains a symbol consisting of white X in a circle with a red background.
           Error,
+          /// @brief The message box contains a symbol consisting of an exclamation point in a triangle with a yellow background.
           Exclamation,
+          /// @brief The message box contains a symbol consisting of a white X in a circle with a red background.
           Hand,
+          /// @brief The message box contains a symbol consisting of a lowercase letter i in a circle.
           Information,
+          /// @brief The message box contains a symbol consisting of a question mark in a circle. The question-mark message icon is no longer recommended because it does not clearly represent a specific type of message and because the phrasing of a message as a question could apply to any message type. In addition, users can confuse the message symbol question mark with Help information. Therefore, do not use this question mark message symbol in your message boxes. The system continues to support its inclusion only for backward compatibility.
           Question,
+          /// @brief The message box contains a symbol consisting of white X in a circle with a red background.
           Stop,
+          /// @brief The message box contains a symbol consisting of an exclamation point in a triangle with a yellow background.
           Warning,
         };
       }
