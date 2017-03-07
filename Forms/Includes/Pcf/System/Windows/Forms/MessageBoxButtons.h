@@ -14,12 +14,20 @@ namespace Pcf {
     namespace Windows {
       /// @brief The Pcf::System::Windows::Forms namespace contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system, Apple Mac Os X and Linux like Ubuntu operating system.
       namespace Forms {
+        /// @brief Specifies constants defining which buttons to display on a MessageBox.
+        /// @remarks This enumeration is used by the MessageBox class.
         enum class MessageBoxButtons {
+          /// @brief The message box contains an OK button.
           OK,
+          /// @brief The message box contains OK and Cancel buttons.
           OKCancel,
+          /// &brief The message box contains Abort, Retry, and Ignore buttons
           AbortRetryIgnore,
+          /// @brief The message box contains Yes, No, and Cancel buttons.
           YesNoCancel,
+          /// @brief The message box contains Yes and No buttons.
           YesNo,
+          /// @brief The message box contains Retry and Cancel buttons.
           RetryCancel
         };
       }
