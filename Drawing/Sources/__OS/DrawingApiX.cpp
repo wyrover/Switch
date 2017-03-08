@@ -9,6 +9,13 @@ using namespace __OS;
 namespace {
 }
 
+intptr DrawingApi::Brush::CreateSolidBrush(const Color& color) {
+  return (intptr)null;
+}
+
+void DrawingApi::Brush::DeleteBrush(intptr handle) {
+}
+
 Array<System::Drawing::FontFamily> DrawingApi::FontFamily::GetInstalledFontFamilies() {
   System::Array<System::Drawing::FontFamily> families;
   return  families;

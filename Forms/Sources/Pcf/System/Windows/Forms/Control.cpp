@@ -13,7 +13,7 @@ System::Collections::Generic::Dictionary<intptr, Reference<Control>> Control::ha
 
 namespace {
   struct ShowDebugTrace {
-    static constexpr bool AllWindowMessages = false;
+    static constexpr bool AllWindowMessages = true;
     static constexpr bool MouseWindowMessage = false;
     static constexpr bool WindowMessage = false;
   };
@@ -49,8 +49,8 @@ Control::Control() {
   SetStyle(ControlStyles::AllPaintingInWmPaint |ControlStyles::UserPaint | ControlStyles::StandardClick | ControlStyles::StandardDoubleClick | ControlStyles::UseTextForAccessibility | ControlStyles::Selectable, true);
 }
 
-static Property<System::Drawing::Color, ReadOnly> DefaultBackColor{
-  [] { return System::Drawing::SystemColors::Control(); },
+Property<System::Drawing::Color, ReadOnly> Control::DefaultBackColor {
+  [] { return System::Drawing::SystemColors::Control(); }
 };
 
 void Control::CreateHandle() {
@@ -111,11 +111,13 @@ bool Control::PreProcessMessage(const Message& msg) {
 
 void Control::WndProc(Message& message) {
   if (!this->GetState(State::WndProcRunning) && this->data->messageActions.ContainsKey(message.Msg)) {
-   SetState(State::WndProcRunning, true);
+    SetState(State::WndProcRunning, true);
     System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::AllWindowMessages, "Control::WndProc message=" + message + ", name=" + this->data->name);
     this->data->messageActions[message.Msg](message);
-  }  else
+  } else {
+    System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::AllWindowMessages, "DefWndProc message=" + message + ", name=" + this->data->name);
     this->DefWndProc(message);
+  }
   SetState(State::WndProcRunning, false);
 }
 
@@ -146,6 +148,19 @@ void Control::WmCreate(Message& message) {
   OnHandleCreated(EventArgs::Empty);
 }
 
+#include <Windows.h>
+
+inline COLORREF ColorToRgb(const Color& color) {
+  return RGB(color.R, color.G, color.B);
+}
+
+inline void SetBackColor(intptr handle, int64 wParam, const Color& color) {
+  RECT rect;
+  GetClientRect((HWND)handle, &rect);
+  SetBkColor((HDC)wParam, ColorToRgb(color));
+  ExtTextOut((HDC)wParam, 0, 0, ETO_OPAQUE, &rect, 0, 0, 0);
+}
+
 void Control::WmCtlColorControl(Message& message) {
   System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmCtlColorControl message=" + message + ", name=" + this->data->name);
   this->DefWndProc(message);
@@ -167,17 +182,12 @@ void Control::WmDrawItem(Message& message) {
   this->DefWndProc(message);
 }
 
-//#include <Windows.h>
-
 void Control::WmEraseBkgnd(Message& message) {
   System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmEraseBkgnd message=" + message + ", name=" + this->data->name);
   this->DefWndProc(message);
-/*
-  RECT rc;
-  GetClientRect((HWND)this->data->handle, &rc);
-  SetBkColor((HDC)message.WParam(), RGB(this->data->backColor.R(), this->data->backColor.G(), this->data->backColor.B())); // red
-  ExtTextOut((HDC)message.WParam(), 0, 0, ETO_OPAQUE, &rc, 0, 0, 0);
-  */
+
+ // SetBackColor(this->data->handle, message.WParam, this->data->backColor.GetValueOrDefault(DefaultBackColor));
+  //SetTextColor(hdcStatic, RGB(255, 255, 255));
 }
 
 void Control::WmExitMenuLoop(Message& message) {
@@ -325,14 +335,22 @@ void Control::WmNotifyFormat(Message& message) {
   this->DefWndProc(message);
 }
 
-//#include <Windows.h>
-
 void Control::WmPaint(Message& message) {
   System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmPaint message=" + message + ", name=" + this->data->name);
 
   if (this->GetStyle(ControlStyles::UserPaint)) {
   } else {
-    this->DefWndProc(message);
+    //this->DefWndProc(message);
+    //SetBackColor(this->data->handle, message.WParam, this->data->backColor.GetValueOrDefault(DefaultBackColor));
+    
+    /*
+    PAINTSTRUCT ps;
+    HDC hdc = BeginPaint((HWND)this->data->handle, &ps);
+    HBRUSH brush = CreateSolidBrush(ColorToRgb(this->data->backColor.GetValueOrDefault(DefaultBackColor)));
+    FillRect(hdc, &ps.rcPaint, brush);
+    DeleteObject(brush);
+    EndPaint((HWND)this->data->handle, &ps);
+    */
   }
 }
 

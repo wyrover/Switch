@@ -30,6 +30,18 @@ namespace {
       (*(LOGFONTW**)result) = new LOGFONT(*logFont);
     return 1;
   }
+
+  inline COLORREF ColorToRgb(const Color& color) {
+    return RGB(color.R, color.G, color.B);
+  }
+}
+
+intptr DrawingApi::Brush::CreateSolidBrush(const Color& color) {
+  return (intptr)::CreateSolidBrush(ColorToRgb(color));
+}
+
+void DrawingApi::Brush::DeleteBrush(intptr handle) {
+  DeleteObject((HGDIOBJ)handle);
 }
 
 Array<System::Drawing::FontFamily> DrawingApi::FontFamily::GetInstalledFontFamilies() {

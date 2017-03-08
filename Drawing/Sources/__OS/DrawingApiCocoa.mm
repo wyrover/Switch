@@ -28,6 +28,13 @@ namespace {
   };
 }
 
+intptr DrawingApi::Brush::CreateSolidBrush(const Color& color) {
+  return (intptr)null;
+}
+
+void DrawingApi::Brush::DeleteBrush(intptr handle) {
+}
+
 System::Array<System::Drawing::FontFamily> __OS::DrawingApi::FontFamily::GetInstalledFontFamilies() {
   NSArray* fonts = [[[NSFontManager sharedFontManager] availableFontFamilies] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
   List<System::Drawing::FontFamily> families;

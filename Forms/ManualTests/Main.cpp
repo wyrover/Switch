@@ -11,10 +11,6 @@ using namespace System;
 using namespace System::Windows::Forms;
 
 namespace PcfFormApp {
-  class UserControl : public Control {
-  public:
-  };
-  
   class Form1 : public Form {
   public:
     // The main entry point for the application.
@@ -26,29 +22,15 @@ namespace PcfFormApp {
     Form1() {
       this->StartPosition = FormStartPosition::Manual;
       this->Name = "form1";
+      this->BackColor = System::Drawing::Color::SpringGreen;
       this->Text = "First Application";
       this->Location = System::Drawing::Point(200, 100);
-      this->BackColor = System::Drawing::Color::Red;
-      //this->Size = System::Drawing::Size(640, 480);
-      this->MouseClick += pcf_delegate(const object& sender, const MouseEventArgs& e) {
-        System::Diagnostics::Debug::WriteLine("form1 Clicked at {0}", e.Location);
-      };
-      this->MouseWheel += pcf_delegate(const object& sender, const MouseEventArgs& e) {
-        System::Diagnostics::Debug::WriteLine("Form::MouseWheel Location={0}, Delta={1}", e.Location, e.Delta);
-      };
       
       this->button1.Parent = *this;
+      this->button1.BackColor = System::Drawing::Color::SpringGreen;
       this->button1.Name = "button1";
-      //this->button1.Text = "Button";
-      this->button1.Text = "Привет мир!";
+      this->button1.Text = "Button";
       this->button1.Location = System::Drawing::Point(10, 10);
-      this->button1.MouseClick += pcf_delegate(const object& sender, const MouseEventArgs& e) {
-        System::Diagnostics::Debug::WriteLine("Button::MouseClick at {0}", e.Location);
-        this->label1.Text = this->button1.PointToScreen(e.Location).ToString();
-      };
-      this->button1.MouseWheel += pcf_delegate(const object& sender, const MouseEventArgs& e) {
-        System::Diagnostics::Debug::WriteLine("Button::MouseWheel Location={0}, Delta={1}", e.Location, e.Delta);
-      };
       
       this->checkBox1.Parent = *this;
       this->checkBox1.Name = "checkBox1";
@@ -57,7 +39,7 @@ namespace PcfFormApp {
       
       this->radioButton1.Parent = *this;
       this->radioButton1.Name = "radioButton1";
-      this->radioButton1.Text = "RadioButton";
+      this->radioButton1.Text = "RadioButton 1";
       this->radioButton1.Location = System::Drawing::Point(10, 70);
       
       this->radioButton2.Parent = *this;
@@ -68,31 +50,11 @@ namespace PcfFormApp {
       
       this->label1.Parent = *this;
       this->label1.Name = "label1";
-      //this->label1.Text = "Text label";
-      //this->label1.Text = "Привет мир!";
-      this->label1.Text = "こんにちは世界!";
+      this->label1.BackColor = System::Drawing::Color::Azure;
+      this->label1.Text = "Text label";
       this->label1.Location = System::Drawing::Point(10, 130);
       this->label1.Size = System::Drawing::Size(200, 23);
-      this->label1.Click += pcf_delegate(const object& sender, const EventArgs& e) {
-        System::Diagnostics::Debug::WriteLine("this->label1 Clicked !");
-      };
-      
-      this->userControl1.Parent = *this;
-      this->userControl1.Name = "userControl1";
-      this->userControl1.BackColor = System::Drawing::Color::SpringGreen;
-      this->userControl1.Bounds = System::Drawing::Rectangle(10, 160, 200, 200);
-      
-      //this->FormBorderStyle = FormBorderStyle::None;
-      
-      //Application::Idle += pcf_delegate(const object sender, const EventArgs e) {
-      //  this->button1.Text = string::Format("{0}", ++counter);
-      //};
     }
-    
-    /// @cond
-    Form1(const Form1& form) = default;
-    int counter = 0;
-    /// @endcond
     
   private:
     Button button1;
@@ -100,7 +62,6 @@ namespace PcfFormApp {
     RadioButton radioButton1;
     RadioButton radioButton2;
     Label label1;
-    UserControl userControl1;
   };
 }
 

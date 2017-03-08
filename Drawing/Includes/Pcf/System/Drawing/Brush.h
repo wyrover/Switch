@@ -13,10 +13,14 @@ namespace Pcf {
       class pcf_public Brush : public object {
       public:
 
+
       protected:
         /// @cond
         Brush() {}
         /// @endcond
+
+      private:
+        SharedPointer<intptr> handle;
       };
     }
   }

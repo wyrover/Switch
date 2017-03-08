@@ -7,6 +7,7 @@
 #include <Pcf/System/Drawing/Color.h>
 #include <Pcf/System/Drawing/SystemColors.h>
 #include <Pcf/System/Drawing/Font.h>
+#include <Pcf/System/Nullable.h>
 #include "../../ComponentModel/Component.h"
 #include "ControlStyles.h"
 #include "InvalidateEventHandler.h"
@@ -126,30 +127,30 @@ namespace Pcf {
           }
           /// @endcond
 
-          Property<System::Drawing::Color> BackColor {
-            pcf_get {return this->data->backColor;},
+          Property<System::Drawing::Color> BackColor{
+            pcf_get {return this->data->backColor.GetValueOrDefault(DefaultBackColor);},
             pcf_set {
             this->data->backColor = value;
             this->Invalidate();
           }
-		  };
+          };
 
           /// @brief Gets or sets the size and location of the control including its nonclient elements, in pixels, relative to the parent control.
           /// @param value A Rectangle in pixels relative to the parent control that represents the size and location of the control including its nonclient elements.
           /// @remarks The bounds of the control include the nonclient elements such as scroll bars, borders, title bars, and menus. The SetBoundsCore method is called to set the Bounds property. The Bounds property is not always changed through its set method so you should override the SetBoundsCore method to ensure that your code is executed when the Bounds property is set.
-          Property<System::Drawing::Rectangle> Bounds {
-            pcf_get{return Drawing::Rectangle(this->Location(), this->Size());},
+          Property<System::Drawing::Rectangle> Bounds{
+            pcf_get{return Drawing::Rectangle(this->Location(), this->Size()); },
             pcf_set{
               this->Location(value.Location());
               this->Size(value.Size());
             }
           };
 
-		  static Property<System::Drawing::Color, ReadOnly> DefaultBackColor;
+          static Property<System::Drawing::Color, ReadOnly> DefaultBackColor;
 
           /// @brief Gets the window handle that the control is bound to.
-	      /// @return intptr An IntPtr that contains the window handle (HWND) of the control.
-	      /// @remarks The value of the Handle property is a Windows HWND. If the handle has not yet been created, referencing this property will force the handle to be created.
+        /// @return intptr An IntPtr that contains the window handle (HWND) of the control.
+        /// @remarks The value of the Handle property is a Windows HWND. If the handle has not yet been created, referencing this property will force the handle to be created.
           Property<intptr, ReadOnly> Handle{
             pcf_get{
               if (this->data->handle == 0)
@@ -163,20 +164,20 @@ namespace Pcf {
           /// @remarks Changes made to the Height and Top property values cause the Bottom property value of the control to change.
           /// @note The minimum height for the derived control Splitter is one pixel. The default height for the Splitter control is three pixels. Setting the height of the Splitter control to a value less than one will reset the property value to the default height.
           Property<int32> Height{
-            pcf_get{return this->data->size.Height();},
-            pcf_set{this->Size(System::Drawing::Size(this->data->size.Width(), value));}
+            pcf_get{return this->data->size.Height(); },
+            pcf_set{this->Size(System::Drawing::Size(this->data->size.Width(), value)); }
           };
 
-          Property<bool, ReadOnly> IsHandleCreated {
-            pcf_get {return this->data->handle != 0;}
+          Property<bool, ReadOnly> IsHandleCreated{
+            pcf_get {return this->data->handle != 0; }
           };
 
-		      /// @brief Gets or sets the coordinates of the upper-left corner of the control relative to the upper-left corner of its container.
-		      /// @return System::Drawing::Point The Point that represents the upper-left corner of the control relative to the upper-left corner of its container.
-		      /// @remarks Because the Point class is returned by value, meaning accessing the property returns a copy of the upper-left point of the control. So, adjusting the X or Y properties of the Point returned from this property will not affect the Left, Right, Top, or Bottom property values of the control. To adjust these properties set each property value individually, or set the Location property with a new Point.
-		      /// @remarks If the Control is a Form, the Location property value represents the upper-left corner of the Form in screen coordinates.
+          /// @brief Gets or sets the coordinates of the upper-left corner of the control relative to the upper-left corner of its container.
+          /// @return System::Drawing::Point The Point that represents the upper-left corner of the control relative to the upper-left corner of its container.
+          /// @remarks Because the Point class is returned by value, meaning accessing the property returns a copy of the upper-left point of the control. So, adjusting the X or Y properties of the Point returned from this property will not affect the Left, Right, Top, or Bottom property values of the control. To adjust these properties set each property value individually, or set the Location property with a new Point.
+          /// @remarks If the Control is a Form, the Location property value represents the upper-left corner of the Form in screen coordinates.
           Property<System::Drawing::Point> Location{
-            pcf_get{return this->data->location;},
+            pcf_get{return this->data->location; },
             pcf_set{
               if (this->data->location != value) {
                 this->data->location = value;
@@ -185,11 +186,11 @@ namespace Pcf {
             }
           };
 
-		      /// @brief Gets or sets the name of the control.
-		      /// @return string The name of the control. The default is an empty string ("").
-		      /// @remarks The Name property can be used at run time to evaluate the object by name rather than type and programmatic name.
+          /// @brief Gets or sets the name of the control.
+          /// @return string The name of the control. The default is an empty string ("").
+          /// @remarks The Name property can be used at run time to evaluate the object by name rather than type and programmatic name.
           Property<string> Name{
-            pcf_get{return this->data->name;},
+            pcf_get{return this->data->name; },
             pcf_set{
               if (this->data->name != value) {
                 this->data->name = value;
@@ -202,7 +203,7 @@ namespace Pcf {
           /// @return Control A Control that represents the parent or container control of the control.
           /// @remarks Setting the Parent property value to null removes the control from the Control.ControlCollection of its current parent control.
           Property<Reference<Control>> Parent{
-            pcf_get{return this->data->parent;},
+            pcf_get{return this->data->parent; },
             pcf_set{
               if (this->data->parent != value) {
                 if (value == null && this->data->parent != null)
@@ -219,7 +220,7 @@ namespace Pcf {
           /// @remarks Because the Size class is returned by value, meaning accessing the property returns a copy of the size of the control. So, adjusting the Width or Height properties of the Size returned from this property will not affect the Width or Height of the control. To adjust the Width or Height of the control, you must set the control's Width or Height property, or set the Size property with a new Size.
           /// @note To maintain better performance, do not set the Size of a control in its constructor. The preferred method is to override the DefaultSize property.
           Property<System::Drawing::Size> Size{
-            pcf_get{return this->data->size;},
+            pcf_get{return this->data->size; },
             pcf_set{
               if (this->data->size != value) {
                 this->data->size = value;
@@ -233,12 +234,12 @@ namespace Pcf {
           /// @remarks The Text property of the control is used differently by each derived class. For example the Text property of a Form is displayed in the title bar at the top of the form, is fairly small in character count, and usually displays the application or document name. However, the Text property of a RichTextBox can be large and can include numerous nonvisual characters used to format the text. For example, the text displayed in a RichTextBox can be formatted by adjusting the Font properties, or by the addition of spaces or tab characters to align the text.
           /// @note When overriding the Text property in a derived class, use the base class's Text property to extend the base implementation. Otherwise, you must provide all the implementation. You are not required to override both the get and setaccessors of the Text property; you can override only one if needed.
           Property<const string&> Text{
-            pcf_get->const string&{return this->GetText();},
-            pcf_set{this->SetText(value);}
+            pcf_get->const string&{return this->GetText(); },
+            pcf_set{this->SetText(value); }
           };
 
           Property<bool> Visible{
-            pcf_get{return this->data->visible;},
+            pcf_get{return this->data->visible; },
             pcf_set{
               if (this->data->visible != value) {
                 this->data->visible = value;
@@ -248,8 +249,8 @@ namespace Pcf {
           };
 
           Property<int32> Width{
-            pcf_get{return this->data->size.Width();},
-            pcf_set{this->Size(System::Drawing::Size(value, this->data->size.Height()));}
+            pcf_get{return this->data->size.Width(); },
+            pcf_set{this->Size(System::Drawing::Size(value, this->data->size.Height())); }
           };
 
           void CreateControl() {
@@ -303,7 +304,7 @@ namespace Pcf {
 
         protected:
           Property<System::Drawing::Size, ReadOnly> DefaultSize{
-            pcf_get{return this->GetDefaultSize();}
+            pcf_get{return this->GetDefaultSize(); }
           };
 
           virtual void CreateHandle();
@@ -376,12 +377,12 @@ namespace Pcf {
           /// @cond
           struct ControlData {
             ControlData(Reference<Control> control) : controls(control) {}
-			System::Drawing::Color backColor;
+            Nullable<System::Drawing::Color> backColor;
             ControlCollection controls;
-			System::Drawing::Color defaultBackColor;
-			System::Drawing::Color defaultForeColor;
-			System::Drawing::Color foreColor;
-			intptr handle = 0;
+            System::Drawing::Color defaultBackColor;
+            System::Drawing::Color defaultForeColor;
+            System::Drawing::Color foreColor;
+            intptr handle = 0;
             System::Drawing::Point location;
             string name;
             Reference<Control> parent;
@@ -394,7 +395,7 @@ namespace Pcf {
           };
           friend class __OS::FormsApi;
           //SharedPointer<ControlData> data = SharedPointer<ControlData>::Create(*this);
-          SharedPointer<ControlData> data {new ControlData(*this)};
+          SharedPointer<ControlData> data{ new ControlData(*this) };
           static System::Collections::Generic::Dictionary<intptr, Reference<Control>> handles;
           /// @endcond
 
@@ -445,7 +446,7 @@ namespace Pcf {
           void WmWindowPosChanging(Message& message);
 
           bool GetState(State flag) const { return ((int32)this->data->state & (int32)flag) == (int32)flag; }
-          void SetState(State flag, bool value) {this->data->state = value ? (State)((int32)this->data->state | (int32)flag) : (State)((int32)this->data->state & ~(int32)flag); }
+          void SetState(State flag, bool value) { this->data->state = value ? (State)((int32)this->data->state | (int32)flag) : (State)((int32)this->data->state & ~(int32)flag); }
 
           enum class State {
             Empty = 0,
