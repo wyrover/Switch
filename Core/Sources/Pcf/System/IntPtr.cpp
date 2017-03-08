@@ -6,8 +6,8 @@
 
 using namespace System;
 
-Property<IntPtr, ReadOnly> IntPtr::Zero {
-  [] {return IntPtr();}
+Property<intptr, ReadOnly> IntPtr::Zero {
+  [] {return 0;}
 };
 
 Property<int32, ReadOnly> IntPtr::Size {

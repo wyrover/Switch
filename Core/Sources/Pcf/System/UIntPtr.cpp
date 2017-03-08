@@ -7,7 +7,9 @@
 
 using namespace System;
 
-UIntPtr UIntPtr::Zero;
+Property<uintptr, ReadOnly> UIntPtr::Zero {
+  [] {return 0;}
+};
 
 Property<int32, ReadOnly> UIntPtr::Size {
   [] {return static_cast<int32>(sizeof(void*));}

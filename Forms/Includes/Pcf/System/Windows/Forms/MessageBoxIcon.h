@@ -17,19 +17,19 @@ namespace Pcf {
         enum class MessageBoxIcon {
           /// @brief The message box contain no symbols.
           None = 0,
-		  /// @brief The message box contains a symbol consisting of a white X in a circle with a red background.
-		  Hand = 0x00000010L,
-		  /// @brief The message box contains a symbol consisting of white X in a circle with a red background.
-		  Stop = 0x00000010L,
-		  /// @brief The message box contains a symbol consisting of white X in a circle with a red background.
-		  Error = 0x00000010L,
-		  /// @brief The message box contains a symbol consisting of a question mark in a circle. The question-mark message icon is no longer recommended because it does not clearly represent a specific type of message and because the phrasing of a message as a question could apply to any message type. In addition, users can confuse the message symbol question mark with Help information. Therefore, do not use this question mark message symbol in your message boxes. The system continues to support its inclusion only for backward compatibility.
-		  Question = 0x00000020L,
-		  /// @brief The message box contains a symbol consisting of an exclamation point in a triangle with a yellow background.
-		  Exclamation = 0x00000030L,
-		  /// @brief The message box contains a symbol consisting of an exclamation point in a triangle with a yellow background.
-		  Warning = 0x00000030L,
-		  /// @brief The message box contains a symbol consisting of a lowercase letter i in a circle.
+          /// @brief The message box contains a symbol consisting of a white X in a circle with a red background.
+          Hand = 0x00000010L,
+          /// @brief The message box contains a symbol consisting of white X in a circle with a red background.
+          Stop = 0x00000010L,
+          /// @brief The message box contains a symbol consisting of white X in a circle with a red background.
+          Error = 0x00000010L,
+          /// @brief The message box contains a symbol consisting of a question mark in a circle. The question-mark message icon is no longer recommended because it does not clearly represent a specific type of message and because the phrasing of a message as a question could apply to any message type. In addition, users can confuse the message symbol question mark with Help information. Therefore, do not use this question mark message symbol in your message boxes. The system continues to support its inclusion only for backward compatibility.
+          Question = 0x00000020L,
+          /// @brief The message box contains a symbol consisting of an exclamation point in a triangle with a yellow background.
+          Exclamation = 0x00000030L,
+          /// @brief The message box contains a symbol consisting of an exclamation point in a triangle with a yellow background.
+          Warning = 0x00000030L,
+          /// @brief The message box contains a symbol consisting of a lowercase letter i in a circle.
           Asterisk = 0x00000040L,
           /// @brief The message box contains a symbol consisting of a lowercase letter i in a circle.
           Information = 0x00000040L,
@@ -44,7 +44,7 @@ template<>
 class EnumToStrings<System::Windows::Forms::MessageBoxIcon> {
 public:
   void operator ()(System::Collections::Generic::SortedDictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Windows::Forms::MessageBoxIcon::None, "None"}, {(int64)System::Windows::Forms::MessageBoxIcon::Asterisk, "Asterisk"}, {(int64)System::Windows::Forms::MessageBoxIcon::Error, "Error"}, {(int64)System::Windows::Forms::MessageBoxIcon::Exclamation, "Exclamation"}, {(int64)System::Windows::Forms::MessageBoxIcon::Hand, "Hand"}, {(int64)System::Windows::Forms::MessageBoxIcon::Information, "Information"}, {(int64)System::Windows::Forms::MessageBoxIcon::Question, "Question"}, {(int64)System::Windows::Forms::MessageBoxIcon::Stop, "Stop"}, {(int64)System::Windows::Forms::MessageBoxIcon::Warning, "Warning"}};
+    values = { {(int64)System::Windows::Forms::MessageBoxIcon::None, "None"}, {(int64)System::Windows::Forms::MessageBoxIcon::Asterisk, "Asterisk"}, {(int64)System::Windows::Forms::MessageBoxIcon::Error, "Error"}, {(int64)System::Windows::Forms::MessageBoxIcon::Exclamation, "Exclamation"}, {(int64)System::Windows::Forms::MessageBoxIcon::Hand, "Hand"}, {(int64)System::Windows::Forms::MessageBoxIcon::Information, "Information"}, {(int64)System::Windows::Forms::MessageBoxIcon::Question, "Question"}, {(int64)System::Windows::Forms::MessageBoxIcon::Stop, "Stop"}, {(int64)System::Windows::Forms::MessageBoxIcon::Warning, "Warning"} };
     flags = false;
   }
 };

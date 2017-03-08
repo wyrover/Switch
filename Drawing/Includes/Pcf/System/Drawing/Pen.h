@@ -4,6 +4,7 @@
 
 #include <Pcf/System/Object.h>
 
+#include "Drawing2D/DashStyle.h"
 #include "Brush.h"
 #include "SolidBrush.h"
 #include "Color.h"
@@ -18,27 +19,45 @@ namespace Pcf {
       public:
         Pen() {}
 
-        Pen(const Pen& pen) : brush(pen.brush), width(pen.width) {}
+        Pen(const Pen& pen) = delete;
 
-        Pen(const Brush& brush) : brush(as<SolidBrush>(brush)) {}
+        Pen(const Brush& brush) : brush(as<System::Drawing::Brush>(brush.Clone())) { this->CreatePen(); }
 
-        Pen(System::Drawing::Color color) : brush(color) {}
+        Pen(const Brush& brush, float width) : brush(as<System::Drawing::Brush>(brush.Clone())), width(width) { this->CreatePen(); }
 
-        Pen(System::Drawing::Color color, float width) : brush(color), width(width) {}
+        Pen(System::Drawing::Color color) : brush(as<System::Drawing::Brush>(UniquePointer<SolidBrush>::Create(color))) { this->CreatePen(); }
 
-        Property<System::Drawing::Color, ReadOnly> Color {
-          pcf_get {return this->brush.Color();}
+        Pen(System::Drawing::Color color, float width) : brush(as<System::Drawing::Brush>(UniquePointer<SolidBrush>::Create(color))), width(width) { this->CreatePen(); }
+
+        /// @cond
+        ~Pen() {this->DeletePen();}
+
+        Property<const System::Drawing::Brush&> Brush{
+          pcf_get->const System::Drawing::Brush& { return this->brush(); },
+          pcf_set {this->brush = as<System::Drawing::Brush>(value.Clone()); }
         };
 
-        Property<float, ReadOnly> Width {
-          pcf_get {return this->width;}
+        Property<System::Drawing::Color, ReadOnly> Color{
+          pcf_get{ return as<SolidBrush>(this->brush)().Color(); }
+        };
+
+        Property<System::Drawing::Drawing2D::DashStyle> DashStyle {
+          pcf_get {return this->dashStyle;},
+          pcf_set {this->dashStyle = value;}
+        };
+
+        Property<float> Width{
+          pcf_get {return this->width;},
+          pcf_set {this->width = value;}
         };
 
       private:
-        SolidBrush brush = System::Drawing::Color::Black();
+        void CreatePen();
+        void DeletePen();
+        UniquePointer<System::Drawing::Brush> brush  = as<System::Drawing::Brush>(UniquePointer<SolidBrush>::Create(System::Drawing::Color::Black()));
+        System::Drawing::Drawing2D::DashStyle dashStyle = System::Drawing::Drawing2D::DashStyle::Solid;
         float width = 1;
-        /// @cond
-        /// @endcond
+        intptr pen = IntPtr::Zero;
       };
     }
   }

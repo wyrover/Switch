@@ -34,7 +34,7 @@ namespace Pcf {
             pcf_set{this->msg = value;}
           };
 
-          Property<int32> Result {
+          Property<intptr> Result {
             pcf_get{return this->result;},
             pcf_set{this->result = value;}
           };
@@ -51,10 +51,10 @@ namespace Pcf {
           };
           /// @endcond
           
-          static Message Create(intptr hwnd, int32 msg, intptr wParam, intptr lParam, int32 result) { return Message(hwnd, msg, wParam, lParam, result); }
+          static Message Create(intptr hwnd, int32 msg, intptr wParam, intptr lParam, intptr result) { return Message(hwnd, msg, wParam, lParam, result); }
           
           /// @cond
-          static Message Create(intptr hwnd, int32 msg, intptr wParam, intptr lParam, int32 result, intptr handle) { return Message(hwnd, msg, wParam, lParam, result, handle); }
+          static Message Create(intptr hwnd, int32 msg, intptr wParam, intptr lParam, intptr result, intptr handle) { return Message(hwnd, msg, wParam, lParam, result, handle); }
           /// @endcond
           
           template<typename Type>
@@ -63,13 +63,13 @@ namespace Pcf {
           String ToString() const noexcept override;
 
         private:
-          Message(intptr hwnd, int32 msg, intptr wParam, intptr lParam, int32 result) : hwnd(hwnd), msg(msg), wParam(wParam), lParam(lParam), result(result) {}
-          Message(intptr hwnd, int32 msg, intptr wParam, intptr lParam, int32 result, intptr handle) : hwnd(hwnd), msg(msg), wParam(wParam), lParam(lParam), result(result), handle(handle) {}
+          Message(intptr hwnd, int32 msg, intptr wParam, intptr lParam, intptr result) : hwnd(hwnd), msg(msg), wParam(wParam), lParam(lParam), result(result) {}
+          Message(intptr hwnd, int32 msg, intptr wParam, intptr lParam, intptr result, intptr handle) : hwnd(hwnd), msg(msg), wParam(wParam), lParam(lParam), result(result), handle(handle) {}
           intptr hwnd = 0;
           int32 msg = 0;
           intptr wParam = 0;
           intptr lParam = 0;
-          int32 result = 0;
+          intptr result = 0;
           intptr handle = 0;
         };
       }

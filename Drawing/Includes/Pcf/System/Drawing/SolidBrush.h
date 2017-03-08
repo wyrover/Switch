@@ -13,11 +13,14 @@ namespace Pcf {
     namespace Drawing {
       class pcf_public SolidBrush : public Brush {
       public:
-        SolidBrush(const System::Drawing::Color& color);
-        SolidBrush(const SolidBrush& solidBrush) : color(solidBrush.color) {}
+        explicit SolidBrush(const System::Drawing::Color& color);
         
         Property<System::Drawing::Color, ReadOnly> Color {
           pcf_get {return this->color;}
+        };
+
+        UniquePointer<object> Clone() const override {
+          return as<object>(UniquePointer<SolidBrush>::Create(this->color));
         };
 
       private:

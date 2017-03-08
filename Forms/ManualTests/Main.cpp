@@ -3,6 +3,7 @@
 #include <Pcf/System/Windows/Forms/CheckBox.h>
 #include <Pcf/System/Windows/Forms/Form.h>
 #include <Pcf/System/Windows/Forms/Label.h>
+#include <Pcf/System/Windows/Forms/MessageBox.h>
 #include <Pcf/System/Windows/Forms/RadioButton.h>
 #include <Pcf/System/Windows/Forms/SystemInformation.h>
 #include <Pcf/Startup.h>
@@ -31,6 +32,9 @@ namespace PcfFormApp {
       this->button1.Name = "button1";
       this->button1.Text = "Button";
       this->button1.Location = System::Drawing::Point(10, 10);
+      this->button1.Click += pcf_delegate(const object& sender, const EventArgs& e) {
+        System::Diagnostics::Debug::WriteLine("Result = {0}", MessageBox::Show("This is my first message", "ManualTest", MessageBoxButtons::OKCancel, MessageBoxIcon::Exclamation));
+      };
       
       this->checkBox1.Parent = *this;
       this->checkBox1.Name = "checkBox1";
@@ -41,7 +45,8 @@ namespace PcfFormApp {
       this->radioButton1.Name = "radioButton1";
       this->radioButton1.Text = "RadioButton 1";
       this->radioButton1.Location = System::Drawing::Point(10, 70);
-      
+      this->radioButton1.Size = System::Drawing::Size(120, 25);
+
       this->radioButton2.Parent = *this;
       this->radioButton2.Name = "radioButton2";
       this->radioButton2.Text = "RadioButton 2";

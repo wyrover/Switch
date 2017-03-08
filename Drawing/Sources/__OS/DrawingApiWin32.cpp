@@ -44,6 +44,14 @@ void DrawingApi::Brush::DeleteBrush(intptr handle) {
   DeleteObject((HGDIOBJ)handle);
 }
 
+intptr DrawingApi::Pen::CreatePen(const System::Drawing::Drawing2D::DashStyle& dashStyle, int32 width, const Color& color) {
+  return (intptr)::CreatePen((int32)dashStyle, width, ColorToRgb(color));
+}
+
+void DrawingApi::Pen::DeletePen(intptr handle) {
+  DeleteObject((HGDIOBJ)handle);
+}
+
 Array<System::Drawing::FontFamily> DrawingApi::FontFamily::GetInstalledFontFamilies() {
   HDC hdc = GetDC(NULL);
   LOGFONT logFont = CreateLOGFONTWithNameAndCharSet("", DEFAULT_CHARSET);
@@ -96,7 +104,7 @@ intptr DrawingApi::Gdi::GetDeviceContext(intptr handle) {
 intptr DrawingApi::Gdi::BeginPaint(intptr handle, System::Drawing::Rectangle& rectangle) {
   PAINTSTRUCT ps;
   HDC hdc = ::BeginPaint((HWND)handle, &ps);
-  rectangle = System::Drawing::Rectangle(ps.rcPaint.left, ps.rcPaint.bottom, ps.rcPaint.right, ps.rcPaint.bottom);
+  rectangle = System::Drawing::Rectangle(ps.rcPaint.left, ps.rcPaint.top, ps.rcPaint.right, ps.rcPaint.bottom);
   return (intptr)hdc;
 }
 
@@ -105,8 +113,13 @@ void DrawingApi::Gdi::EndPaint(intptr handle, const System::Drawing::Rectangle& 
   ::EndPaint((HWND)handle, &ps);
 }
 
+void DrawingApi::Gdi::DrawRectangle(intptr handle, const System::Drawing::Pen& pen, int32 x, int32 y, int32 w, int32 h) {
+  RECT rect{ x, y, w, h };
+  ::FrameRect((HDC)handle, &rect, (HBRUSH)pen.Brush().GetNativeBrush());
+}
+
 void DrawingApi::Gdi::FillRectangle(intptr handle, const System::Drawing::Brush& brush, int32 x, int32 y, int32 w, int32 h) {
-  RECT rect { x, y, w, h };
+  RECT rect{ x, y, w, h };
   FillRect((HDC)handle, &rect, (HBRUSH)brush.GetNativeBrush());
 }
 

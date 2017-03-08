@@ -1,4 +1,5 @@
 set(INCLUDE_FILES
+  Includes/Pcf/System/Drawing/Drawing2D/DashStyle.h
   Includes/Pcf/System/Drawing/Imaging/ColorPalette.h
   Includes/Pcf/System/Drawing/Imaging/FrameDimension.h
   Includes/Pcf/System/Drawing/Imaging/ImageFlags.h
@@ -49,6 +50,7 @@ set(SOURCE_FILES
   Sources/Pcf/System/Drawing/Graphics.cpp
   Sources/Pcf/System/Drawing/Image.cpp
   Sources/Pcf/System/Drawing/Jpg.h
+  Sources/Pcf/System/Drawing/Pen.cpp
   Sources/Pcf/System/Drawing/Png.h
   Sources/Pcf/System/Drawing/Point.cpp
   Sources/Pcf/System/Drawing/PointF.cpp
@@ -69,6 +71,7 @@ endif ()
 
 source_group(Includes\\Pcf\\System REGULAR_EXPRESSION "/Includes/Pcf/System/[-_,A-Za-z0-9]+\\.h*")
 source_group(Includes\\Pcf\\System\\Drawing REGULAR_EXPRESSION "/Includes/Pcf/System/Drawing/[-_,A-Za-z0-9]+\\.h*")
+source_group(Includes\\Pcf\\System\\Drawing\\Drawing2D REGULAR_EXPRESSION "/Includes/Pcf/System/Drawing/Drawing2D/[-_,A-Za-z0-9]+\\.h*")
 source_group(Includes\\Pcf\\System\\Drawing\\Imaging REGULAR_EXPRESSION "/Includes/Pcf/System/Drawing/Imaging/[-_,A-Za-z0-9]+\\.h*")
 source_group(Includes\\Pcf\\System\\Drawing\\Text REGULAR_EXPRESSION "/Includes/Pcf/System/Drawing/Text/[-_,A-Za-z0-9]+\\.h*")
 source_group(Includes\\Pcf REGULAR_EXPRESSION "/Includes/Pcf/[-_,A-Za-z0-9]+\\.h*")

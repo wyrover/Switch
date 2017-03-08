@@ -59,6 +59,10 @@ namespace Pcf {
       
       class pcf_public pcf_public Graphics : public Object {
       public:
+        /// @cond
+        ~Graphics();
+        /// @endcond
+
         void Clear(const Color& color);
 
         void DrawArc(const Pen& pen, int32 x, int32 y, int32 w, int32 h, float startAngle, float sweepAngle);
@@ -113,7 +117,7 @@ namespace Pcf {
 
         SizeF MeasureString(const string& str, const Font& font) const;
 
-        static Graphics FromHdwInternal(intptr hdw);
+        static Graphics FromHwndInternal(intptr hwnd);
 
         static Graphics FromHdcInternal(intptr hdc) {return Graphics(hdc);}
 
@@ -122,11 +126,13 @@ namespace Pcf {
         void SetRectangle(const Rectangle& rectangle) { this->rectangle = rectangle; }
         Graphics(intptr hdc) : hdc(hdc) {}
         Graphics(intptr hdc, const Rectangle& rectangle) : hdc(hdc), rectangle(rectangle) {}
+        Graphics(intptr hwnd, intptr hdc, const Rectangle& rectangle) : hwnd(hwnd), hdc(hdc), rectangle(rectangle) {}
         Graphics(const Graphics& graphics) : rectangle(graphics.rectangle) {}
         static void SetColor(const System::Drawing::Color& color);
 
         Rectangle rectangle;
-        intptr hdc;
+        intptr hdc = 0;
+        intptr hwnd = 0;
       };
     }
   }

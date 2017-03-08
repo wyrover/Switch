@@ -15,7 +15,7 @@ System::Collections::Generic::Dictionary<intptr, Reference<Control>> Control::ha
 
 namespace {
   struct ShowDebugTrace {
-    static constexpr bool AllWindowMessages = true;
+    static constexpr bool AllWindowMessages = false;
     static constexpr bool MouseWindowMessage = false;
     static constexpr bool WindowMessage = false;
   };
@@ -153,6 +153,7 @@ void Control::WmCreate(Message& message) {
 void Control::WmCtlColorControl(Message& message) {
   System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmCtlColorControl message=" + message + ", name=" + this->data->name);
   this->DefWndProc(message);
+  //message.Result = SolidBrush(this->BackColor).ReleaseNativeBrush();
 }
 
 void Control::WmDestroy(Message& message) {
@@ -321,22 +322,13 @@ void Control::WmNotifyFormat(Message& message) {
   this->DefWndProc(message);
 }
 
-#include <Windows.h>
-
 void Control::WmPaint(Message& message) {
   System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmPaint message=" + message + ", name=" + this->data->name);
-
   if (this->GetStyle(ControlStyles::UserPaint)) {
   } else {
-    //this->DefWndProc(message);
-
-    PAINTSTRUCT ps;
-    HDC hdc = BeginPaint((HWND)this->data->handle, &ps);
-
-    Graphics graphics = Graphics((intptr)hdc, {ps.rcPaint.left, ps.rcPaint.top, ps.rcPaint.right, ps.rcPaint.bottom});
-    graphics.Clear(this->data->backColor.GetValueOrDefault(DefaultBackColor));
-    
-    EndPaint((HWND)this->data->handle, &ps);
+    this->DefWndProc(message);
+    //Graphics graphics = Graphics::FromHwndInternal(this->data->handle);
+    //graphics.Clear(this->BackColor);
   }
 }
 

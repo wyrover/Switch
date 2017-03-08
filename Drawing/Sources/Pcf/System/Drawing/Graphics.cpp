@@ -4,6 +4,12 @@
 using namespace System;
 using namespace System::Drawing;
 
+Graphics::~Graphics() {
+  if (!this->hwnd) {
+    __OS::DrawingApi::Gdi::EndPaint(this->hwnd, this->rectangle);
+  }
+}
+
 void Graphics::Clear(const Color& color) {
   this->FillRectangle(SolidBrush(color), this->rectangle);
 }
@@ -40,6 +46,8 @@ SizeF Graphics::MeasureString(const string& str, const Font& font) const {
   return SizeF();
 }
 
-Graphics Graphics::FromHdwInternal(intptr hwd) {
-  return Graphics(__OS::DrawingApi::Gdi::GetDeviceContext(hwd));
+Graphics Graphics::FromHwndInternal(intptr hwnd) {
+  Rectangle rectangle;
+  intptr hdc = __OS::DrawingApi::Gdi::BeginPaint(hwnd, rectangle);
+  return Graphics(hwnd, hdc, rectangle);
 }

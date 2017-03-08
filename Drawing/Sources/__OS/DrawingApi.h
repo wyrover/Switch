@@ -6,6 +6,7 @@
 #include "../../Includes/Pcf/System/Drawing/Brush.h"
 #include "../../Includes/Pcf/System/Drawing/Color.h"
 #include "../../Includes/Pcf/System/Drawing/FontFamily.h"
+#include "../../Includes/Pcf/System/Drawing/Pen.h"
 #include "../../Includes/Pcf/System/Drawing/Rectangle.h"
 
 namespace __OS {
@@ -15,6 +16,12 @@ namespace __OS {
     public:
       static intptr CreateSolidBrush(const System::Drawing::Color& color);
       static void DeleteBrush(intptr handle);
+    };
+
+    class Pen pcf_static {
+    public:
+      static intptr CreatePen(const System::Drawing::Drawing2D::DashStyle& dashStyle, int32 width, const System::Drawing::Color& color);
+      static void DeletePen(intptr handle);
     };
 
     class FontFamily pcf_static {
@@ -31,6 +38,7 @@ namespace __OS {
       static intptr GetDeviceContext(intptr hwd);
       static intptr BeginPaint(intptr hwd, System::Drawing::Rectangle& rectangle);
       static void EndPaint(intptr hwd, const System::Drawing::Rectangle& rectangle);
+      static void DrawRectangle(intptr hdc, const System::Drawing::Pen& pen, int32 x, int32 y, int32 w, int32 h);
       static void FillRectangle(intptr hdc, const System::Drawing::Brush& brush, int32 x, int32 y, int32 w, int32 h);
     };
   };

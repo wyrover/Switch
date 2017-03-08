@@ -2,6 +2,7 @@
 /// @brief Contains Pcf::System::Drawing::Brush class.
 #pragma once
 
+#include <Pcf/System/IntPtr.h>
 #include <Pcf/System/Object.h>
 
 /// @cond
@@ -14,13 +15,21 @@ namespace __OS {
 namespace Pcf {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
+    /// @cond
+    namespace Windows {
+      namespace Forms {
+        class Control;
+    }
+  }
+    /// @endcond
+
     /// @brief The System::Drawing namespace provides access to GDI+ basic graphics functionality. More advanced functionality is provided in the System::Drawing::Drawing2D, System::Drawing::Imaging, and System::Drawing::Text namespaces.
     namespace Drawing {
-      class pcf_public Brush : public object {
+      class pcf_public Brush : public object, public ICloneable {
       public:
         /// @cond
-        Brush(const Brush& brush) = default;
-        Brush& operator=(const Brush& brush) = default;
+        Brush(const Brush& brush) = delete;
+        Brush& operator=(const Brush& brush) = delete;
         ~Brush();
         /// @endcond
 
@@ -31,12 +40,18 @@ namespace Pcf {
         /// @brief In a derived class, sets a reference to a GDI+ brush object.
         /// @param brush A pointer to the GDI+ brush object.
         void SetNativeBrush(intptr brush);
-
       private:
         friend class __OS::DrawingApi;
-        intptr GetNativeBrush() const { return this->brush(); }
+        friend class Windows::Forms::Control;
+        intptr GetNativeBrush() const { return this->brush; }
 
-        SharedPointer<intptr> brush;
+        intptr ReleaseNativeBrush() {
+          intptr brush = this->brush;
+          this->brush = IntPtr::Zero;
+          return brush;
+        }
+
+        intptr brush = IntPtr::Zero;
       };
     }
   }

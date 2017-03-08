@@ -22,7 +22,7 @@ namespace Pcf {
     struct pcf_public IntPtr final : public object, public IComparable, public IFormattable {
     public:
       /// @brief A read-only field that represents a pointer or handle that has been initialized to zero.
-      static Property<IntPtr, ReadOnly> Zero;
+      static Property<intptr, ReadOnly> Zero;
       
       /// @brief Create a new instance of class IntPtr
       /// @remarks IntPtr is initialized by default to null.
