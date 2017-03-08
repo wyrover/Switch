@@ -1,10 +1,11 @@
 #include "../../../../Includes/Pcf/System/Drawing/Graphics.h"
-#include <Pcf/System/Tuple.h>
+#include "../../../__OS/DrawingApi.h"
 
 using namespace System;
 using namespace System::Drawing;
 
 void Graphics::Clear(const Color& color) {
+  this->FillRectangle(SolidBrush(color), this->rectangle);
 }
 
 void Graphics::DrawArc(const Pen& pen, int32 x, int32 y, int32 w, int32 h, float startAngle, float sweepAngle) {
@@ -29,6 +30,7 @@ void Graphics::FillPie(const Brush& brush, int32 x, int32 y, int32 w, int32 h, f
 }
 
 void Graphics::FillRectangle(const Brush& brush, int32 x, int32 y, int32 w, int32 h) {
+  __OS::DrawingApi::Gdi::FillRectangle(this->hdc, brush, x, y, w, h);
 }
 
 void Graphics::SetColor(const System::Drawing::Color& color) {
@@ -36,4 +38,8 @@ void Graphics::SetColor(const System::Drawing::Color& color) {
 
 SizeF Graphics::MeasureString(const string& str, const Font& font) const {
   return SizeF();
+}
+
+Graphics Graphics::FromHdwInternal(intptr hwd) {
+  return Graphics(__OS::DrawingApi::Gdi::GetDeviceContext(hwd));
 }

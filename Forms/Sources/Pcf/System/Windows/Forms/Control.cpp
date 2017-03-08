@@ -1,4 +1,6 @@
 #include <Pcf/System/BitConverter.h>
+#include <Pcf/System/Drawing/Graphics.h>
+#include <Pcf/System/Drawing/SolidBrush.h>
 #include "../../../../../Includes/Pcf/System/Windows/Forms/Application.h"
 #include "../../../../../Includes/Pcf/System/Windows/Forms/Control.h"
 #include "../../../../../Includes/Pcf/System/Windows/Forms/Form.h"
@@ -148,19 +150,6 @@ void Control::WmCreate(Message& message) {
   OnHandleCreated(EventArgs::Empty);
 }
 
-#include <Windows.h>
-
-inline COLORREF ColorToRgb(const Color& color) {
-  return RGB(color.R, color.G, color.B);
-}
-
-inline void SetBackColor(intptr handle, int64 wParam, const Color& color) {
-  RECT rect;
-  GetClientRect((HWND)handle, &rect);
-  SetBkColor((HDC)wParam, ColorToRgb(color));
-  ExtTextOut((HDC)wParam, 0, 0, ETO_OPAQUE, &rect, 0, 0, 0);
-}
-
 void Control::WmCtlColorControl(Message& message) {
   System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmCtlColorControl message=" + message + ", name=" + this->data->name);
   this->DefWndProc(message);
@@ -185,9 +174,6 @@ void Control::WmDrawItem(Message& message) {
 void Control::WmEraseBkgnd(Message& message) {
   System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmEraseBkgnd message=" + message + ", name=" + this->data->name);
   this->DefWndProc(message);
-
- // SetBackColor(this->data->handle, message.WParam, this->data->backColor.GetValueOrDefault(DefaultBackColor));
-  //SetTextColor(hdcStatic, RGB(255, 255, 255));
 }
 
 void Control::WmExitMenuLoop(Message& message) {
@@ -335,22 +321,22 @@ void Control::WmNotifyFormat(Message& message) {
   this->DefWndProc(message);
 }
 
+#include <Windows.h>
+
 void Control::WmPaint(Message& message) {
   System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmPaint message=" + message + ", name=" + this->data->name);
 
   if (this->GetStyle(ControlStyles::UserPaint)) {
   } else {
     //this->DefWndProc(message);
-    //SetBackColor(this->data->handle, message.WParam, this->data->backColor.GetValueOrDefault(DefaultBackColor));
-    
-    /*
+
     PAINTSTRUCT ps;
     HDC hdc = BeginPaint((HWND)this->data->handle, &ps);
-    HBRUSH brush = CreateSolidBrush(ColorToRgb(this->data->backColor.GetValueOrDefault(DefaultBackColor)));
-    FillRect(hdc, &ps.rcPaint, brush);
-    DeleteObject(brush);
+
+    Graphics graphics = Graphics((intptr)hdc, {ps.rcPaint.left, ps.rcPaint.top, ps.rcPaint.right, ps.rcPaint.bottom});
+    graphics.Clear(this->data->backColor.GetValueOrDefault(DefaultBackColor));
+    
     EndPaint((HWND)this->data->handle, &ps);
-    */
   }
 }
 

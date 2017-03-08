@@ -56,6 +56,7 @@ set(SOURCE_FILES
   Sources/Pcf/System/Drawing/RectangleF.cpp
   Sources/Pcf/System/Drawing/Size.cpp
   Sources/Pcf/System/Drawing/SizeF.cpp
+  Sources/Pcf/System/Drawing/SolidBrush.cpp
   Sources/Pcf/System/Drawing/SystemColor.cpp
   Sources/Pcf/System/Drawing/Tif.h
 )

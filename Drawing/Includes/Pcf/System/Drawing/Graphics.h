@@ -112,21 +112,21 @@ namespace Pcf {
         void FillRectangle(const Brush& brush, const Rectangle& r) {this->FillRectangle(brush, r.Left(), r.Top(), r.Width(), r.Height());}
 
         SizeF MeasureString(const string& str, const Font& font) const;
-        
+
+        static Graphics FromHdwInternal(intptr hdw);
+
+        static Graphics FromHdcInternal(intptr hdc) {return Graphics(hdc);}
+
       private:
         friend class Pcf::System::Windows::Forms::Control;
-        Graphics() {}
-        Graphics(const Graphics& graphics) : offset(graphics.offset), size(graphics.size) {}
+        void SetRectangle(const Rectangle& rectangle) { this->rectangle = rectangle; }
+        Graphics(intptr hdc) : hdc(hdc) {}
+        Graphics(intptr hdc, const Rectangle& rectangle) : hdc(hdc), rectangle(rectangle) {}
+        Graphics(const Graphics& graphics) : rectangle(graphics.rectangle) {}
         static void SetColor(const System::Drawing::Color& color);
-        
-        void Offset(const Point& offset) {
-          this->offset = offset;
-        }
 
-        Point offset;
-        Size size;
-        /// @cond
-        /// @endcond
+        Rectangle rectangle;
+        intptr hdc;
       };
     }
   }

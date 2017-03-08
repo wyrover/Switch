@@ -13,7 +13,7 @@ namespace Pcf {
     namespace Drawing {
       class pcf_public SolidBrush : public Brush {
       public:
-        SolidBrush(const System::Drawing::Color& color) : color(color) {}
+        SolidBrush(const System::Drawing::Color& color);
         SolidBrush(const SolidBrush& solidBrush) : color(solidBrush.color) {}
         
         Property<System::Drawing::Color, ReadOnly> Color {

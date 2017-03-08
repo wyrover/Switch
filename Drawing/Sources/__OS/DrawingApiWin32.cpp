@@ -89,4 +89,25 @@ void DrawingApi::FontFamily::ReleaseResource(intptr handle) {
     delete (LOGFONT*)handle;
 }
 
+intptr DrawingApi::Gdi::GetDeviceContext(intptr handle) {
+  return (intptr)GetDC((HWND)handle);
+}
+
+intptr DrawingApi::Gdi::BeginPaint(intptr handle, System::Drawing::Rectangle& rectangle) {
+  PAINTSTRUCT ps;
+  HDC hdc = ::BeginPaint((HWND)handle, &ps);
+  rectangle = System::Drawing::Rectangle(ps.rcPaint.left, ps.rcPaint.bottom, ps.rcPaint.right, ps.rcPaint.bottom);
+  return (intptr)hdc;
+}
+
+void DrawingApi::Gdi::EndPaint(intptr handle, const System::Drawing::Rectangle& rectangle) {
+  PAINTSTRUCT ps {GetDC((HWND)handle), false, {rectangle.X, rectangle.Y, rectangle.Width, rectangle.Height}, false , false, {0}};
+  ::EndPaint((HWND)handle, &ps);
+}
+
+void DrawingApi::Gdi::FillRectangle(intptr handle, const System::Drawing::Brush& brush, int32 x, int32 y, int32 w, int32 h) {
+  RECT rect { x, y, w, h };
+  FillRect((HDC)handle, &rect, (HBRUSH)brush.GetNativeBrush());
+}
+
 #endif
