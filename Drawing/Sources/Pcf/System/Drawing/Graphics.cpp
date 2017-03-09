@@ -6,12 +6,12 @@ using namespace System::Drawing;
 
 Graphics::~Graphics() {
   if (!this->hwnd) {
-    __OS::DrawingApi::Gdi::EndPaint(this->hwnd, this->rectangle);
+    __OS::DrawingApi::Gdi::EndPaint(this->hwnd, this->clipRectangle);
   }
 }
 
 void Graphics::Clear(const Color& color) {
-  this->FillRectangle(SolidBrush(color), this->rectangle);
+  this->FillRectangle(SolidBrush(color), clipRectangle);
 }
 
 void Graphics::DrawArc(const Pen& pen, int32 x, int32 y, int32 w, int32 h, float startAngle, float sweepAngle) {
@@ -27,6 +27,7 @@ void Graphics::DrawPie(const Pen& pen, int32 x, int32 y, int32 w, int32 h, float
 }
 
 void Graphics::DrawRectangle(const Pen& pen, int32 x, int32 y, int32 w, int32 h) {
+  __OS::DrawingApi::Gdi::DrawRectangle(this->hdc, pen, x, y, w, h);
 }
 
 void Graphics::DrawString(const string& str, const Font& font, const Brush& brush, const RectangleF& layoutRectangle, const StringFormat& format) {

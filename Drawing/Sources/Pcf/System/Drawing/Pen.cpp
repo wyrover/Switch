@@ -4,10 +4,10 @@
 using namespace System;
 using namespace System::Drawing;
 
-void Pen::CreatePen() {
+void Pen::Create() {
   this->pen = __OS::DrawingApi::Pen::CreatePen(this->dashStyle, as<int32>(this->width), as<SolidBrush>(this->brush)().Color);
 }
 
-void Pen::DeletePen() {
+void Pen::Destroy() {
   __OS::DrawingApi::Pen::DeletePen(this->pen);
 }

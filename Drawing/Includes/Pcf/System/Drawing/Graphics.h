@@ -41,7 +41,7 @@ namespace Pcf {
       public:
         StringFormat() {}
         StringFormat(const StringFormat& stringFormat) : alignment(stringFormat.alignment), lineAlignment(stringFormat.lineAlignment) {}
-        
+
         Property<StringAlignment> Alignment {
           pcf_get {return this->alignment;},
           pcf_set {this->alignment = value;}
@@ -62,6 +62,10 @@ namespace Pcf {
         /// @cond
         ~Graphics();
         /// @endcond
+
+        Property<RectangleF, ReadOnly> ClipBounds {
+          pcf_get { return this->clipRectangle; }
+        };
 
         void Clear(const Color& color);
 
@@ -123,14 +127,14 @@ namespace Pcf {
 
       private:
         friend class Pcf::System::Windows::Forms::Control;
-        void SetRectangle(const Rectangle& rectangle) { this->rectangle = rectangle; }
+        void SetRectangle(const Rectangle& clipRectangle) { this->clipRectangle = clipRectangle; }
         Graphics(intptr hdc) : hdc(hdc) {}
-        Graphics(intptr hdc, const Rectangle& rectangle) : hdc(hdc), rectangle(rectangle) {}
-        Graphics(intptr hwnd, intptr hdc, const Rectangle& rectangle) : hwnd(hwnd), hdc(hdc), rectangle(rectangle) {}
-        Graphics(const Graphics& graphics) : rectangle(graphics.rectangle) {}
+        Graphics(intptr hdc, const Rectangle& clipRectangle) : hdc(hdc), clipRectangle(clipRectangle) {}
+        Graphics(intptr hwnd, intptr hdc, const Rectangle& clipRectangle) : hwnd(hwnd), hdc(hdc), clipRectangle(clipRectangle) {}
+        Graphics(const Graphics& graphics) : clipRectangle(graphics.clipRectangle) {}
         static void SetColor(const System::Drawing::Color& color);
 
-        Rectangle rectangle;
+        Rectangle clipRectangle;
         intptr hdc = 0;
         intptr hwnd = 0;
       };

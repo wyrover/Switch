@@ -21,16 +21,16 @@ namespace Pcf {
 
         Pen(const Pen& pen) = delete;
 
-        Pen(const Brush& brush) : brush(as<System::Drawing::Brush>(brush.Clone())) { this->CreatePen(); }
+        Pen(const Brush& brush) : brush(as<System::Drawing::Brush>(brush.Clone())) { this->Create(); }
 
-        Pen(const Brush& brush, float width) : brush(as<System::Drawing::Brush>(brush.Clone())), width(width) { this->CreatePen(); }
+        Pen(const Brush& brush, float width) : brush(as<System::Drawing::Brush>(brush.Clone())), width(width) { this->Create(); }
 
-        Pen(System::Drawing::Color color) : brush(as<System::Drawing::Brush>(UniquePointer<SolidBrush>::Create(color))) { this->CreatePen(); }
+        Pen(System::Drawing::Color color) : brush(as<System::Drawing::Brush>(UniquePointer<SolidBrush>::Create(color))) { this->Create(); }
 
-        Pen(System::Drawing::Color color, float width) : brush(as<System::Drawing::Brush>(UniquePointer<SolidBrush>::Create(color))), width(width) { this->CreatePen(); }
+        Pen(System::Drawing::Color color, float width) : brush(as<System::Drawing::Brush>(UniquePointer<SolidBrush>::Create(color))), width(width) { this->Create(); }
 
         /// @cond
-        ~Pen() {this->DeletePen();}
+        ~Pen() {this->Destroy();}
 
         Property<const System::Drawing::Brush&> Brush{
           pcf_get->const System::Drawing::Brush& { return this->brush(); },
@@ -52,8 +52,8 @@ namespace Pcf {
         };
 
       private:
-        void CreatePen();
-        void DeletePen();
+        void Create();
+        void Destroy();
         UniquePointer<System::Drawing::Brush> brush  = as<System::Drawing::Brush>(UniquePointer<SolidBrush>::Create(System::Drawing::Color::Black()));
         System::Drawing::Drawing2D::DashStyle dashStyle = System::Drawing::Drawing2D::DashStyle::Solid;
         float width = 1;

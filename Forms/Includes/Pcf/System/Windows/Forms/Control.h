@@ -13,6 +13,7 @@
 #include "InvalidateEventHandler.h"
 #include "Message.h"
 #include "MouseEventHandler.h"
+#include "PaintEventHandler.h"
 
 /// @cond
 namespace __OS {
@@ -297,6 +298,7 @@ namespace Pcf {
           MouseEventHandler MouseUp;
           MouseEventHandler MouseWheel;
           EventHandler NameChanged;
+          PaintEventHandler Paint;
           EventHandler ParentChanged;
           EventHandler SizeChanged;
           EventHandler TextChanged;
@@ -356,6 +358,8 @@ namespace Pcf {
           virtual void OnMouseWheel(const MouseEventArgs& e) { this->MouseWheel(*this, e); }
 
           virtual void OnNameChanged(const EventArgs& e) { this->NameChanged(*this, e); }
+
+          virtual void OnPaint(PaintEventArgs& e) { this->Paint(*this, e); }
 
           virtual void OnParentChanged(const EventArgs& e) { this->ParentChanged(*this, e); }
 

@@ -48,7 +48,7 @@ Control::Control() {
   // For message : WM_CTLCOLOR, WM_CTLCOLORBTN, WM_CTLCOLORDLG, WM_CTLCOLORMSGBOX, WM_CTLCOLORSCROLLBAR, WM_CTLCOLOREDIT, WM_CTLCOLORLISTBOX, WM_CTLCOLORSTATIC do create reflect message internal ?
   // For message : WM_HSCROLL, WM_VSCROLL, WM_DELETEITEM, WM_VKEYTOITEM, WM_CHARTOITEM, WM_COMPAREITEM do create reflect message internal ?
   // For message : WM_NOTIFYFORMAT do create reflect message internal ?
-  SetStyle(ControlStyles::AllPaintingInWmPaint |ControlStyles::UserPaint | ControlStyles::StandardClick | ControlStyles::StandardDoubleClick | ControlStyles::UseTextForAccessibility | ControlStyles::Selectable, true);
+  SetStyle(ControlStyles((int32)ControlStyles::AllPaintingInWmPaint | (int32)ControlStyles::UserPaint | (int32)ControlStyles::StandardClick | (int32)ControlStyles::StandardDoubleClick | (int32)ControlStyles::UseTextForAccessibility | (int32)ControlStyles::Selectable), true);
 }
 
 Property<System::Drawing::Color, ReadOnly> Control::DefaultBackColor {
@@ -327,8 +327,11 @@ void Control::WmPaint(Message& message) {
   if (this->GetStyle(ControlStyles::UserPaint)) {
   } else {
     this->DefWndProc(message);
-    //Graphics graphics = Graphics::FromHwndInternal(this->data->handle);
+    Graphics graphics = Graphics::FromHwndInternal(this->data->handle);
     //graphics.Clear(this->BackColor);
+    Rectangle clipRectangle(graphics.ClipBounds().Left, graphics.ClipBounds().Top, graphics.ClipBounds().Right, graphics.ClipBounds().Bottom);
+    PaintEventArgs paintEventArgs(clipRectangle, graphics);
+    this->OnPaint(paintEventArgs);
   }
 }
 
