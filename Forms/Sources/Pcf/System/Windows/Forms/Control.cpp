@@ -153,7 +153,6 @@ void Control::WmCreate(Message& message) {
 void Control::WmCtlColorControl(Message& message) {
   System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmCtlColorControl message=" + message + ", name=" + this->data->name);
   this->DefWndProc(message);
-  //message.Result = SolidBrush(this->BackColor).ReleaseNativeBrush();
 }
 
 void Control::WmDestroy(Message& message) {
@@ -328,7 +327,6 @@ void Control::WmPaint(Message& message) {
   } else {
     this->DefWndProc(message);
     Graphics graphics = Graphics::FromHwndInternal(this->data->handle);
-    //graphics.Clear(this->BackColor);
     Rectangle clipRectangle(graphics.ClipBounds().Left, graphics.ClipBounds().Top, graphics.ClipBounds().Right, graphics.ClipBounds().Bottom);
     PaintEventArgs paintEventArgs(clipRectangle, graphics);
     this->OnPaint(paintEventArgs);

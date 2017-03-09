@@ -35,8 +35,10 @@ namespace PcfFormApp {
       this->button1.Click += pcf_delegate(const object& sender, const EventArgs& e) {
         System::Diagnostics::Debug::WriteLine("Result = {0}", MessageBox::Show("This is my first message", "ManualTest", MessageBoxButtons::OKCancel, MessageBoxIcon::Exclamation));
       };
-      this->button1.Paint += pcf_delegate(const object& sender, PaintEventArgs& e) {
+
+      this->radioButton1.Paint += pcf_delegate(const object& sender, PaintEventArgs& e) {
         e.Graphics().Clear(System::Drawing::Color::LawnGreen);
+        e.Graphics().DrawRectangle(System::Drawing::Pen(System::Drawing::Color::DarkGreen), e.ClipRectangle);
       };
       
       this->checkBox1.Parent = *this;

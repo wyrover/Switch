@@ -25,9 +25,9 @@ namespace Pcf {
 
         Pen(const Brush& brush, float width) : brush(as<System::Drawing::Brush>(brush.Clone())), width(width) { this->Create(); }
 
-        Pen(System::Drawing::Color color) : brush(as<System::Drawing::Brush>(UniquePointer<SolidBrush>::Create(color))) { this->Create(); }
+        Pen(System::Drawing::Color color) : brush(as<System::Drawing::Brush>(SharedPointer<SolidBrush>::Create(color))) { this->Create(); }
 
-        Pen(System::Drawing::Color color, float width) : brush(as<System::Drawing::Brush>(UniquePointer<SolidBrush>::Create(color))), width(width) { this->Create(); }
+        Pen(System::Drawing::Color color, float width) : brush(as<System::Drawing::Brush>(SharedPointer<SolidBrush>::Create(color))), width(width) { this->Create(); }
 
         /// @cond
         ~Pen() {this->Destroy();}
@@ -54,7 +54,7 @@ namespace Pcf {
       private:
         void Create();
         void Destroy();
-        UniquePointer<System::Drawing::Brush> brush  = as<System::Drawing::Brush>(UniquePointer<SolidBrush>::Create(System::Drawing::Color::Black()));
+        SharedPointer<System::Drawing::Brush> brush  = as<System::Drawing::Brush>(SharedPointer<SolidBrush>::Create(System::Drawing::Color::Black()));
         System::Drawing::Drawing2D::DashStyle dashStyle = System::Drawing::Drawing2D::DashStyle::Solid;
         float width = 1;
         intptr pen = IntPtr::Zero;

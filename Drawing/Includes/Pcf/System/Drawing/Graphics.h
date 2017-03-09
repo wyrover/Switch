@@ -123,12 +123,11 @@ namespace Pcf {
 
         static Graphics FromHwndInternal(intptr hwnd);
 
-        static Graphics FromHdcInternal(intptr hdc) {return Graphics(hdc);}
+        static Graphics FromHdcInternal(intptr hdc);
 
       private:
         friend class Pcf::System::Windows::Forms::Control;
         void SetRectangle(const Rectangle& clipRectangle) { this->clipRectangle = clipRectangle; }
-        Graphics(intptr hdc) : hdc(hdc) {}
         Graphics(intptr hdc, const Rectangle& clipRectangle) : hdc(hdc), clipRectangle(clipRectangle) {}
         Graphics(intptr hwnd, intptr hdc, const Rectangle& clipRectangle) : hwnd(hwnd), hdc(hdc), clipRectangle(clipRectangle) {}
         Graphics(const Graphics& graphics) : clipRectangle(graphics.clipRectangle) {}

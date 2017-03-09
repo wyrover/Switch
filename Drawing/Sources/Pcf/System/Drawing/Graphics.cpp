@@ -5,9 +5,8 @@ using namespace System;
 using namespace System::Drawing;
 
 Graphics::~Graphics() {
-  if (!this->hwnd) {
-    __OS::DrawingApi::Gdi::EndPaint(this->hwnd, this->clipRectangle);
-  }
+  if (this->hwnd != IntPtr::Zero)
+  __OS::DrawingApi::Gdi::ReleaseDeviceContext(this->hwnd, this->hdc);
 }
 
 void Graphics::Clear(const Color& color) {
@@ -33,7 +32,8 @@ void Graphics::DrawRectangle(const Pen& pen, int32 x, int32 y, int32 w, int32 h)
 void Graphics::DrawString(const string& str, const Font& font, const Brush& brush, const RectangleF& layoutRectangle, const StringFormat& format) {
 }
 
-void Graphics::FillPie(const Brush& brush, int32 x, int32 y, int32 w, int32 h, float startAngle, float sweepAngle) {
+void Graphics::FillPie(const System::Drawing::Brush& brush, int32 x, int32 y, int32 w, int32 h, float startAngle, float sweepAngle) {
+  __OS::DrawingApi::Gdi::FillPie(this->hdc, brush, x, y, w, h, startAngle, sweepAngle);
 }
 
 void Graphics::FillRectangle(const Brush& brush, int32 x, int32 y, int32 w, int32 h) {
@@ -48,7 +48,10 @@ SizeF Graphics::MeasureString(const string& str, const Font& font) const {
 }
 
 Graphics Graphics::FromHwndInternal(intptr hwnd) {
-  Rectangle rectangle;
-  intptr hdc = __OS::DrawingApi::Gdi::BeginPaint(hwnd, rectangle);
-  return Graphics(hwnd, hdc, rectangle);
+  return Graphics(hwnd, __OS::DrawingApi::Gdi::GetDeviceContext(hwnd), __OS::DrawingApi::Gdi::GetClipRectangleFromHwnd(hwnd));
 }
+
+Graphics Graphics::FromHdcInternal(intptr hdc) {
+  return Graphics(hdc, __OS::DrawingApi::Gdi::GetClipRectangleFromHdc(hdc));
+}
+

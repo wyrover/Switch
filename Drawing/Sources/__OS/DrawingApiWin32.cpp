@@ -97,25 +97,34 @@ void DrawingApi::FontFamily::ReleaseResource(intptr handle) {
     delete (LOGFONT*)handle;
 }
 
-intptr DrawingApi::Gdi::GetDeviceContext(intptr handle) {
-  return (intptr)GetDC((HWND)handle);
+intptr DrawingApi::Gdi::GetDeviceContext(intptr hwnd) {
+  return (intptr)GetDC((HWND)hwnd);
 }
 
-intptr DrawingApi::Gdi::BeginPaint(intptr handle, System::Drawing::Rectangle& rectangle) {
-  PAINTSTRUCT ps;
-  HDC hdc = ::BeginPaint((HWND)handle, &ps);
-  rectangle = System::Drawing::Rectangle(ps.rcPaint.left, ps.rcPaint.top, ps.rcPaint.right, ps.rcPaint.bottom);
-  return (intptr)hdc;
+void DrawingApi::Gdi::ReleaseDeviceContext(intptr hwnd, intptr hdc) {
+  ReleaseDC((HWND)hwnd, (HDC)hdc);
 }
 
-void DrawingApi::Gdi::EndPaint(intptr handle, const System::Drawing::Rectangle& rectangle) {
-  PAINTSTRUCT ps {GetDC((HWND)handle), false, {rectangle.X, rectangle.Y, rectangle.Width, rectangle.Height}, false , false, {0}};
-  ::EndPaint((HWND)handle, &ps);
+System::Drawing::Rectangle DrawingApi::Gdi::GetClipRectangleFromHdc(intptr hdc) {
+  RECT clipRectangle;
+  GetClientRect((HWND)WindowFromDC((HDC)hdc), &clipRectangle);
+  return{ clipRectangle.left, clipRectangle.top, clipRectangle.right, clipRectangle.bottom };
+}
+
+System::Drawing::Rectangle DrawingApi::Gdi::GetClipRectangleFromHwnd(intptr hwnd) {
+  RECT clipRectangle;
+  GetClientRect((HWND)hwnd, &clipRectangle);
+  return{ clipRectangle.left, clipRectangle.top, clipRectangle.right, clipRectangle.bottom };
 }
 
 void DrawingApi::Gdi::DrawRectangle(intptr handle, const System::Drawing::Pen& pen, int32 x, int32 y, int32 w, int32 h) {
-  RECT rect{ x, y, w, h };
+  RECT rect { x, y, w, h };
   ::FrameRect((HDC)handle, &rect, (HBRUSH)pen.Brush().GetNativeBrush());
+}
+
+void DrawingApi::Gdi::FillPie(intptr handle, const System::Drawing::Brush& brush, int32 x, int32 y, int32 w, int32 h, float startAngle, float sweepAngle) {
+  RECT rect{ x, y, w, h };
+  Pie((HDC)handle, x,y, w, h, startAngle,sweepAngle, startAngle,sweepAngle);
 }
 
 void DrawingApi::Gdi::FillRectangle(intptr handle, const System::Drawing::Brush& brush, int32 x, int32 y, int32 w, int32 h) {
