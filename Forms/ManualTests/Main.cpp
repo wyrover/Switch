@@ -36,8 +36,8 @@ namespace PcfFormApp {
         System::Diagnostics::Debug::WriteLine("Result = {0}", MessageBox::Show("This is my first message", "ManualTest", MessageBoxButtons::OKCancel, MessageBoxIcon::Information));
       };
 
-      this->Paint += pcf_delegate(const object& sender, PaintEventArgs& e) {
-        //e.Graphics().Clear(System::Drawing::Color::LawnGreen);
+      this->button1.Paint += pcf_delegate(const object& sender, PaintEventArgs& e) {
+        e.Graphics().Clear(System::Drawing::Color::LawnGreen);
         e.Graphics().DrawRectangle(System::Drawing::Pen(System::Drawing::Color::DarkGreen), e.ClipRectangle);
       };
       
@@ -61,6 +61,7 @@ namespace PcfFormApp {
       this->label1.Parent = *this;
       this->label1.Name = "label1";
       this->label1.BackColor = System::Drawing::Color::Azure;
+      this->label1.ForeColor = System::Drawing::Color::OrangeRed;
       this->label1.Text = "Text label";
       this->label1.Location = System::Drawing::Point(10, 130);
       this->label1.Size = System::Drawing::Size(200, 23);

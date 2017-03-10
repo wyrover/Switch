@@ -13,8 +13,6 @@ namespace Pcf {
         class pcf_public InvalidateEventArgs : public EventArgs {
         public:
           /// @brief Initializes a new instance of the InvalidateEventArgs class.
-          InvalidateEventArgs() {}
-          /// @brief Initializes a new instance of the InvalidateEventArgs class.
           /// @param invalidRect The Rectangle that contains the invalidated window area.
           InvalidateEventArgs(const Pcf::System::Drawing::Rectangle& invalidRect) : invalidRect(invalidRect) {}
 

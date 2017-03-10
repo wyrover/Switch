@@ -9,7 +9,6 @@
 using namespace System;
 using namespace System::Drawing;
 using namespace System::Windows::Forms;
-using namespace __OS;
 
 System::Collections::Generic::Dictionary<intptr, Reference<Control>> Control::handles;
 
@@ -55,56 +54,76 @@ Property<System::Drawing::Color, ReadOnly> Control::DefaultBackColor {
   [] { return System::Drawing::SystemColors::Control(); }
 };
 
+Property<System::Drawing::Color, ReadOnly> Control::DefaultForeColor {
+  [] { return System::Drawing::SystemColors::ControlText(); }
+};
+
 void Control::CreateHandle() {
   if (!this->data->handle)
-    this->data->handle = FormsApi::Control::Create(*this);
+    this->data->handle = __OS::FormsApi::Control::Create(*this);
   handles[this->data->handle] = *this;
 }
 
 void Control::DestroyHandle() {
   handles.Remove(this->data->handle);
-  FormsApi::Control::Destroy(*this);
+  __OS::FormsApi::Control::Destroy(*this);
   this->data->handle = 0;
 }
 
 void Control::DefWndProc(Message& message) {
-  FormsApi::Control::DefWndProc(message);
+  __OS::FormsApi::Control::DefWndProc(message);
 }
 
-void Control::Invalidate() {
-  InvalidateEventArgs e;
-  FormsApi::Control::Invalidate(*this, e);
-  this->OnInvalidated(e);
+void Control::Invalidate(bool invalidateChildren) {
+  __OS::FormsApi::Control::Invalidate(*this, invalidateChildren);
+  this->OnInvalidated(InvalidateEventArgs(this->GetClientRectangle()));
+}
+
+void Control::Invalidate(const System::Drawing::Rectangle& rect, bool invalidateChildren) {
+  __OS::FormsApi::Control::Invalidate(*this, rect, invalidateChildren);
+  this->OnInvalidated(InvalidateEventArgs(rect));
+}
+
+void Control::OnBackColorChanged(const EventArgs& e) {
+  __OS::FormsApi::Control::SetBackColor(*this, this->BackColor);
+  this->Invalidate();
+  this->BackColorChanged(*this, e);
+}
+
+void Control::OnForeColorChanged(const EventArgs& e) {
+  __OS::FormsApi::Control::SetBackColor(*this, this->ForeColor);
+  this->Invalidate();
+  this->ForeColorChanged(*this, e);
 }
 
 void Control::OnLocationChanged(const EventArgs& e) {
-  FormsApi::Control::SetLocation(*this);
+  __OS::FormsApi::Control::SetLocation(*this);
   this->LocationChanged(*this, e); 
 }
 
 void Control::OnSizeChanged(const EventArgs& e) {
-  FormsApi::Control::SetSize(*this);
+  __OS::FormsApi::Control::SetSize(*this);
   this->SizeChanged(*this, e); 
 }
 
 void Control::OnTextChanged(const EventArgs& e) {
-  FormsApi::Control::SetText(*this);
+  __OS::FormsApi::Control::SetText(*this);
   this->TextChanged(*this, e); 
 }
 
 void Control::OnVisibleChanged(const EventArgs& e) {
   if (this->data->visible == true)
     CreateControl();
-  FormsApi::Control::SetVisible(*this);
+  __OS::FormsApi::Control::SetVisible(*this);
   this->VisibleChanged(*this, e);
 }
 
 System::Drawing::Point Control::PointToClient(System::Drawing::Point point) const {
-  return FormsApi::Control::PointToClient(*this, point);
+  return __OS::FormsApi::Control::PointToClient(*this, point);
 }
 
 System::Drawing::Point Control::PointToScreen(System::Drawing::Point point) const {
-  return FormsApi::Control::PointToScreen(*this, point);
+  return __OS::FormsApi::Control::PointToScreen(*this, point);
 }
 
 bool Control::PreProcessMessage(const Message& msg) {
@@ -150,9 +169,22 @@ void Control::WmCreate(Message& message) {
   OnHandleCreated(EventArgs::Empty);
 }
 
+#include <windows.h>
+
 void Control::WmCtlColorControl(Message& message) {
   System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmCtlColorControl message=" + message + ", name=" + this->data->name);
-  this->DefWndProc(message);
+  //this->DefWndProc(message);
+  //__OS::FormsApi::Control::SetBackColor(*this, this->BackColor);
+  //__OS::FormsApi::Control::SetForeColor(*this, this->ForeColor);
+
+  if (this->data->name != "label1") {
+    this->DefWndProc(message);
+    return;
+  }
+  
+  SetBkColor((HDC)message.WParam(), RGB(this->BackColor().R(), this->BackColor().G(), this->BackColor().B()));
+  SetTextColor((HDC)message.WParam(), RGB(this->ForeColor().R(), this->ForeColor().G(), this->ForeColor().B()));
+  message.Result = (intptr)GetSysColorBrush(COLOR_BTNFACE);
 }
 
 void Control::WmDestroy(Message& message) {
@@ -327,7 +359,7 @@ void Control::WmPaint(Message& message) {
   } else {
     this->DefWndProc(message);
     Graphics graphics = Graphics::FromHwndInternal(this->data->handle);
-    Rectangle clipRectangle(graphics.ClipBounds().Left, graphics.ClipBounds().Top, graphics.ClipBounds().Right, graphics.ClipBounds().Bottom);
+    System::Drawing::Rectangle clipRectangle(graphics.ClipBounds().Left, graphics.ClipBounds().Top, graphics.ClipBounds().Right, graphics.ClipBounds().Bottom);
     PaintEventArgs paintEventArgs(clipRectangle, graphics);
     this->OnPaint(paintEventArgs);
   }
@@ -381,4 +413,8 @@ void Control::WmWindowPosChanged(Message& message) {
 void Control::WmWindowPosChanging(Message& message) {
   System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmWindowPosChanging message=" + message + ", name=" + this->data->name);
   this->DefWndProc(message);
+}
+
+System::Drawing::Rectangle Control::GetClientRectangle() const {
+  return System::Drawing::Rectangle();
 }

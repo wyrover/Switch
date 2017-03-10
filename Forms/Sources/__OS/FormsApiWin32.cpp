@@ -30,7 +30,6 @@ namespace {
   HINSTANCE __prevInstance;
   LPSTR __commandLine;
   int __cmdShow;
-  static bool messageLoopRunning = false;
   System::Collections::Generic::Dictionary<intptr, WNDPROC> defWindowProcs;
 
   intptr CreateControl(const Control& control, const string& name, int32 windowStyle, HWND parent) {
@@ -82,11 +81,15 @@ namespace {
   LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
     Message message = Message::Create((intptr)hwnd, msg, wParam, lParam, 0);
     Reference<Control> control = Control::FromHandle(message.HWnd);
-    if (messageLoopRunning && control != null)
+    if (control != null)
       control().WndProc(message);
     else
       FormsApi::Control::DefWndProc(message);
     return message.Result;
+  }
+
+  inline COLORREF ColorToRgb(const Color& color) {
+    return RGB(color.R, color.G, color.B);
   }
 }
 
@@ -108,7 +111,7 @@ void FormsApi::Application::MessageLoop(EventHandler idle) {
   // MessagelLoop without idle...
   /*
   MSG msg;
-  messageLoopRunning = true;
+  bool messageLoopRunning = true;
   while (GetMessage(&msg, NULL, 0, 0) != 0) {
     TranslateMessage(&msg);
     DispatchMessage(&msg);
@@ -116,7 +119,7 @@ void FormsApi::Application::MessageLoop(EventHandler idle) {
   messageLoopRunning = false;
   */
 
-  messageLoopRunning = true;
+  bool messageLoopRunning = true;
   while (messageLoopRunning) {
     MSG msg;
     int32 result = idle.IsEmpty() ? GetMessage(&msg, NULL, 0, 0) : PeekMessage(&msg, NULL, 0, 0, PM_REMOVE);
@@ -180,7 +183,7 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::RadioButton& radi
 //}
 
 void FormsApi::Control::DefWndProc(Message& message) {
-  if (messageLoopRunning && defWindowProcs.ContainsKey(message.HWnd()))
+  if (defWindowProcs.ContainsKey(message.HWnd()))
     message.Result = defWindowProcs[message.HWnd()]((HWND)message.HWnd(), message.Msg, message.WParam, message.LParam);
   else
     message.Result = DefWindowProc((HWND)message.HWnd(), message.Msg, message.WParam, message.LParam);
@@ -189,15 +192,28 @@ void FormsApi::Control::DefWndProc(Message& message) {
 void FormsApi::Control::Destroy(const System::Windows::Forms::Control& control) {
   if (control.data->handle) {
     intptr handle = control.data->handle;
+    defWindowProcs.Remove(handle);
     DestroyWindow((HWND)handle);
-    if (messageLoopRunning)
-      defWindowProcs.Remove(handle);
   }
 }
 
-void FormsApi::Control::Invalidate(const System::Windows::Forms::Control& control, const InvalidateEventArgs& e) {
-  if (control.data->handle)
-    UpdateWindow((HWND)control.data->handle);
+void FormsApi::Control::Invalidate(const System::Windows::Forms::Control& control, bool invalidateChildren) {
+  if (!control.data->handle)
+    return;
+  if (invalidateChildren)
+    RedrawWindow((HWND)control.data->handle, null, null, RDW_INVALIDATE | RDW_ERASE | RDW_ALLCHILDREN);
+  else
+    InvalidateRect((HWND)control.data->handle, null, true);
+}
+
+void FormsApi::Control::Invalidate(const System::Windows::Forms::Control& control, const System::Drawing::Rectangle& rect, bool invalidateChildren) {
+  if (!control.data->handle)
+    return;
+  RECT invalidateRect {rect.Left, rect.Top, rect.Right, rect.Bottom};
+  if (invalidateChildren)
+    RedrawWindow((HWND)control.data->handle, &invalidateRect, null, RDW_INVALIDATE | RDW_ERASE | RDW_ALLCHILDREN);
+  else
+    InvalidateRect((HWND)control.data->handle, &invalidateRect, true);
 }
 
 System::Drawing::Point FormsApi::Control::PointToClient(const System::Windows::Forms::Control& control, const System::Drawing::Point& point) {
@@ -210,6 +226,18 @@ System::Drawing::Point FormsApi::Control::PointToScreen(const System::Windows::F
   POINT location{point.X, point.Y};
   ClientToScreen((HWND)control.data->handle, &location);
   return System::Drawing::Point(location.x, location.y);
+}
+
+void FormsApi::Control::SetBackColor(const System::Windows::Forms::Control& control, const System::Drawing::Color color) {
+  HDC hdc = GetDC((HWND)control.data->handle);
+  SetBkColor(hdc,ColorToRgb(color));
+  ReleaseDC((HWND)control.data->handle, hdc);
+}
+
+void FormsApi::Control::SetForeColor(const System::Windows::Forms::Control& control, const System::Drawing::Color color) {
+  HDC hdc = GetDC((HWND)control.data->handle);
+  SetTextColor(hdc, ColorToRgb(color));
+  ReleaseDC((HWND)control.data->handle, hdc);
 }
 
 void FormsApi::Control::SetLocation(const System::Windows::Forms::Control& control) {
