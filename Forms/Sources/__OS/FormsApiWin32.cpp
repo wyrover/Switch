@@ -140,7 +140,7 @@ void FormsApi::Application::RegisterClasses() {
 }
 
 DialogResult FormsApi::Application::ShowMessageBox(const string& message, const string& caption, MessageBoxButtons buttons, MessageBoxIcon icon, MessageBoxDefaultButton defaultButton, MessageBoxOptions options, bool displayHelpButton) {
-  return (DialogResult)MessageBox(null, message.w_str().c_str(), caption.w_str().c_str(), (uint32)buttons + (uint32)icon + (uint32)defaultButton + (uint32)options + (displayHelpButton ? 0x00004000L : 0));
+  return (DialogResult)MessageBox(GetActiveWindow(), message.w_str().c_str(), caption.w_str().c_str(), (uint32)buttons + (uint32)icon + (uint32)defaultButton + (uint32)options + (displayHelpButton ? 0x00004000L : 0));
 }
 
 void FormsApi::Application::UnregisterClasses() {
@@ -164,7 +164,7 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::Control& control)
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Form& form) {
-  return CreateControl(form, L"Form", WS_VISIBLE | WS_OVERLAPPEDWINDOW, (HWND)NULL);
+  return CreateControl(form, L"Form", WS_VISIBLE | WS_OVERLAPPEDWINDOW | WS_GROUP, (HWND)NULL);
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Label& label) {

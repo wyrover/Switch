@@ -24,8 +24,10 @@ void Form::CreateHandle() {
 void Form::WndProc(Message& message) {
   if (this->data->messageActions.ContainsKey(message.Msg))
     this->data->messageActions[message.Msg](message);
-  else
+  else {
+    System::Diagnostics::Debug::WriteLine("Form::WndProc message=" + message + ", name=" + this->data->name);
     this->Control::WndProc(message);
+  }
 }
 
 void Form::WmClose(Message& message) {

@@ -33,11 +33,11 @@ namespace PcfFormApp {
       this->button1.Text = "Button";
       this->button1.Location = System::Drawing::Point(10, 10);
       this->button1.Click += pcf_delegate(const object& sender, const EventArgs& e) {
-        System::Diagnostics::Debug::WriteLine("Result = {0}", MessageBox::Show("This is my first message", "ManualTest", MessageBoxButtons::OKCancel, MessageBoxIcon::Exclamation));
+        System::Diagnostics::Debug::WriteLine("Result = {0}", MessageBox::Show("This is my first message", "ManualTest", MessageBoxButtons::OKCancel, MessageBoxIcon::Information));
       };
 
-      this->radioButton1.Paint += pcf_delegate(const object& sender, PaintEventArgs& e) {
-        e.Graphics().Clear(System::Drawing::Color::LawnGreen);
+      this->Paint += pcf_delegate(const object& sender, PaintEventArgs& e) {
+        //e.Graphics().Clear(System::Drawing::Color::LawnGreen);
         e.Graphics().DrawRectangle(System::Drawing::Pen(System::Drawing::Color::DarkGreen), e.ClipRectangle);
       };
       
