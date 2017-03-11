@@ -6,7 +6,8 @@ using namespace System::Drawing;
 
 Graphics::~Graphics() {
   if (this->hwnd != IntPtr::Zero)
-  __OS::DrawingApi::Gdi::ReleaseDeviceContext(this->hwnd, this->hdc);
+    //__OS::DrawingApi::Gdi::EndPaint(this->hwnd, this->hdc);
+    __OS::DrawingApi::Gdi::ReleaseDeviceContext(this->hwnd, this->hdc);
 }
 
 void Graphics::Clear(const Color& color) {
@@ -48,6 +49,9 @@ SizeF Graphics::MeasureString(const string& str, const Font& font) const {
 }
 
 Graphics Graphics::FromHwndInternal(intptr hwnd) {
+  //Rectangle clipRectangle;
+  //intptr hdc = __OS::DrawingApi::Gdi::BeginPaint(hwnd, clipRectangle);
+  //return Graphics(hwnd, hdc, clipRectangle);
   return Graphics(hwnd, __OS::DrawingApi::Gdi::GetDeviceContext(hwnd), __OS::DrawingApi::Gdi::GetClipRectangleFromHwnd(hwnd));
 }
 

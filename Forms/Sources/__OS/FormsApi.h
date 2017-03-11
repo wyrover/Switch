@@ -47,6 +47,7 @@ namespace __OS {
       static intptr Create(const System::Windows::Forms::RadioButton& radioButton);
       static void DefWndProc(System::Windows::Forms::Message& message);
       static void Destroy(const System::Windows::Forms::Control& control);
+      static intptr GetHandleWindowFromDeviceContext(intptr hdc);
       static void Invalidate(const System::Windows::Forms::Control& control, bool invalidateChildren);
       static void Invalidate(const System::Windows::Forms::Control& control, const System::Drawing::Rectangle& rect, bool invalidateChildren);
 
@@ -59,8 +60,10 @@ namespace __OS {
       
       static System::Drawing::Point PointToClient(const System::Windows::Forms::Control& control, const System::Drawing::Point& point);
       static System::Drawing::Point PointToScreen(const System::Windows::Forms::Control& control, const System::Drawing::Point& point);
-      static void SetBackColor(const System::Windows::Forms::Control& control, const System::Drawing::Color color);
-      static void SetForeColor(const System::Windows::Forms::Control& control, const System::Drawing::Color color);
+      static void SetBackColor(intptr hdc, const System::Drawing::Color& color);
+      static void SetForeColor(intptr hdc, const System::Drawing::Color& color);
+      static void SetBackColor(const System::Windows::Forms::Control& control);
+      static void SetForeColor(const System::Windows::Forms::Control& control);
       static void SetLocation(const System::Windows::Forms::Control& control);
       static void SetSize(const System::Windows::Forms::Control& control);
       static void SetText(const System::Windows::Forms::Control& control);

@@ -63,14 +63,15 @@ namespace Pcf {
           String ToString() const noexcept override;
 
         private:
-          Message(intptr hwnd, int32 msg, intptr wParam, intptr lParam, intptr result) : hwnd(hwnd), msg(msg), wParam(wParam), lParam(lParam), result(result) {}
-          Message(intptr hwnd, int32 msg, intptr wParam, intptr lParam, intptr result, intptr handle) : hwnd(hwnd), msg(msg), wParam(wParam), lParam(lParam), result(result), handle(handle) {}
+          Message(intptr hwnd, int32 msg, intptr wParam, intptr lParam, intptr result) : hwnd(hwnd), msg(msg), wParam(wParam), lParam(lParam), result(result) { counter++; }
+          Message(intptr hwnd, int32 msg, intptr wParam, intptr lParam, intptr result, intptr handle) : hwnd(hwnd), msg(msg), wParam(wParam), lParam(lParam), result(result), handle(handle) { counter++; }
           intptr hwnd = 0;
           int32 msg = 0;
           intptr wParam = 0;
           intptr lParam = 0;
           intptr result = 0;
           intptr handle = 0;
+          static int32 counter;
         };
       }
     }

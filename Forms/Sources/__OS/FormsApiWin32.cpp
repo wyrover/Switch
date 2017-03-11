@@ -83,8 +83,6 @@ namespace {
     Reference<Control> control = Control::FromHandle(message.HWnd);
     if (control != null)
       control().WndProc(message);
-    else
-      FormsApi::Control::DefWndProc(message);
     return message.Result;
   }
 
@@ -197,6 +195,10 @@ void FormsApi::Control::Destroy(const System::Windows::Forms::Control& control) 
   }
 }
 
+intptr FormsApi::Control::GetHandleWindowFromDeviceContext(intptr hdc) {
+  return (intptr)WindowFromDC((HDC)hdc);
+}
+
 void FormsApi::Control::Invalidate(const System::Windows::Forms::Control& control, bool invalidateChildren) {
   if (!control.data->handle)
     return;
@@ -228,15 +230,23 @@ System::Drawing::Point FormsApi::Control::PointToScreen(const System::Windows::F
   return System::Drawing::Point(location.x, location.y);
 }
 
-void FormsApi::Control::SetBackColor(const System::Windows::Forms::Control& control, const System::Drawing::Color color) {
+void FormsApi::Control::SetBackColor(intptr hdc, const System::Drawing::Color& color) {
+  SetBkColor((HDC)hdc, ColorToRgb(color));
+}
+
+void FormsApi::Control::SetForeColor(intptr hdc, const System::Drawing::Color& color) {
+  SetTextColor((HDC)hdc, ColorToRgb(color));
+}
+
+void FormsApi::Control::SetBackColor(const System::Windows::Forms::Control& control) {
   HDC hdc = GetDC((HWND)control.data->handle);
-  SetBkColor(hdc,ColorToRgb(color));
+  SetBackColor((intptr)hdc, control.BackColor);
   ReleaseDC((HWND)control.data->handle, hdc);
 }
 
-void FormsApi::Control::SetForeColor(const System::Windows::Forms::Control& control, const System::Drawing::Color color) {
+void FormsApi::Control::SetForeColor(const System::Windows::Forms::Control& control) {
   HDC hdc = GetDC((HWND)control.data->handle);
-  SetTextColor(hdc, ColorToRgb(color));
+  SetForeColor((intptr)hdc, control.ForeColor);
   ReleaseDC((HWND)control.data->handle, hdc);
 }
 

@@ -31,13 +31,25 @@ namespace {
     return 1;
   }
 
-  inline COLORREF ColorToRgb(const Color& color) {
+  inline COLORREF FromColor(const Color& color) {
     return RGB(color.R, color.G, color.B);
+  }
+
+  inline Color ToColor(COLORREF color) {
+    return Color::FromArgb(255, GetRValue(color), GetGValue(color), GetBValue(color));
+  }
+
+  inline RECT FromRectangle(const System::Drawing::Rectangle& rectangle) {
+    return { rectangle.Left, rectangle.Top, rectangle.Right, rectangle.Bottom};
+  }
+
+  inline System::Drawing::Rectangle ToRectangle(const RECT& rectangle) {
+    return { rectangle.left, rectangle.top, rectangle.right - rectangle.left, rectangle.bottom - rectangle.top };
   }
 }
 
 intptr DrawingApi::Brush::CreateSolidBrush(const Color& color) {
-  return (intptr)::CreateSolidBrush(ColorToRgb(color));
+  return (intptr)::CreateSolidBrush(FromColor(color));
 }
 
 void DrawingApi::Brush::DeleteBrush(intptr handle) {
@@ -45,7 +57,7 @@ void DrawingApi::Brush::DeleteBrush(intptr handle) {
 }
 
 intptr DrawingApi::Pen::CreatePen(const System::Drawing::Drawing2D::DashStyle& dashStyle, int32 width, const Color& color) {
-  return (intptr)::CreatePen((int32)dashStyle, width, ColorToRgb(color));
+  return (intptr)::CreatePen((int32)dashStyle, width, FromColor(color));
 }
 
 void DrawingApi::Pen::DeletePen(intptr handle) {
@@ -101,6 +113,21 @@ intptr DrawingApi::Gdi::GetDeviceContext(intptr hwnd) {
   return (intptr)GetDC((HWND)hwnd);
 }
 
+/*
+intptr DrawingApi::Gdi::BeginPaint(intptr hwnd, System::Drawing::Rectangle& clipRectangle) {
+  PAINTSTRUCT paintStruct;
+  intptr hdc = (intptr)::BeginPaint((HWND)hwnd, &paintStruct);
+  clipRectangle = ToRectangle(paintStruct.rcPaint);
+  return hdc;
+}
+
+void DrawingApi::Gdi::EndPaint(intptr hwnd, intptr hdc) {
+  PAINTSTRUCT paintStruct;
+  paintStruct.hdc = (HDC)hdc;
+  GetClientRect((HWND)hwnd, &paintStruct.rcPaint);
+  ::EndPaint((HWND)hwnd, &paintStruct);
+}*/
+
 void DrawingApi::Gdi::ReleaseDeviceContext(intptr hwnd, intptr hdc) {
   ReleaseDC((HWND)hwnd, (HDC)hdc);
 }
@@ -108,27 +135,32 @@ void DrawingApi::Gdi::ReleaseDeviceContext(intptr hwnd, intptr hdc) {
 System::Drawing::Rectangle DrawingApi::Gdi::GetClipRectangleFromHdc(intptr hdc) {
   RECT clipRectangle;
   GetClientRect((HWND)WindowFromDC((HDC)hdc), &clipRectangle);
-  return{ clipRectangle.left, clipRectangle.top, clipRectangle.right, clipRectangle.bottom };
+  return ToRectangle(clipRectangle);
 }
 
 System::Drawing::Rectangle DrawingApi::Gdi::GetClipRectangleFromHwnd(intptr hwnd) {
   RECT clipRectangle;
   GetClientRect((HWND)hwnd, &clipRectangle);
-  return{ clipRectangle.left, clipRectangle.top, clipRectangle.right, clipRectangle.bottom };
+  return ToRectangle(clipRectangle);
 }
 
 void DrawingApi::Gdi::DrawRectangle(intptr handle, const System::Drawing::Pen& pen, int32 x, int32 y, int32 w, int32 h) {
-  RECT rect { x, y, w, h };
-  ::FrameRect((HDC)handle, &rect, (HBRUSH)pen.Brush().GetNativeBrush());
+  RECT rect { x, y, x+w, y+h };
+  HGDIOBJ oldBrush = SelectObject((HDC)handle, GetStockObject(NULL_BRUSH));
+  HGDIOBJ oldPen = SelectObject((HDC)handle, (HGDIOBJ)pen.GetNativePen());
+  ::Rectangle((HDC)handle, x, y, x + w, y + h);
+  SelectObject((HDC)handle, oldBrush);
+  SelectObject((HDC)handle, oldPen);
 }
 
+
 void DrawingApi::Gdi::FillPie(intptr handle, const System::Drawing::Brush& brush, int32 x, int32 y, int32 w, int32 h, float startAngle, float sweepAngle) {
-  RECT rect{ x, y, w, h };
+  RECT rect { x, y, x+w, y+h };
   Pie((HDC)handle, x,y, w, h, startAngle,sweepAngle, startAngle,sweepAngle);
 }
 
 void DrawingApi::Gdi::FillRectangle(intptr handle, const System::Drawing::Brush& brush, int32 x, int32 y, int32 w, int32 h) {
-  RECT rect{ x, y, w, h };
+  RECT rect { x, y, x+w, y+h };
   FillRect((HDC)handle, &rect, (HBRUSH)brush.GetNativeBrush());
 }
 

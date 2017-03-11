@@ -5,6 +5,7 @@
 #include <Pcf/System/Collections/Generic/Dictionary.h>
 #include <Pcf/System/Collections/Generic/List.h>
 #include <Pcf/System/Drawing/Color.h>
+#include <Pcf/System/Drawing/SolidBrush.h>
 #include <Pcf/System/Drawing/SystemColors.h>
 #include <Pcf/System/Drawing/Font.h>
 #include <Pcf/System/Nullable.h>
@@ -153,13 +154,13 @@ namespace Pcf {
           static Property<System::Drawing::Color, ReadOnly> DefaultForeColor;
 
           Property<System::Drawing::Color> ForeColor {
-            pcf_get { return this->data->foreColor.GetValueOrDefault(DefaultBackColor); },
+            pcf_get { return this->data->foreColor.GetValueOrDefault(DefaultForeColor); },
             pcf_set {
-            if (this->data->foreColor != value) {
-              this->data->foreColor = value;
-              this->OnForeColorChanged(EventArgs());
+              if (this->data->foreColor != value) {
+                this->data->foreColor = value;
+                this->OnForeColorChanged(EventArgs());
+              }
             }
-          }
           };
 
           /// @brief Gets the window handle that the control is bound to.
@@ -219,14 +220,14 @@ namespace Pcf {
           Property<Reference<Control>> Parent {
             pcf_get { return this->data->parent; },
             pcf_set {
-            if (this->data->parent != value) {
-              if (value == null && this->data->parent != null)
-                this->data->parent().data->controls.Remove(*this);
-              else
-                const_cast<Control&>(value()).data->controls.Add(*this);
-              this->OnParentChanged(EventArgs());
+              if (this->data->parent != value) {
+                if (value == null && this->data->parent != null)
+                  this->data->parent().data->controls.Remove(*this);
+                else
+                  const_cast<Control&>(value()).data->controls.Add(*this);
+                this->OnParentChanged(EventArgs());
+              }
             }
-          }
           };
 
           /// @brief Gets or sets the height and width of the control.
@@ -255,11 +256,11 @@ namespace Pcf {
           Property<bool> Visible {
             pcf_get { return this->data->visible; },
             pcf_set {
-            if (this->data->visible != value) {
-              this->data->visible = value;
-              this->OnVisibleChanged(EventArgs());
+              if (this->data->visible != value) {
+                this->data->visible = value;
+                this->OnVisibleChanged(EventArgs());
+              }
             }
-          }
           };
 
           Property<int32> Width {
@@ -407,6 +408,7 @@ namespace Pcf {
           struct ControlData {
             ControlData(Reference<Control> control) : controls(control) {}
             Nullable<System::Drawing::Color> backColor;
+            System::Drawing::SolidBrush backBrush {System::Drawing::SystemColors::Control};
             ControlCollection controls;
             System::Drawing::Color defaultBackColor;
             System::Drawing::Color defaultForeColor;
@@ -480,9 +482,8 @@ namespace Pcf {
 
           enum class State {
             Empty = 0,
-            WndProcRunning = 0b1,
-            DoubleClickFired = 0b10,
-            MouseEntered = 0x100,
+            DoubleClickFired = 0b1,
+            MouseEntered = 0x10,
           };
 
           static Reference<Control> controlEntered;

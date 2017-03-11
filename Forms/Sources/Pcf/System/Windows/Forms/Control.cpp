@@ -14,10 +14,14 @@ System::Collections::Generic::Dictionary<intptr, Reference<Control>> Control::ha
 
 namespace {
   struct ShowDebugTrace {
-    static constexpr bool AllWindowMessages = false;
+    static constexpr bool AllWindowMessages = true;
     static constexpr bool MouseWindowMessage = false;
     static constexpr bool WindowMessage = false;
   };
+
+  bool AllWindowMessagesFilter(const Message& message) {
+    return __OS::FormsApi::Control::MessageToString(message.Msg).StartsWith("WM_CTLCOLOR");
+  }
 
   MouseButtons MessageToMouseButtons(Message message) {
     //constexpr int MK_XBUTTON1 = 0x0020;
@@ -85,13 +89,12 @@ void Control::Invalidate(const System::Drawing::Rectangle& rect, bool invalidate
 }
 
 void Control::OnBackColorChanged(const EventArgs& e) {
-  __OS::FormsApi::Control::SetBackColor(*this, this->BackColor);
+  this->data->backBrush = System::Drawing::SolidBrush(this->BackColor);
   this->Invalidate();
   this->BackColorChanged(*this, e);
 }
 
 void Control::OnForeColorChanged(const EventArgs& e) {
-  __OS::FormsApi::Control::SetBackColor(*this, this->ForeColor);
   this->Invalidate();
   this->ForeColorChanged(*this, e);
 }
@@ -131,15 +134,13 @@ bool Control::PreProcessMessage(const Message& msg) {
 }
 
 void Control::WndProc(Message& message) {
-  if (!this->GetState(State::WndProcRunning) && this->data->messageActions.ContainsKey(message.Msg)) {
-    SetState(State::WndProcRunning, true);
-    System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::AllWindowMessages, "Control::WndProc message=" + message + ", name=" + this->data->name);
+  if (this->data->messageActions.ContainsKey(message.Msg)) {
+    System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::AllWindowMessages && AllWindowMessagesFilter(message), "Control::WndProc message=" + message + ", name=" + this->data->name);
     this->data->messageActions[message.Msg](message);
   } else {
-    System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::AllWindowMessages, "DefWndProc message=" + message + ", name=" + this->data->name);
+    System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::AllWindowMessages && AllWindowMessagesFilter(message), "DefWndProc message=" + message + ", name=" + this->data->name);
     this->DefWndProc(message);
   }
-  SetState(State::WndProcRunning, false);
 }
 
 void Control::WmCaptureChange(Message& message) {
@@ -169,22 +170,17 @@ void Control::WmCreate(Message& message) {
   OnHandleCreated(EventArgs::Empty);
 }
 
-#include <windows.h>
-
 void Control::WmCtlColorControl(Message& message) {
   System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmCtlColorControl message=" + message + ", name=" + this->data->name);
-  //this->DefWndProc(message);
-  //__OS::FormsApi::Control::SetBackColor(*this, this->BackColor);
-  //__OS::FormsApi::Control::SetForeColor(*this, this->ForeColor);
-
-  if (this->data->name != "label1") {
-    this->DefWndProc(message);
-    return;
-  }
   
-  SetBkColor((HDC)message.WParam(), RGB(this->BackColor().R(), this->BackColor().G(), this->BackColor().B()));
-  SetTextColor((HDC)message.WParam(), RGB(this->ForeColor().R(), this->ForeColor().G(), this->ForeColor().B()));
-  message.Result = (intptr)GetSysColorBrush(COLOR_BTNFACE);
+  Reference<Control> control = FromHandle(__OS::FormsApi::Control::GetHandleWindowFromDeviceContext(message.WParam));
+  if (control == null)
+    this->DefWndProc(message);
+  else {
+    __OS::FormsApi::Control::SetBackColor(message.WParam(), control().BackColor());
+    __OS::FormsApi::Control::SetForeColor(message.WParam(), control().ForeColor());
+    message.Result = (intptr)control().data->backBrush.GetNativeBrush();
+  }
 }
 
 void Control::WmDestroy(Message& message) {

@@ -5,12 +5,16 @@ using namespace System;
 using namespace System::Drawing;
 
 Brush::~Brush() {
-  if (this->brush != IntPtr::Zero)
-    __OS::DrawingApi::Brush::DeleteBrush(this->brush);
+  ReleaseNativeBrush();
 }
 
 void Brush::SetNativeBrush(intptr brush) {
+  ReleaseNativeBrush();
+  this->brush = brush;
+}
+
+void Brush::ReleaseNativeBrush() {
   if (this->brush != IntPtr::Zero)
     __OS::DrawingApi::Brush::DeleteBrush(this->brush);
-  this->brush = brush;
+  this->brush = IntPtr::Zero;
 }

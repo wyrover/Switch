@@ -35,6 +35,8 @@ namespace __OS {
 
     class Gdi pcf_static {
     public:
+      //static intptr BeginPaint(intptr hwnd, System::Drawing::Rectangle& clipRectangle);
+      //static void EndPaint(intptr hwnd, intptr hdc);
       static intptr GetDeviceContext(intptr hwnd);
       static void ReleaseDeviceContext(intptr hwnd, intptr hdc);
       static System::Drawing::Rectangle GetClipRectangleFromHdc(intptr hhdcwd);

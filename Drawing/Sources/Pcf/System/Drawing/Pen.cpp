@@ -5,9 +5,12 @@ using namespace System;
 using namespace System::Drawing;
 
 void Pen::Create() {
-  this->pen = __OS::DrawingApi::Pen::CreatePen(this->dashStyle, as<int32>(this->width), as<SolidBrush>(this->brush)().Color);
+  this->Destroy();
+  this->pen = __OS::DrawingApi::Pen::CreatePen(this->dashStyle, this->width, as<SolidBrush>(this->brush)().Color);
 }
 
 void Pen::Destroy() {
-  __OS::DrawingApi::Pen::DeletePen(this->pen);
+  if (this->pen != IntPtr::Zero)
+    __OS::DrawingApi::Pen::DeletePen(this->pen);
+  this->pen = IntPtr::Zero;
 }
