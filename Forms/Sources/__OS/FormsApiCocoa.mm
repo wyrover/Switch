@@ -404,7 +404,14 @@ void FormsApi::Control::Destroy(const System::Windows::Forms::Control& control) 
   controls.Remove(control.Handle);
 }
 
-void FormsApi::Control::Invalidate(const System::Windows::Forms::Control& control, const InvalidateEventArgs& e) {
+intptr FormsApi::Control::GetHandleWindowFromDeviceContext(intptr hdc) {
+  return IntPtr::Zero;
+}
+
+void FormsApi::Control::Invalidate(const System::Windows::Forms::Control& control, bool invalidateChildren) {
+}
+
+void FormsApi::Control::Invalidate(const System::Windows::Forms::Control& control, const System::Drawing::Rectangle& rect, bool invalidateChildren) {
 }
 
 System::Drawing::Point FormsApi::Control::PointToClient(const System::Windows::Forms::Control& control, const System::Drawing::Point& point) {
@@ -413,6 +420,18 @@ System::Drawing::Point FormsApi::Control::PointToClient(const System::Windows::F
 
 System::Drawing::Point FormsApi::Control::PointToScreen(const System::Windows::Forms::Control& control, const System::Drawing::Point& point) {
   return System::Drawing::Point();
+}
+
+void FormsApi::Control::SetBackColor(intptr hdc, const System::Drawing::Color& color) {
+}
+
+void FormsApi::Control::SetForeColor(intptr hdc, const System::Drawing::Color& color) {
+}
+
+void FormsApi::Control::SetBackColor(const System::Windows::Forms::Control& control) {
+}
+
+void FormsApi::Control::SetForeColor(const System::Windows::Forms::Control& control) {
 }
 
 void FormsApi::Control::SetLocation(const System::Windows::Forms::Control& control) {

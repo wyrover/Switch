@@ -8,6 +8,7 @@
 using namespace System;
 using namespace System::Collections::Generic;
 using namespace System::Drawing;
+using namespace __OS;
 
 namespace {
   struct LogFont : public object {
@@ -29,13 +30,20 @@ namespace {
 }
 
 intptr DrawingApi::Brush::CreateSolidBrush(const Color& color) {
-  return (intptr)null;
+  return IntPtr::Zero;
 }
 
 void DrawingApi::Brush::DeleteBrush(intptr handle) {
 }
 
-System::Array<System::Drawing::FontFamily> __OS::DrawingApi::FontFamily::GetInstalledFontFamilies() {
+intptr DrawingApi::Pen::CreatePen(const System::Drawing::Drawing2D::DashStyle& dashStyle, int32 width, const Color& color) {
+  return IntPtr::Zero;
+}
+
+void DrawingApi::Pen::DeletePen(intptr handle) {
+}
+
+System::Array<System::Drawing::FontFamily> DrawingApi::FontFamily::GetInstalledFontFamilies() {
   NSArray* fonts = [[[NSFontManager sharedFontManager] availableFontFamilies] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
   List<System::Drawing::FontFamily> families;
   for (NSString *item in fonts) {
@@ -47,7 +55,7 @@ System::Array<System::Drawing::FontFamily> __OS::DrawingApi::FontFamily::GetInst
   return families.ToArray();
 }
 
-System::Drawing::FontFamily __OS::DrawingApi::FontFamily::GetFontFamilyFromName(const string& name) {
+System::Drawing::FontFamily DrawingApi::FontFamily::GetFontFamilyFromName(const string& name) {
   if ([[NSFontManager sharedFontManager] availableMembersOfFontFamily:[NSString stringWithUTF8String:name.c_str()]] == nil)
     throw ArgumentException(pcf_current_information);
   LogFont* logFont = new LogFont();
@@ -55,12 +63,12 @@ System::Drawing::FontFamily __OS::DrawingApi::FontFamily::GetFontFamilyFromName(
   return System::Drawing::FontFamily((intptr)logFont);
 }
 
-string __OS::DrawingApi::FontFamily::GetName(intptr handle) {
+string DrawingApi::FontFamily::GetName(intptr handle) {
   if (handle == 0) return "";
   return ((LogFont*)handle)->lfFaceName;
 }
 
-bool __OS::DrawingApi::FontFamily::IsStyleAvailable(intptr handle, System::Drawing::FontStyle style) {
+bool DrawingApi::FontFamily::IsStyleAvailable(intptr handle, System::Drawing::FontStyle style) {
   if (handle == 0) return false;
   
   /*
@@ -71,9 +79,41 @@ bool __OS::DrawingApi::FontFamily::IsStyleAvailable(intptr handle, System::Drawi
   return true;
 }
 
-void __OS::DrawingApi::FontFamily::ReleaseResource(intptr handle) {
+void DrawingApi::FontFamily::ReleaseResource(intptr handle) {
   if (handle != 0)
     delete (LogFont*)handle;
+}
+
+intptr DrawingApi::Gdi::GetDeviceContext(intptr hwnd) {
+  return IntPtr::Zero;
+}
+
+/*
+ intptr DrawingApi::Gdi::BeginPaint(intptr hwnd, System::Drawing::Rectangle& clipRectangle) {
+ return IntPtr::Zero;
+ }
+ 
+ void DrawingApi::Gdi::EndPaint(intptr hwnd, intptr hdc) {
+ }*/
+
+void DrawingApi::Gdi::ReleaseDeviceContext(intptr hwnd, intptr hdc) {
+}
+
+System::Drawing::Rectangle DrawingApi::Gdi::GetClipRectangleFromHdc(intptr hdc) {
+  return {};
+}
+
+System::Drawing::Rectangle DrawingApi::Gdi::GetClipRectangleFromHwnd(intptr hwnd) {
+  return {};
+}
+
+void DrawingApi::Gdi::DrawRectangle(intptr handle, const System::Drawing::Pen& pen, int32 x, int32 y, int32 w, int32 h) {
+}
+
+void DrawingApi::Gdi::FillPie(intptr handle, const System::Drawing::Brush& brush, int32 x, int32 y, int32 w, int32 h, float startAngle, float sweepAngle) {
+}
+
+void DrawingApi::Gdi::FillRectangle(intptr handle, const System::Drawing::Brush& brush, int32 x, int32 y, int32 w, int32 h) {
 }
 
 #endif

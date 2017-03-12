@@ -133,9 +133,9 @@ namespace Pcf {
         Graphics(const Graphics& graphics) : clipRectangle(graphics.clipRectangle) {}
         static void SetColor(const System::Drawing::Color& color);
 
+        intptr hwnd = IntPtr::Zero;
+        intptr hdc = IntPtr::Zero;
         Rectangle clipRectangle;
-        intptr hdc = 0;
-        intptr hwnd = 0;
       };
     }
   }

@@ -10,10 +10,17 @@ namespace {
 }
 
 intptr DrawingApi::Brush::CreateSolidBrush(const Color& color) {
-  return (intptr)null;
+  return IntPtr::Zero;
 }
 
 void DrawingApi::Brush::DeleteBrush(intptr handle) {
+}
+
+intptr DrawingApi::Pen::CreatePen(const System::Drawing::Drawing2D::DashStyle& dashStyle, int32 width, const Color& color) {
+  return IntPtr::Zero;
+}
+
+void DrawingApi::Pen::DeletePen(intptr handle) {
 }
 
 Array<System::Drawing::FontFamily> DrawingApi::FontFamily::GetInstalledFontFamilies() {
@@ -41,6 +48,38 @@ bool DrawingApi::FontFamily::IsStyleAvailable(intptr handle, FontStyle style) {
 }
 
 void DrawingApi::FontFamily::ReleaseResource(intptr handle) {
+}
+
+intptr DrawingApi::Gdi::GetDeviceContext(intptr hwnd) {
+  return IntPtr::Zero;
+}
+
+/*
+ intptr DrawingApi::Gdi::BeginPaint(intptr hwnd, System::Drawing::Rectangle& clipRectangle) {
+ return IntPtr::Zero;
+ }
+ 
+ void DrawingApi::Gdi::EndPaint(intptr hwnd, intptr hdc) {
+ }*/
+
+void DrawingApi::Gdi::ReleaseDeviceContext(intptr hwnd, intptr hdc) {
+}
+
+System::Drawing::Rectangle DrawingApi::Gdi::GetClipRectangleFromHdc(intptr hdc) {
+  return {};
+}
+
+System::Drawing::Rectangle DrawingApi::Gdi::GetClipRectangleFromHwnd(intptr hwnd) {
+  return {};
+}
+
+void DrawingApi::Gdi::DrawRectangle(intptr handle, const System::Drawing::Pen& pen, int32 x, int32 y, int32 w, int32 h) {
+}
+
+void DrawingApi::Gdi::FillPie(intptr handle, const System::Drawing::Brush& brush, int32 x, int32 y, int32 w, int32 h, float startAngle, float sweepAngle) {
+}
+
+void DrawingApi::Gdi::FillRectangle(intptr handle, const System::Drawing::Brush& brush, int32 x, int32 y, int32 w, int32 h) {
 }
 
 #endif

@@ -104,8 +104,14 @@ void FormsApi::Control::Destroy(const System::Windows::Forms::Control& control) 
   throw NotImplementedException(pcf_current_information);
 }
 
-void FormsApi::Control::Invalidate(const System::Windows::Forms::Control& control, const InvalidateEventArgs& e) {
-  throw NotImplementedException(pcf_current_information);
+intptr FormsApi::Control::GetHandleWindowFromDeviceContext(intptr hdc) {
+  return IntPtr::Zero;
+}
+
+void FormsApi::Control::Invalidate(const System::Windows::Forms::Control& control, bool invalidateChildren) {
+}
+
+void FormsApi::Control::Invalidate(const System::Windows::Forms::Control& control, const System::Drawing::Rectangle& rect, bool invalidateChildren) {
 }
 
 System::Drawing::Point FormsApi::Control::PointToClient(const System::Windows::Forms::Control& control, const System::Drawing::Point& point) {
@@ -114,6 +120,18 @@ System::Drawing::Point FormsApi::Control::PointToClient(const System::Windows::F
 
 System::Drawing::Point FormsApi::Control::PointToScreen(const System::Windows::Forms::Control& control, const System::Drawing::Point& point) {
   throw NotImplementedException(pcf_current_information);
+}
+
+void FormsApi::Control::SetBackColor(intptr hdc, const System::Drawing::Color& color) {
+}
+
+void FormsApi::Control::SetForeColor(intptr hdc, const System::Drawing::Color& color) {
+}
+
+void FormsApi::Control::SetBackColor(const System::Windows::Forms::Control& control) {
+}
+
+void FormsApi::Control::SetForeColor(const System::Windows::Forms::Control& control) {
 }
 
 void FormsApi::Control::SetLocation(const System::Windows::Forms::Control& control) {
