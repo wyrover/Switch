@@ -64,7 +64,12 @@ namespace Pcf {
 
         Property<System::Drawing::Drawing2D::DashStyle> DashStyle {
           pcf_get {return this->dashStyle;},
-          pcf_set {this->dashStyle = value;}
+          pcf_set {
+            if (this->dashStyle != value) {
+              this->dashStyle = value;
+              this->Create();
+            }
+          }
         };
 
         Property<float> Width{
