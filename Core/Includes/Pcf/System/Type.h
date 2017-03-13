@@ -137,7 +137,7 @@ namespace Pcf {
     return System::Type(typeid(value));
   }
   
-#if __APPLE__
+#if __APPLE__ || __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wkeyword-macro"
 #define typeof pcf_typeof

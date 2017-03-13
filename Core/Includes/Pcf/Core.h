@@ -338,8 +338,6 @@
 #include "System/StringSplitOptions.h"
 #include "System/SystemException.h"
 #include "System/SystemVersion.h"
-#include "System/Text.h"
-#include "System/Threading.h"
 #include "System/TimeoutException.h"
 #include "System/TimeSpan.h"
 #include "System/TimeZoneInfo.h"

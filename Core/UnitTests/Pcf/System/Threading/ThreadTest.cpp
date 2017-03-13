@@ -140,7 +140,7 @@ namespace {
     }
     
     void CreateUnmanagedThreadThenGetManagedThreadId() {
-      delegate<void> threadStart = pcf_delegate {
+      std::function<void()> threadStart = [] {
         Thread thread = Thread::CurrentThread;
         Assert::AreEqual(0, thread.ManagedThreadId, pcf_current_information);
       };
@@ -149,7 +149,7 @@ namespace {
     }
     
     void CreateUnmanagedThreadThenGetHandle() {
-      delegate<void> threadStart = pcf_delegate {
+      std::function<void()> threadStart = [] {
         Thread thread = Thread::CurrentThread;
         Assert::AreEqual(intptr(-1), thread.Handle, pcf_current_information);
       };
@@ -158,7 +158,7 @@ namespace {
     }
     
     void CreateUnmanagedThreadThenIsAlive() {
-      delegate<void> threadStart = pcf_delegate {
+      std::function<void()> threadStart = [] {
         Thread thread = Thread::CurrentThread;
         Assert::True(thread.IsAlive, pcf_current_information);
       };
@@ -167,7 +167,7 @@ namespace {
     }
     
     void CreateUnmanagedThreadThenIsBackground() {
-      delegate<void> threadStart = pcf_delegate {
+      std::function<void()> threadStart = [] {
         Thread thread = Thread::CurrentThread;
         Assert::True(thread.IsBackground);
       };
@@ -176,7 +176,7 @@ namespace {
     }
     
     void CreateUnmanagedThreadThenGetName() {
-      delegate<void> threadStart = pcf_delegate {
+      std::function<void()> threadStart = [] {
         Thread thread = Thread::CurrentThread;
         Assert::AreEqual("", thread.Name);
       };
@@ -185,7 +185,7 @@ namespace {
     }
     
     void CreateUnmanagedThreadThenGetPriority() {
-      delegate<void> threadStart = pcf_delegate {
+      std::function<void()> threadStart = [] {
         Thread thread = Thread::CurrentThread;
         Assert::AreEqual(ThreadPriority::Normal, thread.Priority, pcf_current_information);
       };
@@ -194,7 +194,7 @@ namespace {
     }
     
     void CreateUnmanagedThreadThenGetThreadState() {
-      delegate<void> threadStart = pcf_delegate {
+      std::function<void()> threadStart = [] {
         Thread thread = Thread::CurrentThread;
         Assert::AreEqual(ThreadState::Running, thread.ThreadState() & ThreadState::Running, pcf_current_information);
       };
@@ -203,7 +203,7 @@ namespace {
     }
     
     void CreateUnmanagedThreadThenSetName() {
-      delegate<void> threadStart = pcf_delegate {
+      std::function<void()> threadStart = [] {
         Thread thread = Thread::CurrentThread;
         Assert::Throws<InvalidOperationException>(pcf_delegate {thread.Name = "Unmanaged";}, pcf_current_information);
       };
@@ -212,7 +212,7 @@ namespace {
     }
     
     void CreateUnmanagedThreadThenSetPriority() {
-      delegate<void> threadStart = pcf_delegate {
+      std::function<void()> threadStart = [] {
         Thread thread = Thread::CurrentThread;
         Assert::Throws<InvalidOperationException>(pcf_delegate {thread.Priority = ThreadPriority::Highest;}, pcf_current_information);
       };
@@ -221,7 +221,7 @@ namespace {
     }
     
     void CreateUnmanagedThreadThenAbort() {
-      delegate<void> threadStart = pcf_delegate {
+      std::function<void()> threadStart = [] {
         Thread thread = Thread::CurrentThread;
         Assert::Throws<InvalidOperationException>(pcf_delegate {thread.Abort();}, pcf_current_information);
       };
@@ -230,7 +230,7 @@ namespace {
     }
     
     void CreateUnmanagedThreadThenSetIsBackgroundToTrue() {
-      delegate<void> threadStart = pcf_delegate {
+      std::function<void()> threadStart = [] {
         Thread thread = Thread::CurrentThread;
         Assert::Throws<InvalidOperationException>(pcf_delegate {thread.IsBackground = true;}, pcf_current_information);
       };
@@ -239,7 +239,7 @@ namespace {
     }
     
     void CreateUnmanagedThreadThenGetHashCode() {
-      delegate<void> threadStart = pcf_delegate {
+      std::function<void()> threadStart = [] {
         Thread thread = Thread::CurrentThread;
         Assert::AreEqual(0, thread.GetHashCode(), pcf_current_information);
       };
@@ -248,7 +248,7 @@ namespace {
     }
     
     void CreateUnmanagedThreadThenInterrupt() {
-      delegate<void> threadStart = pcf_delegate {
+      std::function<void()> threadStart = [] {
         Thread thread = Thread::CurrentThread;
         Assert::Throws<InvalidOperationException>(pcf_delegate {thread.Interrupt();}, pcf_current_information);
       };
@@ -257,7 +257,7 @@ namespace {
     }
     
     void CreateUnmanagedThreadThenJoin() {
-      delegate<void> threadStart = pcf_delegate {
+      std::function<void()> threadStart = [] {
         Thread thread = Thread::CurrentThread;
         Assert::Throws<InvalidOperationException>(pcf_delegate {thread.Join();}, pcf_current_information);
       };
@@ -266,7 +266,7 @@ namespace {
     }
     
     void CreateUnmanagedThreadThenJoinWithBadTimeout() {
-      delegate<void> threadStart = pcf_delegate {
+      std::function<void()> threadStart = [] {
         Thread thread = Thread::CurrentThread;
         Assert::Throws<InvalidOperationException>(pcf_delegate {thread.Join(-2);}, pcf_current_information);
       };
@@ -275,7 +275,7 @@ namespace {
     }
     
     void CreateUnmanagedThreadThenJoinWithInfiniteTimeout() {
-      delegate<void> threadStart = pcf_delegate {
+      std::function<void()> threadStart = [] {
         Thread thread = Thread::CurrentThread;
         Assert::Throws<InvalidOperationException>(pcf_delegate {thread.Join(Timeout::Infinite);}, pcf_current_information);
       };
@@ -284,7 +284,7 @@ namespace {
     }
     
     void CreateUnmanagedThreadThenJoinWithTimeout() {
-      delegate<void> threadStart = pcf_delegate {
+      std::function<void()> threadStart = [] {
         Thread thread = Thread::CurrentThread;
         Assert::Throws<InvalidOperationException>(pcf_delegate {thread.Join(1);}, pcf_current_information);
       };
@@ -293,7 +293,7 @@ namespace {
     }
     
     void CreateUnmanagedThreadThenResume() {
-      delegate<void> threadStart = pcf_delegate {
+      std::function<void()> threadStart = [] {
         Thread thread = Thread::CurrentThread;
         Assert::Throws<InvalidOperationException>(pcf_delegate {thread.Resume();}, pcf_current_information);
       };
@@ -302,7 +302,7 @@ namespace {
     }
     
     void CreateUnmanagedThreadThenStart() {
-      delegate<void> threadStart = pcf_delegate {
+      std::function<void()> threadStart = [] {
         Thread thread = Thread::CurrentThread;
         Assert::Throws<ThreadStateException>(pcf_delegate {thread.Start();}, pcf_current_information);
       };
@@ -311,7 +311,7 @@ namespace {
     }
     
     void CreateUnmanagedThreadThenStartWithThreadStart() {
-      delegate<void> threadStart = pcf_delegate {
+      std::function<void()> threadStart = [] {
         Thread thread = Thread::CurrentThread;
         ThreadStart threadStart = pcf_delegate {};
         Assert::Throws<ThreadStateException>(pcf_delegate {thread.Start(threadStart);}, pcf_current_information);
@@ -321,7 +321,7 @@ namespace {
     }
     
     void CreateUnmanagedThreadThenStartWithParameterizedThreadStart() {
-      delegate<void> threadStart = pcf_delegate {
+      std::function<void()> threadStart = [] {
         Thread thread = Thread::CurrentThread;
         ParameterizedThreadStart parameterizedTeadStart = pcf_delegate(const object&) {};
         Assert::Throws<ThreadStateException>(pcf_delegate {thread.Start(parameterizedTeadStart);}, pcf_current_information);
@@ -331,7 +331,7 @@ namespace {
     }
     
     void CreateUnmanagedThreadThenSuspend() {
-      delegate<void> threadStart = pcf_delegate {
+      std::function<void()> threadStart = [] {
         Thread thread = Thread::CurrentThread;
         Assert::Throws<InvalidOperationException>(pcf_delegate {thread.Suspend();}, pcf_current_information);
       };
