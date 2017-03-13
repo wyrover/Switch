@@ -211,11 +211,6 @@ namespace Pcf {
           this->array.push_back(value);
       }
 
-      explicit Array(const std::vector<T, TAllocator>& array) : length((int32)array.size()), array(array) {
-        this->lowerBound.push_back(0);
-        this->upperBound.push_back(length-1);
-      }
-
       /// @brief Get access to raw data of the Array.
       /// @return A pointer to raw data of the array.
       Property<const T*, ReadOnly> Data{
