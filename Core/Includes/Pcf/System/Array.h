@@ -853,8 +853,8 @@ namespace Pcf {
       int32 length = 0;
       int64 operationNumber = 0;
       std::vector<T, TAllocator> array;
-      std::vector<int32, TAllocator> lowerBound;
-      std::vector<int32, TAllocator> upperBound;
+      std::vector<int32> lowerBound;
+      std::vector<int32> upperBound;
       object syncRoot;
     };
   }
