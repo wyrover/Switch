@@ -4,6 +4,7 @@
 
 #include <array>
 
+#include "../Interface.h"
 #include "../InitializerList.h"
 #include "../Move.h"
 #include "../Property.h"
@@ -153,7 +154,7 @@ namespace Pcf {
       /// The following code example demonstrates different methods to create an array.
       /// @include ArrayConstructor.cpp
       Array(const Array& array) : length(array.length), operationNumber(array.operationNumber), array(array.array), lowerBound(array.lowerBound), upperBound(array.upperBound) {}
-      
+
       /// @cond
       Array(Array&& array) : length(array.length), operationNumber(array.operationNumber), array(Move(array.array)), lowerBound(Move(array.lowerBound)), upperBound(Move(array.upperBound)) {
         array.length = 0;
@@ -196,14 +197,14 @@ namespace Pcf {
         this->lowerBound.push_back(0);
         this->upperBound.push_back(this->length-1);
       }
-      
+
       /// @cond
       Array(InitializerList<T> il) : length((int32)il.size()), array(il) {
         this->lowerBound.push_back(0);
         this->upperBound.push_back((int32)il.size());
       }
       /// @endcond
-      
+
       explicit Array(const std::vector<T>& array) : length((int32)array.size()) {
         this->lowerBound.push_back(0);
         this->upperBound.push_back(length-1);
@@ -225,13 +226,13 @@ namespace Pcf {
       Property<int32, ReadOnly> Length {
         pcf_get {return static_cast<int32>(this->array.size());}
       };
-      
+
       /// @brief Gets a 64-bit integer that represents the total number of elements in all the dimensions of the Array.
       /// @return int64 A 64-bit integer that represents the total number of elements in all the dimensions of the Array; zero if there are no elements in the array.
       Property<int64, ReadOnly> LongLength {
         pcf_get {return static_cast<int64>(this->array.size());}
       };
-      
+
       /// @brief Gets the rank (number of dimensions) of the Array.
       /// @return int32 The rank (number of dimensions) of the Array.
       /// @par Examples
@@ -240,7 +241,7 @@ namespace Pcf {
       Property<int32, ReadOnly> Rank {
         pcf_get {return rank;}
       };
-      
+
       /// @brief Returns a read-only wrapper for the specified array.
       /// @param array The one-dimensional, zero-based array to wrap in a read-only ReadOnlyCollection<T> wrapper.
       /// @return A read-only ReadOnlyCollection<T> wrapper for the specified array.
@@ -253,7 +254,7 @@ namespace Pcf {
       static System::Collections::ObjectModel::ReadOnlyCollection<T> AsReadOnly(const Array& array) { return System::Collections::ObjectModel::ReadOnlyCollection<T>(array); }
 
       static int32 BinarySearch(const Array& array, const T& item) {return BinarySearch(array, 0, array.Length, item, System::Collections::Generic::Comparer<T>::Default().Release());}
-      
+
       static int32 BinarySearch(const Array& array, const T& item, const SharedPointer<System::Collections::Generic::IComparer<T>>& comparer) {return BinarySearch(array, 0, array.Length, item, comparer);}
 
       static int32 BinarySearch(const Array& array, int32 index, int32 count, const T& item, const SharedPointer<System::Collections::Generic::IComparer<T>>& comparer) {
@@ -268,10 +269,10 @@ namespace Pcf {
         std::advance(first, index);
         std::advance(last, index+count);
         typename std::vector<T, TAllocator>::const_iterator position = std::lower_bound(first, last, item, Array::Comparer(comparer.ToPointer()));
-        
+
         if (position != array.array.end() && !comparer->Compare(item, *position))
           return static_cast<int32>(std::distance(array.array.begin(), position));
-        
+
         return static_cast<int32>(~std::distance(array.array.begin(), position));
       }
 
@@ -295,12 +296,12 @@ namespace Pcf {
           throw IndexOutOfRangeException(pcf_current_information);
         std::fill(array.array.begin()+index, array.array.begin()+index+length, T());
       }
-      
+
       /// @brief Creates a one-dimensional Array of the specified Type and length, with zero-based indexing.
       /// @param length The size of the Array to create.
       /// @return A new one-dimensional Array of the specified Type with the specified length, using zero-based indexing.
       static Array<T, 1, TAllocator> CreateInstance(int32 length) {return Array<T, 1, TAllocator>(length);}
-      
+
       /// @brief Creates a two-dimensional Array of the specified Type and dimension lengths, with zero-based indexing.
       /// @param length1 The size of the first dimension of the Array to create.
       /// @param length2 The size of the second dimension of the Array to create.
@@ -313,7 +314,7 @@ namespace Pcf {
       /// @param length3 The size of the third dimension of the Array to create.
       /// @return A new three-dimensional Array of the specified Type with the specified length for each dimension, using zero-based indexing.
       static Array<T, 3, TAllocator> CreateInstance(int32 length1, int32 length2, int32 length3) {return Array<T, 3, TAllocator>(length1, length2, length3);}
-      
+
       /// @brief Gets a 32-bit integer that represents the total number of elements in all the dimensions of the Array.
       /// @param dimension A zero-based dimension of the Array whose length needs to be determined.
       /// @return int32 A 32-bit integer that represents the total number of elements in all the dimensions of the Array; zero if there are no elements in the array.
@@ -322,7 +323,7 @@ namespace Pcf {
       /// The following code example demonstrates methods to get the length of an array.
       /// @include ArrayGetLength.cpp
       int32 GetLength(int32 dimension) const { return this->GetUpperBound(dimension)+1; }
-      
+
       /// @brief Returns an IEnumerator for the Array.
       /// @return IEnumerator An IEnumerator for the Array.
       /// @par Examples
@@ -333,7 +334,7 @@ namespace Pcf {
         public:
           explicit Enumerator(const Array& array) : array(array), operationNumber(array.operationNumber), iterator(array.array.begin()) {}
           void Reset() override {this->beforeFirst = true; this->operationNumber = this->array.operationNumber; this->iterator = this->array.array.begin();}
-          
+
           bool MoveNext() override {
             if (this->operationNumber != this->array.operationNumber) throw System::InvalidOperationException(pcf_current_information);
             if (this->iterator == this->array.array.end()) return false;
@@ -343,7 +344,7 @@ namespace Pcf {
             }
             return ++this->iterator != this->array.array.end();
           }
-          
+
         protected:
           const T& GetCurrent() const override {
             if (this->beforeFirst || this->iterator == this->array.array.end()) throw System::InvalidOperationException(pcf_current_information);
@@ -355,7 +356,7 @@ namespace Pcf {
           int64 operationNumber;
           typename std::vector<T, TAllocator>::const_iterator iterator;
         };
-        
+
         return System::Collections::Generic::Enumerator<T>(new Enumerator(*this));
       }
 
@@ -803,7 +804,7 @@ namespace Pcf {
       /// @cond
       using const_iterator = typename std::vector<T, TAllocator>::const_iterator;
       using iterator = typename std::vector<T, TAllocator>::iterator;
-      
+
       const_iterator cbegin() const {return this->array.begin();}
       const_iterator cend() const {return this->array.end();}
       iterator begin() {return this->array.begin();}
@@ -822,16 +823,16 @@ namespace Pcf {
       private:
         const System::Collections::Generic::IComparer<T>* comparer;
       };
-      
+
       class ComparisonComparer : public std::binary_function<T, T, bool> {
       private:
         Comparison<const T&> comparer;
-        
+
       public:
         ComparisonComparer(Comparison<const T&> c) : comparer(c) { }
         ComparisonComparer(const ComparisonComparer& mc) { *this = mc; }
         ~ComparisonComparer() { }
-        
+
         ComparisonComparer& operator =(const ComparisonComparer& mc) { comparer = mc.comparer; return *this; }
         bool operator()(const T& e1, const T& e2) const { return comparer(e1,e2) < 0; }
       };
@@ -842,18 +843,18 @@ namespace Pcf {
       const object& GetSyncRoot() const override { return this->syncRoot; }
 
       int32 GetCount() const override {return static_cast<int32>(this->array.size());}
-     
+
       void Insert(int32, const T&) override { throw InvalidOperationException(pcf_current_information); }
       void RemoveAt(int32) override { throw InvalidOperationException(pcf_current_information); }
       void Add(const T&) override { throw InvalidOperationException(pcf_current_information); }
       void Clear() override { throw InvalidOperationException(pcf_current_information); }
       bool Remove(const T&) override { throw InvalidOperationException(pcf_current_information); }
-      
+
       int32 length = 0;
       int64 operationNumber = 0;
       std::vector<T, TAllocator> array;
-      std::vector<int32> lowerBound;
-      std::vector<int32> upperBound;
+      std::vector<int32, TAllocator> lowerBound;
+      std::vector<int32, TAllocator> upperBound;
       object syncRoot;
     };
   }

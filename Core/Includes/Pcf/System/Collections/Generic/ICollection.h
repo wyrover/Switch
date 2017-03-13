@@ -2,6 +2,7 @@
 /// @brief Contains Pcf::System::Collections::Generic::ICollection <T> interface.
 #pragma once
 
+#include "../../../Interface.h"
 #include "../../../Types.h"
 #include "../../Allocator.h"
 #include "../../Object.h"
@@ -12,11 +13,6 @@
 namespace Pcf {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
-    /// @cond
-    template<typename T, int32 rank, typename allocator>
-    class Array;
-    /// @endcond
-
     /// @brief The System::Collections namespace contains interfaces and classes that define various collections of objects, such as lists, queues, bit arrays, hash tables and dictionaries.
     namespace Collections {
       /// @brief The System::Collections::Generic namespace contains interfaces and classes that define generic collections, which allow users to create strongly typed collections that provide better type safety and performance than non-generic strongly typed collections.

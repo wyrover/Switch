@@ -19,6 +19,9 @@ namespace Pcf {
     /// @cond
     template<typename T, int32 rank=1, typename TAllocator=System::Allocator<T>>
     class Array;
+
+    template<typename T, int32 rank, typename TAllocator>
+    class Array;
     /// @endcond
   }
   
