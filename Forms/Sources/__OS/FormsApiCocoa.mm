@@ -192,9 +192,6 @@ void FormsApi::Application::MessageLoop(EventHandler idle) {
   }
 }
 
-void FormsApi::Application::RegisterClasses() {
-}
-
 namespace {
   void MessageBoxAddButtonsOK(NSAlert *alert) {
     [alert addButtonWithTitle:@"OK"];
@@ -279,7 +276,10 @@ DialogResult FormsApi::Application::ShowMessageBox(const string& message, const 
   }
 }
 
-void FormsApi::Application::UnregisterClasses() {
+void FormsApi::Application::Start() {
+}
+
+void FormsApi::Application::Stop() {
 }
 
 void FormsApi::Control::Close(const System::Windows::Forms::Form& form) {
