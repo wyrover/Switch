@@ -14,16 +14,13 @@ void Application::Exit() {
   FormsApi::Application::Exit();
 }
 
-void Application::Run() {
-  FormsApi::Application::RegisterClasses();
+void Application::Start() {
+  FormsApi::Application::Start();
   if (enableVisualStyles)
     FormsApi::Application::EnableVisualStyles();
-  if (!mainForm.IsNull()) {
-    mainForm().Visible = true;
-    mainForm().FormClosed += pcf_delegate(const object& sender, const FormClosedEventArgs& e) {
-      Exit();
-    };
-  }
+}
+
+void Application::MessageLoop() {
   FormsApi::Application::MessageLoop(Idle);
-  FormsApi::Application::UnregisterClasses();
+  FormsApi::Application::Stop();
 }

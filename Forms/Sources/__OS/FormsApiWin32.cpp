@@ -136,15 +136,15 @@ void FormsApi::Application::MessageLoop(EventHandler idle) {
   }
 }
 
-void FormsApi::Application::RegisterClasses() {
-  RegisterClassControl();
-}
-
 DialogResult FormsApi::Application::ShowMessageBox(const string& message, const string& caption, MessageBoxButtons buttons, MessageBoxIcon icon, MessageBoxDefaultButton defaultButton, MessageBoxOptions options, bool displayHelpButton) {
   return (DialogResult)MessageBox(GetActiveWindow(), message.w_str().c_str(), caption.w_str().c_str(), (uint32)buttons + (uint32)icon + (uint32)defaultButton + (uint32)options + (displayHelpButton ? 0x00004000L : 0));
 }
 
-void FormsApi::Application::UnregisterClasses() {
+void FormsApi::Application::Start() {
+  RegisterClassControl();
+}
+
+void FormsApi::Application::Stop() {
   UnregisterClass(L"Control", NULL);
 }
 

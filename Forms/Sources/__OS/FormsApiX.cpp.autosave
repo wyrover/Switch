@@ -101,6 +101,7 @@ void FormsApi::Control::Close(const System::Windows::Forms::Form& form) {
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Button& button) {
+  Window button = XCreateSimpleWindow(x11Display().Display(), RootWindow(x11Display().Display(), screen), form.Location().X, form.Location().Y, form.Size().Width, form.Size().Height, 1, BlackPixel(x11Display().Display(), screen), WhitePixel(x11Display().Display(), screen));
   return IntPtr::Zero;
 }
 
@@ -114,7 +115,7 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::Control& control)
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Form& form) {
   int32 screen = DefaultScreen(x11Display().Display());
-  Window window = XCreateSimpleWindow(x11Display().Display(), RootWindow(x11Display().Display(), screen), 200 /*form.Location().X()*/, 100 /*form.Location().Y()*/, form.Size().Width, form.Size().Height, 1, BlackPixel(x11Display().Display(), screen), WhitePixel(x11Display().Display(), screen));
+  Window window = XCreateSimpleWindow(x11Display().Display(), RootWindow(x11Display().Display(), screen), form.Location().X, form.Location().Y, form.Size().Width, form.Size().Height, 1, BlackPixel(x11Display().Display(), screen), WhitePixel(x11Display().Display(), screen));
   XSelectInput(x11Display().Display(), window, ExposureMask | KeyPressMask);
   XMapWindow(x11Display().Display(), window);
   XStoreName(x11Display().Display(), window, form.Text().c_str());
