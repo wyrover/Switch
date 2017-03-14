@@ -90,11 +90,13 @@ void Control::Invalidate(const System::Drawing::Rectangle& rect, bool invalidate
 
 void Control::OnBackColorChanged(const EventArgs& e) {
   this->data->backBrush = System::Drawing::SolidBrush(this->BackColor);
+  __OS::FormsApi::Control::SetBackColor(*this);
   this->Invalidate();
   this->BackColorChanged(*this, e);
 }
 
 void Control::OnForeColorChanged(const EventArgs& e) {
+  __OS::FormsApi::Control::SetForeColor(*this);
   this->Invalidate();
   this->ForeColorChanged(*this, e);
 }

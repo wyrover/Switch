@@ -5,7 +5,13 @@
 #include "../../Includes/Pcf/System/Windows/Forms/Control.h"
 #include "FormsApi.h"
 
-#include <X11/Xlib.h>
+#include <FL/Fl.H>
+#include <FL/Fl_Box.H>
+#include <FL/Fl_Button.H>
+#include <FL/Fl_Check_Button.H>
+#include <FL/Fl_File_Icon.H>
+#include <FL/Fl_Round_Button.H>
+#include <FL/Fl_Window.H>
 #undef None
 
 using namespace System;
@@ -16,21 +22,6 @@ using namespace __OS;
 namespace {
   static bool messageLoopRunning = false;
 
-  class X11Display {
-  public:
-    X11Display() {this->display = XOpenDisplay(null);}
-    ~X11Display() {XCloseDisplay(this->display);}
-
-    Property<::Display*, ReadOnly> Display {
-      pcf_get {return this->display;}
-    };
-
-  private:
-    ::Display* display;
-  };
-
-  static UniquePointer<X11Display> x11Display;
-  
   int32 GetMessage(Message& message) {
     return 0;
   }
@@ -44,12 +35,16 @@ namespace {
   
   void DispatchMessage(const Message& message) {
   }
+
+  static Fl_Color FromColor(const System::Drawing::Color& color) {
+    return fl_rgb_color(as<byte>(color.R()), as<byte>(color.G()), as<byte>(color.B()));
+  }
+
 }
 
 bool FormsApi::Application::visualStylesEnabled = false;
 
 void FormsApi::Application::Exit() {
-  x11Display.Reset();
   Environment::Exit(0);
 }
 
@@ -73,16 +68,7 @@ void FormsApi::Application::MessageLoop(EventHandler idle) {
     idle(object(), EventArgs());
   }*/
 
-  XEvent event;
-  while(1) {
-    XNextEvent(x11Display().Display(), &event);
-    if (event.type == Expose) {
-
-    }
-
-    if (event.type == KeyPress)
-      break;
-  }
+  Fl::run();
 }
 
 DialogResult FormsApi::Application::ShowMessageBox(const string& message, const string& caption, MessageBoxButtons buttons, MessageBoxIcon icon, MessageBoxDefaultButton defaultButton, MessageBoxOptions options, bool displayHelpButton) {
@@ -90,22 +76,31 @@ DialogResult FormsApi::Application::ShowMessageBox(const string& message, const 
 }
 
 void FormsApi::Application::Start() {
-  x11Display = UniquePointer<X11Display>::Create();
+  Fl::get_system_colors();
+  Fl_File_Icon::load_system_icons();
+  Fl::lock();
+  if (HasVisualStylesEnabled())
+    Fl::scheme("gtk+");
 }
 
 void FormsApi::Application::Stop() {
-  XCloseDisplay(x11Display().Display());
 }
 
-void FormsApi::Control::Close(const System::Windows::Forms::Form& form) {  
+void FormsApi::Control::Close(const System::Windows::Forms::Form& form) {
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Button& button) {
-  return IntPtr::Zero;
+  Fl_Button* handle = new Fl_Button(button.Location().X, button.Location().Y, button.Size().Width, button.Size().Height, button.data().text.c_str());
+  handle->color(FromColor(button.BackColor()));
+  handle->labelcolor(FromColor(button.ForeColor()));
+  return (intptr)handle;
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::CheckBox& checkBox) {
-  return IntPtr::Zero;
+  Fl_Check_Button* handle = new Fl_Check_Button(checkBox.Location().X, checkBox.Location().Y, checkBox.Size().Width, checkBox.Size().Height, checkBox.data().text.c_str());
+  handle->color(FromColor(checkBox.BackColor()));
+  handle->labelcolor(FromColor(checkBox.ForeColor()));
+  return (intptr)handle;
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Control& control) {
@@ -113,30 +108,41 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::Control& control)
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Form& form) {
-  int32 screen = DefaultScreen(x11Display().Display());
-  Window window = XCreateSimpleWindow(x11Display().Display(), RootWindow(x11Display().Display(), screen), 200 /*form.Location().X()*/, 100 /*form.Location().Y()*/, form.Size().Width, form.Size().Height, 1, BlackPixel(x11Display().Display(), screen), WhitePixel(x11Display().Display(), screen));
-  XSelectInput(x11Display().Display(), window, ExposureMask | KeyPressMask);
-  XMapWindow(x11Display().Display(), window);
-  XStoreName(x11Display().Display(), window, form.Text().c_str());
-  return window;
- }
+  Fl_Window* handle = new Fl_Window(form.Location().X, form.Location().Y, form.Size().Width, form.Size().Height, form.data().text.c_str());
+  handle->color(FromColor(form.BackColor()));
+  handle->labelcolor(FromColor(form.ForeColor()));
+  return (intptr)handle;
+}
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Label& label) {
-  return IntPtr::Zero;
+  Fl_Box* handle = new Fl_Box(FL_NO_BOX, label.Location().X, label.Location().Y, label.Size().Width, label.Size().Height, label.data().text.c_str());
+  handle->color(FromColor(label.BackColor()));
+  handle->labelcolor(FromColor(label.ForeColor()));
+  return (intptr)handle;
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::RadioButton& radioButton) {
-  return IntPtr::Zero;
+  Fl_Round_Button* handle = new Fl_Round_Button(radioButton.Location().X, radioButton.Location().Y, radioButton.Size().Width, radioButton.Size().Height, radioButton.data().text.c_str());
+  handle->color(FromColor(radioButton.BackColor()));
+  handle->labelcolor(FromColor(radioButton.ForeColor()));
+  return (intptr)handle;
 }
 
 void FormsApi::Control::DefWndProc(System::Windows::Forms::Message& message) {
 }
 
 void FormsApi::Control::Destroy(const System::Windows::Forms::Control& control) {
+  if (control.data().handle != IntPtr::Zero) {
+    if (is<System::Windows::Forms::ContainerControl>(control)) {
+      for (int index = 0; index < ((Fl_Group*)control.data().handle)->children(); index++)
+        ((Fl_Group*)control.data().handle)->remove(index);
+    }
+    delete (Fl_Widget*)control.data().handle;
+  }
 }
 
 intptr FormsApi::Control::GetHandleWindowFromDeviceContext(intptr hdc) {
-  return IntPtr::Zero;
+  return hdc;
 }
 
 void FormsApi::Control::Invalidate(const System::Windows::Forms::Control& control, bool invalidateChildren) {
@@ -154,15 +160,21 @@ System::Drawing::Point FormsApi::Control::PointToScreen(const System::Windows::F
 }
 
 void FormsApi::Control::SetBackColor(intptr hdc, const System::Drawing::Color& color) {
+  ((Fl_Widget*)hdc)->color(FromColor(color));
 }
 
 void FormsApi::Control::SetForeColor(intptr hdc, const System::Drawing::Color& color) {
+  ((Fl_Widget*)hdc)->labelcolor(FromColor(color));
 }
 
 void FormsApi::Control::SetBackColor(const System::Windows::Forms::Control& control) {
+  if (control.data().handle != IntPtr::Zero)
+    ((Fl_Widget*)control.data().handle)->color(FromColor(control.BackColor()));
 }
 
 void FormsApi::Control::SetForeColor(const System::Windows::Forms::Control& control) {
+  if (control.data().handle != IntPtr::Zero)
+    ((Fl_Widget*)control.data().handle)->labelcolor(FromColor(control.ForeColor()));
 }
 
 void FormsApi::Control::SetLocation(const System::Windows::Forms::Control& control) {
@@ -173,10 +185,11 @@ void FormsApi::Control::SetSize(const System::Windows::Forms::Control& control) 
 
 void FormsApi::Control::SetText(const System::Windows::Forms::Control& control) {
   if (control.data().handle != IntPtr::Zero)
-    XStoreName(x11Display().Display(), control.data().handle, control.Text().c_str());
+    ((Fl_Widget*)control.data().handle)->copy_label(control.Text().c_str());
 }
 
 void FormsApi::Control::SetVisible(const System::Windows::Forms::Control& control) {
+  ((Fl_Widget*)control.data().handle)->show();
 }
 
 int32 FormsApi::SystemInformation::GetActiveWindowTrackingDelay() {

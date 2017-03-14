@@ -15,9 +15,9 @@ void Application::Exit() {
 }
 
 void Application::Start() {
-  FormsApi::Application::Start();
   if (enableVisualStyles)
     FormsApi::Application::EnableVisualStyles();
+  FormsApi::Application::Start();
 }
 
 void Application::MessageLoop() {
