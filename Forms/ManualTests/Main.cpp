@@ -23,7 +23,7 @@ namespace PcfFormApp {
     Form1() {
       this->StartPosition = FormStartPosition::Manual;
       this->Name = "form1";
-      //this->BackColor = System::Drawing::Color::SpringGreen;
+      this->BackColor = System::Drawing::Color::SpringGreen;
       this->Text = "First Application";
       this->Location = System::Drawing::Point(200, 100);
 
@@ -32,7 +32,7 @@ namespace PcfFormApp {
       };
       
       this->button1.Parent = *this;
-      //this->button1.BackColor = System::Drawing::Color::LawnGreen;
+      this->button1.BackColor = System::Drawing::Color::LawnGreen;
       this->button1.Name = "button1";
       this->button1.Text = "Button";
       this->button1.Location = System::Drawing::Point(10, 10);
@@ -55,27 +55,27 @@ namespace PcfFormApp {
       this->checkBox1.Parent = *this;
       this->checkBox1.Name = "checkBox1";
       this->checkBox1.Text = "CheckBox";
-      //this->checkBox1.BackColor = System::Drawing::Color::SpringGreen;
+      this->checkBox1.BackColor = System::Drawing::Color::SpringGreen;
       this->checkBox1.Location = System::Drawing::Point(10, 40);
       
       this->radioButton1.Parent = *this;
       this->radioButton1.Name = "radioButton1";
       this->radioButton1.Text = "RadioButton 1";
-      //this->radioButton1.BackColor = System::Drawing::Color::SpringGreen;
+      this->radioButton1.BackColor = System::Drawing::Color::SpringGreen;
       this->radioButton1.Location = System::Drawing::Point(10, 70);
       this->radioButton1.Size = System::Drawing::Size(120, 25);
 
       this->radioButton2.Parent = *this;
       this->radioButton2.Name = "radioButton2";
       this->radioButton2.Text = "RadioButton 2";
-      //this->radioButton2.BackColor = System::Drawing::Color::SpringGreen;
+      this->radioButton2.BackColor = System::Drawing::Color::SpringGreen;
       this->radioButton2.Location = System::Drawing::Point(10, 100);
       this->radioButton2.Size = System::Drawing::Size(120, 25);
       
       this->label1.Parent = *this;
       this->label1.Name = "label1";
-      //this->label1.BackColor = System::Drawing::Color::SpringGreen;
-      //this->label1.ForeColor = System::Drawing::Color::Green;
+      this->label1.BackColor = System::Drawing::Color::SpringGreen;
+      this->label1.ForeColor = System::Drawing::Color::Green;
       this->label1.Text = "Text label";
       this->label1.Location = System::Drawing::Point(28, 132);
       this->label1.Size = System::Drawing::Size(100, 23);

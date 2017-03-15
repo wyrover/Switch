@@ -12,6 +12,7 @@
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_File_Icon.H>
 #include <FL/Fl_Round_Button.H>
+#include <FL/Fl_Text_Buffer.H>
 #include <FL/Fl_Window.H>
 #undef None
 
@@ -21,7 +22,84 @@ using namespace System::Windows::Forms;
 using namespace __OS;
 
 namespace {
-static int32 exitCode = 0;
+  static int32 exitCode = 0;
+  static int32 defaultTextSize = 12;
+
+  class IWidget pcf_interface {
+  public:
+    class WidgetEventArgs : public EventArgs {
+    public:
+      WidgetEventArgs() {}
+      WidgetEventArgs(int32 event, bool isHandled) : event(event), isHandled(isHandled) {}
+      WidgetEventArgs(const WidgetEventArgs& eventArgs) : event(eventArgs.event), isHandled(eventArgs.isHandled) {}
+
+      Property<int32, ReadOnly> Event {
+        pcf_get {return this->event;}
+      };
+
+      Property<bool> IsHandled {
+        pcf_get {return this->isHandled;},
+        pcf_set {this->isHandled = value;}
+      };
+
+    private:
+      int32 event = 0;
+      bool isHandled = false;
+    };
+
+    using WidgetEventHandler = Delegate<void, const object&, WidgetEventArgs&>;
+
+    WidgetEventHandler EventHandled;
+    EventHandler Paint;
+    EventHandler Callback;
+
+    virtual void Draw() = 0;
+  };
+
+  template <typename T>
+  class Widget : public T, public IWidget {
+  public:
+    Widget() : T(0, 0, 0, 0, "") {this->callback(&__Callback__, this);}
+
+    Widget(int width, int height) : T(0, 0, width, height, "") { this->callback(&__Callback__, this); }
+
+    Widget(int width, int height, const char* text) : T(0, 0, width, height, text) { this->callback(&__Callback__, this); }
+
+    Widget(int x, int y, int width, int height) : T(x, y, width, height, "") { this->callback(&__Callback__, this); }
+
+    Widget(int x, int y, int width, int height, const char* text) : T(x, y, width, height, text) { this->callback(&__Callback__, this); }
+
+    Widget(const char* text) : T(0, 0, 0, 0, text) { this->callback(&__Callback__, this); }
+
+    void Draw() override {
+      T::draw();
+    }
+
+    static T& ToWidget(IWidget& widget) {return dynamic_cast<T&>(widget);}
+
+    static const T& ToWidget(const IWidget& widget) {return dynamic_cast<const T&>(widget);}
+
+    static Fl_Text_Buffer& ToText(void* text) {return *reinterpret_cast<Fl_Text_Buffer*>(text);}
+
+    static const Fl_Text_Buffer& ToText(const void* text) {return *reinterpret_cast<const Fl_Text_Buffer*>(text);}
+
+    void FreePosition(bool freePostion) {this->force_position(freePostion);}
+
+  private:
+    void draw() override {
+      Paint(object(), System::EventArgs());
+    }
+
+    int handle(int event) override {
+      WidgetEventArgs eventArgs(event, T::handle(event) != 0);
+      EventHandled(object(), eventArgs);
+      return System::Convert::ToInt32(eventArgs.IsHandled);
+    }
+
+    static void __Callback__(Fl_Widget* widget, void* param) {
+      static_cast<Widget<T>*>(param)->Callback(object(), System::EventArgs());
+    }
+  };
 
   static Fl_Color FromColor(const System::Drawing::Color& color) {
     return fl_rgb_color(as<byte>(color.R()), as<byte>(color.G()), as<byte>(color.B()));
@@ -65,16 +143,20 @@ void FormsApi::Control::Close(const System::Windows::Forms::Form& form) {
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Button& button) {
-  Fl_Button* handle = new Fl_Button(button.Location().X, button.Location().Y, button.Size().Width, button.Size().Height, button.data().text.c_str());
+  Widget<Fl_Button>* handle = new Widget<Fl_Button>(button.Location().X, button.Location().Y, button.Size().Width, button.Size().Height, button.data().text.c_str());
   handle->color(FromColor(button.BackColor()));
   handle->labelcolor(FromColor(button.ForeColor()));
+  handle->labelsize(defaultTextSize);
+  handle->align(FL_ALIGN_CENTER | FL_ALIGN_INSIDE | FL_ALIGN_CLIP | FL_ALIGN_WRAP);
   return (intptr)handle;
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::CheckBox& checkBox) {
-  Fl_Check_Button* handle = new Fl_Check_Button(checkBox.Location().X, checkBox.Location().Y, checkBox.Size().Width, checkBox.Size().Height, checkBox.data().text.c_str());
+  Widget<Fl_Check_Button>* handle = new Widget<Fl_Check_Button>(checkBox.Location().X, checkBox.Location().Y, checkBox.Size().Width, checkBox.Size().Height, checkBox.data().text.c_str());
   handle->color(FromColor(checkBox.BackColor()));
   handle->labelcolor(FromColor(checkBox.ForeColor()));
+  handle->labelsize(defaultTextSize);
+  handle->align(FL_ALIGN_LEFT | FL_ALIGN_INSIDE | FL_ALIGN_CLIP | FL_ALIGN_WRAP);
   return (intptr)handle;
 }
 
@@ -83,24 +165,31 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::Control& control)
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Form& form) {
-  Fl_Double_Window* handle = new Fl_Double_Window(form.Location().X, form.Location().Y, form.Size().Width, form.Size().Height, form.data().text.c_str());
+  Widget<Fl_Double_Window>* handle = new Widget<Fl_Double_Window>(form.Location().X, form.Location().Y, form.Size().Width, form.Size().Height, form.data().text.c_str());
   handle->color(FromColor(form.BackColor()));
   handle->labelcolor(FromColor(form.ForeColor()));
+  handle->labelsize(defaultTextSize);
   handle->resizable(handle);
+  handle->align(FL_ALIGN_CENTER | FL_ALIGN_INSIDE | FL_ALIGN_CLIP | FL_ALIGN_WRAP);
   return (intptr)handle;
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Label& label) {
-  Fl_Box* handle = new Fl_Box(FL_NO_BOX, label.Location().X, label.Location().Y, label.Size().Width, label.Size().Height, label.data().text.c_str());
+  Widget<Fl_Box>* handle = new Widget<Fl_Box>(label.Location().X, label.Location().Y, label.Size().Width, label.Size().Height, label.data().text.c_str());
+  handle->box(FL_NO_BOX);
   handle->color(FromColor(label.BackColor()));
   handle->labelcolor(FromColor(label.ForeColor()));
+  handle->labelsize(defaultTextSize);
+  handle->align(FL_ALIGN_LEFT | FL_ALIGN_INSIDE | FL_ALIGN_CLIP | FL_ALIGN_WRAP);
   return (intptr)handle;
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::RadioButton& radioButton) {
-  Fl_Round_Button* handle = new Fl_Round_Button(radioButton.Location().X, radioButton.Location().Y, radioButton.Size().Width, radioButton.Size().Height, radioButton.data().text.c_str());
+  Widget<Fl_Round_Button>* handle = new Widget<Fl_Round_Button>(radioButton.Location().X, radioButton.Location().Y, radioButton.Size().Width, radioButton.Size().Height, radioButton.data().text.c_str());
   handle->color(FromColor(radioButton.BackColor()));
   handle->labelcolor(FromColor(radioButton.ForeColor()));
+  handle->labelsize(defaultTextSize);
+  handle->align(FL_ALIGN_LEFT | FL_ALIGN_INSIDE | FL_ALIGN_CLIP | FL_ALIGN_WRAP);
   return (intptr)handle;
 }
 
@@ -113,7 +202,7 @@ void FormsApi::Control::Destroy(const System::Windows::Forms::Control& control) 
       for (int index = 0; index < ((Fl_Group*)control.data().handle)->children(); index++)
         ((Fl_Group*)control.data().handle)->remove(index);
     }
-    delete (Fl_Widget*)control.data().handle;
+    delete (Widget<Fl_Widget>*)control.data().handle;
   }
 }
 
@@ -136,21 +225,21 @@ System::Drawing::Point FormsApi::Control::PointToScreen(const System::Windows::F
 }
 
 void FormsApi::Control::SetBackColor(intptr hdc, const System::Drawing::Color& color) {
-  ((Fl_Widget*)hdc)->color(FromColor(color));
+  ((Widget<Fl_Widget>*)hdc)->color(FromColor(color));
 }
 
 void FormsApi::Control::SetForeColor(intptr hdc, const System::Drawing::Color& color) {
-  ((Fl_Widget*)hdc)->labelcolor(FromColor(color));
+  ((Widget<Fl_Widget>*)hdc)->labelcolor(FromColor(color));
 }
 
 void FormsApi::Control::SetBackColor(const System::Windows::Forms::Control& control) {
   if (control.data().handle != IntPtr::Zero)
-    ((Fl_Widget*)control.data().handle)->color(FromColor(control.BackColor()));
+    ((Widget<Fl_Widget>*)control.data().handle)->color(FromColor(control.BackColor()));
 }
 
 void FormsApi::Control::SetForeColor(const System::Windows::Forms::Control& control) {
   if (control.data().handle != IntPtr::Zero)
-    ((Fl_Widget*)control.data().handle)->labelcolor(FromColor(control.ForeColor()));
+    ((Widget<Fl_Widget>*)control.data().handle)->labelcolor(FromColor(control.ForeColor()));
 }
 
 void FormsApi::Control::SetLocation(const System::Windows::Forms::Control& control) {
@@ -161,11 +250,11 @@ void FormsApi::Control::SetSize(const System::Windows::Forms::Control& control) 
 
 void FormsApi::Control::SetText(const System::Windows::Forms::Control& control) {
   if (control.data().handle != IntPtr::Zero)
-    ((Fl_Widget*)control.data().handle)->copy_label(control.Text().c_str());
+    ((Widget<Fl_Widget>*)control.data().handle)->copy_label(control.Text().c_str());
 }
 
 void FormsApi::Control::SetVisible(const System::Windows::Forms::Control& control) {
-  ((Fl_Widget*)control.data().handle)->show();
+  ((Widget<Fl_Widget>*)control.data().handle)->show();
 }
 
 int32 FormsApi::SystemInformation::GetActiveWindowTrackingDelay() {
