@@ -85,7 +85,7 @@ void DrawingApi::FontFamily::ReleaseResource(intptr handle) {
 }
 
 intptr DrawingApi::Gdi::GetDeviceContext(intptr hwnd) {
-  return IntPtr::Zero;
+  return hwnd;
 }
 
 /*

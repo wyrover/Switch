@@ -405,7 +405,7 @@ void FormsApi::Control::Destroy(const System::Windows::Forms::Control& control) 
 }
 
 intptr FormsApi::Control::GetHandleWindowFromDeviceContext(intptr hdc) {
-  return IntPtr::Zero;
+  return hdc;
 }
 
 void FormsApi::Control::Invalidate(const System::Windows::Forms::Control& control, bool invalidateChildren) {
@@ -423,12 +423,16 @@ System::Drawing::Point FormsApi::Control::PointToScreen(const System::Windows::F
 }
 
 void FormsApi::Control::SetBackColor(intptr hdc, const System::Drawing::Color& color) {
+  [(NSControl*)hdc setWantsLayer:YES];
+  ((NSControl*)hdc).layer.backgroundColor = [NSColor greenColor].CGColor;
 }
 
 void FormsApi::Control::SetForeColor(intptr hdc, const System::Drawing::Color& color) {
 }
 
 void FormsApi::Control::SetBackColor(const System::Windows::Forms::Control& control) {
+  [(NSControl*)control.data->handle setWantsLayer:YES];
+  ((NSControl*)control.data->handle).layer.backgroundColor = [NSColor greenColor].CGColor;
 }
 
 void FormsApi::Control::SetForeColor(const System::Windows::Forms::Control& control) {
