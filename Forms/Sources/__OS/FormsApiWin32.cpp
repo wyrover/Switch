@@ -32,17 +32,23 @@ namespace {
   int __cmdShow;
   System::Collections::Generic::Dictionary<intptr, WNDPROC> defWindowProcs;
 
+  inline COLORREF ColorToRgb(const Color& color) {
+	  return RGB(color.R, color.G, color.B);
+  }
+
   intptr CreateControl(const Control& control, const string& name, int32 windowStyle, HWND parent) {
     Drawing::Rectangle bounds = control.Bounds;
     if (is<Form>(control))
       Drawing::Rectangle bounds = GetFormBounds(as<Form>(control));
     HWND handle = CreateWindowEx(0, name == "Form" || name == "Panel" ? WC_DIALOG :  name.w_str().c_str(), control.Text().w_str().c_str(), windowStyle, bounds.Left, bounds.Top, bounds.Width, bounds.Height, parent, (HMENU)NULL, __instance, (LPVOID)NULL);
-    if (handle == 0) {
+	  if (handle == 0) {
       string str = string::Format("FormApi::Create(\"{0}\") failed with code {1}", name, GetLastError());
       throw InvalidOperationException(str, pcf_current_information);
     }
+
     defWindowProcs[(intptr)handle] = (WNDPROC)SetWindowLongPtr(handle, GWLP_WNDPROC, (LONG_PTR)WndProc);
-    return (intptr)handle;
+	  RedrawWindow(handle, null, null, RDW_INVALIDATE | RDW_ERASE | RDW_ALLCHILDREN);
+	  return (intptr)handle;
   }
 
   Drawing::Rectangle GetFormBounds(const System::Windows::Forms::Form& form) {
@@ -84,10 +90,6 @@ namespace {
     if (control != null)
       control().WndProc(message);
     return message.Result;
-  }
-
-  inline COLORREF ColorToRgb(const Color& color) {
-    return RGB(color.R, color.G, color.B);
   }
 }
 

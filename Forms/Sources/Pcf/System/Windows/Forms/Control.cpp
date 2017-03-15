@@ -20,7 +20,7 @@ namespace {
   };
 
   bool AllWindowMessagesFilter(const Message& message) {
-    return __OS::FormsApi::Control::MessageToString(message.Msg).StartsWith("WM_CTLCOLOR");
+    return __OS::FormsApi::Control::MessageToString(message.Msg).StartsWith("WM_CTLCOLORDLG");
   }
 
   MouseButtons MessageToMouseButtons(Message message) {
@@ -63,9 +63,9 @@ Property<System::Drawing::Color, ReadOnly> Control::DefaultForeColor {
 };
 
 void Control::CreateHandle() {
-  if (!this->data->handle)
+  if (this->data->handle == IntPtr::Zero)
     this->data->handle = __OS::FormsApi::Control::Create(*this);
-  handles[this->data->handle] = *this;
+  handles.Add(this->data->handle, *this);
 }
 
 void Control::DestroyHandle() {
@@ -173,9 +173,8 @@ void Control::WmCreate(Message& message) {
 }
 
 void Control::WmCtlColorControl(Message& message) {
-  System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmCtlColorControl message=" + message + ", name=" + this->data->name);
-  
-  Reference<Control> control = FromHandle(__OS::FormsApi::Control::GetHandleWindowFromDeviceContext(message.WParam));
+  System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmCtlColorControl message=" + message + ", name=" + this->data->name);  
+  Reference<Control> control = FromHandle(message.LParam);
   if (control == null)
     this->DefWndProc(message);
   else {
