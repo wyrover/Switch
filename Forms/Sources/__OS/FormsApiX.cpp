@@ -9,6 +9,7 @@
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Button.H>
 #include <FL/Fl_Check_Button.H>
+#include <FL/Fl_Double_Window.H>
 #include <FL/Fl_File_Icon.H>
 #include <FL/Fl_Round_Button.H>
 #include <FL/Fl_Window.H>
@@ -75,15 +76,24 @@ DialogResult FormsApi::Application::ShowMessageBox(const string& message, const 
   return DialogResult::None;
 }
 
+namespace {
+static int ApplicationHandler(int event) {
+  if (event == FL_SHORTCUT && Fl::event_key() == FL_Escape)
+    return 1;
+  return 0;
+}
+}
 void FormsApi::Application::Start() {
   Fl::get_system_colors();
   Fl_File_Icon::load_system_icons();
   Fl::lock();
   if (HasVisualStylesEnabled())
     Fl::scheme("gtk+");
+  Fl::add_handler(ApplicationHandler);
 }
 
 void FormsApi::Application::Stop() {
+  Fl::remove_handler(ApplicationHandler);
 }
 
 void FormsApi::Control::Close(const System::Windows::Forms::Form& form) {
@@ -108,9 +118,10 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::Control& control)
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Form& form) {
-  Fl_Window* handle = new Fl_Window(form.Location().X, form.Location().Y, form.Size().Width, form.Size().Height, form.data().text.c_str());
+  Fl_Double_Window* handle = new Fl_Double_Window(form.Location().X, form.Location().Y, form.Size().Width, form.Size().Height, form.data().text.c_str());
   handle->color(FromColor(form.BackColor()));
   handle->labelcolor(FromColor(form.ForeColor()));
+  handle->resizable(handle);
   return (intptr)handle;
 }
 
