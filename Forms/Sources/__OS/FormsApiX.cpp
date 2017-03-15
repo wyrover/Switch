@@ -21,55 +21,21 @@ using namespace System::Windows::Forms;
 using namespace __OS;
 
 namespace {
-  static bool messageLoopRunning = false;
-
-  int32 GetMessage(Message& message) {
-    return 0;
-  }
-  
-  int32 PeekMessage(Message& message) {
-    return 0;
-  }
-  
-  void TranslateMessage(Message& message) {
-  }
-  
-  void DispatchMessage(const Message& message) {
-  }
+static int32 exitCode = 0;
 
   static Fl_Color FromColor(const System::Drawing::Color& color) {
     return fl_rgb_color(as<byte>(color.R()), as<byte>(color.G()), as<byte>(color.B()));
   }
-
 }
 
 bool FormsApi::Application::visualStylesEnabled = false;
 
 void FormsApi::Application::Exit() {
-  Environment::Exit(0);
+  Environment::Exit(exitCode);
 }
 
 void FormsApi::Application::MessageLoop(EventHandler idle) {
-  /*
-  messageLoopRunning = true;
-  while (messageLoopRunning) {
-    Message msg;
-    int32 result = idle.IsEmpty() ? GetMessage(msg) : PeekMessage(msg);
-    while (result != 0) {
-      TranslateMessage(msg);
-      DispatchMessage(msg);
-      if (msg.Msg == WM_QUIT) {
-        messageLoopRunning = false;
-        break;
-      }
-      result = idle.IsEmpty() ? GetMessage(msg) : PeekMessage(msg);
-      if (idle.IsEmpty() && !result)
-        messageLoopRunning = false;
-    }
-    idle(object(), EventArgs());
-  }*/
-
-  Fl::run();
+  exitCode = Fl::run();
 }
 
 DialogResult FormsApi::Application::ShowMessageBox(const string& message, const string& caption, MessageBoxButtons buttons, MessageBoxIcon icon, MessageBoxDefaultButton defaultButton, MessageBoxOptions options, bool displayHelpButton) {
@@ -77,12 +43,11 @@ DialogResult FormsApi::Application::ShowMessageBox(const string& message, const 
 }
 
 namespace {
-static int ApplicationHandler(int event) {
-  if (event == FL_SHORTCUT && Fl::event_key() == FL_Escape)
-    return 1;
-  return 0;
+  static int ApplicationHandler(int event) {
+    return event == FL_SHORTCUT && Fl::event_key() == FL_Escape ? 1 : 0;
+  }
 }
-}
+
 void FormsApi::Application::Start() {
   Fl::get_system_colors();
   Fl_File_Icon::load_system_icons();
