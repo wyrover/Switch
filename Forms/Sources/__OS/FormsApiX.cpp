@@ -146,20 +146,20 @@ void FormsApi::Control::Close(const System::Windows::Forms::Form& form) {
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Button& button) {
-  IWidget* handle = new Widget<Fl_Button>(button.Location().X, button.Location().Y, button.Size().Width, button.Size().Height, button.data().text.c_str());
-  handle->ToWidget().color(FromColor(button.BackColor()));
-  handle->ToWidget().labelcolor(FromColor(button.ForeColor()));
-  handle->ToWidget().labelsize(defaultTextSize);
-  handle->ToWidget().align(FL_ALIGN_CENTER | FL_ALIGN_INSIDE | FL_ALIGN_CLIP | FL_ALIGN_WRAP);
+  Widget<Fl_Button>* handle = new Widget<Fl_Button>(button.Location().X, button.Location().Y, button.Size().Width, button.Size().Height, button.data().text.c_str());
+  handle->color(FromColor(button.BackColor()));
+  handle->labelcolor(FromColor(button.ForeColor()));
+  handle->labelsize(defaultTextSize);
+  handle->align(FL_ALIGN_CENTER | FL_ALIGN_INSIDE | FL_ALIGN_CLIP | FL_ALIGN_WRAP);
   return reinterpret_cast<intptr>(handle);
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::CheckBox& checkBox) {
-  IWidget* handle = new Widget<Fl_Check_Button>(checkBox.Location().X, checkBox.Location().Y, checkBox.Size().Width, checkBox.Size().Height, checkBox.data().text.c_str());
-  handle->ToWidget().color(FromColor(checkBox.BackColor()));
-  handle->ToWidget().labelcolor(FromColor(checkBox.ForeColor()));
-  handle->ToWidget().labelsize(defaultTextSize);
-  handle->ToWidget().align(FL_ALIGN_LEFT | FL_ALIGN_INSIDE | FL_ALIGN_CLIP | FL_ALIGN_WRAP);
+  Widget<Fl_Check_Button>* handle = new Widget<Fl_Check_Button>(checkBox.Location().X, checkBox.Location().Y, checkBox.Size().Width, checkBox.Size().Height, checkBox.data().text.c_str());
+  handle->color(FromColor(checkBox.BackColor()));
+  handle->labelcolor(FromColor(checkBox.ForeColor()));
+  handle->labelsize(defaultTextSize);
+  handle->align(FL_ALIGN_LEFT | FL_ALIGN_INSIDE | FL_ALIGN_CLIP | FL_ALIGN_WRAP);
   return reinterpret_cast<intptr>(handle);
 }
 
