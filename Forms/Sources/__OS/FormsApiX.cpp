@@ -72,7 +72,7 @@ namespace {
     Widget(const char* text) : T(0, 0, 0, 0, text) { this->callback(&__Callback__, this); }
 
     void Draw() override {
-      T::draw();
+      this->T::draw();
     }
 
     static T& ToWidget(IWidget& widget) {return dynamic_cast<T&>(widget);}
@@ -87,13 +87,13 @@ namespace {
 
   private:
     void draw() override {
-      Paint(object(), System::EventArgs());
+      this->Paint(object(), System::EventArgs());
     }
 
     int handle(int event) override {
       WidgetEventArgs eventArgs(event, T::handle(event) != 0);
-      EventHandled(object(), eventArgs);
-      return System::Convert::ToInt32(eventArgs.IsHandled);
+      this->EventHandled(object(), eventArgs);
+      return as<int32>(eventArgs.IsHandled());
     }
 
     static void __Callback__(Fl_Widget* widget, void* param) {
