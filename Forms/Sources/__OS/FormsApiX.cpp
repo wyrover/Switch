@@ -1,6 +1,7 @@
 #if __linux__
 #include <Pcf/System/Diagnostics/Debug.h>
 #include <Pcf/System/Console.h>
+#include <Pcf/System/Delegate.h>
 #include <Pcf/System/NotImplementedException.h>
 #include "../../Includes/Pcf/System/Windows/Forms/Application.h"
 #include "../../Includes/Pcf/System/Windows/Forms/Control.h"
@@ -25,58 +26,16 @@ using namespace __OS;
 namespace {
   static int32 exitCode = 0;
   static int32 defaultTextSize = 12;
+  static System::Collections::Generic::SortedDictionary<intptr, delegate<int32, int32>> defWindowProcs;
 
   class FlWidget : public object {
   public:
-    class WidgetEventArgs : public EventArgs {
-    public:
-      WidgetEventArgs() {}
-      WidgetEventArgs(int32 event, bool isHandled) : event(event), isHandled(isHandled) {}
-      WidgetEventArgs(const WidgetEventArgs& eventArgs) : event(eventArgs.event), isHandled(eventArgs.isHandled) {}
+    void Draw(FlWidget& control) {control.DrawControl();}
 
-      Property<int32, ReadOnly> Event {
-        pcf_get {return this->event;}
-      };
-
-      Property<bool> IsHandled {
-        pcf_get {return this->isHandled;},
-        pcf_set {this->isHandled = value;}
-      };
-
-    private:
-      int32 event = 0;
-      bool isHandled = false;
-    };
-
-    using WidgetEventHandler = Delegate<void, const object&, WidgetEventArgs&>;
-
-    WidgetEventHandler EventHandled;
-    EventHandler Paint;
-    EventHandler Callback;
-
-    template<typename T>
-    void Draw(T& control) {
-      control.DrawControl();
-      this->Paint(object(), System::EventArgs());
-    }
-
-    template<typename T>
-    int HandleEvent(int event, T& control) {
+    int HandleEvent(int event, FlWidget& control) {
+      /*
       int32 isHandled = false;
       switch (event) {
-        case FL_NO_EVENT: this->OnNoEvent(); break;
-        case FL_ENTER: this->OnEnter(); break;
-        case FL_MOVE: this->OnMove(); break;
-        case FL_PUSH: this->OnPush(control); break;
-        case FL_RELEASE: this->OnRelease(); break;
-        case FL_MOUSEWHEEL: this->OnMouseWheel(); break;
-        case FL_LEAVE: this->OnLeave(); break;
-        case FL_DRAG: this->OnDrag(); break;
-        case FL_FOCUS: isHandled = this->OnFocus(); break;
-        case FL_UNFOCUS: this->OnUnfocus(); break;
-        case FL_KEYDOWN: this->OnKeyDown(); break;
-        case FL_KEYUP: this->OnKeyUp(); break;
-        case FL_CLOSE: this->OnClose(); break;
         case FL_SHORTCUT: this->OnShortcut(); break;
         case FL_DEACTIVATE: this->OnDeactivate(); break;
         case FL_ACTIVATE: this->OnActivate(); break;
@@ -91,107 +50,173 @@ namespace {
         case FL_SCREEN_CONFIGURATION_CHANGED: this->OnScreenConfiguartionChange(); break;
         case FL_FULLSCREEN: this->OnFullscreen(); break;
         default: System::Console::WriteLine("Event {0} unknown !!!", event);
+        return isHandled;
       }
-      return isHandled;
+      */
+
+      if (this->events.ContainsKey(event))
+        return this->events[event](event, control);
+      return control.HandleControl(event);
     }
 
-    void OnNoEvent() {
-    }
-
-    void OnEnter() {
-    }
-
-    void OnMove() {
-    }
-
-    template<typename T>
-    void OnPush(T& control) {
-      Message message = Message::Create((intptr)&control, WM_LBUTTONDOWN, 0, 0, 0);
-    }
-
-    void OnRelease() {
-    }
-
-    void OnMouseWheel() {
-    }
-
-    void OnLeave() {
-    }
-
-    void OnDrag() {
-    }
-
-    bool OnFocus() {
-      return false;
-    }
-
-    void OnUnfocus() {
-    }
-
-    void OnKeyDown() {
-    }
-
-    void OnKeyUp() {
-    }
-
-    void OnClose() {
-    }
-
-    void OnShortcut() {
-    }
-
-    void OnDeactivate() {
-    }
-
-    void OnActivate() {
-    }
-
-    void OnHide() {
-    }
-
-    void OnShow() {
-    }
-
-    void OnPaste() {
-    }
-
-    void OnSelectionClear() {
-    }
-
-    bool OnDndEnter() {
-      return false;
-    }
-
-    bool OnDndDrag() {
-      return false;
-    }
-
-    bool OnDndRelease() {
-      return false;
-    }
-
-    bool OnDndLeave() {
-      return false;
-    }
-
-    void OnScreenConfiguartionChange() {
-    }
-
-    void OnFullscreen() {
-    }
-
-    void OnFormSizeChange() {
-    }
-
-    void OnFormMove() {
-    }
-
-    static void __Callback__(Fl_Widget* widget, void* param) {
-      static_cast<FlWidget*>(param)->Callback(object(), System::EventArgs());
-    }
-
+    virtual void DrawControl() = 0;
+    virtual int32 HandleControl(int32 event) = 0;
     virtual const Fl_Widget& ToWidget() const = 0;
     virtual Fl_Widget& ToWidget() = 0;
+
+  private:
+     int WndProc(Message& message) {
+      Reference<Control> control = Control::FromHandle(message.HWnd);
+      if (control != null)
+        control().WndProc(message);
+      return message.Result;
+    }
+
+    int32 FlNoEvent(int32 event, FlWidget& control) {
+      Message message = Message::Create((intptr)&control, WM_NULL, 0, 0, 0, event);
+      return this->WndProc(message);
+    }
+
+    int32 FlEnter(int32 event, FlWidget& control) {
+      Message message = Message::Create((intptr)&control, WM_NULL, 0, 0, 0, event);
+      return this->WndProc(message);
+    }
+
+    int32 FlMove(int32 event, FlWidget& control) {
+      Message message = Message::Create((intptr)&control, WM_NULL, 0, 0, 0, event);
+      return this->WndProc(message);
+    }
+
+    int32 FlPush(int32 event, FlWidget& control) {
+      Message message = Message::Create((intptr)&control, WM_LBUTTONDOWN, 0, 0, 0, event);
+      return this->WndProc(message);
+    }
+
+    int32 FlRelease(int32 event, FlWidget& control) {
+      Message message = Message::Create((intptr)&control, WM_LBUTTONUP, 0, 0, 0, event);
+      return this->WndProc(message);
+    }
+
+    int32 FlMouseWheel(int32 event, FlWidget& control) {
+      Message message = Message::Create((intptr)&control, WM_MOUSEHWHEEL, 0, 0, 0, event);
+      return this->WndProc(message);
+    }
+
+    int32 FlLeave(int32 event, FlWidget& control) {
+      Message message = Message::Create((intptr)&control, WM_NULL, 0, 0, 0, event);
+      return this->WndProc(message);
+    }
+
+    int32 FlDrag(int32 event, FlWidget& control) {
+      Message message = Message::Create((intptr)&control, WM_NULL, 0, 0, 0, event);
+      return this->WndProc(message);
+    }
+
+    int32 FlFocus(int32 event, FlWidget& control) {
+      Message message = Message::Create((intptr)&control, WM_NULL, 0, 0, 0, event);
+      return this->WndProc(message);
+    }
+
+    int32 FlUnfocus(int32 event, FlWidget& control) {
+      Message message = Message::Create((intptr)&control, WM_NULL, 0, 0, 0, event);
+      return this->WndProc(message);
+    }
+
+    int32 FlKeyDown(int32 event, FlWidget& control) {
+      Message message = Message::Create((intptr)&control, WM_KEYDOWN, 0, 0, 0, event);
+      return this->WndProc(message);
+    }
+
+    int32 FlKeyUp(int32 event, FlWidget& control) {
+      Message message = Message::Create((intptr)&control, WM_KEYUP, 0, 0, 0, event);
+      return this->WndProc(message);
+    }
+
+    int32 FlClose(int32 event, FlWidget& control) {
+      Message message = Message::Create((intptr)&control, WM_CLOSE, 0, 0, 0, event);
+      return this->WndProc(message);
+    }
+
+    int32 FlShortcut(int32 event, FlWidget& control) {
+      Message message = Message::Create((intptr)&control, WM_NULL, 0, 0, 0, event);
+      return this->WndProc(message);
+    }
+
+    int32 FlDeactivate(int32 event, FlWidget& control) {
+      Message message = Message::Create((intptr)&control, WM_NULL, 0, 0, 0, event);
+      return this->WndProc(message);
+    }
+
+    int32 FlActivate(int32 event, FlWidget& control) {
+      Message message = Message::Create((intptr)&control, WM_NULL, 0, 0, 0, event);
+      return this->WndProc(message);
+    }
+
+    int32 FlHide(int32 event, FlWidget& control) {
+      Message message = Message::Create((intptr)&control, WM_NULL, 0, 0, 0, event);
+      return this->WndProc(message);
+    }
+
+    int32 FLShow(int32 event, FlWidget& control) {
+      Message message = Message::Create((intptr)&control, WM_NULL, 0, 0, 0, event);
+      return this->WndProc(message);
+    }
+
+    int32 FlPaste(int32 event, FlWidget& control) {
+      Message message = Message::Create((intptr)&control, WM_NULL, 0, 0, 0, event);
+      return this->WndProc(message);
+    }
+
+    int32 FlSelectionClear(int32 event, FlWidget& control) {
+      Message message = Message::Create((intptr)&control, WM_NULL, 0, 0, 0, event);
+      return this->WndProc(message);
+    }
+
+    int32 FlDndEnter(int32 event, FlWidget& control) {
+      Message message = Message::Create((intptr)&control, WM_NULL, 0, 0, 0, event);
+      return this->WndProc(message);
+    }
+
+    int32 FlDndDrag(int32 event, FlWidget& control) {
+      Message message = Message::Create((intptr)&control, WM_NULL, 0, 0, 0, event);
+      return this->WndProc(message);
+    }
+
+    int32 FlDndRelease(int32 event, FlWidget& control) {
+      Message message = Message::Create((intptr)&control, WM_NULL, 0, 0, 0, event);
+      return this->WndProc(message);
+    }
+
+    int32 FlDndLeave(int32 event, FlWidget& control) {
+      Message message = Message::Create((intptr)&control, WM_NULL, 0, 0, 0, event);
+      return this->WndProc(message);
+    }
+
+    int32 FlScreenConfiguartionChange(int32 event, FlWidget& control) {
+      Message message = Message::Create((intptr)&control, WM_NULL, 0, 0, 0, event);
+      return this->WndProc(message);
+    }
+
+    int32 FlFullscreen(int32 event, FlWidget& control) {
+      Message message = Message::Create((intptr)&control, WM_NULL, 0, 0, 0, event);
+      return this->WndProc(message);
+    }
+
+    int32 FlFormSizeChange(int32 event, FlWidget& control) {
+      Message message = Message::Create((intptr)&control, WM_NULL, 0, 0, 0, event);
+      return this->WndProc(message);
+    }
+
+    int32 FlFormMove(int32 event, FlWidget& control) {
+      Message message = Message::Create((intptr)&control, WM_NULL, 0, 0, 0, event);
+      return this->WndProc(message);
+    }
+
+  private:
+    using FlEventHandler = delegate<int32, int32, FlWidget&>;
+    System::Collections::Generic::SortedDictionary<int32, FlEventHandler> events {
+      {FL_NO_EVENT, {*this, &FlWidget::FlNoEvent}}, {FL_ENTER, {*this, &FlWidget::FlEnter}}, {FL_MOVE, {*this, &FlWidget::FlMove}}, {FL_PUSH, {*this, &FlWidget::FlPush}}, {FL_RELEASE, {*this, &FlWidget::FlRelease}}, {FL_MOUSEWHEEL, {*this, &FlWidget::FlMouseWheel}}, {FL_LEAVE, {*this, &FlWidget::FlLeave}}, {FL_DRAG, {*this, &FlWidget::FlDrag}}, {FL_FOCUS, {*this, &FlWidget::FlFocus}}, {FL_UNFOCUS, {*this, &FlWidget::FlUnfocus}}, {FL_KEYDOWN, {*this, &FlWidget::FlKeyDown}}, {FL_KEYUP, {*this, &FlWidget::FlKeyUp}}, {FL_CLOSE, {*this, &FlWidget::FlClose}},
+    };
   };
 
   class FlButton : public FlWidget, public Fl_Button {
@@ -199,8 +224,8 @@ namespace {
     FlButton(int32 x, int32 y, int32 w, int32 h, const char* t) : Fl_Button(x, y, w, h, t) {}
     void draw() override {this->Draw(*this);}
     int handle(int event) override {return this->HandleEvent(event, *this);}
-    void DrawControl() {this->Fl_Button::draw();}
-    int32 HandleControl(int32 event) {return this->Fl_Button::handle(event);}
+    void DrawControl() override {this->Fl_Button::draw();}
+    int32 HandleControl(int32 event) override {return this->Fl_Button::handle(event);}
     const Fl_Widget& ToWidget() const override {return *this;}
     Fl_Widget& ToWidget() override {return *this;}
   };
@@ -210,8 +235,8 @@ namespace {
     FlCheckBox(int32 x, int32 y, int32 w, int32 h, const char* t) : Fl_Check_Button(x, y, w, h, t) {}
     void draw() override {this->Draw(*this);}
     int handle(int event) override {return this->HandleEvent(event, *this);}
-    void DrawControl() {this->Fl_Check_Button::draw();}
-    int32 HandleControl(int32 event) {return this->Fl_Check_Button::handle(event);}
+    void DrawControl() override {this->Fl_Check_Button::draw();}
+    int32 HandleControl(int32 event) override {return this->Fl_Check_Button::handle(event);}
     const Fl_Widget& ToWidget() const override {return *this;}
     Fl_Widget& ToWidget() override {return *this;}
   };
@@ -221,8 +246,8 @@ namespace {
     FlControl(int32 x, int32 y, int32 w, int32 h, const char* t) : Fl_Widget(x, y, w, h, t) {}
     void draw() override {this->Draw(*this);}
     int handle(int event) override {return this->HandleEvent(event, *this);}
-    void DrawControl() {this->Fl_Widget::draw();}
-    int32 HandleControl(int32 event) {return this->Fl_Widget::handle(event);}
+    void DrawControl() override {/*this->Fl_Widget::draw();*/}
+    int32 HandleControl(int32 event) override {return this->Fl_Widget::handle(event);}
     const Fl_Widget& ToWidget() const override {return *this;}
     Fl_Widget& ToWidget() override {return *this;}
   };
@@ -232,8 +257,8 @@ namespace {
     FlForm(int32 x, int32 y, int32 w, int32 h, const char* t) : Fl_Double_Window(x, y, w, h, t) {}
     void draw() override {this->Draw(*this);}
     int handle(int event) override {return this->HandleEvent(event, *this);}
-    void DrawControl() {this->Fl_Double_Window::draw();}
-    int32 HandleControl(int32 event) {return this->Fl_Double_Window::handle(event);}
+    void DrawControl() override {this->Fl_Double_Window::draw();}
+    int32 HandleControl(int32 event) override {return this->Fl_Double_Window::handle(event);}
     const Fl_Widget& ToWidget() const override {return *this;}
     Fl_Widget& ToWidget() override {return *this;}
   };
@@ -243,8 +268,8 @@ namespace {
     FlLabel(int32 x, int32 y, int32 w, int32 h, const char* t) : Fl_Box(x, y, w, h, t) {}
     void draw() override {this->Draw(*this);}
     int handle(int event) override {return this->HandleEvent(event, *this);}
-    void DrawControl() {this->Fl_Box::draw();}
-    int32 HandleControl(int32 event) {return this->Fl_Box::handle(event);}
+    void DrawControl() override {this->Fl_Box::draw();}
+    int32 HandleControl(int32 event) override {return this->Fl_Box::handle(event);}
     const Fl_Widget& ToWidget() const override {return *this;}
     Fl_Widget& ToWidget() override {return *this;}
   };
@@ -254,8 +279,8 @@ namespace {
     FlRadioButton(int32 x, int32 y, int32 w, int32 h, const char* t) : Fl_Round_Button(x, y, w, h, t) {}
     void draw() override {this->Draw(*this);}
     int handle(int event) override {return this->HandleEvent(event, *this);}
-    void DrawControl() {this->Fl_Round_Button::draw();}
-    int32 HandleControl(int32 event) {return this->Fl_Round_Button::handle(event);}
+    void DrawControl() override {this->Fl_Round_Button::draw();}
+    int32 HandleControl(int32 event) override {return this->Fl_Round_Button::handle(event);}
     const Fl_Widget& ToWidget() const override {return *this;}
     Fl_Widget& ToWidget() override {return *this;}
   };
@@ -301,58 +326,54 @@ void FormsApi::Application::Stop() {
 void FormsApi::Control::Close(const System::Windows::Forms::Form& form) {
 }
 
-intptr FormsApi::Control::Create(const System::Windows::Forms::Button& button) {
-  FlButton* handle = new FlButton(button.Location().X, button.Location().Y, button.Size().Width, button.Size().Height, button.data().text.c_str());
-  handle->color(FromColor(button.BackColor()));
-  handle->labelcolor(FromColor(button.ForeColor()));
+template<typename T, typename TControl>
+T* CreateControl(const TControl& control) {
+  T* handle = new T(control.Location().X, control.Location().Y, control.Size().Width, control.Size().Height, control.Text().c_str());
+  handle->color(FromColor(control.BackColor()));
+  handle->labelcolor(FromColor(control.ForeColor()));
   handle->labelsize(defaultTextSize);
+  handle->align(FL_ALIGN_LEFT | FL_ALIGN_INSIDE | FL_ALIGN_CLIP | FL_ALIGN_WRAP);
+  defWindowProcs.Add((intptr)handle, {*handle, &T::HandleControl});
+  return handle;
+}
+
+intptr FormsApi::Control::Create(const System::Windows::Forms::Button& button) {
+  FlButton* handle = CreateControl<FlButton>(button);
   handle->align(FL_ALIGN_CENTER | FL_ALIGN_INSIDE | FL_ALIGN_CLIP | FL_ALIGN_WRAP);
   return (intptr)handle;
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::CheckBox& checkBox) {
-  FlCheckBox* handle = new FlCheckBox(checkBox.Location().X, checkBox.Location().Y, checkBox.Size().Width, checkBox.Size().Height, checkBox.data().text.c_str());
-  handle->color(FromColor(checkBox.BackColor()));
-  handle->labelcolor(FromColor(checkBox.ForeColor()));
-  handle->labelsize(defaultTextSize);
-  handle->align(FL_ALIGN_LEFT | FL_ALIGN_INSIDE | FL_ALIGN_CLIP | FL_ALIGN_WRAP);
+  FlCheckBox* handle = CreateControl<FlCheckBox>(checkBox);
   return (intptr)handle;
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Control& control) {
-  return IntPtr::Zero;
+  FlControl* handle = CreateControl<FlControl>(control);
+  return (intptr)handle;
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Form& form) {
-  FlForm* handle = new FlForm(form.Location().X, form.Location().Y, form.Size().Width, form.Size().Height, form.data().text.c_str());
-  handle->color(FromColor(form.BackColor()));
-  handle->labelcolor(FromColor(form.ForeColor()));
-  handle->labelsize(defaultTextSize);
+  FlForm* handle = CreateControl<FlForm>(form);
   handle->resizable(handle);
   handle->align(FL_ALIGN_CENTER | FL_ALIGN_INSIDE | FL_ALIGN_CLIP | FL_ALIGN_WRAP);
   return (intptr)handle;
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Label& label) {
-  FlLabel* handle = new FlLabel(label.Location().X, label.Location().Y, label.Size().Width, label.Size().Height, label.data().text.c_str());
+  FlLabel* handle = CreateControl<FlLabel>(label);
   handle->box(FL_NO_BOX);
-  handle->color(FromColor(label.BackColor()));
-  handle->labelcolor(FromColor(label.ForeColor()));
-  handle->labelsize(defaultTextSize);
-  handle->align(FL_ALIGN_LEFT | FL_ALIGN_INSIDE | FL_ALIGN_CLIP | FL_ALIGN_WRAP);
   return (intptr)handle;
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::RadioButton& radioButton) {
-  FlRadioButton* handle = new FlRadioButton(radioButton.Location().X, radioButton.Location().Y, radioButton.Size().Width, radioButton.Size().Height, radioButton.data().text.c_str());
-  handle->color(FromColor(radioButton.BackColor()));
-  handle->labelcolor(FromColor(radioButton.ForeColor()));
-  handle->labelsize(defaultTextSize);
-  handle->align(FL_ALIGN_LEFT | FL_ALIGN_INSIDE | FL_ALIGN_CLIP | FL_ALIGN_WRAP);
+  FlRadioButton* handle = CreateControl<FlRadioButton>(radioButton);
   return (intptr)handle;
 }
 
 void FormsApi::Control::DefWndProc(System::Windows::Forms::Message& message) {
+  if (defWindowProcs.ContainsKey(message.HWnd))
+    message.Result = defWindowProcs[message.HWnd()](message.Handle);
 }
 
 void FormsApi::Control::Destroy(const System::Windows::Forms::Control& control) {
