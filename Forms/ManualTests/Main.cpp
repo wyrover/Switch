@@ -1,3 +1,4 @@
+#include <Pcf/System/Diagnostics/ConsoleTraceListener.h>
 #include <Pcf/System/Windows/Forms/Application.h>
 #include <Pcf/System/Windows/Forms/Button.h>
 #include <Pcf/System/Windows/Forms/CheckBox.h>
@@ -16,6 +17,8 @@ namespace PcfFormApp {
   public:
     // The main entry point for the application.
     static void Main() {
+      System::Diagnostics::Debug::AutoFlush = true;
+      System::Diagnostics::Debug::Listeners().Add(System::Diagnostics::ConsoleTraceListener());
       Application::EnableVisualStyles();
       Application::Run(Form1());
     }

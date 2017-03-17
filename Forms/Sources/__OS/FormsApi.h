@@ -18,7 +18,8 @@
 #include "../../Includes/Pcf/System/Windows/Forms/MessageBoxIcon.h"
 #include "../../Includes/Pcf/System/Windows/Forms/MessageBoxOptions.h"
 #include "../../Includes/Pcf/System/Windows/Forms/RadioButton.h"
-#include "WindowMessages.h"
+#include "WindowMessage.h"
+#include "WindowMessageKey.h"
 
 namespace __OS {
   class FormsApi pcf_static {

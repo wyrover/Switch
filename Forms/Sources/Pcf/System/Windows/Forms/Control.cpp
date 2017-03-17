@@ -20,13 +20,10 @@ namespace {
   };
 
   bool AllWindowMessagesFilter(const Message& message) {
-    return __OS::FormsApi::Control::MessageToString(message.Msg).StartsWith("WM_CTLCOLORDLG");
+    return !message.ToString().Contains("WM_NULL");
   }
 
   MouseButtons MessageToMouseButtons(Message message) {
-    //constexpr int MK_XBUTTON1 = 0x0020;
-    constexpr int MK_XBUTTON2 = 0x0040;
-
     if (message.Msg == WM_LBUTTONDBLCLK || message.Msg == WM_LBUTTONDOWN || message.Msg == WM_RBUTTONUP)
       return MouseButtons::Left;
     else if (message.Msg == WM_RBUTTONDBLCLK || message.Msg == WM_RBUTTONDOWN || message.Msg == WM_RBUTTONUP)
@@ -141,6 +138,7 @@ void Control::WndProc(Message& message) {
     this->data->messageActions[message.Msg](message);
   } else {
     System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::AllWindowMessages && AllWindowMessagesFilter(message), "DefWndProc message=" + message + ", name=" + this->data->name);
+    System::Diagnostics::Debug::Flush();
     this->DefWndProc(message);
   }
 }

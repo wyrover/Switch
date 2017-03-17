@@ -4,10 +4,10 @@ using namespace System;
 using namespace System::Diagnostics;
 
 namespace {
-  bool autoFlush = false;
-  int32 indentLevel = 0;
-  int32 indentSize = 4;
-  bool useGlobalLock = true;
+  static bool autoFlush = false;
+  static int32 indentLevel = 0;
+  static int32 indentSize = 4;
+  static bool useGlobalLock = true;
 }
 
 Property<bool> Debug::AutoFlush {

@@ -28,29 +28,47 @@ namespace {
   static int32 defaultTextSize = 12;
   static System::Collections::Generic::SortedDictionary<intptr, delegate<int32, int32>> defWindowProcs;
 
+  static Fl_Color FromColor(const System::Drawing::Color& color) {
+    return fl_rgb_color(as<byte>(color.R()), as<byte>(color.G()), as<byte>(color.B()));
+  }
+
+  static int32 GetMouseButtonState() {
+    int32 flState = Fl::event_state();
+    int32 state = 0;
+    state += (flState & FL_CTRL) == FL_CTRL ? MK_CONTROL : 0;
+    state += (flState & FL_BUTTON1) == FL_BUTTON1 ? MK_LBUTTON : 0;
+    state += (flState & FL_BUTTON2) == FL_BUTTON2 ? MK_MBUTTON : 0;
+    state += (flState & FL_BUTTON3) == FL_BUTTON3 ? MK_RBUTTON : 0;
+    state += (flState & FL_SHIFT) == FL_SHIFT ? MK_SHIFT : 0;
+    return state;
+  }
+
+  static int32 GetMouseWheelDelta() {
+    static const int32 WHEEL_DELTA = 40;
+    return -Fl::event_dy() * WHEEL_DELTA;
+  }
+
+  static int32 GetMouseXCoordinate() {
+    return Fl::event_x_root();
+  }
+
+  static int32 GetMouseYCoordinate() {
+    return Fl::event_y_root();
+  }
+
+  static int32 GetMouseXCoordinateRelativeToClientArea() {
+    return Fl::event_x();
+  }
+
+  static int32 GetMouseYCoordinateRelativeToClientArea() {
+    return Fl::event_y();
+  }
+
   class FlWidget : public object {
   public:
     void Draw(FlWidget& control) {control.DrawControl();}
 
-    int HandleEvent(int event, FlWidget& control) {
-      /*
-      switch (event) {
-        case FL_SHORTCUT: this->OnShortcut(); break;
-        case FL_DEACTIVATE: this->OnDeactivate(); break;
-        case FL_ACTIVATE: this->OnActivate(); break;
-        case FL_HIDE: this->OnHide(); break;
-        case FL_SHOW: this->OnShow(); break;
-        case FL_PASTE: this->OnPaste(); break;
-        case FL_SELECTIONCLEAR: this->OnSelectionClear(); break;
-        case FL_DND_ENTER: isHandled = this->OnDndEnter(); break;
-        case FL_DND_DRAG: isHandled = this->OnDndDrag(); break;
-        case FL_DND_RELEASE: isHandled = this->OnDndRelease(); break;
-        case FL_DND_LEAVE: isHandled = this->OnDndLeave(); break;
-        case FL_SCREEN_CONFIGURATION_CHANGED: this->OnScreenConfiguartionChange(); break;
-        case FL_FULLSCREEN: this->OnFullscreen(); break;
-      }
-      */
-
+    int32 HandleEvent(int32 event, FlWidget& control) {
       if (this->events.ContainsKey(event))
         return this->events[event](event, control);
       return control.HandleControl(event);
@@ -62,11 +80,11 @@ namespace {
     virtual Fl_Widget& ToWidget() = 0;
 
   private:
-     int WndProc(Message& message) {
+     int32 WndProc(Message& message) {
       Reference<Control> control = Control::FromHandle(message.HWnd);
       if (control != null)
         control().WndProc(message);
-      return message.Result;
+      return 1;
     }
 
     int32 FlNoEvent(int32 event, FlWidget& control) {
@@ -75,7 +93,7 @@ namespace {
     }
 
     int32 FlEnter(int32 event, FlWidget& control) {
-      Message message = Message::Create((intptr)&control, WM_NULL, 0, 0, 0, event);
+      Message message = Message::Create((intptr)&control, WM_MOUSEENTER, 0, 0, 0, event);
       return this->WndProc(message);
     }
 
@@ -85,17 +103,27 @@ namespace {
     }
 
     int32 FlPush(int32 event, FlWidget& control) {
-      Message message = Message::Create((intptr)&control, WM_LBUTTONDOWN, 0, 0, 0, event);
+      int32 mouseButton = WM_LBUTTONDOWN;
+      if ((GetMouseButtonState() & MK_MBUTTON) == MK_MBUTTON)
+        mouseButton = WM_MBUTTONDOWN;
+      if ((GetMouseButtonState() & MK_RBUTTON) == MK_RBUTTON)
+        mouseButton = WM_RBUTTONDOWN;
+      Message message = Message::Create((intptr)&control, mouseButton, GetMouseButtonState(), (GetMouseYCoordinateRelativeToClientArea() << 16) + GetMouseXCoordinateRelativeToClientArea(), 0, event);
       return this->WndProc(message);
     }
 
     int32 FlRelease(int32 event, FlWidget& control) {
-      Message message = Message::Create((intptr)&control, WM_LBUTTONUP, 0, 0, 0, event);
+      int32 mouseButton = WM_LBUTTONUP;
+      if ((GetMouseButtonState() & MK_MBUTTON) == MK_MBUTTON)
+        mouseButton = WM_MBUTTONUP;
+      if ((GetMouseButtonState() & MK_RBUTTON) == MK_RBUTTON)
+        mouseButton = WM_RBUTTONUP;
+      Message message = Message::Create((intptr)&control, mouseButton, GetMouseButtonState(), (GetMouseYCoordinateRelativeToClientArea() << 16) + GetMouseXCoordinateRelativeToClientArea(), 0, event);
       return this->WndProc(message);
     }
 
     int32 FlMouseWheel(int32 event, FlWidget& control) {
-      Message message = Message::Create((intptr)&control, WM_MOUSEHWHEEL, 0, 0, 0, event);
+      Message message = Message::Create((intptr)&control, WM_MOUSEHWHEEL, (GetMouseWheelDelta() << 16) + GetMouseButtonState(), (GetMouseYCoordinate() << 16) + GetMouseXCoordinate(), 0, event);
       return this->WndProc(message);
     }
 
@@ -211,9 +239,7 @@ namespace {
 
   private:
     using FlEventHandler = delegate<int32, int32, FlWidget&>;
-    System::Collections::Generic::SortedDictionary<int32, FlEventHandler> events {
-      {FL_NO_EVENT, {*this, &FlWidget::FlNoEvent}}, {FL_ENTER, {*this, &FlWidget::FlEnter}}, {FL_MOVE, {*this, &FlWidget::FlMove}}, {FL_PUSH, {*this, &FlWidget::FlPush}}, {FL_RELEASE, {*this, &FlWidget::FlRelease}}, {FL_MOUSEWHEEL, {*this, &FlWidget::FlMouseWheel}}, {FL_LEAVE, {*this, &FlWidget::FlLeave}}, {FL_DRAG, {*this, &FlWidget::FlDrag}}, {FL_FOCUS, {*this, &FlWidget::FlFocus}}, {FL_UNFOCUS, {*this, &FlWidget::FlUnfocus}}, {FL_KEYDOWN, {*this, &FlWidget::FlKeyDown}}, {FL_KEYUP, {*this, &FlWidget::FlKeyUp}}, {FL_CLOSE, {*this, &FlWidget::FlClose}},
-    };
+    System::Collections::Generic::SortedDictionary<int32, FlEventHandler> events {{FL_NO_EVENT, {*this, &FlWidget::FlNoEvent}}, {FL_ENTER, {*this, &FlWidget::FlEnter}}, {FL_MOVE, {*this, &FlWidget::FlMove}}, {FL_PUSH, {*this, &FlWidget::FlPush}}, {FL_RELEASE, {*this, &FlWidget::FlRelease}}, {FL_MOUSEWHEEL, {*this, &FlWidget::FlMouseWheel}}, {FL_LEAVE, {*this, &FlWidget::FlLeave}}, {FL_DRAG, {*this, &FlWidget::FlDrag}}, {FL_FOCUS, {*this, &FlWidget::FlFocus}}, {FL_UNFOCUS, {*this, &FlWidget::FlUnfocus}}, {FL_KEYDOWN, {*this, &FlWidget::FlKeyDown}}, {FL_KEYUP, {*this, &FlWidget::FlKeyUp}}, {FL_CLOSE, {*this, &FlWidget::FlClose}}, {FL_SHORTCUT, {*this, &FlWidget::FlShortcut}}, {FL_ACTIVATE, {*this, &FlWidget::FlActivate}}, {FL_DEACTIVATE, {*this, &FlWidget::FlDeactivate}}, {FL_HIDE, {*this, &FlWidget::FlHide}}, {FL_SHOW, {*this, &FlWidget::FLShow}}, {FL_SELECTIONCLEAR, {*this, &FlWidget::FlSelectionClear}}, {FL_DND_ENTER, {*this, &FlWidget::FlDndEnter}}, {FL_DND_DRAG, {*this, &FlWidget::FlDndDrag}}, {FL_DND_RELEASE, {*this, &FlWidget::FlDndRelease}}, {FL_DND_LEAVE, {*this, &FlWidget::FlDndLeave}}, {FL_SCREEN_CONFIGURATION_CHANGED, {*this, &FlWidget::FlScreenConfiguartionChange}}, {FL_FULLSCREEN, {*this, &FlWidget::FlFullscreen}}};
   };
 
   class FlButton : public FlWidget, public Fl_Button {
@@ -281,10 +307,6 @@ namespace {
     const Fl_Widget& ToWidget() const override {return *this;}
     Fl_Widget& ToWidget() override {return *this;}
   };
-
-  static Fl_Color FromColor(const System::Drawing::Color& color) {
-    return fl_rgb_color(as<byte>(color.R()), as<byte>(color.G()), as<byte>(color.B()));
-  }
 }
 
 bool FormsApi::Application::visualStylesEnabled = false;
