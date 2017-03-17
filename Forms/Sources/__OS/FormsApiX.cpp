@@ -34,7 +34,6 @@ namespace {
 
     int HandleEvent(int event, FlWidget& control) {
       /*
-      int32 isHandled = false;
       switch (event) {
         case FL_SHORTCUT: this->OnShortcut(); break;
         case FL_DEACTIVATE: this->OnDeactivate(); break;
@@ -49,8 +48,6 @@ namespace {
         case FL_DND_LEAVE: isHandled = this->OnDndLeave(); break;
         case FL_SCREEN_CONFIGURATION_CHANGED: this->OnScreenConfiguartionChange(); break;
         case FL_FULLSCREEN: this->OnFullscreen(); break;
-        default: System::Console::WriteLine("Event {0} unknown !!!", event);
-        return isHandled;
       }
       */
 
