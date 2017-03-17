@@ -1,5 +1,6 @@
 #if __linux__
 #include <Pcf/System/Diagnostics/Debug.h>
+#include <Pcf/System/Console.h>
 #include <Pcf/System/NotImplementedException.h>
 #include "../../Includes/Pcf/System/Windows/Forms/Application.h"
 #include "../../Includes/Pcf/System/Windows/Forms/Control.h"
@@ -61,9 +62,128 @@ namespace {
 
     template<typename T>
     int HandleEvent(int event, T& control) {
-      WidgetEventArgs eventArgs(event, control.HandleControl(event) != 0);
-      this->EventHandled(object(), eventArgs);
-      return as<int32>(eventArgs.IsHandled());
+      int32 isHandled = false;
+      switch (event) {
+        case FL_NO_EVENT: this->OnNoEvent(); break;
+        case FL_ENTER: this->OnEnter(); break;
+        case FL_MOVE: this->OnMove(); break;
+        case FL_PUSH: this->OnPush(control); break;
+        case FL_RELEASE: this->OnRelease(); break;
+        case FL_MOUSEWHEEL: this->OnMouseWheel(); break;
+        case FL_LEAVE: this->OnLeave(); break;
+        case FL_DRAG: this->OnDrag(); break;
+        case FL_FOCUS: isHandled = this->OnFocus(); break;
+        case FL_UNFOCUS: this->OnUnfocus(); break;
+        case FL_KEYDOWN: this->OnKeyDown(); break;
+        case FL_KEYUP: this->OnKeyUp(); break;
+        case FL_CLOSE: this->OnClose(); break;
+        case FL_SHORTCUT: this->OnShortcut(); break;
+        case FL_DEACTIVATE: this->OnDeactivate(); break;
+        case FL_ACTIVATE: this->OnActivate(); break;
+        case FL_HIDE: this->OnHide(); break;
+        case FL_SHOW: this->OnShow(); break;
+        case FL_PASTE: this->OnPaste(); break;
+        case FL_SELECTIONCLEAR: this->OnSelectionClear(); break;
+        case FL_DND_ENTER: isHandled = this->OnDndEnter(); break;
+        case FL_DND_DRAG: isHandled = this->OnDndDrag(); break;
+        case FL_DND_RELEASE: isHandled = this->OnDndRelease(); break;
+        case FL_DND_LEAVE: isHandled = this->OnDndLeave(); break;
+        case FL_SCREEN_CONFIGURATION_CHANGED: this->OnScreenConfiguartionChange(); break;
+        case FL_FULLSCREEN: this->OnFullscreen(); break;
+        default: System::Console::WriteLine("Event {0} unknown !!!", event);
+      }
+      return isHandled;
+    }
+
+    void OnNoEvent() {
+    }
+
+    void OnEnter() {
+    }
+
+    void OnMove() {
+    }
+
+    template<typename T>
+    void OnPush(T& control) {
+      Message message = Message::Create((intptr)&control, WM_LBUTTONDOWN, 0, 0, 0);
+    }
+
+    void OnRelease() {
+    }
+
+    void OnMouseWheel() {
+    }
+
+    void OnLeave() {
+    }
+
+    void OnDrag() {
+    }
+
+    bool OnFocus() {
+      return false;
+    }
+
+    void OnUnfocus() {
+    }
+
+    void OnKeyDown() {
+    }
+
+    void OnKeyUp() {
+    }
+
+    void OnClose() {
+    }
+
+    void OnShortcut() {
+    }
+
+    void OnDeactivate() {
+    }
+
+    void OnActivate() {
+    }
+
+    void OnHide() {
+    }
+
+    void OnShow() {
+    }
+
+    void OnPaste() {
+    }
+
+    void OnSelectionClear() {
+    }
+
+    bool OnDndEnter() {
+      return false;
+    }
+
+    bool OnDndDrag() {
+      return false;
+    }
+
+    bool OnDndRelease() {
+      return false;
+    }
+
+    bool OnDndLeave() {
+      return false;
+    }
+
+    void OnScreenConfiguartionChange() {
+    }
+
+    void OnFullscreen() {
+    }
+
+    void OnFormSizeChange() {
+    }
+
+    void OnFormMove() {
     }
 
     static void __Callback__(Fl_Widget* widget, void* param) {
