@@ -66,6 +66,12 @@ namespace {
 
   class FlWidget : public object {
   public:
+    static const int32 notUsed = 0;
+
+    int32 Close(FlWidget& control) {
+      return control.HandleControl(FL_CLOSE);
+    }
+
     void Draw(FlWidget& control) {control.DrawControl();}
 
     int32 HandleEvent(int32 event, FlWidget& control) {
@@ -88,12 +94,12 @@ namespace {
     }
 
     int32 FlNoEvent(int32 event, FlWidget& control) {
-      Message message = Message::Create((intptr)&control, WM_NULL, 0, 0, 0, event);
+      Message message = Message::Create((intptr)&control, WM_NULL, notUsed, notUsed, 0, event);
       return this->WndProc(message);
     }
 
     int32 FlEnter(int32 event, FlWidget& control) {
-      Message message = Message::Create((intptr)&control, WM_MOUSEENTER, 0, 0, 0, event);
+      Message message = Message::Create((intptr)&control, WM_MOUSEENTER, notUsed, notUsed, 0, event);
       this->hover = true;
       return this->WndProc(message);
     }
@@ -133,7 +139,7 @@ namespace {
     }
 
     int32 FlLeave(int32 event, FlWidget& control) {
-      Message message = Message::Create((intptr)&control, WM_MOUSELEAVE, 0, 0, 0, event);
+      Message message = Message::Create((intptr)&control, WM_MOUSELEAVE, notUsed, notUsed, 0, event);
       this->hover = false;
       return this->WndProc(message);
     }
@@ -144,12 +150,13 @@ namespace {
     }
 
     int32 FlFocus(int32 event, FlWidget& control) {
-      Message message = Message::Create((intptr)&control, WM_NULL, 0, 0, 0, event);
+      Message message = Message::Create((intptr)&control, WM_SETFOCUS, this->previousHwndFocused, notUsed, 0, event);
+      this->hwndFocused = (intptr)&control;
       return this->WndProc(message);
     }
 
     int32 FlUnfocus(int32 event, FlWidget& control) {
-      Message message = Message::Create((intptr)&control, WM_NULL, 0, 0, 0, event);
+      Message message = Message::Create((intptr)&control, WM_KILLFOCUS, this->hwndFocused, notUsed, 0, event);
       return this->WndProc(message);
     }
 
@@ -164,7 +171,7 @@ namespace {
     }
 
     int32 FlClose(int32 event, FlWidget& control) {
-      Message message = Message::Create((intptr)&control, WM_CLOSE, 0, 0, 0, event);
+      Message message = Message::Create((intptr)&control, WM_CLOSE, notUsed, notUsed, 0, event);
       return this->WndProc(message);
     }
 
@@ -247,6 +254,8 @@ namespace {
     using FlEventHandler = delegate<int32, int32, FlWidget&>;
     System::Collections::Generic::SortedDictionary<int32, FlEventHandler> events {{FL_NO_EVENT, {*this, &FlWidget::FlNoEvent}}, {FL_ENTER, {*this, &FlWidget::FlEnter}}, {FL_MOVE, {*this, &FlWidget::FlMove}}, {FL_PUSH, {*this, &FlWidget::FlPush}}, {FL_RELEASE, {*this, &FlWidget::FlRelease}}, {FL_MOUSEWHEEL, {*this, &FlWidget::FlMouseWheel}}, {FL_LEAVE, {*this, &FlWidget::FlLeave}}, {FL_DRAG, {*this, &FlWidget::FlDrag}}, {FL_FOCUS, {*this, &FlWidget::FlFocus}}, {FL_UNFOCUS, {*this, &FlWidget::FlUnfocus}}, {FL_KEYDOWN, {*this, &FlWidget::FlKeyDown}}, {FL_KEYUP, {*this, &FlWidget::FlKeyUp}}, {FL_CLOSE, {*this, &FlWidget::FlClose}}, {FL_SHORTCUT, {*this, &FlWidget::FlShortcut}}, {FL_ACTIVATE, {*this, &FlWidget::FlActivate}}, {FL_DEACTIVATE, {*this, &FlWidget::FlDeactivate}}, {FL_HIDE, {*this, &FlWidget::FlHide}}, {FL_SHOW, {*this, &FlWidget::FLShow}}, {FL_SELECTIONCLEAR, {*this, &FlWidget::FlSelectionClear}}, {FL_DND_ENTER, {*this, &FlWidget::FlDndEnter}}, {FL_DND_DRAG, {*this, &FlWidget::FlDndDrag}}, {FL_DND_RELEASE, {*this, &FlWidget::FlDndRelease}}, {FL_DND_LEAVE, {*this, &FlWidget::FlDndLeave}}, {FL_SCREEN_CONFIGURATION_CHANGED, {*this, &FlWidget::FlScreenConfiguartionChange}}, {FL_FULLSCREEN, {*this, &FlWidget::FlFullscreen}}};
     bool hover = false;
+    intptr hwndFocused = IntPtr::Zero;
+    intptr previousHwndFocused = IntPtr::Zero;
   };
 
   class FlButton : public FlWidget, public Fl_Button {
@@ -282,9 +291,13 @@ namespace {
     Fl_Widget& ToWidget() override {return *this;}
   };
 
+  static void CloseForm(Fl_Widget* widget, void* param);
+
   class FlForm : public FlWidget, public Fl_Double_Window {
   public:
-    FlForm(int32 x, int32 y, int32 w, int32 h, const char* t) : Fl_Double_Window(x, y, w, h, t) {}
+    FlForm(int32 x, int32 y, int32 w, int32 h, const char* t) : Fl_Double_Window(x, y, w, h, t) {
+      this->callback(CloseForm, this);
+    }
     void draw() override {this->Draw(*this);}
     int handle(int event) override {return this->HandleEvent(event, *this);}
     void DrawControl() override {this->Fl_Double_Window::draw();}
@@ -292,6 +305,10 @@ namespace {
     const Fl_Widget& ToWidget() const override {return *this;}
     Fl_Widget& ToWidget() override {return *this;}
   };
+
+  static void CloseForm(Fl_Widget* widget, void* param) {
+    ((FlForm*)param)->Close(*((FlForm*)param));
+  }
 
   class FlLabel : public FlWidget, public Fl_Box {
   public:
