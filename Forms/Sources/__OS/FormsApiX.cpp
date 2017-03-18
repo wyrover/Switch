@@ -94,11 +94,16 @@ namespace {
 
     int32 FlEnter(int32 event, FlWidget& control) {
       Message message = Message::Create((intptr)&control, WM_MOUSEENTER, 0, 0, 0, event);
+      this->hover = true;
       return this->WndProc(message);
     }
 
     int32 FlMove(int32 event, FlWidget& control) {
-      Message message = Message::Create((intptr)&control, WM_NULL, 0, 0, 0, event);
+      if (this->hover) {
+        Message message = Message::Create((intptr)&control, WM_MOUSEHOVER, GetMouseButtonState(), (GetMouseYCoordinateRelativeToClientArea() << 16) + GetMouseXCoordinateRelativeToClientArea(), 0, event);
+        this->WndProc(message);
+      }
+      Message message = Message::Create((intptr)&control, WM_MOUSEMOVE, GetMouseButtonState(), (GetMouseYCoordinateRelativeToClientArea() << 16) + GetMouseXCoordinateRelativeToClientArea(), 0, event);
       return this->WndProc(message);
     }
 
@@ -128,7 +133,8 @@ namespace {
     }
 
     int32 FlLeave(int32 event, FlWidget& control) {
-      Message message = Message::Create((intptr)&control, WM_NULL, 0, 0, 0, event);
+      Message message = Message::Create((intptr)&control, WM_MOUSELEAVE, 0, 0, 0, event);
+      this->hover = false;
       return this->WndProc(message);
     }
 
@@ -240,6 +246,7 @@ namespace {
   private:
     using FlEventHandler = delegate<int32, int32, FlWidget&>;
     System::Collections::Generic::SortedDictionary<int32, FlEventHandler> events {{FL_NO_EVENT, {*this, &FlWidget::FlNoEvent}}, {FL_ENTER, {*this, &FlWidget::FlEnter}}, {FL_MOVE, {*this, &FlWidget::FlMove}}, {FL_PUSH, {*this, &FlWidget::FlPush}}, {FL_RELEASE, {*this, &FlWidget::FlRelease}}, {FL_MOUSEWHEEL, {*this, &FlWidget::FlMouseWheel}}, {FL_LEAVE, {*this, &FlWidget::FlLeave}}, {FL_DRAG, {*this, &FlWidget::FlDrag}}, {FL_FOCUS, {*this, &FlWidget::FlFocus}}, {FL_UNFOCUS, {*this, &FlWidget::FlUnfocus}}, {FL_KEYDOWN, {*this, &FlWidget::FlKeyDown}}, {FL_KEYUP, {*this, &FlWidget::FlKeyUp}}, {FL_CLOSE, {*this, &FlWidget::FlClose}}, {FL_SHORTCUT, {*this, &FlWidget::FlShortcut}}, {FL_ACTIVATE, {*this, &FlWidget::FlActivate}}, {FL_DEACTIVATE, {*this, &FlWidget::FlDeactivate}}, {FL_HIDE, {*this, &FlWidget::FlHide}}, {FL_SHOW, {*this, &FlWidget::FLShow}}, {FL_SELECTIONCLEAR, {*this, &FlWidget::FlSelectionClear}}, {FL_DND_ENTER, {*this, &FlWidget::FlDndEnter}}, {FL_DND_DRAG, {*this, &FlWidget::FlDndDrag}}, {FL_DND_RELEASE, {*this, &FlWidget::FlDndRelease}}, {FL_DND_LEAVE, {*this, &FlWidget::FlDndLeave}}, {FL_SCREEN_CONFIGURATION_CHANGED, {*this, &FlWidget::FlScreenConfiguartionChange}}, {FL_FULLSCREEN, {*this, &FlWidget::FlFullscreen}}};
+    bool hover = false;
   };
 
   class FlButton : public FlWidget, public Fl_Button {
