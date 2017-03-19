@@ -31,8 +31,7 @@ namespace PcfFormApp {
       this->Location = System::Drawing::Point(200, 100);
 
       this->FormClosing += pcf_delegate(const object& sender, FormClosingEventArgs& e) {
-        //e.Cancel = MessageBox::Show("Do you want quit application ?", "Program", MessageBoxButtons::YesNo, MessageBoxIcon::Question) != DialogResult::Yes;
-        e.Cancel = false;
+        e.Cancel = MessageBox::Show("Do you want quit\napplication ?", "Program", MessageBoxButtons::YesNo, MessageBoxIcon::Question) != DialogResult::Yes;
       };
       
       this->button1.Parent = *this;

@@ -1,5 +1,6 @@
 #if __linux__
 #include <Pcf/System/Diagnostics/Debug.h>
+#include <Pcf/System/Collections/Generic/SortedDictionary.h>
 #include <Pcf/System/Console.h>
 #include <Pcf/System/Delegate.h>
 #include <Pcf/System/NotImplementedException.h>
@@ -8,15 +9,22 @@
 #include "FormsApi.h"
 
 #include <FL/Fl.H>
+#include <FL/fl_ask.H>
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Button.H>
 #include <FL/Fl_Check_Button.H>
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_File_Icon.H>
+#include <FL/Fl_Pixmap.H>
 #include <FL/Fl_Round_Button.H>
 #include <FL/Fl_Text_Buffer.H>
 #include <FL/Fl_Window.H>
 #undef None
+
+#include "Exclamation.h"
+#include "Information.h"
+#include "Question.h"
+#include "Stop.h"
 
 using namespace System;
 using namespace System::Drawing;
@@ -24,6 +32,11 @@ using namespace System::Windows::Forms;
 using namespace __OS;
 
 namespace {
+  static Fl_Pixmap exclamationIcon(Exclamation);
+  static Fl_Pixmap informationIcon(Information);
+  static Fl_Pixmap noneIcon(Information);
+  static Fl_Pixmap questionIcon(Question);
+  static Fl_Pixmap stopIcon(Stop);
   static int32 exitCode = 0;
   static int32 defaultTextSize = 12;
   static System::Collections::Generic::SortedDictionary<intptr, delegate<int32, int32>> defWindowProcs;
@@ -69,7 +82,7 @@ namespace {
     static const int32 notUsed = 0;
 
     int32 Close(FlWidget& control) {
-      return control.HandleControl(FL_CLOSE);
+      return control.events[FL_CLOSE](FL_CLOSE, control);
     }
 
     void Draw(FlWidget& control) {control.DrawControl();}
@@ -343,7 +356,25 @@ void FormsApi::Application::MessageLoop(EventHandler idle) {
   exitCode = Fl::run();
 }
 
+Fl_Pixmap& ToPixmap(MessageBoxIcon icon) {
+  switch(icon) {
+ case MessageBoxIcon::Exclamation : return exclamationIcon;
+  case MessageBoxIcon::Information : return informationIcon;
+  case MessageBoxIcon::None : return noneIcon;
+  case MessageBoxIcon::Question : return questionIcon;
+  case MessageBoxIcon::Stop : return stopIcon;
+  }
+}
+
 DialogResult FormsApi::Application::ShowMessageBox(const string& message, const string& caption, MessageBoxButtons buttons, MessageBoxIcon icon, MessageBoxDefaultButton defaultButton, MessageBoxOptions options, bool displayHelpButton) {
+  fl_message_title(caption.c_str());
+  fl_message_icon()->copy_label("");
+  fl_message_icon()->align(FL_ALIGN_TEXT_NEXT_TO_IMAGE);
+  fl_message_icon()->image(ToPixmap(icon));
+  int result = fl_choice(message.c_str(), "No", "Yes", null);
+  if (result == 0) return DialogResult::No;
+  if (result == 1) return DialogResult::Yes;
+
   return DialogResult::None;
 }
 
