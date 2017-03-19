@@ -35,8 +35,8 @@ namespace {
     return MouseButtons::None;
   }
 
-  System::Drawing::Point MakePoint(intptr lParam) {
-    Array<byte> bytes = BitConverter::GetBytes(lParam);
+  System::Drawing::Point MakePoint(intptr param) {
+    Array<byte> bytes = BitConverter::GetBytes(param);
     return System::Drawing::Point(BitConverter::ToInt16(bytes, 0), BitConverter::ToInt16(bytes, 2));
   }
 }

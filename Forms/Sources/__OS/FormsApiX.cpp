@@ -40,6 +40,7 @@ namespace {
   static int32 exitCode = 0;
   static int32 defaultTextSize = 12;
   static System::Collections::Generic::SortedDictionary<intptr, delegate<int32, int32>> defWindowProcs;
+  static const int32 FL_PAINT = 255;
 
   static Fl_Color FromColor(const System::Drawing::Color& color) {
     return fl_rgb_color(as<byte>(color.R()), as<byte>(color.G()), as<byte>(color.B()));
@@ -85,7 +86,12 @@ namespace {
       return control.events[FL_CLOSE](FL_CLOSE, control);
     }
 
-    void Draw(FlWidget& control) {control.DrawControl();}
+    void Draw(FlWidget& control) {
+      if (this->events.ContainsKey(FL_PAINT))
+        this->events[FL_PAINT](FL_PAINT, control);
+      else
+        control.HandleControl(FL_PAINT);
+    }
 
     int32 HandleEvent(int32 event, FlWidget& control) {
       if (this->events.ContainsKey(event))
@@ -93,7 +99,6 @@ namespace {
       return control.HandleControl(event);
     }
 
-    virtual void DrawControl() = 0;
     virtual int32 HandleControl(int32 event) = 0;
     virtual const Fl_Widget& ToWidget() const = 0;
     virtual Fl_Widget& ToWidget() = 0;
@@ -263,9 +268,14 @@ namespace {
       return this->WndProc(message);
     }
 
+    int32 FlPaint(int32 event, FlWidget& control) {
+      Message message = Message::Create((intptr)&control, WM_PAINT, notUsed, notUsed, 0, event);
+      return this->WndProc(message);
+    }
+
   private:
     using FlEventHandler = delegate<int32, int32, FlWidget&>;
-    System::Collections::Generic::SortedDictionary<int32, FlEventHandler> events {{FL_NO_EVENT, {*this, &FlWidget::FlNoEvent}}, {FL_ENTER, {*this, &FlWidget::FlEnter}}, {FL_MOVE, {*this, &FlWidget::FlMove}}, {FL_PUSH, {*this, &FlWidget::FlPush}}, {FL_RELEASE, {*this, &FlWidget::FlRelease}}, {FL_MOUSEWHEEL, {*this, &FlWidget::FlMouseWheel}}, {FL_LEAVE, {*this, &FlWidget::FlLeave}}, {FL_DRAG, {*this, &FlWidget::FlDrag}}, {FL_FOCUS, {*this, &FlWidget::FlFocus}}, {FL_UNFOCUS, {*this, &FlWidget::FlUnfocus}}, {FL_KEYDOWN, {*this, &FlWidget::FlKeyDown}}, {FL_KEYUP, {*this, &FlWidget::FlKeyUp}}, {FL_CLOSE, {*this, &FlWidget::FlClose}}, {FL_SHORTCUT, {*this, &FlWidget::FlShortcut}}, {FL_ACTIVATE, {*this, &FlWidget::FlActivate}}, {FL_DEACTIVATE, {*this, &FlWidget::FlDeactivate}}, {FL_HIDE, {*this, &FlWidget::FlHide}}, {FL_SHOW, {*this, &FlWidget::FLShow}}, {FL_SELECTIONCLEAR, {*this, &FlWidget::FlSelectionClear}}, {FL_DND_ENTER, {*this, &FlWidget::FlDndEnter}}, {FL_DND_DRAG, {*this, &FlWidget::FlDndDrag}}, {FL_DND_RELEASE, {*this, &FlWidget::FlDndRelease}}, {FL_DND_LEAVE, {*this, &FlWidget::FlDndLeave}}, {FL_SCREEN_CONFIGURATION_CHANGED, {*this, &FlWidget::FlScreenConfiguartionChange}}, {FL_FULLSCREEN, {*this, &FlWidget::FlFullscreen}}};
+    System::Collections::Generic::SortedDictionary<int32, FlEventHandler> events {{FL_NO_EVENT, {*this, &FlWidget::FlNoEvent}}, {FL_ENTER, {*this, &FlWidget::FlEnter}}, {FL_MOVE, {*this, &FlWidget::FlMove}}, {FL_PUSH, {*this, &FlWidget::FlPush}}, {FL_RELEASE, {*this, &FlWidget::FlRelease}}, {FL_MOUSEWHEEL, {*this, &FlWidget::FlMouseWheel}}, {FL_LEAVE, {*this, &FlWidget::FlLeave}}, {FL_DRAG, {*this, &FlWidget::FlDrag}}, {FL_FOCUS, {*this, &FlWidget::FlFocus}}, {FL_UNFOCUS, {*this, &FlWidget::FlUnfocus}}, {FL_KEYDOWN, {*this, &FlWidget::FlKeyDown}}, {FL_KEYUP, {*this, &FlWidget::FlKeyUp}}, {FL_CLOSE, {*this, &FlWidget::FlClose}}, {FL_SHORTCUT, {*this, &FlWidget::FlShortcut}}, {FL_ACTIVATE, {*this, &FlWidget::FlActivate}}, {FL_DEACTIVATE, {*this, &FlWidget::FlDeactivate}}, {FL_HIDE, {*this, &FlWidget::FlHide}}, {FL_SHOW, {*this, &FlWidget::FLShow}}, {FL_SELECTIONCLEAR, {*this, &FlWidget::FlSelectionClear}}, {FL_DND_ENTER, {*this, &FlWidget::FlDndEnter}}, {FL_DND_DRAG, {*this, &FlWidget::FlDndDrag}}, {FL_DND_RELEASE, {*this, &FlWidget::FlDndRelease}}, {FL_DND_LEAVE, {*this, &FlWidget::FlDndLeave}}, {FL_SCREEN_CONFIGURATION_CHANGED, {*this, &FlWidget::FlScreenConfiguartionChange}}, {FL_FULLSCREEN, {*this, &FlWidget::FlFullscreen}}, {FL_PAINT, {*this, &FlWidget::FlPaint}}};
     bool hover = false;
     intptr hwndFocused = IntPtr::Zero;
     intptr previousHwndFocused = IntPtr::Zero;
@@ -276,8 +286,12 @@ namespace {
     FlButton(int32 x, int32 y, int32 w, int32 h, const char* t) : Fl_Button(x, y, w, h, t) {}
     void draw() override {this->Draw(*this);}
     int handle(int event) override {return this->HandleEvent(event, *this);}
-    void DrawControl() override {this->Fl_Button::draw();}
-    int32 HandleControl(int32 event) override {return this->Fl_Button::handle(event);}
+    int32 HandleControl(int32 event) override {
+      if (event != FL_PAINT)
+        return this->Fl_Button::handle(event);
+      this->Fl_Button::draw();
+      return 1;
+    }
     const Fl_Widget& ToWidget() const override {return *this;}
     Fl_Widget& ToWidget() override {return *this;}
   };
@@ -287,8 +301,12 @@ namespace {
     FlCheckBox(int32 x, int32 y, int32 w, int32 h, const char* t) : Fl_Check_Button(x, y, w, h, t) {}
     void draw() override {this->Draw(*this);}
     int handle(int event) override {return this->HandleEvent(event, *this);}
-    void DrawControl() override {this->Fl_Check_Button::draw();}
-    int32 HandleControl(int32 event) override {return this->Fl_Check_Button::handle(event);}
+    int32 HandleControl(int32 event) override {
+      if (event != FL_PAINT)
+        return this->Fl_Check_Button::handle(event);
+      this->Fl_Check_Button::draw();
+      return 1;
+    }
     const Fl_Widget& ToWidget() const override {return *this;}
     Fl_Widget& ToWidget() override {return *this;}
   };
@@ -298,8 +316,12 @@ namespace {
     FlControl(int32 x, int32 y, int32 w, int32 h, const char* t) : Fl_Widget(x, y, w, h, t) {}
     void draw() override {this->Draw(*this);}
     int handle(int event) override {return this->HandleEvent(event, *this);}
-    void DrawControl() override {/*this->Fl_Widget::draw();*/}
-    int32 HandleControl(int32 event) override {return this->Fl_Widget::handle(event);}
+    int32 HandleControl(int32 event) override {
+      if (event != FL_PAINT)
+        return this->Fl_Widget::handle(event);
+      //this->Fl_Widget::draw();
+      return 1;
+    }
     const Fl_Widget& ToWidget() const override {return *this;}
     Fl_Widget& ToWidget() override {return *this;}
   };
@@ -313,8 +335,12 @@ namespace {
     }
     void draw() override {this->Draw(*this);}
     int handle(int event) override {return this->HandleEvent(event, *this);}
-    void DrawControl() override {this->Fl_Double_Window::draw();}
-    int32 HandleControl(int32 event) override {return this->Fl_Double_Window::handle(event);}
+    int32 HandleControl(int32 event) override {
+      if (event != FL_PAINT)
+        return this->Fl_Double_Window::handle(event);
+      this->Fl_Double_Window::draw();
+      return 1;
+    }
     const Fl_Widget& ToWidget() const override {return *this;}
     Fl_Widget& ToWidget() override {return *this;}
   };
@@ -328,8 +354,12 @@ namespace {
     FlLabel(int32 x, int32 y, int32 w, int32 h, const char* t) : Fl_Box(x, y, w, h, t) {}
     void draw() override {this->Draw(*this);}
     int handle(int event) override {return this->HandleEvent(event, *this);}
-    void DrawControl() override {this->Fl_Box::draw();}
-    int32 HandleControl(int32 event) override {return this->Fl_Box::handle(event);}
+    int32 HandleControl(int32 event) override {
+      if (event != FL_PAINT)
+        return this->Fl_Box::handle(event);
+      this->Fl_Box::draw();
+      return 1;
+    }
     const Fl_Widget& ToWidget() const override {return *this;}
     Fl_Widget& ToWidget() override {return *this;}
   };
@@ -339,8 +369,12 @@ namespace {
     FlRadioButton(int32 x, int32 y, int32 w, int32 h, const char* t) : Fl_Round_Button(x, y, w, h, t) {}
     void draw() override {this->Draw(*this);}
     int handle(int event) override {return this->HandleEvent(event, *this);}
-    void DrawControl() override {this->Fl_Round_Button::draw();}
-    int32 HandleControl(int32 event) override {return this->Fl_Round_Button::handle(event);}
+    int32 HandleControl(int32 event) override {
+      if (event != FL_PAINT)
+        return this->Fl_Round_Button::handle(event);
+      this->Fl_Round_Button::draw();
+      return 1;
+    }
     const Fl_Widget& ToWidget() const override {return *this;}
     Fl_Widget& ToWidget() override {return *this;}
   };
@@ -369,6 +403,7 @@ Fl_Pixmap& ToPixmap(MessageBoxIcon icon) {
 DialogResult FormsApi::Application::ShowMessageBox(const string& message, const string& caption, MessageBoxButtons buttons, MessageBoxIcon icon, MessageBoxDefaultButton defaultButton, MessageBoxOptions options, bool displayHelpButton) {
   fl_message_title(caption.c_str());
   fl_message_icon()->copy_label("");
+  fl_message_hotspot(false);
   fl_message_icon()->align(FL_ALIGN_TEXT_NEXT_TO_IMAGE);
   fl_message_icon()->image(ToPixmap(icon));
   int result = fl_choice(message.c_str(), "No", "Yes", null);
