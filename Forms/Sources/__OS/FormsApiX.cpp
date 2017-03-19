@@ -78,7 +78,13 @@ namespace {
     return Fl::event_y();
   }
 
-  class FlWidget : public object {
+  class IFlWidget pcf_interface {
+  public:
+    virtual const Fl_Widget& ToWidget() const = 0;
+    virtual Fl_Widget& ToWidget() = 0;
+  };
+
+  class FlWidget : public IFlWidget {
   public:
     static const int32 notUsed = 0;
 
@@ -100,8 +106,6 @@ namespace {
     }
 
     virtual int32 HandleControl(int32 event) = 0;
-    virtual const Fl_Widget& ToWidget() const = 0;
-    virtual Fl_Widget& ToWidget() = 0;
 
   private:
      int32 WndProc(Message& message) {
@@ -132,22 +136,18 @@ namespace {
     }
 
     int32 FlPush(int32 event, FlWidget& control) {
-      int32 mouseButton = WM_LBUTTONDOWN;
-      if ((GetMouseButtonState() & MK_MBUTTON) == MK_MBUTTON)
-        mouseButton = WM_MBUTTONDOWN;
-      if ((GetMouseButtonState() & MK_RBUTTON) == MK_RBUTTON)
-        mouseButton = WM_RBUTTONDOWN;
-      Message message = Message::Create((intptr)&control, mouseButton, GetMouseButtonState(), (GetMouseYCoordinateRelativeToClientArea() << 16) + GetMouseXCoordinateRelativeToClientArea(), 0, event);
+      this->mouseButton = WM_LBUTTONDOWN;
+      if ((GetMouseButtonState() & MK_MBUTTON) == MK_MBUTTON) this->mouseButton = WM_MBUTTONDOWN;
+      if ((GetMouseButtonState() & MK_RBUTTON) == MK_RBUTTON) this->mouseButton = WM_RBUTTONDOWN;
+      Message message = Message::Create((intptr)&control, this->mouseButton, GetMouseButtonState(), (GetMouseYCoordinateRelativeToClientArea() << 16) + GetMouseXCoordinateRelativeToClientArea(), 0, event);
       return this->WndProc(message);
     }
 
     int32 FlRelease(int32 event, FlWidget& control) {
-      int32 mouseButton = WM_LBUTTONUP;
-      if ((GetMouseButtonState() & MK_MBUTTON) == MK_MBUTTON)
-        mouseButton = WM_MBUTTONUP;
-      if ((GetMouseButtonState() & MK_RBUTTON) == MK_RBUTTON)
-        mouseButton = WM_RBUTTONUP;
-      Message message = Message::Create((intptr)&control, mouseButton, GetMouseButtonState(), (GetMouseYCoordinateRelativeToClientArea() << 16) + GetMouseXCoordinateRelativeToClientArea(), 0, event);
+      if (this->mouseButton == WM_LBUTTONDOWN) this->mouseButton = WM_LBUTTONUP;
+      if (this->mouseButton == WM_MBUTTONDOWN) this->mouseButton = WM_MBUTTONUP;
+      if (this->mouseButton == WM_RBUTTONDOWN) this->mouseButton = WM_RBUTTONUP;
+      Message message = Message::Create((intptr)&control, this->mouseButton, GetMouseButtonState(), (GetMouseYCoordinateRelativeToClientArea() << 16) + GetMouseXCoordinateRelativeToClientArea(), 0, event);
       return this->WndProc(message);
     }
 
@@ -277,6 +277,7 @@ namespace {
     using FlEventHandler = delegate<int32, int32, FlWidget&>;
     System::Collections::Generic::SortedDictionary<int32, FlEventHandler> events {{FL_NO_EVENT, {*this, &FlWidget::FlNoEvent}}, {FL_ENTER, {*this, &FlWidget::FlEnter}}, {FL_MOVE, {*this, &FlWidget::FlMove}}, {FL_PUSH, {*this, &FlWidget::FlPush}}, {FL_RELEASE, {*this, &FlWidget::FlRelease}}, {FL_MOUSEWHEEL, {*this, &FlWidget::FlMouseWheel}}, {FL_LEAVE, {*this, &FlWidget::FlLeave}}, {FL_DRAG, {*this, &FlWidget::FlDrag}}, {FL_FOCUS, {*this, &FlWidget::FlFocus}}, {FL_UNFOCUS, {*this, &FlWidget::FlUnfocus}}, {FL_KEYDOWN, {*this, &FlWidget::FlKeyDown}}, {FL_KEYUP, {*this, &FlWidget::FlKeyUp}}, {FL_CLOSE, {*this, &FlWidget::FlClose}}, {FL_SHORTCUT, {*this, &FlWidget::FlShortcut}}, {FL_ACTIVATE, {*this, &FlWidget::FlActivate}}, {FL_DEACTIVATE, {*this, &FlWidget::FlDeactivate}}, {FL_HIDE, {*this, &FlWidget::FlHide}}, {FL_SHOW, {*this, &FlWidget::FLShow}}, {FL_SELECTIONCLEAR, {*this, &FlWidget::FlSelectionClear}}, {FL_DND_ENTER, {*this, &FlWidget::FlDndEnter}}, {FL_DND_DRAG, {*this, &FlWidget::FlDndDrag}}, {FL_DND_RELEASE, {*this, &FlWidget::FlDndRelease}}, {FL_DND_LEAVE, {*this, &FlWidget::FlDndLeave}}, {FL_SCREEN_CONFIGURATION_CHANGED, {*this, &FlWidget::FlScreenConfiguartionChange}}, {FL_FULLSCREEN, {*this, &FlWidget::FlFullscreen}}, {FL_PAINT, {*this, &FlWidget::FlPaint}}};
     bool hover = false;
+    int32 mouseButton = WM_LBUTTONDOWN;
     intptr hwndFocused = IntPtr::Zero;
     intptr previousHwndFocused = IntPtr::Zero;
   };

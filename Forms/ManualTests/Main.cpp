@@ -37,17 +37,6 @@ namespace PcfFormApp {
         this->label2.Text = e.Location().ToString();
       };
 
-      this->Paint += pcf_delegate(const object& sender, PaintEventArgs& e) {
-        System::Diagnostics::Debug::WriteLine("ClipRectangle = {0}", e.ClipRectangle);
-        //e.Graphics().Clear(System::Drawing::Color::LawnGreen);
-        System::Drawing::Pen pen(System::Drawing::Color::DarkGreen, 1);
-        pen.DashStyle = System::Drawing::Drawing2D::DashStyle::Dot;
-        System::Drawing::Rectangle rectangle = e.ClipRectangle;
-        rectangle.Inflate(-10, -10);
-        e.Graphics().DrawRectangle(pen, rectangle);
-        //e.Graphics().DrawRectangle(System::Drawing::Pen(System::Drawing::Color::DarkGreen, 2), { 5, 5, 200, 200 });
-      };
-
       this->button1.Parent = *this;
       this->button1.Name = "button1";
       this->button1.Text = "Button";
@@ -84,7 +73,7 @@ namespace PcfFormApp {
       this->label2.Name = "label2";
       this->label2.Text = "Text label";
       this->label2.Location = System::Drawing::Point(28, 162);
-      this->label2.Size = System::Drawing::Size(100, 23);
+      this->label2.Size = System::Drawing::Size(150, 23);
     }
     
   private:

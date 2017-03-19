@@ -353,11 +353,11 @@ void Control::WmPaint(Message& message) {
   if (this->GetStyle(ControlStyles::UserPaint)) {
   } else {
     this->DefWndProc(message);
-    Graphics graphics = Graphics::FromHwndInternal(this->data->handle);
-    System::Drawing::Rectangle clipRectangle(graphics.ClipBounds().Left, graphics.ClipBounds().Top, graphics.ClipBounds().Width, graphics.ClipBounds().Height);
-    PaintEventArgs paintEventArgs(clipRectangle, graphics);
-    this->OnPaint(paintEventArgs);
   }
+  Graphics graphics = Graphics::FromHwndInternal(this->data->handle);
+  System::Drawing::Rectangle clipRectangle(graphics.ClipBounds().Left, graphics.ClipBounds().Top, graphics.ClipBounds().Width, graphics.ClipBounds().Height);
+  PaintEventArgs paintEventArgs(clipRectangle, graphics);
+  this->OnPaint(paintEventArgs);
 }
 
 void Control::WmParentNotify(Message& message) {

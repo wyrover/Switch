@@ -10,6 +10,12 @@ using namespace System::Drawing;
 using namespace __OS;
 
 namespace {
+  class IFlWidget pcf_interface {
+  public:
+    virtual const Fl_Widget& ToWidget() const = 0;
+    virtual Fl_Widget& ToWidget() = 0;
+  };
+
   static System::Collections::Generic::SortedDictionary<System::Drawing::Drawing2D::DashStyle, int32> dashStyle = {{System::Drawing::Drawing2D::DashStyle::Custom, FL_SOLID}, {System::Drawing::Drawing2D::DashStyle::Dash, FL_DASH}, {System::Drawing::Drawing2D::DashStyle::DashDot, FL_DASHDOT}, {System::Drawing::Drawing2D::DashStyle::DashDotDot, FL_DASHDOTDOT}, {System::Drawing::Drawing2D::DashStyle::Dot, FL_DOT}, {System::Drawing::Drawing2D::DashStyle::Solid, FL_SOLID}};
 
   static Fl_Color FromColor(const System::Drawing::Color& color) {
@@ -74,18 +80,19 @@ void DrawingApi::Gdi::ReleaseDeviceContext(intptr hwnd, intptr hdc) {
 }
 
 System::Drawing::Rectangle DrawingApi::Gdi::GetClipRectangleFromHdc(intptr hdc) {
-  return System::Drawing::Rectangle(((Fl_Widget*)hdc)->x(), ((Fl_Widget*)hdc)->y(), ((Fl_Widget*)hdc)->w(), ((Fl_Widget*)hdc)->h());
+  return System::Drawing::Rectangle(0, 0, ((IFlWidget*)hdc)->ToWidget().w(), ((IFlWidget*)hdc)->ToWidget().h());
 }
 
 System::Drawing::Rectangle DrawingApi::Gdi::GetClipRectangleFromHwnd(intptr hwnd) {
-  return System::Drawing::Rectangle(((Fl_Widget*)hwnd)->x(), ((Fl_Widget*)hwnd)->y(), ((Fl_Widget*)hwnd)->w(), ((Fl_Widget*)hwnd)->h());
+  return System::Drawing::Rectangle(0, 0, ((IFlWidget*)hwnd)->ToWidget().w(), ((IFlWidget*)hwnd)->ToWidget().h());
 }
 
 void DrawingApi::Gdi::DrawRectangle(intptr handle, const System::Drawing::Pen& pen, int32 x, int32 y, int32 w, int32 h) {
-  fl_line_style(dashStyle[pen.DashStyle()], pen.Width());
   fl_color(FromColor(pen.Color));
+  fl_line_style(dashStyle[pen.DashStyle()], pen.Width());
   fl_rect(x, y, w, h);
-  fl_color(((Fl_Widget*)handle)->color());
+  fl_color(((IFlWidget*)handle)->ToWidget().color());
+  fl_line_style(dashStyle[System::Drawing::Drawing2D::DashStyle::Solid], 1);
 }
 
 void DrawingApi::Gdi::FillPie(intptr handle, const System::Drawing::Brush& brush, int32 x, int32 y, int32 w, int32 h, float startAngle, float sweepAngle) {

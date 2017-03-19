@@ -49,10 +49,10 @@ SizeF Graphics::MeasureString(const string& str, const Font& font) const {
 }
 
 Graphics Graphics::FromHwndInternal(intptr hwnd) {
-  //Rectangle clipRectangle;
-  //intptr hdc = __OS::DrawingApi::Gdi::BeginPaint(hwnd, clipRectangle);
-  //return Graphics(hwnd, hdc, clipRectangle);
-  return Graphics(hwnd, __OS::DrawingApi::Gdi::GetDeviceContext(hwnd), __OS::DrawingApi::Gdi::GetClipRectangleFromHwnd(hwnd));
+  intptr hdc = __OS::DrawingApi::Gdi::GetDeviceContext(hwnd);
+  Rectangle clipRectangle = __OS::DrawingApi::Gdi::GetClipRectangleFromHwnd(hwnd);
+  return Graphics(hwnd, hdc, clipRectangle);
+  //return Graphics(hwnd, __OS::DrawingApi::Gdi::GetDeviceContext(hwnd), __OS::DrawingApi::Gdi::GetClipRectangleFromHwnd(hwnd));
 }
 
 Graphics Graphics::FromHdcInternal(intptr hdc) {
