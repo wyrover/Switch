@@ -500,17 +500,10 @@ DialogResult FormsApi::Application::ShowMessageBox(const string& message, const 
   fl_message_icon()->box(FL_NO_BOX);
   fl_message_icon()->image(ToPixmap(icon));
   messageBox->color(FromColor(System::Windows::Forms::Control::DefaultBackColor));
-  for (int index; index < messageBox->children(); index++)
+  for (int index = 0; index < messageBox->children(); index++)
     messageBox->child(index)->color(FromColor(System::Windows::Forms::Control::DefaultBackColor));
-  switch (buttons) {
-  case MessageBoxButtons::AbortRetryIgnore: return ShowMessageBoxAbortRetryIgnore(message);
-  case MessageBoxButtons::OK: return ShowMessageBoxOK(message);
-  case MessageBoxButtons::OKCancel :  return ShowMessageBoxOKCancel(message);
-  case MessageBoxButtons::RetryCancel :   return ShowMessageBoxRetryCancel(message);
-  case MessageBoxButtons::YesNo: return ShowMessageBoxYesNo(message);
-  case MessageBoxButtons::YesNoCancel: return ShowMessageBoxYesNoCancel(message);
-  }
-  return DialogResult::None;
+  System::Collections::Generic::SortedDictionary<MessageBoxButtons, delegate<DialogResult, const string&>> showMessageBox = {{MessageBoxButtons::AbortRetryIgnore, ShowMessageBoxAbortRetryIgnore}, {MessageBoxButtons::OK, ShowMessageBoxOK}, {MessageBoxButtons::OKCancel, ShowMessageBoxOKCancel}, {MessageBoxButtons::RetryCancel, ShowMessageBoxRetryCancel}, {MessageBoxButtons::YesNo, ShowMessageBoxYesNo}, {MessageBoxButtons::YesNoCancel, ShowMessageBoxYesNoCancel}};
+  return showMessageBox[buttons](message);
 }
 
 namespace {
