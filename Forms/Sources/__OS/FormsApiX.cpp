@@ -490,7 +490,7 @@ DialogResult FormsApi::Application::ShowMessageBox(const string& message, const 
   fl_message_icon()->hide();
   fl_message_icon()->label("");
   Fl_Group* messageBox = fl_message_icon()->parent();
-  messageBox->color(FromColor(System::Windows::Forms::Control::DefaultBackColor));
+  messageBox->color(FromColor(System::Drawing::Color::White));
   messageBox->labelsize(defaultTextSize);
   for (int index = 0; index < messageBox->children(); index++) {
     messageBox->child(index)->color(FromColor(System::Windows::Forms::Control::DefaultBackColor));
