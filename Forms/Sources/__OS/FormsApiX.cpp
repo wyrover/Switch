@@ -454,16 +454,62 @@ Fl_Pixmap& ToPixmap(MessageBoxIcon icon) {
   }
 }
 
+DialogResult ShowMessageBoxAbortRetryIgnore(const string& message) {
+  int result = fl_choice(message.c_str(), "Abort", "Retry", "Ignore");
+  if (result == 0) return DialogResult::Abort;
+  if (result == 2) return DialogResult::Ignore;
+  return DialogResult::Retry;
+}
+
+DialogResult ShowMessageBoxOK(const string& message) {
+  fl_choice(message.c_str(), "OK", null, null);
+  return DialogResult::OK;
+}
+
+DialogResult ShowMessageBoxOKCancel(const string& message) {
+  int result = fl_choice(message.c_str(), "Cancel", "OK", null);
+  if (result == 0) return DialogResult::Cancel;
+  return DialogResult::OK;
+}
+
+DialogResult ShowMessageBoxRetryCancel(const string& message) {
+  int result = fl_choice(message.c_str(), "Cancel", "Retry", null);
+  if (result == 0) return DialogResult::Cancel;
+  return DialogResult::Retry;
+}
+
+DialogResult ShowMessageBoxYesNo(const string& message) {
+  int result = fl_choice(message.c_str(), "No", "Yes", null);
+  if (result == 0) return DialogResult::No;
+  return DialogResult::Yes;
+}
+
+DialogResult ShowMessageBoxYesNoCancel(const string& message) {
+  int result = fl_choice(message.c_str(), "No", "Yes", "Cacnel");
+  if (result == 0) return DialogResult::No;
+  if (result == 2) return DialogResult::Cancel;
+  return DialogResult::Yes;
+}
+
 DialogResult FormsApi::Application::ShowMessageBox(const string& message, const string& caption, MessageBoxButtons buttons, MessageBoxIcon icon, MessageBoxDefaultButton defaultButton, MessageBoxOptions options, bool displayHelpButton) {
   fl_message_title(caption.c_str());
   fl_message_icon()->copy_label("");
   fl_message_hotspot(false);
+  Fl_Group* messageBox = fl_message_icon()->parent();
   fl_message_icon()->align(FL_ALIGN_TEXT_NEXT_TO_IMAGE);
+  fl_message_icon()->box(FL_NO_BOX);
   fl_message_icon()->image(ToPixmap(icon));
-  int result = fl_choice(message.c_str(), "No", "Yes", null);
-  if (result == 0) return DialogResult::No;
-  if (result == 1) return DialogResult::Yes;
-
+  messageBox->color(FromColor(System::Windows::Forms::Control::DefaultBackColor));
+  for (int index; index < messageBox->children(); index++)
+    messageBox->child(index)->color(FromColor(System::Windows::Forms::Control::DefaultBackColor));
+  switch (buttons) {
+  case MessageBoxButtons::AbortRetryIgnore: return ShowMessageBoxAbortRetryIgnore(message);
+  case MessageBoxButtons::OK: return ShowMessageBoxOK(message);
+  case MessageBoxButtons::OKCancel :  return ShowMessageBoxOKCancel(message);
+  case MessageBoxButtons::RetryCancel :   return ShowMessageBoxRetryCancel(message);
+  case MessageBoxButtons::YesNo: return ShowMessageBoxYesNo(message);
+  case MessageBoxButtons::YesNoCancel: return ShowMessageBoxYesNoCancel(message);
+  }
   return DialogResult::None;
 }
 
