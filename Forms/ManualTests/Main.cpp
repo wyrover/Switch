@@ -45,7 +45,15 @@ namespace PcfFormApp {
         static int32 counter = 0;
         this->label1.Text = string::Format("Counter {0}", ++counter);
       };
-      
+
+      this->button2.Parent = *this;
+      this->button2.Name = "button2";
+      this->button2.Text = "Message";
+      this->button2.Location = System::Drawing::Point(100, 10);
+      this->button2.Click += pcf_delegate(const object& sender, const EventArgs& e) {
+        System::Diagnostics::Debug::WriteLine("DialogResult = {0}", MessageBox::Show("This is a very long message for testing if MessageBox\ncan adapt his size with good values.", "A massage box", MessageBoxButtons::OK, MessageBoxIcon::Stop));
+      };
+
       this->checkBox1.Parent = *this;
       this->checkBox1.Name = "checkBox1";
       this->checkBox1.Text = "CheckBox";
@@ -78,6 +86,7 @@ namespace PcfFormApp {
     
   private:
     Button button1;
+    Button button2;
     CheckBox checkBox1;
     RadioButton radioButton1;
     RadioButton radioButton2;
