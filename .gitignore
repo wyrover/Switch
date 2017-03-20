@@ -1,4 +1,5 @@
 .DS_Store
+build-*
 Build
 CMakeLists.txt.user
 x64
