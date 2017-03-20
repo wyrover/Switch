@@ -30,6 +30,7 @@ namespace __OS {
       static bool HasVisualStylesEnabled() { return visualStylesEnabled; }
       static void Exit();
       static void MessageLoop(System::EventHandler idle);
+      static void MessageBeep(System::Windows::Forms::MessageBoxIcon type);
       static System::Windows::Forms::DialogResult ShowMessageBox(const string& message, const string& caption, System::Windows::Forms::MessageBoxButtons buttons, System::Windows::Forms::MessageBoxIcon icon, System::Windows::Forms::MessageBoxDefaultButton defaultButton, System::Windows::Forms::MessageBoxOptions options, bool displayHelpButton);
       static void Start();
       static void Stop();
@@ -135,3 +136,5 @@ namespace __OS {
     };
   };
 }
+
+void MyMessageBeep(System::Windows::Forms::MessageBoxIcon type);

@@ -12,6 +12,8 @@
 using namespace System;
 using namespace System::Windows::Forms;
 
+void MyMessageBeep(System::Windows::Forms::MessageBoxIcon type);
+
 namespace PcfFormApp {
   class Form1 : public Form {
   public:
@@ -44,6 +46,7 @@ namespace PcfFormApp {
       this->button1.Click += pcf_delegate(const object& sender, const EventArgs& e) {
         static int32 counter = 0;
         this->label1.Text = string::Format("Counter {0}", ++counter);
+        MyMessageBeep((MessageBoxIcon)0xFFFFFFFF);
       };
 
       this->button2.Parent = *this;
