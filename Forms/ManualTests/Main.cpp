@@ -50,6 +50,7 @@ namespace PcfFormApp {
       this->button2.Name = "button2";
       this->button2.Text = "Message";
       this->button2.Location = System::Drawing::Point(100, 10);
+      this->button2.Size = System::Drawing::Size(80, 25);
       this->button2.Click += pcf_delegate(const object& sender, const EventArgs& e) {
         System::Diagnostics::Debug::WriteLine("DialogResult = {0}", MessageBox::Show("This is a very long message for testing if MessageBox\ncan adapt his size with good values.", "A massage box", MessageBoxButtons::OK, MessageBoxIcon::Stop));
       };

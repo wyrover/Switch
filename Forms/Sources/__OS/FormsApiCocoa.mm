@@ -95,7 +95,7 @@ namespace {
     if (events.ContainsKey([event type]))
       msg = events[[event type]];
     else
-    msg = 0x40000 + [event type];
+      msg = 0x40000 + [event type];
     intptr hwnd = (intptr)[event window];
     
     if  (hwnd != 0) {
@@ -109,8 +109,10 @@ namespace {
       }
     }
     
-    return Message::Create(hwnd, msg, 0, mouseDownLocation.X() & 0x0000FFFF + ((mouseDownLocation.Y() & 0xFFFF0000) << 16), 0, (intptr)event);
+    return Message::Create(hwnd, msg, 0, (mouseDownLocation.Y() <<16) + mouseDownLocation.X(), 0, (intptr)event);
   }
+  
+  
   
   int32 GetMessage(Message& message) {
     int32 result = 0;
@@ -146,8 +148,10 @@ namespace {
       if (control.Key == message.HWnd())
         const_cast<Control&>(control.Value()()).WndProc(message);
     }
-    NSEvent* event = (NSEvent*)message.Handle();
-    [NSApp sendEvent:event];
+    if ((message.Msg() & 0x40000) == 0x40000) {
+      NSEvent* event = (NSEvent*)message.Handle();
+      [NSApp sendEvent:event];
+    }
   }
 }
 
@@ -165,14 +169,16 @@ void FormsApi::Application::MessageLoop(EventHandler idle) {
     NSMenuItem* appMenuItem = [NSMenuItem new];
     [menubar addItem:appMenuItem];
     [NSApp setMainMenu:menubar];
-    NSMenu* appMenu = [NSMenu new];
-    NSString* appName = [[NSProcessInfo processInfo] processName];
-    NSString* quitTitle = [@"Quit " stringByAppendingString:appName];
-    NSMenuItem* quitMenuItem = [[NSMenuItem alloc] initWithTitle:quitTitle action:@selector(terminate:) keyEquivalent:@"q"];
-    [appMenu addItem:quitMenuItem];
-    [appMenuItem setSubmenu:appMenu];
+    //NSMenu* appMenu = [NSMenu new];
+    //NSString* appName = [[NSProcessInfo processInfo] processName];
+    //NSString* quitTitle = [@"Quit " stringByAppendingString:appName];
+    //NSMenuItem* quitMenuItem = [[NSMenuItem alloc] initWithTitle:quitTitle action:@selector(terminate:) keyEquivalent:@"q"];
+    //[appMenu addItem:quitMenuItem];
+    //[appMenuItem setSubmenu:appMenu];
+    
     //[NSApp run];
   }
+
   messageLoopRunning = true;
   while (messageLoopRunning) {
     Message msg;
@@ -262,7 +268,7 @@ namespace {
 
 DialogResult FormsApi::Application::ShowMessageBox(const string& message, const string& caption, MessageBoxButtons buttons, MessageBoxIcon icon, MessageBoxDefaultButton defaultButton, MessageBoxOptions options, bool displayHelpButton) {
   static SortedDictionary<MessageBoxButtons, delegate<void, NSAlert*>> addButtons = {{MessageBoxButtons::OK, MessageBoxAddButtonsOK}, {MessageBoxButtons::OKCancel, MessageBoxAddButtonsOKCancel}, {MessageBoxButtons::AbortRetryIgnore, MessageBoxAddButtonsAbortRetryIgnore}, {MessageBoxButtons::YesNoCancel, MessageBoxAddButtonsYesNoCancel}, {MessageBoxButtons::YesNo, MessageBoxAddButtonsYesNo}, {MessageBoxButtons::RetryCancel, MessageBoxAddButtonsRetryCancel}};
-  static SortedDictionary<MessageBoxIcon, NSAlertStyle>  messageBoxIcon = {{MessageBoxIcon::None, NSAlertStyleWarning}, {MessageBoxIcon::Asterisk, NSAlertStyleInformational}, {MessageBoxIcon::Error, NSAlertStyleCritical}, {MessageBoxIcon::Exclamation, NSAlertStyleCritical}, {MessageBoxIcon::Hand, NSAlertStyleInformational}, {MessageBoxIcon::Information, NSAlertStyleInformational}, {MessageBoxIcon::Question, NSAlertStyleInformational}, {MessageBoxIcon::Stop, NSAlertStyleCritical}, {MessageBoxIcon::Warning, NSAlertStyleCritical}};
+  static SortedDictionary<MessageBoxIcon, NSAlertStyle>  messageBoxIcon = {{MessageBoxIcon::None, NSAlertStyleWarning}, {MessageBoxIcon::Exclamation, NSAlertStyleCritical}, {MessageBoxIcon::Information, NSAlertStyleInformational}, {MessageBoxIcon::Question, NSAlertStyleInformational}, {MessageBoxIcon::Stop, NSAlertStyleCritical}};
   static SortedDictionary<MessageBoxButtons, delegate<DialogResult, NSAlert*>> showModal = {{MessageBoxButtons::OK, MessageBoxShowModalOK}, {MessageBoxButtons::OKCancel, MessageBoxShowModalOKCancel}, {MessageBoxButtons::AbortRetryIgnore, MessageBoxShowModalAbortRetryIgnore}, {MessageBoxButtons::YesNoCancel, MessageBoxShowModalYesNoCancel}, {MessageBoxButtons::YesNo, MessageBoxShowModalYesNo}, {MessageBoxButtons::RetryCancel, MessageBoxShowModalRetryCancel}};
   @autoreleasepool {
     NSAlert *alert = [[NSAlert alloc] init];
@@ -398,6 +404,8 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::RadioButton& radi
 }
 
 void FormsApi::Control::DefWndProc(System::Windows::Forms::Message& message) {
+  NSEvent* event = (NSEvent*)message.Handle();
+  [NSApp sendEvent:event];
 }
 
 void FormsApi::Control::Destroy(const System::Windows::Forms::Control& control) {
