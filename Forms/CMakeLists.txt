@@ -107,6 +107,7 @@ set(source_files
   Sources/__OS/FormsApi.h
   Sources/__OS/FormsApiWin32.cpp
   Sources/__OS/FormsApiX.cpp
+  Sources/__OS/FormsApiXSystemInformation.cpp
   Sources/__OS/WindowMessage.h
   Sources/__OS/WindowMessageKey.h
 #  Sources/Pcf/System/Media/SystemSound.cpp
