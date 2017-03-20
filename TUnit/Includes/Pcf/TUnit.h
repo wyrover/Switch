@@ -9,7 +9,6 @@
 #include "TUnit/Constraints/EqualTo.h"
 #include "TUnit/Assert.h"
 #include "TUnit/AssertionException.h"
-#include "TUnit/Constraints.h"
 #include "TUnit/Expect.h"
 #include "TUnit/Is.h"
 #include "TUnit/TestFixture.h"

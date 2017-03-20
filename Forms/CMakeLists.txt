@@ -7,8 +7,8 @@ set(include_files
   Includes/Pcf/System/ComponentModel/IComponent.h
   Includes/Pcf/System/ComponentModel/IContainer.h
   Includes/Pcf/System/ComponentModel/ISite.h
-#  Includes/Pcf/System/Media/SystemSound.h
-#  Includes/Pcf/System/Media/SystemSounds.h
+  Includes/Pcf/System/Media/SystemSound.h
+  Includes/Pcf/System/Media/SystemSounds.h
   Includes/Pcf/System/Windows/Forms/VisualStyles/VisualStyleState.h
   Includes/Pcf/System/Windows/Forms/AccessibleEvents.h
   Includes/Pcf/System/Windows/Forms/AccessibleNavigation.h
@@ -110,8 +110,8 @@ set(source_files
   Sources/__OS/FormsApiXSystemInformation.cpp
   Sources/__OS/WindowMessage.h
   Sources/__OS/WindowMessageKey.h
-#  Sources/Pcf/System/Media/SystemSound.cpp
-#  Sources/Pcf/System/Media/SystemSounds.cpp
+  Sources/Pcf/System/Media/SystemSound.cpp
+  Sources/Pcf/System/Media/SystemSounds.cpp
   Sources/Pcf/System/Windows/Forms/Application.cpp
   Sources/Pcf/System/Windows/Forms/Button.cpp
   Sources/Pcf/System/Windows/Forms/CheckBox.cpp

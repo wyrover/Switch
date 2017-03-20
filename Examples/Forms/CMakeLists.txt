@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.5)
 
 project(Examples.Forms)
 
-if (BUILD_FORMS_EAXMPLES)
+if (BUILD_FORMS_EXAMPLES)
   foreach(EXAMPLE ${FORMS_EXAMPLES})
     add_subdirectory("${EXAMPLE}")
 #    set_target_properties(${EXAMPLE} PROPERTIES FOLDER Examples/Forms)

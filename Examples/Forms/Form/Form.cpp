@@ -16,7 +16,7 @@ namespace FormExample {
       this->Text = "Form example";
       this->StartPosition = FormStartPosition::Manual;
       this->Location = System::Drawing::Point(300, 200);
-      this->ClientSize = System::Drawing::Size(640, 480);
+      this->Size = System::Drawing::Size(640, 480);
       
       button.Parent = *this;
       button.Text = "Close";

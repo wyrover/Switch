@@ -1,4 +1,5 @@
 #include <Pcf/System/Diagnostics/ConsoleTraceListener.h>
+#include <Pcf/System/Media/SystemSounds.h>
 #include <Pcf/System/Windows/Forms/Application.h>
 #include <Pcf/System/Windows/Forms/Button.h>
 #include <Pcf/System/Windows/Forms/CheckBox.h>
@@ -46,7 +47,7 @@ namespace PcfFormApp {
       this->button1.Click += pcf_delegate(const object& sender, const EventArgs& e) {
         static int32 counter = 0;
         this->label1.Text = string::Format("Counter {0}", ++counter);
-        MyMessageBeep(MessageBoxIcon::Error);
+        System::Media::SystemSounds::Asterisk.Play();
       };
 
       this->button2.Parent = *this;
