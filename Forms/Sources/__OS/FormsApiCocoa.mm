@@ -112,8 +112,6 @@ namespace {
     return Message::Create(hwnd, msg, 0, (mouseDownLocation.Y() <<16) + mouseDownLocation.X(), 0, (intptr)event);
   }
   
-  
-  
   int32 GetMessage(Message& message) {
     int32 result = 0;
     @autoreleasepool {
@@ -196,6 +194,17 @@ void FormsApi::Application::MessageLoop(EventHandler idle) {
     }
     idle(object(), EventArgs());
   }
+}
+
+void FormsApi::Application::MessageBeep(MessageBoxIcon type) {
+  System::Collections::Generic::SortedDictionary<MessageBoxIcon, string> beep = {{(MessageBoxIcon)0, "Funk"}, {MessageBoxIcon::Error, "Sosumi"}, {MessageBoxIcon::Question, "Purr"}, {MessageBoxIcon::Warning, "Hero"}, {MessageBoxIcon::Information, "Glass"}, {(MessageBoxIcon)0xFFFFFFFF, "Funk"}};
+  @autoreleasepool {
+    [[NSSound soundNamed:[NSString stringWithUTF8String:beep[type].c_str()]] play];
+  }
+}
+
+void MyMessageBeep(MessageBoxIcon type) {
+  FormsApi::Application::MessageBeep(type);
 }
 
 namespace {
