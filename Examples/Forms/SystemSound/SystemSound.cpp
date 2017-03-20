@@ -22,35 +22,35 @@ namespace SystemSoundExample {
       this->buttonAsterisk.Bounds = System::Drawing::Rectangle(60, 50, 180, 25);
       this->buttonAsterisk.Text = "Asterisk";
       this->buttonAsterisk.Click += pcf_delegate(const object& sender, const EventArgs& e) {
-        SystemSounds::Asterisk.Play();
+        SystemSounds::Asterisk().Play();
       };
       
       this->buttonBeep.Parent = *this;
       this->buttonBeep.Bounds = System::Drawing::Rectangle(60, 90, 180, 25);
       this->buttonBeep.Text = "Beep";
       this->buttonBeep.Click += pcf_delegate(const object& sender, const EventArgs& e) {
-        SystemSounds::Beep.Play();
+        SystemSounds::Beep().Play();
       };
       
       this->buttonExclamation.Parent = *this;
       this->buttonExclamation.Bounds = System::Drawing::Rectangle(60, 130, 180, 25);
       this->buttonExclamation.Text = "Exclamation";
       this->buttonExclamation.Click += pcf_delegate(const object& sender, const EventArgs& e) {
-        SystemSounds::Exclamation.Play();
+        SystemSounds::Exclamation().Play();
       };
       
       this->buttonHand.Parent = *this;
       this->buttonHand.Bounds = System::Drawing::Rectangle(60, 170, 180, 25);
       this->buttonHand.Text = "Hand";
       this->buttonHand.Click += pcf_delegate(const object& sender, const EventArgs& e) {
-        SystemSounds::Hand.Play();
+        SystemSounds::Hand().Play();
       };
       
       this->buttonQuestion.Parent = *this;
       this->buttonQuestion.Bounds = System::Drawing::Rectangle(60, 210, 180, 25);
       this->buttonQuestion.Text = "Question";
       this->buttonQuestion.Click += pcf_delegate(const object& sender, const EventArgs& e) {
-        SystemSounds::Question.Play();
+        SystemSounds::Question().Play();
       };
     }
     

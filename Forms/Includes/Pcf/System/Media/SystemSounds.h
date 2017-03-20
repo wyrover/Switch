@@ -12,15 +12,15 @@ namespace Pcf {
     namespace Media {
       class SystemSounds {
       public:
-        static const SystemSound Asterisk;
+        static Property<SystemSound, ReadOnly> Asterisk;
 
-        static const SystemSound Beep;
+        static Property<SystemSound, ReadOnly> Beep;
 
-        static const SystemSound Exclamation;
+        static Property<SystemSound, ReadOnly> Exclamation;
 
-        static const SystemSound Hand;
+        static Property<SystemSound, ReadOnly> Hand;
 
-        static const SystemSound Question;
+        static Property<SystemSound, ReadOnly> Question;
       };
     }
   }

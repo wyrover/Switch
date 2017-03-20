@@ -203,10 +203,6 @@ void FormsApi::Application::MessageBeep(MessageBoxIcon type) {
   }
 }
 
-void MyMessageBeep(MessageBoxIcon type) {
-  FormsApi::Application::MessageBeep(type);
-}
-
 namespace {
   void MessageBoxAddButtonsOK(NSAlert *alert) {
     [alert addButtonWithTitle:@"OK"];

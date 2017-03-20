@@ -136,5 +136,3 @@ namespace __OS {
     };
   };
 }
-
-void MyMessageBeep(System::Windows::Forms::MessageBoxIcon type);

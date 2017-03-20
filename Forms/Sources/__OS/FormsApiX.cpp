@@ -450,10 +450,6 @@ void FormsApi::Application::MessageBeep(MessageBoxIcon type) {
   fl_beep(beep[type]);
 }
 
-void MyMessageBeep(MessageBoxIcon type) {
-  FormsApi::Application::MessageBeep(type);
-}
-
 namespace {
   DialogResult ShowMessageBoxAbortRetryIgnore(const string& message) {
     int result = fl_choice("%s", "Abort", "Retry", "Ignore", message.c_str());

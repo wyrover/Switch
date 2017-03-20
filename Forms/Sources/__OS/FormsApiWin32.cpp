@@ -142,10 +142,6 @@ void FormsApi::Application::MessageBeep(MessageBoxIcon type) {
   ::MessageBeep((uint32)type);
 }
 
-void MyMessageBeep(MessageBoxIcon type) {
-  FormsApi::Application::MessageBeep(type);
-}
-
 DialogResult FormsApi::Application::ShowMessageBox(const string& message, const string& caption, MessageBoxButtons buttons, MessageBoxIcon icon, MessageBoxDefaultButton defaultButton, MessageBoxOptions options, bool displayHelpButton) {
   return (DialogResult)MessageBox(GetActiveWindow(), message.w_str().c_str(), caption.w_str().c_str(), (uint32)buttons + (uint32)icon + (uint32)defaultButton + (uint32)options + (displayHelpButton ? 0x00004000L : 0));
 }
