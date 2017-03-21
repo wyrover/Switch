@@ -22,7 +22,7 @@ namespace UnitTests {
     }
     
     void ChangeCurrentDirecoryWithPotatos() {
-      Assert::DoesNotThrows(pcf_delegate {Environment::CurrentDirectory = System::IO::Path::Combine(Environment::GetFolderPath(Environment::SpecialFolder::Personal), "Potatos");}, pcf_current_information);
+      Assert::DoesNotThrows(pcf_delegate {Environment::CurrentDirectory = System::IO::Path::Combine(Environment::GetFolderPath(Environment::SpecialFolder::Personal), "Potatoes");}, pcf_current_information);
     }
     
   private:
@@ -38,12 +38,12 @@ namespace UnitTests {
 //
 // Start 2 tests from 1 test case
 //   Start 2 tests from DirectoryTest
-//     PASSED DirectoryTest.ChangeCurrentDirecoryWithDownloads (1 ms)
-// error: /YourFolder/TUnit/TestFixture/Sources/TestFixture.cpp:25
-// Expected: statement doesn't throws an exception.
-//   Actual: it throws Pcf::System::IO::DirectoryNotFoundException.
-// *** FAILED DirectoryTest.ChangeCurrentDirecoryWithPotatos (11 ms)
-//   End 2 tests from DirectoryTest (45 ms total)
+//     PASSED DirectoryTest.ChangeCurrentDirecoryWithDownloads (2 ms)
+// Expected: No Exception to be thrown
+// But was:  <Pcf::System::IO::DirectoryNotFoundException>
+// error: /YourFolder/Pcf/Examples/TUnit/TestFixture/Sources/TestFixture.cpp:25
+// *** FAILED DirectoryTest.ChangeCurrentDirecoryWithPotatos (4 ms)
+//   End 2 tests from DirectoryTest (8 ms total)
 //
 //   Summary :
 //     PASSED 1 test.
@@ -51,4 +51,4 @@ namespace UnitTests {
 // *** FAILED DirectoryTest.ChangeCurrentDirecoryWithPotatos
 //
 // 1 FAILED TEST
-// End 2 tests from 1 test case ran. (45 ms total)
+// End 2 tests from 1 test case ran. (9 ms total)
