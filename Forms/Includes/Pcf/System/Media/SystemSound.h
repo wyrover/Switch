@@ -29,7 +29,7 @@ namespace Pcf {
         intptr Tag() const {return (intptr)this->type;}
 
       private:
-        friend struct __opaque_snd_access__;
+        friend struct ::__opaque_snd_access__;
         SystemSound(System::Windows::Forms::MessageBoxIcon type) : type(type) {}
         System::Windows::Forms::MessageBoxIcon type = (System::Windows::Forms::MessageBoxIcon)0;
       };
