@@ -309,7 +309,10 @@ namespace Pcf {
             CurrentThread().Interrupt();
           
           CurrentThread().data->state |= System::Threading::ThreadState::WaitSleepJoin;
-          if (millisecondsTimeout == 0)
+          if (millisecondsTimeout == Timeout::Infinite) {
+            while(true)
+              std::this_thread::sleep_for(std::chrono::hours::max());
+          } else if (millisecondsTimeout == 0)
             Yield();
           else
             std::this_thread::sleep_for(std::chrono::milliseconds(millisecondsTimeout));

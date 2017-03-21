@@ -55,7 +55,7 @@ namespace PcfFormApp {
       this->button2.Size = System::Drawing::Size(80, 25);
       this->button2.Click += pcf_delegate(const object& sender, const EventArgs& e) {
           //System::Diagnostics::Debug::WriteLine("DialogResult = {0}", MessageBox::Show("This is a very long message for testing if MessageBox\ncan adapt his size with good values.", "A massage box", MessageBoxButtons::OK, MessageBoxIcon::Stop));
-          System::Diagnostics::Debug::WriteLine("DialogResult = {0}", MessageBox::Show("This is a very long message for testing if MessageBox\ncan adapt his size with good values.", "A massage box"));
+        System::Diagnostics::Debug::WriteLine("DialogResult = {0}", MessageBox::Show("This is a very long message for testing if MessageBox\ncan adapt his size with good values.", "A massage box", MessageBoxButtons::OK, MessageBoxIcon::Hand));
       };
 
       this->checkBox1.Parent = *this;
