@@ -1,0 +1,42 @@
+/// @file
+/// @brief Contains Pcf::System::Drawing::FontFamily class.
+#pragma once
+
+#include <Pcf/System/Object.h>
+#include <Pcf/System/String.h>
+#include "../FontFamily.h"
+
+/// @cond
+namespace __OS {
+  class DrawingApi;
+}
+/// @endcond
+
+/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Pcf {
+  /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
+  namespace System {
+    /// @brief The System::Drawing namespace provides access to GDI+ basic graphics functionality. More advanced functionality is provided in the System::Drawing::Drawing2D, System::Drawing::Imaging, and System::Drawing::Text namespaces.
+    namespace Drawing {
+      /// @brief The System::Drawing::Text namespace provides advanced GDI+ typography functionality.
+      namespace Text {
+        /// @brief Provides a base class for installed and private font collections.
+        /// @remarks The FontCollection allows you to get a list of the font families contained in the collection with its Families property. For additional information on fonts and text, including example code, see Using Fonts and Text.
+        class pcf_public FontCollection : public object {
+        public:
+          /// @brief Gets the array of FontFamily objects associated with this FontCollection.
+          /// @return Array<FontFamily> An array of FontFamily objects.
+          Property<const Array<FontFamily>&, ReadOnly> Families{
+            pcf_get->const Array<FontFamily>& {return this->families;}
+          };
+
+        protected:
+          /// @cond
+          FontCollection();
+          Array<FontFamily> families;
+          /// @endcond
+        };
+      }
+    }
+  }
+}

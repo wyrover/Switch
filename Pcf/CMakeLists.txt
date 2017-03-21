@@ -1,0 +1,18 @@
+project(Pcf)
+
+set(INCLUDE_FILES
+  Includes/Pcf/Pcf
+  Includes/Pcf/Pcf.h
+)
+
+source_group(Includes REGULAR_EXPRESSION "/Includes/[-_,A-Za-z0-9]+\\.h*")
+source_group(Includes\\Pcf REGULAR_EXPRESSION "/Includes/Pcf/[-_,A-Za-z0-9]+\\.h*")
+
+add_library(Pcf INTERFACE)
+target_include_directories(Pcf INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Includes> $<INSTALL_INTERFACE:include>)
+
+add_custom_target(Pcf.Includes ALL SOURCES ${INCLUDE_FILES})
+
+install(FILES Includes/Pcf/Pcf Includes/Pcf/Pcf.h DESTINATION include/Pcf)
+
+set_target_properties(Pcf.Includes PROPERTIES FOLDER Pcf/Pcf)

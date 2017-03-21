@@ -18,7 +18,7 @@ namespace Examples {
       clientWebSocket.Connect("ws://localhost:8126/foo");
       
       // Create receiver thread for client web socket
-      System::Threading::Thread receiver(System::Threading::ThreadStart([&] {
+      System::Threading::Thread receiver(System::Threading::ThreadStart(pcf_delegate {
         string message;
         do {
           /// Client web socket receive

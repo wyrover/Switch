@@ -1,8 +1,3 @@
-
-
-
-
-
 #include <Pcf/Pcf>
 
 using namespace System;
@@ -22,9 +17,3 @@ pcf_startup (HelloWorld::Program)
 // This code produces the following output:
 //
 // Hello, World!
-
-
-
-
-
-
