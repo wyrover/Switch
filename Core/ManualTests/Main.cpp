@@ -8,7 +8,7 @@ namespace Examples {
     static void Main() {
       Action<const object&> action = pcf_delegate(const object&) {
         static int counter = 0;
-        Console::WriteLine("Tcounter = {0}, guid = {1}", ++counter, Guid::NewGuid());
+        Console::WriteLine("counter = {0}, guid = {1}", ++counter, Guid::NewGuid());
       };
 
       System::Threading::Timer timer(action, 10, 10);
