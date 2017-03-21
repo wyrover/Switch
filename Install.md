@@ -10,6 +10,7 @@ CentOS 7 or later
      Remarks, this operation depand of your hardware and can be very long
   
      ~$ cd FolderWherePcfIsDownloaded
+     
      ~$ ./install.sh
   
   4. Enjoy and be creative with Pcf ;-)
@@ -33,6 +34,7 @@ Mac Os X 10.12 or later
      Remarks, this operation depand of your hardware and can be very long
   
      ~$ cd FolderWherePcfIsDownloaded
+     
      ~$ ./install.sh
   
   4. Enjoy and be creative with Pcf ;-)
@@ -51,6 +53,7 @@ Ubuntu 16.04 or later
      Remarks, this operation depand of your hardware and can be very long
   
      ~$ cd FolderWherePcfIsDownloaded
+     
      ~$ ./install.sh
   
   4. Enjoy and be creative with Pcf ;-)
