@@ -159,6 +159,12 @@ void FormsApi::Application::Exit() {
   Environment::Exit(0);
 }
 
+
+void DoSomething(id sender) {
+  FormsApi::Application::Exit();
+}
+
+
 void FormsApi::Application::MessageLoop(EventHandler idle) {
   @autoreleasepool {
     [NSApplication sharedApplication];
@@ -167,12 +173,14 @@ void FormsApi::Application::MessageLoop(EventHandler idle) {
     NSMenuItem* appMenuItem = [NSMenuItem new];
     [menubar addItem:appMenuItem];
     [NSApp setMainMenu:menubar];
-    //NSMenu* appMenu = [NSMenu new];
-    //NSString* appName = [[NSProcessInfo processInfo] processName];
-    //NSString* quitTitle = [@"Quit " stringByAppendingString:appName];
-    //NSMenuItem* quitMenuItem = [[NSMenuItem alloc] initWithTitle:quitTitle action:@selector(terminate:) keyEquivalent:@"q"];
-    //[appMenu addItem:quitMenuItem];
-    //[appMenuItem setSubmenu:appMenu];
+    NSMenu* appMenu = [NSMenu new];
+    NSString* appName = [[NSProcessInfo processInfo] processName];
+    NSString* quitTitle = [@"Quit " stringByAppendingString:appName];
+    NSMenuItem* quitMenuItem = [[NSMenuItem alloc] initWithTitle:quitTitle action:@selector(terminate:) keyEquivalent:@"q"];
+    [appMenu addItem:quitMenuItem];
+    [appMenuItem setSubmenu:appMenu];
+    
+    [quitMenuItem setAction:@selector(DoSomething:)];
     
     //[NSApp run];
   }
@@ -294,6 +302,7 @@ void FormsApi::Application::Stop() {
 }
 
 void FormsApi::Control::Close(const System::Windows::Forms::Form& form) {
+  [(NSWindow*)form.data->handle close];
 }
 
 @interface NSControlResponder : NSObject
