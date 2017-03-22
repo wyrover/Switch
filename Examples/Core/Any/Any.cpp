@@ -16,7 +16,7 @@ namespace Examples {
       // Assign integer to a
       a = 42;
       Console::WriteLine("a = {0}", a);
-      Console::WriteLine("a {0} int", is<Int32>(a) ? "is" : "isn't");
+      Console::WriteLine("a {0} int", is<int32>(a) ? "is" : "isn't");
       Console::WriteLine("a {0} string", is<string>(a) ? "is" : "isn't");
       int i = a;
       Console::WriteLine("i = {0}", i);
@@ -25,7 +25,7 @@ namespace Examples {
       // Assign string to a
       a = "Hello, World!";
       Console::WriteLine("a = {0}", a);
-      Console::WriteLine("a {0} int", is<Int32>(a) ? "is" : "isn't");
+      Console::WriteLine("a {0} int", is<int32>(a) ? "is" : "isn't");
       Console::WriteLine("a {0} string", is<string>(a) ? "is" : "isn't");
       string s = a;
       Console::WriteLine("s = {0}", s);
