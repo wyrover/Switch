@@ -299,21 +299,13 @@ namespace {
       NSMenu* appMenu = [NSMenu new];
       [appMenu addItem:quitMenuItem];
       
-      NSMenu* fileMenu = [NSMenu new];
-      [fileMenu setTitle:@"File"];
-      
-      NSMenuItem* fileMenuItem = [NSMenuItem new];
-      [fileMenuItem setSubmenu:fileMenu];
-      
       NSMenuItem* appMenuItem = [NSMenuItem new];
       [appMenuItem setSubmenu:appMenu];
       
       NSMenu* menubar = [NSMenu new];
       [menubar addItem:appMenuItem];
-      [menubar addItem:fileMenuItem];
       
       [NSApp setMainMenu:menubar];
-      [NSApp setActivationPolicy:NSApplicationActivationPolicyRegular];
     }
   }
 }
@@ -322,6 +314,7 @@ void FormsApi::Application::Start() {
   @autoreleasepool {
     [NSApplication sharedApplication];
     [NSApp finishLaunching];
+    [NSApp setActivationPolicy:NSApplicationActivationPolicyRegular];
     CreateAppleMenu();
   }
 }
