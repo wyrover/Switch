@@ -108,8 +108,8 @@ void FormsApi::Application::Exit() {
 }
 
 void FormsApi::Application::MessageLoop(EventHandler idle) {
-  // MessagelLoop without idle...
   /*
+  // MessagelLoop without idle...
   MSG msg;
   bool messageLoopRunning = true;
   while (GetMessage(&msg, NULL, 0, 0) != 0) {

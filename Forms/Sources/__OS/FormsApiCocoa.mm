@@ -66,89 +66,77 @@ namespace {
   }
   
   Message NSEventToMessage(NSEvent* event) {
-    static System::Collections::Generic::Dictionary<int32, int32> events {
-      {NSEventTypeLeftMouseDown, WM_LBUTTONDOWN},
-      {NSEventTypeLeftMouseUp, WM_LBUTTONUP},
-      {NSEventTypeRightMouseDown, WM_RBUTTONDOWN},
-      {NSEventTypeRightMouseUp, WM_RBUTTONUP},
-      {NSEventTypeMouseMoved, WM_MOUSEMOVE},
-      //{NSEventTypeLeftMouseDragged, WM_...},
-      //{NSEventTypeRightMouseDragged, WM_...},
-      {NSEventTypeMouseEntered, WM_MOUSEENTER},
-      {NSEventTypeMouseExited, WM_MOUSELEAVE},
-      {NSEventTypeKeyDown, WM_KEYDOWN},
-      {NSEventTypeKeyUp, WM_KEYUP},
-      //{NSEventTypeFlagsChanged, WM_...},
-      //{NSEventTypeAppKitDefined, WM_...},
-      //{NSEventTypeSystemDefined, WM_...},
-      //{NSEventTypeApplicationDefined, WM_...},
-      //{NSEventTypePeriodic, WM_...},
-      {NSEventTypeCursorUpdate, WM_SETCURSOR},
-      {NSEventTypeScrollWheel, WM_MOUSEWHEEL},
-      //{NSEventTypeTabletPoint, WM_...},
-      //{NSEventTypeTabletProximity, WM_...},
-      {NSEventTypeOtherMouseDown, WM_MBUTTONDOWN},
-      {NSEventTypeOtherMouseUp, WM_MBUTTONUP},
-      //{NSEventTypeOtherMouseDragged, WM_...},
-    };
-    int32 msg;
-    if (events.ContainsKey([event type]))
-      msg = events[[event type]];
-    else
-      msg = 0x40000 + [event type];
-    intptr hwnd = (intptr)[event window];
-    
-    if  (hwnd != 0) {
-      System::Drawing::Point location(event.locationInWindow.x, event.window.frame.size.height - event.locationInWindow.y - GetCaptionHeight(controls[hwnd]()));
-      for (auto control : controls) {
-        if (control.Key != hwnd && control.Value()().Bounds().Contains(location)) {
-          hwnd = control.Key;
-          mouseDownLocation = location - control.Value()().Location();
-          break;
+    @autoreleasepool {
+      static System::Collections::Generic::Dictionary<int32, int32> events {
+        {NSEventTypeLeftMouseDown, WM_LBUTTONDOWN},
+        {NSEventTypeLeftMouseUp, WM_LBUTTONUP},
+        {NSEventTypeRightMouseDown, WM_RBUTTONDOWN},
+        {NSEventTypeRightMouseUp, WM_RBUTTONUP},
+        {NSEventTypeMouseMoved, WM_MOUSEMOVE},
+        //{NSEventTypeLeftMouseDragged, WM_...},
+        //{NSEventTypeRightMouseDragged, WM_...},
+        {NSEventTypeMouseEntered, WM_MOUSEENTER},
+        {NSEventTypeMouseExited, WM_MOUSELEAVE},
+        {NSEventTypeKeyDown, WM_KEYDOWN},
+        {NSEventTypeKeyUp, WM_KEYUP},
+        //{NSEventTypeFlagsChanged, WM_...},
+        //{NSEventTypeAppKitDefined, WM_...},
+        //{NSEventTypeSystemDefined, WM_...},
+        //{NSEventTypeApplicationDefined, WM_...},
+        //{NSEventTypePeriodic, WM_...},
+        {NSEventTypeCursorUpdate, WM_SETCURSOR},
+        {NSEventTypeScrollWheel, WM_MOUSEWHEEL},
+        //{NSEventTypeTabletPoint, WM_...},
+        //{NSEventTypeTabletProximity, WM_...},
+        {NSEventTypeOtherMouseDown, WM_MBUTTONDOWN},
+        {NSEventTypeOtherMouseUp, WM_MBUTTONUP},
+        //{NSEventTypeOtherMouseDragged, WM_...},
+      };
+      
+      intptr hwnd = (intptr)[event window];
+      if  (hwnd != 0) {
+        System::Drawing::Point location(event.locationInWindow.x, event.window.frame.size.height - event.locationInWindow.y - GetCaptionHeight(controls[hwnd]()));
+        for (auto control : controls) {
+          if (control.Key != hwnd && control.Value()().Bounds().Contains(location)) {
+            hwnd = control.Key;
+            mouseDownLocation = location - control.Value()().Location();
+            break;
+          }
         }
       }
+      
+      return Message::Create(hwnd, events.ContainsKey([event type]) ? events[[event type]] : 0x40000 + [event type], 0, (mouseDownLocation.Y() <<16) + mouseDownLocation.X(), 0, (intptr)event);
     }
-    
-    return Message::Create(hwnd, msg, 0, (mouseDownLocation.Y() <<16) + mouseDownLocation.X(), 0, (intptr)event);
   }
   
   int32 GetMessage(Message& message) {
-    int32 result = 0;
     @autoreleasepool {
       NSEvent *event = [NSApp nextEventMatchingMask:NSEventMaskAny untilDate:[NSDate dateWithTimeIntervalSinceNow:Double::MaxValue] inMode:NSDefaultRunLoopMode dequeue:YES];
-      
-      if (event != nil) {
-        message = NSEventToMessage(event);
-        result = 1;
-      } else
-        System::Diagnostics::Debug::WriteLine("??? What's appened !");
+      if (event == nil) return 0;
+      message = NSEventToMessage(event);
+      return 1;
     }
-    return result;
   }
   
   int32 PeekMessage(Message& message) {
     @autoreleasepool {
       NSEvent *event = [NSApp nextEventMatchingMask:NSEventMaskAny untilDate:[NSDate dateWithTimeIntervalSinceNow:0.0] inMode:NSDefaultRunLoopMode dequeue:YES];
-      
-      if (event != nil && [event window] != nil) {
-        message = NSEventToMessage(event);
-        return 1;
-      }
+      if (event == nil) return 0;
+      message = NSEventToMessage(event);
+      return 1;
     }
-    return 0;
-  }
-  
-  void TranslateMessage(Message& message) {
   }
   
   void DispatchMessage(Message& message) {
-    for (auto control : controls) {
-      if (control.Key == message.HWnd())
-        const_cast<Control&>(control.Value()()).WndProc(message);
-    }
-    if ((message.Msg() & 0x40000) == 0x40000) {
-      NSEvent* event = (NSEvent*)message.Handle();
-      [NSApp sendEvent:event];
+    @autoreleasepool {
+      for (auto control : controls) {
+        if (control.Key == message.HWnd())
+          const_cast<Control&>(control.Value()()).WndProc(message);
+      }
+      if ((message.Msg() & 0x40000) == 0x40000) {
+        NSEvent* event = (NSEvent*)message.Handle();
+        [NSApp sendEvent:event];
+      }
     }
   }
 }
@@ -165,48 +153,53 @@ void DoSomething(id sender) {
 }
 
 
+@interface NSApplicationlResponder : NSObject
+- (IBAction) MenuItemClick:(id)sender;
+@end
+
+@implementation NSApplicationlResponder
+- (IBAction) MenuItemClick:(id)sender {
+  System::Diagnostics::Debug::WriteLine("The item {0} was clicked", sender);
+  FormsApi::Application::Exit();
+}
+@end
+
 void FormsApi::Application::MessageLoop(EventHandler idle) {
   @autoreleasepool {
-    [NSApplication sharedApplication];
-    [NSApp setActivationPolicy:NSApplicationActivationPolicyRegular];
-    NSMenu* menubar = [NSMenu new];
-    NSMenuItem* appMenuItem = [NSMenuItem new];
-    [menubar addItem:appMenuItem];
-    [NSApp setMainMenu:menubar];
-    NSMenu* appMenu = [NSMenu new];
-    NSString* appName = [[NSProcessInfo processInfo] processName];
-    NSString* quitTitle = [@"Quit " stringByAppendingString:appName];
-    NSMenuItem* quitMenuItem = [[NSMenuItem alloc] initWithTitle:quitTitle action:@selector(terminate:) keyEquivalent:@"q"];
-    [appMenu addItem:quitMenuItem];
-    [appMenuItem setSubmenu:appMenu];
-    
-    [quitMenuItem setAction:@selector(DoSomething:)];
-    
     //[NSApp run];
-  }
-
-  messageLoopRunning = true;
-  while (messageLoopRunning) {
+   
+    /*
+    // MessagelLoop without idle...
     Message msg;
-    int32 result = idle.IsEmpty() ? GetMessage(msg) : PeekMessage(msg);
-    while (result != 0) {
-      TranslateMessage(msg);
+    bool messageLoopRunning = true;
+    while (GetMessage(msg) != 0) {
       DispatchMessage(msg);
-      if (msg.Msg == WM_QUIT) {
-        messageLoopRunning = false;
-        break;
-      }
-      result = idle.IsEmpty() ? GetMessage(msg) : PeekMessage(msg);
-      if (idle.IsEmpty() && !result)
-        messageLoopRunning = false;
     }
-    idle(object(), EventArgs());
+    messageLoopRunning = false;
+     */
+    
+    messageLoopRunning = true;
+    while (messageLoopRunning) {
+      Message msg;
+      int32 result = idle.IsEmpty() ? GetMessage(msg) : PeekMessage(msg);
+      while (result != 0) {
+        DispatchMessage(msg);
+        if (msg.Msg == WM_QUIT) {
+          messageLoopRunning = false;
+          break;
+        }
+        result = idle.IsEmpty() ? GetMessage(msg) : PeekMessage(msg);
+        if (idle.IsEmpty() && !result)
+          messageLoopRunning = false;
+      }
+      idle(object(), EventArgs());
+    }
   }
 }
 
 void FormsApi::Application::MessageBeep(MessageBoxIcon type) {
-  System::Collections::Generic::SortedDictionary<MessageBoxIcon, string> beep = {{(MessageBoxIcon)0, "Funk"}, {MessageBoxIcon::Error, "Sosumi"}, {MessageBoxIcon::Question, "Purr"}, {MessageBoxIcon::Warning, "Hero"}, {MessageBoxIcon::Information, "Glass"}, {(MessageBoxIcon)0xFFFFFFFF, "Funk"}};
   @autoreleasepool {
+    System::Collections::Generic::SortedDictionary<MessageBoxIcon, string> beep = {{(MessageBoxIcon)0, "Funk"}, {MessageBoxIcon::Error, "Sosumi"}, {MessageBoxIcon::Question, "Purr"}, {MessageBoxIcon::Warning, "Hero"}, {MessageBoxIcon::Information, "Glass"}, {(MessageBoxIcon)0xFFFFFFFF, "Funk"}};
     [[NSSound soundNamed:[NSString stringWithUTF8String:beep[type].c_str()]] play];
   }
 }
@@ -294,8 +287,43 @@ DialogResult FormsApi::Application::ShowMessageBox(const string& message, const 
     return showModal[buttons](alert);
   }
 }
+namespace {
+  void CreateAppleMenu() {
+    @autoreleasepool {
+      NSMenuItem* quitMenuItem = [[NSMenuItem alloc] init];
+      [quitMenuItem setTitle:[@"Quit " stringByAppendingString:[[NSProcessInfo processInfo] processName]]];
+      [quitMenuItem setKeyEquivalent:@"q"];
+      [quitMenuItem setTarget:[NSApplicationlResponder alloc]];
+      [quitMenuItem setAction:@selector(MenuItemClick:)];
+      
+      NSMenu* appMenu = [NSMenu new];
+      [appMenu addItem:quitMenuItem];
+      
+      NSMenu* fileMenu = [NSMenu new];
+      [fileMenu setTitle:@"File"];
+      
+      NSMenuItem* fileMenuItem = [NSMenuItem new];
+      [fileMenuItem setSubmenu:fileMenu];
+      
+      NSMenuItem* appMenuItem = [NSMenuItem new];
+      [appMenuItem setSubmenu:appMenu];
+      
+      NSMenu* menubar = [NSMenu new];
+      [menubar addItem:appMenuItem];
+      [menubar addItem:fileMenuItem];
+      
+      [NSApp setMainMenu:menubar];
+      [NSApp setActivationPolicy:NSApplicationActivationPolicyRegular];
+    }
+  }
+}
 
 void FormsApi::Application::Start() {
+  @autoreleasepool {
+    [NSApplication sharedApplication];
+    [NSApp finishLaunching];
+    CreateAppleMenu();
+  }
 }
 
 void FormsApi::Application::Stop() {
@@ -417,9 +445,15 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::RadioButton& radi
   }
 }
 
+
 void FormsApi::Control::DefWndProc(System::Windows::Forms::Message& message) {
-  NSEvent* event = (NSEvent*)message.Handle();
-  [NSApp sendEvent:event];
+  @autoreleasepool {
+    NSEvent* event = (NSEvent*)message.Handle();
+    if (event.type == NSEventTypeKeyUp)
+      [[NSApp keyWindow] sendEvent:event];
+    else
+      [NSApp sendEvent:event];
+  }
 }
 
 void FormsApi::Control::Destroy(const System::Windows::Forms::Control& control) {
