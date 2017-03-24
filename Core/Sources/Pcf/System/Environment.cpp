@@ -261,7 +261,7 @@ String Environment::ExpandEnvironmentVariables(const String& name) {
 }
 
 const Array<String>& Environment::GetCommandLineArgs() {
-  return commandLineArgs.ToObject();
+  return commandLineArgs();
 }
 
 String Environment::GetEnvironmentVariable(const String& variable) {

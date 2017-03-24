@@ -2,6 +2,7 @@
 /// @brief Contains include files of Forms library.
 #pragma once
 
+#include <Pcf/Drawing.h>
 #include "System/Media/SystemSound.h"
 #include "System/Media/SystemSounds.h"
 #include "System/ComponentModel/Component.h"

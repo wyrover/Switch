@@ -513,7 +513,7 @@ DialogResult FormsApi::Application::ShowMessageBox(const string& message, const 
 }
 
 namespace {
-  static int ApplicationHandler(int event) {
+  static int32 ApplicationHandler(int32 event) {
     return event == FL_SHORTCUT && Fl::event_key() == FL_Escape ? 1 : 0;
   }
 
@@ -530,6 +530,7 @@ namespace {
 }
 
 void FormsApi::Application::Start() {
+  Fl_Window::default_xclass(System::IO::Path::GetFileName(System::Environment::GetCommandLineArgs()[0]).c_str());
   Fl::set_labeltype(FL_NORMAL_LABEL, DrawLabel, MeasureLabel);
   Fl::get_system_colors();
   Fl_File_Icon::load_system_icons();

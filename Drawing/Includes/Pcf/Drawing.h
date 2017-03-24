@@ -2,6 +2,7 @@
 /// @brief Contains include files of Drawing library.
 #pragma once
 
+#include <Pcf/Core.h>
 #include "System/Drawing/Drawing2D/DashStyle.h"
 #include "System/Drawing/Imaging/ColorPalette.h"
 #include "System/Drawing/Imaging/FrameDimension.h"
