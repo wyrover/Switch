@@ -185,6 +185,16 @@ namespace Pcf {
         throw ArgumentException(pcf_current_information);
       }
       
+      static bool TryParse(const String& version, Version& result) {
+        try {
+          result = Parse(version);
+          return true;
+        } catch(...) {
+          return false;
+        }
+      }
+      
+      
       /// @brief Returns a string that represents the current object.
       /// @return string A string that represents the current object.
       String ToString() const noexcept override {return ToString(2 + (this->build != -1 ? 1 : 0) + (this->revision != -1 ? 1 : 0));}

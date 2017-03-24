@@ -95,7 +95,6 @@ namespace Pcf {
       /// @exception ArgumentNullException The parameters str is null.
       String(const char* str, int32 startIndex, int32 length);
 
-      
       /// @brief Initializes a new instance of the String class to the value indicated by a specified pointer to an array of characters, a starting character position within that array, and a length.
       /// @param str Value for the String (not null terminated).
       /// @param startIndex The starting position within str.

@@ -127,6 +127,13 @@ namespace {
     }
   }
   
+  void IgnoreMessages() {
+    NSEvent *ignoredEvent;
+    do {
+      ignoredEvent = [NSApp nextEventMatchingMask:(NSEventMaskAny & ~NSEventMaskSystemDefined) untilDate:[NSDate dateWithTimeIntervalSinceNow:0] inMode:NSDefaultRunLoopMode dequeue:YES];
+    } while (ignoredEvent);
+  }
+  
   void DispatchMessage(Message& message) {
     @autoreleasepool {
       for (auto control : controls) {
@@ -284,29 +291,70 @@ DialogResult FormsApi::Application::ShowMessageBox(const string& message, const 
     [alert setAlertStyle:messageBoxIcon[icon]];
     if (displayHelpButton)
       [alert setShowsHelp:YES];
-    return showModal[buttons](alert);
+    DialogResult result = showModal[buttons](alert);
+    IgnoreMessages();
+    return result;
   }
 }
 namespace {
-  void CreateAppleMenu() {
-    @autoreleasepool {
-      NSMenuItem* quitMenuItem = [[NSMenuItem alloc] init];
-      [quitMenuItem setTitle:[@"Quit " stringByAppendingString:[[NSProcessInfo processInfo] processName]]];
-      [quitMenuItem setKeyEquivalent:@"q"];
-      [quitMenuItem setTarget:[NSApplicationlResponder alloc]];
-      [quitMenuItem setAction:@selector(MenuItemClick:)];
-      
-      NSMenu* appMenu = [NSMenu new];
-      [appMenu addItem:quitMenuItem];
-      
-      NSMenuItem* appMenuItem = [NSMenuItem new];
-      [appMenuItem setSubmenu:appMenu];
-      
-      NSMenu* menubar = [NSMenu new];
-      [menubar addItem:appMenuItem];
-      
-      [NSApp setMainMenu:menubar];
+  static void CreateAppleMenu() {
+    static BOOL donethat = NO;
+    if (donethat) return;
+    donethat = YES;
+    NSMenu *mainmenu, *services = nil, *appleMenu;
+    NSMenuItem *menuItem;
+    NSString *title;
+    
+    NSString *nsappname = [[[NSBundle mainBundle] performSelector:@selector(localizedInfoDictionary)] objectForKey:@"CFBundleName"];
+    if (nsappname == nil)
+      nsappname = [[NSProcessInfo processInfo] processName];
+    appleMenu = [[NSMenu alloc] initWithTitle:@""];
+    /* Add menu items */
+    title = [NSString stringWithFormat:NSLocalizedString([NSString stringWithUTF8String:"About %@"],nil), nsappname];
+    menuItem = [appleMenu addItemWithTitle:title action:@selector(showPanel) keyEquivalent:@""];
+    //FLaboutItemTarget *about = [[FLaboutItemTarget alloc] init];
+    //[menuItem setTarget:about];
+    [appleMenu addItem:[NSMenuItem separatorItem]];
+    // Print front window
+    title = NSLocalizedString([NSString stringWithUTF8String:"Print Front Window"], nil);
+    if ([title length] > 0) {
+      menuItem = [appleMenu addItemWithTitle:title action:@selector(printPanel) keyEquivalent:@""];
+      //[menuItem setTarget:about];
+      [menuItem setEnabled:YES];
+      [appleMenu addItem:[NSMenuItem separatorItem]];
     }
+    // Services Menu
+    services = [[NSMenu alloc] initWithTitle:@""];
+    menuItem = [appleMenu addItemWithTitle:NSLocalizedString([NSString stringWithUTF8String:"Services"], nil) action:nil keyEquivalent:@""];
+    [appleMenu setSubmenu:services forItem:menuItem];
+    [appleMenu addItem:[NSMenuItem separatorItem]];
+    // Hide AppName
+    title = [NSString stringWithFormat:NSLocalizedString([NSString stringWithUTF8String:"Hide %@"],nil), nsappname];
+    [appleMenu addItemWithTitle:title action:@selector(hide:) keyEquivalent:@"h"];
+    // Hide Others
+    menuItem = [appleMenu addItemWithTitle:NSLocalizedString([NSString stringWithUTF8String:"Hide Others"] , nil) action:@selector(hideOtherApplications:) keyEquivalent:@"h"];
+    [menuItem setKeyEquivalentModifierMask:(NSEventModifierFlagOption|NSEventModifierFlagCommand)];
+    // Show All
+    [appleMenu addItemWithTitle:NSLocalizedString([NSString stringWithUTF8String:"Show All"] , nil) action:@selector(unhideAllApplications:) keyEquivalent:@""];
+    [appleMenu addItem:[NSMenuItem separatorItem]];
+    // Quit AppName
+    title = [NSString stringWithFormat:NSLocalizedString([NSString stringWithUTF8String:"Quit %@"] , nil), nsappname];
+    menuItem = [appleMenu addItemWithTitle:title action:@selector(terminate:) keyEquivalent:@"q"];
+    //[menuItem setTarget:about];
+
+    /* Put menu into the menubar */
+    menuItem = [[NSMenuItem alloc] initWithTitle:@"" action:nil keyEquivalent:@""];
+    [menuItem setSubmenu:appleMenu];
+    mainmenu = [[NSMenu alloc] initWithTitle:@""];
+    [mainmenu addItem:menuItem];
+    [NSApp setMainMenu:mainmenu];
+    if (services) {
+      [NSApp setServicesMenu:services];
+      [services release];
+    }
+    [mainmenu release];
+    [appleMenu release];
+    [menuItem release];
   }
 }
 
@@ -314,6 +362,7 @@ void FormsApi::Application::Start() {
   @autoreleasepool {
     [NSApplication sharedApplication];
     [NSApp finishLaunching];
+    IgnoreMessages();
     [NSApp setActivationPolicy:NSApplicationActivationPolicyRegular];
     CreateAppleMenu();
   }
