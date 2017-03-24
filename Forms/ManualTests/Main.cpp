@@ -66,13 +66,13 @@ namespace PcfFormApp {
 
       this->label1.Parent = *this;
       this->label1.Name = "label1";
-      this->label1.Text = "Text label";
+      this->label1.Text = "counter = 0";
       this->label1.Location = System::Drawing::Point(28, 132);
       this->label1.Size = System::Drawing::Size(100, 23);
 
       this->label2.Parent = *this;
       this->label2.Name = "label2";
-      this->label2.Text = "Text label";
+      this->label2.Text = "(X=0, Y=0)";
       this->label2.Location = System::Drawing::Point(28, 162);
       this->label2.Size = System::Drawing::Size(150, 23);
     }
