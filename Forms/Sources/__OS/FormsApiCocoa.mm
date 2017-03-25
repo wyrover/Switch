@@ -11,6 +11,7 @@
 #include "../../Includes/Pcf/System/Windows/Forms/Application.h"
 #include "../../Includes/Pcf/System/Windows/Forms/Control.h"
 #include "FormsApi.h"
+#include "WindowMessageKey.h"
 
 using namespace System;
 using namespace System::Collections::Generic;
@@ -21,6 +22,8 @@ using namespace __OS;
 namespace {
   static bool messageLoopRunning = false;
   constexpr int32 screenHeight = 1050;
+  static bool hover = false;
+  static const int32 notUsed = 0;
   System::Collections::Generic::Dictionary<intptr, Reference<Control>> controls;
   System::Drawing::Point mouseDownLocation;
   
@@ -65,18 +68,125 @@ namespace {
     return System::Drawing::Rectangle(control.Bounds().X, control.Parent()().Bounds().Height - control.Bounds().Height - control.Bounds().Y - GetCaptionHeight(control.Parent()()), control.Bounds().Width, control.Bounds().Height);
   }
   
+  int32 GetMouseButtonState(NSEvent* event) {
+    int32 state = 0;
+    
+    if ([event buttonNumber] == 1)
+      state &= MK_LBUTTON;
+    if ([event buttonNumber] == 2)
+      state &= MK_MBUTTON;
+    if ([event buttonNumber] == 3)
+      state &= MK_RBUTTON;
+    
+    return state;
+  }
+  
+  int32 GetMouseXCoordinateRelativeToClientArea(NSEvent* event, Control& control) {
+    System::Drawing::Point location(event.locationInWindow.x, event.window.frame.size.height - event.locationInWindow.y - GetCaptionHeight(control));
+    return location.Y;
+  }
+  
+  int32 GetMouseYCoordinateRelativeToClientArea(NSEvent* event, Control& control) {
+    System::Drawing::Point location(event.locationInWindow.x, event.window.frame.size.height - event.locationInWindow.y - GetCaptionHeight(control));
+    return location.Y;
+  }
+  
+  NSEvent* GetMessage() {
+    @autoreleasepool {
+      return [NSApp nextEventMatchingMask:NSEventMaskAny untilDate:[NSDate dateWithTimeIntervalSinceNow:Double::MaxValue] inMode:NSDefaultRunLoopMode dequeue:YES];
+    }
+  }
+  
+  NSEvent* PeekMessage() {
+    @autoreleasepool {
+      return [NSApp nextEventMatchingMask:NSEventMaskAny untilDate:[NSDate dateWithTimeIntervalSinceNow:0.0] inMode:NSDefaultRunLoopMode dequeue:YES];
+    }
+  }
+  
+  void IgnoreMessages() {
+    NSEvent *ignoredEvent;
+    do {
+      ignoredEvent = [NSApp nextEventMatchingMask:(NSEventMaskAny & ~NSEventMaskSystemDefined) untilDate:[NSDate dateWithTimeIntervalSinceNow:0] inMode:NSDefaultRunLoopMode dequeue:YES];
+    } while (ignoredEvent);
+  }
+  
+  void MouseEnterEvent(NSEvent* event, Control& control) {
+    Message message = Message::Create((intptr)event.window, WM_MOUSEENTER, notUsed, notUsed, 0, (intptr)event);
+    hover = true;
+    return control.WndProc(message);
+  }
+  
+  void MouseLeaveEvent(NSEvent* event, Control& control) {
+    Message message = Message::Create((intptr)event.window, WM_MOUSELEAVE, notUsed, notUsed, 0, (intptr)event);
+    hover = false;
+    return control.WndProc(message);
+  }
+  
+  void LeftMouseDownEvent(NSEvent* event, Control& control) {
+    Message message = Message::Create((intptr)event.window, WM_LBUTTONDOWN, GetMouseButtonState(event), (GetMouseYCoordinateRelativeToClientArea(event, control) << 16) + GetMouseXCoordinateRelativeToClientArea(event, control), 0, (intptr)event);
+    return control.WndProc(message);
+  }
+  
+  void LeftMouseUpEvent(NSEvent* event, Control& control) {
+    Message message = Message::Create((intptr)event.window, WM_LBUTTONUP, GetMouseButtonState(event), (GetMouseYCoordinateRelativeToClientArea(event, control) << 16) + GetMouseXCoordinateRelativeToClientArea(event, control), 0, (intptr)event);
+    return control.WndProc(message);
+  }
+  
+  void OtherMouseUpEvent(NSEvent* event, Control& control) {
+    Message message = Message::Create((intptr)event.window, WM_MBUTTONUP, GetMouseButtonState(event), (GetMouseYCoordinateRelativeToClientArea(event, control) << 16) + GetMouseXCoordinateRelativeToClientArea(event, control), 0, (intptr)event);
+    return control.WndProc(message);
+  }
+  
+  void OtherMouseDownEvent(NSEvent* event, Control& control) {
+    Message message = Message::Create((intptr)event.window, WM_MBUTTONDOWN, GetMouseButtonState(event), (GetMouseYCoordinateRelativeToClientArea(event, control) << 16) + GetMouseXCoordinateRelativeToClientArea(event, control), 0, (intptr)event);
+    return control.WndProc(message);
+  }
+  
+  void RightMouseDownEvent(NSEvent* event, Control& control) {
+    Message message = Message::Create((intptr)event.window, WM_RBUTTONDOWN, GetMouseButtonState(event), (GetMouseYCoordinateRelativeToClientArea(event, control) << 16) + GetMouseXCoordinateRelativeToClientArea(event, control), 0, (intptr)event);
+    return control.WndProc(message);
+  }
+  
+  void RightMouseUpEvent(NSEvent* event, Control& control) {
+    Message message = Message::Create((intptr)event.window, WM_RBUTTONUP, GetMouseButtonState(event), (GetMouseYCoordinateRelativeToClientArea(event, control) << 16) + GetMouseXCoordinateRelativeToClientArea(event, control), 0, (intptr)event);
+    return control.WndProc(message);
+  }
+  
+  void MouseMoveEvent(NSEvent* event, Control& control) {
+    if (hover) {
+      Message message = Message::Create((intptr)event.window, WM_MOUSEHOVER, GetMouseButtonState(event), (GetMouseYCoordinateRelativeToClientArea(event, control) << 16) + GetMouseXCoordinateRelativeToClientArea(event, control), 0, (intptr)event);
+      control.WndProc(message);
+    }
+    Message message = Message::Create((intptr)event.window, WM_MOUSEMOVE, GetMouseButtonState(event), (GetMouseYCoordinateRelativeToClientArea(event, control) << 16) + GetMouseXCoordinateRelativeToClientArea(event, control), 0, (intptr)event);
+    return control.WndProc(message);
+  }
+  
+  void DispatchMessage(NSEvent* event) {
+    static System::Collections::Generic::SortedDictionary<int32, delegate<void, NSEvent*, Control&>> events = {
+      {NSEventTypeMouseEntered, MouseEnterEvent},
+      {NSEventTypeMouseExited, MouseLeaveEvent},
+      {NSEventTypeLeftMouseDown, LeftMouseDownEvent},
+      {NSEventTypeLeftMouseUp, LeftMouseUpEvent},
+      {NSEventTypeRightMouseDown, RightMouseDownEvent},
+      {NSEventTypeRightMouseUp, RightMouseUpEvent},
+      {NSEventTypeMouseMoved, MouseMoveEvent},
+      {NSEventTypeOtherMouseDown, OtherMouseDownEvent},
+      {NSEventTypeOtherMouseUp, OtherMouseUpEvent},
+    };
+    @autoreleasepool {
+      if (events.ContainsKey([event type]) && controls.ContainsKey((intptr)[event window])) {
+        events[[event type]](event, controls[(intptr)[event window]]);
+      } else {
+        [NSApp sendEvent:event];
+      }
+    }
+  }
+  
   Message NSEventToMessage(NSEvent* event) {
     @autoreleasepool {
       static System::Collections::Generic::Dictionary<int32, int32> events {
-        {NSEventTypeLeftMouseDown, WM_LBUTTONDOWN},
-        {NSEventTypeLeftMouseUp, WM_LBUTTONUP},
-        {NSEventTypeRightMouseDown, WM_RBUTTONDOWN},
-        {NSEventTypeRightMouseUp, WM_RBUTTONUP},
-        {NSEventTypeMouseMoved, WM_MOUSEMOVE},
         //{NSEventTypeLeftMouseDragged, WM_...},
         //{NSEventTypeRightMouseDragged, WM_...},
-        {NSEventTypeMouseEntered, WM_MOUSEENTER},
-        {NSEventTypeMouseExited, WM_MOUSELEAVE},
         {NSEventTypeKeyDown, WM_KEYDOWN},
         {NSEventTypeKeyUp, WM_KEYUP},
         //{NSEventTypeFlagsChanged, WM_...},
@@ -88,62 +198,9 @@ namespace {
         {NSEventTypeScrollWheel, WM_MOUSEWHEEL},
         //{NSEventTypeTabletPoint, WM_...},
         //{NSEventTypeTabletProximity, WM_...},
-        {NSEventTypeOtherMouseDown, WM_MBUTTONDOWN},
-        {NSEventTypeOtherMouseUp, WM_MBUTTONUP},
         //{NSEventTypeOtherMouseDragged, WM_...},
       };
-      
-      intptr hwnd = (intptr)[event window];
-      if  (hwnd != 0) {
-        System::Drawing::Point location(event.locationInWindow.x, event.window.frame.size.height - event.locationInWindow.y - GetCaptionHeight(controls[hwnd]()));
-        for (auto control : controls) {
-          if (control.Key != hwnd && control.Value()().Bounds().Contains(location)) {
-            hwnd = control.Key;
-            mouseDownLocation = location - control.Value()().Location();
-            break;
-          }
-        }
-      }
-      
-      return Message::Create(hwnd, events.ContainsKey([event type]) ? events[[event type]] : 0x40000 + [event type], 0, (mouseDownLocation.Y() <<16) + mouseDownLocation.X(), 0, (intptr)event);
-    }
-  }
-  
-  int32 GetMessage(Message& message) {
-    @autoreleasepool {
-      NSEvent *event = [NSApp nextEventMatchingMask:NSEventMaskAny untilDate:[NSDate dateWithTimeIntervalSinceNow:Double::MaxValue] inMode:NSDefaultRunLoopMode dequeue:YES];
-      if (event == nil) return 0;
-      message = NSEventToMessage(event);
-      return 1;
-    }
-  }
-  
-  int32 PeekMessage(Message& message) {
-    @autoreleasepool {
-      NSEvent *event = [NSApp nextEventMatchingMask:NSEventMaskAny untilDate:[NSDate dateWithTimeIntervalSinceNow:0.0] inMode:NSDefaultRunLoopMode dequeue:YES];
-      if (event == nil) return 0;
-      message = NSEventToMessage(event);
-      return 1;
-    }
-  }
-  
-  void IgnoreMessages() {
-    NSEvent *ignoredEvent;
-    do {
-      ignoredEvent = [NSApp nextEventMatchingMask:(NSEventMaskAny & ~NSEventMaskSystemDefined) untilDate:[NSDate dateWithTimeIntervalSinceNow:0] inMode:NSDefaultRunLoopMode dequeue:YES];
-    } while (ignoredEvent);
-  }
-  
-  void DispatchMessage(Message& message) {
-    @autoreleasepool {
-      for (auto control : controls) {
-        if (control.Key == message.HWnd())
-          const_cast<Control&>(control.Value()()).WndProc(message);
-      }
-      if ((message.Msg() & 0x40000) == 0x40000) {
-        NSEvent* event = (NSEvent*)message.Handle();
-        [NSApp sendEvent:event];
-      }
+      return Message();
     }
   }
 }
@@ -177,29 +234,22 @@ void FormsApi::Application::MessageLoop(EventHandler idle) {
    
     /*
     // MessagelLoop without idle...
-    Message msg;
+    Event* event = GetMessage();
     bool messageLoopRunning = true;
-    while (GetMessage(msg) != 0) {
-      DispatchMessage(msg);
+    while (event != nil) {
+      DispatchMessage(event);
+      event = GetMessage();
     }
     messageLoopRunning = false;
      */
     
     messageLoopRunning = true;
     while (messageLoopRunning) {
-      Message msg;
-      int32 result = idle.IsEmpty() ? GetMessage(msg) : PeekMessage(msg);
-      while (result != 0) {
-        DispatchMessage(msg);
-        if (msg.Msg == WM_QUIT) {
-          messageLoopRunning = false;
-          break;
-        }
-        result = idle.IsEmpty() ? GetMessage(msg) : PeekMessage(msg);
-        if (idle.IsEmpty() && !result)
-          messageLoopRunning = false;
-      }
-      idle(object(), EventArgs());
+      NSEvent* event = idle.IsEmpty() ? GetMessage() : PeekMessage();
+      if (event != nil) {
+        DispatchMessage(event);
+      } else
+        idle(object(), EventArgs());
     }
   }
 }

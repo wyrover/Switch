@@ -72,7 +72,7 @@ namespace PcfFormApp {
 
       this->label2.Parent = *this;
       this->label2.Name = "label2";
-      this->label2.Text = "(X=0, Y=0)";
+      this->label2.Text = "(X=0,Y=0)";
       this->label2.Location = System::Drawing::Point(28, 162);
       this->label2.Size = System::Drawing::Size(150, 23);
     }
