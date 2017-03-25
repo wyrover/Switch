@@ -83,7 +83,7 @@ namespace {
   
   int32 GetMouseXCoordinateRelativeToClientArea(NSEvent* event, Control& control) {
     System::Drawing::Point location(event.locationInWindow.x, event.window.frame.size.height - event.locationInWindow.y - GetCaptionHeight(control));
-    return location.Y;
+    return location.X;
   }
   
   int32 GetMouseYCoordinateRelativeToClientArea(NSEvent* event, Control& control) {
