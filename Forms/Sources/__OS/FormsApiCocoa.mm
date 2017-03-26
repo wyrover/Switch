@@ -449,6 +449,8 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::Button& button) {
     [handle setTarget:[NSControlResponder alloc]];
     [handle setAction:@selector(ControlClick:)];
     controls[(intptr)handle] = button;
+    Message message = Message::Create((intptr)handle, WM_CREATE, 0, 0, 0, IntPtr::Zero);
+    const_cast<System::Windows::Forms::Button&>(button).WndProc(message);
     return (intptr)handle;
   }
 }
@@ -466,6 +468,8 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::CheckBox& checkBo
     [handle setTarget:[NSControlResponder alloc]];
     [handle setAction:@selector(ControlClick:)];
     controls[(intptr)handle] = checkBox;
+    Message message = Message::Create((intptr)handle, WM_CREATE, 0, 0, 0, IntPtr::Zero);
+    const_cast<System::Windows::Forms::CheckBox&>(checkBox).WndProc(message);
     return (intptr)handle;
   }
 }
@@ -480,6 +484,8 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::Control& control)
   [handle setTarget:[NSControlResponder alloc]];
   [handle setAction:@selector(ControlClick:)];
   controls[(intptr)handle] = control;
+  Message message = Message::Create((intptr)handle, WM_CREATE, 0, 0, 0, IntPtr::Zero);
+  const_cast<System::Windows::Forms::Control&>(control).WndProc(message);
   return (intptr)handle;
 }
 
@@ -496,6 +502,8 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::Form& form) {
     [handle makeKeyAndOrderFront:nil];
     [NSApp activateIgnoringOtherApps:YES];
     controls[(intptr)handle] = form;
+    Message message = Message::Create((intptr)handle, WM_CREATE, 0, 0, 0, IntPtr::Zero);
+    const_cast<System::Windows::Forms::Form&>(form).WndProc(message);
     return (intptr)handle;
   }
 }
@@ -516,6 +524,8 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::Label& label) {
     [handle setTarget:[NSControlResponder alloc]];
     [handle setAction:@selector(ControlClick:)];
     controls[(intptr)handle] = label;
+    Message message = Message::Create((intptr)handle, WM_CREATE, 0, 0, 0, IntPtr::Zero);
+    const_cast<System::Windows::Forms::Label&>(label).WndProc(message);
     return (intptr)handle;
   }
 }
@@ -533,6 +543,8 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::RadioButton& radi
     [handle setTarget:[NSControlResponder alloc]];
     [handle setAction:@selector(ControlClick:)];
     controls[(intptr)handle] = radioButton;
+    Message message = Message::Create((intptr)handle, WM_CREATE, 0, 0, 0, IntPtr::Zero);
+    const_cast<System::Windows::Forms::RadioButton&>(radioButton).WndProc(message);
     return (intptr)handle;
   }
 }
@@ -550,6 +562,8 @@ void FormsApi::Control::DefWndProc(System::Windows::Forms::Message& message) {
 
 void FormsApi::Control::Destroy(const System::Windows::Forms::Control& control) {
   controls.Remove(control.Handle);
+  Message message = Message::Create(control.Handle, WM_DESTROY, 0, 0, 0, IntPtr::Zero);
+  const_cast<System::Windows::Forms::Control&>(control).WndProc(message);
 }
 
 intptr FormsApi::Control::GetHandleWindowFromDeviceContext(intptr hdc) {
