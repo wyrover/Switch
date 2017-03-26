@@ -38,7 +38,7 @@ System::Drawing::Size FormsApi::SystemInformation::GetCaptionButtonSize() {
 }
 
 int32 FormsApi::SystemInformation::GetCaptionHeight() {
-  return 23;
+  return 37;
 }
 
 int32 FormsApi::SystemInformation::GetCaretBlinkTime() {

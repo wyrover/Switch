@@ -555,6 +555,8 @@ T* CreateControl(const TControl& control) {
   handle->labelsize(defaultTextSize);
   handle->align(FL_ALIGN_LEFT | FL_ALIGN_INSIDE | FL_ALIGN_CLIP | FL_ALIGN_WRAP);
   defWindowProcs.Add((intptr)handle, {*handle, &T::HandleControl});
+  Message message = Message::Create((intptr)handle, WM_CREATE, 0, 0, 0, FL_NO_EVENT);
+  const_cast<TControl&>(control).WndProc(message);
   return handle;
 }
 
@@ -576,6 +578,8 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::Control& control)
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Form& form) {
   FlForm* handle = CreateControl<FlForm>(form);
+  handle->position(form.Location().X, form.Location().Y + SystemInformation::GetCaptionHeight());
+  handle->size(form.Size().Width, form.Size().Height - SystemInformation::GetCaptionHeight());
   handle->resizable(handle);
   handle->align(FL_ALIGN_CENTER | FL_ALIGN_INSIDE | FL_ALIGN_CLIP | FL_ALIGN_WRAP);
   return (intptr)handle;
@@ -593,7 +597,7 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::RadioButton& radi
 }
 
 void FormsApi::Control::DefWndProc(System::Windows::Forms::Message& message) {
-  if (defWindowProcs.ContainsKey(message.HWnd))
+  if (defWindowProcs.ContainsKey(message.HWnd) && message.Handle() != FL_NO_EVENT)
     message.Result = defWindowProcs[message.HWnd()](message.Handle);
 }
 
@@ -603,6 +607,8 @@ void FormsApi::Control::Destroy(const System::Windows::Forms::Control& control) 
       for (int index = 0; index < ((Fl_Group&)((FlWidget*)control.data().handle)->ToWidget()).children(); index++)
         ((Fl_Group&)((FlWidget*)control.data().handle)->ToWidget()).remove(index);
     }
+    Message message = Message::Create((intptr)control.data().handle, WM_DESTROY, 0, 0, 0, FL_NO_EVENT);
+    const_cast<System::Windows::Forms::Control&>(control).WndProc(message);
     delete (FlWidget*)control.data().handle;
   }
 }
