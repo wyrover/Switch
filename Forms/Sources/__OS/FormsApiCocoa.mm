@@ -20,12 +20,247 @@ using namespace System::Windows::Forms;
 using namespace __OS;
 
 namespace {
-  static bool messageLoopRunning = false;
-  constexpr int32 screenHeight = 1050;
-  static bool hover = false;
-  static const int32 notUsed = 0;
-  System::Collections::Generic::Dictionary<intptr, Reference<Control>> controls;
-  System::Drawing::Point mouseDownLocation;
+  class CocoaApi {
+  public:
+    using ControlDictionary = System::Collections::Generic::Dictionary<intptr, Reference<Control>>;
+    CocoaApi() {
+      this->CreateAppication();
+      this->CreateMenuBar();
+    }
+    
+    Property<ControlDictionary&> Controls {
+      pcf_get->ControlDictionary& {return this->controls;},
+      pcf_set {this->controls = value;}
+    };
+    
+    System::Drawing::Rectangle GetBounds(const System::Windows::Forms::Control& control) {
+      if (is<System::Windows::Forms::Form>(control))
+        return this->GetBounds(as<System::Windows::Forms::Form>(control));
+      return System::Drawing::Rectangle(control.Bounds().X, control.Parent()().Bounds().Height - control.Bounds().Height - control.Bounds().Y - GetCaptionHeight(control.Parent()()), control.Bounds().Width, control.Bounds().Height);
+    }
+    
+    Drawing::Rectangle GetBounds(const System::Windows::Forms::Form& form) {
+      switch (form.StartPosition) {
+        case FormStartPosition::CenterParent: return Drawing::Rectangle(0, screenHeight - form.Bounds().Y, form.Width, form.Height);
+        case FormStartPosition::CenterScreen: return Drawing::Rectangle(0, screenHeight, form.Width, form.Height);
+        case FormStartPosition::Manual: return Drawing::Rectangle(form.Bounds().X, screenHeight - form.Bounds().Y, form.Bounds().Width, form.Bounds().Height);
+        case FormStartPosition::WindowsDefaultBounds: return Drawing::Rectangle(0, screenHeight, 300, 300);
+        case FormStartPosition::WindowsDefaultLocation: return Drawing::Rectangle(0, screenHeight, form.Width, form.Height);
+      }
+      return Drawing::Rectangle(0, screenHeight - 300, 300, 300);
+    }
+    
+    int32 GetCaptionHeight(const System::Windows::Forms::Control& control) {
+      return !is<Form>(control) || as<Form>(control).FormBorderStyle == FormBorderStyle::None ? 0 : FormsApi::SystemInformation::GetCaptionHeight();
+    }
+    
+    int32 GetMouseButtonState(NSEvent* event) {
+      int32 state = 0;
+      
+      if ([event buttonNumber] == 1)
+        state &= MK_LBUTTON;
+      if ([event buttonNumber] == 2)
+        state &= MK_MBUTTON;
+      if ([event buttonNumber] == 3)
+        state &= MK_RBUTTON;
+      
+      return state;
+    }
+    
+    int32 GetMouseXCoordinateRelativeToClientArea(NSEvent* event, Control& control) {
+      System::Drawing::Point location(event.locationInWindow.x, event.window.frame.size.height - event.locationInWindow.y - GetCaptionHeight(control));
+      return location.X;
+    }
+    
+    int32 GetMouseYCoordinateRelativeToClientArea(NSEvent* event, Control& control) {
+      System::Drawing::Point location(event.locationInWindow.x, event.window.frame.size.height - event.locationInWindow.y - GetCaptionHeight(control));
+      return location.Y;
+    }
+    
+    void IgnoreMessages() const {
+      @autoreleasepool {
+        NSEvent *ignoredEvent;
+        do {
+          ignoredEvent = [NSApp nextEventMatchingMask:(NSEventMaskAny & ~NSEventMaskSystemDefined) untilDate:[NSDate dateWithTimeIntervalSinceNow:0] inMode:NSDefaultRunLoopMode dequeue:YES];
+        } while (ignoredEvent);
+      }
+    }
+
+    void MessageLoop(EventHandler idle) {
+      @autoreleasepool {
+        this->messageLoopRunning = true;
+        while (messageLoopRunning) {
+          NSEvent* event = idle.IsEmpty() ? this->GetMessage() : this->PeekMessage();
+          if (event != nil) {
+            DispatchMessage(event);
+          } else
+            idle(object(), EventArgs());
+        }
+      }
+    }
+    
+  private:
+    void CreateAppication() {
+      @autoreleasepool {
+        [NSApplication sharedApplication];
+        [NSApp finishLaunching];
+        this->IgnoreMessages();
+        [NSApp setActivationPolicy:NSApplicationActivationPolicyRegular];
+      }
+    }
+
+    void CreateMenuBar() {
+      static BOOL donethat = NO;
+      if (donethat) return;
+      donethat = YES;
+      NSMenu *mainmenu, *services = nil, *appleMenu;
+      NSMenuItem *menuItem;
+      NSString *title;
+      
+      NSString *nsappname = [[[NSBundle mainBundle] performSelector:@selector(localizedInfoDictionary)] objectForKey:@"CFBundleName"];
+      if (nsappname == nil)
+        nsappname = [[NSProcessInfo processInfo] processName];
+      appleMenu = [[NSMenu alloc] initWithTitle:@""];
+      /* Add menu items */
+      title = [NSString stringWithFormat:NSLocalizedString([NSString stringWithUTF8String:"About %@"],nil), nsappname];
+      menuItem = [appleMenu addItemWithTitle:title action:@selector(showPanel) keyEquivalent:@""];
+      //FLaboutItemTarget *about = [[FLaboutItemTarget alloc] init];
+      //[menuItem setTarget:about];
+      [appleMenu addItem:[NSMenuItem separatorItem]];
+      // Print front window
+      title = NSLocalizedString([NSString stringWithUTF8String:"Print Front Window"], nil);
+      if ([title length] > 0) {
+        menuItem = [appleMenu addItemWithTitle:title action:@selector(printPanel) keyEquivalent:@""];
+        //[menuItem setTarget:about];
+        [menuItem setEnabled:YES];
+        [appleMenu addItem:[NSMenuItem separatorItem]];
+      }
+      // Services Menu
+      services = [[NSMenu alloc] initWithTitle:@""];
+      menuItem = [appleMenu addItemWithTitle:NSLocalizedString([NSString stringWithUTF8String:"Services"], nil) action:nil keyEquivalent:@""];
+      [appleMenu setSubmenu:services forItem:menuItem];
+      [appleMenu addItem:[NSMenuItem separatorItem]];
+      // Hide AppName
+      title = [NSString stringWithFormat:NSLocalizedString([NSString stringWithUTF8String:"Hide %@"],nil), nsappname];
+      [appleMenu addItemWithTitle:title action:@selector(hide:) keyEquivalent:@"h"];
+      // Hide Others
+      menuItem = [appleMenu addItemWithTitle:NSLocalizedString([NSString stringWithUTF8String:"Hide Others"] , nil) action:@selector(hideOtherApplications:) keyEquivalent:@"h"];
+      [menuItem setKeyEquivalentModifierMask:(NSEventModifierFlagOption|NSEventModifierFlagCommand)];
+      // Show All
+      [appleMenu addItemWithTitle:NSLocalizedString([NSString stringWithUTF8String:"Show All"] , nil) action:@selector(unhideAllApplications:) keyEquivalent:@""];
+      [appleMenu addItem:[NSMenuItem separatorItem]];
+      // Quit AppName
+      title = [NSString stringWithFormat:NSLocalizedString([NSString stringWithUTF8String:"Quit %@"] , nil), nsappname];
+      menuItem = [appleMenu addItemWithTitle:title action:@selector(terminate:) keyEquivalent:@"q"];
+      //[menuItem setTarget:about];
+      
+      /* Put menu into the menubar */
+      menuItem = [[NSMenuItem alloc] initWithTitle:@"" action:nil keyEquivalent:@""];
+      [menuItem setSubmenu:appleMenu];
+      mainmenu = [[NSMenu alloc] initWithTitle:@""];
+      [mainmenu addItem:menuItem];
+      [NSApp setMainMenu:mainmenu];
+      if (services) {
+        [NSApp setServicesMenu:services];
+        [services release];
+      }
+      [mainmenu release];
+      [appleMenu release];
+      [menuItem release];
+    }
+    
+    void DispatchMessage(NSEvent* event) {
+      static System::Collections::Generic::SortedDictionary<int32, delegate<void, NSEvent*, Control&>> events = {
+        {NSEventTypeMouseEntered, {*this, &CocoaApi::MouseEnterEvent}},
+        {NSEventTypeMouseExited, {*this, &CocoaApi::MouseLeaveEvent}},
+        {NSEventTypeLeftMouseDown, {*this, &CocoaApi::LeftMouseDownEvent}},
+        {NSEventTypeLeftMouseUp, {*this, &CocoaApi::LeftMouseUpEvent}},
+        {NSEventTypeRightMouseDown, {*this, &CocoaApi::RightMouseDownEvent}},
+        {NSEventTypeRightMouseUp, {*this, &CocoaApi::RightMouseUpEvent}},
+        {NSEventTypeMouseMoved, {*this, &CocoaApi::MouseMoveEvent}},
+        {NSEventTypeOtherMouseDown, {*this, &CocoaApi::OtherMouseDownEvent}},
+        {NSEventTypeOtherMouseUp, {*this, &CocoaApi::OtherMouseUpEvent}},
+      };
+      @autoreleasepool {
+        if (events.ContainsKey([event type]) && controls.ContainsKey((intptr)[event window])) {
+          events[[event type]](event, this->controls[(intptr)[event window]]);
+        } else {
+          [NSApp sendEvent:event];
+        }
+      }
+    }
+    
+    NSEvent* GetMessage() const {
+      @autoreleasepool {
+        return [NSApp nextEventMatchingMask:NSEventMaskAny untilDate:[NSDate dateWithTimeIntervalSinceNow:Double::MaxValue] inMode:NSDefaultRunLoopMode dequeue:YES];
+      }
+    }
+    
+    NSEvent* PeekMessage() const {
+      @autoreleasepool {
+        return [NSApp nextEventMatchingMask:NSEventMaskAny untilDate:[NSDate dateWithTimeIntervalSinceNow:0.0] inMode:NSDefaultRunLoopMode dequeue:YES];
+      }
+    }
+    
+    void MouseEnterEvent(NSEvent* event, Control& control) {
+      Message message = Message::Create((intptr)event.window, WM_MOUSEENTER, notUsed, notUsed, 0, (intptr)event);
+      hover = true;
+      return control.WndProc(message);
+    }
+    
+    void MouseLeaveEvent(NSEvent* event, Control& control) {
+      Message message = Message::Create((intptr)event.window, WM_MOUSELEAVE, notUsed, notUsed, 0, (intptr)event);
+      hover = false;
+      return control.WndProc(message);
+    }
+    
+    void LeftMouseDownEvent(NSEvent* event, Control& control) {
+      Message message = Message::Create((intptr)event.window, WM_LBUTTONDOWN, GetMouseButtonState(event), (GetMouseYCoordinateRelativeToClientArea(event, control) << 16) + GetMouseXCoordinateRelativeToClientArea(event, control), 0, (intptr)event);
+      return control.WndProc(message);
+    }
+    
+    void LeftMouseUpEvent(NSEvent* event, Control& control) {
+      Message message = Message::Create((intptr)event.window, WM_LBUTTONUP, GetMouseButtonState(event), (GetMouseYCoordinateRelativeToClientArea(event, control) << 16) + GetMouseXCoordinateRelativeToClientArea(event, control), 0, (intptr)event);
+      return control.WndProc(message);
+    }
+    
+    void OtherMouseUpEvent(NSEvent* event, Control& control) {
+      Message message = Message::Create((intptr)event.window, WM_MBUTTONUP, GetMouseButtonState(event), (GetMouseYCoordinateRelativeToClientArea(event, control) << 16) + GetMouseXCoordinateRelativeToClientArea(event, control), 0, (intptr)event);
+      return control.WndProc(message);
+    }
+    
+    void OtherMouseDownEvent(NSEvent* event, Control& control) {
+      Message message = Message::Create((intptr)event.window, WM_MBUTTONDOWN, GetMouseButtonState(event), (GetMouseYCoordinateRelativeToClientArea(event, control) << 16) + GetMouseXCoordinateRelativeToClientArea(event, control), 0, (intptr)event);
+      return control.WndProc(message);
+    }
+    
+    void RightMouseDownEvent(NSEvent* event, Control& control) {
+      Message message = Message::Create((intptr)event.window, WM_RBUTTONDOWN, GetMouseButtonState(event), (GetMouseYCoordinateRelativeToClientArea(event, control) << 16) + GetMouseXCoordinateRelativeToClientArea(event, control), 0, (intptr)event);
+      return control.WndProc(message);
+    }
+    
+    void RightMouseUpEvent(NSEvent* event, Control& control) {
+      Message message = Message::Create((intptr)event.window, WM_RBUTTONUP, GetMouseButtonState(event), (GetMouseYCoordinateRelativeToClientArea(event, control) << 16) + GetMouseXCoordinateRelativeToClientArea(event, control), 0, (intptr)event);
+      return control.WndProc(message);
+    }
+    
+    void MouseMoveEvent(NSEvent* event, Control& control) {
+      if (hover) {
+        Message message = Message::Create((intptr)event.window, WM_MOUSEHOVER, GetMouseButtonState(event), (GetMouseYCoordinateRelativeToClientArea(event, control) << 16) + GetMouseXCoordinateRelativeToClientArea(event, control), 0, (intptr)event);
+        control.WndProc(message);
+      }
+      Message message = Message::Create((intptr)event.window, WM_MOUSEMOVE, GetMouseButtonState(event), (GetMouseYCoordinateRelativeToClientArea(event, control) << 16) + GetMouseXCoordinateRelativeToClientArea(event, control), 0, (intptr)event);
+      return control.WndProc(message);
+    }
+
+    bool messageLoopRunning = false;
+    static const int32 notUsed = 0;
+    ControlDictionary controls;
+    bool hover = false;
+    int32 screenHeight = 1050; // TO DO : Get Screen height...
+  };
+  
+  UniquePointer<CocoaApi> cocoaApi;
   
   NSWindowStyleMask FormToNSWindowStyleMask(const Form& form) {
     constexpr int CP_NOCLOSE_BUTTON = 0x200;
@@ -45,141 +280,6 @@ namespace {
     }
     
     return windowStyleMask;
-  }
-  
-  int32 GetCaptionHeight(const System::Windows::Forms::Control& control) {
-    return !is<Form>(control) || as<Form>(control).FormBorderStyle == FormBorderStyle::None ? 0 : FormsApi::SystemInformation::GetCaptionHeight();
-  }
-  
-  Drawing::Rectangle GetBounds(const System::Windows::Forms::Form& form) {
-    switch (form.StartPosition) {
-      case FormStartPosition::CenterParent: return Drawing::Rectangle(0, screenHeight - form.Bounds().Y, form.Width, form.Height);
-      case FormStartPosition::CenterScreen: return Drawing::Rectangle(0, screenHeight, form.Width, form.Height);
-      case FormStartPosition::Manual: return Drawing::Rectangle(form.Bounds().X, screenHeight - form.Bounds().Y, form.Bounds().Width, form.Bounds().Height);
-      case FormStartPosition::WindowsDefaultBounds: return Drawing::Rectangle(0, screenHeight, 300, 300);
-      case FormStartPosition::WindowsDefaultLocation: return Drawing::Rectangle(0, screenHeight, form.Width, form.Height);
-    }
-    return Drawing::Rectangle(0, screenHeight - 300, 300, 300);
-  }
-  
-  System::Drawing::Rectangle GetBounds(const System::Windows::Forms::Control& control) {
-    if (is<System::Windows::Forms::Form>(control))
-      return GetBounds(as<System::Windows::Forms::Form>(control));
-    return System::Drawing::Rectangle(control.Bounds().X, control.Parent()().Bounds().Height - control.Bounds().Height - control.Bounds().Y - GetCaptionHeight(control.Parent()()), control.Bounds().Width, control.Bounds().Height);
-  }
-  
-  int32 GetMouseButtonState(NSEvent* event) {
-    int32 state = 0;
-    
-    if ([event buttonNumber] == 1)
-      state &= MK_LBUTTON;
-    if ([event buttonNumber] == 2)
-      state &= MK_MBUTTON;
-    if ([event buttonNumber] == 3)
-      state &= MK_RBUTTON;
-    
-    return state;
-  }
-  
-  int32 GetMouseXCoordinateRelativeToClientArea(NSEvent* event, Control& control) {
-    System::Drawing::Point location(event.locationInWindow.x, event.window.frame.size.height - event.locationInWindow.y - GetCaptionHeight(control));
-    return location.X;
-  }
-  
-  int32 GetMouseYCoordinateRelativeToClientArea(NSEvent* event, Control& control) {
-    System::Drawing::Point location(event.locationInWindow.x, event.window.frame.size.height - event.locationInWindow.y - GetCaptionHeight(control));
-    return location.Y;
-  }
-  
-  NSEvent* GetMessage() {
-    @autoreleasepool {
-      return [NSApp nextEventMatchingMask:NSEventMaskAny untilDate:[NSDate dateWithTimeIntervalSinceNow:Double::MaxValue] inMode:NSDefaultRunLoopMode dequeue:YES];
-    }
-  }
-  
-  NSEvent* PeekMessage() {
-    @autoreleasepool {
-      return [NSApp nextEventMatchingMask:NSEventMaskAny untilDate:[NSDate dateWithTimeIntervalSinceNow:0.0] inMode:NSDefaultRunLoopMode dequeue:YES];
-    }
-  }
-  
-  void IgnoreMessages() {
-    NSEvent *ignoredEvent;
-    do {
-      ignoredEvent = [NSApp nextEventMatchingMask:(NSEventMaskAny & ~NSEventMaskSystemDefined) untilDate:[NSDate dateWithTimeIntervalSinceNow:0] inMode:NSDefaultRunLoopMode dequeue:YES];
-    } while (ignoredEvent);
-  }
-  
-  void MouseEnterEvent(NSEvent* event, Control& control) {
-    Message message = Message::Create((intptr)event.window, WM_MOUSEENTER, notUsed, notUsed, 0, (intptr)event);
-    hover = true;
-    return control.WndProc(message);
-  }
-  
-  void MouseLeaveEvent(NSEvent* event, Control& control) {
-    Message message = Message::Create((intptr)event.window, WM_MOUSELEAVE, notUsed, notUsed, 0, (intptr)event);
-    hover = false;
-    return control.WndProc(message);
-  }
-  
-  void LeftMouseDownEvent(NSEvent* event, Control& control) {
-    Message message = Message::Create((intptr)event.window, WM_LBUTTONDOWN, GetMouseButtonState(event), (GetMouseYCoordinateRelativeToClientArea(event, control) << 16) + GetMouseXCoordinateRelativeToClientArea(event, control), 0, (intptr)event);
-    return control.WndProc(message);
-  }
-  
-  void LeftMouseUpEvent(NSEvent* event, Control& control) {
-    Message message = Message::Create((intptr)event.window, WM_LBUTTONUP, GetMouseButtonState(event), (GetMouseYCoordinateRelativeToClientArea(event, control) << 16) + GetMouseXCoordinateRelativeToClientArea(event, control), 0, (intptr)event);
-    return control.WndProc(message);
-  }
-  
-  void OtherMouseUpEvent(NSEvent* event, Control& control) {
-    Message message = Message::Create((intptr)event.window, WM_MBUTTONUP, GetMouseButtonState(event), (GetMouseYCoordinateRelativeToClientArea(event, control) << 16) + GetMouseXCoordinateRelativeToClientArea(event, control), 0, (intptr)event);
-    return control.WndProc(message);
-  }
-  
-  void OtherMouseDownEvent(NSEvent* event, Control& control) {
-    Message message = Message::Create((intptr)event.window, WM_MBUTTONDOWN, GetMouseButtonState(event), (GetMouseYCoordinateRelativeToClientArea(event, control) << 16) + GetMouseXCoordinateRelativeToClientArea(event, control), 0, (intptr)event);
-    return control.WndProc(message);
-  }
-  
-  void RightMouseDownEvent(NSEvent* event, Control& control) {
-    Message message = Message::Create((intptr)event.window, WM_RBUTTONDOWN, GetMouseButtonState(event), (GetMouseYCoordinateRelativeToClientArea(event, control) << 16) + GetMouseXCoordinateRelativeToClientArea(event, control), 0, (intptr)event);
-    return control.WndProc(message);
-  }
-  
-  void RightMouseUpEvent(NSEvent* event, Control& control) {
-    Message message = Message::Create((intptr)event.window, WM_RBUTTONUP, GetMouseButtonState(event), (GetMouseYCoordinateRelativeToClientArea(event, control) << 16) + GetMouseXCoordinateRelativeToClientArea(event, control), 0, (intptr)event);
-    return control.WndProc(message);
-  }
-  
-  void MouseMoveEvent(NSEvent* event, Control& control) {
-    if (hover) {
-      Message message = Message::Create((intptr)event.window, WM_MOUSEHOVER, GetMouseButtonState(event), (GetMouseYCoordinateRelativeToClientArea(event, control) << 16) + GetMouseXCoordinateRelativeToClientArea(event, control), 0, (intptr)event);
-      control.WndProc(message);
-    }
-    Message message = Message::Create((intptr)event.window, WM_MOUSEMOVE, GetMouseButtonState(event), (GetMouseYCoordinateRelativeToClientArea(event, control) << 16) + GetMouseXCoordinateRelativeToClientArea(event, control), 0, (intptr)event);
-    return control.WndProc(message);
-  }
-  
-  void DispatchMessage(NSEvent* event) {
-    static System::Collections::Generic::SortedDictionary<int32, delegate<void, NSEvent*, Control&>> events = {
-      {NSEventTypeMouseEntered, MouseEnterEvent},
-      {NSEventTypeMouseExited, MouseLeaveEvent},
-      {NSEventTypeLeftMouseDown, LeftMouseDownEvent},
-      {NSEventTypeLeftMouseUp, LeftMouseUpEvent},
-      {NSEventTypeRightMouseDown, RightMouseDownEvent},
-      {NSEventTypeRightMouseUp, RightMouseUpEvent},
-      {NSEventTypeMouseMoved, MouseMoveEvent},
-      {NSEventTypeOtherMouseDown, OtherMouseDownEvent},
-      {NSEventTypeOtherMouseUp, OtherMouseUpEvent},
-    };
-    @autoreleasepool {
-      if (events.ContainsKey([event type]) && controls.ContainsKey((intptr)[event window])) {
-        events[[event type]](event, controls[(intptr)[event window]]);
-      } else {
-        [NSApp sendEvent:event];
-      }
-    }
   }
   
   Message NSEventToMessage(NSEvent* event) {
@@ -229,29 +329,7 @@ void DoSomething(id sender) {
 @end
 
 void FormsApi::Application::MessageLoop(EventHandler idle) {
-  @autoreleasepool {
-    //[NSApp run];
-   
-    /*
-    // MessagelLoop without idle...
-    Event* event = GetMessage();
-    bool messageLoopRunning = true;
-    while (event != nil) {
-      DispatchMessage(event);
-      event = GetMessage();
-    }
-    messageLoopRunning = false;
-     */
-    
-    messageLoopRunning = true;
-    while (messageLoopRunning) {
-      NSEvent* event = idle.IsEmpty() ? GetMessage() : PeekMessage();
-      if (event != nil) {
-        DispatchMessage(event);
-      } else
-        idle(object(), EventArgs());
-    }
-  }
+  cocoaApi().MessageLoop(idle);
 }
 
 void FormsApi::Application::MessageBeep(MessageBoxIcon type) {
@@ -342,83 +420,17 @@ DialogResult FormsApi::Application::ShowMessageBox(const string& message, const 
     if (displayHelpButton)
       [alert setShowsHelp:YES];
     DialogResult result = showModal[buttons](alert);
-    IgnoreMessages();
+    cocoaApi().IgnoreMessages();
     return result;
-  }
-}
-namespace {
-  static void CreateAppleMenu() {
-    static BOOL donethat = NO;
-    if (donethat) return;
-    donethat = YES;
-    NSMenu *mainmenu, *services = nil, *appleMenu;
-    NSMenuItem *menuItem;
-    NSString *title;
-    
-    NSString *nsappname = [[[NSBundle mainBundle] performSelector:@selector(localizedInfoDictionary)] objectForKey:@"CFBundleName"];
-    if (nsappname == nil)
-      nsappname = [[NSProcessInfo processInfo] processName];
-    appleMenu = [[NSMenu alloc] initWithTitle:@""];
-    /* Add menu items */
-    title = [NSString stringWithFormat:NSLocalizedString([NSString stringWithUTF8String:"About %@"],nil), nsappname];
-    menuItem = [appleMenu addItemWithTitle:title action:@selector(showPanel) keyEquivalent:@""];
-    //FLaboutItemTarget *about = [[FLaboutItemTarget alloc] init];
-    //[menuItem setTarget:about];
-    [appleMenu addItem:[NSMenuItem separatorItem]];
-    // Print front window
-    title = NSLocalizedString([NSString stringWithUTF8String:"Print Front Window"], nil);
-    if ([title length] > 0) {
-      menuItem = [appleMenu addItemWithTitle:title action:@selector(printPanel) keyEquivalent:@""];
-      //[menuItem setTarget:about];
-      [menuItem setEnabled:YES];
-      [appleMenu addItem:[NSMenuItem separatorItem]];
-    }
-    // Services Menu
-    services = [[NSMenu alloc] initWithTitle:@""];
-    menuItem = [appleMenu addItemWithTitle:NSLocalizedString([NSString stringWithUTF8String:"Services"], nil) action:nil keyEquivalent:@""];
-    [appleMenu setSubmenu:services forItem:menuItem];
-    [appleMenu addItem:[NSMenuItem separatorItem]];
-    // Hide AppName
-    title = [NSString stringWithFormat:NSLocalizedString([NSString stringWithUTF8String:"Hide %@"],nil), nsappname];
-    [appleMenu addItemWithTitle:title action:@selector(hide:) keyEquivalent:@"h"];
-    // Hide Others
-    menuItem = [appleMenu addItemWithTitle:NSLocalizedString([NSString stringWithUTF8String:"Hide Others"] , nil) action:@selector(hideOtherApplications:) keyEquivalent:@"h"];
-    [menuItem setKeyEquivalentModifierMask:(NSEventModifierFlagOption|NSEventModifierFlagCommand)];
-    // Show All
-    [appleMenu addItemWithTitle:NSLocalizedString([NSString stringWithUTF8String:"Show All"] , nil) action:@selector(unhideAllApplications:) keyEquivalent:@""];
-    [appleMenu addItem:[NSMenuItem separatorItem]];
-    // Quit AppName
-    title = [NSString stringWithFormat:NSLocalizedString([NSString stringWithUTF8String:"Quit %@"] , nil), nsappname];
-    menuItem = [appleMenu addItemWithTitle:title action:@selector(terminate:) keyEquivalent:@"q"];
-    //[menuItem setTarget:about];
-
-    /* Put menu into the menubar */
-    menuItem = [[NSMenuItem alloc] initWithTitle:@"" action:nil keyEquivalent:@""];
-    [menuItem setSubmenu:appleMenu];
-    mainmenu = [[NSMenu alloc] initWithTitle:@""];
-    [mainmenu addItem:menuItem];
-    [NSApp setMainMenu:mainmenu];
-    if (services) {
-      [NSApp setServicesMenu:services];
-      [services release];
-    }
-    [mainmenu release];
-    [appleMenu release];
-    [menuItem release];
   }
 }
 
 void FormsApi::Application::Start() {
-  @autoreleasepool {
-    [NSApplication sharedApplication];
-    [NSApp finishLaunching];
-    IgnoreMessages();
-    [NSApp setActivationPolicy:NSApplicationActivationPolicyRegular];
-    CreateAppleMenu();
-  }
+  cocoaApi = UniquePointer<CocoaApi>::Create();
 }
 
 void FormsApi::Application::Stop() {
+  cocoaApi = null;
 }
 
 void FormsApi::Control::Close(const System::Windows::Forms::Form& form) {
@@ -431,14 +443,14 @@ void FormsApi::Control::Close(const System::Windows::Forms::Form& form) {
 
 @implementation NSControlResponder
 - (IBAction) ControlClick:(id)sender {
-  Message event = Message::Create((intptr)sender, WM_LBUTTONUP, 0, mouseDownLocation.X() + (mouseDownLocation.Y() << 16), 0, 0);
-  const_cast<Control&>(controls[(intptr)sender]()).WndProc(event);
+  //Message event = Message::Create((intptr)sender, WM_LBUTTONUP, 0, mouseDownLocation.X() + (mouseDownLocation.Y() << 16), 0, 0);
+  //const_cast<Control&>(cocoaApi().Controls()[(intptr)sender]()).WndProc(event);
 }
 @end
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Button& button) {
   @autoreleasepool {
-    System::Drawing::Rectangle bounds = GetBounds(button);
+    System::Drawing::Rectangle bounds = cocoaApi().GetBounds(button);
     NSButton *handle = [[[NSButton alloc] initWithFrame:NSMakeRect(bounds.X(), bounds.Y(), bounds.Width(), bounds.Height())] autorelease];
     [[(NSWindow*)button.data->parent().data->handle contentView] addSubview: handle];
     
@@ -446,9 +458,9 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::Button& button) {
     [handle setButtonType:NSMomentaryPushInButton];
     [handle setBezelStyle:bounds.Height == button.DefaultSize().Height ? NSBezelStyleRounded : NSBezelStyleRegularSquare];
     [handle setAutoresizingMask:NSViewMaxXMargin | NSViewMinYMargin];
-    [handle setTarget:[NSControlResponder alloc]];
-    [handle setAction:@selector(ControlClick:)];
-    controls[(intptr)handle] = button;
+    //[handle setTarget:[NSControlResponder alloc]];
+    //[handle setAction:@selector(ControlClick:)];
+    cocoaApi().Controls()[(intptr)handle] = button;
     Message message = Message::Create((intptr)handle, WM_CREATE, 0, 0, 0, IntPtr::Zero);
     const_cast<System::Windows::Forms::Button&>(button).WndProc(message);
     return (intptr)handle;
@@ -457,7 +469,7 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::Button& button) {
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::CheckBox& checkBox) {
   @autoreleasepool {
-    System::Drawing::Rectangle bounds = GetBounds(checkBox);
+    System::Drawing::Rectangle bounds = cocoaApi().GetBounds(checkBox);
     NSButton *handle = [[[NSButton alloc] initWithFrame:NSMakeRect(bounds.X(), bounds.Y(), bounds.Width(), bounds.Height())] autorelease];
     [[(NSWindow*)checkBox.data->parent().data->handle contentView] addSubview: handle];
     
@@ -467,7 +479,7 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::CheckBox& checkBo
     [handle setAutoresizingMask:NSViewMaxXMargin | NSViewMinYMargin];
     [handle setTarget:[NSControlResponder alloc]];
     [handle setAction:@selector(ControlClick:)];
-    controls[(intptr)handle] = checkBox;
+    cocoaApi().Controls()[(intptr)handle] = checkBox;
     Message message = Message::Create((intptr)handle, WM_CREATE, 0, 0, 0, IntPtr::Zero);
     const_cast<System::Windows::Forms::CheckBox&>(checkBox).WndProc(message);
     return (intptr)handle;
@@ -475,7 +487,7 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::CheckBox& checkBo
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Control& control) {
-  System::Drawing::Rectangle bounds = GetBounds(control);
+  System::Drawing::Rectangle bounds = cocoaApi().GetBounds(control);
   NSControl *handle = [[[NSControl alloc] initWithFrame:NSMakeRect(bounds.X(), bounds.Y(), bounds.Width(), bounds.Height())] autorelease];
   [[(NSWindow*)control.data->parent().data->handle contentView] addSubview: handle];
   
@@ -483,7 +495,7 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::Control& control)
   [handle setAutoresizingMask:NSViewMaxXMargin | NSViewMinYMargin];
   [handle setTarget:[NSControlResponder alloc]];
   [handle setAction:@selector(ControlClick:)];
-  controls[(intptr)handle] = control;
+  cocoaApi().Controls()[(intptr)handle] = control;
   Message message = Message::Create((intptr)handle, WM_CREATE, 0, 0, 0, IntPtr::Zero);
   const_cast<System::Windows::Forms::Control&>(control).WndProc(message);
   return (intptr)handle;
@@ -491,7 +503,7 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::Control& control)
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Form& form) {
   @autoreleasepool {
-    System::Drawing::Rectangle bounds = GetBounds(form);
+    System::Drawing::Rectangle bounds = cocoaApi().GetBounds(form);
     NSWindow* handle = [[NSWindow alloc] init];
     
     [handle setStyleMask: FormToNSWindowStyleMask(form)];
@@ -501,7 +513,7 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::Form& form) {
     [handle setTitle:[NSString stringWithUTF8String:form.data->text.c_str()]];
     [handle makeKeyAndOrderFront:nil];
     [NSApp activateIgnoringOtherApps:YES];
-    controls[(intptr)handle] = form;
+    cocoaApi().Controls()[(intptr)handle] = form;
     Message message = Message::Create((intptr)handle, WM_CREATE, 0, 0, 0, IntPtr::Zero);
     const_cast<System::Windows::Forms::Form&>(form).WndProc(message);
     return (intptr)handle;
@@ -510,7 +522,7 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::Form& form) {
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Label& label) {
   @autoreleasepool {
-    System::Drawing::Rectangle bounds = GetBounds(label);
+    System::Drawing::Rectangle bounds = cocoaApi().GetBounds(label);
     NSTextField* handle;
     handle = [[NSTextField alloc] initWithFrame:NSMakeRect(bounds.X(), bounds.Y(), bounds.Width(), bounds.Height())];
     [[(NSWindow*)label.data->parent().data->handle contentView] addSubview: handle];
@@ -523,7 +535,7 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::Label& label) {
     [handle setAutoresizingMask:NSViewMaxXMargin | NSViewMinYMargin];
     [handle setTarget:[NSControlResponder alloc]];
     [handle setAction:@selector(ControlClick:)];
-    controls[(intptr)handle] = label;
+    cocoaApi().Controls()[(intptr)handle] = label;
     Message message = Message::Create((intptr)handle, WM_CREATE, 0, 0, 0, IntPtr::Zero);
     const_cast<System::Windows::Forms::Label&>(label).WndProc(message);
     return (intptr)handle;
@@ -532,7 +544,7 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::Label& label) {
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::RadioButton& radioButton) {
   @autoreleasepool {
-    System::Drawing::Rectangle bounds = GetBounds(radioButton);
+    System::Drawing::Rectangle bounds = cocoaApi().GetBounds(radioButton);
     NSButton *handle = [[[NSButton alloc] initWithFrame:NSMakeRect(bounds.X(), bounds.Y(), bounds.Width(), bounds.Height())] autorelease];
     [[(NSWindow*)radioButton.data->parent().data->handle contentView] addSubview: handle];
     
@@ -542,7 +554,7 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::RadioButton& radi
     [handle setAutoresizingMask:NSViewMaxXMargin | NSViewMinYMargin];
     [handle setTarget:[NSControlResponder alloc]];
     [handle setAction:@selector(ControlClick:)];
-    controls[(intptr)handle] = radioButton;
+    cocoaApi().Controls()[(intptr)handle] = radioButton;
     Message message = Message::Create((intptr)handle, WM_CREATE, 0, 0, 0, IntPtr::Zero);
     const_cast<System::Windows::Forms::RadioButton&>(radioButton).WndProc(message);
     return (intptr)handle;
@@ -561,7 +573,7 @@ void FormsApi::Control::DefWndProc(System::Windows::Forms::Message& message) {
 }
 
 void FormsApi::Control::Destroy(const System::Windows::Forms::Control& control) {
-  controls.Remove(control.Handle);
+  cocoaApi().Controls().Remove(control.Handle);
   Message message = Message::Create(control.Handle, WM_DESTROY, 0, 0, 0, IntPtr::Zero);
   const_cast<System::Windows::Forms::Control&>(control).WndProc(message);
 }
@@ -603,7 +615,7 @@ void FormsApi::Control::SetForeColor(const System::Windows::Forms::Control& cont
 void FormsApi::Control::SetLocation(const System::Windows::Forms::Control& control) {
   @autoreleasepool {
     if (control.data->handle) {
-      System::Drawing::Rectangle bounds = GetBounds(control);
+      System::Drawing::Rectangle bounds = cocoaApi().GetBounds(control);
       [(NSControl*)control.data->handle setFrameOrigin:NSMakePoint(bounds.X(), bounds.Y())];
     }
   }
