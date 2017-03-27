@@ -48,7 +48,7 @@ set(CMAKE_CXX_STANDARD 14)
 
 find_package(Pcf REQUIRED)
 add_executable(${PROJECT_NAME} HelloWorld.cpp)
-target_link_libraries(${PROJECT_NAME} ${Pcf_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} Pcf.Core)
 ```
 
 ## Forms
@@ -100,7 +100,7 @@ set(CMAKE_CXX_STANDARD 14)
 
 find_package(Pcf REQUIRED)
 add_executable(${PROJECT_NAME} WIN32 HelloWorldGui.cpp)
-target_link_libraries(${PROJECT_NAME} ${Pcf_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} Pcf.Forms)
 ```
 
 ## TUnit
@@ -140,7 +140,7 @@ set(CMAKE_CXX_STANDARD 14)
 
 find_package(Pcf REQUIRED)
 add_executable(${PROJECT_NAME} HelloWorldTest.cpp)
-target_link_libraries(${PROJECT_NAME} ${Pcf_WITH_TUNIT_MAIN_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} Pcf.TUnit Pcf.TUnit.Main)
 ```
 
 # Namespace
