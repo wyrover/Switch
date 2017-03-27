@@ -11,6 +11,7 @@
 #include "../../Includes/Pcf/System/Windows/Forms/Application.h"
 #include "../../Includes/Pcf/System/Windows/Forms/Control.h"
 #include "FormsApi.h"
+#include "WindowMessageKey.h"
 
 using namespace System;
 using namespace System::Collections::Generic;
@@ -19,138 +20,287 @@ using namespace System::Windows::Forms;
 using namespace __OS;
 
 namespace {
-  static bool messageLoopRunning = false;
-  constexpr int32 screenHeight = 1050;
-  System::Collections::Generic::Dictionary<intptr, Reference<Control>> controls;
-  System::Drawing::Point mouseDownLocation;
-  
-  NSWindowStyleMask FormToNSWindowStyleMask(const Form& form) {
-    constexpr int CP_NOCLOSE_BUTTON = 0x200;
-    NSWindowStyleMask windowStyleMask = NSWindowStyleMaskBorderless;
-    
-    if (form.FormBorderStyle != FormBorderStyle::None) {
-      windowStyleMask |= NSWindowStyleMaskTitled;
-      
-      if (form.MaximizeBox && (form.FormBorderStyle == FormBorderStyle::Sizable || form.FormBorderStyle == FormBorderStyle::SizableToolWindow))
-      windowStyleMask |= NSWindowStyleMaskResizable;
-      
-      if (form.MinimizeBox)
-      windowStyleMask |= NSWindowStyleMaskMiniaturizable;
-      
-      if (CP_NOCLOSE_BUTTON /*(form.GetCreateParams().ClassStyle | CP_NOCLOSE_BUTTON) == CP_NOCLOSE_BUTTON*/)
-      windowStyleMask |= NSWindowStyleMaskClosable;
+  class CocoaApi {
+  public:
+    using ControlDictionary = System::Collections::Generic::Dictionary<intptr, Reference<Control>>;
+    CocoaApi() {
+      this->CreateAppication();
+      this->CreateMenuBar();
     }
     
-    return windowStyleMask;
-  }
-  
-  int32 GetCaptionHeight(const System::Windows::Forms::Control& control) {
-    return !is<Form>(control) || as<Form>(control).FormBorderStyle == FormBorderStyle::None ? 0 : FormsApi::SystemInformation::GetCaptionHeight();
-  }
-  
-  Drawing::Rectangle GetBounds(const System::Windows::Forms::Form& form) {
-    switch (form.StartPosition) {
-      case FormStartPosition::CenterParent: return Drawing::Rectangle(0, screenHeight - form.Bounds().Y, form.Width, form.Height);
-      case FormStartPosition::CenterScreen: return Drawing::Rectangle(0, screenHeight, form.Width, form.Height);
-      case FormStartPosition::Manual: return Drawing::Rectangle(form.Bounds().X, screenHeight - form.Bounds().Y, form.Bounds().Width, form.Bounds().Height);
-      case FormStartPosition::WindowsDefaultBounds: return Drawing::Rectangle(0, screenHeight, 300, 300);
-      case FormStartPosition::WindowsDefaultLocation: return Drawing::Rectangle(0, screenHeight, form.Width, form.Height);
-    }
-    return Drawing::Rectangle(0, screenHeight - 300, 300, 300);
-  }
-  
-  System::Drawing::Rectangle GetBounds(const System::Windows::Forms::Control& control) {
-    if (is<System::Windows::Forms::Form>(control))
-      return GetBounds(as<System::Windows::Forms::Form>(control));
-    return System::Drawing::Rectangle(control.Bounds().X, control.Parent()().Bounds().Height - control.Bounds().Height - control.Bounds().Y - GetCaptionHeight(control.Parent()()), control.Bounds().Width, control.Bounds().Height);
-  }
-  
-  Message NSEventToMessage(NSEvent* event) {
-    static System::Collections::Generic::Dictionary<int32, int32> events {
-      {NSEventTypeLeftMouseDown, WM_LBUTTONDOWN},
-      {NSEventTypeLeftMouseUp, WM_LBUTTONUP},
-      {NSEventTypeRightMouseDown, WM_RBUTTONDOWN},
-      {NSEventTypeRightMouseUp, WM_RBUTTONUP},
-      {NSEventTypeMouseMoved, WM_MOUSEMOVE},
-      //{NSEventTypeLeftMouseDragged, WM_...},
-      //{NSEventTypeRightMouseDragged, WM_...},
-      {NSEventTypeMouseEntered, WM_MOUSEENTER},
-      {NSEventTypeMouseExited, WM_MOUSELEAVE},
-      {NSEventTypeKeyDown, WM_KEYDOWN},
-      {NSEventTypeKeyUp, WM_KEYUP},
-      //{NSEventTypeFlagsChanged, WM_...},
-      //{NSEventTypeAppKitDefined, WM_...},
-      //{NSEventTypeSystemDefined, WM_...},
-      //{NSEventTypeApplicationDefined, WM_...},
-      //{NSEventTypePeriodic, WM_...},
-      {NSEventTypeCursorUpdate, WM_SETCURSOR},
-      {NSEventTypeScrollWheel, WM_MOUSEWHEEL},
-      //{NSEventTypeTabletPoint, WM_...},
-      //{NSEventTypeTabletProximity, WM_...},
-      {NSEventTypeOtherMouseDown, WM_MBUTTONDOWN},
-      {NSEventTypeOtherMouseUp, WM_MBUTTONUP},
-      //{NSEventTypeOtherMouseDragged, WM_...},
+    Property<ControlDictionary&> Controls {
+      pcf_get->ControlDictionary& {return this->controls;},
+      pcf_set {this->controls = value;}
     };
-    int32 msg;
-    if (events.ContainsKey([event type]))
-      msg = events[[event type]];
-    else
-      msg = 0x40000 + [event type];
-    intptr hwnd = (intptr)[event window];
     
-    if  (hwnd != 0) {
-      System::Drawing::Point location(event.locationInWindow.x, event.window.frame.size.height - event.locationInWindow.y - GetCaptionHeight(controls[hwnd]()));
-      for (auto control : controls) {
-        if (control.Key != hwnd && control.Value()().Bounds().Contains(location)) {
-          hwnd = control.Key;
-          mouseDownLocation = location - control.Value()().Location();
-          break;
+    NSWindowStyleMask FormToNSWindowStyleMask(const Form& form) {
+      constexpr int CP_NOCLOSE_BUTTON = 0x200;
+      NSWindowStyleMask windowStyleMask = NSWindowStyleMaskBorderless;
+      
+      if (form.FormBorderStyle != FormBorderStyle::None) {
+        windowStyleMask |= NSWindowStyleMaskTitled;
+        
+        if (form.MaximizeBox && (form.FormBorderStyle == FormBorderStyle::Sizable || form.FormBorderStyle == FormBorderStyle::SizableToolWindow))
+          windowStyleMask |= NSWindowStyleMaskResizable;
+        
+        if (form.MinimizeBox)
+          windowStyleMask |= NSWindowStyleMaskMiniaturizable;
+        
+        if (CP_NOCLOSE_BUTTON /*(form.GetCreateParams().ClassStyle | CP_NOCLOSE_BUTTON) == CP_NOCLOSE_BUTTON*/)
+          windowStyleMask |= NSWindowStyleMaskClosable;
+      }
+      
+      return windowStyleMask;
+    }
+    
+    NSColor* FromColor(const System::Drawing::Color& color) {
+      return [NSColor colorWithCalibratedRed:as<float>(color.R()) / 0xFF green:as<float>(color.G()) / 0xFF blue:as<float>(color.B()) / 0xFF alpha:as<float>(color.A()) / 0xF];
+    }
+    
+    System::Drawing::Rectangle GetBounds(const System::Windows::Forms::Control& control) {
+      if (is<System::Windows::Forms::Form>(control))
+        return this->GetBounds(as<System::Windows::Forms::Form>(control));
+      return System::Drawing::Rectangle(control.Bounds().X, control.Parent()().Bounds().Height - control.Bounds().Height - control.Bounds().Y - GetCaptionHeight(control.Parent()()), control.Bounds().Width, control.Bounds().Height);
+    }
+    
+    Drawing::Rectangle GetBounds(const System::Windows::Forms::Form& form) {
+      switch (form.StartPosition) {
+        case FormStartPosition::CenterParent: return Drawing::Rectangle(0, screenHeight - form.Bounds().Y, form.Width, form.Height);
+        case FormStartPosition::CenterScreen: return Drawing::Rectangle(0, screenHeight, form.Width, form.Height);
+        case FormStartPosition::Manual: return Drawing::Rectangle(form.Bounds().X, screenHeight - form.Bounds().Y, form.Bounds().Width, form.Bounds().Height);
+        case FormStartPosition::WindowsDefaultBounds: return Drawing::Rectangle(0, screenHeight, 300, 300);
+        case FormStartPosition::WindowsDefaultLocation: return Drawing::Rectangle(0, screenHeight, form.Width, form.Height);
+      }
+      return Drawing::Rectangle(0, screenHeight - 300, 300, 300);
+    }
+    
+    int32 GetCaptionHeight(const System::Windows::Forms::Control& control) {
+      return !is<Form>(control) || as<Form>(control).FormBorderStyle == FormBorderStyle::None ? 0 : FormsApi::SystemInformation::GetCaptionHeight();
+    }
+    
+    int32 GetMouseButtonState(NSEvent* event) {
+      int32 state = 0;
+      
+      if ([event buttonNumber] == 1)
+        state &= MK_LBUTTON;
+      if ([event buttonNumber] == 2)
+        state &= MK_MBUTTON;
+      if ([event buttonNumber] == 3)
+        state &= MK_RBUTTON;
+      
+      return state;
+    }
+    
+    int32 GetMouseXCoordinateRelativeToClientArea(NSEvent* event, Control& control) {
+      System::Drawing::Point location(event.locationInWindow.x, event.window.frame.size.height - event.locationInWindow.y - GetCaptionHeight(control));
+      return location.X;
+    }
+    
+    int32 GetMouseYCoordinateRelativeToClientArea(NSEvent* event, Control& control) {
+      System::Drawing::Point location(event.locationInWindow.x, event.window.frame.size.height - event.locationInWindow.y - GetCaptionHeight(control));
+      return location.Y;
+    }
+    
+    void IgnoreMessages() const {
+      @autoreleasepool {
+        NSEvent *ignoredEvent;
+        do {
+          ignoredEvent = [NSApp nextEventMatchingMask:(NSEventMaskAny & ~NSEventMaskSystemDefined) untilDate:[NSDate dateWithTimeIntervalSinceNow:0] inMode:NSDefaultRunLoopMode dequeue:YES];
+        } while (ignoredEvent);
+      }
+    }
+
+    void MessageLoop(EventHandler idle) {
+      @autoreleasepool {
+        this->messageLoopRunning = true;
+        while (messageLoopRunning) {
+          NSEvent* event = idle.IsEmpty() ? this->GetMessage() : this->PeekMessage();
+          if (event != nil) {
+            DispatchMessage(event);
+          } else
+            idle(object(), EventArgs());
         }
       }
     }
     
-    return Message::Create(hwnd, msg, 0, (mouseDownLocation.Y() <<16) + mouseDownLocation.X(), 0, (intptr)event);
-  }
-  
-  int32 GetMessage(Message& message) {
-    int32 result = 0;
-    @autoreleasepool {
-      NSEvent *event = [NSApp nextEventMatchingMask:NSEventMaskAny untilDate:[NSDate dateWithTimeIntervalSinceNow:Double::MaxValue] inMode:NSDefaultRunLoopMode dequeue:YES];
-      
-      if (event != nil) {
-        message = NSEventToMessage(event);
-        result = 1;
-      } else
-        System::Diagnostics::Debug::WriteLine("??? What's appened !");
-    }
-    return result;
-  }
-  
-  int32 PeekMessage(Message& message) {
-    @autoreleasepool {
-      NSEvent *event = [NSApp nextEventMatchingMask:NSEventMaskAny untilDate:[NSDate dateWithTimeIntervalSinceNow:0.0] inMode:NSDefaultRunLoopMode dequeue:YES];
-      
-      if (event != nil && [event window] != nil) {
-        message = NSEventToMessage(event);
-        return 1;
+  private:
+    void CreateAppication() {
+      @autoreleasepool {
+        [NSApplication sharedApplication];
+        [NSApp finishLaunching];
+        this->IgnoreMessages();
+        [NSApp setActivationPolicy:NSApplicationActivationPolicyRegular];
       }
     }
-    return 0;
-  }
-  
-  void TranslateMessage(Message& message) {
-  }
-  
-  void DispatchMessage(Message& message) {
-    for (auto control : controls) {
-      if (control.Key == message.HWnd())
-        const_cast<Control&>(control.Value()()).WndProc(message);
+
+    void CreateMenuBar() {
+      static BOOL donethat = NO;
+      if (donethat) return;
+      donethat = YES;
+      NSMenu *mainmenu, *services = nil, *appleMenu;
+      NSMenuItem *menuItem;
+      NSString *title;
+      
+      NSString *nsappname = [[[NSBundle mainBundle] performSelector:@selector(localizedInfoDictionary)] objectForKey:@"CFBundleName"];
+      if (nsappname == nil)
+        nsappname = [[NSProcessInfo processInfo] processName];
+      appleMenu = [[NSMenu alloc] initWithTitle:@""];
+      /* Add menu items */
+      title = [NSString stringWithFormat:NSLocalizedString([NSString stringWithUTF8String:"About %@"],nil), nsappname];
+      menuItem = [appleMenu addItemWithTitle:title action:@selector(showPanel) keyEquivalent:@""];
+      //FLaboutItemTarget *about = [[FLaboutItemTarget alloc] init];
+      //[menuItem setTarget:about];
+      [appleMenu addItem:[NSMenuItem separatorItem]];
+      // Print front window
+      title = NSLocalizedString([NSString stringWithUTF8String:"Print Front Window"], nil);
+      if ([title length] > 0) {
+        menuItem = [appleMenu addItemWithTitle:title action:@selector(printPanel) keyEquivalent:@""];
+        //[menuItem setTarget:about];
+        [menuItem setEnabled:YES];
+        [appleMenu addItem:[NSMenuItem separatorItem]];
+      }
+      // Services Menu
+      services = [[NSMenu alloc] initWithTitle:@""];
+      menuItem = [appleMenu addItemWithTitle:NSLocalizedString([NSString stringWithUTF8String:"Services"], nil) action:nil keyEquivalent:@""];
+      [appleMenu setSubmenu:services forItem:menuItem];
+      [appleMenu addItem:[NSMenuItem separatorItem]];
+      // Hide AppName
+      title = [NSString stringWithFormat:NSLocalizedString([NSString stringWithUTF8String:"Hide %@"],nil), nsappname];
+      [appleMenu addItemWithTitle:title action:@selector(hide:) keyEquivalent:@"h"];
+      // Hide Others
+      menuItem = [appleMenu addItemWithTitle:NSLocalizedString([NSString stringWithUTF8String:"Hide Others"] , nil) action:@selector(hideOtherApplications:) keyEquivalent:@"h"];
+      [menuItem setKeyEquivalentModifierMask:(NSEventModifierFlagOption|NSEventModifierFlagCommand)];
+      // Show All
+      [appleMenu addItemWithTitle:NSLocalizedString([NSString stringWithUTF8String:"Show All"] , nil) action:@selector(unhideAllApplications:) keyEquivalent:@""];
+      [appleMenu addItem:[NSMenuItem separatorItem]];
+      // Quit AppName
+      title = [NSString stringWithFormat:NSLocalizedString([NSString stringWithUTF8String:"Quit %@"] , nil), nsappname];
+      menuItem = [appleMenu addItemWithTitle:title action:@selector(terminate:) keyEquivalent:@"q"];
+      //[menuItem setTarget:about];
+      
+      /* Put menu into the menubar */
+      menuItem = [[NSMenuItem alloc] initWithTitle:@"" action:nil keyEquivalent:@""];
+      [menuItem setSubmenu:appleMenu];
+      mainmenu = [[NSMenu alloc] initWithTitle:@""];
+      [mainmenu addItem:menuItem];
+      [NSApp setMainMenu:mainmenu];
+      if (services) {
+        [NSApp setServicesMenu:services];
+        [services release];
+      }
+      [mainmenu release];
+      [appleMenu release];
+      [menuItem release];
     }
-    if ((message.Msg() & 0x40000) == 0x40000) {
-      NSEvent* event = (NSEvent*)message.Handle();
-      [NSApp sendEvent:event];
+    
+    void DispatchMessage(NSEvent* event) {
+      /*
+       //{NSEventTypeLeftMouseDragged, WM_...},
+       //{NSEventTypeRightMouseDragged, WM_...},
+       {NSEventTypeKeyDown, WM_KEYDOWN},
+       {NSEventTypeKeyUp, WM_KEYUP},
+       //{NSEventTypeFlagsChanged, WM_...},
+       //{NSEventTypeAppKitDefined, WM_...},
+       //{NSEventTypeSystemDefined, WM_...},
+       //{NSEventTypeApplicationDefined, WM_...},
+       //{NSEventTypePeriodic, WM_...},
+       {NSEventTypeCursorUpdate, WM_SETCURSOR},
+       {NSEventTypeScrollWheel, WM_MOUSEWHEEL},
+       //{NSEventTypeTabletPoint, WM_...},
+       //{NSEventTypeTabletProximity, WM_...},
+       //{NSEventTypeOtherMouseDragged, WM_...},
+       */
+      static System::Collections::Generic::SortedDictionary<int32, delegate<void, NSEvent*, Control&>> events = {
+        {NSEventTypeMouseEntered, {*this, &CocoaApi::MouseEnterEvent}},
+        {NSEventTypeMouseExited, {*this, &CocoaApi::MouseLeaveEvent}},
+        {NSEventTypeLeftMouseDown, {*this, &CocoaApi::LeftMouseDownEvent}},
+        {NSEventTypeLeftMouseUp, {*this, &CocoaApi::LeftMouseUpEvent}},
+        {NSEventTypeRightMouseDown, {*this, &CocoaApi::RightMouseDownEvent}},
+        {NSEventTypeRightMouseUp, {*this, &CocoaApi::RightMouseUpEvent}},
+        {NSEventTypeMouseMoved, {*this, &CocoaApi::MouseMoveEvent}},
+        {NSEventTypeOtherMouseDown, {*this, &CocoaApi::OtherMouseDownEvent}},
+        {NSEventTypeOtherMouseUp, {*this, &CocoaApi::OtherMouseUpEvent}}
+      };
+      @autoreleasepool {
+        if (events.ContainsKey([event type]) && controls.ContainsKey((intptr)[event window])) {
+          events[[event type]](event, this->controls[(intptr)[event window]]);
+        } else {
+          [NSApp sendEvent:event];
+        }
+      }
     }
-  }
+    
+    NSEvent* GetMessage() const {
+      @autoreleasepool {
+        return [NSApp nextEventMatchingMask:NSEventMaskAny untilDate:[NSDate dateWithTimeIntervalSinceNow:Double::MaxValue] inMode:NSDefaultRunLoopMode dequeue:YES];
+      }
+    }
+    
+    NSEvent* PeekMessage() const {
+      @autoreleasepool {
+        return [NSApp nextEventMatchingMask:NSEventMaskAny untilDate:[NSDate dateWithTimeIntervalSinceNow:0.0] inMode:NSDefaultRunLoopMode dequeue:YES];
+      }
+    }
+    
+    void MouseEnterEvent(NSEvent* event, Control& control) {
+      Message message = Message::Create((intptr)event.window, WM_MOUSEENTER, notUsed, notUsed, 0, (intptr)event);
+      hover = true;
+      return control.WndProc(message);
+    }
+    
+    void MouseLeaveEvent(NSEvent* event, Control& control) {
+      Message message = Message::Create((intptr)event.window, WM_MOUSELEAVE, notUsed, notUsed, 0, (intptr)event);
+      hover = false;
+      return control.WndProc(message);
+    }
+    
+    void LeftMouseDownEvent(NSEvent* event, Control& control) {
+      Message message = Message::Create((intptr)event.window, WM_LBUTTONDOWN, GetMouseButtonState(event), (GetMouseYCoordinateRelativeToClientArea(event, control) << 16) + GetMouseXCoordinateRelativeToClientArea(event, control), 0, (intptr)event);
+      return control.WndProc(message);
+    }
+    
+    void LeftMouseUpEvent(NSEvent* event, Control& control) {
+      Message message = Message::Create((intptr)event.window, WM_LBUTTONUP, GetMouseButtonState(event), (GetMouseYCoordinateRelativeToClientArea(event, control) << 16) + GetMouseXCoordinateRelativeToClientArea(event, control), 0, (intptr)event);
+      return control.WndProc(message);
+    }
+    
+    void OtherMouseUpEvent(NSEvent* event, Control& control) {
+      Message message = Message::Create((intptr)event.window, WM_MBUTTONUP, GetMouseButtonState(event), (GetMouseYCoordinateRelativeToClientArea(event, control) << 16) + GetMouseXCoordinateRelativeToClientArea(event, control), 0, (intptr)event);
+      return control.WndProc(message);
+    }
+    
+    void OtherMouseDownEvent(NSEvent* event, Control& control) {
+      Message message = Message::Create((intptr)event.window, WM_MBUTTONDOWN, GetMouseButtonState(event), (GetMouseYCoordinateRelativeToClientArea(event, control) << 16) + GetMouseXCoordinateRelativeToClientArea(event, control), 0, (intptr)event);
+      return control.WndProc(message);
+    }
+    
+    void RightMouseDownEvent(NSEvent* event, Control& control) {
+      Message message = Message::Create((intptr)event.window, WM_RBUTTONDOWN, GetMouseButtonState(event), (GetMouseYCoordinateRelativeToClientArea(event, control) << 16) + GetMouseXCoordinateRelativeToClientArea(event, control), 0, (intptr)event);
+      return control.WndProc(message);
+    }
+    
+    void RightMouseUpEvent(NSEvent* event, Control& control) {
+      Message message = Message::Create((intptr)event.window, WM_RBUTTONUP, GetMouseButtonState(event), (GetMouseYCoordinateRelativeToClientArea(event, control) << 16) + GetMouseXCoordinateRelativeToClientArea(event, control), 0, (intptr)event);
+      return control.WndProc(message);
+    }
+    
+    void MouseMoveEvent(NSEvent* event, Control& control) {
+      if (hover) {
+        Message message = Message::Create((intptr)event.window, WM_MOUSEHOVER, GetMouseButtonState(event), (GetMouseYCoordinateRelativeToClientArea(event, control) << 16) + GetMouseXCoordinateRelativeToClientArea(event, control), 0, (intptr)event);
+        control.WndProc(message);
+      }
+      Message message = Message::Create((intptr)event.window, WM_MOUSEMOVE, GetMouseButtonState(event), (GetMouseYCoordinateRelativeToClientArea(event, control) << 16) + GetMouseXCoordinateRelativeToClientArea(event, control), 0, (intptr)event);
+      return control.WndProc(message);
+    }
+
+    bool messageLoopRunning = false;
+    static const int32 notUsed = 0;
+    ControlDictionary controls;
+    bool hover = false;
+    int32 screenHeight = 1050; // TO DO : Get Screen height...
+  };
+  
+  UniquePointer<CocoaApi> cocoaApi;
 }
 
 bool FormsApi::Application::visualStylesEnabled = false;
@@ -160,45 +310,12 @@ void FormsApi::Application::Exit() {
 }
 
 void FormsApi::Application::MessageLoop(EventHandler idle) {
-  @autoreleasepool {
-    [NSApplication sharedApplication];
-    [NSApp setActivationPolicy:NSApplicationActivationPolicyRegular];
-    NSMenu* menubar = [NSMenu new];
-    NSMenuItem* appMenuItem = [NSMenuItem new];
-    [menubar addItem:appMenuItem];
-    [NSApp setMainMenu:menubar];
-    //NSMenu* appMenu = [NSMenu new];
-    //NSString* appName = [[NSProcessInfo processInfo] processName];
-    //NSString* quitTitle = [@"Quit " stringByAppendingString:appName];
-    //NSMenuItem* quitMenuItem = [[NSMenuItem alloc] initWithTitle:quitTitle action:@selector(terminate:) keyEquivalent:@"q"];
-    //[appMenu addItem:quitMenuItem];
-    //[appMenuItem setSubmenu:appMenu];
-    
-    //[NSApp run];
-  }
-
-  messageLoopRunning = true;
-  while (messageLoopRunning) {
-    Message msg;
-    int32 result = idle.IsEmpty() ? GetMessage(msg) : PeekMessage(msg);
-    while (result != 0) {
-      TranslateMessage(msg);
-      DispatchMessage(msg);
-      if (msg.Msg == WM_QUIT) {
-        messageLoopRunning = false;
-        break;
-      }
-      result = idle.IsEmpty() ? GetMessage(msg) : PeekMessage(msg);
-      if (idle.IsEmpty() && !result)
-        messageLoopRunning = false;
-    }
-    idle(object(), EventArgs());
-  }
+  cocoaApi().MessageLoop(idle);
 }
 
 void FormsApi::Application::MessageBeep(MessageBoxIcon type) {
-  System::Collections::Generic::SortedDictionary<MessageBoxIcon, string> beep = {{(MessageBoxIcon)0, "Funk"}, {MessageBoxIcon::Error, "Sosumi"}, {MessageBoxIcon::Question, "Purr"}, {MessageBoxIcon::Warning, "Hero"}, {MessageBoxIcon::Information, "Glass"}, {(MessageBoxIcon)0xFFFFFFFF, "Funk"}};
   @autoreleasepool {
+    System::Collections::Generic::SortedDictionary<MessageBoxIcon, string> beep = {{(MessageBoxIcon)0, "Funk"}, {MessageBoxIcon::Error, "Sosumi"}, {MessageBoxIcon::Question, "Purr"}, {MessageBoxIcon::Warning, "Hero"}, {MessageBoxIcon::Information, "Glass"}, {(MessageBoxIcon)0xFFFFFFFF, "Funk"}};
     [[NSSound soundNamed:[NSString stringWithUTF8String:beep[type].c_str()]] play];
   }
 }
@@ -283,33 +400,45 @@ DialogResult FormsApi::Application::ShowMessageBox(const string& message, const 
     [alert setAlertStyle:messageBoxIcon[icon]];
     if (displayHelpButton)
       [alert setShowsHelp:YES];
-    return showModal[buttons](alert);
+    DialogResult result = showModal[buttons](alert);
+    cocoaApi().IgnoreMessages();
+    return result;
   }
 }
 
 void FormsApi::Application::Start() {
+  cocoaApi = UniquePointer<CocoaApi>::Create();
 }
 
 void FormsApi::Application::Stop() {
+  cocoaApi = null;
 }
 
 void FormsApi::Control::Close(const System::Windows::Forms::Form& form) {
+  [(NSWindow*)form.data->handle close];
 }
 
 @interface NSControlResponder : NSObject
 - (IBAction) ControlClick:(id)sender;
+- (IBAction) FormClose:(id)sender;
 @end
 
 @implementation NSControlResponder
 - (IBAction) ControlClick:(id)sender {
+  System::Drawing::Point mouseDownLocation;
   Message event = Message::Create((intptr)sender, WM_LBUTTONUP, 0, mouseDownLocation.X() + (mouseDownLocation.Y() << 16), 0, 0);
-  const_cast<Control&>(controls[(intptr)sender]()).WndProc(event);
+  const_cast<Control&>(cocoaApi().Controls()[(intptr)sender]()).WndProc(event);
+}
+
+- (IBAction) FormClose:(id)sender {
+  Message event = Message::Create((intptr)sender, WM_CLOSE, 0, 0, 0, 0);
+  const_cast<Control&>(cocoaApi().Controls()[(intptr)sender]()).WndProc(event);
 }
 @end
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Button& button) {
   @autoreleasepool {
-    System::Drawing::Rectangle bounds = GetBounds(button);
+    System::Drawing::Rectangle bounds = cocoaApi().GetBounds(button);
     NSButton *handle = [[[NSButton alloc] initWithFrame:NSMakeRect(bounds.X(), bounds.Y(), bounds.Width(), bounds.Height())] autorelease];
     [[(NSWindow*)button.data->parent().data->handle contentView] addSubview: handle];
     
@@ -317,16 +446,20 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::Button& button) {
     [handle setButtonType:NSMomentaryPushInButton];
     [handle setBezelStyle:bounds.Height == button.DefaultSize().Height ? NSBezelStyleRounded : NSBezelStyleRegularSquare];
     [handle setAutoresizingMask:NSViewMaxXMargin | NSViewMinYMargin];
+    //[handle setWantsLayer:YES];
+    handle.layer.backgroundColor = cocoaApi().FromColor(button.BackColor).CGColor;
     [handle setTarget:[NSControlResponder alloc]];
     [handle setAction:@selector(ControlClick:)];
-    controls[(intptr)handle] = button;
+    cocoaApi().Controls()[(intptr)handle] = button;
+    Message message = Message::Create((intptr)handle, WM_CREATE, 0, 0, 0, IntPtr::Zero);
+    const_cast<System::Windows::Forms::Button&>(button).WndProc(message);
     return (intptr)handle;
   }
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::CheckBox& checkBox) {
   @autoreleasepool {
-    System::Drawing::Rectangle bounds = GetBounds(checkBox);
+    System::Drawing::Rectangle bounds = cocoaApi().GetBounds(checkBox);
     NSButton *handle = [[[NSButton alloc] initWithFrame:NSMakeRect(bounds.X(), bounds.Y(), bounds.Width(), bounds.Height())] autorelease];
     [[(NSWindow*)checkBox.data->parent().data->handle contentView] addSubview: handle];
     
@@ -334,46 +467,58 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::CheckBox& checkBo
     [handle setButtonType:NSButtonTypeSwitch];
     [handle setBezelStyle:NSBezelStyleRegularSquare];
     [handle setAutoresizingMask:NSViewMaxXMargin | NSViewMinYMargin];
+    [handle setWantsLayer:YES];
+    handle.layer.backgroundColor = cocoaApi().FromColor(checkBox.BackColor).CGColor;
     [handle setTarget:[NSControlResponder alloc]];
     [handle setAction:@selector(ControlClick:)];
-    controls[(intptr)handle] = checkBox;
+    cocoaApi().Controls()[(intptr)handle] = checkBox;
+    Message message = Message::Create((intptr)handle, WM_CREATE, 0, 0, 0, IntPtr::Zero);
+    const_cast<System::Windows::Forms::CheckBox&>(checkBox).WndProc(message);
     return (intptr)handle;
   }
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Control& control) {
-  System::Drawing::Rectangle bounds = GetBounds(control);
+  System::Drawing::Rectangle bounds = cocoaApi().GetBounds(control);
   NSControl *handle = [[[NSControl alloc] initWithFrame:NSMakeRect(bounds.X(), bounds.Y(), bounds.Width(), bounds.Height())] autorelease];
   [[(NSWindow*)control.data->parent().data->handle contentView] addSubview: handle];
   
   [handle setStringValue:[NSString stringWithUTF8String:control.data->text.c_str()]];
   [handle setAutoresizingMask:NSViewMaxXMargin | NSViewMinYMargin];
+  [handle setWantsLayer:YES];
+  handle.layer.backgroundColor = cocoaApi().FromColor(control.BackColor).CGColor;
   [handle setTarget:[NSControlResponder alloc]];
   [handle setAction:@selector(ControlClick:)];
-  controls[(intptr)handle] = control;
+  cocoaApi().Controls()[(intptr)handle] = control;
+  Message message = Message::Create((intptr)handle, WM_CREATE, 0, 0, 0, IntPtr::Zero);
+  const_cast<System::Windows::Forms::Control&>(control).WndProc(message);
   return (intptr)handle;
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Form& form) {
   @autoreleasepool {
-    System::Drawing::Rectangle bounds = GetBounds(form);
+    System::Drawing::Rectangle bounds = cocoaApi().GetBounds(form);
     NSWindow* handle = [[NSWindow alloc] init];
     
-    [handle setStyleMask: FormToNSWindowStyleMask(form)];
+    [handle setStyleMask: cocoaApi().FormToNSWindowStyleMask(form)];
     [handle setFrame:NSMakeRect(0, 0, bounds.Width(), bounds.Height()) display:YES];
     [handle setFrameTopLeftPoint:NSMakePoint(bounds.X(), bounds.Y())];
     
     [handle setTitle:[NSString stringWithUTF8String:form.data->text.c_str()]];
     [handle makeKeyAndOrderFront:nil];
     [NSApp activateIgnoringOtherApps:YES];
-    controls[(intptr)handle] = form;
+    //[(NSControl*)handle setWantsLayer:YES];
+    //((NSControl*)handle).layer.backgroundColor = cocoaApi().FromColor(form.BackColor).CGColor;
+    cocoaApi().Controls()[(intptr)handle] = form;
+    Message message = Message::Create((intptr)handle, WM_CREATE, 0, 0, 0, IntPtr::Zero);
+    const_cast<System::Windows::Forms::Form&>(form).WndProc(message);
     return (intptr)handle;
   }
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Label& label) {
   @autoreleasepool {
-    System::Drawing::Rectangle bounds = GetBounds(label);
+    System::Drawing::Rectangle bounds = cocoaApi().GetBounds(label);
     NSTextField* handle;
     handle = [[NSTextField alloc] initWithFrame:NSMakeRect(bounds.X(), bounds.Y(), bounds.Width(), bounds.Height())];
     [[(NSWindow*)label.data->parent().data->handle contentView] addSubview: handle];
@@ -384,16 +529,24 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::Label& label) {
     [handle setEditable:NO];
     [handle setSelectable:NO];
     [handle setAutoresizingMask:NSViewMaxXMargin | NSViewMinYMargin];
+    //[handle setWantsLayer:YES];
+    //handle.layer.backgroundColor = cocoaApi().FromColor(label.BackColor).CGColor;
+    handle.drawsBackground = TRUE;
+    handle.backgroundColor = cocoaApi().FromColor(label.BackColor);
+    handle.textColor = cocoaApi().FromColor(label.ForeColor);
+    
     [handle setTarget:[NSControlResponder alloc]];
     [handle setAction:@selector(ControlClick:)];
-    controls[(intptr)handle] = label;
+    cocoaApi().Controls()[(intptr)handle] = label;
+    Message message = Message::Create((intptr)handle, WM_CREATE, 0, 0, 0, IntPtr::Zero);
+    const_cast<System::Windows::Forms::Label&>(label).WndProc(message);
     return (intptr)handle;
   }
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::RadioButton& radioButton) {
   @autoreleasepool {
-    System::Drawing::Rectangle bounds = GetBounds(radioButton);
+    System::Drawing::Rectangle bounds = cocoaApi().GetBounds(radioButton);
     NSButton *handle = [[[NSButton alloc] initWithFrame:NSMakeRect(bounds.X(), bounds.Y(), bounds.Width(), bounds.Height())] autorelease];
     [[(NSWindow*)radioButton.data->parent().data->handle contentView] addSubview: handle];
     
@@ -401,20 +554,32 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::RadioButton& radi
     [handle setButtonType:NSButtonTypeRadio];
     [handle setBezelStyle:NSBezelStyleRegularSquare];
     [handle setAutoresizingMask:NSViewMaxXMargin | NSViewMinYMargin];
+    [handle setWantsLayer:YES];
+    handle.layer.backgroundColor = cocoaApi().FromColor(radioButton.BackColor).CGColor;
     [handle setTarget:[NSControlResponder alloc]];
     [handle setAction:@selector(ControlClick:)];
-    controls[(intptr)handle] = radioButton;
+    cocoaApi().Controls()[(intptr)handle] = radioButton;
+    Message message = Message::Create((intptr)handle, WM_CREATE, 0, 0, 0, IntPtr::Zero);
+    const_cast<System::Windows::Forms::RadioButton&>(radioButton).WndProc(message);
     return (intptr)handle;
   }
 }
 
+
 void FormsApi::Control::DefWndProc(System::Windows::Forms::Message& message) {
-  NSEvent* event = (NSEvent*)message.Handle();
-  [NSApp sendEvent:event];
+  @autoreleasepool {
+    NSEvent* event = (NSEvent*)message.Handle();
+    if (event.type == NSEventTypeKeyUp)
+      [[NSApp keyWindow] sendEvent:event];
+    else
+      [NSApp sendEvent:event];
+  }
 }
 
 void FormsApi::Control::Destroy(const System::Windows::Forms::Control& control) {
-  controls.Remove(control.Handle);
+  cocoaApi().Controls().Remove(control.Handle);
+  Message message = Message::Create(control.Handle, WM_DESTROY, 0, 0, 0, IntPtr::Zero);
+  const_cast<System::Windows::Forms::Control&>(control).WndProc(message);
 }
 
 intptr FormsApi::Control::GetHandleWindowFromDeviceContext(intptr hdc) {
@@ -454,7 +619,7 @@ void FormsApi::Control::SetForeColor(const System::Windows::Forms::Control& cont
 void FormsApi::Control::SetLocation(const System::Windows::Forms::Control& control) {
   @autoreleasepool {
     if (control.data->handle) {
-      System::Drawing::Rectangle bounds = GetBounds(control);
+      System::Drawing::Rectangle bounds = cocoaApi().GetBounds(control);
       [(NSControl*)control.data->handle setFrameOrigin:NSMakePoint(bounds.X(), bounds.Y())];
     }
   }
@@ -499,238 +664,6 @@ void FormsApi::Control::SetVisible(const System::Windows::Forms::Control& contro
       [(NSControl*)control.data->handle setHidden:control.data->visible ? NO : YES];
     }
   }
-}
-
-int32 FormsApi::SystemInformation::GetActiveWindowTrackingDelay() {
-  return 0;
-}
-
-ArrangeDirection FormsApi::SystemInformation::GetArrangeDirection() {
-  return ArrangeDirection::Left;
-}
-
-ArrangeStartingPosition FormsApi::SystemInformation::GetArrangeStartingPosition() {
-  return ArrangeStartingPosition::Hide;
-}
-
-BootMode FormsApi::SystemInformation::GetBootMode() {
-  return BootMode::Normal;
-}
-
-System::Drawing::Size FormsApi::SystemInformation::GetBorder3DSize() {
-  return System::Drawing::Size(0, 0);
-}
-
-int32 FormsApi::SystemInformation::GetBorderMultiplierFactor() {
-  return 1;
-}
-
-System::Drawing::Size FormsApi::SystemInformation::GetBorderSize() {
-  return System::Drawing::Size(0, 0);
-}
-
-System::Drawing::Size FormsApi::SystemInformation::GetCaptionButtonSize() {
-  return System::Drawing::Size(16, 16);
-}
-
-int32 FormsApi::SystemInformation::GetCaptionHeight() {
-  return 23;
-}
-
-int32 FormsApi::SystemInformation::GetCaretBlinkTime() {
-  return 530;
-}
-
-int32 FormsApi::SystemInformation::GetCaretWidth() {
-  return 1;
-}
-
-System::Drawing::Size FormsApi::SystemInformation::GetCursorSize() {
-  return System::Drawing::Size(32, 32);
-}
-
-bool FormsApi::SystemInformation::GetDbcsEnabled() {
-  return false;
-}
-
-bool FormsApi::SystemInformation::GetDebugOS() {
-  return false;
-}
-
-System::Drawing::Size FormsApi::SystemInformation::GetDoubleClickSize() {
-  return System::Drawing::Size(4, 4);
-}
-
-int32 FormsApi::SystemInformation::GetDoubleClickTime() {
-  return 500;
-}
-
-bool FormsApi::SystemInformation::GetDragFullWindows() {
-  return true;
-}
-
-System::Drawing::Size FormsApi::SystemInformation::GetDragSize() {
-  return System::Drawing::Size(4, 4);
-}
-
-System::Drawing::Size FormsApi::SystemInformation::GetFixedFrameBorderSize() {
-  return System::Drawing::Size(0, 0);
-}
-
-int32 FormsApi::SystemInformation::GetFontSmoothingContrast() {
-  return 1200;
-}
-
-int32 FormsApi::SystemInformation::GetFontSmoothingType() {
-  return 2;
-}
-
-System::Drawing::Size FormsApi::SystemInformation::GetFrameBorderSize() {
-  return System::Drawing::Size(0, 0);
-}
-
-bool FormsApi::SystemInformation::GetHighContrast() {
-  return false;
-}
-
-int32 FormsApi::SystemInformation::GetHorizontalFocusThickness() {
-  return 1;
-}
-
-int32 FormsApi::SystemInformation::GetHorizontalResizeBorderThickness() {
-  return 4;
-}
-
-int32 FormsApi::SystemInformation::GetHorizontalScrollBarArrowWidth() {
-  return 17;
-}
-
-int32 FormsApi::SystemInformation::GetHorizontalScrollBarHeight() {
-  return 17;
-}
-
-int32 FormsApi::SystemInformation::GetHorizontalScrollBarThumbWidth() {
-  return 17;
-}
-
-int32 FormsApi::SystemInformation::GetIconHorizontalSpacing() {
-  return 75;
-}
-
-System::Drawing::Size FormsApi::SystemInformation::GetIconSize() {
-  return System::Drawing::Size(64, 64);
-}
-
-System::Drawing::Size FormsApi::SystemInformation::GetIconSpacingSize() {
-  return System::Drawing::Size(75, 75);
-}
-
-int32 FormsApi::SystemInformation::GetIconVerticalSpacing() {
-  return 75;
-}
-
-bool FormsApi::SystemInformation::GetIsActiveWindowTrackingEnabled() {
-  return false;
-}
-
-bool FormsApi::SystemInformation::GetIsComboBoxAnimationEnabled() {
-  return false;
-}
-
-bool FormsApi::SystemInformation::GetIsDropShadowEnabled() {
-  return false;
-}
-
-bool FormsApi::SystemInformation::GetIsFlatMenuEnabled() {
-  return true;
-}
-
-bool FormsApi::SystemInformation::GetIsFontSmoothingEnabled() {
-  return true;
-}
-
-bool FormsApi::SystemInformation::GetIsHotTrackingEnabled() {
-  return true;
-}
-
-bool FormsApi::SystemInformation::GetIsIconTitleWrappingEnabled() {
-  return true;
-}
-
-bool FormsApi::SystemInformation::GetIsKeyboardPreferred() {
-  return false;
-}
-
-bool FormsApi::SystemInformation::GetIsListBoxSmoothScrollingEnabled() {
-  return false;
-}
-
-bool FormsApi::SystemInformation::GetIsMenuAnimationEnabled() {
-  return false;
-}
-
-bool FormsApi::SystemInformation::GetIsMenuFadeEnabled() {
-  return false;
-}
-
-bool FormsApi::SystemInformation::GetIsMinimizeRestoreAnimationEnabled() {
-  return false;
-}
-
-bool FormsApi::SystemInformation::GetIsSelectionFadeEnabled() {
-  return true;
-}
-
-bool FormsApi::SystemInformation::GetIsSnapToDefaultEnabled() {
-  return false;
-}
-
-bool FormsApi::SystemInformation::GetIsTitleBarGradientEnabled() {
-  return true;
-}
-
-bool FormsApi::SystemInformation::GetIsToolTipAnimationEnabled() {
-  return false;
-}
-
-int32 FormsApi::SystemInformation::GetKanjiWindowHeight() {
-  return 0;
-}
-
-int32 FormsApi::SystemInformation::GetKeyboardDelay() {
-  return 1;
-}
-
-int32 FormsApi::SystemInformation::GetKeyboardSpeed() {
-  return 31;
-}
-
-System::Drawing::Size FormsApi::SystemInformation::GetMaxWindowTrackSize() {
-  return System::Drawing::Size(0, 0);
-}
-
-bool FormsApi::SystemInformation::GetMenuAccessKeysUnderlined() {
-  return false;
-}
-
-System::Drawing::Size FormsApi::SystemInformation::GetMenuBarButtonSize() {
-  return System::Drawing::Size(19, 19);
-}
-
-System::Drawing::Size FormsApi::SystemInformation::GetMenuButtonSize() {
-  return System::Drawing::Size(19, 19);
-}
-
-System::Drawing::Size FormsApi::SystemInformation::GetMenuCheckSize() {
-  return System::Drawing::Size(15, 15);
-}
-
-Font FormsApi::SystemInformation::GetMenuFont() {
-  return Font::FromLogFont((intptr)0);
-}
-
-int32 FormsApi::SystemInformation::GetMenuHeight() {
-  return 23;
 }
 
 #endif

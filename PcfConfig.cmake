@@ -3,6 +3,9 @@ include(${CMAKE_CURRENT_LIST_DIR}/Pcf.cmake)
 get_filename_component(Pcf_INCLUDE_DIRS "${CMAKE_CURRENT_LIST_DIR}/../include" ABSOLUTE)
 get_filename_component(Pcf_LIBRARIES_DIRS "${CMAKE_CURRENT_LIST_DIR}/../lib" ABSOLUTE)
 
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 if (APPLE)
   set(STANDARD_LINK_LIBRARIES dl)	
 elseif(UNIX)

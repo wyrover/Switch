@@ -2,6 +2,7 @@
 /// @brief Contains include files of TUnit library.
 #pragma once
 
+#include <Pcf/Core.h>
 #include "TUnit/Constraints/Constraint.h"
 #include "TUnit/Constraints/ConstraintExpression.h"
 #include "TUnit/Constraints/ConstraintValue.h"

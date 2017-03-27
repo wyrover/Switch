@@ -1,4 +1,4 @@
-#if __linux__
+#if __APPLE__
 #include "FormsApi.h"
 
 using namespace System;
@@ -22,7 +22,7 @@ BootMode FormsApi::SystemInformation::GetBootMode() {
 }
 
 System::Drawing::Size FormsApi::SystemInformation::GetBorder3DSize() {
-  return System::Drawing::Size(1, 1);
+  return System::Drawing::Size(0, 0);
 }
 
 int32 FormsApi::SystemInformation::GetBorderMultiplierFactor() {
@@ -30,7 +30,7 @@ int32 FormsApi::SystemInformation::GetBorderMultiplierFactor() {
 }
 
 System::Drawing::Size FormsApi::SystemInformation::GetBorderSize() {
-  return System::Drawing::Size(1, 1);
+  return System::Drawing::Size(0, 0);
 }
 
 System::Drawing::Size FormsApi::SystemInformation::GetCaptionButtonSize() {
@@ -38,7 +38,7 @@ System::Drawing::Size FormsApi::SystemInformation::GetCaptionButtonSize() {
 }
 
 int32 FormsApi::SystemInformation::GetCaptionHeight() {
-  return 37;
+  return 23;
 }
 
 int32 FormsApi::SystemInformation::GetCaretBlinkTime() {
