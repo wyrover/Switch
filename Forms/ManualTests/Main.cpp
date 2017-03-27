@@ -9,7 +9,6 @@ namespace PcfFormApp {
     // The main entry point for the application.
     static void Main() {
       System::Diagnostics::Debug::Listeners().Add(System::Diagnostics::ConsoleTraceListener());
-      System::Diagnostics::Debug::AutoFlush = true;
       Application::EnableVisualStyles();
       Application::Run(Form1());
     }

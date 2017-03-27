@@ -210,7 +210,17 @@ namespace {
        //{NSEventTypeTabletProximity, WM_...},
        //{NSEventTypeOtherMouseDragged, WM_...},
        */
-      static System::Collections::Generic::SortedDictionary<int32, delegate<void, NSEvent*, Control&>> events = {{NSEventTypeMouseEntered, {*this, &CocoaApi::MouseEnterEvent}}, {NSEventTypeMouseExited, {*this, &CocoaApi::MouseLeaveEvent}}, {NSEventTypeLeftMouseDown, {*this, &CocoaApi::LeftMouseDownEvent}}, {NSEventTypeLeftMouseUp, {*this, &CocoaApi::LeftMouseUpEvent}}, {NSEventTypeRightMouseDown, {*this, &CocoaApi::RightMouseDownEvent}}, {NSEventTypeRightMouseUp, {*this, &CocoaApi::RightMouseUpEvent}}, {NSEventTypeMouseMoved, {*this, &CocoaApi::MouseMoveEvent}}, {NSEventTypeOtherMouseDown, {*this, &CocoaApi::OtherMouseDownEvent}}, {NSEventTypeOtherMouseUp, {*this, &CocoaApi::OtherMouseUpEvent}}};
+      static System::Collections::Generic::SortedDictionary<int32, delegate<void, NSEvent*, Control&>> events = {
+        {NSEventTypeMouseEntered, {*this, &CocoaApi::MouseEnterEvent}},
+        {NSEventTypeMouseExited, {*this, &CocoaApi::MouseLeaveEvent}},
+        {NSEventTypeLeftMouseDown, {*this, &CocoaApi::LeftMouseDownEvent}},
+        {NSEventTypeLeftMouseUp, {*this, &CocoaApi::LeftMouseUpEvent}},
+        {NSEventTypeRightMouseDown, {*this, &CocoaApi::RightMouseDownEvent}},
+        {NSEventTypeRightMouseUp, {*this, &CocoaApi::RightMouseUpEvent}},
+        {NSEventTypeMouseMoved, {*this, &CocoaApi::MouseMoveEvent}},
+        {NSEventTypeOtherMouseDown, {*this, &CocoaApi::OtherMouseDownEvent}},
+        {NSEventTypeOtherMouseUp, {*this, &CocoaApi::OtherMouseUpEvent}}
+      };
       @autoreleasepool {
         if (events.ContainsKey([event type]) && controls.ContainsKey((intptr)[event window])) {
           events[[event type]](event, this->controls[(intptr)[event window]]);
@@ -410,12 +420,18 @@ void FormsApi::Control::Close(const System::Windows::Forms::Form& form) {
 
 @interface NSControlResponder : NSObject
 - (IBAction) ControlClick:(id)sender;
+- (IBAction) FormClose:(id)sender;
 @end
 
 @implementation NSControlResponder
 - (IBAction) ControlClick:(id)sender {
   System::Drawing::Point mouseDownLocation;
   Message event = Message::Create((intptr)sender, WM_LBUTTONUP, 0, mouseDownLocation.X() + (mouseDownLocation.Y() << 16), 0, 0);
+  const_cast<Control&>(cocoaApi().Controls()[(intptr)sender]()).WndProc(event);
+}
+
+- (IBAction) FormClose:(id)sender {
+  Message event = Message::Create((intptr)sender, WM_CLOSE, 0, 0, 0, 0);
   const_cast<Control&>(cocoaApi().Controls()[(intptr)sender]()).WndProc(event);
 }
 @end
@@ -493,7 +509,6 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::Form& form) {
     [NSApp activateIgnoringOtherApps:YES];
     //[(NSControl*)handle setWantsLayer:YES];
     //((NSControl*)handle).layer.backgroundColor = cocoaApi().FromColor(form.BackColor).CGColor;
-    
     cocoaApi().Controls()[(intptr)handle] = form;
     Message message = Message::Create((intptr)handle, WM_CREATE, 0, 0, 0, IntPtr::Zero);
     const_cast<System::Windows::Forms::Form&>(form).WndProc(message);
