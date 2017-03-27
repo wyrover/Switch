@@ -53,6 +53,10 @@ namespace {
       return windowStyleMask;
     }
     
+    NSColor* FromColor(const System::Drawing::Color& color) {
+      return [NSColor colorWithCalibratedRed:as<float>(color.R()) / 0xFF green:as<float>(color.G()) / 0xFF blue:as<float>(color.B()) / 0xFF alpha:as<float>(color.A()) / 0xF];
+    }
+    
     System::Drawing::Rectangle GetBounds(const System::Windows::Forms::Control& control) {
       if (is<System::Windows::Forms::Form>(control))
         return this->GetBounds(as<System::Windows::Forms::Form>(control));
@@ -295,23 +299,6 @@ void FormsApi::Application::Exit() {
   Environment::Exit(0);
 }
 
-
-void DoSomething(id sender) {
-  FormsApi::Application::Exit();
-}
-
-
-@interface NSApplicationlResponder : NSObject
-- (IBAction) MenuItemClick:(id)sender;
-@end
-
-@implementation NSApplicationlResponder
-- (IBAction) MenuItemClick:(id)sender {
-  System::Diagnostics::Debug::WriteLine("The item {0} was clicked", sender);
-  FormsApi::Application::Exit();
-}
-@end
-
 void FormsApi::Application::MessageLoop(EventHandler idle) {
   cocoaApi().MessageLoop(idle);
 }
@@ -443,6 +430,8 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::Button& button) {
     [handle setButtonType:NSMomentaryPushInButton];
     [handle setBezelStyle:bounds.Height == button.DefaultSize().Height ? NSBezelStyleRounded : NSBezelStyleRegularSquare];
     [handle setAutoresizingMask:NSViewMaxXMargin | NSViewMinYMargin];
+    //[handle setWantsLayer:YES];
+    handle.layer.backgroundColor = cocoaApi().FromColor(button.BackColor).CGColor;
     [handle setTarget:[NSControlResponder alloc]];
     [handle setAction:@selector(ControlClick:)];
     cocoaApi().Controls()[(intptr)handle] = button;
@@ -462,6 +451,8 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::CheckBox& checkBo
     [handle setButtonType:NSButtonTypeSwitch];
     [handle setBezelStyle:NSBezelStyleRegularSquare];
     [handle setAutoresizingMask:NSViewMaxXMargin | NSViewMinYMargin];
+    [handle setWantsLayer:YES];
+    handle.layer.backgroundColor = cocoaApi().FromColor(checkBox.BackColor).CGColor;
     [handle setTarget:[NSControlResponder alloc]];
     [handle setAction:@selector(ControlClick:)];
     cocoaApi().Controls()[(intptr)handle] = checkBox;
@@ -478,6 +469,8 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::Control& control)
   
   [handle setStringValue:[NSString stringWithUTF8String:control.data->text.c_str()]];
   [handle setAutoresizingMask:NSViewMaxXMargin | NSViewMinYMargin];
+  [handle setWantsLayer:YES];
+  handle.layer.backgroundColor = cocoaApi().FromColor(control.BackColor).CGColor;
   [handle setTarget:[NSControlResponder alloc]];
   [handle setAction:@selector(ControlClick:)];
   cocoaApi().Controls()[(intptr)handle] = control;
@@ -498,6 +491,9 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::Form& form) {
     [handle setTitle:[NSString stringWithUTF8String:form.data->text.c_str()]];
     [handle makeKeyAndOrderFront:nil];
     [NSApp activateIgnoringOtherApps:YES];
+    //[(NSControl*)handle setWantsLayer:YES];
+    //((NSControl*)handle).layer.backgroundColor = cocoaApi().FromColor(form.BackColor).CGColor;
+    
     cocoaApi().Controls()[(intptr)handle] = form;
     Message message = Message::Create((intptr)handle, WM_CREATE, 0, 0, 0, IntPtr::Zero);
     const_cast<System::Windows::Forms::Form&>(form).WndProc(message);
@@ -518,6 +514,12 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::Label& label) {
     [handle setEditable:NO];
     [handle setSelectable:NO];
     [handle setAutoresizingMask:NSViewMaxXMargin | NSViewMinYMargin];
+    //[handle setWantsLayer:YES];
+    //handle.layer.backgroundColor = cocoaApi().FromColor(label.BackColor).CGColor;
+    handle.drawsBackground = TRUE;
+    handle.backgroundColor = cocoaApi().FromColor(label.BackColor);
+    handle.textColor = cocoaApi().FromColor(label.ForeColor);
+    
     [handle setTarget:[NSControlResponder alloc]];
     [handle setAction:@selector(ControlClick:)];
     cocoaApi().Controls()[(intptr)handle] = label;
@@ -537,6 +539,8 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::RadioButton& radi
     [handle setButtonType:NSButtonTypeRadio];
     [handle setBezelStyle:NSBezelStyleRegularSquare];
     [handle setAutoresizingMask:NSViewMaxXMargin | NSViewMinYMargin];
+    [handle setWantsLayer:YES];
+    handle.layer.backgroundColor = cocoaApi().FromColor(radioButton.BackColor).CGColor;
     [handle setTarget:[NSControlResponder alloc]];
     [handle setAction:@selector(ControlClick:)];
     cocoaApi().Controls()[(intptr)handle] = radioButton;
