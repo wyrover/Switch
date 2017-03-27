@@ -42,8 +42,6 @@ CMakeLists.txt:
 ```
 cmake_minimum_required(VERSION 3.5)
 
-project(HelloWorld)
-
 find_package(Pcf REQUIRED)
 add_executable(HelloWorld HelloWorld.cpp)
 target_link_libraries(HelloWorld Pcf.Core)
@@ -92,8 +90,6 @@ CMakeLists.txt:
 ```
 cmake_minimum_required(VERSION 3.5)
 
-project(HelloWorldGui)
-
 find_package(Pcf REQUIRED)
 add_executable(HelloWorldGui WIN32 HelloWorldGui.cpp)
 target_link_libraries(HelloWorldGui Pcf.Forms)
@@ -129,8 +125,6 @@ namespace UnitTests {
 CMakeLists.txt:
 ```
 cmake_minimum_required(VERSION 3.5)
-
-project(HelloWorldTest)
 
 find_package(Pcf REQUIRED)
 add_executable(HelloWorldTest HelloWorldTest.cpp)
