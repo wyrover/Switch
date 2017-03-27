@@ -1,7 +1,7 @@
 source_group(Sources REGULAR_EXPRESSION "/Sources/[-_,A-Za-z0-9]+\\.c*")
 
 add_library(Pcf.TUnit.Main STATIC Sources/Main.cpp)
-target_link_libraries(Pcf.TUnit.Main Pcf.TUnit Pcf.Core)
+target_link_libraries(Pcf.TUnit.Main Pcf.TUnit)
 
 set_target_properties(Pcf.TUnit.Main PROPERTIES FOLDER Pcf/TUnit.Main)
 

@@ -1,5 +1,0 @@
-/// @file
-/// @brief Contains include files of Drawing library.
-#pragma once
-
-#include “Drawing.h”

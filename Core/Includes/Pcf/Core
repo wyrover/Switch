@@ -1,5 +1,0 @@
-/// @file
-/// @brief Contains include files of Core library.
-#pragma once
-
-#include "Core.h"
