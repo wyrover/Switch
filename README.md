@@ -42,6 +42,7 @@ CMakeLists.txt:
 ```
 cmake_minimum_required(VERSION 3.5)
 
+Project(HelloWorld)
 find_package(Pcf REQUIRED)
 add_executable(HelloWorld HelloWorld.cpp)
 target_link_libraries(HelloWorld Pcf.Core)
@@ -90,6 +91,7 @@ CMakeLists.txt:
 ```
 cmake_minimum_required(VERSION 3.5)
 
+Project(HelloWorldGui)
 find_package(Pcf REQUIRED)
 add_executable(HelloWorldGui WIN32 HelloWorldGui.cpp)
 target_link_libraries(HelloWorldGui Pcf.Forms)
@@ -126,6 +128,7 @@ CMakeLists.txt:
 ```
 cmake_minimum_required(VERSION 3.5)
 
+Project(HelloWorldTest)
 find_package(Pcf REQUIRED)
 add_executable(HelloWorldTest HelloWorldTest.cpp)
 target_link_libraries(HelloWorldTest Pcf.TUnit.Main)
