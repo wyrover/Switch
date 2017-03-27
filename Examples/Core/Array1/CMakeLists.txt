@@ -1,9 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
 project(Array1)
-
-set(CMAKE_CXX_STANDARD 14)
-
 find_package(Pcf REQUIRED)
-add_executable(${PROJECT_NAME} Array1.cpp)
-target_link_libraries(${PROJECT_NAME} ${Pcf_LIBRARIES})
+add_executable(Array1 Array1.cpp)
+target_link_libraries(Array1 Pcf.Core)

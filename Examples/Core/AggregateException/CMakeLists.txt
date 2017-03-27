@@ -1,9 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
 project(AggregateException)
-
-set(CMAKE_CXX_STANDARD 14)
-
 find_package(Pcf REQUIRED)
-add_executable(${PROJECT_NAME} AggregateException.cpp)
-target_link_libraries(${PROJECT_NAME} ${Pcf_LIBRARIES})
+add_executable(AggregateException AggregateException.cpp)
+target_link_libraries(AggregateException Pcf.Core)

@@ -1,9 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
 project(Action)
-
-set(CMAKE_CXX_STANDARD 14)
-
 find_package(Pcf REQUIRED)
-add_executable(${PROJECT_NAME} Action.cpp)
-target_link_libraries(${PROJECT_NAME} Pcf.Core)
+add_executable(Action Action.cpp)
+target_link_libraries(Action Pcf.Core)
