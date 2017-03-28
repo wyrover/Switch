@@ -62,7 +62,7 @@ namespace PcfForms {
   public:
     static void Main() {
       Form form;
-      form.Text = "PcfForms";
+      form.Text = "PcfForms Application";
       form.StartPosition = FormStartPosition::Manual;
       form.Location = Point(300, 200);
       
