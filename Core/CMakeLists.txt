@@ -607,17 +607,9 @@ source_group(Sources\\Pcf\\System REGULAR_EXPRESSION "/Sources/Pcf/System/[-_,A-
 source_group(Sources\\Pcf REGULAR_EXPRESSION "/Sources/Pcf/[-_,A-Za-z0-9]+\\.c*")
 source_group(Sources REGULAR_EXPRESSION "/Sources/[-_,A-Za-z0-9]+\\.c*")
 
-if(APPLE)
-  set(STANDARD_LINK_LIBRARIES dl)
-elseif(UNIX)
-  set(STANDARD_LINK_LIBRARIES dl rt uuid)
-elseif(MSVC)
-  set(STANDARD_LINK_LIBRARIES Ws2_32.lib Iphlpapi.lib Rpcrt4.lib)    
-endif ()	
-
 add_library(Pcf.Core STATIC ${INCLUDE_FILES} ${SOURCE_FILES})
 target_include_directories(Pcf.Core PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Includes> $<INSTALL_INTERFACE:include>)
-target_link_libraries(Pcf.Core call_stack curl easywsclient Rs232 ZLIB::ZLIB Threads::Threads ${STANDARD_LINK_LIBRARIES})
+target_link_libraries(Pcf.Core call_stack ${CURL_LIBRARIES} easywsclient Rs232 ZLIB::ZLIB Threads::Threads ${STANDARD_CORE_LINK_LIBRARIES})
 set_target_properties(Pcf.Core PROPERTIES FOLDER Pcf/Core)
 
 if (BUILD_CORE_INTEGRATION_TESTS)
