@@ -624,7 +624,7 @@ find_package(ZLIB REQUIRED)
 
 add_library(Pcf.Core STATIC ${INCLUDE_FILES} ${SOURCE_FILES})
 target_include_directories(Pcf.Core PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Includes> $<INSTALL_INTERFACE:include>)
-target_link_libraries(Pcf.Core ${call_stack_LIBRARIES} ${CURL_LIBRARIES} ${easywsclient_LIBRARIES} ${Rs232_LIBRARIES} ${ZLIB_LIBRARIES} Threads::Threads ${STANDARD_LINK_LIBRARIES})
+target_link_libraries(Pcf.Core call_stack curl easywsclient Rs232 z Threads::Threads ${STANDARD_LINK_LIBRARIES})
 set_target_properties(Pcf.Core PROPERTIES FOLDER Pcf/Core)
 
 if (BUILD_CORE_INTEGRATION_TESTS)

@@ -100,7 +100,7 @@ endif ()
 
 add_library(Pcf.Drawing STATIC ${INCLUDE_FILES} ${SOURCE_FILES} ${COCOA_SOURCE_FILES})
 target_include_directories(Pcf.Drawing PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Includes> $<INSTALL_INTERFACE:include>)
-target_link_libraries(Pcf.Drawing Pcf.Core ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${STANDARD_GRAPHIC_LINK_LIBRARIES})
+target_link_libraries(Pcf.Drawing Pcf.Core jpeg png ${STANDARD_GRAPHIC_LINK_LIBRARIES})
 set_target_properties(Pcf.Drawing PROPERTIES FOLDER Pcf/Drawing)
 
 if (BUILD_DRAWING_UNIT_TESTS)

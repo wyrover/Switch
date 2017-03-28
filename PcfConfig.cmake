@@ -24,7 +24,7 @@ find_package(JPEG REQUIRED)
 find_package(PNG REQUIRED)
 find_package(GTest REQUIRED)
 
-SET(Pcf_LIBRARIES Pcf.TUnit ${GTEST_LIBRARIES} Pcf.Forms Pcf.Drawing ${JPEG_LIBRARIES} ${PNG_LIBRARIES} Pcf.Core ${call_stack_LIBRARIES} ${CURL_LIBRARIES} ${easywsclient_LIBRARIES} ${Rs232_LIBRARIES} ${ZLIB_LIBRARIES} Threads::Threads ${STANDARD_LINK_LIBRARIES})
+SET(Pcf_LIBRARIES Pcf.TUnit GTest::GTest Pcf.Forms Pcf.Drawing jpeg png Pcf.Core call_stack curl easywsclient Rs232 z Threads::Threads ${STANDARD_LINK_LIBRARIES})
 SET(Pcf_WITH_TUNIT_MAIN_LIBRARIES Pcf.TUnit.Main ${Pcf_LIBRARIES})
 
 set(Pcf_FOUND TRUE)
