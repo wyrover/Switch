@@ -75,6 +75,7 @@ namespace HelloWorldGui {
         MessageBox::Show("Hello, World!");
       };
       
+      Application::EnableVisualStyles();
       Application::Run(form);
     }
   };
