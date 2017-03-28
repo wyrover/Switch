@@ -60,6 +60,7 @@ using namespace System::Windows::Forms;
 namespace HelloWorldGui {
   class Program {
   public:
+    // The main entry point for the application.
     static void Main() {
       Form form;
       form.Text = "HelloWorldGui Application";
