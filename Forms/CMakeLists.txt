@@ -179,18 +179,9 @@ source_group(Sources\\Pcf\\System\\Windows REGULAR_EXPRESSION "/Sources/Pcf/Syst
 source_group(Sources\\Pcf\\System\\Windows\\Forms REGULAR_EXPRESSION "/Sources/Pcf/System/Windows/Forms/[-_,A-Za-z0-9]+\\.(c*|h*|m*)")
 source_group(Sources\\Pcf\\System\\Windows\\Forms\\VisualStyles REGULAR_EXPRESSION "/Sources/Pcf/System/Windows/Forms/VisualStyles/[-_,A-Za-z0-9]+\\.c*")
 
-if (APPLE)
-  set(STANDARD_GRAPHIC_LINK_LIBRARIES "-framework Cocoa -framework Foundation")
-elseif(UNIX)
-  find_package(FLTK REQUIRED)
-  set(STANDARD_GRAPHIC_LINK_LIBRARIES ${FLTK_LIBRARIES})
-elseif(MSVC)
-  set(STANDARD_GRAPHIC_LINK_LIBRARIES Uxtheme)    
-endif ()	
-
 add_library(Pcf.Forms STATIC ${include_files} ${source_files} ${source_apple_files})
 target_include_directories(Pcf.Forms PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Includes> $<INSTALL_INTERFACE:include>)
-target_link_libraries(Pcf.Forms Pcf.Drawing ${STANDARD_GRAPHIC_LINK_LIBRARIES})
+target_link_libraries(Pcf.Forms Pcf.Drawing)
 set_target_properties(Pcf.Forms PROPERTIES FOLDER Pcf/Forms)
 
 if (BUILD_FORMS_MANUAL_TESTS)

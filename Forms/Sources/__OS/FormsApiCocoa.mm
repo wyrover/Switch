@@ -100,15 +100,6 @@ namespace {
       System::Drawing::Point location(event.locationInWindow.x, event.window.frame.size.height - event.locationInWindow.y - GetCaptionHeight(control));
       return location.Y;
     }
-    
-    void IgnoreMessages() const {
-      @autoreleasepool {
-        NSEvent *ignoredEvent;
-        do {
-          ignoredEvent = [NSApp nextEventMatchingMask:(NSEventMaskAny & ~NSEventMaskSystemDefined) untilDate:[NSDate dateWithTimeIntervalSinceNow:0] inMode:NSDefaultRunLoopMode dequeue:YES];
-        } while (ignoredEvent);
-      }
-    }
 
     void MessageLoop(EventHandler idle) {
       @autoreleasepool {
@@ -233,6 +224,15 @@ namespace {
     NSEvent* GetMessage() const {
       @autoreleasepool {
         return [NSApp nextEventMatchingMask:NSEventMaskAny untilDate:[NSDate dateWithTimeIntervalSinceNow:Double::MaxValue] inMode:NSDefaultRunLoopMode dequeue:YES];
+      }
+    }
+    
+    void IgnoreMessages() const {
+      @autoreleasepool {
+        NSEvent *ignoredEvent;
+        do
+          ignoredEvent = [NSApp nextEventMatchingMask:(NSEventMaskAny & ~NSEventMaskSystemDefined) untilDate:[NSDate dateWithTimeIntervalSinceNow:0] inMode:NSDefaultRunLoopMode dequeue:YES];
+        while (ignoredEvent);
       }
     }
     
@@ -401,7 +401,10 @@ DialogResult FormsApi::Application::ShowMessageBox(const string& message, const 
     if (displayHelpButton)
       [alert setShowsHelp:YES];
     DialogResult result = showModal[buttons](alert);
-    cocoaApi().IgnoreMessages();
+    NSEvent *ignoredEvent;
+    do
+      ignoredEvent = [NSApp nextEventMatchingMask:(NSEventMaskAny & ~NSEventMaskSystemDefined) untilDate:[NSDate dateWithTimeIntervalSinceNow:0] inMode:NSDefaultRunLoopMode dequeue:YES];
+    while (ignoredEvent);
     return result;
   }
 }
