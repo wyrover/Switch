@@ -6,33 +6,20 @@ Portable C++ Framework
 - written in efficient, modern C++14;
 - and highly portable and available on many different platforms (Windows, Mac Os X, Linux);
 
-<<<<<<< HEAD
-![GitHub Logo](Libraries/Pcf/Core/Images/Pcf.png)
-
-#Libraries
-=======
 ![GitHub Logo](Documentations/Images/Pcf.png)
 
 # Libraries
->>>>>>> develop
 The framework is composed of 4 libraries :
 - **Pcf.Core** : The Pcf.Core library is a library of classes, interfaces, and value types that provide access to system functionality. It is the foundation on which c++ applications, components, and controls are built.
 - **Pcf.Drawing** : The Pcf.Drawing library contains types that support basic GDI+ graphics functionality. Child namespaces support advanced two-dimensional and vector graphics functionality, advanced imaging functionality, and print-related and typographical services. A child namespace also contains types that extend design-time user-interface logic and drawing.
 - **Pcf.Forms** : The Pcf.Forms library contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system.
 - **Pcf.TUnit** : The Pcf.TUnit library contains unit testing framework.
 
-<<<<<<< HEAD
-#Examples
-The classic first application 'Hello World'.
-
-Console:
-=======
 # Examples
 The classic first application 'Hello World'.
 
 ## Console
 HelloWorld.cpp:
->>>>>>> develop
 ```
 #include <Pcf/Pcf>
 
@@ -42,11 +29,7 @@ namespace HelloWorld {
   class Program {
   public:
     // The main entry point for the application.
-<<<<<<< HEAD
-    static void Main() {
-=======
     static void Main(const Array<string>& args) {
->>>>>>> develop
       Console::WriteLine("Hello, World!");
     }
   };
@@ -55,9 +38,6 @@ namespace HelloWorld {
 pcf_startup (HelloWorld::Program)
 ```
 
-<<<<<<< HEAD
-Forms:
-=======
 CMakeLists.txt:
 ```
 cmake_minimum_required(VERSION 3.5)
@@ -70,18 +50,13 @@ target_link_libraries(HelloWorld Pcf.Core)
 
 ## Forms
 HelloWorldGui.cpp:
->>>>>>> develop
 ```
 #include <Pcf/Pcf>
 
 using namespace System;
 using namespace System::Windows::Forms;
 
-<<<<<<< HEAD
-namespace HelloWorld {
-=======
 namespace HelloWorldGui {
->>>>>>> develop
   class MainForm : public Form {
   public:
     // The main entry point for the application.
@@ -89,13 +64,13 @@ namespace HelloWorldGui {
       Application::EnableVisualStyles();
       Application::Run(MainForm());
     }
-    
+
     MainForm() {
       this->StartPosition = FormStartPosition::Manual;
       this->Location = System::Drawing::Point(400, 200);
       this->ClientSize = System::Drawing::Size(300, 300);
       this->Text = "My first application";
-      
+
       this->label.Parent = *this;
       this->label.Text = "Hello, World!";
       this->label.AutoSize = true;
@@ -103,18 +78,12 @@ namespace HelloWorldGui {
       this->label.ForeColor = System::Drawing::Color::Green;
       this->label.Location = System::Drawing::Point(5, 100);
     }
-    
+
   private:
     Label label;
   };
 }
 
-<<<<<<< HEAD
-pcf_startup (HelloWorld::MainForm)
-```
-
-TUnit :
-=======
 pcf_startup (HelloWorldGui::MainForm)
 ```
 
@@ -130,7 +99,6 @@ target_link_libraries(HelloWorldGui Pcf.Forms)
 
 ## TUnit
 HelloWorldTest.cpp:
->>>>>>> develop
 ```
 #include <Pcf/Pcf>
 
@@ -139,28 +107,6 @@ using namespace TUnit;
 
 namespace UnitTests {
   class HelloWorldTest : public TestFixture {
-<<<<<<< HEAD
-  public:
-    // The main entry point for the application.
-    static int Main(const Array<string>& args) {
-      return TUnit::UnitTest(args).Run();
-    }
-    
-  protected:
-    void SetString() {
-      string s = "Hello, World!";
-      Assert::AreEqual("Hello, World!", s, pcf_current_information);
-    }
-  };
-
-  pcf_test(HelloWorldTest, SetString);
-}
-
-pcf_startup (UnitTests::HelloWorldTest)
-```
-
-#Namespace
-=======
   protected:
     void CreateStringFromLiteral() {
       string s = "Hello, World!";
@@ -189,7 +135,6 @@ target_link_libraries(HelloWorldTest Pcf.TUnit.Main)
 ```
 
 # Namespace
->>>>>>> develop
 - **Pcf::System** namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
 - **Pcf::System::Collections** namespace contain types that define various standard, specialized, and generic collection objects.
 - **Pcf::System::Collections::Concurrent** provides several thread-safe collection classes that should be used in place of the corresponding types in the System.Collections and System.Collections.Generic namespaces whenever multiple threads are accessing the collection concurrently.
@@ -234,5 +179,3 @@ target_link_libraries(HelloWorldTest Pcf.TUnit.Main)
 - Strong focus on code quality, style, consistency and code readability –all code must satisfy our coding style guide
 - Strong focus on tests (automated unit tests with high coverage)
 - Build on top of solid foundations – use existing proven C libraries (e.g. Curl, rs232, zlib,...) where it makes sense
-
-
