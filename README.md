@@ -90,7 +90,7 @@ cmake_minimum_required(VERSION 3.5)
 
 Project(HelloWorldGui)
 find_package(Pcf REQUIRED)
-add_executable(HelloWorldGui WIN32 HelloWorldGui.cpp)
+add_executable(HelloWorldGui ${PCF_GUI} HelloWorldGui.cpp)
 target_link_libraries(HelloWorldGui Pcf.Forms)
 ```
 
