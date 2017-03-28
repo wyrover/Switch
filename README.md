@@ -54,37 +54,32 @@ HelloWorldGui.cpp:
 #include <Pcf/Pcf>
 
 using namespace System;
+using namespace System::Drawing;
 using namespace System::Windows::Forms;
 
-namespace HelloWorldGui {
-  class MainForm : public Form {
+namespace PcfForms {
+  class Program {
   public:
-    // The main entry point for the application.
     static void Main() {
-      Application::EnableVisualStyles();
-      Application::Run(MainForm());
+      Form form;
+      form.Text = "PcfForms";
+      form.StartPosition = FormStartPosition::Manual;
+      form.Location = Point(300, 200);
+      
+      Button button;
+      button.Parent = form;
+      button.Text = "Click it";
+      button.Location = Point(10, 10);
+      button.Click += pcf_delegate(const object& sender, const EventArgs& e) {
+        MessageBox::Show("Hello, World!");
+      };
+      
+      Application::Run(form);
     }
-
-    MainForm() {
-      this->StartPosition = FormStartPosition::Manual;
-      this->Location = System::Drawing::Point(400, 200);
-      this->ClientSize = System::Drawing::Size(300, 300);
-      this->Text = "My first application";
-
-      this->label.Parent = *this;
-      this->label.Text = "Hello, World!";
-      this->label.AutoSize = true;
-      this->label.Font = System::Drawing::Font("Arial", 46, System::Drawing::FontStyle::Bold | System::Drawing::FontStyle::Italic);
-      this->label.ForeColor = System::Drawing::Color::Green;
-      this->label.Location = System::Drawing::Point(5, 100);
-    }
-
-  private:
-    Label label;
   };
 }
 
-pcf_startup (HelloWorldGui::MainForm)
+pcf_startup (PcfForms::Program)
 ```
 
 CMakeLists.txt:
