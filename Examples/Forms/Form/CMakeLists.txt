@@ -1,9 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
 project(Form)
-
-set(CMAKE_CXX_STANDARD 14)
-
 find_package(Pcf REQUIRED)
-add_executable(${PROJECT_NAME} WIN32 Form.cpp)
-target_link_libraries(${PROJECT_NAME} ${Pcf_LIBRARIES})
+add_executable(Form ${PCF_GUI} Form.cpp)
+target_link_libraries(Form Pcf.Forms)

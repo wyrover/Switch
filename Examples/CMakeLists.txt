@@ -9,6 +9,12 @@ option(BUILD_TUNIT_EXAMPLES "Build Pcf.TUnit examples" ON)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
+if ("${CMAKE_BUILD_TYPE}" STREQUAL "")
+  set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR})
+else ()
+  set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/${CMAKE_BUILD_TYPE})
+endif ()
+
 set(CORE_EXAMPLES Action Action1 Action2 Action3 AggregateException Any ArgumentException Array1 Array2 ArrayArrayOperator ArrayArrayOperatorFunctor ArrayAsReadOnly ArrayConstructor ArrayCopyTo ArrayCopyTo2 ArrayGetEnumerator ArrayGetLength ArrayGetLowerBound ArrayGetSyncRoot ArrayIndexOf ArrayList Async1 Async2 Barrier BitArray BitConverterGetBytesBoolean BitConverterGetBytesChar BitConverterIsLittleEndian BitConverterToString Boolean1 Boolean2 Boolean3 Boolean4 Boolean5 Boolean6 Boolean8 Boxing ClientWebSocket ConcurrentBag ConcurrentQueue ConcurrentStack Console ConsoleOut ConsoleReadKey DateTime DateTimeSpecifyKind Debug Delegate Delegate2 Dictionary DictionaryAdd DictionaryOperators DirectorySeparatorChar Enum Enum2 Environment EventHandler Exception ExceptionPointer Factorial FlagsEnum Foreach1 Foreach2 Foreach3 Foreach4 Format FunctionPointer HashSet HelloWorld HttpWebRequest Interlocked InterlockedDecrement List List2 List3 ListBinarySearch ListCopyTo ListExists ListFind ListReverse Main Math Nullable Object ParallelInvoke Process Profile Properties  Random1 Random2 Random3 Socket SortedDictionary SortedDictionaryAdd SortedDictionaryOperators SortedSet Stopwatch StreamReader StreamReaderReadLine StreamReaderReadToEnd StringCollection StringDictionary StringLiterals StringReader Task TaskDelay TcpClient Thread Thread1 Thread2 Thread3 Thread4 ThreadLocal TextWriterTraceListener Timer Timer2 Trace Tuple2 UdpClient UdpClientListener UdpClientTalker Unused Var)
 set(DRAWING_EXAMPLES Color)
 set(FORMS_EXAMPLES Application Form MessageBox SystemSound)
