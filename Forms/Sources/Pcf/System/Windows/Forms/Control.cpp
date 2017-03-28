@@ -20,7 +20,7 @@ namespace {
   };
 
   bool AllWindowMessagesFilter(const Message& message) {
-    return !message.ToString().Contains("WM_NULL");
+    return false; //!message.ToString().Contains("WM_NULL");
   }
 
   MouseButtons MessageToMouseButtons(Message message) {
