@@ -5,6 +5,7 @@ using namespace System;
 class Person : public object {
 public:
   Person() {}
+  // Must be specified because the copycontructor of Property class is deleted. The implicit or default copy constructor is not suffisant.
   Person(const Person& person) : name(person.name), age(person.age) {}
 
   // Declare a Name property of type string:
@@ -19,7 +20,7 @@ public:
     pcf_set {this->age = value;}
   };
   
-  string ToString() const override {
+  string ToString() const noexcept override {
     return "Name = " + this->Name + ", this->Age = " + Age;
   }
   

@@ -6,12 +6,6 @@ using namespace TUnit;
 namespace UnitTests {
   // The class TimeSpanTest must be inherited from TestFixture
   class TimeSpanTest : public TestFixture {
-  public:
-    // The main entry point for the application.
-    static int Main(const Array<string>& args) {
-      return TUnit::UnitTest(args).Run();
-    }
-
   protected:
     // Used Assert::AreEqual method to test value
     void CreateTimeSpanFromDateTime() {
@@ -46,8 +40,6 @@ namespace UnitTests {
   pcf_test(TimeSpanTest, TimeSpanIsEqualToAnotherTimeSpan);
   pcf_test(TimeSpanTest, DefaultTimeSpanIsEqualToZero);
 }
-
-pcf_startup (UnitTests::TimeSpanTest)
 
 // This code produces the following output:
 //

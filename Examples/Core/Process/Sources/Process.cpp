@@ -1,16 +1,18 @@
 #include <Pcf/Pcf>
 
 using namespace System;
+using namespace System::Diagnostics;
+using namespace System::IO;
 
 namespace Examples {
   class Program {
   public:
     // The main entry point for the application.
     static void Main() {
-      up<System::Diagnostics::Process> process = System::Diagnostics::Process::Start("echo", "Hello, World!");
-      IO::StreamReader reader(process->StandardOutput());
-      Console::WriteLine(reader.ReadToEnd());
-
+      Process process = Process::Start("gcc", "--version");
+      //StreamReader reader(process.StandardOutput());
+      Console::WriteLine(StreamReader(process.StandardOutput()).ReadToEnd());
+ 
       /*
       System::Diagnostics::ProcessStartInfo command;
       if (Environment::OSVersion().Platform > PlatformID::WinCE)

@@ -19,7 +19,7 @@ namespace Examples {
       return this->iD == book.iD && this->author == book.author && this->title == book.title && this->genre == book.genre && this->price == book.price && this->publishDate == book.publishDate && this->description == book.description;
     }
     
-    bool Equals(const object& obj) const override {
+    bool Equals(const object& obj) const noexcept override {
       return is<Book>(obj) && Equals((const Book&)obj);
     }
   };

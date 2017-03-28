@@ -11,7 +11,7 @@ namespace Examples {
       // Parse strings using the Boolean.Parse method.
       for (string value : values) {
         try {
-          Boolean flag = Boolean::Parse(value);
+          bool flag = Boolean::Parse(value);
           Console::WriteLine("'{0}' --> {1}", value, flag);
         } catch (const ArgumentException&) {
           Console::WriteLine("Cannot parse a null string.");
@@ -22,7 +22,7 @@ namespace Examples {
       Console::WriteLine();
       // Parse strings using the Boolean.TryParse method.
       for (string value : values) {
-        Boolean flag = false;
+        bool flag = false;
         if (Boolean::TryParse(value, flag)) {
           Console::WriteLine("'{0}' --> {1}", value, flag);
         } else {

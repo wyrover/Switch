@@ -10,7 +10,7 @@ namespace Examples {
   public:
     // The main entry point for the application.
     static void Main() {
-      sp<IPEndPoint> waitingEndpoint = new IPEndPoint(IPAddress::Any, 8082);
+      IPEndPoint waitingEndpoint(IPAddress::Any, 8082);
       UdpClient listener(waitingEndpoint);
       
       Console::WriteLine("Waiting for broadcast. Press Ctrl+C to quit...");
@@ -20,7 +20,7 @@ namespace Examples {
         
         try {
           listener.Receive(receiveBytes, incomingInformationEndpoint);
-          Console::WriteLine("Received broadcast {0} from {1}", Encoding::UTF8()->GetString(receiveBytes), *waitingEndpoint);
+          Console::WriteLine("Received broadcast {0} from {1}", Encoding::UTF8()->GetString(receiveBytes), waitingEndpoint);
         } catch (const Exception& e) {
           Console::WriteLine(e.Message);
         }

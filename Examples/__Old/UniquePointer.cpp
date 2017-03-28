@@ -2,27 +2,34 @@
 
 using namespace System;
 
-int main(int argc, char* argv[]) {
-  up<string> str = up<string>::Create("Hello world!");
-  Console::WriteLine("str = {0}", str.ToString().c_str());
-  Console::WriteLine(*str);
-  str = up<string>::Create("another string !");
-  Console::WriteLine("str = {0}", str.ToString().c_str());
-  Console::WriteLine(*str);
-  
-  up<string> str2 = str;
-  Console::WriteLine("str2 = {0}", str2.ToString().c_str());
-  Console::WriteLine("str = {0}", str.ToString().c_str());
-  Console::WriteLine(*str2);
-  str2 = null;
-  Console::WriteLine("str2 = {0}", str2.ToString().c_str());
-  Sp<string> sp = Sp<string>::Create("Test sp");
-  Console::WriteLine("sp = {0}", sp.ToString().c_str());
-  up<int> a = up<int>::Create(234);
-  Console::WriteLine("a = {0}", a.ToString().c_str());
-  Sp<string> b;
-  Console::WriteLine("b = {0}", b.ToString().c_str());
+namespace Test {
+  class Program {
+  public:
+    static void Main() {
+      UniquePointer<string> str = UniquePointer<string>::Create("Hello world!");
+      Console::WriteLine("str = {0}", str.ToString().c_str());
+      Console::WriteLine(*str);
+      str = UniquePointer<string>::Create("another string !");
+      Console::WriteLine("str = {0}", str.ToString().c_str());
+      Console::WriteLine(*str);
+      
+      UniquePointer<string> str2 = str;
+      Console::WriteLine("str2 = {0}", str2.ToString().c_str());
+      Console::WriteLine("str = {0}", str.ToString().c_str());
+      Console::WriteLine(*str2);
+      str2 = null;
+      Console::WriteLine("str2 = {0}", str2.ToString().c_str());
+      SharedPointer<string> sp = SharedPointer<string>::Create("Test sp");
+      Console::WriteLine("sp = {0}", SharedPointer.ToString().c_str());
+      UniquePointer<int> a = UniquePointer<int>::Create(234);
+      Console::WriteLine("a = {0}", a.ToString().c_str());
+      SharedPointer<string> b;
+      Console::WriteLine("b = {0}", b.ToString().c_str());
+    }
+  };
 }
+
+pcf_startup (Test::Program)
 
 // This code produces the following output:
 //

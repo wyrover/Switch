@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Show install version
 function ShowVersion() {
   echo "Install Pcf libraries version 1.0.0, copyright GAMMA Soft, 2016"
@@ -91,17 +92,21 @@ function MakeDocumentation() {
   CheckError open $sources_path/Help/html/index.html
   cd $currentFolder
 }
+=======
+OSTYPE=`uname -a`
+if [[ "$OSTYPE" != *"Darwin"* ]]; then
+  OSTYPE=`lsb_release -si`
+fi
+>>>>>>> develop
 
-doxygen_path=`dirname $0`
-sources_path=`dirname $0`
-output_pah=`dirname .`
-targets=All
 case "$OSTYPE" in
-  darwin*) generator="Xcode";;
-  linux*) generator="Unix Makefiles";;
-  *) generator="Unix Makefiles";;
+  *"Darwin"*) ./install_macosx_xcode.sh;;
+  *"Ubuntu"*) ./install_ubuntu_gcc.sh;;
+  *"CentOS"*) ./install_centos_gcc.sh;;
+  *) ./install_linux_gcc.sh;;
 esac
 
+<<<<<<< HEAD
 while [[ $# -gt 0 ]]; do
   key="$1"
   case $key in 
@@ -152,3 +157,5 @@ echo "--------------------------------------------------------------------------
 echo "--- Create project, build and install with success                           ---"
 echo "--------------------------------------------------------------------------------"
 echo ""
+=======
+>>>>>>> develop
