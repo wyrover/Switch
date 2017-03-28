@@ -57,12 +57,12 @@ using namespace System;
 using namespace System::Drawing;
 using namespace System::Windows::Forms;
 
-namespace PcfForms {
+namespace HelloWorldGui {
   class Program {
   public:
     static void Main() {
       Form form;
-      form.Text = "PcfForms Application";
+      form.Text = "HelloWorldGui Application";
       form.StartPosition = FormStartPosition::Manual;
       form.Location = Point(300, 200);
       
@@ -79,7 +79,7 @@ namespace PcfForms {
   };
 }
 
-pcf_startup (PcfForms::Program)
+pcf_startup (HelloWorldGui::Program)
 ```
 
 CMakeLists.txt:
