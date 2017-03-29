@@ -17,11 +17,11 @@ namespace UnitTests {
       Environment::CurrentDirectory = savedCurrentDirecory;
     }
     
-    void ChangeCurrentDirecoryWithDownloads() {
+    void ChangeCurrentDirectoryWithDownloads() {
       Assert::DoesNotThrows(pcf_delegate {Environment::CurrentDirectory = System::IO::Path::Combine(Environment::GetFolderPath(Environment::SpecialFolder::Personal), "Downloads");}, pcf_current_information);
     }
     
-    void ChangeCurrentDirecoryWithPotatos() {
+    void ChangeCurrentDirectoryWithPotatoes() {
       Assert::DoesNotThrows(pcf_delegate {Environment::CurrentDirectory = System::IO::Path::Combine(Environment::GetFolderPath(Environment::SpecialFolder::Personal), "Potatoes");}, pcf_current_information);
     }
     
@@ -30,25 +30,25 @@ namespace UnitTests {
   };
 
   // Used pcf_test to add unit test to execute at the unit test suit.
-  pcf_test(DirectoryTest, ChangeCurrentDirecoryWithDownloads);
-  pcf_test(DirectoryTest, ChangeCurrentDirecoryWithPotatos);
+  pcf_test(DirectoryTest, ChangeCurrentDirectoryWithDownloads);
+  pcf_test(DirectoryTest, ChangeCurrentDirectoryWithPotatoes);
 }
 
 // This code produces the following output if directory Downloads exists and Potatos doesn't exist in your home direcory:
 //
 // Start 2 tests from 1 test case
 //   Start 2 tests from DirectoryTest
-//     PASSED DirectoryTest.ChangeCurrentDirecoryWithDownloads (2 ms)
+//     PASSED DirectoryTest.ChangeCurrentDirectoryWithDownloads (2 ms)
 // Expected: No Exception to be thrown
 // But was:  <Pcf::System::IO::DirectoryNotFoundException>
 // error: /YourFolder/Pcf/Examples/TUnit/TestFixture/Sources/TestFixture.cpp:25
-// *** FAILED DirectoryTest.ChangeCurrentDirecoryWithPotatos (4 ms)
+// *** FAILED DirectoryTest.ChangeCurrentDirectoryWithPotatoes (4 ms)
 //   End 2 tests from DirectoryTest (8 ms total)
 //
 //   Summary :
 //     PASSED 1 test.
 // *** FAILED 1 test, listed below:
-// *** FAILED DirectoryTest.ChangeCurrentDirecoryWithPotatos
+// *** FAILED DirectoryTest.ChangeCurrentDirectoryWithPotatoes
 //
 // 1 FAILED TEST
 // End 2 tests from 1 test case ran. (9 ms total)
