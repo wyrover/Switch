@@ -11,7 +11,7 @@ mkdir -p Build/Examples
 mkdir -p Build/ThirdParties
 
 sudo yum update
-sudo yum install clang cmake3 libcurl-devel libjpeg-devel zlib-devel libpng-devel libx11-devel uuid-devel
+sudo yum install clang cmake3 libcurl-devel libjpeg-devel zlib-devel libpng-devel libx11-devel uuid-devel fltk-devel gtkmm30-devel
 
 ln -s /usr/bin/cmake3 /usr/local/bin/cmake
 ln -s /usr/bin/cpack3 /usr/local/bin/cpack
