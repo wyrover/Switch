@@ -1,4 +1,4 @@
-#if __linux__ || __APPLE__
+#if defined(__linux__) || defined(__APPLE__)
 
 #include <cstdio>
 #include <cstring>

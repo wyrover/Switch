@@ -1,4 +1,4 @@
-#if __linux__
+#ifdef __fltk__
 #include "DrawingApi.h"
 
 #include <Fl/fl_draw.H>

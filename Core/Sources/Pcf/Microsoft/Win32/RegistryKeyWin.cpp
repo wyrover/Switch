@@ -1,4 +1,4 @@
-#if _WIN32
+#if defined(_WIN32)
 
 #include "../../../../Includes/Pcf/Microsoft/Win32/Registry.h"
 #include "../../../../Includes/Pcf/Microsoft/Win32/RegistryKey.h"

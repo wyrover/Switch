@@ -1,4 +1,4 @@
-#if _WIN32
+#if defined(_WIN32)
 
 #include <cstdio>
 #include <cstdlib>

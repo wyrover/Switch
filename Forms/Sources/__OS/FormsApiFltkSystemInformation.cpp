@@ -1,4 +1,4 @@
-#if __linux__
+#ifdef __fltk__
 #include "FormsApi.h"
 
 using namespace System;

@@ -21,7 +21,7 @@
 using namespace System;
 using namespace System::Collections::Generic;
 
-#if _WIN32
+#if defined(_WIN32)
   __declspec(dllimport) extern char** environ;
 #else
   extern char** environ;

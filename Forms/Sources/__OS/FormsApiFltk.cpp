@@ -1,4 +1,4 @@
-#if __linux__
+#ifdef __fltk__
 #include <Pcf/System/Diagnostics/Debug.h>
 #include <Pcf/System/Collections/Generic/SortedDictionary.h>
 #include <Pcf/System/Console.h>
