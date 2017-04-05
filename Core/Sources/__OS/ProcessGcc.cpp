@@ -8,7 +8,7 @@
 #include "../../Includes/Pcf/System/IO/Path.h"
 #include "../../Includes/Pcf/System/Threading/Thread.h"
 
-#if __APPLE__
+#if defined(__APPLE__)
 #include <libproc.h>
 
 namespace {

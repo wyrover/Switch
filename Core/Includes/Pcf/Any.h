@@ -470,7 +470,7 @@ namespace Pcf {
     return value.As<System::Int64>();
   }
   
-#if __APPLE__
+#if defined(__APPLE__)
   template<>
   inline intptr as<intptr>(const Any& value) {
     return value.As<System::IntPtr>();
@@ -497,7 +497,7 @@ namespace Pcf {
     return value.As<System::UInt64>();
   }
   
-#if __APPLE__
+#if defined(__APPLE__)
   template<>
   inline uintptr as<uintptr>(const Any& value) {
     return value.As<System::UIntPtr>();
@@ -534,7 +534,7 @@ namespace Pcf {
     return value.As<System::Int64>();
   }
   
-#if __APPLE__
+#if defined(__APPLE__)
   template<>
   inline intptr as<intptr>(Any& value) {
     return value.As<System::IntPtr>();
@@ -561,7 +561,7 @@ namespace Pcf {
     return value.As<System::UInt64>();
   }
   
-#if __APPLE__
+#if defined(__APPLE__)
   template<>
   inline uintptr as<uintptr>(Any& value) {
     return value.As<System::UIntPtr>();

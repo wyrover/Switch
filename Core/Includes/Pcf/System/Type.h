@@ -137,12 +137,12 @@ namespace Pcf {
     return System::Type(typeid(value));
   }
   
-#if __APPLE__ || __clang__
+#if defined(__APPLE__) || defined(__clang__)
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wkeyword-macro"
 #define typeof pcf_typeof
 #pragma clang diagnostic pop
-#elif __linux__
+#elif defined(__linux__)
 #define typeof pcf_typeof
 #else
   template<typename T>

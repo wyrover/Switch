@@ -92,7 +92,7 @@ namespace Pcf {
           for (int32 i = png_set_interlace_handling(pp); i > 0; i --)
             png_read_rows(pp, rows.ToPointer(), null, image.size.Height());
 
-#ifdef WIN32
+#if defined(_WIN32)
           if (image.pixelFormat == Imaging::PixelFormat::Format32bppRgb) {
             byte* ptr = rawData.ToPointer();
             for (int32 i = image.size.Width() * image.size.Height(); i > 0; i --) {
@@ -101,7 +101,7 @@ namespace Pcf {
               ptr += 4;
             }
           }
-#endif // WIN32
+#endif
 
           png_read_end(pp, info);
           png_destroy_read_struct(&pp, &info, null);

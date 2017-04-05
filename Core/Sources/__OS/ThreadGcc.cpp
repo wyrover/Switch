@@ -17,7 +17,7 @@ void __OS::CoreApi::Thread::Resume(intptr handle) {
 }
 
 void __OS::CoreApi::Thread::SetNameOfCurrentThread(const string &name) {
-#if __APPLE__
+#if defined(__APPLE__)
   pthread_setname_np(name.Data());
 #else
   pthread_setname_np(pthread_self(), name.Data());

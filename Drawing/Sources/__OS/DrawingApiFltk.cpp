@@ -1,4 +1,4 @@
-#ifdef __fltk__
+#if defined(__fltk__)
 #include "DrawingApi.h"
 
 #include <Fl/fl_draw.H>
