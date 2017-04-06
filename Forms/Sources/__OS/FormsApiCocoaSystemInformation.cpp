@@ -1,4 +1,4 @@
-#if defined(__APPLE__)
+#if defined(__APPLE__) && defined(__use_native_interface__)
 #include "FormsApi.h"
 
 using namespace System;

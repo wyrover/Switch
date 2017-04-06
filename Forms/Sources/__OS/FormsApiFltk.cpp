@@ -587,7 +587,7 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::Form& form) {
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Label& label) {
   FlLabel* handle = CreateControl<FlLabel>(label);
-  handle->box(FL_NO_BOX);
+  handle->box(FL_FLAT_BOX);
   return (intptr)handle;
 }
 

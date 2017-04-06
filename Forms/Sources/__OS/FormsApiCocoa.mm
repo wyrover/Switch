@@ -1,4 +1,4 @@
-#if defined(__APPLE__)
+#if defined(__APPLE__) && defined(__use_native_interface__)
 #import <Cocoa/Cocoa.h>
 #import <Foundation/Foundation.h>
 #include <Pcf/System/Collections/Generic/SortedDictionary.h>
@@ -55,6 +55,7 @@ namespace {
     
     NSColor* FromColor(const System::Drawing::Color& color) {
       return [NSColor colorWithCalibratedRed:as<float>(color.R()) / 0xFF green:as<float>(color.G()) / 0xFF blue:as<float>(color.B()) / 0xFF alpha:as<float>(color.A()) / 0xF];
+      //return [NSColor colorWithCalibratedRed:as<float>(color.R()) / 0xFF green:as<float>(color.G()) / 0xFF blue:as<float>(color.B()) / 0xFF alpha:1.0];
     }
     
     System::Drawing::Rectangle GetBounds(const System::Windows::Forms::Control& control) {
@@ -605,15 +606,17 @@ System::Drawing::Point FormsApi::Control::PointToScreen(const System::Windows::F
 
 void FormsApi::Control::SetBackColor(intptr hdc, const System::Drawing::Color& color) {
   [(NSControl*)hdc setWantsLayer:YES];
-  ((NSControl*)hdc).layer.backgroundColor = [NSColor greenColor].CGColor;
+  ((NSControl*)hdc).layer.backgroundColor = cocoaApi().FromColor(color).CGColor;
 }
 
 void FormsApi::Control::SetForeColor(intptr hdc, const System::Drawing::Color& color) {
 }
 
 void FormsApi::Control::SetBackColor(const System::Windows::Forms::Control& control) {
-  [(NSControl*)control.data->handle setWantsLayer:YES];
-  ((NSControl*)control.data->handle).layer.backgroundColor = [NSColor greenColor].CGColor;
+  if (control.data().handle != IntPtr::Zero) {
+    [(NSControl*)control.data->handle setWantsLayer:YES];
+    ((NSControl*)control.data->handle).layer.backgroundColor = cocoaApi().FromColor(control.BackColor).CGColor;
+  }
 }
 
 void FormsApi::Control::SetForeColor(const System::Windows::Forms::Control& control) {

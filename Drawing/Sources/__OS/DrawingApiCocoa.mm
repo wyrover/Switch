@@ -1,4 +1,4 @@
-#if defined(__APPLE__)
+#if defined(__APPLE__) && defined(__use_native_interface__)
 #import <Cocoa/Cocoa.h>
 #import <Foundation/Foundation.h>
 #include <Pcf/System/Diagnostics/Debug.h>
