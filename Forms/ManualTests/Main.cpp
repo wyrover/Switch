@@ -33,7 +33,7 @@ namespace PcfFormApp {
       this->button1.Location = System::Drawing::Point(10, 10);
       this->button1.Click += pcf_delegate(const object& sender, const EventArgs& e) {
         static int32 counter = 0;
-        this->label1.Text = string::Format("Counter {0}", ++counter);
+        this->label1.Text = string::Format("counter = {0}", ++counter);
         System::Media::SystemSounds::Asterisk().Play();
       };
 

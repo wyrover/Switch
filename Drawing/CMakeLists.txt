@@ -35,6 +35,7 @@ set(INCLUDE_FILES
 set(SOURCE_FILES
   Sources/__OS/DrawingApi.h
   Sources/__OS/DrawingApiFltk.cpp
+  Sources/__OS/DrawingApiGtk.cpp
   Sources/__OS/DrawingApiWin32.cpp
   Sources/Pcf/System/Drawing/Imaging/FrameDimension.cpp
   Sources/Pcf/System/Drawing/Imaging/ImageFormat.cpp
