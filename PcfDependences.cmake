@@ -9,10 +9,12 @@ find_package(Rs232 REQUIRED)
 find_package(Threads REQUIRED)
 find_package(ZLIB REQUIRED)
 
+message("fltk=${FLTK_LIBRARIES}")
+
 if (APPLE)
   set(PCF_GUI MACOSX_BUNDLE)
   set(STANDARD_CORE_LINK_LIBRARIES dl)	
-  set(STANDARD_GRAPHIC_LINK_LIBRARIES "-framework Cocoa -framework Foundation fltk_images fltk")
+  set(STANDARD_GRAPHIC_LINK_LIBRARIES "-framework Carbon -framework Cocoa -framework ApplicationServices -framework Foundation ${FLTK_LIBRARIES}")
 elseif(UNIX)
   set(PCF_GUI)
   find_package(PkgConfig)

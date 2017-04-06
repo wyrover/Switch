@@ -598,7 +598,7 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::RadioButton& radi
 
 void FormsApi::Control::DefWndProc(System::Windows::Forms::Message& message) {
   if (defWindowProcs.ContainsKey(message.HWnd) && message.Handle() != FL_NO_EVENT)
-    message.Result = defWindowProcs[message.HWnd()](message.Handle);
+    message.Result = defWindowProcs[message.HWnd()]((int32_t)message.Handle);
 }
 
 void FormsApi::Control::Destroy(const System::Windows::Forms::Control& control) {

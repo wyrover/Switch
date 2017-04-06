@@ -1,8 +1,8 @@
 #if !defined(__use_native_interface__)
 #include "DrawingApi.h"
 
-#include <Fl/fl_draw.H>
-#include <Fl/Fl_Widget.H>
+#include <FL/fl_draw.H>
+#include <FL/Fl_Widget.H>
 
 using namespace System;
 using namespace System::Collections::Generic;
