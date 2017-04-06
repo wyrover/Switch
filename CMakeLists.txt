@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.5)
 
 project(Pcf VERSION 0.2.0)
 
+option(USE_NATIVE_INTERFACE "ON Pcf.Froms with native interface; otherwise Pcf.Forms based on FLTK" ON)
 option(BUILD_CORE_INTEGRATION_TESTS "Build Core integration tests" OFF)
 option(BUILD_CORE_MANUAL_TESTS "Build Core manual tests" OFF)
 option(BUILD_CORE_UNIT_TESTS "Build Core unit tests" OFF)
@@ -14,6 +15,10 @@ enable_testing()
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+if (USE_NATIVE_INTERFACE)
+  add_definitions(-D__use_native_interface__)
+endif()
 
 if (APPLE)
   SET(CMAKE_CXX_FLAGS "-Wall -Wextra -Wpedantic -Wdeprecated-declarations -Wno-unknown-pragmas -Wno-unused-parameter")

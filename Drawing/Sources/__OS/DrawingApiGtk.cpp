@@ -1,4 +1,4 @@
-#if defined(__gtk__)
+#if defined(__linux__) && defined(__use_native_interface__)
 #include "DrawingApi.h"
 
 #include <gtkmm.h>

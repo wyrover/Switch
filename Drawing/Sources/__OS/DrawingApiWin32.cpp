@@ -1,4 +1,4 @@
-﻿#if defined(_WIN32)
+﻿#if defined(_WIN32) && defined(__use_native_interface__)
 #include <Windows.h>
 
 #include <Pcf/System/Diagnostics/Debug.h>

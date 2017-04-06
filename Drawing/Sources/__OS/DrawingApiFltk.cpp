@@ -1,4 +1,4 @@
-#if defined(__fltk__)
+#if !defined(__use_native_interface__)
 #include "DrawingApi.h"
 
 #include <Fl/fl_draw.H>

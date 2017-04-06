@@ -9,12 +9,7 @@ mkdir -p Build/ThirdParties
 
 brew update
 brew upgrade
-brew install cmake
-brew install curl
-brew install doxygen
-brew install jpeg
-brew install libpng
-brew install zlib
+brew install cmake curl doxygen fltk gtlmm3 jpeg libpng zlib
 
 cd Build/ThirdParties
 cmake -G "Xcode" ../../ThirdParties

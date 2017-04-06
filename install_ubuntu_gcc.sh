@@ -11,7 +11,7 @@ mkdir -p Build/Examples
 mkdir -p Build/ThirdParties
 
 sudo apt update
-sudo apt install clang cmake libssl-dev libcurlpp-dev doxygen libjpeg8-dev zlibc libpng-dev libx11-dev uuid-dev libfltk1.3-dev libgtkmm-3.0-dev
+sudo apt install clang cmake doxygen libcurlpp-dev libfltk1.3-dev libgtkmm-3.0-dev libjpeg8-dev libpng-dev libssl-dev libx11-dev uuid-dev zlibc
 
 cd Build/ThirdParties
 cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ../../ThirdParties 

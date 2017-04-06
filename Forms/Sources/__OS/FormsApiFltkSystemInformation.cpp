@@ -1,4 +1,4 @@
-#if defined(__fltk__)
+#if !defined(__use_native_interface__)
 #include "FormsApi.h"
 
 using namespace System;
