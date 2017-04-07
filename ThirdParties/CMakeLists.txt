@@ -2,14 +2,6 @@ cmake_minimum_required(VERSION 3.5)
 
 project(ThirdParties)
 
-if (APPLE)
-  set(CMAKE_MACOSX_RPATH 1)
-endif()
-
-if(NOT CMAKE_DEBUG_POSTFIX)
-  set(CMAKE_DEBUG_POSTFIX d)
-endif()
-
 #________________________________________________________________________________
 #                                                                      call_stack
 find_package(call_stack QUIET)
@@ -45,9 +37,11 @@ endif()
 #________________________________________________________________________________
 #                                                                            fltk
 find_package(FLTK QUIET)
-message(STATUS "Found easywsclient : " ${easywsclient_FOUND})
+message(STATUS "Found FLTK : " ${FLTK_FOUND})
 if (NOT FLTK_FOUND)
   message(STATUS "Add ThirdParty FLTK")
+  set(FLTK_LIBRARIES "")
+  option(OPTION_BUILD_EXAMPLES "build example programs" OFF)
   add_subdirectory(fltk)
   set_target_properties(fltk PROPERTIES FOLDER ThirdParty)
 endif()
@@ -69,6 +63,8 @@ find_package(ZLIB QUIET)
 if (NOT ZLIB_FOUND)
   message(STATUS "Add ThirdParty zlib")
   add_subdirectory(zlib)
+  set(ZLIB_LIBRARIES zlib)
+  set(ZLIB_LIBRARY zlib)
   set_target_properties(zlib PROPERTIES FOLDER ThirdParty)
 endif()
 
