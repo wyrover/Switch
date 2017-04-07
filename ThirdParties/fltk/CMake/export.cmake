@@ -42,7 +42,7 @@ endif(CMAKE_CROSSCOMPILING)
 add_subdirectory(src)
 
 # generate FLTK-Targets.cmake for build directory use
-export(TARGETS ${FLUID} ${FLTK_LIBRARIES} FILE ${CMAKE_BINARY_DIR}/FLTK-Targets.cmake)
+#export(TARGETS ${FLUID} ${FLTK_LIBRARIES} FILE ${CMAKE_BINARY_DIR}/FLTK-Targets.cmake)
 
 # generate FLTKConfig.cmake for build directory use
 set(INCLUDE_DIRS "${FLTK_INCLUDE_DIRS}")
