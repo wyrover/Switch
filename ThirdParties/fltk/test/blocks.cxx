@@ -1,5 +1,5 @@
 //
-// "$Id: blocks.cxx 10991 2016-01-04 13:40:57Z AlbrechtS $"
+// "$Id: blocks.cxx 10127 2014-04-27 13:57:09Z manolo $"
 //
 // "Block Attack!" scrolling blocks game using the Fast Light Tool Kit (FLTK).
 //
@@ -33,12 +33,6 @@
 
 // Audio headers...
 #include <config.h>
-
-#if defined(WIN32) || defined(__APPLE__)
-#elif defined(FL_PORTING)
-#  pragma message "FL_PORTING: FLTK does not provide cross platform sound support"
-#else
-#endif
 
 #ifndef WIN32
 #  include <unistd.h>
@@ -1026,5 +1020,5 @@ BlockWindow::timeout_cb(BlockWindow *bw) {
 
 
 //
-// End of "$Id: blocks.cxx 10991 2016-01-04 13:40:57Z AlbrechtS $".
+// End of "$Id: blocks.cxx 10127 2014-04-27 13:57:09Z manolo $".
 //

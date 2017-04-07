@@ -36,12 +36,12 @@
 \begin{center}
 {\Huge FLTK @FL_VERSION@ Programming Manual}\\
 \vspace*{2cm}
-\begin{DoxyImageNoCaption}
- \mbox{\includegraphics[width=6cm]{FL200.png}}
-\end{DoxyImageNoCaption}\\
+\begin{ImageNoCaption}
+ \mbox{\includegraphics[width=6cm]{FL200}}
+\end{ImageNoCaption}\\
 \vspace*{2cm}
 {\Large
-Revision 10 by F. Costantini, D. Gibson, M. Melcher, \\
+Revision 9 by F. Costantini, D. Gibson, M. Melcher, \\
 A. Schlosser, B. Spitzak, and M. Sweet.}\\
 \vspace*{1.5cm}
 {\large Copyright 1998-@YEAR@ by Bill Spitzak and others.}\\

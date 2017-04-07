@@ -1,9 +1,9 @@
 //
-// "$Id: Fl_Cairo.H 11168 2016-02-13 18:02:17Z AlbrechtS $"
+// "$Id: Fl_Cairo.H 11167 2016-02-13 17:35:36Z AlbrechtS $"
 //
 // Main header file for the Fast Light Tool Kit (FLTK).
 //
-// Copyright 1998-2016 by Bill Spitzak and others.
+// Copyright 1998-2010 by Bill Spitzak and others.
 //
 // This library is free software. Distribution and use rights are outlined in
 // the file "COPYING" which should have been included with this file.  If this
@@ -84,5 +84,5 @@ private:
 #endif // FL_CAIRO_H
 
 //
-// End of "$Id: Fl_Cairo.H 11168 2016-02-13 18:02:17Z AlbrechtS $" .
+// End of "$Id: Fl_Cairo.H 11167 2016-02-13 17:35:36Z AlbrechtS $" .
 //

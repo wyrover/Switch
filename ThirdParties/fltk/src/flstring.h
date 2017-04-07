@@ -1,5 +1,5 @@
 /*
- * "$Id: flstring.h 11590 2016-04-12 17:53:18Z AlbrechtS $"
+ * "$Id: flstring.h 11094 2016-01-31 02:49:56Z AlbrechtS $"
  *
  * Common string header file for the Fast Light Tool Kit (FLTK).
  *
@@ -48,8 +48,11 @@
  */
 #    ifndef __WATCOMC__
 #      define strdup _strdup
-#      /* define unlink _unlink */
+#      define unlink _unlink
 #    endif /* !__WATCOMC__ */
+#  elif defined(__EMX__)
+#    define strcasecmp(s,t)	stricmp((s), (t))
+#    define strncasecmp(s,t,n)	strnicmp((s), (t), (n))
 #  endif /* WIN32 */
 
 #  ifdef __cplusplus
@@ -94,5 +97,5 @@ FL_EXPORT extern int fl_ascii_strcasecmp(const char *s, const char *t);
 #endif /* !flstring_h */
 
 /*
- * End of "$Id: flstring.h 11590 2016-04-12 17:53:18Z AlbrechtS $".
+ * End of "$Id: flstring.h 11094 2016-01-31 02:49:56Z AlbrechtS $".
  */

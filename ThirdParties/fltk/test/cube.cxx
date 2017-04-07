@@ -1,5 +1,5 @@
 //
-// "$Id: cube.cxx 11324 2016-03-08 22:19:57Z manolo $"
+// "$Id: cube.cxx 10498 2014-12-20 07:19:23Z manolo $"
 //
 // Another forms test program for the Fast Light Tool Kit (FLTK).
 //
@@ -99,7 +99,6 @@ void cube_box::draw() {
     glFrustum(-1,1,-1,1,2,10000);
     glTranslatef(0,0,-10);
     gl_font(FL_HELVETICA_BOLD, 16 );
-    glClearColor(0.4, 0.4, 0.4, 0);
   }
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   glPushMatrix();
@@ -114,10 +113,6 @@ void cube_box::draw() {
   glDisable(GL_DEPTH_TEST);
   gl_draw(wire ? "Cube: wire" : "Cube: flat", -4.5f, -4.5f );
   glEnable(GL_DEPTH_TEST);
-
-  // if an OpenGL graphics driver is installed, give it a chance
-  // to draw additional graphics
-  if (Fl::cfg_gfx_opengl) Fl_Gl_Window::draw();
 }
 
 int cube_box::handle(int e) {
@@ -145,12 +140,6 @@ void makeform(const char *name) {
   flat = new Fl_Radio_Light_Button(390,50,100,30,"Flat");
   button = new Fl_Button(390,340,100,30,"Exit");
   cube = new cube_box(23,23,344,344, 0);
-  if (Fl::cfg_gfx_opengl) { // try to overlay a button onto an OpenGL window
-    cube->begin();
-    Fl_Button *test = new Fl_Button(35, 105, 100, 30, "Test");
-    test->box(FL_ROUND_UP_BOX);
-    cube->end();
-  }
   cube2 = new cube_box(513,23,344,344, 0);
   Fl_Box *b = new Fl_Box(FL_NO_BOX,cube->x(),size->y(),
 			 cube->w(),size->h(),0);
@@ -230,5 +219,5 @@ int main(int argc, char **argv) {
 }
 
 //
-// End of "$Id: cube.cxx 11324 2016-03-08 22:19:57Z manolo $".
+// End of "$Id: cube.cxx 10498 2014-12-20 07:19:23Z manolo $".
 //

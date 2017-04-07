@@ -1,4 +1,4 @@
-/* "$Id: utf8Wrap.c 11874 2016-08-16 18:24:09Z manolo $"
+/* "$Id: utf8Wrap.c 11243 2016-02-27 15:14:42Z AlbrechtS $"
  *
  * Author: Jean-Marc Lienher ( http://oksid.ch )
  * Copyright 2000-2003 by O'ksi'D.
@@ -14,12 +14,10 @@
  *     http://www.fltk.org/str.php
  */
 
-#include "../config_lib.h"
-
 /*
  * X11 UTF-8 text drawing functions.
  */
-#if defined(FL_CFG_WIN_X11)
+#if !defined(WIN32) && !defined(__APPLE__)
 
 #include "../Xutf8.h"
 #include <X11/Xlib.h>
@@ -27,7 +25,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-#include "../utf8_internal.h"
 
 /* External auto generated functions : */
 #include "ucs2fontmap.c"
@@ -1024,8 +1021,8 @@ XFreeUtf8FontStruct(Display 	    *dpy,
   free(font_set);
 }
 
-#endif /* FL_CFG_WIN_X11 */
+#endif /* X11 only */
 
 /*
- *  End of "$Id: utf8Wrap.c 11874 2016-08-16 18:24:09Z manolo $".
+ *  End of "$Id: utf8Wrap.c 11243 2016-02-27 15:14:42Z AlbrechtS $".
  */

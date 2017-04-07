@@ -1,5 +1,5 @@
 //
-// "$Id: Fl_Window_iconize.cxx 11411 2016-03-23 18:00:37Z manolo $"
+// "$Id: Fl_Window_iconize.cxx 8864 2011-07-19 04:49:30Z greg.ercolano $"
 //
 // Window minification code for the Fast Light Tool Kit (FLTK).
 //
@@ -16,18 +16,25 @@
 //     http://www.fltk.org/str.php
 //
 
-#include <FL/Fl_Window.H>
-#include <FL/Fl_Window_Driver.H>
+#include <FL/x.H>
+
+extern char fl_show_iconic; // in Fl_x.cxx
 
 void Fl_Window::iconize() {
   if (!shown()) {
-    show_iconic_ = 1;
+    fl_show_iconic = 1;
     show();
   } else {
-    pWindowDriver->iconize();
+#ifdef WIN32
+    ShowWindow(i->xid, SW_SHOWMINNOACTIVE);
+#elif defined(__APPLE__)
+    i->collapse();
+#else
+    XIconifyWindow(fl_display, i->xid, fl_screen);
+#endif
   }
 }
 
 //
-// End of "$Id: Fl_Window_iconize.cxx 11411 2016-03-23 18:00:37Z manolo $".
+// End of "$Id: Fl_Window_iconize.cxx 8864 2011-07-19 04:49:30Z greg.ercolano $".
 //

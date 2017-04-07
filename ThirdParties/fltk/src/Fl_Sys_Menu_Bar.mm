@@ -1,5 +1,5 @@
 //
-// "$Id: Fl_Sys_Menu_Bar.mm 12015 2016-10-06 16:42:59Z manolo $"
+// "$Id: Fl_Sys_Menu_Bar.mm 11786 2016-06-18 00:32:18Z greg.ercolano $"
 //
 // MacOS system menu bar widget for the Fast Light Tool Kit (FLTK).
 //
@@ -32,7 +32,7 @@
  * Many other calls of the parent class don't work.
  */
 
-#if defined(__APPLE__) || defined(FL_DOXYGEN) // PORTME: Fl_Screen_Driver - platform system menu bar
+#if defined(__APPLE__) || defined(FL_DOXYGEN)
 #include <FL/Fl_Menu_Item.H>
 #include <FL/Fl_Sys_Menu_Bar.H>
 #include <FL/x.H>
@@ -76,15 +76,6 @@ typedef struct {
   };
   BOOL use_rank;
 } sys_menu_item;
-
-// Apple App Menu
-const char *Fl_Mac_App_Menu::about = "About %@";
-const char *Fl_Mac_App_Menu::print = "Print Front Window";
-const char *Fl_Mac_App_Menu::services = "Services";
-const char *Fl_Mac_App_Menu::hide = "Hide %@";
-const char *Fl_Mac_App_Menu::hide_others = "Hide Others";
-const char *Fl_Mac_App_Menu::show = "Show All";
-const char *Fl_Mac_App_Menu::quit = "Quit %@";
 
 
 @interface FLMenuItem : NSMenuItem {
@@ -369,9 +360,6 @@ void Fl_Sys_Menu_Bar::menu(const Fl_Menu_Item *m)
 /**
  * @brief Add a new menu item to the system menu bar.
  *
- * Add to the system menu bar a new menu item, with a title string, shortcut int,
- * callback, argument to the callback, and flags.
- *
  * @param label     - new menu item's label
  * @param shortcut  - new menu item's integer shortcut (can be 0 for none, or e.g. FL_ALT+'x')
  * @param cb        - callback to be invoked when item selected (can be 0 for none, in which case the menubar's callback() can be used instead)
@@ -458,6 +446,8 @@ void Fl_Sys_Menu_Bar::replace(int index, const char *name)
   update();
 }
 
+/** Updates the system menu after any change to its items.
+ */
 void Fl_Sys_Menu_Bar::update()
 {
   convertToMenuBar(Fl_Menu_::menu());
@@ -545,8 +535,8 @@ void Fl_Mac_App_Menu::custom_application_menu_items(const Fl_Menu_Item *m)
     [item release];
   }
 }
-#endif /* __APPLE__ */ // PORTME: Fl_Screen_Driver - platform system menu bar
+#endif /* __APPLE__ */
 
 //
-// End of "$Id: Fl_Sys_Menu_Bar.mm 12015 2016-10-06 16:42:59Z manolo $".
+// End of "$Id: Fl_Sys_Menu_Bar.mm 11786 2016-06-18 00:32:18Z greg.ercolano $".
 //

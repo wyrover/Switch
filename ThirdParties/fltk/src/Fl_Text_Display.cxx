@@ -1,7 +1,7 @@
 //
-// "$Id: Fl_Text_Display.cxx 12170 2017-02-04 21:56:38Z AlbrechtS $"
+// "$Id: Fl_Text_Display.cxx 12000 2016-10-01 21:20:18Z greg.ercolano $"
 //
-// Copyright 2001-2017 by Bill Spitzak and others.
+// Copyright 2001-2016 by Bill Spitzak and others.
 // Original code Copyright Mark Edel.  Permission to distribute under
 // the LGPL for the FLTK library granted by Mark Edel.
 //
@@ -27,11 +27,9 @@
 #include <ctype.h>
 #include <string.h>	// strdup()
 #include <FL/Fl.H>
-#include <FL/x.H>
 #include <FL/Fl_Text_Buffer.H>
 #include <FL/Fl_Text_Display.H>
 #include <FL/Fl_Window.H>
-#include <FL/Fl_Screen_Driver.H>
 
 #undef min
 #undef max
@@ -167,24 +165,24 @@ Fl_Text_Display::Fl_Text_Display(int X, int Y, int W, int H, const char* l)
   mContinuousWrap = 0;
   mWrapMarginPix = 0;
   mSuppressResync = mNLinesDeleted = mModifyingTabDistance = 0;
+#if FLTK_ABI_VERSION >= 10303
   linenumber_font_    = FL_HELVETICA;
   linenumber_size_    = FL_NORMAL_SIZE;
   linenumber_fgcolor_ = FL_INACTIVE_COLOR;
   linenumber_bgcolor_ = 53;	// ~90% gray
   linenumber_align_   = FL_ALIGN_RIGHT;
   linenumber_format_  = strdup("%d");
+#endif
 }
 
 
+
 /**
-  Free a text display and release its associated memory.
+ Free a text display and release its associated memory.
 
-  \note The text buffer that the text display displays is a separate entity
-	and is not freed, nor are the style buffer or style table.
-
-  \see Fl_Text_Display::buffer(Fl_Text_Buffer* buf)
-*/
-
+ Note, the text BUFFER that the text display displays is a separate
+ entity and is not freed, nor are the style buffer or style table.
+ */
 Fl_Text_Display::~Fl_Text_Display() {
   if (scroll_direction) {
     Fl::remove_timeout(scroll_timer_cb, this);
@@ -195,19 +193,21 @@ Fl_Text_Display::~Fl_Text_Display() {
     mBuffer->remove_predelete_callback(buffer_predelete_cb, this);
   }
   if (mLineStarts) delete[] mLineStarts;
+#if FLTK_ABI_VERSION >= 10303
   if (linenumber_format_) {
     free((void*)linenumber_format_);
     linenumber_format_ = 0;
   }
+#endif
 }
 
 
 /**
-  Set width of screen area for line numbers.
-  Use to also enable/disable line numbers.
-  A value of 0 disables line numbering, values >0 enable the line number display.
-  \param width The new width of the area for line numbers to appear, in pixels.
-	      0 disables line numbers (default)
+ Set width of screen area for line numbers.
+ Use to also enable/disable line numbers.
+ A value of 0 disables line numbering, values >0 enable the line number display.
+ \param width The new width of the area for line numbers to appear, in pixels.
+              0 disables line numbers (default)
 */
 void Fl_Text_Display::linenumber_width(int width) {
   if (width < 0) return;
@@ -224,78 +224,118 @@ int Fl_Text_Display::linenumber_width() const {
  
 /**
  Set the font used for line numbers (if enabled).
- \version 1.3.3
+ \version 1.3.3 ABI feature (ignored in 1.3.x unless FLTK_ABI_VERSION is 10303 or higher)
 */
 void Fl_Text_Display::linenumber_font(Fl_Font val) {
+#if FLTK_ABI_VERSION >= 10303
   linenumber_font_ = val;
+#else
+  // do nothing
+#endif
 }
 
 /**
  Return the font used for line numbers (if enabled).
 */
 Fl_Font Fl_Text_Display::linenumber_font() const {
+#if FLTK_ABI_VERSION >= 10303
   return linenumber_font_;
+#else
+  return FL_HELVETICA;
+#endif
 }
 
 /**
  Set the font size used for line numbers (if enabled).
- \version 1.3.3
+ \version 1.3.3 ABI feature (ignored in 1.3.x unless FLTK_ABI_VERSION is 10303 or higher)
 */
 void Fl_Text_Display::linenumber_size(Fl_Fontsize val) {
+#if FLTK_ABI_VERSION >= 10303
   linenumber_size_ = val;
+#else
+  // do nothing
+#endif
 }
 
 /**
  Return the font size used for line numbers (if enabled).
 */
 Fl_Fontsize Fl_Text_Display::linenumber_size() const {
+#if FLTK_ABI_VERSION >= 10303
   return linenumber_size_;
+#else
+  return FL_NORMAL_SIZE;
+#endif
 }
 
 /**
  Set the foreground color used for line numbers (if enabled).
- \version 1.3.3
+ \version 1.3.3 ABI feature (ignored in 1.3.x unless FLTK_ABI_VERSION is 10303 or higher)
 */
 void Fl_Text_Display::linenumber_fgcolor(Fl_Color val) {
+#if FLTK_ABI_VERSION >= 10303
   linenumber_fgcolor_ = val;
+#else
+  // do nothing
+#endif
 }
 
 /**
  Return the foreground color used for line numbers (if enabled).
 */
 Fl_Color Fl_Text_Display::linenumber_fgcolor() const {
+#if FLTK_ABI_VERSION >= 10303
   return linenumber_fgcolor_;
+#else
+  return FL_INACTIVE_COLOR;
+#endif
 }
 
 /**
  Set the background color used for line numbers (if enabled).
- \version 1.3.3
+ \version 1.3.3 ABI feature (ignored in 1.3.x unless FLTK_ABI_VERSION is 10303 or higher)
 */
 void Fl_Text_Display::linenumber_bgcolor(Fl_Color val) {
+#if FLTK_ABI_VERSION >= 10303
   linenumber_bgcolor_ = val;
+#else
+  // do nothing
+#endif
 }
 
 /**
  Returns the background color used for line numbers (if enabled).
 */
 Fl_Color Fl_Text_Display::linenumber_bgcolor() const {
+#if FLTK_ABI_VERSION >= 10303
   return linenumber_bgcolor_;
+#else
+  return 53;	// hard coded ~90% gray
+#endif
 }
 
 /**
  Set alignment for line numbers (if enabled).
  Valid values are FL_ALIGN_LEFT, FL_ALIGN_CENTER or FL_ALIGN_RIGHT.
- \version 1.3.3
+ \version 1.3.3 ABI feature (ignored in 1.3.x unless FLTK_ABI_VERSION is 10303 or higher)
 */
 void Fl_Text_Display::linenumber_align(Fl_Align val) {
+#if FLTK_ABI_VERSION >= 10303
   linenumber_align_ = val;
+#else
+  // do nothing
+#endif
 }
 
 /**
  Returns the alignment used for line numbers (if enabled).
 */
 Fl_Align Fl_Text_Display::linenumber_align() const {
+#if FLTK_ABI_VERSION >= 10303
   return linenumber_align_;
+#else
+  return FL_ALIGN_RIGHT;
+#endif
 }
 
 /**
@@ -315,30 +355,32 @@ Fl_Align Fl_Text_Display::linenumber_align() const {
      - "%x"   -- For hexadecimal line numbers
      - "%o"   -- For octal line numbers
 
- \version 1.3.3
+ \version 1.3.3 ABI feature (ignored in 1.3.x unless FLTK_ABI_VERSION is 10303 or higher)
 */
 void Fl_Text_Display::linenumber_format(const char* val) {
+#if FLTK_ABI_VERSION >= 10303
   if ( linenumber_format_ ) free((void*)linenumber_format_);
   linenumber_format_ = val ? strdup(val) : 0;
+#else
+  // do nothing
+#endif
 }
 
 /**
  Returns the line number printf() format string.
 */
 const char* Fl_Text_Display::linenumber_format() const {
+#if FLTK_ABI_VERSION >= 10303
   return linenumber_format_;
+#else
+  return "%d";
+#endif
 }
 
 /**
-  Attach a text buffer to display, replacing the current buffer (if any).
-
-  Multiple text widgets can be associated with the same text buffer.
-
-  \note The caller is responsible for the old (replaced) buffer (if any).
-	This method does not delete the old buffer.
-
-  \param buf attach this text buffer
-*/
+ Attach a text buffer to display, replacing the current buffer (if any)
+ \param buf attach this text buffer
+ */
 void Fl_Text_Display::buffer( Fl_Text_Buffer *buf ) {
   /* If the text display is already displaying a buffer, clear it off
    of the display and remove our callback from it */
@@ -394,11 +436,8 @@ void Fl_Text_Display::buffer( Fl_Text_Buffer *buf ) {
  \param unfinishedStyle if this style is found, the callback below is called
  \param unfinishedHighlightCB if a character with an unfinished style is found,
    this callback will be called
- \param cbArg an optional argument for the callback above, usually a pointer
+ \param cbArg and optional argument for the callback above, usually a pointer
    to the Text Display.
-
- \todo	"extendRangeForStyleMods" does not exist (might be a hangover
-	 from the port from nedit). Find the correct function.
  */
 void Fl_Text_Display::highlight_data(Fl_Text_Buffer *styleBuffer,
                                      const Style_Table_Entry *styleTable,
@@ -421,7 +460,6 @@ void Fl_Text_Display::highlight_data(Fl_Text_Buffer *styleBuffer,
 
 /**
  \brief Find the longest line of all visible lines.
-
  \return the width of the longest visible line in pixels
  */
 int Fl_Text_Display::longest_vline() const {
@@ -435,9 +473,8 @@ int Fl_Text_Display::longest_vline() const {
 
 /**
  \brief Change the size of the displayed text area.
-
- Calling this function will trigger a recalculation of all visible lines
- and of all scrollbar sizes.
+ Calling this function will trigger a recalculation of all lines visible and
+ of all scrollbar sizes.
  \param X, Y, W, H new position and size of this widget
  */
 void Fl_Text_Display::resize(int X, int Y, int W, int H) {
@@ -705,7 +742,6 @@ void Fl_Text_Display::draw_text( int left, int top, int width, int height ) {
 
 /**
  \brief Marks text from start to end as needing a redraw.
-
  This function will trigger a damage event and later a redraw of parts of
  the widget.
  \param startpos index of first character needing redraw
@@ -808,8 +844,7 @@ void Fl_Text_Display::draw_range(int startpos, int endpos) {
 
 /**
  \brief Sets the position of the text insertion cursor for text display.
-
- Moves the insertion cursor in front of the character at \p newPos.
+ Move the insertion cursor in front of the character at \p newPos.
  This function may trigger a redraw.
  \param newPos new caret position
  */
@@ -837,7 +872,6 @@ void Fl_Text_Display::insert_position( int newPos ) {
 
 /**
  \brief Shows the text cursor.
-
  This function may trigger a redraw.
  \param b show(1) or hide(0) the text cursor (caret).
  */
@@ -851,7 +885,6 @@ void Fl_Text_Display::show_cursor(int b) {
 
 /**
  \brief Sets the text cursor style.
-
  Sets the text cursor style to one of the following:
 
  \li Fl_Text_Display::NORMAL_CURSOR - Shows an I beam.
@@ -880,20 +913,17 @@ void Fl_Text_Display::cursor_style(int style) {
  the text is displayed. Different Text Displays can have different wrap modes,
  even if they share the same Text Buffer.
 
- Valid wrap modes are:
-
-  - WRAP_NONE :		don't wrap text at all
-  - WRAP_AT_COLUMN :	wrap text at the given text column
-  - WRAP_AT_PIXEL :	wrap text at a pixel position
-  - WRAP_AT_BOUNDS :	wrap text so that it fits into the widget width
-
- \param wrap new wrap mode (see above)
-
+ \param wrap new wrap mode is WRAP_NONE (don't wrap text at all), WRAP_AT_COLUMN
+      (wrap text at the given text column), WRAP_AT_PIXEL (wrap text at a pixel
+      position), or WRAP_AT_BOUNDS (wrap text so that it fits into the
+      widget width)
  \param wrapMargin in WRAP_AT_COLUMN mode, text will wrap at the n'th character.
       For variable width fonts, an average character width is calculated. The
       column width is calculated using the current textfont or the first style
       when this function is called. If the font size changes, this function
       must be called again. In WRAP_AT_PIXEL mode, this is the pixel position.
+ \todo we need new wrap modes to wrap at the window edge and based on pixel width
+   or average character width.
  */
 void Fl_Text_Display::wrap_mode(int wrap, int wrapMargin) {
   switch (wrap) {
@@ -943,12 +973,13 @@ void Fl_Text_Display::wrap_mode(int wrap, int wrapMargin) {
 }
 
 
+
 /**
  \brief Inserts "text" at the current cursor location.
 
- This has the same effect as inserting the text into the buffer using
- insert(insert_position(),text) and then moving the insert position after
- the newly inserted text, except that it's optimized to do less redrawing.
+ This has the same effect as inserting the text into the buffer using BufInsert
+ and then moving the insert position after the newly inserted text, except
+ that it's optimized to do less redrawing.
 
  \param text new text in UTF-8 encoding.
  */
@@ -1119,7 +1150,6 @@ int Fl_Text_Display::position_to_linecol( int pos, int* lineNum, int* column ) c
 
 /**
  \brief Check if a pixel position is within the primary selection.
-
  \param X, Y pixel position to test
  \return 1 if position (X, Y) is inside of the primary Fl_Text_Selection
  */
@@ -1147,10 +1177,8 @@ int Fl_Text_Display::in_selection( int X, int Y ) const {
  \param row
  \param column
  \return something unknown
-
  \todo What does this do and how is it useful? Column numbers mean little in
     this context. Which functions depend on this one?
-    Function TextDXYToUnconstrainedPosition does not exist (nedit port?)
 
  \todo Unicode?
  */
@@ -1179,10 +1207,8 @@ int Fl_Text_Display::wrapped_column(int row, int column) const {
 
  \param row
  \return something unknown
-
- \todo	What does this do and how is it useful? Column numbers mean little in
-	this context. Which functions depend on this one?
-	Function TextDXYToUnconstrainedPosition does not exist (nedit port?)
+ \todo What does this do and how is it useful? Column numbers mean little in
+ this context. Which functions depend on this one?
  */
 int Fl_Text_Display::wrapped_row(int row) const {
   if (!mContinuousWrap || row < 0 || row > mNVisibleLines)
@@ -1242,7 +1268,6 @@ void Fl_Text_Display::display_insert() {
 
 /**
  \brief Scrolls the text buffer to show the current insert position.
-
  This function triggers a complete recalculation, ending in a call to
  Fl_Text_Display::display_insert()
  */
@@ -1412,10 +1437,9 @@ int Fl_Text_Display::count_lines(int startPos, int endPos,
 /**
  \brief Skip a number of lines forward.
 
- Same as Fl_Text_Buffer::skip_lines(startPos, nLines), but takes into
- account line breaks when wrapping is turned on.
- If the caller knows that \p startPos is at a line start, it can pass
- \p startPosIsLineStart as True to make the call more efficient
+ Same as BufCountForwardNLines, but takes into account line breaks when
+ wrapping is turned on. If the caller knows that startPos is at a line start,
+ it can pass "startPosIsLineStart" as True to make the call more efficient
  by avoiding the additional step of scanning back to the last newline.
 
  \param startPos index to starting character
@@ -1429,7 +1453,7 @@ int Fl_Text_Display::skip_lines(int startPos, int nLines,
 
   int retLines, retPos, retLineStart, retLineEnd;
 
-  /* if we're not wrapping use more efficient skip_lines(startPos, nLines) */
+  /* if we're not wrapping use more efficient BufCountForwardNLines */
   if (!mContinuousWrap)
     return buffer()->skip_lines(startPos, nLines);
 
@@ -1450,10 +1474,9 @@ int Fl_Text_Display::skip_lines(int startPos, int nLines,
 /**
  \brief Returns the end of a line.
 
- Same as buffer()->line_end(startPos), but takes into account line breaks
- when wrapping is turned on.
- If the caller knows that \p startPos is at a line start, it can
- pass \p startPosIsLineStart as True to make the call more efficient
+ Same as BufEndOfLine, but takes into account line breaks when wrapping
+ is turned on.  If the caller knows that \p startPos is at a line start, it
+ can pass "startPosIsLineStart" as True to make the call more efficient
  by avoiding the additional step of scanning back to the last newline.
 
  Note that the definition of the end of a line is less clear when continuous
@@ -1475,7 +1498,7 @@ int Fl_Text_Display::line_end(int startPos, bool startPosIsLineStart) const {
 
   int retLines, retPos, retLineStart, retLineEnd;
 
-  /* If we're not wrapping use more efficient buffer()->line_end(startPos) */
+  /* If we're not wrapping use more efficient BufEndOfLine */
   if (!mContinuousWrap)
     return buffer()->line_end(startPos);
 
@@ -1495,8 +1518,8 @@ int Fl_Text_Display::line_end(int startPos, bool startPosIsLineStart) const {
 /**
  \brief Return the beginning of a line.
 
- Same as buffer()->line_start(pos), but returns the character after last
- wrap point rather than the last newline.
+ Same as BufStartOfLine, but returns the character after last wrap point
+ rather than the last newline.
 
  \param pos index to starting character
  \return new position as index
@@ -1506,7 +1529,7 @@ int Fl_Text_Display::line_start(int pos) const {
 
   int retLines, retPos, retLineStart, retLineEnd;
 
-  /* If we're not wrapping, use the more efficient buffer()->line_start(pos) */
+  /* If we're not wrapping, use the more efficient BufStartOfLine */
   if (!mContinuousWrap)
     return buffer()->line_start(pos);
 
@@ -1522,8 +1545,8 @@ int Fl_Text_Display::line_start(int pos) const {
 /**
  \brief Skip a number of lines back.
 
- Same as buffer()->rewind_lines(startPos, nLines), but takes into account
- line breaks when wrapping is turned on.
+ Same as BufCountBackwardNLines, but takes into account line breaks when
+ wrapping is turned on.
 
  \param startPos index to starting character
  \param nLines number of lines to skip back
@@ -1535,8 +1558,7 @@ int Fl_Text_Display::rewind_lines(int startPos, int nLines) {
   Fl_Text_Buffer *buf = buffer();
   int pos, lineStart, retLines, retPos, retLineStart, retLineEnd;
 
-  /* If we're not wrapping, use the more efficient
-     Fl_Text_Buffer::rewind_lines(startPos, nLines) */
+  /* If we're not wrapping, use the more efficient BufCountBackwardNLines */
   if (!mContinuousWrap)
     return buf->rewind_lines(startPos, nLines);
 
@@ -1557,17 +1579,24 @@ int Fl_Text_Display::rewind_lines(int startPos, int nLines) {
 
 
 
+static inline int fl_isseparator(unsigned int c) {
+  // FIXME: this does not take UCS-4 encoding into account
+  return c != '$' && c != '_' && (isspace(c) || ispunct(c));
+}
+
+
+
 /**
  \brief Moves the current insert position right one word.
  */
 void Fl_Text_Display::next_word() {
   int pos = insert_position();
 
-  while (pos < buffer()->length() && !buffer()->is_word_separator(pos)) {
+  while (pos < buffer()->length() && !fl_isseparator(buffer()->char_at(pos))) {
     pos = buffer()->next_char(pos);
   }
 
-  while (pos < buffer()->length() && buffer()->is_word_separator(pos)) {
+  while (pos < buffer()->length() && fl_isseparator(buffer()->char_at(pos))) {
     pos = buffer()->next_char(pos);
   }
 
@@ -1584,15 +1613,15 @@ void Fl_Text_Display::previous_word() {
   if (pos==0) return;
   pos = buffer()->prev_char(pos);
 
-  while (pos && buffer()->is_word_separator(pos)) {
+  while (pos && fl_isseparator(buffer()->char_at(pos))) {
     pos = buffer()->prev_char(pos);
   }
 
-  while (pos && !buffer()->is_word_separator(pos)) {
+  while (pos && !fl_isseparator(buffer()->char_at(pos))) {
     pos = buffer()->prev_char(pos);
   }
 
-  if (buffer()->is_word_separator(pos)) {
+  if (fl_isseparator(buffer()->char_at(pos))) {
     pos = buffer()->next_char(pos);
   }
 
@@ -1638,7 +1667,7 @@ void Fl_Text_Display::buffer_predelete_cb(int pos, int nDeleted, void *cbArg) {
 /**
  \brief This is called whenever the buffer is modified.
 
- Callback attached to the text buffer to receive modification information.
+ Callback attached to the text buffer to receive modification information
 
  This callback can be used to adjust 
  the display or update other setting. It is not advisable to change any 
@@ -1801,8 +1830,6 @@ void Fl_Text_Display::buffer_modified_cb( int pos, int nInserted, int nDeleted,
  want this line count maintained (for use via TextDPosToLineAndCol).
  More specifically, this allows the line number reported in the statistics
  line to be calibrated in absolute lines, rather than post-wrapped lines.
-
- \todo	TextDPosToLineAndCol does not exist (nedit port?)
  */
 void Fl_Text_Display::maintain_absolute_top_line_number(int state) {
   mNeedAbsTopLineNum = state;
@@ -1922,7 +1949,7 @@ int Fl_Text_Display::position_to_line( int pos, int *lineNum ) const {
   \li return the width of a text range in pixels
   \li return the index of a character that is at a pixel position
 
- \param[in] mode DRAW_LINE, GET_WIDTH, FIND_INDEX, or FIND_INDEX_FROM_ZERO
+ \param[in] mode DRAW_LINE, GET_WIDTH, FIND_INDEX
  \param[in] lineStartPos index of first character
  \param[in] lineLen size of string in bytes
  \param[in] leftChar, rightChar
@@ -2067,7 +2094,6 @@ int Fl_Text_Display::handle_vline(
 
 /**
  \brief Find the index of the character that lies at the given x position.
-
  \param s UTF-8 text string
  \param len length of string
  \param style index into style lookup table
@@ -2190,10 +2216,11 @@ void Fl_Text_Display::draw_string(int style,
 
     if (style & PRIMARY_MASK) {
       if (Fl::focus() == (Fl_Widget*)this) {
-	if (Fl::screen_driver()->has_marked_text() && Fl::compose_state)
-          background = color();// Mac OS: underline marked text
+#ifdef __APPLE__
+	if (Fl::compose_state) background = color();// Mac OS: underline marked text
 	else 
-          background = selection_color();
+#endif
+	background = selection_color();
 	}
       else background = fl_color_average(color(), selection_color(), 0.4f);
     } else if (style & HIGHLIGHT_MASK) {
@@ -2226,16 +2253,20 @@ void Fl_Text_Display::draw_string(int style,
   if (!(style & BG_ONLY_MASK)) {
     fl_color( foreground );
     fl_font( font, fsize );
-    // Make sure antialiased ÄÖÜ do not leak on line above:
-    // on X11+Xft the antialiased part of characters such as ÄÖÜ leak on the bottom pixel of the line above
-    static int can_leak = Fl::screen_driver()->text_display_can_leak();
-    if (can_leak) fl_push_clip(X, Y, toX - X, mMaxsize);
+#if !(defined(__APPLE__) || defined(WIN32)) && USE_XFT
+    // makes sure antialiased ÄÖÜ do not leak on line above
+    fl_push_clip(X, Y, toX - X, mMaxsize);
+#endif
     fl_draw( string, nChars, X, Y + mMaxsize - fl_descent());
-    if (Fl::screen_driver()->has_marked_text() && Fl::compose_state && (style & PRIMARY_MASK)) {
-      fl_color( fl_color_average(foreground, background, 0.6f) );
-      fl_line(X, Y + mMaxsize - 1, X + (int)fl_width(string, nChars), Y + mMaxsize - 1);
+#ifdef __APPLE__ // Mac OS: underline marked (= selected + Fl::compose_state != 0) text
+    if (Fl::compose_state && (style & PRIMARY_MASK)) {
+      fl_color( fl_color_average(foreground, background, 0.6) );
+      fl_line(X, Y + mMaxsize - 1, X + fl_width(string, nChars), Y + mMaxsize - 1);
     }
-    if (can_leak) fl_pop_clip();
+#endif
+#if !(defined(__APPLE__) || defined(WIN32)) && USE_XFT
+    fl_pop_clip();
+#endif
   }
 
   // CET - FIXME
@@ -2318,7 +2349,9 @@ void Fl_Text_Display::draw_cursor( int X, int Y ) {
   if ( X < text_area.x - 1 || X > text_area.x + text_area.w )
     return;
 
+#ifdef __APPLE__
   Fl::insertion_point_location(X, bot, fontHeight);
+#endif
   /* For cursors other than the block, make them around 2/3 of a character
    width, rounded to an even number of pixels so that X will draw an
    odd number centered on the stem at x. */
@@ -2377,9 +2410,8 @@ void Fl_Text_Display::draw_cursor( int X, int Y ) {
  \brief Find the correct style for a character.
 
  Determine the drawing method to use to draw a specific character from "buf".
-
  \p lineStartPos gives the character index where the line begins, \p lineIndex,
- the number of characters past the beginning of the line, and \p lineLen
+ the number of characters past the beginning of the line, and \p lineIndex
  the number of displayed characters past the beginning of the line.  Passing
  \p lineStartPos of -1 returns the drawing style for "no text".
 
@@ -2707,10 +2739,11 @@ void Fl_Text_Display::update_line_starts(int pos, int charsInserted,
 }
 
 
-/**
- \brief Update the line starts array.
 
- Scan through the text in the Text Display's buffer and recalculate the line
+/**
+ \brief Update the line start arrays.
+
+ Scan through the text in the "textD"'s buffer and recalculate the line
  starts array values beginning at index "startLine" and continuing through
  (including) "endLine".  It assumes that the line starts entry preceding
  "startLine" (or mFirstChar if startLine is 0) is good, and re-counts
@@ -2773,6 +2806,7 @@ void Fl_Text_Display::calc_line_starts( int startLine, int endLine ) {
 }
 
 
+
 /**
  \brief Update last display character index.
 
@@ -2786,9 +2820,9 @@ void Fl_Text_Display::calc_last_char() {
 }
 
 
+
 /**
  \brief Scrolls the current buffer to start at the specified line and column.
-
  \param topLineNum top line number
  \param horizOffset column number
  \todo Column numbers make little sense here.
@@ -2800,9 +2834,9 @@ void Fl_Text_Display::scroll(int topLineNum, int horizOffset) {
 }
 
 
+
 /**
  \brief Scrolls the current buffer to start at the specified line and column.
-
  \param topLineNum top line number
  \param horizOffset in pixels
  \return 0 if nothing changed, 1 if we scrolled
@@ -2833,6 +2867,7 @@ int Fl_Text_Display::scroll_(int topLineNum, int horizOffset) {
   damage(FL_DAMAGE_EXPOSE);
   return 1;
 }
+
 
 
 /**
@@ -2869,8 +2904,9 @@ void Fl_Text_Display::update_h_scrollbar() {
 }
 
 
+
 /**
- \brief Callback for drag or valueChanged on vertical scrollbar.
+ \brief Callbacks for drag or valueChanged on vertical scrollbar.
  */
 void Fl_Text_Display::v_scrollbar_cb(Fl_Scrollbar* b, Fl_Text_Display* textD) {
   if (b->value() == textD->mTopLineNum) return;
@@ -2878,13 +2914,15 @@ void Fl_Text_Display::v_scrollbar_cb(Fl_Scrollbar* b, Fl_Text_Display* textD) {
 }
 
 
+
 /**
- \brief Callback for drag or valueChanged on horizontal scrollbar.
+ \brief Callbacks for drag or valueChanged on horizontal scrollbar.
  */
 void Fl_Text_Display::h_scrollbar_cb(Fl_Scrollbar* b, Fl_Text_Display* textD) {
   if (b->value() == textD->mHorizOffset) return;
   textD->scroll(textD->mTopLineNum, b->value());
 }
+
 
 
 /**
@@ -2914,7 +2952,7 @@ void Fl_Text_Display::draw_line_numbers(bool /*clearAll*/) {
   // Take scrollbars and positions into account.
   int hscroll_h = mHScrollBar->visible() ? mHScrollBar->h() : 0;
   int xoff = Fl::box_dx(box());
-  int yoff = text_area.y - y();
+  int yoff = Fl::box_dy(box()) + ((scrollbar_align()&FL_ALIGN_TOP)?hscroll_h:0);
 
 #ifndef LINENUM_LEFT_OF_VSCROLL
   int vscroll_w = mVScrollBar->visible() ? mVScrollBar->w() : 0;
@@ -2951,7 +2989,7 @@ void Fl_Text_Display::draw_line_numbers(bool /*clearAll*/) {
       if (lineStart != -1 && (lineStart==0 || buffer()->char_at(lineStart-1)=='\n')) {
 	sprintf(lineNumString, linenumber_format(), line);
 	int xx = x() + xoff + 3,
-	    yy = Y,
+	    yy = Y + 3,
 	    ww = mLineNumWidth - (3*2),
 	    hh = lineHeight;
 	fl_draw(lineNumString, xx, yy, ww, hh, linenumber_align(), 0, 0);
@@ -2975,6 +3013,7 @@ static int min( int i1, int i2 ) {
 }
 
 
+
 /**
  Count the number of newlines in a null-terminated text string;
  */
@@ -2992,6 +3031,8 @@ static int countlines( const char *string ) {
 }
 
 
+
+
 /**
  \brief Returns the width in pixels of the displayed line pointed to by "visLineNum".
  \param visLineNum index into visible lines array
@@ -3005,6 +3046,7 @@ int Fl_Text_Display::measure_vline( int visLineNum ) const {
 }
 
 
+
 /**
  \brief Return true if there are lines visible with no corresponding buffer text.
  \return 1 if there are empty lines
@@ -3012,6 +3054,7 @@ int Fl_Text_Display::measure_vline( int visLineNum ) const {
 int Fl_Text_Display::empty_vlines() const {
   return (mNVisibleLines > 0) && (mLineStarts[ mNVisibleLines - 1 ] == -1);
 }
+
 
 
 /**
@@ -3047,6 +3090,7 @@ int Fl_Text_Display::vline_length( int visLineNum ) const {
 
   return nextLineStart - lineStartPos;
 }
+
 
 
 /**
@@ -3219,6 +3263,7 @@ void Fl_Text_Display::find_wrap_range(const char *deletedText, int pos,
 }
 
 
+
 /**
  \brief Wrapping calculations.
 
@@ -3299,6 +3344,7 @@ void Fl_Text_Display::measure_deleted_lines(int pos, int nDeleted) {
   mNLinesDeleted = nLines;
   mSuppressResync = 1;
 }
+
 
 
 /**
@@ -3454,6 +3500,7 @@ void Fl_Text_Display::wrapped_line_counter(Fl_Text_Buffer *buf, int startPos,
 }
 
 
+
 /**
  \brief Wrapping calculations.
 
@@ -3489,6 +3536,7 @@ double Fl_Text_Display::measure_proportional_character(const char *s, int xPix, 
   }
   return string_width(s, charLen, style);
 }
+
 
 
 /**
@@ -3530,10 +3578,11 @@ void Fl_Text_Display::find_line_end(int startPos, bool startPosIsLineStart,
 }
 
 
-/**
- \brief Check if the line break is caused by a newline or by line wrapping.
 
- Line breaks in continuous wrap mode usually happen at newlines (\\n) or
+/**
+ \brief Check if the line break is caused by a \\n or by line wrapping.
+
+ Line breaks in continuous wrap mode usually happen at newlines or
  whitespace.  This line-terminating character is not included in line
  width measurements and has a special status as a non-visible character.
  However, lines with no whitespace are wrapped without the benefit of a
@@ -3550,8 +3599,6 @@ void Fl_Text_Display::find_line_end(int startPos, bool startPosIsLineStart,
 
  \param lineEndPos index of character where the line wraps
  \return 1 if a \\n character causes the line wrap
-
- \todo TextDEndOfLine and BufEndOfLine functions don't exist (nedit port?)
  */
 int Fl_Text_Display::wrap_uses_character(int lineEndPos) const {
   IS_UTF8_ALIGNED2(buffer(), lineEndPos)
@@ -3565,6 +3612,7 @@ int Fl_Text_Display::wrap_uses_character(int lineEndPos) const {
   return c == '\n' || ((c == '\t' || c == ' ') &&
                        lineEndPos + 1 < buffer()->length());
 }
+
 
 
 /**
@@ -3620,6 +3668,7 @@ void Fl_Text_Display::extend_range_for_styles( int *startpos, int *endpos ) {
 
   IS_UTF8_ALIGNED2(buffer(), (*endpos))
 }
+
 
 
 /**
@@ -3733,8 +3782,10 @@ void Fl_Text_Display::draw(void) {
   int has_selection = buffer()->selection_position(&start, &end);
   if (damage() & (FL_DAMAGE_ALL | FL_DAMAGE_SCROLL | FL_DAMAGE_EXPOSE)
       && (
-	  (Fl::screen_driver()->has_marked_text() && Fl::compose_state) ||
-	  (!has_selection) || mCursorPos < start || mCursorPos > end) &&
+#ifdef __APPLE__
+	  Fl::compose_state ||
+#endif
+	  !has_selection || mCursorPos < start || mCursorPos > end) &&
       mCursorOn && Fl::focus() == (Fl_Widget*)this ) {
     fl_push_clip(text_area.x-LEFT_MARGIN,
                  text_area.y,
@@ -3793,6 +3844,7 @@ void fl_text_drag_me(int pos, Fl_Text_Display* d) {
 }
 
 
+
 /**
  \brief Timer callback for scroll events.
 
@@ -3826,6 +3878,7 @@ void Fl_Text_Display::scroll_timer_cb(void *user_data) {
   fl_text_drag_me(pos, w);
   Fl::repeat_timeout(.1, scroll_timer_cb, user_data);
 }
+
 
 
 /**
@@ -3907,7 +3960,11 @@ int Fl_Text_Display::handle(int event) {
       if (dragType==DRAG_START_DND) {
         if (!Fl::event_is_click() && Fl::dnd_text_ops()) {
           const char* copy = buffer()->selection_text();
-          Fl::screen_driver()->dnd(1);
+#ifdef __APPLE__
+          Fl_X::dnd(1);
+#else
+          Fl::dnd();
+#endif
           free((void*)copy);
         }
         return 1;
@@ -4075,5 +4132,5 @@ double Fl_Text_Display::col_to_x(double col) const
 
 
 //
-// End of "$Id: Fl_Text_Display.cxx 12170 2017-02-04 21:56:38Z AlbrechtS $".
+// End of "$Id: Fl_Text_Display.cxx 12000 2016-10-01 21:20:18Z greg.ercolano $".
 //

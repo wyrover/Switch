@@ -1,5 +1,5 @@
 //
-// "$Id: Fl_Tree_Prefs.H 11679 2016-04-23 04:30:39Z manolo $"
+// "$Id: Fl_Tree_Prefs.H 10723 2015-04-28 19:39:53Z greg.ercolano $"
 //
 
 #ifndef FL_TREE_PREFS_H
@@ -73,6 +73,7 @@ enum Fl_Tree_Select {
                                      ///< reordered by mouse drag.
 };
 
+#if FLTK_ABI_VERSION >= 10301
 /// \enum Fl_Tree_Item_Reselect_Mode
 /// Defines the ways an item can be (re) selected
 /// via item_reselect_mode().
@@ -92,9 +93,12 @@ enum Fl_Tree_Item_Draw_Mode {
   FL_TREE_ITEM_DRAW_LABEL_AND_WIDGET=1,	///< If widget() defined, include label to the left of the widget
   FL_TREE_ITEM_HEIGHT_FROM_WIDGET=2	///< If widget() defined, widget()'s height controls item's height
 };
+#endif /*FLTK_ABI_VERSION*/
 
+#if FLTK_ABI_VERSION >= 10303
 class Fl_Tree_Item;
 typedef void (Fl_Tree_Item_Draw_Callback)(Fl_Tree_Item*, void*);
+#endif
 
 /// \class Fl_Tree_Prefs
 ///
@@ -109,11 +113,15 @@ class FL_EXPORT Fl_Tree_Prefs {
   Fl_Fontsize _labelsize;		// label's font size
   int _margintop;			// -- 
   int _marginleft;			//   |- tree's controllable margins
+#if FLTK_ABI_VERSION >= 10301
   int _marginbottom;			// --
+#endif
   int _openchild_marginbottom;		// extra space below an open child tree
   int _usericonmarginleft;		// space to left of user icon (if any)
   int _labelmarginleft;			// space to left of label
+#if FLTK_ABI_VERSION >= 10301
   int _widgetmarginleft;		// space to left of widget
+#endif
   int _connectorwidth;			// connector width (right of open/close icon)
   int _linespacing;			// vertical space between lines
   // Colors
@@ -124,21 +132,29 @@ class FL_EXPORT Fl_Tree_Prefs {
   Fl_Image *_openimage;			// the 'open' icon [+]
   Fl_Image *_closeimage;		// the 'close' icon [-]
   Fl_Image *_userimage;			// user's own icon
+#if FLTK_ABI_VERSION >= 10304
   Fl_Image *_opendeimage;		// deactivated 'open' icon
   Fl_Image *_closedeimage;		// deactivated 'close' icon
   Fl_Image *_userdeimage;		// deactivated user icon
+#endif
   char _showcollapse;			// 1=show collapse icons, 0=don't
   char _showroot;			// show the root item as part of the tree
   Fl_Tree_Sort   _sortorder;		// none, ascening, descending, etc.
   Fl_Boxtype     _selectbox;		// selection box type
   Fl_Tree_Select _selectmode;		// selection mode
+#if FLTK_ABI_VERSION >= 10301
   Fl_Tree_Item_Reselect_Mode _itemreselectmode;	// controls item selection callback() behavior
   Fl_Tree_Item_Draw_Mode     _itemdrawmode;	// controls how items draw label + widget()
+#endif /*FLTK_ABI_VERSION*/
+#if FLTK_ABI_VERSION >= 10303
   Fl_Tree_Item_Draw_Callback *_itemdrawcallback;	// callback to handle drawing items (0=none)
   void                       *_itemdrawuserdata;	// data for drawing items (0=none)
+#endif
 public:
   Fl_Tree_Prefs();
+#if FLTK_ABI_VERSION >= 10304
   ~Fl_Tree_Prefs();
+#endif
   
   ////////////////////////////
   // Labels
@@ -155,6 +171,7 @@ public:
   inline Fl_Color item_labelfgcolor() const { return(_labelfgcolor); }
   /// Set the default label foreground color
   inline void item_labelfgcolor(Fl_Color val) { _labelfgcolor = val; }
+#if FLTK_ABI_VERSION >= 10301
   /// Get the default label background color.
   ///    This returns the Fl_Tree::color() unless item_labelbgcolor()
   ///    has been set explicitly.
@@ -168,6 +185,16 @@ public:
   inline void item_labelbgcolor(Fl_Color val) {
     _labelbgcolor = val;
   }
+#else /*FLTK_ABI_VERSION*/
+  /// Get the default label background color
+  inline Fl_Color item_labelbgcolor() const {
+    return(_labelbgcolor);
+  }
+  /// Set the default label background color
+  inline void item_labelbgcolor(Fl_Color val) {
+    _labelbgcolor = val;
+  }
+#endif /*FLTK_ABI_VERSION*/
 
   /////////////////
   // Obsolete names - for 1.3.0 backwards compat
@@ -208,6 +235,7 @@ public:
   inline void margintop(int val) {
     _margintop = val;
   }
+#if FLTK_ABI_VERSION >= 10301
   /// Get the bottom margin's value in pixels.
   /// This is the extra distance the vertical scroller lets you travel.
   inline int marginbottom() const {
@@ -218,6 +246,7 @@ public:
   inline void marginbottom(int val) {
     _marginbottom = val;
   }
+#endif /*FLTK_ABI_VERSION*/
   /// Get the margin below an open child in pixels
   inline int openchild_marginbottom() const {
     return(_openchild_marginbottom);
@@ -242,6 +271,7 @@ public:
   inline void labelmarginleft(int val) {
     _labelmarginleft = val;
   }
+#if FLTK_ABI_VERSION >= 10301
   /// Get the widget()'s left margin value in pixels
   inline int widgetmarginleft() const {
     return(_widgetmarginleft);
@@ -250,6 +280,7 @@ public:
   inline void widgetmarginleft(int val) {
     _widgetmarginleft = val;
   }
+#endif /*FLTK_ABI_VERSION*/
   /// Get the line spacing value in pixels
   inline int linespacing() const {
     return(_linespacing);
@@ -317,6 +348,7 @@ public:
   ///
   inline void usericon(Fl_Image *val) {
     _userimage = val;
+#if FLTK_ABI_VERSION >= 10304
     // Update deactivated version of icon..
     if ( _userdeimage ) delete _userdeimage;
     if ( _userimage ) {
@@ -325,8 +357,10 @@ public:
     } else {
       _userdeimage = 0;
     }
+#endif
   }
 
+#if FLTK_ABI_VERSION >= 10304
   /// Return the deactivated version of the open icon, if any.
   /// Returns 0 if none.
   inline Fl_Image *opendeicon() const {
@@ -342,6 +376,7 @@ public:
   inline Fl_Image *userdeicon() const {
     return _userdeimage;
   }
+#endif
   
   ////////////////////////////
   // Options
@@ -403,6 +438,7 @@ public:
   inline void selectmode(Fl_Tree_Select val) {
     _selectmode = val;
   }
+#if FLTK_ABI_VERSION >= 10301
   /// Returns the current item re/selection mode
   Fl_Tree_Item_Reselect_Mode item_reselect_mode() const {
     return _itemreselectmode;
@@ -423,6 +459,8 @@ public:
   inline void item_draw_mode(Fl_Tree_Item_Draw_Mode val) {
     _itemdrawmode = val;
   }
+#endif
+#if FLTK_ABI_VERSION >= 10303
   void item_draw_callback(Fl_Tree_Item_Draw_Callback *cb, void *data=0) {
     _itemdrawcallback = cb;
     _itemdrawuserdata = data;
@@ -436,10 +474,11 @@ public:
   void do_item_draw_callback(Fl_Tree_Item *o) const {
     _itemdrawcallback(o, _itemdrawuserdata);
   }
+#endif
 };
 
 #endif /*FL_TREE_PREFS_H*/
 
 //
-// End of "$Id: Fl_Tree_Prefs.H 11679 2016-04-23 04:30:39Z manolo $".
+// End of "$Id: Fl_Tree_Prefs.H 10723 2015-04-28 19:39:53Z greg.ercolano $".
 //

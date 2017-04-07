@@ -1,5 +1,5 @@
 //
-// "$Id: unittest_schemes.cxx 12172 2017-02-11 16:39:19Z AlbrechtS $"
+// "$Id: unittest_schemes.cxx 11807 2016-07-14 18:12:46Z greg.ercolano $"
 //
 // Unit tests for the Fast Light Tool Kit (FLTK).
 //
@@ -42,7 +42,6 @@
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Check_Button.H>
-#include <FL/Fl_Radio_Round_Button.H>
 
 class SchemesTest : public Fl_Group {
   Fl_Choice *schemechoice;
@@ -199,25 +198,6 @@ public:
 	  } // Fl_File_Input* o
 	  o->end();
 	} // Fl_Group* o
-	{ Fl_Group* o = new Fl_Group(15, 140, 310, 190, "tab4");
-	  //o->box(FL_THIN_UP_BOX);
-	  o->color(FL_DARK1);
-	  o->hide();
-	  { Fl_Radio_Round_Button* o = new Fl_Radio_Round_Button(40, 160, 120, 25, "Choice 1");
-	    o->tooltip("Fl_Radio_Round_Button");
-	    o->value(1); // selected
-	  } // Fl_Radio_Round_Button* o
-	  { Fl_Radio_Round_Button* o = new Fl_Radio_Round_Button(40, 190, 120, 25, "Choice 2");
-	    o->tooltip("Fl_Radio_Round_Button");
-	  } // Fl_Radio_Round_Button* o
-	  { Fl_Radio_Round_Button* o = new Fl_Radio_Round_Button(40, 220, 120, 25, "Choice 3");
-	    o->tooltip("Fl_Radio_Round_Button");
-	  } // Fl_Radio_Round_Button* o
-	  { Fl_Radio_Round_Button* o = new Fl_Radio_Round_Button(40, 250, 120, 25, "Choice 4");
-	    o->tooltip("Fl_Radio_Round_Button");
-	  } // Fl_Radio_Round_Button* o
-	  o->end();
-	} // Fl_Group* o
 	o->end();
       } // Fl_Tabs* o
       { Fl_Box* o = new Fl_Box(341, 10, 80, 50, "thin box\ndown1");
@@ -323,5 +303,5 @@ public:
 UnitTest schemestest("schemes test", SchemesTest::create);
 
 //
-// End of "$Id: unittest_schemes.cxx 12172 2017-02-11 16:39:19Z AlbrechtS $
+// End of "$Id: unittest_schemes.cxx 11807 2016-07-14 18:12:46Z greg.ercolano $
 //

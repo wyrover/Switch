@@ -1,15 +1,37 @@
-FLTK 1.4 is based on the final release of FLTK 1.3.4.
+The initial FLTK 1.3.0 is based on the final 1.1.10.
 
-Technically the branch was forked earlier, but all changes in FLTK 1.3.4
-have also been (modified and) committed in branch-1.3-porting, which is
-the base of branch-1.4.
+  It adds internationalization, UTF-8 (Unicode), printing support,
+  Doxygen based documentation, and several new widgets including
+  Fl_Native_File_Chooser, Fl_Table, and Fl_Tree.
 
-FLTK 1.4 is intended to be mostly API compatible with FLTK 1.3.4 so
-you don't need to change source code when you switch to FLTK 1.4.
+FLTK 1.3.4 and previous versions contain many improvements and bug fixes.
 
-However, the platform dependent code in FLTK 1.4 was rewritten to enable
-better porting to new platforms. Basically all platform dependent code
-has been isolated and implemented in virtual methods of "driver" classes.
-See src/drivers and subdirectories.
+  Please see CHANGES for a list of changes in FLTK 1.3.0 to 1.3.4.
 
-More to come ...
+  Even though FLTK 1.3.4 does not fix all STRs, we decided to release
+  FLTK 1.3.4 as it contains many new features, bug fixes, and adaptations
+  to new compiler releases.
+
+  Open bugs and feature requests can be viewed (offline) in KNOWN_BUGS.html
+  with your browser. Links in this file direct you to the current state
+  (online) of all listed bugs and feature requests.
+
+  Note: This file is a snapshot of http://www.fltk.org/roadmap.php at the
+  date of this release (Nov. 11, 2016). Please take into account that some
+  bugs and/or feature requests in this list might have been fixed without
+  notice.
+
+FLTK 1.3.4 is expected to be the last release in the 1.3.x series.
+
+  All currently open STR's for 1.3.x will be fixed in FLTK 1.4.x, if possible.
+
+--------------------------------------------------------------------------------
+
+Note to svn (subversion) users: This branch (branch-1.3) is end of life
+since the release of FLTK 1.3.4. Only very serious bug fixes will be
+available if FLTK 1.4.0 is not yet released or not (yet) stable enough.
+
+The new development branch is now branch-1.4 -- please checkout a new,
+clean working copy if you want to get branch-1.4.
+
+--------------------------------------------------------------------------------

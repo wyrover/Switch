@@ -1,5 +1,5 @@
 //
-// "$Id: Fl_Shared_Image.cxx 12062 2016-10-30 19:56:27Z manolo $"
+// "$Id: Fl_Shared_Image.cxx 12002 2016-10-01 22:35:37Z AlbrechtS $"
 //
 // Shared image code for the Fast Light Tool Kit (FLTK).
 //
@@ -123,7 +123,9 @@ Fl_Shared_Image::Fl_Shared_Image() : Fl_Image(0,0,0) {
   original_    = 0;
   image_       = 0;
   alloc_image_ = 0;
+#if FLTK_ABI_VERSION >= 10304
   scaled_image_= 0;
+#endif
 }
 
 
@@ -144,7 +146,9 @@ Fl_Shared_Image::Fl_Shared_Image(const char *n,		// I - Filename
   image_       = img;
   alloc_image_ = !img;
   original_    = 1;
+#if FLTK_ABI_VERSION >= 10304
   scaled_image_= 0;
+#endif
 
   if (!img) reload();
   else update();
@@ -211,7 +215,9 @@ Fl_Shared_Image::update() {
 Fl_Shared_Image::~Fl_Shared_Image() {
   if (name_) delete[] (char *)name_;
   if (alloc_image_) delete image_;
+#if FLTK_ABI_VERSION >= 10304
   delete scaled_image_;
+#endif
 }
 
 
@@ -362,37 +368,39 @@ Fl_Shared_Image::desaturate() {
 // 'Fl_Shared_Image::draw()' - Draw a shared image...
 //
 void Fl_Shared_Image::draw(int X, int Y, int W, int H, int cx, int cy) {
+#if FLTK_ABI_VERSION >= 10304
   if (!image_) {
     Fl_Image::draw(X, Y, W, H, cx, cy);
     return;
   }
-  fl_push_clip(X, Y, W, H);
-  fl_graphics_driver->draw(this, X-cx, Y-cy);
-  fl_pop_clip();
-}
-
-/** Draws the shared image to the current surface with its top-left at X,Y */
-void Fl_Graphics_Driver::draw(Fl_Shared_Image *shared, int X, int Y) {
-  if ( shared->w() == shared->image_->w() && shared->h() == shared->image_->h()) {
-    shared->image_->draw(X, Y, shared->w(), shared->h(), 0, 0);
+  if (w() == image_->w() && h() == image_->h()) {
+    image_->draw(X, Y, W, H, cx, cy);
     return;
   }
+  fl_push_clip(X, Y, W, H);
+  int done = 0;
   // don't call Fl_Graphics_Driver::draw_scaled(Fl_Image*,...) for an enlarged Fl_Bitmap or Fl_Pixmap
-  if (shared->image_->as_rgb_image() || (shared->w() <= shared->image_->w() && shared->h() <= shared->image_->h())) {
-    int done = fl_graphics_driver->draw_scaled(shared->image_, X, Y, shared->w(), shared->h());
-    if (done) return;
+  if ((d() != 0 && count() < 2) || (w() <= image_->w() && h() <= image_->h())) {
+    done = fl_graphics_driver->draw_scaled(image_, X-cx, Y-cy, w(), h());
   }
-  if (shared->scaled_image_ && (shared->scaled_image_->w() != shared->w() || shared->scaled_image_->h() != shared->h())) {
-    delete shared->scaled_image_;
-    shared->scaled_image_ = NULL;
+  if (!done) {
+    if (scaled_image_ && (scaled_image_->w() != w() || scaled_image_->h() != h())) {
+      delete scaled_image_;
+      scaled_image_ = NULL;
+    }
+    if (!scaled_image_) {
+      Fl_RGB_Scaling previous = RGB_scaling();
+      RGB_scaling(scaling_algorithm_); // useless but no harm if image_ is not an Fl_RGB_Image
+      scaled_image_ = image_->copy(w(), h());
+      RGB_scaling(previous);
+    }
+    scaled_image_->draw(X-cx, Y-cy, scaled_image_->w(), scaled_image_->h(), 0, 0);
   }
-  if (!shared->scaled_image_) {
-    Fl_RGB_Scaling previous = Fl_Shared_Image::RGB_scaling();
-    Fl_Shared_Image::RGB_scaling(shared->scaling_algorithm_); // useless but no harm if image_ is not an Fl_RGB_Image
-    shared->scaled_image_ = shared->image_->copy(shared->w(), shared->h());
-    Fl_Shared_Image::RGB_scaling(previous);
-  }
-  shared->scaled_image_->draw(X, Y, shared->scaled_image_->w(), shared->scaled_image_->h(), 0, 0);
+  fl_pop_clip();
+#else
+  if (image_) image_->draw(X, Y, W, H, cx, cy);
+  else Fl_Image::draw(X, Y, W, H, cx, cy);
+#endif // FLTK_ABI_VERSION
 }
 
 /** Sets the drawing size of the shared image.
@@ -407,7 +415,7 @@ void Fl_Graphics_Driver::draw(Fl_Shared_Image *shared, int X, int Y) {
  \param proportional   if not null, keep the width and height of the shared image proportional to those of its original image
  \param can_expand  if null, the width and height of the shared image will not exceed those of the original image
 
- \version 1.3.4
+ \version 1.3.4 and requires compiling with FLTK_ABI_VERSION = 10304
 
  Example code: scale an image to fit in a box
  \code
@@ -420,6 +428,7 @@ void Fl_Graphics_Driver::draw(Fl_Shared_Image *shared, int X, int Y) {
  */
 void Fl_Shared_Image::scale(int width, int height, int proportional, int can_expand)
 {
+#if FLTK_ABI_VERSION >= 10304
   w(width);
   h(height);
   if (!image_) return;
@@ -435,6 +444,7 @@ void Fl_Shared_Image::scale(int width, int height, int proportional, int can_exp
   }
   w(int(image_->w() / fw));
   h(int(image_->h() / fh));
+#endif
 }
 
 
@@ -623,5 +633,5 @@ void Fl_Shared_Image::remove_handler(Fl_Shared_Handler f) {
 
 
 //
-// End of "$Id: Fl_Shared_Image.cxx 12062 2016-10-30 19:56:27Z manolo $".
+// End of "$Id: Fl_Shared_Image.cxx 12002 2016-10-01 22:35:37Z AlbrechtS $".
 //

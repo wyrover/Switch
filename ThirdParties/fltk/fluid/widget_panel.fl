@@ -1,9 +1,9 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0400
+version 1.0304
 header_name {.h}
 code_name {.cxx}
 comment {//
-// "$Id: widget_panel.fl 11956 2016-09-20 13:31:38Z AlbrechtS $"
+// "$Id: widget_panel.fl 11952 2016-09-20 12:57:18Z AlbrechtS $"
 //
 // Widget panel for the Fast Light Tool Kit (FLTK).
 //
@@ -702,6 +702,6 @@ wCallback->do_callback(wCallback, v);} open
 
 comment {
 //
-// End of "$Id: widget_panel.fl 11956 2016-09-20 13:31:38Z AlbrechtS $".
+// End of "$Id: widget_panel.fl 11952 2016-09-20 12:57:18Z AlbrechtS $".
 //} {in_source in_header
 }

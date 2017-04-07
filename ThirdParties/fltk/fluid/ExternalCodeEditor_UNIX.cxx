@@ -1,9 +1,9 @@
 //
-// "$Id: ExternalCodeEditor_UNIX.cxx 12173 2017-02-15 20:28:13Z AlbrechtS $".
+// "$Id: ExternalCodeEditor_UNIX.cxx 11878 2016-08-16 20:42:22Z greg.ercolano $".
 //
-//	External code editor management class for Unix
+//       External code editor management class for Unix
 //
-//	Note: This entire file Unix only
+#ifndef WIN32           /* This entire file unix only */
 
 #include <errno.h>      /* errno */
 #include <string.h>     /* strerror() */
@@ -459,6 +459,7 @@ int ExternalCodeEditor::editors_open() {
   return L_editors_open;
 }
 
+#endif /* !WIN32 */
 //
-// End of "$Id: ExternalCodeEditor_UNIX.cxx 12173 2017-02-15 20:28:13Z AlbrechtS $".
+// End of "$Id: ExternalCodeEditor_UNIX.cxx 11878 2016-08-16 20:42:22Z greg.ercolano $".
 //

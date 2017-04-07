@@ -1,9 +1,9 @@
 #
-# "$Id: Makefile 12171 2017-02-08 02:06:52Z AlbrechtS $"
+# "$Id: Makefile 11918 2016-09-03 08:14:43Z manolo $"
 #
 # Test/example program makefile for the Fast Light Tool Kit (FLTK).
 #
-# Copyright 1998-2017 by Bill Spitzak and others.
+# Copyright 1998-2010 by Bill Spitzak and others.
 #
 # This library is free software. Distribution and use rights are outlined in
 # the file "COPYING" which should have been included with this file.  If this
@@ -53,7 +53,7 @@ CPPFILES =\
 	gl_overlay.cxx \
 	glpuzzle.cxx \
 	hello.cxx \
-	help_dialog.cxx \
+	help.cxx \
 	icon.cxx \
 	iconize.cxx \
 	image.cxx \
@@ -126,7 +126,7 @@ ALL =	\
 	fonts$(EXEEXT) \
 	forms$(EXEEXT) \
 	hello$(EXEEXT) \
-	help_dialog$(EXEEXT) \
+	help$(EXEEXT) \
 	icon$(EXEEXT) \
 	iconize$(EXEEXT) \
 	image$(EXEEXT) \
@@ -349,7 +349,7 @@ editor$(EXEEXT): editor.o
 	echo Linking $@...
 	$(CXX) $(ARCHFLAGS) $(CXXFLAGS) $(LDFLAGS) editor.o -o $@ $(LINKFLTKIMG) $(LDLIBS)
 	$(OSX_ONLY) ../fltk-config --post $@
-	$(OSX_ONLY) cp -f editor-Info.plist editor.app/Contents/Info.plist
+	$(OSX_ONLY) cp -f ../ide/Xcode4/plists/editor-Info.plist editor.app/Contents/Info.plist
 
 fast_slow$(EXEEXT): fast_slow.o
 fast_slow.cxx:	fast_slow.fl ../fluid/fluid$(EXEEXT)
@@ -368,12 +368,12 @@ forms$(EXEEXT): forms.o
 
 hello$(EXEEXT): hello.o
 
-help_dialog$(EXEEXT): help_dialog.o $(IMGLIBNAME)
+help$(EXEEXT): help.o $(IMGLIBNAME)
 	echo Linking $@...
-	$(CXX) $(ARCHFLAGS) $(CXXFLAGS) $(LDFLAGS) help_dialog.o -o $@ $(LINKFLTKIMG) $(LDLIBS)
+	$(CXX) $(ARCHFLAGS) $(CXXFLAGS) $(LDFLAGS) help.o -o $@ $(LINKFLTKIMG) $(LDLIBS)
 	$(OSX_ONLY) ../fltk-config --post $@
-	$(OSX_ONLY) mkdir -p help_dialog.app/Contents/Resources
-	$(OSX_ONLY) cp -f help_dialog.html help_dialog.app/Contents/Resources/
+	$(OSX_ONLY) mkdir -p help.app/Contents/Resources
+	$(OSX_ONLY) cp -f help-test.html help.app/Contents/Resources/
 
 icon$(EXEEXT): icon.o
 
@@ -546,5 +546,5 @@ cairo_test$(EXEEXT): cairo_test.o
 	$(OSX_ONLY) ../fltk-config --post $@
 
 #
-# End of "$Id: Makefile 12171 2017-02-08 02:06:52Z AlbrechtS $".
+# End of "$Id: Makefile 11918 2016-09-03 08:14:43Z manolo $".
 #

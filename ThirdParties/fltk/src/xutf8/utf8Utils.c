@@ -1,4 +1,4 @@
-/* "$Id: utf8Utils.c 11594 2016-04-13 06:29:37Z manolo $"
+/* "$Id: $"
  *
  * Author: Jean-Marc Lienher ( http://oksid.ch )
  * Copyright 2000-2003 by O'ksi'D.
@@ -14,13 +14,11 @@
  *     http://www.fltk.org/str.php
  */
 
-#include "../config_lib.h"
-
 /*
  * Unicode to UTF-8 conversion functions.
  */
 
-#if defined(FL_CFG_WIN_X11)
+#if !defined(WIN32) && !defined(__APPLE__)
 
 #include "../Xutf8.h"
 
@@ -93,7 +91,7 @@ XConvertUtf8ToUcs(const unsigned char     *buf,
     return 1;
   } 
 
-  *ucs = (unsigned int) '?'; /* bad UTF-8 string */
+  *ucs = (unsigned int) '?'; /* bad utf-8 string */
   return -1;
 }
 
@@ -220,12 +218,12 @@ XFastConvertUtf8ToUcs(const unsigned char     *buf,
     return 1;
   } 
 
-  *ucs = (unsigned int) '?'; /* bad UTF-8 string */
+  *ucs = (unsigned int) '?'; /* bad utf-8 string */
   return -1;
 }
 
-#endif /* FL_CFG_WIN_X11 */
+#endif /* X11 only */
 
 /*
- * End of "$Id: utf8Utils.c 11594 2016-04-13 06:29:37Z manolo $".
+ * End of "$Id: $".
  */

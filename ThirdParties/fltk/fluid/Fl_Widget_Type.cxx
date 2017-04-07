@@ -1,5 +1,5 @@
 //
-// "$Id: Fl_Widget_Type.cxx 11956 2016-09-20 13:31:38Z AlbrechtS $"
+// "$Id: Fl_Widget_Type.cxx 11952 2016-09-20 12:57:18Z AlbrechtS $"
 //
 // Widget type code for the Fast Light Tool Kit (FLTK).
 //
@@ -2901,5 +2901,5 @@ void Fl_Pack_Type::copy_properties()
 }
 
 //
-// End of "$Id: Fl_Widget_Type.cxx 11956 2016-09-20 13:31:38Z AlbrechtS $".
+// End of "$Id: Fl_Widget_Type.cxx 11952 2016-09-20 12:57:18Z AlbrechtS $".
 //

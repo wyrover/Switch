@@ -1,5 +1,5 @@
 //
-// "$Id: Fl_Input.H 11544 2016-04-06 19:39:15Z manolo $"
+// "$Id: Fl_Input.H 8864 2011-07-19 04:49:30Z greg.ercolano $"
 //
 // Input header file for the Fast Light Tool Kit (FLTK).
 //
@@ -219,8 +219,6 @@
   </TD></TR></TABLE>
   */
 class FL_EXPORT Fl_Input : public Fl_Input_ {
-  friend class Fl_Screen_Driver;
-  friend class Fl_Cocoa_Screen_Driver; // Not ideal, but probably no other platform will use it
   int handle_key();
   int shift_position(int p);
   int shift_up_down_position(int p);
@@ -266,5 +264,5 @@ public:
 #endif 
 
 //
-// End of "$Id: Fl_Input.H 11544 2016-04-06 19:39:15Z manolo $".
+// End of "$Id: Fl_Input.H 8864 2011-07-19 04:49:30Z greg.ercolano $".
 //

@@ -1,9 +1,9 @@
 //
-// "$Id: colbrowser.cxx 11739 2016-05-15 14:06:01Z manolo $"
+// "$Id: colbrowser.cxx 11917 2016-09-03 07:45:31Z manolo $"
 //
 // X Color Browser demo program for the Fast Light Tool Kit (FLTK).
 //
-// Copyright 1998-2016 by Bill Spitzak and others.
+// Copyright 1998-2010 by Bill Spitzak and others.
 //
 // This library is free software. Distribution and use rights are outlined in
 // the file "COPYING" which should have been included with this file.  If this
@@ -63,7 +63,7 @@ int main(int argc, char *argv[])
   create_form_cl();
   
 #ifdef __APPLE__
-  // Bundled apps do not set the current directory
+  // search for rgb.txt within the bundle
   strcpy(dbname, argv[0]);
   char *slash = strrchr(dbname, '/');
   if (slash)
@@ -147,11 +147,15 @@ static int load_browser(char *fname)
   RGBdb *db = rgbdb, *dbs = db + MAX_RGB;
   int r, g, b,  lr  = -1 , lg = -1, lb = -1;
   char name[256], buf[256];
-
-  if (!(fp = fl_fopen(fname, "r"))) {
-    fl_alert("%s\n%s\n%s","Load", fname, "Can't open");
-    return 0;
-  }
+#ifdef __EMX__
+  if (!(fp = fl_fopen(__XOS2RedirRoot(fname), "r")))
+#else
+    if (!(fp = fl_fopen(fname, "r")))
+#endif
+    {
+      fl_alert("%s\n%s\n%s","Load", fname, "Can't open");
+      return 0;
+    }
   
   /* read the items */
   
@@ -332,5 +336,5 @@ static void create_form_cl(void)
 }
 
 //
-// End of "$Id: colbrowser.cxx 11739 2016-05-15 14:06:01Z manolo $".
+// End of "$Id: colbrowser.cxx 11917 2016-09-03 07:45:31Z manolo $".
 //

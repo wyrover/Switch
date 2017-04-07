@@ -1,5 +1,5 @@
 //
-// "$Id: Fl_Scroll.H 11692 2016-04-24 19:39:27Z manolo $"
+// "$Id: Fl_Scroll.H 10799 2015-07-18 23:59:54Z AlbrechtS $"
 //
 // Scroll header file for the Fast Light Tool Kit (FLTK).
 //
@@ -94,12 +94,16 @@ class FL_EXPORT Fl_Scroll : public Fl_Group {
   void fix_scrollbar_order();
   static void draw_clip(void*,int,int,int,int);
 
-protected:	//  (STR#1895)
+#if FLTK_ABI_VERSION >= 10303
+protected:	// NEW (STR#1895)
+#else
+private:	// OLD
+#endif
   /**
     Structure to manage scrollbar and widget interior sizes.
     This is filled out by recalc_scrollbars() for use in calculations
     that need to know the visible scroll area size, etc.
-    \version 1.3.3
+    \note Availability in FLTK_ABI_VERSION 10303 or higher.
   */
   typedef struct {
     /// A local struct to manage a region defined by xywh
@@ -201,5 +205,5 @@ public:
 #endif
 
 //
-// End of "$Id: Fl_Scroll.H 11692 2016-04-24 19:39:27Z manolo $".
+// End of "$Id: Fl_Scroll.H 10799 2015-07-18 23:59:54Z AlbrechtS $".
 //

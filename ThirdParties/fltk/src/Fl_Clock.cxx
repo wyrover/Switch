@@ -1,9 +1,9 @@
 //
-// "$Id: Fl_Clock.cxx 12188 2017-03-07 17:04:31Z manolo $"
+// "$Id: Fl_Clock.cxx 11849 2016-07-29 09:23:44Z AlbrechtS $"
 //
 // Clock widget for the Fast Light Tool Kit (FLTK).
 //
-// Copyright 1998-2017 by Bill Spitzak and others.
+// Copyright 1998-2010 by Bill Spitzak and others.
 //
 // This library is free software. Distribution and use rights are outlined in
 // the file "COPYING" which should have been included with this file.  If this
@@ -19,10 +19,12 @@
 #include <FL/Fl.H>
 #include <FL/Fl_Clock.H>
 #include <FL/Fl_Round_Clock.H>
-#include <FL/Fl_System_Driver.H>
 #include <FL/fl_draw.H>
 #include <math.h>
 #include <time.h>
+#ifndef WIN32
+#  include <sys/time.h>
+#endif /* !WIN32 */
 
 // Original clock display written by Paul Haeberli at SGI.
 // Modifications by Mark Overmars for Forms
@@ -184,11 +186,8 @@ Fl_Clock::Fl_Clock(uchar t, int X, int Y, int W, int H, const char *L)
 }
 
 static void tick(void *v) {
-  time_t sec;
-  int usec;
-  Fl::system_driver()->gettime(&sec, &usec);
-  ((Fl_Clock*)v)->value((ulong)sec);
-  Fl::add_timeout((1000000 - usec)/1000000., tick, v); // time till next second
+  ((Fl_Clock*)v)->value((ulong) time(0));
+  Fl::add_timeout(1.0, tick, v);
 }
 
 int Fl_Clock::handle(int event) {
@@ -220,5 +219,5 @@ Fl_Round_Clock::Fl_Round_Clock(int X,int Y,int W,int H, const char *L)
 
 
 //
-// End of "$Id: Fl_Clock.cxx 12188 2017-03-07 17:04:31Z manolo $".
+// End of "$Id: Fl_Clock.cxx 11849 2016-07-29 09:23:44Z AlbrechtS $".
 //

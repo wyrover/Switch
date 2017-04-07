@@ -1,5 +1,5 @@
 //
-// "$Id: table-spreadsheet.cxx 11428 2016-03-26 02:55:14Z AlbrechtS $"
+// "$Id: table-spreadsheet.cxx 10835 2015-08-19 21:38:17Z greg.ercolano $"
 //
 //	Simple example of an interactive spreadsheet using Fl_Table.
 //	Uses Mr. Satan's technique of instancing an Fl_Input around.
@@ -250,7 +250,9 @@ void Spreadsheet::event_callback2() {
 int main() {
   Fl_Double_Window *win = new Fl_Double_Window(862, 322, "Fl_Table Spreadsheet");
   Spreadsheet *table = new Spreadsheet(10, 10, win->w()-20, win->h()-20);
+#if FLTK_ABI_VERSION >= 10303
   table->tab_cell_nav(1);		// enable tab navigation of table cells (instead of fltk widgets)
+#endif
   table->tooltip("Use keyboard to navigate cells:\n"
                  "Arrow keys or Tab/Shift-Tab");
   // Table rows
@@ -273,5 +275,5 @@ int main() {
 }
 
 //
-// End of "$Id: table-spreadsheet.cxx 11428 2016-03-26 02:55:14Z AlbrechtS $".
+// End of "$Id: table-spreadsheet.cxx 10835 2015-08-19 21:38:17Z greg.ercolano $".
 //

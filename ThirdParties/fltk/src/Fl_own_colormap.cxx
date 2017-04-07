@@ -1,5 +1,5 @@
 //
-// "$Id: Fl_own_colormap.cxx 11829 2016-07-20 01:05:58Z greg.ercolano $"
+// "$Id: Fl_own_colormap.cxx 11757 2016-05-28 15:39:05Z greg.ercolano $"
 //
 // Private colormap support for the Fast Light Tool Kit (FLTK).
 //
@@ -24,17 +24,31 @@
 // and copy the first 16 colors from the default colormap so that we won't
 // get huge color changes when switching windows.
 
-#include "config_lib.h"
+#include <config.h>
 #include <FL/Fl.H>
 #include <FL/x.H>
-#include <FL/Fl_System_Driver.H>
 
+/** \fn Fl::own_colormap()
+    Makes FLTK use its <a href="fltk-colormap.png">own colormap</a>. This may make FLTK display better
+    and will reduce conflicts with other programs that want lots of colors.
+    However the colors may flash as you move the cursor between windows.
+    
+    <P>This does nothing if the current visual is not colormapped.
+*/
+#ifdef WIN32
+// There is probably something relevant to do on MSWindows 8-bit displays
+// but I don't know what it is
 
-#if defined(FL_CFG_WIN_X11) && !defined(FL_DOXYGEN)
+void Fl::own_colormap() {}
+
+#elif defined(__APPLE__)
+// MacOS X always provides a TrueColor interface...
+
+void Fl::own_colormap() {}
+#else
 // X version
-#include "drivers/X11/Fl_X11_System_Driver.H"
 
-void Fl_X11_System_Driver::own_colormap() {
+void Fl::own_colormap() {
   fl_open_display();
 #if USE_COLORMAP
   switch (fl_visual->c_class) {
@@ -57,22 +71,11 @@ void Fl_X11_System_Driver::own_colormap() {
   // Copy those first 16 colors to our own colormap:
   for (i = 0; i < 16; i ++)
     XAllocColor(fl_display, fl_colormap, colors + i);
-#endif // USE_COLORMAP
+#endif
 }
 
-#endif // FL_CFG_WIN_X11
-
-/** \fn Fl::own_colormap()
- Makes FLTK use its <a href="fltk-colormap.png">own colormap</a>.  This may make FLTK display better
- and will reduce conflicts with other programs that want lots of colors.
- However the colors may flash as you move the cursor between windows.
- 
- <P>This does nothing if the current visual is not colormapped.
- */
-void Fl::own_colormap() {
-  Fl::system_driver()->own_colormap();
-}
+#endif
 
 //
-// End of "$Id: Fl_own_colormap.cxx 11829 2016-07-20 01:05:58Z greg.ercolano $".
+// End of "$Id: Fl_own_colormap.cxx 11757 2016-05-28 15:39:05Z greg.ercolano $".
 //

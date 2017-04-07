@@ -1,4 +1,4 @@
-/* "$Id: utf8Input.c 11560 2016-04-09 10:42:17Z AlbrechtS $"
+/* "$Id: $"
  *
  * Author: Jean-Marc Lienher ( http://oksid.ch )
  * Copyright 2000-2003 by O'ksi'D.
@@ -14,10 +14,9 @@
  *     http://www.fltk.org/str.php
  */
 
+#if !defined(WIN32) && !defined(__APPLE__)
+
 #include <config.h>
-
-#if defined(USE_X11)
-
 #include "../Xutf8.h"
 #include <X11/X.h>
 #include <X11/Xlib.h>
@@ -449,10 +448,10 @@ XUtf8LookupString(XIC                 ic,
   }
   return len;
 }
-#endif /* X11 has UTF-8 */
+#endif /* X11 has utf-8 */
 
 #endif /* X11 only */
 
 /*
- * End of "$Id: utf8Input.c 11560 2016-04-09 10:42:17Z AlbrechtS $".
+ * End of "$Id$".
  */

@@ -1,5 +1,5 @@
 //
-// "$Id: tile.cxx 11727 2016-05-09 11:29:59Z AlbrechtS $"
+// "$Id: tile.cxx 11726 2016-05-09 11:25:57Z AlbrechtS $"
 //
 // Fl_Tile test program for the Fast Light Tool Kit (FLTK).
 //
@@ -93,5 +93,5 @@ int main(int argc, char** argv) {
 }
 
 //
-// End of "$Id: tile.cxx 11727 2016-05-09 11:29:59Z AlbrechtS $".
+// End of "$Id: tile.cxx 11726 2016-05-09 11:25:57Z AlbrechtS $".
 //

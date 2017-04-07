@@ -1,5 +1,5 @@
 //
-// "$Id: fractals.cxx 11590 2016-04-12 17:53:18Z AlbrechtS $"
+// "$Id: fractals.cxx 11096 2016-01-31 04:28:04Z AlbrechtS $"
 //
 // Fractal drawing demo for the Fast Light Tool Kit (FLTK).
 //
@@ -67,7 +67,7 @@ int main(int, char**) {
 
 #include "fracviewer.h"
 
-#if defined(WIN32)
+#if defined(WIN32) || defined(__EMX__)
 #  define drand48() (((float) rand())/((float) RAND_MAX))
 #  define srand48(x) (srand((x)))
 #elif defined __APPLE__
@@ -827,5 +827,5 @@ int main(int argc, char** argv)
 #endif
 
 //
-// End of "$Id: fractals.cxx 11590 2016-04-12 17:53:18Z AlbrechtS $".
+// End of "$Id: fractals.cxx 11096 2016-01-31 04:28:04Z AlbrechtS $".
 //

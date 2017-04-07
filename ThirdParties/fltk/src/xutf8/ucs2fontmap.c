@@ -1,4 +1,4 @@
-/* "$Id: ucs2fontmap.c 11531 2016-04-05 15:08:21Z manolo $"
+/* "$Id: $"
  *
  * Author: Jean-Marc Lienher ( http://oksid.ch )
  * Copyright 2000-2003 by O'ksi'D.
@@ -366,5 +366,5 @@ static int encoding_number(const char *enc) {
 }
 
 /*
- * End of "$Id: ucs2fontmap.c 11531 2016-04-05 15:08:21Z manolo $".
+ * End of "$Id$".
  */

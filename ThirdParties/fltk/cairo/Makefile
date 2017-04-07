@@ -1,5 +1,5 @@
 #
-# "$Id: Makefile 12196 2017-03-13 23:31:38Z AlbrechtS $"
+# "$Id: Makefile 5667 2007-02-07 02:35:44Z mike $"
 #
 # CAIRO library makefile for the Fast Light Toolkit (FLTK).
 #
@@ -170,5 +170,5 @@ depend: $(CAIROCPPFILES)
 include makedepend
 
 #
-# End of "$Id: Makefile 12196 2017-03-13 23:31:38Z AlbrechtS $".
+# End of "$Id: Makefile 5667 2007-02-07 02:35:44Z mike $".
 #

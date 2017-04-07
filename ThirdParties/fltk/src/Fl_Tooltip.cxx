@@ -1,5 +1,5 @@
 //
-// "$Id: Fl_Tooltip.cxx 11565 2016-04-09 15:37:40Z manolo $"
+// "$Id: Fl_Tooltip.cxx 10850 2015-09-01 14:27:45Z AlbrechtS $"
 //
 // Tooltip source file for the Fast Light Tool Kit (FLTK).
 //
@@ -19,8 +19,6 @@
 #include <FL/Fl_Tooltip.H>
 #include <FL/fl_draw.H>
 #include <FL/Fl_Menu_Window.H>
-#include <FL/Fl.H>
-#include <FL/Fl_System_Driver.H>
 
 #include <stdio.h>
 #include <string.h>	// strdup()
@@ -33,9 +31,11 @@ Fl_Color	Fl_Tooltip::color_ = fl_color_cube(FL_NUM_RED - 1,
 Fl_Color	Fl_Tooltip::textcolor_ = FL_BLACK;
 Fl_Font         Fl_Tooltip::font_ = FL_HELVETICA;
 Fl_Fontsize     Fl_Tooltip::size_ = -1;
+#if FLTK_ABI_VERSION >= 10301
 int		Fl_Tooltip::margin_width_  = 3;
 int		Fl_Tooltip::margin_height_ = 3;
 int		Fl_Tooltip::wrap_width_    = 400;
+#endif
 
 static const char* tip;
 
@@ -75,10 +75,13 @@ Fl_Widget* Fl_Tooltip::widget_ = 0;
 static Fl_TooltipBox *window = 0;
 static int Y,H;
 
+#ifdef __APPLE__
+// returns the unique tooltip window
 Fl_Window *Fl_Tooltip::current_window(void)
 {
   return (Fl_Window*)window;
 }
+#endif
 
 void Fl_TooltipBox::layout() {
   fl_font(Fl_Tooltip::font(), Fl_Tooltip::size());
@@ -153,8 +156,9 @@ static void tooltip_timeout(void*) {
       if (window) window->hide();
     } else {
       int condition = 1;
-// bugfix: no need to refactor
-      if (Fl::system_driver()->use_tooltip_timeout_condition()) condition = (Fl::grab() == NULL);
+#if !(defined(__APPLE__) || defined(WIN32))
+      condition = (Fl::grab() == NULL);
+#endif
       if ( condition ) {
 	if (!window) window = new Fl_TooltipBox;
 	// this cast bypasses the normal Fl_Window label() code:
@@ -288,9 +292,12 @@ void Fl_Tooltip::enter_area(Fl_Widget* wid, int x,int y,int w,int h, const char*
   if (recent_tooltip) {
     if (window) window->hide();
     Fl::add_timeout(Fl_Tooltip::hoverdelay(), tooltip_timeout);
+  } else if (Fl_Tooltip::delay() < .1) {
+#ifdef WIN32
     // possible fix for the Windows titlebar, it seems to want the
     // window to be destroyed, moving it messes up the parenting:
-    if (Fl::system_driver()->use_recent_tooltip_fix() && window && window->visible()) window->hide();
+    if (window && window->visible()) window->hide();
+#endif // WIN32
     tooltip_timeout(0);
   } else {
     if (window && window->visible()) window->hide();
@@ -368,5 +375,5 @@ void Fl_Widget::copy_tooltip(const char *text) {
 }
 
 //
-// End of "$Id: Fl_Tooltip.cxx 11565 2016-04-09 15:37:40Z manolo $".
+// End of "$Id: Fl_Tooltip.cxx 10850 2015-09-01 14:27:45Z AlbrechtS $".
 //

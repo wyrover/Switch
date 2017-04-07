@@ -1,5 +1,5 @@
 //
-// "$Id: Fl_Menu_Item.H 11825 2016-07-19 23:50:09Z greg.ercolano $"
+// "$Id: Fl_Menu_Item.H 11786 2016-06-18 00:32:18Z greg.ercolano $"
 //
 // Menu item header file for the Fast Light Tool Kit (FLTK).
 //
@@ -21,7 +21,10 @@
 
 #  include "Fl_Widget.H"
 #  include "Fl_Image.H"
-#  include <FL/platform_types.h> // for FL_COMMAND and FL_CONTROL
+
+#  if defined(__APPLE__) && defined(check)
+#    undef check
+#  endif
 
 // doxygen needs the following line to enable e.g. ::FL_MENU_TOGGLE to link to the enums
 /// @file
@@ -436,5 +439,5 @@ enum {	// back-compatibility enum:
 #endif
 
 //
-// End of "$Id: Fl_Menu_Item.H 11825 2016-07-19 23:50:09Z greg.ercolano $".
+// End of "$Id: Fl_Menu_Item.H 11786 2016-06-18 00:32:18Z greg.ercolano $".
 //

@@ -1,7 +1,7 @@
 dnl -*- sh -*-
 dnl the "configure" script is made from this by running GNU "autoconf"
 dnl
-dnl "$Id: configure.ac 12154 2016-12-23 15:34:39Z AlbrechtS $"
+dnl "$Id: configure.ac 11997 2016-09-30 20:51:45Z AlbrechtS $"
 dnl
 dnl Configuration script for the Fast Light Tool Kit (FLTK).
 dnl
@@ -52,8 +52,8 @@ esac
 
 dnl FLTK library versions...
 FL_MAJOR_VERSION=1
-FL_MINOR_VERSION=4
-FL_PATCH_VERSION=0
+FL_MINOR_VERSION=3
+FL_PATCH_VERSION=4
 FL_DSO_VERSION=${FL_MAJOR_VERSION}.${FL_MINOR_VERSION}
 FL_ABI_VERSION=${FL_MAJOR_VERSION}.${FL_MINOR_VERSION}.0
 FL_VERSION=${FL_MAJOR_VERSION}.${FL_MINOR_VERSION}.${FL_PATCH_VERSION}
@@ -69,7 +69,7 @@ AC_SUBST(ARCHFLAGS)
 AC_SUBST(OPTIM)
 
 dnl FLTK build options to be used in Makefiles (defined in makeinclude)
-BUILD=""
+USEMMFILES="No"
 
 dnl OS-specific pre-tests...
 dnl host_os_gui equals $host_os unless we target Cygwin or Darwin in combination with X11.
@@ -851,7 +851,6 @@ case $host_os_gui in
 	LDFLAGS="-mwindows $LDFLAGS"
 	DSOFLAGS="-mwindows $DSOFLAGS"
 	LIBS="$LIBS -lole32 -luuid -lcomctl32"
-	BUILD="WIN"
 	if test "x$with_optim" = x; then
 	    dnl Avoid -Os optimization on Cygwin/MinGW
 	    with_optim="-O3"
@@ -888,7 +887,7 @@ case $host_os_gui in
     darwin*)
 	AC_DEFINE(__APPLE_QUARTZ__)
 
-	BUILD="OSX"
+	USEMMFILES="Yes"
 
 	# MacOS X uses Cocoa for graphics.
 	LIBS="$LIBS -framework Cocoa"
@@ -947,7 +946,6 @@ case $host_os_gui in
 	LDFLAGS="$X_LIBS $LDFLAGS"
 	DSOFLAGS="$X_LIBS $DSOFLAGS"
 	AC_DEFINE(USE_X11)
-	BUILD="X11"
 	if test "x$x_includes" != x; then
 	    ac_cpp="$ac_cpp -I$x_includes"
 	fi
@@ -992,12 +990,6 @@ case $host_os_gui in
 	    GLDEMOS=""
 	fi
 
-	dnl Check whether print support was disabled...
-	AC_ARG_ENABLE(print,    [  --enable-print          turn on print support (X11 platform) [[default=yes]]])
-	if test x$enable_print = xno; then
-	    AC_DEFINE(FL_NO_PRINT_SUPPORT)
-	fi
-
 	dnl Check for Xinerama support unless disabled...
 	AC_ARG_ENABLE(xinerama, [  --enable-xinerama       turn on Xinerama support [[default=yes]]])
 
@@ -1026,8 +1018,7 @@ case $host_os_gui in
 		    AC_CHECK_LIB(Xft, XftDrawCreate,
 			[AC_DEFINE(USE_XFT)
 			 LIBS="-lXft $LIBS"
-			 BUILD="XFT"
-			 xft_found=yes]))
+			 xft_found=yes] ))
 	    fi
 	fi
 
@@ -1039,41 +1030,6 @@ case $host_os_gui in
 	    if test x$enable_xft = xyes; then
 		AC_MSG_ERROR([Aborting.])
 	    fi
-	fi
-
-	dnl Check for the pango library unless disabled...
-        AC_ARG_ENABLE(pango, [  --enable-pango          turn on Pango support [[default=no]]])
-
-        pango_found=no
-	if test x$enable_pango = xyes; then
-	    case $host_os in
-    		darwin*)
-	    	  CXXFLAGS="-I/sw/include/pango-1.0 -I/sw/include/glib-2.0 -I/sw/lib/glib-2.0/include $CXXFLAGS"
-	    	  PANGOLIBDIR="-L/sw/lib"
-	    	  ;;
-    		linux*)
-	    	  CXXFLAGS="-I/usr/include/pango-1.0 -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include $CXXFLAGS"
-	    	  CXXFLAGS="-I/usr/lib/i386-linux-gnu/glib-2.0/include -I/usr/lib/x86_64-linux-gnu/glib-2.0/include $CXXFLAGS"
-    	    	  ;;
-    	    	freebsd*)
-	    	  CXXFLAGS="-I/usr/local/include/pango-1.0 -I/usr/local/include/glib-2.0 -I/usr/local/lib/glib-2.0/include $CXXFLAGS"
-	    	  ;;
-     	    	netbsd*)
-	    	  CXXFLAGS="-I/usr/pkg/include/pango-1.0 -I/usr/pkg/include/glib-2.0 -I/usr/pkg/lib/glib-2.0/include $CXXFLAGS"
-	    	  CXXFLAGS="-I/usr/pkg/include/glib/glib-2.0 $CXXFLAGS"
-	    	  PANGOLIBDIR="-L/usr/pkg/lib"
-	    	  LDFLAGS="-Wl,-rpath,/usr/pkg/lib $LDFLAGS"
-	    	  ;;
-   	    esac
-	        CPPFLAGS="$PANGOLIBDIR $CXXFLAGS"
-	        AC_CHECK_HEADER(pango/pango.h,
-		  AC_CHECK_HEADER(pango/pangoxft.h,
-		   AC_CHECK_LIB(pango-1.0, pango_layout_new,
-		    AC_CHECK_LIB(pangoxft-1.0, pango_xft_render_layout,
-			AC_DEFINE(USE_PANGO)
-                        pango_found=yes
-			LIBS="$PANGOLIBDIR -lpango-1.0 -lpangoxft-1.0 -lgobject-2.0 $LIBS"))))
-		CPPFLAGS=$CXXFLAGS
 	fi
 
 	dnl Check for the Xdbe extension unless disabled...
@@ -1187,7 +1143,7 @@ AC_SUBST(THREADS)
 AC_SUBST(INSTALL_DESKTOP)
 AC_SUBST(UNINSTALL_DESKTOP)
 
-AC_SUBST(BUILD)
+AC_SUBST(USEMMFILES)
 
 dnl Figure out the appropriate formatted man page extension...
 case "$host_os" in
@@ -1542,9 +1498,6 @@ case $host_os_gui in
 	if test x$xrender_found = xyes; then
 	    graphics="$graphics + Xrender"
 	fi
-        if test x$pango_found = xyes; then
-            graphics="$graphics + pango"
-        fi
 	;;
 esac
 
@@ -1617,5 +1570,5 @@ dnl Make sure the fltk-config script is executable...
 chmod +x fltk-config
 
 dnl
-dnl End of "$Id: configure.ac 12154 2016-12-23 15:34:39Z AlbrechtS $".
+dnl End of "$Id: configure.ac 11997 2016-09-30 20:51:45Z AlbrechtS $".
 dnl

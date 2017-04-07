@@ -1,10 +1,10 @@
 //
-// "$Id: tree-custom-draw-items.cxx 12121 2016-11-19 01:20:53Z AlbrechtS $"
+// "$Id: tree-custom-draw-items.cxx 10071 2014-01-20 21:23:24Z greg.ercolano $"
 //
 //	Demonstrate Fl_Tree custom item draw callback. - erco 11/09/2013
 //
 // Copyright 2013 Greg Ercolano.
-// Copyright 1998-2016 by Bill Spitzak and others.
+// Copyright 1998-2013 by Bill Spitzak and others.
 //
 // This library is free software. Distribution and use rights are outlined in
 // the file "COPYING" which should have been included with this file.  If this
@@ -26,6 +26,7 @@
 #define MAX(a,b) ((a)>(b))?(a):(b)
 #endif
 
+#if FLTK_ABI_VERSION >= 10303
 // DERIVE CUSTOM CLASS FROM Fl_Tree_Item TO IMPLEMENT SHOWING THE TIME OF DAY
 //     This demonstrates that item content can be dynamic and highly customized.
 //
@@ -175,7 +176,16 @@ int main(int argc, char *argv[]) {
   win->show(argc, argv);
   return(Fl::run());
 }
+#else
+#include <FL/Fl.H>
+#include <FL/fl_message.H>
+int main(int, char**) {
+  fl_alert("This demo is dependent on an ABI feature.\n"
+           "FLTK_ABI_VERSION must be set to 10303 (or higher) in Enumerations.H");
+  return 1;
+}
+#endif
 
 //
-// End of "$Id: tree-custom-draw-items.cxx 12121 2016-11-19 01:20:53Z AlbrechtS $".
+// End of "$Id: tree-custom-draw-items.cxx 10071 2014-01-20 21:23:24Z greg.ercolano $".
 //

@@ -1,5 +1,5 @@
 //
-// "$Id: subwindow.cxx 12167 2017-01-26 08:13:19Z manolo $"
+// "$Id: subwindow.cxx 8864 2011-07-19 04:49:30Z greg.ercolano $"
 //
 // Nested window test program for the Fast Light Tool Kit (FLTK).
 //
@@ -94,7 +94,6 @@ int testwindow::handle(int e) {
   if (e == FL_FOCUS) return 1;
   if (e == FL_PUSH) {Fl::focus(this); return 1;}
   if (e == FL_KEYBOARD && Fl::event_text()[0]) {
-    if (Fl::event_key() == FL_Escape || Fl::event_ctrl()) return 0;
     key = Fl::event_text()[0];
     cx = Fl::event_x();
     cy = Fl::event_y();
@@ -179,5 +178,5 @@ int main(int argc, char **argv) {
 }
 
 //
-// End of "$Id: subwindow.cxx 12167 2017-01-26 08:13:19Z manolo $".
+// End of "$Id: subwindow.cxx 8864 2011-07-19 04:49:30Z greg.ercolano $".
 //

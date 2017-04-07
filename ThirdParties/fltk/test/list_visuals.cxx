@@ -1,5 +1,5 @@
 //
-// "$Id: list_visuals.cxx 11262 2016-03-02 00:54:37Z matt $"
+// "$Id: list_visuals.cxx 11094 2016-01-31 02:49:56Z AlbrechtS $"
 //
 // Visual list utility for the Fast Light Tool Kit (FLTK).
 //
@@ -32,10 +32,6 @@ int main(int, char**) {
   fl_alert("Currently, this program works only under X.");
   return 1;
 }
-
-#elif defined(FL_PORTING)
-
-#  pragma message "FL_PORTING: list_visuals"
 
 #else
 
@@ -235,5 +231,5 @@ int main(int argc, char **argv) {
 #endif
 
 //
-// End of "$Id: list_visuals.cxx 11262 2016-03-02 00:54:37Z matt $".
+// End of "$Id: list_visuals.cxx 11094 2016-01-31 02:49:56Z AlbrechtS $".
 //

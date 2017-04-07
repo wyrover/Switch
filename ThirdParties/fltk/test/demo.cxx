@@ -1,5 +1,5 @@
 //
-// "$Id: demo.cxx 11912 2016-08-31 17:01:27Z manolo $"
+// "$Id: demo.cxx 11918 2016-09-03 08:14:43Z manolo $"
 //
 // Main demo program for the Fast Light Tool Kit (FLTK).
 //
@@ -45,18 +45,16 @@
 #include <FL/x.H>
 
 /* Define a macro to decide if a trailing 'd' needs to be removed
-   from the executable file name. Previous versions of Visual Studio
-   added a 'd' to the executable file name ('demod.exe') in Debug
-   configurations that needed to be removed.
-   This is no longer true with CMake-generated IDE's since FLTK 1.4.
+   from the executable file name. Current versions of Visual Studio
+   bundled IDE solutions add a 'd' to the executable file name
+   ('demod.exe') in Debug configurations that needs to be removed.
+   This is no longer true with CMake-generated IDE's starting with
+   FLTK 1.4, but in FLTK 1.3 the OLD behavior is still used.
    The 'old' behavior obviously applied or still applies to
    CodeWarrior (__MWERKS__).
-   *FIXME* is this still true and necessary?
 */
 
-// #if ( defined _MSC_VER || defined __MWERKS__ ) && defined _DEBUG
-
-#if defined(WIN32) && defined(__MWERKS__) && defined(_DEBUG)
+#if ( defined _MSC_VER || defined __MWERKS__ ) && defined _DEBUG
 # define DEBUG_EXE_WITH_D 1
 #else
 # define DEBUG_EXE_WITH_D 0
@@ -298,7 +296,7 @@ void dobut(Fl_Widget *, long arg)
     char command[2048], path[2048], app_path[2048];
     
     // this neat little block of code ensures that the current directory
-    // is set to the location of the Demo application.
+    // is set to the location of the Demo bundled application.
     CFBundleRef app = CFBundleGetMainBundle();
     CFURLRef url = CFBundleCopyBundleURL(app);    
     CFStringRef cc_app_path = CFURLCopyFileSystemPath(url, kCFURLPOSIXPathStyle);
@@ -306,11 +304,11 @@ void dobut(Fl_Widget *, long arg)
     CFStringGetCString(cc_app_path, app_path, 2048, kCFStringEncodingUTF8);
     CFRelease(cc_app_path);
     if (*app_path) {
-      if (memcmp(app_path + strlen(app_path) - 4, ".app", 4) == 0) {
-        char *n = strrchr(app_path, '/');
-        if (n) *n = 0;
+      char *n = strrchr(app_path, '/');
+      if (n) {
+        *n = 0;
+        chdir(app_path);
       }
-      chdir(app_path);
     }
     
     char *name = new char[strlen(cmd) + 5];
@@ -454,6 +452,6 @@ int main(int argc, char **argv) {
 }
 
 //
-// End of "$Id: demo.cxx 11912 2016-08-31 17:01:27Z manolo $".
+// End of "$Id: demo.cxx 11918 2016-09-03 08:14:43Z manolo $".
 //
 

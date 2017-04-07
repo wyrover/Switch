@@ -1,4 +1,4 @@
-/* "$Id: is_spacing.c 12193 2017-03-12 15:12:35Z AlbrechtS $"
+/* "$Id: $"
  *
  * Author: Jean-Marc Lienher ( http://oksid.ch )
  * Copyright 2000-2010 by O'ksi'D.
@@ -15,15 +15,16 @@
  */
 
 /*
- * This file is required on all platforms for UTF-8 support
+ * This file is required on all platforms for utf8 support
  */
 
-#include "../utf8_internal.h"
+#if !defined(WIN32) && !defined(__APPLE__)
+#  include "../Xutf8.h"
+#endif /* !defined(WIN32) && !defined(__APPLE__) */
 
-/* include UCS tables */
 #include "headers/spacing.h"
 
-unsigned short
+unsigned short 
 XUtf8IsNonSpacing(unsigned int ucs) {
 
   if (ucs <= 0x0361) {
@@ -80,5 +81,5 @@ XUtf8IsNonSpacing(unsigned int ucs) {
 }
 
 /*
- * End of "$Id: is_spacing.c 12193 2017-03-12 15:12:35Z AlbrechtS $".
+ * End of "$Id$".
  */

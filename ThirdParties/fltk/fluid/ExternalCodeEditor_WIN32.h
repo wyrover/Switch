@@ -1,5 +1,5 @@
 //
-// "$Id: ExternalCodeEditor_WIN32.h 11880 2016-08-16 21:20:06Z greg.ercolano $".
+// "$Id: ExternalCodeEditor_WIN32.h 11879 2016-08-16 21:08:40Z greg.ercolano $".
 //
 //       External code editor management class for Windows
 //
@@ -60,5 +60,5 @@ public:
 
 #endif /*_EXTCODEEDITOR_H */
 //
-// End of "$Id: ExternalCodeEditor_WIN32.h 11880 2016-08-16 21:20:06Z greg.ercolano $".
+// End of "$Id: ExternalCodeEditor_WIN32.h 11879 2016-08-16 21:08:40Z greg.ercolano $".
 //

@@ -1,5 +1,5 @@
 //
-// "$Id: file_chooser.cxx 12014 2016-10-06 08:55:22Z manolo $"
+// "$Id: file_chooser.cxx 8864 2011-07-19 04:49:30Z greg.ercolano $"
 //
 // File chooser test program.
 //
@@ -103,11 +103,12 @@ main(int  argc,		// I - Number of command-line arguments
   window = new Fl_Double_Window(400, 215, "File Chooser Test");
 
   filter = new Fl_Input(50, 10, 315, 25, "Filter:");
-  // Process standard arguments and find filter argument if present
   int argn = 1;
-  while (argn < argc) {
-    if (Fl::arg(argc, argv, argn) == 0)  break;
-  }
+#ifdef __APPLE__
+  // OS X may add the process number as the first argument - ignore
+  if (argc>argn && strncmp(argv[1], "-psn_", 5)==0)
+    argn++;
+#endif
   if (argc > argn)
     filter->value(argv[argn]);
   else
@@ -376,5 +377,5 @@ show_callback(void)
 
 
 //
-// End of "$Id: file_chooser.cxx 12014 2016-10-06 08:55:22Z manolo $".
+// End of "$Id: file_chooser.cxx 8864 2011-07-19 04:49:30Z greg.ercolano $".
 //

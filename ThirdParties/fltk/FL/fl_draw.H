@@ -1,5 +1,5 @@
 //
-// "$Id: fl_draw.H 12088 2016-11-09 09:49:48Z manolo $"
+// "$Id: fl_draw.H 11977 2016-09-25 11:07:06Z AlbrechtS $"
 //
 // Portable drawing function header file for the Fast Light Tool Kit (FLTK).
 //
@@ -24,12 +24,13 @@
 #ifndef fl_draw_H
 #define fl_draw_H
 
+#include <FL/x.H>	      // for Fl_Region
 #include <FL/Enumerations.H>  // for the color names
-#include <FL/Fl_Graphics_Driver.H>     // for fl_graphics_driver + Fl_Region
+#include <FL/Fl_Window.H>     // for fl_set_spot()
+#include <FL/Fl_Device.H>     // for fl_graphics_driver
 
 // Image class...
 class Fl_Image;
-class Fl_Window;
 
 // Label flags...
 FL_EXPORT extern char fl_draw_shortcut;
@@ -199,10 +200,6 @@ enum {
  */
 inline void fl_rect(int x, int y, int w, int h) { fl_graphics_driver->rect(x,y,w,h); }
 
-/**
- Draw a dotted rectangle, used to indicate keyboard focus on a widget.
- */
-inline void fl_focus_rect(int x, int y, int w, int h) { fl_graphics_driver->focus_rect(x, y, w, h); }
 /** Draws with passed color a 1-pixel border \e inside the given bounding box */
 inline void fl_rect(int x, int y, int w, int h, Fl_Color c) {fl_color(c); fl_rect(x,y,w,h);}
 /** Colors with current color a rectangle that exactly fills the given bounding box */
@@ -493,22 +490,6 @@ inline double fl_transform_dy(double x, double y) {return fl_graphics_driver->tr
  \param[in] xf,yf transformed coordinate
  */
 inline void fl_transformed_vertex(double xf, double yf) {fl_graphics_driver->transformed_vertex(xf,yf); }
-
-/** Copy a rectangular area of the given offscreen buffer into the current drawing destination.
-   \param x,y	position where to draw the copied rectangle
-   \param w,h	size of the copied rectangle
-   \param pixmap  offscreen buffer containing the rectangle to copy
-   \param srcx,srcy origin in offscreen buffer of rectangle to copy
-   */
-inline void fl_copy_offscreen(int x, int y, int w, int h, Fl_Offscreen pixmap, int srcx, int srcy) {
-    fl_graphics_driver->copy_offscreen(x, y, w, h, pixmap, srcx, srcy);
-}
-
-FL_EXPORT Fl_Offscreen fl_create_offscreen(int w, int h);
-FL_EXPORT void fl_begin_offscreen(Fl_Offscreen b);
-FL_EXPORT void fl_end_offscreen(void);
-FL_EXPORT void fl_delete_offscreen(Fl_Offscreen bitmap);
-
 /** @} */
 
 /** \addtogroup  fl_attributes
@@ -759,8 +740,27 @@ inline void fl_draw_image_mono(Fl_Draw_Image_Cb cb, void* data, int X,int Y,int 
   \returns 1 if true alpha blending supported by platform
   \returns 0 not supported so FLTK will use screen door transparency
   */
-inline char fl_can_do_alpha_blending() {return Fl_Graphics_Driver::default_driver().can_do_alpha_blending();}
+/* note: doxygen comment here to avoid triplication in os-speciic files */
+FL_EXPORT char fl_can_do_alpha_blending();
 
+/**
+  Reads an RGB(A) image from the current window or off-screen buffer.
+  \param[in] p     pixel buffer, or NULL to allocate one
+  \param[in] X,Y   position of top-left of image to read
+  \param[in] W,H   width and height of image to read
+  \param[in] alpha alpha value for image (0 for none)
+  \returns pointer to pixel buffer, or NULL if allocation failed.
+
+  The \p p argument points to a buffer that can hold the image and must
+  be at least \p W*H*3 bytes when reading RGB images, or \p W*H*4 bytes
+  when reading RGBA images. If NULL, fl_read_image() will create an
+  array of the proper size which can be freed using <tt>delete[]</tt>.
+
+  The \p alpha parameter controls whether an alpha channel is created
+  and the value that is placed in the alpha channel. If 0, no alpha
+  channel is generated.
+  */
+/* note: doxygen comment here to avoid triplication in os-speciic files */
 FL_EXPORT uchar *fl_read_image(uchar *p,int X,int Y,int W,int H,int alpha=0);
 
 // pixmaps:
@@ -801,5 +801,5 @@ FL_EXPORT int fl_add_symbol(const char* name, void (*drawit)(Fl_Color), int scal
 #endif
 
 //
-// End of "$Id: fl_draw.H 12088 2016-11-09 09:49:48Z manolo $".
+// End of "$Id: fl_draw.H 11977 2016-09-25 11:07:06Z AlbrechtS $".
 //

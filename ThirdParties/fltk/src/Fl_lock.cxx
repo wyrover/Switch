@@ -1,5 +1,5 @@
 //
-// "$Id: Fl_lock.cxx 12137 2016-12-06 18:49:22Z AlbrechtS $"
+// "$Id: Fl_lock.cxx 11094 2016-01-31 02:49:56Z AlbrechtS $"
 //
 // Multi-threading support code for the Fast Light Tool Kit (FLTK).
 //
@@ -16,19 +16,11 @@
 //     http://www.fltk.org/str.php
 //
 
-#include "config_lib.h"
+
 #include <FL/Fl.H>
-#include <FL/Fl_System_Driver.H>
+#include <config.h>
 
 #include <stdlib.h>
-
-// FIXME: why do we need the lines below?
-#if defined(FL_CFG_SYS_POSIX)
-#include "drivers/Posix/Fl_Posix_System_Driver.H"
-#elif defined(FL_CFG_SYS_WIN32)
-#include "drivers/WinAPI/Fl_WinAPI_System_Driver.H"
-#endif
-
 
 /*
    From Bill:
@@ -145,6 +137,8 @@ int Fl::awake(Fl_Awake_Handler func, void *data) {
   return ret;
 }
 
+////////////////////////////////////////////////////////////////
+// Windows threading...
 /** \fn int Fl::lock()
     The lock() method blocks the current thread until it
     can safely access FLTK widgets and data. Child threads should
@@ -194,9 +188,7 @@ int Fl::awake(Fl_Awake_Handler func, void *data) {
     
     See also: \ref advanced_multithreading
 */
-#if defined(FL_CFG_SYS_WIN32)
-////////////////////////////////////////////////////////////////
-// Windows threading...
+#ifdef WIN32
 #  include <windows.h>
 #  include <process.h>
 #  include <FL/x.H>
@@ -240,7 +232,7 @@ static void lock_function() {
   EnterCriticalSection(&cs);
 }
 
-int Fl_WinAPI_System_Driver::lock() {
+int Fl::lock() {
   if (!main_thread) InitializeCriticalSection(&cs);
 
   lock_function();
@@ -253,21 +245,17 @@ int Fl_WinAPI_System_Driver::lock() {
   return 0;
 }
 
-void Fl_WinAPI_System_Driver::unlock() {
+void Fl::unlock() {
   unlock_function();
 }
 
-void Fl_WinAPI_System_Driver::awake(void* msg) {
+void Fl::awake(void* msg) {
   PostThreadMessage( main_thread, fl_wake_msg, (WPARAM)msg, 0);
 }
-#endif // FL_CFG_SYS_WIN32
-
-
-#if defined(FL_CFG_SYS_POSIX) && !defined(FL_DOXYGEN)
 
 ////////////////////////////////////////////////////////////////
 // POSIX threading...
-#if defined(HAVE_PTHREAD)
+#elif defined(HAVE_PTHREAD)
 #  include <unistd.h>
 #  include <fcntl.h>
 #  include <pthread.h>
@@ -318,12 +306,12 @@ static void unlock_function_rec() {
 }
 #  endif // PTHREAD_MUTEX_RECURSIVE
 
-void Fl_Posix_System_Driver::awake(void* msg) {
+void Fl::awake(void* msg) {
   if (write(thread_filedes[1], &msg, sizeof(void*))==0) { /* ignore */ }
 }
 
 static void* thread_message_;
-void* Fl_Posix_System_Driver::thread_message() {
+void* Fl::thread_message() {
   void* r = thread_message_;
   thread_message_ = 0;
   return r;
@@ -344,7 +332,7 @@ static void thread_awake_cb(int fd, void*) {
 extern void (*fl_lock_function)();
 extern void (*fl_unlock_function)();
 
-int Fl_Posix_System_Driver::lock() {
+int Fl::lock() {
   if (!thread_filedes[1]) {
     // Initialize thread communication pipe to let threads awake FLTK
     // from Fl::wait()
@@ -382,7 +370,7 @@ int Fl_Posix_System_Driver::lock() {
   return 0;
 }
 
-void Fl_Posix_System_Driver::unlock() {
+void Fl::unlock() {
   fl_unlock_function();
 }
 
@@ -401,38 +389,30 @@ void lock_ring() {
   pthread_mutex_lock(ring_mutex);
 }
 
-#else // ! HAVE_PTHREAD
+#else
 
-void Fl_Posix_System_Driver::awake(void*) {}
-int Fl_Posix_System_Driver::lock() { return 1; }
-void Fl_Posix_System_Driver::unlock() {}
-void* Fl_Posix_System_Driver::thread_message() { return NULL; }
-
-void lock_ring() {}
-void unlock_ring() {}
-
-#endif // HAVE_PTHREAD
-
-
-#endif // FL_CFG_SYS_POSIX
-
-
-void Fl::awake(void *v) {
-  Fl::system_driver()->awake(v);
+void unlock_ring() {
 }
 
-void* Fl::thread_message() {
-  return Fl::system_driver()->thread_message();
+void lock_ring() {
+}
+
+void Fl::awake(void*) {
 }
 
 int Fl::lock() {
-  return Fl::system_driver()->lock();
+  return 1;
 }
 
 void Fl::unlock() {
-  Fl::system_driver()->unlock();
 }
 
+void* Fl::thread_message() {
+  return NULL;
+}
+
+#endif // WIN32
+
 //
-// End of "$Id: Fl_lock.cxx 12137 2016-12-06 18:49:22Z AlbrechtS $".
+// End of "$Id: Fl_lock.cxx 11094 2016-01-31 02:49:56Z AlbrechtS $".
 //

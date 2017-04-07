@@ -1,5 +1,5 @@
 //
-// "$Id: CodeEditor.cxx 11956 2016-09-20 13:31:38Z AlbrechtS $"
+// "$Id: CodeEditor.cxx 11952 2016-09-20 12:57:18Z AlbrechtS $"
 //
 // Code editor widget for the Fast Light Tool Kit (FLTK).
 //
@@ -438,5 +438,5 @@ void CodeViewer::draw()
 }
 
 //
-// End of "$Id: CodeEditor.cxx 11956 2016-09-20 13:31:38Z AlbrechtS $".
+// End of "$Id: CodeEditor.cxx 11952 2016-09-20 12:57:18Z AlbrechtS $".
 //

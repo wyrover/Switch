@@ -1,5 +1,5 @@
 /*
- * "$Id: configh.in 12153 2016-12-21 15:05:02Z manolo $"
+ * "$Id: configh.in 11094 2016-01-31 02:49:56Z AlbrechtS $"
  *
  * Configuration file for the Fast Light Tool Kit (FLTK).
  *
@@ -85,18 +85,10 @@
 /*
  * USE_XFT
  *
- * Use the Xft library to draw anti-aliased text.
+ * Use the new Xft library to draw anti-aliased text.
  */
 
 #define USE_XFT 0
-
-/*
- * USE_PANGO
- *
- * Use the pango library to draw UTF-8 text.
- */
-
-#define USE_PANGO 0
 
 /*
  * HAVE_XDBE:
@@ -165,26 +157,6 @@
  */
 
 #undef USE_X11
-
-/*
- * USE_SDL
- *
- * Should we use SDL for the current platform
- * *FIXME* Not yet implemented in configure !
- *
- */
-
-#undef USE_SDL
-
-/*
- * FL_PORTING
- *
- * A little helper that points to locations in the core that still need
- * to be ported to the core driver setup.
- * *FIXME* Not yet implemented in configure !
- */
-
-#undef FL_PORTING
 
 /*
  * HAVE_OVERLAY:
@@ -364,18 +336,5 @@
 #define HAVE_DLSYM 0
 
 /*
- * Do we want print support?
- */
-
-#undef FL_NO_PRINT_SUPPORT
-
-/*
- * Do we want filename handling and a filechooser?
- * *FIXME* Not yet implemented in configure !
- */
-
-#undef FL_CFG_NO_FILESYSTEM_SUPPORT
-
-/*
- * End of "$Id: configh.in 12153 2016-12-21 15:05:02Z manolo $".
+ * End of "$Id: configh.in 11094 2016-01-31 02:49:56Z AlbrechtS $".
  */

@@ -1,5 +1,5 @@
 //
-// "$Id: browser.cxx 11911 2016-08-31 16:59:22Z manolo $"
+// "$Id: browser.cxx 9847 2013-03-23 21:32:34Z greg.ercolano $"
 //
 // Browser test program for the Fast Light Tool Kit (FLTK).
 //
@@ -149,13 +149,19 @@ int main(int argc, char **argv) {
       done = browser->load(fname);
     }
 #elif defined(__APPLE__)
-    char buf[2048];
-    strcpy(buf, argv[0]);
-    char *slash = strrchr(buf, '/');
-    if (slash) {
-      strcpy(slash, "/../../../browser.cxx");
+    if ( i == argc ) 
+    {
+      char buf[2048];
+      strcpy(buf, argv[0]);
+      char *slash = strrchr(buf, '/');
+      if (slash)
+#if defined(USING_XCODE)
+        strcpy(slash, "/../Resources/browser.cxx");
+#else
+	strcpy(slash, "/../../../browser.cxx");
+#endif
+      done = browser->load(buf);
     }
-    done = browser->load(buf);
 #endif
     if ( !done )
     {
@@ -202,6 +208,6 @@ int main(int argc, char **argv) {
 }
 
 //
-// End of "$Id: browser.cxx 11911 2016-08-31 16:59:22Z manolo $".
+// End of "$Id: browser.cxx 9847 2013-03-23 21:32:34Z greg.ercolano $".
 //
 

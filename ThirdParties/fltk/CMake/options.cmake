@@ -1,5 +1,5 @@
 #
-# "$Id: options.cmake 12153 2016-12-21 15:05:02Z manolo $"
+# "$Id: options.cmake 11863 2016-08-05 17:07:15Z manolo $"
 #
 # Main CMakeLists.txt to build the FLTK project using CMake (www.cmake.org)
 # Written by Michael Surette
@@ -50,7 +50,6 @@ endif(UNIX)
 #######################################################################
 if(APPLE)
    option(OPTION_APPLE_X11 "use X11" OFF)
-   option(OPTION_APPLE_SDL "use SDL" OFF)
 endif(APPLE)
 
 if((NOT APPLE OR OPTION_APPLE_X11) AND NOT WIN32)
@@ -63,19 +62,6 @@ if((NOT APPLE OR OPTION_APPLE_X11) AND NOT WIN32)
       endif(X11_Xext_FOUND)
    endif(X11_FOUND)
 endif((NOT APPLE OR OPTION_APPLE_X11) AND NOT WIN32)
-
-if (OPTION_APPLE_X11)
-  include_directories(AFTER SYSTEM /opt/X11/include/freetype2)
-endif (OPTION_APPLE_X11)
-
-if (OPTION_APPLE_SDL)
-   find_package(SDL2 REQUIRED)
-   if (SDL2_FOUND)
-      set(USE_SDL 1)
-      set(FL_PORTING 1)
-      list(APPEND FLTK_LDLIBS SDL2_LIBRARY)
-   endif(SDL2_FOUND)
-endif(OPTION_APPLE_SDL)
 
 #######################################################################
 option(OPTION_USE_POLL "use poll if available" OFF)
@@ -93,8 +79,6 @@ option(OPTION_BUILD_SHARED_LIBS
 
 #######################################################################
 option(OPTION_BUILD_EXAMPLES "build example programs" ON)
-option(OPTION_PRINT_SUPPORT "allow print support" ON)
-option(OPTION_FILESYSTEM_SUPPORT "allow file system support" ON)
 
 #######################################################################
 if(DOXYGEN_FOUND)
@@ -149,8 +133,6 @@ if(OPTION_USE_GL)
       set(OPENGL_FOUND TRUE)
       get_filename_component(PATH_TO_XLIBS ${X11_X11_LIB} PATH)
       set(OPENGL_LIBRARIES -L${PATH_TO_XLIBS} -lGLU -lGL)
-   elseif(OPTION_APPLE_SDL)
-      set(OPENGL_FOUND FALSE)
    else()
       include(FindOpenGL)
       if(APPLE)
@@ -176,69 +158,33 @@ else()
 endif(OPENGL_FOUND)
 
 #######################################################################
-# Create an option whether we want to check for pthreads.
-# We must not do it on Windows unless we run under Cygwin, since we
-# always use native threads on Windows (even if libpthread is available).
+option(OPTION_USE_THREADS "use multi-threading" ON)
 
-# Note: HAVE_PTHREAD_H has already been determined in resources.cmake
-# before this file is included (or set to 0 for WIN32).
+if(OPTION_USE_THREADS)
+   include(FindThreads)
+endif(OPTION_USE_THREADS)
 
-if (WIN32 AND NOT CYGWIN)
-  # set(HAVE_PTHREAD_H 0) # (see resources.cmake)
-  set(OPTION_USE_THREADS FALSE)
-else ()
-  option(OPTION_USE_THREADS "use multi-threading with pthreads" ON)
-endif (WIN32 AND NOT CYGWIN)
+if(OPTION_USE_THREADS AND CMAKE_HAVE_THREADS_LIBRARY)
+   add_definitions("-D_THREAD_SAFE -D_REENTRANT")
+   set(USE_THREADS 1)
+   set(FLTK_THREADS_FOUND TRUE)
+else()
+   set(FLTK_THREADS_FOUND FALSE)
+endif(OPTION_USE_THREADS AND CMAKE_HAVE_THREADS_LIBRARY)
 
-# initialize more variables
-set(USE_THREADS 0)
-set(HAVE_PTHREAD 0)
-set(FLTK_PTHREADS_FOUND FALSE)
-
-if (OPTION_USE_THREADS)
-
-  include(FindThreads)
-
-  if (CMAKE_HAVE_THREADS_LIBRARY)
-    add_definitions("-D_THREAD_SAFE -D_REENTRANT")
-    set(USE_THREADS 1)
-    set(FLTK_THREADS_FOUND TRUE)
-  endif (CMAKE_HAVE_THREADS_LIBRARY)
-
-  if (CMAKE_USE_PTHREADS_INIT AND NOT WIN32)
-    set(HAVE_PTHREAD 1)
-    if (NOT APPLE)
-      set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -pthread")
-    endif (NOT APPLE)
-    list(APPEND FLTK_LDLIBS -lpthread)
-    list(APPEND FLTK_CFLAGS -D_THREAD_SAFE -D_REENTRANT)
-    set(FLTK_PTHREADS_FOUND TRUE)
-  else()
-    set(HAVE_PTHREAD 0)
-    set(HAVE_PTHREAD_H 0)
-    set(FLTK_PTHREADS_FOUND FALSE)
-  endif(CMAKE_USE_PTHREADS_INIT AND NOT WIN32)
-
-else (OPTION_USE_THREADS)
-
-  set(HAVE_PTHREAD_H 0)
-
-endif (OPTION_USE_THREADS)
-
-set(debug_threads FALSE) # set to true to show debug info
-if (debug_threads)
-  message ("")
-  message (STATUS "NOTE: set debug_threads to FALSE to disable this info!")
-  message (STATUS "WIN32                  = '${WIN32}'")
-  message (STATUS "MINGW                  = '${MINGW}'")
-  message (STATUS "CYGWIN                 = '${CYGWIN}'")
-  message (STATUS "OPTION_USE_THREADS     = '${OPTION_USE_THREADS}'")
-  message (STATUS "HAVE_PTHREAD           = '${HAVE_PTHREAD}'")
-  message (STATUS "HAVE_PTHREAD_H         = '${HAVE_PTHREAD_H}'")
-  message (STATUS "FLTK_THREADS_FOUND     = '${FLTK_THREADS_FOUND}'")
-  message (STATUS "CMAKE_EXE_LINKER_FLAGS = '${CMAKE_EXE_LINKER_FLAGS}'")
-endif (debug_threads)
-unset(debug_threads)
+if(OPTION_USE_THREADS AND CMAKE_USE_PTHREADS_INIT)
+   set(HAVE_PTHREAD 1)
+   if(NOT APPLE)
+     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -pthread")
+   endif(NOT APPLE)
+   list(APPEND FLTK_LDLIBS -lpthread)
+   list(APPEND FLTK_CFLAGS -D_THREAD_SAFE -D_REENTRANT)
+   set(FLTK_PTHREADS_FOUND TRUE)
+else()
+   set(HAVE_PTHREAD 0)
+   set(HAVE_PTHREAD_H 0)
+   set(FLTK_PTHREADS_FOUND FALSE)
+endif(OPTION_USE_THREADS AND CMAKE_USE_PTHREADS_INIT)
 
 #######################################################################
 option(OPTION_LARGE_FILE "enable large file support" ON)
@@ -372,45 +318,7 @@ endif(OPTION_USE_XCURSOR)
 #######################################################################
 if(X11_Xft_FOUND)
    option(OPTION_USE_XFT "use lib Xft" ON)
-   option(OPTION_USE_PANGO "use lib Pango" OFF)
 endif(X11_Xft_FOUND)
-
-#######################################################################
-if(X11_Xft_FOUND AND OPTION_USE_PANGO)
-#this covers Debian, Ubuntu, FreeBSD, NetBSD, Darwin
-   if(APPLE AND OPTION_APPLE_X11)
-	list(APPEND CMAKE_INCLUDE_PATH  /sw/include)
-    	list(APPEND CMAKE_LIBRARY_PATH  /sw/lib)
-   endif(APPLE AND OPTION_APPLE_X11)
-   find_file(HAVE_PANGO_H pango-1.0/pango/pango.h ${CMAKE_INCLUDE_PATH})
-   find_file(HAVE_PANGOXFT_H pango-1.0/pango/pangoxft.h ${CMAKE_INCLUDE_PATH})
-
-  if(HAVE_PANGO_H AND HAVE_PANGOXFT_H)
-    find_library(HAVE_LIB_PANGO pango-1.0 ${CMAKE_LIBRARY_PATH})
-    find_library(HAVE_LIB_PANGOXFT pangoxft-1.0 ${CMAKE_LIBRARY_PATH})
-    if(APPLE)
-    	set(HAVE_LIB_GOBJECT TRUE)
-    else()
-    	find_library(HAVE_LIB_GOBJECT gobject-2.0 ${CMAKE_LIBRARY_PATH})
-    endif(APPLE)
-  endif(HAVE_PANGO_H AND HAVE_PANGOXFT_H)
-  if(HAVE_LIB_PANGO AND HAVE_LIB_PANGOXFT AND HAVE_LIB_GOBJECT)
-    set(USE_PANGO TRUE)
-    message(STATUS "USE_PANGO=" ${USE_PANGO})
-    #remove last 3 components of HAVE_PANGO_H and put in PANGO_H_PREFIX
-    get_filename_component(PANGO_H_PREFIX ${HAVE_PANGO_H} PATH)
-    get_filename_component(PANGO_H_PREFIX ${PANGO_H_PREFIX} PATH)
-    get_filename_component(PANGO_H_PREFIX ${PANGO_H_PREFIX} PATH)
-
-    get_filename_component(PANGOLIB_DIR ${HAVE_LIB_PANGO} PATH)
-    #glib.h is usually in ${PANGO_H_PREFIX}/glib-2.0/ ...
-    find_path(GLIB_H_PATH glib.h ${PANGO_H_PREFIX}/glib-2.0)
-    if(NOT GLIB_H_PATH) # ... but not under NetBSD
-		find_path(GLIB_H_PATH glib.h ${PANGO_H_PREFIX}/glib/glib-2.0)
-    endif(NOT GLIB_H_PATH)
-    include_directories(${PANGO_H_PREFIX}/pango-1.0 ${GLIB_H_PATH} ${PANGOLIB_DIR}/glib-2.0/include)
-  endif(HAVE_LIB_PANGO AND HAVE_LIB_PANGOXFT AND HAVE_LIB_GOBJECT)
-endif(X11_Xft_FOUND AND OPTION_USE_PANGO)
 
 if(OPTION_USE_XFT)
    set(USE_XFT X11_Xft_FOUND)
@@ -449,20 +357,6 @@ if(OPTION_USE_XDBE AND HAVE_XDBE_H)
 else()
    set(FLTK_XDBE_FOUND FALSE)
 endif(OPTION_USE_XDBE AND HAVE_XDBE_H)
-
-#######################################################################
-set(FL_NO_PRINT_SUPPORT FALSE)
-if(X11_FOUND AND NOT OPTION_PRINT_SUPPORT)
-   set(FL_NO_PRINT_SUPPORT TRUE)
-endif(X11_FOUND AND NOT OPTION_PRINT_SUPPORT)
-#######################################################################
-
-#######################################################################
-set(FL_CFG_NO_FILESYSTEM_SUPPORT TRUE)
-if(OPTION_FILESYSTEM_SUPPORT)
-   set(FL_CFG_NO_FILESYSTEM_SUPPORT FALSE)
-endif(OPTION_FILESYSTEM_SUPPORT)
-#######################################################################
 
 #######################################################################
 # prior to CMake 3.0 this feature was buggy

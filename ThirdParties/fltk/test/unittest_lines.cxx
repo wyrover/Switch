@@ -1,5 +1,5 @@
 //
-// "$Id: unittest_lines.cxx 11621 2016-04-15 21:26:13Z matt $"
+// "$Id: unittest_lines.cxx 8864 2011-07-19 04:49:30Z greg.ercolano $"
 //
 // Unit tests for the Fast Light Tool Kit (FLTK).
 //
@@ -38,8 +38,7 @@ public:
   }
   void draw() {
     Fl_Box::draw();
-
-    int i, a = x()+10, b = y()+10; fl_color(FL_BLACK); fl_rect(a, b, 100, 100);
+    int a = x()+10, b = y()+10; fl_color(FL_BLACK); fl_rect(a, b, 100, 100);
     // testing fl_xyline(x, y, x1)
     fl_color(FL_RED); fl_point(a+10, b+10); fl_point(a+20, b+10);
     fl_color(FL_BLACK); fl_xyline(a+10, b+10, a+20);
@@ -57,27 +56,11 @@ public:
     fl_point(a+60, b+90); fl_point(a+90, b+90);
     fl_color(FL_BLACK);
     fl_loop(a+60, b+60, a+90, b+60, a+90, b+90, a+60, b+90);
-
-    a = x()+120, b = y()+10; fl_color(FL_BLACK); fl_rect(a, b, 203, 203);
-    a += 101; b += 101;
-    fl_color(0xff888800);
-    for (i=-80; i<=80; i+=20) fl_line(a, b, a+i, b-100);
-    fl_color(0xff444400);
-    for (i=-80; i<=80; i+=20) fl_line(a, b, a+i, b+100);
-    fl_color(0x88ff8800);
-    for (i=-80; i<=80; i+=20) fl_line(a, b, a-100, b+i);
-    fl_color(0x44ff4400);
-    for (i=-80; i<=80; i+=20) fl_line(a, b, a+100, b+i);
-    fl_color(0x8888ff00);
-    fl_line(a, b, a-100, b-100);
-    fl_line(a, b, a+100, b-100);
-    fl_line(a, b, a+100, b+100);
-    fl_line(a, b, a-100, b+100);
   }
 };
 
 UnitTest lines("drawing lines", LineTest::create);
 
 //
-// End of "$Id: unittest_lines.cxx 11621 2016-04-15 21:26:13Z matt $"
+// End of "$Id: unittest_lines.cxx 8864 2011-07-19 04:49:30Z greg.ercolano $"
 //

@@ -1,5 +1,5 @@
 //
-// "$Id: fl_draw.cxx 12176 2017-02-19 15:49:48Z manolo $"
+// "$Id: fl_draw.cxx 11847 2016-07-24 08:53:08Z AlbrechtS $"
 //
 // Label drawing code for the Fast Light Tool Kit (FLTK).
 //
@@ -64,7 +64,7 @@ static const char* expand_text_(const char* from, char*& buf, int maxbuf, double
       // test for word-wrap:
       if (word_start < p && wrap) {
 	double newwidth = w + fl_width(word_end, (int) (o-word_end) );
-	if (word_end > buf && int(newwidth) > maxw) { // break before this word
+	if (word_end > buf && newwidth > maxw) { // break before this word
 	  o = word_end;
 	  p = word_start;
 	  break;
@@ -96,6 +96,17 @@ static const char* expand_text_(const char* from, char*& buf, int maxbuf, double
     } else if (c < ' ' || c == 127) { // ^X
       *o++ = '^';
       *o++ = c ^ 0x40;
+/* This is in fact not useful: the point is that a valid UTF-8 sequence for a non-ascii char contains no ascii char,
+ thus no tab, space, control, & or @ we want to process differently.
+ Also, invalid UTF-8 sequences are copied unchanged by this procedure.
+ Therefore, checking for tab, space, control, & or @, and copying the byte otherwise, is enough.
+ } else  if (handle_utf8_seq(p, o)) { // figure out if we have an utf8 valid sequence before we determine the nbsp test validity:
+#ifdef __APPLE__
+    } else if (c == 0xCA) { // non-breaking space in MacRoman
+#else
+    } else if (c == 0xA0) { // non-breaking space in ISO 8859
+#endif
+      *o++ = ' ';*/
     } else if (c == '@' && draw_symbols) { // Symbol???
       if (p[1] && p[1] != '@')  break;
       *o++ = c;
@@ -445,5 +456,5 @@ int fl_height(int font, int size) {
 }
 
 //
-// End of "$Id: fl_draw.cxx 12176 2017-02-19 15:49:48Z manolo $".
+// End of "$Id: fl_draw.cxx 11847 2016-07-24 08:53:08Z AlbrechtS $".
 //

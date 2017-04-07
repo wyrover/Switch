@@ -1,5 +1,5 @@
 //
-// "$Id: Fl_Help_View.cxx 11845 2016-07-23 04:32:10Z greg.ercolano $"
+// "$Id: Fl_Help_View.cxx 11844 2016-07-23 04:25:40Z greg.ercolano $"
 //
 // Fl_Help_View widget routines.
 //
@@ -52,6 +52,7 @@
 #include <FL/Fl_Help_View.H>
 #include <FL/Fl_Window.H>
 #include <FL/Fl_Pixmap.H>
+#include <FL/x.H>
 #include <stdio.h>
 #include <stdlib.h>
 #include <FL/fl_utf8.h>
@@ -60,6 +61,13 @@
 #include <ctype.h>
 #include <errno.h>
 #include <math.h>
+
+#if defined(WIN32) && ! defined(__CYGWIN__)
+#  include <io.h>
+#  include <direct.h>
+#else
+#  include <unistd.h>
+#endif // WIN32
 
 #define MAX_COLUMNS	200
 
@@ -863,7 +871,7 @@ Fl_Help_View::draw()
 	    if (line < 31)
 	      line ++;
 	    xx = block->line[line];
-            yy += 2 * fsize;//hh;
+            yy += 2 * fsize; //hh;
 	    hh = 0;
 	  }
 	  else if (buf.cmp("CENTER") ||
@@ -3706,5 +3714,5 @@ hscrollbar_callback(Fl_Widget *s, void *)
 
 
 //
-// End of "$Id: Fl_Help_View.cxx 11845 2016-07-23 04:32:10Z greg.ercolano $".
+// End of "$Id: Fl_Help_View.cxx 11844 2016-07-23 04:25:40Z greg.ercolano $".
 //

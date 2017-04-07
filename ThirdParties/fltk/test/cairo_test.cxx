@@ -1,5 +1,5 @@
 //
-// "$Id: cairo_test.cxx 12193 2017-03-12 15:12:35Z AlbrechtS $"
+// "$Id: arc.cxx 5115 2006-05-12 16:00:00Z fabien $"
 //
 // Arc drawing test program for the Fast Light Tool Kit (FLTK).
 //
@@ -157,5 +157,5 @@ int main(int argc, char** argv) {
 #endif
 
 //
-// End of "$Id: cairo_test.cxx 12193 2017-03-12 15:12:35Z AlbrechtS $".
+// End of "$Id: arc.cxx 5115 2006-05-12 16:00:00Z fabien $".
 //

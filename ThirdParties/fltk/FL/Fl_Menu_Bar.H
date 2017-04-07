@@ -1,5 +1,5 @@
 //
-// "$Id: Fl_Menu_Bar.H 12015 2016-10-06 16:42:59Z manolo $"
+// "$Id: Fl_Menu_Bar.H 11801 2016-07-09 17:06:46Z AlbrechtS $"
 //
 // Menu bar header file for the Fast Light Tool Kit (FLTK).
 //
@@ -88,14 +88,10 @@ public:
     menu items.
   */
   Fl_Menu_Bar(int X, int Y, int W, int H, const char *l=0);
-  /** Updates the menu bar after any change to its items.
-   This is useful when the menu bar can be an Fl_Sys_Menu_Bar object.
-   */
-  virtual void update() {}
 };
 
 #endif
 
 //
-// End of "$Id: Fl_Menu_Bar.H 12015 2016-10-06 16:42:59Z manolo $".
+// End of "$Id: Fl_Menu_Bar.H 11801 2016-07-09 17:06:46Z AlbrechtS $".
 //

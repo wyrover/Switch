@@ -10,9 +10,8 @@ README.CMake.txt - Building and using FLTK with CMake
     2.1   Prerequisites
     2.2   Options
     2.3   Building under Linux with Unix Makefiles
-    2.4   Building under Windows with Visual Studio [SUGGESTED DOCS -erco]
-    2.5   Building under Windows with MinGW using Makefiles
-    2.6   Crosscompiling
+    2.4   Building under Windows with MinGW using Makefiles
+    2.5   Crosscompiling
   3	Using CMake with FLTK
     3.1   Library Names
     3.2   Using Fluid Files
@@ -152,11 +151,6 @@ OPTION_ABI_VERSION - default EMPTY
    Please see README.abi-version.txt for more information about which
    ABI version to select.
 
-OPTION_PRINT_SUPPORT - default ON
-   When turned off, the Fl_Printer class does nothing and the 
-   Fl_PostScript_File_Device class cannot be used, but the FLTK library
-   is somewhat smaller. This option makes sense only on the Unix/Linux
-   platform or when OPTION_APPLE_X11 is ON.
 
  2.3  Building under Linux with Unix Makefiles
 -----------------------------------------------
@@ -191,65 +185,7 @@ then use subdirectories in the build directory, like this:
     sudo make install (optional)
 
 
- 2.4  Building under Windows with Visual Studio
-------------------------------------------------
-
-Building with CMake under Visual Studio requires the CMake generator
-with the -G command line switch. 
-
-     2.4.1 Visual Studio 7 / .NET
-    ------------------------------
-
-    1) Open a "Visual Studio .NET command prompt" window, e.g.
-
-        Start > All Programs > Microsoft Visual Studio .NET >
-                Visual Studio .NET Tools > Command Prompt
-
-    2) In the DOS window created above, change the current directory
-       to where you've extracted an fltk distribution tar file (or
-       snapshot tar file), and run the following commands:
-
-           cd C:\fltk-1.4.x		<-- change to your FLTK directory
-           mkdir build			<-- create an empty directory
-           cd build
-           cmake -G "Visual Studio 7" -D CMAKE_BUILD_TYPE=Release ..
-
-	This will create the file FLTK.sln in the current 'build' directory.
-
-    3) Open Visual Studio 7, and choose File -> Open -> Project,
-       and pick the "FLTK.sln" created by step #2 in the 'build' directory.
-
-       (Or, if only one version of the Visual Studio compiler is installed,
-       you can just run from DOS: .\FLTK.sln)
-
-    4) Make sure the pulldown menu has either "Release" or "Debug" selected
-       in the "Solution Configurations" pulldown menu.
-
-    5) In the "Solution Explorer", right click on:
-
-	    Solution 'FLTK' (## projects)
-
-       ..and in the popup menu, choose "Build Solution"
-
-    5) That's it, that should build FLTK.
-       The test programs (*.exe) can be found in e.g.
-
-	    Release: C:\fltk-1.4.x\build\bin\examples\release\*.exe
-	      Debug: C:\fltk-1.4.x\build\bin\examples\debug\*.exe
-
-       ..and the FLTK include files (*.H & *.h) your own apps can
-       compile with can be found in:
-       
-	    Release & Debug: C:\fltk-1.4.x\build\FL
-
-       ..and the FLTK library files (*.lib) which your own apps can
-       link with can be found in:
-
-	    Release: C:\fltk-1.4.x\build\lib\release\*.lib
-	      Debug: C:\fltk-1.4.x\build\lib\debug\*.lib
-
-
- 2.5  Building under Windows with MinGW using Makefiles
+ 2.4  Building under Windows with MinGW using Makefiles
 --------------------------------------------------------
 
 Building with CMake under MinGW requires you to specify the CMake Generator
@@ -273,7 +209,7 @@ Note the path to FLTK ".." in the last command line. Depending on where you
 installed CMake you may need to adjust the path's in the alias commands.
 
 
- 2.6  Crosscompiling
+ 2.5  Crosscompiling
 ---------------------
 
 Once you have a crosscompiler going, to use CMake to build FLTK you need
@@ -381,8 +317,8 @@ The WIN32 in the add_executable tells your Windows compiler that this is
 a Windows GUI app.  It is ignored on other platforms and should always be
 present with FLTK GUI programs for better portability.
 
-Note: the variable FLTK_USE_FILE used to include another file in
-previous FLTK versions was deprecated since FLTK 1.3.4 and was removed
+Note: the variable ${FLTK_USE_FILE} used to include another file in
+previous FLTK versions is deprecated since FLTK 1.3.4 and will be removed
 in FLTK 1.4.0.
 
 

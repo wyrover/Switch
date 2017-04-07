@@ -1,5 +1,5 @@
 #
-# "$Id: CMakeLists.txt 12173 2017-02-15 20:28:13Z AlbrechtS $"
+# "$Id: CMakeLists.txt 11816 2016-07-17 19:51:54Z greg.ercolano $"
 #
 # CMakeLists.txt to build fluid for the FLTK project using CMake (www.cmake.org)
 #
@@ -22,6 +22,8 @@ set(CPPFILES
     Fl_Group_Type.cxx
     Fl_Menu_Type.cxx
     Fl_Type.cxx
+    ExternalCodeEditor_UNIX.cxx
+    ExternalCodeEditor_WIN32.cxx
     Fl_Widget_Type.cxx
     Fl_Window_Type.cxx
     Fluid_Image.cxx
@@ -38,40 +40,22 @@ set(CPPFILES
     widget_panel.cxx
 )
 
-# ExternalCodeEditor: platform specific files
-
-if (WIN32)
-    list(APPEND CPPFILES ExternalCodeEditor_WIN32.cxx)
-else ()
-    list(APPEND CPPFILES ExternalCodeEditor_UNIX.cxx)
-endif (WIN32)
-
-if(APPLE AND (NOT OPTION_APPLE_X11) AND (NOT OPTION_APPLE_SDL))
-  set( ICON_NAME fluid.icns )
-  set( ICON_PATH "${PROJECT_SOURCE_DIR}/fluid/Fluid.app/Contents/Resources/${ICON_NAME}" )
-  add_executable(fluid MACOSX_BUNDLE ${CPPFILES} ${ICON_PATH})
+if(APPLE AND NOT OPTION_APPLE_X11)
+    set(FLUID_ICON "${CMAKE_CURRENT_SOURCE_DIR}/Fluid.app/Contents/Resources/fluid.icns")
+    add_executable(fluid MACOSX_BUNDLE ${CPPFILES} "${FLUID_ICON}")
+    FLTK_SET_BUNDLE_ICON(fluid "${FLUID_ICON}")
 else()
-  add_executable(fluid WIN32 ${CPPFILES})
-endif(APPLE AND (NOT OPTION_APPLE_X11) AND (NOT OPTION_APPLE_SDL))
+    add_executable(fluid WIN32 ${CPPFILES})
+endif(APPLE AND NOT OPTION_APPLE_X11)
 
 target_link_libraries(fluid fltk fltk_images fltk_forms)
 
 # install fluid
 
-if(APPLE AND (NOT OPTION_APPLE_X11) AND (NOT OPTION_APPLE_SDL))
-  # create bundle
-  set_target_properties(fluid PROPERTIES MACOSX_BUNDLE_ICON_FILE ${ICON_NAME})
-  set_target_properties(fluid PROPERTIES RESOURCE ${ICON_PATH})
-  # install
-  install(TARGETS fluid DESTINATION ${FLTK_BINDIR})
-else()
-  install(TARGETS fluid
+install(TARGETS fluid
     EXPORT FLTK-Targets
-    RUNTIME DESTINATION ${FLTK_BINDIR}
-    LIBRARY DESTINATION ${FLTK_LIBDIR}
-    ARCHIVE DESTINATION ${FLTK_LIBDIR}
-    )
-endif(APPLE AND (NOT OPTION_APPLE_X11) AND (NOT OPTION_APPLE_SDL))
+    DESTINATION ${FLTK_BINDIR}
+)
 
 # install desktop files
 

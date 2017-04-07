@@ -1,6 +1,6 @@
 /* @CONFIG_H@.  Generated from @CONFIG_H_IN@ by CMake.  */
 /*
- * "$Id: configh.cmake.in 12155 2016-12-23 15:40:25Z AlbrechtS $"
+ * "$Id: configh.cmake.in 11094 2016-01-31 02:49:56Z AlbrechtS $"
  *
  * Configuration file for the Fast Light Tool Kit (FLTK).
  *
@@ -86,18 +86,10 @@
 /*
  * USE_XFT
  *
- * Use the Xft library to draw anti-aliased text.
+ * Use the new Xft library to draw anti-aliased text.
  */
 
 #cmakedefine01 USE_XFT
-
-/*
- * USE_PANGO
- *
- * Use the pango library to draw UTF-8 text.
- */
-
-#cmakedefine01 USE_PANGO
 
 /*
  * HAVE_XDBE:
@@ -166,24 +158,6 @@
  */
 
 #cmakedefine USE_X11 1
-
-/*
- * USE_SDL
- *
- * Should we use SDL for the current platform
- *
- */
-
-#cmakedefine USE_SDL 1
-
-/*
- * FL_PORTING
- *
- * A little helper that points to locations in the core that still need
- * to be ported to the core driver setup.
- */
-
-#cmakedefine FL_PORTING 1
 
 /*
  * HAVE_OVERLAY:
@@ -363,17 +337,5 @@
 #cmakedefine01 HAVE_DLSYM
 
 /*
- * Do we want print support?
- */
-
-#cmakedefine FL_NO_PRINT_SUPPORT 1
-
-/*
- * Do we want filename handling and a filechooser?
- */
-
-#cmakedefine FL_CFG_NO_FILESYSTEM_SUPPORT 1
-
-/*
- * End of "$Id: configh.cmake.in 12155 2016-12-23 15:40:25Z AlbrechtS $".
+ * End of "$Id: configh.cmake.in 11094 2016-01-31 02:49:56Z AlbrechtS $".
  */

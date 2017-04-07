@@ -1,7 +1,7 @@
 //
-// "$Id: Fl_Text_Buffer.cxx 12149 2016-12-17 07:42:54Z manolo $"
+// "$Id: Fl_Text_Buffer.cxx 10083 2014-01-25 23:47:44Z AlbrechtS $"
 //
-// Copyright 2001-2016 by Bill Spitzak and others.
+// Copyright 2001-2010 by Bill Spitzak and others.
 // Original code Copyright Mark Edel.  Permission to distribute under
 // the LGPL for the FLTK library granted by Mark Edel.
 //
@@ -108,7 +108,7 @@ Fl_Text_Buffer::Fl_Text_Buffer(int requestedSize, int preferredGapSize)
   mPreferredGapSize = preferredGapSize;
   mBuf = (char *) malloc(requestedSize + mPreferredGapSize);
   mGapStart = 0;
-  mGapEnd = requestedSize + mPreferredGapSize;
+  mGapEnd = mPreferredGapSize;
   mTabDist = 8;
   mPrimary.mSelected = 0;
   mPrimary.mStart = mPrimary.mEnd = 0;
@@ -825,29 +825,17 @@ int Fl_Text_Buffer::line_end(int pos) const {
 } 
 
 
-/** Returns whether character at position \p pos is a word separator.
- Pos must be at a character boundary.
- */
-bool Fl_Text_Buffer::is_word_separator(int pos) const {
-  int c = char_at(pos);
-  if (c < 128) {
-    return !(isalnum(c) || c == '_');  // non alphanumeric ASCII
-  }
-  return (c == 0xA0 ||                 // NO-BREAK SPACE
-          (c >= 0x3000 && c <= 0x301F) // IDEOGRAPHIC punctuation
-         );
-}
-
-
 /*
  Find the beginning of a word.
+ NOT UNICODE SAFE.
  */
 int Fl_Text_Buffer::word_start(int pos) const {
-  while (pos > 0 && !is_word_separator(pos))
-  {
+  // FIXME: character is ucs-4
+  while (pos>0 && (isalnum(char_at(pos)) || char_at(pos) == '_')) {
     pos = prev_char(pos);
-  }
-  if (is_word_separator(pos))
+  } 
+  // FIXME: character is ucs-4
+  if (!(isalnum(char_at(pos)) || char_at(pos) == '_'))
     pos = next_char(pos);
   return pos;
 }
@@ -855,9 +843,11 @@ int Fl_Text_Buffer::word_start(int pos) const {
 
 /*
  Find the end of a word.
+ NOT UNICODE SAFE.
  */
 int Fl_Text_Buffer::word_end(int pos) const {
-  while (pos < length() && !is_word_separator(pos))
+  // FIXME: character is ucs-4
+  while (pos < length() && (isalnum(char_at(pos)) || char_at(pos) == '_'))
   {
     pos = next_char(pos);
   }
@@ -1431,7 +1421,7 @@ void Fl_Text_Buffer::reallocate_with_gap(int newGapStart, int newGapLen)
   mBuf = newBuf;
   mGapStart = newGapStart;
   mGapEnd = newGapEnd;
-}
+  }
 
 
 /*
@@ -1579,7 +1569,7 @@ static int general_input_filter(char *buffer, int buflen,
       if (r == 0) return q - buffer;
       p = line;
     }
-    if (q + 4 /*max width of UTF-8 char*/ > buffer + buflen) {
+    if (q + 4 /*max width of utf-8 char*/ > buffer + buflen) {
       memmove(line, p, endline - p);
       endline -= (p - line);
       return q - buffer;
@@ -1812,5 +1802,5 @@ int Fl_Text_Buffer::utf8_align(int pos) const
 }
 
 //
-// End of "$Id: Fl_Text_Buffer.cxx 12149 2016-12-17 07:42:54Z manolo $".
+// End of "$Id: Fl_Text_Buffer.cxx 10083 2014-01-25 23:47:44Z AlbrechtS $".
 //

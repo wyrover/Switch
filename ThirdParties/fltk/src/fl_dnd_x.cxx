@@ -1,5 +1,5 @@
 //
-// "$Id: fl_dnd_x.cxx 11489 2016-03-31 19:55:03Z manolo $"
+// "$Id: fl_dnd_x.cxx 9979 2013-09-20 03:36:02Z greg.ercolano $"
 //
 // Drag & Drop code for the Fast Light Tool Kit (FLTK).
 //
@@ -20,7 +20,6 @@
 #include <FL/Fl_Window.H>
 #include <FL/x.H>
 #include "flstring.h"
-#include "drivers/X11/Fl_X11_Screen_Driver.H"
 
 
 extern Atom fl_XdndAware;
@@ -80,7 +79,7 @@ static int local_handle(int event, Fl_Window* window) {
   return ret;
 }
 
-int Fl_X11_Screen_Driver::dnd(int unused) {
+int Fl::dnd() {
   Fl_Window *source_fl_win = Fl::first_window();
   Fl::first_window()->cursor(FL_CURSOR_MOVE);
   Window source_window = fl_xid(Fl::first_window());
@@ -98,7 +97,7 @@ int Fl_X11_Screen_Driver::dnd(int unused) {
     for (Window child = RootWindow(fl_display, fl_screen);;) {
       Window root; unsigned int junk3;
       XQueryPointer(fl_display, child, &root, &child,
-                    &Fl::e_x_root, &Fl::e_y_root, &dest_x, &dest_y, &junk3);
+		    &e_x_root, &e_y_root, &dest_x, &dest_y, &junk3);
       if (!child) {
 	if (!new_window && (new_version = dnd_aware(root))) new_window = root;
 	break;
@@ -152,7 +151,7 @@ int Fl_X11_Screen_Driver::dnd(int unused) {
       local_handle(FL_DND_DRAG, local_window);
     } else if (dndversion) {
       fl_sendClientMessage(target_window, fl_XdndPosition, source_window,
-                           0, (Fl::e_x_root<<16)|Fl::e_y_root, fl_event_time,
+			   0, (e_x_root<<16)|e_y_root, fl_event_time,
 			   fl_XdndActionCopy);
     }
     Fl::wait();
@@ -160,7 +159,7 @@ int Fl_X11_Screen_Driver::dnd(int unused) {
 
   if (local_window) {
     fl_i_own_selection[0] = 1;
-    if (local_handle(FL_DND_RELEASE, local_window)) Fl::paste(*Fl::belowmouse(), 0);
+    if (local_handle(FL_DND_RELEASE, local_window)) paste(*belowmouse(), 0);
   } else if (dndversion) {
     fl_sendClientMessage(target_window, fl_XdndDrop, source_window,
 			 0, fl_event_time);
@@ -192,5 +191,5 @@ int Fl_X11_Screen_Driver::dnd(int unused) {
 
 
 //
-// End of "$Id: fl_dnd_x.cxx 11489 2016-03-31 19:55:03Z manolo $".
+// End of "$Id: fl_dnd_x.cxx 9979 2013-09-20 03:36:02Z greg.ercolano $".
 //

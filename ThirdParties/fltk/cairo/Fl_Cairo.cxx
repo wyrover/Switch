@@ -1,5 +1,5 @@
 //
-// "$Id: Fl_Cairo.cxx 11981 2016-09-26 12:08:37Z manolo $"
+// "$Id: Fl_Cairo.cxx 11980 2016-09-26 09:22:55Z manolo $"
 //
 // Main header file for the Fast Light Tool Kit (FLTK).
 //
@@ -29,17 +29,15 @@
 // Cairo is currently supported for the following platforms:
 // Win32, Apple Quartz, X11
 
-#if defined(USE_X11) // X11
+# if defined(USE_X11) // X11
 #  include <cairo-xlib.h>
-#elif defined(WIN32)
+# elif defined(WIN32)
 #  include <cairo-win32.h>
-#elif defined(__APPLE_QUARTZ__) // PORTME: Cairo Support
+# elif defined(__APPLE_QUARTZ__)
 #  include <cairo-quartz.h>
-#elif defined(FL_PORTING)
-# pragma message "FL_PORTING: is the Cairo library available on this platform?"
-#else
+# else
 #  error Cairo is not supported on this platform.
-#endif
+# endif
 
 // static Fl module initialization :
 Fl_Cairo_State Fl::cairo_state_;	///< contains all necessary info for current cairo context mapping
@@ -181,5 +179,5 @@ FL_EXPORT int fltk_cairo_dummy() { return 1;}
 #endif // FLTK_HAVE_CAIRO
 
 //
-// End of "$Id: Fl_Cairo.cxx 11981 2016-09-26 12:08:37Z manolo $" .
+// End of "$Id: Fl_Cairo.cxx 11980 2016-09-26 09:22:55Z manolo $" .
 //

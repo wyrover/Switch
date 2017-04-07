@@ -1,5 +1,5 @@
 //
-// "$Id: hello.cxx 11782 2016-06-14 11:15:22Z AlbrechtS $"
+// "$Id: hello.cxx 8864 2011-07-19 04:49:30Z greg.ercolano $"
 //
 // Hello, World! program for the Fast Light Tool Kit (FLTK).
 //
@@ -33,6 +33,6 @@ int main(int argc, char **argv) {
 }
 
 //
-// End of "$Id: hello.cxx 11782 2016-06-14 11:15:22Z AlbrechtS $".
+// End of "$Id: hello.cxx 8864 2011-07-19 04:49:30Z greg.ercolano $".
 //
 
