@@ -1,5 +1,5 @@
 //
-// "$Id: Fl_Tabs.cxx 11970 2016-09-23 14:03:40Z AlbrechtS $"
+// "$Id: Fl_Tabs.cxx 12186 2017-03-07 00:20:26Z AlbrechtS $"
 //
 // Tab widget for the Fast Light Tool Kit (FLTK).
 //
@@ -63,7 +63,15 @@ int Fl_Tabs::tab_positions() {
     if (o->visible()) selected = i;
 
     int wt = 0; int ht = 0;
+    Fl_Labeltype ot = o->labeltype();
+    Fl_Align oa = o->align();
+    if (ot == FL_NO_LABEL) {
+      o->labeltype(FL_NORMAL_LABEL);
+    }
+    o->align(tab_align());
     o->measure_label(wt,ht);
+    o->labeltype(ot);
+    o->align(oa);
 
     tab_width[i] = wt + EXTRASPACE;
     tab_pos[i+1] = tab_pos[i] + tab_width[i] + BORDER;
@@ -224,7 +232,7 @@ int Fl_Tabs::handle(int event) {
     switch (Fl::event_key()) {
       case FL_Left:
 	if (!children()) return 0;
-	if (child(0)->visible()) return 0;
+        if (child(0)->visible()) return 0;
 	for (i = 1; i < children(); i ++)
 	  if (child(i)->visible()) break;
 	value(child(i - 1));
@@ -233,7 +241,7 @@ int Fl_Tabs::handle(int event) {
         return 1;
       case FL_Right:
 	if (!children()) return 0;
-	if (child(children() - 1)->visible()) return 0;
+        if (child(children() - 1)->visible()) return 0;
 	for (i = 0; i < children(); i ++)
 	  if (child(i)->visible()) break;
 	value(child(i + 1));
@@ -377,7 +385,16 @@ void Fl_Tabs::draw_tab(int x1, int x2, int W, int H, Fl_Widget* o, int what) {
   char prev_draw_shortcut = fl_draw_shortcut;
   fl_draw_shortcut = 1;
 
-  Fl_Boxtype bt = (o==push_ &&!sel) ? fl_down(box()) : box();
+  Fl_Boxtype bt = (o == push_ && !sel) ? fl_down(box()) : box();
+  Fl_Color bc = sel ? selection_color() : o->selection_color();
+
+  // Save the label color and label type
+  Fl_Color oc = o->labelcolor();
+  Fl_Labeltype ot = o->labeltype();
+
+  // Set a labeltype that really draws a label
+  if (ot == FL_NO_LABEL)
+    o->labeltype(FL_NORMAL_LABEL);
 
   // compute offsets to make selected tab look bigger
   int yofs = sel ? 0 : BORDER;
@@ -390,19 +407,11 @@ void Fl_Tabs::draw_tab(int x1, int x2, int W, int H, Fl_Widget* o, int what) {
 
     H += dh;
 
-    Fl_Color c = sel ? selection_color() : o->selection_color();
-
-    draw_box(bt, x1, y() + yofs, W, H + 10 - yofs, c);
-
-    // Save the previous label color
-    Fl_Color oc = o->labelcolor();
+    draw_box(bt, x1, y() + yofs, W, H + 10 - yofs, bc);
 
     // Draw the label using the current color...
     o->labelcolor(sel ? labelcolor() : o->labelcolor());
-    o->draw_label(x1, y() + yofs, W, H - yofs, FL_ALIGN_CENTER);
-
-    // Restore the original label color...
-    o->labelcolor(oc);
+    o->draw_label(x1, y() + yofs, W, H - yofs, tab_align());
 
     if (Fl::focus() == this && o->visible())
       draw_focus(box(), x1, y(), W, H);
@@ -416,19 +425,11 @@ void Fl_Tabs::draw_tab(int x1, int x2, int W, int H, Fl_Widget* o, int what) {
 
     H += dh;
 
-    Fl_Color c = sel ? selection_color() : o->selection_color();
-
-    draw_box(bt, x1, y() + h() - H - 10, W, H + 10 - yofs, c);
-
-    // Save the previous label color
-    Fl_Color oc = o->labelcolor();
+    draw_box(bt, x1, y() + h() - H - 10, W, H + 10 - yofs, bc);
 
     // Draw the label using the current color...
     o->labelcolor(sel ? labelcolor() : o->labelcolor());
-    o->draw_label(x1, y() + h() - H, W, H - yofs, FL_ALIGN_CENTER);
-
-    // Restore the original label color...
-    o->labelcolor(oc);
+    o->draw_label(x1, y() + h() - H, W, H - yofs, tab_align());
 
     if (Fl::focus() == this && o->visible())
       draw_focus(box(), x1, y() + h() - H, W, H);
@@ -436,6 +437,10 @@ void Fl_Tabs::draw_tab(int x1, int x2, int W, int H, Fl_Widget* o, int what) {
     fl_pop_clip();
   }
   fl_draw_shortcut = prev_draw_shortcut;
+
+  // Restore the original label color and label type
+  o->labelcolor(oc);
+  o->labeltype(ot);
 }
 
 /**
@@ -463,16 +468,11 @@ Fl_Tabs::Fl_Tabs(int X,int Y,int W, int H, const char *l) :
   Fl_Group(X,Y,W,H,l)
 {
   box(FL_THIN_UP_BOX);
-#if FLTK_ABI_VERSION >= 10304
-  // NEW (nothing)
-#else
-  // OLD (init to prevent 'unused' warnings) -- STR #3169
-  value_ = 0;	// NOTE: this member unused -- STR #3169
-#endif
   push_ = 0;
   tab_pos = 0;
   tab_width = 0;
   tab_count = 0;
+  tab_align_ = FL_ALIGN_CENTER;
 }
 
 Fl_Tabs::~Fl_Tabs() {
@@ -548,5 +548,5 @@ void Fl_Tabs::clear_tab_positions() {
 }
 
 //
-// End of "$Id: Fl_Tabs.cxx 11970 2016-09-23 14:03:40Z AlbrechtS $".
+// End of "$Id: Fl_Tabs.cxx 12186 2017-03-07 00:20:26Z AlbrechtS $".
 //

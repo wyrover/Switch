@@ -1,5 +1,5 @@
 #
-# "$Id: setup.cmake 10986 2015-12-31 06:19:59Z manolo $"
+# "$Id: setup.cmake 11262 2016-03-02 00:54:37Z matt $"
 #
 # CMakeLists.txt to build the FLTK project using CMake (www.cmake.org)
 # Written by Michael Surette
@@ -22,8 +22,8 @@
 #######################################################################
 # The FLTK version
 set(FLTK_VERSION_MAJOR "1")
-set(FLTK_VERSION_MINOR "3")
-set(FLTK_VERSION_PATCH "4")
+set(FLTK_VERSION_MINOR "4")
+set(FLTK_VERSION_PATCH "0")
 set(FLTK_VERSION "${FLTK_VERSION_MAJOR}.${FLTK_VERSION_MINOR}")
 set(FLTK_VERSION_FULL "${FLTK_VERSION}.${FLTK_VERSION_PATCH}")
 
@@ -99,6 +99,9 @@ if(APPLE)
    if(OPTION_APPLE_X11)
      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -U__APPLE__")
      set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -U__APPLE__")
+   elseif(OPTION_APPLE_SDL)
+     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${SDL2_INCLUDE_DIRS} -U__APPLE__ -DFL_PORTING")
+     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${SDL2_INCLUDE_DIRS} -U__APPLE__ -DFL_PORTING")
    else()
      set(__APPLE_QUARTZ__ 1)
      set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework Cocoa")

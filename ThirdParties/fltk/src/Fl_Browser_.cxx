@@ -1,5 +1,5 @@
 //
-// "$Id: Fl_Browser_.cxx 11849 2016-07-29 09:23:44Z AlbrechtS $"
+// "$Id: Fl_Browser_.cxx 11850 2016-07-29 09:24:04Z AlbrechtS $"
 //
 // Base Browser widget class for the Fast Light Tool Kit (FLTK).
 //
@@ -715,9 +715,9 @@ int Fl_Browser_::handle(int event) {
         switch (Fl::event_key()) {
         case FL_Down:
 	  while ((l = item_next(l))) {
-	    if (item_height(l)>0) {select_only(l, when()); break;}
+            if (item_height(l)>0) {select_only(l, when()); break;}
 	  }
-	  return 1;
+            return 1;
         case FL_Up:
           while ((l = item_prev(l))) {
 	    if (item_height(l)>0) {
@@ -1098,5 +1098,5 @@ void Fl_Browser_::item_select(void *item, int val) {}
 int Fl_Browser_::item_selected(void* item) const { return item==selection_ ? 1 : 0; }
 
 //
-// End of "$Id: Fl_Browser_.cxx 11849 2016-07-29 09:23:44Z AlbrechtS $".
+// End of "$Id: Fl_Browser_.cxx 11850 2016-07-29 09:24:04Z AlbrechtS $".
 //

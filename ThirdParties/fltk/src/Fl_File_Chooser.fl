@@ -1,9 +1,9 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0400
 header_name {../FL/Fl_File_Chooser.H}
 code_name {.cxx}
 comment {//
-// "$Id: Fl_File_Chooser.fl 10973 2015-12-19 06:35:26Z manolo $"
+// "$Id: Fl_File_Chooser.fl 11088 2016-01-30 00:56:42Z AlbrechtS $"
 //
 // Fl_File_Chooser dialog for the Fast Light Tool Kit (FLTK).
 //
@@ -493,6 +493,6 @@ decl {FL_EXPORT void fl_file_chooser_ok_label(const char*l);} {public local
 
 comment {
 //
-// End of "$Id: Fl_File_Chooser.fl 10973 2015-12-19 06:35:26Z manolo $".
+// End of "$Id: Fl_File_Chooser.fl 11088 2016-01-30 00:56:42Z AlbrechtS $".
 //} {in_source in_header
 }

@@ -1,9 +1,9 @@
 //
-// "$Id: Fl_Device.cxx 10970 2015-12-16 07:18:34Z manolo $"
+// "$Id: Fl_Device.cxx 12145 2016-12-12 20:50:16Z AlbrechtS $"
 //
 // implementation of Fl_Device class for the Fast Light Tool Kit (FLTK).
 //
-// Copyright 2010-2012 by Bill Spitzak and others.
+// Copyright 2010-2016 by Bill Spitzak and others.
 //
 // This library is free software. Distribution and use rights are outlined in
 // the file "COPYING" which should have been included with this file.  If this
@@ -17,61 +17,53 @@
 //
 
 #include <FL/Fl.H>
+#include "config_lib.h"
 #include <FL/Fl_Device.H>
-#include <FL/Fl_Image.H>
+#include <FL/Fl_Graphics_Driver.H>
 
-const char *Fl_Device::class_id = "Fl_Device";
-const char *Fl_Surface_Device::class_id = "Fl_Surface_Device";
-const char *Fl_Display_Device::class_id = "Fl_Display_Device";
-const char *Fl_Graphics_Driver::class_id = "Fl_Graphics_Driver";
-#if defined(__APPLE__) || defined(FL_DOXYGEN)
-const char *Fl_Quartz_Graphics_Driver::class_id = "Fl_Quartz_Graphics_Driver";
-#  ifndef FL_DOXYGEN
-   bool Fl_Display_Device::high_res_window_ = false;
-#  endif
-#endif
-#if defined(WIN32) || defined(FL_DOXYGEN)
-const char *Fl_GDI_Graphics_Driver::class_id = "Fl_GDI_Graphics_Driver";
-const char *Fl_GDI_Printer_Graphics_Driver::class_id = "Fl_GDI_Printer_Graphics_Driver";
-#endif
-#if !(defined(__APPLE__) || defined(WIN32))
-const char *Fl_Xlib_Graphics_Driver::class_id = "Fl_Xlib_Graphics_Driver";
-#endif
+/* Attempt at an inheritance diagram.
+ 
+ 
+  +- Fl_Surface_Device: any kind of surface that we can draw onto -> uses an Fl_Graphics_Driver
+      |
+      +- Fl_Display_Device: some kind of video device
+      +- Fl_Copy_Surface: create an image for dnd or copy/paste
+      +- Fl_Image_Surface: create an RGB Image
+      +- Fl_Paged_Device: output to a printer or similar
+          |
+          +- Fl_..._Surface_: platform specific driver
+          +- Fl_Printer: user can instantiate this to gain access to a printer
+          +- Fl_System_Printer:
+          +- Fl_PostScript_File_Device
+              |
+              +- Fl_PostScript_Printer
+ 
+  +- Fl_Graphics_Driver
+      |
+      +- Fl_..._Graphics_Driver: platform specific graphics driver
 
+*/
 
-/** \brief Make this surface the current drawing surface.
- This surface will receive all future graphics requests. */
+/** Make this surface the current drawing surface.
+ This surface will receive all future graphics requests. 
+ \p Starting from FLTK 1.4.0, another convenient API to set/unset the current drawing surface
+ is Fl_Surface_Device::push_current( ) / Fl_Surface_Device::pop_current().*/
 void Fl_Surface_Device::set_current(void)
 {
-  fl_graphics_driver = _driver;
-  _surface = this;
+  if (surface_) surface_->end_current_();
+  fl_graphics_driver = pGraphicsDriver;
+  surface_ = this;
+  pGraphicsDriver->global_gc();
 }
 
-FL_EXPORT Fl_Graphics_Driver *fl_graphics_driver; // the current target device of graphics operations
-Fl_Surface_Device* Fl_Surface_Device::_surface; // the current target surface of graphics operations
+Fl_Surface_Device* Fl_Surface_Device::surface_; // the current target surface of graphics operations
 
-const Fl_Graphics_Driver::matrix Fl_Graphics_Driver::m0 = {1, 0, 0, 1, 0, 0};
 
-Fl_Graphics_Driver::Fl_Graphics_Driver() {
-  font_ = 0;
-  size_ = 0;
-  sptr=0; rstackptr=0; 
-  rstack[0] = NULL;
-  fl_clip_state_number=0;
-  m = m0; 
-  fl_matrix = &m; 
-  p = (XPOINT *)0;
-  font_descriptor_ = NULL;
-  p_size = 0;
-};
-
-void Fl_Graphics_Driver::text_extents(const char*t, int n, int& dx, int& dy, int& w, int& h)
+Fl_Surface_Device::~Fl_Surface_Device()
 {
-  w = (int)width(t, n);
-  h = - height();
-  dx = 0;
-  dy = descent();
+  if (surface_ == this) surface_ = NULL;
 }
+
 
 /**  A constructor that sets the graphics driver used by the display */
 Fl_Display_Device::Fl_Display_Device(Fl_Graphics_Driver *graphics_driver) : Fl_Surface_Device(graphics_driver) {
@@ -79,17 +71,9 @@ Fl_Display_Device::Fl_Display_Device(Fl_Graphics_Driver *graphics_driver) : Fl_S
 };
 
 
-/** Returns the platform display device. */
+/** Returns a pointer to the unique display device */
 Fl_Display_Device *Fl_Display_Device::display_device() {
-  static Fl_Display_Device *display = new Fl_Display_Device(new
-#if defined(__APPLE__)
-                                                                  Fl_Quartz_Graphics_Driver
-#elif defined(WIN32)
-                                                                  Fl_GDI_Graphics_Driver
-#else
-                                                                  Fl_Xlib_Graphics_Driver
-#endif
-                                                                 );
+  static Fl_Display_Device *display = new Fl_Display_Device(Fl_Graphics_Driver::newMainGraphicsDriver());
   return display;
 };
 
@@ -99,9 +83,31 @@ Fl_Surface_Device *Fl_Surface_Device::default_surface()
   return Fl_Display_Device::display_device();
 }
 
+static unsigned int surface_stack_height = 0;
+static Fl_Surface_Device *surface_stack[16];
 
-Fl_Display_Device *Fl_Display_Device::_display = Fl_Display_Device::display_device();
+/** Pushes \p new_current on top of the stack of current drawing surfaces, and makes it current.
+ \p new_current will receive all future graphics requests.
+ \version 1.4.0 */
+void Fl_Surface_Device::push_current(Fl_Surface_Device *new_current)
+{
+  if (surface_stack_height < sizeof(surface_stack)/sizeof(void*)) {
+    surface_stack[surface_stack_height++] = surface();
+  } else {
+    fprintf(stderr, "FLTK Fl_Surface_Device::push_current Stack overflow error\n");
+  }
+  new_current->set_current();
+}
+
+/** Removes the top element from the current drawing surface stack, and makes the new top element current.
+ \return A pointer to the new current drawing surface. 
+ \version 1.4.0 */
+Fl_Surface_Device *Fl_Surface_Device::pop_current()
+{
+  if (surface_stack_height > 0) surface_stack[--surface_stack_height]->set_current();
+  return surface_;
+}
 
 //
-// End of "$Id: Fl_Device.cxx 10970 2015-12-16 07:18:34Z manolo $".
+// End of "$Id: Fl_Device.cxx 12145 2016-12-12 20:50:16Z AlbrechtS $".
 //

@@ -1,5 +1,5 @@
 //
-// "$Id: Enumerations.H 11803 2016-07-09 18:43:31Z AlbrechtS $"
+// "$Id: Enumerations.H 12182 2017-03-05 11:27:30Z AlbrechtS $"
 //
 // Enumerations for the Fast Light Tool Kit (FLTK).
 //
@@ -25,19 +25,8 @@
 
 /*
  ******************************************************************************
- * Notes on FL_ABI_VERSION and deprecated (obsolete) FLTK_ABI_VERSION:
- *
- * (1)	FLTK_ABI_VERSION is deprecated, but still defined below.
- *	Do NOT define FLTK_ABI_VERSION here - it would be overwritten later.
- *
- * (2)	FL_ABI_VERSION is now (as of FLTK 1.3.4) defined by configure
- *	or CMake. Do NOT define it here. Its definition will be included
- *	below by "#include <FL/abi-version.h>".
- *
- * (3)	If you use the provided IDE files (Windows VC++ or Xcode) you should
- *	edit the definition in the provided file abi-version.ide. The correct
- *	file is `/path/to/fltk/abi-version.ide' .
- *
+ * FL_ABI_VERSION is defined by configure or CMake since FLTK 1.3.4.
+ * It is written to FL/abi-version.h and #included here.
  ******************************************************************************
  * For more informations on FL_ABI_VERSION see README.abi-version.txt.
  ******************************************************************************
@@ -47,6 +36,7 @@
 
 #  include "Fl_Export.H"
 #  include "fl_types.h"
+#  include <FL/platform_types.h> // for FL_COMMAND and FL_CONTROL
 
 /** \name Version Numbers
 
@@ -68,14 +58,14 @@
 
    FLTK remains mostly source-code compatible between minor version changes.
  */
-#define FL_MINOR_VERSION	3
+#define FL_MINOR_VERSION	4
 
 /**
    The patch version for this library.
 
    FLTK remains binary compatible between patches.
  */
-#define FL_PATCH_VERSION	4
+#define FL_PATCH_VERSION	0
 
 /**
     The FLTK version number as a \em double.
@@ -184,19 +174,6 @@
 
 #endif
 
-/*
-  FLTK_ABI_VERSION is deprecated (replaced by FL_ABI_VERSION).
-
-  This deprecated constant will be removed in FLTK 1.4.0 and later.
-  Please use FL_ABI_VERSION when FLTK 1.4.0 has been released.
-*/
-
-#ifdef FLTK_ABI_VERSION
-#undef FLTK_ABI_VERSION
-#endif
-
-#define FLTK_ABI_VERSION FL_ABI_VERSION
-
 /*@}*/	// group: Version Numbers
 
 /**
@@ -217,7 +194,7 @@
 
     \sa Fl::event_text(), Fl::event_key(), class Fl::
  */
-// DEV NOTE: Keep this list in sync with FL/names.H
+// DEV NOTE: Keep this list in sync with FL/names.h
 enum Fl_Event {	// events
   /** No event. */
   FL_NO_EVENT		= 0,
@@ -427,6 +404,8 @@ enum Fl_Event {	// events
       Fl::event_x() and Fl::event_y() are set as well.
      */
   FL_ZOOM_GESTURE	= 26
+
+// DEV NOTE: Keep this list in sync with FL/names.h
 };
 
 /** \name When Conditions */
@@ -572,14 +551,6 @@ enum Fl_When { // Fl_Widget::when():
 
 #define FL_KEY_MASK 0x0000ffff		///< All keys are 16 bit for now 
 					//   FIXME: Unicode needs 24 bits!
-
-#ifdef __APPLE__
-#  define FL_COMMAND	FL_META		///< An alias for FL_CTRL on WIN32 and X11, or FL_META on MacOS X
-#  define FL_CONTROL 	FL_CTRL		///< An alias for FL_META on WIN32 and X11, or FL_CTRL on MacOS X
-#else
-#  define FL_COMMAND	FL_CTRL		///< An alias for FL_CTRL on WIN32 and X11, or FL_META on MacOS X
-#  define FL_CONTROL	FL_META		///< An alias for FL_META on WIN32 and X11, or FL_CTRL on MacOS X
-#endif // __APPLE__
 
 /*@}*/		// group: Event States
 
@@ -773,8 +744,8 @@ enum Fl_Labeltype {	// labeltypes:
   FL_FREE_LABELTYPE    ///< first free labeltype to use for creating own labeltypes
 };
 
-/** 
-  Sets the current label type and return its corresponding Fl_Labeltype value. 
+/**
+  Sets the current label type and returns its corresponding Fl_Labeltype value.
   @{
 */
 #define FL_SYMBOL_LABEL FL_NORMAL_LABEL
@@ -786,19 +757,22 @@ extern Fl_Labeltype FL_EXPORT fl_define_FL_EMBOSSED_LABEL();
 #define FL_EMBOSSED_LABEL fl_define_FL_EMBOSSED_LABEL()
 /** @} */
 
-/** \name Alignment Flags 
-    Flags to control the label alignment. 
+/** \name Alignment Flags
+  Flags to control the label alignment.
 
-    This controls how the label is displayed next to or inside the widget. 
-    The default value is FL_ALIGN_CENTER (0) for most widgets, which centers
-    the label inside the widget.
+  This controls how the label is displayed next to or inside the widget.
+  The default value is FL_ALIGN_CENTER (0) for most widgets, which centers
+  the label inside the widget.
 
-    Flags can be or'd to achieve a combination of alignments, but there
-    are some "magic values" (e.g. combinations of TOP and BOTTOM and of
-    LEFT and RIGHT) that have special meanings (see below). For instance:<BR>
-    FL_ALIGN_TOP_LEFT == (FL_ALIGN_TOP|FL_ALIGN_LEFT) != FL_ALIGN_LEFT_TOP.
+  All alignment flags use the common prefix "FL_ALIGN_". In the following
+  descriptions this prefix is sometimes omitted for brevity.
 
-    \code
+  Flags can be or'd to achieve a combination of alignments, but there
+  are some \e "magic values" (e.g. combinations of TOP and BOTTOM and of
+  LEFT and RIGHT) that have special meanings (see below). For instance:\n
+  FL_ALIGN_TOP_LEFT == (FL_ALIGN_TOP | FL_ALIGN_LEFT) != FL_ALIGN_LEFT_TOP.
+
+  \code
     Outside alignments (FL_ALIGN_INSIDE is not set):
 
                TOP_LEFT        TOP       TOP_RIGHT
@@ -820,52 +794,98 @@ extern Fl_Labeltype FL_EXPORT fl_define_FL_EMBOSSED_LABEL();
                |                                 |
                |BOTTOM_LEFT  BOTTOM  BOTTOM_RIGHT|
                +---------------------------------+
-    \endcode
-    \see #FL_ALIGN_CENTER, etc.
+  \endcode
+  \see Fl_Align, #FL_ALIGN_CENTER, etc.
+
+  \note
+    -# Bit positions not defined in the following constants of type
+       \p Fl_Align are reserved for future extensions. Do not use.
+    -# The \e "magic values" (FL_ALIGN_)LEFT_TOP, RIGHT_TOP, LEFT_BOTTOM,
+       and RIGHT_BOTTOM must not be used together with FL_ALIGN_INSIDE.
+       Use TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, or BOTTOM_RIGHT instead.
+    -# Although bits can be or'd together there are some unused/illegal
+       combinations, for instance:
+      - setting both FL_ALIGN_TOP and FL_ALIGN_BOTTOM in combinations other
+	than those given in the \p Fl_Align constants below (magic values)
+      - setting both FL_ALIGN_LEFT and FL_ALIGN_RIGHT in combinations other
+	than those given in the \p Fl_Align constants below (magic values)
+      - using one of the "magic values" (2) together with FL_ALIGN_INSIDE
+  \note
+    Using illegal bit combinations or undefined bits may yield unexpected
+    behavior, and this behavior may be changed without notice in future
+    FLTK versions.
  */
 /*@{*/
-/** FLTK type for alignment control */
+/** FLTK type for alignment control. */
 typedef unsigned Fl_Align;
+
   /** Align the label horizontally in the middle. */
-const Fl_Align FL_ALIGN_CENTER		= (Fl_Align)0;
+const Fl_Align FL_ALIGN_CENTER		= 0x0000;
+
   /** Align the label at the top of the widget. Inside labels appear below the top,
       outside labels are drawn on top of the widget. */
-const Fl_Align FL_ALIGN_TOP		= (Fl_Align)1;
+const Fl_Align FL_ALIGN_TOP		= 0x0001;
+
   /** Align the label at the bottom of the widget. */
-const Fl_Align FL_ALIGN_BOTTOM		= (Fl_Align)2;
+const Fl_Align FL_ALIGN_BOTTOM		= 0x0002;
+
   /** Align the label at the left of the widget. Inside labels appear left-justified
       starting at the left side of the widget, outside labels are right-justified and
       drawn to the left of the widget. */
-const Fl_Align FL_ALIGN_LEFT		= (Fl_Align)4;
+const Fl_Align FL_ALIGN_LEFT		= 0x0004;
+
   /** Align the label to the right of the widget. */
-const Fl_Align FL_ALIGN_RIGHT		= (Fl_Align)8;
+const Fl_Align FL_ALIGN_RIGHT		= 0x0008;
+
   /** Draw the label inside of the widget. */
-const Fl_Align FL_ALIGN_INSIDE		= (Fl_Align)16;
+const Fl_Align FL_ALIGN_INSIDE		= 0x0010;
+
   /** If the label contains an image, draw the text on top of the image. */
-const Fl_Align FL_ALIGN_TEXT_OVER_IMAGE	= (Fl_Align)0x0020;
+const Fl_Align FL_ALIGN_TEXT_OVER_IMAGE	= 0x0020;
+
   /** If the label contains an image, draw the text below the image. */
-const Fl_Align FL_ALIGN_IMAGE_OVER_TEXT	= (Fl_Align)0x0000;
-  /** All parts of the label that are lager than the widget will not be drawn . */
-const Fl_Align FL_ALIGN_CLIP		= (Fl_Align)64;
+const Fl_Align FL_ALIGN_IMAGE_OVER_TEXT	= 0x0000;
+
+  /** All parts of the label that are larger than the widget will not be drawn. */
+const Fl_Align FL_ALIGN_CLIP		= 0x0040;
+
   /** Wrap text that does not fit the width of the widget. */
-const Fl_Align FL_ALIGN_WRAP		= (Fl_Align)128;
+const Fl_Align FL_ALIGN_WRAP		= 0x0080;
+
   /** If the label contains an image, draw the text to the right of the image. */
-const Fl_Align FL_ALIGN_IMAGE_NEXT_TO_TEXT = (Fl_Align)0x0100;
+const Fl_Align FL_ALIGN_IMAGE_NEXT_TO_TEXT = 0x0100;
+
   /** If the label contains an image, draw the text to the left of the image. */
-const Fl_Align FL_ALIGN_TEXT_NEXT_TO_IMAGE = (Fl_Align)0x0120;
+const Fl_Align FL_ALIGN_TEXT_NEXT_TO_IMAGE = 0x0120;
+
 /** If the label contains an image, draw the image or deimage in the background. */
-const Fl_Align FL_ALIGN_IMAGE_BACKDROP  = (Fl_Align)0x0200;
+const Fl_Align FL_ALIGN_IMAGE_BACKDROP  = 0x0200;
+
 const Fl_Align FL_ALIGN_TOP_LEFT	= FL_ALIGN_TOP | FL_ALIGN_LEFT;
 const Fl_Align FL_ALIGN_TOP_RIGHT	= FL_ALIGN_TOP | FL_ALIGN_RIGHT;
 const Fl_Align FL_ALIGN_BOTTOM_LEFT	= FL_ALIGN_BOTTOM | FL_ALIGN_LEFT;
 const Fl_Align FL_ALIGN_BOTTOM_RIGHT	= FL_ALIGN_BOTTOM | FL_ALIGN_RIGHT;
-const Fl_Align FL_ALIGN_LEFT_TOP	= 0x0007; // magic value
-const Fl_Align FL_ALIGN_RIGHT_TOP	= 0x000b; // magic value
-const Fl_Align FL_ALIGN_LEFT_BOTTOM	= 0x000d; // magic value
-const Fl_Align FL_ALIGN_RIGHT_BOTTOM	= 0x000e; // magic value
-const Fl_Align FL_ALIGN_NOWRAP		= (Fl_Align)0; // for back compatibility
-const Fl_Align FL_ALIGN_POSITION_MASK   = 0x000f; // left, right, top, bottom
-const Fl_Align FL_ALIGN_IMAGE_MASK      = 0x0320; // l/r, t/b, backdrop
+
+/** Outside only, left of widget, top position, magic value: TOP | BOTTOM | LEFT. */
+const Fl_Align FL_ALIGN_LEFT_TOP	= 0x0007;
+
+/** Outside only, right of widget, top position, magic value: TOP | BOTTOM | RIGHT. */
+const Fl_Align FL_ALIGN_RIGHT_TOP	= 0x000b;
+
+/** Outside only, left of widget, bottom position, magic value: TOP | LEFT | RIGHT. */
+const Fl_Align FL_ALIGN_LEFT_BOTTOM	= 0x000d;
+
+/** Outside only, right of widget, bottom position, magic value: BOTTOM | LEFT | RIGHT. */
+const Fl_Align FL_ALIGN_RIGHT_BOTTOM	= 0x000e;
+
+/** Nothing, same as FL_ALIGN_CENTER, for back compatibility. */
+const Fl_Align FL_ALIGN_NOWRAP		= 0x0000;
+
+/** Mask value to test for TOP, BOTTOM, LEFT, and RIGHT flags. */
+const Fl_Align FL_ALIGN_POSITION_MASK   = 0x000f;
+
+/** Mask value to test for image alignment flags. */
+const Fl_Align FL_ALIGN_IMAGE_MASK      = 0x0320;
 /*@}*/
 
 
@@ -1123,5 +1143,5 @@ enum Fl_Damage {
 #endif
 
 //
-// End of "$Id: Enumerations.H 11803 2016-07-09 18:43:31Z AlbrechtS $".
+// End of "$Id: Enumerations.H 12182 2017-03-05 11:27:30Z AlbrechtS $".
 //

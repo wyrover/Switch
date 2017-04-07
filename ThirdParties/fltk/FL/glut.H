@@ -1,5 +1,5 @@
 //
-// "$Id: glut.H 10665 2015-04-03 11:04:43Z AlbrechtS $"
+// "$Id: glut.H 12151 2016-12-20 23:27:29Z greg.ercolano $"
 //
 // GLUT emulation header file for the Fast Light Tool Kit (FLTK).
 //
@@ -39,7 +39,7 @@
 
 /** 
   GLUT is emulated using this window class and these static variables
-  (plus several more static variables hidden in glut_compatability.cxx):
+  (plus several more static variables hidden in glut_compatibility.cxx):
 */
 class FL_EXPORT Fl_Glut_Window : public Fl_Gl_Window {
   void _init();
@@ -62,8 +62,8 @@ public: // so the inline functions work
   void (*entry)(int);
   void (*visibility)(int);
   void (*special)(int, int x, int y);
-  Fl_Glut_Window(int w, int h, const char *);
-  Fl_Glut_Window(int x, int y, int w, int h, const char *);
+  Fl_Glut_Window(int w, int h, const char *t=0);
+  Fl_Glut_Window(int x, int y, int w, int h, const char *t=0);
   ~Fl_Glut_Window();
 };
 
@@ -477,5 +477,5 @@ FL_EXPORT void glutSolidIcosahedron();
 #endif // !Fl_glut_H
 
 //
-// End of "$Id: glut.H 10665 2015-04-03 11:04:43Z AlbrechtS $".
+// End of "$Id: glut.H 12151 2016-12-20 23:27:29Z greg.ercolano $".
 //

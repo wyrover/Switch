@@ -1,5 +1,5 @@
 //
-// "$Id: sudoku.cxx 11535 2016-04-05 21:12:49Z AlbrechtS $"
+// "$Id: sudoku.cxx 11536 2016-04-05 21:15:45Z AlbrechtS $"
 //
 // Sudoku game using the Fast Light Tool Kit (FLTK).
 //
@@ -45,6 +45,12 @@
 #ifndef WIN32
 #  include <unistd.h>
 #endif // !WIN32
+
+#if defined(WIN32) || defined(__APPLE__)
+#elif defined(FL_PORTING)
+#  pragma message "FL_PORTING: FLTK does not provide cross platform sound support"
+#else
+#endif
 
 #ifdef HAVE_ALSA_ASOUNDLIB_H
 #  define ALSA_PCM_NEW_HW_PARAMS_API
@@ -1337,5 +1343,5 @@ main(int argc, char *argv[]) {
 
 
 //
-// End of "$Id: sudoku.cxx 11535 2016-04-05 21:12:49Z AlbrechtS $".
+// End of "$Id: sudoku.cxx 11536 2016-04-05 21:15:45Z AlbrechtS $".
 //

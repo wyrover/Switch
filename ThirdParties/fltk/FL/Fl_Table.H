@@ -1,5 +1,5 @@
 //
-// "$Id: Fl_Table.H 11094 2016-01-31 02:49:56Z AlbrechtS $"
+// "$Id: Fl_Table.H 11428 2016-03-26 02:55:14Z AlbrechtS $"
 //
 // Fl_Table -- A table widget
 //
@@ -209,15 +209,11 @@ private:
   
   int _auto_drag;
   int _selecting;
-#if FLTK_ABI_VERSION >= 10301
   int _scrollbar_size;
-#endif
-#if FLTK_ABI_VERSION >= 10303
   enum {
     TABCELLNAV = 1<<0,			///> tab cell navigation flag
   };
   unsigned int flags_;
-#endif
   
   // An STL-ish vector without templates
   class FL_EXPORT IntVector {
@@ -1079,8 +1075,6 @@ public:
   void callback(Fl_Widget*, void*);
 #endif
 
-#if FLTK_ABI_VERSION >= 10301
-  // NEW
   /**
     Gets the current size of the scrollbars' troughs, in pixels.
 
@@ -1093,6 +1087,7 @@ public:
   int scrollbar_size() const {
       return(_scrollbar_size);
   }
+
   /**
     Sets the pixel size of the scrollbars' troughs to \p newSize, in pixels.
 
@@ -1114,9 +1109,8 @@ public:
   void scrollbar_size(int newSize) {
       if ( newSize != _scrollbar_size ) redraw();
       _scrollbar_size = newSize;
-  }   
-#endif
-#if FLTK_ABI_VERSION >= 10303
+  }
+
   /**
     Flag to control if Tab navigates table cells or not.
 
@@ -1145,11 +1139,10 @@ public:
   int tab_cell_nav() const {
     return(flags_ & TABCELLNAV ? 1 : 0);
   }
-#endif
 };
 
 #endif /*_FL_TABLE_H*/
 
 //
-// End of "$Id: Fl_Table.H 11094 2016-01-31 02:49:56Z AlbrechtS $".
+// End of "$Id: Fl_Table.H 11428 2016-03-26 02:55:14Z AlbrechtS $".
 //

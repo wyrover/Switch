@@ -1,5 +1,5 @@
 //
-// "$Id: Fl_Function_Type.cxx 11952 2016-09-20 12:57:18Z AlbrechtS $"
+// "$Id: Fl_Function_Type.cxx 11956 2016-09-20 13:31:38Z AlbrechtS $"
 //
 // C function type code for the Fast Light Tool Kit (FLTK).
 //
@@ -1492,5 +1492,5 @@ int Fl_Class_Type::has_function(const char *rtype, const char *sig) const {
 }
 
 //
-// End of "$Id: Fl_Function_Type.cxx 11952 2016-09-20 12:57:18Z AlbrechtS $".
+// End of "$Id: Fl_Function_Type.cxx 11956 2016-09-20 13:31:38Z AlbrechtS $".
 //

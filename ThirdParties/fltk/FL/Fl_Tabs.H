@@ -1,5 +1,5 @@
 //
-// "$Id: Fl_Tabs.H 10492 2014-12-19 03:41:45Z greg.ercolano $"
+// "$Id: Fl_Tabs.H 12185 2017-03-06 16:54:33Z AlbrechtS $"
 //
 // Tab header file for the Fast Light Tool Kit (FLTK).
 //
@@ -199,12 +199,6 @@
 	such as using the arrow keys while at the left or right end of the tabs.
 */
 class FL_EXPORT Fl_Tabs : public Fl_Group {
-#if FLTK_ABI_VERSION >= 10304
-  // NEW (nothing)
-#else
-  // OLD (maintained for ABI compat)
-  Fl_Widget *value_;	// NOTE: this member no longer used -- STR #3169
-#endif
   Fl_Widget *push_;
   int *tab_pos;		// array of x-offsets of tabs per child + 1
   int *tab_width;	// array of widths of tabs per child + 1
@@ -214,6 +208,7 @@ class FL_EXPORT Fl_Tabs : public Fl_Group {
   int tab_height();
   void draw_tab(int x1, int x2, int W, int H, Fl_Widget* o, int sel=0);
 protected:
+  Fl_Align tab_align_;	// tab label alignment
   void redraw_tabs();
   void draw();
 
@@ -237,10 +232,28 @@ public:
   Fl_Widget *which(int event_x, int event_y);
   ~Fl_Tabs();
   void client_area(int &rx, int &ry, int &rw, int &rh, int tabh=0);
+  /**
+    Sets the tab label alignment.
+
+    The default is FL_ALIGN_CENTER so tab labels are centered, but since
+    the label space is measured (per label) to fit the labels, there
+    wouldn't be any difference if labels were aligned left or right.
+
+    If you want to show an image (icon) next to the group's label you can
+    set a different label alignment. FL_ALIGN_IMAGE_NEXT_TO_TEXT is the
+    recommended alignment to show the icon left of the text.
+  */
+  void tab_align(Fl_Align a) {tab_align_ = a;}
+  /**
+    Gets the tab label alignment.
+
+    \see tab_align(Fl_Align)
+  */
+  Fl_Align tab_align() const {return tab_align_;}
 };
 
 #endif
 
 //
-// End of "$Id: Fl_Tabs.H 10492 2014-12-19 03:41:45Z greg.ercolano $".
+// End of "$Id: Fl_Tabs.H 12185 2017-03-06 16:54:33Z AlbrechtS $".
 //

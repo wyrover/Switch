@@ -1,5 +1,5 @@
 //
-// "$Id: tree-of-tables.cxx 10040 2014-01-01 17:13:48Z greg.ercolano $"
+// "$Id: tree-of-tables.cxx 12121 2016-11-19 01:20:53Z AlbrechtS $"
 //
 //	Fl_Tree as a container of Fl_Table's. - erco 04/25/2012
 //
@@ -7,7 +7,7 @@
 //      contains a complex widget.
 //
 // Copyright 2010,2012 Greg Ercolano.
-// Copyright 1998-2010 by Bill Spitzak and others.
+// Copyright 1998-2016 by Bill Spitzak and others.
 //
 // This library is free software. Distribution and use rights are outlined in
 // the file "COPYING" which should have been included with this file.  If this
@@ -29,7 +29,6 @@
 #define PI 3.14159
 #endif
 
-#if FLTK_ABI_VERSION >= 10301
 class MyTable : public Fl_Table {
   const char *mode;
 public:
@@ -142,14 +141,7 @@ int main(int argc, char *argv[]) {
   win->show(argc, argv);
   return(Fl::run());
 }
-#else /*FLTK_ABI_VERSION*/
-#include <FL/fl_ask.H>
-int main(int argc, char *argv[]) {
-  fl_alert("This example must have FLTK_ABI_VERSION enabled to work properly.");
-  return 1;
-}
-#endif
 
 //
-// End of "$Id: tree-of-tables.cxx 10040 2014-01-01 17:13:48Z greg.ercolano $".
+// End of "$Id: tree-of-tables.cxx 12121 2016-11-19 01:20:53Z AlbrechtS $".
 //

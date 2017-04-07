@@ -1,5 +1,5 @@
 //
-// "$Id: fullscreen.cxx 11797 2016-06-22 08:46:02Z manolo $"
+// "$Id: fullscreen.cxx 11796 2016-06-22 08:36:48Z manolo $"
 //
 
 //
@@ -163,11 +163,6 @@ void border_cb(Fl_Widget *o, void *p) {
   Fl_Window *w = (Fl_Window *)p;
   int d = ((Fl_Button *)o)->value();
   w->border(d);
-#if defined(WIN32) || defined(__APPLE__)
-  int wx = w->x(), wy = w->y();
-  w->hide(); w->show();
-  w->position(wx, wy);
-#endif
 }
 
 Fl_Button *border_button;
@@ -243,7 +238,7 @@ void update_screeninfo(Fl_Widget *b, void *p) {
         float dpih, dpiv;
 	Fl::screen_xywh(x, y, w, h, n);
         Fl::screen_dpi(dpih, dpiv, n);
-        sprintf(line, "Screen %d: %dx%d@%d,%d DPI:%.1fx%.1f", n, w, h, x, y, dpih, dpiv);
+	sprintf(line, "Screen %d: %dx%d@%d,%d DPI:%.1fx%.1f", n, w, h, x, y, dpih, dpiv);
 	browser->add(line);
 	Fl::screen_work_area(x, y, w, h, n);
 	sprintf(line, "Work area %d: %dx%d@%d,%d", n, w, h, x, y);
@@ -348,5 +343,5 @@ int main(int argc, char **argv) {
 }
 
 //
-// End of "$Id: fullscreen.cxx 11797 2016-06-22 08:46:02Z manolo $".
+// End of "$Id: fullscreen.cxx 11796 2016-06-22 08:36:48Z manolo $".
 //

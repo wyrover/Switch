@@ -1,5 +1,5 @@
 //
-// "$Id: forms_timer.cxx 10413 2014-10-30 09:16:49Z cand $"
+// "$Id: forms_timer.cxx 11155 2016-02-11 12:02:36Z matt $"
 //
 // Forms timer object for the Fast Light Tool Kit (FLTK).
 //
@@ -52,6 +52,8 @@ void fl_gettime(long* sec, long* usec) {
   *sec = (long) tp.time;
   *usec = tp.millitm * 1000;
 # endif
+#elif defined(FL_PORTING) && !defined(__APPLE__) // PORTME: platform timer
+#  pragma message "FL_PORTING: implement time, rarely needed, if ever."
 #else
   struct timeval tp;
   struct timezone tzp;
@@ -174,5 +176,5 @@ void Fl_Timer::suspended(char d) {
 }
 
 //
-// End of "$Id: forms_timer.cxx 10413 2014-10-30 09:16:49Z cand $".
+// End of "$Id: forms_timer.cxx 11155 2016-02-11 12:02:36Z matt $".
 //

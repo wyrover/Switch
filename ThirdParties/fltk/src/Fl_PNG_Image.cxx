@@ -1,5 +1,5 @@
 //
-// "$Id: Fl_PNG_Image.cxx 11535 2016-04-05 21:12:49Z AlbrechtS $"
+// "$Id: Fl_PNG_Image.cxx 11574 2016-04-10 18:22:57Z manolo $"
 //
 // Fl_PNG_Image routines.
 //
@@ -26,10 +26,11 @@
 // Include necessary header files...
 //
 
+#include <config.h>
 #include <FL/Fl.H>
+#include <FL/Fl_System_Driver.H>
 #include <FL/Fl_PNG_Image.H>
 #include <FL/Fl_Shared_Image.H>
-#include <config.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <FL/fl_utf8.h>
@@ -206,15 +207,7 @@ void Fl_PNG_Image::load_png_(const char *name_png, const unsigned char *buffer_p
   for (i = png_set_interlace_handling(pp); i > 0; i --)
     png_read_rows(pp, rows, NULL, h());
 
-#ifdef WIN32
-  // Some Windows graphics drivers don't honor transparency when RGB == white
-  if (channels == 4) {
-    // Convert RGB to 0 when alpha == 0...
-    uchar *ptr = (uchar *)array;
-    for (i = w() * h(); i > 0; i --, ptr += 4)
-      if (!ptr[3]) ptr[0] = ptr[1] = ptr[2] = 0;
-  }
-#endif // WIN32
+  if (channels == 4) Fl::system_driver()->png_extra_rgba_processing((uchar*)array, w(), h());
 
   // Free memory and return...
   delete[] rows;
@@ -235,5 +228,5 @@ void Fl_PNG_Image::load_png_(const char *name_png, const unsigned char *buffer_p
 
 
 //
-// End of "$Id: Fl_PNG_Image.cxx 11535 2016-04-05 21:12:49Z AlbrechtS $".
+// End of "$Id: Fl_PNG_Image.cxx 11574 2016-04-10 18:22:57Z manolo $".
 //

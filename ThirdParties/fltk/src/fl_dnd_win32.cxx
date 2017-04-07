@@ -1,5 +1,5 @@
 //
-// "$Id: fl_dnd_win32.cxx 11131 2016-02-07 10:10:52Z AlbrechtS $"
+// "$Id: fl_dnd_win32.cxx 11489 2016-03-31 19:55:03Z manolo $"
 //
 // Drag & Drop code for the Fast Light Tool Kit (FLTK).
 //
@@ -24,6 +24,7 @@
 #include <FL/x.H>
 #include <FL/Fl_Window.H>
 #include <FL/fl_utf8.h>
+#include "drivers/WinAPI/Fl_WinAPI_Screen_Driver.H"
 #include "flstring.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -274,8 +275,8 @@ private:
       int i, n, nn = 0, nf = DragQueryFileW( hdrop, (UINT)-1, 0, 0 );
         for ( i=0; i<nf; i++ ) nn += DragQueryFileW( hdrop, i, 0, 0 );
       nn += nf;
-        xchar *dst = (xchar *)malloc(nn * sizeof(xchar));
-        xchar *bu = dst;
+        wchar_t *dst = (wchar_t *)malloc(nn * sizeof(wchar_t));
+        wchar_t *bu = dst;
       for ( i=0; i<nf; i++ ) {
           n = DragQueryFileW( hdrop, i, (WCHAR*)dst, nn );
           dst += n;
@@ -479,7 +480,7 @@ public:
 //
 //        df->fWide = TRUE;
 //        l = fl_utf2unicode((unsigned char*)fl_selection_buffer[0],
-//                             fl_selection_length[0], (xchar*)(((char*)pMem)
+//                             fl_selection_length[0], (wchar_t*)(((char*)pMem)
 //                              + sizeof(DROPFILES)));
 //
 //      pMem[l * sizeof(WCHAR) + sizeof(DROPFILES)] = 0;
@@ -520,7 +521,7 @@ public:
 };
 
 
-int Fl::dnd()
+int Fl_WinAPI_Screen_Driver::dnd(int unused)
 {
   DWORD dropEffect;
   ReleaseCapture();
@@ -548,5 +549,5 @@ int Fl::dnd()
 }
 
 //
-// End of "$Id: fl_dnd_win32.cxx 11131 2016-02-07 10:10:52Z AlbrechtS $".
+// End of "$Id: fl_dnd_win32.cxx 11489 2016-03-31 19:55:03Z manolo $".
 //

@@ -1,5 +1,5 @@
 //
-// "$Id: print_panel.cxx 11329 2016-03-09 16:08:39Z manolo $"
+// "$Id: print_panel.cxx 11330 2016-03-09 16:17:36Z manolo $"
 //
 // Print panel for the Fast Light Tool Kit (FLTK).
 //
@@ -620,5 +620,5 @@ void print_update_status() {
 }
 
 //
-// End of "$Id: print_panel.cxx 11329 2016-03-09 16:08:39Z manolo $".
+// End of "$Id: print_panel.cxx 11330 2016-03-09 16:17:36Z manolo $".
 //

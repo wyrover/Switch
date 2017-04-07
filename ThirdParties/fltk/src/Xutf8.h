@@ -1,4 +1,4 @@
-/* "$Id: Xutf8.h 10588 2015-02-22 13:26:00Z AlbrechtS $"
+/* "$Id: Xutf8.h 11568 2016-04-09 17:55:12Z AlbrechtS $"
  *
  * Author: Jean-Marc Lienher ( http://oksid.ch )
  * Copyright 2000-2010 by O'ksi'D.
@@ -156,24 +156,6 @@ XUtf8LookupString(
     Status*             status_return);
 #endif
 
-unsigned short
-XUtf8IsNonSpacing(
-	unsigned int ucs);
-
-unsigned short
-XUtf8IsRightToLeft(
-        unsigned int ucs);
-
-
-int
-XUtf8Tolower(
-        int ucs);
-
-int
-XUtf8Toupper(
-        int ucs);
-
-
 #  ifdef __cplusplus
 }
 #  endif
@@ -181,5 +163,5 @@ XUtf8Toupper(
 #endif
 
 /*
- *  End of "$Id: Xutf8.h 10588 2015-02-22 13:26:00Z AlbrechtS $".
+ *  End of "$Id: Xutf8.h 11568 2016-04-09 17:55:12Z AlbrechtS $".
  */

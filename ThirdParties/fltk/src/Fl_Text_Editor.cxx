@@ -1,5 +1,5 @@
 //
-// "$Id: Fl_Text_Editor.cxx 11808 2016-07-14 18:48:43Z greg.ercolano $"
+// "$Id: Fl_Text_Editor.cxx 11827 2016-07-20 00:55:06Z greg.ercolano $"
 //
 // Copyright 2001-2010 by Bill Spitzak and others.
 // Original code Copyright Mark Edel.  Permission to distribute under
@@ -23,8 +23,8 @@
 #include <FL/Fl.H>
 #include <FL/Fl_Window.H>
 #include <FL/Fl_Text_Editor.H>
+#include <FL/Fl_Screen_Driver.H>
 #include <FL/fl_ask.H>
-
 
 /* Keyboard Control Matrix
 
@@ -140,24 +140,6 @@ static struct {
   { 'v',          FL_CTRL,                  Fl_Text_Editor::kf_paste      },
   { FL_Insert,    FL_SHIFT,                 Fl_Text_Editor::kf_paste      },
   { 'a',          FL_CTRL,                  Fl_Text_Editor::kf_select_all },
-
-#ifdef __APPLE__
-  // Define CMD+key accelerators...
-  { 'z',          FL_COMMAND,               Fl_Text_Editor::kf_undo       },
-  { 'x',          FL_COMMAND,               Fl_Text_Editor::kf_cut        },
-  { 'c',          FL_COMMAND,               Fl_Text_Editor::kf_copy       },
-  { 'v',          FL_COMMAND,               Fl_Text_Editor::kf_paste      },
-  { 'a',          FL_COMMAND,               Fl_Text_Editor::kf_select_all },
-  { FL_Left,      FL_COMMAND,               Fl_Text_Editor::kf_meta_move  },
-  { FL_Right,     FL_COMMAND,               Fl_Text_Editor::kf_meta_move  },
-  { FL_Up,        FL_COMMAND,               Fl_Text_Editor::kf_meta_move  },
-  { FL_Down,      FL_COMMAND,               Fl_Text_Editor::kf_meta_move  },
-  { FL_Left,      FL_COMMAND|FL_SHIFT,      Fl_Text_Editor::kf_m_s_move   },
-  { FL_Right,     FL_COMMAND|FL_SHIFT,      Fl_Text_Editor::kf_m_s_move   },
-  { FL_Up,        FL_COMMAND|FL_SHIFT,      Fl_Text_Editor::kf_m_s_move   },
-  { FL_Down,      FL_COMMAND|FL_SHIFT,      Fl_Text_Editor::kf_m_s_move   },
-#endif // __APPLE__
-
   { 0,            0,                        0                             }
 };
 
@@ -169,17 +151,19 @@ void Fl_Text_Editor::add_default_key_bindings(Key_Binding** list) {
                     default_key_bindings[i].func,
                     list);
   }
+  Key_Binding *extra_key_bindings = Fl::screen_driver()->text_editor_extra_key_bindings;
+  if (extra_key_bindings) { // add platform-specific key bindings, if any
+    for (int i = 0; extra_key_bindings[i].key; i++) {
+      add_key_binding(extra_key_bindings[i].key,
+                      extra_key_bindings[i].state,
+                      extra_key_bindings[i].function,
+                      list);
+    }
+  }
 }
 
 /**  Returns the function associated with a key binding.*/
-#if FLTK_ABI_VERSION < 10304
-// OLD - non-const
-Fl_Text_Editor::Key_Func Fl_Text_Editor::bound_key_function(int key, int state, Key_Binding* list)
-#else
-// NEW - const (STR#3306)
-Fl_Text_Editor::Key_Func Fl_Text_Editor::bound_key_function(int key, int state, Key_Binding* list) const
-#endif
-{
+Fl_Text_Editor::Key_Func Fl_Text_Editor::bound_key_function(int key, int state, Key_Binding* list) const {
   Key_Binding* cur;
   for (cur = list; cur; cur = cur->next)
     if (cur->key == key)
@@ -642,12 +626,10 @@ int Fl_Text_Editor::handle_key() {
       if (insert_mode()) insert(Fl::event_text());
       else overstrike(Fl::event_text());
     }
-#ifdef __APPLE__
-    if (Fl::compose_state) {
+    if (Fl::screen_driver()->has_marked_text() && Fl::compose_state) {
       int pos = this->insert_position();
       this->buffer()->select(pos - Fl::compose_state, pos);
-      }
-#endif
+    }
     show_insert_position();
     set_changed();
     if (when()&FL_WHEN_CHANGED) do_callback();
@@ -685,13 +667,11 @@ int Fl_Text_Editor::handle(int event) {
 
     case FL_UNFOCUS:
       show_cursor(mCursorOn); // redraws the cursor
-#ifdef __APPLE__
-      if (buffer()->selected() && Fl::compose_state) {
+      if (Fl::screen_driver()->has_marked_text() && buffer()->selected() && Fl::compose_state) {
 	int pos = insert_position();
 	buffer()->select(pos, pos);
 	Fl::reset_marked_text();
       }
-#endif
       if (buffer()->selected()) redraw(); // Redraw selections...
     case FL_HIDE:
       if (when() & FL_WHEN_RELEASE) maybe_do_callback();
@@ -770,7 +750,6 @@ int Fl_Text_Editor::handle(int event) {
   return Fl_Text_Display::handle(event);
 }
 
-#if FLTK_ABI_VERSION >= 10304
 /**
 Enables or disables Tab key focus navigation.
 
@@ -819,8 +798,7 @@ and Shift-Tab navigates focus to the previous widget.
 int Fl_Text_Editor::tab_nav() const {
   return (bound_key_function(FL_Tab,0)==kf_ignore) ? 1 : 0;
 }
-#endif
 
 //
-// End of "$Id: Fl_Text_Editor.cxx 11808 2016-07-14 18:48:43Z greg.ercolano $".
+// End of "$Id: Fl_Text_Editor.cxx 11827 2016-07-20 00:55:06Z greg.ercolano $".
 //

@@ -1,5 +1,5 @@
 //
-// "$Id: fl_ask.cxx 11842 2016-07-22 02:05:44Z greg.ercolano $"
+// "$Id: fl_ask.cxx 11843 2016-07-22 10:30:34Z greg.ercolano $"
 //
 // Standard dialog functions for the Fast Light Tool Kit (FLTK).
 //
@@ -41,6 +41,7 @@
 #include <FL/Fl_Input.H>
 #include <FL/Fl_Secret_Input.H>
 #include <FL/x.H>
+#include <FL/Fl_Screen_Driver.H>
 #include <FL/fl_draw.H>
 
 static Fl_Window *message_form;
@@ -54,9 +55,6 @@ static const char *message_title_default;
 Fl_Font fl_message_font_ = FL_HELVETICA;
 Fl_Fontsize fl_message_size_ = -1;
 static int enableHotspot = 1;
-#ifdef __APPLE__
-extern "C" void NSBeep(void);
-#endif
 
 static char avoidRecursion = 0;
 
@@ -275,56 +273,17 @@ const char* fl_cancel= "Cancel"; ///< string pointer used in common dialogs, you
 const char* fl_close= "Close";   ///< string pointer used in common dialogs, you can change it to another language
 
 // fltk functions:
+
 /**
    Emits a system beep message.
  \param[in] type   The beep type from the \ref Fl_Beep enumeration.
    \note \#include <FL/fl_ask.H>
  */
-void fl_beep(int type) {
-#ifdef WIN32
-  switch (type) {
-    case FL_BEEP_QUESTION :
-    case FL_BEEP_PASSWORD :
-      MessageBeep(MB_ICONQUESTION);
-      break;
-    case FL_BEEP_MESSAGE :
-      MessageBeep(MB_ICONASTERISK);
-      break;
-    case FL_BEEP_NOTIFICATION :
-      MessageBeep(MB_ICONASTERISK);
-      break;
-    case FL_BEEP_ERROR :
-      MessageBeep(MB_ICONERROR);
-      break;
-    default :
-      MessageBeep(0xFFFFFFFF);
-      break;
-  }
-#elif defined(__APPLE__)
-  switch (type) {
-    case FL_BEEP_DEFAULT :
-    case FL_BEEP_ERROR :
-      NSBeep();
-      break;
-    default :
-      break;
-  }
-#else
-  switch (type) {
-    case FL_BEEP_DEFAULT :
-    case FL_BEEP_ERROR :
-      if (!fl_display) fl_open_display();
-
-      XBell(fl_display, 100);
-      break;
-    default :
-      if (!fl_display) fl_open_display();
-
-      XBell(fl_display, 50);
-      break;
-  }
-#endif // WIN32
+void fl_beep(int type)
+{
+  Fl::screen_driver()->beep(type);
 }
+
 
 /** Shows an information message dialog box.
 
@@ -616,5 +575,5 @@ void fl_message_title_default(const char *title) {
 /** @} */
 
 //
-// End of "$Id: fl_ask.cxx 11842 2016-07-22 02:05:44Z greg.ercolano $".
+// End of "$Id: fl_ask.cxx 11843 2016-07-22 10:30:34Z greg.ercolano $".
 //

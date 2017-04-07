@@ -1,5 +1,5 @@
 //
-// "$Id: fl_gleam.cxx 11914 2016-09-01 12:41:19Z AlbrechtS $"
+// "$Id: fl_gleam.cxx 11143 2016-02-10 10:31:43Z matt $"
 //
 // "Gleam" drawing routines for the Fast Light Tool Kit (FLTK).
 //
@@ -131,6 +131,6 @@ Fl_Boxtype fl_define_FL_GLEAM_UP_BOX() {
 
 
 //
-// End of "$Id: fl_gleam.cxx 11914 2016-09-01 12:41:19Z AlbrechtS $".
+// End of "$Id: fl_gleam.cxx 11143 2016-02-10 10:31:43Z matt $".
 //
 

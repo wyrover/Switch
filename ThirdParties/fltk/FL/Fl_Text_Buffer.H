@@ -1,5 +1,5 @@
 //
-// "$Id: Fl_Text_Buffer.H 11799 2016-06-25 00:54:24Z greg.ercolano $"
+// "$Id: Fl_Text_Buffer.H 12149 2016-12-17 07:42:54Z manolo $"
 //
 // Header file for Fl_Text_Buffer class.
 //
@@ -699,6 +699,7 @@ public:
    to be informed if file input required transcoding to UTF-8.
    */
   void (*transcoding_warning_action)(Fl_Text_Buffer*);
+  bool is_word_separator(int pos) const;
 
 protected:
 
@@ -801,5 +802,5 @@ protected:
 #endif
 
 //
-// End of "$Id: Fl_Text_Buffer.H 11799 2016-06-25 00:54:24Z greg.ercolano $".
+// End of "$Id: Fl_Text_Buffer.H 12149 2016-12-17 07:42:54Z manolo $".
 //

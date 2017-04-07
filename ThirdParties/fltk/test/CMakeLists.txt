@@ -1,3 +1,22 @@
+#
+# "$Id: CMakeLists.txt 12171 2017-02-08 02:06:52Z AlbrechtS $"
+#
+# CMakeLists.txt used to build test and demo apps by the CMake build system
+#
+# Copyright 2004-2017 by Bill Spitzak and others.
+#
+# This library is free software. Distribution and use rights are outlined in
+# the file "COPYING" which should have been included with this file.  If this
+# file is missing or damaged, see the license at:
+#
+#     http://www.fltk.org/COPYING.php
+#
+# Please report all bugs and problems on the following page:
+#
+#     http://www.fltk.org/str.php
+#
+#######################################################################
+
 set(EXECUTABLE_OUTPUT_PATH ${FLTK_BINARY_DIR}/bin/examples)
 
 #######################################################################
@@ -20,51 +39,32 @@ include_directories(
   )
 
 #######################################################################
-if (APPLE AND NOT OPTION_APPLE_X11)
-    add_definitions(-DUSING_XCODE)
-endif(APPLE AND NOT OPTION_APPLE_X11)
-
-#######################################################################
 CREATE_EXAMPLE(adjuster adjuster.cxx fltk)
 CREATE_EXAMPLE(arc arc.cxx fltk)
 CREATE_EXAMPLE(animated animated.cxx fltk)
 CREATE_EXAMPLE(ask ask.cxx fltk)
 CREATE_EXAMPLE(bitmap bitmap.cxx fltk)
-
-set(BLOCKS_ICON "${CMAKE_CURRENT_SOURCE_DIR}/blocks.app/Contents/Resources/blocks.icns")
-CREATE_EXAMPLE(blocks "blocks.cxx;${BLOCKS_ICON}" "fltk;${AUDIOLIBS}")
-
+CREATE_EXAMPLE(blocks blocks.cxx "fltk;${AUDIOLIBS}")
 CREATE_EXAMPLE(boxtype boxtype.cxx fltk)
 CREATE_EXAMPLE(browser browser.cxx fltk)
 CREATE_EXAMPLE(button button.cxx fltk)
 CREATE_EXAMPLE(buttons buttons.cxx fltk)
-
-set(CHECKERS_ICON "${CMAKE_CURRENT_SOURCE_DIR}/checkers.app/Contents/Resources/checkers.icns")
-CREATE_EXAMPLE(checkers "checkers.cxx;${CHECKERS_ICON}" fltk)
-
+CREATE_EXAMPLE(checkers checkers.cxx fltk)
 CREATE_EXAMPLE(clock clock.cxx fltk)
 CREATE_EXAMPLE(colbrowser colbrowser.cxx "fltk;fltk_forms")
 CREATE_EXAMPLE(color_chooser color_chooser.cxx fltk)
 CREATE_EXAMPLE(cursor cursor.cxx fltk)
 CREATE_EXAMPLE(curve curve.cxx fltk)
-
-CREATE_EXAMPLE(demo "demo.cxx;demo.menu" fltk)
-set_source_files_properties(demo.menu PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
-
+CREATE_EXAMPLE(demo demo.cxx fltk)
 CREATE_EXAMPLE(device device.cxx fltk)
 CREATE_EXAMPLE(doublebuffer doublebuffer.cxx fltk)
-
 CREATE_EXAMPLE(editor editor.cxx fltk)
-set_target_properties(editor PROPERTIES
-    MACOSX_BUNDLE_INFO_PLIST "${PROJECT_SOURCE_DIR}/ide/Xcode4/plists/editor-Info.plist"
-    )
-
 CREATE_EXAMPLE(fast_slow fast_slow.fl fltk)
 CREATE_EXAMPLE(file_chooser file_chooser.cxx "fltk;fltk_images")
 CREATE_EXAMPLE(fonts fonts.cxx fltk)
 CREATE_EXAMPLE(forms forms.cxx "fltk;fltk_forms")
 CREATE_EXAMPLE(hello hello.cxx fltk)
-CREATE_EXAMPLE(help help.cxx "fltk;fltk_images")
+CREATE_EXAMPLE(help_dialog help_dialog.cxx "fltk;fltk_images")
 CREATE_EXAMPLE(icon icon.cxx fltk)
 CREATE_EXAMPLE(iconize iconize.cxx fltk)
 CREATE_EXAMPLE(image image.cxx fltk)
@@ -94,10 +94,7 @@ CREATE_EXAMPLE(resizebox resizebox.cxx fltk)
 CREATE_EXAMPLE(rotated_text rotated_text.cxx fltk)
 CREATE_EXAMPLE(scroll scroll.cxx fltk)
 CREATE_EXAMPLE(subwindow subwindow.cxx fltk)
-
-set(SUDOKU_ICON "${CMAKE_CURRENT_SOURCE_DIR}/sudoku.app/Contents/Resources/sudoku.icns")
-CREATE_EXAMPLE(sudoku "sudoku.cxx;${SUDOKU_ICON}" "fltk;fltk_images;${AUDIOLIBS}")
-
+CREATE_EXAMPLE(sudoku sudoku.cxx "fltk;fltk_images;${AUDIOLIBS}")
 CREATE_EXAMPLE(symbols symbols.cxx fltk)
 CREATE_EXAMPLE(tabs tabs.fl fltk)
 CREATE_EXAMPLE(table table.cxx fltk)
@@ -134,7 +131,7 @@ endif(FLTK_HAVE_CAIRO)
 # Note: this is incomplete as of 11 Feb 2015
 # Todo: currently all files are copied, but some of them need configuration:
 # - demo.menu: fluid can't be started (wrong path)
-# - demo.menu: help (help-test.html) can't find its images (not copied)
+# - demo.menu: help_dialog (help_dialog.html) can't find its images (not copied)
 # - maybe more ...
 
 # prepare for a "better" test file installation path
@@ -149,11 +146,12 @@ configure_file(demo.menu ${TESTFILE_PATH}/demo.menu COPYONLY)
 
 # use target directory only to avoid redundancy
 configure_file(rgb.txt ${TESTFILE_PATH} COPYONLY)
-configure_file(help-test.html ${TESTFILE_PATH} COPYONLY)
+configure_file(help_dialog.html ${TESTFILE_PATH} COPYONLY)
 configure_file(browser.cxx ${TESTFILE_PATH} COPYONLY)
 configure_file(editor.cxx ${TESTFILE_PATH} COPYONLY)
 if(APPLE AND NOT OPTION_APPLE_X11)
+    configure_file(demo.menu "${TESTFILE_PATH}/demo.app/Contents/Resources/demo.menu" COPYONLY)
     configure_file(browser.cxx "${TESTFILE_PATH}/browser.app/Contents/Resources/browser.cxx" COPYONLY)
     configure_file(rgb.txt ${TESTFILE_PATH}/colbrowser.app/Contents/Resources/rgb.txt COPYONLY)
-    configure_file(help-test.html ${TESTFILE_PATH}/help.app/Contents/Resources/help-test.html COPYONLY)
+    configure_file(help_dialog.html ${TESTFILE_PATH}/help_dialog.app/Contents/Resources/help_dialog.html COPYONLY)
 endif(APPLE AND NOT OPTION_APPLE_X11)

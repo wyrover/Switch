@@ -1,10 +1,10 @@
 #
-# "$Id: export.cmake 11742 2016-05-16 14:43:37Z AlbrechtS $"
+# "$Id: export.cmake 10985 2015-12-30 21:13:07Z AlbrechtS $"
 #
 # Main CMakeLists.txt to build the FLTK project using CMake (www.cmake.org)
 # Written by Michael Surette
 #
-# Copyright 1998-2016 by Bill Spitzak and others.
+# Copyright 1998-2015 by Bill Spitzak and others.
 #
 # This library is free software. Distribution and use rights are outlined in
 # the file "COPYING" which should have been included with this file.  If this
@@ -43,13 +43,6 @@ add_subdirectory(src)
 
 # generate FLTK-Targets.cmake for build directory use
 export(TARGETS ${FLUID} ${FLTK_LIBRARIES} FILE ${CMAKE_BINARY_DIR}/FLTK-Targets.cmake)
-
-# generate FLTK-Functions.cmake for build directory use
-configure_file(
-    ${FLTK_SOURCE_DIR}/CMake/FLTK-Functions.cmake
-    ${FLTK_BINARY_DIR}/FLTK-Functions.cmake
-    COPYONLY
-    )
 
 # generate FLTKConfig.cmake for build directory use
 set(INCLUDE_DIRS "${FLTK_INCLUDE_DIRS}")

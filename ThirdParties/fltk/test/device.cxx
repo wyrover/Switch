@@ -1,5 +1,5 @@
 //
-// "$Id: device.cxx 11156 2016-02-11 20:42:51Z manolo $"
+// "$Id: device.cxx 12140 2016-12-07 15:09:52Z manolo $"
 //
 // Device test program for the Fast Light Tool Kit (FLTK).
 //
@@ -31,6 +31,7 @@
 
 
 #include <FL/Fl_Printer.H>
+#include <FL/Fl_PostScript.H>
 #include <FL/Fl_Copy_Surface.H>
 #include <FL/Fl_Image_Surface.H>
 
@@ -438,7 +439,7 @@ protected:
     fl_color(FL_BLACK);
   };
 public:
-  MyWidget4(int x, int y):Fl_Box(x,y,150,150, "Line styles"){
+  MyWidget4(int x, int y):Fl_Box(x,y+10,150,150, "Line styles"){
     labelsize(10);
     align(FL_ALIGN_TOP);
   };
@@ -545,6 +546,11 @@ void make_image() {
   }
 }
 
+void close_tmp_win(Fl_Widget *win, void *data) {
+  ((Fl_Shared_Image*)data)->release();
+  Fl::delete_widget(win);
+}
+
 
 Fl_Widget *target;
 const  char *operation;
@@ -564,20 +570,24 @@ void copy(Fl_Widget *, void *data) {
       decorated = 0;
     }
     rgb_surf = new Fl_Image_Surface(W, H, 1);
-    rgb_surf->set_current();
+    Fl_Surface_Device::push_current(rgb_surf);
+    fl_color(FL_YELLOW);fl_rectf(0,0,W,H);
     if (decorated)
       rgb_surf->draw_decorated_window(target->as_window());
     else
       rgb_surf->draw(target);
     Fl_Image *img = rgb_surf->highres_image();
     delete rgb_surf;
-    Fl_Display_Device::display_device()->set_current();
-    Fl_Window* g2 = new Fl_Window(img->w()+10, img->h()+10);
-    g2->color(FL_YELLOW);
-    Fl_Box *b = new Fl_Box(FL_NO_BOX,5,5,img->w(), img->h(),0);
-    b->image(img);
-    g2->end();
-    g2->show();
+    Fl_Surface_Device::pop_current();
+    if (img) {
+      Fl_Window* g2 = new Fl_Window(img->w()+10, img->h()+10);
+      g2->color(FL_YELLOW);
+      Fl_Box *b = new Fl_Box(FL_NO_BOX,5,5,img->w(), img->h(),0);
+      b->image(img);
+      g2->end();
+      g2->callback(close_tmp_win, img);
+      g2->show();
+    }
     return;
   }
   
@@ -586,22 +596,31 @@ void copy(Fl_Widget *, void *data) {
     Fl_Copy_Surface *copy_surf;
     if (target->as_window() && !target->parent()) {
       copy_surf = new Fl_Copy_Surface(target->as_window()->decorated_w(), target->as_window()->decorated_h());
-      copy_surf->set_current();
+      Fl_Surface_Device::push_current(copy_surf);
       copy_surf->draw_decorated_window(target->as_window(), 0, 0);
     }
     else {
       copy_surf = new Fl_Copy_Surface(target->w()+10, target->h()+20);
-      copy_surf->set_current();
+      Fl_Surface_Device::push_current(copy_surf);
       fl_color(FL_YELLOW);fl_rectf(0,0,copy_surf->w(), copy_surf->h());
       copy_surf->draw(target, 5, 10);
     }
     delete copy_surf;
-    Fl_Display_Device::display_device()->set_current();  
+    Fl_Surface_Device::pop_current();
     }
   
-  if (strcmp(operation, "Fl_Printer") == 0) {
-    Fl_Printer * p = new Fl_Printer();
-    if (!p->start_job(1)) {
+  if (strcmp(operation, "Fl_Printer") == 0 || strcmp(operation, "Fl_PostScript_File_Device") == 0) {
+    Fl_Paged_Device *p;
+    int err;
+    if (strcmp(operation, "Fl_Printer") == 0) {
+      p = new Fl_Printer();
+      err = p->start_job(1);
+    }
+    else {
+      p = new Fl_PostScript_File_Device();
+      err = ((Fl_PostScript_File_Device*)p)->start_job(1);
+    }
+    if (!err) {
       p->start_page();
       if (target->as_window()) p->print_window(target->as_window());
       else p->print_widget(target);
@@ -714,13 +733,14 @@ int main(int argc, char ** argv) {
   c2->end();
   
   Fl_Radio_Round_Button *rb;
-  Fl_Window *w3 = new Fl_Window(2,5,w2->w()-10,55);
+  Fl_Window *w3 = new Fl_Window(2,5,w2->w()-10,60);
   w3->box(FL_DOWN_BOX);
   Fl_Group *g1 = new Fl_Group(w3->x(),w3->y(),w3->w(),w3->h());
   rb = new Fl_Radio_Round_Button(5,5,150,12, "Fl_Image_Surface"); 
-  rb->set(); rb->callback(operation_cb, NULL); operation = rb->label();
-  rb = new Fl_Radio_Round_Button(5,22,150,12, "Fl_Copy_Surface"); rb->callback(operation_cb, NULL);
-  rb = new Fl_Radio_Round_Button(5,39,150,12, "Fl_Printer"); rb->callback(operation_cb, NULL);
+  rb->set(); rb->callback(operation_cb, NULL); operation = rb->label(); rb->labelsize(12);
+  rb = new Fl_Radio_Round_Button(5,18,150,12, "Fl_Copy_Surface"); rb->callback(operation_cb, NULL); rb->labelsize(12);
+  rb = new Fl_Radio_Round_Button(5,31,150,12, "Fl_Printer"); rb->callback(operation_cb, NULL); rb->labelsize(12);
+  rb = new Fl_Radio_Round_Button(5,44,150,12, "Fl_PostScript_File_Device"); rb->callback(operation_cb, NULL); rb->labelsize(12);
   g1->end();
   
   Fl_Group *g2 = new Fl_Group(w3->x(),w3->y(),w3->w(),w3->h());
@@ -737,9 +757,12 @@ int main(int argc, char ** argv) {
   w2->show(argc, argv);
   
   Fl::run();
+  delete pixmap;
+  delete b_bitmap.image();
+  
   return 0;
 }
 
 //
-// End of "$Id: device.cxx 11156 2016-02-11 20:42:51Z manolo $"
+// End of "$Id: device.cxx 12140 2016-12-07 15:09:52Z manolo $"
 //

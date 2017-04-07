@@ -1,5 +1,5 @@
 #
-# "$Id: resources.cmake 11865 2016-08-08 12:25:08Z AlbrechtS $"
+# "$Id: resources.cmake 12209 2017-03-17 17:42:50Z AlbrechtS $"
 #
 # Main CMakeLists.txt to build the FLTK project using CMake (www.cmake.org)
 # Written by Michael Surette
@@ -24,13 +24,11 @@
 find_file(HAVE_ALSA_ASOUNDLIB_H alsa/asoundlib.h)
 find_file(HAVE_DLFCN_H dlfcn.h)
 find_file(HAVE_FREETYPE_H freetype.h PATH_SUFFIXES freetype2 freetype2/freetype)
-find_file(HAVE_GL_GL_H GL/gl.h)
 find_file(HAVE_GL_GLU_H GL/glu.h)
 find_file(HAVE_LIBPNG_PNG_H libpng/png.h)
 find_file(HAVE_LOCALE_H locale.h)
 find_file(HAVE_OPENGL_GLU_H OpenGL/glu.h)
 find_file(HAVE_PNG_H png.h)
-find_file(HAVE_PTHREAD_H pthread.h)
 find_file(HAVE_STDIO_H stdio.h)
 find_file(HAVE_STRINGS_H strings.h)
 find_file(HAVE_SYS_SELECT_H sys/select.h)
@@ -38,13 +36,56 @@ find_file(HAVE_SYS_STDTYPES_H sys/stdtypes.h)
 find_file(HAVE_X11_XREGION_H X11/Xregion.h)
 find_path(HAVE_XDBE_H Xdbe.h PATH_SUFFIXES X11/extensions extensions)
 
+if (WIN32 AND NOT CYGWIN)
+  # we don't use pthreads on Windows (except for Cygwin, see options.cmake)
+  set(HAVE_PTHREAD_H 0)
+else ()
+  find_file(HAVE_PTHREAD_H pthread.h)
+endif (WIN32 AND NOT CYGWIN)
+
+# Special case for Microsoft Visual Studio generator (MSVC):
+#
+# The header files <GL/glu.h> and <locale.h> are located in the SDK's
+# for Visual Studio. If CMake is invoked from a desktop icon or the Windows
+# menu it doesn't have the correct paths to find these header files.
+# The CMake folks recommend not to search for these files at all, because
+# they must always be there, but we do anyway.
+# If we don't find them we issue a warning and suggest to rerun CMake from
+# a "Developer Command Prompt for Visual Studio xxxx", but we fix the issue
+# by setting the *local* instance (not the cache variable) of the corresponding
+# CMake variable to '1' since we "know" the header file is available.
+#
+# If the user builds the solution, everything should run smoothly despite
+# the fact that the header files were not found.
+#
+# If the configuration is changed somehow (e.g. by editing CMakeLists.txt)
+# CMake will be rerun from within Visual Studio, find the header file, and
+# set the cache variable for the header file to its correct path. The latter is
+# only informational so you can see that (and where) the headers were found.
+#
+# Note: these cache variables can only be seen in "advanced" mode.
+
 if (MSVC)
-  message(STATUS "Note: The following three headers should all be found!")
-  message(STATUS "HAVE_GL_GL_H = '${HAVE_GL_GL_H}'")
-  message(STATUS "HAVE_GL_GLU_H = '${HAVE_GL_GLU_H}'")
-  message(STATUS "HAVE_LOCALE_H = '${HAVE_LOCALE_H}'")
-  message(STATUS "If one of these headers was not found, run cmake-gui ...")
-  message(STATUS "... again from a Visual Studio developer command prompt!")
+  set (MSVC_RERUN_MESSAGE FALSE)
+
+  if (NOT HAVE_GL_GLU_H)
+    message(STATUS "Warning: Header file GL/glu.h was not found.")
+    set (HAVE_GL_GLU_H 1)
+    set (MSVC_RERUN_MESSAGE TRUE)
+  endif (NOT HAVE_GL_GLU_H)
+
+  if (NOT HAVE_LOCALE_H)
+    message(STATUS "Warning: Header file locale.h was not found.")
+    set (HAVE_LOCALE_H 1)
+    set (MSVC_RERUN_MESSAGE TRUE)
+  endif (NOT HAVE_LOCALE_H)
+
+  if (MSVC_RERUN_MESSAGE)
+    message(STATUS "The FLTK team recommends to rerun CMake from a")
+    message(STATUS "\"Developer Command Prompt for Visual Studio xxxx\"")
+  endif (MSVC_RERUN_MESSAGE)
+
+  unset (MSVC_RERUN_MESSAGE)
 endif (MSVC)
 
 # Simulate the behavior of autoconf macro AC_HEADER_DIRENT, see:
@@ -67,7 +108,7 @@ if(NOT HAVE_DIRENT_H)
 endif(NOT HAVE_DIRENT_H)
 
 mark_as_advanced(HAVE_ALSA_ASOUNDLIB_H HAVE_DIRENT_H HAVE_DLFCN_H)
-mark_as_advanced(HAVE_FREETYPE_H HAVE_GL_GL_H HAVE_GL_GLU_H)
+mark_as_advanced(HAVE_FREETYPE_H HAVE_GL_GLU_H)
 mark_as_advanced(HAVE_LIBPNG_PNG_H HAVE_LOCALE_H HAVE_NDIR_H)
 mark_as_advanced(HAVE_OPENGL_GLU_H HAVE_PNG_H HAVE_PTHREAD_H)
 mark_as_advanced(HAVE_STDIO_H HAVE_STRINGS_H HAVE_SYS_DIR_H)
@@ -191,5 +232,5 @@ endif (DOXYGEN_FOUND)
 # message("LaTex Compiler : ${LATEX_COMPILER}")
 
 #
-# End of "$Id: resources.cmake 11865 2016-08-08 12:25:08Z AlbrechtS $".
+# End of "$Id: resources.cmake 12209 2017-03-17 17:42:50Z AlbrechtS $".
 #

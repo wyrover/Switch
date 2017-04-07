@@ -1,9 +1,9 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0400
 header_name {.h}
 code_name {.cxx}
 comment {//
-// "$Id: function_panel.fl 12041 2016-10-17 16:46:57Z greg.ercolano $"
+// "$Id: function_panel.fl 12043 2016-10-17 17:00:58Z greg.ercolano $"
 //
 // Code dialogs for the Fast Light Tool Kit (FLTK).
 //
@@ -954,6 +954,6 @@ Function {make_sourceview()} {} {
 
 comment {
 //
-// End of "$Id: function_panel.fl 12041 2016-10-17 16:46:57Z greg.ercolano $".
+// End of "$Id: function_panel.fl 12043 2016-10-17 17:00:58Z greg.ercolano $".
 //} {in_source in_header
 }

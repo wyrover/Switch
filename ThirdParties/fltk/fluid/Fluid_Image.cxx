@@ -1,5 +1,5 @@
 //
-// "$Id: Fluid_Image.cxx 12028 2016-10-14 16:35:44Z AlbrechtS $"
+// "$Id: Fluid_Image.cxx 12029 2016-10-14 16:35:52Z AlbrechtS $"
 //
 // Pixmap (and other images) label support for the Fast Light Tool Kit (FLTK).
 //
@@ -252,5 +252,5 @@ Fluid_Image *ui_find_image(const char *oldname) {
 
 
 //
-// End of "$Id: Fluid_Image.cxx 12028 2016-10-14 16:35:44Z AlbrechtS $".
+// End of "$Id: Fluid_Image.cxx 12029 2016-10-14 16:35:52Z AlbrechtS $".
 //

@@ -1,9 +1,9 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0400
 header_name {.h}
 code_name {.cxx}
 comment {//
-// "$Id: print_panel.fl 11952 2016-09-20 12:57:18Z AlbrechtS $"
+// "$Id: print_panel.fl 11956 2016-09-20 13:31:38Z AlbrechtS $"
 //
 // FLUID print panel for the Fast Light Tool Kit (FLTK).
 //
@@ -361,6 +361,6 @@ print_output_mode[val]->setonly();} {}
 
 comment {
 //
-// End of "$Id: print_panel.fl 11952 2016-09-20 12:57:18Z AlbrechtS $".
+// End of "$Id: print_panel.fl 11956 2016-09-20 13:31:38Z AlbrechtS $".
 //} {in_source in_header
 }

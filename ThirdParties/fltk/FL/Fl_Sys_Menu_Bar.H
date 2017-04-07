@@ -1,5 +1,5 @@
 //
-// "$Id: Fl_Sys_Menu_Bar.H 11795 2016-06-22 07:49:34Z greg.ercolano $"
+// "$Id: Fl_Sys_Menu_Bar.H 12015 2016-10-06 16:42:59Z manolo $"
 //
 // MacOS system menu bar header file for the Fast Light Tool Kit (FLTK).
 //
@@ -19,8 +19,7 @@
 #ifndef Fl_Sys_Menu_Bar_H
 #define Fl_Sys_Menu_Bar_H
 
-#include "Fl_Menu_Bar.H"
-#include "x.H"
+#include <FL/Fl_Menu_Bar.H>
 
 #if defined(__APPLE__) || defined(FL_DOXYGEN)
 
@@ -31,14 +30,13 @@
  \n To use this class, just replace Fl_Menu_Bar by Fl_Sys_Menu_Bar, and, on the Mac platform,
  a system menu at the top of the screen will be available. This menu will match an array
  of Fl_Menu_Item's exactly as with standard FLTK menus.
-  
-  Changes to the menu state are immediately visible in the menubar when they are made
-  using member functions of the Fl_Sys_Menu_Bar class. Other changes (e.g., by a call to
-  Fl_Menu_Item::set()) should be followed by a call to Fl_Sys_Menu_Bar::update() to be
-  visible in the menubar across all platforms.
-  
+ 
+ Changes to the menu state are immediately visible in the menubar when they are made
+ using member functions of the Fl_Sys_Menu_Bar class. Other changes (e.g., by a call to
+ Fl_Menu_Item::set()) should be followed by a call to update() to be
+ visible in the menubar across all platforms.
+ 
   A few FLTK features are not supported by the Mac System menu:
-
   \li no symbolic labels
   \li no embossed labels
   \li no font sizes
@@ -46,20 +44,8 @@
   You can configure a callback for the 'About' menu item to invoke your own code with fl_mac_set_about().
  */
 class FL_EXPORT Fl_Sys_Menu_Bar : public Fl_Menu_Bar {
-
-#if FLTK_ABI_VERSION >= 10304
-  // NEW -- update() public (STR#3317)
-public:
-  void update();
 protected:
   void draw();
-#else
-  // OLD -- update() protected
-protected:
-  void update();
-  void draw();
-#endif
-
 public:
   Fl_Sys_Menu_Bar(int x,int y,int w,int h,const char *l=0);
   ~Fl_Sys_Menu_Bar();
@@ -67,6 +53,7 @@ public:
    */
   const Fl_Menu_Item *menu() const {return Fl_Menu_::menu();}
   void menu(const Fl_Menu_Item *m);
+  virtual void update();
   int add(const char* label, int shortcut, Fl_Callback*, void *user_data=0, int flags=0);
   /** Adds a new menu item. 
    \see Fl_Menu_::add(const char* label, int shortcut, Fl_Callback*, void *user_data=0, int flags=0)
@@ -113,22 +100,12 @@ public:
 
 #else
 
-#if FLTK_ABI_VERSION >= 10304
-// NEW -- small class for update()
-class FL_EXPORT Fl_Sys_Menu_Bar : public Fl_Menu_Bar {
-public:
-  Fl_Sys_Menu_Bar(int x,int y,int w,int h,const char *l=0) : Fl_Menu_Bar(x,y,w,h,l) {}
-  inline void update() {}
-};
-#else
-// OLD -- simple typedef
 typedef Fl_Menu_Bar Fl_Sys_Menu_Bar;
-#endif
 
 #endif // defined(__APPLE__) || defined(FL_DOXYGEN)
 
 #endif // Fl_Sys_Menu_Bar_H
 
 //
-// End of "$Id: Fl_Sys_Menu_Bar.H 11795 2016-06-22 07:49:34Z greg.ercolano $".
+// End of "$Id: Fl_Sys_Menu_Bar.H 12015 2016-10-06 16:42:59Z manolo $".
 //

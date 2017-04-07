@@ -1,5 +1,5 @@
 //
-// "$Id: image.cxx 8864 2011-07-19 04:49:30Z greg.ercolano $"
+// "$Id: image.cxx 11673 2016-04-20 04:49:36Z manolo $"
 //
 // Fl_Image test program for the Fast Light Tool Kit (FLTK).
 //
@@ -89,7 +89,7 @@ int arg(int argc, char **argv, int &i) {
 }
 
 int main(int argc, char **argv) {
-#if !defined(WIN32) && !defined(__APPLE__)
+#if defined(USE_X11)
   int i = 1;
 
   Fl::args(argc,argv,i,arg);
@@ -148,5 +148,5 @@ int main(int argc, char **argv) {
 }
 
 //
-// End of "$Id: image.cxx 8864 2011-07-19 04:49:30Z greg.ercolano $".
+// End of "$Id: image.cxx 11673 2016-04-20 04:49:36Z manolo $".
 //

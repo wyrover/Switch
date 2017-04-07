@@ -320,5 +320,5 @@ KeySymToUcs4(KeySym keysym)
 }
 
 /*
- * End of "$Id$".
+ * End of "$Id: imKStoUCS.c 12193 2017-03-12 15:12:35Z AlbrechtS $".
  */

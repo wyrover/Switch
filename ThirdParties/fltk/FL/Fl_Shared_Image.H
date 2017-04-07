@@ -1,5 +1,5 @@
 //
-// "$Id: Fl_Shared_Image.H 12002 2016-10-01 22:35:37Z AlbrechtS $"
+// "$Id: Fl_Shared_Image.H 12156 2017-01-02 09:48:23Z manolo $"
 //
 // Shared image header file for the Fast Light Tool Kit (FLTK).
 //
@@ -51,12 +51,11 @@ class FL_EXPORT Fl_Shared_Image : public Fl_Image {
 
   friend class Fl_JPEG_Image;
   friend class Fl_PNG_Image;
+  friend class Fl_Graphics_Driver;
 
 private:
   static Fl_RGB_Scaling scaling_algorithm_; // method used to rescale RGB source images
-#if FLTK_ABI_VERSION >= 10304
   Fl_Image *scaled_image_;
-#endif
 protected:
 
   static Fl_Shared_Image **images_;	// Shared images
@@ -108,10 +107,10 @@ public:
   /** Sets what algorithm is used when resizing a source image.
    The default algorithm is FL_RGB_SCALING_BILINEAR.
    Drawing an Fl_Shared_Image is sometimes performed by first resizing the source image
-   and then drawing the resized copy. This occurs, e.g., when drawing to screen under Linux or MSWindows
+   and then drawing the resized copy. This occurs, e.g., when drawing to screen under Linux
    after having called Fl_Shared_Image::scale().
    This function controls what method is used when the image to be resized is an Fl_RGB_Image.
-   \version 1.3.4 and requires compiling with FLTK_ABI_VERSION = 10304
+   \version 1.3.4
    */
   static void scaling_algorithm(Fl_RGB_Scaling algorithm) {scaling_algorithm_ = algorithm; }
 };
@@ -127,5 +126,5 @@ FL_EXPORT extern void fl_register_images();
 #endif // !Fl_Shared_Image_H
 
 //
-// End of "$Id: Fl_Shared_Image.H 12002 2016-10-01 22:35:37Z AlbrechtS $"
+// End of "$Id: Fl_Shared_Image.H 12156 2017-01-02 09:48:23Z manolo $"
 //

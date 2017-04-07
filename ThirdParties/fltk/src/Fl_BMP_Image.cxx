@@ -1,5 +1,5 @@
 //
-// "$Id: Fl_BMP_Image.cxx 10751 2015-06-14 17:07:31Z AlbrechtS $"
+// "$Id: Fl_BMP_Image.cxx 11443 2016-03-27 17:37:07Z manolo $"
 //
 // Fl_BMP_Image routines.
 //
@@ -28,7 +28,6 @@
 #include <FL/Fl_BMP_Image.H>
 #include <FL/fl_utf8.h>
 #include <FL/Fl.H>
-#include <config.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -500,5 +499,5 @@ read_long(FILE *fp) {		// I - File to read from
 
 
 //
-// End of "$Id: Fl_BMP_Image.cxx 10751 2015-06-14 17:07:31Z AlbrechtS $".
+// End of "$Id: Fl_BMP_Image.cxx 11443 2016-03-27 17:37:07Z manolo $".
 //

@@ -1,5 +1,5 @@
 //
-// "$Id: fluid.cxx 12044 2016-10-17 18:21:11Z greg.ercolano $"
+// "$Id: fluid.cxx 12045 2016-10-17 19:20:36Z greg.ercolano $"
 //
 // FLUID main entry for the Fast Light Tool Kit (FLTK).
 //
@@ -17,6 +17,9 @@
 //
 
 #include <FL/Fl.H>
+#ifdef __APPLE__
+#include <FL/x.H> // for fl_open_callback
+#endif
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Button.H>
@@ -34,10 +37,10 @@
 #include <FL/filename.H>
 #include <FL/Fl_Native_File_Chooser.H>
 #include <FL/Fl_Printer.H>
+#include <FL/fl_utf8.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
-#include <sys/stat.h>
 #include <time.h> // time(), localtime(), etc.
 
 #include "../src/flstring.h"
@@ -58,12 +61,10 @@
 #    define access _access
 #    define chdir _chdir
 #    define getcwd _getcwd
+#    define unlink _unlink
 #  endif // !__WATCOMC__
 #else
 #  include <unistd.h>
-#endif
-#ifdef __EMX__
-#  include <X11/Xlibint.h>
 #endif
 
 #include "about_panel.h"
@@ -239,10 +240,10 @@ void save_cb(Fl_Widget *, void *v) {
       const char *basename;
       if ((basename = strrchr(c, '/')) != NULL)
         basename ++;
-#if defined(WIN32) || defined(__EMX__)
+#if defined(WIN32)
       if ((basename = strrchr(c, '\\')) != NULL)
         basename ++;
-#endif // WIN32 || __EMX__
+#endif // WIN32
       else
         basename = c;
 
@@ -305,11 +306,7 @@ void save_template_cb(Fl_Widget *, void *) {
   fluid_prefs.getUserdataPath(filename, sizeof(filename));
 
   strlcat(filename, "templates", sizeof(filename));
-#if defined(WIN32) && !defined(__CYGWIN__)
-  if (access(filename, 0)) mkdir(filename);
-#else
-  if (access(filename, 0)) mkdir(filename, 0777);
-#endif // WIN32 && !__CYGWIN__
+  if (fl_access(filename, 0)) fl_mkdir(filename, 0777);
 
   strlcat(filename, "/", sizeof(filename));
   strlcat(filename, safename, sizeof(filename));
@@ -459,7 +456,6 @@ void exit_cb(Fl_Widget *,void *) {
 }
 
 #ifdef __APPLE__
-#  include <FL/x.H>
 
 void
 apple_open_cb(const char *c) {
@@ -904,17 +900,7 @@ void show_help(const char *name) {
   if (!help_dialog) help_dialog = new Fl_Help_Dialog();
 
   if ((docdir = getenv("FLTK_DOCDIR")) == NULL) {
-#ifdef __EMX__
-    // Doesn't make sense to have a hardcoded fallback
-    static char fltk_docdir[FL_PATH_MAX];
-
-    strlcpy(fltk_docdir, __XOS2RedirRoot("/XFree86/lib/X11/fltk/doc"),
-            sizeof(fltk_docdir));
-
-    docdir = fltk_docdir;
-#else
     docdir = FLTK_DOCDIR;
-#endif // __EMX__
   }
   snprintf(helpname, sizeof(helpname), "%s/%s", docdir, name);
 
@@ -1692,9 +1678,9 @@ void set_modflag(int mf) {
   if (main_window) {
     if (!filename) basename = "Untitled.fl";
     else if ((basename = strrchr(filename, '/')) != NULL) basename ++;
-#if defined(WIN32) || defined(__EMX__)
+#if defined(WIN32)
     else if ((basename = strrchr(filename, '\\')) != NULL) basename ++;
-#endif // WIN32 || __EMX__
+#endif // WIN32
     else basename = filename;
 
     if (modflag) {
@@ -1874,5 +1860,5 @@ int main(int argc,char **argv) {
 }
 
 //
-// End of "$Id: fluid.cxx 12044 2016-10-17 18:21:11Z greg.ercolano $".
+// End of "$Id: fluid.cxx 12045 2016-10-17 19:20:36Z greg.ercolano $".
 //

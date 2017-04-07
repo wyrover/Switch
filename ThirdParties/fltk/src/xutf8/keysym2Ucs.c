@@ -1,4 +1,4 @@
-/* "$Id: $"
+/* "$Id: keysym2Ucs.c 12193 2017-03-12 15:12:35Z AlbrechtS $"
  *
  * Author: Jean-Marc Lienher ( http://oksid.ch )
  * Copyright 2000-2003 by O'ksi'D.
@@ -16,7 +16,9 @@
 
 #define KEYSYM2UCS_INCLUDED
 
-#if !defined(WIN32) && !defined(__APPLE__)
+#include "../config_lib.h"
+
+#if defined(FL_CFG_WIN_X11)
 
 #include "../Xutf8.h"
 #include "imKStoUCS.c"
@@ -25,8 +27,8 @@ long XKeysymToUcs(KeySym keysym) {
   return (long) KeySymToUcs4(keysym);
 }
 
-#endif /* X11 only */
+#endif /* FL_CFG_WIN_X11 */
 
 /*
- * End of "$Id$".
+ * End of "$Id: keysym2Ucs.c 12193 2017-03-12 15:12:35Z AlbrechtS $".
  */

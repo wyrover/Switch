@@ -1,5 +1,5 @@
 //
-// "$Id: Fl_Image.H 12028 2016-10-14 16:35:44Z AlbrechtS $"
+// "$Id: Fl_Image.H 12076 2016-11-02 21:08:15Z manolo $"
 //
 // Image header file for the Fast Light Tool Kit (FLTK).
 //
@@ -20,15 +20,17 @@
    Fl_Image, Fl_RGB_Image classes. */
 
 #ifndef Fl_Image_H
-#  define Fl_Image_H
+#define Fl_Image_H
 
-#  include "Enumerations.H"
+#include "Enumerations.H"
 #include <stdlib.h>
+#include "Fl_Widget.H" // for fl_uintptr_t
 
 class Fl_Widget;
 class Fl_Pixmap;
 struct Fl_Menu_Item;
 struct Fl_Label;
+class Fl_RGB_Image;
 
 
 /** \enum Fl_RGB_Scaling
@@ -53,7 +55,7 @@ enum Fl_RGB_Scaling {
  a box with an X in it being drawn instead.
 */
 class FL_EXPORT Fl_Image {
-    
+  friend class Fl_Graphics_Driver;
 public:
   static const int ERR_NO_IMAGE    = -1;
   static const int ERR_FILE_ACCESS = -2;
@@ -185,6 +187,12 @@ public:
 
   // get RGB image scaling method
   static Fl_RGB_Scaling RGB_scaling();
+  /** Use this method if you have an Fl_Image object and want to know whether it is derived 
+   from class Fl_RGB_Image. 
+   If the method returns non-NULL, then the image in question is
+   derived from Fl_RGB_Image, and the returned value is a pointer to this image.
+   */
+  virtual Fl_RGB_Image *as_rgb_image() {return NULL;}
 };
 
 
@@ -200,10 +208,7 @@ public:
   &lt;FL/Fl_RGB_Image.H&gt; should be included.
 */
 class FL_EXPORT Fl_RGB_Image : public Fl_Image {
-  friend class Fl_Quartz_Graphics_Driver;
-  friend class Fl_GDI_Graphics_Driver;
-  friend class Fl_GDI_Printer_Graphics_Driver;
-  friend class Fl_Xlib_Graphics_Driver;
+  friend class Fl_Graphics_Driver;
   static size_t max_size_;
 public:
 
@@ -214,15 +219,10 @@ public:
    */
   int alloc_array;
 
-  private:
-
-#if defined(__APPLE__) || defined(WIN32)
-  void *id_; // for internal use
-  void *mask_; // for internal use (mask bitmap)
-#else
-  unsigned id_; // for internal use
-  unsigned mask_; // for internal use (mask bitmap)
-#endif // __APPLE__ || WIN32
+private:
+  // These two variables are used to cache the image and mask for the main display graphics driver
+  fl_uintptr_t id_;
+  fl_uintptr_t mask_;
 
 public:
 
@@ -253,10 +253,11 @@ public:
    \sa  void Fl_RGB_Image::max_size(size_t)
    */
   static size_t max_size() {return max_size_;}
+  virtual Fl_RGB_Image *as_rgb_image() {return this;}
 };
 
 #endif // !Fl_Image_H
 
 //
-// End of "$Id: Fl_Image.H 12028 2016-10-14 16:35:44Z AlbrechtS $".
+// End of "$Id: Fl_Image.H 12076 2016-11-02 21:08:15Z manolo $".
 //

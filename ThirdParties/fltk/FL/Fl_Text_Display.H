@@ -1,9 +1,9 @@
 //
-// "$Id: Fl_Text_Display.H 11756 2016-05-26 16:39:09Z greg.ercolano $"
+// "$Id: Fl_Text_Display.H 12168 2017-02-01 18:36:23Z AlbrechtS $"
 //
 // Header file for Fl_Text_Display class.
 //
-// Copyright 2001-2016 by Bill Spitzak and others.
+// Copyright 2001-2017 by Bill Spitzak and others.
 // Original code Copyright Mark Edel.  Permission to distribute under
 // the LGPL for the FLTK library granted by Mark Edel.
 //
@@ -73,11 +73,7 @@
  Note that other features may be available via Fl_Text_Editor
  and Fl_Text_Buffer classes.
 
- \note Line numbers were added in 1.3.3. To avoid breaking ABI,
-       many of its options are read only. To adjust these features
-       in 1.3.x, you must build FLTK with FLTK_ABI_VERSION set to 10303
-       or higher.
-
+ \note Line numbers were added in FLTK 1.3.3.
  */
 class FL_EXPORT Fl_Text_Display: public Fl_Group {
 
@@ -142,14 +138,14 @@ public:
 
    The style table is associated with an Fl_Text_Display by using
    Fl_Text_Display::highlight_data().
-   
+
    \see Fl_Text_Display::highlight_data()
    */
   struct Style_Table_Entry {
     Fl_Color    color;	///< text color
     Fl_Font     font;	///< text font
     Fl_Fontsize size;	///< text font size
-    unsigned    attr;	///< currently unused (this may be change in the future)
+    unsigned    attr;	///< currently unused (this may be changed in the future)
   };
   
   Fl_Text_Display(int X, int Y, int W, int H, const char *l = 0);
@@ -163,6 +159,7 @@ public:
    Sets the current text buffer associated with the text widget.
    Multiple text widgets can be associated with the same text buffer.
    \param buf new text buffer
+   \see Fl_Text_Display::buffer(Fl_Text_Buffer* buf)
    */
   void buffer(Fl_Text_Buffer& buf) { buffer(&buf); }
   
@@ -170,6 +167,8 @@ public:
    Gets the current text buffer associated with the text widget.
    Multiple text widgets can be associated with the same text buffer.
    \return current text buffer
+   \see Fl_Text_Display::buffer(Fl_Text_Buffer* buf)
+   \see Fl_Text_Display::buffer(Fl_Text_Buffer& buf)
    */
   Fl_Text_Buffer* buffer() const { return mBuffer; }
   
@@ -526,18 +525,16 @@ protected:
   int mLineNumLeft, mLineNumWidth;
 
   // Line number font/colors
-#if FLTK_ABI_VERSION >= 10303
   Fl_Font     linenumber_font_;
   Fl_Fontsize linenumber_size_;
   Fl_Color    linenumber_fgcolor_;
   Fl_Color    linenumber_bgcolor_;
   Fl_Align    linenumber_align_;
   const char* linenumber_format_;
-#endif
 };
 
 #endif
 
 //
-// End of "$Id: Fl_Text_Display.H 11756 2016-05-26 16:39:09Z greg.ercolano $".
+// End of "$Id: Fl_Text_Display.H 12168 2017-02-01 18:36:23Z AlbrechtS $".
 //

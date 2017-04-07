@@ -1,9 +1,9 @@
 //
-// "$Id: fl_overlay.cxx 8864 2011-07-19 04:49:30Z greg.ercolano $"
+// "$Id: fl_overlay.cxx 11567 2016-04-09 17:11:34Z manolo $"
 //
 // Overlay support for the Fast Light Tool Kit (FLTK).
 //
-// Copyright 1998-2010 by Bill Spitzak and others.
+// Copyright 1998-2016 by Bill Spitzak and others.
 //
 // This library is free software. Distribution and use rights are outlined in
 // the file "COPYING" which should have been included with this file.  If this
@@ -23,11 +23,13 @@
 
 #include <FL/x.H>
 #include <FL/fl_draw.H>
-#ifdef __APPLE__
-#include <config.h>
-#endif
 
 //#define USE_XOR
+// unless USE_XOR is defined, this source file is cross-platform
+
+#ifdef USE_XOR
+#include <config.h>
+#endif
 
 static int px,py,pw,ph;
 
@@ -40,15 +42,16 @@ static int bgx, bgy, bgw, bgh;
 static void draw_current_rect() {
 #ifdef USE_XOR
 # if defined(USE_X11)
-  XSetFunction(fl_display, fl_gc, GXxor);
-  XSetForeground(fl_display, fl_gc, 0xffffffff);
-  XDrawRectangle(fl_display, fl_window, fl_gc, px, py, pw, ph);
-  XSetFunction(fl_display, fl_gc, GXcopy);
+  GC gc = (GC)fl_graphics_driver->gc();
+  XSetFunction(fl_display, gc, GXxor);
+  XSetForeground(fl_display, gc, 0xffffffff);
+  XDrawRectangle(fl_display, fl_window, gc, px, py, pw, ph);
+  XSetFunction(fl_display, gc, GXcopy);
 # elif defined(WIN32)
-  int old = SetROP2(fl_gc, R2_NOT);
+  int old = SetROP2(fl_graphics_driver->gc(), R2_NOT);
   fl_rect(px, py, pw, ph);
-  SetROP2(fl_gc, old);
-# elif defined(__APPLE_QUARTZ__)
+  SetROP2(fl_graphics_driver->gc(), old);
+# elif defined(__APPLE_) // PORTME: Fl_Window_Driver - platform overlay
   // warning: Quartz does not support xor drawing
   // Use the Fl_Overlay_Window instead.
   fl_color(FL_WHITE);
@@ -76,12 +79,12 @@ static void draw_current_rect() {
   fl_line_style(FL_DOT);
   fl_rect(px, py, pw, ph);
   fl_line_style(FL_SOLID);
-#endif
+#endif // USE_XOR
 }
 
 static void erase_current_rect() {
 #ifdef USE_XOR
-# ifdef __APPLE_QUARTZ__
+# ifdef __APPLE_QUARTZ__ // PORTME: Fl_Window_Driver - platform overlay
   fl_rect(px, py, pw, ph);
 # else
   draw_current_rect();
@@ -116,5 +119,5 @@ void fl_overlay_rect(int x, int y, int w, int h) {
 }
 
 //
-// End of "$Id: fl_overlay.cxx 8864 2011-07-19 04:49:30Z greg.ercolano $".
+// End of "$Id: fl_overlay.cxx 11567 2016-04-09 17:11:34Z manolo $".
 //

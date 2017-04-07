@@ -1,5 +1,5 @@
 //
-// "$Id: fl_cursor.cxx 10405 2014-10-29 15:53:52Z manolo $"
+// "$Id: fl_cursor.cxx 11652 2016-04-18 14:31:07Z manolo $"
 //
 // Mouse cursor support for the Fast Light Tool Kit (FLTK).
 //
@@ -23,10 +23,11 @@
 // portable to other systems.
 
 #include <FL/Fl.H>
+#include <FL/x.H>
 #include <FL/Fl_Window.H>
 #include <FL/Fl_Pixmap.H>
 #include <FL/Fl_RGB_Image.H>
-#include <FL/x.H>
+#include <FL/Fl_Window_Driver.H>
 #include <FL/fl_draw.H>
 
 #include "fl_cursor_wait.xpm"
@@ -130,7 +131,7 @@ void Fl_Window::cursor(Fl_Cursor c) {
   if (!i)
     return;
 
-  ret = i->set_cursor(c);
+  ret = pWindowDriver->set_cursor(c);
   if (ret)
     return;
 
@@ -167,7 +168,7 @@ void Fl_Window::cursor(const Fl_RGB_Image *image, int hotx, int hoty) {
   if (!i)
     return;
 
-  ret = i->set_cursor(image, hotx, hoty);
+  ret = pWindowDriver->set_cursor(image, hotx, hoty);
   if (ret)
     return;
 
@@ -192,5 +193,5 @@ void Fl_Window::default_cursor(Fl_Cursor c, Fl_Color, Fl_Color) {
 
 
 //
-// End of "$Id: fl_cursor.cxx 10405 2014-10-29 15:53:52Z manolo $".
+// End of "$Id: fl_cursor.cxx 11652 2016-04-18 14:31:07Z manolo $".
 //

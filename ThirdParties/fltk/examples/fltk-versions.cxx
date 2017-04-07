@@ -1,5 +1,5 @@
 //
-// "$Id: fltk-versions.cxx 10785 2015-07-12 17:45:13Z AlbrechtS $"
+// "$Id: fltk-versions.cxx 12202 2017-03-17 15:02:08Z AlbrechtS $"
 //
 // Library version test program for the Fast Light Tool Kit (FLTK).
 //
@@ -43,15 +43,10 @@ int main(int argc, char **argv) {
     (FL_ABI_VERSION == Fl::abi_version()) ? "" : "***");
 #endif
 
-#ifdef FLTK_ABI_VERSION
-  sprintf(version[versions++],"FLTK_ABI_VERSION  = %6d",FLTK_ABI_VERSION);
-  sprintf(version[versions++],"NOTE: FLTK_ABI_VERSION is deprecated.\n"
-			      "Please use FL_ABI_VERSION instead !");
-#endif
-
   for (int i=0; i<versions; i++) {
     printf("%s\n",version[i]);
   }
+  fflush(stdout);
 
 #ifdef FL_ABI_VERSION
   if (FL_ABI_VERSION != Fl::abi_version()) {
@@ -83,5 +78,5 @@ int main(int argc, char **argv) {
 }
 
 //
-// End of "$Id: fltk-versions.cxx 10785 2015-07-12 17:45:13Z AlbrechtS $".
+// End of "$Id: fltk-versions.cxx 12202 2017-03-17 15:02:08Z AlbrechtS $".
 //

@@ -1,9 +1,9 @@
 //
-// "$Id: Fl_Printer.H 10592 2015-02-26 15:38:54Z manolo $"
+// "$Id: Fl_Printer.H 11364 2016-03-18 18:20:11Z manolo $"
 //
 // Printing support for the Fast Light Tool Kit (FLTK).
 //
-// Copyright 2010-2014 by Bill Spitzak and others.
+// Copyright 2010-2016 by Bill Spitzak and others.
 //
 // This library is free software. Distribution and use rights are outlined in
 // the file "COPYING" which should have been included with this file.  If this
@@ -17,102 +17,13 @@
 //
 
 /** \file Fl_Printer.H 
- \brief declaration of classes Fl_Printer, Fl_System_Printer and Fl_PostScript_Printer.
+ \brief declaration of class Fl_Printer.
  */
 
 #ifndef Fl_Printer_H
 #define Fl_Printer_H
 
-#include <FL/x.H>
 #include <FL/Fl_Paged_Device.H>
-#include <FL/fl_draw.H>
-#include <FL/Fl_Pixmap.H>
-#include <FL/Fl_RGB_Image.H>
-#include <FL/Fl_Bitmap.H>
-#include <stdio.h>
-#if !(defined(__APPLE__) || defined(WIN32))
-#include <FL/Fl_PostScript.H>
-#elif defined(WIN32)
-#include <commdlg.h>
-#endif
-
-#if defined(__APPLE__) || defined(WIN32) || defined(FL_DOXYGEN)
-/**
- Print support under MSWindows and Mac OS.
-
- Class Fl_System_Printer is implemented only on the MSWindows and Mac OS platforms.
- It has no public constructor.
- Use Fl_Printer instead that is cross-platform and has the same API.
- */
-class Fl_System_Printer : public Fl_Paged_Device {
-  friend class Fl_Printer;
-private:
-  /** \brief the printer's graphics context, if there's one, NULL otherwise */
-  void *gc; 
-  void set_current(void);
-#ifdef __APPLE__
-  float scale_x;
-  float scale_y;
-  float angle; // rotation angle in radians
-  PMPrintSession  printSession;
-  PMPageFormat    pageFormat;
-  PMPrintSettings printSettings;
-#elif defined(WIN32)
-  int   abortPrint;
-  PRINTDLG      pd;
-  HDC           hPr;
-  int           prerr;
-  int left_margin;
-  int top_margin;
-  void absolute_printable_rect(int *x, int *y, int *w, int *h);
-#endif
-protected:
-  /** \brief The constructor */
-  Fl_System_Printer(void);
-public:
-  static const char *class_id;
-  const char *class_name() {return class_id;};
-  int start_job(int pagecount, int *frompage = NULL, int *topage = NULL);
-  int start_page (void);
-  int printable_rect(int *w, int *h);
-  void margins(int *left, int *top, int *right, int *bottom);
-  void origin(int *x, int *y);
-  void origin(int x, int y);
-  void scale (float scale_x, float scale_y = 0.);
-  void rotate(float angle);
-  void translate(int x, int y);
-  void untranslate(void);
-  int end_page (void);
-  void end_job (void);
-#ifdef __APPLE__
-  void print_window_part(Fl_Window *win, int x, int y, int w, int h, int delta_x, int delta_y);
-#endif
-  /** \brief The destructor */
-  ~Fl_System_Printer(void);
-}; // class Fl_System_Printer
-
-#endif
-  
-#if !(defined(__APPLE__) || defined(WIN32) )
-/**
- Print support under Unix/Linux.
- 
- Class Fl_PostScript_Printer is implemented only on the Unix/Linux platform.
- It has no public constructor.
- Use Fl_Printer instead that is cross-platform and has the same API.
- */
-class Fl_PostScript_Printer : public Fl_PostScript_File_Device {
-  friend class Fl_Printer;
-protected:
-  /** The constructor */
-  Fl_PostScript_Printer(void) {};
-public:
-  static const char *class_id;
-  const char *class_name() {return class_id;};
-  int start_job(int pages, int *firstpage = NULL, int *lastpage = NULL);
-};
-
-#endif
 
 /**
  * \brief OS-independent print support.
@@ -167,17 +78,17 @@ public:
  before creation of the Fl_Printer object.
  Use Fl_PostScript_File_Device::file_chooser_title to customize the title of the file chooser dialog that opens
  when using the "Print To File" option of the print dialog. 
- <li>MSWindows platform: Transparent Fl_RGB_Image 's don't print with exact transparency on most printers.
+ <li>MSWindows platform: Transparent Fl_RGB_Image 's don't print with exact transparency on most printers
+ (a workaround is to use print_window_part() ).
  Fl_RGB_Image 's don't rotate() well.
- A workaround is to use the print_window_part() call. 
- <li>Mac OS X platform: all graphics requests print as on display.
+ <li>Mac OS X platform: all graphics requests print as on display and accept rotation and scaling.
  </ul>
  */
 class FL_EXPORT Fl_Printer : public Fl_Paged_Device {
+private:
+  Fl_Paged_Device *printer;
 public:
-  static const char *class_id;
-  const char *class_name() {return class_id;};
-  /** \brief The constructor */
+  /** The constructor */
   Fl_Printer(void);
   int start_job(int pagecount, int *frompage = NULL, int *topage = NULL);
   int start_page(void);
@@ -193,12 +104,10 @@ public:
   void end_job (void);
   void print_widget(Fl_Widget* widget, int delta_x=0, int delta_y=0);
   void print_window_part(Fl_Window *win, int x, int y, int w, int h, int delta_x=0, int delta_y=0);
+  void draw_decorated_window(Fl_Window *win, int x_offset, int y_offset);
   void set_current(void);
-  Fl_Graphics_Driver* driver(void);
-  /** \brief The destructor */
-  ~Fl_Printer(void);
  
-  /** \name These attributes are effective under the Xlib platform only.
+  /** \name These attributes are useful for the Linux/Unix platform only.
    \{
    */  
   static const char *dialog_title; 
@@ -221,16 +130,12 @@ public:
   static const char *property_save;
   static const char *property_cancel;
   /** \} */ 
-private:
-#if defined(WIN32) || defined(__APPLE__)
-  Fl_System_Printer *printer;
-#else
-  Fl_PostScript_Printer *printer;
-#endif
+  /** The destructor */
+  ~Fl_Printer(void);
 };
 
 #endif // Fl_Printer_H
 
 //
-// End of "$Id: Fl_Printer.H 10592 2015-02-26 15:38:54Z manolo $"
+// End of "$Id: Fl_Printer.H 11364 2016-03-18 18:20:11Z manolo $"
 //

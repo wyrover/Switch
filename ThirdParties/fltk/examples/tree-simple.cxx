@@ -1,10 +1,10 @@
 //
-// "$Id: tree-simple.cxx 10015 2013-11-06 20:12:08Z greg.ercolano $"
+// "$Id: tree-simple.cxx 12121 2016-11-19 01:20:53Z AlbrechtS $"
 //
 //	Simple Fl_Tree widget example. - erco 06/05/2010
 //
 // Copyright 2010 Greg Ercolano.
-// Copyright 1998-2010 by Bill Spitzak and others.
+// Copyright 1998-2016 by Bill Spitzak and others.
 //
 // This library is free software. Distribution and use rights are outlined in
 // the file "COPYING" which should have been included with this file.  If this
@@ -44,12 +44,10 @@ void TreeCallback(Fl_Widget *w, void *data) {
     case FL_TREE_REASON_CLOSED:
       // fprintf(stderr, "TreeCallback: Item '%s' closed\n", item->label());
       break;
-#if FLTK_ABI_VERSION >= 10301
     // To enable this callback, use tree->item_reselect_mode(FL_TREE_SELECTABLE_ALWAYS);
     case FL_TREE_REASON_RESELECTED:
       // fprintf(stderr, "TreeCallback: Item '%s' reselected\n", item->label());
       break;
-#endif
     default:
       break;
   }
@@ -89,5 +87,5 @@ int main(int argc, char *argv[]) {
 }
 
 //
-// End of "$Id: tree-simple.cxx 10015 2013-11-06 20:12:08Z greg.ercolano $".
+// End of "$Id: tree-simple.cxx 12121 2016-11-19 01:20:53Z AlbrechtS $".
 //

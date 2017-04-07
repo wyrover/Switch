@@ -1,5 +1,5 @@
 //
-// "$Id: Fl_Bitmap.H 10110 2014-02-22 14:51:50Z manolo $"
+// "$Id: Fl_Bitmap.H 12078 2016-11-03 21:28:09Z manolo $"
 //
 // Bitmap header file for the Fast Light Tool Kit (FLTK).
 //
@@ -21,7 +21,8 @@
 
 #ifndef Fl_Bitmap_H
 #define Fl_Bitmap_H
-#  include "Fl_Image.H"
+#include "Fl_Image.H"
+#include "Fl_Widget.H" // for fl_uintptr_t
 
 class Fl_Widget;
 struct Fl_Menu_Item;
@@ -31,10 +32,7 @@ struct Fl_Menu_Item;
   (bitmap) images. Images are drawn using the current color.
 */
 class FL_EXPORT Fl_Bitmap : public Fl_Image {
-  friend class Fl_Quartz_Graphics_Driver;
-  friend class Fl_GDI_Graphics_Driver;
-  friend class Fl_GDI_Printer_Graphics_Driver;
-  friend class Fl_Xlib_Graphics_Driver;
+  friend class Fl_Graphics_Driver;
 public:
 
   /** pointer to raw bitmap data */
@@ -42,18 +40,13 @@ public:
   /** Non-zero if array points to bitmap data allocated internally */
   int alloc_array;
   
-  private:
-  int start(int XP, int YP, int WP, int HP, int &cx, int &cy, 
+private:
+  int prepare(int XP, int YP, int WP, int HP, int &cx, int &cy,
 	    int &X, int &Y, int &W, int &H);
-#if defined(__APPLE__) || defined(WIN32)
   /** for internal use */
-  void *id_;
-#else
-  /** for internal use */
-  unsigned id_;
-#endif // __APPLE__ || WIN32
+  fl_uintptr_t id_;
 
-  public:
+public:
 
   /** The constructors create a new bitmap from the specified bitmap data */
   Fl_Bitmap(const uchar *bits, int W, int H) :
@@ -74,5 +67,5 @@ public:
 #endif
 
 //
-// End of "$Id: Fl_Bitmap.H 10110 2014-02-22 14:51:50Z manolo $".
+// End of "$Id: Fl_Bitmap.H 12078 2016-11-03 21:28:09Z manolo $".
 //

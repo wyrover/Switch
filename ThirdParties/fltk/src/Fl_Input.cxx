@@ -1,5 +1,5 @@
 //
-// "$Id: Fl_Input.cxx 11094 2016-01-31 02:49:56Z AlbrechtS $"
+// "$Id: Fl_Input.cxx 12208 2017-03-17 17:32:00Z AlbrechtS $"
 //
 // Input widget for the Fast Light Tool Kit (FLTK).
 //
@@ -25,7 +25,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <FL/Fl.H>
+#include <FL/x.H>
 #include <FL/Fl_Window.H>
+#include <FL/Fl_System_Driver.H>
+#include <FL/Fl_Screen_Driver.H>
 #include <FL/Fl_Input.H>
 #include <FL/fl_draw.H>
 #include <FL/fl_ask.H>
@@ -310,10 +313,10 @@ int Fl_Input::handle_key() {
     
     // Insert characters into numeric fields after checking for legality:
     if (input_type() == FL_FLOAT_INPUT || input_type() == FL_INT_INPUT) {
-      Fl::compose_reset(); // ignore any foreign letters...
+      Fl::compose_reset(); // ignore any composed characters...
       
       // initialize the list of legal characters inside a floating point number
-#ifdef HAVE_LOCALECONV
+#if defined(HAVE_LOCALECONV)
       if (!legal_fp_chars) {
         size_t len = strlen(standard_fp_chars);
         struct lconv *lc = localeconv();
@@ -358,11 +361,9 @@ int Fl_Input::handle_key() {
       else replace(position(), del ? position()-del : mark(),
 	           Fl::event_text(), Fl::event_length());
     }
-#ifdef __APPLE__
-    if (Fl::compose_state) {
+    if (Fl::screen_driver()->has_marked_text() && Fl::compose_state) {
       this->mark( this->position() - Fl::compose_state );
-      }
-#endif
+    }
     return 1;
   }
   
@@ -381,6 +382,11 @@ int Fl_Input::handle_key() {
   //
   // Example: (NP,WP,!WO) means supported in notepad + wordpad, but NOT word.
   //
+
+  // handle keypresses that can have a platform-dependent processing
+  int retval = Fl::screen_driver()->input_widget_handle_key(Fl::event_key(), mods, shift, this);
+  if (retval >= 0) return retval;
+  
   switch (Fl::event_key()) {
 
     case FL_Insert:
@@ -391,143 +397,6 @@ int Fl_Input::handle_key() {
       if (mods==0)          return kf_insert_toggle();		// Insert         (Standard)
       if (mods==FL_CTRL)    return kf_copy();			// Ctrl-Insert    (WP,NP,WOW,GE,KE,OF)
       return 0;							// ignore other combos, pass to parent
-
-    case FL_Delete: {
-#ifdef __APPLE__
-      if (mods==0)          return kf_delete_char_right();	// Delete         (OSX-HIG,TE,SA,WOX)
-      if (mods==FL_CTRL)    return kf_delete_char_right();	// Ctrl-Delete    (??? TE,!SA,!WOX)
-      if (mods==FL_ALT)     return kf_delete_word_right();	// Alt-Delete     (OSX-HIG,TE,SA)
-      return 0;							// ignore other combos, pass to parent
-#else
-      int selected = (position() != mark()) ? 1 : 0;
-      if (mods==0 && shift && selected)
-                            return kf_copy_cut();		// Shift-Delete with selection (WP,NP,WOW,GE,KE,OF)
-      if (mods==0 && shift && !selected)
-                            return kf_delete_char_right();	// Shift-Delete no selection (WP,NP,WOW,GE,KE,!OF)
-      if (mods==0)          return kf_delete_char_right();	// Delete         (Standard)
-      if (mods==FL_CTRL)    return kf_delete_word_right();	// Ctrl-Delete    (WP,!NP,WOW,GE,KE,!OF)
-      return 0;							// ignore other combos, pass to parent
-#endif
-    }
-
-    case FL_Left:
-#ifdef __APPLE__
-      if (mods==0)          return kf_move_char_left();		// Left           (OSX-HIG)
-      if (mods==FL_ALT)     return kf_move_word_left();		// Alt-Left       (OSX-HIG)
-      if (mods==FL_META)    return kf_move_sol();		// Meta-Left      (OSX-HIG)
-      if (mods==FL_CTRL)    return kf_move_sol();		// Ctrl-Left      (TE/SA)
-      return 0;							// ignore other combos, pass to parent
-#else
-      if (mods==0)          return kf_move_char_left();		// Left           (WP,NP,WOW,GE,KE,OF)
-      if (mods==FL_CTRL)    return kf_move_word_left();		// Ctrl-Left      (WP,NP,WOW,GE,KE,!OF)
-      if (mods==FL_META)    return kf_move_char_left();		// Meta-Left      (WP,NP,?WOW,GE,KE)
-      return 0;							// ignore other combos, pass to parent
-#endif
-
-    case FL_Right:
-#ifdef __APPLE__
-      if (mods==0)          return kf_move_char_right();	// Right          (OSX-HIG)
-      if (mods==FL_ALT)     return kf_move_word_right();	// Alt-Right      (OSX-HIG)
-      if (mods==FL_META)    return kf_move_eol();		// Meta-Right     (OSX-HIG)
-      if (mods==FL_CTRL)    return kf_move_eol();		// Ctrl-Right     (TE/SA)
-      return 0;							// ignore other combos, pass to parent
-#else
-      if (mods==0)          return kf_move_char_right();	// Right          (WP,NP,WOW,GE,KE,OF)
-      if (mods==FL_CTRL)    return kf_move_word_right();	// Ctrl-Right     (WP,NP,WOW,GE,KE,!OF)
-      if (mods==FL_META)    return kf_move_char_right();	// Meta-Right     (WP,NP,?WOW,GE,KE,!OF)
-      return 0;							// ignore other combos, pass to parent
-#endif
-
-    case FL_Up:
-#ifdef __APPLE__
-      if (mods==0)          return kf_lines_up(1);		// Up             (OSX-HIG)
-      if (mods==FL_CTRL)    return kf_page_up();		// Ctrl-Up        (TE !HIG)
-      if (mods==FL_ALT)     return kf_move_up_and_sol();	// Alt-Up         (OSX-HIG)
-      if (mods==FL_META)    return kf_top();			// Meta-Up        (OSX-HIG)
-      return 0;							// ignore other combos, pass to parent
-#else
-      if (mods==0)          return kf_lines_up(1);		// Up             (WP,NP,WOW,GE,KE,OF)
-      if (mods==FL_CTRL)    return kf_move_up_and_sol();	// Ctrl-Up        (WP,!NP,WOW,GE,!KE,OF)
-      return 0;							// ignore other combos, pass to parent
-#endif
-
-    case FL_Down:
-#ifdef __APPLE__
-      if (mods==0)          return kf_lines_down(1);		// Dn             (OSX-HIG)
-      if (mods==FL_CTRL)    return kf_page_down();		// Ctrl-Dn        (TE !HIG)
-      if (mods==FL_ALT)     return kf_move_down_and_eol();	// Alt-Dn         (OSX-HIG)
-      if (mods==FL_META)    return kf_bottom();			// Meta-Dn        (OSX-HIG)
-      return 0;							// ignore other combos, pass to parent
-#else
-      if (mods==0)          return kf_lines_down(1);		// Dn             (WP,NP,WOW,GE,KE,OF)
-      if (mods==FL_CTRL)    return kf_move_down_and_eol();	// Ctrl-Down      (WP,!NP,WOW,GE,!KE,OF)
-      return 0;							// ignore other combos, pass to parent
-#endif
-
-    case FL_Page_Up:
-      // Fl_Input has no scroll control, so instead we move the cursor by one page
-      // OSX-HIG recommends Alt increase one semantic unit, Meta next higher..
-#ifdef __APPLE__
-      if (mods==0)          return kf_page_up();		// PgUp           (OSX-HIG)
-      if (mods==FL_ALT)     return kf_page_up();		// Alt-PageUp     (OSX-HIG)
-      if (mods==FL_META)    return kf_top();			// Meta-PageUp    (OSX-HIG,!TE)
-      return 0;							// ignore other combos, pass to parent
-#else
-      if (mods==0)          return kf_page_up();		// PageUp         (WP,NP,WOW,GE,KE)
-      if (mods==FL_CTRL)    return kf_page_up();		// Ctrl-PageUp    (!WP,!NP,!WOW,!GE,KE,OF)
-      if (mods==FL_ALT)     return kf_page_up();		// Alt-PageUp     (!WP,!NP,!WOW,!GE,KE,OF)
-      return 0;							// ignore other combos, pass to parent
-#endif
-
-    case FL_Page_Down:
-#ifdef __APPLE__
-      // Fl_Input has no scroll control, so instead we move the cursor by one page
-      // OSX-HIG recommends Alt increase one semantic unit, Meta next higher..
-      if (mods==0)          return kf_page_down();		// PgDn           (OSX-HIG)
-      if (mods==FL_ALT)     return kf_page_down();		// Alt-PageDn     (OSX-HIG)
-      if (mods==FL_META)    return kf_bottom();			// Meta-PageDn    (OSX-HIG,!TE)
-      return 0;							// ignore other combos, pass to parent
-#else
-      if (mods==0)          return kf_page_down();		// PageDn         (WP,NP,WOW,GE,KE)
-      if (mods==FL_CTRL)    return kf_page_down();		// Ctrl-PageDn    (!WP,!NP,!WOW,!GE,KE,OF)
-      if (mods==FL_ALT)     return kf_page_down();		// Alt-PageDn     (!WP,!NP,!WOW,!GE,KE,OF)
-      return 0;							// ignore other combos, pass to parent
-#endif
-
-    case FL_Home:
-#ifdef __APPLE__
-      if (mods==0)          return kf_top();			// Home           (OSX-HIG)
-      if (mods==FL_ALT)     return kf_top();			// Alt-Home       (???)
-      return 0;							// ignore other combos, pass to parent
-#else
-      if (mods==0)          return kf_move_sol();		// Home           (WP,NP,WOW,GE,KE,OF)
-      if (mods==FL_CTRL)    return kf_top();			// Ctrl-Home      (WP,NP,WOW,GE,KE,OF)
-      return 0;							// ignore other combos, pass to parent
-#endif
-
-    case FL_End:
-#ifdef __APPLE__
-      if (mods==0)          return kf_bottom();			// End            (OSX-HIG)
-      if (mods==FL_ALT)     return kf_bottom();			// Alt-End        (???)
-      return 0;							// ignore other combos, pass to parent
-#else
-      if (mods==0)          return kf_move_eol();		// End            (WP,NP,WOW,GE,KE,OF)
-      if (mods==FL_CTRL)    return kf_bottom();			// Ctrl-End       (WP,NP,WOW,GE,KE,OF)
-      return 0;							// ignore other combos, pass to parent
-#endif
-
-    case FL_BackSpace:
-#ifdef __APPLE__
-      if (mods==0)          return kf_delete_char_left();	// Backspace      (OSX-HIG)
-      if (mods==FL_CTRL)    return kf_delete_char_left();	// Ctrl-Backspace (TE/SA)
-      if (mods==FL_ALT)     return kf_delete_word_left();	// Alt-Backspace  (OSX-HIG)
-      if (mods==FL_META)    return kf_delete_sol();		// Meta-Backspace (OSX-HIG,!TE)
-      return 0;							// ignore other combos, pass to parent
-#else
-      if (mods==0)          return kf_delete_char_left();	// Backspace      (WP,NP,WOW,GE,KE,OF)
-      if (mods==FL_CTRL)    return kf_delete_word_left();	// Ctrl-Backspace (WP,!NP,WOW,GE,KE,!OF)
-      return 0;							// ignore other combos, pass to parent
-#endif
 
     case FL_Enter:
     case FL_KP_Enter:
@@ -590,14 +459,12 @@ int Fl_Input::handle(int event) {
   static int dnd_save_position, dnd_save_mark, drag_start = -1, newpos;
   static Fl_Widget *dnd_save_focus = NULL;
   switch (event) {
-#ifdef __APPLE__
     case FL_UNFOCUS:
-      if (Fl::compose_state) {
+      if (Fl::screen_driver()->has_marked_text() && Fl::compose_state) {
 	this->mark( this->position() );
 	Fl::reset_marked_text();
       }
       break;
-#endif
     case FL_FOCUS:
       switch (Fl::event_key()) {
         case FL_Right:
@@ -679,11 +546,7 @@ int Fl_Input::handle(int event) {
 	  dnd_save_focus = this;
           // drag the data:
           copy(0);
-#ifdef __APPLE__
-          Fl_X::dnd(1);
-#else
-          Fl::dnd();
-#endif
+          Fl::screen_driver()->dnd(1);
           return 1;
         }
       }
@@ -746,9 +609,7 @@ int Fl_Input::handle(int event) {
           Fl::focus(dnd_save_focus);
           handle(FL_UNFOCUS);
         }
-#if !(defined(__APPLE__) || defined(WIN32))
       Fl::first_window()->cursor(FL_CURSOR_MOVE);
-#endif
       dnd_save_focus = NULL;
       return 1;
       
@@ -840,14 +701,12 @@ Fl_Secret_Input::Fl_Secret_Input(int X,int Y,int W,int H,const char *l)
 
 int Fl_Secret_Input::handle(int event) {
   int retval = Fl_Input::handle(event);
-#ifdef __APPLE__
-  if (event == FL_KEYBOARD && Fl::compose_state) {
+  if (event == FL_KEYBOARD && Fl::screen_driver()->has_marked_text() && Fl::compose_state) {
     this->mark( this->position() ); // don't underline marked text
   }
-#endif
   return retval;
 }
 
 //
-// End of "$Id: Fl_Input.cxx 11094 2016-01-31 02:49:56Z AlbrechtS $".
+// End of "$Id: Fl_Input.cxx 12208 2017-03-17 17:32:00Z AlbrechtS $".
 //

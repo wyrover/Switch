@@ -1,9 +1,9 @@
 //
-// "$Id: math.h 8864 2011-07-19 04:49:30Z greg.ercolano $"
+// "$Id: math.h 11590 2016-04-12 17:53:18Z AlbrechtS $"
 //
 // Math header file for the Fast Light Tool Kit (FLTK).
 //
-// Copyright 1998-2010 by Bill Spitzak and others.
+// Copyright 1998-2016 by Bill Spitzak and others.
 //
 // This library is free software. Distribution and use rights are outlined in
 // the file "COPYING" which should have been included with this file.  If this
@@ -29,11 +29,6 @@
 #  include <math.h>
 #  undef fl_math_h_cyclic_include 
 
-#  ifdef __EMX__
-#    include <float.h>
-#  endif
-
-
 #  ifndef M_PI
 #    define M_PI            3.14159265358979323846
 #    define M_PI_2          1.57079632679489661923
@@ -58,5 +53,5 @@ inline double copysign(double a, double b) {return b<0 ? -a : a;}
 
 
 //
-// End of "$Id: math.h 8864 2011-07-19 04:49:30Z greg.ercolano $".
+// End of "$Id: math.h 11590 2016-04-12 17:53:18Z AlbrechtS $".
 //

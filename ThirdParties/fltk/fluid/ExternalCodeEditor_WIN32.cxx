@@ -1,10 +1,9 @@
 //
-// "$Id: ExternalCodeEditor_WIN32.cxx 11879 2016-08-16 21:08:40Z greg.ercolano $".
+// "$Id: ExternalCodeEditor_WIN32.cxx 12173 2017-02-15 20:28:13Z AlbrechtS $".
 //
-//       External code editor management class for Windows
+//	External code editor management class for Windows
 //
-
-#ifdef WIN32	        /* This entire file windows only */
+//	Note: This entire file Windows only.
 
 #include <stdio.h>      // snprintf()
 
@@ -571,7 +570,6 @@ int ExternalCodeEditor::editors_open() {
   return L_editors_open;
 }
 
-#endif /* WIN32 */
 //
-// End of "$Id: ExternalCodeEditor_WIN32.cxx 11879 2016-08-16 21:08:40Z greg.ercolano $".
+// End of "$Id: ExternalCodeEditor_WIN32.cxx 12173 2017-02-15 20:28:13Z AlbrechtS $".
 //
