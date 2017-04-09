@@ -12,7 +12,7 @@
 #include "../../../Includes/Pcf/Boxing.h"
 #include "ArrayAlgorithms.h"
 
-#if _WIN32
+#if defined(_WIN32)
 using __char16 = __int16;
 using __char32 = __int32;
 #else

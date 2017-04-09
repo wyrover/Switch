@@ -1,5 +1,4 @@
-# Add include files here:
-set(include_files
+set(INCLUDE_FILES
   Includes/Pcf/System/ComponentModel/CancelEventArgs.h
   Includes/Pcf/System/ComponentModel/CancelEventHandler.h
   Includes/Pcf/System/ComponentModel/Component.h
@@ -102,12 +101,13 @@ set(include_files
  Includes/Pcf/Forms.h
 )
 
-# Add source files here:
-set(source_files
+set(SOURCE_FILES
   Sources/__OS/FormsApi.h
+  Sources/__OS/FormsApiFltk.cpp
+  Sources/__OS/FormsApiFltkSystemInformation.cpp
+  Sources/__OS/FormsApiGtk.cpp
+  Sources/__OS/FormsApiGtkSystemInformation.cpp
   Sources/__OS/FormsApiWin32.cpp
-  Sources/__OS/FormsApiX.cpp
-  Sources/__OS/FormsApiXSystemInformation.cpp
   Sources/__OS/WindowMessage.h
   Sources/__OS/WindowMessageKey.h
   Sources/Pcf/System/Media/SystemSound.cpp
@@ -151,13 +151,12 @@ set(source_files
 )
 
 if (APPLE)
-set(source_apple_files
+set(COCOA_SOURCE_FILES
   Sources/__OS/FormsApiCocoa.mm
   Sources/__OS/FormsApiCocoaSystemInformation.cpp
 )
 endif ()
 
-#Add include groups here:
 source_group(Includes REGULAR_EXPRESSION "/Includes/[-_,A-Za-z0-9]+\\.h*")
 source_group(Includes\\Pcf\\System REGULAR_EXPRESSION "/Includes/Pcf/System/[-_,A-Za-z0-9]+\\.h*")
 source_group(Includes\\Pcf\\System\\ComponentModel REGULAR_EXPRESSION "/Includes/Pcf/System/ComponentModel/[-_,A-Za-z0-9]+\\.h*")
@@ -168,7 +167,6 @@ source_group(Includes\\Pcf\\System\\Windows\\Forms\\VisualStyles REGULAR_EXPRESS
 source_group(Includes\\Pcf REGULAR_EXPRESSION "/Includes/Pcf/[-_,A-Za-z0-9]+\\.h*")
 source_group(Includes\\Pcf REGULAR_EXPRESSION "/Includes/Pcf/[-_,A-Za-z0-9]")
 
-#Add source groups here:
 source_group(Sources REGULAR_EXPRESSION "/Sources/[-_,A-Za-z0-9]+\\.c*")
 source_group(Sources\\__OS REGULAR_EXPRESSION "/Sources/__OS/[-_,A-Za-z0-9]+\\.*")
 source_group(Sources\\Pcf REGULAR_EXPRESSION "/Sources/Pcf/[-_,A-Za-z0-9]+\\.c*")
@@ -179,7 +177,7 @@ source_group(Sources\\Pcf\\System\\Windows REGULAR_EXPRESSION "/Sources/Pcf/Syst
 source_group(Sources\\Pcf\\System\\Windows\\Forms REGULAR_EXPRESSION "/Sources/Pcf/System/Windows/Forms/[-_,A-Za-z0-9]+\\.(c*|h*|m*)")
 source_group(Sources\\Pcf\\System\\Windows\\Forms\\VisualStyles REGULAR_EXPRESSION "/Sources/Pcf/System/Windows/Forms/VisualStyles/[-_,A-Za-z0-9]+\\.c*")
 
-add_library(Pcf.Forms STATIC ${include_files} ${source_files} ${source_apple_files})
+add_library(Pcf.Forms STATIC ${INCLUDE_FILES} ${SOURCE_FILES} ${COCOA_SOURCE_FILES})
 target_include_directories(Pcf.Forms PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Includes> $<INSTALL_INTERFACE:include>)
 target_link_libraries(Pcf.Forms Pcf.Drawing)
 set_target_properties(Pcf.Forms PROPERTIES FOLDER Pcf/Forms)

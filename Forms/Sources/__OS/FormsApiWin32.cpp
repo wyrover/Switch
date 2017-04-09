@@ -1,4 +1,4 @@
-﻿#if _WIN32
+﻿#if defined(_WIN32) && defined(__use_native_interface__)
 #pragma comment(linker,"\"/manifestdependency:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
 
 #include <Windows.h>
@@ -102,6 +102,9 @@ INT WINAPI WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR commandLine
 }
 
 bool FormsApi::Application::visualStylesEnabled = false;
+
+void FormsApi::Application::AddForm(const System::Windows::Forms::Form& form) {
+}
 
 void FormsApi::Application::Exit() {
   PostQuitMessage(0);

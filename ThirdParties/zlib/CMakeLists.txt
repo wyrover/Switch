@@ -1,13 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
 project(zlib VERSION 1.2.8)
- 
-if(PLATFORM_NAME STREQUAL "DESKTOP_OSX64")
-  SET(CMAKE_C_FLAGS "-Wno-deprecated")
-elseif(MSVC)
-  set(CMAKE_C_FLAGS_DEBUG "/MDd /D_DEBUG /DDEBUG /MP /Oy- /Zi /Od /Zi /Oy- /RTC1")
-  set(CMAKE_C_FLAGS_RELEASE "/O2 /Ob2 /Oy- /D NDEBUG /DRELEASE")
-endif()
 
 if(NOT CMAKE_DEBUG_POSTFIX)
   set(CMAKE_DEBUG_POSTFIX d)

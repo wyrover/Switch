@@ -1,4 +1,4 @@
-#if _WIN32
+#if defined(_WIN32)
 #pragma warning(disable:4201)
 #include <winsock2.h>
 #include <ws2tcpip.h>
@@ -15,7 +15,7 @@
 namespace {
   std::mutex mutex;
   using Hostent = hostent;
-#if _WIN32
+#if defined(_WIN32)
   void sethostent(int) {}
   void endhostent() {}
 #endif

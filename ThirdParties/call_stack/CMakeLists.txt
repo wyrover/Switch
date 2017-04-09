@@ -2,19 +2,9 @@ cmake_minimum_required(VERSION 3.5)
 
 project(call_stack  VERSION 1.0.0)
 
-if (APPLE)
-  SET(CMAKE_CXX_FLAGS "-std=c++14 -Wall -Wextra -Wpedantic -Wdeprecated-declarations -Wno-unknown-pragmas -Wno-unused-parameter")
-  set(CMAKE_CXX_FLAGS_DEBUG "-g -o0 -D_DEBUG -DDEBUG")
-  set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG -DRELEASE")
-elseif (UNIX)
-  SET(CMAKE_CXX_FLAGS "-std=c++14 -Wall -Wextra -Wpedantic -Wdeprecated-declarations -Wno-unknown-pragmas -Wno-unused-parameter")
-  set(CMAKE_CXX_FLAGS_DEBUG "-g -o0 -D_DEBUG -DDEBUG")
-  set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG -DRELEASE")
-elseif (MSVC)
-  set(CMAKE_CXX_FLAGS "/DWIN32 /D_WINDOWS /DUNICODE /D_UNICODE /D_CRT_SECURE_NO_WARNINGS /D_CRT_NON_CONFORMING_SWPRINTFS /Zm1000 /bigobj /EHsc /GR /MP /Oy- /W4 /wd4100 /wd4312 /wd4355 /wd4456 /wd4458")
-  set(CMAKE_CXX_FLAGS_DEBUG "/MDd /Od /Zi /RTC1 /D_DEBUG /DDEBUG")
-  set(CMAKE_CXX_FLAGS_RELEASE "/Gy /O2 /Oi /GL- /DNDEBUG /DRELEASE")
-endif ()
+if(NOT CMAKE_DEBUG_POSTFIX)
+  set(CMAKE_DEBUG_POSTFIX d)
+endif()
 
 set(INCLUDE_FILES
   call_stack/call_stack.hpp

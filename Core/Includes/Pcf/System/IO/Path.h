@@ -5,7 +5,7 @@
 #include "../../Types.h"
 #include "../Array.h"
 #include "../Convert.h"
-#include "../string.h"
+#include "../String.h"
 
 /// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Pcf {

@@ -72,7 +72,7 @@ namespace Pcf {
   using uintptr = uintptr_t;
 
   /// @cond
-#if __linux__ && _LP64
+#if defined(__linux__) && defined(_LP64)
   using llong = long long int;
   using ullong = unsigned long long int;
 #else

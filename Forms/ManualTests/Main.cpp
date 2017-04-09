@@ -19,6 +19,7 @@ namespace PcfFormApp {
       this->Text = "First Application";
       this->Location = System::Drawing::Point(200, 100);
 
+/*
       this->FormClosing += pcf_delegate(const object& sender, FormClosingEventArgs& e) {
         e.Cancel = MessageBox::Show("Do you want quit application ?", "Program", MessageBoxButtons::YesNo, MessageBoxIcon::Question) != DialogResult::Yes;
       };
@@ -33,7 +34,7 @@ namespace PcfFormApp {
       this->button1.Location = System::Drawing::Point(10, 10);
       this->button1.Click += pcf_delegate(const object& sender, const EventArgs& e) {
         static int32 counter = 0;
-        this->label1.Text = string::Format("Counter {0}", ++counter);
+        this->label1.Text = string::Format("counter = {0}", ++counter);
         System::Media::SystemSounds::Asterisk().Play();
       };
 
@@ -77,8 +78,9 @@ namespace PcfFormApp {
       this->label2.Text = "(X=0,Y=0)";
       this->label2.Location = System::Drawing::Point(28, 162);
       this->label2.Size = System::Drawing::Size(150, 23);
+    */
     }
-    
+
   private:
     Button button1;
     Button button2;

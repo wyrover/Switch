@@ -2,14 +2,6 @@ cmake_minimum_required(VERSION 3.5)
 
 project(ThirdParties)
 
-if (APPLE)
-  set(CMAKE_MACOSX_RPATH 1)
-endif()
-
-if(NOT CMAKE_DEBUG_POSTFIX)
-  set(CMAKE_DEBUG_POSTFIX d)
-endif()
-
 #________________________________________________________________________________
 #                                                                      call_stack
 find_package(call_stack QUIET)
@@ -17,7 +9,6 @@ message(STATUS "Found call_stack : " ${call_stack_FOUND})
 if (NOT call_stack_FOUND)
   message(STATUS "Add ThirdParty call_stack")
   add_subdirectory(call_stack)
-  set(call_stack_LIBRARIES call_stack)
   set_target_properties(call_stack PROPERTIES FOLDER ThirdParty)
 endif()
 
@@ -30,7 +21,6 @@ if (NOT CURL_FOUND)
   option(BUILD_TESTING "Build the testing tree" OFF)
   option(ENABLE_MANUAL "to provie the built-in manual" OFF)
   add_subdirectory(curl)
-  set(CURL_LIBRARIES libcurl)
   set_target_properties(libcurl PROPERTIES FOLDER ThirdParty)
 endif()
 
@@ -41,8 +31,19 @@ message(STATUS "Found easywsclient : " ${easywsclient_FOUND})
 if (NOT easywsclient_FOUND)
   message(STATUS "Add ThirdParty easywsclient")
   add_subdirectory(easywsclient)
-  set(easywsclient_LIBRARIES easywsclient)
   set_target_properties(easywsclient PROPERTIES FOLDER ThirdParty)
+endif()
+
+#________________________________________________________________________________
+#                                                                            fltk
+find_package(FLTK QUIET)
+message(STATUS "Found FLTK : " ${FLTK_FOUND})
+if (NOT FLTK_FOUND)
+  message(STATUS "Add ThirdParty FLTK")
+  set(FLTK_LIBRARIES "")
+  option(OPTION_BUILD_EXAMPLES "build example programs" OFF)
+  add_subdirectory(fltk)
+  set_target_properties(fltk PROPERTIES FOLDER ThirdParty)
 endif()
 
 #________________________________________________________________________________
@@ -52,7 +53,6 @@ message(STATUS "Found Rs232 : " ${Rs232_FOUND})
 if (NOT Rs232_FOUND)
   message(STATUS "Add ThirdParty Rs232")
   add_subdirectory(Rs232)
-  set(Rs232_LIBRARIES Rs232)
   set_target_properties(Rs232 PROPERTIES FOLDER ThirdParty)
 endif()
 
@@ -86,7 +86,6 @@ message(STATUS "Found libpng : " ${PNG_FOUND})
 if (NOT PNG_FOUND)
   message(STATUS "Add ThirdParty libpng")
   add_subdirectory(libpng)
-  set(PNG_LIBRARIES libpng)
   set_target_properties(libpng PROPERTIES FOLDER ThirdParty)
 endif()
 
@@ -100,7 +99,6 @@ if (NOT GTEST_FOUND)
   option(BUILD_GTEST "Build the google test subproject" ON)
   option(gtest_force_shared_crt "Use shared (DLL) run-time lib even when Google Test is built as static lib." ON)
   add_subdirectory(googletest)
-  set(GTEST_LIBRARIES gtest)
   set_target_properties(gtest PROPERTIES FOLDER ThirdParty)
   set_target_properties(gtest_main PROPERTIES FOLDER ThirdParty)
 endif()

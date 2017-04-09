@@ -10,6 +10,10 @@ Reference<Form> Application::mainForm;
 bool Application::enableVisualStyles = false;
 EventHandler Application::Idle;
 
+void Application::AddForm() {
+  FormsApi::Application::AddForm(mainForm());
+}
+
 void Application::Exit() {
   FormsApi::Application::Exit();
 }

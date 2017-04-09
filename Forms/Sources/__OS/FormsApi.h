@@ -29,6 +29,7 @@ namespace __OS {
       static void EnableVisualStyles() { visualStylesEnabled = true; }
       static bool HasVisualStylesEnabled() { return visualStylesEnabled; }
       static void Exit();
+      static void AddForm(const System::Windows::Forms::Form& form);
       static void MessageLoop(System::EventHandler idle);
       static void MessageBeep(System::Windows::Forms::MessageBoxIcon type);
       static System::Windows::Forms::DialogResult ShowMessageBox(const string& message, const string& caption, System::Windows::Forms::MessageBoxButtons buttons, System::Windows::Forms::MessageBoxIcon icon, System::Windows::Forms::MessageBoxDefaultButton defaultButton, System::Windows::Forms::MessageBoxOptions options, bool displayHelpButton);
