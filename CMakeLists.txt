@@ -37,7 +37,7 @@ else ()
   set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/${CMAKE_BUILD_TYPE})
 endif ()
 
-include (PcfDependencies.cmake)
+include(PcfDependencies.cmake)
 
 add_subdirectory("Core")
 add_subdirectory("Drawing")
