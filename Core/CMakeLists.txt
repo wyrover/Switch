@@ -1,6 +1,3 @@
-project(Pcf.Core)
-set_property(GLOBAL PROPERTY USE_FOLDERS ON)
-
 set(INCLUDE_FILES
   Includes/Pcf/Microsoft/Win32/Registry.h
   Includes/Pcf/Microsoft/Win32/RegistryKey.h

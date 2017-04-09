@@ -13,9 +13,6 @@ option(BUILD_TUNIT_UNIT_TESTS "Build TUnit unit tests" ON)
 
 enable_testing()
 
-set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
 if (BUILD_FORMS_WITH_NATIVE_INTERFACE)
   add_definitions(-D__use_native_interface__)
 endif()

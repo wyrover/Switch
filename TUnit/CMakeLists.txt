@@ -1,4 +1,3 @@
-# Add include files here:
 set(INCLUDE_FILES
   Includes/Pcf/TUnit/Constraints/Constraint.h
   Includes/Pcf/TUnit/Constraints/ConstraintExpression.h
@@ -15,7 +14,6 @@ set(INCLUDE_FILES
   Includes/Pcf/TUnit.h
 )
 
-# Add source files here:
 set(SOURCE_FILES
   Sources/Pcf/TUnit/AssertionResult.cpp
   Sources/Pcf/TUnit/ConsoleEventListener.h
@@ -23,14 +21,12 @@ set(SOURCE_FILES
   Sources/Pcf/TUnit/UnitTest.cpp
 )
 
-#Add include groups here:
 source_group(Includes REGULAR_EXPRESSION "/Includes/[-_,A-Za-z0-9]+\\.h*")
 source_group(Includes\\Pcf REGULAR_EXPRESSION "/Includes/Pcf/[-_,A-Za-z0-9]+\\.h*")
 source_group(Includes\\Pcf REGULAR_EXPRESSION "/Includes/Pcf/[-_,A-Za-z0-9]")
 source_group(Includes\\Pcf\\TUnit REGULAR_EXPRESSION "/Includes/Pcf/TUnit/[-_,A-Za-z0-9]+\\.h*")
 source_group(Includes\\Pcf\\TUnit\\Constraints REGULAR_EXPRESSION "/Includes/Pcf/TUnit/Constraints/[-_,A-Za-z0-9]+\\.h*")
 
-#Add source groups here:
 source_group(Sources REGULAR_EXPRESSION "/Sources/[-_,A-Za-z0-9]+\\.c*")
 source_group(Sources\\Pcf REGULAR_EXPRESSION "/Sources/Pcf/[-_,A-Za-z0-9]+\\.c*")
 source_group(Sources\\Pcf\\TUnit REGULAR_EXPRESSION "/Sources/Pcf/TUnit/[-_,A-Za-z0-9]+\\.(c|h)*")
