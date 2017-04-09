@@ -139,7 +139,7 @@ namespace {
       appleMenu = [[NSMenu alloc] initWithTitle:@""];
       /* Add menu items */
       title = [NSString stringWithFormat:NSLocalizedString([NSString stringWithUTF8String:"About %@"],nil), nsappname];
-      menuItem = [appleMenu addItemWithTitle:title action:@selector(showPanel) keyEquivalent:@""];
+      //menuItem = [appleMenu addItemWithTitle:title action:@selector(showPanel) keyEquivalent:@""];
       //FLaboutItemTarget *about = [[FLaboutItemTarget alloc] init];
       //[menuItem setTarget:about];
       [appleMenu addItem:[NSMenuItem separatorItem]];
@@ -306,6 +306,9 @@ namespace {
 
 bool FormsApi::Application::visualStylesEnabled = false;
 
+void FormsApi::Application::AddForm(const System::Windows::Forms::Form& form) {
+}
+
 void FormsApi::Application::Exit() {
   Environment::Exit(0);
 }
@@ -363,7 +366,7 @@ namespace {
   }
   
   DialogResult MessageBoxShowModalAbortRetryIgnore(NSAlert *alert) {
-    int result = [alert runModal];
+    NSModalResponse result = [alert runModal];
     if (result == NSAlertFirstButtonReturn)
       return DialogResult::Abort;
     if (result == NSAlertSecondButtonReturn)
@@ -372,7 +375,7 @@ namespace {
   }
   
   DialogResult MessageBoxShowModalYesNoCancel(NSAlert *alert) {
-    int result = [alert runModal];
+    NSModalResponse result = [alert runModal];
     if (result == NSAlertFirstButtonReturn)
       return DialogResult::Yes;
     if (result == NSAlertSecondButtonReturn)
@@ -513,6 +516,7 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::Form& form) {
     [NSApp activateIgnoringOtherApps:YES];
     //[(NSControl*)handle setWantsLayer:YES];
     //((NSControl*)handle).layer.backgroundColor = cocoaApi().FromColor(form.BackColor).CGColor;
+    handle.backgroundColor = cocoaApi().FromColor(form.BackColor);
     cocoaApi().Controls()[(intptr)handle] = form;
     Message message = Message::Create((intptr)handle, WM_CREATE, 0, 0, 0, IntPtr::Zero);
     const_cast<System::Windows::Forms::Form&>(form).WndProc(message);

@@ -103,6 +103,9 @@ INT WINAPI WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR commandLine
 
 bool FormsApi::Application::visualStylesEnabled = false;
 
+void FormsApi::Application::AddForm(const System::Windows::Forms::Form& form) {
+}
+
 void FormsApi::Application::Exit() {
   PostQuitMessage(0);
 }

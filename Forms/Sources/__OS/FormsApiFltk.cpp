@@ -437,6 +437,9 @@ namespace {
 
 bool FormsApi::Application::visualStylesEnabled = false;
 
+void FormsApi::Application::AddForm(const System::Windows::Forms::Form& form) {
+}
+
 void FormsApi::Application::Exit() {
   Environment::Exit(exitCode);
 }
