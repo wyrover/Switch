@@ -40,7 +40,7 @@ else ()
   set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/${CMAKE_BUILD_TYPE})
 endif ()
 
-include (PcfDependences.cmake)
+include (PcfDependencies.cmake)
 
 add_subdirectory("Core")
 add_subdirectory("Drawing")
@@ -50,7 +50,7 @@ add_subdirectory("TUnit.Main")
 add_subdirectory("Pcf")
 
 install(EXPORT Pcf DESTINATION cmake)
-install(FILES PcfConfig.cmake PcfDependences.cmake DESTINATION cmake)
+install(FILES PcfConfig.cmake PcfDependencies.cmake DESTINATION cmake)
 
 find_package(Doxygen)
 if(DOXYGEN_FOUND)

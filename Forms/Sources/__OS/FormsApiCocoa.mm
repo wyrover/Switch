@@ -514,9 +514,8 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::Form& form) {
     [handle setTitle:[NSString stringWithUTF8String:form.data->text.c_str()]];
     [handle makeKeyAndOrderFront:nil];
     [NSApp activateIgnoringOtherApps:YES];
-    //[(NSControl*)handle setWantsLayer:YES];
-    //((NSControl*)handle).layer.backgroundColor = cocoaApi().FromColor(form.BackColor).CGColor;
     handle.backgroundColor = cocoaApi().FromColor(form.BackColor);
+    //handle.color = cocoaApi().FromColor(form.ForeColor);
     cocoaApi().Controls()[(intptr)handle] = form;
     Message message = Message::Create((intptr)handle, WM_CREATE, 0, 0, 0, IntPtr::Zero);
     const_cast<System::Windows::Forms::Form&>(form).WndProc(message);
