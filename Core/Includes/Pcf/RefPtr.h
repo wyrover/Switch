@@ -419,15 +419,17 @@ namespace Pcf {
     /// @cond
     virtual ~RefPtr() { Reset(); }
     
-    const T& operator *() const { return ToObject(); }
-    T& operator *() { return ToObject(); }
+    const T& operator*() const { return ToObject(); }
+    T& operator*() { return ToObject(); }
     
     const T& operator()() const { return ToObject(); }
     T& operator()() { return ToObject(); }
     
-    const T* operator ->() const { return ToPointer(); }
+    const T* operator&() const { return ToPointer(); }
+    T* operator&() { return ToPointer(); }
     
-    T* operator ->() { return ToPointer(); }
+    const T* operator->() const { return ToPointer(); }
+    T* operator->() { return ToPointer(); }
     
     RefPtr<T>& operator =(const RefPtr<T>& sp) {
       Reset(sp);
@@ -435,17 +437,17 @@ namespace Pcf {
     }
  
     template<typename TT>
-    RefPtr<T>& operator =(const RefPtr<TT>& sp) {
+    RefPtr<T>& operator=(const RefPtr<TT>& sp) {
       Reset(sp);
       return *this;
     }
     
-    RefPtr<T>& operator =(T* obj) {
+    RefPtr<T>& operator=(T* obj) {
       Reset(obj);
       return *this;
     }
     
-    RefPtr<T>& operator =(UniquePointer<T> up)  {
+    RefPtr<T>& operator=(UniquePointer<T> up)  {
       Reset(up.Release());
       return *this;
     }
@@ -460,7 +462,7 @@ namespace Pcf {
     
     operator bool() const { return this->ptr != null; }
     
-    bool operator !() const { return this->ptr == null; }
+    bool operator!() const { return this->ptr == null; }
     
     /// @endcond
     

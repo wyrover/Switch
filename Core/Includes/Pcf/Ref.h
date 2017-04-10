@@ -223,42 +223,51 @@ namespace Pcf {
     /// @return string A string that represents the current object.
     std::string ToString() const {
       if (this->ptr == null)
-        return "Pcf::Reference [Reference=null]";
+        return "Pcf::Ref [Reference=null]";
       std::stringstream s;
-      s << "Pcf::Reference [Reference=" << this->ptr << "]";
+      s << "Pcf::Ref [Reference=" << this->ptr << "]";
       return s.str();
     }
     
     /// @cond
     virtual ~Ref() { }
     
-    const T& operator ()() const { return ToObject(); }
-    T& operator ()() { return ToObject(); }
+    const T& operator*() const { return ToObject(); }
+    T& operator*() { return ToObject(); }
+    
+    const T& operator()() const { return ToObject(); }
+    T& operator()() { return ToObject(); }
+    
+    const T* operator&() const { return ToPointer(); }
+    T* operator&() { return ToPointer(); }
+    
+    const T* operator->() const { return ToPointer(); }
+    T* operator->() { return ToPointer(); }
     
     operator const T&() const { return ToObject(); }
     operator T&() { return ToObject(); }
     
-    Ref<T>& operator =(const T& ref) {
+    Ref<T>& operator=(const T& ref) {
       Reset(ref);
       return *this;
     }
     
-    Ref<T>& operator =(const Ref<T>& ref) {
+    Ref<T>& operator=(const Ref<T>& ref) {
       Reset(*ref.ptr);
       return *this;
     }
     
-    bool operator ==(const T& ref) const { return this->ptr == &ref; }
+    bool operator==(const T& ref) const { return this->ptr == &ref; }
     
-    bool operator ==(const Ref<T>& ref) const { return this->ptr == ref.ptr; }
+    bool operator==(const Ref<T>& ref) const { return this->ptr == ref.ptr; }
     
-    bool operator !=(const T& ref) const { return this->ptr != &ref; }
+    bool operator!=(const T& ref) const { return this->ptr != &ref; }
     
-    bool operator !=(const Ref<T>& ref) const { return this->ptr != ref.ptr; }
+    bool operator!=(const Ref<T>& ref) const { return this->ptr != ref.ptr; }
     
     operator bool() const { return this->ptr != null; }
     
-    bool operator !() const { return this->ptr == null; }
+    bool operator!() const { return this->ptr == null; }
     /// @endcond
     
   protected:
