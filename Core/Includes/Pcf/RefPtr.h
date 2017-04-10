@@ -63,8 +63,14 @@ namespace Pcf {
     /// @exception ArgumentNullException sp is null.
     /// @remarks the current object is equal to smartPointer and UseCount of both is incremented.
     RefPtr(const RefPtr<T>& sp) { Reset(sp); }
- 
+    
+    template<typename TT>
+    RefPtr(const RefPtr<TT>& sp) { Reset(sp); }
+    
     RefPtr(RefPtr<T>&& sp) { Reset(sp); sp.Reset();}
+    
+    template<typename TT>
+    RefPtr(RefPtr<TT>&& sp) { Reset(sp); sp.Reset();}
     
     /// @brief Create a new instance of class RefPtr with a specified obj pointer T
     /// @param obj Pointer T object to assign the current object. It can be null.
@@ -128,6 +134,24 @@ namespace Pcf {
       
       this->subObject = new __opaque_sub_object__();
       this->ptr = obj;
+      ++this->subObject->UseCount;
+    }
+    
+    template<typename TT>
+    void Reset(RefPtr<TT> obj) {
+      if (this->subObject != null && --this->subObject->UseCount == 0) {
+        delete this->subObject;
+        delete this->ptr;
+      }
+      
+      if (obj == null) {
+        this->subObject = null;
+        this->ptr = null;
+        return;
+      }
+      
+      this->subObject = obj.subObject;
+      this->ptr = obj.template ToPointer<TT>();
       ++this->subObject->UseCount;
     }
     
@@ -406,6 +430,12 @@ namespace Pcf {
     T* operator ->() { return ToPointer(); }
     
     RefPtr<T>& operator =(const RefPtr<T>& sp) {
+      Reset(sp);
+      return *this;
+    }
+ 
+    template<typename TT>
+    RefPtr<T>& operator =(const RefPtr<TT>& sp) {
       Reset(sp);
       return *this;
     }
