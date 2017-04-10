@@ -508,7 +508,7 @@ namespace Pcf {
                 this->status = TaskStatus::WaitingForChildrenToComplete;
                 this->endEvent.Set();
               } catch(...) {
-                this->aggregateException = AggregateException({ExceptionPointer::CurrentException}, pcf_current_information);
+                this->aggregateException = AggregateException({excptr::CurrentException}, pcf_current_information);
                 this->status = TaskStatus::Faulted;
                 this->endEvent.Set();
               }

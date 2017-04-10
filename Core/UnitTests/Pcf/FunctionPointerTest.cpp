@@ -1,4 +1,3 @@
-#include <Pcf/ExceptionPointer.h>
 #include <Pcf/TUnit/Assert.h>
 #include <Pcf/TUnit/TestFixture.h>
 

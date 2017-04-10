@@ -377,7 +377,7 @@ set(INCLUDE_FILES
   Includes/Pcf/Async.h
   Includes/Pcf/Await.h
   Includes/Pcf/Boxing.h
-  Includes/Pcf/ExceptionPointer.h
+  Includes/Pcf/ExcPtr.h
   Includes/Pcf/CurrentInformation.h
   Includes/Pcf/InitializerList.h
   Includes/Pcf/Interface.h
@@ -542,7 +542,7 @@ set(SOURCE_FILES
   Sources/Pcf/System/UIntPtr.cpp
   Sources/Pcf/System/Uri.cpp
   Sources/Pcf/System/ustring.cpp
-  Sources/Pcf/ExceptionPointer.cpp
+  Sources/Pcf/ExcPtr.cpp
 )
 
 source_group(Documentations REGULAR_EXPRESSION "/Includes/Pcf/Documentations/[-_,A-Za-z0-9]+\\.h*")

@@ -2,7 +2,7 @@
 /// @brief Contains Pcf::System::AggregateException exception.
 #pragma once
 
-#include "../ExceptionPointer.h"
+#include "../ExcPtr.h"
 #include "Environment.h"
 #include "Exception.h"
 #include "Collections/Generic/List.h"
@@ -94,51 +94,51 @@ namespace Pcf {
     public:
       /// @brief Gets a read-only collection of the Exception instances that caused the current exception.
       /// @return Returns a read-only collection of the Exception instances that caused the current exception.
-      Property<const Array<ExceptionPointer>&, ReadOnly> InnerExceptions {
-        pcf_get->const Array<ExceptionPointer>& {return this->innerExceptions;}
+      Property<const Array<excptr>&, ReadOnly> InnerExceptions {
+        pcf_get->const Array<excptr>& {return this->innerExceptions;}
       };
  
       /// @brief Initializes a new instance of the AggregateException class with references to the inner exceptions that are the cause of this exception.
       /// @param innerExceptions The exceptions that are the cause of the current exception.
-      AggregateException(const Array<ExceptionPointer>& innerExceptions) : innerExceptions(innerExceptions) {}
+      AggregateException(const Array<excptr>& innerExceptions) : innerExceptions(innerExceptions) {}
       
       /// @brief Initializes a new instance of the AggregateException class with references to the inner exceptions that are the cause of this exception.
       /// @param innerExceptions The exceptions that are the cause of the current exception.
       AggregateException(const Exception& innerException) {
-        this->innerExceptions = Array<ExceptionPointer>(1);
-        this->innerExceptions[0] = ExceptionPointer::Create(innerException);
+        this->innerExceptions = Array<excptr>(1);
+        this->innerExceptions[0] = excptr::Create(innerException);
       }
       
       /// @brief Initializes a new instance of the AggregateException class with references to the inner exceptions that are the cause of this exception.
       /// @param innerExceptions The exceptions that are the cause of the current exception.
       AggregateException(const Array<ref<Exception>>& innerExceptions) {
-        this->innerExceptions = Array<ExceptionPointer>(innerExceptions.Count);
+        this->innerExceptions = Array<excptr>(innerExceptions.Count);
         for (int index= 0; index < innerExceptions.Count; index++)
-          this->innerExceptions[index] = ExceptionPointer::Create(innerExceptions[index]());
+          this->innerExceptions[index] = excptr::Create(innerExceptions[index]());
       }
       
       /// @brief Initializes a new instance of the AggregateException class with references to the inner exceptions that are the cause of this exception.
       /// @param innerExceptions The exceptions that are the cause of the current exception.
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #pcf_current_information.
-      AggregateException(const Array<ExceptionPointer>& innerExceptions, const CurrentInformation& information) : Exception(information), innerExceptions(innerExceptions) {}
+      AggregateException(const Array<excptr>& innerExceptions, const CurrentInformation& information) : Exception(information), innerExceptions(innerExceptions) {}
 
       /// @brief Initializes a new instance of the AggregateException class with references to the inner exceptions that are the cause of this exception.
       /// @param innerExceptions The exceptions that are the cause of the current exception.
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #pcf_current_information.
       AggregateException(const Array<ref<Exception>>& innerExceptions, const CurrentInformation& information) : Exception(information) {
-        this->innerExceptions = Array<ExceptionPointer>(innerExceptions.Count);
+        this->innerExceptions = Array<excptr>(innerExceptions.Count);
         for (int index= 0; index < innerExceptions.Count; index++)
-          this->innerExceptions[index] = ExceptionPointer::Create(innerExceptions[index]());
+          this->innerExceptions[index] = excptr::Create(innerExceptions[index]());
       }
 
       /// @brief Initializes a new instance of the AggregateException class with references to the inner exceptions that are the cause of this exception.
       /// @param innerExceptions The exceptions that are the cause of the current exception.
-      AggregateException(const System::Collections::Generic::IEnumerable<ExceptionPointer>& innerExceptions) : innerExceptions(innerExceptions) {}
+      AggregateException(const System::Collections::Generic::IEnumerable<excptr>& innerExceptions) : innerExceptions(innerExceptions) {}
       
       /// @brief Initializes a new instance of the AggregateException class with references to the inner exceptions that are the cause of this exception.
       /// @param innerExceptions The exceptions that are the cause of the current exception.
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #pcf_current_information.
-      AggregateException(const System::Collections::Generic::IEnumerable<ExceptionPointer>& innerExceptions, const CurrentInformation& information) : Exception(information), innerExceptions(innerExceptions) {}
+      AggregateException(const System::Collections::Generic::IEnumerable<excptr>& innerExceptions, const CurrentInformation& information) : Exception(information), innerExceptions(innerExceptions) {}
       
       /// @brief Create a new instance of class AggregateException
       /// @remarks Message is set with the default message associate to the error.
@@ -168,38 +168,38 @@ namespace Pcf {
       /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #pcf_current_information.
       AggregateException(const System::String& message, const System::Exception& innerException, const CurrentInformation& information) : Exception(message, information) {
-        this->innerExceptions = Array<ExceptionPointer>(1);
-        this->innerExceptions[0] = ExceptionPointer::Create(innerException);
+        this->innerExceptions = Array<excptr>(1);
+        this->innerExceptions[0] = excptr::Create(innerException);
       }
       
       /// @brief Initializes a new instance of the AggregateException class with a specified error message and references to the inner exceptions that are the cause of this exception.
       /// @param message Message string associate to the error.
       /// @param innerExceptions The exceptions that are the cause of the current exception.
-      AggregateException(const System::String& message, const Array<ExceptionPointer>& innerExceptions) : innerExceptions(innerExceptions) {}
+      AggregateException(const System::String& message, const Array<excptr>& innerExceptions) : innerExceptions(innerExceptions) {}
       
       /// @brief Initializes a new instance of the AggregateException class with a specified error message and references to the inner exceptions that are the cause of this exception.
       /// @param message Message string associate to the error.
       /// @param innerExceptions The exceptions that are the cause of the current exception.
       AggregateException(const System::String& message, const Array<ref<Exception>>& innerExceptions) {
-        this->innerExceptions = Array<ExceptionPointer>(innerExceptions.Count);
+        this->innerExceptions = Array<excptr>(innerExceptions.Count);
         for (int index= 0; index < innerExceptions.Count; index++)
-          this->innerExceptions[index] = ExceptionPointer::Create(innerExceptions[index]());
+          this->innerExceptions[index] = excptr::Create(innerExceptions[index]());
       }
       
       /// @brief Initializes a new instance of the AggregateException class with a specified error message and references to the inner exceptions that are the cause of this exception.
       /// @param message Message string associate to the error.
       /// @param innerExceptions The exceptions that are the cause of the current exception.
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #pcf_current_information.
-      AggregateException(const System::String& message, const Array<ExceptionPointer>& innerExceptions, const CurrentInformation& information) : Exception(message, information), innerExceptions(innerExceptions) {}
+      AggregateException(const System::String& message, const Array<excptr>& innerExceptions, const CurrentInformation& information) : Exception(message, information), innerExceptions(innerExceptions) {}
       
       /// @brief Initializes a new instance of the AggregateException class with a specified error message and references to the inner exceptions that are the cause of this exception.
       /// @param message Message string associate to the error.
       /// @param innerExceptions The exceptions that are the cause of the current exception.
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #pcf_current_information.
       AggregateException(const System::String& message, const Array<ref<Exception>>& innerExceptions, const CurrentInformation& information) : Exception(message, information) {
-        this->innerExceptions = Array<ExceptionPointer>(innerExceptions.Count);
+        this->innerExceptions = Array<excptr>(innerExceptions.Count);
         for (int index= 0; index < innerExceptions.Count; index++)
-          this->innerExceptions[index] = ExceptionPointer::Create(innerExceptions[index]());
+          this->innerExceptions[index] = excptr::Create(innerExceptions[index]());
       }
       
       /// @cond
@@ -210,7 +210,7 @@ namespace Pcf {
       /// @param predicate The predicate to execute for each exception. The predicate accepts as an argument the Exception to be processed and returns a Boolean to indicate whether the exception was handled.
       /// @remarks Each invocation of the predicate returns true or false to indicate whether the Exception was handled. After all invocations, if any exceptions went unhandled, all unhandled exceptions will be put into a new AggregateException which will be thrown. Otherwise, the Handle method simply returns. If any invocations of the predicate throws an exception, it will halt the processing of any more exceptions and immediately propagate the thrown exception as-is.
       void Handle(const Func<const Exception&, bool>& predicate) const {
-        System::Collections::Generic::List<ExceptionPointer> notHandledExceptions;
+        System::Collections::Generic::List<excptr> notHandledExceptions;
         for (int32 index = 0; index < this->innerExceptions.Count; ++index) {
           try {
             this->innerExceptions[index].Rethrow();
@@ -240,7 +240,7 @@ namespace Pcf {
 
     private:
       String GetDefaultMessage() const override {return "One or more errors occured."; }
-      Array<ExceptionPointer> innerExceptions;
+      Array<excptr> innerExceptions;
     };
   }
 }
