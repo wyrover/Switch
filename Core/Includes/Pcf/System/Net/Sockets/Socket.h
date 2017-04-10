@@ -4,7 +4,6 @@
 
 #include "../../../Types.h"
 #include "../../../RefPtr.h"
-#include "../../../UniquePointer.h"
 #include "../../Array.h"
 #include "../../IntPtr.h"
 #include "../../Object.h"
@@ -989,8 +988,8 @@ namespace Pcf {
             System::Net::Sockets::AddressFamily addressFamily = System::Net::Sockets::AddressFamily::Unspecified;
             System::Net::Sockets::ProtocolType protocolType = System::Net::Sockets::ProtocolType::Unspecified;
             System::Net::Sockets::SocketType socketType = System::Net::Sockets::SocketType::Unknown;
-            UniquePointer<EndPoint> localEndPoint;
-            UniquePointer<EndPoint> remoteEndPoint;
+            refptr<EndPoint> localEndPoint;
+            refptr<EndPoint> remoteEndPoint;
             bool connected = false;
             bool listening = false;
             bool nonBlocking = false;

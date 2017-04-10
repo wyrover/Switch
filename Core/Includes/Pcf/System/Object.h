@@ -6,7 +6,7 @@
 
 #include "../Types.h"
 #include "../As.h"
-#include "../UniquePointer.h"
+#include "../RefPtr.h"
 
 /// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Pcf {
@@ -71,7 +71,7 @@ namespace Pcf {
       /// The following code example shows how to copy an instance of a class using MemberwiseClone.
       /// @include ObjectMemberwiseClone.cpp
       template<typename T>
-      UniquePointer<Object> MemberwiseClone() const {return new T(as<T>(*this));}
+      refptr<Object> MemberwiseClone() const {return pcf_new<T>(as<T>(*this));}
 
       /// @brief Determines whether the specified Object instances are the same instance.
       /// @param objectA The first Object to compare.
