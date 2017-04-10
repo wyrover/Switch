@@ -36,7 +36,7 @@ namespace Pcf {
         operator const any&() const {return this->value;}
         operator any&() {return this->value;}
         
-        string ToString() const noexcept override {
+        string ToString() const {
           if (is<string>(this->value) && as<string>(this->value).IsEmpty())
             return "<string::Empty>";
           if (is<string>(this->value))

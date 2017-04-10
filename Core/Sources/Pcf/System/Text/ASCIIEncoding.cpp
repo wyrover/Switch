@@ -29,7 +29,7 @@ void ASCIIEncoding::Decoder::Reset() {
   Encoding::Decoder::Reset();
 }
 
-String ASCIIEncoding::Decoder::ToString() const noexcept {
+String ASCIIEncoding::Decoder::ToString() const {
   return "ASCIIDecoder";
 }
 
@@ -49,7 +49,7 @@ void ASCIIEncoding::Encoder::Encode(char32 c, byte* bytes) const {
   bytes[0] = (c > 127) ? Encoding::Unknown() : static_cast<byte>(c);
 }
 
-String ASCIIEncoding::Encoder::ToString() const noexcept {
+String ASCIIEncoding::Encoder::ToString() const {
   return "ASCIIEncoder";
 }
 
@@ -99,7 +99,7 @@ int32 ASCIIEncoding::GetMaxCharCount(int32 byteCount) const {
   return byteCount;
 }
 
-bool ASCIIEncoding::Equals(const object& obj) const noexcept {
+bool ASCIIEncoding::Equals(const object& obj) const {
   return is<ASCIIEncoding>(obj);
 }
 

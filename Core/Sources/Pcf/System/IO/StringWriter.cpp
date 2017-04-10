@@ -36,6 +36,6 @@ void StringWriter::Write(const String& value) {
   
 }
 
-string StringWriter::ToString() const noexcept {
+string StringWriter::ToString() const {
   return this->data->str;
 }

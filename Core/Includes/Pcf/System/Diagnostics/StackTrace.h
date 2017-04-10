@@ -131,7 +131,7 @@ namespace Pcf {
 
         /// @brief Builds a readable representation of the stack trace.
         /// @return A readable representation of the stack trace.
-        virtual String ToString() const noexcept;
+        virtual String ToString() const;
 
       private:
         void FillFrames(int32 skipFrames, bool needFileInfo);

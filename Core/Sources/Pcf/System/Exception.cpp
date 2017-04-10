@@ -56,11 +56,11 @@ bool Exception::Equals(const Exception& value) const {
   return this->hresult == value.hresult && this->message == value.message && this->currentInformation == value.currentInformation && this->innerException == value.innerException;
 }
 
-bool Exception::Equals(const object& obj) const noexcept {
+bool Exception::Equals(const object& obj) const {
   return is<Exception>(obj) && Equals(static_cast<const Exception&>(obj));
 }
 
-string Exception::ToString() const noexcept {
+string Exception::ToString() const {
   return string::Format("{0}: {1}{2}{3}", GetType(), GetMessage(), Environment::NewLine, GetStackTrace(GetType().ToString()));
 }
 

@@ -306,7 +306,7 @@ namespace Pcf {
     
     /// @brief Returns a string that represents the current UniquePointer.
     /// @return string A string that represents the current object.
-    std::string ToString() const noexcept {
+    std::string ToString() const {
       if (this->ptr == null)
         return "Pcf::UniquePointer [Pointer=null]";
       std::stringstream s;
@@ -494,7 +494,7 @@ namespace Pcf {
     
     /// @brief Returns a string that represents the current UniquePointer.
     /// @return string A string that represents the current object.
-    std::string ToString() const noexcept {
+    std::string ToString() const {
       if (this->ptr == null)
         return "Pcf::UniquePointer [Pointer=null]";
       std::stringstream s;

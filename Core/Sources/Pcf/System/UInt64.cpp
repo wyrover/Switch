@@ -52,7 +52,7 @@ bool UInt64::TryParse(const string& str, int32 base, UInt64& value) {
   return TryParse(str, base, value.value);
 }
 
-int32 UInt64::GetHashCode() const noexcept {
+int32 UInt64::GetHashCode() const {
   int32 hash = 0;
 
   hash += (int32)(this->value & 0x00000000FFFFFFFF);
@@ -61,7 +61,7 @@ int32 UInt64::GetHashCode() const noexcept {
   return hash;
 }
 
-string UInt64::ToString() const noexcept {
+string UInt64::ToString() const {
   return ToString("g", ref<IFormatProvider>::Null());
 }
 
@@ -106,7 +106,7 @@ int32 UInt64::CompareTo(const UInt64& value) const {
   return 1;
 }
 
-int32 UInt64::CompareTo(const IComparable& obj) const noexcept {
+int32 UInt64::CompareTo(const IComparable& obj) const {
   if (!is<UInt64>(obj))
     return 1;
 

@@ -284,7 +284,7 @@ namespace PcfUnitTests {
     void AppendObject() {
       class MyObject : public object {
       public:
-        String ToString() const noexcept override {return "MyObject string";}
+        String ToString() const override {return "MyObject string";}
       };
       Assert::AreEqual("String Builder MyObject string", StringBuilder("String Builder ").Append(MyObject()).ToString(), pcf_current_information);
     }
@@ -292,7 +292,7 @@ namespace PcfUnitTests {
     void AppendAnyClass() {
       class AnyClass {
       public:
-        String ToString() const noexcept {return "AnyClass string";}
+        String ToString() const {return "AnyClass string";}
       };
       Assert::AreEqual(U"String Builder AnyClass string", StringBuilder("String Builder ").Append(AnyClass()).ToString(), pcf_current_information);
     }

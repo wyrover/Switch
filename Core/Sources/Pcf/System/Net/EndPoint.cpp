@@ -8,7 +8,7 @@ UniquePointer<EndPoint> EndPoint::Create(const SocketAddress &) const {
   throw NotSupportedException(pcf_current_information);
 }
 
-string EndPoint::ToString() const noexcept {
+string EndPoint::ToString() const {
   return Enum<Sockets::AddressFamily>::ToString(this->addressFamily);
 }
 

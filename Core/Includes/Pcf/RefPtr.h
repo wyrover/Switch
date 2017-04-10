@@ -374,7 +374,7 @@ namespace Pcf {
     
     /// @brief Returns a string that represents the current RefPtr.
     /// @return string A string that represents the current RefPtr.
-    std::string ToString() const noexcept {
+    std::string ToString() const {
       if (this->ptr == null)
         return "Pcf::RefPtr [Pointer=null]";
       std::stringstream s;

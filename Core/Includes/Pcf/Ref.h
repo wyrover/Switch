@@ -221,7 +221,7 @@ namespace Pcf {
     
     /// @brief Returns a string that represents the current Reference.
     /// @return string A string that represents the current object.
-    std::string ToString() const noexcept {
+    std::string ToString() const {
       if (this->ptr == null)
         return "Pcf::Reference [Reference=null]";
       std::stringstream s;

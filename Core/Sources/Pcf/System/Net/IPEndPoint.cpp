@@ -65,7 +65,7 @@ void IPEndPoint::SetPort(int32 port) {
   this->port = port;
 }
 
-string IPEndPoint::ToString() const noexcept {
+string IPEndPoint::ToString() const {
   return string::Format("{0}:{1}", this->address, this->port);
 }
 

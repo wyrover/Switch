@@ -17,7 +17,7 @@ namespace {
     AbstractListHelper(int32 value, const string& name) : value(value), name(name) {}
     
   public:
-    virtual String ToString() const noexcept {return string::Format("{0} {1}", this->value, this->name);}
+    virtual String ToString() const {return string::Format("{0} {1}", this->value, this->name);}
     
   private:
     int32 value;
@@ -43,10 +43,10 @@ namespace {
       return *this;
     }
     
-    String ToString() const noexcept override { return this->name; }
+    String ToString() const override { return this->name; }
     const string& GetName() const { return this->name; }
     
-    bool Equals(const object& obj) const noexcept override {
+    bool Equals(const object& obj) const override {
       if (!is<Dinosaur>(obj))
         return false;
       

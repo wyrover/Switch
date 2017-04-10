@@ -78,11 +78,11 @@ namespace Pcf {
       /// @brief Determines whether this instance of Char and a specified object, which must also be a Char object, have the same value.
       /// @param obj The object to compare with the current object.
       /// @return bool true if the specified object is equal to the current object. otherwise, false.
-      bool Equals(const object& obj) const noexcept override { return is<ConsoleKeyInfo>(obj) && Equals(static_cast<const ConsoleKeyInfo&>(obj)); }
+      bool Equals(const object& obj) const override { return is<ConsoleKeyInfo>(obj) && Equals(static_cast<const ConsoleKeyInfo&>(obj)); }
 
       /// @brief Serves as a hash function for a particular type.
       /// @return int32 A hash code for the current object.
-      virtual int32 GetHashCode() const noexcept override { return (int32)this->key ^ (this->keyChar << 16) ^ ((int32)this->modifiers << 24); }
+      virtual int32 GetHashCode() const override { return (int32)this->key ^ (this->keyChar << 16) ^ ((int32)this->modifiers << 24); }
 
     private:
       char32 keyChar = 0;

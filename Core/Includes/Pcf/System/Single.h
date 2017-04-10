@@ -79,15 +79,15 @@ namespace Pcf {
       /// @brief Determines whether this instance of Single and a specified Object, which must also be a Single Object, have the same value.
       /// @param obj The Object to compare with the current Object.
       /// @return bool true if the specified Object is equal to the current Object. otherwise, false.
-      bool Equals(const Object& obj) const noexcept override;
+      bool Equals(const Object& obj) const override;
 
       /// @brief Serves as a hash function for a particular type.
       /// @return Int32 A hash code for the current Object.
-      int32 GetHashCode() const noexcept override;
+      int32 GetHashCode() const override;
 
       /// @brief Returns a String that represents the current Single.
       /// @return String A String that represents the current Single.
-      String ToString() const noexcept override;
+      String ToString() const override;
 
       /// @brief Returns a String that represents the current Single.
       /// @param format Format-control String.
@@ -116,7 +116,7 @@ namespace Pcf {
       /// Greater than zero   This instance is greater than value.
       /// -or-
       /// obj is nullNothingnullptra null reference.
-      int32 CompareTo(const IComparable& obj) const noexcept override;
+      int32 CompareTo(const IComparable& obj) const override;
 
       /// @brief Returns the TypeCode for this instance.
       /// @return TypeCode The enumerated constant that is the TypeCode of the class or value type that implements this interface.

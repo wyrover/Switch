@@ -688,7 +688,7 @@ namespace Pcf {
         /// @brief Determines whether this instance of String and a specified object, which must also be a String object, have the same value.
         /// @param obj The Object to compare with the current Object.
         /// @return bool true if the specified Object is equal to the current Object. otherwise, false.
-        bool Equals(const object& obj) const noexcept override {return GetType() == obj.GetType()&& Equals(static_cast<const StringBuilder&>(obj));}
+        bool Equals(const object& obj) const override {return GetType() == obj.GetType()&& Equals(static_cast<const StringBuilder&>(obj));}
         
         /// @brief Determines whether this instance and another specified StringBuilder object have the same value.
         /// @param value The StringBuilder to compare.
@@ -703,7 +703,7 @@ namespace Pcf {
         
         /// @brief Returns a String that represents the current StringBuilder.
         /// @return const String A String that represents the current StringBuilder.
-       String ToString() const noexcept override {return std::wstring_convert<std::codecvt_utf8<__char32>, __char32>().to_bytes((const __char32*)this->string.c_str());}
+       String ToString() const override {return std::wstring_convert<std::codecvt_utf8<__char32>, __char32>().to_bytes((const __char32*)this->string.c_str());}
         
       private:
         std::u32string string;

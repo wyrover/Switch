@@ -897,16 +897,16 @@ namespace Pcf {
       /// @brief Determines whether this instance of String and a specified object, which must also be a String object, have the same value.
       /// @param obj The Object to compare with the current Object.
       /// @return bool true if the specified Object is equal to the current Object. otherwise, false.
-      bool Equals(const Object& obj) const noexcept override;
+      bool Equals(const Object& obj) const override;
       
       /// @brief Serves as a hash function for a particular type.
       /// @return int32 A hash code for the current Object.
       /// @return @see Object
-      int32 GetHashCode() const noexcept override;
+      int32 GetHashCode() const override;
       
       /// @brief Returns a String that represents the current String.
       /// @return const String A String that represents the current String.
-      String ToString() const noexcept override;
+      String ToString() const override;
       
       /// @brief Creates a new object that is a copy of the current instance.
       /// @return Object* A new object that is a copy of this instance.
@@ -929,7 +929,7 @@ namespace Pcf {
       /// @return Greater than zero   This instance is greater than value.
       /// -or-
       /// @return obj is nullNothingnullptra null reference.
-      int32 CompareTo(const IComparable& obj) const noexcept override;
+      int32 CompareTo(const IComparable& obj) const override;
       
       /// @brief Returns the TypeCode for this instance.
       /// @return TypeCode The enumerated constant that is the TypeCode of the class or value type that implements this interface.
@@ -973,7 +973,7 @@ namespace Pcf {
         bool MoveNext() override;
         
         Enumerator& operator =(const Enumerator& other);
-        bool Equals(const Object& other) const noexcept override;
+        bool Equals(const Object& other) const override;
         
       protected:
         const char32& GetCurrent() const override;
@@ -994,7 +994,7 @@ namespace Pcf {
         bool MoveNext() override;
         
         ReverseEnumerator& operator =(const ReverseEnumerator& other);
-        bool Equals(const Object& other) const noexcept override;
+        bool Equals(const Object& other) const override;
         
       protected:
         const char32& GetCurrent() const override;

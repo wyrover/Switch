@@ -225,7 +225,7 @@ namespace Pcf {
         }
       }
       
-      String ToString() const noexcept override {
+      String ToString() const override {
         string result = this->Exception::ToString();
         result += string::Format("   --- End of inner exception stack trace ---{0}", Environment::NewLine);
         for (int32 index = 0; index < this->innerExceptions.Count; index++) {

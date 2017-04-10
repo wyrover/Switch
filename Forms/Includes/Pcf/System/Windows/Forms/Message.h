@@ -60,7 +60,7 @@ namespace Pcf {
           template<typename Type>
           refptr<Type> GetLParam() { return (refptr<Type>)this->lParam; }
 
-          String ToString() const noexcept override;
+          String ToString() const override;
 
         private:
           Message(intptr hwnd, int32 msg, intptr wParam, intptr lParam, intptr result) : hwnd(hwnd), msg(msg), wParam(wParam), lParam(lParam), result(result) { counter++; }

@@ -21,7 +21,7 @@ void UnicodeEncoding::Encoder::Encode(char32 c, byte bytes[]) const {
   __OS::CoreApi::UnicodeEncodings::UTF16::Encode(c, bytes, this->bigEndian);
 }
 
-String UnicodeEncoding::Encoder::ToString() const noexcept {
+String UnicodeEncoding::Encoder::ToString() const {
   if (this->bigEndian)
     return "UnicodeEncoder Big Endian";
   else
@@ -59,7 +59,7 @@ void UnicodeEncoding::Decoder::Add(byte b) {
   }
 }
 
-String UnicodeEncoding::Decoder::ToString() const noexcept {
+String UnicodeEncoding::Decoder::ToString() const {
   if (bigEndian)
     return "UnicodeDecoder Big Endian";
   else
@@ -139,7 +139,7 @@ Array<byte> UnicodeEncoding::GetPreamble() const {
       return {};
 }
 
-bool UnicodeEncoding::Equals(const object& obj) const noexcept {
+bool UnicodeEncoding::Equals(const object& obj) const {
   const UnicodeEncoding* ue = dynamic_cast<const UnicodeEncoding*>(&obj);
   if (ue == null)
     return false;

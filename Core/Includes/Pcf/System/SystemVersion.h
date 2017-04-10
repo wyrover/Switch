@@ -54,9 +54,9 @@ namespace Pcf {
         
         static bool ContainsAssembly(const string& name) {return assemblies.ContainsKey(name);}
         
-        bool Equals(const object& obj) const noexcept override {return is<Assembly>(obj) && Equals((const Assembly&)obj);}
+        bool Equals(const object& obj) const override {return is<Assembly>(obj) && Equals((const Assembly&)obj);}
 
-        bool Equals(const Assembly& assembly) const noexcept {return this->company == assembly.company && this->configuration == assembly.configuration && this->copyright == assembly.copyright && this->description == assembly.description && this->name == assembly.name && this->product == assembly.product && this->trademark == assembly.trademark && this->version == assembly.version;}
+        bool Equals(const Assembly& assembly) const {return this->company == assembly.company && this->configuration == assembly.configuration && this->copyright == assembly.copyright && this->description == assembly.description && this->name == assembly.name && this->product == assembly.product && this->trademark == assembly.trademark && this->version == assembly.version;}
         
         static Assembly GetAssembly(const string& name) {return assemblies[name];}
         

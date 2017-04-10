@@ -52,7 +52,7 @@ int32 ANSIEncoding::GetMaxCharCount(int32 byteCount) const {
   return byteCount;
 }
 
-bool ANSIEncoding::Equals(const object& obj) const noexcept {
+bool ANSIEncoding::Equals(const object& obj) const {
   const ANSIEncoding* enc = dynamic_cast<const ANSIEncoding*>(&obj);
   if (enc == null)
     return false;
@@ -171,7 +171,7 @@ void ANSIEncoding::Encoder::Encode(char32 codePoint, byte* bytes) const {
   bytes[0] = encoder->GetByte(codePoint);
 }
 
-String ANSIEncoding::Encoder::ToString() const noexcept {
+String ANSIEncoding::Encoder::ToString() const {
   return String::Format("Code Page {0} Encoder", codePage);
 }
 
@@ -493,7 +493,7 @@ void ANSIEncoding::Decoder::Reset() {
   Encoding::Decoder::Reset();
 }
 
-String ANSIEncoding::Decoder::ToString() const noexcept {
+String ANSIEncoding::Decoder::ToString() const {
   return String::Format("Code Page {0} Decoder", codePage);
 }
 

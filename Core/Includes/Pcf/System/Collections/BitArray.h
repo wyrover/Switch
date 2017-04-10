@@ -172,7 +172,7 @@ namespace Pcf {
         /// @exception ArgumentNullException The parameters obj is null.
         /// @return @see object
         /// @return @see bool
-        bool Equals(const object& obj) const noexcept override {
+        bool Equals(const object& obj) const override {
           return is<BitArray>(obj) && Equals(static_cast<const BitArray&>(obj));
         }
 

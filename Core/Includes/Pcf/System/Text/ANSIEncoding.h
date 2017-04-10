@@ -54,7 +54,7 @@ namespace Pcf {
         /// @exception System::ArgumentOutOfRangeException byteCount is less than zero. -or- The resulting number of bytes is greater than the maximum number that can be returned as an integer.
         int32 GetMaxCharCount(int32 byteCount) const override;
         
-        bool Equals(const object& obj) const noexcept override;
+        bool Equals(const object& obj) const override;
         
         /// @brief Converts the given code point into its representing byte.
         /// @param codePoint The codePoint to encode.
@@ -73,7 +73,7 @@ namespace Pcf {
           Decoder& operator =(const Decoder& b);
           virtual void Add(byte b);
           virtual void Reset();
-          virtual String ToString() const noexcept;
+          virtual String ToString() const;
           virtual char32 GetCodePoint(byte b) = 0;
           
         protected:
@@ -90,7 +90,7 @@ namespace Pcf {
           Encoder& operator =(const Encoder& b);
           virtual int32 GetNbBytes(char32) const;
           virtual void Encode(char32 codePoint, byte* bytes) const;
-          virtual String ToString() const noexcept;
+          virtual String ToString() const;
           virtual byte GetByte(char32 cp) = 0;
           
         private:

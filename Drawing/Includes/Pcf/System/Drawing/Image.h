@@ -127,7 +127,7 @@ namespace Pcf {
 
         static UniquePointer<Image> FromData(const char* data[]);
 
-        virtual int32 CompareTo(const IComparable& obj) const noexcept {
+        virtual int32 CompareTo(const IComparable& obj) const {
           if (!is<Image>(obj))
             return 1;
           return CompareTo(as<Image>(obj));
@@ -135,7 +135,7 @@ namespace Pcf {
 
         virtual int32 CompareTo(const Image& value) const {return IntPtr((intptr)&rawData).CompareTo(IntPtr((intptr)&rawData));}
 
-        virtual int32 GetHashCode() const noexcept {return IntPtr((intptr)&rawData).GetHashCode();}
+        virtual int32 GetHashCode() const {return IntPtr((intptr)&rawData).GetHashCode();}
 
       protected:
         /// @cond

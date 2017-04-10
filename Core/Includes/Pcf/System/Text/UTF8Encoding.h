@@ -77,7 +77,7 @@ namespace Pcf {
         /// @brief Determines whether the specified System::Object is equal to the current instance.
         /// @param value The System::Object to compare with the current instance.
         /// @return true if value is an instance of System::Text::Encoding and is equal to the current instance; otherwise, false.
-        bool Equals(const object& obj) const noexcept override;
+        bool Equals(const object& obj) const override;
         
         UniquePointer<Encoding::Decoder> CreateDecoder() const override;
         UniquePointer<Encoding::Encoder> CreateEncoder() const override;
@@ -90,7 +90,7 @@ namespace Pcf {
           Encoder& operator =(const Encoder& b);
           virtual int32 GetNbBytes(char32 c) const;
           virtual void Encode(char32 c, byte bytes[]) const;
-          virtual String ToString() const noexcept;
+          virtual String ToString() const;
           /// @cond
         private:
           //bool shouldEmitPreamble;
@@ -107,7 +107,7 @@ namespace Pcf {
           virtual void Add(byte b);
           virtual void Reset();
           virtual char32 GetCodePoint() const { return codePoint; }
-          virtual String ToString() const noexcept;
+          virtual String ToString() const;
           
         private:
           byte format;

@@ -105,11 +105,11 @@ namespace Pcf {
       /// @brief Determines whether this instance of Exception and a specified object, which must also be a Exception object, have the same value.
       /// @param obj The object to compare with the current object.
       /// @return bool true if the specified object is equal to the current object. otherwise, false.
-      bool Equals(const Object& obj) const noexcept override;
+      bool Equals(const Object& obj) const override;
       
       /// @brief Returns a string that represents the current DelegateItem.
       /// @return string A string that represents the current DelegateItem.
-      String ToString() const noexcept override;
+      String ToString() const override;
       
       /// @brief Explicit operator equal between Exception
       /// @param value Value to assign this instance.

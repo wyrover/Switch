@@ -48,7 +48,7 @@ void StackTrace::FillFrames(void* stackTrace, int32 skipFrames, bool needFileInf
   }
 }
 
-String StackTrace::ToString() const noexcept {
+String StackTrace::ToString() const {
   String str;
   bool first = true;
   for (refptr<StackFrame> item : this->frames) {

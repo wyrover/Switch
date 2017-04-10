@@ -788,7 +788,7 @@ namespace Pcf {
       }
 
       // TODO : this is ! correct, it must handle multi-dimensional arrays... (which are currently ! used...)
-      bool Equals(const object& obj) const noexcept override {
+      bool Equals(const object& obj) const override {
         if (!is<Array>(obj))
           return false;
         const Array& other = static_cast<const Array&>(obj);

@@ -80,7 +80,7 @@ namespace Pcf {
       
       /// @brief Converts the value of this OperatingSystem object to its equivalent string representation.
       /// @return string The string representation of the values returned by the Platform, Version, and ServicePack properties.
-      String ToString() const noexcept override {return VersionString;}
+      String ToString() const override {return VersionString;}
       
     private:
       PlatformID platform = PlatformID::Unknown;

@@ -45,11 +45,11 @@ bool UInt32::TryParse(const string& str, int32 base, UInt32& value) {
   return TryParse(str, base, value.value);
 }
 
-int32 UInt32::GetHashCode() const noexcept {
+int32 UInt32::GetHashCode() const {
   return this->value;
 }
 
-string UInt32::ToString() const noexcept {
+string UInt32::ToString() const {
   return ToString("g", ref<IFormatProvider>::Null());
 }
 
@@ -89,7 +89,7 @@ int32 UInt32::CompareTo(const UInt32& value) const {
   return this->value - value.value;
 }
 
-int32 UInt32::CompareTo(const IComparable& obj) const noexcept {
+int32 UInt32::CompareTo(const IComparable& obj) const {
   if (!is<UInt32>(obj))
     return 1;
   
