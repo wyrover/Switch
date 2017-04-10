@@ -71,12 +71,12 @@ ASCIIEncoding& ASCIIEncoding::operator =(const ASCIIEncoding& encoding) {
   return *this;
 }
 
-UniquePointer<Encoding::Decoder> ASCIIEncoding::CreateDecoder() const {
-  return new Decoder();
+refptr<Encoding::Decoder> ASCIIEncoding::CreateDecoder() const {
+  return pcf_new<Decoder>();
 }
 
-UniquePointer<Encoding::Encoder> ASCIIEncoding::CreateEncoder() const {
-  return new Encoder();
+refptr<Encoding::Encoder> ASCIIEncoding::CreateEncoder() const {
+  return pcf_new<Encoder>();
 }
 
 int32 ASCIIEncoding::GetByteCount(char32) const {

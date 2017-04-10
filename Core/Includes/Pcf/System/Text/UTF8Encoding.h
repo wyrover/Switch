@@ -79,8 +79,8 @@ namespace Pcf {
         /// @return true if value is an instance of System::Text::Encoding and is equal to the current instance; otherwise, false.
         bool Equals(const object& obj) const override;
         
-        UniquePointer<Encoding::Decoder> CreateDecoder() const override;
-        UniquePointer<Encoding::Encoder> CreateEncoder() const override;
+        refptr<Encoding::Decoder> CreateDecoder() const override;
+        refptr<Encoding::Encoder> CreateEncoder() const override;
         
         class Encoder : public Encoding::Encoder {
         public:
@@ -88,9 +88,9 @@ namespace Pcf {
           Encoder(const Encoder& e) : Encoding::Encoder(e) { }
           
           Encoder& operator =(const Encoder& b);
-          virtual int32 GetNbBytes(char32 c) const;
-          virtual void Encode(char32 c, byte bytes[]) const;
-          virtual String ToString() const;
+          int32 GetNbBytes(char32 c) const override;
+          void Encode(char32 c, byte bytes[]) const override;
+          String ToString() const override;
           /// @cond
         private:
           //bool shouldEmitPreamble;
@@ -104,10 +104,10 @@ namespace Pcf {
           
           Decoder& operator =(const Decoder& b);
           
-          virtual void Add(byte b);
-          virtual void Reset();
+          void Add(byte b) override;
+          void Reset() override;
           virtual char32 GetCodePoint() const { return codePoint; }
-          virtual String ToString() const;
+          String ToString() const override;
           
         private:
           byte format;

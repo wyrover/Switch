@@ -337,7 +337,7 @@ namespace {
   //___________________________________________________________________________
   //                               virtual bool Equals(const object& obj) const
   TYPED_TEST(Encoding, Equals) {
-    UniquePointer<Text::Encoding> byCodePage = Text::Encoding::CreateEncoding(TypeParam::codePage);
+    refptr<Text::Encoding> byCodePage = Text::Encoding::CreateEncoding(TypeParam::codePage);
     EXPECT_TRUE(TypeParam::encoding.Equals(*byCodePage));
   }
   

@@ -946,7 +946,7 @@ Array<char> String::ToCCharArray(int32 startIndex, int32 length) const  {
 }
 
 Array<char> String::ToCCharArray(int32 codePage) const {
-  UniquePointer<Text::Encoding> encoding = Text::Encoding::CreateEncoding(codePage);
+  refptr<Text::Encoding> encoding = Text::Encoding::CreateEncoding(codePage);
   if (!encoding->IsSingleByte())
     throw InvalidOperationException(pcf_current_information);
   
@@ -956,7 +956,7 @@ Array<char> String::ToCCharArray(int32 codePage) const {
 }
 
 Array<char> String::ToCCharArray(int32 startIndex, int32 length, int32 codePage) const {
-  UniquePointer<Text::Encoding> encoding = Text::Encoding::CreateEncoding(codePage);
+  refptr<Text::Encoding> encoding = Text::Encoding::CreateEncoding(codePage);
   if (!encoding->IsSingleByte())
     throw InvalidOperationException(pcf_current_information);
   

@@ -4,7 +4,7 @@
 
 #include "../../Types.h"
 #include "../../Abstract.h"
-#include "../../UniquePointer.h"
+#include "../../RefPtr.h"
 #include "../Array.h"
 #include "../Object.h"
 #include "../String.h"
@@ -23,43 +23,43 @@ namespace Pcf {
 
         /// @brief Creates an encoding for the ASCII (7-bit) character set.
         /// @return An encoding for the ASCII (7-bit) character set.
-        static UniquePointer<Encoding> ASCII();
+        static refptr<Encoding> ASCII();
 
         /// @brief Creates an encoding for the UTF-8 format.
         /// @return An encoding for the UTF-8 format.
-        static UniquePointer<Encoding> UTF8();
+        static refptr<Encoding> UTF8();
 
         /// @brief Creates an encoding for the UTF-16 format using the little endian byte order.
         /// @return An encoding for the UTF-16 format using the little endian byte order.
-        static UniquePointer<Encoding> Unicode();
+        static refptr<Encoding> Unicode();
 
         /// @brief Creates an encoding for the UTF-16 format that uses the big endian byte order.
         /// @return An encoding object for the UTF-16 format that uses the big endian byte order.
-        static UniquePointer<Encoding> BigEndianUnicode();
+        static refptr<Encoding> BigEndianUnicode();
 
         /// @brief Creates an encoding for the UTF-16 format using the little endian byte order.
         /// @return An encoding for the UTF-16 format using the little endian byte order.
-        static UniquePointer<Encoding> UTF16LE();
+        static refptr<Encoding> UTF16LE();
 
         /// @brief Creates an encoding for the UTF-16 format that uses the big endian byte order.
         /// @return An encoding object for the UTF-16 format that uses the big endian byte order.
-        static UniquePointer<Encoding> UTF16BE();
+        static refptr<Encoding> UTF16BE();
 
         /// @brief Creates an encoding for the UTF-32 format using the little endian byte order.
         /// @return An encoding object for the UTF-32 format using the little endian byte order.
-        static UniquePointer<Encoding> UTF32();
+        static refptr<Encoding> UTF32();
 
         /// @brief Returns the encoding associated with the specified code page name.
         /// @param name The code page name of the preferred encoding. Possible values are listed in the Name column of the table that appears in the System::Text::Encoding class topic.
         /// @return The encoding associated with the specified code page.
         /// @exception System::ArgumentException name is not a valid code page name. or  The code page indicated by name is not supported by the underlying platform.
-        static UniquePointer<Encoding> CreateEncoding(int32 codePage);
+        static refptr<Encoding> CreateEncoding(int32 codePage);
 
         /// @brief Returns the encoding associated with the specified code page name.
         /// @param name The code page name of the preferred encoding. Possible values are listed in the Name column of the table that appears in the System::Text::Encoding class topic.
         /// @return The encoding associated with the specified code page.
         /// @exception System::ArgumentException name is not a valid code page name. or  The code page indicated by name is not supported by the underlying platform.
-        static UniquePointer<Encoding> CreateEncoding(const String& codePageName);
+        static refptr<Encoding> CreateEncoding(const String& codePageName);
 
         /// @brief When overridden in a derived class, gets the code page identifier of the current System::Text::Encoding.
         /// @return The code page identifier of the current System::Text::Encoding.
@@ -348,8 +348,8 @@ namespace Pcf {
         };
 
         //todo
-        virtual UniquePointer<Decoder> CreateDecoder() const = 0;
-        virtual UniquePointer<Encoder> CreateEncoder() const = 0;
+        virtual refptr<Decoder> CreateDecoder() const = 0;
+        virtual refptr<Encoder> CreateEncoder() const = 0;
 
       protected:
         /// @brief Initializes a new instance of the System::Text::Encoding class.
@@ -373,9 +373,9 @@ namespace Pcf {
 
       private:
         static void InitCodePages();
-        static UniquePointer< System::Collections::Generic::SortedDictionary<int32, String>> names;
-        static UniquePointer< System::Collections::Generic::SortedDictionary<String, int32>> codePagesFromName;
-        static UniquePointer< System::Collections::Generic::SortedDictionary<int32, String>> displayNames;
+        static refptr< System::Collections::Generic::SortedDictionary<int32, String>> names;
+        static refptr< System::Collections::Generic::SortedDictionary<String, int32>> codePagesFromName;
+        static refptr< System::Collections::Generic::SortedDictionary<int32, String>> displayNames;
         /// @endcond
       };
     }

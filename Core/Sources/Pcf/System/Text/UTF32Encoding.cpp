@@ -82,12 +82,12 @@ UTF32Encoding& UTF32Encoding::operator =(const UTF32Encoding& encoding) {
   return *this;
 }
 
-UniquePointer<Encoding::Decoder> UTF32Encoding::CreateDecoder() const {
-  return new Decoder(this->bigEndian);
+refptr<Encoding::Decoder> UTF32Encoding::CreateDecoder() const {
+  return pcf_new<Decoder>(this->bigEndian);
 }
 
-UniquePointer<Encoding::Encoder> UTF32Encoding::CreateEncoder() const {
-  return new Encoder(this->bigEndian);
+refptr<Encoding::Encoder> UTF32Encoding::CreateEncoder() const {
+  return pcf_new<Encoder>(this->bigEndian);
 }
 
 int32 UTF32Encoding::GetByteCount(char32) const {

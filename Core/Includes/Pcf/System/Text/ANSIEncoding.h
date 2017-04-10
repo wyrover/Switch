@@ -71,9 +71,9 @@ namespace Pcf {
           Decoder(int32 cp) : Encoding::Decoder(), codePage(cp) { }
           Decoder(const Decoder& b);
           Decoder& operator =(const Decoder& b);
-          virtual void Add(byte b);
-          virtual void Reset();
-          virtual String ToString() const;
+          void Add(byte b) override;
+          void Reset() override;
+          String ToString() const override;
           virtual char32 GetCodePoint(byte b) = 0;
           
         protected:
@@ -88,9 +88,9 @@ namespace Pcf {
           Encoder(int32 cp);
           Encoder(const Encoder& e);
           Encoder& operator =(const Encoder& b);
-          virtual int32 GetNbBytes(char32) const;
-          virtual void Encode(char32 codePoint, byte* bytes) const;
-          virtual String ToString() const;
+          int32 GetNbBytes(char32) const override;
+          void Encode(char32 codePoint, byte* bytes) const override;
+          String ToString() const override;
           virtual byte GetByte(char32 cp) = 0;
           
         private:
@@ -112,21 +112,21 @@ namespace Pcf {
       class CodePage437Encoding : public ANSIEncoding {
       public:
         CodePage437Encoding();
-        virtual UniquePointer<Encoding::Decoder> CreateDecoder() const;
-        virtual UniquePointer<Encoding::Encoder> CreateEncoder() const;
+        refptr<Encoding::Decoder> CreateDecoder() const override;
+        refptr<Encoding::Encoder> CreateEncoder() const override;
         using ANSIEncoding::GetBytes;
-        virtual int32 GetBytes(char32 c, byte bytes[], int32 bytesLength, int32 byteIndex) const;
+        int32 GetBytes(char32 c, byte bytes[], int32 bytesLength, int32 byteIndex) const override;
         
         class Decoder : public ANSIEncoding::Decoder {
         public:
           Decoder() : ANSIEncoding::Decoder(437) { }
-          virtual char32 GetCodePoint(byte b);
+          char32 GetCodePoint(byte b) override;
         };
         
         class Encoder : public ANSIEncoding::Encoder {
         public:
           Encoder() : ANSIEncoding::Encoder(437) { }
-          virtual byte GetByte(char32 cp);
+          byte GetByte(char32 cp) override;
         };
       };
       
@@ -136,21 +136,21 @@ namespace Pcf {
       class CodePage28591Encoding : public ANSIEncoding {
       public:
         CodePage28591Encoding();
-        virtual UniquePointer<Encoding::Decoder> CreateDecoder() const;
-        virtual UniquePointer<Encoding::Encoder> CreateEncoder() const;
+        refptr<Encoding::Decoder> CreateDecoder() const override;
+        refptr<Encoding::Encoder> CreateEncoder() const override;
         using ANSIEncoding::GetBytes;
-        virtual int32 GetBytes(char32 c, byte bytes[], int32 bytesLength, int32 byteIndex) const;
+        int32 GetBytes(char32 c, byte bytes[], int32 bytesLength, int32 byteIndex) const override;
         
         class Decoder : public ANSIEncoding::Decoder {
         public:
           Decoder() : ANSIEncoding::Decoder(28591) { }
-          virtual char32 GetCodePoint(byte b);
+          char32 GetCodePoint(byte b) override;
         };
         
         class Encoder : public ANSIEncoding::Encoder {
         public:
           Encoder() : ANSIEncoding::Encoder(28591) { }
-          virtual byte GetByte(char32 cp);
+          byte GetByte(char32 cp) override;
         };
       };
       
@@ -160,21 +160,21 @@ namespace Pcf {
       class CodePage28592Encoding : public ANSIEncoding {
       public:
         CodePage28592Encoding();
-        virtual UniquePointer<Encoding::Decoder> CreateDecoder() const;
-        virtual UniquePointer<Encoding::Encoder> CreateEncoder() const;
+        refptr<Encoding::Decoder> CreateDecoder() const override;
+        refptr<Encoding::Encoder> CreateEncoder() const override;
         using ANSIEncoding::GetBytes;
-        virtual int32 GetBytes(char32 c, byte bytes[], int32 bytesLength, int32 byteIndex) const;
+        int32 GetBytes(char32 c, byte bytes[], int32 bytesLength, int32 byteIndex) const override;
         
         class Decoder : public ANSIEncoding::Decoder {
         public:
           Decoder() : ANSIEncoding::Decoder(28592) { }
-          virtual char32 GetCodePoint(byte b);
+          char32 GetCodePoint(byte b) override;
         };
         
         class Encoder : public ANSIEncoding::Encoder {
         public:
           Encoder() : ANSIEncoding::Encoder(28592) { }
-          virtual byte GetByte(char32 cp);
+          byte GetByte(char32 cp) override;
         };
       };
       

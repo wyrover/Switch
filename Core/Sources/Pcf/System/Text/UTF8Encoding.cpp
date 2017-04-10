@@ -77,12 +77,12 @@ UTF8Encoding& UTF8Encoding::operator =(const UTF8Encoding& encoding) {
   return *this;
 }
 
-UniquePointer<Encoding::Decoder> UTF8Encoding::CreateDecoder() const {
-  return new Decoder();
+refptr<Encoding::Decoder> UTF8Encoding::CreateDecoder() const {
+  return pcf_new<Decoder>();
 }
 
-UniquePointer<Encoding::Encoder> UTF8Encoding::CreateEncoder() const {
-  return new Encoder();
+refptr<Encoding::Encoder> UTF8Encoding::CreateEncoder() const {
+  return pcf_new<Encoder>();
 }
 
 int32 UTF8Encoding::GetByteCount(char32 c) const {

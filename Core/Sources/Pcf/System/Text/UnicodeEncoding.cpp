@@ -100,12 +100,12 @@ UnicodeEncoding& UnicodeEncoding::operator =(const UnicodeEncoding& encoding)  {
   return *this;
 }
 
-UniquePointer<Encoding::Decoder> UnicodeEncoding::CreateDecoder() const {
-  return new Decoder(this->bigEndian);
+refptr<Encoding::Decoder> UnicodeEncoding::CreateDecoder() const {
+  return pcf_new<Decoder>(this->bigEndian);
 }
 
-UniquePointer<Encoding::Encoder> UnicodeEncoding::CreateEncoder() const {
-  return new Encoder(this->bigEndian);
+refptr<Encoding::Encoder> UnicodeEncoding::CreateEncoder() const {
+  return pcf_new<Encoder>(this->bigEndian);
 }
 
 int32 UnicodeEncoding::GetByteCount(char32 c) const {
