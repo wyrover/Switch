@@ -50,11 +50,11 @@ int32 UInt32::GetHashCode() const noexcept {
 }
 
 string UInt32::ToString() const noexcept {
-  return ToString("g", Reference<IFormatProvider>::Null());
+  return ToString("g", Ref<IFormatProvider>::Null());
 }
 
 string UInt32::ToString(const string& format) const {
-  return ToString(format, Reference<IFormatProvider>::Null());
+  return ToString(format, Ref<IFormatProvider>::Null());
 }
 
 string UInt32::ToString(const string& format, const IFormatProvider&) const {

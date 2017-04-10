@@ -7,7 +7,7 @@
 #include <sstream>
 
 #include "Types.h"
-#include "Reference.h"
+#include "Ref.h"
 
 namespace Pcf {
   /// @brief Manages the storage of a pointer, providing a limited garbage-collection facility, with little to no overhead over built-in pointers.
@@ -122,18 +122,18 @@ namespace Pcf {
     /// @brief Get the value stored in UniquePointer.
     /// @return the value stored in UniquePointer.
     /// @exception NullPointerException the UniquePointer is null
-    Reference<T> ToReference() {
+    Ref<T> ToReference() {
       if (this->ptr == null)
-        return Reference<T>();
+        return Ref<T>();
       return ToObject();
     }
     
     /// @brief Get the value stored in UniquePointer.
     /// @return the value stored in UniquePointer.
     /// @exception NullPointerException the UniquePointer is null
-    Reference<T> ToReference() const {
+    Ref<T> ToReference() const {
       if (this->ptr == null)
-        return Reference<T>();
+        return Ref<T>();
       return ToObject();
     }
     
@@ -141,9 +141,9 @@ namespace Pcf {
     /// @return the value stored in UniquePointer.
     /// @exception NullPointerException the UniquePointer is null
     template<typename TT>
-    Reference<TT> ToReference() {
+    Ref<TT> ToReference() {
       if (this->ptr == null)
-        return Reference<T>();
+        return Ref<T>();
       return ToObject<TT>();
     }
     
@@ -151,9 +151,9 @@ namespace Pcf {
     /// @return the value stored in UniquePointer.
     /// @exception NullPointerException the UniquePointer is null
     template<typename TT>
-    Reference<TT> ToReference() const {
+    Ref<TT> ToReference() const {
       if (this->ptr == null)
-        return Reference<T>();
+        return Ref<T>();
       return ToObject<TT>();
     }
     
@@ -285,9 +285,9 @@ namespace Pcf {
     /// @par Examples
     /// @code
     /// UniquePointer<string> uniqueString = new string("Test string");
-    /// SharedPointer<string> sharedString = uniqueString.Share();
+    /// RefPtr<string> sharedString = uniqueString.Share();
     /// @endcode
-     SharedPointer<T> Share() {
+     RefPtr<T> Share() {
      return Release();
      }
      */
@@ -297,9 +297,9 @@ namespace Pcf {
     /// @par Examples
     /// @code
     /// UniquePointer<string> uniqueString = new string("Test string");
-    /// SharedPointer<string> sharedString = UniquePointer<string>::Share(uniqueString);
+    /// RefPtr<string> sharedString = UniquePointer<string>::Share(uniqueString);
     /// @endcode
-     static SharedPointer<T> Share(UniquePointer<T>& up) {
+     static RefPtr<T> Share(UniquePointer<T>& up) {
      return up.Share();
      }
      */

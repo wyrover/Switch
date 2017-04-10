@@ -25,7 +25,7 @@ namespace {
 
   TEST(Dictionary, AddSpPairRef) {
     Dictionary<Int32, string> dictionary;
-    SharedPointer<KeyValuePair<Int32, string>> pair(new KeyValuePair<Int32, string>(Int32(42), "Hello"));
+    RefPtr<KeyValuePair<Int32, string>> pair(new KeyValuePair<Int32, string>(Int32(42), "Hello"));
 
     dictionary.Add(*pair);
     EXPECT_TRUE(dictionary.ContainsKey(Int32(42)));

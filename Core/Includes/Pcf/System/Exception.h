@@ -4,7 +4,7 @@
 
 #include "../CurrentInformation.h"
 #include "../Property.h"
-#include "../SharedPointer.h"
+#include "../RefPtr.h"
 #include "../Types.h"
 #include "Object.h"
 #include "_String.h"
@@ -134,9 +134,9 @@ namespace Pcf {
       String message;
       String helpLink;
       CurrentInformation currentInformation;
-      Reference<Exception> innerException;
+      Ref<Exception> innerException;
       int32 hresult = 0;
-      SharedPointer<Array<String>> stackTrace;
+      RefPtr<Array<String>> stackTrace;
       String whatMessage;
       static bool stackTraceEnabled;
       /// @endcond

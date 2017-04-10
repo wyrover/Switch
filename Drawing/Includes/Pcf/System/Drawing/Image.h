@@ -4,7 +4,7 @@
 
 #include <Pcf/System/Object.h>
 #include <Pcf/System/String.h>
-#include <Pcf/SharedPointer.h>
+#include <Pcf/RefPtr.h>
 #include <Pcf/System/Array.h>
 #include <Pcf/System/IComparable.h>
 #include <Pcf/System/IO/Stream.h>

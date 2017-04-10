@@ -5,7 +5,7 @@
 #include <mutex>
 #include <condition_variable>
 
-#include "../../SharedPointer.h"
+#include "../../RefPtr.h"
 #include "../String.h"
 #include "../Int32.h"
 #include "../ObjectClosedException.h"
@@ -33,7 +33,7 @@ namespace Pcf {
         /// @param initialCount The initial number of requests for the semaphore that can be granted concurrently.
         /// @param maximumCount The maximum number of requests for the semaphore that can be granted concurrently.
         /// @exception IO::IOException An Io error occurred.
-        Semaphore(int32 initialCount, int32 maximumCount) : count(SharedPointer<int32>::Create(initialCount)), maxCount(SharedPointer<int32>::Create(maximumCount)) {}
+        Semaphore(int32 initialCount, int32 maximumCount) : count(RefPtr<int32>::Create(initialCount)), maxCount(RefPtr<int32>::Create(maximumCount)) {}
 
         /// @brief Initializes a new instance of the System::Threading::Semaphore class, specifying the maximum number of concurrent entries, optionally reserving some entries
         /// for the calling thread, and optionally specifying the name of a system semaphore
@@ -140,11 +140,11 @@ namespace Pcf {
           return true;
         }
 
-        SharedPointer<std::mutex> guard = SharedPointer<std::mutex>::Create();
-        SharedPointer<std::condition_variable> signal = SharedPointer<std::condition_variable>::Create();
-        SharedPointer<int32> count = SharedPointer<int32>::Create(0);
-        SharedPointer<int32> maxCount = SharedPointer<int32>::Create(Int32::MaxValue());
-        SharedPointer<string> name = SharedPointer<string>::Create();
+        RefPtr<std::mutex> guard = RefPtr<std::mutex>::Create();
+        RefPtr<std::condition_variable> signal = RefPtr<std::condition_variable>::Create();
+        RefPtr<int32> count = RefPtr<int32>::Create(0);
+        RefPtr<int32> maxCount = RefPtr<int32>::Create(Int32::MaxValue());
+        RefPtr<string> name = RefPtr<string>::Create();
       };
     }
   }

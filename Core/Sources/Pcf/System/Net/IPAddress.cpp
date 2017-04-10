@@ -1,7 +1,7 @@
 #include <cstring>
 
 #include "../../../../Includes/Pcf/System/Net/IPAddress.h"
-#include "../../../../Includes/Pcf/SharedPointer.h"
+#include "../../../../Includes/Pcf/RefPtr.h"
 #include "../../../../Includes/Pcf/Using.h"
 #include "../../../../Includes/Pcf/System/Array.h"
 #include "../../../../Includes/Pcf/System/BitConverter.h"

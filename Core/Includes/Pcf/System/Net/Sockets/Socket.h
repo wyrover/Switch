@@ -3,7 +3,7 @@
 #pragma once
 
 #include "../../../Types.h"
-#include "../../../SharedPointer.h"
+#include "../../../RefPtr.h"
 #include "../../../UniquePointer.h"
 #include "../../Array.h"
 #include "../../IntPtr.h"
@@ -996,7 +996,7 @@ namespace Pcf {
             bool nonBlocking = false;
             bool bound = false;
           };
-          SharedPointer<SocketData> data = SharedPointer<SocketData>::Create();
+          RefPtr<SocketData> data = RefPtr<SocketData>::Create();
           
         };
       }

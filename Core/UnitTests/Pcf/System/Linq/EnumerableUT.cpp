@@ -110,12 +110,12 @@ namespace {
   }
   
   TEST(Enumerable, Cast) {
-    Collections::Generic::List<SharedPointer<string>> al;
+    Collections::Generic::List<RefPtr<string>> al;
     al.Add(new string("Barley"));
     al.Add(new string("Boots"));
     al.Add(new string("Whiskers"));
-    UniquePointer<IEnumerable<SharedPointer<String>>> enumerable = al.Cast<SharedPointer<String>>();
-    Enumerator<SharedPointer<String>> enumerator = enumerable->GetEnumerator();
+    UniquePointer<IEnumerable<RefPtr<String>>> enumerable = al.Cast<RefPtr<String>>();
+    Enumerator<RefPtr<String>> enumerator = enumerable->GetEnumerator();
     ASSERT_TRUE(enumerator.MoveNext());
     ASSERT_EQ("Barley", *enumerator.Current());
     ASSERT_TRUE(enumerator.MoveNext());

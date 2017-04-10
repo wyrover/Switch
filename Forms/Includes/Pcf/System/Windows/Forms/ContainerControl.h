@@ -40,7 +40,7 @@ namespace Pcf {
             pcf_get->const System::ComponentModel::IContainer& {return this->GetContainer();}
           };
           
-          virtual const System::ComponentModel::IContainer& GetContainer() const {return Reference<NullContainer>::Null();}
+          virtual const System::ComponentModel::IContainer& GetContainer() const {return Ref<NullContainer>::Null();}
 
         private:
           class NullContainer : public System::ComponentModel::IContainer {};

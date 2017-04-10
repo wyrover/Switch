@@ -75,7 +75,7 @@ namespace Pcf {
             System::Collections::Generic::Dictionary<int32, Action<Message&>> messageActions;
           };
 
-          SharedPointer<FormData> formData = SharedPointer<FormData>::Create();
+          RefPtr<FormData> formData = RefPtr<FormData>::Create();
           /// @endcond
 
         private:

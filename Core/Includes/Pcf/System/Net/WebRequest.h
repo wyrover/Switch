@@ -64,7 +64,7 @@ namespace Pcf {
             int32 bufferSize = 0;
             int32 bufferOffset = 0;
           };
-          SharedPointer<WebRequestStreamData> data = SharedPointer<WebRequestStreamData>::Create();
+          RefPtr<WebRequestStreamData> data = RefPtr<WebRequestStreamData>::Create();
         };
         
 

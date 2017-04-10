@@ -5,7 +5,7 @@
 #include "../Any.h"
 #include "../Static.h"
 #include "../Types.h"
-#include "../SharedPointer.h"
+#include "../RefPtr.h"
 #include "NullType.h"
 
 /// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
@@ -28,7 +28,7 @@ namespace Pcf {
   ///   An integer value being the generated hashcode.
   /// @exception System::ArgumentNullException The parameters converter is null.
   template<typename T>
-  int32 GetHashCode(const SharedPointer<T>& value) {
+  int32 GetHashCode(const RefPtr<T>& value) {
     return *((int32*)value.ToPointer());
   }
   

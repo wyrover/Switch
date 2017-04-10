@@ -135,7 +135,7 @@ namespace Pcf {
           const T& GetCurrent() const override {return this->enumerator->Current();}
           
         private:
-          SharedPointer<IEnumerator<T>> enumerator;
+          RefPtr<IEnumerator<T>> enumerator;
         };
       }
     }

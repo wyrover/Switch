@@ -12,26 +12,26 @@
 namespace Pcf {
   /// @brief Represent a reference.
   template<typename T>
-  class Reference {
+  class Ref {
   public:
     /// @brief Represent a Null Reference.
     static const T& Null() { static T* nullPtr = null; return *nullPtr; }
     
     /// @brief Represent an Empty Reference.
-    static const Reference<T>& Empty() { static Reference<T> emptyPointer; return emptyPointer; }
+    static const Ref<T>& Empty() { static Ref<T> emptyPointer; return emptyPointer; }
     
     /// @brief Create a null Reference.
-    Reference() {}
+    Ref() {}
     
     /// @brief Create a Reference with specified pointer.
     /// @param ref Reference to store.
-    Reference(const T& ref) { Reset(ref); }
+    Ref(const T& ref) { Reset(ref); }
     
     /// @brief Copy a Reference specified
     /// @param ref Reference to copy.
-    Reference(const Reference& ref) : ptr(ref.ptr) {}
+    Ref(const Ref& ref) : ptr(ref.ptr) {}
 
-    Reference(std::nullptr_t) : ptr(null) {}
+    Ref(std::nullptr_t) : ptr(null) {}
 
     /// @brief Return true if this instance is null.
     /// @return true if this instance is null; otherwise false.
@@ -39,7 +39,7 @@ namespace Pcf {
     
     /// @brief Return true if this instance is null.
     /// @return true if this instance is null; otherwise false.
-    static bool IsNullOrInvalid(const Reference<T>& ref) { return &ref == null || ref.IsNull(); }
+    static bool IsNullOrInvalid(const Ref<T>& ref) { return &ref == null || ref.IsNull(); }
     
     /// @brief Set to null.
     void Reset() { this->ptr = null; }
@@ -50,7 +50,7 @@ namespace Pcf {
     
     /// @brief Exchanges the contents of the Reference object with those of p, transferring ownership of any managed object between them without destroying either.
     /// @param ref Another Reference object of the same type.
-    void Swap(Reference<T>& ref) {
+    void Swap(Ref<T>& ref) {
       T* p = ref.ptr;
       ref.ptr = this->ptr;
       this->Reset(*p);
@@ -139,19 +139,19 @@ namespace Pcf {
     /// @code
     /// string str = "Test string";
     /// ...
-    /// Reference<string> s = str;
-    /// Reference<IComparable> comparable = s.ChangeType<IComparable>();
+    /// Ref<string> s = str;
+    /// Ref<IComparable> comparable = s.ChangeType<IComparable>();
     /// @endcode
     template<typename TT>
-    Reference<TT> As() const {
+    Ref<TT> As() const {
       try {
         if (this->ptr == null)
-          return Reference<TT>::Null();
+          return Ref<TT>::Null();
         
         const TT* ptr = dynamic_cast<const TT*>(this->ptr);
-        return Reference<TT>(*ptr);
+        return Ref<TT>(*ptr);
       } catch (const std::bad_cast&) {
-        return Reference<TT>::Null();
+        return Ref<TT>::Null();
       }
     }
     
@@ -160,19 +160,19 @@ namespace Pcf {
     /// @code
     /// string str = "Test string";
     /// ...
-    /// Reference<string> s = str;
-    /// Reference<IComparable> comparable = Reference<string>::ChangeType<IComparable>(s);
+    /// Ref<string> s = str;
+    /// Ref<IComparable> comparable = Ref<string>::ChangeType<IComparable>(s);
     /// @endcode
     template<typename TT>
-    static Reference<TT> As(const Reference<T>& p) { return p.As<TT>(); }
+    static Ref<TT> As(const Ref<T>& p) { return p.As<TT>(); }
     
     /// @brief Dynamic cast this type to another specified type.
     /// @par Examples
     /// @code
     /// string str = "Test string";
     /// ...
-    /// Reference<string> s = str;
-    /// Reference<IComparable> comparable = s.ChangeType<IComparable>();
+    /// Ref<string> s = str;
+    /// Ref<IComparable> comparable = s.ChangeType<IComparable>();
     /// @endcode
     template<typename TT>
     bool Is() const {
@@ -191,33 +191,33 @@ namespace Pcf {
     /// @code
     /// string str = "Test string";
     /// ...
-    /// Reference<string> s = str;
-    /// Reference<IComparable> comparable = Reference<string>::ChangeType<IComparable>(s);
+    /// Ref<string> s = str;
+    /// Ref<IComparable> comparable = Ref<string>::ChangeType<IComparable>(s);
     /// @endcode
     template<typename TT>
-    static bool Is(const Reference<T>& p) { return p.Is<TT>(); }
+    static bool Is(const Ref<T>& p) { return p.Is<TT>(); }
     
     /// @brief Dynamic cast this type to another specified type.
     /// @par Examples
     /// @code
     /// string str = "Test string";
     /// ...
-    /// Reference<string> s = str;
-    /// Reference<IComparable> comparable = s.ChangeType<IComparable>();
+    /// Ref<string> s = str;
+    /// Ref<IComparable> comparable = s.ChangeType<IComparable>();
     /// @endcode
     template<typename TT>
-    Reference<TT> ChangeType() const { return Reference<TT>(this->ToPointer<TT>()); }
+    Ref<TT> ChangeType() const { return Ref<TT>(this->ToPointer<TT>()); }
     
     /// @brief Dynamic cast specified pointer to another specified type.
     /// @par Examples
     /// @code
     /// string str = "Test string";
     /// ...
-    /// Reference<string> s = str;
-    /// Reference<IComparable> comparable = Reference<string>::ChangeType<IComparable>(s);
+    /// Ref<string> s = str;
+    /// Ref<IComparable> comparable = Ref<string>::ChangeType<IComparable>(s);
     /// @endcode
     template<typename TT>
-    static Reference<TT> ChangeType(const Reference<T>& p) { return p.ChangeType<TT>(); }
+    static Ref<TT> ChangeType(const Ref<T>& p) { return p.ChangeType<TT>(); }
     
     /// @brief Returns a string that represents the current Reference.
     /// @return string A string that represents the current object.
@@ -230,7 +230,7 @@ namespace Pcf {
     }
     
     /// @cond
-    virtual ~Reference() { }
+    virtual ~Ref() { }
     
     const T& operator ()() const { return ToObject(); }
     T& operator ()() { return ToObject(); }
@@ -238,23 +238,23 @@ namespace Pcf {
     operator const T&() const { return ToObject(); }
     operator T&() { return ToObject(); }
     
-    Reference<T>& operator =(const T& ref) {
+    Ref<T>& operator =(const T& ref) {
       Reset(ref);
       return *this;
     }
     
-    Reference<T>& operator =(const Reference<T>& ref) {
+    Ref<T>& operator =(const Ref<T>& ref) {
       Reset(*ref.ptr);
       return *this;
     }
     
     bool operator ==(const T& ref) const { return this->ptr == &ref; }
     
-    bool operator ==(const Reference<T>& ref) const { return this->ptr == ref.ptr; }
+    bool operator ==(const Ref<T>& ref) const { return this->ptr == ref.ptr; }
     
     bool operator !=(const T& ref) const { return this->ptr != &ref; }
     
-    bool operator !=(const Reference<T>& ref) const { return this->ptr != ref.ptr; }
+    bool operator !=(const Ref<T>& ref) const { return this->ptr != ref.ptr; }
     
     operator bool() const { return this->ptr != null; }
     
@@ -267,11 +267,8 @@ namespace Pcf {
     /// @endcond
   };
 
-  template<typename TResult, typename TValue>
-  Reference<TResult> Ref(TValue& value) {return Reference<TResult>(value);}
-  
   template<typename T>
-  Reference<T> Ref(T& value) {return Reference<T>(value);}
+  using ref = Ref<T>;
 }
 
 using namespace Pcf;

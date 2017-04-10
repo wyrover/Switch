@@ -52,7 +52,7 @@ namespace Pcf {
           bool close = false;
         };
         
-        SharedPointer<StringWriterData> data = SharedPointer<StringWriterData>();
+        RefPtr<StringWriterData> data = RefPtr<StringWriterData>();
       };
     }
   }

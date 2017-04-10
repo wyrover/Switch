@@ -10,32 +10,32 @@ using namespace System::Net;
 using namespace System::Net::Sockets;
 
 UdpClient::UdpClient() {
-  this->client = SharedPointer<Socket>::Create(AddressFamily::InterNetwork, SocketType::Dgram, ProtocolType::Udp);
+  this->client = RefPtr<Socket>::Create(AddressFamily::InterNetwork, SocketType::Dgram, ProtocolType::Udp);
 }
 
 UdpClient::UdpClient(AddressFamily addressFamily) {
-  this->client = SharedPointer<Socket>::Create(addressFamily, SocketType::Dgram, ProtocolType::Udp);
+  this->client = RefPtr<Socket>::Create(addressFamily, SocketType::Dgram, ProtocolType::Udp);
 }
 
 UdpClient::UdpClient(int32 port) {
-  this->client = SharedPointer<Socket>::Create(AddressFamily::InterNetwork, SocketType::Dgram, ProtocolType::Udp);
+  this->client = RefPtr<Socket>::Create(AddressFamily::InterNetwork, SocketType::Dgram, ProtocolType::Udp);
   this->client->Bind(IPEndPoint(IPAddress::Any, port));
 }
 
 UdpClient::UdpClient(const IPEndPoint& endPoint) {
-  this->client = SharedPointer<Socket>::Create(AddressFamily::InterNetwork, SocketType::Dgram, ProtocolType::Udp);
+  this->client = RefPtr<Socket>::Create(AddressFamily::InterNetwork, SocketType::Dgram, ProtocolType::Udp);
   this->client->Bind(endPoint);
 }
 
 UdpClient::UdpClient(int32 port, AddressFamily addressFamily) {
-  this->client = SharedPointer<Socket>::Create(addressFamily, SocketType::Dgram, ProtocolType::Udp);
+  this->client = RefPtr<Socket>::Create(addressFamily, SocketType::Dgram, ProtocolType::Udp);
 
   // Retrieve local IPAddress and use the 1st one
   this->client->Bind(IPEndPoint(Dns::GetHostAddresses(Dns::GetHostName())[0], port));
 }
 
 UdpClient::UdpClient(const string& hostname, int32 port) {
-  this->client = SharedPointer<Socket>::Create(AddressFamily::InterNetwork, SocketType::Dgram, ProtocolType::Udp);
+  this->client = RefPtr<Socket>::Create(AddressFamily::InterNetwork, SocketType::Dgram, ProtocolType::Udp);
   Connect(hostname, port);
 }
 
@@ -46,11 +46,11 @@ int32 UdpClient::GetAvailable() const {
   return this->client->Available();
 }
 
-SharedPointer<Socket> UdpClient::GetClient() {
+RefPtr<Socket> UdpClient::GetClient() {
   return this->client;
 }
 
-const SharedPointer<Socket> UdpClient::GetClient() const {
+const RefPtr<Socket> UdpClient::GetClient() const {
   return this->client;
 }
 
@@ -61,7 +61,7 @@ bool UdpClient::GetConnected() const {
   return this->client->Connected();
 }
 
-void UdpClient::SetClient(const SharedPointer<Socket>& client) {
+void UdpClient::SetClient(const RefPtr<Socket>& client) {
   this->client = client;
 }
 

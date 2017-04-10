@@ -50,11 +50,11 @@ int32 SByte::GetHashCode() const noexcept {
 }
 
 string SByte::ToString() const noexcept {
-  return ToString("g3", Reference<IFormatProvider>::Null());
+  return ToString("g3", Ref<IFormatProvider>::Null());
 }
 
 string SByte::ToString(const string& format) const {
-  return ToString(format, Reference<IFormatProvider>::Null());
+  return ToString(format, Ref<IFormatProvider>::Null());
 }
 
 string SByte::ToString(const string& format, const IFormatProvider&) const {

@@ -4,7 +4,7 @@
 
 #include "../../Property.h"
 #include "../../Types.h"
-#include "../../SharedPointer.h"
+#include "../../RefPtr.h"
 #include "../../UniquePointer.h"
 #include "../Boolean.h"
 #include "../Byte.h"
@@ -115,7 +115,7 @@ namespace Pcf {
         void Write(const std::wstring& value) {this->Write(String(value));}
         /// @endcond
 
-        void Write(const String& format, const Array< Reference<Object>>& array) {this->Write(String::Format(format,array));}
+        void Write(const String& format, const Array< Ref<Object>>& array) {this->Write(String::Format(format,array));}
 
         template<typename T0>
         void Write(const String& format, const T0& arg0) {
@@ -234,7 +234,7 @@ namespace Pcf {
         /// @exception IO::IOException An I/O error occurs.
         virtual void Write(const String&) { }
 
-        void WriteLine(const String& format, const Array< Reference<Object>>& array) {this->WriteLine(String::Format(format,array));}
+        void WriteLine(const String& format, const Array< Ref<Object>>& array) {this->WriteLine(String::Format(format,array));}
 
         template<typename T0>
         void WriteLine(const String& format, const T0& arg0) {

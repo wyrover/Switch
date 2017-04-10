@@ -308,11 +308,11 @@ namespace PcfUnitTests {
   
   
   TEST(Array, PolymorphicArray) {
-    Array<SharedPointer<Object>> PolymorphicList(50);
-    PolymorphicList[0] = SharedPointer<object>::Create<Int32>(1024);
-    PolymorphicList[1] = SharedPointer<object>::Create<String>("Polymorphic");
-    PolymorphicList[2] = SharedPointer<object>::Create<Boolean>(true);
-    PolymorphicList[3] = SharedPointer<object>::Create<Char>('P');
+    Array<RefPtr<Object>> PolymorphicList(50);
+    PolymorphicList[0] = RefPtr<object>::Create<Int32>(1024);
+    PolymorphicList[1] = RefPtr<object>::Create<String>("Polymorphic");
+    PolymorphicList[2] = RefPtr<object>::Create<Boolean>(true);
+    PolymorphicList[3] = RefPtr<object>::Create<Char>('P');
     
     Assert::IsTrue(is<Int32>(*(PolymorphicList[0])));
     Assert::IsTrue(is<string>(*(PolymorphicList[1])));

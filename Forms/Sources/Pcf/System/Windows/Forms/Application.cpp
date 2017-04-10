@@ -6,7 +6,7 @@ using namespace System::Windows::Forms;
 using namespace __OS;
 
 //UniquePointer<Form> Application::mainForm;
-Reference<Form> Application::mainForm;
+Ref<Form> Application::mainForm;
 bool Application::enableVisualStyles = false;
 EventHandler Application::Idle;
 

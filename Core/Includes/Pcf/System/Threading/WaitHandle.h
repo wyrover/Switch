@@ -4,8 +4,8 @@
 
 #include "../../Abstract.h"
 #include "../../Types.h"
-#include "../../Reference.h"
-#include "../../SharedPointer.h"
+#include "../../Ref.h"
+#include "../../RefPtr.h"
 #include "../ArgumentException.h"
 #include "../Array.h"
 #include "../Convert.h"
@@ -101,7 +101,7 @@ namespace Pcf {
         /// @exception ArgumentNullException The waitHandles parameter is null
         /// @exception ArgumentException The number of objects in waitHandles is greater than the system permits.
         /// @exception AbandonedMutexException The wait completed because a thread exited without releasing a mutex.
-        static bool WaitAll(Array<Reference<WaitHandle>> waitHandles);
+        static bool WaitAll(Array<Ref<WaitHandle>> waitHandles);
 
         /// @brief Waits for all the elements in the specified array to receive a signal, using
         /// an System.Int32 value to measure the time interval.
@@ -116,7 +116,7 @@ namespace Pcf {
         /// an infinite time-out.
         /// -or-  The number of objects in waitHandles is greater than the system permits.
         /// @exception AbandonedMutexException The wait completed because a thread exited without releasing a mutex.
-        static bool WaitAll(Array<Reference<WaitHandle>> waitHandles, int32 millisecondsTimeOut);
+        static bool WaitAll(Array<Ref<WaitHandle>> waitHandles, int32 millisecondsTimeOut);
         
         /// @brief Waits for all the elements in the specified array to receive a signal, using
         /// a System.TimeSpan value to measure the time interval.
@@ -131,7 +131,7 @@ namespace Pcf {
         /// -or- timeout is greater than System.Int32.MaxValue.
         /// -or- The number of objects in waitHandles is greater than the system permits.
         /// @exception AbandonedMutexException The wait completed because a thread exited without releasing a mutex.
-        static bool WaitAll(Array<Reference<WaitHandle>> waitHandles, const TimeSpan& timeOut);
+        static bool WaitAll(Array<Ref<WaitHandle>> waitHandles, const TimeSpan& timeOut);
 
         /// @brief Waits for any of the elements in the specified array to receive a signal.
         /// @param waitHandles A WaitHandle array containing the objects for which the current instance
@@ -142,7 +142,7 @@ namespace Pcf {
         /// an infinite time-out.
         /// -or-  The number of objects in waitHandles is greater than the system permits.
         /// @exception AbandonedMutexException The wait completed because a thread exited without releasing a mutex.
-        static int32 WaitAny(Array<Reference<WaitHandle>> waitHandles);
+        static int32 WaitAny(Array<Ref<WaitHandle>> waitHandles);
 
         /// @brief Waits for any of the elements in the specified array to receive a signal,
         /// using a 32-bit signed integer to measure the time interval.
@@ -158,7 +158,7 @@ namespace Pcf {
         /// an infinite time-out.
         /// -or-  The number of objects in waitHandles is greater than the system permits.
         /// @exception AbandonedMutexException The wait completed because a thread exited without releasing a mutex.
-        static int32 WaitAny(Array<Reference<WaitHandle>> waitHandles, int32 millisecondsTimeOut);
+        static int32 WaitAny(Array<Ref<WaitHandle>> waitHandles, int32 millisecondsTimeOut);
 
         /// @brief Waits for any of the elements in the specified array to receive a signal,
         /// using a System.TimeSpan to measure the time interval.
@@ -173,7 +173,7 @@ namespace Pcf {
         /// @exception ArgumentException timeout is a negative number other than -1 milliseconds, which represents
         /// an infinite time-out. -or-  The number of objects in waitHandles is greater than the system permits.
         /// @exception AbandonedMutexException The wait completed because a thread exited without releasing a mutex.
-        static int32 WaitAny(Array<Reference<WaitHandle>> waitHandles, const TimeSpan& timeOut);
+        static int32 WaitAny(Array<Ref<WaitHandle>> waitHandles, const TimeSpan& timeOut);
 
       protected:
         /// @brief Releases ownership of the specified WaitHandle object.

@@ -175,7 +175,7 @@ namespace Pcf {
           bool writable = true;
         };
         
-        SharedPointer<MemoryStreamData> data {new MemoryStreamData()};
+        RefPtr<MemoryStreamData> data {new MemoryStreamData()};
       };
     }
   }

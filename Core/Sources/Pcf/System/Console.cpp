@@ -17,8 +17,8 @@ namespace {
     return output;
   }
   
-  SharedPointer<System::Text::Encoding> inputEncoding = SharedPointer<System::Text::Encoding>::Create<System::Text::UTF8Encoding>(false);
-  SharedPointer<System::Text::Encoding> outputEncoding = SharedPointer<System::Text::Encoding>::Create<System::Text::UTF8Encoding>(false);
+  RefPtr<System::Text::Encoding> inputEncoding = RefPtr<System::Text::Encoding>::Create<System::Text::UTF8Encoding>(false);
+  RefPtr<System::Text::Encoding> outputEncoding = RefPtr<System::Text::Encoding>::Create<System::Text::UTF8Encoding>(false);
 
   System::ConsoleColor __backgroundColor = static_cast<System::ConsoleColor>(__OS::CoreApi::Console::GetBackgroundColor());
   System::ConsoleColor __foregroundColor = static_cast<System::ConsoleColor>(__OS::CoreApi::Console::GetForegroundColor());
@@ -151,9 +151,9 @@ Property<Console::StandardInput&, ReadOnly> Console::In {
   }
 };
 
-Property<const SharedPointer<System::Text::Encoding>&> Console::InputEncoding {
-  []()->const SharedPointer<System::Text::Encoding>& {return inputEncoding;},
-  [](const SharedPointer<System::Text::Encoding>& value) {
+Property<const RefPtr<System::Text::Encoding>&> Console::InputEncoding {
+  []()->const RefPtr<System::Text::Encoding>& {return inputEncoding;},
+  [](const RefPtr<System::Text::Encoding>& value) {
     inputEncoding = value;
     __OS::CoreApi::Console::SetInputCodePage(inputEncoding->GetCodePage());
   }
@@ -170,9 +170,9 @@ Property<Console::StandardOutput&, ReadOnly> Console::Out {
   }
 };
 
-Property<const SharedPointer<System::Text::Encoding>&> Console::OutputEncoding {
-  []()->const SharedPointer<System::Text::Encoding>& {return outputEncoding;},
-  [](const SharedPointer<System::Text::Encoding>& value) {
+Property<const RefPtr<System::Text::Encoding>&> Console::OutputEncoding {
+  []()->const RefPtr<System::Text::Encoding>& {return outputEncoding;},
+  [](const RefPtr<System::Text::Encoding>& value) {
     outputEncoding = value;
     __OS::CoreApi::Console::SetOutputCodePage(outputEncoding->GetCodePage());
   }

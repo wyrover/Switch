@@ -255,9 +255,9 @@ namespace Pcf {
 
       static int32 BinarySearch(const Array& array, const T& item) {return BinarySearch(array, 0, array.Length, item, System::Collections::Generic::Comparer<T>::Default().Release());}
 
-      static int32 BinarySearch(const Array& array, const T& item, const SharedPointer<System::Collections::Generic::IComparer<T>>& comparer) {return BinarySearch(array, 0, array.Length, item, comparer);}
+      static int32 BinarySearch(const Array& array, const T& item, const RefPtr<System::Collections::Generic::IComparer<T>>& comparer) {return BinarySearch(array, 0, array.Length, item, comparer);}
 
-      static int32 BinarySearch(const Array& array, int32 index, int32 count, const T& item, const SharedPointer<System::Collections::Generic::IComparer<T>>& comparer) {
+      static int32 BinarySearch(const Array& array, int32 index, int32 count, const T& item, const RefPtr<System::Collections::Generic::IComparer<T>>& comparer) {
         if (rank  != 1)
           throw RankException(pcf_current_information);
         if (index < 0 || count < 0)

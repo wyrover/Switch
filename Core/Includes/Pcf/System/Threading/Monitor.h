@@ -4,7 +4,7 @@
 
 #include <map>
 
-#include "../../SharedPointer.h"
+#include "../../RefPtr.h"
 #include "../../Static.h"
 #include "../IntPtr.h"
 #include "../Object.h"

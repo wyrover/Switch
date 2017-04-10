@@ -31,11 +31,11 @@ public:
     info.AddValue("Flags", this->Flags);
   }
 
-  static SharedPointer<Role> Deserialize(const System::Runtime::Serialization::SerializationInfo& info) {    
+  static RefPtr<Role> Deserialize(const System::Runtime::Serialization::SerializationInfo& info) {    
     if (!info.GetObjectType().Equals("Role"))
       throw System::Runtime::Serialization::SerializationException(pcf_current_information);
 
-    SharedPointer<Role> role = new Role();
+    RefPtr<Role> role = new Role();
     role->RoleName = info.GetString("RoleName");
     role->Flags = info.GetByte("Flags");
     return role;
@@ -58,11 +58,11 @@ public:
     info.AddValue("PrsRole", this->Role, "Role");
   }
 
-  static SharedPointer<Person> Deserialize(const System::Runtime::Serialization::SerializationInfo& info) {
+  static RefPtr<Person> Deserialize(const System::Runtime::Serialization::SerializationInfo& info) {
     if (!info.GetObjectType().Equals("Person"))
       throw System::Runtime::Serialization::SerializationException(pcf_current_information);
 
-    SharedPointer<Person> person = new Person();
+    RefPtr<Person> person = new Person();
 
     person->FirstName = info.GetString("PrsFirstName");
     person->LastName = info.GetString("PrsLastName");
@@ -149,7 +149,7 @@ TEST(SerializationInfo, Deserialize) {
 
   person.GetObjectData(serializationInfo);
 
-  SharedPointer<Person> newPerson = Person::Deserialize(serializationInfo);
+  RefPtr<Person> newPerson = Person::Deserialize(serializationInfo);
 
   EXPECT_EQ(person.Age, newPerson->Age);
   EXPECT_EQ(person.StrAge, newPerson->StrAge);

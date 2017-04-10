@@ -3,7 +3,7 @@
 #pragma once
 
 #include "Boxing.h"
-#include "SharedPointer.h"
+#include "RefPtr.h"
 #include "Types.h"
 #include "System/Boolean.h"
 #include "System/Byte.h"
@@ -34,13 +34,13 @@ namespace Pcf {
     
     template <typename T>
     struct EnumOrOtherToAny<T, std::true_type> {
-      SharedPointer<object> operator()(T value) {return new System::Enum<T>(value);}
+      RefPtr<object> operator()(T value) {return new System::Enum<T>(value);}
     };
     
     template <typename T>
     struct EnumOrOtherToAny<T, std::false_type> {
-      //SharedPointer<object> operator()(T value) {return new System::IntPtr((intptr)&value);}
-      SharedPointer<object> operator()(T value) {return new Boxer<T>(value);}
+      //RefPtr<object> operator()(T value) {return new System::IntPtr((intptr)&value);}
+      RefPtr<object> operator()(T value) {return new Boxer<T>(value);}
     };
     
     template <typename T, typename Bool>
@@ -48,17 +48,17 @@ namespace Pcf {
     
     template <typename T>
     struct ObjectOrOtherToAny<T, std::true_type> {
-      SharedPointer<object> operator()(T value) {return new T(value);}
+      RefPtr<object> operator()(T value) {return new T(value);}
     };
     
     template <typename T>
     struct ObjectOrOtherToAny<T, std::false_type> {
-      SharedPointer<object> operator()(T value) {return EnumOrOtherToAny<T, typename std::conditional<std::is_enum<T>::value, std::true_type, std::false_type>::type>()(value);}
+      RefPtr<object> operator()(T value) {return EnumOrOtherToAny<T, typename std::conditional<std::is_enum<T>::value, std::true_type, std::false_type>::type>()(value);}
     };
     
     template <typename T>
     struct ObjectOrEnumOrOtherToAny {
-      SharedPointer<object> operator()(T value) {return ObjectOrOtherToAny<T, typename std::conditional<std::is_base_of<object, T>::value, std::true_type, std::false_type>::type>()(value);}
+      RefPtr<object> operator()(T value) {return ObjectOrOtherToAny<T, typename std::conditional<std::is_base_of<object, T>::value, std::true_type, std::false_type>::type>()(value);}
     };
     
   public:
@@ -177,8 +177,8 @@ namespace Pcf {
     /// @brief Used to static cast a type into another type. A To expression takes the following form:
     /// @par Examples
     /// @code
-    /// SharedPointer<string> str = new Pcf::string("A new string");
-    /// SharedPointer<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
+    /// RefPtr<string> str = new Pcf::string("A new string");
+    /// RefPtr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
     /// @endcode
     /// @exception InvalidOperationException The parameters is null.
     template<typename T>
@@ -191,8 +191,8 @@ namespace Pcf {
     /// @brief Used to static cast a type into another type. A To expression takes the following form:
     /// @par Examples
     /// @code
-    /// SharedPointer<string> str = new Pcf::string("A new string");
-    /// SharedPointer<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
+    /// RefPtr<string> str = new Pcf::string("A new string");
+    /// RefPtr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
     /// @endcode
     /// @exception InvalidOperationException The parameters is null.
     template<typename T>
@@ -306,7 +306,7 @@ namespace Pcf {
     template <typename T>
     T To() {return *dynamic_cast<T*>(this->value.ToPointer());}
     
-    SharedPointer<object> value;
+    RefPtr<object> value;
   };
   
   /// @cond
@@ -394,8 +394,8 @@ namespace Pcf {
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
   /// @par Examples
   /// @code
-  /// SharedPointer<string> str = new Pcf::string("A new string");
-  /// SharedPointer<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
+  /// RefPtr<string> str = new Pcf::string("A new string");
+  /// RefPtr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
   /// @endcode
   /// @exception ArgumentNullException The parameters is null.
   template<typename T>
@@ -406,8 +406,8 @@ namespace Pcf {
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
   /// @par Examples
   /// @code
-  /// SharedPointer<string> str = new Pcf::string("A new string");
-  /// SharedPointer<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
+  /// RefPtr<string> str = new Pcf::string("A new string");
+  /// RefPtr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
   /// @endcode
   /// @exception ArgumentNullException The parameters is null.
   template<typename T>

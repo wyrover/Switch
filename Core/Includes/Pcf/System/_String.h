@@ -389,7 +389,7 @@ namespace Pcf {
       /// @exception ArgumentNullException The parameters provider or format or arg is null.
       /// @remarks This function work only with base type specified in TypeCode
       /// @see TypeCode
-      static String Format(const String& format, const Array<Reference<Object>>& args);
+      static String Format(const String& format, const Array<Ref<Object>>& args);
       
       /// @brief Replaces the format item in a specified String with the text equivalent of the value of a corresponding Object instance in a specified array. A specified parameter supplies culture-specific formatting information.
       /// @param provider An IFormatProvider that supplies culture-specific formatting information
@@ -409,7 +409,7 @@ namespace Pcf {
       /// @exception ArgumentNullException The parameters provider or format or arg is null.
       /// @remarks This function work only with base type specified in TypeCode
       /// @see TypeCode
-      static String Format(const IFormatProvider& provider, const String& format, const Array<Reference<Object>>& args);
+      static String Format(const IFormatProvider& provider, const String& format, const Array<Ref<Object>>& args);
 
       /// @brief Retrieves an object that can iterate through the individual characters in this String.
       /// @return CharEnumerator An enumerator object.
@@ -961,7 +961,7 @@ namespace Pcf {
       String(const StringType& string);
       
       static String FormatToString(const IFormatProvider& provider, const String& format, const Array<__opaque_format_item__>& args);
-      static String FormatToString(const IFormatProvider& provider, const String& format, const Array<Reference<object>>& args);
+      static String FormatToString(const IFormatProvider& provider, const String& format, const Array<Ref<object>>& args);
       int32 GetLength() const;
 
       class Enumerator : public System::Object, public Collections::Generic::IEnumerator<char32> {

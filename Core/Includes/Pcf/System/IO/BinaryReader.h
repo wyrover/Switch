@@ -4,7 +4,7 @@
 
 #include "../../Property.h"
 #include "../../Types.h"
-#include "../../SharedPointer.h"
+#include "../../RefPtr.h"
 #include "../Array.h"
 #include "../Object.h"
 #include "Stream.h"

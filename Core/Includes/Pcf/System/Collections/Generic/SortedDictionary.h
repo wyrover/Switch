@@ -53,7 +53,7 @@ namespace Pcf {
           /// @param comparer The System::Collections::Generic::IComparer<T> implementation to use when comparing
           ///                 keys, || null to use the default System::Collections::Generic::Comparer<T> for
           ///                 the type of the key.
-          SortedDictionary(SharedPointer< IComparer<TKey>>& comparer) : operationNumber(0), comparer(comparer), map(MapComparer(*this->comparer)) {this->init(comparer);}
+          SortedDictionary(RefPtr< IComparer<TKey>>& comparer) : operationNumber(0), comparer(comparer), map(MapComparer(*this->comparer)) {this->init(comparer);}
 
           /// @brief Initializes a new instance of the System::Collections::Generic::SortedDictionary<TKey,TValue>
           /// class that contains elements copied from the specified System::Collections::Generic::IDictionary<TKey,TValue>
@@ -90,7 +90,7 @@ namespace Pcf {
           ///                 the type of the key.
           /// @exception System::ArgumentNullException dictionary is null.
           /// @exception System::ArgumentException dictionary contains one || more duplicate keys.
-          SortedDictionary(const IDictionary<TKey, TValue>& dictionary, SharedPointer< IComparer<TKey>>& comparer) : operationNumber(0), comparer(comparer), map(MapComparer(*this->comparer)) {
+          SortedDictionary(const IDictionary<TKey, TValue>& dictionary, RefPtr< IComparer<TKey>>& comparer) : operationNumber(0), comparer(comparer), map(MapComparer(*this->comparer)) {
             for (auto p : dictionary)
               Add(p.Key(),p.Value());
           }
@@ -307,10 +307,10 @@ namespace Pcf {
           /// @cond
           class MapComparer : public std::binary_function<TKey, TKey, bool> {
             private:
-              Reference< IComparer<TKey>> comparer;
+              Ref< IComparer<TKey>> comparer;
 
             public:
-              MapComparer(Reference< IComparer<TKey>> c) : comparer(c) { }
+              MapComparer(Ref< IComparer<TKey>> c) : comparer(c) { }
               MapComparer(const MapComparer& mc) { comparer = mc.comparer; }
               ~MapComparer() { }
 
@@ -405,7 +405,7 @@ namespace Pcf {
 
         protected:
           int64 operationNumber;
-          SharedPointer<IComparer<TKey>> comparer;
+          RefPtr<IComparer<TKey>> comparer;
           std::map<TKey,TValue, MapComparer, TAllocator> map;
           object syncRoot;
           /// @endcond

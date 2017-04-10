@@ -3,7 +3,7 @@
 #pragma once
 
 #include "../../../Interface.h"
-#include "../../../SharedPointer.h"
+#include "../../../RefPtr.h"
 #include "../../../UniquePointer.h"
 #include "IEnumerator.h"
 

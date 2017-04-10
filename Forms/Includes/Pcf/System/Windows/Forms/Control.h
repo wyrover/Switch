@@ -52,27 +52,27 @@ namespace Pcf {
           ///   }
           /// }
           /// @endcode
-          class ControlCollection : public System::Collections::Generic::List<Reference<Control>> {
+          class ControlCollection : public System::Collections::Generic::List<Ref<Control>> {
           public:
-            ControlCollection(Reference<Control> parent) : parent(parent) {}
+            ControlCollection(Ref<Control> parent) : parent(parent) {}
 
-            virtual void Add(const Reference<Control>& value) override {
-              Reference<Control> v = value;
+            virtual void Add(const Ref<Control>& value) override {
+              Ref<Control> v = value;
               if (v().data->parent != null)
                 v().data->parent().data->controls.Remove(v);
               else if (this->parent().Visible)
                 v().CreateControl();
               v().data->parent = this->parent;
-              this->System::Collections::Generic::List<Reference<Control>>::Add(v);
+              this->System::Collections::Generic::List<Ref<Control>>::Add(v);
             }
 
-            bool Remove(const Reference<Control>& value) override {
-              Reference<Control> v = value;
+            bool Remove(const Ref<Control>& value) override {
+              Ref<Control> v = value;
               v().data->parent = null;
-              return this->System::Collections::Generic::List<Reference<Control>>::Remove(v);
+              return this->System::Collections::Generic::List<Ref<Control>>::Remove(v);
             }
 
-            Reference<Control> parent;
+            Ref<Control> parent;
           };
 
           /// @brief Initializes a new instance of the Control class with default settings.
@@ -222,7 +222,7 @@ namespace Pcf {
           /// @brief Gets or sets the parent container of the control.
           /// @return Control A Control that represents the parent or container control of the control.
           /// @remarks Setting the Parent property value to null removes the control from the Control.ControlCollection of its current parent control.
-          Property<Reference<Control>> Parent {
+          Property<Ref<Control>> Parent {
             pcf_get { return this->data->parent; },
             pcf_set {
               if (this->data->parent != value) {
@@ -278,15 +278,15 @@ namespace Pcf {
               this->data->size = this->DefaultSize;
             if (this->data->visible && !this->IsHandleCreated)
               CreateHandle();
-            for (Reference<Control> control : this->data->controls)
+            for (Ref<Control> control : this->data->controls)
               control().CreateControl();
             OnCreateControl();
           }
 
-          static const Reference<Control> FromHandle(intptr handle) {
+          static const Ref<Control> FromHandle(intptr handle) {
             if (handles.ContainsKey(handle))
               return handles[handle];
-            return Reference<Control>::Null();
+            return Ref<Control>::Null();
           }
 
           void Invalidate() { Invalidate(false); }
@@ -411,7 +411,7 @@ namespace Pcf {
 
           /// @cond
           struct ControlData {
-            ControlData(Reference<Control> control) : controls(control) {}
+            ControlData(Ref<Control> control) : controls(control) {}
             Nullable<System::Drawing::Color> backColor;
             System::Drawing::SolidBrush backBrush {System::Drawing::SystemColors::Control};
             ControlCollection controls;
@@ -421,7 +421,7 @@ namespace Pcf {
             intptr handle = 0;
             System::Drawing::Point location;
             string name;
-            Reference<Control> parent;
+            Ref<Control> parent;
             System::Drawing::Size size;
             string text;
             bool visible = true;
@@ -430,9 +430,9 @@ namespace Pcf {
             ControlStyles style = (ControlStyles)0;
           };
           friend class __OS::FormsApi;
-          //SharedPointer<ControlData> data = SharedPointer<ControlData>::Create(*this);
-          SharedPointer<ControlData> data { new ControlData(*this) };
-          static System::Collections::Generic::Dictionary<intptr, Reference<Control>> handles;
+          //RefPtr<ControlData> data = RefPtr<ControlData>::Create(*this);
+          RefPtr<ControlData> data { new ControlData(*this) };
+          static System::Collections::Generic::Dictionary<intptr, Ref<Control>> handles;
           /// @endcond
 
         private:
@@ -491,7 +491,7 @@ namespace Pcf {
             MouseEntered = 0x10,
           };
 
-          static Reference<Control> controlEntered;
+          static Ref<Control> controlEntered;
         };
       }
     }

@@ -64,7 +64,7 @@ namespace {
       static auto signalKeys =__OS::CoreApi::Console::GetSignalKeys();
       ::signal(signal, ConsoleInterceptSignals::SignalHandler);
       System::ConsoleCancelEventArgs consoleCancel = System::ConsoleCancelEventArgs(false, signalKeys[signal]);
-      System::Console::CancelKeyPress(Reference<object>::Null(), consoleCancel);
+      System::Console::CancelKeyPress(Ref<object>::Null(), consoleCancel);
       if (consoleCancel.Cancel == false)
         Environment::Exit(-1);
     }

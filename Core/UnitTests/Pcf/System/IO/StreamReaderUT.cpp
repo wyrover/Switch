@@ -27,7 +27,7 @@ namespace {
 
 	TEST(StreamReader, ReadLineUTF8) {
 		Array<byte> utf8buffer = { 0x61, 0xC3, 0xA6, 0xC5, 0xA3, '\n', 0xCE, 0xA3, 0xDC, 0xA3, 0xE2, 0x96, 0x88, '\n', 0xE5, 0xA5, 0xBB, 0xF0, 0x9F, 0x90, 0xA8 };
-		SharedPointer<Text::Encoding> encoding = Text::Encoding::UTF8();
+		RefPtr<Text::Encoding> encoding = Text::Encoding::UTF8();
 		IO::MemoryStream s(utf8buffer, false);
 		IO::StreamReader reader(s, *encoding);
 
@@ -47,7 +47,7 @@ namespace {
 
 	TEST(StreamReader, ReadToEndUTF8) {
 		Array<byte> utf8buffer = { 0x61, 0xC3, 0xA6, 0xC5, 0xA3, '\n', 0xCE, 0xA3, 0xDC, 0xA3, 0xE2, 0x96, 0x88, '\n', 0xE5, 0xA5, 0xBB, 0xF0, 0x9F, 0x90, 0xA8 };
-		SharedPointer<Text::Encoding> encoding = Text::Encoding::UTF8();
+		RefPtr<Text::Encoding> encoding = Text::Encoding::UTF8();
 		IO::MemoryStream s(utf8buffer, false);
 		IO::StreamReader reader(s, *encoding);
 
@@ -63,7 +63,7 @@ namespace {
 
 	TEST(StreamReader, ReadLine437) {
 		Array<byte> buffer = { 0x61, 0x91, '\n', 0xE4, 0xDB};
-		SharedPointer<Text::Encoding> encoding = Text::Encoding::CreateEncoding(437);
+		RefPtr<Text::Encoding> encoding = Text::Encoding::CreateEncoding(437);
 
 		IO::MemoryStream s(buffer, false);
 		IO::StreamReader reader(s, *encoding);
@@ -85,7 +85,7 @@ namespace {
 
 	TEST(StreamReader, ReadToEnd437) {
 		Array<byte> buffer = { 0x61, 0x91, '\n', 0xE4, 0xDB };
-		SharedPointer<Text::Encoding> encoding = Text::Encoding::CreateEncoding(437);
+		RefPtr<Text::Encoding> encoding = Text::Encoding::CreateEncoding(437);
 
 		IO::MemoryStream s(buffer, false);
 		IO::StreamReader reader(s, *encoding);

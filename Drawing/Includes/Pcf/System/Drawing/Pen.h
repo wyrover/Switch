@@ -49,9 +49,9 @@ namespace Pcf {
 
         Pen(const Brush& brush, float width) : brush(as<System::Drawing::Brush>(brush.Clone())), width(width) { this->Create(); }
 
-        Pen(System::Drawing::Color color) : brush(as<System::Drawing::Brush>(SharedPointer<SolidBrush>::Create(color))) { this->Create(); }
+        Pen(System::Drawing::Color color) : brush(as<System::Drawing::Brush>(RefPtr<SolidBrush>::Create(color))) { this->Create(); }
 
-        Pen(System::Drawing::Color color, float width) : brush(as<System::Drawing::Brush>(SharedPointer<SolidBrush>::Create(color))), width(width) { this->Create(); }
+        Pen(System::Drawing::Color color, float width) : brush(as<System::Drawing::Brush>(RefPtr<SolidBrush>::Create(color))), width(width) { this->Create(); }
 
         Property<const System::Drawing::Brush&> Brush{
           pcf_get->const System::Drawing::Brush& { return this->brush(); },
@@ -83,7 +83,7 @@ namespace Pcf {
         intptr GetNativePen() const { return this->pen; }
         void Create();
         void Destroy();
-        SharedPointer<System::Drawing::Brush> brush  = as<System::Drawing::Brush>(SharedPointer<SolidBrush>::Create(System::Drawing::Color::Black()));
+        RefPtr<System::Drawing::Brush> brush  = as<System::Drawing::Brush>(RefPtr<SolidBrush>::Create(System::Drawing::Color::Black()));
         System::Drawing::Drawing2D::DashStyle dashStyle = System::Drawing::Drawing2D::DashStyle::Solid;
         float width = 1;
         intptr pen = IntPtr::Zero;

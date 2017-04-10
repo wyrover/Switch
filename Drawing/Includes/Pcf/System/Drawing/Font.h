@@ -96,7 +96,7 @@ namespace Pcf {
           string name;
           float size = .0f;
         };
-        SharedPointer<FontData> data = SharedPointer<FontData>::Create();
+        RefPtr<FontData> data = RefPtr<FontData>::Create();
       };
     }
   }

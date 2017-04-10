@@ -391,7 +391,7 @@ namespace Pcf {
           static bool SetPriority(NativeHandle handle, ThreadPriority priority);
         };
         
-        Thread(const SharedPointer<ThreadItem>& data) : data(data) {}
+        Thread(const RefPtr<ThreadItem>& data) : data(data) {}
         
         bool Cancel();
         void Close();
@@ -432,7 +432,7 @@ namespace Pcf {
             thread.data->thread = std::thread(std::function<void(const object*)>(std::bind(&ThreadItem::ParameterizedRun, thread.data.ToPointer(), std::placeholders::_1)), obj == null ? this : obj);
         }
         
-        SharedPointer<ThreadItem> data;
+        RefPtr<ThreadItem> data;
         
         friend class ThreadPool;
         friend struct ThreadItem;

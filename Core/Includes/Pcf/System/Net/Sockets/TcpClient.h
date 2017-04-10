@@ -246,7 +246,7 @@ namespace Pcf {
             Socket clientSocket {AddressFamily::InterNetwork, SocketType::Stream, ProtocolType::Tcp};
             bool active = false;
           };
-          SharedPointer<TcpClientData> data = SharedPointer<TcpClientData>::Create();
+          RefPtr<TcpClientData> data = RefPtr<TcpClientData>::Create();
         };
       }
     }

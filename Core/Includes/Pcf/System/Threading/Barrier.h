@@ -4,7 +4,7 @@
 
 #include <mutex>
 
-#include "../../SharedPointer.h"
+#include "../../RefPtr.h"
 #include "../ArgumentOutOfRangeException.h"
 #include "../String.h"
 #include "BarrierPostPhaseException.h"
@@ -196,7 +196,7 @@ namespace Pcf {
           int32 participantsPostPhaseExceptionRemainin = 0;
         };
         
-        SharedPointer<BarrierData> data;
+        RefPtr<BarrierData> data;
       };
     }
   }

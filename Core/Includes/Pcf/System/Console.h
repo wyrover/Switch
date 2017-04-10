@@ -4,7 +4,7 @@
 
 #include "../Property.h"
 #include "../Types.h"
-#include "../SharedPointer.h"
+#include "../RefPtr.h"
 #include "../Static.h"
 #include "../UniquePointer.h"
 #include "Array.h"
@@ -97,7 +97,7 @@ namespace Pcf {
 
       /// @brief Gets or sets the encoding the console uses to read input.
       /// @param The encoding used to read console input.
-      static Property<const SharedPointer<System::Text::Encoding>&> InputEncoding;
+      static Property<const RefPtr<System::Text::Encoding>&> InputEncoding;
 
       /// @brief Gets a value indicating whether a key press is available in the input stream.
       /// @param true if a key press is available; otherwise, false
@@ -111,7 +111,7 @@ namespace Pcf {
 
       /// @brief Gets the encoding the console uses to write output.
       /// @param The encoding used to write console output.
-      static Property<const SharedPointer<System::Text::Encoding>&> OutputEncoding;
+      static Property<const RefPtr<System::Text::Encoding>&> OutputEncoding;
 
       /// @brief Gets or sets a value indicating whether the combination of the Control modifier key and C console key (Ctrl+C) is treated as ordinary input or as an interruption that is handled by the operating system.
       /// @param bool true if Ctrl+C is treated as ordinary input; otherwise, false.
@@ -247,7 +247,7 @@ namespace Pcf {
 
       static void Write(unsigned char* value);
       
-      static void Write(const String& format, const Array< Reference<Object>>& array) {
+      static void Write(const String& format, const Array< Ref<Object>>& array) {
         Write(String::Format(format,array));
       }
 
@@ -383,7 +383,7 @@ namespace Pcf {
       /// @exception ArgumentNullException The parameters value is null.
       static void WriteLine(const wchar value[]);
       
-      static void WriteLine(const String& format, const Array< Reference<Object>>& array) {
+      static void WriteLine(const String& format, const Array< Ref<Object>>& array) {
         WriteLine(String::Format(format,array));
       }
 

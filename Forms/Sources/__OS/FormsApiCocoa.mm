@@ -22,7 +22,7 @@ using namespace __OS;
 namespace {
   class CocoaApi {
   public:
-    using ControlDictionary = System::Collections::Generic::Dictionary<intptr, Reference<Control>>;
+    using ControlDictionary = System::Collections::Generic::Dictionary<intptr, Ref<Control>>;
     CocoaApi() {
       this->CreateAppication();
       this->CreateMenuBar();

@@ -5,7 +5,7 @@
 #include <condition_variable>
 #include <mutex>
 
-#include "../../SharedPointer.h"
+#include "../../RefPtr.h"
 #include "../String.h"
 #include "../ObjectClosedException.h"
 #include "AbandonedMutexException.h"
@@ -31,7 +31,7 @@ namespace Pcf {
         /// @param initialState true to set the initial state to signaled if the named event is created as a result of this call; false to set it to nonsignaled.
         /// @param mode One of the System::Threading::EventResetMode values that determines whether the event resets automatically or manually.
         /// @exception IO::IOException A Win32 error occurred.
-        EventWaitHandle(bool initialState, EventResetMode mode) : mode(SharedPointer<EventResetMode>::Create(mode)) {
+        EventWaitHandle(bool initialState, EventResetMode mode) : mode(RefPtr<EventResetMode>::Create(mode)) {
           if (initialState)
             this->Set();
         }
@@ -134,11 +134,11 @@ namespace Pcf {
           return true;
         }
         
-        SharedPointer<std::mutex> guard = SharedPointer<std::mutex>::Create();
-        SharedPointer<std::condition_variable> signal = SharedPointer<std::condition_variable>::Create();
-        SharedPointer<bool> event = SharedPointer<bool>::Create(false);
-        SharedPointer<EventResetMode> mode = SharedPointer<EventResetMode>::Create(EventResetMode::ManualReset);
-        SharedPointer<string> name = SharedPointer<string>::Create();
+        RefPtr<std::mutex> guard = RefPtr<std::mutex>::Create();
+        RefPtr<std::condition_variable> signal = RefPtr<std::condition_variable>::Create();
+        RefPtr<bool> event = RefPtr<bool>::Create(false);
+        RefPtr<EventResetMode> mode = RefPtr<EventResetMode>::Create(EventResetMode::ManualReset);
+        RefPtr<string> name = RefPtr<string>::Create();
       };
     }
   }

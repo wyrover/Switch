@@ -68,11 +68,11 @@ namespace Pcf {
         void WriteToOutputDebug(const string& message);
         struct DefaultTraceListenerData {
           String logFileName;
-          SharedPointer<System::IO::StreamWriter> logWriter;
+          RefPtr<System::IO::StreamWriter> logWriter;
           string messageLine;
         };
         
-        SharedPointer<DefaultTraceListenerData> data {new DefaultTraceListenerData()};
+        RefPtr<DefaultTraceListenerData> data {new DefaultTraceListenerData()};
       };
     }
   }

@@ -5,7 +5,7 @@
 #include "../../../As.h"
 #include "../../../Property.h"
 #include "../../../Is.h"
-#include "../../../SharedPointer.h"
+#include "../../../RefPtr.h"
 #include "../../../UniquePointer.h"
 #include "../../ArgumentNullException.h"
 #include "../../Object.h"
@@ -45,7 +45,7 @@ namespace Pcf {
         template<typename T>
         class ReversedComparer : public Object, public System::Collections::Generic::IComparer<T> {
         public:
-          static SharedPointer<IComparer<T>> Create(const SharedPointer<IComparer<T>>& comparer) {
+          static RefPtr<IComparer<T>> Create(const RefPtr<IComparer<T>>& comparer) {
             if (is< ReversedComparer<T>> (comparer))
               return as< ReversedComparer<T>>(comparer)->comparer;
             return new ReversedComparer(comparer);
@@ -54,8 +54,8 @@ namespace Pcf {
           virtual int32 Compare(const T& x, const T& y) const {return -(this->comparer->Compare(x,y));}
 
         private:
-          ReversedComparer(const SharedPointer<IComparer<T>>& comparer) {this->comparer = comparer;}
-          SharedPointer< IComparer<T>> comparer;
+          ReversedComparer(const RefPtr<IComparer<T>>& comparer) {this->comparer = comparer;}
+          RefPtr< IComparer<T>> comparer;
         };
         
         /// @cond

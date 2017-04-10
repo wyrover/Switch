@@ -4,7 +4,7 @@
 
 #include "../../../Types.h"
 #include "../../../UniquePointer.h"
-#include "../../../SharedPointer.h"
+#include "../../../RefPtr.h"
 #include "../../Boolean.h"
 #include "../../Byte.h"
 #include "../../Char.h"
@@ -161,7 +161,7 @@ namespace Pcf {
           void AddValue(const String& name, char32 value);
           template<typename T>
           void AddValue(const String& name, const System::Collections::Generic::IEnumerable<T>& value) {
-            AddValue(name, SharedPointer<object>(new Array<T>(value)), "System::Collections::Generic::IEnumerable");
+            AddValue(name, RefPtr<object>(new Array<T>(value)), "System::Collections::Generic::IEnumerable");
           }
 
           System::Collections::Generic::Enumerator<System::Collections::Generic::KeyValuePair<System::String, SerializationEntry>> GetEnumerator() const;
@@ -184,7 +184,7 @@ namespace Pcf {
           const Object& GetObject(const String& name) const;
 
           template<typename T>
-          SharedPointer<T> GetValue(const String& name) const {
+          RefPtr<T> GetValue(const String& name) const {
             const SerializationEntry& entry = mItems[name];
             if (is<System::Runtime::Serialization::SerializationInfo>(entry.Value().ToObject()))
               return T::Deserialize(as<System::Runtime::Serialization::SerializationInfo>(entry.Value()).ToObject());
@@ -199,51 +199,51 @@ namespace Pcf {
           int32 GetMemberCount() { return mItems.Count; }
 
         private:
-          void AddValue(const String& name, SharedPointer<Object> value, const String& typeName);
+          void AddValue(const String& name, RefPtr<Object> value, const String& typeName);
           String objectType;
           System::Collections::Generic::SortedDictionary<String, SerializationEntry> mItems;
         };
 
-        template<> SharedPointer<System::Boolean>
+        template<> RefPtr<System::Boolean>
         SerializationInfo::GetValue<System::Boolean>(const String& name) const;
 
-        template<> SharedPointer<String>
+        template<> RefPtr<String>
         SerializationInfo::GetValue<String>(const String& name) const;
 
-        template<> SharedPointer<System::Byte>
+        template<> RefPtr<System::Byte>
         SerializationInfo::GetValue<System::Byte>(const String& name) const;
 
-        template<> SharedPointer<System::SByte>
+        template<> RefPtr<System::SByte>
         SerializationInfo::GetValue<System::SByte>(const String& name) const;
 
-        template<> SharedPointer<System::Char>
+        template<> RefPtr<System::Char>
         SerializationInfo::GetValue<System::Char>(const String& name) const;
 
-        template<> SharedPointer<System::DateTime>
+        template<> RefPtr<System::DateTime>
         SerializationInfo::GetValue<System::DateTime>(const String& name) const;
 
-        template<> SharedPointer<System::Single>
+        template<> RefPtr<System::Single>
         SerializationInfo::GetValue<System::Single>(const String& name) const;
 
-        template<> SharedPointer<System::Double>
+        template<> RefPtr<System::Double>
         SerializationInfo::GetValue<System::Double>(const String& name) const;
 
-        template<> SharedPointer<System::Int16>
+        template<> RefPtr<System::Int16>
         SerializationInfo::GetValue<System::Int16>(const String& name) const;
 
-        template<> SharedPointer<System::Int32>
+        template<> RefPtr<System::Int32>
         SerializationInfo::GetValue<System::Int32>(const String& name) const;
 
-        template<> SharedPointer<System::Int64>
+        template<> RefPtr<System::Int64>
         SerializationInfo::GetValue<System::Int64>(const String& name) const;
 
-        template<> SharedPointer<System::UInt16>
+        template<> RefPtr<System::UInt16>
         SerializationInfo::GetValue<System::UInt16>(const String& name) const;
 
-        template<> SharedPointer<System::UInt32>
+        template<> RefPtr<System::UInt32>
         SerializationInfo::GetValue<System::UInt32>(const String& name) const;
 
-        template<> SharedPointer<System::UInt64>
+        template<> RefPtr<System::UInt64>
         SerializationInfo::GetValue<System::UInt64>(const String& name) const;
       }
     }

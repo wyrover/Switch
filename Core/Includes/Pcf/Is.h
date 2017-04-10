@@ -2,8 +2,8 @@
 /// @brief Contains Pcf::is <> operator.
 #pragma once
 
-#include "Reference.h"
-#include "SharedPointer.h"
+#include "Ref.h"
+#include "RefPtr.h"
 #include "UniquePointer.h"
 #include "Types.h"
 
@@ -17,7 +17,7 @@ namespace Pcf {
   /// @see Pcf::System::Type
   /// @ingroup Pcf
   template<typename TT, typename T>
-  bool is(const Reference<T>& value) {
+  bool is(const Ref<T>& value) {
     return value.template Is<TT>();
   }
   
@@ -30,7 +30,7 @@ namespace Pcf {
   /// @see Pcf::System::Type
   /// @ingroup Pcf
   template<typename TT, typename T>
-  bool is(Reference<T>& value) {
+  bool is(Ref<T>& value) {
     return value.template Is<TT>();
   }
   
@@ -43,7 +43,7 @@ namespace Pcf {
   /// @see Pcf::System::Type
   /// @ingroup Pcf
   template<typename TT, typename T>
-  bool is(const SharedPointer<T>& value) {
+  bool is(const RefPtr<T>& value) {
     return value.template Is<TT>();
   }
   
@@ -56,7 +56,7 @@ namespace Pcf {
   /// @see Pcf::System::Type
   /// @ingroup Pcf
   template<typename TT, typename T>
-  bool is(SharedPointer<T>& value) {
+  bool is(RefPtr<T>& value) {
     return value.template Is<TT>();
   }
   

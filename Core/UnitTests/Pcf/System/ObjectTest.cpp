@@ -22,7 +22,7 @@ namespace PcfUnitTests {
     }
     
     void EqualsWithNullObject() {
-      TUnit::Assert::IsFalse(Object().Equals(Reference<Object>::Null()), pcf_current_information);
+      TUnit::Assert::IsFalse(Object().Equals(Ref<Object>::Null()), pcf_current_information);
     }
     
     void EqualsOnDifferentObjects() {
@@ -117,7 +117,7 @@ namespace PcfUnitTests {
     
     void ReferenceEqualsOnNullAndObject() {
       Object object1;
-      TUnit::Assert::IsFalse(Object::ReferenceEquals(Reference<object>::Null(), object1), pcf_current_information);
+      TUnit::Assert::IsFalse(Object::ReferenceEquals(Ref<object>::Null(), object1), pcf_current_information);
     }
     
     void ReferenceEqualsOnTwoDifferentObjects() {

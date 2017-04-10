@@ -94,7 +94,7 @@ namespace Pcf {
         }
         
       private:
-        SharedPointer<System::IO::TextWriter> textWriter;
+        RefPtr<System::IO::TextWriter> textWriter;
       };
     }
   }

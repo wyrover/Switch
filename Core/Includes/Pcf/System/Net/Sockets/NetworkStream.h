@@ -3,7 +3,7 @@
 #pragma once
 
 #include "../../../Types.h"
-#include "../../../SharedPointer.h"
+#include "../../../RefPtr.h"
 #include "../../IO/FileAccess.h"
 #include "../../IO/Stream.h"
 #include "../../NotImplementedException.h"
@@ -147,7 +147,7 @@ namespace Pcf {
             bool writeable = false;
 		        bool ownsSocket = false;
           };
-          SharedPointer<NetworkStreamData> data = SharedPointer<NetworkStreamData>::Create();
+          RefPtr<NetworkStreamData> data = RefPtr<NetworkStreamData>::Create();
         };
       }
     }

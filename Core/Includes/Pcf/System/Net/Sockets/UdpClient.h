@@ -59,14 +59,14 @@ namespace Pcf {
           int32 GetAvailable() const;
 
           /// @brief Gets the underlying network Socket
-          SharedPointer<Socket> GetClient();
+          RefPtr<Socket> GetClient();
 
           /// @brief Gets the underlying network Socket
-          const SharedPointer<Socket> GetClient() const;
+          const RefPtr<Socket> GetClient() const;
 
           /// @brief Sets the underlying network Socket
           /// @param client: the socket to use
-          void SetClient(const SharedPointer<Socket>& client);
+          void SetClient(const RefPtr<Socket>& client);
 
           /// @brief Gets a value that indicates whether a Socket is connected to a remote host as of the last Send or Receive operation.
           /// @return bool true if the Socket was connected to a remote resource as of the most recent operation; otherwise, false.
@@ -176,7 +176,7 @@ namespace Pcf {
           int32 Send(const Array<byte>& data, const String& hostname, int32 port);
 
         private:
-          SharedPointer<Socket> client;
+          RefPtr<Socket> client;
         };
       }
     }

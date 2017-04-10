@@ -184,7 +184,7 @@ namespace Pcf {
           }}};
         };
 
-        SharedPointer<TimerData> data = new TimerData();
+        RefPtr<TimerData> data = new TimerData();
       };
     }
   }

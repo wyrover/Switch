@@ -173,7 +173,7 @@ namespace Pcf {
     private :
       static bool IsTuple(const ITuple&) { return true; }
       template<typename T>
-      static bool IsTuple(const SharedPointer<T>&) { return false; }
+      static bool IsTuple(const RefPtr<T>&) { return false; }
       static bool IsTuple(const NullType&) { return false; }
       static bool IsTuple(const bool&) { return false; }
       static bool IsTuple(const char&) { return false; }
@@ -189,7 +189,7 @@ namespace Pcf {
       static bool IsTuple(const float&)  { return false; }
 
       template<typename T>
-      static bool IsNullType(const SharedPointer<T>&) { return false; }
+      static bool IsNullType(const RefPtr<T>&) { return false; }
       static bool IsNullType(const Object&) {  return false; }
       static bool IsNullType(const NullType&) { return true; }
       static bool IsNullType(const bool&) { return false; }

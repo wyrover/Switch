@@ -278,7 +278,7 @@ namespace Pcf {
         
       protected:
         template<typename TResult, typename TSource>
-        static void As(SharedPointer<TResult>& result, SharedPointer<TSource> source) {
+        static void As(RefPtr<TResult>& result, RefPtr<TSource> source) {
           result = source.template As<TResult>();
         }
         

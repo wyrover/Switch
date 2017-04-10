@@ -4,7 +4,7 @@
 
 #include <mutex>
 
-#include "../../SharedPointer.h"
+#include "../../RefPtr.h"
 #include "../ObjectClosedException.h"
 #include "../String.h"
 #include "WaitHandle.h"
@@ -127,8 +127,8 @@ namespace Pcf {
           return this->mutex->try_lock_for(std::chrono::milliseconds(millisecondsTimeOut));
         }
 
-        SharedPointer<std::recursive_timed_mutex> mutex = SharedPointer<std::recursive_timed_mutex>::Create();
-        SharedPointer<string> name = SharedPointer<string>::Create();
+        RefPtr<std::recursive_timed_mutex> mutex = RefPtr<std::recursive_timed_mutex>::Create();
+        RefPtr<string> name = RefPtr<string>::Create();
       };
     }
   }

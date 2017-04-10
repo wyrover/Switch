@@ -101,7 +101,7 @@ namespace {
     EXPECT_FALSE(int64s.IsFixedSize);
     EXPECT_FALSE(int64s.IsReadOnly);
     
-    List< SharedPointer<ListHelper>> myList;
+    List< RefPtr<ListHelper>> myList;
     myList.Add(new ListHelper(1, "YFI"));
     myList.Add(new ListHelper(2, "VLE"));
     
@@ -625,7 +625,7 @@ namespace {
   }
   
   TEST(List, FindLast) {
-    SharedPointer<string>::Empty();
+    RefPtr<string>::Empty();
     // Create List<T> to used with Contains function
     List<string> dinosaurs;
     
@@ -1008,7 +1008,7 @@ namespace {
   }
   
   TEST(List, polymorphicList) {
-    List<SharedPointer<ValueType>> polymorphicList;
+    List<RefPtr<ValueType>> polymorphicList;
     polymorphicList.Add(new Int32(1024));
     polymorphicList.Add(new string("Polymorphic"));
     polymorphicList.Add(new Boolean(true));
