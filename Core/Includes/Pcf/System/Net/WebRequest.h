@@ -133,7 +133,7 @@ namespace Pcf {
         virtual String GetMethod() const { return this->method; }
         virtual void SetMethod(const String& method) { this->method = method;}
         virtual System::Uri GetRequestUri() const { return uri;}
-        void* GetRequestHandle() {return this->requestHandle;}
+        intptr GetRequestHandle() {return this->requestHandle;}
         
         bool IsResponseStreamNeeded() const;
         bool IsRequestStreamNeeded() const;
@@ -149,7 +149,7 @@ namespace Pcf {
         WebRequest& operator =(const WebRequest& webRequest) = delete;
 
         static int32 pendingRequest;
-        void* requestHandle = null;
+        intptr requestHandle = IntPtr::Zero;
         string method;
         NetworkCredential credential;
         int64 contentLength = 0;

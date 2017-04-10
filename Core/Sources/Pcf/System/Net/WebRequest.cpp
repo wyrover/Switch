@@ -31,18 +31,18 @@ void WebRequest::InitWebRequest() {
   if (Curl::GetOSSupportsWebOperations() == false || (pendingRequest == 0 && Curl::GlobalInit() != 0))
     throw NotSupportedException(pcf_current_information);
   
-  Curl::Init(&this->requestHandle);
+  Curl::Init(this->requestHandle);
   
-  if (this->requestHandle == null)
+  if (this->requestHandle == IntPtr::Zero)
     throw NotSupportedException(pcf_current_information);
   
   pendingRequest++;
-  Curl::SetUrl(this->requestHandle, uri.AbsoluteUri().Data());
+  Curl::SetUrl(this->requestHandle, uri.AbsoluteUri);
   Curl::SetVerbose(this->requestHandle, 0L);
 }
 
 WebRequest::~WebRequest() {
-  if (this->requestHandle != null) {
+  if (this->requestHandle != IntPtr::Zero) {
     Curl::Cleanup(this->requestHandle);
     pendingRequest--;
     
@@ -80,11 +80,11 @@ void WebRequest::SetCredential(const NetworkCredential& credential) {
   if (Curl::GetOSSupportsWebOperations() == false)
     throw NotSupportedException(pcf_current_information);
   
-  if (this->requestHandle == null)
+  if (this->requestHandle == IntPtr::Zero)
     throw NotSupportedException(pcf_current_information);
   
-  Curl::SetUserName(this->requestHandle, credential.UserName().Data());
-  Curl::SetPassword(this->requestHandle, credential.Password().Data());
+  Curl::SetUserName(this->requestHandle, credential.UserName);
+  Curl::SetPassword(this->requestHandle, credential.Password);
   this->credential = credential;
 }
 
@@ -96,12 +96,10 @@ void WebRequest::ProccessRequestThread() {
     this->internalError = Curl::Perform(this->GetRequestHandle());
     if (this->internalError == 0) {
       double contentLength;
-      if (Curl::GetContentDownloadLength(this->GetRequestHandle(), &contentLength) == 0)
+      if (Curl::GetContentDownloadLength(this->GetRequestHandle(), contentLength) == 0)
         this->GetInternalResponse().contentLength = Convert::ToInt64(Double(contentLength));
       
-      char* contentType;
-      if (Curl::GetContentType(this->GetRequestHandle(), &contentType) == 0 && contentType!=null)
-        this->GetInternalResponse().contentType = string(contentType);
+      this->internalError = Curl::GetContentType(this->GetRequestHandle(), this->GetInternalResponse().contentType);
     }
     this->Finished(this->internalError);
   } catch (const Exception&) {

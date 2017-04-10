@@ -43,7 +43,7 @@ void StackTrace::FillFrames(void* stackTrace, int32 skipFrames, bool needFileInf
 
   int32 length = skipFrames < StackFrame::GetFrameCount(stackTrace) ? StackFrame::GetFrameCount(stackTrace)-skipFrames : 0;
   for (int32 index = 0; index  < length; index++) {
-    if (!StackFrame(stackTrace, index + skipFrames, needFileInfo).GetMethod().StartsWith("Pcf::FunctionPointer<") && !StackFrame(stackTrace, index + skipFrames, needFileInfo).GetMethod().StartsWith("System::Delegate<"))
+    if (!StackFrame(stackTrace, index + skipFrames, needFileInfo).GetMethod().StartsWith("System::Delegate<"))
       this->frames.Add(new StackFrame(stackTrace, index + skipFrames, needFileInfo));
   }
 }

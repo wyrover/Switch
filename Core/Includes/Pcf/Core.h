@@ -372,7 +372,6 @@
 #include "Boxing.h"
 #include "CurrentInformation.h"
 #include "ExceptionPointer.h"
-#include "FunctionPointer.h"
 #include "InitializerList.h"
 #include "Interface.h"
 #include "Is.h"

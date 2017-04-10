@@ -11,7 +11,6 @@
 #include "_String.h"
 #include "ArgumentNullException.h"
 #include "Type.h"
-#include "../FunctionPointer.h"
 
 /// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Pcf {

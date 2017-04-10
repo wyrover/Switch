@@ -2,7 +2,8 @@
 /// @brief Contains Pcf::Property class, #pcf_get and #pcf_set keywords.
 #pragma once
 
-#include "FunctionPointer.h"
+//#include <functional>
+#include "__opaque_function_pointer__.h"
 
 namespace Pcf {
   class ReadOnly {
@@ -30,8 +31,11 @@ namespace Pcf {
   /// @include Properties.cpp
   template <class T, class Attribute = ReadWrite>
   class Property : public Attribute {
-    using Getter = FunctionPointer<T>;
-    using Setter = FunctionPointer<void, T>;
+    // Don't use std::function<> because the build became very slow
+    //using Getter = std::function<T()>;
+    //using Setter = std::function<void(T)>;
+    using Getter = __opaque_function_pointer__<T>;
+    using Setter = __opaque_function_pointer__<void, T>;
     
   public:
     Property(const Getter& getter, const Setter& setter) : getter(getter), setter(setter) {}
@@ -72,7 +76,9 @@ namespace Pcf {
   /// @cond
   template <class T>
   class Property<T, ReadOnly> : public ReadOnly {
-    using Getter = FunctionPointer<T>;
+    // Don't use std::function<> because the build became very slow
+    //using Getter = std::function<T()>;
+    using Getter = __opaque_function_pointer__<T>;
   
   public:
     Property(const Getter& getter) : getter(getter) {}
@@ -91,7 +97,9 @@ namespace Pcf {
   
   template <class T>
   class Property<T, WriteOnly> : public WriteOnly {
-    using Setter = FunctionPointer<void, T>;
+    // Don't use std::function<> because the build became very slow
+    //using Setter = std::function<void(T)>;
+    using Setter = __opaque_function_pointer__<void, T>;
  
   public:
     Property(const Setter& setter) : setter(setter) {}

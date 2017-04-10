@@ -379,7 +379,6 @@ set(INCLUDE_FILES
   Includes/Pcf/Boxing.h
   Includes/Pcf/ExceptionPointer.h
   Includes/Pcf/CurrentInformation.h
-  Includes/Pcf/FunctionPointer.h
   Includes/Pcf/InitializerList.h
   Includes/Pcf/Interface.h
   Includes/Pcf/Is.h
@@ -398,6 +397,7 @@ set(INCLUDE_FILES
   Includes/Pcf/Using.h
   Includes/Pcf/Var.h
   Includes/Pcf/Core.h
+  Includes/Pcf/__opaque_function_pointer__.h
 )
 
 set(SOURCE_FILES

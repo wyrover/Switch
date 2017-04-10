@@ -12,13 +12,13 @@ namespace PcfUnitTests {
     void SetUp() override {result = string::Empty;}
     
     void CreateFunctionPointerEmptyThenInvoke() {
-      FunctionPointer<> fct;
+      __opaque_function_pointer__<> fct;
       Assert::IsTrue(fct.IsEmpty(), pcf_current_information);
       Assert::Throws<std::exception>(pcf_delegate {fct.Invoke();}, pcf_current_information);
     }
     
     void CreateFunctionPointerWithLambdaThenInvoke() {
-      FunctionPointer<> fct = pcf_delegate {
+      __opaque_function_pointer__<> fct = pcf_delegate {
         result = "fct called";
       };
       Assert::IsFalse(fct.IsEmpty(), pcf_current_information);
@@ -27,7 +27,7 @@ namespace PcfUnitTests {
     }
     
     void CreateFunctionPointerWithLambdaAndWithArgumentThenInvoke() {
-      FunctionPointer<void, const string&> fct = pcf_delegate(const string& value) {
+      __opaque_function_pointer__<void, const string&> fct = pcf_delegate(const string& value) {
         result = value;
       };
       Assert::IsFalse(fct.IsEmpty(), pcf_current_information);
@@ -36,7 +36,7 @@ namespace PcfUnitTests {
     }
     
     void CreateFunctionPointerWithLambdaAndWithReturnThenInvoke() {
-      FunctionPointer<string> fct = pcf_delegate {
+      __opaque_function_pointer__<string> fct = pcf_delegate {
         return "fct called";
       };
       Assert::IsFalse(fct.IsEmpty(), pcf_current_information);
@@ -51,7 +51,7 @@ namespace PcfUnitTests {
           result = "fct called";
         }
       };
-      FunctionPointer<> fct = TestStatic::StaticFunc;
+      __opaque_function_pointer__<> fct = TestStatic::StaticFunc;
       Assert::IsFalse(fct.IsEmpty(), pcf_current_information);
       fct.Invoke();
       Assert::AreEqual("fct called", result, pcf_current_information);
@@ -64,7 +64,7 @@ namespace PcfUnitTests {
           result = value;
         }
       };
-      FunctionPointer<void, const string&> fct = TestStatic::StaticFunc;
+      __opaque_function_pointer__<void, const string&> fct = TestStatic::StaticFunc;
       Assert::IsFalse(fct.IsEmpty(), pcf_current_information);
       fct.Invoke("fct called");
       Assert::AreEqual("fct called", result, pcf_current_information);
@@ -77,7 +77,7 @@ namespace PcfUnitTests {
           return "fct called";
         }
       };
-      FunctionPointer<string> fct = TestStatic::StaticFunc;
+      __opaque_function_pointer__<string> fct = TestStatic::StaticFunc;
       Assert::IsFalse(fct.IsEmpty(), pcf_current_information);
       result = fct.Invoke();
       Assert::AreEqual("fct called", result, pcf_current_information);
@@ -90,7 +90,7 @@ namespace PcfUnitTests {
         }
       };
       TestMember testMember;
-      FunctionPointer<> fct = FunctionPointer<>(testMember, &TestMember::MemberFunc);
+      __opaque_function_pointer__<> fct = __opaque_function_pointer__<>(testMember, &TestMember::MemberFunc);
       Assert::IsFalse(fct.IsEmpty(), pcf_current_information);
       fct.Invoke();
       Assert::AreEqual("fct called", result, pcf_current_information);
@@ -103,7 +103,7 @@ namespace PcfUnitTests {
         }
       };
       TestMember testMember;
-      FunctionPointer<void, const string&> fct = FunctionPointer<void, const string&>(testMember, &TestMember::MemberFunc);
+      __opaque_function_pointer__<void, const string&> fct = __opaque_function_pointer__<void, const string&>(testMember, &TestMember::MemberFunc);
       Assert::IsFalse(fct.IsEmpty(), pcf_current_information);
       fct.Invoke("fct called");
       Assert::AreEqual("fct called", result, pcf_current_information);
@@ -116,7 +116,7 @@ namespace PcfUnitTests {
         }
       };
       TestMember testMember;
-      FunctionPointer<string> fct = FunctionPointer<string>(testMember, &TestMember::MemberFunc);
+      __opaque_function_pointer__<string> fct = __opaque_function_pointer__<string>(testMember, &TestMember::MemberFunc);
       Assert::IsFalse(fct.IsEmpty(), pcf_current_information);
       result = fct.Invoke();
       Assert::AreEqual("fct called", result, pcf_current_information);
@@ -129,7 +129,7 @@ namespace PcfUnitTests {
         }
       };
       TestFunctor testFunctor;
-      FunctionPointer<> fct = testFunctor;
+      __opaque_function_pointer__<> fct = testFunctor;
       Assert::IsFalse(fct.IsEmpty(), pcf_current_information);
       fct.Invoke();
       Assert::AreEqual("fct called", result, pcf_current_information);
@@ -142,7 +142,7 @@ namespace PcfUnitTests {
         }
       };
       TestFunctor testFunctor;
-      FunctionPointer<void, const string&> fct = testFunctor;
+      __opaque_function_pointer__<void, const string&> fct = testFunctor;
       Assert::IsFalse(fct.IsEmpty(), pcf_current_information);
       fct.Invoke("fct called");
       Assert::AreEqual("fct called", result, pcf_current_information);
@@ -155,7 +155,7 @@ namespace PcfUnitTests {
         }
       };
       TestFunctor testFunctor;
-      FunctionPointer<string> fct = testFunctor;
+      __opaque_function_pointer__<string> fct = testFunctor;
       Assert::IsFalse(fct.IsEmpty(), pcf_current_information);
       result = fct.Invoke();
       Assert::AreEqual("fct called", result, pcf_current_information);
