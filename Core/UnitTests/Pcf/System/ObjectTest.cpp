@@ -88,7 +88,7 @@ namespace PcfUnitTests {
     
     void MemberwiseCloneOnString() {
       UniquePointer<string> str = new string("First");
-      UniquePointer<object> clonedStr = str->MemberwiseClone<string>();
+      refptr<object> clonedStr = str->MemberwiseClone<string>();
       *str = "Second";
       TUnit::Assert::AreEqual("Second", str->ToString(), pcf_current_information);
       TUnit::Assert::AreEqual("First", clonedStr->ToString(), pcf_current_information);
@@ -96,7 +96,7 @@ namespace PcfUnitTests {
     
     void MemberwiseCloneOnStringAsString() {
       UniquePointer<string> str = new string("First");
-      UniquePointer<string> clonedStr = str->MemberwiseClone<string>().As<string>();
+      refptr<string> clonedStr = str->MemberwiseClone<string>().As<string>();
       *str = "Second";
       TUnit::Assert::AreEqual("Second", *str, pcf_current_information);
       TUnit::Assert::AreEqual("First", *clonedStr, pcf_current_information);

@@ -76,8 +76,9 @@ namespace Pcf {
     /// @param obj Pointer T object to assign the current object. It can be null.
     /// @remarks The obj pointer must be create by operator new. If obj is a pointer on the stack, a error will occured at used.
     RefPtr(T* obj) { Reset(obj); }
-    
-    RefPtr(UniquePointer<T> up) { Reset(up.Release()); }
+
+    template<typename TT>
+    RefPtr(UniquePointer<TT> up) { Reset(up.template As<T>().Release()); }
     
     /// @brief Delete the current object. Set the current object to null.
     /// @remarks UseCount is decremented. If alias count equal 0 the object T is deleted.
@@ -155,8 +156,8 @@ namespace Pcf {
       ++this->subObject->UseCount;
     }
     
-    /// @brief Exchanges the contents of the UniquePointer object with those of ptr, transferring ownership of any managed object between them without destroying either.
-    /// @param ptr Another UniquePointer object of the same type.
+    /// @brief Exchanges the contents of the RefPtr object with those of ptr, transferring ownership of any managed object between them without destroying either.
+    /// @param ptr Another RefPtr object of the same type.
     void Swap(RefPtr<T>& ptr) {
       T* p = ptr.ptr;
       __opaque_sub_object__* s = ptr.subObject;
@@ -447,8 +448,9 @@ namespace Pcf {
       return *this;
     }
     
-    RefPtr<T>& operator=(UniquePointer<T> up)  {
-      Reset(up.Release());
+    template<typename TT>
+    RefPtr<T>& operator=(UniquePointer<TT> up)  {
+      Reset(up.template As<T>().Release());
       return *this;
     }
     

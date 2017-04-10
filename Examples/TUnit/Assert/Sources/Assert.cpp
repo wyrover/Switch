@@ -18,7 +18,7 @@ namespace UnitTests {
     // Used Assert::Throws to verifie if method throw effectively an exception
     void CreateTimeSpanFromNullTimeSpan() {
       Assert::Throws<ArgumentNullException>(pcf_delegate {
-        TimeSpan timeSpan(Reference<TimeSpan>::Null());
+        TimeSpan timeSpan(Ref<TimeSpan>::Null());
       }, pcf_current_information);
     }
 

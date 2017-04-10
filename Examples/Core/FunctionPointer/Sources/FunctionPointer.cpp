@@ -5,7 +5,7 @@ using namespace System;
 namespace Examples {
   class Program : public object {
   public:
-    using Write = fp<void, const string&>;
+    using Write = delegate<void, const string&>;
 
     // The main entry point for the application.
     static void Main() {

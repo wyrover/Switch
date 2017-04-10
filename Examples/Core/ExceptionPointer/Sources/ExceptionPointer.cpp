@@ -8,13 +8,13 @@ namespace Examples {
   public:
     // The main entry point for the application.
     static void Main() {
-      ExceptionPointer exceptionPointer;
+      ExcPtr exceptionPointer;
       
       Thread thread(ThreadStart(pcf_delegate {
         try {
           throw ArgumentNullException("Ouch there are an error !", pcf_current_information);
         } catch(...) {
-          exceptionPointer = ExceptionPointer::CurrentException;
+          exceptionPointer = ExcPtr::CurrentException;
         }
       }));
       thread.Start();
