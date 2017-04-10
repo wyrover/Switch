@@ -202,10 +202,6 @@ namespace Pcf {
           this->innerExceptions[index] = excptr::Create(innerExceptions[index]());
       }
       
-      /// @cond
-      ~AggregateException() noexcept {}
-      /// @endcond
-      
       /// @brief Invokes a handler on each Exception contained by this AggregateException.
       /// @param predicate The predicate to execute for each exception. The predicate accepts as an argument the Exception to be processed and returns a Boolean to indicate whether the exception was handled.
       /// @remarks Each invocation of the predicate returns true or false to indicate whether the Exception was handled. After all invocations, if any exceptions went unhandled, all unhandled exceptions will be put into a new AggregateException which will be thrown. Otherwise, the Handle method simply returns. If any invocations of the predicate throws an exception, it will halt the processing of any more exceptions and immediately propagate the thrown exception as-is.

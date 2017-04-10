@@ -45,10 +45,6 @@ namespace Pcf {
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #pcf_current_information.
       Exception(const String& message, const Exception& innerException, const CurrentInformation& information);
       
-      /// @cond
-      ~Exception() noexcept;
-      /// @endcond
-      
       /// @brief Get File where Exception occurred
       /// @return string A string represent File where Exception occurred
       Property<const String&, ReadOnly> File {
@@ -115,13 +111,19 @@ namespace Pcf {
       /// @param value Value to assign this instance.
       /// @return Exception& This instance assigned
       Exception& operator =(const Exception& value);
+
       /// @brief Check if the generation of the stack trace is enabled.
       /// @return true if stack trace generation is enabled.
       static bool StackTraceEnabled() { return Exception::stackTraceEnabled; }
+      
       /// @brief Enable / disable the generation of the stack trace.
       /// @param enabled True to enable the stack trace generation.
       static void StackTraceEnabled(bool enabled) { Exception::stackTraceEnabled = enabled; }
-      
+
+      /// @cond
+      const char* what() const noexcept override;
+      /// @endcond
+
     protected:
       /// @cond
       virtual String GetDefaultMessage() const;
@@ -129,7 +131,6 @@ namespace Pcf {
       String GetStackTrace() const;
       String GetStackTrace(const String& filter) const;
       void SetStackTrace(const Exception& exception);
-      const char* what() const noexcept override;
       
       String message;
       String helpLink;
@@ -137,7 +138,7 @@ namespace Pcf {
       ref<Exception> innerException;
       int32 hresult = 0;
       refptr<Array<String>> stackTrace;
-      String whatMessage;
+      mutable String whatMessage;
       static bool stackTraceEnabled;
       /// @endcond
     };

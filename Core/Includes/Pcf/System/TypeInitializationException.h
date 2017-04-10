@@ -14,7 +14,6 @@ namespace Pcf {
       TypeInitializationException(const System::TypeInitializationException& exception) : SystemException(exception) { this->fullTypeName = exception.fullTypeName; SetStackTrace(*this); }
       TypeInitializationException(const String& fullTypeName, const System::Exception& innerException) : SystemException() { this->innerException = innerException; this->fullTypeName = fullTypeName; SetStackTrace(*this); }
       TypeInitializationException(const String& fullTypeName, const System::Exception& innerException, const CurrentInformation& information) : SystemException(information) { this->innerException = innerException; this->fullTypeName = fullTypeName; SetStackTrace(*this); }
-      ~TypeInitializationException() noexcept {}
     private:
       String GetDefaultMessage() const override {return String::Format("The type initializer for '{0}' threw an exception.", this->fullTypeName);}
       String fullTypeName;

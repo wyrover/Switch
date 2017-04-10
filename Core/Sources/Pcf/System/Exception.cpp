@@ -49,9 +49,6 @@ Exception::Exception(const string& message, const Exception& innerExeption, cons
   SetStackTrace(*this);
 }
 
-Exception::~Exception() noexcept {
-}
-
 bool Exception::Equals(const Exception& value) const {
   return this->hresult == value.hresult && this->message == value.message && this->currentInformation == value.currentInformation && this->innerException == value.innerException;
 }
@@ -100,7 +97,7 @@ void Exception::SetStackTrace(const Exception& exception) {
 }
 
 const char* Exception::what() const noexcept {
-  const_cast<Exception&>(*this).whatMessage = ToString();
+  this->whatMessage = this->ToString();
   return whatMessage.c_str();
 }
 

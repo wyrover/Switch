@@ -103,14 +103,14 @@ namespace Pcf {
     /// @cond
     ExcPtr() {}
     ExcPtr(std::nullptr_t) : exception(nullptr) {}
-    ExcPtr(const ExcPtr& eptr) noexcept : exception(eptr.exception) {}
-    ExcPtr& operator=(const ExcPtr& eptr) noexcept {this->exception = eptr.exception; return *this;}
-    ExcPtr(const std::exception_ptr& eptr) noexcept : exception(eptr) {}
-    ~ExcPtr() noexcept {}
-    operator bool() const noexcept {return this->exception.operator bool();}
-    bool operator!() const noexcept {return !this->operator bool();}
-    bool operator==(const ExcPtr& eptr) const noexcept {return this->exception == eptr.exception;}
-    bool operator!=(const ExcPtr& eptr) const noexcept {return !this->operator==(eptr);}
+    ExcPtr(const ExcPtr& eptr) : exception(eptr.exception) {}
+    ExcPtr& operator=(const ExcPtr& eptr) {this->exception = eptr.exception; return *this;}
+    ExcPtr(const std::exception_ptr& eptr) : exception(eptr) {}
+    ~ExcPtr() {}
+    operator bool() const {return this->exception.operator bool();}
+    bool operator!() const {return !this->operator bool();}
+    bool operator==(const ExcPtr& eptr) const {return this->exception == eptr.exception;}
+    bool operator!=(const ExcPtr& eptr) const {return !this->operator==(eptr);}
     /// @endcond
     
     /// @brief Return true if this instance is null.
@@ -127,7 +127,7 @@ namespace Pcf {
     /// @param excpetion exception The exception that copyied.
     /// @return ExcPtr The new ExceptinPointer object create
     template<class T>
-    static ExcPtr Create(T exception) noexcept {
+    static ExcPtr Create(T exception) {
       try {
         throw exception;
       } catch (...) {
@@ -138,7 +138,7 @@ namespace Pcf {
     /// @brief Create an ExcPtr object that points to a copy of specified Excpetion.
     /// @param excpetion exception The exception that copyied.
     /// @return ExcPtr The new ExceptinPointer object create
-    static ExcPtr Create(const System::Exception& exception) noexcept {
+    static ExcPtr Create(const System::Exception& exception) {
       using namespace System;
       if (is<System::Threading::WaitHandleCannotBeOpenedException>(exception)) return ExcPtr::Create(as<System::Threading::WaitHandleCannotBeOpenedException>(exception));
       
