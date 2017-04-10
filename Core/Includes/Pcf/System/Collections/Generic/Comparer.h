@@ -45,7 +45,7 @@ namespace Pcf {
         template<typename T>
         class ReversedComparer : public Object, public System::Collections::Generic::IComparer<T> {
         public:
-          static RefPtr<IComparer<T>> Create(const RefPtr<IComparer<T>>& comparer) {
+          static refptr<IComparer<T>> Create(const refptr<IComparer<T>>& comparer) {
             if (is< ReversedComparer<T>> (comparer))
               return as< ReversedComparer<T>>(comparer)->comparer;
             return new ReversedComparer(comparer);
@@ -54,8 +54,8 @@ namespace Pcf {
           virtual int32 Compare(const T& x, const T& y) const {return -(this->comparer->Compare(x,y));}
 
         private:
-          ReversedComparer(const RefPtr<IComparer<T>>& comparer) {this->comparer = comparer;}
-          RefPtr< IComparer<T>> comparer;
+          ReversedComparer(const refptr<IComparer<T>>& comparer) {this->comparer = comparer;}
+          refptr< IComparer<T>> comparer;
         };
         
         /// @cond

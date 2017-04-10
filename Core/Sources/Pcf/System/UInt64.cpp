@@ -62,11 +62,11 @@ int32 UInt64::GetHashCode() const noexcept {
 }
 
 string UInt64::ToString() const noexcept {
-  return ToString("g", Ref<IFormatProvider>::Null());
+  return ToString("g", ref<IFormatProvider>::Null());
 }
 
 string UInt64::ToString(const string& format) const {
-  return ToString(format, Ref<IFormatProvider>::Null());
+  return ToString(format, ref<IFormatProvider>::Null());
 }
 
 string UInt64::ToString(const string& format, const IFormatProvider&) const {

@@ -58,7 +58,7 @@ namespace Pcf {
           /// @endcond
           
           template<typename Type>
-          RefPtr<Type> GetLParam() { return (RefPtr<Type>)this->lParam; }
+          refptr<Type> GetLParam() { return (refptr<Type>)this->lParam; }
 
           String ToString() const noexcept override;
 

@@ -52,7 +52,7 @@ namespace Pcf {
           bool close = false;
         };
         
-        RefPtr<StringWriterData> data = RefPtr<StringWriterData>();
+        refptr<StringWriterData> data = refptr<StringWriterData>();
       };
     }
   }

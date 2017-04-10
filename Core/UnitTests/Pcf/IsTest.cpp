@@ -277,162 +277,162 @@ namespace {
     }
     
     void SpStringIsString() {
-      RefPtr<string> s = RefPtr<String>::Create("Test");
+      refptr<string> s = refptr<String>::Create("Test");
       Assert::IsTrue(is<string>(s), pcf_current_information);
     }
     
     void SpStringIsObject() {
-      RefPtr<string> s = RefPtr<String>::Create("Test");
+      refptr<string> s = refptr<String>::Create("Test");
       Assert::IsTrue(is<object>(s)), pcf_current_information;
     }
     
     void SpStringIsIComparable() {
-      RefPtr<string> s = RefPtr<String>::Create("Test");
+      refptr<string> s = refptr<String>::Create("Test");
       Assert::IsTrue(is<IComparable>(s), pcf_current_information);
     }
     
     void SpStringIsInt32() {
-      RefPtr<string> s = new String("Test");
+      refptr<string> s = new String("Test");
       Assert::IsFalse(is<Int32>(s), pcf_current_information);
     }
     
     void SpObjectFromSpStringIsString() {
-      RefPtr<object> o = RefPtr<object>::Create<string>("Test");
+      refptr<object> o = refptr<object>::Create<string>("Test");
       Assert::IsTrue(is<string>(o), pcf_current_information);
     }
     
     void SpObjectFromSpStringIsObject() {
-      RefPtr<object> o = RefPtr<object>::Create<string>("Test");
+      refptr<object> o = refptr<object>::Create<string>("Test");
       Assert::IsTrue(is<object>(o), pcf_current_information);
     }
     
     void SpObjectFormSpStringIsIComparable() {
-      RefPtr<object> o = RefPtr<object>::Create<string>("Test");
+      refptr<object> o = refptr<object>::Create<string>("Test");
       Assert::IsTrue(is<IComparable>(o), pcf_current_information);
     }
     
     void SpObjectFormSpStringIsInt32() {
-      RefPtr<object> o = RefPtr<object>::Create<string>("Test");
+      refptr<object> o = refptr<object>::Create<string>("Test");
       Assert::IsFalse(is<Int32>(o), pcf_current_information);
     }
     
     void SpStringNullIsString() {
-      RefPtr<string> s = RefPtr<string>::Null();
+      refptr<string> s = refptr<string>::Null();
       Assert::IsFalse(is<string>(s), pcf_current_information);
     }
     
     void SpStringNullIsObject() {
-      RefPtr<string> s = RefPtr<string>::Null();
+      refptr<string> s = refptr<string>::Null();
       Assert::IsFalse(is<object>(s), pcf_current_information);
     }
     
     void SpStringNullIsIComparable() {
-      RefPtr<string> s = RefPtr<string>::Null();
+      refptr<string> s = refptr<string>::Null();
       Assert::IsFalse(is<IComparable>(s), pcf_current_information);
     }
     
     void SpStringNullIsInt32() {
-      RefPtr<string> s = RefPtr<string>::Null();
+      refptr<string> s = refptr<string>::Null();
       Assert::IsFalse(is<Int32>(s), pcf_current_information);
     }
     
     void SpObjectFromSpStringNullIsString() {
-      RefPtr<object> o = as<object>(RefPtr<string>::Null());
+      refptr<object> o = as<object>(refptr<string>::Null());
       Assert::IsFalse(is<string>(o), pcf_current_information);
     }
     
     void SpObjectFromSpStringNullIsObject() {
-      RefPtr<object> o = as<object>(RefPtr<string>::Null());
+      refptr<object> o = as<object>(refptr<string>::Null());
       Assert::IsFalse(is<object>(o), pcf_current_information);
     }
     
     void SpObjectFormSpStringNullIsIComparable() {
-      RefPtr<object> o = as<object>(RefPtr<string>::Null());
+      refptr<object> o = as<object>(refptr<string>::Null());
       Assert::IsFalse(is<IComparable>(o), pcf_current_information);
     }
     
     void SpObjectFormSpStringNullIsInt32() {
-      RefPtr<object> o = as<object>(RefPtr<string>::Null());
+      refptr<object> o = as<object>(refptr<string>::Null());
       Assert::IsFalse(is<Int32>(o), pcf_current_information);
     }
     
     void ConstSpStringIsString() {
-      const RefPtr<string> s = RefPtr<String>::Create("Test");
+      const refptr<string> s = refptr<String>::Create("Test");
       Assert::IsTrue(is<string>(s), pcf_current_information);
     }
     
     void ConstSpStringIsObject() {
-      const RefPtr<string> s = RefPtr<String>::Create("Test");
+      const refptr<string> s = refptr<String>::Create("Test");
       Assert::IsTrue(is<object>(s), pcf_current_information);
     }
     
     void ConstSpStringIsIComparable() {
-      const RefPtr<string> s = RefPtr<String>::Create("Test");
+      const refptr<string> s = refptr<String>::Create("Test");
       Assert::IsTrue(is<IComparable>(s), pcf_current_information);
     }
     
     void ConstSpStringIsInt32() {
-      const RefPtr<string> s = RefPtr<String>::Create("Test");
+      const refptr<string> s = refptr<String>::Create("Test");
       Assert::IsFalse(is<Int32>(s), pcf_current_information);
     }
     
     void ConstSpObjectFromConstSpStringIsString() {
-      const RefPtr<object> o = RefPtr<object>::Create<string>("Test");
+      const refptr<object> o = refptr<object>::Create<string>("Test");
       Assert::IsTrue(is<string>(o), pcf_current_information);
     }
     
     void ConstSpObjectFromConstSpStringIsObject() {
-      const RefPtr<object> o = RefPtr<object>::Create<string>("Test");
+      const refptr<object> o = refptr<object>::Create<string>("Test");
       Assert::IsTrue(is<object>(o), pcf_current_information);
     }
     
     void ConstSpObjectFormConstSpStringIsIComparable() {
-      const RefPtr<object> o = RefPtr<object>::Create<string>("Test");
+      const refptr<object> o = refptr<object>::Create<string>("Test");
       Assert::IsTrue(is<IComparable>(o), pcf_current_information);
     }
     
     void ConstSpObjectFormConstSpStringIsInt32() {
-      const RefPtr<object> o = RefPtr<object>::Create<string>("Test");
+      const refptr<object> o = refptr<object>::Create<string>("Test");
       Assert::IsFalse(is<Int32>(o), pcf_current_information);
     }
     
     void ConstSpStringNullIsString() {
-      const RefPtr<string> s = RefPtr<string>::Null();
+      const refptr<string> s = refptr<string>::Null();
       Assert::IsFalse(is<string>(s), pcf_current_information);
     }
     
     void ConstSpStringNullIsObject() {
-      const RefPtr<string> s = RefPtr<string>::Null();
+      const refptr<string> s = refptr<string>::Null();
       Assert::IsFalse(is<object>(s), pcf_current_information);
     }
     
     void ConstSpStringNullIsIComparable() {
-      const RefPtr<string> s = RefPtr<string>::Null();
+      const refptr<string> s = refptr<string>::Null();
       Assert::IsFalse(is<IComparable>(s), pcf_current_information);
     }
     
     void ConstSpStringNullIsInt32() {
-      const RefPtr<string> s = RefPtr<string>::Null();
+      const refptr<string> s = refptr<string>::Null();
       Assert::IsFalse(is<Int32>(s), pcf_current_information);
     }
     
     void ConstSpObjectFromConstSpStringNullIsString() {
-      const RefPtr<object> o = as<object>(RefPtr<string>::Null());
+      const refptr<object> o = as<object>(refptr<string>::Null());
       Assert::IsFalse(is<string>(o), pcf_current_information);
     }
     
     void ConstSpObjectFromConstSpStringNullIsObject() {
-      const RefPtr<object> o = as<object>(RefPtr<string>::Null());
+      const refptr<object> o = as<object>(refptr<string>::Null());
       Assert::IsFalse(is<object>(o), pcf_current_information);
     }
     
     void ConstSpObjectFormConstSpStringNullIsIComparable() {
-      const RefPtr<object> o = as<object>(RefPtr<string>::Null());
+      const refptr<object> o = as<object>(refptr<string>::Null());
       Assert::IsFalse(is<IComparable>(o), pcf_current_information);
     }
     
     void ConstSpObjectFormConstSpStringNullIsInt32() {
-      const RefPtr<object> o = as<object>(RefPtr<string>::Null());
+      const refptr<object> o = as<object>(refptr<string>::Null());
       Assert::IsFalse(is<Int32>(o), pcf_current_information);
     }
     
@@ -522,177 +522,177 @@ namespace {
     
     void RefStringIsString() {
       string str = "Test";
-      Ref<string> s = str;
+      ref<string> s = str;
       Assert::IsTrue(is<string>(s), pcf_current_information);
     }
     
     void RefStringIsObject() {
       string str = "Test";
-      Ref<string> s = str;
+      ref<string> s = str;
       Assert::IsTrue(is<object>(s), pcf_current_information);
     }
     
     void RefStringIsIComparable() {
       string str = "Test";
-      Ref<string> s = str;
+      ref<string> s = str;
       Assert::IsTrue(is<IComparable>(s), pcf_current_information);
     }
     
     void RefStringIsInt32() {
       string str = "Test";
-      Ref<string> s = str;
+      ref<string> s = str;
       Assert::IsFalse(is<Int32>(s), pcf_current_information);
     }
     
     void RefObjectFromRefStringIsString() {
       string str = "Test";
-      Ref<object> o = str;
+      ref<object> o = str;
       Assert::IsTrue(is<string>(o), pcf_current_information);
     }
     
     void RefObjectFromRefStringIsObject() {
       string str = "Test";
-      Ref<object> o = str;
+      ref<object> o = str;
       Assert::IsTrue(is<object>(o), pcf_current_information);
     }
     
     void RefObjectFormRefStringIsIComparable() {
       string str = "Test";
-      Ref<object> o = str;
+      ref<object> o = str;
       Assert::IsTrue(is<IComparable>(o), pcf_current_information);
     }
     
     void RefObjectFormRefStringIsInt32() {
       string str = "Test";
-      Ref<object> o = str;
+      ref<object> o = str;
       Assert::IsFalse(is<Int32>(o), pcf_current_information);
     }
     
     void RefStringNullIsString() {
-      Ref<string> s = Ref<string>::Null();
+      ref<string> s = ref<string>::Null();
       Assert::IsFalse(is<string>(s), pcf_current_information);
     }
     
     void RefStringNullIsObject() {
-      Ref<string> s = Ref<string>::Null();
+      ref<string> s = ref<string>::Null();
       Assert::IsFalse(is<object>(s), pcf_current_information);
     }
     
     void RefStringNullIsIComparable() {
-      Ref<string> s = Ref<string>::Null();
+      ref<string> s = ref<string>::Null();
       Assert::IsFalse(is<IComparable>(s), pcf_current_information);
     }
     
     void RefStringNullIsInt32() {
-      Ref<string> s = Ref<string>::Null();
+      ref<string> s = ref<string>::Null();
       Assert::IsFalse(is<Int32>(s), pcf_current_information);
     }
     
     void RefObjectFromRefStringNullIsString() {
-      Ref<object> o = as<object>(Ref<string>::Null());
+      ref<object> o = as<object>(ref<string>::Null());
       Assert::IsFalse(is<string>(o), pcf_current_information);
     }
     
     void RefObjectFromRefStringNullIsObject() {
-      Ref<object> o = as<object>(Ref<string>::Null());
+      ref<object> o = as<object>(ref<string>::Null());
       Assert::IsFalse(is<object>(o), pcf_current_information);
     }
     
     void RefObjectFormRefStringNullIsIComparable() {
-      Ref<object> o = as<object>(Ref<string>::Null());
+      ref<object> o = as<object>(ref<string>::Null());
       Assert::IsFalse(is<IComparable>(o), pcf_current_information);
     }
     
     void RefObjectFormRefStringNullIsInt32() {
-      Ref<object> o = as<object>(Ref<string>::Null());
+      ref<object> o = as<object>(ref<string>::Null());
       Assert::IsFalse(is<Int32>(o), pcf_current_information);
     }
     
     void ConstRefStringIsString() {
       const string str = "Test";
-      const Ref<string> s = str;
+      const ref<string> s = str;
       Assert::IsTrue(is<string>(s), pcf_current_information);
     }
     
     void ConstRefStringIsObject() {
       const string str = "Test";
-      const Ref<string> s = str;
+      const ref<string> s = str;
       Assert::IsTrue(is<object>(s), pcf_current_information);
     }
     
     void ConstRefStringIsIComparable() {
       const string str = "Test";
-      const Ref<string> s = str;
+      const ref<string> s = str;
       Assert::IsTrue(is<IComparable>(s), pcf_current_information);
     }
     
     void ConstRefStringIsInt32() {
       const string str = "Test";
-      const Ref<string> s = str;
+      const ref<string> s = str;
       Assert::IsFalse(is<Int32>(s), pcf_current_information);
     }
     
     void ConstRefObjectFromConstRefStringIsString() {
       const string str = "Test";
-      const Ref<object> o = str;
+      const ref<object> o = str;
       Assert::IsTrue(is<string>(o), pcf_current_information);
     }
     
     void ConstRefObjectFromConstRefStringIsObject() {
       const string str = "Test";
-      const Ref<object> o = str;
+      const ref<object> o = str;
       Assert::IsTrue(is<object>(o), pcf_current_information);
     }
     
     void ConstRefObjectFormConstRefStringIsIComparable() {
       const string str = "Test";
-      const Ref<object> o = str;
+      const ref<object> o = str;
       Assert::IsTrue(is<IComparable>(o), pcf_current_information);
     }
     
     void ConstRefObjectFormConstRefStringIsInt32() {
       const string str = "Test";
-      const Ref<object> o = str;
+      const ref<object> o = str;
       Assert::IsFalse(is<Int32>(o), pcf_current_information);
     }
     
     void ConstRefStringNullIsString() {
-      const Ref<string> s = Ref<string>::Null();
+      const ref<string> s = ref<string>::Null();
       Assert::IsFalse(is<string>(s), pcf_current_information);
     }
     
     void ConstRefStringNullIsObject() {
-      const Ref<string> s = Ref<string>::Null();
+      const ref<string> s = ref<string>::Null();
       Assert::IsFalse(is<object>(s), pcf_current_information);
     }
     
     void ConstRefStringNullIsIComparable() {
-      const Ref<string> s = Ref<string>::Null();
+      const ref<string> s = ref<string>::Null();
       Assert::IsFalse(is<IComparable>(s), pcf_current_information);
     }
     
     void ConstRefStringNullIsInt32() {
-      const Ref<string> s = Ref<string>::Null();
+      const ref<string> s = ref<string>::Null();
       Assert::IsFalse(is<Int32>(s), pcf_current_information);
     }
     
     void ConstRefObjectFromConstRefStringNullIsString() {
-      const Ref<object> o = as<object>(Ref<string>::Null());
+      const ref<object> o = as<object>(ref<string>::Null());
       Assert::IsFalse(is<string>(o), pcf_current_information);
     }
     
     void ConstRefObjectFromConstRefStringNullIsObject() {
-      const Ref<object> o = as<object>(Ref<string>::Null());
+      const ref<object> o = as<object>(ref<string>::Null());
       Assert::IsFalse(is<object>(o), pcf_current_information);
     }
     
     void ConstRefObjectFormConstRefStringNullIsIComparable() {
-      const Ref<object> o = as<object>(Ref<string>::Null());
+      const ref<object> o = as<object>(ref<string>::Null());
       Assert::IsFalse(is<IComparable>(o), pcf_current_information);
     }
     
     void ConstRefObjectFormConstRefStringNullIsInt32() {
-      const Ref<object> o = as<object>(Ref<string>::Null());
+      const ref<object> o = as<object>(ref<string>::Null());
       Assert::IsFalse(is<Int32>(o), pcf_current_information);
     }
   };

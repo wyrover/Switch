@@ -324,7 +324,7 @@ bool String::Equals(const String& strA, const String& strB, bool ignoreCase) {
 using CharEnum = System::Collections::Generic::Enumerator<char32>;
 
 // { uX }
-static char32 ReadUnicodeLitteral(Ref<CharEnum> enumerator) {
+static char32 ReadUnicodeLitteral(ref<CharEnum> enumerator) {
   String toParse;
   do {
     char32 c = enumerator().Current;
@@ -344,7 +344,7 @@ struct FormatInformation {
 };
 
 // { index[,alignment][ : formatString] }
-static void ReadFormat(Ref<CharEnum> enumerator, FormatInformation& info) {
+static void ReadFormat(ref<CharEnum> enumerator, FormatInformation& info) {
   String format;
   do {
     char32 c = enumerator().Current;
@@ -374,11 +374,11 @@ static void ReadFormat(Ref<CharEnum> enumerator, FormatInformation& info) {
   throw FormatException("An opened bracket '{' is !closed by '}'", pcf_current_information);
 }
 
-String String::Format(const String& format, const Array<Ref<Object>>& args) {
+String String::Format(const String& format, const Array<ref<Object>>& args) {
   return Format(System::FormatProvider(), format, args);
 }
 
-String String::Format(const IFormatProvider& provider, const String& format, const Array<Ref<Object>>& args) {
+String String::Format(const IFormatProvider& provider, const String& format, const Array<ref<Object>>& args) {
   return FormatToString(provider, format, args);
 }
 
@@ -447,7 +447,7 @@ String String::FormatToString(const IFormatProvider& provider, const String& for
   return output;
 }
 
-String String::FormatToString(const IFormatProvider& provider, const String& format, const Array<Ref<object>>& args) {
+String String::FormatToString(const IFormatProvider& provider, const String& format, const Array<ref<object>>& args) {
   StringType output;
   output.reserve(2048);
   CharEnum enumerator = format.GetEnumerator();

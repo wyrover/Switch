@@ -10,7 +10,7 @@ using namespace System;
 using namespace System::Drawing;
 using namespace System::Windows::Forms;
 
-System::Collections::Generic::Dictionary<intptr, Ref<Control>> Control::handles;
+System::Collections::Generic::Dictionary<intptr, ref<Control>> Control::handles;
 
 namespace {
   struct ShowDebugTrace {
@@ -41,7 +41,7 @@ namespace {
   }
 }
 
-Ref<Control> Control::controlEntered;
+ref<Control> Control::controlEntered;
 
 Control::Control() {
   this->data->messageActions = {{WM_CAPTURECHANGED,{*this, &Control::WmCaptureChange}},{WM_CLOSE,{*this, &Control::WmClose}},{WM_COMMAND,{*this, &Control::WmCommand}},{WM_CONTEXTMENU,{*this, &Control::WmContextMenu}},{WM_CREATE,{*this, &Control::WmCreate}},{WM_CTLCOLOR,{*this, &Control::WmCtlColorControl}},{WM_CTLCOLORBTN,{*this, &Control::WmCtlColorControl}},{WM_CTLCOLORDLG,{*this, &Control::WmCtlColorControl}},{WM_CTLCOLORMSGBOX,{*this, &Control::WmCtlColorControl}},{WM_CTLCOLORSCROLLBAR,{*this, &Control::WmCtlColorControl}},{WM_CTLCOLOREDIT,{*this, &Control::WmCtlColorControl}},{WM_CTLCOLORLISTBOX,{*this, &Control::WmCtlColorControl}},{WM_CTLCOLORSTATIC,{*this, &Control::WmCtlColorControl}},{WM_DESTROY,{*this, &Control::WmDestroy}},{WM_DISPLAYCHANGE,{*this, &Control::WmDisplayChange}},{WM_DRAWITEM,{*this, &Control::WmDrawItem}},{WM_ERASEBKGND,{*this, &Control::WmEraseBkgnd}},{WM_EXITMENULOOP,{*this, &Control::WmExitMenuLoop}},{WM_GETOBJECT,{*this, &Control::WmGetObject}},{WM_HELP,{*this, &Control::WmHelp}},{WM_IME_CHAR,{*this, &Control::WmImeChar}},{WM_IME_NOTIFY,{*this, &Control::WmImeNotify}},{WM_IME_STARTCOMPOSITION,{*this, &Control::WmImeStartComposition}},{WM_INITMENUPOPUP,{*this, &Control::WmInitMenuPopup}},{WM_INPUTLANGCHANGE,{*this, &Control::WmInputLangChange}},{WM_INPUTLANGCHANGEREQUEST,{*this, &Control::WmInputLangChangeRequest}},{WM_CHAR,{*this, &Control::WmKeyChar}},{WM_KEYDOWN,{*this, &Control::WmKeyChar}},{WM_SYSKEYDOWN,{*this, &Control::WmKeyChar}},{WM_KEYUP,{*this, &Control::WmKeyChar}},{WM_SYSKEYUP,{*this, &Control::WmKeyChar}},{WM_KILLFOCUS,{*this, &Control::WmKillFocus}},{WM_MEASUREITEM,{*this, &Control::WmMeasureItem}},{WM_MENUCHAR,{*this, &Control::WmMenuChar}},{WM_MENUSELECT,{*this, &Control::WmMenuSelect}},{WM_LBUTTONDBLCLK,{*this, &Control::WmMouseDown}},{WM_LBUTTONDOWN,{*this, &Control::WmMouseDown}},{WM_MBUTTONDBLCLK,{*this, &Control::WmMouseDown}},{WM_MBUTTONDOWN,{*this, &Control::WmMouseDown}},{WM_XBUTTONDOWN,{*this, &Control::WmMouseDown}},{WM_XBUTTONDBLCLK,{*this, &Control::WmMouseDown}},{WM_RBUTTONDBLCLK,{*this, &Control::WmMouseDown}},{WM_RBUTTONDOWN,{*this, &Control::WmMouseDown}},{WM_MOUSEHOVER,{*this, &Control::WmMouseHover}},{WM_MOUSELEAVE,{*this, &Control::WmMouseLeave}},{WM_NCMOUSELEAVE,{*this, &Control::WmMouseLeave}},{WM_MOUSEMOVE,{*this, &Control::WmMouseMove}},{WM_LBUTTONUP,{*this, &Control::WmMouseUp}},{WM_MBUTTONUP,{*this, &Control::WmMouseUp}},{WM_XBUTTONUP,{*this, &Control::WmMouseUp}},{WM_RBUTTONUP,{*this, &Control::WmMouseUp}},{WM_MOUSEWHEEL,{*this, &Control::WmMouseWheel}},{WM_NOTIFY,{*this, &Control::WmNotify}},{WM_NOTIFYFORMAT,{*this, &Control::WmNotifyFormat}},{WM_PARENTNOTIFY,{*this, &Control::WmParentNotify}},{WM_PAINT,{*this, &Control::WmPaint}},{WM_PRINTCLIENT,{*this, &Control::WmPrintClient}},{WM_QUERYNEWPALETTE,{*this, &Control::WmQueryNewPalette}},{WM_SHOWWINDOW,{*this, &Control::WmShowWindow}},{WM_SETCURSOR,{*this, &Control::WmSetCursor}},{WM_SETFOCUS,{*this, &Control::WmSetFocus}},{WM_SYSCOMMAND,{*this, &Control::WmSysCommand}},{WM_UPDATEUISTATE,{*this, &Control::WmUpdateUIState}},{WM_WINDOWPOSCHANGED,{*this, &Control::WmWindowPosChanged}},{WM_WINDOWPOSCHANGING,{*this, &Control::WmWindowPosChanging}}};
@@ -172,7 +172,7 @@ void Control::WmCreate(Message& message) {
 
 void Control::WmCtlColorControl(Message& message) {
   System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmCtlColorControl message=" + message + ", name=" + this->data->name);  
-  Ref<Control> control = FromHandle(message.LParam);
+  ref<Control> control = FromHandle(message.LParam);
   if (control == null)
     this->DefWndProc(message);
   else {

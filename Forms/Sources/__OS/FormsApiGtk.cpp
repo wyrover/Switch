@@ -35,7 +35,7 @@ namespace {
     Gtk::Fixed fixed;
   };
 
-  Glib::RefPtr<Gtk::Application> application = Gtk::Application::create();
+  Glib::refptr<Gtk::Application> application = Gtk::Application::create();
   GtkForm* mainForm;
   int32 exitCode = 0;
 

@@ -122,18 +122,18 @@ namespace Pcf {
     /// @brief Get the value stored in UniquePointer.
     /// @return the value stored in UniquePointer.
     /// @exception NullPointerException the UniquePointer is null
-    Ref<T> ToReference() {
+    ref<T> ToReference() {
       if (this->ptr == null)
-        return Ref<T>();
+        return ref<T>();
       return ToObject();
     }
     
     /// @brief Get the value stored in UniquePointer.
     /// @return the value stored in UniquePointer.
     /// @exception NullPointerException the UniquePointer is null
-    Ref<T> ToReference() const {
+    ref<T> ToReference() const {
       if (this->ptr == null)
-        return Ref<T>();
+        return ref<T>();
       return ToObject();
     }
     
@@ -141,9 +141,9 @@ namespace Pcf {
     /// @return the value stored in UniquePointer.
     /// @exception NullPointerException the UniquePointer is null
     template<typename TT>
-    Ref<TT> ToReference() {
+    ref<TT> ToReference() {
       if (this->ptr == null)
-        return Ref<T>();
+        return ref<T>();
       return ToObject<TT>();
     }
     
@@ -151,9 +151,9 @@ namespace Pcf {
     /// @return the value stored in UniquePointer.
     /// @exception NullPointerException the UniquePointer is null
     template<typename TT>
-    Ref<TT> ToReference() const {
+    ref<TT> ToReference() const {
       if (this->ptr == null)
-        return Ref<T>();
+        return ref<T>();
       return ToObject<TT>();
     }
     
@@ -285,9 +285,9 @@ namespace Pcf {
     /// @par Examples
     /// @code
     /// UniquePointer<string> uniqueString = new string("Test string");
-    /// RefPtr<string> sharedString = uniqueString.Share();
+    /// refptr<string> sharedString = uniqueString.Share();
     /// @endcode
-     RefPtr<T> Share() {
+     refptr<T> Share() {
      return Release();
      }
      */
@@ -297,9 +297,9 @@ namespace Pcf {
     /// @par Examples
     /// @code
     /// UniquePointer<string> uniqueString = new string("Test string");
-    /// RefPtr<string> sharedString = UniquePointer<string>::Share(uniqueString);
+    /// refptr<string> sharedString = UniquePointer<string>::Share(uniqueString);
     /// @endcode
-     static RefPtr<T> Share(UniquePointer<T>& up) {
+     static refptr<T> Share(UniquePointer<T>& up) {
      return up.Share();
      }
      */

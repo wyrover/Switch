@@ -331,7 +331,7 @@ namespace Pcf {
           TraceOptions traceOutputOptions = TraceOptions::None;
           };
 
-        RefPtr<TraceListenerData> data = RefPtr<TraceListenerData>::Create();
+        refptr<TraceListenerData> data = refptr<TraceListenerData>::Create();
       };
     }
   }

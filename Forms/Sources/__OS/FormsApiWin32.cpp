@@ -86,7 +86,7 @@ namespace {
 
   LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
     Message message = Message::Create((intptr)hwnd, msg, wParam, lParam, 0);
-    Ref<Control> control = Control::FromHandle(message.HWnd);
+    ref<Control> control = Control::FromHandle(message.HWnd);
     if (control != null)
       control().WndProc(message);
     return message.Result;

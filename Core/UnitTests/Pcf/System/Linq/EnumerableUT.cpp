@@ -110,12 +110,12 @@ namespace {
   }
   
   TEST(Enumerable, Cast) {
-    Collections::Generic::List<RefPtr<string>> al;
+    Collections::Generic::List<refptr<string>> al;
     al.Add(new string("Barley"));
     al.Add(new string("Boots"));
     al.Add(new string("Whiskers"));
-    UniquePointer<IEnumerable<RefPtr<String>>> enumerable = al.Cast<RefPtr<String>>();
-    Enumerator<RefPtr<String>> enumerator = enumerable->GetEnumerator();
+    UniquePointer<IEnumerable<refptr<String>>> enumerable = al.Cast<refptr<String>>();
+    Enumerator<refptr<String>> enumerator = enumerable->GetEnumerator();
     ASSERT_TRUE(enumerator.MoveNext());
     ASSERT_EQ("Barley", *enumerator.Current());
     ASSERT_TRUE(enumerator.MoveNext());

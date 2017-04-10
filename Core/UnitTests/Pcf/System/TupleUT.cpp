@@ -133,11 +133,11 @@ namespace {
   }
   
   TEST(Tuple, SharedPointerTuple) {
-    RefPtr<String> s1 = new String("Item1");
-    RefPtr<Int32> s2 = new Int32(2);
-    RefPtr<String> s3 = new String("Item3");
-    Tuple<RefPtr<String>, RefPtr<Int32>> tuple1(s1, s2);
-    Tuple<RefPtr<Int32>, RefPtr<String>> tuple2(s2, s3);
+    refptr<String> s1 = new String("Item1");
+    refptr<Int32> s2 = new Int32(2);
+    refptr<String> s3 = new String("Item3");
+    Tuple<refptr<String>, refptr<Int32>> tuple1(s1, s2);
+    Tuple<refptr<Int32>, refptr<String>> tuple2(s2, s3);
     EXPECT_EQ(tuple1.Item1(), s1);
     EXPECT_EQ(tuple1.Item2(), s2);
     EXPECT_FALSE(tuple1.Equals(tuple2));

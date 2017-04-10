@@ -82,7 +82,7 @@ namespace Pcf {
         };
 
         /// @brief Gets the underlying stream that interfaces with a backing store.
-        /// @return RefPtr<Stream> The stream this StreamWriter is writing to.
+        /// @return refptr<Stream> The stream this StreamWriter is writing to.
         Property<Stream&, ReadOnly> BaseStream {
           pcf_get->Stream& {return this->GetBaseStream();}
         };
@@ -117,10 +117,10 @@ namespace Pcf {
 
         struct StreamWriterData {
           bool autoFlush {false};
-          RefPtr<Stream> stream;
+          refptr<Stream> stream;
         };
         
-        RefPtr<StreamWriterData> data {new StreamWriterData()};
+        refptr<StreamWriterData> data {new StreamWriterData()};
         
       };
     }

@@ -13,8 +13,8 @@ namespace EncodingUT {
   void CheckErrorsGetCharCount(const System::Text::Encoding& encoding);
   void CheckErrorsGetChars(const System::Text::Encoding& encoding);
   void CheckErrorsString(const System::Text::Encoding& encoding);
-  void GetByteCountTest(RefPtr<System::Text::Encoding> encoding, int charByteSize, int piByteSize, int sigmaByteSize, int koalaByteSize);
-  void GetBytesTest(RefPtr<System::Text::Encoding>, int, int , int, int, const string&, const string&, const string&, const string&);
+  void GetByteCountTest(refptr<System::Text::Encoding> encoding, int charByteSize, int piByteSize, int sigmaByteSize, int koalaByteSize);
+  void GetBytesTest(refptr<System::Text::Encoding>, int, int , int, int, const string&, const string&, const string&, const string&);
   void ConvertTest(const System::Text::Encoding& srcEncoding, const System::Text::Encoding& dstEncoding, const Bytes& bytes, const string& reference);
 
   void EXPECT_CHARS(const char32 expected[], int32 size, const char32 actual[]);

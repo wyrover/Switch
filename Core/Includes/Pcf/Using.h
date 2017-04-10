@@ -8,7 +8,7 @@ namespace Pcf {
   /// @par Examples
   /// @code
   /// // sr is released automatically after the end cosure }.
-  /// pcf_using(RefPtr<StreamReader> sr = RefPtr<StreamReader>::Create(path)) {
+  /// pcf_using(refptr<StreamReader> sr = refptr<StreamReader>::Create(path)) {
   ///   Console::WriteLine(sr->ReadToEnd());
   /// }
   /// @endcode

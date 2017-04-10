@@ -35,11 +35,11 @@ TEST(UTF32_Encoding, String_Exceptions) {
 
 TEST(UTF32_Encoding, Ctor) {
   EncodingUT::Bytes preamble;
-  RefPtr<Text::Encoding> def = new Text::UTF32Encoding();
-  RefPtr<Text::Encoding> eFF = new Text::UTF32Encoding(false,false);
-  RefPtr<Text::Encoding> eFT = new Text::UTF32Encoding(false, true);
-  RefPtr<Text::Encoding> eTF = new Text::UTF32Encoding(true, false);
-  RefPtr<Text::Encoding> eTT = new Text::UTF32Encoding(true, true);
+  refptr<Text::Encoding> def = new Text::UTF32Encoding();
+  refptr<Text::Encoding> eFF = new Text::UTF32Encoding(false,false);
+  refptr<Text::Encoding> eFT = new Text::UTF32Encoding(false, true);
+  refptr<Text::Encoding> eTF = new Text::UTF32Encoding(true, false);
+  refptr<Text::Encoding> eTT = new Text::UTF32Encoding(true, true);
 
   EXPECT_EQ(12000, def->GetCodePage());
   EXPECT_TRUE(def->IsReadOnly());
@@ -77,7 +77,7 @@ TEST(UTF32_Encoding, Ctor) {
 
 TEST(UTF32_Encoding, Encode) {
   // The encoding, utf32 big endian, BOM.
-  RefPtr<Text::UTF32Encoding> unicode = new Text::UTF32Encoding();
+  refptr<Text::UTF32Encoding> unicode = new Text::UTF32Encoding();
 
   // Create a string that contains Unicode characters.
   string unicodeString("This unicode string contains two characters "
@@ -123,7 +123,7 @@ TEST(UTF32_Encoding, Encode) {
 
 TEST(UTF32_Encoding, EncodeBigEndian) {
   // The encoding, utf32 big endian, BOM.
-  RefPtr<Text::UTF32Encoding> unicode = new Text::UTF32Encoding(true);
+  refptr<Text::UTF32Encoding> unicode = new Text::UTF32Encoding(true);
 
   // Create a string that contains Unicode characters.
   string unicodeString("This unicode string contains two characters "

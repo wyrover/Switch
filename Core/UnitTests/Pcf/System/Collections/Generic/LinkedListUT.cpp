@@ -130,12 +130,12 @@ TEST_F(LinkedList, String) {
 }
 
 TEST_F(LinkedList, SpString) {
-  Generic::LinkedList< RefPtr<String>> list;
+  Generic::LinkedList< refptr<String>> list;
   EXPECT_EQ(0, list.Count);
   list.Add(new String("1")); list.Add(new String("2")); list.Add(new String("3")); 
   EXPECT_EQ(3, list.Count);
   int i = 0;
-  for (RefPtr<string> item : list) {
+  for (refptr<string> item : list) {
     if ( i == 0 ) EXPECT_EQ("1", *item);
     if ( i == 1 ) EXPECT_EQ("2", *item);
     if ( i == 2 ) EXPECT_EQ("3", *item);

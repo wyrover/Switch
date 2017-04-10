@@ -53,7 +53,7 @@ namespace {
   int TestPointer::cpt = 0;
   
   TEST(Sp, SetNull) {
-    pcf_using(RefPtr<int> ptr) {
+    pcf_using(refptr<int> ptr) {
       EXPECT_THROW(ptr.ToPointer(), std::exception);
       EXPECT_TRUE(ptr.IsNull());
       EXPECT_THROW(*ptr, std::exception);
@@ -63,7 +63,7 @@ namespace {
   
   TEST(Sp, SetNotNull) {
     TestPointer::ResetCpt();
-    pcf_using(RefPtr<TestPointer> ptr(new TestPointer())) {
+    pcf_using(refptr<TestPointer> ptr(new TestPointer())) {
       EXPECT_EQ(1, TestPointer::GetCpt());
       EXPECT_NE((TestPointer*)null, ptr.ToPointer());
       EXPECT_FALSE(ptr.IsNull());
@@ -77,7 +77,7 @@ namespace {
     TestPointer::ResetCpt();
     TestPointer* tp = new TestPointer();
     EXPECT_EQ(1, TestPointer::GetCpt());
-    pcf_using(RefPtr<TestPointer> ptr(tp)) {
+    pcf_using(refptr<TestPointer> ptr(tp)) {
       EXPECT_NE((TestPointer*)null, ptr.ToPointer());
       EXPECT_FALSE(ptr.IsNull());
       EXPECT_NO_THROW(*ptr);
@@ -89,7 +89,7 @@ namespace {
   
   TEST(Sp, SetFromEqual) {
     TestPointer::ResetCpt();
-    pcf_using(RefPtr<TestPointer> ptr = new TestPointer()) {
+    pcf_using(refptr<TestPointer> ptr = new TestPointer()) {
       EXPECT_EQ(1, TestPointer::GetCpt());
       EXPECT_NE((TestPointer*)null, ptr.ToPointer());
       EXPECT_FALSE(ptr.IsNull());
@@ -101,9 +101,9 @@ namespace {
   
   TEST(Sp, SetFromSharedPointer) {
     TestPointer::ResetCpt();
-    pcf_using(RefPtr<TestPointer> ptr1(new TestPointer())) {
+    pcf_using(refptr<TestPointer> ptr1(new TestPointer())) {
       EXPECT_EQ(1, TestPointer::GetCpt());
-      pcf_using(RefPtr<TestPointer> ptr2(ptr1)) {
+      pcf_using(refptr<TestPointer> ptr2(ptr1)) {
         EXPECT_EQ(1, TestPointer::GetCpt());
         EXPECT_EQ(2, ptr1.GetUseCount());
         EXPECT_EQ(2, ptr2.GetUseCount());
@@ -125,9 +125,9 @@ namespace {
   
   TEST(Sp, SetFromEqualSharedPointer) {
     TestPointer::ResetCpt();
-    pcf_using(RefPtr<TestPointer> ptr1(new TestPointer())) {
+    pcf_using(refptr<TestPointer> ptr1(new TestPointer())) {
       EXPECT_EQ(1, TestPointer::GetCpt());
-      pcf_using(RefPtr<TestPointer> ptr2 = ptr1) {
+      pcf_using(refptr<TestPointer> ptr2 = ptr1) {
         EXPECT_EQ(1, TestPointer::GetCpt());
         EXPECT_EQ(2, ptr1.GetUseCount());
         EXPECT_EQ(2, ptr2.GetUseCount());
@@ -148,9 +148,9 @@ namespace {
   }
   
   TEST(Sp, Constructor) {
-    RefPtr<string> stringEmpty;
+    refptr<string> stringEmpty;
     EXPECT_TRUE(stringEmpty.IsNull());
-    EXPECT_TRUE(RefPtr<string>::IsNullOrInvalid(stringEmpty));
+    EXPECT_TRUE(refptr<string>::IsNullOrInvalid(stringEmpty));
     EXPECT_THROW(stringEmpty.ToObject(), std::exception);
     EXPECT_THROW(stringEmpty.ToPointer(), std::exception);
     EXPECT_EQ(0, stringEmpty.GetUseCount());
@@ -158,8 +158,8 @@ namespace {
     EXPECT_THROW(stringEmpty->Length(), std::exception);
     EXPECT_THROW((*stringEmpty)[0], std::exception);
     
-    RefPtr<string> stringEmpty2(RefPtr<string>::Empty());
-    EXPECT_TRUE(RefPtr<string>::IsNullOrInvalid(stringEmpty2));
+    refptr<string> stringEmpty2(refptr<string>::Empty());
+    EXPECT_TRUE(refptr<string>::IsNullOrInvalid(stringEmpty2));
     EXPECT_THROW(stringEmpty2.ToObject(), std::exception);
     EXPECT_THROW(stringEmpty2.ToPointer(), std::exception);
     EXPECT_EQ(0, stringEmpty2.GetUseCount());
@@ -167,8 +167,8 @@ namespace {
     EXPECT_THROW(stringEmpty2->Length(), std::exception);
     EXPECT_THROW((*stringEmpty2)[0], std::exception);
     
-    RefPtr<string> stringNull(null);
-    EXPECT_TRUE(RefPtr<string>::IsNullOrInvalid(stringNull));
+    refptr<string> stringNull(null);
+    EXPECT_TRUE(refptr<string>::IsNullOrInvalid(stringNull));
     EXPECT_THROW(stringNull.ToObject(), std::exception);
     EXPECT_THROW(stringNull.ToPointer(), std::exception);
     EXPECT_EQ(0, stringNull.GetUseCount());
@@ -176,8 +176,8 @@ namespace {
     EXPECT_THROW(stringNull->Length(), std::exception);
     EXPECT_THROW((*stringNull)[0], std::exception);
     
-    RefPtr<string> str(new string("Test Share Pointer"));
-    EXPECT_FALSE(RefPtr<string>::IsNullOrInvalid(str));
+    refptr<string> str(new string("Test Share Pointer"));
+    EXPECT_FALSE(refptr<string>::IsNullOrInvalid(str));
     EXPECT_EQ("Test Share Pointer", str.ToObject());
     EXPECT_EQ("Test Share Pointer", *str.ToPointer());
     EXPECT_EQ(1, str.GetUseCount());
@@ -185,8 +185,8 @@ namespace {
     EXPECT_EQ(18,str->Length());
     EXPECT_EQ('T', (*str)[0]);
     
-    RefPtr<string> str2= new string("Test an other Share Pointer");
-    EXPECT_FALSE(RefPtr<string>::IsNullOrInvalid(str2));
+    refptr<string> str2= new string("Test an other Share Pointer");
+    EXPECT_FALSE(refptr<string>::IsNullOrInvalid(str2));
     EXPECT_EQ("Test an other Share Pointer", str2.ToObject());
     EXPECT_EQ("Test an other Share Pointer", *str2.ToPointer());
     EXPECT_EQ(1, str2.GetUseCount());
@@ -194,15 +194,15 @@ namespace {
     EXPECT_EQ(27, str2->Length());
     EXPECT_EQ('T', (*str2)[0]);
     
-    RefPtr<string> str3(str);
-    EXPECT_FALSE(RefPtr<string>::IsNullOrInvalid(str));
+    refptr<string> str3(str);
+    EXPECT_FALSE(refptr<string>::IsNullOrInvalid(str));
     EXPECT_EQ("Test Share Pointer", str.ToObject());
     EXPECT_EQ("Test Share Pointer", *str.ToPointer());
     EXPECT_EQ(2, str.GetUseCount());
     EXPECT_EQ(*str, "Test Share Pointer");
     EXPECT_EQ(18, str->Length());
     EXPECT_EQ('T', (*str)[0]);
-    EXPECT_FALSE(RefPtr<string>::IsNullOrInvalid(str3));
+    EXPECT_FALSE(refptr<string>::IsNullOrInvalid(str3));
     EXPECT_EQ("Test Share Pointer", str3.ToObject());
     EXPECT_EQ("Test Share Pointer", *str3.ToPointer());
     EXPECT_EQ(2, str3.GetUseCount());
@@ -212,8 +212,8 @@ namespace {
   }
   
   TEST(Sp, Equal) {
-    RefPtr<string> stringEmpty = RefPtr<string>::Empty();
-    EXPECT_TRUE(RefPtr<string>::IsNullOrInvalid(stringEmpty));
+    refptr<string> stringEmpty = refptr<string>::Empty();
+    EXPECT_TRUE(refptr<string>::IsNullOrInvalid(stringEmpty));
     EXPECT_THROW(stringEmpty.ToObject(), std::exception);
     EXPECT_THROW(stringEmpty.ToPointer(), std::exception);
     EXPECT_EQ(0, stringEmpty.GetUseCount());
@@ -221,8 +221,8 @@ namespace {
     EXPECT_THROW(stringEmpty->Length(), std::exception);
     EXPECT_THROW((*stringEmpty)[0], std::exception);
     
-    RefPtr<string> stringNull = RefPtr<String>::Null();
-    EXPECT_TRUE(RefPtr<string>::IsNullOrInvalid(stringNull));
+    refptr<string> stringNull = refptr<String>::Null();
+    EXPECT_TRUE(refptr<string>::IsNullOrInvalid(stringNull));
     EXPECT_THROW(stringNull.ToObject(), std::exception);
     EXPECT_THROW(stringNull.ToPointer(), std::exception);
     EXPECT_EQ(0, stringNull.GetUseCount());
@@ -230,8 +230,8 @@ namespace {
     EXPECT_THROW(stringNull->Length(), std::exception);
     EXPECT_THROW((*stringNull)[0], std::exception);
     
-    RefPtr<string> str =new string("Test Share Pointer");
-    EXPECT_FALSE(RefPtr<string>::IsNullOrInvalid(str));
+    refptr<string> str =new string("Test Share Pointer");
+    EXPECT_FALSE(refptr<string>::IsNullOrInvalid(str));
     EXPECT_EQ("Test Share Pointer", str.ToObject());
     EXPECT_EQ("Test Share Pointer", *str.ToPointer());
     EXPECT_EQ(1, str.GetUseCount());
@@ -239,8 +239,8 @@ namespace {
     EXPECT_EQ(18,str->Length());
     EXPECT_EQ('T', (*str)[0]);
     
-    RefPtr<string> str2 =new string("Test an other Share Pointer");
-    EXPECT_FALSE(RefPtr<string>::IsNullOrInvalid(str2));
+    refptr<string> str2 =new string("Test an other Share Pointer");
+    EXPECT_FALSE(refptr<string>::IsNullOrInvalid(str2));
     EXPECT_EQ("Test an other Share Pointer", str2.ToObject());
     EXPECT_EQ("Test an other Share Pointer", *str2.ToPointer());
     EXPECT_EQ(1, str2.GetUseCount());
@@ -248,15 +248,15 @@ namespace {
     EXPECT_EQ(27, str2->Length());
     EXPECT_EQ('T', (*str2)[0]);
     
-    RefPtr<string> str3 = str;
-    EXPECT_FALSE(RefPtr<string>::IsNullOrInvalid(str));
+    refptr<string> str3 = str;
+    EXPECT_FALSE(refptr<string>::IsNullOrInvalid(str));
     EXPECT_EQ("Test Share Pointer", str.ToObject());
     EXPECT_EQ("Test Share Pointer", *str.ToPointer());
     EXPECT_EQ(2, str.GetUseCount());
     EXPECT_EQ("Test Share Pointer", *str);
     EXPECT_EQ(18,str->Length());
     EXPECT_EQ('T', (*str)[0]);
-    EXPECT_FALSE(RefPtr<string>::IsNullOrInvalid(str3));
+    EXPECT_FALSE(refptr<string>::IsNullOrInvalid(str3));
     EXPECT_EQ("Test Share Pointer", str3.ToObject());
     EXPECT_EQ("Test Share Pointer", *str3.ToPointer());
     EXPECT_EQ(2, str3.GetUseCount());
@@ -266,14 +266,14 @@ namespace {
     EXPECT_EQ(2, str.GetUseCount());
     
     *str = "This is a new Value for the Share Pointer";
-    EXPECT_FALSE(RefPtr<string>::IsNullOrInvalid(str));
+    EXPECT_FALSE(refptr<string>::IsNullOrInvalid(str));
     EXPECT_EQ("This is a new Value for the Share Pointer", str.ToObject());
     EXPECT_EQ("This is a new Value for the Share Pointer", *str.ToPointer());
     EXPECT_EQ(2, str.GetUseCount());
     EXPECT_EQ("This is a new Value for the Share Pointer", *str);
     EXPECT_EQ(41, str->Length());
     EXPECT_EQ('T', (*str)[0]);
-    EXPECT_FALSE(RefPtr<string>::IsNullOrInvalid(str3));
+    EXPECT_FALSE(refptr<string>::IsNullOrInvalid(str3));
     EXPECT_EQ("This is a new Value for the Share Pointer", str3.ToObject());
     EXPECT_EQ("This is a new Value for the Share Pointer", *str3.ToPointer());
     EXPECT_EQ(2, str3.GetUseCount());
@@ -283,14 +283,14 @@ namespace {
     EXPECT_EQ(2, str.GetUseCount());
     
     *str3 = "And an other one";
-    EXPECT_FALSE(RefPtr<string>::IsNullOrInvalid(str));
+    EXPECT_FALSE(refptr<string>::IsNullOrInvalid(str));
     EXPECT_EQ("And an other one", str.ToObject());
     EXPECT_EQ("And an other one", *str.ToPointer());
     EXPECT_EQ(2, str.GetUseCount());
     EXPECT_EQ("And an other one", *str);
     EXPECT_EQ(16, str->Length());
     EXPECT_EQ('A', (*str)[0]);
-    EXPECT_FALSE(RefPtr<string>::IsNullOrInvalid(str3));
+    EXPECT_FALSE(refptr<string>::IsNullOrInvalid(str3));
     EXPECT_EQ("And an other one", str3.ToObject());
     EXPECT_EQ("And an other one", *str3.ToPointer());
     EXPECT_EQ(2, str3.GetUseCount());
@@ -300,21 +300,21 @@ namespace {
     EXPECT_EQ(2, str.GetUseCount());
     
     str3 = str2;
-    EXPECT_FALSE(RefPtr<string>::IsNullOrInvalid(str));
+    EXPECT_FALSE(refptr<string>::IsNullOrInvalid(str));
     EXPECT_EQ("And an other one", str.ToObject());
     EXPECT_EQ("And an other one", *str.ToPointer());
     EXPECT_EQ(1, str.GetUseCount());
     EXPECT_EQ("And an other one", *str);
     EXPECT_EQ(16, str->Length());
     EXPECT_EQ('A', (*str)[0]);
-    EXPECT_FALSE(RefPtr<string>::IsNullOrInvalid(str2));
+    EXPECT_FALSE(refptr<string>::IsNullOrInvalid(str2));
     EXPECT_EQ("Test an other Share Pointer", str2.ToObject());
     EXPECT_EQ("Test an other Share Pointer", *str2.ToPointer());
     EXPECT_EQ(2, str2.GetUseCount());
     EXPECT_EQ("Test an other Share Pointer", *str2);
     EXPECT_EQ(27, str2->Length());
     EXPECT_EQ('T', (*str2)[0]);
-    EXPECT_FALSE(RefPtr<string>::IsNullOrInvalid(str3));
+    EXPECT_FALSE(refptr<string>::IsNullOrInvalid(str3));
     EXPECT_EQ("Test an other Share Pointer", str3.ToObject());
     EXPECT_EQ("Test an other Share Pointer", *str3.ToPointer());
     EXPECT_EQ(2, str3.GetUseCount());
@@ -322,22 +322,22 @@ namespace {
     EXPECT_EQ(27, str3->Length());
     EXPECT_EQ('T', (*str3)[0]);
     
-    str2 = RefPtr<string>::Null();
-    EXPECT_FALSE(RefPtr<string>::IsNullOrInvalid(str));
+    str2 = refptr<string>::Null();
+    EXPECT_FALSE(refptr<string>::IsNullOrInvalid(str));
     EXPECT_EQ("And an other one", str.ToObject());
     EXPECT_EQ("And an other one", *str.ToPointer());
     EXPECT_EQ(1, str.GetUseCount());
     EXPECT_EQ("And an other one", *str);
     EXPECT_EQ(16, str->Length());
     EXPECT_EQ('A', (*str)[0]);
-    EXPECT_TRUE(RefPtr<string>::IsNullOrInvalid(str2));
+    EXPECT_TRUE(refptr<string>::IsNullOrInvalid(str2));
     EXPECT_THROW(str2.ToObject(), std::exception);
     EXPECT_THROW(str2.ToPointer(), std::exception);
     EXPECT_EQ(0, str2.GetUseCount());
     EXPECT_THROW(*str2, std::exception);
     EXPECT_THROW(str2->Length(), std::exception);
     EXPECT_THROW((*str2)[0], std::exception);
-    EXPECT_FALSE(RefPtr<string>::IsNullOrInvalid(str3));
+    EXPECT_FALSE(refptr<string>::IsNullOrInvalid(str3));
     EXPECT_EQ("Test an other Share Pointer", str3.ToObject());
     EXPECT_EQ("Test an other Share Pointer", *str3.ToPointer());
     EXPECT_EQ(1, str3.GetUseCount());
@@ -345,15 +345,15 @@ namespace {
     EXPECT_EQ(27, str3->Length());
     EXPECT_EQ('T', (*str3)[0]);
     
-    RefPtr<string> str4 = str3;
-    EXPECT_FALSE(RefPtr<string>::IsNullOrInvalid(str3));
+    refptr<string> str4 = str3;
+    EXPECT_FALSE(refptr<string>::IsNullOrInvalid(str3));
     EXPECT_EQ("Test an other Share Pointer", str3.ToObject());
     EXPECT_EQ("Test an other Share Pointer", *str3.ToPointer());
     EXPECT_EQ(2, str3.GetUseCount());
     EXPECT_EQ("Test an other Share Pointer", *str3);
     EXPECT_EQ(27, str3->Length());
     EXPECT_EQ('T', (*str3)[0]);
-    EXPECT_FALSE(RefPtr<string>::IsNullOrInvalid(str4));
+    EXPECT_FALSE(refptr<string>::IsNullOrInvalid(str4));
     EXPECT_EQ("Test an other Share Pointer", str4.ToObject());
     EXPECT_EQ("Test an other Share Pointer", *str4.ToPointer());
     EXPECT_EQ(2, str4.GetUseCount());
@@ -361,15 +361,15 @@ namespace {
     EXPECT_EQ(27, str4->Length());
     EXPECT_EQ('T', (*str4)[0]);
     
-    str4 = RefPtr<string>::Empty();
-    EXPECT_FALSE(RefPtr<string>::IsNullOrInvalid(str3));
+    str4 = refptr<string>::Empty();
+    EXPECT_FALSE(refptr<string>::IsNullOrInvalid(str3));
     EXPECT_EQ("Test an other Share Pointer", str3.ToObject());
     EXPECT_EQ("Test an other Share Pointer", *str3.ToPointer());
     EXPECT_EQ(1, str3.GetUseCount());
     EXPECT_EQ("Test an other Share Pointer", *str3);
     EXPECT_EQ(27, str3->Length());
     EXPECT_EQ('T', (*str3)[0]);
-    EXPECT_TRUE(RefPtr<string>::IsNullOrInvalid(str4));
+    EXPECT_TRUE(refptr<string>::IsNullOrInvalid(str4));
     EXPECT_THROW(str4.ToObject(), std::exception);
     EXPECT_THROW(str4.ToPointer(), std::exception);
     EXPECT_EQ(0, str4.GetUseCount());
@@ -377,31 +377,31 @@ namespace {
     EXPECT_THROW(str4->Length(), std::exception);
     EXPECT_THROW((*str4)[0], std::exception);
     
-    RefPtr<string> str5 = str3;
-    RefPtr<string> str6 = str5;
-    RefPtr<string> str7 = str3;
-    EXPECT_FALSE(RefPtr<string>::IsNullOrInvalid(str3));
+    refptr<string> str5 = str3;
+    refptr<string> str6 = str5;
+    refptr<string> str7 = str3;
+    EXPECT_FALSE(refptr<string>::IsNullOrInvalid(str3));
     EXPECT_EQ("Test an other Share Pointer", str3.ToObject());
     EXPECT_EQ("Test an other Share Pointer", *str3.ToPointer());
     EXPECT_EQ(4, str3.GetUseCount());
     EXPECT_EQ("Test an other Share Pointer", *str3);
     EXPECT_EQ(27, str3->Length());
     EXPECT_EQ('T', (*str3)[0]);
-    EXPECT_FALSE(RefPtr<string>::IsNullOrInvalid(str5));
+    EXPECT_FALSE(refptr<string>::IsNullOrInvalid(str5));
     EXPECT_EQ("Test an other Share Pointer", str5.ToObject());
     EXPECT_EQ("Test an other Share Pointer", *str5.ToPointer());
     EXPECT_EQ(str5.GetUseCount(), 4);
     EXPECT_EQ("Test an other Share Pointer", *str5);
     EXPECT_EQ(27, str5->Length());
     EXPECT_EQ('T', (*str5)[0]);
-    EXPECT_FALSE(RefPtr<string>::IsNullOrInvalid(str6));
+    EXPECT_FALSE(refptr<string>::IsNullOrInvalid(str6));
     EXPECT_EQ("Test an other Share Pointer", str6.ToObject());
     EXPECT_EQ("Test an other Share Pointer", *str6.ToPointer());
     EXPECT_EQ(4, str6.GetUseCount());
     EXPECT_EQ("Test an other Share Pointer", *str6);
     EXPECT_EQ(27, str6->Length());
     EXPECT_EQ('T', (*str6)[0]);
-    EXPECT_FALSE(RefPtr<string>::IsNullOrInvalid(str7));
+    EXPECT_FALSE(refptr<string>::IsNullOrInvalid(str7));
     EXPECT_EQ("Test an other Share Pointer", str7.ToObject());
     EXPECT_EQ("Test an other Share Pointer", *str7.ToPointer());
     EXPECT_EQ(4, str7.GetUseCount());
@@ -412,7 +412,7 @@ namespace {
   
   TEST(Sp, Null) {
     /*
-     RefPtr<string> stringNull;
+     refptr<string> stringNull;
      EXPECT_TRUE(stringNull == IntPtr::Zero);
      EXPECT_TRUE(stringNull == IntPtr(null));
      EXPECT_TRUE(!stringNull);
@@ -420,7 +420,7 @@ namespace {
      EXPECT_FALSE(stringNull != IntPtr(null));
      EXPECT_FALSE(stringNull);
      
-     RefPtr<string> str =new string();
+     refptr<string> str =new string();
      EXPECT_FALSE(str == IntPtr::Zero);
      EXPECT_FALSE(str == IntPtr(null));
      EXPECT_FALSE(!str);
@@ -431,7 +431,7 @@ namespace {
   }
   
   TEST(Sp, Cast) {
-    RefPtr<string> str= new string("Test for cast");
+    refptr<string> str= new string("Test for cast");
     string strCopy;
     
     EXPECT_EQ("Test for cast", *str);
@@ -442,8 +442,8 @@ namespace {
   TEST(Sp, Release) {
     ParentA::parentAReleaseCount=0;
     {
-      RefPtr<ParentA> parentA=new ParentA();
-      RefPtr<ParentA> parentA1=new ParentA();
+      refptr<ParentA> parentA=new ParentA();
+      refptr<ParentA> parentA1=new ParentA();
       EXPECT_EQ(0, ParentA::parentAReleaseCount);
     }
     EXPECT_EQ(2, ParentA::parentAReleaseCount);
@@ -452,8 +452,8 @@ namespace {
   TEST(Sp, Copy) {
     ParentA::parentAReleaseCount=0;
     {
-      RefPtr<ParentA> parentA=new ParentA();
-      RefPtr<ParentA> parentA1(parentA);
+      refptr<ParentA> parentA=new ParentA();
+      refptr<ParentA> parentA1(parentA);
       EXPECT_EQ(0, ParentA::parentAReleaseCount);
     }
     EXPECT_EQ(1, ParentA::parentAReleaseCount);
@@ -462,8 +462,8 @@ namespace {
   TEST(Sp, Affectation) {
     ParentA::parentAReleaseCount=0;
     {
-      RefPtr<ParentA> parentA=new ParentA();
-      RefPtr<ParentA> parentA1=parentA;
+      refptr<ParentA> parentA=new ParentA();
+      refptr<ParentA> parentA1=parentA;
       EXPECT_EQ(0, ParentA::parentAReleaseCount);
     }
     EXPECT_EQ(1, ParentA::parentAReleaseCount);
@@ -473,8 +473,8 @@ namespace {
     ParentA::parentAReleaseCount=0;
     ChildB::childBReleaseCount=0;
     {
-      RefPtr<ChildB> childB=new ChildB();
-      RefPtr<ParentA> parentA = childB.ChangeType<ParentA>();
+      refptr<ChildB> childB=new ChildB();
+      refptr<ParentA> parentA = childB.ChangeType<ParentA>();
       EXPECT_EQ(0, ParentA::parentAReleaseCount);
       EXPECT_EQ(0, ChildB::childBReleaseCount);
     }
@@ -483,31 +483,31 @@ namespace {
   }
   
   TEST(Sp, ToObjectTT) {
-    RefPtr<string> spString(new string("Hello World"));
-    RefPtr<Object> obj = spString.ChangeType<Object>();
+    refptr<string> spString(new string("Hello World"));
+    refptr<Object> obj = spString.ChangeType<Object>();
     string str = obj.ToObject<string>();
     EXPECT_TRUE(str.Equals("Hello World"));
     EXPECT_THROW(obj.ToObject<Int32>(), std::exception);
   }
   
   TEST(Sp, ToPointerTT) {
-    RefPtr<string> spString(new string("Hello World"));
-    RefPtr<Object> obj = spString.ChangeType<Object>();
+    refptr<string> spString(new string("Hello World"));
+    refptr<Object> obj = spString.ChangeType<Object>();
     string* str = obj.ToPointer<string>();
     EXPECT_TRUE(str->Equals("Hello World"));
   }
   
   TEST(Sp, Equality) {
-    Pcf::RefPtr<std::string> s1 = new std::string("string 1");
+    Pcf::refptr<std::string> s1 = new std::string("string 1");
   }
   
   TEST(Sp, CopyCast) {
     ParentA::parentAReleaseCount=0;
     ChildB::childBReleaseCount=0;
     {
-      RefPtr<ChildB> childB=new ChildB();
-      //RefPtr<ParentA> parentA(childB);
-      RefPtr<ParentA> parentA = childB.ChangeType<ParentA>();
+      refptr<ChildB> childB=new ChildB();
+      //refptr<ParentA> parentA(childB);
+      refptr<ParentA> parentA = childB.ChangeType<ParentA>();
       
       EXPECT_EQ(0, ParentA::parentAReleaseCount);
       EXPECT_EQ(0, ChildB::childBReleaseCount);

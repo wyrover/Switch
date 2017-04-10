@@ -64,7 +64,7 @@ namespace Pcf {
             int32 bufferSize = 0;
             int32 bufferOffset = 0;
           };
-          RefPtr<WebRequestStreamData> data = RefPtr<WebRequestStreamData>::Create();
+          refptr<WebRequestStreamData> data = refptr<WebRequestStreamData>::Create();
         };
         
 

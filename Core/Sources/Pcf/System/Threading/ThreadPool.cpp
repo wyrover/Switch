@@ -92,7 +92,7 @@ RegisteredWaitHandle ThreadPool::RegisterWaitForSingleObject(WaitHandle& waitObj
     if (threadPoolAsynchronousIOItems.Count() == maxAsynchronousIOThreads) {
       return result;
     }
-    RefPtr<ThreadPoolAsynchronousIOItem> item = new ThreadPoolAsynchronousIOItem(callBack, state, waitObject, millisecondsTimeoutInterval, executeOnlyOnce);
+    refptr<ThreadPoolAsynchronousIOItem> item = new ThreadPoolAsynchronousIOItem(callBack, state, waitObject, millisecondsTimeoutInterval, executeOnlyOnce);
     result.item = item.ToPointer();
     threadPoolAsynchronousIOItems.Enqueue(item);
     asynchronousIOSemaphore.Release();
@@ -157,7 +157,7 @@ void ThreadPool::Run() {
   while(!closed) {
     semaphore.WaitOne();
     if (!closed) {
-      RefPtr<ThreadPoolItem> item;
+      refptr<ThreadPoolItem> item;
       pcf_lock(threadPoolItems.SyncRoot)
         item = threadPoolItems.Dequeue();
       item->callback(*item->state);
@@ -169,7 +169,7 @@ void ThreadPool::AsynchronousIORun() {
   while(!closed) {
     asynchronousIOSemaphore.WaitOne();
     if (!closed) {
-      RefPtr<ThreadPoolAsynchronousIOItem> item;
+      refptr<ThreadPoolAsynchronousIOItem> item;
       pcf_lock(threadPoolAsynchronousIOItems.SyncRoot)
       item = threadPoolAsynchronousIOItems.Dequeue();
       

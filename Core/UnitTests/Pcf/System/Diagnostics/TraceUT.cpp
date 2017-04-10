@@ -175,9 +175,9 @@ namespace {
     string dataString("Data string");
     const Object& dataObject=string("Data object");
 
-    Array<RefPtr<Object>> dataArray(2);
-    dataArray[0] = RefPtr<Object>::Create<string>("Object 0");
-    dataArray[1] = RefPtr<Object>::Create<string>("Object 1");
+    Array<refptr<Object>> dataArray(2);
+    dataArray[0] = refptr<Object>::Create<string>("Object 0");
+    dataArray[1] = refptr<Object>::Create<string>("Object 1");
 
     TraceSource traceSource("TraceUnittest");
 

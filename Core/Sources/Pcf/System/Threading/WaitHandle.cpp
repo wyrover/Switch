@@ -17,11 +17,11 @@ Property<int32, ReadOnly> WaitHandle::WaitTimeout {
   [] {return -1;} // 258 in .Net
 };
 
-bool WaitHandle::WaitAll(Array<Ref<WaitHandle>> waitHandles) {
+bool WaitHandle::WaitAll(Array<ref<WaitHandle>> waitHandles) {
   return WaitAll(waitHandles, Timeout::Infinite);
 }
 
-bool WaitHandle::WaitAll(Array<Ref<WaitHandle>> waitHandles, int32 millisecondsTimeout) {
+bool WaitHandle::WaitAll(Array<ref<WaitHandle>> waitHandles, int32 millisecondsTimeout) {
   if (millisecondsTimeout < Timeout::Infinite)
     throw ArgumentException(pcf_current_information);
   
@@ -43,15 +43,15 @@ bool WaitHandle::WaitAll(Array<Ref<WaitHandle>> waitHandles, int32 millisecondsT
   return true;
 }
 
-bool WaitHandle::WaitAll(Array<Ref<WaitHandle>> waitHandles, const TimeSpan& timeOut) {
+bool WaitHandle::WaitAll(Array<ref<WaitHandle>> waitHandles, const TimeSpan& timeOut) {
   return WaitAll(waitHandles, Convert::ToInt32(timeOut.TotalMilliseconds()));
 }
 
-int32 WaitHandle::WaitAny(Array<Ref<WaitHandle>> waitHandles) {
+int32 WaitHandle::WaitAny(Array<ref<WaitHandle>> waitHandles) {
   return WaitAny(waitHandles, Timeout::Infinite);
 }
 
-int32 WaitHandle::WaitAny(Array<Ref<WaitHandle>> waitHandles, int32 millisecondsTimeout) {
+int32 WaitHandle::WaitAny(Array<ref<WaitHandle>> waitHandles, int32 millisecondsTimeout) {
   if (millisecondsTimeout < Timeout::Infinite)
     throw ArgumentException(pcf_current_information);
   
@@ -81,7 +81,7 @@ int32 WaitHandle::WaitAny(Array<Ref<WaitHandle>> waitHandles, int32 milliseconds
   return WaitTimeout;
 }
 
-int32 WaitHandle::WaitAny(Array<Ref<WaitHandle>> waitHandles, const TimeSpan& timeOut) {
+int32 WaitHandle::WaitAny(Array<ref<WaitHandle>> waitHandles, const TimeSpan& timeOut) {
   return WaitAny(waitHandles, Convert::ToInt32(timeOut.TotalMilliseconds()));
 }
 

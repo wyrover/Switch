@@ -37,7 +37,7 @@ namespace Pcf {
         /// // Click event handler for a Button control. Adds a TextBox to the form.
         /// void AddControlClick(const object& sender, const System::EventArgs& e) {
         ///   // Create a new TextBox control and add it to the form.
-        ///   RefPtr<TextBox> textBox1 = new TextBox();
+        ///   refptr<TextBox> textBox1 = new TextBox();
         ///   textBox1->Size(Size(100, 10));
         ///   textBox1->Location(Point(10, 10));
         ///   // Name the control in order to remove it later. The name must be specified
@@ -50,7 +50,7 @@ namespace Pcf {
         /// // Removes the previously added TextBox from the form.
         /// void RemoveControlClick(const object& sender, const System::EventArgs& e) {
         ///   // Loop through all controls in the form's control collection.
-        ///   for (RefPtr<Control> tempCtrl : Controls) {
+        ///   for (refptr<Control> tempCtrl : Controls) {
         ///     // Determine whether the control is textBox1,
         ///     // and if it is, remove it.
         ///     if (tempCtrl->Name() == "textBox1") {

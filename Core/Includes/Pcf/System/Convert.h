@@ -2366,7 +2366,7 @@ namespace Pcf {
       static string ToString(NullType) { return "(null)"; }
       
       template<typename T>
-      static string ToString(RefPtr<T> value) { return value.ToString().c_str(); }
+      static string ToString(refptr<T> value) { return value.ToString().c_str(); }
       
       template<typename T>
       static string ToString(UniquePointer<T> value) { return value.ToString().c_str(); }

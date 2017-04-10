@@ -22,7 +22,7 @@ namespace Pcf {
         public:
           /// @brief Gets the value contained in the object.
           /// @param value The value contained in the object.
-          Property<RefPtr<Object>> Value {
+          Property<refptr<Object>> Value {
             pcf_get {return this->value;},
             pcf_set {this->value = value;}
           };
@@ -47,11 +47,11 @@ namespace Pcf {
           
         protected:
           /// @brief Initializes a new instance of the SerializationEntry
-          SerializationEntry(const RefPtr<Object>& value, const String& typeName) : value(value), typeName(typeName) {}
+          SerializationEntry(const refptr<Object>& value, const String& typeName) : value(value), typeName(typeName) {}
           
         private:
           friend class SerializationInfo;
-          RefPtr<Object> value;
+          refptr<Object> value;
           String typeName;
         };
       }

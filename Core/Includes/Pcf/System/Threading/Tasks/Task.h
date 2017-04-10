@@ -228,7 +228,7 @@ namespace Pcf {
           
           /// @brief Waits for all of the provided Task objects to complete execution.
           /// @param tasks An array of ITask instances on which to wait.
-          static void WaitAll(Array<Ref<ITask>> tasks) {WaitAll(tasks, Timeout::Infinite);}
+          static void WaitAll(Array<ref<ITask>> tasks) {WaitAll(tasks, Timeout::Infinite);}
           
           /// @brief Waits for all of the provided Task objects to complete execution.
           /// @param tasks An array of Task instances on which to wait.
@@ -243,7 +243,7 @@ namespace Pcf {
           /// @param tasks An array of ITask instances on which to wait.
           /// @param timeout A TimeSpan that represents the number of milliseconds to wait, or a TimeSpan that represents -1 milliseconds to wait indefinitely.
           /// @exception ArgumentOutOfRangeException timeout is a negative number other than -1 milliseconds, which represents an infinite time-out.
-          static bool WaitAll(Array<Ref<ITask>> tasks, const TimeSpan& timeout) {return WaitAll(tasks, as<int32>(timeout.TotalMilliseconds()));}
+          static bool WaitAll(Array<ref<ITask>> tasks, const TimeSpan& timeout) {return WaitAll(tasks, as<int32>(timeout.TotalMilliseconds()));}
           
           /// @brief Waits for all of the provided cancellable Task objects to complete execution within a specified time interval.
           /// @param tasks An array of Task instances on which to wait.
@@ -262,7 +262,7 @@ namespace Pcf {
           /// @param tasks An array of ITask instances on which to wait.
           /// @param millisecondsTimeout The number of milliseconds to wait, or Infinite (-1) to wait indefinitely.
           /// @exception ArgumentOutOfRangeException millisecondsTimeout is a negative number other than -1, which represents an infinite time-out.
-          static bool WaitAll(Array<Ref<ITask>> tasks, int32 millisecondsTimeout) {
+          static bool WaitAll(Array<ref<ITask>> tasks, int32 millisecondsTimeout) {
             if (millisecondsTimeout < Timeout::Infinite)
               ArgumentOutOfRangeException(pcf_current_information);
 
@@ -339,7 +339,7 @@ namespace Pcf {
           
           /// @brief Waits for any of the provided Task objects to complete execution.
           /// @param tasks An array of ITask instances on which to wait.
-          static void WaitAny(Array<Ref<ITask>> tasks) {WaitAny(tasks, Timeout::Infinite);}
+          static void WaitAny(Array<ref<ITask>> tasks) {WaitAny(tasks, Timeout::Infinite);}
           
           /// @brief Waits for any of the provided Task objects to complete execution.
           /// @param tasks An array of Task instances on which to wait.
@@ -354,7 +354,7 @@ namespace Pcf {
           /// @param tasks An array of ITask instances on which to wait.
           /// @param timeout A TimeSpan that represents the number of milliseconds to wait, or a TimeSpan that represents -1 milliseconds to wait indefinitely.
           /// @exception ArgumentOutOfRangeException timeout is a negative number other than -1 milliseconds, which represents an infinite time-out.
-          static int32 WaitAny(Array<Ref<ITask>> tasks, const TimeSpan& timeout) {return WaitAny(tasks, as<int32>(timeout.TotalMilliseconds()));}
+          static int32 WaitAny(Array<ref<ITask>> tasks, const TimeSpan& timeout) {return WaitAny(tasks, as<int32>(timeout.TotalMilliseconds()));}
           
           /// @brief Waits for any of the provided cancellable Task objects to complete execution within a specified time interval.
           /// @param tasks An array of Task instances on which to wait.
@@ -373,7 +373,7 @@ namespace Pcf {
           /// @param tasks An array of ITask instances on which to wait.
           /// @param millisecondsTimeout The number of milliseconds to wait, or Infinite (-1) to wait indefinitely.
           /// @exception ArgumentOutOfRangeException millisecondsTimeout is a negative number other than -1, which represents an infinite time-out.
-          static int32 WaitAny(Array<Ref<ITask>> tasks, int32 millisecondsTimeout) {
+          static int32 WaitAny(Array<ref<ITask>> tasks, int32 millisecondsTimeout) {
             if (millisecondsTimeout < Timeout::Infinite)
               ArgumentOutOfRangeException(pcf_current_information);
             
@@ -515,7 +515,7 @@ namespace Pcf {
             };
           };
           
-          RefPtr<TaskData> data {new TaskData()};
+          refptr<TaskData> data {new TaskData()};
         };
       }
     }

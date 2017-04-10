@@ -17,13 +17,13 @@ class __opaque_format_item__ {
   
   template <typename T>
   struct EnumOrOtherToAny<T, std::true_type> {
-    RefPtr<object> operator()(T value) {return new System::Enum<T>(value);}
-    //RefPtr<object> operator()(T value);
+    refptr<object> operator()(T value) {return new System::Enum<T>(value);}
+    //refptr<object> operator()(T value);
   };
   
   template <typename T>
   struct EnumOrOtherToAny<T, std::false_type> {
-    RefPtr<object> operator()(T value) {return new System::IntPtr(*((intptr*)&value));}
+    refptr<object> operator()(T value) {return new System::IntPtr(*((intptr*)&value));}
   };
   
   template <typename T, typename Bool>
@@ -31,17 +31,17 @@ class __opaque_format_item__ {
   
   template <typename T>
   struct ObjectOrOtherToAny<T, std::true_type> {
-    RefPtr<object> operator()(T value) {return new T(value);}
+    refptr<object> operator()(T value) {return new T(value);}
   };
   
   template <typename T>
   struct ObjectOrOtherToAny<T, std::false_type> {
-    RefPtr<object> operator()(T value) {return EnumOrOtherToAny<T, typename std::conditional<std::is_enum<T>::value, std::true_type, std::false_type>::type>()(value);}
+    refptr<object> operator()(T value) {return EnumOrOtherToAny<T, typename std::conditional<std::is_enum<T>::value, std::true_type, std::false_type>::type>()(value);}
   };
   
   template <typename T>
   struct ObjectOrEnumOrOtherToAny {
-    RefPtr<object> operator()(T value) {return ObjectOrOtherToAny<T, typename std::conditional<std::is_base_of<object, T>::value, std::true_type, std::false_type>::type>()(value);}
+    refptr<object> operator()(T value) {return ObjectOrOtherToAny<T, typename std::conditional<std::is_base_of<object, T>::value, std::true_type, std::false_type>::type>()(value);}
   };
   
 public:
@@ -98,7 +98,7 @@ private:
   const object& ToObject() const {return *this->value;}
   
 private:
-  RefPtr<object> value;
+  refptr<object> value;
 };
 /// @cond
 

@@ -62,7 +62,7 @@ namespace Pcf {
           static void Start();
           static void MessageLoop();
           //static UniquePointer<Form> mainForm;
-          static Ref<Form> mainForm;
+          static ref<Form> mainForm;
           static bool enableVisualStyles;
         };
       }

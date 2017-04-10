@@ -184,24 +184,24 @@ namespace Pcf {
      /// @brief Gets a reference on object T
      /// @retur Reference on object T.
      /// @exception NullPointerException If the current object is Empty.
-     Ref<T> ToReference() { return ToObject(); }
+     ref<T> ToReference() { return ToObject(); }
      
      /// @brief Gets a reference on object T
      /// @return Reference on object T.
      /// @exception NullPointerException If the current object is Empty.
-     Ref<T> ToReference() const { return ToObject(); }
+     ref<T> ToReference() const { return ToObject(); }
      
      /// @brief Gets a casted reference TT on object T
      /// @return Reference TT on object T.
      /// @exception InvalidCastException if T is not a TT type.
      template<typename TT>
-     Ref<TT> ToReference() { return ToObject<TT>(); }
+     ref<TT> ToReference() { return ToObject<TT>(); }
      
      /// @brief Gets a casted reference TT on object T
      /// @return Reference TT on object T.
      /// @exception InvalidCastException if T is not a TT type.
      template<typename TT>
-     const Ref<TT> ToReference() const { return ToObject<TT>(); }
+     const ref<TT> ToReference() const { return ToObject<TT>(); }
      */
     
     /// @brief Gets a pointer on object T

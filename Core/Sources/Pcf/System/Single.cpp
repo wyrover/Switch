@@ -65,11 +65,11 @@ int32 Single::GetHashCode() const noexcept {
 }
 
 string Single::ToString() const noexcept {
-  return ToString("G", Ref<IFormatProvider>::Null());
+  return ToString("G", ref<IFormatProvider>::Null());
 }
 
 string Single::ToString(const string& format) const {
-  return ToString(format, Ref<IFormatProvider>::Null());
+  return ToString(format, ref<IFormatProvider>::Null());
 }
 
 string Single::ToString(const string& format, const IFormatProvider&) const {

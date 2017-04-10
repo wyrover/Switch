@@ -17,7 +17,7 @@ namespace Pcf {
   /// @see Pcf::System::Type
   /// @ingroup Pcf
   template<typename TT, typename T>
-  bool is(const Ref<T>& value) {
+  bool is(const ref<T>& value) {
     return value.template Is<TT>();
   }
   
@@ -30,7 +30,7 @@ namespace Pcf {
   /// @see Pcf::System::Type
   /// @ingroup Pcf
   template<typename TT, typename T>
-  bool is(Ref<T>& value) {
+  bool is(ref<T>& value) {
     return value.template Is<TT>();
   }
   
@@ -43,7 +43,7 @@ namespace Pcf {
   /// @see Pcf::System::Type
   /// @ingroup Pcf
   template<typename TT, typename T>
-  bool is(const RefPtr<T>& value) {
+  bool is(const refptr<T>& value) {
     return value.template Is<TT>();
   }
   
@@ -56,7 +56,7 @@ namespace Pcf {
   /// @see Pcf::System::Type
   /// @ingroup Pcf
   template<typename TT, typename T>
-  bool is(RefPtr<T>& value) {
+  bool is(refptr<T>& value) {
     return value.template Is<TT>();
   }
   

@@ -34,7 +34,7 @@ namespace Pcf {
 
         Any operator [](string name) {
           /*
-          for(RefPtr<Object> component : components) {
+          for(refptr<Object> component : components) {
             if (component.As<IComponent>().GetSite().Name() == name)
               return component.ChangeType<IComponent>();
           }

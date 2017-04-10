@@ -49,11 +49,11 @@ int32 Int64::GetHashCode() const noexcept {
 }
 
 string Int64::ToString() const noexcept {
-  return ToString("d", Ref<IFormatProvider>::Null());
+  return ToString("d", ref<IFormatProvider>::Null());
 }
 
 string Int64::ToString(const string& format) const {
-  return ToString(format, Ref<IFormatProvider>::Null());
+  return ToString(format, ref<IFormatProvider>::Null());
 }
 
 string Int64::ToString(const string& format, const IFormatProvider&) const {

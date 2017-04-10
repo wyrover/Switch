@@ -94,7 +94,7 @@ namespace Pcf {
         }
         
       private:
-        RefPtr<System::IO::TextWriter> textWriter;
+        refptr<System::IO::TextWriter> textWriter;
       };
     }
   }

@@ -196,7 +196,7 @@ namespace Pcf {
           int32 participantsPostPhaseExceptionRemainin = 0;
         };
         
-        RefPtr<BarrierData> data;
+        refptr<BarrierData> data;
       };
     }
   }

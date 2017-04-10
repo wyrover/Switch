@@ -111,7 +111,7 @@ namespace Pcf {
       
       /// @brief Initializes a new instance of the AggregateException class with references to the inner exceptions that are the cause of this exception.
       /// @param innerExceptions The exceptions that are the cause of the current exception.
-      AggregateException(const Array<Ref<Exception>>& innerExceptions) {
+      AggregateException(const Array<ref<Exception>>& innerExceptions) {
         this->innerExceptions = Array<ExceptionPointer>(innerExceptions.Count);
         for (int index= 0; index < innerExceptions.Count; index++)
           this->innerExceptions[index] = ExceptionPointer::Create(innerExceptions[index]());
@@ -125,7 +125,7 @@ namespace Pcf {
       /// @brief Initializes a new instance of the AggregateException class with references to the inner exceptions that are the cause of this exception.
       /// @param innerExceptions The exceptions that are the cause of the current exception.
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #pcf_current_information.
-      AggregateException(const Array<Ref<Exception>>& innerExceptions, const CurrentInformation& information) : Exception(information) {
+      AggregateException(const Array<ref<Exception>>& innerExceptions, const CurrentInformation& information) : Exception(information) {
         this->innerExceptions = Array<ExceptionPointer>(innerExceptions.Count);
         for (int index= 0; index < innerExceptions.Count; index++)
           this->innerExceptions[index] = ExceptionPointer::Create(innerExceptions[index]());
@@ -180,7 +180,7 @@ namespace Pcf {
       /// @brief Initializes a new instance of the AggregateException class with a specified error message and references to the inner exceptions that are the cause of this exception.
       /// @param message Message string associate to the error.
       /// @param innerExceptions The exceptions that are the cause of the current exception.
-      AggregateException(const System::String& message, const Array<Ref<Exception>>& innerExceptions) {
+      AggregateException(const System::String& message, const Array<ref<Exception>>& innerExceptions) {
         this->innerExceptions = Array<ExceptionPointer>(innerExceptions.Count);
         for (int index= 0; index < innerExceptions.Count; index++)
           this->innerExceptions[index] = ExceptionPointer::Create(innerExceptions[index]());
@@ -196,7 +196,7 @@ namespace Pcf {
       /// @param message Message string associate to the error.
       /// @param innerExceptions The exceptions that are the cause of the current exception.
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #pcf_current_information.
-      AggregateException(const System::String& message, const Array<Ref<Exception>>& innerExceptions, const CurrentInformation& information) : Exception(message, information) {
+      AggregateException(const System::String& message, const Array<ref<Exception>>& innerExceptions, const CurrentInformation& information) : Exception(message, information) {
         this->innerExceptions = Array<ExceptionPointer>(innerExceptions.Count);
         for (int index= 0; index < innerExceptions.Count; index++)
           this->innerExceptions[index] = ExceptionPointer::Create(innerExceptions[index]());

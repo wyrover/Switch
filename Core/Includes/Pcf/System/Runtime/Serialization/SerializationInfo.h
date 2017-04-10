@@ -161,7 +161,7 @@ namespace Pcf {
           void AddValue(const String& name, char32 value);
           template<typename T>
           void AddValue(const String& name, const System::Collections::Generic::IEnumerable<T>& value) {
-            AddValue(name, RefPtr<object>(new Array<T>(value)), "System::Collections::Generic::IEnumerable");
+            AddValue(name, refptr<object>(new Array<T>(value)), "System::Collections::Generic::IEnumerable");
           }
 
           System::Collections::Generic::Enumerator<System::Collections::Generic::KeyValuePair<System::String, SerializationEntry>> GetEnumerator() const;
@@ -184,7 +184,7 @@ namespace Pcf {
           const Object& GetObject(const String& name) const;
 
           template<typename T>
-          RefPtr<T> GetValue(const String& name) const {
+          refptr<T> GetValue(const String& name) const {
             const SerializationEntry& entry = mItems[name];
             if (is<System::Runtime::Serialization::SerializationInfo>(entry.Value().ToObject()))
               return T::Deserialize(as<System::Runtime::Serialization::SerializationInfo>(entry.Value()).ToObject());
@@ -199,51 +199,51 @@ namespace Pcf {
           int32 GetMemberCount() { return mItems.Count; }
 
         private:
-          void AddValue(const String& name, RefPtr<Object> value, const String& typeName);
+          void AddValue(const String& name, refptr<Object> value, const String& typeName);
           String objectType;
           System::Collections::Generic::SortedDictionary<String, SerializationEntry> mItems;
         };
 
-        template<> RefPtr<System::Boolean>
+        template<> refptr<System::Boolean>
         SerializationInfo::GetValue<System::Boolean>(const String& name) const;
 
-        template<> RefPtr<String>
+        template<> refptr<String>
         SerializationInfo::GetValue<String>(const String& name) const;
 
-        template<> RefPtr<System::Byte>
+        template<> refptr<System::Byte>
         SerializationInfo::GetValue<System::Byte>(const String& name) const;
 
-        template<> RefPtr<System::SByte>
+        template<> refptr<System::SByte>
         SerializationInfo::GetValue<System::SByte>(const String& name) const;
 
-        template<> RefPtr<System::Char>
+        template<> refptr<System::Char>
         SerializationInfo::GetValue<System::Char>(const String& name) const;
 
-        template<> RefPtr<System::DateTime>
+        template<> refptr<System::DateTime>
         SerializationInfo::GetValue<System::DateTime>(const String& name) const;
 
-        template<> RefPtr<System::Single>
+        template<> refptr<System::Single>
         SerializationInfo::GetValue<System::Single>(const String& name) const;
 
-        template<> RefPtr<System::Double>
+        template<> refptr<System::Double>
         SerializationInfo::GetValue<System::Double>(const String& name) const;
 
-        template<> RefPtr<System::Int16>
+        template<> refptr<System::Int16>
         SerializationInfo::GetValue<System::Int16>(const String& name) const;
 
-        template<> RefPtr<System::Int32>
+        template<> refptr<System::Int32>
         SerializationInfo::GetValue<System::Int32>(const String& name) const;
 
-        template<> RefPtr<System::Int64>
+        template<> refptr<System::Int64>
         SerializationInfo::GetValue<System::Int64>(const String& name) const;
 
-        template<> RefPtr<System::UInt16>
+        template<> refptr<System::UInt16>
         SerializationInfo::GetValue<System::UInt16>(const String& name) const;
 
-        template<> RefPtr<System::UInt32>
+        template<> refptr<System::UInt32>
         SerializationInfo::GetValue<System::UInt32>(const String& name) const;
 
-        template<> RefPtr<System::UInt64>
+        template<> refptr<System::UInt64>
         SerializationInfo::GetValue<System::UInt64>(const String& name) const;
       }
     }

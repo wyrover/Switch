@@ -9,7 +9,7 @@ void TraceSource::TraceData(const TraceEventType& traceEventType, int32 id, cons
     listener.TraceData(eventCache, this->data->name, traceEventType, id, data);
 }
 
-void TraceSource::TraceData(const TraceEventType& traceEventType, int32 id, const Array<RefPtr<object>>& data) {
+void TraceSource::TraceData(const TraceEventType& traceEventType, int32 id, const Array<refptr<object>>& data) {
   TraceEventCache eventCache;
   for (auto& listener : Listeners())
     listener.TraceData(eventCache, this->data->name, traceEventType, id, data);

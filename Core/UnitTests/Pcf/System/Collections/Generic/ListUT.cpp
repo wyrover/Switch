@@ -101,7 +101,7 @@ namespace {
     EXPECT_FALSE(int64s.IsFixedSize);
     EXPECT_FALSE(int64s.IsReadOnly);
     
-    List< RefPtr<ListHelper>> myList;
+    List< refptr<ListHelper>> myList;
     myList.Add(new ListHelper(1, "YFI"));
     myList.Add(new ListHelper(2, "VLE"));
     
@@ -625,7 +625,7 @@ namespace {
   }
   
   TEST(List, FindLast) {
-    RefPtr<string>::Empty();
+    refptr<string>::Empty();
     // Create List<T> to used with Contains function
     List<string> dinosaurs;
     
@@ -1008,7 +1008,7 @@ namespace {
   }
   
   TEST(List, polymorphicList) {
-    List<RefPtr<ValueType>> polymorphicList;
+    List<refptr<ValueType>> polymorphicList;
     polymorphicList.Add(new Int32(1024));
     polymorphicList.Add(new string("Polymorphic"));
     polymorphicList.Add(new Boolean(true));

@@ -14,60 +14,60 @@ namespace Pcf {
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
   /// @par Examples
   /// @code
-  /// RefPtr<string> str = new Pcf::string("A new string");
-  /// RefPtr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
+  /// refptr<string> str = new Pcf::string("A new string");
+  /// refptr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
   /// @endcode
   /// @exception ArgumentNullException The parameters is null.
   /// @ingroup Pcf
   template<typename TT, typename T>
-  Ref<TT> as(const Ref<T>& value) {
+  ref<TT> as(const ref<T>& value) {
     return value.template As<TT>();
   }
   
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
   /// @par Examples
   /// @code
-  /// RefPtr<string> str = new Pcf::string("A new string");
-  /// RefPtr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
+  /// refptr<string> str = new Pcf::string("A new string");
+  /// refptr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
   /// @endcode
   /// @exception ArgumentNullException The parameters is null.
   /// @ingroup Pcf
   template<typename TT, typename T>
-  Ref<TT> as(Ref<T>& value) {
+  ref<TT> as(ref<T>& value) {
     return value.template As<TT>();
   }
   
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
   /// @par Examples
   /// @code
-  /// RefPtr<string> str = new Pcf::string("A new string");
-  /// RefPtr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
+  /// refptr<string> str = new Pcf::string("A new string");
+  /// refptr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
   /// @endcode
   /// @exception ArgumentNullException The parameters is null.
   /// @ingroup Pcf
   template<typename TT, typename T>
-  RefPtr<TT> as(const RefPtr<T>& value) {
+  refptr<TT> as(const refptr<T>& value) {
     return value.template As<TT>();
   }
   
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
   /// @par Examples
   /// @code
-  /// RefPtr<string> str = new Pcf::string("A new string");
-  /// RefPtr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
+  /// refptr<string> str = new Pcf::string("A new string");
+  /// refptr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
   /// @endcode
   /// @exception ArgumentNullException The parameters is null.
   /// @ingroup Pcf
   template<typename TT, typename T>
-  RefPtr<TT> as(RefPtr<T>& value) {
+  refptr<TT> as(refptr<T>& value) {
     return value.template As<TT>();
   }
   
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
   /// @par Examples
   /// @code
-  /// RefPtr<string> str = new Pcf::string("A new string");
-  /// RefPtr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
+  /// refptr<string> str = new Pcf::string("A new string");
+  /// refptr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
   /// @endcode
   /// @exception ArgumentNullException The parameters is null.
   /// @ingroup Pcf
@@ -79,8 +79,8 @@ namespace Pcf {
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
   /// @par Examples
   /// @code
-  /// RefPtr<string> str = new Pcf::string("A new string");
-  /// RefPtr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
+  /// refptr<string> str = new Pcf::string("A new string");
+  /// refptr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
   /// @endcode
   /// @exception ArgumentNullException The parameters is null.
   /// @ingroup Pcf
@@ -92,8 +92,8 @@ namespace Pcf {
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
   /// @par Examples
   /// @code
-  /// RefPtr<string> str = new Pcf::string("A new string");
-  /// RefPtr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
+  /// refptr<string> str = new Pcf::string("A new string");
+  /// refptr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
   /// @endcode
   /// @exception ArgumentNullException The parameters is null.
   /// @ingroup Pcf
@@ -110,8 +110,8 @@ namespace Pcf {
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
   /// @par Examples
   /// @code
-  /// RefPtr<string> str = new Pcf::string("A new string");
-  /// RefPtr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
+  /// refptr<string> str = new Pcf::string("A new string");
+  /// refptr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
   /// @endcode
   /// @exception ArgumentNullException The parameters is null.
   /// @ingroup Pcf
@@ -128,8 +128,8 @@ namespace Pcf {
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
   /// @par Examples
   /// @code
-  /// RefPtr<string> str = new Pcf::string("A new string");
-  /// RefPtr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
+  /// refptr<string> str = new Pcf::string("A new string");
+  /// refptr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
   /// @endcode
   /// @exception ArgumentNullException The parameters is null.
   /// @ingroup Pcf
@@ -143,8 +143,8 @@ namespace Pcf {
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
   /// @par Examples
   /// @code
-  /// RefPtr<string> str = new Pcf::string("A new string");
-  /// RefPtr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
+  /// refptr<string> str = new Pcf::string("A new string");
+  /// refptr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
   /// @endcode
   /// @exception ArgumentNullException The parameters is null.
   /// @ingroup Pcf

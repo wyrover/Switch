@@ -184,7 +184,7 @@ namespace Pcf {
           }}};
         };
 
-        RefPtr<TimerData> data = new TimerData();
+        refptr<TimerData> data = new TimerData();
       };
     }
   }

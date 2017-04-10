@@ -157,8 +157,8 @@ namespace Pcf {
         using ThreadPoolItem = ThreadItem<WaitCallback>;
         using ThreadPoolAsynchronousIOItem = ThreadItem<WaitOrTimerCallback>;
         
-        using ThreadPoolItemCollection = System::Collections::Generic::Queue<RefPtr<ThreadPoolItem>>;
-        using ThreadPoolAsynchronousIOItemCollection = System::Collections::Generic::Queue<RefPtr<ThreadPoolAsynchronousIOItem>>;
+        using ThreadPoolItemCollection = System::Collections::Generic::Queue<refptr<ThreadPoolItem>>;
+        using ThreadPoolAsynchronousIOItemCollection = System::Collections::Generic::Queue<refptr<ThreadPoolAsynchronousIOItem>>;
         
         static ThreadPoolItemCollection threadPoolItems;
         static ThreadPoolAsynchronousIOItemCollection threadPoolAsynchronousIOItems;

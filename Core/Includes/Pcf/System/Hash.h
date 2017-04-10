@@ -28,7 +28,7 @@ namespace Pcf {
   ///   An integer value being the generated hashcode.
   /// @exception System::ArgumentNullException The parameters converter is null.
   template<typename T>
-  int32 GetHashCode(const RefPtr<T>& value) {
+  int32 GetHashCode(const refptr<T>& value) {
     return *((int32*)value.ToPointer());
   }
   

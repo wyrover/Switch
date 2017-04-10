@@ -327,7 +327,7 @@ namespace Pcf {
               if (IsFinished())
                 return false;
               
-              this->currentKeyValuePair = RefPtr<Item>::Create((*this->iterator).first,(*this->iterator).second);
+              this->currentKeyValuePair = refptr<Item>::Create((*this->iterator).first,(*this->iterator).second);
               return true;
             }
             
@@ -341,14 +341,14 @@ namespace Pcf {
             bool IsFinished() const {return this->iterator == this->dictionary.hashmap.end();}
             int64 operationNumber;
             Dictionary& dictionary;
-            RefPtr<Item> currentKeyValuePair;
+            refptr<Item> currentKeyValuePair;
             typename std::unordered_map<TKey, TValue, Hasher, EqualTo, TAllocator>::iterator iterator;
             bool beforeFirst;
           };
           
         protected:
           std::unordered_map<TKey, TValue, Hasher, EqualTo, TAllocator> hashmap;
-          RefPtr< IComparer<TKey>> comparer;
+          refptr< IComparer<TKey>> comparer;
           int64 operationNumber;
           Object syncRoot;
           /// @endcond

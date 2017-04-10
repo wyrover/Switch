@@ -19,7 +19,7 @@ namespace Pcf {
     namespace Diagnostics {
       /// @brief Provides access to local and remote processes and enables you to start and stop local system processes.
       class pcf_public Process : public Object {
-        RefPtr<IO::Stream> GetStandardOutput() const;
+        refptr<IO::Stream> GetStandardOutput() const;
       public:
         /// @cond
         Process() {}
@@ -81,10 +81,10 @@ namespace Pcf {
         struct ProcessData {
           int32 exitCode = 0;
           intptr handle = 0;
-          RefPtr<System::IO::Stream> outputStream;
+          refptr<System::IO::Stream> outputStream;
           ProcessStartInfo startInfo;
         };
-        RefPtr<ProcessData> data = RefPtr<ProcessData>::Create();
+        refptr<ProcessData> data = refptr<ProcessData>::Create();
       };
     }
   }

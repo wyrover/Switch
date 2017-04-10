@@ -9,24 +9,24 @@ using namespace System;
 using namespace Microsoft::Win32;
 
 namespace {
-  RefPtr<object> BinaryToObject(const char* valueBytes, int32 length) {
+  refptr<object> BinaryToObject(const char* valueBytes, int32 length) {
     if (valueBytes == null)
       throw ArgumentNullException(pcf_current_information);
 
     if (length < 0)
       throw ArgumentException(pcf_current_information);
 
-    return RefPtr<object>(new Array<byte>(reinterpret_cast<const byte*>(valueBytes), length));
+    return refptr<object>(new Array<byte>(reinterpret_cast<const byte*>(valueBytes), length));
   }
 
-  RefPtr<object> DWordToObject(const char* valueBytes) {
+  refptr<object> DWordToObject(const char* valueBytes) {
     if (valueBytes == null)
       throw ArgumentNullException(pcf_current_information);
 
-    return RefPtr<object>(new Int32(*reinterpret_cast<const int32*>(valueBytes)));
+    return refptr<object>(new Int32(*reinterpret_cast<const int32*>(valueBytes)));
   }
 
-  RefPtr<object> ExpandStringToObject(const char* valueBytes) {
+  refptr<object> ExpandStringToObject(const char* valueBytes) {
     if (valueBytes == null)
       throw ArgumentNullException(pcf_current_information);
 
@@ -36,14 +36,14 @@ namespace {
     if (__OS::CoreApi::Registry::ExpandString(valueBytes, expandedString.ToPointer(), length) == 0)
       throw IO::IOException(pcf_current_information);
 
-    return RefPtr<object>(new string(expandedString.ToPointer()));
+    return refptr<object>(new string(expandedString.ToPointer()));
   }
 
-  RefPtr<object> MultiStringToObject(const char* valueBytes) {
+  refptr<object> MultiStringToObject(const char* valueBytes) {
     if (valueBytes == null)
       throw ArgumentNullException(pcf_current_information);
 
-    RefPtr<Array<string>> vakues = new Array<string>();
+    refptr<Array<string>> vakues = new Array<string>();
 
     for (char* line = const_cast<char*>(valueBytes); line[0] != 0; line += strlen(line) + 1) {
       Array<string>::Resize(*vakues, vakues->Length + 1);
@@ -53,18 +53,18 @@ namespace {
     return vakues.ChangeType<object>();
   }
 
-  RefPtr<object> QWordToObject(const char* valueBytes) {
+  refptr<object> QWordToObject(const char* valueBytes) {
     if (valueBytes == null)
       throw ArgumentNullException(pcf_current_information);
 
-    return RefPtr<object>(new Int64(*reinterpret_cast<const int64*>(valueBytes)));
+    return refptr<object>(new Int64(*reinterpret_cast<const int64*>(valueBytes)));
   }
 
-  RefPtr<object> StringToObject(const char* valueBytes) {
+  refptr<object> StringToObject(const char* valueBytes) {
     if (valueBytes == null)
       throw ArgumentNullException(pcf_current_information);
 
-    return RefPtr<object>(new string(valueBytes));
+    return refptr<object>(new string(valueBytes));
   }
 };
 

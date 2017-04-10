@@ -134,9 +134,9 @@ namespace Pcf {
       String message;
       String helpLink;
       CurrentInformation currentInformation;
-      Ref<Exception> innerException;
+      ref<Exception> innerException;
       int32 hresult = 0;
-      RefPtr<Array<String>> stackTrace;
+      refptr<Array<String>> stackTrace;
       String whatMessage;
       static bool stackTraceEnabled;
       /// @endcond

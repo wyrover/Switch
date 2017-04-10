@@ -117,12 +117,12 @@ namespace Pcf {
       
       /// @brief Returns a String that represents the current Byte.
       /// @return String A String that represents the current Byte.
-      String ToString() const noexcept override {return ToString("g", Ref<IFormatProvider>::Null());}
+      String ToString() const noexcept override {return ToString("g", ref<IFormatProvider>::Null());}
       
       /// @brief Returns a String that represents the current Byte.
       /// @param format Format-control String.
       /// @return String A String that represents the current Byte.
-      String ToString(const String& format) const {return ToString(format, Ref<IFormatProvider>::Null());}
+      String ToString(const String& format) const {return ToString(format, ref<IFormatProvider>::Null());}
       
       /// @brief Returns a String that represents the current Byte.
       /// @param format Format-control String.

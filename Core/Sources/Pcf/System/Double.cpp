@@ -60,11 +60,11 @@ int32 Double::GetHashCode() const noexcept {
 }
 
 String Double::ToString() const noexcept {
-  return ToString("G", Ref<IFormatProvider>::Null());
+  return ToString("G", ref<IFormatProvider>::Null());
 }
 
 String Double::ToString(const String& format) const {
-  return ToString(format, Ref<IFormatProvider>::Null());
+  return ToString(format, ref<IFormatProvider>::Null());
 }
 
 String Double::ToString(const String& format, const IFormatProvider&) const {
