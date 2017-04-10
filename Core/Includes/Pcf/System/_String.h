@@ -911,7 +911,7 @@ namespace Pcf {
       /// @brief Creates a new object that is a copy of the current instance.
       /// @return Object* A new object that is a copy of this instance.
       /// @return @see Object
-      up<Object> Clone() const override;
+      refptr<Object> Clone() const override;
 
       /// @brief Compares this instance to a specified Char object and returns an indication of their relative values.
       /// @param value An String object to compare with this instance.

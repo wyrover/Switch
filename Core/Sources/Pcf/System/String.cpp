@@ -1036,8 +1036,8 @@ string String::ToString() const {
   return *this;
 }
 
-up<object> String::Clone() const {
-  return new String(*this);
+refptr<object> String::Clone() const {
+  return pcf_new<String>(*this);
 }
 
 int32 String::CompareTo(const String& value) const {
