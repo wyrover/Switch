@@ -479,6 +479,12 @@ namespace Pcf {
   /// @ingroup Pcf
   template<typename T>
   using refptr = RefPtr<T>;
+  
+  
+  template<typename T, typename ...Args>
+  refptr<T> pcf_new(Args... args) {
+    return refptr<T>(new T(args...));
+  }
 }
 
 using namespace Pcf;
