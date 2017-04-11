@@ -2,7 +2,7 @@
 /// @brief Contains Pcf::System::IO::StreamWriter class.
 #pragma once
 
-#include "../../UniquePointer.h"
+#include "../../UniquePtr.h"
 #include "../Text/Encoding.h"
 #include "FileStream.h"
 #include "TextWriter.h"

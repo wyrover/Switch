@@ -392,7 +392,7 @@ set(INCLUDE_FILES
   Includes/Pcf/Static.h
   Includes/Pcf/RefPtr.h
   Includes/Pcf/Types.h
-  Includes/Pcf/UniquePointer.h
+  Includes/Pcf/UniquePtr.h
   Includes/Pcf/Unused.h
   Includes/Pcf/Using.h
   Includes/Pcf/Var.h

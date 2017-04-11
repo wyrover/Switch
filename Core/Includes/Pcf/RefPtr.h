@@ -8,7 +8,7 @@
 #include <sstream>
 
 #include "Types.h"
-#include "UniquePointer.h"
+#include "UniquePtr.h"
 
 /// @cond
 namespace Pcf {
@@ -78,7 +78,7 @@ namespace Pcf {
     RefPtr(T* obj) { Reset(obj); }
 
     template<typename TT>
-    RefPtr(UniquePointer<TT> up) { Reset(up.template As<T>().Release()); }
+    RefPtr(UniquePtr<TT> up) { Reset(up.template As<T>().Release()); }
     
     /// @brief Delete the current object. Set the current object to null.
     /// @remarks UseCount is decremented. If alias count equal 0 the object T is deleted.
@@ -449,7 +449,7 @@ namespace Pcf {
     }
     
     template<typename TT>
-    RefPtr<T>& operator=(UniquePointer<TT> up)  {
+    RefPtr<T>& operator=(UniquePtr<TT> up)  {
       Reset(up.template As<T>().Release());
       return *this;
     }

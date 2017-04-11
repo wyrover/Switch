@@ -1,7 +1,7 @@
 #include <codecvt>
 #include <locale>
 #include "../../../Includes/Pcf/System/String.h"
-#include "../../../Includes/Pcf/UniquePointer.h"
+#include "../../../Includes/Pcf/UniquePtr.h"
 #include "../../../Includes/Pcf/System/Array.h"
 #include "../../../Includes/Pcf/System/Convert.h"
 #include "../../../Includes/Pcf/System/FormatProvider.h"

@@ -1236,7 +1236,7 @@ namespace Pcf {
       /// Assert::IsNotNull(s2); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void IsNotNull(const UniquePointer<TPointer>& pointer) {IsNotNull(pointer, "", CurrentInformation());}
+      static inline void IsNotNull(const UniquePtr<TPointer>& pointer) {IsNotNull(pointer, "", CurrentInformation());}
       
       /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
@@ -1249,7 +1249,7 @@ namespace Pcf {
       /// Assert::IsNotNull(s2, "User message..."); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void IsNotNull(const UniquePointer<TPointer>& pointer, const string& message) {IsNotNull(pointer, message, CurrentInformation());}
+      static inline void IsNotNull(const UniquePtr<TPointer>& pointer, const string& message) {IsNotNull(pointer, message, CurrentInformation());}
       
       /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
@@ -1262,7 +1262,7 @@ namespace Pcf {
       /// Assert::IsNotNull(s2, pcf_current_information); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void IsNotNull(const UniquePointer<TPointer>& pointer, const CurrentInformation& currentInformation) {IsNotNull(pointer, "", currentInformation);}
+      static inline void IsNotNull(const UniquePtr<TPointer>& pointer, const CurrentInformation& currentInformation) {IsNotNull(pointer, "", currentInformation);}
       
       /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
@@ -1276,7 +1276,7 @@ namespace Pcf {
       /// Assert::IsNotNull(s2, "User message...", pcf_current_information); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void IsNotNull(const UniquePointer<TPointer>& pointer, const string& message, const CurrentInformation& currentInformation) {
+      static inline void IsNotNull(const UniquePtr<TPointer>& pointer, const string& message, const CurrentInformation& currentInformation) {
         if (pointer != null)
           Succeed(message, currentInformation);
         else
@@ -1409,39 +1409,39 @@ namespace Pcf {
       /// @param pointer The pointer to check is null.
       /// @par Examples
       /// @code
-      /// UniquePointer<string> s1;
-      /// UniquePointer<string> s2(new string("A string"));
+      /// UniquePtr<string> s1;
+      /// UniquePtr<string> s2(new string("A string"));
       /// Assert::IsNull(s1); // test ok
       /// Assert::IsNull(s2); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void IsNull(const UniquePointer<TPointer>& pointer) {IsNull(pointer, "", CurrentInformation());}
+      static inline void IsNull(const UniquePtr<TPointer>& pointer) {IsNull(pointer, "", CurrentInformation());}
       
       /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @par Examples
       /// @code
-      /// UniquePointer<string> s1;
-      /// UniquePointer<string> s2(new string("A string"));
+      /// UniquePtr<string> s1;
+      /// UniquePtr<string> s2(new string("A string"));
       /// Assert::IsNull(s1, "User message..."); // test ok
       /// Assert::IsNull(s2, "User message..."); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void IsNull(const UniquePointer<TPointer>& pointer, const string& message) {IsNull(pointer, message, CurrentInformation());}
+      static inline void IsNull(const UniquePtr<TPointer>& pointer, const string& message) {IsNull(pointer, message, CurrentInformation());}
       
       /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
       /// @param currentInformation Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// UniquePointer<string> s1;
-      /// UniquePointer<string> s2(new string("A string"));
+      /// UniquePtr<string> s1;
+      /// UniquePtr<string> s2(new string("A string"));
       /// Assert::IsNull(s1, pcf_current_information); // test ok
       /// Assert::IsNull(s2, pcf_current_information); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void IsNull(const UniquePointer<TPointer>& pointer, const CurrentInformation& currentInformation) {IsNull(pointer, "", currentInformation);}
+      static inline void IsNull(const UniquePtr<TPointer>& pointer, const CurrentInformation& currentInformation) {IsNull(pointer, "", currentInformation);}
       
       /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
@@ -1449,13 +1449,13 @@ namespace Pcf {
       /// @param currentInformation Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// UniquePointer<string> s1;
-      /// UniquePointer<string> s2(new string("A string"));
+      /// UniquePtr<string> s1;
+      /// UniquePtr<string> s2(new string("A string"));
       /// Assert::IsNull(s1, "User message...", pcf_current_information); // test ok
       /// Assert::IsNull(s2, "User message...", pcf_current_information); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void IsNull(const UniquePointer<TPointer>& pointer, const string& message, const CurrentInformation& currentInformation) {
+      static inline void IsNull(const UniquePtr<TPointer>& pointer, const string& message, const CurrentInformation& currentInformation) {
         if (pointer == null)
           Succeed(message, currentInformation);
         else
@@ -1752,7 +1752,7 @@ namespace Pcf {
       /// Assert::NotNull(s2); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void NotNull(const UniquePointer<TPointer>& pointer) {IsNotNull(pointer, "", CurrentInformation());}
+      static inline void NotNull(const UniquePtr<TPointer>& pointer) {IsNotNull(pointer, "", CurrentInformation());}
       
       /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
@@ -1765,7 +1765,7 @@ namespace Pcf {
       /// Assert::NotNull(s2, "User message..."); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void NotNull(const UniquePointer<TPointer>& pointer, const string& message) {IsNotNull(pointer, message, CurrentInformation());}
+      static inline void NotNull(const UniquePtr<TPointer>& pointer, const string& message) {IsNotNull(pointer, message, CurrentInformation());}
       
       /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
@@ -1778,7 +1778,7 @@ namespace Pcf {
       /// Assert::NotNull(s2, pcf_current_information); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void NotNull(const UniquePointer<TPointer>& pointer, const CurrentInformation& currentInformation) {IsNotNull(pointer, "", currentInformation);}
+      static inline void NotNull(const UniquePtr<TPointer>& pointer, const CurrentInformation& currentInformation) {IsNotNull(pointer, "", currentInformation);}
       
       /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
@@ -1792,7 +1792,7 @@ namespace Pcf {
       /// Assert::NotNull(s2, "User message...", pcf_current_information); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void NotNull(const UniquePointer<TPointer>& pointer, const string& message, const CurrentInformation& currentInformation) {IsNotNull(pointer, message, currentInformation);}
+      static inline void NotNull(const UniquePtr<TPointer>& pointer, const string& message, const CurrentInformation& currentInformation) {IsNotNull(pointer, message, currentInformation);}
       
       /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
@@ -1910,39 +1910,39 @@ namespace Pcf {
       /// @param pointer The pointer to check is null.
       /// @par Examples
       /// @code
-      /// UniquePointer<string> s1;
-      /// UniquePointer<string> s2(new string("A string"));
+      /// UniquePtr<string> s1;
+      /// UniquePtr<string> s2(new string("A string"));
       /// Assert::Null(s1); // test ok
       /// Assert::Null(s2); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void Null(const UniquePointer<TPointer>& pointer) {IsNull(pointer, "", CurrentInformation());}
+      static inline void Null(const UniquePtr<TPointer>& pointer) {IsNull(pointer, "", CurrentInformation());}
       
       /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @par Examples
       /// @code
-      /// UniquePointer<string> s1;
-      /// UniquePointer<string> s2(new string("A string"));
+      /// UniquePtr<string> s1;
+      /// UniquePtr<string> s2(new string("A string"));
       /// Assert::Null(s1, "User message..."); // test ok
       /// Assert::Null(s2, "User message..."); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void Null(const UniquePointer<TPointer>& pointer, const string& message) {IsNull(pointer, message, CurrentInformation());}
+      static inline void Null(const UniquePtr<TPointer>& pointer, const string& message) {IsNull(pointer, message, CurrentInformation());}
       
       /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
       /// @param currentInformation Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// UniquePointer<string> s1;
-      /// UniquePointer<string> s2(new string("A string"));
+      /// UniquePtr<string> s1;
+      /// UniquePtr<string> s2(new string("A string"));
       /// Assert::Null(s1, pcf_current_information); // test ok
       /// Assert::Null(s2, pcf_current_information); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void Null(const UniquePointer<TPointer>& pointer, const CurrentInformation& currentInformation) {IsNull(pointer, "", currentInformation);}
+      static inline void Null(const UniquePtr<TPointer>& pointer, const CurrentInformation& currentInformation) {IsNull(pointer, "", currentInformation);}
       
       /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
@@ -1950,13 +1950,13 @@ namespace Pcf {
       /// @param currentInformation Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// UniquePointer<string> s1;
-      /// UniquePointer<string> s2(new string("A string"));
+      /// UniquePtr<string> s1;
+      /// UniquePtr<string> s2(new string("A string"));
       /// Assert::Null(s1, "User message...", pcf_current_information); // test ok
       /// Assert::Null(s2, "User message...", pcf_current_information); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void Null(const UniquePointer<TPointer>& pointer, const string& message, const CurrentInformation& currentInformation) {IsNull(pointer, message, currentInformation);}
+      static inline void Null(const UniquePtr<TPointer>& pointer, const string& message, const CurrentInformation& currentInformation) {IsNull(pointer, message, currentInformation);}
       
       /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.

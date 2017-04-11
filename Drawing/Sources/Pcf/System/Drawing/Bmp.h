@@ -1,6 +1,6 @@
 #include <Pcf/System/Array.h>
 #include <Pcf/System/Object.h>
-#include <Pcf/UniquePointer.h>
+#include <Pcf/UniquePtr.h>
 #include <Pcf/System/Math.h>
 #include <Pcf/System/OutOfMemoryException.h>
 #include <Pcf/System/IO//BinaryReader.h>

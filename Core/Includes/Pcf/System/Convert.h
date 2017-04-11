@@ -2369,7 +2369,7 @@ namespace Pcf {
       static string ToString(refptr<T> value) { return value.ToString().c_str(); }
       
       template<typename T>
-      static string ToString(UniquePointer<T> value) { return value.ToString().c_str(); }
+      static string ToString(UniquePtr<T> value) { return value.ToString().c_str(); }
       
       /// @brief Convert bool to string
       /// @param value bool to convert

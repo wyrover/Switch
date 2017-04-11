@@ -538,106 +538,106 @@ namespace PcfUnitTests {
     }
     
     void UpStringAsString() {
-      UniquePointer<string> s = UniquePointer<string>::Create("Test");
-      UniquePointer<string> r = as<string>(s);
+      UniquePtr<string> s = UniquePtr<string>::Create("Test");
+      UniquePtr<string> r = as<string>(s);
       Assert::AreEqual("Test", r->ToString(), pcf_current_information);
     }
     
     void UpStringAsObject() {
-      UniquePointer<string> s = UniquePointer<string>::Create("Test");
-      UniquePointer<object> r = as<object>(s);
+      UniquePtr<string> s = UniquePtr<string>::Create("Test");
+      UniquePtr<object> r = as<object>(s);
       Assert::AreEqual("Test", r->ToString(), pcf_current_information);
     }
     
     void UpStringAsIComparable() {
-      UniquePointer<string> s = UniquePointer<string>::Create("Test");
-      UniquePointer<IComparable> r = as<IComparable>(s);
+      UniquePtr<string> s = UniquePtr<string>::Create("Test");
+      UniquePtr<IComparable> r = as<IComparable>(s);
       Assert::AreEqual("Test", as<object>(r)->ToString(), pcf_current_information);
     }
     
     void UpStringAsInt32() {
-      UniquePointer<string> s = UniquePointer<string>::Create("Test");
-      UniquePointer<Int32> r = as<Int32>(s);
+      UniquePtr<string> s = UniquePtr<string>::Create("Test");
+      UniquePtr<Int32> r = as<Int32>(s);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void UpObjectFromStringAsString() {
-      UniquePointer<string> s = UniquePointer<string>::Create("Test");
-      UniquePointer<object> o = as<object>(s);
-      UniquePointer<string> r = as<string>(o);
+      UniquePtr<string> s = UniquePtr<string>::Create("Test");
+      UniquePtr<object> o = as<object>(s);
+      UniquePtr<string> r = as<string>(o);
       Assert::AreEqual("Test", r->ToString(), pcf_current_information);
     }
     
     void UpObjectFromStringAsObject() {
-      UniquePointer<string> s = UniquePointer<string>::Create("Test");
-      UniquePointer<object> o = as<object>(s);
-      UniquePointer<object> r = as<object>(o);
+      UniquePtr<string> s = UniquePtr<string>::Create("Test");
+      UniquePtr<object> o = as<object>(s);
+      UniquePtr<object> r = as<object>(o);
       Assert::AreEqual("Test", r->ToString(), pcf_current_information);
     }
     
     void UpObjectFromStringAsIComparable() {
-      UniquePointer<string> s = UniquePointer<string>::Create("Test");
-      UniquePointer<object> o = as<object>(s);
-      UniquePointer<IComparable> r = as<IComparable>(o);
+      UniquePtr<string> s = UniquePtr<string>::Create("Test");
+      UniquePtr<object> o = as<object>(s);
+      UniquePtr<IComparable> r = as<IComparable>(o);
       Assert::AreEqual("Test", as<object>(r)->ToString(), pcf_current_information);
     }
     
     void UpObjectFromStringAsInt32() {
-      UniquePointer<string> s = UniquePointer<string>::Create("Test");
-      UniquePointer<object> o = as<object>(s);
-      UniquePointer<Int32> r = as<Int32>(o);
+      UniquePtr<string> s = UniquePtr<string>::Create("Test");
+      UniquePtr<object> o = as<object>(s);
+      UniquePtr<Int32> r = as<Int32>(o);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void UpStringNullAsString() {
-      UniquePointer<string> s = UniquePointer<string>::Null();
-      UniquePointer<string> r = as<string>(s);
+      UniquePtr<string> s = UniquePtr<string>::Null();
+      UniquePtr<string> r = as<string>(s);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void UpStringNullAsObject() {
-      UniquePointer<string> s = UniquePointer<string>::Null();
-      UniquePointer<object> r = as<object>(s);
+      UniquePtr<string> s = UniquePtr<string>::Null();
+      UniquePtr<object> r = as<object>(s);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void UpStringNullAsIComparable() {
-      UniquePointer<string> s = UniquePointer<string>::Null();
-      UniquePointer<IComparable> r = as<IComparable>(s);
+      UniquePtr<string> s = UniquePtr<string>::Null();
+      UniquePtr<IComparable> r = as<IComparable>(s);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void UpStringNullAsInt32() {
-      UniquePointer<string> s = UniquePointer<string>::Null();
-      UniquePointer<Int32> r = as<Int32>(s);
+      UniquePtr<string> s = UniquePtr<string>::Null();
+      UniquePtr<Int32> r = as<Int32>(s);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void UpObjectFromStringNullAsString() {
-      UniquePointer<string> s = UniquePointer<string>::Null();
-      UniquePointer<object> o = as<object>(s);
-      UniquePointer<string> r = as<string>(o);
+      UniquePtr<string> s = UniquePtr<string>::Null();
+      UniquePtr<object> o = as<object>(s);
+      UniquePtr<string> r = as<string>(o);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void UpObjectFromStringNullAsObject() {
-      UniquePointer<string> s = UniquePointer<string>::Null();
-      UniquePointer<object> o = as<object>(s);
-      UniquePointer<object> r = as<object>(o);
+      UniquePtr<string> s = UniquePtr<string>::Null();
+      UniquePtr<object> o = as<object>(s);
+      UniquePtr<object> r = as<object>(o);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void UpObjectFromStringNullAsIComparable() {
-      UniquePointer<string> s = UniquePointer<string>::Null();
-      UniquePointer<object> o = as<object>(s);
-      UniquePointer<IComparable> r = as<IComparable>(o);
+      UniquePtr<string> s = UniquePtr<string>::Null();
+      UniquePtr<object> o = as<object>(s);
+      UniquePtr<IComparable> r = as<IComparable>(o);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void UpObjectFromStringNullAsInt32() {
-      UniquePointer<string> s = UniquePointer<string>::Null();
-      UniquePointer<object> o = as<object>(s);
-      UniquePointer<Int32> r = as<Int32>(o);
+      UniquePtr<string> s = UniquePtr<string>::Null();
+      UniquePtr<object> o = as<object>(s);
+      UniquePtr<Int32> r = as<Int32>(o);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     

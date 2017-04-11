@@ -5,7 +5,7 @@
 #include "../../Static.h"
 #include "../../Types.h"
 #include "../../RefPtr.h"
-#include "../../UniquePointer.h"
+#include "../../UniquePtr.h"
 #include "../Array.h"
 #include "../String.h"
 #include "../Collections/Generic/IEnumerable.h"

@@ -4,7 +4,7 @@
 
 #include "Ref.h"
 #include "RefPtr.h"
-#include "UniquePointer.h"
+#include "UniquePtr.h"
 
 /// @cond
 void __throw_cast_exception__();
@@ -72,7 +72,7 @@ namespace Pcf {
   /// @exception ArgumentNullException The parameters is null.
   /// @ingroup Pcf
   template<typename TT, typename T>
-  UniquePointer<TT> as(UniquePointer<T>& value) {
+  UniquePtr<TT> as(UniquePtr<T>& value) {
     return value.template As<TT>();
   }
   
@@ -85,7 +85,7 @@ namespace Pcf {
   /// @exception ArgumentNullException The parameters is null.
   /// @ingroup Pcf
   template<typename TT, typename T>
-  UniquePointer<TT> as(UniquePointer<T>&& value) {
+  UniquePtr<TT> as(UniquePtr<T>&& value) {
     return value.template As<TT>();
   }
   

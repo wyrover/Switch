@@ -384,7 +384,7 @@
 #include "Startup.h"
 #include "Static.h"
 #include "Types.h"
-#include "UniquePointer.h"
+#include "UniquePtr.h"
 #include "Unused.h"
 #include "Using.h"
 #include "Var.h"

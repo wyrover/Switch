@@ -5,7 +5,7 @@
 #include <list>
 
 #include "../../../Types.h"
-#include "../../../UniquePointer.h"
+#include "../../../UniquePtr.h"
 #include "../../Allocator.h"
 #include "../../Array.h"
 #include "../../Object.h"

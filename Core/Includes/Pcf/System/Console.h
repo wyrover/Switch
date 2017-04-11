@@ -6,7 +6,7 @@
 #include "../Types.h"
 #include "../RefPtr.h"
 #include "../Static.h"
-#include "../UniquePointer.h"
+#include "../UniquePtr.h"
 #include "Array.h"
 #include "Char.h"
 #include "ConsoleCancelEventHandler.h"

@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains Pcf::UniquePointer <T> class.
+/// @brief Contains Pcf::UniquePtr <T> class.
 #pragma once
 
 #include <exception>
@@ -12,24 +12,24 @@
 namespace Pcf {
   /// @brief Manages the storage of a pointer, providing a limited garbage-collection facility, with little to no overhead over built-in pointers.
   template<typename T>
-  class UniquePointer {
+  class UniquePtr {
   public:
-    /// @brief Represent a Null UniquePointer.
-    static const UniquePointer<T>& Null() { static UniquePointer<T> nullPointer; return nullPointer; }
+    /// @brief Represent a Null UniquePtr.
+    static const UniquePtr<T>& Null() { static UniquePtr<T> nullPointer; return nullPointer; }
     
-    /// @brief Represent an Empty UniquePointer.
-    static const UniquePointer<T>& Empty() { static UniquePointer<T> emptyPointer; return emptyPointer; }
+    /// @brief Represent an Empty UniquePtr.
+    static const UniquePtr<T>& Empty() { static UniquePtr<T> emptyPointer; return emptyPointer; }
     
-    /// @brief Create a null UniquePointer.
-    UniquePointer() {}
+    /// @brief Create a null UniquePtr.
+    UniquePtr() {}
     
     /// @brief Create a Pointer with specified pointer.
     /// @param ptr Pointer to store.
-    UniquePointer(const T* ptr) { this->Reset(ptr); }
+    UniquePtr(const T* ptr) { this->Reset(ptr); }
     
-    /// @brief Copy a UniquePointer specified
-    /// @param ptr UniquePointer to copy.
-    UniquePointer(const UniquePointer& ptr) { this->Swap(const_cast<UniquePointer<T>&>(ptr)); }
+    /// @brief Copy a UniquePtr specified
+    /// @param ptr UniquePtr to copy.
+    UniquePtr(const UniquePtr& ptr) { this->Swap(const_cast<UniquePtr<T>&>(ptr)); }
     
     /// @brief Destroy the current pointer and set to null.
     void Delete() { this->Reset(null); }
@@ -40,10 +40,10 @@ namespace Pcf {
     
     /// @brief Return true if this instance is null.
     /// @return true if this instance is null; otherwise false.
-    static bool IsNullOrInvalid(const UniquePointer<T>& up) { return &up == null || up.IsNull(); }
+    static bool IsNullOrInvalid(const UniquePtr<T>& up) { return &up == null || up.IsNull(); }
     
     /// @brief Releases ownership of its stored pointer, by returning its value and replacing it with a null pointer.
-    /// @return A pointer to the object managed by UniquePointer before the call.
+    /// @return A pointer to the object managed by UniquePtr before the call.
     T* Release() {
       T* ptr = this->ptr;
       this->ptr = null;
@@ -61,19 +61,19 @@ namespace Pcf {
       this->ptr = const_cast<T*>(ptr);
     }
     
-    /// @brief Exchanges the contents of the UniquePointer object with those of ptr, transferring ownership of any managed object between them without destroying either.
-    /// @param ptr Another UniquePointer object of the same type.
-    void Swap(UniquePointer<T>& ptr) {
+    /// @brief Exchanges the contents of the UniquePtr object with those of ptr, transferring ownership of any managed object between them without destroying either.
+    /// @param ptr Another UniquePtr object of the same type.
+    void Swap(UniquePtr<T>& ptr) {
       T* p = ptr.ptr;
       ptr.ptr = this->ptr;
       this->ptr = p;
     }
     
-    static void Swap(UniquePointer<T>& ptrA, UniquePointer<T>& ptrB) { ptrA.Swap(ptrB); }
+    static void Swap(UniquePtr<T>& ptrA, UniquePtr<T>& ptrB) { ptrA.Swap(ptrB); }
     
-    /// @brief Get the value stored in UniquePointer.
-    /// @return the value stored in UniquePointer.
-    /// @exception NullPointerException the UniquePointer is null
+    /// @brief Get the value stored in UniquePtr.
+    /// @return the value stored in UniquePtr.
+    /// @exception NullPointerException the UniquePtr is null
     T& ToObject() {
       if (this->ptr == null)
         throw std::exception();
@@ -81,9 +81,9 @@ namespace Pcf {
       return *this->ptr;
     }
     
-    /// @brief Get the value stored in UniquePointer.
-    /// @return the value stored in UniquePointer.
-    /// @exception NullPointerException the UniquePointer is null
+    /// @brief Get the value stored in UniquePtr.
+    /// @return the value stored in UniquePtr.
+    /// @exception NullPointerException the UniquePtr is null
     const T& ToObject() const {
       if (this->ptr == null)
         throw std::exception();
@@ -91,9 +91,9 @@ namespace Pcf {
       return *this->ptr;
     }
     
-    /// @brief Get the value stored in UniquePointer with specified type.
-    /// @return the value stored in UniquePointer.
-    /// @exception NullPointerException the UniquePointer is null
+    /// @brief Get the value stored in UniquePtr with specified type.
+    /// @return the value stored in UniquePtr.
+    /// @exception NullPointerException the UniquePtr is null
     template<typename TT>
     TT& ToObject() {
       if (this->ptr == null)
@@ -105,9 +105,9 @@ namespace Pcf {
       return *cast;
     }
     
-    /// @brief Get the value stored in UniquePointer with specified type.
-    /// @return the value stored in UniquePointer.
-    /// @exception NullPointerException the UniquePointer is null
+    /// @brief Get the value stored in UniquePtr with specified type.
+    /// @return the value stored in UniquePtr.
+    /// @exception NullPointerException the UniquePtr is null
     template<typename TT>
     const TT& ToObject() const {
       if (this->ptr == null)
@@ -119,27 +119,27 @@ namespace Pcf {
       return *cast;
     }
     
-    /// @brief Get the value stored in UniquePointer.
-    /// @return the value stored in UniquePointer.
-    /// @exception NullPointerException the UniquePointer is null
+    /// @brief Get the value stored in UniquePtr.
+    /// @return the value stored in UniquePtr.
+    /// @exception NullPointerException the UniquePtr is null
     ref<T> ToReference() {
       if (this->ptr == null)
         return ref<T>();
       return ToObject();
     }
     
-    /// @brief Get the value stored in UniquePointer.
-    /// @return the value stored in UniquePointer.
-    /// @exception NullPointerException the UniquePointer is null
+    /// @brief Get the value stored in UniquePtr.
+    /// @return the value stored in UniquePtr.
+    /// @exception NullPointerException the UniquePtr is null
     ref<T> ToReference() const {
       if (this->ptr == null)
         return ref<T>();
       return ToObject();
     }
     
-    /// @brief Get the value stored in UniquePointer with specified type.
-    /// @return the value stored in UniquePointer.
-    /// @exception NullPointerException the UniquePointer is null
+    /// @brief Get the value stored in UniquePtr with specified type.
+    /// @return the value stored in UniquePtr.
+    /// @exception NullPointerException the UniquePtr is null
     template<typename TT>
     ref<TT> ToReference() {
       if (this->ptr == null)
@@ -147,9 +147,9 @@ namespace Pcf {
       return ToObject<TT>();
     }
     
-    /// @brief Get the value stored in UniquePointer with specified type.
-    /// @return the value stored in UniquePointer.
-    /// @exception NullPointerException the UniquePointer is null
+    /// @brief Get the value stored in UniquePtr with specified type.
+    /// @return the value stored in UniquePtr.
+    /// @exception NullPointerException the UniquePtr is null
     template<typename TT>
     ref<TT> ToReference() const {
       if (this->ptr == null)
@@ -157,9 +157,9 @@ namespace Pcf {
       return ToObject<TT>();
     }
     
-    /// @brief Get the pointer stored in UniquePointer.
-    /// @return the pointer stored in UniquePointer.
-    /// @exception NullPointerException the UniquePointer is null
+    /// @brief Get the pointer stored in UniquePtr.
+    /// @return the pointer stored in UniquePtr.
+    /// @exception NullPointerException the UniquePtr is null
     T* ToPointer() {
       if (this->ptr == null)
         throw std::exception();
@@ -167,9 +167,9 @@ namespace Pcf {
       return this->ptr;
     }
     
-    /// @brief Get the pointer stored in UniquePointer.
-    /// @return the pointer stored in UniquePointer.
-    /// @exception NullPointerException the UniquePointer is null
+    /// @brief Get the pointer stored in UniquePtr.
+    /// @return the pointer stored in UniquePtr.
+    /// @exception NullPointerException the UniquePtr is null
     const T* ToPointer() const {
       if (this->ptr == null)
         throw std::exception();
@@ -177,9 +177,9 @@ namespace Pcf {
       return this->ptr;
     }
     
-    /// @brief Get the pointer stored in UniquePointer with specified type.
-    /// @return the pointer stored in UniquePointer.
-    /// @exception NullPointerException the UniquePointer is null
+    /// @brief Get the pointer stored in UniquePtr with specified type.
+    /// @return the pointer stored in UniquePtr.
+    /// @exception NullPointerException the UniquePtr is null
     template<typename TT>
     TT* ToPointer() {
       if (this->ptr == null)
@@ -192,9 +192,9 @@ namespace Pcf {
       return cast;
     }
     
-    /// @brief Get the pointer stored in UniquePointer with specified type.
-    /// @return the pointer stored in UniquePointer.
-    /// @exception NullPointerException the UniquePointer is null
+    /// @brief Get the pointer stored in UniquePtr with specified type.
+    /// @return the pointer stored in UniquePtr.
+    /// @exception NullPointerException the UniquePtr is null
     template<typename TT>
     const TT* ToPointer() const {
       if (this->ptr == null)
@@ -209,35 +209,35 @@ namespace Pcf {
     /// @brief Dynamic cast this type to another specified type.
     /// @par Examples
     /// @code
-    /// UniquePointer<string> s = new string("Test string");
-    /// UniquePointer<IComparable> comparable = s.ToDynamicInstanceOfType<IComparable>();
+    /// UniquePtr<string> s = new string("Test string");
+    /// UniquePtr<IComparable> comparable = s.ToDynamicInstanceOfType<IComparable>();
     /// @endcode
     template<typename TT>
-    UniquePointer<TT> As() {
+    UniquePtr<TT> As() {
       try {
         if (this->ptr == null)
-          return UniquePointer<TT>::Null();
+          return UniquePtr<TT>::Null();
         TT* ptr = dynamic_cast<TT*>(this->ptr);
         Release();
-        return UniquePointer<TT>(ptr);
+        return UniquePtr<TT>(ptr);
       } catch (const std::bad_cast&) {
-        return UniquePointer<TT>::Null();
+        return UniquePtr<TT>::Null();
       }
     }
     /// @brief Dynamic cast specified pointer to another specified type.
     /// @par Examples
     /// @code
-    /// UniquePointer<string> s = new string("Test string");
-    /// UniquePointer<IComparable> comparables = Pointer<string>::ChangeType<IComparable>(s);
+    /// UniquePtr<string> s = new string("Test string");
+    /// UniquePtr<IComparable> comparables = Pointer<string>::ChangeType<IComparable>(s);
     /// @endcode
     template<typename TT>
-    static UniquePointer<TT> As(UniquePointer<T>& up) { return up.As<TT>(); }
+    static UniquePtr<TT> As(UniquePtr<T>& up) { return up.As<TT>(); }
     
     /// @brief Dynamic cast this type to another specified type.
     /// @par Examples
     /// @code
-    /// UniquePointer<string> s = new string("Test string");
-    /// UniquePointer<IComparable> comparable = s.ToDynamicInstanceOfType<IComparable>();
+    /// UniquePtr<string> s = new string("Test string");
+    /// UniquePtr<IComparable> comparable = s.ToDynamicInstanceOfType<IComparable>();
     /// @endcode
     template<typename TT>
     bool Is() {
@@ -252,39 +252,39 @@ namespace Pcf {
     /// @brief Dynamic cast specified pointer to another specified type.
     /// @par Examples
     /// @code
-    /// UniquePointer<string> s = new string("Test string");
-    /// UniquePointer<IComparable> comparables = Pointer<string>::ChangeType<IComparable>(s);
+    /// UniquePtr<string> s = new string("Test string");
+    /// UniquePtr<IComparable> comparables = Pointer<string>::ChangeType<IComparable>(s);
     /// @endcode
     template<typename TT>
-    static bool Is(UniquePointer<T>& up) { return up.Is<TT>(); }
+    static bool Is(UniquePtr<T>& up) { return up.Is<TT>(); }
     
     /// @brief Dynamic cast this type to another specified type.
     /// @par Examples
     /// @code
-    /// UniquePointer<string> s = new string("Test string");
-    /// UniquePointer<IComparable> comparable = s.ToDynamicInstanceOfType<IComparable>();
+    /// UniquePtr<string> s = new string("Test string");
+    /// UniquePtr<IComparable> comparable = s.ToDynamicInstanceOfType<IComparable>();
     /// @endcode
     template<typename TT>
-    UniquePointer<TT> ChangeType() {
+    UniquePtr<TT> ChangeType() {
       TT* ptr = this->ToPointer<TT>();
       Release();
-      return UniquePointer<TT>(ptr);
+      return UniquePtr<TT>(ptr);
     }
 
     /// @brief Dynamic cast specified pointer to another specified type.
     /// @par Examples
     /// @code
-    /// UniquePointer<string> s = new string("Test string");
-    /// UniquePointer<IComparable> comparables = Pointer<string>::ChangeType<IComparable>(s);
+    /// UniquePtr<string> s = new string("Test string");
+    /// UniquePtr<IComparable> comparables = Pointer<string>::ChangeType<IComparable>(s);
     /// @endcode
     template<typename TT>
-    static UniquePointer<TT> ChangeType(UniquePointer<T>& up) { return up.ChangeType<TT>(); }
+    static UniquePtr<TT> ChangeType(UniquePtr<T>& up) { return up.ChangeType<TT>(); }
     
     /*
     /// @brief Creates a shared pointer out of the current unique pointer, which looses the ownership of the pointed data.
     /// @par Examples
     /// @code
-    /// UniquePointer<string> uniqueString = new string("Test string");
+    /// UniquePtr<string> uniqueString = new string("Test string");
     /// refptr<string> sharedString = uniqueString.Share();
     /// @endcode
      refptr<T> Share() {
@@ -296,36 +296,36 @@ namespace Pcf {
     /// @brief Creates a shared pointer out of the up unique pointer, which looses the ownership of the pointed data.
     /// @par Examples
     /// @code
-    /// UniquePointer<string> uniqueString = new string("Test string");
-    /// refptr<string> sharedString = UniquePointer<string>::Share(uniqueString);
+    /// UniquePtr<string> uniqueString = new string("Test string");
+    /// refptr<string> sharedString = UniquePtr<string>::Share(uniqueString);
     /// @endcode
-     static refptr<T> Share(UniquePointer<T>& up) {
+     static refptr<T> Share(UniquePtr<T>& up) {
      return up.Share();
      }
      */
     
-    /// @brief Returns a string that represents the current UniquePointer.
+    /// @brief Returns a string that represents the current UniquePtr.
     /// @return string A string that represents the current object.
     std::string ToString() const {
       if (this->ptr == null)
-        return "Pcf::UniquePointer [Pointer=null]";
+        return "Pcf::UniquePtr [Pointer=null]";
       std::stringstream s;
-      s << "Pcf::UniquePointer [Pointer=" << this->ptr << "]";
+      s << "Pcf::UniquePtr [Pointer=" << this->ptr << "]";
       return s.str();
     }
     
     template<typename ...Arguments>
-    static UniquePointer<T> Create(Arguments... arguments) {
-      return UniquePointer<T>(new T(arguments...));
+    static UniquePtr<T> Create(Arguments... arguments) {
+      return UniquePtr<T>(new T(arguments...));
     }
     
     template<typename TT, typename ...Arguments>
-    static UniquePointer<T> Create(Arguments... arguments) {
-      return UniquePointer<T>(new TT(arguments...));
+    static UniquePtr<T> Create(Arguments... arguments) {
+      return UniquePtr<T>(new TT(arguments...));
     }
     
     /// @cond
-    virtual ~UniquePointer() { Delete(); }
+    virtual ~UniquePtr() { Delete(); }
     
     const T& operator *() const { return ToObject(); }
     T& operator *() { return ToObject(); }
@@ -336,23 +336,23 @@ namespace Pcf {
     const T* operator ->() const { return ToPointer(); }
     T* operator ->() { return ToPointer(); }
     
-    UniquePointer<T>& operator =(const T* ptr) {
+    UniquePtr<T>& operator =(const T* ptr) {
       Reset(ptr);
       return *this;
     }
     
-    UniquePointer<T>& operator =(const UniquePointer<T>& ptr) {
-      Swap(const_cast<UniquePointer<T>&>(ptr));
+    UniquePtr<T>& operator =(const UniquePtr<T>& ptr) {
+      Swap(const_cast<UniquePtr<T>&>(ptr));
       return *this;
     }
     
     bool operator ==(const T* ptr) { return this->ptr == ptr; }
     
-    bool operator ==(const UniquePointer<T>& ptr) { return this->ptr == ptr.ptr; }
+    bool operator ==(const UniquePtr<T>& ptr) { return this->ptr == ptr.ptr; }
     
     bool operator !=(const T* ptr) { return this->ptr != ptr; }
     
-    bool operator !=(const UniquePointer<T>& ptr) { return this->ptr != ptr.ptr; }
+    bool operator !=(const UniquePtr<T>& ptr) { return this->ptr != ptr.ptr; }
     
     operator bool() const { return this->ptr != null; }
     
@@ -365,24 +365,24 @@ namespace Pcf {
   
   /// @brief Manages the storage of an array, providing a limited garbage-collection facility, with little to no overhead over built-in pointers.
   template<typename T>
-  class UniquePointer<T[]> {
+  class UniquePtr<T[]> {
   public:
-    /// @brief Represent a Null UniquePointer.
-    static const UniquePointer<T[]>& Null() { static UniquePointer<T> nullPointer; return nullPointer; }
+    /// @brief Represent a Null UniquePtr.
+    static const UniquePtr<T[]>& Null() { static UniquePtr<T> nullPointer; return nullPointer; }
     
-    /// @brief Represent an Empty UniquePointer.
-    static const UniquePointer<T[]>& Empty() { static UniquePointer<T> emptyPointer; return emptyPointer; }
+    /// @brief Represent an Empty UniquePtr.
+    static const UniquePtr<T[]>& Empty() { static UniquePtr<T> emptyPointer; return emptyPointer; }
     
-    /// @brief Create a null UniquePointer.
-    UniquePointer() {}
+    /// @brief Create a null UniquePtr.
+    UniquePtr() {}
     
     /// @brief Create a Pointer with specified pointer.
     /// @param ptr Pointer to store.
-    UniquePointer(const T* ptr) { Reset(ptr); }
+    UniquePtr(const T* ptr) { Reset(ptr); }
     
-    /// @brief Copy a UniquePointer specified
-    /// @param ptr UniquePointer to copy.
-    UniquePointer(const UniquePointer<T[]>& ptr) { Swap(ptr); }
+    /// @brief Copy a UniquePtr specified
+    /// @param ptr UniquePtr to copy.
+    UniquePtr(const UniquePtr<T[]>& ptr) { Swap(ptr); }
     
     /// @brief Destroy the current pointer and set to null.
     void Delete() { Reset(null); }
@@ -393,10 +393,10 @@ namespace Pcf {
     
     /// @brief Return true if this instance is null.
     /// @return true if this instance is null; otherwise false.
-    static bool IsNullOrInvalid(const UniquePointer<T[]>& up) { return &up == null || up.IsNull(); }
+    static bool IsNullOrInvalid(const UniquePtr<T[]>& up) { return &up == null || up.IsNull(); }
     
     /// @brief Releases ownership of its stored pointer, by returning its value and replacing it with a null pointer.
-    /// @return A pointer to the object managed by UniquePointer before the call.
+    /// @return A pointer to the object managed by UniquePtr before the call.
     T* Release() {
       T* ptr = this->ptr;
       this->ptr = null;
@@ -414,17 +414,17 @@ namespace Pcf {
       this->ptr = const_cast<T*>(ptr);
     }
     
-    /// @brief Exchanges the contents of the UniquePointer object with those of p, transferring ownership of any managed object between them without destroying either.
-    /// @param ptr Another UniquePointer object of the same type.
-    void Swap(const UniquePointer<T[]>& ptr) {
+    /// @brief Exchanges the contents of the UniquePtr object with those of p, transferring ownership of any managed object between them without destroying either.
+    /// @param ptr Another UniquePtr object of the same type.
+    void Swap(const UniquePtr<T[]>& ptr) {
       T* p = ptr.ptr;
-      const_cast<UniquePointer<T[]>& >(ptr).ptr = this->ptr;
+      const_cast<UniquePtr<T[]>& >(ptr).ptr = this->ptr;
       Reset(p);
     }
     
-    /// @brief Get the pointer stored in UniquePointer.
-    /// @return the pointer stored in UniquePointer.
-    /// @exception NullPointerException the UniquePointer is null
+    /// @brief Get the pointer stored in UniquePtr.
+    /// @return the pointer stored in UniquePtr.
+    /// @exception NullPointerException the UniquePtr is null
     T* ToPointer() {
       if (this->ptr == null)
         throw std::exception();
@@ -432,9 +432,9 @@ namespace Pcf {
       return this->ptr;
     }
     
-    /// @brief Get the pointer stored in UniquePointer.
-    /// @return the pointer stored in UniquePointer.
-    /// @exception NullPointerException the UniquePointer is null
+    /// @brief Get the pointer stored in UniquePtr.
+    /// @return the pointer stored in UniquePtr.
+    /// @exception NullPointerException the UniquePtr is null
     const T* ToPointer() const {
       if (this->ptr == null)
         throw std::exception();
@@ -442,9 +442,9 @@ namespace Pcf {
       return this->ptr;
     }
     
-    /// @brief Get the pointer stored in UniquePointer with specified type.
-    /// @return the pointer stored in UniquePointer.
-    /// @exception NullPointerException the UniquePointer is null
+    /// @brief Get the pointer stored in UniquePtr with specified type.
+    /// @return the pointer stored in UniquePtr.
+    /// @exception NullPointerException the UniquePtr is null
     template<typename TT>
     TT* ToPointer() {
       if (this->ptr == null)
@@ -457,9 +457,9 @@ namespace Pcf {
       return cast;
     }
     
-    /// @brief Get the pointer stored in UniquePointer with specified type.
-    /// @return the pointer stored in UniquePointer.
-    /// @exception NullPointerException the UniquePointer is null
+    /// @brief Get the pointer stored in UniquePtr with specified type.
+    /// @return the pointer stored in UniquePtr.
+    /// @exception NullPointerException the UniquePtr is null
     template<typename TT>
     const TT* ToPointer() const {
       if (this->ptr == null)
@@ -474,14 +474,14 @@ namespace Pcf {
     /// @brief Dynamic cast this type to another specified type.
     /// @par Examples
     /// @code
-    /// UniquePointer<string> s = new string("Test string");
-    /// UniquePointer<IComparable> comparable = s.ToDynamicInstanceOfType<IComparable>();
+    /// UniquePtr<string> s = new string("Test string");
+    /// UniquePtr<IComparable> comparable = s.ToDynamicInstanceOfType<IComparable>();
     /// @endcode
     template<typename TT>
-    UniquePointer<TT> ChangeType() {
+    UniquePtr<TT> ChangeType() {
       TT* ptr = ToPointer<TT>();
       Release();
-      return UniquePointer<TT[]>(ptr);
+      return UniquePtr<TT[]>(ptr);
     }
     /// @brief Dynamic cast specified pointer to another specified type.
     /// @par Examples
@@ -490,24 +490,24 @@ namespace Pcf {
     /// Pointer<IComparable[]> comparables = Pointer<string[]>::ChangeType<IComparable[]>(strings);
     /// @endcode
     template<typename TT>
-    static UniquePointer<TT> ChangeType(UniquePointer<T[]>& up) { return up.ChangeType<TT>(); }
+    static UniquePtr<TT> ChangeType(UniquePtr<T[]>& up) { return up.ChangeType<TT>(); }
     
-    /// @brief Returns a string that represents the current UniquePointer.
+    /// @brief Returns a string that represents the current UniquePtr.
     /// @return string A string that represents the current object.
     std::string ToString() const {
       if (this->ptr == null)
-        return "Pcf::UniquePointer [Pointer=null]";
+        return "Pcf::UniquePtr [Pointer=null]";
       std::stringstream s;
-      s << "Pcf::UniquePointer [Pointer=" << this->ptr << "]";
+      s << "Pcf::UniquePtr [Pointer=" << this->ptr << "]";
       return s.str();
     }
     
-    static UniquePointer<T[]> Create(int32 size) {
-      return UniquePointer<T[]>(new T[size]);
+    static UniquePtr<T[]> Create(int32 size) {
+      return UniquePtr<T[]>(new T[size]);
     }
     
     /// @cond
-    virtual ~UniquePointer() { Delete(); }
+    virtual ~UniquePtr() { Delete(); }
     
     const T* operator ->() const { return ToPointer(); }
     
@@ -517,23 +517,23 @@ namespace Pcf {
     
     const T& operator [](int i) const { return this->ptr[i]; }
     
-    UniquePointer<T[]>& operator =(const T* ptr) {
+    UniquePtr<T[]>& operator =(const T* ptr) {
       Reset(ptr);
       return *this;
     }
     
-    UniquePointer<T[]>& operator =(const UniquePointer<T>& ptr) {
+    UniquePtr<T[]>& operator =(const UniquePtr<T>& ptr) {
       Swap(ptr);
       return *this;
     }
     
     bool operator ==(const T* ptr) { return this->ptr == ptr; }
     
-    bool operator ==(const UniquePointer<T[]>& ptr) { return this->ptr == ptr.ptr; }
+    bool operator ==(const UniquePtr<T[]>& ptr) { return this->ptr == ptr.ptr; }
     
     bool operator !=(const T* ptr) { return this->ptr != ptr; }
     
-    bool operator !=(const UniquePointer<T[]>& ptr) { return this->ptr != ptr.ptr; }
+    bool operator !=(const UniquePtr<T[]>& ptr) { return this->ptr != ptr.ptr; }
     
     operator bool() const { return this->ptr != null; }
     
@@ -548,7 +548,7 @@ namespace Pcf {
   /// @see Pcf::Up
   /// @ingroup Pcf
   template<typename T>
-  using up = UniquePointer<T>;
+  using up = UniquePtr<T>;
 }
 
 using namespace Pcf;

@@ -2,7 +2,7 @@
 /// @brief Contains Pcf::System::IO::StreamReader class.
 #pragma once
 
-#include "../../UniquePointer.h"
+#include "../../UniquePtr.h"
 #include "../Text/Encoding.h"
 #include "../Text/UTF8Encoding.h"
 #include "FileStream.h"

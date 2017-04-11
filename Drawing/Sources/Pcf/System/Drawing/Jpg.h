@@ -5,7 +5,7 @@ extern "C" {
 }
 
 #include <Pcf/System/Object.h>
-#include <Pcf/UniquePointer.h>
+#include <Pcf/UniquePtr.h>
 #include <Pcf/System/IO//BinaryReader.h>
 
 #include "../../../../Includes/Pcf/System/Drawing/Image.h"

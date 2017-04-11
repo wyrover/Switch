@@ -4,7 +4,7 @@
 
 #include "Ref.h"
 #include "RefPtr.h"
-#include "UniquePointer.h"
+#include "UniquePtr.h"
 #include "Types.h"
 
 namespace Pcf {
@@ -69,7 +69,7 @@ namespace Pcf {
   /// @see Pcf::System::Type
   /// @ingroup Pcf
   template<typename TT, typename T>
-  bool is(UniquePointer<T>& value) {
+  bool is(UniquePtr<T>& value) {
     return value.template Is<TT>();
   }
 
