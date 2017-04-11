@@ -111,7 +111,7 @@ namespace Pcf {
         }
 
       private:
-        UniquePointer<System::IO::BinaryReader> reader;
+        refptr<System::IO::BinaryReader> reader;
       };
     }
   }

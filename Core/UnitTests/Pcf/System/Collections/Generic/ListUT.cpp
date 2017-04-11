@@ -841,10 +841,10 @@ namespace {
     dinosaurs.Add("Gallimimus");
     dinosaurs.Add("Triceratops");
     
-    UniquePointer<IEnumerator<string>> enumerators[50];
+    refptr<IEnumerator<string>> enumerators[50];
     
     for (Int32 index = 0; index < 50; index++) {
-      enumerators[index] = new Enumerator<string>(dinosaurs.GetEnumerator());
+      enumerators[index] = pcf_new<Enumerator<string>>(dinosaurs.GetEnumerator());
       enumerators[index]->MoveNext();
       EXPECT_EQ("Tyrannosaurus", enumerators[index]->Current());
     }

@@ -311,9 +311,9 @@ string Encoding::GetString(const byte bytes[], int32 bytesSize) const {
   ArrayAlgorithms::ValidateArray(bytes, bytesSize);
   if (bytesSize == 0) return string();
   int32 charsSize = GetCharCount(bytes, bytesSize);
-  UniquePointer<char32[]> chars(new char32[charsSize]);
-  GetChars(bytes, bytesSize, 0, bytesSize, chars.ToPointer(), charsSize, 0);
-  return string(chars.ToPointer(), charsSize);
+  Array<char32> chars(charsSize);
+  GetChars(bytes, bytesSize, 0, bytesSize, (char32*)chars.Data(), charsSize, 0);
+  return string(chars);
 }
 
 string Encoding::GetString(const byte bytes[], int32 bytesSize, int32 index, int32 count) const {
@@ -323,9 +323,9 @@ string Encoding::GetString(const byte bytes[], int32 bytesSize, int32 index, int
   int32 nbChars = GetCharCount(bytes, bytesSize,index,count);
   if (nbChars == 0) return string();
 
-  UniquePointer<char32[]> chars(new char32[nbChars]);
-  GetChars(bytes, bytesSize, index, count, chars.ToPointer(), nbChars, 0);
-  return string(chars.ToPointer(), nbChars, 0 , nbChars);
+  Array<char32> chars(nbChars);
+  GetChars(bytes, bytesSize, index, count, (char32*)chars.Data(), nbChars, 0);
+  return string(chars.Data(), nbChars, 0 , nbChars);
 }
 
 bool Encoding::IsAlwaysNormalized() const {
