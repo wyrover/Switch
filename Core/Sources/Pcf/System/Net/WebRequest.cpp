@@ -51,7 +51,7 @@ WebRequest::~WebRequest() {
   }
 }
 
-UniquePointer<WebRequest> WebRequest::Create(const Uri& requestUriString) {
+refptr<WebRequest> WebRequest::Create(const Uri& requestUriString) {
   if (Curl::GetOSSupportsWebOperations() == false)
     throw NotSupportedException(pcf_current_information);
   

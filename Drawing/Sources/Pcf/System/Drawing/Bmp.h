@@ -1,3 +1,4 @@
+#include <Pcf/System/Array.h>
 #include <Pcf/System/Object.h>
 #include <Pcf/UniquePointer.h>
 #include <Pcf/System/Math.h>
@@ -59,7 +60,7 @@ namespace Pcf {
 
           this->reader.BaseStream().Seek(bmpFile.offBits, Pcf::System::IO::SeekOrigin::Begin);
 
-          UniquePointer<byte[]> rawData = ReadData(bmpInfo.width, bmpInfo.height, bmpInfo.bitCount, bmpInfo.compression, pixelFormatInfo, colors);
+          System::Array<byte> rawData = ReadData(bmpInfo.width, bmpInfo.height, bmpInfo.bitCount, bmpInfo.compression, pixelFormatInfo, colors);
 
           ToImage(image, bmpFile, bmpInfo, colors, rawData, pixelFormatInfo);
         }
@@ -116,9 +117,9 @@ namespace Pcf {
           return colors;
         }
 
-        UniquePointer<byte[]> ReadData(int32 width, int32 height, int32 bitCount, int32 compression, int32 pixelFormatInfo, const Array<Color>& colors) {
+        System::Array<byte> ReadData(int32 width, int32 height, int32 bitCount, int32 compression, int32 pixelFormatInfo, const Array<Color>& colors) {
           int size = width * Math::Abs(height) * (bitCount == 32 ? 4 : 3);
-          UniquePointer<byte[]> rawData = new byte[size];
+          System::Array<byte> rawData(size);
 
           int32 start = Math::Abs(height) - 1;
           int32 end = -1;
@@ -276,7 +277,7 @@ namespace Pcf {
           return rgbQuad;
         }
 
-        void ToImage(Image& image, const BitmapFileHeader& bmpFile, const BitmapInfoHeader& bmpInfo, const Array<Color>& colors, UniquePointer<byte[]> rawData, int32 pixelFormatInfo) {
+        void ToImage(Image& image, const BitmapFileHeader& bmpFile, const BitmapInfoHeader& bmpInfo, const Array<Color>& colors, Array<byte> rawData, int32 pixelFormatInfo) {
           static const float inchesPerMeter = 39.3700787f;
 
           image.flags = Imaging::ImageFlags::ReadOnly | Imaging::ImageFlags::HasRealPixelSize | Imaging::ImageFlags::HasRealDpi | Imaging::ImageFlags::ColorSpaceRgb;
@@ -296,7 +297,8 @@ namespace Pcf {
           image.size = Size(bmpInfo.width, Math::Abs(bmpInfo.height));
 
           image.rawFormat = Imaging::ImageFormat::Bmp;
-          image.rawData = Array<byte>(rawData.Release(), image.size.Width() * image.size.Height() * (image.PixelFormat() == System::Drawing::Imaging::PixelFormat::Format32bppRgb ? 4 : 3));
+          //image.rawData = Array<byte>(rawData.Data, image.size.Width() * image.size.Height() * (image.PixelFormat() == System::Drawing::Imaging::PixelFormat::Format32bppRgb ? 4 : 3));
+          image.rawData = rawData;
         }
 
         System::IO::BinaryReader reader;

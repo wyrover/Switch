@@ -121,11 +121,11 @@ namespace Pcf {
           pcf_get {return this->size.Width();}
         };
 
-        static UniquePointer<Image> FromFile(const string& fileName);
+        static refptr<Image> FromFile(const string& fileName);
 
-        static UniquePointer<Image> FromStream(System::IO::Stream& stream);
+        static refptr<Image> FromStream(System::IO::Stream& stream);
 
-        static UniquePointer<Image> FromData(const char* data[]);
+        static refptr<Image> FromData(const char* data[]);
 
         virtual int32 CompareTo(const IComparable& obj) const {
           if (!is<Image>(obj))

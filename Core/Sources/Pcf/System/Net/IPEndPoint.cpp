@@ -24,15 +24,15 @@ IPEndPoint::IPEndPoint(const IPAddress& address, int32 port) {
   SetPort(port);
 }
 
-UniquePointer<EndPoint> IPEndPoint::Create(const SocketAddress& socketAddress) const {
-  UniquePointer<IPEndPoint> endPoint = new IPEndPoint(0, 0);
+refptr<EndPoint> IPEndPoint::Create(const SocketAddress& socketAddress) const {
+  refptr<IPEndPoint> endPoint = pcf_new<IPEndPoint>(0, 0);
   
   endPoint->addressFamily = socketAddress.GetAddressFamily();
   endPoint->port = IPAddress::NetworkToHostOrder(BitConverter::ToUInt16(socketAddress.bytes, 2));
   endPoint->address = IPAddress(socketAddress[4], socketAddress[5], socketAddress[6], socketAddress[7]);
   if (endPoint->addressFamily != Sockets::AddressFamily::InterNetwork)
     endPoint->address.ScopeId = IPAddress::NetworkToHostOrder(BitConverter::ToInt64(socketAddress.bytes, 8));
-  return as<EndPoint>(endPoint);
+  return endPoint;
 }
 
 SocketAddress IPEndPoint::Serialize() const {

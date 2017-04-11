@@ -261,7 +261,7 @@ namespace Pcf {
         template<typename T>
         const object& GetValue(const System::String& name, const T& defaultValue, bool) const {
           if (! this->values.ContainsKey(name.ToLower())) {
-            static UniquePointer<object> value;
+            static refptr<object> value;
             value = new T(defaultValue);
             return value.ToObject();
           }

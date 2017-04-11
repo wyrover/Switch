@@ -1230,8 +1230,8 @@ namespace Pcf {
       /// @param pointer The pointer to check is null.
       /// @par Examples
       /// @code
-      /// UniquePointer<string> s1(new string("A string"));
-      /// UniquePointer<string> s2;
+      /// refptr<string> s1 = pcf_new<string>("A string");
+      /// refptr<string> s2;
       /// Assert::IsNotNull(s1); // test ok
       /// Assert::IsNotNull(s2); // test throws an AssertionException.
       /// @endcode
@@ -1243,8 +1243,8 @@ namespace Pcf {
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @par Examples
       /// @code
-      /// UniquePointer<string> s1(new string("A string"));
-      /// UniquePointer<string> s2;
+      /// refptr<string> s1 = pcf_new<string>("A string");
+      /// refptr<string> s2;
       /// Assert::IsNotNull(s1, "User message..."); // test ok
       /// Assert::IsNotNull(s2, "User message..."); // test throws an AssertionException.
       /// @endcode
@@ -1256,8 +1256,8 @@ namespace Pcf {
       /// @param currentInformation Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// UniquePointer<string> s1(new string("A string"));
-      /// UniquePointer<string> s2;
+      /// refptr<string> s1 = pcf_new<string>("A string");
+      /// refptr<string> s2;
       /// Assert::IsNotNull(s1, pcf_current_information); // test ok
       /// Assert::IsNotNull(s2, pcf_current_information); // test throws an AssertionException.
       /// @endcode
@@ -1270,8 +1270,8 @@ namespace Pcf {
       /// @param currentInformation Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// UniquePointer<string> s1(new string("A string"));
-      /// UniquePointer<string> s2;
+      /// refptr<string> s1 = pcf_new<string>("A string");
+      /// refptr<string> s2;
       /// Assert::IsNotNull(s1, "User message...", pcf_current_information); // test ok
       /// Assert::IsNotNull(s2, "User message...", pcf_current_information); // test throws an AssertionException.
       /// @endcode
@@ -1746,8 +1746,8 @@ namespace Pcf {
       /// @param pointer The pointer to check is null.
       /// @par Examples
       /// @code
-      /// UniquePointer<string> s1(new string("A string"));
-      /// UniquePointer<string> s2;
+      /// refptr<string> s1 = pcf_new<string>("A string");
+      /// refptr<string> s2;
       /// Assert::NotNull(s1); // test ok
       /// Assert::NotNull(s2); // test throws an AssertionException.
       /// @endcode
@@ -1759,8 +1759,8 @@ namespace Pcf {
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @par Examples
       /// @code
-      /// UniquePointer<string> s1(new string("A string"));
-      /// UniquePointer<string> s2;
+      /// refptr<string> s1 = pcf_new<string>("A string");
+      /// refptr<string> s2;
       /// Assert::NotNull(s1, "User message..."); // test ok
       /// Assert::NotNull(s2, "User message..."); // test throws an AssertionException.
       /// @endcode
@@ -1772,8 +1772,8 @@ namespace Pcf {
       /// @param currentInformation Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// UniquePointer<string> s1(new string("A string"));
-      /// UniquePointer<string> s2;
+      /// refptr<string> s1 = pcf_new<string>("A string");
+      /// refptr<string> s2;
       /// Assert::NotNull(s1, pcf_current_information); // test ok
       /// Assert::NotNull(s2, pcf_current_information); // test throws an AssertionException.
       /// @endcode
@@ -1786,8 +1786,8 @@ namespace Pcf {
       /// @param currentInformation Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// UniquePointer<string> s1(new string("A string"));
-      /// UniquePointer<string> s2;
+      /// refptr<string> s1 = pcf_new<string>("A string");
+      /// refptr<string> s2;
       /// Assert::NotNull(s1, "User message...", pcf_current_information); // test ok
       /// Assert::NotNull(s2, "User message...", pcf_current_information); // test throws an AssertionException.
       /// @endcode

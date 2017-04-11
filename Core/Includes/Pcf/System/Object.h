@@ -66,7 +66,7 @@ namespace Pcf {
       virtual Type GetType() const;
 
       /// @brief Creates a shallow copy of the current Object.
-      /// @return UniquePointer<Object> A shallow copy of the current Object.
+      /// @return refptr<Object> A shallow copy of the current Object.
       /// @par Examples
       /// The following code example shows how to copy an instance of a class using MemberwiseClone.
       /// @include ObjectMemberwiseClone.cpp

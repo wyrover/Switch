@@ -91,7 +91,7 @@ namespace Pcf {
 
           static string WaveAudio() {return "WaveAudio"; }
 
-          static UniquePointer<DataFormats> GetFormat(const string& format) {
+          static refptr<DataFormats> GetFormat(const string& format) {
             return new DataFormats();
           }
 

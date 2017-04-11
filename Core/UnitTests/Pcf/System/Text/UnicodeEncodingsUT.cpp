@@ -996,6 +996,7 @@ namespace {
   //                                  int32 GetCharCount(const byte bytes[], int32 bytesSize) const
   
   using UnicodeCharacters = Array<EncodingUT::UnicodeCharacter>;
+  
   int32 GetCompleteChars(const UnicodeCharacters& chars, int32 index) {
     int32 completed = 0;
     int32 size = 0;

@@ -80,7 +80,7 @@ namespace Pcf {
         /// @remarks ftp://
         /// @remarks The Pcf includes support for the http://, ftp:// URI schemes.
         /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
-        static UniquePointer<WebRequest> Create(const String& requestUriString) { return Create(Uri(requestUriString)); }
+        static refptr<WebRequest> Create(const String& requestUriString) { return Create(Uri(requestUriString)); }
 
         /// @brief Initializes a new WebRequest instance for the specified URI scheme.
         /// @param requestUriString A Uri containing the URI of the requested resource.
@@ -94,7 +94,7 @@ namespace Pcf {
         /// @remarks ftp://
         /// @remarks The Pcf includes support for the http://, ftp:// URI schemes.
         /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
-        static UniquePointer<WebRequest> Create(const Uri& requestUriString);
+        static refptr<WebRequest> Create(const Uri& requestUriString);
 
         Property<int64> ContentLength {
           pcf_get {return this->GetContentLength();},

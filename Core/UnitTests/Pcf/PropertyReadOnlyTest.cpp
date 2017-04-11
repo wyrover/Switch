@@ -88,15 +88,15 @@ namespace PcfUnitTests {
     };
     
     void PropertyCopyConstructor() {
-      UniquePointer<PropertyTestClass> p1 = UniquePointer<PropertyTestClass>::Create();
-      UniquePointer<PropertyTestClass> p2 = UniquePointer<PropertyTestClass>::Create(*p1);
+      refptr<PropertyTestClass> p1 = pcf_new<PropertyTestClass>();
+      refptr<PropertyTestClass> p2 = pcf_new<PropertyTestClass>(*p1);
       p1 = null;
       Assert::AreEqual("Test property", p2->Name, pcf_current_information);
     }
     
     void PropertyEqualOperator() {
-      UniquePointer<PropertyTestClass> p1 = UniquePointer<PropertyTestClass>::Create();
-      UniquePointer<PropertyTestClass> p2 = UniquePointer<PropertyTestClass>::Create();
+      refptr<PropertyTestClass> p1 = pcf_new<PropertyTestClass>();
+      refptr<PropertyTestClass> p2 = pcf_new<PropertyTestClass>();
       *p2 = *p1;
       p1 = null;
       Assert::AreEqual("Test property", p2->Name, pcf_current_information);
