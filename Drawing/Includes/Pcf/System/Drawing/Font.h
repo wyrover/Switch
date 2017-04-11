@@ -96,7 +96,7 @@ namespace Pcf {
           string name;
           float size = .0f;
         };
-        refptr<FontData> data = refptr<FontData>::Create();
+        refptr<FontData> data = pcf_new<FontData>();
       };
     }
   }

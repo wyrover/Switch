@@ -147,7 +147,7 @@ namespace Pcf {
             bool writeable = false;
 		        bool ownsSocket = false;
           };
-          refptr<NetworkStreamData> data = refptr<NetworkStreamData>::Create();
+          refptr<NetworkStreamData> data = pcf_new<NetworkStreamData>();
         };
       }
     }

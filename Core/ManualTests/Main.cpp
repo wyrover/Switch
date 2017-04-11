@@ -11,7 +11,7 @@ namespace Examples {
       refptr<object> s1 = pcf_new<string>("Hello, World!");
       Console::WriteLine(*s1);
 
-      ref<object> s2 = string("Hello, World!");
+      refptr<object> s2 = pcf_new<string>("Hello, World!");
       Console::WriteLine(*s2);
     }
   };

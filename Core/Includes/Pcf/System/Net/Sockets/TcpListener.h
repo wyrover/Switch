@@ -188,7 +188,7 @@ namespace Pcf {
             Socket serverSocket;
             bool active = false;
           };
-          refptr<TcpListenerData> data = refptr<TcpListenerData>::Create();
+          refptr<TcpListenerData> data = pcf_new<TcpListenerData>();
         };
       }
     }

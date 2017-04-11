@@ -75,7 +75,7 @@ namespace Pcf {
             System::Collections::Generic::Dictionary<int32, Action<Message&>> messageActions;
           };
 
-          refptr<FormData> formData = refptr<FormData>::Create();
+          refptr<FormData> formData = pcf_new<FormData>();
           /// @endcond
 
         private:

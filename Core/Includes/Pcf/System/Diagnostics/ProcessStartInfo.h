@@ -308,7 +308,7 @@ namespace Pcf {
           ProcessWindowStyle windowStyle = ProcessWindowStyle::Normal;
           string workingDirectory;
         };
-        refptr<ProcessStartInfoData> data = refptr<ProcessStartInfoData>::Create();
+        refptr<ProcessStartInfoData> data = pcf_new<ProcessStartInfoData>();
       };
     }
   }

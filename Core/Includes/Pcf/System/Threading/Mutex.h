@@ -127,8 +127,8 @@ namespace Pcf {
           return this->mutex->try_lock_for(std::chrono::milliseconds(millisecondsTimeOut));
         }
 
-        refptr<std::recursive_timed_mutex> mutex = refptr<std::recursive_timed_mutex>::Create();
-        refptr<string> name = refptr<string>::Create();
+        refptr<std::recursive_timed_mutex> mutex = pcf_new<std::recursive_timed_mutex>();
+        refptr<string> name = pcf_new<string>();
       };
     }
   }

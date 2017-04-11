@@ -327,7 +327,7 @@ namespace Pcf {
               if (IsFinished())
                 return false;
               
-              this->currentKeyValuePair = refptr<Item>::Create((*this->iterator).first,(*this->iterator).second);
+              this->currentKeyValuePair = pcf_new<Item>((*this->iterator).first,(*this->iterator).second);
               return true;
             }
             

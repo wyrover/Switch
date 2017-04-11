@@ -322,12 +322,12 @@ namespace Pcf {
               toParse = toParse.Substring(toParse.IndexOf("\">") + 2);
 
               switch (rkv.kind) {
-                case RegistryValueKind::DWord: rkv.value = refptr<object>::Create<System::Int32>(System::Int32::Parse(toParse)); break;
-                case RegistryValueKind::QWord: rkv.value = refptr<object>::Create<System::Int64>(System::Int64::Parse(toParse)); break;
-                case RegistryValueKind::String: rkv.value = refptr<object>::Create<string, string>(toParse); break;
-                case RegistryValueKind::ExpandString: rkv.value = refptr<object>::Create<string, string>(toParse); break;
-                case RegistryValueKind::Binary: rkv.value = refptr<object>::Create<System::Array<byte>, System::Array<byte>>(ParseBytes(toParse)); break;
-                case RegistryValueKind::MultiString: rkv.value = refptr<object>::Create<System::Array<System::String>, System::Array<System::String>>(ParseStrings(toParse)); break;
+                case RegistryValueKind::DWord: rkv.value = pcf_new<System::Int32>(System::Int32::Parse(toParse)); break;
+                case RegistryValueKind::QWord: rkv.value = pcf_new<System::Int64>(System::Int64::Parse(toParse)); break;
+                case RegistryValueKind::String: rkv.value = pcf_new<string>(toParse); break;
+                case RegistryValueKind::ExpandString: rkv.value = pcf_new<string>(toParse); break;
+                case RegistryValueKind::Binary: rkv.value = pcf_new<System::Array<byte>>(ParseBytes(toParse)); break;
+                case RegistryValueKind::MultiString: rkv.value = pcf_new<System::Array<System::String>>(ParseStrings(toParse)); break;
                 default:
                   break;
               }

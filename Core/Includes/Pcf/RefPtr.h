@@ -27,7 +27,7 @@ class pcf_public __opaque_sub_object__ {
 
 namespace Pcf {
   /// @cond
-  template <typename T=void>
+  template <typename T>
   class RefPtr;
   /// @endcond
 
@@ -403,18 +403,8 @@ namespace Pcf {
       if (this->ptr == null)
         return "Pcf::RefPtr [Pointer=null]";
       std::stringstream s;
-      s << "Pcf::RefPtr [Pointer=" << this->ptr << ", UseCount=" << std::to_string(this->GetUseCount()) << "]";
+      s << "Pcf::RefPtr [Pointer=" << this->ptr << ", UseCount=" << this->GetUseCount() << "]";
       return s.str();
-    }
-    
-    template<typename ...Arguments>
-    static RefPtr<T> Create(Arguments... arguments) {
-      return RefPtr<T>(new T(arguments...));
-    }
-
-    template<typename TT, typename ...Arguments>
-    static RefPtr<T> Create(Arguments... arguments) {
-      return RefPtr<T>(new TT(arguments...));
     }
     
     /// @cond
@@ -480,20 +470,6 @@ namespace Pcf {
   public:
     T* ptr = null;
     __opaque_sub_object__* subObject = null;
-  };
-  
-  template <>
-  class RefPtr<void> {
-  public:
-    template<typename T, typename ...Arguments>
-    static RefPtr<T> Create(Arguments... arguments) {
-      return RefPtr<T>::Create(arguments...);
-    }
-
-    template<typename TCreate, typename TResult, typename ...Arguments>
-    static RefPtr<TResult> Create(Arguments... arguments) {
-      return RefPtr<TResult>::template Create<TCreate>(arguments...);
-    }
   };
   
   /// @brief Represents a Reference Pointer class. A RefPtr is a memory-managing pointer to an object.

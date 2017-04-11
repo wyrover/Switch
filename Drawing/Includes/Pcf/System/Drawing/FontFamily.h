@@ -47,7 +47,7 @@ namespace Pcf {
         struct FontFamilyData {
           intptr handle = 0;
         };
-        refptr<FontFamilyData> data = refptr<FontFamilyData>::Create();
+        refptr<FontFamilyData> data = pcf_new<FontFamilyData>();
       };
     }
   }

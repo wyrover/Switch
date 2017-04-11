@@ -18,7 +18,7 @@ int32 StackTrace::FrameCount() const {
 }
 
 void StackTrace::FillFrames(int32 skipFrames, bool needFileInfo) {
-  this->stackTrace = refptr<CallStack>::Create();
+  this->stackTrace = pcf_new<CallStack>();
   FillFrames(((stacktrace::call_stack*)this->stackTrace->handle), skipFrames, needFileInfo);
 }
 
@@ -26,7 +26,7 @@ void StackTrace::FillFrames(const String& str, int32 skipFrames, bool needFileIn
   if (skipFrames < 0 )
     throw ArgumentOutOfRangeException(pcf_current_information);
   
-  this->stackTrace = refptr<CallStack>::Create();
+  this->stackTrace = pcf_new<CallStack>();
 
   int32 skipFramesBeforeStr = 0;
   for (int32 index = 0; index < StackFrame::GetFrameCount(((stacktrace::call_stack*)this->stackTrace->handle)); index++) {

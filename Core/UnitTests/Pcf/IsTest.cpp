@@ -277,17 +277,17 @@ namespace {
     }
     
     void SpStringIsString() {
-      refptr<string> s = refptr<String>::Create("Test");
+      refptr<string> s = pcf_new<String>("Test");
       Assert::IsTrue(is<string>(s), pcf_current_information);
     }
     
     void SpStringIsObject() {
-      refptr<string> s = refptr<String>::Create("Test");
+      refptr<string> s = pcf_new<String>("Test");
       Assert::IsTrue(is<object>(s)), pcf_current_information;
     }
     
     void SpStringIsIComparable() {
-      refptr<string> s = refptr<String>::Create("Test");
+      refptr<string> s = pcf_new<String>("Test");
       Assert::IsTrue(is<IComparable>(s), pcf_current_information);
     }
     
@@ -297,22 +297,22 @@ namespace {
     }
     
     void SpObjectFromSpStringIsString() {
-      refptr<object> o = refptr<object>::Create<string>("Test");
+      refptr<object> o = pcf_new<string>("Test");
       Assert::IsTrue(is<string>(o), pcf_current_information);
     }
     
     void SpObjectFromSpStringIsObject() {
-      refptr<object> o = refptr<object>::Create<string>("Test");
+      refptr<object> o = pcf_new<string>("Test");
       Assert::IsTrue(is<object>(o), pcf_current_information);
     }
     
     void SpObjectFormSpStringIsIComparable() {
-      refptr<object> o = refptr<object>::Create<string>("Test");
+      refptr<object> o = pcf_new<string>("Test");
       Assert::IsTrue(is<IComparable>(o), pcf_current_information);
     }
     
     void SpObjectFormSpStringIsInt32() {
-      refptr<object> o = refptr<object>::Create<string>("Test");
+      refptr<object> o = pcf_new<string>("Test");
       Assert::IsFalse(is<Int32>(o), pcf_current_information);
     }
     
@@ -357,42 +357,42 @@ namespace {
     }
     
     void ConstSpStringIsString() {
-      const refptr<string> s = refptr<String>::Create("Test");
+      const refptr<string> s = pcf_new<String>("Test");
       Assert::IsTrue(is<string>(s), pcf_current_information);
     }
     
     void ConstSpStringIsObject() {
-      const refptr<string> s = refptr<String>::Create("Test");
+      const refptr<string> s = pcf_new<String>("Test");
       Assert::IsTrue(is<object>(s), pcf_current_information);
     }
     
     void ConstSpStringIsIComparable() {
-      const refptr<string> s = refptr<String>::Create("Test");
+      const refptr<string> s = pcf_new<String>("Test");
       Assert::IsTrue(is<IComparable>(s), pcf_current_information);
     }
     
     void ConstSpStringIsInt32() {
-      const refptr<string> s = refptr<String>::Create("Test");
+      const refptr<string> s = pcf_new<String>("Test");
       Assert::IsFalse(is<Int32>(s), pcf_current_information);
     }
     
     void ConstSpObjectFromConstSpStringIsString() {
-      const refptr<object> o = refptr<object>::Create<string>("Test");
+      const refptr<object> o = pcf_new<string>("Test");
       Assert::IsTrue(is<string>(o), pcf_current_information);
     }
     
     void ConstSpObjectFromConstSpStringIsObject() {
-      const refptr<object> o = refptr<object>::Create<string>("Test");
+      const refptr<object> o = pcf_new<string>("Test");
       Assert::IsTrue(is<object>(o), pcf_current_information);
     }
     
     void ConstSpObjectFormConstSpStringIsIComparable() {
-      const refptr<object> o = refptr<object>::Create<string>("Test");
+      const refptr<object> o = pcf_new<string>("Test");
       Assert::IsTrue(is<IComparable>(o), pcf_current_information);
     }
     
     void ConstSpObjectFormConstSpStringIsInt32() {
-      const refptr<object> o = refptr<object>::Create<string>("Test");
+      const refptr<object> o = pcf_new<string>("Test");
       Assert::IsFalse(is<Int32>(o), pcf_current_information);
     }
     

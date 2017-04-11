@@ -330,52 +330,52 @@ namespace PcfUnitTests {
     }
     
     void SpStringAsString() {
-      refptr<string> s = refptr<string>::Create("Test");
+      refptr<string> s = pcf_new<string>("Test");
       refptr<string> r = as<string>(s);
       Assert::AreEqual(s.ToPointer(), r.ToPointer(), pcf_current_information);
     }
     
     void SpStringAsObject() {
-      refptr<string> s = refptr<string>::Create("Test");
+      refptr<string> s = pcf_new<string>("Test");
       refptr<object> r = as<object>(s);
       Assert::AreEqual(s.ToPointer(), r.ToPointer(), pcf_current_information);
     }
     
     void SpStringAsIComparable() {
-      refptr<string> s = refptr<string>::Create("Test");
+      refptr<string> s = pcf_new<string>("Test");
       refptr<IComparable> r = as<IComparable>(s);
       Assert::AreEqual(s.ToPointer(), r.ToPointer(), pcf_current_information);
     }
     
     void SpStringAsInt32() {
-      refptr<string> s = refptr<string>::Create("Test");
+      refptr<string> s = pcf_new<string>("Test");
       refptr<Int32> r = as<Int32>(s);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void SpObjectFromStringAsString() {
-      refptr<string> s = refptr<string>::Create("Test");
+      refptr<string> s = pcf_new<string>("Test");
       refptr<object> o = as<object>(s);
       refptr<string> r = as<string>(o);
       Assert::AreEqual(s.ToPointer(), r.ToPointer(), pcf_current_information);
     }
     
     void SpObjectFromStringAsObject() {
-      refptr<string> s = refptr<string>::Create("Test");
+      refptr<string> s = pcf_new<string>("Test");
       refptr<object> o = as<object>(s);
       refptr<object> r = as<object>(o);
       Assert::AreEqual(s.ToPointer(), r.ToPointer(), pcf_current_information);
     }
     
     void SpObjectFromStringAsIComparable() {
-      refptr<string> s = refptr<string>::Create("Test");
+      refptr<string> s = pcf_new<string>("Test");
       refptr<object> o = as<object>(s);
       refptr<IComparable> r = as<IComparable>(o);
       Assert::AreEqual(s.ToPointer(), r.ToPointer(), pcf_current_information);
     }
     
     void SpObjectFromStringAsInt32() {
-      refptr<string> s = refptr<string>::Create("Test");
+      refptr<string> s = pcf_new<string>("Test");
       refptr<object> o = as<object>(s);
       refptr<Int32> r = as<Int32>(o);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
@@ -434,52 +434,52 @@ namespace PcfUnitTests {
     }
     
     void ConstSpStringAsString() {
-      const refptr<string> s = refptr<string>::Create("Test");
+      const refptr<string> s = pcf_new<string>("Test");
       const refptr<string> r = as<string>(s);
       Assert::AreEqual(s.ToPointer(), r.ToPointer(), pcf_current_information);
     }
     
     void ConstSpStringAsObject() {
-      const refptr<string> s = refptr<string>::Create("Test");
+      const refptr<string> s = pcf_new<string>("Test");
       const refptr<object> r = as<object>(s);
       Assert::AreEqual(s.ToPointer(), r.ToPointer(), pcf_current_information);
     }
     
     void ConstSpStringAsIComparable() {
-      const refptr<string> s = refptr<string>::Create("Test");
+      const refptr<string> s = pcf_new<string>("Test");
       const refptr<IComparable> r = as<IComparable>(s);
       Assert::AreEqual(s.ToPointer(), r.ToPointer(), pcf_current_information);
     }
     
     void ConstSpStringAsInt32() {
-      const refptr<string> s = refptr<string>::Create("Test");
+      const refptr<string> s = pcf_new<string>("Test");
       const refptr<Int32> r = as<Int32>(s);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void ConstSpObjectFromStringAsString() {
-      const refptr<string> s = refptr<string>::Create("Test");
+      const refptr<string> s = pcf_new<string>("Test");
       const refptr<object> o = as<object>(s);
       const refptr<string> r = as<string>(o);
       Assert::AreEqual(s.ToPointer(), r.ToPointer(), pcf_current_information);
     }
     
     void ConstSpObjectFromStringAsObject() {
-      const refptr<string> s = refptr<string>::Create("Test");
+      const refptr<string> s = pcf_new<string>("Test");
       const refptr<object> o = as<object>(s);
       const refptr<object> r = as<object>(o);
       Assert::AreEqual(s.ToPointer(), r.ToPointer(), pcf_current_information);
     }
     
     void ConstSpObjectFromStringAsIComparable() {
-      const refptr<string> s = refptr<string>::Create("Test");
+      const refptr<string> s = pcf_new<string>("Test");
       const refptr<object> o = as<object>(s);
       const refptr<IComparable> r = as<IComparable>(o);
       Assert::AreEqual(s.ToPointer(), r.ToPointer(), pcf_current_information);
     }
     
     void ConstSpObjectFromStringAsInt32() {
-      const refptr<string> s = refptr<string>::Create("Test");
+      const refptr<string> s = pcf_new<string>("Test");
       const refptr<object> o = as<object>(s);
       const refptr<Int32> r = as<Int32>(o);
       Assert::IsTrue(r.IsNull(), pcf_current_information);

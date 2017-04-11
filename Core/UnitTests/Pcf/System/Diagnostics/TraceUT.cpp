@@ -176,8 +176,8 @@ namespace {
     const Object& dataObject=string("Data object");
 
     Array<refptr<Object>> dataArray(2);
-    dataArray[0] = refptr<Object>::Create<string>("Object 0");
-    dataArray[1] = refptr<Object>::Create<string>("Object 1");
+    dataArray[0] = pcf_new<string>("Object 0");
+    dataArray[1] = pcf_new<string>("Object 1");
 
     TraceSource traceSource("TraceUnittest");
 

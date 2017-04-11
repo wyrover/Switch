@@ -309,10 +309,10 @@ namespace PcfUnitTests {
   
   TEST(Array, PolymorphicArray) {
     Array<refptr<Object>> PolymorphicList(50);
-    PolymorphicList[0] = refptr<object>::Create<Int32>(1024);
-    PolymorphicList[1] = refptr<object>::Create<String>("Polymorphic");
-    PolymorphicList[2] = refptr<object>::Create<Boolean>(true);
-    PolymorphicList[3] = refptr<object>::Create<Char>('P');
+    PolymorphicList[0] = pcf_new<Int32>(1024);
+    PolymorphicList[1] = pcf_new<String>("Polymorphic");
+    PolymorphicList[2] = pcf_new<Boolean>(true);
+    PolymorphicList[3] = pcf_new<Char>('P');
     
     Assert::IsTrue(is<Int32>(*(PolymorphicList[0])));
     Assert::IsTrue(is<string>(*(PolymorphicList[1])));

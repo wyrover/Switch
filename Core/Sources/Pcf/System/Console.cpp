@@ -18,8 +18,8 @@ namespace {
     return output;
   }
   
-  refptr<System::Text::Encoding> inputEncoding = refptr<System::Text::Encoding>::Create<System::Text::UTF8Encoding>(false);
-  refptr<System::Text::Encoding> outputEncoding = refptr<System::Text::Encoding>::Create<System::Text::UTF8Encoding>(false);
+  refptr<System::Text::Encoding> inputEncoding = pcf_new<System::Text::UTF8Encoding>(false);
+  refptr<System::Text::Encoding> outputEncoding = pcf_new<System::Text::UTF8Encoding>(false);
 
   System::ConsoleColor __backgroundColor = static_cast<System::ConsoleColor>(__OS::CoreApi::Console::GetBackgroundColor());
   System::ConsoleColor __foregroundColor = static_cast<System::ConsoleColor>(__OS::CoreApi::Console::GetForegroundColor());

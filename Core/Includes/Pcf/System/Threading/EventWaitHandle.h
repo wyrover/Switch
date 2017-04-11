@@ -31,7 +31,7 @@ namespace Pcf {
         /// @param initialState true to set the initial state to signaled if the named event is created as a result of this call; false to set it to nonsignaled.
         /// @param mode One of the System::Threading::EventResetMode values that determines whether the event resets automatically or manually.
         /// @exception IO::IOException A Win32 error occurred.
-        EventWaitHandle(bool initialState, EventResetMode mode) : mode(refptr<EventResetMode>::Create(mode)) {
+        EventWaitHandle(bool initialState, EventResetMode mode) : mode(pcf_new<EventResetMode>(mode)) {
           if (initialState)
             this->Set();
         }
@@ -134,11 +134,11 @@ namespace Pcf {
           return true;
         }
         
-        refptr<std::mutex> guard = refptr<std::mutex>::Create();
-        refptr<std::condition_variable> signal = refptr<std::condition_variable>::Create();
-        refptr<bool> event = refptr<bool>::Create(false);
-        refptr<EventResetMode> mode = refptr<EventResetMode>::Create(EventResetMode::ManualReset);
-        refptr<string> name = refptr<string>::Create();
+        refptr<std::mutex> guard = pcf_new<std::mutex>();
+        refptr<std::condition_variable> signal = pcf_new<std::condition_variable>();
+        refptr<bool> event = pcf_new<bool>(false);
+        refptr<EventResetMode> mode = pcf_new<EventResetMode>(EventResetMode::ManualReset);
+        refptr<string> name = pcf_new<string>();
       };
     }
   }

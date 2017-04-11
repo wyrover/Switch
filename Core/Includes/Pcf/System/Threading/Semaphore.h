@@ -33,7 +33,7 @@ namespace Pcf {
         /// @param initialCount The initial number of requests for the semaphore that can be granted concurrently.
         /// @param maximumCount The maximum number of requests for the semaphore that can be granted concurrently.
         /// @exception IO::IOException An Io error occurred.
-        Semaphore(int32 initialCount, int32 maximumCount) : count(refptr<int32>::Create(initialCount)), maxCount(refptr<int32>::Create(maximumCount)) {}
+        Semaphore(int32 initialCount, int32 maximumCount) : count(pcf_new<int32>(initialCount)), maxCount(pcf_new<int32>(maximumCount)) {}
 
         /// @brief Initializes a new instance of the System::Threading::Semaphore class, specifying the maximum number of concurrent entries, optionally reserving some entries
         /// for the calling thread, and optionally specifying the name of a system semaphore
@@ -140,11 +140,11 @@ namespace Pcf {
           return true;
         }
 
-        refptr<std::mutex> guard = refptr<std::mutex>::Create();
-        refptr<std::condition_variable> signal = refptr<std::condition_variable>::Create();
-        refptr<int32> count = refptr<int32>::Create(0);
-        refptr<int32> maxCount = refptr<int32>::Create(Int32::MaxValue());
-        refptr<string> name = refptr<string>::Create();
+        refptr<std::mutex> guard = pcf_new<std::mutex>();
+        refptr<std::condition_variable> signal = pcf_new<std::condition_variable>();
+        refptr<int32> count = pcf_new<int32>(0);
+        refptr<int32> maxCount = pcf_new<int32>(Int32::MaxValue());
+        refptr<string> name = pcf_new<string>();
       };
     }
   }

@@ -61,7 +61,7 @@ namespace Pcf {
             bool started = false;
             bool finished = false;
           };
-          refptr<WebRequestStreamData> data = refptr<WebRequestStreamData>::Create();
+          refptr<WebRequestStreamData> data = pcf_new<WebRequestStreamData>();
         };
         
         Property<int64> ContentLength {

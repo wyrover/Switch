@@ -83,7 +83,7 @@ namespace Pcf {
           refptr<System::IO::Stream> outputStream;
           ProcessStartInfo startInfo;
         };
-        refptr<ProcessData> data = refptr<ProcessData>::Create();
+        refptr<ProcessData> data = pcf_new<ProcessData>();
       };
     }
   }

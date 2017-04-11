@@ -995,7 +995,7 @@ namespace Pcf {
             bool nonBlocking = false;
             bool bound = false;
           };
-          refptr<SocketData> data = refptr<SocketData>::Create();
+          refptr<SocketData> data = pcf_new<SocketData>();
           
         };
       }

@@ -10,32 +10,32 @@ using namespace System::Net;
 using namespace System::Net::Sockets;
 
 UdpClient::UdpClient() {
-  this->client = refptr<Socket>::Create(AddressFamily::InterNetwork, SocketType::Dgram, ProtocolType::Udp);
+  this->client = pcf_new<Socket>(AddressFamily::InterNetwork, SocketType::Dgram, ProtocolType::Udp);
 }
 
 UdpClient::UdpClient(AddressFamily addressFamily) {
-  this->client = refptr<Socket>::Create(addressFamily, SocketType::Dgram, ProtocolType::Udp);
+  this->client = pcf_new<Socket>(addressFamily, SocketType::Dgram, ProtocolType::Udp);
 }
 
 UdpClient::UdpClient(int32 port) {
-  this->client = refptr<Socket>::Create(AddressFamily::InterNetwork, SocketType::Dgram, ProtocolType::Udp);
+  this->client = pcf_new<Socket>(AddressFamily::InterNetwork, SocketType::Dgram, ProtocolType::Udp);
   this->client->Bind(IPEndPoint(IPAddress::Any, port));
 }
 
 UdpClient::UdpClient(const IPEndPoint& endPoint) {
-  this->client = refptr<Socket>::Create(AddressFamily::InterNetwork, SocketType::Dgram, ProtocolType::Udp);
+  this->client = pcf_new<Socket>(AddressFamily::InterNetwork, SocketType::Dgram, ProtocolType::Udp);
   this->client->Bind(endPoint);
 }
 
 UdpClient::UdpClient(int32 port, AddressFamily addressFamily) {
-  this->client = refptr<Socket>::Create(addressFamily, SocketType::Dgram, ProtocolType::Udp);
+  this->client = pcf_new<Socket>(addressFamily, SocketType::Dgram, ProtocolType::Udp);
 
   // Retrieve local IPAddress and use the 1st one
   this->client->Bind(IPEndPoint(Dns::GetHostAddresses(Dns::GetHostName())[0], port));
 }
 
 UdpClient::UdpClient(const string& hostname, int32 port) {
-  this->client = refptr<Socket>::Create(AddressFamily::InterNetwork, SocketType::Dgram, ProtocolType::Udp);
+  this->client = pcf_new<Socket>(AddressFamily::InterNetwork, SocketType::Dgram, ProtocolType::Udp);
   Connect(hostname, port);
 }
 

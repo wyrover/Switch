@@ -430,8 +430,8 @@ namespace Pcf {
             ControlStyles style = (ControlStyles)0;
           };
           friend class __OS::FormsApi;
-          //refptr<ControlData> data = refptr<ControlData>::Create(*this);
-          refptr<ControlData> data { new ControlData(*this) };
+          //refptr<ControlData> data = pcf_new<ControlData>(*this);
+          refptr<ControlData> data {new ControlData(*this)};
           static System::Collections::Generic::Dictionary<intptr, ref<Control>> handles;
           /// @endcond
 
