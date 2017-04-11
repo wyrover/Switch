@@ -20,7 +20,7 @@ namespace Test {
       Console::WriteLine(*str2);
       str2 = null;
       Console::WriteLine("str2 = {0}", str2.ToString());
-      SharedPtr<string> sp = SharedPtr<string>::Create("Test sp");
+      SharedPtr<string> sp = pcf_new<string>("Test sp");
       Console::WriteLine("sp = {0}", sp.ToString());
       UniquePtr<int> a = UniquePtr<int>::Create(234);
       Console::WriteLine("a = {0}", a.ToString());

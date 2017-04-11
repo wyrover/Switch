@@ -437,42 +437,42 @@ namespace {
     }
     
     void UpStringIsString() {
-      UniquePtr<string> s = UniquePtr<String>::Create("Test");
+      UniquePtr<string> s = MakeUnique<String>("Test");
       Assert::IsTrue(is<string>(s), pcf_current_information);
     }
     
     void UpStringIsObject() {
-      UniquePtr<string> s = UniquePtr<String>::Create("Test");
+      UniquePtr<string> s = MakeUnique<String>("Test");
       Assert::IsTrue(is<object>(s), pcf_current_information);
     }
     
     void UpStringIsIComparable() {
-      UniquePtr<string> s = UniquePtr<String>::Create("Test");
+      UniquePtr<string> s = MakeUnique<String>("Test");
       Assert::IsTrue(is<IComparable>(s), pcf_current_information);
     }
     
     void UpStringIsInt32() {
-      UniquePtr<string> s = UniquePtr<String>::Create("Test");
+      UniquePtr<string> s = MakeUnique<String>("Test");
       Assert::IsFalse(is<Int32>(s), pcf_current_information);
     }
     
     void UpObjectFromUpStringIsString() {
-      UniquePtr<object> o = UniquePtr<object>::Create<string>("Test");
+      UniquePtr<object> o = MakeUnique<string>("Test");
       Assert::IsTrue(is<string>(o), pcf_current_information);
     }
     
     void UpObjectFromUpStringIsObject() {
-      UniquePtr<object> o = UniquePtr<object>::Create<string>("Test");
+      UniquePtr<object> o = MakeUnique<string>("Test");
       Assert::IsTrue(is<object>(o), pcf_current_information);
     }
     
     void UpObjectFormUpStringIsIComparable() {
-      UniquePtr<object> o = UniquePtr<object>::Create<string>("Test");
+      UniquePtr<object> o = MakeUnique<string>("Test");
       Assert::IsTrue(is<IComparable>(o), pcf_current_information);
     }
     
     void UpObjectFormUpStringIsInt32() {
-      UniquePtr<object> o = UniquePtr<object>::Create<string>("Test");
+      UniquePtr<object> o = MakeUnique<string>("Test");
       Assert::IsFalse(is<Int32>(o), pcf_current_information);
     }
     

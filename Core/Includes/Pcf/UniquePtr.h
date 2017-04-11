@@ -15,10 +15,10 @@ namespace Pcf {
   class UniquePtr {
   public:
     /// @brief Represent a Null UniquePtr.
-    static const UniquePtr<T>& Null() { static UniquePtr<T> nullPointer; return nullPointer; }
+    static UniquePtr<T> Null() { return UniquePtr<T>(); }
     
     /// @brief Represent an Empty UniquePtr.
-    static const UniquePtr<T>& Empty() { static UniquePtr<T> emptyPointer; return emptyPointer; }
+    static UniquePtr<T> Empty() { return UniquePtr<T>(); }
     
     /// @brief Create a null UniquePtr.
     UniquePtr() {}
@@ -27,9 +27,27 @@ namespace Pcf {
     /// @param ptr Pointer to store.
     UniquePtr(const T* ptr) { this->Reset(ptr); }
     
+    /// @brief Create a Pointer with specified pointer.
+    /// @param ptr Pointer to store.
+    UniquePtr(T* ptr) { this->Reset(ptr); }
+    
     /// @brief Copy a UniquePtr specified
     /// @param ptr UniquePtr to copy.
-    UniquePtr(const UniquePtr& ptr) { this->Swap(const_cast<UniquePtr<T>&>(ptr)); }
+    UniquePtr(UniquePtr<T>& ptr) { this->Swap(ptr); }
+    
+    /// @brief Copy a UniquePtr specified
+    /// @param ptr UniquePtr to copy.
+    UniquePtr(UniquePtr<T>&& ptr) { this->Swap(ptr); }
+    
+    /// @brief Copy a UniquePtr specified
+    /// @param ptr UniquePtr to copy.
+    template<typename TT>
+    UniquePtr(UniquePtr<TT>&& ptr) { this->Swap(ptr.template As<T>()); }
+    
+    /// @brief Copy a UniquePtr specified
+    /// @param ptr UniquePtr to copy.
+    template<typename TT>
+    UniquePtr(UniquePtr<TT>& ptr) { this->Swap(ptr.template As<T>()); }
     
     /// @brief Destroy the current pointer and set to null.
     void Delete() { this->Reset(null); }
@@ -64,6 +82,14 @@ namespace Pcf {
     /// @brief Exchanges the contents of the UniquePtr object with those of ptr, transferring ownership of any managed object between them without destroying either.
     /// @param ptr Another UniquePtr object of the same type.
     void Swap(UniquePtr<T>& ptr) {
+      T* p = ptr.ptr;
+      ptr.ptr = this->ptr;
+      this->ptr = p;
+    }
+    
+    /// @brief Exchanges the contents of the UniquePtr object with those of ptr, transferring ownership of any managed object between them without destroying either.
+    /// @param ptr Another UniquePtr object of the same type.
+    void Swap(UniquePtr<T>&& ptr) {
       T* p = ptr.ptr;
       ptr.ptr = this->ptr;
       this->ptr = p;
@@ -314,49 +340,61 @@ namespace Pcf {
       return s.str();
     }
     
-    template<typename ...Arguments>
-    static UniquePtr<T> Create(Arguments... arguments) {
-      return UniquePtr<T>(new T(arguments...));
-    }
-    
-    template<typename TT, typename ...Arguments>
-    static UniquePtr<T> Create(Arguments... arguments) {
-      return UniquePtr<T>(new TT(arguments...));
-    }
-    
     /// @cond
     virtual ~UniquePtr() { Delete(); }
     
-    const T& operator *() const { return ToObject(); }
-    T& operator *() { return ToObject(); }
+    const T& operator*() const { return ToObject(); }
+    T& operator*() { return ToObject(); }
     
     const T& operator()() const { return ToObject(); }
     T& operator()() { return ToObject(); }
     
-    const T* operator ->() const { return ToPointer(); }
-    T* operator ->() { return ToPointer(); }
+    const T* operator->() const { return ToPointer(); }
+    T* operator->() { return ToPointer(); }
     
-    UniquePtr<T>& operator =(const T* ptr) {
+    UniquePtr<T>& operator=(const T* ptr) {
       Reset(ptr);
       return *this;
     }
     
-    UniquePtr<T>& operator =(const UniquePtr<T>& ptr) {
-      Swap(const_cast<UniquePtr<T>&>(ptr));
+    UniquePtr<T>& operator=(T* ptr) {
+      Reset(ptr);
       return *this;
     }
     
-    bool operator ==(const T* ptr) { return this->ptr == ptr; }
+    UniquePtr<T>& operator=(UniquePtr<T>& ptr) {
+      Swap(ptr);
+      return *this;
+    }
     
-    bool operator ==(const UniquePtr<T>& ptr) { return this->ptr == ptr.ptr; }
+    UniquePtr<T>& operator=(UniquePtr<T>&& ptr) {
+      Swap(ptr);
+      return *this;
+    }
     
-    bool operator !=(const T* ptr) { return this->ptr != ptr; }
+    template<typename TT>
+    UniquePtr<T>& operator=(UniquePtr<TT>& ptr) {
+      Swap(ptr.template As<T>());
+      return *this;
+    }
     
-    bool operator !=(const UniquePtr<T>& ptr) { return this->ptr != ptr.ptr; }
+    template<typename TT>
+    UniquePtr<T>& operator=(UniquePtr<TT>&& ptr) {
+      Swap(ptr.template As<T>());
+      return *this;
+    }
+    
+    bool operator==(const T* ptr) { return this->ptr == ptr; }
+    
+    bool operator==(const UniquePtr<T>& ptr) { return this->ptr == ptr.ptr; }
+    
+    bool operator!=(const T* ptr) { return this->ptr != ptr; }
+  
+    bool operator!=(const UniquePtr<T>& ptr) { return this->ptr != ptr.ptr; }
     
     operator bool() const { return this->ptr != null; }
     
-    bool operator !() const { return this->ptr == null; }
+    bool operator!() const { return this->ptr == null; }
     /// @endcond
     
   private:
@@ -382,7 +420,8 @@ namespace Pcf {
     
     /// @brief Copy a UniquePtr specified
     /// @param ptr UniquePtr to copy.
-    UniquePtr(const UniquePtr<T[]>& ptr) { Swap(ptr); }
+    template<typename TT>
+    UniquePtr(UniquePtr<TT[]>& ptr) { Swap(ptr.template As<T>()); }
     
     /// @brief Destroy the current pointer and set to null.
     void Delete() { Reset(null); }
@@ -502,10 +541,6 @@ namespace Pcf {
       return s.str();
     }
     
-    static UniquePtr<T[]> Create(int32 size) {
-      return UniquePtr<T[]>(new T[size]);
-    }
-    
     /// @cond
     virtual ~UniquePtr() { Delete(); }
     
@@ -522,8 +557,14 @@ namespace Pcf {
       return *this;
     }
     
-    UniquePtr<T[]>& operator =(const UniquePtr<T>& ptr) {
+    UniquePtr<T[]>& operator=(UniquePtr<T>&& ptr) {
       Swap(ptr);
+      return *this;
+    }
+
+    template<typename TT>
+    UniquePtr<T[]>& operator=(UniquePtr<TT>& ptr) {
+      Swap(ptr.template As<T>());
       return *this;
     }
     
@@ -544,11 +585,11 @@ namespace Pcf {
     T* ptr = null;
   };
   
-  /// @brief Manages the storage of a pointer, providing a limited garbage-collection facility, with little to no overhead over built-in pointers.
-  /// @see Pcf::Up
-  /// @ingroup Pcf
+  template<typename T, typename ...Args>
+  UniquePtr<T> MakeUnique(Args... args) {return UniquePtr<T>(new T(args...));}
+
   template<typename T>
-  using up = UniquePtr<T>;
+  UniquePtr<T[]> MakeUnique(int32 size) {return UniquePtr<T[]>(new T[size]);}
 }
 
 using namespace Pcf;
