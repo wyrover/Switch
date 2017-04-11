@@ -23,7 +23,7 @@ const int32 npos = -1;
 const int32 nstatus = 0;
 
 /*
-UniquePointer<symbol[]> CodePointHexEncodingFunction(uint32 codePoint) {
+System::Array<symbol> CodePointHexEncodingFunction(uint32 codePoint) {
 union CPBytes{
 uint32 codePoint;
 byte bytes[4];
@@ -32,7 +32,7 @@ byte bytes[4];
 encoding.codePoint = 0xFF;
 bool bigEndian = encoding.bytes[0] != 0xFF;
 
-UniquePointer<symbol[]> n32 = new symbol[8];
+System::Array<symbol> n32(8);
 
 encoding.codePoint = codePoint;
 int index = 0;
@@ -51,8 +51,8 @@ return n32;
 }
 */
 
-UniquePointer<symbol[]> CodePointHexEncodingFunction(uint32 codePoint) {
-  UniquePointer<symbol[]> w = new symbol[8];
+System::Array<symbol> CodePointHexEncodingFunction(uint32 codePoint) {
+  System::Array<symbol> w(8);
   w[0] = static_cast<symbol>((codePoint >> 28) & 0x0F);
   w[1] = static_cast<symbol>((codePoint >> 24) & 0x0F);
   w[2] = static_cast<symbol>((codePoint >> 20) & 0x0F);
@@ -126,8 +126,8 @@ namespace {
     }
 
     void Add(uint32 codePoint, Status status) {
-      UniquePointer<symbol[]> symbols = CodePointHexEncodingFunction(codePoint);
-      Add(symbols.ToPointer(), 8, status);
+      System::Array<symbol> symbols = CodePointHexEncodingFunction(codePoint);
+      Add(symbols.Data(), 8, status);
     }
 
     void Add(const symbol* symbols, int32 size, Status status) {
@@ -160,8 +160,8 @@ namespace {
     }
 
     Status Get(uint32 codePoint) {
-      UniquePointer<symbol[]> symbols = CodePointHexEncodingFunction(codePoint);
-      return Get(symbols.ToPointer(), 8);
+      System::Array<symbol> symbols = CodePointHexEncodingFunction(codePoint);
+      return Get(symbols.Data(), 8);
     }
 
     Status Get(symbol* symbols, int32 size) const {
@@ -381,18 +381,18 @@ namespace {
 
 bool __OS::CoreApi::UnicodeCharacters::IsAlpha(uint32 codePoint) {
   UnicodeAutomaton& a = GetUnicodeCharacters();
-  UniquePointer<symbol[]> word = CodePointHexEncodingFunction(codePoint);
-  return a.Get(word.ToPointer(), 8) == UnicodeIsAlpha;
+  System::Array<symbol> word = CodePointHexEncodingFunction(codePoint);
+  return a.Get((symbol*)word.Data(), 8) == UnicodeIsAlpha;
 }
 
 bool __OS::CoreApi::UnicodeCharacters::IsDigit(uint32 codePoint) {
   UnicodeAutomaton& a = GetUnicodeCharacters();
-  UniquePointer<symbol[]> word = CodePointHexEncodingFunction(codePoint);
-  return a.Get(word.ToPointer(), 8) == UnicodeIsDigit;
+  System::Array<symbol> word = CodePointHexEncodingFunction(codePoint);
+  return a.Get((symbol*)word.Data(), 8) == UnicodeIsDigit;
 }
 
 bool __OS::CoreApi::UnicodeCharacters::IsPunctuation(uint32 codePoint) {
   UnicodeAutomaton& a = GetUnicodeCharacters();
-  UniquePointer<symbol[]> word = CodePointHexEncodingFunction(codePoint);
-  return a.Get(word.ToPointer(), 8) == UnicodeIsPunct;
+  System::Array<symbol> word = CodePointHexEncodingFunction(codePoint);
+  return a.Get((symbol*)word.Data(), 8) == UnicodeIsPunct;
 }
