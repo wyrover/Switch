@@ -117,7 +117,7 @@ namespace Pcf {
         class Enumerator : public object, public IEnumerator<T> {
         public:
           /// @cond
-          Enumerator(UniquePointer<IEnumerator<T>> enumerator) : enumerator(enumerator.Release()) {}
+          Enumerator(refptr<IEnumerator<T>> enumerator) : enumerator(enumerator) {}
           Enumerator(const Enumerator& enumerator) : enumerator(enumerator.enumerator) {}
           /// @endcond
           

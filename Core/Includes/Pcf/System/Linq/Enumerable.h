@@ -185,27 +185,27 @@ namespace Pcf {
         /// The following code example demonstrates how to use Cast<TResult>(IEnumerable) to enable the use of the standard query operators on an ArrayList.
         /// @include Enumerable.Cast.cpp
         template<typename TResult, typename TSource>
-        static UniquePointer<Collections::Generic::IEnumerable<TResult>> Cast(const Collections::Generic::IEnumerable<TSource>& source) {
-          UniquePointer< System::Collections::Generic::List<TResult>> list ( new System::Collections::Generic::List<TResult>() );
+        static refptr<Collections::Generic::IEnumerable<TResult>> Cast(const Collections::Generic::IEnumerable<TSource>& source) {
+          refptr<System::Collections::Generic::List<TResult>> list = pcf_new<System::Collections::Generic::List<TResult>>();
           for (TSource item : source) {
             TResult result;
             As(result, item);
             list->Add(result);
           }
           
-          return list.Release();
+          return list;
         }
         
         /// @brief Concatenates two sequences.
         /// @param first The first sequence to concatenate.
         /// @param second The sequence to concatenate to the first sequence.
-        /// @return UniquePointer<Collections::Generic::IEnumerable<TSource>> An IEnumerable<T> that contains the concatenated elements of the two input sequences.
+        /// @return refptr<Collections::Generic::IEnumerable<TSource>> An IEnumerable<T> that contains the concatenated elements of the two input sequences.
         /// @par Examples
         /// The following code example demonstrates how to use Cast<TResult>(IEnumerable) to enable the use of the standard query operators on an ArrayList.
         /// @include Enumerable.Concat.cpp
         template<typename TSource>
-        static UniquePointer<Collections::Generic::IEnumerable<TSource>> Concat(const Collections::Generic::IEnumerable<TSource>& first, const Collections::Generic::IEnumerable<TSource>& second) {
-          UniquePointer< System::Collections::Generic::List<TSource>> list ( new System::Collections::Generic::List<TSource>() );
+        static refptr<Collections::Generic::IEnumerable<TSource>> Concat(const Collections::Generic::IEnumerable<TSource>& first, const Collections::Generic::IEnumerable<TSource>& second) {
+          refptr<System::Collections::Generic::List<TSource>> list = pcf_new<System::Collections::Generic::List<TSource>>();
           for (TSource item : first) {
             list->Add(item);
           }
@@ -214,7 +214,7 @@ namespace Pcf {
             list->Add(item);
           }
           
-          return list.Release();
+          return list;
         }
 
         /// @brief Returns the maximum value in a generic sequence.
@@ -254,12 +254,12 @@ namespace Pcf {
         /// The following code example demonstrates how to use Reverse<TSource> to reverse the order of elements in an array.
         /// @include Enumerable.Reverse.cpp
         template<typename TSource>
-        static UniquePointer<Collections::Generic::IEnumerable<TSource>> Reverse(const Collections::Generic::IEnumerable<TSource>& source) {
-          UniquePointer< System::Collections::Generic::List<TSource>> list ( new System::Collections::Generic::List<TSource>() );
+        static refptr<Collections::Generic::IEnumerable<TSource>> Reverse(const Collections::Generic::IEnumerable<TSource>& source) {
+          refptr<System::Collections::Generic::List<TSource>> list = pcf_new<System::Collections::Generic::List<TSource>>();
           for (TSource item : source)
             list->Insert(0, item);
           
-          return list.Release();
+          return list;
         }
         
         /// @brief Creates an array from a IEnumerable<T>
@@ -363,7 +363,7 @@ namespace Pcf {
           /// @par Examples
           /// The following code example demonstrates how to use ToArray<TSource> to force immediate query evaluation and return an array of results.
           /// @include Enumerable.ToArray.cpp
-          UniquePointer<Collections::Generic::IEnumerable<TSource>> AsEnumerable() const {
+          refptr<Collections::Generic::IEnumerable<TSource>> AsEnumerable() const {
             return System::Linq::Enumerable::AsEnumerable<TSource>(static_cast<const T&>(*this));
           }
           
@@ -376,17 +376,17 @@ namespace Pcf {
           /// The following code example demonstrates how to use Cast<TResult>(IEnumerable) to enable the use of the standard query operators on an ArrayList.
           /// @include Enumerable.Cast.cpp
           template<typename TResult>
-          UniquePointer<Collections::Generic::IEnumerable<TResult>> Cast() const {
+          refptr<Collections::Generic::IEnumerable<TResult>> Cast() const {
             return System::Linq::Enumerable::Cast<TResult, TSource>(static_cast<const T&>(*this));
           }
           
           /// @brief Concatenates two sequences.
           /// @param second The sequence to concatenate to this sequence.
-          /// @return UniquePointer<Collections::Generic::IEnumerable<TSource>> An IEnumerable<T> that contains the concatenated elements of the two input sequences.
+          /// @return refptr<Collections::Generic::IEnumerable<TSource>> An IEnumerable<T> that contains the concatenated elements of the two input sequences.
           /// @par Examples
           /// The following code example demonstrates how to use Cast<TResult>(IEnumerable) to enable the use of the standard query operators on an ArrayList.
           /// @include Enumerable.Concat.cpp
-          UniquePointer<Collections::Generic::IEnumerable<TSource>> Concat(const Collections::Generic::IEnumerable<TSource>& second) const {
+          refptr<Collections::Generic::IEnumerable<TSource>> Concat(const Collections::Generic::IEnumerable<TSource>& second) const {
             return System::Linq::Enumerable::Concat<TSource>(static_cast<const T&>(*this), second);
           }
           
@@ -411,7 +411,7 @@ namespace Pcf {
           /// @par Examples
           /// The following code example demonstrates how to use Reverse<TSource> to reverse the order of elements in an array.
           /// @include Enumerable.Reverse.cpp
-          UniquePointer<Collections::Generic::IEnumerable<TSource>> Reverse() const {
+          refptr<Collections::Generic::IEnumerable<TSource>> Reverse() const {
             return System::Linq::Enumerable::Reverse<TSource>(static_cast<const T&>(*this));
           }
 

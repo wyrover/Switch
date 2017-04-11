@@ -48,7 +48,7 @@ namespace Pcf {
           /// @return object An object that can be used to synchronize access to the ICollection.
           /// @remarks In the absence of a Synchronized method on a collection, the expected usage for SyncRoot looks as follows:
           /// @code
-          /// UniquePointer<ICollection> collection;
+          /// refptr<ICollection> collection;
           /// // Instantiate and populate the collection
           /// pcf_lock (collection->SyncRoot) {
           ///   // Some operation on the collection, which is now thread safe.
@@ -103,7 +103,7 @@ namespace Pcf {
           /// @return object An object that can be used to synchronize access to the ICollection.
           /// @remarks In the absence of a Synchronized method on a collection, the expected usage for SyncRoot looks as follows:
           /// @code
-          /// UniquePointer<ICollection> collection;
+          /// refptr<ICollection> collection;
           /// // Instantiate and populate the collection
           /// pcf_lock (collection->SyncRoot) {
           ///   // Some operation on the collection, which is now thread safe.

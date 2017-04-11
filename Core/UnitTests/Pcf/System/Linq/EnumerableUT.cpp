@@ -114,7 +114,7 @@ namespace {
     al.Add(new string("Barley"));
     al.Add(new string("Boots"));
     al.Add(new string("Whiskers"));
-    UniquePointer<IEnumerable<refptr<String>>> enumerable = al.Cast<refptr<String>>();
+    refptr<IEnumerable<refptr<String>>> enumerable = al.Cast<refptr<String>>();
     Enumerator<refptr<String>> enumerator = enumerable->GetEnumerator();
     ASSERT_TRUE(enumerator.MoveNext());
     ASSERT_EQ("Barley", *enumerator.Current());
@@ -127,7 +127,7 @@ namespace {
   TEST(Enumerable, Concat) {
     Array<int> a1 = {1, 2};
     Array<int> a2 = {3, 4};
-    UniquePointer<IEnumerable<int>> enumerable = a1.Concat(a2);
+    refptr<IEnumerable<int>> enumerable = a1.Concat(a2);
     Enumerator<int> enumerator = enumerable->GetEnumerator();
     ASSERT_TRUE(enumerator.MoveNext());
     ASSERT_EQ(1, enumerator.Current());
