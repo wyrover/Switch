@@ -9,7 +9,7 @@ namespace HttpWebRequestExample {
   public:
     /// @brief The main entry point for the application.
     static void Main() {
-      refptr<HttpWebRequest> httpWebRequest = WebRequest::Create("http://httpbin.org/encoding/utf8");
+      refptr<WebRequest> httpWebRequest = WebRequest::Create("http://httpbin.org/encoding/utf8");
       string result = StreamReader(httpWebRequest->GetResponse().GetResponseStream()).ReadToEnd();
       Console::WriteLine(result);
     }
