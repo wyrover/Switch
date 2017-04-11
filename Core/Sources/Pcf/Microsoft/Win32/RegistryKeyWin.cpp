@@ -27,16 +27,24 @@ namespace {
   }
 
   refptr<object> ExpandStringToObject(const char* valueBytes) {
+    struct AutoDeleteCharPointer {
+      AutoDeleteCharPointer(char* value) : value(value) {}
+      ~AutoDeleteCharPointer() {delete value;}
+      char* operator()() const {return this->value;}
+    private:
+      char* value;
+    };
+    
     if (valueBytes == null)
       throw ArgumentNullException(pcf_current_information);
 
     int32 length = 32768;
-    UniquePointer<char[]> expandedString(new char[length]);
+    AutoDeleteCharPointer expandedString(new char[length]);
 
-    if (__OS::CoreApi::Registry::ExpandString(valueBytes, expandedString.ToPointer(), length) == 0)
+    if (__OS::CoreApi::Registry::ExpandString(valueBytes, expandedString(), length) == 0)
       throw IO::IOException(pcf_current_information);
 
-    return refptr<object>(new string(expandedString.ToPointer()));
+    return refptr<object>(new string(expandedString()));
   }
 
   refptr<object> MultiStringToObject(const char* valueBytes) {

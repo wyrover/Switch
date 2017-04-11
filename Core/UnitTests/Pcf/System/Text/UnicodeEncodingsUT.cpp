@@ -487,24 +487,24 @@ namespace {
   
   TYPED_TEST(Encoding, GetBytes_String_Bytes___Exact_Buffer) {
     EncodingUT::UnicodeSequence sequence = Encoding<TypeParam>::charA + Encoding<TypeParam>::cjk + Encoding<TypeParam>::koala;
-    UniquePointer<byte[]> bytes(new byte[sequence.Size()]);
-    EXPECT_EQ(sequence.Size(), TypeParam::encoding.GetBytes(sequence.ToString(), bytes.ToPointer(), sequence.Size()));
-    EncodingUT::EXPECT_BYTES(sequence.Bytes(), sequence.Size(), bytes.ToPointer());
+    System::Array<byte> bytes(sequence.Size());
+    EXPECT_EQ(sequence.Size(), TypeParam::encoding.GetBytes(sequence.ToString(), (byte*)bytes.Data(), sequence.Size()));
+    EncodingUT::EXPECT_BYTES(sequence.Bytes(), sequence.Size(), bytes.Data());
   }
   
   TYPED_TEST(Encoding, GetBytes_String_Bytes___Larger_Buffer) {
     EncodingUT::UnicodeSequence sequence = Encoding<TypeParam>::charA + Encoding<TypeParam>::cjk + Encoding<TypeParam>::koala;
     int32 bytesSize = sequence.Size()+10;
-    UniquePointer<byte[]> bytes(new byte[bytesSize]);
-    EXPECT_EQ(sequence.Size(), TypeParam::encoding.GetBytes(sequence.ToString(), bytes.ToPointer(), bytesSize));
-    EncodingUT::EXPECT_BYTES(sequence.Bytes(), sequence.Size(), bytes.ToPointer());
+    System::Array<byte> bytes(bytesSize);
+    EXPECT_EQ(sequence.Size(), TypeParam::encoding.GetBytes(sequence.ToString(), (byte*)bytes.Data(), bytesSize));
+    EncodingUT::EXPECT_BYTES(sequence.Bytes(), sequence.Size(), bytes.Data());
   }
   
   TYPED_TEST(Encoding, GetBytes_String_Bytes___Too_Small_Buffer) {
     EncodingUT::UnicodeSequence sequence = Encoding<TypeParam>::charA + Encoding<TypeParam>::cjk + Encoding<TypeParam>::koala;
     int32 bytesSize = sequence.Size()-1;
-    UniquePointer<byte[]> bytes(new byte[bytesSize]);
-    EXPECT_THROW(TypeParam::encoding.GetBytes(sequence.ToString(), bytes.ToPointer(), bytesSize), ArgumentException);
+    System::Array<byte> bytes(bytesSize);
+    EXPECT_THROW(TypeParam::encoding.GetBytes(sequence.ToString(), (byte*)bytes.Data(), bytesSize), ArgumentException);
   }
   
   TYPED_TEST(Encoding, GetBytes_String_Bytes___String_Empty) {
@@ -520,24 +520,24 @@ namespace {
   TYPED_TEST(Encoding, GetBytes_Chars_Bytes) {
     EncodingUT::UnicodeSequence sequence = Encoding<TypeParam>::charA + Encoding<TypeParam>::cjk + Encoding<TypeParam>::koala;
     int32 bytesSize = sequence.Size();
-    UniquePointer<byte[]> bytes(new byte[bytesSize]);
-    EXPECT_EQ(sequence.Size(), TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), bytes.ToPointer(), bytesSize));
-    EncodingUT::EXPECT_BYTES(sequence.Bytes(), sequence.Size(), bytes.ToPointer());
+    System::Array<byte> bytes(bytesSize);
+    EXPECT_EQ(sequence.Size(), TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), (byte*)bytes.Data(), bytesSize));
+    EncodingUT::EXPECT_BYTES(sequence.Bytes(), sequence.Size(), bytes.Data());
   }
   
   TYPED_TEST(Encoding, GetBytes_Chars_Bytes___TooSmallBuffer) {
     EncodingUT::UnicodeSequence sequence = Encoding<TypeParam>::charA + Encoding<TypeParam>::cjk + Encoding<TypeParam>::koala;
     int32 bytesSize = sequence.Size() - 1;
-    UniquePointer<byte[]> bytes(new byte[bytesSize]);
-    EXPECT_THROW(TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), bytes.ToPointer(), bytesSize), ArgumentException);
+    System::Array<byte> bytes(bytesSize);
+    EXPECT_THROW(TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), (byte*)bytes.Data(), bytesSize), ArgumentException);
   }
   
   TYPED_TEST(Encoding, GetBytes_Chars_Bytes___LargerBuffer) {
     EncodingUT::UnicodeSequence sequence = Encoding<TypeParam>::charA + Encoding<TypeParam>::cjk + Encoding<TypeParam>::koala;
     int32 bytesSize = sequence.Size()+1;
-    UniquePointer<byte[]> bytes(new byte[bytesSize]);
-    EXPECT_EQ(sequence.Size(), TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), bytes.ToPointer(), bytesSize));
-    EncodingUT::EXPECT_BYTES(sequence.Bytes(), sequence.Size(), bytes.ToPointer());
+    System::Array<byte> bytes(bytesSize);
+    EXPECT_EQ(sequence.Size(), TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), (byte*)bytes.Data(), bytesSize));
+    EncodingUT::EXPECT_BYTES(sequence.Bytes(), sequence.Size(), bytes.Data());
   }
   
   TYPED_TEST(Encoding, GetBytes_Chars_Bytes___NullChars) {
@@ -635,24 +635,24 @@ namespace {
   TYPED_TEST(Encoding, GetBytes_Chars_Index_Count_Bytes) {
     EncodingUT::UnicodeSequence sequence = Encoding<TypeParam>::charA + Encoding<TypeParam>::charSpecialT + Encoding<TypeParam>::fullBlock + Encoding<TypeParam>::koala;
     int32 bytesSize = sequence.Size();
-    UniquePointer<byte[]> bytes(new byte[bytesSize]);
-    EXPECT_EQ(sequence.Size(), TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), 0, sequence.Count(), bytes.ToPointer(), bytesSize));
-    EncodingUT::EXPECT_BYTES(sequence.Bytes(), sequence.Size(), bytes.ToPointer());
+    System::Array<byte> bytes(bytesSize);
+    EXPECT_EQ(sequence.Size(), TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), 0, sequence.Count(), (byte*)bytes.Data(), bytesSize));
+    EncodingUT::EXPECT_BYTES(sequence.Bytes(), sequence.Size(), bytes.Data());
   }
   
   TYPED_TEST(Encoding, GetBytes_Chars_Index_Count_Bytes___Bytes_Too_Small) {
     EncodingUT::UnicodeSequence sequence = Encoding<TypeParam>::charA + Encoding<TypeParam>::charSpecialT + Encoding<TypeParam>::fullBlock + Encoding<TypeParam>::koala;
     int32 bytesSize = sequence.Size()-1;
-    UniquePointer<byte[]> bytes(new byte[bytesSize]);
-    EXPECT_THROW(TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), 0, sequence.Count(), bytes.ToPointer(), bytesSize), ArgumentException);
+    System::Array<byte> bytes(bytesSize);
+    EXPECT_THROW(TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), 0, sequence.Count(), (byte*)bytes.Data(), bytesSize), ArgumentException);
   }
   
   TYPED_TEST(Encoding, GetBytes_Chars_Index_Count_Bytes___Bytes_Larger) {
     EncodingUT::UnicodeSequence sequence = Encoding<TypeParam>::charA + Encoding<TypeParam>::charSpecialT + Encoding<TypeParam>::fullBlock + Encoding<TypeParam>::koala;
     int32 bytesSize = sequence.Size()+1;
-    UniquePointer<byte[]> bytes(new byte[bytesSize]);
-    EXPECT_EQ(sequence.Size(), TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), 0, sequence.Count(), bytes.ToPointer(), bytesSize));
-    EncodingUT::EXPECT_BYTES(sequence.Bytes(), sequence.Size(), bytes.ToPointer());
+    System::Array<byte> bytes(bytesSize);
+    EXPECT_EQ(sequence.Size(), TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), 0, sequence.Count(), (byte*)bytes.Data(), bytesSize));
+    EncodingUT::EXPECT_BYTES(sequence.Bytes(), sequence.Size(), bytes.Data());
   }
   
   TYPED_TEST(Encoding, GetBytes_Chars_Index_Count_Bytes___Chars_Null) {
@@ -673,9 +673,9 @@ namespace {
     int32 bytesSize = sequence.Size();
     int32 bytesOffset = Encoding<TypeParam>::charA.Size();
     
-    UniquePointer<byte[]> bytes(new byte[bytesSize]);
-    EXPECT_EQ(sequence.Size() - bytesOffset, TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), index, sequence.Count()-index, bytes.ToPointer(), bytesSize));
-    EncodingUT::EXPECT_BYTES(&sequence.Bytes()[bytesOffset], sequence.Size()-bytesOffset, bytes.ToPointer());
+    System::Array<byte> bytes(bytesSize);
+    EXPECT_EQ(sequence.Size() - bytesOffset, TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), index, sequence.Count()-index, (byte*)bytes.Data(), bytesSize));
+    EncodingUT::EXPECT_BYTES(&sequence.Bytes()[bytesOffset], sequence.Size()-bytesOffset, bytes.Data());
   }
   
   TYPED_TEST(Encoding, GetBytes_Chars_Index_Count_Bytes___Index_Is_3) {
@@ -684,9 +684,9 @@ namespace {
     int32 bytesSize = sequence.Size();
     int32 bytesOffset = Encoding<TypeParam>::charA.Size() + Encoding<TypeParam>::charSpecialT.Size() + Encoding<TypeParam>::fullBlock.Size();
     
-    UniquePointer<byte[]> bytes(new byte[bytesSize]);
-    EXPECT_EQ(sequence.Size() - bytesOffset, TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), index, sequence.Count()-index, bytes.ToPointer(), bytesSize));
-    EncodingUT::EXPECT_BYTES(&sequence.Bytes()[bytesOffset], sequence.Size()-bytesOffset, bytes.ToPointer());
+    System::Array<byte> bytes(bytesSize);
+    EXPECT_EQ(sequence.Size() - bytesOffset, TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), index, sequence.Count()-index, (byte*)bytes.Data(), bytesSize));
+    EncodingUT::EXPECT_BYTES(&sequence.Bytes()[bytesOffset], sequence.Size()-bytesOffset, bytes.Data());
   }
   
   TYPED_TEST(Encoding, GetBytes_Chars_Index_Count_Bytes___Index_Is_1_And_Count_Is_Too_Large) {
@@ -694,8 +694,8 @@ namespace {
     int32 index = 1;
     int32 bytesSize = sequence.Size();
     
-    UniquePointer<byte[]> bytes(new byte[bytesSize]);
-    EXPECT_THROW(TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), index, 1 + (sequence.Count()-index), bytes.ToPointer(), bytesSize),
+    System::Array<byte> bytes(bytesSize);
+    EXPECT_THROW(TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), index, 1 + (sequence.Count()-index), (byte*)bytes.Data(), bytesSize),
                  ArgumentOutOfRangeException);
   }
   
@@ -703,8 +703,8 @@ namespace {
     EncodingUT::UnicodeSequence sequence = Encoding<TypeParam>::charA + Encoding<TypeParam>::charSpecialT + Encoding<TypeParam>::fullBlock + Encoding<TypeParam>::koala;
     int32 index = 1;
     int32 bytesSize = sequence.Size();
-    UniquePointer<byte[]> bytes(new byte[bytesSize]);
-    EXPECT_EQ(0, TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), index, 0, bytes.ToPointer(), bytesSize));
+    System::Array<byte> bytes(bytesSize);
+    EXPECT_EQ(0, TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), index, 0, (byte*)bytes.Data(), bytesSize));
   }
   
   TYPED_TEST(Encoding, GetBytes_Chars_Index_Count_Bytes___Index_Is_1_And_Count_Is_1) {
@@ -712,9 +712,9 @@ namespace {
     EncodingUT::UnicodeSequence expected = Encoding<TypeParam>::charSpecialT;
     int32 index = 1;
     int32 bytesSize = sequence.Size();
-    UniquePointer<byte[]> bytes(new byte[bytesSize]);
-    EXPECT_EQ(expected.Size(), TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), index, 1, bytes.ToPointer(), bytesSize));
-    EncodingUT::EXPECT_BYTES(expected.Bytes(), expected.Count(), bytes.ToPointer());
+    System::Array<byte> bytes(bytesSize);
+    EXPECT_EQ(expected.Size(), TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), index, 1, (byte*)bytes.Data(), bytesSize));
+    EncodingUT::EXPECT_BYTES(expected.Bytes(), expected.Count(), bytes.Data());
   }
   
   TYPED_TEST(Encoding, GetBytes_Chars_Index_Count_Bytes___Index_Is_3_And_Count_Is_1) {
@@ -722,17 +722,17 @@ namespace {
     EncodingUT::UnicodeSequence expected = Encoding<TypeParam>::koala;
     int32 index = 3;
     int32 bytesSize = sequence.Size();
-    UniquePointer<byte[]> bytes(new byte[bytesSize]);
-    EXPECT_EQ(expected.Size(), TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), index, 1, bytes.ToPointer(), bytesSize));
-    EncodingUT::EXPECT_BYTES(expected.Bytes(), expected.Count(), bytes.ToPointer());
+    System::Array<byte> bytes(bytesSize);
+    EXPECT_EQ(expected.Size(), TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), index, 1, (byte*)bytes.Data(), bytesSize));
+    EncodingUT::EXPECT_BYTES(expected.Bytes(), expected.Count(), bytes.Data());
   }
   
   TYPED_TEST(Encoding, GetBytes_Chars_Index_Count_Bytes___Index_Is_4_And_Count_Is_0) {
     EncodingUT::UnicodeSequence sequence = Encoding<TypeParam>::charA + Encoding<TypeParam>::charSpecialT + Encoding<TypeParam>::fullBlock + Encoding<TypeParam>::koala;
     int32 index = 1;
     int32 bytesSize = sequence.Size();
-    UniquePointer<byte[]> bytes(new byte[bytesSize]);
-    EXPECT_EQ(0, TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), index, 0, bytes.ToPointer(), bytesSize));
+    System::Array<byte> bytes(bytesSize);
+    EXPECT_EQ(0, TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), index, 0, (byte*)bytes.Data(), bytesSize));
   }
   
   //___________________________________________________________________________
@@ -773,32 +773,32 @@ namespace {
   TYPED_TEST(Encoding, GetBytes_Chars_Index_Count_Bytes_Index___Bytes_Is_Too_Small) {
     EncodingUT::UnicodeSequence sequence = Encoding<TypeParam>::charA + Encoding<TypeParam>::cjk + Encoding<TypeParam>::koala;
     int32 bytesSize = sequence.Size() - 1;
-    UniquePointer<byte[]> bytes(new byte[bytesSize]);
-    EXPECT_THROW(TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), 0, 3, bytes.ToPointer(), bytesSize, 0), ArgumentException);
+    System::Array<byte> bytes(bytesSize);
+    EXPECT_THROW(TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), 0, 3, (byte*)bytes.Data(), bytesSize, 0), ArgumentException);
   }
   
   TYPED_TEST(Encoding, GetBytes_Chars_Index_Count_Bytes_Index___CharsIndex_Is_1_And_Bytes_Is_Too_Small) {
     EncodingUT::UnicodeSequence sequence = Encoding<TypeParam>::charA + Encoding<TypeParam>::cjk + Encoding<TypeParam>::koala;
     EncodingUT::UnicodeSequence sequence2 = Encoding<TypeParam>::cjk + Encoding<TypeParam>::koala;
     int32 bytesSize = sequence2.Size() - 1;
-    UniquePointer<byte[]> bytes(new byte[bytesSize]);
-    EXPECT_THROW(TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), 1, 2, bytes.ToPointer(), bytesSize, 0), ArgumentException);
+    System::Array<byte> bytes(bytesSize);
+    EXPECT_THROW(TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), 1, 2, (byte*)bytes.Data(), bytesSize, 0), ArgumentException);
   }
   
   TYPED_TEST(Encoding, GetBytes_Chars_Index_Count_Bytes_Index___Bytes_Is_Larger) {
     EncodingUT::UnicodeSequence sequence = Encoding<TypeParam>::charA + Encoding<TypeParam>::cjk + Encoding<TypeParam>::koala;
     int32 bytesSize = sequence.Size() + 1;
-    UniquePointer<byte[]> bytes(new byte[bytesSize]);
-    EXPECT_EQ(sequence.Size(), TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), 0, 3, bytes.ToPointer(), bytesSize, 0));
-    EncodingUT::EXPECT_BYTES(sequence.Bytes(), sequence.Size(), bytes.ToPointer());
+    System::Array<byte> bytes(bytesSize);
+    EXPECT_EQ(sequence.Size(), TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), 0, 3, (byte*)bytes.Data(), bytesSize, 0));
+    EncodingUT::EXPECT_BYTES(sequence.Bytes(), sequence.Size(), bytes.Data());
   }
   
   TYPED_TEST(Encoding, GetBytes_Chars_Index_Count_Bytes_Index___CharsRange_2_1_Bytes_Is_Larger) {
     EncodingUT::UnicodeSequence sequence = Encoding<TypeParam>::charA + Encoding<TypeParam>::cjk + Encoding<TypeParam>::koala;
     int32 bytesSize = sequence.Size();
-    UniquePointer<byte[]> bytes(new byte[bytesSize]);
-    EXPECT_EQ(Encoding<TypeParam>::koala.Size(), TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), 2, 1, bytes.ToPointer(), bytesSize, 0));
-    EncodingUT::EXPECT_BYTES(&sequence.Bytes()[Encoding<TypeParam>::charA.Size() + Encoding<TypeParam>::cjk.Size()], Encoding<TypeParam>::koala.Size(), bytes.ToPointer());
+    System::Array<byte> bytes(bytesSize);
+    EXPECT_EQ(Encoding<TypeParam>::koala.Size(), TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), 2, 1, (byte*)bytes.Data(), bytesSize, 0));
+    EncodingUT::EXPECT_BYTES(&sequence.Bytes()[Encoding<TypeParam>::charA.Size() + Encoding<TypeParam>::cjk.Size()], Encoding<TypeParam>::koala.Size(), bytes.Data());
   }
   
   TYPED_TEST(Encoding, GetBytes_Chars_Index_Count_Bytes_Index_Exceptions) {
@@ -844,32 +844,32 @@ namespace {
   TYPED_TEST(Encoding, GetBytes_String_Index_Count_Bytes_Index___Bytes_Is_Too_Small) {
     EncodingUT::UnicodeSequence sequence = Encoding<TypeParam>::charA + Encoding<TypeParam>::cjk + Encoding<TypeParam>::koala;
     int32 bytesSize = sequence.Size() - 1;
-    UniquePointer<byte[]> bytes(new byte[bytesSize]);
-    EXPECT_THROW(TypeParam::encoding.GetBytes(sequence.ToString(), 0, 3, bytes.ToPointer(), bytesSize, 0), ArgumentException);
+    System::Array<byte> bytes(bytesSize);
+    EXPECT_THROW(TypeParam::encoding.GetBytes(sequence.ToString(), 0, 3, (byte*)bytes.Data(), bytesSize, 0), ArgumentException);
   }
   
   TYPED_TEST(Encoding, GetBytes_String_Index_Count_Bytes_Index___CharsIndex_Is_1_And_Bytes_Is_Too_Small) {
     EncodingUT::UnicodeSequence sequence = Encoding<TypeParam>::charA + Encoding<TypeParam>::cjk + Encoding<TypeParam>::koala;
     EncodingUT::UnicodeSequence sequence2 = Encoding<TypeParam>::cjk + Encoding<TypeParam>::koala;
     int32 bytesSize = sequence2.Size() - 1;
-    UniquePointer<byte[]> bytes(new byte[bytesSize]);
-    EXPECT_THROW(TypeParam::encoding.GetBytes(sequence.ToString(), 1, 2, bytes.ToPointer(), bytesSize, 0), ArgumentException);
+    System::Array<byte> bytes(bytesSize);
+    EXPECT_THROW(TypeParam::encoding.GetBytes(sequence.ToString(), 1, 2, (byte*)bytes.Data(), bytesSize, 0), ArgumentException);
   }
   
   TYPED_TEST(Encoding, GetBytes_String_Index_Count_Bytes_Index___Bytes_Is_Larger) {
     EncodingUT::UnicodeSequence sequence = Encoding<TypeParam>::charA + Encoding<TypeParam>::cjk + Encoding<TypeParam>::koala;
     int32 bytesSize = sequence.Size() + 1;
-    UniquePointer<byte[]> bytes(new byte[bytesSize]);
-    EXPECT_EQ(sequence.Size(), TypeParam::encoding.GetBytes(sequence.ToString(), 0, 3, bytes.ToPointer(), bytesSize, 0));
-    EncodingUT::EXPECT_BYTES(sequence.Bytes(), sequence.Size(), bytes.ToPointer());
+    System::Array<byte> bytes(bytesSize);
+    EXPECT_EQ(sequence.Size(), TypeParam::encoding.GetBytes(sequence.ToString(), 0, 3, (byte*)bytes.Data(), bytesSize, 0));
+    EncodingUT::EXPECT_BYTES(sequence.Bytes(), sequence.Size(), bytes.Data());
   }
   
   TYPED_TEST(Encoding, GetBytes_String_Index_Count_Bytes_Index___CharsRange_2_1_Bytes_Is_Larger) {
     EncodingUT::UnicodeSequence sequence = Encoding<TypeParam>::charA + Encoding<TypeParam>::cjk + Encoding<TypeParam>::koala;
     int32 bytesSize = sequence.Size();
-    UniquePointer<byte[]> bytes(new byte[bytesSize]);
-    EXPECT_EQ(Encoding<TypeParam>::koala.Size(), TypeParam::encoding.GetBytes(sequence.ToString(), 2, 1, bytes.ToPointer(), bytesSize, 0));
-    EncodingUT::EXPECT_BYTES(&sequence.Bytes()[Encoding<TypeParam>::charA.Size() + Encoding<TypeParam>::cjk.Size()], Encoding<TypeParam>::koala.Size(), bytes.ToPointer());
+    System::Array<byte> bytes(bytesSize);
+    EXPECT_EQ(Encoding<TypeParam>::koala.Size(), TypeParam::encoding.GetBytes(sequence.ToString(), 2, 1, (byte*)bytes.Data(), bytesSize, 0));
+    EncodingUT::EXPECT_BYTES(&sequence.Bytes()[Encoding<TypeParam>::charA.Size() + Encoding<TypeParam>::cjk.Size()], Encoding<TypeParam>::koala.Size(), bytes.Data());
   }
   
   TYPED_TEST(Encoding, GetBytes_String_Index_Count_Bytes_Index_Exceptions) {
@@ -889,42 +889,42 @@ namespace {
   TYPED_TEST(Encoding, GetBytes_char32_Bytes_Index) {
     EncodingUT::UnicodeSequence sequence = Encoding<TypeParam>::charA + Encoding<TypeParam>::charAE + Encoding<TypeParam>::charSpecialT + Encoding<TypeParam>::sigma + Encoding<TypeParam>::syriacSemkath + Encoding<TypeParam>::fullBlock + Encoding<TypeParam>::cjk + Encoding<TypeParam>::koala;
     int32 size = sequence.Size();
-    UniquePointer<byte[]> bytes = new byte[size];
+    System::Array<byte> bytes(size);
     int32 index = 0;
     int32 charSize;
-    charSize = TypeParam::encoding.GetBytes(Encoding<TypeParam>::charA.Character(), bytes.ToPointer(), size, index);
+    charSize = TypeParam::encoding.GetBytes(Encoding<TypeParam>::charA.Character(), (byte*)bytes.Data(), size, index);
     EXPECT_EQ(Encoding<TypeParam>::charA.Size(), charSize);
     index += charSize;
     
-    charSize = TypeParam::encoding.GetBytes(Encoding<TypeParam>::charAE.Character(), bytes.ToPointer(), size, index);
+    charSize = TypeParam::encoding.GetBytes(Encoding<TypeParam>::charAE.Character(), (byte*)bytes.Data(), size, index);
     EXPECT_EQ(Encoding<TypeParam>::charAE.Size(), charSize);
     index += charSize;
     
-    charSize = TypeParam::encoding.GetBytes(Encoding<TypeParam>::charSpecialT.Character(), bytes.ToPointer(), size, index);
+    charSize = TypeParam::encoding.GetBytes(Encoding<TypeParam>::charSpecialT.Character(), (byte*)bytes.Data(), size, index);
     EXPECT_EQ(Encoding<TypeParam>::charSpecialT.Size(), charSize);
     index += charSize;
     
-    charSize = TypeParam::encoding.GetBytes(Encoding<TypeParam>::sigma.Character(), bytes.ToPointer(), size, index);
+    charSize = TypeParam::encoding.GetBytes(Encoding<TypeParam>::sigma.Character(), (byte*)bytes.Data(), size, index);
     EXPECT_EQ(Encoding<TypeParam>::sigma.Size(), charSize);
     index += charSize;
     
-    charSize = TypeParam::encoding.GetBytes(Encoding<TypeParam>::syriacSemkath.Character(), bytes.ToPointer(), size, index);
+    charSize = TypeParam::encoding.GetBytes(Encoding<TypeParam>::syriacSemkath.Character(), (byte*)bytes.Data(), size, index);
     EXPECT_EQ(Encoding<TypeParam>::syriacSemkath.Size(), charSize);
     index += charSize;
     
-    charSize = TypeParam::encoding.GetBytes(Encoding<TypeParam>::fullBlock.Character(), bytes.ToPointer(), size, index);
+    charSize = TypeParam::encoding.GetBytes(Encoding<TypeParam>::fullBlock.Character(), (byte*)bytes.Data(), size, index);
     EXPECT_EQ(Encoding<TypeParam>::fullBlock.Size(), charSize);
     index += charSize;
     
-    charSize = TypeParam::encoding.GetBytes(Encoding<TypeParam>::cjk.Character(), bytes.ToPointer(), size, index);
+    charSize = TypeParam::encoding.GetBytes(Encoding<TypeParam>::cjk.Character(), (byte*)bytes.Data(), size, index);
     EXPECT_EQ(Encoding<TypeParam>::cjk.Size(), charSize);
     index += charSize;
     
-    charSize = TypeParam::encoding.GetBytes(Encoding<TypeParam>::koala.Character(), bytes.ToPointer(), size, index);
+    charSize = TypeParam::encoding.GetBytes(Encoding<TypeParam>::koala.Character(), (byte*)bytes.Data(), size, index);
     EXPECT_EQ(Encoding<TypeParam>::koala.Size(), charSize);
     index += charSize;
     
-    EncodingUT::EXPECT_BYTES(sequence.Bytes(), sequence.Size(), bytes.ToPointer());
+    EncodingUT::EXPECT_BYTES(sequence.Bytes(), sequence.Size(), (byte*)bytes.Data());
   }
   
   //_______________________________________________________________________________________________
@@ -1156,28 +1156,28 @@ namespace {
   TYPED_TEST(Encoding, GetChars_Bytes_Index_Count_Chars___Chars_Is_Too_Small) {
     EncodingUT::UnicodeSequence sequence = Encoding<TypeParam>::charA + Encoding<TypeParam>::charAE + Encoding<TypeParam>::cjk + Encoding<TypeParam>::koala;
     int32 nbChars = sequence.Count()-1;
-    UniquePointer<char32[]> chars(new char32[nbChars]);
-    EXPECT_THROW(TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), 0, sequence.Size(), chars.ToPointer(), nbChars), ArgumentException);
+    Array<char32> chars(nbChars);
+    EXPECT_THROW(TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), 0, sequence.Size(), (char32*)chars.Data(), nbChars), ArgumentException);
   }
   
   TYPED_TEST(Encoding, GetChars_Bytes_Index_Count_Chars___Chars_Is_Larger) {
     EncodingUT::UnicodeSequence sequence = Encoding<TypeParam>::charA + Encoding<TypeParam>::charAE + Encoding<TypeParam>::charSpecialT + Encoding<TypeParam>::sigma + Encoding<TypeParam>::syriacSemkath + Encoding<TypeParam>::fullBlock + Encoding<TypeParam>::cjk + Encoding<TypeParam>::koala;
     int32 nbChars = sequence.Count()+1;
-    UniquePointer<char32[]> chars(new char32[nbChars]);
-    EXPECT_EQ(sequence.Count(), TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), 0, sequence.Size(), chars.ToPointer(), nbChars));
-    EncodingUT::EXPECT_CHARS(sequence.DecodedChars(), sequence.Count(), chars.ToPointer());
+    Array<char32> chars(nbChars);
+    EXPECT_EQ(sequence.Count(), TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), 0, sequence.Size(), (char32*)chars.Data(), nbChars));
+    EncodingUT::EXPECT_CHARS(sequence.DecodedChars(), sequence.Count(), chars.Data());
   }
   
   TYPED_TEST(Encoding, GetChars_Bytes_Index_Count_Chars) {
     UnicodeCharacters uchars = {Encoding<TypeParam>::charA, Encoding<TypeParam>::charAE, Encoding<TypeParam>::cjk, Encoding<TypeParam>::koala};
     EncodingUT::UnicodeSequence sequence(uchars);
     int32 nbChars = sequence.Count();
-    UniquePointer<char32[]> chars(new char32[nbChars]);
+    Array<char32> chars(nbChars);
     
     for (int32 i = 0; i <= sequence.Size(); i += 1) {
       int32 expectedNbChars = GetCompleteChars(uchars, i);
-      EXPECT_EQ(expectedNbChars, TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), 0, i, chars.ToPointer(), nbChars));
-      EncodingUT::EXPECT_CHARS(sequence.DecodedChars(), expectedNbChars, chars.ToPointer());
+      EXPECT_EQ(expectedNbChars, TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), 0, i, (char32*)chars.Data(), nbChars));
+      EncodingUT::EXPECT_CHARS(sequence.DecodedChars(), expectedNbChars, chars.Data());
     }
   }
   
@@ -1187,12 +1187,12 @@ namespace {
     EncodingUT::UnicodeSequence sequence(uchars);
     EncodingUT::UnicodeSequence expected(expectedChars);
     int32 nbChars = sequence.Count();
-    UniquePointer<char32[]> chars(new char32[nbChars]);
+    Array<char32> chars(nbChars);
     
     for (int32 i = 0; i <= expected.Size(); i += 1) {
       int32 expectedNbChars = GetCompleteChars(expectedChars, i);
-      EXPECT_EQ(expectedNbChars, TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), uchars[0].Size(), i, chars.ToPointer(), nbChars));
-      EncodingUT::EXPECT_CHARS(expected.DecodedChars(), expectedNbChars, chars.ToPointer());
+      EXPECT_EQ(expectedNbChars, TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), uchars[0].Size(), i, (char32*)chars.Data(), nbChars));
+      EncodingUT::EXPECT_CHARS(expected.DecodedChars(), expectedNbChars, chars.Data());
     }
   }
   
@@ -1205,12 +1205,12 @@ namespace {
     EncodingUT::UnicodeSequence prefix(prefixChars);
     
     int32 nbChars = sequence.Count();
-    UniquePointer<char32[]> chars(new char32[nbChars]);
+    Array<char32> chars(nbChars);
     
     for (int32 i = 0; i <= expected.Size(); i += 1) {
       int32 expectedNbChars = GetCompleteChars(expectedChars, i);
-      EXPECT_EQ(expectedNbChars, TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), prefix.Size(), i, chars.ToPointer(), nbChars));
-      EncodingUT::EXPECT_CHARS(expected.DecodedChars(), expectedNbChars, chars.ToPointer());
+      EXPECT_EQ(expectedNbChars, TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), prefix.Size(), i, (char32*)chars.Data(), nbChars));
+      EncodingUT::EXPECT_CHARS(expected.DecodedChars(), expectedNbChars, chars.Data());
     }
   }
   
@@ -1342,9 +1342,9 @@ namespace {
   TYPED_TEST(Encoding, GetChars_Bytes_Index_Count_Chars_Index) {
     EncodingUT::UnicodeSequence sequence = Encoding<TypeParam>::charA + Encoding<TypeParam>::charAE + Encoding<TypeParam>::charSpecialT + Encoding<TypeParam>::sigma + Encoding<TypeParam>::syriacSemkath + Encoding<TypeParam>::fullBlock + Encoding<TypeParam>::cjk + Encoding<TypeParam>::koala;
     int32 nbChars = sequence.Count();
-    UniquePointer<char32[]> chars(new char32[nbChars]);
-    EXPECT_EQ(sequence.Count(), TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), 0, sequence.Size(), chars.ToPointer(), nbChars, 0));
-    EncodingUT::EXPECT_CHARS(sequence.DecodedChars(), nbChars, chars.ToPointer());
+    Array<char32> chars(nbChars);
+    EXPECT_EQ(sequence.Count(), TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), 0, sequence.Size(), (char32*)chars.Data(), nbChars, 0));
+    EncodingUT::EXPECT_CHARS(sequence.DecodedChars(), nbChars, chars.Data());
   }
   
   TYPED_TEST(Encoding, GetChars_Bytes_Index_Count_Chars_Index___Bytes_Is_Null) {
@@ -1380,26 +1380,26 @@ namespace {
   TYPED_TEST(Encoding, GetChars_Bytes_Index_Count_Chars_Index___Bytes_Invalid_Range) {
     EncodingUT::UnicodeSequence sequence = Encoding<TypeParam>::charA + Encoding<TypeParam>::charAE + Encoding<TypeParam>::charSpecialT + Encoding<TypeParam>::sigma + Encoding<TypeParam>::syriacSemkath + Encoding<TypeParam>::fullBlock + Encoding<TypeParam>::cjk + Encoding<TypeParam>::koala;
     int32 nbChars = sequence.Count();
-    UniquePointer<char32[]> chars(new char32[nbChars]);
+    Array<char32> chars(nbChars);
     for (int32 i = 0; i < sequence.Size(); i += 1) {
-      EXPECT_THROW(TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), i, (sequence.Size()-i)+1, chars.ToPointer(), nbChars, 0), ArgumentOutOfRangeException);
+      EXPECT_THROW(TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), i, (sequence.Size()-i)+1, (char32*)chars.Data(), nbChars, 0), ArgumentOutOfRangeException);
     }
   }
   
   TYPED_TEST(Encoding, GetChars_Bytes_Index_Count_Chars_Index___Chars_Is_Too_Small) {
     EncodingUT::UnicodeSequence sequence = Encoding<TypeParam>::charA + Encoding<TypeParam>::charAE + Encoding<TypeParam>::charSpecialT + Encoding<TypeParam>::sigma + Encoding<TypeParam>::syriacSemkath + Encoding<TypeParam>::fullBlock + Encoding<TypeParam>::cjk + Encoding<TypeParam>::koala;
     int32 nbChars = sequence.Count();
-    UniquePointer<char32[]> chars(new char32[nbChars]);
+    Array<char32> chars(nbChars);
     for (int32 i = 1; i <= nbChars; i += 1) {
-      EXPECT_THROW(TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), 0, sequence.Size(), chars.ToPointer(), nbChars, i), ArgumentException);
+      EXPECT_THROW(TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), 0, sequence.Size(), (char32*)chars.Data(), nbChars, i), ArgumentException);
     }
   }
   
   TYPED_TEST(Encoding, GetChars_Bytes_Index_Count_Chars_Index___Chars_Index_At_End_With_Zero_Length) {
     EncodingUT::UnicodeSequence sequence = Encoding<TypeParam>::charA + Encoding<TypeParam>::charAE + Encoding<TypeParam>::charSpecialT + Encoding<TypeParam>::sigma + Encoding<TypeParam>::syriacSemkath + Encoding<TypeParam>::fullBlock + Encoding<TypeParam>::cjk + Encoding<TypeParam>::koala;
     int32 nbChars = sequence.Count();
-    UniquePointer<char32[]> chars(new char32[nbChars]);
-    EXPECT_EQ(0, TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), 0, 0, chars.ToPointer(), nbChars, nbChars));
+    Array<char32> chars(nbChars);
+    EXPECT_EQ(0, TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), 0, 0, (char32*)chars.Data(), nbChars, nbChars));
   }
   
   TYPED_TEST(Encoding, GetChars_Bytes_Index_Count_Chars_Index___Index_Last_Defined_Char) {
@@ -1411,12 +1411,12 @@ namespace {
     EncodingUT::UnicodeSequence prefix(prefixChars);
     
     int32 nbChars = expected.Count();
-    UniquePointer<char32[]> chars(new char32[nbChars]);
+    Array<char32> chars(nbChars);
     
     for (int32 i = 0; i <= expected.Size(); i += 1) {
       int32 expectedNbChars = GetCompleteChars(expectedChars, i);
-      EXPECT_EQ(expectedNbChars, TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), prefix.Size(), i, chars.ToPointer(), nbChars, 0));
-      EncodingUT::EXPECT_CHARS(expected.DecodedChars(), expectedNbChars, chars.ToPointer());
+      EXPECT_EQ(expectedNbChars, TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), prefix.Size(), i, (char32*)chars.Data(), nbChars, 0));
+      EncodingUT::EXPECT_CHARS(expected.DecodedChars(), expectedNbChars, chars.Data());
     }
   }
   
@@ -1429,12 +1429,12 @@ namespace {
     EncodingUT::UnicodeSequence prefix(prefixChars);
     
     int32 nbChars = expected.Count() + 3;
-    UniquePointer<char32[]> chars(new char32[nbChars]);
+    Array<char32> chars(nbChars);
     
     for (int32 i = 0; i <= expected.Size(); i += 1) {
       int32 expectedNbChars = GetCompleteChars(expectedChars, i);
-      EXPECT_EQ(expectedNbChars, TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), prefix.Size(), i, chars.ToPointer(), nbChars, 3));
-      EncodingUT::EXPECT_CHARS(expected.DecodedChars(), expectedNbChars, &chars.ToPointer()[3]);
+      EXPECT_EQ(expectedNbChars, TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), prefix.Size(), i, (char32*)chars.Data(), nbChars, 3));
+      EncodingUT::EXPECT_CHARS(expected.DecodedChars(), expectedNbChars, &chars.Data()[3]);
     }
   }
   
@@ -1448,12 +1448,12 @@ namespace {
     EncodingUT::UnicodeSequence expected(expectedChars);
     
     int32 nbChars = expected.Count();
-    UniquePointer<char32[]> chars(new char32[nbChars]);
+    Array<char32> chars(nbChars);
     
     for (int32 i = 0; i <= expected.Size(); i += 1) {
       int32 expectedNbChars = GetCompleteChars(expectedChars, i);
-      EXPECT_EQ(expectedNbChars, TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), prefix.Size(), i, chars.ToPointer(), nbChars, 0));
-      EncodingUT::EXPECT_CHARS(expected.DecodedChars(), expectedNbChars, chars.ToPointer());
+      EXPECT_EQ(expectedNbChars, TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), prefix.Size(), i, (char32*)chars.Data(), nbChars, 0));
+      EncodingUT::EXPECT_CHARS(expected.DecodedChars(), expectedNbChars, chars.Data());
     }
   }
   
