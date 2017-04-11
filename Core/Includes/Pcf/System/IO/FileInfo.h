@@ -3,7 +3,6 @@
 #pragma once
 
 #include "../../Types.h"
-#include "../../UniquePtr.h"
 #include "../String.h"
 #include "FileAccess.h"
 #include "FileMode.h"

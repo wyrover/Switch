@@ -4,7 +4,6 @@
 
 #include "../../../Property.h"
 #include "../../../Types.h"
-#include "../../../UniquePtr.h"
 #include "ICollection.h"
 #include "List.h"
 #include "KeyValuePair.h"

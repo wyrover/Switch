@@ -6,7 +6,6 @@
 
 #include "../Move.h"
 #include "../Property.h"
-#include "../UniquePtr.h"
 #include "Object.h"
 
 #include "Collections/Generic/IEnumerable.h"

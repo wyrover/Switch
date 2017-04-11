@@ -4,7 +4,6 @@
 
 #include "../../Abstract.h"
 #include "../../Types.h"
-#include "../../UniquePtr.h"
 #include "../Object.h"
 #include "../String.h"
 #include "../Uri.h"

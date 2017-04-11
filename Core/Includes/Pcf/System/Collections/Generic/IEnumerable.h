@@ -4,7 +4,6 @@
 
 #include "../../../Interface.h"
 #include "../../../RefPtr.h"
-#include "../../../UniquePtr.h"
 #include "IEnumerator.h"
 
 /// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.

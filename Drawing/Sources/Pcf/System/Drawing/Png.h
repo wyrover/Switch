@@ -1,7 +1,6 @@
 #include <zlib.h>
 #include <png.h>
 #include <Pcf/System/Object.h>
-#include <Pcf/UniquePtr.h>
 #include <Pcf/System/IO//BinaryReader.h>
 
 #include "../../../../Includes/Pcf/System/Drawing/Image.h"

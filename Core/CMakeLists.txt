@@ -388,9 +388,10 @@ set(INCLUDE_FILES
   Includes/Pcf/Property.h
   Includes/Pcf/Public.h
   Includes/Pcf/Ref.h
+  Includes/Pcf/RefPtr.h
+  Includes/Pcf/SharedPtr.h
   Includes/Pcf/Startup.h
   Includes/Pcf/Static.h
-  Includes/Pcf/RefPtr.h
   Includes/Pcf/Types.h
   Includes/Pcf/UniquePtr.h
   Includes/Pcf/Unused.h

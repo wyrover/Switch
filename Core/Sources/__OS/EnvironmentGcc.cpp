@@ -9,7 +9,6 @@
 #include <sys/time.h>
 
 #include "CoreApi.h"
-#include "../../Includes/Pcf/UniquePtr.h"
 
 namespace {
   static string CreateProcess(const string& command) {

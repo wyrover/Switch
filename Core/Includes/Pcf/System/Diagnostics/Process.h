@@ -4,7 +4,6 @@
 
 #include "../../Property.h"
 #include "../../Types.h"
-#include "../../UniquePtr.h"
 #include "../Object.h"
 #include "../ObjectClosedException.h"
 #include "../String.h"

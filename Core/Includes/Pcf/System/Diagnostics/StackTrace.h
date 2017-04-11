@@ -3,7 +3,6 @@
 #pragma once
 
 #include "../../Types.h"
-#include "../../UniquePtr.h"
 #include "../Exception.h"
 #include "../Object.h"
 #include "../String.h"

@@ -5,7 +5,6 @@
 #include "../../Property.h"
 #include "../../Types.h"
 #include "../../RefPtr.h"
-#include "../../UniquePtr.h"
 #include "../Boolean.h"
 #include "../Byte.h"
 #include "../Char.h"
