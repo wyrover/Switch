@@ -381,6 +381,7 @@
 #include "Property.h"
 #include "Ref.h"
 #include "RefPtr.h"
+#include "SharedPtr.h"
 #include "Startup.h"
 #include "Static.h"
 #include "Types.h"

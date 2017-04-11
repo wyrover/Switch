@@ -403,7 +403,7 @@ namespace Pcf {
       if (this->ptr == null)
         return "Pcf::RefPtr [Pointer=null]";
       std::stringstream s;
-      s << "Pcf::RefPtr [Pointer=" << this->ptr << "]";
+      s << "Pcf::RefPtr [Pointer=" << this->ptr << ", UseCount=" << std::to_string(this->GetUseCount()) << "]";
       return s.str();
     }
     
