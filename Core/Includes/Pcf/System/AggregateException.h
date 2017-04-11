@@ -2,7 +2,7 @@
 /// @brief Contains Pcf::System::AggregateException exception.
 #pragma once
 
-#include "../ExcPtr.h"
+#include "../ExceptionPtr.h"
 #include "Environment.h"
 #include "Exception.h"
 #include "Collections/Generic/List.h"

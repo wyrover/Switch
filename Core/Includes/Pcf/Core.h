@@ -371,7 +371,7 @@
 #include "Await.h"
 #include "Boxing.h"
 #include "CurrentInformation.h"
-#include "ExcPtr.h"
+#include "ExceptionPtr.h"
 #include "InitializerList.h"
 #include "Interface.h"
 #include "Is.h"

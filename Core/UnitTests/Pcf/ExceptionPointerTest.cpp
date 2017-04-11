@@ -1,4 +1,4 @@
-#include <Pcf/ExcPtr.h>
+#include <Pcf/ExceptionPtr.h>
 #include <Pcf/TUnit/Assert.h>
 #include <Pcf/TUnit/TestFixture.h>
 
@@ -9,40 +9,40 @@ namespace PcfUnitTests {
   class ExceptionPointerTest : public TestFixture {
   protected:
     void CreateExceptionPointerEmptyThenRethrow() {
-      ExcPtr ep;
+      ExceptionPtr ep;
       Assert::IsTrue(ep.IsNull(), pcf_current_information);
       Assert::DoesNotThrows(pcf_delegate {ep.Rethrow();}, pcf_current_information);
     }
     
     void CreateKnownExceptionThenRethrow() {
-      ExcPtr ep = ExcPtr::Create(InvalidCastException());
+      ExceptionPtr ep = ExceptionPtr::Create(InvalidCastException());
       Assert::IsFalse(ep.IsNull());
       Assert::Throws<InvalidCastException>(pcf_delegate {ep.Rethrow();}, pcf_current_information);
     }
     
     void CreateUnknownExceptionThenRethrow() {
       struct MyException {};
-      ExcPtr ep = ExcPtr::Create(MyException());
+      ExceptionPtr ep = ExceptionPtr::Create(MyException());
       Assert::IsFalse(ep.IsNull());
       Assert::Throws<MyException>(pcf_delegate {ep.Rethrow();}, pcf_current_information);
     }
    
     void GetCurrentExceptionOnNullExceptionThenRethrow() {
-      ExcPtr ep;
+      ExceptionPtr ep;
       pcf_using() {
-        ep = ExcPtr::CurrentException;
+        ep = ExceptionPtr::CurrentException;
       }
       Assert::IsTrue(ep.IsNull(), pcf_current_information);
       Assert::DoesNotThrows(pcf_delegate {ep.Rethrow();}, pcf_current_information);
     }
     
     void GetCurrentExceptionOnKnownExceptionThenRethrow() {
-      ExcPtr ep;
+      ExceptionPtr ep;
       pcf_using() {
         try {
           throw InvalidOperationException();
         } catch(...) {
-          ep = ExcPtr::CurrentException;
+          ep = ExceptionPtr::CurrentException;
         }
       }
       Assert::IsFalse(ep.IsNull(), pcf_current_information);
@@ -51,12 +51,12 @@ namespace PcfUnitTests {
     
     void GetCurrentExceptionOnUnknownExceptionThenRethrow() {
       struct MyException {};
-      ExcPtr ep;
+      ExceptionPtr ep;
       pcf_using() {
         try {
           throw MyException();
         } catch(...) {
-          ep = ExcPtr::CurrentException;
+          ep = ExceptionPtr::CurrentException;
         }
       }
       Assert::IsFalse(ep.IsNull(), pcf_current_information);
