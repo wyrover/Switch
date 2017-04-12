@@ -56,20 +56,20 @@ bool Single::Equals(const Single& value) const {
   return (this->value == value.value);
 }
 
-bool Single::Equals(const object& obj) const noexcept {
+bool Single::Equals(const object& obj) const {
   return is<Single>(obj) && Equals(static_cast<const Single&>(obj));
 }
 
-int32 Single::GetHashCode() const noexcept {
+int32 Single::GetHashCode() const {
   return *((int32*)&this->value);
 }
 
-string Single::ToString() const noexcept {
-  return ToString("G", Reference<IFormatProvider>::Null());
+string Single::ToString() const {
+  return ToString("G", ref<IFormatProvider>::Null());
 }
 
 string Single::ToString(const string& format) const {
-  return ToString(format, Reference<IFormatProvider>::Null());
+  return ToString(format, ref<IFormatProvider>::Null());
 }
 
 string Single::ToString(const string& format, const IFormatProvider&) const {
@@ -117,7 +117,7 @@ int32 Single::CompareTo(const Single& value) const {
   return 0;
 }
 
-int32 Single::CompareTo(const IComparable& obj) const noexcept {
+int32 Single::CompareTo(const IComparable& obj) const {
   if (!is<Single>(obj))
     return 1;
 

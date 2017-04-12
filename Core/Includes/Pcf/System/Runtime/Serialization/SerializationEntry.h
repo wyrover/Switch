@@ -3,7 +3,7 @@
 #pragma once
 
 #include "../../../Types.h"
-#include "../../../SharedPointer.h"
+#include "../../../RefPtr.h"
 #include "../../Object.h"
 #include "../../String.h"
 
@@ -22,7 +22,7 @@ namespace Pcf {
         public:
           /// @brief Gets the value contained in the object.
           /// @param value The value contained in the object.
-          Property<SharedPointer<Object>> Value {
+          Property<refptr<Object>> Value {
             pcf_get {return this->value;},
             pcf_set {this->value = value;}
           };
@@ -47,11 +47,11 @@ namespace Pcf {
           
         protected:
           /// @brief Initializes a new instance of the SerializationEntry
-          SerializationEntry(const SharedPointer<Object>& value, const String& typeName) : value(value), typeName(typeName) {}
+          SerializationEntry(const refptr<Object>& value, const String& typeName) : value(value), typeName(typeName) {}
           
         private:
           friend class SerializationInfo;
-          SharedPointer<Object> value;
+          refptr<Object> value;
           String typeName;
         };
       }

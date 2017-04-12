@@ -41,7 +41,7 @@ namespace Pcf {
       /// @brief Determines whether this instance of Exception and a specified object, which must also be a Exception object, have the same value.
       /// @param obj The object to compare with the current object.
       /// @return bool true if the specified object is equal to the current object. otherwise, false.
-      bool Equals(const object& obj) const noexcept override {return is<UInt16>(obj) && Equals(((const UInt16&)obj).value);}
+      bool Equals(const object& obj) const override {return is<UInt16>(obj) && Equals(((const UInt16&)obj).value);}
 
       /// @brief Converts the specified String representation of a logical value to its 16-bit unsigned integer equivalent.
       /// @param str A String containing the value to convert.
@@ -84,11 +84,11 @@ namespace Pcf {
 
       /// @brief Serves as a hash function for a particular type.
       /// @return Int32 A hash code for the current object.
-      int32 GetHashCode() const noexcept override;
+      int32 GetHashCode() const override;
 
       /// @brief Returns a String that represents the current UInt16.
       /// @return String A String that represents the current UInt16.
-      String ToString() const noexcept override;
+      String ToString() const override;
 
       /// @brief Returns a String that represents the current UInt16.
       /// @param format Format-control String.
@@ -117,7 +117,7 @@ namespace Pcf {
       /// @return Greater than zero   This instance is greater than value.
       /// -or-
       /// @return obj is nullNothingnullptra null reference.
-      int32 CompareTo(const IComparable& obj) const noexcept override;
+      int32 CompareTo(const IComparable& obj) const override;
 
       /// @brief Returns the TypeCode for this instance.
       /// @return TypeCode The enumerated constant that is the TypeCode of the class or value type that implements this interface.

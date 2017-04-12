@@ -224,7 +224,7 @@ int32 Socket::GetSendTimeout() const {
   return GetSocketOption(SocketOptionLevel::Socket, SocketOptionName::SendTimeout).ChangeType<Int32>().ToObject();
 }
 
-UniquePointer<object> Socket::GetSocketOption(SocketOptionLevel socketOptionLevel, SocketOptionName socketOptionName) const {
+refptr<object> Socket::GetSocketOption(SocketOptionLevel socketOptionLevel, SocketOptionName socketOptionName) const {
   if (this->data->socket == IntPtr::Zero())
     throw ObjectClosedException(pcf_current_information);
 
@@ -233,13 +233,13 @@ UniquePointer<object> Socket::GetSocketOption(SocketOptionLevel socketOptionLeve
   
   if (socketOptionName == SocketOptionName::Linger) {
     /// @todo
-    //retValue = new LingerOption(false, 0);
+    //return pcf_new<LingerOption>(false, 0);
     throw NotImplementedException(pcf_current_information);
   }
   
   if (socketOptionName == SocketOptionName::AddMembership || socketOptionName == SocketOptionName::DropMembership) {
     /// @todo
-    //retValue = new MulticastOption(IPAddress());
+    //return pcf_new<MulticastOption>(IPAddress());
     throw NotImplementedException(pcf_current_information);
   }
 
@@ -247,7 +247,7 @@ UniquePointer<object> Socket::GetSocketOption(SocketOptionLevel socketOptionLeve
   int32 size = sizeof(int32);
   if (__OS::CoreApi::Socket::GetSocketOption(this->data->socket, socketOptionLevel, socketOptionName, &socketOption, &size) == -1)
     throw SocketException(__OS::CoreApi::Socket::GetLastError(), pcf_current_information);
-  return new Int32(socketOption);
+  return pcf_new<Int32>(socketOption);
 }
 
 int32 Socket::GetTtl() const {
@@ -324,21 +324,21 @@ int32 Socket::Select(IList<Socket>& checkRead, IList<Socket>& checkWrite, IList<
     throw ArgumentNullException(pcf_current_information);
   
   int32 nbCheckRead = checkRead.Count;
-  UniquePointer<intptr[]> checkReadHandles(new intptr[nbCheckRead]);
+  Array<intptr> checkReadHandles(nbCheckRead);
   for (int32 i = 0; i < nbCheckRead; i++)
     checkReadHandles[i] = checkRead[i].data->socket;
   
   int32 nbCheckWrite = checkWrite.Count;
-  UniquePointer<intptr[]> checkWriteHandles(new intptr[nbCheckWrite]);
+  Array<intptr> checkWriteHandles(nbCheckWrite);
   for (int32 i = 0; i < nbCheckWrite; i++)
     checkWriteHandles[i] = checkWrite[i].data->socket;
   
   int32 nbCheckError = checkError.Count;
-  UniquePointer<intptr[]> checkErrorHandles(new intptr[nbCheckError]);
+  Array<intptr> checkErrorHandles(nbCheckError);
   for (int32 i = 0; i < nbCheckError; i++)
     checkErrorHandles[i] = checkError[i].data->socket;
   
-  int32 status = __OS::CoreApi::Socket::Select(checkReadHandles.ToPointer(), nbCheckRead, checkWriteHandles.ToPointer(), nbCheckWrite, checkErrorHandles.ToPointer(), nbCheckError, microseconds);
+  int32 status = __OS::CoreApi::Socket::Select((intptr*)checkReadHandles.Data(), nbCheckRead, (intptr*)checkWriteHandles.Data(), nbCheckWrite, (intptr*)checkErrorHandles.Data(), nbCheckError, microseconds);
   
   if (status < 0)
     throw SocketException(__OS::CoreApi::Socket::GetLastError(), pcf_current_information);

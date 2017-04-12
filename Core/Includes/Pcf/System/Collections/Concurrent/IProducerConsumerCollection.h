@@ -3,7 +3,6 @@
 #pragma once
 
 #include "../../../Types.h"
-#include "../../../UniquePointer.h"
 #include "../../Array.h"
 #include "../Generic/ICollection.h"
 

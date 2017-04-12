@@ -4,7 +4,7 @@
 
 #include "../CurrentInformation.h"
 #include "../Property.h"
-#include "../SharedPointer.h"
+#include "../RefPtr.h"
 #include "../Types.h"
 #include "Object.h"
 #include "_String.h"
@@ -44,10 +44,6 @@ namespace Pcf {
       /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #pcf_current_information.
       Exception(const String& message, const Exception& innerException, const CurrentInformation& information);
-      
-      /// @cond
-      ~Exception() noexcept;
-      /// @endcond
       
       /// @brief Get File where Exception occurred
       /// @return string A string represent File where Exception occurred
@@ -105,23 +101,29 @@ namespace Pcf {
       /// @brief Determines whether this instance of Exception and a specified object, which must also be a Exception object, have the same value.
       /// @param obj The object to compare with the current object.
       /// @return bool true if the specified object is equal to the current object. otherwise, false.
-      bool Equals(const Object& obj) const noexcept override;
+      bool Equals(const Object& obj) const override;
       
       /// @brief Returns a string that represents the current DelegateItem.
       /// @return string A string that represents the current DelegateItem.
-      String ToString() const noexcept override;
+      String ToString() const override;
       
       /// @brief Explicit operator equal between Exception
       /// @param value Value to assign this instance.
       /// @return Exception& This instance assigned
       Exception& operator =(const Exception& value);
+
       /// @brief Check if the generation of the stack trace is enabled.
       /// @return true if stack trace generation is enabled.
       static bool StackTraceEnabled() { return Exception::stackTraceEnabled; }
+      
       /// @brief Enable / disable the generation of the stack trace.
       /// @param enabled True to enable the stack trace generation.
       static void StackTraceEnabled(bool enabled) { Exception::stackTraceEnabled = enabled; }
-      
+
+      /// @cond
+      const char* what() const noexcept override;
+      /// @endcond
+
     protected:
       /// @cond
       virtual String GetDefaultMessage() const;
@@ -129,15 +131,14 @@ namespace Pcf {
       String GetStackTrace() const;
       String GetStackTrace(const String& filter) const;
       void SetStackTrace(const Exception& exception);
-      const char* what() const noexcept override;
       
       String message;
       String helpLink;
       CurrentInformation currentInformation;
-      Reference<Exception> innerException;
+      ref<Exception> innerException;
       int32 hresult = 0;
-      SharedPointer<Array<String>> stackTrace;
-      String whatMessage;
+      refptr<Array<String>> stackTrace;
+      mutable String whatMessage;
       static bool stackTraceEnabled;
       /// @endcond
     };

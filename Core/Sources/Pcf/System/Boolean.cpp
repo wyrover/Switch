@@ -35,7 +35,7 @@ bool Boolean::TryParse(const String& str, bool& value) {
   return true;
 }
 
-String Boolean::ToString() const noexcept {
+String Boolean::ToString() const {
   return this->value ? TrueString : FalseString;
 }
 

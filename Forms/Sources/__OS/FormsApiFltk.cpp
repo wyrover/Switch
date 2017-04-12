@@ -163,7 +163,7 @@ namespace {
 
   private:
      int32 WndProc(Message& message) {
-      Reference<Control> control = Control::FromHandle(message.HWnd);
+      ref<Control> control = Control::FromHandle(message.HWnd);
       if (control != null)
         control().WndProc(message);
       return 1;

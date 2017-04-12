@@ -18,7 +18,7 @@ namespace UnitTests {
      // Used Expect::Throws to verifie if method throw effectively an exception
      void CreateTimeSpanFromNullTimeSpan() {
        Expect::Throws<ArgumentNullException>(pcf_delegate {
-         TimeSpan ts(Reference<TimeSpan>::Null());
+         TimeSpan ts(Ref<TimeSpan>::Null());
        }, pcf_current_information);
      }
 

@@ -45,16 +45,16 @@ bool SByte::TryParse(const string& str, int32 base, SByte& value) {
   return TryParse(str, base, value.value);
 }
 
-int32 SByte::GetHashCode() const noexcept {
+int32 SByte::GetHashCode() const {
   return this->value;
 }
 
-string SByte::ToString() const noexcept {
-  return ToString("g3", Reference<IFormatProvider>::Null());
+string SByte::ToString() const {
+  return ToString("g3", ref<IFormatProvider>::Null());
 }
 
 string SByte::ToString(const string& format) const {
-  return ToString(format, Reference<IFormatProvider>::Null());
+  return ToString(format, ref<IFormatProvider>::Null());
 }
 
 string SByte::ToString(const string& format, const IFormatProvider&) const {
@@ -89,7 +89,7 @@ int32 SByte::CompareTo(const SByte& value) const {
   return (this->value - value.value);
 }
 
-int32 SByte::CompareTo(const IComparable& obj) const noexcept {
+int32 SByte::CompareTo(const IComparable& obj) const {
   if (!is<SByte>(obj))
     return 1;
   return CompareTo(static_cast<const SByte&>(obj));

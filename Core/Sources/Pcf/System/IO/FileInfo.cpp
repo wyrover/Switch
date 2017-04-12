@@ -121,11 +121,11 @@ bool FileInfo::Equals(const FileInfo& value) const {
   return this->fullPath.Equals(value.fullPath);
 }
 
-bool FileInfo::Equals(const object& obj) const noexcept {
+bool FileInfo::Equals(const object& obj) const {
   return is<FileInfo>(obj) && Equals((const FileInfo&)obj);
 }
 
-string FileInfo::ToString() const noexcept {
+string FileInfo::ToString() const {
   return FullName();
 }
 

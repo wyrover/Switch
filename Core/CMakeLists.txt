@@ -377,9 +377,8 @@ set(INCLUDE_FILES
   Includes/Pcf/Async.h
   Includes/Pcf/Await.h
   Includes/Pcf/Boxing.h
-  Includes/Pcf/ExceptionPointer.h
+  Includes/Pcf/ExceptionPtr.h
   Includes/Pcf/CurrentInformation.h
-  Includes/Pcf/FunctionPointer.h
   Includes/Pcf/InitializerList.h
   Includes/Pcf/Interface.h
   Includes/Pcf/Is.h
@@ -388,16 +387,18 @@ set(INCLUDE_FILES
   Includes/Pcf/Move.h
   Includes/Pcf/Property.h
   Includes/Pcf/Public.h
-  Includes/Pcf/Reference.h
+  Includes/Pcf/Ref.h
+  Includes/Pcf/RefPtr.h
+  Includes/Pcf/SharedPtr.h
   Includes/Pcf/Startup.h
   Includes/Pcf/Static.h
-  Includes/Pcf/SharedPointer.h
   Includes/Pcf/Types.h
-  Includes/Pcf/UniquePointer.h
+  Includes/Pcf/UniquePtr.h
   Includes/Pcf/Unused.h
   Includes/Pcf/Using.h
   Includes/Pcf/Var.h
   Includes/Pcf/Core.h
+  Includes/Pcf/__opaque_function_pointer__.h
 )
 
 set(SOURCE_FILES
@@ -542,7 +543,7 @@ set(SOURCE_FILES
   Sources/Pcf/System/UIntPtr.cpp
   Sources/Pcf/System/Uri.cpp
   Sources/Pcf/System/ustring.cpp
-  Sources/Pcf/ExceptionPointer.cpp
+  Sources/Pcf/ExceptionPtr.cpp
 )
 
 source_group(Documentations REGULAR_EXPRESSION "/Includes/Pcf/Documentations/[-_,A-Za-z0-9]+\\.h*")

@@ -72,7 +72,7 @@ namespace Pcf {
         /// @brief Returns information about the socket address.(
         /// @return string A string that contains information about the SocketAddress.
         /// @remarks The ToString method returns a string that contains the AddressFamily enumerated value, the size of the underlying buffer of the SocketAddress structure, and the remaining contents of the buffer.
-        virtual String ToString() const noexcept;
+        virtual String ToString() const;
 
       private :
         friend class IPEndPoint;

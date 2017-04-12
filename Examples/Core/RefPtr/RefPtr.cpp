@@ -5,8 +5,9 @@ using namespace System;
 namespace Test {
   class Program {
   public:
+    /// @brief The main entry point for the application.
     static void Main() {
-      SharedPointer<string> p1 = SharedPointer<string>::Create("First string****");
+      refptr<string> p1 = pcf_new<string>("First string****");
       
       if (!p1)
         Console::WriteLine("p1 == null");
@@ -14,7 +15,7 @@ namespace Test {
       Console::WriteLine("*p1 = {0}", *p1);
       Console::WriteLine("p1 UseCount =  {0}{1}", p1.GetUseCount(), Environment::NewLine);
       
-      pcf_using (SharedPointer<string> p2 = p1) {
+      pcf_using (refptr<string> p2 = p1) {
         Console::WriteLine("*p2 = {0}", *p2);
         Console::WriteLine("p1 UseCount =  {0}{1}", p1.GetUseCount(), Environment::NewLine);
         
@@ -27,7 +28,7 @@ namespace Test {
       Console::WriteLine("*p1 = {0}", *p1);
       Console::WriteLine("p1 UseCount =  {0}{1}", p1.GetUseCount(), Environment::NewLine);
       
-      p1 = SharedPointer<string>::Null();
+      p1 = null;
       if (!p1)
         Console::WriteLine("p1 == null");
       Console::WriteLine("p1 UseCount =  {0}{1}", p1.GetUseCount(), Environment::NewLine);

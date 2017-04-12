@@ -12,7 +12,7 @@ namespace Examples {
       Console::WriteLine("Result {0}", result);
       Console::WriteLine("Format integer in decimal = {0:D}, hexa = {0:X} or {0:x}, in binary {0:B}", 0xDEAD);
       Console::WriteLine("args : {0}, {1}, {2}, {3}", 42, "Info", DateTime::Now, DayOfWeek::Wednesday);
-      Console::WriteLine("args : {0}, {1}, {2}, {3}, {4}", Array<Reference<object>> {Box(42), string("Info"), DateTime::Now(), Box(.25), Tuple<string, Byte> {"item1", 255}});
+      Console::WriteLine("args : {0}, {1}, {2}, {3}, {4}", Array<Ref<object>> {Box(42), string("Info"), DateTime::Now(), Box(.25), Tuple<string, Byte> {"item1", 255}});
     }
   };
 }

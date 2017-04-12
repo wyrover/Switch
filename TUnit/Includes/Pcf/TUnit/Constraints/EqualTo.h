@@ -21,7 +21,7 @@ namespace Pcf {
         template<typename TExpect>
         EqualTo(const TExpect& expect) : Constraint(expect) {}
         
-        string ToString() const noexcept override {return string::Format("{0}", this->expect);}
+        string ToString() const override {return string::Format("{0}", this->expect);}
         
       private:
         bool Verify(const ConstraintValue& actual) const override {

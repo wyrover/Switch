@@ -3,7 +3,6 @@
 #pragma once
 
 #include "../Types.h"
-#include "../UniquePointer.h"
 #include "FormatException.h"
 #include "Type.h"
 #include "Collections/Generic/KeyValuePair.h"

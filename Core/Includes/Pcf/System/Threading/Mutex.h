@@ -4,7 +4,7 @@
 
 #include <mutex>
 
-#include "../../SharedPointer.h"
+#include "../../RefPtr.h"
 #include "../ObjectClosedException.h"
 #include "../String.h"
 #include "WaitHandle.h"
@@ -101,7 +101,7 @@ namespace Pcf {
         /// @brief Determines whether this instance of Mutex and a specified object, which must also be a Mutex object, have the same value.
         /// @param obj The object to compare with the current object.
         /// @return bool true if the specified object is equal to the current object. otherwise, false.
-        bool Equals(const Object& obj) const noexcept override {return is<Mutex>(obj) && Equals((const Mutex&)obj);}
+        bool Equals(const Object& obj) const override {return is<Mutex>(obj) && Equals((const Mutex&)obj);}
         
         /// @brief Opens the specified named mutex, if it already exists, and returns a value that indicates whether the operation succeeded.
         /// @param name The name of a system-wide named mutex object.
@@ -127,8 +127,8 @@ namespace Pcf {
           return this->mutex->try_lock_for(std::chrono::milliseconds(millisecondsTimeOut));
         }
 
-        SharedPointer<std::recursive_timed_mutex> mutex = SharedPointer<std::recursive_timed_mutex>::Create();
-        SharedPointer<string> name = SharedPointer<string>::Create();
+        refptr<std::recursive_timed_mutex> mutex = pcf_new<std::recursive_timed_mutex>();
+        refptr<string> name = pcf_new<string>();
       };
     }
   }

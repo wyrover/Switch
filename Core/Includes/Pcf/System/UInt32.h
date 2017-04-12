@@ -40,7 +40,7 @@ namespace Pcf {
       /// @brief Determines whether this instance of Exception and a specified object, which must also be a Exception object, have the same value.
       /// @param obj The object to compare with the current object.
       /// @return bool true if the specified object is equal to the current object. otherwise, false.
-      bool Equals(const object& obj) const noexcept override {return is<UInt32>(obj) && Equals(((const UInt32&)obj).value);}
+      bool Equals(const object& obj) const override {return is<UInt32>(obj) && Equals(((const UInt32&)obj).value);}
 
       /// @brief Converts the specified String representation of a logical value to its 32-bit unsigned integer equivalent.
       /// @param str A String containing the value to convert.
@@ -83,11 +83,11 @@ namespace Pcf {
 
       /// @brief Serves as a hash function for a particular type.
       /// @return  Int32 A hash code for the current object.
-      int32 GetHashCode() const noexcept override;
+      int32 GetHashCode() const override;
 
       /// @brief Returns a String that represents the current UInt32.
       /// @return String A String that represents the current UInt32.
-      String ToString() const noexcept override;
+      String ToString() const override;
 
       /// @brief Returns a String that represents the current UInt32.
       /// @param format Format-control String.
@@ -116,7 +116,7 @@ namespace Pcf {
       /// Greater than zero   This instance is greater than value.
       /// -or-
       /// obj is nullNothingnullptra null reference.
-      int32 CompareTo(const IComparable& obj) const noexcept override;
+      int32 CompareTo(const IComparable& obj) const override;
 
 
       /// @brief Returns the TypeCode for this instance.

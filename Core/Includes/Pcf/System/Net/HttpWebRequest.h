@@ -42,7 +42,7 @@ namespace Pcf {
         System::Net::HttpWebResponse httpWebResponse;
         bool allowAutoRedirect = true;
         String contentType;
-        void* header = null;
+        intptr header = IntPtr::Zero;
         
       private:
         friend class System::Net::WebRequest;

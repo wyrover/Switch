@@ -17,7 +17,7 @@ void UTF8Encoding::Encoder::Encode(char32 c, byte bytes[]) const {
   __OS::CoreApi::UnicodeEncodings::UTF8::Encode(c, bytes);
 }
 
-String UTF8Encoding::Encoder::ToString() const noexcept {
+String UTF8Encoding::Encoder::ToString() const {
   return "UTF8Encoder";
 }
 
@@ -52,7 +52,7 @@ void UTF8Encoding::Decoder::Reset() {
   format = 0;
 }
 
-String UTF8Encoding::Decoder::ToString() const noexcept {
+String UTF8Encoding::Decoder::ToString() const {
   return "UTF8Decoder";
 }
 
@@ -77,12 +77,12 @@ UTF8Encoding& UTF8Encoding::operator =(const UTF8Encoding& encoding) {
   return *this;
 }
 
-UniquePointer<Encoding::Decoder> UTF8Encoding::CreateDecoder() const {
-  return new Decoder();
+refptr<Encoding::Decoder> UTF8Encoding::CreateDecoder() const {
+  return pcf_new<Decoder>();
 }
 
-UniquePointer<Encoding::Encoder> UTF8Encoding::CreateEncoder() const {
-  return new Encoder();
+refptr<Encoding::Encoder> UTF8Encoding::CreateEncoder() const {
+  return pcf_new<Encoder>();
 }
 
 int32 UTF8Encoding::GetByteCount(char32 c) const {
@@ -117,7 +117,7 @@ Array<byte> UTF8Encoding::GetPreamble() const {
     return {};
 }
 
-bool UTF8Encoding::Equals(const object& obj) const noexcept {
+bool UTF8Encoding::Equals(const object& obj) const {
   const UTF8Encoding* utf8 = dynamic_cast<const UTF8Encoding*>(&obj);
   if (utf8 == null)
     return false;

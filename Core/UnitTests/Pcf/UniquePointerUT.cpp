@@ -1,4 +1,4 @@
-#include <Pcf/UniquePointer.h>
+#include <Pcf/UniquePtr.h>
 #include <Pcf/TUnit/Assert.h>
 #include <Pcf/TUnit/TestFixture.h>
 
@@ -21,7 +21,7 @@ namespace {
   int TestPointer::cpt = 0;
 
   TEST(Up, SetNull) {
-    pcf_using(UniquePointer<int> ptr) {
+    pcf_using(UniquePtr<int> ptr) {
       EXPECT_THROW(ptr.ToPointer(), std::exception);
       EXPECT_TRUE(ptr.IsNull());
       EXPECT_THROW(*ptr, std::exception);
@@ -31,7 +31,7 @@ namespace {
 
   TEST(Up, SetNotNull) {
     TestPointer::ResetCpt();
-    pcf_using(UniquePointer<TestPointer> ptr(new TestPointer())) {
+    pcf_using(UniquePtr<TestPointer> ptr(new TestPointer())) {
       EXPECT_EQ(1, TestPointer::GetCpt());
       EXPECT_NE((TestPointer*)null, ptr.ToPointer());
       EXPECT_FALSE(ptr.IsNull());
@@ -46,7 +46,7 @@ namespace {
     TestPointer* tp = new TestPointer();
     EXPECT_EQ(1, TestPointer::GetCpt());
   
-    pcf_using(UniquePointer<TestPointer> ptr(tp)) {
+    pcf_using(UniquePtr<TestPointer> ptr(tp)) {
       EXPECT_NE((TestPointer*)null, ptr.ToPointer());
       EXPECT_FALSE(ptr.IsNull());
       EXPECT_NO_THROW(*ptr);
@@ -58,7 +58,7 @@ namespace {
 
   TEST(Up, FromEqual) {
     TestPointer::ResetCpt();
-    pcf_using(UniquePointer<TestPointer> ptr = new TestPointer()) {
+    pcf_using(UniquePtr<TestPointer> ptr = new TestPointer()) {
       EXPECT_EQ(1, TestPointer::GetCpt());
       EXPECT_NE((TestPointer*)null, ptr.ToPointer());
       EXPECT_FALSE(ptr.IsNull());
@@ -70,10 +70,10 @@ namespace {
 
   TEST(Up, FromUniquePointer) {
     TestPointer::ResetCpt();
-    UniquePointer<TestPointer> ptr1(new TestPointer());
+    UniquePtr<TestPointer> ptr1(new TestPointer());
     EXPECT_EQ(1, TestPointer::GetCpt());
   
-    pcf_using(UniquePointer<TestPointer> ptr2(ptr1)) {
+    pcf_using(UniquePtr<TestPointer> ptr2(ptr1)) {
       EXPECT_EQ(1, TestPointer::GetCpt());
       EXPECT_THROW(ptr1.ToPointer(), std::exception);
       EXPECT_NE((TestPointer*)null, ptr2.ToPointer());
@@ -86,10 +86,10 @@ namespace {
 
   TEST(Up, FromEqualUniquePointer) {
     TestPointer::ResetCpt();
-    UniquePointer<TestPointer> ptr1(new TestPointer());
+    UniquePtr<TestPointer> ptr1(new TestPointer());
     EXPECT_EQ(1, TestPointer::GetCpt());
   
-    pcf_using(UniquePointer<TestPointer> ptr2 = ptr1) {
+    pcf_using(UniquePtr<TestPointer> ptr2 = ptr1) {
       EXPECT_EQ(1, TestPointer::GetCpt());
       EXPECT_THROW(ptr1.ToPointer(), std::exception);
       EXPECT_NE((TestPointer*)null, ptr2.ToPointer());
@@ -102,7 +102,7 @@ namespace {
 
   TEST(Up, SetAndReset) {
     TestPointer::ResetCpt();
-    UniquePointer<TestPointer> ptr;
+    UniquePtr<TestPointer> ptr;
   
     EXPECT_NO_THROW(ptr.Reset());
     EXPECT_THROW(ptr.ToPointer(), std::exception);
@@ -114,7 +114,7 @@ namespace {
     TestPointer* pt = new TestPointer();
     EXPECT_EQ(1, TestPointer::GetCpt());
 
-    pcf_using(UniquePointer<TestPointer> ptr(pt)) {
+    pcf_using(UniquePtr<TestPointer> ptr(pt)) {
       EXPECT_EQ(1, TestPointer::GetCpt());
       EXPECT_NO_THROW(ptr.Reset());
       EXPECT_THROW(ptr.ToPointer(), std::exception);
@@ -124,7 +124,7 @@ namespace {
   }
 
   TEST(Up, SetNullAndCheckIsNullOrEmpty) {
-    UniquePointer<string> ptr;
+    UniquePtr<string> ptr;
     EXPECT_TRUE(ptr.IsNull());
   }
 
@@ -133,7 +133,7 @@ namespace {
     TestPointer* pt = new TestPointer();
     EXPECT_EQ(1, TestPointer::GetCpt());
   
-    pcf_using(UniquePointer<TestPointer> ptr(pt)) {
+    pcf_using(UniquePtr<TestPointer> ptr(pt)) {
       EXPECT_FALSE(ptr.IsNull());
       EXPECT_EQ(1, TestPointer::GetCpt());
     }
@@ -146,7 +146,7 @@ namespace {
     TestPointer* pt = new TestPointer();
     EXPECT_EQ(1, TestPointer::GetCpt());
   
-    pcf_using(UniquePointer<TestPointer> ptr) {
+    pcf_using(UniquePtr<TestPointer> ptr) {
       EXPECT_NO_THROW(ptr.Reset(pt));
       EXPECT_EQ(pt, ptr.ToPointer());
       EXPECT_EQ(1, TestPointer::GetCpt());
@@ -161,7 +161,7 @@ namespace {
     TestPointer* pt2 = new TestPointer();
     EXPECT_EQ(2, TestPointer::GetCpt());
  
-    pcf_using(UniquePointer<TestPointer> ptr(pt1)) {
+    pcf_using(UniquePtr<TestPointer> ptr(pt1)) {
       EXPECT_EQ(2, TestPointer::GetCpt());
       EXPECT_NO_THROW(ptr.Reset(pt2));
       EXPECT_EQ(pt2, ptr.ToPointer());
@@ -177,8 +177,8 @@ namespace {
     TestPointer* pt2 = new TestPointer();
     EXPECT_EQ(2, TestPointer::GetCpt());
 
-    pcf_using(UniquePointer<TestPointer> ptr(pt1)) {
-      UniquePointer<TestPointer> ptr2(pt2);
+    pcf_using(UniquePtr<TestPointer> ptr(pt1)) {
+      UniquePtr<TestPointer> ptr2(pt2);
       EXPECT_EQ(2, TestPointer::GetCpt());
       EXPECT_NO_THROW(ptr.Swap(ptr2));
       EXPECT_EQ(pt1, ptr2.ToPointer());
@@ -190,28 +190,28 @@ namespace {
 
   TEST(Up, SetFromANativePointerAndGetValue) {
     string* str = new string("Test Pointer!");
-    pcf_using(UniquePointer<string> ptr(str)) {
+    pcf_using(UniquePtr<string> ptr(str)) {
       EXPECT_EQ(*str, ptr.ToObject());
     }
   }
 
   TEST(Up, SetFromANativePointerAndGetPointer) {
     string* str = new string("Test Pointer!");
-    pcf_using(UniquePointer<string> ptr(str)) {
+    pcf_using(UniquePtr<string> ptr(str)) {
       EXPECT_EQ(str, ptr.ToPointer());
     }
   }
 
   TEST(Up, ToString) {
-    pcf_using(UniquePointer<string> ptr) {
-      EXPECT_EQ(string("Pcf::UniquePointer [Pointer=null]"), ptr.ToString().c_str());
+    pcf_using(UniquePtr<string> ptr) {
+      EXPECT_EQ(string("Pcf::UniquePtr [Pointer=null]"), ptr.ToString().c_str());
     }
 
     string* str = new string("Test Pointer!");
-    pcf_using(UniquePointer<string> ptr(str)) {
-      EXPECT_TRUE(string(ptr.ToString().c_str()).StartsWith("Pcf::UniquePointer [Pointer="));
+    pcf_using(UniquePtr<string> ptr(str)) {
+      EXPECT_TRUE(string(ptr.ToString().c_str()).StartsWith("Pcf::UniquePtr [Pointer="));
       EXPECT_TRUE(string(ptr.ToString().c_str()).EndsWith("]"));
-      EXPECT_NE(string("Pcf::UniquePointer [Pointer=null]"), ptr.ToString().c_str());
+      EXPECT_NE(string("Pcf::UniquePtr [Pointer=null]"), ptr.ToString().c_str());
     }
 
   }

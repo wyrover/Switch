@@ -33,14 +33,14 @@ namespace Examples {
     // Add item of polymorphic objects
     template<typename T>
     static void Add(const T& obj) {
-      items.Add(new T(obj));
+      items.Add(pcf_new<T>(obj));
     }
     
-    static System::Collections::Generic::List<sp<object>> items;
+    static System::Collections::Generic::List<refptr<object>> items;
   };
   
   // List of polymorphic objects
-  System::Collections::Generic::List<sp<object>> Program::items;
+  System::Collections::Generic::List<refptr<object>> Program::items;
 }
 
 pcf_startup (Examples::Program)

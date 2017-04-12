@@ -17,7 +17,7 @@ void UTF32Encoding::Encoder::Encode(char32 c, byte bytes[]) const {
   __OS::CoreApi::UnicodeEncodings::UTF32::Encode(c, bytes[0], bytes[1], bytes[2], bytes[3], this->bigEndian);
 }
 
-String UTF32Encoding::Encoder::ToString() const noexcept {
+String UTF32Encoding::Encoder::ToString() const {
   if (this->bigEndian)
     return "UTF32Encoder Big Endian";
   else
@@ -41,7 +41,7 @@ void UTF32Encoding::Decoder::Add(byte b) {
   }
 }
 
-String UTF32Encoding::Decoder::ToString() const noexcept {
+String UTF32Encoding::Decoder::ToString() const {
   if (bigEndian)
     return "UTF32Decoder Big Endian";
   else
@@ -82,12 +82,12 @@ UTF32Encoding& UTF32Encoding::operator =(const UTF32Encoding& encoding) {
   return *this;
 }
 
-UniquePointer<Encoding::Decoder> UTF32Encoding::CreateDecoder() const {
-  return new Decoder(this->bigEndian);
+refptr<Encoding::Decoder> UTF32Encoding::CreateDecoder() const {
+  return pcf_new<Decoder>(this->bigEndian);
 }
 
-UniquePointer<Encoding::Encoder> UTF32Encoding::CreateEncoder() const {
-  return new Encoder(this->bigEndian);
+refptr<Encoding::Encoder> UTF32Encoding::CreateEncoder() const {
+  return pcf_new<Encoder>(this->bigEndian);
 }
 
 int32 UTF32Encoding::GetByteCount(char32) const {
@@ -120,7 +120,7 @@ Array<byte> UTF32Encoding::GetPreamble() const {
       return {};
 }
 
-bool UTF32Encoding::Equals(const object& obj) const noexcept {
+bool UTF32Encoding::Equals(const object& obj) const {
   const UTF32Encoding* ue = dynamic_cast<const UTF32Encoding*>(&obj);
   if (ue == null)
     return false;

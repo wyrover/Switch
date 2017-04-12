@@ -2,7 +2,7 @@
 /// @brief Contains Pcf::System::Drawing::Bitmap class.
 #pragma once
 
-#include <Pcf/SharedPointer.h>
+#include <Pcf/RefPtr.h>
 #include <Pcf/System/String.h>
 #include <Pcf/System/IO/Stream.h>
 

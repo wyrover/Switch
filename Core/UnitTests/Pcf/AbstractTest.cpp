@@ -19,7 +19,7 @@ namespace PcfUnitTests {
         ~NotInheritedFromAnAbstract() {result += "~NotInheritedFromAnAbstract";}
       };
       
-      pcf_using (up<NotAnAbstract> value = new NotInheritedFromAnAbstract());
+      pcf_using (refptr<NotAnAbstract> value = pcf_new<NotInheritedFromAnAbstract>());
       Assert::AreEqual("~NotAnAbstract", result);
     }
 
@@ -34,7 +34,7 @@ namespace PcfUnitTests {
         ~InheritedFromAnAbstract() {result += "~InheritedFromAnAbstract";}
       };
       
-      pcf_using (up<AnAbstract> value = new InheritedFromAnAbstract());
+      pcf_using (refptr<AnAbstract> value = pcf_new<InheritedFromAnAbstract>());
       Assert::AreEqual("~InheritedFromAnAbstract~AnAbstract", result);
     }
   };

@@ -331,7 +331,7 @@ namespace Pcf {
           TraceOptions traceOutputOptions = TraceOptions::None;
           };
 
-        SharedPointer<TraceListenerData> data = SharedPointer<TraceListenerData>::Create();
+        refptr<TraceListenerData> data = pcf_new<TraceListenerData>();
       };
     }
   }

@@ -54,33 +54,33 @@ TEST(Unicode_Encoding, String_Exceptions) {
 
 TEST(Unicode_Encoding, Equals) {
   // Create a Text::UnicodeEncoding without parameters.
-  SharedPointer<Text::UnicodeEncoding> unicode = new Text::UnicodeEncoding();
+  refptr<Text::UnicodeEncoding> unicode = new Text::UnicodeEncoding();
   EXPECT_EQ(1200,unicode->GetCodePage());
 
   // Create a Text::UnicodeEncoding to support little-endian byte ordering 
   // and include the Unicode byte order mark.
-  SharedPointer<Text::UnicodeEncoding> unicodeLittleEndianBOM = new Text::UnicodeEncoding(false, true);
+  refptr<Text::UnicodeEncoding> unicodeLittleEndianBOM = new Text::UnicodeEncoding(false, true);
   // Compare this Text::UnicodeEncoding to the Text::UnicodeEncoding without parameters.
   EXPECT_TRUE(unicode->Equals(*unicodeLittleEndianBOM));
   EXPECT_EQ(1200,unicodeLittleEndianBOM->GetCodePage());
 
   // Create a Text::UnicodeEncoding to support little-endian byte ordering 
   // and not include the Unicode byte order mark.
-  SharedPointer<Text::UnicodeEncoding> unicodeLittleEndianNoBOM = new Text::UnicodeEncoding(false, false);
+  refptr<Text::UnicodeEncoding> unicodeLittleEndianNoBOM = new Text::UnicodeEncoding(false, false);
   // Compare this Text::UnicodeEncoding to the Text::UnicodeEncoding without parameters.
   EXPECT_FALSE(unicode->Equals(*unicodeLittleEndianNoBOM));
   EXPECT_EQ(1200,unicodeLittleEndianNoBOM->GetCodePage());
 
   // Create a Text::UnicodeEncoding to support big-endian byte ordering 
   // and include the Unicode byte order mark.
-  SharedPointer<Text::UnicodeEncoding> unicodeBigEndianBOM = new Text::UnicodeEncoding(true, true);
+  refptr<Text::UnicodeEncoding> unicodeBigEndianBOM = new Text::UnicodeEncoding(true, true);
   // Compare this Text::UnicodeEncoding to the Text::UnicodeEncoding without parameters.
   EXPECT_FALSE(unicode->Equals(*unicodeBigEndianBOM));
   EXPECT_EQ(1201,unicodeBigEndianBOM->GetCodePage());
 
   // Create a Text::UnicodeEncoding to support big-endian byte ordering 
   // and not include the Unicode byte order mark.
-  SharedPointer<Text::UnicodeEncoding> unicodeBigEndianNoBOM = new Text::UnicodeEncoding(true, false);
+  refptr<Text::UnicodeEncoding> unicodeBigEndianNoBOM = new Text::UnicodeEncoding(true, false);
   // Compare this Text::UnicodeEncoding to the Text::UnicodeEncoding without parameters.
   EXPECT_FALSE(unicode->Equals(*unicodeBigEndianNoBOM));
   EXPECT_EQ(1201,unicodeBigEndianNoBOM->GetCodePage());

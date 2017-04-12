@@ -34,11 +34,11 @@ bool UIntPtr::Equals(const UIntPtr& value) const {
   return this->value == value.value;
 }
 
-bool UIntPtr::Equals(const object& obj) const noexcept {
+bool UIntPtr::Equals(const object& obj) const {
   return is<UIntPtr>(obj) && Equals(static_cast<const UIntPtr&>(obj));
 }
 
-int32 UIntPtr::GetHashCode() const noexcept {
+int32 UIntPtr::GetHashCode() const {
   uint64 handleValue = this->value;
   int32 hash = 0;
 
@@ -52,7 +52,7 @@ int32 UIntPtr::CompareTo(const UIntPtr& value) const {
   return static_cast<int32>(this->value - value.value);
 }
 
-int32 UIntPtr::CompareTo(const IComparable& obj) const noexcept {
+int32 UIntPtr::CompareTo(const IComparable& obj) const {
   if (!is<UIntPtr>(obj))
     return 1;
 
@@ -76,7 +76,7 @@ void* UIntPtr::ToPointer() const {
   return (void*)this->value;
 }
 
-string UIntPtr::ToString() const noexcept {
+string UIntPtr::ToString() const {
   return UInt64(ToUInt64()).ToString();
 }
 

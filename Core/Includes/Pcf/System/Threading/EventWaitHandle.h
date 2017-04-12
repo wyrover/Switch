@@ -5,7 +5,7 @@
 #include <condition_variable>
 #include <mutex>
 
-#include "../../SharedPointer.h"
+#include "../../RefPtr.h"
 #include "../String.h"
 #include "../ObjectClosedException.h"
 #include "AbandonedMutexException.h"
@@ -31,7 +31,7 @@ namespace Pcf {
         /// @param initialState true to set the initial state to signaled if the named event is created as a result of this call; false to set it to nonsignaled.
         /// @param mode One of the System::Threading::EventResetMode values that determines whether the event resets automatically or manually.
         /// @exception IO::IOException A Win32 error occurred.
-        EventWaitHandle(bool initialState, EventResetMode mode) : mode(SharedPointer<EventResetMode>::Create(mode)) {
+        EventWaitHandle(bool initialState, EventResetMode mode) : mode(pcf_new<EventResetMode>(mode)) {
           if (initialState)
             this->Set();
         }
@@ -110,7 +110,7 @@ namespace Pcf {
         /// @param obj The object to compare with the current object.
         /// @return bool true if the specified object is equal to the current object. otherwise, false.
         /// @exception ArgumentNullException The parameters obj is null.
-        bool Equals(const object& obj) const noexcept override {return is<EventWaitHandle>(obj) && this->Equals((const EventWaitHandle&)obj);}
+        bool Equals(const object& obj) const override {return is<EventWaitHandle>(obj) && this->Equals((const EventWaitHandle&)obj);}
 
       private:
         bool Signal() override {return this->Set();}
@@ -134,11 +134,11 @@ namespace Pcf {
           return true;
         }
         
-        SharedPointer<std::mutex> guard = SharedPointer<std::mutex>::Create();
-        SharedPointer<std::condition_variable> signal = SharedPointer<std::condition_variable>::Create();
-        SharedPointer<bool> event = SharedPointer<bool>::Create(false);
-        SharedPointer<EventResetMode> mode = SharedPointer<EventResetMode>::Create(EventResetMode::ManualReset);
-        SharedPointer<string> name = SharedPointer<string>::Create();
+        refptr<std::mutex> guard = pcf_new<std::mutex>();
+        refptr<std::condition_variable> signal = pcf_new<std::condition_variable>();
+        refptr<bool> event = pcf_new<bool>(false);
+        refptr<EventResetMode> mode = pcf_new<EventResetMode>(EventResetMode::ManualReset);
+        refptr<string> name = pcf_new<string>();
       };
     }
   }

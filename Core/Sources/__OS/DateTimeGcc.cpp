@@ -70,9 +70,9 @@ int64 __OS::CoreApi::DateTime::Mktime(int32 year, int32 month, int32 day, int32 
 
 int32 __OS::CoreApi::DateTime::Strftime(string& output, const string& format, int32 year, int32 month, int32 day, int32 hour, int32 minute, int32 second, int32 dayOfYear, int32 dayOfWeek, bool daylight) {
   struct tm value = { second, minute, hour, day, month-1, year - 1900, dayOfWeek, dayOfYear, daylight == true ? 1 : 0, 0, null };
-  UniquePointer<char[]> buffer = UniquePointer<char[]>::Create(2048);
-  int32 result = (int32)strftime(buffer.ToPointer(), 200, format.Data, &value);
-  output = buffer.ToPointer();
+  char buffer[256];
+  int32 result = (int32)strftime(buffer, 256, format.Data, &value);
+  output = buffer;
   return result;
 }
 

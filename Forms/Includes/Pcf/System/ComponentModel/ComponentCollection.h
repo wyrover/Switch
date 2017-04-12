@@ -3,7 +3,7 @@
 #pragma once
 
 #include <Pcf/System/Object.h>
-#include <Pcf/SharedPointer.h>
+#include <Pcf/RefPtr.h>
 #include <Pcf/System/Array.h>
 #include <Pcf/System/Collections/ArrayList.h>
 
@@ -34,7 +34,7 @@ namespace Pcf {
 
         Any operator [](string name) {
           /*
-          for(SharedPointer<Object> component : components) {
+          for(refptr<Object> component : components) {
             if (component.As<IComponent>().GetSite().Name() == name)
               return component.ChangeType<IComponent>();
           }

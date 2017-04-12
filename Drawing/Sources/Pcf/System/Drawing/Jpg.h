@@ -5,7 +5,6 @@ extern "C" {
 }
 
 #include <Pcf/System/Object.h>
-#include <Pcf/UniquePointer.h>
 #include <Pcf/System/IO//BinaryReader.h>
 
 #include "../../../../Includes/Pcf/System/Drawing/Image.h"
@@ -36,7 +35,7 @@ namespace Pcf {
 
         void Read(Image& image) {
           Array<byte> streamData((int32)reader.BaseStream().Length());
-          UniquePointer<byte[]> rawData;
+          Array<byte> rawData;
           jpeg_decompress_struct dinfo;
           JpegErrorMgr jerr;
           JSAMPROW row;
@@ -54,9 +53,9 @@ namespace Pcf {
           *max_destroy_decompress_err= 10;
 
           if (setjmp(jerr.errhand_)) {
-            if ( ((*max_finish_decompress_err)-- > 0) && rawData.IsNull())
+            if (((*max_finish_decompress_err)-- > 0))
               jpeg_finish_decompress(&dinfo);
-            if ( (*max_destroy_decompress_err)-- > 0)
+            if ((*max_destroy_decompress_err)-- > 0)
               jpeg_destroy_decompress(&dinfo);
 
             free(max_destroy_decompress_err);
@@ -77,12 +76,12 @@ namespace Pcf {
 
           jpeg_calc_output_dimensions(&dinfo);
 
-          rawData = new byte[dinfo.output_width * dinfo.output_height * dinfo.output_components];
+          rawData = Array<byte>(dinfo.output_width * dinfo.output_height * dinfo.output_components);
 
           jpeg_start_decompress(&dinfo);
 
           while (dinfo.output_scanline < dinfo.output_height) {
-            row = (JSAMPROW)(rawData.ToPointer() + dinfo.output_scanline * dinfo.output_width * dinfo.output_components);
+            row = (JSAMPROW)(rawData.Data() + dinfo.output_scanline * dinfo.output_width * dinfo.output_components);
             jpeg_read_scanlines(&dinfo, &row, (JDIMENSION)1);
           }
 
@@ -95,7 +94,7 @@ namespace Pcf {
           free(max_finish_decompress_err);
         }
 
-        void ToImage(Image& image, const jpeg_decompress_struct& dinfo, UniquePointer<byte[]> rawData) {
+        void ToImage(Image& image, const jpeg_decompress_struct& dinfo, Array<byte> rawData) {
           image.flags = Imaging::ImageFlags::ReadOnly | Imaging::ImageFlags::HasRealPixelSize | Imaging::ImageFlags::HasRealDpi | Imaging::ImageFlags::ColorSpaceRgb;
           image.frameDimensionList = {Imaging::FrameDimension::Page().Guid};
           //image.horizontalResolution = Convert::ToSingle(dinfo.) / inchesPerMeter;
@@ -103,7 +102,8 @@ namespace Pcf {
           //image.verticalResolution = Convert::ToSingle(bmpInfo.yPixelsPerMeter) / inchesPerMeter;
           image.size = Size(dinfo.output_width, dinfo.output_height);
           image.rawFormat = Imaging::ImageFormat::Jpeg;
-          image.rawData = Array<byte>(rawData.Release(), image.size.Width() * image.size.Height() * (image.PixelFormat() == System::Drawing::Imaging::PixelFormat::Format32bppRgb ? 4 : 3));
+          //image.rawData = Array<byte>(rawData.Data(), image.size.Width() * image.size.Height() * (image.PixelFormat() == System::Drawing::Imaging::PixelFormat::Format32bppRgb ? 4 : 3));
+          image.rawData = rawData;
         }
 
       private:

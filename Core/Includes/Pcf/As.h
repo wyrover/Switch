@@ -2,9 +2,9 @@
 /// @brief Contains Pcf::as <> operator.
 #pragma once
 
-#include "Reference.h"
-#include "SharedPointer.h"
-#include "UniquePointer.h"
+#include "Ref.h"
+#include "RefPtr.h"
+#include "UniquePtr.h"
 
 /// @cond
 void __throw_cast_exception__();
@@ -14,86 +14,86 @@ namespace Pcf {
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
   /// @par Examples
   /// @code
-  /// SharedPointer<string> str = new Pcf::string("A new string");
-  /// SharedPointer<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
+  /// refptr<string> str = new Pcf::string("A new string");
+  /// refptr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
   /// @endcode
   /// @exception ArgumentNullException The parameters is null.
   /// @ingroup Pcf
   template<typename TT, typename T>
-  Reference<TT> as(const Reference<T>& value) {
+  ref<TT> as(const ref<T>& value) {
     return value.template As<TT>();
   }
   
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
   /// @par Examples
   /// @code
-  /// SharedPointer<string> str = new Pcf::string("A new string");
-  /// SharedPointer<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
+  /// refptr<string> str = new Pcf::string("A new string");
+  /// refptr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
   /// @endcode
   /// @exception ArgumentNullException The parameters is null.
   /// @ingroup Pcf
   template<typename TT, typename T>
-  Reference<TT> as(Reference<T>& value) {
+  ref<TT> as(ref<T>& value) {
     return value.template As<TT>();
   }
   
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
   /// @par Examples
   /// @code
-  /// SharedPointer<string> str = new Pcf::string("A new string");
-  /// SharedPointer<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
+  /// refptr<string> str = new Pcf::string("A new string");
+  /// refptr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
   /// @endcode
   /// @exception ArgumentNullException The parameters is null.
   /// @ingroup Pcf
   template<typename TT, typename T>
-  SharedPointer<TT> as(const SharedPointer<T>& value) {
+  refptr<TT> as(const refptr<T>& value) {
     return value.template As<TT>();
   }
   
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
   /// @par Examples
   /// @code
-  /// SharedPointer<string> str = new Pcf::string("A new string");
-  /// SharedPointer<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
+  /// refptr<string> str = new Pcf::string("A new string");
+  /// refptr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
   /// @endcode
   /// @exception ArgumentNullException The parameters is null.
   /// @ingroup Pcf
   template<typename TT, typename T>
-  SharedPointer<TT> as(SharedPointer<T>& value) {
+  refptr<TT> as(refptr<T>& value) {
     return value.template As<TT>();
   }
   
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
   /// @par Examples
   /// @code
-  /// SharedPointer<string> str = new Pcf::string("A new string");
-  /// SharedPointer<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
+  /// refptr<string> str = new Pcf::string("A new string");
+  /// refptr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
   /// @endcode
   /// @exception ArgumentNullException The parameters is null.
   /// @ingroup Pcf
   template<typename TT, typename T>
-  UniquePointer<TT> as(UniquePointer<T>& value) {
+  UniquePtr<TT> as(UniquePtr<T>& value) {
     return value.template As<TT>();
   }
   
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
   /// @par Examples
   /// @code
-  /// SharedPointer<string> str = new Pcf::string("A new string");
-  /// SharedPointer<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
+  /// refptr<string> str = new Pcf::string("A new string");
+  /// refptr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
   /// @endcode
   /// @exception ArgumentNullException The parameters is null.
   /// @ingroup Pcf
   template<typename TT, typename T>
-  UniquePointer<TT> as(UniquePointer<T>&& value) {
+  UniquePtr<TT> as(UniquePtr<T>&& value) {
     return value.template As<TT>();
   }
   
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
   /// @par Examples
   /// @code
-  /// SharedPointer<string> str = new Pcf::string("A new string");
-  /// SharedPointer<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
+  /// refptr<string> str = new Pcf::string("A new string");
+  /// refptr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
   /// @endcode
   /// @exception ArgumentNullException The parameters is null.
   /// @ingroup Pcf
@@ -110,8 +110,8 @@ namespace Pcf {
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
   /// @par Examples
   /// @code
-  /// SharedPointer<string> str = new Pcf::string("A new string");
-  /// SharedPointer<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
+  /// refptr<string> str = new Pcf::string("A new string");
+  /// refptr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
   /// @endcode
   /// @exception ArgumentNullException The parameters is null.
   /// @ingroup Pcf
@@ -128,8 +128,8 @@ namespace Pcf {
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
   /// @par Examples
   /// @code
-  /// SharedPointer<string> str = new Pcf::string("A new string");
-  /// SharedPointer<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
+  /// refptr<string> str = new Pcf::string("A new string");
+  /// refptr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
   /// @endcode
   /// @exception ArgumentNullException The parameters is null.
   /// @ingroup Pcf
@@ -143,8 +143,8 @@ namespace Pcf {
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
   /// @par Examples
   /// @code
-  /// SharedPointer<string> str = new Pcf::string("A new string");
-  /// SharedPointer<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
+  /// refptr<string> str = new Pcf::string("A new string");
+  /// refptr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
   /// @endcode
   /// @exception ArgumentNullException The parameters is null.
   /// @ingroup Pcf

@@ -160,7 +160,7 @@ namespace Pcf {
           std::fstream::openmode openMode = (std::fstream::openmode)0;
         };
         
-        SharedPointer<FileStreamData> data = new FileStreamData();
+        refptr<FileStreamData> data = new FileStreamData();
       };
     }
   }

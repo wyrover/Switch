@@ -5,7 +5,7 @@
 #include <mutex>
 #include <condition_variable>
 
-#include "../../SharedPointer.h"
+#include "../../RefPtr.h"
 #include "../String.h"
 #include "../Int32.h"
 #include "../ObjectClosedException.h"
@@ -33,7 +33,7 @@ namespace Pcf {
         /// @param initialCount The initial number of requests for the semaphore that can be granted concurrently.
         /// @param maximumCount The maximum number of requests for the semaphore that can be granted concurrently.
         /// @exception IO::IOException An Io error occurred.
-        Semaphore(int32 initialCount, int32 maximumCount) : count(SharedPointer<int32>::Create(initialCount)), maxCount(SharedPointer<int32>::Create(maximumCount)) {}
+        Semaphore(int32 initialCount, int32 maximumCount) : count(pcf_new<int32>(initialCount)), maxCount(pcf_new<int32>(maximumCount)) {}
 
         /// @brief Initializes a new instance of the System::Threading::Semaphore class, specifying the maximum number of concurrent entries, optionally reserving some entries
         /// for the calling thread, and optionally specifying the name of a system semaphore
@@ -78,7 +78,7 @@ namespace Pcf {
         /// @brief Determines whether this instance of Semaphore and a specified object, which must also be a Semaphore object, have the same value.
         /// @param obj The object to compare with the current object.
         /// @return bool true if the specified object is equal to the current object. otherwise, false.
-        bool Equals(const Object& obj) const noexcept override {return is<Semaphore>(obj) && this->Equals((const Semaphore&)obj);}
+        bool Equals(const Object& obj) const override {return is<Semaphore>(obj) && this->Equals((const Semaphore&)obj);}
 
         /// @brief Opens an existing named semaphore.
         /// @param name The name of a named system semaphore.
@@ -140,11 +140,11 @@ namespace Pcf {
           return true;
         }
 
-        SharedPointer<std::mutex> guard = SharedPointer<std::mutex>::Create();
-        SharedPointer<std::condition_variable> signal = SharedPointer<std::condition_variable>::Create();
-        SharedPointer<int32> count = SharedPointer<int32>::Create(0);
-        SharedPointer<int32> maxCount = SharedPointer<int32>::Create(Int32::MaxValue());
-        SharedPointer<string> name = SharedPointer<string>::Create();
+        refptr<std::mutex> guard = pcf_new<std::mutex>();
+        refptr<std::condition_variable> signal = pcf_new<std::condition_variable>();
+        refptr<int32> count = pcf_new<int32>(0);
+        refptr<int32> maxCount = pcf_new<int32>(Int32::MaxValue());
+        refptr<string> name = pcf_new<string>();
       };
     }
   }

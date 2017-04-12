@@ -2,7 +2,6 @@
 /// @brief Contains Pcf::System::IO::StreamWriter class.
 #pragma once
 
-#include "../../UniquePointer.h"
 #include "../Text/Encoding.h"
 #include "FileStream.h"
 #include "TextWriter.h"
@@ -82,7 +81,7 @@ namespace Pcf {
         };
 
         /// @brief Gets the underlying stream that interfaces with a backing store.
-        /// @return SharedPointer<Stream> The stream this StreamWriter is writing to.
+        /// @return refptr<Stream> The stream this StreamWriter is writing to.
         Property<Stream&, ReadOnly> BaseStream {
           pcf_get->Stream& {return this->GetBaseStream();}
         };
@@ -117,10 +116,10 @@ namespace Pcf {
 
         struct StreamWriterData {
           bool autoFlush {false};
-          SharedPointer<Stream> stream;
+          refptr<Stream> stream;
         };
         
-        SharedPointer<StreamWriterData> data {new StreamWriterData()};
+        refptr<StreamWriterData> data {new StreamWriterData()};
         
       };
     }

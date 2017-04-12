@@ -128,7 +128,7 @@ namespace Pcf {
         return year % 4 == 0 && (year % 100 != 0 || year % 400 == 0);
       }
       
-      String ToString() const noexcept override {
+      String ToString() const override {
         return string::Format("{0}/{1}/{2} {3}:{4}:{5}", this->Day, this->Month, this->Year, this->Hour, this->Minute, this->Second);
       }
       

@@ -22,7 +22,7 @@ using namespace __OS;
 namespace {
   class CocoaApi {
   public:
-    using ControlDictionary = System::Collections::Generic::Dictionary<intptr, Reference<Control>>;
+    using ControlDictionary = System::Collections::Generic::Dictionary<intptr, ref<Control>>;
     CocoaApi() {
       this->CreateAppication();
       this->CreateMenuBar();
@@ -301,7 +301,7 @@ namespace {
     int32 screenHeight = 1050; // TO DO : Get Screen height...
   };
   
-  UniquePointer<CocoaApi> cocoaApi;
+  refptr<CocoaApi> cocoaApi;
 }
 
 bool FormsApi::Application::visualStylesEnabled = false;
@@ -414,7 +414,7 @@ DialogResult FormsApi::Application::ShowMessageBox(const string& message, const 
 }
 
 void FormsApi::Application::Start() {
-  cocoaApi = UniquePointer<CocoaApi>::Create();
+  cocoaApi = pcf_new<CocoaApi>();
 }
 
 void FormsApi::Application::Stop() {

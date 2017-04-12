@@ -43,7 +43,7 @@ namespace Pcf {
   /// @brief Represents a null pointer value.
   /// @par Examples
   /// @code
-  /// UniquePointer<Foo> foo = UniquePointer<Foo>::Create();
+  /// refptr<Foo> foo = pcf_new<Foo>();
   /// ...
   /// foo = null; // release the unique pointer.
   /// @endcode

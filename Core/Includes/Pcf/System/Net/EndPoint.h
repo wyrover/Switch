@@ -3,7 +3,7 @@
 #pragma once
 
 #include "../../Types.h"
-#include "../../UniquePointer.h"
+#include "../../RefPtr.h"
 #include "../Object.h"
 #include "../String.h"
 #include "SocketAddress.h"
@@ -28,7 +28,7 @@ namespace Pcf {
         /// @param socketAddress The socket address that serves as the endpoint for a connection.
         /// @return A new EndPoint instance that is initialized from the specified SocketAddress instance.
         /// @exception NotSupportedException Any attempt is made to access the method when the method is not overridden in a descendant class.
-        virtual UniquePointer<EndPoint> Create(const SocketAddress& socketAddress) const;
+        virtual refptr<EndPoint> Create(const SocketAddress& socketAddress) const;
 
         /// @brief Gets the address family to which the endpoint belongs.
         /// @return One of the AddressFamily values.
@@ -42,7 +42,7 @@ namespace Pcf {
 
         /// @brief Returns a string that represents the current object.
         /// @return string A string that represents the current object.
-        String ToString() const noexcept override;
+        String ToString() const override;
 
       protected:
         /// @brief Initializes a new instance of the EndPoint class.

@@ -54,7 +54,7 @@ namespace Pcf {
         Constraint(const ConstraintValue& expect) : expect(expect) {}
         
         virtual bool Verify(const ConstraintValue& actual) const = 0;
-        virtual string ToString() const noexcept = 0;
+        virtual string ToString() const = 0;
         
         mutable ConstraintValue actual;
         ConstraintValue expect;

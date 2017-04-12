@@ -28,10 +28,10 @@ namespace Examples {
       }
       
       // An action to consume the ConcurrentQueue.
-      Array<sp<Thread>> actions(4);
+      Array<refptr<Thread>> actions(4);
       
       for (int i = 0; i < 4; i++) {
-        actions[i] = sp<Thread>::Create((ThreadStart)&Program::ActionTryDequeue);
+        actions[i] = pcf_new<Thread>((ThreadStart)&Program::ActionTryDequeue);
       }
       
       // Start 4 concurrent consuming actions.

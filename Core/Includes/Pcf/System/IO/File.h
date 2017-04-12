@@ -4,8 +4,6 @@
 
 #include "../../Static.h"
 #include "../../Types.h"
-#include "../../SharedPointer.h"
-#include "../../UniquePointer.h"
 #include "../Array.h"
 #include "../String.h"
 #include "../Collections/Generic/IEnumerable.h"

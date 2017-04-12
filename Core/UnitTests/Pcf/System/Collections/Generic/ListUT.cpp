@@ -17,7 +17,7 @@ namespace {
     AbstractListHelper(int32 value, const string& name) : value(value), name(name) {}
     
   public:
-    virtual String ToString() const noexcept {return string::Format("{0} {1}", this->value, this->name);}
+    virtual String ToString() const {return string::Format("{0} {1}", this->value, this->name);}
     
   private:
     int32 value;
@@ -43,10 +43,10 @@ namespace {
       return *this;
     }
     
-    String ToString() const noexcept override { return this->name; }
+    String ToString() const override { return this->name; }
     const string& GetName() const { return this->name; }
     
-    bool Equals(const object& obj) const noexcept override {
+    bool Equals(const object& obj) const override {
       if (!is<Dinosaur>(obj))
         return false;
       
@@ -101,7 +101,7 @@ namespace {
     EXPECT_FALSE(int64s.IsFixedSize);
     EXPECT_FALSE(int64s.IsReadOnly);
     
-    List< SharedPointer<ListHelper>> myList;
+    List< refptr<ListHelper>> myList;
     myList.Add(new ListHelper(1, "YFI"));
     myList.Add(new ListHelper(2, "VLE"));
     
@@ -625,7 +625,7 @@ namespace {
   }
   
   TEST(List, FindLast) {
-    SharedPointer<string>::Empty();
+    refptr<string>::Empty();
     // Create List<T> to used with Contains function
     List<string> dinosaurs;
     
@@ -841,10 +841,10 @@ namespace {
     dinosaurs.Add("Gallimimus");
     dinosaurs.Add("Triceratops");
     
-    UniquePointer<IEnumerator<string>> enumerators[50];
+    refptr<IEnumerator<string>> enumerators[50];
     
     for (Int32 index = 0; index < 50; index++) {
-      enumerators[index] = new Enumerator<string>(dinosaurs.GetEnumerator());
+      enumerators[index] = pcf_new<Enumerator<string>>(dinosaurs.GetEnumerator());
       enumerators[index]->MoveNext();
       EXPECT_EQ("Tyrannosaurus", enumerators[index]->Current());
     }
@@ -1008,7 +1008,7 @@ namespace {
   }
   
   TEST(List, polymorphicList) {
-    List<SharedPointer<ValueType>> polymorphicList;
+    List<refptr<ValueType>> polymorphicList;
     polymorphicList.Add(new Int32(1024));
     polymorphicList.Add(new string("Polymorphic"));
     polymorphicList.Add(new Boolean(true));

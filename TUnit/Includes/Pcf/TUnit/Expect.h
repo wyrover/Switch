@@ -1211,39 +1211,39 @@ namespace Pcf {
       /// @param pointer The pointer to check is null.
       /// @par Examples
       /// @code
-      /// UniquePointer<string> s1(new string("A string"));
-      /// UniquePointer<string> s2;
+      /// UniquePtr<string> s1(new string("A string"));
+      /// UniquePtr<string> s2;
       /// Expect::IsNotNull(s1); // test ok
       /// Expect::IsNotNull(s2); // test shows an error message.
       /// @endcode
       template<typename TPointer>
-      static inline void IsNotNull(const UniquePointer<TPointer>& pointer) {IsNotNull(pointer, "", CurrentInformation());}
+      static inline void IsNotNull(const UniquePtr<TPointer>& pointer) {IsNotNull(pointer, "", CurrentInformation());}
       
       /// @brief Expect that the pointer is not null. If the pointer is null the method show an error message.
       /// @param pointer The pointer to check is null.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @par Examples
       /// @code
-      /// UniquePointer<string> s1(new string("A string"));
-      /// UniquePointer<string> s2;
+      /// UniquePtr<string> s1(new string("A string"));
+      /// UniquePtr<string> s2;
       /// Expect::IsNotNull(s1, "User message..."); // test ok
       /// Expect::IsNotNull(s2, "User message..."); // test shows an error message.
       /// @endcode
       template<typename TPointer>
-      static inline void IsNotNull(const UniquePointer<TPointer>& pointer, const string& message) {IsNotNull(pointer, message, CurrentInformation());}
+      static inline void IsNotNull(const UniquePtr<TPointer>& pointer, const string& message) {IsNotNull(pointer, message, CurrentInformation());}
       
       /// @brief Expect that the pointer is not null. If the pointer is null the method show an error message.
       /// @param pointer The pointer to check is null.
       /// @param currentInformation Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// UniquePointer<string> s1(new string("A string"));
-      /// UniquePointer<string> s2;
+      /// UniquePtr<string> s1(new string("A string"));
+      /// UniquePtr<string> s2;
       /// Expect::IsNotNull(s1, pcf_current_information); // test ok
       /// Expect::IsNotNull(s2, pcf_current_information); // test shows an error message.
       /// @endcode
       template<typename TPointer>
-      static inline void IsNotNull(const UniquePointer<TPointer>& pointer, const CurrentInformation& currentInformation) {IsNotNull(pointer, "", currentInformation);}
+      static inline void IsNotNull(const UniquePtr<TPointer>& pointer, const CurrentInformation& currentInformation) {IsNotNull(pointer, "", currentInformation);}
       
       /// @brief Expect that the pointer is not null. If the pointer is null the method show an error message.
       /// @param pointer The pointer to check is null.
@@ -1251,13 +1251,13 @@ namespace Pcf {
       /// @param currentInformation Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// UniquePointer<string> s1(new string("A string"));
-      /// UniquePointer<string> s2;
+      /// UniquePtr<string> s1(new string("A string"));
+      /// UniquePtr<string> s2;
       /// Expect::IsNotNull(s1, "User message...", pcf_current_information); // test ok
       /// Expect::IsNotNull(s2, "User message...", pcf_current_information); // test shows an error message.
       /// @endcode
       template<typename TPointer>
-      static inline void IsNotNull(const UniquePointer<TPointer>& pointer, const string& message, const CurrentInformation& currentInformation) {
+      static inline void IsNotNull(const UniquePtr<TPointer>& pointer, const string& message, const CurrentInformation& currentInformation) {
         if (pointer != null)
           Succeed(message, currentInformation);
         else
@@ -1268,39 +1268,39 @@ namespace Pcf {
       /// @param pointer The pointer to check is null.
       /// @par Examples
       /// @code
-      /// SharedPointer<string> s1(new string("A string"));
-      /// SharedPointer<string> s2;
+      /// refptr<string> s1(new string("A string"));
+      /// refptr<string> s2;
       /// Expect::IsNotNull(s1); // test ok
       /// Expect::IsNotNull(s2); // test shows an error message.
       /// @endcode
       template<typename TPointer>
-      static inline void IsNotNull(const SharedPointer<TPointer>& pointer) {IsNotNull(pointer, "", CurrentInformation());}
+      static inline void IsNotNull(const refptr<TPointer>& pointer) {IsNotNull(pointer, "", CurrentInformation());}
       
       /// @brief Expect that the pointer is not null. If the pointer is null the method show an error message.
       /// @param pointer The pointer to check is null.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @par Examples
       /// @code
-      /// SharedPointer<string> s1(new string("A string"));
-      /// SharedPointer<string> s2;
+      /// refptr<string> s1(new string("A string"));
+      /// refptr<string> s2;
       /// Expect::IsNotNull(s1, "User message..."); // test ok
       /// Expect::IsNotNull(s2, "User message..."); // test shows an error message.
       /// @endcode
       template<typename TPointer>
-      static inline void IsNotNull(const SharedPointer<TPointer>& pointer, const string& message) {IsNotNull(pointer, message, CurrentInformation());}
+      static inline void IsNotNull(const refptr<TPointer>& pointer, const string& message) {IsNotNull(pointer, message, CurrentInformation());}
       
       /// @brief Expect that the pointer is not null. If the pointer is null the method show an error message.
       /// @param pointer The pointer to check is null.
       /// @param currentInformation Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// SharedPointer<string> s1(new string("A string"));
-      /// SharedPointer<string> s2;
+      /// refptr<string> s1(new string("A string"));
+      /// refptr<string> s2;
       /// Expect::IsNotNull(s1, pcf_current_information); // test ok
       /// Expect::IsNotNull(s2, pcf_current_information); // test shows an error message.
       /// @endcode
       template<typename TPointer>
-      static inline void IsNotNull(const SharedPointer<TPointer>& pointer, const CurrentInformation& currentInformation) {IsNotNull(pointer, "", currentInformation);}
+      static inline void IsNotNull(const refptr<TPointer>& pointer, const CurrentInformation& currentInformation) {IsNotNull(pointer, "", currentInformation);}
       
       /// @brief Expect that the pointer is not null. If the pointer is null the method show an error message.
       /// @param pointer The pointer to check is null.
@@ -1308,13 +1308,13 @@ namespace Pcf {
       /// @param currentInformation Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// SharedPointer<string> s1(new string("A string"));
-      /// SharedPointer<string> s2;
+      /// refptr<string> s1(new string("A string"));
+      /// refptr<string> s2;
       /// Expect::IsNotNull(s1, "User message...", pcf_current_information); // test ok
       /// Expect::IsNotNull(s2, "User message...", pcf_current_information); // test shows an error message.
       /// @endcode
       template<typename TPointer>
-      static inline void IsNotNull(const SharedPointer<TPointer>& pointer, const string& message, const CurrentInformation& currentInformation) {
+      static inline void IsNotNull(const refptr<TPointer>& pointer, const string& message, const CurrentInformation& currentInformation) {
         if (pointer != null)
           Succeed(message, currentInformation);
         else
@@ -1390,39 +1390,39 @@ namespace Pcf {
       /// @param pointer The pointer to check is null.
       /// @par Examples
       /// @code
-      /// UniquePointer<string> s1;
-      /// UniquePointer<string> s2(new string("A string"));
+      /// UniquePtr<string> s1;
+      /// UniquePtr<string> s2(new string("A string"));
       /// Expect::IsNull(s1); // test ok
       /// Expect::IsNull(s2); // test shows an error message.
       /// @endcode
       template<typename TPointer>
-      static inline void IsNull(const UniquePointer<TPointer>& pointer) {IsNull(pointer, "", CurrentInformation());}
+      static inline void IsNull(const UniquePtr<TPointer>& pointer) {IsNull(pointer, "", CurrentInformation());}
       
       /// @brief Expect that the pointer is null. If the pointer is null the method show an error message.
       /// @param pointer The pointer to check is null.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @par Examples
       /// @code
-      /// UniquePointer<string> s1;
-      /// UniquePointer<string> s2(new string("A string"));
+      /// UniquePtr<string> s1;
+      /// UniquePtr<string> s2(new string("A string"));
       /// Expect::IsNull(s1, "User message..."); // test ok
       /// Expect::IsNull(s2, "User message..."); // test shows an error message.
       /// @endcode
       template<typename TPointer>
-      static inline void IsNull(const UniquePointer<TPointer>& pointer, const string& message) {IsNull(pointer, message, CurrentInformation());}
+      static inline void IsNull(const UniquePtr<TPointer>& pointer, const string& message) {IsNull(pointer, message, CurrentInformation());}
       
       /// @brief Expect that the pointer is null. If the pointer is null the method show an error message.
       /// @param pointer The pointer to check is null.
       /// @param currentInformation Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// UniquePointer<string> s1;
-      /// UniquePointer<string> s2(new string("A string"));
+      /// UniquePtr<string> s1;
+      /// UniquePtr<string> s2(new string("A string"));
       /// Expect::IsNull(s1, pcf_current_information); // test ok
       /// Expect::IsNull(s2, pcf_current_information); // test shows an error message.
       /// @endcode
       template<typename TPointer>
-      static inline void IsNull(const UniquePointer<TPointer>& pointer, const CurrentInformation& currentInformation) {IsNull(pointer, "", currentInformation);}
+      static inline void IsNull(const UniquePtr<TPointer>& pointer, const CurrentInformation& currentInformation) {IsNull(pointer, "", currentInformation);}
       
       /// @brief Expect that the pointer is null. If the pointer is null the method show an error message.
       /// @param pointer The pointer to check is null.
@@ -1430,13 +1430,13 @@ namespace Pcf {
       /// @param currentInformation Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// UniquePointer<string> s1;
-      /// UniquePointer<string> s2(new string("A string"));
+      /// UniquePtr<string> s1;
+      /// UniquePtr<string> s2(new string("A string"));
       /// Expect::IsNull(s1, "User message...", pcf_current_information); // test ok
       /// Expect::IsNull(s2, "User message...", pcf_current_information); // test shows an error message.
       /// @endcode
       template<typename TPointer>
-      static inline void IsNull(const UniquePointer<TPointer>& pointer, const string& message, const CurrentInformation& currentInformation) {
+      static inline void IsNull(const UniquePtr<TPointer>& pointer, const string& message, const CurrentInformation& currentInformation) {
         if (pointer == null)
           Succeed(message, currentInformation);
         else
@@ -1447,39 +1447,39 @@ namespace Pcf {
       /// @param pointer The pointer to check is null.
       /// @par Examples
       /// @code
-      /// SharedPointer<string> s1;
-      /// SharedPointer<string> s2(new string("A string"));
+      /// refptr<string> s1;
+      /// refptr<string> s2(new string("A string"));
       /// Expect::IsNull(s1); // test ok
       /// Expect::IsNull(s2); // test shows an error message.
       /// @endcode
       template<typename TPointer>
-      static inline void IsNull(const SharedPointer<TPointer>& pointer) {IsNull(pointer, "", CurrentInformation());}
+      static inline void IsNull(const refptr<TPointer>& pointer) {IsNull(pointer, "", CurrentInformation());}
       
       /// @brief Expect that the pointer is null. If the pointer is null the method show an error message.
       /// @param pointer The pointer to check is null.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @par Examples
       /// @code
-      /// SharedPointer<string> s1;
-      /// SharedPointer<string> s2(new string("A string"));
+      /// refptr<string> s1;
+      /// refptr<string> s2(new string("A string"));
       /// Expect::IsNull(s1, "User message..."); // test ok
       /// Expect::IsNull(s2, "User message..."); // test shows an error message.
       /// @endcode
       template<typename TPointer>
-      static inline void IsNull(const SharedPointer<TPointer>& pointer, const string& message) {IsNull(pointer, message, CurrentInformation());}
+      static inline void IsNull(const refptr<TPointer>& pointer, const string& message) {IsNull(pointer, message, CurrentInformation());}
       
       /// @brief Expect that the pointer is null. If the pointer is null the method show an error message.
       /// @param pointer The pointer to check is null.
       /// @param currentInformation Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// SharedPointer<string> s1;
-      /// SharedPointer<string> s2(new string("A string"));
+      /// refptr<string> s1;
+      /// refptr<string> s2(new string("A string"));
       /// Expect::IsNull(s1, pcf_current_information); // test ok
       /// Expect::IsNull(s2, pcf_current_information); // test shows an error message.
       /// @endcode
       template<typename TPointer>
-      static inline void IsNull(const SharedPointer<TPointer>& pointer, const CurrentInformation& currentInformation) {IsNull(pointer, "", currentInformation);}
+      static inline void IsNull(const refptr<TPointer>& pointer, const CurrentInformation& currentInformation) {IsNull(pointer, "", currentInformation);}
       
       /// @brief Expect that the pointer is null. If the pointer is null the method show an error message.
       /// @param pointer The pointer to check is null.
@@ -1487,13 +1487,13 @@ namespace Pcf {
       /// @param currentInformation Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// SharedPointer<string> s1;
-      /// SharedPointer<string> s2(new string("A string"));
+      /// refptr<string> s1;
+      /// refptr<string> s2(new string("A string"));
       /// Expect::IsNull(s1, "User message...", pcf_current_information); // test ok
       /// Expect::IsNull(s2, "User message...", pcf_current_information); // test shows an error message.
       /// @endcode
       template<typename TPointer>
-      static inline void IsNull(const SharedPointer<TPointer>& pointer, const string& message, const CurrentInformation& currentInformation) {
+      static inline void IsNull(const refptr<TPointer>& pointer, const string& message, const CurrentInformation& currentInformation) {
         if (pointer == null)
           Succeed(message, currentInformation);
         else
@@ -1727,39 +1727,39 @@ namespace Pcf {
       /// @param pointer The pointer to check is null.
       /// @par Examples
       /// @code
-      /// UniquePointer<string> s1(new string("A string"));
-      /// UniquePointer<string> s2;
+      /// UniquePtr<string> s1(new string("A string"));
+      /// UniquePtr<string> s2;
       /// Expect::NotNull(s1); // test ok
       /// Expect::NotNull(s2); // test shows an error message.
       /// @endcode
       template<typename TPointer>
-      static inline void NotNull(const UniquePointer<TPointer>& pointer) {IsNotNull(pointer, "", CurrentInformation());}
+      static inline void NotNull(const UniquePtr<TPointer>& pointer) {IsNotNull(pointer, "", CurrentInformation());}
       
       /// @brief Expect that the pointer is not null. If the pointer is null the method show an error message.
       /// @param pointer The pointer to check is null.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @par Examples
       /// @code
-      /// UniquePointer<string> s1(new string("A string"));
-      /// UniquePointer<string> s2;
+      /// UniquePtr<string> s1(new string("A string"));
+      /// UniquePtr<string> s2;
       /// Expect::NotNull(s1, "User message..."); // test ok
       /// Expect::NotNull(s2, "User message..."); // test shows an error message.
       /// @endcode
       template<typename TPointer>
-      static inline void NotNull(const UniquePointer<TPointer>& pointer, const string& message) {IsNotNull(pointer, message, CurrentInformation());}
+      static inline void NotNull(const UniquePtr<TPointer>& pointer, const string& message) {IsNotNull(pointer, message, CurrentInformation());}
       
       /// @brief Expect that the pointer is not null. If the pointer is null the method show an error message.
       /// @param pointer The pointer to check is null.
       /// @param currentInformation Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// UniquePointer<string> s1(new string("A string"));
-      /// UniquePointer<string> s2;
+      /// UniquePtr<string> s1(new string("A string"));
+      /// UniquePtr<string> s2;
       /// Expect::NotNull(s1, pcf_current_information); // test ok
       /// Expect::NotNull(s2, pcf_current_information); // test shows an error message.
       /// @endcode
       template<typename TPointer>
-      static inline void NotNull(const UniquePointer<TPointer>& pointer, const CurrentInformation& currentInformation) {IsNotNull(pointer, "", currentInformation);}
+      static inline void NotNull(const UniquePtr<TPointer>& pointer, const CurrentInformation& currentInformation) {IsNotNull(pointer, "", currentInformation);}
       
       /// @brief Expect that the pointer is not null. If the pointer is null the method show an error message.
       /// @param pointer The pointer to check is null.
@@ -1767,51 +1767,51 @@ namespace Pcf {
       /// @param currentInformation Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// UniquePointer<string> s1(new string("A string"));
-      /// UniquePointer<string> s2;
+      /// UniquePtr<string> s1(new string("A string"));
+      /// UniquePtr<string> s2;
       /// Expect::NotNull(s1, "User message...", pcf_current_information); // test ok
       /// Expect::NotNull(s2, "User message...", pcf_current_information); // test shows an error message.
       /// @endcode
       template<typename TPointer>
-      static inline void NotNull(const UniquePointer<TPointer>& pointer, const string& message, const CurrentInformation& currentInformation) {IsNotNull(pointer, message, currentInformation);}
+      static inline void NotNull(const UniquePtr<TPointer>& pointer, const string& message, const CurrentInformation& currentInformation) {IsNotNull(pointer, message, currentInformation);}
       
       /// @brief Expect that the pointer is not null. If the pointer is null the method show an error message.
       /// @param pointer The pointer to check is null.
       /// @par Examples
       /// @code
-      /// SharedPointer<string> s1(new string("A string"));
-      /// SharedPointer<string> s2;
+      /// refptr<string> s1(new string("A string"));
+      /// refptr<string> s2;
       /// Expect::IsNotNull(s1); // test ok
       /// Expect::IsNotNull(s2); // test shows an error message.
       /// @endcode
       template<typename TPointer>
-      static inline void NotNull(const SharedPointer<TPointer>& pointer) {IsNotNull(pointer, "", CurrentInformation());}
+      static inline void NotNull(const refptr<TPointer>& pointer) {IsNotNull(pointer, "", CurrentInformation());}
       
       /// @brief Expect that the pointer is not null. If the pointer is null the method show an error message.
       /// @param pointer The pointer to check is null.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @par Examples
       /// @code
-      /// SharedPointer<string> s1(new string("A string"));
-      /// SharedPointer<string> s2;
+      /// refptr<string> s1(new string("A string"));
+      /// refptr<string> s2;
       /// Expect::NotNull(s1, "User message..."); // test ok
       /// Expect::NotNull(s2, "User message..."); // test shows an error message.
       /// @endcode
       template<typename TPointer>
-      static inline void NotNull(const SharedPointer<TPointer>& pointer, const string& message) {IsNotNull(pointer, message, CurrentInformation());}
+      static inline void NotNull(const refptr<TPointer>& pointer, const string& message) {IsNotNull(pointer, message, CurrentInformation());}
       
       /// @brief Expect that the pointer is not null. If the pointer is null the method show an error message.
       /// @param pointer The pointer to check is null.
       /// @param currentInformation Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// SharedPointer<string> s1(new string("A string"));
-      /// SharedPointer<string> s2;
+      /// refptr<string> s1(new string("A string"));
+      /// refptr<string> s2;
       /// Expect::NotNull(s1, pcf_current_information); // test ok
       /// Expect::NotNull(s2, pcf_current_information); // test shows an error message.
       /// @endcode
       template<typename TPointer>
-      static inline void NotNull(const SharedPointer<TPointer>& pointer, const CurrentInformation& currentInformation) {IsNotNull(pointer, "", currentInformation);}
+      static inline void NotNull(const refptr<TPointer>& pointer, const CurrentInformation& currentInformation) {IsNotNull(pointer, "", currentInformation);}
       
       /// @brief Expect that the pointer is not null. If the pointer is null the method show an error message.
       /// @param pointer The pointer to check is null.
@@ -1819,13 +1819,13 @@ namespace Pcf {
       /// @param currentInformation Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// SharedPointer<string> s1(new string("A string"));
-      /// SharedPointer<string> s2;
+      /// refptr<string> s1(new string("A string"));
+      /// refptr<string> s2;
       /// Expect::NotNull(s1, "User message...", pcf_current_information); // test ok
       /// Expect::NotNull(s2, "User message...", pcf_current_information); // test shows an error message.
       /// @endcode
       template<typename TPointer>
-      static inline void NotNull(const SharedPointer<TPointer>& pointer, const string& message, const CurrentInformation& currentInformation) {IsNotNull(pointer, message, currentInformation);}
+      static inline void NotNull(const refptr<TPointer>& pointer, const string& message, const CurrentInformation& currentInformation) {IsNotNull(pointer, message, currentInformation);}
       
       /// @brief Expect that the pointer is null. If the pointer is null the method show an error message.
       /// @param pointer The pointer to check is null.
@@ -1891,39 +1891,39 @@ namespace Pcf {
       /// @param pointer The pointer to check is null.
       /// @par Examples
       /// @code
-      /// UniquePointer<string> s1;
-      /// UniquePointer<string> s2(new string("A string"));
+      /// UniquePtr<string> s1;
+      /// UniquePtr<string> s2(new string("A string"));
       /// Expect::Null(s1); // test ok
       /// Expect::Null(s2); // test shows an error message.
       /// @endcode
       template<typename TPointer>
-      static inline void Null(const UniquePointer<TPointer>& pointer) {IsNull(pointer, "", CurrentInformation());}
+      static inline void Null(const UniquePtr<TPointer>& pointer) {IsNull(pointer, "", CurrentInformation());}
       
       /// @brief Expect that the pointer is null. If the pointer is null the method show an error message.
       /// @param pointer The pointer to check is null.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @par Examples
       /// @code
-      /// UniquePointer<string> s1;
-      /// UniquePointer<string> s2(new string("A string"));
+      /// UniquePtr<string> s1;
+      /// UniquePtr<string> s2(new string("A string"));
       /// Expect::Null(s1, "User message..."); // test ok
       /// Expect::Null(s2, "User message..."); // test shows an error message.
       /// @endcode
       template<typename TPointer>
-      static inline void Null(const UniquePointer<TPointer>& pointer, const string& message) {IsNull(pointer, message, CurrentInformation());}
+      static inline void Null(const UniquePtr<TPointer>& pointer, const string& message) {IsNull(pointer, message, CurrentInformation());}
       
       /// @brief Expect that the pointer is null. If the pointer is null the method show an error message.
       /// @param pointer The pointer to check is null.
       /// @param currentInformation Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// UniquePointer<string> s1;
-      /// UniquePointer<string> s2(new string("A string"));
+      /// UniquePtr<string> s1;
+      /// UniquePtr<string> s2(new string("A string"));
       /// Expect::Null(s1, pcf_current_information); // test ok
       /// Expect::Null(s2, pcf_current_information); // test shows an error message.
       /// @endcode
       template<typename TPointer>
-      static inline void Null(const UniquePointer<TPointer>& pointer, const CurrentInformation& currentInformation) {IsNull(pointer, "", currentInformation);}
+      static inline void Null(const UniquePtr<TPointer>& pointer, const CurrentInformation& currentInformation) {IsNull(pointer, "", currentInformation);}
       
       /// @brief Expect that the pointer is null. If the pointer is null the method show an error message.
       /// @param pointer The pointer to check is null.
@@ -1931,51 +1931,51 @@ namespace Pcf {
       /// @param currentInformation Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// UniquePointer<string> s1;
-      /// UniquePointer<string> s2(new string("A string"));
+      /// UniquePtr<string> s1;
+      /// UniquePtr<string> s2(new string("A string"));
       /// Expect::Null(s1, "User message...", pcf_current_information); // test ok
       /// Expect::Null(s2, "User message...", pcf_current_information); // test shows an error message.
       /// @endcode
       template<typename TPointer>
-      static inline void Null(const UniquePointer<TPointer>& pointer, const string& message, const CurrentInformation& currentInformation) {IsNull(pointer, message, currentInformation);}
+      static inline void Null(const UniquePtr<TPointer>& pointer, const string& message, const CurrentInformation& currentInformation) {IsNull(pointer, message, currentInformation);}
       
       /// @brief Expect that the pointer is null. If the pointer is null the method show an error message.
       /// @param pointer The pointer to check is null.
       /// @par Examples
       /// @code
-      /// SharedPointer<string> s1;
-      /// SharedPointer<string> s2(new string("A string"));
+      /// refptr<string> s1;
+      /// refptr<string> s2(new string("A string"));
       /// Expect::Null(s1); // test ok
       /// Expect::Null(s2); // test shows an error message.
       /// @endcode
       template<typename TPointer>
-      static inline void Null(const SharedPointer<TPointer>& pointer) {IsNull(pointer, "", CurrentInformation());}
+      static inline void Null(const refptr<TPointer>& pointer) {IsNull(pointer, "", CurrentInformation());}
       
       /// @brief Expect that the pointer is null. If the pointer is null the method show an error message.
       /// @param pointer The pointer to check is null.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @par Examples
       /// @code
-      /// SharedPointer<string> s1;
-      /// SharedPointer<string> s2(new string("A string"));
+      /// refptr<string> s1;
+      /// refptr<string> s2(new string("A string"));
       /// Expect::Null(s1, "User message..."); // test ok
       /// Expect::Null(s2, "User message..."); // test shows an error message.
       /// @endcode
       template<typename TPointer>
-      static inline void Null(const SharedPointer<TPointer>& pointer, const string& message) {IsNull(pointer, message, CurrentInformation());}
+      static inline void Null(const refptr<TPointer>& pointer, const string& message) {IsNull(pointer, message, CurrentInformation());}
       
       /// @brief Expect that the pointer is null. If the pointer is null the method show an error message.
       /// @param pointer The pointer to check is null.
       /// @param currentInformation Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// SharedPointer<string> s1;
-      /// SharedPointer<string> s2(new string("A string"));
+      /// refptr<string> s1;
+      /// refptr<string> s2(new string("A string"));
       /// Expect::Null(s1, pcf_current_information); // test ok
       /// Expect::Null(s2, pcf_current_information); // test shows an error message.
       /// @endcode
       template<typename TPointer>
-      static inline void Null(const SharedPointer<TPointer>& pointer, const CurrentInformation& currentInformation) {IsNull(pointer, "", currentInformation);}
+      static inline void Null(const refptr<TPointer>& pointer, const CurrentInformation& currentInformation) {IsNull(pointer, "", currentInformation);}
       
       /// @brief Expect that the pointer is null. If the pointer is null the method show an error message.
       /// @param pointer The pointer to check is null.
@@ -1983,13 +1983,13 @@ namespace Pcf {
       /// @param currentInformation Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// SharedPointer<string> s1;
-      /// SharedPointer<string> s2(new string("A string"));
+      /// refptr<string> s1;
+      /// refptr<string> s2(new string("A string"));
       /// Expect::Null(s1, "User message...", pcf_current_information); // test ok
       /// Expect::Null(s2, "User message...", pcf_current_information); // test shows an error message.
       /// @endcode
       template<typename TPointer>
-      static inline void Null(const SharedPointer<TPointer>& pointer, const string& message, const CurrentInformation& currentInformation) {IsNull(pointer, message, currentInformation);}
+      static inline void Null(const refptr<TPointer>& pointer, const string& message, const CurrentInformation& currentInformation) {IsNull(pointer, message, currentInformation);}
       
       /// @brief The ReferenceEquals method throws an Pcf::TUnit::AssertionException. This is done to make sure there is no mistake by calling this function.
       static inline bool ReferenceEquals(const Object&, const Object&) { throw AssertionException(pcf_current_information); }

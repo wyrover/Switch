@@ -42,15 +42,15 @@ namespace {
     int Age() const { return age; }
     bool IsVaccinated() const { return vaccinated; }
     
-    bool Equals(const object& other) const noexcept override {
+    bool Equals(const object& other) const override {
       return is<Pet>(other) && name == as<Pet>(other).name && age == as<Pet>(other).age && vaccinated == as<Pet>(other).vaccinated;
     }
 
-    int32 GetHashCode() const noexcept override {
+    int32 GetHashCode() const override {
       return name.GetHashCode() ^ age ^ (int)vaccinated;
     }
     
-    int32 CompareTo(const IComparable& other) const noexcept override {
+    int32 CompareTo(const IComparable& other) const override {
       if (!is<Pet>(other))
         return 1;
       
@@ -66,7 +66,7 @@ namespace {
       return 1;
     }
     
-    String ToString() const noexcept override {
+    String ToString() const override {
       return String::Format("{{{0}, {1}, {2}}}", this->name, this->age, this-vaccinated);
     }
     
@@ -110,12 +110,12 @@ namespace {
   }
   
   TEST(Enumerable, Cast) {
-    Collections::Generic::List<SharedPointer<string>> al;
+    Collections::Generic::List<refptr<string>> al;
     al.Add(new string("Barley"));
     al.Add(new string("Boots"));
     al.Add(new string("Whiskers"));
-    UniquePointer<IEnumerable<SharedPointer<String>>> enumerable = al.Cast<SharedPointer<String>>();
-    Enumerator<SharedPointer<String>> enumerator = enumerable->GetEnumerator();
+    refptr<IEnumerable<refptr<String>>> enumerable = al.Cast<refptr<String>>();
+    Enumerator<refptr<String>> enumerator = enumerable->GetEnumerator();
     ASSERT_TRUE(enumerator.MoveNext());
     ASSERT_EQ("Barley", *enumerator.Current());
     ASSERT_TRUE(enumerator.MoveNext());
@@ -127,7 +127,7 @@ namespace {
   TEST(Enumerable, Concat) {
     Array<int> a1 = {1, 2};
     Array<int> a2 = {3, 4};
-    UniquePointer<IEnumerable<int>> enumerable = a1.Concat(a2);
+    refptr<IEnumerable<int>> enumerable = a1.Concat(a2);
     Enumerator<int> enumerator = enumerable->GetEnumerator();
     ASSERT_TRUE(enumerator.MoveNext());
     ASSERT_EQ(1, enumerator.Current());

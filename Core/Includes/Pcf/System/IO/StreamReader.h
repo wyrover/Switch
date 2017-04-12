@@ -2,7 +2,6 @@
 /// @brief Contains Pcf::System::IO::StreamReader class.
 #pragma once
 
-#include "../../UniquePointer.h"
 #include "../Text/Encoding.h"
 #include "../Text/UTF8Encoding.h"
 #include "FileStream.h"
@@ -77,13 +76,13 @@ namespace Pcf {
         /// @endcond
 
         /// @brief Gets the underlying stream that interfaces with a backing store.
-        /// @return SharedPointer<Stream> The stream this StreamReader is writing to.
+        /// @return refptr<Stream> The stream this StreamReader is writing to.
         Property<Stream&, ReadOnly> BaseStream {
           pcf_get->Stream& {return *this->data->stream;}
         };
 
         /// @brief Gets the current character encoding that the current StreamReader object is using.
-        /// @return SharedPointer<Text::Encoding> The current character encoding used by the current reader. The value can be different after the first call to any Read method of StreamReader, since encoding autodetection is not done until the first call to a Read method.
+        /// @return refptr<Text::Encoding> The current character encoding used by the current reader. The value can be different after the first call to any Read method of StreamReader, since encoding autodetection is not done until the first call to a Read method.
         Property<Text::Encoding&, ReadOnly> CurrentEncoding {
           pcf_get->Text::Encoding& {return *this->data->encoding;}
         };
@@ -136,11 +135,11 @@ namespace Pcf {
         struct StreamReaderData {
           int32 peekByte {0};
           bool hasPeekByte {false};
-          SharedPointer<Stream> stream;
+          refptr<Stream> stream;
           Text::Encoding* encoding {null};
        };
         
-        SharedPointer<StreamReaderData> data {new StreamReaderData()};
+        refptr<StreamReaderData> data {new StreamReaderData()};
         static Text::UTF8Encoding utf8Encoding;
         /// @endcond
       };

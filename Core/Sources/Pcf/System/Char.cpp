@@ -107,7 +107,7 @@ char32 Char::ToUpper(char32 value) {
   return toupper(value);
 }
 
-String Char::ToString() const noexcept {
+String Char::ToString() const {
   byte bytes[5];
   int32 count = __OS::CoreApi::UnicodeEncodings::UTF8::Encode(this->value, bytes);
   bytes[count] = 0;

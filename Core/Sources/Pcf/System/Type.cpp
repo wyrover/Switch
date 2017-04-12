@@ -8,29 +8,29 @@
 
 using namespace System;
 
-Type::Type(const Type& type) noexcept : FullName(pcf_delegate {return this->GetFullName();}),  Name(pcf_delegate {return this->GetName();}), Namespace(pcf_delegate {return this->GetNamespace();}), type(type.type) {
+Type::Type(const Type& type) : FullName(pcf_delegate {return this->GetFullName();}),  Name(pcf_delegate {return this->GetName();}), Namespace(pcf_delegate {return this->GetNamespace();}), type(type.type) {
 }
 
-Type::Type() noexcept : FullName(pcf_delegate {return this->GetFullName();}),  Name(pcf_delegate {return this->GetName();}), Namespace(pcf_delegate {return this->GetNamespace();}), type(typeid(*this)) {
+Type::Type() : FullName(pcf_delegate {return this->GetFullName();}),  Name(pcf_delegate {return this->GetName();}), Namespace(pcf_delegate {return this->GetNamespace();}), type(typeid(*this)) {
 }
 
-Type::Type(const ::type& type) noexcept : FullName(pcf_delegate {return this->GetFullName();}),  Name(pcf_delegate {return this->GetName();}), Namespace(pcf_delegate {return this->GetNamespace();}), type(type) {
+Type::Type(const ::type& type) : FullName(pcf_delegate {return this->GetFullName();}),  Name(pcf_delegate {return this->GetName();}), Namespace(pcf_delegate {return this->GetNamespace();}), type(type) {
 }
 
-Type& Type::operator =(const Type& type) noexcept {
+Type& Type::operator =(const Type& type) {
   memcpy((void*)&this->type, (void*)&type.type, sizeof(type.type));
   return *this;
 }
 
-bool Type::Equals(const Object& obj) const noexcept {
+bool Type::Equals(const Object& obj) const {
   return is<Type>(obj) && Equals(static_cast<const Type&>(obj));
 }
 
-bool Type::Equals(const Type& type) const noexcept {
+bool Type::Equals(const Type& type) const {
   return this->type == type.type;
 }
 
-String Type::GetFullName() const noexcept {
+String Type::GetFullName() const {
   String fullName = __OS::CoreApi::Type::Demangle(this->type.name());
   Array<string> containsNullPtrTypes = {"Pcf::Fp", "System::Action", "System::Delegate", "System::Func", "std::tuple"};
   for (string item : containsNullPtrTypes) {
@@ -49,7 +49,7 @@ String Type::GetFullName() const noexcept {
   return fullName.TrimEnd('*').Replace(" const", "").Replace("const ", "");
 }
 
-String Type::GetName() const noexcept {
+String Type::GetName() const {
   String fullName = GetFullName();
   int length = fullName.LastIndexOf("<");
   if (length == -1)
@@ -59,7 +59,7 @@ String Type::GetName() const noexcept {
   return fullName.Substring(fullName.LastIndexOf("::", 0, length) + 2);
 }
 
-String Type::GetNamespace() const noexcept {
+String Type::GetNamespace() const {
   String fullName = GetFullName();
   int length = fullName.LastIndexOf("<");
   if (length == -1)
@@ -69,6 +69,6 @@ String Type::GetNamespace() const noexcept {
   return fullName.Remove(fullName.LastIndexOf("::", 0, length));
 }
 
-String Type::ToString() const noexcept {
+String Type::ToString() const {
   return FullName;
 }

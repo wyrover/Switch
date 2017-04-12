@@ -82,10 +82,10 @@ namespace Pcf {
         /// @brief Determines whether the specified System::Object is equal to the current instance.
         /// @param value The System::Object to compare with the current instance.
         /// @return true if value is an instance of System::Text::Encoding and is equal to the current instance; otherwise, false.
-        bool Equals(const object& obj) const noexcept override;
+        bool Equals(const object& obj) const override;
         
-        UniquePointer<Decoder> CreateDecoder() const override;
-        UniquePointer<Encoder> CreateEncoder() const override;
+        refptr<Decoder> CreateDecoder() const override;
+        refptr<Encoder> CreateEncoder() const override;
         
         class Encoder : public Encoding::Encoder {
         public:
@@ -94,9 +94,9 @@ namespace Pcf {
           
           Encoder& operator =(const Encoder& b);
           
-          virtual int32 GetNbBytes(char32) const { return 4; }
-          virtual void Encode(char32 c, byte bytes[]) const;
-          virtual String ToString() const noexcept;
+          int32 GetNbBytes(char32) const override { return 4; }
+          void Encode(char32 c, byte bytes[]) const override;
+          String ToString() const override;
           
         private:
           bool bigEndian;
@@ -108,9 +108,9 @@ namespace Pcf {
           Decoder(const Decoder& b) : Encoding::Decoder(b) { bigEndian = b.bigEndian; }
           
           Decoder& operator =(const Decoder& b);
-          virtual void Add(byte b);
+          void Add(byte b) override;
           virtual char32 GetCodePoint() const { return codePoint; }
-          virtual String ToString() const noexcept;
+          String ToString() const override;
           
         private:
           bool bigEndian;

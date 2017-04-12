@@ -4,7 +4,7 @@
 
 #include <Pcf/System/Object.h>
 #include <Pcf/System/String.h>
-#include <Pcf/SharedPointer.h>
+#include <Pcf/RefPtr.h>
 #include <Pcf/System/Array.h>
 #include <Pcf/System/IComparable.h>
 #include <Pcf/System/IO/Stream.h>
@@ -121,13 +121,13 @@ namespace Pcf {
           pcf_get {return this->size.Width();}
         };
 
-        static UniquePointer<Image> FromFile(const string& fileName);
+        static refptr<Image> FromFile(const string& fileName);
 
-        static UniquePointer<Image> FromStream(System::IO::Stream& stream);
+        static refptr<Image> FromStream(System::IO::Stream& stream);
 
-        static UniquePointer<Image> FromData(const char* data[]);
+        static refptr<Image> FromData(const char* data[]);
 
-        virtual int32 CompareTo(const IComparable& obj) const noexcept {
+        virtual int32 CompareTo(const IComparable& obj) const {
           if (!is<Image>(obj))
             return 1;
           return CompareTo(as<Image>(obj));
@@ -135,7 +135,7 @@ namespace Pcf {
 
         virtual int32 CompareTo(const Image& value) const {return IntPtr((intptr)&rawData).CompareTo(IntPtr((intptr)&rawData));}
 
-        virtual int32 GetHashCode() const noexcept {return IntPtr((intptr)&rawData).GetHashCode();}
+        virtual int32 GetHashCode() const {return IntPtr((intptr)&rawData).GetHashCode();}
 
       protected:
         /// @cond

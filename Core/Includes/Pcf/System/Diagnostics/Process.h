@@ -4,7 +4,6 @@
 
 #include "../../Property.h"
 #include "../../Types.h"
-#include "../../UniquePointer.h"
 #include "../Object.h"
 #include "../ObjectClosedException.h"
 #include "../String.h"
@@ -19,7 +18,7 @@ namespace Pcf {
     namespace Diagnostics {
       /// @brief Provides access to local and remote processes and enables you to start and stop local system processes.
       class pcf_public Process : public Object {
-        SharedPointer<IO::Stream> GetStandardOutput() const;
+        refptr<IO::Stream> GetStandardOutput() const;
       public:
         /// @cond
         Process() {}
@@ -67,7 +66,7 @@ namespace Pcf {
         
         static Process Start(const ProcessStartInfo& startInfo);
         
-        String ToString() const noexcept override {return string::Format("{0} ({1})", this->GetType(), this->ProcessName);};
+        String ToString() const override {return string::Format("{0} ({1})", this->GetType(), this->ProcessName);};
         
         void WaitForExit();
         
@@ -81,10 +80,10 @@ namespace Pcf {
         struct ProcessData {
           int32 exitCode = 0;
           intptr handle = 0;
-          SharedPointer<System::IO::Stream> outputStream;
+          refptr<System::IO::Stream> outputStream;
           ProcessStartInfo startInfo;
         };
-        SharedPointer<ProcessData> data = SharedPointer<ProcessData>::Create();
+        refptr<ProcessData> data = pcf_new<ProcessData>();
       };
     }
   }

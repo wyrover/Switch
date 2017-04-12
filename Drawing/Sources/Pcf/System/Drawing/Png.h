@@ -1,7 +1,6 @@
 #include <zlib.h>
 #include <png.h>
 #include <Pcf/System/Object.h>
-#include <Pcf/UniquePointer.h>
 #include <Pcf/System/IO//BinaryReader.h>
 
 #include "../../../../Includes/Pcf/System/Drawing/Image.h"
@@ -83,14 +82,14 @@ namespace Pcf {
           if (png_get_valid(pp, info, PNG_INFO_tRNS))
             png_set_tRNS_to_alpha(pp);
 
-          UniquePointer<byte[]> rawData = new byte[image.size.Width() * image.size.Height() * (image.pixelFormat == Imaging::PixelFormat::Format32bppRgb ? 4 : 3)];
-          UniquePointer<png_bytep[]> rows = new png_bytep[image.size.Height()];
+          Array<byte> rawData(image.size.Width() * image.size.Height() * (image.pixelFormat == Imaging::PixelFormat::Format32bppRgb ? 4 : 3));
+          Array<png_bytep> rows(image.size.Height());
 
           for (int32 i = 0; i < image.size.Height(); i ++)
-            rows[i] = (png_bytep)(rawData.ToPointer() + i * image.size.Width() * (image.pixelFormat == Imaging::PixelFormat::Format32bppRgb ? 4 : 3));
+            rows[i] = (png_bytep)(rawData.Data() + i * image.size.Width() * (image.pixelFormat == Imaging::PixelFormat::Format32bppRgb ? 4 : 3));
 
           for (int32 i = png_set_interlace_handling(pp); i > 0; i --)
-            png_read_rows(pp, rows.ToPointer(), null, image.size.Height());
+            png_read_rows(pp,(png_bytep*)rows.Data(), null, image.size.Height());
 
 #if defined(_WIN32)
           if (image.pixelFormat == Imaging::PixelFormat::Format32bppRgb) {
@@ -106,11 +105,12 @@ namespace Pcf {
           png_read_end(pp, info);
           png_destroy_read_struct(&pp, &info, null);
 
-          image.rawData = Array<byte>(rawData.Release(), image.size.Width() * image.size.Height() * (image.PixelFormat() == System::Drawing::Imaging::PixelFormat::Format32bppRgb ? 4 : 3));
+          //image.rawData = Array<byte>(rawData.Data(), image.size.Width() * image.size.Height() * (image.PixelFormat() == System::Drawing::Imaging::PixelFormat::Format32bppRgb ? 4 : 3));
+          image.rawData = rawData;
         }
 
       private:
-        UniquePointer<System::IO::BinaryReader> reader;
+        refptr<System::IO::BinaryReader> reader;
       };
     }
   }

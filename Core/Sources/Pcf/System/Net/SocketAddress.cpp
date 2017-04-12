@@ -19,7 +19,7 @@ Sockets::AddressFamily SocketAddress::GetAddressFamily() const {
   return __OS::CoreApi::Socket::NativeToAddressFamily(this->bytes[0]);
 }
 
-string SocketAddress::ToString() const noexcept {
+string SocketAddress::ToString() const {
   return string::Format("{0}:{1}:{{{2}}}", this->GetAddressFamily(), this->Size, string::Join(",", this->bytes, 2, this->Size - 2));
 }
 

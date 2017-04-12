@@ -3,8 +3,7 @@
 #pragma once
 
 #include "../../../Interface.h"
-#include "../../../SharedPointer.h"
-#include "../../../UniquePointer.h"
+#include "../../../RefPtr.h"
 #include "IEnumerator.h"
 
 /// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
@@ -30,19 +29,19 @@ namespace Pcf {
           public:
             Iterator(const Iterator& value) : enumerator(value.enumerator), pos(value.pos) {}
             
-            explicit Iterator(const Enumerator<T>& enumerator) : enumerator(enumerator), pos(0) {
+            explicit Iterator(const Enumerator<T>& enumerator) : enumerator(enumerator) {
               this->enumerator.Reset();
               if (this->enumerator.MoveNext() == false)
                 this->pos = -1;
             }
             
-            Iterator(const Enumerator<T>& enumerator, bool end) : enumerator(enumerator), pos(0) {
+            Iterator(const Enumerator<T>& enumerator, bool end) : enumerator(enumerator) {
               this->enumerator.Reset();
               if (this->enumerator.MoveNext() == false || end == true)
                 this->pos = -1;
             }
             
-            Iterator& operator ++() {
+            Iterator& operator++() {
               if (this->pos != -1) {
                 ++this->pos;
                 if (this->enumerator.MoveNext() == false)
@@ -51,7 +50,7 @@ namespace Pcf {
               return *this;
             }
             
-            Iterator operator ++(int) {
+            Iterator operator++(int) {
               Iterator iterator(*this);
               if (this->pos != -1) {
                 ++this->pos;
@@ -61,21 +60,15 @@ namespace Pcf {
               return iterator;
             }
             
-            bool operator ==(const Iterator& rhs) const {return this->pos == rhs.pos;}
+            bool operator==(const Iterator& rhs) const {return this->pos == rhs.pos;}
+            bool operator!=(const Iterator& rhs) const {return this->pos != rhs.pos;}
             
-            bool operator !=(const Iterator& rhs) const {return this->pos != rhs.pos;}
-            
-            const T& operator *() const  {
-              return this->enumerator.Current();
-            }
-            
-            T& operator *()  {
-              return const_cast<T&>(this->enumerator.Current());
-            }
+            const T& operator*() const {return this->enumerator.Current();}
+            T& operator*() {return const_cast<T&>(this->enumerator.Current());}
             
           private:
             Enumerator<T> enumerator;
-            int32 pos;
+            int32 pos = 0;
           };
           
         public:

@@ -211,7 +211,7 @@ const String DateTime::ToShortTimeString() const {
   return ToString("%H:%M");
 }
 
-String DateTime::ToString() const noexcept {
+String DateTime::ToString() const {
   return ToString("%d/%m/%Y %H:%M:%S");
 }
 
@@ -306,11 +306,11 @@ bool DateTime::Equals(const DateTime& value) const {
   return this->value == value.value;
 }
 
-bool DateTime::Equals(const object& obj) const noexcept {
+bool DateTime::Equals(const object& obj) const {
   return is<DateTime>(obj) && Equals((const DateTime&)obj);
 }
 
-int32 DateTime::GetHashCode() const noexcept {
+int32 DateTime::GetHashCode() const {
   return (int32)(this->value & 0x00000000FFFFFFFF) ^ (int32)((this->value>>32) & 0x00000000FFFFFFFF);
 }
 
@@ -333,7 +333,7 @@ int32 DateTime::CompareTo(const DateTime& value) const {
   return 0;
 }
 
-int32 DateTime::CompareTo(const IComparable& obj) const noexcept {
+int32 DateTime::CompareTo(const IComparable& obj) const {
   if (!is<DateTime>(obj))
     return 1;
   

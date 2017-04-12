@@ -29,13 +29,13 @@ namespace {
 
     virtual ~Person() { }
     
-    int32 GetHashCode() const noexcept override { return this->name.GetHashCode() ^ this->surname.GetHashCode(); }
+    int32 GetHashCode() const override { return this->name.GetHashCode() ^ this->surname.GetHashCode(); }
     
     const string& GetName() const { return this->name; }
     const string& GetSurname() const { return this->surname; }
   
     // surname compare
-    int32 CompareTo(const IComparable& obj) const noexcept override {
+    int32 CompareTo(const IComparable& obj) const override {
       if (!is<Person>(obj))
         return 1;
       const Person& p = as<Person>(obj);
@@ -44,7 +44,7 @@ namespace {
       return this->name.CompareTo(p.name);
     }
 
-    bool Equals(const object& obj) const noexcept override {
+    bool Equals(const object& obj) const override {
       if (!is<Person>(obj))
         return false;
     
@@ -52,7 +52,7 @@ namespace {
       return this->name == p.name && this->surname == p.surname;
     }
 
-    String ToString() const noexcept override { return this->name + " " + this->surname; }
+    String ToString() const override { return this->name + " " + this->surname; }
   
   private:
     string name, surname;

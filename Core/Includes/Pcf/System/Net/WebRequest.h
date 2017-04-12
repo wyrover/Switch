@@ -4,7 +4,6 @@
 
 #include "../../Abstract.h"
 #include "../../Types.h"
-#include "../../UniquePointer.h"
 #include "../Object.h"
 #include "../String.h"
 #include "../Uri.h"
@@ -64,7 +63,7 @@ namespace Pcf {
             int32 bufferSize = 0;
             int32 bufferOffset = 0;
           };
-          SharedPointer<WebRequestStreamData> data = SharedPointer<WebRequestStreamData>::Create();
+          refptr<WebRequestStreamData> data = pcf_new<WebRequestStreamData>();
         };
         
 
@@ -80,7 +79,7 @@ namespace Pcf {
         /// @remarks ftp://
         /// @remarks The Pcf includes support for the http://, ftp:// URI schemes.
         /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
-        static UniquePointer<WebRequest> Create(const String& requestUriString) { return Create(Uri(requestUriString)); }
+        static refptr<WebRequest> Create(const String& requestUriString) { return Create(Uri(requestUriString)); }
 
         /// @brief Initializes a new WebRequest instance for the specified URI scheme.
         /// @param requestUriString A Uri containing the URI of the requested resource.
@@ -94,7 +93,7 @@ namespace Pcf {
         /// @remarks ftp://
         /// @remarks The Pcf includes support for the http://, ftp:// URI schemes.
         /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
-        static UniquePointer<WebRequest> Create(const Uri& requestUriString);
+        static refptr<WebRequest> Create(const Uri& requestUriString);
 
         Property<int64> ContentLength {
           pcf_get {return this->GetContentLength();},
@@ -133,7 +132,7 @@ namespace Pcf {
         virtual String GetMethod() const { return this->method; }
         virtual void SetMethod(const String& method) { this->method = method;}
         virtual System::Uri GetRequestUri() const { return uri;}
-        void* GetRequestHandle() {return this->requestHandle;}
+        intptr GetRequestHandle() {return this->requestHandle;}
         
         bool IsResponseStreamNeeded() const;
         bool IsRequestStreamNeeded() const;
@@ -149,7 +148,7 @@ namespace Pcf {
         WebRequest& operator =(const WebRequest& webRequest) = delete;
 
         static int32 pendingRequest;
-        void* requestHandle = null;
+        intptr requestHandle = IntPtr::Zero;
         string method;
         NetworkCredential credential;
         int64 contentLength = 0;

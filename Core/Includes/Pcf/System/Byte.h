@@ -27,32 +27,32 @@ namespace Pcf {
     public:
       /// @brief Create a new instance of struct Byte
       /// @remarks Byte is initialized by default to 0.
-      Byte() noexcept {}
+      Byte() {}
 
       /// @brief Create a new instance of struct Byte
       /// @param value Value for the Byte.
-      Byte(byte value) noexcept : value(value) {}
+      Byte(byte value) : value(value) {}
       
       /// @cond
-      Byte(const Byte& value) noexcept : value(value.value) {}
-      operator const byte&() const noexcept {return this->value;}
-      template<typename T> Byte& operator=(T value) noexcept {this->value = value; return *this;}
-      template<typename T> Byte& operator+=(T value) noexcept {this->value += value.value; return *this;}
-      template<typename T> Byte& operator-=(T value) noexcept {this->value -= value; return *this;}
-      template<typename T> Byte& operator*=(T value) noexcept {this->value *= value; return *this;}
+      Byte(const Byte& value) : value(value.value) {}
+      operator const byte&() const {return this->value;}
+      template<typename T> Byte& operator=(T value) {this->value = value; return *this;}
+      template<typename T> Byte& operator+=(T value) {this->value += value.value; return *this;}
+      template<typename T> Byte& operator-=(T value) {this->value -= value; return *this;}
+      template<typename T> Byte& operator*=(T value) {this->value *= value; return *this;}
       template<typename T> Byte& operator/=(T value) {if (value.value == 0) throw DivideByZeroException(pcf_current_information); this->value /= value.value; return *this;}
       template<typename T> Byte& operator%=(T value) {if (value.value == 0) throw DivideByZeroException(pcf_current_information); this->value %= value.value; return *this;}
-      template<typename T> Byte& operator&=(T value) noexcept {this->value &= value; return *this;}
-      template<typename T> Byte& operator|=(T value) noexcept {this->value |= value; return *this;}
-      template<typename T> Byte& operator^=(T value) noexcept {this->value ^= value; return *this;}
-      template<typename T> Byte& operator<<=(T value) noexcept {this->value <<= value; return *this;}
+      template<typename T> Byte& operator&=(T value) {this->value &= value; return *this;}
+      template<typename T> Byte& operator|=(T value) {this->value |= value; return *this;}
+      template<typename T> Byte& operator^=(T value) {this->value ^= value; return *this;}
+      template<typename T> Byte& operator<<=(T value) {this->value <<= value; return *this;}
       template<typename T> Byte& operator>>=(T value) {this->value >>= value; return *this;}
-      template<typename T> bool operator==(T value) const noexcept {return this->value == value;}
-      template<typename T> bool operator!=(T value) const noexcept {return !this->operator==(value);}
-      Byte& operator++() noexcept {++this->value; return *this;}
-      const Byte operator++(int) noexcept {return this->value++;}
-      Byte& operator--() noexcept {--this->value; return *this;}
-      const Byte operator--(int) noexcept {return this->value--;}
+      template<typename T> bool operator==(T value) const {return this->value == value;}
+      template<typename T> bool operator!=(T value) const {return !this->operator==(value);}
+      Byte& operator++() {++this->value; return *this;}
+      const Byte operator++(int) {return this->value++;}
+      Byte& operator--() {--this->value; return *this;}
+      const Byte operator--(int) {return this->value--;}
       /// @endcond
       
       /// @brief Represents the largest possible value of an Byte 255 (0xFF). This field is constant.
@@ -69,7 +69,7 @@ namespace Pcf {
       /// | Less than zero    | This instance is false and value is true.                                   |
       /// | Zero              | This instance and value are equal (either both are true or both are false). |
       /// | Greater than zero | This instance is true and value is false.  -or- value is null reference.    |
-      int32 CompareTo(const Byte& value) const noexcept {return this->value - value.value;}
+      int32 CompareTo(const Byte& value) const {return this->value - value.value;}
       
       /// @brief Compares the current instance with another object of the same type.
       /// @param obj An object to compare with this instance.
@@ -79,7 +79,7 @@ namespace Pcf {
       /// | Less than zero    | This instance is false and obj is true.                                   |
       /// | Zero              | This instance and obj are equal (either both are true or both are false). |
       /// | Greater than zero | This instance is true and obj is false.  -or- obj is null reference.      |
-      int32 CompareTo(const IComparable& obj) const noexcept override{
+      int32 CompareTo(const IComparable& obj) const override{
         if (!is<Byte>(obj))
           return 1;
         return CompareTo(static_cast<const Byte&>(obj));
@@ -89,20 +89,20 @@ namespace Pcf {
       /// @param dateTimeA The first DateTime to compare.
       /// @param dateTimeB The second DateTime to compare.
       /// @return bool true if the value of dateTimenA is the same as the value of dateTimeB; otherwise, false.
-      bool Equals(byte value) const noexcept {return this->value == value;}
+      bool Equals(byte value) const {return this->value == value;}
 
       /// @brief Determines whether this instance of Exception and a specified object, which must also be a Exception object, have the same value.
       /// @param obj The object to compare with the current object.
       /// @return bool true if the specified object is equal to the current object. otherwise, false.
-      bool Equals(const object& obj) const noexcept override {return is<Byte>(obj) && Equals(((const Byte&)obj).value);}
+      bool Equals(const object& obj) const override {return is<Byte>(obj) && Equals(((const Byte&)obj).value);}
       
       /// @brief Serves as a hash function for a particular type.
       /// @return int32 A hash code for the current object.
-      int32 GetHashCode() const noexcept override {return this->value;}
+      int32 GetHashCode() const override {return this->value;}
 
       /// @brief Returns the TypeCode for this instance.
       /// @return TypeCode The enumerated constant that is the TypeCode of the class or value type that implements this interface.
-      TypeCode GetTypeCode() const noexcept override {return TypeCode::Byte;}
+      TypeCode GetTypeCode() const override {return TypeCode::Byte;}
       
       /// @brief Converts the specified String representation of a logical value to its 8-bit unsigned integer equivalent.
       /// @param str A String containing the value to convert.
@@ -117,12 +117,12 @@ namespace Pcf {
       
       /// @brief Returns a String that represents the current Byte.
       /// @return String A String that represents the current Byte.
-      String ToString() const noexcept override {return ToString("g", Reference<IFormatProvider>::Null());}
+      String ToString() const override {return ToString("g", ref<IFormatProvider>::Null());}
       
       /// @brief Returns a String that represents the current Byte.
       /// @param format Format-control String.
       /// @return String A String that represents the current Byte.
-      String ToString(const String& format) const {return ToString(format, Reference<IFormatProvider>::Null());}
+      String ToString(const String& format) const {return ToString(format, ref<IFormatProvider>::Null());}
       
       /// @brief Returns a String that represents the current Byte.
       /// @param format Format-control String.
@@ -133,14 +133,14 @@ namespace Pcf {
       /// @param str A String containing the value to convert.
       /// @param retValue When this method returns, contains the 8-bit unsigned integer value equivalent to the number contained in str, if the conversion succeeded, or zero if the conversion failed. The conversion fails if the s parameter is null, is not in a format compliant with style, or represents a number less than MinValue or greater than MaxValue. This parameter is passed uninitialized.
       /// @return A Boolean true if str was converted successfully; otherwise, false.
-      static bool TryParse(const String& str, byte& retValue) noexcept {return TryParse(str, 10, retValue);}
+      static bool TryParse(const String& str, byte& retValue) {return TryParse(str, 10, retValue);}
 
       /// @brief Converts the specified String representation of a logical value to its 8-bit unsigned integer equivalent. A return value indicates whether the conversion succeeded.
       /// @param str A String containing the value to convert.
       /// @param base The base of number to parse
       /// @param retValue When this method returns, contains the 8-bit unsigned integer value equivalent to the number contained in str, if the conversion succeeded, or zero if the conversion failed. The conversion fails if the s parameter is null, is not in a format compliant with style, or represents a number less than MinValue or greater than MaxValue. This parameter is passed uninitialized.
       /// @return A Boolean true if str was converted successfully; otherwise, false.
-      static bool TryParse(const String& str, int32 base, byte& retValue) noexcept {
+      static bool TryParse(const String& str, int32 base, byte& retValue) {
         try {
           retValue = Parse(str, base);
           return true;

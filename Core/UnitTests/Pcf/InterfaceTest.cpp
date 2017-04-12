@@ -19,7 +19,7 @@ namespace PcfUnitTests {
         ~NotInheritedFromAnInterface() {result += "~NotInheritedFromAnInterface";}
       };
       
-      pcf_using (up<NotAnInterface> value = new NotInheritedFromAnInterface());
+      pcf_using (refptr<NotAnInterface> value = pcf_new<NotInheritedFromAnInterface>());
       Assert::AreEqual("~NotAnInterface", result);
     }
 
@@ -34,7 +34,7 @@ namespace PcfUnitTests {
         ~InheritedFromAnInterface() {result += "~InheritedFromAnInterface";}
       };
       
-      pcf_using (up<AnInterface> value = new InheritedFromAnInterface());
+      pcf_using (refptr<AnInterface> value = pcf_new<InheritedFromAnInterface>());
       Assert::AreEqual("~InheritedFromAnInterface~AnInterface", result);
     }
   };

@@ -22,9 +22,9 @@ namespace Pcf {
 
         void Play() const;
 
-        bool Equals(const object& obj) const noexcept override {return is<SystemSound>(obj) && Equals((const SystemSound&)obj);}
+        bool Equals(const object& obj) const override {return is<SystemSound>(obj) && Equals((const SystemSound&)obj);}
 
-        bool Equals(const SystemSound& sound) const noexcept {return this->type == sound.type;}
+        bool Equals(const SystemSound& sound) const {return this->type == sound.type;}
 
         intptr Tag() const {return (intptr)this->type;}
 

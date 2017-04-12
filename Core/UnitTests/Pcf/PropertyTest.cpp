@@ -116,15 +116,15 @@ namespace PcfUnitTests {
     };
     
     void PropertyReadOnlyAndCopyConstructor() {
-      UniquePointer<PropertyReadOnly> propertyReadOnly1 = UniquePointer<PropertyReadOnly>::Create();
-      UniquePointer<PropertyReadOnly> propertyReadOnly2 = UniquePointer<PropertyReadOnly>::Create(*propertyReadOnly1);
+      refptr<PropertyReadOnly> propertyReadOnly1 = pcf_new<PropertyReadOnly>();
+      refptr<PropertyReadOnly> propertyReadOnly2 = pcf_new<PropertyReadOnly>(*propertyReadOnly1);
       propertyReadOnly1 = null;
       Assert::AreEqual("Test property", propertyReadOnly2->Name, pcf_current_information);
     }
     
     void PropertyReadOnlyAndEqualOperator() {
-      UniquePointer<PropertyReadOnly> propertyReadOnly1 = UniquePointer<PropertyReadOnly>::Create();
-      UniquePointer<PropertyReadOnly> propertyReadOnly2 = UniquePointer<PropertyReadOnly>::Create();
+      refptr<PropertyReadOnly> propertyReadOnly1 = pcf_new<PropertyReadOnly>();
+      refptr<PropertyReadOnly> propertyReadOnly2 = pcf_new<PropertyReadOnly>();
       *propertyReadOnly2 = *propertyReadOnly1;
       propertyReadOnly1 = null;
       Assert::AreEqual("Test property", propertyReadOnly2->Name, pcf_current_information);
@@ -143,16 +143,16 @@ namespace PcfUnitTests {
     };
     
     void PropertyWriteOnlyAndCopyConstructor() {
-      UniquePointer<PropertyWriteOnly> propertyWriteOnly1 = UniquePointer<PropertyWriteOnly>::Create();
-      UniquePointer<PropertyWriteOnly> propertyWriteOnly2 = UniquePointer<PropertyWriteOnly>::Create(*propertyWriteOnly1);
+      refptr<PropertyWriteOnly> propertyWriteOnly1 = pcf_new<PropertyWriteOnly>();
+      refptr<PropertyWriteOnly> propertyWriteOnly2 = pcf_new<PropertyWriteOnly>(*propertyWriteOnly1);
       propertyWriteOnly1 = null;
       propertyWriteOnly2->Name = "Other thing";
       Assert::AreEqual("Other thing", propertyWriteOnly2->name, pcf_current_information);
     }
     
     void PropertyWriteOnlyAndEqualOperator() {
-      UniquePointer<PropertyWriteOnly> propertyWriteOnly1 = UniquePointer<PropertyWriteOnly>::Create();
-      UniquePointer<PropertyWriteOnly> propertyWriteOnly2 = UniquePointer<PropertyWriteOnly>::Create();
+      refptr<PropertyWriteOnly> propertyWriteOnly1 = pcf_new<PropertyWriteOnly>();
+      refptr<PropertyWriteOnly> propertyWriteOnly2 = pcf_new<PropertyWriteOnly>();
       *propertyWriteOnly2 = *propertyWriteOnly1;
       propertyWriteOnly1 = null;
       propertyWriteOnly2->Name = "Other thing";
@@ -174,8 +174,8 @@ namespace PcfUnitTests {
     };
     
     void PropertyReadWriteAndCopyConstructor() {
-      UniquePointer<PropertyReadWrite> propertyReadWrite1 = UniquePointer<PropertyReadWrite>::Create();
-      UniquePointer<PropertyReadWrite> propertyReadWrite2 = UniquePointer<PropertyReadWrite>::Create(*propertyReadWrite1);
+      refptr<PropertyReadWrite> propertyReadWrite1 = pcf_new<PropertyReadWrite>();
+      refptr<PropertyReadWrite> propertyReadWrite2 = pcf_new<PropertyReadWrite>(*propertyReadWrite1);
       propertyReadWrite1 = null;
       Assert::AreEqual("Test property", propertyReadWrite2->Name, pcf_current_information);
       propertyReadWrite2->Name = "Other thing";
@@ -183,8 +183,8 @@ namespace PcfUnitTests {
     }
     
     void PropertyReadWriteAndEqualOperator() {
-      UniquePointer<PropertyReadWrite> propertyReadWrite1 = UniquePointer<PropertyReadWrite>::Create();
-      UniquePointer<PropertyReadWrite> propertyReadWrite2 = UniquePointer<PropertyReadWrite>::Create();
+      refptr<PropertyReadWrite> propertyReadWrite1 = pcf_new<PropertyReadWrite>();
+      refptr<PropertyReadWrite> propertyReadWrite2 = pcf_new<PropertyReadWrite>();
       *propertyReadWrite2 = *propertyReadWrite1;
       propertyReadWrite1 = null;
       Assert::AreEqual("Test property", propertyReadWrite2->Name, pcf_current_information);

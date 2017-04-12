@@ -6,7 +6,6 @@
 
 #include "../Move.h"
 #include "../Property.h"
-#include "../UniquePointer.h"
 #include "Object.h"
 
 #include "Collections/Generic/IEnumerable.h"
@@ -389,7 +388,7 @@ namespace Pcf {
       /// @exception ArgumentNullException The parameters provider or format or arg is null.
       /// @remarks This function work only with base type specified in TypeCode
       /// @see TypeCode
-      static String Format(const String& format, const Array<Reference<Object>>& args);
+      static String Format(const String& format, const Array<ref<Object>>& args);
       
       /// @brief Replaces the format item in a specified String with the text equivalent of the value of a corresponding Object instance in a specified array. A specified parameter supplies culture-specific formatting information.
       /// @param provider An IFormatProvider that supplies culture-specific formatting information
@@ -409,7 +408,7 @@ namespace Pcf {
       /// @exception ArgumentNullException The parameters provider or format or arg is null.
       /// @remarks This function work only with base type specified in TypeCode
       /// @see TypeCode
-      static String Format(const IFormatProvider& provider, const String& format, const Array<Reference<Object>>& args);
+      static String Format(const IFormatProvider& provider, const String& format, const Array<ref<Object>>& args);
 
       /// @brief Retrieves an object that can iterate through the individual characters in this String.
       /// @return CharEnumerator An enumerator object.
@@ -897,21 +896,21 @@ namespace Pcf {
       /// @brief Determines whether this instance of String and a specified object, which must also be a String object, have the same value.
       /// @param obj The Object to compare with the current Object.
       /// @return bool true if the specified Object is equal to the current Object. otherwise, false.
-      bool Equals(const Object& obj) const noexcept override;
+      bool Equals(const Object& obj) const override;
       
       /// @brief Serves as a hash function for a particular type.
       /// @return int32 A hash code for the current Object.
       /// @return @see Object
-      int32 GetHashCode() const noexcept override;
+      int32 GetHashCode() const override;
       
       /// @brief Returns a String that represents the current String.
       /// @return const String A String that represents the current String.
-      String ToString() const noexcept override;
+      String ToString() const override;
       
       /// @brief Creates a new object that is a copy of the current instance.
       /// @return Object* A new object that is a copy of this instance.
       /// @return @see Object
-      up<Object> Clone() const override;
+      refptr<Object> Clone() const override;
 
       /// @brief Compares this instance to a specified Char object and returns an indication of their relative values.
       /// @param value An String object to compare with this instance.
@@ -929,7 +928,7 @@ namespace Pcf {
       /// @return Greater than zero   This instance is greater than value.
       /// -or-
       /// @return obj is nullNothingnullptra null reference.
-      int32 CompareTo(const IComparable& obj) const noexcept override;
+      int32 CompareTo(const IComparable& obj) const override;
       
       /// @brief Returns the TypeCode for this instance.
       /// @return TypeCode The enumerated constant that is the TypeCode of the class or value type that implements this interface.
@@ -961,7 +960,7 @@ namespace Pcf {
       String(const StringType& string);
       
       static String FormatToString(const IFormatProvider& provider, const String& format, const Array<__opaque_format_item__>& args);
-      static String FormatToString(const IFormatProvider& provider, const String& format, const Array<Reference<object>>& args);
+      static String FormatToString(const IFormatProvider& provider, const String& format, const Array<ref<object>>& args);
       int32 GetLength() const;
 
       class Enumerator : public System::Object, public Collections::Generic::IEnumerator<char32> {
@@ -973,7 +972,7 @@ namespace Pcf {
         bool MoveNext() override;
         
         Enumerator& operator =(const Enumerator& other);
-        bool Equals(const Object& other) const noexcept override;
+        bool Equals(const Object& other) const override;
         
       protected:
         const char32& GetCurrent() const override;
@@ -994,7 +993,7 @@ namespace Pcf {
         bool MoveNext() override;
         
         ReverseEnumerator& operator =(const ReverseEnumerator& other);
-        bool Equals(const Object& other) const noexcept override;
+        bool Equals(const Object& other) const override;
         
       protected:
         const char32& GetCurrent() const override;

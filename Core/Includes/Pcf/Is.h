@@ -2,9 +2,9 @@
 /// @brief Contains Pcf::is <> operator.
 #pragma once
 
-#include "Reference.h"
-#include "SharedPointer.h"
-#include "UniquePointer.h"
+#include "Ref.h"
+#include "RefPtr.h"
+#include "UniquePtr.h"
 #include "Types.h"
 
 namespace Pcf {
@@ -17,7 +17,7 @@ namespace Pcf {
   /// @see Pcf::System::Type
   /// @ingroup Pcf
   template<typename TT, typename T>
-  bool is(const Reference<T>& value) {
+  bool is(const ref<T>& value) {
     return value.template Is<TT>();
   }
   
@@ -30,7 +30,7 @@ namespace Pcf {
   /// @see Pcf::System::Type
   /// @ingroup Pcf
   template<typename TT, typename T>
-  bool is(Reference<T>& value) {
+  bool is(ref<T>& value) {
     return value.template Is<TT>();
   }
   
@@ -43,7 +43,7 @@ namespace Pcf {
   /// @see Pcf::System::Type
   /// @ingroup Pcf
   template<typename TT, typename T>
-  bool is(const SharedPointer<T>& value) {
+  bool is(const refptr<T>& value) {
     return value.template Is<TT>();
   }
   
@@ -56,7 +56,7 @@ namespace Pcf {
   /// @see Pcf::System::Type
   /// @ingroup Pcf
   template<typename TT, typename T>
-  bool is(SharedPointer<T>& value) {
+  bool is(refptr<T>& value) {
     return value.template Is<TT>();
   }
   
@@ -69,7 +69,7 @@ namespace Pcf {
   /// @see Pcf::System::Type
   /// @ingroup Pcf
   template<typename TT, typename T>
-  bool is(UniquePointer<T>& value) {
+  bool is(UniquePtr<T>& value) {
     return value.template Is<TT>();
   }
 

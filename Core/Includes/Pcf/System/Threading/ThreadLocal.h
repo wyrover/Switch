@@ -76,7 +76,7 @@ namespace Pcf {
         
         /// @brief Creates and returns a string representation of this instance for the current thread
         /// @return The result of calling ToString on the Value.
-        String ToString() const noexcept override {return string::Format("{0}", this->Value());}
+        String ToString() const override {return string::Format("{0}", this->Value());}
         
       private:
         const T& GetValue() const {

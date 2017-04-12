@@ -88,7 +88,7 @@ namespace Pcf {
       /// | Less than zero    | This instance is false and obj is true.                                   |
       /// | Zero              | This instance and obj are equal (either both are true or both are false). |
       /// | Greater than zero | This instance is true and obj is false.  -or- obj is null reference.      |
-      int32 CompareTo(const IComparable& obj) const noexcept override {
+      int32 CompareTo(const IComparable& obj) const override {
         if (!is<Boolean>(obj)) return 1;
         return CompareTo(static_cast<const Boolean&>(obj));
       }
@@ -101,11 +101,11 @@ namespace Pcf {
       /// @brief Determines whether this instance of Boolean and a specified Object, which must also be a Boolean Object, have the same value.
       /// @param obj The Object to compare with the current Object.
       /// @return Boolean true if the specified Object is equal to the current Object. otherwise, false.
-      bool Equals(const Object& obj) const noexcept override {return is<Boolean>(obj) && Equals(((const Boolean&)obj).value);}
+      bool Equals(const Object& obj) const override {return is<Boolean>(obj) && Equals(((const Boolean&)obj).value);}
       
       /// @brief Serves as a hash function for a particular type.
       /// @return Int32 A hash code for the current Object.
-      int32 GetHashCode() const noexcept override { return this->value; }
+      int32 GetHashCode() const override { return this->value; }
       
       /// @brief Returns the TypeCode for this instance.
       /// @return TypeCode The enumerated constant that is the TypeCode of the class or value type that implements this interface.
@@ -125,7 +125,7 @@ namespace Pcf {
 
       /// @brief Returns a string that represents the current Boolean.
       /// @return const string A string that represents the current Boolean.
-      String ToString() const noexcept override;
+      String ToString() const override;
 
     protected:
       /// @cond

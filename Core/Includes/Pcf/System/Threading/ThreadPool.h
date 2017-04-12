@@ -3,7 +3,7 @@
 #pragma once
 
 #include "../../Types.h"
-#include "../../SharedPointer.h"
+#include "../../RefPtr.h"
 #include "../../Static.h"
 #include "../TimeSpan.h"
 #include "../Collections/Generic/Queue.h"
@@ -157,8 +157,8 @@ namespace Pcf {
         using ThreadPoolItem = ThreadItem<WaitCallback>;
         using ThreadPoolAsynchronousIOItem = ThreadItem<WaitOrTimerCallback>;
         
-        using ThreadPoolItemCollection = System::Collections::Generic::Queue<SharedPointer<ThreadPoolItem>>;
-        using ThreadPoolAsynchronousIOItemCollection = System::Collections::Generic::Queue<SharedPointer<ThreadPoolAsynchronousIOItem>>;
+        using ThreadPoolItemCollection = System::Collections::Generic::Queue<refptr<ThreadPoolItem>>;
+        using ThreadPoolAsynchronousIOItemCollection = System::Collections::Generic::Queue<refptr<ThreadPoolAsynchronousIOItem>>;
         
         static ThreadPoolItemCollection threadPoolItems;
         static ThreadPoolAsynchronousIOItemCollection threadPoolAsynchronousIOItems;
