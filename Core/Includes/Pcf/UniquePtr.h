@@ -25,10 +25,6 @@ namespace Pcf {
     
     /// @brief Create a Pointer with specified pointer.
     /// @param ptr Pointer to store.
-    UniquePtr(const T* ptr) { this->Reset(ptr); }
-    
-    /// @brief Create a Pointer with specified pointer.
-    /// @param ptr Pointer to store.
     UniquePtr(T* ptr) { this->Reset(ptr); }
     
     /// @brief Copy a UniquePtr specified
@@ -73,7 +69,7 @@ namespace Pcf {
     
     /// @brief Destroy the current pointer and set to new specified pointer.
     /// @param ptr new ptr to store.
-    void Reset(const T* ptr) {
+    void Reset(T* ptr) {
       if (this->ptr != null)
         delete this->ptr;
       this->ptr = const_cast<T*>(ptr);
@@ -352,11 +348,6 @@ namespace Pcf {
     const T* operator->() const { return ToPointer(); }
     T* operator->() { return ToPointer(); }
     
-    UniquePtr<T>& operator=(const T* ptr) {
-      Reset(ptr);
-      return *this;
-    }
-    
     UniquePtr<T>& operator=(T* ptr) {
       Reset(ptr);
       return *this;
@@ -406,22 +397,35 @@ namespace Pcf {
   class UniquePtr<T[]> {
   public:
     /// @brief Represent a Null UniquePtr.
-    static const UniquePtr<T[]>& Null() { static UniquePtr<T> nullPointer; return nullPointer; }
+    static UniquePtr<T[]> Null() { return UniquePtr<T>(); }
     
     /// @brief Represent an Empty UniquePtr.
-    static const UniquePtr<T[]>& Empty() { static UniquePtr<T> emptyPointer; return emptyPointer; }
+    static UniquePtr<T[]> Empty() { return UniquePtr<T>(); }
     
     /// @brief Create a null UniquePtr.
     UniquePtr() {}
     
     /// @brief Create a Pointer with specified pointer.
     /// @param ptr Pointer to store.
-    UniquePtr(const T* ptr) { Reset(ptr); }
+    UniquePtr(T* ptr) { Reset(ptr); }
+    
+    /// @brief Copy a UniquePtr specified
+    /// @param ptr UniquePtr to copy.
+    UniquePtr(UniquePtr<T[]>& ptr) { Swap(ptr); }
+    
+    /// @brief Copy a UniquePtr specified
+    /// @param ptr UniquePtr to copy.
+    UniquePtr(UniquePtr<T[]>&& ptr) { Swap(ptr); }
     
     /// @brief Copy a UniquePtr specified
     /// @param ptr UniquePtr to copy.
     template<typename TT>
     UniquePtr(UniquePtr<TT[]>& ptr) { Swap(ptr.template As<T>()); }
+    
+    /// @brief Copy a UniquePtr specified
+    /// @param ptr UniquePtr to copy.
+    template<typename TT>
+    UniquePtr(UniquePtr<TT[]>&& ptr) { Swap(ptr.template As<T>()); }
     
     /// @brief Destroy the current pointer and set to null.
     void Delete() { Reset(null); }
@@ -456,6 +460,14 @@ namespace Pcf {
     /// @brief Exchanges the contents of the UniquePtr object with those of p, transferring ownership of any managed object between them without destroying either.
     /// @param ptr Another UniquePtr object of the same type.
     void Swap(const UniquePtr<T[]>& ptr) {
+      T* p = ptr.ptr;
+      const_cast<UniquePtr<T[]>& >(ptr).ptr = this->ptr;
+      Reset(p);
+    }
+    
+    /// @brief Exchanges the contents of the UniquePtr object with those of p, transferring ownership of any managed object between them without destroying either.
+    /// @param ptr Another UniquePtr object of the same type.
+    void Swap(const UniquePtr<T[]>&& ptr) {
       T* p = ptr.ptr;
       const_cast<UniquePtr<T[]>& >(ptr).ptr = this->ptr;
       Reset(p);
@@ -544,52 +556,97 @@ namespace Pcf {
     /// @cond
     virtual ~UniquePtr() { Delete(); }
     
-    const T* operator ->() const { return ToPointer(); }
+    const T* operator->() const { return ToPointer(); }
     
-    T* operator ->() { return ToPointer(); }
+    T* operator->() { return ToPointer(); }
     
-    T& operator [](int i) { return this->ptr[i]; }
+    T& operator[](int i) { return this->ptr[i]; }
     
-    const T& operator [](int i) const { return this->ptr[i]; }
+    const T& operator[](int i) const { return this->ptr[i]; }
     
-    UniquePtr<T[]>& operator =(const T* ptr) {
+    UniquePtr<T[]>& operator=(T* ptr) {
       Reset(ptr);
       return *this;
     }
     
-    UniquePtr<T[]>& operator=(UniquePtr<T>&& ptr) {
+    UniquePtr<T[]>& operator=(UniquePtr<T[]>& ptr) {
       Swap(ptr);
       return *this;
     }
-
-    template<typename TT>
-    UniquePtr<T[]>& operator=(UniquePtr<TT>& ptr) {
-      Swap(ptr.template As<T>());
+    
+    UniquePtr<T[]>& operator=(UniquePtr<T[]>&& ptr) {
+      Swap(ptr);
       return *this;
     }
     
-    bool operator ==(const T* ptr) { return this->ptr == ptr; }
+    template<typename TT>
+    UniquePtr<T[]>& operator=(UniquePtr<TT[]>& ptr) {
+      Swap(ptr.template As<T[]>());
+      return *this;
+    }
     
-    bool operator ==(const UniquePtr<T[]>& ptr) { return this->ptr == ptr.ptr; }
+    template<typename TT>
+    UniquePtr<T[]>& operator=(UniquePtr<TT[]>&& ptr) {
+      Swap(ptr.template As<T[]>());
+      return *this;
+    }
     
-    bool operator !=(const T* ptr) { return this->ptr != ptr; }
+    bool operator==(const T* ptr) { return this->ptr == ptr; }
     
-    bool operator !=(const UniquePtr<T[]>& ptr) { return this->ptr != ptr.ptr; }
+    bool operator==(const UniquePtr<T[]>& ptr) { return this->ptr == ptr.ptr; }
+    
+    bool operator!=(const T* ptr) { return this->ptr != ptr; }
+    
+    bool operator!=(const UniquePtr<T[]>& ptr) { return this->ptr != ptr.ptr; }
     
     operator bool() const { return this->ptr != null; }
     
-    bool operator !() const { return this->ptr == null; }
+    bool operator!() const { return this->ptr == null; }
     /// @endcond
     
   private:
     T* ptr = null;
   };
   
+  template<class T>
+  struct __pcf_unique_if {
+    typedef UniquePtr<T> __unique_single;
+  };
+  
+  template<class T>
+  struct __pcf_unique_if<T[]> {
+    typedef UniquePtr<T[]> __unique_array_unknown_bound;
+  };
+  
+  template<class T, size_t N>
+  struct __pcf_unique_if<T[N]> {
+    typedef void __unique_array_known_bound;
+  };
+  
+  template <class T>
+  struct pcf_remove_extent {
+    typedef T type;
+  };
+  template <class _Tp>
+  struct pcf_remove_extent<_Tp[]> {
+    typedef _Tp type;
+  };
+  template <class _Tp, size_t _Np>
+  struct pcf_remove_extent<_Tp[_Np]> {
+    typedef _Tp type;
+  };
+  
+  template <class T>
+  using pcf_remove_extent_t = typename pcf_remove_extent<T>::type;
+  
   template<typename T, typename ...Args>
-  UniquePtr<T> MakeUnique(Args... args) {return UniquePtr<T>(new T(args...));}
-
+  typename __pcf_unique_if<T>::__unique_single MakeUnique(Args&&... args) {return UniquePtr<T>(new T(args...));}
+  
   template<typename T>
-  UniquePtr<T[]> MakeUnique(int32 size) {return UniquePtr<T[]>(new T[size]);}
+  typename __pcf_unique_if<T>::__unique_array_known_bound MakeUnique(size_t size) {
+    typedef typename pcf_remove_extent<T>::type TT;
+    return UniquePtr<T>(new TT[size]());
+  }
 }
 
 using namespace Pcf;

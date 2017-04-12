@@ -30,7 +30,7 @@ namespace Pcf {
   using SharedPtr = RefPtr<T>;
   
   template<typename T, typename ...Args>
-  SharedPtr<T> MakeShared(Args... args) {return SharedPtr<T>(new T(args...));}
+  SharedPtr<T> MakeShared(Args&&... args) {return SharedPtr<T>(new T(args...));}
 }
 
 using namespace Pcf;

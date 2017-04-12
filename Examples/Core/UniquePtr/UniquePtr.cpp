@@ -7,10 +7,10 @@ namespace Test {
   public:
     /// @brief The main entry point for the application.
     static void Main() {
-      UniquePtr<string> str = UniquePtr<string>::Create("Hello world!");
+      UniquePtr<string> str = MakeUnique<string>("Hello world!");
       Console::WriteLine("str = {0}", str.ToString());
       Console::WriteLine(*str);
-      str = UniquePtr<string>::Create("another string !");
+      str = MakeUnique<string>("another string !");
       Console::WriteLine("str = {0}", str.ToString());
       Console::WriteLine(*str);
       
@@ -22,7 +22,7 @@ namespace Test {
       Console::WriteLine("str2 = {0}", str2.ToString());
       SharedPtr<string> sp = pcf_new<string>("Test sp");
       Console::WriteLine("sp = {0}", sp.ToString());
-      UniquePtr<int> a = UniquePtr<int>::Create(234);
+      UniquePtr<int> a = MakeUnique<int>(234);
       Console::WriteLine("a = {0}", a.ToString());
       SharedPtr<string> b;
       Console::WriteLine("b = {0}", b.ToString());

@@ -7,7 +7,7 @@ namespace Test {
   public:
     /// @brief The main entry point for the application.
     static void Main() {
-      SharedPtr<string> p1 = SharedPtr<string>::Create("First string****");
+      SharedPtr<string> p1 = MakeShared<string>("First string****");
       
       if (!p1)
         Console::WriteLine("p1 == null");
