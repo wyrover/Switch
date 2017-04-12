@@ -93,7 +93,7 @@ namespace Pcf {
 
 #if defined(_WIN32)
           if (image.pixelFormat == Imaging::PixelFormat::Format32bppRgb) {
-            byte* ptr = rawData.ToPointer();
+            byte* ptr = (byte*)rawData.Data();
             for (int32 i = image.size.Width() * image.size.Height(); i > 0; i --) {
               if (!ptr[3])
                 ptr[0] = ptr[1] = ptr[2] = 0;
