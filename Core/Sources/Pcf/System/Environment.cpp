@@ -306,7 +306,7 @@ Array<string> Environment::SetCommandLineArgs(char* argv[], int argc) {
 
   socketInit = pcf_new<SocketInit>();
   consoleChangeCodePage = pcf_new<ConsoleChangeCodePage>();
-  //consoleInterceptSignals = pcf_new<ConsoleInterceptSignals>();
+  consoleInterceptSignals = pcf_new<ConsoleInterceptSignals>();
   signalCatcher = pcf_new<SignalCatcher>();
   System::Threading::Thread::RegisterCurrentThread();
   commandLineArgs = pcf_new<Array<string>>(std::vector<string>(argv, argv+argc));
