@@ -1,10 +1,5 @@
 #if defined(_WIN32)
 
-#pragma warning(push)
-#pragma warning(disable:4201)
-#include <windows.h>
-#pragma warning(pop)
-
 #include <direct.h>
 #include <shlobj.h>
 #include <sys/stat.h>
@@ -12,6 +7,9 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+
+#include <windows.h>
+#include "../../Includes/Pcf/Undef.h"
 
 #include "CoreApi.h"
 

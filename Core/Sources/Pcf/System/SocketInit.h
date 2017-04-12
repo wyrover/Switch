@@ -1,8 +1,7 @@
 #if _WIN32
 
-#pragma warning(disable:4201)
 #include <winsock2.h>
-#pragma warning(default:4201)
+#include "../Includes/Pcf/Undef.h"
 
 namespace {
   struct SocketInit {

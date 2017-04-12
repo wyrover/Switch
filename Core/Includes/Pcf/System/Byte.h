@@ -162,7 +162,6 @@ namespace Pcf {
       uint16 ToUInt16(const IFormatProvider& provider) const override {return this->value;}
       uint32 ToUInt32(const IFormatProvider& provider) const override {return this->value;}
       uint64 ToUInt64(const IFormatProvider& provider) const override {return this->value;}
-      #undef max
       sbyte ToSByte(const IFormatProvider& provider) const override {if (this->value > std::numeric_limits<sbyte>::max()) throw OverflowException(pcf_current_information); return this->value;}
       float ToSingle(const IFormatProvider& provider) const override {return this->value;}
       String ToString(const IFormatProvider& provider) const override {return ToString();}

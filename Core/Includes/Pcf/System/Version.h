@@ -26,8 +26,6 @@ namespace Pcf {
       /// - Minor = 0,
       Version() {}
 
-      #undef major
-      #undef minor
       /// @brief Initializes a new instance of the Version class using the specified major and minor values.
       /// @param major The major version number.
       /// @param minor The minor version number.

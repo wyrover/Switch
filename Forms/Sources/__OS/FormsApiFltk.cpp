@@ -20,7 +20,8 @@
 #include <FL/Fl_Round_Button.H>
 #include <FL/Fl_Text_Buffer.H>
 #include <FL/Fl_Window.H>
-#undef None
+
+#include <Pcf/Undef.h>
 
 #include "Exclamation.h"
 #include "Information.h"

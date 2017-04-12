@@ -1,8 +1,7 @@
 #if defined(_WIN32)
-#pragma warning(disable:4201)
 #include <winsock2.h>
 #include <ws2tcpip.h>
-#pragma warning(default:4201)
+#include "../../Includes/Pcf/Undef.h"
 #else
 #include <netdb.h>
 #include <unistd.h>

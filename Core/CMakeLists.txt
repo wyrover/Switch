@@ -377,6 +377,7 @@ set(INCLUDE_FILES
   Includes/Pcf/Async.h
   Includes/Pcf/Await.h
   Includes/Pcf/Boxing.h
+  Includes/Pcf/Core.h
   Includes/Pcf/ExceptionPtr.h
   Includes/Pcf/CurrentInformation.h
   Includes/Pcf/InitializerList.h
@@ -393,11 +394,11 @@ set(INCLUDE_FILES
   Includes/Pcf/Startup.h
   Includes/Pcf/Static.h
   Includes/Pcf/Types.h
+  Includes/Pcf/Undef.h
   Includes/Pcf/UniquePtr.h
   Includes/Pcf/Unused.h
   Includes/Pcf/Using.h
   Includes/Pcf/Var.h
-  Includes/Pcf/Core.h
   Includes/Pcf/__opaque_function_pointer__.h
 )
 

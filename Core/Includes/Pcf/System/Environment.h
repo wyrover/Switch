@@ -257,8 +257,6 @@ namespace Pcf {
       /// @remarks The names and values for the environment variables are stored as key-value pairs in the returned IDictionary.
       static const Collections::Generic::IDictionary<String, String>& GetEnvironmentVariables();
       
-      #undef GetEnvironmentVariable
-
       /// @brief Retrieves the value of an environment variable from the current process.
       /// @param variable The name of the environment variable.
       /// @return tring The value of the environment variable specified by variable, or null if the environment variable is not found.

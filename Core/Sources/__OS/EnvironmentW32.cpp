@@ -5,6 +5,7 @@
 #include <cstring>
 #include <rpc.h>
 #include <Windows.h>
+#include "../../Includes/Pcf/Undef.h"
 
 #include "CoreApi.h"
 

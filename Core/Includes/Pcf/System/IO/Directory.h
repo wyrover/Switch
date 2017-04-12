@@ -14,7 +14,6 @@ namespace Pcf {
       /// @brief Provides static methods for the creation, copying, deletion, moving, and opening of Directories, and aids in the creation of System::IO::DirectoryStream objects.
       class pcf_public Directory pcf_static {
       public:
-        #undef CreateDirectory
         /// @brief Creates all directories and subdirectories as specified by path.
         /// @param path The directory path to create.
         /// @return A System::IO::DirectoryInfo as specified by path.

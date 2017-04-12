@@ -339,7 +339,6 @@ namespace Pcf {
         /// @exception ThreadStateException The thread has not been started or is dead.
         void Suspend();
         
-        #undef Yield
         /// @brief Causes the calling thread to yield execution to another thread that is ready to run on the current processor. The operating system selects the thread to yield to.
         /// @return true if the operating system switched execution to another thread; otherwise, false.
         /// @remarks If this method succeeds, the rest of the thread's current time slice is yielded. The operating system schedules the calling thread for another time slice, according to its priority and the status of other threads that are available to run.

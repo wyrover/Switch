@@ -191,7 +191,6 @@ namespace Pcf {
         /// @return The incremented value.
         static int64 Increment(int64& location);
 
-#undef MemoryBarrier
         /// @brief Synchronizes memory access as follows: The processor that executes the current thread cannot reorder instructions in such a way that memory accesses before the call to MemoryBarrier execute after memory accesses that follow the call to MemoryBarrier.
         /// @remarks This method was added to the Interlocked class in the .NET Framework 4.5 as a convenience; it's a wrapper for the Thread.MemoryBarrier method.
         /// @remarks MemoryBarrier is required only on multiprocessor systems that have weak memory ordering (for example, a system that employs multiple Intel Itanium processors).

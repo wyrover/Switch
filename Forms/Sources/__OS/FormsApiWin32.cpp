@@ -4,15 +4,14 @@
 #include <Windows.h>
 #include <Windowsx.h>
 #include <Uxtheme.h>
+#include <Pcf/Undef.h>
 
-#undef AddForm
-
+#include "FormsApi.h"
 #include <Pcf/System/Collections/Generic/SortedDictionary.h>
 #include <Pcf/System/Diagnostics/Debug.h>
 #include <Pcf/System/NotImplementedException.h>
 #include "../../Includes/Pcf/System/Windows/Forms/Application.h"
 #include "../../Includes/Pcf/System/Windows/Forms/Control.h"
-#include "FormsApi.h"
 
 using namespace System;
 using namespace System::Collections::Generic;
