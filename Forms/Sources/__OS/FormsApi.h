@@ -29,7 +29,6 @@ namespace __OS {
       static void EnableVisualStyles() { visualStylesEnabled = true; }
       static bool HasVisualStylesEnabled() { return visualStylesEnabled; }
       static void Exit();
-#undef AddForm
       static void AddForm(const System::Windows::Forms::Form& form);
       static void MessageLoop(System::EventHandler idle);
       static void MessageBeep(System::Windows::Forms::MessageBoxIcon type);

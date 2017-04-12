@@ -5,6 +5,8 @@
 #include <Windowsx.h>
 #include <Uxtheme.h>
 
+#undef AddForm
+
 #include <Pcf/System/Collections/Generic/SortedDictionary.h>
 #include <Pcf/System/Diagnostics/Debug.h>
 #include <Pcf/System/NotImplementedException.h>
