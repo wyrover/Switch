@@ -19,7 +19,6 @@ namespace PcfFormApp {
       this->Text = "First Application";
       this->Location = System::Drawing::Point(200, 100);
 
-/*
       this->FormClosing += pcf_delegate(const object& sender, FormClosingEventArgs& e) {
         e.Cancel = MessageBox::Show("Do you want quit application ?", "Program", MessageBoxButtons::YesNo, MessageBoxIcon::Question) != DialogResult::Yes;
       };
@@ -28,6 +27,7 @@ namespace PcfFormApp {
         this->label2.Text = e.Location().ToString();
       };
 
+      /*
       this->button1.Parent = *this;
       this->button1.Name = "button1";
       this->button1.Text = "Button";

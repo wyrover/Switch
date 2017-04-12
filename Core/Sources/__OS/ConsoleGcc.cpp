@@ -13,6 +13,7 @@
 #include <termios.h>
 #include <unistd.h>
 #include <sys/ioctl.h>
+#include "../../Includes/Pcf/Undef.h"
 
 #include "CoreApi.h"
 

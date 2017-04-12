@@ -35,15 +35,21 @@ namespace {
     Gtk::Fixed fixed;
   };
 
-  Glib::refptr<Gtk::Application> application = Gtk::Application::create();
-  GtkForm* mainForm;
-  int32 exitCode = 0;
-
   Gdk::RGBA FromColor(const System::Drawing::Color& color) {
     Gdk::RGBA result;
     result.set_rgba(as<double>(color.R()) / 255, as<double>(color.G()) / 255, as<double>(color.B()) / 255, as<double>(color.A()) / 255);
     return result;
   }
+
+  System::Drawing::Color ToColor(const Gdk::RGBA& color) {
+    System::Drawing::Color result = System::Drawing::Color::FromArgb(color.get_alpha() * 255, color.get_red() * 255, color.get_green() * 255, color.get_blue() * 255);
+    return result;
+  }
+
+  Glib::RefPtr<Gtk::Application> application = Gtk::Application::create();
+  GtkForm* mainForm;
+  int32 exitCode = 0;
+  System::Drawing::Color controlColor;
 }
 
 bool FormsApi::Application::visualStylesEnabled = false;
@@ -68,6 +74,8 @@ DialogResult FormsApi::Application::ShowMessageBox(const string& message, const 
 }
 
 void FormsApi::Application::Start() {
+  //controlColor = ToColor(GtkForm().get_style_context()->get_background_color());
+  controlColor = ToColor(Gtk::Entry().get_style_context()->get_background_color());
 }
 
 void FormsApi::Application::Stop() {
@@ -91,8 +99,13 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::Control& control)
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Form& form) {
   GtkForm* gtkForm = new GtkForm();
-  gtkForm->override_background_color(FromColor(form.BackColor));
+  Console::WriteLine("backColor = {0}", gtkForm->get_style_context()->get_background_color().to_string().c_str());
+  Console::WriteLine("backColor = {0}", Gtk::Button().get_style_context()->get_background_color().to_string().c_str());
+  //gtkForm->override_background_color(FromColor(form.BackColor));
+  gtkForm->override_background_color(FromColor(controlColor));
   gtkForm->override_color(FromColor(form.ForeColor));
+  gtkForm->move(form.data().location.X, form.data().location.Y);
+  gtkForm->resize(form.data().size.Width, form.data().size.Height);
   return (intptr)gtkForm;
 }
 
@@ -147,6 +160,14 @@ void FormsApi::Control::SetForeColor(const System::Windows::Forms::Control& cont
 }
 
 void FormsApi::Control::SetLocation(const System::Windows::Forms::Control& control) {
+  if (control.data().handle != IntPtr::Zero) {
+    if (is<System::Windows::Forms::Form>(control)) {
+      ((Gtk::Window*)control.data().handle)->move(control.data().location.X, control.data().location.Y);
+    } else {
+      ((Gtk::Fixed*)((Gtk::Widget*)control.data().handle)->get_parent())->child_property_x(*(Gtk::Widget*)control.data().handle) = control.data().location.X;
+      ((Gtk::Fixed*)((Gtk::Widget*)control.data().handle)->get_parent())->child_property_y(*(Gtk::Widget*)control.data().handle) = control.data().location.Y;
+    }
+  }
 }
 
 void FormsApi::Control::SetSize(const System::Windows::Forms::Control& control) {
