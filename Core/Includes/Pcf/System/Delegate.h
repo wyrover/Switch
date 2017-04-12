@@ -10,6 +10,7 @@
 #include "../Types.h"
 #include "_String.h"
 #include "ArgumentNullException.h"
+#include "NullReferenceException.h"
 #include "Type.h"
 
 /// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
@@ -166,8 +167,13 @@ namespace Pcf {
       /// @return Result The return value.
       Result operator()(Arguments... arguments) const {
         if (this->functions.size() == 0) return Result();
-        for(size_t i = 0; i < this->functions.size()-1; i++)
-            this->functions[i](arguments...);
+        for(size_t i = 0; i < this->functions.size()-1; i++) {
+          if (this->functions[i] == null)
+            throw NullReferenceException(pcf_current_information);
+          this->functions[i](arguments...);
+        }
+        if (this->functions.back() == null)
+          throw NullReferenceException(pcf_current_information);
         return this->functions.back()(arguments...);
       }
       

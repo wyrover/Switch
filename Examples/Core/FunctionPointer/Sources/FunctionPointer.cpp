@@ -41,8 +41,8 @@ namespace Examples {
       Write function7 = null;
       try {
         function7("null");
-      } catch (const std::exception& e) {
-        Console::WriteLine(e.what());
+      } catch (const NullReferenceException& e) {
+        Console::WriteLine(e);
       }
     }
     
