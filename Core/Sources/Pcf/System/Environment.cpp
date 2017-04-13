@@ -28,8 +28,7 @@ using namespace System::Collections::Generic;
 #endif
 
 namespace {
-  class ConsoleChangeCodePage {
-  public:
+  struct ConsoleChangeCodePage {
     ConsoleChangeCodePage() {
       __OS::CoreApi::Console::SetInputCodePage(65001);
       __OS::CoreApi::Console::SetOutputCodePage(65001);
@@ -45,8 +44,7 @@ namespace {
     int32 previousOutputCodePage = __OS::CoreApi::Console::GetOutputCodePage();
   };
   
-  class ConsoleInterceptSignals {
-  public:
+  struct ConsoleInterceptSignals {
     ConsoleInterceptSignals() {
       auto signalKeys =__OS::CoreApi::Console::GetSignalKeys();
       for(auto signal : signalKeys)
@@ -70,8 +68,7 @@ namespace {
     }
   };
   
-  class SignalCatcher {
-  public:
+  struct SignalCatcher {
     SignalCatcher() {
       signal(SIGILL, SignalCatcher::SignalIllegalInstructionHandler);
       signal(SIGABRT, SignalCatcher::SignalAbortExceptionHandler);
@@ -265,12 +262,8 @@ const Array<String>& Environment::GetCommandLineArgs() {
 }
 
 String Environment::GetEnvironmentVariable(const String& variable) {
-  char* value = getenv(variable.Data());
-  
-  if (value == null)
-    return "";
-  
-  return value;
+  char* value = getenv(variable.Data());  
+  return value == null ? "" : value;
 }
 
 const Collections::Generic::IDictionary<String, String>& Environment::GetEnvironmentVariables() {

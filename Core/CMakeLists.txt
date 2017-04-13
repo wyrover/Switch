@@ -108,10 +108,8 @@ set(INCLUDE_FILES
   Includes/Pcf/System/IO/IOException.h
   Includes/Pcf/System/IO/IsolatedStorage.h
   Includes/Pcf/System/IO/MemoryStream.h
-  Includes/Pcf/System/IO/Packaging.h
   Includes/Pcf/System/IO/Path.h
-  Includes/Pcf/System/IO/PathTooLongException.h
-  Includes/Pcf/System/IO/Pipes.h
+  Includes/Pcf/System/IO/PathTooLongException.h  Includes/Pcf/System/IO/Pipes.h
   Includes/Pcf/System/IO/PipeException.h
   Includes/Pcf/System/IO/SeekOrigin.h
   Includes/Pcf/System/IO/Stream.h
@@ -444,8 +442,6 @@ set(SOURCE_FILES
   Sources/Pcf/System/Diagnostics/Stopwatch.cpp
   Sources/Pcf/System/Diagnostics/Trace.cpp
   Sources/Pcf/System/Diagnostics/TraceSource.cpp
-  Sources/Pcf/System/IO/BinaryReader.cpp
-  Sources/Pcf/System/IO/BinaryWriter.cpp
   Sources/Pcf/System/IO/Directory.cpp
   Sources/Pcf/System/IO/DirectoryInfo.cpp
   Sources/Pcf/System/IO/DriveInfo.cpp

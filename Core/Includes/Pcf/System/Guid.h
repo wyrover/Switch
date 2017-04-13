@@ -29,7 +29,6 @@ namespace Pcf {
       explicit Guid(const Array<byte>& bytes) {
         if (bytes.Length != this->data.Length)
           throw ArgumentException(pcf_current_information);
-
         this->data = bytes;
       }
 
@@ -42,7 +41,6 @@ namespace Pcf {
           throw ArgumentNullException(pcf_current_information);
         if (dataSize != this->data.Length)
           throw ArgumentException(pcf_current_information);
-
         this->data = Array<byte>(bytes);
       }
 
@@ -63,7 +61,6 @@ namespace Pcf {
           throw ArgumentNullException(pcf_current_information);
         if (dataSize != this->data.Length)
           throw ArgumentException(pcf_current_information);
-
         this->data = Array<byte>(bytes, dataSize);
       }
 
@@ -127,6 +124,7 @@ namespace Pcf {
       Guid(int32 a, int16 b, int16 c, const byte d[8]) {
         if (d == null)
           throw ArgumentNullException(pcf_current_information);
+
         this->data[0] = (byte)((a&0xFF000000)>>24);
         this->data[1] = (byte)((a&0x00FF0000)>>16);
         this->data[2] = (byte)((a&0x0000FF00)>>8);
@@ -237,16 +235,13 @@ namespace Pcf {
 
       int32 CompareTo(const Guid& value) const {
         for (int32 i = 0; i < this->data.Length; i++)
-          if (this->data[i] > value.data[i])
-            return 1;
-          else if (this->data[i] < value.data[i])
-            return -1;
+          if (this->data[i] > value.data[i]) return 1;
+          else if (this->data[i] < value.data[i]) return -1;
         return 0;
       }
 
       int32 CompareTo(const IComparable& obj) const override {
-        if (!is<Guid>(obj))
-          return 1;
+        if (!is<Guid>(obj)) return 1;
         return CompareTo(static_cast<const Guid&>(obj));
       }
 
@@ -254,10 +249,8 @@ namespace Pcf {
       /// @return Int32 A hash code for the current object.
       int32 GetHashCode() const override {
         int32 hashCode = 0;
-
         for (int32 i = 0; i< this->data.Length; i++)
           hashCode ^= this->data[i];
-
         return hashCode;
       }
 
@@ -273,9 +266,7 @@ namespace Pcf {
 
       /// @brief Returns a 16-element byte array that contains the value of this instance.
       /// @return Array<Byte> A 16-element byte array.
-      Array<byte> ToByteArray() const {
-        return this->data;
-      }
+      Array<byte> ToByteArray() const {return this->data;}
 
       /// @brief Returns a string representation of the value of this instance in registry format.
       /// @return string The value of this Guid, formatted by using the "D" format specifier as follows:

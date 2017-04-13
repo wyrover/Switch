@@ -22,7 +22,10 @@ namespace Pcf {
 
         Bitmap(const string & fileName);
 
-        Bitmap(System::IO::Stream& stream);
+        template<typename TStream>
+        Bitmap(const TStream& stream) : Image(stream) {}
+
+        Bitmap(refptr<System::IO::Stream> stream) : Image(stream) {}
 
       private:
         Bitmap() {}

@@ -31,7 +31,20 @@ namespace Pcf {
           if (stream.CanRead() == false)
             throw ArgumentException(pcf_current_information);
           this->data->stream = stream.template MemberwiseClone<TStream>().template As<Stream>();
-          this->data->encoding = &utf8Encoding;
+          this->data->encoding = utf8Encoding;
+          
+          if (this->data->stream->CanSeek())
+            this->data->stream->Seek(0, System::IO::SeekOrigin::Begin);
+        }
+        
+        /// @brief Initializes a new instance of the System::IO::StreamReader class for the specified Sream pointer.
+        /// @param stream The stream pointer to be read.
+        /// @exception ArgumentException The stream to be read.
+        StreamReader(refptr<Stream> stream) {
+          if (stream->CanRead() == false)
+            throw ArgumentException(pcf_current_information);
+          this->data->stream = stream;
+          this->data->encoding = utf8Encoding;
           
           if (this->data->stream->CanSeek())
             this->data->stream->Seek(0, System::IO::SeekOrigin::Begin);
@@ -48,7 +61,7 @@ namespace Pcf {
           if (stream.CanRead() == false)
             throw ArgumentException(pcf_current_information);
           this->data->stream = stream.template MemberwiseClone<TStream>().template As<Stream>();
-          this->data->encoding = &encoding;
+          this->data->encoding = encoding;
          
           if (this->data->stream->CanSeek())
             this->data->stream->Seek(0, System::IO::SeekOrigin::Begin);
@@ -136,7 +149,7 @@ namespace Pcf {
           int32 peekByte {0};
           bool hasPeekByte {false};
           refptr<Stream> stream;
-          Text::Encoding* encoding {null};
+          ref<Text::Encoding> encoding;
        };
         
         refptr<StreamReaderData> data {new StreamReaderData()};

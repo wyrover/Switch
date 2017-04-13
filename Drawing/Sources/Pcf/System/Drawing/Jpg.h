@@ -31,7 +31,10 @@ namespace Pcf {
     namespace Drawing {
       class Jpg : public object {
       public:
-        Jpg(System::IO::Stream& stream) : reader(stream) {}
+        template<typename TStream>
+        Jpg(const TStream& stream) : reader(stream) {}
+        
+        Jpg(refptr<System::IO::Stream> stream) : reader(stream) {}
 
         void Read(Image& image) {
           Array<byte> streamData((int32)reader.BaseStream().Length());

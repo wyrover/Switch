@@ -29,7 +29,10 @@ namespace Pcf {
     namespace Drawing {
       class Png : public object {
       public:
-        Png(System::IO::Stream& stream) {this->reader = new System::IO::BinaryReader(stream);}
+        template<typename TStream>
+        Png(const TStream& stream) : reader(pcf_new<System::IO::BinaryReader>(stream)) {}
+        
+        Png(refptr<System::IO::Stream> stream) : reader(pcf_new<System::IO::BinaryReader>(stream)) {}
 
         void Read(Image& image) {
           png_infop info = null;

@@ -122,8 +122,11 @@ namespace Pcf {
         };
 
         static refptr<Image> FromFile(const string& fileName);
-
-        static refptr<Image> FromStream(System::IO::Stream& stream);
+        
+        template<typename TStream>
+        static refptr<Image> FromStream(const TStream& stream) {return new Image(stream.template MemberwiseClone<TStream>().template As<TStream>());}
+        
+        static refptr<Image> FromStream(refptr<System::IO::Stream> stream) {return new Image(stream);}
 
         static refptr<Image> FromData(const char* data[]);
 
@@ -144,11 +147,11 @@ namespace Pcf {
         friend Png;
         friend Gif;
         friend Resources::Image;
-        Image(const string & fileName);
-        Image(System::IO::Stream& stream);
+        Image(const string& fileName);
+        Image(refptr<System::IO::Stream> stream);
         
-        void ReadStream(System::IO::Stream& stream);
-        void ReadWindowsBmp(System::IO::Stream& stream);
+        void ReadStream(refptr<System::IO::Stream> stream);
+        void ReadWindowsBmp(refptr<System::IO::Stream> stream);
 
         Imaging::ImageFlags flags;
         Array<Guid> frameDimensionList;

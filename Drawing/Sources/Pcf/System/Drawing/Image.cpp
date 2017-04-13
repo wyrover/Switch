@@ -30,13 +30,13 @@ Property<Image, ReadOnly> Image::None {
 Image::Image() {
 }
 
-Image::Image(System::IO::Stream& stream) {
+Image::Image(refptr<System::IO::Stream> stream) {
   ReadStream(stream);
 }
 
 Image::Image(const string& fileName) {
   FileStream fs = File::Open(fileName, FileMode::Open, FileAccess::Read);
-  ReadStream(fs);
+  ReadStream(fs.MemberwiseClone<FileStream>().As<FileStream>());
 }
 
 Image::Image(const Image& image) : flags(image.flags), frameDimensionList(image.frameDimensionList), horizontalResolution(image.horizontalResolution), pixelFormat(image.pixelFormat), palette(image.palette), rawData(image.rawData), rawFormat(image.rawFormat), size(image.size), tag(image.tag), verticalResolution(image.verticalResolution) {
@@ -44,10 +44,6 @@ Image::Image(const Image& image) : flags(image.flags), frameDimensionList(image.
 
 refptr<Image> Image::FromFile(const string& fileName) {
   return new Image(fileName);
-}
-
-refptr<Image> Image::FromStream(System::IO::Stream& stream) {
-  return new Image(stream);
 }
 
 refptr<Image> Image::FromData(const char* data[]) {
@@ -93,7 +89,7 @@ refptr<Image> Image::FromData(const char* data[]) {
   return image;
 }
 
-void Image::ReadStream(System::IO::Stream& stream) {
+void Image::ReadStream(refptr<System::IO::Stream> stream) {
   refptr<BinaryReader> reader = new BinaryReader(stream);
   
   uint16 magicNumber = reader->ReadUInt16();

@@ -41,7 +41,8 @@ namespace Pcf {
 
       class Bmp : public object {
       public:
-        Bmp(System::IO::Stream& stream) : reader(stream) {}
+        template<typename TStream>
+        Bmp(const TStream& stream) : reader(stream) {}
 
         void Read(Image& image) {
           BitmapFileHeader bmpFile = ReadBitmapFileHeader();

@@ -16,7 +16,7 @@ namespace Pcf {
       class pcf_public StreamWriter : public TextWriter {
       public:
         static Property<StreamWriter, ReadOnly> Null;
-
+        
         /// @brief Initializes a new instance of the System::IO::StreamWriter class for the specified file on the specified stream pointer.
         /// @param stream The stream pointer to write to.
         /// @exception ArgumentException stream is not writable.
@@ -27,6 +27,15 @@ namespace Pcf {
           if (!stream.CanWrite())
             throw ArgumentException(pcf_current_information);
           this->data->stream = stream.template MemberwiseClone<TStream>().template As<Stream>();
+        }
+        
+        /// @brief Initializes a new instance of the System::IO::StreamWriter class for the specified file on the specified stream pointer.
+        /// @param stream The stream pointer to write to.
+        /// @exception ArgumentException stream is not writable.
+        StreamWriter(refptr<Stream> stream) {
+          if (!stream->CanWrite())
+            throw ArgumentException(pcf_current_information);
+          this->data->stream = stream;
         }
 
         /// @brief Initializes a new instance of the StreamWriter class for the specified stream by using the specified encoding and the default buffer size
