@@ -29,6 +29,8 @@ namespace Pcf {
         /// @exception ArgumentException stream is not readable.
         template<typename TStream>
         BinaryReader(const TStream& stream) : stream(stream.template MemberwiseClone<TStream>().template As<Stream>()) {
+          static_assert(!std::is_same<System::IO::Stream, TStream>::value, "Must not be System::IO::Stream but inherited");
+          static_assert(std::is_base_of<System::IO::Stream, TStream>::value, "Is not inherited from System::IO::Stream");
           if (!stream.CanRead())
             throw ArgumentException(pcf_current_information);
         }
