@@ -13,6 +13,9 @@
 #include "Object.h"
 #include "String.h"
 
+#undef major
+#undef minor
+
 /// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Pcf {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.

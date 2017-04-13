@@ -4,6 +4,7 @@
 #include <ctime>
 
 #include <sys/timeb.h>
+#include "../../Includes/Pcf/Undef.h"
 
 #include "CoreApi.h"
 
