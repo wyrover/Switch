@@ -37,7 +37,9 @@ namespace Pcf {
     /// Comparing Boolean values
     /// Because Boolean values are either true or false, there is little reason to explicitly call the CompareTo method, which indicates whether an instance is greater than, less than, or equal to a specified value. Typically, to compare two Boolean variables, you call the Equals method or use your language's equality operator.
     /// However, when you want to compare a Boolean variable with the literal Boolean value true or false, it is not necessary to do an explicit comparison, because the result of evaluating a Boolean value is that Boolean value. For example, the expressions
-    /// @include Boolean7.cpp
+    /// @code
+    /// if (booleanValue) {
+    /// @endcode
     /// and
     /// @include Boolean8.cpp
     /// are equivalent, but the second is more compact. However, both techniques offer comparable performance.
