@@ -9,21 +9,21 @@ namespace Examples {
     // The main entry point for the application.
     static void Main() {
       // Create and write into binary file stream.
-      BinaryWriter bw(FileStream(Path::Combine(Path::GetTempPath(), "PcfTest.bin"), FileMode::Create));
-      bw.Write(true);
-      bw.Write(1.25);
-      bw.Write(4);
-      bw.Write(Array<byte> {10, 29, 32, 42});
-      bw.Write("This is a test");
-      bw.Close();
+      pcf_using(BinaryWriter binaryWriter(FileStream(Path::Combine(Path::GetTempPath(), "PcfTest.bin"), FileMode::Create))) {
+        binaryWriter.Write(true);
+        binaryWriter.Write(1.25);
+        binaryWriter.Write(4);
+        binaryWriter.Write(Array<byte> {10, 29, 32, 42});
+        binaryWriter.Write("This is a test");
+      }
       
-      // Open and read into binary file stream.
-      BinaryReader br(FileStream(Path::Combine(Path::GetTempPath(), "PcfTest.bin"), FileMode::Open));
-      Console::WriteLine("Boolean: {0}", br.ReadBoolean());
-      Console::WriteLine("Double: {0}", br.ReadDouble());
-      Console::WriteLine("Array<byte>: {{{0}}}", string::Join(", ", br.ReadBytes(br.ReadInt32())));
-      Console::WriteLine("String: \"{0}\"", br.ReadString());
-      br.Close();
+      // Open and read from binary file stream.
+      pcf_using(BinaryReader binaryReader(FileStream(Path::Combine(Path::GetTempPath(), "PcfTest.bin"), FileMode::Open))) {
+        Console::WriteLine("Boolean: {0}", binaryReader.ReadBoolean());
+        Console::WriteLine("Double: {0}", binaryReader.ReadDouble());
+        Console::WriteLine("Array<byte>: {{{0}}}", string::Join(", ", binaryReader.ReadBytes(binaryReader.ReadInt32())));
+        Console::WriteLine("String: \"{0}\"", binaryReader.ReadString());
+      }
       
       // Delete binary file stream.
       File::Delete(Path::Combine(Path::GetTempPath(), "PcfTest.bin"));
