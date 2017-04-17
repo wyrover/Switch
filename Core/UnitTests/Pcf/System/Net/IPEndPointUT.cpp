@@ -77,7 +77,7 @@ namespace {
   TEST(IPEndPoint, OperatorEqualTest_Create) {
     IPEndPoint endPoint(IPAddress(127, 0, 0, 1), 12365);
     SocketAddress sockaddr = endPoint.Serialize();
-    UniquePointer<EndPoint> created = endPoint.Create(sockaddr);
+    refptr<EndPoint> created = endPoint.Create(sockaddr);
     ASSERT_EQ(endPoint.ToString(), created->ToString());
   }
 }

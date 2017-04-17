@@ -434,15 +434,15 @@ namespace Pcf {
       /// @param obj The object to compare with the current object.
       /// @return bool true if the specified object is equal to the current object. otherwise, false.
       /// @exception ArgumentNullException The parameters obj is null.
-      bool Equals(const object& obj) const noexcept override;
+      bool Equals(const object& obj) const override;
 
       /// @brief Serves as a hash function for a particular type.
       /// @return Int32 A hash code for the current object.
-      int32 GetHashCode() const noexcept override;
+      int32 GetHashCode() const override;
 
       /// @brief Returns a String that represents the current DateTime.
       /// @return String A String that represents the current DateTime.
-      String ToString() const noexcept override;
+      String ToString() const override;
 
       /// @brief Returns a String that represents the current DateTime.
       /// @param format Format-control String.
@@ -492,7 +492,7 @@ namespace Pcf {
       /// -or-
       /// @return obj is nullNothingnullptra null reference.
       /// @remarks Before comparing DateTime objects, make sure that the objects represent times in the same time zone. You can do this by comparing the values of their Kind() function.
-      int32 CompareTo(const IComparable& obj) const noexcept override;
+      int32 CompareTo(const IComparable& obj) const override;
 
       /// @brief Returns the TypeCode for this instance.
       /// @return TypeCode The enumerated constant that is the TypeCode of the class or value type that implements this interface.

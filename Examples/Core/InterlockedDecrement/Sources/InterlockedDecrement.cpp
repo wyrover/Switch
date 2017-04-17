@@ -35,11 +35,11 @@ namespace Examples {
 
   private:
     static void ThreadMethod() {
-      up<CountClass> coutClass;
+      refptr<CountClass> coutClass;
       
       // Create 100000 instances of CountClass.
       for (int i = 0; i < 100000; i++) {
-        coutClass = new CountClass();
+        coutClass = pcf_new<CountClass>();
       }
     }
   };

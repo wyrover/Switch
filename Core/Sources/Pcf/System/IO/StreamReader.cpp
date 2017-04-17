@@ -16,17 +16,17 @@ Text::UTF8Encoding StreamReader::utf8Encoding {false};
 
 StreamReader::StreamReader() {
   this->data->stream = new NullStream();
-  this->data->encoding = &utf8Encoding;
+  this->data->encoding = utf8Encoding;
 }
 
 StreamReader::StreamReader(const string& path) {
   this->data->stream = new FileStream(path, FileMode::Open, FileAccess::Read, FileShare::ReadWrite);
-  this->data->encoding = &utf8Encoding;
+  this->data->encoding = utf8Encoding;
 }
 
 StreamReader::StreamReader(const string& path, Text::Encoding& encoding) {
   this->data->stream = new FileStream(path, FileMode::Open, FileAccess::Read, FileShare::ReadWrite);
-  this->data->encoding = &encoding;
+  this->data->encoding = encoding;
 }
 
 void StreamReader::Close() {
@@ -79,7 +79,7 @@ int32 StreamReader::ReadCodePoint(Text::Encoding::Decoder& decoder) {
 }
 
 string StreamReader::ReadLine() {
-  UniquePointer<Text::Encoding::Decoder> decoder = this->data->encoding->CreateDecoder();
+  refptr<Text::Encoding::Decoder> decoder = this->data->encoding->CreateDecoder();
   string result;
   for (int32 value = this->Read(*decoder); value != -1 && value != '\n'; value = this->Read(*decoder)) {
     if (value != '\r')
@@ -90,7 +90,7 @@ string StreamReader::ReadLine() {
 }
 
 string StreamReader::ReadToEnd() {
-  UniquePointer<Text::Encoding::Decoder> decoder = this->data->encoding->CreateDecoder();
+  refptr<Text::Encoding::Decoder> decoder = this->data->encoding->CreateDecoder();
   String result;
   for (int32 value = this->Read(*decoder); value != -1; value = this->Read(*decoder)) {
     if (value != '\r')

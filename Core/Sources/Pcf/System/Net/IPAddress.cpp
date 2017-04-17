@@ -1,7 +1,7 @@
 #include <cstring>
 
 #include "../../../../Includes/Pcf/System/Net/IPAddress.h"
-#include "../../../../Includes/Pcf/SharedPointer.h"
+#include "../../../../Includes/Pcf/RefPtr.h"
 #include "../../../../Includes/Pcf/Using.h"
 #include "../../../../Includes/Pcf/System/Array.h"
 #include "../../../../Includes/Pcf/System/BitConverter.h"
@@ -121,7 +121,7 @@ bool IPAddress::Equals(const IPAddress& value) const {
   return true;
 }
 
-bool IPAddress::Equals(const object& obj) const noexcept {
+bool IPAddress::Equals(const object& obj) const {
   return is<IPAddress>(obj) && Equals(static_cast<const IPAddress&>(obj));
 }
 
@@ -151,7 +151,7 @@ AddressFamily IPAddress::GetAddressFamily() const {
   return this->family;
 }
 
-int32 IPAddress::GetHashCode() const noexcept {
+int32 IPAddress::GetHashCode() const {
   if (this->family == Sockets::AddressFamily::InterNetwork)
     return Int64(this->address).GetHashCode();
 
@@ -312,7 +312,7 @@ void IPAddress::SetScopeId(int64 scopeId) {
   this->scopeId = Convert::ToUInt32(scopeId);
 }
 
-string IPAddress::ToString() const noexcept {
+string IPAddress::ToString() const {
   if (this->family == Sockets::AddressFamily::InterNetwork)
     return String::Join(".", GetAddressBytes());
 

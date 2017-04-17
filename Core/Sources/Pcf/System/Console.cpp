@@ -3,6 +3,7 @@
 #include <cwchar>
 #include <iostream>
 
+#include "../../../Includes/Pcf/System/Buffer.h"
 #include "../../../Includes/Pcf/System/Console.h"
 #include "../../../Includes/Pcf/System/Environment.h"
 #include "../../../Includes/Pcf/System/Text/UTF8Encoding.h"
@@ -17,8 +18,8 @@ namespace {
     return output;
   }
   
-  SharedPointer<System::Text::Encoding> inputEncoding = SharedPointer<System::Text::Encoding>::Create<System::Text::UTF8Encoding>(false);
-  SharedPointer<System::Text::Encoding> outputEncoding = SharedPointer<System::Text::Encoding>::Create<System::Text::UTF8Encoding>(false);
+  refptr<System::Text::Encoding> inputEncoding = pcf_new<System::Text::UTF8Encoding>(false);
+  refptr<System::Text::Encoding> outputEncoding = pcf_new<System::Text::UTF8Encoding>(false);
 
   System::ConsoleColor __backgroundColor = static_cast<System::ConsoleColor>(__OS::CoreApi::Console::GetBackgroundColor());
   System::ConsoleColor __foregroundColor = static_cast<System::ConsoleColor>(__OS::CoreApi::Console::GetForegroundColor());
@@ -34,16 +35,16 @@ void Console::StandardErrorOutput::Write(const System::String& s) {
     std::cerr << s.ToCCharArray(outputEncoding->GetCodePage()).Data();
   else if (outputEncoding->GetCodePage() == 1200) { // Unicode
     System::Array<byte> bytes = outputEncoding->GetBytes(s);
-    UniquePointer<char16[]> str = UniquePointer<char16[]>::Create(bytes.Length + 1);
-    memcpy(str.ToPointer(), bytes.Data, bytes.Length);
+    System::Array<char16> str(bytes.Length + 1);
+    Buffer::BlockCopy(bytes, 0, str, 0, bytes.Length);
     str[bytes.Length] = 0;
-    std::wcerr << str.ToPointer();
+    std::wcerr << str.Data();
   } else { // Utf32
     System::Array<byte> bytes = outputEncoding->GetBytes(s);
-    UniquePointer<char32[]> str = UniquePointer<char32[]>::Create(bytes.Length + 1);
-    memcpy(str.ToPointer(), bytes.Data, bytes.Length);
+    System::Array<char32> str(bytes.Length + 1);
+    Buffer::BlockCopy(bytes, 0, str, 0, bytes.Length);
     str[bytes.Length] = 0;
-    std::wcerr << str.ToPointer();
+    std::wcerr << str.Data();
   }
 }
 
@@ -54,16 +55,16 @@ void Console::StandardOutput::Write(const System::String& s) {
     std::cout << s.ToCCharArray(outputEncoding->GetCodePage()).Data();
   else if (outputEncoding->GetCodePage() == 1200) { // Unicode
     int32 length = outputEncoding->GetByteCount(s);
-    UniquePointer<char16[]> str = UniquePointer<char16[]>::Create(length + 1);
-    outputEncoding->GetBytes(s, (byte*)str.ToPointer(), length);
+    System::Array<char16> str(length + 1);
+    outputEncoding->GetBytes(s, (byte*)str.Data(), length);
     str[length] = 0;
-    std::wcout << str.ToPointer();
+    std::wcout << str.Data();
   } else { // Utf32
     int32 length = outputEncoding->GetByteCount(s);
-    UniquePointer<char32[]> str = UniquePointer<char32[]>::Create(length + 1);
-    outputEncoding->GetBytes(s, (byte*)str.ToPointer(), length);
+    System::Array<char32> str(length + 1);
+    outputEncoding->GetBytes(s, (byte*)str.Data(), length);
     str[length] = 0;
-    std::wcout << str.ToPointer();
+    std::wcout << str.Data();
   }
 }
 
@@ -151,9 +152,9 @@ Property<Console::StandardInput&, ReadOnly> Console::In {
   }
 };
 
-Property<const SharedPointer<System::Text::Encoding>&> Console::InputEncoding {
-  []()->const SharedPointer<System::Text::Encoding>& {return inputEncoding;},
-  [](const SharedPointer<System::Text::Encoding>& value) {
+Property<const refptr<System::Text::Encoding>&> Console::InputEncoding {
+  []()->const refptr<System::Text::Encoding>& {return inputEncoding;},
+  [](const refptr<System::Text::Encoding>& value) {
     inputEncoding = value;
     __OS::CoreApi::Console::SetInputCodePage(inputEncoding->GetCodePage());
   }
@@ -170,9 +171,9 @@ Property<Console::StandardOutput&, ReadOnly> Console::Out {
   }
 };
 
-Property<const SharedPointer<System::Text::Encoding>&> Console::OutputEncoding {
-  []()->const SharedPointer<System::Text::Encoding>& {return outputEncoding;},
-  [](const SharedPointer<System::Text::Encoding>& value) {
+Property<const refptr<System::Text::Encoding>&> Console::OutputEncoding {
+  []()->const refptr<System::Text::Encoding>& {return outputEncoding;},
+  [](const refptr<System::Text::Encoding>& value) {
     outputEncoding = value;
     __OS::CoreApi::Console::SetOutputCodePage(outputEncoding->GetCodePage());
   }

@@ -3,7 +3,7 @@
 #pragma once
 
 #include "../../Types.h"
-#include "../../SharedPointer.h"
+#include "../../RefPtr.h"
 #include "../Object.h"
 #include "../String.h"
 #include "../IO/SeekOrigin.h"
@@ -61,7 +61,7 @@ namespace Pcf {
             bool started = false;
             bool finished = false;
           };
-          SharedPointer<WebRequestStreamData> data = SharedPointer<WebRequestStreamData>::Create();
+          refptr<WebRequestStreamData> data = pcf_new<WebRequestStreamData>();
         };
         
         Property<int64> ContentLength {

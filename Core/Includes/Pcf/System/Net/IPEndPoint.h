@@ -44,7 +44,7 @@ namespace Pcf {
         /// @param socketAddress The socket address that serves as the endpoint for a connection.
         /// @return A new EndPoint instance that is initialized from the specified SocketAddress instance.
         /// @exception NotSupportedException Any attempt is made to access the method when the method is not overridden in a descendant class.
-        UniquePointer<EndPoint> Create(const SocketAddress& socketAddress) const override;
+        refptr<EndPoint> Create(const SocketAddress& socketAddress) const override;
 
         /// @brief Gets the IP address of the endpoint.
         /// @param value An IPAddress instance containing the IP address of the endpoint.
@@ -68,7 +68,7 @@ namespace Pcf {
 
         /// @brief Returns a string that represents the current object.
         /// @return string A string that represents the current object.
-        String ToString() const noexcept override;
+        String ToString() const override;
 
       private :
         void SetAddress(const IPAddress& address);

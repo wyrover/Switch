@@ -18,7 +18,7 @@ int32 StackTrace::FrameCount() const {
 }
 
 void StackTrace::FillFrames(int32 skipFrames, bool needFileInfo) {
-  this->stackTrace = SharedPointer<CallStack>::Create();
+  this->stackTrace = pcf_new<CallStack>();
   FillFrames(((stacktrace::call_stack*)this->stackTrace->handle), skipFrames, needFileInfo);
 }
 
@@ -26,7 +26,7 @@ void StackTrace::FillFrames(const String& str, int32 skipFrames, bool needFileIn
   if (skipFrames < 0 )
     throw ArgumentOutOfRangeException(pcf_current_information);
   
-  this->stackTrace = SharedPointer<CallStack>::Create();
+  this->stackTrace = pcf_new<CallStack>();
 
   int32 skipFramesBeforeStr = 0;
   for (int32 index = 0; index < StackFrame::GetFrameCount(((stacktrace::call_stack*)this->stackTrace->handle)); index++) {
@@ -43,15 +43,15 @@ void StackTrace::FillFrames(void* stackTrace, int32 skipFrames, bool needFileInf
 
   int32 length = skipFrames < StackFrame::GetFrameCount(stackTrace) ? StackFrame::GetFrameCount(stackTrace)-skipFrames : 0;
   for (int32 index = 0; index  < length; index++) {
-    if (!StackFrame(stackTrace, index + skipFrames, needFileInfo).GetMethod().StartsWith("Pcf::FunctionPointer<") && !StackFrame(stackTrace, index + skipFrames, needFileInfo).GetMethod().StartsWith("System::Delegate<"))
+    if (!StackFrame(stackTrace, index + skipFrames, needFileInfo).GetMethod().StartsWith("System::Delegate<"))
       this->frames.Add(new StackFrame(stackTrace, index + skipFrames, needFileInfo));
   }
 }
 
-String StackTrace::ToString() const noexcept {
+String StackTrace::ToString() const {
   String str;
   bool first = true;
-  for (SharedPointer<StackFrame> item : this->frames) {
+  for (refptr<StackFrame> item : this->frames) {
     if (!first) str += Environment::NewLine;
     str += "   at "_s + item->GetMethod() ;
     if (!String::IsNullOrEmpty(item->GetFileName())) {

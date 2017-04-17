@@ -22,7 +22,7 @@ HttpWebRequest::~HttpWebRequest() {
 WebRequest::WebRequestStream HttpWebRequest::GetRequestStream() {
   if (!this->contentType.IsEmpty()) {
     string contentType = string::Format("Content-Type: {0}", this->contentType);
-    this->header = Curl::AppendToList(this->header, contentType.Data());
+    this->header = Curl::AppendToList(this->header, contentType);
     Curl::SetHttpHeader(this->requestHandle, this->header);
   }
   

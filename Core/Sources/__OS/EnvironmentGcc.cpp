@@ -1,4 +1,4 @@
-#if __linux__ || __APPLE__
+#if defined(__linux__) || defined(__APPLE__)
 
 #include <cstdio>
 #include <cstdlib>
@@ -9,7 +9,6 @@
 #include <sys/time.h>
 
 #include "CoreApi.h"
-#include "../../Includes/Pcf/UniquePointer.h"
 
 namespace {
   static string CreateProcess(const string& command) {
@@ -31,7 +30,7 @@ string __OS::CoreApi::Environment::NewLine() {
 }
 
 System::PlatformID __OS::CoreApi::Environment::GetOsPlatformID() {
-#if __APPLE__
+#if defined(__APPLE__)
   return System::PlatformID::MacOSX;
 #else
   return System::PlatformID::Unix;
@@ -39,7 +38,7 @@ System::PlatformID __OS::CoreApi::Environment::GetOsPlatformID() {
 }
 
 int32 __OS::CoreApi::Environment::GetOsVersion(int32& major, int32& minor, int32& build, int32& revision) {
-#if __APPLE__
+#if defined(__APPLE__)
   System::Array<string> numbers = CreateProcess("sw_vers -productVersion").Split({'.', '\n'});
 #else
   System::Array<string> numbers = CreateProcess("uname -r").Split({'.', '-', '\n'});

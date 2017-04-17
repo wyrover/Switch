@@ -24,7 +24,7 @@ namespace ObjectTest {
     string ToString() const noexcept override { return string::Format("({0}, {1})", this->x, this->y); }
 
     // Return a copy of this point object by making a simple field copy.
-    up<Point> Copy() { return as<Point>(this->MemberwiseClone<Point>()); }
+    refptr<Point> Copy() { return as<Point>(this->MemberwiseClone<Point>()); }
 
   private:
     int x;
@@ -36,13 +36,13 @@ class App final {
 public:
   static void Main() {
     // Construct a Point object.
-    sp<ObjectTest::Point> p1 = new ObjectTest::Point(1, 2);
+    refptr<ObjectTest::Point> p1 = pcf_new<ObjectTest::Point>(1, 2);
     
     // Make another Point object that is a copy of the first.
-    sp<ObjectTest::Point> p2 = p1->Copy();
+    refptr<ObjectTest::Point> p2 = p1->Copy();
     
     // Make another variable that references the first Point object.
-    sp<ObjectTest::Point> p3 = p1;
+    refptr<ObjectTest::Point> p3 = p1;
     
     // The line below displays false because point1 and point2 refer to two different objects.
     Console::WriteLine(Object::ReferenceEquals(*p1, *p2));

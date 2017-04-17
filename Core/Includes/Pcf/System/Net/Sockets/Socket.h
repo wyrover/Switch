@@ -3,8 +3,7 @@
 #pragma once
 
 #include "../../../Types.h"
-#include "../../../SharedPointer.h"
-#include "../../../UniquePointer.h"
+#include "../../../RefPtr.h"
 #include "../../Array.h"
 #include "../../IntPtr.h"
 #include "../../Object.h"
@@ -431,7 +430,7 @@ namespace Pcf {
           /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information. - or - socketOptionName was set to the unsupported value SocketOptionNameMaxConnections.
           /// @exception ObjectClosedException The Socket has been closed.
           /// @remarks Socket options determine the behavior of the current Socket. Use this overload to get the SocketOptionNameLinger, SocketOptionNameAddMembership, and SocketOptionNameDropMembership Socket options. For the SocketOptionNameLinger option, use Socket for the socketOptionLevel parameter. For SocketOptionNameAddMembership and SocketOptionNameDropMembership, use IP. If you want to set the value of any of the options listed above, use the SetSocketOption method.
-          UniquePointer<Object> GetSocketOption(SocketOptionLevel socketOptionLevel, SocketOptionName socketOptionName) const;
+          refptr<Object> GetSocketOption(SocketOptionLevel socketOptionLevel, SocketOptionName socketOptionName) const;
 
           /// @brief Sets low-level operating modes for the Socket using the IOControlCode enumeration to specify control codes.
           /// @param ioControlCode A IOControlCode value that specifies the control code of the operation to perform.
@@ -989,14 +988,14 @@ namespace Pcf {
             System::Net::Sockets::AddressFamily addressFamily = System::Net::Sockets::AddressFamily::Unspecified;
             System::Net::Sockets::ProtocolType protocolType = System::Net::Sockets::ProtocolType::Unspecified;
             System::Net::Sockets::SocketType socketType = System::Net::Sockets::SocketType::Unknown;
-            UniquePointer<EndPoint> localEndPoint;
-            UniquePointer<EndPoint> remoteEndPoint;
+            refptr<EndPoint> localEndPoint;
+            refptr<EndPoint> remoteEndPoint;
             bool connected = false;
             bool listening = false;
             bool nonBlocking = false;
             bool bound = false;
           };
-          SharedPointer<SocketData> data = SharedPointer<SocketData>::Create();
+          refptr<SocketData> data = pcf_new<SocketData>();
           
         };
       }

@@ -1,5 +1,3 @@
-project(Pcf)
-
 set(INCLUDE_FILES
   Includes/Pcf/Pcf
   Includes/Pcf/Pcf.h

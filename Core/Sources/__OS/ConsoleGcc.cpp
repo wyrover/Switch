@@ -1,4 +1,4 @@
-#if __linux__ || __APPLE__
+#if defined(__linux__) || defined(__APPLE__)
 
 #include <csignal>
 #include <cstdio>
@@ -13,6 +13,7 @@
 #include <termios.h>
 #include <unistd.h>
 #include <sys/ioctl.h>
+#include "../../Includes/Pcf/Undef.h"
 
 #include "CoreApi.h"
 
@@ -114,7 +115,7 @@ namespace {
       
       bool IsEmpty() const {return this->chars.empty();}
       
-      std::string ToString() const noexcept {
+      std::string ToString() const {
         std::stringstream result;
         std::list<int32>::const_iterator iterator = this->chars.begin();
         while (iterator != this->chars.end()) {
@@ -192,7 +193,7 @@ namespace {
     
     bool HasShiftModifier() const {return this->hasShiftModifier;}
     
-    std::string ToString() const noexcept {
+    std::string ToString() const {
       std::stringstream result;
       result << "{Key=" << std::hex << this->key << ", KeyChar=" << std::dec << static_cast<char>(this->keyChar) << ", HasAltModifier=" << ToString(this->hasAltModifier) << ", HasControlModifier=" << ToString(this->hasControlModifier) << ", HasShiftModifier=" << ToString(this->hasShiftModifier) << "}";
       return result.str();

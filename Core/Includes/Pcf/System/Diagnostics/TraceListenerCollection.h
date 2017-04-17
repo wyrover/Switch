@@ -2,7 +2,7 @@
 /// @brief Contains Pcf::System::Diagnostics::TraceListenerCollection class.
 #pragma once
 
-#include "../../SharedPointer.h"
+#include "../../RefPtr.h"
 #include "../Collections/Generic/List.h"
 #include "DefaultTraceListener.h"
 #include "NullTraceListener.h"
@@ -49,18 +49,18 @@ namespace Pcf {
         
         bool Contains(const TraceListener &value) const override {return this->IndexOf(value) != -1;}
         
-        void CopyTo (System::Array<SharedPointer<TraceListener>>& array, int32 index) const {this->list.CopyTo(array, index);}
+        void CopyTo (System::Array<refptr<TraceListener>>& array, int32 index) const {this->list.CopyTo(array, index);}
         
         System::Collections::Generic::Enumerator<TraceListener> GetEnumerator() const override {
           class Enumerator : public System::Collections::Generic::IEnumerator<TraceListener>, public object {
           public:
-            Enumerator(const System::Collections::Generic::Enumerator<SharedPointer<TraceListener>>& enumerator) : enumerator(enumerator)  {}
+            Enumerator(const System::Collections::Generic::Enumerator<refptr<TraceListener>>& enumerator) : enumerator(enumerator)  {}
             bool MoveNext() override {return this->enumerator.MoveNext();}
             void Reset() override {this->enumerator.Reset();}
             
           private:
             const TraceListener& GetCurrent() const override {return *this->enumerator.Current();}
-            System::Collections::Generic::Enumerator<SharedPointer<TraceListener>> enumerator;
+            System::Collections::Generic::Enumerator<refptr<TraceListener>> enumerator;
           };
           
           return System::Collections::Generic::Enumerator<TraceListener>(new Enumerator(this->list.GetEnumerator()));
@@ -130,7 +130,7 @@ namespace Pcf {
         void CopyTo (System::Array<TraceListener>& array, int32 index) const override {throw InvalidOperationException(pcf_current_information);}
         void Insert(int32 index, const TraceListener& value) override {throw InvalidOperationException(pcf_current_information);}
 
-        System::Collections::Generic::List<SharedPointer<TraceListener>> list;
+        System::Collections::Generic::List<refptr<TraceListener>> list;
       };
     }
   }

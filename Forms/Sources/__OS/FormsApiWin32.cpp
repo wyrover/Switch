@@ -1,16 +1,17 @@
-﻿#if _WIN32
+﻿#if defined(_WIN32) && defined(__use_native_interface__)
 #pragma comment(linker,"\"/manifestdependency:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
 
 #include <Windows.h>
 #include <Windowsx.h>
 #include <Uxtheme.h>
+#include <Pcf/Undef.h>
 
+#include "FormsApi.h"
 #include <Pcf/System/Collections/Generic/SortedDictionary.h>
 #include <Pcf/System/Diagnostics/Debug.h>
 #include <Pcf/System/NotImplementedException.h>
 #include "../../Includes/Pcf/System/Windows/Forms/Application.h"
 #include "../../Includes/Pcf/System/Windows/Forms/Control.h"
-#include "FormsApi.h"
 
 using namespace System;
 using namespace System::Collections::Generic;
@@ -86,7 +87,7 @@ namespace {
 
   LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
     Message message = Message::Create((intptr)hwnd, msg, wParam, lParam, 0);
-    Reference<Control> control = Control::FromHandle(message.HWnd);
+    ref<Control> control = Control::FromHandle(message.HWnd);
     if (control != null)
       control().WndProc(message);
     return message.Result;
@@ -102,6 +103,9 @@ INT WINAPI WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR commandLine
 }
 
 bool FormsApi::Application::visualStylesEnabled = false;
+
+void FormsApi::Application::AddForm(const System::Windows::Forms::Form& form) {
+}
 
 void FormsApi::Application::Exit() {
   PostQuitMessage(0);

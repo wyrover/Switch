@@ -145,8 +145,8 @@ namespace Pcf {
         /// @brief Creates a new object that is a copy of the current instance.
         /// @return object A new object that is a copy of this instance.
         /// @return @see object
-        up<object> Clone() const override {
-          return new BitArray(*this);
+        refptr<object> Clone() const override {
+          return pcf_new<BitArray>(*this);
         }
 
         /// @brief Determines whether this instance of BitArray and a specified object, which must also be a BitArray object, have the same value.
@@ -172,7 +172,7 @@ namespace Pcf {
         /// @exception ArgumentNullException The parameters obj is null.
         /// @return @see object
         /// @return @see bool
-        bool Equals(const object& obj) const noexcept override {
+        bool Equals(const object& obj) const override {
           return is<BitArray>(obj) && Equals(static_cast<const BitArray&>(obj));
         }
 

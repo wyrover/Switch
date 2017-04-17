@@ -1,5 +1,4 @@
 #include <Pcf/System/Object.h>
-#include <Pcf/UniquePointer.h>
 #include <Pcf/System/IO//BinaryReader.h>
 
 #include "../../../../Includes/Pcf/System/Drawing/Image.h"
@@ -10,8 +9,11 @@ namespace Pcf {
     namespace Drawing {
       class Gif : public object {
       public:
-        Gif(System::IO::Stream& stream) : reader(stream) {}
-
+        template<typename TStream>
+        Gif(const TStream& stream) : reader(stream) {}
+        
+        Gif(refptr<System::IO::Stream> stream) : reader(stream) {}
+        
         void Read(Image& image) {
         }
 

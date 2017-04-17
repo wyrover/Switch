@@ -1,7 +1,9 @@
-#if _WIN32
+#if defined(_WIN32)
 
 #include <Windows.h>
 #include <tlhelp32.h>
+#include "../../Includes/Pcf/Undef.h"
+
 #include "CoreApi.h"
 
 intptr __OS::CoreApi::Process::Start(const System::Diagnostics::ProcessStartInfo& processStartInfo) {

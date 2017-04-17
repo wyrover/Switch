@@ -22,7 +22,7 @@ namespace PcfUnitTests {
     }
     
     void EqualsWithNullObject() {
-      TUnit::Assert::IsFalse(Object().Equals(Reference<Object>::Null()), pcf_current_information);
+      TUnit::Assert::IsFalse(Object().Equals(ref<Object>::Null()), pcf_current_information);
     }
     
     void EqualsOnDifferentObjects() {
@@ -87,16 +87,16 @@ namespace PcfUnitTests {
     }
     
     void MemberwiseCloneOnString() {
-      UniquePointer<string> str = new string("First");
-      UniquePointer<object> clonedStr = str->MemberwiseClone<string>();
+      refptr<string> str = pcf_new<string>("First");
+      refptr<object> clonedStr = str->MemberwiseClone<string>();
       *str = "Second";
       TUnit::Assert::AreEqual("Second", str->ToString(), pcf_current_information);
       TUnit::Assert::AreEqual("First", clonedStr->ToString(), pcf_current_information);
     }
     
     void MemberwiseCloneOnStringAsString() {
-      UniquePointer<string> str = new string("First");
-      UniquePointer<string> clonedStr = str->MemberwiseClone<string>().As<string>();
+      refptr<string> str = pcf_new<string>("First");
+      refptr<string> clonedStr = str->MemberwiseClone<string>().As<string>();
       *str = "Second";
       TUnit::Assert::AreEqual("Second", *str, pcf_current_information);
       TUnit::Assert::AreEqual("First", *clonedStr, pcf_current_information);
@@ -117,7 +117,7 @@ namespace PcfUnitTests {
     
     void ReferenceEqualsOnNullAndObject() {
       Object object1;
-      TUnit::Assert::IsFalse(Object::ReferenceEquals(Reference<object>::Null(), object1), pcf_current_information);
+      TUnit::Assert::IsFalse(Object::ReferenceEquals(ref<object>::Null(), object1), pcf_current_information);
     }
     
     void ReferenceEqualsOnTwoDifferentObjects() {

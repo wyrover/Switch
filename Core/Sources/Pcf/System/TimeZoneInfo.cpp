@@ -58,7 +58,7 @@ namespace {
   TimeZoneInfo utc("UTC", 0, "", "UTC", "UTC", false);
 }
 
-#if _WIN32
+#if defined(_WIN32)
 int daylight = 0;
 long timezone = 0;
 char* tzname[2] = {"Local", "Local"};

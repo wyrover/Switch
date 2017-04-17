@@ -255,9 +255,9 @@ namespace Pcf {
 
       static int32 BinarySearch(const Array& array, const T& item) {return BinarySearch(array, 0, array.Length, item, System::Collections::Generic::Comparer<T>::Default().Release());}
 
-      static int32 BinarySearch(const Array& array, const T& item, const SharedPointer<System::Collections::Generic::IComparer<T>>& comparer) {return BinarySearch(array, 0, array.Length, item, comparer);}
+      static int32 BinarySearch(const Array& array, const T& item, const refptr<System::Collections::Generic::IComparer<T>>& comparer) {return BinarySearch(array, 0, array.Length, item, comparer);}
 
-      static int32 BinarySearch(const Array& array, int32 index, int32 count, const T& item, const SharedPointer<System::Collections::Generic::IComparer<T>>& comparer) {
+      static int32 BinarySearch(const Array& array, int32 index, int32 count, const T& item, const refptr<System::Collections::Generic::IComparer<T>>& comparer) {
         if (rank  != 1)
           throw RankException(pcf_current_information);
         if (index < 0 || count < 0)
@@ -788,7 +788,7 @@ namespace Pcf {
       }
 
       // TODO : this is ! correct, it must handle multi-dimensional arrays... (which are currently ! used...)
-      bool Equals(const object& obj) const noexcept override {
+      bool Equals(const object& obj) const override {
         if (!is<Array>(obj))
           return false;
         const Array& other = static_cast<const Array&>(obj);

@@ -37,7 +37,9 @@ namespace Pcf {
     /// Comparing Boolean values
     /// Because Boolean values are either true or false, there is little reason to explicitly call the CompareTo method, which indicates whether an instance is greater than, less than, or equal to a specified value. Typically, to compare two Boolean variables, you call the Equals method or use your language's equality operator.
     /// However, when you want to compare a Boolean variable with the literal Boolean value true or false, it is not necessary to do an explicit comparison, because the result of evaluating a Boolean value is that Boolean value. For example, the expressions
-    /// @include Boolean7.cpp
+    /// @code
+    /// if (booleanValue) {
+    /// @endcode
     /// and
     /// @include Boolean8.cpp
     /// are equivalent, but the second is more compact. However, both techniques offer comparable performance.
@@ -88,7 +90,7 @@ namespace Pcf {
       /// | Less than zero    | This instance is false and obj is true.                                   |
       /// | Zero              | This instance and obj are equal (either both are true or both are false). |
       /// | Greater than zero | This instance is true and obj is false.  -or- obj is null reference.      |
-      int32 CompareTo(const IComparable& obj) const noexcept override {
+      int32 CompareTo(const IComparable& obj) const override {
         if (!is<Boolean>(obj)) return 1;
         return CompareTo(static_cast<const Boolean&>(obj));
       }
@@ -101,11 +103,11 @@ namespace Pcf {
       /// @brief Determines whether this instance of Boolean and a specified Object, which must also be a Boolean Object, have the same value.
       /// @param obj The Object to compare with the current Object.
       /// @return Boolean true if the specified Object is equal to the current Object. otherwise, false.
-      bool Equals(const Object& obj) const noexcept override {return is<Boolean>(obj) && Equals(((const Boolean&)obj).value);}
+      bool Equals(const Object& obj) const override {return is<Boolean>(obj) && Equals(((const Boolean&)obj).value);}
       
       /// @brief Serves as a hash function for a particular type.
       /// @return Int32 A hash code for the current Object.
-      int32 GetHashCode() const noexcept override { return this->value; }
+      int32 GetHashCode() const override { return this->value; }
       
       /// @brief Returns the TypeCode for this instance.
       /// @return TypeCode The enumerated constant that is the TypeCode of the class or value type that implements this interface.
@@ -125,7 +127,7 @@ namespace Pcf {
 
       /// @brief Returns a string that represents the current Boolean.
       /// @return const string A string that represents the current Boolean.
-      String ToString() const noexcept override;
+      String ToString() const override;
 
     protected:
       /// @cond

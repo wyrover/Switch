@@ -30,14 +30,14 @@ namespace Pcf {
   /// @code
   /// class IStringable pcf_interface {
   /// public:
-  ///   virtual String ToString() const noexcept = 0;
+  ///   virtual String ToString() const = 0;
   /// };
   ///
   /// class Foo : public object, public IStringable {
   /// public:
   ///   Foo() {}
   ///
-  ///   String ToString() const noexcept override {return "Foo";}
+  ///   String ToString() const override {return "Foo";}
   /// };
   /// @endcode
   /// @ingroup Pcf

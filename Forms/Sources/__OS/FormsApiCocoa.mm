@@ -1,4 +1,4 @@
-#if __APPLE__
+#if defined(__APPLE__) && defined(__use_native_interface__)
 #import <Cocoa/Cocoa.h>
 #import <Foundation/Foundation.h>
 #include <Pcf/System/Collections/Generic/SortedDictionary.h>
@@ -22,7 +22,7 @@ using namespace __OS;
 namespace {
   class CocoaApi {
   public:
-    using ControlDictionary = System::Collections::Generic::Dictionary<intptr, Reference<Control>>;
+    using ControlDictionary = System::Collections::Generic::Dictionary<intptr, ref<Control>>;
     CocoaApi() {
       this->CreateAppication();
       this->CreateMenuBar();
@@ -55,6 +55,7 @@ namespace {
     
     NSColor* FromColor(const System::Drawing::Color& color) {
       return [NSColor colorWithCalibratedRed:as<float>(color.R()) / 0xFF green:as<float>(color.G()) / 0xFF blue:as<float>(color.B()) / 0xFF alpha:as<float>(color.A()) / 0xF];
+      //return [NSColor colorWithCalibratedRed:as<float>(color.R()) / 0xFF green:as<float>(color.G()) / 0xFF blue:as<float>(color.B()) / 0xFF alpha:1.0];
     }
     
     System::Drawing::Rectangle GetBounds(const System::Windows::Forms::Control& control) {
@@ -138,7 +139,7 @@ namespace {
       appleMenu = [[NSMenu alloc] initWithTitle:@""];
       /* Add menu items */
       title = [NSString stringWithFormat:NSLocalizedString([NSString stringWithUTF8String:"About %@"],nil), nsappname];
-      menuItem = [appleMenu addItemWithTitle:title action:@selector(showPanel) keyEquivalent:@""];
+      //menuItem = [appleMenu addItemWithTitle:title action:@selector(showPanel) keyEquivalent:@""];
       //FLaboutItemTarget *about = [[FLaboutItemTarget alloc] init];
       //[menuItem setTarget:about];
       [appleMenu addItem:[NSMenuItem separatorItem]];
@@ -300,10 +301,13 @@ namespace {
     int32 screenHeight = 1050; // TO DO : Get Screen height...
   };
   
-  UniquePointer<CocoaApi> cocoaApi;
+  refptr<CocoaApi> cocoaApi;
 }
 
 bool FormsApi::Application::visualStylesEnabled = false;
+
+void FormsApi::Application::AddForm(const System::Windows::Forms::Form& form) {
+}
 
 void FormsApi::Application::Exit() {
   Environment::Exit(0);
@@ -362,7 +366,7 @@ namespace {
   }
   
   DialogResult MessageBoxShowModalAbortRetryIgnore(NSAlert *alert) {
-    int result = [alert runModal];
+    NSModalResponse result = [alert runModal];
     if (result == NSAlertFirstButtonReturn)
       return DialogResult::Abort;
     if (result == NSAlertSecondButtonReturn)
@@ -371,7 +375,7 @@ namespace {
   }
   
   DialogResult MessageBoxShowModalYesNoCancel(NSAlert *alert) {
-    int result = [alert runModal];
+    NSModalResponse result = [alert runModal];
     if (result == NSAlertFirstButtonReturn)
       return DialogResult::Yes;
     if (result == NSAlertSecondButtonReturn)
@@ -410,7 +414,7 @@ DialogResult FormsApi::Application::ShowMessageBox(const string& message, const 
 }
 
 void FormsApi::Application::Start() {
-  cocoaApi = UniquePointer<CocoaApi>::Create();
+  cocoaApi = pcf_new<CocoaApi>();
 }
 
 void FormsApi::Application::Stop() {
@@ -510,8 +514,8 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::Form& form) {
     [handle setTitle:[NSString stringWithUTF8String:form.data->text.c_str()]];
     [handle makeKeyAndOrderFront:nil];
     [NSApp activateIgnoringOtherApps:YES];
-    //[(NSControl*)handle setWantsLayer:YES];
-    //((NSControl*)handle).layer.backgroundColor = cocoaApi().FromColor(form.BackColor).CGColor;
+    handle.backgroundColor = cocoaApi().FromColor(form.BackColor);
+    //handle.color = cocoaApi().FromColor(form.ForeColor);
     cocoaApi().Controls()[(intptr)handle] = form;
     Message message = Message::Create((intptr)handle, WM_CREATE, 0, 0, 0, IntPtr::Zero);
     const_cast<System::Windows::Forms::Form&>(form).WndProc(message);
@@ -605,15 +609,17 @@ System::Drawing::Point FormsApi::Control::PointToScreen(const System::Windows::F
 
 void FormsApi::Control::SetBackColor(intptr hdc, const System::Drawing::Color& color) {
   [(NSControl*)hdc setWantsLayer:YES];
-  ((NSControl*)hdc).layer.backgroundColor = [NSColor greenColor].CGColor;
+  ((NSControl*)hdc).layer.backgroundColor = cocoaApi().FromColor(color).CGColor;
 }
 
 void FormsApi::Control::SetForeColor(intptr hdc, const System::Drawing::Color& color) {
 }
 
 void FormsApi::Control::SetBackColor(const System::Windows::Forms::Control& control) {
-  [(NSControl*)control.data->handle setWantsLayer:YES];
-  ((NSControl*)control.data->handle).layer.backgroundColor = [NSColor greenColor].CGColor;
+  if (control.data().handle != IntPtr::Zero) {
+    [(NSControl*)control.data->handle setWantsLayer:YES];
+    ((NSControl*)control.data->handle).layer.backgroundColor = cocoaApi().FromColor(control.BackColor).CGColor;
+  }
 }
 
 void FormsApi::Control::SetForeColor(const System::Windows::Forms::Control& control) {

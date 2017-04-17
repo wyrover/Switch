@@ -3,7 +3,6 @@
 #pragma once
 
 #include "../../Types.h"
-#include "../../UniquePointer.h"
 #include "../String.h"
 #include "TextWriter.h"
 
@@ -44,7 +43,7 @@ namespace Pcf {
         
         /// @brief Returns a string containing the characters written to the current StringWriter so far.
         /// @return string The string containing the characters written to the current StringWriter.
-        String ToString() const noexcept override;
+        String ToString() const override;
         
       private:
         struct StringWriterData {
@@ -52,7 +51,7 @@ namespace Pcf {
           bool close = false;
         };
         
-        SharedPointer<StringWriterData> data = SharedPointer<StringWriterData>();
+        refptr<StringWriterData> data = refptr<StringWriterData>();
       };
     }
   }

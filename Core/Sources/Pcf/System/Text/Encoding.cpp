@@ -9,9 +9,9 @@
 using namespace System;
 using namespace System::Text;
 
-UniquePointer< System::Collections::Generic::SortedDictionary<int32, string>> Encoding::names;
-UniquePointer< System::Collections::Generic::SortedDictionary<string, int32>> Encoding::codePagesFromName;
-UniquePointer< System::Collections::Generic::SortedDictionary<int32, string>> Encoding::displayNames;
+refptr< System::Collections::Generic::SortedDictionary<int32, string>> Encoding::names;
+refptr< System::Collections::Generic::SortedDictionary<string, int32>> Encoding::codePagesFromName;
+refptr< System::Collections::Generic::SortedDictionary<int32, string>> Encoding::displayNames;
 
 Encoding::Encoding() {
   this->codePage = 0;
@@ -50,50 +50,50 @@ string Encoding::GetEncodingName() const {
   return "";
 }
 
-UniquePointer<Encoding> Encoding::ASCII() {
-  return new ASCIIEncoding();
+refptr<Encoding> Encoding::ASCII() {
+  return pcf_new<ASCIIEncoding>();
 }
 
-UniquePointer<Encoding> Encoding::UTF8() {
-  return new UTF8Encoding(true);
+refptr<Encoding> Encoding::UTF8() {
+  return pcf_new<UTF8Encoding>(true);
 }
 
-UniquePointer<Encoding> Encoding::Unicode() {
-  return new UnicodeEncoding(false,true);
+refptr<Encoding> Encoding::Unicode() {
+  return pcf_new<UnicodeEncoding>(false,true);
 }
 
-UniquePointer<Encoding> Encoding::BigEndianUnicode() {
-  return new UnicodeEncoding(true,true);
+refptr<Encoding> Encoding::BigEndianUnicode() {
+  return pcf_new<UnicodeEncoding>(true,true);
 }
 
-UniquePointer<Encoding> Encoding::UTF16LE() {
-  return new UnicodeEncoding(false,true);
+refptr<Encoding> Encoding::UTF16LE() {
+  return pcf_new<UnicodeEncoding>(false,true);
 }
 
-UniquePointer<Encoding> Encoding::UTF16BE() {
-  return new UnicodeEncoding(true,true);
+refptr<Encoding> Encoding::UTF16BE() {
+  return pcf_new<UnicodeEncoding>(true,true);
 }
 
-UniquePointer<Encoding> Encoding::UTF32() {
-  return new UTF32Encoding(false,true);
+refptr<Encoding> Encoding::UTF32() {
+  return pcf_new<UTF32Encoding>(false,true);
 }
 
-UniquePointer<Encoding> Encoding::CreateEncoding(int32 codePage) {
+refptr<Encoding> Encoding::CreateEncoding(int32 codePage) {
   switch(codePage) {
-    case 437   : { return new CodePage437Encoding(); }
-    case 1200  : { return new UnicodeEncoding(false,true); }
-    case 1201  : { return new UnicodeEncoding(true,true); }
-    case 12000 : { return new UTF32Encoding(false,true); }
-    case 12001 : { return new UTF32Encoding(true,true); }
-    case 20127 : { return new ASCIIEncoding(); }
-    case 28591 : { return new CodePage28591Encoding(); }
-    case 28592 : { return new CodePage28592Encoding(); }
-    case 65001 : { return new UTF8Encoding(); }
+    case 437   : { return pcf_new<CodePage437Encoding>(); }
+    case 1200  : { return pcf_new<UnicodeEncoding>(false,true); }
+    case 1201  : { return pcf_new<UnicodeEncoding>(true,true); }
+    case 12000 : { return pcf_new<UTF32Encoding>(false,true); }
+    case 12001 : { return pcf_new<UTF32Encoding>(true,true); }
+    case 20127 : { return pcf_new<ASCIIEncoding>(); }
+    case 28591 : { return pcf_new<CodePage28591Encoding>(); }
+    case 28592 : { return pcf_new<CodePage28592Encoding>(); }
+    case 65001 : { return pcf_new<UTF8Encoding>(); }
   }
   throw NotSupportedException(pcf_current_information);
 }
 
-UniquePointer<Encoding> Encoding::CreateEncoding(const string& codePageName) {
+refptr<Encoding> Encoding::CreateEncoding(const string& codePageName) {
   if (codePageName == "us-ascii") return CreateEncoding(20127);
   if (codePageName == "iso-8859-1") return CreateEncoding(28591);
   if (codePageName == "iso-8859-2") return CreateEncoding(28592);
@@ -122,7 +122,7 @@ Array<byte> Encoding::Convert(const Encoding& srcEncoding, const Encoding& dstEn
   return dstEncoding.GetBytes(chars.Data, chars.Length);
 }
 
-bool Encoding::Equals(const object& obj) const noexcept { 
+bool Encoding::Equals(const object& obj) const { 
   const Encoding* enc = dynamic_cast<const Encoding*>(&obj);
   if (enc == null) return false;
   return this->codePage == enc->codePage;
@@ -271,7 +271,7 @@ int32 Encoding::GetChars(const byte bytes[], int32 bytesLength, int32 byteIndex,
   ArrayAlgorithms::ValidateRange(bytesLength, byteIndex, byteCount);
   ArrayAlgorithms::ValidateIndex(charIndex, charsLength);
   if (bytesLength == 0) return 0;
-  UniquePointer<Decoder> decoder = CreateDecoder();
+  refptr<Decoder> decoder = CreateDecoder();
   int index = charIndex;
   for (int32 i = byteIndex; i < byteIndex + byteCount; i += 1) {
     decoder->Add(bytes[i]);
@@ -311,9 +311,9 @@ string Encoding::GetString(const byte bytes[], int32 bytesSize) const {
   ArrayAlgorithms::ValidateArray(bytes, bytesSize);
   if (bytesSize == 0) return string();
   int32 charsSize = GetCharCount(bytes, bytesSize);
-  UniquePointer<char32[]> chars(new char32[charsSize]);
-  GetChars(bytes, bytesSize, 0, bytesSize, chars.ToPointer(), charsSize, 0);
-  return string(chars.ToPointer(), charsSize);
+  Array<char32> chars(charsSize);
+  GetChars(bytes, bytesSize, 0, bytesSize, (char32*)chars.Data(), charsSize, 0);
+  return string(chars);
 }
 
 string Encoding::GetString(const byte bytes[], int32 bytesSize, int32 index, int32 count) const {
@@ -323,9 +323,9 @@ string Encoding::GetString(const byte bytes[], int32 bytesSize, int32 index, int
   int32 nbChars = GetCharCount(bytes, bytesSize,index,count);
   if (nbChars == 0) return string();
 
-  UniquePointer<char32[]> chars(new char32[nbChars]);
-  GetChars(bytes, bytesSize, index, count, chars.ToPointer(), nbChars, 0);
-  return string(chars.ToPointer(), nbChars, 0 , nbChars);
+  Array<char32> chars(nbChars);
+  GetChars(bytes, bytesSize, index, count, (char32*)chars.Data(), nbChars, 0);
+  return string(chars.Data(), nbChars, 0 , nbChars);
 }
 
 bool Encoding::IsAlwaysNormalized() const {
@@ -333,7 +333,7 @@ bool Encoding::IsAlwaysNormalized() const {
   return false;
 }
 
-string Encoding::ToString() const noexcept { 
+string Encoding::ToString() const { 
   return GetEncodingName();
 }
 

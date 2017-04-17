@@ -50,6 +50,7 @@ namespace Pcf {
             Application::mainForm().FormClosed += pcf_delegate(const object& sender, const FormClosedEventArgs& e) {
               Exit();
             };
+            Application::AddForm();
             MessageLoop();
           }
 
@@ -57,10 +58,11 @@ namespace Pcf {
           static EventHandler Idle;
 
         private:
+          static void AddForm();
           static void Start();
           static void MessageLoop();
-          //static UniquePointer<Form> mainForm;
-          static Reference<Form> mainForm;
+          //static refptr<Form> mainForm;
+          static ref<Form> mainForm;
           static bool enableVisualStyles;
         };
       }

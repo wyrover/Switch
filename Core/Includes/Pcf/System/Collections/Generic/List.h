@@ -984,7 +984,7 @@ namespace Pcf {
 
           bool Equals(const List& list) const {return this->list == list.list;}
 
-          bool Equals(const Object& obj) const noexcept override {return is<List>(obj) && Equals(static_cast<const List&>(obj));}
+          bool Equals(const Object& obj) const override {return is<List>(obj) && Equals(static_cast<const List&>(obj));}
 
           /// @cond
           using const_iterator = typename std::vector<T, TAllocator>::const_iterator;

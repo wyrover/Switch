@@ -49,18 +49,15 @@ Exception::Exception(const string& message, const Exception& innerExeption, cons
   SetStackTrace(*this);
 }
 
-Exception::~Exception() noexcept {
-}
-
 bool Exception::Equals(const Exception& value) const {
   return this->hresult == value.hresult && this->message == value.message && this->currentInformation == value.currentInformation && this->innerException == value.innerException;
 }
 
-bool Exception::Equals(const object& obj) const noexcept {
+bool Exception::Equals(const object& obj) const {
   return is<Exception>(obj) && Equals(static_cast<const Exception&>(obj));
 }
 
-string Exception::ToString() const noexcept {
+string Exception::ToString() const {
   return string::Format("{0}: {1}{2}{3}", GetType(), GetMessage(), Environment::NewLine, GetStackTrace(GetType().ToString()));
 }
 
@@ -79,13 +76,13 @@ string Exception::GetDefaultMessage() const {
 
 void Exception::SetStackTrace(const Exception& exception) {
   if (Exception::stackTraceEnabled == false) {
-    this->stackTrace = SharedPointer<Array<string>>::Create(1);
+    this->stackTrace = pcf_new<Array<string>>(1);
     stackTrace()[0] = String::Format("  in {0}:{1}{2}", this->currentInformation.FileName, this->currentInformation.Line, Environment::NewLine);
     return;
   }
   
   Diagnostics::StackTrace st(1, true);
-  this->stackTrace = SharedPointer<Array<string>>::Create(st.FrameCount() + 1);
+  this->stackTrace = pcf_new<Array<string>>(st.FrameCount() + 1);
 
   if (st.FrameCount() == 0) {
     this->stackTrace()[0] = String::Format("  in {0}:{1}{2}", this->currentInformation.FileName, this->currentInformation.Line, Environment::NewLine);
@@ -100,7 +97,7 @@ void Exception::SetStackTrace(const Exception& exception) {
 }
 
 const char* Exception::what() const noexcept {
-  const_cast<Exception&>(*this).whatMessage = ToString();
+  this->whatMessage = this->ToString();
   return whatMessage.c_str();
 }
 

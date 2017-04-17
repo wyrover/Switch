@@ -32,7 +32,7 @@ namespace Pcf {
 
           /// @brief Initializes a new instance of the HashSet<T> class that uses a specified comparer
           /// @param comparer an instance of IComparer<T> used to determine the sort order of the set.
-          HashSet(const SharedPointer< IComparer<T>>& comparer) : comparer(comparer) {}
+          HashSet(const refptr< IComparer<T>>& comparer) : comparer(comparer) {}
 
           /// @cond
           HashSet(InitializerList<T> il) : operationNumber(0), comparer(new System::Collections::Generic::Comparer<T>()) {
@@ -66,7 +66,7 @@ namespace Pcf {
           /// @brief Initializes a new instance of the HashSet<T> class that contains elements copied from a specified enumerable collection && that uses a specified comparer.
           /// @param collection The elements to copy
           /// @param comparer an instance of IComparer<T> used to determine the sort order of the set.
-          HashSet(const IEnumerable<T>& collection, const SharedPointer<IComparer<T>>& comparer) : operationNumber(0), comparer(comparer) {
+          HashSet(const IEnumerable<T>& collection, const refptr<IComparer<T>>& comparer) : operationNumber(0), comparer(comparer) {
             for (T item : collection)
               Add(item);
           }
@@ -360,7 +360,7 @@ namespace Pcf {
 
           std::unordered_set<T, Hasher, EqualTo, TAllocator> hashset;
           int64 operationNumber;
-          SharedPointer< IComparer<T>> comparer;
+          refptr< IComparer<T>> comparer;
 
         public:
           /// @cond

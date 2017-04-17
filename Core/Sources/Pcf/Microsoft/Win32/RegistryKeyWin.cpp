@@ -1,4 +1,4 @@
-#if _WIN32
+#if defined(_WIN32)
 
 #include "../../../../Includes/Pcf/Microsoft/Win32/Registry.h"
 #include "../../../../Includes/Pcf/Microsoft/Win32/RegistryKey.h"
@@ -9,41 +9,49 @@ using namespace System;
 using namespace Microsoft::Win32;
 
 namespace {
-  SharedPointer<object> BinaryToObject(const char* valueBytes, int32 length) {
+  refptr<object> BinaryToObject(const char* valueBytes, int32 length) {
     if (valueBytes == null)
       throw ArgumentNullException(pcf_current_information);
 
     if (length < 0)
       throw ArgumentException(pcf_current_information);
 
-    return SharedPointer<object>(new Array<byte>(reinterpret_cast<const byte*>(valueBytes), length));
+    return refptr<object>(new Array<byte>(reinterpret_cast<const byte*>(valueBytes), length));
   }
 
-  SharedPointer<object> DWordToObject(const char* valueBytes) {
+  refptr<object> DWordToObject(const char* valueBytes) {
     if (valueBytes == null)
       throw ArgumentNullException(pcf_current_information);
 
-    return SharedPointer<object>(new Int32(*reinterpret_cast<const int32*>(valueBytes)));
+    return refptr<object>(new Int32(*reinterpret_cast<const int32*>(valueBytes)));
   }
 
-  SharedPointer<object> ExpandStringToObject(const char* valueBytes) {
+  refptr<object> ExpandStringToObject(const char* valueBytes) {
+    struct AutoDeleteCharPointer {
+      AutoDeleteCharPointer(char* value) : value(value) {}
+      ~AutoDeleteCharPointer() {delete value;}
+      char* operator()() const {return this->value;}
+    private:
+      char* value;
+    };
+    
     if (valueBytes == null)
       throw ArgumentNullException(pcf_current_information);
 
     int32 length = 32768;
-    UniquePointer<char[]> expandedString(new char[length]);
+    AutoDeleteCharPointer expandedString(new char[length]);
 
-    if (__OS::CoreApi::Registry::ExpandString(valueBytes, expandedString.ToPointer(), length) == 0)
+    if (__OS::CoreApi::Registry::ExpandString(valueBytes, expandedString(), length) == 0)
       throw IO::IOException(pcf_current_information);
 
-    return SharedPointer<object>(new string(expandedString.ToPointer()));
+    return refptr<object>(new string(expandedString()));
   }
 
-  SharedPointer<object> MultiStringToObject(const char* valueBytes) {
+  refptr<object> MultiStringToObject(const char* valueBytes) {
     if (valueBytes == null)
       throw ArgumentNullException(pcf_current_information);
 
-    SharedPointer<Array<string>> vakues = new Array<string>();
+    refptr<Array<string>> vakues = new Array<string>();
 
     for (char* line = const_cast<char*>(valueBytes); line[0] != 0; line += strlen(line) + 1) {
       Array<string>::Resize(*vakues, vakues->Length + 1);
@@ -53,18 +61,18 @@ namespace {
     return vakues.ChangeType<object>();
   }
 
-  SharedPointer<object> QWordToObject(const char* valueBytes) {
+  refptr<object> QWordToObject(const char* valueBytes) {
     if (valueBytes == null)
       throw ArgumentNullException(pcf_current_information);
 
-    return SharedPointer<object>(new Int64(*reinterpret_cast<const int64*>(valueBytes)));
+    return refptr<object>(new Int64(*reinterpret_cast<const int64*>(valueBytes)));
   }
 
-  SharedPointer<object> StringToObject(const char* valueBytes) {
+  refptr<object> StringToObject(const char* valueBytes) {
     if (valueBytes == null)
       throw ArgumentNullException(pcf_current_information);
 
-    return SharedPointer<object>(new string(valueBytes));
+    return refptr<object>(new string(valueBytes));
   }
 };
 

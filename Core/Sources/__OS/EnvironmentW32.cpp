@@ -1,10 +1,11 @@
-#if _WIN32
+#if defined(_WIN32)
 
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
 #include <rpc.h>
 #include <Windows.h>
+#include "../../Includes/Pcf/Undef.h"
 
 #include "CoreApi.h"
 

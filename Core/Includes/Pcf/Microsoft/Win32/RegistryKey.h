@@ -166,7 +166,7 @@ namespace Pcf {
         /// @brief Determines whether this instance of RegistryKey && a specified object, which must also be a RegistryKey object, have the same value.
         /// @param obj The object to compare with the current object.
         /// @return bool true if the specified object is equal to the current object. otherwise, false.
-        bool Equals(const object& obj) const noexcept override { return is<RegistryKey>(obj) && Equals(static_cast<const RegistryKey&>(obj)); }
+        bool Equals(const object& obj) const override { return is<RegistryKey>(obj) && Equals(static_cast<const RegistryKey&>(obj)); }
 
         /// @brief Retrieves an array of strings that contains all the subkey names.
         System::Array<System::String> GetSubKeyNames();
@@ -253,7 +253,7 @@ namespace Pcf {
 
         /// @brief Retrieves a string representation of this key.
         /// @return A string representing the key. If the specified key is invalid (cannot be found) then "" is returned.
-        System::String ToString() const noexcept override { return this->name; }
+        System::String ToString() const override { return this->name; }
 
       private:
         void Load();
@@ -261,7 +261,7 @@ namespace Pcf {
         template<typename T>
         const object& GetValue(const System::String& name, const T& defaultValue, bool) const {
           if (! this->values.ContainsKey(name.ToLower())) {
-            static UniquePointer<object> value;
+            static refptr<object> value;
             value = new T(defaultValue);
             return value.ToObject();
           }
@@ -322,12 +322,12 @@ namespace Pcf {
               toParse = toParse.Substring(toParse.IndexOf("\">") + 2);
 
               switch (rkv.kind) {
-                case RegistryValueKind::DWord: rkv.value = SharedPointer<object>::Create<System::Int32>(System::Int32::Parse(toParse)); break;
-                case RegistryValueKind::QWord: rkv.value = SharedPointer<object>::Create<System::Int64>(System::Int64::Parse(toParse)); break;
-                case RegistryValueKind::String: rkv.value = SharedPointer<object>::Create<string, string>(toParse); break;
-                case RegistryValueKind::ExpandString: rkv.value = SharedPointer<object>::Create<string, string>(toParse); break;
-                case RegistryValueKind::Binary: rkv.value = SharedPointer<object>::Create<System::Array<byte>, System::Array<byte>>(ParseBytes(toParse)); break;
-                case RegistryValueKind::MultiString: rkv.value = SharedPointer<object>::Create<System::Array<System::String>, System::Array<System::String>>(ParseStrings(toParse)); break;
+                case RegistryValueKind::DWord: rkv.value = pcf_new<System::Int32>(System::Int32::Parse(toParse)); break;
+                case RegistryValueKind::QWord: rkv.value = pcf_new<System::Int64>(System::Int64::Parse(toParse)); break;
+                case RegistryValueKind::String: rkv.value = pcf_new<string>(toParse); break;
+                case RegistryValueKind::ExpandString: rkv.value = pcf_new<string>(toParse); break;
+                case RegistryValueKind::Binary: rkv.value = pcf_new<System::Array<byte>>(ParseBytes(toParse)); break;
+                case RegistryValueKind::MultiString: rkv.value = pcf_new<System::Array<System::String>>(ParseStrings(toParse)); break;
                 default:
                   break;
               }
@@ -338,7 +338,7 @@ namespace Pcf {
             }
           }
 
-          System::String ToString() const noexcept {
+          System::String ToString() const {
             System::String value;
             if (this->kind == RegistryValueKind::Binary) {
               for (byte item : as<System::Array<byte>>(*this->value))
@@ -386,7 +386,7 @@ namespace Pcf {
           }
 
           System::String key;
-          SharedPointer<object> value;
+          refptr<object> value;
           RegistryValueKind kind;
         };
 
@@ -404,13 +404,13 @@ namespace Pcf {
 
           bool Equals(const RegistryHandle& value) const { return this->handle == value.handle; }
 
-          bool Equals(const object& obj) const noexcept override { return is<RegistryHandle>(obj) && Equals(static_cast<const RegistryHandle&>(obj)); }
+          bool Equals(const object& obj) const override { return is<RegistryHandle>(obj) && Equals(static_cast<const RegistryHandle&>(obj)); }
 
         private:
           void* handle;
         };
 
-        SharedPointer<RegistryHandle> handle;
+        refptr<RegistryHandle> handle;
         System::String name;
         System::String path;
         RegistryKeyPermissionCheck permission;

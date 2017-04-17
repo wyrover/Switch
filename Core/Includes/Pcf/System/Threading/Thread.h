@@ -216,7 +216,7 @@ namespace Pcf {
         
         /// @brief Serves as a hash function for a particular type.
         /// @return int32 A hash code for the current Object.
-        int32 GetHashCode() const noexcept override {return this->data->managedThreadId;}
+        int32 GetHashCode() const override {return this->data->managedThreadId;}
         
         /// @brief Determines whether this instance and another specified Thread object have the same value.
         /// @param value The Thread to compare.
@@ -230,7 +230,7 @@ namespace Pcf {
         /// @exception ArgumentNullException The parameters obj is null.
         /// @return @see object
         /// @return @see Boolean
-        bool Equals(const Object& obj) const noexcept override {return is<Thread>(obj) && Equals((const Thread&)obj);}
+        bool Equals(const Object& obj) const override {return is<Thread>(obj) && Equals((const Thread&)obj);}
         
         /// @brief Notifies a host that execution is about to leave a region of code in which the effects of a thread abort.
         static void EndCriticalRegion() {
@@ -339,7 +339,6 @@ namespace Pcf {
         /// @exception ThreadStateException The thread has not been started or is dead.
         void Suspend();
         
-        #undef Yield
         /// @brief Causes the calling thread to yield execution to another thread that is ready to run on the current processor. The operating system selects the thread to yield to.
         /// @return true if the operating system switched execution to another thread; otherwise, false.
         /// @remarks If this method succeeds, the rest of the thread's current time slice is yielded. The operating system schedules the calling thread for another time slice, according to its priority and the status of other threads that are available to run.
@@ -391,7 +390,7 @@ namespace Pcf {
           static bool SetPriority(NativeHandle handle, ThreadPriority priority);
         };
         
-        Thread(const SharedPointer<ThreadItem>& data) : data(data) {}
+        Thread(const refptr<ThreadItem>& data) : data(data) {}
         
         bool Cancel();
         void Close();
@@ -432,7 +431,7 @@ namespace Pcf {
             thread.data->thread = std::thread(std::function<void(const object*)>(std::bind(&ThreadItem::ParameterizedRun, thread.data.ToPointer(), std::placeholders::_1)), obj == null ? this : obj);
         }
         
-        SharedPointer<ThreadItem> data;
+        refptr<ThreadItem> data;
         
         friend class ThreadPool;
         friend struct ThreadItem;

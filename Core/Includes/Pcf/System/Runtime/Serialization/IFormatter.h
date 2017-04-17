@@ -4,7 +4,7 @@
 
 #include "../../../Types.h"
 #include "../../../Interface.h"
-#include "../../../SharedPointer.h"
+#include "../../../RefPtr.h"
 #include "../../IO/Stream.h"
 #include "../../Object.h"
 #include "ISerializable.h"
@@ -25,7 +25,7 @@ namespace Pcf {
         public:
           /// @cond
           template<typename T>
-          T Deserialize(const SharedPointer<System::IO::Stream>& seralizationStream) {
+          T Deserialize(const refptr<System::IO::Stream>& seralizationStream) {
             T obj;
             Deserialize(seralizationStream, obj);
 
@@ -38,7 +38,7 @@ namespace Pcf {
           /// @remarks The Deserialize method reads graph information from the stream and reconstructs a clone of the original graph. The topology of the graph is preserved.
           /// @remarks The deserialization process allocates an empty object of the appropriate type and repopulates its fields from the data transmitted in the serializationStream stream.
           /// @remarks It is important to note that no constructor is ever called on the object during deserialization.
-          virtual void Deserialize(const SharedPointer<System::IO::Stream>& serializationStream, ISerializable& graph) = 0;
+          virtual void Deserialize(const refptr<System::IO::Stream>& serializationStream, ISerializable& graph) = 0;
 
           /// @brief Serializes an object, or graph of objects with the given root to the provided stream.
           /// @param serializationStream The stream where the formatter puts the serialized data. This stream can reference a variety of backing stores (such as files, network, memory, and so on).
@@ -46,7 +46,7 @@ namespace Pcf {
           /// @remarks The Serialize method automatically serializes the provided objects, and all objects connected to it, to the provided stream.
           /// @remarks By default, the serialization process records an object's state by gathering the values of all its fields (public and private).
           /// @remarks These fields are saved to the stream along with information about the object such as the name qualified by the assembly for its type.
-          virtual void Serialize(const SharedPointer<System::IO::Stream>& serializationStream, const Object& graph) = 0;
+          virtual void Serialize(const refptr<System::IO::Stream>& serializationStream, const Object& graph) = 0;
         };
       }
     }

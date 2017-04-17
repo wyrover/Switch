@@ -32,7 +32,7 @@ namespace Pcf {
       /// Less than zero      This instance is less than obj.
       /// Zero                This instance is equal to obj.
       /// Greater than zero   This instance is greater than obj.
-      int32 CompareTo(const IComparable& obj) const noexcept override {
+      int32 CompareTo(const IComparable& obj) const override {
         if (!is<BoxEnum<T>>(obj)) return 1;
         return this->CompareTo(static_cast<const BoxEnum<T>&>(obj));
       }
@@ -55,7 +55,7 @@ namespace Pcf {
       /// @param obj The object to compare with the current object.
       /// @return Boolean true if the specified object is equal to the current object. otherwise, false.
       /// @exception ArgumentNullException The parameters obj is null.
-      bool Equals(const object& obj) const noexcept override { return is<BoxEnum<T>>(obj) && Equals(static_cast<const BoxEnum<T>&>(obj)); }
+      bool Equals(const object& obj) const override { return is<BoxEnum<T>>(obj) && Equals(static_cast<const BoxEnum<T>&>(obj)); }
       
       /// @brief Set this Enum class with specified value.
       /// @param value An int32 as value.
@@ -77,7 +77,7 @@ namespace Pcf {
       
       /// @brief Serves as a hash function for a particular type.
       /// @return int32 A hash code for the current object.
-      virtual int32 GetHashCode() const noexcept override {return Int64((int64)this->value).GetHashCode();}
+      virtual int32 GetHashCode() const override {return Int64((int64)this->value).GetHashCode();}
       
       /// @brief Retrieves the name of the constant in the specified enumeration that has the specified value.
       /// @param value The value of a particular enumerated constant in terms of its underlying type.
@@ -146,7 +146,7 @@ namespace Pcf {
       static int32 ToInt32(T value);
       static int64 ToInt64(T value);
 
-      String ToString() const noexcept override {
+      String ToString() const override {
         Values();
         if (flags)
           return ToStringFlags();

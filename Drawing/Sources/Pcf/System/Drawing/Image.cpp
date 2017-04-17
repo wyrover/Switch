@@ -30,28 +30,24 @@ Property<Image, ReadOnly> Image::None {
 Image::Image() {
 }
 
-Image::Image(System::IO::Stream& stream) {
+Image::Image(refptr<System::IO::Stream> stream) {
   ReadStream(stream);
 }
 
 Image::Image(const string& fileName) {
   FileStream fs = File::Open(fileName, FileMode::Open, FileAccess::Read);
-  ReadStream(fs);
+  ReadStream(fs.MemberwiseClone<FileStream>().As<FileStream>());
 }
 
 Image::Image(const Image& image) : flags(image.flags), frameDimensionList(image.frameDimensionList), horizontalResolution(image.horizontalResolution), pixelFormat(image.pixelFormat), palette(image.palette), rawData(image.rawData), rawFormat(image.rawFormat), size(image.size), tag(image.tag), verticalResolution(image.verticalResolution) {
 }
 
-UniquePointer<Image> Image::FromFile(const string& fileName) {
+refptr<Image> Image::FromFile(const string& fileName) {
   return new Image(fileName);
 }
 
-UniquePointer<Image> Image::FromStream(System::IO::Stream& stream) {
-  return new Image(stream);
-}
-
-UniquePointer<Image> Image::FromData(const char* data[]) {
-  UniquePointer<Image> image = new Image();
+refptr<Image> Image::FromData(const char* data[]) {
+  refptr<Image> image = pcf_new<Image>();
   
   Array<string> infos = string(data[0]).Split(' ');
   int32 columns = Int32::Parse(infos[0]);
@@ -93,8 +89,8 @@ UniquePointer<Image> Image::FromData(const char* data[]) {
   return image;
 }
 
-void Image::ReadStream(System::IO::Stream& stream) {
-  UniquePointer<BinaryReader> reader = new BinaryReader(stream);
+void Image::ReadStream(refptr<System::IO::Stream> stream) {
+  refptr<BinaryReader> reader = new BinaryReader(stream);
   
   uint16 magicNumber = reader->ReadUInt16();
   reader->BaseStream().Seek(0, Pcf::System::IO::SeekOrigin::Begin);

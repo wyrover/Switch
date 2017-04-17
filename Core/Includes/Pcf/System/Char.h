@@ -192,16 +192,16 @@ namespace Pcf {
       /// @param obj The Object to compare with the current Object.
       /// @return Boolean true if the specified Object is equal to the current Object. otherwise, false.
       /// @exception ArgumentNullException The parameters obj is null.
-      bool Equals(const Object& obj) const noexcept override {return is<Char>(obj) && Equals((const Char&)obj);}
+      bool Equals(const Object& obj) const override {return is<Char>(obj) && Equals((const Char&)obj);}
 
       /// @brief Serves as a hash function for a particular type.
       /// @return Int32 A hash code for the current Object.
       /// @see Object
-      int32 GetHashCode() const noexcept override {return this->value;}
+      int32 GetHashCode() const override {return this->value;}
 
       /// @brief Returns a String that represents the current Char.
       /// @return String A String that represents the current Char.
-      String ToString() const noexcept override;
+      String ToString() const override;
 
       /// @brief Compares this instance to a specified Char Object and returns an indication of their relative values.
       /// @param value An Char Object to compare with this instance.
@@ -221,7 +221,7 @@ namespace Pcf {
       /// | Less than zero    | This instance is false and obj is true.                                   |
       /// | Zero              | This instance and obj are equal (either both are true or both are false). |
       /// | Greater than zero | This instance is true and obj is false.  -or- obj is null reference.      |
-      int32 CompareTo(const IComparable& obj) const noexcept override {
+      int32 CompareTo(const IComparable& obj) const override {
         if (!is<Char>(obj)) return 1;
         return CompareTo(static_cast<const Char&>(obj));
       }

@@ -6,7 +6,7 @@
 
 #include "../../../InitializerList.h"
 #include "../../../Types.h"
-#include "../../../SharedPointer.h"
+#include "../../../RefPtr.h"
 #include "../../Allocator.h"
 #include "../../Array.h"
 #include "../../Object.h"
@@ -42,7 +42,7 @@ namespace Pcf {
 
           /// @brief Initializes a new instance of the SortedSet<T> class that uses a specified comparer
           /// @param comparer an instance of IComparer<T> used to determine the sort order of the set.
-          SortedSet(const SharedPointer< IComparer<T>>& comparer) : comparer(comparer), set(new std::set<T, SetComparer, TAllocator>(SetComparer(this->comparer.ToPointer()))), operationNumber(0) {}
+          SortedSet(const refptr< IComparer<T>>& comparer) : comparer(comparer), set(new std::set<T, SetComparer, TAllocator>(SetComparer(this->comparer.ToPointer()))), operationNumber(0) {}
 
           /// @brief Initializes a new instance of the SortedSet<T> class that contains elements copied from a specified enumerable collection
           /// @param collection The elements to copy
@@ -54,7 +54,7 @@ namespace Pcf {
           /// @brief Initializes a new instance of the SortedSet<T> class that contains elements copied from a specified enumerable collection && that uses a specified comparer.
           /// @param collection The elements to copy
           /// @param comparer an instance of IComparer<T> used to determine the sort order of the set.
-          SortedSet(const IEnumerable<T>& collection, const SharedPointer<IComparer<T>>& comparer) : comparer(comparer), set(new std::set<T,SetComparer, TAllocator>(SetComparer(this->comparer.ToPointer()))), operationNumber(0) {
+          SortedSet(const IEnumerable<T>& collection, const refptr<IComparer<T>>& comparer) : comparer(comparer), set(new std::set<T,SetComparer, TAllocator>(SetComparer(this->comparer.ToPointer()))), operationNumber(0) {
             for (const T& item : collection)
               this->Add(item);
           }
@@ -463,8 +463,8 @@ namespace Pcf {
           /// @endcond
 
         private:
-          SharedPointer< IComparer<T>> comparer;
-          SharedPointer< std::set<T, SetComparer, TAllocator>> set;
+          refptr< IComparer<T>> comparer;
+          refptr< std::set<T, SetComparer, TAllocator>> set;
           int64 operationNumber;
           /// @endcond
 		    };

@@ -1,4 +1,4 @@
-#if __linux__ || __APPLE__
+#if defined(__linux__) || defined(__APPLE__)
 
 #include "../../../../Includes/Pcf/Microsoft/Win32/Registry.h"
 #include "../../../../Includes/Pcf/Microsoft/Win32/RegistryKey.h"
@@ -63,7 +63,7 @@ RegistryKey::RegistryKey(RegistryHive rhive)  : name(ToName(rhive)), permission(
     ::CreateDefaultFile(Path::Combine(this->path, "Values.xml"));
   }
   
-  this->handle = SharedPointer<RegistryHandle>::Create();
+  this->handle = pcf_new<RegistryHandle>();
   this->Load();
 }
 
@@ -85,7 +85,7 @@ RegistryKey RegistryKey::CreateSubKey(const System::String& subKey, RegistryKeyP
   if (this->permission != RegistryKeyPermissionCheck::ReadWriteSubTree)
     throw UnauthorizedAccessException(pcf_current_information);
   
-  key.handle = SharedPointer<RegistryHandle>::Create();
+  key.handle = pcf_new<RegistryHandle>();
   key.path = ::MakePath(this->path, subKey);
   Directory::CreateDirectory(key.path);
   ::CreateDefaultFile(Path::Combine(key.path, "Values.xml"));

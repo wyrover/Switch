@@ -11,7 +11,7 @@ Property<NullTextReader, ReadOnly> TextReader::Null {
 
 string TextReader::ReadLine() {
   string line;
-  UniquePointer<Text::Encoding::Decoder> decoder = Text::Encoding::UTF8()->CreateDecoder();
+  refptr<Text::Encoding::Decoder> decoder = Text::Encoding::UTF8()->CreateDecoder();
   for (int32 current = Read(); current != -1 && current != '\n'; current = Read()) {
     if (current != '\r') continue;
     decoder->Add(Convert::ToByte(current));
@@ -23,7 +23,7 @@ string TextReader::ReadLine() {
 
 string TextReader::ReadToEnd() {
   string text;
-  UniquePointer<Text::Encoding::Decoder> decoder = Text::Encoding::UTF8()->CreateDecoder();
+  refptr<Text::Encoding::Decoder> decoder = Text::Encoding::UTF8()->CreateDecoder();
   for (int32 current = Read(); current != -1; current = Read()) {
     if (current == '\n') continue;
     decoder->Add(Convert::ToByte(current));

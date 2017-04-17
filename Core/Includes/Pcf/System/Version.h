@@ -13,6 +13,9 @@
 #include "Object.h"
 #include "String.h"
 
+#undef major
+#undef minor
+
 /// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Pcf {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
@@ -26,8 +29,6 @@ namespace Pcf {
       /// - Minor = 0,
       Version() {}
 
-      #undef major
-      #undef minor
       /// @brief Initializes a new instance of the Version class using the specified major and minor values.
       /// @param major The major version number.
       /// @param minor The minor version number.
@@ -115,7 +116,7 @@ namespace Pcf {
 
       /// @brief Returns a new Version object whose value is the same as the current Version object.
       /// @return object* A new object whose values are a copy of the current Version object.
-      up<object> Clone() const override {return new Version(*this);}
+      refptr<object> Clone() const override {return pcf_new<Version>(*this);}
 
       /// @brief Compares the current Version object to a specified object and returns an indication of their relative values.
       /// @param obj An object to compare with this instance.
@@ -123,7 +124,7 @@ namespace Pcf {
       /// Less than zero      This instance is less than obj.
       /// Zero                This instance is equal to obj.
       /// Greater than zero   This instance is greater than obj.
-      int32 CompareTo(const IComparable& obj) const noexcept override {
+      int32 CompareTo(const IComparable& obj) const override {
         if (!is<Version>(obj))
           return 1;
         return CompareTo((const Version &)obj);
@@ -155,7 +156,7 @@ namespace Pcf {
       /// @brief Determines whether this instance of Version and a specified object, which must also be a Version object, have the same value.
       /// @param obj The object to compare with the current object.
       /// @return bool true if the specified object is equal to the current object. otherwise, false.
-      bool Equals(const object& obj) const noexcept override {
+      bool Equals(const object& obj) const override {
         if (!is<Version>(obj))
           return false;
         return Equals((const Version&)obj);
@@ -163,7 +164,7 @@ namespace Pcf {
       
       /// @brief Serves as a hash function for a particular type.
       /// @return int32 A hash code for the current object.
-      int32 GetHashCode() const noexcept override {
+      int32 GetHashCode() const override {
         int32 hash = this->major ^ this->minor;
         if (this->build != -1)
           hash ^= this->build;
@@ -197,7 +198,7 @@ namespace Pcf {
       
       /// @brief Returns a string that represents the current object.
       /// @return string A string that represents the current object.
-      String ToString() const noexcept override {return ToString(2 + (this->build != -1 ? 1 : 0) + (this->revision != -1 ? 1 : 0));}
+      String ToString() const override {return ToString(2 + (this->build != -1 ? 1 : 0) + (this->revision != -1 ? 1 : 0));}
       
       String ToString(int32 fieldCount) const {
         if (fieldCount < 0 || fieldCount> 4 || (fieldCount >= 3 && this->build == -1) || (fieldCount == 4 && this->revision == -1))

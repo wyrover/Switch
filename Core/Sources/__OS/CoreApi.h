@@ -73,36 +73,26 @@ namespace __OS {
       static char32 VolumeSeparator();
       static System::Collections::Generic::Enumerator<string> EnumerateDirectories(const string& path, const string& pattern);
       static System::Collections::Generic::Enumerator<string> EnumerateFiles(const string& path, const string& pattern);
-      #undef GetFileAttributes
       static int32 GetFileAttributes(const string& path, System::IO::FileAttributes& attributes);
       static int32 GetFileTime(const string& path, int64& creationTime, int64& lastAccessTime, int64& lastWriteTime);
       static string GetFullPath(const string& relativePath);
-      #undef GetCurrentDirectory
       static string GetCurrentDirectory();
-      #undef SetCurrentDirectory
       static int32 SetCurrentDirectory(const string& directoryName);
       static int64 GetFileSize(const string& path);
-      #undef CreateDirectory
       static int32 CreateDirectory(const string& directoryName);
-      #undef RemoveDirectory
       static int32 RemoveDirectory(const string& directoryName);
       static int32 RemoveFile(const string& file);
       static int32 RenameFile(const string& oldPath, const string& newPath);
       static string GetKnowFolderPath(System::Environment::SpecialFolder id);
-      #undef GetTempPath
       static string GetTempPath();
     };
 
     class Drive pcf_static {
     public:
       static bool GetAvailableFreeSpace(const string& rootPathName, int64& freeBytes, int64& totalNumberOfBytes, int64& totalNumberOfFreeBytes);
-      #undef GetDriveType
       static System::IO::DriveType GetDriveType(const string& rootPathName);
-      #undef GetLogicalDriveStrings
       static System::Array<string> GetDrives();
-      #undef GetVolumeInformation
       static bool GetVolumeInformation(const string& rootPathName, string& volumeName, string& fileSystemName);
-      #undef SetVolumeLabel
       static bool SetVolumeLabel(const string& rootPathName, const string& volumeName);
     };
     
@@ -129,7 +119,6 @@ namespace __OS {
       static int32 GetTickCount();
       static string GetUserDomainName();
       static bool GetUserInteractive();
-      #undef GetUserName
       static string GetUserName();
       static int64 GetWorkingSet();
       static int32 SetEnv(const string& name, const string& value);

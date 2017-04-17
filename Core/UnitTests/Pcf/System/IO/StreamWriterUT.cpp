@@ -31,7 +31,7 @@ namespace {
 
 	TEST(StreamWriter, WriteUTF8) {
 		string unicodeString = "Pi " + Char(928) + " ma " + Char(931) + " KOALA " + Char(128040);
-    SharedPointer<Text::Encoding> encoding = Text::Encoding::UTF8();
+    refptr<Text::Encoding> encoding = Text::Encoding::UTF8();
 		IO::MemoryStream s;
     IO::StreamWriter writer(s, *encoding);
     writer.Write(unicodeString);
@@ -47,7 +47,7 @@ namespace {
 	TEST(StreamWriter, Write437) {
 		string unicodeString = "a" + Char(0XE6) + "\n" + Char(0x3A3) + Char(0x2588);
 		IO::MemoryStream s;
-		SharedPointer<Text::Encoding> encoding = Text::Encoding::CreateEncoding(437);
+		refptr<Text::Encoding> encoding = Text::Encoding::CreateEncoding(437);
 		IO::StreamWriter writer(s, *encoding);
 
 		writer.Write(unicodeString);

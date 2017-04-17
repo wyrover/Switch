@@ -25,7 +25,7 @@ namespace Pcf {
       ///  * <b>Less than zero</b> This instance is less than obj.
       ///  * <b>Zero</b> This instance is equal to obj.
       ///  * <b>Greater than zero</b> This instance is greater than obj.
-      virtual int32 CompareTo(const IComparable& obj) const noexcept = 0;
+      virtual int32 CompareTo(const IComparable& obj) const = 0;
 
       /// @brief Determines whether this instance of Version and a specified object, which must also be a Version object, have the same value.
       /// @param obj The object to compare with the current object.
@@ -33,7 +33,7 @@ namespace Pcf {
       /// @exception ArgumentNullException The parameters obj is null.
       /// @return @see object
       /// @return @see Boolean
-      virtual bool Equals(const Object& obj) const noexcept = 0;
+      virtual bool Equals(const Object& obj) const = 0;
     };
 
     /// @brief Base class for n Tuple classes.
@@ -69,7 +69,7 @@ namespace Pcf {
       ///  - Less than zero      This instance is less than obj.
       ///  - Zero                This instance is equal to obj.
       ///  - Greater than zero   This instance is greater than obj.
-      int32 CompareTo(const IComparable& obj) const noexcept override {
+      int32 CompareTo(const IComparable& obj) const override {
         if (!is<TupleImpl<T1, T2, T3, T4, T5, T6, T7, T8>>(obj))
           return 1;
         return CompareTo(static_cast<const TupleImpl<T1, T2, T3, T4, T5, T6, T7, T8>&>(obj));
@@ -105,7 +105,7 @@ namespace Pcf {
       /// @param obj The object to compare with the current object.
       /// @return bool true if the specified object is equal to the current object. otherwise, false.
       /// @exception ArgumentNullException The parameters obj is null.
-      bool Equals(const Object& obj) const noexcept override {
+      bool Equals(const Object& obj) const override {
         return is<TupleImpl<T1, T2, T3, T4, T5, T6, T7, T8>>(obj) && Equals(static_cast<const TupleImpl<T1, T2, T3, T4, T5, T6, T7, T8>&>(obj));
       }
 
@@ -119,11 +119,11 @@ namespace Pcf {
 
       /// @brief Serves as a hash function for a particular type.
       /// @return Int32 A hash code for the current object.
-      int32 GetHashCode() const noexcept override { return ::GetHashCode(item1) ^ ::GetHashCode(item2) ^ ::GetHashCode(item3) ^ ::GetHashCode(item4) ^ ::GetHashCode(item5)  ^ ::GetHashCode(item6) ^ ::GetHashCode(item7)  ^ ::GetHashCode(item8); }
+      int32 GetHashCode() const override { return ::GetHashCode(item1) ^ ::GetHashCode(item2) ^ ::GetHashCode(item3) ^ ::GetHashCode(item4) ^ ::GetHashCode(item5)  ^ ::GetHashCode(item6) ^ ::GetHashCode(item7)  ^ ::GetHashCode(item8); }
 
       /// @brief Returns a string that represents the current object.
       /// @return string A string that represents the current object.
-      String ToString() const noexcept override {
+      String ToString() const override {
         String str = "(";
 
         if (!IsNullType(item1))
@@ -173,7 +173,7 @@ namespace Pcf {
     private :
       static bool IsTuple(const ITuple&) { return true; }
       template<typename T>
-      static bool IsTuple(const SharedPointer<T>&) { return false; }
+      static bool IsTuple(const refptr<T>&) { return false; }
       static bool IsTuple(const NullType&) { return false; }
       static bool IsTuple(const bool&) { return false; }
       static bool IsTuple(const char&) { return false; }
@@ -189,7 +189,7 @@ namespace Pcf {
       static bool IsTuple(const float&)  { return false; }
 
       template<typename T>
-      static bool IsNullType(const SharedPointer<T>&) { return false; }
+      static bool IsNullType(const refptr<T>&) { return false; }
       static bool IsNullType(const Object&) {  return false; }
       static bool IsNullType(const NullType&) { return true; }
       static bool IsNullType(const bool&) { return false; }

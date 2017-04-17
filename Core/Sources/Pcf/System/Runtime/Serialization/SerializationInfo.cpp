@@ -7,59 +7,59 @@ using namespace System;
 using namespace System::Runtime::Serialization;
 
 void SerializationInfo::AddValue(const string& name, const string& value) {
-  AddValue(name, SharedPointer<object>(new String(value)), value.GetType().Name());
+  AddValue(name, refptr<object>(new String(value)), value.GetType().Name());
 }
 
 void SerializationInfo::AddValue(const string& name, const Boolean& value) {
-  AddValue(name, SharedPointer<object>(new Boolean(value)), value.GetType().Name());
+  AddValue(name, refptr<object>(new Boolean(value)), value.GetType().Name());
 }
 
 void SerializationInfo::AddValue(const string& name, const Byte& value) {
-  AddValue(name, SharedPointer<object>(new Byte(value)), value.GetType().Name());
+  AddValue(name, refptr<object>(new Byte(value)), value.GetType().Name());
 }
 
 void SerializationInfo::AddValue(const string& name, const SByte& value) {
-  AddValue(name, SharedPointer<object>(new SByte(value)), value.GetType().Name());
+  AddValue(name, refptr<object>(new SByte(value)), value.GetType().Name());
 }
 
 void SerializationInfo::AddValue(const string& name, const Char& value) {
-  AddValue(name, SharedPointer<object>(new Char(value)), value.GetType().Name());
+  AddValue(name, refptr<object>(new Char(value)), value.GetType().Name());
 }
 
 void SerializationInfo::AddValue(const string& name, const DateTime& value) {
-  AddValue(name, SharedPointer<object>(new DateTime(value)), value.GetType().Name());
+  AddValue(name, refptr<object>(new DateTime(value)), value.GetType().Name());
 }
 
 void SerializationInfo::AddValue(const string& name, const Single& value) {
-  AddValue(name, SharedPointer<object>(new Single(value)), value.GetType().Name());
+  AddValue(name, refptr<object>(new Single(value)), value.GetType().Name());
 }
 
 void SerializationInfo::AddValue(const string& name, const Double& value) {
-  AddValue(name, SharedPointer<object>(new Double(value)), value.GetType().Name());
+  AddValue(name, refptr<object>(new Double(value)), value.GetType().Name());
 }
 
 void SerializationInfo::AddValue(const string& name, const Int16& value) {
-  AddValue(name, SharedPointer<object>(new Int16(value)), value.GetType().Name());
+  AddValue(name, refptr<object>(new Int16(value)), value.GetType().Name());
 }
 
 void SerializationInfo::AddValue(const string& name, const Int32& value) {
-  AddValue(name, SharedPointer<object>(new Int32(value)), value.GetType().Name());
+  AddValue(name, refptr<object>(new Int32(value)), value.GetType().Name());
 }
 
 void SerializationInfo::AddValue(const string& name, const Int64& value) {
-  AddValue(name, SharedPointer<object>(new Int64(value)), value.GetType().Name());
+  AddValue(name, refptr<object>(new Int64(value)), value.GetType().Name());
 }
 
 void SerializationInfo::AddValue(const string& name, const UInt16& value) {
-  AddValue(name, SharedPointer<object>(new UInt16(value)), value.GetType().Name());
+  AddValue(name, refptr<object>(new UInt16(value)), value.GetType().Name());
 }
 
 void SerializationInfo::AddValue(const string& name, const UInt32& value) {
-  AddValue(name, SharedPointer<object>(new UInt32(value)), value.GetType().Name());
+  AddValue(name, refptr<object>(new UInt32(value)), value.GetType().Name());
 }
 
 void SerializationInfo::AddValue(const string& name, const UInt64& value) {
-  AddValue(name, SharedPointer<object>(new UInt64(value)), value.GetType().Name());
+  AddValue(name, refptr<object>(new UInt64(value)), value.GetType().Name());
 }
 
 void SerializationInfo::AddValue(const string& name, const ISerializable& value) {
@@ -68,14 +68,14 @@ void SerializationInfo::AddValue(const string& name, const ISerializable& value)
 }
 
 void SerializationInfo::AddValue(const string& name, const ISerializable& value, const string& typeName) {
-  SharedPointer<SerializationInfo> infos = new SerializationInfo();
+  refptr<SerializationInfo> infos = new SerializationInfo();
   infos->SetObjectType(typeName);
   value.GetObjectData(*infos);
   
   mItems.Add(name,SerializationEntry(infos.ChangeType<object>(), typeName));
 }
 
-void SerializationInfo::AddValue(const string& name, SharedPointer<Object> value, const string& typeName) {
+void SerializationInfo::AddValue(const string& name, refptr<Object> value, const string& typeName) {
   if (value.IsNull())
     throw ArgumentNullException(pcf_current_information);
 
@@ -184,7 +184,7 @@ const object& SerializationInfo::GetObject(const string& name) const {
 }
 
 template<>
-SharedPointer<Boolean> SerializationInfo::GetValue<Boolean>(const string& name) const {
+refptr<Boolean> SerializationInfo::GetValue<Boolean>(const string& name) const {
   const SerializationEntry& entry = mItems[name];
   if (is<Boolean>(entry.Value().ToObject()))
     return entry.Value().ChangeType<Boolean>();
@@ -195,7 +195,7 @@ SharedPointer<Boolean> SerializationInfo::GetValue<Boolean>(const string& name) 
 }
 
 template<>
-SharedPointer<string> SerializationInfo::GetValue<string>(const string& name) const {
+refptr<string> SerializationInfo::GetValue<string>(const string& name) const {
   const SerializationEntry& entry = mItems[name];
   if (is<string>(entry.Value().ToObject()))
     return entry.Value().ChangeType<string>();
@@ -204,7 +204,7 @@ SharedPointer<string> SerializationInfo::GetValue<string>(const string& name) co
 }
 
 template<>
-SharedPointer<Byte> SerializationInfo::GetValue<Byte>(const string& name) const {
+refptr<Byte> SerializationInfo::GetValue<Byte>(const string& name) const {
   const SerializationEntry& entry = mItems[name];
   if (is<Byte>(entry.Value().ToObject()))
     return entry.Value().ChangeType<Byte>();
@@ -215,7 +215,7 @@ SharedPointer<Byte> SerializationInfo::GetValue<Byte>(const string& name) const 
 }
 
 template<>
-SharedPointer<SByte> SerializationInfo::GetValue<SByte>(const string& name) const {
+refptr<SByte> SerializationInfo::GetValue<SByte>(const string& name) const {
   const SerializationEntry& entry = mItems[name];
   if (is<SByte>(entry.Value().ToObject()))
     return entry.Value().ChangeType<SByte>();
@@ -226,7 +226,7 @@ SharedPointer<SByte> SerializationInfo::GetValue<SByte>(const string& name) cons
 }
 
 template<>
-SharedPointer<Char> SerializationInfo::GetValue<Char>(const string& name) const {
+refptr<Char> SerializationInfo::GetValue<Char>(const string& name) const {
   const SerializationEntry& entry = mItems[name];
   if (is<Char>(entry.Value().ToObject()))
     return entry.Value().ChangeType<Char>();
@@ -237,7 +237,7 @@ SharedPointer<Char> SerializationInfo::GetValue<Char>(const string& name) const 
 }
 
 template<>
-SharedPointer<DateTime> SerializationInfo::GetValue<DateTime>(const string& name) const {
+refptr<DateTime> SerializationInfo::GetValue<DateTime>(const string& name) const {
   const SerializationEntry& entry = mItems[name];
   if (is<DateTime>(entry.Value().ToObject()))
     return entry.Value().ChangeType<DateTime>();
@@ -248,7 +248,7 @@ SharedPointer<DateTime> SerializationInfo::GetValue<DateTime>(const string& name
 }
 
 template<>
-SharedPointer<Single> SerializationInfo::GetValue<Single>(const string& name) const {
+refptr<Single> SerializationInfo::GetValue<Single>(const string& name) const {
   const SerializationEntry& entry = mItems[name];
   if (is<Single>(entry.Value().ToObject()))
     return entry.Value().ChangeType<Single>();
@@ -259,7 +259,7 @@ SharedPointer<Single> SerializationInfo::GetValue<Single>(const string& name) co
 }
 
 template<>
-SharedPointer<Double> SerializationInfo::GetValue<Double>(const string& name) const {
+refptr<Double> SerializationInfo::GetValue<Double>(const string& name) const {
   const SerializationEntry& entry = mItems[name];
   if (is<Double>(entry.Value().ToObject()))
     return entry.Value().ChangeType<Double>();
@@ -270,7 +270,7 @@ SharedPointer<Double> SerializationInfo::GetValue<Double>(const string& name) co
 }
 
 template<>
-SharedPointer<Int16> SerializationInfo::GetValue<Int16>(const string& name) const {
+refptr<Int16> SerializationInfo::GetValue<Int16>(const string& name) const {
   const SerializationEntry& entry = mItems[name];
   if (is<Int16>(entry.Value().ToObject()))
     return entry.Value().ChangeType<Int16>();
@@ -281,7 +281,7 @@ SharedPointer<Int16> SerializationInfo::GetValue<Int16>(const string& name) cons
 }
 
 template<>
-SharedPointer<Int32> SerializationInfo::GetValue<Int32>(const string& name) const {
+refptr<Int32> SerializationInfo::GetValue<Int32>(const string& name) const {
   const SerializationEntry& entry = mItems[name];
   if (is<Int32>(entry.Value().ToObject()))
     return entry.Value().ChangeType<Int32>();
@@ -292,7 +292,7 @@ SharedPointer<Int32> SerializationInfo::GetValue<Int32>(const string& name) cons
 }
 
 template<>
-SharedPointer<Int64> SerializationInfo::GetValue<Int64>(const string& name) const {
+refptr<Int64> SerializationInfo::GetValue<Int64>(const string& name) const {
   const SerializationEntry& entry = mItems[name];
   if (is<Int64>(entry.Value().ToObject()))
     return entry.Value().ChangeType<Int64>();
@@ -303,7 +303,7 @@ SharedPointer<Int64> SerializationInfo::GetValue<Int64>(const string& name) cons
 }
 
 template<>
-SharedPointer<UInt16> SerializationInfo::GetValue<UInt16>(const string& name) const {
+refptr<UInt16> SerializationInfo::GetValue<UInt16>(const string& name) const {
   const SerializationEntry& entry = mItems[name];
   if (is<UInt16>(entry.Value().ToObject()))
     return entry.Value().ChangeType<UInt16>();
@@ -314,7 +314,7 @@ SharedPointer<UInt16> SerializationInfo::GetValue<UInt16>(const string& name) co
 }
 
 template<>
-SharedPointer<UInt32> SerializationInfo::GetValue<UInt32>(const string& name) const {
+refptr<UInt32> SerializationInfo::GetValue<UInt32>(const string& name) const {
   const SerializationEntry& entry = mItems[name];
   if (is<UInt32>(entry.Value().ToObject()))
     return entry.Value().ChangeType<UInt32>();
@@ -325,7 +325,7 @@ SharedPointer<UInt32> SerializationInfo::GetValue<UInt32>(const string& name) co
 }
 
 template<>
-SharedPointer<UInt64> SerializationInfo::GetValue<UInt64>(const string& name) const {
+refptr<UInt64> SerializationInfo::GetValue<UInt64>(const string& name) const {
   const SerializationEntry& entry = mItems[name];
   if (is<UInt64>(entry.Value().ToObject()))
     return entry.Value().ChangeType<UInt64>();

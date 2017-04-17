@@ -57,7 +57,7 @@ int64 WebResponse::GetResponseCode() const {
     throw NotSupportedException(pcf_current_information);
 
   int64 code = 0;
-  Curl::GetResponseCode(this->webRequest->GetRequestHandle(), &code);
+  Curl::GetResponseCode(this->webRequest->GetRequestHandle(), code);
   return int64(code);
 }
 

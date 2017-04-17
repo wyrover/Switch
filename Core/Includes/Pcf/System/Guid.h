@@ -29,7 +29,6 @@ namespace Pcf {
       explicit Guid(const Array<byte>& bytes) {
         if (bytes.Length != this->data.Length)
           throw ArgumentException(pcf_current_information);
-
         this->data = bytes;
       }
 
@@ -42,7 +41,6 @@ namespace Pcf {
           throw ArgumentNullException(pcf_current_information);
         if (dataSize != this->data.Length)
           throw ArgumentException(pcf_current_information);
-
         this->data = Array<byte>(bytes);
       }
 
@@ -63,7 +61,6 @@ namespace Pcf {
           throw ArgumentNullException(pcf_current_information);
         if (dataSize != this->data.Length)
           throw ArgumentException(pcf_current_information);
-
         this->data = Array<byte>(bytes, dataSize);
       }
 
@@ -127,6 +124,7 @@ namespace Pcf {
       Guid(int32 a, int16 b, int16 c, const byte d[8]) {
         if (d == null)
           throw ArgumentNullException(pcf_current_information);
+
         this->data[0] = (byte)((a&0xFF000000)>>24);
         this->data[1] = (byte)((a&0x00FF0000)>>16);
         this->data[2] = (byte)((a&0x0000FF00)>>8);
@@ -237,33 +235,28 @@ namespace Pcf {
 
       int32 CompareTo(const Guid& value) const {
         for (int32 i = 0; i < this->data.Length; i++)
-          if (this->data[i] > value.data[i])
-            return 1;
-          else if (this->data[i] < value.data[i])
-            return -1;
+          if (this->data[i] > value.data[i]) return 1;
+          else if (this->data[i] < value.data[i]) return -1;
         return 0;
       }
 
-      int32 CompareTo(const IComparable& obj) const noexcept override {
-        if (!is<Guid>(obj))
-          return 1;
+      int32 CompareTo(const IComparable& obj) const override {
+        if (!is<Guid>(obj)) return 1;
         return CompareTo(static_cast<const Guid&>(obj));
       }
 
       /// @brief Serves as a hash function for a particular type.
       /// @return Int32 A hash code for the current object.
-      int32 GetHashCode() const noexcept override {
+      int32 GetHashCode() const override {
         int32 hashCode = 0;
-
         for (int32 i = 0; i< this->data.Length; i++)
           hashCode ^= this->data[i];
-
         return hashCode;
       }
 
       bool Equals(const Guid& value) const {return this->data == value.data;}
 
-      bool Equals(const object& obj) const noexcept override {return is<Guid>(obj) && Equals(static_cast<const Guid&>(obj));}
+      bool Equals(const object& obj) const override {return is<Guid>(obj) && Equals(static_cast<const Guid&>(obj));}
 
       /// @brief Initializes a new instance of the Guid structure.
       /// @return Guid A new GUID object.
@@ -273,16 +266,14 @@ namespace Pcf {
 
       /// @brief Returns a 16-element byte array that contains the value of this instance.
       /// @return Array<Byte> A 16-element byte array.
-      Array<byte> ToByteArray() const {
-        return this->data;
-      }
+      Array<byte> ToByteArray() const {return this->data;}
 
       /// @brief Returns a string representation of the value of this instance in registry format.
       /// @return string The value of this Guid, formatted by using the "D" format specifier as follows:
       /// xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
       /// where the value of the GUID is represented as a series of lowercase hexadecimal digits in groups of 8, 4, 4, 4, and 12 digits and separated by hyphens. An example of a return value is "382c74c3-721d-4f34-80e5-57657b6cbc27". To convert the hexadecimal digits from a through f to uppercase, call the string.ToString method on the returned string.
       /// @remarks This method provides a default GUID format that is sufficient for typical use; however, other versions of this method that take a format parameter provide a few common format variations.
-      String ToString() const noexcept override { return ToString("D"); }
+      String ToString() const override { return ToString("D"); }
 
       /// @brief Returns a string representation of the value of this Guid instance, according to the provided format specifier.
       /// @param format A single format specifier that indicates how to format the value of this Guid. The format parameter can be "N", "D", "B", "P", or "X". If format is null or an empty string (""), "D" is used.

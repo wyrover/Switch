@@ -1,7 +1,6 @@
 #include <codecvt>
 #include <locale>
 #include "../../../Includes/Pcf/System/String.h"
-#include "../../../Includes/Pcf/UniquePointer.h"
 #include "../../../Includes/Pcf/System/Array.h"
 #include "../../../Includes/Pcf/System/Convert.h"
 #include "../../../Includes/Pcf/System/FormatProvider.h"
@@ -12,7 +11,7 @@
 #include "../../../Includes/Pcf/Boxing.h"
 #include "ArrayAlgorithms.h"
 
-#if _WIN32
+#if defined(_WIN32)
 using __char16 = __int16;
 using __char32 = __int32;
 #else
@@ -324,7 +323,7 @@ bool String::Equals(const String& strA, const String& strB, bool ignoreCase) {
 using CharEnum = System::Collections::Generic::Enumerator<char32>;
 
 // { uX }
-static char32 ReadUnicodeLitteral(Reference<CharEnum> enumerator) {
+static char32 ReadUnicodeLitteral(ref<CharEnum> enumerator) {
   String toParse;
   do {
     char32 c = enumerator().Current;
@@ -344,7 +343,7 @@ struct FormatInformation {
 };
 
 // { index[,alignment][ : formatString] }
-static void ReadFormat(Reference<CharEnum> enumerator, FormatInformation& info) {
+static void ReadFormat(ref<CharEnum> enumerator, FormatInformation& info) {
   String format;
   do {
     char32 c = enumerator().Current;
@@ -374,11 +373,11 @@ static void ReadFormat(Reference<CharEnum> enumerator, FormatInformation& info) 
   throw FormatException("An opened bracket '{' is !closed by '}'", pcf_current_information);
 }
 
-String String::Format(const String& format, const Array<Reference<Object>>& args) {
+String String::Format(const String& format, const Array<ref<Object>>& args) {
   return Format(System::FormatProvider(), format, args);
 }
 
-String String::Format(const IFormatProvider& provider, const String& format, const Array<Reference<Object>>& args) {
+String String::Format(const IFormatProvider& provider, const String& format, const Array<ref<Object>>& args) {
   return FormatToString(provider, format, args);
 }
 
@@ -447,7 +446,7 @@ String String::FormatToString(const IFormatProvider& provider, const String& for
   return output;
 }
 
-String String::FormatToString(const IFormatProvider& provider, const String& format, const Array<Reference<object>>& args) {
+String String::FormatToString(const IFormatProvider& provider, const String& format, const Array<ref<object>>& args) {
   StringType output;
   output.reserve(2048);
   CharEnum enumerator = format.GetEnumerator();
@@ -946,7 +945,7 @@ Array<char> String::ToCCharArray(int32 startIndex, int32 length) const  {
 }
 
 Array<char> String::ToCCharArray(int32 codePage) const {
-  UniquePointer<Text::Encoding> encoding = Text::Encoding::CreateEncoding(codePage);
+  refptr<Text::Encoding> encoding = Text::Encoding::CreateEncoding(codePage);
   if (!encoding->IsSingleByte())
     throw InvalidOperationException(pcf_current_information);
   
@@ -956,7 +955,7 @@ Array<char> String::ToCCharArray(int32 codePage) const {
 }
 
 Array<char> String::ToCCharArray(int32 startIndex, int32 length, int32 codePage) const {
-  UniquePointer<Text::Encoding> encoding = Text::Encoding::CreateEncoding(codePage);
+  refptr<Text::Encoding> encoding = Text::Encoding::CreateEncoding(codePage);
   if (!encoding->IsSingleByte())
     throw InvalidOperationException(pcf_current_information);
   
@@ -1018,33 +1017,33 @@ String String::TrimStart(const Array<char32>& trimChars) const {
   return String();
 }
 
-bool String::Equals(const object& obj) const noexcept {
+bool String::Equals(const object& obj) const {
   if (GetType() == obj.GetType())
     return Equals(static_cast<const String&>(obj));
 
   return false;
 }
 
-int32 String::GetHashCode() const noexcept {
+int32 String::GetHashCode() const {
   int32 hash = 0;
   for (StringType::const_iterator it = (this->string).begin(); it != (this->string).end(); it++)
     hash = 5 * hash + *it;
   return hash;
 }
 
-string String::ToString() const noexcept {
+string String::ToString() const {
   return *this;
 }
 
-up<object> String::Clone() const {
-  return new String(*this);
+refptr<object> String::Clone() const {
+  return pcf_new<String>(*this);
 }
 
 int32 String::CompareTo(const String& value) const {
   return strcmp(this->string.c_str(), value.string.c_str());
 }
 
-int32 String::CompareTo(const IComparable& obj) const noexcept {
+int32 String::CompareTo(const IComparable& obj) const {
   if (!is<String>(obj))
     return 1;
 
@@ -1358,7 +1357,7 @@ String::Enumerator& String::Enumerator::operator =(const String::Enumerator& oth
   return *this;
 }
 
-bool String::Enumerator::Equals(const Object& obj) const noexcept {
+bool String::Enumerator::Equals(const Object& obj) const {
   const String::Enumerator* other = dynamic_cast<const String::Enumerator*>(&obj);
   if (other == null) return false;
   
@@ -1424,7 +1423,7 @@ String::ReverseEnumerator& String::ReverseEnumerator::operator =(const String::R
   return *this;
 }
 
-bool String::ReverseEnumerator::Equals(const Object& obj) const noexcept {
+bool String::ReverseEnumerator::Equals(const Object& obj) const {
   const String::ReverseEnumerator* other = dynamic_cast<const String::ReverseEnumerator*>(&obj);
   if (other == null) return false;
   

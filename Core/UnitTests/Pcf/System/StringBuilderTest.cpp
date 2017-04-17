@@ -129,7 +129,7 @@ namespace PcfUnitTests {
     }
     
     void GetChar32() {
-#if !_WIN32
+#if !defined(_WIN32)
       StringBuilder sb(U"こんにちは世界!");
       Assert::AreEqual(U'\U0000306f', sb[4], pcf_current_information);
 #endif
@@ -142,7 +142,7 @@ namespace PcfUnitTests {
     }
     
     void SetChar32() {
-#if !_WIN32
+#if !defined(_WIN32)
       StringBuilder sb(U"こんにちは世界!");
       sb[4] = U'こ';
       Assert::AreEqual(U'こ', sb[4], pcf_current_information);
@@ -232,7 +232,7 @@ namespace PcfUnitTests {
     }
    
     void AppendChar32() {
-#if !_WIN32
+#if !defined(_WIN32)
       Assert::AreEqual(U"String Builder こ", StringBuilder("String Builder ").Append(U'こ').ToString(), pcf_current_information);
 #endif
     }
@@ -243,7 +243,7 @@ namespace PcfUnitTests {
     }
     
     void AppendChar32Pointer() {
-#if !_WIN32
+#if !defined(_WIN32)
       const char32 test[] {U'こ' , U'ん', U'に', U'ち'};
       Assert::AreEqual(U"String Builder こんにち", StringBuilder("String Builder ").Append(test, 4).ToString(), pcf_current_information);
 #endif
@@ -284,7 +284,7 @@ namespace PcfUnitTests {
     void AppendObject() {
       class MyObject : public object {
       public:
-        String ToString() const noexcept override {return "MyObject string";}
+        String ToString() const override {return "MyObject string";}
       };
       Assert::AreEqual("String Builder MyObject string", StringBuilder("String Builder ").Append(MyObject()).ToString(), pcf_current_information);
     }
@@ -292,7 +292,7 @@ namespace PcfUnitTests {
     void AppendAnyClass() {
       class AnyClass {
       public:
-        String ToString() const noexcept {return "AnyClass string";}
+        String ToString() const {return "AnyClass string";}
       };
       Assert::AreEqual(U"String Builder AnyClass string", StringBuilder("String Builder ").Append(AnyClass()).ToString(), pcf_current_information);
     }

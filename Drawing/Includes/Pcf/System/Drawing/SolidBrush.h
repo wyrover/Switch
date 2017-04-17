@@ -21,9 +21,7 @@ namespace Pcf {
           pcf_get {return this->color;}
         };
 
-        UniquePointer<object> Clone() const override {
-          return as<object>(UniquePointer<SolidBrush>::Create(this->color));
-        };
+        refptr<object> Clone() const override {return pcf_new<SolidBrush>(this->color);};
 
       private:
         System::Drawing::Color color;

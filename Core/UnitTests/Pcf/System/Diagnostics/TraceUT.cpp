@@ -175,9 +175,9 @@ namespace {
     string dataString("Data string");
     const Object& dataObject=string("Data object");
 
-    Array<SharedPointer<Object>> dataArray(2);
-    dataArray[0] = SharedPointer<Object>::Create<string>("Object 0");
-    dataArray[1] = SharedPointer<Object>::Create<string>("Object 1");
+    Array<refptr<Object>> dataArray(2);
+    dataArray[0] = pcf_new<string>("Object 0");
+    dataArray[1] = pcf_new<string>("Object 1");
 
     TraceSource traceSource("TraceUnittest");
 

@@ -1,0 +1,38 @@
+#include <Pcf/Pcf>
+
+using namespace System;
+using namespace System::Threading;
+
+namespace Examples {
+  class Program {
+  public:
+    // The main entry point for the application.
+    static void Main() {
+      ExceptionPtr exceptionPtr;
+      
+      Thread thread(ThreadStart(pcf_delegate {
+        try {
+          throw ArgumentNullException("Ouch there are an error !", pcf_current_information);
+        } catch(...) {
+          exceptionPtr = ExceptionPtr::CurrentException;
+        }
+      }));
+      thread.Start();
+      thread.Join();
+      
+      if (exceptionPtr) {
+        try {
+          exceptionPtr.Rethrow();
+        } catch(const ArgumentNullException& exception) {
+          Console::WriteLine(exception.Message);
+        }
+      }
+    }
+  };
+}
+
+pcf_startup (Examples::Program)
+
+// This code produces the following output:
+//
+// Ouch there are an error !

@@ -21,15 +21,14 @@
 using namespace System;
 using namespace System::Collections::Generic;
 
-#if _WIN32
+#if defined(_WIN32)
   __declspec(dllimport) extern char** environ;
 #else
   extern char** environ;
 #endif
 
 namespace {
-  class ConsoleChangeCodePage {
-  public:
+  struct ConsoleChangeCodePage {
     ConsoleChangeCodePage() {
       __OS::CoreApi::Console::SetInputCodePage(65001);
       __OS::CoreApi::Console::SetOutputCodePage(65001);
@@ -45,8 +44,7 @@ namespace {
     int32 previousOutputCodePage = __OS::CoreApi::Console::GetOutputCodePage();
   };
   
-  class ConsoleInterceptSignals {
-  public:
+  struct ConsoleInterceptSignals {
     ConsoleInterceptSignals() {
       auto signalKeys =__OS::CoreApi::Console::GetSignalKeys();
       for(auto signal : signalKeys)
@@ -64,14 +62,13 @@ namespace {
       static auto signalKeys =__OS::CoreApi::Console::GetSignalKeys();
       ::signal(signal, ConsoleInterceptSignals::SignalHandler);
       System::ConsoleCancelEventArgs consoleCancel = System::ConsoleCancelEventArgs(false, signalKeys[signal]);
-      System::Console::CancelKeyPress(Reference<object>::Null(), consoleCancel);
+      System::Console::CancelKeyPress(ref<object>::Null(), consoleCancel);
       if (consoleCancel.Cancel == false)
         Environment::Exit(-1);
     }
   };
   
-  class SignalCatcher {
-  public:
+  struct SignalCatcher {
     SignalCatcher() {
       signal(SIGILL, SignalCatcher::SignalIllegalInstructionHandler);
       signal(SIGABRT, SignalCatcher::SignalAbortExceptionHandler);
@@ -125,11 +122,11 @@ namespace {
   };
   
   int32 exitCode;
-  UniquePointer<SocketInit> socketInit;
-  UniquePointer<System::Array<String>> commandLineArgs;
-  UniquePointer<ConsoleChangeCodePage> consoleChangeCodePage;
-  UniquePointer<ConsoleInterceptSignals> consoleInterceptSignals;
-  UniquePointer<SignalCatcher> signalCatcher;
+  refptr<SocketInit> socketInit;
+  refptr<System::Array<String>> commandLineArgs;
+  refptr<ConsoleChangeCodePage> consoleChangeCodePage;
+  refptr<ConsoleInterceptSignals> consoleInterceptSignals;
+  refptr<SignalCatcher> signalCatcher;
 }
 
 Property<String, ReadOnly> Environment::CommandLine {
@@ -265,12 +262,8 @@ const Array<String>& Environment::GetCommandLineArgs() {
 }
 
 String Environment::GetEnvironmentVariable(const String& variable) {
-  char* value = getenv(variable.Data());
-  
-  if (value == null)
-    return "";
-  
-  return value;
+  char* value = getenv(variable.Data());  
+  return value == null ? "" : value;
 }
 
 const Collections::Generic::IDictionary<String, String>& Environment::GetEnvironmentVariables() {
@@ -304,12 +297,12 @@ Array<string> Environment::SetCommandLineArgs(char* argv[], int argc) {
   if (commandLineArgs != null)
     throw InvalidOperationException("Can be called only once", pcf_current_information);
 
-  socketInit = UniquePointer<SocketInit>();
-  consoleChangeCodePage = UniquePointer<ConsoleChangeCodePage>::Create();
-  //consoleInterceptSignals = UniquePointer<ConsoleInterceptSignals>::Create();
-  signalCatcher = UniquePointer<SignalCatcher>::Create();
+  socketInit = pcf_new<SocketInit>();
+  consoleChangeCodePage = pcf_new<ConsoleChangeCodePage>();
+  consoleInterceptSignals = pcf_new<ConsoleInterceptSignals>();
+  signalCatcher = pcf_new<SignalCatcher>();
   System::Threading::Thread::RegisterCurrentThread();
-  commandLineArgs = UniquePointer<Array<string>>::Create(std::vector<string>(argv, argv+argc));
+  commandLineArgs = pcf_new<Array<string>>(std::vector<string>(argv, argv+argc));
   return Array<string>(std::vector<string>(argv+1, argv+argc));
 }
 

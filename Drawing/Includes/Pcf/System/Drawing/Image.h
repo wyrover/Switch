@@ -4,7 +4,7 @@
 
 #include <Pcf/System/Object.h>
 #include <Pcf/System/String.h>
-#include <Pcf/SharedPointer.h>
+#include <Pcf/RefPtr.h>
 #include <Pcf/System/Array.h>
 #include <Pcf/System/IComparable.h>
 #include <Pcf/System/IO/Stream.h>
@@ -121,13 +121,16 @@ namespace Pcf {
           pcf_get {return this->size.Width();}
         };
 
-        static UniquePointer<Image> FromFile(const string& fileName);
+        static refptr<Image> FromFile(const string& fileName);
+        
+        template<typename TStream>
+        static refptr<Image> FromStream(const TStream& stream) {return new Image(stream.template MemberwiseClone<TStream>().template As<TStream>());}
+        
+        static refptr<Image> FromStream(refptr<System::IO::Stream> stream) {return new Image(stream);}
 
-        static UniquePointer<Image> FromStream(System::IO::Stream& stream);
+        static refptr<Image> FromData(const char* data[]);
 
-        static UniquePointer<Image> FromData(const char* data[]);
-
-        virtual int32 CompareTo(const IComparable& obj) const noexcept {
+        virtual int32 CompareTo(const IComparable& obj) const {
           if (!is<Image>(obj))
             return 1;
           return CompareTo(as<Image>(obj));
@@ -135,7 +138,7 @@ namespace Pcf {
 
         virtual int32 CompareTo(const Image& value) const {return IntPtr((intptr)&rawData).CompareTo(IntPtr((intptr)&rawData));}
 
-        virtual int32 GetHashCode() const noexcept {return IntPtr((intptr)&rawData).GetHashCode();}
+        virtual int32 GetHashCode() const {return IntPtr((intptr)&rawData).GetHashCode();}
 
       protected:
         /// @cond
@@ -144,11 +147,11 @@ namespace Pcf {
         friend Png;
         friend Gif;
         friend Resources::Image;
-        Image(const string & fileName);
-        Image(System::IO::Stream& stream);
+        Image(const string& fileName);
+        Image(refptr<System::IO::Stream> stream);
         
-        void ReadStream(System::IO::Stream& stream);
-        void ReadWindowsBmp(System::IO::Stream& stream);
+        void ReadStream(refptr<System::IO::Stream> stream);
+        void ReadWindowsBmp(refptr<System::IO::Stream> stream);
 
         Imaging::ImageFlags flags;
         Array<Guid> frameDimensionList;

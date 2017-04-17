@@ -2,7 +2,6 @@
 /// @brief Contains Pcf::System::IO::StreamWriter class.
 #pragma once
 
-#include "../../UniquePointer.h"
 #include "../Text/Encoding.h"
 #include "FileStream.h"
 #include "TextWriter.h"
@@ -17,7 +16,7 @@ namespace Pcf {
       class pcf_public StreamWriter : public TextWriter {
       public:
         static Property<StreamWriter, ReadOnly> Null;
-
+        
         /// @brief Initializes a new instance of the System::IO::StreamWriter class for the specified file on the specified stream pointer.
         /// @param stream The stream pointer to write to.
         /// @exception ArgumentException stream is not writable.
@@ -28,6 +27,15 @@ namespace Pcf {
           if (!stream.CanWrite())
             throw ArgumentException(pcf_current_information);
           this->data->stream = stream.template MemberwiseClone<TStream>().template As<Stream>();
+        }
+        
+        /// @brief Initializes a new instance of the System::IO::StreamWriter class for the specified file on the specified stream pointer.
+        /// @param stream The stream pointer to write to.
+        /// @exception ArgumentException stream is not writable.
+        StreamWriter(refptr<Stream> stream) {
+          if (!stream->CanWrite())
+            throw ArgumentException(pcf_current_information);
+          this->data->stream = stream;
         }
 
         /// @brief Initializes a new instance of the StreamWriter class for the specified stream by using the specified encoding and the default buffer size
@@ -82,7 +90,7 @@ namespace Pcf {
         };
 
         /// @brief Gets the underlying stream that interfaces with a backing store.
-        /// @return SharedPointer<Stream> The stream this StreamWriter is writing to.
+        /// @return refptr<Stream> The stream this StreamWriter is writing to.
         Property<Stream&, ReadOnly> BaseStream {
           pcf_get->Stream& {return this->GetBaseStream();}
         };
@@ -117,10 +125,10 @@ namespace Pcf {
 
         struct StreamWriterData {
           bool autoFlush {false};
-          SharedPointer<Stream> stream;
+          refptr<Stream> stream;
         };
         
-        SharedPointer<StreamWriterData> data {new StreamWriterData()};
+        refptr<StreamWriterData> data {new StreamWriterData()};
         
       };
     }

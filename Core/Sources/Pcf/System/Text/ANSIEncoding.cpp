@@ -52,7 +52,7 @@ int32 ANSIEncoding::GetMaxCharCount(int32 byteCount) const {
   return byteCount;
 }
 
-bool ANSIEncoding::Equals(const object& obj) const noexcept {
+bool ANSIEncoding::Equals(const object& obj) const {
   const ANSIEncoding* enc = dynamic_cast<const ANSIEncoding*>(&obj);
   if (enc == null)
     return false;
@@ -67,12 +67,12 @@ CodePage437Encoding::CodePage437Encoding() : ANSIEncoding(437) {
   
 }
 
-UniquePointer<Encoding::Decoder> CodePage437Encoding::CreateDecoder() const {
-  return UniquePointer<Encoding::Decoder>::Create<Decoder>();
+refptr<Encoding::Decoder> CodePage437Encoding::CreateDecoder() const {
+  return pcf_new<Decoder>();
 }
 
-UniquePointer<Encoding::Encoder> CodePage437Encoding::CreateEncoder() const {
-  return UniquePointer<Encoding::Encoder>::Create<Encoder>();
+refptr<Encoding::Encoder> CodePage437Encoding::CreateEncoder() const {
+  return pcf_new<Encoder>();
 }
 
 int32 CodePage437Encoding::GetBytes(char32 c, byte bytes[], int32 bytesLength, int32 index) const {
@@ -94,12 +94,12 @@ CodePage28591Encoding::CodePage28591Encoding() : ANSIEncoding(28591) {
   
 }
 
-UniquePointer<Encoding::Decoder> CodePage28591Encoding::CreateDecoder() const {
-  return UniquePointer<Encoding::Decoder>::Create<Decoder>();
+refptr<Encoding::Decoder> CodePage28591Encoding::CreateDecoder() const {
+  return pcf_new<Decoder>();
 }
 
-UniquePointer<Encoding::Encoder> CodePage28591Encoding::CreateEncoder() const {
-  return UniquePointer<Encoding::Encoder>::Create<Encoder>();
+refptr<Encoding::Encoder> CodePage28591Encoding::CreateEncoder() const {
+  return pcf_new<Encoder>();
 }
 
 int32 CodePage28591Encoding::GetBytes(char32 c, byte bytes[], int32 bytesLength, int32 index) const {
@@ -122,12 +122,12 @@ CodePage28592Encoding::CodePage28592Encoding() : ANSIEncoding(28592) {
   
 }
 
-UniquePointer<Encoding::Decoder> CodePage28592Encoding::CreateDecoder() const {
-  return UniquePointer<Encoding::Decoder>::Create<Decoder>();
+refptr<Encoding::Decoder> CodePage28592Encoding::CreateDecoder() const {
+  return pcf_new<Decoder>();
 }
 
-UniquePointer<Encoding::Encoder> CodePage28592Encoding::CreateEncoder() const {
-  return UniquePointer<Encoding::Encoder>::Create<Encoder>();
+refptr<Encoding::Encoder> CodePage28592Encoding::CreateEncoder() const {
+  return pcf_new<Encoder>();
 }
 
 int32 CodePage28592Encoding::GetBytes(char32 c, byte bytes[], int32 bytesLength, int32 index) const {
@@ -171,7 +171,7 @@ void ANSIEncoding::Encoder::Encode(char32 codePoint, byte* bytes) const {
   bytes[0] = encoder->GetByte(codePoint);
 }
 
-String ANSIEncoding::Encoder::ToString() const noexcept {
+String ANSIEncoding::Encoder::ToString() const {
   return String::Format("Code Page {0} Encoder", codePage);
 }
 
@@ -493,7 +493,7 @@ void ANSIEncoding::Decoder::Reset() {
   Encoding::Decoder::Reset();
 }
 
-String ANSIEncoding::Decoder::ToString() const noexcept {
+String ANSIEncoding::Decoder::ToString() const {
   return String::Format("Code Page {0} Decoder", codePage);
 }
 

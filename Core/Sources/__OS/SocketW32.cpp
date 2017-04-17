@@ -1,9 +1,10 @@
-#if _WIN32
-
-#include <Winsock2.h>
+#if defined(_WIN32)
 
 #include <cstring>
 #include <cstdlib>
+
+#include <Winsock2.h>
+#include "../../Includes/Pcf/Undef.h"
 
 #include "CoreApi.h"
 #include "../../Includes/Pcf/System/Collections/Generic/SortedDictionary.h"

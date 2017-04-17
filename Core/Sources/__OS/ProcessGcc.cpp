@@ -1,4 +1,4 @@
-#if __linux__ || __APPLE__
+#if defined(__linux__) || defined(__APPLE__)
 
 #include <sys/types.h>
 #include <sys/wait.h>
@@ -8,7 +8,7 @@
 #include "../../Includes/Pcf/System/IO/Path.h"
 #include "../../Includes/Pcf/System/Threading/Thread.h"
 
-#if __APPLE__
+#if defined(__APPLE__)
 #include <libproc.h>
 
 namespace {
@@ -30,7 +30,7 @@ namespace {
       pcf_get {return this->path;}
     };
     
-    String ToString() const noexcept override {return string::Format("{{pid={0}, Name={1}, Path={2}}}", this->pid, this->name, this->path);}
+    String ToString() const override {return string::Format("{{pid={0}, Name={1}, Path={2}}}", this->pid, this->name, this->path);}
     
   private:
     intptr pid = 0;
@@ -119,11 +119,11 @@ intptr __OS::CoreApi::Process::GetParent() {
 }
 
 string __OS::CoreApi::Process::GetName(intptr handle) {
-  return ::GetProcessName(handle);
+  return ::GetProcessName((int32_t)handle);
 }
 
 string __OS::CoreApi::Process::GetPath(intptr handle) {
-  return ::GetProcessPath(handle);
+  return ::GetProcessPath((int32_t)handle);
 }
 
 System::Array<intptr> __OS::CoreApi::Process::GetProcesses() {
@@ -133,8 +133,8 @@ System::Array<intptr> __OS::CoreApi::Process::GetProcesses() {
 void __OS::CoreApi::Process::WaitForExit(intptr handle, int32& exitCode) {
   siginfo_t waitInfo;
   memset(&waitInfo, 0, sizeof(siginfo_t));
-  waitInfo.si_pid = handle;
-  waitid(P_PID, handle, &waitInfo, WEXITED | WSTOPPED | WCONTINUED | WNOWAIT);
+  waitInfo.si_pid = (int32_t)handle;
+  waitid(P_PID, (int32_t)handle, &waitInfo, WEXITED | WSTOPPED | WCONTINUED | WNOWAIT);
   exitCode = waitInfo.si_code;
 }
 

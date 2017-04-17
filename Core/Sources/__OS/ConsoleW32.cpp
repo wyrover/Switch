@@ -1,11 +1,9 @@
-#if _WIN32
+#if defined(_WIN32)
 
 #include <csignal>
 #include <conio.h>
-#pragma warning(push)
-#pragma warning(disable:4201)
 #include <windows.h>
-#pragma warning(pop)
+#include "../../Includes/Pcf/Undef.h"
 
 #include "CoreApi.h"
 

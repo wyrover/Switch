@@ -1,8 +1,7 @@
-#if _WIN32
-#pragma warning(disable:4201)
+#if defined(_WIN32)
 #include <winsock2.h>
 #include <ws2tcpip.h>
-#pragma warning(default:4201)
+#include "../../Includes/Pcf/Undef.h"
 #else
 #include <netdb.h>
 #include <unistd.h>
@@ -15,7 +14,7 @@
 namespace {
   std::mutex mutex;
   using Hostent = hostent;
-#if _WIN32
+#if defined(_WIN32)
   void sethostent(int) {}
   void endhostent() {}
 #endif

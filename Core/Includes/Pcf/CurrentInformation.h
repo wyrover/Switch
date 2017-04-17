@@ -46,7 +46,7 @@ namespace Pcf {
       pcf_get->const System::String& {return this->functionName;}
     };
     
-    System::String ToString() const noexcept override {
+    System::String ToString() const override {
       if (this->fileName.IsEmpty() && this->line == 0 && this->functionName.IsEmpty())
         return "{Empty}";
       if (this->functionName.IsEmpty())

@@ -117,7 +117,7 @@ namespace Pcf {
         class Enumerator : public object, public IEnumerator<T> {
         public:
           /// @cond
-          Enumerator(UniquePointer<IEnumerator<T>> enumerator) : enumerator(enumerator.Release()) {}
+          Enumerator(refptr<IEnumerator<T>> enumerator) : enumerator(enumerator) {}
           Enumerator(const Enumerator& enumerator) : enumerator(enumerator.enumerator) {}
           /// @endcond
           
@@ -135,7 +135,7 @@ namespace Pcf {
           const T& GetCurrent() const override {return this->enumerator->Current();}
           
         private:
-          SharedPointer<IEnumerator<T>> enumerator;
+          refptr<IEnumerator<T>> enumerator;
         };
       }
     }

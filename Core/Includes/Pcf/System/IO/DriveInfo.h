@@ -108,7 +108,7 @@ namespace Pcf {
 
         /// @brief Returns a drive name as a string.
         /// @return The name of the drive.
-        virtual String ToString() const noexcept;
+        virtual String ToString() const;
 
       protected:
         /// @cond

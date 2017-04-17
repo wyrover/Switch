@@ -62,7 +62,7 @@ namespace Pcf {
         /// @brief Gets the offset from the start of the compiled code for the method that is being executed
         int32 GetOffset() const {return this->offset;}
 
-        virtual String ToString() const noexcept;
+        virtual String ToString() const;
 
         /// @brief Defines the default for the number of methods to omit from the stack trace. This field is constant.
         static Property<int32, ReadOnly> METHODS_TO_SKIP;

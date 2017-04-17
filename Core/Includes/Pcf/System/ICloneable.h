@@ -4,7 +4,7 @@
 
 #include "../Interface.h"
 #include "../Types.h"
-#include "../UniquePointer.h"
+#include "../RefPtr.h"
 
 /// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Pcf {
@@ -20,7 +20,7 @@ namespace Pcf {
     public:
       /// @brief Creates a new object that is a copy of the current instance.
       /// @return object A new object that is a copy of this instance.
-      virtual UniquePointer<Object> Clone() const = 0;
+      virtual refptr<Object> Clone() const = 0;
     };
   }
 }

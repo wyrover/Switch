@@ -330,538 +330,538 @@ namespace PcfUnitTests {
     }
     
     void SpStringAsString() {
-      SharedPointer<string> s = SharedPointer<string>::Create("Test");
-      SharedPointer<string> r = as<string>(s);
+      refptr<string> s = pcf_new<string>("Test");
+      refptr<string> r = as<string>(s);
       Assert::AreEqual(s.ToPointer(), r.ToPointer(), pcf_current_information);
     }
     
     void SpStringAsObject() {
-      SharedPointer<string> s = SharedPointer<string>::Create("Test");
-      SharedPointer<object> r = as<object>(s);
+      refptr<string> s = pcf_new<string>("Test");
+      refptr<object> r = as<object>(s);
       Assert::AreEqual(s.ToPointer(), r.ToPointer(), pcf_current_information);
     }
     
     void SpStringAsIComparable() {
-      SharedPointer<string> s = SharedPointer<string>::Create("Test");
-      SharedPointer<IComparable> r = as<IComparable>(s);
+      refptr<string> s = pcf_new<string>("Test");
+      refptr<IComparable> r = as<IComparable>(s);
       Assert::AreEqual(s.ToPointer(), r.ToPointer(), pcf_current_information);
     }
     
     void SpStringAsInt32() {
-      SharedPointer<string> s = SharedPointer<string>::Create("Test");
-      SharedPointer<Int32> r = as<Int32>(s);
+      refptr<string> s = pcf_new<string>("Test");
+      refptr<Int32> r = as<Int32>(s);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void SpObjectFromStringAsString() {
-      SharedPointer<string> s = SharedPointer<string>::Create("Test");
-      SharedPointer<object> o = as<object>(s);
-      SharedPointer<string> r = as<string>(o);
+      refptr<string> s = pcf_new<string>("Test");
+      refptr<object> o = as<object>(s);
+      refptr<string> r = as<string>(o);
       Assert::AreEqual(s.ToPointer(), r.ToPointer(), pcf_current_information);
     }
     
     void SpObjectFromStringAsObject() {
-      SharedPointer<string> s = SharedPointer<string>::Create("Test");
-      SharedPointer<object> o = as<object>(s);
-      SharedPointer<object> r = as<object>(o);
+      refptr<string> s = pcf_new<string>("Test");
+      refptr<object> o = as<object>(s);
+      refptr<object> r = as<object>(o);
       Assert::AreEqual(s.ToPointer(), r.ToPointer(), pcf_current_information);
     }
     
     void SpObjectFromStringAsIComparable() {
-      SharedPointer<string> s = SharedPointer<string>::Create("Test");
-      SharedPointer<object> o = as<object>(s);
-      SharedPointer<IComparable> r = as<IComparable>(o);
+      refptr<string> s = pcf_new<string>("Test");
+      refptr<object> o = as<object>(s);
+      refptr<IComparable> r = as<IComparable>(o);
       Assert::AreEqual(s.ToPointer(), r.ToPointer(), pcf_current_information);
     }
     
     void SpObjectFromStringAsInt32() {
-      SharedPointer<string> s = SharedPointer<string>::Create("Test");
-      SharedPointer<object> o = as<object>(s);
-      SharedPointer<Int32> r = as<Int32>(o);
+      refptr<string> s = pcf_new<string>("Test");
+      refptr<object> o = as<object>(s);
+      refptr<Int32> r = as<Int32>(o);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void SpStringNullAsString() {
-      SharedPointer<string> s = SharedPointer<string>::Null();
-      SharedPointer<string> r = as<string>(s);
+      refptr<string> s = refptr<string>::Null();
+      refptr<string> r = as<string>(s);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void SpStringNullAsObject() {
-      SharedPointer<string> s = SharedPointer<string>::Null();
-      SharedPointer<object> r = as<object>(s);
+      refptr<string> s = refptr<string>::Null();
+      refptr<object> r = as<object>(s);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void SpStringNullAsIComparable() {
-      SharedPointer<string> s = SharedPointer<string>::Null();
-      SharedPointer<IComparable> r = as<IComparable>(s);
+      refptr<string> s = refptr<string>::Null();
+      refptr<IComparable> r = as<IComparable>(s);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void SpStringNullAsInt32() {
-      SharedPointer<string> s = SharedPointer<string>::Null();
-      SharedPointer<Int32> r = as<Int32>(s);
+      refptr<string> s = refptr<string>::Null();
+      refptr<Int32> r = as<Int32>(s);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void SpObjectFromStringNullAsString() {
-      SharedPointer<string> s = SharedPointer<string>::Null();
-      SharedPointer<object> o = as<object>(s);
-      SharedPointer<string> r = as<string>(o);
+      refptr<string> s = refptr<string>::Null();
+      refptr<object> o = as<object>(s);
+      refptr<string> r = as<string>(o);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void SpObjectFromStringNullAsObject() {
-      SharedPointer<string> s = SharedPointer<string>::Null();
-      SharedPointer<object> o = as<object>(s);
-      SharedPointer<object> r = as<object>(o);
+      refptr<string> s = refptr<string>::Null();
+      refptr<object> o = as<object>(s);
+      refptr<object> r = as<object>(o);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void SpObjectFromStringNullAsIComparable() {
-      SharedPointer<string> s = SharedPointer<string>::Null();
-      SharedPointer<object> o = as<object>(s);
-      SharedPointer<IComparable> r = as<IComparable>(o);
+      refptr<string> s = refptr<string>::Null();
+      refptr<object> o = as<object>(s);
+      refptr<IComparable> r = as<IComparable>(o);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void SpObjectFromStringNullAsInt32() {
-      SharedPointer<string> s = SharedPointer<string>::Null();
-      SharedPointer<object> o = as<object>(s);
-      SharedPointer<Int32> r = as<Int32>(o);
+      refptr<string> s = refptr<string>::Null();
+      refptr<object> o = as<object>(s);
+      refptr<Int32> r = as<Int32>(o);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void ConstSpStringAsString() {
-      const SharedPointer<string> s = SharedPointer<string>::Create("Test");
-      const SharedPointer<string> r = as<string>(s);
+      const refptr<string> s = pcf_new<string>("Test");
+      const refptr<string> r = as<string>(s);
       Assert::AreEqual(s.ToPointer(), r.ToPointer(), pcf_current_information);
     }
     
     void ConstSpStringAsObject() {
-      const SharedPointer<string> s = SharedPointer<string>::Create("Test");
-      const SharedPointer<object> r = as<object>(s);
+      const refptr<string> s = pcf_new<string>("Test");
+      const refptr<object> r = as<object>(s);
       Assert::AreEqual(s.ToPointer(), r.ToPointer(), pcf_current_information);
     }
     
     void ConstSpStringAsIComparable() {
-      const SharedPointer<string> s = SharedPointer<string>::Create("Test");
-      const SharedPointer<IComparable> r = as<IComparable>(s);
+      const refptr<string> s = pcf_new<string>("Test");
+      const refptr<IComparable> r = as<IComparable>(s);
       Assert::AreEqual(s.ToPointer(), r.ToPointer(), pcf_current_information);
     }
     
     void ConstSpStringAsInt32() {
-      const SharedPointer<string> s = SharedPointer<string>::Create("Test");
-      const SharedPointer<Int32> r = as<Int32>(s);
+      const refptr<string> s = pcf_new<string>("Test");
+      const refptr<Int32> r = as<Int32>(s);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void ConstSpObjectFromStringAsString() {
-      const SharedPointer<string> s = SharedPointer<string>::Create("Test");
-      const SharedPointer<object> o = as<object>(s);
-      const SharedPointer<string> r = as<string>(o);
+      const refptr<string> s = pcf_new<string>("Test");
+      const refptr<object> o = as<object>(s);
+      const refptr<string> r = as<string>(o);
       Assert::AreEqual(s.ToPointer(), r.ToPointer(), pcf_current_information);
     }
     
     void ConstSpObjectFromStringAsObject() {
-      const SharedPointer<string> s = SharedPointer<string>::Create("Test");
-      const SharedPointer<object> o = as<object>(s);
-      const SharedPointer<object> r = as<object>(o);
+      const refptr<string> s = pcf_new<string>("Test");
+      const refptr<object> o = as<object>(s);
+      const refptr<object> r = as<object>(o);
       Assert::AreEqual(s.ToPointer(), r.ToPointer(), pcf_current_information);
     }
     
     void ConstSpObjectFromStringAsIComparable() {
-      const SharedPointer<string> s = SharedPointer<string>::Create("Test");
-      const SharedPointer<object> o = as<object>(s);
-      const SharedPointer<IComparable> r = as<IComparable>(o);
+      const refptr<string> s = pcf_new<string>("Test");
+      const refptr<object> o = as<object>(s);
+      const refptr<IComparable> r = as<IComparable>(o);
       Assert::AreEqual(s.ToPointer(), r.ToPointer(), pcf_current_information);
     }
     
     void ConstSpObjectFromStringAsInt32() {
-      const SharedPointer<string> s = SharedPointer<string>::Create("Test");
-      const SharedPointer<object> o = as<object>(s);
-      const SharedPointer<Int32> r = as<Int32>(o);
+      const refptr<string> s = pcf_new<string>("Test");
+      const refptr<object> o = as<object>(s);
+      const refptr<Int32> r = as<Int32>(o);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void ConstSpStringNullAsString() {
-      const SharedPointer<string> s = SharedPointer<string>::Null();
-      const SharedPointer<string> r = as<string>(s);
+      const refptr<string> s = refptr<string>::Null();
+      const refptr<string> r = as<string>(s);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void ConstSpStringNullAsObject() {
-      const SharedPointer<string> s = SharedPointer<string>::Null();
-      const SharedPointer<object> r = as<object>(s);
+      const refptr<string> s = refptr<string>::Null();
+      const refptr<object> r = as<object>(s);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void ConstSpStringNullAsIComparable() {
-      const SharedPointer<string> s = SharedPointer<string>::Null();
-      const SharedPointer<IComparable> r = as<IComparable>(s);
+      const refptr<string> s = refptr<string>::Null();
+      const refptr<IComparable> r = as<IComparable>(s);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void ConstSpStringNullAsInt32() {
-      const SharedPointer<string> s = SharedPointer<string>::Null();
-      const SharedPointer<Int32> r = as<Int32>(s);
+      const refptr<string> s = refptr<string>::Null();
+      const refptr<Int32> r = as<Int32>(s);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void ConstSpObjectFromStringNullAsString() {
-      const SharedPointer<string> s = SharedPointer<string>::Null();
-      const SharedPointer<object> o = as<object>(s);
-      const SharedPointer<string> r = as<string>(o);
+      const refptr<string> s = refptr<string>::Null();
+      const refptr<object> o = as<object>(s);
+      const refptr<string> r = as<string>(o);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void ConstSpObjectFromStringNullAsObject() {
-      const SharedPointer<string> s = SharedPointer<string>::Null();
-      const SharedPointer<object> o = as<object>(s);
-      const SharedPointer<object> r = as<object>(o);
+      const refptr<string> s = refptr<string>::Null();
+      const refptr<object> o = as<object>(s);
+      const refptr<object> r = as<object>(o);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void ConstSpObjectFromStringNullAsIComparable() {
-      const SharedPointer<string> s = SharedPointer<string>::Null();
-      const SharedPointer<object> o = as<object>(s);
-      const SharedPointer<IComparable> r = as<IComparable>(o);
+      const refptr<string> s = refptr<string>::Null();
+      const refptr<object> o = as<object>(s);
+      const refptr<IComparable> r = as<IComparable>(o);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void ConstSpObjectFromStringNullAsInt32() {
-      const SharedPointer<string> s = SharedPointer<string>::Null();
-      const SharedPointer<object> o = as<object>(s);
-      const SharedPointer<Int32> r = as<Int32>(o);
+      const refptr<string> s = refptr<string>::Null();
+      const refptr<object> o = as<object>(s);
+      const refptr<Int32> r = as<Int32>(o);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void UpStringAsString() {
-      UniquePointer<string> s = UniquePointer<string>::Create("Test");
-      UniquePointer<string> r = as<string>(s);
+      UniquePtr<string> s = MakeUnique<string>("Test");
+      UniquePtr<string> r = as<string>(s);
       Assert::AreEqual("Test", r->ToString(), pcf_current_information);
     }
     
     void UpStringAsObject() {
-      UniquePointer<string> s = UniquePointer<string>::Create("Test");
-      UniquePointer<object> r = as<object>(s);
+      UniquePtr<string> s = MakeUnique<string>("Test");
+      UniquePtr<object> r = as<object>(s);
       Assert::AreEqual("Test", r->ToString(), pcf_current_information);
     }
     
     void UpStringAsIComparable() {
-      UniquePointer<string> s = UniquePointer<string>::Create("Test");
-      UniquePointer<IComparable> r = as<IComparable>(s);
+      UniquePtr<string> s = MakeUnique<string>("Test");
+      UniquePtr<IComparable> r = as<IComparable>(s);
       Assert::AreEqual("Test", as<object>(r)->ToString(), pcf_current_information);
     }
     
     void UpStringAsInt32() {
-      UniquePointer<string> s = UniquePointer<string>::Create("Test");
-      UniquePointer<Int32> r = as<Int32>(s);
+      UniquePtr<string> s = MakeUnique<string>("Test");
+      UniquePtr<Int32> r = as<Int32>(s);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void UpObjectFromStringAsString() {
-      UniquePointer<string> s = UniquePointer<string>::Create("Test");
-      UniquePointer<object> o = as<object>(s);
-      UniquePointer<string> r = as<string>(o);
+      UniquePtr<string> s = MakeUnique<string>("Test");
+      UniquePtr<object> o = as<object>(s);
+      UniquePtr<string> r = as<string>(o);
       Assert::AreEqual("Test", r->ToString(), pcf_current_information);
     }
     
     void UpObjectFromStringAsObject() {
-      UniquePointer<string> s = UniquePointer<string>::Create("Test");
-      UniquePointer<object> o = as<object>(s);
-      UniquePointer<object> r = as<object>(o);
+      UniquePtr<string> s = MakeUnique<string>("Test");
+      UniquePtr<object> o = as<object>(s);
+      UniquePtr<object> r = as<object>(o);
       Assert::AreEqual("Test", r->ToString(), pcf_current_information);
     }
     
     void UpObjectFromStringAsIComparable() {
-      UniquePointer<string> s = UniquePointer<string>::Create("Test");
-      UniquePointer<object> o = as<object>(s);
-      UniquePointer<IComparable> r = as<IComparable>(o);
+      UniquePtr<string> s = MakeUnique<string>("Test");
+      UniquePtr<object> o = as<object>(s);
+      UniquePtr<IComparable> r = as<IComparable>(o);
       Assert::AreEqual("Test", as<object>(r)->ToString(), pcf_current_information);
     }
     
     void UpObjectFromStringAsInt32() {
-      UniquePointer<string> s = UniquePointer<string>::Create("Test");
-      UniquePointer<object> o = as<object>(s);
-      UniquePointer<Int32> r = as<Int32>(o);
+      UniquePtr<string> s = MakeUnique<string>("Test");
+      UniquePtr<object> o = as<object>(s);
+      UniquePtr<Int32> r = as<Int32>(o);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void UpStringNullAsString() {
-      UniquePointer<string> s = UniquePointer<string>::Null();
-      UniquePointer<string> r = as<string>(s);
+      UniquePtr<string> s = UniquePtr<string>::Null();
+      UniquePtr<string> r = as<string>(s);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void UpStringNullAsObject() {
-      UniquePointer<string> s = UniquePointer<string>::Null();
-      UniquePointer<object> r = as<object>(s);
+      UniquePtr<string> s = UniquePtr<string>::Null();
+      UniquePtr<object> r = as<object>(s);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void UpStringNullAsIComparable() {
-      UniquePointer<string> s = UniquePointer<string>::Null();
-      UniquePointer<IComparable> r = as<IComparable>(s);
+      UniquePtr<string> s = UniquePtr<string>::Null();
+      UniquePtr<IComparable> r = as<IComparable>(s);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void UpStringNullAsInt32() {
-      UniquePointer<string> s = UniquePointer<string>::Null();
-      UniquePointer<Int32> r = as<Int32>(s);
+      UniquePtr<string> s = UniquePtr<string>::Null();
+      UniquePtr<Int32> r = as<Int32>(s);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void UpObjectFromStringNullAsString() {
-      UniquePointer<string> s = UniquePointer<string>::Null();
-      UniquePointer<object> o = as<object>(s);
-      UniquePointer<string> r = as<string>(o);
+      UniquePtr<string> s = UniquePtr<string>::Null();
+      UniquePtr<object> o = as<object>(s);
+      UniquePtr<string> r = as<string>(o);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void UpObjectFromStringNullAsObject() {
-      UniquePointer<string> s = UniquePointer<string>::Null();
-      UniquePointer<object> o = as<object>(s);
-      UniquePointer<object> r = as<object>(o);
+      UniquePtr<string> s = UniquePtr<string>::Null();
+      UniquePtr<object> o = as<object>(s);
+      UniquePtr<object> r = as<object>(o);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void UpObjectFromStringNullAsIComparable() {
-      UniquePointer<string> s = UniquePointer<string>::Null();
-      UniquePointer<object> o = as<object>(s);
-      UniquePointer<IComparable> r = as<IComparable>(o);
+      UniquePtr<string> s = UniquePtr<string>::Null();
+      UniquePtr<object> o = as<object>(s);
+      UniquePtr<IComparable> r = as<IComparable>(o);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void UpObjectFromStringNullAsInt32() {
-      UniquePointer<string> s = UniquePointer<string>::Null();
-      UniquePointer<object> o = as<object>(s);
-      UniquePointer<Int32> r = as<Int32>(o);
+      UniquePtr<string> s = UniquePtr<string>::Null();
+      UniquePtr<object> o = as<object>(s);
+      UniquePtr<Int32> r = as<Int32>(o);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void RefStringAsString() {
       string str = "Test";
-      Reference<string> s = str;
-      Reference<string> r = as<string>(s);
+      ref<string> s = str;
+      ref<string> r = as<string>(s);
       Assert::AreEqual(s.ToPointer(), r.ToPointer(), pcf_current_information);
     }
     
     void RefStringAsObject() {
       string str = "Test";
-      Reference<string> s = str;
-      Reference<object> r = as<object>(s);
+      ref<string> s = str;
+      ref<object> r = as<object>(s);
       Assert::AreEqual(s.ToPointer(), r.ToPointer(), pcf_current_information);
     }
     
     void RefStringAsIComparable() {
       string str = "Test";
-      Reference<string> s = str;
-      Reference<IComparable> r = as<IComparable>(s);
+      ref<string> s = str;
+      ref<IComparable> r = as<IComparable>(s);
       Assert::AreEqual(s.ToPointer(), r.ToPointer(), pcf_current_information);
     }
     
     void RefStringAsInt32() {
       string str = "Test";
-      Reference<string> s = str;
-      Reference<Int32> r = as<Int32>(s);
+      ref<string> s = str;
+      ref<Int32> r = as<Int32>(s);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void RefObjectFromStringAsString() {
       string str = "Test";
-      Reference<string> s = str;
-      Reference<object> o = as<object>(s);
-      Reference<string> r = as<string>(o);
+      ref<string> s = str;
+      ref<object> o = as<object>(s);
+      ref<string> r = as<string>(o);
       Assert::AreEqual(s.ToPointer(), r.ToPointer(), pcf_current_information);
     }
     
     void RefObjectFromStringAsObject() {
       string str = "Test";
-      Reference<string> s = str;
-      Reference<object> o = as<object>(s);
-      Reference<object> r = as<object>(o);
+      ref<string> s = str;
+      ref<object> o = as<object>(s);
+      ref<object> r = as<object>(o);
       Assert::AreEqual(s.ToPointer(), r.ToPointer(), pcf_current_information);
     }
     
     void RefObjectFromStringAsIComparable() {
       string str = "Test";
-      Reference<string> s = str;
-      Reference<object> o = as<object>(s);
-      Reference<IComparable> r = as<IComparable>(o);
+      ref<string> s = str;
+      ref<object> o = as<object>(s);
+      ref<IComparable> r = as<IComparable>(o);
       Assert::AreEqual(s.ToPointer(), r.ToPointer(), pcf_current_information);
     }
     
     void RefObjectFromStringAsInt32() {
       string str = "Test";
-      Reference<string> s = str;
-      Reference<object> o = as<object>(s);
-      Reference<Int32> r = as<Int32>(o);
+      ref<string> s = str;
+      ref<object> o = as<object>(s);
+      ref<Int32> r = as<Int32>(o);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void RefStringNullAsString() {
-      Reference<string> s = Reference<string>::Null();
-      Reference<string> r = as<string>(s);
+      ref<string> s = ref<string>::Null();
+      ref<string> r = as<string>(s);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void RefStringNullAsObject() {
-      Reference<string> s = Reference<string>::Null();
-      Reference<object> r = as<object>(s);
+      ref<string> s = ref<string>::Null();
+      ref<object> r = as<object>(s);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void RefStringNullAsIComparable() {
-      Reference<string> s = Reference<string>::Null();
-      Reference<IComparable> r = as<IComparable>(s);
+      ref<string> s = ref<string>::Null();
+      ref<IComparable> r = as<IComparable>(s);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void RefStringNullAsInt32() {
-      Reference<string> s = Reference<string>::Null();
-      Reference<Int32> r = as<Int32>(s);
+      ref<string> s = ref<string>::Null();
+      ref<Int32> r = as<Int32>(s);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void RefObjectFromStringNullAsString() {
-      Reference<string> s = Reference<string>::Null();
-      Reference<object> o = as<object>(s);
-      Reference<string> r = as<string>(o);
+      ref<string> s = ref<string>::Null();
+      ref<object> o = as<object>(s);
+      ref<string> r = as<string>(o);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void RefObjectFromStringNullAsObject() {
-      Reference<string> s = Reference<string>::Null();
-      Reference<object> o = as<object>(s);
-      Reference<object> r = as<object>(o);
+      ref<string> s = ref<string>::Null();
+      ref<object> o = as<object>(s);
+      ref<object> r = as<object>(o);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void RefObjectFromStringNullAsIComparable() {
-      Reference<string> s = Reference<string>::Null();
-      Reference<object> o = as<object>(s);
-      Reference<IComparable> r = as<IComparable>(o);
+      ref<string> s = ref<string>::Null();
+      ref<object> o = as<object>(s);
+      ref<IComparable> r = as<IComparable>(o);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void RefObjectFromStringNullAsInt32() {
-      Reference<string> s = Reference<string>::Null();
-      Reference<object> o = as<object>(s);
-      Reference<Int32> r = as<Int32>(o);
+      ref<string> s = ref<string>::Null();
+      ref<object> o = as<object>(s);
+      ref<Int32> r = as<Int32>(o);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void ConstRefStringAsString() {
       const string str = "Test";
-      const Reference<string> s = str;
-      const Reference<string> r = as<string>(s);
+      const ref<string> s = str;
+      const ref<string> r = as<string>(s);
       Assert::AreEqual(s.ToPointer(), r.ToPointer(), pcf_current_information);
     }
     
     void ConstRefStringAsObject() {
       const string str = "Test";
-      const Reference<string> s = str;
-      const Reference<object> r = as<object>(s);
+      const ref<string> s = str;
+      const ref<object> r = as<object>(s);
       Assert::AreEqual(s.ToPointer(), r.ToPointer(), pcf_current_information);
     }
     
     void ConstRefStringAsIComparable() {
       const string str = "Test";
-      const Reference<string> s = str;
-      const Reference<IComparable> r = as<IComparable>(s);
+      const ref<string> s = str;
+      const ref<IComparable> r = as<IComparable>(s);
       Assert::AreEqual(s.ToPointer(), r.ToPointer(), pcf_current_information);
     }
     
     void ConstRefStringAsInt32() {
       const string str = "Test";
-      const Reference<string> s = str;
-      const Reference<Int32> r = as<Int32>(s);
+      const ref<string> s = str;
+      const ref<Int32> r = as<Int32>(s);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void ConstRefObjectFromStringAsString() {
       const string str = "Test";
-      const Reference<string> s = str;
-      const Reference<object> o = as<object>(s);
-      const Reference<string> r = as<string>(o);
+      const ref<string> s = str;
+      const ref<object> o = as<object>(s);
+      const ref<string> r = as<string>(o);
       Assert::AreEqual(s.ToPointer(), r.ToPointer(), pcf_current_information);
     }
     
     void ConstRefObjectFromStringAsObject() {
       const string str = "Test";
-      const Reference<string> s = str;
-      const Reference<object> o = as<object>(s);
-      const Reference<object> r = as<object>(o);
+      const ref<string> s = str;
+      const ref<object> o = as<object>(s);
+      const ref<object> r = as<object>(o);
       Assert::AreEqual(s.ToPointer(), r.ToPointer(), pcf_current_information);
     }
     
     void ConstRefObjectFromStringAsIComparable() {
       const string str = "Test";
-      const Reference<string> s = str;
-      const Reference<object> o = as<object>(s);
-      const Reference<IComparable> r = as<IComparable>(o);
+      const ref<string> s = str;
+      const ref<object> o = as<object>(s);
+      const ref<IComparable> r = as<IComparable>(o);
       Assert::AreEqual(s.ToPointer(), r.ToPointer(), pcf_current_information);
     }
     
     void ConstRefObjectFromStringAsInt32() {
       const string str = "Test";
-      const Reference<string> s = str;
-      const Reference<object> o = as<object>(s);
-      const Reference<Int32> r = as<Int32>(o);
+      const ref<string> s = str;
+      const ref<object> o = as<object>(s);
+      const ref<Int32> r = as<Int32>(o);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void ConstRefStringNullAsString() {
-      const Reference<string> s = Reference<string>::Null();
-      const Reference<string> r = as<string>(s);
+      const ref<string> s = ref<string>::Null();
+      const ref<string> r = as<string>(s);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void ConstRefStringNullAsObject() {
-      const Reference<string> s = Reference<string>::Null();
-      const Reference<object> r = as<object>(s);
+      const ref<string> s = ref<string>::Null();
+      const ref<object> r = as<object>(s);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void ConstRefStringNullAsIComparable() {
-      const Reference<string> s = Reference<string>::Null();
-      const Reference<IComparable> r = as<IComparable>(s);
+      const ref<string> s = ref<string>::Null();
+      const ref<IComparable> r = as<IComparable>(s);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void ConstRefStringNullAsInt32() {
-      const Reference<string> s = Reference<string>::Null();
-      const Reference<Int32> r = as<Int32>(s);
+      const ref<string> s = ref<string>::Null();
+      const ref<Int32> r = as<Int32>(s);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void ConstRefObjectFromStringNullAsString() {
-      const Reference<string> s = Reference<string>::Null();
-      const Reference<object> o = as<object>(s);
-      const Reference<string> r = as<string>(o);
+      const ref<string> s = ref<string>::Null();
+      const ref<object> o = as<object>(s);
+      const ref<string> r = as<string>(o);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void ConstRefObjectFromStringNullAsObject() {
-      const Reference<string> s = Reference<string>::Null();
-      const Reference<object> o = as<object>(s);
-      const Reference<object> r = as<object>(o);
+      const ref<string> s = ref<string>::Null();
+      const ref<object> o = as<object>(s);
+      const ref<object> r = as<object>(o);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void ConstRefObjectFromStringNullAsIComparable() {
-      const Reference<string> s = Reference<string>::Null();
-      const Reference<object> o = as<object>(s);
-      const Reference<IComparable> r = as<IComparable>(o);
+      const ref<string> s = ref<string>::Null();
+      const ref<object> o = as<object>(s);
+      const ref<IComparable> r = as<IComparable>(o);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     
     void ConstRefObjectFromStringNullAsInt32() {
-      const Reference<string> s = Reference<string>::Null();
-      const Reference<object> o = as<object>(s);
-      const Reference<Int32> r = as<Int32>(o);
+      const ref<string> s = ref<string>::Null();
+      const ref<object> o = as<object>(s);
+      const ref<Int32> r = as<Int32>(o);
       Assert::IsTrue(r.IsNull(), pcf_current_information);
     }
     

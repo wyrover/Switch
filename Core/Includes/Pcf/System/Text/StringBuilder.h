@@ -29,7 +29,7 @@ namespace Pcf {
       /// @brief Represents a mutable string of characters. This class cannot be inherited.
       /// @remarks This class represents a string-like object whose value is a mutable sequence of characters.
       class pcf_public StringBuilder final : public Object {
-#if _WIN32
+#if defined(_WIN32)
         using __char32 = __int32;
 #else
         using __char32 = char32;
@@ -674,7 +674,7 @@ namespace Pcf {
         template<typename T1, typename T2, typename T3, typename T4, typename T5,  typename T6,  typename T7, typename T8, typename T9,  typename T10>
         StringBuilder& AppendFormat(const string& format, const T1& a1, const T2& a2, const T3& a3, const T4& a4, const T5& a5, const T6& a6, const T7& a7, const T8& a8, const T9& a9, const T10& a10) {return this->Append(string::Format(format, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10));}
 
-        StringBuilder& AppendFormat(const string& format, const Array<Reference<object>>& objects) {return this->Append(string::Format(format, objects));}
+        StringBuilder& AppendFormat(const string& format, const Array<ref<object>>& objects) {return this->Append(string::Format(format, objects));}
         
         StringBuilder& AppendLine() {return this->Append(Environment::NewLine());}
        
@@ -688,7 +688,7 @@ namespace Pcf {
         /// @brief Determines whether this instance of String and a specified object, which must also be a String object, have the same value.
         /// @param obj The Object to compare with the current Object.
         /// @return bool true if the specified Object is equal to the current Object. otherwise, false.
-        bool Equals(const object& obj) const noexcept override {return GetType() == obj.GetType()&& Equals(static_cast<const StringBuilder&>(obj));}
+        bool Equals(const object& obj) const override {return GetType() == obj.GetType()&& Equals(static_cast<const StringBuilder&>(obj));}
         
         /// @brief Determines whether this instance and another specified StringBuilder object have the same value.
         /// @param value The StringBuilder to compare.
@@ -703,7 +703,7 @@ namespace Pcf {
         
         /// @brief Returns a String that represents the current StringBuilder.
         /// @return const String A String that represents the current StringBuilder.
-       String ToString() const noexcept override {return std::wstring_convert<std::codecvt_utf8<__char32>, __char32>().to_bytes((const __char32*)this->string.c_str());}
+       String ToString() const override {return std::wstring_convert<std::codecvt_utf8<__char32>, __char32>().to_bytes((const __char32*)this->string.c_str());}
         
       private:
         std::u32string string;

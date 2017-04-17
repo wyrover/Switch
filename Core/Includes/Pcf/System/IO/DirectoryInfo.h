@@ -3,7 +3,6 @@
 #pragma once
 
 #include "../../Types.h"
-#include "../../UniquePointer.h"
 #include "../Array.h"
 #include "../String.h"
 #include "FileInfo.h"
@@ -103,11 +102,11 @@ namespace Pcf {
         /// @brief Determines whether this instance of DirectoryInfo and a specified object, which must also be a DirectoryInfo object, have the same value.
         /// @param obj The object to compare with the current object.
         /// @return bool true if the specified object is equal to the current object. otherwise, false.
-        bool Equals(const object& obj) const noexcept override {return is<DirectoryInfo>(obj) && Equals((const DirectoryInfo&)obj);}
+        bool Equals(const object& obj) const override {return is<DirectoryInfo>(obj) && Equals((const DirectoryInfo&)obj);}
 
         /// @brief Returns the original path that was passed by the user.
         /// @return the original path that was passed by the user.
-        String ToString() const noexcept override {return this->Name;}
+        String ToString() const override {return this->Name;}
 
       private:
         bool GetExists() const override;

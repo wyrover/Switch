@@ -521,7 +521,7 @@ namespace PcfUnitTests {
       TUnit::Assert::AreNotEqual("My string"_S.GetHashCode(), "My Gtrins"_S.GetHashCode(), pcf_current_information);
       TUnit::Assert::AreEqual("another string"_S.GetHashCode(), "another string"_S.GetHashCode(), pcf_current_information);
       
-      UniquePointer<string> clone;
+      refptr<string> clone;
       string testClone("Test Clone");
       clone = as<string>(testClone.Clone());
       TUnit::Assert::AreEqual(testClone.GetHashCode(),clone->GetHashCode(), pcf_current_information);

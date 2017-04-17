@@ -44,16 +44,16 @@ bool Int64::TryParse(const string& str, int32 base, Int64& value) {
   return TryParse(str, base, value.value);
 }
 
-int32 Int64::GetHashCode() const noexcept {
+int32 Int64::GetHashCode() const {
   return (int32)(this->value & 0x00000000FFFFFFFF) ^ (int32)((this->value>>32) & 0x00000000FFFFFFFF);
 }
 
-string Int64::ToString() const noexcept {
-  return ToString("d", Reference<IFormatProvider>::Null());
+string Int64::ToString() const {
+  return ToString("d", ref<IFormatProvider>::Null());
 }
 
 string Int64::ToString(const string& format) const {
-  return ToString(format, Reference<IFormatProvider>::Null());
+  return ToString(format, ref<IFormatProvider>::Null());
 }
 
 string Int64::ToString(const string& format, const IFormatProvider&) const {
@@ -90,7 +90,7 @@ int32 Int64::CompareTo(const Int64& value) const {
   return 1;
 }
 
-int32 Int64::CompareTo(const IComparable& obj) const noexcept {
+int32 Int64::CompareTo(const IComparable& obj) const {
   if (!is<Int64>(obj))
     return 1;
   return CompareTo(static_cast<const Int64&>(obj));

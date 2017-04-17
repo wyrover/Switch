@@ -29,7 +29,7 @@ namespace Pcf {
         const Exception& GetException() const {return this->exception();}
         
       private:
-        SharedPointer<Exception> exception;
+        refptr<Exception> exception;
       };
     }
   }

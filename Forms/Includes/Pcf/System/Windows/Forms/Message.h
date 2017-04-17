@@ -58,9 +58,9 @@ namespace Pcf {
           /// @endcond
           
           template<typename Type>
-          SharedPointer<Type> GetLParam() { return (SharedPointer<Type>)this->lParam; }
+          refptr<Type> GetLParam() { return (refptr<Type>)this->lParam; }
 
-          String ToString() const noexcept override;
+          String ToString() const override;
 
         private:
           Message(intptr hwnd, int32 msg, intptr wParam, intptr lParam, intptr result) : hwnd(hwnd), msg(msg), wParam(wParam), lParam(lParam), result(result) { counter++; }
