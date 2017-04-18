@@ -37,6 +37,9 @@ set(SOURCE_FILES
   Sources/__OS/DrawingApiFltk.cpp
   Sources/__OS/DrawingApiGtk.cpp
   Sources/__OS/DrawingApiWin32.cpp
+  Sources/__OS/SystemColorsFltk.cpp
+  Sources/__OS/SystemColorsGtk.cpp
+  Sources/__OS/SystemColorsWin32.cpp
   Sources/Pcf/System/Drawing/Imaging/FrameDimension.cpp
   Sources/Pcf/System/Drawing/Imaging/ImageFormat.cpp
   Sources/Pcf/System/Drawing/Text/FontCollection.cpp
@@ -60,7 +63,7 @@ set(SOURCE_FILES
   Sources/Pcf/System/Drawing/Size.cpp
   Sources/Pcf/System/Drawing/SizeF.cpp
   Sources/Pcf/System/Drawing/SolidBrush.cpp
-  Sources/Pcf/System/Drawing/SystemColor.cpp
+  Sources/Pcf/System/Drawing/SystemColors.cpp
   Sources/Pcf/System/Drawing/Tif.h
 )
 

@@ -110,7 +110,7 @@ namespace PcfUnitTests {
     }
     
     void Desktop() {
-      Assert::AreEqual(0xFF0076A3u, (unsigned)Drawing::SystemColors::Desktop().ToArgb(), pcf_current_information);
+      Assert::AreEqual(0xFF000000u, (unsigned)Drawing::SystemColors::Desktop().ToArgb(), pcf_current_information);
       Assert::IsFalse(Drawing::SystemColors::Desktop().IsEmpty(), pcf_current_information);
       Assert::IsTrue(Drawing::SystemColors::Desktop().IsKnownColor(), pcf_current_information);
       Assert::IsTrue(Drawing::SystemColors::Desktop().IsNamedColor(), pcf_current_information);
@@ -180,7 +180,7 @@ namespace PcfUnitTests {
     }
     
     void InactiveCaptionText() {
-      Assert::AreEqual(0xFF434E54u, (unsigned)Drawing::SystemColors::InactiveCaptionText().ToArgb(), pcf_current_information);
+      Assert::AreEqual(0xFF000000u, (unsigned)Drawing::SystemColors::InactiveCaptionText().ToArgb(), pcf_current_information);
       Assert::IsFalse(Drawing::SystemColors::InactiveCaptionText().IsEmpty(), pcf_current_information);
       Assert::IsTrue(Drawing::SystemColors::InactiveCaptionText().IsKnownColor(), pcf_current_information);
       Assert::IsTrue(Drawing::SystemColors::InactiveCaptionText().IsNamedColor(), pcf_current_information);

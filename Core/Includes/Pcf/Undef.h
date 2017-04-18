@@ -10,6 +10,7 @@
 #undef GetTempPath
 #undef GetUserName
 #undef GetVolumeInformation
+#undef GetWindowText
 #undef major
 #undef max
 #undef minor
