@@ -16,6 +16,12 @@ using namespace System::Windows::Forms;
 using namespace __OS;
 
 namespace {
+  class IGtkWidget pcf_interface {
+  public:
+    virtual const Gtk::Widget& ToWidget() const = 0;
+    virtual Gtk::Widget& ToWidget() = 0;
+  };
+
   class GtkForm : public Gtk::Window {
   public:
     GtkForm() {
@@ -49,7 +55,6 @@ namespace {
   Glib::RefPtr<Gtk::Application> application = Gtk::Application::create();
   GtkForm* mainForm;
   int32 exitCode = 0;
-  System::Drawing::Color controlColor;
 }
 
 bool FormsApi::Application::visualStylesEnabled = false;
@@ -74,8 +79,6 @@ DialogResult FormsApi::Application::ShowMessageBox(const string& message, const 
 }
 
 void FormsApi::Application::Start() {
-  //controlColor = ToColor(GtkForm().get_style_context()->get_background_color());
-  controlColor = ToColor(Gtk::Entry().get_style_context()->get_background_color());
 }
 
 void FormsApi::Application::Stop() {
@@ -99,10 +102,7 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::Control& control)
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Form& form) {
   GtkForm* gtkForm = new GtkForm();
-  Console::WriteLine("backColor = {0}", gtkForm->get_style_context()->get_background_color().to_string().c_str());
-  Console::WriteLine("backColor = {0}", Gtk::Button().get_style_context()->get_background_color().to_string().c_str());
-  //gtkForm->override_background_color(FromColor(form.BackColor));
-  gtkForm->override_background_color(FromColor(controlColor));
+  gtkForm->override_background_color(FromColor(form.BackColor));
   gtkForm->override_color(FromColor(form.ForeColor));
   gtkForm->move(form.data().location.X, form.data().location.Y);
   gtkForm->resize(form.data().size.Width, form.data().size.Height);

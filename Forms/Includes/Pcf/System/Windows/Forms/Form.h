@@ -23,6 +23,7 @@ namespace Pcf {
           Form() {
             this->data->visible = false;
             this->SetStyle(ControlStyles::UserPaint, false);
+            this->BackColor = System::Drawing::SystemColors::Window;
           }
 
           /// @cond

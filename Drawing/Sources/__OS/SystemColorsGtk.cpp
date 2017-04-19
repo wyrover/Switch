@@ -1,9 +1,16 @@
 ﻿#if defined(__linux__) && defined(__use_native_interface__)
 
+#include <gtkmm.h>
 #include "DrawingApi.h"
 
 using namespace System;
 using namespace __OS;
+
+namespace {
+  System::Drawing::Color ToColor(const Gdk::RGBA& color) {
+    return System::Drawing::Color::FromArgb(color.get_alpha() * 255, color.get_red() * 255, color.get_green() * 255, color.get_blue() * 255);
+  }
+}
 
 int32 DrawingApi::SystemColors::GetActiveBorder() {
   return (int32)0xFFB4B4B4;
@@ -22,7 +29,7 @@ int32 DrawingApi::SystemColors::GetAppWorkspace() {
 }
 
 int32 DrawingApi::SystemColors::GetButtonFace() {
-  return (int32)0xFFF0F0F0;
+  return ToColor(Gtk::Button().get_style_context()->get_background_color()).ToArgb();
 }
 
 int32 DrawingApi::SystemColors::GetButtonHighlight() {
@@ -34,27 +41,27 @@ int32 DrawingApi::SystemColors::GetButtonShadow() {
 }
 
 int32 DrawingApi::SystemColors::GetControl() {
-  return (int32)0xFFF0F0F0;
+  return ToColor(Gtk::Button().get_style_context()->get_background_color()).ToArgb();
 }
 
 int32 DrawingApi::SystemColors::GetControlDark() {
-  return (int32)0xFFA0A0A0;
+  return ToColor(Gtk::Button().get_style_context()->get_background_color()).ToArgb();
 }
 
 int32 DrawingApi::SystemColors::GetControlDarkDark() {
-  return (int32)0xFF696969;
+  return ToColor(Gtk::Button().get_style_context()->get_background_color()).ToArgb();
 }
 
 int32 DrawingApi::SystemColors::GetControlLight() {
-  return (int32)0xFFE3E3E3;
+  return ToColor(Gtk::Button().get_style_context()->get_background_color()).ToArgb();
 }
 
 int32 DrawingApi::SystemColors::GetControlLightLight() {
-  return (int32)0xFFFFFFFF;
+  return ToColor(Gtk::Button().get_style_context()->get_background_color()).ToArgb();
 }
 
 int32 DrawingApi::SystemColors::GetControlText() {
-  return (int32)0xFF000000;
+  return ToColor(Gtk::Button().get_style_context()->get_color()).ToArgb();
 }
 
 int32 DrawingApi::SystemColors::GetDesktop() {
@@ -73,11 +80,11 @@ int32 DrawingApi::SystemColors::GetGrayText() {
   return (int32)0xFF6D6D6D;
 }
 
-int32 DrawingApi::SystemColors::GetHighLight() {
+int32 DrawingApi::SystemColors::GetHighlight() {
   return (int32)0xFF3399FF;
 }
 
-int32 DrawingApi::SystemColors::GetHighLightText() {
+int32 DrawingApi::SystemColors::GetHighlightText() {
   return (int32)0xFFFFFFFF;
 }
 
@@ -126,15 +133,15 @@ int32 DrawingApi::SystemColors::GetScrollBar() {
 }
 
 int32 DrawingApi::SystemColors::GetWindow() {
-  return (int32)0xFFFFFFFF;
+  return ToColor(Gtk::Window().get_style_context()->get_background_color()).ToArgb();
 }
 
 int32 DrawingApi::SystemColors::GetWindowFrame() {
-  return (int32)0xFF646464;
+  return ToColor(Gtk::Window().get_style_context()->get_border_color()).ToArgb();
 }
 
 int32 DrawingApi::SystemColors::GetWindowText() {
-  return (int32)0xFF000000;
+  return ToColor(Gtk::Window().get_style_context()->get_color()).ToArgb();
 }
 
 #endif

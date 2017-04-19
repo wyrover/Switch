@@ -68,9 +68,11 @@ void DrawingApi::Gdi::ReleaseDeviceContext(intptr hwnd, intptr hdc) {
 }
 
 System::Drawing::Rectangle DrawingApi::Gdi::GetClipRectangleFromHdc(intptr hdc) {
+  return {};
 }
 
 System::Drawing::Rectangle DrawingApi::Gdi::GetClipRectangleFromHwnd(intptr hwnd) {
+  return {};
 }
 
 void DrawingApi::Gdi::DrawRectangle(intptr handle, const System::Drawing::Pen& pen, int32 x, int32 y, int32 w, int32 h) {

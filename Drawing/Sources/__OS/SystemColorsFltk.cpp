@@ -72,11 +72,11 @@ int32 DrawingApi::SystemColors::GetGrayText() {
   return (int32)0xFF6D6D6D;
 }
 
-int32 DrawingApi::SystemColors::GetHighLight() {
+int32 DrawingApi::SystemColors::GetHighlight() {
   return (int32)0xFF3399FF;
 }
 
-int32 DrawingApi::SystemColors::GetHighLightText() {
+int32 DrawingApi::SystemColors::GetHighlightText() {
   return (int32)0xFFFFFFFF;
 }
 
