@@ -70,6 +70,7 @@ set(SOURCE_FILES
 if (APPLE)
 set(COCOA_SOURCE_FILES
   Sources/__OS/DrawingApiCocoa.mm
+  Sources/__OS/SystemColorsCocoa.mm
 )
 endif ()
 
