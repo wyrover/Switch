@@ -1,4 +1,4 @@
-﻿#if defined(__APPLE__) && defined(__use_native_interface__)
+#if defined(__APPLE__) && defined(__use_native_interface__)
 #import <Cocoa/Cocoa.h>
 #import <Foundation/Foundation.h>
 #include "DrawingApi.h"
@@ -43,7 +43,7 @@ int32 DrawingApi::SystemColors::GetAppWorkspace() {
 
 int32 DrawingApi::SystemColors::GetButtonFace() {
   @autoreleasepool {
-    NSColor* color = [[NSColor knobColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
+    NSColor* color = [[NSColor controlHighlightColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
     return ToColor(color).ToArgb();
   }
 }
@@ -219,7 +219,7 @@ int32 DrawingApi::SystemColors::GetScrollBar() {
 
 int32 DrawingApi::SystemColors::GetWindow() {
   @autoreleasepool {
-    NSColor* color = [[NSColor controlHighlightColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
+    NSColor* color = [[NSColor controlBackgroundColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
     return ToColor(color).ToArgb();
   }
 }

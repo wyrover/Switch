@@ -18,7 +18,6 @@ namespace PcfFormApp {
       this->Name = "form1";
       this->Text = "First Application";
       this->Location = System::Drawing::Point(200, 100);
-      this->BackColor = System::Drawing::SystemColors::MenuBar;
 
       this->FormClosing += pcf_delegate(const object& sender, FormClosingEventArgs& e) {
         e.Cancel = MessageBox::Show("Do you want quit application ?", "Program", MessageBoxButtons::YesNo, MessageBoxIcon::Question) != DialogResult::Yes;
