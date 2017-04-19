@@ -31,15 +31,15 @@ int32 DrawingApi::SystemColors::GetAppWorkspace() {
 }
 
 int32 DrawingApi::SystemColors::GetButtonFace() {
-  return (int32)0xFFEDEDED;
+  return GetSystemColor(COLOR_BTNFACE);
 }
 
 int32 DrawingApi::SystemColors::GetButtonHighlight() {
-  return (int32)0xFFFFFFFF;
+  return GetSystemColor(COLOR_BTNHIGHLIGHT);
 }
 
 int32 DrawingApi::SystemColors::GetButtonShadow() {
-  return (int32)0xFFACA899;
+  return GetSystemColor(COLOR_BTNSHADOW);
 }
 
 int32 DrawingApi::SystemColors::GetControl() {
@@ -47,7 +47,7 @@ int32 DrawingApi::SystemColors::GetControl() {
 }
 
 int32 DrawingApi::SystemColors::GetControlDark() {
-  return GetSystemColor(COLOR_3DSHADOW);
+  return GetSystemColor(COLOR_BTNSHADOW);
 }
 
 int32 DrawingApi::SystemColors::GetControlDarkDark() {
@@ -59,7 +59,7 @@ int32 DrawingApi::SystemColors::GetControlLight() {
 }
 
 int32 DrawingApi::SystemColors::GetControlLightLight() {
-  return GetSystemColor(COLOR_3DHILIGHT);
+  return GetSystemColor(COLOR_BTNHIGHLIGHT);
 }
 
 int32 DrawingApi::SystemColors::GetControlText() {
@@ -71,22 +71,22 @@ int32 DrawingApi::SystemColors::GetDesktop() {
 }
 
 int32 DrawingApi::SystemColors::GetGradientActiveCaption() {
-  return (int32)0xFF3D95FF;
+  return GetSystemColor(COLOR_GRADIENTACTIVECAPTION);
 }
 
 int32 DrawingApi::SystemColors::GetGradientInactiveCaption() {
-  return (int32)0xFF9DB9EB;
+  return GetSystemColor(COLOR_GRADIENTINACTIVECAPTION);
 }
 
 int32 DrawingApi::SystemColors::GetGrayText() {
   return GetSystemColor(COLOR_GRAYTEXT);
 }
 
-int32 DrawingApi::SystemColors::GetHighLight() {
+int32 DrawingApi::SystemColors::GetHighlight() {
   return GetSystemColor(COLOR_HIGHLIGHT);
 }
 
-int32 DrawingApi::SystemColors::GetHighLightText() {
+int32 DrawingApi::SystemColors::GetHighlightText() {
   return GetSystemColor(COLOR_HIGHLIGHTTEXT);
 }
 
@@ -119,11 +119,11 @@ int32 DrawingApi::SystemColors::GetMenu() {
 }
 
 int32 DrawingApi::SystemColors::GetMenuBar() {
-  return (int32)0xFFEDEDED;
+  return GetSystemColor(COLOR_MENUBAR);
 }
 
 int32 DrawingApi::SystemColors::GetMenuHighlight() {
-  return (int32)0xFF316AC5;
+  return GetSystemColor(COLOR_MENUHILIGHT);
 }
 
 int32 DrawingApi::SystemColors::GetMenuText() {

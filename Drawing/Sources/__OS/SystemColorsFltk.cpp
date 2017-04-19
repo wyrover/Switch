@@ -21,7 +21,7 @@ int32 DrawingApi::SystemColors::GetAppWorkspace() {
 }
 
 int32 DrawingApi::SystemColors::GetButtonFace() {
-  return (int32)0xFFEDEDED;
+  return (int32)0xFFF0F0F0;
 }
 
 int32 DrawingApi::SystemColors::GetButtonHighlight() {
@@ -29,7 +29,7 @@ int32 DrawingApi::SystemColors::GetButtonHighlight() {
 }
 
 int32 DrawingApi::SystemColors::GetButtonShadow() {
-  return (int32)0xFFACA899;
+  return (int32)0xFFF0F0F0;
 }
 
 int32 DrawingApi::SystemColors::GetControl() {
@@ -61,7 +61,7 @@ int32 DrawingApi::SystemColors::GetDesktop() {
 }
 
 int32 DrawingApi::SystemColors::GetGradientActiveCaption() {
-  return (int32)0xFF3D95FF;
+  return (int32)0xFF99B4D1;
 }
 
 int32 DrawingApi::SystemColors::GetGradientInactiveCaption() {
@@ -109,11 +109,11 @@ int32 DrawingApi::SystemColors::GetMenu() {
 }
 
 int32 DrawingApi::SystemColors::GetMenuBar() {
-  return (int32)0xFFEDEDED;
+  return (int32)0xFFF0F0F0;
 }
 
 int32 DrawingApi::SystemColors::GetMenuHighlight() {
-  return (int32)0xFF316AC5;
+  return (int32)0xFF3399FF;
 }
 
 int32 DrawingApi::SystemColors::GetMenuText() {
