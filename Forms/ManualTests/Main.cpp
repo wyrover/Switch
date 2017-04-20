@@ -28,7 +28,6 @@ namespace PcfFormApp {
         this->label2.Text = e.Location().ToString();
       };
 
-      /*
       this->button1.Parent = *this;
       this->button1.Name = "button1";
       this->button1.Text = "Button";
@@ -48,6 +47,7 @@ namespace PcfFormApp {
         System::Diagnostics::Debug::WriteLine("DialogResult = {0}", MessageBox::Show("This is a very long message for testing if MessageBox\ncan adapt his size with good values.", "A message box", MessageBoxButtons::OK, MessageBoxIcon::Hand));
       };
 
+      /*
       this->checkBox1.Parent = *this;
       this->checkBox1.Name = "checkBox1";
       this->checkBox1.Text = "CheckBox";

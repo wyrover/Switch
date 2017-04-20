@@ -16,23 +16,19 @@ using namespace System::Windows::Forms;
 using namespace __OS;
 
 namespace {
-  class IGtkWidget pcf_interface {
+  class _IWidget pcf_interface {
   public:
     virtual const Gtk::Widget& ToWidget() const = 0;
     virtual Gtk::Widget& ToWidget() = 0;
   };
 
-  class GtkWidget : public IGtkWidget {
+  class _Widget : public _IWidget {
   public:
-    void move(int32 x, int32 y) {
-      ((Gtk::Fixed*)this->get_parent())->child_property_x(*this) = x;
-      ((Gtk::Fixed*)this->get_parent())->child_property_y(*this) = y;
-    }
   };
 
-  class GtkForm : public GtkWidget, public Gtk::Window {
+  class _Form : public _Widget, public Gtk::Window {
   public:
-    GtkForm() {
+    _Form() {
       this->add(this->scrolledWindow);
       this->scrolledWindow.add(this->fixed);
 
@@ -52,14 +48,17 @@ namespace {
     Gtk::Fixed fixed;
   };
 
-  class GtkButton : public GtkWidget, public Gtk::Button {
+  class _Button : public _Widget, public Gtk::Button {
   public:
+    _Button() {this->set_parent(this->emptyParent);}
     void move(int32 x, int32 y) {
       ((Gtk::Fixed*)this->get_parent())->child_property_x(*this) = x;
       ((Gtk::Fixed*)this->get_parent())->child_property_y(*this) = y;
     }
     const Gtk::Widget& ToWidget() const override {return *this;}
     Gtk::Widget& ToWidget() override {return *this;}
+  private:
+    Gtk::Fixed emptyParent;
   };
 
   Gdk::RGBA FromColor(const System::Drawing::Color& color) {
@@ -74,15 +73,14 @@ namespace {
   }
 
   Glib::RefPtr<Gtk::Application> application = Gtk::Application::create();
-  Gtk::Fixed nullParent;
-  GtkForm* mainForm;
+  _Form* mainForm;
   int32 exitCode = 0;
 }
 
 bool FormsApi::Application::visualStylesEnabled = false;
 
 void FormsApi::Application::AddForm(const System::Windows::Forms::Form& form) {
-   mainForm = (GtkForm*)form.data().handle;
+   mainForm = (_Form*)form.data().handle;
 }
 
 void FormsApi::Application::Exit() {
@@ -107,16 +105,17 @@ void FormsApi::Application::Stop() {
 }
 
 void FormsApi::Control::Close(const System::Windows::Forms::Form& form) {
-  ((GtkForm*)form.Handle())->close();
+  ((_Form*)form.Handle())->close();
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Button& button) {
-  GtkButton* gtkButton = new GtkButton();
-  gtkButton->set_parent(nullParent);
-  gtkButton->override_background_color(FromColor(form.BackColor));
-  gtkButton->override_color(FromColor(form.ForeColor));
-  gtkForm->move(form.data().location.X, form.data().location.Y);
-  gtkForm->resize(form.data().size.Width, form.data().size.Height);
+  _Button* gtkButton = new _Button();
+  gtkButton->set_parent(mainForm->Container());
+  gtkButton->override_background_color(FromColor(button.BackColor));
+  gtkButton->override_color(FromColor(button.ForeColor));
+  gtkButton->move(button.data().location.X, button.data().location.Y);
+  gtkButton->set_size_request(button.data().size.Width, button.data().size.Height);
+  return (intptr)gtkButton;
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::CheckBox& checkBox) {
@@ -128,7 +127,7 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::Control& control)
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Form& form) {
-  GtkForm* gtkForm = new GtkForm();
+  _Form* gtkForm = new _Form();
   gtkForm->override_background_color(FromColor(form.BackColor));
   gtkForm->override_color(FromColor(form.ForeColor));
   gtkForm->move(form.data().location.X, form.data().location.Y);
