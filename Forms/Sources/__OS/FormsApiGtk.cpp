@@ -110,11 +110,15 @@ void FormsApi::Control::Close(const System::Windows::Forms::Form& form) {
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Button& button) {
   _Button* gtkButton = new _Button();
-  gtkButton->set_parent(mainForm->Container());
+  mainForm->Container().add(*gtkButton);
   gtkButton->override_background_color(FromColor(button.BackColor));
   gtkButton->override_color(FromColor(button.ForeColor));
   gtkButton->move(button.data().location.X, button.data().location.Y);
+  //((Gtk::Fixed*)gtkButton->get_parent())->child_property_x(*gtkButton) = button.data().location.X;
+  //((Gtk::Fixed*)gtkButton->get_parent())->child_property_y(*gtkButton) = button.data().location.Y;
+
   gtkButton->set_size_request(button.data().size.Width, button.data().size.Height);
+  gtkButton->show();
   return (intptr)gtkButton;
 }
 
@@ -128,6 +132,7 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::Control& control)
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Form& form) {
   _Form* gtkForm = new _Form();
+  mainForm = gtkForm;
   gtkForm->override_background_color(FromColor(form.BackColor));
   gtkForm->override_color(FromColor(form.ForeColor));
   gtkForm->move(form.data().location.X, form.data().location.Y);
