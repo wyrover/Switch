@@ -28,9 +28,6 @@ namespace {
   LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
   HINSTANCE __instance;
-  HINSTANCE __prevInstance;
-  LPSTR __commandLine;
-  int __cmdShow;
   System::Collections::Generic::Dictionary<intptr, WNDPROC> defWindowProcs;
 
   inline COLORREF ColorToRgb(const Color& color) {
@@ -96,9 +93,6 @@ namespace {
 
 INT WINAPI WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR commandLine, INT cmdShow) {
   __instance = instance;
-  __prevInstance = prevInstance;
-  __commandLine = commandLine;
-  __cmdShow = cmdShow;
   return main(__argc, __argv);
 }
 
