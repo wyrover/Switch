@@ -450,9 +450,8 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::Button& button) {
     [[(NSWindow*)button.data->parent().data->handle contentView] addSubview: handle];
     
     [handle setTitle:[NSString stringWithUTF8String:button.data->text.c_str()]];
-    [handle setButtonType:NSMomentaryPushInButton];
+    [handle setButtonType:NSButtonTypeMomentaryPushIn];
     [handle setBezelStyle:bounds.Height == button.DefaultSize().Height ? NSBezelStyleRounded : NSBezelStyleRegularSquare];
-    [handle setAutoresizingMask:NSViewMaxXMargin | NSViewMinYMargin];
     //[handle setWantsLayer:YES];
     handle.layer.backgroundColor = cocoaApi().FromColor(button.BackColor).CGColor;
     [handle setTarget:[NSControlResponder alloc]];
