@@ -236,6 +236,7 @@ System::Drawing::Point FormsApi::Control::PointToScreen(const System::Windows::F
 
 void FormsApi::Control::SetBackColor(intptr hdc, const System::Drawing::Color& color) {
   SetBkColor((HDC)hdc, ColorToRgb(color));
+  SetBkMode((HDC)hdc, TRANSPARENT);
 }
 
 void FormsApi::Control::SetForeColor(intptr hdc, const System::Drawing::Color& color) {

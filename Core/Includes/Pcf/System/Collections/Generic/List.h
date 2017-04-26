@@ -111,6 +111,8 @@ namespace Pcf {
             for (const T& item : il)
               this->Add(item);
           }
+
+          ~List() { this->Clear(); }
           /// @endcond
           
           /// @brief Gets or sets the total number of elements the internal data structure.
@@ -263,7 +265,10 @@ namespace Pcf {
           /// @par Examples
           /// Other properties && methods are used to search for, insert, && remove elements from the list, && finally to clear the list.
           /// @include List.cpp
-          void Clear() override {this->list.clear();}
+          void Clear() override {
+            while (this->Count)
+              this->RemoveAt(this->Count - 1);
+          }
 
           /// @brief Determines whether an element is in the List<T>.
           /// @param value The object to locate in the List<T>. The value can be null for reference types.
@@ -805,14 +810,13 @@ namespace Pcf {
           /// @include ListExists.cpp
           virtual int32 RemoveAll(const Predicate<const T&>& match) {
             int32 count = 0;
-            typename std::vector<T, TAllocator>::const_iterator it = this->list.begin();
-            while (it != this->list.end()) {
-              if (match(*it)) {
-                it = this->list.erase(it);
-                count += 1;
-              } else {
-                it++;
+            int32 index = 0;
+            for (auto& value : this->list) {
+              if (match(value)) {
+                this->RemoveAt(index);
+                count++;
               }
+              index++;
             }
 
             if (count) this->operationNumber++;

@@ -56,22 +56,31 @@ namespace Pcf {
           public:
             ControlCollection(ref<Control> parent) : parent(parent) {}
 
-            virtual void Add(const ref<Control>& value) override {
-              ref<Control> v = value;
-              if (v().data->parent != null)
-                v().data->parent().data->controls.Remove(v);
-              else if (this->parent().Visible)
-                v().CreateControl();
-              v().data->parent = this->parent;
-              this->System::Collections::Generic::List<ref<Control>>::Add(v);
+            void Add(const ref<Control>& value) override {
+              ChangeParent(value);
+              this->System::Collections::Generic::List<ref<Control>>::Add(value);
+            }
+
+            void Insert(int32 index, const ref<Control>& value) override {
+              ChangeParent(value);
+              this->System::Collections::Generic::List<ref<Control>>::Insert(index, value);
             }
 
             bool Remove(const ref<Control>& value) override {
-              ref<Control> v = value;
-              v().data->parent = null;
-              return this->System::Collections::Generic::List<ref<Control>>::Remove(v);
+              RemoveParent(value);
+              return this->System::Collections::Generic::List<ref<Control>>::Remove(value);
             }
 
+          private:
+            void ChangeParent(ref<Control> value) {
+              if (value().data->parent != null)
+                value().data->parent().data->controls.Remove(value);
+              else if (this->parent().Visible)
+                value().CreateControl();
+              value().data->parent = this->parent;
+            }
+
+            void RemoveParent(ref<Control> value) {value().data->parent = null;}
             ref<Control> parent;
           };
 
@@ -135,7 +144,7 @@ namespace Pcf {
           /// @remarks The BackColor property is an ambient property. An ambient property is a control property that, if not set, is retrieved from the parent control. For example, a Button will have the same BackColor as its parent Form by default. For more information about ambient properties, see the AmbientProperties class or the Control class overview.
           Property<System::Drawing::Color> BackColor {
             //pcf_get { return !this->data->backColor.HasValue && this->data->parent != null ? this->data->parent().BackColor() : this->data->backColor.GetValueOrDefault(DefaultBackColor); },
-            pcf_get { return this->data->backColor.GetValueOrDefault(DefaultBackColor); },
+            pcf_get{ return this->data->backColor.GetValueOrDefault(DefaultBackColor); },
             pcf_set {
               if (this->data->backColor != value) {
                 this->data->backColor = value;
@@ -155,11 +164,21 @@ namespace Pcf {
             }
           };
 
+          /// @brief Gets the collection of controls contained within the control.
+          /// @param controls A Control.ControlCollection representing the collection of controls contained within the control.
+          /// @remarks A Control can act as a parent to a collection of controls. For example, when several controls are added to a Form, each of the controls is a member of the Control.ControlCollection assigned to the Controls property of the form, which is derived from the Control class.
+          /// @remarks You can manipulate the controls in the Control.ControlCollection assigned to the Controls property by using the methods available in the Control.ControlCollection class.
+          /// @remarks When adding several controls to a parent control, it is recommended that you call the SuspendLayout method before initializing the controls to be added. After adding the controls to the parent control, call the ResumeLayout method. Doing so will increase the performance of applications with many controls.
+          /// @remarks Use the Controls property to iterate through all controls of a form, including nested controls. Use the GetNextControl method to retrieve the previous or next child control in the tab order. Use the ActiveControl property to get or set the active control of a container control.
+          Property<ControlCollection&, ReadOnly> Controls {
+            pcf_get->ControlCollection& {return this->data().controls; }
+          };
+
           static Property<System::Drawing::Color, ReadOnly> DefaultBackColor;
           static Property<System::Drawing::Color, ReadOnly> DefaultForeColor;
 
           Property<System::Drawing::Color> ForeColor {
-            pcf_get { return this->data->foreColor.GetValueOrDefault(DefaultForeColor); },
+            pcf_get{ return this->data->foreColor.GetValueOrDefault(DefaultForeColor); },
             pcf_set {
               if (this->data->foreColor != value) {
                 this->data->foreColor = value;
@@ -430,8 +449,7 @@ namespace Pcf {
             ControlStyles style = (ControlStyles)0;
           };
           friend class __OS::FormsApi;
-          //refptr<ControlData> data = pcf_new<ControlData>(*this);
-          refptr<ControlData> data {new ControlData(*this)};
+          refptr<ControlData> data = pcf_new<ControlData>(*this);
           static System::Collections::Generic::Dictionary<intptr, ref<Control>> handles;
           /// @endcond
 

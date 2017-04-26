@@ -47,7 +47,6 @@ namespace PcfFormApp {
         System::Diagnostics::Debug::WriteLine("DialogResult = {0}", MessageBox::Show("This is a very long message for testing if MessageBox\ncan adapt his size with good values.", "A message box", MessageBoxButtons::OK, MessageBoxIcon::Hand));
       };
 
-      /*
       this->checkBox1.Parent = *this;
       this->checkBox1.Name = "checkBox1";
       this->checkBox1.Text = "CheckBox";
@@ -66,20 +65,18 @@ namespace PcfFormApp {
       this->radioButton2.Size = System::Drawing::Size(120, 25);
 
       this->label1.Parent = *this;
-      this->label1.BackColor = System::Drawing::Color::SpringGreen;
-      this->label1.ForeColor = System::Drawing::Color::DarkRed;
+      this->label1.BackColor = System::Drawing::Color::Transparent;
       this->label1.Name = "label1";
       this->label1.Text = "counter = 0";
       this->label1.Location = System::Drawing::Point(28, 132);
       this->label1.Size = System::Drawing::Size(150, 23);
 
       this->label2.Parent = *this;
-      this->label2.BackColor = System::Drawing::Color::FromArgb(128, System::Drawing::Color::SpringGreen);
+      this->label2.BackColor = System::Drawing::Color::Transparent;
       this->label2.Name = "label2";
       this->label2.Text = "(X=0,Y=0)";
       this->label2.Location = System::Drawing::Point(28, 162);
       this->label2.Size = System::Drawing::Size(150, 23);
-    */
     }
 
   private:
