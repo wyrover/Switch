@@ -85,7 +85,7 @@
 #include "System/Windows/Forms/PaintEventHandler.h"
 #include "System/Windows/Forms/Panel.h"
 //#include "System/Windows/Forms/PictureBox.h"
-//#include "System/Windows/Forms/ProgressBar.h"
+#include "System/Windows/Forms/ProgressBar.h"
 #include "System/Windows/Forms/RadioButton.h"
 //#include "System/Windows/Forms/RichTextBox.h"
 //#include "System/Windows/Forms/SaveFileDialog.h"

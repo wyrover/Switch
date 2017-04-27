@@ -9,10 +9,9 @@ using namespace System;
 using namespace System::ComponentModel;
 using namespace System::Drawing;
 using namespace System::Windows::Forms;
-using namespace __OS;
 
 void Panel::CreateHandle() {
-  this->data->handle = FormsApi::Control::Create(*this);
+  __OS::FormsApi::Control::Create(*this);
   this->Control::CreateHandle();
 }
 

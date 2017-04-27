@@ -159,38 +159,46 @@ void FormsApi::Control::Close(const System::Windows::Forms::Form& form) {
   CloseWindow((HWND)form.data->handle);
 }
 
-intptr FormsApi::Control::Create(const System::Windows::Forms::Button& control) {
+void FormsApi::Control::Create(System::Windows::Forms::Button& control) {
   static Form emptyForm;
-  return CreateControl(control, L"Button", WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, (control.Parent != null && control.Parent()().data().handle != IntPtr::Zero) ? (HWND)control.Parent()().data().handle : (HWND)emptyForm.Handle());
+  control.data().handle = CreateControl(control, L"Button", WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, (control.Parent != null && control.Parent()().data().handle != IntPtr::Zero) ? (HWND)control.Parent()().data().handle : (HWND)emptyForm.Handle());
 }
 
-intptr FormsApi::Control::Create(const System::Windows::Forms::CheckBox& control) {
+void FormsApi::Control::Create(System::Windows::Forms::CheckBox& control) {
   static Form emptyForm;
-  return CreateControl(control, L"Button", WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_AUTOCHECKBOX, (control.Parent != null && control.Parent()().data().handle != IntPtr::Zero) ? (HWND)control.Parent()().data().handle : (HWND)emptyForm.Handle());
+  control.data().handle = CreateControl(control, L"Button", WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_AUTOCHECKBOX, (control.Parent != null && control.Parent()().data().handle != IntPtr::Zero) ? (HWND)control.Parent()().data().handle : (HWND)emptyForm.Handle());
 }
 
-intptr FormsApi::Control::Create(const System::Windows::Forms::Control& control) {
+void FormsApi::Control::Create(System::Windows::Forms::Control& control) {
   static Form emptyForm;
-  return CreateControl(control, L"Control", WS_VISIBLE | WS_CHILD, (control.Parent != null && control.Parent()().data().handle != IntPtr::Zero) ? (HWND)control.Parent()().data().handle : (HWND)emptyForm.Handle());
+  control.data().handle = CreateControl(control, L"Control", WS_VISIBLE | WS_CHILD, (control.Parent != null && control.Parent()().data().handle != IntPtr::Zero) ? (HWND)control.Parent()().data().handle : (HWND)emptyForm.Handle());
 }
 
-intptr FormsApi::Control::Create(const System::Windows::Forms::Form& control) {
-  return CreateControl(control, L"Form", WS_VISIBLE | WS_OVERLAPPEDWINDOW | WS_GROUP, (control.Parent != null && control.Parent()().data().handle != IntPtr::Zero) ? (HWND)control.Parent()().data().handle : NULL);
+void FormsApi::Control::Create(System::Windows::Forms::Form& control) {
+  control.data().handle = CreateControl(control, L"Form", WS_VISIBLE | WS_OVERLAPPEDWINDOW | WS_GROUP, (control.Parent != null && control.Parent()().data().handle != IntPtr::Zero) ? (HWND)control.Parent()().data().handle : NULL);
 }
 
-intptr FormsApi::Control::Create(const System::Windows::Forms::Label& control) {
+void FormsApi::Control::Create(System::Windows::Forms::Label& control) {
   static Form emptyForm;
-  return CreateControl(control, L"Static", WS_VISIBLE | WS_CHILD, (control.Parent != null && control.Parent()().data().handle != IntPtr::Zero) ? (HWND)control.Parent()().data().handle : (HWND)emptyForm.Handle());
+  control.data().handle = CreateControl(control, L"Static", WS_VISIBLE | WS_CHILD, (control.Parent != null && control.Parent()().data().handle != IntPtr::Zero) ? (HWND)control.Parent()().data().handle : (HWND)emptyForm.Handle());
 }
 
-intptr FormsApi::Control::Create(const System::Windows::Forms::Panel& control) {
+void FormsApi::Control::Create(System::Windows::Forms::Panel& control) {
   static Form emptyForm;
-  return CreateControl(control, L"Panel", WS_VISIBLE | WS_CHILD | WS_BORDER, (control.Parent != null && control.Parent()().data().handle != IntPtr::Zero) ? (HWND)control.Parent()().data().handle : (HWND)emptyForm.Handle());
+  control.data().handle = CreateControl(control, L"Panel", WS_VISIBLE | WS_CHILD | WS_BORDER, (control.Parent != null && control.Parent()().data().handle != IntPtr::Zero) ? (HWND)control.Parent()().data().handle : (HWND)emptyForm.Handle());
 }
 
-intptr FormsApi::Control::Create(const System::Windows::Forms::RadioButton& control) {
+void FormsApi::Control::Create(System::Windows::Forms::ProgressBar& control) {
   static Form emptyForm;
-  return CreateControl(control, L"Button", WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_AUTORADIOBUTTON, (control.Parent != null && control.Parent()().data().handle != IntPtr::Zero) ? (HWND)control.Parent()().data().handle : (HWND)emptyForm.Handle());
+  control.data().handle = CreateControl(control, PROGRESS_CLASS, WS_VISIBLE | WS_CHILD, (control.Parent != null && control.Parent()().data().handle != IntPtr::Zero) ? (HWND)control.Parent()().data().handle : (HWND)emptyForm.Handle());
+  FormsApi::ProgressBar::SetMaximum(control);
+  FormsApi::ProgressBar::SetMinimum(control);
+  FormsApi::ProgressBar::SetValue(control);
+}
+
+void FormsApi::Control::Create(System::Windows::Forms::RadioButton& control) {
+  static Form emptyForm;
+  control.data().handle = CreateControl(control, L"Button", WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_AUTORADIOBUTTON, (control.Parent != null && control.Parent()().data().handle != IntPtr::Zero) ? (HWND)control.Parent()().data().handle : (HWND)emptyForm.Handle());
 }
 
 void FormsApi::Control::DefWndProc(Message& message) {
@@ -288,6 +296,21 @@ void FormsApi::Control::SetText(const System::Windows::Forms::Control& control) 
 void FormsApi::Control::SetVisible(const System::Windows::Forms::Control& control) {
   if (control.data->handle)
     ShowWindow((HWND)control.data->handle, control.Visible ? SW_SHOW : SW_HIDE);
+}
+
+void FormsApi::ProgressBar::SetMaximum(const System::Windows::Forms::ProgressBar& progressBar) {
+  if (progressBar.data->handle)
+    SendMessage((HWND)progressBar.data->handle, PBM_SETRANGE, 0, MAKELPARAM(progressBar.Minimum(), progressBar.Maximum()));
+}
+
+void FormsApi::ProgressBar::SetMinimum(const System::Windows::Forms::ProgressBar& progressBar) {
+  if (progressBar.data->handle)
+    SendMessage((HWND)progressBar.data->handle, PBM_SETRANGE, 0, MAKELPARAM(progressBar.Minimum(), progressBar.Maximum()));
+}
+
+void FormsApi::ProgressBar::SetValue(const System::Windows::Forms::ProgressBar& progressBar) {
+  if (progressBar.data->handle)
+    SendMessage((HWND)progressBar.data->handle, PBM_SETPOS, (WPARAM)progressBar.Value(), 0);
 }
 
 #endif

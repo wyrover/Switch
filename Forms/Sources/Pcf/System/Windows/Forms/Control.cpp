@@ -61,7 +61,7 @@ Property<System::Drawing::Color, ReadOnly> Control::DefaultForeColor {
 
 void Control::CreateHandle() {
   if (this->data->handle == IntPtr::Zero)
-    this->data->handle = __OS::FormsApi::Control::Create(*this);
+    __OS::FormsApi::Control::Create(*this);
   handles.Add(this->data->handle, *this);
 }
 

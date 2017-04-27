@@ -83,7 +83,7 @@ set(INCLUDE_FILES
   Includes/Pcf/System/Windows/Forms/PaintEventHandler.h
   Includes/Pcf/System/Windows/Forms/Panel.h
 #  Includes/Pcf/System/Windows/Forms/PictureBox.h
-#  Includes/Pcf/System/Windows/Forms/ProgressBar.h
+  Includes/Pcf/System/Windows/Forms/ProgressBar.h
   Includes/Pcf/System/Windows/Forms/RadioButton.h
 #  Includes/Pcf/System/Windows/Forms/RichTextBox.h
 #  Includes/Pcf/System/Windows/Forms/SaveFileDialog.h
@@ -138,7 +138,7 @@ set(SOURCE_FILES
 #  Sources/Pcf/System/Windows/Forms/OpenFileDialog.cpp
   Sources/Pcf/System/Windows/Forms/Panel.cpp
 #  Sources/Pcf/System/Windows/Forms/PictureBox.cpp
-#  Sources/Pcf/System/Windows/Forms/ProgressBar.cpp
+  Sources/Pcf/System/Windows/Forms/ProgressBar.cpp
 #  Sources/Pcf/System/Windows/Forms/Question.h
   Sources/Pcf/System/Windows/Forms/RadioButton.cpp
 #  Sources/Pcf/System/Windows/Forms/RichTextBox.cpp

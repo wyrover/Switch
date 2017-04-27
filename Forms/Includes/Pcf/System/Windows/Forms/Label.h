@@ -18,7 +18,7 @@ namespace Pcf {
         /// @note A Label can be made transparent by setting its BackColor property to Color.Transparent. When you use a transparent label, use only the current device coordinate system to draw on the container, or the Label background might paint improperly.
         class pcf_public Label : public Control {
         public:
-          Label() : Control("", 0, 0, 100, 25) { this->SetStyle(ControlStyles::UserPaint, false); }
+          Label() : Control("", 0, 0, 100, 23) { this->SetStyle(ControlStyles::UserPaint, false); }
 
           /// @cond
           //Label(const Label& label) : Control(label) {}

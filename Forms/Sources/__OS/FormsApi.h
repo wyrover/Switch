@@ -18,6 +18,7 @@
 #include "../../Includes/Pcf/System/Windows/Forms/MessageBoxIcon.h"
 #include "../../Includes/Pcf/System/Windows/Forms/MessageBoxOptions.h"
 #include "../../Includes/Pcf/System/Windows/Forms/Panel.h"
+#include "../../Includes/Pcf/System/Windows/Forms/ProgressBar.h"
 #include "../../Includes/Pcf/System/Windows/Forms/RadioButton.h"
 #include "WindowMessage.h"
 #include "WindowMessageKey.h"
@@ -44,13 +45,14 @@ namespace __OS {
     class Control pcf_static {
     public:
       static void Close(const System::Windows::Forms::Form& form);
-      static intptr Create(const System::Windows::Forms::Button& button);
-      static intptr Create(const System::Windows::Forms::CheckBox& checkBox);
-      static intptr Create(const System::Windows::Forms::Control& control);
-      static intptr Create(const System::Windows::Forms::Form& form);
-      static intptr Create(const System::Windows::Forms::Label& label);
-      static intptr Create(const System::Windows::Forms::Panel& panel);
-      static intptr Create(const System::Windows::Forms::RadioButton& radioButton);
+      static void Create(System::Windows::Forms::Button& control);
+      static void Create(System::Windows::Forms::CheckBox& control);
+      static void Create(System::Windows::Forms::Control& control);
+      static void Create(System::Windows::Forms::Form& control);
+      static void Create(System::Windows::Forms::Label& control);
+      static void Create(System::Windows::Forms::Panel& control);
+      static void Create(System::Windows::Forms::ProgressBar& control);
+      static void Create(System::Windows::Forms::RadioButton& control);
       static void DefWndProc(System::Windows::Forms::Message& message);
       static void Destroy(const System::Windows::Forms::Control& control);
       static intptr GetHandleWindowFromDeviceContext(intptr hdc);
@@ -75,6 +77,13 @@ namespace __OS {
       static void SetSize(const System::Windows::Forms::Control& control);
       static void SetText(const System::Windows::Forms::Control& control);
       static void SetVisible(const System::Windows::Forms::Control& control);
+    };
+
+    class ProgressBar pcf_static {
+    public:
+      static void SetMaximum(const System::Windows::Forms::ProgressBar& progressBar);
+      static void SetMinimum(const System::Windows::Forms::ProgressBar& progressBar);
+      static void SetValue(const System::Windows::Forms::ProgressBar& progressBar);
     };
     
     class SystemInformation pcf_static {
