@@ -85,7 +85,7 @@ namespace Pcf {
               if (value().data().parent != null)
                 value().data().parent().data().controls.Remove(value);
               value().data().parent = this->controlContainer;
-              if (this->controlContainer().Visible && value().data().handle == IntPtr::Zero)
+              if (this->controlContainer().Visible && this->controlContainer().data().handle != IntPtr::Zero && value().data().handle == IntPtr::Zero)
                 value().CreateControl();
             }
 
@@ -157,7 +157,7 @@ namespace Pcf {
             pcf_set {
               if (this->data->backColor != value) {
                 this->data->backColor = value;
-                this->OnBackColorChanged(EventArgs());
+                this->OnBackColorChanged(EventArgs::Empty);
               }
             }
           };
@@ -191,7 +191,7 @@ namespace Pcf {
             pcf_set {
               if (this->data->foreColor != value) {
                 this->data->foreColor = value;
-                this->OnForeColorChanged(EventArgs());
+                this->OnForeColorChanged(EventArgs::Empty);
               }
             }
           };
@@ -201,7 +201,7 @@ namespace Pcf {
           /// @remarks The value of the Handle property is a Windows HWND. If the handle has not yet been created, referencing this property will force the handle to be created.
           Property<intptr, ReadOnly> Handle {
             pcf_get {
-              if (this->data->handle == 0)
+              if (!this->IsHandleCreated)
                 CreateHandle();
               return this->data->handle;
             }
@@ -229,7 +229,7 @@ namespace Pcf {
             pcf_set {
             if (this->data->location != value) {
               this->data->location = value;
-              this->OnLocationChanged(EventArgs());
+              this->OnLocationChanged(EventArgs::Empty);
             }
           }
           };
@@ -242,7 +242,7 @@ namespace Pcf {
             pcf_set {
             if (this->data->name != value) {
               this->data->name = value;
-              this->OnNameChanged(EventArgs());
+              this->OnNameChanged(EventArgs::Empty);
             }
           }
           };
@@ -258,7 +258,7 @@ namespace Pcf {
                   this->data->parent().data->controls.Remove(*this);
                 else
                   const_cast<Control&>(value()).data->controls.Add(*this);
-                this->OnParentChanged(EventArgs());
+                this->OnParentChanged(EventArgs::Empty);
               }
             }
           };
@@ -272,7 +272,7 @@ namespace Pcf {
             pcf_set {
             if (this->data->size != value) {
               this->data->size = value;
-              this->OnSizeChanged(EventArgs());
+              this->OnSizeChanged(EventArgs::Empty);
             }
           }
           };
@@ -291,7 +291,7 @@ namespace Pcf {
             pcf_set {
               if (this->data->visible != value) {
                 this->data->visible = value;
-                this->OnVisibleChanged(EventArgs());
+                this->OnVisibleChanged(EventArgs::Empty);
               }
             }
           };
@@ -433,7 +433,7 @@ namespace Pcf {
           virtual void SetText(const string& value) {
             if (this->data->text != value) {
               this->data->text = value;
-              this->OnTextChanged(EventArgs());
+              this->OnTextChanged(EventArgs::Empty);
             }
           }
 

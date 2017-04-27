@@ -2,4 +2,6 @@
 
 using namespace System;
 
-EventArgs EventArgs::Empty;
+Property<EventArgs, ReadOnly> EventArgs::Empty {
+  [] {return EventArgs(); }
+};

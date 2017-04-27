@@ -14,7 +14,7 @@ namespace Pcf {
     class pcf_public EventArgs : public Object {
     public:
       /// @brief Represents an event with no event data.
-      static EventArgs Empty;
+      static Property<EventArgs, ReadOnly> Empty;
 
       /// @brief Create a new instance of class EventArgs
       EventArgs() {}
