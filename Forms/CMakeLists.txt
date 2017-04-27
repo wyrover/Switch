@@ -81,7 +81,7 @@ set(INCLUDE_FILES
 #  Includes/Pcf/System/Windows/Forms/OpenFileDialog.h
   Includes/Pcf/System/Windows/Forms/PaintEventArgs.h
   Includes/Pcf/System/Windows/Forms/PaintEventHandler.h
-#  Includes/Pcf/System/Windows/Forms/Panel.h
+  Includes/Pcf/System/Windows/Forms/Panel.h
 #  Includes/Pcf/System/Windows/Forms/PictureBox.h
 #  Includes/Pcf/System/Windows/Forms/ProgressBar.h
   Includes/Pcf/System/Windows/Forms/RadioButton.h
@@ -135,7 +135,7 @@ set(SOURCE_FILES
   Sources/Pcf/System/Windows/Forms/MessageBox.cpp
 #  Sources/Pcf/System/Windows/Forms/NumericUpDown.cpp
 #  Sources/Pcf/System/Windows/Forms/OpenFileDialog.cpp
-#  Sources/Pcf/System/Windows/Forms/Panel.cpp
+  Sources/Pcf/System/Windows/Forms/Panel.cpp
 #  Sources/Pcf/System/Windows/Forms/PictureBox.cpp
 #  Sources/Pcf/System/Windows/Forms/ProgressBar.cpp
 #  Sources/Pcf/System/Windows/Forms/Question.h

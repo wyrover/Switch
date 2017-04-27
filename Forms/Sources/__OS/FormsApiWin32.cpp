@@ -89,6 +89,8 @@ namespace {
       control().WndProc(message);
     return message.Result;
   }
+
+  refptr<System::Windows::Forms::Form> defaultForm;
 }
 
 INT WINAPI WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR commandLine, INT cmdShow) {
@@ -146,6 +148,7 @@ DialogResult FormsApi::Application::ShowMessageBox(const string& message, const 
 
 void FormsApi::Application::Start() {
   RegisterClassControl();
+  defaultForm = pcf_new<System::Windows::Forms::Form>();
 }
 
 void FormsApi::Application::Stop() {
@@ -157,32 +160,32 @@ void FormsApi::Control::Close(const System::Windows::Forms::Form& form) {
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Button& button) {
-  return CreateControl(button, L"Button", WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, (HWND)button.Parent()().data->handle);
+  return CreateControl(button, L"Button", WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, (HWND)defaultForm().Handle());
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::CheckBox& checkBox) {
-  return CreateControl(checkBox, L"Button", WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_AUTOCHECKBOX, (HWND)checkBox.Parent()().data->handle);
+  return CreateControl(checkBox, L"Button", WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_AUTOCHECKBOX, (HWND)defaultForm().Handle());
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Control& control) {
-  return CreateControl(control, L"Control", WS_VISIBLE | WS_CHILD, (HWND)control.Parent()().data->handle);
+  return CreateControl(control, L"Control", WS_VISIBLE | WS_CHILD, (HWND)defaultForm().Handle());
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Form& form) {
-  return CreateControl(form, L"Form", WS_VISIBLE | WS_OVERLAPPEDWINDOW | WS_GROUP, (HWND)NULL);
+  return CreateControl(form, L"Form", WS_VISIBLE | WS_OVERLAPPEDWINDOW | WS_GROUP, NULL);
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Label& label) {
-  return CreateControl(label, L"Static", WS_VISIBLE | WS_CHILD, (HWND)label.Parent()().data->handle);
+  return CreateControl(label, L"Static", WS_VISIBLE | WS_CHILD, (HWND)defaultForm().Handle());
+}
+
+intptr FormsApi::Control::Create(const System::Windows::Forms::Panel& panel) {
+  return CreateControl(panel, L"Panel", WS_VISIBLE | WS_CHILD | WS_BORDER, (HWND)defaultForm().Handle());
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::RadioButton& radioButton) {
-  return CreateControl(radioButton, L"Button", WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_AUTORADIOBUTTON, (HWND)radioButton.Parent()().data->handle);
+  return CreateControl(radioButton, L"Button", WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_AUTORADIOBUTTON, (HWND)defaultForm().Handle());
 }
-
-//intptr FormsApi::Control::Create(const System::Windows::Forms::Panel& panel) {
-//  return CreateControl(panel, L"Panel", WS_VISIBLE | WS_CHILD | WS_BORDER, (HWND)control.Parent()().data->handle);
-//}
 
 void FormsApi::Control::DefWndProc(Message& message) {
   if (defWindowProcs.ContainsKey(message.HWnd()))
@@ -258,6 +261,11 @@ void FormsApi::Control::SetForeColor(const System::Windows::Forms::Control& cont
 void FormsApi::Control::SetLocation(const System::Windows::Forms::Control& control) {
   if (control.data->handle)
     SetWindowPos((HWND)control.data->handle, NULL, control.Location().X, control.Location().Y, control.Size().Width, control.Size().Height, SWP_NOSIZE);
+}
+
+void FormsApi::Control::SetParent(const System::Windows::Forms::Control& control) {
+  if (control.data->handle)
+    ::SetParent((HWND)control.data->handle, (HWND)control.data->parent().data->handle);
 }
 
 void FormsApi::Control::SetSize(const System::Windows::Forms::Control& control) {

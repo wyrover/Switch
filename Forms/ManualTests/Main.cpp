@@ -77,6 +77,10 @@ namespace PcfFormApp {
       this->label2.Text = "(X=0,Y=0)";
       this->label2.Location = System::Drawing::Point(28, 162);
       this->label2.Size = System::Drawing::Size(150, 23);
+
+      this->panel1.Parent = *this;
+      this->panel1.Name = "panel1";
+      this->panel1.Location = System::Drawing::Point(10, 190);
     }
 
   private:
@@ -87,6 +91,7 @@ namespace PcfFormApp {
     RadioButton radioButton2;
     Label label1;
     Label label2;
+    Panel panel1;
   };
 }
 

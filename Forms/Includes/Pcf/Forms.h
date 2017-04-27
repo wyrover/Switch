@@ -83,7 +83,7 @@
 //#include "System/Windows/Forms/OpenFileDialog.h"
 #include "System/Windows/Forms/PaintEventArgs.h"
 #include "System/Windows/Forms/PaintEventHandler.h"
-//#include "System/Windows/Forms/Panel.h"
+#include "System/Windows/Forms/Panel.h"
 //#include "System/Windows/Forms/PictureBox.h"
 //#include "System/Windows/Forms/ProgressBar.h"
 #include "System/Windows/Forms/RadioButton.h"

@@ -103,6 +103,11 @@ void Control::OnLocationChanged(const EventArgs& e) {
   this->LocationChanged(*this, e); 
 }
 
+void Control::OnParentChanged(const EventArgs& e) {
+  __OS::FormsApi::Control::SetParent(*this);
+  this->ParentChanged(*this, e);
+}
+
 void Control::OnSizeChanged(const EventArgs& e) {
   __OS::FormsApi::Control::SetSize(*this);
   this->SizeChanged(*this, e); 

@@ -17,6 +17,7 @@
 #include "../../Includes/Pcf/System/Windows/Forms/MessageBoxDefaultButton.h"
 #include "../../Includes/Pcf/System/Windows/Forms/MessageBoxIcon.h"
 #include "../../Includes/Pcf/System/Windows/Forms/MessageBoxOptions.h"
+#include "../../Includes/Pcf/System/Windows/Forms/Panel.h"
 #include "../../Includes/Pcf/System/Windows/Forms/RadioButton.h"
 #include "WindowMessage.h"
 #include "WindowMessageKey.h"
@@ -48,6 +49,7 @@ namespace __OS {
       static intptr Create(const System::Windows::Forms::Control& control);
       static intptr Create(const System::Windows::Forms::Form& form);
       static intptr Create(const System::Windows::Forms::Label& label);
+      static intptr Create(const System::Windows::Forms::Panel& panel);
       static intptr Create(const System::Windows::Forms::RadioButton& radioButton);
       static void DefWndProc(System::Windows::Forms::Message& message);
       static void Destroy(const System::Windows::Forms::Control& control);
@@ -69,6 +71,7 @@ namespace __OS {
       static void SetBackColor(const System::Windows::Forms::Control& control);
       static void SetForeColor(const System::Windows::Forms::Control& control);
       static void SetLocation(const System::Windows::Forms::Control& control);
+      static void SetParent(const System::Windows::Forms::Control& control);
       static void SetSize(const System::Windows::Forms::Control& control);
       static void SetText(const System::Windows::Forms::Control& control);
       static void SetVisible(const System::Windows::Forms::Control& control);

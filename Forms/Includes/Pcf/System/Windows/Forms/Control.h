@@ -54,8 +54,9 @@ namespace Pcf {
           /// @endcode
           class ControlCollection : public System::Collections::Generic::List<ref<Control>> {
           public:
-            ControlCollection(ref<Control> parent) : parent(parent) {}
-
+            /// @cond
+            ~ControlCollection() { this->Clear(); }
+            /// @endcond
             void Add(const ref<Control>& value) override {
               ChangeParent(value);
               this->System::Collections::Generic::List<ref<Control>>::Add(value);
@@ -71,17 +72,25 @@ namespace Pcf {
               return this->System::Collections::Generic::List<ref<Control>>::Remove(value);
             }
 
-          private:
-            void ChangeParent(ref<Control> value) {
-              if (value().data->parent != null)
-                value().data->parent().data->controls.Remove(value);
-              else if (this->parent().Visible)
-                value().CreateControl();
-              value().data->parent = this->parent;
+            void RemoveAt(int32 index) override {
+              RemoveParent((*this)[index]);
+              this->System::Collections::Generic::List<ref<Control>>::RemoveAt(index);
             }
 
-            void RemoveParent(ref<Control> value) {value().data->parent = null;}
-            ref<Control> parent;
+          private:
+            friend Control;
+            ControlCollection(ref<Control> controlContainer) : controlContainer(controlContainer) {}
+            
+            void ChangeParent(ref<Control> value) {
+              if (value().data().parent != null)
+                value().data().parent().data().controls.Remove(value);
+              value().data().parent = this->controlContainer;
+              if (this->controlContainer().Visible && value().data().handle == IntPtr::Zero)
+                value().CreateControl();
+            }
+
+            void RemoveParent(ref<Control> value) {value().data().parent = null;}
+            ref<Control> controlContainer;
           };
 
           /// @brief Initializes a new instance of the Control class with default settings.
@@ -411,7 +420,7 @@ namespace Pcf {
 
           virtual void OnPaint(PaintEventArgs& e) { this->Paint(*this, e); }
 
-          virtual void OnParentChanged(const EventArgs& e) { this->ParentChanged(*this, e); }
+          virtual void OnParentChanged(const EventArgs& e);
 
           virtual void OnSizeChanged(const EventArgs& e);
 
