@@ -42,6 +42,11 @@ namespace __OS {
       static bool visualStylesEnabled;
     };
 
+    class CheckBox pcf_static {
+    public:
+      static void SetChecked(const System::Windows::Forms::CheckBox& checkBox);
+    };
+
     class Control pcf_static {
     public:
       static void Close(const System::Windows::Forms::Form& form);
@@ -79,13 +84,23 @@ namespace __OS {
       static void SetVisible(const System::Windows::Forms::Control& control);
     };
 
+    class Panel pcf_static {
+    public:
+      static void SetBorderStyle(const System::Windows::Forms::Panel& panel);
+    };
+
     class ProgressBar pcf_static {
     public:
       static void SetMaximum(const System::Windows::Forms::ProgressBar& progressBar);
       static void SetMinimum(const System::Windows::Forms::ProgressBar& progressBar);
       static void SetValue(const System::Windows::Forms::ProgressBar& progressBar);
     };
-    
+
+    class RadioButton pcf_static {
+    public:
+      static void SetChecked(const System::Windows::Forms::RadioButton& checkBox);
+    };
+
     class SystemInformation pcf_static {
     public:
       static int32 GetActiveWindowTrackingDelay();

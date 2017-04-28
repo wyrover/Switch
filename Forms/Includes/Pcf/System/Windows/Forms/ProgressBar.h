@@ -21,17 +21,17 @@ namespace Pcf {
           ProgressBar() : Control("", 0, 0, 100, 23) { this->SetStyle(ControlStyles::UserPaint, false); }
 
           Property<int32> Maximum{
-            pcf_get{ return this->progressBarData().maximum; },
+            pcf_get{ return this->maximum; },
             pcf_set{ this->SetMaximum(value); },
           };
 
           Property<int32> Minimum{
-            pcf_get{ return this->progressBarData().minimum; },
+            pcf_get{ return this->minimum; },
             pcf_set{ this->SetMinimum(value); },
           };
 
           Property<int32> Value{
-            pcf_get{ return this->progressBarData().value; },
+            pcf_get{ return this->value; },
             pcf_set{ this->SetValue(value); },
           };
 
@@ -42,17 +42,13 @@ namespace Pcf {
           System::Drawing::Size GetDefaultSize() const override { return System::Drawing::Size(100, 23); }
          
           /// @cond
-          struct ProgressBarData {
-            int32 maximum = 100;
-            int32 minimum = 0;
-            int32 value = 0;
-          };
-
+          int32 maximum = 100;
+          int32 minimum = 0;
+          int32 value = 0;
+ 
           void SetMaximum(int32 maximum);
           void SetMinimum(int32 minimum);
           void SetValue(int32 value);
-
-          refptr<ProgressBarData> progressBarData = pcf_new<ProgressBarData>();
         };
       }
     }

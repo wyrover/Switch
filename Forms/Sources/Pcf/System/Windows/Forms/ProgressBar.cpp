@@ -9,19 +9,25 @@ using namespace System::Windows::Forms;
 void ProgressBar::CreateHandle() {
   __OS::FormsApi::Control::Create(*this);
   this->Control::CreateHandle();
+  __OS::FormsApi::ProgressBar::SetMaximum(*this);
+  __OS::FormsApi::ProgressBar::SetMinimum(*this);
+  __OS::FormsApi::ProgressBar::SetValue(*this);
 }
 
 void ProgressBar::SetMaximum(int32 maximum) {
-  this->progressBarData().maximum = maximum;
-  __OS::FormsApi::ProgressBar::SetMaximum(*this);
+  this->maximum = maximum;
+  if (this->IsHandleCreated)
+    __OS::FormsApi::ProgressBar::SetMaximum(*this);
 }
 
 void ProgressBar::SetMinimum(int32 minimum) {
-  this->progressBarData().minimum = minimum;
-  __OS::FormsApi::ProgressBar::SetMinimum(*this);
+  this->minimum = minimum;
+  if (this->IsHandleCreated)
+    __OS::FormsApi::ProgressBar::SetMinimum(*this);
 }
 
 void ProgressBar::SetValue(int32 value) {
-  this->progressBarData().value = value;
-  __OS::FormsApi::ProgressBar::SetValue(*this);
+  this->value = value;
+  if (this->IsHandleCreated)
+    __OS::FormsApi::ProgressBar::SetValue(*this);
 }

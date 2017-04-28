@@ -26,28 +26,24 @@ namespace Pcf {
             //this->BackColor = System::Drawing::SystemColors::Window;
           }
 
-          /// @cond
-          //Form(const Form& form) : ContainerControl(form), formData(form.formData) {}
-          /// @endcond
-
           Property<System::Windows::Forms::FormBorderStyle> FormBorderStyle {
-            pcf_get{return this->formData->formBorderStyle;},
-            pcf_set{this->formData->formBorderStyle = value;}
+            pcf_get{return this->formBorderStyle;},
+            pcf_set{this->formBorderStyle = value;}
           };
           
           Property<bool> MaximizeBox {
-            pcf_get {return this->formData->maximizeBox;},
-            pcf_set {this->formData->maximizeBox = value;}
+            pcf_get {return this->maximizeBox;},
+            pcf_set {this->maximizeBox = value;}
           };
           
           Property<bool> MinimizeBox {
-            pcf_get {return this->formData->minimizeBox;},
-            pcf_set {this->formData->minimizeBox = value;}
+            pcf_get {return this->minimizeBox;},
+            pcf_set {this->minimizeBox = value;}
           };
           
 		      Property<FormStartPosition> StartPosition{
-			      pcf_get{return this->formData->startPosition;},
-			      pcf_set{this->formData->startPosition = value;}
+			      pcf_get{return this->startPosition;},
+			      pcf_set{this->startPosition = value;}
 		      };
 
           void Close() override;
@@ -68,15 +64,11 @@ namespace Pcf {
           virtual void OnFormClosing(FormClosingEventArgs& e) { this->FormClosing(*this, e); }
 
           /// @cond
-          struct FormData {
-            System::Windows::Forms::FormBorderStyle formBorderStyle = System::Windows::Forms::FormBorderStyle::Sizable;
-            bool maximizeBox = true;
-            bool minimizeBox = true;
-            System::Windows::Forms::FormStartPosition startPosition = FormStartPosition::WindowsDefaultLocation;
-            System::Collections::Generic::Dictionary<int32, Action<Message&>> messageActions;
-          };
-
-          refptr<FormData> formData = pcf_new<FormData>();
+          System::Windows::Forms::FormBorderStyle formBorderStyle = System::Windows::Forms::FormBorderStyle::Sizable;
+          bool maximizeBox = true;
+          bool minimizeBox = true;
+          System::Windows::Forms::FormStartPosition startPosition = FormStartPosition::WindowsDefaultLocation;
+          System::Collections::Generic::Dictionary<int32, Action<Message&>> messageActions;
           /// @endcond
 
         private:

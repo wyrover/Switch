@@ -20,7 +20,7 @@ namespace {
   };
 
   bool AllWindowMessagesFilter(const Message& message) {
-    return false; //!message.ToString().Contains("WM_NULL");
+    return true; //message.Msg != WM_TIMER && message.Msg != WM_PAINT && message.Msg != WM_ERASEBKGND;  //!message.ToString().Contains("WM_NULL");
   }
 
   MouseButtons MessageToMouseButtons(Message message) {
@@ -60,15 +60,17 @@ Property<System::Drawing::Color, ReadOnly> Control::DefaultForeColor {
 };
 
 void Control::CreateHandle() {
-  if (this->data->handle == IntPtr::Zero)
+  if (!this->IsHandleCreated)
     __OS::FormsApi::Control::Create(*this);
   handles.Add(this->data->handle, *this);
 }
 
 void Control::DestroyHandle() {
-  handles.Remove(this->data->handle);
-  __OS::FormsApi::Control::Destroy(*this);
-  this->data->handle = 0;
+  if (this->IsHandleCreated) {
+    handles.Remove(this->data->handle);
+    __OS::FormsApi::Control::Destroy(*this);
+    this->data->handle = 0;
+  }
 }
 
 void Control::DefWndProc(Message& message) {
@@ -76,52 +78,61 @@ void Control::DefWndProc(Message& message) {
 }
 
 void Control::Invalidate(bool invalidateChildren) {
-  __OS::FormsApi::Control::Invalidate(*this, invalidateChildren);
+  if (this->IsHandleCreated)
+    __OS::FormsApi::Control::Invalidate(*this, invalidateChildren);
   this->OnInvalidated(InvalidateEventArgs(this->GetClientRectangle()));
 }
 
 void Control::Invalidate(const System::Drawing::Rectangle& rect, bool invalidateChildren) {
-  __OS::FormsApi::Control::Invalidate(*this, rect, invalidateChildren);
+  if (this->IsHandleCreated)
+    __OS::FormsApi::Control::Invalidate(*this, rect, invalidateChildren);
   this->OnInvalidated(InvalidateEventArgs(rect));
 }
 
 void Control::OnBackColorChanged(const EventArgs& e) {
   this->data->backBrush = System::Drawing::SolidBrush(this->BackColor);
-  __OS::FormsApi::Control::SetBackColor(*this);
+  if (this->IsHandleCreated)
+    __OS::FormsApi::Control::SetBackColor(*this);
   this->Invalidate();
   this->BackColorChanged(*this, e);
 }
 
 void Control::OnForeColorChanged(const EventArgs& e) {
-  __OS::FormsApi::Control::SetForeColor(*this);
+  if (this->IsHandleCreated)
+    __OS::FormsApi::Control::SetForeColor(*this);
   this->Invalidate();
   this->ForeColorChanged(*this, e);
 }
 
 void Control::OnLocationChanged(const EventArgs& e) {
-  __OS::FormsApi::Control::SetLocation(*this);
-  this->LocationChanged(*this, e); 
+  if (this->IsHandleCreated)
+    __OS::FormsApi::Control::SetLocation(*this);
+  this->LocationChanged(*this, e);
 }
 
 void Control::OnParentChanged(const EventArgs& e) {
-  __OS::FormsApi::Control::SetParent(*this);
+  if (this->IsHandleCreated)
+    __OS::FormsApi::Control::SetParent(*this);
   this->ParentChanged(*this, e);
 }
 
 void Control::OnSizeChanged(const EventArgs& e) {
-  __OS::FormsApi::Control::SetSize(*this);
-  this->SizeChanged(*this, e); 
+  if (this->IsHandleCreated)
+    __OS::FormsApi::Control::SetSize(*this);
+  this->SizeChanged(*this, e);
 }
 
 void Control::OnTextChanged(const EventArgs& e) {
-  __OS::FormsApi::Control::SetText(*this);
+  if (this->IsHandleCreated)
+    __OS::FormsApi::Control::SetText(*this);
   this->TextChanged(*this, e); 
 }
 
 void Control::OnVisibleChanged(const EventArgs& e) {
   if (this->data->visible == true)
     CreateControl();
-  __OS::FormsApi::Control::SetVisible(*this);
+  if (this->IsHandleCreated)
+    __OS::FormsApi::Control::SetVisible(*this);
   this->VisibleChanged(*this, e);
 }
 
@@ -143,7 +154,6 @@ void Control::WndProc(Message& message) {
     this->data->messageActions[message.Msg](message);
   } else {
     System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::AllWindowMessages && AllWindowMessagesFilter(message), "DefWndProc message=" + message + ", name=" + this->data->name);
-    System::Diagnostics::Debug::Flush();
     this->DefWndProc(message);
   }
 }

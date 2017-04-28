@@ -13,6 +13,12 @@ using namespace System::Windows::Forms;
 void Panel::CreateHandle() {
   __OS::FormsApi::Control::Create(*this);
   this->Control::CreateHandle();
+  __OS::FormsApi::Panel::SetBorderStyle(*this);
 }
 
+void Panel::SetBorderStyle(System::Windows::Forms::BorderStyle borderStyle) {
+  this->borderStyle = borderStyle;
+  if (this->IsHandleCreated)
+    __OS::FormsApi::Panel::SetBorderStyle(*this);
+}
 

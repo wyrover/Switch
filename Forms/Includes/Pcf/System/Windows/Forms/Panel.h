@@ -25,23 +25,20 @@ namespace Pcf {
           }
 
           Property<System::Windows::Forms::BorderStyle> BorderStyle {
-            pcf_get{return this->panelData->borderStyle;},
-            pcf_set{this->panelData->borderStyle = value;}
+            pcf_get{return this->borderStyle;},
+            pcf_set{this->SetBorderStyle (value);}
           };
 
          FormClosingEventHandler FormClosing;
 
         protected:
           void CreateHandle() override;
+          void SetBorderStyle(System::Windows::Forms::BorderStyle borderStyle);
 
           System::Drawing::Size GetDefaultSize() const override { return System::Drawing::Size(200, 100); }
 
           /// @cond
-          struct PanelData {
-            System::Windows::Forms::BorderStyle borderStyle = System::Windows::Forms::BorderStyle::None;
-          };
-
-          refptr<PanelData> panelData = pcf_new<PanelData>();
+          System::Windows::Forms::BorderStyle borderStyle = System::Windows::Forms::BorderStyle::None;
           /// @endcond
         };
       }

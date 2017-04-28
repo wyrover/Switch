@@ -137,7 +137,6 @@ namespace Pcf {
           }
 
           /// @cond
-          //Control(const Control& control) : data(control.data) {}
           Control(const Control& control) = delete;
           ~Control() {
             if (this->Parent() != null)
@@ -152,8 +151,8 @@ namespace Pcf {
           /// @remarks The BackColor property does not support transparent colors unless the SupportsTransparentBackColor value of System::Windows::Forms::ControlStyles is set to true.
           /// @remarks The BackColor property is an ambient property. An ambient property is a control property that, if not set, is retrieved from the parent control. For example, a Button will have the same BackColor as its parent Form by default. For more information about ambient properties, see the AmbientProperties class or the Control class overview.
           Property<System::Drawing::Color> BackColor {
-            //pcf_get { return !this->data->backColor.HasValue && this->data->parent != null ? this->data->parent().BackColor() : this->data->backColor.GetValueOrDefault(DefaultBackColor); },
-            pcf_get{ return this->data->backColor.GetValueOrDefault(DefaultBackColor); },
+            pcf_get { return (!this->data->backColor.HasValue && this->data->parent != null) ? this->data().parent().data().backColor.GetValueOrDefault(DefaultBackColor) : this->data().backColor.GetValueOrDefault(DefaultBackColor); },
+            //pcf_get{ return this->data->backColor.GetValueOrDefault(DefaultBackColor); },
             pcf_set {
               if (this->data->backColor != value) {
                 this->data->backColor = value;

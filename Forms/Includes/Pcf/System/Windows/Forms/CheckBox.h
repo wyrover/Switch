@@ -22,14 +22,20 @@ namespace Pcf {
         public:
           CheckBox() : ButtonBase("", 0, 0, 105, 25) { this->SetStyle(ControlStyles::UserPaint, false); }
 
-          /// @cond
-          //CheckBox(const CheckBox& checkBox) : ButtonBase(checkBox) {}
-          /// @endcond
+          Property<bool> Checked {
+            pcf_get {return this->checked;},
+            pcf_set {this->SetChecked(value);}
+          };
 
         protected:
           void CreateHandle() override;
+          void SetChecked(bool checked);
 
           System::Drawing::Size GetDefaultSize() const override { return System::Drawing::Size(100, 25); }
+
+          /// @cond
+          bool checked = false;
+          /// @endcond
         };
       }
     }

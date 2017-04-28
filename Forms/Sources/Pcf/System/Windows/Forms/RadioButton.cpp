@@ -9,4 +9,11 @@ using namespace System::Windows::Forms;
 void RadioButton::CreateHandle() {
   __OS::FormsApi::Control::Create(*this);
   this->Control::CreateHandle();
+  __OS::FormsApi::RadioButton::SetChecked(*this);
+}
+
+void RadioButton::SetChecked(bool checked) {
+  this->checked = checked;
+  if (this->IsHandleCreated)
+    __OS::FormsApi::RadioButton::SetChecked(*this);
 }

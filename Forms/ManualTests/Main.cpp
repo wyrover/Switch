@@ -1,6 +1,7 @@
 #include <Pcf/Forms.h>
 
 using namespace System;
+using namespace System::Drawing;
 using namespace System::Windows::Forms;
 
 namespace PcfFormApp {
@@ -12,10 +13,36 @@ namespace PcfFormApp {
       progressBar.Location = System::Drawing::Point(10, 10);
       progressBar.Minimum = 0;
       progressBar.Maximum = 100;
-      progressBar.Value = 50;
+      progressBar.Value = 80;
+
+      Label label;
+      label.Location = Point(10, 40);
+      label.Text = "A label";
+
+      CheckBox checkBox;
+      checkBox.Text = "Check 1";
+      checkBox.Location = Point(10, 70);
+      checkBox.Checked = true;
+
+      RadioButton radioButton1;
+      radioButton1.Text = "Radio 1";
+      radioButton1.Location = Point(10, 100);
+      radioButton1.Checked = true;
+
+      RadioButton radioButton2;
+      radioButton2.Text = "Radio 2";
+      radioButton2.Location = Point(10, 130);
+      radioButton2.Checked = true;
+
+      Panel panel;
+      panel.Text = "Panel";
+      panel.Location = Point(10, 10);
+      panel.Size = Size(200, 200);
+      panel.BorderStyle = BorderStyle::Fixed3D;
+      panel.Controls().AddRange({progressBar, label, checkBox, radioButton1, radioButton2});
  
       Form form;
-      form.Controls().AddRange({progressBar});
+      form.Controls().Add(panel);
 
       Application::EnableVisualStyles();
       Application::Run(form);
