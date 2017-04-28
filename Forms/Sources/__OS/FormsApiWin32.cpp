@@ -146,52 +146,51 @@ void FormsApi::Application::Stop() {
 }
 
 void FormsApi::CheckBox::SetChecked(const System::Windows::Forms::CheckBox& checkBox) {
-  PostMessage((HWND)checkBox.data().handle, BM_SETCHECK, checkBox.Checked ? BST_CHECKED : BST_UNCHECKED, 0);
+  PostMessage((HWND)checkBox.handle, BM_SETCHECK, checkBox.Checked ? BST_CHECKED : BST_UNCHECKED, 0);
 }
 
 void FormsApi::Control::Close(const System::Windows::Forms::Form& form) {
-  CloseWindow((HWND)form.data->handle);
+  CloseWindow((HWND)form.handle);
 }
 
 void FormsApi::Control::Create(System::Windows::Forms::Button& control) {
   static Form emptyForm;
-  control.data().handle = CreateControl(control, L"Button", WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, (control.Parent != null && control.Parent()().data().handle != IntPtr::Zero) ? (HWND)control.Parent()().data().handle : (HWND)emptyForm.Handle());
+  control.handle = CreateControl(control, L"Button", WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, (control.Parent != null && control.Parent()().handle != IntPtr::Zero) ? (HWND)control.Parent()().handle : (HWND)emptyForm.Handle());
 }
 
 void FormsApi::Control::Create(System::Windows::Forms::CheckBox& control) {
   static Form emptyForm;
-  control.data().handle = CreateControl(control, L"Button", WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_AUTOCHECKBOX, (control.Parent != null && control.Parent()().data().handle != IntPtr::Zero) ? (HWND)control.Parent()().data().handle : (HWND)emptyForm.Handle());
-  FormsApi::CheckBox::SetChecked(control);
+  control.handle = CreateControl(control, L"Button", WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_AUTOCHECKBOX, (control.Parent != null && control.Parent()().handle != IntPtr::Zero) ? (HWND)control.Parent()().handle : (HWND)emptyForm.Handle());
 }
 
 void FormsApi::Control::Create(System::Windows::Forms::Control& control) {
   static Form emptyForm;
-  control.data().handle = CreateControl(control, L"Control", WS_VISIBLE | WS_CHILD, (control.Parent != null && control.Parent()().data().handle != IntPtr::Zero) ? (HWND)control.Parent()().data().handle : (HWND)emptyForm.Handle());
+  control.handle = CreateControl(control, L"Control", WS_VISIBLE | WS_CHILD, (control.Parent != null && control.Parent()().handle != IntPtr::Zero) ? (HWND)control.Parent()().handle : (HWND)emptyForm.Handle());
 }
 
 void FormsApi::Control::Create(System::Windows::Forms::Form& control) {
-  control.data().handle = CreateControl(control, L"Form", WS_VISIBLE | WS_OVERLAPPEDWINDOW | WS_GROUP, (control.Parent != null && control.Parent()().data().handle != IntPtr::Zero) ? (HWND)control.Parent()().data().handle : NULL);
+  control.handle = CreateControl(control, L"Form", WS_VISIBLE | WS_OVERLAPPEDWINDOW | WS_GROUP, (control.Parent != null && control.Parent()().handle != IntPtr::Zero) ? (HWND)control.Parent()().handle : NULL);
 }
 
 void FormsApi::Control::Create(System::Windows::Forms::Label& control) {
   static Form emptyForm;
-  control.data().handle = CreateControl(control, L"Static", WS_VISIBLE | WS_CHILD, (control.Parent != null && control.Parent()().data().handle != IntPtr::Zero) ? (HWND)control.Parent()().data().handle : (HWND)emptyForm.Handle());
-  PostMessage((HWND)control.data().parent().data().handle, WM_CTLCOLORSTATIC, 0, control.data().handle);
+  control.handle = CreateControl(control, L"Static", WS_VISIBLE | WS_CHILD, (control.Parent != null && control.Parent()().handle != IntPtr::Zero) ? (HWND)control.Parent()().handle : (HWND)emptyForm.Handle());
+  PostMessage((HWND)control.parent().handle, WM_CTLCOLORSTATIC, 0, control.handle);
 }
 
 void FormsApi::Control::Create(System::Windows::Forms::Panel& control) {
   static Form emptyForm;
-  control.data().handle = CreateControl(control, L"Panel", WS_VISIBLE | WS_CHILD | WS_BORDER, (control.Parent != null && control.Parent()().data().handle != IntPtr::Zero) ? (HWND)control.Parent()().data().handle : (HWND)emptyForm.Handle());
+  control.handle = CreateControl(control, L"Panel", WS_VISIBLE | WS_CHILD | WS_BORDER, (control.Parent != null && control.Parent()().handle != IntPtr::Zero) ? (HWND)control.Parent()().handle : (HWND)emptyForm.Handle());
 }
 
 void FormsApi::Control::Create(System::Windows::Forms::ProgressBar& control) {
   static Form emptyForm;
-  control.data().handle = CreateControl(control, PROGRESS_CLASS, WS_VISIBLE | WS_CHILD | PBS_SMOOTH, (control.Parent != null && control.Parent()().data().handle != IntPtr::Zero) ? (HWND)control.Parent()().data().handle : (HWND)emptyForm.Handle());
+  control.handle = CreateControl(control, PROGRESS_CLASS, WS_VISIBLE | WS_CHILD | PBS_SMOOTH, (control.Parent != null && control.Parent()().handle != IntPtr::Zero) ? (HWND)control.Parent()().handle : (HWND)emptyForm.Handle());
 }
 
 void FormsApi::Control::Create(System::Windows::Forms::RadioButton& control) {
   static Form emptyForm;
-  control.data().handle = CreateControl(control, L"Button", WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_AUTORADIOBUTTON, (control.Parent != null && control.Parent()().data().handle != IntPtr::Zero) ? (HWND)control.Parent()().data().handle : (HWND)emptyForm.Handle());
+  control.handle = CreateControl(control, L"Button", WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_AUTORADIOBUTTON, (control.Parent != null && control.Parent()().handle != IntPtr::Zero) ? (HWND)control.Parent()().handle : (HWND)emptyForm.Handle());
 }
 
 void FormsApi::Control::DefWndProc(Message& message) {
@@ -202,8 +201,8 @@ void FormsApi::Control::DefWndProc(Message& message) {
 }
 
 void FormsApi::Control::Destroy(const System::Windows::Forms::Control& control) {
-  if (control.data->handle) {
-    intptr handle = control.data->handle;
+  if (control.handle) {
+    intptr handle = control.handle;
     defWindowProcs.Remove(handle);
     DestroyWindow((HWND)handle);
   }
@@ -215,28 +214,28 @@ intptr FormsApi::Control::GetHandleWindowFromDeviceContext(intptr hdc) {
 
 void FormsApi::Control::Invalidate(const System::Windows::Forms::Control& control, bool invalidateChildren) {
   if (invalidateChildren)
-    RedrawWindow((HWND)control.data->handle, null, null, RDW_INVALIDATE | RDW_ERASE | RDW_ALLCHILDREN);
+    RedrawWindow((HWND)control.handle, null, null, RDW_INVALIDATE | RDW_ERASE | RDW_ALLCHILDREN);
   else
-    InvalidateRect((HWND)control.data->handle, null, true);
+    InvalidateRect((HWND)control.handle, null, true);
 }
 
 void FormsApi::Control::Invalidate(const System::Windows::Forms::Control& control, const System::Drawing::Rectangle& rect, bool invalidateChildren) {
   RECT invalidateRect {rect.Left, rect.Top, rect.Right, rect.Bottom};
   if (invalidateChildren)
-    RedrawWindow((HWND)control.data->handle, &invalidateRect, null, RDW_INVALIDATE | RDW_ERASE | RDW_ALLCHILDREN);
+    RedrawWindow((HWND)control.handle, &invalidateRect, null, RDW_INVALIDATE | RDW_ERASE | RDW_ALLCHILDREN);
   else
-    InvalidateRect((HWND)control.data->handle, &invalidateRect, true);
+    InvalidateRect((HWND)control.handle, &invalidateRect, true);
 }
 
 System::Drawing::Point FormsApi::Control::PointToClient(const System::Windows::Forms::Control& control, const System::Drawing::Point& point) {
   POINT location{point.X, point.Y};
-  ScreenToClient((HWND)control.data->handle, &location);
+  ScreenToClient((HWND)control.handle, &location);
   return System::Drawing::Point(location.x, location.y);
 }
 
 System::Drawing::Point FormsApi::Control::PointToScreen(const System::Windows::Forms::Control& control, const System::Drawing::Point& point) {
   POINT location{point.X, point.Y};
-  ClientToScreen((HWND)control.data->handle, &location);
+  ClientToScreen((HWND)control.handle, &location);
   return System::Drawing::Point(location.x, location.y);
 }
 
@@ -250,61 +249,61 @@ void FormsApi::Control::SetForeColor(intptr hdc, const System::Drawing::Color& c
 }
 
 void FormsApi::Control::SetBackColor(const System::Windows::Forms::Control& control) {
-  HDC hdc = GetDC((HWND)control.data->handle);
+  HDC hdc = GetDC((HWND)control.handle);
   SetBackColor((intptr)hdc, control.BackColor);
-  ReleaseDC((HWND)control.data->handle, hdc);
+  ReleaseDC((HWND)control.handle, hdc);
 }
 
 void FormsApi::Control::SetForeColor(const System::Windows::Forms::Control& control) {
-  HDC hdc = GetDC((HWND)control.data->handle);
+  HDC hdc = GetDC((HWND)control.handle);
   SetForeColor((intptr)hdc, control.ForeColor);
-  ReleaseDC((HWND)control.data->handle, hdc);
+  ReleaseDC((HWND)control.handle, hdc);
 }
 
 void FormsApi::Control::SetLocation(const System::Windows::Forms::Control& control) {
-  SetWindowPos((HWND)control.data->handle, NULL, control.Location().X, control.Location().Y, control.Size().Width, control.Size().Height, SWP_NOSIZE);
+  SetWindowPos((HWND)control.handle, NULL, control.Location().X, control.Location().Y, control.Size().Width, control.Size().Height, SWP_NOSIZE);
 }
 
 void FormsApi::Control::SetParent(const System::Windows::Forms::Control& control) {
-  ::SetParent((HWND)control.data->handle, (HWND)control.data->parent().data->handle);
+  ::SetParent((HWND)control.handle, (HWND)control.parent().handle);
 }
 
 void FormsApi::Control::SetSize(const System::Windows::Forms::Control& control) {
-  SetWindowPos((HWND)control.data->handle, NULL, control.Location().X, control.Location().Y, control.Size().Width, control.Size().Height, SWP_NOMOVE);
+  SetWindowPos((HWND)control.handle, NULL, control.Location().X, control.Location().Y, control.Size().Width, control.Size().Height, SWP_NOMOVE);
 }
 
 void FormsApi::Control::SetText(const System::Windows::Forms::Control& control) {
-  SetWindowText((HWND)control.data->handle, control.data->text.w_str().c_str());
+  SetWindowText((HWND)control.handle, control.text.w_str().c_str());
 }
 
 void FormsApi::Control::SetVisible(const System::Windows::Forms::Control& control) {
-  ShowWindow((HWND)control.data->handle, control.Visible ? SW_SHOW : SW_HIDE);
+  ShowWindow((HWND)control.handle, control.Visible ? SW_SHOW : SW_HIDE);
 }
 
 void FormsApi::Panel::SetBorderStyle(const System::Windows::Forms::Panel& panel) {
   if (panel.BorderStyle == BorderStyle::FixedSingle)
-    SetWindowLong((HWND)panel.data().handle, GWL_STYLE, GetWindowLong((HWND)panel.data().handle, GWL_STYLE) | WS_BORDER);
+    SetWindowLong((HWND)panel.handle, GWL_STYLE, GetWindowLong((HWND)panel.handle, GWL_STYLE) | WS_BORDER);
   else {
-    SetWindowLong((HWND)panel.data().handle, GWL_STYLE, GetWindowLong((HWND)panel.data().handle, GWL_STYLE) & ~WS_BORDER);
+    SetWindowLong((HWND)panel.handle, GWL_STYLE, GetWindowLong((HWND)panel.handle, GWL_STYLE) & ~WS_BORDER);
     if (panel.BorderStyle == BorderStyle::Fixed3D)
-      SetWindowLong((HWND)panel.data().handle, GWL_EXSTYLE, GetWindowLong((HWND)panel.data().handle, GWL_EXSTYLE) | WS_EX_CLIENTEDGE);
+      SetWindowLong((HWND)panel.handle, GWL_EXSTYLE, GetWindowLong((HWND)panel.handle, GWL_EXSTYLE) | WS_EX_CLIENTEDGE);
   }
 }
 
 void FormsApi::ProgressBar::SetMaximum(const System::Windows::Forms::ProgressBar& progressBar) {
-  PostMessage((HWND)progressBar.data->handle, PBM_SETRANGE32, progressBar.Minimum(), progressBar.Maximum());
+  PostMessage((HWND)progressBar.handle, PBM_SETRANGE32, progressBar.Minimum(), progressBar.Maximum());
 }
 
 void FormsApi::ProgressBar::SetMinimum(const System::Windows::Forms::ProgressBar& progressBar) {
-  PostMessage((HWND)progressBar.data->handle, PBM_SETRANGE32, progressBar.Minimum(), progressBar.Maximum());
+  PostMessage((HWND)progressBar.handle, PBM_SETRANGE32, progressBar.Minimum(), progressBar.Maximum());
 }
 
 void FormsApi::ProgressBar::SetValue(const System::Windows::Forms::ProgressBar& progressBar) {
-  PostMessage((HWND)progressBar.data->handle, PBM_SETPOS, progressBar.Value(), 0);
+  PostMessage((HWND)progressBar.handle, PBM_SETPOS, progressBar.Value(), 0);
 }
 
 void FormsApi::RadioButton::SetChecked(const System::Windows::Forms::RadioButton& radioButton) {
-  PostMessage((HWND)radioButton.data().handle, BM_SETCHECK, radioButton.Checked ? BST_CHECKED : BST_UNCHECKED, 0);
+  PostMessage((HWND)radioButton.handle, BM_SETCHECK, radioButton.Checked ? BST_CHECKED : BST_UNCHECKED, 0);
 }
 
 #endif

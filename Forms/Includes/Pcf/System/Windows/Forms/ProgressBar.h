@@ -38,17 +38,16 @@ namespace Pcf {
 
         protected:
           void CreateHandle() override;
-
           System::Drawing::Size GetDefaultSize() const override { return System::Drawing::Size(100, 23); }
+          void SetMaximum(int32 maximum);
+          void SetMinimum(int32 minimum);
+          void SetValue(int32 value);
          
           /// @cond
           int32 maximum = 100;
           int32 minimum = 0;
           int32 value = 0;
- 
-          void SetMaximum(int32 maximum);
-          void SetMinimum(int32 minimum);
-          void SetValue(int32 value);
+          /// @endcond
         };
       }
     }

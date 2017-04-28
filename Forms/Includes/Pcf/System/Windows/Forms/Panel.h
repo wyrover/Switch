@@ -33,9 +33,8 @@ namespace Pcf {
 
         protected:
           void CreateHandle() override;
-          void SetBorderStyle(System::Windows::Forms::BorderStyle borderStyle);
-
           System::Drawing::Size GetDefaultSize() const override { return System::Drawing::Size(200, 100); }
+          void SetBorderStyle(System::Windows::Forms::BorderStyle borderStyle);
 
           /// @cond
           System::Windows::Forms::BorderStyle borderStyle = System::Windows::Forms::BorderStyle::None;

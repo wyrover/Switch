@@ -15,14 +15,14 @@ void Form::Close() {
 }
 
 void Form::CreateHandle() {
-  this->data->messageActions[WM_CLOSE] = {*this, &Form::WmClose};
+  this->messageActions[WM_CLOSE] = {*this, &Form::WmClose};
   __OS::FormsApi::Control::Create(*this);
   this->Control::CreateHandle();
 }
 
 void Form::WndProc(Message& message) {
   if (message.Msg == WM_CLOSE)
-    this->data->messageActions[message.Msg](message);
+    this->messageActions[message.Msg](message);
   else
     this->Control::WndProc(message);
 }

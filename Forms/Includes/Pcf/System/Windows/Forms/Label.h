@@ -20,13 +20,8 @@ namespace Pcf {
         public:
           Label() : Control("", 0, 0, 100, 23) { this->SetStyle(ControlStyles::UserPaint, false); }
 
-          /// @cond
-          //Label(const Label& label) : Control(label) {}
-          /// @endcond
-
         protected:
           void CreateHandle() override;
-
           System::Drawing::Size GetDefaultSize() const override { return System::Drawing::Size(100, 23); }
         };
       }

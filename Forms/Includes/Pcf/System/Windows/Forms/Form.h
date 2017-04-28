@@ -21,7 +21,7 @@ namespace Pcf {
         class pcf_public Form : public ContainerControl {
         public:
           Form() {
-            this->data->visible = false;
+            this->visible = false;
             this->SetStyle(ControlStyles::UserPaint, false);
             //this->BackColor = System::Drawing::SystemColors::Window;
           }
@@ -56,11 +56,9 @@ namespace Pcf {
 
         protected:
           void CreateHandle() override;
-
           System::Drawing::Size GetDefaultSize() const override { return System::Drawing::Size(300, 300); }
 
           virtual void OnFormClosed(const FormClosedEventArgs& e) { this->FormClosed(*this, e); }
-
           virtual void OnFormClosing(FormClosingEventArgs& e) { this->FormClosing(*this, e); }
 
           /// @cond
