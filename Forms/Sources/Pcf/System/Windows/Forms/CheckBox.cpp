@@ -7,7 +7,7 @@ using namespace System::Drawing;
 using namespace System::Windows::Forms;
 
 void CheckBox::CreateHandle() {
-  __OS::FormsApi::Control::Create(*this);
+  this->handle = __OS::FormsApi::Control::Create(*this);
   this->Control::CreateHandle();
   __OS::FormsApi::CheckBox::SetChecked(*this);
 }

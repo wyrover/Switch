@@ -102,10 +102,15 @@ set(INCLUDE_FILES
 )
 
 set(SOURCE_FILES
+  Sources/__OS/ApplicationWin32.cpp
+  Sources/__OS/ControlWin32.cpp
+  Sources/__OS/CheckBoxWin32.cpp
   Sources/__OS/FormsApi.h
   Sources/__OS/FormsApiFltk.cpp
   Sources/__OS/FormsApiGtk.cpp
-  Sources/__OS/FormsApiWin32.cpp
+  Sources/__OS/MainWin32.cpp
+  Sources/__OS/PanelWin32.cpp
+  Sources/__OS/ProgressBarWin32.cpp
   Sources/__OS/SystemInformationFltk.cpp
   Sources/__OS/SystemInformationGtk.cpp
   Sources/__OS/SystemInformationWin32.cpp

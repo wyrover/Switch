@@ -7,7 +7,7 @@ using namespace System::Drawing;
 using namespace System::Windows::Forms;
 
 void RadioButton::CreateHandle() {
-  __OS::FormsApi::Control::Create(*this);
+  this->handle = __OS::FormsApi::Control::Create(*this);
   this->Control::CreateHandle();
   __OS::FormsApi::RadioButton::SetChecked(*this);
 }

@@ -61,8 +61,13 @@ Property<System::Drawing::Color, ReadOnly> Control::DefaultForeColor {
 
 void Control::CreateHandle() {
   if (!this->IsHandleCreated)
-    __OS::FormsApi::Control::Create(*this);
+    this->handle = __OS::FormsApi::Control::Create(*this);
   handles.Add(this->handle, *this);
+  __OS::FormsApi::Control::SetBackColor(*this);
+  __OS::FormsApi::Control::SetForeColor(*this);
+  __OS::FormsApi::Control::SetLocation(*this);
+  __OS::FormsApi::Control::SetSize(*this);
+  //__OS::FormsApi::Control::SetText(*this);
 }
 
 void Control::DestroyHandle() {

@@ -42,6 +42,7 @@ namespace PcfFormApp {
       panel.Controls().AddRange({progressBar, label, checkBox, radioButton1, radioButton2});
  
       Form form;
+      form.BackColor = Color::SpringGreen;
       form.Controls().Add(panel);
 
       Application::EnableVisualStyles();

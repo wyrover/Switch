@@ -16,12 +16,6 @@
 #include "MouseEventHandler.h"
 #include "PaintEventHandler.h"
 
-/// @cond
-namespace __OS {
-  class FormsApi;
-}
-/// @endcond
-
 namespace Pcf {
   namespace System {
     namespace Windows {
@@ -439,7 +433,6 @@ namespace Pcf {
           virtual void OnVisibleChanged(const EventArgs& e);
 
           /// @cond
-          friend class __OS::FormsApi;
           Nullable<System::Drawing::Color> backColor;
           System::Drawing::SolidBrush backBrush {System::Drawing::SystemColors::Control};
           ControlCollection controls {*this};

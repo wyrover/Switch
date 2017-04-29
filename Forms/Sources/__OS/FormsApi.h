@@ -28,12 +28,12 @@ namespace __OS {
   public:
     class Application pcf_static {
     public:
-      static void EnableVisualStyles() { visualStylesEnabled = true; }
-      static bool HasVisualStylesEnabled() { return visualStylesEnabled; }
-      static void Exit();
       static void AddForm(const System::Windows::Forms::Form& form);
-      static void MessageLoop(System::EventHandler idle);
+      static void EnableVisualStyles() { visualStylesEnabled = true; }
+      static void Exit();
+      static bool HasVisualStylesEnabled() { return visualStylesEnabled; }
       static void MessageBeep(System::Windows::Forms::MessageBoxIcon type);
+      static void MessageLoop(System::EventHandler idle);
       static System::Windows::Forms::DialogResult ShowMessageBox(const string& message, const string& caption, System::Windows::Forms::MessageBoxButtons buttons, System::Windows::Forms::MessageBoxIcon icon, System::Windows::Forms::MessageBoxDefaultButton defaultButton, System::Windows::Forms::MessageBoxOptions options, bool displayHelpButton);
       static void Start();
       static void Stop();
@@ -50,14 +50,14 @@ namespace __OS {
     class Control pcf_static {
     public:
       static void Close(const System::Windows::Forms::Form& form);
-      static void Create(System::Windows::Forms::Button& control);
-      static void Create(System::Windows::Forms::CheckBox& control);
-      static void Create(System::Windows::Forms::Control& control);
-      static void Create(System::Windows::Forms::Form& control);
-      static void Create(System::Windows::Forms::Label& control);
-      static void Create(System::Windows::Forms::Panel& control);
-      static void Create(System::Windows::Forms::ProgressBar& control);
-      static void Create(System::Windows::Forms::RadioButton& control);
+      static intptr Create(const System::Windows::Forms::Button& control);
+      static intptr Create(const System::Windows::Forms::CheckBox& control);
+      static intptr Create(const System::Windows::Forms::Control& control);
+      static intptr Create(const System::Windows::Forms::Form& control);
+      static intptr Create(const System::Windows::Forms::Label& control);
+      static intptr Create(const System::Windows::Forms::Panel& control);
+      static intptr Create(const System::Windows::Forms::ProgressBar& control);
+      static intptr Create(const System::Windows::Forms::RadioButton& control);
       static void DefWndProc(System::Windows::Forms::Message& message);
       static void Destroy(const System::Windows::Forms::Control& control);
       static intptr GetHandleWindowFromDeviceContext(intptr hdc);
