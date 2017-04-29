@@ -61,6 +61,12 @@ namespace __OS {
       static void DefWndProc(System::Windows::Forms::Message& message);
       static void Destroy(const System::Windows::Forms::Control& control);
       static intptr GetHandleWindowFromDeviceContext(intptr hdc);
+
+      static intptr GetParentHandleOrDefault(const System::Windows::Forms::Control& control) {
+        static System::Windows::Forms::Form emptyForm;
+        return (control.Parent != null && control.Parent()().IsHandleCreated) ? control.Parent()().Handle() : emptyForm.Handle();
+      }
+
       static void Invalidate(const System::Windows::Forms::Control& control, bool invalidateChildren);
       static void Invalidate(const System::Windows::Forms::Control& control, const System::Drawing::Rectangle& rect, bool invalidateChildren);
 

@@ -17,7 +17,7 @@ namespace PcfFormApp {
 
       Label label;
       label.Location = Point(10, 40);
-      label.Text = "A label";
+      label.Text = "Label";
 
       CheckBox checkBox;
       checkBox.Text = "Check 1";
@@ -26,23 +26,22 @@ namespace PcfFormApp {
 
       RadioButton radioButton1;
       radioButton1.Text = "Radio 1";
-      radioButton1.Location = Point(10, 100);
+      radioButton1.Location = Point(10, 300);
       radioButton1.Checked = true;
 
       RadioButton radioButton2;
       radioButton2.Text = "Radio 2";
-      radioButton2.Location = Point(10, 130);
-      radioButton2.Checked = true;
-
+      radioButton2.Location = Point(10, 330);
+ 
       Panel panel;
       panel.Text = "Panel";
       panel.Location = Point(10, 10);
       panel.Size = Size(200, 200);
       panel.BorderStyle = BorderStyle::Fixed3D;
+      panel.VScroll = true;
       panel.Controls().AddRange({progressBar, label, checkBox, radioButton1, radioButton2});
  
       Form form;
-      form.BackColor = Color::SpringGreen;
       form.Controls().Add(panel);
 
       Application::EnableVisualStyles();

@@ -16,14 +16,18 @@ void ProgressBar::CreateHandle() {
 
 void ProgressBar::SetMaximum(int32 maximum) {
   this->maximum = maximum;
-  if (this->IsHandleCreated)
+  if (this->IsHandleCreated) {
     __OS::FormsApi::ProgressBar::SetMaximum(*this);
+    __OS::FormsApi::ProgressBar::SetValue(*this);
+  }
 }
 
 void ProgressBar::SetMinimum(int32 minimum) {
   this->minimum = minimum;
-  if (this->IsHandleCreated)
+  if (this->IsHandleCreated) {
     __OS::FormsApi::ProgressBar::SetMinimum(*this);
+    __OS::FormsApi::ProgressBar::SetValue(*this);
+  }
 }
 
 void ProgressBar::SetValue(int32 value) {

@@ -35,11 +35,11 @@ namespace {
     HWND handle = CreateWindowEx(0, name == "Form" || name == "Panel" ? WC_DIALOG : name.w_str().c_str(), control.Text().w_str().c_str(), windowStyle, bounds.Left, bounds.Top, bounds.Width, bounds.Height, parent, (HMENU)id, __instance, (LPVOID)NULL);
     if (handle == 0) {
       string str = string::Format("FormApi::Create(\"{0}\") failed with code {1}", name, GetLastError());
+      System::Diagnostics::Debug::WriteLine(str);
       throw InvalidOperationException(str, pcf_current_information);
     }
 
     defWindowProcs[(intptr)handle] = (WNDPROC)SetWindowLongPtr(handle, GWLP_WNDPROC, (LONG_PTR)WndProc);
-    RedrawWindow(handle, null, null, RDW_INVALIDATE | RDW_ERASE | RDW_ALLCHILDREN);
     return (intptr)handle;
   }
 
@@ -56,7 +56,7 @@ namespace {
     return Drawing::Rectangle(CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT);
   }
 
-  LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+  LRESULT CALLBACK WndProc(HWND hwnd, uint32 msg, WPARAM wParam, LPARAM lParam) {
     Message message = Message::Create((intptr)hwnd, msg, wParam, lParam, 0);
     ref<Control> control = Control::FromHandle(message.HWnd);
     if (control != null)
@@ -91,15 +91,30 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::Form& control) {
 intptr FormsApi::Control::Create(const System::Windows::Forms::Label& control) {
   static Form emptyForm;
   return CreateControl(control, L"Static", WS_VISIBLE | WS_CHILD, (control.Parent != null && control.Parent()().IsHandleCreated) ? (HWND)control.Parent()().Handle() : (HWND)emptyForm.Handle());
-  //PostMessage((HWND)control.parent().Handle(), WM_CTLCOLORSTATIC, 0, control.Handle());
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Panel& control) {
-  static Form emptyForm;
-  return CreateControl(control, L"Panel", WS_VISIBLE | WS_CHILD | WS_BORDER, (control.Parent != null && control.Parent()().IsHandleCreated) ? (HWND)control.Parent()().Handle() : (HWND)emptyForm.Handle());
+  int style = WS_VISIBLE | WS_CHILD;
+  if (control.BorderStyle == BorderStyle::FixedSingle)
+    style |= WS_BORDER;
+  if (control.HScroll)
+    style |= WS_HSCROLL;
+  if (control.VScroll)
+    style |= WS_VSCROLL;
+  int styleEx = 0;
+  if (control.BorderStyle == BorderStyle::Fixed3D)
+    styleEx |= WS_EX_CLIENTEDGE;
+
+  HWND handle = CreateWindowEx(styleEx, WC_DIALOG, control.Text().w_str().c_str(), style, control.Bounds().Left, control.Bounds().Top, control.Bounds().Width, control.Bounds().Height, (HWND)FormsApi::Control::GetParentHandleOrDefault(control), (HMENU)0, __instance, (LPVOID)NULL);
+  defWindowProcs[(intptr)handle] = (WNDPROC)SetWindowLongPtr(handle, GWLP_WNDPROC, (LONG_PTR)WndProc);
+  return (intptr)handle;
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::ProgressBar& control) {
+  static INITCOMMONCONTROLSEX icc;
+  icc.dwSize = sizeof(INITCOMMONCONTROLSEX);
+  icc.dwICC = ICC_PROGRESS_CLASS;
+  InitCommonControlsEx(&icc);
   static Form emptyForm;
   return CreateControl(control, PROGRESS_CLASS, WS_VISIBLE | WS_CHILD | PBS_SMOOTH, (control.Parent != null && control.Parent()().IsHandleCreated) ? (HWND)control.Parent()().Handle() : (HWND)emptyForm.Handle());
 }
