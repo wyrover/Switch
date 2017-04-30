@@ -26,7 +26,7 @@ namespace PcfFormApp {
 
       RadioButton radioButton1;
       radioButton1.Text = "Radio 1";
-      radioButton1.Location = Point(10, 300);
+      radioButton1.Location = Point(10, 100);
       radioButton1.Checked = true;
 
       RadioButton radioButton2;
@@ -37,8 +37,7 @@ namespace PcfFormApp {
       panel.Text = "Panel";
       panel.Location = Point(10, 10);
       panel.Size = Size(200, 200);
-      panel.BorderStyle = BorderStyle::Fixed3D;
-      panel.VScroll = true;
+      panel.BorderStyle = BorderStyle::FixedSingle;
       panel.Controls().AddRange({progressBar, label, checkBox, radioButton1, radioButton2});
  
       Form form;

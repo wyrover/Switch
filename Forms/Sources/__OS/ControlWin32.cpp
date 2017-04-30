@@ -18,50 +18,40 @@ using namespace __OS;
 
 extern HINSTANCE __instance;
 
+namespace __OS {
+  class WindowProcedure {
+  public:
+    static System::Collections::Generic::Dictionary<intptr, WNDPROC> DefWindowProcs;
+    static LRESULT CALLBACK WndProc(HWND hwnd, uint32 msg, WPARAM wParam, LPARAM lParam);
+  };
+}
+
+LRESULT CALLBACK WindowProcedure::WndProc(HWND hwnd, uint32 msg, WPARAM wParam, LPARAM lParam) {
+  Message message = Message::Create((intptr)hwnd, msg, wParam, lParam, 0);
+  ref<Control> control = Control::FromHandle(message.HWnd);
+  if (control != null)
+    control().WndProc(message);
+  return message.Result;
+}
+
+Dictionary<intptr, WNDPROC> WindowProcedure::DefWindowProcs;
+
 namespace {
-  Drawing::Rectangle GetFormBounds(const Form& form);
-  LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
-
-  Dictionary<intptr, WNDPROC> defWindowProcs;
-
   inline COLORREF ColorToRgb(const Color& color) {
 	  return RGB(color.R, color.G, color.B);
   }
 
-  intptr CreateControl(const Control& control, const string& name, int32 windowStyle, int32 id, HWND parent) {
+  intptr CreateControl(const Control& control, const string& name, int32 windowStyle, HWND parent) {
     Drawing::Rectangle bounds = control.Bounds;
-    if (is<Form>(control))
-      Drawing::Rectangle bounds = GetFormBounds(as<Form>(control));
-    HWND handle = CreateWindowEx(0, name == "Form" || name == "Panel" ? WC_DIALOG : name.w_str().c_str(), control.Text().w_str().c_str(), windowStyle, bounds.Left, bounds.Top, bounds.Width, bounds.Height, parent, (HMENU)id, __instance, (LPVOID)NULL);
+    HWND handle = CreateWindowEx(0, name == "Form" || name == "Panel" ? WC_DIALOG : name.w_str().c_str(), control.Text().w_str().c_str(), windowStyle, bounds.Left, bounds.Top, bounds.Width, bounds.Height, parent, (HMENU)0, __instance, (LPVOID)NULL);
     if (handle == 0) {
       string str = string::Format("FormApi::Create(\"{0}\") failed with code {1}", name, GetLastError());
       System::Diagnostics::Debug::WriteLine(str);
       throw InvalidOperationException(str, pcf_current_information);
     }
 
-    defWindowProcs[(intptr)handle] = (WNDPROC)SetWindowLongPtr(handle, GWLP_WNDPROC, (LONG_PTR)WndProc);
+    WindowProcedure::DefWindowProcs[(intptr)handle] = (WNDPROC)SetWindowLongPtr(handle, GWLP_WNDPROC, (LONG_PTR)WindowProcedure::WndProc);
     return (intptr)handle;
-  }
-
-  intptr CreateControl(const Control& control, const string& name, int32 windowStyle, HWND parent) {
-    return CreateControl(control, name, windowStyle, 0, parent);
-  }
-
-  Drawing::Rectangle GetFormBounds(const Form& form) {
-    switch (form.StartPosition) {
-    case FormStartPosition::Manual: return Drawing::Rectangle(form.Bounds);
-    case FormStartPosition::WindowsDefaultBounds: return Drawing::Rectangle(CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT);
-    case FormStartPosition::WindowsDefaultLocation: return Drawing::Rectangle(CW_USEDEFAULT, CW_USEDEFAULT, form.Width, form.Height);
-    }
-    return Drawing::Rectangle(CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT);
-  }
-
-  LRESULT CALLBACK WndProc(HWND hwnd, uint32 msg, WPARAM wParam, LPARAM lParam) {
-    Message message = Message::Create((intptr)hwnd, msg, wParam, lParam, 0);
-    ref<Control> control = Control::FromHandle(message.HWnd);
-    if (control != null)
-      control().WndProc(message);
-    return message.Result;
   }
 }
 
@@ -85,7 +75,17 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::Control& control)
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Form& control) {
-  return CreateControl(control, L"Form", WS_VISIBLE | WS_OVERLAPPEDWINDOW | WS_GROUP, (control.Parent != null && control.Parent()().IsHandleCreated) ? (HWND)control.Parent()().Handle() : NULL);
+  int32 style = WS_VISIBLE | WS_OVERLAPPEDWINDOW | WS_GROUP;
+  int32 exStyle = 0;
+  Drawing::Rectangle bounds = Drawing::Rectangle(CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT);
+  switch (control.StartPosition) {
+  case FormStartPosition::Manual: bounds = control.Bounds; break;
+  case FormStartPosition::WindowsDefaultBounds: bounds = Drawing::Rectangle(CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT); break;
+  case FormStartPosition::WindowsDefaultLocation: bounds = Drawing::Rectangle(CW_USEDEFAULT, CW_USEDEFAULT, control.Width, control.Height); break;
+  }
+  HWND handle = CreateWindowEx(exStyle, WC_DIALOG, control.Text().w_str().c_str(), style, bounds.Left, bounds.Top, bounds.Width, bounds.Height, NULL, (HMENU)0, __instance, (LPVOID)NULL);
+  WindowProcedure::DefWindowProcs[(intptr)handle] = (WNDPROC)SetWindowLongPtr(handle, GWLP_WNDPROC, (LONG_PTR)WindowProcedure::WndProc);
+  return (intptr)handle;
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Label& control) {
@@ -94,19 +94,19 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::Label& control) {
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Panel& control) {
-  int style = WS_VISIBLE | WS_CHILD;
+  int32 style = WS_VISIBLE | WS_CHILD;
   if (control.BorderStyle == BorderStyle::FixedSingle)
     style |= WS_BORDER;
   if (control.HScroll)
     style |= WS_HSCROLL;
   if (control.VScroll)
     style |= WS_VSCROLL;
-  int styleEx = 0;
+  int32 exStyle = WS_EX_CONTROLPARENT;
   if (control.BorderStyle == BorderStyle::Fixed3D)
-    styleEx |= WS_EX_CLIENTEDGE;
+    exStyle |= WS_EX_CLIENTEDGE;
 
-  HWND handle = CreateWindowEx(styleEx, WC_DIALOG, control.Text().w_str().c_str(), style, control.Bounds().Left, control.Bounds().Top, control.Bounds().Width, control.Bounds().Height, (HWND)FormsApi::Control::GetParentHandleOrDefault(control), (HMENU)0, __instance, (LPVOID)NULL);
-  defWindowProcs[(intptr)handle] = (WNDPROC)SetWindowLongPtr(handle, GWLP_WNDPROC, (LONG_PTR)WndProc);
+  HWND handle = CreateWindowEx(exStyle, WC_DIALOG, control.Text().w_str().c_str(), style, control.Bounds().Left, control.Bounds().Top, control.Bounds().Width, control.Bounds().Height, (HWND)FormsApi::Control::GetParentHandleOrDefault(control), (HMENU)0, __instance, (LPVOID)NULL);
+  WindowProcedure::DefWindowProcs[(intptr)handle] = (WNDPROC)SetWindowLongPtr(handle, GWLP_WNDPROC, (LONG_PTR)WindowProcedure::WndProc);
   return (intptr)handle;
 }
 
@@ -125,8 +125,8 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::RadioButton& cont
 }
 
 void FormsApi::Control::DefWndProc(Message& message) {
-  if (defWindowProcs.ContainsKey(message.HWnd()))
-    message.Result = defWindowProcs[message.HWnd()]((HWND)message.HWnd(), message.Msg, message.WParam, message.LParam);
+  if (WindowProcedure::DefWindowProcs.ContainsKey(message.HWnd()))
+    message.Result = WindowProcedure::DefWindowProcs[message.HWnd()]((HWND)message.HWnd(), message.Msg, message.WParam, message.LParam);
   else
     message.Result = DefWindowProc((HWND)message.HWnd(), message.Msg, message.WParam, message.LParam);
 }
@@ -134,7 +134,7 @@ void FormsApi::Control::DefWndProc(Message& message) {
 void FormsApi::Control::Destroy(const System::Windows::Forms::Control& control) {
   if (control.Handle()) {
     intptr handle = control.Handle();
-    defWindowProcs.Remove(handle);
+    WindowProcedure::DefWindowProcs.Remove(handle);
     DestroyWindow((HWND)handle);
   }
 }
