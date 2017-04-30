@@ -73,7 +73,7 @@ namespace HelloWorldGui {
       form.Text = "HelloWorldGui Application";
       form.StartPosition = FormStartPosition::Manual;
       form.Location = Point(300, 200);
-	  form.Controls().Add(button);
+      form.Controls().Add(button);
       
       Application::EnableVisualStyles();
       Application::Run(form);
