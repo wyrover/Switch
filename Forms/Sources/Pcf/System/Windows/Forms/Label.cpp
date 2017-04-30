@@ -7,6 +7,6 @@ using namespace System::Drawing;
 using namespace System::Windows::Forms;
 
 void Label::CreateHandle() {
-  this->handle = __OS::FormsApi::Control::Create(*this);
+  this->handle = __OS::FormsApi::Label::Create(*this);
   this->Control::CreateHandle();
 }

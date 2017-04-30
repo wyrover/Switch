@@ -16,7 +16,7 @@ void Form::Close() {
 
 void Form::CreateHandle() {
   this->messageActions[WM_CLOSE] = {*this, &Form::WmClose};
-  this->handle = __OS::FormsApi::Control::Create(*this);
+  this->handle = __OS::FormsApi::Form::Create(*this);
   this->Control::CreateHandle();
 }
 

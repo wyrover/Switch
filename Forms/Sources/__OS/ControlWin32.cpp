@@ -7,51 +7,18 @@
 #include <Pcf/Undef.h>
 
 #include "FormsApi.h"
-#include <Pcf/System/Collections/Generic/SortedDictionary.h>
-#include <Pcf/System/NotImplementedException.h>
+#include "WindowProcedureWin32.h"
 
 using namespace System;
-using namespace System::Collections::Generic;
 using namespace System::Drawing;
 using namespace System::Windows::Forms;
 using namespace __OS;
 
 extern HINSTANCE __instance;
 
-namespace __OS {
-  class WindowProcedure {
-  public:
-    static System::Collections::Generic::Dictionary<intptr, WNDPROC> DefWindowProcs;
-    static LRESULT CALLBACK WndProc(HWND hwnd, uint32 msg, WPARAM wParam, LPARAM lParam);
-  };
-}
-
-LRESULT CALLBACK WindowProcedure::WndProc(HWND hwnd, uint32 msg, WPARAM wParam, LPARAM lParam) {
-  Message message = Message::Create((intptr)hwnd, msg, wParam, lParam, 0);
-  ref<Control> control = Control::FromHandle(message.HWnd);
-  if (control != null)
-    control().WndProc(message);
-  return message.Result;
-}
-
-Dictionary<intptr, WNDPROC> WindowProcedure::DefWindowProcs;
-
 namespace {
   inline COLORREF ColorToRgb(const Color& color) {
 	  return RGB(color.R, color.G, color.B);
-  }
-
-  intptr CreateControl(const Control& control, const string& name, int32 windowStyle, HWND parent) {
-    Drawing::Rectangle bounds = control.Bounds;
-    HWND handle = CreateWindowEx(0, name == "Form" || name == "Panel" ? WC_DIALOG : name.w_str().c_str(), control.Text().w_str().c_str(), windowStyle, bounds.Left, bounds.Top, bounds.Width, bounds.Height, parent, (HMENU)0, __instance, (LPVOID)NULL);
-    if (handle == 0) {
-      string str = string::Format("FormApi::Create(\"{0}\") failed with code {1}", name, GetLastError());
-      System::Diagnostics::Debug::WriteLine(str);
-      throw InvalidOperationException(str, pcf_current_information);
-    }
-
-    WindowProcedure::DefWindowProcs[(intptr)handle] = (WNDPROC)SetWindowLongPtr(handle, GWLP_WNDPROC, (LONG_PTR)WindowProcedure::WndProc);
-    return (intptr)handle;
   }
 }
 
@@ -59,69 +26,12 @@ void FormsApi::Control::Close(const System::Windows::Forms::Form& form) {
   CloseWindow((HWND)form.Handle());
 }
 
-intptr FormsApi::Control::Create(const System::Windows::Forms::Button& control) {
-  static Form emptyForm;
-  return CreateControl(control, L"Button", WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, (control.Parent != null && control.Parent()().IsHandleCreated) ? (HWND)control.Parent()().Handle() : (HWND)emptyForm.Handle());
-}
-
-intptr FormsApi::Control::Create(const System::Windows::Forms::CheckBox& control) {
-  static Form emptyForm;
-  return CreateControl(control, L"Button", WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_AUTOCHECKBOX, (control.Parent != null && control.Parent()().IsHandleCreated) ? (HWND)control.Parent()().Handle() : (HWND)emptyForm.Handle());
-}
-
 intptr FormsApi::Control::Create(const System::Windows::Forms::Control& control) {
-  static Form emptyForm;
-  return CreateControl(control, L"Control", WS_VISIBLE | WS_CHILD, (control.Parent != null && control.Parent()().IsHandleCreated) ? (HWND)control.Parent()().Handle() : (HWND)emptyForm.Handle());
-}
-
-intptr FormsApi::Control::Create(const System::Windows::Forms::Form& control) {
-  int32 style = WS_VISIBLE | WS_OVERLAPPEDWINDOW | WS_GROUP;
-  int32 exStyle = 0;
-  Drawing::Rectangle bounds = Drawing::Rectangle(CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT);
-  switch (control.StartPosition) {
-  case FormStartPosition::Manual: bounds = control.Bounds; break;
-  case FormStartPosition::WindowsDefaultBounds: bounds = Drawing::Rectangle(CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT); break;
-  case FormStartPosition::WindowsDefaultLocation: bounds = Drawing::Rectangle(CW_USEDEFAULT, CW_USEDEFAULT, control.Width, control.Height); break;
-  }
-  HWND handle = CreateWindowEx(exStyle, WC_DIALOG, control.Text().w_str().c_str(), style, bounds.Left, bounds.Top, bounds.Width, bounds.Height, NULL, (HMENU)0, __instance, (LPVOID)NULL);
-  WindowProcedure::DefWindowProcs[(intptr)handle] = (WNDPROC)SetWindowLongPtr(handle, GWLP_WNDPROC, (LONG_PTR)WindowProcedure::WndProc);
-  return (intptr)handle;
-}
-
-intptr FormsApi::Control::Create(const System::Windows::Forms::Label& control) {
-  static Form emptyForm;
-  return CreateControl(control, L"Static", WS_VISIBLE | WS_CHILD, (control.Parent != null && control.Parent()().IsHandleCreated) ? (HWND)control.Parent()().Handle() : (HWND)emptyForm.Handle());
-}
-
-intptr FormsApi::Control::Create(const System::Windows::Forms::Panel& control) {
   int32 style = WS_VISIBLE | WS_CHILD;
-  if (control.BorderStyle == BorderStyle::FixedSingle)
-    style |= WS_BORDER;
-  if (control.HScroll)
-    style |= WS_HSCROLL;
-  if (control.VScroll)
-    style |= WS_VSCROLL;
-  int32 exStyle = WS_EX_CONTROLPARENT;
-  if (control.BorderStyle == BorderStyle::Fixed3D)
-    exStyle |= WS_EX_CLIENTEDGE;
-
-  HWND handle = CreateWindowEx(exStyle, WC_DIALOG, control.Text().w_str().c_str(), style, control.Bounds().Left, control.Bounds().Top, control.Bounds().Width, control.Bounds().Height, (HWND)FormsApi::Control::GetParentHandleOrDefault(control), (HMENU)0, __instance, (LPVOID)NULL);
+  int32 exStyle = 0;
+  HWND handle = CreateWindowEx(exStyle, L"Control", control.Text().w_str().c_str(), style, control.Bounds().Left, control.Bounds().Top, control.Bounds().Width, control.Bounds().Height, (HWND)FormsApi::Control::GetParentHandleOrDefault(control), (HMENU)0, __instance, (LPVOID)NULL);
   WindowProcedure::DefWindowProcs[(intptr)handle] = (WNDPROC)SetWindowLongPtr(handle, GWLP_WNDPROC, (LONG_PTR)WindowProcedure::WndProc);
   return (intptr)handle;
-}
-
-intptr FormsApi::Control::Create(const System::Windows::Forms::ProgressBar& control) {
-  static INITCOMMONCONTROLSEX icc;
-  icc.dwSize = sizeof(INITCOMMONCONTROLSEX);
-  icc.dwICC = ICC_PROGRESS_CLASS;
-  InitCommonControlsEx(&icc);
-  static Form emptyForm;
-  return CreateControl(control, PROGRESS_CLASS, WS_VISIBLE | WS_CHILD | PBS_SMOOTH, (control.Parent != null && control.Parent()().IsHandleCreated) ? (HWND)control.Parent()().Handle() : (HWND)emptyForm.Handle());
-}
-
-intptr FormsApi::Control::Create(const System::Windows::Forms::RadioButton& control) {
-  static Form emptyForm;
-  return CreateControl(control, L"Button", WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_AUTORADIOBUTTON, (control.Parent != null && control.Parent()().IsHandleCreated) ? (HWND)control.Parent()().Handle() : (HWND)emptyForm.Handle());
 }
 
 void FormsApi::Control::DefWndProc(Message& message) {

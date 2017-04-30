@@ -6,7 +6,7 @@
 #include <Pcf/System/Collections/Generic/SortedDictionary.h>
 
 namespace __OS {
-  class WindowProcedure {
+  class WindowProcedure pcf_static {
   public:
     static System::Collections::Generic::SortedDictionary<intptr, WNDPROC> DefWindowProcs;
     static LRESULT CALLBACK WndProc(HWND hwnd, uint32 msg, WPARAM wParam, LPARAM lParam);

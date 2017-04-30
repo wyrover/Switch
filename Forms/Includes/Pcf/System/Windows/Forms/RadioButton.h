@@ -22,6 +22,11 @@ namespace Pcf {
         public:
           RadioButton() : ButtonBase("", 0, 0, 104, 24) { this->SetStyle(ControlStyles::UserPaint, false); }
 
+          Property<bool> AutoCheck {
+            pcf_get {return this->autoCheck;},
+            pcf_set {this->SetAutoCheck(value);}
+          };
+
           Property<bool> Checked{
             pcf_get{ return this->checked; },
             pcf_set{ this->SetChecked(value); }
@@ -29,10 +34,12 @@ namespace Pcf {
 
         protected:
           void CreateHandle() override;
+          void SetAutoCheck(bool autoCheck);
           void SetChecked(bool checked);
 
           System::Drawing::Size GetDefaultSize() const override { return System::Drawing::Size(104, 24); }
 
+          bool autoCheck = true;
           bool checked = false;
         };
       }

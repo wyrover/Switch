@@ -11,7 +11,7 @@ using namespace System::Drawing;
 using namespace System::Windows::Forms;
 
 void Panel::CreateHandle() {
-  this->handle = __OS::FormsApi::Control::Create(*this);
+  this->handle = __OS::FormsApi::Panel::Create(*this);
   this->Control::CreateHandle();
   __OS::FormsApi::Panel::SetBorderStyle(*this);
 }

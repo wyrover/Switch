@@ -7,6 +7,6 @@ using namespace System::Drawing;
 using namespace System::Windows::Forms;
 
 void Button::CreateHandle() {
-  this->handle = __OS::FormsApi::Control::Create(*this);
+  this->handle = __OS::FormsApi::Button::Create(*this);
   this->Control::CreateHandle();
 }

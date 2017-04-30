@@ -62,18 +62,18 @@ namespace HelloWorldGui {
   public:
     // The main entry point for the application.
     static void Main() {
-      Form form;
-      form.Text = "HelloWorldGui Application";
-      form.StartPosition = FormStartPosition::Manual;
-      form.Location = Point(300, 200);
-      
       Button button;
-      button.Parent = form;
-      button.Text = "Click it";
+      button.Text = "Click me";
       button.Location = Point(10, 10);
       button.Click += pcf_delegate(const object& sender, const EventArgs& e) {
         MessageBox::Show("Hello, World!");
       };
+      
+      Form form;
+      form.Text = "HelloWorldGui Application";
+      form.StartPosition = FormStartPosition::Manual;
+      form.Location = Point(300, 200);
+	  form.Controls().Add(button);
       
       Application::EnableVisualStyles();
       Application::Run(form);

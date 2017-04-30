@@ -31,13 +31,13 @@ namespace PcfFormApp {
 
       RadioButton radioButton2;
       radioButton2.Text = "Radio 2";
-      radioButton2.Location = Point(10, 330);
- 
+      radioButton2.Location = Point(10, 130);
+
       Panel panel;
       panel.Text = "Panel";
       panel.Location = Point(10, 10);
       panel.Size = Size(200, 200);
-      panel.BorderStyle = BorderStyle::FixedSingle;
+      panel.BorderStyle = BorderStyle::Fixed3D;
       panel.Controls().AddRange({progressBar, label, checkBox, radioButton1, radioButton2});
  
       Form form;

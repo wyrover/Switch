@@ -1,7 +1,8 @@
 ﻿#if defined(_WIN32) && defined(__use_native_interface__)
 
-#include "FormsApi.h"
 #include "WindowProcedureWin32.h"
+#include "../../Includes/Pcf/System/Windows/Forms/Control.h"
+#include "../../Includes/Pcf/System/Windows/Forms/Message.h"
 
 using namespace System;
 using namespace System::Collections::Generic;

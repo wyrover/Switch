@@ -42,22 +42,22 @@ namespace __OS {
       static bool visualStylesEnabled;
     };
 
+    class Button pcf_static {
+    public:
+      static intptr Create(const System::Windows::Forms::Button& button);
+    };
+
     class CheckBox pcf_static {
     public:
+      static intptr Create(const System::Windows::Forms::CheckBox& checkBox);
+      static void SetAutoCheck(const System::Windows::Forms::CheckBox& checkBox);
       static void SetChecked(const System::Windows::Forms::CheckBox& checkBox);
     };
 
     class Control pcf_static {
     public:
       static void Close(const System::Windows::Forms::Form& form);
-      static intptr Create(const System::Windows::Forms::Button& control);
-      static intptr Create(const System::Windows::Forms::CheckBox& control);
       static intptr Create(const System::Windows::Forms::Control& control);
-      static intptr Create(const System::Windows::Forms::Form& control);
-      static intptr Create(const System::Windows::Forms::Label& control);
-      static intptr Create(const System::Windows::Forms::Panel& control);
-      static intptr Create(const System::Windows::Forms::ProgressBar& control);
-      static intptr Create(const System::Windows::Forms::RadioButton& control);
       static void DefWndProc(System::Windows::Forms::Message& message);
       static void Destroy(const System::Windows::Forms::Control& control);
       static intptr GetHandleWindowFromDeviceContext(intptr hdc);
@@ -90,13 +90,25 @@ namespace __OS {
       static void SetVisible(const System::Windows::Forms::Control& control);
     };
 
+    class Form pcf_static {
+    public:
+      static intptr Create(const System::Windows::Forms::Form& form);
+    };
+
+    class Label pcf_static {
+    public:
+      static intptr Create(const System::Windows::Forms::Label& label);
+    };
+
     class Panel pcf_static {
     public:
+      static intptr Create(const System::Windows::Forms::Panel& panel);
       static void SetBorderStyle(const System::Windows::Forms::Panel& panel);
     };
 
     class ProgressBar pcf_static {
     public:
+      static intptr Create(const System::Windows::Forms::ProgressBar& progressBar);
       static void SetMaximum(const System::Windows::Forms::ProgressBar& progressBar);
       static void SetMinimum(const System::Windows::Forms::ProgressBar& progressBar);
       static void SetValue(const System::Windows::Forms::ProgressBar& progressBar);
@@ -104,7 +116,9 @@ namespace __OS {
 
     class RadioButton pcf_static {
     public:
-      static void SetChecked(const System::Windows::Forms::RadioButton& checkBox);
+      static intptr Create(const System::Windows::Forms::RadioButton& radioButton);
+      static void SetAutoCheck(const System::Windows::Forms::RadioButton& radioButton);
+      static void SetChecked(const System::Windows::Forms::RadioButton& radioButton);
     };
 
     class SystemInformation pcf_static {
