@@ -17,6 +17,10 @@ extern HINSTANCE __instance;
 
 intptr FormsApi::Form::Create(const System::Windows::Forms::Form& form) {
   int32 style = WS_VISIBLE | WS_OVERLAPPEDWINDOW | WS_GROUP;
+  if (form.HScroll)
+    style |= WS_HSCROLL;
+  if (form.VScroll)
+    style |= WS_VSCROLL;
   int32 exStyle = 0;
   System::Drawing::Rectangle bounds = Drawing::Rectangle(CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT);
   switch (form.StartPosition) {

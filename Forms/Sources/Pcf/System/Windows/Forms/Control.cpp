@@ -20,7 +20,7 @@ namespace {
   };
 
   bool AllWindowMessagesFilter(const Message& message) {
-    return true; //message.Msg != WM_TIMER && message.Msg != WM_PAINT && message.Msg != WM_ERASEBKGND;  //!message.ToString().Contains("WM_NULL");
+    return false; //true; //message.Msg != WM_TIMER && message.Msg != WM_PAINT && message.Msg != WM_ERASEBKGND;  //!message.ToString().Contains("WM_NULL");
   }
 
   MouseButtons MessageToMouseButtons(Message message) {
@@ -196,8 +196,8 @@ void Control::WmCtlColorControl(Message& message) {
   if (control == null)
     this->DefWndProc(message);
   else {
-    __OS::FormsApi::Control::SetBackColor(message.WParam(), control().BackColor());
-    __OS::FormsApi::Control::SetForeColor(message.WParam(), control().ForeColor());
+    __OS::FormsApi::Control::SetBackColor(message.WParam());
+    __OS::FormsApi::Control::SetForeColor(message.WParam());
     message.Result = (intptr)control().backBrush.GetNativeBrush();
   }
 }

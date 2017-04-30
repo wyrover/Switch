@@ -80,24 +80,44 @@ System::Drawing::Point FormsApi::Control::PointToScreen(const System::Windows::F
   return System::Drawing::Point(location.x, location.y);
 }
 
-void FormsApi::Control::SetBackColor(intptr hdc, const System::Drawing::Color& color) {
-  SetBkColor((HDC)hdc, ColorToRgb(color));
-  SetBkMode((HDC)hdc, TRANSPARENT);
+void FormsApi::Control::SetBackColor(intptr hdc) {
+  ref<System::Windows::Forms::Control> control = System::Windows::Forms::Control::FromHandle((intptr)WindowFromDC((HDC)hdc));
+  if (control != null) {
+    System::Diagnostics::Debug::WriteLine("{0} = {1}", control().Name, control().BackColor);
+    if (control().BackColor == Color::Transparent)
+      SetBkMode((HDC)hdc, TRANSPARENT);
+    else
+      SetBkColor((HDC)hdc, ColorToRgb(control().BackColor));
+    SetTextColor((HDC)hdc, ColorToRgb(control().ForeColor));
+  }
 }
 
-void FormsApi::Control::SetForeColor(intptr hdc, const System::Drawing::Color& color) {
-  SetTextColor((HDC)hdc, ColorToRgb(color));
+void FormsApi::Control::SetForeColor(intptr hdc) {
+  ref<System::Windows::Forms::Control> control = System::Windows::Forms::Control::FromHandle((intptr)WindowFromDC((HDC)hdc));
+  if (control != null) {
+    if (control().BackColor == Color::Transparent)
+      SetBkMode((HDC)hdc, TRANSPARENT);
+    else
+      SetBkColor((HDC)hdc, ColorToRgb(control().BackColor));
+    SetTextColor((HDC)hdc, ColorToRgb(control().ForeColor));
+  }
 }
 
 void FormsApi::Control::SetBackColor(const System::Windows::Forms::Control& control) {
   HDC hdc = GetDC((HWND)control.Handle());
-  SetBackColor((intptr)hdc, control.BackColor);
+  ref<System::Windows::Forms::Control> form = control;
+  while (form().Parent() != null)
+    form = form().Parent();
+  SendMessage((HWND)form().Handle(), WM_ERASEBKGND, (WPARAM)hdc, 0);
   ReleaseDC((HWND)control.Handle(), hdc);
 }
 
 void FormsApi::Control::SetForeColor(const System::Windows::Forms::Control& control) {
   HDC hdc = GetDC((HWND)control.Handle());
-  SetForeColor((intptr)hdc, control.ForeColor);
+  ref<System::Windows::Forms::Control> form = control;
+  while (form().Parent() != null)
+    form = form().Parent();
+  SendMessage((HWND)form().Handle(), WM_ERASEBKGND, (WPARAM)hdc, 0);
   ReleaseDC((HWND)control.Handle(), hdc);
 }
 

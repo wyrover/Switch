@@ -79,8 +79,8 @@ namespace __OS {
       
       static System::Drawing::Point PointToClient(const System::Windows::Forms::Control& control, const System::Drawing::Point& point);
       static System::Drawing::Point PointToScreen(const System::Windows::Forms::Control& control, const System::Drawing::Point& point);
-      static void SetBackColor(intptr hdc, const System::Drawing::Color& color);
-      static void SetForeColor(intptr hdc, const System::Drawing::Color& color);
+      static void SetBackColor(intptr hdc);
+      static void SetForeColor(intptr hdc);
       static void SetBackColor(const System::Windows::Forms::Control& control);
       static void SetForeColor(const System::Windows::Forms::Control& control);
       static void SetLocation(const System::Windows::Forms::Control& control);
