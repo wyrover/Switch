@@ -44,7 +44,6 @@ namespace Pcf {
           template <typename TForm>
           static void Run(const TForm& mainForm) {
             Start();
-            //Application::mainForm = as<Form>(mainForm.template MemberwiseClone<TForm>());
             Application::mainForm = as<Form>(mainForm);
             Application::mainForm().Visible = true;
             Application::mainForm().FormClosed += pcf_delegate(const object& sender, const FormClosedEventArgs& e) {
@@ -61,7 +60,6 @@ namespace Pcf {
           static void AddForm();
           static void Start();
           static void MessageLoop();
-          //static refptr<Form> mainForm;
           static ref<Form> mainForm;
           static bool enableVisualStyles;
         };

@@ -17,6 +17,8 @@
 #include "../../Includes/Pcf/System/Windows/Forms/MessageBoxDefaultButton.h"
 #include "../../Includes/Pcf/System/Windows/Forms/MessageBoxIcon.h"
 #include "../../Includes/Pcf/System/Windows/Forms/MessageBoxOptions.h"
+#include "../../Includes/Pcf/System/Windows/Forms/Panel.h"
+#include "../../Includes/Pcf/System/Windows/Forms/ProgressBar.h"
 #include "../../Includes/Pcf/System/Windows/Forms/RadioButton.h"
 #include "WindowMessage.h"
 #include "WindowMessageKey.h"
@@ -26,12 +28,12 @@ namespace __OS {
   public:
     class Application pcf_static {
     public:
-      static void EnableVisualStyles() { visualStylesEnabled = true; }
-      static bool HasVisualStylesEnabled() { return visualStylesEnabled; }
-      static void Exit();
       static void AddForm(const System::Windows::Forms::Form& form);
-      static void MessageLoop(System::EventHandler idle);
+      static void EnableVisualStyles() { visualStylesEnabled = true; }
+      static void Exit();
+      static bool HasVisualStylesEnabled() { return visualStylesEnabled; }
       static void MessageBeep(System::Windows::Forms::MessageBoxIcon type);
+      static void MessageLoop(System::EventHandler idle);
       static System::Windows::Forms::DialogResult ShowMessageBox(const string& message, const string& caption, System::Windows::Forms::MessageBoxButtons buttons, System::Windows::Forms::MessageBoxIcon icon, System::Windows::Forms::MessageBoxDefaultButton defaultButton, System::Windows::Forms::MessageBoxOptions options, bool displayHelpButton);
       static void Start();
       static void Stop();
@@ -40,18 +42,31 @@ namespace __OS {
       static bool visualStylesEnabled;
     };
 
+    class Button pcf_static {
+    public:
+      static intptr Create(const System::Windows::Forms::Button& button);
+    };
+
+    class CheckBox pcf_static {
+    public:
+      static intptr Create(const System::Windows::Forms::CheckBox& checkBox);
+      static void SetAutoCheck(const System::Windows::Forms::CheckBox& checkBox);
+      static void SetChecked(const System::Windows::Forms::CheckBox& checkBox);
+    };
+
     class Control pcf_static {
     public:
       static void Close(const System::Windows::Forms::Form& form);
-      static intptr Create(const System::Windows::Forms::Button& button);
-      static intptr Create(const System::Windows::Forms::CheckBox& checkBox);
       static intptr Create(const System::Windows::Forms::Control& control);
-      static intptr Create(const System::Windows::Forms::Form& form);
-      static intptr Create(const System::Windows::Forms::Label& label);
-      static intptr Create(const System::Windows::Forms::RadioButton& radioButton);
       static void DefWndProc(System::Windows::Forms::Message& message);
       static void Destroy(const System::Windows::Forms::Control& control);
       static intptr GetHandleWindowFromDeviceContext(intptr hdc);
+
+      static intptr GetParentHandleOrDefault(const System::Windows::Forms::Control& control) {
+        static System::Windows::Forms::Form emptyForm;
+        return (control.Parent != null && control.Parent()().IsHandleCreated) ? control.Parent()().Handle() : emptyForm.Handle();
+      }
+
       static void Invalidate(const System::Windows::Forms::Control& control, bool invalidateChildren);
       static void Invalidate(const System::Windows::Forms::Control& control, const System::Drawing::Rectangle& rect, bool invalidateChildren);
 
@@ -64,16 +79,48 @@ namespace __OS {
       
       static System::Drawing::Point PointToClient(const System::Windows::Forms::Control& control, const System::Drawing::Point& point);
       static System::Drawing::Point PointToScreen(const System::Windows::Forms::Control& control, const System::Drawing::Point& point);
-      static void SetBackColor(intptr hdc, const System::Drawing::Color& color);
-      static void SetForeColor(intptr hdc, const System::Drawing::Color& color);
+      static void SetBackColor(intptr hdc);
+      static void SetForeColor(intptr hdc);
       static void SetBackColor(const System::Windows::Forms::Control& control);
       static void SetForeColor(const System::Windows::Forms::Control& control);
       static void SetLocation(const System::Windows::Forms::Control& control);
+      static void SetParent(const System::Windows::Forms::Control& control);
       static void SetSize(const System::Windows::Forms::Control& control);
       static void SetText(const System::Windows::Forms::Control& control);
       static void SetVisible(const System::Windows::Forms::Control& control);
     };
-    
+
+    class Form pcf_static {
+    public:
+      static intptr Create(const System::Windows::Forms::Form& form);
+    };
+
+    class Label pcf_static {
+    public:
+      static intptr Create(const System::Windows::Forms::Label& label);
+    };
+
+    class Panel pcf_static {
+    public:
+      static intptr Create(const System::Windows::Forms::Panel& panel);
+      static void SetBorderStyle(const System::Windows::Forms::Panel& panel);
+    };
+
+    class ProgressBar pcf_static {
+    public:
+      static intptr Create(const System::Windows::Forms::ProgressBar& progressBar);
+      static void SetMaximum(const System::Windows::Forms::ProgressBar& progressBar);
+      static void SetMinimum(const System::Windows::Forms::ProgressBar& progressBar);
+      static void SetValue(const System::Windows::Forms::ProgressBar& progressBar);
+    };
+
+    class RadioButton pcf_static {
+    public:
+      static intptr Create(const System::Windows::Forms::RadioButton& radioButton);
+      static void SetAutoCheck(const System::Windows::Forms::RadioButton& radioButton);
+      static void SetChecked(const System::Windows::Forms::RadioButton& radioButton);
+    };
+
     class SystemInformation pcf_static {
     public:
       static int32 GetActiveWindowTrackingDelay();

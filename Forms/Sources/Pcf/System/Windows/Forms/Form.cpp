@@ -9,21 +9,20 @@ using namespace System;
 using namespace System::ComponentModel;
 using namespace System::Drawing;
 using namespace System::Windows::Forms;
-using namespace __OS;
 
 void Form::Close() {
-  FormsApi::Control::Close(*this);
+  __OS::FormsApi::Control::Close(*this);
 }
 
 void Form::CreateHandle() {
-  this->data->messageActions[WM_CLOSE] = {*this, &Form::WmClose};
-  this->data->handle = FormsApi::Control::Create(*this);
+  this->messageActions[WM_CLOSE] = {*this, &Form::WmClose};
+  this->handle = __OS::FormsApi::Form::Create(*this);
   this->Control::CreateHandle();
 }
 
 void Form::WndProc(Message& message) {
   if (message.Msg == WM_CLOSE)
-    this->data->messageActions[message.Msg](message);
+    this->messageActions[message.Msg](message);
   else
     this->Control::WndProc(message);
 }

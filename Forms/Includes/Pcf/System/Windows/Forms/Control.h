@@ -16,12 +16,6 @@
 #include "MouseEventHandler.h"
 #include "PaintEventHandler.h"
 
-/// @cond
-namespace __OS {
-  class FormsApi;
-}
-/// @endcond
-
 namespace Pcf {
   namespace System {
     namespace Windows {
@@ -54,25 +48,43 @@ namespace Pcf {
           /// @endcode
           class ControlCollection : public System::Collections::Generic::List<ref<Control>> {
           public:
-            ControlCollection(ref<Control> parent) : parent(parent) {}
+            /// @cond
+            ~ControlCollection() { this->Clear(); }
+            /// @endcond
+            void Add(const ref<Control>& value) override {
+              ChangeParent(value);
+              this->System::Collections::Generic::List<ref<Control>>::Add(value);
+            }
 
-            virtual void Add(const ref<Control>& value) override {
-              ref<Control> v = value;
-              if (v().data->parent != null)
-                v().data->parent().data->controls.Remove(v);
-              else if (this->parent().Visible)
-                v().CreateControl();
-              v().data->parent = this->parent;
-              this->System::Collections::Generic::List<ref<Control>>::Add(v);
+            void Insert(int32 index, const ref<Control>& value) override {
+              ChangeParent(value);
+              this->System::Collections::Generic::List<ref<Control>>::Insert(index, value);
             }
 
             bool Remove(const ref<Control>& value) override {
-              ref<Control> v = value;
-              v().data->parent = null;
-              return this->System::Collections::Generic::List<ref<Control>>::Remove(v);
+              RemoveParent(value);
+              return this->System::Collections::Generic::List<ref<Control>>::Remove(value);
             }
 
-            ref<Control> parent;
+            void RemoveAt(int32 index) override {
+              RemoveParent((*this)[index]);
+              this->System::Collections::Generic::List<ref<Control>>::RemoveAt(index);
+            }
+
+          private:
+            friend Control;
+            ControlCollection(ref<Control> controlContainer) : controlContainer(controlContainer) {}
+            
+            void ChangeParent(ref<Control> value) {
+              if (value().parent != null)
+                value().parent().controls.Remove(value);
+              value().parent = this->controlContainer;
+              if (this->controlContainer().Visible && this->controlContainer().handle != IntPtr::Zero && value().handle == IntPtr::Zero)
+                value().CreateControl();
+            }
+
+            void RemoveParent(ref<Control> value) {value().parent = null;}
+            ref<Control> controlContainer;
           };
 
           /// @brief Initializes a new instance of the Control class with default settings.
@@ -119,12 +131,11 @@ namespace Pcf {
           }
 
           /// @cond
-          //Control(const Control& control) : data(control.data) {}
           Control(const Control& control) = delete;
           ~Control() {
             if (this->Parent() != null)
-              this->Parent()().data->controls.Remove(*this);
-            if (this->data.IsUnique() && this->data->handle)
+              this->Parent()().controls.Remove(*this);
+            if (this->IsHandleCreated)
               this->DestroyHandle();
           }
           /// @endcond
@@ -134,12 +145,11 @@ namespace Pcf {
           /// @remarks The BackColor property does not support transparent colors unless the SupportsTransparentBackColor value of System::Windows::Forms::ControlStyles is set to true.
           /// @remarks The BackColor property is an ambient property. An ambient property is a control property that, if not set, is retrieved from the parent control. For example, a Button will have the same BackColor as its parent Form by default. For more information about ambient properties, see the AmbientProperties class or the Control class overview.
           Property<System::Drawing::Color> BackColor {
-            //pcf_get { return !this->data->backColor.HasValue && this->data->parent != null ? this->data->parent().BackColor() : this->data->backColor.GetValueOrDefault(DefaultBackColor); },
-            pcf_get { return this->data->backColor.GetValueOrDefault(DefaultBackColor); },
+            pcf_get { return (!this->backColor.HasValue && this->parent != null) ? this->parent().BackColor : this->backColor.GetValueOrDefault(DefaultBackColor); },
             pcf_set {
-              if (this->data->backColor != value) {
-                this->data->backColor = value;
-                this->OnBackColorChanged(EventArgs());
+              if (this->backColor != value) {
+                this->backColor = value;
+                this->OnBackColorChanged(EventArgs::Empty);
               }
             }
           };
@@ -155,15 +165,25 @@ namespace Pcf {
             }
           };
 
+          /// @brief Gets the collection of controls contained within the control.
+          /// @param controls A Control.ControlCollection representing the collection of controls contained within the control.
+          /// @remarks A Control can act as a parent to a collection of controls. For example, when several controls are added to a Form, each of the controls is a member of the Control.ControlCollection assigned to the Controls property of the form, which is derived from the Control class.
+          /// @remarks You can manipulate the controls in the Control.ControlCollection assigned to the Controls property by using the methods available in the Control.ControlCollection class.
+          /// @remarks When adding several controls to a parent control, it is recommended that you call the SuspendLayout method before initializing the controls to be added. After adding the controls to the parent control, call the ResumeLayout method. Doing so will increase the performance of applications with many controls.
+          /// @remarks Use the Controls property to iterate through all controls of a form, including nested controls. Use the GetNextControl method to retrieve the previous or next child control in the tab order. Use the ActiveControl property to get or set the active control of a container control.
+          Property<ControlCollection&, ReadOnly> Controls {
+            pcf_get->ControlCollection& {return this->controls; }
+          };
+
           static Property<System::Drawing::Color, ReadOnly> DefaultBackColor;
           static Property<System::Drawing::Color, ReadOnly> DefaultForeColor;
 
           Property<System::Drawing::Color> ForeColor {
-            pcf_get { return this->data->foreColor.GetValueOrDefault(DefaultForeColor); },
+            pcf_get{ return (!this->foreColor.HasValue && this->parent != null) ? this->parent().ForeColor : this->foreColor.GetValueOrDefault(DefaultForeColor); },
             pcf_set {
-              if (this->data->foreColor != value) {
-                this->data->foreColor = value;
-                this->OnForeColorChanged(EventArgs());
+              if (this->foreColor != value) {
+                this->foreColor = value;
+                this->OnForeColorChanged(EventArgs::Empty);
               }
             }
           };
@@ -173,9 +193,9 @@ namespace Pcf {
           /// @remarks The value of the Handle property is a Windows HWND. If the handle has not yet been created, referencing this property will force the handle to be created.
           Property<intptr, ReadOnly> Handle {
             pcf_get {
-              if (this->data->handle == 0)
+              if (!this->IsHandleCreated)
                 CreateHandle();
-              return this->data->handle;
+              return this->handle;
             }
           };
 
@@ -184,12 +204,12 @@ namespace Pcf {
           /// @remarks Changes made to the Height and Top property values cause the Bottom property value of the control to change.
           /// @note The minimum height for the derived control Splitter is one pixel. The default height for the Splitter control is three pixels. Setting the height of the Splitter control to a value less than one will reset the property value to the default height.
           Property<int32> Height {
-            pcf_get { return this->data->size.Height(); },
-            pcf_set { this->Size(System::Drawing::Size(this->data->size.Width(), value)); }
+            pcf_get { return this->size.Height(); },
+            pcf_set { this->Size(System::Drawing::Size(this->size.Width(), value)); }
           };
 
           Property<bool, ReadOnly> IsHandleCreated {
-            pcf_get { return this->data->handle != 0; }
+            pcf_get { return this->handle != 0; }
           };
 
           /// @brief Gets or sets the coordinates of the upper-left corner of the control relative to the upper-left corner of its container.
@@ -197,11 +217,11 @@ namespace Pcf {
           /// @remarks Because the Point class is returned by value, meaning accessing the property returns a copy of the upper-left point of the control. So, adjusting the X or Y properties of the Point returned from this property will not affect the Left, Right, Top, or Bottom property values of the control. To adjust these properties set each property value individually, or set the Location property with a new Point.
           /// @remarks If the Control is a Form, the Location property value represents the upper-left corner of the Form in screen coordinates.
           Property<System::Drawing::Point> Location {
-            pcf_get { return this->data->location; },
+            pcf_get { return this->location; },
             pcf_set {
-            if (this->data->location != value) {
-              this->data->location = value;
-              this->OnLocationChanged(EventArgs());
+            if (this->location != value) {
+              this->location = value;
+              this->OnLocationChanged(EventArgs::Empty);
             }
           }
           };
@@ -210,11 +230,11 @@ namespace Pcf {
           /// @return string The name of the control. The default is an empty string ("").
           /// @remarks The Name property can be used at run time to evaluate the object by name rather than type and programmatic name.
           Property<string> Name {
-            pcf_get { return this->data->name; },
+            pcf_get { return this->name; },
             pcf_set {
-            if (this->data->name != value) {
-              this->data->name = value;
-              this->OnNameChanged(EventArgs());
+            if (this->name != value) {
+              this->name = value;
+              this->OnNameChanged(EventArgs::Empty);
             }
           }
           };
@@ -223,14 +243,14 @@ namespace Pcf {
           /// @return Control A Control that represents the parent or container control of the control.
           /// @remarks Setting the Parent property value to null removes the control from the Control.ControlCollection of its current parent control.
           Property<ref<Control>> Parent {
-            pcf_get { return this->data->parent; },
+            pcf_get { return this->parent; },
             pcf_set {
-              if (this->data->parent != value) {
-                if (value == null && this->data->parent != null)
-                  this->data->parent().data->controls.Remove(*this);
+              if (this->parent != value) {
+                if (value == null && this->parent != null)
+                  this->parent().controls.Remove(*this);
                 else
-                  const_cast<Control&>(value()).data->controls.Add(*this);
-                this->OnParentChanged(EventArgs());
+                  const_cast<Control&>(value()).controls.Add(*this);
+                this->OnParentChanged(EventArgs::Empty);
               }
             }
           };
@@ -240,11 +260,11 @@ namespace Pcf {
           /// @remarks Because the Size class is returned by value, meaning accessing the property returns a copy of the size of the control. So, adjusting the Width or Height properties of the Size returned from this property will not affect the Width or Height of the control. To adjust the Width or Height of the control, you must set the control's Width or Height property, or set the Size property with a new Size.
           /// @note To maintain better performance, do not set the Size of a control in its constructor. The preferred method is to override the DefaultSize property.
           Property<System::Drawing::Size> Size {
-            pcf_get { return this->data->size; },
+            pcf_get { return this->size; },
             pcf_set {
-            if (this->data->size != value) {
-              this->data->size = value;
-              this->OnSizeChanged(EventArgs());
+            if (this->size != value) {
+              this->size = value;
+              this->OnSizeChanged(EventArgs::Empty);
             }
           }
           };
@@ -259,26 +279,26 @@ namespace Pcf {
           };
 
           Property<bool> Visible {
-            pcf_get { return this->data->visible; },
+            pcf_get { return this->visible; },
             pcf_set {
-              if (this->data->visible != value) {
-                this->data->visible = value;
-                this->OnVisibleChanged(EventArgs());
+              if (this->visible != value) {
+                this->visible = value;
+                this->OnVisibleChanged(EventArgs::Empty);
               }
             }
           };
 
           Property<int32> Width {
-            pcf_get { return this->data->size.Width(); },
-            pcf_set { this->Size(System::Drawing::Size(value, this->data->size.Height())); }
+            pcf_get { return this->size.Width(); },
+            pcf_set { this->Size(System::Drawing::Size(value, this->size.Height())); }
           };
 
           void CreateControl() {
-            if (this->data->size.IsEmpty())
-              this->data->size = this->DefaultSize;
-            if (this->data->visible && !this->IsHandleCreated)
+            if (this->size.IsEmpty())
+              this->size = this->DefaultSize;
+            if (this->visible && !this->IsHandleCreated)
               CreateHandle();
-            for (ref<Control> control : this->data->controls)
+            for (ref<Control> control : this->controls)
               control().CreateControl();
             OnCreateControl();
           }
@@ -342,11 +362,22 @@ namespace Pcf {
 
           virtual void DestroyHandle();
 
+          System::Drawing::Rectangle GetClientRectangle() const;
+          
           virtual System::Drawing::Size GetDefaultSize() const { return System::Drawing::Size(0, 0); }
 
-          bool GetStyle(ControlStyles flag) { return ((int32)this->data->style & (int32)flag) == (int32)flag; }
+          bool GetStyle(ControlStyles flag) { return ((int32)this->style & (int32)flag) == (int32)flag; }
 
-          virtual const string& GetText() const { return this->data->text; }
+          virtual const string& GetText() const { return this->text; }
+
+          void SetStyle(ControlStyles flag, bool value) { this->style = value ? (ControlStyles)((int32)this->state | (int32)flag) : (ControlStyles)((int32)this->style & ~(int32)flag); }
+
+          virtual void SetText(const string& value) {
+            if (this->text != value) {
+              this->text = value;
+              this->OnTextChanged(EventArgs::Empty);
+            }
+          }
 
           virtual void OnCreateControl() {}
 
@@ -392,7 +423,7 @@ namespace Pcf {
 
           virtual void OnPaint(PaintEventArgs& e) { this->Paint(*this, e); }
 
-          virtual void OnParentChanged(const EventArgs& e) { this->ParentChanged(*this, e); }
+          virtual void OnParentChanged(const EventArgs& e);
 
           virtual void OnSizeChanged(const EventArgs& e);
 
@@ -400,38 +431,23 @@ namespace Pcf {
 
           virtual void OnVisibleChanged(const EventArgs& e);
 
-          void SetStyle(ControlStyles flag, bool value) { this->data->style = value ? (ControlStyles)((int32)this->data->state | (int32)flag) : (ControlStyles)((int32)this->data->style & ~(int32)flag); }
-
-          virtual void SetText(const string& value) {
-            if (this->data->text != value) {
-              this->data->text = value;
-              this->OnTextChanged(EventArgs());
-            }
-          }
-
           /// @cond
-          struct ControlData {
-            ControlData(ref<Control> control) : controls(control) {}
-            Nullable<System::Drawing::Color> backColor;
-            System::Drawing::SolidBrush backBrush {System::Drawing::SystemColors::Control};
-            ControlCollection controls;
-            System::Drawing::Color defaultBackColor;
-            System::Drawing::Color defaultForeColor;
-            Nullable<System::Drawing::Color> foreColor;
-            intptr handle = 0;
-            System::Drawing::Point location;
-            string name;
-            ref<Control> parent;
-            System::Drawing::Size size;
-            string text;
-            bool visible = true;
-            System::Collections::Generic::Dictionary<int32, Action<Message&>> messageActions;
-            State state = State::Empty;
-            ControlStyles style = (ControlStyles)0;
-          };
-          friend class __OS::FormsApi;
-          //refptr<ControlData> data = pcf_new<ControlData>(*this);
-          refptr<ControlData> data {new ControlData(*this)};
+          Nullable<System::Drawing::Color> backColor;
+          System::Drawing::SolidBrush backBrush {System::Drawing::SystemColors::Control};
+          ControlCollection controls {*this};
+          System::Drawing::Color defaultBackColor;
+          System::Drawing::Color defaultForeColor;
+          Nullable<System::Drawing::Color> foreColor;
+          intptr handle = 0;
+          System::Drawing::Point location;
+          string name;
+          ref<Control> parent;
+          System::Drawing::Size size;
+          string text;
+          bool visible = true;
+          System::Collections::Generic::Dictionary<int32, Action<Message&>> messageActions;
+          State state = State::Empty;
+          ControlStyles style = (ControlStyles)0;
           static System::Collections::Generic::Dictionary<intptr, ref<Control>> handles;
           /// @endcond
 
@@ -481,9 +497,8 @@ namespace Pcf {
           void WmWindowPosChanged(Message& message);
           void WmWindowPosChanging(Message& message);
 
-          System::Drawing::Rectangle GetClientRectangle() const;
-          bool GetState(State flag) const { return ((int32)this->data->state & (int32)flag) == (int32)flag; }
-          void SetState(State flag, bool value) { this->data->state = value ? (State)((int32)this->data->state | (int32)flag) : (State)((int32)this->data->state & ~(int32)flag); }
+          bool GetState(State flag) const { return ((int32)this->state & (int32)flag) == (int32)flag; }
+          void SetState(State flag, bool value) { this->state = value ? (State)((int32)this->state | (int32)flag) : (State)((int32)this->state & ~(int32)flag); }
 
           enum class State {
             Empty = 0,

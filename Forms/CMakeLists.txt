@@ -81,9 +81,9 @@ set(INCLUDE_FILES
 #  Includes/Pcf/System/Windows/Forms/OpenFileDialog.h
   Includes/Pcf/System/Windows/Forms/PaintEventArgs.h
   Includes/Pcf/System/Windows/Forms/PaintEventHandler.h
-#  Includes/Pcf/System/Windows/Forms/Panel.h
+  Includes/Pcf/System/Windows/Forms/Panel.h
 #  Includes/Pcf/System/Windows/Forms/PictureBox.h
-#  Includes/Pcf/System/Windows/Forms/ProgressBar.h
+  Includes/Pcf/System/Windows/Forms/ProgressBar.h
   Includes/Pcf/System/Windows/Forms/RadioButton.h
 #  Includes/Pcf/System/Windows/Forms/RichTextBox.h
 #  Includes/Pcf/System/Windows/Forms/SaveFileDialog.h
@@ -102,14 +102,26 @@ set(INCLUDE_FILES
 )
 
 set(SOURCE_FILES
+  Sources/__OS/ApplicationWin32.cpp
+  Sources/__OS/ButtonWin32.cpp
+  Sources/__OS/ControlWin32.cpp
+  Sources/__OS/CheckBoxWin32.cpp
   Sources/__OS/FormsApi.h
   Sources/__OS/FormsApiFltk.cpp
-  Sources/__OS/FormsApiFltkSystemInformation.cpp
   Sources/__OS/FormsApiGtk.cpp
-  Sources/__OS/FormsApiGtkSystemInformation.cpp
-  Sources/__OS/FormsApiWin32.cpp
+  Sources/__OS/FormWin32.cpp
+  Sources/__OS/LabelWin32.cpp
+  Sources/__OS/MainWin32.cpp
+  Sources/__OS/PanelWin32.cpp
+  Sources/__OS/ProgressBarWin32.cpp
+  Sources/__OS/RadioButtonWin32.cpp
+  Sources/__OS/SystemInformationFltk.cpp
+  Sources/__OS/SystemInformationGtk.cpp
+  Sources/__OS/SystemInformationWin32.cpp
   Sources/__OS/WindowMessage.h
   Sources/__OS/WindowMessageKey.h
+  Sources/__OS/WindowProcedureWin32.cpp
+  Sources/__OS/WindowProcedureWin32.h
   Sources/Pcf/System/Media/SystemSound.cpp
   Sources/Pcf/System/Media/SystemSounds.cpp
   Sources/Pcf/System/Windows/Forms/Application.cpp
@@ -135,9 +147,9 @@ set(SOURCE_FILES
   Sources/Pcf/System/Windows/Forms/MessageBox.cpp
 #  Sources/Pcf/System/Windows/Forms/NumericUpDown.cpp
 #  Sources/Pcf/System/Windows/Forms/OpenFileDialog.cpp
-#  Sources/Pcf/System/Windows/Forms/Panel.cpp
+  Sources/Pcf/System/Windows/Forms/Panel.cpp
 #  Sources/Pcf/System/Windows/Forms/PictureBox.cpp
-#  Sources/Pcf/System/Windows/Forms/ProgressBar.cpp
+  Sources/Pcf/System/Windows/Forms/ProgressBar.cpp
 #  Sources/Pcf/System/Windows/Forms/Question.h
   Sources/Pcf/System/Windows/Forms/RadioButton.cpp
 #  Sources/Pcf/System/Windows/Forms/RichTextBox.cpp
@@ -153,7 +165,7 @@ set(SOURCE_FILES
 if (APPLE)
 set(COCOA_SOURCE_FILES
   Sources/__OS/FormsApiCocoa.mm
-  Sources/__OS/FormsApiCocoaSystemInformation.cpp
+  Sources/__OS/SystemInformationCocoa.cpp
 )
 endif ()
 

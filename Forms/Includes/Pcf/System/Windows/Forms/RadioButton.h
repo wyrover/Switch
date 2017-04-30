@@ -20,16 +20,27 @@ namespace Pcf {
         /// @note If the control that has focus accepts and processes the ENTER key press, the Button does not process it. For example, if a multiline TextBox or another button has focus, that control processes the ENTER key press instead of the accept button.
         class pcf_public RadioButton : public ButtonBase {
         public:
-          RadioButton() : ButtonBase("", 0, 0, 105, 25) { this->SetStyle(ControlStyles::UserPaint, false); }
+          RadioButton() : ButtonBase("", 0, 0, 104, 24) { this->SetStyle(ControlStyles::UserPaint, false); }
 
-          /// @cond
-          //RadioButton(const RadioButton& radioButton) : ButtonBase(radioButton) {}
-          /// @endcond
+          Property<bool> AutoCheck {
+            pcf_get {return this->autoCheck;},
+            pcf_set {this->SetAutoCheck(value);}
+          };
+
+          Property<bool> Checked{
+            pcf_get{ return this->checked; },
+            pcf_set{ this->SetChecked(value); }
+          };
 
         protected:
           void CreateHandle() override;
+          void SetAutoCheck(bool autoCheck);
+          void SetChecked(bool checked);
 
-          System::Drawing::Size GetDefaultSize() const override { return System::Drawing::Size(100, 25); }
+          System::Drawing::Size GetDefaultSize() const override { return System::Drawing::Size(104, 24); }
+
+          bool autoCheck = true;
+          bool checked = false;
         };
       }
     }

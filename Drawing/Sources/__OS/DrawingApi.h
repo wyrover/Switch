@@ -45,5 +45,42 @@ namespace __OS {
       static void FillPie(intptr hdc, const System::Drawing::Brush& brush, int32 x, int32 y, int32 w, int32 h, float startAngle, float sweepAngle);
       static void FillRectangle(intptr hdc, const System::Drawing::Brush& brush, int32 x, int32 y, int32 w, int32 h);
     };
+
+    class SystemColors pcf_static {
+    public:
+      static int32 GetActiveBorder();
+      static int32 GetActiveCaption();
+      static int32 GetActiveCaptionText();
+      static int32 GetAppWorkspace();
+      static int32 GetButtonFace();
+      static int32 GetButtonHighlight();
+      static int32 GetButtonShadow();
+      static int32 GetControl();
+      static int32 GetControlDark();
+      static int32 GetControlDarkDark();
+      static int32 GetControlLight();
+      static int32 GetControlLightLight();
+      static int32 GetControlText();
+      static int32 GetDesktop();
+      static int32 GetGradientActiveCaption();
+      static int32 GetGradientInactiveCaption();
+      static int32 GetGrayText();
+      static int32 GetHighlight();
+      static int32 GetHighlightText();
+      static int32 GetHotTrack();
+      static int32 GetInactiveBorder();
+      static int32 GetInactiveCaption();
+      static int32 GetInactiveCaptionText();
+      static int32 GetInfo();
+      static int32 GetInfoText();
+      static int32 GetMenu();
+      static int32 GetMenuBar();
+      static int32 GetMenuHighlight();
+      static int32 GetMenuText();
+      static int32 GetScrollBar();
+      static int32 GetWindow();
+      static int32 GetWindowFrame();
+      static int32 GetWindowText();
+    };
   };
 }

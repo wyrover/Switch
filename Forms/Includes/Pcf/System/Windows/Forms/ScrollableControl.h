@@ -29,11 +29,21 @@ namespace Pcf {
           /// @note To maintain better performance, do not set the size of a control in its constructor. The preferred method is to virtual the DefaultSize property.
           ScrollableControl(const string& text, int32 left, int32 top, int32 width, int32 height) : Control(text, left, top, width, height) {}
 
-          /// @cond
-          //ScrollableControl(const ScrollableControl& scrollableControl) : Control(scrollableControl) {}
-          /// @endcond
+          Property<bool> HScroll {
+            pcf_get {return this->hscroll;},
+            pcf_set {this->hscroll = value;}
+          };
 
-        private:
+          Property<bool> VScroll {
+            pcf_get {return this->vscroll;},
+            pcf_set {this->vscroll = value;}
+          };
+
+        protected:
+          /// @cond
+          bool hscroll = false;
+          bool vscroll = false;
+          /// @endcond
         };
       }
     }

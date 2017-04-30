@@ -16,9 +16,19 @@ using namespace System::Windows::Forms;
 using namespace __OS;
 
 namespace {
-  class GtkForm : public Gtk::Window {
+  class _IWidget pcf_interface {
   public:
-    GtkForm() {
+    virtual const Gtk::Widget& ToWidget() const = 0;
+    virtual Gtk::Widget& ToWidget() = 0;
+  };
+
+  class _Widget : public _IWidget {
+  public:
+  };
+
+  class _Form : public _Widget, public Gtk::Window {
+  public:
+    _Form() {
       this->add(this->scrolledWindow);
       this->scrolledWindow.add(this->fixed);
 
@@ -30,9 +40,25 @@ namespace {
 
     Gtk::Container& Container() {return this->fixed;}
 
+    const Gtk::Widget& ToWidget() const override {return *this;}
+    Gtk::Widget& ToWidget() override {return *this;}
+
   private:
     Gtk::ScrolledWindow scrolledWindow;
     Gtk::Fixed fixed;
+  };
+
+  class _Button : public _Widget, public Gtk::Button {
+  public:
+    _Button() {this->set_parent(this->emptyParent);}
+    void move(int32 x, int32 y) {
+      ((Gtk::Fixed*)this->get_parent())->child_property_x(*this) = x;
+      ((Gtk::Fixed*)this->get_parent())->child_property_y(*this) = y;
+    }
+    const Gtk::Widget& ToWidget() const override {return *this;}
+    Gtk::Widget& ToWidget() override {return *this;}
+  private:
+    Gtk::Fixed emptyParent;
   };
 
   Gdk::RGBA FromColor(const System::Drawing::Color& color) {
@@ -47,15 +73,14 @@ namespace {
   }
 
   Glib::RefPtr<Gtk::Application> application = Gtk::Application::create();
-  GtkForm* mainForm;
+  _Form* mainForm;
   int32 exitCode = 0;
-  System::Drawing::Color controlColor;
 }
 
 bool FormsApi::Application::visualStylesEnabled = false;
 
 void FormsApi::Application::AddForm(const System::Windows::Forms::Form& form) {
-   mainForm = (GtkForm*)form.data().handle;
+   mainForm = (_Form*)form.data().handle;
 }
 
 void FormsApi::Application::Exit() {
@@ -74,19 +99,27 @@ DialogResult FormsApi::Application::ShowMessageBox(const string& message, const 
 }
 
 void FormsApi::Application::Start() {
-  //controlColor = ToColor(GtkForm().get_style_context()->get_background_color());
-  controlColor = ToColor(Gtk::Entry().get_style_context()->get_background_color());
 }
 
 void FormsApi::Application::Stop() {
 }
 
 void FormsApi::Control::Close(const System::Windows::Forms::Form& form) {
-  ((GtkForm*)form.Handle())->close();
+  ((_Form*)form.Handle())->close();
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Button& button) {
-  return 0;
+  _Button* gtkButton = new _Button();
+  mainForm->Container().add(*gtkButton);
+  gtkButton->override_background_color(FromColor(button.BackColor));
+  gtkButton->override_color(FromColor(button.ForeColor));
+  gtkButton->move(button.data().location.X, button.data().location.Y);
+  //((Gtk::Fixed*)gtkButton->get_parent())->child_property_x(*gtkButton) = button.data().location.X;
+  //((Gtk::Fixed*)gtkButton->get_parent())->child_property_y(*gtkButton) = button.data().location.Y;
+
+  gtkButton->set_size_request(button.data().size.Width, button.data().size.Height);
+  gtkButton->show();
+  return (intptr)gtkButton;
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::CheckBox& checkBox) {
@@ -98,14 +131,12 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::Control& control)
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Form& form) {
-  GtkForm* gtkForm = new GtkForm();
-  Console::WriteLine("backColor = {0}", gtkForm->get_style_context()->get_background_color().to_string().c_str());
-  Console::WriteLine("backColor = {0}", Gtk::Button().get_style_context()->get_background_color().to_string().c_str());
-  //gtkForm->override_background_color(FromColor(form.BackColor));
-  gtkForm->override_background_color(FromColor(controlColor));
+  _Form* gtkForm = new _Form();
+  mainForm = gtkForm;
+  gtkForm->override_background_color(FromColor(form.BackColor));
   gtkForm->override_color(FromColor(form.ForeColor));
   gtkForm->move(form.data().location.X, form.data().location.Y);
-  gtkForm->resize(form.data().size.Width, form.data().size.Height);
+  gtkForm->set_size_request(form.data().size.Width, form.data().size.Height);
   return (intptr)gtkForm;
 }
 
@@ -121,6 +152,7 @@ void FormsApi::Control::DefWndProc(System::Windows::Forms::Message& message) {
 }
 
 void FormsApi::Control::Destroy(const System::Windows::Forms::Control& control) {
+ delete (Gtk::Widget*)control.data().handle;
 }
 
 intptr FormsApi::Control::GetHandleWindowFromDeviceContext(intptr hdc) {

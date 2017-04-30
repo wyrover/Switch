@@ -37,7 +37,7 @@ namespace Pcf {
           void SetValueMember(const string& valueMember) {
             if (this->valueMember != valueMember) {
               this->valueMember = valueMember;
-              ValueMemberChanged(*this, EventArgs());
+              ValueMemberChanged(*this, EventArgs::Empty);
             }
           }
 

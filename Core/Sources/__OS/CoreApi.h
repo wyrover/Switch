@@ -175,19 +175,19 @@ namespace __OS {
       static int32 CreateSubKey(const void* hrootKey, const char* subKey, void** hkey);
       static int32 OpenSubKey(const void* hrootKey, const char* subKey, void** hkey);
       static int32 GetValue(void* hkey, const char* subKey, int32 &type, void* data, int32* cbData);
-      static int32 SetValue(void *hKey, const char* keyName, int32 type, byte* data, int32 cbData);
+      static int32 SetValue(void* hKey, const char* keyName, int32 type, byte* data, int32 cbData);
       static int32 Flush(void* hKey);
       static int32 DeleteTree(void* hKey, const char* subkeyName);
       static int32 DeleteSubKey(void* hKey, const char* subkeyName);
       static int32 DeleteValue(void* hKey, const char* subkeyName);
-      static int32 ExpandString(const char *strtoexpand, char *result, int32 cbData);
-      static int32 EnumValues(void* hkey, int32 dwIndex, char *avaluenamey, char* val, int32 &pcf_typeofvalue, int32& sizekey, int32& sizeval);
-      static int32 EnumKey(void* hKey, int32 dwIndex, char *subkeyname, int32& sizesubkey);
+      static int32 ExpandString(const char* strtoexpand, char* result, int32 cbData);
+      static int32 EnumValues(void* hkey, int32 dwIndex, char* avaluenamey, char* val, int32 &pcf_typeofvalue, int32& sizekey, int32& sizeval);
+      static int32 EnumKey(void* hKey, int32 dwIndex, char* subkeyname, int32& sizesubkey);
       static int32 NumberOfSubKey(void* hkey);
       static int32 NumberOfValue(void* hkey);
       static int32 QueryInfoKey(void* hkey, int32& subKey, int32& value);
       static int32 GetHandleBaseKey(int32 reghive, void** hkey);
-      static const char *GetDefaultString();
+      static const char* GetDefaultString();
     };
 
     class Security pcf_static {
@@ -202,10 +202,10 @@ namespace __OS {
     public:
       static int32 AddressFamilyToNative(System::Net::Sockets::AddressFamily addressFamily);
       static System::Net::Sockets::AddressFamily NativeToAddressFamily(int32 addressFamily);
-      static int32 Accept(intptr handle, byte *socketAddress, int32 addressLength, intptr* socket);
-      static int32 Bind(intptr handle, byte *socketAddress, int32 addressLength);
+      static int32 Accept(intptr handle, byte* socketAddress, int32 addressLength, intptr* socket);
+      static int32 Bind(intptr handle, byte* socketAddress, int32 addressLength);
       static int32 Close(intptr handle);
-      static int32 Connect(intptr handle, byte *socketAddress, int32 addressLength);
+      static int32 Connect(intptr handle, byte* socketAddress, int32 addressLength);
       static int32 GetLastError();
       static int32 GetAvailable(intptr handle, int32* nbrBytesAvailable);
       static int32 GetSocketOption(intptr handle, System::Net::Sockets::SocketOptionLevel socketLevel, System::Net::Sockets::SocketOptionName socketOptionName, void* option, int32* optionLength);
@@ -216,12 +216,12 @@ namespace __OS {
       static int32 Open(System::Net::Sockets::AddressFamily addressFamily, System::Net::Sockets::SocketType socketType, System::Net::Sockets::ProtocolType protocolType, intptr* socket);
       static int32 Poll(intptr handle, int32 microseconds, int32 mode);
       static int32 Select(intptr* checkRead, int32 nbCheckRead, intptr* checkWrite, int32 nbCheckWrite, intptr* checkError, int32 nbCheckError, int32 microseconds);
-      static int32 Send(intptr handle, byte *buffer, int32 bufferLength, int32 flags);
-      static int32 SendTo(intptr handle, byte *buffer, int32 bufferLength, int32 flags, byte *socketAddress, int32 addressLength);
+      static int32 Send(intptr handle, byte* buffer, int32 bufferLength, int32 flags);
+      static int32 SendTo(intptr handle, byte* buffer, int32 bufferLength, int32 flags, byte* socketAddress, int32 addressLength);
       static int32 SetBlocking(intptr handle, bool blocking);
       static int32 SetSocketOption(intptr handle, System::Net::Sockets::SocketOptionLevel socketLevel, System::Net::Sockets::SocketOptionName socketOptionName, void* option, int32 optionLength);
       static int32 Receive(intptr handle, byte* buffer, int32 bufferLength, int32 flags);
-      static int32 ReceiveFrom(intptr handle, byte* buffer, int32 bufferLength, int32 flags, byte *socketAddress, int32 addressLength);
+      static int32 ReceiveFrom(intptr handle, byte* buffer, int32 bufferLength, int32 flags, byte* socketAddress, int32 addressLength);
       static int32 Shutdown(intptr handle, int32 how);
     };
     
@@ -257,24 +257,24 @@ namespace __OS {
       class UTF8 pcf_static {
       public:
         static byte GetFormat(byte b);
-        static int GetNextCodeIndex(const std::string& str, int32 pos);
-        static int GetPrevCodeIndex(const std::string& str, int32 pos);
+        static int32 GetNextCodeIndex(const std::string& str, int32 pos);
+        static int32 GetPrevCodeIndex(const std::string& str, int32 pos);
         static uint32 GetCode(const byte* bytes, byte size);
         static uint32 GetLength(const std::string& str);
-        static int GetLastIndex(const std::string& str);
-        static int GetByteCount(uint32 code);
+        static int32 GetLastIndex(const std::string& str);
+        static int32 GetByteCount(uint32 code);
         static std::string Encode(uint32 code);
-        static int Encode(uint32 code, byte bytes[]);
-        static int Encode(uint32 code, std::string& utf8_encoding);
+        static int32 Encode(uint32 code, byte bytes[]);
+        static int32 Encode(uint32 code, std::string& utf8_encoding);
         static System::Array<byte> ToBytes(uint32 code);
       };
 
       class UTF16 pcf_static {
       public:
-        static int GetByteCount(uint32 code);
-        static int Encode(uint32 code, byte bytes[], bool big_endian);
-        static int Decode(const byte* bytes, uint32 bytes_size, bool big_endian, uint32& code_point);
-        static int GetLength(const byte* bytes, uint32 nb_bytes, bool big_endian);
+        static int32 GetByteCount(uint32 code);
+        static int32 Encode(uint32 code, byte bytes[], bool big_endian);
+        static int32 Decode(const byte* bytes, uint32 bytes_size, bool big_endian, uint32& code_point);
+        static int32 GetLength(const byte* bytes, uint32 nb_bytes, bool big_endian);
       };
 
       class UTF32 pcf_static {

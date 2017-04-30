@@ -17,9 +17,6 @@ namespace Pcf {
     namespace Drawing {
       /// @brief Represents an ARGB (alpha, red, green, blue) color.
       class pcf_public Color : public object, public IComparable {
-        using KnownColors = Collections::Generic::Dictionary<int32, int32>;
-        static KnownColors knownColors;
-
       public:
         /// @brief Gets a system-defined color that has an ARGB value of 0x00FFFFFF. This field is constant.
         static Property<Color, ReadOnly> Transparent;
@@ -585,15 +582,13 @@ namespace Pcf {
           return CompareTo(as<Color>(obj));
         }
 
-        int32 CompareTo(const Color& color) const {
-          return Int32(this->argb).CompareTo(color);
-        }
+        int32 CompareTo(const Color& color) const {return Int32(this->argb).CompareTo(color);}
 
         int32 GetHashCode() const override { return this->argb; }
 
       private :
         Color(int32 argb) : argb(argb), knownColor((KnownColor)0) {}
-        Color(const KnownColor& color) : argb(knownColors[(int32)color]), knownColor(color) {}
+        Color(int32 argb, const KnownColor& color) : argb(argb), knownColor(color) {}
 
         bool GetIsSystemColor() const;
         string GetName() const;
