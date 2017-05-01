@@ -111,6 +111,7 @@ namespace __OS {
       static intptr Create(const System::Windows::Forms::ProgressBar& progressBar);
       static void SetMaximum(const System::Windows::Forms::ProgressBar& progressBar);
       static void SetMinimum(const System::Windows::Forms::ProgressBar& progressBar);
+      static void SetStyle(const System::Windows::Forms::ProgressBar& progressBar);
       static void SetValue(const System::Windows::Forms::ProgressBar& progressBar);
     };
 

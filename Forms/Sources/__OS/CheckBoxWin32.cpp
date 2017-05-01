@@ -21,6 +21,7 @@ intptr FormsApi::CheckBox::Create(const System::Windows::Forms::CheckBox& checkB
     style |= BS_CHECKBOX;
   int32 exStyle = 0;
   HWND handle = CreateWindowEx(exStyle, L"Button", checkBox.Text().w_str().c_str(), style, checkBox.Bounds().Left, checkBox.Bounds().Top, checkBox.Bounds().Width, checkBox.Bounds().Height, (HWND)FormsApi::Control::GetParentHandleOrDefault(checkBox), (HMENU)0, __instance, (LPVOID)NULL);
+  WindowProcedure::SetWindowTheme(handle);
   WindowProcedure::DefWindowProcs[(intptr)handle] = (WNDPROC)SetWindowLongPtr(handle, GWLP_WNDPROC, (LONG_PTR)WindowProcedure::WndProc);
   return (intptr)handle;
 }

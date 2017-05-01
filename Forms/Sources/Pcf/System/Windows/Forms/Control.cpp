@@ -63,11 +63,12 @@ void Control::CreateHandle() {
   if (!this->IsHandleCreated)
     this->handle = __OS::FormsApi::Control::Create(*this);
   handles.Add(this->handle, *this);
+  this->backBrush = System::Drawing::SolidBrush(this->BackColor);
   __OS::FormsApi::Control::SetBackColor(*this);
   __OS::FormsApi::Control::SetForeColor(*this);
   //__OS::FormsApi::Control::SetLocation(*this);
   __OS::FormsApi::Control::SetSize(*this);
-  //__OS::FormsApi::Control::SetText(*this);
+ // __OS::FormsApi::Control::SetText(*this);
 }
 
 void Control::DestroyHandle() {

@@ -84,6 +84,7 @@ set(INCLUDE_FILES
   Includes/Pcf/System/Windows/Forms/Panel.h
 #  Includes/Pcf/System/Windows/Forms/PictureBox.h
   Includes/Pcf/System/Windows/Forms/ProgressBar.h
+  Includes/Pcf/System/Windows/Forms/ProgressBarStyle.h
   Includes/Pcf/System/Windows/Forms/RadioButton.h
 #  Includes/Pcf/System/Windows/Forms/RichTextBox.h
 #  Includes/Pcf/System/Windows/Forms/SaveFileDialog.h

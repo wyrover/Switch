@@ -1,5 +1,4 @@
 ﻿#if defined(_WIN32) && defined(__use_native_interface__)
-#pragma comment(linker,"\"/manifestdependency:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
 
 #include <Windows.h>
 #include <Windowsx.h>
@@ -29,6 +28,7 @@ intptr FormsApi::Form::Create(const System::Windows::Forms::Form& form) {
   case FormStartPosition::WindowsDefaultLocation: bounds = Drawing::Rectangle(CW_USEDEFAULT, CW_USEDEFAULT, form.Width, form.Height); break;
   }
   HWND handle = CreateWindowEx(exStyle, WC_DIALOG, form.Text().w_str().c_str(), style, bounds.Left, bounds.Top, bounds.Width, bounds.Height, NULL, (HMENU)0, __instance, (LPVOID)NULL);
+  //WindowProcedure::SetWindowTheme(handle);
   WindowProcedure::DefWindowProcs[(intptr)handle] = (WNDPROC)SetWindowLongPtr(handle, GWLP_WNDPROC, (LONG_PTR)WindowProcedure::WndProc);
   return (intptr)handle;
 }

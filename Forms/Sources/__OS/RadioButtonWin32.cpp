@@ -21,6 +21,7 @@ intptr FormsApi::RadioButton::Create(const System::Windows::Forms::RadioButton& 
     style |= BS_RADIOBUTTON;
   int32 exStyle = 0;
   HWND handle = CreateWindowEx(exStyle, L"Button", radioButton.Text().w_str().c_str(), style, radioButton.Bounds().Left, radioButton.Bounds().Top, radioButton.Bounds().Width, radioButton.Bounds().Height, (HWND)FormsApi::Control::GetParentHandleOrDefault(radioButton), (HMENU)0, __instance, (LPVOID)NULL);
+  WindowProcedure::SetWindowTheme(handle);
   WindowProcedure::DefWindowProcs[(intptr)handle] = (WNDPROC)SetWindowLongPtr(handle, GWLP_WNDPROC, (LONG_PTR)WindowProcedure::WndProc);
   return (intptr)handle;
 }

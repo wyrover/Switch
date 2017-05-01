@@ -2,8 +2,6 @@
 #pragma comment(linker,"\"/manifestdependency:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
 
 #include <Windows.h>
-#include <Windowsx.h>
-#include <Uxtheme.h>
 #include <Pcf/Undef.h>
 
 #include "FormsApi.h"
@@ -15,11 +13,6 @@ using namespace __OS;
 extern HINSTANCE __instance;
 
 namespace {
-  void SetWindowTheme(intptr handle) {
-    if (!FormsApi::Application::HasVisualStylesEnabled())
-      SetWindowTheme((HWND)handle, L"", L"");
-  }
-
   void RegisterClassControl() {
     WNDCLASSEX wndClass;
     wndClass.cbSize = sizeof(WNDCLASSEX);

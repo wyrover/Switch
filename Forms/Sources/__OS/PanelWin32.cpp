@@ -26,6 +26,7 @@ intptr FormsApi::Panel::Create(const System::Windows::Forms::Panel& panel) {
     exStyle |= WS_EX_CLIENTEDGE;
 
   HWND handle = CreateWindowEx(exStyle, WC_DIALOG, panel.Text().w_str().c_str(), style, panel.Bounds().Left, panel.Bounds().Top, panel.Bounds().Width, panel.Bounds().Height, (HWND)FormsApi::Control::GetParentHandleOrDefault(panel), (HMENU)0, __instance, (LPVOID)NULL);
+  WindowProcedure::SetWindowTheme(handle);
   WindowProcedure::DefWindowProcs[(intptr)handle] = (WNDPROC)SetWindowLongPtr(handle, GWLP_WNDPROC, (LONG_PTR)WindowProcedure::WndProc);
   return (intptr)handle;
 }

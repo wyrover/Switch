@@ -3,6 +3,7 @@
 #pragma once
 
 #include "ButtonBase.h"
+#include "ProgressBarStyle.h"
 
 /// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Pcf {
@@ -30,22 +31,28 @@ namespace Pcf {
             pcf_set{ this->SetMinimum(value); },
           };
 
+          Property<ProgressBarStyle> Style{
+            pcf_get{ return this->style; },
+            pcf_set{ this->SetProgressStyle(value); },
+          };
+
           Property<int32> Value{
             pcf_get{ return this->value; },
             pcf_set{ this->SetValue(value); },
           };
-
 
         protected:
           void CreateHandle() override;
           System::Drawing::Size GetDefaultSize() const override { return System::Drawing::Size(100, 23); }
           void SetMaximum(int32 maximum);
           void SetMinimum(int32 minimum);
+          void SetProgressStyle(ProgressBarStyle style);
           void SetValue(int32 value);
-         
+
           /// @cond
           int32 maximum = 100;
           int32 minimum = 0;
+          ProgressBarStyle style;
           int32 value = 0;
           /// @endcond
         };

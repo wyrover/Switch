@@ -38,19 +38,22 @@ namespace PcfFormApp {
       radioButton2.Text = "Radio 2";
       radioButton2.Location = Point(10, 130);
 
+      Button button;
+      button.Name = "button";
+      button.Text = "Click me";
+      button.Location = Point(10, 160);
+
       Panel panel;
       panel.Name = "panel";
       panel.Text = "Panel";
       panel.Location = Point(10, 10);
-      panel.Size = Size(200, 200);
+      panel.Size = Size(260, 240);
       panel.BorderStyle = BorderStyle::Fixed3D;
-      panel.Controls().AddRange({progressBar, label, checkBox, radioButton1, radioButton2});
- 
+      panel.Controls().AddRange({progressBar, label, checkBox, radioButton1, radioButton2, button});
+
       Form form;
       form.Name = "form";
-      form.VScroll = true;
       form.Controls().Add(panel);
-      form.BackColor = Color::LightPink;
 
       Application::EnableVisualStyles();
       Application::Run(form);

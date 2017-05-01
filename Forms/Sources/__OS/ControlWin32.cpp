@@ -1,5 +1,4 @@
 ﻿#if defined(_WIN32) && defined(__use_native_interface__)
-#pragma comment(linker,"\"/manifestdependency:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
 
 #include <Windows.h>
 #include <Windowsx.h>
@@ -30,6 +29,7 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::Control& control)
   int32 style = WS_VISIBLE | WS_CHILD;
   int32 exStyle = 0;
   HWND handle = CreateWindowEx(exStyle, L"Control", control.Text().w_str().c_str(), style, control.Bounds().Left, control.Bounds().Top, control.Bounds().Width, control.Bounds().Height, (HWND)FormsApi::Control::GetParentHandleOrDefault(control), (HMENU)0, __instance, (LPVOID)NULL);
+  WindowProcedure::SetWindowTheme(handle);
   WindowProcedure::DefWindowProcs[(intptr)handle] = (WNDPROC)SetWindowLongPtr(handle, GWLP_WNDPROC, (LONG_PTR)WindowProcedure::WndProc);
   return (intptr)handle;
 }
@@ -82,25 +82,17 @@ System::Drawing::Point FormsApi::Control::PointToScreen(const System::Windows::F
 
 void FormsApi::Control::SetBackColor(intptr hdc) {
   ref<System::Windows::Forms::Control> control = System::Windows::Forms::Control::FromHandle((intptr)WindowFromDC((HDC)hdc));
-  if (control != null) {
-    System::Diagnostics::Debug::WriteLine("{0} = {1}", control().Name, control().BackColor);
+  if (control != null)
     if (control().BackColor == Color::Transparent)
       SetBkMode((HDC)hdc, TRANSPARENT);
     else
       SetBkColor((HDC)hdc, ColorToRgb(control().BackColor));
-    SetTextColor((HDC)hdc, ColorToRgb(control().ForeColor));
-  }
 }
 
 void FormsApi::Control::SetForeColor(intptr hdc) {
   ref<System::Windows::Forms::Control> control = System::Windows::Forms::Control::FromHandle((intptr)WindowFromDC((HDC)hdc));
-  if (control != null) {
-    if (control().BackColor == Color::Transparent)
-      SetBkMode((HDC)hdc, TRANSPARENT);
-    else
-      SetBkColor((HDC)hdc, ColorToRgb(control().BackColor));
+  if (control != null)
     SetTextColor((HDC)hdc, ColorToRgb(control().ForeColor));
-  }
 }
 
 void FormsApi::Control::SetBackColor(const System::Windows::Forms::Control& control) {
