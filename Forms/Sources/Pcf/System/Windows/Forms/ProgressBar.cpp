@@ -11,6 +11,7 @@ void ProgressBar::CreateHandle() {
   this->Control::CreateHandle();
   __OS::FormsApi::ProgressBar::SetMaximum(*this);
   __OS::FormsApi::ProgressBar::SetMinimum(*this);
+  __OS::FormsApi::ProgressBar::SetStyle(*this);
   __OS::FormsApi::ProgressBar::SetValue(*this);
 }
 

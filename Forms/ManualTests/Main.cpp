@@ -59,6 +59,7 @@ namespace PcfFormApp {
       form.Name = "form";
       form.Text = "Form";
       form.Controls().Add(panel);
+      form.BackColor = Color::SpringGreen;
 
       Application::EnableVisualStyles();
       Application::Run(form);
