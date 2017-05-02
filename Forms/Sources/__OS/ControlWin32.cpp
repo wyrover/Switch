@@ -81,7 +81,7 @@ System::Drawing::Point FormsApi::Control::PointToScreen(const System::Windows::F
 }
 
 void FormsApi::Control::SetBackColor(intptr hdc) {
-  ref<System::Windows::Forms::Control> control = System::Windows::Forms::Control::FromHandle((intptr)WindowFromDC((HDC)hdc));
+  ref<System::Windows::Forms::Control> control = System::Windows::Forms::Control::FromHandle(GetHandleWindowFromDeviceContext(hdc));
   if (control != null)
     if (control().BackColor == Color::Transparent)
       SetBkMode((HDC)hdc, TRANSPARENT);
@@ -90,7 +90,7 @@ void FormsApi::Control::SetBackColor(intptr hdc) {
 }
 
 void FormsApi::Control::SetForeColor(intptr hdc) {
-  ref<System::Windows::Forms::Control> control = System::Windows::Forms::Control::FromHandle((intptr)WindowFromDC((HDC)hdc));
+  ref<System::Windows::Forms::Control> control = System::Windows::Forms::Control::FromHandle(GetHandleWindowFromDeviceContext(hdc));
   if (control != null)
     SetTextColor((HDC)hdc, ColorToRgb(control().ForeColor));
 }

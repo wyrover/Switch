@@ -166,7 +166,7 @@ set(SOURCE_FILES
 if (APPLE)
 set(COCOA_SOURCE_FILES
   Sources/__OS/FormsApiCocoa.mm
-  Sources/__OS/SystemInformationCocoa.cpp
+  Sources/__OS/SystemInformationCocoa.mm
 )
 endif ()
 
