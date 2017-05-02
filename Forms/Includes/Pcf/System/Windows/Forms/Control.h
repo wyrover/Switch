@@ -75,15 +75,9 @@ namespace Pcf {
             friend Control;
             ControlCollection(ref<Control> controlContainer) : controlContainer(controlContainer) {}
             
-            void ChangeParent(ref<Control> value) {
-              if (value().parent != null)
-                value().parent().controls.Remove(value);
-              value().parent = this->controlContainer;
-              if (this->controlContainer().Visible && this->controlContainer().handle != IntPtr::Zero && value().handle == IntPtr::Zero)
-                value().CreateControl();
-            }
+            void ChangeParent(ref<Control> value);
 
-            void RemoveParent(ref<Control> value) {value().parent = null;}
+            void RemoveParent(ref<Control> value);
             ref<Control> controlContainer;
           };
 
@@ -293,15 +287,7 @@ namespace Pcf {
             pcf_set { this->Size(System::Drawing::Size(value, this->size.Height())); }
           };
 
-          void CreateControl() {
-            if (this->size.IsEmpty())
-              this->size = this->DefaultSize;
-            if (this->visible && !this->IsHandleCreated)
-              CreateHandle();
-            for (ref<Control> control : this->controls)
-              control().CreateControl();
-            OnCreateControl();
-          }
+          void CreateControl();
 
           static const ref<Control> FromHandle(intptr handle) {
             if (handles.ContainsKey(handle))

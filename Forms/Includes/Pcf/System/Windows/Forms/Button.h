@@ -22,14 +22,19 @@ namespace Pcf {
         public:
           Button() : ButtonBase("", 0, 0, 75, 25) { this->SetStyle(ControlStyles::UserPaint, false); }
 
-          /// @cond
-          //Button(const Button& button) : ButtonBase(button) {}
-          /// @endcond
+          Property<bool> IsDefault {
+            pcf_get {return this->isDefault;},
+            pcf_set {this->SetIsDefault(value);}
+          };
 
         protected:
           void CreateHandle() override;
-
           System::Drawing::Size GetDefaultSize() const override { return System::Drawing::Size(75, 25); }
+          void SetIsDefault(bool isDefault);
+
+          /// @cond
+          bool isDefault = false;
+          /// @endcond
         };
       }
     }

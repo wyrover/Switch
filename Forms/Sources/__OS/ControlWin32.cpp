@@ -28,7 +28,7 @@ void FormsApi::Control::Close(const System::Windows::Forms::Form& form) {
 intptr FormsApi::Control::Create(const System::Windows::Forms::Control& control) {
   int32 style = WS_VISIBLE | WS_CHILD;
   int32 exStyle = 0;
-  HWND handle = CreateWindowEx(exStyle, L"Control", control.Text().w_str().c_str(), style, control.Bounds().Left, control.Bounds().Top, control.Bounds().Width, control.Bounds().Height, (HWND)FormsApi::Control::GetParentHandleOrDefault(control), (HMENU)0, __instance, (LPVOID)NULL);
+  HWND handle = CreateWindowEx(exStyle, L"Control", control.Text().w_str().c_str(), style, control.Bounds().Left, control.Bounds().Top, control.Bounds().Width, control.Bounds().Height, (HWND)control.Parent()().Handle(), (HMENU)0, __instance, (LPVOID)NULL);
   WindowProcedure::SetWindowTheme(handle);
   WindowProcedure::DefWindowProcs[(intptr)handle] = (WNDPROC)SetWindowLongPtr(handle, GWLP_WNDPROC, (LONG_PTR)WindowProcedure::WndProc);
   return (intptr)handle;
@@ -118,7 +118,8 @@ void FormsApi::Control::SetLocation(const System::Windows::Forms::Control& contr
 }
 
 void FormsApi::Control::SetParent(const System::Windows::Forms::Control& control) {
-  ::SetParent((HWND)control.Handle(), (HWND)control.Parent()().Handle());
+  ::SetParent((HWND)control.Handle(), control.Parent() != null ? (HWND)control.Parent()().Handle() : (HWND)0);
+
 }
 
 void FormsApi::Control::SetSize(const System::Windows::Forms::Control& control) {

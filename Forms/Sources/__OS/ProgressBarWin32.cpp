@@ -28,7 +28,7 @@ intptr FormsApi::ProgressBar::Create(const System::Windows::Forms::ProgressBar& 
   exStyle |= WS_EX_LAYOUTRTL;
   exStyle &= ~(WS_EX_RTLREADING | WS_EX_RIGHT | WS_EX_LEFTSCROLLBAR);
   */
-  HWND handle = CreateWindowEx(exStyle, PROGRESS_CLASS, progressBar.Text().w_str().c_str(), style, progressBar.Bounds().Left, progressBar.Bounds().Top, progressBar.Bounds().Width, progressBar.Bounds().Height, (HWND)FormsApi::Control::GetParentHandleOrDefault(progressBar), (HMENU)0, __instance, (LPVOID)NULL);
+  HWND handle = CreateWindowEx(exStyle, PROGRESS_CLASS, progressBar.Text().w_str().c_str(), style, progressBar.Bounds().Left, progressBar.Bounds().Top, progressBar.Bounds().Width, progressBar.Bounds().Height, (HWND)progressBar.Parent()().Handle(), (HMENU)0, __instance, (LPVOID)NULL);
   WindowProcedure::SetWindowTheme(handle);
   WindowProcedure::DefWindowProcs[(intptr)handle] = (WNDPROC)SetWindowLongPtr(handle, GWLP_WNDPROC, (LONG_PTR)WindowProcedure::WndProc);
   return (intptr)handle;
@@ -43,9 +43,7 @@ void FormsApi::ProgressBar::SetMinimum(const System::Windows::Forms::ProgressBar
 }
 
 void FormsApi::ProgressBar::SetStyle(const System::Windows::Forms::ProgressBar& progressBar) {
-  SetWindowLong((HWND)progressBar.Handle(), GWL_STYLE, GetWindowLong((HWND)progressBar.Handle(), GWL_STYLE) & ~PBS_MARQUEE);
-  SetWindowLong((HWND)progressBar.Handle(), GWL_STYLE, GetWindowLong((HWND)progressBar.Handle(), GWL_STYLE) & ~PBS_SMOOTH);
-  SetWindowLong((HWND)progressBar.Handle(), GWL_STYLE, GetWindowLong((HWND)progressBar.Handle(), GWL_STYLE) & ~PBS_SMOOTHREVERSE);
+  SetWindowLong((HWND)progressBar.Handle(), GWL_STYLE, GetWindowLong((HWND)progressBar.Handle(), GWL_STYLE) & ~(PBS_MARQUEE | PBS_SMOOTH | PBS_SMOOTHREVERSE));
   switch (progressBar.Style) {
   case ProgressBarStyle::Continuous: SetWindowLong((HWND)progressBar.Handle(), GWL_STYLE, GetWindowLong((HWND)progressBar.Handle(), GWL_STYLE) | PBS_SMOOTH); break;
   case ProgressBarStyle::Marquee: SetWindowLong((HWND)progressBar.Handle(), GWL_STYLE, GetWindowLong((HWND)progressBar.Handle(), GWL_STYLE) | PBS_MARQUEE); break;

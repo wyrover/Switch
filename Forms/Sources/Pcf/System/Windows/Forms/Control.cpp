@@ -43,6 +43,19 @@ namespace {
 
 ref<Control> Control::controlEntered;
 
+void Control::ControlCollection::ChangeParent(ref<Control> value) {
+  if (value().parent != null)
+    value().parent().controls.Remove(value);
+  value().parent = this->controlContainer;
+  if (this->controlContainer().Visible && this->controlContainer().handle != IntPtr::Zero && value().handle == IntPtr::Zero)
+    value().CreateControl();
+}
+
+void Control::ControlCollection::RemoveParent(ref<Control> value) {
+  value().parent = null;
+}
+
+
 Control::Control() {
   this->messageActions = {{WM_CAPTURECHANGED,{*this, &Control::WmCaptureChange}},{WM_CLOSE,{*this, &Control::WmClose}},{WM_COMMAND,{*this, &Control::WmCommand}},{WM_CONTEXTMENU,{*this, &Control::WmContextMenu}},{WM_CREATE,{*this, &Control::WmCreate}},{WM_CTLCOLOR,{*this, &Control::WmCtlColorControl}},{WM_CTLCOLORBTN,{*this, &Control::WmCtlColorControl}},{WM_CTLCOLORDLG,{*this, &Control::WmCtlColorControl}},{WM_CTLCOLORMSGBOX,{*this, &Control::WmCtlColorControl}},{WM_CTLCOLORSCROLLBAR,{*this, &Control::WmCtlColorControl}},{WM_CTLCOLOREDIT,{*this, &Control::WmCtlColorControl}},{WM_CTLCOLORLISTBOX,{*this, &Control::WmCtlColorControl}},{WM_CTLCOLORSTATIC,{*this, &Control::WmCtlColorControl}},{WM_DESTROY,{*this, &Control::WmDestroy}},{WM_DISPLAYCHANGE,{*this, &Control::WmDisplayChange}},{WM_DRAWITEM,{*this, &Control::WmDrawItem}},{WM_ERASEBKGND,{*this, &Control::WmEraseBkgnd}},{WM_EXITMENULOOP,{*this, &Control::WmExitMenuLoop}},{WM_GETOBJECT,{*this, &Control::WmGetObject}},{WM_HELP,{*this, &Control::WmHelp}},{WM_IME_CHAR,{*this, &Control::WmImeChar}},{WM_IME_NOTIFY,{*this, &Control::WmImeNotify}},{WM_IME_STARTCOMPOSITION,{*this, &Control::WmImeStartComposition}},{WM_INITMENUPOPUP,{*this, &Control::WmInitMenuPopup}},{WM_INPUTLANGCHANGE,{*this, &Control::WmInputLangChange}},{WM_INPUTLANGCHANGEREQUEST,{*this, &Control::WmInputLangChangeRequest}},{WM_CHAR,{*this, &Control::WmKeyChar}},{WM_KEYDOWN,{*this, &Control::WmKeyChar}},{WM_SYSKEYDOWN,{*this, &Control::WmKeyChar}},{WM_KEYUP,{*this, &Control::WmKeyChar}},{WM_SYSKEYUP,{*this, &Control::WmKeyChar}},{WM_KILLFOCUS,{*this, &Control::WmKillFocus}},{WM_MEASUREITEM,{*this, &Control::WmMeasureItem}},{WM_MENUCHAR,{*this, &Control::WmMenuChar}},{WM_MENUSELECT,{*this, &Control::WmMenuSelect}},{WM_LBUTTONDBLCLK,{*this, &Control::WmMouseDown}},{WM_LBUTTONDOWN,{*this, &Control::WmMouseDown}},{WM_MBUTTONDBLCLK,{*this, &Control::WmMouseDown}},{WM_MBUTTONDOWN,{*this, &Control::WmMouseDown}},{WM_XBUTTONDOWN,{*this, &Control::WmMouseDown}},{WM_XBUTTONDBLCLK,{*this, &Control::WmMouseDown}},{WM_RBUTTONDBLCLK,{*this, &Control::WmMouseDown}},{WM_RBUTTONDOWN,{*this, &Control::WmMouseDown}},{WM_MOUSEHOVER,{*this, &Control::WmMouseHover}},{WM_MOUSELEAVE,{*this, &Control::WmMouseLeave}},{WM_NCMOUSELEAVE,{*this, &Control::WmMouseLeave}},{WM_MOUSEMOVE,{*this, &Control::WmMouseMove}},{WM_LBUTTONUP,{*this, &Control::WmMouseUp}},{WM_MBUTTONUP,{*this, &Control::WmMouseUp}},{WM_XBUTTONUP,{*this, &Control::WmMouseUp}},{WM_RBUTTONUP,{*this, &Control::WmMouseUp}},{WM_MOUSEWHEEL,{*this, &Control::WmMouseWheel}},{WM_NOTIFY,{*this, &Control::WmNotify}},{WM_NOTIFYFORMAT,{*this, &Control::WmNotifyFormat}},{WM_PARENTNOTIFY,{*this, &Control::WmParentNotify}},{WM_PAINT,{*this, &Control::WmPaint}},{WM_PRINTCLIENT,{*this, &Control::WmPrintClient}},{WM_QUERYNEWPALETTE,{*this, &Control::WmQueryNewPalette}},{WM_SHOWWINDOW,{*this, &Control::WmShowWindow}},{WM_SETCURSOR,{*this, &Control::WmSetCursor}},{WM_SETFOCUS,{*this, &Control::WmSetFocus}},{WM_SYSCOMMAND,{*this, &Control::WmSysCommand}},{WM_UPDATEUISTATE,{*this, &Control::WmUpdateUIState}},{WM_WINDOWPOSCHANGED,{*this, &Control::WmWindowPosChanged}},{WM_WINDOWPOSCHANGING,{*this, &Control::WmWindowPosChanging}}};
   // For message : WM_CTLCOLOR, WM_CTLCOLORBTN, WM_CTLCOLORDLG, WM_CTLCOLORMSGBOX, WM_CTLCOLORSCROLLBAR, WM_CTLCOLOREDIT, WM_CTLCOLORLISTBOX, WM_CTLCOLORSTATIC do create reflect message internal ?
@@ -59,6 +72,19 @@ Property<System::Drawing::Color, ReadOnly> Control::DefaultForeColor {
   [] { return System::Drawing::SystemColors::ControlText(); }
 };
 
+void Control::CreateControl() {
+  if (this->size.IsEmpty())
+    this->size = this->DefaultSize;
+  if (this->parent != null || is<Form>(*this)) {
+    if (this->visible && !this->IsHandleCreated)
+      CreateHandle();
+    for (ref<Control> control : this->controls)
+      control().CreateControl();
+    OnCreateControl();
+  }
+}
+
+
 void Control::CreateHandle() {
   if (!this->IsHandleCreated)
     this->handle = __OS::FormsApi::Control::Create(*this);
@@ -67,6 +93,7 @@ void Control::CreateHandle() {
   __OS::FormsApi::Control::SetBackColor(*this);
   __OS::FormsApi::Control::SetForeColor(*this);
   //__OS::FormsApi::Control::SetLocation(*this);
+  __OS::FormsApi::Control::SetParent(*this);
   __OS::FormsApi::Control::SetSize(*this);
  // __OS::FormsApi::Control::SetText(*this);
 }

@@ -17,8 +17,10 @@ void Panel::CreateHandle() {
 }
 
 void Panel::SetBorderStyle(System::Windows::Forms::BorderStyle borderStyle) {
-  this->borderStyle = borderStyle;
-  if (this->IsHandleCreated)
-    __OS::FormsApi::Panel::SetBorderStyle(*this);
+  if (this->borderStyle != borderStyle) {
+    this->borderStyle = borderStyle;
+    if (this->IsHandleCreated)
+      __OS::FormsApi::Panel::SetBorderStyle(*this);
+  }
 }
 

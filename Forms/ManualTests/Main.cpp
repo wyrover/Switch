@@ -15,6 +15,7 @@ namespace PcfFormApp {
       progressBar.Minimum = 0;
       progressBar.Maximum = 100;
       progressBar.Value = 80;
+      progressBar.CreateControl();
 
       Label label;
       label.Location = Point(10, 40);
@@ -42,17 +43,21 @@ namespace PcfFormApp {
       button.Name = "button";
       button.Text = "Click me";
       button.Location = Point(10, 160);
+      button.Click += pcf_delegate(const object& sender, const EventArgs& e) {
+        MessageBox::Show("Hello, World !", "Message", MessageBoxButtons::OK, MessageBoxIcon::Hand);
+      };
 
       Panel panel;
       panel.Name = "panel";
       panel.Text = "Panel";
       panel.Location = Point(10, 10);
       panel.Size = Size(260, 240);
-      panel.BorderStyle = BorderStyle::Fixed3D;
+      panel.BorderStyle = BorderStyle::FixedSingle;
       panel.Controls().AddRange({progressBar, label, checkBox, radioButton1, radioButton2, button});
 
       Form form;
       form.Name = "form";
+      form.Text = "Form";
       form.Controls().Add(panel);
 
       Application::EnableVisualStyles();
