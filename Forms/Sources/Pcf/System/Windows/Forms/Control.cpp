@@ -90,11 +90,11 @@ void Control::CreateHandle() {
     this->handle = __OS::FormsApi::Control::Create(*this);
   handles.Add(this->handle, *this);
   this->backBrush = System::Drawing::SolidBrush(this->BackColor);
-  __OS::FormsApi::Control::SetBackColor(*this);
+ //MOS __OS::FormsApi::Control::SetBackColor(*this);
   __OS::FormsApi::Control::SetForeColor(*this);
   //__OS::FormsApi::Control::SetLocation(*this);
   __OS::FormsApi::Control::SetParent(*this);
-  __OS::FormsApi::Control::SetSize(*this);
+  //MOS __OS::FormsApi::Control::SetSize(*this);
  // __OS::FormsApi::Control::SetText(*this);
 }
 

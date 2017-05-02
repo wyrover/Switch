@@ -14,7 +14,7 @@ namespace PcfFormApp {
       progressBar.Name = "progressBar";
       progressBar.Minimum = 0;
       progressBar.Maximum = 100;
-      progressBar.Value = 80;
+      progressBar.Value = 50;
       progressBar.CreateControl();
 
       Label label;
@@ -52,14 +52,14 @@ namespace PcfFormApp {
       panel.Text = "Panel";
       panel.Location = Point(10, 10);
       panel.Size = Size(260, 240);
-      panel.BorderStyle = BorderStyle::FixedSingle;
+      panel.BorderStyle = BorderStyle::Fixed3D;
       panel.Controls().AddRange({progressBar, label, checkBox, radioButton1, radioButton2, button});
 
       Form form;
       form.Name = "form";
       form.Text = "Form";
       form.Controls().Add(panel);
-      form.BackColor = Color::SpringGreen;
+      //form.BackColor = Color::SpringGreen;
 
       Application::EnableVisualStyles();
       Application::Run(form);

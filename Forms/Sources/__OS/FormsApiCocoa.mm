@@ -488,6 +488,7 @@ void FormsApi::CheckBox::SetAutoCheck(const System::Windows::Forms::CheckBox& ch
 }
 
 void FormsApi::CheckBox::SetChecked(const System::Windows::Forms::CheckBox& checkBox) {
+  [(NSButton*)checkBox.Handle() setState:checkBox.Checked()];
 }
 
 void FormsApi::Control::Close(const System::Windows::Forms::Form& form) {
@@ -593,17 +594,15 @@ void FormsApi::Control::SetText(const System::Windows::Forms::Control& control) 
 
 void FormsApi::Control::SetVisible(const System::Windows::Forms::Control& control) {
   @autoreleasepool {
-    if (is<Form>(control)) {
+    if (is<System::Windows::Forms::Form>(control)) {
       if (control.Visible ) {
         [(NSWindow*)control.Handle() makeKeyAndOrderFront:NSApp];
         [NSApp activateIgnoringOtherApps:YES];
       } else {
         [(NSWindow*)control.Handle() orderOut:nil];
       }
-    return;
-    }
-  
-    [(NSControl*)control.Handle() setHidden:control.Visible ? NO : YES];
+    } else
+      [(NSControl*)control.Handle() setHidden:control.Visible ? NO : YES];
   }
 }
 
@@ -659,14 +658,19 @@ intptr FormsApi::Label::Create(const System::Windows::Forms::Label& label) {
 intptr FormsApi::Panel::Create(const System::Windows::Forms::Panel& panel) {
   @autoreleasepool {
     System::Drawing::Rectangle bounds = cocoaApi().GetBounds(panel);
-    NSPanel* handle = [[NSPanel alloc] init];
-    
+    NSScrollView* handle = [[NSScrollView alloc] init];
+    [[(NSWindow*)panel.Parent()().Handle() contentView] addSubview: handle];
+   
     //[handle setStyleMask: cocoaApi().FormToNSWindowStyleMask(NSPanel)];
-    [handle setFrame:NSMakeRect(0, 0, bounds.Width(), bounds.Height()) display:YES];
-    [handle setFrameTopLeftPoint:NSMakePoint(bounds.X(), bounds.Y())];
-    
-    [handle setTitle:[NSString stringWithUTF8String:panel.Text().c_str()]];
-    [handle makeKeyAndOrderFront:nil];
+    [handle setFrame:NSMakeRect(bounds.X(), bounds.Y(), bounds.Width(), bounds.Height())];
+    //[handle setFrameTopLeftPoint:NSMakePoint(bounds.X(), bounds.Y())];
+
+    switch (panel.BorderStyle) {
+      case BorderStyle::None : [handle setBorderType:NSNoBorder]; break;
+      case BorderStyle::FixedSingle : [handle setBorderType:NSLineBorder]; break;
+      case BorderStyle::Fixed3D : [handle setBorderType:NSBezelBorder]; break;
+    }
+    [handle setBorderType:NSBezelBorder];
     [NSApp activateIgnoringOtherApps:YES];
     handle.backgroundColor = cocoaApi().FromColor(panel.BackColor);
     //handle.color = cocoaApi().FromColor(panel.ForeColor);
@@ -678,29 +682,49 @@ intptr FormsApi::Panel::Create(const System::Windows::Forms::Panel& panel) {
 }
 
 void FormsApi::Panel::SetBorderStyle(const System::Windows::Forms::Panel& panel) {
+  switch (panel.BorderStyle) {
+    case BorderStyle::None : [(NSScrollView*)panel.Handle() setBorderType:NSNoBorder]; break;
+    case BorderStyle::FixedSingle : [(NSScrollView*)panel.Handle() setBorderType:NSLineBorder]; break;
+    case BorderStyle::Fixed3D : [(NSScrollView*)panel.Handle() setBorderType:NSBezelBorder]; break;
+  }
 }
 
 intptr FormsApi::ProgressBar::Create(const System::Windows::Forms::ProgressBar& progressBar) {
-  /*
   @autoreleasepool {
     System::Drawing::Rectangle bounds = cocoaApi().GetBounds(progressBar);
-    NSProgress* handle = [[NSProgress alloc] init];
+    NSProgressIndicator* handle = [[NSProgressIndicator alloc] init];
+    [[(NSWindow*)progressBar.Parent()().Handle() contentView] addSubview: handle];
     
     //[handle setStyleMask: cocoaApi().FormToNSWindowStyleMask(NSProgress)];
-    //[handle setFrame:NSMakeRect(0, 0, bounds.Width(), bounds.Height()) display:YES];
+    [handle setFrame:NSMakeRect(bounds.X(), bounds.Y(), bounds.Width(), bounds.Height())];
     //[handle setFrameTopLeftPoint:NSMakePoint(bounds.X(), bounds.Y())];
+    [handle setMaxValue:progressBar.Maximum()];
+    [handle setMinValue:progressBar.Minimum()];
+    [handle setDoubleValue:as<double>(progressBar.Value())];
     
-    [handle setTitle:[NSString stringWithUTF8String:progressBar.Text().c_str()]];
-    [handle makeKeyAndOrderFront:nil];
     [NSApp activateIgnoringOtherApps:YES];
-    handle.backgroundColor = cocoaApi().FromColor(progressBar.BackColor);
+    //handle.backgroundColor = cocoaApi().FromColor(progressBar.BackColor);
     //handle.color = cocoaApi().FromColor(panel.ForeColor);
-    cocoaApi().Controls()[(intptr)handle] = panel;
+    cocoaApi().Controls()[(intptr)handle] = progressBar;
     Message message = Message::Create((intptr)handle, WM_CREATE, 0, 0, 0, IntPtr::Zero);
     const_cast<System::Windows::Forms::ProgressBar&>(progressBar).WndProc(message);
     return (intptr)handle;
   }
-   */
+}
+
+void FormsApi::ProgressBar::SetMaximum(const System::Windows::Forms::ProgressBar& progressBar) {
+  [(NSProgressIndicator*)progressBar.Handle() setMaxValue:progressBar.Maximum()];
+}
+
+void FormsApi::ProgressBar::SetMinimum(const System::Windows::Forms::ProgressBar& progressBar) {
+  [(NSProgressIndicator*)progressBar.Handle() setMinValue:progressBar.Minimum()];
+}
+
+void FormsApi::ProgressBar::SetStyle(const System::Windows::Forms::ProgressBar& progressBar) {
+}
+
+void FormsApi::ProgressBar::SetValue(const System::Windows::Forms::ProgressBar& progressBar) {
+  [(NSProgressIndicator*)progressBar.Handle() setDoubleValue:progressBar.Value()];
 }
 
 intptr FormsApi::RadioButton::Create(const System::Windows::Forms::RadioButton& radioButton) {
@@ -728,6 +752,7 @@ void FormsApi::RadioButton::SetAutoCheck(const System::Windows::Forms::RadioButt
 }
 
 void FormsApi::RadioButton::SetChecked(const System::Windows::Forms::RadioButton& radioButton) {
+  [(NSButton*)radioButton.Handle() setState:radioButton.Checked()];
 }
 
 #endif
