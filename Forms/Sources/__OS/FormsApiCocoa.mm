@@ -448,8 +448,6 @@ intptr FormsApi::Button::Create(const System::Windows::Forms::Button& button) {
     [handle setTitle:[NSString stringWithUTF8String:button.Text().c_str()]];
     [handle setButtonType:NSButtonTypeMomentaryPushIn];
     [handle setBezelStyle:bounds.Height == 25 ? NSBezelStyleRounded : NSBezelStyleRegularSquare];
-    //[handle setWantsLayer:YES];
-    handle.layer.backgroundColor = cocoaApi().FromColor(button.BackColor).CGColor;
     [handle setTarget:[NSControlResponder alloc]];
     [handle setAction:@selector(ControlClick:)];
     cocoaApi().Controls()[(intptr)handle] = button;
@@ -473,8 +471,6 @@ intptr FormsApi::CheckBox::Create(const System::Windows::Forms::CheckBox& checkB
     [handle setButtonType:NSButtonTypeSwitch];
     [handle setBezelStyle:NSBezelStyleRegularSquare];
     [handle setAutoresizingMask:NSViewMaxXMargin | NSViewMinYMargin];
-    [handle setWantsLayer:YES];
-    handle.layer.backgroundColor = cocoaApi().FromColor(checkBox.BackColor).CGColor;
     [handle setTarget:[NSControlResponder alloc]];
     [handle setAction:@selector(ControlClick:)];
     cocoaApi().Controls()[(intptr)handle] = checkBox;
@@ -503,7 +499,6 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::Control& control)
   [handle setStringValue:[NSString stringWithUTF8String:control.Text().c_str()]];
   [handle setAutoresizingMask:NSViewMaxXMargin | NSViewMinYMargin];
   [handle setWantsLayer:YES];
-  handle.layer.backgroundColor = cocoaApi().FromColor(control.BackColor).CGColor;
   [handle setTarget:[NSControlResponder alloc]];
   [handle setAction:@selector(ControlClick:)];
   cocoaApi().Controls()[(intptr)handle] = control;
@@ -556,8 +551,12 @@ void FormsApi::Control::SetForeColor(intptr hdc) {
 }
 
 void FormsApi::Control::SetBackColor(const System::Windows::Forms::Control& control) {
-  [(NSControl*)control.Handle() setWantsLayer:YES];
-  ((NSControl*)control.Handle()).layer.backgroundColor = cocoaApi().FromColor(control.BackColor).CGColor;
+  if (is<System::Windows::Forms::Form>(control)) {
+    ((NSWindow*)control.Handle()).backgroundColor = cocoaApi().FromColor(control.BackColor);
+  } else {
+    [(NSControl*)control.Handle() setWantsLayer:YES];
+    ((NSControl*)control.Handle()).layer.backgroundColor = cocoaApi().FromColor(control.BackColor).CGColor;
+  }
 }
 
 void FormsApi::Control::SetForeColor(const System::Windows::Forms::Control& control) {
@@ -575,9 +574,15 @@ void FormsApi::Control::SetParent(const System::Windows::Forms::Control& control
 
 void FormsApi::Control::SetSize(const System::Windows::Forms::Control& control) {
   @autoreleasepool {
-    [(NSControl*)control.Handle() setFrameSize:NSMakeSize(control.Width(), control.Height())];
-    if (is<System::Windows::Forms::Button>(control))
-      [(NSButton*)control.Handle() setBezelStyle: control.Height() == 25 ? NSBezelStyleRounded : NSBezelStyleRegularSquare];
+    if (is<System::Windows::Forms::Form>(control)) {
+      System::Drawing::Rectangle bounds = cocoaApi().GetBounds(control);
+      [(NSWindow*)control.Handle() setFrame:NSMakeRect(bounds.X(), bounds.Y(), bounds.Width(), bounds.Height()) display:YES];
+      [(NSWindow*)control.Handle() setFrameTopLeftPoint:NSMakePoint(bounds.X(), bounds.Y())];
+    } else {
+      [(NSControl*)control.Handle() setFrameSize:NSMakeSize(control.Width(), control.Height())];
+      if (is<System::Windows::Forms::Button>(control))
+        [(NSButton*)control.Handle() setBezelStyle: control.Height() == 25 ? NSBezelStyleRounded : NSBezelStyleRegularSquare];
+    }
   }
 }
 
@@ -618,7 +623,6 @@ intptr FormsApi::Form::Create(const System::Windows::Forms::Form& form) {
     [handle setTitle:[NSString stringWithUTF8String:form.Text().c_str()]];
     [handle makeKeyAndOrderFront:nil];
     [NSApp activateIgnoringOtherApps:YES];
-    handle.backgroundColor = cocoaApi().FromColor(form.BackColor);
     //handle.color = cocoaApi().FromColor(form.ForeColor);
     cocoaApi().Controls()[(intptr)handle] = form;
     Message message = Message::Create((intptr)handle, WM_CREATE, 0, 0, 0, IntPtr::Zero);
@@ -640,8 +644,6 @@ intptr FormsApi::Label::Create(const System::Windows::Forms::Label& label) {
     [handle setEditable:NO];
     [handle setSelectable:NO];
     [handle setAutoresizingMask:NSViewMaxXMargin | NSViewMinYMargin];
-    //[handle setWantsLayer:YES];
-    //handle.layer.backgroundColor = cocoaApi().FromColor(label.BackColor).CGColor;
     handle.drawsBackground = TRUE;
     handle.backgroundColor = cocoaApi().FromColor(label.BackColor);
     handle.textColor = cocoaApi().FromColor(label.ForeColor);
@@ -671,8 +673,6 @@ intptr FormsApi::Panel::Create(const System::Windows::Forms::Panel& panel) {
       case BorderStyle::Fixed3D : [handle setBorderType:NSBezelBorder]; break;
     }
     [handle setBorderType:NSBezelBorder];
-    [NSApp activateIgnoringOtherApps:YES];
-    handle.backgroundColor = cocoaApi().FromColor(panel.BackColor);
     //handle.color = cocoaApi().FromColor(panel.ForeColor);
     cocoaApi().Controls()[(intptr)handle] = panel;
     Message message = Message::Create((intptr)handle, WM_CREATE, 0, 0, 0, IntPtr::Zero);
@@ -694,17 +694,8 @@ intptr FormsApi::ProgressBar::Create(const System::Windows::Forms::ProgressBar& 
     System::Drawing::Rectangle bounds = cocoaApi().GetBounds(progressBar);
     NSProgressIndicator* handle = [[NSProgressIndicator alloc] init];
     [[(NSWindow*)progressBar.Parent()().Handle() contentView] addSubview: handle];
-    
-    //[handle setStyleMask: cocoaApi().FormToNSWindowStyleMask(NSProgress)];
     [handle setFrame:NSMakeRect(bounds.X(), bounds.Y(), bounds.Width(), bounds.Height())];
-    //[handle setFrameTopLeftPoint:NSMakePoint(bounds.X(), bounds.Y())];
-    [handle setMaxValue:progressBar.Maximum()];
-    [handle setMinValue:progressBar.Minimum()];
-    [handle setDoubleValue:as<double>(progressBar.Value())];
-    
     [NSApp activateIgnoringOtherApps:YES];
-    //handle.backgroundColor = cocoaApi().FromColor(progressBar.BackColor);
-    //handle.color = cocoaApi().FromColor(panel.ForeColor);
     cocoaApi().Controls()[(intptr)handle] = progressBar;
     Message message = Message::Create((intptr)handle, WM_CREATE, 0, 0, 0, IntPtr::Zero);
     const_cast<System::Windows::Forms::ProgressBar&>(progressBar).WndProc(message);
@@ -737,8 +728,6 @@ intptr FormsApi::RadioButton::Create(const System::Windows::Forms::RadioButton& 
     [handle setButtonType:NSButtonTypeRadio];
     [handle setBezelStyle:NSBezelStyleRegularSquare];
     [handle setAutoresizingMask:NSViewMaxXMargin | NSViewMinYMargin];
-    [handle setWantsLayer:YES];
-    handle.layer.backgroundColor = cocoaApi().FromColor(radioButton.BackColor).CGColor;
     [handle setTarget:[NSControlResponder alloc]];
     [handle setAction:@selector(ControlClick:)];
     cocoaApi().Controls()[(intptr)handle] = radioButton;

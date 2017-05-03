@@ -15,7 +15,6 @@ namespace PcfFormApp {
       progressBar.Minimum = 0;
       progressBar.Maximum = 100;
       progressBar.Value = 50;
-      progressBar.CreateControl();
 
       Label label;
       label.Location = Point(10, 40);
@@ -59,6 +58,8 @@ namespace PcfFormApp {
       form.Name = "form";
       form.Text = "Form";
       form.Controls().Add(panel);
+      form.StartPosition = FormStartPosition::Manual;
+      form.Location = Point(300, 200);
       //form.BackColor = Color::SpringGreen;
 
       Application::EnableVisualStyles();
