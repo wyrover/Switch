@@ -165,8 +165,11 @@ set(SOURCE_FILES
 
 if (APPLE)
 set(COCOA_SOURCE_FILES
+  Sources/__OS/ApplicationCocoa.mm
   Sources/__OS/FormsApiCocoa.mm
   Sources/__OS/SystemInformationCocoa.mm
+  Sources/__OS/WindowProcedureCocoa.h
+  Sources/__OS/WindowProcedureCocoa.mm
 )
 endif ()
 

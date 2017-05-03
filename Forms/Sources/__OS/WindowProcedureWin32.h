@@ -11,8 +11,7 @@ namespace __OS {
   public:
     static System::Collections::Generic::SortedDictionary<intptr, WNDPROC> DefWindowProcs;
 
-    static void SetWindowTheme(HWND handle) {SetWindowTheme(handle, false);}
-    static void SetWindowTheme(HWND handle, bool forceNone);
+    static void SetWindowTheme(HWND handle);
     static LRESULT CALLBACK WndProc(HWND hwnd, uint32 msg, WPARAM wParam, LPARAM lParam);
   };
 }

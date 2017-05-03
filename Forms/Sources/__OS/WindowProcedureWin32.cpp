@@ -12,8 +12,8 @@ using namespace __OS;
 
 SortedDictionary<intptr, WNDPROC> WindowProcedure::DefWindowProcs;
 
-void WindowProcedure::SetWindowTheme(HWND handle, bool forceNone) {
-  if (!FormsApi::Application::HasVisualStylesEnabled() || forceNone)
+void WindowProcedure::SetWindowTheme(HWND handle) {
+  if (!FormsApi::Application::HasVisualStylesEnabled())
     ::SetWindowTheme(handle, L"", L"");
 }
 
