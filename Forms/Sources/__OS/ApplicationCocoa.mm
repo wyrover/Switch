@@ -21,18 +21,13 @@ using namespace System::Windows::Forms;
 using namespace __OS;
 
 namespace {
-  class CocoaApi {
+  class ApplicationApi pcf_static {
   public:
-    CocoaApi() {
-      this->CreateAppication();
-      this->CreateMenuBar();
-    }
-
-    void MessageLoop(EventHandler idle) {
+    static void MessageLoop(EventHandler idle) {
       @autoreleasepool {
-        this->messageLoopRunning = true;
+        messageLoopRunning = true;
         while (messageLoopRunning) {
-          NSEvent* event = idle.IsEmpty() ? this->GetMessage() : this->PeekMessage();
+          NSEvent* event = idle.IsEmpty() ? GetMessage() : PeekMessage();
           if (event != nil) {
             DispatchMessage(event);
           } else
@@ -40,18 +35,17 @@ namespace {
         }
       }
     }
-    
-  private:
-    void CreateAppication() {
+
+    static void CreateAppication() {
       @autoreleasepool {
         [NSApplication sharedApplication];
         [NSApp finishLaunching];
-        this->IgnoreMessages();
+        IgnoreMessages();
         [NSApp setActivationPolicy:NSApplicationActivationPolicyRegular];
       }
     }
 
-    void CreateMenuBar() {
+    static void CreateMenuBar() {
       static BOOL donethat = NO;
       if (donethat) return;
       donethat = YES;
@@ -111,17 +105,18 @@ namespace {
       [menuItem release];
     }
     
-    void DispatchMessage(NSEvent* event) {
+  private:
+    static void DispatchMessage(NSEvent* event) {
       __OS::WindowProcedure::WndProc(event);
     }
     
-    NSEvent* GetMessage() const {
+    static NSEvent* GetMessage() {
       @autoreleasepool {
         return [NSApp nextEventMatchingMask:NSEventMaskAny untilDate:[NSDate dateWithTimeIntervalSinceNow:Double::MaxValue] inMode:NSDefaultRunLoopMode dequeue:YES];
       }
     }
     
-    void IgnoreMessages() const {
+    static void IgnoreMessages() {
       @autoreleasepool {
         NSEvent *ignoredEvent;
         do
@@ -130,16 +125,85 @@ namespace {
       }
     }
     
-    NSEvent* PeekMessage() const {
+    static NSEvent* PeekMessage() {
       @autoreleasepool {
         return [NSApp nextEventMatchingMask:NSEventMaskAny untilDate:[NSDate dateWithTimeIntervalSinceNow:0.0] inMode:NSDefaultRunLoopMode dequeue:YES];
       }
     }
 
-    bool messageLoopRunning = false;
+    static bool messageLoopRunning;
   };
   
-  refptr<CocoaApi> cocoaApi;
+  bool ApplicationApi::messageLoopRunning = false;
+
+  class MessageBoxApi pcf_static {
+  public:
+    static void MessageBoxAddButtonsOK(NSAlert *alert) {
+      [alert addButtonWithTitle:@"OK"];
+    }
+    
+    static void MessageBoxAddButtonsOKCancel(NSAlert *alert) {
+      [alert addButtonWithTitle:@"OK"];
+      [alert addButtonWithTitle:@"Cancel"];
+    }
+    
+    static void MessageBoxAddButtonsAbortRetryIgnore(NSAlert *alert) {
+      [alert addButtonWithTitle:@"Abort"];
+      [alert addButtonWithTitle:@"Retry"];
+      [alert addButtonWithTitle:@"Ignore"];
+    }
+    
+    static void MessageBoxAddButtonsYesNoCancel(NSAlert *alert) {
+      [alert addButtonWithTitle:@"Yes"];
+      [alert addButtonWithTitle:@"No"];
+      [alert addButtonWithTitle:@"Cancel"];
+    }
+    
+    static void MessageBoxAddButtonsYesNo(NSAlert *alert) {
+      [alert addButtonWithTitle:@"Yes"];
+      [alert addButtonWithTitle:@"No"];
+    }
+    
+    static void MessageBoxAddButtonsRetryCancel(NSAlert *alert) {
+      [alert addButtonWithTitle:@"Retry"];
+      [alert addButtonWithTitle:@"Cancel"];
+    }
+    
+    static DialogResult MessageBoxShowModalOK(NSAlert *alert) {
+      [alert runModal];
+      return DialogResult::OK;
+    }
+    
+    static DialogResult MessageBoxShowModalOKCancel(NSAlert *alert) {
+      return [alert runModal] == NSAlertFirstButtonReturn ? DialogResult::OK : DialogResult::Cancel;
+    }
+    
+    static DialogResult MessageBoxShowModalAbortRetryIgnore(NSAlert *alert) {
+      NSModalResponse result = [alert runModal];
+      if (result == NSAlertFirstButtonReturn)
+        return DialogResult::Abort;
+      if (result == NSAlertSecondButtonReturn)
+        return DialogResult::Retry;
+      return DialogResult::Ignore;
+    }
+    
+    static DialogResult MessageBoxShowModalYesNoCancel(NSAlert *alert) {
+      NSModalResponse result = [alert runModal];
+      if (result == NSAlertFirstButtonReturn)
+        return DialogResult::Yes;
+      if (result == NSAlertSecondButtonReturn)
+        return DialogResult::No;
+      return DialogResult::Cancel;
+    }
+    
+    static DialogResult MessageBoxShowModalYesNo(NSAlert *alert) {
+      return [alert runModal] == NSAlertFirstButtonReturn ? DialogResult::Yes : DialogResult::No;
+    }
+    
+    static DialogResult MessageBoxShowModalRetryCancel(NSAlert *alert) {
+      return [alert runModal] == NSAlertFirstButtonReturn ? DialogResult::Retry : DialogResult::Cancel;
+    }
+  };
 }
 
 bool FormsApi::Application::visualStylesEnabled = false;
@@ -159,81 +223,13 @@ void FormsApi::Application::MessageBeep(MessageBoxIcon type) {
 }
 
 void FormsApi::Application::MessageLoop(EventHandler idle) {
-  cocoaApi().MessageLoop(idle);
-}
-
-namespace {
-  void MessageBoxAddButtonsOK(NSAlert *alert) {
-    [alert addButtonWithTitle:@"OK"];
-  }
-  
-  void MessageBoxAddButtonsOKCancel(NSAlert *alert) {
-    [alert addButtonWithTitle:@"OK"];
-    [alert addButtonWithTitle:@"Cancel"];
-  }
-  
-  void MessageBoxAddButtonsAbortRetryIgnore(NSAlert *alert) {
-    [alert addButtonWithTitle:@"Abort"];
-    [alert addButtonWithTitle:@"Retry"];
-    [alert addButtonWithTitle:@"Ignore"];
-  }
-  
-  void MessageBoxAddButtonsYesNoCancel(NSAlert *alert) {
-    [alert addButtonWithTitle:@"Yes"];
-    [alert addButtonWithTitle:@"No"];
-    [alert addButtonWithTitle:@"Cancel"];
-  }
-  
-  void MessageBoxAddButtonsYesNo(NSAlert *alert) {
-    [alert addButtonWithTitle:@"Yes"];
-    [alert addButtonWithTitle:@"No"];
-  }
-  
-  void MessageBoxAddButtonsRetryCancel(NSAlert *alert) {
-    [alert addButtonWithTitle:@"Retry"];
-    [alert addButtonWithTitle:@"Cancel"];
-  }
-  
-  DialogResult MessageBoxShowModalOK(NSAlert *alert) {
-    [alert runModal];
-    return DialogResult::OK;
-  }
-  
-  DialogResult MessageBoxShowModalOKCancel(NSAlert *alert) {
-    return [alert runModal] == NSAlertFirstButtonReturn ? DialogResult::OK : DialogResult::Cancel;
-  }
-  
-  DialogResult MessageBoxShowModalAbortRetryIgnore(NSAlert *alert) {
-    NSModalResponse result = [alert runModal];
-    if (result == NSAlertFirstButtonReturn)
-      return DialogResult::Abort;
-    if (result == NSAlertSecondButtonReturn)
-      return DialogResult::Retry;
-    return DialogResult::Ignore;
-  }
-  
-  DialogResult MessageBoxShowModalYesNoCancel(NSAlert *alert) {
-    NSModalResponse result = [alert runModal];
-    if (result == NSAlertFirstButtonReturn)
-      return DialogResult::Yes;
-    if (result == NSAlertSecondButtonReturn)
-      return DialogResult::No;
-    return DialogResult::Cancel;
-  }
-  
-  DialogResult MessageBoxShowModalYesNo(NSAlert *alert) {
-    return [alert runModal] == NSAlertFirstButtonReturn ? DialogResult::Yes : DialogResult::No;
-  }
-  
-  DialogResult MessageBoxShowModalRetryCancel(NSAlert *alert) {
-    return [alert runModal] == NSAlertFirstButtonReturn ? DialogResult::Retry : DialogResult::Cancel;
-  }
+  ApplicationApi::MessageLoop(idle);
 }
 
 DialogResult FormsApi::Application::ShowMessageBox(const string& message, const string& caption, MessageBoxButtons buttons, MessageBoxIcon icon, MessageBoxDefaultButton defaultButton, MessageBoxOptions options, bool displayHelpButton) {
-  static SortedDictionary<MessageBoxButtons, delegate<void, NSAlert*>> addButtons = {{MessageBoxButtons::OK, MessageBoxAddButtonsOK}, {MessageBoxButtons::OKCancel, MessageBoxAddButtonsOKCancel}, {MessageBoxButtons::AbortRetryIgnore, MessageBoxAddButtonsAbortRetryIgnore}, {MessageBoxButtons::YesNoCancel, MessageBoxAddButtonsYesNoCancel}, {MessageBoxButtons::YesNo, MessageBoxAddButtonsYesNo}, {MessageBoxButtons::RetryCancel, MessageBoxAddButtonsRetryCancel}};
+  static SortedDictionary<MessageBoxButtons, delegate<void, NSAlert*>> addButtons = {{MessageBoxButtons::OK, MessageBoxApi::MessageBoxAddButtonsOK}, {MessageBoxButtons::OKCancel, MessageBoxApi::MessageBoxAddButtonsOKCancel}, {MessageBoxButtons::AbortRetryIgnore, MessageBoxApi::MessageBoxAddButtonsAbortRetryIgnore}, {MessageBoxButtons::YesNoCancel, MessageBoxApi::MessageBoxAddButtonsYesNoCancel}, {MessageBoxButtons::YesNo, MessageBoxApi::MessageBoxAddButtonsYesNo}, {MessageBoxButtons::RetryCancel, MessageBoxApi::MessageBoxAddButtonsRetryCancel}};
   static SortedDictionary<MessageBoxIcon, NSAlertStyle>  messageBoxIcon = {{MessageBoxIcon::None, NSAlertStyleWarning}, {MessageBoxIcon::Exclamation, NSAlertStyleCritical}, {MessageBoxIcon::Information, NSAlertStyleInformational}, {MessageBoxIcon::Question, NSAlertStyleInformational}, {MessageBoxIcon::Stop, NSAlertStyleCritical}};
-  static SortedDictionary<MessageBoxButtons, delegate<DialogResult, NSAlert*>> showModal = {{MessageBoxButtons::OK, MessageBoxShowModalOK}, {MessageBoxButtons::OKCancel, MessageBoxShowModalOKCancel}, {MessageBoxButtons::AbortRetryIgnore, MessageBoxShowModalAbortRetryIgnore}, {MessageBoxButtons::YesNoCancel, MessageBoxShowModalYesNoCancel}, {MessageBoxButtons::YesNo, MessageBoxShowModalYesNo}, {MessageBoxButtons::RetryCancel, MessageBoxShowModalRetryCancel}};
+  static SortedDictionary<MessageBoxButtons, delegate<DialogResult, NSAlert*>> showModal = {{MessageBoxButtons::OK, MessageBoxApi::MessageBoxShowModalOK}, {MessageBoxButtons::OKCancel, MessageBoxApi::MessageBoxShowModalOKCancel}, {MessageBoxButtons::AbortRetryIgnore, MessageBoxApi::MessageBoxShowModalAbortRetryIgnore}, {MessageBoxButtons::YesNoCancel, MessageBoxApi::MessageBoxShowModalYesNoCancel}, {MessageBoxButtons::YesNo, MessageBoxApi::MessageBoxShowModalYesNo}, {MessageBoxButtons::RetryCancel, MessageBoxApi::MessageBoxShowModalRetryCancel}};
   @autoreleasepool {
     NSAlert *alert = [[NSAlert alloc] init];
     addButtons[buttons](alert);
@@ -252,11 +248,11 @@ DialogResult FormsApi::Application::ShowMessageBox(const string& message, const 
 }
 
 void FormsApi::Application::Start() {
-  cocoaApi = pcf_new<CocoaApi>();
+  ApplicationApi::CreateAppication();
+  ApplicationApi::CreateMenuBar();
 }
 
 void FormsApi::Application::Stop() {
-  cocoaApi = null;
 }
 
 #endif
