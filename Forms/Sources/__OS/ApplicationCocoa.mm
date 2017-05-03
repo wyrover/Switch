@@ -1,17 +1,4 @@
 #if defined(__APPLE__) && defined(__use_native_interface__)
-#import <Cocoa/Cocoa.h>
-#import <Foundation/Foundation.h>
-#include <Pcf/System/Collections/Generic/SortedDictionary.h>
-#include <Pcf/System/Console.h>
-#include <Pcf/System/Convert.h>
-#include <Pcf/System/NotImplementedException.h>
-#include <Pcf/System/Diagnostics/Debug.h>
-#include <Pcf/System/Collections/Generic/Dictionary.h>
-#include <Pcf/System/Collections/Generic/Queue.h>
-#include "../../Includes/Pcf/System/Windows/Forms/Application.h"
-#include "../../Includes/Pcf/System/Windows/Forms/Control.h"
-#include "FormsApi.h"
-#include "WindowMessageKey.h"
 #include "WindowProcedureCocoa.h"
 
 using namespace System;

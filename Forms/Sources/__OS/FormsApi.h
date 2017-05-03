@@ -2,7 +2,6 @@
 
 #include <Pcf/Static.h>
 #include <Pcf/System/String.h>
-#include <Pcf/System/Collections/Generic/Dictionary.h>
 #include "../../Includes/Pcf/System/Windows/Forms/ArrangeDirection.h"
 #include "../../Includes/Pcf/System/Windows/Forms/ArrangeStartingPosition.h"
 #include "../../Includes/Pcf/System/Windows/Forms/BootMode.h"

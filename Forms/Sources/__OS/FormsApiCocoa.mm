@@ -1,17 +1,4 @@
 #if defined(__APPLE__) && defined(__use_native_interface__)
-#import <Cocoa/Cocoa.h>
-#import <Foundation/Foundation.h>
-#include <Pcf/System/Collections/Generic/SortedDictionary.h>
-#include <Pcf/System/Console.h>
-#include <Pcf/System/Convert.h>
-#include <Pcf/System/NotImplementedException.h>
-#include <Pcf/System/Diagnostics/Debug.h>
-#include <Pcf/System/Collections/Generic/Dictionary.h>
-#include <Pcf/System/Collections/Generic/Queue.h>
-#include "../../Includes/Pcf/System/Windows/Forms/Application.h"
-#include "../../Includes/Pcf/System/Windows/Forms/Control.h"
-#include "FormsApi.h"
-#include "WindowMessageKey.h"
 #include "WindowProcedureCocoa.h"
 
 using namespace System;
@@ -91,28 +78,6 @@ namespace {
   const_cast<Control&>(__OS::WindowProcedure::Controls[(intptr)sender]()).WndProc(event);
 }
 @end
-
-intptr FormsApi::Button::Create(const System::Windows::Forms::Button& button) {
-  @autoreleasepool {
-    System::Drawing::Rectangle bounds = CocoaApi::GetBounds(button);
-    NSButton *handle = [[[NSButton alloc] initWithFrame:NSMakeRect(bounds.X(), bounds.Y(), bounds.Width(), bounds.Height())] autorelease];
-    [[(NSWindow*)button.Parent()().Handle() contentView] addSubview: handle];
-    
-    [handle setTitle:[NSString stringWithUTF8String:button.Text().c_str()]];
-    [handle setButtonType:NSButtonTypeMomentaryPushIn];
-    [handle setBezelStyle:bounds.Height == 25 ? NSBezelStyleRounded : NSBezelStyleRegularSquare];
-    [handle setTarget:[NSControlResponder alloc]];
-    [handle setAction:@selector(ControlClick:)];
-    __OS::WindowProcedure::Controls[(intptr)handle] = button;
-    Message message = Message::Create((intptr)handle, WM_CREATE, 0, 0, 0, IntPtr::Zero);
-    const_cast<System::Windows::Forms::Button&>(button).WndProc(message);
-    return (intptr)handle;
-  }
-}
-
-void FormsApi::Button::SetIsDefault(const System::Windows::Forms::Button& button) {
-  
-}
 
 intptr FormsApi::CheckBox::Create(const System::Windows::Forms::CheckBox& checkBox) {
   @autoreleasepool {
