@@ -84,7 +84,6 @@ void Control::CreateControl() {
   }
 }
 
-
 void Control::CreateHandle() {
   if (!this->IsHandleCreated)
     this->handle = __OS::FormsApi::Control::Create(*this);
@@ -94,7 +93,7 @@ void Control::CreateHandle() {
   __OS::FormsApi::Control::SetForeColor(*this);
   //__OS::FormsApi::Control::SetLocation(*this);
   __OS::FormsApi::Control::SetParent(*this);
-  __OS::FormsApi::Control::SetSize(*this);
+  //__OS::FormsApi::Control::SetSize(*this);
  // __OS::FormsApi::Control::SetText(*this);
 }
 

@@ -161,8 +161,15 @@ System::Drawing::Point FormsApi::Control::PointToScreen(const System::Windows::F
 
 void FormsApi::Control::SetBackColor(intptr hdc) {
   ref<System::Windows::Forms::Control> control = System::Windows::Forms::Control::FromHandle(GetHandleWindowFromDeviceContext(hdc));
-  [(NSControl*)hdc setWantsLayer:YES];
-  ((NSControl*)hdc).layer.backgroundColor = CocoaApi::FromColor(control().BackColor()).CGColor;
+  if (control) {
+    if (is<System::Windows::Forms::Form>(control)) {
+      ((NSWindow*)control().Handle()).backgroundColor = CocoaApi::FromColor(control().BackColor);
+    } else {
+      [(NSControl*)control().Handle() setWantsLayer:YES];
+      ((NSControl*)control().Handle()).layer.backgroundColor = CocoaApi::FromColor(control().BackColor).CGColor;
+    }
+    
+  }
 }
 
 void FormsApi::Control::SetForeColor(intptr hdc) {
@@ -278,19 +285,10 @@ intptr FormsApi::Label::Create(const System::Windows::Forms::Label& label) {
 intptr FormsApi::Panel::Create(const System::Windows::Forms::Panel& panel) {
   @autoreleasepool {
     System::Drawing::Rectangle bounds = CocoaApi::GetBounds(panel);
-    NSScrollView* handle = [[NSScrollView alloc] init];
+    NSScrollView* handle = [[[NSScrollView alloc]  initWithFrame:NSMakeRect(bounds.X(), bounds.Y(), bounds.Width(), bounds.Height())] autorelease];
     [[(NSWindow*)panel.Parent()().Handle() contentView] addSubview: handle];
    
-    //[handle setStyleMask: CocoaApi::FormToNSWindowStyleMask(NSPanel)];
-    [handle setFrame:NSMakeRect(bounds.X(), bounds.Y(), bounds.Width(), bounds.Height())];
-    //[handle setFrameTopLeftPoint:NSMakePoint(bounds.X(), bounds.Y())];
-
-    switch (panel.BorderStyle) {
-      case BorderStyle::None : [handle setBorderType:NSNoBorder]; break;
-      case BorderStyle::FixedSingle : [handle setBorderType:NSLineBorder]; break;
-      case BorderStyle::Fixed3D : [handle setBorderType:NSBezelBorder]; break;
-    }
-    [handle setBorderType:NSBezelBorder];
+    [handle setAutoresizingMask:NSViewMaxXMargin | NSViewMinYMargin];
     //handle.color = CocoaApi::FromColor(panel.ForeColor);
     __OS::WindowProcedure::Controls[(intptr)handle] = panel;
     Message message = Message::Create((intptr)handle, WM_CREATE, 0, 0, 0, IntPtr::Zero);
@@ -310,11 +308,11 @@ void FormsApi::Panel::SetBorderStyle(const System::Windows::Forms::Panel& panel)
 intptr FormsApi::ProgressBar::Create(const System::Windows::Forms::ProgressBar& progressBar) {
   @autoreleasepool {
     System::Drawing::Rectangle bounds = CocoaApi::GetBounds(progressBar);
-    NSProgressIndicator* handle = [[NSProgressIndicator alloc] init];
+    NSProgressIndicator* handle = [[[NSProgressIndicator alloc]  initWithFrame:NSMakeRect(bounds.X(), bounds.Y(), bounds.Width(), bounds.Height())] autorelease];
     [[(NSWindow*)progressBar.Parent()().Handle() contentView] addSubview: handle];
-    [handle setFrame:NSMakeRect(bounds.X(), bounds.Y(), bounds.Width(), bounds.Height())];
-    [NSApp activateIgnoringOtherApps:YES];
+
     __OS::WindowProcedure::Controls[(intptr)handle] = progressBar;
+    [handle setAutoresizingMask:NSViewMaxXMargin | NSViewMinYMargin];
     Message message = Message::Create((intptr)handle, WM_CREATE, 0, 0, 0, IntPtr::Zero);
     const_cast<System::Windows::Forms::ProgressBar&>(progressBar).WndProc(message);
     return (intptr)handle;

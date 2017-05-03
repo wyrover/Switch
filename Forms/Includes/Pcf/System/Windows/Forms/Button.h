@@ -2,6 +2,7 @@
 /// @brief Contains Pcf::System::Windows::Forms::Button class.
 #pragma once
 
+#include <Pcf/System/Environment.h>
 #include "ButtonBase.h"
 
 /// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
@@ -20,7 +21,11 @@ namespace Pcf {
         /// @note If the control that has focus accepts and processes the ENTER key press, the Button does not process it. For example, if a multiline TextBox or another button has focus, that control processes the ENTER key press instead of the accept button.
         class pcf_public Button : public ButtonBase {
         public:
-          Button() : ButtonBase("", 0, 0, 75, 25) { this->SetStyle(ControlStyles::UserPaint, false); }
+          Button() : ButtonBase("", 0, 0, 75, 25) {
+            if (System::Environment::OSVersion().Platform == System::PlatformID::MacOSX)
+              Size = System::Drawing::Size(81, 32);
+            this->SetStyle(ControlStyles::UserPaint, false);
+          }
 
           Property<bool> IsDefault {
             pcf_get {return this->isDefault;},
@@ -29,7 +34,7 @@ namespace Pcf {
 
         protected:
           void CreateHandle() override;
-          System::Drawing::Size GetDefaultSize() const override { return System::Drawing::Size(75, 25); }
+          System::Drawing::Size GetDefaultSize() const override { return System::Environment::OSVersion().Platform == System::PlatformID::MacOSX ? System::Drawing::Size(81, 32) : System::Drawing::Size(75, 25); }
           void SetIsDefault(bool isDefault);
 
           /// @cond
