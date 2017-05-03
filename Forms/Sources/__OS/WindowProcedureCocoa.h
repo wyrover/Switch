@@ -16,32 +16,9 @@ namespace __OS {
     static ControlDictionary Controls;
     
     static void WndProc(NSEvent* event) {
-      /*
-       //{NSEventTypeLeftMouseDragged, WM_...},
-       //{NSEventTypeRightMouseDragged, WM_...},
-       {NSEventTypeKeyDown, WM_KEYDOWN},
-       {NSEventTypeKeyUp, WM_KEYUP},
-       //{NSEventTypeFlagsChanged, WM_...},
-       //{NSEventTypeAppKitDefined, WM_...},
-       //{NSEventTypeSystemDefined, WM_...},
-       //{NSEventTypeApplicationDefined, WM_...},
-       //{NSEventTypePeriodic, WM_...},
-       {NSEventTypeCursorUpdate, WM_SETCURSOR},
-       {NSEventTypeScrollWheel, WM_MOUSEWHEEL},
-       //{NSEventTypeTabletPoint, WM_...},
-       //{NSEventTypeTabletProximity, WM_...},
-       //{NSEventTypeOtherMouseDragged, WM_...},
-       */
+       // {NSEventTypeLeftMouseDragged, WM_...}, {NSEventTypeRightMouseDragged, WM_...}, {NSEventTypeKeyDown, WM_KEYDOWN}, {NSEventTypeKeyUp, WM_KEYUP}, {NSEventTypeFlagsChanged, WM_...}, {NSEventTypeAppKitDefined, WM_...}, {NSEventTypeSystemDefined, WM_...}, {NSEventTypeApplicationDefined, WM_...}, {NSEventTypePeriodic, WM_...}, {NSEventTypeCursorUpdate, WM_SETCURSOR}, {NSEventTypeScrollWheel, WM_MOUSEWHEEL}, {NSEventTypeTabletPoint, WM_...}, {NSEventTypeTabletProximity, WM_...}, {NSEventTypeOtherMouseDragged, WM_...},
       static System::Collections::Generic::SortedDictionary<int32, delegate<void, NSEvent*, System::Windows::Forms::Control&>> events = {
-        {NSEventTypeMouseEntered, WindowProcedure::MouseEnterEvent},
-        {NSEventTypeMouseExited, WindowProcedure::MouseLeaveEvent},
-        {NSEventTypeLeftMouseDown, WindowProcedure::LeftMouseDownEvent},
-        {NSEventTypeLeftMouseUp, WindowProcedure::LeftMouseUpEvent},
-        {NSEventTypeRightMouseDown, WindowProcedure::RightMouseDownEvent},
-        {NSEventTypeRightMouseUp, WindowProcedure::RightMouseUpEvent},
-        {NSEventTypeMouseMoved, WindowProcedure::MouseMoveEvent},
-        {NSEventTypeOtherMouseDown, WindowProcedure::OtherMouseDownEvent},
-        {NSEventTypeOtherMouseUp, WindowProcedure::OtherMouseUpEvent}
+        {NSEventTypeMouseEntered, WindowProcedure::MouseEnterEvent}, {NSEventTypeMouseExited, WindowProcedure::MouseLeaveEvent}, {NSEventTypeLeftMouseDown, WindowProcedure::LeftMouseDownEvent}, {NSEventTypeLeftMouseUp, WindowProcedure::LeftMouseUpEvent}, {NSEventTypeRightMouseDown, WindowProcedure::RightMouseDownEvent}, {NSEventTypeRightMouseUp, WindowProcedure::RightMouseUpEvent}, {NSEventTypeMouseMoved, WindowProcedure::MouseMoveEvent}, {NSEventTypeOtherMouseDown, WindowProcedure::OtherMouseDownEvent}, {NSEventTypeOtherMouseUp, WindowProcedure::OtherMouseUpEvent}
       };
       @autoreleasepool {
         if (events.ContainsKey([event type]) && Controls.ContainsKey((intptr)[event window])) {
@@ -54,14 +31,9 @@ namespace __OS {
     
     static int32 GetMouseButtonState(NSEvent* event) {
       int32 state = 0;
-      
-      if ([event buttonNumber] == 1)
-        state &= MK_LBUTTON;
-      if ([event buttonNumber] == 2)
-        state &= MK_MBUTTON;
-      if ([event buttonNumber] == 3)
-        state &= MK_RBUTTON;
-      
+      if ([event buttonNumber] == 1) state &= MK_LBUTTON;
+      if ([event buttonNumber] == 2) state &= MK_MBUTTON;
+      if ([event buttonNumber] == 3) state &= MK_RBUTTON;
       return state;
     }
 
