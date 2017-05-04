@@ -14,6 +14,10 @@ using namespace __OS;
 
 extern HINSTANCE __instance;
 
+void FormsApi::Form::Close(const System::Windows::Forms::Form& form) {
+  CloseWindow((HWND)form.Handle());
+}
+
 intptr FormsApi::Form::Create(const System::Windows::Forms::Form& form) {
   int32 style = WS_VISIBLE | WS_OVERLAPPEDWINDOW | WS_GROUP | (form.HScroll ? WS_HSCROLL : 0) | (form.VScroll ? WS_VSCROLL : 0);
   int32 exStyle = 0;

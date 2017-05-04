@@ -21,10 +21,6 @@ namespace {
   }
 }
 
-void FormsApi::Control::Close(const System::Windows::Forms::Form& form) {
-  CloseWindow((HWND)form.Handle());
-}
-
 intptr FormsApi::Control::Create(const System::Windows::Forms::Control& control) {
   int32 style = WS_VISIBLE | WS_CHILD;
   int32 exStyle = 0;
