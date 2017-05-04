@@ -16,6 +16,7 @@ namespace SystemSoundExample {
     Form1() {
       this->StartPosition = FormStartPosition::Manual;
       this->Location = System::Drawing::Point(400, 200);
+      this->ClientSize = System::Drawing::Size(300, 300);
       this->Text = "SystemSounds example";
       
       this->buttonAsterisk.Parent = *this;
