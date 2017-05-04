@@ -19,7 +19,7 @@ namespace PanelExample {
       this->Text = "Panel example";
       
       this->panel1.Parent = *this;
-      this->panel1.BorderStyle = BorderStyle::Fixed3D;
+      this->panel1.BorderStyle = BorderStyle::FixedSingle;
       //this->panel1.Anchor = AnchorStyles::Left | AnchorStyles::Top | AnchorStyles::Bottom;
       this->panel1.Bounds = System::Drawing::Rectangle(10, 10, 305, 460);
       
