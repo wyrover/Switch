@@ -141,6 +141,16 @@ void FormsApi::Control::Destroy(const System::Windows::Forms::Control& control) 
   const_cast<System::Windows::Forms::Control&>(control).WndProc(message);
 }
 
+System::Drawing::Size FormsApi::Control::GetClientSize(const System::Windows::Forms::Control& control) {
+  @autoreleasepool {
+    if (is<System::Windows::Forms::Form>(control)) {
+      return System::Drawing::Size(((NSWindow*)control.Handle()).contentView.intrinsicContentSize.width, ((NSWindow*)control.Handle()).contentView.intrinsicContentSize.height);
+    } else {
+      return System::Drawing::Size(((NSControl*)control.Handle()).frame.size.width, ((NSControl*)control.Handle()).frame.size.height);
+    }
+  }
+}
+
 intptr FormsApi::Control::GetHandleWindowFromDeviceContext(intptr hdc) {
   return hdc;
 }
@@ -169,6 +179,17 @@ void FormsApi::Control::SetBackColor(intptr hdc) {
       ((NSControl*)control().Handle()).layer.backgroundColor = CocoaApi::FromColor(control().BackColor).CGColor;
     }
     
+  }
+}
+
+void FormsApi::Control::SetClientSize(System::Windows::Forms::Control& control, const System::Drawing::Size& clientSize) {
+  @autoreleasepool {
+    if (is<System::Windows::Forms::Form>(control)) {
+      [(NSWindow*)control.Handle() setContentSize:NSMakeSize(clientSize.Width(), clientSize.Height())];
+    } else {
+      [(NSControl*)control.Handle() setFrameSize:NSMakeSize(clientSize.Width(), clientSize.Height())];
+    }
+    control.Size = System::Drawing::Size(((NSControl*)control.Handle()).frame.size.width, ((NSControl*)control.Handle()).frame.size.height);
   }
 }
 
