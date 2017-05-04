@@ -178,6 +178,8 @@ void FormsApi::Control::SetForeColor(intptr hdc) {
 void FormsApi::Control::SetBackColor(const System::Windows::Forms::Control& control) {
   if (is<System::Windows::Forms::Form>(control)) {
     ((NSWindow*)control.Handle()).backgroundColor = CocoaApi::FromColor(control.BackColor);
+  } else if (is<System::Windows::Forms::Panel>(control)) {
+    ((NSScrollView*)control.Handle()).backgroundColor = CocoaApi::FromColor(control.BackColor);
   } else {
     [(NSControl*)control.Handle() setWantsLayer:YES];
     ((NSControl*)control.Handle()).layer.backgroundColor = CocoaApi::FromColor(control.BackColor).CGColor;
@@ -205,8 +207,6 @@ void FormsApi::Control::SetSize(const System::Windows::Forms::Control& control) 
       [(NSWindow*)control.Handle() setFrameTopLeftPoint:NSMakePoint(bounds.X(), bounds.Y())];
     } else {
       [(NSControl*)control.Handle() setFrameSize:NSMakeSize(control.Width(), control.Height())];
-      if (is<System::Windows::Forms::Button>(control))
-        [(NSButton*)control.Handle() setBezelStyle: control.Height() == 25 ? NSBezelStyleRounded : NSBezelStyleRegularSquare];
     }
   }
 }
@@ -313,6 +313,7 @@ intptr FormsApi::ProgressBar::Create(const System::Windows::Forms::ProgressBar& 
 
     __OS::WindowProcedure::Controls[(intptr)handle] = progressBar;
     [handle setAutoresizingMask:NSViewMaxXMargin | NSViewMinYMargin];
+    [handle setIndeterminate:false];
     Message message = Message::Create((intptr)handle, WM_CREATE, 0, 0, 0, IntPtr::Zero);
     const_cast<System::Windows::Forms::ProgressBar&>(progressBar).WndProc(message);
     return (intptr)handle;

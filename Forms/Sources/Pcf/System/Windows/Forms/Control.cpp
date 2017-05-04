@@ -20,7 +20,7 @@ namespace {
   };
 
   bool AllWindowMessagesFilter(const Message& message) {
-    return false; //true; //message.Msg != WM_TIMER && message.Msg != WM_PAINT && message.Msg != WM_ERASEBKGND;  //!message.ToString().Contains("WM_NULL");
+    return true; //message.Msg != WM_TIMER && message.Msg != WM_PAINT && message.Msg != WM_ERASEBKGND;  //!message.ToString().Contains("WM_NULL");
   }
 
   MouseButtons MessageToMouseButtons(Message message) {
@@ -93,7 +93,7 @@ void Control::CreateHandle() {
   __OS::FormsApi::Control::SetForeColor(*this);
   //__OS::FormsApi::Control::SetLocation(*this);
   __OS::FormsApi::Control::SetParent(*this);
-  //__OS::FormsApi::Control::SetSize(*this);
+  __OS::FormsApi::Control::SetSize(*this);
  // __OS::FormsApi::Control::SetText(*this);
 }
 

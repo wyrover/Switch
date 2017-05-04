@@ -51,8 +51,7 @@ namespace PcfFormApp {
       panel.Text = "Panel";
       panel.Location = Point(10, 10);
       panel.Size = Size(260, 240);
-      //panel.BorderStyle = BorderStyle::Fixed3D;
-      panel.BackColor = Color::SpringGreen;
+      panel.BorderStyle = BorderStyle::Fixed3D;
       panel.Controls().AddRange({progressBar, label, checkBox, radioButton1, radioButton2, button});
 
       Form form;
