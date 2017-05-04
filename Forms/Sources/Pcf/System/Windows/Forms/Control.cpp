@@ -109,10 +109,14 @@ void Control::DefWndProc(Message& message) {
   __OS::FormsApi::Control::DefWndProc(message);
 }
 
+System::Drawing::Size Control::GetClientSize() const {
+  return __OS::FormsApi::Control::GetClientSize(*this);
+}
+
 void Control::Invalidate(bool invalidateChildren) {
   if (this->IsHandleCreated)
     __OS::FormsApi::Control::Invalidate(*this, invalidateChildren);
-  this->OnInvalidated(InvalidateEventArgs(this->GetClientRectangle()));
+  this->OnInvalidated(InvalidateEventArgs(Rectangle(Point(0, 0), this->GetClientSize())));
 }
 
 void Control::Invalidate(const System::Drawing::Rectangle& rect, bool invalidateChildren) {
@@ -121,12 +125,20 @@ void Control::Invalidate(const System::Drawing::Rectangle& rect, bool invalidate
   this->OnInvalidated(InvalidateEventArgs(rect));
 }
 
+void Control::SetClientSize(const System::Drawing::Size& clientSize) {
+  __OS::FormsApi::Control::SetClientSize(*this, clientSize);
+}
+
 void Control::OnBackColorChanged(const EventArgs& e) {
   this->backBrush = System::Drawing::SolidBrush(this->BackColor);
   if (this->IsHandleCreated)
     __OS::FormsApi::Control::SetBackColor(*this);
   this->Invalidate();
   this->BackColorChanged(*this, e);
+}
+
+void Control::OnClientSizeChanged(const EventArgs& e) {
+  this->ClientSizeChanged(*this, e);
 }
 
 void Control::OnForeColorChanged(const EventArgs& e) {
@@ -152,6 +164,7 @@ void Control::OnSizeChanged(const EventArgs& e) {
   if (this->IsHandleCreated)
     __OS::FormsApi::Control::SetSize(*this);
   this->SizeChanged(*this, e);
+  this->OnClientSizeChanged(e);
 }
 
 void Control::OnTextChanged(const EventArgs& e) {
@@ -457,6 +470,4 @@ void Control::WmWindowPosChanging(Message& message) {
   this->DefWndProc(message);
 }
 
-System::Drawing::Rectangle Control::GetClientRectangle() const {
-  return System::Drawing::Rectangle();
-}
+

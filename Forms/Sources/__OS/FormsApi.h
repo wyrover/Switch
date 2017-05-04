@@ -65,12 +65,14 @@ namespace __OS {
       static void Invalidate(const System::Windows::Forms::Control& control, const System::Drawing::Rectangle& rect, bool invalidateChildren);      
       static System::Drawing::Point PointToClient(const System::Windows::Forms::Control& control, const System::Drawing::Point& point);
       static System::Drawing::Point PointToScreen(const System::Windows::Forms::Control& control, const System::Drawing::Point& point);
+      static System::Drawing::Size GetClientSize(const System::Windows::Forms::Control& control);
       static void SetBackColor(intptr hdc);
       static void SetForeColor(intptr hdc);
       static void SetBackColor(const System::Windows::Forms::Control& control);
       static void SetForeColor(const System::Windows::Forms::Control& control);
       static void SetLocation(const System::Windows::Forms::Control& control);
       static void SetParent(const System::Windows::Forms::Control& control);
+      static void SetClientSize(System::Windows::Forms::Control& control, const System::Drawing::Size& clientSize);
       static void SetSize(const System::Windows::Forms::Control& control);
       static void SetText(const System::Windows::Forms::Control& control);
       static void SetVisible(const System::Windows::Forms::Control& control);

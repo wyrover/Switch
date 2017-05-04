@@ -159,6 +159,11 @@ namespace Pcf {
             }
           };
 
+          Property<System::Drawing::Size> ClientSize {
+            pcf_get {return this->GetClientSize();},
+            pcf_set {this->SetClientSize(value);}
+          };
+
           /// @brief Gets the collection of controls contained within the control.
           /// @param controls A Control.ControlCollection representing the collection of controls contained within the control.
           /// @remarks A Control can act as a parent to a collection of controls. For example, when several controls are added to a Form, each of the controls is a member of the Control.ControlCollection assigned to the Controls property of the form, which is derived from the Control class.
@@ -314,6 +319,7 @@ namespace Pcf {
           InvalidateEventHandler Invalidated;
           EventHandler BackColorChanged;
           EventHandler Click;
+          EventHandler ClientSizeChanged;
           EventHandler DoubleClick;
           EventHandler ForeColorChanged;
           EventHandler HandleCreated;
@@ -348,15 +354,17 @@ namespace Pcf {
 
           virtual void DestroyHandle();
 
-          System::Drawing::Rectangle GetClientRectangle() const;
-          
+          virtual System::Drawing::Size GetClientSize() const;
+
           virtual System::Drawing::Size GetDefaultSize() const { return System::Drawing::Size(0, 0); }
 
-          bool GetStyle(ControlStyles flag) { return ((int32)this->style & (int32)flag) == (int32)flag; }
+          virtual bool GetStyle(ControlStyles flag) { return ((int32)this->style & (int32)flag) == (int32)flag; }
 
           virtual const string& GetText() const { return this->text; }
 
-          void SetStyle(ControlStyles flag, bool value) { this->style = value ? (ControlStyles)((int32)this->state | (int32)flag) : (ControlStyles)((int32)this->style & ~(int32)flag); }
+          virtual void SetClientSize(const System::Drawing::Size& clientSize);
+
+          virtual void SetStyle(ControlStyles flag, bool value) { this->style = value ? (ControlStyles)((int32)this->state | (int32)flag) : (ControlStyles)((int32)this->style & ~(int32)flag); }
 
           virtual void SetText(const string& value) {
             if (this->text != value) {
@@ -370,6 +378,8 @@ namespace Pcf {
           virtual void OnBackColorChanged(const EventArgs& e);
 
           virtual void OnClick(const EventArgs& e) { this->Click(*this, e); }
+
+          virtual void OnClientSizeChanged(const EventArgs& e);
 
           virtual void OnDoubleClick(const EventArgs& e) { this->DoubleClick(*this, e); }
 

@@ -53,6 +53,12 @@ intptr FormsApi::Control::GetHandleWindowFromDeviceContext(intptr hdc) {
   return (intptr)WindowFromDC((HDC)hdc);
 }
 
+System::Drawing::Size FormsApi::Control::GetClientSize(const System::Windows::Forms::Control& control) {
+  RECT rect{ 0, 0, 0, 0 };
+  GetClientRect((HWND)control.Handle(), &rect);
+  return System::Drawing::Size(rect.right - rect.left, rect.bottom - rect.top);
+}
+
 void FormsApi::Control::Invalidate(const System::Windows::Forms::Control& control, bool invalidateChildren) {
   if (invalidateChildren)
     RedrawWindow((HWND)control.Handle(), null, null, RDW_INVALIDATE | RDW_ERASE | RDW_ALLCHILDREN);
@@ -120,6 +126,15 @@ void FormsApi::Control::SetLocation(const System::Windows::Forms::Control& contr
 void FormsApi::Control::SetParent(const System::Windows::Forms::Control& control) {
   ::SetParent((HWND)control.Handle(), control.Parent() != null ? (HWND)control.Parent()().Handle() : (HWND)0);
 
+}
+
+void FormsApi::Control::SetClientSize(System::Windows::Forms::Control& control, const System::Drawing::Size& clientSize) {
+  RECT rect = { 0, 0, clientSize.Width, clientSize.Height };
+  AdjustWindowRectEx(&rect, GetWindowLong((HWND)control.Handle(), GWL_STYLE), false /*menu == null*/, GetWindowLong((HWND)control.Handle(), GWL_EXSTYLE));
+  if (SetWindowPos((HWND)control.Handle(), NULL, control.Location().X, control.Location().Y, control.Size().Width, control.Size().Height, SWP_NOMOVE)) {
+    System::Drawing::Size size = System::Drawing::Size(rect.right - rect.left, rect.bottom - rect.top);
+    control.Size = size;
+  }
 }
 
 void FormsApi::Control::SetSize(const System::Windows::Forms::Control& control) {
