@@ -169,7 +169,11 @@ set(COCOA_SOURCE_FILES
   Sources/__OS/ButtonCocoa.mm
   Sources/__OS/CheckBoxCocoa.mm
   Sources/__OS/ControlCocoa.mm
-  Sources/__OS/FormsApiCocoa.mm
+  Sources/__OS/FormCocoa.mm
+  Sources/__OS/LabelCocoa.mm
+  Sources/__OS/PanelCocoa.mm
+  Sources/__OS/ProgressBarCocoa.mm
+  Sources/__OS/RadioButtonCocoa.mm
   Sources/__OS/SystemInformationCocoa.mm
   Sources/__OS/WindowProcedureCocoa.h
   Sources/__OS/WindowProcedureCocoa.mm

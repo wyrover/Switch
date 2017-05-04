@@ -26,17 +26,29 @@ namespace PcfFormApp {
       checkBox.Text = "Check 1";
       checkBox.Location = Point(10, 70);
       checkBox.Checked = true;
+      checkBox.Click += pcf_delegate(const object& sender, const EventArgs& e) {
+        if (!checkBox.Checked)
+          progressBar.Value = 0;
+      };
 
       RadioButton radioButton1;
       radioButton1.Name = "radioButton1";
       radioButton1.Text = "Radio 1";
       radioButton1.Location = Point(10, 100);
       radioButton1.Checked = true;
+      radioButton1.Click += pcf_delegate(const object& sender, const EventArgs& e) {
+        if (checkBox.Checked && radioButton1.Checked)
+          progressBar.Value = 50;
+      };
 
       RadioButton radioButton2;
       radioButton2.Name = "radioButton2";
       radioButton2.Text = "Radio 2";
       radioButton2.Location = Point(10, 130);
+      radioButton2.Click += pcf_delegate(const object& sender, const EventArgs& e) {
+        if (checkBox.Checked && radioButton2.Checked)
+          progressBar.Value = 100;
+      };
 
       Button button;
       button.Name = "button";
