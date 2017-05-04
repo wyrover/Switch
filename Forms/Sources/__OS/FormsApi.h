@@ -56,7 +56,6 @@ namespace __OS {
 
     class Control pcf_static {
     public:
-      static void Close(const System::Windows::Forms::Form& form);
       static intptr Create(const System::Windows::Forms::Control& control);
       static void DefWndProc(System::Windows::Forms::Message& message);
       static void Destroy(const System::Windows::Forms::Control& control);
@@ -88,6 +87,7 @@ namespace __OS {
 
     class Form pcf_static {
     public:
+      static void Close(const System::Windows::Forms::Form& form);
       static intptr Create(const System::Windows::Forms::Form& form);
     };
 

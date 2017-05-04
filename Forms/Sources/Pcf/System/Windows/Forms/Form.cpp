@@ -12,7 +12,7 @@ using namespace System::Windows::Forms;
 
 void Form::Close() {
   this->Visible = false;
-  __OS::FormsApi::Control::Close(*this);
+  __OS::FormsApi::Form::Close(*this);
 }
 
 void Form::CreateHandle() {

@@ -15,6 +15,32 @@ namespace __OS {
     
     static ControlDictionary Controls;
     
+    static System::Drawing::Rectangle GetBounds(const System::Windows::Forms::Control& control) {
+      if (is<System::Windows::Forms::Form>(control))
+        GetBounds(as<System::Windows::Forms::Form>(control));
+      int32 captionHeight = !is<System::Windows::Forms::Form>(control.Parent()()) || as<System::Windows::Forms::Form>(control.Parent()()).FormBorderStyle == System::Windows::Forms::FormBorderStyle::None ? 0 : FormsApi::SystemInformation::GetCaptionHeight();
+      return System::Drawing::Rectangle(control.Bounds().X, control.Parent()().Bounds().Height - control.Bounds().Height - control.Bounds().Y - captionHeight, control.Bounds().Width, control.Bounds().Height);
+    }
+    
+    static System::Drawing::Rectangle GetBounds(const System::Windows::Forms::Form& form) {
+      switch (form.StartPosition) {
+        case System::Windows::Forms::FormStartPosition::CenterParent: return System::Drawing::Rectangle(0, screenHeight - form.Bounds().Y, form.Width, form.Height);
+        case System::Windows::Forms::FormStartPosition::CenterScreen: return System::Drawing::Rectangle(0, screenHeight, form.Width, form.Height);
+        case System::Windows::Forms::FormStartPosition::Manual: return System::Drawing::Rectangle(form.Bounds().X, screenHeight - form.Bounds().Y, form.Bounds().Width, form.Bounds().Height);
+        case System::Windows::Forms::FormStartPosition::WindowsDefaultBounds: return System::Drawing::Rectangle(0, screenHeight, 300, 300);
+        case System::Windows::Forms::FormStartPosition::WindowsDefaultLocation: return System::Drawing::Rectangle(0, screenHeight, form.Width, form.Height);
+      }
+      return System::Drawing::Rectangle(0, screenHeight - 300, 300, 300);
+    }
+    
+    static int32 GetMouseButtonState(NSEvent* event) {
+      int32 state = 0;
+      if ([event buttonNumber] == 1) state &= MK_LBUTTON;
+      if ([event buttonNumber] == 2) state &= MK_MBUTTON;
+      if ([event buttonNumber] == 3) state &= MK_RBUTTON;
+      return state;
+    }
+    
     static void WndProc(NSEvent* event) {
        // {NSEventTypeLeftMouseDragged, WM_...}, {NSEventTypeRightMouseDragged, WM_...}, {NSEventTypeKeyDown, WM_KEYDOWN}, {NSEventTypeKeyUp, WM_KEYUP}, {NSEventTypeFlagsChanged, WM_...}, {NSEventTypeAppKitDefined, WM_...}, {NSEventTypeSystemDefined, WM_...}, {NSEventTypeApplicationDefined, WM_...}, {NSEventTypePeriodic, WM_...}, {NSEventTypeCursorUpdate, WM_SETCURSOR}, {NSEventTypeScrollWheel, WM_MOUSEWHEEL}, {NSEventTypeTabletPoint, WM_...}, {NSEventTypeTabletProximity, WM_...}, {NSEventTypeOtherMouseDragged, WM_...},
       static System::Collections::Generic::SortedDictionary<int32, delegate<void, NSEvent*, System::Windows::Forms::Control&>> events = {
@@ -27,14 +53,6 @@ namespace __OS {
           [NSApp sendEvent:event];
         }
       }
-    }
-    
-    static int32 GetMouseButtonState(NSEvent* event) {
-      int32 state = 0;
-      if ([event buttonNumber] == 1) state &= MK_LBUTTON;
-      if ([event buttonNumber] == 2) state &= MK_MBUTTON;
-      if ([event buttonNumber] == 3) state &= MK_RBUTTON;
-      return state;
     }
 
   private:
@@ -106,6 +124,7 @@ namespace __OS {
     static bool messageLoopRunning ;
     static const int32 notUsed = 0;
     static bool hover;
+    static const int32 screenHeight = 1050; // TO DO : Get Screen height...
   };
 }
 

@@ -31,10 +31,6 @@ namespace {
       return windowStyleMask;
     }
     
-    static NSColor* FromColor(const System::Drawing::Color& color) {
-      return [NSColor colorWithCalibratedRed:as<float>(color.R()) / 0xFF green:as<float>(color.G()) / 0xFF blue:as<float>(color.B()) / 0xFF alpha:as<float>(color.A()) / 0xFF];
-    }
-    
     static System::Drawing::Rectangle GetBounds(const System::Windows::Forms::Control& control) {
       if (is<System::Windows::Forms::Form>(control))
         return GetBounds(as<System::Windows::Forms::Form>(control));
@@ -79,182 +75,8 @@ namespace {
 }
 @end
 
-intptr FormsApi::CheckBox::Create(const System::Windows::Forms::CheckBox& checkBox) {
-  @autoreleasepool {
-    System::Drawing::Rectangle bounds = CocoaApi::GetBounds(checkBox);
-    NSButton *handle = [[[NSButton alloc] initWithFrame:NSMakeRect(bounds.X(), bounds.Y(), bounds.Width(), bounds.Height())] autorelease];
-    [[(NSWindow*)checkBox.Parent()().Handle() contentView] addSubview: handle];
-    
-    [handle setTitle:[NSString stringWithUTF8String:checkBox.Text().c_str()]];
-    [handle setButtonType:NSButtonTypeSwitch];
-    [handle setBezelStyle:NSBezelStyleRegularSquare];
-    [handle setAutoresizingMask:NSViewMaxXMargin | NSViewMinYMargin];
-    [handle setTarget:[NSControlResponder alloc]];
-    [handle setAction:@selector(ControlClick:)];
-    __OS::WindowProcedure::Controls[(intptr)handle] = checkBox;
-    Message message = Message::Create((intptr)handle, WM_CREATE, 0, 0, 0, IntPtr::Zero);
-    const_cast<System::Windows::Forms::CheckBox&>(checkBox).WndProc(message);
-    return (intptr)handle;
-  }
-}
-
-void FormsApi::CheckBox::SetAutoCheck(const System::Windows::Forms::CheckBox& checkBox) {
-}
-
-void FormsApi::CheckBox::SetChecked(const System::Windows::Forms::CheckBox& checkBox) {
-  [(NSButton*)checkBox.Handle() setState:checkBox.Checked()];
-}
-
-void FormsApi::Control::Close(const System::Windows::Forms::Form& form) {
+void FormsApi::Form::Close(const System::Windows::Forms::Form& form) {
   [(NSWindow*)form.Handle() close];
-}
-
-intptr FormsApi::Control::Create(const System::Windows::Forms::Control& control) {
-  System::Drawing::Rectangle bounds = CocoaApi::GetBounds(control);
-  NSControl *handle = [[[NSControl alloc] initWithFrame:NSMakeRect(bounds.X(), bounds.Y(), bounds.Width(), bounds.Height())] autorelease];
-  [[(NSWindow*)control.Parent()().Handle() contentView] addSubview: handle];
-  
-  [handle setStringValue:[NSString stringWithUTF8String:control.Text().c_str()]];
-  [handle setAutoresizingMask:NSViewMaxXMargin | NSViewMinYMargin];
-  [handle setWantsLayer:YES];
-  [handle setTarget:[NSControlResponder alloc]];
-  [handle setAction:@selector(ControlClick:)];
-  __OS::WindowProcedure::Controls[(intptr)handle] = control;
-  Message message = Message::Create((intptr)handle, WM_CREATE, 0, 0, 0, IntPtr::Zero);
-  const_cast<System::Windows::Forms::Control&>(control).WndProc(message);
-  return (intptr)handle;
-}
-
-void FormsApi::Control::DefWndProc(System::Windows::Forms::Message& message) {
-  @autoreleasepool {
-    NSEvent* event = (NSEvent*)message.Handle();
-    if (event.type == NSEventTypeKeyUp)
-      [[NSApp keyWindow] sendEvent:event];
-    else
-      [NSApp sendEvent:event];
-  }
-}
-
-void FormsApi::Control::Destroy(const System::Windows::Forms::Control& control) {
-  __OS::WindowProcedure::Controls.Remove(control.Handle);
-  Message message = Message::Create(control.Handle, WM_DESTROY, 0, 0, 0, IntPtr::Zero);
-  const_cast<System::Windows::Forms::Control&>(control).WndProc(message);
-}
-
-System::Drawing::Size FormsApi::Control::GetClientSize(const System::Windows::Forms::Control& control) {
-  @autoreleasepool {
-    if (is<System::Windows::Forms::Form>(control)) {
-      return System::Drawing::Size(((NSWindow*)control.Handle()).contentView.intrinsicContentSize.width, ((NSWindow*)control.Handle()).contentView.intrinsicContentSize.height);
-    } else {
-      return System::Drawing::Size(((NSControl*)control.Handle()).frame.size.width, ((NSControl*)control.Handle()).frame.size.height);
-    }
-  }
-}
-
-intptr FormsApi::Control::GetHandleWindowFromDeviceContext(intptr hdc) {
-  return hdc;
-}
-
-void FormsApi::Control::Invalidate(const System::Windows::Forms::Control& control, bool invalidateChildren) {
-}
-
-void FormsApi::Control::Invalidate(const System::Windows::Forms::Control& control, const System::Drawing::Rectangle& rect, bool invalidateChildren) {
-}
-
-System::Drawing::Point FormsApi::Control::PointToClient(const System::Windows::Forms::Control& control, const System::Drawing::Point& point) {
-  return System::Drawing::Point();
-}
-
-System::Drawing::Point FormsApi::Control::PointToScreen(const System::Windows::Forms::Control& control, const System::Drawing::Point& point) {
-  return System::Drawing::Point();
-}
-
-void FormsApi::Control::SetBackColor(intptr hdc) {
-  ref<System::Windows::Forms::Control> control = System::Windows::Forms::Control::FromHandle(GetHandleWindowFromDeviceContext(hdc));
-  if (control) {
-    if (is<System::Windows::Forms::Form>(control)) {
-      ((NSWindow*)control().Handle()).backgroundColor = CocoaApi::FromColor(control().BackColor);
-    } else {
-      [(NSControl*)control().Handle() setWantsLayer:YES];
-      ((NSControl*)control().Handle()).layer.backgroundColor = CocoaApi::FromColor(control().BackColor).CGColor;
-    }
-    
-  }
-}
-
-void FormsApi::Control::SetClientSize(System::Windows::Forms::Control& control, const System::Drawing::Size& clientSize) {
-  @autoreleasepool {
-    if (is<System::Windows::Forms::Form>(control)) {
-      [(NSWindow*)control.Handle() setContentSize:NSMakeSize(clientSize.Width(), clientSize.Height())];
-    } else {
-      [(NSControl*)control.Handle() setFrameSize:NSMakeSize(clientSize.Width(), clientSize.Height())];
-    }
-    control.Size = System::Drawing::Size(((NSControl*)control.Handle()).frame.size.width, ((NSControl*)control.Handle()).frame.size.height);
-  }
-}
-
-void FormsApi::Control::SetForeColor(intptr hdc) {
-}
-
-void FormsApi::Control::SetBackColor(const System::Windows::Forms::Control& control) {
-  if (is<System::Windows::Forms::Form>(control)) {
-    ((NSWindow*)control.Handle()).backgroundColor = CocoaApi::FromColor(control.BackColor);
-  } else if (is<System::Windows::Forms::Panel>(control)) {
-    ((NSScrollView*)control.Handle()).backgroundColor = CocoaApi::FromColor(control.BackColor);
-  } else {
-    [(NSControl*)control.Handle() setWantsLayer:YES];
-    ((NSControl*)control.Handle()).layer.backgroundColor = CocoaApi::FromColor(control.BackColor).CGColor;
-  }
-}
-
-void FormsApi::Control::SetForeColor(const System::Windows::Forms::Control& control) {
-}
-
-void FormsApi::Control::SetLocation(const System::Windows::Forms::Control& control) {
-  @autoreleasepool {
-    System::Drawing::Rectangle bounds = CocoaApi::GetBounds(control);
-    [(NSControl*)control.Handle() setFrameOrigin:NSMakePoint(bounds.X(), bounds.Y())];
-  }
-}
-
-void FormsApi::Control::SetParent(const System::Windows::Forms::Control& control) {
-}
-
-void FormsApi::Control::SetSize(const System::Windows::Forms::Control& control) {
-  @autoreleasepool {
-    if (is<System::Windows::Forms::Form>(control)) {
-      System::Drawing::Rectangle bounds = CocoaApi::GetBounds(control);
-      [(NSWindow*)control.Handle() setFrame:NSMakeRect(bounds.X(), bounds.Y(), bounds.Width(), bounds.Height()) display:YES];
-      [(NSWindow*)control.Handle() setFrameTopLeftPoint:NSMakePoint(bounds.X(), bounds.Y())];
-    } else {
-      [(NSControl*)control.Handle() setFrameSize:NSMakeSize(control.Width(), control.Height())];
-    }
-  }
-}
-
-void FormsApi::Control::SetText(const System::Windows::Forms::Control& control) {
-  @autoreleasepool {
-    if (is<System::Windows::Forms::Button>(control))
-      [(NSButton*)control.Handle()  setTitle:[NSString stringWithUTF8String:control.Text().c_str()]];
-    else if (is<System::Windows::Forms::Form>(control))
-      [(NSWindow*)control.Handle()  setTitle:[NSString stringWithUTF8String:control.Text().c_str()]];
-    else
-      [(NSControl*)control.Handle()  setStringValue:[NSString stringWithUTF8String:control.Text().c_str()]];
-  }
-}
-
-void FormsApi::Control::SetVisible(const System::Windows::Forms::Control& control) {
-  @autoreleasepool {
-    if (is<System::Windows::Forms::Form>(control)) {
-      if (control.Visible ) {
-        [(NSWindow*)control.Handle() makeKeyAndOrderFront:NSApp];
-        [NSApp activateIgnoringOtherApps:YES];
-      } else {
-        [(NSWindow*)control.Handle() orderOut:nil];
-      }
-    } else
-      [(NSControl*)control.Handle() setHidden:control.Visible ? NO : YES];
-  }
 }
 
 intptr FormsApi::Form::Create(const System::Windows::Forms::Form& form) {
@@ -291,8 +113,8 @@ intptr FormsApi::Label::Create(const System::Windows::Forms::Label& label) {
     [handle setSelectable:NO];
     [handle setAutoresizingMask:NSViewMaxXMargin | NSViewMinYMargin];
     handle.drawsBackground = TRUE;
-    handle.backgroundColor = CocoaApi::FromColor(label.BackColor);
-    handle.textColor = CocoaApi::FromColor(label.ForeColor);
+    //handle.backgroundColor = CocoaApi::FromColor(label.BackColor);
+    //handle.textColor = CocoaApi::FromColor(label.ForeColor);
     
     [handle setTarget:[NSControlResponder alloc]];
     [handle setAction:@selector(ControlClick:)];
