@@ -1,6 +1,7 @@
 ﻿#if defined(_WIN32) && defined(__use_native_interface__)
 
 #include <Windows.h>
+#include <Uxtheme.h>
 #include <Pcf/Undef.h>
 
 #include <Pcf/System/Collections/Generic/SortedDictionary.h>
@@ -9,6 +10,8 @@ namespace __OS {
   class WindowProcedure pcf_static {
   public:
     static System::Collections::Generic::SortedDictionary<intptr, WNDPROC> DefWindowProcs;
+
+    static void SetWindowTheme(HWND handle);
     static LRESULT CALLBACK WndProc(HWND hwnd, uint32 msg, WPARAM wParam, LPARAM lParam);
   };
 }

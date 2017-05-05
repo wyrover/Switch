@@ -14,24 +14,17 @@ using namespace __OS;
 extern HINSTANCE __instance;
 
 intptr FormsApi::RadioButton::Create(const System::Windows::Forms::RadioButton& radioButton) {
-  int32 style = WS_TABSTOP | WS_VISIBLE | WS_CHILD;
-  if (radioButton.AutoCheck)
-    style |= BS_AUTORADIOBUTTON;
-  else
-    style |= BS_RADIOBUTTON;
+  int32 style = WS_TABSTOP | WS_VISIBLE | WS_CHILD | (radioButton.AutoCheck ? BS_AUTORADIOBUTTON : BS_RADIOBUTTON);
   int32 exStyle = 0;
-  HWND handle = CreateWindowEx(exStyle, L"Button", radioButton.Text().w_str().c_str(), style, radioButton.Bounds().Left, radioButton.Bounds().Top, radioButton.Bounds().Width, radioButton.Bounds().Height, (HWND)FormsApi::Control::GetParentHandleOrDefault(radioButton), (HMENU)0, __instance, (LPVOID)NULL);
+  HWND handle = CreateWindowEx(exStyle, L"Button", radioButton.Text().w_str().c_str(), style, radioButton.Bounds().Left, radioButton.Bounds().Top, radioButton.Bounds().Width, radioButton.Bounds().Height, (HWND)radioButton.Parent()().Handle(), (HMENU)0, __instance, (LPVOID)NULL);
+  WindowProcedure::SetWindowTheme(handle);
   WindowProcedure::DefWindowProcs[(intptr)handle] = (WNDPROC)SetWindowLongPtr(handle, GWLP_WNDPROC, (LONG_PTR)WindowProcedure::WndProc);
   return (intptr)handle;
 }
 
 void FormsApi::RadioButton::SetAutoCheck(const System::Windows::Forms::RadioButton& radioButton) {
-  SetWindowLong((HWND)radioButton.Handle(), GWL_STYLE, GetWindowLong((HWND)radioButton.Handle(), GWL_STYLE) & ~BS_RADIOBUTTON);
-  SetWindowLong((HWND)radioButton.Handle(), GWL_STYLE, GetWindowLong((HWND)radioButton.Handle(), GWL_STYLE) & ~BS_AUTORADIOBUTTON);
-  if (radioButton.AutoCheck)
-    SetWindowLong((HWND)radioButton.Handle(), GWL_STYLE, GetWindowLong((HWND)radioButton.Handle(), GWL_STYLE) | BS_AUTORADIOBUTTON);
-  else
-    SetWindowLong((HWND)radioButton.Handle(), GWL_STYLE, GetWindowLong((HWND)radioButton.Handle(), GWL_STYLE) | BS_RADIOBUTTON);
+  SetWindowLong((HWND)radioButton.Handle(), GWL_STYLE, GetWindowLong((HWND)radioButton.Handle(), GWL_STYLE) & ~(BS_AUTORADIOBUTTON | BS_RADIOBUTTON));
+  SetWindowLong((HWND)radioButton.Handle(), GWL_STYLE, GetWindowLong((HWND)radioButton.Handle(), GWL_STYLE) | (radioButton.AutoCheck ? BS_AUTORADIOBUTTON : BS_RADIOBUTTON));
 }
 
 void FormsApi::RadioButton::SetChecked(const System::Windows::Forms::RadioButton& radioButton) {

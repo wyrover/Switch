@@ -2,7 +2,9 @@
 /// @brief Contains Pcf::System::Windows::Forms::Button class.
 #pragma once
 
-#include "ButtonBase.h"
+#include <Pcf/System/Environment.h>
+#include "Control.h"
+#include "ProgressBarStyle.h"
 
 /// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Pcf {
@@ -18,7 +20,9 @@ namespace Pcf {
         /// @note A Label can be made transparent by setting its BackColor property to Color.Transparent. When you use a transparent label, use only the current device coordinate system to draw on the container, or the Label background might paint improperly.
         class pcf_public ProgressBar : public Control {
         public:
-          ProgressBar() : Control("", 0, 0, 100, 23) { this->SetStyle(ControlStyles::UserPaint, false); }
+          ProgressBar() : Control("", 0, 0, 100, System::Environment::OSVersion().Platform == System::PlatformID::MacOSX ? 20 : 23) {
+            this->SetStyle(ControlStyles::UserPaint, false);
+          }
 
           Property<int32> Maximum{
             pcf_get{ return this->maximum; },
@@ -30,23 +34,29 @@ namespace Pcf {
             pcf_set{ this->SetMinimum(value); },
           };
 
+          Property<ProgressBarStyle> Style{
+            pcf_get{ return this->style; },
+            pcf_set{ this->SetProgressStyle(value); },
+          };
+
           Property<int32> Value{
             pcf_get{ return this->value; },
             pcf_set{ this->SetValue(value); },
           };
 
-
         protected:
           void CreateHandle() override;
-          System::Drawing::Size GetDefaultSize() const override { return System::Drawing::Size(100, 23); }
+          System::Drawing::Size GetDefaultSize() const override { return System::Drawing::Size(100, System::Environment::OSVersion().Platform == System::PlatformID::MacOSX ? 20 : 23); }
           void SetMaximum(int32 maximum);
           void SetMinimum(int32 minimum);
+          void SetProgressStyle(ProgressBarStyle style);
           void SetValue(int32 value);
-         
+
           /// @cond
           int32 maximum = 100;
           int32 minimum = 0;
-          int32 value = 0;
+          ProgressBarStyle style = ProgressBarStyle::Continuous;
+          int32 value = 50;
           /// @endcond
         };
       }

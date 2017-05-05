@@ -11,14 +11,18 @@ using namespace System::Drawing;
 using namespace System::Windows::Forms;
 
 void Panel::CreateHandle() {
+  if (!this->backColor.HasValue && Environment::OSVersion().Platform == PlatformID::MacOSX)
+    this->backColor = Color::White;
   this->handle = __OS::FormsApi::Panel::Create(*this);
   this->Control::CreateHandle();
   __OS::FormsApi::Panel::SetBorderStyle(*this);
 }
 
 void Panel::SetBorderStyle(System::Windows::Forms::BorderStyle borderStyle) {
-  this->borderStyle = borderStyle;
-  if (this->IsHandleCreated)
-    __OS::FormsApi::Panel::SetBorderStyle(*this);
+  if (this->borderStyle != borderStyle) {
+    this->borderStyle = borderStyle;
+    if (this->IsHandleCreated)
+      __OS::FormsApi::Panel::SetBorderStyle(*this);
+  }
 }
 

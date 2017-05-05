@@ -75,15 +75,9 @@ namespace Pcf {
             friend Control;
             ControlCollection(ref<Control> controlContainer) : controlContainer(controlContainer) {}
             
-            void ChangeParent(ref<Control> value) {
-              if (value().parent != null)
-                value().parent().controls.Remove(value);
-              value().parent = this->controlContainer;
-              if (this->controlContainer().Visible && this->controlContainer().handle != IntPtr::Zero && value().handle == IntPtr::Zero)
-                value().CreateControl();
-            }
+            void ChangeParent(ref<Control> value);
 
-            void RemoveParent(ref<Control> value) {value().parent = null;}
+            void RemoveParent(ref<Control> value);
             ref<Control> controlContainer;
           };
 
@@ -163,6 +157,11 @@ namespace Pcf {
               this->Location(value.Location());
               this->Size(value.Size());
             }
+          };
+
+          Property<System::Drawing::Size> ClientSize {
+            pcf_get {return this->GetClientSize();},
+            pcf_set {this->SetClientSize(value);}
           };
 
           /// @brief Gets the collection of controls contained within the control.
@@ -293,15 +292,7 @@ namespace Pcf {
             pcf_set { this->Size(System::Drawing::Size(value, this->size.Height())); }
           };
 
-          void CreateControl() {
-            if (this->size.IsEmpty())
-              this->size = this->DefaultSize;
-            if (this->visible && !this->IsHandleCreated)
-              CreateHandle();
-            for (ref<Control> control : this->controls)
-              control().CreateControl();
-            OnCreateControl();
-          }
+          void CreateControl();
 
           static const ref<Control> FromHandle(intptr handle) {
             if (handles.ContainsKey(handle))
@@ -328,6 +319,7 @@ namespace Pcf {
           InvalidateEventHandler Invalidated;
           EventHandler BackColorChanged;
           EventHandler Click;
+          EventHandler ClientSizeChanged;
           EventHandler DoubleClick;
           EventHandler ForeColorChanged;
           EventHandler HandleCreated;
@@ -362,15 +354,17 @@ namespace Pcf {
 
           virtual void DestroyHandle();
 
-          System::Drawing::Rectangle GetClientRectangle() const;
-          
+          virtual System::Drawing::Size GetClientSize() const;
+
           virtual System::Drawing::Size GetDefaultSize() const { return System::Drawing::Size(0, 0); }
 
-          bool GetStyle(ControlStyles flag) { return ((int32)this->style & (int32)flag) == (int32)flag; }
+          virtual bool GetStyle(ControlStyles flag) { return ((int32)this->style & (int32)flag) == (int32)flag; }
 
           virtual const string& GetText() const { return this->text; }
 
-          void SetStyle(ControlStyles flag, bool value) { this->style = value ? (ControlStyles)((int32)this->state | (int32)flag) : (ControlStyles)((int32)this->style & ~(int32)flag); }
+          virtual void SetClientSize(const System::Drawing::Size& clientSize);
+
+          virtual void SetStyle(ControlStyles flag, bool value) { this->style = value ? (ControlStyles)((int32)this->state | (int32)flag) : (ControlStyles)((int32)this->style & ~(int32)flag); }
 
           virtual void SetText(const string& value) {
             if (this->text != value) {
@@ -384,6 +378,8 @@ namespace Pcf {
           virtual void OnBackColorChanged(const EventArgs& e);
 
           virtual void OnClick(const EventArgs& e) { this->Click(*this, e); }
+
+          virtual void OnClientSizeChanged(const EventArgs& e);
 
           virtual void OnDoubleClick(const EventArgs& e) { this->DoubleClick(*this, e); }
 

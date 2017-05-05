@@ -9,4 +9,13 @@ using namespace System::Windows::Forms;
 void Button::CreateHandle() {
   this->handle = __OS::FormsApi::Button::Create(*this);
   this->Control::CreateHandle();
+  __OS::FormsApi::Button::SetIsDefault(*this);
+}
+
+void Button::SetIsDefault(bool isDefault) {
+  if (this->isDefault != isDefault) {
+    this->isDefault = isDefault;
+    if (this->IsHandleCreated)
+      __OS::FormsApi::Button::SetIsDefault(*this);
+  }
 }

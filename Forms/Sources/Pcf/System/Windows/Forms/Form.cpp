@@ -11,7 +11,8 @@ using namespace System::Drawing;
 using namespace System::Windows::Forms;
 
 void Form::Close() {
-  __OS::FormsApi::Control::Close(*this);
+  this->Visible = false;
+  __OS::FormsApi::Form::Close(*this);
 }
 
 void Form::CreateHandle() {

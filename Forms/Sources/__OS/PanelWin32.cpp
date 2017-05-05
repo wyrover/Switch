@@ -14,18 +14,10 @@ using namespace __OS;
 extern HINSTANCE __instance;
 
 intptr FormsApi::Panel::Create(const System::Windows::Forms::Panel& panel) {
-  int32 style = WS_VISIBLE | WS_CHILD;
-  if (panel.BorderStyle == BorderStyle::FixedSingle)
-    style |= WS_BORDER;
-  if (panel.HScroll)
-    style |= WS_HSCROLL;
-  if (panel.VScroll)
-    style |= WS_VSCROLL;
-  int32 exStyle = WS_EX_CONTROLPARENT;
-  if (panel.BorderStyle == BorderStyle::Fixed3D)
-    exStyle |= WS_EX_CLIENTEDGE;
-
-  HWND handle = CreateWindowEx(exStyle, WC_DIALOG, panel.Text().w_str().c_str(), style, panel.Bounds().Left, panel.Bounds().Top, panel.Bounds().Width, panel.Bounds().Height, (HWND)FormsApi::Control::GetParentHandleOrDefault(panel), (HMENU)0, __instance, (LPVOID)NULL);
+  int32 style = WS_VISIBLE | WS_CHILD | (panel.BorderStyle == BorderStyle::FixedSingle ? WS_BORDER : 0) | (panel.HScroll ? WS_HSCROLL : 0) | (panel.VScroll ? WS_VSCROLL : 0);
+  int32 exStyle = WS_EX_CONTROLPARENT | (panel.BorderStyle == BorderStyle::Fixed3D ? WS_EX_CLIENTEDGE : 0);
+  HWND handle = CreateWindowEx(exStyle, WC_DIALOG, panel.Text().w_str().c_str(), style, panel.Bounds().Left, panel.Bounds().Top, panel.Bounds().Width, panel.Bounds().Height, (HWND)panel.Parent()().Handle(), (HMENU)0, __instance, (LPVOID)NULL);
+  WindowProcedure::SetWindowTheme(handle);
   WindowProcedure::DefWindowProcs[(intptr)handle] = (WNDPROC)SetWindowLongPtr(handle, GWLP_WNDPROC, (LONG_PTR)WindowProcedure::WndProc);
   return (intptr)handle;
 }

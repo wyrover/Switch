@@ -84,6 +84,7 @@ set(INCLUDE_FILES
   Includes/Pcf/System/Windows/Forms/Panel.h
 #  Includes/Pcf/System/Windows/Forms/PictureBox.h
   Includes/Pcf/System/Windows/Forms/ProgressBar.h
+  Includes/Pcf/System/Windows/Forms/ProgressBarStyle.h
   Includes/Pcf/System/Windows/Forms/RadioButton.h
 #  Includes/Pcf/System/Windows/Forms/RichTextBox.h
 #  Includes/Pcf/System/Windows/Forms/SaveFileDialog.h
@@ -104,8 +105,8 @@ set(INCLUDE_FILES
 set(SOURCE_FILES
   Sources/__OS/ApplicationWin32.cpp
   Sources/__OS/ButtonWin32.cpp
-  Sources/__OS/ControlWin32.cpp
   Sources/__OS/CheckBoxWin32.cpp
+  Sources/__OS/ControlWin32.cpp
   Sources/__OS/FormsApi.h
   Sources/__OS/FormsApiFltk.cpp
   Sources/__OS/FormsApiGtk.cpp
@@ -164,8 +165,18 @@ set(SOURCE_FILES
 
 if (APPLE)
 set(COCOA_SOURCE_FILES
-  Sources/__OS/FormsApiCocoa.mm
-  Sources/__OS/SystemInformationCocoa.cpp
+  Sources/__OS/ApplicationCocoa.mm
+  Sources/__OS/ButtonCocoa.mm
+  Sources/__OS/CheckBoxCocoa.mm
+  Sources/__OS/ControlCocoa.mm
+  Sources/__OS/FormCocoa.mm
+  Sources/__OS/LabelCocoa.mm
+  Sources/__OS/PanelCocoa.mm
+  Sources/__OS/ProgressBarCocoa.mm
+  Sources/__OS/RadioButtonCocoa.mm
+  Sources/__OS/SystemInformationCocoa.mm
+  Sources/__OS/WindowProcedureCocoa.h
+  Sources/__OS/WindowProcedureCocoa.mm
 )
 endif ()
 
