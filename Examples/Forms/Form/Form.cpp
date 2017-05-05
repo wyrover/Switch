@@ -13,21 +13,19 @@ namespace FormExample {
     }
     
     Form1() {
-      this->Text = "Form example";
-      this->StartPosition = FormStartPosition::Manual;
-      this->Location = System::Drawing::Point(300, 200);
-      this->Size = System::Drawing::Size(640, 480);
-      
-      button.Parent = *this;
       button.Text = "Close";
       button.Location = System::Drawing::Point(10, 10);
       button.Click += pcf_delegate(const object& sender, const EventArgs& e) {
         this->Close();
       };
       
+      this->Text = "Form example";
+      this->StartPosition = FormStartPosition::Manual;
+      this->Location = System::Drawing::Point(300, 200);
+      this->Size = System::Drawing::Size(640, 480);
+      this->Controls().Add(button);
       this->FormClosing += pcf_delegate(const object& sender, FormClosingEventArgs& e) {
-        DialogResult dialogResult = MessageBox::Show("Do you really want to save and exit?", "Close Form", MessageBoxButtons::YesNoCancel, MessageBoxIcon::Question);
-        e.Cancel = dialogResult == DialogResult::Cancel;
+        e.Cancel = MessageBox::Show("Do you really want to save and exit?", "Close Form", MessageBoxButtons::YesNoCancel, MessageBoxIcon::Question) ==  DialogResult::Cancel;
       };
     }
     
