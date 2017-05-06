@@ -589,7 +589,6 @@ T* CreateControl(const TControl& control) {
   System::Drawing::Point offset;
   if (control.Parent() != null && !is<System::Windows::Forms::Form>(control.Parent()))
     offset = control.Parent()().Location;
-    
   T* handle = new T(offset.X + control.Location().X, offset.Y + control.Location().Y, control.Size().Width, control.Size().Height, control.Text().c_str());
   handle->labelsize(defaultTextSize);
   handle->align(FL_ALIGN_LEFT | FL_ALIGN_INSIDE | FL_ALIGN_CLIP | FL_ALIGN_WRAP);
@@ -616,6 +615,7 @@ intptr FormsApi::CheckBox::Create(const System::Windows::Forms::CheckBox& checkB
 }
 
 void FormsApi::CheckBox::SetAutoCheck(const System::Windows::Forms::CheckBox& checkBox) {
+  ((Fl_Check_Button&)((FlWidget*)checkBox.Handle())->ToWidget()).type(checkBox.AutoCheck ? FL_TOGGLE_BUTTON : FL_NORMAL_BUTTON);
 }
 
 void FormsApi::CheckBox::SetChecked(const System::Windows::Forms::CheckBox& checkBox) {
@@ -675,7 +675,7 @@ void FormsApi::Control::SetForeColor(intptr hdc) {
 }
 
 void FormsApi::Control::SetBackColor(const System::Windows::Forms::Control& control) {
-    ((FlWidget*)control.Handle())->ToWidget().color(FromColor(control.BackColor()));
+  ((FlWidget*)control.Handle())->ToWidget().color(FromColor(control.BackColor()));
 }
 
 void FormsApi::Control::SetClientSize(System::Windows::Forms::Control &control, const System::Drawing::Size &clientSize) {
@@ -687,6 +687,16 @@ void FormsApi::Control::SetForeColor(const System::Windows::Forms::Control& cont
 }
 
 void FormsApi::Control::SetLocation(const System::Windows::Forms::Control& control) {
+  if (is<System::Windows::Forms::Form>(control))
+    ((FlWidget*)control.Handle())->ToWidget().position(control.Location().X, control.Location().Y + SystemInformation::GetCaptionHeight());
+  else if (is<System::Windows::Forms::ProgressBar>(control)) {
+    System::Drawing::Point offset;
+    if (control.Parent() != null && !is<System::Windows::Forms::Form>(control.Parent()))
+      offset = control.Parent()().Location;
+    offset = System::Drawing::Point::Add(offset, {0, control.Height > 6 ? (control.Height - 6) / 2 : 0});
+    ((FlWidget*)control.Handle())->ToWidget().position(control.Location().X + offset.X, control.Location().Y + offset.Y);
+  } else
+    ((FlWidget*)control.Handle())->ToWidget().position(control.Location().X, control.Location().Y);
 }
 
 void FormsApi::Control::SetParent(const System::Windows::Forms::Control& control) {
@@ -711,7 +721,7 @@ void FormsApi::Control::SetSize(const System::Windows::Forms::Control& control) 
 }
 
 void FormsApi::Control::SetText(const System::Windows::Forms::Control& control) {
-    ((FlWidget*)control.Handle())->ToWidget().copy_label(control.Text().c_str());
+  ((FlWidget*)control.Handle())->ToWidget().copy_label(control.Text().c_str());
 }
 
 void FormsApi::Control::SetVisible(const System::Windows::Forms::Control& control) {
