@@ -11,7 +11,6 @@ namespace PcfFormApp {
     static void Main() {
       ProgressBar progressBar;
       progressBar.Location = System::Drawing::Point(10, 10);
-      progressBar.Height = 6;
       progressBar.Name = "progressBar";
       progressBar.Minimum = 0;
       progressBar.Maximum = 100;

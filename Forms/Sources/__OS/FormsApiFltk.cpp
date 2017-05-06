@@ -538,10 +538,13 @@ DialogResult FormsApi::Application::ShowMessageBox(const string& message, const 
   messageBox->labelsize(defaultTextSize);
   for (int index = 0; index < messageBox->children(); index++) {
     messageBox->child(index)->color(FromColor(System::Windows::Forms::Control::DefaultBackColor));
+    if (System::Environment::OSVersion().Platform == System::PlatformID::MacOSX)
+      messageBox->child(index)->selection_color(FromColor(System::Drawing::SystemColors::Highlight));
     messageBox->child(index)->labelsize(defaultTextSize);
   }
 
   fl_message_title(caption.c_str());
+  fl_message_hotspot(false);
   if (icon != MessageBoxIcon::None) {
     fl_message_icon()->show();
     fl_message_icon()->image(messageBoxIcon[icon]);
@@ -599,6 +602,8 @@ T* CreateControl(const TControl& control) {
 intptr FormsApi::Button::Create(const System::Windows::Forms::Button& button) {
   FlButton* handle = CreateControl<FlButton>(button);
   handle->align(FL_ALIGN_CENTER | FL_ALIGN_INSIDE | FL_ALIGN_CLIP | FL_ALIGN_WRAP);
+  if (System::Environment::OSVersion().Platform == System::PlatformID::MacOSX)
+    handle->selection_color(FromColor(System::Drawing::SystemColors::Highlight));
   return (intptr)handle;
 }
 
@@ -674,6 +679,7 @@ void FormsApi::Control::SetBackColor(const System::Windows::Forms::Control& cont
 }
 
 void FormsApi::Control::SetClientSize(System::Windows::Forms::Control &control, const System::Drawing::Size &clientSize) {
+  ((FlWidget*)control.Handle())->ToWidget().size(clientSize.Width, clientSize.Height);
 }
 
 void FormsApi::Control::SetForeColor(const System::Windows::Forms::Control& control) {
@@ -691,6 +697,17 @@ void FormsApi::Control::SetParent(const System::Windows::Forms::Control& control
 }
 
 void FormsApi::Control::SetSize(const System::Windows::Forms::Control& control) {
+  if (is<System::Windows::Forms::Form>(control))
+    ((FlWidget*)control.Handle())->ToWidget().size(control.Size().Width, control.Size().Height - SystemInformation::GetCaptionHeight());
+  else if (is<System::Windows::Forms::ProgressBar>(control)) {
+    System::Drawing::Point offset;
+    if (control.Parent() != null && !is<System::Windows::Forms::Form>(control.Parent()))
+      offset = control.Parent()().Location;
+    offset = System::Drawing::Point::Add(offset, {0, control.Height > 6 ? (control.Height - 6) / 2 : 0});
+    ((FlWidget*)control.Handle())->ToWidget().position(control.Location().X + offset.X, control.Location().Y + offset.Y);
+    ((FlWidget*)control.Handle())->ToWidget().size(control.Size().Width, 6);
+  } else
+    ((FlWidget*)control.Handle())->ToWidget().size(control.Size().Width, control.Size().Height);
 }
 
 void FormsApi::Control::SetText(const System::Windows::Forms::Control& control) {
@@ -756,10 +773,13 @@ void FormsApi::ProgressBar::SetValue(const System::Windows::Forms::ProgressBar &
 
 intptr FormsApi::RadioButton::Create(const System::Windows::Forms::RadioButton& radioButton) {
   FlRadioButton* handle = CreateControl<FlRadioButton>(radioButton);
+  if (System::Environment::OSVersion().Platform == System::PlatformID::MacOSX)
+    handle->selection_color(FromColor(System::Drawing::SystemColors::Highlight));
   return (intptr)handle;
 }
 
 void FormsApi::RadioButton::SetAutoCheck(const System::Windows::Forms::RadioButton& radioButton) {
+  ((Fl_Round_Button&)((FlWidget*)radioButton.Handle())->ToWidget()).type(radioButton.AutoCheck ? FL_RADIO_BUTTON : FL_NORMAL_BUTTON);
 }
 
 void FormsApi::RadioButton::SetChecked(const System::Windows::Forms::RadioButton& radioButton) {

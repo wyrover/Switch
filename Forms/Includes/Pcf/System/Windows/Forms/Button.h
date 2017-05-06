@@ -22,8 +22,10 @@ namespace Pcf {
         class pcf_public Button : public ButtonBase {
         public:
           Button() : ButtonBase("", 0, 0, 75, 25) {
+#if defined(__use_native_interface__)
             if (System::Environment::OSVersion().Platform == System::PlatformID::MacOSX)
               Size = System::Drawing::Size(81, 32);
+#endif
             this->SetStyle(ControlStyles::UserPaint, false);
           }
 
