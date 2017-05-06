@@ -303,134 +303,6 @@ namespace {
     intptr hwndFocused = IntPtr::Zero;
     intptr previousHwndFocused = IntPtr::Zero;
   };
-
-  class FlButton : public FlWidget, public Fl_Button {
-  public:
-    FlButton(int32 x, int32 y, int32 w, int32 h, const char* t) : Fl_Button(x, y, w, h, t) {}
-    void draw() override {this->Draw(*this);}
-    int handle(int event) override {return this->HandleEvent(event, *this);}
-    int32 HandleControl(int32 event) override {
-      if (event != FL_PAINT)
-        return this->Fl_Button::handle(event);
-      this->Fl_Button::draw();
-      return 1;
-    }
-    const Fl_Widget& ToWidget() const override {return *this;}
-    Fl_Widget& ToWidget() override {return *this;}
-  };
-
-  class FlCheckBox : public FlWidget, public Fl_Check_Button {
-  public:
-    FlCheckBox(int32 x, int32 y, int32 w, int32 h, const char* t) : Fl_Check_Button(x, y, w, h, t) {}
-    void draw() override {this->Draw(*this);}
-    int handle(int event) override {return this->HandleEvent(event, *this);}
-    int32 HandleControl(int32 event) override {
-      if (event != FL_PAINT)
-        return this->Fl_Check_Button::handle(event);
-      this->Fl_Check_Button::draw();
-      return 1;
-    }
-    const Fl_Widget& ToWidget() const override {return *this;}
-    Fl_Widget& ToWidget() override {return *this;}
-  };
-
-  class FlControl : public FlWidget, public Fl_Widget {
-  public:
-    FlControl(int32 x, int32 y, int32 w, int32 h, const char* t) : Fl_Widget(x, y, w, h, t) {}
-    void draw() override {this->Draw(*this);}
-    int handle(int event) override {return this->HandleEvent(event, *this);}
-    int32 HandleControl(int32 event) override {
-      if (event != FL_PAINT)
-        return this->Fl_Widget::handle(event);
-      //this->Fl_Widget::draw();
-      return 1;
-    }
-    const Fl_Widget& ToWidget() const override {return *this;}
-    Fl_Widget& ToWidget() override {return *this;}
-  };
-
-  static void CloseForm(Fl_Widget* widget, void* param);
-
-  class FlForm : public FlWidget, public Fl_Double_Window {
-  public:
-    FlForm(int32 x, int32 y, int32 w, int32 h, const char* t) : Fl_Double_Window(x, y, w, h, t) {
-      this->callback(CloseForm, this);
-    }
-    void draw() override {this->Draw(*this);}
-    int handle(int event) override {return this->HandleEvent(event, *this);}
-    int32 HandleControl(int32 event) override {
-      if (event != FL_PAINT)
-        return this->Fl_Double_Window::handle(event);
-      this->Fl_Double_Window::draw();
-      return 1;
-    }
-    const Fl_Widget& ToWidget() const override {return *this;}
-    Fl_Widget& ToWidget() override {return *this;}
-  };
-
-  static void CloseForm(Fl_Widget* widget, void* param) {
-    ((FlForm*)param)->Close(*((FlForm*)param));
-  }
-  
-  class FlLabel : public FlWidget, public Fl_Box {
-  public:
-    FlLabel(int32 x, int32 y, int32 w, int32 h, const char* t) : Fl_Box(x, y, w, h, t) {}
-    void draw() override {this->Draw(*this);}
-    int handle(int event) override {return this->HandleEvent(event, *this);}
-    int32 HandleControl(int32 event) override {
-      if (event != FL_PAINT)
-        return this->Fl_Box::handle(event);
-      this->Fl_Box::draw();
-      return 1;
-    }
-    const Fl_Widget& ToWidget() const override {return *this;}
-    Fl_Widget& ToWidget() override {return *this;}
-  };
-  
-  class FlPanel : public FlWidget, public Fl_Scroll {
-  public:
-    FlPanel(int32 x, int32 y, int32 w, int32 h, const char* t) : Fl_Scroll(x, y, w, h, t) {}
-    void draw() override {this->Draw(*this);}
-    int handle(int event) override {return this->HandleEvent(event, *this);}
-    int32 HandleControl(int32 event) override {
-      if (event != FL_PAINT)
-        return this->Fl_Scroll::handle(event);
-      this->Fl_Scroll::draw();
-      return 1;
-    }
-    const Fl_Widget& ToWidget() const override {return *this;}
-    Fl_Widget& ToWidget() override {return *this;}
-  };
-  
-  class FlProgressBar : public FlWidget, public Fl_Progress {
-  public:
-    FlProgressBar(int32 x, int32 y, int32 w, int32 h, const char* t) : Fl_Progress(x, y, w, h, t) {}
-    void draw() override {this->Draw(*this);}
-    int handle(int event) override {return this->HandleEvent(event, *this);}
-    int32 HandleControl(int32 event) override {
-      if (event != FL_PAINT)
-        return this->Fl_Progress::handle(event);
-      this->Fl_Progress::draw();
-      return 1;
-    }
-    const Fl_Widget& ToWidget() const override {return *this;}
-    Fl_Widget& ToWidget() override {return *this;}
-  };
-
-  class FlRadioButton : public FlWidget, public Fl_Round_Button {
-  public:
-    FlRadioButton(int32 x, int32 y, int32 w, int32 h, const char* t) : Fl_Round_Button(x, y, w, h, t) {}
-    void draw() override {this->Draw(*this);}
-    int handle(int event) override {return this->HandleEvent(event, *this);}
-    int32 HandleControl(int32 event) override {
-      if (event != FL_PAINT)
-        return this->Fl_Round_Button::handle(event);
-      this->Fl_Round_Button::draw();
-      return 1;
-    }
-    const Fl_Widget& ToWidget() const override {return *this;}
-    Fl_Widget& ToWidget() override {return *this;}
-  };
 }
 
 template<typename T, typename TControl>
@@ -447,6 +319,26 @@ T* CreateControl(const TControl& control) {
   return handle;
 }
 
+//________________________________________________________________________________________________________
+//                                                                                                  Button
+
+namespace {
+  class FlButton : public FlWidget, public Fl_Button {
+  public:
+    FlButton(int32 x, int32 y, int32 w, int32 h, const char* t) : Fl_Button(x, y, w, h, t) {}
+    void draw() override {this->Draw(*this);}
+    int handle(int event) override {return this->HandleEvent(event, *this);}
+    int32 HandleControl(int32 event) override {
+      if (event != FL_PAINT)
+        return this->Fl_Button::handle(event);
+      this->Fl_Button::draw();
+      return 1;
+    }
+    const Fl_Widget& ToWidget() const override {return *this;}
+    Fl_Widget& ToWidget() override {return *this;}
+  };
+}
+
 intptr FormsApi::Button::Create(const System::Windows::Forms::Button& button) {
   FlButton* handle = CreateControl<FlButton>(button);
   handle->align(FL_ALIGN_CENTER | FL_ALIGN_INSIDE | FL_ALIGN_CLIP | FL_ALIGN_WRAP);
@@ -456,6 +348,26 @@ intptr FormsApi::Button::Create(const System::Windows::Forms::Button& button) {
 }
 
 void FormsApi::Button::SetIsDefault(const System::Windows::Forms::Button& button) {
+}
+
+//________________________________________________________________________________________________________
+//                                                                                                checkBox
+
+namespace {
+  class FlCheckBox : public FlWidget, public Fl_Check_Button {
+  public:
+    FlCheckBox(int32 x, int32 y, int32 w, int32 h, const char* t) : Fl_Check_Button(x, y, w, h, t) {}
+    void draw() override {this->Draw(*this);}
+    int handle(int event) override {return this->HandleEvent(event, *this);}
+    int32 HandleControl(int32 event) override {
+      if (event != FL_PAINT)
+        return this->Fl_Check_Button::handle(event);
+      this->Fl_Check_Button::draw();
+      return 1;
+    }
+    const Fl_Widget& ToWidget() const override {return *this;}
+    Fl_Widget& ToWidget() override {return *this;}
+  };
 }
 
 intptr FormsApi::CheckBox::Create(const System::Windows::Forms::CheckBox& checkBox) {
@@ -469,6 +381,26 @@ void FormsApi::CheckBox::SetAutoCheck(const System::Windows::Forms::CheckBox& ch
 
 void FormsApi::CheckBox::SetChecked(const System::Windows::Forms::CheckBox& checkBox) {
   ((Fl_Check_Button&)((FlWidget*)checkBox.Handle())->ToWidget()).value(checkBox.Checked);
+}
+
+//________________________________________________________________________________________________________
+//                                                                                                 Control
+
+namespace {
+  class FlControl : public FlWidget, public Fl_Widget {
+  public:
+    FlControl(int32 x, int32 y, int32 w, int32 h, const char* t) : Fl_Widget(x, y, w, h, t) {}
+    void draw() override {this->Draw(*this);}
+    int handle(int event) override {return this->HandleEvent(event, *this);}
+    int32 HandleControl(int32 event) override {
+      if (event != FL_PAINT)
+        return this->Fl_Widget::handle(event);
+      //this->Fl_Widget::draw();
+      return 1;
+    }
+    const Fl_Widget& ToWidget() const override {return *this;}
+    Fl_Widget& ToWidget() override {return *this;}
+  };
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Control& control) {
@@ -577,6 +509,34 @@ void FormsApi::Control::SetVisible(const System::Windows::Forms::Control& contro
   ((FlWidget*)control.Handle())->ToWidget().show();
 }
 
+//________________________________________________________________________________________________________
+//                                                                                                    Form
+
+namespace {
+  static void CloseForm(Fl_Widget* widget, void* param);
+  
+  class FlForm : public FlWidget, public Fl_Double_Window {
+  public:
+    FlForm(int32 x, int32 y, int32 w, int32 h, const char* t) : Fl_Double_Window(x, y, w, h, t) {
+      this->callback(CloseForm, this);
+    }
+    void draw() override {this->Draw(*this);}
+    int handle(int event) override {return this->HandleEvent(event, *this);}
+    int32 HandleControl(int32 event) override {
+      if (event != FL_PAINT)
+        return this->Fl_Double_Window::handle(event);
+      this->Fl_Double_Window::draw();
+      return 1;
+    }
+    const Fl_Widget& ToWidget() const override {return *this;}
+    Fl_Widget& ToWidget() override {return *this;}
+  };
+  
+  static void CloseForm(Fl_Widget* widget, void* param) {
+    ((FlForm*)param)->Close(*((FlForm*)param));
+  }
+}
+
 void FormsApi::Form::Close(const System::Windows::Forms::Form& form) {
 }
 
@@ -589,10 +549,50 @@ intptr FormsApi::Form::Create(const System::Windows::Forms::Form& form) {
   return (intptr)handle;
 }
 
+//________________________________________________________________________________________________________
+//                                                                                                   Label
+
+namespace {
+  class FlLabel : public FlWidget, public Fl_Box {
+  public:
+    FlLabel(int32 x, int32 y, int32 w, int32 h, const char* t) : Fl_Box(x, y, w, h, t) {}
+    void draw() override {this->Draw(*this);}
+    int handle(int event) override {return this->HandleEvent(event, *this);}
+    int32 HandleControl(int32 event) override {
+      if (event != FL_PAINT)
+        return this->Fl_Box::handle(event);
+      this->Fl_Box::draw();
+      return 1;
+    }
+    const Fl_Widget& ToWidget() const override {return *this;}
+    Fl_Widget& ToWidget() override {return *this;}
+  };
+}
+
 intptr FormsApi::Label::Create(const System::Windows::Forms::Label& label) {
   FlLabel* handle = CreateControl<FlLabel>(label);
   handle->box(FL_FLAT_BOX);
   return (intptr)handle;
+}
+
+//________________________________________________________________________________________________________
+//                                                                                                   Panel
+
+namespace {
+  class FlPanel : public FlWidget, public Fl_Scroll {
+  public:
+    FlPanel(int32 x, int32 y, int32 w, int32 h, const char* t) : Fl_Scroll(x, y, w, h, t) {}
+    void draw() override {this->Draw(*this);}
+    int handle(int event) override {return this->HandleEvent(event, *this);}
+    int32 HandleControl(int32 event) override {
+      if (event != FL_PAINT)
+        return this->Fl_Scroll::handle(event);
+      this->Fl_Scroll::draw();
+      return 1;
+    }
+    const Fl_Widget& ToWidget() const override {return *this;}
+    Fl_Widget& ToWidget() override {return *this;}
+  };
 }
 
 intptr FormsApi::Panel::Create(const System::Windows::Forms::Panel& panel) {
@@ -606,6 +606,26 @@ void FormsApi::Panel::SetBorderStyle(const System::Windows::Forms::Panel &panel)
     case System::Windows::Forms::BorderStyle::FixedSingle: ((FlPanel*)panel.Handle())->box(panel.BackColor == Color::Transparent ? FL_BORDER_FRAME : FL_BORDER_BOX); break;
     case System::Windows::Forms::BorderStyle::Fixed3D: ((FlPanel*)panel.Handle())->box(panel.BackColor == Color::Transparent ? FL_DOWN_FRAME : FL_DOWN_BOX); break;
   }
+}
+
+//________________________________________________________________________________________________________
+//                                                                                             ProgressBar
+
+namespace  {
+  class FlProgressBar : public FlWidget, public Fl_Progress {
+  public:
+    FlProgressBar(int32 x, int32 y, int32 w, int32 h, const char* t) : Fl_Progress(x, y, w, h, t) {}
+    void draw() override {this->Draw(*this);}
+    int handle(int event) override {return this->HandleEvent(event, *this);}
+    int32 HandleControl(int32 event) override {
+      if (event != FL_PAINT)
+        return this->Fl_Progress::handle(event);
+      this->Fl_Progress::draw();
+      return 1;
+    }
+    const Fl_Widget& ToWidget() const override {return *this;}
+    Fl_Widget& ToWidget() override {return *this;}
+  };
 }
 
 intptr FormsApi::ProgressBar::Create(const System::Windows::Forms::ProgressBar& progressBar) {
@@ -628,6 +648,26 @@ void FormsApi::ProgressBar::SetStyle(const System::Windows::Forms::ProgressBar &
 
 void FormsApi::ProgressBar::SetValue(const System::Windows::Forms::ProgressBar &progressBar) {
   ((Fl_Progress&)((FlWidget*)progressBar.Handle())->ToWidget()).value(progressBar.Value);
+}
+
+//________________________________________________________________________________________________________
+//                                                                                             RadioButton
+
+namespace {
+  class FlRadioButton : public FlWidget, public Fl_Round_Button {
+  public:
+    FlRadioButton(int32 x, int32 y, int32 w, int32 h, const char* t) : Fl_Round_Button(x, y, w, h, t) {}
+    void draw() override {this->Draw(*this);}
+    int handle(int event) override {return this->HandleEvent(event, *this);}
+    int32 HandleControl(int32 event) override {
+      if (event != FL_PAINT)
+        return this->Fl_Round_Button::handle(event);
+      this->Fl_Round_Button::draw();
+      return 1;
+    }
+    const Fl_Widget& ToWidget() const override {return *this;}
+    Fl_Widget& ToWidget() override {return *this;}
+  };
 }
 
 intptr FormsApi::RadioButton::Create(const System::Windows::Forms::RadioButton& radioButton) {
