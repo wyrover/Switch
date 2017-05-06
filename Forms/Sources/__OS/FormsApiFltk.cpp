@@ -3,6 +3,7 @@
 #include <Pcf/System/Collections/Generic/SortedDictionary.h>
 #include <Pcf/System/Console.h>
 #include <Pcf/System/Delegate.h>
+#include <Pcf/System/Drawing/SystemColors.h>
 #include <Pcf/System/NotImplementedException.h>
 #include "../../Includes/Pcf/System/Windows/Forms/Application.h"
 #include "../../Includes/Pcf/System/Windows/Forms/Control.h"
@@ -17,7 +18,9 @@
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_File_Icon.H>
 #include <FL/Fl_Pixmap.H>
+#include <FL/Fl_Progress.H>
 #include <FL/Fl_Round_Button.H>
+#include <FL/Fl_Scroll.H>
 #include <FL/Fl_Text_Buffer.H>
 #include <FL/Fl_Window.H>
 
@@ -404,7 +407,7 @@ namespace {
   static void CloseForm(Fl_Widget* widget, void* param) {
     ((FlForm*)param)->Close(*((FlForm*)param));
   }
-
+  
   class FlLabel : public FlWidget, public Fl_Box {
   public:
     FlLabel(int32 x, int32 y, int32 w, int32 h, const char* t) : Fl_Box(x, y, w, h, t) {}
@@ -414,6 +417,36 @@ namespace {
       if (event != FL_PAINT)
         return this->Fl_Box::handle(event);
       this->Fl_Box::draw();
+      return 1;
+    }
+    const Fl_Widget& ToWidget() const override {return *this;}
+    Fl_Widget& ToWidget() override {return *this;}
+  };
+  
+  class FlPanel : public FlWidget, public Fl_Scroll {
+  public:
+    FlPanel(int32 x, int32 y, int32 w, int32 h, const char* t) : Fl_Scroll(x, y, w, h, t) {}
+    void draw() override {this->Draw(*this);}
+    int handle(int event) override {return this->HandleEvent(event, *this);}
+    int32 HandleControl(int32 event) override {
+      if (event != FL_PAINT)
+        return this->Fl_Scroll::handle(event);
+      this->Fl_Scroll::draw();
+      return 1;
+    }
+    const Fl_Widget& ToWidget() const override {return *this;}
+    Fl_Widget& ToWidget() override {return *this;}
+  };
+  
+  class FlProgressBar : public FlWidget, public Fl_Progress {
+  public:
+    FlProgressBar(int32 x, int32 y, int32 w, int32 h, const char* t) : Fl_Progress(x, y, w, h, t) {}
+    void draw() override {this->Draw(*this);}
+    int handle(int event) override {return this->HandleEvent(event, *this);}
+    int32 HandleControl(int32 event) override {
+      if (event != FL_PAINT)
+        return this->Fl_Progress::handle(event);
+      this->Fl_Progress::draw();
       return 1;
     }
     const Fl_Widget& ToWidget() const override {return *this;}
@@ -548,14 +581,13 @@ void FormsApi::Application::Stop() {
   Fl::remove_handler(ApplicationHandler);
 }
 
-void FormsApi::Control::Close(const System::Windows::Forms::Form& form) {
-}
-
 template<typename T, typename TControl>
 T* CreateControl(const TControl& control) {
-  T* handle = new T(control.Location().X, control.Location().Y, control.Size().Width, control.Size().Height, control.Text().c_str());
-  handle->color(FromColor(control.BackColor()));
-  handle->labelcolor(FromColor(control.ForeColor()));
+  System::Drawing::Point offset;
+  if (control.Parent() != null && !is<System::Windows::Forms::Form>(control.Parent()))
+    offset = control.Parent()().Location;
+    
+  T* handle = new T(offset.X + control.Location().X, offset.Y + control.Location().Y, control.Size().Width, control.Size().Height, control.Text().c_str());
   handle->labelsize(defaultTextSize);
   handle->align(FL_ALIGN_LEFT | FL_ALIGN_INSIDE | FL_ALIGN_CLIP | FL_ALIGN_WRAP);
   defWindowProcs.Add((intptr)handle, {*handle, &T::HandleControl});
@@ -564,39 +596,29 @@ T* CreateControl(const TControl& control) {
   return handle;
 }
 
-intptr FormsApi::Control::Create(const System::Windows::Forms::Button& button) {
+intptr FormsApi::Button::Create(const System::Windows::Forms::Button& button) {
   FlButton* handle = CreateControl<FlButton>(button);
   handle->align(FL_ALIGN_CENTER | FL_ALIGN_INSIDE | FL_ALIGN_CLIP | FL_ALIGN_WRAP);
   return (intptr)handle;
 }
 
-intptr FormsApi::Control::Create(const System::Windows::Forms::CheckBox& checkBox) {
+void FormsApi::Button::SetIsDefault(const System::Windows::Forms::Button& button) {
+}
+
+intptr FormsApi::CheckBox::Create(const System::Windows::Forms::CheckBox& checkBox) {
   FlCheckBox* handle = CreateControl<FlCheckBox>(checkBox);
   return (intptr)handle;
 }
 
+void FormsApi::CheckBox::SetAutoCheck(const System::Windows::Forms::CheckBox& checkBox) {
+}
+
+void FormsApi::CheckBox::SetChecked(const System::Windows::Forms::CheckBox& checkBox) {
+  ((Fl_Check_Button&)((FlWidget*)checkBox.Handle())->ToWidget()).value(checkBox.Checked);
+}
+
 intptr FormsApi::Control::Create(const System::Windows::Forms::Control& control) {
   FlControl* handle = CreateControl<FlControl>(control);
-  return (intptr)handle;
-}
-
-intptr FormsApi::Control::Create(const System::Windows::Forms::Form& form) {
-  FlForm* handle = CreateControl<FlForm>(form);
-  handle->position(form.Location().X, form.Location().Y + SystemInformation::GetCaptionHeight());
-  handle->size(form.Size().Width, form.Size().Height - SystemInformation::GetCaptionHeight());
-  handle->resizable(handle);
-  handle->align(FL_ALIGN_CENTER | FL_ALIGN_INSIDE | FL_ALIGN_CLIP | FL_ALIGN_WRAP);
-  return (intptr)handle;
-}
-
-intptr FormsApi::Control::Create(const System::Windows::Forms::Label& label) {
-  FlLabel* handle = CreateControl<FlLabel>(label);
-  handle->box(FL_FLAT_BOX);
-  return (intptr)handle;
-}
-
-intptr FormsApi::Control::Create(const System::Windows::Forms::RadioButton& radioButton) {
-  FlRadioButton* handle = CreateControl<FlRadioButton>(radioButton);
   return (intptr)handle;
 }
 
@@ -606,15 +628,19 @@ void FormsApi::Control::DefWndProc(System::Windows::Forms::Message& message) {
 }
 
 void FormsApi::Control::Destroy(const System::Windows::Forms::Control& control) {
-  if (control.data().handle != IntPtr::Zero) {
+  if (control.Handle != IntPtr::Zero) {
     if (is<System::Windows::Forms::ContainerControl>(control)) {
-      for (int index = 0; index < ((Fl_Group&)((FlWidget*)control.data().handle)->ToWidget()).children(); index++)
-        ((Fl_Group&)((FlWidget*)control.data().handle)->ToWidget()).remove(index);
+      for (int index = 0; index < ((Fl_Group&)((FlWidget*)control.Handle())->ToWidget()).children(); index++)
+        ((Fl_Group&)((FlWidget*)control.Handle())->ToWidget()).remove(index);
     }
-    Message message = Message::Create((intptr)control.data().handle, WM_DESTROY, 0, 0, 0, FL_NO_EVENT);
+    Message message = Message::Create((intptr)control.Handle, WM_DESTROY, 0, 0, 0, FL_NO_EVENT);
     const_cast<System::Windows::Forms::Control&>(control).WndProc(message);
-    delete (FlWidget*)control.data().handle;
+    delete (FlWidget*)control.Handle();
   }
+}
+
+System::Drawing::Size FormsApi::Control::GetClientSize(const System::Windows::Forms::Control &control) {
+  return {};
 }
 
 intptr FormsApi::Control::GetHandleWindowFromDeviceContext(intptr hdc) {
@@ -635,37 +661,109 @@ System::Drawing::Point FormsApi::Control::PointToScreen(const System::Windows::F
   return {};
 }
 
-void FormsApi::Control::SetBackColor(intptr hdc, const System::Drawing::Color& color) {
-  ((FlWidget*)hdc)->ToWidget().color(FromColor(color));
+void FormsApi::Control::SetBackColor(intptr hdc) {
+  ((FlWidget*)hdc)->ToWidget().color(FromColor(System::Windows::Forms::Control::FromHandle(GetHandleWindowFromDeviceContext(hdc))().BackColor));
 }
 
-void FormsApi::Control::SetForeColor(intptr hdc, const System::Drawing::Color& color) {
-  ((FlWidget*)hdc)->ToWidget().labelcolor(FromColor(color));
+void FormsApi::Control::SetForeColor(intptr hdc) {
+  ((FlWidget*)hdc)->ToWidget().labelcolor(FromColor(System::Windows::Forms::Control::FromHandle(GetHandleWindowFromDeviceContext(hdc))().ForeColor));
 }
 
 void FormsApi::Control::SetBackColor(const System::Windows::Forms::Control& control) {
-  if (control.data().handle != IntPtr::Zero)
-    ((FlWidget*)control.data().handle)->ToWidget().color(FromColor(control.BackColor()));
+    ((FlWidget*)control.Handle())->ToWidget().color(FromColor(control.BackColor()));
+}
+
+void FormsApi::Control::SetClientSize(System::Windows::Forms::Control &control, const System::Drawing::Size &clientSize) {
 }
 
 void FormsApi::Control::SetForeColor(const System::Windows::Forms::Control& control) {
-  if (control.data().handle != IntPtr::Zero)
-    ((FlWidget*)control.data().handle)->ToWidget().labelcolor(FromColor(control.ForeColor()));
+    ((FlWidget*)control.Handle())->ToWidget().labelcolor(FromColor(control.ForeColor()));
 }
 
 void FormsApi::Control::SetLocation(const System::Windows::Forms::Control& control) {
+}
+
+void FormsApi::Control::SetParent(const System::Windows::Forms::Control& control) {
+  if (((Fl_Group&)((FlWidget*)control.Handle())->ToWidget()).parent() != null)
+    ((FlWidget*)control.Handle())->ToWidget().parent()->remove(((FlWidget*)control.Handle())->ToWidget());
+  if (control.Parent() != null)
+    ((Fl_Group&)((FlWidget*)control.Parent()().Handle())->ToWidget()).add(((FlWidget*)control.Handle())->ToWidget());
 }
 
 void FormsApi::Control::SetSize(const System::Windows::Forms::Control& control) {
 }
 
 void FormsApi::Control::SetText(const System::Windows::Forms::Control& control) {
-  if (control.data().handle != IntPtr::Zero)
-    ((FlWidget*)control.data().handle)->ToWidget().copy_label(control.Text().c_str());
+    ((FlWidget*)control.Handle())->ToWidget().copy_label(control.Text().c_str());
 }
 
 void FormsApi::Control::SetVisible(const System::Windows::Forms::Control& control) {
-  ((FlWidget*)control.data().handle)->ToWidget().show();
+  ((FlWidget*)control.Handle())->ToWidget().show();
+}
+
+void FormsApi::Form::Close(const System::Windows::Forms::Form& form) {
+}
+
+intptr FormsApi::Form::Create(const System::Windows::Forms::Form& form) {
+  FlForm* handle = CreateControl<FlForm>(form);
+  handle->position(form.Location().X, form.Location().Y + SystemInformation::GetCaptionHeight());
+  handle->size(form.Size().Width, form.Size().Height - SystemInformation::GetCaptionHeight());
+  handle->resizable(handle);
+  handle->align(FL_ALIGN_CENTER | FL_ALIGN_INSIDE | FL_ALIGN_CLIP | FL_ALIGN_WRAP);
+  return (intptr)handle;
+}
+
+intptr FormsApi::Label::Create(const System::Windows::Forms::Label& label) {
+  FlLabel* handle = CreateControl<FlLabel>(label);
+  handle->box(FL_FLAT_BOX);
+  return (intptr)handle;
+}
+
+intptr FormsApi::Panel::Create(const System::Windows::Forms::Panel& panel) {
+  FlPanel* handle = CreateControl<FlPanel>(panel);
+  return (intptr)handle;
+}
+
+void FormsApi::Panel::SetBorderStyle(const System::Windows::Forms::Panel &panel) {
+  switch (panel.BorderStyle) {
+    case System::Windows::Forms::BorderStyle::None: ((FlPanel*)panel.Handle())->box(panel.BackColor == Color::Transparent ? FL_NO_BOX : FL_FLAT_BOX); break;
+    case System::Windows::Forms::BorderStyle::FixedSingle: ((FlPanel*)panel.Handle())->box(panel.BackColor == Color::Transparent ? FL_BORDER_FRAME : FL_BORDER_BOX); break;
+    case System::Windows::Forms::BorderStyle::Fixed3D: ((FlPanel*)panel.Handle())->box(panel.BackColor == Color::Transparent ? FL_DOWN_FRAME : FL_DOWN_BOX); break;
+  }
+}
+
+intptr FormsApi::ProgressBar::Create(const System::Windows::Forms::ProgressBar& progressBar) {
+  FlProgressBar* handle = CreateControl<FlProgressBar>(progressBar);
+  handle->selection_color(FromColor(System::Drawing::SystemColors::Highlight));
+  return (intptr)handle;
+}
+
+void FormsApi::ProgressBar::SetMaximum(const System::Windows::Forms::ProgressBar& progressBar) {
+  ((Fl_Progress&)((FlWidget*)progressBar.Handle())->ToWidget()).maximum(progressBar.Maximum);
+}
+
+void FormsApi::ProgressBar::SetMinimum(const System::Windows::Forms::ProgressBar &progressBar) {
+  ((Fl_Progress&)((FlWidget*)progressBar.Handle())->ToWidget()).minimum(progressBar.Minimum);
+}
+
+void FormsApi::ProgressBar::SetStyle(const System::Windows::Forms::ProgressBar &progressBar) {
+  
+}
+
+void FormsApi::ProgressBar::SetValue(const System::Windows::Forms::ProgressBar &progressBar) {
+  ((Fl_Progress&)((FlWidget*)progressBar.Handle())->ToWidget()).value(progressBar.Value);
+}
+
+intptr FormsApi::RadioButton::Create(const System::Windows::Forms::RadioButton& radioButton) {
+  FlRadioButton* handle = CreateControl<FlRadioButton>(radioButton);
+  return (intptr)handle;
+}
+
+void FormsApi::RadioButton::SetAutoCheck(const System::Windows::Forms::RadioButton& radioButton) {
+}
+
+void FormsApi::RadioButton::SetChecked(const System::Windows::Forms::RadioButton& radioButton) {
+  ((Fl_Round_Button&)((FlWidget*)radioButton.Handle())->ToWidget()).value(radioButton.Checked);
 }
 
 #endif
