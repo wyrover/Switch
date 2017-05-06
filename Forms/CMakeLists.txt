@@ -103,6 +103,7 @@ set(INCLUDE_FILES
 )
 
 set(SOURCE_FILES
+  Sources/__OS/ApplicationFltk.cpp
   Sources/__OS/ApplicationWin32.cpp
   Sources/__OS/ButtonWin32.cpp
   Sources/__OS/CheckBoxWin32.cpp

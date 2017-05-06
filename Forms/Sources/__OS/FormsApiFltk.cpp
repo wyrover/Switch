@@ -1,22 +1,12 @@
 #if !defined(__use_native_interface__)
-#include <Pcf/System/Diagnostics/Debug.h>
-#include <Pcf/System/Collections/Generic/SortedDictionary.h>
-#include <Pcf/System/Console.h>
-#include <Pcf/System/Delegate.h>
-#include <Pcf/System/Drawing/SystemColors.h>
-#include <Pcf/System/NotImplementedException.h>
-#include "../../Includes/Pcf/System/Windows/Forms/Application.h"
-#include "../../Includes/Pcf/System/Windows/Forms/Control.h"
 #include "FormsApi.h"
 
 #include <FL/Fl.H>
-#include <FL/fl_ask.H>
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Button.H>
 #include <FL/Fl_Check_Button.H>
 #include <FL/fl_draw.H>
 #include <FL/Fl_Double_Window.H>
-#include <FL/Fl_File_Icon.H>
 #include <FL/Fl_Pixmap.H>
 #include <FL/Fl_Progress.H>
 #include <FL/Fl_Round_Button.H>
@@ -26,23 +16,12 @@
 
 #include <Pcf/Undef.h>
 
-#include "Exclamation.h"
-#include "Information.h"
-#include "Question.h"
-#include "Stop.h"
-
 using namespace System;
 using namespace System::Drawing;
 using namespace System::Windows::Forms;
 using namespace __OS;
 
 namespace {
-  static Fl_Pixmap exclamationIcon(Exclamation);
-  static Fl_Pixmap informationIcon(Information);
-  static Fl_Pixmap noneIcon(Information);
-  static Fl_Pixmap questionIcon(Question);
-  static Fl_Pixmap stopIcon(Stop);
-  static int32 exitCode = 0;
   static int32 defaultTextSize = 12;
   static System::Collections::Generic::SortedDictionary<intptr, delegate<int32, int32>> defWindowProcs;
   static const int32 FL_PAINT = 255;
@@ -53,22 +32,7 @@ namespace {
 
   static System::Windows::Forms::Keys GetKeyCode() {
     using namespace System::Windows::Forms;
-    System::Collections::Generic::SortedDictionary<int32, Keys> keys {
-      {FL_BackSpace, Keys::Back}, {FL_Tab, Keys::Tab}, {FL_Iso_Key, Keys::OemBackslash},{FL_Enter, Keys::Enter}, {FL_Pause, Keys::Pause}, {FL_Scroll_Lock, Keys::Scroll}, {FL_Escape, Keys::Escape},
-      {FL_Kana, Keys::Delete}, {FL_Eisu, Keys::Help}, {FL_Yen, Keys::D0}, {FL_JIS_Underscore, Keys::D1}, {FL_Home, Keys::Home}, {FL_Left, Keys::Left}, {FL_Up, Keys::Up}, {FL_Right, Keys::Right},
-      {FL_Down, Keys::Down}, {FL_Page_Up, Keys::PageUp}, {FL_Page_Down, Keys::PageDown}, {FL_End, Keys::End}, {FL_Print, Keys::PrintScreen}, {FL_Insert, Keys::Insert}, {FL_Menu, Keys::Menu},
-      {FL_Help, Keys::Help}, {FL_Num_Lock, Keys::NumLock}, {FL_KP + 0, Keys::NumPad0}, {FL_KP + 1, Keys::NumPad1}, {FL_KP + 2, Keys::NumPad2}, {FL_KP + 3, Keys::NumPad3}, {FL_KP + 4, Keys::NumPad4},
-      {FL_KP + 5, Keys::NumPad5}, {FL_KP + 6, Keys::NumPad6}, {FL_KP + 7, Keys::NumPad7}, {FL_KP + 8, Keys::NumPad8}, {FL_KP + 9, Keys::NumPad9}, {FL_KP_Enter, Keys::Enter}, {FL_F+1, Keys::F1},
-      {FL_F+2, Keys::F2}, {FL_F+3, Keys::F3}, {FL_F+4, Keys::F4}, {FL_F+5, Keys::F5}, {FL_F+6, Keys::F6}, {FL_F+7, Keys::F7}, {FL_F+8, Keys::F8}, {FL_F+9, Keys::F9}, {FL_F+10, Keys::F10},
-      {FL_F+11, Keys::F11}, {FL_F+12, Keys::F12}, {FL_F+13, Keys::F13}, {FL_F+14, Keys::F14}, {FL_F+15, Keys::F15}, {FL_F+16, Keys::F16}, {FL_F+17, Keys::F17}, {FL_F+18, Keys::F18}, {FL_F+19, Keys::F19},
-      {FL_F+20, Keys::F20}, {FL_F+21, Keys::F21}, {FL_F+22, Keys::F22}, {FL_F+23, Keys::F23}, {FL_F+24, Keys::F24}, {FL_Shift_L, Keys::ShiftKey /*Keys::LShiftKey*/}, {FL_Shift_R, Keys::ShiftKey /*Keys::RShiftKey*/},
-      {FL_Control_L, Keys::ControlKey /*Keys::LControlKey*/}, {FL_Control_R, Keys::ControlKey /*Keys::RControlKey*/}, {FL_Caps_Lock, Keys::CapsLock},
-      {FL_Meta_L, Keys::CommandKey /*Keys::LCommandKey*/}, {FL_Meta_R, Keys::CommandKey /*Keys::RCommandKey*/},
-      {FL_Alt_L, Keys::Alt /*KeysLAlt*/}, {FL_Alt_R, Keys::Alt /*Keys::RAlt*/}, {FL_Delete, Keys::Delete}, {0x0027, Keys::OemQuotes}, {0xFFAA, Keys::Multiply}, {0xFFAB, Keys::Add}, {0xFFAD, Keys::Subtract},
-      {0xFFAE, Keys::Decimal}, {0xFFAF, Keys::Divide}, {0xFFBD, Keys::Packet}, {0x0029, Keys::OemOpenBrackets}, {0x002C, Keys::Oemcomma}, {0x002D, Keys::OemMinus}, {0x002E, Keys::OemPeriod},
-      {0x002F, Keys::OemQuestion}, {0x003A, Keys::Oemtilde}, {0x003B, Keys::OemSemicolon}, {0x003C, Keys::OemBackslash}, {0x003D, Keys::Oemplus}, {0x005B, Keys::OemOpenBrackets}, {0x005C, Keys::OemPipe},
-      {0x005D, Keys::OemCloseBrackets}, {0x0060, Keys::Oemtilde}
-    };
+    System::Collections::Generic::SortedDictionary<int32, Keys> keys {{FL_BackSpace, Keys::Back}, {FL_Tab, Keys::Tab}, {FL_Iso_Key, Keys::OemBackslash},{FL_Enter, Keys::Enter}, {FL_Pause, Keys::Pause}, {FL_Scroll_Lock, Keys::Scroll}, {FL_Escape, Keys::Escape}, {FL_Kana, Keys::Delete}, {FL_Eisu, Keys::Help}, {FL_Yen, Keys::D0}, {FL_JIS_Underscore, Keys::D1}, {FL_Home, Keys::Home}, {FL_Left, Keys::Left}, {FL_Up, Keys::Up}, {FL_Right, Keys::Right}, {FL_Down, Keys::Down}, {FL_Page_Up, Keys::PageUp}, {FL_Page_Down, Keys::PageDown}, {FL_End, Keys::End}, {FL_Print, Keys::PrintScreen}, {FL_Insert, Keys::Insert}, {FL_Menu, Keys::Menu}, {FL_Help, Keys::Help}, {FL_Num_Lock, Keys::NumLock}, {FL_KP + 0, Keys::NumPad0}, {FL_KP + 1, Keys::NumPad1}, {FL_KP + 2, Keys::NumPad2}, {FL_KP + 3, Keys::NumPad3}, {FL_KP + 4, Keys::NumPad4}, {FL_KP + 5, Keys::NumPad5}, {FL_KP + 6, Keys::NumPad6}, {FL_KP + 7, Keys::NumPad7}, {FL_KP + 8, Keys::NumPad8}, {FL_KP + 9, Keys::NumPad9}, {FL_KP_Enter, Keys::Enter}, {FL_F+1, Keys::F1}, {FL_F+2, Keys::F2}, {FL_F+3, Keys::F3}, {FL_F+4, Keys::F4}, {FL_F+5, Keys::F5}, {FL_F+6, Keys::F6}, {FL_F+7, Keys::F7}, {FL_F+8, Keys::F8}, {FL_F+9, Keys::F9}, {FL_F+10, Keys::F10}, {FL_F+11, Keys::F11}, {FL_F+12, Keys::F12}, {FL_F+13, Keys::F13}, {FL_F+14, Keys::F14}, {FL_F+15, Keys::F15}, {FL_F+16, Keys::F16}, {FL_F+17, Keys::F17}, {FL_F+18, Keys::F18}, {FL_F+19, Keys::F19}, {FL_F+20, Keys::F20}, {FL_F+21, Keys::F21}, {FL_F+22, Keys::F22}, {FL_F+23, Keys::F23}, {FL_F+24, Keys::F24}, {FL_Shift_L, Keys::ShiftKey /*Keys::LShiftKey*/}, {FL_Shift_R, Keys::ShiftKey /*Keys::RShiftKey*/}, {FL_Control_L, Keys::ControlKey /*Keys::LControlKey*/}, {FL_Control_R, Keys::ControlKey /*Keys::RControlKey*/}, {FL_Caps_Lock, Keys::CapsLock}, {FL_Meta_L, Keys::CommandKey /*Keys::LCommandKey*/}, {FL_Meta_R, Keys::CommandKey /*Keys::RCommandKey*/}, {FL_Alt_L, Keys::Alt /*KeysLAlt*/}, {FL_Alt_R, Keys::Alt /*Keys::RAlt*/}, {FL_Delete, Keys::Delete}, {0x0027, Keys::OemQuotes}, {0xFFAA, Keys::Multiply}, {0xFFAB, Keys::Add}, {0xFFAD, Keys::Subtract}, {0xFFAE, Keys::Decimal}, {0xFFAF, Keys::Divide}, {0xFFBD, Keys::Packet}, {0x0029, Keys::OemOpenBrackets}, {0x002C, Keys::Oemcomma}, {0x002D, Keys::OemMinus}, {0x002E, Keys::OemPeriod}, {0x002F, Keys::OemQuestion}, {0x003A, Keys::Oemtilde}, {0x003B, Keys::OemSemicolon}, {0x003C, Keys::OemBackslash}, {0x003D, Keys::Oemplus}, {0x005B, Keys::OemOpenBrackets}, {0x005C, Keys::OemPipe}, {0x005D, Keys::OemCloseBrackets}, {0x0060, Keys::Oemtilde}};
 
     int32 key = Fl::event_key();
     if (Fl::event_ctrl() && key >= 'a' && key <= 'z')
@@ -467,121 +431,6 @@ namespace {
     const Fl_Widget& ToWidget() const override {return *this;}
     Fl_Widget& ToWidget() override {return *this;}
   };
-}
-
-bool FormsApi::Application::visualStylesEnabled = false;
-
-void FormsApi::Application::AddForm(const System::Windows::Forms::Form& form) {
-}
-
-void FormsApi::Application::Exit() {
-  Environment::Exit(exitCode);
-}
-
-void FormsApi::Application::MessageLoop(EventHandler idle) {
-  exitCode = Fl::run();
-}
-
-void FormsApi::Application::MessageBeep(MessageBoxIcon type) {
-  System::Collections::Generic::SortedDictionary<MessageBoxIcon, int32> beep = {{(MessageBoxIcon)0, FL_BEEP_DEFAULT}, {MessageBoxIcon::Error, FL_BEEP_ERROR}, {MessageBoxIcon::Question, FL_BEEP_QUESTION}, {MessageBoxIcon::Warning, FL_BEEP_MESSAGE}, {MessageBoxIcon::Information, FL_BEEP_NOTIFICATION}, {(MessageBoxIcon)0xFFFFFFFF, FL_BEEP_DEFAULT}};
-  fl_beep(beep[type]);
-}
-
-namespace {
-  DialogResult ShowMessageBoxAbortRetryIgnore(const string& message) {
-    int result = fl_choice("%s", "Abort", "Retry", "Ignore", message.c_str());
-    if (result == 0) return DialogResult::Abort;
-    if (result == 2) return DialogResult::Ignore;
-    return DialogResult::Retry;
-  }
-
-  DialogResult ShowMessageBoxOK(const string& message) {
-    fl_choice("%s", "OK", null, null, message.c_str());
-    return DialogResult::OK;
-  }
-
-  DialogResult ShowMessageBoxOKCancel(const string& message) {
-    int result = fl_choice("%s", "Cancel", "OK", null, message.c_str());
-    if (result == 0) return DialogResult::Cancel;
-    return DialogResult::OK;
-  }
-
-  DialogResult ShowMessageBoxRetryCancel(const string& message) {
-    int result = fl_choice("%s", "Cancel", "Retry", null, message.c_str());
-    if (result == 0) return DialogResult::Cancel;
-    return DialogResult::Retry;
-  }
-
-  DialogResult ShowMessageBoxYesNo(const string& message) {
-    int result = fl_choice("%s", "No", "Yes", null, message.c_str());
-    if (result == 0) return DialogResult::No;
-    return DialogResult::Yes;
-  }
-
-  DialogResult ShowMessageBoxYesNoCancel(const string& message) {
-    int result = fl_choice("%s", "No", "Yes", "Cancel", message.c_str());
-    if (result == 0) return DialogResult::No;
-    if (result == 2) return DialogResult::Cancel;
-    return DialogResult::Yes;
-  }
-}
-
-DialogResult FormsApi::Application::ShowMessageBox(const string& message, const string& caption, MessageBoxButtons buttons, MessageBoxIcon icon, MessageBoxDefaultButton defaultButton, MessageBoxOptions options, bool displayHelpButton) {
-  static System::Collections::Generic::SortedDictionary<MessageBoxButtons, delegate<DialogResult, const string&>> showMessageBox = {{MessageBoxButtons::AbortRetryIgnore, ShowMessageBoxAbortRetryIgnore}, {MessageBoxButtons::OK, ShowMessageBoxOK}, {MessageBoxButtons::OKCancel, ShowMessageBoxOKCancel}, {MessageBoxButtons::RetryCancel, ShowMessageBoxRetryCancel}, {MessageBoxButtons::YesNo, ShowMessageBoxYesNo}, {MessageBoxButtons::YesNoCancel, ShowMessageBoxYesNoCancel}};
-  static System::Collections::Generic::SortedDictionary<MessageBoxIcon, Fl_Pixmap*> messageBoxIcon = {{MessageBoxIcon::Exclamation, &exclamationIcon}, {MessageBoxIcon::Information, &informationIcon}, {MessageBoxIcon::None, &noneIcon}, {MessageBoxIcon::Question, &questionIcon}, {MessageBoxIcon::Stop, &stopIcon}};
-  fl_message_icon()->align(FL_ALIGN_TEXT_NEXT_TO_IMAGE);
-  fl_message_icon()->box(FL_NO_BOX);
-  fl_message_icon()->hide();
-  fl_message_icon()->label("");
-  Fl_Group* messageBox = fl_message_icon()->parent();
-  messageBox->color(FromColor(System::Drawing::Color::White));
-  messageBox->labelsize(defaultTextSize);
-  for (int index = 0; index < messageBox->children(); index++) {
-    messageBox->child(index)->color(FromColor(System::Windows::Forms::Control::DefaultBackColor));
-    if (System::Environment::OSVersion().Platform == System::PlatformID::MacOSX)
-      messageBox->child(index)->selection_color(FromColor(System::Drawing::SystemColors::Highlight));
-    messageBox->child(index)->labelsize(defaultTextSize);
-  }
-
-  fl_message_title(caption.c_str());
-  fl_message_hotspot(false);
-  if (icon != MessageBoxIcon::None) {
-    fl_message_icon()->show();
-    fl_message_icon()->image(messageBoxIcon[icon]);
-  }
-  return showMessageBox[buttons](message);
-}
-
-namespace {
-  static int32 ApplicationHandler(int32 event) {
-    return event == FL_SHORTCUT && Fl::event_key() == FL_Escape ? 1 : 0;
-  }
-
-  static void DrawLabel(const Fl_Label *label, int left, int top, int width, int height, Fl_Align align) {
-    fl_font(label->font, label->size);
-    fl_color((Fl_Color)label->color);
-    fl_draw(label->value, left, top, width, height, align, label->image, 0 /*1 (default): replace patterns (like "@->") by symbols; 0: do not replace patterns by symbols*/);
-  }
-
-  static void MeasureLabel(const Fl_Label *label, int &width, int &height) {
-    fl_font(label->font, label->size);
-    fl_measure(label->value, width, height, 0 /*1 (default): replace patterns (like "@->") by symbols; 0: do not replace patterns by symbols*/);
-  }
-}
-
-void FormsApi::Application::Start() {
-  Fl_Window::default_xclass(System::IO::Path::GetFileName(System::Environment::GetCommandLineArgs()[0]).c_str());
-  Fl::set_labeltype(FL_NORMAL_LABEL, DrawLabel, MeasureLabel);
-  Fl::get_system_colors();
-  Fl_File_Icon::load_system_icons();
-  Fl::lock();
-  if (HasVisualStylesEnabled())
-    Fl::scheme("gtk+");
-  Fl::add_handler(ApplicationHandler);
-}
-
-void FormsApi::Application::Stop() {
-  Fl::remove_handler(ApplicationHandler);
 }
 
 template<typename T, typename TControl>
