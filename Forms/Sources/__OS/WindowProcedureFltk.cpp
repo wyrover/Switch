@@ -1,4 +1,4 @@
-#if !defined(__use_native_interface__)
+#if defined(__use_fltk_interface__)
 #include "WindowProcedureFltk.h"
 
 using namespace System;

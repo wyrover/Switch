@@ -1,4 +1,4 @@
-#if defined(__linux__) && defined(__use_native_interface__)
+#if (defined(__linux__) && defined(__use_native_interface__)) || defined(__use_gtk_interface__)
 #include <Pcf/System/Diagnostics/Debug.h>
 #include <Pcf/System/Collections/Generic/SortedDictionary.h>
 #include <Pcf/System/Console.h>
