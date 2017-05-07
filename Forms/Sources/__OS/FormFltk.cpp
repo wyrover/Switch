@@ -35,6 +35,7 @@ void FormsApi::Form::Close(const System::Windows::Forms::Form& form) {
 
 intptr FormsApi::Form::Create(const System::Windows::Forms::Form& form) {
   __OS::Form* handle = CreateControl<__OS::Form>(form);
+  handle->end();
   handle->position(form.Location().X, form.Location().Y + SystemInformation::GetCaptionHeight());
   handle->size(form.Size().Width, form.Size().Height - SystemInformation::GetCaptionHeight());
   handle->resizable(handle);

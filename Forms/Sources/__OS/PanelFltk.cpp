@@ -25,6 +25,7 @@ namespace __OS {
 
 intptr FormsApi::Panel::Create(const System::Windows::Forms::Panel& panel) {
   __OS::Panel* handle = CreateControl<__OS::Panel>(panel);
+  handle->end();
   return (intptr)handle;
 }
 
