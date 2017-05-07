@@ -120,9 +120,12 @@ set(SOURCE_FILES
   Sources/__OS/SystemInformationFltk.cpp
   Sources/__OS/SystemInformationGtk.cpp
   Sources/__OS/SystemInformationWin32.cpp
+  Sources/__OS/WidgetFltk.h
   Sources/__OS/WindowMessage.h
   Sources/__OS/WindowMessageKey.h
+  Sources/__OS/WindowProcedureFltk.cpp
   Sources/__OS/WindowProcedureWin32.cpp
+  Sources/__OS/WindowProcedureFltk.h
   Sources/__OS/WindowProcedureWin32.h
   Sources/Pcf/System/Media/SystemSound.cpp
   Sources/Pcf/System/Media/SystemSounds.cpp
