@@ -117,6 +117,10 @@ void FormsApi::Control::SetBackColor(intptr hdc) {
   if (control) {
     if (is<System::Windows::Forms::Form>(control)) {
       ((NSWindow*)control().Handle()).backgroundColor = CocoaApi::FromColor(control().BackColor);
+    } else if (is<System::Windows::Forms::Label>(control)) {
+      ((NSTextField*)control().Handle()).backgroundColor = CocoaApi::FromColor(control().BackColor);
+    } else if (is<System::Windows::Forms::Panel>(control)) {
+      ((NSScrollView*)control().Handle()).backgroundColor = CocoaApi::FromColor(control().BackColor);
     } else {
       [(NSControl*)control().Handle() setWantsLayer:YES];
       ((NSControl*)control().Handle()).layer.backgroundColor = CocoaApi::FromColor(control().BackColor).CGColor;
@@ -142,6 +146,8 @@ void FormsApi::Control::SetForeColor(intptr hdc) {
 void FormsApi::Control::SetBackColor(const System::Windows::Forms::Control& control) {
   if (is<System::Windows::Forms::Form>(control)) {
     ((NSWindow*)control.Handle()).backgroundColor = CocoaApi::FromColor(control.BackColor);
+  } else if (is<System::Windows::Forms::Label>(control)) {
+    ((NSTextField*)control.Handle()).backgroundColor = CocoaApi::FromColor(control.BackColor);
   } else if (is<System::Windows::Forms::Panel>(control)) {
     ((NSScrollView*)control.Handle()).backgroundColor = CocoaApi::FromColor(control.BackColor);
   } else {
