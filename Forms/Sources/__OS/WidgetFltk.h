@@ -32,13 +32,13 @@ namespace __OS {
     }
 
     virtual int32 HandleControl(int32 event) = 0;
-
+    
   private:
      int32 WndProc(System::Windows::Forms::Message& message) {
       ref<System::Windows::Forms::Control> control = System::Windows::Forms::Control::FromHandle(message.HWnd);
       if (control != null)
         control().WndProc(message);
-      return 1;
+      return (int32)message.Result();
     }
 
     int32 FlNoEvent(int32 event, Widget& control) {

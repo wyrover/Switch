@@ -11,15 +11,29 @@ namespace __OS {
   public:
     Button(int32 x, int32 y, int32 w, int32 h, const char* t) : Fl_Button(x, y, w, h, t) {}
     void draw() override {this->Draw(*this);}
-    int handle(int event) override {return this->HandleEvent(event, *this);}
+    int handle(int event) override {
+      if (this->isDefault && event == FL_SHORTCUT && (Fl::event_key() == FL_Enter || Fl::event_key() == FL_KP_Enter)) {
+        this->simulate_key_action();
+        this->do_callback();
+        return 1;
+      } else
+        return this->HandleEvent(event, *this);
+    }
+    
     int32 HandleControl(int32 event) override {
       if (event != FL_PAINT)
         return this->Fl_Button::handle(event);
       this->Fl_Button::draw();
       return 1;
     }
+    
     const Fl_Widget& ToWidget() const override {return *this;}
     Fl_Widget& ToWidget() override {return *this;}
+    
+    void SetIsDefault(bool isDefault) {this->isDefault = isDefault;}
+    
+  private:
+    bool isDefault = false;
   };
 }
 
@@ -32,6 +46,7 @@ intptr FormsApi::Button::Create(const System::Windows::Forms::Button& button) {
 }
 
 void FormsApi::Button::SetIsDefault(const System::Windows::Forms::Button& button) {
+  ((__OS::Button*)button.Handle())->SetIsDefault(button.IsDefault);
 }
 
 #endif

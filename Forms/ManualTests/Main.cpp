@@ -35,7 +35,7 @@ namespace PcfFormApp {
       radioButton1.Text = "Radio 1";
       radioButton1.Location = Point(10, 100);
       radioButton1.Checked = true;
-      radioButton1.Click += pcf_delegate(const object& sender, const EventArgs& e) {        if (checkBox.Checked && radioButton1.Checked)
+      radioButton1.Click += pcf_delegate(const object& sender, const EventArgs& e) {
         progressBar.Value = 50;
       };
 
@@ -51,8 +51,9 @@ namespace PcfFormApp {
       button.Name = "button";
       button.Text = "Click me";
       button.Location = Point(10, 160);
+      button.IsDefault = true;
       button.Click += pcf_delegate(const object& sender, const EventArgs& e) {
-        MessageBox::Show("Hello, World !", "Message", MessageBoxButtons::OK, MessageBoxIcon::Hand);
+        MessageBox::Show("Hello, World !", "Message", MessageBoxButtons::OKCancel, MessageBoxIcon::Hand);
       };
 
       Panel panel;

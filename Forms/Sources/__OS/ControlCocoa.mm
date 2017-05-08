@@ -133,6 +133,8 @@ void FormsApi::Control::SetClientSize(System::Windows::Forms::Control& control, 
   @autoreleasepool {
     if (is<System::Windows::Forms::Form>(control)) {
       [(NSWindow*)control.Handle() setContentSize:NSMakeSize(clientSize.Width(), clientSize.Height())];
+    } else  if (is<System::Windows::Forms::Button>(control)) {
+      [(NSWindow*)control.Handle() setContentSize:NSMakeSize(clientSize.Width + 12, clientSize.Height + 10)];
     } else {
       [(NSControl*)control.Handle() setFrameSize:NSMakeSize(clientSize.Width(), clientSize.Height())];
     }
@@ -162,7 +164,10 @@ void FormsApi::Control::SetForeColor(const System::Windows::Forms::Control& cont
 void FormsApi::Control::SetLocation(const System::Windows::Forms::Control& control) {
   @autoreleasepool {
     System::Drawing::Rectangle bounds = CocoaApi::GetBounds(control);
-    [(NSControl*)control.Handle() setFrameOrigin:NSMakePoint(bounds.X(), bounds.Y())];
+    if (is<System::Windows::Forms::Button>(control))
+      [(NSControl*)control.Handle() setFrameOrigin:NSMakePoint(bounds.X()-6, bounds.Y()-6)];
+    else
+      [(NSControl*)control.Handle() setFrameOrigin:NSMakePoint(bounds.X(), bounds.Y())];
   }
 }
 
@@ -175,6 +180,8 @@ void FormsApi::Control::SetSize(const System::Windows::Forms::Control& control) 
       System::Drawing::Rectangle bounds = CocoaApi::GetBounds(control);
       [(NSWindow*)control.Handle() setFrame:NSMakeRect(bounds.X(), bounds.Y(), bounds.Width(), bounds.Height()) display:YES];
       [(NSWindow*)control.Handle() setFrameTopLeftPoint:NSMakePoint(bounds.X(), bounds.Y())];
+    } else if (is<System::Windows::Forms::Button>(control)) {
+      [(NSControl*)control.Handle() setFrameSize:NSMakeSize(control.Width() + 12, control.Height() + 10)];
     } else {
       [(NSControl*)control.Handle() setFrameSize:NSMakeSize(control.Width(), control.Height())];
     }

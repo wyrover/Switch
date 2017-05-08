@@ -30,7 +30,7 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::Control& control)
 
 void FormsApi::Control::DefWndProc(System::Windows::Forms::Message& message) {
   if (defWindowProcs.ContainsKey(message.HWnd) && message.Handle() != FL_NO_EVENT)
-    message.Result = defWindowProcs[message.HWnd()]((int32_t)message.Handle);
+    message.Result = defWindowProcs[message.HWnd()]((int32)message.Handle);
 }
 
 void FormsApi::Control::Destroy(const System::Windows::Forms::Control& control) {
@@ -68,15 +68,26 @@ System::Drawing::Point FormsApi::Control::PointToScreen(const System::Windows::F
 }
 
 void FormsApi::Control::SetBackColor(intptr hdc) {
-  ((__OS::Widget*)hdc)->ToWidget().color(FromColor(System::Windows::Forms::Control::FromHandle(GetHandleWindowFromDeviceContext(hdc))().BackColor));
+  ref<System::Windows::Forms::Control> control = System::Windows::Forms::Control::FromHandle(GetHandleWindowFromDeviceContext(hdc));
+  if (is<System::Windows::Forms::Button>(control) && as<System::Windows::Forms::Button>(control)().IsDefault)
+    ((__OS::Widget*)control().Handle())->ToWidget().color(FromColor(System::Drawing::SystemColors::Highlight));
+  else
+  ((__OS::Widget*)hdc)->ToWidget().color(FromColor(control().BackColor));
 }
 
 void FormsApi::Control::SetForeColor(intptr hdc) {
-  ((__OS::Widget*)hdc)->ToWidget().labelcolor(FromColor(System::Windows::Forms::Control::FromHandle(GetHandleWindowFromDeviceContext(hdc))().ForeColor));
+  ref<System::Windows::Forms::Control> control = System::Windows::Forms::Control::FromHandle(GetHandleWindowFromDeviceContext(hdc));
+  if (is<System::Windows::Forms::Button>(control) && as<System::Windows::Forms::Button>(control)().IsDefault)
+    ((__OS::Widget*)control().Handle())->ToWidget().labelcolor(FromColor(System::Drawing::Color::White));
+  else
+    ((__OS::Widget*)hdc)->ToWidget().labelcolor(FromColor(control().ForeColor));
 }
 
 void FormsApi::Control::SetBackColor(const System::Windows::Forms::Control& control) {
-  ((__OS::Widget*)control.Handle())->ToWidget().color(FromColor(control.BackColor()));
+  if (is<System::Windows::Forms::Button>(control) && as<System::Windows::Forms::Button>(control).IsDefault)
+    ((__OS::Widget*)control.Handle())->ToWidget().color(FromColor(System::Drawing::SystemColors::Highlight));
+  else
+    ((__OS::Widget*)control.Handle())->ToWidget().color(FromColor(control.BackColor));
 }
 
 void FormsApi::Control::SetClientSize(System::Windows::Forms::Control &control, const System::Drawing::Size &clientSize) {
@@ -84,7 +95,10 @@ void FormsApi::Control::SetClientSize(System::Windows::Forms::Control &control, 
 }
 
 void FormsApi::Control::SetForeColor(const System::Windows::Forms::Control& control) {
-    ((__OS::Widget*)control.Handle())->ToWidget().labelcolor(FromColor(control.ForeColor()));
+  if (is<System::Windows::Forms::Button>(control) && as<System::Windows::Forms::Button>(control).IsDefault)
+    ((__OS::Widget*)control.Handle())->ToWidget().labelcolor(FromColor(System::Drawing::Color::White));
+  else
+    ((__OS::Widget*)control.Handle())->ToWidget().labelcolor(FromColor(control.ForeColor));
 }
 
 void FormsApi::Control::SetLocation(const System::Windows::Forms::Control& control) {
