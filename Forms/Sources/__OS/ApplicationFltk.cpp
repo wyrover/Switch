@@ -141,6 +141,8 @@ void FormsApi::Application::Start() {
   Fl_Window::default_xclass(System::IO::Path::GetFileName(System::Environment::GetCommandLineArgs()[0]).c_str());
   Fl::set_labeltype(FL_NORMAL_LABEL, DrawLabel, MeasureLabel);
   Fl::get_system_colors();
+  if (Environment::OSVersion().Platform == PlatformID::MacOSX)
+    Fl::set_color(FL_SELECTION_COLOR, 0x56, 0x96, 0xF5);
   Fl_File_Icon::load_system_icons();
   Fl::lock();
   if (HasVisualStylesEnabled())
