@@ -101,7 +101,7 @@ DialogResult FormsApi::Application::ShowMessageBox(const string& message, const 
   messageBox->color(FromColor(System::Drawing::Color::White));
   messageBox->labelsize(defaultTextSize);
   for (int index = 0; index < messageBox->children(); index++) {
-    if (is<Fl_Return_Button>(messageBox->child(index))) {
+    if (System::Environment::OSVersion().Platform == System::PlatformID::MacOSX && is<Fl_Return_Button>(messageBox->child(index))) {
       messageBox->child(index)->color(FromColor(System::Drawing::SystemColors::Highlight));
       messageBox->child(index)->labelcolor(FromColor(System::Drawing::Color::White));
     } else
