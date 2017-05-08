@@ -134,7 +134,7 @@ void FormsApi::Control::SetClientSize(System::Windows::Forms::Control& control, 
     if (is<System::Windows::Forms::Form>(control)) {
       [(NSWindow*)control.Handle() setContentSize:NSMakeSize(clientSize.Width(), clientSize.Height())];
     } else  if (is<System::Windows::Forms::Button>(control)) {
-      [(NSWindow*)control.Handle() setContentSize:NSMakeSize(clientSize.Width + 12, clientSize.Height + 10)];
+      [(NSWindow*)control.Handle() setContentSize:NSMakeSize(clientSize.Width + 12, clientSize.Height + 11)];
     } else {
       [(NSControl*)control.Handle() setFrameSize:NSMakeSize(clientSize.Width(), clientSize.Height())];
     }
@@ -181,7 +181,7 @@ void FormsApi::Control::SetSize(const System::Windows::Forms::Control& control) 
       [(NSWindow*)control.Handle() setFrame:NSMakeRect(bounds.X(), bounds.Y(), bounds.Width(), bounds.Height()) display:YES];
       [(NSWindow*)control.Handle() setFrameTopLeftPoint:NSMakePoint(bounds.X(), bounds.Y())];
     } else if (is<System::Windows::Forms::Button>(control)) {
-      [(NSControl*)control.Handle() setFrameSize:NSMakeSize(control.Width() + 12, control.Height() + 10)];
+      [(NSControl*)control.Handle() setFrameSize:NSMakeSize(control.Width() + 12, control.Height() + 11)];
     } else {
       [(NSControl*)control.Handle() setFrameSize:NSMakeSize(control.Width(), control.Height())];
     }
