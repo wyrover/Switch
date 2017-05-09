@@ -15,14 +15,21 @@ namespace __OS {
     virtual const Fl_Widget& ToWidget() const = 0;
     virtual Fl_Widget& ToWidget() = 0;
 
-    virtual const Fl_Group& Container() const {return as<Fl_Group>(this->ToWidget());}
-    virtual Fl_Group& Container() {return as<Fl_Group>(this->ToWidget());}
+    virtual void Color(Fl_Color color) = 0;
+    
+    virtual const Fl_Group& Container() const = 0;
+    virtual Fl_Group& Container() = 0;
 };
 
   class Widget : public IWidget {
   public:
     static const int32 notUsed = 0;
-
+    
+    void Color(Fl_Color color) override {this->ToWidget().color(color);}
+    
+    const Fl_Group& Container() const override {return as<Fl_Group>(this->ToWidget());}
+    Fl_Group& Container() override {return as<Fl_Group>(this->ToWidget());}
+    
     int32 Close(Widget& control) {
       return control.events[FL_CLOSE](FL_CLOSE, control);
     }

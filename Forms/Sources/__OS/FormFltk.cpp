@@ -16,10 +16,14 @@ namespace __OS {
   public:
     Form(int32 x, int32 y, int32 w, int32 h, const char* t) : Fl_Double_Window(x, y, w, h, t), container(0, 0, w, h, "") {
       this->add(container);
-      this->container.box(FL_NO_BOX);
       this->callback(CloseForm, this);
     }
 
+    void Color(Fl_Color color) override {
+      this->Fl_Double_Window::color(color);
+      this->container.color(color);
+    }
+    
     void draw() override {this->Draw(*this);}
     
     int handle(int event) override {return this->HandleEvent(event, *this);}
@@ -41,7 +45,7 @@ namespace __OS {
     static void CloseForm(Fl_Widget* widget, void* param) {
       ((__OS::Form*)param)->Close(*((__OS::Form*)param));
     }
-    Fl_Group container;
+    Fl_Scroll container;
   };
 }
 

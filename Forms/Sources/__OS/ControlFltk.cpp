@@ -74,9 +74,9 @@ System::Drawing::Point FormsApi::Control::PointToScreen(const System::Windows::F
 void FormsApi::Control::SetBackColor(intptr hdc) {
   ref<System::Windows::Forms::Control> control = System::Windows::Forms::Control::FromHandle(GetHandleWindowFromDeviceContext(hdc));
   if (System::Environment::OSVersion().Platform == System::PlatformID::MacOSX && is<System::Windows::Forms::Button>(control) && as<System::Windows::Forms::Button>(control)().IsDefault)
-    ((__OS::Widget*)control().Handle())->ToWidget().color(FromColor(System::Drawing::SystemColors::Highlight));
+    ((__OS::Widget*)control().Handle())->Color(FromColor(System::Drawing::SystemColors::Highlight));
   else
-  ((__OS::Widget*)hdc)->ToWidget().color(FromColor(control().BackColor));
+  ((__OS::Widget*)hdc)->Color(FromColor(control().BackColor));
 }
 
 void FormsApi::Control::SetForeColor(intptr hdc) {
@@ -89,9 +89,9 @@ void FormsApi::Control::SetForeColor(intptr hdc) {
 
 void FormsApi::Control::SetBackColor(const System::Windows::Forms::Control& control) {
   if (System::Environment::OSVersion().Platform == System::PlatformID::MacOSX && is<System::Windows::Forms::Button>(control) && as<System::Windows::Forms::Button>(control).IsDefault)
-    ((__OS::Widget*)control.Handle())->ToWidget().color(FromColor(System::Drawing::SystemColors::Highlight));
+    ((__OS::Widget*)control.Handle())->Color(FromColor(System::Drawing::SystemColors::Highlight));
   else
-    ((__OS::Widget*)control.Handle())->ToWidget().color(FromColor(control.BackColor));
+    ((__OS::Widget*)control.Handle())->Color(FromColor(control.BackColor));
 }
 
 void FormsApi::Control::SetClientSize(System::Windows::Forms::Control &control, const System::Drawing::Size &clientSize) {
