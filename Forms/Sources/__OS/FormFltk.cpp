@@ -2,6 +2,7 @@
 #include "WidgetFltk.h"
 
 #include <FL/Fl_Double_Window.H>
+#include <FL/Fl_Scroll.H>
 
 #include <Pcf/Undef.h>
 
@@ -13,7 +14,9 @@ using namespace __OS;
 namespace __OS {
   class Form : public __OS::Widget, public Fl_Double_Window {
   public:
-    Form(int32 x, int32 y, int32 w, int32 h, const char* t) : Fl_Double_Window(x, y, w, h, t) {
+    Form(int32 x, int32 y, int32 w, int32 h, const char* t) : Fl_Double_Window(x, y, w, h, t), panel(x, y, w, h, "") {
+      this->add(panel);
+      this->panel.box(FL_NO_BOX);
       this->callback(CloseForm, this);
     }
     void draw() override {this->Draw(*this);}
@@ -27,10 +30,14 @@ namespace __OS {
     const Fl_Widget& ToWidget() const override {return *this;}
     Fl_Widget& ToWidget() override {return *this;}
     
+    const Fl_Widget& Container() const override {return this->panel;}
+    Fl_Widget& Container() override {return this->panel;}
+    
   private:
     static void CloseForm(Fl_Widget* widget, void* param) {
       ((__OS::Form*)param)->Close(*((__OS::Form*)param));
     }
+    Fl_Scroll panel;
   };
 }
 
@@ -41,7 +48,7 @@ intptr FormsApi::Form::Create(const System::Windows::Forms::Form& form) {
   __OS::Form* handle = CreateControl<__OS::Form>(form);
   handle->position(form.Location().X, form.Location().Y + SystemInformation::GetCaptionHeight());
   handle->size(form.Size().Width, form.Size().Height - SystemInformation::GetCaptionHeight());
-  handle->resizable(handle);
+  handle->resizable(handle->Container());
   handle->align(FL_ALIGN_CENTER | FL_ALIGN_INSIDE | FL_ALIGN_CLIP | FL_ALIGN_WRAP);
   handle->end();
   return (intptr)handle;

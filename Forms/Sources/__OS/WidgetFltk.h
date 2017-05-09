@@ -13,7 +13,10 @@ namespace __OS {
   public:
     virtual const Fl_Widget& ToWidget() const = 0;
     virtual Fl_Widget& ToWidget() = 0;
-  };
+
+    virtual const Fl_Widget& Container() const {return this->ToWidget();}
+    virtual Fl_Widget& Container() {return this->ToWidget();}
+};
 
   class Widget : public IWidget {
   public:
