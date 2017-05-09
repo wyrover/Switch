@@ -1,7 +1,7 @@
 #if defined(__use_fltk_interface__)
 #include "WidgetFltk.h"
 
-#include <FL/fl_Group.H>
+#include <FL/Fl_Group.H>
 
 #include <Pcf/Undef.h>
 
