@@ -15,6 +15,7 @@ namespace __OS {
   class Form : public __OS::Widget, public Fl_Double_Window {
   public:
     Form(int32 x, int32 y, int32 w, int32 h, const char* t) : Fl_Double_Window(x, y, w, h, t), container(0, 0, w, h, "") {
+      this->end();
       this->add(container);
       this->callback(CloseForm, this);
     }
@@ -54,11 +55,8 @@ void FormsApi::Form::Close(const System::Windows::Forms::Form& form) {
 
 intptr FormsApi::Form::Create(const System::Windows::Forms::Form& form) {
   __OS::Form* handle = CreateControl<__OS::Form>(form);
-  handle->position(form.Location().X, form.Location().Y + SystemInformation::GetCaptionHeight());
-  handle->size(form.Size().Width, form.Size().Height - SystemInformation::GetCaptionHeight());
   handle->resizable(handle->Container());
   handle->align(FL_ALIGN_CENTER | FL_ALIGN_INSIDE | FL_ALIGN_CLIP | FL_ALIGN_WRAP);
-  handle->end();
   return (intptr)handle;
 }
 

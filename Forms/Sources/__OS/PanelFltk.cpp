@@ -13,7 +13,7 @@ using namespace __OS;
 namespace __OS {
   class Panel : public __OS::Widget, public Fl_Scroll {
   public:
-    Panel(int32 x, int32 y, int32 w, int32 h, const char* t) : Fl_Scroll(x, y, w, h, t) {}
+    Panel(int32 x, int32 y, int32 w, int32 h, const char* t) : Fl_Scroll(x, y, w, h, t) {this->end();}
     void draw() override {this->Draw(*this);}
     int handle(int event) override {return this->HandleEvent(event, *this);}
     int32 HandleControl(int32 event) override {
@@ -29,7 +29,6 @@ namespace __OS {
 
 intptr FormsApi::Panel::Create(const System::Windows::Forms::Panel& panel) {
   __OS::Panel* handle = CreateControl<__OS::Panel>(panel);
-  handle->end();
   return (intptr)handle;
 }
 

@@ -71,7 +71,7 @@ namespace PcfFormApp {
       form.StartPosition = FormStartPosition::Manual;
       form.Location = Point(300, 200);
       form.ClientSize = Size(300, 300);
-      form.BackColor = Color::SpringGreen;
+      //form.BackColor = Color::SpringGreen;
 
       Application::EnableVisualStyles();
       Application::Run(form);
