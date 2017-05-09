@@ -2,17 +2,6 @@
 #include "FormsApi.h"
 
 #include <FL/Fl.H>
-#include <FL/Fl_Box.H>
-#include <FL/Fl_Button.H>
-#include <FL/Fl_Check_Button.H>
-#include <FL/fl_draw.H>
-#include <FL/Fl_Double_Window.H>
-#include <FL/Fl_Pixmap.H>
-#include <FL/Fl_Progress.H>
-#include <FL/Fl_Round_Button.H>
-#include <FL/Fl_Scroll.H>
-#include <FL/Fl_Text_Buffer.H>
-#include <FL/Fl_Window.H>
 
 #include <Pcf/Undef.h>
 

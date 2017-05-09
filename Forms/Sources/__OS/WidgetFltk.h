@@ -1,5 +1,10 @@
 #if defined(__use_fltk_interface__)
+
 #include "WindowProcedureFltk.h"
+
+#include <FL/Fl_Widget.H>
+
+#include <Pcf/Undef.h>
 
 namespace __OS {
   static const int32 FL_PAINT = 255;

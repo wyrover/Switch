@@ -1,6 +1,10 @@
 #if defined(__use_fltk_interface__)
 #include "WidgetFltk.h"
 
+#include <FL/Fl_Scroll.H>
+
+#include <Pcf/Undef.h>
+
 using namespace System;
 using namespace System::Drawing;
 using namespace System::Windows::Forms;

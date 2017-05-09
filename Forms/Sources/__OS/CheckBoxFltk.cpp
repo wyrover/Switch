@@ -1,6 +1,8 @@
 #if defined(__use_fltk_interface__)
 #include "WidgetFltk.h"
 
+#include <FL/Fl_Check_Button.H>
+
 using namespace System;
 using namespace System::Drawing;
 using namespace System::Windows::Forms;

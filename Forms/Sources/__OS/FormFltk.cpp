@@ -1,6 +1,10 @@
 #if defined(__use_fltk_interface__)
 #include "WidgetFltk.h"
 
+#include <FL/Fl_Double_Window.H>
+
+#include <Pcf/Undef.h>
+
 using namespace System;
 using namespace System::Drawing;
 using namespace System::Windows::Forms;
@@ -35,11 +39,11 @@ void FormsApi::Form::Close(const System::Windows::Forms::Form& form) {
 
 intptr FormsApi::Form::Create(const System::Windows::Forms::Form& form) {
   __OS::Form* handle = CreateControl<__OS::Form>(form);
-  handle->end();
   handle->position(form.Location().X, form.Location().Y + SystemInformation::GetCaptionHeight());
   handle->size(form.Size().Width, form.Size().Height - SystemInformation::GetCaptionHeight());
   handle->resizable(handle);
   handle->align(FL_ALIGN_CENTER | FL_ALIGN_INSIDE | FL_ALIGN_CLIP | FL_ALIGN_WRAP);
+  handle->end();
   return (intptr)handle;
 }
 
