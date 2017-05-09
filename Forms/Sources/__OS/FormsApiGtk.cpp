@@ -15,20 +15,38 @@ using namespace System::Drawing;
 using namespace System::Windows::Forms;
 using namespace __OS;
 
-namespace {
-  class _IWidget pcf_interface {
+namespace __OS {
+  class IWidget pcf_interface {
   public:
+    virtual const Gtk::Container& Container() const = 0;
+    virtual Gtk::Container& Container() = 0;
+
     virtual const Gtk::Widget& ToWidget() const = 0;
     virtual Gtk::Widget& ToWidget() = 0;
+
+    virtual void Move(int32 x, int32 y) = 0;
+    virtual void Text(const string& text) = 0;
   };
 
-  class _Widget : public _IWidget {
+  class Widget : public IWidget {
   public:
+    const Gtk::Container& Container() const override {return as<Gtk::Container>(this->ToWidget());}
+    Gtk::Container& Container() override {return as<Gtk::Container>(this->ToWidget());}
+    
+    const Gtk::Widget& ToWidget() const override {return as<Gtk::Widget>(*this);}
+    Gtk::Widget& ToWidget() override {return as<Gtk::Widget>(*this);}
+    
+    void Move(int32 x, int32 y) override {
+      if (is<Gtk::Fixed>(this->ToWidget().get_parent())) {
+        as<Gtk::Fixed>(this->ToWidget().get_parent())->child_property_x(this->ToWidget()) = x;
+        as<Gtk::Fixed>(this->ToWidget().get_parent())->child_property_y(this->ToWidget()) = y;
+      }
+    }
   };
 
-  class _Form : public _Widget, public Gtk::Window {
+  class Form : public Widget, public Gtk::Window {
   public:
-    _Form() {
+    Form() {
       this->add(this->scrolledWindow);
       this->scrolledWindow.add(this->fixed);
 
@@ -38,27 +56,50 @@ namespace {
       });
     }
 
-    Gtk::Container& Container() {return this->fixed;}
+    const Gtk::Container& Container() const override {return this->fixed;}
+    Gtk::Container& Container() override {return this->fixed;}
 
-    const Gtk::Widget& ToWidget() const override {return *this;}
-    Gtk::Widget& ToWidget() override {return *this;}
+    void Move(int32 x, int32 y) override {
+      this->Gtk::Window::move(x, y);
+    }
 
+    void Text(const string& text) override {
+    }
+    
   private:
     Gtk::ScrolledWindow scrolledWindow;
     Gtk::Fixed fixed;
   };
-
-  class _Button : public _Widget, public Gtk::Button {
+  
+  class Button : public Widget, public Gtk::Button {
+    
   public:
-    _Button() {this->set_parent(this->emptyParent);}
-    void move(int32 x, int32 y) {
-      ((Gtk::Fixed*)this->get_parent())->child_property_x(*this) = x;
-      ((Gtk::Fixed*)this->get_parent())->child_property_y(*this) = y;
-    }
-    const Gtk::Widget& ToWidget() const override {return *this;}
-    Gtk::Widget& ToWidget() override {return *this;}
-  private:
-    Gtk::Fixed emptyParent;
+    void Text(const string& text) override {this->set_label(text.c_str());}
+  };
+  
+  class CheckBox : public Widget, public Gtk::CheckButton {
+  public:
+    void Text(const string& text) override {this->set_label(text.c_str());}
+  };
+  
+  class Label : public Widget, public Gtk::Label {
+  public:
+    void Text(const string& text) override {this->set_label(text.c_str());}
+  };
+  
+  class Panel : public Widget, public Gtk::ScrolledWindow {
+  public:
+    void Text(const string& text) override {}
+  };
+  
+  class ProgressBar : public Widget, public Gtk::ProgressBar {
+  public:
+    void Text(const string& text) override {}
+  };
+  
+  class RadioButton : public Widget, public Gtk::RadioButton {
+  public:
+    void Text(const string& text) override {this->set_label(text.c_str());}
   };
 
   Gdk::RGBA FromColor(const System::Drawing::Color& color) {
@@ -73,14 +114,14 @@ namespace {
   }
 
   Glib::RefPtr<Gtk::Application> application = Gtk::Application::create();
-  _Form* mainForm;
+  __OS::Form* mainForm;
   int32 exitCode = 0;
 }
 
 bool FormsApi::Application::visualStylesEnabled = false;
 
 void FormsApi::Application::AddForm(const System::Windows::Forms::Form& form) {
-   mainForm = (_Form*)form.data().handle;
+   mainForm = (__OS::Form*)form.Handle();
 }
 
 void FormsApi::Application::Exit() {
@@ -104,47 +145,43 @@ void FormsApi::Application::Start() {
 void FormsApi::Application::Stop() {
 }
 
-void FormsApi::Control::Close(const System::Windows::Forms::Form& form) {
-  ((_Form*)form.Handle())->close();
+intptr FormsApi::Button::Create(const System::Windows::Forms::Button& button) {
+  __OS::Button* handle = new __OS::Button();
+  mainForm->Container().add(*handle);
+  return (intptr)handle;
 }
 
-intptr FormsApi::Control::Create(const System::Windows::Forms::Button& button) {
-  _Button* gtkButton = new _Button();
-  mainForm->Container().add(*gtkButton);
-  gtkButton->override_background_color(FromColor(button.BackColor));
-  gtkButton->override_color(FromColor(button.ForeColor));
-  gtkButton->move(button.data().location.X, button.data().location.Y);
-  //((Gtk::Fixed*)gtkButton->get_parent())->child_property_x(*gtkButton) = button.data().location.X;
-  //((Gtk::Fixed*)gtkButton->get_parent())->child_property_y(*gtkButton) = button.data().location.Y;
-
-  gtkButton->set_size_request(button.data().size.Width, button.data().size.Height);
-  gtkButton->show();
-  return (intptr)gtkButton;
-}
-
-intptr FormsApi::Control::Create(const System::Windows::Forms::CheckBox& checkBox) {
+intptr FormsApi::CheckBox::Create(const System::Windows::Forms::CheckBox& checkBox) {
   return 0;
+}
+
+void FormsApi::CheckBox::SetAutoCheck(const System::Windows::Forms::CheckBox& checkBox) {
+  
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Control& control) {
   return 0;
 }
 
-intptr FormsApi::Control::Create(const System::Windows::Forms::Form& form) {
-  _Form* gtkForm = new _Form();
+void FormsApi::Form::Close(const System::Windows::Forms::Form& form) {
+  ((__OS::Form*)form.Handle())->close();
+}
+
+intptr FormsApi::Form::Create(const System::Windows::Forms::Form& form) {
+  __OS::Form* gtkForm = new __OS::Form();
   mainForm = gtkForm;
   gtkForm->override_background_color(FromColor(form.BackColor));
   gtkForm->override_color(FromColor(form.ForeColor));
-  gtkForm->move(form.data().location.X, form.data().location.Y);
-  gtkForm->set_size_request(form.data().size.Width, form.data().size.Height);
+  gtkForm->move(form.Location().X, form.Location().Y);
+  gtkForm->set_size_request(form.Size().Width, form.Size().Height);
   return (intptr)gtkForm;
 }
 
-intptr FormsApi::Control::Create(const System::Windows::Forms::Label& label) {
+intptr FormsApi::Label::Create(const System::Windows::Forms::Label& label) {
   return 0;
 }
 
-intptr FormsApi::Control::Create(const System::Windows::Forms::RadioButton& radioButton) {
+intptr FormsApi::RadioButton::Create(const System::Windows::Forms::RadioButton& radioButton) {
   return 0;
 }
 
@@ -152,7 +189,7 @@ void FormsApi::Control::DefWndProc(System::Windows::Forms::Message& message) {
 }
 
 void FormsApi::Control::Destroy(const System::Windows::Forms::Control& control) {
- delete (Gtk::Widget*)control.data().handle;
+ delete (Gtk::Widget*)control.Handle();
 }
 
 intptr FormsApi::Control::GetHandleWindowFromDeviceContext(intptr hdc) {
@@ -173,43 +210,41 @@ System::Drawing::Point FormsApi::Control::PointToScreen(const System::Windows::F
   return {};
 }
 
-void FormsApi::Control::SetBackColor(intptr hdc, const System::Drawing::Color& color) {
-  ((Gtk::Widget*)hdc)->override_background_color(FromColor(color));
+void FormsApi::Control::SetBackColor(intptr hdc) {
+  ref<System::Windows::Forms::Control> control = System::Windows::Forms::Control::FromHandle(GetHandleWindowFromDeviceContext(hdc));
+  if (System::Environment::OSVersion().Platform == System::PlatformID::MacOSX && is<System::Windows::Forms::Button>(control) && as<System::Windows::Forms::Button>(control)().IsDefault)
+    ((__OS::Widget*)hdc)->ToWidget().override_background_color(FromColor(System::Drawing::SystemColors::Highlight));
+  else
+    ((__OS::Widget*)hdc)->ToWidget().override_background_color(FromColor(control().BackColor));
 }
 
-void FormsApi::Control::SetForeColor(intptr hdc, const System::Drawing::Color& color) {
-  ((Gtk::Widget*)hdc)->override_color(FromColor(color));
+void FormsApi::Control::SetForeColor(intptr hdc) {
+  ref<System::Windows::Forms::Control> control = System::Windows::Forms::Control::FromHandle(GetHandleWindowFromDeviceContext(hdc));
+  ((__OS::Widget*)hdc)->ToWidget().override_color(FromColor(control().ForeColor));
 }
 
 void FormsApi::Control::SetBackColor(const System::Windows::Forms::Control& control) {
-  if (control.data().handle != IntPtr::Zero)
-    ((Gtk::Widget*)control.data().handle)->override_background_color(FromColor(control.BackColor));
+  ((__OS::Widget*)control.Handle())->ToWidget().override_background_color(FromColor(control.BackColor));
 }
 
 void FormsApi::Control::SetForeColor(const System::Windows::Forms::Control& control) {
-  if (control.data().handle != IntPtr::Zero)
-    ((Gtk::Widget*)control.data().handle)->override_color(FromColor(control.BackColor));
+  ((__OS::Widget*)control.Handle())->ToWidget().override_color(FromColor(control.BackColor));
 }
 
 void FormsApi::Control::SetLocation(const System::Windows::Forms::Control& control) {
-  if (control.data().handle != IntPtr::Zero) {
-    if (is<System::Windows::Forms::Form>(control)) {
-      ((Gtk::Window*)control.data().handle)->move(control.data().location.X, control.data().location.Y);
-    } else {
-      ((Gtk::Fixed*)((Gtk::Widget*)control.data().handle)->get_parent())->child_property_x(*(Gtk::Widget*)control.data().handle) = control.data().location.X;
-      ((Gtk::Fixed*)((Gtk::Widget*)control.data().handle)->get_parent())->child_property_y(*(Gtk::Widget*)control.data().handle) = control.data().location.Y;
-    }
-  }
+  ((__OS::Widget*)control.Handle())->Move(control.Location().X, control.Location().Y);
 }
 
 void FormsApi::Control::SetSize(const System::Windows::Forms::Control& control) {
+  ((__OS::Widget*)control.Handle())->ToWidget().set_size_request(control.Size().Width, control.Size().Height);;
 }
 
 void FormsApi::Control::SetText(const System::Windows::Forms::Control& control) {
+  ((__OS::Widget*)control.Handle())->Text(control.Text);
 }
 
 void FormsApi::Control::SetVisible(const System::Windows::Forms::Control& control) {
-   ((Gtk::Widget*)control.data().handle)->show();
+   ((Gtk::Widget*)control.Handle())->show();
 }
 
 #endif
