@@ -25,6 +25,7 @@ namespace __OS {
     virtual Gtk::Widget& ToWidget() = 0;
 
     virtual void Move(int32 x, int32 y) = 0;
+    virtual void Show() = 0;
     virtual void Text(const string& text) = 0;
   };
 
@@ -41,6 +42,10 @@ namespace __OS {
         as<Gtk::Fixed>(this->ToWidget().get_parent())->child_property_x(this->ToWidget()) = x;
         as<Gtk::Fixed>(this->ToWidget().get_parent())->child_property_y(this->ToWidget()) = y;
       }
+    }
+    
+    void Show() override {
+      return this->ToWidget().show();
     }
   };
 
@@ -72,9 +77,13 @@ namespace __OS {
   };
   
   class Button : public Widget, public Gtk::Button {
-    
   public:
     void Text(const string& text) override {this->set_label(text.c_str());}
+  };
+  
+  class Control : public Widget, public Gtk::Widget {
+  public:
+    void Text(const string& text) override {}
   };
   
   class CheckBox : public Widget, public Gtk::CheckButton {
@@ -140,56 +149,62 @@ DialogResult FormsApi::Application::ShowMessageBox(const string& message, const 
 }
 
 void FormsApi::Application::Start() {
+
 }
 
 void FormsApi::Application::Stop() {
+
 }
 
 intptr FormsApi::Button::Create(const System::Windows::Forms::Button& button) {
   __OS::Button* handle = new __OS::Button();
   mainForm->Container().add(*handle);
+  handle->Move(button.Location().X, button.Location().Y);
+  handle->Text(button.Text);
+  handle->show();
   return (intptr)handle;
 }
 
+void FormsApi::Button::SetIsDefault(const System::Windows::Forms::Button& button) {
+
+}
+
 intptr FormsApi::CheckBox::Create(const System::Windows::Forms::CheckBox& checkBox) {
-  return 0;
+  __OS::CheckBox* handle = new __OS::CheckBox();
+  mainForm->Container().add(*handle);
+  handle->Move(checkBox.Location().X, checkBox.Location().Y);
+  handle->Text(checkBox.Text);
+  handle->show();
+  return (intptr)handle;
 }
 
 void FormsApi::CheckBox::SetAutoCheck(const System::Windows::Forms::CheckBox& checkBox) {
   
 }
 
+void FormsApi::CheckBox::SetChecked(const System::Windows::Forms::CheckBox& checkBox) {
+  
+}
+
 intptr FormsApi::Control::Create(const System::Windows::Forms::Control& control) {
-  return 0;
-}
-
-void FormsApi::Form::Close(const System::Windows::Forms::Form& form) {
-  ((__OS::Form*)form.Handle())->close();
-}
-
-intptr FormsApi::Form::Create(const System::Windows::Forms::Form& form) {
-  __OS::Form* gtkForm = new __OS::Form();
-  mainForm = gtkForm;
-  gtkForm->override_background_color(FromColor(form.BackColor));
-  gtkForm->override_color(FromColor(form.ForeColor));
-  gtkForm->move(form.Location().X, form.Location().Y);
-  gtkForm->set_size_request(form.Size().Width, form.Size().Height);
-  return (intptr)gtkForm;
-}
-
-intptr FormsApi::Label::Create(const System::Windows::Forms::Label& label) {
-  return 0;
-}
-
-intptr FormsApi::RadioButton::Create(const System::Windows::Forms::RadioButton& radioButton) {
-  return 0;
+  __OS::Control* handle = new __OS::Control();
+  mainForm->Container().add(*handle);
+  handle->Move(control.Location().X, control.Location().Y);
+  handle->Text(control.Text);
+  handle->show();
+  return (intptr)handle;
 }
 
 void FormsApi::Control::DefWndProc(System::Windows::Forms::Message& message) {
+
 }
 
 void FormsApi::Control::Destroy(const System::Windows::Forms::Control& control) {
  delete (Gtk::Widget*)control.Handle();
+}
+
+System::Drawing::Size FormsApi::Control::GetClientSize(const System::Windows::Forms::Control &control) {
+  return {};
 }
 
 intptr FormsApi::Control::GetHandleWindowFromDeviceContext(intptr hdc) {
@@ -197,9 +212,11 @@ intptr FormsApi::Control::GetHandleWindowFromDeviceContext(intptr hdc) {
 }
 
 void FormsApi::Control::Invalidate(const System::Windows::Forms::Control& control, bool invalidateChildren) {
+
 }
 
 void FormsApi::Control::Invalidate(const System::Windows::Forms::Control& control, const System::Drawing::Rectangle& rect, bool invalidateChildren) {
+
 }
 
 System::Drawing::Point FormsApi::Control::PointToClient(const System::Windows::Forms::Control& control, const System::Drawing::Point& point) {
@@ -218,6 +235,10 @@ void FormsApi::Control::SetBackColor(intptr hdc) {
     ((__OS::Widget*)hdc)->ToWidget().override_background_color(FromColor(control().BackColor));
 }
 
+void FormsApi::Control::SetClientSize(System::Windows::Forms::Control &control, const System::Drawing::Size &clientSize) {
+  ((__OS::Widget*)control.Handle())->ToWidget().set_size_request(clientSize.Width, clientSize.Height);
+}
+
 void FormsApi::Control::SetForeColor(intptr hdc) {
   ref<System::Windows::Forms::Control> control = System::Windows::Forms::Control::FromHandle(GetHandleWindowFromDeviceContext(hdc));
   ((__OS::Widget*)hdc)->ToWidget().override_color(FromColor(control().ForeColor));
@@ -228,15 +249,20 @@ void FormsApi::Control::SetBackColor(const System::Windows::Forms::Control& cont
 }
 
 void FormsApi::Control::SetForeColor(const System::Windows::Forms::Control& control) {
-  ((__OS::Widget*)control.Handle())->ToWidget().override_color(FromColor(control.BackColor));
+  ((__OS::Widget*)control.Handle())->ToWidget().override_color(FromColor(control.ForeColor));
 }
 
 void FormsApi::Control::SetLocation(const System::Windows::Forms::Control& control) {
   ((__OS::Widget*)control.Handle())->Move(control.Location().X, control.Location().Y);
 }
 
+void FormsApi::Control::SetParent(const System::Windows::Forms::Control& control) {
+  if (control.Parent() != null)
+    ((__OS::Widget*)control.Parent()().Handle())->Container().add(((__OS::Widget*)control.Handle())->ToWidget());
+}
+
 void FormsApi::Control::SetSize(const System::Windows::Forms::Control& control) {
-  ((__OS::Widget*)control.Handle())->ToWidget().set_size_request(control.Size().Width, control.Size().Height);;
+  ((__OS::Widget*)control.Handle())->ToWidget().set_size_request(control.Size().Width, control.Size().Height);
 }
 
 void FormsApi::Control::SetText(const System::Windows::Forms::Control& control) {
@@ -245,6 +271,81 @@ void FormsApi::Control::SetText(const System::Windows::Forms::Control& control) 
 
 void FormsApi::Control::SetVisible(const System::Windows::Forms::Control& control) {
    ((Gtk::Widget*)control.Handle())->show();
+}
+
+void FormsApi::Form::Close(const System::Windows::Forms::Form& form) {
+  ((__OS::Form*)form.Handle())->close();
+}
+
+intptr FormsApi::Form::Create(const System::Windows::Forms::Form& form) {
+  __OS::Form* handle = new __OS::Form();
+  mainForm = handle;
+  handle->Move(form.Location().X, form.Location().Y);
+  handle->Text(form.Text);
+  return (intptr)handle;
+}
+
+intptr FormsApi::Label::Create(const System::Windows::Forms::Label& label) {
+  __OS::Label* handle = new __OS::Label();
+  mainForm->Container().add(*handle);
+  handle->Move(label.Location().X, label.Location().Y);
+  handle->Text(label.Text);
+  handle->show();
+  return (intptr)handle;
+}
+
+intptr FormsApi::Panel::Create(const System::Windows::Forms::Panel& panel) {
+  __OS::Panel* handle = new __OS::Panel();
+  mainForm->Container().add(*handle);
+  handle->Move(panel.Location().X, panel.Location().Y);
+  handle->Text(panel.Text);
+  handle->show();
+  return (intptr)handle;
+}
+
+void FormsApi::Panel::SetBorderStyle(const System::Windows::Forms::Panel &panel) {
+}
+
+intptr FormsApi::ProgressBar::Create(const System::Windows::Forms::ProgressBar& progressBar) {
+  __OS::ProgressBar* handle = new __OS::ProgressBar();
+  mainForm->Container().add(*handle);
+  handle->Move(progressBar.Location().X, progressBar.Location().Y);
+  handle->Text(progressBar.Text);
+  handle->show();
+ return (intptr)handle;
+}
+
+void FormsApi::ProgressBar::SetMaximum(const System::Windows::Forms::ProgressBar& progressBar) {
+
+}
+
+void FormsApi::ProgressBar::SetMinimum(const System::Windows::Forms::ProgressBar &progressBar) {
+
+}
+
+void FormsApi::ProgressBar::SetStyle(const System::Windows::Forms::ProgressBar &progressBar) {
+  
+}
+
+void FormsApi::ProgressBar::SetValue(const System::Windows::Forms::ProgressBar &progressBar) {
+
+}
+
+intptr FormsApi::RadioButton::Create(const System::Windows::Forms::RadioButton& radioButton) {
+  __OS::RadioButton* handle = new __OS::RadioButton();
+  mainForm->Container().add(*handle);
+  handle->Move(radioButton.Location().X, radioButton.Location().Y);
+  handle->Text(radioButton.Text);
+  handle->show();
+  return (intptr)handle;
+}
+
+void FormsApi::RadioButton::SetAutoCheck(const System::Windows::Forms::RadioButton& radioButton) {
+  
+}
+
+void FormsApi::RadioButton::SetChecked(const System::Windows::Forms::RadioButton& radioButton) {
+  
 }
 
 #endif
