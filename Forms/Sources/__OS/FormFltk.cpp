@@ -14,30 +14,34 @@ using namespace __OS;
 namespace __OS {
   class Form : public __OS::Widget, public Fl_Double_Window {
   public:
-    Form(int32 x, int32 y, int32 w, int32 h, const char* t) : Fl_Double_Window(x, y, w, h, t), panel(x, y, w, h, "") {
-      this->add(panel);
-      this->panel.box(FL_NO_BOX);
+    Form(int32 x, int32 y, int32 w, int32 h, const char* t) : Fl_Double_Window(x, y, w, h, t), container(0, 0, w, h, "") {
+      this->add(container);
+      this->container.box(FL_NO_BOX);
       this->callback(CloseForm, this);
     }
+
     void draw() override {this->Draw(*this);}
+    
     int handle(int event) override {return this->HandleEvent(event, *this);}
+    
     int32 HandleControl(int32 event) override {
       if (event != FL_PAINT)
         return this->Fl_Double_Window::handle(event);
       this->Fl_Double_Window::draw();
       return 1;
     }
+    
     const Fl_Widget& ToWidget() const override {return *this;}
     Fl_Widget& ToWidget() override {return *this;}
     
-    const Fl_Widget& Container() const override {return this->panel;}
-    Fl_Widget& Container() override {return this->panel;}
+    const Fl_Group& Container() const override {return this->container;}
+    Fl_Group& Container() override {return this->container;}
     
   private:
     static void CloseForm(Fl_Widget* widget, void* param) {
       ((__OS::Form*)param)->Close(*((__OS::Form*)param));
     }
-    Fl_Scroll panel;
+    Fl_Group container;
   };
 }
 

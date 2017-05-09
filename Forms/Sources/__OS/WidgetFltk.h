@@ -2,6 +2,7 @@
 
 #include "WindowProcedureFltk.h"
 
+#include <FL/Fl_Group.H>
 #include <FL/Fl_Widget.H>
 
 #include <Pcf/Undef.h>
@@ -14,8 +15,8 @@ namespace __OS {
     virtual const Fl_Widget& ToWidget() const = 0;
     virtual Fl_Widget& ToWidget() = 0;
 
-    virtual const Fl_Widget& Container() const {return this->ToWidget();}
-    virtual Fl_Widget& Container() {return this->ToWidget();}
+    virtual const Fl_Group& Container() const {return as<Fl_Group>(this->ToWidget());}
+    virtual Fl_Group& Container() {return as<Fl_Group>(this->ToWidget());}
 };
 
   class Widget : public IWidget {

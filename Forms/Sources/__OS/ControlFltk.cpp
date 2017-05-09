@@ -122,7 +122,7 @@ void FormsApi::Control::SetParent(const System::Windows::Forms::Control& control
   if (((Fl_Group&)((__OS::Widget*)control.Handle())->ToWidget()).parent() != null)
     ((__OS::Widget*)control.Handle())->ToWidget().parent()->remove(((__OS::Widget*)control.Handle())->ToWidget());
   if (control.Parent() != null)
-    ((Fl_Group&)((__OS::Widget*)control.Parent()().Handle())->ToWidget()).add(((__OS::Widget*)control.Handle())->Container());
+    ((__OS::Widget*)control.Parent()().Handle())->Container().add(((__OS::Widget*)control.Handle())->ToWidget());
 }
 
 void FormsApi::Control::SetSize(const System::Windows::Forms::Control& control) {
