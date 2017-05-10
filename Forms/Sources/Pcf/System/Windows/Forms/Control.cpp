@@ -131,9 +131,10 @@ void Control::SetClientSize(const System::Drawing::Size& clientSize) {
 
 void Control::OnBackColorChanged(const EventArgs& e) {
   this->backBrush = System::Drawing::SolidBrush(this->BackColor);
-  if (this->IsHandleCreated)
+  if (this->IsHandleCreated) {
     __OS::FormsApi::Control::SetBackColor(*this);
-  this->Invalidate();
+    this->Invalidate();
+  }
   this->BackColorChanged(*this, e);
 }
 
@@ -142,9 +143,10 @@ void Control::OnClientSizeChanged(const EventArgs& e) {
 }
 
 void Control::OnForeColorChanged(const EventArgs& e) {
-  if (this->IsHandleCreated)
+  if (this->IsHandleCreated) {
     __OS::FormsApi::Control::SetForeColor(*this);
-  this->Invalidate();
+    this->Invalidate();
+  }
   this->ForeColorChanged(*this, e);
 }
 
