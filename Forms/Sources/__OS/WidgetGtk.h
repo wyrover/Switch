@@ -1,6 +1,7 @@
 #if (defined(__linux__) && defined(__use_native_interface__)) || defined(__use_gtk_interface__)
 
 #include <gtkmm/fixed.h>
+#include <gtkmm/radiobuttongroup.h>
 #include <gtkmm/widget.h>
 
 #include "FormsApi.h"
@@ -35,6 +36,8 @@ namespace __OS {
       }
     }
     
+    Gtk::RadioButtonGroup& RadioButtonGroup() {return this->radioButtonGroup;}
+    
     virtual void Show() {return this->ToWidget().show();}
 
     virtual void Text(const string& text) = 0;
@@ -47,6 +50,9 @@ namespace __OS {
     const Gtk::Widget& ToWidget() const override {return as<Gtk::Widget>(*this);}
     
     Gtk::Widget& ToWidget() override {return as<Gtk::Widget>(*this);}
+    
+  private:
+    Gtk::RadioButtonGroup radioButtonGroup;
   };
 }
 #endif

@@ -39,8 +39,7 @@ void FormsApi::ProgressBar::SetStyle(const System::Windows::Forms::ProgressBar &
 }
 
 void FormsApi::ProgressBar::SetValue(const System::Windows::Forms::ProgressBar &progressBar) {
-  //((__OS::ProgressBar*)progressBar.Handle())->set_fraction(double(progressBar.Maximum - progressBar.Minimum)/progressBar.Value);
-  ((__OS::ProgressBar*)progressBar.Handle())->set_fraction(0.5);
+  ((__OS::ProgressBar*)progressBar.Handle())->set_fraction(double(progressBar.Value()) / (double(progressBar.Maximum()) - double(progressBar.Minimum)));
 }
 
 #endif

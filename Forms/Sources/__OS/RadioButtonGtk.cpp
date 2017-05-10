@@ -25,11 +25,15 @@ intptr FormsApi::RadioButton::Create(const System::Windows::Forms::RadioButton& 
 }
 
 void FormsApi::RadioButton::SetAutoCheck(const System::Windows::Forms::RadioButton& radioButton) {
-  
+  if (radioButton.AutoCheck) {
+    if (radioButton.Parent != null)
+      ((__OS::RadioButton*)radioButton.Handle())->set_group(((__OS::Widget*)radioButton.Parent()().Handle())->RadioButtonGroup());
+  } else
+    ((__OS::RadioButton*)radioButton.Handle())->reset_group();
 }
 
 void FormsApi::RadioButton::SetChecked(const System::Windows::Forms::RadioButton& radioButton) {
-  
+  ((__OS::RadioButton*)radioButton.Handle())->set_active(radioButton.Checked);
 }
 
 #endif

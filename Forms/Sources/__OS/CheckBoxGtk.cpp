@@ -29,7 +29,7 @@ void FormsApi::CheckBox::SetAutoCheck(const System::Windows::Forms::CheckBox& ch
 }
 
 void FormsApi::CheckBox::SetChecked(const System::Windows::Forms::CheckBox& checkBox) {
-  
+  ((__OS::CheckBox*)checkBox.Handle())->set_active(checkBox.Checked);
 }
 
 #endif
