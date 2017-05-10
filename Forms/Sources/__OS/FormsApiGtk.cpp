@@ -18,78 +18,45 @@ using namespace __OS;
 namespace __OS {
   class IWidget pcf_interface {
   public:
-    virtual const Gtk::Container& Container() const = 0;
-    virtual Gtk::Container& Container() = 0;
-
     virtual const Gtk::Widget& ToWidget() const = 0;
     virtual Gtk::Widget& ToWidget() = 0;
-
-    virtual void BackColor(const System::Drawing::Color& color) = 0;
-    virtual void ForeColor(const System::Drawing::Color& color) = 0;
-    virtual void Move(int32 x, int32 y) = 0;
-    virtual void Show() = 0;
-    virtual void Text(const string& text) = 0;
   };
 
   class Widget : public IWidget {
   public:
-    const Gtk::Container& Container() const override {return as<Gtk::Container>(this->ToWidget());}
-    Gtk::Container& Container() override {return as<Gtk::Container>(this->ToWidget());}
+    virtual const Gtk::Container& Container() const {return as<Gtk::Container>(this->ToWidget());}
     
-    const Gtk::Widget& ToWidget() const override {return as<Gtk::Widget>(*this);}
-    Gtk::Widget& ToWidget() override {return as<Gtk::Widget>(*this);}
+    virtual Gtk::Container& Container() {return as<Gtk::Container>(this->ToWidget());}
     
-    void BackColor(const System::Drawing::Color& color) override {this->ToWidget().override_background_color(FromColor(color));}
-    void ForeColor(const System::Drawing::Color& color) override {this->ToWidget().override_color(FromColor(color));}
-
-    void Move(int32 x, int32 y) override {
-      if (is<Gtk::Fixed>(this->ToWidget().get_parent())) {
-        as<Gtk::Fixed>(this->ToWidget().get_parent())->child_property_x(this->ToWidget()) = x;
-        as<Gtk::Fixed>(this->ToWidget().get_parent())->child_property_y(this->ToWidget()) = y;
-      }
-    }
+    virtual void BackColor(const System::Drawing::Color& color) {this->ToWidget().override_background_color(FromColor(color));}
     
-    void Show() override {
-      return this->ToWidget().show();
-    }
+    virtual void ForeColor(const System::Drawing::Color& color) {this->ToWidget().override_color(FromColor(color));}
 
     static Gdk::RGBA FromColor(const System::Drawing::Color& color) {
       Gdk::RGBA result;
       result.set_rgba(as<double>(color.R()) / 255, as<double>(color.G()) / 255, as<double>(color.B()) / 255, as<double>(color.A()) / 255);
       return result;
     }
+    
+    virtual void Move(int32 x, int32 y) {
+      if (is<Gtk::Fixed>(this->ToWidget().get_parent())) {
+        as<Gtk::Fixed>(this->ToWidget().get_parent())->child_property_x(this->ToWidget()) = x;
+        as<Gtk::Fixed>(this->ToWidget().get_parent())->child_property_y(this->ToWidget()) = y;
+      }
+    }
+    
+    virtual void Show() {return this->ToWidget().show();}
 
+    virtual void Text(const string& text) = 0;
+    
     static System::Drawing::Color ToColor(const Gdk::RGBA& color) {
       System::Drawing::Color result = System::Drawing::Color::FromArgb(color.get_alpha() * 255, color.get_red() * 255, color.get_green() * 255, color.get_blue() * 255);
       return result;
     }
-  };
-
-  class Form : public Widget, public Gtk::Window {
-  public:
-    Form() {
-      this->add(this->scrolledWindow);
-      this->scrolledWindow.add(this->fixed);
-
-      this->signal_show().connect([&] {
-        this->scrolledWindow.show();
-        this->fixed.show();
-      });
-    }
-
-    const Gtk::Container& Container() const override {return this->fixed;}
-    Gtk::Container& Container() override {return this->fixed;}
-
-    void Move(int32 x, int32 y) override {
-      this->Gtk::Window::move(x, y);
-    }
-
-    void Text(const string& text) override {
-    }
     
-  private:
-    Gtk::ScrolledWindow scrolledWindow;
-    Gtk::Fixed fixed;
+    const Gtk::Widget& ToWidget() const override {return as<Gtk::Widget>(*this);}
+    
+    Gtk::Widget& ToWidget() override {return as<Gtk::Widget>(*this);}
   };
   
   class Button : public Widget, public Gtk::Button {
@@ -107,6 +74,33 @@ namespace __OS {
     void Text(const string& text) override {this->set_label(text.c_str());}
   };
   
+  class Form : public Widget, public Gtk::Window {
+  public:
+    Form() {
+      this->add(this->scrolledWindow);
+      this->scrolledWindow.add(this->fixed);
+      
+      this->signal_show().connect(pcf_delegate {
+        this->scrolledWindow.show();
+        this->fixed.show();
+      });
+    }
+    
+    const Gtk::Container& Container() const override {return this->fixed;}
+    
+    Gtk::Container& Container() override {return this->fixed;}
+    
+    void Move(int32 x, int32 y) override {
+      this->Gtk::Window::move(x, y);
+    }
+    
+    void Text(const string& text) override {this->set_title(text.c_str());}
+    
+  private:
+    Gtk::ScrolledWindow scrolledWindow;
+    Gtk::Fixed fixed;
+  };
+  
   class Label : public Widget, public Gtk::Label {
   public:
     void Text(const string& text) override {this->set_label(text.c_str());}
@@ -114,12 +108,28 @@ namespace __OS {
   
   class Panel : public Widget, public Gtk::ScrolledWindow {
   public:
+    Panel() {
+      this->add(this->fixed);
+      
+      this->signal_show().connect(pcf_delegate {
+        this->fixed.show();
+      });
+    }
+    
+    const Gtk::Container& Container() const override {return this->fixed;}
+   
+    Gtk::Container& Container() override {return this->fixed;}
+    
     void Text(const string& text) override {}
+    
+  private:
+    Gtk::Fixed fixed;
   };
   
   class ProgressBar : public Widget, public Gtk::ProgressBar {
   public:
     void BackColor(const System::Drawing::Color& color) override {}
+    
     void Text(const string& text) override {}
   };
   
@@ -263,8 +273,11 @@ void FormsApi::Control::SetLocation(const System::Windows::Forms::Control& contr
 }
 
 void FormsApi::Control::SetParent(const System::Windows::Forms::Control& control) {
-  if (control.Parent() != null)
-    ((__OS::Widget*)control.Parent()().Handle())->Container().add(((__OS::Widget*)control.Handle())->ToWidget());
+  if (control.Parent() != null) {
+    ((__OS::Widget*)control.Handle())->ToWidget().reparent(((__OS::Widget*)control.Parent()().Handle())->Container());
+    //((__OS::Widget*)control.Parent()().Handle())->Container().add(((__OS::Widget*)control.Handle())->ToWidget());
+    SetLocation(control);
+  }
 }
 
 void FormsApi::Control::SetSize(const System::Windows::Forms::Control& control) {
