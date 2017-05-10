@@ -12,6 +12,7 @@ using namespace __OS;
 namespace __OS {
   class Control : public Widget, public Gtk::Widget {
   public:
+    Control() {this->RegisterEvent();}
     void Text(const string& text) override {}
   };
 }

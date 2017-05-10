@@ -12,6 +12,7 @@ using namespace __OS;
 namespace __OS {
   class Button : public Widget, public Gtk::Button {
   public:
+    Button() {this->RegisterEvent();}
     void Text(const string& text) override {this->set_label(text.c_str());}
   };
 }

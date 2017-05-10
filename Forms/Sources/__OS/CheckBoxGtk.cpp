@@ -12,6 +12,7 @@ using namespace __OS;
 namespace __OS {
   class CheckBox : public Widget, public Gtk::CheckButton {
   public:
+    CheckBox() {this->RegisterEvent();}
     void Text(const string& text) override {this->set_label(text.c_str());}
   };
 }

@@ -15,6 +15,7 @@ namespace __OS {
   class Form : public Widget, public Gtk::Window {
   public:
     Form() {
+      this->RegisterEvent();
       this->add(this->scrolledWindow);
       this->scrolledWindow.add(this->fixed);
       

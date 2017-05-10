@@ -12,6 +12,7 @@ using namespace __OS;
 namespace __OS {
   class ProgressBar : public Widget, public Gtk::ProgressBar {
   public:
+    ProgressBar() {this->RegisterEvent();}
     void BackColor(const System::Drawing::Color& color) override {}
     
     void Text(const string& text) override {}

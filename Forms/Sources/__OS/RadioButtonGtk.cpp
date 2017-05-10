@@ -12,6 +12,7 @@ using namespace __OS;
 namespace __OS {
   class RadioButton : public Widget, public Gtk::RadioButton {
   public:
+    RadioButton() {this->RegisterEvent();}
     void Text(const string& text) override {this->set_label(text.c_str());}
   };
 }

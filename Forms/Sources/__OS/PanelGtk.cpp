@@ -14,6 +14,7 @@ namespace __OS {
   class Panel : public Widget, public Gtk::Frame {
   public:
     Panel() {
+      this->RegisterEvent();
       this->add(this->scrolledWindow);
       this->scrolledWindow.add(this->fixed);
       
