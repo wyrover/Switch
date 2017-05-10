@@ -14,11 +14,11 @@ namespace __OS {
 
   class Widget : public IWidget {
   public:
+    virtual void BackColor(const System::Drawing::Color& color) {this->ToWidget().override_background_color(FromColor(color));}
+    
     virtual const Gtk::Container& Container() const {return as<Gtk::Container>(this->ToWidget());}
     
     virtual Gtk::Container& Container() {return as<Gtk::Container>(this->ToWidget());}
-    
-    virtual void BackColor(const System::Drawing::Color& color) {this->ToWidget().override_background_color(FromColor(color));}
     
     virtual void ForeColor(const System::Drawing::Color& color) {this->ToWidget().override_color(FromColor(color));}
 

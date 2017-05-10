@@ -90,10 +90,8 @@ void Control::CreateHandle() {
   handles.Add(this->handle, *this);
   this->backBrush = System::Drawing::SolidBrush(this->BackColor);
   __OS::FormsApi::Control::SetParent(*this);
-  //if (this->backColor.HasValue)
-    __OS::FormsApi::Control::SetBackColor(*this);
-  //if (this->foreColor.HasValue)
-    __OS::FormsApi::Control::SetForeColor(*this);
+  __OS::FormsApi::Control::SetBackColor(*this);
+  __OS::FormsApi::Control::SetForeColor(*this);
   //__OS::FormsApi::Control::SetLocation(*this);
   __OS::FormsApi::Control::SetSize(*this);
  // __OS::FormsApi::Control::SetText(*this);
