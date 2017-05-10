@@ -1,5 +1,6 @@
 #if (defined(__linux__) && defined(__use_native_interface__)) || defined(__use_gtk_interface__)
 
+#include <gtkmm.h>
 #include <gtkmm/application.h>
 #include <gtkmm/window.h>
 #include "WidgetGtk.h"
@@ -21,6 +22,10 @@ void FormsApi::Application::Exit() {
 }
 
 void FormsApi::Application::MessageLoop(const System::Windows::Forms::Form& mainForm, EventHandler idle) {
+  Glib::signal_idle().connect(pcf_delegate {
+    idle.Invoke(object(), EventArgs::Empty);
+    return mainForm.Visible() && !idle.IsEmpty();
+  });
   exitCode = application->run(as<Gtk::Window>(((__OS::IWidget*)mainForm.Handle())->ToWidget()));
 }
 
@@ -36,7 +41,6 @@ void FormsApi::Application::Start() {
 }
 
 void FormsApi::Application::Stop() {
-
 }
 
 #endif

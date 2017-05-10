@@ -86,7 +86,7 @@ namespace __OS {
 
     class Form pcf_static {
     public:
-      static void Close(const System::Windows::Forms::Form& form);
+      static void Close(System::Windows::Forms::Form& form);
       static intptr Create(const System::Windows::Forms::Form& form);
     };
 

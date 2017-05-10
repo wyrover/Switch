@@ -22,6 +22,10 @@ namespace __OS {
         this->scrolledWindow.show();
         this->fixed.show();
       });
+      
+      this->signal_hide().connect(pcf_delegate {
+        System::Windows::Forms::Control::FromHandle((intptr)this)().Visible = false;
+      });
     }
     
     const Gtk::Container& Container() const override {return this->fixed;}
@@ -40,7 +44,7 @@ namespace __OS {
   };
 }
 
-void FormsApi::Form::Close(const System::Windows::Forms::Form& form) {
+void FormsApi::Form::Close(System::Windows::Forms::Form& form) {
   ((__OS::Form*)form.Handle())->close();
 }
 

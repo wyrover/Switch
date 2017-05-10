@@ -294,7 +294,7 @@ namespace Pcf {
 
           void CreateControl();
 
-          static const ref<Control> FromHandle(intptr handle) {
+          static ref<Control> FromHandle(intptr handle) {
             if (handles.ContainsKey(handle))
               return handles[handle];
             return ref<Control>::Null();

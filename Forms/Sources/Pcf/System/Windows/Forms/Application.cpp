@@ -22,5 +22,6 @@ void Application::Start() {
 
 void Application::MessageLoop() {
   FormsApi::Application::MessageLoop(mainForm(), Idle);
+  Idle = EventHandler();
   FormsApi::Application::Stop();
 }

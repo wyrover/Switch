@@ -72,6 +72,11 @@ namespace PcfFormApp {
       form.Location = Point(300, 200);
       form.ClientSize = Size(300, 300);
       //form.BackColor = Color::SpringGreen;
+      
+      Application::Idle += pcf_delegate(const object& sender, const EventArgs& e) {
+        static int counter = 0;
+        label.Text = string::Format("counter = {0}", counter++);
+      };
 
       Application::EnableVisualStyles();
       Application::Run(form);
