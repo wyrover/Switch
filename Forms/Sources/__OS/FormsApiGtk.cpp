@@ -24,6 +24,8 @@ namespace __OS {
     virtual const Gtk::Widget& ToWidget() const = 0;
     virtual Gtk::Widget& ToWidget() = 0;
 
+    virtual void BackColor(const System::Drawing::Color& color) = 0;
+    virtual void ForeColor(const System::Drawing::Color& color) = 0;
     virtual void Move(int32 x, int32 y) = 0;
     virtual void Show() = 0;
     virtual void Text(const string& text) = 0;
@@ -37,6 +39,9 @@ namespace __OS {
     const Gtk::Widget& ToWidget() const override {return as<Gtk::Widget>(*this);}
     Gtk::Widget& ToWidget() override {return as<Gtk::Widget>(*this);}
     
+    void BackColor(const System::Drawing::Color& color) override {this->ToWidget().override_background_color(FromColor(color));}
+    void ForeColor(const System::Drawing::Color& color) override {this->ToWidget().override_color(FromColor(color));}
+
     void Move(int32 x, int32 y) override {
       if (is<Gtk::Fixed>(this->ToWidget().get_parent())) {
         as<Gtk::Fixed>(this->ToWidget().get_parent())->child_property_x(this->ToWidget()) = x;
@@ -46,6 +51,17 @@ namespace __OS {
     
     void Show() override {
       return this->ToWidget().show();
+    }
+
+    static Gdk::RGBA FromColor(const System::Drawing::Color& color) {
+      Gdk::RGBA result;
+      result.set_rgba(as<double>(color.R()) / 255, as<double>(color.G()) / 255, as<double>(color.B()) / 255, as<double>(color.A()) / 255);
+      return result;
+    }
+
+    static System::Drawing::Color ToColor(const Gdk::RGBA& color) {
+      System::Drawing::Color result = System::Drawing::Color::FromArgb(color.get_alpha() * 255, color.get_red() * 255, color.get_green() * 255, color.get_blue() * 255);
+      return result;
     }
   };
 
@@ -103,6 +119,7 @@ namespace __OS {
   
   class ProgressBar : public Widget, public Gtk::ProgressBar {
   public:
+    void BackColor(const System::Drawing::Color& color) override {}
     void Text(const string& text) override {}
   };
   
@@ -110,17 +127,6 @@ namespace __OS {
   public:
     void Text(const string& text) override {this->set_label(text.c_str());}
   };
-
-  Gdk::RGBA FromColor(const System::Drawing::Color& color) {
-    Gdk::RGBA result;
-    result.set_rgba(as<double>(color.R()) / 255, as<double>(color.G()) / 255, as<double>(color.B()) / 255, as<double>(color.A()) / 255);
-    return result;
-  }
-
-  System::Drawing::Color ToColor(const Gdk::RGBA& color) {
-    System::Drawing::Color result = System::Drawing::Color::FromArgb(color.get_alpha() * 255, color.get_red() * 255, color.get_green() * 255, color.get_blue() * 255);
-    return result;
-  }
 
   Glib::RefPtr<Gtk::Application> application = Gtk::Application::create();
   __OS::Form* mainForm;
@@ -230,9 +236,9 @@ System::Drawing::Point FormsApi::Control::PointToScreen(const System::Windows::F
 void FormsApi::Control::SetBackColor(intptr hdc) {
   ref<System::Windows::Forms::Control> control = System::Windows::Forms::Control::FromHandle(GetHandleWindowFromDeviceContext(hdc));
   if (System::Environment::OSVersion().Platform == System::PlatformID::MacOSX && is<System::Windows::Forms::Button>(control) && as<System::Windows::Forms::Button>(control)().IsDefault)
-    ((__OS::Widget*)hdc)->ToWidget().override_background_color(FromColor(System::Drawing::SystemColors::Highlight));
+    ((__OS::Widget*)hdc)->BackColor(System::Drawing::SystemColors::Highlight);
   else
-    ((__OS::Widget*)hdc)->ToWidget().override_background_color(FromColor(control().BackColor));
+    ((__OS::Widget*)hdc)->BackColor(control().BackColor);
 }
 
 void FormsApi::Control::SetClientSize(System::Windows::Forms::Control &control, const System::Drawing::Size &clientSize) {
@@ -241,15 +247,15 @@ void FormsApi::Control::SetClientSize(System::Windows::Forms::Control &control, 
 
 void FormsApi::Control::SetForeColor(intptr hdc) {
   ref<System::Windows::Forms::Control> control = System::Windows::Forms::Control::FromHandle(GetHandleWindowFromDeviceContext(hdc));
-  ((__OS::Widget*)hdc)->ToWidget().override_color(FromColor(control().ForeColor));
+  ((__OS::Widget*)hdc)->ForeColor(control().ForeColor);
 }
 
 void FormsApi::Control::SetBackColor(const System::Windows::Forms::Control& control) {
-  ((__OS::Widget*)control.Handle())->ToWidget().override_background_color(FromColor(control.BackColor));
+  ((__OS::Widget*)control.Handle())->BackColor(control.BackColor);
 }
 
 void FormsApi::Control::SetForeColor(const System::Windows::Forms::Control& control) {
-  ((__OS::Widget*)control.Handle())->ToWidget().override_color(FromColor(control.ForeColor));
+    ((__OS::Widget*)control.Handle())->ForeColor(control.ForeColor);
 }
 
 void FormsApi::Control::SetLocation(const System::Windows::Forms::Control& control) {
@@ -328,7 +334,8 @@ void FormsApi::ProgressBar::SetStyle(const System::Windows::Forms::ProgressBar &
 }
 
 void FormsApi::ProgressBar::SetValue(const System::Windows::Forms::ProgressBar &progressBar) {
-
+  //((__OS::ProgressBar*)progressBar.Handle())->set_fraction(double(progressBar.Maximum - progressBar.Minimum)/progressBar.Value);
+  ((__OS::ProgressBar*)progressBar.Handle())->set_fraction(0.5);
 }
 
 intptr FormsApi::RadioButton::Create(const System::Windows::Forms::RadioButton& radioButton) {
