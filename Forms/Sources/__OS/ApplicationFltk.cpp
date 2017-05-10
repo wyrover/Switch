@@ -42,7 +42,7 @@ void FormsApi::Application::Exit() {
   Environment::Exit(exitCode);
 }
 
-void FormsApi::Application::MessageLoop(EventHandler idle) {
+void FormsApi::Application::MessageLoop(const System::Windows::Forms::Form& mainForm, EventHandler idle) {
   exitCode = Fl::run();
 }
 

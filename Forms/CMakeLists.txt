@@ -104,30 +104,39 @@ set(INCLUDE_FILES
 
 set(SOURCE_FILES
   Sources/__OS/ApplicationFltk.cpp
+  Sources/__OS/ApplicationGtk.cpp
   Sources/__OS/ApplicationWin32.cpp
   Sources/__OS/ButtonFltk.cpp
+  Sources/__OS/ButtonGtk.cpp
   Sources/__OS/ButtonWin32.cpp
   Sources/__OS/CheckBoxFltk.cpp
+  Sources/__OS/CheckBoxGtk.cpp
   Sources/__OS/CheckBoxWin32.cpp
   Sources/__OS/ControlFltk.cpp
+  Sources/__OS/ControlGtk.cpp
   Sources/__OS/ControlWin32.cpp
   Sources/__OS/FormsApi.h
-  Sources/__OS/FormsApiGtk.cpp
   Sources/__OS/FormFltk.cpp
+  Sources/__OS/FormGtk.cpp
   Sources/__OS/FormWin32.cpp
   Sources/__OS/LabelFltk.cpp
+  Sources/__OS/LabelGtk.cpp
   Sources/__OS/LabelWin32.cpp
   Sources/__OS/MainWin32.cpp
   Sources/__OS/PanelFltk.cpp
+  Sources/__OS/PanelGtk.cpp
   Sources/__OS/PanelWin32.cpp
   Sources/__OS/ProgressBarFltk.cpp
+  Sources/__OS/ProgressBarGtk.cpp
   Sources/__OS/ProgressBarWin32.cpp
   Sources/__OS/RadioButtonFltk.cpp
+  Sources/__OS/RadioButtonGtk.cpp
   Sources/__OS/RadioButtonWin32.cpp
   Sources/__OS/SystemInformationFltk.cpp
   Sources/__OS/SystemInformationGtk.cpp
   Sources/__OS/SystemInformationWin32.cpp
   Sources/__OS/WidgetFltk.h
+  Sources/__OS/WidgetGtk.h
   Sources/__OS/WindowMessage.h
   Sources/__OS/WindowMessageKey.h
   Sources/__OS/WindowProcedureFltk.cpp

@@ -27,12 +27,11 @@ namespace __OS {
   public:
     class Application pcf_static {
     public:
-      static void AddForm(const System::Windows::Forms::Form& form);
       static void EnableVisualStyles() { visualStylesEnabled = true; }
       static void Exit();
       static bool HasVisualStylesEnabled() { return visualStylesEnabled; }
       static void MessageBeep(System::Windows::Forms::MessageBoxIcon type);
-      static void MessageLoop(System::EventHandler idle);
+      static void MessageLoop(const System::Windows::Forms::Form& form, System::EventHandler idle);
       static System::Windows::Forms::DialogResult ShowMessageBox(const string& message, const string& caption, System::Windows::Forms::MessageBoxButtons buttons, System::Windows::Forms::MessageBoxIcon icon, System::Windows::Forms::MessageBoxDefaultButton defaultButton, System::Windows::Forms::MessageBoxOptions options, bool displayHelpButton);
       static void Start();
       static void Stop();

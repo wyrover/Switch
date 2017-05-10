@@ -10,10 +10,6 @@ ref<Form> Application::mainForm;
 bool Application::enableVisualStyles = false;
 EventHandler Application::Idle;
 
-void Application::AddForm() {
-  FormsApi::Application::AddForm(mainForm());
-}
-
 void Application::Exit() {
   FormsApi::Application::Exit();
 }
@@ -25,6 +21,6 @@ void Application::Start() {
 }
 
 void Application::MessageLoop() {
-  FormsApi::Application::MessageLoop(Idle);
+  FormsApi::Application::MessageLoop(mainForm(), Idle);
   FormsApi::Application::Stop();
 }

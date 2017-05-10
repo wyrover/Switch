@@ -46,7 +46,7 @@ void FormsApi::Application::MessageBeep(MessageBoxIcon type) {
   ::MessageBeep((uint32)type);
 }
 
-void FormsApi::Application::MessageLoop(EventHandler idle) {
+void FormsApi::Application::MessageLoop(const System::Windows::Forms::Form& mainForm, EventHandler idle) {
   bool messageLoopRunning = true;
   while (messageLoopRunning) {
     MSG msg;
