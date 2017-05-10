@@ -195,9 +195,6 @@ namespace {
 
 bool FormsApi::Application::visualStylesEnabled = false;
 
-void FormsApi::Application::AddForm(const System::Windows::Forms::Form& form) {
-}
-
 void FormsApi::Application::Exit() {
   Environment::Exit(0);
 }
@@ -209,7 +206,7 @@ void FormsApi::Application::MessageBeep(MessageBoxIcon type) {
   }
 }
 
-void FormsApi::Application::MessageLoop(EventHandler idle) {
+void FormsApi::Application::MessageLoop(const System::Windows::Forms::Form& mainForm, EventHandler idle) {
   ApplicationApi::MessageLoop(idle);
 }
 

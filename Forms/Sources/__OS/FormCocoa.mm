@@ -43,7 +43,7 @@ namespace {
 }
 @end
 
-void FormsApi::Form::Close(const System::Windows::Forms::Form& form) {
+void FormsApi::Form::Close(System::Windows::Forms::Form& form) {
   [(NSWindow*)form.Handle() close];
 }
 

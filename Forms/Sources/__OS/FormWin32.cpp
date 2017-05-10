@@ -14,7 +14,7 @@ using namespace __OS;
 
 extern HINSTANCE __instance;
 
-void FormsApi::Form::Close(const System::Windows::Forms::Form& form) {
+void FormsApi::Form::Close(System::Windows::Forms::Form& form) {
   CloseWindow((HWND)form.Handle());
 }
 

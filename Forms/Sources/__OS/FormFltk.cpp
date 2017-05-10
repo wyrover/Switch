@@ -51,7 +51,7 @@ namespace __OS {
   };
 }
 
-void FormsApi::Form::Close(const System::Windows::Forms::Form& form) {
+void FormsApi::Form::Close(System::Windows::Forms::Form& form) {
 }
 
 intptr FormsApi::Form::Create(const System::Windows::Forms::Form& form) {

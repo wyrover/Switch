@@ -18,6 +18,7 @@ namespace PcfFormApp {
 
       Label label;
       label.Location = Point(10, 40);
+      label.Width = 200;
       label.Name = "label";
       label.Text = "Label";
 
