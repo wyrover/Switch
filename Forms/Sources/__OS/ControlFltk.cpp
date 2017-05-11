@@ -22,8 +22,6 @@ namespace __OS {
       //this->Fl_Widget::draw();
       return 1;
     }
-    const Fl_Widget& ToWidget() const override {return *this;}
-    Fl_Widget& ToWidget() override {return *this;}
   };
 }
 
@@ -50,7 +48,7 @@ void FormsApi::Control::Destroy(const System::Windows::Forms::Control& control) 
 }
 
 System::Drawing::Size FormsApi::Control::GetClientSize(const System::Windows::Forms::Control &control) {
-  return {};
+  return {((__OS::Widget*)control.Handle())->ToWidget().w(), ((__OS::Widget*)control.Handle())->ToWidget().h()};
 }
 
 intptr FormsApi::Control::GetHandleWindowFromDeviceContext(intptr hdc) {
@@ -58,40 +56,62 @@ intptr FormsApi::Control::GetHandleWindowFromDeviceContext(intptr hdc) {
 }
 
 void FormsApi::Control::Invalidate(const System::Windows::Forms::Control& control, bool invalidateChildren) {
+  ((__OS::Widget*)control.Handle())->ToWidget().redraw();
 }
 
 void FormsApi::Control::Invalidate(const System::Windows::Forms::Control& control, const System::Drawing::Rectangle& rect, bool invalidateChildren) {
+  ((__OS::Widget*)control.Handle())->ToWidget().redraw();
 }
 
 System::Drawing::Point FormsApi::Control::PointToClient(const System::Windows::Forms::Control& control, const System::Drawing::Point& point) {
-  return {};
+  System::Drawing::Point pointToClient = point - control.Location();
+  ref<System::Windows::Forms::Control> workControl = control;
+  while (workControl().Parent() != null && !is<System::Windows::Forms::Form>(workControl().Parent())) {
+    workControl = workControl().Parent();
+    pointToClient -= workControl().Location();
+  }
+  
+  if (workControl().Parent != null)
+    pointToClient -= workControl().Parent()().Location();
+  
+  return pointToClient;
 }
 
 System::Drawing::Point FormsApi::Control::PointToScreen(const System::Windows::Forms::Control& control, const System::Drawing::Point& point) {
-  return {};
+  System::Drawing::Point pointToScreen = point + control.Location();
+  ref<System::Windows::Forms::Control> workControl = control;
+  while (workControl().Parent != null && !is<System::Windows::Forms::Form>(workControl().Parent())) {
+    workControl = workControl().Parent();
+    pointToScreen += workControl().Location();
+  }
+  
+  if (workControl().Parent != null)
+    pointToScreen += workControl().Parent()().Location();
+  
+  return pointToScreen;
 }
 
 void FormsApi::Control::SetBackColor(intptr hdc) {
   ref<System::Windows::Forms::Control> control = System::Windows::Forms::Control::FromHandle(GetHandleWindowFromDeviceContext(hdc));
   if (System::Environment::OSVersion().Platform == System::PlatformID::MacOSX && is<System::Windows::Forms::Button>(control) && as<System::Windows::Forms::Button>(control)().IsDefault)
-    ((__OS::Widget*)control().Handle())->Color(FromColor(System::Drawing::SystemColors::Highlight));
+    ((__OS::Widget*)control().Handle())->Color(System::Drawing::SystemColors::Highlight);
   else
-  ((__OS::Widget*)hdc)->Color(FromColor(control().BackColor));
+  ((__OS::Widget*)hdc)->Color(control().BackColor);
 }
 
 void FormsApi::Control::SetForeColor(intptr hdc) {
   ref<System::Windows::Forms::Control> control = System::Windows::Forms::Control::FromHandle(GetHandleWindowFromDeviceContext(hdc));
   if (System::Environment::OSVersion().Platform == System::PlatformID::MacOSX && is<System::Windows::Forms::Button>(control) && as<System::Windows::Forms::Button>(control)().IsDefault)
-    ((__OS::Widget*)control().Handle())->ToWidget().labelcolor(FromColor(System::Drawing::Color::White));
+    ((__OS::Widget*)control().Handle())->ToWidget().labelcolor(__OS::Widget::FromColor(System::Drawing::Color::White));
   else
-    ((__OS::Widget*)hdc)->ToWidget().labelcolor(FromColor(control().ForeColor));
+    ((__OS::Widget*)hdc)->ToWidget().labelcolor(__OS::Widget::FromColor(control().ForeColor));
 }
 
 void FormsApi::Control::SetBackColor(const System::Windows::Forms::Control& control) {
   if (System::Environment::OSVersion().Platform == System::PlatformID::MacOSX && is<System::Windows::Forms::Button>(control) && as<System::Windows::Forms::Button>(control).IsDefault)
-    ((__OS::Widget*)control.Handle())->Color(FromColor(System::Drawing::SystemColors::Highlight));
+    ((__OS::Widget*)control.Handle())->Color(System::Drawing::SystemColors::Highlight);
   else
-    ((__OS::Widget*)control.Handle())->Color(FromColor(control.BackColor));
+    ((__OS::Widget*)control.Handle())->Color(control.BackColor);
 }
 
 void FormsApi::Control::SetClientSize(System::Windows::Forms::Control &control, const System::Drawing::Size &clientSize) {
@@ -100,9 +120,9 @@ void FormsApi::Control::SetClientSize(System::Windows::Forms::Control &control, 
 
 void FormsApi::Control::SetForeColor(const System::Windows::Forms::Control& control) {
   if (System::Environment::OSVersion().Platform == System::PlatformID::MacOSX && System::Environment::OSVersion().Platform == System::PlatformID::MacOSX && is<System::Windows::Forms::Button>(control) && as<System::Windows::Forms::Button>(control).IsDefault)
-    ((__OS::Widget*)control.Handle())->ToWidget().labelcolor(FromColor(System::Drawing::Color::White));
+    ((__OS::Widget*)control.Handle())->ToWidget().labelcolor(__OS::Widget::FromColor(System::Drawing::Color::White));
   else
-    ((__OS::Widget*)control.Handle())->ToWidget().labelcolor(FromColor(control.ForeColor));
+    ((__OS::Widget*)control.Handle())->ToWidget().labelcolor(__OS::Widget::FromColor(control.ForeColor));
 }
 
 void FormsApi::Control::SetLocation(const System::Windows::Forms::Control& control) {

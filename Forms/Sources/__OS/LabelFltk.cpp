@@ -22,8 +22,6 @@ namespace __OS {
       this->Fl_Box::draw();
       return 1;
     }
-    const Fl_Widget& ToWidget() const override {return *this;}
-    Fl_Widget& ToWidget() override {return *this;}
   };
 }
 

@@ -31,9 +31,6 @@ namespace __OS {
       return 1;
     }
     
-    const Fl_Widget& ToWidget() const override {return *this;}
-    Fl_Widget& ToWidget() override {return *this;}
-    
     void SetIsDefault(bool isDefault) {this->isDefault = isDefault;}
     
   private:
@@ -45,7 +42,7 @@ intptr FormsApi::Button::Create(const System::Windows::Forms::Button& button) {
   __OS::Button* handle = CreateControl<__OS::Button>(button);
   handle->align(FL_ALIGN_CENTER | FL_ALIGN_INSIDE | FL_ALIGN_CLIP | FL_ALIGN_WRAP);
   if (System::Environment::OSVersion().Platform == System::PlatformID::MacOSX)
-    handle->selection_color(FromColor(System::Drawing::SystemColors::Highlight));
+    handle->selection_color(__OS::Widget::FromColor(System::Drawing::SystemColors::Highlight));
   return (intptr)handle;
 }
 

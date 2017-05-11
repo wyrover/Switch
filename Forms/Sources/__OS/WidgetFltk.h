@@ -14,21 +14,16 @@ namespace __OS {
   public:
     virtual const Fl_Widget& ToWidget() const = 0;
     virtual Fl_Widget& ToWidget() = 0;
-
-    virtual void Color(Fl_Color color) = 0;
-    
-    virtual const Fl_Group& Container() const = 0;
-    virtual Fl_Group& Container() = 0;
 };
 
   class Widget : public IWidget {
   public:
     static const int32 notUsed = 0;
     
-    void Color(Fl_Color color) override {this->ToWidget().color(color);}
+    virtual void Color(const System::Drawing::Color& color) {this->ToWidget().color(FromColor(color));}
     
-    const Fl_Group& Container() const override {return as<Fl_Group>(this->ToWidget());}
-    Fl_Group& Container() override {return as<Fl_Group>(this->ToWidget());}
+    virtual const Fl_Group& Container() const {return as<Fl_Group>(this->ToWidget());}
+    virtual Fl_Group& Container() {return as<Fl_Group>(this->ToWidget());}
     
     int32 Close(Widget& control) {
       return control.events[FL_CLOSE](FL_CLOSE, control);
@@ -49,8 +44,15 @@ namespace __OS {
 
     virtual int32 HandleControl(int32 event) = 0;
     
+    const Fl_Widget& ToWidget() const override {return as<Fl_Widget>(*this);}
+    Fl_Widget& ToWidget() override {return as<Fl_Widget>(*this);}
+    
+    static Fl_Color FromColor(const System::Drawing::Color& color) {
+      return fl_rgb_color(as<byte>(color.R()), as<byte>(color.G()), as<byte>(color.B()));
+    }
+    
   private:
-     int32 WndProc(System::Windows::Forms::Message& message) {
+    int32 WndProc(System::Windows::Forms::Message& message) {
       ref<System::Windows::Forms::Control> control = System::Windows::Forms::Control::FromHandle(message.HWnd);
       if (control != null)
         control().WndProc(message);
@@ -215,7 +217,6 @@ namespace __OS {
       return this->WndProc(message);
     }
 
-  private:
     using FlEventHandler = delegate<int32, int32, Widget&>;
     System::Collections::Generic::SortedDictionary<int32, FlEventHandler> events {{FL_NO_EVENT, {*this, &Widget::FlNoEvent}}, {FL_ENTER, {*this, &Widget::FlEnter}}, {FL_MOVE, {*this, &Widget::FlMove}}, {FL_PUSH, {*this, &Widget::FlPush}}, {FL_RELEASE, {*this, &Widget::FlRelease}}, {FL_MOUSEWHEEL, {*this, &Widget::FlMouseWheel}}, {FL_LEAVE, {*this, &Widget::FlLeave}}, {FL_DRAG, {*this, &Widget::FlDrag}}, {FL_FOCUS, {*this, &Widget::FlFocus}}, {FL_UNFOCUS, {*this, &Widget::FlUnfocus}}, {FL_KEYDOWN, {*this, &Widget::FlKeyDown}}, {FL_KEYUP, {*this, &Widget::FlKeyUp}}, {FL_CLOSE, {*this, &Widget::FlClose}}, {FL_SHORTCUT, {*this, &Widget::FlShortcut}}, {FL_ACTIVATE, {*this, &Widget::FlActivate}}, {FL_DEACTIVATE, {*this, &Widget::FlDeactivate}}, {FL_HIDE, {*this, &Widget::FlHide}}, {FL_SHOW, {*this, &Widget::FLShow}}, {FL_SELECTIONCLEAR, {*this, &Widget::FlSelectionClear}}, {FL_DND_ENTER, {*this, &Widget::FlDndEnter}}, {FL_DND_DRAG, {*this, &Widget::FlDndDrag}}, {FL_DND_RELEASE, {*this, &Widget::FlDndRelease}}, {FL_DND_LEAVE, {*this, &Widget::FlDndLeave}}, {FL_SCREEN_CONFIGURATION_CHANGED, {*this, &Widget::FlScreenConfiguartionChange}}, {FL_FULLSCREEN, {*this, &Widget::FlFullscreen}}, {FL_PAINT, {*this, &Widget::FlPaint}}};
     bool hover = false;

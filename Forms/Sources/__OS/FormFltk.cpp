@@ -21,9 +21,9 @@ namespace __OS {
       this->callback(CloseForm, this);
     }
 
-    void Color(Fl_Color color) override {
-      this->Fl_Double_Window::color(color);
-      this->container.color(color);
+    void Color(const System::Drawing::Color& color) override {
+      this->Fl_Double_Window::color(FromColor(color));
+      this->container.color(FromColor(color));
     }
     
     void draw() override {this->Draw(*this);}
@@ -36,9 +36,6 @@ namespace __OS {
       this->Fl_Double_Window::draw();
       return 1;
     }
-    
-    const Fl_Widget& ToWidget() const override {return *this;}
-    Fl_Widget& ToWidget() override {return *this;}
     
     const Fl_Group& Container() const override {return this->container;}
     Fl_Group& Container() override {return this->container;}

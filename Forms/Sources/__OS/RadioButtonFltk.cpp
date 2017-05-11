@@ -22,15 +22,13 @@ namespace __OS {
       this->Fl_Round_Button::draw();
       return 1;
     }
-    const Fl_Widget& ToWidget() const override {return *this;}
-    Fl_Widget& ToWidget() override {return *this;}
   };
 }
 
 intptr FormsApi::RadioButton::Create(const System::Windows::Forms::RadioButton& radioButton) {
   __OS::RadioButton* handle = CreateControl<__OS::RadioButton>(radioButton);
   if (System::Environment::OSVersion().Platform == System::PlatformID::MacOSX)
-    handle->selection_color(FromColor(System::Drawing::SystemColors::Highlight));
+    handle->selection_color(__OS::Widget::FromColor(System::Drawing::SystemColors::Highlight));
   return (intptr)handle;
 }
 

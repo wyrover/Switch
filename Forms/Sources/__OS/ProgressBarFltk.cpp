@@ -22,14 +22,12 @@ namespace __OS {
       this->Fl_Progress::draw();
       return 1;
     }
-    const Fl_Widget& ToWidget() const override {return *this;}
-    Fl_Widget& ToWidget() override {return *this;}
   };
 }
 
 intptr FormsApi::ProgressBar::Create(const System::Windows::Forms::ProgressBar& progressBar) {
   __OS::ProgressBar* handle = CreateControl<__OS::ProgressBar>(progressBar);
-  handle->selection_color(FromColor(System::Drawing::SystemColors::Highlight));
+  handle->selection_color(__OS::Widget::FromColor(System::Drawing::SystemColors::Highlight));
   return (intptr)handle;
 }
 
