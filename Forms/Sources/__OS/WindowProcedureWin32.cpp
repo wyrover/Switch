@@ -10,7 +10,7 @@ using namespace System::Collections::Generic;
 using namespace System::Windows::Forms;
 using namespace __OS;
 
-SortedDictionary<intptr, WNDPROC> WindowProcedure::DefWindowProcs;
+Dictionary<intptr, WNDPROC> WindowProcedure::DefWindowProcs;
 
 void WindowProcedure::SetWindowTheme(HWND handle) {
   if (!FormsApi::Application::HasVisualStylesEnabled())

@@ -21,7 +21,7 @@ namespace PcfFormApp {
       label.Width = 150;
       label.Name = "label";
       label.Text = "Label";
-      label.BackColor = Color::SpringGreen;
+      //label.BackColor = Color::SpringGreen;
 
       CheckBox checkBox;
       checkBox.Name = "checkBox1";
@@ -75,8 +75,8 @@ namespace PcfFormApp {
       form.ClientSize = Size(300, 300);
       //form.BackColor = Color::SpringGreen;
       
+      int counter = 0;
       Application::Idle += pcf_delegate(const object& sender, const EventArgs& e) {
-        static int counter = 0;
         label.Text = string::Format("counter = {0}", counter++);
       };
 

@@ -43,6 +43,7 @@ void FormsApi::Application::MessageBeep(MessageBoxIcon type) {
   ::MessageBeep((uint32)type);
 }
 
+/*
 void FormsApi::Application::MessageLoop(const System::Windows::Forms::Form& mainForm, EventHandler idle) {
   bool messageLoopRunning = true;
   while (messageLoopRunning) {
@@ -60,6 +61,21 @@ void FormsApi::Application::MessageLoop(const System::Windows::Forms::Form& main
         messageLoopRunning = false;
     }
     idle(object(), EventArgs::Empty);
+  }
+}
+*/
+
+void FormsApi::Application::MessageLoop(const System::Windows::Forms::Form& mainForm, EventHandler idle) {
+  for (;;) {
+    MSG msg;
+    if (idle.IsEmpty() ? GetMessage(&msg, NULL, 0, 0) : PeekMessage(&msg, NULL, 0, 0, PM_REMOVE) != 0) {
+      TranslateMessage(&msg);
+      DispatchMessage(&msg);
+      if (msg.message == WM_QUIT) return;
+    } else {
+      if (idle.IsEmpty()) return;
+      idle(object(), EventArgs::Empty);
+    }
   }
 }
 
