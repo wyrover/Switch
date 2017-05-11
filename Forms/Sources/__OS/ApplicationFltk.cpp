@@ -31,6 +31,10 @@ namespace {
   static Fl_Color FromColor(const System::Drawing::Color& color) {
     return fl_rgb_color(as<byte>(color.R()), as<byte>(color.G()), as<byte>(color.B()));
   }
+  
+  static void ApplicationIdle(void* idle) {
+    ((System::EventHandler*)idle)->Invoke(object(), System::EventArgs::Empty);
+  }
 }
 
 bool FormsApi::Application::visualStylesEnabled = false;
@@ -40,7 +44,9 @@ void FormsApi::Application::Exit() {
 }
 
 void FormsApi::Application::MessageLoop(const System::Windows::Forms::Form& mainForm, EventHandler idle) {
+  Fl::add_idle(&ApplicationIdle, &idle);
   exitCode = Fl::run();
+  Fl::remove_idle(&ApplicationIdle);
 }
 
 void FormsApi::Application::MessageBeep(MessageBoxIcon type) {
