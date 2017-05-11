@@ -18,9 +18,10 @@ namespace PcfFormApp {
 
       Label label;
       label.Location = Point(10, 40);
-      label.Width = 200;
+      label.Width = 150;
       label.Name = "label";
       label.Text = "Label";
+      label.BackColor = Color::SpringGreen;
 
       CheckBox checkBox;
       checkBox.Name = "checkBox1";

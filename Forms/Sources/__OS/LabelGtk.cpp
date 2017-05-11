@@ -12,8 +12,22 @@ using namespace __OS;
 namespace __OS {
   class Label : public Widget, public Gtk::Label {
   public:
-    Label() {this->RegisterEvent();}
+    Label() {
+      //LIGN_START);
+      //this->set_justify(Gtk::JUSTIFY_LEFT);
+      gtk_label_set_xalign (this->gobj(), textAlignLeft);
+      gtk_label_set_yalign (this->gobj(), textAlignTop);
+      this->RegisterEvent();
+    }
     void Text(const string& text) override {this->set_label(text.c_str());}
+    
+  private:
+    constexpr static float textAlignLeft = 0;
+    constexpr static float textAlignMidle = 0.5;
+    constexpr static float textAlignRigth = 1;
+    constexpr static float textAlignTop = 0;
+    constexpr static float textAlignCenter = 0.5;
+    constexpr static float textAlignBottom = 1;
   };
 }
 
