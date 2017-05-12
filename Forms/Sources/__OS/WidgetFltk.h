@@ -20,14 +20,13 @@ namespace __OS {
   public:
     static const int32 notUsed = 0;
     
-    virtual void Color(const System::Drawing::Color& color) {this->ToWidget().color(FromColor(color));}
+    virtual void BackColor(const System::Drawing::Color& color) {this->ToWidget().color(FromColor(color));}
+    virtual void ForeColor(const System::Drawing::Color& color) {this->ToWidget().labelcolor(FromColor(color));}
     
     virtual const Fl_Group& Container() const {return as<Fl_Group>(this->ToWidget());}
     virtual Fl_Group& Container() {return as<Fl_Group>(this->ToWidget());}
     
-    int32 Close(Widget& control) {
-      return control.events[FL_CLOSE](FL_CLOSE, control);
-    }
+    int32 Close(Widget& control) {return control.events[FL_CLOSE](FL_CLOSE, control);}
 
     void Draw(Widget& control) {
       if (this->events.ContainsKey(FL_PAINT))
@@ -42,7 +41,12 @@ namespace __OS {
       return control.HandleControl(event);
     }
 
-    virtual int32 HandleControl(int32 event) = 0;
+    virtual int32 HandleControl(int32 event) {
+      if (event != FL_PAINT)
+        return this->ToWidget().handle(event);
+      this->ToWidget().draw();
+      return 1;
+    }
     
     const Fl_Widget& ToWidget() const override {return as<Fl_Widget>(*this);}
     Fl_Widget& ToWidget() override {return as<Fl_Widget>(*this);}

@@ -20,8 +20,8 @@ namespace __OS {
         this->simulate_key_action();
         this->do_callback();
         return 1;
-      } else
-        return this->HandleEvent(event, *this);
+      }
+      return this->HandleEvent(event, *this);
     }
     
     int32 HandleControl(int32 event) override {

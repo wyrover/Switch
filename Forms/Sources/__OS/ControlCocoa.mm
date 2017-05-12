@@ -105,11 +105,31 @@ void FormsApi::Control::Invalidate(const System::Windows::Forms::Control& contro
 }
 
 System::Drawing::Point FormsApi::Control::PointToClient(const System::Windows::Forms::Control& control, const System::Drawing::Point& point) {
-  return System::Drawing::Point();
+  System::Drawing::Point pointToClient = point - control.Location();
+  ref<System::Windows::Forms::Control> workControl = control;
+  while (workControl().Parent() != null && !is<System::Windows::Forms::Form>(workControl().Parent())) {
+    workControl = workControl().Parent();
+    pointToClient -= workControl().Location();
+  }
+  
+  if (workControl().Parent != null)
+    pointToClient -= workControl().Parent()().Location();
+  
+  return pointToClient;
 }
 
 System::Drawing::Point FormsApi::Control::PointToScreen(const System::Windows::Forms::Control& control, const System::Drawing::Point& point) {
-  return System::Drawing::Point();
+  System::Drawing::Point pointToScreen = point + control.Location();
+  ref<System::Windows::Forms::Control> workControl = control;
+  while (workControl().Parent != null && !is<System::Windows::Forms::Form>(workControl().Parent())) {
+    workControl = workControl().Parent();
+    pointToScreen += workControl().Location();
+  }
+  
+  if (workControl().Parent != null)
+    pointToScreen += workControl().Parent()().Location();
+  
+  return pointToScreen;
 }
 
 void FormsApi::Control::SetBackColor(intptr hdc) {
@@ -129,6 +149,19 @@ void FormsApi::Control::SetBackColor(intptr hdc) {
   }
 }
 
+void FormsApi::Control::SetBackColor(const System::Windows::Forms::Control& control) {
+  if (is<System::Windows::Forms::Form>(control)) {
+    ((NSWindow*)control.Handle()).backgroundColor = CocoaApi::FromColor(control.BackColor);
+  } else if (is<System::Windows::Forms::Label>(control)) {
+    ((NSTextField*)control.Handle()).backgroundColor = CocoaApi::FromColor(control.BackColor);
+  } else if (is<System::Windows::Forms::Panel>(control)) {
+    ((NSScrollView*)control.Handle()).backgroundColor = CocoaApi::FromColor(control.BackColor);
+  } else {
+    [(NSControl*)control.Handle() setWantsLayer:YES];
+    ((NSControl*)control.Handle()).layer.backgroundColor = CocoaApi::FromColor(control.BackColor).CGColor;
+  }
+}
+
 void FormsApi::Control::SetClientSize(System::Windows::Forms::Control& control, const System::Drawing::Size& clientSize) {
   @autoreleasepool {
     if (is<System::Windows::Forms::Form>(control)) {
@@ -143,19 +176,6 @@ void FormsApi::Control::SetClientSize(System::Windows::Forms::Control& control, 
 }
 
 void FormsApi::Control::SetForeColor(intptr hdc) {
-}
-
-void FormsApi::Control::SetBackColor(const System::Windows::Forms::Control& control) {
-  if (is<System::Windows::Forms::Form>(control)) {
-    ((NSWindow*)control.Handle()).backgroundColor = CocoaApi::FromColor(control.BackColor);
-  } else if (is<System::Windows::Forms::Label>(control)) {
-    ((NSTextField*)control.Handle()).backgroundColor = CocoaApi::FromColor(control.BackColor);
-  } else if (is<System::Windows::Forms::Panel>(control)) {
-    ((NSScrollView*)control.Handle()).backgroundColor = CocoaApi::FromColor(control.BackColor);
-  } else {
-    [(NSControl*)control.Handle() setWantsLayer:YES];
-    ((NSControl*)control.Handle()).layer.backgroundColor = CocoaApi::FromColor(control.BackColor).CGColor;
-  }
 }
 
 void FormsApi::Control::SetForeColor(const System::Windows::Forms::Control& control) {

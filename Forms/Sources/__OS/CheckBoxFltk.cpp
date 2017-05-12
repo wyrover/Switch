@@ -17,7 +17,15 @@ namespace __OS {
     int32 HandleControl(int32 event) override {
       if (event != FL_PAINT)
         return this->Fl_Check_Button::handle(event);
+      if (System::Environment::OSVersion().Platform == System::PlatformID::MacOSX && this->value() != 0) {
+        Fl::set_color(FL_BACKGROUND2_COLOR, 0x56, 0x96, 0xF5);
+        Fl::set_color(FL_SELECTION_COLOR, 0xFF, 0xFF, 0xFF);
+      }
       this->Fl_Check_Button::draw();
+      if (System::Environment::OSVersion().Platform == System::PlatformID::MacOSX) {
+        Fl::set_color(FL_BACKGROUND2_COLOR, 0xFF, 0xFF, 0xFF);
+        Fl::set_color(FL_SELECTION_COLOR, 0x56, 0x96, 0xF5);
+      }
       return 1;
     }
   };
@@ -34,6 +42,15 @@ void FormsApi::CheckBox::SetAutoCheck(const System::Windows::Forms::CheckBox& ch
 
 void FormsApi::CheckBox::SetChecked(const System::Windows::Forms::CheckBox& checkBox) {
   ((Fl_Check_Button&)((__OS::Widget*)checkBox.Handle())->ToWidget()).value(checkBox.Checked);
+  if (System::Environment::OSVersion().Platform == System::PlatformID::MacOSX) {
+    if (((__OS::CheckBox*)checkBox.Handle())->value() != 0) {
+      ((__OS::CheckBox*)checkBox.Handle())->BackColor(System::Drawing::SystemColors::Highlight);
+      ((__OS::CheckBox*)checkBox.Handle())->selection_color(__OS::Widget::FromColor(System::Drawing::SystemColors::HighlightText));
+    } else {
+      ((__OS::CheckBox*)checkBox.Handle())->BackColor(checkBox.BackColor);
+      ((__OS::CheckBox*)checkBox.Handle())->selection_color(__OS::Widget::FromColor(checkBox.ForeColor));
+    }
+  }
 }
 
 #endif

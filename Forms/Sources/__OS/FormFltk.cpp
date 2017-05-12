@@ -21,7 +21,7 @@ namespace __OS {
       this->callback(CloseForm, this);
     }
 
-    void Color(const System::Drawing::Color& color) override {
+    void BackColor(const System::Drawing::Color& color) override {
       this->Fl_Double_Window::color(FromColor(color));
       this->container.color(FromColor(color));
     }
