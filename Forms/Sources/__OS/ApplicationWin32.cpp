@@ -3,6 +3,7 @@
 
 #include <Windows.h>
 #include <Pcf/Undef.h>
+#include <Pcf/System/Diagnostics/Debug.h>
 
 #include "FormsApi.h"
 
@@ -44,16 +45,15 @@ void FormsApi::Application::MessageBeep(MessageBoxIcon type) {
 }
 
 void FormsApi::Application::MessageLoop(const System::Windows::Forms::Form& mainForm, EventHandler idle) {
-  for (;;) {
+  while (true) {
     MSG msg;
-    if (idle.IsEmpty() ? GetMessage(&msg, NULL, 0, 0) : PeekMessage(&msg, NULL, 0, 0, PM_REMOVE) != 0) {
+    if (idle.IsEmpty() || PeekMessage(&msg, NULL, 0, 0, PM_NOREMOVE) != 0) {
+      if (GetMessage(&msg, NULL, 0, 0) == 0) return;
       TranslateMessage(&msg);
       DispatchMessage(&msg);
       if (msg.message == WM_QUIT) return;
-    } else {
-      if (idle.IsEmpty()) return;
-      idle(object(), EventArgs::Empty);
     }
+    idle(object(), EventArgs::Empty);
   }
 }
 

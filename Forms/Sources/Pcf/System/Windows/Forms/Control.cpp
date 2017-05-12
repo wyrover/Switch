@@ -233,6 +233,7 @@ void Control::WmCreate(Message& message) {
 }
 
 void Control::WmCtlColorControl(Message& message) {
+  this->DefWndProc(message);
   System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmCtlColorControl message=" + message + ", name=" + this->name);  
   ref<Control> control = FromHandle(message.LParam);
   if (control == null)

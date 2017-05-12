@@ -26,6 +26,7 @@ namespace PcfFormApp {
       CheckBox checkBox;
       checkBox.Name = "checkBox1";
       checkBox.Text = "Check 1";
+      checkBox.Width = 200;
       checkBox.Location = Point(10, 70);
       checkBox.Checked = true;
       checkBox.Click += pcf_delegate(const object& sender, const EventArgs& e) {
@@ -53,7 +54,6 @@ namespace PcfFormApp {
       button.Name = "button";
       button.Text = "Click me";
       button.Location = Point(10, 160);
-      button.IsDefault = true;
       button.Click += pcf_delegate(const object& sender, const EventArgs& e) {
         MessageBox::Show("Hello, World !", "Message", MessageBoxButtons::OKCancel, MessageBoxIcon::Hand);
       };
@@ -77,7 +77,8 @@ namespace PcfFormApp {
       
       int counter = 0;
       Application::Idle += pcf_delegate(const object& sender, const EventArgs& e) {
-        label.Text = string::Format("counter = {0}", counter++);
+        //label.Text = string::Format("counter = {0}", counter++);
+        checkBox.Text = string::Format("counter = {0}", counter++);
       };
 
       Application::EnableVisualStyles();
