@@ -43,28 +43,6 @@ void FormsApi::Application::MessageBeep(MessageBoxIcon type) {
   ::MessageBeep((uint32)type);
 }
 
-/*
-void FormsApi::Application::MessageLoop(const System::Windows::Forms::Form& mainForm, EventHandler idle) {
-  bool messageLoopRunning = true;
-  while (messageLoopRunning) {
-    MSG msg;
-    int32 result = idle.IsEmpty() ? GetMessage(&msg, NULL, 0, 0) : PeekMessage(&msg, NULL, 0, 0, PM_REMOVE);
-    while (result != 0) {
-      TranslateMessage(&msg);
-      DispatchMessage(&msg);
-      if (msg.message == WM_QUIT) {
-        messageLoopRunning = false;
-        break;
-      }
-      result = idle.IsEmpty() ? GetMessage(&msg, NULL, 0, 0) : PeekMessage(&msg, NULL, 0, 0, PM_REMOVE);
-      if (idle.IsEmpty() && !result)
-        messageLoopRunning = false;
-    }
-    idle(object(), EventArgs::Empty);
-  }
-}
-*/
-
 void FormsApi::Application::MessageLoop(const System::Windows::Forms::Form& mainForm, EventHandler idle) {
   for (;;) {
     MSG msg;

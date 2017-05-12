@@ -2,7 +2,6 @@
 /// @brief Contains Pcf::System::Windows::Forms::Form class.
 #pragma once
 
-#include <Pcf/System/Diagnostics/Debug.h>
 #include "ContainerControl.h"
 #include "BorderStyle.h"
 #include "FormClosedEventHandler.h"

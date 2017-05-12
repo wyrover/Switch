@@ -1,4 +1,5 @@
 #include <Pcf/System/BitConverter.h>
+#include <Pcf/System/Diagnostics/Debug.h>
 #include <Pcf/System/Drawing/Graphics.h>
 #include <Pcf/System/Drawing/SolidBrush.h>
 #include "../../../../../Includes/Pcf/System/Windows/Forms/Application.h"
@@ -14,13 +15,16 @@ System::Collections::Generic::Dictionary<intptr, ref<Control>> Control::handles;
 
 namespace {
   struct ShowDebugTrace {
-    static constexpr bool AllWindowMessages = true;
+    static constexpr bool AllWindowMessages = false;
     static constexpr bool MouseWindowMessage = false;
     static constexpr bool WindowMessage = false;
   };
 
   bool AllWindowMessagesFilter(const Message& message) {
-    return false; // true; //message.Msg != WM_TIMER && message.Msg != WM_PAINT && message.Msg != WM_ERASEBKGND;  //!message.ToString().Contains("WM_NULL");
+    return false; 
+    //return true;
+    //return message.Msg != WM_TIMER && message.Msg != WM_PAINT && message.Msg != WM_ERASEBKGND;
+    //return !message.ToString().Contains("WM_NULL");
   }
 
   MouseButtons MessageToMouseButtons(Message message) {
@@ -131,10 +135,8 @@ void Control::SetClientSize(const System::Drawing::Size& clientSize) {
 
 void Control::OnBackColorChanged(const EventArgs& e) {
   this->backBrush = System::Drawing::SolidBrush(this->BackColor);
-  if (this->IsHandleCreated) {
+  if (this->IsHandleCreated)
     __OS::FormsApi::Control::SetBackColor(*this);
-    this->Invalidate();
-  }
   this->BackColorChanged(*this, e);
 }
 
@@ -143,10 +145,8 @@ void Control::OnClientSizeChanged(const EventArgs& e) {
 }
 
 void Control::OnForeColorChanged(const EventArgs& e) {
-  if (this->IsHandleCreated) {
+  if (this->IsHandleCreated)
     __OS::FormsApi::Control::SetForeColor(*this);
-    this->Invalidate();
-  }
   this->ForeColorChanged(*this, e);
 }
 
@@ -351,7 +351,7 @@ void Control::WmMouseEnter(Message& message) {
   System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::MouseWindowMessage, "Control::WmMouseEnter message=" + message + ", name=" + this->name);
   this->SetState(State::MouseEntered, true);
   controlEntered = *this;
-  this->DefWndProc(message);
+  //this->DefWndProc(message);
   this->OnMouseEnter(EventArgs::Empty);
 }
 

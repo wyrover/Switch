@@ -31,10 +31,7 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::Control& control)
 }
 
 void FormsApi::Control::DefWndProc(Message& message) {
-  if (WindowProcedure::DefWindowProcs.ContainsKey(message.HWnd()))
     message.Result = WindowProcedure::DefWindowProcs[message.HWnd()]((HWND)message.HWnd(), message.Msg, message.WParam, message.LParam);
-  else
-    message.Result = DefWindowProc((HWND)message.HWnd(), message.Msg, message.WParam, message.LParam);
 }
 
 void FormsApi::Control::Destroy(const System::Windows::Forms::Control& control) {
@@ -121,7 +118,6 @@ void FormsApi::Control::SetLocation(const System::Windows::Forms::Control& contr
 
 void FormsApi::Control::SetParent(const System::Windows::Forms::Control& control) {
   ::SetParent((HWND)control.Handle(), control.Parent() != null ? (HWND)control.Parent()().Handle() : (HWND)0);
-
 }
 
 void FormsApi::Control::SetClientSize(System::Windows::Forms::Control& control, const System::Drawing::Size& clientSize) {
@@ -138,7 +134,7 @@ void FormsApi::Control::SetSize(const System::Windows::Forms::Control& control) 
 }
 
 void FormsApi::Control::SetText(const System::Windows::Forms::Control& control) {
-  SetWindowText((HWND)control.Handle(), control.Text().w_str().c_str());
+  SendMessage((HWND)control.Handle(), WM_SETTEXT, 0, (LPARAM)control.Text().w_str().c_str());
 }
 
 void FormsApi::Control::SetVisible(const System::Windows::Forms::Control& control) {
