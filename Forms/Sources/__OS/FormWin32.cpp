@@ -19,7 +19,7 @@ void FormsApi::Form::Close(System::Windows::Forms::Form& form) {
 }
 
 intptr FormsApi::Form::Create(const System::Windows::Forms::Form& form) {
-  int32 style = WS_VISIBLE | WS_OVERLAPPEDWINDOW | WS_GROUP | (form.HScroll ? WS_HSCROLL : 0) | (form.VScroll ? WS_VSCROLL : 0);
+  int32 style = WS_OVERLAPPEDWINDOW | WS_GROUP | (form.HScroll ? WS_HSCROLL : 0) | (form.VScroll ? WS_VSCROLL : 0);
   int32 exStyle = 0; //WS_EX_COMPOSITED;
   System::Drawing::Rectangle bounds = Drawing::Rectangle(CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT);
   switch (form.StartPosition) {

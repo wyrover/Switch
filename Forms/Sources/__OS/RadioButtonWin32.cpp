@@ -14,7 +14,7 @@ using namespace __OS;
 extern HINSTANCE __instance;
 
 intptr FormsApi::RadioButton::Create(const System::Windows::Forms::RadioButton& radioButton) {
-  int32 style = WS_TABSTOP | WS_VISIBLE | WS_CHILD | (radioButton.AutoCheck ? BS_AUTORADIOBUTTON : BS_RADIOBUTTON);
+  int32 style = WS_CHILD | WS_TABSTOP | (radioButton.AutoCheck ? BS_AUTORADIOBUTTON : BS_RADIOBUTTON);
   int32 exStyle = 0;
   HWND handle = CreateWindowEx(exStyle, L"Button", radioButton.Text().w_str().c_str(), style, radioButton.Bounds().Left, radioButton.Bounds().Top, radioButton.Bounds().Width, radioButton.Bounds().Height, (HWND)radioButton.Parent()().Handle(), (HMENU)0, __instance, (LPVOID)NULL);
   WindowProcedure::SetWindowTheme(handle);

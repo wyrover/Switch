@@ -22,7 +22,7 @@ namespace {
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Control& control) {
-  int32 style = WS_VISIBLE | WS_CHILD;
+  int32 style = WS_CHILD;
   int32 exStyle = 0;
   HWND handle = CreateWindowEx(exStyle, L"Control", control.Text().w_str().c_str(), style, control.Bounds().Left, control.Bounds().Top, control.Bounds().Width, control.Bounds().Height, (HWND)control.Parent()().Handle(), (HMENU)0, __instance, (LPVOID)NULL);
   WindowProcedure::SetWindowTheme(handle);
@@ -81,11 +81,10 @@ System::Drawing::Point FormsApi::Control::PointToScreen(const System::Windows::F
 
 void FormsApi::Control::SetBackColor(intptr hdc) {
   ref<System::Windows::Forms::Control> control = System::Windows::Forms::Control::FromHandle(GetHandleWindowFromDeviceContext(hdc));
-  if (control != null)
-    if (control().BackColor == Color::Transparent)
-      SetBkMode((HDC)hdc, TRANSPARENT);
-    else
-      SetBkColor((HDC)hdc, ColorToRgb(control().BackColor));
+  if (control != null) {
+    SetBkMode((HDC)hdc, TRANSPARENT);
+    SetBkColor((HDC)hdc, ColorToRgb(control().BackColor));
+  }
 }
 
 void FormsApi::Control::SetForeColor(intptr hdc) {

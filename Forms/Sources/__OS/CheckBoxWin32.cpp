@@ -14,7 +14,7 @@ using namespace __OS;
 extern HINSTANCE __instance;
 
 intptr FormsApi::CheckBox::Create(const System::Windows::Forms::CheckBox& checkBox) {
-  int32 style = WS_TABSTOP | WS_VISIBLE | WS_CHILD | (checkBox.AutoCheck ? BS_AUTOCHECKBOX : BS_CHECKBOX);
+  int32 style = WS_CHILD | WS_TABSTOP | (checkBox.AutoCheck ? BS_AUTOCHECKBOX : BS_CHECKBOX);
   int32 exStyle = 0;
   HWND handle = CreateWindowEx(exStyle, L"Button", checkBox.Text().w_str().c_str(), style, checkBox.Bounds().Left, checkBox.Bounds().Top, checkBox.Bounds().Width, checkBox.Bounds().Height, (HWND)checkBox.Parent()().Handle(), (HMENU)0, __instance, (LPVOID)NULL);
   WindowProcedure::SetWindowTheme(handle);
