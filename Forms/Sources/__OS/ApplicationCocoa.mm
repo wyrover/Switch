@@ -15,10 +15,9 @@ namespace {
         messageLoopRunning = true;
         while (messageLoopRunning) {
           NSEvent* event = idle.IsEmpty() ? GetMessage() : PeekMessage();
-          if (event != nil) {
+          if (event != nil)
             DispatchMessage(event);
-          } else
-            idle(object(), EventArgs());
+          idle(object(), EventArgs());
         }
       }
     }

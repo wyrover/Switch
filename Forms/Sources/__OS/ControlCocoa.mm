@@ -214,7 +214,7 @@ void FormsApi::Control::SetText(const System::Windows::Forms::Control& control) 
       [(NSButton*)control.Handle()  setTitle:[NSString stringWithUTF8String:control.Text().c_str()]];
     else if (is<System::Windows::Forms::Form>(control))
       [(NSWindow*)control.Handle()  setTitle:[NSString stringWithUTF8String:control.Text().c_str()]];
-    else
+    else if (!is<System::Windows::Forms::Panel>(control) && !is<System::Windows::Forms::ProgressBar>(control))
       [(NSControl*)control.Handle()  setStringValue:[NSString stringWithUTF8String:control.Text().c_str()]];
   }
 }

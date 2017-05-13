@@ -23,21 +23,32 @@ namespace PcfFormApp {
       label.Text = "Label";
       //label.BackColor = Color::SpringGreen;
 
-      CheckBox checkBox;
-      checkBox.Name = "checkBox1";
-      checkBox.Text = "Check 1";
-      checkBox.Width = 200;
-      checkBox.Location = Point(10, 70);
-      checkBox.Checked = true;
-      checkBox.Click += pcf_delegate(const object& sender, const EventArgs& e) {
-        progressBar.Value = 0;
+      CheckBox checkBox1;
+      checkBox1.Name = "checkBox1";
+      checkBox1.Text = "Check 1";
+      checkBox1.Width = 200;
+      checkBox1.Location = Point(10, 70);
+      checkBox1.Checked = true;
+      checkBox1.Click += pcf_delegate(const object& sender, const EventArgs& e) {
+        if (checkBox1.Checked)
+          progressBar.Value = 0;
       };
-
+      
+      CheckBox checkBox2;
+      checkBox2.Name = "checkBox2";
+      checkBox2.Text = "Check 2";
+      checkBox2.Width = 200;
+      checkBox2.Location = Point(10, 100);
+      checkBox2.Click += pcf_delegate(const object& sender, const EventArgs& e) {
+        if (checkBox2.Checked)
+          progressBar.Value = 25;
+      };
+      
       RadioButton radioButton1;
       radioButton1.Name = "radioButton1";
       radioButton1.Text = "Radio 1";
-      radioButton1.Location = Point(10, 100);
-      radioButton1.Checked = true;
+      radioButton1.Location = Point(10, 130);
+      //radioButton1.Checked = true;
       radioButton1.Click += pcf_delegate(const object& sender, const EventArgs& e) {
         progressBar.Value = 50;
       };
@@ -45,7 +56,8 @@ namespace PcfFormApp {
       RadioButton radioButton2;
       radioButton2.Name = "radioButton2";
       radioButton2.Text = "Radio 2";
-      radioButton2.Location = Point(10, 130);
+      radioButton2.Location = Point(10, 160);
+      radioButton2.Checked = true;
       radioButton2.Click += pcf_delegate(const object& sender, const EventArgs& e) {
         progressBar.Value = 100;
       };
@@ -53,7 +65,7 @@ namespace PcfFormApp {
       Button button;
       button.Name = "button";
       button.Text = "Click me";
-      button.Location = Point(10, 160);
+      button.Location = Point(10, 190);
       button.Click += pcf_delegate(const object& sender, const EventArgs& e) {
         MessageBox::Show("Hello, World !", "Message", MessageBoxButtons::OKCancel, MessageBoxIcon::Hand);
       };
@@ -64,7 +76,7 @@ namespace PcfFormApp {
       panel.Location = Point(10, 10);
       panel.Size = Size(280, 280);
       panel.BorderStyle = BorderStyle::Fixed3D;
-      panel.Controls().AddRange({progressBar, label, checkBox, radioButton1, radioButton2, button});
+      panel.Controls().AddRange({progressBar, label, checkBox1, checkBox2, radioButton1, radioButton2, button});
 
       Form form;
       form.Name = "form";

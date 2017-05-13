@@ -14,6 +14,7 @@ using namespace System::Windows::Forms;
 System::Collections::Generic::Dictionary<intptr, ref<Control>> Control::handles;
 
 namespace {
+  /*
   struct ShowDebugTrace {
     static constexpr bool AllWindowMessages = false;
     static constexpr bool MouseWindowMessage = false;
@@ -25,7 +26,7 @@ namespace {
     //return true;
     //return message.Msg != WM_TIMER && message.Msg != WM_PAINT && message.Msg != WM_ERASEBKGND;
     //return !message.ToString().Contains("WM_NULL");
-  }
+  } */
 
   MouseButtons MessageToMouseButtons(Message message) {
     if (message.Msg == WM_LBUTTONDBLCLK || message.Msg == WM_LBUTTONDOWN || message.Msg == WM_RBUTTONUP)

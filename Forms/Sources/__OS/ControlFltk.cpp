@@ -23,6 +23,16 @@ namespace __OS {
       return 1;
     }
   };
+
+  System::Drawing::Point PointToForm(const System::Windows::Forms::Control& control, const System::Drawing::Point point) {
+    System::Drawing::Point pointToForm = point;
+    ref<System::Windows::Forms::Control> workControl = control;
+    while (workControl().Parent() != null && !is<System::Windows::Forms::Form>(workControl().Parent())) {
+      workControl = workControl().Parent();
+      pointToForm += workControl().Location();
+    }
+    return pointToForm;
+  }
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Control& control) {
@@ -114,6 +124,7 @@ void FormsApi::Control::SetForeColor(const System::Windows::Forms::Control& cont
 }
 
 void FormsApi::Control::SetLocation(const System::Windows::Forms::Control& control) {
+  System::Drawing::Point formLocation = PointToForm(control, control.Location);
   if (is<System::Windows::Forms::Form>(control))
     ((__OS::Widget*)control.Handle())->ToWidget().position(control.Location().X, control.Location().Y + SystemInformation::GetCaptionHeight());
   else if (is<System::Windows::Forms::ProgressBar>(control)) {
@@ -121,9 +132,9 @@ void FormsApi::Control::SetLocation(const System::Windows::Forms::Control& contr
     if (control.Parent() != null && !is<System::Windows::Forms::Form>(control.Parent()))
       offset = control.Parent()().Location;
     offset = System::Drawing::Point::Add(offset, {0, control.Height > 6 ? (control.Height - 6) : 0});
-    ((__OS::Widget*)control.Handle())->ToWidget().position(control.Location().X + offset.X, control.Location().Y + offset.Y);
+    ((__OS::Widget*)control.Handle())->ToWidget().position(formLocation.X + offset.X, formLocation.Y + offset.Y);
   } else
-    ((__OS::Widget*)control.Handle())->ToWidget().position(control.Location().X, control.Location().Y);
+    ((__OS::Widget*)control.Handle())->ToWidget().position(formLocation.X, formLocation.Y);
 }
 
 void FormsApi::Control::SetParent(const System::Windows::Forms::Control& control) {
