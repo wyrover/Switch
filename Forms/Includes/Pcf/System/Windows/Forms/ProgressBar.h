@@ -55,7 +55,7 @@ namespace Pcf {
           /// @cond
           int32 maximum = 100;
           int32 minimum = 0;
-          ProgressBarStyle style = ProgressBarStyle::Continuous;
+          ProgressBarStyle style = ProgressBarStyle::Blocks;
           int32 value = 50;
           /// @endcond
         };

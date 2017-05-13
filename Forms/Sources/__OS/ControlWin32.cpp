@@ -37,8 +37,8 @@ void FormsApi::Control::DefWndProc(Message& message) {
 void FormsApi::Control::Destroy(const System::Windows::Forms::Control& control) {
   if (control.Handle()) {
     intptr handle = control.Handle();
-    WindowProcedure::DefWindowProcs.Remove(handle);
     DestroyWindow((HWND)handle);
+    WindowProcedure::DefWindowProcs.Remove(handle);
   }
 }
 

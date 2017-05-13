@@ -18,11 +18,13 @@ intptr FormsApi::ProgressBar::Create(const System::Windows::Forms::ProgressBar& 
   icc.dwSize = sizeof(INITCOMMONCONTROLSEX);
   icc.dwICC = ICC_PROGRESS_CLASS;
   InitCommonControlsEx(&icc);
+
   int32 style = WS_VISIBLE | WS_CHILD;
   switch (progressBar.Style) {
   case ProgressBarStyle::Continuous: style |= PBS_SMOOTH; break;
   case ProgressBarStyle::Marquee: style |= PBS_MARQUEE; break;
   }
+
   int32 exStyle = 0;
   /* Rigth to left
   exStyle |= WS_EX_LAYOUTRTL;

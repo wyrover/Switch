@@ -13,27 +13,6 @@ using namespace __OS;
 
 extern HINSTANCE __instance;
 
-namespace {
-  void RegisterClassControl() {
-    WNDCLASSEX wndClass;
-    wndClass.cbSize = sizeof(WNDCLASSEX);
-    wndClass.style = CS_GLOBALCLASS;
-    wndClass.lpfnWndProc = DefWindowProc;
-    wndClass.cbClsExtra = 0;
-    wndClass.cbWndExtra = 0;
-    wndClass.hInstance = __instance;
-    wndClass.hIcon = NULL;
-    wndClass.hCursor = NULL;
-    wndClass.hbrBackground = (HBRUSH)(COLOR_BTNFACE + 1);
-    wndClass.lpszMenuName = NULL;
-    wndClass.lpszClassName = L"Control";
-    wndClass.hIconSm = NULL;
-
-    if (RegisterClassEx(&wndClass) == NULL)
-      throw InvalidOperationException(string::Format("FormsApi::Application::RegisterClasses(\"Control\") failed with code = {0}", GetLastError()), pcf_current_information);
-  }
-}
-
 bool FormsApi::Application::visualStylesEnabled = false;
 
 void FormsApi::Application::Exit() {
@@ -48,10 +27,10 @@ void FormsApi::Application::MessageLoop(const System::Windows::Forms::Form& main
   while (true) {
     MSG msg;
     if (idle.IsEmpty() || PeekMessage(&msg, NULL, 0, 0, PM_NOREMOVE) != 0) {
-      if (GetMessage(&msg, NULL, 0, 0) == 0) return;
+      if (GetMessage(&msg, NULL, 0, 0) == 0) break;
       TranslateMessage(&msg);
       DispatchMessage(&msg);
-      if (msg.message == WM_QUIT) return;
+      if (msg.message == WM_QUIT) break;
     }
     idle(object(), EventArgs::Empty);
   }
@@ -62,7 +41,9 @@ DialogResult FormsApi::Application::ShowMessageBox(const string& message, const 
 }
 
 void FormsApi::Application::Start() {
-  RegisterClassControl();
+  WNDCLASSEX wndClass = { sizeof(WNDCLASSEX), CS_GLOBALCLASS, DefWindowProc, 0, 0, __instance, NULL, NULL, (HBRUSH)COLOR_BTNFACE, NULL, L"Control", NULL };
+  if (RegisterClassEx(&wndClass) == NULL)
+    throw InvalidOperationException(string::Format("FormsApi::Application::RegisterClasses(\"Control\") failed with code = {0}", GetLastError()), pcf_current_information);
 }
 
 void FormsApi::Application::Stop() {

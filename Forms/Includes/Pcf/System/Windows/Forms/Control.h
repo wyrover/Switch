@@ -295,9 +295,11 @@ namespace Pcf {
           void CreateControl();
 
           static ref<Control> FromHandle(intptr handle) {
-            if (handles.ContainsKey(handle))
+            try {
               return handles[handle];
-            return ref<Control>::Null();
+            } catch(...) {
+              return ref<Control>::Null();
+            }
           }
 
           void Invalidate() { Invalidate(false); }

@@ -77,7 +77,7 @@ namespace PcfFormApp {
       
       int counter = 0;
       Application::Idle += pcf_delegate(const object& sender, const EventArgs& e) {
-        //label.Text = string::Format("counter = {0}", counter++);
+        label.Text = string::Format("counter = {0}", counter++);
         checkBox.Text = string::Format("counter = {0}", counter++);
       };
 
