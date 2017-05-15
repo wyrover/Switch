@@ -96,9 +96,10 @@ void Control::CreateHandle() {
   __OS::FormsApi::Control::SetParent(*this);
   __OS::FormsApi::Control::SetBackColor(*this);
   __OS::FormsApi::Control::SetForeColor(*this);
-  if (!is<Form>(*this))
+  if (!is<Form>(*this)) {
     __OS::FormsApi::Control::SetLocation(*this);
-  __OS::FormsApi::Control::SetSize(*this);
+    __OS::FormsApi::Control::SetSize(*this);
+  }
   __OS::FormsApi::Control::SetTabStop(*this);
   __OS::FormsApi::Control::SetText(*this);
   __OS::FormsApi::Control::SetVisible(*this);
@@ -144,7 +145,8 @@ void Control::Invalidate(const System::Drawing::Rectangle& rect, bool invalidate
 }
 
 void Control::SetClientSize(const System::Drawing::Size& clientSize) {
-  __OS::FormsApi::Control::SetClientSize(*this, clientSize);
+  if (this->IsHandleCreated)
+    __OS::FormsApi::Control::SetClientSize(*this, clientSize);
 }
 
 void Control::OnBackColorChanged(const EventArgs& e) {
@@ -371,7 +373,7 @@ void Control::WmMouseEnter(Message& message) {
   //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::MouseWindowMessage, "Control::WmMouseEnter message=" + message + ", name=" + this->name);
   this->SetState(State::MouseEntered, true);
   controlEntered = *this;
-  //this->DefWndProc(message);
+  this->DefWndProc(message);
   this->OnMouseEnter(EventArgs::Empty);
 }
 

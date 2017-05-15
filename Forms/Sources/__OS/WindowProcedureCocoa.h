@@ -17,20 +17,13 @@ namespace __OS {
     
     static System::Drawing::Rectangle GetBounds(const System::Windows::Forms::Control& control) {
       if (is<System::Windows::Forms::Form>(control))
-        GetBounds(as<System::Windows::Forms::Form>(control));
+        return System::Drawing::Rectangle(control.Left, screenHeight - control.Top, control.Width, control.Height);
       int32 captionHeight = !is<System::Windows::Forms::Form>(control.Parent()()) || as<System::Windows::Forms::Form>(control.Parent()()).FormBorderStyle == System::Windows::Forms::FormBorderStyle::None ? 0 : FormsApi::SystemInformation::GetCaptionHeight();
-      return System::Drawing::Rectangle(control.Bounds().X, control.Parent()().Bounds().Height - control.Bounds().Height - control.Bounds().Y - captionHeight, control.Bounds().Width, control.Bounds().Height);
+      return System::Drawing::Rectangle(control.Left, control.Parent()().Height - control.Height - control.Top - captionHeight, control.Width, control.Height);
     }
     
-    static System::Drawing::Rectangle GetBounds(const System::Windows::Forms::Form& form) {
-      switch (form.StartPosition) {
-        case System::Windows::Forms::FormStartPosition::CenterParent: return System::Drawing::Rectangle(0, screenHeight - form.Bounds().Y, form.Width, form.Height);
-        case System::Windows::Forms::FormStartPosition::CenterScreen: return System::Drawing::Rectangle(0, screenHeight, form.Width, form.Height);
-        case System::Windows::Forms::FormStartPosition::Manual: return System::Drawing::Rectangle(form.Bounds().X, screenHeight - form.Bounds().Y, form.Bounds().Width, form.Bounds().Height);
-        case System::Windows::Forms::FormStartPosition::WindowsDefaultBounds: return System::Drawing::Rectangle(0, screenHeight, 300, 300);
-        case System::Windows::Forms::FormStartPosition::WindowsDefaultLocation: return System::Drawing::Rectangle(0, screenHeight, form.Width, form.Height);
-      }
-      return System::Drawing::Rectangle(0, screenHeight - 300, 300, 300);
+    static System::Drawing::Rectangle GetBounds(const System::Drawing::Rectangle& bounds) {
+      return System::Drawing::Rectangle(bounds.Left, screenHeight - bounds.Top, bounds.Width, bounds.Height);
     }
     
     static int32 GetMouseButtonState(NSEvent* event) {
@@ -73,43 +66,43 @@ namespace __OS {
     static void MouseEnterEvent(NSEvent* event, System::Windows::Forms::Control& control) {
       System::Windows::Forms::Message message = System::Windows::Forms::Message::Create((intptr)event.window, WM_MOUSEENTER, notUsed, notUsed, 0, (intptr)event);
       hover = true;
-      return control.WndProc(message);
+      control.WndProc(message);
     }
     
     static void MouseLeaveEvent(NSEvent* event, System::Windows::Forms::Control& control) {
       System::Windows::Forms::Message message = System::Windows::Forms::Message::Create((intptr)event.window, WM_MOUSELEAVE, notUsed, notUsed, 0, (intptr)event);
       hover = false;
-      return control.WndProc(message);
+      control.WndProc(message);
     }
     
     static void LeftMouseDownEvent(NSEvent* event, System::Windows::Forms::Control& control) {
       System::Windows::Forms::Message message = System::Windows::Forms::Message::Create((intptr)event.window, WM_LBUTTONDOWN, GetMouseButtonState(event), (GetMouseYCoordinateRelativeToClientArea(event, control) << 16) + GetMouseXCoordinateRelativeToClientArea(event, control), 0, (intptr)event);
-      return control.WndProc(message);
+      control.WndProc(message);
     }
     
     static void LeftMouseUpEvent(NSEvent* event, System::Windows::Forms::Control& control) {
       System::Windows::Forms::Message message = System::Windows::Forms::Message::Create((intptr)event.window, WM_LBUTTONUP, GetMouseButtonState(event), (GetMouseYCoordinateRelativeToClientArea(event, control) << 16) + GetMouseXCoordinateRelativeToClientArea(event, control), 0, (intptr)event);
-      return control.WndProc(message);
+      control.WndProc(message);
     }
     
     static void OtherMouseUpEvent(NSEvent* event, System::Windows::Forms::Control& control) {
       System::Windows::Forms::Message message = System::Windows::Forms::Message::Create((intptr)event.window, WM_MBUTTONUP, GetMouseButtonState(event), (GetMouseYCoordinateRelativeToClientArea(event, control) << 16) + GetMouseXCoordinateRelativeToClientArea(event, control), 0, (intptr)event);
-      return control.WndProc(message);
+      control.WndProc(message);
     }
     
     static void OtherMouseDownEvent(NSEvent* event, System::Windows::Forms::Control& control) {
       System::Windows::Forms::Message message = System::Windows::Forms::Message::Create((intptr)event.window, WM_MBUTTONDOWN, GetMouseButtonState(event), (GetMouseYCoordinateRelativeToClientArea(event, control) << 16) + GetMouseXCoordinateRelativeToClientArea(event, control), 0, (intptr)event);
-      return control.WndProc(message);
+      control.WndProc(message);
     }
     
     static void RightMouseDownEvent(NSEvent* event, System::Windows::Forms::Control& control) {
       System::Windows::Forms::Message message = System::Windows::Forms::Message::Create((intptr)event.window, WM_RBUTTONDOWN, GetMouseButtonState(event), (GetMouseYCoordinateRelativeToClientArea(event, control) << 16) + GetMouseXCoordinateRelativeToClientArea(event, control), 0, (intptr)event);
-      return control.WndProc(message);
+      control.WndProc(message);
     }
     
     static void RightMouseUpEvent(NSEvent* event, System::Windows::Forms::Control& control) {
       System::Windows::Forms::Message message = System::Windows::Forms::Message::Create((intptr)event.window, WM_RBUTTONUP, GetMouseButtonState(event), (GetMouseYCoordinateRelativeToClientArea(event, control) << 16) + GetMouseXCoordinateRelativeToClientArea(event, control), 0, (intptr)event);
-      return control.WndProc(message);
+      control.WndProc(message);
     }
     
     static void MouseMoveEvent(NSEvent* event, System::Windows::Forms::Control& control) {
@@ -118,7 +111,7 @@ namespace __OS {
         control.WndProc(message);
       }
       System::Windows::Forms::Message message = System::Windows::Forms::Message::Create((intptr)event.window, WM_MOUSEMOVE, GetMouseButtonState(event), (GetMouseYCoordinateRelativeToClientArea(event, control) << 16) + GetMouseXCoordinateRelativeToClientArea(event, control), 0, (intptr)event);
-      return control.WndProc(message);
+      control.WndProc(message);
     }
     
     static bool messageLoopRunning ;

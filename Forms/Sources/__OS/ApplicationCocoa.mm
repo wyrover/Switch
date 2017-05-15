@@ -97,9 +97,7 @@ namespace {
     }
     
     static NSEvent* GetMessage() {
-      @autoreleasepool {
-        return [NSApp nextEventMatchingMask:NSEventMaskAny untilDate:[NSDate dateWithTimeIntervalSinceNow:Double::MaxValue] inMode:NSDefaultRunLoopMode dequeue:YES];
-      }
+      return [NSApp nextEventMatchingMask:NSEventMaskAny untilDate:[NSDate dateWithTimeIntervalSinceNow:Double::MaxValue] inMode:NSDefaultRunLoopMode dequeue:YES];
     }
     
     static void IgnoreMessages() {
@@ -112,9 +110,7 @@ namespace {
     }
     
     static NSEvent* PeekMessage() {
-      @autoreleasepool {
-        return [NSApp nextEventMatchingMask:NSEventMaskAny untilDate:[NSDate dateWithTimeIntervalSinceNow:0.0] inMode:NSDefaultRunLoopMode dequeue:YES];
-      }
+      return [NSApp nextEventMatchingMask:NSEventMaskAny untilDate:[NSDate dateWithTimeIntervalSinceNow:0.0] inMode:NSDefaultRunLoopMode dequeue:YES];
     }
 
     static bool messageLoopRunning;

@@ -175,6 +175,10 @@ void FormsApi::Control::SetClientSize(System::Windows::Forms::Control& control, 
   }
 }
 
+bool FormsApi::Control::SetFocus(const System::Windows::Forms::Control& control) {
+  return true;
+}
+
 void FormsApi::Control::SetForeColor(intptr hdc) {
 }
 
@@ -206,6 +210,9 @@ void FormsApi::Control::SetSize(const System::Windows::Forms::Control& control) 
       [(NSControl*)control.Handle() setFrameSize:NSMakeSize(control.Width(), control.Height())];
     }
   }
+}
+
+void FormsApi::Control::SetTabStop(const System::Windows::Forms::Control& control) {
 }
 
 void FormsApi::Control::SetText(const System::Windows::Forms::Control& control) {

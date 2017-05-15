@@ -13,9 +13,6 @@ using namespace __OS;
 @implementation CheckBoxCocoa
 - (IBAction) Click:(id)sender {
   System::Drawing::Point mouseDownLocation;
-  ref<Control> control = System::Windows::Forms::Control::FromHandle((intptr)sender);
-  if (is<System::Windows::Forms::CheckBox>(control))
-    as<System::Windows::Forms::CheckBox>(control)().Checked = !as<System::Windows::Forms::CheckBox>(control)().Checked;
   Message event = Message::Create((intptr)sender, WM_LBUTTONUP, 0, mouseDownLocation.X() + (mouseDownLocation.Y() << 16), 0, 0);
   const_cast<Control&>(__OS::WindowProcedure::Controls[(intptr)sender]()).WndProc(event);
 }
