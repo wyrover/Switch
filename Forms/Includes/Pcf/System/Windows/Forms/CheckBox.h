@@ -32,12 +32,22 @@ namespace Pcf {
             pcf_set {this->SetChecked(value);}
           };
 
+          EventHandler CheckedChanged;
+
         protected:
           void CreateHandle() override;
           void SetAutoCheck(bool autoCheck);
           void SetChecked(bool checked);
 
-          System::Drawing::Size GetDefaultSize() const override { return System::Drawing::Size(104, 24); }
+          System::Drawing::Size GetDefaultSize() const override {return System::Drawing::Size(104, 24);}
+
+          virtual void OnCheckedChanged(const EventArgs& e) {this->CheckedChanged(*this, e);}
+
+          void OnClick(const EventArgs& e) override {
+            if (this->AutoCheck)
+              this->Checked = !this->Checked;
+            this->Control::OnClick(e);
+          }
 
           /// @cond
           bool autoCheck = true;

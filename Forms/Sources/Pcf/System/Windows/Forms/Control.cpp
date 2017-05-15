@@ -14,19 +14,18 @@ using namespace System::Windows::Forms;
 System::Collections::Generic::Dictionary<intptr, ref<Control>> Control::handles;
 
 namespace {
-  /*
   struct ShowDebugTrace {
-    static constexpr bool AllWindowMessages = false;
-    static constexpr bool MouseWindowMessage = false;
-    static constexpr bool WindowMessage = false;
+    static constexpr bool AllWindowMessages = true;
+    static constexpr bool MouseWindowMessage = true;
+    static constexpr bool WindowMessage = true;
   };
 
   bool AllWindowMessagesFilter(const Message& message) {
-    return false; 
-    //return true;
+    //return false; 
+    return true;
     //return message.Msg != WM_TIMER && message.Msg != WM_PAINT && message.Msg != WM_ERASEBKGND;
     //return !message.ToString().Contains("WM_NULL");
-  } */
+  }
 
   MouseButtons MessageToMouseButtons(Message message) {
     if (message.Msg == WM_LBUTTONDBLCLK || message.Msg == WM_LBUTTONDOWN || message.Msg == WM_RBUTTONUP)
@@ -97,10 +96,16 @@ void Control::CreateHandle() {
   __OS::FormsApi::Control::SetParent(*this);
   __OS::FormsApi::Control::SetBackColor(*this);
   __OS::FormsApi::Control::SetForeColor(*this);
-  __OS::FormsApi::Control::SetLocation(*this);
+  if (!is<Form>(*this))
+    __OS::FormsApi::Control::SetLocation(*this);
   __OS::FormsApi::Control::SetSize(*this);
+  __OS::FormsApi::Control::SetTabStop(*this);
   __OS::FormsApi::Control::SetText(*this);
   __OS::FormsApi::Control::SetVisible(*this);
+  if (this->setFocusAfterHandleCreated) {
+    this->setFocusAfterHandleCreated = false;
+    __OS::FormsApi::Control::SetFocus(*this);
+  }
 }
 
 void Control::DestroyHandle() {
@@ -117,6 +122,13 @@ void Control::DefWndProc(Message& message) {
 
 System::Drawing::Size Control::GetClientSize() const {
   return __OS::FormsApi::Control::GetClientSize(*this);
+}
+
+bool Control::Focus() {
+  if (this->IsHandleCreated)
+    return __OS::FormsApi::Control::SetFocus(*this);
+  this->setFocusAfterHandleCreated = true;
+  return true;
 }
 
 void Control::Invalidate(bool invalidateChildren) {
@@ -171,10 +183,16 @@ void Control::OnSizeChanged(const EventArgs& e) {
   this->OnClientSizeChanged(e);
 }
 
+void Control::OnTabStopChanged(const EventArgs& e) {
+  if (this->IsHandleCreated)
+    __OS::FormsApi::Control::SetTabStop(*this);
+  this->TabStopChanged(*this, e);
+}
+
 void Control::OnTextChanged(const EventArgs& e) {
   if (this->IsHandleCreated)
     __OS::FormsApi::Control::SetText(*this);
-  this->TextChanged(*this, e); 
+  this->TextChanged(*this, e);
 }
 
 void Control::OnVisibleChanged(const EventArgs& e) {

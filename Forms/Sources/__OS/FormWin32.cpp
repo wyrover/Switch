@@ -19,16 +19,12 @@ void FormsApi::Form::Close(System::Windows::Forms::Form& form) {
 }
 
 intptr FormsApi::Form::Create(const System::Windows::Forms::Form& form) {
-  int32 style = WS_OVERLAPPEDWINDOW | WS_GROUP | (form.HScroll ? WS_HSCROLL : 0) | (form.VScroll ? WS_VSCROLL : 0);
-  int32 exStyle = 0; //WS_EX_COMPOSITED;
-  System::Drawing::Rectangle bounds = Drawing::Rectangle(CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT);
+  System::Drawing::Rectangle bounds = form.Bounds;
   switch (form.StartPosition) {
-  case FormStartPosition::Manual: bounds = form.Bounds; break;
   case FormStartPosition::WindowsDefaultBounds: bounds = Drawing::Rectangle(CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT); break;
   case FormStartPosition::WindowsDefaultLocation: bounds = Drawing::Rectangle(CW_USEDEFAULT, CW_USEDEFAULT, form.Width, form.Height); break;
   }
-  HWND handle = CreateWindowEx(exStyle, WC_DIALOG, form.Text().w_str().c_str(), style, bounds.Left, bounds.Top, bounds.Width, bounds.Height, NULL, (HMENU)0, __instance, (LPVOID)NULL);
-  //WindowProcedure::SetWindowTheme(handle);
+  HWND handle = CreateWindowEx(0, WC_DIALOG, form.Text().w_str().c_str(), WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_GROUP, bounds.Left, bounds.Top, bounds.Width, bounds.Height, NULL, (HMENU)0, __instance, (LPVOID)NULL);
   WindowProcedure::DefWindowProcs[(intptr)handle] = (WNDPROC)SetWindowLongPtr(handle, GWLP_WNDPROC, (LONG_PTR)WindowProcedure::WndProc);
   return (intptr)handle;
 }

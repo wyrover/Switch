@@ -22,9 +22,7 @@ namespace {
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Control& control) {
-  int32 style = WS_CHILD;
-  int32 exStyle = 0;
-  HWND handle = CreateWindowEx(exStyle, L"Control", control.Text().w_str().c_str(), style, control.Bounds().Left, control.Bounds().Top, control.Bounds().Width, control.Bounds().Height, (HWND)control.Parent()().Handle(), (HMENU)0, __instance, (LPVOID)NULL);
+  HWND handle = CreateWindowEx(0, L"Control", control.Text().w_str().c_str(), WS_CHILD, control.Left, control.Top, control.Width, control.Height, (HWND)control.Parent()().Handle(), (HMENU)0, __instance, (LPVOID)NULL);
   WindowProcedure::SetWindowTheme(handle);
   WindowProcedure::DefWindowProcs[(intptr)handle] = (WNDPROC)SetWindowLongPtr(handle, GWLP_WNDPROC, (LONG_PTR)WindowProcedure::WndProc);
   return (intptr)handle;
@@ -87,12 +85,6 @@ void FormsApi::Control::SetBackColor(intptr hdc) {
   }
 }
 
-void FormsApi::Control::SetForeColor(intptr hdc) {
-  ref<System::Windows::Forms::Control> control = System::Windows::Forms::Control::FromHandle(GetHandleWindowFromDeviceContext(hdc));
-  if (control != null)
-    SetTextColor((HDC)hdc, ColorToRgb(control().ForeColor));
-}
-
 void FormsApi::Control::SetBackColor(const System::Windows::Forms::Control& control) {
   HDC hdc = GetDC((HWND)control.Handle());
   ref<System::Windows::Forms::Control> form = control;
@@ -100,6 +92,22 @@ void FormsApi::Control::SetBackColor(const System::Windows::Forms::Control& cont
     form = form().Parent();
   SendMessage((HWND)form().Handle(), WM_ERASEBKGND, (WPARAM)hdc, 0);
   ReleaseDC((HWND)control.Handle(), hdc);
+}
+
+void FormsApi::Control::SetClientSize(System::Windows::Forms::Control& control, const System::Drawing::Size& clientSize) {
+  RECT rect = { 0, 0, clientSize.Width, clientSize.Height };
+  AdjustWindowRectEx(&rect, GetWindowLong((HWND)control.Handle(), GWL_STYLE), false /*menu == null*/, GetWindowLong((HWND)control.Handle(), GWL_EXSTYLE));
+  control.Size = System::Drawing::Size(rect.right - rect.left, rect.bottom - rect.top);
+}
+
+bool FormsApi::Control::SetFocus(const System::Windows::Forms::Control& control) {
+  return ::SetFocus((HWND)control.Handle()) != NULL;
+}
+
+void FormsApi::Control::SetForeColor(intptr hdc) {
+  ref<System::Windows::Forms::Control> control = System::Windows::Forms::Control::FromHandle(GetHandleWindowFromDeviceContext(hdc));
+  if (control != null)
+    SetTextColor((HDC)hdc, ColorToRgb(control().ForeColor));
 }
 
 void FormsApi::Control::SetForeColor(const System::Windows::Forms::Control& control) {
@@ -112,24 +120,22 @@ void FormsApi::Control::SetForeColor(const System::Windows::Forms::Control& cont
 }
 
 void FormsApi::Control::SetLocation(const System::Windows::Forms::Control& control) {
-  SetWindowPos((HWND)control.Handle(), NULL, control.Location().X, control.Location().Y, control.Size().Width, control.Size().Height, SWP_NOSIZE);
+  SetWindowPos((HWND)control.Handle(), NULL, control.Left, control.Top, control.Width, control.Height, SWP_NOSIZE);
 }
 
 void FormsApi::Control::SetParent(const System::Windows::Forms::Control& control) {
   ::SetParent((HWND)control.Handle(), control.Parent() != null ? (HWND)control.Parent()().Handle() : (HWND)0);
 }
 
-void FormsApi::Control::SetClientSize(System::Windows::Forms::Control& control, const System::Drawing::Size& clientSize) {
-  RECT rect = { 0, 0, clientSize.Width, clientSize.Height };
-  AdjustWindowRectEx(&rect, GetWindowLong((HWND)control.Handle(), GWL_STYLE), false /*menu == null*/, GetWindowLong((HWND)control.Handle(), GWL_EXSTYLE));
-  if (SetWindowPos((HWND)control.Handle(), NULL, control.Location().X, control.Location().Y, control.Size().Width, control.Size().Height, SWP_NOMOVE)) {
-    System::Drawing::Size size = System::Drawing::Size(rect.right - rect.left, rect.bottom - rect.top);
-    control.Size = size;
-  }
+void FormsApi::Control::SetSize(const System::Windows::Forms::Control& control) {
+  SetWindowPos((HWND)control.Handle(), NULL, 0, 0, control.Width, control.Height, SWP_NOMOVE);
 }
 
-void FormsApi::Control::SetSize(const System::Windows::Forms::Control& control) {
-  SetWindowPos((HWND)control.Handle(), NULL, control.Location().X, control.Location().Y, control.Size().Width, control.Size().Height, SWP_NOMOVE);
+void FormsApi::Control::SetTabStop(const System::Windows::Forms::Control& control) {
+  if (control.TabStop)
+    SetWindowLongPtr((HWND)control.Handle(), GWL_STYLE, GetWindowLongPtr((HWND)control.Handle(), GWL_STYLE) | WS_BORDER);
+  else
+    SetWindowLongPtr((HWND)control.Handle(), GWL_STYLE, GetWindowLongPtr((HWND)control.Handle(), GWL_STYLE) & ~WS_BORDER);
 }
 
 void FormsApi::Control::SetText(const System::Windows::Forms::Control& control) {

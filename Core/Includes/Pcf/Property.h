@@ -50,8 +50,8 @@ namespace Pcf {
     bool operator !=(T value) const {return this->getter() != value;}
     /// @endcond
     
-    void Set(T value) {this->setter(value);}
-    void operator ()(T value) {this->setter(value);}
+    T Set(T value) {this->setter(value); return this->getter();}
+    T operator ()(T value) {this->setter(value); return this->getter();}
 
     /// @cond
     Property& operator =(T value) {this->setter(value); return *this;}

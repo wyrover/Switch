@@ -22,6 +22,7 @@ namespace Pcf {
         public:
           ProgressBar() : Control("", 0, 0, 100, System::Environment::OSVersion().Platform == System::PlatformID::MacOSX ? 20 : 23) {
             this->SetStyle(ControlStyles::UserPaint, false);
+            this->TabStop = false;
           }
 
           Property<int32> Maximum{
@@ -56,7 +57,7 @@ namespace Pcf {
           int32 maximum = 100;
           int32 minimum = 0;
           ProgressBarStyle style = ProgressBarStyle::Blocks;
-          int32 value = 50;
+          int32 value = 0;
           /// @endcond
         };
       }

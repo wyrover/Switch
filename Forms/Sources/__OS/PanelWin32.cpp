@@ -14,21 +14,20 @@ using namespace __OS;
 extern HINSTANCE __instance;
 
 intptr FormsApi::Panel::Create(const System::Windows::Forms::Panel& panel) {
-  int32 style = WS_CHILD | (panel.BorderStyle == BorderStyle::FixedSingle ? WS_BORDER : 0) | (panel.HScroll ? WS_HSCROLL : 0) | (panel.VScroll ? WS_VSCROLL : 0);
-  int32 exStyle = WS_EX_CONTROLPARENT | (panel.BorderStyle == BorderStyle::Fixed3D ? WS_EX_CLIENTEDGE : 0);
-  HWND handle = CreateWindowEx(exStyle, WC_DIALOG, panel.Text().w_str().c_str(), style, panel.Bounds().Left, panel.Bounds().Top, panel.Bounds().Width, panel.Bounds().Height, (HWND)panel.Parent()().Handle(), (HMENU)0, __instance, (LPVOID)NULL);
+  HWND handle = CreateWindowEx(WS_EX_CONTROLPARENT, WC_DIALOG, panel.Text().w_str().c_str(), WS_CHILD, panel.Left, panel.Top, panel.Width, panel.Height, (HWND)panel.Parent()().Handle(), (HMENU)0, __instance, (LPVOID)NULL);
   WindowProcedure::SetWindowTheme(handle);
   WindowProcedure::DefWindowProcs[(intptr)handle] = (WNDPROC)SetWindowLongPtr(handle, GWLP_WNDPROC, (LONG_PTR)WindowProcedure::WndProc);
   return (intptr)handle;
 }
 
 void FormsApi::Panel::SetBorderStyle(const System::Windows::Forms::Panel& panel) {
-  SetWindowLong((HWND)panel.Handle(), GWL_STYLE, GetWindowLong((HWND)panel.Handle(), GWL_STYLE) & ~WS_BORDER);
-  SetWindowLong((HWND)panel.Handle(), GWL_EXSTYLE, GetWindowLong((HWND)panel.Handle(), GWL_EXSTYLE) & ~WS_EX_CLIENTEDGE);
+  SetWindowLongPtr((HWND)panel.Handle(), GWL_STYLE, GetWindowLongPtr((HWND)panel.Handle(), GWL_STYLE) & ~WS_BORDER);
+  SetWindowLongPtr((HWND)panel.Handle(), GWL_EXSTYLE, GetWindowLongPtr((HWND)panel.Handle(), GWL_EXSTYLE) & ~WS_EX_CLIENTEDGE);
   switch (panel.BorderStyle) {
-  case BorderStyle::FixedSingle: SetWindowLong((HWND)panel.Handle(), GWL_STYLE, GetWindowLong((HWND)panel.Handle(), GWL_STYLE) | WS_BORDER); break;
-  case BorderStyle::Fixed3D: SetWindowLong((HWND)panel.Handle(), GWL_EXSTYLE, GetWindowLong((HWND)panel.Handle(), GWL_EXSTYLE) | WS_EX_CLIENTEDGE); break;
+  case BorderStyle::FixedSingle: SetWindowLongPtr((HWND)panel.Handle(), GWL_STYLE, GetWindowLongPtr((HWND)panel.Handle(), GWL_STYLE) | WS_BORDER); break;
+  case BorderStyle::Fixed3D: SetWindowLongPtr((HWND)panel.Handle(), GWL_EXSTYLE, GetWindowLongPtr((HWND)panel.Handle(), GWL_EXSTYLE) | WS_EX_CLIENTEDGE); break;
   }
+  SetWindowPos((HWND)panel.Handle(), NULL, 0, 0, 0, 0, SWP_DRAWFRAME | SWP_NOACTIVATE | SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER);
 }
 
 #endif
