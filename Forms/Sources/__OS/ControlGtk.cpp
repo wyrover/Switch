@@ -90,6 +90,11 @@ void FormsApi::Control::SetClientSize(System::Windows::Forms::Control &control, 
   ((__OS::Widget*)control.Handle())->ToWidget().set_size_request(clientSize.Width, clientSize.Height);
 }
 
+bool FormsApi::Control::SetFocus(const System::Windows::Forms::Control &control) {
+  ((__OS::Widget*)control.Handle())->ToWidget().grab_focus();
+  return true;
+}
+
 void FormsApi::Control::SetForeColor(intptr hdc) {
   ref<System::Windows::Forms::Control> control = System::Windows::Forms::Control::FromHandle(GetHandleWindowFromDeviceContext(hdc));
   ((__OS::Widget*)control().Handle())->ForeColor(System::Environment::OSVersion().Platform == System::PlatformID::MacOSX && is<System::Windows::Forms::Button>(control) && as<System::Windows::Forms::Button>(control)().IsDefault ? System::Drawing::Color::White() : control().ForeColor());
@@ -114,6 +119,10 @@ void FormsApi::Control::SetParent(const System::Windows::Forms::Control& control
 
 void FormsApi::Control::SetSize(const System::Windows::Forms::Control& control) {
   ((__OS::Widget*)control.Handle())->ToWidget().set_size_request(control.Size().Width, control.Size().Height);
+}
+
+void FormsApi::Control::SetTabStop(const System::Windows::Forms::Control &control) {
+  ((__OS::Widget*)control.Handle())->ToWidget().set_can_focus(control.TabStop);
 }
 
 void FormsApi::Control::SetText(const System::Windows::Forms::Control& control) {

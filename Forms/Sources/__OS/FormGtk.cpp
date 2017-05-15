@@ -5,6 +5,7 @@
 #include <gtkmm/window.h>
 
 #include "WidgetGtk.h"
+#include <Pcf/System/Random.h>
 
 using namespace System;
 using namespace System::Drawing;
@@ -50,8 +51,18 @@ void FormsApi::Form::Close(System::Windows::Forms::Form& form) {
 }
 
 intptr FormsApi::Form::Create(const System::Windows::Forms::Form& form) {
+  System::Drawing::Rectangle bounds = form.Bounds;
+  Random random;
+  switch (form.StartPosition) {
+    case FormStartPosition::Manual: bounds = form.Bounds; break;
+    case FormStartPosition::WindowsDefaultBounds: bounds = System::Drawing::Rectangle(System::Drawing::Rectangle(random.Next(50, 300), random.Next(50, 200), random.Next(640, 800), random.Next(480, 600))); break;
+    case FormStartPosition::WindowsDefaultLocation: bounds = System::Drawing::Rectangle(System::Drawing::Rectangle(random.Next(50, 300), random.Next(50, 200), form.Width, form.Height)); break;
+    default: break;
+  }
+
   __OS::Form* handle = new __OS::Form();
-  handle->Move(form.Location().X, form.Location().Y);
+  handle->Move(bounds.Left, bounds.Top);
+  handle->set_size_request(bounds.Width, bounds.Height);
   handle->Text(form.Text);
   return (intptr)handle;
 }
