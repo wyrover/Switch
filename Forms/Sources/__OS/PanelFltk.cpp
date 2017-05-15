@@ -36,6 +36,7 @@ void FormsApi::Panel::SetBorderStyle(const System::Windows::Forms::Panel &panel)
     case System::Windows::Forms::BorderStyle::FixedSingle: ((__OS::Panel*)panel.Handle())->box(panel.BackColor == Color::Transparent ? FL_BORDER_FRAME : FL_BORDER_BOX); break;
     case System::Windows::Forms::BorderStyle::Fixed3D: ((__OS::Panel*)panel.Handle())->box(panel.BackColor == Color::Transparent ? FL_DOWN_FRAME : FL_DOWN_BOX); break;
   }
+  ((__OS::Panel*)panel.Handle())->redraw();
 }
 
 #endif

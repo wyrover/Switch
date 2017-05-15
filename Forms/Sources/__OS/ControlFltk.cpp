@@ -119,6 +119,12 @@ void FormsApi::Control::SetForeColor(intptr hdc) {
   ((__OS::Widget*)control().Handle())->ForeColor(System::Environment::OSVersion().Platform == System::PlatformID::MacOSX && is<System::Windows::Forms::Button>(control) && as<System::Windows::Forms::Button>(control)().IsDefault ? System::Drawing::Color::White() : control().ForeColor());
 }
 
+bool FormsApi::Control::SetFocus(const System::Windows::Forms::Control &control) {
+  Fl_Widget& widget = ((__OS::Widget*)control.Handle())->ToWidget();
+  Fl::focus(&widget);
+  return true;
+}
+
 void FormsApi::Control::SetForeColor(const System::Windows::Forms::Control& control) {
   ((__OS::Widget*)control.Handle())->ForeColor(System::Environment::OSVersion().Platform == System::PlatformID::MacOSX && is<System::Windows::Forms::Button>(control) && as<System::Windows::Forms::Button>(control).IsDefault ? System::Drawing::Color::White() : control.ForeColor());
 }
@@ -156,6 +162,9 @@ void FormsApi::Control::SetSize(const System::Windows::Forms::Control& control) 
     ((__OS::Widget*)control.Handle())->ToWidget().size(control.Size().Width, 6);
   } else
     ((__OS::Widget*)control.Handle())->ToWidget().size(control.Size().Width, control.Size().Height);
+}
+
+void FormsApi::Control::SetTabStop(const System::Windows::Forms::Control &control) {
 }
 
 void FormsApi::Control::SetText(const System::Windows::Forms::Control& control) {

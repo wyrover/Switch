@@ -5,6 +5,7 @@
 #include <FL/Fl_Scroll.H>
 
 #include <Pcf/Undef.h>
+#include <Pcf/System/Random.h>
 
 using namespace System;
 using namespace System::Drawing;
@@ -52,7 +53,17 @@ void FormsApi::Form::Close(System::Windows::Forms::Form& form) {
 }
 
 intptr FormsApi::Form::Create(const System::Windows::Forms::Form& form) {
+  System::Drawing::Rectangle bounds = form.Bounds;
+  Random random;
+  switch (form.StartPosition) {
+    case FormStartPosition::Manual: bounds = form.Bounds; break;
+    case FormStartPosition::WindowsDefaultBounds: bounds = System::Drawing::Rectangle(System::Drawing::Rectangle(random.Next(50, 300), random.Next(50, 200), random.Next(640, 800), random.Next(480, 600))); break;
+    case FormStartPosition::WindowsDefaultLocation: bounds = System::Drawing::Rectangle(System::Drawing::Rectangle(random.Next(50, 300), random.Next(50, 200), form.Width, form.Height)); break;
+    default: break;
+  }
+
   __OS::Form* handle = CreateControl<__OS::Form>(form);
+  handle->Fl_Window::resize(bounds.Left, bounds.Top, bounds.Width, bounds.Height);
   handle->resizable(handle->Container());
   return (intptr)handle;
 }
