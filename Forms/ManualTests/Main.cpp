@@ -49,13 +49,13 @@ namespace PcfFormApp {
 
       Panel panel;
       panel.Text = "Panel";
-      panel.Bounds = Rectangle(10, 10, 380, 280);
+      panel.Bounds = Rectangle(10, 10, 280, 280);
       panel.Controls().AddRange({ progressBar, label, checkBox1, checkBox2, radioButton1, radioButton2, radioButton3, button });
       panel.BackColor = Color::White;
 
       Form form;
       form.Controls().Add(panel);
-      form.ClientSize = Size(400, 300);
+      form.ClientSize = Size(300, 300);
       //form.StartPosition = FormStartPosition::Manual;
       //form.Location = Point(500, 300);
 

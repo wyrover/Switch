@@ -33,10 +33,6 @@ void FormsApi::Control::Destroy(const System::Windows::Forms::Control& control) 
  delete (Gtk::Widget*)control.Handle();
 }
 
-System::Drawing::Size FormsApi::Control::GetClientSize(const System::Windows::Forms::Control &control) {
-  return {};
-}
-
 intptr FormsApi::Control::GetHandleWindowFromDeviceContext(intptr hdc) {
   return hdc;
 }
@@ -86,8 +82,12 @@ void FormsApi::Control::SetBackColor(const System::Windows::Forms::Control& cont
   ((__OS::Widget*)control.Handle())->BackColor(System::Environment::OSVersion().Platform == System::PlatformID::MacOSX && is<System::Windows::Forms::Button>(control) && as<System::Windows::Forms::Button>(control).IsDefault ? System::Drawing::SystemColors::Highlight() : control.BackColor());
 }
 
-void FormsApi::Control::SetClientSize(System::Windows::Forms::Control &control, const System::Drawing::Size &clientSize) {
-  ((__OS::Widget*)control.Handle())->ToWidget().set_size_request(clientSize.Width, clientSize.Height);
+void FormsApi::Control::SetClientSize(System::Windows::Forms::Control &control) {
+  ((__OS::Widget*)control.Handle())->ToWidget().set_size_request(control.ClientSize().Width, control.ClientSize().Height);
+  if (is<System::Windows::Forms::Form>(control))
+    control.Size = System::Drawing::Size::Add(control.ClientSize, {0, SystemInformation::GetCaptionHeight()});
+  else
+    control.Size = control.ClientSize;
 }
 
 bool FormsApi::Control::SetFocus(const System::Windows::Forms::Control &control) {
@@ -117,8 +117,14 @@ void FormsApi::Control::SetParent(const System::Windows::Forms::Control& control
   }
 }
 
-void FormsApi::Control::SetSize(const System::Windows::Forms::Control& control) {
-  ((__OS::Widget*)control.Handle())->ToWidget().set_size_request(control.Size().Width, control.Size().Height);
+void FormsApi::Control::SetSize(System::Windows::Forms::Control& control) {
+  if (is<System::Windows::Forms::Form>(control)) {
+    ((__OS::Widget*)control.Handle())->ToWidget().set_size_request(control.Size().Width, control.Size().Height - SystemInformation::GetCaptionHeight());
+    control.ClientSize = System::Drawing::Size::Subtract(control.Size, {0, SystemInformation::GetCaptionHeight()});
+  } else {
+    ((__OS::Widget*)control.Handle())->ToWidget().set_size_request(control.Size().Width, control.Size().Height);
+    control.ClientSize = control.Size;
+  }
 }
 
 void FormsApi::Control::SetTabStop(const System::Windows::Forms::Control &control) {

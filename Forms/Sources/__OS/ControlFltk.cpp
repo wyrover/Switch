@@ -109,7 +109,7 @@ void FormsApi::Control::SetBackColor(const System::Windows::Forms::Control& cont
 void FormsApi::Control::SetClientSize(System::Windows::Forms::Control &control) {
   if (is<System::Windows::Forms::Form>(control)) {
     ((__OS::Widget*)control.Handle())->ToWidget().size(control.ClientSize().Width, control.ClientSize().Height);
-    control.Size = System::Drawing::Size(control.ClientSize().Width, control.ClientSize().Height + SystemInformation::GetCaptionHeight());
+    control.Size = System::Drawing::Size::Add(control.ClientSize, {0, SystemInformation::GetCaptionHeight()});
   } else if (is<System::Windows::Forms::ProgressBar>(control)) {
     System::Drawing::Point offset;
     if (control.Parent() != null && !is<System::Windows::Forms::Form>(control.Parent()))
@@ -163,7 +163,7 @@ void FormsApi::Control::SetParent(const System::Windows::Forms::Control& control
 void FormsApi::Control::SetSize(System::Windows::Forms::Control& control) {
   if (is<System::Windows::Forms::Form>(control)) {
     ((__OS::Widget*)control.Handle())->ToWidget().size(control.Size().Width, control.Size().Height - SystemInformation::GetCaptionHeight());
-    control.ClientSize = System::Drawing::Size(control.Size().Width, control.Size().Height - SystemInformation::GetCaptionHeight());
+    control.ClientSize = System::Drawing::Size::Subtract(control.Size, {0, SystemInformation::GetCaptionHeight()});
   } else if (is<System::Windows::Forms::ProgressBar>(control)) {
     System::Drawing::Point offset;
     if (control.Parent() != null && !is<System::Windows::Forms::Form>(control.Parent()))
