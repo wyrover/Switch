@@ -41,7 +41,7 @@ int32 FormsApi::SystemInformation::GetCaptionHeight() {
   if (System::Environment::OSVersion().Platform == System::PlatformID::MacOSX)
     return 47;
   if (System::Environment::OSVersion().Platform == System::PlatformID::MacOSX)
-    return 79;
+    return 74;
   return 65;
 }
 
