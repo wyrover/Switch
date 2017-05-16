@@ -18,35 +18,24 @@ intptr FormsApi::ProgressBar::Create(const System::Windows::Forms::ProgressBar& 
   icc.dwSize = sizeof(INITCOMMONCONTROLSEX);
   icc.dwICC = ICC_PROGRESS_CLASS;
   InitCommonControlsEx(&icc);
-  int32 style = WS_VISIBLE | WS_CHILD;
-  switch (progressBar.Style) {
-  case ProgressBarStyle::Continuous: style |= PBS_SMOOTH; break;
-  case ProgressBarStyle::Marquee: style |= PBS_MARQUEE; break;
-  }
-  int32 exStyle = 0;
-  /* Rigth to left
-  exStyle |= WS_EX_LAYOUTRTL;
-  exStyle &= ~(WS_EX_RTLREADING | WS_EX_RIGHT | WS_EX_LEFTSCROLLBAR);
-  */
-  HWND handle = CreateWindowEx(exStyle, PROGRESS_CLASS, progressBar.Text().w_str().c_str(), style, progressBar.Bounds().Left, progressBar.Bounds().Top, progressBar.Bounds().Width, progressBar.Bounds().Height, (HWND)FormsApi::Control::GetParentHandleOrDefault(progressBar), (HMENU)0, __instance, (LPVOID)NULL);
+  HWND handle = CreateWindowEx(0, PROGRESS_CLASS, progressBar.Text().w_str().c_str(), WS_CHILD, progressBar.Left, progressBar.Top, progressBar.Width, progressBar.Height, (HWND)progressBar.Parent()().Handle(), (HMENU)0, __instance, (LPVOID)NULL);
   WindowProcedure::SetWindowTheme(handle);
   WindowProcedure::DefWindowProcs[(intptr)handle] = (WNDPROC)SetWindowLongPtr(handle, GWLP_WNDPROC, (LONG_PTR)WindowProcedure::WndProc);
+  /// @todo to remove after create SetFont method...
+  PostMessage(handle, WM_SETFONT, WPARAM((HFONT)GetStockObject(DEFAULT_GUI_FONT)), TRUE);
   return (intptr)handle;
 }
 
 void FormsApi::ProgressBar::SetMaximum(const System::Windows::Forms::ProgressBar& progressBar) {
-  PostMessage((HWND)progressBar.Handle(), PBM_SETRANGE32, progressBar.Minimum(), progressBar.Maximum());
+  SendMessage((HWND)progressBar.Handle(), PBM_SETRANGE32, progressBar.Minimum(), progressBar.Maximum());
 }
 
 void FormsApi::ProgressBar::SetMinimum(const System::Windows::Forms::ProgressBar& progressBar) {
-  PostMessage((HWND)progressBar.Handle(), PBM_SETRANGE32, progressBar.Minimum(), progressBar.Maximum());
+  SendMessage((HWND)progressBar.Handle(), PBM_SETRANGE32, progressBar.Minimum(), progressBar.Maximum());
 }
 
 void FormsApi::ProgressBar::SetStyle(const System::Windows::Forms::ProgressBar& progressBar) {
-  PostMessage((HWND)progressBar.Handle(), PBM_SETSTATE, PBST_NORMAL, 0);
-  SetWindowLong((HWND)progressBar.Handle(), GWL_STYLE, GetWindowLong((HWND)progressBar.Handle(), GWL_STYLE) & ~PBS_MARQUEE);
-  SetWindowLong((HWND)progressBar.Handle(), GWL_STYLE, GetWindowLong((HWND)progressBar.Handle(), GWL_STYLE) & ~PBS_SMOOTH);
-  SetWindowLong((HWND)progressBar.Handle(), GWL_STYLE, GetWindowLong((HWND)progressBar.Handle(), GWL_STYLE) & ~PBS_SMOOTHREVERSE);
+  SetWindowLong((HWND)progressBar.Handle(), GWL_STYLE, GetWindowLong((HWND)progressBar.Handle(), GWL_STYLE) & ~(PBS_MARQUEE | PBS_SMOOTH | PBS_SMOOTHREVERSE));
   switch (progressBar.Style) {
   case ProgressBarStyle::Continuous: SetWindowLong((HWND)progressBar.Handle(), GWL_STYLE, GetWindowLong((HWND)progressBar.Handle(), GWL_STYLE) | PBS_SMOOTH); break;
   case ProgressBarStyle::Marquee: SetWindowLong((HWND)progressBar.Handle(), GWL_STYLE, GetWindowLong((HWND)progressBar.Handle(), GWL_STYLE) | PBS_MARQUEE); break;
@@ -54,7 +43,7 @@ void FormsApi::ProgressBar::SetStyle(const System::Windows::Forms::ProgressBar& 
 }
 
 void FormsApi::ProgressBar::SetValue(const System::Windows::Forms::ProgressBar& progressBar) {
-  PostMessage((HWND)progressBar.Handle(), PBM_SETPOS, progressBar.Value(), 0);
+  SendMessage((HWND)progressBar.Handle(), PBM_SETPOS, progressBar.Value(), 0);
 }
 
 #endif
