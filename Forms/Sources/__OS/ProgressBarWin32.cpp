@@ -21,6 +21,8 @@ intptr FormsApi::ProgressBar::Create(const System::Windows::Forms::ProgressBar& 
   HWND handle = CreateWindowEx(0, PROGRESS_CLASS, progressBar.Text().w_str().c_str(), WS_CHILD, progressBar.Left, progressBar.Top, progressBar.Width, progressBar.Height, (HWND)progressBar.Parent()().Handle(), (HMENU)0, __instance, (LPVOID)NULL);
   WindowProcedure::SetWindowTheme(handle);
   WindowProcedure::DefWindowProcs[(intptr)handle] = (WNDPROC)SetWindowLongPtr(handle, GWLP_WNDPROC, (LONG_PTR)WindowProcedure::WndProc);
+  /// @todo to remove after create SetFont method...
+  PostMessage(handle, WM_SETFONT, WPARAM((HFONT)GetStockObject(DEFAULT_GUI_FONT)), TRUE);
   return (intptr)handle;
 }
 

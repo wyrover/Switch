@@ -94,19 +94,19 @@ void Control::CreateHandle() {
   handles.Add(this->handle, *this);
   this->backBrush = System::Drawing::SolidBrush(this->BackColor);
   __OS::FormsApi::Control::SetParent(*this);
-  __OS::FormsApi::Control::SetBackColor(*this);
-  __OS::FormsApi::Control::SetForeColor(*this);
   if (!is<Form>(*this)) {
     __OS::FormsApi::Control::SetLocation(*this);
     __OS::FormsApi::Control::SetSize(*this);
   }
+  if (this->setClientSizeAfterHandleCreated)
+    __OS::FormsApi::Control::SetClientSize(*this);
+  __OS::FormsApi::Control::SetBackColor(*this);
+  __OS::FormsApi::Control::SetForeColor(*this);
   __OS::FormsApi::Control::SetTabStop(*this);
   __OS::FormsApi::Control::SetText(*this);
-  __OS::FormsApi::Control::SetVisible(*this);
-  if (this->setFocusAfterHandleCreated) {
-    this->setFocusAfterHandleCreated = false;
+  if (this->setFocusAfterHandleCreated)
     __OS::FormsApi::Control::SetFocus(*this);
-  }
+  __OS::FormsApi::Control::SetVisible(*this);
 }
 
 void Control::DestroyHandle() {
@@ -121,10 +121,6 @@ void Control::DefWndProc(Message& message) {
   __OS::FormsApi::Control::DefWndProc(message);
 }
 
-System::Drawing::Size Control::GetClientSize() const {
-  return __OS::FormsApi::Control::GetClientSize(*this);
-}
-
 bool Control::Focus() {
   if (this->IsHandleCreated)
     return __OS::FormsApi::Control::SetFocus(*this);
@@ -135,18 +131,13 @@ bool Control::Focus() {
 void Control::Invalidate(bool invalidateChildren) {
   if (this->IsHandleCreated)
     __OS::FormsApi::Control::Invalidate(*this, invalidateChildren);
-  this->OnInvalidated(InvalidateEventArgs(Rectangle(Point(0, 0), this->GetClientSize())));
+  this->OnInvalidated(InvalidateEventArgs(Rectangle(Point(0, 0), this->ClientSize)));
 }
 
 void Control::Invalidate(const System::Drawing::Rectangle& rect, bool invalidateChildren) {
   if (this->IsHandleCreated)
     __OS::FormsApi::Control::Invalidate(*this, rect, invalidateChildren);
   this->OnInvalidated(InvalidateEventArgs(rect));
-}
-
-void Control::SetClientSize(const System::Drawing::Size& clientSize) {
-  if (this->IsHandleCreated)
-    __OS::FormsApi::Control::SetClientSize(*this, clientSize);
 }
 
 void Control::OnBackColorChanged(const EventArgs& e) {
@@ -157,6 +148,10 @@ void Control::OnBackColorChanged(const EventArgs& e) {
 }
 
 void Control::OnClientSizeChanged(const EventArgs& e) {
+  if (this->IsHandleCreated)
+    __OS::FormsApi::Control::SetClientSize(*this);
+  else
+    setClientSizeAfterHandleCreated = true;
   this->ClientSizeChanged(*this, e);
 }
 
@@ -181,8 +176,9 @@ void Control::OnParentChanged(const EventArgs& e) {
 void Control::OnSizeChanged(const EventArgs& e) {
   if (this->IsHandleCreated)
     __OS::FormsApi::Control::SetSize(*this);
+  else
+    setClientSizeAfterHandleCreated = false;
   this->SizeChanged(*this, e);
-  this->OnClientSizeChanged(e);
 }
 
 void Control::OnTabStopChanged(const EventArgs& e) {

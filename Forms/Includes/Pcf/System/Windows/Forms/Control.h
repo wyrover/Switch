@@ -164,8 +164,13 @@ namespace Pcf {
           };
 
           Property<System::Drawing::Size> ClientSize {
-            pcf_get {return this->GetClientSize();},
-            pcf_set {this->SetClientSize(value);}
+            pcf_get{ return this->clientSize; },
+            pcf_set{
+              if (this->clientSize != value) {
+                this->clientSize = value;
+                this->OnClientSizeChanged(EventArgs::Empty);
+              }
+            }
           };
 
           /// @brief Gets the collection of controls contained within the control.
@@ -283,7 +288,12 @@ namespace Pcf {
 
           Property<bool> TabStop {
             pcf_get {return this->tabStop;},
-            pcf_set {this->SetTabStop(value); }
+            pcf_set {
+              if (this->tabStop != value) {
+                this->tabStop = value;
+                this->OnTabStopChanged(EventArgs::Empty);
+              }
+            }
           };
 
           /// @brief Gets or sets the text associated with this control.
@@ -291,8 +301,13 @@ namespace Pcf {
           /// @remarks The Text property of the control is used differently by each derived class. For example the Text property of a Form is displayed in the title bar at the top of the form, is fairly small in character count, and usually displays the application or document name. However, the Text property of a RichTextBox can be large and can include numerous nonvisual characters used to format the text. For example, the text displayed in a RichTextBox can be formatted by adjusting the Font properties, or by the addition of spaces or tab characters to align the text.
           /// @note When overriding the Text property in a derived class, use the base class's Text property to extend the base implementation. Otherwise, you must provide all the implementation. You are not required to override both the get and setaccessors of the Text property; you can override only one if needed.
           Property<const string&> Text {
-            pcf_get->const string& { return this->GetText(); },
-            pcf_set { this->SetText(value); }
+            pcf_get->const string& { return this->text; },
+            pcf_set {
+              if (this->text != value) {
+                this->text = value;
+                this->OnTextChanged(EventArgs::Empty);
+              }
+            }
           };
 
           Property<int32> Top {
@@ -382,31 +397,11 @@ namespace Pcf {
 
           virtual void DestroyHandle();
 
-          virtual System::Drawing::Size GetClientSize() const;
-
           virtual System::Drawing::Size GetDefaultSize() const { return System::Drawing::Size(0, 0); }
 
           virtual bool GetStyle(ControlStyles flag) { return ((int32)this->style & (int32)flag) == (int32)flag; }
 
-          virtual const string& GetText() const { return this->text; }
-
-          virtual void SetClientSize(const System::Drawing::Size& clientSize);
-
           virtual void SetStyle(ControlStyles flag, bool value) { this->style = value ? (ControlStyles)((int32)this->state | (int32)flag) : (ControlStyles)((int32)this->style & ~(int32)flag); }
-
-          virtual void SetTabStop(bool value) {
-            if (this->tabStop != value) {
-              this->tabStop = value;
-              this->OnTabStopChanged(EventArgs::Empty);
-            }
-          }
-
-          virtual void SetText(const string& value) {
-            if (this->text != value) {
-              this->text = value;
-              this->OnTextChanged(EventArgs::Empty);
-            }
-          }
 
           virtual void OnCreateControl() {}
 
@@ -467,23 +462,23 @@ namespace Pcf {
           /// @cond
           Nullable<System::Drawing::Color> backColor;
           System::Drawing::SolidBrush backBrush {System::Drawing::SystemColors::Control};
+          System::Drawing::Size clientSize;
           ControlCollection controls {*this};
           System::Drawing::Color defaultBackColor;
           System::Drawing::Color defaultForeColor;
           Nullable<System::Drawing::Color> foreColor;
           intptr handle = 0;
+          static System::Collections::Generic::Dictionary<intptr, ref<Control>> handles;
           System::Drawing::Point location;
+          System::Collections::Generic::Dictionary<int32, Action<Message&>> messageActions;
           string name;
           ref<Control> parent;
           System::Drawing::Size size;
+          State state = State::Empty;
+          ControlStyles style = (ControlStyles)0;
           bool tabStop = true;
           string text;
           bool visible = true;
-          System::Collections::Generic::Dictionary<int32, Action<Message&>> messageActions;
-          bool setFocusAfterHandleCreated = false;
-          State state = State::Empty;
-          ControlStyles style = (ControlStyles)0;
-          static System::Collections::Generic::Dictionary<intptr, ref<Control>> handles;
           /// @endcond
 
         private:
@@ -542,6 +537,8 @@ namespace Pcf {
           };
 
           static ref<Control> controlEntered;
+          bool setFocusAfterHandleCreated = false;
+          bool setClientSizeAfterHandleCreated = false;
         };
       }
     }

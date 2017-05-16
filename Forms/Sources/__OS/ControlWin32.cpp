@@ -25,6 +25,8 @@ intptr FormsApi::Control::Create(const System::Windows::Forms::Control& control)
   HWND handle = CreateWindowEx(0, L"Control", control.Text().w_str().c_str(), WS_CHILD, control.Left, control.Top, control.Width, control.Height, (HWND)control.Parent()().Handle(), (HMENU)0, __instance, (LPVOID)NULL);
   WindowProcedure::SetWindowTheme(handle);
   WindowProcedure::DefWindowProcs[(intptr)handle] = (WNDPROC)SetWindowLongPtr(handle, GWLP_WNDPROC, (LONG_PTR)WindowProcedure::WndProc);
+  /// @todo to remove after create SetFont method...
+  PostMessage(handle, WM_SETFONT, WPARAM((HFONT)GetStockObject(DEFAULT_GUI_FONT)), TRUE);
   return (intptr)handle;
 }
 
@@ -42,12 +44,6 @@ void FormsApi::Control::Destroy(const System::Windows::Forms::Control& control) 
 
 intptr FormsApi::Control::GetHandleWindowFromDeviceContext(intptr hdc) {
   return (intptr)WindowFromDC((HDC)hdc);
-}
-
-System::Drawing::Size FormsApi::Control::GetClientSize(const System::Windows::Forms::Control& control) {
-  RECT rect{ 0, 0, 0, 0 };
-  GetClientRect((HWND)control.Handle(), &rect);
-  return System::Drawing::Size(rect.right - rect.left, rect.bottom - rect.top);
 }
 
 void FormsApi::Control::Invalidate(const System::Windows::Forms::Control& control, bool invalidateChildren) {
@@ -94,8 +90,8 @@ void FormsApi::Control::SetBackColor(const System::Windows::Forms::Control& cont
   ReleaseDC((HWND)control.Handle(), hdc);
 }
 
-void FormsApi::Control::SetClientSize(System::Windows::Forms::Control& control, const System::Drawing::Size& clientSize) {
-  RECT rect = { 0, 0, clientSize.Width, clientSize.Height };
+void FormsApi::Control::SetClientSize(System::Windows::Forms::Control& control) {
+  RECT rect = { 0, 0, control.ClientSize().Width, control.ClientSize().Height };
   AdjustWindowRectEx(&rect, GetWindowLong((HWND)control.Handle(), GWL_STYLE), false /*menu == null*/, GetWindowLong((HWND)control.Handle(), GWL_EXSTYLE));
   control.Size = System::Drawing::Size(rect.right - rect.left, rect.bottom - rect.top);
 }
@@ -127,8 +123,11 @@ void FormsApi::Control::SetParent(const System::Windows::Forms::Control& control
   ::SetParent((HWND)control.Handle(), control.Parent() != null ? (HWND)control.Parent()().Handle() : (HWND)0);
 }
 
-void FormsApi::Control::SetSize(const System::Windows::Forms::Control& control) {
+void FormsApi::Control::SetSize(System::Windows::Forms::Control& control) {
   SetWindowPos((HWND)control.Handle(), NULL, 0, 0, control.Width, control.Height, SWP_NOMOVE);
+  RECT rect{ 0, 0, 0, 0 };
+  GetClientRect((HWND)control.Handle(), &rect);
+  control.ClientSize = System::Drawing::Size(rect.right - rect.left, rect.bottom - rect.top);
 }
 
 void FormsApi::Control::SetTabStop(const System::Windows::Forms::Control& control) {
