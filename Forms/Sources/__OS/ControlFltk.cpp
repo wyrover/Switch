@@ -57,10 +57,6 @@ void FormsApi::Control::Destroy(const System::Windows::Forms::Control& control) 
   }
 }
 
-System::Drawing::Size FormsApi::Control::GetClientSize(const System::Windows::Forms::Control &control) {
-  return {((__OS::Widget*)control.Handle())->ToWidget().w(), ((__OS::Widget*)control.Handle())->ToWidget().h()};
-}
-
 intptr FormsApi::Control::GetHandleWindowFromDeviceContext(intptr hdc) {
   return hdc;
 }
@@ -110,8 +106,22 @@ void FormsApi::Control::SetBackColor(const System::Windows::Forms::Control& cont
   ((__OS::Widget*)control.Handle())->BackColor(System::Environment::OSVersion().Platform == System::PlatformID::MacOSX && is<System::Windows::Forms::Button>(control) && as<System::Windows::Forms::Button>(control).IsDefault ? System::Drawing::SystemColors::Highlight() : control.BackColor());
 }
 
-void FormsApi::Control::SetClientSize(System::Windows::Forms::Control &control, const System::Drawing::Size &clientSize) {
-  ((__OS::Widget*)control.Handle())->ToWidget().size(clientSize.Width, clientSize.Height);
+void FormsApi::Control::SetClientSize(System::Windows::Forms::Control &control) {
+  if (is<System::Windows::Forms::Form>(control)) {
+    ((__OS::Widget*)control.Handle())->ToWidget().size(control.ClientSize().Width, control.ClientSize().Height);
+    control.Size = System::Drawing::Size(control.ClientSize().Width, control.ClientSize().Height + SystemInformation::GetCaptionHeight());
+  } else if (is<System::Windows::Forms::ProgressBar>(control)) {
+    System::Drawing::Point offset;
+    if (control.Parent() != null && !is<System::Windows::Forms::Form>(control.Parent()))
+      offset = control.Parent()().Location;
+    offset = System::Drawing::Point::Add(offset, {0, control.Height > 6 ? (control.Height - 6) : 0});
+    ((__OS::Widget*)control.Handle())->ToWidget().position(control.Location().X + offset.X, control.Location().Y + offset.Y);
+    ((__OS::Widget*)control.Handle())->ToWidget().size(control.Size().Width, 6);
+    control.Size = control.ClientSize;
+  } else {
+    ((__OS::Widget*)control.Handle())->ToWidget().size(control.ClientSize().Width, control.ClientSize().Height);
+    control.Size = control.ClientSize;
+  }
 }
 
 void FormsApi::Control::SetForeColor(intptr hdc) {
@@ -150,18 +160,22 @@ void FormsApi::Control::SetParent(const System::Windows::Forms::Control& control
     ((__OS::Widget*)control.Parent()().Handle())->Container().add(((__OS::Widget*)control.Handle())->ToWidget());
 }
 
-void FormsApi::Control::SetSize(const System::Windows::Forms::Control& control) {
-  if (is<System::Windows::Forms::Form>(control))
+void FormsApi::Control::SetSize(System::Windows::Forms::Control& control) {
+  if (is<System::Windows::Forms::Form>(control)) {
     ((__OS::Widget*)control.Handle())->ToWidget().size(control.Size().Width, control.Size().Height - SystemInformation::GetCaptionHeight());
-  else if (is<System::Windows::Forms::ProgressBar>(control)) {
+    control.ClientSize = System::Drawing::Size(control.Size().Width, control.Size().Height - SystemInformation::GetCaptionHeight());
+  } else if (is<System::Windows::Forms::ProgressBar>(control)) {
     System::Drawing::Point offset;
     if (control.Parent() != null && !is<System::Windows::Forms::Form>(control.Parent()))
       offset = control.Parent()().Location;
     offset = System::Drawing::Point::Add(offset, {0, control.Height > 6 ? (control.Height - 6) : 0});
     ((__OS::Widget*)control.Handle())->ToWidget().position(control.Location().X + offset.X, control.Location().Y + offset.Y);
     ((__OS::Widget*)control.Handle())->ToWidget().size(control.Size().Width, 6);
-  } else
+    control.ClientSize = control.Size;
+  } else {
     ((__OS::Widget*)control.Handle())->ToWidget().size(control.Size().Width, control.Size().Height);
+    control.ClientSize = control.Size;
+  }
 }
 
 void FormsApi::Control::SetTabStop(const System::Windows::Forms::Control &control) {

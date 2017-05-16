@@ -64,7 +64,7 @@ intptr FormsApi::Form::Create(System::Windows::Forms::Form& form) {
   form.Location= System::Drawing::Point(bounds.Left, bounds.Top);
 
   __OS::Form* handle = CreateControl<__OS::Form>(form);
-  handle->Fl_Window::resize(bounds.Left, bounds.Top, bounds.Width, bounds.Height);
+  handle->Fl_Window::resize(bounds.Left, bounds.Top, bounds.Width, bounds.Height - SystemInformation::GetCaptionHeight());
   handle->resizable(handle->Container());
   return (intptr)handle;
 }
