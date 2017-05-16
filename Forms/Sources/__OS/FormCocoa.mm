@@ -48,7 +48,7 @@ void FormsApi::Form::Close(System::Windows::Forms::Form& form) {
   [(NSWindow*)form.Handle() close];
 }
 
-intptr FormsApi::Form::Create(const System::Windows::Forms::Form& form) {
+intptr FormsApi::Form::Create(System::Windows::Forms::Form& form) {
   @autoreleasepool {
     System::Drawing::Rectangle bounds = __OS::WindowProcedure::GetBounds(form);
     Random random;
@@ -58,6 +58,7 @@ intptr FormsApi::Form::Create(const System::Windows::Forms::Form& form) {
       case FormStartPosition::WindowsDefaultLocation: bounds = __OS::WindowProcedure::GetBounds(System::Drawing::Rectangle(random.Next(50, 300), random.Next(50, 200), form.Width, form.Height)); break;
       default: break;
     }
+    form.Location= System::Drawing::Point(bounds.Left, bounds.Top);
 
     FormCocoa* handle = [[FormCocoa alloc] init];
     [handle setStyleMask: CocoaApi::FormToNSWindowStyleMask(form)];

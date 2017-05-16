@@ -50,7 +50,7 @@ void FormsApi::Form::Close(System::Windows::Forms::Form& form) {
   ((__OS::Form*)form.Handle())->close();
 }
 
-intptr FormsApi::Form::Create(const System::Windows::Forms::Form& form) {
+intptr FormsApi::Form::Create(System::Windows::Forms::Form& form) {
   System::Drawing::Rectangle bounds = form.Bounds;
   Random random;
   switch (form.StartPosition) {
@@ -59,6 +59,7 @@ intptr FormsApi::Form::Create(const System::Windows::Forms::Form& form) {
     case FormStartPosition::WindowsDefaultLocation: bounds = System::Drawing::Rectangle(System::Drawing::Rectangle(random.Next(50, 300), random.Next(50, 200), form.Width, form.Height)); break;
     default: break;
   }
+  form.Location= System::Drawing::Point(bounds.Left, bounds.Top);
 
   __OS::Form* handle = new __OS::Form();
   handle->Move(bounds.Left, bounds.Top);
