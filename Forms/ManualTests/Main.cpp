@@ -56,8 +56,8 @@ namespace PcfFormApp {
       Form form;
       form.Controls().Add(panel);
       form.ClientSize = Size(300, 300);
-      //form.StartPosition = FormStartPosition::Manual;
-      //form.Location = Point(10, 10);
+      form.StartPosition = FormStartPosition::Manual;
+      form.Location = Point(10, 10);
 
       int counter = 0;
       Application::Idle += pcf_delegate(const object& sender, const EventArgs& e) {
