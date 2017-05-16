@@ -25,6 +25,7 @@ intptr FormsApi::Form::Create(System::Windows::Forms::Form& form) {
   case FormStartPosition::WindowsDefaultLocation: bounds = Drawing::Rectangle(CW_USEDEFAULT, CW_USEDEFAULT, form.Width, form.Height); break;
   }
   form.Location= System::Drawing::Point(bounds.Left, bounds.Top);
+  form.Size= System::Drawing::Size(bounds.Width, bounds.Height);
 
   HWND handle = CreateWindowEx(0, WC_DIALOG, form.Text().w_str().c_str(), WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_GROUP, bounds.Left, bounds.Top, bounds.Width, bounds.Height, NULL, (HMENU)0, __instance, (LPVOID)NULL);
   WindowProcedure::DefWindowProcs[(intptr)handle] = (WNDPROC)SetWindowLongPtr(handle, GWLP_WNDPROC, (LONG_PTR)WindowProcedure::WndProc);

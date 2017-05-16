@@ -8,8 +8,7 @@ using namespace __OS;
 
 intptr FormsApi::Panel::Create(const System::Windows::Forms::Panel& panel) {
   @autoreleasepool {
-    System::Drawing::Rectangle bounds = __OS::WindowProcedure::GetBounds(panel);
-    NSScrollView* handle = [[[NSScrollView alloc]  initWithFrame:NSMakeRect(bounds.X(), bounds.Y(), bounds.Width(), bounds.Height())] autorelease];
+    NSScrollView* handle = [[[NSScrollView alloc] init] autorelease];
     [[(NSWindow*)panel.Parent()().Handle() contentView] addSubview: handle];
     
     [handle setAutoresizingMask:NSViewMaxXMargin | NSViewMinYMargin];

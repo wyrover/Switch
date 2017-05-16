@@ -20,8 +20,7 @@ using namespace __OS;
 
 intptr FormsApi::RadioButton::Create(const System::Windows::Forms::RadioButton& radioButton) {
   @autoreleasepool {
-    System::Drawing::Rectangle bounds = __OS::WindowProcedure::GetBounds(radioButton);
-    RadioButtonCocoa *handle = [[[RadioButtonCocoa alloc] initWithFrame:NSMakeRect(bounds.X(), bounds.Y(), bounds.Width(), bounds.Height())] autorelease];
+    RadioButtonCocoa *handle = [[[RadioButtonCocoa alloc] init] autorelease];
     [[(NSWindow*)radioButton.Parent()().Handle() contentView] addSubview: handle];
     
     [handle setTitle:[NSString stringWithUTF8String:radioButton.Text().c_str()]];

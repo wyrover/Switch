@@ -20,8 +20,7 @@ using namespace __OS;
 
 intptr FormsApi::CheckBox::Create(const System::Windows::Forms::CheckBox& checkBox) {
   @autoreleasepool {
-    System::Drawing::Rectangle bounds = __OS::WindowProcedure::GetBounds(checkBox);
-    CheckBoxCocoa *handle = [[[CheckBoxCocoa alloc] initWithFrame:NSMakeRect(bounds.X(), bounds.Y(), bounds.Width(), bounds.Height())] autorelease];
+    CheckBoxCocoa *handle = [[[CheckBoxCocoa alloc] init] autorelease];
     [[(NSWindow*)checkBox.Parent()().Handle() contentView] addSubview: handle];
     
     [handle setTitle:[NSString stringWithUTF8String:checkBox.Text().c_str()]];

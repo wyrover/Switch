@@ -93,20 +93,19 @@ void Control::CreateHandle() {
     this->handle = __OS::FormsApi::Control::Create(*this);
   handles.Add(this->handle, *this);
   this->backBrush = System::Drawing::SolidBrush(this->BackColor);
-  __OS::FormsApi::Control::SetParent(*this);
-  if (!is<Form>(*this)) {
-    __OS::FormsApi::Control::SetLocation(*this);
-    __OS::FormsApi::Control::SetSize(*this);
-  }
+  __OS::FormsApi::Control::SetParent(*this); // Must be first
   if (this->setClientSizeAfterHandleCreated)
     __OS::FormsApi::Control::SetClientSize(*this);
+  else
+    __OS::FormsApi::Control::SetSize(*this);
+  __OS::FormsApi::Control::SetLocation(*this); // Must be after SetClientSize or SetSize
   __OS::FormsApi::Control::SetBackColor(*this);
   __OS::FormsApi::Control::SetForeColor(*this);
   __OS::FormsApi::Control::SetTabStop(*this);
   __OS::FormsApi::Control::SetText(*this);
   if (this->setFocusAfterHandleCreated)
     __OS::FormsApi::Control::SetFocus(*this);
-  __OS::FormsApi::Control::SetVisible(*this);
+  __OS::FormsApi::Control::SetVisible(*this); // Must be last
 }
 
 void Control::DestroyHandle() {

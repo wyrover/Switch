@@ -62,6 +62,7 @@ intptr FormsApi::Form::Create(System::Windows::Forms::Form& form) {
     default: break;
   }
   form.Location= System::Drawing::Point(bounds.Left, bounds.Top);
+  form.Size= System::Drawing::Size(bounds.Width, bounds.Height);
 
   __OS::Form* handle = CreateControl<__OS::Form>(form);
   handle->Fl_Window::resize(bounds.Left, bounds.Top, bounds.Width, bounds.Height - SystemInformation::GetCaptionHeight());

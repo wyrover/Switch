@@ -20,8 +20,7 @@ using namespace __OS;
 
 intptr FormsApi::Label::Create(const System::Windows::Forms::Label& label) {
   @autoreleasepool {
-    System::Drawing::Rectangle bounds = __OS::WindowProcedure::GetBounds(label);
-    LabelCocoa* handle = [[LabelCocoa alloc] initWithFrame:NSMakeRect(bounds.X(), bounds.Y(), bounds.Width(), bounds.Height())];
+    LabelCocoa* handle = [[LabelCocoa alloc] init];
     [[(NSWindow*)label.Parent()().Handle() contentView] addSubview: handle];
     
     [handle setStringValue:[NSString stringWithUTF8String:label.Text().c_str()]];

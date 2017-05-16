@@ -60,6 +60,7 @@ intptr FormsApi::Form::Create(System::Windows::Forms::Form& form) {
     default: break;
   }
   form.Location= System::Drawing::Point(bounds.Left, bounds.Top);
+  form.Size= System::Drawing::Size(bounds.Width, bounds.Height);
 
   __OS::Form* handle = new __OS::Form();
   handle->Move(bounds.Left, bounds.Top);

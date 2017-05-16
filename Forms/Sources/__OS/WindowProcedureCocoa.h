@@ -15,17 +15,6 @@ namespace __OS {
     
     static ControlDictionary Controls;
     
-    static System::Drawing::Rectangle GetBounds(const System::Windows::Forms::Control& control) {
-      if (is<System::Windows::Forms::Form>(control))
-        return System::Drawing::Rectangle(control.Left, screenHeight - control.Top, control.Width, control.Height);
-      int32 captionHeight = !is<System::Windows::Forms::Form>(control.Parent()()) || as<System::Windows::Forms::Form>(control.Parent()()).FormBorderStyle == System::Windows::Forms::FormBorderStyle::None ? 0 : FormsApi::SystemInformation::GetCaptionHeight();
-      return System::Drawing::Rectangle(control.Left, control.Parent()().Height - control.Height - control.Top - captionHeight, control.Width, control.Height);
-    }
-    
-    static System::Drawing::Rectangle GetBounds(const System::Drawing::Rectangle& bounds) {
-      return System::Drawing::Rectangle(bounds.Left, screenHeight - bounds.Top, bounds.Width, bounds.Height);
-    }
-    
     static int32 GetMouseButtonState(NSEvent* event) {
       int32 state = 0;
       if ([event buttonNumber] == 1) state &= MK_LBUTTON;
@@ -49,17 +38,15 @@ namespace __OS {
     }
 
   private:
-    static int32 GetCaptionHeight(const System::Windows::Forms::Control& control) {
-      return !is<System::Windows::Forms::Form>(control) || as<System::Windows::Forms::Form>(control).FormBorderStyle == System::Windows::Forms::FormBorderStyle::None ? 0 : FormsApi::SystemInformation::GetCaptionHeight();
-    }
-
     static int32 GetMouseXCoordinateRelativeToClientArea(NSEvent* event, System::Windows::Forms::Control& control) {
-      System::Drawing::Point location(event.locationInWindow.x, event.window.frame.size.height - event.locationInWindow.y - GetCaptionHeight(control));
+      int32 captionHeight = !is<System::Windows::Forms::Form>(control) || as<System::Windows::Forms::Form>(control).FormBorderStyle == System::Windows::Forms::FormBorderStyle::None ? 0 : FormsApi::SystemInformation::GetCaptionHeight();
+      System::Drawing::Point location(event.locationInWindow.x, event.window.frame.size.height - event.locationInWindow.y - captionHeight);
       return location.X;
     }
     
     static int32 GetMouseYCoordinateRelativeToClientArea(NSEvent* event, System::Windows::Forms::Control& control) {
-      System::Drawing::Point location(event.locationInWindow.x, event.window.frame.size.height - event.locationInWindow.y - GetCaptionHeight(control));
+      int32 captionHeight = !is<System::Windows::Forms::Form>(control) || as<System::Windows::Forms::Form>(control).FormBorderStyle == System::Windows::Forms::FormBorderStyle::None ? 0 : FormsApi::SystemInformation::GetCaptionHeight();
+      System::Drawing::Point location(event.locationInWindow.x, event.window.frame.size.height - event.locationInWindow.y - captionHeight);
       return location.Y;
     }
     
@@ -117,7 +104,6 @@ namespace __OS {
     static bool messageLoopRunning ;
     static const int32 notUsed = 0;
     static bool hover;
-    static const int32 screenHeight = 1050; // TO DO : Get Screen height...
   };
 }
 

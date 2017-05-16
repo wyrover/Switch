@@ -20,8 +20,7 @@ using namespace __OS;
 
 intptr FormsApi::Button::Create(const System::Windows::Forms::Button& button) {
   @autoreleasepool {
-    System::Drawing::Rectangle bounds = __OS::WindowProcedure::GetBounds(button);
-    ButtonCocoa *handle = [[[ButtonCocoa alloc] initWithFrame:NSMakeRect(bounds.X()-6, bounds.Y()-6, bounds.Width()+12, bounds.Height()+13)] autorelease];
+    ButtonCocoa *handle = [[[ButtonCocoa alloc] init] autorelease];
     [[(NSWindow*)button.Parent()().Handle() contentView] addSubview: handle];
     
     [handle setTitle:[NSString stringWithUTF8String:button.Text().c_str()]];

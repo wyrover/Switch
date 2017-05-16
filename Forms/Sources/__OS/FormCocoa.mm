@@ -50,20 +50,21 @@ void FormsApi::Form::Close(System::Windows::Forms::Form& form) {
 
 intptr FormsApi::Form::Create(System::Windows::Forms::Form& form) {
   @autoreleasepool {
-    System::Drawing::Rectangle bounds = __OS::WindowProcedure::GetBounds(form);
+    System::Drawing::Rectangle bounds = form.Bounds;
     Random random;
     switch (form.StartPosition) {
-      case FormStartPosition::Manual: bounds = __OS::WindowProcedure::GetBounds(form); break;
-      case FormStartPosition::WindowsDefaultBounds: bounds = __OS::WindowProcedure::GetBounds(System::Drawing::Rectangle(random.Next(50, 300), random.Next(50, 200), random.Next(640, 800), random.Next(480, 600))); break;
-      case FormStartPosition::WindowsDefaultLocation: bounds = __OS::WindowProcedure::GetBounds(System::Drawing::Rectangle(random.Next(50, 300), random.Next(50, 200), form.Width, form.Height)); break;
+      case FormStartPosition::Manual: bounds = form.Bounds; break;
+      case FormStartPosition::WindowsDefaultBounds: bounds = System::Drawing::Rectangle(random.Next(50, 300), random.Next(50, 200), random.Next(640, 800), random.Next(480, 600)); break;
+      case FormStartPosition::WindowsDefaultLocation: bounds = System::Drawing::Rectangle(random.Next(50, 300), random.Next(50, 200), form.Width, form.Height); break;
       default: break;
     }
     form.Location= System::Drawing::Point(bounds.Left, bounds.Top);
+    form.Size= System::Drawing::Size(bounds.Width, bounds.Height);
 
     FormCocoa* handle = [[FormCocoa alloc] init];
     [handle setStyleMask: CocoaApi::FormToNSWindowStyleMask(form)];
-    [handle setFrame:NSMakeRect(bounds.X(), bounds.Y(), bounds.Width(), bounds.Height()) display:YES];
-    [handle setFrameTopLeftPoint:NSMakePoint(bounds.X(), bounds.Y())];
+    //[handle setFrame:NSMakeRect(bounds.X(), bounds.Y(), bounds.Width(), bounds.Height()) display:YES];
+    //[handle setFrameTopLeftPoint:NSMakePoint(bounds.X(), bounds.Y())];
     
     [handle setTitle:[NSString stringWithUTF8String:form.Text().c_str()]];
     [handle makeKeyAndOrderFront:nil];

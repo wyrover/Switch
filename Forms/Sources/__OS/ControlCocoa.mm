@@ -15,28 +15,13 @@ namespace {
     }
     
     static System::Drawing::Rectangle GetBounds(const System::Windows::Forms::Control& control) {
-      if (is<System::Windows::Forms::Form>(control))
-        return GetBounds(as<System::Windows::Forms::Form>(control));
-      return System::Drawing::Rectangle(control.Bounds().X, control.Parent()().Bounds().Height - control.Bounds().Height - control.Bounds().Y - GetCaptionHeight(control.Parent()()), control.Bounds().Width, control.Bounds().Height);
-    }
-    
-    static Drawing::Rectangle GetBounds(const System::Windows::Forms::Form& form) {
-      switch (form.StartPosition) {
-        case FormStartPosition::CenterParent: return Drawing::Rectangle(0, screenHeight - form.Bounds().Y, form.Width, form.Height);
-        case FormStartPosition::CenterScreen: return Drawing::Rectangle(0, screenHeight, form.Width, form.Height);
-        case FormStartPosition::Manual: return Drawing::Rectangle(form.Bounds().X, screenHeight - form.Bounds().Y, form.Bounds().Width, form.Bounds().Height);
-        case FormStartPosition::WindowsDefaultBounds: return Drawing::Rectangle(0, screenHeight, 300, 300);
-        case FormStartPosition::WindowsDefaultLocation: return Drawing::Rectangle(0, screenHeight, form.Width, form.Height);
+      if (is<System::Windows::Forms::Form>(control)) {
+        int32 screenHeight = 1050 - __OS::FormsApi::SystemInformation::GetMenuHeight(); // TO DO : Get Screen height...
+        return System::Drawing::Rectangle(control.Left, screenHeight - control.Top - control.Height , control.Width, control.Height);
       }
-      return Drawing::Rectangle(0, screenHeight - 300, 300, 300);
+      int32 captionHeight = !is<Form>(control.Parent()) || as<Form>(control.Parent())().FormBorderStyle == FormBorderStyle::None ? 0 : FormsApi::SystemInformation::GetCaptionHeight();
+      return System::Drawing::Rectangle(control.Left, control.Parent()().Height - control.Height - control.Top - captionHeight, control.Width, control.Height);
     }
-    
-    static int32 GetCaptionHeight(const System::Windows::Forms::Control& control) {
-      return !is<Form>(control) || as<Form>(control).FormBorderStyle == FormBorderStyle::None ? 0 : FormsApi::SystemInformation::GetCaptionHeight();
-    }
-    
-  private:
-    static const int32 screenHeight = 1050; // TO DO : Get Screen height...
   };
 }
 
@@ -53,8 +38,7 @@ namespace {
 @end
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Control& control) {
-  System::Drawing::Rectangle bounds = __OS::WindowProcedure::GetBounds(control);
-  ControlCocoa *handle = [[[ControlCocoa alloc] initWithFrame:NSMakeRect(bounds.X(), bounds.Y(), bounds.Width(), bounds.Height())] autorelease];
+  ControlCocoa *handle = [[[ControlCocoa alloc] init] autorelease];
   [[(NSWindow*)control.Parent()().Handle() contentView] addSubview: handle];
   
   [handle setStringValue:[NSString stringWithUTF8String:control.Text().c_str()]];
@@ -181,9 +165,9 @@ void FormsApi::Control::SetLocation(const System::Windows::Forms::Control& contr
   @autoreleasepool {
     System::Drawing::Rectangle bounds = CocoaApi::GetBounds(control);
     if (is<System::Windows::Forms::Button>(control))
-      [(NSControl*)control.Handle() setFrameOrigin:NSMakePoint(bounds.X()-6, bounds.Y()-6)];
+      [(NSControl*)control.Handle() setFrameOrigin:NSMakePoint(bounds.Left - 6, bounds.Top - 6)];
     else
-      [(NSControl*)control.Handle() setFrameOrigin:NSMakePoint(bounds.X(), bounds.Y())];
+      [(NSControl*)control.Handle() setFrameOrigin:NSMakePoint(bounds.Left, bounds.Top)];
   }
 }
 
