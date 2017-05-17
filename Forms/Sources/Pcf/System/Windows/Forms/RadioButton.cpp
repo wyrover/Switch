@@ -9,6 +9,7 @@ using namespace System::Windows::Forms;
 void RadioButton::CreateHandle() {
   this->handle = __OS::FormsApi::RadioButton::Create(*this);
   this->Control::CreateHandle();
+  __OS::FormsApi::RadioButton::SetAutoCheck(*this);
   __OS::FormsApi::RadioButton::SetChecked(*this);
 }
 
