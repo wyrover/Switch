@@ -2,6 +2,7 @@
 
 #include <gtkmm.h>
 #include <gtkmm/application.h>
+#include <gtkmm/messagedialog.h>
 #include <gtkmm/window.h>
 #include "WidgetGtk.h"
 
@@ -33,6 +34,15 @@ void FormsApi::Application::MessageBeep(MessageBoxIcon type) {
 }
 
 DialogResult FormsApi::Application::ShowMessageBox(const string& message, const string& caption, MessageBoxButtons buttons, MessageBoxIcon icon, MessageBoxDefaultButton defaultButton, MessageBoxOptions options, bool displayHelpButton) {
+  Gtk::MessageDialog dialog(caption.c_str(), true /* use_markup */, Gtk::MESSAGE_QUESTION, Gtk::BUTTONS_OK_CANCEL, true);
+  dialog.set_secondary_text(message.c_str());
+  dialog.set_modal();
+  dialog.set_position(Gtk::WindowPosition::WIN_POS_CENTER);
+  
+  switch (dialog.run()) {
+    case Gtk::RESPONSE_ACCEPT: return DialogResult::OK;
+    case Gtk::RESPONSE_CANCEL: return DialogResult::Cancel;
+  }
   return DialogResult::Cancel;
 }
 
