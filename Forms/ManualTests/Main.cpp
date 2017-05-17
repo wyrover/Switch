@@ -46,19 +46,25 @@ namespace PcfFormApp {
       radioButton3.Text = "Radio 3";
       radioButton3.Location = Point(10, 190);
 
+      Label result;
+      result.Name = "result";
+      result.Text = "Dialog result";
+      result.Location = Point(120, 220);
+      result.Width = 150;
+
       Button button;
       button.Name = "button";
       button.Text = "Click me";
       button.Location = Point(10, 220);
       button.Click += pcf_delegate(const object& sender, const EventArgs& e) {
-        MessageBox::Show("Hello, World !", "Message", MessageBoxButtons::OKCancel, MessageBoxIcon::Hand);
+        result.Text = string::Format("Dialog result = {0}", MessageBox::Show("Hello, World !", "Message", MessageBoxButtons::OKCancel, MessageBoxIcon::Hand));
       };
 
       Panel panel;
       panel.Name = "panel";
       panel.Text = "Panel";
       panel.Bounds = Rectangle(10, 10, 280, 280);
-      panel.Controls().AddRange({ progressBar, label, checkBox1, checkBox2, radioButton1, radioButton2, radioButton3, button });
+      panel.Controls().AddRange({ progressBar, label, checkBox1, checkBox2, radioButton1, radioButton2, radioButton3, result, button });
       panel.BackColor = Color::White;
 
       Form form;

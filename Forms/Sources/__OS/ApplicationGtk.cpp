@@ -40,7 +40,7 @@ DialogResult FormsApi::Application::ShowMessageBox(const string& message, const 
   dialog.set_position(Gtk::WindowPosition::WIN_POS_CENTER);
   
   switch (dialog.run()) {
-    case Gtk::RESPONSE_ACCEPT: return DialogResult::OK;
+  case Gtk::RESPONSE_OK: return DialogResult::OK;
     case Gtk::RESPONSE_CANCEL: return DialogResult::Cancel;
   }
   return DialogResult::Cancel;
