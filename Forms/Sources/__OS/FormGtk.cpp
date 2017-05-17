@@ -63,8 +63,6 @@ intptr FormsApi::Form::Create(System::Windows::Forms::Form& form) {
   form.Size= System::Drawing::Size(bounds.Width, bounds.Height);
 
   __OS::Form* handle = new __OS::Form();
-  handle->Move(bounds.Left, bounds.Top);
-  handle->set_size_request(bounds.Width, bounds.Height - SystemInformation::GetCaptionHeight());
   handle->Text(form.Text);
   return (intptr)handle;
 }

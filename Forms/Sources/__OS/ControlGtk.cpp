@@ -119,10 +119,10 @@ void FormsApi::Control::SetParent(const System::Windows::Forms::Control& control
 
 void FormsApi::Control::SetSize(System::Windows::Forms::Control& control) {
   if (is<System::Windows::Forms::Form>(control)) {
-    ((__OS::Widget*)control.Handle())->ToWidget().set_size_request(control.Size().Width, control.Size().Height - SystemInformation::GetCaptionHeight());
+    ((__OS::Widget*)control.Handle())->ToWidget().set_size_request(control.Width, control.Height - SystemInformation::GetCaptionHeight());
     control.ClientSize = System::Drawing::Size::Subtract(control.Size, {0, SystemInformation::GetCaptionHeight()});
   } else {
-    ((__OS::Widget*)control.Handle())->ToWidget().set_size_request(control.Size().Width, control.Size().Height);
+    ((__OS::Widget*)control.Handle())->ToWidget().set_size_request(control.Width, control.Height);
     control.ClientSize = control.Size;
   }
 }
