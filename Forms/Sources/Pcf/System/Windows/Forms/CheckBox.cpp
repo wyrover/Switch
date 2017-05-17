@@ -20,11 +20,17 @@ void CheckBox::SetAutoCheck(bool autoCheck) {
   }
 }
 
-void CheckBox::SetChecked(bool checked) {
-  if (this->checked != checked) {
-    this->checked = checked;
+void CheckBox::SetCheckState(System::Windows::Forms::CheckState checkState) {
+  if (this->checkState != checkState) {
+    bool oldChecked = this->Checked;
+    this->checkState = checkState;
+
     if (this->IsHandleCreated)
       __OS::FormsApi::CheckBox::SetChecked(*this);
-    this->OnCheckedChanged(EventArgs::Empty);
+
+    if (oldChecked != this->Checked)
+      this->OnCheckedChanged(EventArgs::Empty);
+
+    this->OnCheckStateChanged(EventArgs::Empty);
   }
 }

@@ -23,6 +23,7 @@ set(INCLUDE_FILES
   Includes/Pcf/System/Windows/Forms/ButtonBase.h
   Includes/Pcf/System/Windows/Forms/CheckBox.h
 #  Includes/Pcf/System/Windows/Forms/CheckedListBox.h
+  Includes/Pcf/System/Windows/Forms/CheckState.h
   Includes/Pcf/System/Windows/Forms/CloseReason.h
   Includes/Pcf/System/Windows/Forms/ContainerControl.h
   Includes/Pcf/System/Windows/Forms/Control.h

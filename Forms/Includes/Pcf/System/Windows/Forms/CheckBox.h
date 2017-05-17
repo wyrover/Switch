@@ -3,6 +3,7 @@
 #pragma once
 
 #include "ButtonBase.h"
+#include "CheckState.h"
 
 /// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Pcf {
@@ -22,27 +23,39 @@ namespace Pcf {
         public:
           CheckBox() : ButtonBase("", 0, 0, 104, 24) { this->SetStyle(ControlStyles::UserPaint, false); }
 
-          Property<bool> AutoCheck{
+          Property<bool> AutoCheck {
             pcf_get{ return this->autoCheck; },
             pcf_set{ this->SetAutoCheck(value); }
           };
 
           Property<bool> Checked {
-            pcf_get {return this->checked;},
-            pcf_set {this->SetChecked(value);}
+            pcf_get {return this->CheckState != System::Windows::Forms::CheckState::Unchecked;},
+            pcf_set {
+              if (this->Checked != value) {
+                this->CheckState = value ? System::Windows::Forms::CheckState::Checked : System::Windows::Forms::CheckState::Unchecked;
+              }
+            }
+          };
+          
+          Property<System::Windows::Forms::CheckState> CheckState {
+            pcf_get {return this->checkState;},
+            pcf_set {this->SetCheckState(value);}
           };
 
           EventHandler CheckedChanged;
+          EventHandler CheckStateChanged;
 
         protected:
           void CreateHandle() override;
           void SetAutoCheck(bool autoCheck);
-          void SetChecked(bool checked);
+          void SetCheckState(System::Windows::Forms::CheckState checkState);
 
           System::Drawing::Size GetDefaultSize() const override {return System::Drawing::Size(104, 24);}
 
           virtual void OnCheckedChanged(const EventArgs& e) {this->CheckedChanged(*this, e);}
-
+          
+          virtual void OnCheckStateChanged(const EventArgs& e) {this->CheckedChanged(*this, e);}
+          
           void OnClick(const EventArgs& e) override {
             if (this->AutoCheck)
               this->Checked = !this->Checked;
@@ -51,7 +64,7 @@ namespace Pcf {
 
           /// @cond
           bool autoCheck = true;
-          bool checked = false;
+          System::Windows::Forms::CheckState checkState = System::Windows::Forms::CheckState::Unchecked;
           /// @endcond
         };
       }

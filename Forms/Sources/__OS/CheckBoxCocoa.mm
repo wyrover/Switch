@@ -26,6 +26,7 @@ intptr FormsApi::CheckBox::Create(const System::Windows::Forms::CheckBox& checkB
     [handle setTitle:[NSString stringWithUTF8String:checkBox.Text().c_str()]];
     [handle setButtonType:NSButtonTypeSwitch];
     [handle setAutoresizingMask:NSViewMaxXMargin | NSViewMinYMargin];
+    [handle setAllowsMixedState:true];
     [handle setTarget:handle];
     [handle setAction:@selector(Click:)];
     __OS::WindowProcedure::Controls[(intptr)handle] = checkBox;
@@ -39,7 +40,10 @@ void FormsApi::CheckBox::SetAutoCheck(const System::Windows::Forms::CheckBox& ch
 }
 
 void FormsApi::CheckBox::SetChecked(const System::Windows::Forms::CheckBox& checkBox) {
-  [(NSButton*)checkBox.Handle() setState:checkBox.Checked()];
+  if (checkBox.CheckState == System::Windows::Forms::CheckState::Indeterminate)
+    [(NSButton*)checkBox.Handle() setState:-1];
+  else
+    [(NSButton*)checkBox.Handle() setState:(int32)checkBox.CheckState()];
 }
 
 #endif

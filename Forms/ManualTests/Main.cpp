@@ -22,7 +22,7 @@ namespace PcfFormApp {
       checkBox1.Name = "checkBox1";
       checkBox1.Text = "Check 1";
       checkBox1.Location = Point(10, 70);
-      checkBox1.Checked = true;
+      checkBox1.CheckState = System::Windows::Forms::CheckState::Indeterminate;
       checkBox1.Focus();
 
       CheckBox checkBox2;

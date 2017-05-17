@@ -41,7 +41,7 @@ DialogResult FormsApi::Application::ShowMessageBox(const string& message, const 
   
   switch (dialog.run()) {
   case Gtk::RESPONSE_OK: return DialogResult::OK;
-    case Gtk::RESPONSE_CANCEL: return DialogResult::Cancel;
+  case Gtk::RESPONSE_CANCEL: return DialogResult::Cancel;
   }
   return DialogResult::Cancel;
 }
