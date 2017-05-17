@@ -24,7 +24,10 @@ namespace Pcf {
 
           Property<bool> AutoCheck {
             pcf_get {return this->autoCheck;},
-            pcf_set {this->SetAutoCheck(value);}
+            pcf_set {
+              if (this->autoCheck != value)
+                this->autoCheck = value;
+            }
           };
 
           Property<bool> Checked{
@@ -36,7 +39,6 @@ namespace Pcf {
 
         protected:
           void CreateHandle() override;
-          void SetAutoCheck(bool autoCheck);
           void SetChecked(bool checked);
 
           System::Drawing::Size GetDefaultSize() const override { return System::Drawing::Size(104, 24); }
@@ -48,6 +50,8 @@ namespace Pcf {
               this->Checked = true;
             this->Control::OnClick(e);
           }
+          
+          void OnParentChanged(const EventArgs& e) override;
 
           bool autoCheck = true;
           bool checked = false;

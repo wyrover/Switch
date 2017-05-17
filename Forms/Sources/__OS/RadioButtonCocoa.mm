@@ -35,11 +35,11 @@ intptr FormsApi::RadioButton::Create(const System::Windows::Forms::RadioButton& 
   }
 }
 
-void FormsApi::RadioButton::SetAutoCheck(const System::Windows::Forms::RadioButton& radioButton) {
-}
-
 void FormsApi::RadioButton::SetChecked(const System::Windows::Forms::RadioButton& radioButton) {
   [(NSButton*)radioButton.Handle() setState:radioButton.Checked()];
+}
+
+void FormsApi::RadioButton::SetGroup(const System::Windows::Forms::RadioButton& radioButton) {
 }
 
 #endif

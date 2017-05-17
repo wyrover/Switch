@@ -32,12 +32,11 @@ intptr FormsApi::RadioButton::Create(const System::Windows::Forms::RadioButton& 
   return (intptr)handle;
 }
 
-void FormsApi::RadioButton::SetAutoCheck(const System::Windows::Forms::RadioButton& radioButton) {
-  ((Fl_Round_Button&)((__OS::Widget*)radioButton.Handle())->ToWidget()).type(radioButton.AutoCheck ? FL_RADIO_BUTTON : FL_NORMAL_BUTTON);
-}
-
 void FormsApi::RadioButton::SetChecked(const System::Windows::Forms::RadioButton& radioButton) {
   ((Fl_Round_Button&)((__OS::Widget*)radioButton.Handle())->ToWidget()).value(radioButton.Checked);
+}
+
+void FormsApi::RadioButton::SetGroup(const System::Windows::Forms::RadioButton& radioButton) {
 }
 
 #endif

@@ -22,11 +22,11 @@ intptr FormsApi::RadioButton::Create(const System::Windows::Forms::RadioButton& 
   return (intptr)handle;
 }
 
-void FormsApi::RadioButton::SetAutoCheck(const System::Windows::Forms::RadioButton& radioButton) {
-}
-
 void FormsApi::RadioButton::SetChecked(const System::Windows::Forms::RadioButton& radioButton) {
   SendMessage((HWND)radioButton.Handle(), BM_SETCHECK, radioButton.Checked ? BST_CHECKED : BST_UNCHECKED, 0);
+}
+
+void FormsApi::RadioButton::SetGroup(const System::Windows::Forms::RadioButton& radioButton) {
 }
 
 #endif

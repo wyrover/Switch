@@ -114,8 +114,8 @@ namespace __OS {
     class RadioButton pcf_static {
     public:
       static intptr Create(const System::Windows::Forms::RadioButton& radioButton);
-      static void SetAutoCheck(const System::Windows::Forms::RadioButton& radioButton);
       static void SetChecked(const System::Windows::Forms::RadioButton& radioButton);
+      static void SetGroup(const System::Windows::Forms::RadioButton& radioButton);
     };
 
     class SystemInformation pcf_static {
