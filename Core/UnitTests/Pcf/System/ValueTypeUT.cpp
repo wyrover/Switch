@@ -1,3 +1,7 @@
+#if !defined(_WIN32)
+#pragma GCC diagnostic ignored "-Wsign-compare"
+#endif
+
 #include <Pcf/System/Int16.h>
 #include <Pcf/System/Int32.h>
 #include <Pcf/System/Int64.h>
@@ -5,6 +9,7 @@
 #include <Pcf/System/UInt32.h>
 #include <Pcf/System/UInt64.h>
 #include <Pcf/TUnit/Assert.h>
+#include <Pcf/TUnit/Expect.h>
 #include <Pcf/TUnit/TestFixture.h>
 
 using namespace System;
@@ -33,7 +38,7 @@ namespace {
     
     EXPECT_TRUE(a == b);
     EXPECT_TRUE(a == c);
-    EXPECT_TRUE(a == d);
+    Expect::True(a == d);
     EXPECT_TRUE(a == e);
   }
   

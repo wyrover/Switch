@@ -3,6 +3,7 @@ set(INCLUDE_FILES
   Includes/Pcf/System/ComponentModel/CancelEventHandler.h
   Includes/Pcf/System/ComponentModel/Component.h
   Includes/Pcf/System/ComponentModel/ComponentCollection.h
+  Includes/Pcf/System/ComponentModel/EventHandlerList.h
   Includes/Pcf/System/ComponentModel/IComponent.h
   Includes/Pcf/System/ComponentModel/IContainer.h
   Includes/Pcf/System/ComponentModel/ISite.h

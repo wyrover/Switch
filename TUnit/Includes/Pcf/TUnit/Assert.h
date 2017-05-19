@@ -1519,6 +1519,63 @@ namespace Pcf {
           Fail(string::Format("Expected: null{0}But was:  {1}", System::Environment::NewLine, ValueToString(*pointer)), message, currentInformation);
       }
       
+      /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
+      /// @param pointer The pointer to check is null.
+      /// @par Examples
+      /// @code
+      /// refptr<string> s1;
+      /// refptr<string> s2(new string("A string"));
+      /// Assert::IsNull(s1); // test ok
+      /// Assert::IsNull(s2); // test throws an AssertionException.
+      /// @endcode
+      template<typename TPointer>
+      static inline void IsNull(const ref<TPointer>& pointer) {IsNull(pointer, "", CurrentInformation());}
+      
+      /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
+      /// @param pointer The pointer to check is null.
+      /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
+      /// @par Examples
+      /// @code
+      /// refptr<string> s1;
+      /// refptr<string> s2(new string("A string"));
+      /// Assert::IsNull(s1, "User message..."); // test ok
+      /// Assert::IsNull(s2, "User message..."); // test throws an AssertionException.
+      /// @endcode
+      template<typename TPointer>
+      static inline void IsNull(const ref<TPointer>& pointer, const string& message) {IsNull(pointer, message, CurrentInformation());}
+      
+      /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
+      /// @param pointer The pointer to check is null.
+      /// @param currentInformation Contains information about current file and current line.
+      /// @par Examples
+      /// @code
+      /// refptr<string> s1;
+      /// refptr<string> s2(new string("A string"));
+      /// Assert::IsNull(s1, pcf_current_information); // test ok
+      /// Assert::IsNull(s2, pcf_current_information); // test throws an AssertionException.
+      /// @endcode
+      template<typename TPointer>
+      static inline void IsNull(const ref<TPointer>& pointer, const CurrentInformation& currentInformation) {IsNull(pointer, "", currentInformation);}
+      
+      /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Pcf::TUnit::AssertionException.
+      /// @param pointer The pointer to check is null.
+      /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
+      /// @param currentInformation Contains information about current file and current line.
+      /// @par Examples
+      /// @code
+      /// refptr<string> s1;
+      /// refptr<string> s2(new string("A string"));
+      /// Assert::IsNull(s1, "User message...", pcf_current_information); // test ok
+      /// Assert::IsNull(s2, "User message...", pcf_current_information); // test throws an AssertionException.
+      /// @endcode
+      template<typename TPointer>
+      static inline void IsNull(const ref<TPointer>& pointer, const string& message, const CurrentInformation& currentInformation) {
+        if (pointer == null)
+          Succeed(message, currentInformation);
+        else
+          Fail(string::Format("Expected: null{0}But was:  {1}", System::Environment::NewLine, ValueToString(pointer)), message, currentInformation);
+      }
+      
       /// @brief Asserts that a condition is true. If the condition is true the method throws an Pcf::TUnit::AssertionException.
       /// @param condition The condition to check is false.
       /// @par Examples

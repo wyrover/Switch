@@ -165,7 +165,7 @@ namespace Pcf {
         /// @param args An object array containing zero or more objects to format.
         /// @remarks TraceError calls the TraceEvent methods in the trace listeners with the trace event type Error, passing the message content as an object array with formatting information. See the Format method for more information about the format and args parameters.
         template<typename ...Objects>
-        static void TraceError(const string& format, Objects&&... args) {TraceEvent(TraceEventType::Error, string::Format(format, args...));}
+        static void TraceError(const string& format, const Objects&... args) {TraceEvent(TraceEventType::Error, string::Format(format, args...));}
         
         /// @brief Writes an informational message to the trace listeners in the Listeners collection using the specified message.
         /// @param message The informative message to write.
@@ -177,7 +177,7 @@ namespace Pcf {
         /// @param args An object array containing zero or more objects to format.
         /// @remarks TraceInformation calls the TraceEvent methods in the trace listeners with the trace event type Information, passing the message content as an object array with formatting information. See the Format method for more information about the format and args parameters.
         template<typename ...Objects>
-        static void TraceInformation(const string& format, Objects&&... args) {TraceEvent(TraceEventType::Information, string::Format(format, args...));}
+        static void TraceInformation(const string& format, const Objects&... args) {TraceEvent(TraceEventType::Information, string::Format(format, args...));}
         
         /// @brief Writes a warning message to the trace listeners in the Listeners collection using the specified message.
         /// @param message The informative message to write.
@@ -189,7 +189,7 @@ namespace Pcf {
         /// @param args An object array containing zero or more objects to format.
         /// @remarks TraceWarning calls the TraceEvent methods in the trace listeners with the trace event type Warning, passing the message content as an object array with formatting information. See the Format method for more information about the format and args parameters.
         template<typename ...Objects>
-        static void TraceWarning(const string& format, Objects&&... args) {TraceEvent(TraceEventType::Warning, string::Format(format, args...));}
+        static void TraceWarning(const string& format, const Objects&... args) {TraceEvent(TraceEventType::Warning, string::Format(format, args...));}
         
         /// @brief Decreases the current IndentLevel by one.
         static void Unindent() {

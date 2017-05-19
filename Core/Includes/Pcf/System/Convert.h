@@ -2371,6 +2371,9 @@ namespace Pcf {
       template<typename T>
       static string ToString(UniquePtr<T> value) { return value.ToString().c_str(); }
       
+      template<typename T>
+      static string ToString(ref<T> value) { return value.ToString().c_str(); }
+      
       /// @brief Convert bool to string
       /// @param value bool to convert
       /// @return string A new string object converted from value

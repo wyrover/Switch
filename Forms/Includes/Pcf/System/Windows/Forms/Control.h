@@ -10,6 +10,7 @@
 #include <Pcf/System/Drawing/Font.h>
 #include <Pcf/System/Nullable.h>
 #include "../../ComponentModel/Component.h"
+#include "../../ComponentModel/EventHandlerList.h"
 #include "ControlStyles.h"
 #include "InvalidateEventHandler.h"
 #include "Message.h"
@@ -126,6 +127,7 @@ namespace Pcf {
 
           /// @cond
           Control(const Control& control) = delete;
+          Control(Control&& control) = default;
           ~Control() {
             if (this->Parent() != null)
               this->Parent()().controls.Remove(*this);
@@ -148,6 +150,14 @@ namespace Pcf {
             }
           };
 
+          /// @brief Gets the distance, in pixels, between the bottom edge of the control and the top edge of its container's client area.
+          /// @param value An Int32 representing the distance, in pixels, between the bottom edge of the control and the top edge of its container's client area.
+          /// @remarks The value of this property is equal to the sum of the Top property value, and the Height property value.
+          /// @remarks he Bottom property is a read-only property. You can manipulate this property value by changing the value of the Top or Height properties or calling the SetBounds, SetBoundsCore, UpdateBounds, or SetClientSizeCore methods.
+          Property<int32, ReadOnly> Bottom {
+            pcf_get{ return this->location.Y() + this->size.Height(); }
+          };
+          
           /// @brief Gets or sets the size and location of the control including its nonclient elements, in pixels, relative to the parent control.
           /// @param value A Rectangle in pixels relative to the parent control that represents the size and location of the control including its nonclient elements.
           /// @remarks The bounds of the control include the nonclient elements such as scroll bars, borders, title bars, and menus. The SetBoundsCore method is called to set the Bounds property. The Bounds property is not always changed through its set method so you should override the SetBoundsCore method to ensure that your code is executed when the Bounds property is set.
@@ -157,10 +167,6 @@ namespace Pcf {
               this->Location(value.Location());
               this->Size(value.Size());
             }
-          };
-
-          Property<int32, ReadOnly> Bottom {
-            pcf_get{ return this->location.Y() + this->size.Height(); }
           };
 
           Property<System::Drawing::Size> ClientSize {
@@ -355,6 +361,16 @@ namespace Pcf {
           System::Drawing::Point PointToScreen(System::Drawing::Point point) const;
 
           bool PreProcessMessage(const Message& msg);
+          
+          /// @brief Sets the bounds of the control to the specified location and size.
+          /// @param x The new Left property value of the control.
+          /// @param y The new Top property value of the control.
+          /// @param width The new Width property value of the control.
+          /// @param height The new Height property value of the control.
+          void SetBounds(int32 x, int32 y, int32 width, int32 height) {
+            this->Location = System::Drawing::Point(x, y);
+            this->Size = System::Drawing::Size(width, height);
+          }
 
           virtual void WndProc(Message& message);
 
