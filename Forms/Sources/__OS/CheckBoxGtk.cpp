@@ -31,6 +31,7 @@ void FormsApi::CheckBox::SetAutoCheck(const System::Windows::Forms::CheckBox& ch
 
 void FormsApi::CheckBox::SetChecked(const System::Windows::Forms::CheckBox& checkBox) {
   ((__OS::CheckBox*)checkBox.Handle())->set_active(checkBox.Checked);
+  ((__OS::CheckBox*)checkBox.Handle())->set_inconsistent(checkBox.CheckState == System::Windows::Forms::CheckState::Indeterminate);
 }
 
 #endif
