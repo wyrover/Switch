@@ -1,4 +1,4 @@
-#if !defined(__use_native_interface__)
+#if defined(__use_fltk_interface__)
 #include "FormsApi.h"
 
 using namespace System;
@@ -38,7 +38,11 @@ System::Drawing::Size FormsApi::SystemInformation::GetCaptionButtonSize() {
 }
 
 int32 FormsApi::SystemInformation::GetCaptionHeight() {
-  return 37;
+  if (System::Environment::OSVersion().Platform == System::PlatformID::MacOSX)
+    return 47;
+  if (System::Environment::OSVersion().Platform == System::PlatformID::MacOSX)
+    return 79;
+  return 65;
 }
 
 int32 FormsApi::SystemInformation::GetCaretBlinkTime() {

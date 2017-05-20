@@ -10,7 +10,7 @@ using namespace System::Collections::Generic;
 using namespace System::Windows::Forms;
 using namespace __OS;
 
-SortedDictionary<intptr, WNDPROC> WindowProcedure::DefWindowProcs;
+Dictionary<intptr, WNDPROC> WindowProcedure::DefWindowProcs;
 
 void WindowProcedure::SetWindowTheme(HWND handle) {
   if (!FormsApi::Application::HasVisualStylesEnabled())
@@ -19,9 +19,7 @@ void WindowProcedure::SetWindowTheme(HWND handle) {
 
 LRESULT CALLBACK WindowProcedure::WndProc(HWND hwnd, uint32 msg, WPARAM wParam, LPARAM lParam) {
   Message message = Message::Create((intptr)hwnd, msg, wParam, lParam, 0);
-  ref<Control> control = Control::FromHandle(message.HWnd);
-  if (control != null)
-    control().WndProc(message);
+  Control::FromHandle(message.HWnd)().WndProc(message);
   return message.Result;
 }
 

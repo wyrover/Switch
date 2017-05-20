@@ -160,7 +160,7 @@ namespace Pcf {
         /// @remarks <b>Important</b> This method is not intended to be called directly by application code but by members of the Debug, Trace, and TraceSource classes to write trace data to output.
         /// @remarks The default implementation writes the eventCache, source, eventType and id parameters in the header and footer of the trace. The data parameter is written as the body of the trace message. The ToString method of the data object is used to convert the object to a String.
         template<typename ...Objects>
-        void TraceData(const TraceEventCache& eventCache, const string& source, const TraceEventType& eventType, int32 id, Objects&&... data) {
+        void TraceData(const TraceEventCache& eventCache, const string& source, const TraceEventType& eventType, int32 id, const Objects&... data) {
           this->WriteLine(string::Format("{0} {1}: {2} : {3}", source, eventType, id, String::Join(", ", {data...})));
           this->WriteEventCache(eventCache);
         }
@@ -213,7 +213,7 @@ namespace Pcf {
         /// @remarks <b>Important</b> This method is not intended to be called directly by application code but by members of the Debug, Trace, and TraceSource classes to write trace data to output.
         /// @remarks The default implementation writes the values of the source, eventType and id parameters as a header. The args object array is converted to a string using the Format method, passing the format string and args array to format the string as the message portion of the trace. The eventCache data is written as a footer, the nature of the output data being dependent on the value of the TraceOutputOptions property.
         template<typename ...Objects>
-        void TraceEvent(const TraceEventCache& eventCache, const string& source, const TraceEventType& eventType, int32 id, const string& format, Objects&&... args) {
+        void TraceEvent(const TraceEventCache& eventCache, const string& source, const TraceEventType& eventType, int32 id, const string& format, const Objects&... args) {
           this->WriteLine(string::Format("{0} {1}: {2} : {3}", source, eventType, id, string::Format(format, args...)));
           this->WriteEventCache(eventCache);
         }

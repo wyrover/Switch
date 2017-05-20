@@ -13,20 +13,21 @@ namespace MessageBoxExample {
     }
     
     Form1() {
-      this->StartPosition = FormStartPosition::Manual;
-      this->Location = System::Drawing::Point(400, 200);
-      this->Text = "MessageBox example";
-      
-      this->buttonShowMessage.Parent = *this;
-      this->buttonShowMessage.Bounds = System::Drawing::Rectangle(10, 10, 100, 25);
+      this->buttonShowMessage.Location = System::Drawing::Point(10, 10);
+      this->buttonShowMessage.Width = 100;
       this->buttonShowMessage.Text = "MessageBox";
       this->buttonShowMessage.Click += pcf_delegate(const object& sender, const EventArgs& e) {
         DialogResult result = MessageBox::Show("Hello, World!", "Message", MessageBoxButtons::OKCancel, MessageBoxIcon::Error);
         labelDialogResult.Text = string::Format("DialogResult = {0}", result);
       };
       
-      this->labelDialogResult.Parent = *this;
-      this->labelDialogResult.Bounds = System::Drawing::Rectangle(10, 60, 200, 30);
+      this->labelDialogResult.Location = System::Drawing::Point(10, 45);
+      this->labelDialogResult.Width = 200;
+
+      this->StartPosition = FormStartPosition::Manual;
+      this->Location = System::Drawing::Point(400, 200);
+      this->Text = "MessageBox example";
+      this->Controls().AddRange({this->buttonShowMessage, this->labelDialogResult});
     }
     
   private:

@@ -13,9 +13,6 @@ using namespace __OS;
 @implementation CheckBoxCocoa
 - (IBAction) Click:(id)sender {
   System::Drawing::Point mouseDownLocation;
-  ref<Control> control = System::Windows::Forms::Control::FromHandle((intptr)sender);
-  if (is<System::Windows::Forms::CheckBox>(control))
-    as<System::Windows::Forms::CheckBox>(control)().Checked = !as<System::Windows::Forms::CheckBox>(control)().Checked;
   Message event = Message::Create((intptr)sender, WM_LBUTTONUP, 0, mouseDownLocation.X() + (mouseDownLocation.Y() << 16), 0, 0);
   const_cast<Control&>(__OS::WindowProcedure::Controls[(intptr)sender]()).WndProc(event);
 }
@@ -23,13 +20,13 @@ using namespace __OS;
 
 intptr FormsApi::CheckBox::Create(const System::Windows::Forms::CheckBox& checkBox) {
   @autoreleasepool {
-    System::Drawing::Rectangle bounds = __OS::WindowProcedure::GetBounds(checkBox);
-    CheckBoxCocoa *handle = [[[CheckBoxCocoa alloc] initWithFrame:NSMakeRect(bounds.X(), bounds.Y(), bounds.Width(), bounds.Height())] autorelease];
+    CheckBoxCocoa *handle = [[[CheckBoxCocoa alloc] init] autorelease];
     [[(NSWindow*)checkBox.Parent()().Handle() contentView] addSubview: handle];
     
     [handle setTitle:[NSString stringWithUTF8String:checkBox.Text().c_str()]];
     [handle setButtonType:NSButtonTypeSwitch];
     [handle setAutoresizingMask:NSViewMaxXMargin | NSViewMinYMargin];
+    [handle setAllowsMixedState:true];
     [handle setTarget:handle];
     [handle setAction:@selector(Click:)];
     __OS::WindowProcedure::Controls[(intptr)handle] = checkBox;
@@ -43,7 +40,10 @@ void FormsApi::CheckBox::SetAutoCheck(const System::Windows::Forms::CheckBox& ch
 }
 
 void FormsApi::CheckBox::SetChecked(const System::Windows::Forms::CheckBox& checkBox) {
-  [(NSButton*)checkBox.Handle() setState:checkBox.Checked()];
+  if (checkBox.CheckState == System::Windows::Forms::CheckState::Indeterminate)
+    [(NSButton*)checkBox.Handle() setState:-1];
+  else
+    [(NSButton*)checkBox.Handle() setState:(int32)checkBox.CheckState()];
 }
 
 #endif

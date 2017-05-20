@@ -379,7 +379,7 @@ namespace Pcf {
       /// @exception ArgumentNullException The parameters provider or format or arg is null.
       /// @remarks This function work only with base type specified in TypeCode
       template<typename ...Args>
-      static String Format(const String& format, Args&&... args);
+      static String Format(const String& format, const Args&... args);
       
       /// @brief Replaces the format item in a specified String with the text equivalent of the value of a corresponding Object instance in a specified array. A specified parameter supplies culture-specific formatting information.
       /// @param format A composite format String.
@@ -398,7 +398,7 @@ namespace Pcf {
       /// @exception ArgumentNullException The parameters provider or format or arg is null.
       /// @remarks This function work only with base type specified in TypeCode
       template<typename ...Args>
-      static String Format(const IFormatProvider& provider, const String& format, Args&&... args);
+      static String Format(const IFormatProvider& provider, const String& format, const Args&... args);
       
       /// @brief Replaces the format item in a specified String with the text equivalent of the value of a corresponding Object instance in a specified array. A specified parameter supplies culture-specific formatting information.
       /// @param provider An IFormatProvider that supplies culture-specific formatting information

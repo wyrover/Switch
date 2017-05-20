@@ -1,5 +1,6 @@
 set(SOURCE_FILES
   ApplicationTest.cpp
+  ControlTest.cpp
 )
 
 source_group(UnitTests REGULAR_EXPRESSION "/UnitTests/[-_,A-Za-z0-9]+\\.(c|h)*")

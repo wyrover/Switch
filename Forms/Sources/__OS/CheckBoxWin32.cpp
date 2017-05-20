@@ -14,21 +14,19 @@ using namespace __OS;
 extern HINSTANCE __instance;
 
 intptr FormsApi::CheckBox::Create(const System::Windows::Forms::CheckBox& checkBox) {
-  int32 style = WS_TABSTOP | WS_VISIBLE | WS_CHILD | (checkBox.AutoCheck ? BS_AUTOCHECKBOX : BS_CHECKBOX);
-  int32 exStyle = 0;
-  HWND handle = CreateWindowEx(exStyle, L"Button", checkBox.Text().w_str().c_str(), style, checkBox.Bounds().Left, checkBox.Bounds().Top, checkBox.Bounds().Width, checkBox.Bounds().Height, (HWND)checkBox.Parent()().Handle(), (HMENU)0, __instance, (LPVOID)NULL);
+  HWND handle = CreateWindowEx(0, WC_BUTTON, checkBox.Text().w_str().c_str(), WS_CHILD | BS_3STATE, checkBox.Left, checkBox.Top, checkBox.Width, checkBox.Height, (HWND)checkBox.Parent()().Handle(), (HMENU)0, __instance, (LPVOID)NULL);
   WindowProcedure::SetWindowTheme(handle);
   WindowProcedure::DefWindowProcs[(intptr)handle] = (WNDPROC)SetWindowLongPtr(handle, GWLP_WNDPROC, (LONG_PTR)WindowProcedure::WndProc);
+  /// @todo to remove after create SetFont method...
+  PostMessage(handle, WM_SETFONT, WPARAM((HFONT)GetStockObject(DEFAULT_GUI_FONT)), TRUE);
   return (intptr)handle;
 }
 
 void FormsApi::CheckBox::SetAutoCheck(const System::Windows::Forms::CheckBox& checkBox) {
-  SetWindowLong((HWND)checkBox.Handle(), GWL_STYLE, GetWindowLong((HWND)checkBox.Handle(), GWL_STYLE) & ~(BS_CHECKBOX | BS_AUTOCHECKBOX));
-  SetWindowLong((HWND)checkBox.Handle(), GWL_STYLE, GetWindowLong((HWND)checkBox.Handle(), GWL_STYLE) | (checkBox.AutoCheck ? BS_AUTOCHECKBOX : BS_CHECKBOX));
 }
 
 void FormsApi::CheckBox::SetChecked(const System::Windows::Forms::CheckBox& checkBox) {
-  PostMessage((HWND)checkBox.Handle(), BM_SETCHECK, checkBox.Checked ? BST_CHECKED : BST_UNCHECKED, 0);
+  SendMessage((HWND)checkBox.Handle(), BM_SETCHECK, (int32)checkBox.CheckState(), 0);
 }
 
 #endif

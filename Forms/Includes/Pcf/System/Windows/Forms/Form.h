@@ -2,7 +2,6 @@
 /// @brief Contains Pcf::System::Windows::Forms::Form class.
 #pragma once
 
-#include <Pcf/System/Diagnostics/Debug.h>
 #include "ContainerControl.h"
 #include "FormBorderStyle.h"
 #include "FormClosedEventHandler.h"
@@ -20,7 +19,7 @@ namespace Pcf {
         /// @brief Represents a window or dialog box that makes up an application's user interface.
         class pcf_public Form : public ContainerControl {
         public:
-          Form() {
+          Form() : ContainerControl("", 0, 0, 300, 300) {
             this->visible = false;
             this->SetStyle(ControlStyles::UserPaint, false);
             //this->BackColor = System::Drawing::SystemColors::Window;

@@ -1,5 +1,6 @@
 #if defined(__APPLE__) && defined(__use_native_interface__)
 #include "WindowProcedureCocoa.h"
+#include <Pcf/System/Random.h>
 
 using namespace System;
 using namespace System::Collections::Generic;
@@ -43,18 +44,27 @@ namespace {
 }
 @end
 
-void FormsApi::Form::Close(const System::Windows::Forms::Form& form) {
+void FormsApi::Form::Close(System::Windows::Forms::Form& form) {
   [(NSWindow*)form.Handle() close];
 }
 
-intptr FormsApi::Form::Create(const System::Windows::Forms::Form& form) {
+intptr FormsApi::Form::Create(System::Windows::Forms::Form& form) {
   @autoreleasepool {
-    System::Drawing::Rectangle bounds = __OS::WindowProcedure::GetBounds(form);
+    System::Drawing::Rectangle bounds = form.Bounds;
+    Random random;
+    switch (form.StartPosition) {
+      case FormStartPosition::Manual: bounds = form.Bounds; break;
+      case FormStartPosition::WindowsDefaultBounds: bounds = System::Drawing::Rectangle(random.Next(50, 300), random.Next(50, 200), random.Next(640, 800), random.Next(480, 600)); break;
+      case FormStartPosition::WindowsDefaultLocation: bounds = System::Drawing::Rectangle(random.Next(50, 300), random.Next(50, 200), form.Width, form.Height); break;
+      default: break;
+    }
+    form.Location= System::Drawing::Point(bounds.Left, bounds.Top);
+    form.Size= System::Drawing::Size(bounds.Width, bounds.Height);
+
     FormCocoa* handle = [[FormCocoa alloc] init];
-    
     [handle setStyleMask: CocoaApi::FormToNSWindowStyleMask(form)];
-    [handle setFrame:NSMakeRect(0, 0, bounds.Width(), bounds.Height()) display:YES];
-    [handle setFrameTopLeftPoint:NSMakePoint(bounds.X(), bounds.Y())];
+    //[handle setFrame:NSMakeRect(bounds.X(), bounds.Y(), bounds.Width(), bounds.Height()) display:YES];
+    //[handle setFrameTopLeftPoint:NSMakePoint(bounds.X(), bounds.Y())];
     
     [handle setTitle:[NSString stringWithUTF8String:form.Text().c_str()]];
     [handle makeKeyAndOrderFront:nil];

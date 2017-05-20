@@ -11,19 +11,57 @@
 
 /// @cond
 class __opaque_format_item__ {
+  class refobj {
+    template<typename T, typename B = ref<T>>
+    class Factory {
+      refobj operator()(const T& value) {return refiobj(value);}
+    };
+    
+    template<typename T>
+    class Factory<T, refptr<T>> {
+    //class Factory<T, typename std::enable_if<std::is_base_of<refptr<T>, T>::value>::type> {
+    public:
+      refobj operator()(const T& value) {return refobj(new T(value));}
+    };
+  public:
+    refobj() {}
+    
+    refobj(const refobj& refobj) : ref(refobj.ref), ptr(refobj.ptr) {}
+    
+    template<typename T>
+    refobj(const T& value, bool clone) {
+      if (clone == true)
+        ptr = new T(value);
+      else
+        ref = value;
+    }
+    
+    template<typename T>
+    refobj(T* value) : ptr(value) {}
+    
+    const object& operator*() const { return !this->ptr.IsNull() ? this->ptr() : this->ref(); }
+    object& operator*() { return !this->ptr.IsNull() ? this->ptr() : this->ref(); }
+   
+    bool operator==(const refobj& refobj) const {return this->ref == refobj.ref && this->ptr == refobj.ptr;}
+    bool operator!=(const refobj& refobj) const {return !this->operator==(refobj);}
+    
+  private:
+    ref<object> ref;
+    refptr<object> ptr;
+  };
+  
   friend class Pcf::System::String;
   template <typename T, typename Bool>
   struct EnumOrOtherToAny {};
   
   template <typename T>
   struct EnumOrOtherToAny<T, std::true_type> {
-    refptr<object> operator()(T value) {return new System::Enum<T>(value);}
-    //refptr<object> operator()(T value);
+    refobj operator()(const T& value, bool clone) {return new System::Enum<T>(value);}
   };
   
   template <typename T>
   struct EnumOrOtherToAny<T, std::false_type> {
-    refptr<object> operator()(T value) {return new System::IntPtr(*((intptr*)&value));}
+    refobj operator()(const T& value, bool clone) {return new System::IntPtr(*((intptr*)&value));}
   };
   
   template <typename T, typename Bool>
@@ -31,17 +69,17 @@ class __opaque_format_item__ {
   
   template <typename T>
   struct ObjectOrOtherToAny<T, std::true_type> {
-    refptr<object> operator()(T value) {return new T(value);}
+    refobj operator()(const T& value, bool clone) {return refobj(value, clone);}
   };
   
   template <typename T>
   struct ObjectOrOtherToAny<T, std::false_type> {
-    refptr<object> operator()(T value) {return EnumOrOtherToAny<T, typename std::conditional<std::is_enum<T>::value, std::true_type, std::false_type>::type>()(value);}
+    refobj operator()(const T& value, bool clone) {return EnumOrOtherToAny<T, typename std::conditional<std::is_enum<T>::value, std::true_type, std::false_type>::type>()(value, clone);}
   };
   
   template <typename T>
   struct ObjectOrEnumOrOtherToAny {
-    refptr<object> operator()(T value) {return ObjectOrOtherToAny<T, typename std::conditional<std::is_base_of<object, T>::value, std::true_type, std::false_type>::type>()(value);}
+    refobj operator()(const T& value, bool clone) {return ObjectOrOtherToAny<T, typename std::conditional<std::is_base_of<object, T>::value, std::true_type, std::false_type>::type>()(value, clone);}
   };
   
 public:
@@ -88,17 +126,59 @@ private:
   __opaque_format_item__(llong value) : value(sizeof(long) == 8 ? (object*)new System::Int64(value) : (object*)new System::Int32(value)) {}
   __opaque_format_item__(ullong value) : value(sizeof(long) == 8 ? (object*)new System::UInt64(value) : (object*)new System::UInt32(value)) {}
   __opaque_format_item__(Any value) : value(new Any(value)) {}
+  
   template<typename T, typename Attribute>
-  __opaque_format_item__(const Property<T, Attribute>& value) : __opaque_format_item__(value()) {}
+  __opaque_format_item__(const Property<const T&, Attribute>& value) : __opaque_format_item__(value()) {}
+
+  template<typename T, typename Attribute>
+  __opaque_format_item__(const Property<T, Attribute>& value) : __opaque_format_item__(value(), true) {}
+  
   template<typename T>
-  __opaque_format_item__(T value) : value(ObjectOrEnumOrOtherToAny<T>()(value)) {}
+  __opaque_format_item__(const T& value) : value(ObjectOrEnumOrOtherToAny<T>()(value, false)) {}
   
   const object& operator*() const {return *this->value;}
   object& operator*() {return *this->value;}
   const object& ToObject() const {return *this->value;}
   
 private:
-  refptr<object> value;
+  __opaque_format_item__(byte value, bool clone) : value(new System::Byte(value)) {}
+  __opaque_format_item__(char value, bool clone) : value(new System::Char(value)) {}
+  __opaque_format_item__(wchar value, bool clone) : value(new System::Char(value)) {}
+  __opaque_format_item__(char16 value, bool clone) : value(new System::Char(value)) {}
+  __opaque_format_item__(char32 value, bool clone) : value(new System::Char(value)) {}
+  __opaque_format_item__(double value, bool clone) : value(new System::Double(value)) {}
+  __opaque_format_item__(int16 value, bool clone) : value(new System::Int16(value)) {}
+  __opaque_format_item__(int32 value, bool clone) : value(new System::Int32(value)) {}
+  __opaque_format_item__(int64 value, bool clone) : value(new System::Int64(value)) {}
+  __opaque_format_item__(bool value, bool clone) : value(new System::Boolean(value)) {}
+  __opaque_format_item__(const char* value, bool clone) : value(new System::String(value)) {}
+  __opaque_format_item__(char* value, bool clone) : value(new System::String(value)) {}
+  __opaque_format_item__(const unsigned char* value, bool clone) : value(new System::String((const char*)value)) {}
+  __opaque_format_item__(unsigned char* value, bool clone) : value(new System::String((const char*)value)) {}
+  __opaque_format_item__(const wchar* value, bool clone) : value(new System::String(value)) {}
+  __opaque_format_item__(wchar* value, bool clone) : value(new System::String(value)) {}
+  __opaque_format_item__(const char16* value, bool clone) : value(new System::String(value)) {}
+  __opaque_format_item__(char16* value, bool clone) : value(new System::String(value)) {}
+  __opaque_format_item__(const char32* value, bool clone) : value(new System::String(value)) {}
+  __opaque_format_item__(char32* value, bool clone) : value(new System::String(value)) {}
+  __opaque_format_item__(const std::string& value, bool clone) : value(new System::String(value)) {}
+  __opaque_format_item__(const std::wstring& value, bool clone) : value(new System::String(value)) {}
+  __opaque_format_item__(const std::u16string& value, bool clone) : value(new System::String(value)) {}
+  __opaque_format_item__(const std::u32string& value, bool clone) : value(new System::String(value)) {}
+  __opaque_format_item__(sbyte value, bool clone) : value(new System::SByte(value)) {}
+  __opaque_format_item__(float value, bool clone) : value(new System::Single(value)) {}
+  __opaque_format_item__(uint16 value, bool clone) : value(new System::UInt16(value)) {}
+  __opaque_format_item__(uint32 value, bool clone) : value(new System::UInt32(value)) {}
+  __opaque_format_item__(uint64 value, bool clone) : value(new System::UInt64(value)) {}
+  __opaque_format_item__(void* value, bool clone) : value(new System::IntPtr((intptr)value)) {}
+  __opaque_format_item__(llong value, bool clone) : value(sizeof(long) == 8 ? (object*)new System::Int64(value) : (object*)new System::Int32(value)) {}
+  __opaque_format_item__(ullong value, bool clone) : value(sizeof(long) == 8 ? (object*)new System::UInt64(value) : (object*)new System::UInt32(value)) {}
+  __opaque_format_item__(Any value, bool clone) : value(new Any(value)) {}
+  
+  template<typename T>
+  __opaque_format_item__(const T& value, bool clone) : value(ObjectOrEnumOrOtherToAny<T>()(value, clone)) {}
+
+  refobj value;
 };
 /// @cond
 
@@ -201,12 +281,12 @@ System::String System::String::Join(const System::String& separator, const T (&o
 }
 
 template<typename ...Args>
-System::String System::String::Format(const System::String& format, Args&&... args) {
+System::String System::String::Format(const System::String& format, const Args&... args) {
   return System::String::FormatToString(System::FormatProvider(), format, System::Array<__opaque_format_item__> {args...});
 }
 
 template<typename ...Args>
-System::String System::String::Format(const IFormatProvider& provider, const System::String& format, Args&&... args) {
+System::String System::String::Format(const IFormatProvider& provider, const System::String& format, const Args&... args) {
   return System::String::FormatToString(provider, format, System::Array<__opaque_format_item__> {args...});
 }
 

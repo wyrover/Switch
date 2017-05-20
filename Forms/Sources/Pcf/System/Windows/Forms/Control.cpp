@@ -1,4 +1,5 @@
 #include <Pcf/System/BitConverter.h>
+#include <Pcf/System/Diagnostics/Debug.h>
 #include <Pcf/System/Drawing/Graphics.h>
 #include <Pcf/System/Drawing/SolidBrush.h>
 #include "../../../../../Includes/Pcf/System/Windows/Forms/Application.h"
@@ -13,15 +14,19 @@ using namespace System::Windows::Forms;
 System::Collections::Generic::Dictionary<intptr, ref<Control>> Control::handles;
 
 namespace {
+  /*
   struct ShowDebugTrace {
     static constexpr bool AllWindowMessages = true;
-    static constexpr bool MouseWindowMessage = false;
-    static constexpr bool WindowMessage = false;
+    static constexpr bool MouseWindowMessage = true;
+    static constexpr bool WindowMessage = true;
   };
 
   bool AllWindowMessagesFilter(const Message& message) {
-    return true; //message.Msg != WM_TIMER && message.Msg != WM_PAINT && message.Msg != WM_ERASEBKGND;  //!message.ToString().Contains("WM_NULL");
-  }
+    //return false; 
+    return true;
+    //return message.Msg != WM_TIMER && message.Msg != WM_PAINT && message.Msg != WM_ERASEBKGND;
+    //return !message.ToString().Contains("WM_NULL");
+  }*/
 
   MouseButtons MessageToMouseButtons(Message message) {
     if (message.Msg == WM_LBUTTONDBLCLK || message.Msg == WM_LBUTTONDOWN || message.Msg == WM_RBUTTONUP)
@@ -89,18 +94,25 @@ void Control::CreateHandle() {
     this->handle = __OS::FormsApi::Control::Create(*this);
   handles.Add(this->handle, *this);
   this->backBrush = System::Drawing::SolidBrush(this->BackColor);
+  __OS::FormsApi::Control::SetParent(*this); // Must be first
+  if (this->setClientSizeAfterHandleCreated)
+    __OS::FormsApi::Control::SetClientSize(*this);
+  else
+    __OS::FormsApi::Control::SetSize(*this);
+  __OS::FormsApi::Control::SetLocation(*this); // Must be after SetClientSize or SetSize
   __OS::FormsApi::Control::SetBackColor(*this);
   __OS::FormsApi::Control::SetForeColor(*this);
-  //__OS::FormsApi::Control::SetLocation(*this);
-  __OS::FormsApi::Control::SetParent(*this);
-  __OS::FormsApi::Control::SetSize(*this);
- // __OS::FormsApi::Control::SetText(*this);
+  __OS::FormsApi::Control::SetTabStop(*this);
+  __OS::FormsApi::Control::SetText(*this);
+  if (this->setFocusAfterHandleCreated)
+    __OS::FormsApi::Control::SetFocus(*this);
+  __OS::FormsApi::Control::SetVisible(*this); // Must be last
 }
 
 void Control::DestroyHandle() {
   if (this->IsHandleCreated) {
-    handles.Remove(this->handle);
     __OS::FormsApi::Control::Destroy(*this);
+    handles.Remove(this->handle);
     this->handle = 0;
   }
 }
@@ -109,14 +121,17 @@ void Control::DefWndProc(Message& message) {
   __OS::FormsApi::Control::DefWndProc(message);
 }
 
-System::Drawing::Size Control::GetClientSize() const {
-  return __OS::FormsApi::Control::GetClientSize(*this);
+bool Control::Focus() {
+  if (this->IsHandleCreated)
+    return __OS::FormsApi::Control::SetFocus(*this);
+  this->setFocusAfterHandleCreated = true;
+  return true;
 }
 
 void Control::Invalidate(bool invalidateChildren) {
   if (this->IsHandleCreated)
     __OS::FormsApi::Control::Invalidate(*this, invalidateChildren);
-  this->OnInvalidated(InvalidateEventArgs(Rectangle(Point(0, 0), this->GetClientSize())));
+  this->OnInvalidated(InvalidateEventArgs(Rectangle(Point(0, 0), this->ClientSize)));
 }
 
 void Control::Invalidate(const System::Drawing::Rectangle& rect, bool invalidateChildren) {
@@ -125,26 +140,24 @@ void Control::Invalidate(const System::Drawing::Rectangle& rect, bool invalidate
   this->OnInvalidated(InvalidateEventArgs(rect));
 }
 
-void Control::SetClientSize(const System::Drawing::Size& clientSize) {
-  __OS::FormsApi::Control::SetClientSize(*this, clientSize);
-}
-
 void Control::OnBackColorChanged(const EventArgs& e) {
   this->backBrush = System::Drawing::SolidBrush(this->BackColor);
   if (this->IsHandleCreated)
     __OS::FormsApi::Control::SetBackColor(*this);
-  this->Invalidate();
   this->BackColorChanged(*this, e);
 }
 
 void Control::OnClientSizeChanged(const EventArgs& e) {
+  if (this->IsHandleCreated)
+    __OS::FormsApi::Control::SetClientSize(*this);
+  else
+    setClientSizeAfterHandleCreated = true;
   this->ClientSizeChanged(*this, e);
 }
 
 void Control::OnForeColorChanged(const EventArgs& e) {
   if (this->IsHandleCreated)
     __OS::FormsApi::Control::SetForeColor(*this);
-  this->Invalidate();
   this->ForeColorChanged(*this, e);
 }
 
@@ -163,14 +176,21 @@ void Control::OnParentChanged(const EventArgs& e) {
 void Control::OnSizeChanged(const EventArgs& e) {
   if (this->IsHandleCreated)
     __OS::FormsApi::Control::SetSize(*this);
+  else
+    setClientSizeAfterHandleCreated = false;
   this->SizeChanged(*this, e);
-  this->OnClientSizeChanged(e);
+}
+
+void Control::OnTabStopChanged(const EventArgs& e) {
+  if (this->IsHandleCreated)
+    __OS::FormsApi::Control::SetTabStop(*this);
+  this->TabStopChanged(*this, e);
 }
 
 void Control::OnTextChanged(const EventArgs& e) {
   if (this->IsHandleCreated)
     __OS::FormsApi::Control::SetText(*this);
-  this->TextChanged(*this, e); 
+  this->TextChanged(*this, e);
 }
 
 void Control::OnVisibleChanged(const EventArgs& e) {
@@ -195,43 +215,43 @@ bool Control::PreProcessMessage(const Message& msg) {
 
 void Control::WndProc(Message& message) {
   if (this->messageActions.ContainsKey(message.Msg)) {
-    System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::AllWindowMessages && AllWindowMessagesFilter(message), "Control::WndProc message=" + message + ", name=" + this->name);
+    //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::AllWindowMessages && AllWindowMessagesFilter(message), "Control::WndProc message=" + message + ", name=" + this->name);
     this->messageActions[message.Msg](message);
   } else {
-    System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::AllWindowMessages && AllWindowMessagesFilter(message), "DefWndProc message=" + message + ", name=" + this->name);
+    //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::AllWindowMessages && AllWindowMessagesFilter(message), "DefWndProc message=" + message + ", name=" + this->name);
     this->DefWndProc(message);
   }
 }
 
 void Control::WmCaptureChange(Message& message) {
-  System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmCaptureChange message=" + message + ", name=" + this->name);
+  //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmCaptureChange message=" + message + ", name=" + this->name);
   this->DefWndProc(message);
   this->OnMouseCaptureChanged(EventArgs::Empty);
 }
 
 void Control::WmClose(Message& message) {
-  System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmClose message=" + message + ", name=" + this->name);
+  //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmClose message=" + message + ", name=" + this->name);
   this->DefWndProc(message);
 }
 
 void Control::WmCommand(Message& message) {
-  System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmCommand message=" + message + ", name=" + this->name);
+  //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmCommand message=" + message + ", name=" + this->name);
   this->DefWndProc(message);
 }
 
 void Control::WmContextMenu(Message& message) {
-  System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmContextMenu message=" + message + ", name=" + this->name);
+  //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmContextMenu message=" + message + ", name=" + this->name);
   this->DefWndProc(message);
 }
 
 void Control::WmCreate(Message& message) {
-  System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmCreate message=" + message + ", name=" + this->name);
+  //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmCreate message=" + message + ", name=" + this->name);
   this->DefWndProc(message);
   OnHandleCreated(EventArgs::Empty);
 }
 
 void Control::WmCtlColorControl(Message& message) {
-  System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmCtlColorControl message=" + message + ", name=" + this->name);  
+  //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmCtlColorControl message=" + message + ", name=" + this->name);  
   ref<Control> control = FromHandle(message.LParam);
   if (control == null)
     this->DefWndProc(message);
@@ -243,99 +263,99 @@ void Control::WmCtlColorControl(Message& message) {
 }
 
 void Control::WmDestroy(Message& message) {
-  System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmDestroy message=" + message + ", name=" + this->name);
+  //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmDestroy message=" + message + ", name=" + this->name);
   OnHandleDestroyed(EventArgs::Empty);
   this->DefWndProc(message);
 }
 
 void Control::WmDisplayChange(Message& message) {
-  System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmDisplayChange message=" + message + ", name=" + this->name);
+  //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmDisplayChange message=" + message + ", name=" + this->name);
   this->DefWndProc(message);
 }
 
 void Control::WmDrawItem(Message& message) {
-  System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmDrawItem message=" + message + ", name=" + this->name);
+  //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmDrawItem message=" + message + ", name=" + this->name);
   this->DefWndProc(message);
 }
 
 void Control::WmEraseBkgnd(Message& message) {
-  System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmEraseBkgnd message=" + message + ", name=" + this->name);
+  //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmEraseBkgnd message=" + message + ", name=" + this->name);
   this->DefWndProc(message);
 }
 
 void Control::WmExitMenuLoop(Message& message) {
-  System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmExitMenuLoop message=" + message + ", name=" + this->name);
+  //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmExitMenuLoop message=" + message + ", name=" + this->name);
   this->DefWndProc(message);
 }
 
 void Control::WmGetObject(Message& message) {
-  System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmGetObject message=" + message + ", name=" + this->name);
+  //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmGetObject message=" + message + ", name=" + this->name);
   this->DefWndProc(message);
 }
 
 void Control::WmHelp(Message& message) {
-  System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmHelp message=" + message + ", name=" + this->name);
+  //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmHelp message=" + message + ", name=" + this->name);
   this->DefWndProc(message);
 }
 
 void Control::WmImeChar(Message& message) {
-  System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmImeChar message=" + message + ", name=" + this->name);
+  //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmImeChar message=" + message + ", name=" + this->name);
   this->DefWndProc(message);
 }
 
 void Control::WmImeNotify(Message& message) {
-  System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmImeNotify message=" + message + ", name=" + this->name);
+  //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmImeNotify message=" + message + ", name=" + this->name);
   this->DefWndProc(message);
 }
 
 void Control::WmImeStartComposition(Message& message) {
-  System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmImeStartComposition message=" + message + ", name=" + this->name);
+  //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmImeStartComposition message=" + message + ", name=" + this->name);
   this->DefWndProc(message);
 }
 
 void Control::WmInitMenuPopup(Message& message) {
-  System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmInitMenuPopup message=" + message + ", name=" + this->name);
+  //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmInitMenuPopup message=" + message + ", name=" + this->name);
   this->DefWndProc(message);
 }
 
 void Control::WmInputLangChange(Message& message) {
-  System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmInputLangChange message=" + message + ", name=" + this->name);
+  //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmInputLangChange message=" + message + ", name=" + this->name);
   this->DefWndProc(message);
 }
 
 void Control::WmInputLangChangeRequest(Message& message) {
-  System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmInputLangChangeRequest message=" + message + ", name=" + this->name);
+  //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmInputLangChangeRequest message=" + message + ", name=" + this->name);
   this->DefWndProc(message);
 }
 
 void Control::WmKeyChar(Message& message) {
-  System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmKeyChar message=" + message + ", name=" + this->name);
+  //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmKeyChar message=" + message + ", name=" + this->name);
   this->DefWndProc(message);
 }
 
 void Control::WmKillFocus(Message& message) {
-  System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmKillFocus message=" + message + ", name=" + this->name);
+  //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmKillFocus message=" + message + ", name=" + this->name);
   this->DefWndProc(message);
   this->OnLostFocus(EventArgs::Empty);
 }
 
 void Control::WmMeasureItem(Message& message) {
-  System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmMeasureItem message=" + message + ", name=" + this->name);
+  //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmMeasureItem message=" + message + ", name=" + this->name);
   this->DefWndProc(message);
 }
 
 void Control::WmMenuChar(Message& message) {
-  System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmMenuChar message=" + message + ", name=" + this->name);
+  //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmMenuChar message=" + message + ", name=" + this->name);
   this->DefWndProc(message);
 }
 
 void Control::WmMenuSelect(Message& message) {
-  System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmMenuSelect message=" + message + ", name=" + this->name);
+  //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmMenuSelect message=" + message + ", name=" + this->name);
   this->DefWndProc(message);
 }
 
 void Control::WmMouseDown(Message& message) {
-  System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::MouseWindowMessage, "Control::WmMouseDown message=" + message + ", name=" + this->name);
+  //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::MouseWindowMessage, "Control::WmMouseDown message=" + message + ", name=" + this->name);
   SetState(State::DoubleClickFired, message.Msg == WM_LBUTTONDBLCLK || message.Msg == WM_RBUTTONDBLCLK || message.Msg == WM_MBUTTONDBLCLK || message.Msg == WM_XBUTTONDBLCLK);
   this->DefWndProc(message);
   this->OnMouseDown(MouseEventArgs(MessageToMouseButtons(message), MakePoint(message.LParam()), this->GetState(State::DoubleClickFired) ? 2 : 1, 0));
@@ -346,7 +366,7 @@ void Control::WmMouseEnter(Message& message) {
     Message messageMouseLeave = Message::Create(controlEntered().Handle, WM_MOUSELEAVE, message.WParam, message.LParam, 0);
     controlEntered().WmMouseLeave(messageMouseLeave);
   }
-  System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::MouseWindowMessage, "Control::WmMouseEnter message=" + message + ", name=" + this->name);
+  //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::MouseWindowMessage, "Control::WmMouseEnter message=" + message + ", name=" + this->name);
   this->SetState(State::MouseEntered, true);
   controlEntered = *this;
   this->DefWndProc(message);
@@ -354,13 +374,13 @@ void Control::WmMouseEnter(Message& message) {
 }
 
 void Control::WmMouseHover(Message& message) {
-  System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::MouseWindowMessage, "Control::WmMouseHover message=" + message + ", name=" + this->name);
+  //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::MouseWindowMessage, "Control::WmMouseHover message=" + message + ", name=" + this->name);
   this->DefWndProc(message);
   this->OnMouseHover(EventArgs::Empty);
 }
 
 void Control::WmMouseLeave(Message& message) {
-  System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::MouseWindowMessage, "Control::WmMouseLeave message=" + message + ", name=" + this->name);
+  //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::MouseWindowMessage, "Control::WmMouseLeave message=" + message + ", name=" + this->name);
   this->SetState(State::MouseEntered, false);
   controlEntered = null;
   this->DefWndProc(message);
@@ -372,13 +392,13 @@ void Control::WmMouseMove(Message& message) {
     Message messageMouseEnter = Message::Create(message.HWnd, WM_MOUSEENTER, message.WParam, message.LParam, 0);
     this->WmMouseEnter(messageMouseEnter);
   }
-  System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::MouseWindowMessage, "Control::WmMouseMove message=" + message + ", name=" + this->name);
+  //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::MouseWindowMessage, "Control::WmMouseMove message=" + message + ", name=" + this->name);
   this->DefWndProc(message);
   this->OnMouseMove(MouseEventArgs(MouseButtons::None, MakePoint(message.LParam()), 0, 0));
 }
 
 void Control::WmMouseUp(Message& message) {
-  System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::MouseWindowMessage, "Control::WmMouseUp message=" + message + ", name=" + this->name);
+  //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::MouseWindowMessage, "Control::WmMouseUp message=" + message + ", name=" + this->name);
   if (this->GetState(State::DoubleClickFired)) {
     this->OnMouseDoubleClick(MouseEventArgs(MessageToMouseButtons(message), MakePoint(message.LParam()), 2, 0));
     this->OnDoubleClick(EventArgs::Empty);
@@ -391,7 +411,7 @@ void Control::WmMouseUp(Message& message) {
 }
 
 void Control::WmMouseWheel(Message& message) {
-  System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::MouseWindowMessage, "Control::WmMouseWheel message=" + message + ", name=" + this->name);
+  //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::MouseWindowMessage, "Control::WmMouseWheel message=" + message + ", name=" + this->name);
   System::Drawing::Point point = this->PointToClient(MakePoint(message.LParam));
   Array<byte> bytes = BitConverter::GetBytes(message.WParam());
   this->DefWndProc(message);
@@ -399,17 +419,17 @@ void Control::WmMouseWheel(Message& message) {
 }
 
 void Control::WmNotify(Message& message) {
-  System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmNotify message=" + message + ", name=" + this->name);
+  //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmNotify message=" + message + ", name=" + this->name);
   this->DefWndProc(message);
 }
 
 void Control::WmNotifyFormat(Message& message) {
-  System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmNotifyFormat message=" + message + ", name=" + this->name);
+  //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmNotifyFormat message=" + message + ", name=" + this->name);
   this->DefWndProc(message);
 }
 
 void Control::WmPaint(Message& message) {
-  System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmPaint message=" + message + ", name=" + this->name);
+  //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmPaint message=" + message + ", name=" + this->name);
   if (this->GetStyle(ControlStyles::UserPaint)) {
   } else {
     this->DefWndProc(message);
@@ -421,52 +441,52 @@ void Control::WmPaint(Message& message) {
 }
 
 void Control::WmParentNotify(Message& message) {
-  System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmParentNotify message=" + message + ", name=" + this->name);
+  //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmParentNotify message=" + message + ", name=" + this->name);
   this->DefWndProc(message);
 }
 
 void Control::WmPrintClient(Message& message) {
-  System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmPrintClient message=" + message + ", name=" + this->name);
+  //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmPrintClient message=" + message + ", name=" + this->name);
   this->DefWndProc(message);
 }
 
 void Control::WmQueryNewPalette(Message& message) {
-  System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmQueryNewPalette message=" + message + ", name=" + this->name);
+  //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmQueryNewPalette message=" + message + ", name=" + this->name);
   this->DefWndProc(message);
 }
 
 void Control::WmShowWindow(Message& message) {
-  System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmShowWindow message=" + message + ", name=" + this->name);
+  //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmShowWindow message=" + message + ", name=" + this->name);
   this->DefWndProc(message);
 }
 
 void Control::WmSetCursor(Message& message) {
-  System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmSetCursor message=" + message + ", name=" + this->name);
+  //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmSetCursor message=" + message + ", name=" + this->name);
   this->DefWndProc(message);
 }
 
 void Control::WmSetFocus(Message& message) {
-  System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmSetFocus message=" + message + ", name=" + this->name);
+  //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmSetFocus message=" + message + ", name=" + this->name);
   this->DefWndProc(message);
 }
 
 void Control::WmSysCommand(Message& message) {
-  System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmSysCommand message=" + message + ", name=" + this->name);
+  //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmSysCommand message=" + message + ", name=" + this->name);
   this->DefWndProc(message);
 }
 
 void Control::WmUpdateUIState(Message& message) {
-  System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmUpdateUIState message=" + message + ", name=" + this->name);
+  //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmUpdateUIState message=" + message + ", name=" + this->name);
   this->DefWndProc(message);
 }
 
 void Control::WmWindowPosChanged(Message& message) {
-  System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmWindowPosChanged message=" + message + ", name=" + this->name);
+  //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmWindowPosChanged message=" + message + ", name=" + this->name);
   this->DefWndProc(message);
 }
 
 void Control::WmWindowPosChanging(Message& message) {
-  System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmWindowPosChanging message=" + message + ", name=" + this->name);
+  //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmWindowPosChanging message=" + message + ", name=" + this->name);
   this->DefWndProc(message);
 }
 

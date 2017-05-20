@@ -116,7 +116,6 @@ int32 __OS::CoreApi::Socket::Accept(intptr handle, byte* socketAddress, int32 ad
 
 int32 __OS::CoreApi::Socket::Bind(intptr handle, byte* socketAddress, int32 addressLength) {
   int32 result = bind(*(int32*)&handle, (struct sockaddr*)socketAddress, (socklen_t)addressLength);
-  System::Diagnostics::Debug::WriteLineIf(result != 0, string::Format("errno = {0}", NativeToSocketError(errno)));
   return result;
 }
 

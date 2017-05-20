@@ -15,11 +15,11 @@ using namespace __OS;
 extern HINSTANCE __instance;
 
 intptr FormsApi::Button::Create(const System::Windows::Forms::Button& button) {
-  int32 style = WS_TABSTOP | WS_VISIBLE | WS_CHILD | (button.IsDefault ? BS_DEFPUSHBUTTON : BS_PUSHBUTTON);
-  int32 exStyle = 0;
-  HWND handle = CreateWindowEx(exStyle, L"Button", button.Text().w_str().c_str(), style, button.Bounds().Left, button.Bounds().Top, button.Bounds().Width, button.Bounds().Height, (HWND)button.Parent()().Handle(), (HMENU)0, __instance, (LPVOID)NULL);
+  HWND handle = CreateWindowEx(0, WC_BUTTON, button.Text().w_str().c_str(), WS_CHILD | BS_PUSHBUTTON, button.Left, button.Top, button.Width, button.Height, (HWND)button.Parent()().Handle(), (HMENU)0, __instance, (LPVOID)NULL);
   WindowProcedure::SetWindowTheme(handle);
   WindowProcedure::DefWindowProcs[(intptr)handle] = (WNDPROC)SetWindowLongPtr(handle, GWLP_WNDPROC, (LONG_PTR)WindowProcedure::WndProc);
+  /// @todo to remove after create SetFont method...
+  PostMessage(handle, WM_SETFONT, WPARAM((HFONT)GetStockObject(DEFAULT_GUI_FONT)), TRUE);
   return (intptr)handle;
 }
 

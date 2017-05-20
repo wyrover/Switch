@@ -11,69 +11,89 @@ namespace PcfFormApp {
     static void Main() {
       ProgressBar progressBar;
       progressBar.Location = System::Drawing::Point(10, 10);
-      progressBar.Name = "progressBar";
-      progressBar.Minimum = 0;
-      progressBar.Maximum = 100;
-      progressBar.Value = 50;
 
       Label label;
-      label.Location = Point(10, 40);
       label.Name = "label";
       label.Text = "Label";
+      label.Location = Point(10, 40);
+      label.Width = 150;
 
-      CheckBox checkBox;
-      checkBox.Name = "checkBox1";
-      checkBox.Text = "Check 1";
-      checkBox.Location = Point(10, 70);
-      checkBox.Checked = true;
-      checkBox.Click += pcf_delegate(const object& sender, const EventArgs& e) {
-        if (!checkBox.Checked)
-          progressBar.Value = 0;
-      };
+      CheckBox checkBox1;
+      checkBox1.Name = "checkBox1";
+      checkBox1.Text = "Check 1";
+      checkBox1.Location = Point(10, 70);
+      checkBox1.CheckState = System::Windows::Forms::CheckState::Indeterminate;
+      checkBox1.Focus();
+
+      CheckBox checkBox2;
+      checkBox2.Name = "checkBox2";
+      checkBox2.Text = "Check 2";
+      checkBox2.Location = Point(10, 100);
 
       RadioButton radioButton1;
       radioButton1.Name = "radioButton1";
       radioButton1.Text = "Radio 1";
-      radioButton1.Location = Point(10, 100);
+      radioButton1.Location = Point(10, 130);
       radioButton1.Checked = true;
-      radioButton1.Click += pcf_delegate(const object& sender, const EventArgs& e) {
-        if (checkBox.Checked && radioButton1.Checked)
-          progressBar.Value = 50;
-      };
 
       RadioButton radioButton2;
       radioButton2.Name = "radioButton2";
       radioButton2.Text = "Radio 2";
-      radioButton2.Location = Point(10, 130);
-      radioButton2.Click += pcf_delegate(const object& sender, const EventArgs& e) {
-        if (checkBox.Checked && radioButton2.Checked)
-          progressBar.Value = 100;
-      };
+      radioButton2.Location = Point(10, 160);
+
+      RadioButton radioButton3;
+      radioButton3.Name = "radioButton3";
+      radioButton3.Text = "Radio 3";
+      radioButton3.Location = Point(10, 190);
+
+      Label result;
+      result.Name = "result";
+      result.Text = "Dialog result";
+      result.Location = Point(120, 220);
+      result.Width = 150;
 
       Button button;
       button.Name = "button";
       button.Text = "Click me";
-      button.Location = Point(10, 160);
+      button.Location = Point(10, 220);
       button.Click += pcf_delegate(const object& sender, const EventArgs& e) {
-        MessageBox::Show("Hello, World !", "Message", MessageBoxButtons::OK, MessageBoxIcon::Hand);
+        result.Text = string::Format("Dialog result = {0}", MessageBox::Show("Hello, World !", "Message", MessageBoxButtons::OKCancel, MessageBoxIcon::Hand));
       };
 
       Panel panel;
       panel.Name = "panel";
       panel.Text = "Panel";
-      panel.Location = Point(10, 10);
-      panel.Size = Size(280, 280);
-      panel.BorderStyle = BorderStyle::Fixed3D;
-      panel.Controls().AddRange({progressBar, label, checkBox, radioButton1, radioButton2, button});
+      panel.Bounds = Rectangle(10, 10, 280, 280);
+      panel.Controls().AddRange({ progressBar, label, checkBox1, checkBox2, radioButton1, radioButton2, radioButton3, result, button });
+      panel.BackColor = Color::White;
 
       Form form;
       form.Name = "form";
-      form.Text = "Form";
       form.Controls().Add(panel);
-      form.StartPosition = FormStartPosition::Manual;
-      form.Location = Point(300, 200);
       form.ClientSize = Size(300, 300);
-      //form.BackColor = Color::SpringGreen;
+      //form.StartPosition = FormStartPosition::Manual;
+      //form.Location = Point(10, 10);
+
+      int counter = 0;
+      Application::Idle += pcf_delegate(const object& sender, const EventArgs& e) {
+        if (checkBox1.Checked && checkBox2.Checked)
+          progressBar.Value = 100;
+        else if (checkBox1.Checked)
+          progressBar.Value = 30;
+        else if (checkBox2.Checked)
+          progressBar.Value = 70;
+        else
+          progressBar.Value = 0;
+
+        if (radioButton1.Checked)
+          panel.BorderStyle = BorderStyle::None;
+        if (radioButton2.Checked)
+          panel.BorderStyle = BorderStyle::FixedSingle;
+        if (radioButton3.Checked)
+          panel.BorderStyle = BorderStyle::Fixed3D;
+
+        label.Text = string::Format("counter = {0}", counter++);
+      };
 
       Application::EnableVisualStyles();
       Application::Run(form);
@@ -81,4 +101,4 @@ namespace PcfFormApp {
   };
 }
 
-pcf_startup (PcfFormApp::Program)
+pcf_startup(PcfFormApp::Program)

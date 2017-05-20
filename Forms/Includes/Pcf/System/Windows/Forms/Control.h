@@ -10,6 +10,7 @@
 #include <Pcf/System/Drawing/Font.h>
 #include <Pcf/System/Nullable.h>
 #include "../../ComponentModel/Component.h"
+#include "../../ComponentModel/EventHandlerList.h"
 #include "ControlStyles.h"
 #include "InvalidateEventHandler.h"
 #include "Message.h"
@@ -126,6 +127,7 @@ namespace Pcf {
 
           /// @cond
           Control(const Control& control) = delete;
+          Control(Control&& control) = default;
           ~Control() {
             if (this->Parent() != null)
               this->Parent()().controls.Remove(*this);
@@ -148,6 +150,14 @@ namespace Pcf {
             }
           };
 
+          /// @brief Gets the distance, in pixels, between the bottom edge of the control and the top edge of its container's client area.
+          /// @param value An Int32 representing the distance, in pixels, between the bottom edge of the control and the top edge of its container's client area.
+          /// @remarks The value of this property is equal to the sum of the Top property value, and the Height property value.
+          /// @remarks he Bottom property is a read-only property. You can manipulate this property value by changing the value of the Top or Height properties or calling the SetBounds, SetBoundsCore, UpdateBounds, or SetClientSizeCore methods.
+          Property<int32, ReadOnly> Bottom {
+            pcf_get{ return this->location.Y() + this->size.Height(); }
+          };
+          
           /// @brief Gets or sets the size and location of the control including its nonclient elements, in pixels, relative to the parent control.
           /// @param value A Rectangle in pixels relative to the parent control that represents the size and location of the control including its nonclient elements.
           /// @remarks The bounds of the control include the nonclient elements such as scroll bars, borders, title bars, and menus. The SetBoundsCore method is called to set the Bounds property. The Bounds property is not always changed through its set method so you should override the SetBoundsCore method to ensure that your code is executed when the Bounds property is set.
@@ -160,8 +170,13 @@ namespace Pcf {
           };
 
           Property<System::Drawing::Size> ClientSize {
-            pcf_get {return this->GetClientSize();},
-            pcf_set {this->SetClientSize(value);}
+            pcf_get{ return this->clientSize; },
+            pcf_set{
+              if (this->clientSize != value) {
+                this->clientSize = value;
+                this->OnClientSizeChanged(EventArgs::Empty);
+              }
+            }
           };
 
           /// @brief Gets the collection of controls contained within the control.
@@ -211,6 +226,11 @@ namespace Pcf {
             pcf_get { return this->handle != 0; }
           };
 
+          Property<int32> Left {
+            pcf_get{ return this->location.X(); },
+            pcf_set{ this->Location(System::Drawing::Point(value, this->location.Y())); }
+          };
+
           /// @brief Gets or sets the coordinates of the upper-left corner of the control relative to the upper-left corner of its container.
           /// @return System::Drawing::Point The Point that represents the upper-left corner of the control relative to the upper-left corner of its container.
           /// @remarks Because the Point class is returned by value, meaning accessing the property returns a copy of the upper-left point of the control. So, adjusting the X or Y properties of the Point returned from this property will not affect the Left, Right, Top, or Bottom property values of the control. To adjust these properties set each property value individually, or set the Location property with a new Point.
@@ -218,11 +238,11 @@ namespace Pcf {
           Property<System::Drawing::Point> Location {
             pcf_get { return this->location; },
             pcf_set {
-            if (this->location != value) {
-              this->location = value;
-              this->OnLocationChanged(EventArgs::Empty);
+              if (this->location != value) {
+                this->location = value;
+                this->OnLocationChanged(EventArgs::Empty);
+              }
             }
-          }
           };
 
           /// @brief Gets or sets the name of the control.
@@ -231,11 +251,11 @@ namespace Pcf {
           Property<string> Name {
             pcf_get { return this->name; },
             pcf_set {
-            if (this->name != value) {
-              this->name = value;
-              this->OnNameChanged(EventArgs::Empty);
+              if (this->name != value) {
+                this->name = value;
+                this->OnNameChanged(EventArgs::Empty);
+              }
             }
-          }
           };
 
           /// @brief Gets or sets the parent container of the control.
@@ -254,6 +274,10 @@ namespace Pcf {
             }
           };
 
+          Property<int32, ReadOnly> Right{
+            pcf_get{ return this->location.X() + this->size.Width(); }
+          };
+
           /// @brief Gets or sets the height and width of the control.
           /// @return System::Drawing::Size The Size that represents the height and width of the control in pixels.
           /// @remarks Because the Size class is returned by value, meaning accessing the property returns a copy of the size of the control. So, adjusting the Width or Height properties of the Size returned from this property will not affect the Width or Height of the control. To adjust the Width or Height of the control, you must set the control's Width or Height property, or set the Size property with a new Size.
@@ -261,11 +285,21 @@ namespace Pcf {
           Property<System::Drawing::Size> Size {
             pcf_get { return this->size; },
             pcf_set {
-            if (this->size != value) {
-              this->size = value;
-              this->OnSizeChanged(EventArgs::Empty);
+              if (this->size != value) {
+                this->size = value;
+                this->OnSizeChanged(EventArgs::Empty);
+              }
             }
-          }
+          };
+
+          Property<bool> TabStop {
+            pcf_get {return this->tabStop;},
+            pcf_set {
+              if (this->tabStop != value) {
+                this->tabStop = value;
+                this->OnTabStopChanged(EventArgs::Empty);
+              }
+            }
           };
 
           /// @brief Gets or sets the text associated with this control.
@@ -273,8 +307,18 @@ namespace Pcf {
           /// @remarks The Text property of the control is used differently by each derived class. For example the Text property of a Form is displayed in the title bar at the top of the form, is fairly small in character count, and usually displays the application or document name. However, the Text property of a RichTextBox can be large and can include numerous nonvisual characters used to format the text. For example, the text displayed in a RichTextBox can be formatted by adjusting the Font properties, or by the addition of spaces or tab characters to align the text.
           /// @note When overriding the Text property in a derived class, use the base class's Text property to extend the base implementation. Otherwise, you must provide all the implementation. You are not required to override both the get and setaccessors of the Text property; you can override only one if needed.
           Property<const string&> Text {
-            pcf_get->const string& { return this->GetText(); },
-            pcf_set { this->SetText(value); }
+            pcf_get->const string& { return this->text; },
+            pcf_set {
+              if (this->text != value) {
+                this->text = value;
+                this->OnTextChanged(EventArgs::Empty);
+              }
+            }
+          };
+
+          Property<int32> Top {
+            pcf_get{ return this->location.Y(); },
+            pcf_set{ this->Location(System::Drawing::Point(this->location.X(), value)); }
           };
 
           Property<bool> Visible {
@@ -294,10 +338,14 @@ namespace Pcf {
 
           void CreateControl();
 
-          static const ref<Control> FromHandle(intptr handle) {
-            if (handles.ContainsKey(handle))
+          bool Focus();
+
+          static ref<Control> FromHandle(intptr handle) {
+            try {
               return handles[handle];
-            return ref<Control>::Null();
+            } catch(...) {
+              return ref<Control>::Null();
+            }
           }
 
           void Invalidate() { Invalidate(false); }
@@ -313,10 +361,19 @@ namespace Pcf {
           System::Drawing::Point PointToScreen(System::Drawing::Point point) const;
 
           bool PreProcessMessage(const Message& msg);
+          
+          /// @brief Sets the bounds of the control to the specified location and size.
+          /// @param x The new Left property value of the control.
+          /// @param y The new Top property value of the control.
+          /// @param width The new Width property value of the control.
+          /// @param height The new Height property value of the control.
+          void SetBounds(int32 x, int32 y, int32 width, int32 height) {
+            this->Location = System::Drawing::Point(x, y);
+            this->Size = System::Drawing::Size(width, height);
+          }
 
           virtual void WndProc(Message& message);
 
-          InvalidateEventHandler Invalidated;
           EventHandler BackColorChanged;
           EventHandler Click;
           EventHandler ClientSizeChanged;
@@ -324,6 +381,7 @@ namespace Pcf {
           EventHandler ForeColorChanged;
           EventHandler HandleCreated;
           EventHandler HandleDestroyed;
+          InvalidateEventHandler Invalidated;
           EventHandler LocationChanged;
           EventHandler LostFocus;
           EventHandler MouseCaptureChanged;
@@ -340,6 +398,7 @@ namespace Pcf {
           PaintEventHandler Paint;
           EventHandler ParentChanged;
           EventHandler SizeChanged;
+          EventHandler TabStopChanged;
           EventHandler TextChanged;
           EventHandler VisibleChanged;
 
@@ -354,24 +413,11 @@ namespace Pcf {
 
           virtual void DestroyHandle();
 
-          virtual System::Drawing::Size GetClientSize() const;
-
           virtual System::Drawing::Size GetDefaultSize() const { return System::Drawing::Size(0, 0); }
 
           virtual bool GetStyle(ControlStyles flag) { return ((int32)this->style & (int32)flag) == (int32)flag; }
 
-          virtual const string& GetText() const { return this->text; }
-
-          virtual void SetClientSize(const System::Drawing::Size& clientSize);
-
           virtual void SetStyle(ControlStyles flag, bool value) { this->style = value ? (ControlStyles)((int32)this->state | (int32)flag) : (ControlStyles)((int32)this->style & ~(int32)flag); }
-
-          virtual void SetText(const string& value) {
-            if (this->text != value) {
-              this->text = value;
-              this->OnTextChanged(EventArgs::Empty);
-            }
-          }
 
           virtual void OnCreateControl() {}
 
@@ -423,6 +469,8 @@ namespace Pcf {
 
           virtual void OnSizeChanged(const EventArgs& e);
 
+          virtual void OnTabStopChanged(const EventArgs& e);
+
           virtual void OnTextChanged(const EventArgs& e);
 
           virtual void OnVisibleChanged(const EventArgs& e);
@@ -430,21 +478,23 @@ namespace Pcf {
           /// @cond
           Nullable<System::Drawing::Color> backColor;
           System::Drawing::SolidBrush backBrush {System::Drawing::SystemColors::Control};
+          System::Drawing::Size clientSize;
           ControlCollection controls {*this};
           System::Drawing::Color defaultBackColor;
           System::Drawing::Color defaultForeColor;
           Nullable<System::Drawing::Color> foreColor;
           intptr handle = 0;
+          static System::Collections::Generic::Dictionary<intptr, ref<Control>> handles;
           System::Drawing::Point location;
+          System::Collections::Generic::Dictionary<int32, Action<Message&>> messageActions;
           string name;
           ref<Control> parent;
           System::Drawing::Size size;
-          string text;
-          bool visible = true;
-          System::Collections::Generic::Dictionary<int32, Action<Message&>> messageActions;
           State state = State::Empty;
           ControlStyles style = (ControlStyles)0;
-          static System::Collections::Generic::Dictionary<intptr, ref<Control>> handles;
+          bool tabStop = true;
+          string text;
+          bool visible = true;
           /// @endcond
 
         private:
@@ -503,6 +553,8 @@ namespace Pcf {
           };
 
           static ref<Control> controlEntered;
+          bool setFocusAfterHandleCreated = false;
+          bool setClientSizeAfterHandleCreated = false;
         };
       }
     }

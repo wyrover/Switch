@@ -27,12 +27,11 @@ namespace __OS {
   public:
     class Application pcf_static {
     public:
-      static void AddForm(const System::Windows::Forms::Form& form);
       static void EnableVisualStyles() { visualStylesEnabled = true; }
       static void Exit();
       static bool HasVisualStylesEnabled() { return visualStylesEnabled; }
       static void MessageBeep(System::Windows::Forms::MessageBoxIcon type);
-      static void MessageLoop(System::EventHandler idle);
+      static void MessageLoop(const System::Windows::Forms::Form& mainForm, System::EventHandler idle);
       static System::Windows::Forms::DialogResult ShowMessageBox(const string& message, const string& caption, System::Windows::Forms::MessageBoxButtons buttons, System::Windows::Forms::MessageBoxIcon icon, System::Windows::Forms::MessageBoxDefaultButton defaultButton, System::Windows::Forms::MessageBoxOptions options, bool displayHelpButton);
       static void Start();
       static void Stop();
@@ -64,15 +63,16 @@ namespace __OS {
       static void Invalidate(const System::Windows::Forms::Control& control, const System::Drawing::Rectangle& rect, bool invalidateChildren);      
       static System::Drawing::Point PointToClient(const System::Windows::Forms::Control& control, const System::Drawing::Point& point);
       static System::Drawing::Point PointToScreen(const System::Windows::Forms::Control& control, const System::Drawing::Point& point);
-      static System::Drawing::Size GetClientSize(const System::Windows::Forms::Control& control);
       static void SetBackColor(intptr hdc);
-      static void SetForeColor(intptr hdc);
       static void SetBackColor(const System::Windows::Forms::Control& control);
+      static void SetClientSize(System::Windows::Forms::Control& control);
+      static bool SetFocus(const System::Windows::Forms::Control& control);
+      static void SetForeColor(intptr hdc);
       static void SetForeColor(const System::Windows::Forms::Control& control);
       static void SetLocation(const System::Windows::Forms::Control& control);
       static void SetParent(const System::Windows::Forms::Control& control);
-      static void SetClientSize(System::Windows::Forms::Control& control, const System::Drawing::Size& clientSize);
-      static void SetSize(const System::Windows::Forms::Control& control);
+      static void SetSize(System::Windows::Forms::Control& control);
+      static void SetTabStop(const System::Windows::Forms::Control& control);
       static void SetText(const System::Windows::Forms::Control& control);
       static void SetVisible(const System::Windows::Forms::Control& control);
 
@@ -87,8 +87,8 @@ namespace __OS {
 
     class Form pcf_static {
     public:
-      static void Close(const System::Windows::Forms::Form& form);
-      static intptr Create(const System::Windows::Forms::Form& form);
+      static void Close(System::Windows::Forms::Form& form);
+      static intptr Create(System::Windows::Forms::Form& form);
     };
 
     class Label pcf_static {
@@ -114,8 +114,8 @@ namespace __OS {
     class RadioButton pcf_static {
     public:
       static intptr Create(const System::Windows::Forms::RadioButton& radioButton);
-      static void SetAutoCheck(const System::Windows::Forms::RadioButton& radioButton);
       static void SetChecked(const System::Windows::Forms::RadioButton& radioButton);
+      static void SetGroup(const System::Windows::Forms::RadioButton& radioButton);
     };
 
     class SystemInformation pcf_static {

@@ -8,8 +8,7 @@ using namespace __OS;
 
 intptr FormsApi::ProgressBar::Create(const System::Windows::Forms::ProgressBar& progressBar) {
   @autoreleasepool {
-    System::Drawing::Rectangle bounds = __OS::WindowProcedure::GetBounds(progressBar);
-    NSProgressIndicator* handle = [[[NSProgressIndicator alloc]  initWithFrame:NSMakeRect(bounds.X(), bounds.Y(), bounds.Width(), bounds.Height())] autorelease];
+    NSProgressIndicator* handle = [[[NSProgressIndicator alloc] init] autorelease];
     [[(NSWindow*)progressBar.Parent()().Handle() contentView] addSubview: handle];
     
     __OS::WindowProcedure::Controls[(intptr)handle] = progressBar;

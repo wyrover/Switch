@@ -15,10 +15,9 @@ namespace {
         messageLoopRunning = true;
         while (messageLoopRunning) {
           NSEvent* event = idle.IsEmpty() ? GetMessage() : PeekMessage();
-          if (event != nil) {
+          if (event != nil)
             DispatchMessage(event);
-          } else
-            idle(object(), EventArgs());
+          idle(object(), EventArgs());
         }
       }
     }
@@ -98,9 +97,7 @@ namespace {
     }
     
     static NSEvent* GetMessage() {
-      @autoreleasepool {
-        return [NSApp nextEventMatchingMask:NSEventMaskAny untilDate:[NSDate dateWithTimeIntervalSinceNow:Double::MaxValue] inMode:NSDefaultRunLoopMode dequeue:YES];
-      }
+      return [NSApp nextEventMatchingMask:NSEventMaskAny untilDate:[NSDate dateWithTimeIntervalSinceNow:Double::MaxValue] inMode:NSDefaultRunLoopMode dequeue:YES];
     }
     
     static void IgnoreMessages() {
@@ -113,9 +110,7 @@ namespace {
     }
     
     static NSEvent* PeekMessage() {
-      @autoreleasepool {
-        return [NSApp nextEventMatchingMask:NSEventMaskAny untilDate:[NSDate dateWithTimeIntervalSinceNow:0.0] inMode:NSDefaultRunLoopMode dequeue:YES];
-      }
+      return [NSApp nextEventMatchingMask:NSEventMaskAny untilDate:[NSDate dateWithTimeIntervalSinceNow:0.0] inMode:NSDefaultRunLoopMode dequeue:YES];
     }
 
     static bool messageLoopRunning;
@@ -195,9 +190,6 @@ namespace {
 
 bool FormsApi::Application::visualStylesEnabled = false;
 
-void FormsApi::Application::AddForm(const System::Windows::Forms::Form& form) {
-}
-
 void FormsApi::Application::Exit() {
   Environment::Exit(0);
 }
@@ -209,7 +201,7 @@ void FormsApi::Application::MessageBeep(MessageBoxIcon type) {
   }
 }
 
-void FormsApi::Application::MessageLoop(EventHandler idle) {
+void FormsApi::Application::MessageLoop(const System::Windows::Forms::Form& mainForm, EventHandler idle) {
   ApplicationApi::MessageLoop(idle);
 }
 

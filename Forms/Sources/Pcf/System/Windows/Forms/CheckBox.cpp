@@ -9,7 +9,6 @@ using namespace System::Windows::Forms;
 void CheckBox::CreateHandle() {
   this->handle = __OS::FormsApi::CheckBox::Create(*this);
   this->Control::CreateHandle();
-  __OS::FormsApi::CheckBox::SetAutoCheck(*this);
   __OS::FormsApi::CheckBox::SetChecked(*this);
 }
 
@@ -21,10 +20,17 @@ void CheckBox::SetAutoCheck(bool autoCheck) {
   }
 }
 
-void CheckBox::SetChecked(bool checked) {
-  if (this->checked != checked) {
-    this->checked = checked;
+void CheckBox::SetCheckState(System::Windows::Forms::CheckState checkState) {
+  if (this->checkState != checkState) {
+    bool oldChecked = this->Checked;
+    this->checkState = checkState;
+
     if (this->IsHandleCreated)
       __OS::FormsApi::CheckBox::SetChecked(*this);
+
+    if (oldChecked != this->Checked)
+      this->OnCheckedChanged(EventArgs::Empty);
+
+    this->OnCheckStateChanged(EventArgs::Empty);
   }
 }

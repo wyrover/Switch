@@ -49,7 +49,6 @@ namespace Pcf {
             Application::mainForm().FormClosed += pcf_delegate(const object& sender, const FormClosedEventArgs& e) {
               Exit();
             };
-            Application::AddForm();
             MessageLoop();
           }
 
