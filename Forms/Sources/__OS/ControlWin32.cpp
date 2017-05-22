@@ -22,7 +22,7 @@ namespace {
 }
 
 intptr FormsApi::Control::Create(const System::Windows::Forms::Control& control) {
-  HWND handle = CreateWindowEx(0, L"Control", control.Text().w_str().c_str(), WS_CHILD, control.Left, control.Top, control.Width, control.Height, (HWND)control.Parent()().Handle(), (HMENU)0, __instance, (LPVOID)NULL);
+  HWND handle = CreateWindowEx(0, WC_DIALOG, control.Text().w_str().c_str(), WS_CHILD, control.Left, control.Top, control.Width, control.Height, (HWND)control.Parent()().Handle(), (HMENU)0, __instance, (LPVOID)NULL);
   WindowProcedure::SetWindowTheme(handle);
   WindowProcedure::DefWindowProcs[(intptr)handle] = (WNDPROC)SetWindowLongPtr(handle, GWLP_WNDPROC, (LONG_PTR)WindowProcedure::WndProc);
   /// @todo to remove after create SetFont method...

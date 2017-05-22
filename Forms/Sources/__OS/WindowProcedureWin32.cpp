@@ -1,5 +1,10 @@
 ﻿#if defined(_WIN32) && defined(__use_native_interface__)
 
+#include <Windows.h>
+#include <Windowsx.h>
+#include <Uxtheme.h>
+#include <Pcf/Undef.h>
+
 #include "FormsApi.h"
 #include "WindowProcedureWin32.h"
 #include "../../Includes/Pcf/System/Windows/Forms/Control.h"

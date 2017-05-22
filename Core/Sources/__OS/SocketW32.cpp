@@ -164,6 +164,7 @@ int32 __OS::CoreApi::Socket::Poll(intptr handle, int32 microSec, int32 mode) {
    return retValue;*/
 }
 
+#pragma warning(push)
 #pragma warning(disable:4127)
 int32 __OS::CoreApi::Socket::Select(intptr* checkRead, int32 nbCheckRead, intptr* checkWrite, int32 nbCheckWrite, intptr* checkError, int32 nbCheckError, int32 microseconds) {
   SOCKET nfds = 0;
@@ -236,7 +237,7 @@ int32 __OS::CoreApi::Socket::Select(intptr* checkRead, int32 nbCheckRead, intptr
 
   return result;
 }
-#pragma warning(default:4127)
+#pragma warning(pop)
 
 int32 __OS::CoreApi::Socket::Receive(intptr handle, byte* buffer, int32 bufferLength, int32 flags) {
   return ::recv(*(int32*)&handle, (char*)buffer, bufferLength, flags);

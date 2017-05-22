@@ -18,7 +18,7 @@ namespace Pcf {
         /// @brief Provides static methods and properties to manage an application, such as methods to start and stop an application, to process Windows messages, and properties to get information about an application. This class cannot be inherited.
         class pcf_public Application pcf_static {
         public:
-          static void EnableVisualStyles() { enableVisualStyles = true; }
+          static void EnableVisualStyles();
 
           /// @brief Informs all message pumps that they must terminate, and then closes all application windows after the messages have been processed.
           /// @remarks The Exit method stops all running message loops on all threads and closes all windows of the application. This method does not necessarily force the application to exit. The Exit method is typically called from within a message loop, and forces Run to return. To exit a message loop for the current thread only, call ExitThread.
@@ -60,7 +60,6 @@ namespace Pcf {
           static void Start();
           static void MessageLoop();
           static ref<Form> mainForm;
-          static bool enableVisualStyles;
         };
       }
     }

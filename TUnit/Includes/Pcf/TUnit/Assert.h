@@ -2144,6 +2144,11 @@ namespace Pcf {
       template<typename ExceptionType>
       static inline void Throws(const System::Delegate<void>& statement, const CurrentInformation& currentInformation) {Throws<ExceptionType>(statement, "", currentInformation);}
       
+#if defined(_WIN32)
+#pragma warning(push)
+#pragma warning(disable:4286)
+#endif
+
       /// @brief Verifies that the statement throws a particular exception when called.
       /// @param exceptionType The exception type that must be throw.
       /// @param statement The statement that verify.
@@ -2170,7 +2175,11 @@ namespace Pcf {
           Fail(string::Format("Expected: <{0}>{1}But was:  <exception>", pcf_typeof<ExceptionType>().FullName(), System::Environment::NewLine), message, currentInformation);
         }
       }
-      
+
+#if defined(_WIN32)
+#pragma warning(pop)
+#endif
+
       /// @brief Verifies that the statement throws any exception when called.
       /// @param statement The statement that verify.
       /// @par Examples

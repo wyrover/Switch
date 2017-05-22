@@ -3,8 +3,6 @@
 
 #include <FL/Fl.H>
 
-#include <Pcf/Undef.h>
-
 extern System::Collections::Generic::SortedDictionary<intptr, delegate<int32, int32>> defWindowProcs;
 
 namespace {

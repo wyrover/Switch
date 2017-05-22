@@ -45,7 +45,6 @@ set(SOURCE_FILES
   Sources/Pcf/System/Drawing/Text/FontCollection.cpp
   Sources/Pcf/System/Drawing/Text/InstalledFontCollection.cpp
   Sources/Pcf/System/Drawing/Bmp.h
-  Sources/Pcf/System/Drawing/Bitmap.cpp
   Sources/Pcf/System/Drawing/Brush.cpp
   Sources/Pcf/System/Drawing/Color.cpp
   Sources/Pcf/System/Drawing/Font.cpp

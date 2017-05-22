@@ -3,24 +3,24 @@
 
 using namespace System;
 using namespace System::Windows::Forms;
-using namespace __OS;
 
 ref<Form> Application::mainForm;
-bool Application::enableVisualStyles = false;
 EventHandler Application::Idle;
 
+void Application::EnableVisualStyles() {
+  __OS::FormsApi::Application::EnableVisualStyles();
+}
+
 void Application::Exit() {
-  FormsApi::Application::Exit();
+  __OS::FormsApi::Application::Exit();
 }
 
 void Application::Start() {
-  if (enableVisualStyles)
-    FormsApi::Application::EnableVisualStyles();
-  FormsApi::Application::Start();
+  __OS::FormsApi::Application::Start();
 }
 
 void Application::MessageLoop() {
-  FormsApi::Application::MessageLoop(mainForm(), Idle);
+  __OS::FormsApi::Application::MessageLoop(mainForm(), Idle);
   Idle = EventHandler();
-  FormsApi::Application::Stop();
+  __OS::FormsApi::Application::Stop();
 }

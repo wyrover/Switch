@@ -5,8 +5,6 @@
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Widget.H>
 
-#include <Pcf/Undef.h>
-
 namespace __OS {
   static const int32 FL_PAINT = 255;
 

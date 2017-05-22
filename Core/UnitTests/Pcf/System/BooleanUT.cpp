@@ -180,6 +180,11 @@ namespace PcfUnitTests {
     TUnit::Assert::IsFalse(Boolean::TryParse("Not true or false", result));    
   }
   
+#if defined(_WIN32)
+#pragma warning(push)
+#pragma warning(disable:4305)
+#endif
+
   TEST(Boolean, Equals) {
     TUnit::Assert::IsTrue(Boolean(true).Equals(Boolean(true)));
     TUnit::Assert::IsFalse(Boolean(true).Equals(Boolean(false)));
@@ -190,6 +195,10 @@ namespace PcfUnitTests {
     TUnit::Assert::IsFalse(Boolean(false).Equals((const Object &)Boolean(true)));
     TUnit::Assert::IsFalse(Boolean(false).Equals(int32(24)));    
   }
+
+#if defined(_WIN32)
+#pragma warning(pop)
+#endif
   
   TEST(Boolean, GetHashCode) {
     TUnit::Assert::AreEqual(Boolean(true).GetHashCode(), int32(1));
