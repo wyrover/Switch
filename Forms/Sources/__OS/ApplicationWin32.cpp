@@ -41,13 +41,9 @@ DialogResult FormsApi::Application::ShowMessageBox(const string& message, const 
 }
 
 void FormsApi::Application::Start() {
-  WNDCLASSEX wndClass = { sizeof(WNDCLASSEX), CS_GLOBALCLASS, DefWindowProc, 0, 0, __instance, NULL, NULL, (HBRUSH)COLOR_BTNFACE, NULL, L"Control", NULL };
-  if (RegisterClassEx(&wndClass) == NULL)
-    throw InvalidOperationException(string::Format("FormsApi::Application::RegisterClasses(\"Control\") failed with code = {0}", GetLastError()), pcf_current_information);
 }
 
 void FormsApi::Application::Stop() {
-  UnregisterClass(L"Control", NULL);
 }
 
 #endif

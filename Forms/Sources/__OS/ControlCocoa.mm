@@ -177,7 +177,7 @@ void FormsApi::Control::SetParent(const System::Windows::Forms::Control& control
 void FormsApi::Control::SetSize(System::Windows::Forms::Control& control) {
   @autoreleasepool {
     if (is<System::Windows::Forms::Form>(control)) {
-      ((NSWindow*)control.Handle()).frame.size = NSMakeSize(control.Width, control.Height);
+      [((NSWindow*)control.Handle()) setFrame:NSMakeRect(0, 0, control.Width(), control.Height()) display:true];
       control.ClientSize = System::Drawing::Size(((NSWindow*)control.Handle()).contentLayoutRect.size.width, ((NSWindow*)control.Handle()).contentLayoutRect.size.height);
     } else if (is<System::Windows::Forms::Button>(control)) {
       [(NSButton*)control.Handle() setFrameSize:NSMakeSize(control.Width() + 12, control.Height() + 11)];

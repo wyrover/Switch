@@ -16,7 +16,7 @@ void Form::Close() {
 }
 
 void Form::CreateHandle() {
-  if (System::Environment::OSVersion().Platform == System::PlatformID::Unix)
+  if (!this->backColor.HasValue && System::Environment::OSVersion().Platform == System::PlatformID::Unix)
     this->backColor = System::Drawing::SystemColors::Window;
   this->messageActions[WM_CLOSE] = {*this, &Form::WmClose};
   this->handle = __OS::FormsApi::Form::Create(*this);

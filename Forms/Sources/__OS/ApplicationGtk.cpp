@@ -47,7 +47,6 @@ DialogResult FormsApi::Application::ShowMessageBox(const string& message, const 
 }
 
 void FormsApi::Application::Start() {
-
 }
 
 void FormsApi::Application::Stop() {

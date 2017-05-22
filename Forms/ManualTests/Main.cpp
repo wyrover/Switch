@@ -1,4 +1,6 @@
-#include <Pcf/Forms.h>
+#include <Pcf/Startup.h>
+#include <Pcf/System/Windows/Forms/Application.h>
+#include <Pcf/System/Windows/Forms/CheckBox.h>
 
 using namespace System;
 using namespace System::Drawing;
@@ -9,96 +11,32 @@ namespace PcfFormApp {
   public:
     // The main entry point for the application.
     static void Main() {
-      ProgressBar progressBar;
-      progressBar.Location = System::Drawing::Point(10, 10);
-
-      Label label;
-      label.Name = "label";
-      label.Text = "Label";
-      label.Location = Point(10, 40);
-      label.Width = 150;
+      Application::EnableVisualStyles();
 
       CheckBox checkBox1;
-      checkBox1.Name = "checkBox1";
-      checkBox1.Text = "Check 1";
-      checkBox1.Location = Point(10, 70);
-      checkBox1.CheckState = System::Windows::Forms::CheckState::Indeterminate;
-      checkBox1.Focus();
+      checkBox1.Text = "Checked";
+      checkBox1.Location = Point(30, 30);
+      checkBox1.CheckState = System::Windows::Forms::CheckState::Checked;
 
       CheckBox checkBox2;
-      checkBox2.Name = "checkBox2";
-      checkBox2.Text = "Check 2";
-      checkBox2.Location = Point(10, 100);
+      checkBox2.Text = "Unchecked";
+      checkBox2.Location = Point(30, 60);
+      checkBox2.CheckState = System::Windows::Forms::CheckState::Unchecked;
 
-      RadioButton radioButton1;
-      radioButton1.Name = "radioButton1";
-      radioButton1.Text = "Radio 1";
-      radioButton1.Location = Point(10, 130);
-      radioButton1.Checked = true;
-
-      RadioButton radioButton2;
-      radioButton2.Name = "radioButton2";
-      radioButton2.Text = "Radio 2";
-      radioButton2.Location = Point(10, 160);
-
-      RadioButton radioButton3;
-      radioButton3.Name = "radioButton3";
-      radioButton3.Text = "Radio 3";
-      radioButton3.Location = Point(10, 190);
-
-      Label result;
-      result.Name = "result";
-      result.Text = "Dialog result";
-      result.Location = Point(120, 220);
-      result.Width = 150;
-
-      Button button;
-      button.Name = "button";
-      button.Text = "Click me";
-      button.Location = Point(10, 220);
-      button.Click += pcf_delegate(const object& sender, const EventArgs& e) {
-        result.Text = string::Format("Dialog result = {0}", MessageBox::Show("Hello, World !", "Message", MessageBoxButtons::OKCancel, MessageBoxIcon::Hand));
-      };
-
-      Panel panel;
-      panel.Name = "panel";
-      panel.Text = "Panel";
-      panel.Bounds = Rectangle(10, 10, 280, 280);
-      panel.Controls().AddRange({ progressBar, label, checkBox1, checkBox2, radioButton1, radioButton2, radioButton3, result, button });
-      panel.BackColor = Color::White;
+      CheckBox checkBox3;
+      checkBox3.Text = "Indeterminate";
+      checkBox3.Location = Point(30, 90);
+      checkBox3.CheckState = System::Windows::Forms::CheckState::Indeterminate;
 
       Form form;
       form.Name = "form";
-      form.Controls().Add(panel);
-      form.ClientSize = Size(300, 300);
-      //form.StartPosition = FormStartPosition::Manual;
-      //form.Location = Point(10, 10);
+      form.Controls().AddRange({checkBox1, checkBox2, checkBox3});
+      form.BackColor = Color::White;
 
-      int counter = 0;
-      Application::Idle += pcf_delegate(const object& sender, const EventArgs& e) {
-        if (checkBox1.Checked && checkBox2.Checked)
-          progressBar.Value = 100;
-        else if (checkBox1.Checked)
-          progressBar.Value = 30;
-        else if (checkBox2.Checked)
-          progressBar.Value = 70;
-        else
-          progressBar.Value = 0;
-
-        if (radioButton1.Checked)
-          panel.BorderStyle = BorderStyle::None;
-        if (radioButton2.Checked)
-          panel.BorderStyle = BorderStyle::FixedSingle;
-        if (radioButton3.Checked)
-          panel.BorderStyle = BorderStyle::Fixed3D;
-
-        label.Text = string::Format("counter = {0}", counter++);
-      };
-
-      Application::EnableVisualStyles();
       Application::Run(form);
     }
   };
 }
 
 pcf_startup(PcfFormApp::Program)
+
