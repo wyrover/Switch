@@ -40,9 +40,9 @@ System::Drawing::Size FormsApi::SystemInformation::GetCaptionButtonSize() {
 int32 FormsApi::SystemInformation::GetCaptionHeight() {
   if (System::Environment::OSVersion().Platform == System::PlatformID::MacOSX)
     return 47;
-  if (System::Environment::OSVersion().Platform == System::PlatformID::MacOSX)
-    return 74;
-  return 65;
+  if (System::Environment::OSVersion().Platform == System::PlatformID::Unix)
+    return 45;
+  return 24;
 }
 
 int32 FormsApi::SystemInformation::GetCaretBlinkTime() {
