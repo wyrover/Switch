@@ -1,12 +1,12 @@
 CentOS 7 or later
 -----------------
 
-  1. Install Gcc 6.1 or later
+  1. Install clang 4.0.0 or later
+  
+     In order to build Pcf, you first need download and install clang 4.0.0 or later.
+     Remarks: Verify if you can execute clang --version in terminal.
 
-     In order to build Pcf, you first need download and install Gcc 6.1 or later.
-     Remarks: Verify if you can execute gcc --version in terminal.
-
-  2. After installing Gcc, do the following in "Terminal" to Build and install Pcf :
+  2. After installing clang, do the following in "Terminal" to Build and install Pcf :
      Remarks, this operation depand of your hardware and can be very long
   
      ~$ cd FolderWherePcfIsDownloaded
@@ -44,12 +44,12 @@ ________________________________________________________________________________
 Ubuntu 16.04 or later
 ---------------------
 
-  1. Install Gcc 6.1 or later
+  1. Install clang 4.0.0 or later
+  
+     In order to build Pcf, you first need download and install clang 4.0.0 or later.
+     Remarks: Verify if you can execute clang --version in terminal.
 
-     In order to build Pcf, you first need download and install Gcc 6.1 or later.
-     Remarks: Verify if you can execute gcc --version in terminal.
-
-  2. After installing Gcc, do the following in "Terminal" to Build and install Pcf :
+  2. After installing clang, do the following in "Terminal" to Build and install Pcf :
      Remarks, this operation depand of your hardware and can be very long
   
      ~$ cd FolderWherePcfIsDownloaded
