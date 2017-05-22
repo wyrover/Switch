@@ -16,6 +16,9 @@ sudo yum install clang cmake3 libcurl-devel libjpeg-devel zlib-devel libpng-deve
 ln -s /usr/bin/cmake3 /usr/local/bin/cmake
 ln -s /usr/bin/cpack3 /usr/local/bin/cpack
 
+export CC=/usr/bin/clang
+export CXX=/usr/bin/clang
+
 cd Build/ThirdParties
 cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ../../ThirdParties 
 make install -j6

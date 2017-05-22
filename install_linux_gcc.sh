@@ -10,6 +10,9 @@ sudo chmod 777 /usr/local/lib
 mkdir -p Build/Examples
 mkdir -p Build/ThirdParties
 
+export CC=/usr/bin/clang
+export CXX=/usr/bin/clang
+
 cd Build/ThirdParties
 cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ../../ThirdParties 
 make install -j6

@@ -1,19 +1,14 @@
 CentOS 7 or later
 -----------------
 
-  1. Install Gcc 6.1 or later
-
-     In order to build Pcf, you first need download and install Gcc 6.1 or later.
-     Remarks: Verify if you can execute gcc --version in terminal.
-
-  2. After installing Gcc, do the following in "Terminal" to Build and install Pcf :
+  1. Do the following in "Terminal" to Build and install Pcf :
      Remarks, this operation depand of your hardware and can be very long
   
      ~$ cd FolderWherePcfIsDownloaded
      
      ~$ ./install.sh
   
-  4. Enjoy and be creative with Pcf ;-)
+  2. Enjoy and be creative with Pcf ;-)
 
 ______________________________________________________________________________________________________________
 
@@ -44,19 +39,14 @@ ________________________________________________________________________________
 Ubuntu 16.04 or later
 ---------------------
 
-  1. Install Gcc 6.1 or later
-
-     In order to build Pcf, you first need download and install Gcc 6.1 or later.
-     Remarks: Verify if you can execute gcc --version in terminal.
-
-  2. After installing Gcc, do the following in "Terminal" to Build and install Pcf :
+  1. Do the following in "Terminal" to Build and install Pcf :
      Remarks, this operation depand of your hardware and can be very long
   
      ~$ cd FolderWherePcfIsDownloaded
      
      ~$ ./install.sh
   
-  4. Enjoy and be creative with Pcf ;-)
+  2. Enjoy and be creative with Pcf ;-)
 
 ______________________________________________________________________________________________________________
 
@@ -84,4 +74,33 @@ Windows 10 or later
      C:\Users\You\FolderWherePcfIsDownloaded> install.bat
   
   4. Enjoy and be creative with Pcf ;-)
+  
+______________________________________________________________________________________________________________
+
+Other linux Distribution
+------------------------
+
+  1. Install clang 4.0.0 or later
+  
+     In order to build Pcf, you first need download and install clang 4.0.0 or later.
+     Remarks: Verify if you can execute clang --version in terminal.
+
+    2. Install CMake
+    
+     After clang, to build Pcf, you need to install the latest version cmake from https://cmake.org/download/
+     Remarks: Verify if you can execute cmake --version in terminal.
+
+  3. Install Doxygen
+
+     After CMake, to generate Pcf documentation, you need to install the latest version Doxygen from https://cmake.org/download/
+     Remarks: Verify if you can execute doxygen --version in terminal.
+
+  4. After installing CMAke, do the following in "Terminal" to Build and install Pcf :
+     Remarks, this operation depand of your hardware and can be very long
+  
+     ~$ cd FolderWherePcfIsDownloaded
+     
+     ~$ ./install.sh
+  
+  5. Enjoy and be creative with Pcf ;-)
   
