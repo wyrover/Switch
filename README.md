@@ -62,6 +62,8 @@ namespace HelloWorldGui {
   public:
     // The main entry point for the application.
     static void Main() {
+      Application::EnableVisualStyles();
+      
       Button button;
       button.Text = "Click me";
       button.Location = Point(10, 10);
@@ -75,7 +77,6 @@ namespace HelloWorldGui {
       form.Location = Point(300, 200);
       form.Controls().Add(button);
       
-      Application::EnableVisualStyles();
       Application::Run(form);
     }
   };

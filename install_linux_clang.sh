@@ -11,7 +11,7 @@ mkdir -p Build/Examples
 mkdir -p Build/ThirdParties
 
 export CC=/usr/bin/clang
-export CXX=/usr/bin/clang
+export CXX=/usr/bin/clang++
 
 cd Build/ThirdParties
 cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ../../ThirdParties 
@@ -24,7 +24,7 @@ xdg-open Help/html/index.html
 make install -j6
 
 cd Examples
-cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ../../Examples
+#cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ../../Examples
 #make -j6
 cd ../..
 

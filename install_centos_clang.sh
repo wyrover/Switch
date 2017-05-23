@@ -17,7 +17,7 @@ ln -s /usr/bin/cmake3 /usr/local/bin/cmake
 ln -s /usr/bin/cpack3 /usr/local/bin/cpack
 
 export CC=/usr/bin/clang
-export CXX=/usr/bin/clang
+export CXX=/usr/bin/clang++
 
 cd Build/ThirdParties
 cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ../../ThirdParties 
@@ -30,7 +30,7 @@ xdg-open Help/html/index.html
 make install -j6
 
 cd Examples
-cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ../../Examples
+#cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ../../Examples
 #make -j6
 cd ../..
 

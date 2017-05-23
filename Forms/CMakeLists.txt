@@ -105,44 +105,57 @@ set(INCLUDE_FILES
 )
 
 set(SOURCE_FILES
+  Sources/__OS/ApplicationCocoa.mm
   Sources/__OS/ApplicationFltk.cpp
   Sources/__OS/ApplicationGtk.cpp
   Sources/__OS/ApplicationWin32.cpp
+  Sources/__OS/ButtonCocoa.mm
   Sources/__OS/ButtonFltk.cpp
   Sources/__OS/ButtonGtk.cpp
   Sources/__OS/ButtonWin32.cpp
+  Sources/__OS/CheckBoxCocoa.mm
   Sources/__OS/CheckBoxFltk.cpp
   Sources/__OS/CheckBoxGtk.cpp
   Sources/__OS/CheckBoxWin32.cpp
+  Sources/__OS/ControlCocoa.mm
   Sources/__OS/ControlFltk.cpp
   Sources/__OS/ControlGtk.cpp
   Sources/__OS/ControlWin32.cpp
+  Sources/__OS/FormCocoa.mm
   Sources/__OS/FormsApi.h
   Sources/__OS/FormFltk.cpp
   Sources/__OS/FormGtk.cpp
   Sources/__OS/FormWin32.cpp
+  Sources/__OS/LabelCocoa.mm
   Sources/__OS/LabelFltk.cpp
   Sources/__OS/LabelGtk.cpp
   Sources/__OS/LabelWin32.cpp
   Sources/__OS/MainWin32.cpp
+  Sources/__OS/PanelCocoa.mm
   Sources/__OS/PanelFltk.cpp
   Sources/__OS/PanelGtk.cpp
   Sources/__OS/PanelWin32.cpp
+  Sources/__OS/ProgressBarCocoa.mm
   Sources/__OS/ProgressBarFltk.cpp
   Sources/__OS/ProgressBarGtk.cpp
   Sources/__OS/ProgressBarWin32.cpp
+  Sources/__OS/RadioButtonCocoa.mm
   Sources/__OS/RadioButtonFltk.cpp
   Sources/__OS/RadioButtonGtk.cpp
   Sources/__OS/RadioButtonWin32.cpp
+  Sources/__OS/SystemInformationCocoa.mm
   Sources/__OS/SystemInformationFltk.cpp
   Sources/__OS/SystemInformationGtk.cpp
   Sources/__OS/SystemInformationWin32.cpp
+  Sources/__OS/WidgetCocoa.h
   Sources/__OS/WidgetFltk.h
   Sources/__OS/WidgetGtk.h
   Sources/__OS/WindowMessage.h
   Sources/__OS/WindowMessageKey.h
+  Sources/__OS/WindowProcedureCocoa.mm
   Sources/__OS/WindowProcedureFltk.cpp
   Sources/__OS/WindowProcedureWin32.cpp
+  Sources/__OS/WindowProcedureCocoa.h
   Sources/__OS/WindowProcedureFltk.h
   Sources/__OS/WindowProcedureWin32.h
   Sources/Pcf/System/Media/SystemSound.cpp
@@ -185,23 +198,6 @@ set(SOURCE_FILES
 #  Sources/Pcf/System/Windows/Forms/Timer.cpp
 )
 
-if (APPLE)
-set(COCOA_SOURCE_FILES
-  Sources/__OS/ApplicationCocoa.mm
-  Sources/__OS/ButtonCocoa.mm
-  Sources/__OS/CheckBoxCocoa.mm
-  Sources/__OS/ControlCocoa.mm
-  Sources/__OS/FormCocoa.mm
-  Sources/__OS/LabelCocoa.mm
-  Sources/__OS/PanelCocoa.mm
-  Sources/__OS/ProgressBarCocoa.mm
-  Sources/__OS/RadioButtonCocoa.mm
-  Sources/__OS/SystemInformationCocoa.mm
-  Sources/__OS/WindowProcedureCocoa.h
-  Sources/__OS/WindowProcedureCocoa.mm
-)
-endif ()
-
 source_group(Includes REGULAR_EXPRESSION "/Includes/[-_,A-Za-z0-9]+\\.h*")
 source_group(Includes\\Pcf\\System REGULAR_EXPRESSION "/Includes/Pcf/System/[-_,A-Za-z0-9]+\\.h*")
 source_group(Includes\\Pcf\\System\\ComponentModel REGULAR_EXPRESSION "/Includes/Pcf/System/ComponentModel/[-_,A-Za-z0-9]+\\.h*")
@@ -222,7 +218,7 @@ source_group(Sources\\Pcf\\System\\Windows REGULAR_EXPRESSION "/Sources/Pcf/Syst
 source_group(Sources\\Pcf\\System\\Windows\\Forms REGULAR_EXPRESSION "/Sources/Pcf/System/Windows/Forms/[-_,A-Za-z0-9]+\\.(c*|h*|m*)")
 source_group(Sources\\Pcf\\System\\Windows\\Forms\\VisualStyles REGULAR_EXPRESSION "/Sources/Pcf/System/Windows/Forms/VisualStyles/[-_,A-Za-z0-9]+\\.c*")
 
-add_library(Pcf.Forms STATIC ${INCLUDE_FILES} ${SOURCE_FILES} ${COCOA_SOURCE_FILES})
+add_library(Pcf.Forms STATIC ${INCLUDE_FILES} ${SOURCE_FILES})
 target_include_directories(Pcf.Forms PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Includes> $<INSTALL_INTERFACE:include>)
 target_link_libraries(Pcf.Forms Pcf.Drawing)
 set_target_properties(Pcf.Forms PROPERTIES FOLDER Pcf/Forms)
