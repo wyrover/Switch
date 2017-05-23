@@ -95,7 +95,7 @@ Other linux Distribution
      After CMake, to generate Pcf documentation, you need to install the latest version Doxygen from https://cmake.org/download/
      Remarks: Verify if you can execute doxygen --version in terminal.
 
-  4. After installing CMAke, do the following in "Terminal" to Build and install Pcf :
+  4. After installing CMake, do the following in "Terminal" to Build and install Pcf :
      Remarks, this operation depand of your hardware and can be very long
   
      ~$ cd FolderWherePcfIsDownloaded
