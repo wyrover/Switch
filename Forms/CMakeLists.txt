@@ -147,7 +147,7 @@ set(SOURCE_FILES
   Sources/__OS/SystemInformationFltk.cpp
   Sources/__OS/SystemInformationGtk.cpp
   Sources/__OS/SystemInformationWin32.cpp
-  #Sources/__OS/WidgetCocoa.h
+  Sources/__OS/WidgetCocoa.h
   Sources/__OS/WidgetFltk.h
   Sources/__OS/WidgetGtk.h
   Sources/__OS/WindowMessage.h

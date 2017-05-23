@@ -1,5 +1,7 @@
 #if defined(__APPLE__) && defined(__use_native_interface__)
+#include "WidgetCocoa.h"
 #include "WindowProcedureCocoa.h"
+
 
 using namespace System;
 using namespace System::Drawing;
