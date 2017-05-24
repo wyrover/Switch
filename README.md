@@ -137,7 +137,7 @@ launch Terminal and type followed line :
 ```
 cd FolderWhereYourAreCopyExample
 export CC=/usr/bin/clang
-export CXX=+usr/bin/clang++
+export CXX=/usr/bin/clang++
 cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ..
 make
 ./ExampleProgramName
