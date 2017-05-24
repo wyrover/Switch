@@ -4,6 +4,10 @@ if [[ "$OSTYPE" != *"Darwin"* ]]; then
 fi
 
 case "$OSTYPE" in
+<<<<<<< Updated upstream
+=======
+  *"CentOS"*) ./install_centos_clang.sh;;
+>>>>>>> Stashed changes
   *"Darwin"*) ./install_macosx_xcode.sh;;
   *"Ubuntu"*) ./install_ubuntu_clang.sh;;
   *"CentOS"*) ./install_centos_clang.sh;;
