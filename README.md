@@ -132,6 +132,18 @@ add_executable(HelloWorldTest HelloWorldTest.cpp)
 target_link_libraries(HelloWorldTest Pcf.TUnit.Main)
 ```
 
+# Build and run on linux
+launch Terminal and type followed line :
+```
+cd FolderWhereYourAreCopyExample
+export CC=/usr/bin/clang
+export CXX=+usr/bin/clang++
+cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ..
+make
+./ExampleProgramName
+```
+
+
 # Namespace
 - **Pcf::System** namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
 - **Pcf::System::Collections** namespace contain types that define various standard, specialized, and generic collection objects.
