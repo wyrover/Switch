@@ -15,6 +15,9 @@ The framework is composed of 4 libraries :
 - **Pcf.Forms** : The Pcf.Forms library contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system.
 - **Pcf.TUnit** : The Pcf.TUnit library is a unit-testing framework for modern C++14. Initially ported from NUnit.
 
+# Install
+Before running examples you must install Pcf. To install it read Install.md file.
+
 # Examples
 The classic first application 'Hello World'.
 
@@ -131,6 +134,18 @@ find_package(Pcf REQUIRED)
 add_executable(HelloWorldTest HelloWorldTest.cpp)
 target_link_libraries(HelloWorldTest Pcf.TUnit.Main)
 ```
+
+# Build and run on linux
+launch Terminal and type followed line :
+```
+cd FolderWhereYourAreCopyExample
+export CC=/usr/bin/clang
+export CXX=/usr/bin/clang++
+cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ..
+make
+./ExampleProgramName
+```
+
 
 # Namespace
 - **Pcf::System** namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
