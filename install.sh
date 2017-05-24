@@ -4,14 +4,7 @@ if [[ "$OSTYPE" != *"Darwin"* ]]; then
 fi
 
 case "$OSTYPE" in
-<<<<<<< HEAD
-  *"CentOS"*) ./install_redhat_clang.sh;;
-=======
-<<<<<<< Updated upstream
-=======
   *"CentOS"*) ./install_centos_clang.sh;;
->>>>>>> Stashed changes
->>>>>>> develop
   *"Darwin"*) ./install_macosx_xcode.sh;;
   *"elementary"*) ./install_debian_clang.sh;;
   *"Fedora"*) ./install_redhat_clang.sh;;
