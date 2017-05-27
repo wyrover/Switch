@@ -9,7 +9,7 @@ case "$OSTYPE" in
   *"Debian"*) ./install_debian_clang.sh;;
   *"elementary"*) ./install_elementary_os_clang.sh;;
   *"Fedora"*) ./install_fedora_clang.sh;;
-  *"Mint"*) ./install_mint_clang.sh;;
+  *"LinuxMint"*) ./install_mint_clang.sh;;
   *"RedHat"*) ./install_redhat_clang.sh;;
   *"Suze"*) ./install_suze_clang.sh;;
   *"Ubuntu"*) ./install_ubuntu_clang.sh;;
