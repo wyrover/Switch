@@ -31,6 +31,7 @@ namespace PcfFormApp {
       Form form;
       form.Controls().AddRange({checkBox1, checkBox2, checkBox3});
       form.BackColor = Color::White;
+      form.ForeColor = Color::Black;
 
       Application::Run(form);
     }
