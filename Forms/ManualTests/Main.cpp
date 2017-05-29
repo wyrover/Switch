@@ -1,9 +1,6 @@
 #include <Pcf/Startup.h>
 #include <Pcf/System/Windows/Forms/Application.h>
-#include <Pcf/System/Windows/Forms/Button.h>
 #include <Pcf/System/Windows/Forms/CheckBox.h>
-#include <Pcf/System/Windows/Forms/ProgressBar.h>
-#include <Pcf/System/Windows/Forms/RadioButton.h>
 
 using namespace System;
 using namespace System::Drawing;
@@ -42,4 +39,3 @@ namespace PcfFormApp {
 }
 
 pcf_startup(PcfFormApp::Program)
-
