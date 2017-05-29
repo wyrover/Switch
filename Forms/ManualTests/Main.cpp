@@ -31,8 +31,25 @@ namespace PcfFormApp {
       checkBox3.Location = Point(30, 90);
       checkBox3.CheckState = System::Windows::Forms::CheckState::Indeterminate;
 
+      Button button;
+      button.Text = "Click me!";
+      button.Location = Point(30, 120);
+
+      ProgressBar progressBar;
+      progressBar.Value = 80;
+      progressBar.Location = Point(30, 150);
+
+      RadioButton radio1;
+      radio1.Text = "Radio 1";
+      radio1.Location = Point(30, 180);
+      radio1.Checked = true;
+
+      RadioButton radio2;
+      radio2.Text = "Radio 2";
+      radio2.Location = Point(30, 210);
+
       Form form;
-      form.Controls().AddRange({checkBox1, checkBox2, checkBox3});
+      form.Controls().AddRange({checkBox1, checkBox2, checkBox3, button, progressBar, radio1, radio2});
       //form.BackColor = Color::White;
       //form.ForeColor = Color::Black;
 
