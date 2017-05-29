@@ -61,7 +61,8 @@ int32 DrawingApi::SystemColors::GetControlLightLight() {
 }
 
 int32 DrawingApi::SystemColors::GetControlText() {
-  return ToColor(Gtk::Button().get_style_context()->get_color()).ToArgb();
+  //return ToColor(Gtk::Button().get_style_context()->get_color()).ToArgb();
+  return ToColor(Gtk::Window().get_style_context()->get_color()).ToArgb();
 }
 
 int32 DrawingApi::SystemColors::GetDesktop() {
