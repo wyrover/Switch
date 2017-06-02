@@ -151,23 +151,23 @@ namespace {
   };
   
   TEST(Exception, Constructor) {
-    EXPECT_TRUE(is<Exception>(Exception()));
-    EXPECT_EQ(Exception().HResult(), 0);
-    EXPECT_NE(Exception().File(), pcf_current_information.FileName);
-    EXPECT_NE(Exception().Line(), pcf_current_information.Line);
-    EXPECT_FALSE(Exception().HasInnerException);
+    ASSERT_TRUE(is<Exception>(Exception()));
+    ASSERT_EQ((int32)0x80131500, Exception().HResult());
+    ASSERT_NE(pcf_current_information.FileName, Exception().File());
+    ASSERT_NE(pcf_current_information.Line, Exception().Line());
+    ASSERT_FALSE(Exception().HasInnerException);
     
-    EXPECT_TRUE(is<Exception>(Exception(pcf_current_information)));
-    EXPECT_EQ(Exception(pcf_current_information).HResult(), 0);
-    EXPECT_EQ(Exception(pcf_current_information).File(), pcf_current_information.FileName);
-    EXPECT_EQ(Exception(pcf_current_information).Line(), pcf_current_information.Line);
-    EXPECT_FALSE(Exception(pcf_current_information).HasInnerException);
+    ASSERT_TRUE(is<Exception>(Exception(pcf_current_information)));
+    ASSERT_EQ((int32)0x80131500, Exception(pcf_current_information).HResult());
+    ASSERT_EQ(pcf_current_information.FileName, Exception(pcf_current_information).File());
+    ASSERT_EQ(pcf_current_information.Line, Exception(pcf_current_information).Line());
+    ASSERT_FALSE(Exception(pcf_current_information).HasInnerException);
     
-    EXPECT_TRUE(is<Exception>(Exception("Value is invalid.", pcf_current_information)));
-    EXPECT_EQ(Exception("Value is invalid.", pcf_current_information).HResult(), 0);
-    EXPECT_EQ(Exception("Value is invalid.", pcf_current_information).File(), pcf_current_information.FileName);
-    EXPECT_EQ(Exception("Value is invalid.", pcf_current_information).Line(), pcf_current_information.Line);
-    EXPECT_FALSE(Exception("Value is invalid.", pcf_current_information).HasInnerException);
+    ASSERT_TRUE(is<Exception>(Exception("Value is invalid.", pcf_current_information)));
+    ASSERT_EQ((int32)0x80131500, Exception("Value is invalid.", pcf_current_information).HResult());
+    ASSERT_EQ(pcf_current_information.FileName, Exception("Value is invalid.", pcf_current_information).File());
+    ASSERT_EQ(pcf_current_information.Line, Exception("Value is invalid.", pcf_current_information).Line());
+    ASSERT_FALSE(Exception("Value is invalid.", pcf_current_information).HasInnerException);
   }
   
   TEST(Exception, GetStackTrace) {

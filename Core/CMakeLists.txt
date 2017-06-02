@@ -502,6 +502,7 @@ set(SOURCE_FILES
   Sources/Pcf/System/Threading/TryLockGuard.cpp
   Sources/Pcf/System/Threading/WaitHandle.cpp
   Sources/Pcf/System/Threading/Tasks/Task.cpp
+  Sources/Pcf/System/__HResults.h
   Sources/Pcf/System/ArrayAlgorithms.h
   Sources/Pcf/System/BitConverter.cpp
   Sources/Pcf/System/Boolean.cpp
@@ -528,6 +529,7 @@ set(SOURCE_FILES
   Sources/Pcf/System/Random.cpp
   Sources/Pcf/System/Runtime/Serialization/SerializationInfo.cpp
   Sources/Pcf/System/SByte.cpp
+  Sources/Pcf/System/SocketInit.h
   Sources/Pcf/System/Single.cpp
   Sources/Pcf/System/String.cpp
   Sources/Pcf/System/SystemVersion.cpp

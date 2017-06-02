@@ -21,11 +21,6 @@ namespace Pcf {
       Exception();
       
       /// @brief Create a new instance of class Exception
-      /// @param value The Excetion to copy.
-      /// @remarks Message is set with the default message associate to the error.
-      Exception(const Exception& value);
-      
-      /// @brief Create a new instance of class Exception
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #pcf_current_information.
       /// @remarks Message is set with the default message associate to the error.
       Exception(const CurrentInformation& information);
@@ -42,8 +37,18 @@ namespace Pcf {
       /// @brief Create a new instance of class Exception
       /// @param message Message string associate to the error.
       /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
+      Exception(const String& message, const Exception& innerException);
+      
+      /// @brief Create a new instance of class Exception
+      /// @param message Message string associate to the error.
+      /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #pcf_current_information.
       Exception(const String& message, const Exception& innerException, const CurrentInformation& information);
+      
+      /// @cond
+      Exception(const Exception& value);
+      const char* what() const noexcept override;
+      /// @endcond
       
       /// @brief Get File where Exception occurred
       /// @return string A string represent File where Exception occurred
@@ -120,18 +125,17 @@ namespace Pcf {
       /// @param enabled True to enable the stack trace generation.
       static void StackTraceEnabled(bool enabled) { Exception::stackTraceEnabled = enabled; }
 
-      /// @cond
-      const char* what() const noexcept override;
-      /// @endcond
-
     protected:
       /// @cond
       virtual String GetDefaultMessage() const;
       const String& GetMessage() const;
       String GetStackTrace() const;
       String GetStackTrace(const String& filter) const;
+      void SetHResult(int32 hresult) {this->hresult = hresult;}
+      void SetInnerException(ref<Exception> innerException) {this->innerException = innerException;}
       void SetStackTrace(const Exception& exception);
-      
+    
+    //private:
       String message;
       String helpLink;
       CurrentInformation currentInformation;

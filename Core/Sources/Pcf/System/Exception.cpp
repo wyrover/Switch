@@ -1,6 +1,7 @@
 #include "../../../Includes/Pcf/System/Exception.h"
 #include "../../../Includes/Pcf/System/Environment.h"
 #include "../../../Includes/Pcf/System/Diagnostics/StackTrace.h"
+#include "__HResults.h"
 
 using namespace System;
 
@@ -20,33 +21,42 @@ string Exception::GetStackTrace() const {
 }
 
 Exception::Exception() : currentInformation(pcf_current_information) {
-  SetStackTrace(*this);
+  this->SetStackTrace(*this);
+  this->SetHResult(__HResults::COR_E_EXCEPTION);
+}
+
+Exception::Exception(const CurrentInformation& information) : currentInformation(information) {
+  this->SetStackTrace(*this);
+  this->SetHResult(__HResults::COR_E_EXCEPTION);
 }
 
 Exception::Exception(const Exception& value) {
-  message = value.message;
-  helpLink = value.helpLink;
-  currentInformation = value.currentInformation;
-  innerException = value.innerException;
-  hresult = value.hresult;
-  stackTrace = value.stackTrace;
-}
-
-Exception::Exception(const CurrentInformation& information) : currentInformation(information),
-hresult(0) {
-  SetStackTrace(*this);
+  this->message = value.message;
+  this->helpLink = value.helpLink;
+  this->currentInformation = value.currentInformation;
+  this->innerException = value.innerException;
+  this->hresult = value.hresult;
+  this-> stackTrace = value.stackTrace;
 }
 
 Exception::Exception(const string& message) : message(message), currentInformation(pcf_current_information) {
-  SetStackTrace(*this);
+  this->SetStackTrace(*this);
+  this->SetHResult(__HResults::COR_E_EXCEPTION);
 }
 
 Exception::Exception(const string& message, const CurrentInformation& information) : message(message), currentInformation(information) {
-  SetStackTrace(*this);
+  this->SetStackTrace(*this);
+  this->SetHResult(__HResults::COR_E_EXCEPTION);
+}
+
+Exception::Exception(const string& message, const Exception& innerExeption) : message(message), innerException(innerExeption) {
+  this->SetStackTrace(*this);
+  this->SetHResult(__HResults::COR_E_EXCEPTION);
 }
 
 Exception::Exception(const string& message, const Exception& innerExeption, const CurrentInformation& information) : message(message), currentInformation(information), innerException(innerExeption) {
-  SetStackTrace(*this);
+  this->SetStackTrace(*this);
+  this->SetHResult(__HResults::COR_E_EXCEPTION);
 }
 
 bool Exception::Equals(const Exception& value) const {
@@ -62,10 +72,12 @@ string Exception::ToString() const {
 }
 
 Exception& Exception::operator =(const Exception& value) {
-  message = value.message;
-  currentInformation = value.currentInformation;
-  innerException = value.innerException;
-  hresult = value.hresult;
+  this->message = value.message;
+  this->helpLink = value.helpLink;
+  this->currentInformation = value.currentInformation;
+  this->innerException = value.innerException;
+  this->hresult = value.hresult;
+  this-> stackTrace = value.stackTrace;
 
   return *this;
 }
@@ -77,46 +89,46 @@ string Exception::GetDefaultMessage() const {
 void Exception::SetStackTrace(const Exception& exception) {
   if (Exception::stackTraceEnabled == false) {
     this->stackTrace = pcf_new<Array<string>>(1);
-    stackTrace()[0] = String::Format("  in {0}:{1}{2}", this->currentInformation.FileName, this->currentInformation.Line, Environment::NewLine);
+    this->stackTrace()[0] = String::Format("  in {0}:{1}{2}", this->currentInformation.FileName, this->currentInformation.Line, Environment::NewLine);
     return;
   }
   
-  Diagnostics::StackTrace st(1, true);
-  this->stackTrace = pcf_new<Array<string>>(st.FrameCount() + 1);
+  Diagnostics::StackTrace stackTrace(1, true);
+  this->stackTrace = pcf_new<Array<string>>(stackTrace.FrameCount() + 1);
 
-  if (st.FrameCount() == 0) {
+  if (stackTrace.FrameCount() == 0) {
     this->stackTrace()[0] = String::Format("  in {0}:{1}{2}", this->currentInformation.FileName, this->currentInformation.Line, Environment::NewLine);
   } else {
-    this->stackTrace()[0] = String::Format("  at {0} [0x{1:X8}] in {2}:{3}{4}", st.GetFrame(0).GetMethod(), st.GetFrame(0).GetOffset(), this->currentInformation.FileName, this->currentInformation.Line, Environment::NewLine);
-    for (int32 index = 0; index < st.FrameCount(); index++) {
-      this->stackTrace()[index + 1] = String::Format("  at {0}", st.GetFrame(index).GetMethod());
-      if (!string::IsNullOrEmpty(st.GetFrame(index).GetFileName()))
-        this->stackTrace()[index + 1] += String::Format(" [0x{0:X8}] in {1}:{2}{3}", st.GetFrame(index).GetOffset(), st.GetFrame(index).GetFileName(), st.GetFrame(index).GetFileLineNumber(), Environment::NewLine);
+    this->stackTrace()[0] = String::Format("  at {0} [0x{1:X8}] in {2}:{3}{4}", stackTrace.GetFrame(0).GetMethod(), stackTrace.GetFrame(0).GetOffset(), this->currentInformation.FileName, this->currentInformation.Line, Environment::NewLine);
+    for (int32 index = 0; index < stackTrace.FrameCount(); index++) {
+      this->stackTrace()[index + 1] = String::Format("  at {0}", stackTrace.GetFrame(index).GetMethod());
+      if (!string::IsNullOrEmpty(stackTrace.GetFrame(index).GetFileName()))
+        this->stackTrace()[index + 1] += String::Format(" [0x{0:X8}] in {1}:{2}{3}", stackTrace.GetFrame(index).GetOffset(), stackTrace.GetFrame(index).GetFileName(), stackTrace.GetFrame(index).GetFileLineNumber(), Environment::NewLine);
     }
   }
 }
 
 const char* Exception::what() const noexcept {
   this->whatMessage = this->ToString();
-  return whatMessage.c_str();
+  return this->whatMessage.c_str();
 }
 
 string Exception::GetStackTrace(const string& filter) const {
-  if (stackTrace.IsNull() || stackTrace().Length == 0)
+  if (this->stackTrace.IsNull() || this->stackTrace().Length == 0)
     return "";
 
   int32 startIndex= 0;
-  for (int32 i = 0; i < stackTrace().Length; i++) {
-    if (stackTrace()[i].Contains(filter))
+  for (int32 i = 0; i < this->stackTrace().Length; i++) {
+    if (this->stackTrace()[i].Contains(filter))
       startIndex = i+1;
   }
 
   string output;
-  for (int32 i = startIndex; i < stackTrace().Length; i++) {
+  for (int32 i = startIndex; i < this->stackTrace().Length; i++) {
     if (i == startIndex) {
-      output = string::Format("{0} in {1}:{2}{3}", stackTrace()[i].Remove(stackTrace()[i].IndexOf(" in ")), this->currentInformation.FileName, this->currentInformation.Line, Environment::NewLine);
+      output = string::Format("{0} in {1}:{2}{3}", this->stackTrace()[i].Remove(this->stackTrace()[i].IndexOf(" in ")), this->currentInformation.FileName, this->currentInformation.Line, Environment::NewLine);
     } else {
-      output += stackTrace()[i];
+      output += this->stackTrace()[i];
     }
   }
   return output;

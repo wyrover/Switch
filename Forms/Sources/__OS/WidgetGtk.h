@@ -78,6 +78,7 @@ namespace __OS {
     }
     
     int32 GdkButtonPress(GdkEvent& event) {
+      //GdkEventButton& eventButton = event
       System::Windows::Forms::Message message = System::Windows::Forms::Message::Create((intptr)this, WM_LBUTTONDOWN, 0, 0, 0, (intptr)&event);
       return this->WndProc(message);
       

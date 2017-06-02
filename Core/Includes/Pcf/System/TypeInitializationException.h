@@ -11,9 +11,23 @@ namespace Pcf {
     /// @brief The exception that is thrown as a wrapper around the exception thrown by the class initializer.
     class pcf_public TypeInitializationException : public SystemException {
     public:
-      TypeInitializationException(const System::TypeInitializationException& exception) : SystemException(exception) { this->fullTypeName = exception.fullTypeName; SetStackTrace(*this); }
-      TypeInitializationException(const String& fullTypeName, const System::Exception& innerException) : SystemException() { this->innerException = innerException; this->fullTypeName = fullTypeName; SetStackTrace(*this); }
-      TypeInitializationException(const String& fullTypeName, const System::Exception& innerException, const CurrentInformation& information) : SystemException(information) { this->innerException = innerException; this->fullTypeName = fullTypeName; SetStackTrace(*this); }
+      TypeInitializationException(const System::TypeInitializationException& exception) : SystemException(exception) {
+        this->fullTypeName = exception.fullTypeName;
+        this->SetStackTrace(*this);
+      }
+      
+      TypeInitializationException(const String& fullTypeName, ref<System::Exception> innerException) : SystemException() {
+        this->SetInnerException(innerException);
+        this->fullTypeName = fullTypeName;
+        this->SetStackTrace(*this);
+      }
+      
+      TypeInitializationException(const String& fullTypeName, ref<System::Exception> innerException, const CurrentInformation& information) : SystemException(information) {
+        this->SetInnerException(innerException);
+        this->fullTypeName = fullTypeName;
+        this->SetStackTrace(*this);
+      }
+      
     private:
       String GetDefaultMessage() const override {return String::Format("The type initializer for '{0}' threw an exception.", this->fullTypeName);}
       String fullTypeName;
