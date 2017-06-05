@@ -9,25 +9,6 @@ Thread::ThreadCollection Thread::threads;
 std::recursive_mutex Thread::mutex;
 
 void Thread::ThreadItem::RunWithOrWithoutParam(const object* obj, bool withParam) {
-  auto endThread = pcf_delegate {
-    this->state |= System::Threading::ThreadState::Stopped;
-    this->endThreadEvent.Set();
-    if (Enum<System::Threading::ThreadState>(this->state).HasFlag(System::Threading::ThreadState::Background)) {
-      if (this->thread.joinable()) {
-        this->detachedThreadId = this->thread.get_id();
-        this->thread.detach();
-      }
-      std::lock_guard<std::recursive_mutex> lock(mutex);
-      for (int i = 0; i < threads.Count; i++) {
-        if (threads[i].data->managedThreadId == this->managedThreadId) {
-          threads.RemoveAt(i);
-          break;
-        }
-      }
-    }
-  };
-
-  try {
     this->SetNameThreadForDebugger();
     if (Enum<System::Threading::ThreadState>(this->state).HasFlag(System::Threading::ThreadState::Background) && this->thread.joinable()) {
       if (this->thread.joinable()) {
@@ -41,10 +22,21 @@ void Thread::ThreadItem::RunWithOrWithoutParam(const object* obj, bool withParam
       this->parameterizedThreadStart(*obj);
     else
       this->threadStart();
-    endThread();
-  } catch(...) {
-    endThread();
-    throw;
+  
+  this->state |= System::Threading::ThreadState::Stopped;
+  this->endThreadEvent.Set();
+  if (Enum<System::Threading::ThreadState>(this->state).HasFlag(System::Threading::ThreadState::Background)) {
+    if (this->thread.joinable()) {
+      this->detachedThreadId = this->thread.get_id();
+      this->thread.detach();
+    }
+    std::lock_guard<std::recursive_mutex> lock(mutex);
+    for (int i = 0; i < threads.Count; i++) {
+      if (threads[i].data->managedThreadId == this->managedThreadId) {
+        threads.RemoveAt(i);
+        break;
+      }
+    }
   }
 }
 

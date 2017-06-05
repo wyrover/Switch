@@ -12,7 +12,7 @@ namespace Pcf {
   /// @see System::Threading::Monitor
   /// @par Examples
   /// The following code example shows how to use lock keyword.
-  /// @include ArrayGetSyncRoot.cpp
+  /// @include Lock.cpp
   /// @ingroup Pcf
   #define pcf_lock(object)\
   pcf_using (System::Threading::LockGuard __pcf_lock_guard__(object))
