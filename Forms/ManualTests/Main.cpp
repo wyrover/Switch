@@ -1,4 +1,5 @@
 #include <Pcf/Startup.h>
+#include <Pcf/System/Diagnostics/Debug.h>
 #include <Pcf/System/Windows/Forms/Application.h>
 #include <Pcf/System/Windows/Forms/CheckBox.h>
 
@@ -32,6 +33,10 @@ namespace PcfFormApp {
       form.Controls().AddRange({checkBox1, checkBox2, checkBox3});
       form.BackColor = Color::White;
       form.ForeColor = Color::Black;
+      
+      form.MouseDown += pcf_delegate(const object& sender, const MouseEventArgs& e) {
+        System::Diagnostics::Debug::WriteLine("MouseDown {0} {{{1}, {2}}}", e.Button, e.X, e.Y);
+      };
 
       Application::Run(form);
     }

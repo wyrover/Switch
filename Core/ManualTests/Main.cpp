@@ -3,7 +3,7 @@
 
 using namespace System;
 
-namespace Examples {
+namespace ManualTests {
   class Program {
   public:
     static void Main() {
@@ -12,4 +12,4 @@ namespace Examples {
   };
 }
 
-pcf_startup (Examples::Program)
+pcf_startup (ManualTests::Program)

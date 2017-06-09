@@ -70,6 +70,18 @@ namespace __OS {
     Gtk::Widget& ToWidget() override {return as<Gtk::Widget>(*this);}
     
   private:
+    static int32 GetMouseButtonState(GdkEvent& event) {
+      int32 state = 0;
+      state += (event.button.state) == GDK_CONTROL_MASK ? MK_CONTROL : 0;
+      state += event.button.button == 1 ? MK_LBUTTON : 0;
+      state += event.button.button == 2 ? MK_MBUTTON : 0;
+      state += event.button.button == 3 ? MK_RBUTTON : 0;
+      state += event.button.button == 4 ? MK_XBUTTON1 : 0;
+      state += event.button.button == 5 ? MK_XBUTTON2 : 0;
+      state += (event.button.state) == GDK_SHIFT_MASK ? MK_SHIFT : 0;
+      return state;
+    }
+
     int32 WndProc(System::Windows::Forms::Message& message) {
       ref<System::Windows::Forms::Control> control = System::Windows::Forms::Control::FromHandle(message.HWnd);
       if (control != null)
@@ -78,14 +90,23 @@ namespace __OS {
     }
     
     int32 GdkButtonPress(GdkEvent& event) {
-      //GdkEventButton& eventButton = event
-      System::Windows::Forms::Message message = System::Windows::Forms::Message::Create((intptr)this, WM_LBUTTONDOWN, 0, 0, 0, (intptr)&event);
+      int32 mouseButton = WM_LBUTTONDOWN;
+      if (event.button.button == 2) mouseButton = WM_MBUTTONDOWN;
+      if (event.button.button == 3) mouseButton = WM_RBUTTONDOWN;
+      if (event.button.button == 4) mouseButton = WM_XBUTTONDOWN;
+      if (event.button.button == 5) mouseButton = WM_XBUTTONDOWN;
+      System::Windows::Forms::Message message = System::Windows::Forms::Message::Create((intptr)this, mouseButton, GetMouseButtonState(event), ((int32)event.button.y << 16) + event.button.x, 0, (intptr)&event);
       return this->WndProc(message);
       
     }
     
     int32 GdkButtonRelease(GdkEvent& event) {
-      System::Windows::Forms::Message message = System::Windows::Forms::Message::Create((intptr)this, WM_LBUTTONUP, 0, 0, 0, (intptr)&event);
+      int32 mouseButton = WM_LBUTTONUP;
+      if (event.button.button == 2) mouseButton = WM_MBUTTONUP;
+      if (event.button.button == 3) mouseButton = WM_RBUTTONUP;
+      if (event.button.button == 4) mouseButton = WM_XBUTTONUP;
+      if (event.button.button == 5) mouseButton = WM_XBUTTONUP;
+      System::Windows::Forms::Message message = System::Windows::Forms::Message::Create((intptr)this, mouseButton, GetMouseButtonState(event), ((int32)event.button.y << 16) + event.button.x, 0, (intptr)&event);
       return this->WndProc(message);
     }
 
