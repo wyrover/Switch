@@ -40,16 +40,20 @@ namespace __OS {
     
     void RegisterEvent() {
       this->ToWidget().signal_event().connect(pcf_delegate(GdkEvent* event)->bool {
-        System::Diagnostics::Debug::WriteLine("Event : {0}, Name : {1}", EventToString(event->type), System::Windows::Forms::Control::FromHandle((intptr)this)().Name);
         System::Collections::Generic::SortedDictionary<int32, System::Delegate<int32, GdkEvent&>> events {
           {GDK_BUTTON_PRESS, {*this, &Widget::GdkButtonPress}},
           {GDK_BUTTON_RELEASE, {*this, &Widget::GdkButtonRelease}},
+          {GDK_ENTER_NOTIFY, {*this, &Widget::GdkEnterNotify}},
+          {GDK_LEAVE_NOTIFY, {*this, &Widget::GdkLeaveNotify}},
+          {GDK_MOTION_NOTIFY, {*this, &Widget::GdkMotionNotify}},
         };
         
         if (events.ContainsKey(event->type)) {
           events[event->type](*event);
           return true;
-        }
+        } else
+          System::Diagnostics::Debug::WriteLine("Event : {0}, Name : {1}", EventToString(event->type), System::Windows::Forms::Control::FromHandle((intptr)this)().Name);
+        
         return false; //this->ToWidget().event(event);
       });
     }
@@ -70,14 +74,38 @@ namespace __OS {
     Gtk::Widget& ToWidget() override {return as<Gtk::Widget>(*this);}
     
   private:
-    static int32 GetMouseButtonState(GdkEvent& event) {
+    int32 GetMouseButtonDown() const {
+      switch (this->button) {
+        case 0: throw System::Exception(pcf_current_information);
+        case 1: return WM_LBUTTONDOWN;
+        case 2 :return WM_MBUTTONDOWN;
+        case 3 :return WM_RBUTTONDOWN;
+        case 4 :return WM_XBUTTONDOWN;
+        case 5 :return WM_XBUTTONDOWN;
+        default: throw System::Exception(pcf_current_information);
+      }
+    }
+    
+    int32 GetMouseButtonUp() const {
+      switch (this->button) {
+        case 0: throw System::Exception(pcf_current_information);
+        case 1: return WM_LBUTTONUP;
+        case 2 :return WM_MBUTTONUP;
+        case 3 :return WM_RBUTTONUP;
+        case 4 :return WM_XBUTTONUP;
+        case 5 :return WM_XBUTTONUP;
+        default: throw System::Exception(pcf_current_information);
+      }
+    }
+
+    int32 GetMouseButtonState(GdkEvent& event) const {
       int32 state = 0;
       state += (event.button.state) == GDK_CONTROL_MASK ? MK_CONTROL : 0;
-      state += event.button.button == 1 ? MK_LBUTTON : 0;
-      state += event.button.button == 2 ? MK_MBUTTON : 0;
-      state += event.button.button == 3 ? MK_RBUTTON : 0;
-      state += event.button.button == 4 ? MK_XBUTTON1 : 0;
-      state += event.button.button == 5 ? MK_XBUTTON2 : 0;
+      state += this->button == 1 ? MK_LBUTTON : 0;
+      state += this->button == 2 ? MK_MBUTTON : 0;
+      state += this->button == 3 ? MK_RBUTTON : 0;
+      state += this->button == 4 ? MK_XBUTTON1 : 0;
+      state += this->button == 5 ? MK_XBUTTON2 : 0;
       state += (event.button.state) == GDK_SHIFT_MASK ? MK_SHIFT : 0;
       return state;
     }
@@ -90,23 +118,30 @@ namespace __OS {
     }
     
     int32 GdkButtonPress(GdkEvent& event) {
-      int32 mouseButton = WM_LBUTTONDOWN;
-      if (event.button.button == 2) mouseButton = WM_MBUTTONDOWN;
-      if (event.button.button == 3) mouseButton = WM_RBUTTONDOWN;
-      if (event.button.button == 4) mouseButton = WM_XBUTTONDOWN;
-      if (event.button.button == 5) mouseButton = WM_XBUTTONDOWN;
-      System::Windows::Forms::Message message = System::Windows::Forms::Message::Create((intptr)this, mouseButton, GetMouseButtonState(event), ((int32)event.button.y << 16) + event.button.x, 0, (intptr)&event);
+      this->button = event.button.button;
+      System::Windows::Forms::Message message = System::Windows::Forms::Message::Create((intptr)this, GetMouseButtonDown(), GetMouseButtonState(event), ((int32)event.button.y << 16) + event.button.x, 0, (intptr)&event);
       return this->WndProc(message);
       
     }
     
     int32 GdkButtonRelease(GdkEvent& event) {
-      int32 mouseButton = WM_LBUTTONUP;
-      if (event.button.button == 2) mouseButton = WM_MBUTTONUP;
-      if (event.button.button == 3) mouseButton = WM_RBUTTONUP;
-      if (event.button.button == 4) mouseButton = WM_XBUTTONUP;
-      if (event.button.button == 5) mouseButton = WM_XBUTTONUP;
-      System::Windows::Forms::Message message = System::Windows::Forms::Message::Create((intptr)this, mouseButton, GetMouseButtonState(event), ((int32)event.button.y << 16) + event.button.x, 0, (intptr)&event);
+      System::Windows::Forms::Message message = System::Windows::Forms::Message::Create((intptr)this, GetMouseButtonUp(), GetMouseButtonState(event), ((int32)event.button.y << 16) + event.button.x, 0, (intptr)&event);
+      this->button = 0;
+      return this->WndProc(message);
+    }
+    
+    int32 GdkEnterNotify(GdkEvent& event) {
+      System::Windows::Forms::Message message = System::Windows::Forms::Message::Create((intptr)this, WM_MOUSEENTER, notUsed, notUsed, 0, (intptr)&event);
+      return this->WndProc(message);
+    }
+    
+    int32 GdkLeaveNotify(GdkEvent& event) {
+      System::Windows::Forms::Message message = System::Windows::Forms::Message::Create((intptr)this, WM_MOUSELEAVE, notUsed, notUsed, 0, (intptr)&event);
+      return this->WndProc(message);
+    }
+    
+    int32 GdkMotionNotify(GdkEvent& event) {
+      System::Windows::Forms::Message message = System::Windows::Forms::Message::Create((intptr)this, WM_MOUSEMOVE, GetMouseButtonState(event), ((int32)event.button.y << 16) + event.button.x, 0, (intptr)&event);
       return this->WndProc(message);
     }
 
@@ -116,7 +151,10 @@ namespace __OS {
         return "<Unknown>";
       return events[event];
     };
+
+    int32 button = 0;
     Gtk::RadioButtonGroup radioButtonGroup;
+    static const int32 notUsed = 0;
   };
 }
 #endif

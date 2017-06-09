@@ -29,7 +29,7 @@ namespace {
   }*/
 
   MouseButtons MessageToMouseButtons(Message message) {
-    if (message.Msg == WM_LBUTTONDBLCLK || message.Msg == WM_LBUTTONDOWN || message.Msg == WM_RBUTTONUP)
+    if (message.Msg == WM_LBUTTONDBLCLK || message.Msg == WM_LBUTTONDOWN || message.Msg == WM_LBUTTONUP)
       return MouseButtons::Left;
     else if (message.Msg == WM_RBUTTONDBLCLK || message.Msg == WM_RBUTTONDOWN || message.Msg == WM_RBUTTONUP)
       return MouseButtons::Right;
@@ -37,6 +37,16 @@ namespace {
       return MouseButtons::Middle;
     else if (message.Msg == WM_XBUTTONDBLCLK || message.Msg == WM_XBUTTONDOWN || message.Msg == WM_XBUTTONUP)
       return (message.WParam() & MK_XBUTTON2) == MK_XBUTTON2 ? MouseButtons::XButton2 : MouseButtons::XButton1;
+    return MouseButtons::None;
+  }
+  
+  MouseButtons WParamToMouseButtons(Message message) {
+    if ((message.WParam & MK_LBUTTON) == MK_LBUTTON)
+      return MouseButtons::Left;
+    else if ((message.WParam & MK_RBUTTON) == MK_RBUTTON)
+      return MouseButtons::Right;
+    else if ((message.WParam & MK_MBUTTON) == MK_MBUTTON)
+      return MouseButtons::Middle;
     return MouseButtons::None;
   }
 
@@ -394,7 +404,7 @@ void Control::WmMouseMove(Message& message) {
   }
   //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::MouseWindowMessage, "Control::WmMouseMove message=" + message + ", name=" + this->name);
   this->DefWndProc(message);
-  this->OnMouseMove(MouseEventArgs(MouseButtons::None, MakePoint(message.LParam()), 0, 0));
+  this->OnMouseMove(MouseEventArgs(WParamToMouseButtons(message), MakePoint(message.LParam()), 0, 0));
 }
 
 void Control::WmMouseUp(Message& message) {

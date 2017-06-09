@@ -34,8 +34,24 @@ namespace PcfFormApp {
       form.BackColor = Color::White;
       form.ForeColor = Color::Black;
       
+      form.MouseEnter += pcf_delegate(const object& sender, const EventArgs& e) {
+        System::Diagnostics::Debug::WriteLine("MouseEnter");
+      };
+      
       form.MouseDown += pcf_delegate(const object& sender, const MouseEventArgs& e) {
         System::Diagnostics::Debug::WriteLine("MouseDown {0} {{{1}, {2}}}", e.Button, e.X, e.Y);
+      };
+      
+      form.MouseUp += pcf_delegate(const object& sender, const MouseEventArgs& e) {
+        System::Diagnostics::Debug::WriteLine("MouseUp {0} {{{1}, {2}}}", e.Button, e.X, e.Y);
+      };
+      
+      form.MouseMove += pcf_delegate(const object& sender, const MouseEventArgs& e) {
+        System::Diagnostics::Debug::WriteLine("MouseMove {0} {{{1}, {2}}}", e.Button, e.X, e.Y);
+      };
+      
+      form.MouseLeave += pcf_delegate(const object& sender, const EventArgs& e) {
+        System::Diagnostics::Debug::WriteLine("MouseLeave");
       };
 
       Application::Run(form);
