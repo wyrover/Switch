@@ -372,15 +372,16 @@ void Control::WmMouseDown(Message& message) {
 }
 
 void Control::WmMouseEnter(Message& message) {
-  if (controlEntered && is<Form>(controlEntered)) {
-    Message messageMouseLeave = Message::Create(controlEntered().Handle, WM_MOUSELEAVE, message.WParam, message.LParam, 0);
-    controlEntered().WmMouseLeave(messageMouseLeave);
+  if (controlEntered != *this) {
+    if (controlEntered) {
+      Message messageMouseLeave = Message::Create(controlEntered().Handle, WM_MOUSELEAVE, message.WParam, message.LParam, 0);
+      controlEntered().WmMouseLeave(messageMouseLeave);
+    }
+    //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::MouseWindowMessage, "Control::WmMouseEnter message=" + message + ", name=" + this->name);
+    controlEntered = *this;
+    this->DefWndProc(message);
+    this->OnMouseEnter(EventArgs::Empty);
   }
-  //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::MouseWindowMessage, "Control::WmMouseEnter message=" + message + ", name=" + this->name);
-  this->SetState(State::MouseEntered, true);
-  controlEntered = *this;
-  this->DefWndProc(message);
-  this->OnMouseEnter(EventArgs::Empty);
 }
 
 void Control::WmMouseHover(Message& message) {
@@ -390,15 +391,15 @@ void Control::WmMouseHover(Message& message) {
 }
 
 void Control::WmMouseLeave(Message& message) {
-  //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::MouseWindowMessage, "Control::WmMouseLeave message=" + message + ", name=" + this->name);
-  this->SetState(State::MouseEntered, false);
-  controlEntered = null;
-  this->DefWndProc(message);
-  this->OnMouseLeave(EventArgs::Empty);
+   //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::MouseWindowMessage, "Control::WmMouseLeave message=" + message + ", name=" + this->name);
+   this->SetState(State::MouseEntered, false);
+   controlEntered = null;
+   this->DefWndProc(message);
+   this->OnMouseLeave(EventArgs::Empty);
 }
 
 void Control::WmMouseMove(Message& message) {
-  if (!this->GetState(State::MouseEntered)) {
+  if (controlEntered != *this) {
     Message messageMouseEnter = Message::Create(message.HWnd, WM_MOUSEENTER, message.WParam, message.LParam, 0);
     this->WmMouseEnter(messageMouseEnter);
   }

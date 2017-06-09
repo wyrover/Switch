@@ -30,6 +30,7 @@ namespace PcfFormApp {
       checkBox3.CheckState = System::Windows::Forms::CheckState::Indeterminate;
 
       Form form;
+      form.Text = "Form1";
       form.Controls().AddRange({checkBox1, checkBox2, checkBox3});
       form.BackColor = Color::White;
       form.ForeColor = Color::Black;
