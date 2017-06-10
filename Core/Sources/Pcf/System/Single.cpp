@@ -1,10 +1,10 @@
 #include <limits>
-#include "../../../Includes/Pcf/System/Single.h"
-#include "../../../Includes/Pcf/System/Convert.h"
-#include "../../../Includes/Pcf/System/DivideByZeroException.h"
-#include "../../../Includes/Pcf/System/Math.h"
-#include "../../../Includes/Pcf/System/SystemException.h"
-#include "../../../Includes/Pcf/System/NumericalFormat.h"
+#include "../../../Includes/Pcf/System/Single.hpp"
+#include "../../../Includes/Pcf/System/Convert.hpp"
+#include "../../../Includes/Pcf/System/DivideByZeroException.hpp"
+#include "../../../Includes/Pcf/System/Math.hpp"
+#include "../../../Includes/Pcf/System/SystemException.hpp"
+#include "../../../Includes/Pcf/System/NumericalFormat.hpp"
 
 using namespace System;
 

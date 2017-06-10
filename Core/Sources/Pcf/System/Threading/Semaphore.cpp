@@ -1,5 +1,5 @@
-#include "../../../../Includes/Pcf/System/Threading/Semaphore.h"
-#include "NamedHandleCollection.h"
+#include "../../../../Includes/Pcf/System/Threading/Semaphore.hpp"
+#include "NamedHandleCollection.hpp"
 
 using namespace System;
 using namespace System::Threading;

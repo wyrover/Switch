@@ -1,9 +1,9 @@
-#include "../../../../Includes/Pcf/System/Threading/WaitHandle.h"
-#include "../../../../Includes/Pcf/System/Threading/Thread.h"
-#include "../../../../Includes/Pcf/System/Diagnostics/Stopwatch.h"
-#include "../../../../Includes/Pcf/System/Array.h"
-#include "../../../../Includes/Pcf/System/Boolean.h"
-#include "../../../../Includes/Pcf/System/DateTime.h"
+#include "../../../../Includes/Pcf/System/Threading/WaitHandle.hpp"
+#include "../../../../Includes/Pcf/System/Threading/Thread.hpp"
+#include "../../../../Includes/Pcf/System/Diagnostics/Stopwatch.hpp"
+#include "../../../../Includes/Pcf/System/Array.hpp"
+#include "../../../../Includes/Pcf/System/Boolean.hpp"
+#include "../../../../Includes/Pcf/System/DateTime.hpp"
 
 using namespace System;
 using namespace System::Diagnostics;

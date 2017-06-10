@@ -1,5 +1,5 @@
-#include "../../../../../Includes/Pcf/System/Drawing/Text/FontCollection.h"
-#include "../../../../__OS/DrawingApi.h"
+#include "../../../../../Includes/Pcf/System/Drawing/Text/FontCollection.hpp"
+#include "../../../../__OS/DrawingApi.hpp"
 
 System::Drawing::Text::FontCollection::FontCollection() : families(__OS::DrawingApi::FontFamily::GetInstalledFontFamilies()) {
 }

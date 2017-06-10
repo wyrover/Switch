@@ -2,7 +2,7 @@
 #include <stack>
 #include <vector>
 
-#include "CoreApi.h"
+#include "CoreApi.hpp"
 
 bool __OS::CoreApi::UnicodeCharacters::ValidateCodePoint(uint32 codePoint) {
   if (codePoint > 0x0010FFFFu) return false;

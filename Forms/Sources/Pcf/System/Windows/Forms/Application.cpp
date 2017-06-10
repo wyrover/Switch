@@ -1,5 +1,5 @@
-#include "../../../../__OS/FormsApi.h"
-#include "../../../../../Includes/Pcf/System/Windows/Forms/Application.h"
+#include "../../../../__OS/FormsApi.hpp"
+#include "../../../../../Includes/Pcf/System/Windows/Forms/Application.hpp"
 
 using namespace System;
 using namespace System::Windows::Forms;

@@ -1,12 +1,12 @@
 #include <cstring>
 
-#include "../../../../Includes/Pcf/System/Net/IPAddress.h"
-#include "../../../../Includes/Pcf/RefPtr.h"
-#include "../../../../Includes/Pcf/Using.h"
-#include "../../../../Includes/Pcf/System/Array.h"
-#include "../../../../Includes/Pcf/System/BitConverter.h"
-#include "../../../../Includes/Pcf/System/Buffer.h"
-#include "../../../../Includes/Pcf/System/Net/Sockets/SocketException.h"
+#include "../../../../Includes/Pcf/System/Net/IPAddress.hpp"
+#include "../../../../Includes/Pcf/RefPtr.hpp"
+#include "../../../../Includes/Pcf/Using.hpp"
+#include "../../../../Includes/Pcf/System/Array.hpp"
+#include "../../../../Includes/Pcf/System/BitConverter.hpp"
+#include "../../../../Includes/Pcf/System/Buffer.hpp"
+#include "../../../../Includes/Pcf/System/Net/Sockets/SocketException.hpp"
 
 using namespace System;
 using namespace System::Net;

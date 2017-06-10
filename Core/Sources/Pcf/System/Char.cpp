@@ -2,13 +2,13 @@
 #include <cwchar>
 #include <cwctype>
 
-#include "../../../Includes/Pcf/System/Char.h"
-#include "../../../Includes/Pcf/System/Byte.h"
-#include "../../../Includes/Pcf/System/DateTime.h"
-#include "../../../Includes/Pcf/System/InvalidCastException.h"
-#include "../../../Includes/Pcf/System/OverflowException.h"
-#include "../../../Includes/Pcf/System/SByte.h"
-#include "../../__OS/CoreApi.h"
+#include "../../../Includes/Pcf/System/Char.hpp"
+#include "../../../Includes/Pcf/System/Byte.hpp"
+#include "../../../Includes/Pcf/System/DateTime.hpp"
+#include "../../../Includes/Pcf/System/InvalidCastException.hpp"
+#include "../../../Includes/Pcf/System/OverflowException.hpp"
+#include "../../../Includes/Pcf/System/SByte.hpp"
+#include "../../__OS/CoreApi.hpp"
 
 using namespace System;
 

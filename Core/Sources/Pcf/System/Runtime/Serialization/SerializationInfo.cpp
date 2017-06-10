@@ -1,7 +1,7 @@
-#include "../../../../../Includes/Pcf/System/Runtime/Serialization/SerializationInfo.h"
-#include "../../../../../Includes/Pcf/System/Convert.h"
-#include "../../../../../Includes/Pcf/System/SystemException.h"
-#include "../../../../../Includes/Pcf/System/Runtime/Serialization/ISerializable.h"
+#include "../../../../../Includes/Pcf/System/Runtime/Serialization/SerializationInfo.hpp"
+#include "../../../../../Includes/Pcf/System/Convert.hpp"
+#include "../../../../../Includes/Pcf/System/SystemException.hpp"
+#include "../../../../../Includes/Pcf/System/Runtime/Serialization/ISerializable.hpp"
 
 using namespace System;
 using namespace System::Runtime::Serialization;

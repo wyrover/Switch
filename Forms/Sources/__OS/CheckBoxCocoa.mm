@@ -1,6 +1,6 @@
 #if defined(__APPLE__) && defined(__use_native_interface__)
-#include "WidgetCocoa.h"
-#include "WindowProcedureCocoa.h"
+#include "WidgetCocoa.hpp"
+#include "WindowProcedureCocoa.hpp"
 
 
 using namespace System;

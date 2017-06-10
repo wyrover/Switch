@@ -2,7 +2,7 @@
 
 #include <cstdlib>
 
-#include "CoreApi.h"
+#include "CoreApi.hpp"
 
 const char *__OS::CoreApi::Registry::GetDefaultString() {
   return "Default";

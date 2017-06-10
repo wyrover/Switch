@@ -1,8 +1,8 @@
-#include "../../../Includes/Pcf/System/_ustring.h"
-#include "../../../Includes/Pcf/System/Array.h"
-#include "../../../Includes/Pcf/System/ArgumentNullException.h"
-#include "../../../Includes/Pcf/System/ArgumentOutOfRangeException.h"
-#include "../../__OS/CoreApi.h"
+#include "../../../Includes/Pcf/System/_ustring.hpp"
+#include "../../../Includes/Pcf/System/Array.hpp"
+#include "../../../Includes/Pcf/System/ArgumentNullException.hpp"
+#include "../../../Includes/Pcf/System/ArgumentOutOfRangeException.hpp"
+#include "../../__OS/CoreApi.hpp"
 
 namespace std {
   size_t ustring::npos = std::string::npos;

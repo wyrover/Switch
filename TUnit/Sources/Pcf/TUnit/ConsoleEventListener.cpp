@@ -1,7 +1,7 @@
-#include "ConsoleEventListener.h"
-#include <Pcf/System/Console.h>
-#include <Pcf/System/Environment.h>
-#include <Pcf/System/String.h>
+#include "ConsoleEventListener.hpp"
+#include <Pcf/System/Console.hpp>
+#include <Pcf/System/Environment.hpp>
+#include <Pcf/System/String.hpp>
 
 using namespace TUnit;
 using namespace System;

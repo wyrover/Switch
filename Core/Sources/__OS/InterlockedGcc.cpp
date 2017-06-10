@@ -1,6 +1,6 @@
 #if defined(__linux__) || defined(__APPLE__)
 
-#include "CoreApi.h"
+#include "CoreApi.hpp"
 
 int32 __OS::CoreApi::Interlocked::Add(int32& location, int32 value) {
   __sync_fetch_and_add(&location, value);

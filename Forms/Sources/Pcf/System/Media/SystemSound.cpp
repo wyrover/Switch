@@ -1,5 +1,5 @@
-#include "../../../../Includes/Pcf/System/Media/SystemSound.h"
-#include "../../../__OS/FormsApi.h"
+#include "../../../../Includes/Pcf/System/Media/SystemSound.hpp"
+#include "../../../__OS/FormsApi.hpp"
 
 using namespace System::Media;
 

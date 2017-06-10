@@ -1,6 +1,6 @@
-#include <Pcf/TUnit/Assert.h>
-#include <Pcf/TUnit/TestFixture.h>
-#include <Pcf/System/Windows/Forms/Control.h>
+#include <Pcf/TUnit/Assert.hpp>
+#include <Pcf/TUnit/TestFixture.hpp>
+#include <Pcf/System/Windows/Forms/Control.hpp>
 
 using namespace System;
 using namespace System::Drawing;

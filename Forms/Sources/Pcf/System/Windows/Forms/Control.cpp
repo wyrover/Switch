@@ -1,11 +1,11 @@
-#include <Pcf/System/BitConverter.h>
-#include <Pcf/System/Diagnostics/Debug.h>
-#include <Pcf/System/Drawing/Graphics.h>
-#include <Pcf/System/Drawing/SolidBrush.h>
-#include "../../../../../Includes/Pcf/System/Windows/Forms/Application.h"
-#include "../../../../../Includes/Pcf/System/Windows/Forms/Control.h"
-#include "../../../../../Includes/Pcf/System/Windows/Forms/Form.h"
-#include "../../../../__OS/FormsApi.h"
+#include <Pcf/System/BitConverter.hpp>
+#include <Pcf/System/Diagnostics/Debug.hpp>
+#include <Pcf/System/Drawing/Graphics.hpp>
+#include <Pcf/System/Drawing/SolidBrush.hpp>
+#include "../../../../../Includes/Pcf/System/Windows/Forms/Application.hpp"
+#include "../../../../../Includes/Pcf/System/Windows/Forms/Control.hpp"
+#include "../../../../../Includes/Pcf/System/Windows/Forms/Form.hpp"
+#include "../../../../__OS/FormsApi.hpp"
 
 using namespace System;
 using namespace System::Drawing;

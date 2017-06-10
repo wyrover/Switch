@@ -1,6 +1,6 @@
 #if defined(__use_fltk_interface__)
-#include "FormsApi.h"
-#include <Pcf/System/IO/Path.h>
+#include "FormsApi.hpp"
+#include <Pcf/System/IO/Path.hpp>
 
 #include <FL/Fl.H>
 #include <FL/fl_ask.H>
@@ -9,12 +9,12 @@
 #include <FL/Fl_Pixmap.H>
 #include <FL/Fl_Return_Button.H>
 
-#include <Pcf/Undef.h>
+#include <Pcf/Undef.hpp>
 
-#include "Exclamation.h"
-#include "Information.h"
-#include "Question.h"
-#include "Stop.h"
+#include "Exclamation.hpp"
+#include "Information.hpp"
+#include "Question.hpp"
+#include "Stop.hpp"
 
 using namespace System;
 using namespace System::Windows::Forms;

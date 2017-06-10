@@ -1,7 +1,7 @@
-#include "../../../../Includes/Pcf/System/Net/HttpWebResponse.h"
-#include "../../../../Includes/Pcf/System/Convert.h"
-#include "../../../../Includes/Pcf/System/Net/HttpWebRequest.h"
-#include "../../../../Includes/Pcf/System/Net/WebRequestMethods.h"
+#include "../../../../Includes/Pcf/System/Net/HttpWebResponse.hpp"
+#include "../../../../Includes/Pcf/System/Convert.hpp"
+#include "../../../../Includes/Pcf/System/Net/HttpWebRequest.hpp"
+#include "../../../../Includes/Pcf/System/Net/WebRequestMethods.hpp"
 
 using namespace System;
 using namespace System::Collections::Generic;

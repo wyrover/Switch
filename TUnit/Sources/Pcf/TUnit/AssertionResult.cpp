@@ -1,5 +1,5 @@
-#include <Pcf/System/Array.h>
-#include "../../../Includes/Pcf/TUnit/AssertionResult.h"
+#include <Pcf/System/Array.hpp>
+#include "../../../Includes/Pcf/TUnit/AssertionResult.hpp"
 
 using namespace System;
 

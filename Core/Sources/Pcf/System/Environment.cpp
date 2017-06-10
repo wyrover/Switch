@@ -4,19 +4,19 @@
 #include <cstring>
 #include <thread>
 
-#include "SocketInit.h"
+#include "SocketInit.hpp"
 
-#include "../../../Includes/Pcf/System/AccessViolationException.h"
-#include "../../../Includes/Pcf/System/Console.h"
-#include "../../../Includes/Pcf/System/Environment.h"
-#include "../../../Includes/Pcf/System/SystemVersion.h"
-#include "../../../Includes/Pcf/System/IO/Directory.h"
-#include "../../../Includes/Pcf/System/IO/DirectoryNotFoundException.h"
-#include "../../../Includes/Pcf/System/Diagnostics/StackTrace.h"
-#include "../../../Includes/Pcf/System/SystemException.h"
-#include "../../../Includes/Pcf/System/Threading/Thread.h"
-#include "../../../Includes/Pcf/System/Threading/AbandonedMutexException.h"
-#include "../../__OS/CoreApi.h"
+#include "../../../Includes/Pcf/System/AccessViolationException.hpp"
+#include "../../../Includes/Pcf/System/Console.hpp"
+#include "../../../Includes/Pcf/System/Environment.hpp"
+#include "../../../Includes/Pcf/System/SystemVersion.hpp"
+#include "../../../Includes/Pcf/System/IO/Directory.hpp"
+#include "../../../Includes/Pcf/System/IO/DirectoryNotFoundException.hpp"
+#include "../../../Includes/Pcf/System/Diagnostics/StackTrace.hpp"
+#include "../../../Includes/Pcf/System/SystemException.hpp"
+#include "../../../Includes/Pcf/System/Threading/Thread.hpp"
+#include "../../../Includes/Pcf/System/Threading/AbandonedMutexException.hpp"
+#include "../../__OS/CoreApi.hpp"
 
 using namespace System;
 using namespace System::Collections::Generic;

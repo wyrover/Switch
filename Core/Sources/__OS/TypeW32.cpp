@@ -1,6 +1,6 @@
 #if defined(_WIN32)
 
-#include "CoreApi.h"
+#include "CoreApi.hpp"
 
 string __OS::CoreApi::Type::Demangle(const string &name) {
   System::Array<string> types = {"enum ", "class ", "union ", "struct "};

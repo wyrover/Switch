@@ -4,9 +4,9 @@
 #include <ctime>
 
 #include <sys/timeb.h>
-#include "../../Includes/Pcf/Undef.h"
+#include "../../Includes/Pcf/Undef.hpp"
 
-#include "CoreApi.h"
+#include "CoreApi.hpp"
 
 int32 __OS::CoreApi::DateTime::Ftime(int64& seconds, int32& milliseconds, int32& timeZone, bool& daylight) {
   struct timeb value;

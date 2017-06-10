@@ -1,4 +1,4 @@
-#include "CoreApi.h"
+#include "CoreApi.hpp"
 
 namespace {
   string EncryptDecryptString(const string& value) {

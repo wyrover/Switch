@@ -4,7 +4,7 @@
 #include <gtkmm/application.h>
 #include <gtkmm/messagedialog.h>
 #include <gtkmm/window.h>
-#include "WidgetGtk.h"
+#include "WidgetGtk.hpp"
 
 using namespace System;
 using namespace System::Drawing;

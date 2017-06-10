@@ -1,7 +1,7 @@
-#include <Pcf/System/Collections/Generic/List.h>
-#include "../../../../Includes/Pcf/System/Drawing/FontFamily.h"
-#include "../../../../Includes/Pcf/System/Drawing/Text/InstalledFontCollection.h"
-#include "../../../__OS/DrawingApi.h"
+#include <Pcf/System/Collections/Generic/List.hpp>
+#include "../../../../Includes/Pcf/System/Drawing/FontFamily.hpp"
+#include "../../../../Includes/Pcf/System/Drawing/Text/InstalledFontCollection.hpp"
+#include "../../../__OS/DrawingApi.hpp"
 
 namespace {
   const string genericFontFamilySerifName = "Times New Roman";

@@ -1,4 +1,4 @@
-#include "CoreApi.h"
+#include "CoreApi.hpp"
 
 const string& __OS::CoreApi::Format::Integer() {
 #if defined(__linux__)

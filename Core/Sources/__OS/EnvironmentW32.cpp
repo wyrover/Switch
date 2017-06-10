@@ -3,11 +3,11 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
-#include <rpc.h>
-#include <Windows.h>
-#include "../../Includes/Pcf/Undef.h"
+#include <rpc.hpp>
+#include <Windows.hpp>
+#include "../../Includes/Pcf/Undef.hpp"
 
-#include "CoreApi.h"
+#include "CoreApi.hpp"
 
 static string CreateProcess(const string& command) {
   FILE* fs = _popen(command.Data(), "r");

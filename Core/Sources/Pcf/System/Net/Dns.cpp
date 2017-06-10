@@ -1,5 +1,5 @@
-#include "../../../../Includes/Pcf/System/Net/Dns.h"
-#include "../../../__OS/CoreApi.h"
+#include "../../../../Includes/Pcf/System/Net/Dns.hpp"
+#include "../../../__OS/CoreApi.hpp"
 
 using namespace System::Net;
 using namespace System::Net::Sockets;

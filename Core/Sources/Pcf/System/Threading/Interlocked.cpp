@@ -1,6 +1,6 @@
-#include "../../../../Includes/Pcf/System/Array.h"
-#include "../../../../Includes/Pcf/System/Threading/Interlocked.h"
-#include "../../../__OS/CoreApi.h"
+#include "../../../../Includes/Pcf/System/Array.hpp"
+#include "../../../../Includes/Pcf/System/Threading/Interlocked.hpp"
+#include "../../../__OS/CoreApi.hpp"
 
 using namespace System;
 using namespace System::Threading;

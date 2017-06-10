@@ -4,10 +4,10 @@
 #include <unistd.h>
 #include <sys/stat.h>
 
-#include "../../Includes/Pcf/System/Collections/Generic/SortedDictionary.h"
-#include "../../Includes/Pcf/System/IO/FileAttributes.h"
-#include "../../Includes/Pcf/System/Environment.h"
-#include "CoreApi.h"
+#include "../../Includes/Pcf/System/Collections/Generic/SortedDictionary.hpp"
+#include "../../Includes/Pcf/System/IO/FileAttributes.hpp"
+#include "../../Includes/Pcf/System/Environment.hpp"
+#include "CoreApi.hpp"
 
 namespace {
   class Enumerator : public System::Collections::Generic::IEnumerator<string> {

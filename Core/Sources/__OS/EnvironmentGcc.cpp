@@ -8,7 +8,7 @@
 #include <uuid/uuid.h>
 #include <sys/time.h>
 
-#include "CoreApi.h"
+#include "CoreApi.hpp"
 
 namespace {
   static string CreateProcess(const string& command) {

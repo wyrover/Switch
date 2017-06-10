@@ -1,5 +1,5 @@
 #if defined(__use_fltk_interface__)
-#include "WindowProcedureFltk.h"
+#include "WindowProcedureFltk.hpp"
 
 using namespace System;
 using namespace System::Drawing;

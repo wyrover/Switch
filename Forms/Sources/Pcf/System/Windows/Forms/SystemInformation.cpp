@@ -1,5 +1,5 @@
-#include "../../../../../Includes/Pcf/System/Windows/Forms/SystemInformation.h"
-#include "../../../../__OS/FormsApi.h"
+#include "../../../../../Includes/Pcf/System/Windows/Forms/SystemInformation.hpp"
+#include "../../../../__OS/FormsApi.hpp"
 
 using namespace System;
 using namespace System::Drawing;

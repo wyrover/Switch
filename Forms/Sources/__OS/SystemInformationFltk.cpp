@@ -1,5 +1,5 @@
 #if defined(__use_fltk_interface__)
-#include "FormsApi.h"
+#include "FormsApi.hpp"
 
 using namespace System;
 using namespace System::Windows::Forms;

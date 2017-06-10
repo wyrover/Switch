@@ -1,5 +1,5 @@
-#if defined(__linux__) && defined(__use_native_interface__)
-#include "DrawingApi.h"
+#if (defined(__linux__) && defined(__use_native_interface__)) || defined(__use_gtk_interface__)
+#include "DrawingApi.hpp"
 
 #include <gtkmm.h>
 

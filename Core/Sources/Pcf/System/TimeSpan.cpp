@@ -1,13 +1,13 @@
-#include "../../../Includes/Pcf/System/TimeSpan.h"
-#include "../../../Includes/Pcf/System/Array.h"
-#include "../../../Includes/Pcf/System/Convert.h"
-#include "../../../Includes/Pcf/System/Int32.h"
-#include "../../../Includes/Pcf/System/Int64.h"
-#include "../../../Includes/Pcf/System/Math.h"
-#include "../../../Includes/Pcf/System/String.h"
-#include "../../../Includes/Pcf/System/StringSplitOptions.h"
-#include "../../../Includes/Pcf/System/SystemException.h"
-#include "../../../Includes/Pcf/Boxing.h"
+#include "../../../Includes/Pcf/System/TimeSpan.hpp"
+#include "../../../Includes/Pcf/System/Array.hpp"
+#include "../../../Includes/Pcf/System/Convert.hpp"
+#include "../../../Includes/Pcf/System/Int32.hpp"
+#include "../../../Includes/Pcf/System/Int64.hpp"
+#include "../../../Includes/Pcf/System/Math.hpp"
+#include "../../../Includes/Pcf/System/String.hpp"
+#include "../../../Includes/Pcf/System/StringSplitOptions.hpp"
+#include "../../../Includes/Pcf/System/SystemException.hpp"
+#include "../../../Includes/Pcf/Boxing.hpp"
 
 using namespace System;
 

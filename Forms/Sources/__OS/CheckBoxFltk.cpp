@@ -1,5 +1,5 @@
 #if defined(__use_fltk_interface__)
-#include "WidgetFltk.h"
+#include "WidgetFltk.hpp"
 
 #include <FL/Fl_Check_Button.H>
 

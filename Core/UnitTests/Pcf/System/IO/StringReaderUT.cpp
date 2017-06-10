@@ -1,7 +1,7 @@
-#include <Pcf/System/IO/StringReader.h>
-#include <Pcf/System/ObjectClosedException.h>
-#include <Pcf/TUnit/Assert.h>
-#include <Pcf/TUnit/TestFixture.h>
+#include <Pcf/System/IO/StringReader.hpp>
+#include <Pcf/System/ObjectClosedException.hpp>
+#include <Pcf/TUnit/Assert.hpp>
+#include <Pcf/TUnit/TestFixture.hpp>
 
 using namespace System;
 using namespace System::IO;

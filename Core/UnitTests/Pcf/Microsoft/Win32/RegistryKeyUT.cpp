@@ -1,6 +1,6 @@
-#include <Pcf/Microsoft/Win32/Registry.h>
-#include <Pcf/TUnit/Assert.h>
-#include <Pcf/TUnit/TestFixture.h>
+#include <Pcf/Microsoft/Win32/Registry.hpp>
+#include <Pcf/TUnit/Assert.hpp>
+#include <Pcf/TUnit/TestFixture.hpp>
 
 using namespace System;
 using namespace Microsoft::Win32;

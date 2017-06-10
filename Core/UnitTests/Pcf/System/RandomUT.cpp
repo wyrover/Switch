@@ -1,7 +1,7 @@
-#include <Pcf/System/Random.h>
-#include <Pcf/System/Collections/Generic/List.h>
-#include <Pcf/TUnit/Assert.h>
-#include <Pcf/TUnit/TestFixture.h>
+#include <Pcf/System/Random.hpp>
+#include <Pcf/System/Collections/Generic/List.hpp>
+#include <Pcf/TUnit/Assert.hpp>
+#include <Pcf/TUnit/TestFixture.hpp>
 
 using namespace System;
 using namespace TUnit;

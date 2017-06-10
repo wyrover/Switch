@@ -1,9 +1,9 @@
-#include "../../../Includes/Pcf/System/UIntPtr.h"
-#include "../../../Includes/Pcf/System/Array.h"
-#include "../../../Includes/Pcf/System/Int32.h"
-#include "../../../Includes/Pcf/System/OverflowException.h"
-#include "../../../Includes/Pcf/System/UInt32.h"
-#include "../../../Includes/Pcf/System/UInt64.h"
+#include "../../../Includes/Pcf/System/UIntPtr.hpp"
+#include "../../../Includes/Pcf/System/Array.hpp"
+#include "../../../Includes/Pcf/System/Int32.hpp"
+#include "../../../Includes/Pcf/System/OverflowException.hpp"
+#include "../../../Includes/Pcf/System/UInt32.hpp"
+#include "../../../Includes/Pcf/System/UInt64.hpp"
 
 using namespace System;
 

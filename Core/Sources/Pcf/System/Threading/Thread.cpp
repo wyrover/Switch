@@ -1,6 +1,6 @@
-#include "../../../../Includes/Pcf/System/Threading/Thread.h"
-#include "../../../../Includes/Pcf/System/Environment.h"
-#include "../../../__OS/CoreApi.h"
+#include "../../../../Includes/Pcf/System/Threading/Thread.hpp"
+#include "../../../../Includes/Pcf/System/Environment.hpp"
+#include "../../../__OS/CoreApi.hpp"
 
 using namespace System;
 using namespace System::Threading;

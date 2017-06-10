@@ -2,7 +2,7 @@
 
 #include <gtkmm/progressbar.h>
 
-#include "WidgetGtk.h"
+#include "WidgetGtk.hpp"
 
 using namespace System;
 using namespace System::Drawing;

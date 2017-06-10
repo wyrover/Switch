@@ -11,9 +11,9 @@
 #include <sys/socket.h>
 #include <sys/ioctl.h>
 
-#include "CoreApi.h"
-#include "../../Includes/Pcf/System/BitConverter.h"
-#include "../../Includes/Pcf/System/Diagnostics/Debug.h"
+#include "CoreApi.hpp"
+#include "../../Includes/Pcf/System/BitConverter.hpp"
+#include "../../Includes/Pcf/System/Diagnostics/Debug.hpp"
 
 namespace {
   static int32 ProtocolTypeToNative(System::Net::Sockets::ProtocolType protocolType) {

@@ -1,7 +1,7 @@
-﻿#include <Pcf/System/Drawing/Size.h>
-#include <Pcf/System/Drawing/Point.h>
-#include <Pcf/TUnit/Assert.h>
-#include <Pcf/TUnit/TestFixture.h>
+﻿#include <Pcf/System/Drawing/Size.hpp>
+#include <Pcf/System/Drawing/Point.hpp>
+#include <Pcf/TUnit/Assert.hpp>
+#include <Pcf/TUnit/TestFixture.hpp>
 
 using namespace System;
 using namespace TUnit;

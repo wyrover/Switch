@@ -1,9 +1,9 @@
 #if defined(_WIN32)
 
-#include "../../../../Includes/Pcf/Microsoft/Win32/Registry.h"
-#include "../../../../Includes/Pcf/Microsoft/Win32/RegistryKey.h"
-#include "../../../../Includes/Pcf/System/IO/IOException.h"
-#include "../../../__OS/CoreApi.h"
+#include "../../../../Includes/Pcf/Microsoft/Win32/Registry.hpp"
+#include "../../../../Includes/Pcf/Microsoft/Win32/RegistryKey.hpp"
+#include "../../../../Includes/Pcf/System/IO/IOException.hpp"
+#include "../../../__OS/CoreApi.hpp"
 
 using namespace System;
 using namespace Microsoft::Win32;

@@ -1,9 +1,9 @@
 #if defined(__use_fltk_interface__)
-#include "WidgetFltk.h"
+#include "WidgetFltk.hpp"
 
 #include <FL/Fl_Group.H>
 
-#include <Pcf/Undef.h>
+#include <Pcf/Undef.hpp>
 
 using namespace System;
 using namespace System::Drawing;

@@ -4,8 +4,8 @@
 #include <gtkmm/scrolledwindow.h>
 #include <gtkmm/window.h>
 
-#include "WidgetGtk.h"
-#include <Pcf/System/Random.h>
+#include "WidgetGtk.hpp"
+#include <Pcf/System/Random.hpp>
 
 using namespace System;
 using namespace System::Drawing;

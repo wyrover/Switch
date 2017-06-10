@@ -2,15 +2,15 @@
 #pragma GCC diagnostic ignored "-Wsign-compare"
 #endif
 
-#include <Pcf/System/Int16.h>
-#include <Pcf/System/Int32.h>
-#include <Pcf/System/Int64.h>
-#include <Pcf/System/UInt16.h>
-#include <Pcf/System/UInt32.h>
-#include <Pcf/System/UInt64.h>
-#include <Pcf/TUnit/Assert.h>
-#include <Pcf/TUnit/Expect.h>
-#include <Pcf/TUnit/TestFixture.h>
+#include <Pcf/System/Int16.hpp>
+#include <Pcf/System/Int32.hpp>
+#include <Pcf/System/Int64.hpp>
+#include <Pcf/System/UInt16.hpp>
+#include <Pcf/System/UInt32.hpp>
+#include <Pcf/System/UInt64.hpp>
+#include <Pcf/TUnit/Assert.hpp>
+#include <Pcf/TUnit/Expect.hpp>
+#include <Pcf/TUnit/TestFixture.hpp>
 
 using namespace System;
 using namespace TUnit;

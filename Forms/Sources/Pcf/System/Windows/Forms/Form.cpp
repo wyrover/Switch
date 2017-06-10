@@ -1,9 +1,9 @@
-#include "../../../../../Includes/Pcf/System/Windows/Forms/Application.h"
-#include "../../../../../Includes/Pcf/System/Windows/Forms/Form.h"
-#include "../../../../__OS/FormsApi.h"
+#include "../../../../../Includes/Pcf/System/Windows/Forms/Application.hpp"
+#include "../../../../../Includes/Pcf/System/Windows/Forms/Form.hpp"
+#include "../../../../__OS/FormsApi.hpp"
 
-#include <Pcf/System/EventArgs.h>
-#include <Pcf/System/Drawing/SystemColors.h>
+#include <Pcf/System/EventArgs.hpp>
+#include <Pcf/System/Drawing/SystemColors.hpp>
 
 using namespace System;
 using namespace System::ComponentModel;

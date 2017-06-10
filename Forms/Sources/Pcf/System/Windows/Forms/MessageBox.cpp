@@ -1,6 +1,6 @@
-#include "../../../../../Includes/Pcf/System/Windows/Forms/MessageBox.h"
-#include "../../../../../Includes/Pcf/System/Media/SystemSounds.h"
-#include "../../../../__OS/FormsApi.h"
+#include "../../../../../Includes/Pcf/System/Windows/Forms/MessageBox.hpp"
+#include "../../../../../Includes/Pcf/System/Media/SystemSounds.hpp"
+#include "../../../../__OS/FormsApi.hpp"
 
 using namespace System;
 using namespace System::Windows::Forms;

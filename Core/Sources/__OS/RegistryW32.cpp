@@ -1,11 +1,11 @@
 #if defined(_WIN32)
 
-#include <windows.h>
-#include "../../Includes/Pcf/Undef.h"
+#include <windows.hpp>
+#include "../../Includes/Pcf/Undef.hpp"
 
 #include <cstdlib>
 
-#include "CoreApi.h"
+#include "CoreApi.hpp"
 
 const char *__OS::CoreApi::Registry::GetDefaultString() {
   return "";

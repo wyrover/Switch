@@ -4,9 +4,9 @@
 #include <sys/wait.h>
 #include <signal.h>
 #include <unistd.h>
-#include "CoreApi.h"
-#include "../../Includes/Pcf/System/IO/Path.h"
-#include "../../Includes/Pcf/System/Threading/Thread.h"
+#include "CoreApi.hpp"
+#include "../../Includes/Pcf/System/IO/Path.hpp"
+#include "../../Includes/Pcf/System/Threading/Thread.hpp"
 
 #if defined(__APPLE__)
 #include <libproc.h>

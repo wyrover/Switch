@@ -1,5 +1,5 @@
-#include "../../../../Includes/Pcf/System/Diagnostics/DefaultTraceListener.h"
-#include "../../../__OS/CoreApi.h"
+#include "../../../../Includes/Pcf/System/Diagnostics/DefaultTraceListener.hpp"
+#include "../../../__OS/CoreApi.hpp"
 
 using namespace System::Diagnostics;
 

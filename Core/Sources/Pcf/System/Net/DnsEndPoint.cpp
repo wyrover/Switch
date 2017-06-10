@@ -1,7 +1,7 @@
-#include "../../../../Includes/Pcf/System/Net/DnsEndPoint.h"
-#include "../../../../Includes/Pcf/System/Net/Dns.h"
-#include "../../../../Includes/Pcf/System/Net/IPEndPoint.h"
-#include "../../../../Includes/Pcf/System/Net/IPHostEntry.h"
+#include "../../../../Includes/Pcf/System/Net/DnsEndPoint.hpp"
+#include "../../../../Includes/Pcf/System/Net/Dns.hpp"
+#include "../../../../Includes/Pcf/System/Net/IPEndPoint.hpp"
+#include "../../../../Includes/Pcf/System/Net/IPHostEntry.hpp"
 
 using namespace System;
 using namespace System::Net;

@@ -1,10 +1,10 @@
 #if defined(_WIN32)
 
-#include <Windows.h>
-#include <tlhelp32.h>
-#include "../../Includes/Pcf/Undef.h"
+#include <Windows.hpp>
+#include <tlhelp32.hpp>
+#include "../../Includes/Pcf/Undef.hpp"
 
-#include "CoreApi.h"
+#include "CoreApi.hpp"
 
 intptr __OS::CoreApi::Process::Start(const System::Diagnostics::ProcessStartInfo& processStartInfo) {
   System::Array<string> variables(processStartInfo.EnvironmentVariables().Count + 1);

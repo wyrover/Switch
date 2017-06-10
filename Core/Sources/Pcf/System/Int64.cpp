@@ -1,9 +1,9 @@
 #include <limits>
-#include "../../../Includes/Pcf/System/Int64.h"
-#include "../../../Includes/Pcf/System/Convert.h"
-#include "../../../Includes/Pcf/System/DivideByZeroException.h"
-#include "../../../Includes/Pcf/System/NumericalFormat.h"
-#include "../../../Includes/Pcf/System/NumericalParsing.h"
+#include "../../../Includes/Pcf/System/Int64.hpp"
+#include "../../../Includes/Pcf/System/Convert.hpp"
+#include "../../../Includes/Pcf/System/DivideByZeroException.hpp"
+#include "../../../Includes/Pcf/System/NumericalFormat.hpp"
+#include "../../../Includes/Pcf/System/NumericalParsing.hpp"
 
 using namespace System;
 

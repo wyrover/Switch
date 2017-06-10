@@ -1,18 +1,18 @@
-#include <Pcf/Lock.h>
-#include <Pcf/System/Collections/Concurrent/ConcurrentBag.h>
-#include <Pcf/System/Collections/Concurrent/ConcurrentQueue.h>
-#include <Pcf/System/Collections/Concurrent/ConcurrentStack.h>
-#include <Pcf/System/Collections/Generic/Dictionary.h>
-#include <Pcf/System/Collections/Generic/HashSet.h>
-#include <Pcf/System/Collections/Generic/LinkedList.h>
-#include <Pcf/System/Collections/Generic/List.h>
-#include <Pcf/System/Collections/Generic/Queue.h>
-#include <Pcf/System/Collections/Generic/SortedDictionary.h>
-#include <Pcf/System/Collections/Generic/SortedSet.h>
-#include <Pcf/System/Collections/Generic/Stack.h>
-#include <Pcf/System/Collections/BitArray.h>
-#include <Pcf/TUnit/Assert.h>
-#include <Pcf/TUnit/TestFixture.h>
+#include <Pcf/Lock.hpp>
+#include <Pcf/System/Collections/Concurrent/ConcurrentBag.hpp>
+#include <Pcf/System/Collections/Concurrent/ConcurrentQueue.hpp>
+#include <Pcf/System/Collections/Concurrent/ConcurrentStack.hpp>
+#include <Pcf/System/Collections/Generic/Dictionary.hpp>
+#include <Pcf/System/Collections/Generic/HashSet.hpp>
+#include <Pcf/System/Collections/Generic/LinkedList.hpp>
+#include <Pcf/System/Collections/Generic/List.hpp>
+#include <Pcf/System/Collections/Generic/Queue.hpp>
+#include <Pcf/System/Collections/Generic/SortedDictionary.hpp>
+#include <Pcf/System/Collections/Generic/SortedSet.hpp>
+#include <Pcf/System/Collections/Generic/Stack.hpp>
+#include <Pcf/System/Collections/BitArray.hpp>
+#include <Pcf/TUnit/Assert.hpp>
+#include <Pcf/TUnit/TestFixture.hpp>
 
 using namespace System;
 using namespace System::Collections;

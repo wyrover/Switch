@@ -2,8 +2,8 @@
 #include <cstdlib>
 #include <ctime>
 
-#include "../../../../Includes/Pcf/System/Diagnostics/ProcessStartInfo.h"
-#include "../../../__OS/CoreApi.h"
+#include "../../../../Includes/Pcf/System/Diagnostics/ProcessStartInfo.hpp"
+#include "../../../__OS/CoreApi.hpp"
 
 using namespace System;
 using namespace System::Diagnostics;

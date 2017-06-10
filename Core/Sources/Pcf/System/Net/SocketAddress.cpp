@@ -1,8 +1,8 @@
-#include "../../../../Includes/Pcf/System/Net/IPAddress.h"
-#include "../../../../Includes/Pcf/System/Net/SocketAddress.h"
-#include "../../../../Includes/Pcf/System/BitConverter.h"
-#include "../../../../Includes/Pcf/System/Convert.h"
-#include "../../../__OS/CoreApi.h"
+#include "../../../../Includes/Pcf/System/Net/IPAddress.hpp"
+#include "../../../../Includes/Pcf/System/Net/SocketAddress.hpp"
+#include "../../../../Includes/Pcf/System/BitConverter.hpp"
+#include "../../../../Includes/Pcf/System/Convert.hpp"
+#include "../../../__OS/CoreApi.hpp"
 
 using namespace System;
 using namespace System::Net;

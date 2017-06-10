@@ -2,7 +2,7 @@
 
 #include <syslog.h>
 
-#include "CoreApi.h"
+#include "CoreApi.hpp"
 
 namespace {
   int32 LevelToNative(int32 level) {

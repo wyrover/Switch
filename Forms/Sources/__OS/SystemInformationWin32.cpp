@@ -1,11 +1,11 @@
 ﻿#if defined(_WIN32) && defined(__use_native_interface__)
 
-#include <Windows.h>
-#include <Windowsx.h>
-#include <Uxtheme.h>
-#include <Pcf/Undef.h>
+#include <Windows.hpp>
+#include <Windowsx.hpp>
+#include <Uxtheme.hpp>
+#include <Pcf/Undef.hpp>
 
-#include "FormsApi.h"
+#include "FormsApi.hpp"
 
 using namespace System;
 using namespace System::Drawing;

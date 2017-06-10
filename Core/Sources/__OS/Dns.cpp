@@ -1,7 +1,7 @@
 #if defined(_WIN32)
-#include <winsock2.h>
-#include <ws2tcpip.h>
-#include "../../Includes/Pcf/Undef.h"
+#include <winsock2.hpp>
+#include <ws2tcpip.hpp>
+#include "../../Includes/Pcf/Undef.hpp"
 #else
 #include <netdb.h>
 #include <unistd.h>
@@ -9,7 +9,7 @@
 #include <netinet/in.h>
 #include <sys/socket.h>
 #endif
-#include "CoreApi.h"
+#include "CoreApi.hpp"
 
 namespace {
   std::mutex mutex;

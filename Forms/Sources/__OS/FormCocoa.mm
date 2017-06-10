@@ -1,6 +1,6 @@
 #if defined(__APPLE__) && defined(__use_native_interface__)
-#include "WindowProcedureCocoa.h"
-#include <Pcf/System/Random.h>
+#include "WindowProcedureCocoa.hpp"
+#include <Pcf/System/Random.hpp>
 
 using namespace System;
 using namespace System::Collections::Generic;

@@ -1,407 +1,407 @@
 set(INCLUDE_FILES
-  Includes/Pcf/Microsoft/Win32/Registry.h
-  Includes/Pcf/Microsoft/Win32/RegistryKey.h
-  Includes/Pcf/Microsoft/Win32/RegistryKeyPermissionCheck.h
-  Includes/Pcf/Microsoft/Win32/RegistryHive.h
-  Includes/Pcf/Microsoft/Win32/RegistryOptions.h
-  Includes/Pcf/Microsoft/Win32/RegistryValueKind.h
-  Includes/Pcf/Microsoft/Win32/RegistryValueOptions.h
-  Includes/Pcf/System/Collections/Concurrent/ConcurrentBag.h
-  Includes/Pcf/System/Collections/Concurrent/ConcurrentQueue.h
-  Includes/Pcf/System/Collections/Concurrent/ConcurrentStack.h
-  Includes/Pcf/System/Collections/Concurrent/IProducerConsumerCollection.h
-  Includes/Pcf/System/Collections/Generic/Comparer.h
-  Includes/Pcf/System/Collections/Generic/Dictionary.h
-  Includes/Pcf/System/Collections/Generic/GenericException.h
-  Includes/Pcf/System/Collections/Generic/HashSet.h
-  Includes/Pcf/System/Collections/Generic/ICollection.h
-  Includes/Pcf/System/Collections/Generic/IComparer.h
-  Includes/Pcf/System/Collections/Generic/IDictionary.h
-  Includes/Pcf/System/Collections/Generic/IEnumerable.h
-  Includes/Pcf/System/Collections/Generic/IEnumerator.h
-  Includes/Pcf/System/Collections/Generic/IList.h
-  Includes/Pcf/System/Collections/Generic/ISet.h
-  Includes/Pcf/System/Collections/Generic/KeyValuePair.h
-  Includes/Pcf/System/Collections/Generic/LinkedList.h
-  Includes/Pcf/System/Collections/Generic/List.h
-  Includes/Pcf/System/Collections/Generic/Queue.h
-  Includes/Pcf/System/Collections/Generic/SortedDictionary.h
-  Includes/Pcf/System/Collections/Generic/SortedSet.h
-  Includes/Pcf/System/Collections/Generic/Stack.h
-  Includes/Pcf/System/Collections/ObjectModel/Collection.h
-  Includes/Pcf/System/Collections/ObjectModel/ReadOnlyCollection.h
-  Includes/Pcf/System/Collections/Specialized/StringCollection.h
-  Includes/Pcf/System/Collections/Specialized/StringDictionary.h
-  Includes/Pcf/System/Collections/Specialized/StringEnumerator.h
-  Includes/Pcf/System/Collections/ArrayList.h
-  Includes/Pcf/System/Collections/BitArray.h
-  Includes/Pcf/System/Collections/Comparer.h
-  Includes/Pcf/System/Collections/DictionaryEntry.h
-  Includes/Pcf/System/Collections/Hashtable.h
-  Includes/Pcf/System/Collections/ICollection.h
-  Includes/Pcf/System/Collections/IComparer.h
-  Includes/Pcf/System/Collections/IDictionary.h
-  Includes/Pcf/System/Collections/IEnumerable.h
-  Includes/Pcf/System/Collections/IEnumerator.h
-  Includes/Pcf/System/Collections/IList.h
-  Includes/Pcf/System/Collections/Queue.h
-  Includes/Pcf/System/Collections/Stack.h
-  Includes/Pcf/System/ComponentModel/InvalidEnumArgumentException.h
-  Includes/Pcf/System/Diagnostics/ConsoleTraceListener.h
-  Includes/Pcf/System/Diagnostics/Debug.h
-  Includes/Pcf/System/Diagnostics/DefaultTraceListener.h
-  Includes/Pcf/System/Diagnostics/NullTraceListener.h
-  Includes/Pcf/System/Diagnostics/Process.h
-  Includes/Pcf/System/Diagnostics/ProcessStartInfo.h
-  Includes/Pcf/System/Diagnostics/ProcessWindowStyle.h
-  Includes/Pcf/System/Diagnostics/StackFrame.h
-  Includes/Pcf/System/Diagnostics/StackTrace.h
-  Includes/Pcf/System/Diagnostics/Stopwatch.h
-  Includes/Pcf/System/Diagnostics/TextWriterTraceListener.h
-  Includes/Pcf/System/Diagnostics/Trace.h
-  Includes/Pcf/System/Diagnostics/TraceEventCache.h
-  Includes/Pcf/System/Diagnostics/TraceEventType.h
-  Includes/Pcf/System/Diagnostics/TraceFilter.h
-  Includes/Pcf/System/Diagnostics/TraceListener.h
-  Includes/Pcf/System/Diagnostics/TraceListenerCollection.h
-  Includes/Pcf/System/Diagnostics/TraceOptions.h
-  Includes/Pcf/System/Diagnostics/TraceSource.h
-  Includes/Pcf/System/Globalization/NumberStyles.h
-  Includes/Pcf/System/IO/Ports/Handshake.h
-  Includes/Pcf/System/IO/Ports/Parity.h
-  Includes/Pcf/System/IO/Ports/SerialData.h
-  Includes/Pcf/System/IO/Ports/SerialError.h
-  Includes/Pcf/System/IO/Ports/SerialPinChange.h
-  Includes/Pcf/System/IO/Ports/SerialPort.h
-  Includes/Pcf/System/IO/Ports/StopBits.h
-  Includes/Pcf/System/IO/Ports/SerialDataReceivedEventArgs.h
-  Includes/Pcf/System/IO/Ports/SerialErrorReceivedEventArgs.h
-  Includes/Pcf/System/IO/Ports/SerialPinChangedEventArgs.h
-  Includes/Pcf/System/IO/Ports/SerialDataReceivedEventHandler.h
-  Includes/Pcf/System/IO/Ports/SerialErrorReceivedEventHandler.h
-  Includes/Pcf/System/IO/Ports/SerialPinChangedEventHandler.h
-  Includes/Pcf/System/IO/BinaryReader.h
-  Includes/Pcf/System/IO/BinaryWriter.h
-  Includes/Pcf/System/IO/Compression.h
-  Includes/Pcf/System/IO/Directory.h
-  Includes/Pcf/System/IO/DirectoryInfo.h
-  Includes/Pcf/System/IO/DirectoryNotFoundException.h
-  Includes/Pcf/System/IO/DriveInfo.h
-  Includes/Pcf/System/IO/DriveNotFoundException.h
-  Includes/Pcf/System/IO/DriveType.h
-  Includes/Pcf/System/IO/EndOfStreamException.h
-  Includes/Pcf/System/IO/ErrorEventArgs.h
-  Includes/Pcf/System/IO/File.h
-  Includes/Pcf/System/IO/FileAccess.h
-  Includes/Pcf/System/IO/FileAttributes.h
-  Includes/Pcf/System/IO/FileFormatException.h
-  Includes/Pcf/System/IO/FileInfo.h
-  Includes/Pcf/System/IO/FileLoadException.h
-  Includes/Pcf/System/IO/FileNotFoundException.h
-  Includes/Pcf/System/IO/FileMode.h
-  Includes/Pcf/System/IO/FileShare.h
-  Includes/Pcf/System/IO/FileStream.h
-  Includes/Pcf/System/IO/FileSystemEventArgs.h
-  Includes/Pcf/System/IO/FileSystemInfo.h
-  Includes/Pcf/System/IO/InternalBufferOverflowException.h
-  Includes/Pcf/System/IO/InvalidDataException.h
-  Includes/Pcf/System/IO/IOException.h
-  Includes/Pcf/System/IO/IsolatedStorage.h
-  Includes/Pcf/System/IO/MemoryStream.h
-  Includes/Pcf/System/IO/Path.h
-  Includes/Pcf/System/IO/PathTooLongException.h  Includes/Pcf/System/IO/Pipes.h
-  Includes/Pcf/System/IO/PipeException.h
-  Includes/Pcf/System/IO/SeekOrigin.h
-  Includes/Pcf/System/IO/Stream.h
-  Includes/Pcf/System/IO/StreamReader.h
-  Includes/Pcf/System/IO/StreamWriter.h
-  Includes/Pcf/System/IO/StringReader.h
-  Includes/Pcf/System/IO/StringWriter.h
-  Includes/Pcf/System/IO/TextReader.h
-  Includes/Pcf/System/IO/TextWriter.h
-  Includes/Pcf/System/IO/WatcherChangeTypes.h
-  Includes/Pcf/System/Linq/Enumerable.h
-  Includes/Pcf/System/Net/Sockets/AddressFamily.h
-  Includes/Pcf/System/Net/Sockets/IOControlCode.h
-  Includes/Pcf/System/Net/Sockets/IPv6MulticastOption.h
-  Includes/Pcf/System/Net/Sockets/LingerOption.h
-  Includes/Pcf/System/Net/Sockets/MulticastOption.h
-  Includes/Pcf/System/Net/Sockets/NetworkStream.h
-  Includes/Pcf/System/Net/Sockets/ProtocolFamily.h
-  Includes/Pcf/System/Net/Sockets/ProtocolType.h
-  Includes/Pcf/System/Net/Sockets/SelectMode.h
-  Includes/Pcf/System/Net/Sockets/Socket.h
-  Includes/Pcf/System/Net/Sockets/SocketError.h
-  Includes/Pcf/System/Net/Sockets/SocketFlags.h
-  Includes/Pcf/System/Net/Sockets/SocketInformation.h
-  Includes/Pcf/System/Net/Sockets/SocketInformationOptions.h
-  Includes/Pcf/System/Net/Sockets/SocketOptionLevel.h
-  Includes/Pcf/System/Net/Sockets/SocketOptionName.h
-  Includes/Pcf/System/Net/Sockets/SocketShutdown.h
-  Includes/Pcf/System/Net/Sockets/SocketException.h
-  Includes/Pcf/System/Net/Sockets/SocketType.h
-  Includes/Pcf/System/Net/Sockets/UdpClient.h
-  Includes/Pcf/System/Net/Sockets/TcpClient.h
-  Includes/Pcf/System/Net/Sockets/TcpListener.h
-  Includes/Pcf/System/Net/WebSockets/ClientWebSocket.h
-  Includes/Pcf/System/Net/WebSockets/WebSocket.h
-  Includes/Pcf/System/Net/WebSockets/WebSocketCloseStatus.h
-  Includes/Pcf/System/Net/WebSockets/WebSocketMessageType.h
-  Includes/Pcf/System/Net/WebSockets/WebSocketState.h
-  Includes/Pcf/System/Net/CookieException.h
-  Includes/Pcf/System/Net/Dns.h
-  Includes/Pcf/System/Net/DnsEndPoint.h
-  Includes/Pcf/System/Net/EndPoint.h
-  Includes/Pcf/System/Net/IPAddress.h
-  Includes/Pcf/System/Net/IPEndPoint.h
-  Includes/Pcf/System/Net/IPHostEntry.h
-  Includes/Pcf/System/Net/HttpListenerException.h
-  Includes/Pcf/System/Net/HttpStatusCode.h
-  Includes/Pcf/System/Net/HttpWebRequest.h
-  Includes/Pcf/System/Net/HttpWebResponse.h
-  Includes/Pcf/System/Net/FtpStatusCode.h
-  Includes/Pcf/System/Net/FtpWebRequest.h
-  Includes/Pcf/System/Net/FtpWebResponse.h
-  Includes/Pcf/System/Net/NetworkCredential.h
-  Includes/Pcf/System/Net/ProtocolViolationException.h
-  Includes/Pcf/System/Net/SocketAddress.h
-  Includes/Pcf/System/Net/WebException.h
-  Includes/Pcf/System/Net/WebRequest.h
-  Includes/Pcf/System/Net/WebRequestMethods.h
-  Includes/Pcf/System/Net/WebResponse.h
-  Includes/Pcf/System/Runtime/Serialization/Formatter.h
-  Includes/Pcf/System/Runtime/Serialization/IFormatter.h
-  Includes/Pcf/System/Runtime/Serialization/ISerializable.h
-  Includes/Pcf/System/Runtime/Serialization/SerializationException.h
-  Includes/Pcf/System/Runtime/Serialization/SerializationEntry.h
-  Includes/Pcf/System/Runtime/Serialization/SerializationInfo.h
-  Includes/Pcf/System/Security/HostProtectionException.h
-  Includes/Pcf/System/Security/SecureString.h
-  Includes/Pcf/System/Security/SecurityException.h
-  Includes/Pcf/System/Security/VerificationException.h
-  Includes/Pcf/System/Security/XmlSyntaxException.h
-  Includes/Pcf/System/Text/ASCIIEncoding.h
-  Includes/Pcf/System/Text/Decoder.h
-  Includes/Pcf/System/Text/Encoder.h
-  Includes/Pcf/System/Text/Encoding.h
-  Includes/Pcf/System/Text/ANSIEncoding.h
-  Includes/Pcf/System/Text/StringBuilder.h
-  Includes/Pcf/System/Text/UnicodeEncoding.h
-  Includes/Pcf/System/Text/UTF8Encoding.h
-  Includes/Pcf/System/Text/UTF32Encoding.h
-  Includes/Pcf/System/Threading/AbandonedMutexException.h
-  Includes/Pcf/System/Threading/AutoResetEvent.h
-  Includes/Pcf/System/Threading/Barrier.h
-  Includes/Pcf/System/Threading/BarrierPostPhaseException.h
-  Includes/Pcf/System/Threading/EventResetMode.h
-  Includes/Pcf/System/Threading/EventWaitHandle.h
-  Includes/Pcf/System/Threading/Interlocked.h
-  Includes/Pcf/System/Threading/LockGuard.h
-  Includes/Pcf/System/Threading/LockRecursionException.h
-  Includes/Pcf/System/Threading/ManualResetEvent.h
-  Includes/Pcf/System/Threading/Monitor.h
-  Includes/Pcf/System/Threading/Mutex.h
-  Includes/Pcf/System/Threading/ParameterizedThreadStart.h
-  Includes/Pcf/System/Threading/RegisteredWaitHandle.h
-  Includes/Pcf/System/Threading/Semaphore.h
-  Includes/Pcf/System/Threading/SemaphoreFullException.h
-  Includes/Pcf/System/Threading/SynchronizationLockException.h
-  Includes/Pcf/System/Threading/Thread.h
-  Includes/Pcf/System/Threading/ThreadLocal.h
-  Includes/Pcf/System/Threading/ThreadAbortException.h
-  Includes/Pcf/System/Threading/ThreadInterruptedException.h
-  Includes/Pcf/System/Threading/ThreadPool.h
-  Includes/Pcf/System/Threading/ThreadPriority.h
-  Includes/Pcf/System/Threading/ThreadStart.h
-  Includes/Pcf/System/Threading/ThreadStartException.h
-  Includes/Pcf/System/Threading/ThreadState.h
-  Includes/Pcf/System/Threading/ThreadStateException.h
-  Includes/Pcf/System/Threading/TimeOut.h
-  Includes/Pcf/System/Threading/TimerCallback.h
-  Includes/Pcf/System/Threading/Timer.h
-  Includes/Pcf/System/Threading/TryLockGuard.h
-  Includes/Pcf/System/Threading/WaitHandle.h
-  Includes/Pcf/System/Threading/WaitHandleCannotBeOpenedException.h
-  Includes/Pcf/System/Threading/Tasks/ITask.h
-  Includes/Pcf/System/Threading/Tasks/Parallel.h
-  Includes/Pcf/System/Threading/Tasks/Task.h
-  Includes/Pcf/System/Threading/Tasks/TaskFactory.h
-  Includes/Pcf/System/Threading/Tasks/TaskStatus.h
-  Includes/Pcf/System/Threading/Tasks/TaskTResult.h
-  Includes/Pcf/System/_String.h
+  Includes/Pcf/Microsoft/Win32/Registry.hpp
+  Includes/Pcf/Microsoft/Win32/RegistryKey.hpp
+  Includes/Pcf/Microsoft/Win32/RegistryKeyPermissionCheck.hpp
+  Includes/Pcf/Microsoft/Win32/RegistryHive.hpp
+  Includes/Pcf/Microsoft/Win32/RegistryOptions.hpp
+  Includes/Pcf/Microsoft/Win32/RegistryValueKind.hpp
+  Includes/Pcf/Microsoft/Win32/RegistryValueOptions.hpp
+  Includes/Pcf/System/Collections/Concurrent/ConcurrentBag.hpp
+  Includes/Pcf/System/Collections/Concurrent/ConcurrentQueue.hpp
+  Includes/Pcf/System/Collections/Concurrent/ConcurrentStack.hpp
+  Includes/Pcf/System/Collections/Concurrent/IProducerConsumerCollection.hpp
+  Includes/Pcf/System/Collections/Generic/Comparer.hpp
+  Includes/Pcf/System/Collections/Generic/Dictionary.hpp
+  Includes/Pcf/System/Collections/Generic/GenericException.hpp
+  Includes/Pcf/System/Collections/Generic/HashSet.hpp
+  Includes/Pcf/System/Collections/Generic/ICollection.hpp
+  Includes/Pcf/System/Collections/Generic/IComparer.hpp
+  Includes/Pcf/System/Collections/Generic/IDictionary.hpp
+  Includes/Pcf/System/Collections/Generic/IEnumerable.hpp
+  Includes/Pcf/System/Collections/Generic/IEnumerator.hpp
+  Includes/Pcf/System/Collections/Generic/IList.hpp
+  Includes/Pcf/System/Collections/Generic/ISet.hpp
+  Includes/Pcf/System/Collections/Generic/KeyValuePair.hpp
+  Includes/Pcf/System/Collections/Generic/LinkedList.hpp
+  Includes/Pcf/System/Collections/Generic/List.hpp
+  Includes/Pcf/System/Collections/Generic/Queue.hpp
+  Includes/Pcf/System/Collections/Generic/SortedDictionary.hpp
+  Includes/Pcf/System/Collections/Generic/SortedSet.hpp
+  Includes/Pcf/System/Collections/Generic/Stack.hpp
+  Includes/Pcf/System/Collections/ObjectModel/Collection.hpp
+  Includes/Pcf/System/Collections/ObjectModel/ReadOnlyCollection.hpp
+  Includes/Pcf/System/Collections/Specialized/StringCollection.hpp
+  Includes/Pcf/System/Collections/Specialized/StringDictionary.hpp
+  Includes/Pcf/System/Collections/Specialized/StringEnumerator.hpp
+  Includes/Pcf/System/Collections/ArrayList.hpp
+  Includes/Pcf/System/Collections/BitArray.hpp
+  Includes/Pcf/System/Collections/Comparer.hpp
+  Includes/Pcf/System/Collections/DictionaryEntry.hpp
+  Includes/Pcf/System/Collections/Hashtable.hpp
+  Includes/Pcf/System/Collections/ICollection.hpp
+  Includes/Pcf/System/Collections/IComparer.hpp
+  Includes/Pcf/System/Collections/IDictionary.hpp
+  Includes/Pcf/System/Collections/IEnumerable.hpp
+  Includes/Pcf/System/Collections/IEnumerator.hpp
+  Includes/Pcf/System/Collections/IList.hpp
+  Includes/Pcf/System/Collections/Queue.hpp
+  Includes/Pcf/System/Collections/Stack.hpp
+  Includes/Pcf/System/ComponentModel/InvalidEnumArgumentException.hpp
+  Includes/Pcf/System/Diagnostics/ConsoleTraceListener.hpp
+  Includes/Pcf/System/Diagnostics/Debug.hpp
+  Includes/Pcf/System/Diagnostics/DefaultTraceListener.hpp
+  Includes/Pcf/System/Diagnostics/NullTraceListener.hpp
+  Includes/Pcf/System/Diagnostics/Process.hpp
+  Includes/Pcf/System/Diagnostics/ProcessStartInfo.hpp
+  Includes/Pcf/System/Diagnostics/ProcessWindowStyle.hpp
+  Includes/Pcf/System/Diagnostics/StackFrame.hpp
+  Includes/Pcf/System/Diagnostics/StackTrace.hpp
+  Includes/Pcf/System/Diagnostics/Stopwatch.hpp
+  Includes/Pcf/System/Diagnostics/TextWriterTraceListener.hpp
+  Includes/Pcf/System/Diagnostics/Trace.hpp
+  Includes/Pcf/System/Diagnostics/TraceEventCache.hpp
+  Includes/Pcf/System/Diagnostics/TraceEventType.hpp
+  Includes/Pcf/System/Diagnostics/TraceFilter.hpp
+  Includes/Pcf/System/Diagnostics/TraceListener.hpp
+  Includes/Pcf/System/Diagnostics/TraceListenerCollection.hpp
+  Includes/Pcf/System/Diagnostics/TraceOptions.hpp
+  Includes/Pcf/System/Diagnostics/TraceSource.hpp
+  Includes/Pcf/System/Globalization/NumberStyles.hpp
+  Includes/Pcf/System/IO/Ports/Handshake.hpp
+  Includes/Pcf/System/IO/Ports/Parity.hpp
+  Includes/Pcf/System/IO/Ports/SerialData.hpp
+  Includes/Pcf/System/IO/Ports/SerialError.hpp
+  Includes/Pcf/System/IO/Ports/SerialPinChange.hpp
+  Includes/Pcf/System/IO/Ports/SerialPort.hpp
+  Includes/Pcf/System/IO/Ports/StopBits.hpp
+  Includes/Pcf/System/IO/Ports/SerialDataReceivedEventArgs.hpp
+  Includes/Pcf/System/IO/Ports/SerialErrorReceivedEventArgs.hpp
+  Includes/Pcf/System/IO/Ports/SerialPinChangedEventArgs.hpp
+  Includes/Pcf/System/IO/Ports/SerialDataReceivedEventHandler.hpp
+  Includes/Pcf/System/IO/Ports/SerialErrorReceivedEventHandler.hpp
+  Includes/Pcf/System/IO/Ports/SerialPinChangedEventHandler.hpp
+  Includes/Pcf/System/IO/BinaryReader.hpp
+  Includes/Pcf/System/IO/BinaryWriter.hpp
+  Includes/Pcf/System/IO/Compression.hpp
+  Includes/Pcf/System/IO/Directory.hpp
+  Includes/Pcf/System/IO/DirectoryInfo.hpp
+  Includes/Pcf/System/IO/DirectoryNotFoundException.hpp
+  Includes/Pcf/System/IO/DriveInfo.hpp
+  Includes/Pcf/System/IO/DriveNotFoundException.hpp
+  Includes/Pcf/System/IO/DriveType.hpp
+  Includes/Pcf/System/IO/EndOfStreamException.hpp
+  Includes/Pcf/System/IO/ErrorEventArgs.hpp
+  Includes/Pcf/System/IO/File.hpp
+  Includes/Pcf/System/IO/FileAccess.hpp
+  Includes/Pcf/System/IO/FileAttributes.hpp
+  Includes/Pcf/System/IO/FileFormatException.hpp
+  Includes/Pcf/System/IO/FileInfo.hpp
+  Includes/Pcf/System/IO/FileLoadException.hpp
+  Includes/Pcf/System/IO/FileNotFoundException.hpp
+  Includes/Pcf/System/IO/FileMode.hpp
+  Includes/Pcf/System/IO/FileShare.hpp
+  Includes/Pcf/System/IO/FileStream.hpp
+  Includes/Pcf/System/IO/FileSystemEventArgs.hpp
+  Includes/Pcf/System/IO/FileSystemInfo.hpp
+  Includes/Pcf/System/IO/InternalBufferOverflowException.hpp
+  Includes/Pcf/System/IO/InvalidDataException.hpp
+  Includes/Pcf/System/IO/IOException.hpp
+  Includes/Pcf/System/IO/IsolatedStorage.hpp
+  Includes/Pcf/System/IO/MemoryStream.hpp
+  Includes/Pcf/System/IO/Path.hpp
+  Includes/Pcf/System/IO/PathTooLongException.hpp  Includes/Pcf/System/IO/Pipes.hpp
+  Includes/Pcf/System/IO/PipeException.hpp
+  Includes/Pcf/System/IO/SeekOrigin.hpp
+  Includes/Pcf/System/IO/Stream.hpp
+  Includes/Pcf/System/IO/StreamReader.hpp
+  Includes/Pcf/System/IO/StreamWriter.hpp
+  Includes/Pcf/System/IO/StringReader.hpp
+  Includes/Pcf/System/IO/StringWriter.hpp
+  Includes/Pcf/System/IO/TextReader.hpp
+  Includes/Pcf/System/IO/TextWriter.hpp
+  Includes/Pcf/System/IO/WatcherChangeTypes.hpp
+  Includes/Pcf/System/Linq/Enumerable.hpp
+  Includes/Pcf/System/Net/Sockets/AddressFamily.hpp
+  Includes/Pcf/System/Net/Sockets/IOControlCode.hpp
+  Includes/Pcf/System/Net/Sockets/IPv6MulticastOption.hpp
+  Includes/Pcf/System/Net/Sockets/LingerOption.hpp
+  Includes/Pcf/System/Net/Sockets/MulticastOption.hpp
+  Includes/Pcf/System/Net/Sockets/NetworkStream.hpp
+  Includes/Pcf/System/Net/Sockets/ProtocolFamily.hpp
+  Includes/Pcf/System/Net/Sockets/ProtocolType.hpp
+  Includes/Pcf/System/Net/Sockets/SelectMode.hpp
+  Includes/Pcf/System/Net/Sockets/Socket.hpp
+  Includes/Pcf/System/Net/Sockets/SocketError.hpp
+  Includes/Pcf/System/Net/Sockets/SocketFlags.hpp
+  Includes/Pcf/System/Net/Sockets/SocketInformation.hpp
+  Includes/Pcf/System/Net/Sockets/SocketInformationOptions.hpp
+  Includes/Pcf/System/Net/Sockets/SocketOptionLevel.hpp
+  Includes/Pcf/System/Net/Sockets/SocketOptionName.hpp
+  Includes/Pcf/System/Net/Sockets/SocketShutdown.hpp
+  Includes/Pcf/System/Net/Sockets/SocketException.hpp
+  Includes/Pcf/System/Net/Sockets/SocketType.hpp
+  Includes/Pcf/System/Net/Sockets/UdpClient.hpp
+  Includes/Pcf/System/Net/Sockets/TcpClient.hpp
+  Includes/Pcf/System/Net/Sockets/TcpListener.hpp
+  Includes/Pcf/System/Net/WebSockets/ClientWebSocket.hpp
+  Includes/Pcf/System/Net/WebSockets/WebSocket.hpp
+  Includes/Pcf/System/Net/WebSockets/WebSocketCloseStatus.hpp
+  Includes/Pcf/System/Net/WebSockets/WebSocketMessageType.hpp
+  Includes/Pcf/System/Net/WebSockets/WebSocketState.hpp
+  Includes/Pcf/System/Net/CookieException.hpp
+  Includes/Pcf/System/Net/Dns.hpp
+  Includes/Pcf/System/Net/DnsEndPoint.hpp
+  Includes/Pcf/System/Net/EndPoint.hpp
+  Includes/Pcf/System/Net/IPAddress.hpp
+  Includes/Pcf/System/Net/IPEndPoint.hpp
+  Includes/Pcf/System/Net/IPHostEntry.hpp
+  Includes/Pcf/System/Net/HttpListenerException.hpp
+  Includes/Pcf/System/Net/HttpStatusCode.hpp
+  Includes/Pcf/System/Net/HttpWebRequest.hpp
+  Includes/Pcf/System/Net/HttpWebResponse.hpp
+  Includes/Pcf/System/Net/FtpStatusCode.hpp
+  Includes/Pcf/System/Net/FtpWebRequest.hpp
+  Includes/Pcf/System/Net/FtpWebResponse.hpp
+  Includes/Pcf/System/Net/NetworkCredential.hpp
+  Includes/Pcf/System/Net/ProtocolViolationException.hpp
+  Includes/Pcf/System/Net/SocketAddress.hpp
+  Includes/Pcf/System/Net/WebException.hpp
+  Includes/Pcf/System/Net/WebRequest.hpp
+  Includes/Pcf/System/Net/WebRequestMethods.hpp
+  Includes/Pcf/System/Net/WebResponse.hpp
+  Includes/Pcf/System/Runtime/Serialization/Formatter.hpp
+  Includes/Pcf/System/Runtime/Serialization/IFormatter.hpp
+  Includes/Pcf/System/Runtime/Serialization/ISerializable.hpp
+  Includes/Pcf/System/Runtime/Serialization/SerializationException.hpp
+  Includes/Pcf/System/Runtime/Serialization/SerializationEntry.hpp
+  Includes/Pcf/System/Runtime/Serialization/SerializationInfo.hpp
+  Includes/Pcf/System/Security/HostProtectionException.hpp
+  Includes/Pcf/System/Security/SecureString.hpp
+  Includes/Pcf/System/Security/SecurityException.hpp
+  Includes/Pcf/System/Security/VerificationException.hpp
+  Includes/Pcf/System/Security/XmlSyntaxException.hpp
+  Includes/Pcf/System/Text/ASCIIEncoding.hpp
+  Includes/Pcf/System/Text/Decoder.hpp
+  Includes/Pcf/System/Text/Encoder.hpp
+  Includes/Pcf/System/Text/Encoding.hpp
+  Includes/Pcf/System/Text/ANSIEncoding.hpp
+  Includes/Pcf/System/Text/StringBuilder.hpp
+  Includes/Pcf/System/Text/UnicodeEncoding.hpp
+  Includes/Pcf/System/Text/UTF8Encoding.hpp
+  Includes/Pcf/System/Text/UTF32Encoding.hpp
+  Includes/Pcf/System/Threading/AbandonedMutexException.hpp
+  Includes/Pcf/System/Threading/AutoResetEvent.hpp
+  Includes/Pcf/System/Threading/Barrier.hpp
+  Includes/Pcf/System/Threading/BarrierPostPhaseException.hpp
+  Includes/Pcf/System/Threading/EventResetMode.hpp
+  Includes/Pcf/System/Threading/EventWaitHandle.hpp
+  Includes/Pcf/System/Threading/Interlocked.hpp
+  Includes/Pcf/System/Threading/LockGuard.hpp
+  Includes/Pcf/System/Threading/LockRecursionException.hpp
+  Includes/Pcf/System/Threading/ManualResetEvent.hpp
+  Includes/Pcf/System/Threading/Monitor.hpp
+  Includes/Pcf/System/Threading/Mutex.hpp
+  Includes/Pcf/System/Threading/ParameterizedThreadStart.hpp
+  Includes/Pcf/System/Threading/RegisteredWaitHandle.hpp
+  Includes/Pcf/System/Threading/Semaphore.hpp
+  Includes/Pcf/System/Threading/SemaphoreFullException.hpp
+  Includes/Pcf/System/Threading/SynchronizationLockException.hpp
+  Includes/Pcf/System/Threading/Thread.hpp
+  Includes/Pcf/System/Threading/ThreadLocal.hpp
+  Includes/Pcf/System/Threading/ThreadAbortException.hpp
+  Includes/Pcf/System/Threading/ThreadInterruptedException.hpp
+  Includes/Pcf/System/Threading/ThreadPool.hpp
+  Includes/Pcf/System/Threading/ThreadPriority.hpp
+  Includes/Pcf/System/Threading/ThreadStart.hpp
+  Includes/Pcf/System/Threading/ThreadStartException.hpp
+  Includes/Pcf/System/Threading/ThreadState.hpp
+  Includes/Pcf/System/Threading/ThreadStateException.hpp
+  Includes/Pcf/System/Threading/TimeOut.hpp
+  Includes/Pcf/System/Threading/TimerCallback.hpp
+  Includes/Pcf/System/Threading/Timer.hpp
+  Includes/Pcf/System/Threading/TryLockGuard.hpp
+  Includes/Pcf/System/Threading/WaitHandle.hpp
+  Includes/Pcf/System/Threading/WaitHandleCannotBeOpenedException.hpp
+  Includes/Pcf/System/Threading/Tasks/ITask.hpp
+  Includes/Pcf/System/Threading/Tasks/Parallel.hpp
+  Includes/Pcf/System/Threading/Tasks/Task.hpp
+  Includes/Pcf/System/Threading/Tasks/TaskFactory.hpp
+  Includes/Pcf/System/Threading/Tasks/TaskStatus.hpp
+  Includes/Pcf/System/Threading/Tasks/TaskTResult.hpp
   Includes/Pcf/System/_String.hpp
-  Includes/Pcf/System/_ustring.h
-  Includes/Pcf/System/Action.h
-  Includes/Pcf/System/AccessViolationException.h
-  Includes/Pcf/System/AggregateException.h
-  Includes/Pcf/System/Allocator.h
-  Includes/Pcf/System/AppDomainUnloadedException.h
-  Includes/Pcf/System/ApplicationException.h
-  Includes/Pcf/System/ArgumentException.h
-  Includes/Pcf/System/ArgumentNullException.h
-  Includes/Pcf/System/ArgumentOutOfRangeException.h
-  Includes/Pcf/System/ArithmeticException.h
-  Includes/Pcf/System/Array.h
-  Includes/Pcf/System/ArraySegment.h
-  Includes/Pcf/System/ArrayTypeMismatchException.h
-  Includes/Pcf/System/AsyncCallback.h
-  Includes/Pcf/System/BadImageFormatException.h
-  Includes/Pcf/System/BitConverter.h
-  Includes/Pcf/System/Boolean.h
-  Includes/Pcf/System/BoxEnum.h
-  Includes/Pcf/System/Buffer.h
-  Includes/Pcf/System/Byte.h
-  Includes/Pcf/System/CannotUnloadAppDomainException.h
-  Includes/Pcf/System/Char.h
-  Includes/Pcf/System/CharEnumerator.h
-  Includes/Pcf/System/Comparison.h
-  Includes/Pcf/System/Console.h
-  Includes/Pcf/System/ConsoleCancelEventArgs.h
-  Includes/Pcf/System/ConsoleCancelEventHandler.h
-  Includes/Pcf/System/ConsoleColor.h
-  Includes/Pcf/System/ConsoleKey.h
-  Includes/Pcf/System/ConsoleKeyInfo.h
-  Includes/Pcf/System/ConsoleModifiers.h
-  Includes/Pcf/System/ConsoleSpecialKey.h
-  Includes/Pcf/System/ContextMarshalException.h
-  Includes/Pcf/System/Convert.h
-  Includes/Pcf/System/DataMisalignedException.h
-  Includes/Pcf/System/DateTime.h
-  Includes/Pcf/System/DateTimeKind.h
-  Includes/Pcf/System/DayOfWeek.h
-  Includes/Pcf/System/Decimal.h
-  Includes/Pcf/System/Delegate.h
-  Includes/Pcf/System/DivideByZeroException.h
-  Includes/Pcf/System/DllNotFoundException.h
-  Includes/Pcf/System/DuplicateWaitObjectException.h
-  Includes/Pcf/System/Double.h
-  Includes/Pcf/System/Environment.h
-  Includes/Pcf/System/EntryPointNotFoundException.h
-  Includes/Pcf/System/Enum.h
-  Includes/Pcf/System/EventArgs.h
-  Includes/Pcf/System/EventHandler.h
-  Includes/Pcf/System/ExecutionEngineException.h
-  Includes/Pcf/System/Exception.h
-  Includes/Pcf/System/FieldAccessException.h
-  Includes/Pcf/System/FormatException.h
-  Includes/Pcf/System/Func.h
-  Includes/Pcf/System/Guid.h
-  Includes/Pcf/System/Hash.h
-  Includes/Pcf/System/IAsyncResult.h
-  Includes/Pcf/System/ICloneable.h
-  Includes/Pcf/System/IComparable.h
-  Includes/Pcf/System/IConvertible.h
-  Includes/Pcf/System/ICustomFormatter.h
-  Includes/Pcf/System/IFormatProvider.h
-  Includes/Pcf/System/IFormattable.h
-  Includes/Pcf/System/IndexOutOfRangeException.h
-  Includes/Pcf/System/InsufficientExecutionStackException.h
-  Includes/Pcf/System/InsufficientMemoryException.h
-  Includes/Pcf/System/Int16.h
-  Includes/Pcf/System/Int32.h
-  Includes/Pcf/System/Int64.h
-  Includes/Pcf/System/IntPtr.h
-  Includes/Pcf/System/InvalidCastException.h
-  Includes/Pcf/System/InvalidOperationException.h
-  Includes/Pcf/System/InvalidProgramException.h
-  Includes/Pcf/System/InvalidTimeZoneException.h
-  Includes/Pcf/System/Math.h
-  Includes/Pcf/System/MemberAccessException.h
-  Includes/Pcf/System/MethodAccessException.h
-  Includes/Pcf/System/MissingMemberException.h
-  Includes/Pcf/System/MissingFieldException.h
-  Includes/Pcf/System/MissingMethodException.h
-  Includes/Pcf/System/MulticastNotSupportedException.h
-  Includes/Pcf/System/NotFiniteNumberException.h
-  Includes/Pcf/System/NotImplementedException.h
-  Includes/Pcf/System/NotSupportedException.h
-  Includes/Pcf/System/NullPointerException.h
-  Includes/Pcf/System/NullReferenceException.h
-  Includes/Pcf/System/Nullable.h
-  Includes/Pcf/System/NullType.h
-  Includes/Pcf/System/NumberRepresentationBase.h
-  Includes/Pcf/System/NumericalFormat.h
-  Includes/Pcf/System/NumericalParsing.h
-  Includes/Pcf/System/FormatProvider.h
-  Includes/Pcf/System/Object.h
-  Includes/Pcf/System/ObjectClosedException.h
-  Includes/Pcf/System/ObjectDisposedException.h
-  Includes/Pcf/System/OperatingSystem.h
-  Includes/Pcf/System/OperationCanceledException.h
-  Includes/Pcf/System/OutOfMemoryException.h
-  Includes/Pcf/System/OverflowException.h
-  Includes/Pcf/System/PlatformID.h
-  Includes/Pcf/System/PlatformNotSupportedException.h
-  Includes/Pcf/System/Predicate.h
-  Includes/Pcf/System/Random.h
-  Includes/Pcf/System/RankException.h
-  Includes/Pcf/System/SByte.h
-  Includes/Pcf/System/Single.h
-  Includes/Pcf/System/String.h
-  Includes/Pcf/System/StackOverflowException.h
-  Includes/Pcf/System/StringSplitOptions.h
-  Includes/Pcf/System/SystemException.h
-  Includes/Pcf/System/SystemVersion.h
-  Includes/Pcf/System/TimeoutException.h
-  Includes/Pcf/System/TimeSpan.h
-  Includes/Pcf/System/TimeZoneInfo.h
-  Includes/Pcf/System/TimeZoneNotFoundException.h
-  Includes/Pcf/System/Tuple.h
-  Includes/Pcf/System/TupleImpl.h
-  Includes/Pcf/System/Type.h
-  Includes/Pcf/System/TypeAccessException.h
-  Includes/Pcf/System/TypeCode.h
-  Includes/Pcf/System/TypeInitializationException.h
-  Includes/Pcf/System/TypeLoadException.h
-  Includes/Pcf/System/TypeUnloadedException.h
-  Includes/Pcf/System/UInt16.h
-  Includes/Pcf/System/UInt32.h
-  Includes/Pcf/System/UInt64.h
-  Includes/Pcf/System/UIntPtr.h
-  Includes/Pcf/System/UnauthorizedAccessException.h
-  Includes/Pcf/System/Uri.h
-  Includes/Pcf/System/UriComponents.h
-  Includes/Pcf/System/UriFormat.h
-  Includes/Pcf/System/UriFormatException.h
-  Includes/Pcf/System/UriKind.h
-  Includes/Pcf/System/UriHostNameType.h
-  Includes/Pcf/System/UriPartial.h
-  Includes/Pcf/System/UriTemplateMatchException.h
-  Includes/Pcf/System/ValueType.h
-  Includes/Pcf/System/Version.h
-  Includes/Pcf/Abstract.h
-  Includes/Pcf/Any.h
-  Includes/Pcf/As.h
-  Includes/Pcf/Async.h
-  Includes/Pcf/Await.h
-  Includes/Pcf/Boxing.h
-  Includes/Pcf/Core.h
-  Includes/Pcf/ExceptionPtr.h
-  Includes/Pcf/CurrentInformation.h
-  Includes/Pcf/InitializerList.h
-  Includes/Pcf/Interface.h
-  Includes/Pcf/Is.h
-  Includes/Pcf/LiteralOperatorConverter.h
-  Includes/Pcf/Lock.h
-  Includes/Pcf/Move.h
-  Includes/Pcf/Property.h
-  Includes/Pcf/Public.h
-  Includes/Pcf/Ref.h
-  Includes/Pcf/RefPtr.h
-  Includes/Pcf/SharedPtr.h
-  Includes/Pcf/Startup.h
-  Includes/Pcf/Static.h
-  Includes/Pcf/Types.h
-  Includes/Pcf/Undef.h
-  Includes/Pcf/UniquePtr.h
-  Includes/Pcf/Unused.h
-  Includes/Pcf/Using.h
-  Includes/Pcf/Var.h
-  Includes/Pcf/__opaque_function_pointer__.h
+  Includes/Pcf/System/_String.h
+  Includes/Pcf/System/_ustring.hpp
+  Includes/Pcf/System/Action.hpp
+  Includes/Pcf/System/AccessViolationException.hpp
+  Includes/Pcf/System/AggregateException.hpp
+  Includes/Pcf/System/Allocator.hpp
+  Includes/Pcf/System/AppDomainUnloadedException.hpp
+  Includes/Pcf/System/ApplicationException.hpp
+  Includes/Pcf/System/ArgumentException.hpp
+  Includes/Pcf/System/ArgumentNullException.hpp
+  Includes/Pcf/System/ArgumentOutOfRangeException.hpp
+  Includes/Pcf/System/ArithmeticException.hpp
+  Includes/Pcf/System/Array.hpp
+  Includes/Pcf/System/ArraySegment.hpp
+  Includes/Pcf/System/ArrayTypeMismatchException.hpp
+  Includes/Pcf/System/AsyncCallback.hpp
+  Includes/Pcf/System/BadImageFormatException.hpp
+  Includes/Pcf/System/BitConverter.hpp
+  Includes/Pcf/System/Boolean.hpp
+  Includes/Pcf/System/BoxEnum.hpp
+  Includes/Pcf/System/Buffer.hpp
+  Includes/Pcf/System/Byte.hpp
+  Includes/Pcf/System/CannotUnloadAppDomainException.hpp
+  Includes/Pcf/System/Char.hpp
+  Includes/Pcf/System/CharEnumerator.hpp
+  Includes/Pcf/System/Comparison.hpp
+  Includes/Pcf/System/Console.hpp
+  Includes/Pcf/System/ConsoleCancelEventArgs.hpp
+  Includes/Pcf/System/ConsoleCancelEventHandler.hpp
+  Includes/Pcf/System/ConsoleColor.hpp
+  Includes/Pcf/System/ConsoleKey.hpp
+  Includes/Pcf/System/ConsoleKeyInfo.hpp
+  Includes/Pcf/System/ConsoleModifiers.hpp
+  Includes/Pcf/System/ConsoleSpecialKey.hpp
+  Includes/Pcf/System/ContextMarshalException.hpp
+  Includes/Pcf/System/Convert.hpp
+  Includes/Pcf/System/DataMisalignedException.hpp
+  Includes/Pcf/System/DateTime.hpp
+  Includes/Pcf/System/DateTimeKind.hpp
+  Includes/Pcf/System/DayOfWeek.hpp
+  Includes/Pcf/System/Decimal.hpp
+  Includes/Pcf/System/Delegate.hpp
+  Includes/Pcf/System/DivideByZeroException.hpp
+  Includes/Pcf/System/DllNotFoundException.hpp
+  Includes/Pcf/System/DuplicateWaitObjectException.hpp
+  Includes/Pcf/System/Double.hpp
+  Includes/Pcf/System/Environment.hpp
+  Includes/Pcf/System/EntryPointNotFoundException.hpp
+  Includes/Pcf/System/Enum.hpp
+  Includes/Pcf/System/EventArgs.hpp
+  Includes/Pcf/System/EventHandler.hpp
+  Includes/Pcf/System/ExecutionEngineException.hpp
+  Includes/Pcf/System/Exception.hpp
+  Includes/Pcf/System/FieldAccessException.hpp
+  Includes/Pcf/System/FormatException.hpp
+  Includes/Pcf/System/Func.hpp
+  Includes/Pcf/System/Guid.hpp
+  Includes/Pcf/System/Hash.hpp
+  Includes/Pcf/System/IAsyncResult.hpp
+  Includes/Pcf/System/ICloneable.hpp
+  Includes/Pcf/System/IComparable.hpp
+  Includes/Pcf/System/IConvertible.hpp
+  Includes/Pcf/System/ICustomFormatter.hpp
+  Includes/Pcf/System/IFormatProvider.hpp
+  Includes/Pcf/System/IFormattable.hpp
+  Includes/Pcf/System/IndexOutOfRangeException.hpp
+  Includes/Pcf/System/InsufficientExecutionStackException.hpp
+  Includes/Pcf/System/InsufficientMemoryException.hpp
+  Includes/Pcf/System/Int16.hpp
+  Includes/Pcf/System/Int32.hpp
+  Includes/Pcf/System/Int64.hpp
+  Includes/Pcf/System/IntPtr.hpp
+  Includes/Pcf/System/InvalidCastException.hpp
+  Includes/Pcf/System/InvalidOperationException.hpp
+  Includes/Pcf/System/InvalidProgramException.hpp
+  Includes/Pcf/System/InvalidTimeZoneException.hpp
+  Includes/Pcf/System/Math.hpp
+  Includes/Pcf/System/MemberAccessException.hpp
+  Includes/Pcf/System/MethodAccessException.hpp
+  Includes/Pcf/System/MissingMemberException.hpp
+  Includes/Pcf/System/MissingFieldException.hpp
+  Includes/Pcf/System/MissingMethodException.hpp
+  Includes/Pcf/System/MulticastNotSupportedException.hpp
+  Includes/Pcf/System/NotFiniteNumberException.hpp
+  Includes/Pcf/System/NotImplementedException.hpp
+  Includes/Pcf/System/NotSupportedException.hpp
+  Includes/Pcf/System/NullPointerException.hpp
+  Includes/Pcf/System/NullReferenceException.hpp
+  Includes/Pcf/System/Nullable.hpp
+  Includes/Pcf/System/NullType.hpp
+  Includes/Pcf/System/NumberRepresentationBase.hpp
+  Includes/Pcf/System/NumericalFormat.hpp
+  Includes/Pcf/System/NumericalParsing.hpp
+  Includes/Pcf/System/FormatProvider.hpp
+  Includes/Pcf/System/Object.hpp
+  Includes/Pcf/System/ObjectClosedException.hpp
+  Includes/Pcf/System/ObjectDisposedException.hpp
+  Includes/Pcf/System/OperatingSystem.hpp
+  Includes/Pcf/System/OperationCanceledException.hpp
+  Includes/Pcf/System/OutOfMemoryException.hpp
+  Includes/Pcf/System/OverflowException.hpp
+  Includes/Pcf/System/PlatformID.hpp
+  Includes/Pcf/System/PlatformNotSupportedException.hpp
+  Includes/Pcf/System/Predicate.hpp
+  Includes/Pcf/System/Random.hpp
+  Includes/Pcf/System/RankException.hpp
+  Includes/Pcf/System/SByte.hpp
+  Includes/Pcf/System/Single.hpp
+  Includes/Pcf/System/String.hpp
+  Includes/Pcf/System/StackOverflowException.hpp
+  Includes/Pcf/System/StringSplitOptions.hpp
+  Includes/Pcf/System/SystemException.hpp
+  Includes/Pcf/System/SystemVersion.hpp
+  Includes/Pcf/System/TimeoutException.hpp
+  Includes/Pcf/System/TimeSpan.hpp
+  Includes/Pcf/System/TimeZoneInfo.hpp
+  Includes/Pcf/System/TimeZoneNotFoundException.hpp
+  Includes/Pcf/System/Tuple.hpp
+  Includes/Pcf/System/TupleImpl.hpp
+  Includes/Pcf/System/Type.hpp
+  Includes/Pcf/System/TypeAccessException.hpp
+  Includes/Pcf/System/TypeCode.hpp
+  Includes/Pcf/System/TypeInitializationException.hpp
+  Includes/Pcf/System/TypeLoadException.hpp
+  Includes/Pcf/System/TypeUnloadedException.hpp
+  Includes/Pcf/System/UInt16.hpp
+  Includes/Pcf/System/UInt32.hpp
+  Includes/Pcf/System/UInt64.hpp
+  Includes/Pcf/System/UIntPtr.hpp
+  Includes/Pcf/System/UnauthorizedAccessException.hpp
+  Includes/Pcf/System/Uri.hpp
+  Includes/Pcf/System/UriComponents.hpp
+  Includes/Pcf/System/UriFormat.hpp
+  Includes/Pcf/System/UriFormatException.hpp
+  Includes/Pcf/System/UriKind.hpp
+  Includes/Pcf/System/UriHostNameType.hpp
+  Includes/Pcf/System/UriPartial.hpp
+  Includes/Pcf/System/UriTemplateMatchException.hpp
+  Includes/Pcf/System/ValueType.hpp
+  Includes/Pcf/System/Version.hpp
+  Includes/Pcf/Abstract.hpp
+  Includes/Pcf/Any.hpp
+  Includes/Pcf/As.hpp
+  Includes/Pcf/Async.hpp
+  Includes/Pcf/Await.hpp
+  Includes/Pcf/Boxing.hpp
+  Includes/Pcf/Core.hpp
+  Includes/Pcf/ExceptionPtr.hpp
+  Includes/Pcf/CurrentInformation.hpp
+  Includes/Pcf/InitializerList.hpp
+  Includes/Pcf/Interface.hpp
+  Includes/Pcf/Is.hpp
+  Includes/Pcf/LiteralOperatorConverter.hpp
+  Includes/Pcf/Lock.hpp
+  Includes/Pcf/Move.hpp
+  Includes/Pcf/Property.hpp
+  Includes/Pcf/Public.hpp
+  Includes/Pcf/Ref.hpp
+  Includes/Pcf/RefPtr.hpp
+  Includes/Pcf/SharedPtr.hpp
+  Includes/Pcf/Startup.hpp
+  Includes/Pcf/Static.hpp
+  Includes/Pcf/Types.hpp
+  Includes/Pcf/Undef.hpp
+  Includes/Pcf/UniquePtr.hpp
+  Includes/Pcf/Unused.hpp
+  Includes/Pcf/Using.hpp
+  Includes/Pcf/Var.hpp
+  Includes/Pcf/__opaque_function_pointer__.hpp
 )
 
 set(SOURCE_FILES
-  Sources/__OS/CoreApi.h
+  Sources/__OS/CoreApi.hpp
   Sources/__OS/ConsoleGcc.cpp
   Sources/__OS/ConsoleW32.cpp
   Sources/__OS/DateTimeGcc.cpp
@@ -463,7 +463,7 @@ set(SOURCE_FILES
   Sources/Pcf/System/Net/DnsEndPoint.cpp
   Sources/Pcf/System/Net/EndPoint.cpp
   Sources/Pcf/System/Net/Internals/curl.cpp
-  Sources/Pcf/System/Net/Internals/curl.h
+  Sources/Pcf/System/Net/Internals/curl.hpp
   Sources/Pcf/System/Net/IPAddress.cpp
   Sources/Pcf/System/Net/IPEndPoint.cpp
   Sources/Pcf/System/Net/IPHostEntry.cpp
@@ -502,8 +502,8 @@ set(SOURCE_FILES
   Sources/Pcf/System/Threading/TryLockGuard.cpp
   Sources/Pcf/System/Threading/WaitHandle.cpp
   Sources/Pcf/System/Threading/Tasks/Task.cpp
-  Sources/Pcf/System/__HResults.h
-  Sources/Pcf/System/ArrayAlgorithms.h
+  Sources/Pcf/System/__HResults.hpp
+  Sources/Pcf/System/ArrayAlgorithms.hpp
   Sources/Pcf/System/BitConverter.cpp
   Sources/Pcf/System/Boolean.cpp
   Sources/Pcf/System/Buffer.cpp
@@ -529,7 +529,7 @@ set(SOURCE_FILES
   Sources/Pcf/System/Random.cpp
   Sources/Pcf/System/Runtime/Serialization/SerializationInfo.cpp
   Sources/Pcf/System/SByte.cpp
-  Sources/Pcf/System/SocketInit.h
+  Sources/Pcf/System/SocketInit.hpp
   Sources/Pcf/System/Single.cpp
   Sources/Pcf/System/String.cpp
   Sources/Pcf/System/SystemVersion.cpp
@@ -545,41 +545,41 @@ set(SOURCE_FILES
   Sources/Pcf/ExceptionPtr.cpp
 )
 
-source_group(Documentations REGULAR_EXPRESSION "/Includes/Pcf/Documentations/[-_,A-Za-z0-9]+\\.h*")
-source_group(Documentations\\DesignPatterns REGULAR_EXPRESSION "/Includes/Pcf/Documentations/DesignPatterns/[-_,A-Za-z0-9]+\\.h*")
-source_group(Documentations\\Examples REGULAR_EXPRESSION "/Includes/Pcf/Documentations/Examples/[-_,A-Za-z0-9]+\\.h*")
-source_group(Documentations\\FrameworkDesignGuidelines REGULAR_EXPRESSION "/Includes/Pcf/Documentations/FrameworkDesignGuidelines/[-_,A-Za-z0-9]+\\.h*")
-source_group(Documentations\\FrameworkDesignGuidelines\\NamingGuidelines REGULAR_EXPRESSION "/Includes/Pcf/Documentations/FrameworkDesignGuidelines/NamingGuidelines/[-_,A-Za-z0-9]+\\.h*")
-source_group(Documentations\\FrameworkDesignGuidelines\\TypeDesignGuidelines REGULAR_EXPRESSION "/Includes/Pcf/Documentations/FrameworkDesignGuidelines/TypeDesignGuidelines/[-_,A-Za-z0-9]+\\.h*")
-source_group(Documentations\\FrameworkDesignGuidelines\\MemberDesignGuidelines REGULAR_EXPRESSION "/Includes/Pcf/Documentations/FrameworkDesignGuidelines/MemberDesignGuidelines/[-_,A-Za-z0-9]+\\.h*")
-source_group(Documentations\\Tutorials REGULAR_EXPRESSION "/Includes/Pcf/Documentations/Tutorials/[-_,A-Za-z0-9]+\\.h*")
-source_group(Includes\\Pcf\\Microsoft\\Win32 REGULAR_EXPRESSION "/Includes/Pcf/Microsoft/Win32/[-_,A-Za-z0-9]+\\.h*")
-source_group(Includes\\Pcf\\Microsoft REGULAR_EXPRESSION "/Includes/Pcf/Microsoft/[-_,A-Za-z0-9]+\\.h*")
-source_group(Includes\\Pcf\\System\\Collections\\Concurrent REGULAR_EXPRESSION "/Includes/Pcf/System/Collections/Concurrent/[-_,A-Za-z0-9]+\\.h*")
-source_group(Includes\\Pcf\\System\\Collections\\Internal REGULAR_EXPRESSION "/Includes/Pcf/System/Collections/Internal/[-_,A-Za-z0-9]+\\.h*")
-source_group(Includes\\Pcf\\System\\Collections\\Generic REGULAR_EXPRESSION "/Includes/Pcf/System/Collections/Generic/[-_,A-Za-z0-9]+\\.h*")
-source_group(Includes\\Pcf\\System\\Collections\\ObjectModel REGULAR_EXPRESSION "/Includes/Pcf/System/Collections/ObjectModel/[-_,A-Za-z0-9]+\\.h*")
-source_group(Includes\\Pcf\\System\\Collections\\Specialized REGULAR_EXPRESSION "/Includes/Pcf/System/Collections/Specialized/[-_,A-Za-z0-9]+\\.h*")
-source_group(Includes\\Pcf\\System\\Collections REGULAR_EXPRESSION "/Includes/Pcf/System/Collections/[-_,A-Za-z0-9]+\\.h*")
-source_group(Includes\\Pcf\\System\\ComponentModel REGULAR_EXPRESSION "/Includes/Pcf/System/ComponentModel/[-_,A-Za-z0-9]+\\.h*")
-source_group(Includes\\Pcf\\System\\Diagnostics REGULAR_EXPRESSION "/Includes/Pcf/System/Diagnostics/[-_,A-Za-z0-9]+\\.h*")
-source_group(Includes\\Pcf\\System\\Globalization REGULAR_EXPRESSION "/Includes/Pcf/System/Globalization/[-_,A-Za-z0-9]+\\.h*")
-source_group(Includes\\Pcf\\System\\IO\\Ports REGULAR_EXPRESSION "/Includes/Pcf/System/IO/Ports/[-_,A-Za-z0-9]+\\.h*")
-source_group(Includes\\Pcf\\System\\IO REGULAR_EXPRESSION "/Includes/Pcf/System/IO/[-_,A-Za-z0-9]+\\.h*")
-source_group(Includes\\Pcf\\System\\Linq REGULAR_EXPRESSION "/Includes/Pcf/System/Linq/[-_,A-Za-z0-9]+\\.h*")
-source_group(Includes\\Pcf\\System\\Net\\Sockets REGULAR_EXPRESSION "/Includes/Pcf/System/Net/Sockets/[-_,A-Za-z0-9]+\\.h*")
-source_group(Includes\\Pcf\\System\\Net\\WebSockets REGULAR_EXPRESSION "/Includes/Pcf/System/Net/WebSockets/[-_,A-Za-z0-9]+\\.h*")
-source_group(Includes\\Pcf\\System\\Net REGULAR_EXPRESSION "/Includes/Pcf/System/Net/[-_,A-Za-z0-9]+\\.h*")
-source_group(Includes\\Pcf\\System\\Security REGULAR_EXPRESSION "/Includes/Pcf/System/Security/[-_,A-Za-z0-9]+\\.h*")
-source_group(Includes\\Pcf\\System\\Runtime\\Serialization REGULAR_EXPRESSION "/Includes/Pcf/System/Runtime/Serialization/[-_,A-Za-z0-9]+\\.h*")
-source_group(Includes\\Pcf\\System\\Runtime REGULAR_EXPRESSION "/Includes/Pcf/System/Runtime/[-_,A-Za-z0-9]+\\.h*")
-source_group(Includes\\Pcf\\System\\Text REGULAR_EXPRESSION "/Includes/Pcf/System/Text/[-_,A-Za-z0-9]+\\.h*")
-source_group(Includes\\Pcf\\System\\Threading REGULAR_EXPRESSION "/Includes/Pcf/System/Threading/[-_,A-Za-z0-9]+\\.h*")
-source_group(Includes\\Pcf\\System\\Threading\\Tasks REGULAR_EXPRESSION "/Includes/Pcf/System/Threading/Tasks/[-_,A-Za-z0-9]+\\.h*")
-source_group(Includes\\Pcf\\System REGULAR_EXPRESSION "/Includes/Pcf/System/[-_,A-Za-z0-9]+\\.h*")
-source_group(Includes\\Pcf REGULAR_EXPRESSION "/Includes/Pcf/[-_,A-Za-z0-9]+\\.h*")
+source_group(Documentations REGULAR_EXPRESSION "/Includes/Pcf/Documentations/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Documentations\\DesignPatterns REGULAR_EXPRESSION "/Includes/Pcf/Documentations/DesignPatterns/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Documentations\\Examples REGULAR_EXPRESSION "/Includes/Pcf/Documentations/Examples/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Documentations\\FrameworkDesignGuidelines REGULAR_EXPRESSION "/Includes/Pcf/Documentations/FrameworkDesignGuidelines/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Documentations\\FrameworkDesignGuidelines\\NamingGuidelines REGULAR_EXPRESSION "/Includes/Pcf/Documentations/FrameworkDesignGuidelines/NamingGuidelines/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Documentations\\FrameworkDesignGuidelines\\TypeDesignGuidelines REGULAR_EXPRESSION "/Includes/Pcf/Documentations/FrameworkDesignGuidelines/TypeDesignGuidelines/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Documentations\\FrameworkDesignGuidelines\\MemberDesignGuidelines REGULAR_EXPRESSION "/Includes/Pcf/Documentations/FrameworkDesignGuidelines/MemberDesignGuidelines/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Documentations\\Tutorials REGULAR_EXPRESSION "/Includes/Pcf/Documentations/Tutorials/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Pcf\\Microsoft\\Win32 REGULAR_EXPRESSION "/Includes/Pcf/Microsoft/Win32/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Pcf\\Microsoft REGULAR_EXPRESSION "/Includes/Pcf/Microsoft/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Pcf\\System\\Collections\\Concurrent REGULAR_EXPRESSION "/Includes/Pcf/System/Collections/Concurrent/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Pcf\\System\\Collections\\Internal REGULAR_EXPRESSION "/Includes/Pcf/System/Collections/Internal/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Pcf\\System\\Collections\\Generic REGULAR_EXPRESSION "/Includes/Pcf/System/Collections/Generic/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Pcf\\System\\Collections\\ObjectModel REGULAR_EXPRESSION "/Includes/Pcf/System/Collections/ObjectModel/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Pcf\\System\\Collections\\Specialized REGULAR_EXPRESSION "/Includes/Pcf/System/Collections/Specialized/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Pcf\\System\\Collections REGULAR_EXPRESSION "/Includes/Pcf/System/Collections/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Pcf\\System\\ComponentModel REGULAR_EXPRESSION "/Includes/Pcf/System/ComponentModel/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Pcf\\System\\Diagnostics REGULAR_EXPRESSION "/Includes/Pcf/System/Diagnostics/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Pcf\\System\\Globalization REGULAR_EXPRESSION "/Includes/Pcf/System/Globalization/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Pcf\\System\\IO\\Ports REGULAR_EXPRESSION "/Includes/Pcf/System/IO/Ports/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Pcf\\System\\IO REGULAR_EXPRESSION "/Includes/Pcf/System/IO/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Pcf\\System\\Linq REGULAR_EXPRESSION "/Includes/Pcf/System/Linq/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Pcf\\System\\Net\\Sockets REGULAR_EXPRESSION "/Includes/Pcf/System/Net/Sockets/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Pcf\\System\\Net\\WebSockets REGULAR_EXPRESSION "/Includes/Pcf/System/Net/WebSockets/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Pcf\\System\\Net REGULAR_EXPRESSION "/Includes/Pcf/System/Net/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Pcf\\System\\Security REGULAR_EXPRESSION "/Includes/Pcf/System/Security/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Pcf\\System\\Runtime\\Serialization REGULAR_EXPRESSION "/Includes/Pcf/System/Runtime/Serialization/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Pcf\\System\\Runtime REGULAR_EXPRESSION "/Includes/Pcf/System/Runtime/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Pcf\\System\\Text REGULAR_EXPRESSION "/Includes/Pcf/System/Text/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Pcf\\System\\Threading REGULAR_EXPRESSION "/Includes/Pcf/System/Threading/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Pcf\\System\\Threading\\Tasks REGULAR_EXPRESSION "/Includes/Pcf/System/Threading/Tasks/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Pcf\\System REGULAR_EXPRESSION "/Includes/Pcf/System/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Pcf REGULAR_EXPRESSION "/Includes/Pcf/[-_,A-Za-z0-9]+\\.hpp*")
 source_group(Includes\\Pcf REGULAR_EXPRESSION "/Includes/Pcf/[-_,A-Za-z0-9]")
-source_group(Includes REGULAR_EXPRESSION "/Includes/[-_,A-Za-z0-9]+\\.h*")
+source_group(Includes REGULAR_EXPRESSION "/Includes/[-_,A-Za-z0-9]+\\.hpp*")
 
 source_group(Sources\\Pcf\\Microsoft\\Win32 REGULAR_EXPRESSION "/Sources/Pcf/Microsoft/Win32/[-_,A-Za-z0-9]+\\.c*")
 source_group(Sources\\Pcf\\Microsoft REGULAR_EXPRESSION "/Sources/Pcf/Microsoft/[-_,A-Za-z0-9]+\\.c*")

@@ -1,7 +1,7 @@
-﻿#include <Pcf/System/Byte.h>
-#include <Pcf/System/NumberRepresentationBase.h>
-#include <Pcf/TUnit/Assert.h>
-#include <Pcf/TUnit/TestFixture.h>
+﻿#include <Pcf/System/Byte.hpp>
+#include <Pcf/System/NumberRepresentationBase.hpp>
+#include <Pcf/TUnit/Assert.hpp>
+#include <Pcf/TUnit/TestFixture.hpp>
 
 using namespace System;
 using namespace TUnit;

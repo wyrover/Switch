@@ -1,5 +1,5 @@
-#include "../../../../Includes/Pcf/System/Drawing/Font.h"
-#include <Pcf/System/Tuple.h>
+#include "../../../../Includes/Pcf/System/Drawing/Font.hpp"
+#include <Pcf/System/Tuple.hpp>
 
 using namespace System;
 

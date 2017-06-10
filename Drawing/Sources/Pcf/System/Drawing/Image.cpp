@@ -1,5 +1,5 @@
-#include <Pcf/System/IO/File.h>
-#include "../../../../Includes/Pcf/System/Drawing/Image.h"
+#include <Pcf/System/IO/File.hpp>
+#include "../../../../Includes/Pcf/System/Drawing/Image.hpp"
 
 #include <csetjmp>
 #include <cstdio>
@@ -9,15 +9,15 @@
 #include <jpeglib.h>
 //#undef HAVE_BOOLEAN
 
-#include "Bmp.h"
-#include "Gif.h"
+#include "Bmp.hpp"
+#include "Gif.hpp"
 #pragma warning(push)
 #pragma warning(disable:4324)
 #pragma warning(disable:4611)
-#include "Jpg.h"
-#include "Png.h"
+#include "Jpg.hpp"
+#include "Png.hpp"
 #pragma warning(pop)
-#include "Tif.h"
+#include "Tif.hpp"
 
 using namespace System;
 using namespace System::Drawing;

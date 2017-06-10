@@ -1,14 +1,14 @@
 ﻿#if defined(_WIN32) && defined(__use_native_interface__)
 
-#include <Windows.h>
-#include <Windowsx.h>
-#include <Uxtheme.h>
-#include <Pcf/Undef.h>
+#include <Windows.hpp>
+#include <Windowsx.hpp>
+#include <Uxtheme.hpp>
+#include <Pcf/Undef.hpp>
 
-#include "FormsApi.h"
-#include "WindowProcedureWin32.h"
-#include "../../Includes/Pcf/System/Windows/Forms/Control.h"
-#include "../../Includes/Pcf/System/Windows/Forms/Message.h"
+#include "FormsApi.hpp"
+#include "WindowProcedureWin32.hpp"
+#include "../../Includes/Pcf/System/Windows/Forms/Control.hpp"
+#include "../../Includes/Pcf/System/Windows/Forms/Message.hpp"
 
 using namespace System;
 using namespace System::Collections::Generic;

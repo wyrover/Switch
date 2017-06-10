@@ -1,9 +1,9 @@
 #if defined(_WIN32)
 
-#include <windows.h>
-#include "../../Includes/Pcf/Undef.h"
+#include <windows.hpp>
+#include "../../Includes/Pcf/Undef.hpp"
 
-#include "CoreApi.h"
+#include "CoreApi.hpp"
 
 namespace {
   // https://msdn.microsoft.com/en-us/library/xcb2z8hs.aspx

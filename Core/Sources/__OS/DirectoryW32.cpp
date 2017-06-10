@@ -1,17 +1,17 @@
 #if defined(_WIN32)
 
-#include <direct.h>
-#include <shlobj.h>
-#include <sys/stat.h>
+#include <direct.hpp>
+#include <shlobj.hpp>
+#include <sys/stat.hpp>
 
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
 
-#include <windows.h>
-#include "../../Includes/Pcf/Undef.h"
+#include <windows.hpp>
+#include "../../Includes/Pcf/Undef.hpp"
 
-#include "CoreApi.h"
+#include "CoreApi.hpp"
 
 namespace {
   class Enumerator : public System::Collections::Generic::IEnumerator<string> {

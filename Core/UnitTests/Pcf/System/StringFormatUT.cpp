@@ -1,7 +1,7 @@
-#include <Pcf/System/String.h>
-#include <Pcf/System/Console.h>
-#include <Pcf/TUnit/Assert.h>
-#include <Pcf/TUnit/TestFixture.h>
+#include <Pcf/System/String.hpp>
+#include <Pcf/System/Console.hpp>
+#include <Pcf/TUnit/Assert.hpp>
+#include <Pcf/TUnit/TestFixture.hpp>
 
 using namespace System;
 using namespace System::Collections::Generic;

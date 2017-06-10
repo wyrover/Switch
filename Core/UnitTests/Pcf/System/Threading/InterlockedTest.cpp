@@ -1,10 +1,10 @@
-#include <Pcf/System/Threading/Timer.h>
-#include <Pcf/System/Threading/Interlocked.h>
-#include <Pcf/System/Double.h>
-#include <Pcf/System/Math.h>
-#include <Pcf/TUnit/Assert.h>
-#include <Pcf/TUnit/TestFixture.h>
-#include <Pcf/LiteralOperatorConverter.h>
+#include <Pcf/System/Threading/Timer.hpp>
+#include <Pcf/System/Threading/Interlocked.hpp>
+#include <Pcf/System/Double.hpp>
+#include <Pcf/System/Math.hpp>
+#include <Pcf/TUnit/Assert.hpp>
+#include <Pcf/TUnit/TestFixture.hpp>
+#include <Pcf/LiteralOperatorConverter.hpp>
 
 using namespace System;
 using namespace System::Threading;

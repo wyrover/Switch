@@ -1,6 +1,6 @@
-#include <Pcf/TUnit/Assert.h>
-#include <Pcf/TUnit/TestFixture.h>
-#include <Pcf/System/Windows/Forms/Application.h>
+#include <Pcf/TUnit/Assert.hpp>
+#include <Pcf/TUnit/TestFixture.hpp>
+#include <Pcf/System/Windows/Forms/Application.hpp>
 
 using namespace System::Windows::Forms;
 using namespace TUnit;

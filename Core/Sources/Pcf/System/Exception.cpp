@@ -1,7 +1,7 @@
-#include "../../../Includes/Pcf/System/Exception.h"
-#include "../../../Includes/Pcf/System/Environment.h"
-#include "../../../Includes/Pcf/System/Diagnostics/StackTrace.h"
-#include "__HResults.h"
+#include "../../../Includes/Pcf/System/Exception.hpp"
+#include "../../../Includes/Pcf/System/Environment.hpp"
+#include "../../../Includes/Pcf/System/Diagnostics/StackTrace.hpp"
+#include "__HResults.hpp"
 
 using namespace System;
 

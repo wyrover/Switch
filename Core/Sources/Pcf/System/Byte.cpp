@@ -1,9 +1,9 @@
 #include <limits>
-#include "../../../Includes/Pcf/System/Byte.h"
-#include "../../../Includes/Pcf/System/Convert.h"
-#include "../../../Includes/Pcf/System/DateTime.h"
-#include "../../../Includes/Pcf/System/NumericalFormat.h"
-#include "../../../Includes/Pcf/System/NumericalParsing.h"
+#include "../../../Includes/Pcf/System/Byte.hpp"
+#include "../../../Includes/Pcf/System/Convert.hpp"
+#include "../../../Includes/Pcf/System/DateTime.hpp"
+#include "../../../Includes/Pcf/System/NumericalFormat.hpp"
+#include "../../../Includes/Pcf/System/NumericalParsing.hpp"
 
 using namespace System;
 

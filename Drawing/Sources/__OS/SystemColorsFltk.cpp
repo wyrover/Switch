@@ -1,5 +1,5 @@
-﻿#if !defined(__use_native_interface__)
-#include "DrawingApi.h"
+﻿#if defined(__use_fltk_interface__)
+#include "DrawingApi.hpp"
 
 using namespace System;
 using namespace __OS;

@@ -1,5 +1,5 @@
-#include "../../../../Includes/Pcf/System/Security/SecureString.h"
-#include "../../../__OS/CoreApi.h"
+#include "../../../../Includes/Pcf/System/Security/SecureString.hpp"
+#include "../../../__OS/CoreApi.hpp"
 
 using namespace System;
 using namespace System::Security;

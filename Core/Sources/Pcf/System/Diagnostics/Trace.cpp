@@ -1,4 +1,4 @@
-#include "../../../../Includes/Pcf/System/Diagnostics/Trace.h"
+#include "../../../../Includes/Pcf/System/Diagnostics/Trace.hpp"
 
 using namespace System;
 using namespace System::Diagnostics;

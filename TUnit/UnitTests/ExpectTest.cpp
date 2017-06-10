@@ -1,6 +1,6 @@
-﻿#include <Pcf/System/Uri.h>
-#include <Pcf/TUnit/Expect.h>
-#include <Pcf/TUnit/TestFixture.h>
+﻿#include <Pcf/System/Uri.hpp>
+#include <Pcf/TUnit/Expect.hpp>
+#include <Pcf/TUnit/TestFixture.hpp>
 
 using namespace TUnit;
 

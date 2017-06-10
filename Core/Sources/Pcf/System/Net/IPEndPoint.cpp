@@ -1,6 +1,6 @@
-#include "../../../../Includes/Pcf/System/Net/IPEndPoint.h"
-#include "../../../../Includes/Pcf/System/BitConverter.h"
-#include "../../../../Includes/Pcf/System/Convert.h"
+#include "../../../../Includes/Pcf/System/Net/IPEndPoint.hpp"
+#include "../../../../Includes/Pcf/System/BitConverter.hpp"
+#include "../../../../Includes/Pcf/System/Convert.hpp"
 
 using namespace System;
 using namespace System::Net;

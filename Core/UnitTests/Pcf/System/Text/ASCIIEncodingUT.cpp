@@ -1,7 +1,7 @@
-#include "EncodingUT.h"
-#include <Pcf/System/Text/ASCIIEncoding.h>
-#include <Pcf/TUnit/Assert.h>
-#include <Pcf/TUnit/TestFixture.h>
+#include "EncodingUT.hpp"
+#include <Pcf/System/Text/ASCIIEncoding.hpp>
+#include <Pcf/TUnit/Assert.hpp>
+#include <Pcf/TUnit/TestFixture.hpp>
 
 using namespace System;
 using namespace TUnit;

@@ -1,7 +1,7 @@
-#include "../../../../Includes/Pcf/System/IO/FileSystemInfo.h"
-#include "../../../../Includes/Pcf/System/IO/IOException.h"
-#include "../../../../Includes/Pcf/System/IO/Path.h"
-#include "../../../__OS/CoreApi.h"
+#include "../../../../Includes/Pcf/System/IO/FileSystemInfo.hpp"
+#include "../../../../Includes/Pcf/System/IO/IOException.hpp"
+#include "../../../../Includes/Pcf/System/IO/Path.hpp"
+#include "../../../__OS/CoreApi.hpp"
 
 using namespace System;
 using namespace System::IO;

@@ -1,5 +1,5 @@
 #if (defined(__linux__) && defined(__use_native_interface__)) || defined(__use_gtk_interface__)
-#include "FormsApi.h"
+#include "FormsApi.hpp"
 
 using namespace System;
 using namespace System::Windows::Forms;

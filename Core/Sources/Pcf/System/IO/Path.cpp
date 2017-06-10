@@ -1,13 +1,13 @@
 #include <cstdio>
 #include <cstring>
 
-#include "../../../../Includes/Pcf/System/IO/Path.h"
-#include "../../../../Includes/Pcf/System/IO/File.h"
-#include "../../../../Includes/Pcf/System/IO/DriveInfo.h"
-#include "../../../../Includes/Pcf/System/IO/FileAttributes.h"
-#include "../../../../Includes/Pcf/System/Char.h"
-#include "../../../../Includes/Pcf/System/Random.h"
-#include "../../../__OS/CoreApi.h"
+#include "../../../../Includes/Pcf/System/IO/Path.hpp"
+#include "../../../../Includes/Pcf/System/IO/File.hpp"
+#include "../../../../Includes/Pcf/System/IO/DriveInfo.hpp"
+#include "../../../../Includes/Pcf/System/IO/FileAttributes.hpp"
+#include "../../../../Includes/Pcf/System/Char.hpp"
+#include "../../../../Includes/Pcf/System/Random.hpp"
+#include "../../../__OS/CoreApi.hpp"
 
 using namespace System;
 using namespace System::IO;

@@ -1,10 +1,10 @@
 ﻿#if defined(_WIN32) && defined(__use_native_interface__)
-#include <Windows.h>
-#include <Pcf/Undef.h>
+#include <Windows.hpp>
+#include <Pcf/Undef.hpp>
 
-#include "DrawingApi.h"
-#include <Pcf/System/Diagnostics/Debug.h>
-#include <Pcf/System/ArgumentException.h>
+#include "DrawingApi.hpp"
+#include <Pcf/System/Diagnostics/Debug.hpp>
+#include <Pcf/System/ArgumentException.hpp>
 
 using namespace System;
 using namespace System::Collections::Generic;

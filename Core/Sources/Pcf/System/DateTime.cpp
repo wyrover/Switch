@@ -1,8 +1,8 @@
 #include <cstdio>
 
-#include "../../../Includes/Pcf/System/DateTime.h"
-#include "../../../Includes/Pcf/System/Convert.h"
-#include "../../__OS/CoreApi.h"
+#include "../../../Includes/Pcf/System/DateTime.hpp"
+#include "../../../Includes/Pcf/System/Convert.hpp"
+#include "../../__OS/CoreApi.hpp"
 
 using namespace System;
 

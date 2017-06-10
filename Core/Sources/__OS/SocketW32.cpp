@@ -3,11 +3,11 @@
 #include <cstring>
 #include <cstdlib>
 
-#include <Winsock2.h>
-#include "../../Includes/Pcf/Undef.h"
+#include <Winsock2.hpp>
+#include "../../Includes/Pcf/Undef.hpp"
 
-#include "CoreApi.h"
-#include "../../Includes/Pcf/System/Collections/Generic/SortedDictionary.h"
+#include "CoreApi.hpp"
+#include "../../Includes/Pcf/System/Collections/Generic/SortedDictionary.hpp"
 
 namespace {
   static int32 ProtocolTypeToNative(System::Net::Sockets::ProtocolType protocolType) {

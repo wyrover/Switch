@@ -1,10 +1,10 @@
-#include "../../../../Includes/Pcf/System/Text/Encoding.h"
-#include "../../../../Includes/Pcf/System/Text/ANSIEncoding.h"
-#include "../../../../Includes/Pcf/System/Text/ASCIIEncoding.h"
-#include "../../../../Includes/Pcf/System/Text/UnicodeEncoding.h"
-#include "../../../../Includes/Pcf/System/Text/UTF32Encoding.h"
-#include "../../../../Includes/Pcf/System/Text/UTF8Encoding.h"
-#include "../ArrayAlgorithms.h"
+#include "../../../../Includes/Pcf/System/Text/Encoding.hpp"
+#include "../../../../Includes/Pcf/System/Text/ANSIEncoding.hpp"
+#include "../../../../Includes/Pcf/System/Text/ASCIIEncoding.hpp"
+#include "../../../../Includes/Pcf/System/Text/UnicodeEncoding.hpp"
+#include "../../../../Includes/Pcf/System/Text/UTF32Encoding.hpp"
+#include "../../../../Includes/Pcf/System/Text/UTF8Encoding.hpp"
+#include "../ArrayAlgorithms.hpp"
 
 using namespace System;
 using namespace System::Text;

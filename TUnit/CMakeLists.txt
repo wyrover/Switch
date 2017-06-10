@@ -1,31 +1,31 @@
 set(INCLUDE_FILES
-  Includes/Pcf/TUnit/Constraints/Constraint.h
-  Includes/Pcf/TUnit/Constraints/ConstraintExpression.h
-  Includes/Pcf/TUnit/Constraints/ConstraintValue.h
-  Includes/Pcf/TUnit/Constraints/Empty.h
-  Includes/Pcf/TUnit/Constraints/EqualTo.h
-  Includes/Pcf/TUnit.h
-  Includes/Pcf/TUnit/Assert.h
-  Includes/Pcf/TUnit/AssertionException.h
-  Includes/Pcf/TUnit/AssertionResult.h
-  Includes/Pcf/TUnit/Expect.h
-  Includes/Pcf/TUnit/Is.h
-  Includes/Pcf/TUnit/TestFixture.h
-  Includes/Pcf/TUnit.h
+  Includes/Pcf/TUnit/Constraints/Constraint.hpp
+  Includes/Pcf/TUnit/Constraints/ConstraintExpression.hpp
+  Includes/Pcf/TUnit/Constraints/ConstraintValue.hpp
+  Includes/Pcf/TUnit/Constraints/Empty.hpp
+  Includes/Pcf/TUnit/Constraints/EqualTo.hpp
+  Includes/Pcf/TUnit.hpp
+  Includes/Pcf/TUnit/Assert.hpp
+  Includes/Pcf/TUnit/AssertionException.hpp
+  Includes/Pcf/TUnit/AssertionResult.hpp
+  Includes/Pcf/TUnit/Expect.hpp
+  Includes/Pcf/TUnit/Is.hpp
+  Includes/Pcf/TUnit/TestFixture.hpp
+  Includes/Pcf/TUnit.hpp
 )
 
 set(SOURCE_FILES
   Sources/Pcf/TUnit/AssertionResult.cpp
-  Sources/Pcf/TUnit/ConsoleEventListener.h
+  Sources/Pcf/TUnit/ConsoleEventListener.hpp
   Sources/Pcf/TUnit/ConsoleEventListener.cpp
   Sources/Pcf/TUnit/UnitTest.cpp
 )
 
-source_group(Includes REGULAR_EXPRESSION "/Includes/[-_,A-Za-z0-9]+\\.h*")
-source_group(Includes\\Pcf REGULAR_EXPRESSION "/Includes/Pcf/[-_,A-Za-z0-9]+\\.h*")
+source_group(Includes REGULAR_EXPRESSION "/Includes/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Pcf REGULAR_EXPRESSION "/Includes/Pcf/[-_,A-Za-z0-9]+\\.hpp*")
 source_group(Includes\\Pcf REGULAR_EXPRESSION "/Includes/Pcf/[-_,A-Za-z0-9]")
-source_group(Includes\\Pcf\\TUnit REGULAR_EXPRESSION "/Includes/Pcf/TUnit/[-_,A-Za-z0-9]+\\.h*")
-source_group(Includes\\Pcf\\TUnit\\Constraints REGULAR_EXPRESSION "/Includes/Pcf/TUnit/Constraints/[-_,A-Za-z0-9]+\\.h*")
+source_group(Includes\\Pcf\\TUnit REGULAR_EXPRESSION "/Includes/Pcf/TUnit/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Pcf\\TUnit\\Constraints REGULAR_EXPRESSION "/Includes/Pcf/TUnit/Constraints/[-_,A-Za-z0-9]+\\.hpp*")
 
 source_group(Sources REGULAR_EXPRESSION "/Sources/[-_,A-Za-z0-9]+\\.c*")
 source_group(Sources\\Pcf REGULAR_EXPRESSION "/Sources/Pcf/[-_,A-Za-z0-9]+\\.c*")

@@ -1,4 +1,4 @@
-#include "../../../../../Includes/Pcf/System/Drawing/Imaging/FrameDimension.h"
+#include "../../../../../Includes/Pcf/System/Drawing/Imaging/FrameDimension.hpp"
 
 using namespace System::Drawing::Imaging;
 

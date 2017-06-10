@@ -1,9 +1,9 @@
-#include "../../../../../Includes/Pcf/System/Net/Sockets/UdpClient.h"
-#include "../../../../../Includes/Pcf/System/Convert.h"
-#include "../../../../../Includes/Pcf/System/NullReferenceException.h"
-#include "../../../../../Includes/Pcf/System/Net/Dns.h"
-#include "../../../../../Includes/Pcf/System/Net/Sockets/IPv6MulticastOption.h"
-#include "../../../../../Includes/Pcf/System/Net/Sockets/MulticastOption.h"
+#include "../../../../../Includes/Pcf/System/Net/Sockets/UdpClient.hpp"
+#include "../../../../../Includes/Pcf/System/Convert.hpp"
+#include "../../../../../Includes/Pcf/System/NullReferenceException.hpp"
+#include "../../../../../Includes/Pcf/System/Net/Dns.hpp"
+#include "../../../../../Includes/Pcf/System/Net/Sockets/IPv6MulticastOption.hpp"
+#include "../../../../../Includes/Pcf/System/Net/Sockets/MulticastOption.hpp"
 
 using namespace System;
 using namespace System::Net;

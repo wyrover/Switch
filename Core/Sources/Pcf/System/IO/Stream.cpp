@@ -1,6 +1,6 @@
-#include "../../../../Includes/Pcf/System/IO/Stream.h"
-#include "../../../../Includes/Pcf/System/Array.h"
-#include "../../../../Includes/Pcf/System/ObjectClosedException.h"
+#include "../../../../Includes/Pcf/System/IO/Stream.hpp"
+#include "../../../../Includes/Pcf/System/Array.hpp"
+#include "../../../../Includes/Pcf/System/ObjectClosedException.hpp"
 
 using namespace System;
 using namespace System::IO;

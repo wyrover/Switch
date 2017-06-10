@@ -1,6 +1,6 @@
-#include <Pcf/System/Threading/EventWaitHandle.h>
-#include <Pcf/TUnit/Assert.h>
-#include <Pcf/TUnit/TestFixture.h>
+#include <Pcf/System/Threading/EventWaitHandle.hpp>
+#include <Pcf/TUnit/Assert.hpp>
+#include <Pcf/TUnit/TestFixture.hpp>
 
 using namespace System;
 using namespace System::Threading;

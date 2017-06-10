@@ -1,11 +1,11 @@
 #if defined(_WIN32)
 
-#include <time.h>
+#include <time.hpp>
 #include <string>
-#include <windows.h>
-#include "../../Includes/Pcf/Undef.h"
+#include <windows.hpp>
+#include "../../Includes/Pcf/Undef.hpp"
 
-#include "CoreApi.h"
+#include "CoreApi.hpp"
 
 namespace {
   const int64 dateFixOs = 116444736000000000ULL; // Diff 01/01/1601 and 01/01/1970

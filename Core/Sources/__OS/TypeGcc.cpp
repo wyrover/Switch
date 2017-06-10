@@ -1,7 +1,7 @@
 #if defined(__linux__) || defined(__APPLE__)
 
 #include <cxxabi.h>
-#include "CoreApi.h"
+#include "CoreApi.hpp"
 
 string __OS::CoreApi::Type::Demangle(const string &name) {
   struct AutoDeleteCharPointer {

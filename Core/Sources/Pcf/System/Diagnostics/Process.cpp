@@ -1,8 +1,8 @@
 #include <cstdio>
 #include <cstdlib>
 
-#include "../../../../Includes/Pcf/System/Diagnostics/Process.h"
-#include "../../../__OS/CoreApi.h"
+#include "../../../../Includes/Pcf/System/Diagnostics/Process.hpp"
+#include "../../../__OS/CoreApi.hpp"
 
 using namespace System;
 using namespace System::Diagnostics;

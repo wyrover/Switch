@@ -1,9 +1,9 @@
 #if defined(__APPLE__) && defined(__use_native_interface__)
 #import <Cocoa/Cocoa.h>
 #import <Foundation/Foundation.h>
-#include <Pcf/System/Diagnostics/Debug.h>
-#include <Pcf/System/ArgumentException.h>
-#include "DrawingApi.h"
+#include <Pcf/System/Diagnostics/Debug.hpp>
+#include <Pcf/System/ArgumentException.hpp>
+#include "DrawingApi.hpp"
 
 using namespace System;
 using namespace System::Collections::Generic;

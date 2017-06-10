@@ -1,11 +1,11 @@
 ﻿#if defined(_WIN32) && defined(__use_native_interface__)
 
-#include <Windows.h>
-#include <Uxtheme.h>
-#include <Pcf/Undef.h>
+#include <Windows.hpp>
+#include <Uxtheme.hpp>
+#include <Pcf/Undef.hpp>
 
-#include "FormsApi.h"
-#include "WindowProcedureWin32.h"
+#include "FormsApi.hpp"
+#include "WindowProcedureWin32.hpp"
 
 using namespace System;
 using namespace System::Windows::Forms;

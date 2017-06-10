@@ -1,6 +1,6 @@
-#include "../../../../Includes/Pcf/System/Net/FtpWebRequest.h"
-#include "../../../../Includes/Pcf/System/Net/WebRequestMethods.h"
-#include "Internals/curl.h"
+#include "../../../../Includes/Pcf/System/Net/FtpWebRequest.hpp"
+#include "../../../../Includes/Pcf/System/Net/WebRequestMethods.hpp"
+#include "Internals/curl.hpp"
 
 using namespace System;
 using namespace System::Net;

@@ -1,107 +1,107 @@
 set(INCLUDE_FILES
-  Includes/Pcf/System/ComponentModel/CancelEventArgs.h
-  Includes/Pcf/System/ComponentModel/CancelEventHandler.h
-  Includes/Pcf/System/ComponentModel/Component.h
-  Includes/Pcf/System/ComponentModel/ComponentCollection.h
-  Includes/Pcf/System/ComponentModel/EventHandlerList.h
-  Includes/Pcf/System/ComponentModel/IComponent.h
-  Includes/Pcf/System/ComponentModel/IContainer.h
-  Includes/Pcf/System/ComponentModel/ISite.h
-  Includes/Pcf/System/Media/SystemSound.h
-  Includes/Pcf/System/Media/SystemSounds.h
-  Includes/Pcf/System/Windows/Forms/VisualStyles/VisualStyleState.h
-  Includes/Pcf/System/Windows/Forms/AccessibleEvents.h
-  Includes/Pcf/System/Windows/Forms/AccessibleNavigation.h
-  Includes/Pcf/System/Windows/Forms/AccessibleRole.h
-  Includes/Pcf/System/Windows/Forms/AnchorStyles.h
-  Includes/Pcf/System/Windows/Forms/Application.h
-  Includes/Pcf/System/Windows/Forms/ArrangeDirection.h
-  Includes/Pcf/System/Windows/Forms/ArrangeStartingPosition.h
-  Includes/Pcf/System/Windows/Forms/AutoSizeMode.h
-  Includes/Pcf/System/Windows/Forms/BootMode.h
-  Includes/Pcf/System/Windows/Forms/BorderStyle.h
-  Includes/Pcf/System/Windows/Forms/Button.h
-  Includes/Pcf/System/Windows/Forms/ButtonBase.h
-  Includes/Pcf/System/Windows/Forms/CheckBox.h
-#  Includes/Pcf/System/Windows/Forms/CheckedListBox.h
-  Includes/Pcf/System/Windows/Forms/CheckState.h
-  Includes/Pcf/System/Windows/Forms/CloseReason.h
-  Includes/Pcf/System/Windows/Forms/ContainerControl.h
-  Includes/Pcf/System/Windows/Forms/Control.h
-  Includes/Pcf/System/Windows/Forms/ControlEventArgs.h
-  Includes/Pcf/System/Windows/Forms/ControlEventHandler.h
-  Includes/Pcf/System/Windows/Forms/ControlStyles.h
-#  Includes/Pcf/System/Windows/Forms/Cursor.h
-#  Includes/Pcf/System/Windows/Forms/Cursors.h
-  Includes/Pcf/System/Windows/Forms/DataFormats.h
-  Includes/Pcf/System/Windows/Forms/DialogResult.h
-  Includes/Pcf/System/Windows/Forms/DockStyle.h
-  Includes/Pcf/System/Windows/Forms/DragDropEffects.h
-  Includes/Pcf/System/Windows/Forms/DragEventArgs.h
-  Includes/Pcf/System/Windows/Forms/DragEventHandler.h
-#  Includes/Pcf/System/Windows/Forms/FolderBrowserDialog.h
-  Includes/Pcf/System/Windows/Forms/Form.h
-  Includes/Pcf/System/Windows/Forms/FormBorderStyle.h
-  Includes/Pcf/System/Windows/Forms/FormClosedEventArgs.h
-  Includes/Pcf/System/Windows/Forms/FormClosedEventHandler.h
-  Includes/Pcf/System/Windows/Forms/FormClosingEventArgs.h
-  Includes/Pcf/System/Windows/Forms/FormClosingEventHandler.h
-  Includes/Pcf/System/Windows/Forms/FormStartPosition.h
-  Includes/Pcf/System/Windows/Forms/GiveFeedbackEventArgs.h
-  Includes/Pcf/System/Windows/Forms/GiveFeedbackEventHandler.h
-#  Includes/Pcf/System/Windows/Forms/GroupBox.h
-  Includes/Pcf/System/Windows/Forms/HelpEventArgs.h
-  Includes/Pcf/System/Windows/Forms/HelpEventHandler.h
-  Includes/Pcf/System/Windows/Forms/IDataObject.h
-#  Includes/Pcf/System/Windows/Forms/ImageList.h
-  Includes/Pcf/System/Windows/Forms/ImageLayout.h
-  Includes/Pcf/System/Windows/Forms/InvalidateEventArgs.h
-  Includes/Pcf/System/Windows/Forms/InvalidateEventHandler.h
-  Includes/Pcf/System/Windows/Forms/KeyEventArgs.h
-  Includes/Pcf/System/Windows/Forms/KeyEventHandler.h
-  Includes/Pcf/System/Windows/Forms/KeyPressEventArgs.h
-  Includes/Pcf/System/Windows/Forms/KeyPressEventHandler.h
-  Includes/Pcf/System/Windows/Forms/Keys.h
-  Includes/Pcf/System/Windows/Forms/Label.h
-#  Includes/Pcf/System/Windows/Forms/ListBox.h
-  Includes/Pcf/System/Windows/Forms/ListControl.h
-#  Includes/Pcf/System/Windows/Forms/MainMenu.h
-#  Includes/Pcf/System/Windows/Forms/MaskedTextBox.h
-#  Includes/Pcf/System/Windows/Forms/Menu.h
-#  Includes/Pcf/System/Windows/Forms/MenuItem.h
-  Includes/Pcf/System/Windows/Forms/Message.h
-  Includes/Pcf/System/Windows/Forms/MessageBox.h
-  Includes/Pcf/System/Windows/Forms/MessageBoxButtons.h
-  Includes/Pcf/System/Windows/Forms/MessageBoxDefaultButton.h
-  Includes/Pcf/System/Windows/Forms/MessageBoxIcon.h
-  Includes/Pcf/System/Windows/Forms/MessageBoxOptions.h
-  Includes/Pcf/System/Windows/Forms/MethodInvoker.h
-  Includes/Pcf/System/Windows/Forms/MouseButtons.h
-  Includes/Pcf/System/Windows/Forms/MouseEventArgs.h
-  Includes/Pcf/System/Windows/Forms/MouseEventHandler.h
-#  Includes/Pcf/System/Windows/Forms/NumericUpDown.h
-#  Includes/Pcf/System/Windows/Forms/OpenFileDialog.h
-  Includes/Pcf/System/Windows/Forms/PaintEventArgs.h
-  Includes/Pcf/System/Windows/Forms/PaintEventHandler.h
-  Includes/Pcf/System/Windows/Forms/Panel.h
-#  Includes/Pcf/System/Windows/Forms/PictureBox.h
-  Includes/Pcf/System/Windows/Forms/ProgressBar.h
-  Includes/Pcf/System/Windows/Forms/ProgressBarStyle.h
-  Includes/Pcf/System/Windows/Forms/RadioButton.h
-#  Includes/Pcf/System/Windows/Forms/RichTextBox.h
-#  Includes/Pcf/System/Windows/Forms/SaveFileDialog.h
-#  Includes/Pcf/System/Windows/Forms/Screen.h
-  Includes/Pcf/System/Windows/Forms/ScrollableControl.h
-  Includes/Pcf/System/Windows/Forms/Shortcut.h
-  Includes/Pcf/System/Windows/Forms/SystemInformation.h
-#  Includes/Pcf/System/Windows/Forms/TabControl.h
-#  Includes/Pcf/System/Windows/Forms/TabPage.h
-#  Includes/Pcf/System/Windows/Forms/TextBox.h
-#  Includes/Pcf/System/Windows/Forms/Timer.h
-  Includes/Pcf/System/Windows/Forms/UICues.h
-  Includes/Pcf/System/Windows/Forms/UICuesEventArgs.h
-  Includes/Pcf/System/Windows/Forms/UICuesEventHandler.h
- Includes/Pcf/Forms.h
+  Includes/Pcf/System/ComponentModel/CancelEventArgs.hpp
+  Includes/Pcf/System/ComponentModel/CancelEventHandler.hpp
+  Includes/Pcf/System/ComponentModel/Component.hpp
+  Includes/Pcf/System/ComponentModel/ComponentCollection.hpp
+  Includes/Pcf/System/ComponentModel/EventHandlerList.hpp
+  Includes/Pcf/System/ComponentModel/IComponent.hpp
+  Includes/Pcf/System/ComponentModel/IContainer.hpp
+  Includes/Pcf/System/ComponentModel/ISite.hpp
+  Includes/Pcf/System/Media/SystemSound.hpp
+  Includes/Pcf/System/Media/SystemSounds.hpp
+  Includes/Pcf/System/Windows/Forms/VisualStyles/VisualStyleState.hpp
+  Includes/Pcf/System/Windows/Forms/AccessibleEvents.hpp
+  Includes/Pcf/System/Windows/Forms/AccessibleNavigation.hpp
+  Includes/Pcf/System/Windows/Forms/AccessibleRole.hpp
+  Includes/Pcf/System/Windows/Forms/AnchorStyles.hpp
+  Includes/Pcf/System/Windows/Forms/Application.hpp
+  Includes/Pcf/System/Windows/Forms/ArrangeDirection.hpp
+  Includes/Pcf/System/Windows/Forms/ArrangeStartingPosition.hpp
+  Includes/Pcf/System/Windows/Forms/AutoSizeMode.hpp
+  Includes/Pcf/System/Windows/Forms/BootMode.hpp
+  Includes/Pcf/System/Windows/Forms/BorderStyle.hpp
+  Includes/Pcf/System/Windows/Forms/Button.hpp
+  Includes/Pcf/System/Windows/Forms/ButtonBase.hpp
+  Includes/Pcf/System/Windows/Forms/CheckBox.hpp
+#  Includes/Pcf/System/Windows/Forms/CheckedListBox.hpp
+  Includes/Pcf/System/Windows/Forms/CheckState.hpp
+  Includes/Pcf/System/Windows/Forms/CloseReason.hpp
+  Includes/Pcf/System/Windows/Forms/ContainerControl.hpp
+  Includes/Pcf/System/Windows/Forms/Control.hpp
+  Includes/Pcf/System/Windows/Forms/ControlEventArgs.hpp
+  Includes/Pcf/System/Windows/Forms/ControlEventHandler.hpp
+  Includes/Pcf/System/Windows/Forms/ControlStyles.hpp
+#  Includes/Pcf/System/Windows/Forms/Cursor.hpp
+#  Includes/Pcf/System/Windows/Forms/Cursors.hpp
+  Includes/Pcf/System/Windows/Forms/DataFormats.hpp
+  Includes/Pcf/System/Windows/Forms/DialogResult.hpp
+  Includes/Pcf/System/Windows/Forms/DockStyle.hpp
+  Includes/Pcf/System/Windows/Forms/DragDropEffects.hpp
+  Includes/Pcf/System/Windows/Forms/DragEventArgs.hpp
+  Includes/Pcf/System/Windows/Forms/DragEventHandler.hpp
+#  Includes/Pcf/System/Windows/Forms/FolderBrowserDialog.hpp
+  Includes/Pcf/System/Windows/Forms/Form.hpp
+  Includes/Pcf/System/Windows/Forms/FormBorderStyle.hpp
+  Includes/Pcf/System/Windows/Forms/FormClosedEventArgs.hpp
+  Includes/Pcf/System/Windows/Forms/FormClosedEventHandler.hpp
+  Includes/Pcf/System/Windows/Forms/FormClosingEventArgs.hpp
+  Includes/Pcf/System/Windows/Forms/FormClosingEventHandler.hpp
+  Includes/Pcf/System/Windows/Forms/FormStartPosition.hpp
+  Includes/Pcf/System/Windows/Forms/GiveFeedbackEventArgs.hpp
+  Includes/Pcf/System/Windows/Forms/GiveFeedbackEventHandler.hpp
+#  Includes/Pcf/System/Windows/Forms/GroupBox.hpp
+  Includes/Pcf/System/Windows/Forms/HelpEventArgs.hpp
+  Includes/Pcf/System/Windows/Forms/HelpEventHandler.hpp
+  Includes/Pcf/System/Windows/Forms/IDataObject.hpp
+#  Includes/Pcf/System/Windows/Forms/ImageList.hpp
+  Includes/Pcf/System/Windows/Forms/ImageLayout.hpp
+  Includes/Pcf/System/Windows/Forms/InvalidateEventArgs.hpp
+  Includes/Pcf/System/Windows/Forms/InvalidateEventHandler.hpp
+  Includes/Pcf/System/Windows/Forms/KeyEventArgs.hpp
+  Includes/Pcf/System/Windows/Forms/KeyEventHandler.hpp
+  Includes/Pcf/System/Windows/Forms/KeyPressEventArgs.hpp
+  Includes/Pcf/System/Windows/Forms/KeyPressEventHandler.hpp
+  Includes/Pcf/System/Windows/Forms/Keys.hpp
+  Includes/Pcf/System/Windows/Forms/Label.hpp
+#  Includes/Pcf/System/Windows/Forms/ListBox.hpp
+  Includes/Pcf/System/Windows/Forms/ListControl.hpp
+#  Includes/Pcf/System/Windows/Forms/MainMenu.hpp
+#  Includes/Pcf/System/Windows/Forms/MaskedTextBox.hpp
+#  Includes/Pcf/System/Windows/Forms/Menu.hpp
+#  Includes/Pcf/System/Windows/Forms/MenuItem.hpp
+  Includes/Pcf/System/Windows/Forms/Message.hpp
+  Includes/Pcf/System/Windows/Forms/MessageBox.hpp
+  Includes/Pcf/System/Windows/Forms/MessageBoxButtons.hpp
+  Includes/Pcf/System/Windows/Forms/MessageBoxDefaultButton.hpp
+  Includes/Pcf/System/Windows/Forms/MessageBoxIcon.hpp
+  Includes/Pcf/System/Windows/Forms/MessageBoxOptions.hpp
+  Includes/Pcf/System/Windows/Forms/MethodInvoker.hpp
+  Includes/Pcf/System/Windows/Forms/MouseButtons.hpp
+  Includes/Pcf/System/Windows/Forms/MouseEventArgs.hpp
+  Includes/Pcf/System/Windows/Forms/MouseEventHandler.hpp
+#  Includes/Pcf/System/Windows/Forms/NumericUpDown.hpp
+#  Includes/Pcf/System/Windows/Forms/OpenFileDialog.hpp
+  Includes/Pcf/System/Windows/Forms/PaintEventArgs.hpp
+  Includes/Pcf/System/Windows/Forms/PaintEventHandler.hpp
+  Includes/Pcf/System/Windows/Forms/Panel.hpp
+#  Includes/Pcf/System/Windows/Forms/PictureBox.hpp
+  Includes/Pcf/System/Windows/Forms/ProgressBar.hpp
+  Includes/Pcf/System/Windows/Forms/ProgressBarStyle.hpp
+  Includes/Pcf/System/Windows/Forms/RadioButton.hpp
+#  Includes/Pcf/System/Windows/Forms/RichTextBox.hpp
+#  Includes/Pcf/System/Windows/Forms/SaveFileDialog.hpp
+#  Includes/Pcf/System/Windows/Forms/Screen.hpp
+  Includes/Pcf/System/Windows/Forms/ScrollableControl.hpp
+  Includes/Pcf/System/Windows/Forms/Shortcut.hpp
+  Includes/Pcf/System/Windows/Forms/SystemInformation.hpp
+#  Includes/Pcf/System/Windows/Forms/TabControl.hpp
+#  Includes/Pcf/System/Windows/Forms/TabPage.hpp
+#  Includes/Pcf/System/Windows/Forms/TextBox.hpp
+#  Includes/Pcf/System/Windows/Forms/Timer.hpp
+  Includes/Pcf/System/Windows/Forms/UICues.hpp
+  Includes/Pcf/System/Windows/Forms/UICuesEventArgs.hpp
+  Includes/Pcf/System/Windows/Forms/UICuesEventHandler.hpp
+ Includes/Pcf/Forms.hpp
 )
 
 set(SOURCE_FILES
@@ -122,7 +122,7 @@ set(SOURCE_FILES
   Sources/__OS/ControlGtk.cpp
   Sources/__OS/ControlWin32.cpp
   Sources/__OS/FormCocoa.mm
-  Sources/__OS/FormsApi.h
+  Sources/__OS/FormsApi.hpp
   Sources/__OS/FormFltk.cpp
   Sources/__OS/FormGtk.cpp
   Sources/__OS/FormWin32.cpp
@@ -147,17 +147,17 @@ set(SOURCE_FILES
   Sources/__OS/SystemInformationFltk.cpp
   Sources/__OS/SystemInformationGtk.cpp
   Sources/__OS/SystemInformationWin32.cpp
-  Sources/__OS/WidgetCocoa.h
-  Sources/__OS/WidgetFltk.h
-  Sources/__OS/WidgetGtk.h
-  Sources/__OS/WindowMessage.h
-  Sources/__OS/WindowMessageKey.h
+  Sources/__OS/WidgetCocoa.hpp
+  Sources/__OS/WidgetFltk.hpp
+  Sources/__OS/WidgetGtk.hpp
+  Sources/__OS/WindowMessage.hpp
+  Sources/__OS/WindowMessageKey.hpp
   Sources/__OS/WindowProcedureCocoa.mm
   Sources/__OS/WindowProcedureFltk.cpp
   Sources/__OS/WindowProcedureWin32.cpp
-  Sources/__OS/WindowProcedureCocoa.h
-  Sources/__OS/WindowProcedureFltk.h
-  Sources/__OS/WindowProcedureWin32.h
+  Sources/__OS/WindowProcedureCocoa.hpp
+  Sources/__OS/WindowProcedureFltk.hpp
+  Sources/__OS/WindowProcedureWin32.hpp
   Sources/Pcf/System/Media/SystemSound.cpp
   Sources/Pcf/System/Media/SystemSounds.cpp
   Sources/Pcf/System/Windows/Forms/Application.cpp
@@ -167,12 +167,12 @@ set(SOURCE_FILES
   Sources/Pcf/System/Windows/Forms/Control.cpp
 #  Sources/Pcf/System/Windows/Forms/Cursor.cpp
 #  Sources/Pcf/System/Windows/Forms/Cursors.cpp
-#  Sources/Pcf/System/Windows/Forms/Exclamation.h
+#  Sources/Pcf/System/Windows/Forms/Exclamation.hpp
 #  Sources/Pcf/System/Windows/Forms/FolderBrowserDialog.cpp
   Sources/Pcf/System/Windows/Forms/Form.cpp
 #  Sources/Pcf/System/Windows/Forms/GroupBox.cpp
 #  Sources/Pcf/System/Windows/Forms/ImageList.cpp
-#  Sources/Pcf/System/Windows/Forms/Information.h
+#  Sources/Pcf/System/Windows/Forms/Information.hpp
   Sources/Pcf/System/Windows/Forms/Label.cpp
 #  Sources/Pcf/System/Windows/Forms/ListBox.cpp
 #  Sources/Pcf/System/Windows/Forms/MainMenu.cpp
@@ -186,26 +186,26 @@ set(SOURCE_FILES
   Sources/Pcf/System/Windows/Forms/Panel.cpp
 #  Sources/Pcf/System/Windows/Forms/PictureBox.cpp
   Sources/Pcf/System/Windows/Forms/ProgressBar.cpp
-#  Sources/Pcf/System/Windows/Forms/Question.h
+#  Sources/Pcf/System/Windows/Forms/Question.hpp
   Sources/Pcf/System/Windows/Forms/RadioButton.cpp
 #  Sources/Pcf/System/Windows/Forms/RichTextBox.cpp
 #  Sources/Pcf/System/Windows/Forms/SaveFileDialog.cpp
 #  Sources/Pcf/System/Windows/Forms/Screen.cpp
-#  Sources/Pcf/System/Windows/Forms/Stop.h
+#  Sources/Pcf/System/Windows/Forms/Stop.hpp
   Sources/Pcf/System/Windows/Forms/SystemInformation.cpp
 #  Sources/Pcf/System/Windows/Forms/TabControl.cpp
 #  Sources/Pcf/System/Windows/Forms/TextBox.cpp
 #  Sources/Pcf/System/Windows/Forms/Timer.cpp
 )
 
-source_group(Includes REGULAR_EXPRESSION "/Includes/[-_,A-Za-z0-9]+\\.h*")
-source_group(Includes\\Pcf\\System REGULAR_EXPRESSION "/Includes/Pcf/System/[-_,A-Za-z0-9]+\\.h*")
-source_group(Includes\\Pcf\\System\\ComponentModel REGULAR_EXPRESSION "/Includes/Pcf/System/ComponentModel/[-_,A-Za-z0-9]+\\.h*")
-source_group(Includes\\Pcf\\System\\Media REGULAR_EXPRESSION "/Includes/Pcf/System/Media/[-_,A-Za-z0-9]+\\.h*")
-source_group(Includes\\Pcf\\System\\Windows REGULAR_EXPRESSION "/Includes/Pcf/System/Windows/[-_,A-Za-z0-9]+\\.h*")
-source_group(Includes\\Pcf\\System\\Windows\\Forms REGULAR_EXPRESSION "/Includes/Pcf/System/Windows/Forms/[-_,A-Za-z0-9]+\\.h*")
-source_group(Includes\\Pcf\\System\\Windows\\Forms\\VisualStyles REGULAR_EXPRESSION "/Includes/Pcf/System/Windows/Forms/VisualStyles/[-_,A-Za-z0-9]+\\.h*")
-source_group(Includes\\Pcf REGULAR_EXPRESSION "/Includes/Pcf/[-_,A-Za-z0-9]+\\.h*")
+source_group(Includes REGULAR_EXPRESSION "/Includes/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Pcf\\System REGULAR_EXPRESSION "/Includes/Pcf/System/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Pcf\\System\\ComponentModel REGULAR_EXPRESSION "/Includes/Pcf/System/ComponentModel/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Pcf\\System\\Media REGULAR_EXPRESSION "/Includes/Pcf/System/Media/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Pcf\\System\\Windows REGULAR_EXPRESSION "/Includes/Pcf/System/Windows/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Pcf\\System\\Windows\\Forms REGULAR_EXPRESSION "/Includes/Pcf/System/Windows/Forms/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Pcf\\System\\Windows\\Forms\\VisualStyles REGULAR_EXPRESSION "/Includes/Pcf/System/Windows/Forms/VisualStyles/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Pcf REGULAR_EXPRESSION "/Includes/Pcf/[-_,A-Za-z0-9]+\\.hpp*")
 source_group(Includes\\Pcf REGULAR_EXPRESSION "/Includes/Pcf/[-_,A-Za-z0-9]")
 
 source_group(Sources REGULAR_EXPRESSION "/Sources/[-_,A-Za-z0-9]+\\.c*")

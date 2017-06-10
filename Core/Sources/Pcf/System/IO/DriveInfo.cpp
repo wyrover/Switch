@@ -1,9 +1,9 @@
 #include <cstring>
 
-#include "../../../../Includes/Pcf/System/UnauthorizedAccessException.h"
-#include "../../../../Includes/Pcf/System/IO/DriveInfo.h"
-#include "../../../../Includes/Pcf/System/IO/IOException.h"
-#include "../../../__OS/CoreApi.h"
+#include "../../../../Includes/Pcf/System/UnauthorizedAccessException.hpp"
+#include "../../../../Includes/Pcf/System/IO/DriveInfo.hpp"
+#include "../../../../Includes/Pcf/System/IO/IOException.hpp"
+#include "../../../__OS/CoreApi.hpp"
 
 using namespace System;
 using namespace System::IO;

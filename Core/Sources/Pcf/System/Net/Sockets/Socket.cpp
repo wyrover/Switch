@@ -1,10 +1,10 @@
-#include "../../../../../Includes/Pcf/System/NotImplementedException.h"
-#include "../../../../../Includes/Pcf/System/ObjectClosedException.h"
-#include "../../../../../Includes/Pcf/System/Net/Dns.h"
-#include "../../../../../Includes/Pcf/System/Net/Sockets/Socket.h"
-#include "../../../../../Includes/Pcf/System/Net/Sockets/MulticastOption.h"
-#include "../../../../../Includes/Pcf/System/Net/Sockets/SocketException.h"
-#include "../../../../__OS/CoreApi.h"
+#include "../../../../../Includes/Pcf/System/NotImplementedException.hpp"
+#include "../../../../../Includes/Pcf/System/ObjectClosedException.hpp"
+#include "../../../../../Includes/Pcf/System/Net/Dns.hpp"
+#include "../../../../../Includes/Pcf/System/Net/Sockets/Socket.hpp"
+#include "../../../../../Includes/Pcf/System/Net/Sockets/MulticastOption.hpp"
+#include "../../../../../Includes/Pcf/System/Net/Sockets/SocketException.hpp"
+#include "../../../../__OS/CoreApi.hpp"
 
 using namespace System;
 using namespace System::Net;

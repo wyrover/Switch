@@ -1,15 +1,15 @@
 #include <codecvt>
 #include <locale>
-#include "../../../Includes/Pcf/System/String.h"
-#include "../../../Includes/Pcf/System/Array.h"
-#include "../../../Includes/Pcf/System/Convert.h"
-#include "../../../Includes/Pcf/System/FormatProvider.h"
-#include "../../../Includes/Pcf/System/Math.h"
-#include "../../../Includes/Pcf/System/StringSplitOptions.h"
-#include "../../../Includes/Pcf/System/Text/UTF8Encoding.h"
-#include "../../../Includes/Pcf/System/Text/ANSIEncoding.h"
-#include "../../../Includes/Pcf/Boxing.h"
-#include "ArrayAlgorithms.h"
+#include "../../../Includes/Pcf/System/String.hpp"
+#include "../../../Includes/Pcf/System/Array.hpp"
+#include "../../../Includes/Pcf/System/Convert.hpp"
+#include "../../../Includes/Pcf/System/FormatProvider.hpp"
+#include "../../../Includes/Pcf/System/Math.hpp"
+#include "../../../Includes/Pcf/System/StringSplitOptions.hpp"
+#include "../../../Includes/Pcf/System/Text/UTF8Encoding.hpp"
+#include "../../../Includes/Pcf/System/Text/ANSIEncoding.hpp"
+#include "../../../Includes/Pcf/Boxing.hpp"
+#include "ArrayAlgorithms.hpp"
 
 #if defined(_WIN32)
 using __char16 = __int16;

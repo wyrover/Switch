@@ -1,5 +1,5 @@
-#include "../../../../Includes/Pcf/System/Drawing/SolidBrush.h"
-#include "../../../__OS/DrawingApi.h"
+#include "../../../../Includes/Pcf/System/Drawing/SolidBrush.hpp"
+#include "../../../__OS/DrawingApi.hpp"
 
 using namespace System;
 using namespace System::Drawing;

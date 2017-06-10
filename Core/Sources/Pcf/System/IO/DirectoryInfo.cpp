@@ -1,10 +1,10 @@
-#include "../../../../Includes/Pcf/System/IO/Directory.h"
-#include "../../../../Includes/Pcf/System/IO/File.h"
-#include "../../../../Includes/Pcf/System/IO/DirectoryNotFoundException.h"
-#include "../../../../Includes/Pcf/System/IO/Path.h"
-#include "../../../../Includes/Pcf/System/Security/SecurityException.h"
-#include "../../../../Includes/Pcf/System/Text/StringBuilder.h"
-#include "../../../__OS/CoreApi.h"
+#include "../../../../Includes/Pcf/System/IO/Directory.hpp"
+#include "../../../../Includes/Pcf/System/IO/File.hpp"
+#include "../../../../Includes/Pcf/System/IO/DirectoryNotFoundException.hpp"
+#include "../../../../Includes/Pcf/System/IO/Path.hpp"
+#include "../../../../Includes/Pcf/System/Security/SecurityException.hpp"
+#include "../../../../Includes/Pcf/System/Text/StringBuilder.hpp"
+#include "../../../__OS/CoreApi.hpp"
 
 using namespace System;
 using namespace System::IO;

@@ -1,7 +1,7 @@
 #if defined(__APPLE__) && defined(__use_native_interface__)
 #import <Cocoa/Cocoa.h>
 #import <Foundation/Foundation.h>
-#include "DrawingApi.h"
+#include "DrawingApi.hpp"
 
 using namespace System;
 using namespace __OS;

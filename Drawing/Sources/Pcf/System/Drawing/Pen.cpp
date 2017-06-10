@@ -1,5 +1,5 @@
-#include "../../../../Includes/Pcf/System/Drawing/Pen.h"
-#include "../../../__OS/DrawingApi.h"
+#include "../../../../Includes/Pcf/System/Drawing/Pen.hpp"
+#include "../../../__OS/DrawingApi.hpp"
 
 using namespace System;
 using namespace System::Drawing;

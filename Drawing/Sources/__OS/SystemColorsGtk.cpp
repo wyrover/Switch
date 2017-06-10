@@ -1,7 +1,7 @@
-﻿#if defined(__linux__) && defined(__use_native_interface__)
+﻿#if (defined(__linux__) && defined(__use_native_interface__)) || defined(__use_gtk_interface__)
 
 #include <gtkmm.h>
-#include "DrawingApi.h"
+#include "DrawingApi.hpp"
 
 using namespace System;
 using namespace __OS;

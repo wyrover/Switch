@@ -2,7 +2,7 @@
 
 #include <cmath>
 #include <pthread.h>
-#include "CoreApi.h"
+#include "CoreApi.hpp"
 
 bool __OS::CoreApi::Thread::Cancel(intptr handle) {
   return pthread_cancel((pthread_t)handle) == 0;

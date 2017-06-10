@@ -1,8 +1,8 @@
 ﻿#if defined(_WIN32) && defined(__use_native_interface__)
-#include <Windows.h>
-#include <Pcf/Undef.h>
+#include <Windows.hpp>
+#include <Pcf/Undef.hpp>
 
-#include "DrawingApi.h"
+#include "DrawingApi.hpp"
 
 using namespace System;
 using namespace __OS;

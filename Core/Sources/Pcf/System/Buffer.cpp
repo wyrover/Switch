@@ -1,6 +1,6 @@
 #include <cstring>
 
-#include "../../../Includes/Pcf/System/Buffer.h"
+#include "../../../Includes/Pcf/System/Buffer.hpp"
 
 using namespace System;
 

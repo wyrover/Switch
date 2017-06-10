@@ -1,11 +1,11 @@
 #if defined(_WIN32)
 
 #include <csignal>
-#include <conio.h>
-#include <windows.h>
-#include "../../Includes/Pcf/Undef.h"
+#include <conio.hpp>
+#include <windows.hpp>
+#include "../../Includes/Pcf/Undef.hpp"
 
-#include "CoreApi.h"
+#include "CoreApi.hpp"
 
 void __OS::CoreApi::Console::Beep(int32 frequency, int32 duration) {
   ::Beep(frequency, duration);

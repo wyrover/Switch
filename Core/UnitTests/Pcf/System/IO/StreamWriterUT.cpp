@@ -1,12 +1,12 @@
-#include <Pcf/System/IO/StreamWriter.h>
-#include <Pcf/System/IO/StreamReader.h>
-#include <Pcf/System/IO/StringReader.h>
-#include <Pcf/System/IO/MemoryStream.h>
-#include <Pcf/TUnit/Assert.h>
-#include <Pcf/TUnit/TestFixture.h>
+#include <Pcf/System/IO/StreamWriter.hpp>
+#include <Pcf/System/IO/StreamReader.hpp>
+#include <Pcf/System/IO/StringReader.hpp>
+#include <Pcf/System/IO/MemoryStream.hpp>
+#include <Pcf/TUnit/Assert.hpp>
+#include <Pcf/TUnit/TestFixture.hpp>
 
 
-#include <Pcf/System/IO/Path.h>
+#include <Pcf/System/IO/Path.hpp>
 
 using namespace System;
 using namespace System::IO;

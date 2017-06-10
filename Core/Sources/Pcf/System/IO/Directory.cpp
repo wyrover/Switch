@@ -1,9 +1,9 @@
-#include "../../../../Includes/Pcf/System/IO/Directory.h"
-#include "../../../../Includes/Pcf/System/IO/DirectoryInfo.h"
-#include "../../../../Includes/Pcf/System/Environment.h"
-#include "../../../../Includes/Pcf/System/IO/File.h"
-#include "../../../../Includes/Pcf/System/IO/Path.h"
-#include "../../../__OS/CoreApi.h"
+#include "../../../../Includes/Pcf/System/IO/Directory.hpp"
+#include "../../../../Includes/Pcf/System/IO/DirectoryInfo.hpp"
+#include "../../../../Includes/Pcf/System/Environment.hpp"
+#include "../../../../Includes/Pcf/System/IO/File.hpp"
+#include "../../../../Includes/Pcf/System/IO/Path.hpp"
+#include "../../../__OS/CoreApi.hpp"
 
 using namespace System;
 using namespace System::IO;

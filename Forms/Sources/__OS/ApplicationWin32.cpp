@@ -1,11 +1,11 @@
 ﻿#if defined(_WIN32) && defined(__use_native_interface__)
 #pragma comment(linker,"\"/manifestdependency:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
 
-#include <Windows.h>
-#include <Pcf/Undef.h>
-#include <Pcf/System/Diagnostics/Debug.h>
+#include <Windows.hpp>
+#include <Pcf/Undef.hpp>
+#include <Pcf/System/Diagnostics/Debug.hpp>
 
-#include "FormsApi.h"
+#include "FormsApi.hpp"
 
 using namespace System;
 using namespace System::Windows::Forms;

@@ -1,5 +1,5 @@
-#include "../../../../Includes/Pcf/System/Threading/Mutex.h"
-#include "NamedHandleCollection.h"
+#include "../../../../Includes/Pcf/System/Threading/Mutex.hpp"
+#include "NamedHandleCollection.hpp"
 
 using namespace System;
 using namespace System::Threading;

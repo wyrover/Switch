@@ -1,7 +1,7 @@
-#include "../../../Includes/Pcf/System/NumericalParsing.h"
-#include "../../../Includes/Pcf/System/Convert.h"
-#include "../../../Includes/Pcf/System/NumberRepresentationBase.h"
-#include "../../../Includes/Pcf/System/SystemException.h"
+#include "../../../Includes/Pcf/System/NumericalParsing.hpp"
+#include "../../../Includes/Pcf/System/Convert.hpp"
+#include "../../../Includes/Pcf/System/NumberRepresentationBase.hpp"
+#include "../../../Includes/Pcf/System/SystemException.hpp"
 
 using namespace System;
 

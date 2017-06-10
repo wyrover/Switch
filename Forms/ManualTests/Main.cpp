@@ -1,7 +1,7 @@
-#include <Pcf/Startup.h>
-#include <Pcf/System/Diagnostics/Debug.h>
-#include <Pcf/System/Windows/Forms/Application.h>
-#include <Pcf/System/Windows/Forms/CheckBox.h>
+#include <Pcf/Startup.hpp>
+#include <Pcf/System/Diagnostics/Debug.hpp>
+#include <Pcf/System/Windows/Forms/Application.hpp>
+#include <Pcf/System/Windows/Forms/CheckBox.hpp>
 
 using namespace System;
 using namespace System::Drawing;

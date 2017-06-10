@@ -1,10 +1,10 @@
 #if defined(_WIN32)
 
-#include <windows.h>
-#include "../../Includes/Pcf/Undef.h"
+#include <windows.hpp>
+#include "../../Includes/Pcf/Undef.hpp"
 
-#include "CoreApi.h"
-#include "../../Includes/Pcf/System/Collections/Generic/List.h"
+#include "CoreApi.hpp"
+#include "../../Includes/Pcf/System/Collections/Generic/List.hpp"
 
 bool __OS::CoreApi::Drive::GetAvailableFreeSpace(const string& rootPathName, int64& freeBytes, int64& totalNumberOfBytes, int64& totalNumberOfFreeBytes) {
   bool retValue = false;

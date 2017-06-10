@@ -2,7 +2,7 @@
 #include <set>
 #include <vector>
 
-#include "CoreApi.h"
+#include "CoreApi.hpp"
 
 byte __OS::CoreApi::UnicodeEncodings::UTF8::GetFormat(byte b) {
   if (b  < 0x80)          return 1;  // 0XXXXXXX

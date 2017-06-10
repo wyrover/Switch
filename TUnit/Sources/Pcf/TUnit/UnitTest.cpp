@@ -1,10 +1,10 @@
-#include <Pcf/TUnit/UnitTest.h>
-#include <Pcf/System/Console.h>
-#include <Pcf/System/Environment.h>
-#include <Pcf/System/String.h>
-#include <Pcf/Startup.h>
+#include <Pcf/TUnit/UnitTest.hpp>
+#include <Pcf/System/Console.hpp>
+#include <Pcf/System/Environment.hpp>
+#include <Pcf/System/String.hpp>
+#include <Pcf/Startup.hpp>
 #include <gtest/gtest.h>
-#include "ConsoleEventListener.h"
+#include "ConsoleEventListener.hpp"
 
 using namespace TUnit;
 

@@ -1,39 +1,39 @@
 set(INCLUDE_FILES
-  Includes/Pcf/System/Drawing/Drawing2D/DashStyle.h
-  Includes/Pcf/System/Drawing/Imaging/ColorPalette.h
-  Includes/Pcf/System/Drawing/Imaging/FrameDimension.h
-  Includes/Pcf/System/Drawing/Imaging/ImageFlags.h
-  Includes/Pcf/System/Drawing/Imaging/ImageFormat.h
-  Includes/Pcf/System/Drawing/Imaging/PixelFormat.h
-  Includes/Pcf/System/Drawing/Text/FontCollection.h
-  Includes/Pcf/System/Drawing/Text/GenericFontFamilies.h
-  Includes/Pcf/System/Drawing/Text/InstalledFontCollection.h
-  Includes/Pcf/System/Drawing/Bitmap.h
-  Includes/Pcf/System/Drawing/Brush.h
-  Includes/Pcf/System/Drawing/CharacterRange.h
-  Includes/Pcf/System/Drawing/Color.h
-  Includes/Pcf/System/Drawing/ContentAlignment.h
-  Includes/Pcf/System/Drawing/Font.h
-  Includes/Pcf/System/Drawing/FontFamily.h
-  Includes/Pcf/System/Drawing/FontStyle.h
-  Includes/Pcf/System/Drawing/Graphics.h
-  Includes/Pcf/System/Drawing/GraphicsUnit.h
-  Includes/Pcf/System/Drawing/Image.h
-  Includes/Pcf/System/Drawing/KnownColor.h
-  Includes/Pcf/System/Drawing/Pen.h
-  Includes/Pcf/System/Drawing/Point.h
-  Includes/Pcf/System/Drawing/PointF.h
-  Includes/Pcf/System/Drawing/Rectangle.h
-  Includes/Pcf/System/Drawing/RectangleF.h
-  Includes/Pcf/System/Drawing/SolidBrush.h
-  Includes/Pcf/System/Drawing/Size.h
-  Includes/Pcf/System/Drawing/SizeF.h
-  Includes/Pcf/System/Drawing/SystemColors.h
-  Includes/Pcf/Drawing.h
+  Includes/Pcf/System/Drawing/Drawing2D/DashStyle.hpp
+  Includes/Pcf/System/Drawing/Imaging/ColorPalette.hpp
+  Includes/Pcf/System/Drawing/Imaging/FrameDimension.hpp
+  Includes/Pcf/System/Drawing/Imaging/ImageFlags.hpp
+  Includes/Pcf/System/Drawing/Imaging/ImageFormat.hpp
+  Includes/Pcf/System/Drawing/Imaging/PixelFormat.hpp
+  Includes/Pcf/System/Drawing/Text/FontCollection.hpp
+  Includes/Pcf/System/Drawing/Text/GenericFontFamilies.hpp
+  Includes/Pcf/System/Drawing/Text/InstalledFontCollection.hpp
+  Includes/Pcf/System/Drawing/Bitmap.hpp
+  Includes/Pcf/System/Drawing/Brush.hpp
+  Includes/Pcf/System/Drawing/CharacterRange.hpp
+  Includes/Pcf/System/Drawing/Color.hpp
+  Includes/Pcf/System/Drawing/ContentAlignment.hpp
+  Includes/Pcf/System/Drawing/Font.hpp
+  Includes/Pcf/System/Drawing/FontFamily.hpp
+  Includes/Pcf/System/Drawing/FontStyle.hpp
+  Includes/Pcf/System/Drawing/Graphics.hpp
+  Includes/Pcf/System/Drawing/GraphicsUnit.hpp
+  Includes/Pcf/System/Drawing/Image.hpp
+  Includes/Pcf/System/Drawing/KnownColor.hpp
+  Includes/Pcf/System/Drawing/Pen.hpp
+  Includes/Pcf/System/Drawing/Point.hpp
+  Includes/Pcf/System/Drawing/PointF.hpp
+  Includes/Pcf/System/Drawing/Rectangle.hpp
+  Includes/Pcf/System/Drawing/RectangleF.hpp
+  Includes/Pcf/System/Drawing/SolidBrush.hpp
+  Includes/Pcf/System/Drawing/Size.hpp
+  Includes/Pcf/System/Drawing/SizeF.hpp
+  Includes/Pcf/System/Drawing/SystemColors.hpp
+  Includes/Pcf/Drawing.hpp
 )
 
 set(SOURCE_FILES
-  Sources/__OS/DrawingApi.h
+  Sources/__OS/DrawingApi.hpp
   Sources/__OS/DrawingApiFltk.cpp
   Sources/__OS/DrawingApiGtk.cpp
   Sources/__OS/DrawingApiWin32.cpp
@@ -44,17 +44,17 @@ set(SOURCE_FILES
   Sources/Pcf/System/Drawing/Imaging/ImageFormat.cpp
   Sources/Pcf/System/Drawing/Text/FontCollection.cpp
   Sources/Pcf/System/Drawing/Text/InstalledFontCollection.cpp
-  Sources/Pcf/System/Drawing/Bmp.h
+  Sources/Pcf/System/Drawing/Bmp.hpp
   Sources/Pcf/System/Drawing/Brush.cpp
   Sources/Pcf/System/Drawing/Color.cpp
   Sources/Pcf/System/Drawing/Font.cpp
   Sources/Pcf/System/Drawing/FontFamily.cpp
-  Sources/Pcf/System/Drawing/Gif.h
+  Sources/Pcf/System/Drawing/Gif.hpp
   Sources/Pcf/System/Drawing/Graphics.cpp
   Sources/Pcf/System/Drawing/Image.cpp
-  Sources/Pcf/System/Drawing/Jpg.h
+  Sources/Pcf/System/Drawing/Jpg.hpp
   Sources/Pcf/System/Drawing/Pen.cpp
-  Sources/Pcf/System/Drawing/Png.h
+  Sources/Pcf/System/Drawing/Png.hpp
   Sources/Pcf/System/Drawing/Point.cpp
   Sources/Pcf/System/Drawing/PointF.cpp
   Sources/Pcf/System/Drawing/Rectangle.cpp
@@ -63,7 +63,7 @@ set(SOURCE_FILES
   Sources/Pcf/System/Drawing/SizeF.cpp
   Sources/Pcf/System/Drawing/SolidBrush.cpp
   Sources/Pcf/System/Drawing/SystemColors.cpp
-  Sources/Pcf/System/Drawing/Tif.h
+  Sources/Pcf/System/Drawing/Tif.hpp
 )
 
 if (APPLE)
@@ -73,14 +73,14 @@ set(COCOA_SOURCE_FILES
 )
 endif ()
 
-source_group(Includes\\Pcf\\System REGULAR_EXPRESSION "/Includes/Pcf/System/[-_,A-Za-z0-9]+\\.h*")
-source_group(Includes\\Pcf\\System\\Drawing REGULAR_EXPRESSION "/Includes/Pcf/System/Drawing/[-_,A-Za-z0-9]+\\.h*")
-source_group(Includes\\Pcf\\System\\Drawing\\Drawing2D REGULAR_EXPRESSION "/Includes/Pcf/System/Drawing/Drawing2D/[-_,A-Za-z0-9]+\\.h*")
-source_group(Includes\\Pcf\\System\\Drawing\\Imaging REGULAR_EXPRESSION "/Includes/Pcf/System/Drawing/Imaging/[-_,A-Za-z0-9]+\\.h*")
-source_group(Includes\\Pcf\\System\\Drawing\\Text REGULAR_EXPRESSION "/Includes/Pcf/System/Drawing/Text/[-_,A-Za-z0-9]+\\.h*")
-source_group(Includes\\Pcf REGULAR_EXPRESSION "/Includes/Pcf/[-_,A-Za-z0-9]+\\.h*")
+source_group(Includes\\Pcf\\System REGULAR_EXPRESSION "/Includes/Pcf/System/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Pcf\\System\\Drawing REGULAR_EXPRESSION "/Includes/Pcf/System/Drawing/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Pcf\\System\\Drawing\\Drawing2D REGULAR_EXPRESSION "/Includes/Pcf/System/Drawing/Drawing2D/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Pcf\\System\\Drawing\\Imaging REGULAR_EXPRESSION "/Includes/Pcf/System/Drawing/Imaging/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Pcf\\System\\Drawing\\Text REGULAR_EXPRESSION "/Includes/Pcf/System/Drawing/Text/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Pcf REGULAR_EXPRESSION "/Includes/Pcf/[-_,A-Za-z0-9]+\\.hpp*")
 source_group(Includes\\Pcf REGULAR_EXPRESSION "/Includes/Pcf/[-_,A-Za-z0-9]")
-source_group(Includes REGULAR_EXPRESSION "/Includes/[-_,A-Za-z0-9]+\\.h*")
+source_group(Includes REGULAR_EXPRESSION "/Includes/[-_,A-Za-z0-9]+\\.hpp*")
 
 source_group(Sources\\Pcf\\System REGULAR_EXPRESSION "/Sources/Pcf/System/[-_,A-Za-z0-9]+\\.c*")
 source_group(Sources\\Pcf\\System\\Drawing REGULAR_EXPRESSION "/Sources/Pcf/System/Drawing/[-_,A-Za-z0-9]+\\.*")

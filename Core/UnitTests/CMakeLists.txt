@@ -34,7 +34,7 @@ set(SOURCE_FILES
   Pcf/System/Text/DecoderUT.cpp
   Pcf/System/Text/EncoderUT.cpp
   Pcf/System/Text/EncodingUT.cpp
-  Pcf/System/Text/EncodingUT.h
+  Pcf/System/Text/EncodingUT.hpp
   Pcf/System/Text/UnicodeEncodingUT.cpp
   Pcf/System/Text/UnicodeEncodingsUT.cpp
   Pcf/System/Text/UTF32EncodingUT.cpp

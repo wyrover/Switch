@@ -13,9 +13,9 @@
 #include <termios.h>
 #include <unistd.h>
 #include <sys/ioctl.h>
-#include "../../Includes/Pcf/Undef.h"
+#include "../../Includes/Pcf/Undef.hpp"
 
-#include "CoreApi.h"
+#include "CoreApi.hpp"
 
 namespace {
   class Terminal {

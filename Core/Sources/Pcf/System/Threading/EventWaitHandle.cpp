@@ -1,5 +1,5 @@
-#include "../../../../Includes/Pcf/System/Threading/EventWaitHandle.h"
-#include "NamedHandleCollection.h"
+#include "../../../../Includes/Pcf/System/Threading/EventWaitHandle.hpp"
+#include "NamedHandleCollection.hpp"
 
 using namespace System;
 using namespace System::Threading;

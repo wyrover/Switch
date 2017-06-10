@@ -1,6 +1,6 @@
-#include "../../../../../Includes/Pcf/System/Windows/Forms/Application.h"
-#include "../../../../../Includes/Pcf/System/Windows/Forms/CheckBox.h"
-#include "../../../../__OS/FormsApi.h"
+#include "../../../../../Includes/Pcf/System/Windows/Forms/Application.hpp"
+#include "../../../../../Includes/Pcf/System/Windows/Forms/CheckBox.hpp"
+#include "../../../../__OS/FormsApi.hpp"
 
 using namespace System;
 using namespace System::Drawing;

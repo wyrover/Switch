@@ -1,8 +1,8 @@
-#include "../../../../Includes/Pcf/System/ObjectClosedException.h"
-#include "../../../../Includes/Pcf/System/IO/StreamWriter.h"
-#include "../../../../Includes/Pcf/System/IO/File.h"
-#include "../../../../Includes/Pcf/System/IO/FileStream.h"
-#include "../../../../Includes/Pcf/System/Text/UTF8Encoding.h"
+#include "../../../../Includes/Pcf/System/ObjectClosedException.hpp"
+#include "../../../../Includes/Pcf/System/IO/StreamWriter.hpp"
+#include "../../../../Includes/Pcf/System/IO/File.hpp"
+#include "../../../../Includes/Pcf/System/IO/FileStream.hpp"
+#include "../../../../Includes/Pcf/System/Text/UTF8Encoding.hpp"
 
 using namespace System;
 using namespace System::IO;

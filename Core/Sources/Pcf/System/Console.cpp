@@ -3,11 +3,11 @@
 #include <cwchar>
 #include <iostream>
 
-#include "../../../Includes/Pcf/System/Buffer.h"
-#include "../../../Includes/Pcf/System/Console.h"
-#include "../../../Includes/Pcf/System/Environment.h"
-#include "../../../Includes/Pcf/System/Text/UTF8Encoding.h"
-#include "../../__OS/CoreApi.h"
+#include "../../../Includes/Pcf/System/Buffer.hpp"
+#include "../../../Includes/Pcf/System/Console.hpp"
+#include "../../../Includes/Pcf/System/Environment.hpp"
+#include "../../../Includes/Pcf/System/Text/UTF8Encoding.hpp"
+#include "../../__OS/CoreApi.hpp"
 
 namespace {
   // This hack is necessary in windows because std::cout does not work properly with Utf8 and unicode code page

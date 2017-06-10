@@ -1,8 +1,8 @@
-#include <Pcf/System/Collections/Generic/List.h>
-#include <Pcf/System/Threading/Thread.h>
-#include <Pcf/System/Random.h>
-#include <Pcf/TUnit/Assert.h>
-#include <Pcf/TUnit/TestFixture.h>
+#include <Pcf/System/Collections/Generic/List.hpp>
+#include <Pcf/System/Threading/Thread.hpp>
+#include <Pcf/System/Random.hpp>
+#include <Pcf/TUnit/Assert.hpp>
+#include <Pcf/TUnit/TestFixture.hpp>
 
 using namespace System;
 using namespace System::Collections::Generic;

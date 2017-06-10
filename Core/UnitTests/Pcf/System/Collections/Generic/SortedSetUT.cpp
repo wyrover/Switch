@@ -1,6 +1,6 @@
-#include <Pcf/System/Collections/Generic/SortedSet.h>
-#include <Pcf/TUnit/Assert.h>
-#include <Pcf/TUnit/TestFixture.h>
+#include <Pcf/System/Collections/Generic/SortedSet.hpp>
+#include <Pcf/TUnit/Assert.hpp>
+#include <Pcf/TUnit/TestFixture.hpp>
 
 using namespace System;
 using namespace System::Collections::Generic;

@@ -1,5 +1,5 @@
-#include "../../../Includes/Pcf/System/Guid.h"
-#include "../../__OS/CoreApi.h"
+#include "../../../Includes/Pcf/System/Guid.hpp"
+#include "../../__OS/CoreApi.hpp"
 
 System::Guid System::Guid::Empty;
 

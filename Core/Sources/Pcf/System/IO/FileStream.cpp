@@ -1,12 +1,12 @@
 #include <cstring>
 
-#include "../../../../Includes/Pcf/System/ObjectClosedException.h"
-#include "../../../../Includes/Pcf/System/IO/Directory.h"
-#include "../../../../Includes/Pcf/System/IO/DirectoryNotFoundException.h"
-#include "../../../../Includes/Pcf/System/IO/FileStream.h"
-#include "../../../../Includes/Pcf/System/IO/File.h"
-#include "../../../../Includes/Pcf/System/IO/FileNotFoundException.h"
-#include "../../../../Includes/Pcf/System/IO/Path.h"
+#include "../../../../Includes/Pcf/System/ObjectClosedException.hpp"
+#include "../../../../Includes/Pcf/System/IO/Directory.hpp"
+#include "../../../../Includes/Pcf/System/IO/DirectoryNotFoundException.hpp"
+#include "../../../../Includes/Pcf/System/IO/FileStream.hpp"
+#include "../../../../Includes/Pcf/System/IO/File.hpp"
+#include "../../../../Includes/Pcf/System/IO/FileNotFoundException.hpp"
+#include "../../../../Includes/Pcf/System/IO/Path.hpp"
 
 using namespace System;
 using namespace System::IO;

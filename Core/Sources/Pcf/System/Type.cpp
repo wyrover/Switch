@@ -2,9 +2,9 @@
 #include <cstddef>
 #include <cstring>
 
-#include "../../../Includes/Pcf/System/Array.h"
-#include "../../../Includes/Pcf/System/Type.h"
-#include "../../__OS/CoreApi.h"
+#include "../../../Includes/Pcf/System/Array.hpp"
+#include "../../../Includes/Pcf/System/Type.hpp"
+#include "../../__OS/CoreApi.hpp"
 
 using namespace System;
 

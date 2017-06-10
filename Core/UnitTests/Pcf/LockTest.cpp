@@ -1,7 +1,7 @@
-﻿#include <Pcf/Lock.h>
-#include <Pcf/System/Diagnostics/Stopwatch.h>
-#include <Pcf/TUnit/Assert.h>
-#include <Pcf/TUnit/TestFixture.h>
+﻿#include <Pcf/Lock.hpp>
+#include <Pcf/System/Diagnostics/Stopwatch.hpp>
+#include <Pcf/TUnit/Assert.hpp>
+#include <Pcf/TUnit/TestFixture.hpp>
 
 using namespace System;
 using namespace System::Threading;

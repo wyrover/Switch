@@ -1,5 +1,5 @@
-#include <Pcf/TUnit/UnitTest.h>
-#include <Pcf/Startup.h>
+#include <Pcf/TUnit/UnitTest.hpp>
+#include <Pcf/Startup.hpp>
 
 namespace {
   class MainTest {

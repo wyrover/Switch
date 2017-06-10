@@ -1,9 +1,9 @@
 #if defined(_WIN32)
 
-#include <windows.h>
-#include "../../Includes/Pcf/Undef.h"
+#include <windows.hpp>
+#include "../../Includes/Pcf/Undef.hpp"
 
-#include "CoreApi.h"
+#include "CoreApi.hpp"
 
 int32 __OS::CoreApi::Interlocked::Add(int32& location, int32 value) {
   InterlockedExchange((long*)&location, location + value);

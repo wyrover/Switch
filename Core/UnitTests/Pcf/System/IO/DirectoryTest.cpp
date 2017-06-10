@@ -1,7 +1,7 @@
-﻿#include <Pcf/System/IO/Directory.h>
-#include <Pcf/System/IO/Path.h>
-#include <Pcf/TUnit/Assert.h>
-#include <Pcf/TUnit/TestFixture.h>
+﻿#include <Pcf/System/IO/Directory.hpp>
+#include <Pcf/System/IO/Path.hpp>
+#include <Pcf/TUnit/Assert.hpp>
+#include <Pcf/TUnit/TestFixture.hpp>
 
 using namespace System;
 using namespace TUnit;

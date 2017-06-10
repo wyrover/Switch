@@ -1,8 +1,8 @@
 ﻿#if defined(_WIN32) && defined(__use_native_interface__)
-#include <Windows.h>
-#include <Pcf/Undef.h>
+#include <Windows.hpp>
+#include <Pcf/Undef.hpp>
 
-#include "FormsApi.h"
+#include "FormsApi.hpp"
 
 extern int main(int argc, char* argv[]);
 __declspec(dllimport) extern int __argc;

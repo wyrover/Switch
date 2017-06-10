@@ -1,10 +1,10 @@
-﻿#include <Pcf/System/Text/ASCIIEncoding.h>
-#include <Pcf/System/Text/ANSIEncoding.h>
-#include <Pcf/System/Text/UnicodeEncoding.h>
-#include <Pcf/System/Text/UTF8Encoding.h>
-#include <Pcf/System/Text/UTF32Encoding.h>
-#include <Pcf/TUnit/Assert.h>
-#include <Pcf/TUnit/TestFixture.h>
+﻿#include <Pcf/System/Text/ASCIIEncoding.hpp>
+#include <Pcf/System/Text/ANSIEncoding.hpp>
+#include <Pcf/System/Text/UnicodeEncoding.hpp>
+#include <Pcf/System/Text/UTF8Encoding.hpp>
+#include <Pcf/System/Text/UTF32Encoding.hpp>
+#include <Pcf/TUnit/Assert.hpp>
+#include <Pcf/TUnit/TestFixture.hpp>
 
 using namespace System;
 using namespace System::Text;

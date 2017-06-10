@@ -1,5 +1,5 @@
-#include "../../../../Includes/Pcf/System/Text/UTF8Encoding.h"
-#include "../../../__OS/CoreApi.h"
+#include "../../../../Includes/Pcf/System/Text/UTF8Encoding.hpp"
+#include "../../../__OS/CoreApi.hpp"
 
 using namespace System;
 using namespace System::Text;

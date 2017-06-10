@@ -1,4 +1,4 @@
-#include "../../../../Includes/Pcf/System/Net/IPHostEntry.h"
+#include "../../../../Includes/Pcf/System/Net/IPHostEntry.hpp"
 
 using namespace System;
 using namespace System::Net;

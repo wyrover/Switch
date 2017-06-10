@@ -1,5 +1,5 @@
-#include <Pcf/System/Console.h>
-#include <Pcf/Startup.h>
+#include <Pcf/System/Console.hpp>
+#include <Pcf/Startup.hpp>
 
 using namespace System;
 

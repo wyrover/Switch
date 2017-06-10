@@ -2,8 +2,8 @@
 #include <cstdlib>
 #include <ctime>
 
-#include "../../../Includes/Pcf/System/Random.h"
-#include "../../../Includes/Pcf/System/Math.h"
+#include "../../../Includes/Pcf/System/Random.hpp"
+#include "../../../Includes/Pcf/System/Math.hpp"
 
 using namespace System;
 

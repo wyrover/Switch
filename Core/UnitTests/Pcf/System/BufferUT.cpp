@@ -1,7 +1,7 @@
-#include <Pcf/Types.h>
-#include <Pcf/System/Buffer.h>
-#include <Pcf/TUnit/Assert.h>
-#include <Pcf/TUnit/TestFixture.h>
+#include <Pcf/Types.hpp>
+#include <Pcf/System/Buffer.hpp>
+#include <Pcf/TUnit/Assert.hpp>
+#include <Pcf/TUnit/TestFixture.hpp>
 
 using namespace System;
 using namespace TUnit;

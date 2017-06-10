@@ -3,7 +3,7 @@
 #include <gtkmm/frame.h>
 #include <gtkmm/scrolledwindow.h>
 
-#include "WidgetGtk.h"
+#include "WidgetGtk.hpp"
 
 using namespace System;
 using namespace System::Drawing;

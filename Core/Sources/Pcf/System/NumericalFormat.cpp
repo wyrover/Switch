@@ -1,11 +1,11 @@
 #include <cstdio>
 #include <cstring>
 
-#include "../../../Includes/Pcf/Types.h"
-#include "../../../Includes/Pcf/System/NumericalFormat.h"
-#include "../../../Includes/Pcf/System/Collections/Generic/List.h"
-#include "../../../Includes/Pcf/System/SystemException.h"
-#include "../../__OS/CoreApi.h"
+#include "../../../Includes/Pcf/Types.hpp"
+#include "../../../Includes/Pcf/System/NumericalFormat.hpp"
+#include "../../../Includes/Pcf/System/Collections/Generic/List.hpp"
+#include "../../../Includes/Pcf/System/SystemException.hpp"
+#include "../../__OS/CoreApi.hpp"
 
 using namespace System;
 
