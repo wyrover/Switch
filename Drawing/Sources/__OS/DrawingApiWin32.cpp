@@ -1,5 +1,5 @@
 ﻿#if defined(_WIN32) && defined(__use_native_interface__)
-#include <Windows.hpp>
+#include <windows.h>
 #include <Pcf/Undef.hpp>
 
 #include "DrawingApi.hpp"

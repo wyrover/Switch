@@ -1,14 +1,14 @@
 #if defined(_WIN32)
 
-#include <direct.hpp>
-#include <shlobj.hpp>
-#include <sys/stat.hpp>
+#include <direct.h>
+#include <shlobj.h>
+#include <sys/stat.h>
 
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
 
-#include <windows.hpp>
+#include <windows.h>
 #include "../../Includes/Pcf/Undef.hpp"
 
 #include "CoreApi.hpp"

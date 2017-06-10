@@ -1,6 +1,6 @@
 #if _WIN32
 
-#include <winsock2.hpp>
+#include <winsock2.h>
 #include "../Includes/Pcf/Undef.hpp"
 
 namespace {

@@ -1,7 +1,7 @@
 #if defined(_WIN32)
 
-#include <Windows.hpp>
-#include <tlhelp32.hpp>
+#include <windows.h>
+#include <tlhelp32.h>
 #include "../../Includes/Pcf/Undef.hpp"
 
 #include "CoreApi.hpp"

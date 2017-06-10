@@ -1,8 +1,8 @@
 #if defined(_WIN32)
 
-#include <time.hpp>
+#include <time.h>
 #include <string>
-#include <windows.hpp>
+#include <windows.h>
 #include "../../Includes/Pcf/Undef.hpp"
 
 #include "CoreApi.hpp"

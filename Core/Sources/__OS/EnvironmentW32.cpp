@@ -3,8 +3,8 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
-#include <rpc.hpp>
-#include <Windows.hpp>
+#include <rpc.h>
+#include <windows.h>
 #include "../../Includes/Pcf/Undef.hpp"
 
 #include "CoreApi.hpp"

@@ -3,7 +3,7 @@
 #include <cstring>
 #include <cstdlib>
 
-#include <Winsock2.hpp>
+#include <Winsock2.h>
 #include "../../Includes/Pcf/Undef.hpp"
 
 #include "CoreApi.hpp"

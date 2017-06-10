@@ -1,8 +1,8 @@
 #if defined(_WIN32)
 
 #include <csignal>
-#include <conio.hpp>
-#include <windows.hpp>
+#include <conio.h>
+#include <windows.h>
 #include "../../Includes/Pcf/Undef.hpp"
 
 #include "CoreApi.hpp"

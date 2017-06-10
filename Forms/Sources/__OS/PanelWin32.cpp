@@ -1,7 +1,7 @@
 ﻿#if defined(_WIN32) && defined(__use_native_interface__)
 
-#include <Windows.hpp>
-#include <Uxtheme.hpp>
+#include <windows.h>
+#include <Uxtheme.h>
 #include <Pcf/Undef.hpp>
 
 #include "FormsApi.hpp"
