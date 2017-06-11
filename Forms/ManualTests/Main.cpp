@@ -35,6 +35,8 @@ namespace PcfFormApp {
       form.BackColor = Color::White;
       form.ForeColor = Color::Black;
       
+      System::Diagnostics::Debug::AutoFlush = true;
+      
       form.MouseEnter += pcf_delegate(const object& sender, const EventArgs& e) {
         System::Diagnostics::Debug::WriteLine("MouseEnter");
       };
