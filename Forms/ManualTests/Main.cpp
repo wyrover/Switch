@@ -44,7 +44,23 @@ namespace PcfFormApp {
       form.MouseDown += pcf_delegate(const object& sender, const MouseEventArgs& e) {
         System::Diagnostics::Debug::WriteLine("MouseDown {0} {{{1}, {2}}}", e.Button, e.X, e.Y);
       };
-      
+
+      form.Click += pcf_delegate(const object& sender, const EventArgs& e) {
+        System::Diagnostics::Debug::WriteLine("Click");
+      };
+
+      form.MouseClick += pcf_delegate(const object& sender, const MouseEventArgs& e) {
+        System::Diagnostics::Debug::WriteLine("MouseClick {0} {{{1}, {2}}}", e.Button, e.X, e.Y);
+      };
+
+      form.DoubleClick += pcf_delegate(const object& sender, const EventArgs& e) {
+        System::Diagnostics::Debug::WriteLine("DoubleClick");
+      };
+
+      form.MouseDoubleClick += pcf_delegate(const object& sender, const MouseEventArgs& e) {
+        System::Diagnostics::Debug::WriteLine("MouseDoubleClick {0} {{{1}, {2}}}", e.Button, e.X, e.Y);
+      };
+
       form.MouseUp += pcf_delegate(const object& sender, const MouseEventArgs& e) {
         System::Diagnostics::Debug::WriteLine("MouseUp {0} {{{1}, {2}}}", e.Button, e.X, e.Y);
       };
@@ -52,7 +68,11 @@ namespace PcfFormApp {
       form.MouseMove += pcf_delegate(const object& sender, const MouseEventArgs& e) {
         System::Diagnostics::Debug::WriteLine("MouseMove {0} {{{1}, {2}}}", e.Button, e.X, e.Y);
       };
-      
+
+      form.MouseHover += pcf_delegate(const object& sender, const EventArgs& e) {
+        System::Diagnostics::Debug::WriteLine("MouseHover");
+      };
+
       form.MouseLeave += pcf_delegate(const object& sender, const EventArgs& e) {
         System::Diagnostics::Debug::WriteLine("MouseLeave");
       };

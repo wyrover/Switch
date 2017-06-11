@@ -411,11 +411,11 @@ void Control::WmMouseMove(Message& message) {
 void Control::WmMouseUp(Message& message) {
   //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::MouseWindowMessage, "Control::WmMouseUp message=" + message + ", name=" + this->name);
   if (this->GetState(State::DoubleClickFired)) {
-    this->OnMouseDoubleClick(MouseEventArgs(MessageToMouseButtons(message), MakePoint(message.LParam()), 2, 0));
     this->OnDoubleClick(EventArgs::Empty);
+    this->OnMouseDoubleClick(MouseEventArgs(MessageToMouseButtons(message), MakePoint(message.LParam()), 2, 0));
   } else {
-    this->OnMouseClick(MouseEventArgs(MessageToMouseButtons(message), MakePoint(message.LParam()), 1, 0));
     this->OnClick(EventArgs::Empty);
+    this->OnMouseClick(MouseEventArgs(MessageToMouseButtons(message), MakePoint(message.LParam()), 1, 0));
   }
   this->DefWndProc(message);
   this->OnMouseUp(MouseEventArgs(MessageToMouseButtons(message), MakePoint(message.LParam()), 1, 0));
