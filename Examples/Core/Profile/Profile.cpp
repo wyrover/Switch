@@ -52,4 +52,4 @@ pcf_startup (Examples::Program)
 
 // This code produces the following output :
 //
-// Lock Duration : 00:00:00.415
+// Lock Duration : 00:00:00.1326642
