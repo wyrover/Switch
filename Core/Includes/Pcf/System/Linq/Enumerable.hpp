@@ -29,7 +29,7 @@ namespace Pcf {
         /// @return The final accumulator value.
         /// @par Examples
         /// The following code example demonstrates how to reverse the order of words in a string by using Aggregate.
-        /// @include Enumerable.Agregate.cpp
+        /// @include EnumerableAgregate.cpp
         template<typename TSource>
         static TSource Agregate(const Collections::Generic::IEnumerable<TSource>& source, const System::Func<const TSource&, const TSource&, TSource>& func)  {
           int nb = 0;
@@ -50,13 +50,12 @@ namespace Pcf {
         /// @return The final accumulator value.
         /// @par Examples
         /// The following code example demonstrates how to use Aggregate to apply an accumulator function and use a seed value.
-        /// @include Enumerable.Agregate2.cpp
+        /// @include EnumerableAgregate2.cpp
         template<typename TAccumulate, typename TSource>
         static TAccumulate Agregate(const Collections::Generic::IEnumerable<TSource>& source, const TAccumulate& seed, const System::Func<const TAccumulate&, const TSource&, TAccumulate>& func)  {
           TAccumulate agregated = seed;
-          for (TSource item : source) {
+          for (TSource item : source)
             agregated = func(agregated, item);
-          }
           return agregated;
         }
         
@@ -70,13 +69,12 @@ namespace Pcf {
         /// @return The transformed final accumulator value.
         /// @par Examples
         /// The following code example demonstrates how to use Aggregate to apply an accumulator function and use a seed value.
-        /// @include Enumerable.Agregate3.cpp
+        /// @include EnumerableAgregate3.cpp
         template<typename TResult, typename TAccumulate, typename TSource>
         static TResult Agregate(const Collections::Generic::IEnumerable<TSource>& source, const TAccumulate& seed, const System::Func<const TAccumulate&, const TSource&, TAccumulate>& func, const System::Func<const TAccumulate&, TResult>& resultSelector){
           TAccumulate agregated = seed;
-          for (TSource item : source) {
+          for (TSource item : source)
             agregated = func(agregated, item);
-          }
           return resultSelector(agregated);
         }
         
@@ -86,13 +84,12 @@ namespace Pcf {
         /// @return true if every element of the source sequence passes the test in the specified predicate, or if the sequence is empty; otherwise, false.
         /// @par Examples
         /// The following code example demonstrates how to use All<TSource> to determine whether all the elements in a sequence satisfy a condition. Variable allStartWithB is true if all the pet names start with "B" or if the pets array is empty.
-        /// @include Enumerable.All.cpp
+        /// @include EnumerableAll.cpp
         template<typename TSource>
         static bool All(const Collections::Generic::IEnumerable<TSource>& source, const System::Func<const TSource&, bool>& func) {
-          for (TSource item : source) {
+          for (TSource item : source)
             if (func(item) == false)
               return false;
-          }
           return true;
         }
         
@@ -101,7 +98,7 @@ namespace Pcf {
         /// @return true if the source sequence contains any elements; otherwise, false.
         /// @par Examples
         /// The following code example demonstrates how to use Any to determine whether a sequence contains any elements.
-        /// @include Enumerable.Any.cpp
+        /// @include EnumerableAny.cpp
         template<typename TSource>
         static bool Any(const Collections::Generic::IEnumerable<TSource>& source) {
           return source.GetEnumerator().MoveNext();
@@ -113,24 +110,21 @@ namespace Pcf {
         /// @return true if any elements in the source sequence pass the test in the specified predicate; otherwise, false.
         /// @par Examples
         /// The following code example demonstrates how to use Any to determine whether any element in a sequence satisfies a condition.
-        /// @include Enumerable.Any2.cpp
+        /// @include EnumerableAny2.cpp
         template<typename TSource>
         static bool Any(const Collections::Generic::IEnumerable<TSource>& source, const System::Func<const TSource&, bool>& predicate) {
-          for (TSource item : source) {
+          for (TSource item : source)
             if (predicate(item) == true)
               return true;
-          }
           return false;
         }
         
         /// @brief Creates an array from a IEnumerable<T>
         /// @par Examples
         /// The following code example demonstrates how to use ToArray<TSource> to force immediate query evaluation and return an array of results.
-        /// @include Enumerable.ToArray.cpp
+        /// @include EnumerableToArray.cpp
         template<typename TSource>
-        static Collections::Generic::IEnumerable<TSource>& AsEnumerable(const Collections::Generic::IEnumerable<TSource>& source) {
-          return source;
-        }
+        static Collections::Generic::IEnumerable<TSource>& AsEnumerable(const Collections::Generic::IEnumerable<TSource>& source) {return source;}
         
         static double Average(const Collections::Generic::IEnumerable<int32>& source) {
           double average = 0;
@@ -183,16 +177,12 @@ namespace Pcf {
         /// @brief Casts the elements of an IEnumerable to the specified type.
         /// @par Examples
         /// The following code example demonstrates how to use Cast<TResult>(IEnumerable) to enable the use of the standard query operators on an ArrayList.
-        /// @include Enumerable.Cast.cpp
+        /// @include EnumerableCast.cpp
         template<typename TResult, typename TSource>
         static refptr<Collections::Generic::IEnumerable<TResult>> Cast(const Collections::Generic::IEnumerable<TSource>& source) {
           refptr<System::Collections::Generic::List<TResult>> list = pcf_new<System::Collections::Generic::List<TResult>>();
-          for (TSource item : source) {
-            TResult result;
-            As(result, item);
-            list->Add(result);
-          }
-          
+          for (TSource item : source)
+            list->Add(as<TResult>(item));
           return list;
         }
         
@@ -202,18 +192,14 @@ namespace Pcf {
         /// @return refptr<Collections::Generic::IEnumerable<TSource>> An IEnumerable<T> that contains the concatenated elements of the two input sequences.
         /// @par Examples
         /// The following code example demonstrates how to use Cast<TResult>(IEnumerable) to enable the use of the standard query operators on an ArrayList.
-        /// @include Enumerable.Concat.cpp
+        /// @include EnumerableConcat.cpp
         template<typename TSource>
         static refptr<Collections::Generic::IEnumerable<TSource>> Concat(const Collections::Generic::IEnumerable<TSource>& first, const Collections::Generic::IEnumerable<TSource>& second) {
           refptr<System::Collections::Generic::List<TSource>> list = pcf_new<System::Collections::Generic::List<TSource>>();
-          for (TSource item : first) {
+          for (TSource item : first)
             list->Add(item);
-          }
-          
-          for (TSource item : second) {
+          for (TSource item : second)
             list->Add(item);
-          }
-          
           return list;
         }
 
@@ -222,50 +208,47 @@ namespace Pcf {
         /// @return An IEnumerable<T> that contains each element of the source sequence cast to the specified type.
         /// @par Examples
         /// The following code example demonstrates how to use Max<TSource>(IEnumerable<TSource>) to determine the maximum value in a sequence of IComparable<T> objects.
-        /// @include Enumerable.Max.cpp
+        /// @include EnumerableMax.cpp
         template<typename TSource>
         static const TSource& Max(const Collections::Generic::IEnumerable<TSource>& source) {
           const TSource* max = null;
           System::Collections::Generic::Enumerator<TSource> enumerator = source.GetEnumerator();
-          while (enumerator.MoveNext()) {
+          while (enumerator.MoveNext())
             if (max == null || enumerator.Current() > *max)
               max = &enumerator.Current();
-          }
           return *max;
         }
         
         /// @brief Returns the minimum value in a generic sequence.
         /// @par Examples
         /// The following code example demonstrates how to use Min<TSource>(IEnumerable<TSource>) to determine the minimum value in a sequence of IComparable<T> objects.
-        /// @include Enumerable.Min.cpp
+        /// @include EnumerableMin.cpp
         template<typename TSource>
         static const TSource& Min(const Collections::Generic::IEnumerable<TSource>& source) {
           const TSource* min = null;
           System::Collections::Generic::Enumerator<TSource> enumerator = source.GetEnumerator();
-          while (enumerator.MoveNext()) {
+          while (enumerator.MoveNext())
             if (min == null || enumerator.Current() < *min)
               min = &enumerator.Current();
-          }
           return *min;
         }
         
         /// @brief Inverts the order of the elements in a sequence.
         /// @par Examples
         /// The following code example demonstrates how to use Reverse<TSource> to reverse the order of elements in an array.
-        /// @include Enumerable.Reverse.cpp
+        /// @include EnumerableReverse.cpp
         template<typename TSource>
         static refptr<Collections::Generic::IEnumerable<TSource>> Reverse(const Collections::Generic::IEnumerable<TSource>& source) {
           refptr<System::Collections::Generic::List<TSource>> list = pcf_new<System::Collections::Generic::List<TSource>>();
           for (TSource item : source)
             list->Insert(0, item);
-          
           return list;
         }
         
         /// @brief Creates an array from a IEnumerable<T>
         /// @par Examples
         /// The following code example demonstrates how to use ToArray<TSource> to force immediate query evaluation and return an array of results.
-        /// @include Enumerable.ToArray.cpp
+        /// @include EnumerableToArray.cpp
         template<typename TSource>
         static System::Array<TSource> ToArray(const Collections::Generic::IEnumerable<TSource>& source) {
           System::Array<TSource> array = new System::Array<TSource>();
@@ -274,17 +257,6 @@ namespace Pcf {
             array[array.Length-1] = item;
           }
           return array;
-        }
-        
-      protected:
-        template<typename TResult, typename TSource>
-        static void As(refptr<TResult>& result, refptr<TSource> source) {
-          result = source.template As<TResult>();
-        }
-        
-        template<typename TResult, typename TSource>
-        static void As(TResult& result, TSource source) {
-          result = as<TResult>(source);
         }
       };
 
@@ -298,10 +270,8 @@ namespace Pcf {
           /// @return The final accumulator value.
           /// @par Examples
           /// The following code example demonstrates how to reverse the order of words in a string by using Aggregate.
-          /// @include Enumerable.Agregate.cpp
-          TSource Agregate(const System::Func<const TSource&, const TSource&, TSource>& func) const {
-            return System::Linq::Enumerable::Agregate<TSource>(static_cast<const T&>(*this), func);
-          }
+          /// @include EnumerableAgregate.cpp
+          TSource Agregate(const System::Func<const TSource&, const TSource&, TSource>& func) const {return System::Linq::Enumerable::Agregate<TSource>(static_cast<const T&>(*this), func);}
 
           /// @brief Applies an accumulator function over a sequence. The specified seed value is used as the initial accumulator value.
           /// @param seed The initial accumulator value.
@@ -309,11 +279,9 @@ namespace Pcf {
           /// @return The final accumulator value.
           /// @par Examples
           /// The following code example demonstrates how to use Aggregate to apply an accumulator function and use a seed value.
-          /// @include Enumerable.Agregate2.cpp
+          /// @include EnumerableAgregate2.cpp
           template<typename TAccumulate>
-          TAccumulate Agregate(const TAccumulate& seed, const System::Func<const TAccumulate&, const TSource&, TAccumulate>& func) const {
-            return System::Linq::Enumerable::Agregate<TAccumulate, TSource>(static_cast<const T&>(*this), seed, func);
-          }
+          TAccumulate Agregate(const TAccumulate& seed, const System::Func<const TAccumulate&, const TSource&, TAccumulate>& func) const {return System::Linq::Enumerable::Agregate<TAccumulate, TSource>(static_cast<const T&>(*this), seed, func);}
 
           /// @brief Applies an accumulator function over a sequence. The specified seed value is used as the initial accumulator value, and the specified function is used to select the result value.
           /// @param seed The initial accumulator value.
@@ -324,105 +292,80 @@ namespace Pcf {
           /// @return The transformed final accumulator value.
           /// @par Examples
           /// The following code example demonstrates how to use Aggregate to apply an accumulator function and use a seed value.
-          /// @include Enumerable.Agregate3.cpp
+          /// @include EnumerableAgregate3.cpp
           template<typename TResult, typename TAccumulate>
-          TResult Agregate(const TAccumulate& seed, const System::Func<const TAccumulate&, const TSource&, TAccumulate>& func, const System::Func<const TAccumulate&, TResult>& resultSelector) const {
-            return System::Linq::Enumerable::Agregate<TResult, TAccumulate, TSource>(static_cast<const T&>(*this), seed, func, resultSelector);
-          }
+          TResult Agregate(const TAccumulate& seed, const System::Func<const TAccumulate&, const TSource&, TAccumulate>& func, const System::Func<const TAccumulate&, TResult>& resultSelector) const {return System::Linq::Enumerable::Agregate<TResult, TAccumulate, TSource>(static_cast<const T&>(*this), seed, func, resultSelector);}
 
           /// @brief Determines whether all elements of a sequence satisfy a condition.
           /// @param func A function to test each element for a condition.
           /// @return true if every element of the source sequence passes the test in the specified predicate, or if the sequence is empty; otherwise, false.
           /// @par Examples
           /// The following code example demonstrates how to use All<TSource> to determine whether all the elements in a sequence satisfy a condition. Variable allStartWithB is true if all the pet names start with "B" or if the pets array is empty.
-          /// @include Enumerable.All.cpp
-          bool All(const System::Func<const TSource&, bool>& func) const {
-            return System::Linq::Enumerable::All<TSource>(static_cast<const T&>(*this), func);
-          }
+          /// @include EnumerableAll.cpp
+          bool All(const System::Func<const TSource&, bool>& func) const {return System::Linq::Enumerable::All<TSource>(static_cast<const T&>(*this), func);}
 
           /// @brief Determines whether a sequence contains any elements.
           /// @return true if the source sequence contains any elements; otherwise, false.
           /// @par Examples
           /// The following code example demonstrates how to use Any to determine whether a sequence contains any elements.
-          /// @include Enumerable.Any.cpp
-          bool Any() const {
-            return System::Linq::Enumerable::Any<TSource>(static_cast<const T&>(*this));
-          }
+          /// @include EnumerableAny.cpp
+          bool Any() const {return System::Linq::Enumerable::Any<TSource>(static_cast<const T&>(*this));}
 
           /// @brief Determines whether any element of a sequence satisfies a condition.
           /// @param predicate A function to test each element for a condition.
           /// @return true if any elements in the source sequence pass the test in the specified predicate; otherwise, false.
           /// @par Examples
           /// The following code example demonstrates how to use Any to determine whether any element in a sequence satisfies a condition.
-          /// @include Enumerable.Any2.cpp
-          bool Any(const System::Func<const TSource&, bool>& predicate) const {
-            return System::Linq::Enumerable::Any<TSource>(static_cast<const T&>(*this), predicate);
-          }
+          /// @include EnumerableAny2.cpp
+          bool Any(const System::Func<const TSource&, bool>& predicate) const {return System::Linq::Enumerable::Any<TSource>(static_cast<const T&>(*this), predicate);}
           
           /// @brief Creates an array from a IEnumerable<T>
           /// @par Examples
           /// The following code example demonstrates how to use ToArray<TSource> to force immediate query evaluation and return an array of results.
-          /// @include Enumerable.ToArray.cpp
-          refptr<Collections::Generic::IEnumerable<TSource>> AsEnumerable() const {
-            return System::Linq::Enumerable::AsEnumerable<TSource>(static_cast<const T&>(*this));
-          }
+          /// @include EnumerableToArray.cpp
+          refptr<Collections::Generic::IEnumerable<TSource>> AsEnumerable() const {return System::Linq::Enumerable::AsEnumerable<TSource>(static_cast<const T&>(*this));}
           
-          double Average() const {
-            return System::Linq::Enumerable::Average(static_cast<const T&>(*this));
-          }
+          double Average() const {return System::Linq::Enumerable::Average(static_cast<const T&>(*this));}
 
           /// @brief Casts the elements of an IEnumerable to the specified type.
           /// @par Examples
           /// The following code example demonstrates how to use Cast<TResult>(IEnumerable) to enable the use of the standard query operators on an ArrayList.
-          /// @include Enumerable.Cast.cpp
+          /// @include EnumerableCast.cpp
           template<typename TResult>
-          refptr<Collections::Generic::IEnumerable<TResult>> Cast() const {
-            return System::Linq::Enumerable::Cast<TResult, TSource>(static_cast<const T&>(*this));
-          }
+          refptr<Collections::Generic::IEnumerable<TResult>> Cast() const {return System::Linq::Enumerable::Cast<TResult, TSource>(static_cast<const T&>(*this));}
           
           /// @brief Concatenates two sequences.
           /// @param second The sequence to concatenate to this sequence.
           /// @return refptr<Collections::Generic::IEnumerable<TSource>> An IEnumerable<T> that contains the concatenated elements of the two input sequences.
           /// @par Examples
           /// The following code example demonstrates how to use Cast<TResult>(IEnumerable) to enable the use of the standard query operators on an ArrayList.
-          /// @include Enumerable.Concat.cpp
-          refptr<Collections::Generic::IEnumerable<TSource>> Concat(const Collections::Generic::IEnumerable<TSource>& second) const {
-            return System::Linq::Enumerable::Concat<TSource>(static_cast<const T&>(*this), second);
-          }
+          /// @include EnumerableConcat.cpp
+          refptr<Collections::Generic::IEnumerable<TSource>> Concat(const Collections::Generic::IEnumerable<TSource>& second) const {return System::Linq::Enumerable::Concat<TSource>(static_cast<const T&>(*this), second);}
           
           /// @brief Returns the maximum value in a generic sequence.
           /// @return An IEnumerable<T> that contains each element of the source sequence cast to the specified type.
           /// @par Examples
           /// The following code example demonstrates how to use Max<TSource>(IEnumerable<TSource>) to determine the maximum value in a sequence of IComparable<T> objects.
-          /// @include Enumerable.Max.cpp
-          const TSource& Max() const {
-            return System::Linq::Enumerable::Max<TSource>(static_cast<const T&>(*this));
-          }
+          /// @include EnumerableMax.cpp
+          const TSource& Max() const {return System::Linq::Enumerable::Max<TSource>(static_cast<const T&>(*this));}
           
           /// @brief Returns the minimum value in a generic sequence.
           /// @par Examples
           /// The following code example demonstrates how to use Min<TSource>(IEnumerable<TSource>) to determine the minimum value in a sequence of IComparable<T> objects.
-          /// @include Enumerable.Min.cpp
-          const TSource& Min() const {
-            return System::Linq::Enumerable::Min<TSource>(static_cast<const T&>(*this));
-          }
+          /// @include EnumerableMin.cpp
+          const TSource& Min() const {return System::Linq::Enumerable::Min<TSource>(static_cast<const T&>(*this));}
           
           /// @brief Inverts the order of the elements in a sequence.
           /// @par Examples
           /// The following code example demonstrates how to use Reverse<TSource> to reverse the order of elements in an array.
-          /// @include Enumerable.Reverse.cpp
-          refptr<Collections::Generic::IEnumerable<TSource>> Reverse() const {
-            return System::Linq::Enumerable::Reverse<TSource>(static_cast<const T&>(*this));
-          }
+          /// @include EnumerableReverse.cpp
+          refptr<Collections::Generic::IEnumerable<TSource>> Reverse() const {return System::Linq::Enumerable::Reverse<TSource>(static_cast<const T&>(*this));}
 
           /// @brief Creates an array from a IEnumerable<T>
           /// @par Examples
           /// The following code example demonstrates how to use ToArray<TSource> to force immediate query evaluation and return an array of results.
-          /// @include Enumerable.ToArray.cpp
-          System::Array<TSource> ToArray() const {
-            return System::Linq::Enumerable::ToArray<TSource>(static_cast<const T&>(*this));
-          }
-
+          /// @include EnumerableToArray.cpp
+          System::Array<TSource> ToArray() const {return System::Linq::Enumerable::ToArray<TSource>(static_cast<const T&>(*this));}
 
         protected:
           Enumerable() {}

@@ -110,18 +110,18 @@ namespace {
   }
   
   TEST(Enumerable, Cast) {
-    Collections::Generic::List<refptr<string>> al;
-    al.Add(new string("Barley"));
-    al.Add(new string("Boots"));
-    al.Add(new string("Whiskers"));
-    refptr<IEnumerable<refptr<String>>> enumerable = al.Cast<refptr<String>>();
-    Enumerator<refptr<String>> enumerator = enumerable->GetEnumerator();
+    Collections::ArrayList al;
+    al.Add("Barley");
+    al.Add("Boots");
+    al.Add("Whiskers");
+    refptr<IEnumerable<String>> enumerable = al.Cast<String>();
+    Enumerator<String> enumerator = enumerable->GetEnumerator();
     ASSERT_TRUE(enumerator.MoveNext());
-    ASSERT_EQ("Barley", *enumerator.Current());
+    ASSERT_EQ("Barley", enumerator.Current());
     ASSERT_TRUE(enumerator.MoveNext());
-    ASSERT_EQ("Boots", *enumerator.Current());
+    ASSERT_EQ("Boots", enumerator.Current());
     ASSERT_TRUE(enumerator.MoveNext());
-    ASSERT_EQ("Whiskers", *enumerator.Current());
+    ASSERT_EQ("Whiskers", enumerator.Current());
   }
   
   TEST(Enumerable, Concat) {
