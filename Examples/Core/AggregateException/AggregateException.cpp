@@ -15,7 +15,7 @@ namespace Examples {
       //Task<Array<string>> task1 = Task<>::Factory().StartNew<Array<string>>(pcf_delegate {return GetAllFiles(path);});
       
       // Use this line to throw an exception that is not handled.
-      Task<> task1 = Task<>::Factory().StartNew(pcf_delegate {throw new IndexOutOfRangeException();});
+      Task<> task1 = Task<>::Factory().StartNew(pcf_delegate {throw IndexOutOfRangeException();});
       try {
         task1.Wait();
       } catch (const AggregateException& ae) {

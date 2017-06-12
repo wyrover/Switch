@@ -82,23 +82,9 @@ namespace Pcf {
       ///  - Zero                This instance is equal to obj.
       ///  - Greater than zero   This instance is greater than obj.
       int32 CompareTo(const TupleImpl<T1, T2, T3, T4, T5, T6, T7, T8>& tuple) const {
-        if (item1 < tuple.item1) return -1;
-        if (item1 > tuple.item1) return 1;
-        if (item2 < tuple.item2) return -1;
-        if (item2 > tuple.item2) return 1;
-        if (item3 < tuple.item3) return -1;
-        if (item3 > tuple.item3) return 1;
-        if (item4 < tuple.item4) return -1;
-        if (item4 > tuple.item4) return 1;
-        if (item5 < tuple.item5) return -1;
-        if (item5 > tuple.item5) return 1;
-        if (item6 < tuple.item6) return -1;
-        if (item6 > tuple.item6) return 1;
-        if (item7 < tuple.item7) return -1;
-        if (item7 > tuple.item7) return 1;
-        if (item8 < tuple.item8) return -1;
-        if (item8 > tuple.item8) return 1;
-        return 0;
+        if (this == &tuple) return 0;
+        if (this < &tuple) return -1;
+        return 1;
       }
       
       /// @brief Determines whether this instance of Version and a specified object, which must also be a Version object, have the same value.
@@ -114,7 +100,7 @@ namespace Pcf {
       /// @return bool true if the specified object is equal to the current object. otherwise, false.
       /// @exception ArgumentNullException The parameters obj is null.
       bool Equals(const TupleImpl<T1, T2, T3, T4, T5, T6, T7, T8>& tuple) const {
-        return  item1 == tuple.item1 && item2 == tuple.item2 && item3 == tuple.item3 && item4 == tuple.item4 && item5 == tuple.item5 && item6 == tuple.item6 && item7 == tuple.item7 && item8 == tuple.item8;
+        return this == &tuple;
       }
 
       /// @brief Serves as a hash function for a particular type.
