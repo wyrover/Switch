@@ -11,9 +11,6 @@
 namespace Pcf {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
-    //template<typename Reuslut, typename ... Arguments>
-    //using Func=Delegate<Result, Arguments>;
-
     /// @brief Encapsulates a method that has 16 parameters and returns a value of the type specified by the TResult parameter.
     /// @param arg1 The first parameter of the method that this delegate encapsulates.
     /// @param arg2 The second parameter of the method that this delegate encapsulates.
@@ -36,22 +33,11 @@ namespace Pcf {
     template<typename T1=std::nullptr_t, typename T2=std::nullptr_t, typename T3=std::nullptr_t, typename T4=std::nullptr_t, typename T5=std::nullptr_t, typename T6=std::nullptr_t, typename T7=std::nullptr_t, typename T8=std::nullptr_t, typename T9=std::nullptr_t, typename T10=std::nullptr_t, typename T11=std::nullptr_t, typename T12=std::nullptr_t, typename T13=std::nullptr_t, typename T14=std::nullptr_t, typename T15=std::nullptr_t, typename T16=std::nullptr_t, class TResult=void>
     class Func : public Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> {
     public:
-      /// @brief Initializes an empty action.
-      Func() {}
-
-      /// @brief Initializes an action that invokes the specified action instance.
-      /// @param delegate
-      /// The delegate instance.
-      Func(const Func& function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(function) {}
-
-      /// @brief Initializes an action that invokes the specified instance method.
-      /// @param function
-      /// the method instance.
-      Func(const typename Func::Function& function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(function) {}
-
       /// @cond
-      template<typename Fn>
-      Func(Fn function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(function) {}
+      Func() {}
+      Func(const Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>& function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(function) {}
+      template<typename Function> Func(Function function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(function) {}
+      template<typename Object, typename Function> Func(const Object& object, Function function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(object, function) {}
       /// @endcond
     };
 
@@ -76,22 +62,11 @@ namespace Pcf {
     template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12, typename T13, typename T14, typename T15, class TResult>
     class Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> : public Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> {
     public:
-      /// @brief Initializes an empty action.
-      Func() {}
-
-      /// @brief Initializes an action that invokes the specified action instance.
-      /// @param delegate
-      /// The delegate instance.
-      Func(const Func& function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(function) {}
-
-      /// @brief Initializes an action that invokes the specified instance method.
-      /// @param function
-      /// the method instance.
-      Func(const typename Func::Function& function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(function) {}
-      
       /// @cond
-      template<typename Fn>
-      Func(Fn function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(function) {}
+      Func() {}
+      Func(const Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>& function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(function) {}
+      template<typename Function> Func(Function function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(function) {}
+      template<typename Object, typename Function> Func(const Object& object, Function function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(object, function) {}
       /// @endcond
     };
 
@@ -115,22 +90,11 @@ namespace Pcf {
     template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12, typename T13, typename T14, class TResult>
     class Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> : public Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> {
     public:
-      /// @brief Initializes an empty action.
-      Func() {}
-
-      /// @brief Initializes an action that invokes the specified action instance.
-      /// @param delegate
-      /// The delegate instance.
-      Func(const Func& function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(function) {}
-
-      /// @brief Initializes an action that invokes the specified instance method.
-      /// @param function
-      /// the method instance.
-      Func(const typename Func::Function& function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(function) {}
-      
       /// @cond
-      template<typename Fn>
-      Func(Fn function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(function) {}
+      Func() {}
+      Func(const Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>& function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(function) {}
+      template<typename Function> Func(Function function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(function) {}
+      template<typename Object, typename Function> Func(const Object& object, Function function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(object, function) {}
       /// @endcond
     };
 
@@ -153,22 +117,11 @@ namespace Pcf {
     template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12, typename T13, class TResult>
     class Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> : public Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> {
     public:
-      /// @brief Initializes an empty action.
-      Func() {}
-
-      /// @brief Initializes an action that invokes the specified action instance.
-      /// @param delegate
-      /// The delegate instance.
-      Func(const Func& function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(function) {}
-
-      /// @brief Initializes an action that invokes the specified instance method.
-      /// @param function
-      /// the method instance.
-      Func(const typename Func::Function& function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(function) {}
-      
       /// @cond
-      template<typename Fn>
-      Func(Fn function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(function) {}
+      Func() {}
+      Func(const Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>& function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(function) {}
+      template<typename Function> Func(Function function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(function) {}
+      template<typename Object, typename Function> Func(const Object& object, Function function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(object, function) {}
       /// @endcond
     };
 
@@ -190,22 +143,11 @@ namespace Pcf {
     template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12, class TResult>
     class Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> : public Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> {
     public:
-      /// @brief Initializes an empty action.
-      Func() {}
-
-      /// @brief Initializes an action that invokes the specified action instance.
-      /// @param delegate
-      /// The delegate instance.
-      Func(const Func& function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(function) {}
-
-      /// @brief Initializes an action that invokes the specified instance method.
-      /// @param function
-      /// the method instance.
-      Func(const typename Func::Function& function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(function) {}
-      
       /// @cond
-      template<typename Fn>
-      Func(Fn function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(function) {}
+      Func() {}
+      Func(const Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>& function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(function) {}
+      template<typename Function> Func(Function function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(function) {}
+      template<typename Object, typename Function> Func(const Object& object, Function function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(object, function) {}
       /// @endcond
     };
 
@@ -226,22 +168,11 @@ namespace Pcf {
     template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, class TResult>
     class Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> : public Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> {
     public:
-      /// @brief Initializes an empty action.
-      Func() {}
-
-      /// @brief Initializes an action that invokes the specified action instance.
-      /// @param delegate
-      /// The delegate instance.
-      Func(const Func& function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(function) {}
-
-      /// @brief Initializes an action that invokes the specified instance method.
-      /// @param function
-      /// the method instance.
-      Func(const typename Func<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>::Function& function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(function) {}
-      
       /// @cond
-      template<typename Fn>
-      Func(Fn function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(function) {}
+      Func() {}
+      Func(const Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>& function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(function) {}
+      template<typename Function> Func(Function function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(function) {}
+      template<typename Object, typename Function> Func(const Object& object, Function function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(object, function) {}
       /// @endcond
     };
 
@@ -261,22 +192,11 @@ namespace Pcf {
     template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, class TResult>
     class Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> : public Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> {
     public:
-      /// @brief Initializes an empty action.
-      Func() {}
-
-      /// @brief Initializes an action that invokes the specified action instance.
-      /// @param delegate
-      /// The delegate instance.
-      Func(const Func& function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(function) {}
-
-      /// @brief Initializes an action that invokes the specified instance method.
-      /// @param function
-      /// the method instance.
-      Func(const typename Func::Function& function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(function) {}
-      
       /// @cond
-      template<typename Fn>
-      Func(Fn function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(function) {}
+      Func() {}
+      Func(const Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>& function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(function) {}
+      template<typename Function> Func(Function function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(function) {}
+      template<typename Object, typename Function> Func(const Object& object, Function function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(object, function) {}
       /// @endcond
     };
 
@@ -295,22 +215,11 @@ namespace Pcf {
     template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, class TResult>
     class Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> : public Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9> {
     public:
-      /// @brief Initializes an empty action.
-      Func() {}
-
-      /// @brief Initializes an action that invokes the specified action instance.
-      /// @param delegate
-      /// The delegate instance.
-      Func(const Func& function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9>(function) {}
-
-      /// @brief Initializes an action that invokes the specified instance method.
-      /// @param function
-      /// the method instance.
-      Func(const typename Func::Function& function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9>(function) {}
-      
       /// @cond
-      template<typename Fn>
-      Func(Fn function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9>(function) {}
+      Func() {}
+      Func(const Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9>& function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9>(function) {}
+      template<typename Function> Func(Function function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9>(function) {}
+      template<typename Object, typename Function> Func(const Object& object, Function function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9>(object, function) {}
       /// @endcond
     };
 
@@ -328,22 +237,11 @@ namespace Pcf {
     template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, class TResult>
     class Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> : public Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8> {
     public:
-      /// @brief Initializes an empty action.
-      Func() {}
-
-      /// @brief Initializes an action that invokes the specified action instance.
-      /// @param delegate
-      /// The delegate instance.
-      Func(const Func& function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8>(function) {}
-
-      /// @brief Initializes an action that invokes the specified instance method.
-      /// @param function
-      /// the method instance.
-      Func(const typename Func::Function& function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8>(function) {}
-      
       /// @cond
-      template<typename Fn>
-      Func(Fn function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8>(function) {}
+      Func() {}
+      Func(const Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8>& function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8>(function) {}
+      template<typename Function> Func(Function function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8>(function) {}
+      template<typename Object, typename Function> Func(const Object& object, Function function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8>(object, function) {}
       /// @endcond
     };
 
@@ -360,22 +258,11 @@ namespace Pcf {
     template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, class TResult>
     class Func<T1, T2, T3, T4, T5, T6, T7, TResult> : public Delegate<TResult, T1, T2, T3, T4, T5, T6, T7> {
     public:
-      /// @brief Initializes an empty action.
-      Func() {}
-
-      /// @brief Initializes an action that invokes the specified action instance.
-      /// @param delegate
-      /// The delegate instance.
-      Func(const Func& function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7>(function) {}
-
-      /// @brief Initializes an action that invokes the specified instance method.
-      /// @param function
-      /// the method instance.
-      Func(const typename Func::Function& function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7>(function) {}
-      
       /// @cond
-      template<typename Fn>
-      Func(Fn function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7>(function) {}
+      Func() {}
+      Func(const Delegate<TResult, T1, T2, T3, T4, T5, T6, T7>& function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7>(function) {}
+      template<typename Function> Func(Function function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7>(function) {}
+      template<typename Object, typename Function> Func(const Object& object, Function function) : Delegate<TResult, T1, T2, T3, T4, T5, T6, T7>(object, function) {}
       /// @endcond
     };
 
@@ -391,22 +278,11 @@ namespace Pcf {
     template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, class TResult>
     class Func<T1, T2, T3, T4, T5, T6, TResult> : public Delegate<TResult, T1, T2, T3, T4, T5, T6> {
     public:
-      /// @brief Initializes an empty action.
-      Func() {}
-
-      /// @brief Initializes an action that invokes the specified action instance.
-      /// @param delegate
-      /// The delegate instance.
-      Func(const Func& function) : Delegate<TResult, T1, T2, T3, T4, T5, T6>(function) {}
-
-      /// @brief Initializes an action that invokes the specified instance method.
-      /// @param function
-      /// the method instance.
-      Func(const typename Func::Function& function) : Delegate<TResult, T1, T2, T3, T4, T5, T6>(function) {}
-      
       /// @cond
-      template<typename Fn>
-      Func(Fn function) : Delegate<TResult, T1, T2, T3, T4, T5, T6>(function) {}
+      Func() {}
+      Func(const Delegate<TResult, T1, T2, T3, T4, T5, T6>& function) : Delegate<TResult, T1, T2, T3, T4, T5, T6>(function) {}
+      template<typename Function> Func(Function function) : Delegate<TResult, T1, T2, T3, T4, T5, T6>(function) {}
+      template<typename Object, typename Function> Func(const Object& object, Function function) : Delegate<TResult, T1, T2, T3, T4, T5, T6>(object, function) {}
       /// @endcond
     };
 
@@ -421,22 +297,11 @@ namespace Pcf {
     template<typename T1, typename T2, typename T3, typename T4, typename T5, class TResult>
     class Func<T1, T2, T3, T4, T5, TResult> : public Delegate<TResult, T1, T2, T3, T4, T5> {
     public:
-      /// @brief Initializes an empty action.
-      Func() {}
-
-      /// @brief Initializes an action that invokes the specified action instance.
-      /// @param delegate
-      /// The delegate instance.
-      Func(const Func& function) : Delegate<TResult, T1, T2, T3, T4, T5>(function) {}
-
-      /// @brief Initializes an action that invokes the specified instance method.
-      /// @param function
-      /// the method instance.
-      Func(const typename Func::Function& function) : Delegate<TResult, T1, T2, T3, T4, T5>(function) {}
-      
       /// @cond
-      template<typename Fn>
-      Func(Fn function) : Delegate<TResult, T1, T2, T3, T4, T5>(function) {}
+      Func() {}
+      Func(const Delegate<TResult, T1, T2, T3, T4, T5>& function) : Delegate<TResult, T1, T2, T3, T4, T5>(function) {}
+      template<typename Function> Func(Function function) : Delegate<TResult, T1, T2, T3, T4, T5>(function) {}
+      template<typename Object, typename Function> Func(const Object& object, Function function) : Delegate<TResult, T1, T2, T3, T4, T5>(object, function) {}
       /// @endcond
     };
 
@@ -450,22 +315,11 @@ namespace Pcf {
     template<typename T1, typename T2, typename T3, typename T4, class TResult>
     class Func<T1, T2, T3, T4, TResult> : public Delegate<TResult, T1, T2, T3, T4> {
     public:
-      /// @brief Initializes an empty action.
-      Func() {}
-
-      /// @brief Initializes an action that invokes the specified action instance.
-      /// @param delegate
-      /// The delegate instance.
-      Func(const Func& function) : Delegate<TResult, T1, T2, T3, T4>(function) {}
-
-      /// @brief Initializes an action that invokes the specified instance method.
-      /// @param function
-      /// the method instance.
-      Func(const typename Func::Function& function) : Delegate<TResult, T1, T2, T3, T4>(function) {}
-      
       /// @cond
-      template<typename Fn>
-      Func(Fn function) : Delegate<TResult, T1, T2, T3, T4>(function) {}
+      Func() {}
+      Func(const Delegate<TResult, T1, T2, T3, T4>& function) : Delegate<TResult, T1, T2, T3, T4>(function) {}
+      template<typename Function> Func(Function function) : Delegate<TResult, T1, T2, T3, T4>(function) {}
+      template<typename Object, typename Function> Func(const Object& object, Function function) : Delegate<TResult, T1, T2, T3, T4>(object, function) {}
       /// @endcond
     };
 
@@ -478,22 +332,11 @@ namespace Pcf {
     template<typename T1, typename T2, typename T3, class TResult>
     class Func<T1, T2, T3, TResult> : public Delegate<TResult, T1, T2, T3> {
     public:
-      /// @brief Initializes an empty action.
-      Func() {}
-
-      /// @brief Initializes an action that invokes the specified action instance.
-      /// @param delegate
-      /// The delegate instance.
-      Func(const Func& function) : Delegate<TResult, T1, T2, T3>(function) {}
-
-      /// @brief Initializes an action that invokes the specified instance method.
-      /// @param function
-      /// the method instance.
-      Func(const typename Func::Function& function) : Delegate<TResult, T1, T2, T3>(function) {}
-      
       /// @cond
-      template<typename Fn>
-      Func(Fn function) : Delegate<TResult, T1, T2, T3>(function) {}
+      Func() {}
+      Func(const Delegate<TResult, T1, T2, T3>& function) : Delegate<TResult, T1, T2, T3>(function) {}
+      template<typename Function> Func(Function function) : Delegate<TResult, T1, T2, T3>(function) {}
+      template<typename Object, typename Function> Func(const Object& object, Function function) : Delegate<TResult, T1, T2, T3>(object, function) {}
       /// @endcond
     };
 
@@ -505,22 +348,11 @@ namespace Pcf {
     template<typename T1, typename T2, class TResult>
     class Func<T1, T2, TResult> : public Delegate<TResult, T1, T2> {
     public:
-      /// @brief Initializes an empty action.
-      Func() {}
-
-      /// @brief Initializes an action that invokes the specified action instance.
-      /// @param delegate
-      /// The delegate instance.
-      Func(const Func& function) : Delegate<TResult, T1, T2>(function) {}
-
-      /// @brief Initializes an action that invokes the specified instance method.
-      /// @param function
-      /// the method instance.
-      Func(const typename Func::Function& function) : Delegate<TResult, T1, T2>(function) {}
-      
       /// @cond
-      template<typename Fn>
-      Func(Fn function) : Delegate<TResult, T1, T2>(function) {}
+      Func() {}
+      Func(const Delegate<TResult, T1, T2>& function) : Delegate<TResult, T1, T2>(function) {}
+      template<typename Function> Func(Function function) : Delegate<TResult, T1, T2>(function) {}
+      template<typename Object, typename Function> Func(const Object& object, Function function) : Delegate<TResult, T1, T2>(object, function) {}
       /// @endcond
     };
 
@@ -531,22 +363,11 @@ namespace Pcf {
     template<class T, class TResult>
     class Func<T, TResult> : public Delegate<TResult, T> {
     public:
-      /// @brief Initializes an empty action.
-      Func() {}
-
-      /// @brief Initializes an action that invokes the specified action instance.
-      /// @param delegate
-      /// The delegate instance.
-      Func(const Func& function) : Delegate<TResult, T>(function) {}
-
-      /// @brief Initializes an action that invokes the specified instance method.
-      /// @param function
-      /// the method instance.
-      Func(const typename Func::Function& function) : Delegate<TResult, T>(function) {}
-      
       /// @cond
-      template<typename Fn>
-      Func(Fn function) : Delegate<TResult, T>(function) {}
+      Func() {}
+      Func(const Delegate<TResult, T>& function) : Delegate<TResult, T>(function) {}
+      template<typename Function> Func(Function function) : Delegate<TResult, T>(function) {}
+      template<typename Object, typename Function> Func(const Object& object, Function function) : Delegate<TResult, T>(object, function) {}
       /// @endcond
     };
 
@@ -556,22 +377,11 @@ namespace Pcf {
     template<class TResult>
     class Func<TResult> : public Delegate<TResult> {
     public:
-      /// @brief Initializes an empty action.
-      Func() {}
-
-      /// @brief Initializes an action that invokes the specified action instance.
-      /// @param delegate
-      /// The delegate instance.
-      Func(const Func& function) : Delegate<TResult>(function) {}
-
-      /// @brief Initializes an action that invokes the specified instance method.
-      /// @param function
-      /// the method instance.
-      Func(const typename Func::Function& function) : Delegate<TResult>(function) {}
-      
       /// @cond
-      template<typename Fn>
-      Func(Fn function) : Delegate<TResult>(function) {}
+      Func() {}
+      Func(const Delegate<TResult>& function) : Delegate<TResult>(function) {}
+      template<typename Function> Func(Function function) : Delegate<TResult>(function) {}
+      template<typename Object, typename Function> Func(const Object& object, Function function) : Delegate<TResult>(object, function) {}
       /// @endcond
     };
   }
