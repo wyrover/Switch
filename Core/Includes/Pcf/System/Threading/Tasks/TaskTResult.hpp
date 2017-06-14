@@ -2,6 +2,7 @@
 /// @brief Contains Pcf::System::Threading::Tasks::Task <TResult> class.
 #pragma once
 
+#include "../../../Move.hpp"
 #include "../../AggregateException.hpp"
 #include "../../ArgumentOutOfRangeException.hpp"
 #include "../../Diagnostics/Stopwatch.hpp"
@@ -521,11 +522,11 @@ namespace Pcf {
                 if (this->millisecondsDelay != -2)
                   Thread::Sleep(this->millisecondsDelay);
                 if (!this->task.IsEmpty())
-                  this->result = this->task();
+                  this->result = Move(this->task());
                 else if (!this->parameterizedTask.IsEmpty())
-                  this->result = this->parameterizedTask(state);
+                  this->result = Move(this->parameterizedTask(state));
                 else if (!this->constParameterizedTask.IsEmpty())
-                  this->result = this->constParameterizedTask(*this->state);
+                  this->result = Move(this->constParameterizedTask(*this->state));
                 this->status = TaskStatus::WaitingForChildrenToComplete;
                 this->endEvent.Set();
               } catch(...) {
