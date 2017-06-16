@@ -871,7 +871,23 @@ namespace Pcf {
       /// @return String A new String in uppercase.
       String ToUpper() const;
       
+      /// @brief Removes all leading and trailing white-space characters from the current String object.
+      /// @return The string that remains after all white-space characters are removed from the start and end of the current string. If no characters can be trimmed from the current instance, the method returns the current instance unchanged.
+      String Trim() const {return TrimStart().TrimEnd();}
+
+      /// @brief Removes all leading and trailing occurrences of a character specified in an array from the current String object.
+      /// @param trimChar An Unicode character to remove.
+      String Trim(char32 trimChar) const {return TrimStart(trimChar).TrimEnd(trimChar);}
+      
+      /// @brief Removes all leading and trailing occurrences of a set of characters specified in an array from the current String object.
+      /// @param trimChars An array of Unicode characters to remove.
+      String Trim(const Array<char32>& trimChars) const {return TrimStart(trimChars).TrimEnd(trimChars);}
+      
       /// @brief Removes all trailing occurrences of a character specified from the current String object.
+      /// @return The String that remains after all occurrences of the character in the trimChar parameter are removed from the end of the current String object.
+      String TrimEnd() const {return TrimEnd(' ');}
+      
+      /// @brief Removes all trailing occurrences of white-space characters from the current String object.
       /// @param trimChar A Unicode character to remove
       /// @return The String that remains after all occurrences of the character in the trimChar parameter are removed from the end of the current String object.
       String TrimEnd(char32 trimChar) const;
@@ -881,6 +897,11 @@ namespace Pcf {
       /// @return The String that remains after all occurrences of the characters in the trimChars parameter are removed from the end of the current String object.
       /// @exception ArgumentNullException The parameters trimChars is null.
       String TrimEnd(const Array<char32>& trimChars) const;
+      
+      /// @brief Removes all leading occurrences of white-space characters from the current String object.
+      /// @param trimChar A Unicode character to remove
+      /// @return The String that remains after all occurrences of the character in the trimChar parameter are removed from the start of the current String object.
+      String TrimStart() const {return TrimStart(' ');}
       
       /// @brief Removes all leading occurrences of a character specified from the current String object.
       /// @param trimChar A Unicode character to remove
