@@ -102,7 +102,7 @@ namespace Pcf {
   /// @brief Used to obtain the type Object for a type. A pcf_typeof expression takes the following form:
   /// @par Examples
   /// @code
-  /// Type type = pcf_typeof<Int32>;
+  /// Type type = pcf_typeof<Int32>();
   /// @endcode
   /// @par Examples
   /// To obtain the run-time type of an expression, you can use the Pcf method GetType, as in the following example:
@@ -120,7 +120,7 @@ namespace Pcf {
   /// @brief Used to obtain the type Object for a type. A pcf_typeof expression takes the following form:
   /// @par Examples
   /// @code
-  /// @Int32 i = 42;
+  /// Int32 i = 42;
   /// type atype& = pcf_typeof(i);
   /// @endcode
   /// @par Examples
