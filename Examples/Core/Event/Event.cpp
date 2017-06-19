@@ -72,6 +72,7 @@ namespace PcfEvents {
   public:
     // The main entry point for the application.
     static void Main() {
+      
       Publisher pub;
       Subscriber sub1("sub1", pub);
       Subscriber sub2("sub2", pub);

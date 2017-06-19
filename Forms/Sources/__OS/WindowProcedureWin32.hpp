@@ -2,7 +2,7 @@
 
 #include <Pcf/System/Collections/Generic/Dictionary.hpp>
 
-typedef HWND__ *HWND;
+typedef HWND__* HWND;
 
 namespace __OS {
   class WindowProcedure pcf_static {
