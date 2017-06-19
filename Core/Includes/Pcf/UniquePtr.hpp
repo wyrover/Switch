@@ -608,32 +608,33 @@ namespace Pcf {
     T* ptr = null;
   };
   
+  /// @cond
   template<class T>
   struct __pcf_unique_if {
-    typedef UniquePtr<T> __unique_single;
+    using __unique_single = UniquePtr<T>;
   };
   
   template<class T>
   struct __pcf_unique_if<T[]> {
-    typedef UniquePtr<T[]> __unique_array_unknown_bound;
+    using __unique_array_unknown_bound = UniquePtr<T[]>;
   };
   
   template<class T, size_t N>
   struct __pcf_unique_if<T[N]> {
-    typedef void __unique_array_known_bound;
+    using __unique_array_known_bound = void;
   };
   
   template <class T>
   struct pcf_remove_extent {
-    typedef T type;
+    using type = T;
   };
-  template <class _Tp>
-  struct pcf_remove_extent<_Tp[]> {
-    typedef _Tp type;
+  template <class T>
+  struct pcf_remove_extent<T[]> {
+    using type = T;
   };
-  template <class _Tp, size_t _Np>
-  struct pcf_remove_extent<_Tp[_Np]> {
-    typedef _Tp type;
+  template <class T, size_t N>
+  struct pcf_remove_extent<T[N]> {
+    using type = T;
   };
   
   template <class T>
@@ -644,9 +645,10 @@ namespace Pcf {
   
   template<typename T>
   typename __pcf_unique_if<T>::__unique_array_known_bound MakeUnique(size_t size) {
-    typedef typename pcf_remove_extent<T>::type TT;
+    using TT = typename pcf_remove_extent<T>::type;
     return UniquePtr<T>(new TT[size]());
   }
+  /// @endcond
 }
 
 using namespace Pcf;

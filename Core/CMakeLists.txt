@@ -376,6 +376,7 @@ set(INCLUDE_FILES
   Includes/Pcf/Await.hpp
   Includes/Pcf/Boxing.hpp
   Includes/Pcf/Core.hpp
+  Includes/Pcf/Event.hpp
   Includes/Pcf/ExceptionPtr.hpp
   Includes/Pcf/CurrentInformation.hpp
   Includes/Pcf/InitializerList.hpp

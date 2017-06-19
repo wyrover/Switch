@@ -1,26 +1,34 @@
 #include <Pcf/System/Collections/ArrayList.hpp>
 #include <Pcf/System/Console.hpp>
 #include <Pcf/System/Uri.hpp>
+#include <Pcf/Event.hpp>
 #include <Pcf/Startup.hpp>
 
 using namespace System;
 using namespace System::Collections;
 
 namespace ManualTests {
+  using MyEventHandler = delegate<void, const object&, const EventArgs>;
+
+  class Publisher : public object {
+  public:
+    event<Publisher, MyEventHandler> MyEvent;
+    
+    void RaiseMyEvent() {
+      this->MyEvent.Invoke(*this, EventArgs());
+    }
+  };
+  
   class Program {
   public:
     static void Main() {
-      //Console::WriteLine("Hello, World!");
-      ArrayList arrayList = {42, "This is a string", DayOfWeek::Wednesday, "Another string", Uri("http://www.gammasoft.com"), 4.2f};
+      Publisher publisher;
       
-      Console::WriteLine("arrayList = [{0}]", string::Join(", ", arrayList));
-      Console::WriteLine();
-
-      for(auto item : arrayList)
-        if (is<string>(item))
-          Console::WriteLine("\"{0}\"", as<string>(item).ToUpper());
-        else
-          Console::WriteLine("{0}", item);
+      publisher.MyEvent += pcf_delegate(const object& sender, const EventArgs& e) {
+        Console::WriteLine("On myEvent");
+      };
+      
+      publisher.RaiseMyEvent();
     }
   };
 }

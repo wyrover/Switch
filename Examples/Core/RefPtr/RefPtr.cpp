@@ -9,7 +9,7 @@ namespace Test {
     static void Main() {
       refptr<string> p1 = pcf_new<string>("First string****");
       
-      if (!p1)
+      if (p1 == null)
         Console::WriteLine("p1 == null");
       
       Console::WriteLine("*p1 = {0}", *p1);
@@ -29,7 +29,7 @@ namespace Test {
       Console::WriteLine("p1 UseCount =  {0}{1}", p1.GetUseCount(), Environment::NewLine);
       
       p1 = null;
-      if (!p1)
+      if (p1 == null)
         Console::WriteLine("p1 == null");
       Console::WriteLine("p1 UseCount =  {0}{1}", p1.GetUseCount(), Environment::NewLine);
     }
@@ -46,10 +46,10 @@ pcf_startup (Test::Program)
 // *p2 = First string****
 // p1 UseCount =  2
 //
-// *p2 = Another string
+// *p2 = First string
 // p2 UseCount =  2
 //
-// *p1 = Another string
+// *p1 = First string
 // p1 UseCount =  1
 //
 // p1 == null

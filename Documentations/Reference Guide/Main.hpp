@@ -42,4 +42,4 @@
 /// For more detailed information, browse the different sections of this documentation.
 ///
 /// @section CopyrightSection Copyright
-/// Pcf, @subpage CopyrightPage (c) 2010-2016, GAMMA Soft. All rights reserved.
+/// @subpage CopyrightPage

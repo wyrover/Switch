@@ -2353,7 +2353,7 @@ namespace Pcf {
 
       template<typename TValue>
       static System::String ValueToString(const TValue& value) {
-        typedef typename std::conditional<std::is_base_of<object, TValue>::value, StringerFromObject, StringerFromOther>::type Stringer;
+        using Stringer = typename std::conditional<std::is_base_of<object, TValue>::value, StringerFromObject, StringerFromOther>::type;
         Stringer stringer;
         return stringer(value);
       }
