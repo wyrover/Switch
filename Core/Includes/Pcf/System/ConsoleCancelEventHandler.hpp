@@ -12,7 +12,7 @@ namespace Pcf {
     /// @brief Represents the method that will handle the CancelKeyPress event of a System::Console.
     /// @param sender The source of the event.
     /// @param e A System::ConsoleCancelEventArgs object that contains the event data.
-    using ConsoleCancelEventHandler = TEventHandler<ConsoleCancelEventArgs&>;
+    using ConsoleCancelEventHandler = GenericEventHandler<ConsoleCancelEventArgs&>;
   }
 }
 

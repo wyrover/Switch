@@ -33,7 +33,7 @@ namespace Pcf {
         ///   }
         /// }
         /// @endcode
-        using GiveFeedbackEventHandler = TEventHandler<GiveFeedbackEventArgs&>;
+        using GiveFeedbackEventHandler = GenericEventHandler<GiveFeedbackEventArgs&>;
       }
     }
   }

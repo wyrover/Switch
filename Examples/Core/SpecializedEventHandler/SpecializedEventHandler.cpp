@@ -15,8 +15,8 @@ namespace Examples {
     string message;
   };
   
-  // Declares a specialized event handler from TEventHandler<T> with a SpecializedEventArgs argument.
-  using SpecializedEventHandler = TEventHandler<const SpecializedEventArgs&>;
+  // Declares a specialized event handler from GenericEventHandler<T> with a SpecializedEventArgs argument.
+  using SpecializedEventHandler = GenericEventHandler<const SpecializedEventArgs&>;
   
   // Defines some methods to which the delegate can point.
   class MySampleClass : public object {

@@ -27,7 +27,7 @@ namespace Pcf {
     /// @param sender The source of the event.
     /// @param e An object that contains the event data.
     template<typename T=const EventArgs&>
-    using TEventHandler = Delegate<void, const object&, T>;
+    using GenericEventHandler = Delegate<void, const object&, T>;
   }
 }
 

@@ -16,7 +16,7 @@ namespace Pcf {
       namespace Ports {
         /// @brief Represents the method that will handle the PinChanged event of a SerialPort object.
         /// @remarks When you create a SerialPinChangedEventHandler delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event-handler delegates, see Handling and Raising Events.
-        using SerialPinChangedEventHandler = System::TEventHandler<SerialPinChangedEventArgs>;
+        using SerialPinChangedEventHandler = System::GenericEventHandler<SerialPinChangedEventArgs>;
       }
     }
   }

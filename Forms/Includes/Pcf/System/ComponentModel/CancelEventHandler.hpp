@@ -9,7 +9,7 @@
 namespace Pcf {
   namespace System {
     namespace ComponentModel {
-      using CancelEventHandler = TEventHandler<CancelEventArgs&>;
+      using CancelEventHandler = GenericEventHandler<CancelEventArgs&>;
     }
   }
 }

@@ -24,7 +24,7 @@ namespace PcfEvents {
   class Publisher : public object {
   public:
     // Declare the event using EventHandler<T>
-    event<Publisher, TEventHandler<const CustomEventArgs&>> RaiseCustomEvent;
+    event<Publisher, GenericEventHandler<const CustomEventArgs&>> RaiseCustomEvent;
     
     void DoSomething() {
       // Write some code that does something useful here
@@ -41,7 +41,7 @@ namespace PcfEvents {
       // Make a temporary copy of the event to avoid possibility of
       // a race condition if the last subscriber unsubscribes
       // immediately after the null check and before the event is raised.
-      TEventHandler<const CustomEventArgs&> handler = as<TEventHandler<const CustomEventArgs&>>(RaiseCustomEvent);
+      GenericEventHandler<const CustomEventArgs&> handler = as<GenericEventHandler<const CustomEventArgs&>>(RaiseCustomEvent);
       
       // Format the string to send inside the CustomEventArgs parameter
       e.Message += String::Format(" at {0}", DateTime::Now().ToString());

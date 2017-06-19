@@ -40,7 +40,7 @@ namespace Pcf {
         /// * ContentElement::PreviewDragOver
         /// * ContentElement::PreviewDrop
         /// The attached events and the base element routed events share their event data, and the bubbling and tunneling versions of the routed events also share event data. This can affect the handled characteristics of the event as it travels the event route. For details, see Input Overview.
-        using DragEventHandler = TEventHandler<DragEventArgs&>;
+        using DragEventHandler = GenericEventHandler<DragEventArgs&>;
       }
     }
   }

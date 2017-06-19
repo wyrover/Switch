@@ -10,7 +10,7 @@ namespace Pcf {
   namespace System {
     namespace Windows {
       namespace Forms {
-        using KeyPressEventHandler = TEventHandler<KeyPressEventArgs&>;
+        using KeyPressEventHandler = GenericEventHandler<KeyPressEventArgs&>;
       }
     }
   }

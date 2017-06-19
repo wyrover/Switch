@@ -14,7 +14,7 @@ namespace Pcf {
         /// @param sender he object where the event handler is attached.
         /// @param e The event data.
         /// @remarks When you create an InvalidateEventHandler delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about handling events with delegates, see Events and Delegates.
-        using InvalidateEventHandler = TEventHandler<const InvalidateEventArgs&>;
+        using InvalidateEventHandler = GenericEventHandler<const InvalidateEventArgs&>;
       }
     }
   }

@@ -59,7 +59,7 @@ namespace Pcf {
         ///   }
         /// }
         /// @endcode
-        using ControlEventHandler = TEventHandler<const ControlEventArgs&>;
+        using ControlEventHandler = GenericEventHandler<const ControlEventArgs&>;
       }
     }
   }

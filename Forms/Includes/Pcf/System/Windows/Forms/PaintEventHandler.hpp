@@ -10,7 +10,7 @@ namespace Pcf {
   namespace System {
     namespace Windows {
       namespace Forms {
-        using PaintEventHandler = TEventHandler<PaintEventArgs&>;
+        using PaintEventHandler = GenericEventHandler<PaintEventArgs&>;
       }
     }
   }
