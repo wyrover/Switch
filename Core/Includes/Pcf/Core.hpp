@@ -371,6 +371,7 @@
 #include "Await.hpp"
 #include "Boxing.hpp"
 #include "CurrentInformation.hpp"
+#include "Event.hpp"
 #include "ExceptionPtr.hpp"
 #include "InitializerList.hpp"
 #include "Interface.hpp"
