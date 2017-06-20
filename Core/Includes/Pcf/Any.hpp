@@ -569,6 +569,10 @@ namespace Pcf {
 #endif
   /// @endcond
 
+  /// @brief Represent a polymorphic wrapper capable of holding any type.
+  /// @par Examples
+  /// This example show how to use any:
+  /// @include Any.cpp
   using any = Any;
 }
 

@@ -42,7 +42,7 @@ namespace Pcf {
       /// @remarks Different computer architectures store data using different byte orders. "Big-endian" means the most significant byte is on the left end of a word. "Little-endian" means the most significant byte is on the right end of a word.
       /// @par Examples
       /// The following code example illustrates the use of the IsLittleEndian field.
-      /// @include BitConverter.IsLittleEndian.cpp
+      /// @include BitConverterIsLittleEndian.cpp
        static Property<bool, ReadOnly> IsLittleEndian;
 
       /// @brief Returns the specified Boolean value as an array of bytes.
