@@ -340,6 +340,17 @@ void Control::WmInputLangChangeRequest(Message& message) {
 
 void Control::WmKeyChar(Message& message) {
   //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmKeyChar message=" + message + ", name=" + this->name);
+  if (message.Msg == WM_KEYDOWN || message.Msg == WM_SYSKEYDOWN) {
+    KeyEventArgs keyEventArgs((Keys)message.WParam());
+    OnKeyDown(keyEventArgs);
+  } else if (message.Msg == WM_CHAR || message.Msg == WM_SYSCHAR) {
+    KeyPressEventArgs keyPressEventArgs((char32)message.WParam());
+    OnKeyPress(keyPressEventArgs);
+  } else if (message.Msg == WM_KEYUP || message.Msg == WM_SYSKEYUP) {
+    KeyEventArgs keyEventArgs((Keys)message.WParam());
+    OnKeyUp(keyEventArgs);
+  }
+
   this->DefWndProc(message);
 }
 

@@ -13,6 +13,8 @@
 #include "../../ComponentModel/EventHandlerList.hpp"
 #include "ControlStyles.hpp"
 #include "InvalidateEventHandler.hpp"
+#include "KeyEventHandler.hpp"
+#include "KeyPressEventHandler.hpp"
 #include "Message.hpp"
 #include "MouseEventHandler.hpp"
 #include "PaintEventHandler.hpp"
@@ -382,6 +384,9 @@ namespace Pcf {
           EventHandler HandleCreated;
           EventHandler HandleDestroyed;
           InvalidateEventHandler Invalidated;
+          KeyEventHandler KeyDown;
+          KeyPressEventHandler KeyPress;
+          KeyEventHandler KeyUp;
           EventHandler LocationChanged;
           EventHandler LostFocus;
           EventHandler MouseCaptureChanged;
@@ -434,6 +439,12 @@ namespace Pcf {
           virtual void OnHandleCreated(const EventArgs& e) { this->HandleCreated(*this, e); }
 
           virtual void OnHandleDestroyed(const EventArgs& e) { this->HandleDestroyed(*this, e); }
+
+          virtual void OnKeyDown(KeyEventArgs& e) { this->KeyDown(*this, e); }
+
+          virtual void OnKeyPress(KeyPressEventArgs& e) { this->KeyPress(*this, e); }
+
+          virtual void OnKeyUp(KeyEventArgs& e) { this->KeyUp(*this, e); }
 
           virtual void OnInvalidated(const InvalidateEventArgs& e) { this->Invalidated(*this, e); }
 
