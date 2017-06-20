@@ -4,6 +4,12 @@ This example demonstrates the use of the Action<T> delegate to print the content
 ![GitHub Logo](../../../Documentations/Images/Examples/Core/MacOsX/Action.png)
 <p align="center">Mac Os X</p>
 
+
 ![GitHub Logo](../../../Documentations/Images/Examples/Core/Ubuntu/Action.png)
+<p align="center">Ubuntu</p>
+
 
 ![GitHub Logo](../../../Documentations/Images/Examples/Core/Windows/Action.png)
+<p align="center">Windows</p>
+
+
