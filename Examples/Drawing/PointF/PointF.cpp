@@ -11,8 +11,8 @@ namespace Examples {
       PointF location = {10.5f, 235.8f};
       Console::WriteLine("location = {0}", location);
       
-      location.X += 20.2;
-      location.Y -= 15.1;
+      location.X += 20.2f;
+      location.Y -= 15.1f;
       Console::WriteLine("location = {0}", location);
       
       location = PointF(10, 10) + PointF(20.5, 50.5);
