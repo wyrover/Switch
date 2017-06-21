@@ -1,7 +1,9 @@
 #include <Pcf/Startup.hpp>
 #include <Pcf/System/Diagnostics/Debug.hpp>
 #include <Pcf/System/Windows/Forms/Application.hpp>
-#include <Pcf/System/Windows/Forms/CheckBox.hpp>
+#include <Pcf/System/Windows/Forms/Button.hpp>
+#include <Pcf/System/Windows/Forms/Label.hpp>
+#include <Pcf/System/Windows/Forms/MessageBox.hpp>
 
 using namespace System;
 using namespace System::Drawing;
@@ -17,27 +19,20 @@ namespace PcfFormApp {
 
       Application::EnableVisualStyles();
 
-      CheckBox checkBox1;
-      checkBox1.Text = "Checked";
-      checkBox1.Location = Point(30, 30);
-      checkBox1.CheckState = System::Windows::Forms::CheckState::Checked;
+      Label label;
+      label.Text = "Result = ";
+      label.Location = Point(10, 50);
 
-      CheckBox checkBox2;
-      checkBox2.Text = "Unchecked";
-      checkBox2.Location = Point(30, 60);
-      checkBox2.CheckState = System::Windows::Forms::CheckState::Unchecked;
-
-      CheckBox checkBox3;
-      checkBox3.Text = "Indeterminate";
-      checkBox3.Location = Point(30, 90);
-      checkBox3.CheckState = System::Windows::Forms::CheckState::Indeterminate;
+      Button button;
+      button.Text = "Message";
+      button.Location = Point(10, 10);
+      button.Click = pcf_delegate(const object& sender, const EventArgs& e) {
+        label.Text = string::Format("Result = {0}", MessageBox::Show("This is the text messge of the MessageBox", "Title MessageBox", MessageBoxButtons::OKCancel, MessageBoxIcon::Question));
+      };
 
       Form form;
-      form.Text = "Form1";
-      form.Controls().AddRange({checkBox1, checkBox2, checkBox3});
-      form.BackColor = Color::White;
-      form.ForeColor = Color::Black;
-      
+      form.Controls().AddRange({label, button});
+
       System::Diagnostics::Debug::AutoFlush = true;
       
       form.MouseEnter += pcf_delegate(const object& sender, const EventArgs& e) {

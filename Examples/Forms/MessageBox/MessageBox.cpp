@@ -17,7 +17,7 @@ namespace MessageBoxExample {
       this->buttonShowMessage.Width = 100;
       this->buttonShowMessage.Text = "MessageBox";
       this->buttonShowMessage.Click += pcf_delegate(const object& sender, const EventArgs& e) {
-        DialogResult result = MessageBox::Show("Hello, World!", "Message", MessageBoxButtons::OKCancel, MessageBoxIcon::Error);
+        DialogResult result = MessageBox::Show("Hello, World!", "Message", MessageBoxButtons::OKCancel, MessageBoxIcon::Asterisk);
         labelDialogResult.Text = string::Format("DialogResult = {0}", result);
       };
       
