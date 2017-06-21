@@ -1,4 +1,4 @@
-# Action
+# CheckBox
 This example demonstrates the use of System::Windows::Forms::CheckBox control.
 
 ![GitHub Logo](../../../Documentations/Images/Examples/Forms/MacOsX/CheckBox.png)
