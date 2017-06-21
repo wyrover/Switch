@@ -8,7 +8,7 @@ namespace Examples {
   public:
     // The main entry point for the application.
     static void Main() {
-      RectangleF bounds = {10.5, 10.5, 200.8, 300.8};
+      RectangleF bounds = {10.5f, 10.5f, 200.8f, 300.8f};
       Console::WriteLine("bounds = {0}", bounds);
       Console::WriteLine("X = {0}", bounds.X);
       Console::WriteLine("Y = {0}", bounds.Y);

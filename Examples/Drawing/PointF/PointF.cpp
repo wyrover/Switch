@@ -8,7 +8,7 @@ namespace Examples {
   public:
     // The main entry point for the application.
     static void Main() {
-      PointF location = {10.5, 235.8};
+      PointF location = {10.5f, 235.8f};
       Console::WriteLine("location = {0}", location);
       
       location.X += 20.2;
