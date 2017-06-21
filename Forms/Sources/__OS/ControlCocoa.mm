@@ -151,6 +151,9 @@ void FormsApi::Control::SetClientSize(System::Windows::Forms::Control& control) 
   }
 }
 
+void FormsApi::Control::SetEnabled(const System::Windows::Forms::Control& control) {
+}
+
 bool FormsApi::Control::SetFocus(const System::Windows::Forms::Control& control) {
   return true;
 }

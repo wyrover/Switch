@@ -122,6 +122,9 @@ void FormsApi::Control::SetClientSize(System::Windows::Forms::Control &control) 
   }
 }
 
+void FormsApi::Control::SetEnabled(const System::Windows::Forms::Control& control) {
+}
+
 void FormsApi::Control::SetForeColor(intptr hdc) {
   ref<System::Windows::Forms::Control> control = System::Windows::Forms::Control::FromHandle(GetHandleWindowFromDeviceContext(hdc));
   ((__OS::Widget*)control().Handle())->ForeColor(System::Environment::OSVersion().Platform == System::PlatformID::MacOSX && is<System::Windows::Forms::Button>(control) && as<System::Windows::Forms::Button>(control)().IsDefault ? System::Drawing::Color::White() : control().ForeColor());

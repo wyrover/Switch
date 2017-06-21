@@ -111,6 +111,7 @@ void Control::CreateHandle() {
     __OS::FormsApi::Control::SetSize(*this);
   __OS::FormsApi::Control::SetLocation(*this); // Must be after SetClientSize or SetSize
   __OS::FormsApi::Control::SetBackColor(*this);
+  __OS::FormsApi::Control::SetEnabled(*this);
   __OS::FormsApi::Control::SetForeColor(*this);
   __OS::FormsApi::Control::SetTabStop(*this);
   __OS::FormsApi::Control::SetText(*this);
@@ -163,6 +164,12 @@ void Control::OnClientSizeChanged(const EventArgs& e) {
   else
     setClientSizeAfterHandleCreated = true;
   this->ClientSizeChanged(*this, e);
+}
+
+void Control::OnEnabledChanged(const EventArgs& e) {
+  if (this->IsHandleCreated)
+    __OS::FormsApi::Control::SetEnabled(*this);
+  this->ForeColorChanged(*this, e);
 }
 
 void Control::OnForeColorChanged(const EventArgs& e) {

@@ -96,6 +96,10 @@ void FormsApi::Control::SetClientSize(System::Windows::Forms::Control& control) 
   control.Size = System::Drawing::Size(rect.right - rect.left, rect.bottom - rect.top);
 }
 
+void FormsApi::Control::SetEnabled(const System::Windows::Forms::Control& control) {
+  ::EnableWindow((HWND)control.Handle(), control.Enabled);
+}
+
 bool FormsApi::Control::SetFocus(const System::Windows::Forms::Control& control) {
   return ::SetFocus((HWND)control.Handle()) != NULL;
 }
