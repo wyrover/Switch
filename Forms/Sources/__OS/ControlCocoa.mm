@@ -152,6 +152,8 @@ void FormsApi::Control::SetClientSize(System::Windows::Forms::Control& control) 
 }
 
 void FormsApi::Control::SetEnabled(const System::Windows::Forms::Control& control) {
+  if (!is<System::Windows::Forms::ContainerControl>(control))
+    [(NSControl*)control.Handle() setEnabled:control.Enabled()];
 }
 
 bool FormsApi::Control::SetFocus(const System::Windows::Forms::Control& control) {

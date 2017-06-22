@@ -42,9 +42,9 @@ namespace FormExample {
       };
 
       this->line.Parent = *this;
-      this->line.BorderStyle = BorderStyle::Fixed3D;
+      this->line.BorderStyle = BorderStyle::FixedSingle;
       //this->line.Anchor = AnchorStyles::Left | AnchorStyles::Bottom | AnchorStyles::Right;
-      this->line.Bounds = System::Drawing::Rectangle(10, 253, 280, 4);
+      this->line.Bounds = System::Drawing::Rectangle(10, 253, 280, 1);
 
       this->StartPosition = FormStartPosition::Manual;
       this->Location = System::Drawing::Point(400, 200);
