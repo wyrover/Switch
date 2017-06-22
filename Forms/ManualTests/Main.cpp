@@ -27,6 +27,7 @@ namespace PcfFormApp {
       Button button;
       button.Text = "Message";
       button.Location = Point(10, 10);
+      button.Enabled = false;
       button.Click = pcf_delegate(const object& sender, const EventArgs& e) {
         label.Text = string::Format("Result = {0}", MessageBox::Show("This is the text messge of the MessageBox", "Title MessageBox", MessageBoxButtons::OKCancel, MessageBoxIcon::Question));
       };

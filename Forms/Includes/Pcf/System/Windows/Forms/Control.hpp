@@ -194,6 +194,16 @@ namespace Pcf {
           static Property<System::Drawing::Color, ReadOnly> DefaultBackColor;
           static Property<System::Drawing::Color, ReadOnly> DefaultForeColor;
 
+          Property<bool> Enabled{
+            pcf_get {return this->enabled; },
+            pcf_set {
+              if (this->enabled != value) {
+                this->enabled = value;
+                this->OnEnabledChanged(EventArgs::Empty);
+              }
+            }
+          };
+
           Property<System::Drawing::Color> ForeColor {
             pcf_get{ return (!this->foreColor.HasValue && this->parent != null) ? this->parent().ForeColor : this->foreColor.GetValueOrDefault(DefaultForeColor); },
             pcf_set {
@@ -380,6 +390,7 @@ namespace Pcf {
           EventHandler Click;
           EventHandler ClientSizeChanged;
           EventHandler DoubleClick;
+          EventHandler EnabledChanged;
           EventHandler ForeColorChanged;
           EventHandler HandleCreated;
           EventHandler HandleDestroyed;
@@ -433,6 +444,8 @@ namespace Pcf {
           virtual void OnClientSizeChanged(const EventArgs& e);
 
           virtual void OnDoubleClick(const EventArgs& e) { this->DoubleClick(*this, e); }
+
+          virtual void OnEnabledChanged(const EventArgs& e);
 
           virtual void OnForeColorChanged(const EventArgs& e);
 
@@ -493,6 +506,7 @@ namespace Pcf {
           ControlCollection controls {*this};
           System::Drawing::Color defaultBackColor;
           System::Drawing::Color defaultForeColor;
+          bool enabled = true;
           Nullable<System::Drawing::Color> foreColor;
           intptr handle = 0;
           static System::Collections::Generic::Dictionary<intptr, ref<Control>> handles;

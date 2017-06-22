@@ -66,6 +66,7 @@ namespace __OS {
       static void SetBackColor(intptr hdc);
       static void SetBackColor(const System::Windows::Forms::Control& control);
       static void SetClientSize(System::Windows::Forms::Control& control);
+      static void SetEnabled(const System::Windows::Forms::Control& control);
       static bool SetFocus(const System::Windows::Forms::Control& control);
       static void SetForeColor(intptr hdc);
       static void SetForeColor(const System::Windows::Forms::Control& control);
