@@ -16,7 +16,7 @@ The framework is composed of 4 libraries :
 - **Pcf.TUnit** : The Pcf.TUnit library is a unit-testing framework for modern C++14. Initially ported from NUnit.
 
 # Install
-Before running examples you must install Pcf. To install it read See [INSTALL.md](INSTALL.md) file.
+Before running examples you must install Pcf. To install it read See [Install.md](Install.md) file.
 
 # Examples
 The classic first application 'Hello World'.
