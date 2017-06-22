@@ -4,6 +4,7 @@
 #include <Pcf/System/Windows/Forms/Button.hpp>
 #include <Pcf/System/Windows/Forms/Label.hpp>
 #include <Pcf/System/Windows/Forms/MessageBox.hpp>
+#include <Pcf/System/Windows/Forms/RadioButton.hpp>
 
 using namespace System;
 using namespace System::Drawing;
@@ -31,8 +32,20 @@ namespace PcfFormApp {
         label.Text = string::Format("Result = {0}", MessageBox::Show("This is the text messge of the MessageBox", "Title MessageBox", MessageBoxButtons::OKCancel, MessageBoxIcon::Question));
       };
 
+      RadioButton radioButton1;
+      radioButton1.Text = "raio 1";
+      radioButton1.Location = Point(10, 80);
+
+      RadioButton radioButton2;
+      radioButton2.Text = "raio 2";
+      radioButton2.Location = Point(10, 110);
+
+      RadioButton radioButton3;
+      radioButton2.Text = "raio 3";
+      radioButton2.Location = Point(10, 140);
+
       Form form;
-      form.Controls().AddRange({label, button});
+      form.Controls().AddRange({label, button, radioButton1, radioButton2});
 
       System::Diagnostics::Debug::AutoFlush = true;
       
