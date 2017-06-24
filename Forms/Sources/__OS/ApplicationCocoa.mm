@@ -7,6 +7,8 @@ using namespace System::Drawing;
 using namespace System::Windows::Forms;
 using namespace __OS;
 
+ref<System::Windows::Forms::Form> __mainForm;
+
 namespace {
   class ApplicationApi pcf_static {
   public:
@@ -202,6 +204,7 @@ void FormsApi::Application::MessageBeep(MessageBoxIcon type) {
 }
 
 void FormsApi::Application::MessageLoop(const System::Windows::Forms::Form& mainForm, EventHandler idle) {
+  __mainForm = mainForm;
   ApplicationApi::MessageLoop(idle);
 }
 
