@@ -35,18 +35,6 @@ if (NOT easywsclient_FOUND)
 endif()
 
 #________________________________________________________________________________
-#                                                                            fltk
-find_package(FLTK QUIET)
-message(STATUS "Found FLTK : " ${FLTK_FOUND})
-if (NOT FLTK_FOUND)
-  message(STATUS "Add ThirdParty FLTK")
-  set(FLTK_LIBRARIES "")
-  option(OPTION_BUILD_EXAMPLES "build example programs" OFF)
-  add_subdirectory(fltk)
-  set_target_properties(fltk PROPERTIES FOLDER ThirdParty)
-endif()
-
-#________________________________________________________________________________
 #                                                                           Rs232
 find_package(Rs232 QUIET)
 message(STATUS "Found Rs232 : " ${Rs232_FOUND})

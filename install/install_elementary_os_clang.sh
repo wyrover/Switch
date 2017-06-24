@@ -11,7 +11,7 @@ mkdir -p Build/Examples
 mkdir -p Build/ThirdParties
 
 sudo apt update
-sudo apt install clang cmake doxygen libcurlpp-dev libfltk1.3-dev libgtkmm-3.0-dev libjpeg8-dev libssl-dev libx11-dev uuid-dev zlibc
+sudo apt install clang cmake doxygen libcurlpp-dev libgtkmm-3.0-dev libjpeg8-dev libssl-dev libx11-dev uuid-dev zlibc
 
 export CC=/usr/bin/clang
 export CXX=/usr/bin/clang++

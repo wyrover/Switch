@@ -1,4 +1,4 @@
-﻿#if defined(_WIN32) && defined(__use_native_interface__)
+﻿#if defined(_WIN32)
 
 #include <Pcf/System/Collections/Generic/Dictionary.hpp>
 

@@ -7,15 +7,6 @@ sudo chmod 777 /usr/local/bin
 sudo chmod 777 /usr/local/cmake
 sudo chmod 777 /usr/local/include
 sudo chmod 777 /usr/local/lib
-# --> To remove when fltk removed from project
-sudo chmod 777 /usr/local/share
-sudo chmod 777 /usr/local/share/man
-sudo chmod 777 /usr/local/share/man/man1
-sudo chmod 777 /usr/local/share/man/man3
-sudo chmod 777 /usr/local/share/man/man6
-sudo chmod 777 /usr/local/share/applications
-sudo chmod 777 /usr/local/lib64
-# <--
 mkdir -p Build/Examples
 mkdir -p Build/ThirdParties
 
