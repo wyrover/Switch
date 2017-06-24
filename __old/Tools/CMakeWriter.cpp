@@ -95,9 +95,37 @@ namespace Tools {
 
     string GetCmakeFileTemplate() const {
       return 
-        "cmake_minimum_required(VERSION 2.8.11)\n\n" "SET(CMAKE_USER_MAKE_RULES_OVERRIDE_CXX ../../cmake/CxxFlagsOverride.cmake)\n\n" "include(../../cmake/Os.cmake)\n\n" "project(<AddProjectName>)\n\n"
-        "<AddGroupFiles>\n\n" "#Add group for sources\n" "<AddSourcesGroups>\n\n" "<AddIncludeDirectories>\n\n" "<AddLibrary>\n\n" "target_link_libraries(\n" "  <AddProjectName>\n"
-        "  ${ThreadLib}\n" "  ${RtLib}\n" "  ${DlLib}\n" "  ${SocketLib}\n" "  ${IphlpapiLib}\n" "  ${RpcLib}\n" ")\n\n" "#add_dependencies(\n" "#  <AddProjectName>\n" "#)\n\n";
+      "cmake_minimum_required(VERSION 2.8.11)\n"
+      "\n"
+      "SET(CMAKE_USER_MAKE_RULES_OVERRIDE_CXX ../../cmake/CxxFlagsOverride.cmake)\n"
+      "\n"
+      "include(../../cmake/Os.cmake)\n"
+      "\n"
+      "project(<AddProjectName>)\n"
+      "\n"
+      "<AddGroupFiles>\n
+      "\n"
+      "#Add group for sources\n"
+      "<AddSourcesGroups>\n"
+      "\n"
+      "<AddIncludeDirectories>\n"
+      "\n"
+      "<AddLibrary>\n"
+      "\n"
+      "target_link_libraries(\n"
+      "  <AddProjectName>\n"
+      "  ${ThreadLib}\n"
+      "  ${RtLib}\n"
+      "  ${DlLib}\n"
+      "  ${SocketLib}\n"
+      "  ${IphlpapiLib}\n"
+      "  ${RpcLib}\n"
+      ")\n"
+      "\n"
+      "#add_dependencies(\n"
+      "#  <AddProjectName>\n"
+      "#)\n"
+      "\n";
      }
     
       string GetGroupsFiles() const {

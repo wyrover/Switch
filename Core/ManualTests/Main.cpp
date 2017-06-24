@@ -8,27 +8,12 @@ using namespace System;
 using namespace System::Collections;
 
 namespace ManualTests {
-  using MyEventHandler = delegate<void, const object&, const EventArgs>;
-
-  class Publisher : public object {
-  public:
-    event<Publisher, MyEventHandler> MyEvent;
-    
-    void RaiseMyEvent() {
-      this->MyEvent.Invoke(*this, EventArgs());
-    }
-  };
-  
   class Program {
   public:
     static void Main() {
-      Publisher publisher;
-      
-      publisher.MyEvent += pcf_delegate(const object& sender, const EventArgs& e) {
-        Console::WriteLine("On myEvent");
-      };
-      
-      publisher.RaiseMyEvent();
+      for(auto c : "yfiumefreddo"_s)
+        Console::Write("{0:b}", byte(c));
+      Console::WriteLine();
     }
   };
 }
