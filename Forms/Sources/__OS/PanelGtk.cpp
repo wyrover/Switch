@@ -1,4 +1,4 @@
-#if (defined(__linux__) && defined(__use_native_interface__)) || defined(__use_gtk_interface__)
+#if defined(__linux__)
 
 #include <gtkmm/frame.h>
 #include <gtkmm/scrolledwindow.h>

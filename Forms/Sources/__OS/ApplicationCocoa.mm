@@ -1,4 +1,4 @@
-#if defined(__APPLE__) && defined(__use_native_interface__)
+#if defined(__APPLE__)
 #include "WindowProcedureCocoa.hpp"
 
 using namespace System;
@@ -6,6 +6,8 @@ using namespace System::Collections::Generic;
 using namespace System::Drawing;
 using namespace System::Windows::Forms;
 using namespace __OS;
+
+ref<System::Windows::Forms::Form> __mainForm;
 
 namespace {
   class ApplicationApi pcf_static {
@@ -202,6 +204,7 @@ void FormsApi::Application::MessageBeep(MessageBoxIcon type) {
 }
 
 void FormsApi::Application::MessageLoop(const System::Windows::Forms::Form& mainForm, EventHandler idle) {
+  __mainForm = mainForm;
   ApplicationApi::MessageLoop(idle);
 }
 

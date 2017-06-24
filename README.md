@@ -1,3 +1,5 @@
+![GitHub Logo](Documentations/Images/Pcf-logo.png)
+
 # Pcf
 Portable C++ Framework
 
@@ -16,7 +18,7 @@ The framework is composed of 4 libraries :
 - **Pcf.TUnit** : The Pcf.TUnit library is a unit-testing framework for modern C++14. Initially ported from NUnit.
 
 # Install
-Before running examples you must install Pcf. To install it read Install.md file.
+Before running examples you must install Pcf. To install it read See [Install.md](Install.md) file.
 
 # Examples
 The classic first application 'Hello World'.
@@ -135,17 +137,7 @@ add_executable(HelloWorldTest HelloWorldTest.cpp)
 target_link_libraries(HelloWorldTest Pcf.TUnit.Main)
 ```
 
-# Build and run on linux
-launch Terminal and type followed line :
-```
-cd FolderWhereYourAreCopyExample
-export CC=/usr/bin/clang
-export CXX=/usr/bin/clang++
-cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ..
-make
-./ExampleProgramName
-```
-
+For more Examples see [Examples](Examples)
 
 # Namespace
 - **Pcf::System** namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.

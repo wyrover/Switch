@@ -1,4 +1,4 @@
-#if defined(__APPLE__) && defined(__use_native_interface__)
+#if defined(__APPLE__)
 #include "WidgetCocoa.hpp"
 #include "WindowProcedureCocoa.hpp"
 

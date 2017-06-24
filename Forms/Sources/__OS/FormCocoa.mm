@@ -1,4 +1,4 @@
-#if defined(__APPLE__) && defined(__use_native_interface__)
+#if defined(__APPLE__)
 #include "WindowProcedureCocoa.hpp"
 #include <Pcf/System/Random.hpp>
 
@@ -34,18 +34,21 @@ namespace {
 }
 
 @interface FormCocoa : NSWindow
-- (IBAction) FormClose:(id)sender;
+- (BOOL)windowShouldClose:(id)sender;
 @end
 
 @implementation FormCocoa
-- (IBAction) FormClose:(id)sender {
+- (BOOL)windowShouldClose:(id)sender {
   Message event = Message::Create((intptr)sender, WM_CLOSE, 0, 0, 0, 0);
   const_cast<Control&>(__OS::WindowProcedure::Controls[(intptr)sender]()).WndProc(event);
+  return NO;
 }
 @end
 
 void FormsApi::Form::Close(System::Windows::Forms::Form& form) {
-  [(NSWindow*)form.Handle() close];
+  Message event = Message::Create((intptr)form.Handle(), WM_CLOSE, 0, 0, 0, 0);
+  form.WndProc(event);
+  //[(NSWindow*)form.Handle() close];
 }
 
 intptr FormsApi::Form::Create(System::Windows::Forms::Form& form) {
