@@ -1,2 +1,2 @@
 @echo off
-call install_windows_visual_studio_2015.bat
+call install\install_windows_visual_studio_2015.bat
