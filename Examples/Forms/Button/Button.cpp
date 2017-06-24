@@ -41,19 +41,17 @@ namespace FormExample {
         this->Close();
       };
 
-      this->line.Parent = *this;
-      this->line.BorderStyle = BorderStyle::Fixed3D;
-      //this->line.Anchor = AnchorStyles::Left | AnchorStyles::Bottom | AnchorStyles::Right;
-      this->line.Bounds = System::Drawing::Rectangle(10, 253, 280, 4);
-
       this->StartPosition = FormStartPosition::Manual;
       this->Location = System::Drawing::Point(400, 200);
       this->ClientSize = System::Drawing::Size(300, 300);
       this->Text = "Button example";
+      this->Paint += pcf_delegate(const object& sender, const PaintEventArgs& e) {
+        // Draws line for delimited the buttons of bottom area
+        e.Graphics().DrawLine(System::Drawing::Pen(System::Drawing::Color::Black), e.ClipRectangle().Left + 10, e.ClipRectangle().Bottom - 47, e.ClipRectangle().Right - 10, e.ClipRectangle().Bottom - 47);
+      };
     }
     
   private:
-    Panel line;
     Button buttonNone;
     Button buttonClose;
     Button buttonTooSmallForText;

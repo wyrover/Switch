@@ -91,6 +91,7 @@ void FormsApi::Control::SetClientSize(System::Windows::Forms::Control &control) 
 }
 
 void FormsApi::Control::SetEnabled(const System::Windows::Forms::Control& control) {
+  ((__OS::Widget*)control.Handle())->ToWidget().set_sensitive(control.Enabled);
 }
 
 bool FormsApi::Control::SetFocus(const System::Windows::Forms::Control &control) {
