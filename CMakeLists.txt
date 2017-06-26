@@ -34,6 +34,9 @@ endif ()
 
 include(PcfDependencies.cmake)
 
+# this setting is for Travis CI
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
+
 add_subdirectory("Core")
 add_subdirectory("Drawing")
 add_subdirectory("Forms")
