@@ -1,5 +1,5 @@
 os:
-  - linux
+  #- linux
   - osx
 
 addons:
@@ -8,6 +8,8 @@ addons:
       - llvm-toolchain-precise
       - ubuntu-toolchain-r-test
     packages:
+      #- clang-3.7
+      #- clang++-3.7
       - g++-5
       - gcc-5
             
