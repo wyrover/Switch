@@ -1,0 +1,39 @@
+os:
+  - linux
+  - osx
+
+sudo: enabled
+
+compiler: clang
+
+# This makes us use Ubuntu 14 instead of 12
+dist: trusty
+
+# This makes us use OS X 10.12 and Xcode 8.3.3 instead of OS X10.11 and Xcode 7.3.1
+osx_image: xcode8.3
+
+language: cpp
+
+# Notes:
+# - Travis uses cmake 3.0.2 on OS X; we need 3.5 or newer (thanks tbodt)
+
+script:
+  - cmake --version
+  - mkdir /usr/local/cmake
+  - chmod 777 /usr/local/bin
+  - chmod 777 /usr/local/cmake
+  - chmod 777 /usr/local/include
+  - chmod 777 /usr/local/lib
+  - mkdir -p Build/Examples
+  - mkdir -p Build/ThirdParties
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get update; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get install clang cmake doxygen libcurlpp-dev libgtkmm-3.0-dev libjpeg8-dev libpng-dev libssl-dev libx11-dev uuid-dev zlibc -y fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew update; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install cmake curl doxygen fltk gtkmm3 jpeg libpng zlib; fi
+  - cd Build/ThirdParties
+  - cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ../../ThirdParties 
+  - make install
+  - cd ..
+  - cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DBUILD_CORE_UNIT_TESTS=ON -DBUILD_DRAWING_UNIT_TESTS=ON -DBUILD_FORMS_UNIT_TESTS=ON -DBUILD_TUNIT_UNIT_TESTS=ON ..
+  - make all
+  - make test
