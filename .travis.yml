@@ -19,11 +19,11 @@ language: cpp
 
 script:
   - cmake --version
-  - mkdir /usr/local/cmake
-  - chmod 777 /usr/local/bin
-  - chmod 777 /usr/local/cmake
-  - chmod 777 /usr/local/include
-  - chmod 777 /usr/local/lib
+  - sudo mkdir /usr/local/cmake
+  - sudo chmod 777 /usr/local/bin
+  - sudo chmod 777 /usr/local/cmake
+  - sudo chmod 777 /usr/local/include
+  - sudo chmod 777 /usr/local/lib
   - mkdir -p Build/Examples
   - mkdir -p Build/ThirdParties
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get update; fi
