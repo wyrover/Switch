@@ -3,7 +3,7 @@
 # Pcf
 Portable C++ Framework
 
-[![Build Status](https://travis-ci.org/yfiumefreddo/pcf.svg)](https://travis-ci.org/yfiumefreddo/pcf)
+[![Build Status](https://travis-ci.org/yfiumefreddo/Pcf.svg)](https://travis-ci.org/yfiumefreddo/Pcf)
 
 # The Pcf Libraries are...
 - a collection of native C++ classes libraries, similar to the .NET Framework;
