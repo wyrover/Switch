@@ -34,7 +34,8 @@ source_group(Sources\\Pcf\\TUnit\\Constraints REGULAR_EXPRESSION "/Sources/Pcf/T
 
 add_library(Pcf.TUnit STATIC ${INCLUDE_FILES} ${SOURCE_FILES})
 target_include_directories(Pcf.TUnit PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Includes> $<INSTALL_INTERFACE:include>)
-target_link_libraries(Pcf.TUnit GTest::GTest Pcf.Core)
+#target_link_libraries(Pcf.TUnit GTest::GTest Pcf.Core)
+target_link_libraries(Pcf.TUnit ${GTEST_LIBRARIES} Pcf.Core)
 set_target_properties(Pcf.TUnit PROPERTIES FOLDER Pcf/TUnit)
 
 if (BUILD_TUNIT_UNIT_TESTS)
