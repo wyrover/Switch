@@ -4,7 +4,9 @@ os:
 
 sudo: enabled
 
-compiler: clang
+compiler: 
+  - clang
+  - clang
 
 # This makes us use Ubuntu 14 instead of 12
 dist: trusty
