@@ -10,6 +10,6 @@ This example demonstrates the use of System::Windows::Forms::ProgressBar control
 <p align="left">Ubuntu</p>
 <BR>
 
-![GitHub Logo](../../../Documentations/Images/Examples/Forms/ProgressBarg)
+![GitHub Logo](../../../Documentations/Images/Examples/Forms/ProgressBarW.png)
 <p align="left">Windows</p>
 <BR>
