@@ -25,6 +25,11 @@ namespace Pcf {
             this->TabStop = false;
           }
 
+          Property<int32> MarqueeAnimationSpeed {
+            pcf_get{ return this->marqueeAnimationSpeed; },
+            pcf_set{ this->SetMarqueeAnimationSpeed(value); },
+          };
+
           Property<int32> Maximum{
             pcf_get{ return this->maximum; },
             pcf_set{ this->SetMaximum(value); },
@@ -48,12 +53,14 @@ namespace Pcf {
         protected:
           void CreateHandle() override;
           System::Drawing::Size GetDefaultSize() const override { return System::Drawing::Size(100, System::Environment::OSVersion().Platform == System::PlatformID::MacOSX ? 20 : 23); }
+          void SetMarqueeAnimationSpeed(int32 maximum);
           void SetMaximum(int32 maximum);
           void SetMinimum(int32 minimum);
           void SetProgressStyle(ProgressBarStyle style);
           void SetValue(int32 value);
 
           /// @cond
+          int32 marqueeAnimationSpeed = 100;
           int32 maximum = 100;
           int32 minimum = 0;
           ProgressBarStyle style = ProgressBarStyle::Blocks;

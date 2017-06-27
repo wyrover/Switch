@@ -5,6 +5,7 @@
 #include <Pcf/System/Windows/Forms/Label.hpp>
 #include <Pcf/System/Windows/Forms/MessageBox.hpp>
 #include <Pcf/System/Windows/Forms/RadioButton.hpp>
+#include <Pcf/System/Windows/Forms/Timer.hpp>
 
 using namespace System;
 using namespace System::Drawing;
@@ -32,20 +33,15 @@ namespace PcfFormApp {
         label.Text = string::Format("Result = {0}", MessageBox::Show("This is the text messge of the MessageBox", "Title MessageBox", MessageBoxButtons::OKCancel, MessageBoxIcon::Question));
       };
 
-      RadioButton radioButton1;
-      radioButton1.Text = "raio 1";
-      radioButton1.Location = Point(10, 80);
-
-      RadioButton radioButton2;
-      radioButton2.Text = "raio 2";
-      radioButton2.Location = Point(10, 110);
-
-      RadioButton radioButton3;
-      radioButton2.Text = "raio 3";
-      radioButton2.Location = Point(10, 140);
+      Timer timer;
+      timer.Tick += pcf_delegate(const object& sender, const EventArgs& e) {
+        static int32 counter = 0;
+        label.Text = string::Format("Counter = {0}", ++counter);
+      };
+      timer.Enabled = true;
 
       Form form;
-      form.Controls().AddRange({label, button, radioButton1, radioButton2});
+      form.Controls().AddRange({label, button});
 
       System::Diagnostics::Debug::AutoFlush = true;
       

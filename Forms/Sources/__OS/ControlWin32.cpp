@@ -111,12 +111,7 @@ void FormsApi::Control::SetForeColor(intptr hdc) {
 }
 
 void FormsApi::Control::SetForeColor(const System::Windows::Forms::Control& control) {
-  HDC hdc = GetDC((HWND)control.Handle());
-  ref<System::Windows::Forms::Control> form = control;
-  while (form().Parent() != null)
-    form = form().Parent();
-  SendMessage((HWND)form().Handle(), WM_ERASEBKGND, (WPARAM)hdc, 0);
-  ReleaseDC((HWND)control.Handle(), hdc);
+  SetForeColor((intptr)GetDC((HWND)control.Handle()));
 }
 
 void FormsApi::Control::SetLocation(const System::Windows::Forms::Control& control) {

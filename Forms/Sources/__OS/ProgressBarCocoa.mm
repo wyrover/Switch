@@ -28,7 +28,7 @@ void FormsApi::ProgressBar::SetMinimum(const System::Windows::Forms::ProgressBar
   [(NSProgressIndicator*)progressBar.Handle() setMinValue:progressBar.Minimum()];
 }
 
-void FormsApi::ProgressBar::SetStyle(const System::Windows::Forms::ProgressBar& progressBar) {
+void FormsApi::ProgressBar::SetMarquee(const System::Windows::Forms::ProgressBar& progressBar) {
 }
 
 void FormsApi::ProgressBar::SetValue(const System::Windows::Forms::ProgressBar& progressBar) {

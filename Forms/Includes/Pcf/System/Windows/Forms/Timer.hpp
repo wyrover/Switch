@@ -2,9 +2,9 @@
 /// @brief Contains Pcf::System::Windows::Forms::Timer class.
 #pragma once
 
-#include <Pcf/System/EventHandler.h>
+#include <Pcf/System/EventHandler.hpp>
 
-#include "../../ComponentModel/Component.h"
+#include "../../ComponentModel/Component.hpp"
 
 /// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Pcf {
@@ -40,8 +40,10 @@ namespace Pcf {
           
           int32 interval = 100;
           bool enabled = false;
-          
-          static void TimerTick(void* timer);
+          intptr handle = IntPtr::Zero;
+          delegate<void> tick = pcf_delegate {
+            Tick(*this, System::EventArgs::Empty);
+          };
         };
       }
     }

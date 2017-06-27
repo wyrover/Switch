@@ -35,7 +35,7 @@ void FormsApi::ProgressBar::SetMinimum(const System::Windows::Forms::ProgressBar
 
 }
 
-void FormsApi::ProgressBar::SetStyle(const System::Windows::Forms::ProgressBar &progressBar) {
+void FormsApi::ProgressBar::SetMarquee(const System::Windows::Forms::ProgressBar &progressBar) {
   
 }
 

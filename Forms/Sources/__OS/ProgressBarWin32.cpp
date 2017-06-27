@@ -18,7 +18,12 @@ intptr FormsApi::ProgressBar::Create(const System::Windows::Forms::ProgressBar& 
   icc.dwSize = sizeof(INITCOMMONCONTROLSEX);
   icc.dwICC = ICC_PROGRESS_CLASS;
   InitCommonControlsEx(&icc);
-  HWND handle = CreateWindowEx(0, PROGRESS_CLASS, progressBar.Text().w_str().c_str(), WS_CHILD, progressBar.Left, progressBar.Top, progressBar.Width, progressBar.Height, (HWND)progressBar.Parent()().Handle(), (HMENU)0, __instance, (LPVOID)NULL);
+  int style = WS_CHILD;
+  switch (progressBar.Style) {
+  case ProgressBarStyle::Continuous: style |= PBS_SMOOTH; break;
+  case ProgressBarStyle::Marquee: style |= PBS_MARQUEE; break;
+  }
+  HWND handle = CreateWindowEx(0, PROGRESS_CLASS, progressBar.Text().w_str().c_str(), style, progressBar.Left, progressBar.Top, progressBar.Width, progressBar.Height, (HWND)progressBar.Parent()().Handle(), (HMENU)0, __instance, (LPVOID)NULL);
   WindowProcedure::SetWindowTheme(handle);
   WindowProcedure::DefWindowProcs[(intptr)handle] = (WNDPROC)SetWindowLongPtr(handle, GWLP_WNDPROC, (LONG_PTR)WindowProcedure::WndProc);
   /// @todo to remove after create SetFont method...
@@ -34,12 +39,8 @@ void FormsApi::ProgressBar::SetMinimum(const System::Windows::Forms::ProgressBar
   SendMessage((HWND)progressBar.Handle(), PBM_SETRANGE32, progressBar.Minimum(), progressBar.Maximum());
 }
 
-void FormsApi::ProgressBar::SetStyle(const System::Windows::Forms::ProgressBar& progressBar) {
-  SetWindowLong((HWND)progressBar.Handle(), GWL_STYLE, GetWindowLong((HWND)progressBar.Handle(), GWL_STYLE) & ~(PBS_MARQUEE | PBS_SMOOTH | PBS_SMOOTHREVERSE));
-  switch (progressBar.Style) {
-  case ProgressBarStyle::Continuous: SetWindowLong((HWND)progressBar.Handle(), GWL_STYLE, GetWindowLong((HWND)progressBar.Handle(), GWL_STYLE) | PBS_SMOOTH); break;
-  case ProgressBarStyle::Marquee: SetWindowLong((HWND)progressBar.Handle(), GWL_STYLE, GetWindowLong((HWND)progressBar.Handle(), GWL_STYLE) | PBS_MARQUEE); break;
-  }
+void FormsApi::ProgressBar::SetMarquee(const System::Windows::Forms::ProgressBar& progressBar) {
+  SendMessage((HWND)progressBar.Handle(), PBM_SETMARQUEE, progressBar.Style == ProgressBarStyle::Marquee ? 1 : 0, progressBar.MarqueeAnimationSpeed);
 }
 
 void FormsApi::ProgressBar::SetValue(const System::Windows::Forms::ProgressBar& progressBar) {

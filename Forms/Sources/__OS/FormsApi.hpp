@@ -108,7 +108,7 @@ namespace __OS {
       static intptr Create(const System::Windows::Forms::ProgressBar& progressBar);
       static void SetMaximum(const System::Windows::Forms::ProgressBar& progressBar);
       static void SetMinimum(const System::Windows::Forms::ProgressBar& progressBar);
-      static void SetStyle(const System::Windows::Forms::ProgressBar& progressBar);
+      static void SetMarquee(const System::Windows::Forms::ProgressBar& progressBar);
       static void SetValue(const System::Windows::Forms::ProgressBar& progressBar);
     };
 
@@ -179,6 +179,12 @@ namespace __OS {
       static System::Drawing::Size GetMenuCheckSize();
       static System::Drawing::Font GetMenuFont();
       static int32 GetMenuHeight();
+    };
+
+    class Timer pcf_static {
+    public:
+      static intptr Create(int32 interval, delegate<void> tick);
+      static void Destroy(intptr handle);
     };
   };
 }

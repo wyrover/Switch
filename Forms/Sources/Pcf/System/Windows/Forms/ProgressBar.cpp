@@ -11,8 +11,18 @@ void ProgressBar::CreateHandle() {
   this->Control::CreateHandle();
   __OS::FormsApi::ProgressBar::SetMaximum(*this);
   __OS::FormsApi::ProgressBar::SetMinimum(*this);
-  __OS::FormsApi::ProgressBar::SetStyle(*this);
   __OS::FormsApi::ProgressBar::SetValue(*this);
+  __OS::FormsApi::ProgressBar::SetMarquee(*this);
+}
+
+void ProgressBar::SetMarqueeAnimationSpeed(int32 marqueeAnimationSpeed) {
+  if (marqueeAnimationSpeed < 0)
+    throw ArgumentOutOfRangeException(pcf_current_information);
+  if (this->marqueeAnimationSpeed != marqueeAnimationSpeed) {
+    this->marqueeAnimationSpeed = marqueeAnimationSpeed;
+    if (this->IsHandleCreated)
+      __OS::FormsApi::ProgressBar::SetMarquee(*this);
+  }
 }
 
 void ProgressBar::SetMaximum(int32 maximum) {
@@ -39,7 +49,7 @@ void ProgressBar::SetProgressStyle(ProgressBarStyle style) {
   if (this->style != style) {
     this->style = style;
     if (this->IsHandleCreated)
-      __OS::FormsApi::ProgressBar::SetStyle(*this);
+      __OS::FormsApi::ProgressBar::SetMarquee(*this);
   }
 }
 

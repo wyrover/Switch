@@ -97,7 +97,7 @@ set(INCLUDE_FILES
 #  Includes/Pcf/System/Windows/Forms/TabControl.hpp
 #  Includes/Pcf/System/Windows/Forms/TabPage.hpp
 #  Includes/Pcf/System/Windows/Forms/TextBox.hpp
-#  Includes/Pcf/System/Windows/Forms/Timer.hpp
+  Includes/Pcf/System/Windows/Forms/Timer.hpp
   Includes/Pcf/System/Windows/Forms/UICues.hpp
   Includes/Pcf/System/Windows/Forms/UICuesEventArgs.hpp
   Includes/Pcf/System/Windows/Forms/UICuesEventHandler.hpp
@@ -147,6 +147,9 @@ set(SOURCE_FILES
   Sources/__OS/SystemInformationFltk.cpp
   Sources/__OS/SystemInformationGtk.cpp
   Sources/__OS/SystemInformationWin32.cpp
+  Sources/__OS/TimerCocoa.mm
+  Sources/__OS/TimerGtk.cpp
+  Sources/__OS/TimerWin32.cpp
   Sources/__OS/WidgetCocoa.hpp
   Sources/__OS/WidgetFltk.hpp
   Sources/__OS/WidgetGtk.hpp
@@ -195,7 +198,7 @@ set(SOURCE_FILES
   Sources/Pcf/System/Windows/Forms/SystemInformation.cpp
 #  Sources/Pcf/System/Windows/Forms/TabControl.cpp
 #  Sources/Pcf/System/Windows/Forms/TextBox.cpp
-#  Sources/Pcf/System/Windows/Forms/Timer.cpp
+  Sources/Pcf/System/Windows/Forms/Timer.cpp
 )
 
 source_group(Includes REGULAR_EXPRESSION "/Includes/[-_,A-Za-z0-9]+\\.hpp*")
