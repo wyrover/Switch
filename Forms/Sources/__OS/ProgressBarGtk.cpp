@@ -1,6 +1,6 @@
 #if defined(__linux__)
 
-#include <gtkmm/progressbar.h>
+#include <gtkmm.h>
 
 #include "WidgetGtk.hpp"
 
@@ -16,7 +16,14 @@ namespace __OS {
     void BackColor(const System::Drawing::Color& color) override {}
     
     void Text(const string& text) override {}
+    guint marquee = 0;
+    bool isMarquee = false;
   };
+
+ int MarqueeProc(gpointer progressBar) {
+    ((__OS::ProgressBar*)progressBar)->pulse();
+    return 1;
+  }
 }
 
 intptr FormsApi::ProgressBar::Create(const System::Windows::Forms::ProgressBar& progressBar) {
@@ -28,15 +35,23 @@ intptr FormsApi::ProgressBar::Create(const System::Windows::Forms::ProgressBar& 
 }
 
 void FormsApi::ProgressBar::SetMaximum(const System::Windows::Forms::ProgressBar& progressBar) {
-
+  // no implementation
 }
 
 void FormsApi::ProgressBar::SetMinimum(const System::Windows::Forms::ProgressBar &progressBar) {
-
+    // no implementation
 }
 
 void FormsApi::ProgressBar::SetMarquee(const System::Windows::Forms::ProgressBar &progressBar) {
-  
+  if (progressBar.Style == ProgressBarStyle::Marquee) {
+    ((__OS::ProgressBar*)progressBar.Handle())->isMarquee = true;
+    ((__OS::ProgressBar*)progressBar.Handle())->marquee = g_timeout_add(progressBar.MarqueeAnimationSpeed(), MarqueeProc, (gpointer)progressBar.Handle());
+  } else {
+    if (((__OS::ProgressBar*)progressBar.Handle())->isMarquee == true) {
+      g_source_remove(((__OS::ProgressBar*)progressBar.Handle())->marquee);
+      ((__OS::ProgressBar*)progressBar.Handle())->isMarquee = false;
+    }
+  }
 }
 
 void FormsApi::ProgressBar::SetValue(const System::Windows::Forms::ProgressBar &progressBar) {

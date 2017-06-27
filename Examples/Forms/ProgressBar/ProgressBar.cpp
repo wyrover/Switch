@@ -54,7 +54,7 @@ namespace ProgressBarExample {
         this->progressBar1.Value = this->progressBar1.Value < this->progressBar1.Maximum ? this->progressBar1.Value+1 : this->progressBar1.Minimum;
         this->progressBar1.ForeColor = this->progressBar1.Value >= 50 ? Drawing::Color::Red : Drawing::Color::Green;
         this->progressBar4.Value = this->progressBar4.Value < this->progressBar4.Maximum ? this->progressBar4.Value+1 : this->progressBar4.Minimum;
-        if (this->progressBar4.Value == 110) this->timer.Enabled = false;
+        //if (this->progressBar4.Value == 110) this->timer.Enabled = false;
       };
     }
     
