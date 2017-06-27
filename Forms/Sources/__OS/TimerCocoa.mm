@@ -34,7 +34,6 @@ intptr FormsApi::Timer::Create(int32 interval, delegate<void> tick) {
 
 void FormsApi::Timer::Destroy(intptr handle) {
   [[(TimerCocoa*)handle timer] invalidate];
-  ((TimerCocoa*)handle).timer = nil;
   ticks.Remove(handle);
 }
 
