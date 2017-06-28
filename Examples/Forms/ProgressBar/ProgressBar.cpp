@@ -26,12 +26,12 @@ namespace ProgressBarExample {
       this->progressBar2.Maximum = 140;
       
       this->progressBar3.Parent = *this;
-      this->progressBar3.Location = System::Drawing::Rectangle(50, 80);
+      this->progressBar3.Location = System::Drawing::Point(50, 80);
       this->progressBar3.Width = 200;
       this->progressBar3.Value = 50;
       
       this->progressBar4.Parent = *this;
-      this->progressBar4.Location = System::Drawing::Rectangle(50, 110);
+      this->progressBar4.Location = System::Drawing::Point(50, 110);
       this->progressBar4.Width = 200;
       this->progressBar4.Maximum = 200;
       this->progressBar4.Value = 200;
