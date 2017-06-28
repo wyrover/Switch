@@ -3,7 +3,6 @@
 #pragma once
 
 #include "ContainerControl.hpp"
-#include "BorderStyle.hpp"
 
 /// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Pcf {
@@ -14,27 +13,13 @@ namespace Pcf {
       /// @brief The Pcf::System::Windows::Forms namespace contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system, Apple Mac Os X and Linux like Ubuntu operating system.
       namespace Forms {
         /// @brief Used to group collections of controls.
-        class pcf_public Panel : public ContainerControl {
+        class pcf_public GroupBox : public ContainerControl {
         public:
-          Panel() {
-            this->SetStyle(ControlStyles::UserPaint, false);
-          }
-
-          Property<System::Windows::Forms::BorderStyle> BorderStyle {
-            pcf_get{return this->borderStyle;},
-            pcf_set{this->SetBorderStyle (value);}
-          };
-
-         FormClosingEventHandler FormClosing;
+          GroupBox() {}
 
         protected:
           void CreateHandle() override;
-          System::Drawing::Size GetDefaultSize() const override { return System::Drawing::Size(200, 100); }
-          void SetBorderStyle(System::Windows::Forms::BorderStyle borderStyle);
-
-          /// @cond
-          System::Windows::Forms::BorderStyle borderStyle = System::Windows::Forms::BorderStyle::None;
-          /// @endcond
+          System::Drawing::Size GetDefaultSize() const override {return System::Drawing::Size(200, 100);}
         };
       }
     }

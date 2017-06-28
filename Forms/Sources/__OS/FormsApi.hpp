@@ -10,6 +10,7 @@
 #include "../../Includes/Pcf/System/Windows/Forms/Control.hpp"
 #include "../../Includes/Pcf/System/Windows/Forms/DialogResult.hpp"
 #include "../../Includes/Pcf/System/Windows/Forms/Form.hpp"
+#include "../../Includes/Pcf/System/Windows/Forms/GroupBox.hpp"
 #include "../../Includes/Pcf/System/Windows/Forms/InvalidateEventArgs.hpp"
 #include "../../Includes/Pcf/System/Windows/Forms/Label.hpp"
 #include "../../Includes/Pcf/System/Windows/Forms/MessageBoxButtons.hpp"
@@ -90,6 +91,11 @@ namespace __OS {
     public:
       static void Close(System::Windows::Forms::Form& form);
       static intptr Create(System::Windows::Forms::Form& form);
+    };
+
+    class GroupBox pcf_static {
+    public:
+      static intptr Create(const System::Windows::Forms::GroupBox& groupBox);
     };
 
     class Label pcf_static {

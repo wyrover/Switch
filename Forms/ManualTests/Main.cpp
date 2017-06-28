@@ -2,8 +2,10 @@
 #include <Pcf/System/Diagnostics/Debug.hpp>
 #include <Pcf/System/Windows/Forms/Application.hpp>
 #include <Pcf/System/Windows/Forms/Button.hpp>
+#include <Pcf/System/Windows/Forms/GroupBox.hpp>
 #include <Pcf/System/Windows/Forms/Label.hpp>
 #include <Pcf/System/Windows/Forms/MessageBox.hpp>
+#include <Pcf/System/Windows/Forms/Panel.hpp>
 #include <Pcf/System/Windows/Forms/RadioButton.hpp>
 #include <Pcf/System/Windows/Forms/Timer.hpp>
 
@@ -21,27 +23,15 @@ namespace PcfFormApp {
 
       Application::EnableVisualStyles();
 
-      Label label;
-      label.Text = "Result = ";
-      label.Location = Point(10, 50);
+      GroupBox groupBox;
+      groupBox.Text = "GroupBox";
+      groupBox.Location = Point(10, 10);
 
-      Button button;
-      button.Text = "Message";
-      button.Location = Point(10, 10);
-      button.Enabled = false;
-      button.Click = pcf_delegate(const object& sender, const EventArgs& e) {
-        label.Text = string::Format("Result = {0}", MessageBox::Show("This is the text messge of the MessageBox", "Title MessageBox", MessageBoxButtons::OKCancel, MessageBoxIcon::Question));
-      };
-
-      Timer timer;
-      timer.Tick += pcf_delegate(const object& sender, const EventArgs& e) {
-        static int32 counter = 0;
-        label.Text = string::Format("Counter = {0}", ++counter);
-      };
-      timer.Enabled = true;
+      GroupBox groupBox2;
+      groupBox2.Location = Point(10, 120);
 
       Form form;
-      form.Controls().AddRange({label, button});
+      form.Controls().AddRange({groupBox, groupBox2});
 
       System::Diagnostics::Debug::AutoFlush = true;
       

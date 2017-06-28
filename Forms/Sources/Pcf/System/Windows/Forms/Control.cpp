@@ -417,10 +417,12 @@ void Control::WmMouseLeave(Message& message) {
 }
 
 void Control::WmMouseMove(Message& message) {
+  // Warning this code produce error for some Control like Scrollbar and GroupBox
+  /*
   if (controlEntered != *this) {
     Message messageMouseEnter = Message::Create(message.HWnd, WM_MOUSEENTER, message.WParam, message.LParam, 0);
     this->WmMouseEnter(messageMouseEnter);
-  }
+  }*/
   //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::MouseWindowMessage, "Control::WmMouseMove message=" + message + ", name=" + this->name);
   this->DefWndProc(message);
   this->OnMouseMove(MouseEventArgs(WParamToMouseButtons(message), MakePoint(message.LParam()), 0, 0));

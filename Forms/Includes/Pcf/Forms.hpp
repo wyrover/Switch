@@ -49,7 +49,7 @@
 #include "System/Windows/Forms/FormStartPosition.hpp"
 #include "System/Windows/Forms/GiveFeedbackEventArgs.hpp"
 #include "System/Windows/Forms/GiveFeedbackEventHandler.hpp"
-//#include "System/Windows/Forms/GroupBox.hpp"
+#include "System/Windows/Forms/GroupBox.hpp"
 #include "System/Windows/Forms/HelpEventArgs.hpp"
 #include "System/Windows/Forms/HelpEventHandler.hpp"
 #include "System/Windows/Forms/IDataObject.hpp"

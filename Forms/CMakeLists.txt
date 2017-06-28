@@ -49,7 +49,7 @@ set(INCLUDE_FILES
   Includes/Pcf/System/Windows/Forms/FormStartPosition.hpp
   Includes/Pcf/System/Windows/Forms/GiveFeedbackEventArgs.hpp
   Includes/Pcf/System/Windows/Forms/GiveFeedbackEventHandler.hpp
-#  Includes/Pcf/System/Windows/Forms/GroupBox.hpp
+  Includes/Pcf/System/Windows/Forms/GroupBox.hpp
   Includes/Pcf/System/Windows/Forms/HelpEventArgs.hpp
   Includes/Pcf/System/Windows/Forms/HelpEventHandler.hpp
   Includes/Pcf/System/Windows/Forms/IDataObject.hpp
@@ -126,6 +126,9 @@ set(SOURCE_FILES
   Sources/__OS/FormFltk.cpp
   Sources/__OS/FormGtk.cpp
   Sources/__OS/FormWin32.cpp
+  Sources/__OS/GroupBoxCocoa.mm
+  Sources/__OS/GroupBoxGtk.cpp
+  Sources/__OS/GroupBoxWin32.cpp
   Sources/__OS/LabelCocoa.mm
   Sources/__OS/LabelFltk.cpp
   Sources/__OS/LabelGtk.cpp
@@ -173,7 +176,7 @@ set(SOURCE_FILES
 #  Sources/Pcf/System/Windows/Forms/Exclamation.hpp
 #  Sources/Pcf/System/Windows/Forms/FolderBrowserDialog.cpp
   Sources/Pcf/System/Windows/Forms/Form.cpp
-#  Sources/Pcf/System/Windows/Forms/GroupBox.cpp
+  Sources/Pcf/System/Windows/Forms/GroupBox.cpp
 #  Sources/Pcf/System/Windows/Forms/ImageList.cpp
 #  Sources/Pcf/System/Windows/Forms/Information.hpp
   Sources/Pcf/System/Windows/Forms/Label.cpp
