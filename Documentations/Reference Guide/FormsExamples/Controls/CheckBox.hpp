@@ -8,4 +8,3 @@
 /// <BR>
 /// @image HTML Images/Examples/Forms/CheckBoxW.png "Windows"
 /// <BR>
-
