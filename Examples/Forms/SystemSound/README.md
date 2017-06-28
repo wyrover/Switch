@@ -3,7 +3,7 @@ This example demonstrates the use of System::Media::SystemSound component.
 <BR>
 
 ![GitHub Logo](../../../Documentations/Images/Examples/Forms/SystemSoundM.png)
-<p align="left">Mac Os X</p>
+<p align="left">macOS</p>
 <BR>
 
 ![GitHub Logo](../../../Documentations/Images/Examples/Forms/SystemSoundU.png)

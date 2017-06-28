@@ -3,7 +3,7 @@ This example demonstrates the use of System::Windows::Forms::RadioButton control
 <BR>
 
 ![GitHub Logo](../../../Documentations/Images/Examples/Forms/RadioButtonM.png)
-<p align="left">Mac Os X</p>
+<p align="left">macOS</p>
 <BR>
 
 ![GitHub Logo](../../../Documentations/Images/Examples/Forms/RadioButtonU.png)

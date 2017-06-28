@@ -3,7 +3,7 @@ This example demonstrates the use of System::Windows::Forms::CheckBox control.
 <BR>
 
 ![GitHub Logo](../../../Documentations/Images/Examples/Forms/CheckBoxM.png)
-<p align="left">Mac Os X</p>
+<p align="left"macOS</p>
 <BR>
 
 ![GitHub Logo](../../../Documentations/Images/Examples/Forms/CheckBoxU.png)
