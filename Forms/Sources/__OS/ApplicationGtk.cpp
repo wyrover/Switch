@@ -83,9 +83,11 @@ DialogResult FormsApi::Application::ShowMessageBox(const string& message, const 
 }
 
 void FormsApi::Application::Start() {
+  // no implementation
 }
 
 void FormsApi::Application::Stop() {
+  // no implementation
 }
 
 #endif

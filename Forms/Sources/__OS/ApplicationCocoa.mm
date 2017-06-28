@@ -235,6 +235,7 @@ void FormsApi::Application::Start() {
 }
 
 void FormsApi::Application::Stop() {
+  // no implementation
 }
 
 #endif

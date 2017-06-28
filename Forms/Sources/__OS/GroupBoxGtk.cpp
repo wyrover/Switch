@@ -28,7 +28,7 @@ namespace __OS {
    
     Gtk::Container& Container() override {return this->fixed;}
     
-    void Text(const string& text) override {}
+    void Text(const string& text) override {this->set_label(text.c_str());}
     
   private:
     Gtk::ScrolledWindow scrolledWindow;
@@ -40,6 +40,7 @@ intptr FormsApi::GroupBox::Create(const System::Windows::Forms::GroupBox& groupB
   __OS::GroupBox* handle = new __OS::GroupBox();
   handle->Move(groupBox.Location().X, groupBox.Location().Y);
   handle->Text(groupBox.Text);
+  handle->set_shadow_type(Gtk::SHADOW_IN);
   handle->show();
   return (intptr)handle;
 }
