@@ -8,10 +8,11 @@ using namespace __OS;
 
 intptr FormsApi::GroupBox::Create(const System::Windows::Forms::GroupBox& groupBox) {
   @autoreleasepool {
-    NSScrollView* handle = [[[NSScrollView alloc] init] autorelease];
+    NSBox* handle = [[[NSBox alloc] init] autorelease];
     [[(NSWindow*)groupBox.Parent()().Handle() contentView] addSubview: handle];
     
     [handle setAutoresizingMask:NSViewMaxXMargin | NSViewMinYMargin];
+    [handle setTitle:[NSString stringWithUTF8String:groupBox.Text().c_str()]];
     //handle.color = CocoaApi::FromColor(groupBox.ForeColor);
     __OS::WindowProcedure::Controls[(intptr)handle] = groupBox;
     Message message = Message::Create((intptr)handle, WM_CREATE, 0, 0, 0, IntPtr::Zero);
