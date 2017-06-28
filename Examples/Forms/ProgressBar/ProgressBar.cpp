@@ -43,8 +43,8 @@ namespace ProgressBarExample {
       this->timer.Interval = 50;
       this->timer.Enabled = true;
       this->timer.Tick += pcf_delegate(const object& sender, const EventArgs& e) {
-        this->progressBar4.Value = this->progressBar4.Value < this->progressBar4.Maximum ? this->progressBar4.Value+1 : this->progressBar4.Minimum;
-        //if (this->progressBar4.Value == 110) this->timer.Enabled = false;
+        this->progressBar4.Value = this->progressBar4.Value < this->progressBar4.Maximum ? this->progressBar4.Value + 1 : this->progressBar4.Minimum;
+        if (this->progressBar4.Value == 110) this->timer.Enabled = false;
       };
     }
     
