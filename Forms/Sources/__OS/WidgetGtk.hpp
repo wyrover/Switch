@@ -43,6 +43,7 @@ namespace __OS {
         System::Collections::Generic::SortedDictionary<int32, System::Delegate<int32, GdkEvent&>> events {
           {GDK_BUTTON_PRESS, {*this, &Widget::GdkButtonPress}},
           {GDK_BUTTON_RELEASE, {*this, &Widget::GdkButtonRelease}},
+          {GDK_DESTROY, {*this, &Widget::GdkDestroy}},
           {GDK_ENTER_NOTIFY, {*this, &Widget::GdkEnterNotify}},
           {GDK_LEAVE_NOTIFY, {*this, &Widget::GdkLeaveNotify}},
           {GDK_MOTION_NOTIFY, {*this, &Widget::GdkMotionNotify}},
@@ -123,13 +124,18 @@ namespace __OS {
       return this->WndProc(message);
       
     }
-    
+
     int32 GdkButtonRelease(GdkEvent& event) {
       System::Windows::Forms::Message message = System::Windows::Forms::Message::Create((intptr)this, GetMouseButtonUp(), GetMouseButtonState(event), ((int32)event.button.y << 16) + event.button.x, 0, (intptr)&event);
       this->button = 0;
       return this->WndProc(message);
     }
-    
+
+    int32 GdkDestroy(GdkEvent& event) {
+      System::Windows::Forms::Message message = System::Windows::Forms::Message::Create((intptr)this, WM_CLOSE, notUsed, notUsed, 0, (intptr)&event);
+      return this->WndProc(message);
+    }
+
     int32 GdkEnterNotify(GdkEvent& event) {
       System::Windows::Forms::Message message = System::Windows::Forms::Message::Create((intptr)this, WM_MOUSEENTER, notUsed, notUsed, 0, (intptr)&event);
       return this->WndProc(message);
