@@ -199,7 +199,7 @@ void FormsApi::Control::SetTabStop(const System::Windows::Forms::Control& contro
 
 void FormsApi::Control::SetText(const System::Windows::Forms::Control& control) {
   @autoreleasepool {
-    if (is<System::Windows::Forms::Button>(control))
+    if (is<System::Windows::Forms::Button>(control) || is<System::Windows::Forms::GroupBox>(control))
       [(NSButton*)control.Handle()  setTitle:[NSString stringWithUTF8String:control.Text().c_str()]];
     else if (is<System::Windows::Forms::Form>(control))
       [(NSWindow*)control.Handle()  setTitle:[NSString stringWithUTF8String:control.Text().c_str()]];
