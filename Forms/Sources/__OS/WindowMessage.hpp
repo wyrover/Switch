@@ -291,6 +291,8 @@ const int32 WM_PENWINLAST = 0x038F;
 const int32 WM_USER = 0x0400;
 // Private Window Messages Stop Here : 0x7FFF;
 
+const int32 WM_REFLECT = WM_USER + 0x1C00;
+
 // NOTE: Messages available for use by applications.
 const int32 WM_APP = 0x8000;
 #endif

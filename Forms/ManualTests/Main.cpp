@@ -1,13 +1,8 @@
 #include <Pcf/Startup.hpp>
 #include <Pcf/System/Diagnostics/Debug.hpp>
 #include <Pcf/System/Windows/Forms/Application.hpp>
-#include <Pcf/System/Windows/Forms/Button.hpp>
-#include <Pcf/System/Windows/Forms/GroupBox.hpp>
 #include <Pcf/System/Windows/Forms/Label.hpp>
-#include <Pcf/System/Windows/Forms/MessageBox.hpp>
-#include <Pcf/System/Windows/Forms/Panel.hpp>
-#include <Pcf/System/Windows/Forms/RadioButton.hpp>
-#include <Pcf/System/Windows/Forms/Timer.hpp>
+#include <Pcf/System/Windows/Forms/TrackBar.hpp>
 
 using namespace System;
 using namespace System::Drawing;
@@ -23,15 +18,27 @@ namespace PcfFormApp {
 
       Application::EnableVisualStyles();
 
-      GroupBox groupBox;
-      groupBox.Text = "GroupBox";
-      groupBox.Location = Point(10, 10);
+      Label label;
+      label.Location = Point(50, 50);
+      label.Text = "0";
 
-      GroupBox groupBox2;
-      groupBox2.Location = Point(10, 120);
+      TrackBar trackBar;
+      trackBar.Location = Point(50, 100);
+      trackBar.Width = 200;
+      trackBar.Maximum = 100;
+      trackBar.Style = TickStyle::None;
+      trackBar.ValueChanged += pcf_delegate(const object& sender, const EventArgs& e) {
+        label.Text = string::Format("{0}", trackBar.Value);
+      };
+
+      TrackBar trackBar2;
+      trackBar2.Orientation = Orientation::Vertical;
+      trackBar2.Location = Point(50, 150);
+      trackBar2.Size = Size(45, 104);
+      trackBar2.TickFrequency = 2;
 
       Form form;
-      form.Controls().AddRange({groupBox, groupBox2});
+      form.Controls().AddRange({label, trackBar, trackBar2});
 
       System::Diagnostics::Debug::AutoFlush = true;
       

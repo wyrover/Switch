@@ -81,6 +81,7 @@ set(INCLUDE_FILES
   Includes/Pcf/System/Windows/Forms/MouseEventHandler.hpp
 #  Includes/Pcf/System/Windows/Forms/NumericUpDown.hpp
 #  Includes/Pcf/System/Windows/Forms/OpenFileDialog.hpp
+  Includes/Pcf/System/Windows/Forms/Orientation.hpp
   Includes/Pcf/System/Windows/Forms/PaintEventArgs.hpp
   Includes/Pcf/System/Windows/Forms/PaintEventHandler.hpp
   Includes/Pcf/System/Windows/Forms/Panel.hpp
@@ -97,7 +98,9 @@ set(INCLUDE_FILES
 #  Includes/Pcf/System/Windows/Forms/TabControl.hpp
 #  Includes/Pcf/System/Windows/Forms/TabPage.hpp
 #  Includes/Pcf/System/Windows/Forms/TextBox.hpp
+  Includes/Pcf/System/Windows/Forms/TickStyle.hpp
   Includes/Pcf/System/Windows/Forms/Timer.hpp
+  Includes/Pcf/System/Windows/Forms/TrackBar.hpp
   Includes/Pcf/System/Windows/Forms/UICues.hpp
   Includes/Pcf/System/Windows/Forms/UICuesEventArgs.hpp
   Includes/Pcf/System/Windows/Forms/UICuesEventHandler.hpp
@@ -106,63 +109,53 @@ set(INCLUDE_FILES
 
 set(SOURCE_FILES
   Sources/__OS/ApplicationCocoa.mm
-  Sources/__OS/ApplicationFltk.cpp
   Sources/__OS/ApplicationGtk.cpp
   Sources/__OS/ApplicationWin32.cpp
   Sources/__OS/ButtonCocoa.mm
-  Sources/__OS/ButtonFltk.cpp
   Sources/__OS/ButtonGtk.cpp
   Sources/__OS/ButtonWin32.cpp
   Sources/__OS/CheckBoxCocoa.mm
-  Sources/__OS/CheckBoxFltk.cpp
   Sources/__OS/CheckBoxGtk.cpp
   Sources/__OS/CheckBoxWin32.cpp
   Sources/__OS/ControlCocoa.mm
-  Sources/__OS/ControlFltk.cpp
   Sources/__OS/ControlGtk.cpp
   Sources/__OS/ControlWin32.cpp
   Sources/__OS/FormCocoa.mm
   Sources/__OS/FormsApi.hpp
-  Sources/__OS/FormFltk.cpp
   Sources/__OS/FormGtk.cpp
   Sources/__OS/FormWin32.cpp
   Sources/__OS/GroupBoxCocoa.mm
   Sources/__OS/GroupBoxGtk.cpp
   Sources/__OS/GroupBoxWin32.cpp
   Sources/__OS/LabelCocoa.mm
-  Sources/__OS/LabelFltk.cpp
   Sources/__OS/LabelGtk.cpp
   Sources/__OS/LabelWin32.cpp
   Sources/__OS/MainWin32.cpp
   Sources/__OS/PanelCocoa.mm
-  Sources/__OS/PanelFltk.cpp
   Sources/__OS/PanelGtk.cpp
   Sources/__OS/PanelWin32.cpp
   Sources/__OS/ProgressBarCocoa.mm
-  Sources/__OS/ProgressBarFltk.cpp
   Sources/__OS/ProgressBarGtk.cpp
   Sources/__OS/ProgressBarWin32.cpp
   Sources/__OS/RadioButtonCocoa.mm
-  Sources/__OS/RadioButtonFltk.cpp
   Sources/__OS/RadioButtonGtk.cpp
   Sources/__OS/RadioButtonWin32.cpp
   Sources/__OS/SystemInformationCocoa.mm
-  Sources/__OS/SystemInformationFltk.cpp
   Sources/__OS/SystemInformationGtk.cpp
   Sources/__OS/SystemInformationWin32.cpp
   Sources/__OS/TimerCocoa.mm
   Sources/__OS/TimerGtk.cpp
   Sources/__OS/TimerWin32.cpp
+  Sources/__OS/TrackBarCocoa.mm
+  Sources/__OS/TrackBarGtk.cpp
+  Sources/__OS/TrackBarWin32.cpp
   Sources/__OS/WidgetCocoa.hpp
-  Sources/__OS/WidgetFltk.hpp
   Sources/__OS/WidgetGtk.hpp
   Sources/__OS/WindowMessage.hpp
   Sources/__OS/WindowMessageKey.hpp
   Sources/__OS/WindowProcedureCocoa.mm
-  Sources/__OS/WindowProcedureFltk.cpp
   Sources/__OS/WindowProcedureWin32.cpp
   Sources/__OS/WindowProcedureCocoa.hpp
-  Sources/__OS/WindowProcedureFltk.hpp
   Sources/__OS/WindowProcedureWin32.hpp
   Sources/Pcf/System/Media/SystemSound.cpp
   Sources/Pcf/System/Media/SystemSounds.cpp
@@ -202,6 +195,7 @@ set(SOURCE_FILES
 #  Sources/Pcf/System/Windows/Forms/TabControl.cpp
 #  Sources/Pcf/System/Windows/Forms/TextBox.cpp
   Sources/Pcf/System/Windows/Forms/Timer.cpp
+  Sources/Pcf/System/Windows/Forms/TrackBar.cpp
 )
 
 source_group(Includes REGULAR_EXPRESSION "/Includes/[-_,A-Za-z0-9]+\\.hpp*")

@@ -523,6 +523,8 @@ namespace Pcf {
           /// @endcond
 
         private:
+          static bool ReflectMessage(intptr hWnd, Message& m);
+          intptr SendMessage(int32 msg, intptr wparam, intptr lparam) const;
           void WmCaptureChange(Message& message);
           void WmClose(Message& message);
           void WmCommand(Message& message);

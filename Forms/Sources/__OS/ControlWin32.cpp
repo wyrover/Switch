@@ -4,6 +4,7 @@
 #include <Windowsx.h>
 #include <Uxtheme.h>
 #include <Pcf/Undef.hpp>
+#undef SendMessage
 
 #include "FormsApi.hpp"
 #include "WindowProcedureWin32.hpp"
@@ -73,6 +74,10 @@ System::Drawing::Point FormsApi::Control::PointToScreen(const System::Windows::F
   return System::Drawing::Point(location.x, location.y);
 }
 
+intptr FormsApi::Control::SendMessage(intptr handle, int32 msg, intptr wparam, intptr lparam) {
+  return ::SendMessageW((HWND)handle, msg, wparam, lparam);
+}
+
 void FormsApi::Control::SetBackColor(intptr hdc) {
   ref<System::Windows::Forms::Control> control = System::Windows::Forms::Control::FromHandle(GetHandleWindowFromDeviceContext(hdc));
   if (control != null) {
@@ -86,7 +91,7 @@ void FormsApi::Control::SetBackColor(const System::Windows::Forms::Control& cont
   ref<System::Windows::Forms::Control> form = control;
   while (form().Parent() != null)
     form = form().Parent();
-  SendMessage((HWND)form().Handle(), WM_ERASEBKGND, (WPARAM)hdc, 0);
+  SendMessageW((HWND)form().Handle(), WM_ERASEBKGND, (WPARAM)hdc, 0);
   ReleaseDC((HWND)control.Handle(), hdc);
 }
 
@@ -137,7 +142,7 @@ void FormsApi::Control::SetTabStop(const System::Windows::Forms::Control& contro
 }
 
 void FormsApi::Control::SetText(const System::Windows::Forms::Control& control) {
-  SendMessage((HWND)control.Handle(), WM_SETTEXT, 0, (LPARAM)control.Text().w_str().c_str());
+  SendMessageW((HWND)control.Handle(), WM_SETTEXT, 0, (LPARAM)control.Text().w_str().c_str());
 }
 
 void FormsApi::Control::SetVisible(const System::Windows::Forms::Control& control) {

@@ -230,13 +230,40 @@ bool Control::PreProcessMessage(const Message& msg) {
   return true;
 }
 
+bool Control::ReflectMessage(intptr hWnd, Message& message) {
+  ref<Control> control = FromHandle(hWnd);
+  if (control == null) return false;
+  message.Result = control().SendMessage(WM_REFLECT + message.Msg, message.WParam, message.LParam);
+  return true;
+}
+
+intptr Control::SendMessage(int32 msg, intptr wparam, intptr lparam) const {
+  return __OS::FormsApi::Control::SendMessage(this->handle, msg, wparam, lparam);
+}
+
 void Control::WndProc(Message& message) {
   if (this->messageActions.ContainsKey(message.Msg)) {
     //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::AllWindowMessages && AllWindowMessagesFilter(message), "Control::WndProc message=" + message + ", name=" + this->name);
     this->messageActions[message.Msg](message);
   } else {
-    //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::AllWindowMessages && AllWindowMessagesFilter(message), "DefWndProc message=" + message + ", name=" + this->name);
-    this->DefWndProc(message);
+    // For message : WM_CTLCOLOR, WM_CTLCOLORBTN, WM_CTLCOLORDLG, WM_CTLCOLORMSGBOX, WM_CTLCOLORSCROLLBAR, WM_CTLCOLOREDIT, WM_CTLCOLORLISTBOX, WM_CTLCOLORSTATIC do create reflect message internal ?
+    // For message : WM_NOTIFYFORMAT do create reflect message internal ?
+    switch (message.Msg) {
+    case WM_HSCROLL:
+    case WM_VSCROLL:
+    case WM_DELETEITEM:
+    case WM_VKEYTOITEM:
+    case WM_CHARTOITEM:
+    case WM_COMPAREITEM:
+      if (!ReflectMessage(message.LParam, message))
+        DefWndProc(message);
+      break;
+
+    default:
+      //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::AllWindowMessages && AllWindowMessagesFilter(message), "DefWndProc message=" + message + ", name=" + this->name);
+      this->DefWndProc(message);
+      break;
+    }
   }
 }
 

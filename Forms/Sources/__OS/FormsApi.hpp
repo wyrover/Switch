@@ -20,6 +20,7 @@
 #include "../../Includes/Pcf/System/Windows/Forms/Panel.hpp"
 #include "../../Includes/Pcf/System/Windows/Forms/ProgressBar.hpp"
 #include "../../Includes/Pcf/System/Windows/Forms/RadioButton.hpp"
+#include "../../Includes/Pcf/System/Windows/Forms/TrackBar.hpp"
 #include "WindowMessage.hpp"
 #include "WindowMessageKey.hpp"
 
@@ -64,6 +65,7 @@ namespace __OS {
       static void Invalidate(const System::Windows::Forms::Control& control, const System::Drawing::Rectangle& rect, bool invalidateChildren);      
       static System::Drawing::Point PointToClient(const System::Windows::Forms::Control& control, const System::Drawing::Point& point);
       static System::Drawing::Point PointToScreen(const System::Windows::Forms::Control& control, const System::Drawing::Point& point);
+      static intptr SendMessage(intptr handle, int32 msg, intptr wparam, intptr lparam);
       static void SetBackColor(intptr hdc);
       static void SetBackColor(const System::Windows::Forms::Control& control);
       static void SetClientSize(System::Windows::Forms::Control& control);
@@ -191,6 +193,20 @@ namespace __OS {
     public:
       static intptr Create(int32 interval, delegate<void> tick);
       static void Destroy(intptr handle);
+    };
+
+    class TrackBar pcf_static {
+    public:
+      static intptr Create(const System::Windows::Forms::TrackBar& trackBar);
+      static void SetLargeChange(const System::Windows::Forms::TrackBar& trackBar);
+      static void SetMaximum(const System::Windows::Forms::TrackBar& trackBar);
+      static void SetMinimum(const System::Windows::Forms::TrackBar& trackBar);
+      static void SetOrientation(const System::Windows::Forms::TrackBar& trackBar);
+      static void SetSmallChange(const System::Windows::Forms::TrackBar& trackBar);
+      static void SetTickFrequency(const System::Windows::Forms::TrackBar& trackBar);
+      static void SetTickStyle(const System::Windows::Forms::TrackBar& trackBar);
+      static int32 GetValue(const System::Windows::Forms::TrackBar& trackBar);
+      static void SetValue(const System::Windows::Forms::TrackBar& trackBar);
     };
   };
 }
