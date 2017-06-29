@@ -1,4 +1,4 @@
-# ProgressBar
+# TrackBar
 This example demonstrates the use of System::Windows::Forms::TrackBar control.
 <BR>
 
