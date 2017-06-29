@@ -18,27 +18,34 @@ namespace PcfFormApp {
 
       Application::EnableVisualStyles();
 
-      Label label;
-      label.Location = Point(50, 50);
-      label.Text = "0";
-
-      TrackBar trackBar;
-      trackBar.Location = Point(50, 100);
-      trackBar.Width = 200;
-      trackBar.Maximum = 100;
-      trackBar.Style = TickStyle::None;
-      trackBar.ValueChanged += pcf_delegate(const object& sender, const EventArgs& e) {
-        label.Text = string::Format("{0}", trackBar.Value);
+      Label label1;
+      label1.Location = Point(50, 50);
+      label1.Text = "0";
+      
+      TrackBar trackBar1;
+      trackBar1.Location = Point(50, 100);
+      trackBar1.Width = 200;
+      trackBar1.Maximum = 100;
+      trackBar1.Style = TickStyle::None;
+      trackBar1.ValueChanged += pcf_delegate(const object& sender, const EventArgs& e) {
+        label1.Text = string::Format("{0}", trackBar1.Value);
       };
-
+      
+      Label label2;
+      label2.Location = Point(150, 200);
+      label2.Text = "0";
+      
       TrackBar trackBar2;
       trackBar2.Orientation = Orientation::Vertical;
       trackBar2.Location = Point(50, 150);
       trackBar2.Size = Size(45, 104);
-      trackBar2.TickFrequency = 2;
-
+      trackBar2.TickFrequency = 1;
+      trackBar2.ValueChanged += pcf_delegate(const object& sender, const EventArgs& e) {
+        label2.Text = string::Format("{0}", trackBar2.Value);
+      };
+      
       Form form;
-      form.Controls().AddRange({label, trackBar, trackBar2});
+      form.Controls().AddRange({label1, trackBar1, label2, trackBar2});
 
       System::Diagnostics::Debug::AutoFlush = true;
       

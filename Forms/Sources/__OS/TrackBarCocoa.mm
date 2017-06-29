@@ -6,40 +6,69 @@ using namespace System::Drawing;
 using namespace System::Windows::Forms;
 using namespace __OS;
 
-intptr FormsApi::ProgressBar::Create(const System::Windows::Forms::ProgressBar& progressBar) {
+@interface SliderCocoa : NSSlider
+- (IBAction) ValueChanged:(id)sender;
+@end
+
+@implementation SliderCocoa
+- (IBAction) ValueChanged:(id)sender {
+  Message event = Message::Create((intptr)sender, [self isVertical] ? WM_VSCROLL : WM_HSCROLL, 0, (intptr)sender, 0, 0);
+  __OS::WindowProcedure::Controls[(intptr)sender]().Parent()().WndProc(event);
+}
+@end
+
+intptr FormsApi::TrackBar::Create(const System::Windows::Forms::TrackBar& trackBar) {
   @autoreleasepool {
-    NSProgressIndicator* handle = [[[NSProgressIndicator alloc] init] autorelease];
-    [[(NSWindow*)progressBar.Parent()().Handle() contentView] addSubview: handle];
-    
-    __OS::WindowProcedure::Controls[(intptr)handle] = progressBar;
+    SliderCocoa* handle = [[[SliderCocoa alloc] init] autorelease];
+    [[(NSWindow*)trackBar.Parent()().Handle() contentView] addSubview: handle];
+    __OS::WindowProcedure::Controls[(intptr)handle] = trackBar;
     [handle setAutoresizingMask:NSViewMaxXMargin | NSViewMinYMargin];
-    [handle setIndeterminate:progressBar.Style == ProgressBarStyle::Marquee];
+    [handle setTarget:handle];
+    [handle setAction:@selector(ValueChanged:)];
+
+    //[handle setIndeterminate:trackBar.Style == ProgressBarStyle::Marquee];
     Message message = Message::Create((intptr)handle, WM_CREATE, 0, 0, 0, IntPtr::Zero);
-    const_cast<System::Windows::Forms::ProgressBar&>(progressBar).WndProc(message);
+    const_cast<System::Windows::Forms::TrackBar&>(trackBar).WndProc(message);
     return (intptr)handle;
   }
 }
 
-void FormsApi::ProgressBar::SetMaximum(const System::Windows::Forms::ProgressBar& progressBar) {
-  [(NSProgressIndicator*)progressBar.Handle() setMaxValue:progressBar.Maximum()];
+void FormsApi::TrackBar::SetLargeChange(const System::Windows::Forms::TrackBar& trackBar) {
+  // Not implemented on macOS
 }
 
-void FormsApi::ProgressBar::SetMinimum(const System::Windows::Forms::ProgressBar& progressBar) {
-  [(NSProgressIndicator*)progressBar.Handle() setMinValue:progressBar.Minimum()];
+void FormsApi::TrackBar::SetMaximum(const System::Windows::Forms::TrackBar& trackBar) {
+  [(NSSlider*)trackBar.Handle() setMaxValue:trackBar.Maximum()];
 }
 
-void FormsApi::ProgressBar::SetMarquee(const System::Windows::Forms::ProgressBar& progressBar) {
-  [(NSProgressIndicator*)progressBar.Handle() setIndeterminate:progressBar.Style == ProgressBarStyle::Marquee];
-  if (progressBar.Style == ProgressBarStyle::Marquee) {
-    [(NSProgressIndicator*)progressBar.Handle() startAnimation:nil];
-    // Deprecated since macOS 10.6
-    //[(NSProgressIndicator*)progressBar.Handle() setAnimationDelay:(double)progressBar.MarqueeAnimationSpeed()/1000];
-  } else
-    [(NSProgressIndicator*)progressBar.Handle() stopAnimation:nil];
+void FormsApi::TrackBar::SetMinimum(const System::Windows::Forms::TrackBar& trackBar) {
+  [(NSSlider*)trackBar.Handle() setMinValue:trackBar.Minimum()];
 }
 
-void FormsApi::ProgressBar::SetValue(const System::Windows::Forms::ProgressBar& progressBar) {
-  [(NSProgressIndicator*)progressBar.Handle() setDoubleValue:progressBar.Value()];
+void FormsApi::TrackBar::SetOrientation(const System::Windows::Forms::TrackBar& trackBar) {
+  [(NSSlider*)trackBar.Handle() setVertical:trackBar.Orientation == Orientation::Vertical];
+}
+
+void FormsApi::TrackBar::SetSmallChange(const System::Windows::Forms::TrackBar& trackBar) {
+  // Not implemented on macOS
+}
+
+void FormsApi::TrackBar::SetTickFrequency(const System::Windows::Forms::TrackBar& trackBar) {
+  if (trackBar.Style != TickStyle::None)
+    [(NSSlider*)trackBar.Handle() setNumberOfTickMarks:(trackBar.Maximum - trackBar.Minimum) / trackBar.TickFrequency];
+}
+
+void FormsApi::TrackBar::SetTickStyle(const System::Windows::Forms::TrackBar& trackBar) {
+  if (trackBar.Style == TickStyle::TopLeft)
+    [(NSSlider*)trackBar.Handle() setTickMarkPosition:NSTickMarkPositionAbove];
+}
+
+int32 FormsApi::TrackBar::GetValue(const System::Windows::Forms::TrackBar& trackBar) {
+  return [(NSSlider*)trackBar.Handle() integerValue];
+}
+
+void FormsApi::TrackBar::SetValue(const System::Windows::Forms::TrackBar& trackBar) {
+  [(NSSlider*)trackBar.Handle() setIntegerValue:trackBar.Value()];
 }
 
 #endif

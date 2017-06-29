@@ -106,6 +106,14 @@ System::Drawing::Point FormsApi::Control::PointToScreen(const System::Windows::F
   return pointToScreen;
 }
 
+intptr FormsApi::Control::SendMessage(intptr handle, int32 msg, intptr wparam, intptr lparam) {
+  ref<System::Windows::Forms::Control> control = System::Windows::Forms::Control::FromHandle(handle);
+  if (control == null) return -1;
+  System::Windows::Forms::Message message = System::Windows::Forms::Message::Create(handle, msg, wparam, lparam, 0);
+  control().WndProc(message);
+  return message.Result;
+}
+
 void FormsApi::Control::SetBackColor(intptr hdc) {
   ref<System::Windows::Forms::Control> control = System::Windows::Forms::Control::FromHandle(GetHandleWindowFromDeviceContext(hdc));
   if (control) {

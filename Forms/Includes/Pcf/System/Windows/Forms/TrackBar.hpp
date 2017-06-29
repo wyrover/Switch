@@ -72,11 +72,12 @@ namespace Pcf {
           EventHandler Scroll;
           EventHandler ValueChanged;
 
+          void WndProc(Message& message) override;
+
         protected:
           void OnScroll(const EventArgs& e) { this->Scroll(*this, e); }
           void OnValueChanged(const EventArgs& e) { this->ValueChanged(*this, e); }
 
-          void WndProc(Message& message) override;
           void CreateHandle() override;
           System::Drawing::Size GetDefaultSize() const override {
             if (this->orientation == Forms::Orientation::Horizontal)
