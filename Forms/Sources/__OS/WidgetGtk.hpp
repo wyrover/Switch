@@ -42,7 +42,7 @@ namespace __OS {
       this->ToWidget().signal_event().connect(pcf_delegate(GdkEvent* event)->bool {
         System::Collections::Generic::SortedDictionary<int32, System::Delegate<int32, GdkEvent&>> events {
           {GDK_BUTTON_PRESS, {*this, &Widget::GdkButtonPress}},
-          {GDK_BUTTON_RELEASE, {*this, &Widget::GdkButtonRelease}},
+          //{GDK_BUTTON_RELEASE, {*this, &Widget::GdkButtonRelease}},
           {GDK_DESTROY, {*this, &Widget::GdkDestroy}},
           {GDK_ENTER_NOTIFY, {*this, &Widget::GdkEnterNotify}},
           {GDK_LEAVE_NOTIFY, {*this, &Widget::GdkLeaveNotify}},
@@ -51,7 +51,7 @@ namespace __OS {
         
         if (events.ContainsKey(event->type)) {
           events[event->type](*event);
-          return true;
+          return false;
         } else
           System::Diagnostics::Debug::WriteLine("Event : {0}, Name : {1}", EventToString(event->type), System::Windows::Forms::Control::FromHandle((intptr)this)().Name);
         
@@ -132,8 +132,9 @@ namespace __OS {
     }
 
     int32 GdkDestroy(GdkEvent& event) {
-      System::Windows::Forms::Message message = System::Windows::Forms::Message::Create((intptr)this, WM_CLOSE, notUsed, notUsed, 0, (intptr)&event);
-      return this->WndProc(message);
+      //System::Windows::Forms::Message message = System::Windows::Forms::Message::Create((intptr)this, WM_CLOSE, notUsed, notUsed, 0, (intptr)&event);
+      //return this->WndProc(message);
+      return 0;
     }
 
     int32 GdkEnterNotify(GdkEvent& event) {

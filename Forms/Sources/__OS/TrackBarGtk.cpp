@@ -10,52 +10,62 @@ using namespace System::Windows::Forms;
 using namespace __OS;
 
 namespace __OS {
-  class ProgressBar : public Widget, public Gtk::ProgressBar {
+  class TrackBar : public Widget, public Gtk::Scale {
   public:
-    ProgressBar() {this->RegisterEvent();}
-    void BackColor(const System::Drawing::Color& color) override {}
+    TrackBar() {this->RegisterEvent();}
+    void BackColor(const System::Drawing::Color& color) override {
+      this->signal_value_changed().connect(pcf_delegate {
+        ref<System::Windows::Forms::Control> control = System::Windows::Forms::Control::FromHandle((intptr)this);
+        if (control == null) return;
+        Message event = Message::Create((intptr)this, as<System::Windows::Forms::TrackBar>(control)().Orientation == Orientation::Vertical ? WM_VSCROLL : WM_HSCROLL, 0, (intptr)this, 0, 0);
+        control().Parent()().WndProc(event);
+      });
+    }
     
     void Text(const string& text) override {}
-    guint marquee = 0;
-    bool isMarquee = false;
   };
-
- int MarqueeProc(gpointer progressBar) {
-    ((__OS::ProgressBar*)progressBar)->pulse();
-    return 1;
-  }
 }
 
-intptr FormsApi::ProgressBar::Create(const System::Windows::Forms::ProgressBar& progressBar) {
-  __OS::ProgressBar* handle = new __OS::ProgressBar();
-  handle->Move(progressBar.Location().X, progressBar.Location().Y);
-  handle->Text(progressBar.Text);
+intptr FormsApi::TrackBar::Create(const System::Windows::Forms::TrackBar& trackBar) {
+  __OS::TrackBar* handle = new __OS::TrackBar();
+  handle->Move(trackBar.Location().X, trackBar.Location().Y);
+  handle->Text(trackBar.Text);
+  handle->set_draw_value(false);
   handle->show();
  return (intptr)handle;
 }
 
-void FormsApi::ProgressBar::SetMaximum(const System::Windows::Forms::ProgressBar& progressBar) {
-  // no implementation
+void FormsApi::TrackBar::SetLargeChange(const System::Windows::Forms::TrackBar& trackBar) {
+  // Not implemented on macOS
 }
 
-void FormsApi::ProgressBar::SetMinimum(const System::Windows::Forms::ProgressBar &progressBar) {
-    // no implementation
+void FormsApi::TrackBar::SetMaximum(const System::Windows::Forms::TrackBar& trackBar) {
+  ((__OS::TrackBar*)trackBar.Handle())->set_range(trackBar.Minimum(), trackBar.Maximum());
 }
 
-void FormsApi::ProgressBar::SetMarquee(const System::Windows::Forms::ProgressBar &progressBar) {
-  if (progressBar.Style == ProgressBarStyle::Marquee) {
-    ((__OS::ProgressBar*)progressBar.Handle())->isMarquee = true;
-    ((__OS::ProgressBar*)progressBar.Handle())->marquee = g_timeout_add(progressBar.MarqueeAnimationSpeed(), MarqueeProc, (gpointer)progressBar.Handle());
-  } else {
-    if (((__OS::ProgressBar*)progressBar.Handle())->isMarquee == true) {
-      g_source_remove(((__OS::ProgressBar*)progressBar.Handle())->marquee);
-      ((__OS::ProgressBar*)progressBar.Handle())->isMarquee = false;
-    }
-  }
+void FormsApi::TrackBar::SetMinimum(const System::Windows::Forms::TrackBar &trackBar) {
+  ((__OS::TrackBar*)trackBar.Handle())->set_range(trackBar.Minimum(), trackBar.Maximum());
 }
 
-void FormsApi::ProgressBar::SetValue(const System::Windows::Forms::ProgressBar &progressBar) {
-  ((__OS::ProgressBar*)progressBar.Handle())->set_fraction(double(progressBar.Value()) / (double(progressBar.Maximum()) - double(progressBar.Minimum)));
+void FormsApi::TrackBar::SetOrientation(const System::Windows::Forms::TrackBar& trackBar) {
+}
+
+void FormsApi::TrackBar::SetSmallChange(const System::Windows::Forms::TrackBar& trackBar) {
+  // Not implemented on macOS
+}
+
+void FormsApi::TrackBar::SetTickFrequency(const System::Windows::Forms::TrackBar& trackBar) {
+}
+
+void FormsApi::TrackBar::SetTickStyle(const System::Windows::Forms::TrackBar& trackBar) {
+}
+
+int32 FormsApi::TrackBar::GetValue(const System::Windows::Forms::TrackBar& trackBar) {
+  return   ((__OS::TrackBar*)trackBar.Handle())->get_value();
+}
+
+void FormsApi::TrackBar::SetValue(const System::Windows::Forms::TrackBar &trackBar) {
+  ((__OS::TrackBar*)trackBar.Handle())->set_value(trackBar.Value());
 }
 
 #endif
