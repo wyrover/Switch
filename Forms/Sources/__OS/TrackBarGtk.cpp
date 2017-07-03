@@ -37,7 +37,7 @@ intptr FormsApi::TrackBar::Create(const System::Windows::Forms::TrackBar& trackB
 }
 
 void FormsApi::TrackBar::SetLargeChange(const System::Windows::Forms::TrackBar& trackBar) {
-  // Not implemented on macOS
+  // Not implemented on Gtk
 }
 
 void FormsApi::TrackBar::SetMaximum(const System::Windows::Forms::TrackBar& trackBar) {
@@ -49,16 +49,14 @@ void FormsApi::TrackBar::SetMinimum(const System::Windows::Forms::TrackBar &trac
 }
 
 void FormsApi::TrackBar::SetOrientation(const System::Windows::Forms::TrackBar& trackBar) {
+  // if handle created recreate handle...
 }
 
 void FormsApi::TrackBar::SetSmallChange(const System::Windows::Forms::TrackBar& trackBar) {
-  // Not implemented on macOS
+  // Not implemented on Gtk
 }
 
 void FormsApi::TrackBar::SetTickFrequency(const System::Windows::Forms::TrackBar& trackBar) {
-}
-
-void FormsApi::TrackBar::SetTickStyle(const System::Windows::Forms::TrackBar& trackBar) {
   if (trackBar.Style == TickStyle::None)
     ((__OS::TrackBar*)trackBar.Handle())->clear_marks();
   else {
@@ -67,10 +65,14 @@ void FormsApi::TrackBar::SetTickStyle(const System::Windows::Forms::TrackBar& tr
       position = trackBar.Style == TickStyle::TopLeft ? Gtk::POS_TOP : Gtk::POS_BOTTOM;
     else
       position = trackBar.Style == TickStyle::TopLeft ? Gtk::POS_LEFT : Gtk::POS_RIGHT;
-
+    
     for (int32 i = 0; i <= trackBar.Maximum - trackBar.Minimum; i +=  trackBar.TickFrequency)
       ((__OS::TrackBar*)trackBar.Handle())->add_mark(i, position, "");
   }
+}
+
+void FormsApi::TrackBar::SetTickStyle(const System::Windows::Forms::TrackBar& trackBar) {
+  SetTickFrequency(trackBar);
 }
 
 int32 FormsApi::TrackBar::GetValue(const System::Windows::Forms::TrackBar& trackBar) {
