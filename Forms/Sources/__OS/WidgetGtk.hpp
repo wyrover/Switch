@@ -42,17 +42,16 @@ namespace __OS {
       this->ToWidget().signal_event().connect(pcf_delegate(GdkEvent* event)->bool {
         System::Collections::Generic::SortedDictionary<int32, System::Delegate<int32, GdkEvent&>> events {
           {GDK_BUTTON_PRESS, {*this, &Widget::GdkButtonPress}},
-          //{GDK_BUTTON_RELEASE, {*this, &Widget::GdkButtonRelease}},
+          {GDK_BUTTON_RELEASE, {*this, &Widget::GdkButtonRelease}},
           {GDK_DESTROY, {*this, &Widget::GdkDestroy}},
           {GDK_ENTER_NOTIFY, {*this, &Widget::GdkEnterNotify}},
           {GDK_LEAVE_NOTIFY, {*this, &Widget::GdkLeaveNotify}},
           {GDK_MOTION_NOTIFY, {*this, &Widget::GdkMotionNotify}},
         };
         
-        if (events.ContainsKey(event->type)) {
+        if (events.ContainsKey(event->type))
           events[event->type](*event);
-          return false;
-        } else
+        else
           System::Diagnostics::Debug::WriteLine("Event : {0}, Name : {1}", EventToString(event->type), System::Windows::Forms::Control::FromHandle((intptr)this)().Name);
         
         return false; //this->ToWidget().event(event);
@@ -122,12 +121,12 @@ namespace __OS {
       this->button = event.button.button;
       System::Windows::Forms::Message message = System::Windows::Forms::Message::Create((intptr)this, GetMouseButtonDown(), GetMouseButtonState(event), ((int32)event.button.y << 16) + event.button.x, 0, (intptr)&event);
       return this->WndProc(message);
-      
     }
 
     int32 GdkButtonRelease(GdkEvent& event) {
+      this->button = event.button.button;
       System::Windows::Forms::Message message = System::Windows::Forms::Message::Create((intptr)this, GetMouseButtonUp(), GetMouseButtonState(event), ((int32)event.button.y << 16) + event.button.x, 0, (intptr)&event);
-      this->button = 0;
+      //this->button = 0;
       return this->WndProc(message);
     }
 
