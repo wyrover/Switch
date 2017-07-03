@@ -13,6 +13,7 @@ namespace __OS {
   class TrackBar : public Widget, public Gtk::Scale {
   public:
     TrackBar() {this->RegisterEvent();}
+    TrackBar(Gtk::Orientation orientation) : Gtk::Scale(orientation) {this->RegisterEvent();}
     void BackColor(const System::Drawing::Color& color) override {
       this->signal_value_changed().connect(pcf_delegate {
         ref<System::Windows::Forms::Control> control = System::Windows::Forms::Control::FromHandle((intptr)this);
@@ -27,7 +28,7 @@ namespace __OS {
 }
 
 intptr FormsApi::TrackBar::Create(const System::Windows::Forms::TrackBar& trackBar) {
-  __OS::TrackBar* handle = new __OS::TrackBar();
+  __OS::TrackBar* handle = new __OS::TrackBar(trackBar.Orientation == Orientation::Horizontal ? Gtk::ORIENTATION_HORIZONTAL : Gtk::ORIENTATION_VERTICAL);
   handle->Move(trackBar.Location().X, trackBar.Location().Y);
   handle->Text(trackBar.Text);
   handle->set_draw_value(false);
@@ -58,6 +59,18 @@ void FormsApi::TrackBar::SetTickFrequency(const System::Windows::Forms::TrackBar
 }
 
 void FormsApi::TrackBar::SetTickStyle(const System::Windows::Forms::TrackBar& trackBar) {
+  if (trackBar.Style == TickStyle::None)
+    ((__OS::TrackBar*)trackBar.Handle())->clear_marks();
+  else {
+    Gtk::PositionType position = Gtk::POS_BOTTOM;
+    if (trackBar.Orientation == Orientation::Horizontal)
+      position = trackBar.Style == TickStyle::TopLeft ? Gtk::POS_TOP : Gtk::POS_BOTTOM;
+    else
+      position = trackBar.Style == TickStyle::TopLeft ? Gtk::POS_LEFT : Gtk::POS_RIGHT;
+
+    for (int32 i = 0; i <= trackBar.Maximum - trackBar.Minimum; i +=  trackBar.TickFrequency)
+      ((__OS::TrackBar*)trackBar.Handle())->add_mark(i, position, "");
+  }
 }
 
 int32 FormsApi::TrackBar::GetValue(const System::Windows::Forms::TrackBar& trackBar) {
