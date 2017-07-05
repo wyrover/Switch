@@ -12,8 +12,9 @@ using namespace System::Drawing;
 using namespace System::Windows::Forms;
 using namespace __OS;
 
+extern Glib::RefPtr<Gtk::Application> __application__;
+
 namespace {
-  Glib::RefPtr<Gtk::Application> application = Gtk::Application::create();
   int32 exitCode = 0;
 }
 
@@ -28,7 +29,7 @@ void FormsApi::Application::MessageLoop(const System::Windows::Forms::Form& main
     idle.Invoke(object(), EventArgs::Empty);
     return mainForm.Visible() && !idle.IsEmpty();
   });
-  exitCode = application->run(as<Gtk::Window>(((__OS::IWidget*)mainForm.Handle())->ToWidget()));
+  exitCode = __application__->run(as<Gtk::Window>(((__OS::IWidget*)mainForm.Handle())->ToWidget()));
 }
 
 void FormsApi::Application::MessageBeep(MessageBoxIcon type) {
@@ -69,7 +70,7 @@ namespace {
 DialogResult FormsApi::Application::ShowMessageBox(const string& message, const string& caption, MessageBoxButtons buttons, MessageBoxIcon icon, MessageBoxDefaultButton defaultButton, MessageBoxOptions options, bool displayHelpButton) {
   static System::Collections::Generic::SortedDictionary<MessageBoxIcon, Gtk::MessageType> icons = {{MessageBoxIcon::None, Gtk::MESSAGE_OTHER}, {MessageBoxIcon::Error, Gtk::MESSAGE_ERROR}, {MessageBoxIcon::Question, Gtk::MESSAGE_QUESTION}, {MessageBoxIcon::Warning, Gtk::MESSAGE_WARNING}, {MessageBoxIcon::Information, Gtk::MESSAGE_INFO}};
   static refptr<Gtk::Window> emptyWindow = pcf_new<Gtk::Window>();
-  Gtk::Window* activeWindow = application->get_active_window();
+  Gtk::Window* activeWindow = __application__->get_active_window();
   if (activeWindow == null) activeWindow = emptyWindow.ToPointer();
   Gtk::MessageDialog dialog(*activeWindow, caption.c_str(), true /* use_markup */, icons[icon], Gtk::BUTTONS_NONE, true);
   AddButtons(dialog, buttons);

@@ -6,6 +6,8 @@
 using namespace System;
 using namespace __OS;
 
+Glib::RefPtr<Gtk::Application> __application__ = Gtk::Application::create();
+
 namespace {
   System::Drawing::Color ToColor(const Gdk::RGBA& color) {
     return System::Drawing::Color::FromArgb(color.get_alpha() * 255, color.get_red() * 255, color.get_green() * 255, color.get_blue() * 255);
