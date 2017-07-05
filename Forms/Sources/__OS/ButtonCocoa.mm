@@ -26,6 +26,7 @@ intptr FormsApi::Button::Create(const System::Windows::Forms::Button& button) {
     [handle setTitle:[NSString stringWithUTF8String:button.Text().c_str()]];
     [handle setButtonType:NSButtonTypeMomentaryPushIn];
     [handle setBezelStyle:NSBezelStyleRounded];
+    [handle setAutoresizingMask:NSViewMaxXMargin | NSViewMinYMargin];
     [handle setTarget:handle];
     [handle setAction:@selector(Click:)];
     __OS::WindowProcedure::Controls[(intptr)handle] = button;
