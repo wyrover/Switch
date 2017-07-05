@@ -2,7 +2,7 @@
 /// The following code example shows how to use Pcf::System::Media::SystemSound class.
 /// @include SystemSound.cpp
 /// <BR>
-/// @image HTML Images/Examples/Forms/SystemSoundM.png "Mac Os X"
+/// @image HTML Images/Examples/Forms/SystemSoundM.png "macOS"
 /// <BR>
 /// @image HTML Images/Examples/Forms/SystemSoundU.png "Ubuntu"
 /// <BR>

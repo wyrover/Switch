@@ -35,6 +35,7 @@
 /// * @ref FormslibRadioButtonPage shows how to use Pcf::System::Windows::Forms::RadioButton control.
 /// * @ref FormslibRichTextBoxPage shows how to use Pcf::System::Windows::Forms::RichTextBox class.
 /// * @ref FormslibTabControlPage shows how to use Pcf::System::Windows::Forms::TabControl control.
+/// * @ref FormslibTrackBarPage shows how to use Pcf::System::Windows::Forms::TrackBar control.
 /// * @ref FormslibTextBoxPage shows how to use Pcf::System::Windows::Forms::TextBox control.
 ///
 /// @section CursorSection Cursor
