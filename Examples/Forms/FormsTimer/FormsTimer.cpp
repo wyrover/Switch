@@ -19,7 +19,7 @@ namespace TimerExample {
       this->ClientSize = System::Drawing::Size(230, 130);
       
       this->label.Parent = *this;
-      this->label.Text = string::Format("{0:N1}", as<double>(this->count)/10);
+      this->label.Text = string::Format("{0:N1}", as<double>(this->counter)/10);
       this->label.Location = System::Drawing::Point(10, 10);
       //this->label.AutoSize = true;
       //this->label.Font = System::Drawing::Font("Arial", 60, System::Drawing::FontStyle::Italic);
@@ -27,7 +27,7 @@ namespace TimerExample {
       
       this->timer.Interval = 100;
       this->timer.Tick += pcf_delegate(const object& sender, const EventArgs& e) {
-        this->label.Text = string::Format("{0:N1}", as<double>(++this->count)/10);
+        this->label.Text = string::Format("{0:N1}", as<double>(++this->counter)/10);
       };
 
       this->button.Parent = *this;
@@ -44,7 +44,7 @@ namespace TimerExample {
     Label label;
     Button button;
     Timer timer;
-    int count = 0;
+    int counter = 0;
   };
 }
 
