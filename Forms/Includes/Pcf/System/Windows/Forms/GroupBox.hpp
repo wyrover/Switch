@@ -15,7 +15,7 @@ namespace Pcf {
         /// @brief Used to group collections of controls.
         class pcf_public GroupBox : public ContainerControl {
         public:
-          GroupBox() {}
+          GroupBox();
 
         protected:
           void CreateHandle() override;

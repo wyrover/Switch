@@ -29,9 +29,7 @@ intptr FormsApi::Label::Create(const System::Windows::Forms::Label& label) {
     [handle setEditable:NO];
     [handle setSelectable:NO];
     [handle setAutoresizingMask:NSViewMaxXMargin | NSViewMinYMargin];
-    handle.drawsBackground = TRUE;
-    //handle.backgroundColor = CocoaApi::FromColor(label.BackColor);
-    //handle.textColor = CocoaApi::FromColor(label.ForeColor);
+    //handle.drawsBackground = TRUE;
     
     [handle setTarget:handle];
     [handle setAction:@selector(Click:)];

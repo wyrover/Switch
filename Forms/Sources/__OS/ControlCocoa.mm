@@ -11,7 +11,7 @@ namespace {
   class CocoaApi pcf_static {
   public:
     static NSColor* FromColor(const System::Drawing::Color& color) {
-      return [NSColor colorWithCalibratedRed:as<float>(color.R()) / 0xFF green:as<float>(color.G()) / 0xFF blue:as<float>(color.B()) / 0xFF alpha:as<float>(color.A()) / 0xFF];
+      return [NSColor colorWithCalibratedRed:as<double>(color.R()) / 0xFF green:as<double>(color.G()) / 0xFF blue:as<double>(color.B()) / 0xFF alpha:as<double>(color.A()) / 0xFF];
     }
     
     static System::Drawing::Rectangle GetBounds(const System::Windows::Forms::Control& control) {
@@ -117,17 +117,7 @@ intptr FormsApi::Control::SendMessage(intptr handle, int32 msg, intptr wparam, i
 void FormsApi::Control::SetBackColor(intptr hdc) {
   ref<System::Windows::Forms::Control> control = System::Windows::Forms::Control::FromHandle(GetHandleWindowFromDeviceContext(hdc));
   if (control) {
-    if (is<System::Windows::Forms::Form>(control)) {
-      ((NSWindow*)control().Handle()).backgroundColor = CocoaApi::FromColor(control().BackColor);
-    } else if (is<System::Windows::Forms::Label>(control)) {
-      ((NSTextField*)control().Handle()).backgroundColor = CocoaApi::FromColor(control().BackColor);
-    } else if (is<System::Windows::Forms::Panel>(control)) {
-      ((NSScrollView*)control().Handle()).backgroundColor = CocoaApi::FromColor(control().BackColor);
-    } else {
-      [(NSControl*)control().Handle() setWantsLayer:YES];
-      ((NSControl*)control().Handle()).layer.backgroundColor = CocoaApi::FromColor(control().BackColor).CGColor;
-    }
-    
+    SetBackColor(control());
   }
 }
 
@@ -135,7 +125,10 @@ void FormsApi::Control::SetBackColor(const System::Windows::Forms::Control& cont
   if (is<System::Windows::Forms::Form>(control)) {
     ((NSWindow*)control.Handle()).backgroundColor = CocoaApi::FromColor(control.BackColor);
   } else if (is<System::Windows::Forms::Label>(control)) {
+    ((NSTextField*)control.Handle()).drawsBackground = TRUE;
     ((NSTextField*)control.Handle()).backgroundColor = CocoaApi::FromColor(control.BackColor);
+  } else if (is<System::Windows::Forms::GroupBox>(control)) {
+    ((NSBox*)control.Handle()).contentView.layer.backgroundColor = CocoaApi::FromColor(control.BackColor).CGColor;
   } else if (is<System::Windows::Forms::Panel>(control)) {
     ((NSScrollView*)control.Handle()).backgroundColor = CocoaApi::FromColor(control.BackColor);
   } else {
