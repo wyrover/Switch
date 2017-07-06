@@ -27,6 +27,7 @@ intptr FormsApi::RadioButton::Create(const System::Windows::Forms::RadioButton& 
     [handle setButtonType:NSButtonTypeRadio];
     [handle setAutoresizingMask:NSViewMaxXMargin | NSViewMinYMargin];
     [handle setTarget:handle];
+    [handle setState:true];
     [handle setAction:@selector(Click:)];
     __OS::WindowProcedure::Controls[(intptr)handle] = radioButton;
     Message message = Message::Create((intptr)handle, WM_CREATE, 0, 0, 0, IntPtr::Zero);

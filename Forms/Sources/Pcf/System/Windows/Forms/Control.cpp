@@ -110,9 +110,11 @@ void Control::CreateHandle() {
   else
     __OS::FormsApi::Control::SetSize(*this);
   __OS::FormsApi::Control::SetLocation(*this); // Must be after SetClientSize or SetSize
-  __OS::FormsApi::Control::SetBackColor(*this);
+  if (this->backColor.HasValue)
+    __OS::FormsApi::Control::SetBackColor(*this);
   __OS::FormsApi::Control::SetEnabled(*this);
-  __OS::FormsApi::Control::SetForeColor(*this);
+  if (this->foreColor.HasValue)
+    __OS::FormsApi::Control::SetForeColor(*this);
   __OS::FormsApi::Control::SetTabStop(*this);
   __OS::FormsApi::Control::SetText(*this);
   if (this->setFocusAfterHandleCreated)
