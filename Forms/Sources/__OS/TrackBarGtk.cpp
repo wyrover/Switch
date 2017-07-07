@@ -14,7 +14,8 @@ namespace __OS {
   public:
     TrackBar() {this->RegisterEvent();}
     TrackBar(Gtk::Orientation orientation) : Gtk::Scale(orientation) {this->RegisterEvent();}
-    void BackColor(const System::Drawing::Color& color) override {
+    void RegisterEvent() override {
+      __OS::Widget::RegisterEvent();
       this->signal_value_changed().connect(pcf_delegate {
         ref<System::Windows::Forms::Control> control = System::Windows::Forms::Control::FromHandle((intptr)this);
         if (control == null) return;

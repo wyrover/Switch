@@ -38,7 +38,7 @@ namespace __OS {
     
     Gtk::RadioButtonGroup& RadioButtonGroup() {return this->radioButtonGroup;}
     
-    void RegisterEvent() {
+    virtual void RegisterEvent() {
       this->ToWidget().signal_event().connect(pcf_delegate(GdkEvent* event)->bool {
         System::Collections::Generic::SortedDictionary<int32, System::Delegate<int32, GdkEvent&>> events {
           {GDK_BUTTON_PRESS, {*this, &Widget::GdkButtonPress}},
