@@ -1,6 +1,7 @@
 /*! 
-@page CopyrightPage Pcf, Copyright (c) 2010-2017, GAMMA Soft. All rights reserved.
+@page CopyrightPage Pcf, Copyright (C) 2010-2017, GAMMA Soft - Yves Fiumefreddo
 @verbatim
+ Pcf, Copyright (C) 2010-2017, GAMMA Soft - Yves Fiumefreddo.
  
                    GNU LESSER GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
