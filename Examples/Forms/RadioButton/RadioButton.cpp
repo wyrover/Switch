@@ -16,18 +16,15 @@ namespace FormExample {
       this->radioButton1.Text = "radioButton 1";
       this->radioButton1.Location = System::Drawing::Point(30, 30);
       this->radioButton1.Checked = true;
-      //this->radioButton1.Parent = *this;
       
       this->radioButton2.Text = "radioButton 2";
       this->radioButton2.Location = System::Drawing::Point(30, 60);
-      //this->radioButton2.Parent = *this;
       
       this->radioButton3.Text = "radioButton 3";
       this->radioButton3.Location = System::Drawing::Point(30, 90);
-      //this->radioButton3.Parent = *this;
       
       this->Text = "RadioButton example";
-        this->Controls().AddRange({this->radioButton1, this->radioButton2, this->radioButton3});
+      this->Controls().AddRange({this->radioButton1, this->radioButton2, this->radioButton3});
     }
     
   private:

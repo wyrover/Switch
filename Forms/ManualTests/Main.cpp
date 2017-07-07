@@ -1,109 +1,76 @@
-#include <Pcf/Startup.hpp>
-#include <Pcf/System/Diagnostics/Debug.hpp>
-#include <Pcf/System/Windows/Forms/Application.hpp>
-#include <Pcf/System/Windows/Forms/Label.hpp>
-#include <Pcf/System/Windows/Forms/TrackBar.hpp>
+#include <Pcf/Pcf>
 
-using namespace System;
-using namespace System::Drawing;
 using namespace System::Windows::Forms;
 
-namespace PcfFormApp {
-  class Program {
+namespace SomeControls {
+  class MainForm : public Form {
   public:
-    // The main entry point for the application.
     static void Main() {
-      static bool DebugKeyboardEvent = true;
-      static bool DebugMouseEvent = false;
-
       Application::EnableVisualStyles();
-
-      Label label1;
-      label1.Location = Point(50, 50);
-      label1.Text = "0";
-
-      TrackBar trackBar1;
-      trackBar1.Location = Point(50, 100);
-      trackBar1.Width = 200;
-      trackBar1.Maximum = 100;
-      trackBar1.Style = TickStyle::None;
-      trackBar1.ValueChanged += pcf_delegate(const object& sender, const EventArgs& e) {
-        label1.Text = string::Format("{0}", trackBar1.Value);
-      };
-      
-      Label label2;
-      label2.Location = Point(150, 200);
-      label2.Text = "0";
-      
-      TrackBar trackBar2;
-      trackBar2.Orientation = Orientation::Vertical;
-      trackBar2.Location = Point(50, 150);
-      trackBar2.Size = Size(45, 104);
-      trackBar2.TickFrequency = 2;
-      trackBar2.ValueChanged += pcf_delegate(const object& sender, const EventArgs& e) {
-        label2.Text = string::Format("{0}", trackBar2.Value);
-      };
-
-      Form form;
-      form.Controls().AddRange({label1, trackBar1, label2, trackBar2});
-
-      System::Diagnostics::Debug::AutoFlush = true;
-      
-      form.MouseEnter += pcf_delegate(const object& sender, const EventArgs& e) {
-        System::Diagnostics::Debug::WriteLineIf(DebugMouseEvent, string::Format("MouseEnter"));
-      };
-      
-      form.MouseDown += pcf_delegate(const object& sender, const MouseEventArgs& e) {
-        System::Diagnostics::Debug::WriteLineIf(DebugMouseEvent, string::Format("MouseDown {0} {{{1}, {2}}}", e.Button, e.X, e.Y));
-      };
-
-      form.Click += pcf_delegate(const object& sender, const EventArgs& e) {
-        System::Diagnostics::Debug::WriteLineIf(DebugMouseEvent, string::Format("Click"));
-      };
-
-      form.MouseClick += pcf_delegate(const object& sender, const MouseEventArgs& e) {
-        System::Diagnostics::Debug::WriteLineIf(DebugMouseEvent, string::Format("MouseClick {0} {{{1}, {2}}}", e.Button, e.X, e.Y));
-      };
-
-      form.DoubleClick += pcf_delegate(const object& sender, const EventArgs& e) {
-        System::Diagnostics::Debug::WriteLineIf(DebugMouseEvent, string::Format("DoubleClick"));
-      };
-
-      form.MouseDoubleClick += pcf_delegate(const object& sender, const MouseEventArgs& e) {
-        System::Diagnostics::Debug::WriteLineIf(DebugMouseEvent, string::Format("MouseDoubleClick {0} {{{1}, {2}}}", e.Button, e.X, e.Y));
-      };
-
-      form.MouseUp += pcf_delegate(const object& sender, const MouseEventArgs& e) {
-        System::Diagnostics::Debug::WriteLineIf(DebugMouseEvent, string::Format("MouseUp {0} {{{1}, {2}}}", e.Button, e.X, e.Y));
-      };
-      
-      form.MouseMove += pcf_delegate(const object& sender, const MouseEventArgs& e) {
-        System::Diagnostics::Debug::WriteLineIf(DebugMouseEvent, string::Format("MouseMove {0} {{{1}, {2}}}", e.Button, e.X, e.Y));
-      };
-
-      form.MouseHover += pcf_delegate(const object& sender, const EventArgs& e) {
-        System::Diagnostics::Debug::WriteLineIf(DebugMouseEvent, string::Format("MouseHover"));
-      };
-
-      form.MouseLeave += pcf_delegate(const object& sender, const EventArgs& e) {
-        System::Diagnostics::Debug::WriteLineIf(DebugMouseEvent, string::Format("MouseLeave"));
-      };
-
-      form.KeyDown += pcf_delegate(const object& sender, KeyEventArgs& e) {
-        System::Diagnostics::Debug::WriteLineIf(DebugKeyboardEvent, string::Format("KeyDown KeyCode {0} KeyValue {1} KeyData {2} KeyModifiers {3}", e.KeyCode, e.KeyValue, e.KeyData, e.Modifiers));
-      };
-
-      form.KeyPress += pcf_delegate(const object& sender, KeyPressEventArgs& e) {
-        System::Diagnostics::Debug::WriteLineIf(DebugKeyboardEvent, string::Format("KeyPress KeyChar {0}", e.KeyChar));
-      };
-
-      form.KeyUp += pcf_delegate(const object& sender, KeyEventArgs& e) {
-        System::Diagnostics::Debug::WriteLineIf(DebugKeyboardEvent, string::Format("KeyUp KeyCode {0} KeyValue {1} KeyData {2} KeyModifiers {3}", e.KeyCode, e.KeyValue, e.KeyData, e.Modifiers));
-      };
-
-      Application::Run(form);
+      Application::Run(MainForm());
     }
+
+    MainForm() {
+      this->button.Text = "Button";
+      this->button.Location = System::Drawing::Point(10, 10);
+      
+      this->label.Text = u8"こんにちは世界！";
+      this->label.Location = System::Drawing::Point(100, 13);
+      this->label.Width = 200;
+      
+      this->radioButton1.Text = "RadioButton1";
+      this->radioButton1.Location = System::Drawing::Point(10, 40);
+      this->radioButton1.Checked = true;
+      
+      this->radioButton2.Text = "RadioButton2";
+      this->radioButton2.Location = System::Drawing::Point(10, 70);
+
+      this->radioButton3.Text = "RadioButton3";
+      this->radioButton3.Location = System::Drawing::Point(10, 100);
+      
+      this->groupBox.Text = "GroupBox";
+      this->groupBox.Location = System::Drawing::Point(10, 60);
+      this->groupBox.Size = System::Drawing::Size(200, 150);
+      this->groupBox.Controls().AddRange({this->radioButton1, this->radioButton2, this->radioButton3});
+      
+      this->checkBox1.Text = "Checked";
+      this->checkBox1.Location = System::Drawing::Point(10, 10);
+      this->checkBox1.CheckState = CheckState::Checked;
+      
+      this->checkBox2.Text = "Unchecked";
+      this->checkBox2.Location = System::Drawing::Point(10, 40);
+      this->checkBox2.CheckState = CheckState::Unchecked;
+      
+      this->checkBox3.Text = "Indeterminate";
+      this->checkBox3.Location = System::Drawing::Point(10, 70);
+      this->checkBox3.CheckState = CheckState::Indeterminate;
+      
+      this->panel.Location = System::Drawing::Point(220, 60);
+      this->panel.Size = System::Drawing::Size(200, 150);
+      this->panel.BorderStyle = BorderStyle::Fixed3D;
+      this->panel.Controls().AddRange({this->checkBox1, this->checkBox2, this->checkBox3});
+      
+      this->progressBar.Location = System::Drawing::Point(10, 240);
+      this->progressBar.Width = 410;
+      this->progressBar.Value = 40;
+      
+      this->Text = "Some Controls";
+      this->ClientSize = System::Drawing::Size(430, 280);
+      this->Controls().AddRange({this->button, this->label, this->groupBox, this->panel, this->progressBar});
+    }
+    
+  private:
+    Button button;
+    Label label;
+    RadioButton radioButton1, radioButton2, radioButton3;
+    GroupBox groupBox;
+    CheckBox checkBox1, checkBox2, checkBox3;
+    Panel panel;
+    ProgressBar progressBar;
+    
   };
 }
 
-pcf_startup(PcfFormApp::Program)
+pcf_startup(SomeControls::MainForm)
+
+
