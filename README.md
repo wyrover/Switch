@@ -5,6 +5,8 @@ Portable C++ Framework
 
 [![Build Status](https://travis-ci.org/yfiumefreddo/Pcf.svg)](https://travis-ci.org/yfiumefreddo/Pcf)
 
+[![Download Portable C++ Framework](https://sourceforge.net/sflogo.php?type=8&group_id=2794431)](https://sourceforge.net/p/pcfpro/)
+
 # The Pcf Libraries are...
 - a collection of native C++ classes libraries, similar to the .NET Framework;
 - written in efficient, modern C++14;
