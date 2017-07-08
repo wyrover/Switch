@@ -95,8 +95,9 @@ set(INCLUDE_FILES
   Includes/Pcf/System/Windows/Forms/ScrollableControl.hpp
   Includes/Pcf/System/Windows/Forms/Shortcut.hpp
   Includes/Pcf/System/Windows/Forms/SystemInformation.hpp
-#  Includes/Pcf/System/Windows/Forms/TabControl.hpp
-#  Includes/Pcf/System/Windows/Forms/TabPage.hpp
+  Includes/Pcf/System/Windows/Forms/TabAlignment.hpp
+  Includes/Pcf/System/Windows/Forms/TabControl.hpp
+  Includes/Pcf/System/Windows/Forms/TabPage.hpp
 #  Includes/Pcf/System/Windows/Forms/TextBox.hpp
   Includes/Pcf/System/Windows/Forms/TickStyle.hpp
   Includes/Pcf/System/Windows/Forms/Timer.hpp
@@ -104,7 +105,7 @@ set(INCLUDE_FILES
   Includes/Pcf/System/Windows/Forms/UICues.hpp
   Includes/Pcf/System/Windows/Forms/UICuesEventArgs.hpp
   Includes/Pcf/System/Windows/Forms/UICuesEventHandler.hpp
- Includes/Pcf/Forms.hpp
+  Includes/Pcf/Forms.hpp
 )
 
 set(SOURCE_FILES
@@ -143,6 +144,12 @@ set(SOURCE_FILES
   Sources/__OS/SystemInformationCocoa.mm
   Sources/__OS/SystemInformationGtk.cpp
   Sources/__OS/SystemInformationWin32.cpp
+  Sources/__OS/TabControlCocoa.mm
+  Sources/__OS/TabControlGtk.cpp
+  Sources/__OS/TabControlWin32.cpp
+  Sources/__OS/TabPageCocoa.mm
+  Sources/__OS/TabPageGtk.cpp
+  Sources/__OS/TabPageWin32.cpp
   Sources/__OS/TimerCocoa.mm
   Sources/__OS/TimerGtk.cpp
   Sources/__OS/TimerWin32.cpp
@@ -192,7 +199,8 @@ set(SOURCE_FILES
 #  Sources/Pcf/System/Windows/Forms/Screen.cpp
 #  Sources/Pcf/System/Windows/Forms/Stop.hpp
   Sources/Pcf/System/Windows/Forms/SystemInformation.cpp
-#  Sources/Pcf/System/Windows/Forms/TabControl.cpp
+  Sources/Pcf/System/Windows/Forms/TabControl.cpp
+  Sources/Pcf/System/Windows/Forms/TabPage.cpp
 #  Sources/Pcf/System/Windows/Forms/TextBox.cpp
   Sources/Pcf/System/Windows/Forms/Timer.cpp
   Sources/Pcf/System/Windows/Forms/TrackBar.cpp

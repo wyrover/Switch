@@ -20,6 +20,8 @@
 #include "../../Includes/Pcf/System/Windows/Forms/Panel.hpp"
 #include "../../Includes/Pcf/System/Windows/Forms/ProgressBar.hpp"
 #include "../../Includes/Pcf/System/Windows/Forms/RadioButton.hpp"
+#include "../../Includes/Pcf/System/Windows/Forms/TabControl.hpp"
+#include "../../Includes/Pcf/System/Windows/Forms/TabPage.hpp"
 #include "../../Includes/Pcf/System/Windows/Forms/TrackBar.hpp"
 #include "WindowMessage.hpp"
 #include "WindowMessageKey.hpp"
@@ -187,6 +189,17 @@ namespace __OS {
       static System::Drawing::Size GetMenuCheckSize();
       static System::Drawing::Font GetMenuFont();
       static int32 GetMenuHeight();
+    };
+
+    class TabPage pcf_static {
+    public:
+      static intptr Create(const System::Windows::Forms::TabPage& tabPage);
+    };
+
+    class TabControl pcf_static {
+    public:
+      static intptr Create(const System::Windows::Forms::TabControl& tabControl);
+      static void SetAlignment(const System::Windows::Forms::TabControl& tabControl);
     };
 
     class Timer pcf_static {

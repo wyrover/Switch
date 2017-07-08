@@ -3,7 +3,8 @@
 #pragma once
 
 #include "ContainerControl.hpp"
-#include "BorderStyle.hpp"
+#include "TabAlignment.hpp"
+#include "TabPage.hpp"
 
 /// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Pcf {
@@ -14,24 +15,30 @@ namespace Pcf {
       /// @brief The Pcf::System::Windows::Forms namespace contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system, Apple Mac Os X and Linux like Ubuntu operating system.
       namespace Forms {
         /// @brief Used to group collections of controls.
-        class pcf_public Panel : public ContainerControl {
+        class pcf_public TabControl : public ContainerControl {
         public:
-          Panel() {
+          using TabPageCollection = ControlCollection;
+
+          TabControl() {
             this->SetStyle(ControlStyles::UserPaint, false);
           }
 
-          Property<System::Windows::Forms::BorderStyle> BorderStyle {
-            pcf_get{return this->borderStyle;},
-            pcf_set{this->SetBorderStyle (value);}
+          Property<TabAlignment> Alignment{
+            pcf_get {return this->alignment;},
+            pcf_set {this->SetAlignment(value);}
+          };
+
+          Property<TabPageCollection&, ReadOnly> TabPages{
+            pcf_get->TabPageCollection& {return this->Controls();}
           };
 
         protected:
           void CreateHandle() override;
           System::Drawing::Size GetDefaultSize() const override { return System::Drawing::Size(200, 100); }
-          void SetBorderStyle(System::Windows::Forms::BorderStyle borderStyle);
+          void SetAlignment(TabAlignment alignment);
 
           /// @cond
-          System::Windows::Forms::BorderStyle borderStyle = System::Windows::Forms::BorderStyle::None;
+          TabAlignment alignment = TabAlignment::Top;
           /// @endcond
         };
       }

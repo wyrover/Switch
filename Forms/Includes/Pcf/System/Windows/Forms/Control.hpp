@@ -274,16 +274,8 @@ namespace Pcf {
           /// @return Control A Control that represents the parent or container control of the control.
           /// @remarks Setting the Parent property value to null removes the control from the Control.ControlCollection of its current parent control.
           Property<ref<Control>> Parent {
-            pcf_get { return this->parent; },
-            pcf_set {
-              if (this->parent != value) {
-                if (value == null && this->parent != null)
-                  this->parent().controls.Remove(*this);
-                else
-                  const_cast<Control&>(value()).controls.Add(*this);
-                this->OnParentChanged(EventArgs::Empty);
-              }
-            }
+            pcf_get {return this->parent;},
+            pcf_set {this->SetParent(value);}
           };
 
           Property<int32, ReadOnly> Right{
@@ -430,6 +422,16 @@ namespace Pcf {
           virtual void DestroyHandle();
 
           virtual System::Drawing::Size GetDefaultSize() const { return System::Drawing::Size(0, 0); }
+
+          virtual void SetParent(ref<Control> parent) {
+            if (this->parent != parent) {
+              if (parent == null && this->parent != null)
+                this->parent().controls.Remove(*this);
+              else
+                const_cast<Control&>(parent()).controls.Add(*this);
+              this->OnParentChanged(EventArgs::Empty);
+            }
+          }
 
           virtual bool GetStyle(ControlStyles flag) { return ((int32)this->style & (int32)flag) == (int32)flag; }
 
