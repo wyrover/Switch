@@ -29,7 +29,7 @@ The classic first application 'Hello World'.
 
 ## Console
 HelloWorld.cpp:
-```
+```c++
 #include <Pcf/Pcf>
 
 using namespace System;
@@ -48,7 +48,7 @@ pcf_startup (HelloWorld::Program)
 ```
 
 CMakeLists.txt:
-```
+```make
 cmake_minimum_required(VERSION 3.5)
 
 Project(HelloWorld)
@@ -59,7 +59,7 @@ target_link_libraries(HelloWorld Pcf.Core)
 
 ## Forms
 HelloWorldGui.cpp:
-```
+```c++
 #include <Pcf/Pcf>
 
 using namespace System;
@@ -106,7 +106,7 @@ target_link_libraries(HelloWorldGui Pcf.Forms)
 
 ## TUnit
 HelloWorldTest.cpp:
-```
+```c++
 #include <Pcf/Pcf>
 
 using namespace System;
