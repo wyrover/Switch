@@ -48,7 +48,7 @@ pcf_startup (HelloWorld::Program)
 ```
 
 CMakeLists.txt:
-```make
+```cmake
 cmake_minimum_required(VERSION 3.5)
 
 Project(HelloWorld)
@@ -95,7 +95,7 @@ pcf_startup (HelloWorldGui::Program)
 ```
 
 CMakeLists.txt:
-```
+```cmake
 cmake_minimum_required(VERSION 3.5)
 
 Project(HelloWorldGui)
@@ -132,7 +132,7 @@ namespace UnitTests {
 ```
 
 CMakeLists.txt:
-```
+```cmake
 cmake_minimum_required(VERSION 3.5)
 
 Project(HelloWorldTest)
