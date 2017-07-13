@@ -3,10 +3,8 @@
 # Pcf
 ### Portable C++ Framework
 
-[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-
-[![Build Status](https://travis-ci.org/yfiumefreddo/Pcf.svg)](https://travis-ci.org/yfiumefreddo/Pcf)
-
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) 
+[![Build Status](https://travis-ci.org/yfiumefreddo/Pcf.svg)](https://travis-ci.org/yfiumefreddo/Pcf) 
 [![Download Portable C++ Framework](https://sourceforge.net/sflogo.php?type=8&group_id=2794431)](https://sourceforge.net/p/pcfpro/)
 
 # The Pcf Libraries are...
