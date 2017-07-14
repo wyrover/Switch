@@ -58,7 +58,7 @@ target_link_libraries(HelloWorld Pcf.Core)
 ```
 
 ## Forms
-HelloWorldGui.cpp:
+HelloWorldForm.cpp:
 ```c++
 #include <Pcf/Pcf>
 
@@ -66,7 +66,7 @@ using namespace System;
 using namespace System::Drawing;
 using namespace System::Windows::Forms;
 
-namespace HelloWorldGui {
+namespace HelloWorld {
   class Program {
   public:
     // The main entry point for the application.
@@ -81,7 +81,7 @@ namespace HelloWorldGui {
       };
       
       Form form;
-      form.Text = "HelloWorldGui Application";
+      form.Text = "Hello World Form";
       form.StartPosition = FormStartPosition::Manual;
       form.Location = Point(300, 200);
       form.Controls().Add(button);
@@ -91,17 +91,17 @@ namespace HelloWorldGui {
   };
 }
 
-pcf_startup (HelloWorldGui::Program)
+pcf_startup (HelloWorld::Program)
 ```
 
 CMakeLists.txt:
 ```cmake
 cmake_minimum_required(VERSION 3.5)
 
-Project(HelloWorldGui)
+Project(HelloWorldFlorm)
 find_package(Pcf REQUIRED)
-add_executable(HelloWorldGui ${PCF_GUI} HelloWorldGui.cpp)
-target_link_libraries(HelloWorldGui Pcf.Forms)
+add_executable(HelloWorldForm ${PCF_GUI} HelloWorldForm.cpp)
+target_link_libraries(HelloWorldForm Pcf.Forms)
 ```
 
 ## TUnit
