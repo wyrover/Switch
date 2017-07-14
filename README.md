@@ -49,7 +49,7 @@ pcf_startup (HelloWorld::Program)
 
 CMakeLists.txt:
 ```cmake
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.2)
 
 Project(HelloWorld)
 find_package(Pcf REQUIRED)
@@ -96,7 +96,7 @@ pcf_startup (HelloWorld::Program)
 
 CMakeLists.txt:
 ```cmake
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.2)
 
 Project(HelloWorldFlorm)
 find_package(Pcf REQUIRED)
@@ -133,7 +133,7 @@ namespace UnitTests {
 
 CMakeLists.txt:
 ```cmake
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.2)
 
 Project(HelloWorldTest)
 find_package(Pcf REQUIRED)
