@@ -1,10 +1,10 @@
 ![GitHub Logo](Documentations/Images/Pcf-logo.png)
 
 # Pcf
-Portable C++ Framework
+### Portable C++ Framework
 
-[![Build Status](https://travis-ci.org/yfiumefreddo/Pcf.svg)](https://travis-ci.org/yfiumefreddo/Pcf)
-
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) 
+[![Build Status](https://travis-ci.org/yfiumefreddo/Pcf.svg)](https://travis-ci.org/yfiumefreddo/Pcf) 
 [![Download Portable C++ Framework](https://sourceforge.net/sflogo.php?type=8&group_id=2794431)](https://sourceforge.net/p/pcfpro/)
 
 # The Pcf Libraries are...
@@ -29,7 +29,7 @@ The classic first application 'Hello World'.
 
 ## Console
 HelloWorld.cpp:
-```
+```c++
 #include <Pcf/Pcf>
 
 using namespace System;
@@ -48,7 +48,7 @@ pcf_startup (HelloWorld::Program)
 ```
 
 CMakeLists.txt:
-```
+```cmake
 cmake_minimum_required(VERSION 3.5)
 
 Project(HelloWorld)
@@ -59,7 +59,7 @@ target_link_libraries(HelloWorld Pcf.Core)
 
 ## Forms
 HelloWorldGui.cpp:
-```
+```c++
 #include <Pcf/Pcf>
 
 using namespace System;
@@ -95,7 +95,7 @@ pcf_startup (HelloWorldGui::Program)
 ```
 
 CMakeLists.txt:
-```
+```cmake
 cmake_minimum_required(VERSION 3.5)
 
 Project(HelloWorldGui)
@@ -106,7 +106,7 @@ target_link_libraries(HelloWorldGui Pcf.Forms)
 
 ## TUnit
 HelloWorldTest.cpp:
-```
+```c++
 #include <Pcf/Pcf>
 
 using namespace System;
@@ -132,7 +132,7 @@ namespace UnitTests {
 ```
 
 CMakeLists.txt:
-```
+```cmake
 cmake_minimum_required(VERSION 3.5)
 
 Project(HelloWorldTest)
