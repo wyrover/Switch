@@ -20,6 +20,9 @@ namespace Pcf {
   namespace System {
     /// @brief The System::Linq namespace provides classes and interfaces that support queries that use Language-Integrated Query (LINQ).
     namespace Linq {
+      template<typename T>
+      using EnumerableCollection = System::Collections::Generic::List<T>;
+
       /// @brief Provides a set of static methods for querying objects that implement IEnumerable<T>.
       class pcf_public Enumerable pcf_static {
       public:
@@ -124,7 +127,14 @@ namespace Pcf {
         /// The following code example demonstrates how to use ToArray<TSource> to force immediate query evaluation and return an array of results.
         /// @include EnumerableToArray.cpp
         template<typename TSource>
-        static Collections::Generic::IEnumerable<TSource>& AsEnumerable(const Collections::Generic::IEnumerable<TSource>& source) {return source;}
+        static refptr<EnumerableCollection<TSource>> AsEnumerable(const Collections::Generic::IEnumerable<TSource>& source) {return pcf_new<EnumerableCollection<TSource>>(source);}
+        
+        /// @brief Creates an array from a IEnumerable<T>
+        /// @par Examples
+        /// The following code example demonstrates how to use ToArray<TSource> to force immediate query evaluation and return an array of results.
+        /// @include EnumerableToArray.cpp
+        template<typename TSource, int32 len>
+        static refptr<EnumerableCollection<TSource>> AsEnumerable(const TSource (&source)[len]) {return pcf_new<EnumerableCollection<TSource>>(source);}
         
         static double Average(const Collections::Generic::IEnumerable<int32>& source) {
           double average = 0;
@@ -178,9 +188,9 @@ namespace Pcf {
         /// @par Examples
         /// The following code example demonstrates how to use Cast<TResult>(IEnumerable) to enable the use of the standard query operators on an ArrayList.
         /// @include EnumerableCast.cpp
-        template<typename TResult, typename TSource>
-        static refptr<Collections::Generic::IEnumerable<TResult>> Cast(const Collections::Generic::IEnumerable<TSource>& source) {
-          refptr<System::Collections::Generic::List<TResult>> list = pcf_new<System::Collections::Generic::List<TResult>>();
+        template<typename TSource, typename TResult>
+        static refptr<EnumerableCollection<TResult>> Cast(const Collections::Generic::IEnumerable<TSource>& source) {
+          refptr<EnumerableCollection<TResult>> list = pcf_new<EnumerableCollection<TResult>>();
           for (TSource item : source)
             list->Add(as<TResult>(item));
           return list;
@@ -194,12 +204,63 @@ namespace Pcf {
         /// The following code example demonstrates how to use Cast<TResult>(IEnumerable) to enable the use of the standard query operators on an ArrayList.
         /// @include EnumerableConcat.cpp
         template<typename TSource>
-        static refptr<Collections::Generic::IEnumerable<TSource>> Concat(const Collections::Generic::IEnumerable<TSource>& first, const Collections::Generic::IEnumerable<TSource>& second) {
-          refptr<System::Collections::Generic::List<TSource>> list = pcf_new<System::Collections::Generic::List<TSource>>();
+        static refptr<EnumerableCollection<TSource>> Concat(const Collections::Generic::IEnumerable<TSource>& first, const Collections::Generic::IEnumerable<TSource>& second) {
+          refptr<EnumerableCollection<TSource>> list = pcf_new<EnumerableCollection<TSource>>();
           for (TSource item : first)
             list->Add(item);
           for (TSource item : second)
             list->Add(item);
+          return list;
+        }
+        
+        /// @brief Concatenates two sequences.
+        /// @param first The first sequence to concatenate.
+        /// @param second The sequence to concatenate to the first sequence.
+        /// @return refptr<Collections::Generic::IEnumerable<TSource>> An IEnumerable<T> that contains the concatenated elements of the two input sequences.
+        /// @par Examples
+        /// The following code example demonstrates how to use Cast<TResult>(IEnumerable) to enable the use of the standard query operators on an ArrayList.
+        /// @include EnumerableConcat.cpp
+        template<typename TSource, int32 len>
+        static refptr<EnumerableCollection<TSource>> Concat(const Collections::Generic::IEnumerable<TSource>& first, const TSource (&second)[len]) {
+          refptr<EnumerableCollection<TSource>> list = pcf_new<EnumerableCollection<TSource>>();
+          for (TSource item : first)
+            list->Add(item);
+          for (TSource item : second)
+            list->Add(item);
+          return list;
+        }
+        
+        /// @brief Concatenates two sequences.
+        /// @param first The first sequence to concatenate.
+        /// @param second The sequence to concatenate to the first sequence.
+        /// @return refptr<Collections::Generic::IEnumerable<TSource>> An IEnumerable<T> that contains the concatenated elements of the two input sequences.
+        /// @par Examples
+        /// The following code example demonstrates how to use Cast<TResult>(IEnumerable) to enable the use of the standard query operators on an ArrayList.
+        /// @include EnumerableIntersect.cpp
+        template<typename TSource>
+        static refptr<EnumerableCollection<TSource>> Intersect(const Collections::Generic::IEnumerable<TSource>& first, const Collections::Generic::IEnumerable<TSource>& second) {
+          refptr<EnumerableCollection<TSource>> list = pcf_new<EnumerableCollection<TSource>>();
+          for (TSource item : first)
+            
+            if (second.Contains(item))
+              list->Add(item);
+          return list;
+        }
+        
+        /// @brief Concatenates two sequences.
+        /// @param first The first sequence to concatenate.
+        /// @param second The sequence to concatenate to the first sequence.
+        /// @return refptr<Collections::Generic::IEnumerable<TSource>> An IEnumerable<T> that contains the concatenated elements of the two input sequences.
+        /// @par Examples
+        /// The following code example demonstrates how to use Cast<TResult>(IEnumerable) to enable the use of the standard query operators on an ArrayList.
+        /// @include EnumerableIntersect.cpp
+        template<typename TSource, int32 len>
+        static refptr<EnumerableCollection<TSource>> Intersect(const Collections::Generic::IEnumerable<TSource>& first, const TSource (&second)[len]) {
+          refptr<EnumerableCollection<TSource>> list = pcf_new<EnumerableCollection<TSource>>();
+          Array<TSource> array(second);
+          for (TSource item : first)
+            if (array.Contains(item))
+              list->Add(item);
           return list;
         }
 
@@ -233,15 +294,54 @@ namespace Pcf {
           return *min;
         }
         
+        /// @brief Projects each element of a sequence into a new form.
+        /// @include EnumerableCast.cpp
+        template<typename TSource, typename TKey>
+        static refptr<EnumerableCollection<TSource>> OrderBy(const Collections::Generic::IEnumerable<TSource>& source, const System::Func<const TSource&, TKey>& keySelector) {
+          refptr<EnumerableCollection<TSource>> list = pcf_new<EnumerableCollection<TSource>>(source);
+          System::Comparison<const TSource&> comparer = pcf_delegate(const TSource& x, const TSource& y) {
+            if (keySelector(x) < keySelector(y)) return -1;
+            if (keySelector(x) == keySelector(y)) return 0;
+            return 1;
+          };
+          
+          list->Sort(comparer);
+          return list;
+        }
+        
+        /// @brief Projects each element of a sequence into a new form.
+        /// @include EnumerableCast.cpp
+        template<typename TSource, typename TKey>
+        static refptr<EnumerableCollection<TSource>> OrderByDescending(const Collections::Generic::IEnumerable<TSource>& source, const System::Func<const TSource&, TKey>& keySelector) {
+          refptr<EnumerableCollection<TSource>> list = pcf_new<EnumerableCollection<TSource>>(source);
+          System::Comparison<const TSource&> comparer = pcf_delegate(const TSource& x, const TSource& y) {
+            if (keySelector(x) < keySelector(y)) return 1;
+            if (keySelector(x) == keySelector(y)) return 0;
+            return -1;
+          };
+          list->Sort(comparer);
+          return list;
+        }
+        
         /// @brief Inverts the order of the elements in a sequence.
         /// @par Examples
         /// The following code example demonstrates how to use Reverse<TSource> to reverse the order of elements in an array.
         /// @include EnumerableReverse.cpp
         template<typename TSource>
-        static refptr<Collections::Generic::IEnumerable<TSource>> Reverse(const Collections::Generic::IEnumerable<TSource>& source) {
-          refptr<System::Collections::Generic::List<TSource>> list = pcf_new<System::Collections::Generic::List<TSource>>();
+        static refptr<EnumerableCollection<TSource>> Reverse(const Collections::Generic::IEnumerable<TSource>& source) {
+          refptr<EnumerableCollection<TSource>> list = pcf_new<EnumerableCollection<TSource>>();
           for (TSource item : source)
             list->Insert(0, item);
+          return list;
+        }
+        
+        /// @brief Projects each element of a sequence into a new form.
+        /// @include EnumerableCast.cpp
+        template<typename TSource, typename TResult>
+        static refptr<EnumerableCollection<TResult>> Select(const Collections::Generic::IEnumerable<TSource>& source, const System::Func<const TSource&, TResult>& selector) {
+          refptr<EnumerableCollection<TResult>> list = pcf_new<EnumerableCollection<TResult>>();
+          for (TSource item : source)
+            list->Add(selector(item));
           return list;
         }
         
@@ -258,6 +358,17 @@ namespace Pcf {
           }
           return array;
         }
+        
+        /// @brief Projects each element of a sequence into a new form.
+        /// @include EnumerableCast.cpp
+        template<typename TSource>
+        static refptr<EnumerableCollection<TSource>> Where(const Collections::Generic::IEnumerable<TSource>& source, const System::Func<const TSource&, bool>& predicate) {
+          refptr<EnumerableCollection<TSource>> list = pcf_new<EnumerableCollection<TSource>>();
+          for (TSource item : source)
+            if (predicate(item))
+              list->Add(item);
+          return list;
+        }
       };
 
       namespace Extension {
@@ -265,6 +376,8 @@ namespace Pcf {
         template<typename T, typename TSource>
         class Enumerable {
         public:
+          //class EnumerablePtr : public refptr<Collections::Generic::IEnumerable<T>>, public Enumerable<EnumerablePtr, T> {};
+
           /// @brief Applies an accumulator function over a sequence.
           /// @param func An accumulator function to be invoked on each element.
           /// @return The final accumulator value.
@@ -323,7 +436,7 @@ namespace Pcf {
           /// @par Examples
           /// The following code example demonstrates how to use ToArray<TSource> to force immediate query evaluation and return an array of results.
           /// @include EnumerableToArray.cpp
-          refptr<Collections::Generic::IEnumerable<TSource>> AsEnumerable() const {return System::Linq::Enumerable::AsEnumerable<TSource>(static_cast<const T&>(*this));}
+          refptr<System::Linq::EnumerableCollection<TSource>> AsEnumerable() const {return System::Linq::Enumerable::AsEnumerable<TSource>(static_cast<const T&>(*this));}
           
           double Average() const {return System::Linq::Enumerable::Average(static_cast<const T&>(*this));}
 
@@ -332,7 +445,7 @@ namespace Pcf {
           /// The following code example demonstrates how to use Cast<TResult>(IEnumerable) to enable the use of the standard query operators on an ArrayList.
           /// @include EnumerableCast.cpp
           template<typename TResult>
-          refptr<Collections::Generic::IEnumerable<TResult>> Cast() const {return System::Linq::Enumerable::Cast<TResult, TSource>(static_cast<const T&>(*this));}
+          refptr<System::Linq::EnumerableCollection<TResult>> Cast() const {return System::Linq::Enumerable::Cast<TSource, TResult>(static_cast<const T&>(*this));}
           
           /// @brief Concatenates two sequences.
           /// @param second The sequence to concatenate to this sequence.
@@ -340,7 +453,33 @@ namespace Pcf {
           /// @par Examples
           /// The following code example demonstrates how to use Cast<TResult>(IEnumerable) to enable the use of the standard query operators on an ArrayList.
           /// @include EnumerableConcat.cpp
-          refptr<Collections::Generic::IEnumerable<TSource>> Concat(const Collections::Generic::IEnumerable<TSource>& second) const {return System::Linq::Enumerable::Concat<TSource>(static_cast<const T&>(*this), second);}
+          refptr<System::Linq::EnumerableCollection<TSource>> Concat(const Collections::Generic::IEnumerable<TSource>& second) const {return System::Linq::Enumerable::Concat<TSource>(static_cast<const T&>(*this), second);}
+          
+          /// @brief Concatenates two sequences.
+          /// @param second The sequence to concatenate to this sequence.
+          /// @return refptr<Collections::Generic::IEnumerable<TSource>> An IEnumerable<T> that contains the concatenated elements of the two input sequences.
+          /// @par Examples
+          /// The following code example demonstrates how to use Cast<TResult>(IEnumerable) to enable the use of the standard query operators on an ArrayList.
+          /// @include EnumerableConcat.cpp
+          template<int32 len>
+          refptr<System::Linq::EnumerableCollection<TSource>> Concat(const TSource (&second)[len]) const {return System::Linq::Enumerable::Concat<TSource>(static_cast<const T&>(*this), second);}
+          
+          /// @brief Concatenates two sequences.
+          /// @param second The sequence to concatenate to this sequence.
+          /// @return refptr<Collections::Generic::IEnumerable<TSource>> An IEnumerable<T> that contains the concatenated elements of the two input sequences.
+          /// @par Examples
+          /// The following code example demonstrates how to use Cast<TResult>(IEnumerable) to enable the use of the standard query operators on an ArrayList.
+          /// @include EnumerableIntersect.cpp
+          refptr<System::Linq::EnumerableCollection<TSource>> Intersect(const Collections::Generic::IEnumerable<TSource>& second) const {return System::Linq::Enumerable::Intersect<TSource>(static_cast<const T&>(*this), second);}
+          
+          /// @brief Concatenates two sequences.
+          /// @param second The sequence to concatenate to this sequence.
+          /// @return refptr<Collections::Generic::IEnumerable<TSource>> An IEnumerable<T> that contains the concatenated elements of the two input sequences.
+          /// @par Examples
+          /// The following code example demonstrates how to use Cast<TResult>(IEnumerable) to enable the use of the standard query operators on an ArrayList.
+          /// @include EnumerableIntersect.cpp
+          template<int32 len>
+          refptr<System::Linq::EnumerableCollection<TSource>> Intersect(const TSource (&second)[len]) const {return System::Linq::Enumerable::Intersect<TSource>(static_cast<const T&>(*this), second);}
           
           /// @brief Returns the maximum value in a generic sequence.
           /// @return An IEnumerable<T> that contains each element of the source sequence cast to the specified type.
@@ -355,11 +494,26 @@ namespace Pcf {
           /// @include EnumerableMin.cpp
           const TSource& Min() const {return System::Linq::Enumerable::Min<TSource>(static_cast<const T&>(*this));}
           
+          /// @brief Projects each element of a sequence into a new form.
+          /// @include EnumerableCast.cpp
+          template<typename TKey>
+          refptr<System::Linq::EnumerableCollection<TSource>> OrderBy(const System::Func<const TSource&, TKey>& keySelector) const {return System::Linq::Enumerable::OrderBy<TSource, TKey>(static_cast<const T&>(*this), keySelector);}
+          
+          /// @brief Projects each element of a sequence into a new form.
+          /// @include EnumerableCast.cpp
+          template<typename TKey>
+          refptr<System::Linq::EnumerableCollection<TSource>> OrderByDescending(const System::Func<const TSource&, TKey>& keySelector) const {return System::Linq::Enumerable::OrderByDescending<TSource, TKey>(static_cast<const T&>(*this), keySelector);}
+          
+          /// @brief Projects each element of a sequence into a new form.
+          /// @include EnumerableCast.cpp
+          template<typename TResult>
+          refptr<System::Linq::EnumerableCollection<TResult>> Select(const System::Func<const TSource&, TResult>& selector) const {return System::Linq::Enumerable::Select<TSource, TResult>(static_cast<const T&>(*this), selector);}
+          
           /// @brief Inverts the order of the elements in a sequence.
           /// @par Examples
           /// The following code example demonstrates how to use Reverse<TSource> to reverse the order of elements in an array.
           /// @include EnumerableReverse.cpp
-          refptr<Collections::Generic::IEnumerable<TSource>> Reverse() const {return System::Linq::Enumerable::Reverse<TSource>(static_cast<const T&>(*this));}
+          refptr<System::Linq::EnumerableCollection<TSource>> Reverse() const {return System::Linq::Enumerable::Reverse<TSource>(static_cast<const T&>(*this));}
 
           /// @brief Creates an array from a IEnumerable<T>
           /// @par Examples
@@ -367,6 +521,10 @@ namespace Pcf {
           /// @include EnumerableToArray.cpp
           System::Array<TSource> ToArray() const {return System::Linq::Enumerable::ToArray<TSource>(static_cast<const T&>(*this));}
 
+          /// @brief Projects each element of a sequence into a new form.
+          /// @include EnumerableCast.cpp
+          refptr<System::Linq::EnumerableCollection<TSource>> Where(const System::Func<const TSource&, bool>& predicate) const {return System::Linq::Enumerable::Where<TSource>(static_cast<const T&>(*this), predicate);}
+          
         protected:
           Enumerable() {}
         };
