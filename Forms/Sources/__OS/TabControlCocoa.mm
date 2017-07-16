@@ -20,7 +20,6 @@ intptr FormsApi::TabControl::Create(const System::Windows::Forms::TabControl& ta
   }
 }
 
-
 void FormsApi::TabControl::SetAlignment(const System::Windows::Forms::TabControl& tabControl) {
 }
 

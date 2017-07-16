@@ -1,6 +1,6 @@
 #if defined(__linux__)
 
-#include <gtkmm/frame.h>
+#include <gtkmm/notebook.h>
 #include <gtkmm/scrolledwindow.h>
 
 #include "WidgetGtk.hpp"
@@ -11,9 +11,9 @@ using namespace System::Windows::Forms;
 using namespace __OS;
 
 namespace __OS {
-  class Panel : public Widget, public Gtk::Frame {
+  class TabControl : public Widget, public Gtk::Notebook {
   public:
-    Panel() {
+    TabControl() {
       this->RegisterEvent();
       this->add(this->scrolledWindow);
       this->scrolledWindow.add(this->fixed);
@@ -36,20 +36,15 @@ namespace __OS {
   };
 }
 
-intptr FormsApi::Panel::Create(const System::Windows::Forms::Panel& panel) {
-  __OS::Panel* handle = new __OS::Panel();
-  handle->Move(panel.Location().X, panel.Location().Y);
-  handle->Text(panel.Text);
+intptr FormsApi::TabControl::Create(const System::Windows::Forms::TabControl& tabControl) {
+  __OS::TabControl* handle = new __OS::TabControl();
+  handle->Move(tabControl.Location().X, tabControl.Location().Y);
+  handle->Text(tabControl.Text);
   handle->show();
   return (intptr)handle;
 }
 
-void FormsApi::Panel::SetBorderStyle(const System::Windows::Forms::Panel &panel) {
-  switch (panel.BorderStyle) {
-    case System::Windows::Forms::BorderStyle::None: ((__OS::Panel*)panel.Handle())->set_shadow_type(Gtk::SHADOW_NONE); break;
-    case System::Windows::Forms::BorderStyle::FixedSingle: ((__OS::Panel*)panel.Handle())->set_shadow_type(Gtk::SHADOW_IN); break;
-    case System::Windows::Forms::BorderStyle::Fixed3D: ((__OS::Panel*)panel.Handle())->set_shadow_type(Gtk::SHADOW_ETCHED_IN); break;
-  }
+void FormsApi::TabControl::SetAlignment(const System::Windows::Forms::TabControl& tabControl) {
 }
 
 #endif
