@@ -140,7 +140,7 @@ namespace Pcf {
         /// @remarks AsEnumerable<TSource>(IEnumerable<TSource>) can be used to choose between query implementations when a sequence implements IEnumerable<T> but also has a different set of public query methods available. For example, given a generic class Table that implements IEnumerable<T> and has its own methods such as Where, Select, and SelectMany, a call to Where would invoke the public Where method of Table. A Table type that represents a database table could have a Wheremethod that takes the predicate argument as an expression tree and converts the tree to SQL for remote execution. If remote execution is not desired, for example because the predicate invokes a local method, the AsEnumerable<TSource> method can be used to hide the custom methods and instead make the standard query operators available.
         /// @par Examples
         /// The following code example demonstrates how to use AsEnumerable<TSource>(IEnumerable<TSource>) with native c++ array.
-        /// @include EnumerableAsEnumerable.cpp
+        /// @include EnumerableAsEnumerable2.cpp
         template<typename TSource, int32 len>
         static refptr<EnumerableCollection<TSource>> AsEnumerable(const TSource (&source)[len]) {return pcf_new<EnumerableCollection<TSource>>(source);}
         
