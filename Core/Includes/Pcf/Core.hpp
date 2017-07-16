@@ -129,6 +129,7 @@
 #include "System/IO/TextWriter.hpp"
 #include "System/IO/WatcherChangeTypes.hpp"
 #include "System/Linq/Enumerable.hpp"
+#include "System/Linq/Linq.hpp"
 #include "System/Net/Sockets/AddressFamily.hpp"
 #include "System/Net/Sockets/IOControlCode.hpp"
 #include "System/Net/Sockets/IPv6MulticastOption.hpp"

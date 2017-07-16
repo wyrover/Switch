@@ -121,6 +121,7 @@ set(INCLUDE_FILES
   Includes/Pcf/System/IO/TextWriter.hpp
   Includes/Pcf/System/IO/WatcherChangeTypes.hpp
   Includes/Pcf/System/Linq/Enumerable.hpp
+  Includes/Pcf/System/Linq/Linq.hpp
   Includes/Pcf/System/Net/Sockets/AddressFamily.hpp
   Includes/Pcf/System/Net/Sockets/IOControlCode.hpp
   Includes/Pcf/System/Net/Sockets/IPv6MulticastOption.hpp
@@ -460,6 +461,7 @@ set(SOURCE_FILES
   Sources/Pcf/System/IO/StreamWriter.cpp
   Sources/Pcf/System/IO/TextReader.cpp
   Sources/Pcf/System/IO/TextWriter.cpp
+  Sources/Pcf/System/Linq/Linq.cpp
   Sources/Pcf/System/Net/Dns.cpp
   Sources/Pcf/System/Net/DnsEndPoint.cpp
   Sources/Pcf/System/Net/EndPoint.cpp
@@ -591,6 +593,7 @@ source_group(Sources\\Pcf\\System\\ComponentModel REGULAR_EXPRESSION "/Sources/P
 source_group(Sources\\Pcf\\System\\Diagnostics REGULAR_EXPRESSION "/Sources/Pcf/System/Diagnostics/[-_,A-Za-z0-9]+\\.c*")
 source_group(Sources\\Pcf\\System\\IO\\Ports REGULAR_EXPRESSION "/Sources/Pcf/System/IO/Ports/[-_,A-Za-z0-9]+\\.c*")
 source_group(Sources\\Pcf\\System\\IO REGULAR_EXPRESSION "/Sources/Pcf/System/IO/[-_,A-Za-z0-9]+\\.c*")
+source_group(Sources\\Pcf\\System\\Linq REGULAR_EXPRESSION "/Sources/Pcf/System/Linq/[-_,A-Za-z0-9]+\\.c*")
 source_group(Sources\\Pcf\\System\\Net\\Internals REGULAR_EXPRESSION "/Sources/Pcf/System/Net/Internals/[-_,A-Za-z0-9]+\\.(c*|h*)")
 source_group(Sources\\Pcf\\System\\Net\\Sockets REGULAR_EXPRESSION "/Sources/Pcf/System/Net/Sockets/[-_,A-Za-z0-9]+\\.c*")
 source_group(Sources\\Pcf\\System\\Net\\WebSockets REGULAR_EXPRESSION "/Sources/Pcf/System/Net/WebSockets/[-_,A-Za-z0-9]+\\.c*")
