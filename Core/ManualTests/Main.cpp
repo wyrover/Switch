@@ -1,4 +1,6 @@
-#include <Pcf/Pcf>
+#include <Pcf/System/Linq/Linq.hpp>
+#include <Pcf/System/Console.hpp>
+#include <Pcf/Startup.hpp>
 
 using namespace System;
 using namespace System::Linq;

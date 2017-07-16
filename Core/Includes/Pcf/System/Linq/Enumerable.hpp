@@ -54,7 +54,7 @@ namespace Pcf {
         /// @par Examples
         /// The following code example demonstrates how to use Aggregate to apply an accumulator function and use a seed value.
         /// @include EnumerableAgregate2.cpp
-        template<typename TAccumulate, typename TSource>
+        template<typename TSource, typename TAccumulate>
         static TAccumulate Agregate(const Collections::Generic::IEnumerable<TSource>& source, const TAccumulate& seed, const System::Func<const TAccumulate&, const TSource&, TAccumulate>& func)  {
           TAccumulate agregated = seed;
           for (TSource item : source)
@@ -73,7 +73,7 @@ namespace Pcf {
         /// @par Examples
         /// The following code example demonstrates how to use Aggregate to apply an accumulator function and use a seed value.
         /// @include EnumerableAgregate3.cpp
-        template<typename TResult, typename TAccumulate, typename TSource>
+        template<typename TSource, typename TAccumulate, typename TResult>
         static TResult Agregate(const Collections::Generic::IEnumerable<TSource>& source, const TAccumulate& seed, const System::Func<const TAccumulate&, const TSource&, TAccumulate>& func, const System::Func<const TAccumulate&, TResult>& resultSelector){
           TAccumulate agregated = seed;
           for (TSource item : source)
@@ -122,56 +122,35 @@ namespace Pcf {
           return false;
         }
         
-        /// @brief Creates an array from a IEnumerable<T>
+        /// @brief Returns the input typed as IEnumerable<T>.
+        /// @param source The sequence to type as IEnumerable<T>.
+        /// @return The input sequence typed as IEnumerable<T>.
+        /// @remarks The AsEnumerable<TSource>(IEnumerable<TSource>) method has no effect other than to change the compile-time type of source from a type that implements IEnumerable<T> to IEnumerable<T> itself.
+        /// @remarks AsEnumerable<TSource>(IEnumerable<TSource>) can be used to choose between query implementations when a sequence implements IEnumerable<T> but also has a different set of public query methods available. For example, given a generic class Table that implements IEnumerable<T> and has its own methods such as Where, Select, and SelectMany, a call to Where would invoke the public Where method of Table. A Table type that represents a database table could have a Wheremethod that takes the predicate argument as an expression tree and converts the tree to SQL for remote execution. If remote execution is not desired, for example because the predicate invokes a local method, the AsEnumerable<TSource> method can be used to hide the custom methods and instead make the standard query operators available.
         /// @par Examples
-        /// The following code example demonstrates how to use ToArray<TSource> to force immediate query evaluation and return an array of results.
-        /// @include EnumerableToArray.cpp
+        /// The following code example demonstrates how to use AsEnumerable<TSource>(IEnumerable<TSource>) to hide a type's custom Where method when the standard query operator implementation is desired.
+        /// @include EnumerableAsEnumerable.cpp
         template<typename TSource>
         static refptr<EnumerableCollection<TSource>> AsEnumerable(const Collections::Generic::IEnumerable<TSource>& source) {return pcf_new<EnumerableCollection<TSource>>(source);}
         
-        /// @brief Creates an array from a IEnumerable<T>
+        /// @brief Returns the input typed as IEnumerable<T>.
+        /// @param source The sequence to type as IEnumerable<T>.
+        /// @return The input sequence typed as IEnumerable<T>.
+        /// @remarks The AsEnumerable<TSource>(IEnumerable<TSource>) method has no effect other than to change the compile-time type of source from a type that implements IEnumerable<T> to IEnumerable<T> itself.
+        /// @remarks AsEnumerable<TSource>(IEnumerable<TSource>) can be used to choose between query implementations when a sequence implements IEnumerable<T> but also has a different set of public query methods available. For example, given a generic class Table that implements IEnumerable<T> and has its own methods such as Where, Select, and SelectMany, a call to Where would invoke the public Where method of Table. A Table type that represents a database table could have a Wheremethod that takes the predicate argument as an expression tree and converts the tree to SQL for remote execution. If remote execution is not desired, for example because the predicate invokes a local method, the AsEnumerable<TSource> method can be used to hide the custom methods and instead make the standard query operators available.
         /// @par Examples
-        /// The following code example demonstrates how to use ToArray<TSource> to force immediate query evaluation and return an array of results.
-        /// @include EnumerableToArray.cpp
+        /// The following code example demonstrates how to use AsEnumerable<TSource>(IEnumerable<TSource>) with native c++ array.
+        /// @include EnumerableAsEnumerable.cpp
         template<typename TSource, int32 len>
         static refptr<EnumerableCollection<TSource>> AsEnumerable(const TSource (&source)[len]) {return pcf_new<EnumerableCollection<TSource>>(source);}
         
-        static double Average(const Collections::Generic::IEnumerable<int32>& source) {
-          double average = 0;
-          int32 count = 0;
-          for (int32 item : source) {
-            average+= item;
-            ++count;
-          }
-          if (count == 0)
-            return 0;
-          return average / count;
-        }
-        
-        static double Average(const Collections::Generic::IEnumerable<int64>& source) {
-          double average = 0;
-          int32 count = 0;
-          for (int64 item : source) {
-            average+= item;
-            ++count;
-          }
-          if (count == 0)
-            return 0;
-          return average / count;
-        }
-        
-        static double Average(const Collections::Generic::IEnumerable<float>& source) {
-          double average = 0;
-          int32 count = 0;
-          for (float item : source) {
-            average+= item;
-            ++count;
-          }
-          if (count == 0)
-            return 0;
-          return average / count;
-        }
-        
+        /// @brief Computes the average of a sequence of Double values.
+        /// @param source A sequence of Double values to calculate the average of.
+        /// @return The average of the sequence of values.
+        /// @exception InvalidOperationException source contains no elements.
+        /// @par Examples
+        /// The following code example demonstrates how to use Average(IEnumerable<Int32>) to calculate an average.
+        /// @include EnumerableAverageInt32.cpp
         static double Average(const Collections::Generic::IEnumerable<double>& source) {
           double average = 0;
           int32 count = 0;
@@ -180,7 +159,64 @@ namespace Pcf {
             ++count;
           }
           if (count == 0)
-            return 0;
+            throw InvalidOperationException(pcf_current_information);
+          return average / count;
+        }
+        
+        /// @brief Computes the average of a sequence of Single values.
+        /// @param source A sequence of Single values to calculate the average of.
+        /// @return The average of the sequence of values.
+        /// @exception InvalidOperationException source contains no elements.
+        /// @par Examples
+        /// The following code example demonstrates how to use Average(IEnumerable<Int32>) to calculate an average.
+        /// @include EnumerableAverageInt32.cpp
+        static double Average(const Collections::Generic::IEnumerable<float>& source) {
+          double average = 0;
+          int32 count = 0;
+          for (float item : source) {
+            average+= item;
+            ++count;
+          }
+          if (count == 0)
+            throw InvalidOperationException(pcf_current_information);
+          return average / count;
+        }
+        
+        /// @brief Computes the average of a sequence of Int32 values.
+        /// @param source A sequence of Int32 values to calculate the average of.
+        /// @return The average of the sequence of values.
+        /// @exception InvalidOperationException source contains no elements.
+        /// @par Examples
+        /// The following code example demonstrates how to use Average(IEnumerable<Int32>) to calculate an average.
+        /// @include EnumerableAverageInt32.cpp
+        static double Average(const Collections::Generic::IEnumerable<int32>& source) {
+          double average = 0;
+          int32 count = 0;
+          for (int32 item : source) {
+            average+= item;
+            ++count;
+          }
+          if (count == 0)
+            throw InvalidOperationException(pcf_current_information);
+          return average / count;
+        }
+        
+        /// @brief Computes the average of a sequence of Int64 values.
+        /// @param source A sequence of Int64 values to calculate the average of.
+        /// @return The average of the sequence of values.
+        /// @exception InvalidOperationException source contains no elements.
+        /// @par Examples
+        /// The following code example demonstrates how to use Average(IEnumerable<Int32>) to calculate an average.
+        /// @include EnumerableAverageInt32.cpp
+        static double Average(const Collections::Generic::IEnumerable<int64>& source) {
+          double average = 0;
+          int32 count = 0;
+          for (int64 item : source) {
+            average+= item;
+            ++count;
+          }
+          if (count == 0)
+            throw InvalidOperationException(pcf_current_information);
           return average / count;
         }
         
@@ -394,7 +430,7 @@ namespace Pcf {
           /// The following code example demonstrates how to use Aggregate to apply an accumulator function and use a seed value.
           /// @include EnumerableAgregate2.cpp
           template<typename TAccumulate>
-          TAccumulate Agregate(const TAccumulate& seed, const System::Func<const TAccumulate&, const TSource&, TAccumulate>& func) const {return System::Linq::Enumerable::Agregate<TAccumulate, TSource>(static_cast<const T&>(*this), seed, func);}
+          TAccumulate Agregate(const TAccumulate& seed, const System::Func<const TAccumulate&, const TSource&, TAccumulate>& func) const {return System::Linq::Enumerable::Agregate<TSource, TAccumulate>(static_cast<const T&>(*this), seed, func);}
 
           /// @brief Applies an accumulator function over a sequence. The specified seed value is used as the initial accumulator value, and the specified function is used to select the result value.
           /// @param seed The initial accumulator value.
@@ -406,8 +442,8 @@ namespace Pcf {
           /// @par Examples
           /// The following code example demonstrates how to use Aggregate to apply an accumulator function and use a seed value.
           /// @include EnumerableAgregate3.cpp
-          template<typename TResult, typename TAccumulate>
-          TResult Agregate(const TAccumulate& seed, const System::Func<const TAccumulate&, const TSource&, TAccumulate>& func, const System::Func<const TAccumulate&, TResult>& resultSelector) const {return System::Linq::Enumerable::Agregate<TResult, TAccumulate, TSource>(static_cast<const T&>(*this), seed, func, resultSelector);}
+          template<typename TAccumulate, typename TResult>
+          TResult Agregate(const TAccumulate& seed, const System::Func<const TAccumulate&, const TSource&, TAccumulate>& func, const System::Func<const TAccumulate&, TResult>& resultSelector) const {return System::Linq::Enumerable::Agregate<TSource, TAccumulate, TResult>(static_cast<const T&>(*this), seed, func, resultSelector);}
 
           /// @brief Determines whether all elements of a sequence satisfy a condition.
           /// @param func A function to test each element for a condition.
@@ -432,12 +468,21 @@ namespace Pcf {
           /// @include EnumerableAny2.cpp
           bool Any(const System::Func<const TSource&, bool>& predicate) const {return System::Linq::Enumerable::Any<TSource>(static_cast<const T&>(*this), predicate);}
           
-          /// @brief Creates an array from a IEnumerable<T>
+          /// @brief Returns the input typed as IEnumerable<T>.
+          /// @return The input sequence typed as IEnumerable<T>.
+          /// @remarks The AsEnumerable<TSource>(IEnumerable<TSource>) method has no effect other than to change the compile-time type of source from a type that implements IEnumerable<T> to IEnumerable<T> itself.
+          /// @remarks AsEnumerable<TSource>(IEnumerable<TSource>) can be used to choose between query implementations when a sequence implements IEnumerable<T> but also has a different set of public query methods available. For example, given a generic class Table that implements IEnumerable<T> and has its own methods such as Where, Select, and SelectMany, a call to Where would invoke the public Where method of Table. A Table type that represents a database table could have a Wheremethod that takes the predicate argument as an expression tree and converts the tree to SQL for remote execution. If remote execution is not desired, for example because the predicate invokes a local method, the AsEnumerable<TSource> method can be used to hide the custom methods and instead make the standard query operators available.
           /// @par Examples
-          /// The following code example demonstrates how to use ToArray<TSource> to force immediate query evaluation and return an array of results.
-          /// @include EnumerableToArray.cpp
+          /// The following code example demonstrates how to use AsEnumerable<TSource>(IEnumerable<TSource>) to hide a type's custom Where method when the standard query operator implementation is desired.
+          /// @include EnumerableAsEnumerable.cpp
           refptr<System::Linq::EnumerableCollection<TSource>> AsEnumerable() const {return System::Linq::Enumerable::AsEnumerable<TSource>(static_cast<const T&>(*this));}
           
+          /// @brief Computes the average of a sequence of Double values.
+          /// @param source A sequence of Double values to calculate the average of.
+          /// @return The average of the sequence of values.
+          /// @exception InvalidOperationException source contains no elements.
+          /// The following code example demonstrates how to use Average(IEnumerable<Int32>) to calculate an average.
+          /// @include EnumerableAverageInt32.cpp
           double Average() const {return System::Linq::Enumerable::Average(static_cast<const T&>(*this));}
 
           /// @brief Casts the elements of an IEnumerable to the specified type.

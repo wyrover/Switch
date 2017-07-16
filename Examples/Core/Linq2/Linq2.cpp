@@ -11,10 +11,7 @@ namespace Examples {
     static void Main() {
       Array<string> names = { "Burke", "Connor", "Frank", "Everett", "Albert", "George", "Harris", "David" };
       
-      refptr<IEnumerable<string>> query = from<string>(names)
-                                          | where<string>(pcf_delegate(string s) {return s.Length == 5;})
-                                          | orderby<string>(pcf_delegate(string s) {return s;})
-                                          | select<string>(pcf_delegate(string s) {return s.ToUpper();});
+      refptr<IEnumerable<string>> query = names.Where(pcf_delegate(string s) {return s.Length == 5;})->OrderBy<string>(pcf_delegate(string s) {return s;})->Select<string>(pcf_delegate(string s) {return s.ToUpper();});
       
       for (string item : *query)
         Console::WriteLine(item);

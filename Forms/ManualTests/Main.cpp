@@ -1,4 +1,6 @@
-﻿#include <Pcf/Pcf>
+﻿#include <Pcf/System/Windows/Forms/Application.hpp>
+#include <Pcf/System/Windows/Forms/TabControl.hpp>
+#include <Pcf/Startup.hpp>
 
 using namespace System;
 using namespace System::Drawing;

@@ -12,6 +12,9 @@
 /// @section TypesSection Types
 /// The Pcf define Unboxed and Boxed @subpage TypesPage.
 ///
+/// @section ArticlesAndOverviewsSection Articles and Overviews
+/// @subpage ArticlesAndOverviewsPage provide articles and overviews of different themes.
+///
 /// @section TutorialsSection Tutorials
 /// @subpage TutorialsPage provide an overview of the basics of the language and identify important language features. Each tutorial includes one or more sample programs. The tutorials discuss the sample code plus provide additional background information. They also link to the corresponding sample abstract topics, where you can download and run the sample programs.
 ///
