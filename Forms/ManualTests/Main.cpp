@@ -1,4 +1,5 @@
 ﻿#include <Pcf/System/Windows/Forms/Application.hpp>
+#include <Pcf/System/Windows/Forms/Button.hpp>
 #include <Pcf/System/Windows/Forms/TabControl.hpp>
 #include <Pcf/Startup.hpp>
 
@@ -20,8 +21,13 @@ namespace ManualTests {
       tabControl.Location = Point(10, 10);
       //tabControl.TabPages().AddRange({tabPage1, tabPage2});
 
+      Button button;
+      //button.Size = Size(200, 100);
+      button.Text = "My Button";
+      button.Location = Point(10, 10);
+      
       Form form;
-      form.Controls().AddRange({tabControl});
+      form.Controls().AddRange({button});
 
       Application::EnableVisualStyles();
       Application::Run(form);

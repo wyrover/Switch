@@ -24,8 +24,8 @@ intptr FormsApi::Button::Create(const System::Windows::Forms::Button& button) {
     [[(NSWindow*)button.Parent()().Handle() contentView] addSubview: handle];
     
     [handle setTitle:[NSString stringWithUTF8String:button.Text().c_str()]];
+    [handle setBezelStyle: button.Height <= 32 ? NSBezelStyleRounded : NSBezelStyleTexturedSquare];
     [handle setButtonType:NSButtonTypeMomentaryPushIn];
-    [handle setBezelStyle:NSBezelStyleRounded];
     [handle setAutoresizingMask:NSViewMaxXMargin | NSViewMinYMargin];
     [handle setTarget:handle];
     [handle setAction:@selector(Click:)];

@@ -143,8 +143,8 @@ void FormsApi::Control::SetClientSize(System::Windows::Forms::Control& control) 
       [(NSWindow*)control.Handle() setContentSize:NSMakeSize(control.ClientSize().Width(), control.ClientSize().Height())];
       control.Size = System::Drawing::Size(((NSControl*)control.Handle()).frame.size.width, ((NSControl*)control.Handle()).frame.size.height);
     } else  if (is<System::Windows::Forms::Button>(control)) {
-      [(NSButton*)control.Handle() setFrameSize:NSMakeSize(control.ClientSize().Width + 12, control.ClientSize().Height + 11)];
-      control.Size = System::Drawing::Size(((NSControl*)control.Handle()).frame.size.width -12, ((NSControl*)control.Handle()).frame.size.height - 11);
+      [(NSButton*)control.Handle() setFrameSize:NSMakeSize(control.ClientSize().Width + 2, control.ClientSize().Height + 2)];
+      control.Size = System::Drawing::Size(((NSControl*)control.Handle()).frame.size.width - 2, ((NSControl*)control.Handle()).frame.size.height - 2);
     } else {
       [(NSControl*)control.Handle() setFrameSize:NSMakeSize(control.ClientSize().Width(), control.ClientSize().Height())];
       control.Size = System::Drawing::Size(((NSControl*)control.Handle()).frame.size.width, ((NSControl*)control.Handle()).frame.size.height);
@@ -171,7 +171,7 @@ void FormsApi::Control::SetLocation(const System::Windows::Forms::Control& contr
   @autoreleasepool {
     System::Drawing::Rectangle bounds = CocoaApi::GetBounds(control);
     if (is<System::Windows::Forms::Button>(control))
-      [(NSControl*)control.Handle() setFrameOrigin:NSMakePoint(bounds.Left - 6, bounds.Top - 6)];
+      [(NSControl*)control.Handle() setFrameOrigin:NSMakePoint(bounds.Left - 1, bounds.Top - 1)];
     else
       [(NSControl*)control.Handle() setFrameOrigin:NSMakePoint(bounds.Left, bounds.Top)];
   }
@@ -186,8 +186,8 @@ void FormsApi::Control::SetSize(System::Windows::Forms::Control& control) {
       [((NSWindow*)control.Handle()) setFrame:NSMakeRect(0, 0, control.Width(), control.Height()) display:true];
       control.ClientSize = System::Drawing::Size(((NSWindow*)control.Handle()).contentLayoutRect.size.width, ((NSWindow*)control.Handle()).contentLayoutRect.size.height);
     } else if (is<System::Windows::Forms::Button>(control)) {
-      [(NSButton*)control.Handle() setFrameSize:NSMakeSize(control.Width() + 12, control.Height() + 11)];
-      control.ClientSize = System::Drawing::Size(((NSControl*)control.Handle()).frame.size.width -12, ((NSControl*)control.Handle()).frame.size.height - 11);
+      [(NSButton*)control.Handle() setFrameSize:NSMakeSize(control.Width() + 2, control.Height() + 2)];
+      control.ClientSize = System::Drawing::Size(((NSControl*)control.Handle()).frame.size.width - 2, ((NSControl*)control.Handle()).frame.size.height - 2);
     } else {
       [(NSControl*)control.Handle() setFrameSize:NSMakeSize(control.Width(), control.Height())];
       control.ClientSize = System::Drawing::Size(((NSControl*)control.Handle()).frame.size.width, ((NSControl*)control.Handle()).frame.size.height);
