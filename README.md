@@ -28,7 +28,7 @@ Before running examples you must install Pcf. To install it read See [Install.md
 The classic first application 'Hello World'.
 
 ## Console
-HelloWorldConsole.cpp:
+HelloWorld.cpp:
 ```c++
 #include <Pcf/Pcf>
 
@@ -51,10 +51,10 @@ CMakeLists.txt:
 ```cmake
 cmake_minimum_required(VERSION 3.2)
 
-Project(HelloWorldConsole)
+Project(HelloWorld)
 find_package(Pcf REQUIRED)
-add_executable(HelloWorldConsole HelloWorldConsole.cpp)
-target_link_libraries(HelloWorldConsole Pcf.Core)
+add_executable(HelloWorld HelloWorld.cpp)
+target_link_libraries(HelloWorld Pcf.Core)
 ```
 
 ## Forms
