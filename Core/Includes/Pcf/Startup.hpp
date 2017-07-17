@@ -10,64 +10,16 @@ namespace Pcf {
   /// @param mainClass The class that contains the static Main method.
   /// @par Examples
   /// This example show a Main method without arguments and without return code
-  /// @code
-  /// #include <Pcf/Pcf>
-  ///
-  /// class Hello1 {
-  /// public:
-  ///   static void Main() {
-  ///     System::Console::WriteLine("Hello, World!");
-  ///   }
-  /// };
-  ///
-  /// pcf_startup (Hello1);
-  /// @endcode
+  /// @include Main1.cpp
   /// @par
   /// This example show a Main method with a return code without arguments
-  /// @code
-  /// #include <Pcf/Pcf>
-  /// 
-  /// class Hello2 {
-  /// public:
-  ///   static int Main() {
-  ///     System::Console::WriteLine("Hello, World!");
-  ///     return 42;
-  ///   }
-  /// };
-  ///
-  /// pcf_startup (Hello2);
-  /// @endcode
+  /// @include Main2.cpp
   /// @par
   /// This example show a Main method with argument and without return code
-  /// @code
-  /// #include <Pcf/Pcf>
-  /// 
-  /// class Arguments1 {
-  /// public:
-  ///   static void Main(const Array<System::String>& args) {
-  ///     for (System::String arg : args)
-  ///       System::Console::WriteLine(arg);
-  ///   }
-  /// };
-  ///
-  /// pcf_startup (Arguments1);
-  /// @endcode
+  /// @include Main3.cpp
   /// @par
   /// This example show a Main method with argument and return code
-  /// @code
-  /// #include <Pcf/Pcf>
-  /// 
-  /// class Arguments2 {
-  /// public:
-  ///   static int Main(const Array<System::String>& args) {
-  ///     for (System::String arg : args)
-  ///       System::Console::WriteLine(arg);
-  ///     return 42;
-  ///   }
-  /// };
-  ///
-  /// pcf_startup (Arguments2);
-  /// @endcode
+  /// @include Main4.cpp
   /// @ingroup Pcf
   #define pcf_startup(mainClass)\
   int main(int argc, char* argv[]) {\
