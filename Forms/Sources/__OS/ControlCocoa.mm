@@ -162,9 +162,15 @@ bool FormsApi::Control::SetFocus(const System::Windows::Forms::Control& control)
 }
 
 void FormsApi::Control::SetForeColor(intptr hdc) {
+  ref<System::Windows::Forms::Control> control = System::Windows::Forms::Control::FromHandle(GetHandleWindowFromDeviceContext(hdc));
+  if (control) {
+    SetForeColor(control());
+  }
 }
 
 void FormsApi::Control::SetForeColor(const System::Windows::Forms::Control& control) {
+  if (is<System::Windows::Forms::Label>(control))
+    [(NSTextField*)control.Handle() setTextColor:CocoaApi::FromColor(control.ForeColor)];
 }
 
 void FormsApi::Control::SetLocation(const System::Windows::Forms::Control& control) {
