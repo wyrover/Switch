@@ -1,11 +1,11 @@
 /// @page FormslibHelloWorldPage Hello World
 /// The classic first application.
-/// @include FormHelloWorld.cpp
+/// @include HelloWorldForm.cpp
 /// <BR>
-/// @image HTML Images/Examples/Forms/FormHelloWorldM.jpg "Mac Os X"
+/// @image HTML Images/Examples/Forms/HelloWorldFormM.png "Mac Os X"
 /// <BR>
-/// @image HTML Images/Examples/Forms/FormHelloWorldU.jpg "Ubuntu"
+/// @image HTML Images/Examples/Forms/HelloWorldFormU.png "Ubuntu"
 /// <BR>
-/// @image HTML Images/Examples/Forms/FormHelloWorldW.jpg "Windows"
+/// @image HTML Images/Examples/Forms/HelloWorldFormW.png "Windows"
 /// <BR>
 

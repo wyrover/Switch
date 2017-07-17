@@ -82,8 +82,6 @@ namespace HelloWorld {
       
       Form form;
       form.Text = "Hello World Form";
-      form.StartPosition = FormStartPosition::Manual;
-      form.Location = Point(300, 200);
       form.Controls().Add(button);
       
       Application::Run(form);
