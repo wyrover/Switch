@@ -5,7 +5,6 @@ using namespace System;
 namespace HelloWorld {
   class Program {
   public:
-    /// @brief The main entry point for the application.
     static void Main() {
       Console::WriteLine("Hello, World!");
     }

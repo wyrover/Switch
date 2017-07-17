@@ -37,8 +37,7 @@ using namespace System;
 namespace HelloWorld {
   class Program {
   public:
-    // The main entry point for the application.
-    static void Main(const Array<string>& args) {
+    static void Main() {
       Console::WriteLine("Hello, World!");
     }
   };
@@ -69,7 +68,6 @@ using namespace System::Windows::Forms;
 namespace HelloWorld {
   class Program {
   public:
-    // The main entry point for the application.
     static void Main() {
       Application::EnableVisualStyles();
       
