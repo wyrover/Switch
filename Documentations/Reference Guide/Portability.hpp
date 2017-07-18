@@ -5,13 +5,13 @@
 /// Pcf is portable on the Operating systems listed below :
 /// * Microsoft Windows XP, Vista, 7, 8, 8.1 and 10.
 /// * Linux
-/// * Mac OS X 10.8, 10.9, 10.10 and 10.11
+/// * Mac OS X 10.8, 10.9, 10.10, 10.11 and macOS 10.12
 ///
 /// @section OperatingSystemTestedSection Operating System Tested
 /// Pcf is every day tested on :
 /// * Microsoft Windows 10 (32 and 64 bits)
 /// * Ubuntu 16.04 (32 bits and 64 bits)
-/// * Mac Os X 10.11 (64 bits)
+/// * macOS 10.12 (64 bits)
 ///
 /// @section ProcessorsSection Processors
 /// The processors listed below are supported with Pcf :

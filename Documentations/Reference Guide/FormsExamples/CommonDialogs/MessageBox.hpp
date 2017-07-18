@@ -2,7 +2,7 @@
 /// The following code example shows how to used Pcf::System::Windows::Forms::MessageBox Dialog.
 /// @include MessageBox.cpp
 /// <BR>
-/// @image HTML Images/Examples/Forms/MessageBoxM.png "Mac Os X"
+/// @image HTML Images/Examples/Forms/MessageBoxM.png "macOS"
 /// <BR>
 /// @image HTML Images/Examples/Forms/MessageBoxU.png "Ubuntu"
 /// <BR>

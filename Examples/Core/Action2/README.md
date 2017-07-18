@@ -3,7 +3,7 @@ This example simplifies this code by instantiating the Action<T> delegate instea
 <BR>
 
 ![GitHub Logo](../../../Documentations/Images/Examples/Core/Action1M.png)
-<p align="left">Mac Os X</p>
+<p align="left">macOS</p>
 <BR>
 
 ![GitHub Logo](../../../Documentations/Images/Examples/Core/Action1U.png)

@@ -1,4 +1,4 @@
-/// @page LinqPage LINQ: Pcf Language-Integrated Query
+/// @page AEOLinqPage LINQ: Pcf Language-Integrated Query
 ///
 /// @section SummarySection Summary
 /// * @ref LinqSection

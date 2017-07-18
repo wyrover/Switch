@@ -6,7 +6,12 @@
 /// * @ref HelloWorldPage The classic first application.
 ///
 /// @section MainSection Main
-///  * @ref MainPage shows how to use Pcf::System::Environment::SetCommandLineArgs, Main and params.
+///  * @ref MainPage shows how to use #pcf_startup, Main and params.
+///  * @ref Main1Page shows a Main method without arguments and without return code.
+///  * @ref Main2Page shows a Main method with a return code without arguments.
+///  * @ref Main3Page shows a Main method with argument and without return code.
+///  * @ref Main4Page shows a Main method with argument and return code.
+///  * @ref Main5Page shows how to use Pcf::System::Environment::SetCommandLineArgs, main and params.
 ///
 /// @section ObjectSection Object
 /// * @ref ObjectUsagePage deemonstrates how to inherit from Pcf::System::Object.
@@ -36,13 +41,18 @@
 /// * @ref FlagsEnumPage show how to inherit from Pcf::System::FlagsEnum.
 ///
 /// @section ForeachSection foreach
-/// * @ref ForeachCArrayPage show how to use #pcf_foreach on C array.
-/// * @ref ForeachListTPage show how to use #pcf_foreach on List< T >.
-/// * @ref ForeachStringPage show how to use #pcf_foreach on Pcf::System::String.
-/// * @ref ForeachTuplesPage show how to use #pcf_foreach on Pcf::System::Tuple <T1, T2, T3> collection.
+/// * @ref ForeachCArrayPage show how to use foreach on C array.
+/// * @ref ForeachListTPage show how to use foreach on List< T >.
+/// * @ref ForeachStringPage show how to use foreach on Pcf::System::String.
+/// * @ref ForeachTuplesPage show how to use foreach on Pcf::System::Tuple <T1, T2, T3> collection.
 ///
 /// @section SystemSection System
 /// * @ref EnvironmentPage show how to use Pcf::System::Environment class.
+/// * @ref VersionPage show how to use Pcf::System::Version class.
+///
+/// @section LinqSection Linq
+/// * @ref LinqPage show how to use Pcf::System::Linq syntax.
+/// * @ref EnumerablePage show how to use Pcf::System::Linq::Enumerable.
 ///
 /// @section SeeSection See also
 /// Other Resources

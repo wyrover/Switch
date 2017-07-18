@@ -68,7 +68,7 @@ namespace Pcf {
             case PlatformID::WinCE: operatingSystem = "Microsoft Windows CE"; break;
             case PlatformID::Unix: operatingSystem = "Unix"; break;
             case PlatformID::Xbox: operatingSystem = "Xbox"; break;
-            case PlatformID::MacOSX: operatingSystem = "Mac OS X"; break;
+            case PlatformID::MacOSX: operatingSystem = "macOS"; break;
             case PlatformID::IOs: operatingSystem = "IOs"; break;
             case PlatformID::Android: operatingSystem = "Android"; break;
             case PlatformID::Unknown: operatingSystem = "<Unknown>"; break;

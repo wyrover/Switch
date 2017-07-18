@@ -217,7 +217,7 @@ namespace Pcf {
       static Property<bool, ReadOnly> UserInteractive;
       
       /// @brief Gets the user name of the person who is currently logged on to the Windows operating system.
-      /// @return string The user name of the person who is logged on to Windows/Linux/Mac Os X/... .
+      /// @return string The user name of the person who is logged on to Windows/Linux/macOS/... .
       /// @remarks You can use the UserName property to identify the user on the current thread, to the system and application for security or access purposes. It can also be used to customize a particular application for each user.
       /// @remarks The domain account credentials for a user are formatted as the user's domain name, the '\' character, and user name. Use the UserDomainName property to obtain the user's domain name and the UserName property to obtain the user name. A user name is typically an abbreviated combination of the user's first and last names.
       static Property<String, ReadOnly> UserName;
@@ -227,7 +227,7 @@ namespace Pcf {
       
       /// @brief Gets the amount of physical memory mapped to the process context.
       /// @return Int64 A 64-bit signed integer containing the number of bytes of physical memory mapped to the process context.
-      /// @remarks Windows 98, Windows Millennium Edition, Linux, Mac Os, Android,... Platform Note: This property always returns zero.
+      /// @remarks Windows 98, Windows Millennium Edition, Linux, macOS, Android,... Platform Note: This property always returns zero.
       static Property<int64, ReadOnly> WorkingSet;
       
       /// @brief Terminates this process and gives the underlying operating system the specified exit code.

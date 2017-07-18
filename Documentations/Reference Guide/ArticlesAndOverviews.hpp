@@ -4,7 +4,7 @@
 /// @page ArticlesAndOverviewsPage The Pcf Articles and Overviews
 ///
 /// @section GeneralSection General
-/// * @subpage LinqPage
+/// * @subpage AEOLinqPage
 ///
 ///
 /// @section SeeSection See also

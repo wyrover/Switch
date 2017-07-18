@@ -3,7 +3,7 @@ This example demonstrates the use of the Action<T> delegate to print the content
 <BR>
 
 ![GitHub Logo](../../../Documentations/Images/Examples/Core/ActionM.png)
-<p align="left">Mac Os X</p>
+<p align="left">macOS</p>
 <BR>
 
 ![GitHub Logo](../../../Documentations/Images/Examples/Core/ActionU.png)

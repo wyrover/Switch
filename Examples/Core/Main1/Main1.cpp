@@ -7,7 +7,7 @@ namespace Examples {
   public:
     // The main entry point for the application.
     static void Main() {
-      // write arguments to the console
+      // Write arguments to the console output
       for (string arg : Environment::GetCommandLineArgs())
         Console::WriteLine(arg);
       
@@ -18,6 +18,14 @@ namespace Examples {
 }
 
 pcf_startup (Examples::Program)
+// pcf_startup (Examples::Program) is same as :
+//
+// int main(int argc, char* argv[]) {
+//   Environment::SetCommandLineArgs(argv, argc)
+//   Examples::Program::Main();
+//   return Environment::ExitCode;
+// }
+
 
 // This code produces the following output if One Two "Three Four" Five are entered on command line:
 //

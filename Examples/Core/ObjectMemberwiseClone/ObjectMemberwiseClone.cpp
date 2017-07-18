@@ -16,10 +16,10 @@ namespace Examples {
     string name;
     IdInfo* idInfo;
     
-    refptr<Person> ShallowCopy() { return MemberwiseClone<Person>().As<Person>(); }
+    refptr<Person> ShallowCopy() { return as<Person>(MemberwiseClone<Person>()); }
     
     refptr<Person> DeepCopy() {
-      refptr<Person> other = MemberwiseClone<Person>().As<Person>();
+      refptr<Person> other = as<Person>(MemberwiseClone<Person>());
       other->idInfo = new IdInfo(idInfo->idNumber);
       return other;
     }

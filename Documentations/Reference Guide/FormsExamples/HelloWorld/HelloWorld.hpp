@@ -2,7 +2,7 @@
 /// The classic first application.
 /// @include HelloWorldForm.cpp
 /// <BR>
-/// @image HTML Images/Examples/Forms/HelloWorldFormM.png "Mac Os X"
+/// @image HTML Images/Examples/Forms/HelloWorldFormM.png "macOS"
 /// <BR>
 /// @image HTML Images/Examples/Forms/HelloWorldFormU.png "Ubuntu"
 /// <BR>
