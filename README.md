@@ -21,8 +21,18 @@ The framework is composed of 4 libraries :
 - **Pcf.Forms** : The Pcf.Forms library contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system.
 - **Pcf.TUnit** : The Pcf.TUnit library is a unit-testing framework for modern C++14. Initially ported from NUnit.
 
-# Install
-Before running examples you must install Pcf. To install it read See [Install.md](Install.md) file.
+# Objectives and Mission
+- **Pcf** is a powerful, yet easy to use platform to build your applications upon
+- **Pcf** allows you to build highly portable applications (write once – compile and run anywhere)
+- **Pcf** is modular and scalable from embedded applications
+- **Pcf** provides consistent, comprehensive and comprehensible programming interfaces
+- **Pcf** favors simplicity over complexity ("as simple as possible, but not simpler")
+- **Pcf** aims for consistency in design, coding style and documentation
+- **Pcf** emphasizes source code quality, in terms of readability, comprehensiveness, consistency, style and testability
+- **Pcf** aims to make C++ programming fun again Guiding Principles
+- Strong focus on code quality, style, consistency and code readability –all code must satisfy our coding style guide
+- Strong focus on tests (automated unit tests with high coverage)
+- Build on top of solid foundations – use existing proven C libraries (e.g. Curl, rs232, zlib,...) where it makes sense
 
 # Examples
 The classic first application 'Hello World'.
@@ -139,6 +149,13 @@ target_link_libraries(HelloWorldTest Pcf.TUnit.Main)
 
 For more Examples see [Examples](Examples)
 
+# Download Pcf 0.2.0
+You can download latest stable version on SourceForge
+[![Download Portable C++ Framework](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/pcfpro/files/latest/download)
+
+# Install
+Before running examples you must install Pcf. To install it read See [Install.md](Install.md) file.
+
 # Namespace
 - **Pcf::System** namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
 - **Pcf::System::Collections** namespace contain types that define various standard, specialized, and generic collection objects.
@@ -170,17 +187,3 @@ For more Examples see [Examples](Examples)
 - **Pcf::Microsoft** nampsace provide Microsoft specific classes.
 - **Pcf::Microsoft::Win32** namepsace provides two types of classes: those that handle events raised by the operating system and those that manipulate the system registry.
 - **Pcf::TUnit** namepsace contains a unit test framework.
-
-# Objectives and Mission
-- **Pcf** is a powerful, yet easy to use platform to build your applications upon
-- **Pcf** allows you to build highly portable applications (write once – compile and run anywhere)
-- **Pcf** is modular and scalable from embedded applications
-- **Pcf** provides consistent, comprehensive and comprehensible programming interfaces
-- **Pcf** is written in fast, efficient C++14.
-- **Pcf** favors simplicity over complexity ("as simple as possible, but not simpler")
-- **Pcf** aims for consistency in design, coding style and documentation
-- **Pcf** emphasizes source code quality, in terms of readability, comprehensiveness, consistency, style and testability
-- **Pcf** aims to make C++ programming fun again Guiding Principles
-- Strong focus on code quality, style, consistency and code readability –all code must satisfy our coding style guide
-- Strong focus on tests (automated unit tests with high coverage)
-- Build on top of solid foundations – use existing proven C libraries (e.g. Curl, rs232, zlib,...) where it makes sense
