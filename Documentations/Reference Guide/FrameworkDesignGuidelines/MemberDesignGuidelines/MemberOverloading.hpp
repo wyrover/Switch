@@ -37,4 +37,4 @@
 /// Other Resources
 /// * @ref CorelibSection
 /// * @ref FrameworkDesignGuidelinesPage
-/// * @ref TypeDesignGuidelinesPage
+/// * @ref MemberDesignGuidelinesPage

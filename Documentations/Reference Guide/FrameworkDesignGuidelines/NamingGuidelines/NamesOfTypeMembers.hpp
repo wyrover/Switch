@@ -21,8 +21,10 @@
 ///
 /// <b>X DO NOT</b> have properties that match the name of "Get" or "Set" methods as in the following example:
 /// @code
-/// string TextWriter() const { ... }
-/// void TextWriter(const string& textWriter) { ... }
+/// Property<string> TextWriter {
+///   pcf_get { ... },
+///   pcf_set { ... }
+/// };
 /// string GetTextWriter(int32 value) { ... }
 /// @endcode
 /// This pattern typically indicates that the property should really be a method.
@@ -35,14 +37,16 @@
 ///
 /// For example, the following property correctly gets and sets an enum value named Color, so the property is named Color:
 /// @code
-/// class Color : public Enum {
+/// enum class Color {
 ///   ...
 /// };
 ///
 /// class Control : public object {
 /// public:
-///  Color Color() const { ... }
-///  void Color(const Color& color) { ... }
+///   Property<::Color> Color {
+///     pcf_get { ... }
+///     pcf_set { ... }
+///   };
 /// };
 /// @endcode
 ///

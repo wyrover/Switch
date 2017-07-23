@@ -66,9 +66,10 @@
 /// @code
 /// class String : public object {
 /// public:
-///   int32 Length() const {return this->length;}
-///
-///   void Length(int32 length) const {this->length = length;}
+///   Property<int32> Length {
+///     pcf_get {return this->length;},
+///     pcf_set {this->length = value;}
+///   )
 /// };
 /// @endcode
 ///
@@ -90,12 +91,9 @@
 ///
 /// * <b>Enum Value :</b> PascalCasing
 /// @code
-/// class FileMode : public Enum {
-/// public:
-///   enum Values {
-///     Append,
-///     ...
-///   };
+/// enum class Values {
+///   Append,
+///   ...
 /// };
 /// @endcode
 ///

@@ -41,7 +41,7 @@
 /// 
 /// <b>√ DO</b> validate enum parameters.
 ///
-/// Do not assume enum arguments will be in the range defined by the enum. The CLR allows casting any integer value into an enum value even if the value is not defined in the enum.
+/// Do not assume enum arguments will be in the range defined by the enum. The C++ language allows casting any integer value into an enum value even if the value is not defined in the enum.
 /// 
 /// <b>X DO NOT</b> use Enum.IsDefined for enum range checks.
 /// 
@@ -53,7 +53,7 @@
 ///
 /// From the perspective of a framework designer, there are three main groups of parameters: by-value parameters, ref parameters, and out parameters.
 ///
-/// When an argument is passed through a by-value parameter, the member receives a copy of the actual argument passed in. If the argument is a value type, a copy of the argument is put on the stack. If the argument is a reference type, a copy of the reference is put on the stack. Most popular CLR languages, such as C#, VB.NET, and C++, default to passing parameters by value.
+/// When an argument is passed through a by-value parameter, the member receives a copy of the actual argument passed in. If the argument is a value type, a copy of the argument is put on the stack. If the argument is a reference type, a copy of the reference is put on the stack. The C++ languages, default to passing parameters by value.
 ///
 /// When an argument is passed through a ref parameter, the member receives a reference to the actual argument passed in. If the argument is a value type, a reference to the argument is put on the stack. If the argument is a reference type, a reference to the reference is put on the stack. Ref parameters can be used to allow the member to modify arguments passed by the caller.
 ///
@@ -71,4 +71,4 @@
 /// Other Resources
 /// * @ref CorelibSection
 /// * @ref FrameworkDesignGuidelinesPage
-/// * @ref TypeDesignGuidelinesPage
+/// * @ref MemberDesignGuidelinesPage
