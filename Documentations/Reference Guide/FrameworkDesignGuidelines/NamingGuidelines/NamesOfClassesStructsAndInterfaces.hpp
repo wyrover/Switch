@@ -44,7 +44,7 @@
 /// <b>√ DO</b> prefix descriptive type parameter names with T.
 /// @code
 /// template<typename TSession=ISession>
-/// interface ISessionChannel : public Interface {
+/// class ISessionChannel pcf_interface {
 ///   virtual TSession GetSession() = 0;
 /// };
 /// @endcode
@@ -61,7 +61,6 @@
 /// | <b>System::Delegate</b>         | <b>X DO NOT</b> add the suffix "Delegate" to a delegate.                                                                                                                                       |
 /// | <b>System::EventArgs</b>        | <b>√ DO</b> add the suffix "EventArgs”.                                                                                                                                                        |
 /// | <b>System::Enum</b>             | <b>√ DO</b> derive from this class.                                                                                                                                                            |
-/// | <b>System::FlagsEnum</b>             | <b>√ DO</b> derive from this class.                                                                                                                                                       |
 /// | <b>System::Enum</b>             | <b>X DO NOT</b> add the suffix "Enum" or "Flag.”                                                                                                                                               |
 /// | <b>System::Exception</b>        | <b>√ DO</b> add the suffix "Exception”.                                                                                                                                                        |
 /// | <b>IDictionary</b>              | <b>√ DO</b> add the suffix "Dictionary". Note that IDictionary is a specific type of collection, but this guideline takes precedence over the more general collections guideline that follows. |

@@ -12,7 +12,7 @@
 ///
 /// where <Component> contains one or more dot-separated clauses. For example:
 ///
-/// <b>Pcf.Controls.lib.</b>
+/// <b>Pcf.Core.lib.</b>
 ///
 /// @section SeeSection See also
 /// Other Resources

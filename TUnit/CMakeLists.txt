@@ -11,6 +11,7 @@ set(INCLUDE_FILES
   Includes/Pcf/TUnit/Expect.hpp
   Includes/Pcf/TUnit/Is.hpp
   Includes/Pcf/TUnit/TestFixture.hpp
+  Includes/Pcf/TUnit/UnitTest.hpp
   Includes/Pcf/TUnit.hpp
 )
 

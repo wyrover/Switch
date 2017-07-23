@@ -36,11 +36,11 @@
 ///   ...
 ///  
 ///   bool Equals(const Point& value) const {
-///     return &value != null and this->x == value.x and this->y == value.y;
+///     return this->x == value.x && this->y == value.y;
 ///   }
 ///
 ///   virtual bool Equals(const object& obj) const {
-///     return &obj != null and Is<Point>(obj) and this->Equals(To<Point>(obj));
+///     return is<Point>(obj) && this->Equals(as<Point>(obj));
 ///   }
 ///
 ///   ...
@@ -78,9 +78,9 @@
 ///   }
 ///
 ///   virtual int32 CompareTo(const IComparable& obj) const {
-///     if (&obj == null or not Is<TimeSpan>(obj))
+///     if (&obj == null || !is<TimeSpan>(obj))
 ///       return 1;
-///     return this->CompareTo(To<TimeSpan>(obj));
+///     return this->CompareTo(as<TimeSpan>(obj));
 ///   }
 /// 
 ///   ...
@@ -93,7 +93,7 @@
 ///
 /// TimeSpan Test::GetMaxDuration(const IEnumerable<TimeSpan>& durations) const {
 ///   TimeSpan result;
-///   foreach(TimeSpan, duration, durations {
+///   for (TimeSpan duration : durations) {
 ///     if (duration > result)
 ///       result = duration;
 ///   }
@@ -116,14 +116,14 @@
 ///
 /// @section ArithmeticOperatorsSection Arithmetic operators
 ///
-/// | Operator name                   | Syntax          | Can overload | Protype examples As member of K    | Protype examples Outside class definitions |
+/// | Operator name                   | Syntax          | Can overload | Protype examples as member of K    | Protype examples outside class definitions |
 /// |---------------------------------|-----------------|--------------|------------------------------------|--------------------------------------------|
 /// | Basic assignment                | a = b           | Yes          | R& K::operator =(S b);             | N/A                                        |
 /// | Addition                        | a + b           | Yes          | R K::operator +(S b);              | R operator +(K a, S b);                    |
 /// | Subtraction                     | a - b           | Yes          | R K::operator -(S b);              | R operator -(K a, S b);                    |
 /// | Unary plus (integer promotion)  | +a              | Yes          | R K::operator +();                 | R operator +(K a);                         |
 /// | Unary minus (integer promotion) | -a              | Yes          | R K::operator -();                 | R operator -(K a);                         |
-/// | Multiplication                  | a/// b           | Yes          | R K::operator///(S b);              | R operator///(K a, S b);                    |
+/// | Multiplication                  | a/// b          | Yes          | R K::operator///(S b);              | R operator///(K a, S b);                    |
 /// | Division                        | a / b           | Yes          | R K::operator /(S b);              | R operator /(K a, S b);                    |
 /// | Modulo (integer remainder)      | a % b           | Yes          | R K::operator %(S b);              | R operator %(K a, S b);                    |
 /// | Increment Prefix                | ++a             | Yes          | R& K::operator ++();               | R& operator ++(K a);                       |
@@ -133,26 +133,26 @@
 ///
 /// @section ComparisonOperatorsSection Comparison operators / reloational operators
 ///
-/// | Operator name            | Syntax                        | Can overload | Protype examples As member of K  | Protype examples Outside class definitions |
-/// |--------------------------|-------------------------------|--------------|----------------------------------|--------------------------------------------|
-/// | Equal to                 | a == b                        | Yes          | bool K::operator ==(S const& b); | bool operator ==(K const& a, S const& b);  |
-/// | Not Equal to             | a != b -or- a <b>not_eq</b> b | Yes          | bool K::operator !=(S const& b); | bool operator !=(K const& a, S const& b);  |
-/// | Greater than             | a > b                         | Yes          | bool K::operator >(S const& b);  | bool operator >(K const& a, S const& b);   |
-/// | Less than                | a < b                         | Yes          | bool K::operator <(S const& b);  | bool operator <(K const& a, S const& b);   |
-/// | Greater than or equal to | a >= b                        | Yes          | bool K::operator >=(S const& b); | bool operator >=(K const& a, S const& b);  |
-/// | Less than or equal to    | a <= b                        | Yes          | bool K::operator <=(S const& b); | bool operator <=(K const& a, S const& b);  |
+/// | Operator name            | Syntax                        | Can overload | Protype examples as member of K        | Protype examples outside class definitions |
+/// |--------------------------|-------------------------------|--------------|----------------------------------------|--------------------------------------------|
+/// | Equal to                 | a == b                        | Yes          | bool K::operator ==(S const& b) const; | bool operator ==(K const& a, S const& b);  |
+/// | Not Equal to             | a != b -or- a <b>not_eq</b> b | Yes          | bool K::operator !=(S const& b) const; | bool operator !=(K const& a, S const& b);  |
+/// | Greater than             | a > b                         | Yes          | bool K::operator >(S const& b) const;  | bool operator >(K const& a, S const& b);   |
+/// | Less than                | a < b                         | Yes          | bool K::operator <(S const& b) const;  | bool operator <(K const& a, S const& b);   |
+/// | Greater than or equal to | a >= b                        | Yes          | bool K::operator >=(S const& b) const; | bool operator >=(K const& a, S const& b);  |
+/// | Less than or equal to    | a <= b                        | Yes          | bool K::operator <=(S const& b) const; | bool operator <=(K const& a, S const& b);  |
 ///
 /// @section LogicalOperatorsSection Logical operators
 ///
-/// | Operator name          | Syntax                                     | Can overload | Protype examples As member of K  | Protype examples Outside class definitions |
-/// |------------------------|--------------------------------------------|--------------|----------------------------------|--------------------------------------------|
-/// | Logical negation (NOT) | !a <i>-or-</i> <b>not</b> a                | Yes          | R K::operator !();               | R operator !(K a);                         |
-/// | Logical AND            | a && b <i>-or-</i> a <b>and</b> b          | Yes          | R K::operator &&(S b);           | R operator &&(K a, S b);                   |
-/// | Logical OR             | a \|\| b <i>-or-</i> a <b>or</b> b         | Yes          | R K::operator \|\|(S b);         | R operator \|\|(K a, S b);                 |
+/// | Operator name          | Syntax                                     | Can overload | Protype examples as member of K   | Protype examples outside class definitions |
+/// |------------------------|--------------------------------------------|--------------|-----------------------------------|--------------------------------------------|
+/// | Logical negation (NOT) | !a <i>-or-</i> <b>not</b> a                | Yes          | bool K::operator !() const;       | bool operator !(K a);                      |
+/// | Logical AND            | a && b <i>-or-</i> a <b>and</b> b          | Yes          | bool K::operator &&(S b) const;   | bool operator &&(K a, S b);                |
+/// | Logical OR             | a \|\| b <i>-or-</i> a <b>or</b> b         | Yes          | bool K::operator ||\|(S b) const; | bool operator \|\|(K a, S b);              |
 ///
 /// @section BitwiseOperatorsSection Bitwise operators
 ///
-/// | Operator name          | Syntax                                  | Can overload | Protype examples As member of K  | Protype examples Outside class definitions |
+/// | Operator name          | Syntax                                  | Can overload | Protype examples as member of K  | Protype examples outside class definitions |
 /// |------------------------|-----------------------------------------|--------------|----------------------------------|--------------------------------------------|
 /// | Bitwise NOT            | ~a <i>-or-</i> <b>compl</b> a           | Yes          | R K::operator ~();               | R operator ~(K a);                         |
 /// | Bitwise AND            | a & b <i>-or-</i> a <b>bitand</b> b     | Yes          | R K::operator &(S b);            | R operator &(K a, S b);                    |
@@ -163,7 +163,7 @@
 ///
 /// @section CompoundAssignmentOperatorsSection Compound assignment operators
 ///
-/// | Operator name                  | Syntax                                   | Meaning         | Can overload | Protype examples As member of K | Protype examples Outside class definitions |
+/// | Operator name                  | Syntax                                   | Meaning         | Can overload | Protype examples as member of K | Protype examples outside class definitions |
 /// |--------------------------------|------------------------------------------|-----------------|--------------|---------------------------------|--------------------------------------------|
 /// | Addition assignment            | a += b                                   | a = a + b;      | Yes          | R& K::operator +=(S b);         | R& operator +=(K a, S b);                  |
 /// | Subtraction assignment         | a -= b                                   | a = a - b;      | Yes          | R& K::operator -=(S b);         | R& operator -=(K a, S b);                  |
@@ -178,7 +178,7 @@
 ///
 /// @section MemberAndPointerOperatorsSection Member and pointer operators
 ///
-/// | Operator name                                                | Syntax | Can overload | Protype examples As member of K | Protype examples Outside class definitions |
+/// | Operator name                                                | Syntax | Can overload | Protype examples as member of K | Protype examples outside class definitions |
 /// |--------------------------------------------------------------|--------|--------------|---------------------------------|--------------------------------------------|
 /// | Array subsript                                               | a[b]   | Yes          | R& K::operator [](S b);         | N/A                                        |
 /// | Indirection ("object pointed to by a")                       | *a     | Yes          | R& K::operator *();             | R& operator *(K a);                        |
@@ -190,7 +190,7 @@
 ///
 /// @section OtherOperatorsSection Other operators
 ///
-/// | Operator name                        | Syntax                                   | Can overload | Protype examples As member of K     | Protype examples Outside class definitions |
+/// | Operator name                        | Syntax                                   | Can overload | Protype examples as member of K     | Protype examples outside class definitions |
 /// |--------------------------------------|------------------------------------------|--------------|-------------------------------------|--------------------------------------------|
 /// | Function call                        | a(a1, a2)                                | Yes          | R K::operator ()(S a, T b, ...);    | N/A                                        |
 /// | Comma                                | a, b                                     | Yes          | R K::operator ,(S b);               | R operator ,(K a, S b);                    |
@@ -216,4 +216,4 @@
 /// Other Resources
 /// * @ref CorelibSection
 /// * @ref FrameworkDesignGuidelinesPage
-/// * @ref TypeDesignGuidelinesPage
+/// * @ref MemberDesignGuidelinesPage
