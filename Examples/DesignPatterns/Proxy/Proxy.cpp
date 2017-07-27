@@ -6,19 +6,19 @@ using namespace System;
 
 namespace DesignPatterns {
   namespace Structural {
-    /// @brief The 'Subject' abstract class
-    class Subject : public Abstract {
+    // The 'Subject' abstract class
+    class Subject pcf_abstract {
     public:
-      virtual void Request() const =0;
+      virtual void Request() const = 0;
     };
     
-    /// @brief The 'RealSubject' class
+    // The 'RealSubject' class
     class RealSubject : public Subject {
     public:
       void Request() const override {Console::WriteLine("Called RealSubject.Request()");}
     };
     
-    /// @brief The 'Proxy' class
+    // The 'Proxy' class
     class Proxy : public Subject {
     public:
       void Request() const override  {
@@ -28,17 +28,22 @@ namespace DesignPatterns {
     private:
       RealSubject realSubject;
     };
+    
+    // MainApp startup class for Structural
+    // Proxy Design Pattern.
+    class MainApp {
+    public:
+      // Entry point into console application.
+      static void Main() {
+        // Create proxy and request a service
+        Proxy proxy;
+        proxy.Request();
+      }
+    };
   }
 }
 
-/// @brief Entry point into console application.
-int main(int argc, char* argv[]) {
-  using namespace DesignPatterns::Structural;
-  
-  // Create proxy and request a service
-  Proxy proxy;
-  proxy.Request();
-}
+pcf_startup (DesignPatterns::Structural::MainApp)
 
 // This code produces the following output:
 //
