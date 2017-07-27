@@ -2,6 +2,10 @@ cmake_minimum_required(VERSION 2.6.4)
 
 project( googletest-distribution )
 
+if(NOT CMAKE_DEBUG_POSTFIX)
+  set(CMAKE_DEBUG_POSTFIX d)
+endif()
+
 enable_testing()
 
 option(BUILD_GTEST "Builds the googletest subproject" OFF)
