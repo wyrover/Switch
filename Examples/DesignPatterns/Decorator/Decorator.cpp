@@ -6,13 +6,13 @@ using namespace System;
 
 namespace DesignPatterns {
   namespace Structural {
-    /// @brief The 'Component' abstract class
+    // The 'Component' abstract class
     class Component : public Abstract {
     public:
-      virtual void Operation() const =0;
+      virtual void Operation() const = 0;
     };
     
-    /// @brief The 'ConcreteComponent' class
+    // The 'ConcreteComponent' class
     class ConcreteComponent : public Component {
     public:
       void Operation() const override {Console::WriteLine("ConcreteComponent.Operation()");}
@@ -21,19 +21,19 @@ namespace DesignPatterns {
     /// brief The 'Decorator' abstract class
     class Decorator : public Component {
     public:
-      void SetComponent(Up<Component> component) {this->component = component;}
+      void SetComponent(refptr<Component> component) {this->component = component;}
       
       void Operation() const override {
-        if (!component.IsNull()) {
+        if (component != null) {
           component->Operation();
         }
       }
       
     protected:
-      Up<Component> component;
+      refptr<Component> component;
     };
     
-    /// @brief The 'ConcreteDecoratorA' class
+    // The 'ConcreteDecoratorA' class
     class ConcreteDecoratorA : public Decorator {
     public:
       void Operation() const override {
@@ -42,7 +42,7 @@ namespace DesignPatterns {
       }
     };
     
-    /// @brief The 'ConcreteDecoratorB' class
+    // The 'ConcreteDecoratorB' class
     class ConcreteDecoratorB : public Decorator {
     public:
       void Operation() const override {
@@ -53,24 +53,29 @@ namespace DesignPatterns {
       
       void AddedBehavior() const {}
     };
+    
+    // MainApp startup class for Structural
+    // Decorator Design Pattern.
+    class MainApp {
+    public:
+      // Entry point into console application.
+      static void Main() {
+        // Create ConcreteComponent and two Decorators
+        refptr<ConcreteComponent> c = pcf_new<ConcreteComponent>();
+        refptr<ConcreteDecoratorA> d1 = pcf_new<ConcreteDecoratorA>();
+        refptr<ConcreteDecoratorB> d2 = pcf_new<ConcreteDecoratorB>();
+        
+        // Link decorators
+        d1->SetComponent(as<Component>(c));
+        d2->SetComponent(as<Component>(d1));
+        
+        d2->Operation();
+      }
+    };
   }
 }
 
-/// @brief Entry point into console application.
-int main(int argc, char* argv[]) {
-  using namespace DesignPatterns::Structural;
-  
-  // Create ConcreteComponent and two Decorators
-  Up<ConcreteComponent> c = new ConcreteComponent();
-  Up<ConcreteDecoratorA> d1 = new ConcreteDecoratorA();
-  Up<ConcreteDecoratorB> d2 = new ConcreteDecoratorB();
-  
-  // Link decorators
-  d1->SetComponent(as<Component>(c));
-  d2->SetComponent(as<Component>(d1));
-  
-  d2->Operation();
-}
+pcf_startup (DesignPatterns::Structural::MainApp)
 
 // This code produces the following output:
 //
