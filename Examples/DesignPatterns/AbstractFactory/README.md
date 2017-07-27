@@ -5,4 +5,4 @@ Provide an interface for creating families of related or dependent objects witho
 <BR>
 
 ## UML class diagram
-![GitHub Logo](../../../Documentations/Images/DesignPaterns/abstract.gif)
+![GitHub Logo](../../../Documentations/Images/DesignPatterns/abstract.gif)
