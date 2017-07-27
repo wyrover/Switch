@@ -6,31 +6,31 @@ using namespace System;
 
 namespace DesignPatterns {
   namespace Structural {
-    /// @brief The 'Subsystem ClassA' class
+    // The 'Subsystem ClassA' class
     class SubSystemOne : public object {
     public:
       void MethodOne() const {Console::WriteLine(" SubSystemOne Method");}
     };
     
-    /// @brief The 'Subsystem ClassB' class
+    // The 'Subsystem ClassB' class
     class SubSystemTwo : public object {
     public:
       void MethodTwo() const {Console::WriteLine(" SubSystemTwo Method");}
     };
     
-    /// @brief The 'Subsystem ClassC' class
+    // The 'Subsystem ClassC' class
     class SubSystemThree : public object {
     public:
       void MethodThree() const {Console::WriteLine(" SubSystemThree Method");}
     };
     
-    /// @brief The 'Subsystem ClassD' class
+    // The 'Subsystem ClassD' class
     class SubSystemFour : public object {
     public:
       void MethodFour() const {Console::WriteLine(" SubSystemFour Method");}
     };
     
-    /// @brief The 'Facade' class
+    // The 'Facade' class
     class Facade : public object {
     public:
       Facade() {}
@@ -54,18 +54,23 @@ namespace DesignPatterns {
       SubSystemThree three;
       SubSystemFour four;
     };
+    
+    // MainApp startup class for Structural
+    // Facade Design Pattern.
+    class MainApp {
+    public:
+      // Entry point into console application.
+      static void Main() {
+        Facade facade;
+        
+        facade.MethodA();
+        facade.MethodB();
+      }
+    };
   }
 }
 
-/// @brief Entry point into console application.
-int main(int argc, char* argv[]) {
-  using namespace DesignPatterns::Structural;
-  
-  Facade facade;
-  
-  facade.MethodA();
-  facade.MethodB();
-}
+pcf_startup (DesignPatterns::Structural::MainApp)
 
 // This code produces the following output:
 //
