@@ -13,14 +13,14 @@ namespace DesignPatterns {
     // The 'AbstractProductB' abstract class
     class AbstractProductB pcf_abstract {
     public:
-      virtual void Interact(const AbstractProductA& a) const =0;
+      virtual void Interact(const AbstractProductA& a) const = 0;
     };
     
     // The 'AbstractFactory' abstract class
     class AbstractFactory pcf_abstract {
     public:
-      virtual refptr<AbstractProductA> CreateProductA() const =0;
-      virtual refptr<AbstractProductB> CreateProductB() const =0;
+      virtual refptr<AbstractProductA> CreateProductA() const = 0;
+      virtual refptr<AbstractProductB> CreateProductB() const = 0;
     };
     
     // The 'ProductA1' class

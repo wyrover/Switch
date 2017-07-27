@@ -16,7 +16,7 @@ namespace DesignPatterns {
 
       void Show() const {
         Console::WriteLine("\nProduct Parts -------");
-        for (string part : this->parts)
+        for (const string& part : this->parts)
           Console::WriteLine(part);
       }
 
@@ -25,11 +25,11 @@ namespace DesignPatterns {
     };
 
     /// @brief The 'Builder' abstract class
-    class Builder : public Abstract {
+    class Builder pcf_abstract {
     public:
-      virtual void BuildPartA() =0;
-      virtual void BuildPartB() =0;
-      virtual const Product& GetResult() const =0;
+      virtual void BuildPartA() = 0;
+      virtual void BuildPartB() = 0;
+      virtual const Product& GetResult() const = 0;
     };
 
     /// @brief The 'Director' class
@@ -63,28 +63,31 @@ namespace DesignPatterns {
     private:
       Product product;
     };
+    
+    class MainApp {
+    public:
+      /// @brief Entry point into console application.
+      static void Main() {
+        // Create director and builders
+        Director director;
+        
+        refptr<Builder> b1 = pcf_new<ConcreteBuilder1>();
+        refptr<Builder> b2 = pcf_new<ConcreteBuilder2>();
+        
+        // Construct two products
+        director.Construct(*b1);
+        Product p1 = b1->GetResult();
+        p1.Show();
+        
+        director.Construct(*b2);
+        Product p2 = b2->GetResult();
+        p2.Show();
+      }
+    };
   }
 }
 
-/// @brief Entry point into console application.
-int main(int argc, char* argv[]) {
-  using namespace DesignPatterns::Creational;
-  
-  // Create director and builders
-  Director director;
-  
-  Up<Builder> b1 = Up<Builder>::Create<ConcreteBuilder1>();
-  Up<Builder> b2 = Up<Builder>::Create<ConcreteBuilder2>();
-  
-  // Construct two products
-  director.Construct(*b1);
-  Product p1 = b1->GetResult();
-  p1.Show();
-  
-  director.Construct(*b2);
-  Product p2 = b2->GetResult();
-  p2.Show();
-}
+pcf_startup (DesignPatterns::Creational::MainApp)
 
 // This code produces the following output:
 //
