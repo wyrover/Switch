@@ -6,18 +6,18 @@ using namespace System;
 
 namespace DesignPatterns {
   namespace Behavioral {
-    /// @brief The 'Handler' abstract class
-    class Handler : public Abstract {
+    // The 'Handler' abstract class
+    class Handler pcf_abstract {
     public:
-      void SetSuccessor(Sp<Handler> successor) {this->successor = successor;}
+      void SetSuccessor(refptr<Handler> successor) {this->successor = successor;}
       
       virtual void HandleRequest(int request) const =0;
 
     protected:
-      Sp<Handler> successor;
+      refptr<Handler> successor;
     };
     
-    /// @brief The 'ConcreteHandler1' class
+    // The 'ConcreteHandler1' class
     class ConcreteHandler1 : public Handler {
     public:
       void HandleRequest(int request) const override {
@@ -29,7 +29,7 @@ namespace DesignPatterns {
       }
     };
     
-    /// @brief The 'ConcreteHandler2' class
+    // The 'ConcreteHandler2' class
     class ConcreteHandler2 : public Handler {
     public:
       void HandleRequest(int request) const override {
@@ -41,7 +41,7 @@ namespace DesignPatterns {
       }
     };
     
-    /// @brief The 'ConcreteHandler3' class
+    // The 'ConcreteHandler3' class
     class ConcreteHandler3 : public Handler {
     public:
       void HandleRequest(int request) const override {
@@ -52,27 +52,32 @@ namespace DesignPatterns {
         }
       }
     };
+    
+    // MainApp startup class for Behavioral
+    // Chain Of Responsability Design Pattern.
+    class MainApp {
+    public:
+      // Entry point into console application.
+      static void Main() {
+        // Setup Chain of Responsibility
+        refptr<Handler> h1 = pcf_new<ConcreteHandler1>();
+        refptr<Handler> h2 = pcf_new<ConcreteHandler2>();
+        refptr<Handler> h3 = pcf_new<ConcreteHandler3>();
+        h1->SetSuccessor(h2);
+        h2->SetSuccessor(h3);
+        
+        // Generate and process request
+        int requests[] = { 2, 5, 14, 22, 18, 3, 27, 20 };
+        
+        for (int request : requests) {
+          h1->HandleRequest(request);
+        }
+      }
+    };
   }
 }
 
-/// @brief Entry point into console application.
-int main(int argc, char* argv[]) {
-  using namespace DesignPatterns::Behavioral;
-  
-  // Setup Chain of Responsibility
-  Sp<Handler> h1 = new ConcreteHandler1();
-  Sp<Handler> h2 = new ConcreteHandler2();
-  Sp<Handler> h3 = new ConcreteHandler3();
-  h1->SetSuccessor(h2);
-  h2->SetSuccessor(h3);
-  
-  // Generate and process request
-  int requests[] = { 2, 5, 14, 22, 18, 3, 27, 20 };
-  
-  for (int request : requests) {
-    h1->HandleRequest(request);
-  }
-}
+pcf_startup (DesignPatterns::Behavioral::MainApp)
 
 // This code produces the following output:
 //
