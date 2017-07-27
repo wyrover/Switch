@@ -6,7 +6,7 @@ using namespace System;
 
 namespace DesignPatterns {
   namespace Creational {
-    /// @brief The 'Singleton' class
+    // The 'Singleton' class
     class Singleton : public object {
     public:
       static Singleton& Instance() {return instance;}
@@ -14,32 +14,32 @@ namespace DesignPatterns {
     protected:
       // Constructor is 'protected'
       Singleton() {}
-      /// @cond
       Singleton(const Singleton&) = delete;
       Singleton& operator =(const Singleton&) = delete;
-      /// @endcond
       
     private:
       static Singleton instance;
     };
 
     Singleton Singleton::instance;
+    
+    class MainApp {
+    public:
+      // Entry point into console application.
+      static void Main() {
+        // Constructor is protected -- cannot use constructor
+        ref<Singleton> singleton1 = Singleton::Instance();
+        ref<Singleton> singleton2 = Singleton::Instance();
+
+        // Test for same instance
+        if (&singleton1 == &singleton2)
+          Console::WriteLine("Objects are the same instance");
+      }
+    };
   }
 }
 
-/// @brief Entry point into console application.
-int main(int argc, char* argv[]) {
-  using namespace DesignPatterns::Creational;
-  
-  // Constructor is protected -- cannot use constructor
-  Singleton& singleton1 = Singleton::Instance();
-  Singleton& singleton2 = Singleton::Instance();
-  
-  // Test for same instance
-  if (&singleton1 == &singleton2) {
-    Console::WriteLine("Objects are the same instance");
-  }
-}
+pcf_startup (DesignPatterns::Creational::MainApp)
 
 // This code produces the following output:
 //

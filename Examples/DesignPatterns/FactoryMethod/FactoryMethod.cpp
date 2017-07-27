@@ -8,7 +8,11 @@ namespace DesignPatterns {
   namespace Creational {
     // The 'Product' abstract class
     class Product pcf_abstract {
+    public:
+      ~Product() = 0;
     };
+    
+    inline Product::~Product() {}
     
     // A 'ConcreteProduct' class
     class ConcreteProductA : public Product {

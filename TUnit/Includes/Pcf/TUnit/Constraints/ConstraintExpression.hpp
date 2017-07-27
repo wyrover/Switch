@@ -18,7 +18,10 @@ namespace Pcf {
     namespace Constraints {
       class pcf_public ConstraintExpression pcf_abstract {
       public:
+        ~ConstraintExpression() = 0;
       };
+      
+      inline ConstraintExpression::~ConstraintExpression() {}
     }
   }
 }
