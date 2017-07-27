@@ -92,27 +92,27 @@ namespace Pcf {
   }
   
   template<typename TSource, typename TKey>
-  auto orderby(System::Func<const TSource&, TKey> keySelector) {
-    return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->template OrderBy(keySelector);
+  refptr<System::Linq::EnumerableCollection<TSource>> orderby(System::Func<const TSource&, TKey> keySelector) {
+    return as<refptr<System::Linq::EnumerableCollection<TSource>>>(as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->template OrderBy(keySelector));
   }
   
   template<typename TSource>
   auto orderby(System::Func<const TSource&, TSource> keySelector) {
-    return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->template OrderBy(keySelector);
+    return as<refptr<System::Linq::EnumerableCollection<TSource>>>(as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->template OrderBy(keySelector));
   }
   
   template<__order__ order, typename TSource, typename TKey>
   auto orderby(System::Func<const TSource&, TKey> keySelector) {
     if (order == descending)
-      return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->template OrderByDescending(keySelector);
-    return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->template OrderBy(keySelector);
+      return as<refptr<System::Linq::EnumerableCollection<TSource>>>(as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->template OrderByDescending(keySelector));
+    return as<refptr<System::Linq::EnumerableCollection<TSource>>>(as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->template OrderBy(keySelector));
   }
   
   template<__order__ order, typename TSource>
   auto orderby(System::Func<const TSource&, TSource> keySelector) {
     if (order == descending)
-      return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->template OrderByDescending(keySelector);
-    return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->template OrderBy(keySelector);
+      return as<refptr<System::Linq::EnumerableCollection<TSource>>>(as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->template OrderByDescending(keySelector));
+    return as<refptr<System::Linq::EnumerableCollection<TSource>>>(as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->template OrderBy(keySelector));
   }
   
   template<typename TSource, typename TResult>
