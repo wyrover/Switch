@@ -18,7 +18,7 @@ namespace DesignPatterns {
       void Operation() const override {Console::WriteLine("ConcreteComponent.Operation()");}
     };
     
-    /// brief The 'Decorator' abstract class
+    // The 'Decorator' abstract class
     class Decorator : public Component {
     public:
       void SetComponent(refptr<Component> component) {this->component = component;}
