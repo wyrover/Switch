@@ -33,19 +33,22 @@ namespace DesignPatterns {
     private:
       Adaptee adaptee;
     };
+    
+    // MainApp startup class for Structural
+    // Adapter Design Pattern.
+    class MainApp {
+    public:
+      // Entry point into console application.
+      static void Main() {
+        // Create adapter and place a request
+        refptr<Target> target = pcf_new<Adapter>();
+        target->Request();
+      }
+    };
   }
 }
 
-// The main entry point for the application.
-int main(int argc, char* argv[]) {
-  using namespace DesignPatterns::Structural;
-  
-  // Create adapter and place a request
-  Up<Target> target = new Adapter();
-  target->Request();
-  
-  return 0;
-}
+pcf_startup (DesignPatterns::Structural::MainApp)
 
 // This code produces the following output:
 //

@@ -44,6 +44,8 @@ namespace DesignPatterns {
       refptr<Prototype> Clone() const override {return as<Prototype>(this->MemberwiseClone<ConcretePrototype2>());}
     };
     
+    // MainApp startup class for Creational
+    // Prototype Design Pattern.
     class MainApp {
     public:
       // Entry point into console application.

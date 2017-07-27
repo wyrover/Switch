@@ -64,6 +64,8 @@ namespace DesignPatterns {
       Product product;
     };
     
+    // MainApp startup class for Creational
+    // Builder Design Pattern.
     class MainApp {
     public:
       // Entry point into console application.

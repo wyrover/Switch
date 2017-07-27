@@ -23,6 +23,8 @@ namespace DesignPatterns {
 
     Singleton Singleton::instance;
     
+    // MainApp startup class for Creational
+    // Singleton Design Pattern.
     class MainApp {
     public:
       // Entry point into console application.

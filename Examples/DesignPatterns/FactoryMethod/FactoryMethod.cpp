@@ -40,6 +40,8 @@ namespace DesignPatterns {
       refptr<Product> FactoryMethod() const override {return pcf_new<ConcreteProductB>();}
     };
     
+    // MainApp startup class for Creational
+    // Factory Method Design Pattern.
     class MainApp {
     public:
       // Entry point into console application.
