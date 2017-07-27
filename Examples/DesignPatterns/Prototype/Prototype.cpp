@@ -7,7 +7,7 @@ using namespace System;
 namespace DesignPatterns {
   namespace Creational {
     // The 'Prototype' abstract class
-    class Prototype : public Abstract {
+    class Prototype pcf_abstract {
     public:
       // Constructor
       Prototype(const string& id) : id(id) {}
