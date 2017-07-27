@@ -6,31 +6,31 @@ using namespace System;
 
 namespace DesignPatterns {
   namespace Creational {
-    /// @brief The 'Product' abstract class
+    // The 'Product' abstract class
     class Product pcf_abstract {
     };
     
-    /// @brief A 'ConcreteProduct' class
+    // A 'ConcreteProduct' class
     class ConcreteProductA : public Product {
     };
     
-    /// @brief A 'ConcreteProduct' class
+    // A 'ConcreteProduct' class
     class ConcreteProductB : public Product {
     };
     
-    /// @brief The 'Creator' abstract class
+    // The 'Creator' abstract class
     class Creator pcf_abstract {
     public:
       virtual refptr<Product> FactoryMethod() const = 0;
     };
     
-    /// @brief A 'ConcreteCreator' class
+    // A 'ConcreteCreator' class
     class ConcreteCreatorA : public Creator {
     public:
       refptr<Product> FactoryMethod() const override {return pcf_new<ConcreteProductA>();}
     };
     
-    /// @brief A 'ConcreteCreator' class
+    // A 'ConcreteCreator' class
     class ConcreteCreatorB : public Creator {
     public:
       refptr<Product> FactoryMethod() const override {return pcf_new<ConcreteProductB>();}
@@ -38,7 +38,7 @@ namespace DesignPatterns {
     
     class MainApp {
     public:
-      /// @brief Entry point into console application.
+      // Entry point into console application.
       static void Main() {
         // An array of creators
         Array<refptr<Creator>> creators(2);

@@ -7,7 +7,7 @@ using namespace System::Collections::Generic;
 
 namespace DesignPatterns {
   namespace Creational {
-    /// @brief The 'Product' class
+    // The 'Product' class
     class Product : public object {
     public:
       void Add(string part) {
@@ -24,7 +24,7 @@ namespace DesignPatterns {
       List<string> parts;
     };
 
-    /// @brief The 'Builder' abstract class
+    // The 'Builder' abstract class
     class Builder pcf_abstract {
     public:
       virtual void BuildPartA() = 0;
@@ -32,7 +32,7 @@ namespace DesignPatterns {
       virtual const Product& GetResult() const = 0;
     };
 
-    /// @brief The 'Director' class
+    // The 'Director' class
     class Director : public object {
     public:
       // Builder uses a complex series of steps
@@ -42,7 +42,7 @@ namespace DesignPatterns {
       }
     };
 
-    /// @brief The 'ConcreteBuilder1' class
+    // The 'ConcreteBuilder1' class
     class ConcreteBuilder1 : public Builder {
     public:
       void BuildPartA() override {this->product.Add("PartA");}
@@ -53,7 +53,7 @@ namespace DesignPatterns {
       Product product;
     };
 
-    /// @brief The 'ConcreteBuilder2' class
+    // The 'ConcreteBuilder2' class
     class ConcreteBuilder2 : public Builder {
     public:
       void BuildPartA() override {this->product.Add("PartX");}
@@ -66,7 +66,7 @@ namespace DesignPatterns {
     
     class MainApp {
     public:
-      /// @brief Entry point into console application.
+      // Entry point into console application.
       static void Main() {
         // Create director and builders
         Director director;
