@@ -51,11 +51,11 @@ namespace DesignPatterns {
         // Create two instances and clone each
         
         refptr<ConcretePrototype1> p1 = pcf_new<ConcretePrototype1>("I");
-        refptr<ConcretePrototype1> c1 = p1->Clone().As<ConcretePrototype1>();
+        refptr<ConcretePrototype1> c1 = as<ConcretePrototype1>(p1->Clone());
         Console::WriteLine("Cloned: {0}", c1->Id);
         
         refptr<ConcretePrototype2> p2 = pcf_new<ConcretePrototype2>("II");
-        refptr<ConcretePrototype2> c2 = p2->Clone().As<ConcretePrototype2>();
+        refptr<ConcretePrototype2> c2 = as<ConcretePrototype2>(p2->Clone());
         Console::WriteLine("Cloned: {0}", c2->Id);
       }
     };
