@@ -47,7 +47,7 @@ namespace DesignPatterns {
         list.Add(TerminalExpression());
         
         // Interpret
-        for (any exp : list) {
+        for (auto exp : list) {
           as<AbstractExpression&>(exp).Interpret(context);
         }
       }
