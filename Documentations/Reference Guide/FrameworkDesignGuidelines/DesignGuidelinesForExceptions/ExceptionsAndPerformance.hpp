@@ -11,14 +11,14 @@
 /// Sometimes performance of an exception-throwing member can be improved by breaking the member into two. Let’s look at the Add method of the Pcf::System::Collections::Generic::ICollection< T > interface.
 ///
 /// @code
-/// Up<ICOllection<int32> > numbers = ...
+/// refptr<ICOllection<int32> > numbers = ...
 /// numbers->Add(1);
 /// @endcode
 ///
 /// The method Add throws if the collection is read-only. This can be a performance problem in scenarios where the method call is expected to fail often. One of the ways to mitigate the problem is to test whether the collection is writable before trying to add a value.
 ///
 /// @code
-/// Up<ICOllection<int32> > numbers = ...
+/// refptr<ICOllection<int32> > numbers = ...
 /// ...
 /// if ((!numbers->IsReadOnly()) {
 ///   numbers->Add(1);

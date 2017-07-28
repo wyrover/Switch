@@ -23,6 +23,9 @@ namespace Pcf {
       template<typename T>
       using EnumerableCollection = System::Collections::Generic::List<T>;
 
+      template<typename T>
+      using IOrderedEnumerable = System::Collections::Generic::IEnumerable<T>;
+
       /// @brief Provides a set of static methods for querying objects that implement IEnumerable<T>.
       class pcf_public Enumerable pcf_static {
       public:
@@ -317,6 +320,7 @@ namespace Pcf {
         }
         
         /// @brief Returns the minimum value in a generic sequence.
+        /// @param source The IEnumerable that contains the elements to be cast to type TResult.
         /// @par Examples
         /// The following code example demonstrates how to use Min<TSource>(IEnumerable<TSource>) to determine the minimum value in a sequence of IComparable<T> objects.
         /// @include EnumerableMin.cpp
@@ -330,8 +334,12 @@ namespace Pcf {
           return *min;
         }
         
-        /// @brief Projects each element of a sequence into a new form.
-        /// @include EnumerableCast.cpp
+        /// @brief Sorts the elements of a sequence in ascending order according to a key.
+        /// @param source A sequence of values to order.
+        /// @param keySelector A function to extract a key from an element.
+        /// @par Examples
+        /// The following code example demonstrates how to use OrderBy<TSource, TKey>(IEnumerable<TSource>, Func<TSource, TKey>) to sort the elements of a sequence.
+        /// @include EnumerableOrderBy.cpp
         template<typename TSource, typename TKey>
         static refptr<EnumerableCollection<TSource>> OrderBy(const Collections::Generic::IEnumerable<TSource>& source, const System::Func<const TSource&, TKey>& keySelector) {
           refptr<EnumerableCollection<TSource>> list = pcf_new<EnumerableCollection<TSource>>(source);
@@ -539,8 +547,11 @@ namespace Pcf {
           /// @include EnumerableMin.cpp
           const TSource& Min() const {return System::Linq::Enumerable::Min<TSource>(static_cast<const T&>(*this));}
           
-          /// @brief Projects each element of a sequence into a new form.
-          /// @include EnumerableCast.cpp
+          /// @brief Sorts the elements of a sequence in ascending order according to a key.
+          /// @param keySelector A function to extract a key from an element.
+          /// @par Examples
+          /// The following code example demonstrates how to use OrderBy<TSource, TKey>(IEnumerable<TSource>, Func<TSource, TKey>) to sort the elements of a sequence.
+          /// @include EnumerableOrderBy.cpp
           template<typename TKey>
           refptr<System::Linq::EnumerableCollection<TSource>> OrderBy(const System::Func<const TSource&, TKey>& keySelector) const {return System::Linq::Enumerable::OrderBy<TSource, TKey>(static_cast<const T&>(*this), keySelector);}
           
