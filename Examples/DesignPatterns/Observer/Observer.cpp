@@ -1,4 +1,4 @@
-// Observer pattern -- Structural example
+// Observer pattern -- Behavorial example
 
 #include <Pcf/Pcf>
 

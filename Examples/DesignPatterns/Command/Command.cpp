@@ -1,4 +1,4 @@
-// Command pattern -- Structural example
+// Command pattern -- Behavorial example
 
 #include <Pcf/Pcf>
 

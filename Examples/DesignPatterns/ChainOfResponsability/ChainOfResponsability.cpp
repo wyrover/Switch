@@ -1,4 +1,4 @@
-// Chain of Responsibility pattern -- Structural example
+// Chain of Responsibility pattern -- Behavorial example
 
 #include <Pcf/Pcf>
 

@@ -1,4 +1,4 @@
-// Mediator pattern -- Structural example
+// Mediator pattern -- Behavorial example
 
 #include <Pcf/Pcf>
 

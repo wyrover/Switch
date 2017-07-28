@@ -1,4 +1,4 @@
-// Interpreter pattern -- Structural example
+// Interpreter pattern -- Behavorial example
 
 #include <Pcf/Pcf>
 

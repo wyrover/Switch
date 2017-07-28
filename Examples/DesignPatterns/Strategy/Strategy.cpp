@@ -1,4 +1,4 @@
-// Strategy pattern -- Structural example
+// Strategy pattern -- Behavorial example
 
 #include <Pcf/Pcf>
 

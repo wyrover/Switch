@@ -1,4 +1,4 @@
-// Memento pattern -- Structural example
+// Memento pattern -- Behavorial example
 
 #include <Pcf/Pcf>
 
