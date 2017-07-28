@@ -5,4 +5,4 @@ Allow an object to alter its behavior when its internal state changes. The objec
 <BR>
 
 ## UML class diagram
-![GitHub Logo](../../../Documentations/Images/DesignPatterns/observer.gif)
+![GitHub Logo](../../../Documentations/Images/DesignPatterns/state.gif)
