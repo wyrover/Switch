@@ -44,8 +44,8 @@ namespace DesignPatterns {
       }
     };
     
-    // MainApp startup class for Real-World
-    // Template Design Pattern.
+    // MainApp startup class for Behavorial
+    // Template Method Design Pattern.
     class MainApp {
     public:
       // Entry point into console application.
@@ -60,6 +60,7 @@ namespace DesignPatterns {
   }
 }
 
+// Specify the Main entry point to System
 pcf_startup (DesignPatterns::Behavioral::MainApp)
 
 // This code produces the following output:

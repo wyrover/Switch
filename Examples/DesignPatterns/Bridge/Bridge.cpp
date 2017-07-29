@@ -72,6 +72,7 @@ namespace DesignPatterns {
   }
 }
 
+// Specify the Main entry point to System
 pcf_startup (DesignPatterns::Structural::MainApp)
 
 // This code produces the following output:
