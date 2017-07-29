@@ -28,21 +28,21 @@ namespace DesignPatterns {
     };
     
     // The 'ProductA1' class
-    class ProductA1 final : public AbstractProductA {
+    class ProductA1 : public AbstractProductA {
     };
     
     // The 'ProductB1' class
-    class ProductB1 final : public AbstractProductB {
+    class ProductB1 : public AbstractProductB {
     public:
       void Interact(const AbstractProductA& a) const override {Console::WriteLine(string::Format("{0} interacts with {1}", this->GetType().Name, a.GetType().Name));}
     };
     
     // The 'ProductA2' class
-    class ProductA2 final : public AbstractProductA {
+    class ProductA2 : public AbstractProductA {
     };
     
     // The 'ProductB2' class
-    class ProductB2 final : public AbstractProductB {
+    class ProductB2 : public AbstractProductB {
     public:
       void Interact(const AbstractProductA& a) const override {Console::WriteLine(string::Format("{0} interacts with {1}", this->GetType().Name, a.GetType().Name));}
     };
