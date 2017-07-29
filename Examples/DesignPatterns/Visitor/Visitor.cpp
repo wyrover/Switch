@@ -92,7 +92,7 @@ namespace DesignPatterns {
       List<refptr<Element>> elements;
     };
 
-    // MainApp startup class for Structural
+    // MainApp startup class for Behavorial
     // Visitor Design Pattern.
     class MainApp {
     public:
@@ -114,6 +114,7 @@ namespace DesignPatterns {
   }
 }
 
+// Specify the Main entry point to System
 pcf_startup (DesignPatterns::Behavioral::MainApp)
 
 // This code produces the following output:

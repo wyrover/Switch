@@ -1,4 +1,4 @@
-// Iterator pattern -- Structural example
+// Iterator pattern -- Behavorial example
 
 #include <Pcf/Pcf>
 
