@@ -70,7 +70,6 @@ namespace SomeControls {
     CheckBox checkBox1, checkBox2, checkBox3;
     Panel panel;
     ProgressBar progressBar;
-    
   };
 }
 

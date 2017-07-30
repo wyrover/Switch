@@ -3,30 +3,31 @@
 #include <Pcf/Startup.hpp>
 
 using namespace System;
-using namespace System::Collections::Generic;
 using namespace System::Linq;
+using namespace System::Collections::Generic;
 
-namespace ManualTests {
-  struct Abs : public object {
-    ~Abs() override = 0;
-  };
-  
-  inline Abs::~Abs() { }
-  
-  class C2 : public Abs {
-  protected:
-    C2() {}
-  };
-
-  class C3 : public C2 {
-  };
-  
+namespace Examples {
   class Program {
   public:
+    // The main entry point for the application.
     static void Main() {
-      C3 c;
+      Array<string> names = { "Burke", "Connor", "Frank", "Everett", "Albert", "George", "Harris", "David" };
+      
+      auto query = from<string>(names)
+                   | where<string>([](string s) {return s.Length == 5;})
+                   | orderby<string>([](string s) {return s;})
+                   | select<string>([](string s) {return s.ToUpper();});
+      
+      for (string item : *query)
+        Console::WriteLine(item);
     }
   };
 }
 
-pcf_startup (ManualTests::Program)
+pcf_startup (Examples::Program)
+
+// This code example produces the following output:
+//
+// BURKE
+// DAVID
+// FRANK

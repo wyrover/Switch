@@ -1,48 +1,44 @@
 /// @mainpage Portable C++ Framework - Reference Guide Documentation
 ///
-/// @section OverviewSection Overview
-/// For more information see @subpage IntroductionAndOverviewPage
+/// <table>
+///   <tr>
+///     <td>@ref PcfFrameworkNamespacesPage</td>
+///     <td>@ref TypesPage</td>
+///     <td>@ref ArticlesAndOverviewsPage</td>
+///     <td>@ref TutorialsPage</td>
+///     <td>@ref ExamplesPage</td>
+///     <td>@ref FrameworkDesignGuidelinesPage</td>
+///     <td>@ref ReleaseNotesPage</td>
+///     <td>@ref PortabilityPage</td>
+///     <td>@ref ExternalProductsandLibrariesPage</td>
+///     <td>@ref ExternalProductsandLibrariesPage</td>
+///     <td>@ref LicensePage</td>
+///   </tr>
+/// </table>
 ///
-/// @section LibrariesSection Libraries
-/// The Pcf @subpage LibrariesPage list
+/// @section ThePcfLibrariesAreSection The Pcf Libraries are...
+///   * a collection of C++ classes libraries, similar to the .NET Framework;
+///   * written in efficient, modern C++14;
+///   * and highly portable and available on many different platforms;
 ///
-/// @section PcfFrameworkNamespacesSection Namespaces
-/// The Pcf @subpage PcfFrameworkNamespacesPage list.
+/// @image HTML Pcf.png
 ///
-/// @section TypesSection Types
-/// The Pcf define Unboxed and Boxed @subpage TypesPage.
+/// @section Pcfiscomposedof4librariesSection Pcf is composed of 4 libraries
+///   * @ref CorelibPage library is a library of classes, interfaces, and value types that provide access to system functionality. It is the foundation on which c++ applications, components, and controls are built.
+///   * @ref DrawinglibPage library contains types that support basic GDI+ graphics functionality. Child namespaces support advanced two-dimensional and vector graphics functionality, advanced imaging functionality, and print-related and typographical services. A child namespace also contains types that extend design-time user-interface logic and drawing.
+///   * @ref FormslibPage library contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system.
+///   * @ref TUnitlibPage library contains unit testing framework.
 ///
-/// @section ArticlesAndOverviewsSection Articles and Overviews
-/// @subpage ArticlesAndOverviewsPage provide articles and overviews of different themes.
-///
-/// @section TutorialsSection Tutorials
-/// @subpage TutorialsPage provide an overview of the basics of the language and identify important language features. Each tutorial includes one or more sample programs. The tutorials discuss the sample code plus provide additional background information. They also link to the corresponding sample abstract topics, where you can download and run the sample programs.
-///
-/// @section ExamplesSection Examples
-/// For more practice with :
-/// * Pcf.Core you can read @subpage CorelibExamplesPage.
-/// * Pcf.Forms you can read @subpage FormslibExamplesPage.
-/// * Pcf.TUnit you can read @subpage TUnitlibExamplesPage.
-///
-/// @section FrameworkDesignGuidelinesSection Framework Design Guidelines
-/// @subpage FrameworkDesignGuidelinesPage provides guidelines for designing libraries that extend and interact with the Pcf Framework.
-///
-/// @section DesignPatternsSection Design Patterns
-/// @subpage DesignPatternsPage are solutions to software design problems you find again and again in real-world application development. Patterns are about reusable designs and interactions of objects.
-///
-/// @section ReleaseNotesSection Release Notes
-/// @subpage You can find the @subpage ReleaseNotesPage list here.
-///
-/// @section PortabilitySection Portability
-/// The @subpage PortabilityPage section provide informations about Operating System suported, Compilators and Devepment Environment tools.
-///
-/// @section ExternalProductsandLibrariesSection External Products and Libraries
-/// The @subpage ExternalProductsandLibrariesPage list the external products and libraries.
-///
-/// @section LinksSection External Links
-/// The @subpage LinksPage list the essential links.
-///
-/// For more detailed information, browse the different sections of this documentation.
-///
-/// @section CopyrightSection Copyright
-/// @subpage CopyrightPage
+/// @section ObjectivesAndMissionSection Objectives and Mission
+///  * Pcf is a powerful, yet easy to use platform to build your applications upon
+///  * Pcf allows you to build highly portable applications (write once – compile and run anywhere)
+///  * Pcf is modular and scalable from embedded applications
+///  * Pcf provides consistent, comprehensive and comprehensible programming interfaces
+///  * Pcf is written in fast, efficient C++
+///  * Pcf favors simplicity over complexity ("as simple as possible, but not simpler")
+///  * Pcf aims for consistency in design, coding style and documentation
+///  * Pcf emphasizes source code quality, in terms of readability, comprehensiveness, consistency, style and testability
+///  * Pcf aims to make C++ programming fun again Guiding Principles
+///  * Strong focus on code quality, style, consistency and code readability –all code must satisfy our coding style guide
+///  * Strong focus on tests (automated unit tests with high coverage)
+///  * Build on top of solid foundations – use existing proven C libraries (e.g. libcurl, icu, zlib, SQLite) where it makes sense

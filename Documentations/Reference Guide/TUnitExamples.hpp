@@ -10,4 +10,4 @@
 ///
 /// @section SeeSection See also
 /// Other Resources
-/// * @ref CorelibSection
+/// * @ref ExamplesPage

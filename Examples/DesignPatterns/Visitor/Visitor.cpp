@@ -92,7 +92,7 @@ namespace DesignPatterns {
       List<refptr<Element>> elements;
     };
 
-    // MainApp startup class for Behavorial
+    // MainApp startup class for Behavioral
     // Visitor Design Pattern.
     class MainApp {
     public:

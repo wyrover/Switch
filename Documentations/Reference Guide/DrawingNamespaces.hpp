@@ -9,7 +9,3 @@
 /// |-----------|------------|
 /// | Pcf::System::Drawing | The Pcf::System::Drawing parent namespace contains types that support basic GDI+ graphics functionality. Child namespaces support advanced two-dimensional and vector graphics functionality, advanced imaging functionality, and print-related and typographical services. A child namespace also contains types that extend design-time user-interface logic and drawing. |
 /// | Pcf::System::Drawing::Imaging |  |
-///
-/// @section SeeSection See also
-/// Other Resources
-/// * @ref DrawinglibSection

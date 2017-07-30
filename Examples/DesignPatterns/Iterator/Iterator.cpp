@@ -1,4 +1,4 @@
-// Iterator pattern -- Behavorial example
+// Iterator pattern -- Behavioral example
 
 #include <Pcf/Pcf>
 
@@ -101,7 +101,7 @@ namespace DesignPatterns {
       return this->current >= this->aggregate.Count;
     }
 
-    /// MainApp startup class for Behavorial
+    /// MainApp startup class for Behavioral
     /// Iterator Design Pattern.
     class MainApp {
     public:

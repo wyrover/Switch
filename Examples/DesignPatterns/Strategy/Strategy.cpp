@@ -1,4 +1,4 @@
-// Strategy pattern -- Behavorial example
+// Strategy pattern -- Behavioral example
 
 #include <Pcf/Pcf>
 
@@ -52,7 +52,7 @@ namespace DesignPatterns {
       refptr<Strategy> strategy;
     };
     
-    // MainApp startup class for Behavorial
+    // MainApp startup class for Behavioral
     // Strategy Design Pattern.
     class MainApp {
     public:

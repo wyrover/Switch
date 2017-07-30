@@ -30,7 +30,3 @@
 /// | Pcf::System::Threading::Tasks             | The System::Threading::Tasks namespace provides types that simplify the work of writing concurrent and asynchronous code. The main types are System::Threading::Tasks::Task which represents an asynchronous operation that can be waited on and cancelled, and System::Threading::Tasks::Task<TResult>, which is a task that can return a value. The System::Threading::Tasks::TaskFactory class provides static methods for creating and starting tasks, and the System::Threading::Tasks::TaskScheduler class provides the default thread scheduling infrastructure.                                                                                       |
 /// | Pcf::Microsoft | The Pcf::Microsoft namespace provide Microsoft specific classes. |
 /// | Pcf::Microsoft::Win32 | The Pcf::Microsoft.Win32 namespace provides two types of classes: those that handle events raised by the operating system and those that manipulate the system registry. |
-///
-/// @section SeeSection See also
-/// Other Resources
-/// * @ref CorelibSection

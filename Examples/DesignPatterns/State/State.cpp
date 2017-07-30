@@ -1,4 +1,4 @@
-// State pattern -- Behavorial example
+// State pattern -- Behavioral example
 
 #include <Pcf/Pcf>
 
@@ -58,7 +58,7 @@ namespace DesignPatterns {
       context.State = pcf_new<ConcreteStateA>();
     }
 
-    // MainApp startup class for Behavorial
+    // MainApp startup class for Behavioral
     // State Design Pattern.
     class MainApp {
     public:

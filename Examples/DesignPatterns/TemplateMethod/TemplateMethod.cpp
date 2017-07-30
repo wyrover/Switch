@@ -44,7 +44,7 @@ namespace DesignPatterns {
       }
     };
     
-    // MainApp startup class for Behavorial
+    // MainApp startup class for Behavioral
     // Template Method Design Pattern.
     class MainApp {
     public:

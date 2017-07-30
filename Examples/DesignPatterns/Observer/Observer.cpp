@@ -1,4 +1,4 @@
-// Observer pattern -- Behavorial example
+// Observer pattern -- Behavioral example
 
 #include <Pcf/Pcf>
 
@@ -66,7 +66,7 @@ namespace DesignPatterns {
       string name;
     };
     
-    /// MainApp startup class for Behavorial
+    /// MainApp startup class for Behavioral
     // Observer Design Pattern.
     class MainApp {
     public:

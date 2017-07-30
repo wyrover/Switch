@@ -10,6 +10,6 @@
  * @image html decorator.gif
  *
  * @section SampleCodeSection Sample code
- * TThis structural code demonstrates the Decorator pattern which dynamically adds extra functionality to an existing object.
+ * This structural code demonstrates the Decorator pattern which dynamically adds extra functionality to an existing object.
  * @include Decorator.cpp
  */

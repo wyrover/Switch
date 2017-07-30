@@ -1,5 +1,5 @@
 /*! 
-@page CopyrightPage Pcf, Copyright (C) 2010-2017, GAMMA Soft - Yves Fiumefreddo
+@page LicensePage License
 @verbatim
  Pcf, Copyright (C) 2010-2017, GAMMA Soft - Yves Fiumefreddo.
  

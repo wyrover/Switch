@@ -1,7 +1,7 @@
 // http://msdn.microsoft.com/en-us/library/aa288436(v=vs.71).aspx
 // http://msdn.microsoft.com/en-us/library/67ef8sbd.aspx
 
-/// @page TutorialsPage The Pcf Tutorials
+/// @page TutorialsPage Tutorials
 ///
 /// The Pcf tutorials provide an overview of the basics of the language and identify important language features. Each tutorial includes one or more sample programs. The tutorials discuss the sample code plus provide additional background information. They also link to the corresponding sample abstract topics, where you can download and run the sample programs.
 ///
@@ -25,7 +25,3 @@
 /// | @ref TutorialConditionalMethodPage                | Demonstrates conditional methods, which provide a powerful mechanism by which calls to methods can be included or omitted depending on whether a symbol is defined. | Intermediate |
 /// | @ref TutorialDoxygenDocumentationPage             | Shows how to document code by using Doxygen. | Intermediate |
 /// | @ref TutorialThreadingPage                        | Demonstrates various thread activities such as creating and executing a thread, synchronizing threads, interacting between threads, using a thread pool, and using a mutex object. | Advanced |
-///
-/// @section SeeSection See also
-/// Other Resources
-/// * @ref CorelibSection

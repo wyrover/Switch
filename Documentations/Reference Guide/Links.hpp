@@ -1,4 +1,4 @@
-/// @page LinksPage Links
+/// @page LinksPage External Links
 /// Follow these links for more information about C++ and Framework:
 ///
 /// * <b>Bjarne Stroustrup</b>

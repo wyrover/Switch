@@ -1,4 +1,4 @@
-// Mediator pattern -- Behavorial example
+// Mediator pattern -- Behavioral example
 
 #include <Pcf/Pcf>
 
@@ -79,7 +79,7 @@ namespace DesignPatterns {
 
     };
     
-    /// MainApp startup class for Behavorial
+    /// MainApp startup class for Behavioral
     /// Mediator Design Pattern.
     class MainApp {
     public:

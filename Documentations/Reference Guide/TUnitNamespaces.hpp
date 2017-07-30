@@ -9,7 +9,3 @@
 /// |-----------|------------|
 /// | Pcf | The Pcf library contains all fundamental classes to access Hardware, Os, System, and more. |
 /// | Pcf::TUnit | The Pcf::TUnit namespace contains a unit test framework abstraction. |
-///
-/// @section SeeSection See also
-/// Other Resources
-/// * @ref TUnitlibSection

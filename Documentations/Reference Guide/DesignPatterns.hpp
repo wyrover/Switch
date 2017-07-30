@@ -1,4 +1,4 @@
-/// @page DesignPatternsPage Design Patterns
+/// @page CommonDesignPatternsPage Common Design Patterns
 ///
 /// Design patterns are solutions to software design problems you find again and again in real-world application development. Patterns are about reusable designs and interactions of objects.
 ///
@@ -40,4 +40,4 @@
 ///
 /// @section SeeSection See also
 /// Other Resources
-/// * @ref CorelibSection
+/// * @ref FrameworkDesignGuidelinesPage

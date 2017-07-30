@@ -11,12 +11,9 @@
 ///  * @ref DesigningForExtensibilityPage Discusses extensibility mechanisms such as subclassing, using events, virtual members, and callbacks, and explains how to choose the mechanisms that best meet your framework's requirements.
 ///  * @ref DesignGuidelinesForExceptionsPage Describes design guidelines for designing, throwing, and catching exceptions.
 ///  * @ref UsageGuidelinesPage Describes guidelines for using common types such as arrays, attributes, and collections, supporting serialization, and overloading equality operators.
+///  * @ref CommonDesignPatternsPage are solutions to software design problems you find again and again in real-world application development. Patterns are about reusable designs and interactions of objects.
 ///
 /// @section ReferenceSection Reference
 /// This Guideline is based on Microsoft .Net Framework Design Guidelines.
 ///
 /// http://msdn.microsoft.com/en-us/library/ms229042.aspx
-///
-/// @section SeeSection See also
-/// Other Resources
-/// * @ref CorelibSection

@@ -1,4 +1,4 @@
-// Memento pattern -- Behavorial example
+// Memento pattern -- Behavioral example
 
 #include <Pcf/Pcf>
 
@@ -65,7 +65,7 @@ namespace DesignPatterns {
       DesignPatterns::Behavioral::Memento memento;
     };
 
-    /// MainApp startup class for Behavorial
+    /// MainApp startup class for Behavioral
     // Memento Design Pattern.
     class MainApp {
     public:
