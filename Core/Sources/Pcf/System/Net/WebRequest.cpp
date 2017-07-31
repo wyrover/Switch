@@ -61,6 +61,9 @@ refptr<WebRequest> WebRequest::Create(const Uri& requestUriString) {
   if (requestUriString.Scheme == Uri::UriSchemeHttp)
     return new HttpWebRequest(requestUriString);
   
+  if (requestUriString.Scheme == Uri::UriSchemeHttps)
+    return new HttpWebRequest(requestUriString);
+  
   throw NotSupportedException(pcf_current_information);
 }
 
