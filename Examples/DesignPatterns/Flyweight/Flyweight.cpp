@@ -31,7 +31,6 @@ namespace DesignPatterns {
         flyweights.Add("Z", pcf_new<ConcreteFlyweight>());
       }
       
-    public:
       refptr<Flyweight> GetFlyweight(const string& key) const {return flyweights[key];}
 
     private:

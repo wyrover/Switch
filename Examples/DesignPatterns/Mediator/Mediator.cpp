@@ -79,8 +79,8 @@ namespace DesignPatterns {
 
     };
     
-    /// MainApp startup class for Behavioral
-    /// Mediator Design Pattern.
+    // MainApp startup class for Behavioral
+    // Mediator Design Pattern.
     class MainApp {
     public:
       /// Entry point into console application.

@@ -101,8 +101,8 @@ namespace DesignPatterns {
       return this->current >= this->aggregate.Count;
     }
 
-    /// MainApp startup class for Behavioral
-    /// Iterator Design Pattern.
+    // MainApp startup class for Behavioral
+    // Iterator Design Pattern.
     class MainApp {
     public:
       // Entry point into console application.

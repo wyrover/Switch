@@ -66,7 +66,7 @@ namespace DesignPatterns {
       string name;
     };
     
-    /// MainApp startup class for Behavioral
+    // MainApp startup class for Behavioral
     // Observer Design Pattern.
     class MainApp {
     public:

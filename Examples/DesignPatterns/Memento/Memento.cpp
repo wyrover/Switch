@@ -65,7 +65,7 @@ namespace DesignPatterns {
       DesignPatterns::Behavioral::Memento memento;
     };
 
-    /// MainApp startup class for Behavioral
+    // MainApp startup class for Behavioral
     // Memento Design Pattern.
     class MainApp {
     public:
