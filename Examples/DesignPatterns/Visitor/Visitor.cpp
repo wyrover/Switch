@@ -60,7 +60,7 @@ namespace DesignPatterns {
       }
     };
     
-    /// A 'ConcreteVisitor' class
+    // A 'ConcreteVisitor' class
     class ConcreteVisitor2 : public Visitor {
     public:
       void VisitConcreteElementA(const ConcreteElementA& concreteElementA) override {
