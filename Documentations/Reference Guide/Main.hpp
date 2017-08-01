@@ -1,21 +1,5 @@
 /// @mainpage Portable C++ Framework - Reference Guide Documentation
 ///
-/// <table>
-///   <tr>
-///     <td>@ref PcfFrameworkNamespacesPage</td>
-///     <td>@ref TypesPage</td>
-///     <td>@ref ArticlesAndOverviewsPage</td>
-///     <td>@ref TutorialsPage</td>
-///     <td>@ref ExamplesPage</td>
-///     <td>@ref FrameworkDesignGuidelinesPage</td>
-///     <td>@ref ReleaseNotesPage</td>
-///     <td>@ref PortabilityPage</td>
-///     <td>@ref ExternalProductsandLibrariesPage</td>
-///     <td>@ref LinksPage</td>
-///     <td>@ref LicensePage</td>
-///   </tr>
-/// </table>
-///
 /// @section ThePcfLibrariesAreSection The Pcf Libraries are...
 ///   * a collection of C++ classes libraries, similar to the .NET Framework;
 ///   * written in efficient, modern C++14;
@@ -43,4 +27,4 @@
 ///  * Strong focus on tests (automated unit tests with high coverage)
 ///  * Build on top of solid foundations – use existing proven C libraries (e.g. libcurl, icu, zlib, SQLite) where it makes sense
 ///
-/// For more information see https:yfiumefreddo.wixsite.com/pcfpro
+/// For more information see https://yfiumefreddo.wixsite.com/pcfpro
