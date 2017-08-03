@@ -98,7 +98,7 @@ namespace Pcf {
   
   template<typename TSource>
   auto orderby(System::Func<const TSource&, TSource> keySelector) {
-    return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->template OrderBy(keySelector);
+    return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->OrderBy(keySelector);
   }
   
   template<__order__ order, typename TSource, typename TKey>
@@ -122,12 +122,12 @@ namespace Pcf {
   
   template<typename TSource>
   auto select(System::Func<const TSource&, TSource> selector) {
-    return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->template Select(selector);
+    return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->Select(selector);
   }
   
   template<typename TSource>
   auto where(System::Func<const TSource&, bool> predicate) {
-    return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->template Where(predicate);
+    return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->Where(predicate);
   }
   
   template<typename TSource>
