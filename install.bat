@@ -1,6 +1,6 @@
 @echo off
-echo "Install Pcf libraries version 0.2.1, copyright GAMMA Soft, 2017"
-echo ""
+echo Install Pcf libraries version 0.2.1, copyright GAMMA Soft, 2017
+echo.
 
 @echo off
 if "%1" == "" (
@@ -10,7 +10,7 @@ if "%1" == "" (
 ) else if "%1" == "VS2015" (
   call install\install_windows_visual_studio_2015.bat 
 ) else (
-  echo "  usage Install [VS2017 | VS2015]
-  echo "      VS2017 : Visual Studio 2017 (default)"
-  echo "      VS2015 : Visual Studio 2015"
+  echo   usage Install [VS2017 ^| VS2015]
+  echo       VS2017 : Visual Studio 2017 (default)
+  echo       VS2015 : Visual Studio 2015
 ) 
