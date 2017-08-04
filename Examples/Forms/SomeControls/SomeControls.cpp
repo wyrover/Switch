@@ -17,7 +17,7 @@ namespace SomeControls {
       this->button.Text = "Button";
       this->button.Location = Point(10, 10);
       
-      this->label.Text = u8"こんにちは世界！";
+      this->label.Text = "こんにちは世界！";
       this->label.Location = Point(100, 13);
       this->label.Width = 200;
       
