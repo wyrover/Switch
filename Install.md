@@ -55,7 +55,7 @@ Windows 10 or later
 
   1. Install Microsoft Visual Studio 2017 Community
 
-     In order to build Pcf, you first need download and install Microsoft Visual Studio 2017 community from https://www.microsoft.com/en-us/download/details.aspx?id=48146.
+     In order to build Pcf, you first need download and install Microsoft Visual Studio 2017 community from https://www.visualstudio.com.
 
   2. Install CMake
 
