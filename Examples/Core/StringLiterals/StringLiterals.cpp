@@ -1,7 +1,6 @@
 #include <Pcf/Pcf>
 
 using namespace System;
-using namespace::std::string_literals;
 
 namespace Examples {
   class Program : public object {
@@ -29,26 +28,12 @@ namespace Examples {
       Console::WriteLine(uR"("こんに \ ちは世界！")");
       Console::WriteLine(UR"("!مرحبا \ بالعالم 🐨")");
       Console::WriteLine();
-      Console::WriteLine("Combining string literals with standard s suffix");
-      Console::WriteLine("Hello, World!"s);
-      Console::WriteLine(u8"Привет мир! 🐨"s);
-      Console::WriteLine(L"!שלום עולם"s);
-      Console::WriteLine(u"こんにちは世界！"s);
-      Console::WriteLine(U"!مرحبا بالعالم 🐨"s);
-      Console::WriteLine();
       Console::WriteLine("Combining string literals with Pcf _s suffix");
       Console::WriteLine("Hello, World!"_s);
       Console::WriteLine(u8"Привет мир! 🐨"_s);
       Console::WriteLine(L"!שלום עולם"_s);
       Console::WriteLine(u"こんにちは世界！"_s);
       Console::WriteLine(U"!مرحبا بالعالم 🐨"_s);
-      Console::WriteLine();
-      Console::WriteLine("Combining raw string literals with standard s suffix");
-      Console::WriteLine(R"("Hello \ World!")"s);
-      Console::WriteLine(u8R"("Привет \ мир! 🐨")"s);
-      Console::WriteLine(LR"("!שלום \ עולם")"s);
-      Console::WriteLine(uR"("こんに \ ちは世界!")"s);
-      Console::WriteLine(UR"("!مرحبا \ بالعالم 🐨")"s);
       Console::WriteLine();
       Console::WriteLine("Combining raw string literals with Pcf _s suffix");
       Console::WriteLine(R"("Hello \ World!")"_s);
