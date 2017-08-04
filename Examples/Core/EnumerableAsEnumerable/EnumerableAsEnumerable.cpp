@@ -10,11 +10,11 @@ namespace Examples {
   class Clump : public List<T> {
   public:
     Clump() {}
-    Clump(InitializerList<string> il) : List<T>(il) {}
+    Clump(InitializerList<T> il) : List<T>(il) {}
     // Custom implementation of Where().
     refptr<IEnumerable<T>> Where(Func<T, bool> predicate) {
       Console::WriteLine("In Clump's implementation of Where().");
-      return Enumerable::Where<string>(*this, predicate);
+      return Linq::Enumerable::Where<T>(*this, predicate);
     }
   };
   
