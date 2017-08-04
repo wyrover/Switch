@@ -1,7 +1,3 @@
-@echo off
-echo "Install Pcf libraries version 0.2.0, copyright GAMMA Soft, 2017"
-echo ""
-
 del /q /s Build
 mkdir Build\Examples
 mkdir Build\ThirdParties

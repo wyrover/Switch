@@ -1,3 +1,6 @@
+echo "Install Pcf libraries version 0.2.1, copyright GAMMA Soft, 2017"
+echo ""
+
 OSTYPE=`uname -a`
 if [[ "$OSTYPE" != *"Darwin"* ]]; then
   OSTYPE=`lsb_release -si`

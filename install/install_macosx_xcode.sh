@@ -1,6 +1,3 @@
-echo "Install Pcf libraries version 0.2.0, copyright GAMMA Soft, 2017"
-echo ""
-
 rm  -r Build
 sudo mkdir /usr/local/cmake
 sudo chmod 777 /usr/local/cmake
