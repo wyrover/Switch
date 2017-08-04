@@ -27,7 +27,7 @@ namespace Pcf {
   /// @ingroup Pcf
   template<typename TSource>
   auto agregate(const System::Func<const TSource&, const TSource&, TSource>& func) {
-    return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->template Agregate(func);
+    return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->Agregate(func);
   }
   
   /// @brief Applies an accumulator function over a sequence. The specified seed value is used as the initial accumulator value.
@@ -40,7 +40,7 @@ namespace Pcf {
   /// @ingroup Pcf
   template<typename TSource, typename TAccumulate>
   auto agregate(const TAccumulate& seed, const System::Func<const TAccumulate&, const TSource&, TAccumulate>& func)  {
-    return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->template Agregate(seed, func);
+    return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->Agregate(seed, func);
   }
   
   /// @brief Applies an accumulator function over a sequence. The specified seed value is used as the initial accumulator value, and the specified function is used to select the result value.
@@ -56,17 +56,17 @@ namespace Pcf {
   /// @ingroup Pcf
   template<typename TSource, typename TAccumulate, typename TResult>
   auto agregate(const TAccumulate& seed, const System::Func<const TAccumulate&, const TSource&, TAccumulate>& func, const System::Func<const TAccumulate&, TResult>& resultSelector)  {
-    return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->template Agregate(seed, func, resultSelector);
+    return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->Agregate(seed, func, resultSelector);
   }
   
   template<typename TSource>
   auto concat(const System::Collections::Generic::IEnumerable<TSource>& second) {
-    return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->template Concat(second);
+    return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->Concat(second);
   }
   
   template<typename TSource, int32 len>
   auto concat(const TSource (&second)[len]) {
-    return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->template Concat(second);
+    return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->Concat(second);
   }
   
   template<typename TSource>
@@ -83,17 +83,17 @@ namespace Pcf {
   
   template<typename TSource>
   auto intersect(const System::Collections::Generic::IEnumerable<TSource>& second) {
-    return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->template Intersect(second);
+    return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->Intersect(second);
   }
   
   template<typename TSource, int32 len>
   auto intersect(const TSource (&second)[len]) {
-    return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->template Intersect(second);
+    return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->Intersect(second);
   }
   
   template<typename TSource, typename TKey>
   auto orderby(System::Func<const TSource&, TKey> keySelector) {
-    return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->template OrderBy(keySelector);
+    return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->OrderBy(keySelector);
   }
   
   template<typename TSource>
@@ -104,20 +104,20 @@ namespace Pcf {
   template<__order__ order, typename TSource, typename TKey>
   auto orderby(System::Func<const TSource&, TKey> keySelector) {
     if (order == descending)
-      return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->template OrderByDescending(keySelector);
-    return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->template OrderBy(keySelector);
+      return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->OrderByDescending(keySelector);
+    return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->OrderBy(keySelector);
   }
   
   template<__order__ order, typename TSource>
   auto orderby(System::Func<const TSource&, TSource> keySelector) {
     if (order == descending)
-      return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->template OrderByDescending(keySelector);
-    return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->template OrderBy(keySelector);
+      return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->OrderByDescending(keySelector);
+    return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->OrderBy(keySelector);
   }
   
   template<typename TSource, typename TResult>
   auto select(System::Func<const TSource&, TResult> selector) {
-    return as<refptr<System::Linq::EnumerableCollection<TResult>>>(__enumerable__.Value())->template Select(selector);
+    return as<refptr<System::Linq::EnumerableCollection<TResult>>>(__enumerable__.Value())->Select(selector);
   }
   
   template<typename TSource>
