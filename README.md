@@ -1,4 +1,4 @@
-![GitHub Logo](Documentations/Images/Pcf-logo-190x80.png)
+![GitHub Logo](Pcf-PortableCppFramework.png)
 
 # Pcf
 ### Portable C++ Framework
