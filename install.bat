@@ -1,5 +1,5 @@
 @echo off
-echo Install Pcf libraries version 0.2.1, copyright GAMMA Soft, 2017
+echo Install Pcf libraries version 0.3.0, copyright GAMMA Soft, 2017
 echo.
 
 @echo off
