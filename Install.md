@@ -64,7 +64,7 @@ Windows 10 or later
 
   2. Install Doxygen
 
-     After CMake, to generate Pcf documentation, you need to install the latest version Doxygen from https://cmake.org/download/
+     After CMake, to generate Pcf documentation, you need to install the latest version Doxygen from http://www.stack.nl/~dimitri/doxygen/download.html
      Remarks: Verify if you can execute doxygen --version in "Developer Command Prompt for VS 2017", if it's no, add doxygen install directory to your path.
 
   3. After installing Microsoft Visual Studio, Cmake and Doxygen, do the following in "Developer Command Prompt for VS 2017" to Build and install Pcf :
@@ -98,7 +98,7 @@ Other linux Distribution
 
   3. Install Doxygen
 
-     After CMake, to generate Pcf documentation, you need to install the latest version Doxygen from https://cmake.org/download/
+     After CMake, to generate Pcf documentation, you need to install the latest version Doxygen from http://www.stack.nl/~dimitri/doxygen/download.html
      Remarks: Verify if you can execute doxygen --version in terminal.
 
   4. After installing CMAke, do the following in "Terminal" to Build and install Pcf :
