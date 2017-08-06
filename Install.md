@@ -91,7 +91,7 @@ Other linux Distribution
      In order to build Pcf, you first need download and install clang 4.0.0 or later.
      Remarks: Verify if you can execute clang --version in terminal.
 
-    2. Install CMake
+  2. Install CMake
     
      After clang, to build Pcf, you need to install the latest version cmake from https://cmake.org/download/
      Remarks: Verify if you can execute cmake --version in terminal.
@@ -101,7 +101,9 @@ Other linux Distribution
      After CMake, to generate Pcf documentation, you need to install the latest version Doxygen from http://www.stack.nl/~dimitri/doxygen/download.html
      Remarks: Verify if you can execute doxygen --version in terminal.
 
-  4. After installing CMAke, do the following in "Terminal" to Build and install Pcf :
+  4. After installing Doxygen, you need to install gtkmm 3 on your system. See https://developer.gnome.org/gtkmm-tutorial/stable/chapter-installation.html for more information.
+  
+  5. After installing gtkmm, do the following in "Terminal" to Build and install Pcf :
      Remarks, this operation depand of your hardware and can be very long
   
      ~$ cd FolderWherePcfIsDownloaded
