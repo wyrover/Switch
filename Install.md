@@ -103,7 +103,7 @@ Other linux Distribution
 
   4. After installing Doxygen, you need to install gtkmm 3 on your system. See https://developer.gnome.org/gtkmm-tutorial/stable/chapter-installation.html for more information.
   
-  4. After installing gtkmm, do the following in "Terminal" to Build and install Pcf :
+  5. After installing gtkmm, do the following in "Terminal" to Build and install Pcf :
      Remarks, this operation depand of your hardware and can be very long
   
      ~$ cd FolderWherePcfIsDownloaded
