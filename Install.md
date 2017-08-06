@@ -76,11 +76,9 @@ Windows 10 or later
   4. Enjoy and be creative with Pcf ;-)
   
   ### Remarks
-  On Windows by default the Pcf installer set cmake variable CMAKE_INSTALL_PREFIX to "C:/usr/local" for generate and Build Pcf. 
-  
-  When install is complete you can find installed Pcf files in folder "C:/usr/local".
-  
-  To build your own project using Pcf, don't miss to set cmake variable MAKE_INSTALL_PREFIX to "C:/usr/local"; otherwise cmake don't find Pcf libraries and include files. See cmake documentation (http://cmake.org/documentation) for more information.
+  * Pcf installer set cmake variable CMAKE_INSTALL_PREFIX to "C:/usr/local" for generate, build and install Pcf.
+  * When install is complete you can find installed Pcf files in folder "C:/usr/local".
+  * To build your own project using Pcf, don't miss to set cmake variable MAKE_INSTALL_PREFIX to "C:/usr/local"; otherwise cmake don't find Pcf libraries and include files. See cmake documentation (http://cmake.org/documentation) for more information.
   
 ______________________________________________________________________________________________________________
 
