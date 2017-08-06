@@ -146,7 +146,7 @@ target_link_libraries(HelloWorldTest Pcf.TUnit.Main)
 
 For more Examples see [Examples](Examples)
 
-# Download Pcf 0.2.0
+# Download Pcf 0.2.1
 You can download latest stable version on SourceForge
 
 [![Download Portable C++ Framework](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/pcfpro/files/latest/download)
