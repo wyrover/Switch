@@ -2,7 +2,6 @@
 echo Install Pcf libraries version 0.3.0, copyright GAMMA Soft, 2017
 echo.
 
-@echo off
 if "%1" == "" (
   call install\install_windows_visual_studio_2017.bat 
 ) else if "%1" == "/VS:2017" (
