@@ -70,9 +70,9 @@ namespace Pcf {
           jpeg_create_decompress(&dinfo);
           reader.Read(streamData, 0, (int32)reader.BaseStream().Length());
           jpeg_mem_src(&dinfo, (byte*)streamData.Data(), (int32)reader.BaseStream().Length());
-          jpeg_read_header(&dinfo, 1);
+          jpeg_read_header(&dinfo, TRUE);
 
-          dinfo.quantize_colors = false;
+          dinfo.quantize_colors = FALSE;
           dinfo.out_color_space = JCS_RGB;
           dinfo.out_color_components = 3;
           dinfo.output_components = 3;
