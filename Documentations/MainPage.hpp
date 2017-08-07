@@ -155,4 +155,4 @@
 /// Before running examples you must install Pcf. To install it read See https://github.com/yfiumefreddo/Pcf/blob/master/Install.md file.
 ///
 /// @section PcfWebSizeSEction Pcf Web Site
-/// For more information see https://yfiumefreddo.wixsite.com/pcfpro
+/// For more information see https://pcfpro.wixsite.com/pcfpro
