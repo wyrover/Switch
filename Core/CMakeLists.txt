@@ -613,15 +613,9 @@ target_include_directories(Pcf.Core PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOU
 target_link_libraries(Pcf.Core call_stack ${CURL_LIBRARIES} easywsclient Rs232 ZLIB::ZLIB Threads::Threads ${STANDARD_CORE_LINK_LIBRARIES})
 set_target_properties(Pcf.Core PROPERTIES FOLDER Pcf/Core)
 
-if (BUILD_CORE_INTEGRATION_TESTS)
-  add_subdirectory("IntegrationTests")
-endif ()
-if (BUILD_CORE_MANUAL_TESTS)
-  add_subdirectory("ManualTests")
-endif ()
-if (BUILD_CORE_UNIT_TESTS)
-  add_subdirectory("UnitTests")
-endif ()
+#add_subdirectory("IntegrationTests")
+add_subdirectory("ManualTests")
+add_subdirectory("UnitTests")
 
 install(TARGETS Pcf.Core EXPORT Pcf DESTINATION lib)
 install(DIRECTORY "Includes/Pcf/." DESTINATION include/Pcf)

@@ -2,13 +2,10 @@ cmake_minimum_required(VERSION 3.2)
 
 project(Pcf VERSION 0.3.0)
 
-option(BUILD_CORE_INTEGRATION_TESTS "Build Core integration tests" OFF)
-option(BUILD_CORE_MANUAL_TESTS "Build Core manual tests" OFF)
-option(BUILD_CORE_UNIT_TESTS "Build Core unit tests" OFF)
-option(BUILD_DRAWING_UNIT_TESTS "Build Drawing unit tests" OFF)
-option(BUILD_FORMS_MANUAL_TESTS "Build Forms manual tests" OFF)
-option(BUILD_FORMS_UNIT_TESTS "Build Forms unit tests" OFF)
-option(BUILD_TUNIT_UNIT_TESTS "Build TUnit unit tests" OFF)
+option(BUILD_CORE "Build Pcf.Core library" ON)
+option(BUILD_DRAWING "Build Pcf.Drawing library" ON)
+option(BUILD_FORMS "Build Pcf.Forms library" ON)
+option(BUILD_TUNIT "Build Pcf.TUnit and Pcf.TUnit.Main libraries" ON)
 
 enable_testing()
 
@@ -34,11 +31,23 @@ endif ()
 
 include(PcfDependencies.cmake)
 
-add_subdirectory("Core")
-add_subdirectory("Drawing")
-add_subdirectory("Forms")
-add_subdirectory("TUnit")
-add_subdirectory("TUnit.Main")
+if (BUILD_CORE)
+  add_subdirectory("Core")
+endif()
+
+if (BUILD_DRAWING)
+  add_subdirectory("Drawing")
+endif()
+
+if (BUILD_FORMS)
+  add_subdirectory("Forms")
+endif()
+
+if (BUILD_TUNIT)
+  add_subdirectory("TUnit")
+  add_subdirectory("TUnit.Main")
+endif()
+
 add_subdirectory("Pcf")
 
 install(EXPORT Pcf DESTINATION cmake)

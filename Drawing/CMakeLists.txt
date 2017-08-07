@@ -96,9 +96,7 @@ target_include_directories(Pcf.Drawing PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_
 target_link_libraries(Pcf.Drawing Pcf.Core ${JPEG_LIBRARIES} ${PNG_LIBRARY} ${STANDARD_GRAPHIC_LINK_LIBRARIES} ${COCOA_FRAMEWORK})
 set_target_properties(Pcf.Drawing PROPERTIES FOLDER Pcf/Drawing)
 
-if (BUILD_DRAWING_UNIT_TESTS)
-  add_subdirectory("UnitTests")
-endif ()
+add_subdirectory("UnitTests")
 
 install(TARGETS Pcf.Drawing EXPORT Pcf DESTINATION lib)
 install(DIRECTORY "Includes/Pcf/." DESTINATION include/Pcf)
