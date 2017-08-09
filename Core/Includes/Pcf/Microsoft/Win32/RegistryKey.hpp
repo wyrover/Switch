@@ -212,7 +212,7 @@ namespace Pcf {
         /// @brief Retrieves a subkey as read-only.
         /// @param name The name || path of the subkey to open as read-only.
         /// @param writable Set to true if you need write access to the key.
-        RegistryKey OpenSubKey(const System::String& name, System::Boolean writable) { return OpenSubKey(name, RegistryKeyPermissionCheck(writable ? RegistryKeyPermissionCheck::ReadWriteSubTree : RegistryKeyPermissionCheck::ReadSubTree)); }
+        RegistryKey OpenSubKey(const System::String& name, System::Boolean writable) { return OpenSubKey(name, writable ? RegistryKeyPermissionCheck::ReadWriteSubTree : RegistryKeyPermissionCheck::ReadSubTree); }
 
         /// @brief Retrieves a subkey as read-only.
         /// @param name The name || path of the subkey to open as read-only.
@@ -224,6 +224,8 @@ namespace Pcf {
         /// @param value The data to be stored.
         template<typename T>
         void SetValue(const System::String& name, T value) {
+          if (this->permission != RegistryKeyPermissionCheck::ReadWriteSubTree)
+            throw System::UnauthorizedAccessException(pcf_current_information);
           if (is<System::Int32>(Pcf::Box(value)))
             this->values[name.ToLower()] = RegistryKeyValue(name, Pcf::Box(value), Pcf::Microsoft::Win32::RegistryValueKind::DWord);
           else if (is<System::Array<System::String>>(Pcf::Box(value)))
@@ -241,6 +243,8 @@ namespace Pcf {
         /// @param valueKind The registry data type to use when storing the data.
         template<typename T>
         void SetValue(const System::String& name, T value, Pcf::Microsoft::Win32::RegistryValueKind valueKind) {
+          if (this->permission != RegistryKeyPermissionCheck::ReadWriteSubTree)
+            throw System::UnauthorizedAccessException(pcf_current_information);
           switch (valueKind) {
             case RegistryValueKind::Binary: this->values[name.ToLower()] = RegistryKeyValue(name, Pcf::Box(value), valueKind); break;
             case RegistryValueKind::MultiString: this->values[name.ToLower()] = RegistryKeyValue(name, Pcf::Box(value), valueKind); break;
