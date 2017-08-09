@@ -1,5 +1,7 @@
 #include <Pcf/Microsoft/Win32/Registry.hpp>
 #include <Pcf/System/Console.hpp>
+#include <Pcf/System/Environment.hpp>
+#include <Pcf/System/String.hpp>
 #include <Pcf/Startup.hpp>
 
 using namespace System;
