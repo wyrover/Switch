@@ -32,11 +32,7 @@ namespace {
       tcsetattr(0, TCSANOW, &this->newSettings);
     }
     
-    ~Terminal() {
-      if (IsAnsiSupported())
-        printf("%s", "\x1b[0m");
-      tcsetattr(0, TCSANOW, &this->initialSettings);
-    }
+    ~Terminal() {tcsetattr(0, TCSANOW, &this->initialSettings);}
     
     int32 Getch() {
       sbyte character = this->peekCharacter;
