@@ -188,13 +188,11 @@ void RegistryKey::Load() {
     __OS::CoreApi::Registry::GetValue(this->handle->Handle(), keyName, kind, data);
 
     switch (kind) {
-    case RegistryValueKind::String: this->SetValue(keyName, BytesToString(data), kind); break;
-    case RegistryValueKind::ExpandString: this->SetValue(keyName, BytesToString(data), kind); break;
-    case RegistryValueKind::Binary: this->SetValue(keyName, BytesToBinary(data), kind); break;
-    case RegistryValueKind::DWord: this->SetValue(keyName, BytesToDWord(data), kind); break;
-    case RegistryValueKind::MultiString: this->SetValue(keyName, BytesToMultiString(data), kind); break;
-    case RegistryValueKind::QWord: this->SetValue(keyName, BytesToQWord(data), kind); break;
-    default: this->SetValue(keyName, BytesToString(data), kind); break;
+    case RegistryValueKind::Binary: this->values[keyName.ToLower()] = RegistryKeyValue(keyName, BytesToBinary(data), kind); break;
+    case RegistryValueKind::MultiString: this->values[keyName.ToLower()] = RegistryKeyValue(keyName, BytesToMultiString(data), kind); break;
+    case RegistryValueKind::DWord: this->values[keyName.ToLower()] = RegistryKeyValue(keyName, BytesToDWord(data), kind); break;
+    case RegistryValueKind::QWord: this->values[keyName.ToLower()] = RegistryKeyValue(keyName, BytesToQWord(data), kind); break;
+    default: this->values[keyName.ToLower()] = RegistryKeyValue(keyName, BytesToString(data), kind); break;
     }
   }
 }

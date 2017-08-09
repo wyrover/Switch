@@ -18,5 +18,6 @@
 #undef None
 #undef RemoveDirectory
 #undef SetCurrentDirectory
+#undef SetEnvironmentVariable
 #undef SetVolumeLabel
 #undef Yield
