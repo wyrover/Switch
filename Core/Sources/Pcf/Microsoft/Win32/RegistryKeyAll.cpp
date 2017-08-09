@@ -44,10 +44,10 @@ namespace {
   }
 }
 
-RegistryKey::RegistryHandle::RegistryHandle(void* key, const System::String& name) : handle(this) {
+RegistryKey::RegistryHandle::RegistryHandle(intptr key, const System::String& name) {
 }
 
-RegistryKey::RegistryHandle::RegistryHandle(RegistryHive rhive) : handle(this) {
+RegistryKey::RegistryHandle::RegistryHandle(RegistryHive rhive) {
 }
 
 RegistryKey::RegistryHandle::~RegistryHandle() {

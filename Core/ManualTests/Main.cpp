@@ -30,7 +30,8 @@ namespace Examples {
       Console::WriteLine("Key5 = {0}", string::Join(", ", as<Array<string>>(key2.GetValue("Key5"))));
       Console::WriteLine("Key6 = {0}", Int64::Parse(key2.GetValue("Key6").ToString()));
       Console::WriteLine("Key7 = {0}", key2.GetValue("Key7"));
-      Console::ReadKey(true);
+      
+      Registry::CurrentUser().DeleteSubKeyTree("UnitTests");
     }
   };
 }

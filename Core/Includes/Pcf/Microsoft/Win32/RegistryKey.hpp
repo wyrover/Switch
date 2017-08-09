@@ -47,7 +47,7 @@ namespace Pcf {
 
         /// @brief Gets a SafeRegistryHandle object that represents the registry key that the current RegistryKey object encapsulates.
         /// @return intptr The handle to the registry key.
-        const intptr Handle() const { return this->handle->Handle(); }
+        intptr Handle() const { return this->handle->Handle(); }
 
         /// @brief Retrieves the name of the key.
         /// @return System::String The absolute (qualified) name of the key.
@@ -408,7 +408,7 @@ namespace Pcf {
           RegistryHandle(RegistryHive rhive);
           ~RegistryHandle();
 
-          const intptr Handle() const { return this->handle; }
+          intptr Handle() const { return this->handle; }
           void Handle(intptr handle) { this->handle = handle; }
 
           bool Equals(const RegistryHandle& value) const { return this->handle == value.handle; }

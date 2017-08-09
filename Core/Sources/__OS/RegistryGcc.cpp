@@ -16,7 +16,7 @@ int32 __OS::CoreApi::Registry::DeleteValue(intptr key, const string& subkeyName)
   return 0;
 }
 
-int32 __OS::CoreApi::Registry::SetValue(intptr key, const string& keyName, int32 type, const Array<byte>& data) {
+int32 __OS::CoreApi::Registry::SetValue(intptr key, const string& keyName, Microsoft::Win32::RegistryValueKind type, const byte* data, int32 length) {
   return 0;
 }
 
@@ -36,19 +36,19 @@ int32 __OS::CoreApi::Registry::CreateSubKey(intptr rootKey, const string& subKey
   return 0;
 }
 
-int32  __OS::CoreApi::Registry::EnumKey(intptr hkey, int32 index, string& subkeyname) {
+int32  __OS::CoreApi::Registry::EnumKey(intptr key, int32 index, string& subkeyname) {
   return 0;
 }
 
-int32 __OS::CoreApi::Registry::QueryInfoKey(intptr hkey,int32& subKey ,int32& value) {
+int32 __OS::CoreApi::Registry::QueryInfoKey(intptr key,int32& subKey ,int32& value) {
   return 0;
 }
 
-int32  __OS::CoreApi::Registry::DeleteSubKey(intptr hKey,const string& subkeyName) {
+int32  __OS::CoreApi::Registry::DeleteSubKey(intptr Key,const string& subkeyName) {
   return 0;
 }
 
-int32 __OS::CoreApi::Registry::GetValue(intptr hkey, const string& subKey, int32& type, System::Array<byte>& data) {
+int32 __OS::CoreApi::Registry::GetValue(intptr key, const string& subKey, Microsoft::Win32::RegistryValueKind& type, System::Array<byte>& data) {
   return 0;
 }
 
