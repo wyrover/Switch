@@ -4,67 +4,55 @@
 
 #include "CoreApi.hpp"
 
-const char *__OS::CoreApi::Registry::GetDefaultString() {
+string __OS::CoreApi::Registry::GetDefaultString() {
   return "Default";
 }
 
-int32 __OS::CoreApi::Registry::CloseKey(void* hKey) {
+int32 __OS::CoreApi::Registry::CloseKey(intptr key) {
   return 0;
 }
 
-int32 __OS::CoreApi::Registry::DeleteValue(void* hKey,const char* subkeyName) {
+int32 __OS::CoreApi::Registry::DeleteValue(intptr key, const string& subkeyName) {
   return 0;
 }
 
-int32 __OS::CoreApi::Registry::SetValue(void* hKey, const char* keyName, int32 type, byte* bData, int32 cbData) {
+int32 __OS::CoreApi::Registry::SetValue(intptr key, const string& keyName, int32 type, const Array<byte>& data) {
   return 0;
 }
 
-int32 __OS::CoreApi::Registry::Flush(void* hKey) {
+int32 __OS::CoreApi::Registry::Flush(intptr key) {
   return 0;
 }
 
-int32 __OS::CoreApi::Registry::DeleteTree(void *hKey,const char* subkeyName) {
+int32 __OS::CoreApi::Registry::DeleteTree(intptr key, const string& subkeyName) {
   return 0;
 }
 
-int32 __OS::CoreApi::Registry::OpenSubKey(const void* hrootKey, const char* subKey, void** hkey) {
+int32 __OS::CoreApi::Registry::OpenSubKey(intptr rootKey, const string& subKey, intptr& key) {
   return 0;
 }
 
-int32 __OS::CoreApi::Registry::CreateSubKey(const char* rootKeystr, const char* subKey, void** hkey) {
+int32 __OS::CoreApi::Registry::CreateSubKey(intptr rootKey, const string& subKey, intptr& key) {
   return 0;
 }
 
-int32 __OS::CoreApi::Registry::CreateSubKey(const void* hrootKey, const char* subKey, void** hkey) {
+int32  __OS::CoreApi::Registry::EnumKey(intptr hkey, int32 index, string& subkeyname) {
   return 0;
 }
 
-int32  __OS::CoreApi::Registry::EnumValues(void* hkey, int32 dwIndex,char *avaluenamey,char* val, int32 &pcf_typeofvalue,int32& sizekey,int32& sizeval) {
+int32 __OS::CoreApi::Registry::QueryInfoKey(intptr hkey,int32& subKey ,int32& value) {
   return 0;
 }
 
-int32  __OS::CoreApi::Registry::EnumKey(void* hkey, int32 dwIndex,char *subkeyname,int32& sizesubkey) {
+int32  __OS::CoreApi::Registry::DeleteSubKey(intptr hKey,const string& subkeyName) {
   return 0;
 }
 
-int32 __OS::CoreApi::Registry::QueryInfoKey(void* hkey,int32& subKey ,int32& value) {
+int32 __OS::CoreApi::Registry::GetValue(intptr hkey, const string& subKey, int32& type, System::Array<byte>& data) {
   return 0;
 }
 
-int32 __OS::CoreApi::Registry::ExpandString(const char *strtoexpand,char *data_expanded,int32 cbData) {
-  return 0;
-}
-
-int32  __OS::CoreApi::Registry::DeleteSubKey(void* hKey,const char* subkeyName) {
-  return 0;
-}
-
-int32 __OS::CoreApi::Registry::GetValue(void* hkey, const char* subKey, int32 &type, void* data, int32* cbData) {
-  return 0;
-}
-
-int32  __OS::CoreApi::Registry::GetHandleBaseKey (int32 reghive,void** hkey) {
+int32  __OS::CoreApi::Registry::GetHandleBaseKey (Microsoft::Win32::RegistryHive reghive, intptr& key) {
   return 0;
 }
 

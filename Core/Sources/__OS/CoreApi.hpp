@@ -1,5 +1,8 @@
 #pragma once
 
+#include "../../Includes/Pcf/Microsoft/Win32/RegistryHive.hpp"
+#include "../../Includes/Pcf/Microsoft/Win32/RegistryKey.hpp"
+#include "../../Includes/Pcf/Microsoft/Win32/RegistryValueKind.hpp"
 #include "../../Includes/Pcf/System/Collections/Generic/SortedDictionary.hpp"
 #include "../../Includes/Pcf/System/Diagnostics/ProcessStartInfo.hpp"
 #include "../../Includes/Pcf/System/IO/DriveType.hpp"
@@ -170,24 +173,22 @@ namespace __OS {
     
     class Registry pcf_static {
     public:
-      static int32 CloseKey(void* hKey);
-      static int32 CreateSubKey(const char* rootKey, const char* subKey, void** hkey);
-      static int32 CreateSubKey(const void* hrootKey, const char* subKey, void** hkey);
-      static int32 OpenSubKey(const void* hrootKey, const char* subKey, void** hkey);
-      static int32 GetValue(void* hkey, const char* subKey, int32 &type, void* data, int32* cbData);
-      static int32 SetValue(void* hKey, const char* keyName, int32 type, byte* data, int32 cbData);
-      static int32 Flush(void* hKey);
-      static int32 DeleteTree(void* hKey, const char* subkeyName);
-      static int32 DeleteSubKey(void* hKey, const char* subkeyName);
-      static int32 DeleteValue(void* hKey, const char* subkeyName);
-      static int32 ExpandString(const char* strtoexpand, char* result, int32 cbData);
-      static int32 EnumValues(void* hkey, int32 dwIndex, char* avaluenamey, char* val, int32 &pcf_typeofvalue, int32& sizekey, int32& sizeval);
-      static int32 EnumKey(void* hKey, int32 dwIndex, char* subkeyname, int32& sizesubkey);
-      static int32 NumberOfSubKey(void* hkey);
-      static int32 NumberOfValue(void* hkey);
-      static int32 QueryInfoKey(void* hkey, int32& subKey, int32& value);
-      static int32 GetHandleBaseKey(int32 reghive, void** hkey);
-      static const char* GetDefaultString();
+      static int32 CloseKey(intptr key);
+      static int32 CreateSubKey(intptr rootKey, const string& subKey, intptr& key);
+      static int32 DeleteSubKey(intptr key, const string& subkeyName);
+      static int32 DeleteTree(intptr key, const string& subkeyName);
+      static int32 DeleteValue(intptr key, const string& subkeyName);
+      static int32 EnumKey(intptr hKey, int32 index, string& subkeyname);
+      static int32 EnumValues(intptr key, int32 index, string& keyName, Microsoft::Win32::RegistryValueKind& kind);
+      static int32 Flush(intptr hKey);
+      static string GetDefaultString();
+      static int32 GetHandleBaseKey(Microsoft::Win32::RegistryHive rhive, intptr& key);
+      static int32 GetValue(intptr key, const string& subKey, Microsoft::Win32::RegistryValueKind& type, System::Array<byte>& data);
+      static int32 NumberOfSubKey(intptr hkey);
+      static int32 NumberOfValue(intptr hkey);
+      static int32 OpenSubKey(intptr hrootKey, const string& subKey, intptr& hkey);
+      static int32 QueryInfoKey(intptr hkey, int32& subKey, int32& value);
+      static int32 SetValue(intptr key, const string& keyName, Microsoft::Win32::RegistryValueKind type, const byte* data, int32 length);
     };
 
     class Security pcf_static {

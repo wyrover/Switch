@@ -13,7 +13,6 @@ namespace {
     EXPECT_EQ(tuple1.Item1(), 512);
     EXPECT_EQ(tuple1.ToString(), "(512)");
     EXPECT_FALSE(tuple1.Equals(tuple2));
-    EXPECT_GT(tuple1.CompareTo(tuple2), 0);
   }
   
   TEST(Tuple, 2) {

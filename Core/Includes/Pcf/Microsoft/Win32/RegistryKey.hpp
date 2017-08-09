@@ -7,7 +7,7 @@
 #include "../../System/Environment.hpp"
 #include "../../System/String.hpp"
 #include "../../System/UnauthorizedAccessException.hpp"
-#include "../../System/Collections/Generic/Dictionary.hpp"
+#include "../../System/Collections/Generic/SortedDictionary.hpp"
 #include "../../Boxing.hpp"
 #include "RegistryHive.hpp"
 #include "RegistryKeyPermissionCheck.hpp"
@@ -21,11 +21,11 @@ namespace Pcf {
       class pcf_public RegistryKey : public object {
       private:
         friend class Registry;
-        RegistryKey();
         RegistryKey(RegistryHive hkey);
 
       public:
         /// @cond
+        RegistryKey();
         RegistryKey(const RegistryKey& rk) : handle(rk.handle), name(rk.name), path(rk.path), permission(rk.permission), values(rk.values) {}
 
         RegistryKey& operator =(const RegistryKey& rk) {
@@ -46,8 +46,8 @@ namespace Pcf {
         /// @endcond
 
         /// @brief Gets a SafeRegistryHandle object that represents the registry key that the current RegistryKey object encapsulates.
-        /// @return void* The handle to the registry key.
-        const void* Handle() const { return this->handle->Handle(); }
+        /// @return intptr The handle to the registry key.
+        const intptr Handle() const { return this->handle->Handle(); }
 
         /// @brief Retrieves the name of the key.
         /// @return System::String The absolute (qualified) name of the key.
@@ -306,7 +306,14 @@ namespace Pcf {
           }
 
           const System::String& Key() const { return this->key; }
-          const object& Value() const { return this->value.ToObject(); }
+          const object& Value() const {
+            if (this->kind == RegistryValueKind::ExpandString) {
+              static string expandedValue;
+              expandedValue = System::Environment::ExpandEnvironmentVariables(as<string>(this->value)());
+              return expandedValue;
+            }
+            return this->value();
+          }
           RegistryValueKind Kind() const { return this->kind; }
 
           static RegistryKeyValue Parse(const System::String& s) {
@@ -353,6 +360,9 @@ namespace Pcf {
           }
 
         private:
+          friend class RegistryKey;
+          const object& InternalValue() const {return this->value();}
+
           static System::Array<byte> ParseBytes(const System::String& s) {
             try {
               System::Array<byte> bytes;
@@ -392,29 +402,28 @@ namespace Pcf {
 
         class RegistryHandle : public object {
         public:
-          RegistryHandle() : handle(this) {}
-          RegistryHandle(void* handle) : handle(handle) {}
-          RegistryHandle(void* key, const System::String& name);
+          RegistryHandle() : handle((intptr)this) {}
+          RegistryHandle(intptr handle) : handle(handle) {}
+          RegistryHandle(intptr key, const System::String& name);
           RegistryHandle(RegistryHive rhive);
           ~RegistryHandle();
 
-          const void* Handle() const { return this->handle; }
-          void* Handle() { return this->handle; }
-          void Handle(void* handle) { this->handle = handle; }
+          const intptr Handle() const { return this->handle; }
+          void Handle(intptr handle) { this->handle = handle; }
 
           bool Equals(const RegistryHandle& value) const { return this->handle == value.handle; }
 
           bool Equals(const object& obj) const override { return is<RegistryHandle>(obj) && Equals(static_cast<const RegistryHandle&>(obj)); }
 
         private:
-          void* handle;
+          intptr handle;
         };
 
         refptr<RegistryHandle> handle;
         System::String name;
         System::String path;
         RegistryKeyPermissionCheck permission;
-        System::Collections::Generic::Dictionary<System::String, RegistryKeyValue> values;
+        System::Collections::Generic::SortedDictionary<System::String, RegistryKeyValue> values;
       };
     }
   }

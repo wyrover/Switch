@@ -810,17 +810,17 @@ namespace Pcf {
           /// @include ListExists.cpp
           virtual int32 RemoveAll(const Predicate<const T&>& match) {
             int32 count = 0;
-            int32 index = 0;
-            for (auto& value : this->list) {
-              if (match(value)) {
-                this->RemoveAt(index);
-                count++;
+            typename std::vector<T, TAllocator>::const_iterator iterator = this->list.begin();
+            while (iterator != this->list.end())
+              if (!match(*iterator))
+                iterator++;
+              else {
+                iterator = this->list.erase(iterator);
+                count += 1;
               }
-              index++;
-            }
 
-            if (count) this->operationNumber++;
-
+            if (count)
+              this->operationNumber++;
             return count;
           }
 
