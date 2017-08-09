@@ -80,7 +80,7 @@ namespace {
 Property<ConsoleColor> Console::BackgroundColor {
   []()->ConsoleColor {return static_cast<ConsoleColor>(__OS::CoreApi::Console::GetBackgroundColor());},
   [](ConsoleColor value) {
-    __OS::CoreApi::Console::SetBackgroundColor(static_cast<int32>(value));
+    __OS::CoreApi::Console::SetBackgroundColor(value);
   }
 };
 
@@ -141,7 +141,7 @@ Property<Console::StandardErrorOutput&, ReadOnly> Console::Error {
 Property<ConsoleColor> Console::ForegroundColor {
   [] {return static_cast<ConsoleColor>(__OS::CoreApi::Console::GetForegroundColor());},
   [](ConsoleColor value) {
-    __OS::CoreApi::Console::SetForegroundColor(static_cast<int32>(value));
+    __OS::CoreApi::Console::SetForegroundColor(value);
   }
 };
 
@@ -240,8 +240,8 @@ ConsoleKeyInfo Console::ReadKey(bool intercept) {
 }
 
 void Console::ResetColor() {
-  __OS::CoreApi::Console::SetForegroundColor(static_cast<uint16>(::__foregroundColor));
-  __OS::CoreApi::Console::SetBackgroundColor(static_cast<uint16>(::__backgroundColor));
+  __OS::CoreApi::Console::SetForegroundColor(__foregroundColor);
+  __OS::CoreApi::Console::SetBackgroundColor(__backgroundColor);
 }
 
 void Console::SetCursorPosition(int32 left, int32 top) {

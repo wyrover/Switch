@@ -7,6 +7,8 @@
 
 #include "CoreApi.hpp"
 
+using namespace System;
+
 void __OS::CoreApi::Console::Beep(int32 frequency, int32 duration) {
   ::Beep(frequency, duration);
 }
@@ -22,10 +24,10 @@ void __OS::CoreApi::Console::Clrscr() {
   Gotoxy(1, 1);
 }
 
-int32 __OS::CoreApi::Console::GetBackgroundColor() {
+ConsoleColor __OS::CoreApi::Console::GetBackgroundColor() {
   CONSOLE_SCREEN_BUFFER_INFO bufferInfo;
   GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &bufferInfo);
-  return (bufferInfo.wAttributes & 0x00F0) >> 4;
+  return ConsoleColor((bufferInfo.wAttributes & 0x00F0) >> 4);
 }
 
 int32 __OS::CoreApi::Console::GetCursorSize() {
@@ -40,10 +42,10 @@ bool __OS::CoreApi::Console::GetCursorVisible() {
   return cursorInfo.bVisible != FALSE;
 }
 
-int32 __OS::CoreApi::Console::GetForegroundColor() {
+ConsoleColor __OS::CoreApi::Console::GetForegroundColor() {
   CONSOLE_SCREEN_BUFFER_INFO bufferInfo;
   GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &bufferInfo);
-  return bufferInfo.wAttributes & 0x000F;
+  return ConsoleColor(bufferInfo.wAttributes & 0x000F);
 }
 
 System::Collections::Generic::SortedDictionary<int32, System::ConsoleSpecialKey> __OS::CoreApi::Console::GetSignalKeys() {
@@ -73,12 +75,12 @@ void __OS::CoreApi::Console::ReadKey(int32& keyChar, int32& keyCode, bool& alt, 
   ctrl = (inputRecord.Event.KeyEvent.dwControlKeyState & LEFT_CTRL_PRESSED) == LEFT_CTRL_PRESSED || (inputRecord.Event.KeyEvent.dwControlKeyState & RIGHT_CTRL_PRESSED) == RIGHT_CTRL_PRESSED;
 }
 
-void __OS::CoreApi::Console::SetBackgroundColor(int32 color) {
+void __OS::CoreApi::Console::SetBackgroundColor(ConsoleColor color) {
   CONSOLE_SCREEN_BUFFER_INFO bufferInfo;
   GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &bufferInfo);
 
   bufferInfo.wAttributes &= 0xFF0F;
-  bufferInfo.wAttributes |= color << 4;
+  bufferInfo.wAttributes |= (int32)color << 4;
   SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), bufferInfo.wAttributes);
 }
 
@@ -102,12 +104,12 @@ void __OS::CoreApi::Console::SetEchoVisible(bool visible) {
   // Only for Linux terminal...
 }
 
-void __OS::CoreApi::Console::SetForegroundColor(int32 color) {
+void __OS::CoreApi::Console::SetForegroundColor(ConsoleColor color) {
   CONSOLE_SCREEN_BUFFER_INFO bufferInfo;
   GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &bufferInfo);
 
   bufferInfo.wAttributes &= 0xFFF0;
-  bufferInfo.wAttributes |= color;
+  bufferInfo.wAttributes |= (int32)color;
   SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), bufferInfo.wAttributes);
 }
 

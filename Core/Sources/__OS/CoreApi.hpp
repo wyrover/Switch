@@ -15,6 +15,7 @@
 #include "../../Includes/Pcf/System/Net/IPAddress.hpp"
 #include "../../Includes/Pcf/System/Security/SecureString.hpp"
 #include "../../Includes/Pcf/System/Array.hpp"
+#include "../../Includes/Pcf/System/ConsoleColor.hpp"
 #include "../../Includes/Pcf/System/ConsoleSpecialKey.hpp"
 #include "../../Includes/Pcf/System/Environment.hpp"
 #include "../../Includes/Pcf/System/Guid.hpp"
@@ -30,19 +31,19 @@ namespace __OS {
     public:
       static void Beep(int32 freq, int32 dur);
       static void Clrscr();
-      static int32 GetBackgroundColor();
+      static System::ConsoleColor GetBackgroundColor();
       static int32 GetCursorSize();
       static bool GetCursorVisible();
-      static int32 GetForegroundColor();
+      static System::ConsoleColor GetForegroundColor();
       static System::Collections::Generic::SortedDictionary<int32, System::ConsoleSpecialKey> GetSignalKeys();
       static void Gotoxy(int32 x, int32 y);
       static bool KeyAvailable();
       static void ReadKey(int32& keyChar, int32& keyCode, bool& alt, bool& shift, bool& ctrl);
-      static void SetBackgroundColor(int32 color);
+      static void SetBackgroundColor(System::ConsoleColor color);
       static void SetCursorSize(int32 size);
       static void SetCursorVisible(bool visible);
       static void SetEchoVisible(bool visible);
-      static void SetForegroundColor(int32 color);
+      static void SetForegroundColor(System::ConsoleColor color);
       static void Wherexy(int32& x, int32& y);
       static void GetBufferSize(int32& w, int32& h);
       static int32 GetInputCodePage();

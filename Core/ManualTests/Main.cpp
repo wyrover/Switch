@@ -44,6 +44,8 @@ namespace Examples {
       
       // Remove environment variale PCF_REGISTRY_TEST
       Environment::SetEnvironmentVariable("PCF_REGISTRY_TEST", "");
+      
+      Console::WriteLine(Environment::GetEnvironmentVariable("TERM"));
     }
   };
 }
