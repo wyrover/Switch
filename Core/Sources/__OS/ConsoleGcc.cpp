@@ -495,28 +495,6 @@ namespace {
     {"y", {89, U'y', false, false, false}}, // y
     {"z", {90, U'z', false, false, false}}, // z
   };
-
-  static const char* ColorToEscapeForeColorStr(int32 color) {
-    switch (color) {
-      case 0 : return "\033[30m"; break; // Black
-      case 1 : return "\033[34m"; break; // DarkBlue
-      case 2 : return "\033[32m"; break; // DarkGreen
-      case 3 : return "\033[36m"; break; // DarkCyan
-      case 4 : return "\033[31m"; break; // DarkRed
-      case 5 : return "\033[35m"; break; // DarkMagenta
-      case 6 : return "\033[33m"; break; // DarkYellow
-      case 7 : return "\033[37m"; break; // Gray
-      case 8 : return "\033[90m"; break; // DarkGray
-      case 9 : return "\033[94m"; break; // Blue
-      case 10 : return "\033[92m"; break; // Green
-      case 11 : return "\033[96m"; break; // Cyan
-      case 12 : return "\033[91m"; break; // Red
-      case 13 : return "\033[95m"; break; // Magena
-      case 14 : return "\033[93m"; break; // Yellow
-      case 15 : return "\033[97m"; break; // White
-      default : return "\033[39m"; break; // Default
-    }
-  }
 }
 
 #ifndef KIOCSOUND
