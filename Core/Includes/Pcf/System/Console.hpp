@@ -63,6 +63,18 @@ namespace Pcf {
       /// @param A ConsoleColor that specifies the background color of the console; that is, the color that appears behind each character.
       static Property<ConsoleColor> BackgroundColor;
 
+      /// @brief Gets or sets the height of the buffer area.
+      /// @param The current height, in rows, of the buffer area. 
+      static Property<int32> BufferHeight;
+
+      /// @brief Gets or sets the width of the buffer area.
+      /// @param The current width, in columns, of the buffer area.
+      static Property<int32> BufferWidth;
+
+      /// @brief Gets a value indicating whether the CAPS LOCK keyboard toggle is turned on or turned off.
+      /// @param true if CAPS LOCK is turned on; false if CAPS LOCK is turned off.
+      static Property<bool, ReadOnly> CapsLock;
+
       /// @brief Gets or sets the column position of the cursor within the buffer area.
       /// @param The current position, in columns, of the cursor.
       /// @exception ArgumentOutOfRangeException left less than 1 or greater than 80.
@@ -98,11 +110,35 @@ namespace Pcf {
       /// @param The encoding used to read console input.
       static Property<const refptr<System::Text::Encoding>&> InputEncoding;
 
+      /// @brief Gets a value that indicates whether the error output stream has been redirected from the standard error stream.
+      /// @param true if error output is redirected; otherwise, false.
+      static Property<bool, ReadOnly> IsErrorRedirected;
+
+      /// @brief  Gets a value that indicates whether the input stream has been redirected from the standard input stream.
+      /// @param true if input is redirected; otherwise, false.
+      static Property<bool, ReadOnly> IsInputRedirected;
+
+      /// @brief  Gets a value that indicates whether the output stream has been redirected from the standard output stream.
+      /// @param true if output is redirected; otherwise, false.
+      static Property<bool, ReadOnly> IsOutputRedirected;
+
       /// @brief Gets a value indicating whether a key press is available in the input stream.
       /// @param true if a key press is available; otherwise, false
       /// @remarks The KeyAvailable method is returned immediately; that is, the KeyAvailable method does not block input until a key press is available.
       /// @remarks Use the KeyAvailable method in conjunction with only the ReadKey method, not the Read or ReadLine methods
       static Property<bool, ReadOnly> KeyAvailable;
+
+      /// @brief Gets the largest possible number of console window rows, based on the current font and screen resolution.
+      /// @param The height of the largest possible console window measured in rows.
+      static Property<int32, ReadOnly> LargestWindowHeight;
+
+      /// @brief Gets the largest possible number of console window columns, based on the current font and screen resolution.
+      /// @param The width of the largest possible console window measured in colomns.
+      static Property<int32, ReadOnly> LargestWindowWidth;
+
+      /// @brief Gets a value indicating whether the NUM LOCK keyboard toggle is turned on or turned off.
+      /// @param true if NUM LOCK is turned on; false if NUM LOCK is turned off.
+      static Property<bool, ReadOnly> NumberLock;
 
       /// @brief Gets the standard output stream.
       /// @param A TextWriter that represents the standard output stream.
@@ -112,11 +148,31 @@ namespace Pcf {
       /// @param The encoding used to write console output.
       static Property<const refptr<System::Text::Encoding>&> OutputEncoding;
 
+      /// @brief Gets or sets the title to display in the console title bar.
+      /// @param The string to be displayed in the title bar of the console. The maximum length of the title string is 24500 characters.
+      static Property<string> Title;
+
       /// @brief Gets or sets a value indicating whether the combination of the Control modifier key and C console key (Ctrl+C) is treated as ordinary input or as an interruption that is handled by the operating system.
       /// @param bool true if Ctrl+C is treated as ordinary input; otherwise, false.
       /// @remarks If the value of the TreatControlCAsInput property is false and Ctrl+C is pressed, the pressed keys are not stored in the input buffer and the operating system terminates the currently executing process. This is the default value.
       /// @warning Use this property judiciously because setting it to true has such a dramatic effect. Most users expect Ctrl+C to terminate a console application. If you disable the effect of Ctrl+C, the user must remember to use Ctrl+Break to terminate the application, which is a less familiar key combination.
       static Property<bool> TreatControlCAsInput;
+
+      /// @brief Gets or sets the height of the console window area.
+      /// @param The height of the console window measured in rows.
+      static Property<int32> WindowHeight;
+
+      /// @brief Gets or sets the leftmost position of the console window area relative to the screen buffer.
+      /// @param The leftmost console window position measured in columns.
+      static Property<int32> WindowLeft;
+
+      /// @brief Gets or sets the top position of the console window area relative to the screen buffer.
+      /// @param The uppermost console window position measured in rows.
+      static Property<int32> WindowTop;
+
+      /// @brief Gets or sets the width of the console window.
+      /// @param The width of the console window measured in columns.
+      static Property<int32> WindowWidth;
 
       /// @brief Plays the sound of a beep through the console speaker.
       /// @remarks By default, the beep plays at a frequency of 800 hertz for a duration of 200 milliseconds

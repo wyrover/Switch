@@ -72,31 +72,46 @@ namespace {
   Console::StandardInput sin;
   Console::StandardErrorOutput serror;
   Console::StandardOutput sout;
+  System::IO::TextReader* defaultIn = &sin;
+  System::IO::TextWriter* defaultError = &serror;
+  System::IO::TextWriter* defaultOut = &sout;
   System::IO::TextReader* in = &sin;
   System::IO::TextWriter* error = &serror;
   System::IO::TextWriter* out = &sout;
 }
 
 Property<ConsoleColor> Console::BackgroundColor {
-  []()->ConsoleColor {return static_cast<ConsoleColor>(__OS::CoreApi::Console::GetBackgroundColor());},
+  [] {return __OS::CoreApi::Console::GetBackgroundColor();},
   [](ConsoleColor value) {
     __OS::CoreApi::Console::SetBackgroundColor(value);
   }
 };
 
-Property<int32> Console::CursorLeft {
-  [] {
-    int32 left, top;
-    __OS::CoreApi::Console::Wherexy(left, top);
-    return left;
-  },
+Property<int32> Console::BufferHeight{
+  [] {return __OS::CoreApi::Console::GetBufferHeight(); },
   [](int32 value) {
-    if (value < 1 || value > 80)
+    __OS::CoreApi::Console::SetBufferHeight(value);
+  }
+};
+
+Property<int32> Console::BufferWidth{
+  [] {return __OS::CoreApi::Console::GetBufferWidth(); },
+  [](int32 value) {
+    __OS::CoreApi::Console::SetBufferWidth(value);
+  }
+};
+
+Property<bool, ReadOnly> Console::CapsLock {
+  [] {return __OS::CoreApi::Console::GetCapsLock();}
+};
+
+Property<int32> Console::CursorLeft {
+  [] {return __OS::CoreApi::Console::GetCursorTop();},
+  [](int32 value) {
+    if (value < 1 || value > __OS::CoreApi::Console::GetWindowWidth())
       throw ArgumentOutOfRangeException(pcf_current_information);
       
-    int32 left, top;
-    __OS::CoreApi::Console::Wherexy(left, top);
-    __OS::CoreApi::Console::Gotoxy(value, top);
+    __OS::CoreApi::Console::SetCursorLeft(value);
   }
 };
 
@@ -111,18 +126,12 @@ Property<int32> Console::CursorSize {
 };
 
 Property<int32> Console::CursorTop {
-  [] {
-    int32 left, top;
-    __OS::CoreApi::Console::Wherexy(left, top);
-    return top;
-  },
+  [] {return __OS::CoreApi::Console::GetCursorTop();},
   [](int32 value) {
-    if (value < 1 || value > 25)
+    if (value < 1 || value > __OS::CoreApi::Console::GetWindowHeight())
       throw ArgumentOutOfRangeException(pcf_current_information);
       
-    int32 left, top;
-    __OS::CoreApi::Console::Wherexy(left, top);
-    __OS::CoreApi::Console::Gotoxy(left, value);
+    __OS::CoreApi::Console::SetCursorTop(value);
   }
 };
 
@@ -139,7 +148,7 @@ Property<Console::StandardErrorOutput&, ReadOnly> Console::Error {
 };
 
 Property<ConsoleColor> Console::ForegroundColor {
-  [] {return static_cast<ConsoleColor>(__OS::CoreApi::Console::GetForegroundColor());},
+  [] {return __OS::CoreApi::Console::GetForegroundColor();},
   [](ConsoleColor value) {
     __OS::CoreApi::Console::SetForegroundColor(value);
   }
@@ -160,8 +169,32 @@ Property<const refptr<System::Text::Encoding>&> Console::InputEncoding {
   }
 };
 
+Property<bool, ReadOnly> Console::IsErrorRedirected{
+  [] {return error == defaultError; }
+};
+
+Property<bool, ReadOnly> Console::IsInputRedirected{
+  [] {return in == defaultIn; }
+};
+
+Property<bool, ReadOnly> Console::IsOutputRedirected{
+  [] {return out == defaultOut; }
+};
+
 Property<bool, ReadOnly> Console::KeyAvailable {
   [] {return __OS::CoreApi::Console::KeyAvailable();}
+};
+
+Property<int32, ReadOnly> Console::LargestWindowHeight{
+  [] {return __OS::CoreApi::Console::GetLargestWindowHeight(); }
+};
+
+Property<int32, ReadOnly> Console::LargestWindowWidth{
+  [] {return __OS::CoreApi::Console::GetLargestWindowWidth(); }
+};
+
+Property<bool, ReadOnly> Console::NumberLock{
+  [] {return __OS::CoreApi::Console::GetNumberLock(); }
 };
 
 Property<Console::StandardOutput&, ReadOnly> Console::Out {
@@ -179,9 +212,28 @@ Property<const refptr<System::Text::Encoding>&> Console::OutputEncoding {
   }
 };
 
+Property<string> Console::Title {
+  [] {return __OS::CoreApi::Console::GetTitle(); },
+  [](const string& value) {__OS::CoreApi::Console::SetTitle(value);}
+};
+
 Property<bool> Console::TreatControlCAsInput {
   [] {return treatControlCAsInput;},
   [](bool value) {treatControlCAsInput = value;}
+};
+
+Property<int32> Console::WindowHeight {
+  []{return __OS::CoreApi::Console::GetWindowHeight(); },
+  [](int32 value) {
+    __OS::CoreApi::Console::SetWindowHeight(value);
+  }
+};
+
+Property<int32> Console::WindowWidth {
+  [] {return __OS::CoreApi::Console::GetWindowWidth(); },
+  [](int32 value) {
+    __OS::CoreApi::Console::SetWindowWidth(value);
+  }
 };
 
 ConsoleCancelEventHandler Console::CancelKeyPress;
@@ -245,13 +297,11 @@ void Console::ResetColor() {
 }
 
 void Console::SetCursorPosition(int32 left, int32 top) {
-  int32 width = 0;
-  int32 height = 0;
-  __OS::CoreApi::Console::GetBufferSize(width, height);
-  if (left < 1 || left > width || top < 1 || top > height)
+  if (left < 0 || left > __OS::CoreApi::Console::GetWindowWidth() || top < 0 || top > __OS::CoreApi::Console::GetWindowHeight())
     throw ArgumentOutOfRangeException(pcf_current_information);
 
-  __OS::CoreApi::Console::Gotoxy(left, top);
+  __OS::CoreApi::Console::SetCursorLeft(left);
+  __OS::CoreApi::Console::SetCursorTop(top);
 }
 
 void Console::SetError(System::IO::TextWriter& e) { error = &e; }
