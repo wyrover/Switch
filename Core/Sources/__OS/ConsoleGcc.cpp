@@ -514,8 +514,53 @@ ConsoleColor __OS::CoreApi::Console::GetBackgroundColor() {
   return backColor;
 }
 
+int32 __OS::CoreApi::Console::GetBufferHeight() {
+  /// @todo console buffer Height on linux and macOS
+  return __OS::CoreApi::Console::GetWindowHeight();
+}
+
+int32 __OS::CoreApi::Console::GetBufferWidth() {
+  /// @todo console buffer Width on linux and macOS
+  return __OS::CoreApi::Console::GetWindowWidth();
+}
+
+bool __OS::CoreApi::Console::GetCapsLock() {
+  /// @todo caps lock status on linux and macOS
+  return false;
+}
+
+int32 __OS::CoreApi::Console::GetCursorLeft() {
+  if (!Terminal::IsAnsiSupported())
+    return 0;
+
+  printf("\x1b[6n");
+  fflush(stdout);
+  terminal.Getch();
+  terminal.Getch();
+
+  std::string str;
+  while ((char c = terminal.Getch()) != 'R')
+    str.push_back(c);
+  return atoi(str.c_str()) - 1;
+}
+
 int32 __OS::CoreApi::Console::GetCursorSize() {
   return 100;
+}
+
+int32 __OS::CoreApi::Console::GetCursorTop() {
+  if (!Terminal::IsAnsiSupported())
+    return 0;
+
+  printf("\x1b[6n");
+  fflush(stdout);
+  terminal.Getch();
+  terminal.Getch();
+
+  std::string str;
+  while ((char c = terminal.Getch()) != ';')
+    str.push_back(c);
+  return atoi(str.c_str()) - 1;
 }
 
 bool __OS::CoreApi::Console::GetCursorVisible() {
@@ -526,13 +571,59 @@ ConsoleColor __OS::CoreApi::Console::GetForegroundColor() {
   return foreColor;
 }
 
+int32 __OS::CoreApi::Console::GetInputCodePage() {
+  /// @todo console input code page status on linux and macOS
+  return 65001;
+}
+
+int32 __OS::CoreApi::Console::GetLargestWindowHeight() {
+  /// @todo console larget window Height on linux and macOS
+  return __OS::CoreApi::Console::GetWindowHeight();
+}
+
+int32 __OS::CoreApi::Console::GetLargestWindowWidth() {
+  /// @todo console largest window width on linux and macOS
+  return __OS::CoreApi::Console::GetWindowWidth();
+}
+
+bool __OS::CoreApi::Console::GeNumberLock() {
+  /// @todo number lock status on linux and macOS
+  return false;
+}
+
+int32 __OS::CoreApi::Console::GetOutputCodePage() {
+  /// @todo console output code page status on linux and macOS
+  return 65001;
+}
+
 System::Collections::Generic::SortedDictionary<int32, System::ConsoleSpecialKey> __OS::CoreApi::Console::GetSignalKeys() {
   return {{SIGQUIT, System::ConsoleSpecialKey::ControlBackslash}, {SIGTSTP, System::ConsoleSpecialKey::ControlZ}, {SIGINT, System::ConsoleSpecialKey::ControlC}};
 }
 
-void __OS::CoreApi::Console::Gotoxy(int32 x, int32 y) {
-  if (Terminal::IsAnsiSupported())
-    printf("\x1b[%d;%df", y, x);
+string __OS::CoreApi::Console::GetTitle() {
+  return "";
+}
+
+int32 __OS::CoreApi::Console::GetWindowLeft() {
+  /// @todo get console window left on linux and macOS
+  return 0;
+}
+
+int32 __OS::CoreApi::Console::GetWindowHeight() {
+  struct winsize size;
+  ioctl(STDOUT_FILENO, TIOCGWINSZ, &size);
+  return size.ws_row;
+}
+
+int32 __OS::CoreApi::Console::GetWindowTop() {
+  /// @todo get console window top on linux and macOS
+  return 0;
+}
+
+int32 __OS::CoreApi::Console::GetWindowWidth() {
+  struct winsize size;
+  ioctl(STDOUT_FILENO, TIOCGWINSZ, &size);
+  return size.ws_col;
 }
 
 bool __OS::CoreApi::Console::KeyAvailable() {
@@ -553,6 +644,28 @@ void __OS::CoreApi::Console::SetBackgroundColor(ConsoleColor color) {
   backColor = color;
   if (Terminal::IsAnsiSupported())
     printf("%s", colors[(int32)backColor].c_str());
+}
+
+bool __OS::CoreApi::Console::SetBufferHeight(int32 height) {
+  /// @todo set console buffer height on linux and macOS
+  return true;
+}
+
+bool __OS::CoreApi::Console::SetBufferWidth(int32 width) {
+  /// @todo set console buffer width on linux and macOS
+  return true;
+}
+
+bool __OS::CoreApi::Console::SetCursorLeft(int32 left) {
+  if (Terminal::IsAnsiSupported())
+    printf("\x1b[%d;%df", left + 1, GetCursorTop() + 1);
+  return true;
+}
+
+bool __OS::CoreApi::Console::SetCursorTop(int32 top) {
+  if (Terminal::IsAnsiSupported())
+    printf("\x1b[%d;%df", GetCursorLeft() + 1, top + 1);
+  return true;
 }
 
 void __OS::CoreApi::Console::SetCursorSize(int32 size) {
@@ -582,45 +695,44 @@ void __OS::CoreApi::Console::SetForegroundColor(ConsoleColor color) {
     printf("%s", colors[(int32)foreColor].c_str());
 }
 
-void __OS::CoreApi::Console::Wherexy(int32& x, int32& y) {
-  if (Terminal::IsAnsiSupported()) {
-    printf("\x1b[6n");
-    fflush(stdout);
-    terminal.Getch();
-    terminal.Getch();
-    
-    char c;
-    std::string str;
-     
-    while ((c = terminal.Getch()) != ';')
-      str.push_back(c);
-    y = atoi(str.c_str());
-
-    str.clear();
-    while ((c = terminal.Getch()) != 'R')
-      str.push_back(c);
-    x = atoi(str.c_str());
-  }
-}
-
-void __OS::CoreApi::Console::GetBufferSize(int32& w, int32& h) {
-  w = 80;
-  h = 25;
-}
-
-int32 __OS::CoreApi::Console::GetInputCodePage() {
-  return 65001;
-}
-
-int32 __OS::CoreApi::Console::GetOutputCodePage() {
-  return 65001;
-}
-
 bool __OS::CoreApi::Console::SetInputCodePage(int32 codePage) {
+  /// @todo set console input code page on linux and macOS
   return true;
 }
 
 bool __OS::CoreApi::Console::SetOutputCodePage(int32 codePage) {
+  /// @todo set console output code page status on linux and macOS
+  return true;
+}
+
+bool __OS::CoreApi::Console::SetTitle(const string& title) {
+  /// @todo set window title on linux and macOS
+  return true;
+}
+
+bool __OS::CoreApi::Console::SetWindowLeft(int32 height) {
+  /// @todo set console window left on linux and macOS
+  return true;
+}
+
+bool __OS::CoreApi::Console::SetWindowHeight(int32 height) {
+  struct winsize size;
+  ioctl(STDOUT_FILENO, TIOCGWINSZ, &size);
+  size.ws_row = height;
+  ioctl(STDOUT_FILENO, TIOCSWINSZ, &size);
+  return true;
+}
+
+bool __OS::CoreApi::Console::SetWindowTop(int32 height) {
+  /// @todo set console window top on linux and macOS
+  return true;
+}
+
+bool __OS::CoreApi::Console::SetWindowWidth(int32 width) {
+  struct winsize size;
+  ioctl(STDOUT_FILENO, TIOCGWINSZ, &size);
+  size.ws_col = width;
+  ioctl(STDOUT_FILENO, TIOCSWINSZ, &size);
   return true;
 }
 
