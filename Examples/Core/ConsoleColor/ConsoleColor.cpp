@@ -10,7 +10,7 @@ namespace Examples {
       ConsoleColor backColor = Console::BackgroundColor;
       ConsoleColor foreColor = Console::ForegroundColor;
       
-      Console::BackgroundColor = ConsoleColor::White;
+      Console::BackgroundColor = ConsoleColor::DarkGray;
       Console::ForegroundColor = ConsoleColor::DarkRed;
       Console::WriteLine("===============================================================================");
       Console::ForegroundColor = ConsoleColor::DarkBlue;

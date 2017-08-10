@@ -9,11 +9,13 @@
 #include <sstream>
 #include <string>
 
+#include <ncurses.h>
 #include <fcntl.h>
 #include <termios.h>
 #include <unistd.h>
 #include <sys/ioctl.h>
 #include "../../Includes/Pcf/Undef.hpp"
+#include "../../Includes/Pcf/System/Diagnostics/Debug.hpp"
 
 #include "CoreApi.hpp"
 
@@ -538,8 +540,11 @@ int32 __OS::CoreApi::Console::GetCursorLeft() {
   terminal.Getch();
   terminal.Getch();
 
+  char c;
+  while ((c = terminal.Getch()) != ';');
+
   std::string str;
-  while ((char c = terminal.Getch()) != 'R')
+  while ((c = terminal.Getch()) != 'R')
     str.push_back(c);
   return atoi(str.c_str()) - 1;
 }
@@ -557,9 +562,13 @@ int32 __OS::CoreApi::Console::GetCursorTop() {
   terminal.Getch();
   terminal.Getch();
 
+  char c;
   std::string str;
-  while ((char c = terminal.Getch()) != ';')
+  while ((c = terminal.Getch()) != ';')
     str.push_back(c);
+  
+  while ((c = terminal.Getch()) != 'R');
+
   return atoi(str.c_str()) - 1;
 }
 
@@ -586,7 +595,7 @@ int32 __OS::CoreApi::Console::GetLargestWindowWidth() {
   return __OS::CoreApi::Console::GetWindowWidth();
 }
 
-bool __OS::CoreApi::Console::GeNumberLock() {
+bool __OS::CoreApi::Console::GetNumberLock() {
   /// @todo number lock status on linux and macOS
   return false;
 }
@@ -610,9 +619,18 @@ int32 __OS::CoreApi::Console::GetWindowLeft() {
 }
 
 int32 __OS::CoreApi::Console::GetWindowHeight() {
-  struct winsize size;
-  ioctl(STDOUT_FILENO, TIOCGWINSZ, &size);
-  return size.ws_row;
+#ifdef __APPLE__
+  initscr();
+  return getmaxy(stdscr);
+#elif TIOCGSIZE
+  struct ttysize ts;
+  ioctl(STDIN_FILENO, TIOCGSIZE, &ts);
+  return ts.ts_lines;
+#elif defined(TIOCGWINSZ)
+  struct winsize ts;
+  ioctl(STDOUT_FILENO, TIOCGWINSZ, &ts);
+  return ts.ws_row;
+#endif
 }
 
 int32 __OS::CoreApi::Console::GetWindowTop() {
@@ -621,9 +639,18 @@ int32 __OS::CoreApi::Console::GetWindowTop() {
 }
 
 int32 __OS::CoreApi::Console::GetWindowWidth() {
-  struct winsize size;
-  ioctl(STDOUT_FILENO, TIOCGWINSZ, &size);
-  return size.ws_col;
+#ifdef __APPLE__
+  initscr();
+  return getmaxx(stdscr);
+#elif TIOCGSIZE
+  struct ttysize ts;
+  ioctl(STDIN_FILENO, TIOCGSIZE, &ts);
+  return ts.ts_cols;
+#elif defined(TIOCGWINSZ)
+  struct winsize ts;
+  ioctl(STDOUT_FILENO, TIOCGWINSZ, &ts);
+  return ts.ws_col;
+#endif
 }
 
 bool __OS::CoreApi::Console::KeyAvailable() {
@@ -658,13 +685,13 @@ bool __OS::CoreApi::Console::SetBufferWidth(int32 width) {
 
 bool __OS::CoreApi::Console::SetCursorLeft(int32 left) {
   if (Terminal::IsAnsiSupported())
-    printf("\x1b[%d;%df", left + 1, GetCursorTop() + 1);
+    printf("\x1b[%d;%df", GetCursorTop() + 1, left + 1);
   return true;
 }
 
 bool __OS::CoreApi::Console::SetCursorTop(int32 top) {
   if (Terminal::IsAnsiSupported())
-    printf("\x1b[%d;%df", GetCursorLeft() + 1, top + 1);
+    printf("\x1b[%d;%df", top + 1, GetCursorLeft() + 1);
   return true;
 }
 
@@ -716,10 +743,14 @@ bool __OS::CoreApi::Console::SetWindowLeft(int32 height) {
 }
 
 bool __OS::CoreApi::Console::SetWindowHeight(int32 height) {
+#ifdef __APPLE__
+  resize_term(height, getmaxx(stdscr));
+#else
   struct winsize size;
   ioctl(STDOUT_FILENO, TIOCGWINSZ, &size);
   size.ws_row = height;
   ioctl(STDOUT_FILENO, TIOCSWINSZ, &size);
+#endif
   return true;
 }
 
@@ -729,10 +760,14 @@ bool __OS::CoreApi::Console::SetWindowTop(int32 height) {
 }
 
 bool __OS::CoreApi::Console::SetWindowWidth(int32 width) {
+#ifdef __APPLE__
+  resize_term(getmaxy(stdscr), width);
+#else
   struct winsize size;
   ioctl(STDOUT_FILENO, TIOCGWINSZ, &size);
   size.ws_col = width;
   ioctl(STDOUT_FILENO, TIOCSWINSZ, &size);
+#endif
   return true;
 }
 

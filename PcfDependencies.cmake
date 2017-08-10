@@ -13,7 +13,7 @@ find_package(ZLIB REQUIRED)
 
 if (APPLE)
   set(PCF_GUI MACOSX_BUNDLE)
-  set(STANDARD_CORE_LINK_LIBRARIES dl)	
+  set(STANDARD_CORE_LINK_LIBRARIES dl ncurses)	
   set(STANDARD_GRAPHIC_LINK_LIBRARIES )
   set(COCOA_FRAMEWORK "-framework Carbon -framework Cocoa -framework ApplicationServices -framework Foundation")
 elseif(UNIX)

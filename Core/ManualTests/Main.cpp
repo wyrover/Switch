@@ -1,4 +1,5 @@
 ﻿#include <Pcf/Microsoft/Win32/Registry.hpp>
+#include <Pcf/System/Diagnostics/Debug.hpp>
 #include <Pcf/System/IO/Path.hpp>
 #include <Pcf/System/Console.hpp>
 #include <Pcf/System/Environment.hpp>
@@ -21,10 +22,10 @@ namespace Examples {
       int32 bufferHeight = Console::BufferHeight;
       string title = Console::Title;
 
-      Console::WindowWidth = 80;
-      Console::WindowHeight = 25;
-      Console::BufferWidth = 80;
-      Console::BufferHeight = 25;
+      //Console::WindowWidth = 80;
+      //Console::WindowHeight = 25;
+      //Console::BufferWidth = 80;
+      //Console::BufferHeight = 25;
       Console::Title = System::IO::Path::GetFileNameWithoutExtension(Environment::GetCommandLineArgs()[0]);
 
       Console::CursorVisible = false;
@@ -41,15 +42,15 @@ namespace Examples {
       Console::ForegroundColor = ConsoleColor::DarkRed;
       Console::SetCursorPosition(1, 0);
       Console::Write(u'≡');
-
+      
       Console::SetCursorPosition(1, Console::WindowHeight - 1);
       Console::Write("Alt-X");
-
+      
       Console::BackgroundColor = ConsoleColor::Gray;
       Console::ForegroundColor = ConsoleColor::Black;
       Console::SetCursorPosition(7, Console::WindowHeight - 1);
       Console::Write("Exit");
-
+      
       MessageLoop();
 
       Console::BackgroundColor = backColor;
@@ -59,16 +60,18 @@ namespace Examples {
       Console::WindowWidth = windowWidth;
       Console::WindowHeight = windowHeight;
       Console::Title = title;
+      Console::Clear();
       Console::CursorVisible = cursorVisible;
     }
 
   private:
     static void MessageLoop() {
       while (true) {
-        if (Console::KeyAvailable) {
+        //System::Diagnostics::Debug::WriteLine("MessageLoop");
+        /*if (Console::KeyAvailable)*/ {
           ConsoleKeyInfo keyInfo = Console::ReadKey(true);
-          //Console::WriteLine("Key = {0} ({1}), Char = '{2}' ({3}), Modifiers = {4}", keyInfo.Key, Convert::ToInt32(keyInfo.Key), keyInfo.KeyChar, Convert::ToInt32(keyInfo.KeyChar), keyInfo.Modifiers);
-          if (keyInfo.Key == ConsoleKey::X && keyInfo.Modifiers == ConsoleModifiers::Alt) break;
+          System::Diagnostics::Debug::WriteLine("Key = {0} ({1}), Char = '{2}' ({3}), Modifiers = {4}", keyInfo.Key, Convert::ToInt32(keyInfo.Key), keyInfo.KeyChar, Convert::ToInt32(keyInfo.KeyChar), keyInfo.Modifiers);
+          if (keyInfo.Key == ConsoleKey::X && (keyInfo.Modifiers == ConsoleModifiers::Alt || keyInfo.Modifiers == ConsoleModifiers::Control)) break;
         }
       }
     }
