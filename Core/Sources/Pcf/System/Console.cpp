@@ -182,7 +182,9 @@ Property<bool, ReadOnly> Console::IsOutputRedirected{
 };
 
 Property<bool, ReadOnly> Console::KeyAvailable {
-  [] {return __OS::CoreApi::Console::KeyAvailable();}
+  [] {
+    Console::__f();
+    return __OS::CoreApi::Console::KeyAvailable();}
 };
 
 Property<int32, ReadOnly> Console::LargestWindowHeight{
@@ -470,4 +472,8 @@ void Console::WriteLine(const char32 value[]) {
 
 void Console::WriteLine(const wchar value[]) {
   Write(string::Format("{0}{1}", value, Environment::NewLine));
+}
+
+void Console::__f() {
+  out->Flush();
 }

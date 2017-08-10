@@ -505,6 +505,8 @@ namespace Pcf {
       /// * Cancel, which allows you to determine how to your application should respond to the user pressing Ctrl+C or Ctrl+Break. By default, the Cancel property is false, which causes program execution to terminate when the event handler exits. Changing its property to true specifies that the application should continue to execute.
       /// @note If your application has simple requirements, you can use the TreatControlCAsInput property instead of this event. By setting this property to false, you can ensure that your application always exits if the user presses Ctrl+C. By setting it to true, you can ensure that pressing Ctrl+C will not terminate the application.
       static ConsoleCancelEventHandler CancelKeyPress;
+      
+      static void __f();
     };
   }
 }

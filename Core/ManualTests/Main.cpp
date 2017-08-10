@@ -1,5 +1,4 @@
 ﻿#include <Pcf/Microsoft/Win32/Registry.hpp>
-#include <Pcf/System/Diagnostics/Debug.hpp>
 #include <Pcf/System/IO/Path.hpp>
 #include <Pcf/System/Console.hpp>
 #include <Pcf/System/Environment.hpp>
@@ -44,11 +43,11 @@ namespace Examples {
       Console::Write(u'≡');
       
       Console::SetCursorPosition(1, Console::WindowHeight - 1);
-      Console::Write("Alt-X");
+      Console::Write("Ctrl-X");
       
       Console::BackgroundColor = ConsoleColor::Gray;
       Console::ForegroundColor = ConsoleColor::Black;
-      Console::SetCursorPosition(7, Console::WindowHeight - 1);
+      Console::SetCursorPosition(8, Console::WindowHeight - 1);
       Console::Write("Exit");
       
       MessageLoop();
@@ -68,9 +67,8 @@ namespace Examples {
     static void MessageLoop() {
       while (true) {
         //System::Diagnostics::Debug::WriteLine("MessageLoop");
-        /*if (Console::KeyAvailable)*/ {
+        if (Console::KeyAvailable) {
           ConsoleKeyInfo keyInfo = Console::ReadKey(true);
-          System::Diagnostics::Debug::WriteLine("Key = {0} ({1}), Char = '{2}' ({3}), Modifiers = {4}", keyInfo.Key, Convert::ToInt32(keyInfo.Key), keyInfo.KeyChar, Convert::ToInt32(keyInfo.KeyChar), keyInfo.Modifiers);
           if (keyInfo.Key == ConsoleKey::X && (keyInfo.Modifiers == ConsoleModifiers::Alt || keyInfo.Modifiers == ConsoleModifiers::Control)) break;
         }
       }
