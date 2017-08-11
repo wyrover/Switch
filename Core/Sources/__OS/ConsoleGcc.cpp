@@ -9,7 +9,9 @@
 #include <sstream>
 #include <string>
 
+#ifdef __APPLE__
 #include <ncurses.h>
+#endif
 #include <fcntl.h>
 #include <termios.h>
 #include <unistd.h>
