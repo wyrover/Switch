@@ -620,7 +620,7 @@ int32 __OS::CoreApi::Console::GetWindowHeight() {
   int32 top = GetCursorTop();
   SetCursorTop(999);
   int32 height = GetCursorTop() + 1;
-  SetCursorTop(height);
+  SetCursorTop(top);
   return height;
 }
 
