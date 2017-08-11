@@ -21,10 +21,10 @@ namespace Examples {
       int32 bufferHeight = Console::BufferHeight;
       string title = Console::Title;
 
-      //Console::WindowWidth = 80;
-      //Console::WindowHeight = 25;
-      //Console::BufferWidth = 80;
-      //Console::BufferHeight = 25;
+      Console::WindowWidth = 80;
+      Console::WindowHeight = 25;
+      Console::BufferWidth = 80;
+      Console::BufferHeight = 25;
       Console::Title = System::IO::Path::GetFileNameWithoutExtension(Environment::GetCommandLineArgs()[0]);
 
       Console::CursorVisible = false;

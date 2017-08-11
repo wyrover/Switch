@@ -9,9 +9,6 @@
 #include <sstream>
 #include <string>
 
-#ifdef __APPLE__
-#include <ncurses.h>
-#endif
 #include <fcntl.h>
 #include <termios.h>
 #include <unistd.h>
@@ -587,13 +584,11 @@ int32 __OS::CoreApi::Console::GetInputCodePage() {
 }
 
 int32 __OS::CoreApi::Console::GetLargestWindowHeight() {
-  /// @todo console larget window Height on linux and macOS
-  return __OS::CoreApi::Console::GetWindowHeight();
+  return 999;
 }
 
 int32 __OS::CoreApi::Console::GetLargestWindowWidth() {
-  /// @todo console largest window width on linux and macOS
-  return __OS::CoreApi::Console::GetWindowWidth();
+  return 999;
 }
 
 bool __OS::CoreApi::Console::GetNumberLock() {
@@ -620,18 +615,13 @@ int32 __OS::CoreApi::Console::GetWindowLeft() {
 }
 
 int32 __OS::CoreApi::Console::GetWindowHeight() {
-#ifdef __APPLE__
-  initscr();
-  return getmaxy(stdscr);
-#elif TIOCGSIZE
-  struct ttysize ts;
-  ioctl(STDIN_FILENO, TIOCGSIZE, &ts);
-  return ts.ts_lines;
-#elif defined(TIOCGWINSZ)
-  struct winsize ts;
-  ioctl(STDOUT_FILENO, TIOCGWINSZ, &ts);
-  return ts.ws_row;
-#endif
+  if (!Terminal::IsAnsiSupported())
+    return 24;
+  int32 top = GetCursorTop();
+  SetCursorTop(999);
+  int32 height = GetCursorTop() + 1;
+  SetCursorTop(height);
+  return height;
 }
 
 int32 __OS::CoreApi::Console::GetWindowTop() {
@@ -640,18 +630,13 @@ int32 __OS::CoreApi::Console::GetWindowTop() {
 }
 
 int32 __OS::CoreApi::Console::GetWindowWidth() {
-#ifdef __APPLE__
-  initscr();
-  return getmaxx(stdscr);
-#elif TIOCGSIZE
-  struct ttysize ts;
-  ioctl(STDIN_FILENO, TIOCGSIZE, &ts);
-  return ts.ts_cols;
-#elif defined(TIOCGWINSZ)
-  struct winsize ts;
-  ioctl(STDOUT_FILENO, TIOCGWINSZ, &ts);
-  return ts.ws_col;
-#endif
+  if (!Terminal::IsAnsiSupported())
+    return 80;
+  int32 left = GetCursorLeft();
+  SetCursorLeft(999);
+  int32 width = GetCursorLeft() + 1;
+  SetCursorLeft(left);
+  return width;
 }
 
 bool __OS::CoreApi::Console::KeyAvailable() {
@@ -744,14 +729,8 @@ bool __OS::CoreApi::Console::SetWindowLeft(int32 height) {
 }
 
 bool __OS::CoreApi::Console::SetWindowHeight(int32 height) {
-#ifdef __APPLE__
-  resize_term(height, getmaxx(stdscr));
-#else
-  struct winsize size;
-  ioctl(STDOUT_FILENO, TIOCGWINSZ, &size);
-  size.ws_row = height;
-  ioctl(STDOUT_FILENO, TIOCSWINSZ, &size);
-#endif
+  if (Terminal::IsAnsiSupported())
+    printf("\x1b[8;%d;%dt", height, GetWindowWidth());
   return true;
 }
 
@@ -761,14 +740,8 @@ bool __OS::CoreApi::Console::SetWindowTop(int32 height) {
 }
 
 bool __OS::CoreApi::Console::SetWindowWidth(int32 width) {
-#ifdef __APPLE__
-  resize_term(getmaxy(stdscr), width);
-#else
-  struct winsize size;
-  ioctl(STDOUT_FILENO, TIOCGWINSZ, &size);
-  size.ws_col = width;
-  ioctl(STDOUT_FILENO, TIOCSWINSZ, &size);
-#endif
+  if (Terminal::IsAnsiSupported())
+    printf("\x1b[8;%d;%dt", GetWindowHeight(), width);
   return true;
 }
 
