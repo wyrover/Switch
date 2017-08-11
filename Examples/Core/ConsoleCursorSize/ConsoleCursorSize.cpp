@@ -28,6 +28,16 @@ pcf_startup (Examples::Program)
 
 // This code produces the following output:
 //
-// Hello World!
-// Enter your name: James
-// Good day, James!
+// This example increments the cursor size from 1% to 100%:
+//
+// Cursor size = 1%. (Press any key to continue...)
+// Cursor size = 10%. (Press any key to continue...)
+// Cursor size = 20%. (Press any key to continue...)
+// Cursor size = 30%. (Press any key to continue...)
+// Cursor size = 40%. (Press any key to continue...)
+// Cursor size = 50%. (Press any key to continue...)
+// Cursor size = 60%. (Press any key to continue...)
+// Cursor size = 70%. (Press any key to continue...)
+// Cursor size = 80%. (Press any key to continue...)
+// Cursor size = 90%. (Press any key to continue...)
+// Cursor size = 100%. (Press any key to continue...)

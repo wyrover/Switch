@@ -143,7 +143,7 @@
 /// target_link_libraries(HelloWorldTest Pcf.TUnit.Main)
 /// @endcode
 ///
-/// For more Examples see https://github.com/yfiumefreddo/Pcf/blob/master/Examples
+/// For more Examples see https://github.com/gammasoft71/Pcf/blob/master/Examples
 ///
 /// @section DownloadSection Download Pcf 0.2.1
 ///
@@ -152,7 +152,7 @@
 /// https://sourceforge.net/projects/pcfpro/files/latest/download
 ///
 /// @section InstallSection Install
-/// Before running examples you must install Pcf. To install it read See https://github.com/yfiumefreddo/Pcf/blob/master/Install.md file.
+/// Before running examples you must install Pcf. To install it read See https://github.com/gammasoft71/Pcf/blob/master/Install.md file.
 ///
 /// @section PcfWebSizeSEction Pcf Web Site
-/// For more information see https://pcfpro.wixsite.com/pcfpro
+/// For more information see https://gammasoft71.wixsite.com/pcfpro

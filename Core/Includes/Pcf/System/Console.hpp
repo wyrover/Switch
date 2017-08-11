@@ -61,14 +61,23 @@ namespace Pcf {
 
       /// @brief Gets or sets the background color of the console.
       /// @param A ConsoleColor that specifies the background color of the console; that is, the color that appears behind each character.
+      /// @par Example
+      /// The following example saves the values of the ConsoleColor enumeration to an array and stores the current values of the BackgroundColor and ForegroundColor properties to variables. It then changes the foreground color to each color in the ConsoleColor enumeration except to the color that matches the current background, and it changes the background color to each color in the ConsoleColor enumeration except to the color that matches the current foreground. (If the foreground color is the same as the background color, the text isn't visible.) Finally, it calls the ResetColor method to restore the original console colors.
+      /// @include ConsoleColor4.cpp
       static Property<ConsoleColor> BackgroundColor;
 
       /// @brief Gets or sets the height of the buffer area.
-      /// @param The current height, in rows, of the buffer area. 
+      /// @param The current height, in rows, of the buffer area.
+      /// @par Example
+      /// This example demonstrates the BufferHeight and BufferWidth properties. The example reports the dimensions of an operating system window set to a buffer size of 300 rows and 85 columns.
+      /// @include ConsoleBuffer.cpp
       static Property<int32> BufferHeight;
 
       /// @brief Gets or sets the width of the buffer area.
       /// @param The current width, in columns, of the buffer area.
+      /// @par Example
+      /// This example demonstrates the BufferHeight and BufferWidth properties. The example reports the dimensions of an operating system window set to a buffer size of 300 rows and 85 columns.
+      /// @include ConsoleBuffer.cpp
       static Property<int32> BufferWidth;
 
       /// @brief Gets a value indicating whether the CAPS LOCK keyboard toggle is turned on or turned off.
@@ -78,6 +87,9 @@ namespace Pcf {
       /// @brief Gets or sets the column position of the cursor within the buffer area.
       /// @param The current position, in columns, of the cursor.
       /// @exception ArgumentOutOfRangeException left less than 1 or greater than 80.
+      /// @par Example
+      /// This example demonstrates the CursorLeft and CursorTop properties, and the SetCursorPosition and Clear methods. The example positions the cursor, which determines where the next write will occur, to draw a 5 character by 5 character rectangle using a combination of "+", "|", and "-" strings. Note that the rectangle could be drawn with fewer steps using a combination of other strings.
+      /// @include ConsoleCursor.cpp
       static Property<int32> CursorLeft;
 
       /// @brief Gets or sets the height of the cursor within a character cell.
@@ -88,10 +100,16 @@ namespace Pcf {
       /// @brief Gets or sets the row position of the cursor within the buffer area.
       /// @param int32 The current position, in rows, of the cursor.
       /// @exception ArgumentOutOfRangeException top less than 1 or greater than 25.
+      /// @par Example
+      /// This example demonstrates the CursorLeft and CursorTop properties, and the SetCursorPosition and Clear methods. The example positions the cursor, which determines where the next write will occur, to draw a 5 character by 5 character rectangle using a combination of "+", "|", and "-" strings. Note that the rectangle could be drawn with fewer steps using a combination of other strings.
+      /// @include ConsoleCursor.cpp
       static Property<int32> CursorTop;
 
       /// @brief Gets or sets a value indicating whether the cursor is visible.
       /// @param true if the cursor is visible; otherwise, false.
+      /// @par Example
+      /// This example demonstrates the CursorVisible property. The example makes the cursor visible if the first column of input is a '+' character or invisible if the input is a '-' character.
+      /// @include ConsoleCursorVisibility.cpp
       static Property<bool> CursorVisible;
 
       /// @brief Gets the standard error outpout stream.
@@ -100,6 +118,9 @@ namespace Pcf {
 
       /// @brief Gets or sets the foreground color of the console.
       /// @param A ConsoleColor that specifies the foreground color of the console; that is, the color of each character that is displayed.
+      /// @par Example
+      /// The following example saves the values of the ConsoleColor enumeration to an array and stores the current values of the BackgroundColor and ForegroundColor properties to variables. It then changes the foreground color to each color in the ConsoleColor enumeration except to the color that matches the current background, and it changes the background color to each color in the ConsoleColor enumeration except to the color that matches the current foreground. (If the foreground color is the same as the background color, the text isn't visible.) Finally, it calls the ResetColor method to restore the original console colors.
+      /// @include ConsoleColor4.cpp
       static Property<ConsoleColor> ForegroundColor;
 
       /// @brief Gets the standard input stream.
@@ -186,6 +207,9 @@ namespace Pcf {
       /// @brief Clears the console buffer and corresponding console window of display information.
       /// @remarks pcf_using the Clear method is equivalent invoking the MS-DOS cls command in the command prompt window.
       /// @remarks When the Clear method is called, the cursor automatically scrolls to the top-left corner of the window and the contents of the screen buffer are set to blanks using the current foreground background colors.
+      /// @par Example
+      /// This example demonstrates the CursorLeft and CursorTop properties, and the SetCursorPosition and Clear methods. The example positions the cursor, which determines where the next write will occur, to draw a 5 character by 5 character rectangle using a combination of "+", "|", and "-" strings. Note that the rectangle could be drawn with fewer steps using a combination of other strings.
+      /// @include ConsoleCursor.cpp
       static void Clear();
 
       /// @brief Reads the next character from the standard input stream.
@@ -215,12 +239,18 @@ namespace Pcf {
       /// @brief Sets the foreground and background console colors to their defaults.
       /// @remarks The foreground and background colors are restored to the colors that existed when the current process began.
       /// @remarks For more information, see the GetForegroundColor() and GetBackgroundColor() properties
+      /// @par Example
+      /// The following example saves the values of the ConsoleColor enumeration to an array and stores the current values of the BackgroundColor and ForegroundColor properties to variables. It then changes the foreground color to each color in the ConsoleColor enumeration except to the color that matches the current background, and it changes the background color to each color in the ConsoleColor enumeration except to the color that matches the current foreground. (If the foreground color is the same as the background color, the text isn't visible.) Finally, it calls the ResetColor method to restore the original console colors.
+      /// @include ConsoleColor4.cpp
       static void ResetColor();
 
       /// @brief Sets the position of the cursor.
       /// @param left The column position of the cursor (1-80).
       /// @param top The row position of the cursor (1-25).
-      /// @exception ArgumentOutOfRangeException left lessa than 1 or greater than 80  - or -  top less than 1 or greater than 25.
+      /// @exception ArgumentOutOfRangeException left less than 0 or greater than WindowWidth  - or -  top less than 1 or greater than WindowHeighr.
+      /// @par Example
+      /// This example demonstrates the CursorLeft and CursorTop properties, and the SetCursorPosition and Clear methods. The example positions the cursor, which determines where the next write will occur, to draw a 5 character by 5 character rectangle using a combination of "+", "|", and "-" strings. Note that the rectangle could be drawn with fewer steps using a combination of other strings.
+      /// @include ConsoleCursor.cpp
       static void SetCursorPosition(int32 left, int32 top);
 
       /// @brief Writes the specified bool value to the standard output stream.

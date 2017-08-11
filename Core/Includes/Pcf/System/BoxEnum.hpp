@@ -88,19 +88,19 @@ namespace Pcf {
       /// @brief Retrieves an array of the names of the constants in a specified enumeration.
       /// @return Array<String> A String array of the names of the constants in enumType.
       /// @exception ArgumentException The value is ! a value of enumType.
-      static System::Collections::Generic::List<String> GetNames() {return Values().Values();}
+      static System::Array<String> GetNames() {return Values().Values().ToArray();}
       
       /// @brief Retrieves an array of the values of the constants in a specified enumeration.
       /// @return Array<T> An array that contains the values of the constants in enumType.
       /// @exception ArgumentException The value is ! a value of enumType.
-      static System::Collections::Generic::List<T> GetValues() {
+      static System::Array<T> GetValues() {
         static System::Collections::Generic::List<T> keys;
         
         if (keys.Count == 0)
           for(auto key : Values().Keys())
             keys.Add(T(key));
         
-        return keys;
+        return keys.ToArray();
       }
       
       /// @brief Retrieves an array of the values of the constants in a specified enumeration.

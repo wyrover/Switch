@@ -13,8 +13,6 @@ namespace Examples {
   public:
     static void Run() {
       bool cursorVisible = Console::CursorVisible;
-      ConsoleColor backColor = Console::BackgroundColor;
-      ConsoleColor foreColor = Console::ForegroundColor;
       int32 windowWidth = Console::WindowWidth;
       int32 windowHeight = Console::WindowHeight;
       int32 bufferWidth = Console::BufferWidth;
@@ -60,8 +58,7 @@ namespace Examples {
       
       MessageLoop();
 
-      Console::BackgroundColor = backColor;
-      Console::ForegroundColor = foreColor;
+      Console::ResetColor();
       Console::BufferWidth = bufferWidth;
       Console::BufferHeight = bufferHeight;
       Console::WindowWidth = windowWidth;

@@ -682,7 +682,12 @@ bool __OS::CoreApi::Console::SetCursorTop(int32 top) {
 }
 
 void __OS::CoreApi::Console::SetCursorSize(int32 size) {
-  // not supported
+  if (Terminal::IsAnsiSupported()) {
+    if (size < 50)
+      printf("\x1b[4 q");
+    else
+      printf("\x1b[2 q");
+  }
 }
 
 void __OS::CoreApi::Console::SetCursorVisible(bool visible) {
