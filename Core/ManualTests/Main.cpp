@@ -22,9 +22,9 @@ namespace Examples {
       string title = Console::Title;
 
       Console::WindowWidth = 80;
-      Console::WindowHeight = 50;
+      Console::WindowHeight = 25;
       Console::BufferWidth = 80;
-      Console::BufferHeight = 50;
+      Console::BufferHeight = 25;
       Console::Title = System::IO::Path::GetFileNameWithoutExtension(Environment::GetCommandLineArgs()[0]);
 
       Console::CursorVisible = false;
@@ -42,7 +42,14 @@ namespace Examples {
       Console::ForegroundColor = ConsoleColor::DarkRed;
       Console::SetCursorPosition(1, 0);
       Console::Write(u'≡');
-      
+
+      Console::BackgroundColor = ConsoleColor::Gray;
+      Console::ForegroundColor = ConsoleColor::Black;
+      Console::SetCursorPosition(4, 0);
+      Console::Write("File  Edit  Windows");
+
+      Console::BackgroundColor = ConsoleColor::Gray;
+      Console::ForegroundColor = ConsoleColor::DarkRed;
       Console::SetCursorPosition(1, Console::WindowHeight - 1);
       Console::Write("Ctrl-X");
       

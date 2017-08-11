@@ -720,6 +720,8 @@ bool __OS::CoreApi::Console::SetOutputCodePage(int32 codePage) {
 
 bool __OS::CoreApi::Console::SetTitle(const string& title) {
   /// @todo set window title on linux and macOS
+  if (Terminal::IsAnsiSupported())
+    printf("\x1b[0;%s\x7", title.c_str());
   return true;
 }
 
