@@ -9,7 +9,8 @@ namespace Examples {
     static void Main() {
       ConsoleColor backColor = Console::BackgroundColor;
       ConsoleColor foreColor = Console::ForegroundColor;
-      Console::BackgroundColor = ConsoleColor::White;
+      
+      Console::BackgroundColor = ConsoleColor::DarkGray;
       Console::ForegroundColor = ConsoleColor::DarkRed;
       Console::WriteLine("===============================================================================");
       Console::ForegroundColor = ConsoleColor::DarkBlue;
@@ -37,6 +38,7 @@ namespace Examples {
       Console::WriteLine("                                                                               ");
       Console::ForegroundColor = ConsoleColor::DarkRed;
       Console::WriteLine("===============================================================================");
+      
       Console::BackgroundColor = backColor;
       Console::ForegroundColor = foreColor;
     }

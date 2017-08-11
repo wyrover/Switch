@@ -1,4 +1,5 @@
-#include <Pcf/Microsoft/Win32/Registry.hpp>
+﻿#include <Pcf/Microsoft/Win32/Registry.hpp>
+#include <Pcf/System/IO/Path.hpp>
 #include <Pcf/System/Console.hpp>
 #include <Pcf/System/Environment.hpp>
 #include <Pcf/System/String.hpp>
@@ -8,46 +9,85 @@ using namespace System;
 using namespace Microsoft::Win32;
 
 namespace Examples {
+  class Application {
+  public:
+    static void Run() {
+      bool cursorVisible = Console::CursorVisible;
+      ConsoleColor backColor = Console::BackgroundColor;
+      ConsoleColor foreColor = Console::ForegroundColor;
+      int32 windowWidth = Console::WindowWidth;
+      int32 windowHeight = Console::WindowHeight;
+      int32 bufferWidth = Console::BufferWidth;
+      int32 bufferHeight = Console::BufferHeight;
+      string title = Console::Title;
+
+      Console::WindowWidth = 80;
+      Console::WindowHeight = 25;
+      Console::BufferWidth = 80;
+      Console::BufferHeight = 25;
+      Console::Title = System::IO::Path::GetFileNameWithoutExtension(Environment::GetCommandLineArgs()[0]);
+
+      Console::CursorVisible = false;
+      Console::BackgroundColor = ConsoleColor::Gray;
+      Console::ForegroundColor = ConsoleColor::DarkBlue;
+      Console::Clear();
+
+      string line(u'▒', Console::WindowWidth);
+      for (int y = 1; y < Console::WindowHeight - 1; y++) {
+        Console::SetCursorPosition(0, y);
+        Console::Write(line);
+      }
+
+      Console::BackgroundColor = ConsoleColor::Gray;
+      Console::ForegroundColor = ConsoleColor::DarkRed;
+      Console::SetCursorPosition(1, 0);
+      Console::Write(u'≡');
+
+      Console::BackgroundColor = ConsoleColor::Gray;
+      Console::ForegroundColor = ConsoleColor::Black;
+      Console::SetCursorPosition(4, 0);
+      Console::Write("File  Edit  Windows");
+
+      Console::BackgroundColor = ConsoleColor::Gray;
+      Console::ForegroundColor = ConsoleColor::DarkRed;
+      Console::SetCursorPosition(1, Console::WindowHeight - 1);
+      Console::Write("Ctrl-X");
+      
+      Console::BackgroundColor = ConsoleColor::Gray;
+      Console::ForegroundColor = ConsoleColor::Black;
+      Console::SetCursorPosition(8, Console::WindowHeight - 1);
+      Console::Write("Exit");
+      
+      MessageLoop();
+
+      Console::BackgroundColor = backColor;
+      Console::ForegroundColor = foreColor;
+      Console::BufferWidth = bufferWidth;
+      Console::BufferHeight = bufferHeight;
+      Console::WindowWidth = windowWidth;
+      Console::WindowHeight = windowHeight;
+      Console::Title = title;
+      Console::Clear();
+      Console::CursorVisible = cursorVisible;
+    }
+
+  private:
+    static void MessageLoop() {
+      while (true) {
+        //System::Diagnostics::Debug::WriteLine("MessageLoop");
+        if (Console::KeyAvailable) {
+          ConsoleKeyInfo keyInfo = Console::ReadKey(true);
+          if (keyInfo.Key == ConsoleKey::X && (keyInfo.Modifiers == ConsoleModifiers::Alt || keyInfo.Modifiers == ConsoleModifiers::Control)) break;
+        }
+      }
+    }
+  };
+
   class Program {
   public:
     // The main entry point for the application.
     static void Main() {
-      // Create environment variale PCF_REGISTRY_TEST to validate registry expand string
-      Environment::SetEnvironmentVariable("PCF_REGISTRY_TEST", "my environment variable");
-      
-      // Create a new regiqstry sub key "HKEY_CURRENT_USER\PcfRegistryTest" and add values
-      pcf_using(RegistryKey key = Registry::CurrentUser().CreateSubKey("PcfRegistryTest")) {
-        key.SetValue("Key1", "Value1");
-        key.SetValue("Key2", "%PCF_REGISTRY_TEST%", RegistryValueKind::ExpandString);
-        key.SetValue("Key3", Array<byte> {1, 2, 3, 4, 5}, RegistryValueKind::Binary);
-        key.SetValue("Key4", 42);
-        key.SetValue("Key5", Array<string> {"str1", "Str2", "str3"});
-        key.SetValue("Key6", 42, RegistryValueKind::QWord);
-        key.SetValue("Key7", Version(1, 2, 3));
-      }
-
-      // Open sub key HKEY_CURRENT_USER\PcfRegistryTest in read mode and read values
-      RegistryKey key = Registry::CurrentUser().OpenSubKey("PcfRegistryTest");
-      Console::WriteLine("Key1 = {0}", key.GetValue("Key1"));
-      Console::WriteLine("Key2 = {0}", key.GetValue("Key2"));
-      Console::WriteLine("Key3 = {0}", string::Join(", ", as<Array<byte>>(key.GetValue("Key3"))));
-      Console::WriteLine("Key4 = {0}", key.GetValue("Key4"));
-      Console::WriteLine("Key5 = {0}", string::Join(", ", as<Array<string>>(key.GetValue("Key5"))));
-      Console::WriteLine("Key6 = {0}", Int64::Parse(key.GetValue("Key6").ToString()));
-      Console::WriteLine("Key7 = {0}", key.GetValue("Key7"));
-      try {
-        key.SetValue("key8", -1);
-      } catch (const UnauthorizedAccessException&) {
-        Console::WriteLine("Unauthorized access");
-      }
-      
-      // Remove the "HKEY_CURRENT_USER\PcfRegistryTest" sub key
-      Registry::CurrentUser().DeleteSubKeyTree("PcfRegistryTest");
-      
-      // Remove environment variale PCF_REGISTRY_TEST
-      Environment::SetEnvironmentVariable("PCF_REGISTRY_TEST", "");
-      
-      Console::WriteLine(Environment::GetEnvironmentVariable("TERM"));
+      Console::WriteLine(); Application::Run();
     }
   };
 }
