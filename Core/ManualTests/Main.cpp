@@ -1,4 +1,4 @@
-#include <Pcf/Microsoft/Win32/Registry.hpp>
+﻿#include <Pcf/Microsoft/Win32/Registry.hpp>
 #include <Pcf/System/IO/Path.hpp>
 #include <Pcf/System/Console.hpp>
 #include <Pcf/System/Environment.hpp>
