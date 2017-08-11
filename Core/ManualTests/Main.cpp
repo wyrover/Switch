@@ -1,4 +1,4 @@
-﻿#include <Pcf/Microsoft/Win32/Registry.hpp>
+#include <Pcf/Microsoft/Win32/Registry.hpp>
 #include <Pcf/System/IO/Path.hpp>
 #include <Pcf/System/Console.hpp>
 #include <Pcf/System/Environment.hpp>
@@ -22,9 +22,9 @@ namespace Examples {
       string title = Console::Title;
 
       Console::WindowWidth = 80;
-      Console::WindowHeight = 25;
+      Console::WindowHeight = 50;
       Console::BufferWidth = 80;
-      Console::BufferHeight = 25;
+      Console::BufferHeight = 50;
       Console::Title = System::IO::Path::GetFileNameWithoutExtension(Environment::GetCommandLineArgs()[0]);
 
       Console::CursorVisible = false;
@@ -32,9 +32,10 @@ namespace Examples {
       Console::ForegroundColor = ConsoleColor::DarkBlue;
       Console::Clear();
 
+      string line(u'▒', Console::WindowWidth);
       for (int y = 1; y < Console::WindowHeight - 1; y++) {
         Console::SetCursorPosition(0, y);
-        Console::Write(string(u'▒', Console::WindowWidth));
+        Console::Write(line);
       }
 
       Console::BackgroundColor = ConsoleColor::Gray;

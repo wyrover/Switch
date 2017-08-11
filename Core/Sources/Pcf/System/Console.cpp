@@ -108,7 +108,7 @@ Property<bool, ReadOnly> Console::CapsLock {
 Property<int32> Console::CursorLeft {
   [] {return __OS::CoreApi::Console::GetCursorTop();},
   [](int32 value) {
-    if (value < 1 || value > __OS::CoreApi::Console::GetWindowWidth())
+    if (value < 0 || value >= __OS::CoreApi::Console::GetWindowWidth())
       throw ArgumentOutOfRangeException(pcf_current_information);
       
     __OS::CoreApi::Console::SetCursorLeft(value);
@@ -128,7 +128,7 @@ Property<int32> Console::CursorSize {
 Property<int32> Console::CursorTop {
   [] {return __OS::CoreApi::Console::GetCursorTop();},
   [](int32 value) {
-    if (value < 1 || value > __OS::CoreApi::Console::GetWindowHeight())
+    if (value < 0 || value >= __OS::CoreApi::Console::GetWindowHeight())
       throw ArgumentOutOfRangeException(pcf_current_information);
       
     __OS::CoreApi::Console::SetCursorTop(value);
