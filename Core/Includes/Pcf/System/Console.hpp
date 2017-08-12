@@ -95,6 +95,9 @@ namespace Pcf {
       /// @brief Gets or sets the height of the cursor within a character cell.
       /// @param size The size of the cursor expressed as a percentage of the height of a character cell. The property value ranges from 1 to 100.
       /// @exception ArgumentOutOfRangeException size less than 1 or greater than 100.
+      /// @par Example
+      /// This example demonstrates the CursorSize property. The example increases the size of the cursor each time any console key is pressed, then restores the cursor to its original size before terminating.
+      /// @include ConsoleCursorSize.cpp
       static Property<int32> CursorSize;
 
       /// @brief Gets or sets the row position of the cursor within the buffer area.
@@ -109,7 +112,7 @@ namespace Pcf {
       /// @param true if the cursor is visible; otherwise, false.
       /// @par Example
       /// This example demonstrates the CursorVisible property. The example makes the cursor visible if the first column of input is a '+' character or invisible if the input is a '-' character.
-      /// @include ConsoleCursorVisibility.cpp
+      /// @include ConsoleCursorVisible.cpp
       static Property<bool> CursorVisible;
 
       /// @brief Gets the standard error outpout stream.

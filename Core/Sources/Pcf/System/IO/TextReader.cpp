@@ -13,7 +13,7 @@ string TextReader::ReadLine() {
   string line;
   refptr<Text::Encoding::Decoder> decoder = Text::Encoding::UTF8()->CreateDecoder();
   for (int32 current = Read(); current != -1 && current != '\n'; current = Read()) {
-    if (current != '\r') continue;
+    if (current == '\r') continue;
     decoder->Add(Convert::ToByte(current));
     if (decoder->CodePointDefined())
       line += decoder->CodePoint();
