@@ -193,6 +193,10 @@ namespace Pcf {
 
       /// @brief Gets or sets the height of the console window area.
       /// @param The height of the console window measured in rows.
+      /// @par Example
+      /// This example demonstrates the SetWindowSize method, and the WindowWidth and WindowHeight properties. You must run the example to see the full effect of changing the console window size.
+      /// The example reports the dimensions of a console window set to 85 columns and 43 rows, then waits for a key press. When any key is pressed, the dimensions of the console window are halved, the new dimensions are reported, and the example waits for another key press. Finally, when any key is pressed the console window is restored to its original dimensions and the example terminates.
+      /// @include ConsoleWindowSize.cpp
       static Property<int32> WindowHeight;
 
       /// @brief Gets or sets the leftmost position of the console window area relative to the screen buffer.
@@ -205,6 +209,10 @@ namespace Pcf {
 
       /// @brief Gets or sets the width of the console window.
       /// @param The width of the console window measured in columns.
+      /// @par Example
+      /// This example demonstrates the SetWindowSize method, and the WindowWidth and WindowHeight properties. You must run the example to see the full effect of changing the console window size.
+      /// The example reports the dimensions of a console window set to 85 columns and 43 rows, then waits for a key press. When any key is pressed, the dimensions of the console window are halved, the new dimensions are reported, and the example waits for another key press. Finally, when any key is pressed the console window is restored to its original dimensions and the example terminates.
+      /// @include ConsoleWindowSize.cpp
       static Property<int32> WindowWidth;
 
       /// @brief Plays the sound of a beep through the console speaker.
@@ -257,14 +265,38 @@ namespace Pcf {
       static void ResetColor();
 
       /// @brief Sets the position of the cursor.
-      /// @param left The column position of the cursor (1-80).
-      /// @param top The row position of the cursor (1-25).
+      /// @param left The column position of the cursor.
+      /// @param top The row position of the cursor.
       /// @exception ArgumentOutOfRangeException left less than 0 or greater than WindowWidth  - or -  top less than 1 or greater than WindowHeighr.
       /// @par Example
       /// This example demonstrates the CursorLeft and CursorTop properties, and the SetCursorPosition and Clear methods. The example positions the cursor, which determines where the next write will occur, to draw a 5 character by 5 character rectangle using a combination of "+", "|", and "-" strings. Note that the rectangle could be drawn with fewer steps using a combination of other strings.
       /// @include ConsoleCursor.cpp
-      static void SetCursorPosition(int32 left, int32 top);
-
+      static void SetCursorPosition(int32 left, int32 top) {
+        Console::CursorLeft = left;
+        Console::CursorTop = top;
+      }
+      
+      /// @brief Sets the position of the console window relative to the screen buffer.
+      /// @param left The column position of the upper left corner of the console window.
+      /// @param top The row position of the upper left corner of the console window.
+      static void SetWindowPosition(int32 left, int32 top) {
+        Console::WindowLeft = left;
+        Console::WindowTop = top;
+      }
+      
+      /// @brief Sets the height and width of the console window to the specified values.
+      /// @param width The width of the console window measured in columns.
+      /// @param height The height of the console window measured in rows.
+      /// @exception ArgumentOutOfRangeException width or height is less than or equal to zero.  -or-  width plus WindowLeft or height plus WindowTop is greater than or equal to Int16.MaxValue.  -or-  width or height is greater than the largest possible window width or height for the current screen resolution and console font.
+      /// @par Example
+      /// This example demonstrates the SetWindowSize method, and the WindowWidth and WindowHeight properties. You must run the example to see the full effect of changing the console window size.
+      /// The example reports the dimensions of a console window set to 85 columns and 43 rows, then waits for a key press. When any key is pressed, the dimensions of the console window are halved, the new dimensions are reported, and the example waits for another key press. Finally, when any key is pressed the console window is restored to its original dimensions and the example terminates.
+      /// @include ConsoleWindowSize.cpp
+      static void SetWindowSize(int32 width, int32 height) {
+        Console::WindowWidth = width;
+        Console::WindowHeight = height;
+      }
+      
       /// @brief Writes the specified bool value to the standard output stream.
       /// @param value The value to write
       static void Write(bool value);

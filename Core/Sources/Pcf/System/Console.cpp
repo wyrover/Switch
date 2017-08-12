@@ -298,14 +298,6 @@ void Console::ResetColor() {
   __OS::CoreApi::Console::SetBackgroundColor(__backgroundColor);
 }
 
-void Console::SetCursorPosition(int32 left, int32 top) {
-  if (left < 0 || left > __OS::CoreApi::Console::GetWindowWidth() || top < 0 || top > __OS::CoreApi::Console::GetWindowHeight())
-    throw ArgumentOutOfRangeException(pcf_current_information);
-
-  __OS::CoreApi::Console::SetCursorLeft(left);
-  __OS::CoreApi::Console::SetCursorTop(top);
-}
-
 void Console::SetError(System::IO::TextWriter& e) { error = &e; }
 
 void Console::SetInt(System::IO::TextReader& i) { in = &i; }
