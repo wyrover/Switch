@@ -493,8 +493,27 @@ namespace {
   };
 }
 
+#if __APPLE__
+#ifndef KIOCSOUND
+const int32 KIOCSOUND = 0x4B2F;
+#endif
+#else
+#include <linux/kd.h>
+#endif
+
 void __OS::CoreApi::Console::Beep(int32 frequency, int32 duration) {
-  printf("\a");
+  int32 fd = open("/dev/console", O_WRONLY);
+  if (fd == -1) {
+    printf("\a");
+  } else {
+    if (ioctl(fd, KIOCSOUND, (int32)(1193180/frequency)) < 0) {
+      printf("\a");
+    } else {
+      usleep(1000*duration);
+      ioctl(fd, KIOCSOUND, 0);
+    }
+    close(fd);
+  }
 }
 
 void __OS::CoreApi::Console::Clrscr() {
