@@ -7,9 +7,6 @@ namespace Examples {
   public:
     // The main entry point for the application.
     static void Main() {
-      ConsoleColor backColor = Console::BackgroundColor;
-      ConsoleColor foreColor = Console::ForegroundColor;
-      
       Console::BackgroundColor = ConsoleColor::DarkGray;
       Console::ForegroundColor = ConsoleColor::DarkRed;
       Console::WriteLine("===============================================================================");
@@ -39,8 +36,7 @@ namespace Examples {
       Console::ForegroundColor = ConsoleColor::DarkRed;
       Console::WriteLine("===============================================================================");
       
-      Console::BackgroundColor = backColor;
-      Console::ForegroundColor = foreColor;
+      Console::ResetColor();
     }
   };
 }

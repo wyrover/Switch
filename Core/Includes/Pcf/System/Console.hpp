@@ -128,6 +128,9 @@ namespace Pcf {
 
       /// @brief Gets the standard input stream.
       /// @param A TextReader that represents the standard input stream.
+      /// @par Example
+      /// The following sample illustrates the use of the In property.
+      /// @include ConsoleInOut.cpp
       static Property<StandardInput&, ReadOnly> In;
 
       /// @brief Gets or sets the encoding the console uses to read input.
@@ -150,6 +153,9 @@ namespace Pcf {
       /// @param true if a key press is available; otherwise, false
       /// @remarks The KeyAvailable method is returned immediately; that is, the KeyAvailable method does not block input until a key press is available.
       /// @remarks Use the KeyAvailable method in conjunction with only the ReadKey method, not the Read or ReadLine methods
+      /// @par Example
+      /// The following example demonstrates how to use the KeyAvailable property to create a loop that runs until a key is pressed.
+      /// @include ConsoleKeyAvaible.cpp
       static Property<bool, ReadOnly> KeyAvailable;
 
       /// @brief Gets the largest possible number of console window rows, based on the current font and screen resolution.
@@ -174,6 +180,9 @@ namespace Pcf {
 
       /// @brief Gets or sets the title to display in the console title bar.
       /// @param The string to be displayed in the title bar of the console. The maximum length of the title string is 24500 characters.
+      /// @par Example
+      /// This example demonstrates the Title property. The example displays the current title of the operating system window, waits for a key press, then displays a new title.
+      /// @include ConsoleTitle.cpp
       static Property<string> Title;
 
       /// @brief Gets or sets a value indicating whether the combination of the Control modifier key and C console key (Ctrl+C) is treated as ordinary input or as an interruption that is handled by the operating system.
