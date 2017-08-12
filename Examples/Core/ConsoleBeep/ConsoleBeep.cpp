@@ -25,8 +25,16 @@ pcf_startup (Examples::Program)
 
 // This code produces the following output:
 //
-// The current window width is 100, and the current window height is 60.
-//   (Press any key to continue...)
-// The new window width is 50, and the new window height is 30.
-//   (Press any key to continue...)
-// The current window width is 100, and the current window height is 60.
+// >ConsoleBeep
+// Usage: Enter the number of times (between 1 and 9) to beep
+//
+// >ConsoleBeep 9
+// Beep number 1.
+// Beep number 2.
+// Beep number 3.
+// Beep number 4.
+// Beep number 5.
+// Beep number 6.
+// Beep number 7.
+// Beep number 8.
+// Beep number 9.

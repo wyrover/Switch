@@ -84,6 +84,7 @@ namespace Examples {
   public:
     // The main entry point for the application.
     static void Main() {
+      Console::Beep();
       Console::WriteLine(); Application::Run();
     }
   };

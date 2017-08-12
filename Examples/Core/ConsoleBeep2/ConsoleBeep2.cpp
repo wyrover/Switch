@@ -91,10 +91,7 @@ namespace Examples {
 
 pcf_startup (Examples::Program)
 
-// This code produces the following output:
+// This code produces the following result:
 //
-// The current window width is 100, and the current window height is 60.
-//   (Press any key to continue...)
-// The new window width is 50, and the new window height is 30.
-//   (Press any key to continue...)
-// The current window width is 100, and the current window height is 60.
+// This example plays the first few notes of "Mary Had A Little Lamb"
+// through the console speaker.

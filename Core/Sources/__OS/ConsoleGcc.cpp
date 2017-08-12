@@ -493,16 +493,8 @@ namespace {
   };
 }
 
-#ifndef KIOCSOUND
-const int32 KIOCSOUND = 0x4B2F;
-#endif
-
 void __OS::CoreApi::Console::Beep(int32 frequency, int32 duration) {
-  int32 fd = open("/dev/console", O_WRONLY);
-  ioctl(fd, KIOCSOUND, (int32)(1193180/frequency));
-  usleep(1000*duration);
-  ioctl(fd, KIOCSOUND, 0);
-  close(fd);
+  printf("\a");
 }
 
 void __OS::CoreApi::Console::Clrscr() {
