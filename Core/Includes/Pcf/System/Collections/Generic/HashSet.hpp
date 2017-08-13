@@ -23,7 +23,7 @@ namespace Pcf {
         /// @par Examples
         /// The following example demonstrates how to merge two disparate sets. This example creates two HashSet<T> objects, && populates them with even && odd numbers, respectively. A third HashSet<T> object is created from the set that contains the even numbers. The example then calls the UnionWith method, which adds the odd number set to the third set.
         /// @include HashSet.cpp
-        template<typename T, typename TAllocator=System::Allocator<T>>
+        template<typename T, typename TAllocator=Allocator<T>>
         class HashSet : public Object, public System::Linq::Extension::Enumerable<HashSet<T, TAllocator>, T>, public ISet<T> {
           using Item = T;
         public:

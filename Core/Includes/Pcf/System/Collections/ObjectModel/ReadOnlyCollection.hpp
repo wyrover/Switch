@@ -2,8 +2,8 @@
 /// @brief Contains Pcf::System::Collections::ObjectModel::ReadOnlyCollection <T> class.
 #pragma once
 
+#include "../../../Allocator.hpp"
 #include "../../../Types.hpp"
-#include "../../Allocator.hpp"
 #include "../../NotSupportedException.hpp"
 #include "../../Object.hpp"
 #include "../../_String.hpp"
@@ -17,14 +17,14 @@ namespace Pcf {
     namespace Collections {
       /// @cond
       namespace Generic {
-        template<typename T, typename TAllocator=System::Allocator<T>> class List;
+        template<typename T, typename TAllocator=Allocator<T>> class List;
       }
       /// @endcond
 
       /// @brief The System::Collections::ObjectModel namespace contains classes that can be used as collections in the object model of a reusable library. Use these classes when properties or methods return collections.
       namespace ObjectModel {
         /// @brief Provides the base class for a generic read-only collection.
-        template<typename T, typename TAllocator=System::Allocator<T>>
+        template<typename T, typename TAllocator=Allocator<T>>
         class ReadOnlyCollection : public System::Collections::Generic::IList<T> {
         public:
           /// @brief Initializes a new instance of the ReadOnlyCollection<T> class that contains elements copied from the specified List and has sufficient capacity to accommodate the number of elements copied.

@@ -42,7 +42,7 @@ String Type::GetFullName() const {
   Array<string> containsNullTypeTypes = {"System::Tuple"};
   for (string item : containsNullTypeTypes) {
     if (fullName.StartsWith(item)) {
-      fullName = fullName.Replace(", System::NullType", "");
+      fullName = fullName.Replace(", NullType", "");
       break;
     }
   }

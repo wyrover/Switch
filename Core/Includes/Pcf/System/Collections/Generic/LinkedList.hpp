@@ -8,9 +8,9 @@
 #include "IComparer.hpp"
 #include "ICollection.hpp"
 #include "GenericException.hpp"
+#include "../../../Allocator.hpp"
 #include "../../../InitializerList.hpp"
 #include "../../Action.hpp"
-#include "../../Allocator.hpp"
 #include "../../Array.hpp"
 #include "../../Comparison.hpp"
 #include "../../Int32.hpp"
@@ -33,7 +33,7 @@ namespace Pcf {
         /// @remarks Lists that contain reference types perform better when a node and its value are created at the same time. LinkedList<T> accepts null as a valid Value property for reference types and allows duplicate values.
         /// @remarks If the LinkedList<T> is empty, the First and Last properties contain null.
         /// @remarks The LinkedList<T> class does not support chaining, splitting, cycles, or other features that can leave the list in an inconsistent state. The list remains consistent on a single thread. The only multithreaded scenario supported by LinkedList<T> is multithreaded read operations.
-        template<typename T, typename TAllocator=System::Allocator<T>>
+        template<typename T, typename TAllocator=Allocator<T>>
         class LinkedList : public Object, public System::Linq::Extension::Enumerable<LinkedList<T, TAllocator>, T>, public ICollection<T> {
           using Item = T;
         public:

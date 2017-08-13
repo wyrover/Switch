@@ -235,7 +235,6 @@ set(INCLUDE_FILES
   Includes/Pcf/System/Action.hpp
   Includes/Pcf/System/AccessViolationException.hpp
   Includes/Pcf/System/AggregateException.hpp
-  Includes/Pcf/System/Allocator.hpp
   Includes/Pcf/System/AppDomainUnloadedException.hpp
   Includes/Pcf/System/ApplicationException.hpp
   Includes/Pcf/System/ArgumentException.hpp
@@ -319,7 +318,6 @@ set(INCLUDE_FILES
   Includes/Pcf/System/NullPointerException.hpp
   Includes/Pcf/System/NullReferenceException.hpp
   Includes/Pcf/System/Nullable.hpp
-  Includes/Pcf/System/NullType.hpp
   Includes/Pcf/System/NumberRepresentationBase.hpp
   Includes/Pcf/System/NumericalFormat.hpp
   Includes/Pcf/System/NumericalParsing.hpp
@@ -371,6 +369,7 @@ set(INCLUDE_FILES
   Includes/Pcf/System/ValueType.hpp
   Includes/Pcf/System/Version.hpp
   Includes/Pcf/Abstract.hpp
+  Includes/Pcf/Allocator.hpp
   Includes/Pcf/Any.hpp
   Includes/Pcf/As.hpp
   Includes/Pcf/Async.hpp
@@ -386,6 +385,7 @@ set(INCLUDE_FILES
   Includes/Pcf/LiteralOperatorConverter.hpp
   Includes/Pcf/Lock.hpp
   Includes/Pcf/Move.hpp
+  Includes/Pcf/NullType.hpp
   Includes/Pcf/Property.hpp
   Includes/Pcf/Public.hpp
   Includes/Pcf/Ref.hpp

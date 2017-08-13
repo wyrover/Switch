@@ -20,7 +20,7 @@ namespace Pcf {
         /// @par Examples
         /// The following example shows how to add and remove items from a ConcurrentBag<T>:
         /// @include ConcurrentBag.cpp
-        template<typename T, typename TAllocator=System::Allocator<T>>
+        template<typename T, typename TAllocator=Allocator<T>>
         class ConcurrentBag : public Object, public IProducerConsumerCollection<T> {
         public:
           /// @brief Initializes a new instance of the ConcurrentBag<T> class.

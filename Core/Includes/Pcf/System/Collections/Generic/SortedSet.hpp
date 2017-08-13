@@ -4,10 +4,10 @@
 
 #include <set>
 
+#include "../../../Allocator.hpp"
 #include "../../../InitializerList.hpp"
 #include "../../../Types.hpp"
 #include "../../../RefPtr.hpp"
-#include "../../Allocator.hpp"
 #include "../../Array.hpp"
 #include "../../Object.hpp"
 #include "../../Predicate.hpp"
@@ -33,7 +33,7 @@ namespace Pcf {
         /// @par Examples
         /// The following example demonstrates how to merge two disparate sets. This example creates two SortedSet<T> objects, && populates them with even && odd numbers, respectively. A third SortedSet<T> object is created from the set that contains the even numbers. The example then calls the UnionWith method, which adds the odd number set to the third set.
         /// @include SortedSet.cpp
-        template<typename T, typename TAllocator=System::Allocator<T>>
+        template<typename T, typename TAllocator=Allocator<T>>
         class SortedSet : public Object, public System::Linq::Extension::Enumerable<SortedSet<T, TAllocator>, T>, public ISet<T> {
           using Item = T;
         public:

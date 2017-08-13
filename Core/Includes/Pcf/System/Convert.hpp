@@ -2,6 +2,7 @@
 /// @brief Contains Pcf::System::Convert class.
 #pragma once
 
+#include "../NullType.hpp"
 #include "../Types.hpp"
 #include "../RefPtr.hpp"
 #include "Boolean.hpp"
@@ -16,7 +17,6 @@
 #include "Int64.hpp"
 #include "IntPtr.hpp"
 #include "InvalidCastException.hpp"
-#include "NullType.hpp"
 #include "OverflowException.hpp"
 #include "SByte.hpp"
 #include "Single.hpp"

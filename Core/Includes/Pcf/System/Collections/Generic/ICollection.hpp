@@ -2,9 +2,9 @@
 /// @brief Contains Pcf::System::Collections::Generic::ICollection <T> interface.
 #pragma once
 
+#include "../../../Allocator.hpp"
 #include "../../../Interface.hpp"
 #include "../../../Types.hpp"
-#include "../../Allocator.hpp"
 #include "../../Object.hpp"
 #include "IEnumerable.hpp"
 #include "../../../Property.hpp"

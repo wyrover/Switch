@@ -4,8 +4,8 @@
 
 #include <map>
 
+#include "../../../Allocator.hpp"
 #include "../../../InitializerList.hpp"
-#include "../../Allocator.hpp"
 #include "../../Object.hpp"
 #include "../../../Types.hpp"
 #include "../../Array.hpp"
@@ -32,7 +32,7 @@ namespace Pcf {
         /// The example shows how to enumerate the keys && values in the dictionary && how to enumerate the keys && values alone using the Keys property && the Values property.
         /// Finally, the example demonstrates the Remove method.
         /// @include SortedDictionary.cpp
-        template<typename TKey, typename TValue, typename TAllocator=System::Allocator<std::pair<TKey, TValue>>>
+        template<typename TKey, typename TValue, typename TAllocator=Allocator<std::pair<TKey, TValue>>>
         class SortedDictionary : public Object, public System::Linq::Extension::Enumerable<SortedDictionary<TKey, TValue, TAllocator>, System::Collections::Generic::KeyValuePair<TKey,TValue>>, public IDictionary<TKey, TValue> {
           using Item = System::Collections::Generic::KeyValuePair<TKey,TValue>;
         public:

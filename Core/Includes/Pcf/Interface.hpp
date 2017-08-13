@@ -3,7 +3,7 @@
 #pragma once
 
 #include "Types.hpp"
-#include "System/Allocator.hpp"
+#include "Allocator.hpp"
 
 /// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Pcf {
@@ -17,7 +17,7 @@ namespace Pcf {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @cond
-    template<typename T, int32 rank=1, typename TAllocator=System::Allocator<T>>
+    template<typename T, int32 rank=1, typename TAllocator=Allocator<T>>
     class Array;
 
     template<typename T, int32 rank, typename TAllocator>

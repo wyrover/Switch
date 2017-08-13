@@ -18,7 +18,7 @@ namespace Pcf {
         /// @par Examples
         /// The following example shows how to use a ConcurrentStack<T> to push and pop individual items:
         /// @include ConcurrentStack.cpp
-        template<typename T, typename TAllocator=System::Allocator<T>>
+        template<typename T, typename TAllocator=Allocator<T>>
         class ConcurrentStack : public Object, public IProducerConsumerCollection<T> {
         public:
           /// @brief Initializes a new instance of the ConcurrentStack<T> class.

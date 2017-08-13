@@ -19,7 +19,7 @@ namespace Pcf {
         /// @par Examples
         /// The following example shows how to use a ConcurrentQueue<T> to enqueue and dequeue items:
         /// @include ConcurrentQueue.cpp
-        template<typename T, typename TAllocator=System::Allocator<T>>
+        template<typename T, typename TAllocator=Allocator<T>>
         class ConcurrentQueue : public Object, public IProducerConsumerCollection<T> {
         public:
           /// @brief Initializes a new instance of the ConcurrentQueue<T> class.

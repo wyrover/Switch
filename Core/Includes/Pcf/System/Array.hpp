@@ -4,12 +4,12 @@
 
 #include <array>
 
+#include "../Allocator.hpp"
 #include "../Interface.hpp"
 #include "../InitializerList.hpp"
 #include "../Move.hpp"
 #include "../Property.hpp"
 #include "../Types.hpp"
-#include "Allocator.hpp"
 #include "Comparison.hpp"
 #include "IndexOutOfRangeException.hpp"
 #include "InvalidOperationException.hpp"

@@ -4,10 +4,10 @@
 
 #include <unordered_map>
 
+#include "../../../Allocator.hpp"
 #include "../../../InitializerList.hpp"
 #include "../../../Move.hpp"
 #include "../../../Types.hpp"
-#include "../../Allocator.hpp"
 #include "../../Array.hpp"
 #include "../../Hash.hpp"
 #include "../../Object.hpp"
@@ -32,7 +32,7 @@ namespace Pcf {
         /// The example shows how to enumerate the keys && values in the dictionary && how to enumerate the keys && values alone using the Keys property && the Values property.
         /// Finally, the example demonstrates the Remove method.
         /// @include Dictionary.cpp
-        template<typename TKey, typename TValue, typename TAllocator=System::Allocator<std::pair<const TKey, TValue>>>
+        template<typename TKey, typename TValue, typename TAllocator=Allocator<std::pair<const TKey, TValue>>>
         class Dictionary : public Object, public Linq::Extension::Enumerable<Dictionary<TKey, TValue, TAllocator>, KeyValuePair<TKey,TValue>>, public IDictionary<TKey, TValue> {
         public:
           using Item = KeyValuePair<TKey,TValue>;

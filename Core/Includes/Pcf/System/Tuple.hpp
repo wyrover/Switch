@@ -2,9 +2,9 @@
 /// @brief Contains Pcf::System::Tuple <> class.
 #pragma once
 
+#include "../NullType.hpp"
 #include "../Property.hpp"
 #include "../Types.hpp"
-#include "NullType.hpp"
 #include "TupleImpl.hpp"
 
 /// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.

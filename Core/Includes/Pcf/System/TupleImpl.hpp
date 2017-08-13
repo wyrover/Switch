@@ -2,12 +2,12 @@
 /// @brief Contains Pcf::System::ITuple interface and Pcf::System::TupleImpl class.
 #pragma once
 
-#include "../Types.hpp"
 #include "../Interface.hpp"
+#include "../NullType.hpp"
+#include "../Types.hpp"
 #include "Convert.hpp"
 #include "Hash.hpp"
 #include "IComparable.hpp"
-#include "NullType.hpp"
 #include "Object.hpp"
 #include "String.hpp"
 
