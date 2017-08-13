@@ -3,6 +3,7 @@
 #include <cwchar>
 #include <iostream>
 
+#include "../../../Includes/Pcf/System/IO/IOException.hpp"
 #include "../../../Includes/Pcf/System/Buffer.hpp"
 #include "../../../Includes/Pcf/System/Console.hpp"
 #include "../../../Includes/Pcf/System/Environment.hpp"
@@ -21,8 +22,6 @@ namespace {
   refptr<System::Text::Encoding> inputEncoding = pcf_new<System::Text::UTF8Encoding>(false);
   refptr<System::Text::Encoding> outputEncoding = pcf_new<System::Text::UTF8Encoding>(false);
 
-  System::ConsoleColor __backgroundColor = static_cast<System::ConsoleColor>(__OS::CoreApi::Console::GetBackgroundColor());
-  System::ConsoleColor __foregroundColor = static_cast<System::ConsoleColor>(__OS::CoreApi::Console::GetForegroundColor());
   bool treatControlCAsInput = false;
 }
 
@@ -83,7 +82,10 @@ namespace {
 Property<ConsoleColor> Console::BackgroundColor {
   [] {return __OS::CoreApi::Console::GetBackgroundColor();},
   [](ConsoleColor value) {
-    __OS::CoreApi::Console::SetBackgroundColor(value);
+    if (!Enum<ConsoleColor>::IsDefined(value))
+      throw ArgumentException(pcf_current_information);
+    if (!__OS::CoreApi::Console::SetBackgroundColor(value))
+      throw System::IO::IOException(pcf_current_information);
   }
 };
 
@@ -128,7 +130,7 @@ Property<int32> Console::CursorSize {
 Property<int32> Console::CursorTop {
   [] {return __OS::CoreApi::Console::GetCursorTop();},
   [](int32 value) {
-    if (value < 0 || value >= __OS::CoreApi::Console::GetWindowHeight())
+    if (value < 0 || value >= __OS::CoreApi::Console::GetBufferHeight())
       throw ArgumentOutOfRangeException(pcf_current_information);
       
     __OS::CoreApi::Console::SetCursorTop(value);
@@ -150,6 +152,8 @@ Property<Console::StandardErrorOutput&, ReadOnly> Console::Error {
 Property<ConsoleColor> Console::ForegroundColor {
   [] {return __OS::CoreApi::Console::GetForegroundColor();},
   [](ConsoleColor value) {
+    if (!Enum<ConsoleColor>::IsDefined(value))
+      throw ArgumentException(pcf_current_information);
     __OS::CoreApi::Console::SetForegroundColor(value);
   }
 };
@@ -170,15 +174,15 @@ Property<const refptr<System::Text::Encoding>&> Console::InputEncoding {
 };
 
 Property<bool, ReadOnly> Console::IsErrorRedirected{
-  [] {return error == defaultError; }
+  [] {return error != defaultError; }
 };
 
 Property<bool, ReadOnly> Console::IsInputRedirected{
-  [] {return in == defaultIn; }
+  [] {return in != defaultIn; }
 };
 
 Property<bool, ReadOnly> Console::IsOutputRedirected{
-  [] {return out == defaultOut; }
+  [] {return out != defaultOut; }
 };
 
 Property<bool, ReadOnly> Console::KeyAvailable {
@@ -231,6 +235,20 @@ Property<int32> Console::WindowHeight {
   }
 };
 
+Property<int32> Console::WindowLeft {
+  []{return __OS::CoreApi::Console::GetWindowLeft(); },
+  [](int32 value) {
+    __OS::CoreApi::Console::SetWindowLeft(value);
+  }
+};
+
+Property<int32> Console::WindowTop {
+  []{return __OS::CoreApi::Console::GetWindowTop(); },
+  [](int32 value) {
+    __OS::CoreApi::Console::SetWindowTop(value);
+  }
+};
+
 Property<int32> Console::WindowWidth {
   [] {return __OS::CoreApi::Console::GetWindowWidth(); },
   [](int32 value) {
@@ -254,6 +272,11 @@ void Console::Beep(int32 frequency, int32 duration) {
 void Console::Clear() {
   __OS::CoreApi::Console::Clrscr();
 }
+
+void Console::MoveBufferArea(int32 sourceLeft, int32 sourceTop, int32 sourceWidth, int32 sourceHeight, int32 targetLeft, int32 targetTop, char32 sourceChar, ConsoleColor sourceForeColor, ConsoleColor sourceBackColor) {
+  
+}
+
 
 int32 Console::Read() {
   out->Flush();
@@ -294,8 +317,7 @@ ConsoleKeyInfo Console::ReadKey(bool intercept) {
 }
 
 void Console::ResetColor() {
-  __OS::CoreApi::Console::SetForegroundColor(__foregroundColor);
-  __OS::CoreApi::Console::SetBackgroundColor(__backgroundColor);
+  __OS::CoreApi::Console::ResetColor();
 }
 
 void Console::SetError(System::IO::TextWriter& e) { error = &e; }

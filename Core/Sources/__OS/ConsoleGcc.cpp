@@ -72,8 +72,8 @@ namespace {
   };
   
   static Terminal terminal;
-  static ConsoleColor backColor = (ConsoleColor)16;
-  static ConsoleColor foreColor = (ConsoleColor)16;
+  static ConsoleColor backColor = ConsoleColor::Black;
+  static ConsoleColor foreColor = ConsoleColor::White;
   static bool cursorVisible = true;
   
   class KeyInfo {
@@ -595,11 +595,11 @@ int32 __OS::CoreApi::Console::GetInputCodePage() {
 }
 
 int32 __OS::CoreApi::Console::GetLargestWindowHeight() {
-  return 999;
+  return 1000;
 }
 
 int32 __OS::CoreApi::Console::GetLargestWindowWidth() {
-  return 999;
+  return 1000;
 }
 
 bool __OS::CoreApi::Console::GetNumberLock() {
@@ -663,11 +663,20 @@ void __OS::CoreApi::Console::ReadKey(int32& keyChar, int32& keyCode, bool& alt, 
   shift = keyInfo.HasShiftModifier();
 }
 
-void __OS::CoreApi::Console::SetBackgroundColor(ConsoleColor color) {
-  static System::Collections::Generic::Dictionary<int32, string> colors {{(int32)ConsoleColor::Black, "\033[40m"}, {(int32)ConsoleColor::DarkBlue, "\033[44m"}, {(int32)ConsoleColor::DarkGreen, "\033[42m"}, {(int32)ConsoleColor::DarkCyan, "\033[46m"}, {(int32)ConsoleColor::DarkRed, "\033[41m"}, {(int32)ConsoleColor::DarkMagenta, "\033[45m"}, {(int32)ConsoleColor::DarkYellow, "\033[43m"}, {(int32)ConsoleColor::Gray, "\033[47m"}, {(int32)ConsoleColor::DarkGray, "\033[100m"}, {(int32)ConsoleColor::Blue, "\033[104m"}, {(int32)ConsoleColor::Green, "\033[102m"}, {(int32)ConsoleColor::Cyan, "\033[106m"}, {(int32)ConsoleColor::Red, "\033[101m"}, {(int32)ConsoleColor::Magenta,"\033[105m"}, {(int32)ConsoleColor::Yellow, "\033[103m"}, {(int32)ConsoleColor::White,"\033[107m"}, {16, "\033[49m"}};
+bool __OS::CoreApi::Console::ResetColor() {
+  if (Terminal::IsAnsiSupported()) {
+    printf("\033[49m");
+    printf("\033[39m");
+  }
+  return true;
+}
+
+bool __OS::CoreApi::Console::SetBackgroundColor(ConsoleColor color) {
+  static System::Collections::Generic::Dictionary<int32, string> colors {{(int32)ConsoleColor::Black, "\033[40m"}, {(int32)ConsoleColor::DarkBlue, "\033[44m"}, {(int32)ConsoleColor::DarkGreen, "\033[42m"}, {(int32)ConsoleColor::DarkCyan, "\033[46m"}, {(int32)ConsoleColor::DarkRed, "\033[41m"}, {(int32)ConsoleColor::DarkMagenta, "\033[45m"}, {(int32)ConsoleColor::DarkYellow, "\033[43m"}, {(int32)ConsoleColor::Gray, "\033[47m"}, {(int32)ConsoleColor::DarkGray, "\033[100m"}, {(int32)ConsoleColor::Blue, "\033[104m"}, {(int32)ConsoleColor::Green, "\033[102m"}, {(int32)ConsoleColor::Cyan, "\033[106m"}, {(int32)ConsoleColor::Red, "\033[101m"}, {(int32)ConsoleColor::Magenta,"\033[105m"}, {(int32)ConsoleColor::Yellow, "\033[103m"}, {(int32)ConsoleColor::White,"\033[107m"}};
   backColor = color;
   if (Terminal::IsAnsiSupported())
     printf("%s", colors[(int32)backColor].c_str());
+  return true;
 }
 
 bool __OS::CoreApi::Console::SetBufferHeight(int32 height) {
@@ -717,11 +726,12 @@ void __OS::CoreApi::Console::SetEchoVisible(bool visible) {
   tcsetattr(0, TCSANOW, &settings);
 }
 
-void __OS::CoreApi::Console::SetForegroundColor(ConsoleColor color) {
-  static System::Collections::Generic::Dictionary<int32, string> colors {{(int32)ConsoleColor::Black, "\033[30m"}, {(int32)ConsoleColor::DarkBlue, "\033[34m"}, {(int32)ConsoleColor::DarkGreen, "\033[32m"}, {(int32)ConsoleColor::DarkCyan, "\033[36m"}, {(int32)ConsoleColor::DarkRed, "\033[31m"}, {(int32)ConsoleColor::DarkMagenta, "\033[35m"}, {(int32)ConsoleColor::DarkYellow, "\033[33m"}, {(int32)ConsoleColor::Gray, "\033[37m"}, {(int32)ConsoleColor::DarkGray, "\033[90m"}, {(int32)ConsoleColor::Blue, "\033[94m"}, {(int32)ConsoleColor::Green, "\033[92m"}, {(int32)ConsoleColor::Cyan, "\033[96m"}, {(int32)ConsoleColor::Red, "\033[91m"}, {(int32)ConsoleColor::Magenta,"\033[95m"}, {(int32)ConsoleColor::Yellow, "\033[93m"}, {(int32)ConsoleColor::White,"\033[97m"}, {16, "\033[39m"}};
+bool __OS::CoreApi::Console::SetForegroundColor(ConsoleColor color) {
+  static System::Collections::Generic::Dictionary<int32, string> colors {{(int32)ConsoleColor::Black, "\033[30m"}, {(int32)ConsoleColor::DarkBlue, "\033[34m"}, {(int32)ConsoleColor::DarkGreen, "\033[32m"}, {(int32)ConsoleColor::DarkCyan, "\033[36m"}, {(int32)ConsoleColor::DarkRed, "\033[31m"}, {(int32)ConsoleColor::DarkMagenta, "\033[35m"}, {(int32)ConsoleColor::DarkYellow, "\033[33m"}, {(int32)ConsoleColor::Gray, "\033[37m"}, {(int32)ConsoleColor::DarkGray, "\033[90m"}, {(int32)ConsoleColor::Blue, "\033[94m"}, {(int32)ConsoleColor::Green, "\033[92m"}, {(int32)ConsoleColor::Cyan, "\033[96m"}, {(int32)ConsoleColor::Red, "\033[91m"}, {(int32)ConsoleColor::Magenta,"\033[95m"}, {(int32)ConsoleColor::Yellow, "\033[93m"}, {(int32)ConsoleColor::White,"\033[97m"}};
   foreColor = color;
   if (Terminal::IsAnsiSupported())
     printf("%s", colors[(int32)foreColor].c_str());
+  return true;
 }
 
 bool __OS::CoreApi::Console::SetInputCodePage(int32 codePage) {

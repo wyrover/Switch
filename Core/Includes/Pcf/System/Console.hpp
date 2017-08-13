@@ -61,6 +61,11 @@ namespace Pcf {
 
       /// @brief Gets or sets the background color of the console.
       /// @param A ConsoleColor that specifies the background color of the console; that is, the color that appears behind each character.
+      /// @exception ArgumentException The color specified in a set operation is not a valid member of System::ConsoleColor.
+      /// @exception IOException An I/O error occurred.
+      /// @remarks A change to the BackgroundColor property affects only output that is written to individual character cells after the background color is changed. To change the background color of the console window as a whole, set the BackgroundColor property and call the Clear method. The following example provides an illustration.
+      /// @include
+      /// A get operation for a Windows-based application, in which a console does not exist, returns ConsoleColor.Black.
       /// @par Example
       /// The following example saves the values of the ConsoleColor enumeration to an array and stores the current values of the BackgroundColor and ForegroundColor properties to variables. It then changes the foreground color to each color in the ConsoleColor enumeration except to the color that matches the current background, and it changes the background color to each color in the ConsoleColor enumeration except to the color that matches the current foreground. (If the foreground color is the same as the background color, the text isn't visible.) Finally, it calls the ResetColor method to restore the original console colors.
       /// @include ConsoleColor4.cpp
@@ -225,12 +230,22 @@ namespace Pcf {
       static void Beep(int32 frequency, int32 duration);
 
       /// @brief Clears the console buffer and corresponding console window of display information.
-      /// @remarks pcf_using the Clear method is equivalent invoking the MS-DOS cls command in the command prompt window.
+      /// @remarks Using the Clear method is equivalent invoking the MS-DOS cls command in the command prompt window.
       /// @remarks When the Clear method is called, the cursor automatically scrolls to the top-left corner of the window and the contents of the screen buffer are set to blanks using the current foreground background colors.
       /// @par Example
+      /// The following example uses the Clear method to clear the console before it executes a loop, prompts the user to select a foreground and background color and to enter a string to display. If the user chooses not to exit the program, the console's original foreground and background colors are restored and the Clear method is called again before re-executing the loop.
+      /// @include ConsoleClear.cpp
+      /// The example relies on a GetKeyPress method to validate the user's selection of a foreground and background color.
+      ///
       /// This example demonstrates the CursorLeft and CursorTop properties, and the SetCursorPosition and Clear methods. The example positions the cursor, which determines where the next write will occur, to draw a 5 character by 5 character rectangle using a combination of "+", "|", and "-" strings. Note that the rectangle could be drawn with fewer steps using a combination of other strings.
       /// @include ConsoleCursor.cpp
       static void Clear();
+      
+      static void MoveBufferArea(int32 sourceLeft, int32 sourceTop, int32 sourceWidth, int32 sourceHeight, int32 targetLeft, int32 targetTop) {
+        MoveBufferArea(sourceLeft, sourceTop, sourceWidth, sourceHeight, targetLeft, targetTop, ' ', Console::BackgroundColor, Console::ForegroundColor);
+      }
+
+      static void MoveBufferArea(int32 sourceLeft, int32 sourceTop, int32 sourceWidth, int32 sourceHeight, int32 targetLeft, int32 targetTop, char32 sourceChar, ConsoleColor sourceForeColor, ConsoleColor sourceBackColor);
 
       /// @brief Reads the next character from the standard input stream.
       /// @return int32 The next character from the input stream, or negative one (-1) if there are currently no more characters to be read
@@ -240,6 +255,9 @@ namespace Pcf {
       /// @remarks Note that you will not get a property value of -1 unless you perform one of the following actions: simultaneously press the Control modifier key and Z console key (CTRL+Z),
       /// @remarks which signals the end-of-file condition; press an equivalent key that signals the end-of-file condition, such as the F6 function key in Windows; or redirect the input stream to a source,
       /// @remarks such as a text file, that has an actual end-of-file character.
+      /// @par Example
+      /// The following example demonstrates the Read method.
+      /// @include ConsoleRead.cpp
       static int32 Read();
 
       /// @brief Reads the next line of characters from the standard input stream.

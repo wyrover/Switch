@@ -14,6 +14,7 @@
 #include "IndexOutOfRangeException.hpp"
 #include "InvalidOperationException.hpp"
 #include "Object.hpp"
+#include "Predicate.hpp"
 #include "RankException.hpp"
 #include "_String.hpp"
 #include "Collections/Generic/IList.hpp"
@@ -481,6 +482,26 @@ namespace Pcf {
       /// @brief Determines whether an element is in the Array.
       /// @param value The object to be added to the end of the Array. The value can ! be null for reference types.
       bool Contains(const T& value) const override { return this->IndexOf(value) != -1; }
+      
+      /// @brief Determines whether the List<T> contains elements that match the conditions defined by the specified predicate..
+      /// @param match The Predicate pointer function that defines the conditions of the elements to search for.
+      /// @return Boolean true if the List<T> contains one || more elements that match the conditions defined by the specified predicate; otherwise, false.
+      /// @exception ArgumentNUllException The parameters match is null.
+      /// @remarks The Predicate is a pointer to a method that returns true if the object passed to it matches the conditions defined in the pointer function. The elements of the current List<T> are individually passed to the Predicate pointer function, && processing is stopped when a match is found.
+      /// @remarks This method is an O(n) operation, where n is Count.
+      /// @remarks The following code example demonstrates the RemoveAll method && several other methods that use the Predicate<T> generic delegate.
+      /// @remarks A List<T> of strings is created, containing 8 dinosaur names, two of which (at positions 1 && 5) end with "saurus". The code example also defines a search predicate method named EndsWithSaurus, which accepts a string parameter && returns a Boolean value indicating whether the input string ends in "saurus".
+      /// @remarks The Find, FindLast, && FindAll methods are used to search the list with the search predicate method.
+      /// @par Examples
+      /// The RemoveAll method is used to remove all entries ending with "saurus". It traverses the list from the beginning, passing each element in turn to the EndsWithSaurus method. The element is removed if the EndsWithSaurus method returns true.
+      /// @include ListExists.cpp
+      bool Exists(const Predicate<const T&>& match) const {
+        for (const T& elem : *this)
+          if (match(elem))
+            return true;
+        
+        return false;
+      }
 
       /// @brief Determines the index of a specific item in the Array.
       /// @param value The object to locate in the Array.

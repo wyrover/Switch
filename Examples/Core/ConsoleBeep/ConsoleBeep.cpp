@@ -1,7 +1,6 @@
 #include <Pcf/Pcf>
 
 using namespace System;
-using namespace System::Threading;
 
 namespace Examples {
   class Program {

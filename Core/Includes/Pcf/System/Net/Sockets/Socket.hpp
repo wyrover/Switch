@@ -943,7 +943,7 @@ namespace Pcf {
           /// @remarks Setting how to Receive specifies that subsequent calls to Receive are not allowed. This has no effect on lower protocol layers. If you are using a connection-oriented protocol, the connection is terminated if either of the following conditions exist after a call to Shutdown :
           /// @remarks Data is in the incoming network buffer waiting to be received.
           /// @remarks More data has arrived.
-          /// @remarks If you are using a connectionless protocol, datagrams are accepted and queued. However, if no buffer space is available for additional incoming datagrams, they will be discarded and no error will be returned to the sender. pcf_using Shutdown on a connectionless Socket is not recommended.
+          /// @remarks If you are using a connectionless protocol, datagrams are accepted and queued. However, if no buffer space is available for additional incoming datagrams, they will be discarded and no error will be returned to the sender. Using Shutdown on a connectionless Socket is not recommended.
           /// @remarks Setting how to Both disables both sends and receives as described above.
           /// @note If you receive a SocketException when calling the Shutdown method, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.

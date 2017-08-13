@@ -53,7 +53,8 @@ namespace __OS {
       static int32 GetWindowWidth();
       static bool KeyAvailable();
       static void ReadKey(int32& keyChar, int32& keyCode, bool& alt, bool& shift, bool& ctrl);
-      static void SetBackgroundColor(System::ConsoleColor color);
+      static bool ResetColor();
+      static bool SetBackgroundColor(System::ConsoleColor color);
       static bool SetBufferHeight(int32 height);
       static bool SetBufferWidth(int32 width);
       static bool SetCursorLeft(int32 left);
@@ -61,7 +62,7 @@ namespace __OS {
       static void SetCursorSize(int32 size);
       static void SetCursorVisible(bool visible);
       static void SetEchoVisible(bool visible);
-      static void SetForegroundColor(System::ConsoleColor color);
+      static bool SetForegroundColor(System::ConsoleColor color);
       static bool SetInputCodePage(int32 codePage);
       static bool SetOutputCodePage(int32 codePage);
       static bool SetTitle(const string& title);

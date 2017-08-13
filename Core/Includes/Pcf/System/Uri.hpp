@@ -664,7 +664,7 @@ namespace Pcf {
       /// @param uri The specified Uri instance to test.
       /// @return bool true if the current Uri instance is a base of uri; otherwise, false.
       /// @exception ArgumentNullException uri is null.
-      /// @remarks IsBaseOf is used to compare the current Uri instance to a specified Uri to determine whether this URI is a base for the specified Uri. When comparing two Uri objects to determine a base relationship, the user information (UserInfo) is ! evaluated. When comparing two URIs (uri1 && uri2), uri1 is the base of uri2 if, when you ignore everything in uri2 after the last slash (/), the two URIs are identical. pcf_using http://host/path/path/file?query as the base URI, the following table shows whether it is a base for other URIs.
+      /// @remarks IsBaseOf is used to compare the current Uri instance to a specified Uri to determine whether this URI is a base for the specified Uri. When comparing two Uri objects to determine a base relationship, the user information (UserInfo) is ! evaluated. When comparing two URIs (uri1 && uri2), uri1 is the base of uri2 if, when you ignore everything in uri2 after the last slash (/), the two URIs are identical. Using http://host/path/path/file?query as the base URI, the following table shows whether it is a base for other URIs.
       /// | URI                                   | http://host/path/path/file?query is base of |
       /// |---------------------------------------|---------------------------------------------|
       /// | http://host/path/path/file/           | yes                                         |

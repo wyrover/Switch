@@ -227,7 +227,7 @@ namespace Pcf {
           /// @par Examples
           /// The RemoveAll method is used to remove all entries ending with "saurus". It traverses the list from the beginning, passing each element in turn to the EndsWithSaurus method. The element is removed if the EndsWithSaurus method returns true.
           /// @include LinkedList.Exists.cpp
-          bool Exists(const Predicate<const T&>& match) {
+          bool Exists(const Predicate<const T&>& match) const {
             for (T elem : *this)
               if (match(elem))
                 return true;

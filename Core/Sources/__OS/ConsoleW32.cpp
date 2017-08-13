@@ -9,6 +9,11 @@
 
 using namespace System;
 
+namepsace {
+  static ConsoleColor backColor = __OS::CoreApi::Console::GetBackgroundColor();
+  static ConsoleColor foreColor = __OS::CoreApi::Console::GetForegroundColor();
+}
+
 void __OS::CoreApi::Console::Beep(int32 frequency, int32 duration) {
   ::Beep(frequency, duration);
 }
@@ -139,13 +144,17 @@ void __OS::CoreApi::Console::ReadKey(int32& keyChar, int32& keyCode, bool& alt, 
   ctrl = (inputRecord.Event.KeyEvent.dwControlKeyState & LEFT_CTRL_PRESSED) == LEFT_CTRL_PRESSED || (inputRecord.Event.KeyEvent.dwControlKeyState & RIGHT_CTRL_PRESSED) == RIGHT_CTRL_PRESSED;
 }
 
-void __OS::CoreApi::Console::SetBackgroundColor(ConsoleColor color) {
+bool __OS::CoreApi::Console::ResetColor() {
+  return SetBackgroundColor(backColor) && SetForegroundColor(foreColor);
+}
+
+bool __OS::CoreApi::Console::SetBackgroundColor(ConsoleColor color) {
   CONSOLE_SCREEN_BUFFER_INFO csbi;
   GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
 
   csbi.wAttributes &= 0xFF0F;
   csbi.wAttributes |= (int32)color << 4;
-  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), csbi.wAttributes);
+  return SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), csbi.wAttributes) == TRUE;
 }
 
 bool __OS::CoreApi::Console::SetBufferHeight(int32 height) {
@@ -196,13 +205,13 @@ void __OS::CoreApi::Console::SetEchoVisible(bool visible) {
   // Only for Linux terminal...
 }
 
-void __OS::CoreApi::Console::SetForegroundColor(ConsoleColor color) {
+bool __OS::CoreApi::Console::SetForegroundColor(ConsoleColor color) {
   CONSOLE_SCREEN_BUFFER_INFO csbi;
   GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
 
   csbi.wAttributes &= 0xFFF0;
   csbi.wAttributes |= (int32)color;
-  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), csbi.wAttributes);
+  return SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), csbi.wAttributes) == TRUE;
 }
 
 bool __OS::CoreApi::Console::SetInputCodePage(int32 codePage) {

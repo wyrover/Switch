@@ -7,7 +7,7 @@ namespace Examples {
   public:
     // The main entry point for the application.
     static void Main() {
-      Console::BackgroundColor = ConsoleColor::DarkGray;
+      Console::BackgroundColor = ConsoleColor::White;
       Console::ForegroundColor = ConsoleColor::DarkRed;
       Console::WriteLine("===============================================================================");
       Console::ForegroundColor = ConsoleColor::DarkBlue;
