@@ -84,22 +84,7 @@ namespace Examples {
   public:
     // The main entry point for the application.
     static void Main() {
-      int a = 42;
-      uint b = 42;
-      Console::WriteLine("{0} = {1} : {2}", a, b, a ==  b);
-      Console::WriteLine("{0} equals {1} : {2}", a, b, Int32(a).Equals(b));
-      
-      Int32 c = 42;
-      Int64 d = 42;
-      Console::WriteLine("{0} = {1} : {2}", c, d, c == d);
-      Console::WriteLine("{0} equals {1} : {2}", c, d, c.Equals(d));
-      
-      //int e = 42;
-      //object f = 42;
-      //Console::WriteLine("{0} = {1} : {2}", e, f, e == f);
-      //Console::WriteLine("{0} equals {1} : {2}", e, f, e::Equals(f));
-
-      //Console::WriteLine(); Application::Run();
+      Console::WriteLine(); Application::Run();
     }
   };
 }

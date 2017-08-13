@@ -557,6 +557,42 @@ namespace Pcf {
         }
         return -1;
       }
+      
+      /// @brief Reverses the order of the elements in the entire List<T>.
+      /// @remarks This method uses Array.Reverse to reverse the order of the elements, such that the element at List<T>[i], where i is any index within the range, moves to List<T>[j], where j equals index plus index plus count minus i minus 1.
+      /// @remarks This method is an O(n) operation, where n is Count.
+      /// @par Examples
+      /// The following code example demonstrates both overloads of the Reverse method. The code example creates a List<T> of strings && adds six strings. The Reverse() method overload is used to reverse the list, && then the Reverse(Int32, Int32) method overload is used to reverse the middle of the list, beginning with element 1 && encompassing four elements.
+      /// @include ListReverse.cpp
+      void Reverse() {
+        this->operationNumber++;
+        std::reverse(this->array.begin(), this->array.end());
+      }
+      
+      /// @brief Reverses the order of the elements in the specified range.
+      /// @param index The zero-based starting index of the range to reverse.
+      /// @param count The number of elements in the range to reverse.
+      /// @exception ArgumentOutOfRangeException index is less than 0. -||- count is less than 0.
+      /// @exception ArgumentException ndex && count do ! denote a valid range of elements in the List<T>.
+      /// @remarks This method uses Array.Reverse to reverse the order of the elements, such that the element at List<T>[i], where i is any index within the range, moves to List<T>[j], where j equals index plus index plus count minus i minus 1.
+      /// @remarks This method is an O(n) operation, where n is Count.
+      /// @par Examples
+      /// The following code example demonstrates both overloads of the Reverse method. The code example creates a List<T> of strings && adds six strings. The Reverse() method overload is used to reverse the list, && then the Reverse(Int32, Int32) method overload is used to reverse the middle of the list, beginning with element 1 && encompassing four elements.
+      /// @include ListReverse.cpp
+      void Reverse(int32 index, int32 count) {
+        if (index < 0 || count < 0)
+          throw ArgumentOutOfRangeException(pcf_current_information);
+        
+        if (index + count > this->Count)
+          throw ArgumentException(pcf_current_information);
+        
+        this->operationNumber++;
+        int pos1 = index, pos2 = (index + count)-1;
+        typename std::vector<T, TAllocator>::iterator it1 = this->array.begin() + pos1, it2 = this->array.begin() + pos2;
+        
+        while (pos1++ < pos2--)
+          std::iter_swap(it1++,it2--);
+      }
 
       /// @brief Resize this instane to new size specified.
       /// @param newSize The newSize for this instance.
