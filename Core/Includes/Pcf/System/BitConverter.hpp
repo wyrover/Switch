@@ -30,7 +30,7 @@ namespace Pcf {
     /// | uint32   | GetBytes(uint32)                                  | ToUInt32(const Array< byte >&, int32)                                 |
     /// | uint64   | GetBytes(uint64)                                  | ToUInt64(const Array< byte >&, int32)                                 |
     /// If you use BitConverter methods to round-trip data, make sure that the GetBytes overload and the ToType method specify the same type. As the following example illustrates, restoring an array that represents a signed integer by calling the ToUInt32 method can result in a value that is different from the original. For more information, see the entry Working with Signed Non-Decimal and Bitwise Values in the BCL Team Blog.
-    /// @include BitCoverterRoundTrips.cpp
+    /// @include BitConverterRoundTrips.cpp
     /// The order of bytes in the array returned by the GetBytes method overloads (as well as the order of bits in the integer returned by the DoubleToInt64Bits method and the order of hexadecimal strings returned by the ToString(Byte[]) method) depends on whether the computer architecture is little-endian or big-endian. Similarly, the order of bytes in the array and returned by the ToIntegerValue methods and the ToChar method depends on whether the computer architecture is little-endian or big-endian. The endianness of an architecture is indicated by the IsLittleEndian property, which returns true on little-endian systems and false on big-endian systems. On little-endian systems, lower-order bytes precede higher-order bytes. On big-endian system, higher-order bytes precede lower-order bytes. The following table illustrates the difference in the byte arrays that result from passing the integer 1,234,567,890 (0x499602D2) to the GetBytes(Int32) method. The bytes are listed in order from the byte at index 0 to the byte at index 3.
     /// |---------------|-------------|
     /// | Little-endian | D2-02-96-49 |
@@ -40,11 +40,11 @@ namespace Pcf {
     /// Because the return value of some methods depends on system architecture, be careful when transmitting byte data beyond machine boundaries:
     /// * If all systems sending and receiving data are guaranteed to have the same endianness, nothing has be done to the data.
     /// * If systems sending and receiving data can have different endianness, always transmit data in a particular order. This means that the order of bytes in the array may have to be reversed either before sending them or after receiving them. A common convention is to transmit data in network byte order (big-endian order). The following example provides an implementation for sending an integer value in network byte order.
-    /// @include BitConverterEndianness.cpp
+    /// @include BitConverterEndianess.cpp
     /// * If systems sending and receiving data can have different endianness and the data to be transmitted consists of signed integers, call the IPAddress.HostToNetworkOrder method to convert the data to network byte order and the IPAddress.NetworkToHostOrder method to convert it to the order required by the recipient.
     /// @par Example
     /// The following code example illustrates the use of several BitConverter class methods.
-    /// 
+    /// @include BitConverter.cpp
     class pcf_public BitConverter {
     public:
       /// @brief Converts the specified double-precision floating point number to a 64-bit signed integer.
