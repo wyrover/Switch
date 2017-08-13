@@ -1,9 +1,12 @@
 .DS_Store
+bin-*
+bin
 build-*
 Build
 CMakeLists.txt.user
 x64
 Libraries/Pcf/Help
+Libraries/Pcf-bin
 Libraries/Pcf-build
 Libraries/Pcf/Documentations/warning.txt
 CMakeLists.txt.user

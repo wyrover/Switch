@@ -1,6 +1,6 @@
-rm  -r -q Build
-mkdir -p Build/Examples
-mkdir -p Build/ThirdParties
+rm  -r -q bin
+mkdir -p bin/Examples
+mkdir -p bin/ThirdParties
 
 sudo apt update
 sudo apt install clang cmake doxygen libcurlpp-dev libgtkmm-3.0-dev libjpeg8-dev libpng-dev libssl-dev libx11-dev uuid-dev zlibc -y
@@ -8,20 +8,20 @@ sudo apt install clang cmake doxygen libcurlpp-dev libgtkmm-3.0-dev libjpeg8-dev
 export CC=/usr/bin/clang
 export CXX=/usr/bin/clang++
 
-cd Build/ThirdParties
-cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ../../ThirdParties 
+cd bin/ThirdParties
+cmake -G "Unix Makefiles" -DCMAKE_bin_TYPE=Release ../../ThirdParties 
 make all -j6
 sudo make install
 
 cd ..
-cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ..
+cmake -G "Unix Makefiles" -DCMAKE_bin_TYPE=Release ..
 make documentation -j6
 xdg-open Help/html/index.html &>/dev/null &
 make all -j6
 sudo make install
 
 cd Examples
-#cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ../../Examples
+#cmake -G "Unix Makefiles" -DCMAKE_bin_TYPE=Release ../../Examples
 #make all -j6
 cd ../..
 

@@ -1,9 +1,9 @@
-del /q /s Build
-mkdir Build\Examples
-mkdir Build\ThirdParties
+del /q /s bin
+mkdir bin\Examples
+mkdir bin\ThirdParties
 mkdir c:\usr\local
 
-cd Build\ThirdParties
+cd bin\ThirdParties
 cmake -G "Visual Studio 14 2015 Win64" -D CMAKE_INSTALL_PREFIX:STRING="C:/usr/local" ../../ThirdParties
 "%VS140COMNTOOLS%\..\IDE\devenv" "ThirdParties.sln" /project install /build Debug
 "%VS140COMNTOOLS%\..\IDE\devenv" "ThirdParties.sln" /project install /build Release
