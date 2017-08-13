@@ -34,6 +34,13 @@ namespace Pcf {
       /// @param value Value for the Int64.
       Int64(int64 value) : value(value) {}
       
+      /// @cond
+      bool Equals(const Int64& value) const {return this->value == value;}
+      
+      template<typename T>
+      bool Equals(T value) const {return false;}
+      /// @endcond
+      
       /// @brief Determines whether two specified DateTime objects have the same value.
       /// @param dateTimeA The first DateTime to compare.
       /// @param dateTimeB The second DateTime to compare.

@@ -91,6 +91,13 @@ namespace Pcf {
       /// @return bool true if the value of dateTimenA is the same as the value of dateTimeB; otherwise, false.
       bool Equals(byte value) const {return this->value == value;}
 
+      /// @cond
+      bool Equals(const Byte& value) const {return this->value == value;}
+      
+      template<typename T>
+      bool Equals(T value) const {return false;}
+      /// @endcond
+      
       /// @brief Determines whether this instance of Exception and a specified object, which must also be a Exception object, have the same value.
       /// @param obj The object to compare with the current object.
       /// @return bool true if the specified object is equal to the current object. otherwise, false.

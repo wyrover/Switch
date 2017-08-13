@@ -37,6 +37,13 @@ namespace Pcf {
       /// @param dateTimeB The second DateTime to compare.
       /// @return Boolean true if the value of dateTimenA is the same as the value of dateTimeB; otherwise, false.
       bool Equals(int32 value) const {return this->value == value;}
+
+      /// @cond
+      bool Equals(const Int32& value) const {return this->value == value;}
+      
+      template<typename T>
+      bool Equals(T value) const {return false;}
+      /// @endcond
       
       /// @brief Determines whether this instance of Exception and a specified object, which must also be a Exception object, have the same value.
       /// @param obj The object to compare with the current object.

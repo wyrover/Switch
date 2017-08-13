@@ -29,6 +29,8 @@ namespace Pcf {
     /// | uint16   | GetBytes(uint16)                                  | ToUInt16(const Array< byte >&, int32)                                 |
     /// | uint32   | GetBytes(uint32)                                  | ToUInt32(const Array< byte >&, int32)                                 |
     /// | uint64   | GetBytes(uint64)                                  | ToUInt64(const Array< byte >&, int32)                                 |
+    /// If you use BitConverter methods to round-trip data, make sure that the GetBytes overload and the ToType method specify the same type. As the following example illustrates, restoring an array that represents a signed integer by calling the ToUInt32 method can result in a value that is different from the original. For more information, see the entry Working with Signed Non-Decimal and Bitwise Values in the BCL Team Blog.
+    /// 
     class pcf_public BitConverter {
     public:
       /// @brief Converts the specified double-precision floating point number to a 64-bit signed integer.
