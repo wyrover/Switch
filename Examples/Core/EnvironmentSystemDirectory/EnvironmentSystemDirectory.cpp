@@ -19,5 +19,5 @@ pcf_startup (Examples::Program)
 
 // This example produces results similar to the following if you run it on Windows 10:
 //
-// SystemDirectory: C:\Windows\System32
+// SystemDirectory: C:\WINDOWS\system32
 

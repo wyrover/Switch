@@ -70,7 +70,7 @@ int32 __OS::CoreApi::Environment::GetTickCount() {
 }
 
 string __OS::CoreApi::Environment::GetUserDomainName() {
-  return CreateProcess("uname -n");
+  return CreateProcess("uname -n").TrimEnd('\n');
 }
 
 bool __OS::CoreApi::Environment::GetUserInteractive() {
