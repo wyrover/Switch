@@ -198,6 +198,9 @@ namespace Pcf {
       /// @brief Gets the fully qualified path of the system directory.
       /// @return string A string containing a directory path.
       /// @remarks An example of the value returned is the string "C:\WinNT\System32".
+      /// @par Example
+      /// The following example displays the system directory of the computer that runs the code example. (The system directory is omitted from the example output for security reasons.)
+      /// @include EnvironmentsystemDirectory.cpp
       static Property<String, ReadOnly> SystemDirectory;
       
       /// @brief Gets the number of milliseconds elapsed since the system started.
