@@ -76,7 +76,9 @@ string UInt64::ToString(const string& format, const IFormatProvider&) const {
     case 0:   return NumericalFormat::Format_Custom(this->value,format);
     case 'b': return NumericalFormat::Format_B(this->value, precision);
     case 'd': return NumericalFormat::Format_D(this->value, precision);
-    case 'f': 
+    case 'e': return NumericalFormat::Format_E(this->value, precision == 0 ? 20 : precision, false);
+    case 'E': return NumericalFormat::Format_E(this->value, precision == 0 ? 20 : precision, true);
+    case 'f':
       if (format.Length() == 1) precision = 2;
       return NumericalFormat::Format_F(this->value, precision);
     case 'g':

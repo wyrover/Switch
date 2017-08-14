@@ -65,7 +65,9 @@ string SByte::ToString(const string& format, const IFormatProvider&) const {
     case 0:   return NumericalFormat::Format_Custom(arg,format);
     case 'b': return NumericalFormat::Format_B(arg, precision, 8);
     case 'd': return NumericalFormat::Format_D(arg, precision);
-    case 'f': 
+    case 'e': return NumericalFormat::Format_E(Convert::ToInt64(this->value), precision == 0 ? 3 : precision, false);
+    case 'E': return NumericalFormat::Format_E(Convert::ToInt64(this->value), precision == 0 ? 3 : precision, true);
+    case 'f':
       if (format.Length() == 1) precision = 2;
       return NumericalFormat::Format_F(arg, precision);
     case 'g':

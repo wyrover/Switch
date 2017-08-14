@@ -23,13 +23,19 @@ namespace Pcf {
       static String Format_D(int64 value, int32 precision);
       
       static String Format_D(uint64 value, int32 precision);
-
+      
+      static String Format_E(uint64 value, int32 precision, bool upper);
+      
+      static String Format_E(int64 value, int32 precision, bool upper);
+      
+      static String Format_E(double value, int32 precision, bool upper);
+      
       static String Format_F(uint64 value, int32 precision);
       
       static String Format_F(int64 value, int32 precision);
       
       static String Format_F(double value, int32 precision);
-
+      
       static String Format_G(uint64 value, int32 precision, bool upper);
       
       static String Format_G(int64 value, int32 precision, bool upper);

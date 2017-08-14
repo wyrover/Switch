@@ -24,21 +24,10 @@ namespace Pcf {
     // verify that :
     // any exponent contains the minimum number of numbers, but at least 'size'.
     // 'e' in the exponent is transformed in 'E' if 'upper' is true.
-    static string controlLengthExp(char* s, bool upper, int size) {
-      int32 len = static_cast<int32>(strlen(s));
-      for (int i=0;i<len;i++) {
-        if (s[i] == 'e') {
-          if (i+1 == len) return s;
-          int trim = i+2;
-          while (trim+2 < len && s[trim] == '0')
-            trim++;
-          //strcpy(&s[i+size],&s[trim]);
-          memmove(&s[i+size], &s[trim], strlen(&s[i+size]));
-          if (upper) s[i] = 'E';
-          return s;
-        }
-      }
-      return s;
+    static string controlLengthExp(const string& s, bool upper, int size) {
+      int32 endNumber = s.IndexOfAny({'e', 'E'});
+      if (endNumber == -1) return s;
+      return s.Remove(endNumber) + (upper ? s.Substring(endNumber, 2).ToUpper() :  s.Substring(endNumber, 2)) + Int32(Int32::Parse(s.Substring(endNumber+2))).ToString(string::Format("D{0}", size));
     }
     
     // do not use Int32::Parse because it allows Trimming and allows to have sign
@@ -79,11 +68,11 @@ namespace Pcf {
       else if (type == 'N') type = 'n';
       else if (type == 'F') type = 'f';
       
-      if (type == 'b' || type == 'g' || type == 'G' || type == 'x' || type == 'X' || type == 'd' || type == 'n' || type == 'f' || type == 'p') {
+      if (type == 'b' || type == 'e' || type == 'E' || type == 'g' || type == 'G' || type == 'x' || type == 'X' || type == 'd' || type == 'n' || type == 'f' || type == 'p') {
         if (!ParsePrecision(format.Substring(1),precision))
           return 0;
       }
-      // types R, r, C, c, E, e are not supported by now.
+      // types R, r, C, c, are not supported by now.
       return type;
     }
     
@@ -148,6 +137,43 @@ namespace Pcf {
       return s;
     }
     
+    String NumericalFormat::Format_E(uint64 value, int32 precision,bool upper) {
+      char cout[192];
+      if (upper)
+        sprintf(cout, "%.*E", precision, (double)value);
+      else
+        sprintf(cout, "%.*e", precision, (double)value);
+      if (strchr(cout,'e') == null) {
+        sprintf(cout, __OS::CoreApi::Format::UnsignedInteger().Data, value);
+        return cout;
+      }
+      return controlLengthExp(cout, upper, 3);
+    }
+    
+    String NumericalFormat::Format_E(int64 value, int32 precision,bool upper) {
+      char cout[192];
+      if (upper)
+        sprintf(cout, "%.*E", precision, (double)value);
+      else
+        sprintf(cout, "%.*e", precision, (double)value);
+      
+      if (strchr(cout,'e') == null) {
+        sprintf(cout, __OS::CoreApi::Format::Integer().Data, value);
+        return cout;
+      }
+      return controlLengthExp(cout, upper, 3);
+    }
+    
+    String NumericalFormat::Format_E(double value, int32 precision, bool upper) {
+      char cout[192];
+      if (upper)
+        sprintf(cout, "%.*E", precision, (double)value);
+      else
+        sprintf(cout, "%.*e", precision, (double)value);
+      string output = controlLengthExp(cout, upper, 3);
+      if (output == "-0") return "0";
+      return output;
+    }
     
     String NumericalFormat::Format_F(uint64 value, int32 precision) {
       String format_d = Format_D(value,0);

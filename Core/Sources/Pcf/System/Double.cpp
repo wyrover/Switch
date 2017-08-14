@@ -82,7 +82,9 @@ String Double::ToString(const String& format, const IFormatProvider&) const {
     case 0:   return NumericalFormat::Format_Custom(arg,format);
     case 'b': throw FormatException(pcf_current_information);
     case 'd': throw FormatException(pcf_current_information);
-    case 'f': 
+    case 'e': return NumericalFormat::Format_E(this->value, precision == 0 ? 15 : precision, false);
+    case 'E': return NumericalFormat::Format_E(this->value, precision == 0 ? 15 : precision, true);
+    case 'f':
       if (format.Length() == 1) precision = 2;
       return NumericalFormat::Format_F(this->value, precision);
     case 'g':

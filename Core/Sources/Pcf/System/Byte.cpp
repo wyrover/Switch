@@ -25,6 +25,8 @@ String Byte::ToString(const String& format, const IFormatProvider&) const {
     case 0: return NumericalFormat::Format_Custom(Convert::ToUInt64(this->value), format);
     case 'b': return NumericalFormat::Format_B(Convert::ToUInt64(this->value), precision);
     case 'd': return NumericalFormat::Format_D(Convert::ToUInt64(this->value), precision);
+    case 'e': return NumericalFormat::Format_E(Convert::ToUInt64(this->value), precision == 0 ? 3 : precision, false);
+    case 'E': return NumericalFormat::Format_E(Convert::ToUInt64(this->value), precision == 0 ? 3 : precision, true);
     case 'f': return NumericalFormat::Format_F(Convert::ToUInt64(this->value), format.Length() == 1 ? 2 : precision);
     case 'g': return NumericalFormat::Format_G(Convert::ToUInt64(this->value), precision == 0 ? 3 : precision, false);
     case 'G': return NumericalFormat::Format_G(Convert::ToUInt64(this->value), precision == 0 ? 3 : precision, true);

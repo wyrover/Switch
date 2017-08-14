@@ -87,6 +87,8 @@ string Single::ToString(const string& format, const IFormatProvider&) const {
     case 0:   return NumericalFormat::Format_Custom(arg,format);
     case 'b': throw FormatException(pcf_current_information);
     case 'd': throw FormatException(pcf_current_information);
+    case 'e': return NumericalFormat::Format_E(Convert::ToDouble(this->value), precision == 0 ? 7 : precision, false);
+    case 'E': return NumericalFormat::Format_E(Convert::ToDouble(this->value), precision == 0 ? 7 : precision, true);
     case 'f':
       if (format.Length() == 1) precision = 2;
       return NumericalFormat::Format_F(arg, precision);

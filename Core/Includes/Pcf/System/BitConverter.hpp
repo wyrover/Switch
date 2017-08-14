@@ -19,8 +19,8 @@ namespace Pcf {
     /// @remarks The BitConverter class helps manipulate value types in their fundamental form, as a series of bytes. A byte is defined as an 8-bit unsigned integer. The BitConverter class includes static methods to convert each of the primitive types to and from an array of bytes, as the following table illustrates.
     /// | Type     | To byte conversion                                | From byte conversion                                                  |
     /// |----------|---------------------------------------------------|-----------------------------------------------------------------------|
-    /// | bool     | GetBytes(Boolean)                                 | ToBoolean(const Array< byte >&, int32)                                |
-    /// | char32   | GetBytes(Char)                                    | ToChar(const Array< byte >&, int32)                                  |
+    /// | bool     | GetBytes(bool)                                    | ToBoolean(const Array< byte >&, int32)                                |
+    /// | char32   | GetBytes(char32)                                  | ToChar(const Array< byte >&, int32)                                  |
     /// | double   | GetBytes(double) - or - DoubleToInt64Bits(double) | ToDouble(const Array< byte >&, int32) - or - Int64BitsToDouble(int64) |
     /// | int16    | GetBytes(int16)                                   | ToInt16(const Array< byte >&, int32)                                  |
     /// | int32    | GetBytes(int32)                                   | ToInt32(const Array< byte >&, int32)                                  |
@@ -51,6 +51,9 @@ namespace Pcf {
       /// @param value The number to convert.
       /// @return A 64-bit signed integer whose value is equivalent to value.
       /// @remarks The order of bits in the integer returned by the DoubleToInt64Bits method depends on whether the computer architecture is little-endian or big-endian.
+      /// @par Example
+      /// The following code example converts the bit patterns of several Double values to Int64 values with the DoubleToInt64Bits method.
+      /// @include BitConverterDoubleToInt64Bits.cpp
       static int64 DoubleToInt64Bits(double value) {return *((int64*)&value);}
 
       /// @brief Indicates the byte order ("endianness") in which data is stored in this computer architecture.

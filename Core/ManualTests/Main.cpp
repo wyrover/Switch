@@ -84,7 +84,12 @@ namespace Examples {
   public:
     // The main entry point for the application.
     static void Main() {
-      Console::WriteLine(); Application::Run();
+      Console::WriteLine("  {0:D}", 42);
+      Console::WriteLine("0x{0:X4}", 42);
+      Console::WriteLine("0b{0:B8}", 42);
+      Console::WriteLine("  {0:G4}", 42.0);
+      Console::WriteLine("  {0:E4}", 42.0);
+      //Console::WriteLine(); Application::Run();
     }
   };
 }
