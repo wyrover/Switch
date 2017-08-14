@@ -5,12 +5,20 @@ using namespace System;
 namespace Examples {
   class Program {
   public:
+    static const string formatter;
+    
+    // Convert a bool argument to a byte array and display it.
+    static void GetBytesChar(Char argument) {
+      Array<byte> byteArray = BitConverter::GetBytes(argument);
+      Console::WriteLine(formatter, argument, BitConverter::ToString(byteArray));
+    }
+
     // The main entry point for the application.
     static void Main() {
-      Console::WriteLine("This example of the BitConverter::GetBytes(char)\n"
-                         "method generates the following output.\n");
-      Console::WriteLine("{0,10}{1,20}", "char", "byte array");
-      Console::WriteLine("{0,10}{1,20}", "----", "----------");
+      Console::WriteLine("This example of the BitConverter::GetBytes(char) "
+                         "\nmethod generates the following output.\n");
+      Console::WriteLine(formatter, "char", "byte array");
+      Console::WriteLine(formatter, "----", "----------");
       
       // Convert bool values and display the results.
       GetBytesChar('\0');
@@ -22,14 +30,9 @@ namespace Examples {
       GetBytesChar('a');
       GetBytesChar('{');
     }
-    
-  private:
-    // Convert a bool argument to a byte array and display it.
-    static void GetBytesChar(Char argument) {
-      Array<byte> byteArray = BitConverter::GetBytes(argument);
-      Console::WriteLine("{0,10}{1,20}", argument, BitConverter::ToString(byteArray));
-    }
   };
+  
+  const string Program::formatter = "{0,10}{1,16}";
 }
 
 pcf_startup (Examples::Program)

@@ -18,9 +18,10 @@ namespace Examples {
   public:
     // The main entry point for the application.
     static void Main() {
-      Console::WriteLine("This example of the BitConverter.DoubleToInt64Bits( double ) \nmethod generates the following output.\n");
+      Console::WriteLine("This example of the BitConverter.DoubleToInt64Bits( double ) "
+                         "\nmethod generates the following output.\n");
       Console::WriteLine(formatter, "double argument", "hexadecimal value");
-      Console::WriteLine(formatter, "---------------", "-----------------" );
+      Console::WriteLine(formatter, "---------------", "-----------------");
       
       // Convert double values and display the results.
       DoubleToLongBits(1.0);

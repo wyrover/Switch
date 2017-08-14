@@ -47,6 +47,14 @@ namespace Pcf {
     /// @include BitConverter.cpp
     class pcf_public BitConverter {
     public:
+      /// @brief Indicates the byte order ("endianness") in which data is stored in this computer architecture.
+      /// @return Returns true if the architecture is little-endian; false if it is big-endian.
+      /// @remarks Different computer architectures store data using different byte orders. "Big-endian" means the most significant byte is on the left end of a word. "Little-endian" means the most significant byte is on the right end of a word.
+      /// @par Examples
+      /// The following code example illustrates the use of the IsLittleEndian field.
+      /// @include BitConverterIsLittleEndian.cpp
+      static Property<bool, ReadOnly> IsLittleEndian;
+      
       /// @brief Converts the specified double-precision floating point number to a 64-bit signed integer.
       /// @param value The number to convert.
       /// @return A 64-bit signed integer whose value is equivalent to value.
@@ -55,14 +63,6 @@ namespace Pcf {
       /// The following code example converts the bit patterns of several Double values to Int64 values with the DoubleToInt64Bits method.
       /// @include BitConverterDoubleToInt64Bits.cpp
       static int64 DoubleToInt64Bits(double value) {return *((int64*)&value);}
-
-      /// @brief Indicates the byte order ("endianness") in which data is stored in this computer architecture.
-      /// @return Returns true if the architecture is little-endian; false if it is big-endian.
-      /// @remarks Different computer architectures store data using different byte orders. "Big-endian" means the most significant byte is on the left end of a word. "Little-endian" means the most significant byte is on the right end of a word.
-      /// @par Examples
-      /// The following code example illustrates the use of the IsLittleEndian field.
-      /// @include BitConverterIsLittleEndian.cpp
-       static Property<bool, ReadOnly> IsLittleEndian;
 
       /// @brief Returns the specified Boolean value as an array of bytes.
       /// @param value A Boolean value.
