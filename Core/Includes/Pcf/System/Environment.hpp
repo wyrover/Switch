@@ -169,20 +169,10 @@ namespace Pcf {
       /// @return Int32 A 32-bit signed integer containing the exit code. The default value is zero.
       /// @remarks If the Main method returns void, you can use this property to set the exit code that will be returned to the calling environment. If Main does not return void, this property is ignored. The initial value of this property is zero.
       /// @warning The ExitCode property is a signed 32-bit integer. To prevent the property from returning a negative exit code, you should not use values greater than or equal to 0x80000000.
-      /// @remarks Use a non-zero number to indicate an error. In your application, you can define your own error codes in an enumeration, and return the appropriate error code based on the scenario. For example, return a value of 1 to indicate that the required file is not present and a value of 2 to indicate that the file is in the wrong format. For a list of exit codes used by the Windows operating system, see System Error Codes in the Windows documentation.
+      /// @remarks Use a non-zero number to indicate an error. In your application, you can define your own error codes in an enumeration, and return the appropriate error code based on the scenario. For example, return a value of 1 to indicate that the required file is not present and a value of 2 to indicate that the file is in the wrong format. For a list of exit codes used by macOS, Linux or Windows, see errno error code documentation (http://en.cppreference.com/w/cpp/error/errno_macros).
       /// @par Example
       /// The following is a simple app named Double.exe that doubles an integer value passed to it as a command-line argument. The value assigns error codes to the ExitCode property to indicate error conditions. Note that you must add a reference to the System.Numerics.dll assembly to successfully compile the example.
       /// @include EnvironmentExitCode.cpp
-      /// The example can then be invoked on Windows from a batch file such as the following, which makes its error codes accessible by using the ERRORLEVEL command.
-      /// @code
-      /// echo off
-      /// EnvironmentExitCode.exe %1
-      ///
-      /// if ERRORLEVEL 89 echo Missing argument
-      /// if ERRORLEVEL 34 echo Arithmetic overflow
-      /// if ERRORLEVEL 22 echo Invalid argument
-      /// if ERRORLEVEL 0 echo Completed Successfully
-      /// @endcode
       /// The example can then be invoked on macOS or linux from a batch file such as the following, which makes its error codes accessible by using the $? command.
       /// @code
       /// ./EnvironmentExitCode $1
@@ -194,6 +184,42 @@ namespace Pcf {
       ///   0) echo "Completed Successfully";;
       /// esac
       /// @endcode
+      /// The example can then be invoked on linux from a batch file such as the following, which makes its error codes accessible by using the $? command.
+      /// @code
+      /// ./EnvironmentExitCode $1
+      ///
+      /// case $? in
+      ///   125) echo "Missing argument";;
+      ///   34) echo "Arithmetic overflow";;
+      ///   22) echo "Invalid argument";;
+      ///   0) echo "Completed Successfully";;
+      /// esac
+      /// @endcode
+      /// The example can then be invoked on Windows from a batch file such as the following, which makes its error codes accessible by using the ERRORLEVEL command.
+      /// @code
+      /// @echo off
+      /// EnvironmentExitCode.exe %1
+      ///
+      /// if ERRORLEVEL 105 (echo Missing argument
+      /// ) else if ERRORLEVEL 34 (echo Arithmetic overflow
+      /// ) else if ERRORLEVEL 22 (echo Invalid argument
+      /// ) else if ERRORLEVEL 0 (echo Completed Successfully
+      /// )
+      /// @endcode
+      /// The following shows some sample output produced by invoking the batch file.
+      /// @code
+      /// > ./TestEnvironmentExitCode.sh 123
+      /// Result: 246
+      /// Completed Successfully
+      /// > ./TestEnvironmentExitCode.sh 5912323109093
+      /// Arithmetic overflow
+      /// > ./TestEnvironmentExitCode.sh
+      /// Missing argument
+      /// > ./TestEnvironmentExitCode.sh "a string"
+      /// Invalid argument
+      /// @endcode
+      /// Note that code for EnvironmentExitCode is identical in function to the following example, except that the former defines an entry point named Main that has no return value, whereas this example defines an entry point named Main that returns an integer.
+      /// @include EnvironmentExitCode2.cpp
       static Property<int32> ExitCode;
       
       /// @brief Gets a value that indicates whether the current application domain is shutting down.

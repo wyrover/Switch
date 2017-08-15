@@ -11,7 +11,7 @@ namespace Examples {
     static void Main() {
       Array<char32> apple = {'a', 'p', 'p', 'l', 'e'};
       
-      refptr<IEnumerable<char32>> reversed = apple.Reverse();
+      refptr<IEnumerable<char32>> reversed = apple.Enumerable::Reverse();
       for (char32 chr : *reversed)
         Console::Write(string::Format("{0} ", chr));
       
