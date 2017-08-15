@@ -132,11 +132,11 @@ namespace {
 Property<String, ReadOnly> Environment::CommandLine {
   [] {
     if (commandLineArgs->Length == 0)
-      throw InvalidOperationException("You must call Environment::SetCommandLineArgs() method in main before.", pcf_current_information);
+      throw InvalidOperationException("You must call System::Environment::SetCommandLineArgs(argv, argc); method in main before.", pcf_current_information);
       
-    string commandLine = commandLineArgs.ToObject()[0];
+    string commandLine = string::Format("\"{0}\" ", commandLineArgs.ToObject()[0]);
     for (int i = 1; i < commandLineArgs->Length; i++)
-      commandLine += " " + (commandLineArgs.ToObject()[i].Contains(" ") ? string::Format("\"{0}\"", commandLineArgs.ToObject()[i]) : commandLineArgs.ToObject()[i]);
+      commandLine += string::Format(" {0}", (commandLineArgs.ToObject()[i].Contains(" ") ? string::Format("\"{0}\"", commandLineArgs.ToObject()[i]) : commandLineArgs.ToObject()[i]));
     return commandLine;
   }
 };
@@ -258,6 +258,8 @@ String Environment::ExpandEnvironmentVariables(const String& name) {
 }
 
 const Array<String>& Environment::GetCommandLineArgs() {
+  if (commandLineArgs->Length == 0)
+    throw InvalidOperationException("You must call System::Environment::SetCommandLineArgs(argv, argc); method in main before.", pcf_current_information);
   return commandLineArgs();
 }
 

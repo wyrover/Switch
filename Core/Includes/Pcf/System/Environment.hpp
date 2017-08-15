@@ -139,6 +139,12 @@ namespace Pcf {
       
       /// @brief Gets the command line for this process.
       /// @return string A string represented the command line for this process.
+      /// @remarks This property provides access to the program name and any arguments specified on the command line when the current process was started.
+      /// @remarks The program name can include path information, but is not required to do so. Use the GetCommandLineArgs method to retrieve the command-line information parsed and stored in an array of strings.
+      /// @remarks The maximum size of the command-line buffer is not set to a specific number of characters; it varies depending on the Windows operating system that is running on the computer.
+      /// @par Example
+      /// The following example displays its own command line.
+      /// @include EnvironmentCommandLine.cpp
       static Property<String, ReadOnly> CommandLine;
       
       /// @brief Gets or sets the current working directory.
@@ -149,6 +155,10 @@ namespace Pcf {
       /// @exception IOException An I/O error occurred.
       /// @exception DirectoryNotFoundException Attempted to set a local path that cannot be found.
       /// @exception SecurityException The caller does not have the appropriate permission.
+      /// @remarks By definition, if this process starts in the root directory of a local or network drive, the value of this property is the drive name followed by a trailing slash (for example, "C:\"). If this process starts in a subdirectory, the value of this property is the drive and subdirectory path, without a trailing slash (for example, "C:\mySubDirectory").
+      /// @par Example
+      /// The following example demonstrates setting the CurrentDirectory property.
+      /// @include EnvironmentCurrentDirectory.cpp
       static Property<string> CurrentDirectory;
       
       /// @brief Gets a unique identifier for the current managed thread.
@@ -156,8 +166,34 @@ namespace Pcf {
       static Property<int32, ReadOnly> CurrentManagedThreadId;
       
       /// @brief Gets or sets the exit code of the process.
-      /// Internal used only!
       /// @return Int32 A 32-bit signed integer containing the exit code. The default value is zero.
+      /// @remarks If the Main method returns void, you can use this property to set the exit code that will be returned to the calling environment. If Main does not return void, this property is ignored. The initial value of this property is zero.
+      /// @warning The ExitCode property is a signed 32-bit integer. To prevent the property from returning a negative exit code, you should not use values greater than or equal to 0x80000000.
+      /// @remarks Use a non-zero number to indicate an error. In your application, you can define your own error codes in an enumeration, and return the appropriate error code based on the scenario. For example, return a value of 1 to indicate that the required file is not present and a value of 2 to indicate that the file is in the wrong format. For a list of exit codes used by the Windows operating system, see System Error Codes in the Windows documentation.
+      /// @par Example
+      /// The following is a simple app named Double.exe that doubles an integer value passed to it as a command-line argument. The value assigns error codes to the ExitCode property to indicate error conditions. Note that you must add a reference to the System.Numerics.dll assembly to successfully compile the example.
+      /// @include EnvironmentExitCode.cpp
+      /// The example can then be invoked on Windows from a batch file such as the following, which makes its error codes accessible by using the ERRORLEVEL command.
+      /// @code
+      /// echo off
+      /// EnvironmentExitCode.exe %1
+      ///
+      /// if ERRORLEVEL 89 echo Missing argument
+      /// if ERRORLEVEL 34 echo Arithmetic overflow
+      /// if ERRORLEVEL 22 echo Invalid argument
+      /// if ERRORLEVEL 0 echo Completed Successfully
+      /// @endcode
+      /// The example can then be invoked on macOS or linux from a batch file such as the following, which makes its error codes accessible by using the $? command.
+      /// @code
+      /// ./EnvironmentExitCode $1
+      ///
+      /// case $? in
+      ///   89) echo "Missing argument";;
+      ///   34) echo "Arithmetic overflow";;
+      ///   22) echo "Invalid argument";;
+      ///   0) echo "Completed Successfully";;
+      /// esac
+      /// @endcode
       static Property<int32> ExitCode;
       
       /// @brief Gets a value that indicates whether the current application domain is shutting down.
