@@ -9,7 +9,7 @@
 
 using namespace System;
 
-namepsace {
+namespace {
   static ConsoleColor backColor = __OS::CoreApi::Console::GetBackgroundColor();
   static ConsoleColor foreColor = __OS::CoreApi::Console::GetForegroundColor();
 }
@@ -118,6 +118,18 @@ int32 __OS::CoreApi::Console::GetWindowHeight() {
   CONSOLE_SCREEN_BUFFER_INFO csbi;
   GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
   return csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
+}
+
+int32 __OS::CoreApi::Console::GetWindowLeft() {
+  CONSOLE_SCREEN_BUFFER_INFO csbi;
+  GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+  return csbi.srWindow.Left;
+}
+
+int32 __OS::CoreApi::Console::GetWindowTop() {
+  CONSOLE_SCREEN_BUFFER_INFO csbi;
+  GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+  return csbi.srWindow.Top;
 }
 
 int32 __OS::CoreApi::Console::GetWindowWidth() {
@@ -230,6 +242,20 @@ bool __OS::CoreApi::Console::SetWindowHeight(int32 height) {
   CONSOLE_SCREEN_BUFFER_INFO csbi;
   GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
   csbi.srWindow.Bottom = csbi.srWindow.Top + height - 1;
+  return SetConsoleWindowInfo(GetStdHandle(STD_OUTPUT_HANDLE), TRUE, &csbi.srWindow) == TRUE;
+}
+
+bool __OS::CoreApi::Console::SetWindowLeft(int32 left) {
+  CONSOLE_SCREEN_BUFFER_INFO csbi;
+  GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+  csbi.srWindow.Left = left;
+  return SetConsoleWindowInfo(GetStdHandle(STD_OUTPUT_HANDLE), TRUE, &csbi.srWindow) == TRUE;
+}
+
+bool __OS::CoreApi::Console::SetWindowTop(int32 top) {
+  CONSOLE_SCREEN_BUFFER_INFO csbi;
+  GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+  csbi.srWindow.Top = top;
   return SetConsoleWindowInfo(GetStdHandle(STD_OUTPUT_HANDLE), TRUE, &csbi.srWindow) == TRUE;
 }
 
