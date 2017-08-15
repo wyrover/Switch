@@ -224,37 +224,72 @@ namespace Pcf {
       
       /// @brief Gets a value that indicates whether the current application domain is shutting down.
       /// @return bool true if the current application domain is shutting down; otherwise, false.
-      /// @remarks At this time the return value is always false;
+      /// @remarks At this time the return value is always false.
       static Property<bool, ReadOnly> HasShutdownStarted;
       
       /// @brief Determines whether the current operating system is a 64-bit operating system.
       /// @return bool true if the operating system is 64-bit; otherwise, false.
-      static Property<bool, ReadOnly>  Is64BitOperatingSystem;
+      static Property<bool, ReadOnly> Is64BitOperatingSystem;
       
       /// @brief Determines whether the current process is a 64-bit process.
       /// @return bool true if the process is 64-bit; otherwise, false.
-      static Property<bool, ReadOnly>  Is64BitProcess;
+      static Property<bool, ReadOnly> Is64BitProcess;
       
       /// @brief Gets the NetBIOS name of this local computer.
       /// @return string A string containing the name of this computer.
       /// @exception InvalidOperationException The name of this computer cannot be obtained.
-      static Property<String, ReadOnly>  MachineName;
+      /// @remarks The name of this computer is established at system startup when the name is read from the registry. If this computer is a node in a cluster, the name of the node is returned.
+      /// @par Example
+      /// The following example displays the name of the computer that runs the code example. (The machine name is omitted from the example output for security reasons.)
+      /// @include EnvironmentMachineName.cpp
+      static Property<String, ReadOnly> MachineName;
       
       /// @brief Gets the newline string defined for this environment.
       /// @return string A string containing "\r\n" for non-Unix platforms, or a string containing "\n" for Unix platforms.
+      /// @remarks The property value of NewLine is a constant customized specifically for the current platform and implementation of the Pcf. For more information about the escape characters in the property value, see Character Escapes in Regular Expressions.
+      /// @remarks The functionality provided by NewLine is often what is meant by the terms newline, line feed, line break, carriage return, CRLF, and end of line.
+      /// @remarks NewLine is automatically appended to text processed by the Console.WriteLine and StringBuilder.AppendLine methods.
+      /// @par Example
+      /// The following example displays three lines separated by newlines.
+      /// @include EnvironmentNewLine.cpp
       static Property<String, ReadOnly> NewLine;
       
       /// @brief Gets an OperatingSystem object that contains the current platform identifier and version number.
       /// @return OperatingSystem An object that contains the platform identifier and version number.
+      /// @note Starting with Windows 8, the OSVersion property returns the same major and minor version numbers for all Windows platforms. Therefore, we do not recommend that you retrieve the value of this property to determine the operating system version.
+      /// @remarks Typically, the OSVersion property is used to ensure that an app is running on some base version of an operating system in which a particular feature was introduced. When this is the case, you should perform a version check by testing whether the current operating system version returned by the OSVersion property is the same as, or greater than, the base operating system version. For more information, see the Version class topic.
+      /// @remarks Through Windows 8, the OSVersion property returns the version reported by the Windows GetVersionEx function. For a list of Windows desktop operating system versions and their corresponding version numbers, see Operating System Version in the Windows Dev Center.
+      /// @note The OSVersion property reports the same version number (6.2.0.0) for both Windows 8 and Windows 8.1 and the same major and minor version number for Windows 10.
+      /// @remarks In some cases, the OSVersion property may not return the operating system version that matches the version specified for the Windows Program Compatibility mode feature.
+      /// @par Example
+      /// The following example displays the platform identifier and version number of the computer that runs the code example.
+      /// @include EnvironmentOSVersion.cpp
       static Property<const OperatingSystem&, ReadOnly> OSVersion;
       
       /// @brief Gets the number of processors on the current machine.
       /// @return int32 The 32-bit signed integer that specifies the number of processors on the current machine. There is no default. If the current machine contains multiple processor groups, this property returns the number of logical processors.
       /// @remarks For more information about processor groups and logical processors, see Processor Groups.
+      /// @par Example
+      /// The following example demonstrates the ProcessorCount property.
+      /// @include EnvironmentProcessorCount.cpp
       static Property<int32, ReadOnly> ProcessorCount;
       
       /// @brief Gets current stack trace information.
       /// @return string A string containing stack trace information. This value can be string.Empty.
+      /// @remarks The StackTrace property lists method calls in reverse chronological order, that is, the most recent method call is described first, and one line of stack trace information is listed for each method call on the stack. However, the StackTrace property might not report as many method calls as expected due to code transformations that occur during optimization.
+      /// @note For a hierarchical view of the stack trace information by class, use the StackTrace class.
+      /// @remarks The StackTrace property formats the stack trace information for each method call as follows:
+      /// @remarks "at FullClassName.MethodName(MethodParams) in FileName :line LineNumber "
+      /// @remarks The literal "at" is preceded by three spaces, and the entire substring starting with "in" is omitted if debug symbols are not available. The placeholders, FullClassName, MethodName, MethodParams, FileName, and LineNumber, are replaced by actual values, and are defined as follows:
+      /// * FullClassName The full name of the class, including the namespace.
+      /// * MethodName The name of the method.
+      /// * MethodParams The list of parameter type/name pairs. Each pair is separated by a comma (","). This information is omitted if MethodName takes no parameters.
+      /// * FileName The name of the source file where the MethodName method is declared. This information is omitted if debug symbols are not available.
+      /// * LineNumber The number of the line in FileName that contains the source code from MethodName for the instruction that is on the call stack. This information is omitted if debug symbols are not available.
+      /// @remarks The Environment.NewLine string terminates each line of the stack trace.
+      /// @par Example
+      /// The following example demonstrates the StackTrace property.
+      /// @include EnvironmentStackTrace.cpp
       static Property<String, ReadOnly> StackTrace;
       
       /// @brief Gets the fully qualified path of the system directory.
@@ -265,15 +300,27 @@ namespace Pcf {
       /// @include EnvironmentsystemDirectory.cpp
       static Property<String, ReadOnly> SystemDirectory;
       
+      /// @brief Gets the number of bytes in the operating system's memory page.
+      /// @return The number of bytes in the system memory page.
+      /// @remarks This information can be useful when determining whether to use the MemoryMappedFileOptions.DelayAllocatePages option when you work with memory-mapped files.
+      /// @remarks In Windows, this value is the dwPageSize member in the SYSTEM_INFO structure.
+      /// @remarks At this time the return value is always 4096.
+      static Property<int32, ReadOnly> SystemPageSize;
+      
       /// @brief Gets the number of milliseconds elapsed since the system started.
       /// @return Int32 A 32-bit signed integer containing the amount of time in milliseconds that has passed since the last time the computer was started.
       /// @remarks The value of this property is derived from the system timer and is stored as a 32-bit signed integer. Consequently, if the system runs continuously, TickCount will increment from zero to Int32.MaxValue for approximately 24.9 days, then jump to Int32.MinValue, which is a negative number, then increment back to zero during the next 24.9 days.
       /// @remarks TickCount is different from the Ticks property, which is the number of 100-nanosecond intervals that have elapsed since 1/1/0001, 12:00am.
       /// @remarks Use the DateTime::Now property to obtain the current local date and time on this computer.
+      /// @par Example
+      /// The following example demonstrates how to retrieve the positive range of values returned by the TickCount property. The TickCount property cycles between Int32.MinValue, which is a negative number, and Int32.MaxValue once every 49.8 days. This code sample removes the sign bit to yield a nonnegative number that cycles between zero and MaxValue once every 24.9 days.
+      /// @include EnvironmentTickCount.cpp
       static Property<int32, ReadOnly> TickCount;
       
       /// @brief Gets the network domain name associated with the current user.
       /// @return string The network domain name associated with the current user.
+      /// @remarks The domain account credentials for a user are formatted as the user's domain name, the '\' character, and user name. Use the UserDomainName property to obtain the user's domain name without the user name, and the UserName property to obtain the user name without the domain name. For example, if a user's domain name and user name are CORPORATENETWORK\john, the UserDomainName property returns "CORPORATENETWORK".
+      /// @remarks The UserDomainName property first attempts to get the domain name component of the Windows account name for the current user. If that attempt fails, this property attempts to get the domain name associated with the user name provided by the UserName property. If that attempt fails because the host computer is not joined to a domain, then the host computer name is returned.
       static Property<String, ReadOnly> UserDomainName;
       
       /// @brief Gets a value indicating whether the current process is running in user interactive mode.

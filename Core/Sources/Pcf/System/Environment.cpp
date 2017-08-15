@@ -202,11 +202,15 @@ Property<int32, ReadOnly> Environment::ProcessorCount {
 };
 
 Property<String, ReadOnly> Environment::StackTrace {
-  [] {return Diagnostics::StackTrace(true).ToString();}
+  [] {return Diagnostics::StackTrace(3, true).ToString();}
 };
 
 Property<String, ReadOnly> Environment::SystemDirectory {
   [] {return GetFolderPath(Environment::SpecialFolder::System);}
+};
+
+Property<int32, ReadOnly> Environment::SystemPageSize {
+  [] {return 4096;}
 };
 
 Property<int32, ReadOnly> Environment::TickCount {
