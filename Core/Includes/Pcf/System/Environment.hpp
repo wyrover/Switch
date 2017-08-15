@@ -173,7 +173,7 @@ namespace Pcf {
       /// @par Example
       /// The following is a simple app named Double.exe that doubles an integer value passed to it as a command-line argument. The value assigns error codes to the ExitCode property to indicate error conditions. Note that you must add a reference to the System.Numerics.dll assembly to successfully compile the example.
       /// @include EnvironmentExitCode.cpp
-      /// The example can then be invoked on macOS or linux from a batch file such as the following, which makes its error codes accessible by using the $? command.
+      /// The example can then be invoked on macOS from a batch file such as the following, which makes its error codes accessible by using the $? command.
       /// @code
       /// ./EnvironmentExitCode $1
       ///
