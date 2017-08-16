@@ -29,6 +29,14 @@ namespace Pcf {
       }
       /// @endcond
       
+      Property<bool, ReadOnly> IsWindowsFamilly {
+        pcf_get {return this->platform == PlatformID::Win32NT || this->platform == PlatformID::Win32S || this->platform == PlatformID::Win32Windows || this->platform == PlatformID::WinCE || this->platform == PlatformID::Xbox;}
+      };
+      
+      Property<bool, ReadOnly> IsUnixFamilly {
+        pcf_get {return this->platform == PlatformID::Unix || this->platform == PlatformID::MacOSX || this->platform == PlatformID::IOs || this->platform == PlatformID::Android;}
+      };
+      
       /// @brief Gets a System::PlatformID enumeration value that identifies the operating system platform.
       /// @return PlatformID One of the PlatformID values.
       Property<PlatformID, ReadOnly> Platform {

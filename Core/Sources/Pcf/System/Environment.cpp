@@ -6,6 +6,7 @@
 
 #include "SocketInit.hpp"
 
+#include "../../../Includes/Pcf/Microsoft/Win32/Registry.hpp"
 #include "../../../Includes/Pcf/System/AccessViolationException.hpp"
 #include "../../../Includes/Pcf/System/Console.hpp"
 #include "../../../Includes/Pcf/System/Environment.hpp"
@@ -122,6 +123,7 @@ namespace {
   };
   
   int32 exitCode;
+  bool userInteractive = true;
   refptr<SocketInit> socketInit;
   refptr<System::Array<String>> commandLineArgs;
   refptr<ConsoleChangeCodePage> consoleChangeCodePage;
@@ -222,7 +224,7 @@ Property<String, ReadOnly> Environment::UserDomainName {
 };
 
 Property<bool, ReadOnly> Environment::UserInteractive {
-  [] {return __OS::CoreApi::Environment::GetUserInteractive();}
+  [] {return ::userInteractive;}
 };
 
 Property<String, ReadOnly> Environment::UserName {
@@ -267,9 +269,13 @@ const Array<String>& Environment::GetCommandLineArgs() {
   return commandLineArgs();
 }
 
-String Environment::GetEnvironmentVariable(const String& variable) {
-  char* value = getenv(variable.Data());  
-  return value == null ? "" : value;
+String Environment::GetEnvironmentVariable(const String& variable, EnvironmentVariableTarget target) {
+  if (target == EnvironmentVariableTarget::Process) {
+    char* value = getenv(variable.Data());
+    return value == null ? "" : value;
+  } else  if (target == EnvironmentVariableTarget::User)
+    return Microsoft::Win32::Registry::GetValue("HKEY_CURRENT_USER\\Environment", variable, "").ToString();
+  return Microsoft::Win32::Registry::GetValue("HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Session Manager\\Environment", variable, "").ToString();
 }
 
 const Collections::Generic::IDictionary<String, String>& Environment::GetEnvironmentVariables() {
@@ -284,18 +290,26 @@ Array<String> Environment::GetLogicalDrives() {
   return __OS::CoreApi::Drive::GetDrives();
 }
 
-void Environment::SetEnvironmentVariable(const String& name, const String& value) {
+void Environment::SetEnvironmentVariable(const String& name, const String& value, EnvironmentVariableTarget target) {
   if (name.IsEmpty())
     throw ArgumentException(pcf_current_information);
   
-  if (value.IsEmpty()) {
-    EnvironmentVariables().Remove(name);
-    if (__OS::CoreApi::Environment::UnsetEnv(name) != 0)
-      throw ArgumentException(pcf_current_information);
+  if (target == EnvironmentVariableTarget::Process) {
+    if (value.IsEmpty()) {
+      EnvironmentVariables().Remove(name);
+      if (__OS::CoreApi::Environment::UnsetEnv(name) != 0)
+        throw ArgumentException(pcf_current_information);
+    } else {
+      EnvironmentVariables()[name] = value;
+      if (__OS::CoreApi::Environment::SetEnv(name, value) != 0)
+        throw ArgumentException(pcf_current_information);
+    }
   } else {
-    EnvironmentVariables()[name] = value;
-    if (__OS::CoreApi::Environment::SetEnv(name, value) != 0)
-      throw ArgumentException(pcf_current_information);
+    Microsoft::Win32::RegistryKey key = target == EnvironmentVariableTarget::User ? Microsoft::Win32::Registry::CurrentUser().CreateSubKey("Environment") : Microsoft::Win32::Registry::LocalMachine().CreateSubKey("System").CreateSubKey("CurrentControlSet").CreateSubKey("Control").CreateSubKey("Session Manager").CreateSubKey("Environment");
+    if (value.IsEmpty())
+      key.DeleteValue(name);
+    else
+      key.SetValue(name, value);
   }
 }
 
@@ -310,5 +324,9 @@ Array<string> Environment::SetCommandLineArgs(char* argv[], int argc) {
   System::Threading::Thread::RegisterCurrentThread();
   commandLineArgs = pcf_new<Array<string>>(std::vector<string>(argv, argv+argc));
   return Array<string>(std::vector<string>(argv+1, argv+argc));
+}
+
+void Environment::SetUserInteractive(bool userInteractive) {
+  ::userInteractive = userInteractive;
 }
 

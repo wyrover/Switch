@@ -73,10 +73,6 @@ string __OS::CoreApi::Environment::GetUserDomainName() {
   return CreateProcess("uname -n").TrimEnd('\n');
 }
 
-bool __OS::CoreApi::Environment::GetUserInteractive() {
-  return false;
-}
-
 string __OS::CoreApi::Environment::GetUserName() {
   char name[512];
   strcpy(name, getenv("USER"));

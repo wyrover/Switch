@@ -276,6 +276,7 @@ set(INCLUDE_FILES
   Includes/Pcf/System/DuplicateWaitObjectException.hpp
   Includes/Pcf/System/Double.hpp
   Includes/Pcf/System/Environment.hpp
+  Includes/Pcf/System/EnvironmentVariableTarget.hpp
   Includes/Pcf/System/EntryPointNotFoundException.hpp
   Includes/Pcf/System/Enum.hpp
   Includes/Pcf/System/EventArgs.hpp

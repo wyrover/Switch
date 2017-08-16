@@ -64,10 +64,6 @@ string __OS::CoreApi::Environment::GetUserDomainName() {
   return name;
 }
 
-bool __OS::CoreApi::Environment::GetUserInteractive() {
-  return false;
-}
-
 string __OS::CoreApi::Environment::GetUserName() {
   char name[512];
   strcpy(name, getenv("USERNAME"));

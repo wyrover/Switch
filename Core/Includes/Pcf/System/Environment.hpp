@@ -7,6 +7,8 @@
 #include "../Types.hpp"
 #include "Array.hpp"
 #include "Enum.hpp"
+#include "EnvironmentVariableTarget.hpp"
+#include "NotImplementedException.hpp"
 #include "OperatingSystem.hpp"
 #include "String.hpp"
 #include "Version.hpp"
@@ -15,6 +17,16 @@
 #include "Threading/Thread.hpp"
 
 class __start_up__;
+
+/// @cond
+namespace Pcf {
+  namespace System {
+    namespace Diagnoastics {
+      class Process;
+    }
+  }
+}
+/// @endcond
 
 /// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Pcf {
@@ -171,7 +183,7 @@ namespace Pcf {
       /// @warning The ExitCode property is a signed 32-bit integer. To prevent the property from returning a negative exit code, you should not use values greater than or equal to 0x80000000.
       /// @remarks Use a non-zero number to indicate an error. In your application, you can define your own error codes in an enumeration, and return the appropriate error code based on the scenario. For example, return a value of 1 to indicate that the required file is not present and a value of 2 to indicate that the file is in the wrong format. For a list of exit codes used by macOS, Linux or Windows, see errno error code documentation (http://en.cppreference.com/w/cpp/error/errno_macros).
       /// @par Example
-      /// The following is a simple app named Double.exe that doubles an integer value passed to it as a command-line argument. The value assigns error codes to the ExitCode property to indicate error conditions. Note that you must add a reference to the System.Numerics.dll assembly to successfully compile the example.
+      /// The following is a simple app named Double.exe that doubles an integer value passed to it as a command-line argument. The value assigns error codes to the ExitCode property to indicate error conditions.
       /// @include EnvironmentExitCode.cpp
       /// The example can then be invoked on macOS from a batch file such as the following, which makes its error codes accessible by using the $? command.
       /// @code
@@ -326,60 +338,117 @@ namespace Pcf {
       /// @brief Gets a value indicating whether the current process is running in user interactive mode.
       /// @return bool true if the current process is running in user interactive mode; otherwise, false.
       /// @remarks The UserInteractive property reports false for a Os process or a service like IIS that runs without a user interface. If this property is false, do not display modal dialogs or message boxes because there is no graphical user interface for the user to interact with.
+      /// @par Example
+      /// The following example displays whether the current process is running in user interactive mode.
+      /// @include EnvironmentUserInteractive.cpp
       static Property<bool, ReadOnly> UserInteractive;
       
       /// @brief Gets the user name of the person who is currently logged on to the Windows operating system.
       /// @return string The user name of the person who is logged on to Windows/Linux/macOS/... .
       /// @remarks You can use the UserName property to identify the user on the current thread, to the system and application for security or access purposes. It can also be used to customize a particular application for each user.
-      /// @remarks The domain account credentials for a user are formatted as the user's domain name, the '\' character, and user name. Use the UserDomainName property to obtain the user's domain name and the UserName property to obtain the user name. A user name is typically an abbreviated combination of the user's first and last names.
+      /// @remarks The UserName property wraps a call to the Windows GetUserName function. The domain account credentials for a user are formatted as the user's domain name, the '\' character, and user name. Use the UserDomainName property to obtain the user's domain name and the UserName property to obtain the user name.
+      /// @par Example
+      /// The following example displays the user name of the person who started the current thread.
+      /// @include EnvironmentUserName.cpp
       static Property<String, ReadOnly> UserName;
       
-      /// @brief Gets a Version object that describes the major, minor, build, and revision numbers of the System core.
+      /// @brief Gets a Version object that describes the major, minor, build, and revision numbers of the Pcf.
+      /// @return Version An object that displays the version of the Pcf.
+      /// @par Example
+      /// The following example displays the version of the Pcf.
+      /// @include EnvironmentVersion.cpp
       static Property<const System::Version&, ReadOnly> Version;
       
       /// @brief Gets the amount of physical memory mapped to the process context.
       /// @return Int64 A 64-bit signed integer containing the number of bytes of physical memory mapped to the process context.
       /// @remarks Windows 98, Windows Millennium Edition, Linux, macOS, Android,... Platform Note: This property always returns zero.
+      /// @par Example
+      /// The following example displays the size of the working set of the computer that runs the code example.
+      /// @include EnvironmentWorkingSet.cpp
       static Property<int64, ReadOnly> WorkingSet;
       
       /// @brief Terminates this process and gives the underlying operating system the specified exit code.
       /// @param exitCode Exit code to be given to the operating system.
+      /// @remarks For the exitCode parameter, use a non-zero number to indicate an error. In your application, you can define your own error codes in an enumeration, and return the appropriate error code based on the scenario. For example, return a value of 1 to indicate that the required file is not present, and a value of 2 to indicate that the file is in the wrong format. For a list of exit codes used by macOS, Linux or Windows, see errno error code documentation (http://en.cppreference.com/w/cpp/error/errno_macros).
+      /// @remarks Calling the Exit method differs from using your programming language's return statement in the following ways:
+      /// * Exit always terminates an application. Using the return statement may terminate an application only if it is used in the application entry point, such as in the Main method.
+      /// * Exit terminates an application immediately, even if other threads are running. If the return statement is called in the application entry point, it causes an application to terminate only after all foreground threads have terminated.
       static void Exit(int32 exitCode);
       
       /// @brief Replaces the name of each environment variable embedded in the specified string with the string equivalent of the value of the variable, then returns the resulting string.
       /// @param name A string containing the names of zero or more environment variables. Each environment variable is quoted with the percent sign character (%).
       /// @return A string with each environment variable replaced by its value.
-      /// @exception ArgumentNullException name is null.
+      /// @remarks Replacement only occurs for environment variables that are set. For example, suppose name is "MyENV = %MyENV%". If the environment variable, MyENV, is set to 42, this method returns "MyENV = 42". If MyENV is not set, no change occurs; this method returns "MyENV = %MyENV%".
+      /// @remarks The size of the return value is limited to 32K.
+      /// @par Example
+      /// The following example shows how to obtain the system drive and system root variables.
+      /// @include EnvironmentExpandEnvironmentVariables.cpp
       static String ExpandEnvironmentVariables(const String& name);
+      
+      /// @brief Immediately terminates a process after writing a message to the Windows Application event log, and then includes the message in error reporting to Microsoft.
+      /// @param message A message that explains why the process was terminated, or null if no explanation is provided.
+      /// @remarks This method terminates a process without running any active try/catch blocks or finalizers.
+      /// @remarks The FailFast method writes the message string to the Windows Application event log, creates a dump of your application, and then terminates the current process. The message string is also included in error reporting to Microsoft.
+      /// @remarks Use the FailFast method instead of the Exit method to terminate your application if the state of your application is damaged beyond repair, and executing your application's try/catch blocks and finalizers will corrupt program resources.
+      /// @remarks Information is reported to Microsoft by using Windows Error Reporting. For more information, see Windows Error Reporting: Getting Started.
+      /// @exception NotImplementedException This method always throw NotImplementedException.
+      static void FailFast(const string& message) {throw NotImplementedException("Use System::Environment::Exit method instead", pcf_current_information);}
       
       /// @brief Returns a string array containing the command-line arguments for the current process.
       /// @return Array<string> An array of string where each element contains a command-line argument. The first element is the executable file name, and the following zero or more elements contain the remaining command-line arguments.
+      /// @remarks The first element in the array contains the file name of the executing program. If the file name is not available, the first element is equal to String.Empty. The remaining elements contain any additional tokens entered on the command line.
+      /// @remarks The program file name can, but is not required to, include path information.
+      /// @remarks Command line arguments are delimited by spaces. You can use double quotation marks (") to include spaces within an argument. The single quotation mark ('), however, does not provide this functionality.
+      /// @remarks If a double quotation mark follows two or an even number of backslashes, each proceeding backslash pair is replaced with one backslash and the double quotation mark is removed. If a double quotation mark follows an odd number of backslashes, including just one, each preceding pair is replaced with one backslash and the remaining backslash is removed; however, in this case the double quotation mark is not removed.
+      /// @remarks The following table shows how command line arguments can be delimited, and assumes MyApp as the current executing application.
+      /// | Input at the command line                    | Resulting command line argumen             |
+      /// |----------------------------------------------|--------------------------------------------|
+      /// | MyApp alpha beta                             | MyApp, alpha, beta                         |
+      /// | MyApp "alpha with spaces" "beta with spaces" | MyApp, alpha with spaces, beta with spaces |
+      /// | MyApp 'alpha with spaces' beta               | MyApp, 'alpha, with, spaces', beta         |
+      /// | MyApp \\\alpha \\\\"beta                     | MyApp, \\\alpha, \\beta                    |
+      /// | MyApp \\\\\"alpha \"beta                     | MyApp, \\"alpha, "beta                     |
+      /// @remarks To obtain the command line as a single string, use the CommandLine property.
+      /// @par Example
+      /// The following example displays the application's command line arguments.
+      /// @include EnvironmentGetCommandLineArgs.cpp
       static const Array<String>& GetCommandLineArgs();
       
-      /// @brief Initailize CommandLineArgs with specified command line arguments.
-      /// @remarks This methode must be call only once in main.
-      /// @param argv Command line arguments.
-      /// @param argc Number of command line arguments.
-      /// @return Array<string> A string array that contains the arguments without the command line.
-      /// @exception InvalidOperationException Call more than once. CommandeLine has already been set and is not empty.
-      static Array<string> SetCommandLineArgs(char* argv[], int argc);
-      
+      /// @brief Retrieves the value of an environment variable from the current process.
+      /// @param variable The name of the environment variable.
+      /// @return String The value of the environment variable specified by variable, or String::Empty if the environment variable is not found.
+      /// @remarks The GetEnvironmentVariable(String) method retrieves an environment variable from the environment block of the current process only. It is equivalent to calling the GetEnvironmentVariable(String, EnvironmentVariableTarget) method with a target value of EnvironmentVariableTarget.Process. The environment block of the current process includes the following environment variables:
+      /// * All per-machine environment variables that are defined at the time the process is created, along with their values.
+      /// * All per-user environment variables that are defined at the time the process is created, along with their values.
+      /// * Any variables added to the process block while the process is running by calling either the SetEnvironmentVariable(String, String) method or the SetEnvironmentVariable(String, String, EnvironmentVariableTarget) method with a target value of EnvironmentVariableTarget.Process.
+      /// @remarks If environment variables are created after the process has started, you can use this method to retrieve only those variables that were created by calling the SetEnvironmentVariable(String, String) method or the SetEnvironmentVariable(String, String, EnvironmentVariableTarget) method with a target value of .EnvironmentVariableTarget.Process.
+      /// @remarks To retrieve all environment variables along with their values, call the GetEnvironmentVariables method.
+      /// @remarks On Windows Environment variable names <b>are not</b> case-sensitive.
+      /// @remarks On macOS and linux Environment variable names <b>are</b> case-sensitive.
+      /// @par Example
+      /// The following example uses the GetEnvironmentVariable method to retrieve the windir environment variable, which contains the path of the Windows directory.
+      /// @include EnvironmentGetEnvironmentVariable.cpp
+      /// The following example attempts to retrieve the value of an environment variable named Test1 from the process environment block. If the variable doesn't exist, the example creates its and retrieves its value. The example displays the value of the variable. If the example created the variable, it also calls the GetEnvironmentVariables(EnvironmentVariableTarget) method with each member of the EnvironmentVariableTarget enumeration to establish that the variable can be retrieved only from the current process environment block. Finally, if the example created the variable, it deletes it.
+      /// @include EnvironmentGetEnvironmentVariable2.cpp
+      static String GetEnvironmentVariable(const String& variable) {return GetEnvironmentVariable(variable, EnvironmentVariableTarget::Process);}
+
+      /// @brief Retrieves the value of an environment variable from the current process or from the Windows operating system registry key for the current user or local machine.
+      /// @param variable The name of an environment variable.
+      /// @param target One of the EnvironmentVariableTarget values.
+      /// @return The value of the environment variable specified by the variable and target parameters, or string::Empty if the environment variable is not found.
+      /// @remarks The target parameter specifies whether the environment variable is retrieved from the current process or from the Windows operating system registry key for the current user or local machine. All per-user and per-machine environment variables are automatically copied into the environment block of the current process. However, environment variables added only to the environment block of the current process persist only for the duration of the process.
+      /// @remarks To retrieve all environment variables along with their values, call the GetEnvironmentVariables method.
+      /// @remarks On Windows Environment variable names <b>are not</b> case-sensitive.
+      /// @remarks On macOS and linux Environment variable names <b>are</b> case-sensitive.
+      /// @par Example
+      /// The following example creates environment variables for the Process, User, and Machine targets, checks whether the operating system registry contains the User and Machine environment variables, then deletes the environment variables.
+      /// @include EnvironmentGetEnvironmentVariable3.cpp
+      static String GetEnvironmentVariable(const String& variable, EnvironmentVariableTarget target);
+
       /// @brief Retrieves all environment variable names and their values from the current process.
       /// @return Collections::Generic::IDictionary<string, string> A dictionary that contains all environment variable names and their values; otherwise, an empty dictionary if no environment variables are found.
       /// @remarks The names and values for the environment variables are stored as key-value pairs in the returned IDictionary.
       static const Collections::Generic::IDictionary<String, String>& GetEnvironmentVariables();
-      
-      /// @brief Retrieves the value of an environment variable from the current process.
-      /// @param variable The name of the environment variable.
-      /// @return tring The value of the environment variable specified by variable, or null if the environment variable is not found.
-      static String GetEnvironmentVariable(const String& variable);
-      
-      /// @brief Creates, modifies, or deletes an environment variable stored in the current process.
-      /// @param name The name of an environment variable.
-      /// @param value A value to assign to variable.
-      /// @exception ArgumentNullException name is null.
-      /// @exception ArgumentException An error occurred during the execution of this operation.
-      static void SetEnvironmentVariable(const String& name, const String& value);
       
       /// @brief Gets the path to the system special folder that is identified by the specified enumeration.
       /// @param folder An enumerated constant that identifies a system special folder.
@@ -393,6 +462,31 @@ namespace Pcf {
       /// @brief Returns an array of string containing the names of the logical drives on the current computer.
       /// @return Array<string> An array of strings where each element contains the name of a logical drive. For example, if the computer's hard drive is the first logical drive, the first element returned is "C:\".
       static Array<String> GetLogicalDrives();
+      
+      /// @brief Initailize CommandLineArgs with specified command line arguments.
+      /// @remarks This methode must be call only once in main.
+      /// @param argv Command line arguments.
+      /// @param argc Number of command line arguments.
+      /// @return Array<string> A string array that contains the arguments without the command line.
+      /// @exception InvalidOperationException Call more than once. CommandeLine has already been set and is not empty.
+      /// @remarks if you use #pcf_startup (default) you don't need to call this method; otherwise if you use the standerd C++ main method you need to call it.
+      /// @par Example
+      /// This example show how to call SetCommandLineArgs with sandard C++ main method:
+      /// @include Main5.cpp
+      static Array<string> SetCommandLineArgs(char* argv[], int argc);
+      
+      /// @brief Creates, modifies, or deletes an environment variable stored in the current process.
+      /// @param name The name of an environment variable.
+      /// @param value A value to assign to variable.
+      /// @exception ArgumentNullException name is null.
+      /// @exception ArgumentException An error occurred during the execution of this operation.
+      static void SetEnvironmentVariable(const String& name, const String& value) {SetEnvironmentVariable(name, value, System::EnvironmentVariableTarget::Process);}
+
+      static void SetEnvironmentVariable(const String& name, const String& value, EnvironmentVariableTarget target);
+      
+    private:
+      friend class System::Diagnoastics::Process;
+      void SetUserInteractive(bool userInteractive);
     };
   }
 }

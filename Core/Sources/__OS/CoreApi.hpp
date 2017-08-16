@@ -142,7 +142,6 @@ namespace __OS {
       static string GetMachineName();
       static int32 GetTickCount();
       static string GetUserDomainName();
-      static bool GetUserInteractive();
       static string GetUserName();
       static int64 GetWorkingSet();
       static int32 SetEnv(const string& name, const string& value);
