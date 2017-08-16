@@ -278,12 +278,28 @@ String Environment::GetEnvironmentVariable(const String& variable, EnvironmentVa
   return Microsoft::Win32::Registry::GetValue("HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Session Manager\\Environment", variable, "").ToString();
 }
 
-const Collections::Generic::IDictionary<String, String>& Environment::GetEnvironmentVariables() {
-  return EnvironmentVariables;
+const Collections::Generic::IDictionary<String, String>& Environment::GetEnvironmentVariables(EnvironmentVariableTarget target) {
+  if (target == EnvironmentVariableTarget::Process)
+    return EnvironmentVariables;
+
+  static Collections::Specialized::StringDictionary environmentVariables;
+  environmentVariables.Clear();
+  Microsoft::Win32::RegistryKey key = target == EnvironmentVariableTarget::User ? Microsoft::Win32::Registry::CurrentUser().CreateSubKey("Environment") : Microsoft::Win32::Registry::LocalMachine().CreateSubKey("System").CreateSubKey("CurrentControlSet").CreateSubKey("Control").CreateSubKey("Session Manager").CreateSubKey("Environment");
+  for (auto name : key.GetValueNames())
+    environmentVariables[name] = key.GetValue(name).ToString();
+  return environmentVariables;
 }
 
-String Environment::GetFolderPath(Environment::SpecialFolder folder) {
-  return __OS::CoreApi::Directory::GetKnowFolderPath(folder);
+String Environment::GetFolderPath(Environment::SpecialFolder folder, Environment::SpecialFolderOption option) {
+  string path = __OS::CoreApi::Directory::GetKnowFolderPath(folder);
+
+  if (option == Environment::SpecialFolderOption::None)
+    return  !System::IO::Directory::Exists(path) ? "" :  path;
+  
+  if (!System::IO::Directory::Exists(path))
+    System::IO::Directory::CreateDirectory(path);
+  
+  return path;
 }
 
 Array<String> Environment::GetLogicalDrives() {

@@ -18,6 +18,9 @@ namespace {
   }
   
   static bool ExistSubKey(const System::String& path, const System::String& subKey) {
+    if (path == "")
+      return false;
+    
     if (subKey == "")
       return true;
     
@@ -31,7 +34,7 @@ namespace {
   }
   
   static System::String MakePath(const System::String& path, const System::String& subKey) {
-    if (subKey == "")
+    if (path == "" || subKey == "")
       return path;
     
     Array<DirectoryInfo> directories = DirectoryInfo(path).GetDirectories();

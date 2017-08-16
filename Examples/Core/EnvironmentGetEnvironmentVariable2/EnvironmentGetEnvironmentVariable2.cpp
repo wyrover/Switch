@@ -1,7 +1,6 @@
 #include <Pcf/Pcf>
 
 using namespace System;
-using namespace System::IO;
 
 namespace Examples {
   class Program {
