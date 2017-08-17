@@ -29,7 +29,7 @@ namespace {
 #if defined(__APPLE__)
   string amovibleMountedPoint = "/Volumes";
   System::Array<string> ramDrives = {"/Dev"};
-  System::Array<string> networkDrives = {"/net", "/home", "/Network/Servers"};
+  System::Array<string> networkDrives = {"/net", "/home"};
 #else
   string amovibleMountedPoint = System::Environment::ExpandEnvironmentVariables("/media/%USER%");
   System::Array<string> ramDrives = {"/run/vmblock-fuse", "/run/user/1000/gvfs"};
@@ -56,11 +56,11 @@ System::Array<string> __OS::CoreApi::Drive::GetDrives() {
   for(string drive : __OS::CoreApi::Directory::EnumerateDirectories(amovibleMountedPoint, "*")) {
     struct statfs stat;
 #if defined(__APPLE__)
-    if (statfs(string::Format("{0}/{1}", amovibleMountedPoint, drive).Data(), &stat) == 0 && string(stat.f_mntonname) != rootDrive)
+    if (statfs(drive.Data(), &stat) == 0 && string(stat.f_mntonname) != rootDrive)
 #else
-    if (statfs(string::Format("{0}/{1}", amovibleMountedPoint, drive).Data(), &stat) == 0)
+    if (statfs(drive.Data(), &stat) == 0)
 #endif
-      drives.Add(string::Format("{0}/{1}", amovibleMountedPoint, drive));
+      drives.Add(drive);
   }
   
   return drives.ToArray();

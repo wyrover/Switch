@@ -84,10 +84,9 @@ namespace Examples {
   public:
     // The main entry point for the application.
     static void Main() {
-      Environment::SetEnvironmentVariable("key1", "value1");
-      Environment::SetEnvironmentVariable("KEY1", "VALUE1");
-      Console::WriteLine("key1 = {0}", Environment::GetEnvironmentVariable("key1"));
-      Console::WriteLine("KEY1 = {0}", Environment::GetEnvironmentVariable("KEY1"));
+      Console::WriteLine();
+      Array<String> drives = Environment::GetLogicalDrives();
+      Console::WriteLine("GetLogicalDrives: {0}", String::Join(", ", drives));
       //Console::WriteLine(); Application::Run();
     }
   };

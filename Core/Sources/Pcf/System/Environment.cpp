@@ -270,6 +270,9 @@ const Array<String>& Environment::GetCommandLineArgs() {
 }
 
 String Environment::GetEnvironmentVariable(const String& variable, EnvironmentVariableTarget target) {
+  if (!Enum<EnvironmentVariableTarget>::GetValues().Contains(target))
+    throw ArgumentException(pcf_current_information);
+  
   if (target == EnvironmentVariableTarget::Process) {
     char* value = getenv(variable.Data());
     return value == null ? "" : value;
@@ -279,6 +282,9 @@ String Environment::GetEnvironmentVariable(const String& variable, EnvironmentVa
 }
 
 const Collections::Generic::IDictionary<String, String>& Environment::GetEnvironmentVariables(EnvironmentVariableTarget target) {
+  if (!Enum<EnvironmentVariableTarget>::GetValues().Contains(target))
+    throw ArgumentException(pcf_current_information);
+  
   if (target == EnvironmentVariableTarget::Process)
     return EnvironmentVariables;
 
@@ -291,6 +297,9 @@ const Collections::Generic::IDictionary<String, String>& Environment::GetEnviron
 }
 
 String Environment::GetFolderPath(Environment::SpecialFolder folder, Environment::SpecialFolderOption option) {
+  if (!Enum<Environment::SpecialFolderOption>::GetValues().Contains(option))
+    throw ArgumentException(pcf_current_information);
+  
   string path = __OS::CoreApi::Directory::GetKnowFolderPath(folder);
 
   if (option == Environment::SpecialFolderOption::None)

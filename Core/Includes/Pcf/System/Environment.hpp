@@ -500,6 +500,10 @@ namespace Pcf {
 
       /// @brief Returns an array of string containing the names of the logical drives on the current computer.
       /// @return Array<string> An array of strings where each element contains the name of a logical drive. For example, if the computer's hard drive is the first logical drive, the first element returned is "C:\".
+      /// @Exception IOException An I/O error occurs.
+      /// @par Example
+      /// The following example shows how to display the logical drives of the current computer using the GetLogicalDrives method.
+      /// @include EnvironmentGetLogicalDrives.cpp
       static Array<String> GetLogicalDrives();
       
       /// @brief Initailize CommandLineArgs with specified command line arguments.
@@ -517,10 +521,39 @@ namespace Pcf {
       /// @brief Creates, modifies, or deletes an environment variable stored in the current process.
       /// @param name The name of an environment variable.
       /// @param value A value to assign to variable.
-      /// @exception ArgumentNullException name is null.
-      /// @exception ArgumentException An error occurred during the execution of this operation.
+      /// @exception ArgumentException variable contains a zero-length string, an initial hexadecimal zero character (0x00), or an equal sign ("=").  -or-  The length of variable or value is greater than or equal to 32,767 characters.  -or-  An error occurred during the execution of this operation.
+      /// @remarks Calling this method is equivalent to calling the SetEnvironmentVariable(String, String, EnvironmentVariableTarget) overload with a value of EnvironmentVariableTarget.Process for the target argument.
+      /// @remarks If the value argument is not empty (see the discussion of deleting an environment variable later in this section for the definition of an empty value) and the environment variable named by the variable parameter does not exist, the environment variable is created and assigned the contents of value. If it does exist, its value is modified. Because the environment variable is defined in the environment block of the current process only, it does not persist after the process has ended.
+      /// @remarks If variable contains a non-initial hexadecimal zero character, the characters before the zero character are considered the environment variable name and all subsequent characters are ignored.
+      /// @remarks If value contains a non-initial hexadecimal zero character, the characters before the zero character are assigned to the environment variable and all subsequent characters are ignored.
+      /// @remarks If value is empty and the environment variable named by variable exists, the environment variable is deleted. If variable does not exist, no error occurs even though the operation cannot be performed. value is considered empty under any of the following conditions:
+      /// * It is String.Empty.
+      /// * It consists of a single character whose value is U+0000.
+      /// @par Example
+      /// The following example attempts to retrieve the value of an environment variable named Test1 from the process environment block. If the variable doesn't exist, the example creates the variable and retrieves its value. The example displays the value of the variable. If the example created the variable, it also calls the GetEnvironmentVariables(EnvironmentVariableTarget) method with each member of the EnvironmentVariableTarget enumeration to establish that the variable can be retrieved only from the current process environment block. Finally, if the example created the variable, it deletes it.
+      /// @include EnvironmentSetEnvironmentVariable1.cpp
       static void SetEnvironmentVariable(const String& name, const String& value) {SetEnvironmentVariable(name, value, System::EnvironmentVariableTarget::Process);}
 
+      /// @brief Creates, modifies, or deletes an environment variable stored in the current process or in the Windows operating system registry key reserved for the current user or local machine.
+      /// @param name The name of an environment variable.
+      /// @param value A value to assign to variable.
+      /// @param One of the enumeration values that specifies the location of the environment variable.
+      /// @exception ArgumentException variable contains a zero-length string, an initial hexadecimal zero character (0x00), or an equal sign ("=").  -or-  The length of variable is greater than or equal to 32,767 characters.  -or-  target is not a member of the EnvironmentVariableTarget enumeration.  -or-  target is Machine or User, and the length of variable is greater than or equal to 255.  -or-  arget is Process and the length of value is greater than or equal to 32,767 characters.  -or-  An error occurred during the execution of this operation.
+      /// @remarks The SetEnvironmentVariable(String, String, EnvironmentVariableTarget) method lets you define an environment variable that is available to all processes that run on a machine (the EnvironmentVariableTarget.Machine value), to all processes run by a user (the EnvironmentVariableTarget.User value), or to the current process (the Process value). Per-machine and per-user environment variables are copied into the environment block of the current process. However, environment variables that are unique to the current process environment block persist only until the process ends.
+      /// @remarks If the value argument is not empty (see the discussion of deleting an environment variable later in this section for the definition of an empty value) and the environment variable named by the variable parameter does not exist, the environment variable is created and assigned the contents of value. If it does exist, its value is modified.
+      /// @remarks If variable contains a non-initial hexadecimal zero character, the characters before the zero character are considered the environment variable name and all subsequent characters are ignored.
+      /// @remarks If value contains a non-initial hexadecimal zero character, the characters before the zero character are assigned to the environment variable and all subsequent characters are ignored.
+      /// @remarks If value is empty and the environment variable named by variable exists, the environment variable is deleted. value is considered empty under any of the following conditions:
+      /// * It is String.Empty.
+      /// * It consists of a single character whose value is U+0000.
+      /// @remarks If variable does not exist, no error occurs although the operation cannot be performed. Be careful when target is Machine, because you can accidentally delete an environment variable that affects your entire local machine, not just the current process or user.
+      /// @remarks If target is User, the environment variable is stored in the HKEY_CURRENT_USER\Environment key of the local computer's registry. It is also copied to instances of File Explorer that are running as the current user. The environment variable is then inherited by any new processes that the user launches from File Explorer.
+      /// @remarks Similarly, if target is EnvironmentVariableTarget.Machine, the environment variable is stored in the HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Session Manager\Environment key of the local computer's registry. It is also copied to all instances of File Explorer. The environment variable is then inherited by any new processes that are launched from File Explorer.
+      /// @remarks If target is User or Machine, other applications are notified of the set operation by a Windows WM_SETTINGCHANGE message.
+      /// @remarks If target is EnvironmentVariableTarget.User or EnvironmentVariableTarget.Machine, we recommend that the length of value be less than 2048 characters.
+      /// @par Example
+      /// The following example creates environment variables for the EnvironmentVariableTarget.Process, EnvironmentVariableTarget.User, and Machine targets, checks whether the operating system registry contains the user and machine environment variables, then deletes the environment variables.
+      /// @include EnvironmentGetEnvironmentVariables.cpp
       static void SetEnvironmentVariable(const String& name, const String& value, EnvironmentVariableTarget target);
       
     private:
