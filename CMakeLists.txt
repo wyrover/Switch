@@ -6,6 +6,7 @@ option(BUILD_CORE "Build Pcf.Core library" ON)
 option(BUILD_DRAWING "Build Pcf.Drawing library" ON)
 option(BUILD_FORMS "Build Pcf.Forms library" ON)
 option(BUILD_TUNIT "Build Pcf.TUnit and Pcf.TUnit.Main libraries" ON)
+option(BUILD_TESTS "Build unittests libraries" OFF)
 
 enable_testing()
 

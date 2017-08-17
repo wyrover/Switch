@@ -231,8 +231,10 @@ target_include_directories(Pcf.Forms PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SO
 target_link_libraries(Pcf.Forms Pcf.Drawing)
 set_target_properties(Pcf.Forms PROPERTIES FOLDER Pcf/Forms)
 
-add_subdirectory("ManualTests")
-add_subdirectory("UnitTests")
+if (BUILD_TESTS)
+  add_subdirectory("ManualTests")
+  add_subdirectory("UnitTests")
+endif()
 
 install(TARGETS Pcf.Forms EXPORT Pcf DESTINATION lib)
 install(DIRECTORY "Includes/Pcf/." DESTINATION include/Pcf)

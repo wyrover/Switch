@@ -39,7 +39,9 @@ target_include_directories(Pcf.TUnit PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SO
 target_link_libraries(Pcf.TUnit ${GTEST_LIBRARIES} Pcf.Core)
 set_target_properties(Pcf.TUnit PROPERTIES FOLDER Pcf/TUnit)
 
-add_subdirectory("UnitTests")
+if (BUILD_TESTS)
+  add_subdirectory("UnitTests")
+endif()
 
 install(TARGETS Pcf.TUnit EXPORT Pcf DESTINATION lib)
 install(DIRECTORY "Includes/Pcf/." DESTINATION include/Pcf)

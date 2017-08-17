@@ -69,8 +69,13 @@ namespace Pcf {
       /// @exception ArgumentNullException blk1 || blk2 is null
       /// @exception ArgumentOutOfRangeException blk1Length, blk1Offset, blk2Length, blk2Offset, || count is less than 0.
       /// @exception ArgumentException The number of bytes in blk1 is less than blk1Offset plus count -||- The number of bytes in blk2 is less than blk2Offset plus count.
+      template<typename T1, typename T2>
+      static int32 BlockCompare(const T1* blk1, int64 blk1Length, int64 blk1Offset, const T2* blk2, int64 blk2Length, int64 blk2Offset, int64 count) {return BlockCompare((const void*)blk1, blk1Length, blk1Offset, (const void *)blk2, blk2Length, blk2Offset, count);}
+     
+      /// @cond
       static int32 BlockCompare(const void* blk1, int64 blk1Length, int64 blk1Offset, const void* blk2, int64 blk2Length, int64 blk2Offset, int64 count);
-      
+      /// @endcond
+
       /// @brief Copies a specified number of bytes from a source array starting at a particular offset to a destination array starting at a particular offset.
       /// @param src The source buffer.
       /// @param srcOffset The zero-based byte offset into src.

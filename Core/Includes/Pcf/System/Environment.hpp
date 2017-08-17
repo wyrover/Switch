@@ -507,11 +507,11 @@ namespace Pcf {
       static Array<String> GetLogicalDrives();
       
       /// @brief Initailize CommandLineArgs with specified command line arguments.
-      /// @remarks This methode must be call only once in main.
-      /// @param argv Command line arguments.
+     /// @param argv Command line arguments.
       /// @param argc Number of command line arguments.
       /// @return Array<string> A string array that contains the arguments without the command line.
       /// @exception InvalidOperationException Call more than once. CommandeLine has already been set and is not empty.
+      /// @remarks This methode must be call only once in main.
       /// @remarks if you use #pcf_startup (default) you don't need to call this method; otherwise if you use the standerd C++ main method you need to call it.
       /// @par Example
       /// This example show how to call SetCommandLineArgs with sandard C++ main method:
@@ -531,7 +531,7 @@ namespace Pcf {
       /// * It consists of a single character whose value is U+0000.
       /// @par Example
       /// The following example attempts to retrieve the value of an environment variable named Test1 from the process environment block. If the variable doesn't exist, the example creates the variable and retrieves its value. The example displays the value of the variable. If the example created the variable, it also calls the GetEnvironmentVariables(EnvironmentVariableTarget) method with each member of the EnvironmentVariableTarget enumeration to establish that the variable can be retrieved only from the current process environment block. Finally, if the example created the variable, it deletes it.
-      /// @include EnvironmentSetEnvironmentVariable1.cpp
+      /// @include EnvironmentSetEnvironmentVariable.cpp
       static void SetEnvironmentVariable(const String& name, const String& value) {SetEnvironmentVariable(name, value, System::EnvironmentVariableTarget::Process);}
 
       /// @brief Creates, modifies, or deletes an environment variable stored in the current process or in the Windows operating system registry key reserved for the current user or local machine.
@@ -553,7 +553,7 @@ namespace Pcf {
       /// @remarks If target is EnvironmentVariableTarget.User or EnvironmentVariableTarget.Machine, we recommend that the length of value be less than 2048 characters.
       /// @par Example
       /// The following example creates environment variables for the EnvironmentVariableTarget.Process, EnvironmentVariableTarget.User, and Machine targets, checks whether the operating system registry contains the user and machine environment variables, then deletes the environment variables.
-      /// @include EnvironmentGetEnvironmentVariables.cpp
+      /// @include EnvironmentGetEnvironmentVariables2.cpp
       static void SetEnvironmentVariable(const String& name, const String& value, EnvironmentVariableTarget target);
       
     private:
