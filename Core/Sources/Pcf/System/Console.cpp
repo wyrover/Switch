@@ -258,10 +258,6 @@ Property<int32> Console::WindowWidth {
 
 ConsoleCancelEventHandler Console::CancelKeyPress;
 
-void Console::Beep() {
-  Beep(800, 200);
-}
-
 void Console::Beep(int32 frequency, int32 duration) {
   if (frequency < 37 || frequency > 32767 || duration <= 0)
     throw ArgumentOutOfRangeException(pcf_current_information);

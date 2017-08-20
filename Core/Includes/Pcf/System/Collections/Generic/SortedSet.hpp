@@ -252,10 +252,6 @@ namespace Pcf {
             return System::Collections::Generic::Enumerator<T>(new SortedSet::Enumerator(*const_cast<SortedSet*>(this)));
           }
 
-          /// @brief Returns a new set defined in reverse order.
-          /// @return a new set defined in reverse order.
-          SortedSet Reverse() const {return SortedSet(*this, ReversedComparer<T>::Create(this->comparer));}
-
           /// @brief Removes a specified item from the SortedSet<T>.
           /// @param item The element to remove.
           /// @return true if the element was removed, false otherwise.

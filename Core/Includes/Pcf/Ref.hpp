@@ -7,6 +7,7 @@
 #include <string>
 #include <sstream>
 
+#include "NullPtr.hpp"
 #include "Types.hpp"
 
 namespace Pcf {
@@ -31,7 +32,7 @@ namespace Pcf {
     /// @param ref Reference to copy.
     Ref(const Ref& ref) : ptr(ref.ptr) {}
 
-    Ref(std::nullptr_t) : ptr(null) {}
+    Ref(NullPtr) : ptr(null) {}
 
     /// @brief Return true if this instance is null.
     /// @return true if this instance is null; otherwise false.

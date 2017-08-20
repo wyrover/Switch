@@ -347,7 +347,6 @@ set(INCLUDE_FILES
   Includes/Pcf/System/TimeZoneInfo.hpp
   Includes/Pcf/System/TimeZoneNotFoundException.hpp
   Includes/Pcf/System/Tuple.hpp
-  Includes/Pcf/System/TupleImpl.hpp
   Includes/Pcf/System/Type.hpp
   Includes/Pcf/System/TypeAccessException.hpp
   Includes/Pcf/System/TypeCode.hpp
@@ -386,7 +385,7 @@ set(INCLUDE_FILES
   Includes/Pcf/LiteralOperatorConverter.hpp
   Includes/Pcf/Lock.hpp
   Includes/Pcf/Move.hpp
-  Includes/Pcf/NullType.hpp
+  Includes/Pcf/NullPtr.hpp
   Includes/Pcf/Property.hpp
   Includes/Pcf/Public.hpp
   Includes/Pcf/Ref.hpp

@@ -3,6 +3,8 @@
 #include <Pcf/System/Console.hpp>
 #include <Pcf/System/Environment.hpp>
 #include <Pcf/System/String.hpp>
+#include <Pcf/System/TimeSpan.hpp>
+#include <Pcf/System/Tuple.hpp>
 #include <Pcf/Startup.hpp>
 
 using namespace System;
@@ -79,14 +81,11 @@ namespace Examples {
       }
     }
   };
-
+  
   class Program {
   public:
     // The main entry point for the application.
     static void Main() {
-      Console::WriteLine();
-      Array<String> drives = Environment::GetLogicalDrives();
-      Console::WriteLine("GetLogicalDrives: {0}", String::Join(", ", drives));
       //Console::WriteLine(); Application::Run();
     }
   };

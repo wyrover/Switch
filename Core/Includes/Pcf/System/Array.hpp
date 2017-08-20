@@ -3,6 +3,7 @@
 #pragma once
 
 #include <array>
+#include <tuple>
 
 #include "../Allocator.hpp"
 #include "../Interface.hpp"
@@ -17,6 +18,7 @@
 #include "Predicate.hpp"
 #include "RankException.hpp"
 #include "_String.hpp"
+#include "Tuple.hpp"
 #include "Collections/Generic/IList.hpp"
 #include "Collections/Generic/List.hpp"
 #include "Linq/Enumerable.hpp"
@@ -50,10 +52,7 @@ namespace Pcf {
       /// The following code example demonstrates different methods to create an array.
       /// @include ArrayConstructor.cpp
       Array() {
-        int32 r = rank;
-        if (r != 1)
-          throw System::ArgumentOutOfRangeException(pcf_current_information);
-
+        static_assert(rank == 1, "Call this contructor only for rank = 1");
         this->lowerBound.push_back(0);
         this->upperBound.push_back(-1);
       }
@@ -65,10 +64,7 @@ namespace Pcf {
       /// The following code example demonstrates different methods to create an array.
       /// @include ArrayConstructor.cpp
       explicit Array(int32 length) : length(length), array(length) {
-        int32 r = rank;
-        if (r != 1)
-          throw System::ArgumentOutOfRangeException(pcf_current_information);
-
+        static_assert(rank == 1, "Call this contructor only for rank = 1");
         this->lowerBound.push_back(0);
         this->upperBound.push_back(length-1);
       }
@@ -81,10 +77,7 @@ namespace Pcf {
       /// The following code example demonstrates different methods to create an array.
       /// @include ArrayConstructor.cpp
       Array(int32 length1, int32 length2) : length(length2 * length1), array(length2 * length1) {
-        int32 r = rank;
-        if (r != 2)
-          throw System::ArgumentOutOfRangeException(pcf_current_information);
-
+        static_assert(rank == 2, "Call this contructor only for rank = 2");
         this->lowerBound.push_back(0);
         this->upperBound.push_back(length1-1);
         this->lowerBound.push_back(0);
@@ -100,10 +93,7 @@ namespace Pcf {
       /// The following code example demonstrates different methods to create an array.
       /// @include ArrayConstructor.cpp
       Array(int32 length1, int32 length2, int32 length3) : length(length3 * length2 * length1), array(length3 * length2 * length1) {
-        int32 r = rank;
-        if (r != 3)
-          throw System::ArgumentOutOfRangeException(pcf_current_information);
-
+        static_assert(rank == 3, "Call this contructor only for rank = 3");
         this->lowerBound.push_back(0);
         this->upperBound.push_back(length1-1);
         this->lowerBound.push_back(0);
@@ -120,9 +110,7 @@ namespace Pcf {
       /// @include ArrayConstructor.cpp
       template<int32 len>
       explicit Array(const T (&array)[len]) : length(len), array(len) {
-        int32 r = rank;
-        if (r != 1)
-          throw System::ArgumentOutOfRangeException(pcf_current_information);
+        static_assert(rank == 1, "Call this contructor only for rank = 1");
         int l = len;
         if (l < 0)
           throw System::ArgumentOutOfRangeException(pcf_current_information);
@@ -177,10 +165,7 @@ namespace Pcf {
       /// The following code example demonstrates different methods to create an array.
       /// @include ArrayConstructor.cpp
       explicit Array(const Collections::Generic::IList<T>& list) : length(list.Count), array(list.Count) {
-        int32 r = rank;
-        if (r != 1)
-          throw System::ArgumentOutOfRangeException(pcf_current_information);
-
+        static_assert(rank == 1, "Call this contructor only for rank = 1");
         this->lowerBound.push_back(0);
         this->upperBound.push_back(this->length-1);
         for (int32 index = 0; index < list.Count; index++)
@@ -194,10 +179,7 @@ namespace Pcf {
       /// The following code example demonstrates different methods to create an array.
       /// @include ArrayConstructor.cpp
       explicit Array(const Collections::Generic::IEnumerable<T>& collection) {
-        int32 r = rank;
-        if (r != 1)
-          throw System::ArgumentOutOfRangeException(pcf_current_information);
-
+        static_assert(rank == 1, "Call this contructor only for rank = 1");
         System::Collections::Generic::Enumerator<T> enumerator = collection.GetEnumerator();
         while (enumerator.MoveNext())
           this->array.push_back(enumerator.Current);
@@ -208,26 +190,59 @@ namespace Pcf {
 
       /// @cond
       Array(InitializerList<T> il) : length((int32)il.size()), array(il) {
+        static_assert(rank == 1, "Call this contructor only for rank = 1");
         this->lowerBound.push_back(0);
         this->upperBound.push_back((int32)il.size());
       }
-      /// @endcond
 
+      /*
+      Array(InitializerList<Tuple<T, T> il) : length((int32)il.size()) {
+        static_assert(rank == 2, "Call this contructor only for rank = 2");
+        this->lowerBound.push_back(0);
+        this->upperBound.push_back(length1-1);
+        this->lowerBound.push_back(0);
+        this->upperBound.push_back(length2-1);
+        
+        for (auto value : il) {
+          this->array.push_back(value.Item1);
+          this->array.push_back(value.Item2);
+        }
+      }
+      
+      Array(InitializerList<Tuple<T, T, T> il) : length((int32)il.size()) {
+        static_assert(rank == 3, "Call this contructor only for rank = 3");
+        this->lowerBound.push_back(0);
+        this->upperBound.push_back(length1-1);
+        this->lowerBound.push_back(0);
+        this->upperBound.push_back(length2-1);
+        this->lowerBound.push_back(0);
+        this->upperBound.push_back(length3-1);
+
+        for (auto value : il) {
+          this->array.push_back(value.Item1);
+          this->array.push_back(value.Item2);
+          this->array.push_back(value.Item3);
+        }
+      }
+       */
+      
       explicit Array(const std::vector<T>& array) : length((int32)array.size()) {
         this->lowerBound.push_back(0);
         this->upperBound.push_back(length-1);
         for (T value : array)
           this->array.push_back(value);
       }
+      /// @endcond
 
       /// @brief Get access to raw data of the Array.
       /// @return A pointer to raw data of the array.
-      Property<const T*, ReadOnly> Data{
-        pcf_get{ return this->array.data(); }
+      Property<const T*, ReadOnly> Data {
+        pcf_get{return this->array.data();}
       };
 
       /// @brief Gets a 32-bit integer that represents the total number of elements in all the dimensions of the Array.
       /// @return int32 A 32-bit integer that represents the total number of elements in all the dimensions of the Array; zero if there are no elements in the array.
+      /// @remarks Retrieving the value of this property is an O(1) operation.
       /// @par Examples
       /// The following code example demonstrates methods to get the length of an array.
       /// @include ArrayGetLength.cpp
@@ -237,6 +252,7 @@ namespace Pcf {
 
       /// @brief Gets a 64-bit integer that represents the total number of elements in all the dimensions of the Array.
       /// @return int64 A 64-bit integer that represents the total number of elements in all the dimensions of the Array; zero if there are no elements in the array.
+      /// @remarks Retrieving the value of this property is an O(1) operation.
       Property<int64, ReadOnly> LongLength {
         pcf_get {return static_cast<int64>(this->array.size());}
       };

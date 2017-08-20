@@ -2,11 +2,6 @@
 /// @brief Contains Pcf::System::Collections::Generic::Comparer <T> class.
 #pragma once
 
-#include "../../../As.hpp"
-#include "../../../Property.hpp"
-#include "../../../Is.hpp"
-#include "../../../RefPtr.hpp"
-#include "../../ArgumentNullException.hpp"
 #include "../../Object.hpp"
 #include "IComparer.hpp"
 
@@ -22,39 +17,21 @@ namespace Pcf {
         template<typename T>
         class Comparer : public Object, public IComparer<T> {
         public:
+          /// @cond
+          Comparer() {}
+          /// @endcond
+          
           /// @brief Returns a default sort order comparer for the type specified by the generic argument
           static Property<const IComparer<T>&, ReadOnly> Default;
-
-          /// @brief Create a new instance of class Comparer
-          Comparer() {}
-          
-          /// @brief Destroy instance of the class Comparer
-          ~Comparer() {}
 
           /// @brief Compares two entities and returns a value indicating whether one is less than, equal to, or greater than the other.
           /// @param x The first entity to compare.
           /// @param y The second entity to compare.
           /// @return Int32 A 32-bit signed integer that indicates the relative order of the entities being compared. The return value has these meanings:
-          /// Less than zero      x is less than y.
-          /// Zero                x equals y.
-          /// Greater than zero   x is greater than y.
+          /// - Less than zero      x is less than y.
+          /// - Zero                x equals y.
+          /// - Greater than zero   x is greater than y.
           virtual int32 Compare(const T& x, const T& y) const {return x < y ? -1 : (x == y ? 0 : 1);}
-        };
-
-        template<typename T>
-        class ReversedComparer : public Object, public System::Collections::Generic::IComparer<T> {
-        public:
-          static refptr<IComparer<T>> Create(const refptr<IComparer<T>>& comparer) {
-            if (is< ReversedComparer<T>> (comparer))
-              return as< ReversedComparer<T>>(comparer)->comparer;
-            return new ReversedComparer(comparer);
-          }
-
-          virtual int32 Compare(const T& x, const T& y) const {return -(this->comparer->Compare(x,y));}
-
-        private:
-          ReversedComparer(const refptr<IComparer<T>>& comparer) {this->comparer = comparer;}
-          refptr< IComparer<T>> comparer;
         };
         
         /// @cond

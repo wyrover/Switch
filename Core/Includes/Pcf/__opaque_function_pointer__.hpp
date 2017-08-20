@@ -7,10 +7,11 @@
 #include <cstring>
 #include <functional>
 
+#include "NullPtr.hpp"
 #include "Types.hpp"
 
 /// @cond
-template<typename TResult = void, typename T1 = std::nullptr_t, typename T2 = std::nullptr_t, typename T3 = std::nullptr_t, typename T4 = std::nullptr_t, typename T5 = std::nullptr_t, typename T6 = std::nullptr_t, typename T7 = std::nullptr_t, typename T8 = std::nullptr_t, typename T9 = std::nullptr_t, typename T10 = std::nullptr_t, typename T11 = std::nullptr_t, typename T12 = std::nullptr_t, typename T13 = std::nullptr_t, typename T14 = std::nullptr_t, typename T15 = std::nullptr_t, typename T16 = std::nullptr_t>
+template<typename TResult = void, typename T1 = NullPtr, typename T2 = NullPtr, typename T3 = NullPtr, typename T4 = NullPtr, typename T5 = NullPtr, typename T6 = NullPtr, typename T7 = NullPtr, typename T8 = NullPtr, typename T9 = NullPtr, typename T10 = NullPtr, typename T11 = NullPtr, typename T12 = NullPtr, typename T13 = NullPtr, typename T14 = NullPtr, typename T15 = NullPtr, typename T16 = NullPtr>
 class __opaque_function_pointer__;
 
 class pcf_public __opaque_inner_function_ptr__ {
@@ -28,7 +29,7 @@ private:
     }
   }
   
-  __opaque_inner_function_ptr__(std::nullptr_t) : value(null), size(0) {}
+  __opaque_inner_function_ptr__(NullPtr) : value(null), size(0) {}
   
   template<typename T>
   __opaque_inner_function_ptr__(T* value) {
@@ -134,7 +135,7 @@ public:
   
   __opaque_function_pointer__() {}
   
-  __opaque_function_pointer__(std::nullptr_t) {}
+  __opaque_function_pointer__(NullPtr) {}
   
   __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
   
@@ -248,7 +249,7 @@ public:
   
   __opaque_function_pointer__() {}
   
-  __opaque_function_pointer__(std::nullptr_t) {}
+  __opaque_function_pointer__(NullPtr) {}
   
   __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
   
@@ -362,7 +363,7 @@ public:
   
   __opaque_function_pointer__() {}
   
-  __opaque_function_pointer__(std::nullptr_t) {}
+  __opaque_function_pointer__(NullPtr) {}
   
   __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
   
@@ -476,7 +477,7 @@ public:
   
   __opaque_function_pointer__() {}
   
-  __opaque_function_pointer__(std::nullptr_t) {}
+  __opaque_function_pointer__(NullPtr) {}
   
   __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
   
@@ -590,7 +591,7 @@ public:
   
   __opaque_function_pointer__() {}
   
-  __opaque_function_pointer__(std::nullptr_t) {}
+  __opaque_function_pointer__(NullPtr) {}
   
   __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
   
@@ -704,7 +705,7 @@ public:
   
   __opaque_function_pointer__() {}
   
-  __opaque_function_pointer__(std::nullptr_t) {}
+  __opaque_function_pointer__(NullPtr) {}
   
   __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
   
@@ -818,7 +819,7 @@ public:
   
   __opaque_function_pointer__() {}
   
-  __opaque_function_pointer__(std::nullptr_t) {}
+  __opaque_function_pointer__(NullPtr) {}
   
   __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
   
@@ -932,7 +933,7 @@ public:
   
   __opaque_function_pointer__() {}
   
-  __opaque_function_pointer__(std::nullptr_t) {}
+  __opaque_function_pointer__(NullPtr) {}
   
   __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
   
@@ -1045,7 +1046,7 @@ public:
   
   __opaque_function_pointer__() {}
   
-  __opaque_function_pointer__(std::nullptr_t) {}
+  __opaque_function_pointer__(NullPtr) {}
   
   __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
   
@@ -1159,7 +1160,7 @@ public:
   
   __opaque_function_pointer__() {}
   
-  __opaque_function_pointer__(std::nullptr_t) {}
+  __opaque_function_pointer__(NullPtr) {}
   
   __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
   
@@ -1272,7 +1273,7 @@ public:
   
   __opaque_function_pointer__() {}
   
-  __opaque_function_pointer__(std::nullptr_t) {}
+  __opaque_function_pointer__(NullPtr) {}
   
   __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
   
@@ -1386,7 +1387,7 @@ public:
   
   __opaque_function_pointer__() {}
   
-  __opaque_function_pointer__(std::nullptr_t) {}
+  __opaque_function_pointer__(NullPtr) {}
   
   __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
   
@@ -1481,7 +1482,7 @@ public:
   
   __opaque_function_pointer__() {}
   
-  __opaque_function_pointer__(std::nullptr_t) {}
+  __opaque_function_pointer__(NullPtr) {}
   
   __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
   
@@ -1595,7 +1596,7 @@ public:
   
   __opaque_function_pointer__() {}
   
-  __opaque_function_pointer__(std::nullptr_t) {}
+  __opaque_function_pointer__(NullPtr) {}
   
   __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
   
@@ -1709,7 +1710,7 @@ public:
   
   __opaque_function_pointer__() {}
   
-  __opaque_function_pointer__(std::nullptr_t) {}
+  __opaque_function_pointer__(NullPtr) {}
   
   __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
   
@@ -1820,7 +1821,7 @@ public:
   
   __opaque_function_pointer__() {}
   
-  __opaque_function_pointer__(std::nullptr_t) {}
+  __opaque_function_pointer__(NullPtr) {}
   
   __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
   
@@ -1933,7 +1934,7 @@ public:
   
   __opaque_function_pointer__() {}
   
-  __opaque_function_pointer__(std::nullptr_t) {}
+  __opaque_function_pointer__(NullPtr) {}
   
   __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
   

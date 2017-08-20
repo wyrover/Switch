@@ -32,17 +32,11 @@ bool Type::Equals(const Type& type) const {
 
 String Type::GetFullName() const {
   String fullName = __OS::CoreApi::Type::Demangle(this->type.name());
-  Array<string> containsNullPtrTypes = {"Pcf::Fp", "System::Action", "System::Delegate", "System::Func", "std::tuple"};
+  Array<string> containsNullPtrTypes = {"Pcf::Fp", "System::Action", "System::Delegate", "System::Func", "std::tuple", "System::Tuple"};
   for (string item : containsNullPtrTypes) {
     if (fullName.StartsWith(item)) {
       fullName = fullName.Replace(", std::nullptr_t", "");
-      break;
-    }
-  }
-  Array<string> containsNullTypeTypes = {"System::Tuple"};
-  for (string item : containsNullTypeTypes) {
-    if (fullName.StartsWith(item)) {
-      fullName = fullName.Replace(", NullType", "");
+      fullName = fullName.Replace(", NullPtr", "");
       break;
     }
   }

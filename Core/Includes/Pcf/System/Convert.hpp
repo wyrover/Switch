@@ -2,7 +2,7 @@
 /// @brief Contains Pcf::System::Convert class.
 #pragma once
 
-#include "../NullType.hpp"
+#include "../NullPtr.hpp"
 #include "../Types.hpp"
 #include "../RefPtr.hpp"
 #include "Boolean.hpp"
@@ -2363,7 +2363,7 @@ namespace Pcf {
       /// @brief Convert a bool to string
       /// @param The value to convert
       /// @return string A new string object converted from converter
-      static string ToString(NullType) { return "(null)"; }
+      static string ToString(NullPtr) { return "(null)"; }
       
       template<typename T>
       static string ToString(refptr<T> value) { return value.ToString().c_str(); }

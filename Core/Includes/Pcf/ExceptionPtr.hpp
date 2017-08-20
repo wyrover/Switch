@@ -3,6 +3,7 @@
 #pragma once
 
 #include <exception>
+#include "NullPtr.hpp"
 #include "Property.hpp"
 #include "Allocator.hpp"
 #include "System/Exception.hpp"
@@ -102,7 +103,7 @@ namespace Pcf {
   public:
     /// @cond
     ExceptionPtr() {}
-    ExceptionPtr(std::nullptr_t) : exception(nullptr) {}
+    ExceptionPtr(NullPtr) : exception(nullptr) {}
     ExceptionPtr(const ExceptionPtr& eptr) : exception(eptr.exception) {}
     ExceptionPtr& operator=(const ExceptionPtr& eptr) {this->exception = eptr.exception; return *this;}
     ExceptionPtr(const std::exception_ptr& eptr) : exception(eptr) {}

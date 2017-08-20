@@ -640,28 +640,6 @@ TEST(SortedSet, UnionWith_WithComparer) {
 
 }
 
-TEST(SortedSet, Reverse) {
-  SortedSet<int32> set;
-  int32 compte[10] = {1,2,3,4,5,6,7,8,9,10};
-  int32 decompte[10] = {10,9,8,7,6,5,4,3,2,1};
-
-  for (int32 i = 1; i <= 10; i++)
-    set.Add(i);
-  
-  SortedSet<int32> setr = set.Reverse();
-  EXPECT_TRUE(set.SetEquals(setr));
-  EXPECT_EQ(10,setr.Count);
-
-  int k = 0;
-  for (int32 i : setr)
-    EXPECT_EQ(decompte[k++],i);
-
-  k=0;
-  SortedSet<int32> setrr = setr.Reverse();
-  for (int32 i : setrr)
-    EXPECT_EQ(compte[k++],i);
-}
-
 TEST(SortedSet, Enumerator) {
   SortedSet<int32> set;
   set.Add(3);

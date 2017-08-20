@@ -222,7 +222,7 @@ namespace Pcf {
 
       /// @brief Plays the sound of a beep through the console speaker.
       /// @remarks By default, the beep plays at a frequency of 800 hertz for a duration of 200 milliseconds
-      static void Beep();
+      static void Beep() {Beep(800, 200);}
 
       /// @brief Plays the sound of a beep of a specified frequency and duration through the console speaker.
       /// @param frequency The frequency of the beep, ranging from 37 to 32767 hertz

@@ -2,6 +2,7 @@
 /// @brief Contains Pcf::System::Nullable struct.
 #pragma once
 
+#include "../NullPtr.hpp"
 #include "../Property.hpp"
 #include "Convert.hpp"
 #include "Hash.hpp"
@@ -25,7 +26,7 @@ namespace Pcf {
       
       /// @cond
       Nullable() {}
-      Nullable(std::nullptr_t) {}
+      Nullable(NullPtr) {}
       Nullable(const Nullable& value) : value(value.value), hasValue(value.hasValue) {}
 
       Nullable& operator=(const Nullable& value) {
@@ -40,13 +41,13 @@ namespace Pcf {
         return *this;
       }
       
-      Nullable& operator=(std::nullptr_t) {
+      Nullable& operator=(NullPtr) {
         this->hasValue = false;
         return *this;
       }
       
-      bool operator==(std::nullptr_t value) const {return !this->HasValue();}
-      bool operator!=(std::nullptr_t value) const {return !this->operator==(value);}
+      bool operator==(NullPtr value) const {return !this->HasValue();}
+      bool operator!=(NullPtr value) const {return !this->operator==(value);}
       bool operator==(const Nullable& value) const {return this->HasValue() == value.HasValue() && this->value == value.value;}
       bool operator!=(const Nullable& value) const {return !this->operator==(value);}
       bool operator==(T value) const {return this->HasValue() && this->value == value;}

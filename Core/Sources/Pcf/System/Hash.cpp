@@ -21,7 +21,7 @@ int32 Pcf::GetHashCode(const void* value) {
   return *((int32*)&value);
 }
 
-int32 Pcf::GetHashCode(const NullType&) {
+int32 Pcf::GetHashCode(const NullPtr&) {
   return 0;
 }
 

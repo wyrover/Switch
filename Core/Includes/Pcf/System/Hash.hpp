@@ -3,7 +3,7 @@
 #pragma once
 
 #include "../Any.hpp"
-#include "../NullType.hpp"
+#include "../NullPtr.hpp"
 #include "../Static.hpp"
 #include "../Types.hpp"
 #include "../RefPtr.hpp"
@@ -31,11 +31,11 @@ namespace Pcf {
   /// @exception System::ArgumentNullException The parameters converter is null.
   int32 GetHashCode(const void* e);
   
-  /// @brief Generate a hash code for NullType.
+  /// @brief Generate a hash code for NullPtr.
   /// @param[in] value For which the hashcode is generated.
   /// @return int32 An integer value being the generated hashcode.
   /// @exception System::ArgumentNullException The parameters converter is null.
-  int32 GetHashCode(const NullType& value);
+  int32 GetHashCode(const NullPtr& value);
   
   /// @brief Generate a hash code for bool.
   /// @param[in] value For which the hashcode is generated.
