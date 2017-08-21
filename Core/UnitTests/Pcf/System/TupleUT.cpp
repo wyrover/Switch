@@ -9,7 +9,7 @@ namespace {
   class TupleTest : public TestFixture {
   protected:
     void Tuple1() {
-      Tuple<string> t("Value");
+      Tuple<string> t("Value"_s);
       Assert::AreEqual("Value", t.Item1);
     }
     
@@ -90,7 +90,7 @@ namespace {
     }
     
     void Tuple1ToString() {
-      Tuple<string> t("Value");
+      Tuple<string> t("Value"_s);
       Assert::AreEqual("(Value)", t.ToString());
     }
     

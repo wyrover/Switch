@@ -14,6 +14,11 @@ namespace Pcf {
   namespace System {
     /// @brief Base object that represent Tuple.
     struct TupleObject : public object {};
+   
+    /// @cond
+    template<typename T1=NullPtr, typename T2=NullPtr, typename T3=NullPtr, typename T4=NullPtr, typename T5=NullPtr, typename T6=NullPtr, typename T7=NullPtr, typename TRest=NullPtr>
+    class Tuple;
+    /// @endcond
     
     /// @brief Represents an n-tuple, where n is 8 or greater.
     /// @see System::Tuple
@@ -24,7 +29,7 @@ namespace Pcf {
     /// @see System::Tuple <T1, T2, T3, T4, T5>
     /// @see System::Tuple <T1, T2, T3, T4, T5, T6>
     /// @see System::Tuple <T1, T2, T3, T4, T5, T6, T7>
-    template<typename T1=NullPtr, typename T2=NullPtr, typename T3=NullPtr, typename T4=NullPtr, typename T5=NullPtr, typename T6=NullPtr, typename T7=NullPtr, typename TRest=NullPtr>
+    template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename TRest>
     class Tuple : public TupleObject, public IComparable {
     public:
       /// @brief Initializes a new instance of the Tuple <T1, T2, T3, T4, T5, T6, T7, TRest> class.
@@ -41,6 +46,7 @@ namespace Pcf {
       /// @cond
       Tuple() {}
       Tuple(const Tuple& tuple) : tuple(tuple.tuple) {}
+      Tuple(const std::tuple<T1, T2, T3, T4, T5, T6, T7, TRest>& tuple) : tuple(tuple) {}
       /// @endcond
       
       /// @brief Gets the value of the current Tuple <T1, T2, T3, T4, T5, T6, T7, TRest> object's first component.
@@ -105,7 +111,7 @@ namespace Pcf {
       ///  - Less than zero      This instance is less than obj.
       ///  - Zero                This instance is equal to obj.
       ///  - Greater than zero   This instance is greater than obj.
-      int32 CompareTo(const IComparable& obj) const override {return !is<Tuple>(obj) ? 1 : CompareTo((const Tuple&)obj);}
+      int32 CompareTo(const IComparable& obj) const override {return !is<Tuple>(obj) ? 1 : this->CompareTo((const Tuple&)obj);}
       
       /// @brief Compares the current Version object to a specified object and returns an indication of their relative values.
       /// @param obj An object to compare with this instance.
@@ -129,7 +135,7 @@ namespace Pcf {
       /// @brief Determines whether this instance of Version and a specified object, which must also be a Version object, have the same value.
       /// @param obj The object to compare with the current object.
       /// @return bool true if the specified object is equal to the current object. otherwise, false.
-      bool Equals(const Object& obj) const override {return is<Tuple>(obj) && Equals((const Tuple&)obj);}
+      bool Equals(const Object& obj) const override {return is<Tuple>(obj) && this->Equals((const Tuple&)obj);}
       
       /// @brief Determines whether this instance of Version and a specified object, which must also be a Version object, have the same value.
       /// @param obj The object to compare with the current object.
@@ -154,7 +160,7 @@ namespace Pcf {
     /// @see System::Tuple <T1, T2, T3, T4, T5, T6>
     /// @see System::Tuple <T1, T2, T3, T4, T5, T6, T7, TRest>
     template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7>
-    class Tuple<T1, T2, T3, T4, T5, T6, T7, NullPtr> : public TupleObject, public IComparable {
+    class Tuple<T1, T2, T3, T4, T5, T6, T7> : public TupleObject, public IComparable {
     public:
       /// @brief Initializes a new instance of the Tuple <T1, T2, T3, T4, T5, T6, T7> class.
       /// @param item1 The value of the tuple's first component.
@@ -169,6 +175,7 @@ namespace Pcf {
       /// @cond
       Tuple() {}
       Tuple(const Tuple& tuple) : tuple(tuple.tuple) {}
+      Tuple(const std::tuple<T1, T2, T3, T4, T5, T6, T7>& tuple) : tuple(tuple) {}
       /// @endcond
       
       /// @brief Gets the value of the current Tuple <T1, T2, T3, T4, T5, T6, T7> object's first component.
@@ -226,7 +233,7 @@ namespace Pcf {
       ///  - Less than zero      This instance is less than obj.
       ///  - Zero                This instance is equal to obj.
       ///  - Greater than zero   This instance is greater than obj.
-      int32 CompareTo(const IComparable& obj) const override {return !is<Tuple>(obj) ? 1 : CompareTo((const Tuple&)obj);}
+      int32 CompareTo(const IComparable& obj) const override {return !is<Tuple>(obj) ? 1 : this->CompareTo((const Tuple&)obj);}
       
       /// @brief Compares the current Version object to a specified object and returns an indication of their relative values.
       /// @param obj An object to compare with this instance.
@@ -249,7 +256,7 @@ namespace Pcf {
       /// @brief Determines whether this instance of Version and a specified object, which must also be a Version object, have the same value.
       /// @param obj The object to compare with the current object.
       /// @return bool true if the specified object is equal to the current object. otherwise, false.
-      bool Equals(const Object& obj) const override {return is<Tuple>(obj) && Equals((const Tuple&)obj);}
+      bool Equals(const Object& obj) const override {return is<Tuple>(obj) && this->Equals((const Tuple&)obj);}
       
       /// @brief Determines whether this instance of Version and a specified object, which must also be a Version object, have the same value.
       /// @param obj The object to compare with the current object.
@@ -274,7 +281,7 @@ namespace Pcf {
     /// @see System::Tuple <T1, T2, T3, T4, T5, T6, T7>
     /// @see System::Tuple <T1, T2, T3, T4, T5, T6, T7, TRest>
     template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6>
-    class Tuple<T1, T2, T3, T4, T5, T6, NullPtr, NullPtr> : public TupleObject, public IComparable {
+    class Tuple<T1, T2, T3, T4, T5, T6> : public TupleObject, public IComparable {
     public:
       /// @brief Initializes a new instance of the Tuple <T1, T2, T3, T4, T5, T6> class.
       /// @param item1 The value of the tuple's first component.
@@ -288,6 +295,7 @@ namespace Pcf {
       /// @cond
       Tuple() {}
       Tuple(const Tuple& tuple) : tuple(tuple.tuple) {}
+      Tuple(const std::tuple<T1, T2, T3, T4, T5, T6>& tuple) : tuple(tuple) {}
       /// @endcond
       
       /// @brief Gets the value of the current Tuple <T1, T2, T3, T4, T5, T6> object's first component.
@@ -338,7 +346,7 @@ namespace Pcf {
       ///  - Less than zero      This instance is less than obj.
       ///  - Zero                This instance is equal to obj.
       ///  - Greater than zero   This instance is greater than obj.
-      int32 CompareTo(const IComparable& obj) const override {return !is<Tuple>(obj) ? 1 : CompareTo((const Tuple&)obj);}
+      int32 CompareTo(const IComparable& obj) const override {return !is<Tuple>(obj) ? 1 : this->CompareTo((const Tuple&)obj);}
       
       /// @brief Compares the current Version object to a specified object and returns an indication of their relative values.
       /// @param obj An object to compare with this instance.
@@ -360,7 +368,7 @@ namespace Pcf {
       /// @brief Determines whether this instance of Version and a specified object, which must also be a Version object, have the same value.
       /// @param obj The object to compare with the current object.
       /// @return bool true if the specified object is equal to the current object. otherwise, false.
-      bool Equals(const Object& obj) const override {return is<Tuple>(obj) && Equals((const Tuple&)obj);}
+      bool Equals(const Object& obj) const override {return is<Tuple>(obj) && this->Equals((const Tuple&)obj);}
       
       /// @brief Determines whether this instance of Version and a specified object, which must also be a Version object, have the same value.
       /// @param obj The object to compare with the current object.
@@ -385,7 +393,7 @@ namespace Pcf {
     /// @see System::Tuple <T1, T2, T3, T4, T5, T6, T7>
     /// @see System::Tuple <T1, T2, T3, T4, T5, T6, T7, TRest>
     template<typename T1, typename T2, typename T3, typename T4, typename T5>
-    class Tuple<T1, T2, T3, T4, T5, NullPtr, NullPtr, NullPtr> : public TupleObject, public IComparable {
+    class Tuple<T1, T2, T3, T4, T5> : public TupleObject, public IComparable {
     public:
       /// @brief Initializes a new instance of the Tuple <T1, T2, T3, T4, T5> class.
       /// @param item1 The value of the tuple's first component.
@@ -398,6 +406,7 @@ namespace Pcf {
       /// @cond
       Tuple() {}
       Tuple(const Tuple& tuple) : tuple(tuple.tuple) {}
+      Tuple(const std::tuple<T1, T2, T3, T4, T5>& tuple) : tuple(tuple) {}
       /// @endcond
       
       /// @brief Gets the value of the current Tuple <T1, T2, T3, T4, T5> object's first component.
@@ -441,7 +450,7 @@ namespace Pcf {
       ///  - Less than zero      This instance is less than obj.
       ///  - Zero                This instance is equal to obj.
       ///  - Greater than zero   This instance is greater than obj.
-      int32 CompareTo(const IComparable& obj) const override {return !is<Tuple>(obj) ? 1 : CompareTo((const Tuple&)obj);}
+      int32 CompareTo(const IComparable& obj) const override {return !is<Tuple>(obj) ? 1 : this->CompareTo((const Tuple&)obj);}
       
       /// @brief Compares the current Version object to a specified object and returns an indication of their relative values.
       /// @param obj An object to compare with this instance.
@@ -462,7 +471,7 @@ namespace Pcf {
       /// @brief Determines whether this instance of Version and a specified object, which must also be a Version object, have the same value.
       /// @param obj The object to compare with the current object.
       /// @return bool true if the specified object is equal to the current object. otherwise, false.
-      bool Equals(const Object& obj) const override {return is<Tuple>(obj) && Equals((const Tuple&)obj);}
+      bool Equals(const Object& obj) const override {return is<Tuple>(obj) && this->Equals((const Tuple&)obj);}
       
       /// @brief Determines whether this instance of Version and a specified object, which must also be a Version object, have the same value.
       /// @param obj The object to compare with the current object.
@@ -487,7 +496,7 @@ namespace Pcf {
     /// @see System::Tuple <T1, T2, T3, T4, T5, T6, T7>
     /// @see System::Tuple <T1, T2, T3, T4, T5, T6, T7, TRest>
     template<typename T1, typename T2, typename T3, typename T4>
-    class Tuple<T1, T2, T3, T4, NullPtr, NullPtr, NullPtr, NullPtr> : public TupleObject, public IComparable {
+    class Tuple<T1, T2, T3, T4> : public TupleObject, public IComparable {
     public:
       /// @brief Initializes a new instance of the Tuple <T1, T2, T3, T4> class.
       /// @param item1 The value of the tuple's first component.
@@ -499,6 +508,7 @@ namespace Pcf {
       /// @cond
       Tuple() {}
       Tuple(const Tuple& tuple) : tuple(tuple.tuple) {}
+      Tuple(const std::tuple<T1, T2, T3, T4>& tuple) : tuple(tuple) {}
       /// @endcond
       
       /// @brief Gets the value of the current Tuple <T1, T2, T3, T4> object's first component.
@@ -535,7 +545,7 @@ namespace Pcf {
       ///  - Less than zero      This instance is less than obj.
       ///  - Zero                This instance is equal to obj.
       ///  - Greater than zero   This instance is greater than obj.
-      int32 CompareTo(const IComparable& obj) const override {return !is<Tuple>(obj) ? 1 : CompareTo((const Tuple&)obj);}
+      int32 CompareTo(const IComparable& obj) const override {return !is<Tuple>(obj) ? 1 : this->CompareTo((const Tuple&)obj);}
       
       /// @brief Compares the current Version object to a specified object and returns an indication of their relative values.
       /// @param obj An object to compare with this instance.
@@ -555,7 +565,7 @@ namespace Pcf {
       /// @brief Determines whether this instance of Version and a specified object, which must also be a Version object, have the same value.
       /// @param obj The object to compare with the current object.
       /// @return bool true if the specified object is equal to the current object. otherwise, false.
-      bool Equals(const Object& obj) const override {return is<Tuple>(obj) && Equals((const Tuple&)obj);}
+      bool Equals(const Object& obj) const override {return is<Tuple>(obj) && this->Equals((const Tuple&)obj);}
       
       /// @brief Determines whether this instance of Version and a specified object, which must also be a Version object, have the same value.
       /// @param obj The object to compare with the current object.
@@ -580,7 +590,7 @@ namespace Pcf {
     /// @see System::Tuple <T1, T2, T3, T4, T5, T6, T7>
     /// @see System::Tuple <T1, T2, T3, T4, T5, T6, T7, TRest>
     template<typename T1, typename T2, typename T3>
-    class Tuple<T1, T2, T3, NullPtr, NullPtr, NullPtr, NullPtr, NullPtr> : public TupleObject, public IComparable {
+    class Tuple<T1, T2, T3> : public TupleObject, public IComparable {
     public:
       /// @brief Initializes a new instance of the Tuple <T1, T2, T3> class.
       /// @param item1 The value of the tuple's first component.
@@ -591,6 +601,7 @@ namespace Pcf {
       /// @cond
       Tuple() {}
       Tuple(const Tuple& tuple) : tuple(tuple.tuple) {}
+      Tuple(const std::tuple<T1, T2, T3>& tuple) : tuple(tuple) {}
       /// @endcond
       
       /// @brief Gets the value of the current Tuple <T1, T2, T3> object's first component.
@@ -620,7 +631,7 @@ namespace Pcf {
       ///  - Less than zero      This instance is less than obj.
       ///  - Zero                This instance is equal to obj.
       ///  - Greater than zero   This instance is greater than obj.
-      int32 CompareTo(const IComparable& obj) const override {return !is<Tuple>(obj) ? 1 : CompareTo((const Tuple&)obj);}
+      int32 CompareTo(const IComparable& obj) const override {return !is<Tuple>(obj) ? 1 : this->CompareTo((const Tuple&)obj);}
       
       /// @brief Compares the current Version object to a specified object and returns an indication of their relative values.
       /// @param obj An object to compare with this instance.
@@ -639,7 +650,7 @@ namespace Pcf {
       /// @brief Determines whether this instance of Version and a specified object, which must also be a Version object, have the same value.
       /// @param obj The object to compare with the current object.
       /// @return bool true if the specified object is equal to the current object. otherwise, false.
-      bool Equals(const Object& obj) const override {return is<Tuple>(obj) && Equals((const Tuple&)obj);}
+      bool Equals(const Object& obj) const override {return is<Tuple>(obj) && this->Equals((const Tuple&)obj);}
       
       /// @brief Determines whether this instance of Version and a specified object, which must also be a Version object, have the same value.
       /// @param obj The object to compare with the current object.
@@ -672,7 +683,7 @@ namespace Pcf {
     /// @remarks To return multiple values from a method without the use of out parameters. For example, the following example uses a Tuple<T1, T2> object to return the quotient and the remainder that result from integer division.
     /// @remarks To pass multiple values to a method through a single parameter. For example, the Thread.Start(object) method has a single parameter that lets you supply one value to the method that the thread executes at startup. If you supply a Tuple<T1, T2> object as the method argument, you can supply the thread’s startup routine with two items of data.
     template<typename T1, typename T2>
-    class Tuple<T1, T2, NullPtr, NullPtr, NullPtr, NullPtr, NullPtr, NullPtr> : public TupleObject, public IComparable {
+    class Tuple<T1, T2> : public TupleObject, public IComparable {
     public:
       /// @brief Initializes a new instance of the Tuple <T1, T2> class.
       /// @param item1 The value of the tuple's first component.
@@ -682,6 +693,7 @@ namespace Pcf {
       /// @cond
       Tuple() {}
       Tuple(const Tuple& tuple) : tuple(tuple.tuple) {}
+      Tuple(const std::tuple<T1, T2>& tuple) : tuple(tuple) {}
       /// @endcond
       
       /// @brief Gets the value of the current Tuple <T1, T2> object's first component.
@@ -704,7 +716,7 @@ namespace Pcf {
       ///  - Less than zero      This instance is less than obj.
       ///  - Zero                This instance is equal to obj.
       ///  - Greater than zero   This instance is greater than obj.
-      int32 CompareTo(const IComparable& obj) const override {return !is<Tuple>(obj) ? 1 : CompareTo((const Tuple&)obj);}
+      int32 CompareTo(const IComparable& obj) const override {return !is<Tuple>(obj) ? 1 : this->CompareTo((const Tuple&)obj);}
       
       /// @brief Compares the current Version object to a specified object and returns an indication of their relative values.
       /// @param obj An object to compare with this instance.
@@ -722,7 +734,7 @@ namespace Pcf {
       /// @brief Determines whether this instance of Version and a specified object, which must also be a Version object, have the same value.
       /// @param obj The object to compare with the current object.
       /// @return bool true if the specified object is equal to the current object. otherwise, false.
-      bool Equals(const Object& obj) const override {return is<Tuple>(obj) && Equals((const Tuple&)obj);}
+      bool Equals(const Object& obj) const override {return is<Tuple>(obj) && this->Equals((const Tuple&)obj);}
       
       /// @brief Determines whether this instance of Version and a specified object, which must also be a Version object, have the same value.
       /// @param obj The object to compare with the current object.
@@ -747,7 +759,7 @@ namespace Pcf {
     /// @see System::Tuple <T1, T2, T3, T4, T5, T6, T7>
     /// @see System::Tuple <T1, T2, T3, T4, T5, T6, T7, TRest>
     template<typename T1>
-    class Tuple<T1, NullPtr, NullPtr, NullPtr, NullPtr, NullPtr, NullPtr, NullPtr> : public TupleObject, public IComparable {
+    class Tuple<T1> : public TupleObject, public IComparable {
     public:
       /// @brief Initializes a new instance of the Tuple <T1> class.
       /// @param item1 The value of the tuple's first component.
@@ -756,6 +768,7 @@ namespace Pcf {
       /// @cond
       Tuple() {}
       Tuple(const Tuple& tuple) : tuple(tuple.tuple) {}
+      Tuple(const std::tuple<T1>& tuple) : tuple(tuple) {}
       /// @endcond
       
       /// @brief Gets the value of the current Tuple <T1> object's first component.
@@ -771,7 +784,7 @@ namespace Pcf {
       ///  - Less than zero      This instance is less than obj.
       ///  - Zero                This instance is equal to obj.
       ///  - Greater than zero   This instance is greater than obj.
-      int32 CompareTo(const IComparable& obj) const override {return !is<Tuple>(obj) ? 1 : CompareTo((const Tuple&)obj);}
+      int32 CompareTo(const IComparable& obj) const override {return !is<Tuple>(obj) ? 1 : this->CompareTo((const Tuple&)obj);}
       
       /// @brief Compares the current Version object to a specified object and returns an indication of their relative values.
       /// @param obj An object to compare with this instance.
@@ -784,7 +797,7 @@ namespace Pcf {
       /// @brief Determines whether this instance of Version and a specified object, which must also be a Version object, have the same value.
       /// @param obj The object to compare with the current object.
       /// @return bool true if the specified object is equal to the current object. otherwise, false.
-      bool Equals(const Object& obj) const override {return is<Tuple>(obj) && Equals((const Tuple&)obj);}
+      bool Equals(const Object& obj) const override {return is<Tuple>(obj) && this->Equals((const Tuple&)obj);}
       
       /// @brief Determines whether this instance of Version and a specified object, which must also be a Version object, have the same value.
       /// @param obj The object to compare with the current object.
@@ -809,7 +822,7 @@ namespace Pcf {
     /// @see System::Tuple <T1, T2, T3, T4, T5, T6, T7>
     /// @see System::Tuple <T1, T2, T3, T4, T5, T6, T7, TRest>
     template<>
-    class Tuple<NullPtr, NullPtr, NullPtr, NullPtr, NullPtr, NullPtr, NullPtr, NullPtr> : public TupleObject {
+    class Tuple<> : public TupleObject {
     public:
       /// @brief Creates a new 8-tuple, or octuple.
       /// @param item1 The value of the first component of the tuple.

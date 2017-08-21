@@ -194,35 +194,18 @@ namespace Pcf {
         this->lowerBound.push_back(0);
         this->upperBound.push_back((int32)il.size());
       }
-
+      
       /*
-      Array(InitializerList<Tuple<T, T> il) : length((int32)il.size()) {
+      Array(InitializerList<InitializerList<T>> il) {
         static_assert(rank == 2, "Call this contructor only for rank = 2");
         this->lowerBound.push_back(0);
-        this->upperBound.push_back(length1-1);
-        this->lowerBound.push_back(0);
-        this->upperBound.push_back(length2-1);
-        
-        for (auto value : il) {
-          this->array.push_back(value.Item1);
-          this->array.push_back(value.Item2);
-        }
+        this->upperBound.push_back((int32)il.size());
       }
       
-      Array(InitializerList<Tuple<T, T, T> il) : length((int32)il.size()) {
+      Array(InitializerList<InitializerList<InitializerList<T>>> il) {
         static_assert(rank == 3, "Call this contructor only for rank = 3");
         this->lowerBound.push_back(0);
-        this->upperBound.push_back(length1-1);
-        this->lowerBound.push_back(0);
-        this->upperBound.push_back(length2-1);
-        this->lowerBound.push_back(0);
-        this->upperBound.push_back(length3-1);
-
-        for (auto value : il) {
-          this->array.push_back(value.Item1);
-          this->array.push_back(value.Item2);
-          this->array.push_back(value.Item3);
-        }
+        this->upperBound.push_back((int32)il.size());
       }
        */
       

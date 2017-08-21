@@ -4,6 +4,7 @@
 
 #include "../../../Property.hpp"
 #include "../../../Is.hpp"
+#include "../../../NullPtr.hpp"
 #include "../../../Types.hpp"
 #include "../../Object.hpp"
 #include "../../_String.hpp"
@@ -19,69 +20,60 @@ namespace Pcf {
       /// @brief The System::Collections::Generic namespace contains interfaces and classes that define generic collections, which allow users to create strongly typed collections that provide better type safety and performance than non-generic strongly typed collections.
       namespace Generic {
         /// @cond
-        template<typename TKey=void, typename TValue=void>
+        template<typename TKey=NullPtr, typename TValue=NullPtr>
         class KeyValuePair;
         /// @endcond
-        /// @brief Defines a key/value pair that can be set || retrieved.
+        
+        /// @brief Defines a key/value pair that can be set or retrieved.
         template<typename TKey, typename TValue>
         class KeyValuePair : public Object {
         public:
-          /// @brief Initializes a new instance of the KeyValuePair<TKey, TValue> class.
-          KeyValuePair() {}
-
-          /// @brief Initializes a new instance of the KeyValuePair<TKey, TValue> class as a copy of keyValuePair argument
-          KeyValuePair(const KeyValuePair& keyValuePair) {
-            this->key = keyValuePair.key;
-            this->value = keyValuePair.value;
-          }
-          
-          /// @cond
-          KeyValuePair& operator =(const KeyValuePair& keyValuePair) {
-            this->key = keyValuePair.key;
-            this->value = keyValuePair.value;
-            return *this;
-          }
-          /// @endcond
-
           /// @brief Initializes a new instance of the KeyValuePair<TKey, TValue> class with the specified key && value.
           /// @param Key The object defined in each key/value pair
           /// @param value The definition associated with key
-          KeyValuePair(const TKey& key, const TValue& value) {
-            this->key = key;
-            this->value = value;
-          }
+          KeyValuePair(const TKey& key, const TValue& value) : pair(std::make_pair(key, value)) {}
+          
+          /// @cond
+          KeyValuePair() {}
+          KeyValuePair(const KeyValuePair& keyValuePair) : pair(keyValuePair.pair) {}
+          KeyValuePair(const std::pair<TKey, TValue>& pair) : pair(pair) {}
+          operator std::pair<TKey, TValue>() const {return this->pair;}
+          /// @endcond
 
          /// @brief Gets the key in the key/value pair.
          /// @return TKey A TKey that is the key of the KeyValuePair<TKey, TValue>.
           Property<const TKey&, ReadOnly> Key {
-            pcf_get->const TKey& {return this->key;}
+            pcf_get->const TKey& {return this->pair.first;}
           };
 
          /// @brief Gets the value in the key/value pair.
          /// @return TValue A TValue that is the value of the KeyValuePair<TKey, TValue>.
           Property<const TValue&, ReadOnly> Value {
-            pcf_get->const TValue& {return this->value;}
+            pcf_get->const TValue& {return this->pair.second;}
           };
 
           /// @brief Returns a String representation of the KeyValuePair<TKey, TValue>, using the String representations of the key && value.
           /// @return const String A String representation of the KeyValuePair<TKey, TValue>, which includes the String representations of the key && value.
           /// @return String
-          String ToString() const override {return String::Format("[{0}, {1}]", this->key, this->value);}
+          String ToString() const override {return String::Format("[{0}, {1}]", this->pair.first, this->pair.second);}
 
-          bool Equals(const KeyValuePair& value) const {return this->value == value.value;}
-
+          bool Equals(const KeyValuePair& value) const {return this->pair == value.pair;}
+          
           bool Equals(const Object& obj) const override {return is<KeyValuePair>(obj) && Equals(static_cast<const KeyValuePair&>(obj));}
 
         private:
-          TKey key;
-          TValue value;
+          std::pair<TKey, TValue> pair;
         };
         
+        /// @brief Defines a key/value pair that can be set or retrieved.
         template<>
-        class KeyValuePair<void, void> : public object {
+        class KeyValuePair<> : public object {
         public:
           template<typename TKey, typename TValue>
           static KeyValuePair<TKey, TValue> Create(TKey key, TValue value) {return KeyValuePair<TKey, TValue>(key, value);}
+          
+        private:
+          KeyValuePair() = delete;
         };
       }
     }

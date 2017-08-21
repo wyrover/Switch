@@ -3,58 +3,10 @@
 using namespace System;
 
 namespace Examples {
-  template<typename T1>
-  class __tuple {
-  public:
-    __tuple(const T1& value1) : tuple(std::make_tuple(value1)) {}
-    
-    Property<T1> Item1 {
-      pcf_get {return std::get<0>(this->tuple);},
-      pcf_set {std::get<0>(this->tuple) = value;}
-    };
-    
-  private:
-    std::tuple<T1> tuple;
-  };
-  
-  template<typename T>
-  Array<T> MyFunc(const InitializerList<T>& il) {
-    System::Collections::Generic::List<T> list;
-    for (auto item : il)
-      list.Add(item);
-    return list.ToArray();
-  }
-  
-  template<typename T>
-  Array<T> MyFunc(const InitializerList<Tuple<T, T>>& il) {
-    System::Collections::Generic::List<T> list;
-    for (auto item : il) {
-      list.Add(item.Item1);
-      list.Add(item.Item2);
-    }
-    return list.ToArray();
-  }
-  
-  template<typename T>
-  Array<T> MyFunc(const InitializerList<Tuple<T, T, T>>& il) {
-    System::Collections::Generic::List<T> list;
-    for (auto item : il) {
-      list.Add(item.Item1);
-      list.Add(item.Item2);
-      list.Add(item.Item3);
-    }
-    return list.ToArray();
-  }
-  
   class Program {
   public:
     // The main entry point for the application.
     static void Main() {
-      
-      Console::WriteLine("1 = {0}", string::Join(", ", MyFunc<int>({1, 2, 3, 4, 5, 6})));
-      Console::WriteLine("2 = {0}", string::Join(", ", MyFunc<int>({{1, 2}, {3, 4}, {5, 6}})));
-      Console::WriteLine("3 = {0}", string::Join(", ", MyFunc<int>({{1, 2, 3}, {4, 5, 6}})));
-      
       // make a single dimension array
       Array<int> myArray1(5);
       

@@ -84,9 +84,40 @@ namespace Examples {
   
   class Program {
   public:
+    template<typename T>
+    static string Fct(InitializerList<T> il) {
+      return string::Format("{{{0}}}", string::Join(", ", Array<T>(il)));
+    }
+    
+    template<typename T>
+    static string Fct(InitializerList<InitializerList<T>> il) {
+      int32 length = -1;
+      string result = "{";
+      bool first = true;
+      for (auto a : il) {
+        if (length != -1 && length != (int32)a.size())
+          throw ArgumentException(pcf_current_information);
+        length = (int32)a.size();
+        if (!first) result += ", ";
+        result += string::Format("{{{0}}}", string::Join(", ", Array<T>(a)));
+        first = false;
+      }
+      result += "}";
+      return result;
+    }
+    
+    template<typename T>
+    static string Fct(InitializerList<InitializerList<InitializerList<T>>> il) {
+      return string::Format("{{{0}}}", string::Join(", ", Array<T>(il)));
+    }
+    
     // The main entry point for the application.
     static void Main() {
+      Console::WriteLine("1 = {0}", Fct<int>({1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}));
+      Console::WriteLine("2 = {0}", Fct<int>({{1, 2, 3}, {4, 5, 6}, {7, 8, 9}, {10, 11, 12}}));
+      
       //Console::WriteLine(); Application::Run();
+      
     }
   };
 }

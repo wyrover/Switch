@@ -12,6 +12,11 @@
 namespace Pcf {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
+    /// @cond
+    template<typename T1=NullPtr, typename T2=NullPtr, typename T3=NullPtr, typename T4=NullPtr, typename T5=NullPtr, typename T6=NullPtr, typename T7=NullPtr, typename T8=NullPtr, typename T9=NullPtr, typename T10=NullPtr, typename T11=NullPtr, typename T12=NullPtr, typename T13=NullPtr, typename T14=NullPtr, typename T15=NullPtr, typename T16=NullPtr, class TResult=void>
+    class Func;
+    /// @endcond
+    
     /// @brief Encapsulates a method that has 16 parameters and returns a value of the type specified by the TResult parameter.
     /// @param arg1 The first parameter of the method that this delegate encapsulates.
     /// @param arg2 The second parameter of the method that this delegate encapsulates.
@@ -31,7 +36,7 @@ namespace Pcf {
     /// @param arg16 The sixteenth parameter of the method that this delegate encapsulates.
     /// @return TResult The type of the return value of the method that this delegate encapsulates.
     /// @return The return value of the method that this delegate encapsulates.
-    template<typename T1=NullPtr, typename T2=NullPtr, typename T3=NullPtr, typename T4=NullPtr, typename T5=NullPtr, typename T6=NullPtr, typename T7=NullPtr, typename T8=NullPtr, typename T9=NullPtr, typename T10=NullPtr, typename T11=NullPtr, typename T12=NullPtr, typename T13=NullPtr, typename T14=NullPtr, typename T15=NullPtr, typename T16=NullPtr, class TResult=void>
+    template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12, typename T13, typename T14, typename T15, typename T16, class TResult>
     class Func : public Delegate<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> {
     public:
       /// @cond
