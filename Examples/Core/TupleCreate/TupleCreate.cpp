@@ -6,14 +6,14 @@ namespace Examples {
   class Program {
   public:
     static void Main() {
-      auto t = Tuple<>::Create(25, Uri("http://www.gammasoft.com"));
+      auto t = Tuple<>::Create(25, Version(1, 2, 3));
 
       Console::WriteLine("Tuple : " + t);
 
       int i = t.Item1;
-      Uri u = t.Item2;
+      Version v = t.Item2;
       Console::WriteLine("i = {0}", i);
-      Console::WriteLine("u = {0}", u);
+      Console::WriteLine("v = {0}", v);
     }
   };
 }
@@ -23,6 +23,6 @@ pcf_startup (Examples::Program);
 
 // This code produces the following output:
 //
-// Tuple : (25, http://www.gammasoft.com/)
+// Tuple : (25, 1.2.3)
 // i = 25
-// u = http://www.gammasoft.com/
+// v = 1.2.3

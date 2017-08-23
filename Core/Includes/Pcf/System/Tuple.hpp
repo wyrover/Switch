@@ -4,6 +4,7 @@
 #include <tuple>
 
 #include "../Property.hpp"
+#include "../Static.hpp"
 #include "../Types.hpp"
 #include "_String.hpp"
 #include "Collections/Generic/Comparer.hpp"
@@ -12,13 +13,17 @@
 namespace Pcf {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
-    /// @brief Base object that represent Tuple.
-    struct TupleObject : public object {};
-   
     /// @cond
     template<typename T1=NullPtr, typename T2=NullPtr, typename T3=NullPtr, typename T4=NullPtr, typename T5=NullPtr, typename T6=NullPtr, typename T7=NullPtr, typename TRest=NullPtr>
     class Tuple;
     /// @endcond
+    
+    /// @brief Base object that represent Tuple.
+    class TupleObject : public object {
+      template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename TRest>
+      friend class Tuple;
+      TupleObject() = default;
+    };
     
     /// @brief Represents an n-tuple, where n is 8 or greater.
     /// @see System::Tuple
@@ -822,7 +827,7 @@ namespace Pcf {
     /// @see System::Tuple <T1, T2, T3, T4, T5, T6, T7>
     /// @see System::Tuple <T1, T2, T3, T4, T5, T6, T7, TRest>
     template<>
-    class Tuple<> : public TupleObject {
+    class Tuple<> pcf_static {
     public:
       /// @brief Creates a new 8-tuple, or octuple.
       /// @param item1 The value of the first component of the tuple.
@@ -899,11 +904,6 @@ namespace Pcf {
       /// @return A tuple whose value is (item1).
       template<typename T1>
       static Tuple<T1> Create(T1 item1) {return Tuple<T1>(item1);}
-      
-    private:
-      /// @cond
-      Tuple() = delete;
-      /// @endcond
     };
   }
 }

@@ -11,7 +11,9 @@
 #include "../Move.hpp"
 #include "../Property.hpp"
 #include "../Types.hpp"
+#include "ArrayTypeMismatchException.hpp"
 #include "Comparison.hpp"
+#include "Converter.hpp"
 #include "IndexOutOfRangeException.hpp"
 #include "InvalidOperationException.hpp"
 #include "Object.hpp"
@@ -47,7 +49,7 @@ namespace Pcf {
 
     public:
       /// @brief Initializes a new instance of the Array class that is empty.
-      /// @remarks The Array class is ! thread safe.
+      /// @remarks The Array class is not thread safe.
       /// @par Examples
       /// The following code example demonstrates different methods to create an array.
       /// @include ArrayConstructor.cpp
@@ -59,7 +61,7 @@ namespace Pcf {
 
       /// @brief Initializes a new instance of the Array class with lengths for each rank specified.
       /// @param length the length for the first rank.
-      /// @remarks The Array class is ! thread safe.
+      /// @remarks The Array class is not thread safe.
       /// @par Examples
       /// The following code example demonstrates different methods to create an array.
       /// @include ArrayConstructor.cpp
@@ -72,7 +74,7 @@ namespace Pcf {
       /// @brief Initializes a new instance of the Array class with lengths for each rank specified.
       /// @param length1 the length for the first rank.
       /// @param length2 the length for the second rank.
-      /// @remarks The Array class is ! thread safe.
+      /// @remarks The Array class is not thread safe.
       /// @par Examples
       /// The following code example demonstrates different methods to create an array.
       /// @include ArrayConstructor.cpp
@@ -88,7 +90,7 @@ namespace Pcf {
       /// @param length1 the length for the first rank.
       /// @param length2 the length for the second rank.
       /// @param length3 the length for the third rank.
-      /// @remarks The Array class is ! thread safe.
+      /// @remarks The Array class is not thread safe.
       /// @par Examples
       /// The following code example demonstrates different methods to create an array.
       /// @include ArrayConstructor.cpp
@@ -104,7 +106,7 @@ namespace Pcf {
 
       /// @brief Initializes a new instance of the Array && copy array[] T.
       /// @param array the Array to copy.
-      /// @remarks The Array class is ! thread safe.
+      /// @remarks The Array class is not thread safe.
       /// @par Examples
       /// The following code example demonstrates different methods to create an array.
       /// @include ArrayConstructor.cpp
@@ -124,7 +126,7 @@ namespace Pcf {
       /// @brief Initializes a new instance of the Array && copy array[] T with length specified.
       /// @param array the Array to copy.
       /// @param length Length of the array.
-      /// @remarks The Array class is ! thread safe.
+      /// @remarks The Array class is not thread safe.
       /// @par Examples
       /// The following code example demonstrates different methods to create an array.
       /// @include ArrayConstructor.cpp
@@ -145,7 +147,7 @@ namespace Pcf {
 
       /// @brief Initializes a new instance of the Array && copy array Array specified.
       /// @param array the Array to copy.
-      /// @remarks The Array class is ! thread safe.
+      /// @remarks The Array class is not thread safe.
       /// @par Examples
       /// The following code example demonstrates different methods to create an array.
       /// @include ArrayConstructor.cpp
@@ -160,7 +162,7 @@ namespace Pcf {
 
       /// @brief Initializes a new instance of the Array && copy array Array specified.
       /// @param array the Array to copy.
-      /// @remarks The Array class is ! thread safe.
+      /// @remarks The Array class is not thread safe.
       /// @par Examples
       /// The following code example demonstrates different methods to create an array.
       /// @include ArrayConstructor.cpp
@@ -174,7 +176,7 @@ namespace Pcf {
 
       /// @brief Initializes a new instance of the Array && copy array Array specified.
       /// @param array the Array to copy.
-      /// @remarks The Array class is ! thread safe.
+      /// @remarks The Array class is not thread safe.
       /// @par Examples
       /// The following code example demonstrates different methods to create an array.
       /// @include ArrayConstructor.cpp
@@ -260,11 +262,11 @@ namespace Pcf {
       /// @include ArrayAsReadOnly.cpp
       static System::Collections::ObjectModel::ReadOnlyCollection<T> AsReadOnly(const Array& array) { return System::Collections::ObjectModel::ReadOnlyCollection<T>(array); }
 
-      static int32 BinarySearch(const Array& array, const T& item) {return BinarySearch(array, 0, array.Length, item, System::Collections::Generic::Comparer<T>::Default().Release());}
+      static int32 BinarySearch(const Array& array, const T& item) {return BinarySearch(array, 0, array.Length, item, System::Collections::Generic::Comparer<T>::Default());}
 
-      static int32 BinarySearch(const Array& array, const T& item, const refptr<System::Collections::Generic::IComparer<T>>& comparer) {return BinarySearch(array, 0, array.Length, item, comparer);}
+      static int32 BinarySearch(const Array& array, const T& item, const System::Collections::Generic::IComparer<T>& comparer) {return BinarySearch(array, 0, array.Length, item, comparer);}
 
-      static int32 BinarySearch(const Array& array, int32 index, int32 count, const T& item, const refptr<System::Collections::Generic::IComparer<T>>& comparer) {
+      static int32 BinarySearch(const Array& array, int32 index, int32 count, const T& item, const System::Collections::Generic::IComparer<T>& comparer) {
         if (rank  != 1)
           throw RankException(pcf_current_information);
         if (index < 0 || count < 0)
@@ -275,7 +277,7 @@ namespace Pcf {
         typename std::vector<T, TAllocator>::const_iterator last = array.array.begin();
         std::advance(first, index);
         std::advance(last, index+count);
-        typename std::vector<T, TAllocator>::const_iterator position = std::lower_bound(first, last, item, Array::Comparer(comparer.ToPointer()));
+        typename std::vector<T, TAllocator>::const_iterator position = std::lower_bound(first, last, item, Array::Comparer(&comparer));
 
         if (position != array.array.end() && !comparer->Compare(item, *position))
           return static_cast<int32>(std::distance(array.array.begin(), position));

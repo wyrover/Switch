@@ -264,6 +264,7 @@
 #include "System/ConsoleModifiers.hpp"
 #include "System/ContextMarshalException.hpp"
 #include "System/Convert.hpp"
+#include "System/Converter.hpp"
 #include "System/DataMisalignedException.hpp"
 #include "System/DateTime.hpp"
 #include "System/DateTimeKind.hpp"

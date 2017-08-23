@@ -265,6 +265,7 @@ set(INCLUDE_FILES
   Includes/Pcf/System/ConsoleSpecialKey.hpp
   Includes/Pcf/System/ContextMarshalException.hpp
   Includes/Pcf/System/Convert.hpp
+  Includes/Pcf/System/Converter.hpp
   Includes/Pcf/System/DataMisalignedException.hpp
   Includes/Pcf/System/DateTime.hpp
   Includes/Pcf/System/DateTimeKind.hpp
