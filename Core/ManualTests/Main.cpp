@@ -4,7 +4,9 @@
 
 using namespace System;
 
+/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Pcf {
+  /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @cond
     template<typename T = NullPtr, int32 Rank = 1, typename TAllocator = Allocator<T>>
@@ -23,7 +25,7 @@ namespace Pcf {
     
     /// @brief Generic Base object that represent Array.
     template<typename T, typename TAllocator = Allocator<T>>
-    class GenericArrayObject : public ArrayObject {
+    class GenericArrayObject : public ArrayObject, public Linq::Extension::Enumerable<GenericArrayObject<T, TAllocator>, T>, public Collections::Generic::IList<T> {
     public:
       /// @brief Get access to raw data of the Array.
       /// @return A pointer to raw data of the array.
@@ -57,135 +59,88 @@ namespace Pcf {
         pcf_get {return this->GetRank();}
       };
       
-      /// @brief Sets a value to the element at the specified position in the one-dimensional Array. The index is specified as a 32-bit integer.
-      /// @param value The new value for the specified element.
-      /// @param index A 32-bit integer that represents the position of the Array element to set.
-      /// @exception ArgumentException The current Array does ! have exactly one dimension.
-      /// @exception IndexOutOfRangeException index is outside the range of valid indexes for the current Array.
+      /// @brief Returns an IEnumerator for the Array.
+      /// @return IEnumerator An IEnumerator for the Array.
       /// @par Examples
-      /// The following code example shows how to use operator [] to list the elements of an array.
-      /// @include ArrayArrayOperator.cpp
-      T& operator[](int32 index) override {
-        if (index >= this->Count || index < 0)
+      /// The following code example shows how to use GetEnumerator to list the elements of an array.
+      /// @include ArrayGetEnumerator.cpp
+      Collections::Generic::Enumerator<T> GetEnumerator() const override {
+        class Enumerator : public object, public Collections::Generic::IEnumerator<T> {
+        public:
+          explicit Enumerator(const GenericArrayObject& array) : array(array), operationNumber(array.operationNumber), iterator(array.array.begin()) {}
+          void Reset() override {this->beforeFirst = true; this->operationNumber = this->array.operationNumber; this->iterator = this->array.array.begin();}
+          
+          bool MoveNext() override {
+            if (this->operationNumber != this->array.operationNumber) throw System::InvalidOperationException(pcf_current_information);
+            if (this->iterator == this->array.array.end()) return false;
+            if (this->beforeFirst) {
+              this->beforeFirst = false;
+              return this->iterator != this->array.array.end();
+            }
+            return ++this->iterator != this->array.array.end();
+          }
+          
+        protected:
+          const T& GetCurrent() const override {
+            if (this->beforeFirst || this->iterator == this->array.array.end()) throw System::InvalidOperationException(pcf_current_information);
+              return *this->iterator;
+          }
+          
+          const GenericArrayObject& array;
+          bool beforeFirst = true;
+          int64 operationNumber;
+          typename std::vector<T, TAllocator>::const_iterator iterator;
+        };
+        
+        return System::Collections::Generic::Enumerator<T>(new Enumerator(*this));
+      }
+      
+      /// @brief Determines whether an element is in the Array.
+      /// @param value The object to be added to the end of the Array. The value can ! be null for reference types.
+      bool Contains(const T& value) const override { return this->IndexOf(value) != -1; }
+      
+      /// @brief Copies the entire Array<T> to a compatible one-dimensional array.
+      /// @param array The one-dimensional Array that is the destination of the elements copied from ICollection. The Array must have zero-based indexing.
+      /// @param arraySize The size of Array that is the destination.
+      /// @exception ArgumentNullException The parameters array is null.
+      /// @exception ArgumentOutOfRangeException The arraySize is less than 0.
+      /// @exception ArgumentException arrayIndex is equal to || greater than the length of array.
+      /// @remarks The elements are copied to the Array in the same order in which the enumerator iterates through the Array<T>.
+      void CopyTo(Array<T>& array) const { this->CopyTo(0, array, 0, this->Length); }
+      
+      /// @brief Copies the entire Array<T> to a compatible one-dimensional array, starting at the specified index of the target array.
+      /// @param array The one-dimensional Array that is the destination of the elements copied from ICollection. The Array must have zero-based indexing.
+      /// @param arraySize The size of Array that is the destination.
+      /// @param arrayIndex The zero-based index in array at which copying begins;
+      /// @exception ArgumentNullException The parameters array is null.
+      /// @exception ArgumentOutOfRangeException The arraySize is less than 0 - or - The arrayIndex is less than 0.
+      /// @exception ArgumentException arrayIndex is equal to || greater than the length of array - or - The number of elements in the source Array<T> is greater than the available space from arrayIndex to the end of the destination array.
+      /// @remarks The elements are copied to the Array in the same order in which the enumerator iterates through the Array<T>.
+      /// @par Examples
+      /// The following code example shows how to copy an Array to another native Array.
+      /// @include ArrayCopyTo2.cpp
+      void CopyTo(Array<T>& array, int32 arrayIndex) const override { this->CopyTo(0, array, arrayIndex, this->Length); }
+      
+      /// @brief Copies the entire Array<T> to a compatible one-dimensional array, starting at the specified index of the target array.
+      /// @param index The zero-based index in the source Array<T> at which copying begins.
+      /// @param array The one-dimensional Array that is the destination of the elements copied from ICollection. The Array must have zero-based indexing.
+      /// @param arraySize The size of Array that is the destination.
+      /// @param arrayIndex The zero-based index in array at which copying begins;
+      /// @param count The number of elements to copy.
+      /// @return int32 Number of elements copied.
+      /// @exception ArgumentNullException The parameters array is null.
+      /// @exception ArgumentOutOfRangeException The arrayIndex is less than 0.
+      /// @exception ArgumentException index is equal to || greater than the Count of the source Array<T>. - or - arrayIndex is equal to || greater than the length of array -||-
+      /// The number of elements in the source Array<T> is greater than the available space from arrayIndex to the end of the destination array.
+      /// @remarks The elements are copied to the Array in the same order in which the enumerator iterates through the Array<T>.
+      void CopyTo(int32 index, Array<T>& array, int32 arrayIndex, int32 count) const {
+        if (index < 0 || array.Length < 0 || arrayIndex < 0 || count < 0)
           throw System::ArgumentOutOfRangeException(pcf_current_information);
-          return this->array[index];
-      }
-      
-      /// @brief Gets the element at the specified index.
-      /// @param index The zero-based index of the element to get.
-      /// @return The value at the specified position in the one-dimensional Array.
-      /// @exception ArgumentException The current Array does ! have exactly one dimension.
-      /// @exception IndexOutOfRangeException index is less than 0 || index is equal to || greater than Count.
-      /// @par Examples
-      /// The following code example shows how to use operator [] to list the elements of an array.
-      /// @include ArrayArrayOperator.cpp
-      inline const T& operator[](int32 index) const override {
-          if (index >= this->Count || index < 0)
-            throw System::ArgumentOutOfRangeException(pcf_current_information);
-            return this->array[index];
-      }
-      
-      /// @brief Sets a value to the element at the specified position in the one-dimensional Array. The index is specified as a 32-bit integer.
-      /// @param value The new value for the specified element.
-      /// @param index A 32-bit integer that represents the position of the Array element to set.
-      /// @exception ArgumentException The current Array does ! have exactly one dimension.
-      /// @exception IndexOutOfRangeException index is outside the range of valid indexes for the current Array.
-      /// @par Examples
-      /// The following code example shows how to use operator () to list the elements of an array.
-      /// @include ArrayArrayOperatorFunctor.cpp
-      T& operator()(int32 index) {
-        if (index >= this->Count || index < 0)
-          throw System::ArgumentOutOfRangeException(pcf_current_information);
+        if (index + count > this->Length() || arrayIndex + count > array.Length)
+          throw System::ArgumentException(pcf_current_information);
         
-        return this->array[index];
-      }
-      
-      /// @brief Gets the value at the specified position in the one-dimensional Array. The index is specified as a 32-bit integer.
-      /// @param index A 32-bit integer that represents the position of the Array element to get.
-      /// @return The value at the specified position in the one-dimensional Array.
-      /// @exception ArgumentException The current Array does ! have exactly one dimension.
-      /// @exception IndexOutOfRangeException index is outside the range of valid indexes for the current Array.
-      /// @par Examples
-      /// The following code example shows how to use operator () to list the elements of an array.
-      /// @include ArrayArrayOperatorFunctor.cpp
-      const T& operator()(int32 index) const {
-        if (index >= this->Count || index < 0)
-          throw System::IndexOutOfRangeException(pcf_current_information);
-        
-        return this->array[index];
-      }
-      
-      /// @brief Sets the element at in multidimension array the specified index.
-      /// @param index The zero-based index of the element to set.
-      /// @return T The modified element at the specified index.
-      /// @exception ArgumentOutOfRangeException index is less than 0 || index is equal to || greater than Count.
-      /// @par Examples
-      /// The following code example shows how to use operator [] to list the elements of an array.
-      /// @include ArrayArrayOperatorFunctor.cpp
-      T& operator()(int32 index1, int32 index2) {
-        if (index2 >= GetLength(1) || index2 < 0)
-          throw System::IndexOutOfRangeException(pcf_current_information);
-        if (index1 >= GetLength(0) || index1 < 0)
-          throw System::IndexOutOfRangeException(pcf_current_information);
-        
-        return this->array[index2 + (index1 * this->GetLength(1))];
-      }
-      
-      /// @brief Gets the value at the specified position in the two-dimensional Array. The index is specified as a 32-bit integer.
-      /// @param index1 A 32-bit integer that represents the first-dimension index of the Array element to get.
-      /// @param index2 A 32-bit integer that represents the second-dimension index of the Array element to get.
-      /// @return The value at the specified position in the two-dimensional Array.
-      /// @exception ArgumentException The current Array does ! have exactly two dimension.
-      /// @exception IndexOutOfRangeException Either index1 || index2 is outside the range of valid indexes for the corresponding dimension of the current Array.
-      /// @par Examples
-      /// The following code example shows how to use operator [] to list the elements of an array.
-      /// @include ArrayArrayOperatorFunctor.cpp
-      const T& operator()(int32 index1, int32 index2) const {
-        if (index2 >= GetLength(1) || index2 < 0)
-          throw System::ArgumentOutOfRangeException(pcf_current_information);
-        if (index1 >= GetLength(0) || index1 < 0)
-          throw System::ArgumentOutOfRangeException(pcf_current_information);
-        
-        return this->array[index2 + (index1 * this->GetLength(1))];
-      }
-      
-      /// @brief Sets the element at in multidimension array the specified index.
-      /// @param index The zero-based index of the element to set.
-      /// @return T The modified element at the specified index.
-      /// @exception ArgumentOutOfRangeException index is less than 0 || index is equal to || greater than Count.
-      /// @par Examples
-      /// The following code example shows how to use operator [] to list the elements of an array.
-      /// @include ArrayArrayOperatorFunctor.cpp
-      T& operator()(int32 index1, int32 index2, int32 index3) {
-        if (index3 >= GetLength(2) || index3 < 0)
-          throw System::IndexOutOfRangeException(pcf_current_information);
-        if (index2 >= GetLength(1) || index2 < 0)
-          throw System::IndexOutOfRangeException(pcf_current_information);
-        if (index1 >= GetLength(0) || index1 < 0)
-          throw System::IndexOutOfRangeException(pcf_current_information);
-        
-        return this->array[index3 + (index2 * this->GetLength(2)) + (index1 * this->GetLength(2) * this->GetLength(1))];
-      }
-      
-      /// @brief Gets the value at the specified position in the three-dimensional Array. The index is specified as a 32-bit integer.
-      /// @param index1 A 32-bit integer that represents the first-dimension index of the Array element to get.
-      /// @param index2 A 32-bit integer that represents the second-dimension index of the Array element to get.
-      /// @param index3 A 32-bit integer that represents the third-dimension index of the Array element to get.
-      /// @return The value at the specified position in the three-dimensional Array.
-      /// @exception ArgumentException The current Array does ! have exactly three dimension.
-      /// @exception IndexOutOfRangeException Either index1 || index2 || index3 is outside the range of valid indexes for the corresponding dimension of the current Array.
-      /// @par Examples
-      /// The following code example shows how to use operator [] to list the elements of an array.
-      /// @include ArrayArrayOperatorFunctor.cpp
-      const T& operator()(int32 index1, int32 index2, int32 index3) const {
-        if (index3 >= GetLength(2) || index3 < 0)
-          throw System::IndexOutOfRangeException(pcf_current_information);
-        if (index2 >= GetLength(1) || index2 < 0)
-          throw System::IndexOutOfRangeException(pcf_current_information);
-        if (index1 >= GetLength(0) || index1 < 0)
-          throw System::IndexOutOfRangeException(pcf_current_information);
-        
-        return this->array[index3 + (index2 * this->GetLength(2)) + (index1 * this->GetLength(2) * this->GetLength(1))];
+        for (int32 i = 0; i < count; i++)
+          array[arrayIndex+i] = (*this)[index+i];
       }
       
       /// @brief Gets a 32-bit integer that represents the total number of elements in all the dimensions of the Array.
@@ -195,8 +150,109 @@ namespace Pcf {
       /// @par Examples
       /// The following code example demonstrates methods to get the length of an array.
       /// @include ArrayGetLength.cpp
-      int32 GetLength(int32 dimension) const { return this->GetUpperBound(dimension)+1; }
+      int32 GetLength(int32 dimension) const {return this->GetUpperBound(dimension)+1;}
       
+      /// @brief Gets the lower bound of the specified dimension in the Array.
+      /// @param dimension A zero-based dimension of the Array whose lower bound needs to be determined.
+      /// @return int32 The lower bound of the specified dimension in the Array.
+      /// @exception ArgumentOutOfRangeException dimension is less than zero. -||- dimension is equal to || greater than rank.
+      /// @par Examples
+      /// The following code example uses GetLowerBound && GetUpperBound to initialize a one-dimensional array && a multidimensional array.
+      /// @include ArrayGetLowerBound.cpp
+      int32 GetLowerBound(int32 dimension) const {
+        if (dimension < 0 || dimension >= this->Rank) throw System::ArgumentOutOfRangeException(pcf_current_information);
+        
+        return this->lowerBound[dimension];
+      }
+      
+      /// @brief Gets the upper bound of the specified dimension in the Array.
+      /// @param dimension A zero-based dimension of the Array whose upper bound needs to be determined.
+      /// @return int32 The upper bound of the specified dimension in the Array.
+      /// @exception ArgumentOutOfRangeException dimension is less than zero. -||- dimension is equal to || greater than rank.
+      /// @par Examples
+      /// The following code example uses GetLowerBound && GetUpperBound to initialize a one-dimensional array && a multidimensional array.
+      /// @include ArrayGetLowerBound.cpp
+      int32 GetUpperBound(int32 dimension) const {
+        if (dimension < 0 || dimension >= this->Rank) throw System::ArgumentOutOfRangeException(pcf_current_information);
+        
+        return this->upperBound[dimension];
+      }
+      
+      /// @brief Determines the index of a specific item in the Array.
+      /// @param value The object to locate in the Array.
+      /// @return int32 The index of value if found in the Array; otherwise, -1.
+      int32 IndexOf(const T& value) const override { return IndexOf(*this, value); }
+      
+      /// @brief Determines the index of a specific item in the array specified.
+      /// @param array The object to locate in the Array.
+      /// @param value The object to locate in the Array.
+      /// @return int32 The index of value if found in the Array; otherwise, -1.
+      /// @par Examples
+      /// The following code example shows how to determine the index of the first occurrence of a specified element.
+      /// @include ArrayIndexOf.cpp
+      static int32 IndexOf(const GenericArrayObject& array, const T& value) { return IndexOf(array, value, 0, array.Length); }
+      
+      /// @brief Determines the index of a specific item in the array specified.
+      /// @param array The object to locate in the Array.
+      /// @param value The object to locate in the Array.
+      /// @param index The zero-based starting index of the search.
+      /// @return int32 The index of value if found in the Array; otherwise, -1.
+      /// @exception ArgumentOutOfRangeException The parameters index is less than 0.
+      /// @par Examples
+      /// The following code example shows how to determine the index of the first occurrence of a specified element.
+      /// @include ArrayIndexOf.cpp
+      static int32 IndexOf(const GenericArrayObject& array, const T& value, int32 index) { return IndexOf(array, value, index, array.Length-index); }
+      
+      /// @brief Determines the index of a specific item in the array specified.
+      /// @param array The object to locate in the Array.
+      /// @param value The object to locate in the Array.
+      /// @param index The zero-based starting index of the search.
+      /// @param count The number of elements in the section to search
+      /// @return int32 The index of value if found in the list; otherwise, -1.
+      /// @exception ArgumentOutOfRangeException The parameters index is less than 0 || The parameters count is less than 0 || index && count do ! specify a valid section in the Array.
+      /// @par Examples
+      /// The following code example shows how to determine the index of the first occurrence of a specified element.
+      /// @include ArrayIndexOf.cpp
+      static int32 IndexOf(const GenericArrayObject& array, const T& value, int32 index, int32 count) {
+        if (index < 0 || count < 0)
+          throw System::ArgumentOutOfRangeException(pcf_current_information);
+        if (index + count > array.Length)
+          throw System::ArgumentException(pcf_current_information);
+        
+        for (int32 i = 0; i < count; i++) {
+          if (array[index+i] == value)
+            return index+i;
+        }
+        return -1;
+      }
+      
+      /// @cond
+      using const_iterator = typename std::vector<T, TAllocator>::const_iterator;
+      using iterator = typename std::vector<T, TAllocator>::iterator;
+      
+      const_iterator cbegin() const {return this->array.begin();}
+      const_iterator cend() const {return this->array.end();}
+      iterator begin() {return this->array.begin();}
+      const_iterator begin() const {return this->array.begin();}
+      iterator end() {return this->array.end();}
+      const_iterator end() const {return this->array.end();}
+      /// @endcond
+
+    protected:
+      /// @cond
+      T& operator[](int32 index) override {
+        if (index >= this->Length || index < 0) throw System::ArgumentOutOfRangeException(pcf_current_information);
+        
+        return this->array[index];
+      }
+      
+      const T& operator[](int32 index) const override {
+        if (index >= this->Length || index < 0) throw System::ArgumentOutOfRangeException(pcf_current_information);
+        
+        return this->array[index];
+      }
+      /// @endcond
+
     private:
       template<typename TArray, int32 RankArray, typename TAllocatorArray>
       friend class _Array;
@@ -253,7 +309,7 @@ namespace Pcf {
         for (T value : il)
           this->array.push_back(value);
         this->lowerBound.push_back(0);
-        this->upperBound.push_back((int32)il.size());
+        this->upperBound.push_back((int32)il.size()-1);
       }
       
       GenericArrayObject(InitializerList<InitializerList<T>> il)  {
@@ -261,9 +317,9 @@ namespace Pcf {
           for (T value : il1)
             this->array.push_back(value);
         this->lowerBound.push_back(0);
-        this->upperBound.push_back((int32)il.size());
+        this->upperBound.push_back((int32)il.size()-1);
         this->lowerBound.push_back(0);
-        this->upperBound.push_back((int32)(*il.begin()).size());
+        this->upperBound.push_back((int32)(*il.begin()).size()-1);
       }
       
       GenericArrayObject(InitializerList<InitializerList<InitializerList<T>>> il)  {
@@ -272,15 +328,27 @@ namespace Pcf {
             for (T value : il2)
               this->array.push_back(value);
         this->lowerBound.push_back(0);
-        this->upperBound.push_back((int32)il.size());
+        this->upperBound.push_back((int32)il.size()-1);
         this->lowerBound.push_back(0);
-        this->upperBound.push_back((int32)(*il.begin()).size());
+        this->upperBound.push_back((int32)(*il.begin()).size()-1);
         this->lowerBound.push_back(0);
-        this->upperBound.push_back((int32)(*(*il.begin()).begin()).size());
+        this->upperBound.push_back((int32)(*(*il.begin()).begin()).size()-1);
       }
       
       virtual int32 GetRank() const = 0;
+
+      bool GetIsFixedSize() const override { return true; }
+      bool GetIsReadOnly() const override { return true; }
+      bool GetIsSynchronized() const override { return false; }
+      const object& GetSyncRoot() const override { return this->syncRoot; }
       
+      int32 GetCount() const override {return static_cast<int32>(this->array.size());}
+      void Insert(int32, const T&) override { throw InvalidOperationException(pcf_current_information); }
+      void RemoveAt(int32) override { throw InvalidOperationException(pcf_current_information); }
+      void Add(const T&) override { throw InvalidOperationException(pcf_current_information); }
+      void Clear() override { throw InvalidOperationException(pcf_current_information); }
+      bool Remove(const T&) override { throw InvalidOperationException(pcf_current_information); }
+
       int32 length = 0;
       int64 operationNumber = 0;
       std::vector<T, TAllocator> array;
@@ -416,37 +484,45 @@ namespace Pcf {
       _Array(const Array<int32>& lengths) : GenericArrayObject<T, TAllocator>(lengths) {}
       /// @endcond
       
-      /// @brief Get access to raw data of the Array.
-      /// @return A pointer to raw data of the array.
-      Property<const T*, ReadOnly> Data {
-        pcf_get{return this->GenericArrayObject<T, TAllocator>::Data();}
-      };
-      
-      /// @brief Gets a 32-bit integer that represents the total number of elements in all the dimensions of the Array.
-      /// @return int32 A 32-bit integer that represents the total number of elements in all the dimensions of the Array; zero if there are no elements in the array.
-      /// @remarks Retrieving the value of this property is an O(1) operation.
+      /// @brief Sets a value to the element at the specified position in the one-dimensional Array. The index is specified as a 32-bit integer.
+      /// @param value The new value for the specified element.
+      /// @param index A 32-bit integer that represents the position of the Array element to set.
+      /// @exception ArgumentException The current Array does ! have exactly one dimension.
+      /// @exception IndexOutOfRangeException index is outside the range of valid indexes for the current Array.
       /// @par Examples
-      /// The following code example demonstrates methods to get the length of an array.
-      /// @include ArrayGetLength.cpp
-      Property<int32, ReadOnly> Length {
-        pcf_get {return this->GenericArrayObject<T, TAllocator>::Length();}
-      };
+      /// The following code example shows how to use operator () to list the elements of an array.
+      /// @include ArrayArrayOperatorFunctor.cpp
+      T& operator()(int32 index) {return this->GenericArrayObject<T, TAllocator>::operator[](index);}
       
-      /// @brief Gets a 64-bit integer that represents the total number of elements in all the dimensions of the Array.
-      /// @return int64 A 64-bit integer that represents the total number of elements in all the dimensions of the Array; zero if there are no elements in the array.
-      /// @remarks Retrieving the value of this property is an O(1) operation.
-      Property<int64, ReadOnly> LongLength {
-        pcf_get {return this->GenericArrayObject<T, TAllocator>::LongLength();}
-      };
-      
-      /// @brief Gets the rank (number of dimensions) of the Array.
-      /// @return int32 The rank (number of dimensions) of the Array.
+      /// @brief Gets the value at the specified position in the one-dimensional Array. The index is specified as a 32-bit integer.
+      /// @param index A 32-bit integer that represents the position of the Array element to get.
+      /// @return The value at the specified position in the one-dimensional Array.
+      /// @exception ArgumentException The current Array does ! have exactly one dimension.
+      /// @exception IndexOutOfRangeException index is outside the range of valid indexes for the current Array.
       /// @par Examples
-      /// The following code example demonstrates methods to get the rank of an array.
-      /// @include ArrayGetLength.cpp
-      Property<int32, ReadOnly> Rank {
-        pcf_get {return this->GenericArrayObject<T, TAllocator>::Rank();}
-      };
+      /// The following code example shows how to use operator () to list the elements of an array.
+      /// @include ArrayArrayOperatorFunctor.cpp
+      const T& operator()(int32 index) const {return this->GenericArrayObject<T, TAllocator>::operator[](index);}
+      
+      /// @brief Sets a value to the element at the specified position in the one-dimensional Array. The index is specified as a 32-bit integer.
+      /// @param value The new value for the specified element.
+      /// @param index A 32-bit integer that represents the position of the Array element to set.
+      /// @exception ArgumentException The current Array does ! have exactly one dimension.
+      /// @exception IndexOutOfRangeException index is outside the range of valid indexes for the current Array.
+      /// @par Examples
+      /// The following code example shows how to use operator [] to list the elements of an array.
+      /// @include ArrayArrayOperator.cpp
+      T& operator[](int32 index) override {return this->GenericArrayObject<T, TAllocator>::operator[](index);}
+      
+      /// @brief Gets the element at the specified index.
+      /// @param index The zero-based index of the element to get.
+      /// @return The value at the specified position in the one-dimensional Array.
+      /// @exception ArgumentException The current Array does ! have exactly one dimension.
+      /// @exception IndexOutOfRangeException index is less than 0 || index is equal to || greater than Count.
+      /// @par Examples
+      /// The following code example shows how to use operator [] to list the elements of an array.
+      /// @include ArrayArrayOperator.cpp
+      const T& operator[](int32 index) const override {return this->GenericArrayObject<T, TAllocator>::operator[](index);}
       
       /// @brief Creates a shallow copy of the Array.
       /// @return object A shallow copy of the Array.
@@ -486,37 +562,35 @@ namespace Pcf {
       _Array(const Array<int32>& lengths) : GenericArrayObject<T, TAllocator>(lengths) {}
       /// @endcond
       
-      /// @brief Get access to raw data of the Array.
-      /// @return A pointer to raw data of the array.
-      Property<const T*, ReadOnly> Data {
-        pcf_get{return this->GenericArrayObject<T, TAllocator>::Data();}
-      };
-      
-      /// @brief Gets a 32-bit integer that represents the total number of elements in all the dimensions of the Array.
-      /// @return int32 A 32-bit integer that represents the total number of elements in all the dimensions of the Array; zero if there are no elements in the array.
-      /// @remarks Retrieving the value of this property is an O(1) operation.
+      /// @brief Sets the element at in multidimension array the specified index.
+      /// @param index The zero-based index of the element to set.
+      /// @return T The modified element at the specified index.
+      /// @exception ArgumentOutOfRangeException index is less than 0 || index is equal to || greater than Count.
       /// @par Examples
-      /// The following code example demonstrates methods to get the length of an array.
-      /// @include ArrayGetLength.cpp
-      Property<int32, ReadOnly> Length {
-        pcf_get {return this->GenericArrayObject<T, TAllocator>::Length();}
-      };
+      /// The following code example shows how to use operator [] to list the elements of an array.
+      /// @include ArrayArrayOperatorFunctor.cpp
+      T& operator()(int32 index1, int32 index2) {
+        if (index2 >= this->GetLength(1) || index2 < 0) throw System::IndexOutOfRangeException(pcf_current_information);
+        if (index1 >= this->GetLength(0) || index1 < 0) throw System::IndexOutOfRangeException(pcf_current_information);
+        
+        return this->array[index2 + (index1 * this->GetLength(1))];
+      }
       
-      /// @brief Gets a 64-bit integer that represents the total number of elements in all the dimensions of the Array.
-      /// @return int64 A 64-bit integer that represents the total number of elements in all the dimensions of the Array; zero if there are no elements in the array.
-      /// @remarks Retrieving the value of this property is an O(1) operation.
-      Property<int64, ReadOnly> LongLength {
-        pcf_get {return this->GenericArrayObject<T, TAllocator>::LongLength();}
-      };
-      
-      /// @brief Gets the rank (number of dimensions) of the Array.
-      /// @return int32 The rank (number of dimensions) of the Array.
+      /// @brief Gets the value at the specified position in the two-dimensional Array. The index is specified as a 32-bit integer.
+      /// @param index1 A 32-bit integer that represents the first-dimension index of the Array element to get.
+      /// @param index2 A 32-bit integer that represents the second-dimension index of the Array element to get.
+      /// @return The value at the specified position in the two-dimensional Array.
+      /// @exception ArgumentException The current Array does ! have exactly two dimension.
+      /// @exception IndexOutOfRangeException Either index1 || index2 is outside the range of valid indexes for the corresponding dimension of the current Array.
       /// @par Examples
-      /// The following code example demonstrates methods to get the rank of an array.
-      /// @include ArrayGetLength.cpp
-      Property<int32, ReadOnly> Rank {
-        pcf_get {return this->GenericArrayObject<T, TAllocator>::Rank();}
-      };
+      /// The following code example shows how to use operator [] to list the elements of an array.
+      /// @include ArrayArrayOperatorFunctor.cpp
+      const T& operator()(int32 index1, int32 index2) const {
+        if (index2 >= this->GetLength(1) || index2 < 0) throw System::ArgumentOutOfRangeException(pcf_current_information);
+        if (index1 >= this->GetLength(0) || index1 < 0) throw System::ArgumentOutOfRangeException(pcf_current_information);
+        
+        return this->array[index2 + (index1 * this->GetLength(1))];
+      }
       
       /// @brief Creates a shallow copy of the Array.
       /// @return object A shallow copy of the Array.
@@ -557,37 +631,38 @@ namespace Pcf {
       _Array(const Array<int32>& lengths) : GenericArrayObject<T, TAllocator>(lengths) {}
       /// @endcond
       
-      /// @brief Get access to raw data of the Array.
-      /// @return A pointer to raw data of the array.
-      Property<const T*, ReadOnly> Data {
-        pcf_get{return this->GenericArrayObject<T, TAllocator>::Data();}
-      };
-      
-      /// @brief Gets a 32-bit integer that represents the total number of elements in all the dimensions of the Array.
-      /// @return int32 A 32-bit integer that represents the total number of elements in all the dimensions of the Array; zero if there are no elements in the array.
-      /// @remarks Retrieving the value of this property is an O(1) operation.
+      /// @brief Sets the element at in multidimension array the specified index.
+      /// @param index The zero-based index of the element to set.
+      /// @return T The modified element at the specified index.
+      /// @exception ArgumentOutOfRangeException index is less than 0 || index is equal to || greater than Count.
       /// @par Examples
-      /// The following code example demonstrates methods to get the length of an array.
-      /// @include ArrayGetLength.cpp
-      Property<int32, ReadOnly> Length {
-        pcf_get {return this->GenericArrayObject<T, TAllocator>::Length();}
-      };
+      /// The following code example shows how to use operator [] to list the elements of an array.
+      /// @include ArrayArrayOperatorFunctor.cpp
+      T& operator()(int32 index1, int32 index2, int32 index3) {
+        if (index3 >= this->GetLength(2) || index3 < 0) throw System::IndexOutOfRangeException(pcf_current_information);
+        if (index2 >= this->GetLength(1) || index2 < 0) throw System::IndexOutOfRangeException(pcf_current_information);
+        if (index1 >= this->GetLength(0) || index1 < 0) throw System::IndexOutOfRangeException(pcf_current_information);
+        
+        return this->array[index3 + (index2 * this->GetLength(2)) + (index1 * this->GetLength(2) * this->GetLength(1))];
+      }
       
-      /// @brief Gets a 64-bit integer that represents the total number of elements in all the dimensions of the Array.
-      /// @return int64 A 64-bit integer that represents the total number of elements in all the dimensions of the Array; zero if there are no elements in the array.
-      /// @remarks Retrieving the value of this property is an O(1) operation.
-      Property<int64, ReadOnly> LongLength {
-        pcf_get {return this->GenericArrayObject<T, TAllocator>::LongLength();}
-      };
-      
-      /// @brief Gets the rank (number of dimensions) of the Array.
-      /// @return int32 The rank (number of dimensions) of the Array.
+      /// @brief Gets the value at the specified position in the three-dimensional Array. The index is specified as a 32-bit integer.
+      /// @param index1 A 32-bit integer that represents the first-dimension index of the Array element to get.
+      /// @param index2 A 32-bit integer that represents the second-dimension index of the Array element to get.
+      /// @param index3 A 32-bit integer that represents the third-dimension index of the Array element to get.
+      /// @return The value at the specified position in the three-dimensional Array.
+      /// @exception ArgumentException The current Array does ! have exactly three dimension.
+      /// @exception IndexOutOfRangeException Either index1 || index2 || index3 is outside the range of valid indexes for the corresponding dimension of the current Array.
       /// @par Examples
-      /// The following code example demonstrates methods to get the rank of an array.
-      /// @include ArrayGetLength.cpp
-      Property<int32, ReadOnly> Rank {
-        pcf_get {return this->GenericArrayObject<T, TAllocator>::Rank();}
-      };
+      /// The following code example shows how to use operator [] to list the elements of an array.
+      /// @include ArrayArrayOperatorFunctor.cpp
+      const T& operator()(int32 index1, int32 index2, int32 index3) const {
+        if (index3 >= this->GetLength(2) || index3 < 0) throw System::IndexOutOfRangeException(pcf_current_information);
+        if (index2 >= this->GetLength(1) || index2 < 0) throw System::IndexOutOfRangeException(pcf_current_information);
+        if (index1 >= this->GetLength(0) || index1 < 0) throw System::IndexOutOfRangeException(pcf_current_information);
+        
+        return this->array[index3 + (index2 * this->GetLength(2)) + (index1 * this->GetLength(2) * this->GetLength(1))];
+      }
       
       /// @brief Creates a shallow copy of the Array.
       /// @return object A shallow copy of the Array.
@@ -775,8 +850,9 @@ namespace Pcf {
       /// @remarks The source array remains unchanged.
       /// @remarks This method is an O(n) operation, where n is the Length of array.
       template<typename TInput, typename TOutput, typename TAllocatorOutput = Allocator<TOutput>, int32 Rank = 1, typename TAllocatorInput = Allocator<TInput>>
-      _Array<TOutput, Rank, TAllocatorOutput> ConvertAll(const _Array<TInput, Rank, TAllocatorInput>& array, Converter<TInput, TOutput> converter) {
-        Array<int32, 1, TAllocatorOutput> lengths(Rank);
+      static _Array<TOutput, Rank, TAllocatorOutput> ConvertAll(const _Array<TInput, Rank, TAllocatorInput>& array, Converter<TInput, TOutput> converter) {
+        //Array<int32, 1, TAllocatorOutput> lengths(Rank);
+        Array<int32> lengths(Rank);
         for (int32 index = 0; index < Rank; index++)
           lengths[index] = array.GetLength(index);
         _Array<TOutput, Rank, TAllocatorOutput> result = CreateInstance<TOutput, Rank, TAllocatorOutput>(lengths);
@@ -843,10 +919,37 @@ namespace Pcf {
 namespace Examples {
   class Program {
   public:
-    template<typename TInput, typename TOutput>
     // The main entry point for the application.
     static void Main() {
-      Array<string> strings = ConvertAll<any, string>(Array<any> {DateTime::Now, Version(1, 2, 3), DayOfWeek::Wednesday, 12_h + 23_min + 2_s, true}, pcf_delegate(any value) {return value.ToString();})));
+      _Array<int> a1 = {1, 2, 3, 4, 5, 6, 7, 8};
+      Console::WriteLine("a1(0) = {0}", a1(0));
+      Console::WriteLine("a1(1) = {0}", a1(1));
+      Console::WriteLine("a1(2) = {0}", a1(2));
+      Console::WriteLine("a1(3) = {0}", a1(3));
+      Console::WriteLine("a1(4) = {0}", a1(4));
+      Console::WriteLine("a1(5) = {0}", a1(5));
+      Console::WriteLine("a1(6) = {0}", a1(6));
+      Console::WriteLine("a1(7) = {0}", a1(7));
+      
+      _Array<int, 2> a2 = {{10, 20, 30, 40}, {50, 60, 70, 80}};
+      Console::WriteLine("a2(0, 0) = {0}", a2(0, 0));
+      Console::WriteLine("a2(0, 1) = {0}", a2(0, 1));
+      Console::WriteLine("a2(0, 2) = {0}", a2(0, 2));
+      Console::WriteLine("a2(0, 3) = {0}", a2(0, 3));
+      Console::WriteLine("a2(1, 0) = {0}", a2(1, 0));
+      Console::WriteLine("a2(1, 1) = {0}", a2(1, 1));
+      Console::WriteLine("a2(1, 2) = {0}", a2(1, 2));
+      Console::WriteLine("a2(1, 3) = {0}", a2(1, 3));
+      
+      _Array<int, 3> a3 = {{{100, 200}, {300, 400}}, {{500, 600}, {700, 800}}};
+      Console::WriteLine("a3(0, 0, 0) = {0}", a3(0, 0, 0));
+      Console::WriteLine("a3(0, 0, 1) = {0}", a3(0, 0, 1));
+      Console::WriteLine("a3(0, 1, 0) = {0}", a3(0, 1, 0));
+      Console::WriteLine("a3(0, 0, 1) = {0}", a3(0, 1, 1));
+      Console::WriteLine("a3(1, 0, 0) = {0}", a3(1, 0, 0));
+      Console::WriteLine("a3(1, 0, 1) = {0}", a3(1, 0, 1));
+      Console::WriteLine("a3(1, 1, 0) = {0}", a3(1, 1, 0));
+      Console::WriteLine("a3(1, 1, 1) = {0}", a3(1, 1, 1));
     }
   };
 }
