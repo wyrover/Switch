@@ -8,6 +8,40 @@ using namespace TUnit;
 namespace PcfUnitTests {
   class ArrayTest : public TestFixture {
   protected:
+    void CreateOneDimensionalArrayWithCreateInstance() {
+      Assert::AreEqual(1, Array<>::CreateInstance<int>(3).Rank, pcf_current_information);
+      Assert::AreEqual(3, Array<>::CreateInstance<int>(3).Length, pcf_current_information);
+    }
+    
+    void CreateOneDimensionalArrayWithCreateInstanceWithLengthArraySpecified() {
+      Assert::AreEqual(1, Array<>::CreateInstance<int, 1>({3}).Rank, pcf_current_information);
+      Assert::AreEqual(3, Array<>::CreateInstance<int, 1>({3}).Length, pcf_current_information);
+    }
+    
+    void CreateTwoDimensionalArrayWithCreateInstance() {
+      Assert::AreEqual(2, Array<>::CreateInstance<int>(3, 5).Rank, pcf_current_information);
+      Assert::AreEqual(15, Array<>::CreateInstance<int>(3, 5).Length, pcf_current_information);
+    }
+    
+    void CreateTwoDimensionalArrayWithCreateInstanceWithLengthArraySpecified() {
+      Assert::AreEqual(2, Array<>::CreateInstance<int, 2>({3, 5}).Rank, pcf_current_information);
+      Assert::AreEqual(15, Array<>::CreateInstance<int, 2>({3, 5}).Length, pcf_current_information);
+    }
+    
+    void CreateThreeDimensionalArrayWithCreateInstance() {
+      Assert::AreEqual(3, Array<>::CreateInstance<int>(3, 5, 2).Rank, pcf_current_information);
+      Assert::AreEqual(30, Array<>::CreateInstance<int>(3, 5, 2).Length, pcf_current_information);
+    }
+    
+    void CreateThreeDimensionalArrayWithCreateInstanceWithLengthArraySpecified() {
+      Assert::AreEqual(3, Array<>::CreateInstance<int, 3>({3, 5, 2}).Rank, pcf_current_information);
+      Assert::AreEqual(30, Array<>::CreateInstance<int, 3>({3, 5, 2}).Length, pcf_current_information);
+    }
+    
+    void CreateFourDimensionalArrayWithCreateInstance() {
+      Assert::AreEqual(4, Array<>::CreateInstance<int, 4>({3, 5, 2, 4}).Rank, pcf_current_information);
+      Assert::AreEqual(120, Array<>::CreateInstance<int, 4>({3, 5, 2, 4}).Length, pcf_current_information);
+    }
     
     void ConstructorEmpty() {
       Array<int32> a;
@@ -95,9 +129,15 @@ namespace PcfUnitTests {
       Assert::AreEqual(a3[8], 90, pcf_current_information);
       Assert::Throws<ArgumentOutOfRangeException>(pcf_delegate {a3[9];}, pcf_current_information);
     }
-    
   };
   
+  pcf_test(ArrayTest, CreateOneDimensionalArrayWithCreateInstance)
+  pcf_test(ArrayTest, CreateOneDimensionalArrayWithCreateInstanceWithLengthArraySpecified)
+  pcf_test(ArrayTest, CreateTwoDimensionalArrayWithCreateInstance)
+  pcf_test(ArrayTest, CreateTwoDimensionalArrayWithCreateInstanceWithLengthArraySpecified)
+  pcf_test(ArrayTest, CreateThreeDimensionalArrayWithCreateInstance)
+  pcf_test(ArrayTest, CreateThreeDimensionalArrayWithCreateInstanceWithLengthArraySpecified)
+  pcf_test(ArrayTest, CreateFourDimensionalArrayWithCreateInstance)
   pcf_test(ArrayTest, ConstructorEmpty)
   pcf_test(ArrayTest, Length)
   pcf_test(ArrayTest, AccessExceptions)

@@ -478,6 +478,8 @@ namespace Pcf {
       bool Equals(const object& obj) const override {return this->GenericArrayObject<T, TAllocator>::Equals(obj);}
       
     private:
+      friend class Array<>;
+      Array(const Array<int32>& lengths, bool) : GenericArrayObject<T, TAllocator>(lengths) {}
       int32 GetRank() const override {return rank;}
     };
     
@@ -538,9 +540,6 @@ namespace Pcf {
       Array(const Array&& array) : GenericArrayObject<T, TAllocator>(Move((GenericArrayObject<T, TAllocator>&&)array)) {}
       explicit Array(const std::vector<T>& array) : GenericArrayObject<T, TAllocator>(array) {}
       Array(InitializerList<T> il) : GenericArrayObject<T, TAllocator>(il) {}
-    private:
-      friend class Array<>;
-      Array(const Array<int32, 1>& lengths, bool) : GenericArrayObject<T, TAllocator>(lengths) {}
     public:
       Array& operator=(const Array& array) {
         this->GenericArrayObject<T, TAllocator>::operator=(array);
@@ -650,6 +649,8 @@ namespace Pcf {
       void SetValue(const T& value, int32 index) { this->operator()(index) = value; }
       
     private:
+      friend class Array<>;
+      Array(const Array<int32>& lengths, bool) : GenericArrayObject<T, TAllocator>(lengths) {}
       int32 GetRank() const override {return 1;}
     };
     
@@ -740,6 +741,8 @@ namespace Pcf {
       void SetValue(const T& value, int32 index1, int32 index2) { this->operator()(index1, index2) = value; }
       
     private:
+      friend class Array<>;
+      Array(const Array<int32>& lengths, bool) : GenericArrayObject<T, TAllocator>(lengths) {}
       int32 GetRank() const override {return 2;}
     };
     
@@ -836,6 +839,8 @@ namespace Pcf {
       void SetValue(const T& value, int32 index1, int32 index2, int32 index3)  { this->operator()(index1, index2, index3) = value; }
       
     private:
+      friend class Array<>;
+      Array(const Array<int32>& lengths, bool) : GenericArrayObject<T, TAllocator>(lengths) {}
       int32 GetRank() const override {return 3;}
     };
     
@@ -1034,7 +1039,7 @@ namespace Pcf {
       /// @remarks Pointer-type elements are initialized to null. Value-type elements are initialized to zero.
       /// @remarks This method is an O(n) operation, where n is length.
       template<typename T, typename TAllocator = Allocator<T>>
-      static Array<T, 1, TAllocator> CreateInstance(int32 length) {return Array<T, 1, TAllocator>({length}, true);}
+      static Array<T, 1, TAllocator> CreateInstance(int32 length) {return Array<T, 1, TAllocator>(length);}
       
       /// @brief Creates a two-dimensional Array of the specified Type and dimension lengths, with zero-based indexing.
       /// @param length1 The size of the first dimension of the Array to create.
@@ -1074,7 +1079,7 @@ namespace Pcf {
       /// @remarks Pointer-type elements are initialized to null. Value-type elements are initialized to zero.
       /// @remarks This method is an O(n) operation, where n is length.
       template<typename T, int32 Rank, typename TAllocator = Allocator<T>>
-      static Array<T, Rank, TAllocator> CreateInstance(const Array<int32>& lengths) {return Array<T, Rank, TAllocator>(lengths);}
+      static Array<T, Rank, TAllocator> CreateInstance(const Array<int32>& lengths) {return Array<T, Rank, TAllocator>(lengths, true);}
       
       /// @brief Determines whether the List<T> contains elements that match the conditions defined by the specified predicate..
       /// @param match The Predicate pointer function that defines the conditions of the elements to search for.

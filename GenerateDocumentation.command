@@ -5,12 +5,3 @@ echo "Generate documentations..."
 cd ~/Projects/Pcf/bin
 rm -r ~/Projects/Pcf/bin/Help
 xcodebuild -target documentation -configuration Debug
-
-echo "Publish documentation..."
-cd ~/Projects/Pcf-Doc
-git pull
-rm -r ~/Projects/Pcf-Doc/docs
-cp -R ~/Projects/Pcf/bin/Help/html/. ~/Projects/Pcf-Doc/docs
-git add --all
-git commit -m "add documentations"
-git push
