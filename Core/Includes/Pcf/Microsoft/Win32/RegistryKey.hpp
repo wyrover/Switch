@@ -372,7 +372,7 @@ namespace Pcf {
               System::Array<byte> bytes;
               System::String toParse = s;
               while (! toParse.IsEmpty()) {
-                bytes.Resize(bytes.Length + 1);
+                System::Array<>::Resize(bytes, bytes.Length + 1);
                 bytes[bytes.Length - 1] = System::Byte::Parse(toParse.Remove(2), 16);
                 toParse = toParse.Substring(2);
               }
@@ -388,7 +388,7 @@ namespace Pcf {
               System::Array<System::String> strings;
               System::String toParse = s;
               while (! toParse.IsEmpty()) {
-                strings.Resize(strings.Length + 1);
+                System::Array<>::Resize(strings, strings.Length + 1);
                 strings[strings.Length - 1] = toParse.Remove(toParse.IndexOf("</String>")).Substring(toParse.IndexOf("<String>") + 8);
                 toParse = toParse.Substring(toParse.IndexOf("</String>") + 9);
               }

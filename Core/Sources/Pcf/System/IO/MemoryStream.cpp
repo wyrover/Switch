@@ -37,7 +37,7 @@ void MemoryStream::SetLength(int64 value) {
         this->data->dynamicBuffer.Add(0);
     }
   } else {
-    this->data->staticBuffer->Resize((int32)value);
+    System::Array<>::Resize(*this->data->staticBuffer, (int32)value);
   }
 }
 

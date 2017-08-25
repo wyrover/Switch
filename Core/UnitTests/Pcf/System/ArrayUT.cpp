@@ -132,11 +132,11 @@ namespace PcfUnitTests {
     EXPECT_EQ(10, MyType::initCounter);
     EXPECT_EQ(0, MyType::copyCounter);
     
-    array2.Resize(12);
+    Array<>::Resize(array2, 12);
     EXPECT_LE(12, MyType::initCounter);
     EXPECT_LE(12, MyType::copyCounter);
     
-    array2.Resize(5);
+    Array<>::Resize(array2, 5);
     EXPECT_LE(12, MyType::initCounter);
     EXPECT_LE(12, MyType::copyCounter);
   }
@@ -186,43 +186,43 @@ namespace PcfUnitTests {
     EXPECT_THROW(a1[-1], ArgumentOutOfRangeException);
     EXPECT_THROW(a1[0], ArgumentOutOfRangeException);
     
-    Array<Int32>::Resize(a1, 1);
+    Array<>::Resize(a1, 1);
     Assert::AreEqual(a1.Length, 1);
     Assert::AreEqual(a1[0], 0);
     EXPECT_THROW(a1[1], ArgumentOutOfRangeException);
     
-    Array<Int32>::Resize(a1, 10);
+    Array<>::Resize(a1, 10);
     Assert::AreEqual(a1.Length, 10);
     Assert::AreEqual(a1[9], 0);
     EXPECT_THROW(a1[10], ArgumentOutOfRangeException);
     
-    Array<Int32>::Resize(a1, 5);
+    Array<>::Resize(a1, 5);
     Assert::AreEqual(a1.Length, 5);
     Assert::AreEqual(a1[4], 0);
     EXPECT_THROW(a1[5], ArgumentOutOfRangeException);
     
-    // No Resize for an Array
-    Array<string, 2> a2(Int32(0), Int32(0));
-    Assert::AreEqual(a2.Length, 0);
-    EXPECT_THROW((Array<string, 2>::Resize(a2, 10)), ArgumentException);
+    // No Resize for a multi-dimensional Array
+    //Array<string, 2> a2(Int32(0), Int32(0));
+    //Assert::AreEqual(a2.Length, 0);
+    //EXPECT_THROW((Array<>::Resize(a2, 10)), ArgumentException);
     
     Int32 a3[] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
     Array<Int32> a4(a3, 0);
     EXPECT_THROW(a4[0], ArgumentOutOfRangeException);
     
-    Array<Int32>::Resize(a4, 3);
+    Array<>::Resize(a4, 3);
     Assert::AreEqual(a4.Length, 3);
     Assert::AreEqual(a4[2], 0);
     EXPECT_THROW(a4[4], ArgumentOutOfRangeException);
-    Array<Int32>::Resize(a4, 2);
+    Array<>::Resize(a4, 2);
     EXPECT_THROW(a4[2], ArgumentOutOfRangeException);
     
-    Array<Int32>::Resize(a4, 6);
+    Array<>::Resize(a4, 6);
     Assert::AreEqual(a4.Length, 6);
     Assert::AreEqual(a4[5], 0);
     EXPECT_THROW(a4[6], ArgumentOutOfRangeException);
     
-    Array<Int32>::Resize(a4, 10);
+    Array<>::Resize(a4, 10);
     Assert::AreEqual(a4.Length, 10);
   }
   
@@ -300,9 +300,9 @@ namespace PcfUnitTests {
     Assert::AreEqual(array1[3], string("Reset"));
     EXPECT_NE(array2[3], string("Reset"));
     
-    Array<string>::Resize(array1, 3);
+    Array<>::Resize(array1, 3);
     Assert::AreEqual(array1.Length, 3);
-    Array<string>::Resize(array1,6);
+    Array<>::Resize(array1,6);
     Assert::AreEqual(array1.Length, 6);
   }
   

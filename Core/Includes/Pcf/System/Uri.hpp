@@ -409,7 +409,7 @@ namespace Pcf {
           int32 length = 1;
             
           if (absolutePath[startIndex] == '/') {
-            Array<String>::Resize(segments, segments.Length+1);
+            Array<>::Resize(segments, segments.Length+1);
             segments[segments.Length-1] = absolutePath.Substring(startIndex, length);
             startIndex += length;
           }
@@ -419,7 +419,7 @@ namespace Pcf {
             if (length == -1)
               length = absolutePath.Length() - startIndex;
                 
-            Array<String>::Resize(segments, segments.Length+1);
+            Array<>::Resize(segments, segments.Length+1);
             segments[segments.Length-1] = absolutePath.Substring(startIndex, length);
             startIndex += length;
           }
