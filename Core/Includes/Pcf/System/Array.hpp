@@ -408,6 +408,20 @@ namespace Pcf {
       object syncRoot;
     };
     
+    /// @brief Provides methods for creating, manipulating, searching, && sorting arrays, thereby serving as the base class for all arrays.
+    /// @remarks The Array class is not part of the System.Collections namespaces. However, it is still considered a collection because it is based on the IList interface.
+    /// @remarks An element is a value in an Array. The length of an Array is the total number of elements it can contain. The lower bound of an Array is the index of its first element. An Array can have any lower bound, but it has a lower bound of zero by default. A different lower bound can be defined when creating an instance of the Array class using CreateInstance.A multidimensional Array can have different bounds for each dimension. An array can have a maximum of 32 dimensions.
+    /// @remarks Unlike the classes in the System.Collections namespaces, Array has a fixed capacity. To increase the capacity, you must create a new Array object with the required capacity, copy the elements from the old Array object to the new one, and delete the old Array.
+    /// @remarks The Array class implements the System.Collections.Generic.IList<T>, System.Collections.Generic.ICollection<T>, and System.Collections.Generic.IEnumerable<T> generic interfaces. The implementations are provided to arrays at run time, and as a result, the generic interfaces do not appear in the declaration syntax for the Array class. In addition, there are no reference topics for interface members that are accessible only by casting an array to the generic interface type (explicit interface implementations). The key thing to be aware of when you cast an array to one of these interfaces is that members which add, insert, or remove elements throw NotSupportedException.
+    /// @remarks The Array.Copy method copies elements not only between arrays of the same type but also between standard arrays of different types; it handles type casting automatically.
+    /// @remarks Some methods, such as CreateInstance, Copy, CopyTo, GetValue, and SetValue, provide overloads that accept 64-bit integers as parameters to accommodate large capacity arrays. LongLength and GetLongLength return 64-bit integers indicating the length of the array.
+    /// @remarks The Array is not guaranteed to be sorted. You must sort the Array prior to performing operations (such as BinarySearch) that require the Array to be sorted.
+    /// @par Examples
+    /// The following code example demonstrates different methods to create an array.
+    /// @include Array1.cpp
+    /// @par Examples
+    /// The following code example creates && initializes an Array && displays its properties && its elements.
+    /// @include Array2.cpp
     template<typename T, int32 rank, typename TAllocator>
     class Array : public GenericArrayObject<T, TAllocator>, public ICloneable {
     public:
@@ -483,6 +497,20 @@ namespace Pcf {
       int32 GetRank() const override {return rank;}
     };
     
+    /// @brief Provides methods for creating, manipulating, searching, && sorting arrays, thereby serving as the base class for all arrays.
+    /// @remarks The Array class is not part of the System.Collections namespaces. However, it is still considered a collection because it is based on the IList interface.
+    /// @remarks An element is a value in an Array. The length of an Array is the total number of elements it can contain. The lower bound of an Array is the index of its first element. An Array can have any lower bound, but it has a lower bound of zero by default. A different lower bound can be defined when creating an instance of the Array class using CreateInstance.A multidimensional Array can have different bounds for each dimension. An array can have a maximum of 32 dimensions.
+    /// @remarks Unlike the classes in the System.Collections namespaces, Array has a fixed capacity. To increase the capacity, you must create a new Array object with the required capacity, copy the elements from the old Array object to the new one, and delete the old Array.
+    /// @remarks The Array class implements the System.Collections.Generic.IList<T>, System.Collections.Generic.ICollection<T>, and System.Collections.Generic.IEnumerable<T> generic interfaces. The implementations are provided to arrays at run time, and as a result, the generic interfaces do not appear in the declaration syntax for the Array class. In addition, there are no reference topics for interface members that are accessible only by casting an array to the generic interface type (explicit interface implementations). The key thing to be aware of when you cast an array to one of these interfaces is that members which add, insert, or remove elements throw NotSupportedException.
+    /// @remarks The Array.Copy method copies elements not only between arrays of the same type but also between standard arrays of different types; it handles type casting automatically.
+    /// @remarks Some methods, such as CreateInstance, Copy, CopyTo, GetValue, and SetValue, provide overloads that accept 64-bit integers as parameters to accommodate large capacity arrays. LongLength and GetLongLength return 64-bit integers indicating the length of the array.
+    /// @remarks The Array is not guaranteed to be sorted. You must sort the Array prior to performing operations (such as BinarySearch) that require the Array to be sorted.
+    /// @par Examples
+    /// The following code example demonstrates different methods to create an array.
+    /// @include Array1.cpp
+    /// @par Examples
+    /// The following code example creates && initializes an Array && displays its properties && its elements.
+    /// @include Array2.cpp
     template<typename T, typename TAllocator>
     class Array<T, 1, TAllocator> : public GenericArrayObject<T, TAllocator>, public ICloneable {
     public:
@@ -654,6 +682,20 @@ namespace Pcf {
       int32 GetRank() const override {return 1;}
     };
     
+    /// @brief Provides methods for creating, manipulating, searching, && sorting arrays, thereby serving as the base class for all arrays.
+    /// @remarks The Array class is not part of the System.Collections namespaces. However, it is still considered a collection because it is based on the IList interface.
+    /// @remarks An element is a value in an Array. The length of an Array is the total number of elements it can contain. The lower bound of an Array is the index of its first element. An Array can have any lower bound, but it has a lower bound of zero by default. A different lower bound can be defined when creating an instance of the Array class using CreateInstance.A multidimensional Array can have different bounds for each dimension. An array can have a maximum of 32 dimensions.
+    /// @remarks Unlike the classes in the System.Collections namespaces, Array has a fixed capacity. To increase the capacity, you must create a new Array object with the required capacity, copy the elements from the old Array object to the new one, and delete the old Array.
+    /// @remarks The Array class implements the System.Collections.Generic.IList<T>, System.Collections.Generic.ICollection<T>, and System.Collections.Generic.IEnumerable<T> generic interfaces. The implementations are provided to arrays at run time, and as a result, the generic interfaces do not appear in the declaration syntax for the Array class. In addition, there are no reference topics for interface members that are accessible only by casting an array to the generic interface type (explicit interface implementations). The key thing to be aware of when you cast an array to one of these interfaces is that members which add, insert, or remove elements throw NotSupportedException.
+    /// @remarks The Array.Copy method copies elements not only between arrays of the same type but also between standard arrays of different types; it handles type casting automatically.
+    /// @remarks Some methods, such as CreateInstance, Copy, CopyTo, GetValue, and SetValue, provide overloads that accept 64-bit integers as parameters to accommodate large capacity arrays. LongLength and GetLongLength return 64-bit integers indicating the length of the array.
+    /// @remarks The Array is not guaranteed to be sorted. You must sort the Array prior to performing operations (such as BinarySearch) that require the Array to be sorted.
+    /// @par Examples
+    /// The following code example demonstrates different methods to create an array.
+    /// @include Array1.cpp
+    /// @par Examples
+    /// The following code example creates && initializes an Array && displays its properties && its elements.
+    /// @include Array2.cpp
     template<typename T, typename TAllocator>
     class Array<T, 2, TAllocator> : public GenericArrayObject<T, TAllocator>, public ICloneable {
     public:
@@ -746,6 +788,20 @@ namespace Pcf {
       int32 GetRank() const override {return 2;}
     };
     
+    /// @brief Provides methods for creating, manipulating, searching, && sorting arrays, thereby serving as the base class for all arrays.
+    /// @remarks The Array class is not part of the System.Collections namespaces. However, it is still considered a collection because it is based on the IList interface.
+    /// @remarks An element is a value in an Array. The length of an Array is the total number of elements it can contain. The lower bound of an Array is the index of its first element. An Array can have any lower bound, but it has a lower bound of zero by default. A different lower bound can be defined when creating an instance of the Array class using CreateInstance.A multidimensional Array can have different bounds for each dimension. An array can have a maximum of 32 dimensions.
+    /// @remarks Unlike the classes in the System.Collections namespaces, Array has a fixed capacity. To increase the capacity, you must create a new Array object with the required capacity, copy the elements from the old Array object to the new one, and delete the old Array.
+    /// @remarks The Array class implements the System.Collections.Generic.IList<T>, System.Collections.Generic.ICollection<T>, and System.Collections.Generic.IEnumerable<T> generic interfaces. The implementations are provided to arrays at run time, and as a result, the generic interfaces do not appear in the declaration syntax for the Array class. In addition, there are no reference topics for interface members that are accessible only by casting an array to the generic interface type (explicit interface implementations). The key thing to be aware of when you cast an array to one of these interfaces is that members which add, insert, or remove elements throw NotSupportedException.
+    /// @remarks The Array.Copy method copies elements not only between arrays of the same type but also between standard arrays of different types; it handles type casting automatically.
+    /// @remarks Some methods, such as CreateInstance, Copy, CopyTo, GetValue, and SetValue, provide overloads that accept 64-bit integers as parameters to accommodate large capacity arrays. LongLength and GetLongLength return 64-bit integers indicating the length of the array.
+    /// @remarks The Array is not guaranteed to be sorted. You must sort the Array prior to performing operations (such as BinarySearch) that require the Array to be sorted.
+    /// @par Examples
+    /// The following code example demonstrates different methods to create an array.
+    /// @include Array1.cpp
+    /// @par Examples
+    /// The following code example creates && initializes an Array && displays its properties && its elements.
+    /// @include Array2.cpp
     template<typename T, typename TAllocator>
     class Array<T, 3, TAllocator> : public GenericArrayObject<T, TAllocator>, public ICloneable {
     public:
@@ -844,6 +900,20 @@ namespace Pcf {
       int32 GetRank() const override {return 3;}
     };
     
+    /// @brief Provides methods for creating, manipulating, searching, && sorting arrays, thereby serving as the base class for all arrays.
+    /// @remarks The Array class is not part of the System.Collections namespaces. However, it is still considered a collection because it is based on the IList interface.
+    /// @remarks An element is a value in an Array. The length of an Array is the total number of elements it can contain. The lower bound of an Array is the index of its first element. An Array can have any lower bound, but it has a lower bound of zero by default. A different lower bound can be defined when creating an instance of the Array class using CreateInstance.A multidimensional Array can have different bounds for each dimension. An array can have a maximum of 32 dimensions.
+    /// @remarks Unlike the classes in the System.Collections namespaces, Array has a fixed capacity. To increase the capacity, you must create a new Array object with the required capacity, copy the elements from the old Array object to the new one, and delete the old Array.
+    /// @remarks The Array class implements the System.Collections.Generic.IList<T>, System.Collections.Generic.ICollection<T>, and System.Collections.Generic.IEnumerable<T> generic interfaces. The implementations are provided to arrays at run time, and as a result, the generic interfaces do not appear in the declaration syntax for the Array class. In addition, there are no reference topics for interface members that are accessible only by casting an array to the generic interface type (explicit interface implementations). The key thing to be aware of when you cast an array to one of these interfaces is that members which add, insert, or remove elements throw NotSupportedException.
+    /// @remarks The Array.Copy method copies elements not only between arrays of the same type but also between standard arrays of different types; it handles type casting automatically.
+    /// @remarks Some methods, such as CreateInstance, Copy, CopyTo, GetValue, and SetValue, provide overloads that accept 64-bit integers as parameters to accommodate large capacity arrays. LongLength and GetLongLength return 64-bit integers indicating the length of the array.
+    /// @remarks The Array is not guaranteed to be sorted. You must sort the Array prior to performing operations (such as BinarySearch) that require the Array to be sorted.
+    /// @par Examples
+    /// The following code example demonstrates different methods to create an array.
+    /// @include Array1.cpp
+    /// @par Examples
+    /// The following code example creates && initializes an Array && displays its properties && its elements.
+    /// @include Array2.cpp
     template<>
     class Array<> pcf_static {
     public:

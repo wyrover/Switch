@@ -16,7 +16,7 @@ namespace Examples {
       PrintIndexAndValues(myArr);
       
       // Create a read-only collection wrapper around the array.
-      System::Collections::ObjectModel::ReadOnlyCollection<string> myList = Array<string>::AsReadOnly(myArr);
+      System::Collections::ObjectModel::ReadOnlyCollection<string> myList = Array<>::AsReadOnly(myArr);
       
       // Display the values of the read-only IList.
       Console::WriteLine("The read-only IList contains the following values:");
