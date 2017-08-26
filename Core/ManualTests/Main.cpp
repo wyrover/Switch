@@ -7,7 +7,6 @@ using namespace System;
 namespace Examples {
   class Program {
   public:
-    
     // The main entry point for the application.
     static void Main() {
       Array<int> a1 = {1, 2, 3, 4, 5, 6, 7, 8};

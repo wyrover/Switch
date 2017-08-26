@@ -1163,8 +1163,8 @@ namespace Pcf {
       /// @par Examples
       /// The RemoveAll method is used to remove all entries ending with "saurus". It traverses the list from the beginning, passing each element in turn to the EndsWithSaurus method. The element is removed if the EndsWithSaurus method returns true.
       /// @include ListExists.cpp
-      template<typename T, typename TAllocator>
-      static bool Exists(const GenericArrayObject<T, TAllocator>& array, Predicate<const T&> match) {
+      template<typename T, typename TAllocator = Allocator<T>>
+      static bool Exists(const GenericArrayObject<T, TAllocator>& array, Predicate<T> match) {
         for (const T& elem : array)
           if (match(elem))
             return true;

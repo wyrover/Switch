@@ -65,7 +65,7 @@ namespace Examples {
         Console::Write(msg);
         keyPressed = Console::ReadKey();
         Console::WriteLine();
-        if (validChars.Exists(pcf_delegate(const char32& ch) {return Char(ch).Equals(Char::ToUpper(keyPressed.KeyChar));}))
+        if (Array<>::Exists<char32>(validChars, pcf_delegate(const char32& ch) {return Char(ch).Equals(Char::ToUpper(keyPressed.KeyChar));}))
           valid = true;
         
       } while (! valid);
