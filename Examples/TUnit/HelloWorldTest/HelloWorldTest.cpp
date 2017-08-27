@@ -21,7 +21,7 @@ namespace UnitTests {
   pcf_test (HelloWorldTest, CreateStringFromChar32Array)
 }
 
-//
+// This code produces the following output:
 //
 // Start 2 tests from 1 test case
 //   Start 2 tests from HelloWorldTest
