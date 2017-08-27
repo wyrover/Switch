@@ -2,8 +2,6 @@ cmake_minimum_required(VERSION 3.2)
 
 project(Assert)
 
-set(CMAKE_CXX_STANDARD 14)
-
 find_package(Pcf REQUIRED)
-add_executable(${PROJECT_NAME} Sources/${PROJECT_NAME}.cpp)
-target_link_libraries(${PROJECT_NAME} ${Pcf_WITH_TUNIT_MAIN_LIBRARIES})
+add_executable(Assert Assert.cpp)
+target_link_libraries(${PROJECT_NAME} Pcf.TUnit.Main)
