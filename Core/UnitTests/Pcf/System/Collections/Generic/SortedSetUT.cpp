@@ -7,7 +7,6 @@ using namespace System::Collections::Generic;
 using namespace TUnit;
 
 namespace {
-
   SortedSet<char> cset(const char* s) {
     SortedSet<char> set;
     int len = static_cast<int>(strlen(s));
@@ -104,16 +103,16 @@ namespace {
     SortedSet<Person> set_n(new NameComparer());
     set_sn.Add(Person("Peter","PARKER"));
     set_sn.Add(Person("Gwen","STACY"));
-    set_sn.Add(Person("Mary Jane","WATON"));
+    set_sn.Add(Person("Mary Jane","WATSON"));
     set_sn.Add(Person("Harry","OSBORN"));
 
     set_n.Add(Person("Peter","PARKER"));
     set_n.Add(Person("Gwen","STACY"));
-    set_n.Add(Person("Mary Jane","WATON"));
+    set_n.Add(Person("Mary Jane","WATSON"));
     set_n.Add(Person("Harry","OSBORN"));
 
-    string by_surname[4] = {"Harry OSBORN", "Peter PARKER", "Gwen STACY", "Mary Jane WATON"};
-    string by_name[4] = {"Gwen STACY", "Harry OSBORN", "Mary Jane WATON", "Peter PARKER"};
+    string by_surname[4] = {"Harry OSBORN", "Peter PARKER", "Gwen STACY", "Mary Jane WATSON"};
+    string by_name[4] = {"Gwen STACY", "Harry OSBORN", "Mary Jane WATSON", "Peter PARKER"};
 
     int i=0;
     for (Person p : set_sn)
@@ -128,7 +127,7 @@ namespace {
     List<Person> list;
     list.Add(Person("Peter","PARKER"));
     list.Add(Person("Gwen","STACY"));
-    list.Add(Person("Mary Jane","WATON"));
+    list.Add(Person("Mary Jane","WATSON"));
     list.Add(Person("Harry","OSBORN"));
     SortedSet<Person> set_n(list, new NameComparer());
     string by_name[4] = {"Gwen STACY", "Harry OSBORN", "Mary Jane WATSON", "Peter PARKER"};
