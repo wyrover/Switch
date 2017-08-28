@@ -4,4 +4,4 @@ project(TestFixture)
 
 find_package(Pcf REQUIRED)
 add_executable(TestFixture TestFixture.cpp)
-target_link_libraries(TestFixture Pcf.TUnit.MAin)
+target_link_libraries(TestFixture Pcf.TUnit.Main)

@@ -225,7 +225,7 @@ namespace Test {
 }
 
 int main(int argc, char* argv[]) {
-  Test::Person person("Yves", "Fiumefreddo", 45, {"Martin", "Arthur"}, Test::Role("Senior Software Architect", 42));
+  Test::Person person("Robert", "March", 45, {"Meg", "Jo", "Beth", "Amy"}, Test::Role("Doctor", 42));
   Console::WriteLine("person = {0}", person);
   refptr<System::IO::Stream> stream = pcf_new<System::IO::MemoryStream>();
   
@@ -233,7 +233,7 @@ int main(int argc, char* argv[]) {
   serializer.Serialize(stream, person);
   
   /*
-   Test::Person person("Yves", "Fiumefreddo", 45, {"Martin", "Arthur"}, Test::Role("Senior Software Architect", 42));
+   Test::Person person("Robert", "March", 45, {"Meg", "Jo", "Beth", "Amy"}, Test::Role("Doctor", 42));
    Console::WriteLine("person = {0}", person);
    Sp<System::IO::Stream> stream = pcf_new<System::IO::MemoryStream>();
    

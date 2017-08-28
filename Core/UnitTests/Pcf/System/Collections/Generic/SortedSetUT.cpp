@@ -131,7 +131,7 @@ namespace {
     list.Add(Person("Mary Jane","WATON"));
     list.Add(Person("Harry","OSBORN"));
     SortedSet<Person> set_n(list, new NameComparer());
-    string by_name[4] = {"Gwen STACY", "Harry OSBORN", "Mary Jane WATON", "Peter PARKER"};
+    string by_name[4] = {"Gwen STACY", "Harry OSBORN", "Mary Jane WATSON", "Peter PARKER"};
     int i=0;
     for (Person p : set_n)
       EXPECT_EQ(by_name[i++],p.ToString());
