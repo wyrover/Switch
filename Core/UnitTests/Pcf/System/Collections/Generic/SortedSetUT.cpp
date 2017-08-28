@@ -102,18 +102,18 @@ namespace {
   TEST(SortedSet, ConstructorIComparer) {
     SortedSet<Person> set_sn;
     SortedSet<Person> set_n(new NameComparer());
-    set_sn.Add(Person("Yves","FIUMEFREDDO"));
-    set_sn.Add(Person("Jean-Francois","DEGBOMONT"));
-    set_sn.Add(Person("Jean-Charles","DRAPPIER"));
-    set_sn.Add(Person("Luc","LEMAIRE"));
+    set_sn.Add(Person("Peter","PARKER"));
+    set_sn.Add(Person("Gwen","STACY"));
+    set_sn.Add(Person("Mary Jane","WATON"));
+    set_sn.Add(Person("Harry","OSBORN"));
 
-    set_n.Add(Person("Yves","FIUMEFREDDO"));
-    set_n.Add(Person("Jean-Francois","DEGBOMONT"));
-    set_n.Add(Person("Jean-Charles","DRAPPIER"));
-    set_n.Add(Person("Luc","LEMAIRE"));
+    set_n.Add(Person("Peter","PARKER"));
+    set_n.Add(Person("Gwen","STACY"));
+    set_n.Add(Person("Mary Jane","WATON"));
+    set_n.Add(Person("Harry","OSBORN"));
 
-    string by_surname[4] = {"Jean-Francois DEGBOMONT","Jean-Charles DRAPPIER","Yves FIUMEFREDDO","Luc LEMAIRE"};
-    string by_name[4] = {"Jean-Charles DRAPPIER","Jean-Francois DEGBOMONT","Luc LEMAIRE","Yves FIUMEFREDDO"};
+    string by_surname[4] = {"Harry OSBORN", "Peter PARKER", "Gwen STACY", "Mary Jane WATON"};
+    string by_name[4] = {"Gwen STACY", "Harry OSBORN", "Mary Jane WATON", "Peter PARKER"};
 
     int i=0;
     for (Person p : set_sn)
@@ -126,12 +126,12 @@ namespace {
 
   TEST(SortedSet, ConstructorIEnumerableIComparer) {
     List<Person> list;
-    list.Add(Person("Yves","FIUMEFREDDO"));
-    list.Add(Person("Jean-Francois","DEGBOMONT"));
-    list.Add(Person("Jean-Charles","DRAPPIER"));
-    list.Add(Person("Luc","LEMAIRE"));
+    list.Add(Person("Peter","PARKER"));
+    list.Add(Person("Gwen","STACY"));
+    list.Add(Person("Mary Jane","WATON"));
+    list.Add(Person("Harry","OSBORN"));
     SortedSet<Person> set_n(list, new NameComparer());
-    string by_name[4] = {"Jean-Charles DRAPPIER","Jean-Francois DEGBOMONT","Luc LEMAIRE","Yves FIUMEFREDDO"};
+    string by_name[4] = {"Gwen STACY", "Harry OSBORN", "Mary Jane WATON", "Peter PARKER"};
     int i=0;
     for (Person p : set_n)
       EXPECT_EQ(by_name[i++],p.ToString());
@@ -274,20 +274,20 @@ namespace {
 
   TEST(SortedSet, SetEquals) {
     SortedSet<Person> set1;
-    set1.Add(Person("Yves","FIUMEFREDDO"));
-    set1.Add(Person("Jean-Francois","DEGBOMONT"));
-    set1.Add(Person("Jean-Charles","DRAPPIER"));
-    set1.Add(Person("Luc","LEMAIRE"));
+    set1.Add(Person("Peter","PARKER"));
+    set1.Add(Person("Gwen","STACY"));
+    set1.Add(Person("Mary Jane","WATON"));
+    set1.Add(Person("Harry","OSBORN"));
 
     SortedSet<Person> set2;
-    set2.Add(Person("Yves","FIUMEFREDDO"));
-    set2.Add(Person("Jean-Francois","DEGBOMONT"));
-    set2.Add(Person("Jean-Charles","DRAPPIER"));
+    set2.Add(Person("Peter","PARKER"));
+    set2.Add(Person("Gwen","STACY"));
+    set2.Add(Person("Mary Jane","WATON"));
 
     SortedSet<Person> set3(new NameComparer());
-    set3.Add(Person("Yves","FIUMEFREDDO"));
-    set3.Add(Person("Jean-Francois","DEGBOMONT"));
-    set3.Add(Person("Jean-Charles","DRAPPIER"));
+    set3.Add(Person("Peter","PARKER"));
+    set3.Add(Person("Gwen","STACY"));
+    set3.Add(Person("Mary Jane","WATON"));
 
     EXPECT_FALSE(set1.SetEquals(set2));
     EXPECT_FALSE(set2.SetEquals(set1));
@@ -297,12 +297,12 @@ namespace {
     EXPECT_TRUE(set2.SetEquals(set3));
     EXPECT_TRUE(set3.SetEquals(set2));
 
-    set2.Add(Person("Luc","LEMAIRE"));
+    set2.Add(Person("Harry","OSBORN"));
 
     EXPECT_TRUE(set1.SetEquals(set2));
     EXPECT_TRUE(set2.SetEquals(set1));
 
-    set3.Add(Person("Luc","LEMAIRE"));
+    set3.Add(Person("Harry","OSBORN"));
     EXPECT_TRUE(set1.SetEquals(set3));
     EXPECT_TRUE(set3.SetEquals(set1));
     EXPECT_TRUE(set2.SetEquals(set3));
@@ -622,20 +622,20 @@ TEST(SortedSet, UnionWith_NotEmptyAndEmpty) {
 
 TEST(SortedSet, UnionWith_WithComparer) {
   SortedSet<Person> set(new NameOnlyComparer());
-  set.Add(Person("Jean-Francois", "DEGBOMONT"));
-  set.Add(Person("Jean-Charles", "DRAPPIER"));
-  set.Add(Person("Luc", "LEMAIRE"));
-  set.Add(Person("Yves", "FIUMEFREDDO"));
+  set.Add(Person("Gwen", "STACY"));
+  set.Add(Person("Mary Jane", "WATON"));
+  set.Add(Person("Harry", "OSBORN"));
+  set.Add(Person("Peter", "PARKER"));
 
   SortedSet<Person> set2(new NameOnlyComparer());
-  set.Add(Person("Jean-Francois", "DECAUWERS"));
+  set.Add(Person("Gwen", "DECAUWERS"));
   set.Add(Person("Julien", "MICHEL"));
-  set.Add(Person("Jean-Francois", "BERGMANS"));
+  set.Add(Person("Gwen", "BERGMANS"));
 
   set.UnionWith(set2);
   for (Person p : set) {
-    if (p.GetName().Equals("Jean-Francois"))
-      EXPECT_TRUE(string("DEGBOMONT").Equals(p.GetSurname()));
+    if (p.GetName().Equals("Gwen"))
+      EXPECT_TRUE(string("STACY").Equals(p.GetSurname()));
   }
 
 }

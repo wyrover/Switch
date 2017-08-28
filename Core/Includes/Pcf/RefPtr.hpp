@@ -513,6 +513,9 @@ namespace Pcf {
   
   template<typename T, typename ...Args>
   refptr<T> ref_new(Args&&... args) {return refptr<T>(new T(args...));}
+  
+  template<typename T, typename ...Args>
+  refptr<T> gcnew(Args&&... args) {return refptr<T>(new T(args...));}
 }
 
 using namespace Pcf;

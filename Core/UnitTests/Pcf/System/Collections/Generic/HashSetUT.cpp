@@ -189,20 +189,20 @@ TEST(HashSet, CopyToExceptions) {
  
 TEST(HashSet, SetEquals) {
   HashSet<Person> set1;
-  set1.Add(Person("Yves","FIUMEFREDDO"));
-  set1.Add(Person("Jean-Francois","DEGBOMONT"));
-  set1.Add(Person("Jean-Charles","DRAPPIER"));
-  set1.Add(Person("Luc","LEMAIRE"));
+  set1.Add(Person("Peter","PARKER"));
+  set1.Add(Person("Gwen","STACY"));
+  set1.Add(Person("Mary Jane","WATSON"));
+  set1.Add(Person("Harry","OSBORN"));
 
   HashSet<Person> set2;
-  set2.Add(Person("Yves","FIUMEFREDDO"));
-  set2.Add(Person("Jean-Francois","DEGBOMONT"));
-  set2.Add(Person("Jean-Charles","DRAPPIER"));
+  set2.Add(Person("Peter","PARKER"));
+  set2.Add(Person("Gwen","STACY"));
+  set2.Add(Person("Mary Jane","WATSON"));
 
   HashSet<Person> set3(new NameComparer());
-  set3.Add(Person("Yves","FIUMEFREDDO"));
-  set3.Add(Person("Jean-Francois","DEGBOMONT"));
-  set3.Add(Person("Jean-Charles","DRAPPIER"));
+  set3.Add(Person("Peter","PARKER"));
+  set3.Add(Person("Gwen","STACY"));
+  set3.Add(Person("Mary Jane","WATSON"));
 
   EXPECT_FALSE(set1.SetEquals(set2));
   EXPECT_FALSE(set2.SetEquals(set1));
@@ -212,12 +212,12 @@ TEST(HashSet, SetEquals) {
   EXPECT_TRUE(set2.SetEquals(set3));
   EXPECT_TRUE(set3.SetEquals(set2));
 
-  set2.Add(Person("Luc","LEMAIRE"));
+  set2.Add(Person("Harry","OSBORN"));
 
   EXPECT_TRUE(set1.SetEquals(set2));
   EXPECT_TRUE(set2.SetEquals(set1));
 
-  set3.Add(Person("Luc","LEMAIRE"));
+  set3.Add(Person("Harry","OSBORN"));
   EXPECT_TRUE(set1.SetEquals(set3));
   EXPECT_TRUE(set3.SetEquals(set1));
   EXPECT_TRUE(set2.SetEquals(set3));
@@ -488,20 +488,20 @@ TEST(HashSet, UnionWith_NotEmptyAndEmpty) {
 
 TEST(HashSet, UnionWith_WithComparer) {
   HashSet<Person> set(new NameOnlyComparer());
-  set.Add(Person("Jean-Francois", "DEGBOMONT"));
-  set.Add(Person("Jean-Charles", "DRAPPIER"));
-  set.Add(Person("Luc", "LEMAIRE"));
-  set.Add(Person("Yves", "FIUMEFREDDO"));
+  set.Add(Person("Mary Jane", "WATSON"));
+  set.Add(Person("Peter", "PARKER"));
+  set.Add(Person("Gwen", "STACY"));
+  set.Add(Person("Harry", "OSBORN"));
 
   HashSet<Person> set2(new NameOnlyComparer());
-  set.Add(Person("Jean-Francois", "DECAUWERS"));
-  set.Add(Person("Julien", "MICHEL"));
-  set.Add(Person("Jean-Francois", "BERGMANS"));
+  set.Add(Person("Ben", "PARKER"));
+  set.Add(Person("Norman", "OSBORN"));
+  set.Add(Person("May", "PARKER"));
 
   set.UnionWith(set2);
   for (Person p : set) {
-    if (p.GetName().Equals("Julien"))
-      EXPECT_TRUE(string("MICHEL").Equals(p.GetSurname()));
+    if (p.GetName().Equals("Gwen"))
+      EXPECT_TRUE(string("STACY").Equals(p.GetSurname()));
   }
 }
 

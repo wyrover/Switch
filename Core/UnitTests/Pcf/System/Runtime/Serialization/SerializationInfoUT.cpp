@@ -85,14 +85,14 @@ public:
 
 TEST(SerializationInfo, Serialize) {
   Role role;
-  role.RoleName = "Architect";
+  role.RoleName = "Photographer";
   role.Flags = 0x22;
 
   Person person;
   person.Age = 42;
   person.StrAge = "42";
-  person.FirstName = "Yves";
-  person.LastName = "Fiumefreddo";
+  person.FirstName = "Peter";
+  person.LastName = "Parker";
   person.Male = true;
   person.Role = role;
 
@@ -103,8 +103,8 @@ TEST(SerializationInfo, Serialize) {
   EXPECT_EQ("Person", info.GetObjectType());
   EXPECT_EQ(6, info.GetMemberCount());
 
-  EXPECT_EQ("Yves", info.GetString("PrsFirstName"));
-  EXPECT_EQ("Fiumefreddo" , info.GetString("PrsLastName"));
+  EXPECT_EQ("Peter", info.GetString("PrsFirstName"));
+  EXPECT_EQ("Parker" , info.GetString("PrsLastName"));
   
   EXPECT_EQ(42, info.GetInt16("PrsAge"));
   EXPECT_EQ(42, info.GetInt32("PrsAge"));
@@ -134,14 +134,14 @@ TEST(SerializationInfo, Serialize) {
 
 TEST(SerializationInfo, Deserialize) {
   Role role;
-  role.RoleName = "Architect";
+  role.RoleName = "Photographer";
   role.Flags = 0x22;
 
   Person person;
   person.Age = 42;
   person.StrAge = "42";
-  person.FirstName = "Yves";
-  person.LastName = "Fiumefreddo";
+  person.FirstName = "Peter";
+  person.LastName = "Parker";
   person.Male = true;
   person.Role = role;
 
