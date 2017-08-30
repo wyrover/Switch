@@ -32,7 +32,7 @@ DOXYFILE_ENCODING      = UTF-8
 # title of most generated pages and in a few other places.
 # The default value is: My Project.
 
-PROJECT_NAME           = "Portable C++ Framework - Reference Guide"
+PROJECT_NAME           = "Switch - Reference Guide"
 
 # The PROJECT_NUMBER tag can be used to enter a project or revision number. This
 # could be handy for archiving the generated documentation or if some version
@@ -51,7 +51,7 @@ PROJECT_BRIEF          = "Native C++ port of .Net Framework on macOS, Linux and 
 # pixels and the maximum width should not exceed 200 pixels. Doxygen will copy
 # the logo to the output directory.
 
-PROJECT_LOGO           = "@CMAKE_CURRENT_SOURCE_DIR@/Documentations/Images/Pcf-logo 190x80.png"
+PROJECT_LOGO           = "@CMAKE_CURRENT_SOURCE_DIR@/Documentations/Images/Switch80x80.png"
 
 # The OUTPUT_DIRECTORY tag is used to specify the (relative or absolute) path
 # into which the generated documentation will be written. If a relative path is
@@ -866,7 +866,7 @@ EXCLUDE_PATTERNS       =
 # Note that the wildcards are matched against the file with absolute path, so to
 # exclude all test directories use the pattern */test/*
 
-EXCLUDE_SYMBOLS        = pcf_public
+EXCLUDE_SYMBOLS        = sw_public
 
 # The EXAMPLE_PATH tag can be used to specify one or more files or directories
 # that contain example code fragments that are included (see the \include
@@ -1254,7 +1254,7 @@ GENERATE_DOCSET        = YES
 # The default value is: Doxygen generated docs.
 # This tag requires that the tag GENERATE_DOCSET is set to YES.
 
-DOCSET_FEEDNAME        = "Pcf Framework"
+DOCSET_FEEDNAME        = "Switch Framework"
 
 # This tag specifies a string that should uniquely identify the documentation
 # set bundle. This should be a reverse domain-name style string, e.g.
@@ -1262,7 +1262,7 @@ DOCSET_FEEDNAME        = "Pcf Framework"
 # The default value is: org.doxygen.Project.
 # This tag requires that the tag GENERATE_DOCSET is set to YES.
 
-DOCSET_BUNDLE_ID       = pcf.Framework
+DOCSET_BUNDLE_ID       = Switch.Framework
 
 # The DOCSET_PUBLISHER_ID tag specifies a string that should uniquely identify
 # the documentation publisher. This should be a reverse domain-name style
@@ -1270,13 +1270,13 @@ DOCSET_BUNDLE_ID       = pcf.Framework
 # The default value is: org.doxygen.Publisher.
 # This tag requires that the tag GENERATE_DOCSET is set to YES.
 
-DOCSET_PUBLISHER_ID    = pcf.Framework.Pcf
+DOCSET_PUBLISHER_ID    = switch.Framework.Switch
 
 # The DOCSET_PUBLISHER_NAME tag identifies the documentation publisher.
 # The default value is: Publisher.
 # This tag requires that the tag GENERATE_DOCSET is set to YES.
 
-DOCSET_PUBLISHER_NAME  = Pcf
+DOCSET_PUBLISHER_NAME  = Switch
 
 # If the GENERATE_HTMLHELP tag is set to YES then doxygen generates three
 # additional HTML index files: index.hhp, index.hhc, and index.hhk. The
@@ -2069,18 +2069,18 @@ INCLUDE_FILE_PATTERNS  =
 # recursively expanded use the := operator instead of the = operator.
 # This tag requires that the tag ENABLE_PREPROCESSING is set to YES.
 
-PREDEFINED             = "pcf_abstract=: public Abstract" \
-                         "pcf_current_information=CurrentInformation(__FILE__, __LINE__)" \
-                         pcf_delegate=[&] \
-                         pcf_get=[&]() \
-                         pcf_ignore_test= \
-                         "pcf_interface=: public Interface" \
-                         pcf_lock= \
-                         "pcf_set=[&](auto value)" \
-                         pcf_startup= \
-                         "pcf_static=: public Static" \
-                         pcf_test= \
-                         pcf_using=
+PREDEFINED             = "sw_abstract=: public Abstract" \
+                         "sw_current_information=CurrentInformation(__FILE__, __LINE__)" \
+                         sw_delegate=[&] \
+                         sw_get=[&]() \
+                         sw_ignore_test= \
+                         "sw_interface=: public Interface" \
+                         sw_lock= \
+                         "sw_set=[&](auto value)" \
+                         sw_startup= \
+                         "sw_static=: public Static" \
+                         sw_test= \
+                         sw_using=
 
 # If the MACRO_EXPANSION and EXPAND_ONLY_PREDEF tags are set to YES then this
 # tag can be used to specify a list of macro names that should be expanded. The
