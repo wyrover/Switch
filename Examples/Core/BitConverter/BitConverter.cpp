@@ -11,7 +11,7 @@ namespace Examples {
       
       double aDoubl = 0.1111111111111111111;
       float aSingl = 0.1111111111111111111F;
-      long aLong = 1111111111111111111;
+      long long aLong = 1111111111111111111;
       int anInt = 1111111111;
       short aShort = 11111;
       char aChar = '*';

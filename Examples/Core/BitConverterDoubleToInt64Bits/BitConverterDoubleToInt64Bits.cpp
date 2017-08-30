@@ -8,7 +8,7 @@ namespace Examples {
     
     // Reinterpret the double argument as a long.
     static void DoubleToLongBits(double argument) {
-      long longValue;
+      long long longValue;
       longValue = BitConverter::DoubleToInt64Bits(argument);
       
       // Display the resulting long in hexadecimal.
