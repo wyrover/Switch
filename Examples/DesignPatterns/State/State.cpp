@@ -1,6 +1,6 @@
 // State pattern -- Behavioral example
 
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 
@@ -8,7 +8,7 @@ namespace DesignPatterns {
   namespace Behavioral {
     class Context;
     // The 'State' abstract class
-    class State pcf_abstract {
+    class State sw_abstract {
     public:
       virtual void Handle(Context& context) = 0;
     };
@@ -23,8 +23,8 @@ namespace DesignPatterns {
       
       // Gets or sets the state
       Property<refptr<DesignPatterns::Behavioral::State>> State {
-        pcf_get { return this->state; },
-        pcf_set {
+        sw_get { return this->state; },
+        sw_set {
           this->state = value;
           Console::WriteLine("State: " + this->state->GetType().Name);
         }
@@ -51,11 +51,11 @@ namespace DesignPatterns {
     };
 
     inline void ConcreteStateA::Handle(Context& context) {
-      context.State = pcf_new<ConcreteStateB>();
+      context.State = sw_new<ConcreteStateB>();
     }
 
     inline void ConcreteStateB::Handle(Context& context) {
-      context.State = pcf_new<ConcreteStateA>();
+      context.State = sw_new<ConcreteStateA>();
     }
 
     // MainApp startup class for Behavioral
@@ -65,7 +65,7 @@ namespace DesignPatterns {
       // Entry point into console application.
       static void Main() {
         // Setup context in a state
-        Context c(pcf_new<ConcreteStateA>());
+        Context c(sw_new<ConcreteStateA>());
         
         // Issue requests, which toggles state
         c.Request();
@@ -78,7 +78,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-pcf_startup (DesignPatterns::Behavioral::MainApp)
+sw_startup (DesignPatterns::Behavioral::MainApp)
 
 // This code produces the following output:
 //

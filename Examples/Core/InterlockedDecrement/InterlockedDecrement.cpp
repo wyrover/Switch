@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 using namespace System::Threading;
@@ -39,7 +39,7 @@ namespace Examples {
       
       // Create 100000 instances of CountClass.
       for (int i = 0; i < 100000; i++) {
-        coutClass = pcf_new<CountClass>();
+        coutClass = sw_new<CountClass>();
       }
     }
   };
@@ -48,7 +48,7 @@ namespace Examples {
   int MyInterlockedDecrementClass::CountClass::SafeInstanceCount = 0;
 }
       
-pcf_startup (Examples::MyInterlockedDecrementClass)
+sw_startup (Examples::MyInterlockedDecrementClass)
 
 // This code produces the following output:
 //

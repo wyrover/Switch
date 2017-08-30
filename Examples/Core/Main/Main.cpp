@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 
@@ -14,7 +14,7 @@ namespace Examples {
         return -1;
       }
 
-      Console::WriteLine("The Factorial of {0} is {1}", number, pcf_delegate {
+      Console::WriteLine("The Factorial of {0} is {1}", number, sw_delegate {
         int64 result = 1;
         for (int i = 1; i <= number; ++i)
           result *= i;
@@ -25,7 +25,7 @@ namespace Examples {
   };
 }
 
-pcf_startup (Examples::Program)
+sw_startup (Examples::Program)
 
 // This code produces the following output if 3 is entered on command line:
 //

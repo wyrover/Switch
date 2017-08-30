@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 
@@ -34,7 +34,7 @@ namespace Examples {
   const string Program::formatter = "{0,10}{1,13}";
 }
 
-pcf_startup (Examples::Program)
+sw_startup (Examples::Program)
 
 // This code produces the following output:
 //

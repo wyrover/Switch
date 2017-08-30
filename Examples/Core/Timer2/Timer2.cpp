@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 using namespace System::Threading;
@@ -57,7 +57,7 @@ namespace Examples {
   };
 }
 
-pcf_startup (Examples::TimerExample)
+sw_startup (Examples::TimerExample)
 
 // This code produces the following output:
 //

@@ -1,6 +1,6 @@
 // Decorator pattern -- Structural example
 
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 
@@ -61,9 +61,9 @@ namespace DesignPatterns {
       // Entry point into console application.
       static void Main() {
         // Create ConcreteComponent and two Decorators
-        refptr<ConcreteComponent> c = pcf_new<ConcreteComponent>();
-        refptr<ConcreteDecoratorA> d1 = pcf_new<ConcreteDecoratorA>();
-        refptr<ConcreteDecoratorB> d2 = pcf_new<ConcreteDecoratorB>();
+        refptr<ConcreteComponent> c = sw_new<ConcreteComponent>();
+        refptr<ConcreteDecoratorA> d1 = sw_new<ConcreteDecoratorA>();
+        refptr<ConcreteDecoratorB> d2 = sw_new<ConcreteDecoratorB>();
         
         // Link decorators
         d1->SetComponent(as<Component>(c));
@@ -76,7 +76,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-pcf_startup (DesignPatterns::Structural::MainApp)
+sw_startup (DesignPatterns::Structural::MainApp)
 
 // This code produces the following output:
 //

@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 using namespace System::Threading;
@@ -12,12 +12,12 @@ namespace Examples {
       try {
         Parallel::Invoke(
                          BasicAction,  // Param #0 - static method
-                         pcf_delegate {     // Param #1 - lambda expression
-                           pcf_lock(lck)
+                         sw_delegate {     // Param #1 - lambda expression
+                           sw_lock(lck)
                              Console::WriteLine("Method=beta, Thread={0}", Thread::CurrentThread().ManagedThreadId);
                          },
-                         delegate<void> {pcf_delegate {    // Param #2 - in-line delegate
-                           pcf_lock(lck)
+                         delegate<void> {sw_delegate {    // Param #2 - in-line delegate
+                           sw_lock(lck)
                              Console::WriteLine("Method=gamma, Thread={0}", Thread::CurrentThread().ManagedThreadId);
                            }}
                          );
@@ -30,7 +30,7 @@ namespace Examples {
     }
     
     static void BasicAction() {
-      pcf_lock(lck)
+      sw_lock(lck)
         Console::WriteLine("Method=alpha, Thread={0}", Thread::CurrentThread().ManagedThreadId);
     }
     
@@ -40,7 +40,7 @@ namespace Examples {
   object Program::lck;
 }
 
-pcf_startup (Examples::Program)
+sw_startup (Examples::Program)
 
 // This code produces the following output:
 //

@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 using namespace System::Linq;
@@ -12,11 +12,11 @@ namespace Examples {
       Pet(const Pet& pet) : name(pet.name), age(pet.age) {}
       
       Property<int, ReadOnly> Age {
-        pcf_get {return this->age;}
+        sw_get {return this->age;}
       };
       
       Property<string, ReadOnly> Name {
-        pcf_get {return this->name;}
+        sw_get {return this->name;}
       };
       
     private:
@@ -36,7 +36,7 @@ namespace Examples {
       
       // Determine whether all pet names
       // in the array start with 'B'.
-      bool allStartWithB = pets.All(pcf_delegate(const Pet& pet)->bool {
+      bool allStartWithB = pets.All(sw_delegate(const Pet& pet)->bool {
         return pet.Name().StartsWith("B");
       });
       
@@ -45,7 +45,7 @@ namespace Examples {
   };
 }
 
-pcf_startup (Examples::Program)
+sw_startup (Examples::Program)
 
 // This code produces the following output:
 //

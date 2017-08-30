@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 using namespace TUnit;
@@ -18,20 +18,20 @@ namespace UnitTests {
     }
     
     void ChangeCurrentDirectoryWithDownloads() {
-      Assert::DoesNotThrows(pcf_delegate {Environment::CurrentDirectory = System::IO::Path::Combine(Environment::GetFolderPath(Environment::SpecialFolder::Personal), "Downloads");}, pcf_current_information);
+      Assert::DoesNotThrows(sw_delegate {Environment::CurrentDirectory = System::IO::Path::Combine(Environment::GetFolderPath(Environment::SpecialFolder::Personal), "Downloads");}, sw_current_information);
     }
     
     void ChangeCurrentDirectoryWithPotatoes() {
-      Assert::DoesNotThrows(pcf_delegate {Environment::CurrentDirectory = System::IO::Path::Combine(Environment::GetFolderPath(Environment::SpecialFolder::Personal), "Potatoes");}, pcf_current_information);
+      Assert::DoesNotThrows(sw_delegate {Environment::CurrentDirectory = System::IO::Path::Combine(Environment::GetFolderPath(Environment::SpecialFolder::Personal), "Potatoes");}, sw_current_information);
     }
     
   private:
     string savedCurrentDirecory;
   };
 
-  // Used pcf_test to add unit test to execute at the unit test suit.
-  pcf_test(DirectoryTest, ChangeCurrentDirectoryWithDownloads);
-  pcf_test(DirectoryTest, ChangeCurrentDirectoryWithPotatoes);
+  // Used sw_test to add unit test to execute at the unit test suit.
+  sw_test(DirectoryTest, ChangeCurrentDirectoryWithDownloads);
+  sw_test(DirectoryTest, ChangeCurrentDirectoryWithPotatoes);
 }
 
 // This code produces the following output if directory Downloads exists and Potatos doesn't exist in your home direcory:
@@ -40,8 +40,8 @@ namespace UnitTests {
 //   Start 2 tests from DirectoryTest
 //     PASSED DirectoryTest.ChangeCurrentDirectoryWithDownloads (2 ms)
 // Expected: No Exception to be thrown
-// But was:  <Pcf::System::IO::DirectoryNotFoundException>
-// error: /YourFolder/Pcf/Examples/TUnit/TestFixture/Sources/TestFixture.cpp:25
+// But was:  <Switch::System::IO::DirectoryNotFoundException>
+// error: /YourFolder/Switch/Examples/TUnit/TestFixture/Sources/TestFixture.cpp:25
 // *** FAILED DirectoryTest.ChangeCurrentDirectoryWithPotatoes (4 ms)
 //   End 2 tests from DirectoryTest (8 ms total)
 //

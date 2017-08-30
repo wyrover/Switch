@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 using namespace System::Threading;
@@ -63,4 +63,4 @@ namespace Examples {
   int MyInterlockedExchangeClass::usingResource = 0;
 }
 
-pcf_startup (Examples::MyInterlockedExchangeClass)
+sw_startup (Examples::MyInterlockedExchangeClass)

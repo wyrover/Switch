@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 
@@ -174,4 +174,4 @@ public:
   }
 };
 
-pcf_startup (Program)
+sw_startup (Program)

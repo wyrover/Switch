@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 using namespace System::Linq;
@@ -12,15 +12,15 @@ namespace Examples {
       Pet(const Pet& pet) : name(pet.name), age(pet.age), vaccinated(pet.vaccinated) {}
       
       Property<int, ReadOnly> Age {
-        pcf_get { return this->age; }
+        sw_get { return this->age; }
       };
       
       Property<bool, ReadOnly> IsVaccinated {
-        pcf_get { return this->vaccinated; }
+        sw_get { return this->vaccinated; }
       };
       
       Property<string, ReadOnly> Name {
-        pcf_get { return this->name; }
+        sw_get { return this->name; }
       };
       
     private:
@@ -40,7 +40,7 @@ namespace Examples {
       };
       
       // Determine whether any pets over age 1 are also unvaccinated.
-      bool unvaccinated = pets.Any(pcf_delegate(const Pet& pet) {
+      bool unvaccinated = pets.Any(sw_delegate(const Pet& pet) {
         return pet.IsVaccinated == false && pet.Age > 1;
       });
       
@@ -49,7 +49,7 @@ namespace Examples {
   };
 }
 
-pcf_startup (Examples::Program)
+sw_startup (Examples::Program)
 
 // This code produces the following output:
 //

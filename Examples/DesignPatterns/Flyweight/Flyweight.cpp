@@ -1,6 +1,6 @@
 // Flyweight pattern -- Structural example
 
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 using namespace System::Collections::Generic;
@@ -8,7 +8,7 @@ using namespace System::Collections::Generic;
 namespace DesignPatterns {
   namespace Structural {
     // The 'Flyweight' abstract class
-    class Flyweight pcf_abstract {
+    class Flyweight sw_abstract {
     public:
       virtual void Operation(int extrinsicstate) const =0;
     };
@@ -26,9 +26,9 @@ namespace DesignPatterns {
     public:
       // Constructor
       FlyweightFactory() {
-        flyweights.Add("X", pcf_new<ConcreteFlyweight>());
-        flyweights.Add("Y", pcf_new<ConcreteFlyweight>());
-        flyweights.Add("Z", pcf_new<ConcreteFlyweight>());
+        flyweights.Add("X", sw_new<ConcreteFlyweight>());
+        flyweights.Add("Y", sw_new<ConcreteFlyweight>());
+        flyweights.Add("Z", sw_new<ConcreteFlyweight>());
       }
       
       refptr<Flyweight> GetFlyweight(const string& key) const {return flyweights[key];}
@@ -64,7 +64,7 @@ namespace DesignPatterns {
         refptr<Flyweight> fz = factory.GetFlyweight("Z");
         fz->Operation(--extrinsicstate);
         
-        refptr<UnsharedConcreteFlyweight> fu = pcf_new<UnsharedConcreteFlyweight>();
+        refptr<UnsharedConcreteFlyweight> fu = sw_new<UnsharedConcreteFlyweight>();
         fu->Operation(--extrinsicstate);
       }
     };
@@ -72,7 +72,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-pcf_startup (DesignPatterns::Structural::MainApp)
+sw_startup (DesignPatterns::Structural::MainApp)
 
 // This code produces the following output:
 //

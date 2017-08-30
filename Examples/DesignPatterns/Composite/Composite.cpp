@@ -1,6 +1,6 @@
 // Composite pattern -- Structural example
 
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 using namespace System::Collections::Generic;
@@ -63,11 +63,11 @@ namespace DesignPatterns {
       // Entry point into console application.
       static void Main() {
         // Create a tree structure
-        refptr<Composite> root = pcf_new<Composite>("root");
+        refptr<Composite> root = sw_new<Composite>("root");
         root->Add(new Leaf("Leaf A"));
         root->Add(new Leaf("Leaf B"));
         
-        refptr<Composite> comp = pcf_new<Composite>("Composite X");
+        refptr<Composite> comp = sw_new<Composite>("Composite X");
         comp->Add(new Leaf("Leaf XA"));
         comp->Add(new Leaf("Leaf XB"));
         
@@ -75,7 +75,7 @@ namespace DesignPatterns {
         root->Add(new Leaf("Leaf C"));
         
         // Add and remove a leaf
-        refptr<Leaf> leaf = pcf_new<Leaf>("Leaf D");
+        refptr<Leaf> leaf = sw_new<Leaf>("Leaf D");
         root->Add(as<Component>(leaf));
         root->Remove(as<Component>(leaf));
         
@@ -87,7 +87,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-pcf_startup (DesignPatterns::Structural::MainApp)
+sw_startup (DesignPatterns::Structural::MainApp)
 
 // This code produces the following output:
 //

@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 using namespace System::Windows::Forms;
@@ -42,7 +42,7 @@ namespace ProgressBarExample {
       
       this->timer.Interval = 50;
       this->timer.Enabled = true;
-      this->timer.Tick += pcf_delegate(const object& sender, const EventArgs& e) {
+      this->timer.Tick += sw_delegate(const object& sender, const EventArgs& e) {
         this->progressBar4.Value = this->progressBar4.Value < this->progressBar4.Maximum ? this->progressBar4.Value + 1 : this->progressBar4.Minimum;
       };
     }
@@ -57,4 +57,4 @@ namespace ProgressBarExample {
   };
 }
 
-pcf_startup (ProgressBarExample::Form1)
+sw_startup (ProgressBarExample::Form1)

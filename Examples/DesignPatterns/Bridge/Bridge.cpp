@@ -1,13 +1,13 @@
 // Bridge pattern -- Structural example
 
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 
 namespace DesignPatterns {
   namespace Structural {
     // The 'Implementor' abstract class
-    class Implementor pcf_abstract {
+    class Implementor sw_abstract {
     public:
       virtual void Operation() const = 0;
     };
@@ -17,7 +17,7 @@ namespace DesignPatterns {
     public:
       // Property
       Property<refptr<DesignPatterns::Structural::Implementor>, WriteOnly> Implementor {
-        pcf_set {this->implementor = value;}
+        sw_set {this->implementor = value;}
       };
       
       virtual void Operation() const {
@@ -58,14 +58,14 @@ namespace DesignPatterns {
     public:
       // Entry point into console application.
       static void Main() {
-        refptr<Abstraction> ab = pcf_new<RefinedAbstraction>();
+        refptr<Abstraction> ab = sw_new<RefinedAbstraction>();
         
         // Set implementation and call
-        ab->Implementor = pcf_new<ConcreteImplementorA>();
+        ab->Implementor = sw_new<ConcreteImplementorA>();
         ab->Operation();
         
         // Change implemention and call
-        ab->Implementor = pcf_new<ConcreteImplementorB>();
+        ab->Implementor = sw_new<ConcreteImplementorB>();
         ab->Operation();
       }
     };
@@ -73,7 +73,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-pcf_startup (DesignPatterns::Structural::MainApp)
+sw_startup (DesignPatterns::Structural::MainApp)
 
 // This code produces the following output:
 //

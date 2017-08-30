@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 using namespace TUnit;
@@ -17,8 +17,8 @@ namespace UnitTests {
     }
   };
   
-  pcf_test (HelloWorldTest, CreateStringFromLiteral)
-  pcf_test (HelloWorldTest, CreateStringFromChar32Array)
+  sw_test (HelloWorldTest, CreateStringFromLiteral)
+  sw_test (HelloWorldTest, CreateStringFromChar32Array)
 }
 
 // This code produces the following output:

@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 using namespace System::Drawing;
@@ -73,4 +73,4 @@ namespace SomeControls {
   };
 }
 
-pcf_startup(SomeControls::MainForm)
+sw_startup(SomeControls::MainForm)

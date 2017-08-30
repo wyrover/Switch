@@ -1,13 +1,13 @@
 // Strategy pattern -- Behavioral example
 
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 
 namespace DesignPatterns {
   namespace Behavioral {
     // The 'Strategy' abstract class
-    class Strategy pcf_abstract {
+    class Strategy sw_abstract {
     public:
       virtual void AlgorithmInterface() = 0;
     };
@@ -61,13 +61,13 @@ namespace DesignPatterns {
         Context context;
         
         // Three contexts following different strategies
-        context = Context(pcf_new<ConcreteStrategyA>());
+        context = Context(sw_new<ConcreteStrategyA>());
         context.ContextInterface();
         
-        context = Context(pcf_new<ConcreteStrategyB>());
+        context = Context(sw_new<ConcreteStrategyB>());
         context.ContextInterface();
         
-        context = Context(pcf_new<ConcreteStrategyC>());
+        context = Context(sw_new<ConcreteStrategyC>());
         context.ContextInterface();
       }
     };
@@ -75,7 +75,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-pcf_startup (DesignPatterns::Behavioral::MainApp)
+sw_startup (DesignPatterns::Behavioral::MainApp)
 
 // This code produces the following output:
 //

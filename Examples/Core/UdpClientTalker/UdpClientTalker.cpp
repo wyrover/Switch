@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 using namespace System::Net;
@@ -31,7 +31,7 @@ namespace Examples {
   };
 }
 
-pcf_startup (Examples::UdpClientTalker)
+sw_startup (Examples::UdpClientTalker)
 
 // This code example can produce the following output:
 //

@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 using namespace System::Threading;
@@ -11,10 +11,10 @@ namespace Examples {
     int Withdraw(int amount) {
       // This condition never is true unless the lock statement is commented out.
       if (this->balance < 0)
-        throw Exception("Negative Balance", pcf_current_information);
+        throw Exception("Negative Balance", sw_current_information);
       
       // Comment out the next line to see the effect of leaving out the lock keyword.
-      pcf_lock (this->lock)
+      sw_lock (this->lock)
       {
         if (this->balance >= amount) {
           Console::WriteLine("Balance before Withdrawal :  {0}", this->balance);
@@ -51,4 +51,4 @@ namespace Examples {
   };
 }
 
-pcf_startup (Examples::Program)
+sw_startup (Examples::Program)

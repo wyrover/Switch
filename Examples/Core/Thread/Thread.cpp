@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 using namespace System::Threading;
@@ -13,7 +13,7 @@ namespace Examples {
       Console::WriteLine("Main thread: Start a second thread.");
       // The constructor for the Thread class requires a ThreadStart
       // delegate that represents the method to be executed on the
-      // thread.  Pcf simplifies the creation of this delegate.
+      // thread.  Switch simplifies the creation of this delegate.
       Thread t = Thread(ThreadStart(ThreadProc));
       
       // Start ThreadProc.  Note that on a uniprocessor, the new
@@ -46,7 +46,7 @@ namespace Examples {
   };
 }
 
-pcf_startup (Examples::ThreadExample)
+sw_startup (Examples::ThreadExample)
 
 // This code produces the following output:
 //

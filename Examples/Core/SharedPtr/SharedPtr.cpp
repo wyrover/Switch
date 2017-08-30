@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 
@@ -15,7 +15,7 @@ namespace Test {
       Console::WriteLine("*p1 = {0}", *p1);
       Console::WriteLine("p1 UseCount =  {0}{1}", p1.GetUseCount(), Environment::NewLine);
       
-      pcf_using (SharedPtr<string> p2 = p1) {
+      sw_using (SharedPtr<string> p2 = p1) {
         Console::WriteLine("*p2 = {0}", *p2);
         Console::WriteLine("p1 UseCount =  {0}{1}", p1.GetUseCount(), Environment::NewLine);
         
@@ -36,7 +36,7 @@ namespace Test {
   };
 }
 
-pcf_startup (Test::Program)
+sw_startup (Test::Program)
 
 // This code produces the following output :
 //

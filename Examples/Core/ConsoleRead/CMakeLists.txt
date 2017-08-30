@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.2)
 
 project(ConsoleRead)
-find_package(Pcf REQUIRED)
+find_package(Switch REQUIRED)
 add_executable(ConsoleRead ConsoleRead.cpp)
-target_link_libraries(ConsoleRead Pcf.Core)
+target_link_libraries(ConsoleRead Switch.Core)

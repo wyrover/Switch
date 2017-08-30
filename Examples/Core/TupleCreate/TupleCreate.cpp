@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 
@@ -19,7 +19,7 @@ namespace Examples {
 }
 
 // Specify the Main entry point to System
-pcf_startup (Examples::Program);
+sw_startup (Examples::Program);
 
 // This code produces the following output:
 //

@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 using namespace System::Linq;
@@ -13,11 +13,11 @@ namespace Examples {
       // Determine whether any string in the array is longer than "banana".
       string longestName =
       fruits.Agregate<string, string>("bananas",
-                                      pcf_delegate(const string& longest, const string& next) {
+                                      sw_delegate(const string& longest, const string& next) {
                                         return next.Length > longest.Length ? next : longest;
                                       },
                                       // Return the final result as an upper case string.
-                                      pcf_delegate(const string& fruit) {
+                                      sw_delegate(const string& fruit) {
                                         return fruit.ToUpper();
                                       });
       
@@ -26,7 +26,7 @@ namespace Examples {
   };
 }
 
-pcf_startup (Examples::Program)
+sw_startup (Examples::Program)
 
 // This code produces the following output:
 //

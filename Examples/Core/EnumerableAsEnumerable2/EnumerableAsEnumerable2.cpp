@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 using namespace System::Collections::Generic;
@@ -13,7 +13,7 @@ namespace Examples {
       string fruits[] = { "apple", "passionfruit", "banana", "mango", "orange", "blueberry", "grape", "strawberry" };
       
       // transform c++ aray to Enumerable and call Where method.
-      refptr<IEnumerable<string>> query = Enumerable::AsEnumerable(fruits)->Where(pcf_delegate(string fruit) { return fruit.Contains("o");});
+      refptr<IEnumerable<string>> query = Enumerable::AsEnumerable(fruits)->Where(sw_delegate(string fruit) { return fruit.Contains("o");});
       
       // Display the output.
       Console::WriteLine("query = {{{0}}}", string::Join(", ", *query));
@@ -21,7 +21,7 @@ namespace Examples {
   };
 }
 
-pcf_startup (Examples::Program)
+sw_startup (Examples::Program)
 
 // This code example produces the following output:
 //

@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 using namespace System::Threading::Tasks;
@@ -6,12 +6,12 @@ using namespace System::Threading::Tasks;
 namespace Examples {
   class TestAsync : public object {
   public:
-    pcf_async(Task<>, CounterTask, {
+    sw_async(Task<>, CounterTask, {
       for (int counter = 1; counter <= 5; counter++)
         Console::WriteLine("counter --> {0}", counter);
     });
     
-    pcf_async(Task<string>, ComputeStringTask, {
+    sw_async(Task<string>, ComputeStringTask, {
       return "My result";
     });
     
@@ -19,15 +19,15 @@ namespace Examples {
     static void Main() {
       TestAsync testAsync;
       
-      pcf_await testAsync.CounterTask;
+      sw_await testAsync.CounterTask;
       
-      string value = pcf_await testAsync.ComputeStringTask;
+      string value = sw_await testAsync.ComputeStringTask;
       Console::WriteLine(value);
     }
   };
 }
 
-pcf_startup (Examples::TestAsync)
+sw_startup (Examples::TestAsync)
 
 // This code produces output similar to the following:
 //

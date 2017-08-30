@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 using namespace System::IO;
@@ -12,7 +12,7 @@ namespace Examples {
     // The main entry point for the application.
     static void Main() {
       Console::WriteLine("Press Ctrl+C to quit...");
-      Thread server(ThreadStart(pcf_delegate {
+      Thread server(ThreadStart(sw_delegate {
         TcpListener tcpListener(IPAddress::Any, 9050);
         tcpListener.Start();
         StreamReader streamReader(tcpListener.AcceptTcpClient().GetStream());
@@ -22,7 +22,7 @@ namespace Examples {
       }));
       server.Start();
       
-      Thread client(ThreadStart(pcf_delegate {
+      Thread client(ThreadStart(sw_delegate {
         StreamWriter streamWriter(TcpClient("127.0.0.1", 9050).GetStream());
         int counter = Random().Next(1, 20000);
         while (true) {
@@ -39,7 +39,7 @@ namespace Examples {
   };
 }
 
-pcf_startup (Examples::TcpClientExample)
+sw_startup (Examples::TcpClientExample)
 
 // This code example can produce the following output:
 //

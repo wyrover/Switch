@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 using namespace System::Threading;
@@ -8,7 +8,7 @@ namespace Examples {
   public:
     static void Main() {
       int counter = 0;
-      TimerCallback callback = pcf_delegate(object& state) {
+      TimerCallback callback = sw_delegate(object& state) {
         Console::WriteLine("counter -> {0}", ++counter);
       };
       
@@ -18,7 +18,7 @@ namespace Examples {
   };
 }
 
-pcf_startup (Examples::Program)
+sw_startup (Examples::Program)
 
 // The example displays the following output:
 //

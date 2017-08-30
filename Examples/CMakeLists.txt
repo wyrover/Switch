@@ -2,11 +2,11 @@ cmake_minimum_required(VERSION 3.2)
 
 project(Examples VERSION 0.2.0)
 
-option(BUILD_CORE_EXAMPLES "Build Pcf.Core examples" ON)
+option(BUILD_CORE_EXAMPLES "Build Switch.Core examples" ON)
 option(BUILD_DESIGNPATTERNS_EXAMPLES "Build DesignPatterns examples" ON)
-option(BUILD_DRAWING_EXAMPLES "Build Pcf.Drawing examples" ON)
-option(BUILD_FORMS_EXAMPLES "Build Pcf.Forms examples" ON)
-option(BUILD_TUNIT_EXAMPLES "Build Pcf.TUnit examples" ON)
+option(BUILD_DRAWING_EXAMPLES "Build Switch.Drawing examples" ON)
+option(BUILD_FORMS_EXAMPLES "Build Switch.Forms examples" ON)
+option(BUILD_TUNIT_EXAMPLES "Build Switch.TUnit examples" ON)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 

@@ -1,13 +1,13 @@
 // Template Method pattern -- Bahavorial example
 
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 
 namespace DesignPatterns {
   namespace Behavioral {
     // The 'AbstractClass' abstract class
-    class AbstractClass pcf_abstract {
+    class AbstractClass sw_abstract {
     public:
       virtual void PrimitiveOperation1() = 0;
       virtual void PrimitiveOperation2() = 0;
@@ -50,10 +50,10 @@ namespace DesignPatterns {
     public:
       // Entry point into console application.
       static void Main() {
-        refptr<AbstractClass> aA = pcf_new<ConcreteClassA>();
+        refptr<AbstractClass> aA = sw_new<ConcreteClassA>();
         aA->TemplateMethod();
         
-        refptr<AbstractClass> aB = pcf_new<ConcreteClassB>();
+        refptr<AbstractClass> aB = sw_new<ConcreteClassB>();
         aB->TemplateMethod();
       }
     };
@@ -61,7 +61,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-pcf_startup (DesignPatterns::Behavioral::MainApp)
+sw_startup (DesignPatterns::Behavioral::MainApp)
 
 // This code produces the following output:
 //

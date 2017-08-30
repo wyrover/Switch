@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 using namespace System::Drawing;
@@ -14,7 +14,7 @@ namespace HelloWorld {
       Button button;
       button.Text = "Click me";
       button.Location = Point(10, 10);
-      button.Click += pcf_delegate(const object& sender, const EventArgs& e) {
+      button.Click += sw_delegate(const object& sender, const EventArgs& e) {
         MessageBox::Show("Hello, World!");
       };
       
@@ -27,4 +27,4 @@ namespace HelloWorld {
   };
 }
 
-pcf_startup (HelloWorld::Program)
+sw_startup (HelloWorld::Program)

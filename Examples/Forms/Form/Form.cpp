@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 using namespace System::Windows::Forms;
@@ -15,7 +15,7 @@ namespace FormExample {
     Form1() {
       button.Text = "Close";
       button.Location = System::Drawing::Point(10, 10);
-      button.Click += pcf_delegate(const object& sender, const EventArgs& e) {
+      button.Click += sw_delegate(const object& sender, const EventArgs& e) {
         this->Close();
       };
       
@@ -24,7 +24,7 @@ namespace FormExample {
       this->Location = System::Drawing::Point(300, 200);
       this->Size = System::Drawing::Size(640, 480);
       this->Controls().Add(button);
-      this->FormClosing += pcf_delegate(const object& sender, FormClosingEventArgs& e) {
+      this->FormClosing += sw_delegate(const object& sender, FormClosingEventArgs& e) {
         e.Cancel = MessageBox::Show("Do you really want to save and exit?", "Close Form", MessageBoxButtons::YesNoCancel, MessageBoxIcon::Question) ==  DialogResult::Cancel;
       };
     }
@@ -34,4 +34,4 @@ namespace FormExample {
   };
 }
 
-pcf_startup (FormExample::Form1)
+sw_startup (FormExample::Form1)

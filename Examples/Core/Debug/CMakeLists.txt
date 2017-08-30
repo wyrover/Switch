@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.2)
 
 project(Debug)
-find_package(Pcf REQUIRED)
+find_package(Switch REQUIRED)
 add_executable(Debug Debug.cpp)
-target_link_libraries(Debug Pcf.Core)
+target_link_libraries(Debug Switch.Core)

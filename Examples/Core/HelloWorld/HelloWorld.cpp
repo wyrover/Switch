@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 
@@ -11,7 +11,7 @@ namespace HelloWorld {
   };
 }
 
-pcf_startup (HelloWorld::Program)
+sw_startup (HelloWorld::Program)
 
 // This code produces the following output:
 //

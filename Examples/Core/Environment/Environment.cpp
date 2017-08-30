@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 using namespace System::Collections;
@@ -76,7 +76,7 @@ namespace Examples {
   };
 }
 
-pcf_startup (Examples::Program)
+sw_startup (Examples::Program)
 
 // This example produces results similar to the following:
 // (Any result that is lengthy or reveals information that should remain
@@ -85,7 +85,7 @@ pcf_startup (Examples::Program)
 // -- Environment members --
 // CommandLine: Environment.exe ARBITRARY TEXT
 // GetCommandLineArgs: Environment.exe, ARBITRARY, TEXT
-// CurrentDirectory: F:\Projects\Pcf\Bin\VS2012Win64\Debug
+// CurrentDirectory: F:\Projects\Switch\Bin\VS2012Win64\Debug
 // ExitCode: 0
 // HasShutdownStarted: False
 // MachineName: !---OMITTED---!

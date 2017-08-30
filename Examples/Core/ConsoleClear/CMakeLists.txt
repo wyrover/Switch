@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.2)
 
 project(ConsoleClear)
-find_package(Pcf REQUIRED)
+find_package(Switch REQUIRED)
 add_executable(ConsoleClear ConsoleClear.cpp)
-target_link_libraries(ConsoleClear Pcf.Core)
+target_link_libraries(ConsoleClear Switch.Core)

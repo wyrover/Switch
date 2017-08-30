@@ -1,13 +1,13 @@
 // Proxy pattern -- Structural example
 
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 
 namespace DesignPatterns {
   namespace Structural {
     // The 'Subject' abstract class
-    class Subject pcf_abstract {
+    class Subject sw_abstract {
     public:
       virtual void Request() const = 0;
     };
@@ -44,7 +44,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-pcf_startup (DesignPatterns::Structural::MainApp)
+sw_startup (DesignPatterns::Structural::MainApp)
 
 // This code produces the following output:
 //

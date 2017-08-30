@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 using namespace System::Windows::Forms;
@@ -20,7 +20,7 @@ namespace TrackBarExample {
       this->trackBar.Maximum = 200;
       this->trackBar.Width = 200;
       this->trackBar.Style = TickStyle::None;
-      this->trackBar.ValueChanged += pcf_delegate(const object& sender, const EventArgs& e) {
+      this->trackBar.ValueChanged += sw_delegate(const object& sender, const EventArgs& e) {
         this->progressBar.Value = this->trackBar.Value;
         this->label.Text = string::Format("{0}", this->trackBar.Value);
       };
@@ -42,4 +42,4 @@ namespace TrackBarExample {
   };
 }
 
-pcf_startup (TrackBarExample::Form1)
+sw_startup (TrackBarExample::Form1)

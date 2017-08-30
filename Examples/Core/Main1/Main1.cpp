@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 
@@ -17,8 +17,8 @@ namespace Examples {
   };
 }
 
-pcf_startup (Examples::Program)
-// pcf_startup (Examples::Program) is same as :
+sw_startup (Examples::Program)
+// sw_startup (Examples::Program) is same as :
 //
 // int main(int argc, char* argv[]) {
 //   Environment::SetCommandLineArgs(argv, argc)

@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 
@@ -28,14 +28,14 @@ namespace Examples {
       Console::WriteLine(uR"("こんに \ ちは世界！")");
       Console::WriteLine(UR"("!مرحبا \ بالعالم 🐨")");
       Console::WriteLine();
-      Console::WriteLine("Combining string literals with Pcf _s suffix");
+      Console::WriteLine("Combining string literals with Switch _s suffix");
       Console::WriteLine("Hello, World!"_s);
       Console::WriteLine(u8"Привет мир! 🐨"_s);
       Console::WriteLine(L"!שלום עולם"_s);
       Console::WriteLine(u"こんにちは世界！"_s);
       Console::WriteLine(U"!مرحبا بالعالم 🐨"_s);
       Console::WriteLine();
-      Console::WriteLine("Combining raw string literals with Pcf _s suffix");
+      Console::WriteLine("Combining raw string literals with Switch _s suffix");
       Console::WriteLine(R"("Hello \ World!")"_s);
       Console::WriteLine(u8R"("Привет \ мир! 🐨")"_s);
       Console::WriteLine(LR"("!שלום \ עולם")"_s);
@@ -52,4 +52,4 @@ namespace Examples {
   };
 }
 
-pcf_startup (Examples::Program)
+sw_startup (Examples::Program)

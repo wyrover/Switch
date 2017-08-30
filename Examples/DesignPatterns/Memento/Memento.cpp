@@ -1,6 +1,6 @@
 // Memento pattern -- Behavioral example
 
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 
@@ -16,7 +16,7 @@ namespace DesignPatterns {
       
       // Gets or sets state
       Property<string, ReadOnly> State {
-        pcf_get { return this->state; }
+        sw_get { return this->state; }
       };
 
     private:
@@ -28,8 +28,8 @@ namespace DesignPatterns {
     public:
       // Property
       Property<string> State {
-        pcf_get { return this->state; },
-        pcf_set {
+        sw_get { return this->state; },
+        sw_set {
           this->state = value;
           Console::WriteLine("State = " + this->state);
         }
@@ -57,8 +57,8 @@ namespace DesignPatterns {
       
       // Gets or sets memento
       Property<DesignPatterns::Behavioral::Memento> Memento {
-        pcf_get { return this->memento; },
-        pcf_set { this->memento = value; }
+        sw_get { return this->memento; },
+        sw_set { this->memento = value; }
       };
 
     private:
@@ -89,7 +89,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-pcf_startup (DesignPatterns::Behavioral::MainApp)
+sw_startup (DesignPatterns::Behavioral::MainApp)
 
 // This code produces the following output:
 //

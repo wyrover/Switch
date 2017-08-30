@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 
@@ -27,13 +27,13 @@ namespace Examples {
       function4("Function pointer on Functor");
 
       // Declare a function pointer on a lambda expression
-      Write function5 = pcf_delegate(const string& value) {
+      Write function5 = sw_delegate(const string& value) {
         Function1(value);
       };
       function5("Function pointer on Lambda expression");
 
       // Declare a function pointer on a lambda expression with this
-      Write function6 = pcf_delegate(const string& value) {
+      Write function6 = sw_delegate(const string& value) {
         //this->Function2(value);
       };
       function6("Function pointer on Lambda expression with this");
@@ -71,4 +71,4 @@ namespace Examples {
   };
 }
 
-pcf_startup (Examples::Program)
+sw_startup (Examples::Program)

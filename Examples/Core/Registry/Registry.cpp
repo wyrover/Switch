@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 using namespace Microsoft::Win32;
@@ -8,21 +8,21 @@ namespace Examples {
   public:
     // The main entry point for the application.
     static void Main() {
-      // Create a new regiqstry sub key "HKEY_CURRENT_USER\PcfRegistryTest" and add value
-      pcf_using(RegistryKey key = Registry::CurrentUser().CreateSubKey("PcfRegistryTest")) {
+      // Create a new regiqstry sub key "HKEY_CURRENT_USER\SwitchRegistryTest" and add value
+      sw_using(RegistryKey key = Registry::CurrentUser().CreateSubKey("SwitchRegistryTest")) {
         key.SetValue("MyKey", "MyValue");
       }
 
-      Console::WriteLine("MyKey      = {0}", Registry::GetValue("HKEY_CURRENT_USER\\PcfRegistryTest", "MyKey", "default"));
-      Console::WriteLine("UnknownKey = {0}", Registry::GetValue("HKEY_CURRENT_USER\\PcfRegistryTest", "UnknownKey", -1));
+      Console::WriteLine("MyKey      = {0}", Registry::GetValue("HKEY_CURRENT_USER\\SwitchRegistryTest", "MyKey", "default"));
+      Console::WriteLine("UnknownKey = {0}", Registry::GetValue("HKEY_CURRENT_USER\\SwitchRegistryTest", "UnknownKey", -1));
       
-      // Remove the "HKEY_CURRENT_USER\PcfRegistryTest" sub key
-      Registry::CurrentUser().DeleteSubKeyTree("PcfRegistryTest");
+      // Remove the "HKEY_CURRENT_USER\SwitchRegistryTest" sub key
+      Registry::CurrentUser().DeleteSubKeyTree("SwitchRegistryTest");
     }
   };
 }
 
-pcf_startup (Examples::Program)
+sw_startup (Examples::Program)
 
 // This code produces the following output:
 //

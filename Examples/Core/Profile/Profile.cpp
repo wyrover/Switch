@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 using namespace System::Diagnostics;
@@ -18,7 +18,7 @@ namespace Examples {
       Stopwatch stopWatch;
       stopWatch.Start();
       while (index < Profile::CountMax()) {
-        pcf_lock (sync) {
+        sw_lock (sync) {
           int cpt = Profile::Counter;
           if (cpt != Profile::Counter)
             Console::WriteLine("cpt != Counter : {0}", cpt + Profile::Counter);
@@ -39,7 +39,7 @@ namespace Examples {
       
       static void LockThread(const Object& sync) {
         for (int index = 0; index < CountMax(); index++) {
-          pcf_lock (sync)
+          sw_lock (sync)
             Counter++;
         }
       }
@@ -48,7 +48,7 @@ namespace Examples {
   int Program::Profile::Counter = 0;
 }
 
-pcf_startup (Examples::Program)
+sw_startup (Examples::Program)
 
 // This code produces the following output :
 //

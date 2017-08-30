@@ -1,6 +1,6 @@
 // Mediator pattern -- Behavioral example
 
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 
@@ -9,7 +9,7 @@ namespace DesignPatterns {
     class Mediator;
     
     // The 'Colleague' abstract class
-    class Colleague pcf_abstract {
+    class Colleague sw_abstract {
     public:
       // Constructor
       Colleague(Mediator& mediator) : mediator(mediator)  {}
@@ -19,7 +19,7 @@ namespace DesignPatterns {
     };
     
     // The 'Mediator' abstract class
-    class Mediator pcf_abstract {
+    class Mediator sw_abstract {
     public:
       virtual void Send(const string& message, Colleague& colleague) = 0;
     };
@@ -58,11 +58,11 @@ namespace DesignPatterns {
     class ConcreteMediator : public Mediator {
     public:
       Property<ConcreteColleague1, WriteOnly> Colleague1 {
-        pcf_set { colleague1 = value; }
+        sw_set { colleague1 = value; }
       };
       
       Property<ConcreteColleague2, WriteOnly> Colleague2 {
-        pcf_set { colleague2 = value; }
+        sw_set { colleague2 = value; }
       };
       
       void Send(const string& message, Colleague& colleague) override {
@@ -101,7 +101,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-pcf_startup (DesignPatterns::Behavioral::MainApp)
+sw_startup (DesignPatterns::Behavioral::MainApp)
 
 // This code produces the following output:
 //

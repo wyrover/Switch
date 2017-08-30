@@ -1,7 +1,7 @@
 // Specify add_definitions(-DTRACE) in the CMakeLists.txt file or add "#define TRACE 1" to the top of your file.
 #define TRACE 1
 
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 using namespace System::Diagnostics;
@@ -21,7 +21,7 @@ namespace Examples {
   };
 }
 
-pcf_startup (Examples::Program)
+sw_startup (Examples::Program)
 
 // The example displays the following output if TRACE is defined:
 //

@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 using namespace System::Windows::Forms;
@@ -10,9 +10,9 @@ namespace Examples {
       Action<const string&> messageTarget;
       
       if (Environment::GetCommandLineArgs().Length > 1)
-        messageTarget = pcf_delegate(const string& s) { ShowWindowsMessage(s); };
+        messageTarget = sw_delegate(const string& s) { ShowWindowsMessage(s); };
       else
-        messageTarget = pcf_delegate(const string& s) { WriteLine(s); };
+        messageTarget = sw_delegate(const string& s) { WriteLine(s); };
       
       messageTarget("Hello, World!");
     }
@@ -28,4 +28,4 @@ namespace Examples {
   };
 }
 
-pcf_startup (Examples::Program)
+sw_startup (Examples::Program)

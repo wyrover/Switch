@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 
@@ -25,7 +25,7 @@ namespace FactorialExample {
   };
 }
 
-pcf_startup (FactorialExample::Progam)
+sw_startup (FactorialExample::Progam)
 
 // This code produces the following output:
 //

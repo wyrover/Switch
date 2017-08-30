@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 using namespace System::IO;
@@ -9,7 +9,7 @@ namespace Examples {
     // The main entry point for the application.
     static void Main() {
       // Create and write into binary file stream.
-      pcf_using(BinaryWriter binaryWriter(FileStream(Path::Combine(Path::GetTempPath(), "PcfTest.bin"), FileMode::Create))) {
+      sw_using(BinaryWriter binaryWriter(FileStream(Path::Combine(Path::GetTempPath(), "SwitchTest.bin"), FileMode::Create))) {
         binaryWriter.Write(true);
         binaryWriter.Write(1.25);
         binaryWriter.Write(4);
@@ -18,7 +18,7 @@ namespace Examples {
       }
       
       // Open and read from binary file stream.
-      pcf_using(BinaryReader binaryReader(FileStream(Path::Combine(Path::GetTempPath(), "PcfTest.bin"), FileMode::Open))) {
+      sw_using(BinaryReader binaryReader(FileStream(Path::Combine(Path::GetTempPath(), "SwitchTest.bin"), FileMode::Open))) {
         Console::WriteLine("Boolean: {0}", binaryReader.ReadBoolean());
         Console::WriteLine("Double: {0}", binaryReader.ReadDouble());
         Console::WriteLine("Array<byte>: {{{0}}}", string::Join(", ", binaryReader.ReadBytes(binaryReader.ReadInt32())));
@@ -26,12 +26,12 @@ namespace Examples {
       }
       
       // Delete binary file stream.
-      File::Delete(Path::Combine(Path::GetTempPath(), "PcfTest.bin"));
+      File::Delete(Path::Combine(Path::GetTempPath(), "SwitchTest.bin"));
     }
   };
 }
 
-pcf_startup (Examples::Program)
+sw_startup (Examples::Program)
 
 // This code produces the following output:
 //

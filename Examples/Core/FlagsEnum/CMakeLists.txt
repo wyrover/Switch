@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.2)
 
 project(FlagsEnum)
-find_package(Pcf REQUIRED)
+find_package(Switch REQUIRED)
 add_executable(FlagsEnum FlagsEnum.cpp)
-target_link_libraries(FlagsEnum Pcf.Core)
+target_link_libraries(FlagsEnum Switch.Core)

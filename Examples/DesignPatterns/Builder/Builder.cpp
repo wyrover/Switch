@@ -1,6 +1,6 @@
 // Builder pattern -- Creational example
 
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 using namespace System::Collections::Generic;
@@ -25,7 +25,7 @@ namespace DesignPatterns {
     };
 
     // The 'Builder' abstract class
-    class Builder pcf_abstract {
+    class Builder sw_abstract {
     public:
       virtual void BuildPartA() = 0;
       virtual void BuildPartB() = 0;
@@ -73,8 +73,8 @@ namespace DesignPatterns {
         // Create director and builders
         Director director;
         
-        refptr<Builder> b1 = pcf_new<ConcreteBuilder1>();
-        refptr<Builder> b2 = pcf_new<ConcreteBuilder2>();
+        refptr<Builder> b1 = sw_new<ConcreteBuilder1>();
+        refptr<Builder> b2 = sw_new<ConcreteBuilder2>();
         
         // Construct two products
         director.Construct(*b1);
@@ -90,7 +90,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-pcf_startup (DesignPatterns::Creational::MainApp)
+sw_startup (DesignPatterns::Creational::MainApp)
 
 // This code produces the following output:
 //

@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 
@@ -10,14 +10,14 @@ public:
 
   // Declare a Name property of type string:
   Property<string> Name {
-    pcf_get {return this->name;},
-    pcf_set {this->name = value;}
+    sw_get {return this->name;},
+    sw_set {this->name = value;}
   };
   
   // Declare an Age property of type int:
   Property<int> Age {
-    pcf_get {return this->age;},
-    pcf_set {this->age = value;}
+    sw_get {return this->age;},
+    sw_set {this->age = value;}
   };
   
   string ToString() const noexcept override {
@@ -48,7 +48,7 @@ private:
   int age = 0;
 };
 
-pcf_startup (Person)
+sw_startup (Person)
 
 // This code produces the following output :
 //

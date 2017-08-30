@@ -1,8 +1,8 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 
-namespace PcfEvents {
+namespace SwitchEvents {
   // Define a class to hold custom event info
   /// The following example shows how to declare and raise an event that uses EventHandler as the underlying delegate type.
   /// @include Event.cpp
@@ -12,8 +12,8 @@ namespace PcfEvents {
     CustomEventArgs(const CustomEventArgs& cea) : message(cea.message) {}
     
     Property<string> Message {
-      pcf_get { return this->message; },
-      pcf_set { this->message = value; }
+      sw_get { return this->message; },
+      sw_set { this->message = value; }
     };
     
   private:
@@ -83,7 +83,7 @@ namespace PcfEvents {
   };
 }
 
-pcf_startup (PcfEvents::Program)
+sw_startup (SwitchEvents::Program)
 
 // This code produces output similar to the following:
 //

@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 using namespace System::Linq;
@@ -16,14 +16,14 @@ namespace Examples {
       // new sentence to reverse the word order.
       string reversed = from<string>(words1)
                         | concat<string>(words2)
-                        | agregate<string>(pcf_delegate(const string& workingSentence, const string& next) {return next + " " + workingSentence;});
+                        | agregate<string>(sw_delegate(const string& workingSentence, const string& next) {return next + " " + workingSentence;});
       
       Console::WriteLine(reversed);
     }
   };
 }
 
-pcf_startup (Examples::Program)
+sw_startup (Examples::Program)
 
 // This code produces the following output:
 //

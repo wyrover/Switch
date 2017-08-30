@@ -2,6 +2,6 @@ cmake_minimum_required(VERSION 3.2)
 
 project(Assert)
 
-find_package(Pcf REQUIRED)
+find_package(Switch REQUIRED)
 add_executable(Assert Assert.cpp)
-target_link_libraries(${PROJECT_NAME} Pcf.TUnit.Main)
+target_link_libraries(${PROJECT_NAME} Switch.TUnit.Main)

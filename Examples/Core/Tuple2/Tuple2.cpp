@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 
@@ -39,7 +39,7 @@ namespace Test {
   };
 }
 
-pcf_startup (Test::Program)
+sw_startup (Test::Program)
 
 // This code produces the following output:
 //

@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 using namespace System::IO;
@@ -15,14 +15,14 @@ namespace Examples {
           File::Delete(path);
         }
         
-        pcf_using (StreamWriter sw(path)) {
+        sw_using (StreamWriter sw(path)) {
           sw.WriteLine("This");
           sw.WriteLine("is some text");
           sw.WriteLine("to test");
           sw.WriteLine("Reading");
         }
         
-        pcf_using (StreamReader sr(path)) {
+        sw_using (StreamReader sr(path)) {
           //This allows you to do one Read operation.
           Console::WriteLine(sr.ReadToEnd());
         }
@@ -33,7 +33,7 @@ namespace Examples {
   };
 }
 
-pcf_startup (Examples::Program)
+sw_startup (Examples::Program)
 
 // This code produces the following output:
 //

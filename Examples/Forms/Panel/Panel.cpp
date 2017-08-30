@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 using namespace System::Windows::Forms;
@@ -34,4 +34,4 @@ namespace PanelExample {
   };
 }
 
-pcf_startup (PanelExample::Form1)
+sw_startup (PanelExample::Form1)

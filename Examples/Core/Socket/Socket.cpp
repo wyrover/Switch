@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 using namespace System::Net;
@@ -13,7 +13,7 @@ namespace Examples {
     static void Main() {
       Console::WriteLine("Press Ctrl+C to quit...");
       bool terminate = false;
-      Thread server(ThreadStart(pcf_delegate {
+      Thread server(ThreadStart(sw_delegate {
         Socket socket(AddressFamily::InterNetwork, SocketType::Stream, ProtocolType::Tcp);
         socket.Bind(IPEndPoint(IPAddress::Any, 9050));
         socket.Listen((int)SocketOptionName::MaxConnections);
@@ -26,7 +26,7 @@ namespace Examples {
       }));
       server.Start();
       
-      Thread client(ThreadStart(pcf_delegate {
+      Thread client(ThreadStart(sw_delegate {
         Socket socket(AddressFamily::InterNetwork, SocketType::Stream, ProtocolType::Tcp);
         socket.Connect("127.0.0.1", 9050);
         int counter  = Random().Next(1, 20000);
@@ -44,7 +44,7 @@ namespace Examples {
   };
 }
 
-pcf_startup (Examples::SocketExample)
+sw_startup (Examples::SocketExample)
 
 // This code example can produce the following output:
 //

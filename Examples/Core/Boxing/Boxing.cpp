@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 
@@ -33,7 +33,7 @@ namespace Examples {
     // Add item of polymorphic objects
     template<typename T>
     static void Add(const T& obj) {
-      items.Add(pcf_new<T>(obj));
+      items.Add(sw_new<T>(obj));
     }
     
     static System::Collections::Generic::List<refptr<object>> items;
@@ -43,7 +43,7 @@ namespace Examples {
   System::Collections::Generic::List<refptr<object>> Program::items;
 }
 
-pcf_startup (Examples::Program)
+sw_startup (Examples::Program)
 
 // This code produces the following output:
 //

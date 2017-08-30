@@ -1,13 +1,13 @@
 // Chain of Responsibility pattern -- Behavioral example
 
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 
 namespace DesignPatterns {
   namespace Behavioral {
     // The 'Handler' abstract class
-    class Handler pcf_abstract {
+    class Handler sw_abstract {
     public:
       void SetSuccessor(refptr<Handler> successor) {this->successor = successor;}
       
@@ -60,9 +60,9 @@ namespace DesignPatterns {
       // Entry point into console application.
       static void Main() {
         // Setup Chain of Responsibility
-        refptr<Handler> h1 = pcf_new<ConcreteHandler1>();
-        refptr<Handler> h2 = pcf_new<ConcreteHandler2>();
-        refptr<Handler> h3 = pcf_new<ConcreteHandler3>();
+        refptr<Handler> h1 = sw_new<ConcreteHandler1>();
+        refptr<Handler> h2 = sw_new<ConcreteHandler2>();
+        refptr<Handler> h3 = sw_new<ConcreteHandler3>();
         h1->SetSuccessor(h2);
         h2->SetSuccessor(h3);
         
@@ -78,7 +78,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-pcf_startup (DesignPatterns::Behavioral::MainApp)
+sw_startup (DesignPatterns::Behavioral::MainApp)
 
 // This code produces the following output:
 //

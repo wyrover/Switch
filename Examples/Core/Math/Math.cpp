@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 
@@ -71,7 +71,7 @@ namespace Examples {
   };
 }
 
-pcf_startup (Examples::MathTrapezoidSample)
+sw_startup (Examples::MathTrapezoidSample)
 
 // This code produces the following output:
 //

@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 using namespace System::IO;
@@ -10,8 +10,8 @@ namespace Examples {
     static void Main() {
       try {
         // Create an instance of StreamReader to read from a file.
-        // The pcf_using statement also closes the StreamReader.
-        pcf_using (StreamReader sr("TestFile.txt")) {
+        // The sw_using statement also closes the StreamReader.
+        sw_using (StreamReader sr("TestFile.txt")) {
           string line;
           // Read and display lines from the file until the end of
           // the file is reached.
@@ -29,7 +29,7 @@ namespace Examples {
   };
 }
 
-pcf_startup (Examples::Program)
+sw_startup (Examples::Program)
 
 // This code produces the following output:
 //

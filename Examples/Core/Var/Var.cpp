@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 
@@ -16,16 +16,16 @@ namespace Examples {
       pets["Persian"] = "Cat";
       pets["Pied Mutation Cockatiel"] = "Bird";
       
-      // you can use pcf_var type insted :
+      // you can use sw_var type insted :
       // System::Collections::Specialized::StringKeyValuePair item
-      for (pcf_var item : pets) {
+      for (sw_var item : pets) {
         Console::WriteLine(item);
       }
     }
   };
 }
 
-pcf_startup (Examples::Program)
+sw_startup (Examples::Program)
 
 // This code produces the following output:
 //

@@ -1,6 +1,6 @@
 // Singleton pattern -- Creational example
 
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 
@@ -42,7 +42,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-pcf_startup (DesignPatterns::Creational::MainApp)
+sw_startup (DesignPatterns::Creational::MainApp)
 
 // This code produces the following output:
 //

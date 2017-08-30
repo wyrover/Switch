@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 using namespace System::Linq;
@@ -12,11 +12,11 @@ namespace Examples {
       Pet(const Pet& pet) : name(pet.name), age(pet.age) {}
       
       Property<int, ReadOnly> Age {
-        pcf_get {return this->age;}
+        sw_get {return this->age;}
       };
       
       Property<string, ReadOnly> Name {
-        pcf_get {return this->name;}
+        sw_get {return this->name;}
       };
       
       virtual bool Equals(const object& other) const {
@@ -60,7 +60,7 @@ namespace Examples {
   };
 }
 
-pcf_startup (Examples::Program)
+sw_startup (Examples::Program)
 
 // This code produces the following output:
 //

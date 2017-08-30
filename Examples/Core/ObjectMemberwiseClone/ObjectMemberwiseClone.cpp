@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 
@@ -30,7 +30,7 @@ namespace Examples {
     // The main entry point for the application.
     static void Main() {
       // Create an instance of Person and assign values to its fields.
-      refptr<Person> person1 = pcf_new<Person>();
+      refptr<Person> person1 = sw_new<Person>();
       person1->age = 42;
       person1->name = "Sam";
       person1->idInfo = new IdInfo(6565);
@@ -78,7 +78,7 @@ namespace Examples {
   };
 }
 
-pcf_startup (Examples::Program)
+sw_startup (Examples::Program)
 
 // This code produces the following output:
 //

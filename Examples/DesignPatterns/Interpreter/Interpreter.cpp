@@ -1,6 +1,6 @@
 // Interpreter pattern -- Behavioral example
 
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 using namespace System::Collections;
@@ -12,7 +12,7 @@ namespace DesignPatterns {
     };
     
     // The 'AbstractExpression' abstract class
-    class AbstractExpression pcf_abstract {
+    class AbstractExpression sw_abstract {
     public:
       virtual void Interpret(const Context& context) const =0;
     };
@@ -56,7 +56,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-pcf_startup (DesignPatterns::Behavioral::MainApp)
+sw_startup (DesignPatterns::Behavioral::MainApp)
 
 // This code produces the following output:
 //

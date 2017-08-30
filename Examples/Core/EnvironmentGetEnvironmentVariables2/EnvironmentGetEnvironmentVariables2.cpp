@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace Microsoft::Win32;
 using namespace System;
@@ -236,7 +236,7 @@ namespace Examples {
   string Program::myVarD = "D" + myVarSuffix;
 }
 
-pcf_startup (Examples::Program)
+sw_startup (Examples::Program)
 
 
 // This example produces the following results:

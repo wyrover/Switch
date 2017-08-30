@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 using namespace System::IO;
@@ -16,7 +16,7 @@ namespace HttpWebRequestExample {
   };
 }
 
-pcf_startup (HttpWebRequestExample::Program)
+sw_startup (HttpWebRequestExample::Program)
 
 // This code produces the following output :
 //

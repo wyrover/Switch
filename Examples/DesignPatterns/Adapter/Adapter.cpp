@@ -1,6 +1,6 @@
 // Adapter pattern -- Structural example
 
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 
@@ -41,7 +41,7 @@ namespace DesignPatterns {
       // Entry point into console application.
       static void Main() {
         // Create adapter and place a request
-        refptr<Target> target = pcf_new<Adapter>();
+        refptr<Target> target = sw_new<Adapter>();
         target->Request();
       }
     };
@@ -49,7 +49,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-pcf_startup (DesignPatterns::Structural::MainApp)
+sw_startup (DesignPatterns::Structural::MainApp)
 
 // This code produces the following output:
 //

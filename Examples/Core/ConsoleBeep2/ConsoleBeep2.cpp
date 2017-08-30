@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 using namespace System::Threading;
@@ -49,8 +49,8 @@ namespace Examples {
       Note() : toneVal((Tone)0), durVal((Duration)0) {}
       
       // Define properties to return the note's tone and duration.
-      Property<Tone, ReadOnly> NoteTone { pcf_get{ return toneVal; } };
-      Property<Duration, ReadOnly> NoteDuration { pcf_get{ return durVal; } };
+      Property<Tone, ReadOnly> NoteTone { sw_get{ return toneVal; } };
+      Property<Duration, ReadOnly> NoteDuration { sw_get{ return durVal; } };
     };
     
   public:
@@ -89,7 +89,7 @@ namespace Examples {
   };
 }
 
-pcf_startup (Examples::Program)
+sw_startup (Examples::Program)
 
 // This code produces the following result:
 //

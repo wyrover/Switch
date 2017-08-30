@@ -1,6 +1,6 @@
 // Observer pattern -- Behavioral example
 
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 using namespace System::Collections::Generic;
@@ -8,13 +8,13 @@ using namespace System::Collections::Generic;
 namespace DesignPatterns {
   namespace Behavioral {
     // The 'Observer' abstract class
-    class Observer pcf_abstract {
+    class Observer sw_abstract {
     public:
       virtual void Update() = 0;
     };
 
     // The 'Subject' abstract class
-    class Subject pcf_abstract {
+    class Subject sw_abstract {
     public:
       void Attach(refptr<Observer> observer) {this->observers.Add(observer);}
 
@@ -35,8 +35,8 @@ namespace DesignPatterns {
     public:
       // Gets or sets subject state
       Property<string> SubjectState {
-        pcf_get { return this->subjectState; },
-        pcf_set { this->subjectState = value; }
+        sw_get { return this->subjectState; },
+        sw_set { this->subjectState = value; }
       };
 
     private:
@@ -56,8 +56,8 @@ namespace DesignPatterns {
 
       // Gets or sets subject
       Property<refptr<ConcreteSubject>> Subject {
-        pcf_get { return this->subject; },
-        pcf_set { this->subject = value; }
+        sw_get { return this->subject; },
+        sw_set { this->subject = value; }
       };
 
     private:
@@ -73,7 +73,7 @@ namespace DesignPatterns {
       // Entry point into console application.
       static void Main() {
         // Configure Observer pattern
-        refptr<ConcreteSubject> s = pcf_new<ConcreteSubject>();
+        refptr<ConcreteSubject> s = sw_new<ConcreteSubject>();
         
         s->Attach(new ConcreteObserver(s, "X"));
         s->Attach(new ConcreteObserver(s, "Y"));
@@ -88,7 +88,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-pcf_startup (DesignPatterns::Behavioral::MainApp)
+sw_startup (DesignPatterns::Behavioral::MainApp)
 
 // This code produces the following output:
 //

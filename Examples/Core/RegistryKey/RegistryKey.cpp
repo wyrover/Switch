@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 using namespace Microsoft::Win32;
@@ -8,13 +8,13 @@ namespace Examples {
   public:
     // The main entry point for the application.
     static void Main() {
-      // Create environment variale PCF_REGISTRY_KEY_TEST to validate registry expand string
-      Environment::SetEnvironmentVariable("PCF_REGISTRY_KEY_TEST", "My Environment Variable");
+      // Create environment variale SWITCH_REGISTRY_KEY_TEST to validate registry expand string
+      Environment::SetEnvironmentVariable("SWITCH_REGISTRY_KEY_TEST", "My Environment Variable");
       
-      // Create a new regiqstry sub key "HKEY_CURRENT_USER\PcfRegistryKeyTest" and add values
-      pcf_using(RegistryKey key = Registry::CurrentUser().CreateSubKey("PcfRegistryKeyTest")) {
+      // Create a new regiqstry sub key "HKEY_CURRENT_USER\SwitchRegistryKeyTest" and add values
+      sw_using(RegistryKey key = Registry::CurrentUser().CreateSubKey("SwitchRegistryKeyTest")) {
         key.SetValue("Key1", "Value1");
-        key.SetValue("Key2", "%PCF_REGISTRY_KEY_TEST%", RegistryValueKind::ExpandString);
+        key.SetValue("Key2", "%SWITCH_REGISTRY_KEY_TEST%", RegistryValueKind::ExpandString);
         key.SetValue("Key3", Array<byte> {1, 2, 3, 4, 5}, RegistryValueKind::Binary);
         key.SetValue("Key4", 42);
         key.SetValue("Key5", Array<string> {"str1", "Str2", "str3"});
@@ -22,8 +22,8 @@ namespace Examples {
         key.SetValue("Key7", Version(1, 2, 3));
       }
       
-      // Open sub key HKEY_CURRENT_USER\PcfRegistryKeyTest in read mode and read values
-      RegistryKey key = Registry::CurrentUser().OpenSubKey("PcfRegistryKeyTest");
+      // Open sub key HKEY_CURRENT_USER\SwitchRegistryKeyTest in read mode and read values
+      RegistryKey key = Registry::CurrentUser().OpenSubKey("SwitchRegistryKeyTest");
       Console::WriteLine("Key1 = {0}", key.GetValue("Key1"));
       Console::WriteLine("Key2 = {0}", key.GetValue("Key2"));
       Console::WriteLine("Key3 = {0}", string::Join(", ", as<Array<byte>>(key.GetValue("Key3"))));
@@ -40,16 +40,16 @@ namespace Examples {
         Console::WriteLine("Unauthorized access !");
       }
 
-      // Remove the "HKEY_CURRENT_USER\PcfRegistryKeyTest" sub key
-      Registry::CurrentUser().DeleteSubKeyTree("PcfRegistryKeyTest");
+      // Remove the "HKEY_CURRENT_USER\SwitchRegistryKeyTest" sub key
+      Registry::CurrentUser().DeleteSubKeyTree("SwitchRegistryKeyTest");
       
-      // Remove environment variale PCF_REGISTRY_KEY_TEST
-      Environment::SetEnvironmentVariable("PCF_REGISTRY_KEY_TEST", "");
+      // Remove environment variale SWITCH_REGISTRY_KEY_TEST
+      Environment::SetEnvironmentVariable("SWITCH_REGISTRY_KEY_TEST", "");
     }
   };
 }
 
-pcf_startup (Examples::Program)
+sw_startup (Examples::Program)
 
 // This code produces the following output:
 //

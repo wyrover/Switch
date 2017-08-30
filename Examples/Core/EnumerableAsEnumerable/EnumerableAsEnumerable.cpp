@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 using namespace System::Collections::Generic;
@@ -27,14 +27,14 @@ namespace Examples {
       
       // First call to Where():
       // Call Clump's Where() method with a predicate.
-      refptr<IEnumerable<string>> query1 = fruitClump.Where(pcf_delegate(string fruit) { return fruit.Contains("o");});
+      refptr<IEnumerable<string>> query1 = fruitClump.Where(sw_delegate(string fruit) { return fruit.Contains("o");});
       
       Console::WriteLine("query1 has been created.\n");
       
       // Second call to Where():
       // First call AsEnumerable() to hide Clump's Where() method and thereby
       // force System::Linq::Enumerable's Where() method to be called.
-      refptr<IEnumerable<string>> query2 = fruitClump.AsEnumerable()->Where(pcf_delegate(string fruit) { return fruit.Contains("o");});
+      refptr<IEnumerable<string>> query2 = fruitClump.AsEnumerable()->Where(sw_delegate(string fruit) { return fruit.Contains("o");});
       
       // Display the output.
       Console::WriteLine("query2 has been created.");
@@ -42,7 +42,7 @@ namespace Examples {
   };
 }
 
-pcf_startup (Examples::Program)
+sw_startup (Examples::Program)
 
 // This code example produces the following output:
 //

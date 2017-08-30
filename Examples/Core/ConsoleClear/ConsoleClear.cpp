@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 
@@ -65,7 +65,7 @@ namespace Examples {
         Console::Write(msg);
         keyPressed = Console::ReadKey();
         Console::WriteLine();
-        if (Array<>::Exists<char32>(validChars, pcf_delegate(const char32& ch) {return Char(ch).Equals(Char::ToUpper(keyPressed.KeyChar));}))
+        if (Array<>::Exists<char32>(validChars, sw_delegate(const char32& ch) {return Char(ch).Equals(Char::ToUpper(keyPressed.KeyChar));}))
           valid = true;
         
       } while (! valid);
@@ -74,7 +74,7 @@ namespace Examples {
   };
 }
 
-pcf_startup (Examples::Program)
+sw_startup (Examples::Program)
 
 // This code produces the following output:
 //

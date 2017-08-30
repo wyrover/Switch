@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 using namespace System::Collections::Generic;
@@ -18,7 +18,7 @@ namespace Examples {
       names.ForEach(Print);
       
       // The following demonstrates the lambda of C++ to display the contents of the list to the console.
-      names.ForEach(pcf_delegate(const string& name) {
+      names.ForEach(sw_delegate(const string& name) {
         Console::WriteLine(name);
       });
     }
@@ -30,7 +30,7 @@ namespace Examples {
   };
 }
 
-pcf_startup (Examples::Program)
+sw_startup (Examples::Program)
 
 // This code produces the following output:
 //

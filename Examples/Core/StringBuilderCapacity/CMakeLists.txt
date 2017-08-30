@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.2)
 
 project(StringBuilderCapacity)
-find_package(Pcf REQUIRED)
+find_package(Switch REQUIRED)
 add_executable(StringBuilderCapacity StringBuilderCapacity.cpp)
-target_link_libraries(StringBuilderCapacity Pcf.Core)
+target_link_libraries(StringBuilderCapacity Switch.Core)

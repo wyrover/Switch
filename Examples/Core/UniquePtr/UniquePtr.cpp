@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 
@@ -20,7 +20,7 @@ namespace Test {
       Console::WriteLine(*str2);
       str2 = null;
       Console::WriteLine("str2 = {0}", str2.ToString());
-      SharedPtr<string> sp = pcf_new<string>("Test sp");
+      SharedPtr<string> sp = sw_new<string>("Test sp");
       Console::WriteLine("sp = {0}", sp.ToString());
       UniquePtr<int> a = MakeUnique<int>(234);
       Console::WriteLine("a = {0}", a.ToString());
@@ -30,18 +30,18 @@ namespace Test {
   };
 }
 
-pcf_startup (Test::Program)
+sw_startup (Test::Program)
 
 // This code produces the following output:
 //
-// str = Pcf::UniquePtr [Pointer=140704215999824]
+// str = Switch::UniquePtr [Pointer=140704215999824]
 // Hello world!
-// str = Pcf::UniquePtr [Pointer=140704216001168]
+// str = Switch::UniquePtr [Pointer=140704216001168]
 // another string !
-// str2 = Pcf::UniquePtr [Pointer=140704216001168]
-// str = Pcf::UniquePtr [Pointer=null]
+// str2 = Switch::UniquePtr [Pointer=140704216001168]
+// str = Switch::UniquePtr [Pointer=null]
 // another string !
-// str2 = Pcf::UniquePtr [Pointer=null]
-// sp = Pcf::RefPtr [Pointer=140704215999520, UseCount=1]
-// a = Pcf::UniquePtr [Pointer=140704215998368]
-// b = Pcf::RefPtr [Pointer=null]
+// str2 = Switch::UniquePtr [Pointer=null]
+// sp = Switch::RefPtr [Pointer=140704215999520, UseCount=1]
+// a = Switch::UniquePtr [Pointer=140704215998368]
+// b = Switch::RefPtr [Pointer=null]

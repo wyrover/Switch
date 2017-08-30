@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 using namespace System::Collections::Generic;
@@ -18,10 +18,10 @@ namespace Examples {
       Reader() = delete;
       Reader(const Reader& reader) = delete;
       NetworkStream stream;
-      Thread readThread {ThreadStart(pcf_delegate {
+      Thread readThread {ThreadStart(sw_delegate {
         StreamReader streamReader(this->stream);
         while (true) {
-          pcf_lock(lock) {
+          sw_lock(lock) {
             Console::WriteLine(streamReader.ReadLine());
           }
         }
@@ -34,13 +34,13 @@ namespace Examples {
       Console::WriteLine("Press Ctrl+C to quit...");
       
       // create server thread
-      Thread server(ThreadStart(pcf_delegate {
+      Thread server(ThreadStart(sw_delegate {
         TcpListener tcpListener(IPAddress::Any, 9050);
         tcpListener.Start();
         List<refptr<Reader>> readers;
         while(true) {
           // create reader for each client
-          readers.Add(pcf_new<Reader>(tcpListener.AcceptTcpClient().GetStream()));
+          readers.Add(sw_new<Reader>(tcpListener.AcceptTcpClient().GetStream()));
         }
       }));
       server.Start();
@@ -50,7 +50,7 @@ namespace Examples {
       // Create 10 client threads
       List<Thread> clients;
       for(int i = 0; i < 10; i++) {
-        clients.Add(Thread(ThreadStart(pcf_delegate {
+        clients.Add(Thread(ThreadStart(sw_delegate {
           StreamWriter streamWriter(TcpClient("127.0.0.1", 9050).GetStream());
           int counter = 1;
           while (true) {
@@ -70,7 +70,7 @@ namespace Examples {
 object Examples::TcpClientExample::Reader::lock;
 
 
-pcf_startup (Examples::TcpClientExample)
+sw_startup (Examples::TcpClientExample)
 
 // This code example can produce the following output:
 //

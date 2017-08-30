@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 using namespace System::Linq;
@@ -12,9 +12,9 @@ namespace Examples {
       Array<string> names = { "Burke", "Connor", "Frank", "Everett", "Albert", "George", "Harris", "David" };
       
       refptr<IEnumerable<string>> query = from<string>(names)
-                                          | where<string>(pcf_delegate(string s) {return s.Length == 5;})
-                                          | orderby<string>(pcf_delegate(string s) {return s;})
-                                          | select<string>(pcf_delegate(string s) {return s.ToUpper();});
+                                          | where<string>(sw_delegate(string s) {return s.Length == 5;})
+                                          | orderby<string>(sw_delegate(string s) {return s;})
+                                          | select<string>(sw_delegate(string s) {return s.ToUpper();});
       
       for (string item : *query)
         Console::WriteLine(item);
@@ -22,7 +22,7 @@ namespace Examples {
   };
 }
 
-pcf_startup (Examples::Program)
+sw_startup (Examples::Program)
 
 // This code example produces the following output:
 //

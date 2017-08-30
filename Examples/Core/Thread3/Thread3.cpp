@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 using namespace System::Diagnostics;
@@ -23,7 +23,7 @@ namespace Examples {
 
   private:
     static void ShowThreadInformation(const Object& state) {
-      pcf_lock (obj) {
+      sw_lock (obj) {
         auto th  = Thread::CurrentThread();
         Console::WriteLine("Managed thread #{0}: ", th.ManagedThreadId);
         Console::WriteLine("   Background thread: {0}", th.IsBackground);
@@ -38,7 +38,7 @@ namespace Examples {
   Object Program::obj;
 }
 
-pcf_startup (Examples::Program)
+sw_startup (Examples::Program)
 
 // This code produces output similar to the following:
 //

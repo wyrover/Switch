@@ -1,4 +1,4 @@
-#include <Pcf/Pcf>
+#include <Switch/Switch>
 
 using namespace System;
 using namespace System::Threading;
@@ -10,9 +10,9 @@ namespace Examples {
     static void Main() {
       ExceptionPtr exceptionPtr;
       
-      Thread thread(ThreadStart(pcf_delegate {
+      Thread thread(ThreadStart(sw_delegate {
         try {
-          throw ArgumentNullException("Ouch there are an error !", pcf_current_information);
+          throw ArgumentNullException("Ouch there are an error !", sw_current_information);
         } catch(...) {
           exceptionPtr = ExceptionPtr::CurrentException;
         }
@@ -31,7 +31,7 @@ namespace Examples {
   };
 }
 
-pcf_startup (Examples::Program)
+sw_startup (Examples::Program)
 
 // This code produces the following output:
 //
