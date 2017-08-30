@@ -9,7 +9,7 @@
 - written in efficient, modern C++14;
 - and highly portable and available on many different platforms (Windows, Mac Os X, Linux);
 
-![GitHub Logo](Documentations/Images/Switch architecture.png)
+![GitHub Logo](Documentations/Images/SwitchArchitecture.png)
 
 # Libraries
 The framework is composed of 4 libraries :
