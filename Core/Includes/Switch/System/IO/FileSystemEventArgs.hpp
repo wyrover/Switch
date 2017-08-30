@@ -12,7 +12,7 @@ namespace Switch {
   namespace System {
     /// @brief The System::IO namespace contains types that allow reading and writing to files and data streams, and types that provide basic file and directory support.
     namespace IO {
-      class pcf_public FileSystemEventArgs : public EventArgs {
+      class sw_public FileSystemEventArgs : public EventArgs {
       public:
         FileSystemEventArgs(WatcherChangeTypes changeType, const string directory, const string name) : changeType(changeType), directory(directory), name(name) {}
         
@@ -27,15 +27,15 @@ namespace Switch {
         /// @endcond
         
         Property<WatcherChangeTypes, ReadOnly> ChangeType {
-          pcf_get {return this->changeType;}
+          sw_get {return this->changeType;}
         };
         
         Property<string, ReadOnly> Directory {
-          pcf_get {return this->directory;}
+          sw_get {return this->directory;}
         };
         
         Property<string, ReadOnly> Name {
-          pcf_get {return this->name;}
+          sw_get {return this->name;}
         };
         
       private:

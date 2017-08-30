@@ -19,35 +19,35 @@ namespace Switch {
         /// @endcond
         
         Property<string, ReadOnly> Company {
-          pcf_get {return this->company;}
+          sw_get {return this->company;}
         };
         
         Property<string, ReadOnly> Configuration {
-          pcf_get {return this->configuration;}
+          sw_get {return this->configuration;}
         };
         
         Property<string, ReadOnly> Copyright {
-          pcf_get {return this->copyright;}
+          sw_get {return this->copyright;}
         };
         
         Property<string, ReadOnly> Description {
-          pcf_get {return this->description;}
+          sw_get {return this->description;}
         };
         
         Property<string, ReadOnly> Name {
-          pcf_get {return this->name;}
+          sw_get {return this->name;}
         };
         
         Property<string, ReadOnly> Product {
-          pcf_get {return this->product;}
+          sw_get {return this->product;}
         };
         
         Property<string, ReadOnly> Trademark {
-          pcf_get {return this->trademark;}
+          sw_get {return this->trademark;}
         };
         
         Property<System::Version, ReadOnly> Version {
-          pcf_get {return this->version;}
+          sw_get {return this->version;}
         };
         
         static void AddAssembly(const Assembly& assembly) {assemblies.Add(assembly.name, assembly);}

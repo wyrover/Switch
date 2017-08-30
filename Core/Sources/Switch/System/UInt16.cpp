@@ -108,14 +108,14 @@ bool UInt16::ToBoolean(const IFormatProvider&) const {
 
 byte UInt16::ToByte(const IFormatProvider&) const {
   if (this->value > Byte::MaxValue)
-    throw OverflowException(pcf_current_information);
+    throw OverflowException(sw_current_information);
   
   return (sbyte)this->value;
 }
 
 char32 UInt16::ToChar(const IFormatProvider&) const {
   if (this->value > Char::MaxValue)
-    throw OverflowException(pcf_current_information);
+    throw OverflowException(sw_current_information);
   
   return (char)this->value;
 }
@@ -130,7 +130,7 @@ double UInt16::ToDouble(const IFormatProvider&) const {
 
 int16 UInt16::ToInt16(const IFormatProvider&) const {
   if (this->value > Int16::MaxValue)
-    throw OverflowException(pcf_current_information);
+    throw OverflowException(sw_current_information);
   
   return (int16)this->value;
 }
@@ -157,7 +157,7 @@ uint64 UInt16::ToUInt64(const IFormatProvider&) const {
 
 sbyte UInt16::ToSByte(const IFormatProvider&) const {
   if (this->value > SByte::MaxValue)
-    throw OverflowException(pcf_current_information);
+    throw OverflowException(sw_current_information);
   
   return (sbyte)this->value;
 }
@@ -196,7 +196,7 @@ UInt16& UInt16::operator *=(const UInt16& value) {
 
 UInt16& UInt16::operator /=(const UInt16& value) {
   if (value == 0)
-    throw DivideByZeroException(pcf_current_information);
+    throw DivideByZeroException(sw_current_information);
 
   this->value /= value.value;
   return *this;
@@ -204,7 +204,7 @@ UInt16& UInt16::operator /=(const UInt16& value) {
 
 UInt16& UInt16::operator %=(const UInt16& value) {
   if (value == 0)
-    throw DivideByZeroException(pcf_current_information);
+    throw DivideByZeroException(sw_current_information);
 
   this->value %= value;
   return *this;

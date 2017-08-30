@@ -26,7 +26,7 @@ namespace Switch {
       ///  * To enable debugging with cmake, add the add_definitions(-DDEBUG) command line in the CMakeLists.txt of your porject, or you can add #define DEBUG to the top of your file but in this case, the compiler options for debug is not activated.
       ///  * To enable tracing with cmake, add the add_definitions(-DTRACE) command line in the CMakeLists.txt of your porject, or you can add #define TRACE to the top of your file.
       /// @note <b>to Inheritors:</b> Inherit from this class to implement a custom listener for the Debug and Trace classes. At a minimum, you must implement the Write and WriteLine methods. Additionally, you can implement the Fail, Close and Flush methods.
-      class pcf_public TraceListener pcf_abstract {
+      class sw_public TraceListener sw_abstract {
       public:
         /// @brief Initializes a new instance of the TraceListener class.
         /// @remarks The following table shows initial property values for an instance of TraceListener.
@@ -50,20 +50,20 @@ namespace Switch {
         /// @return A StringDictionary containing the custom attributes for the trace listener.
         /// @remarks Classes that inherit from the TraceListener class can add custom attributes by overriding the GetSupportedAttributes method and returning a string array of custom attribute names. The Attributes property identifies the custom attributes that are referenced in the application's configuration file. For example, in the following configuration file excerpt the DelimitedListTraceListener custom attribute "delimiter" is referenced. In this case, the Attributes property returns a StringDictionary containing the string "delimiter".
         Property<const Collections::Specialized::StringDictionary&, ReadOnly> Attributes {
-          pcf_get->const Collections::Specialized::StringDictionary& {return this->data->attibutes;}
+          sw_get->const Collections::Specialized::StringDictionary& {return this->data->attibutes;}
         };
         
         Property<const TraceFilter&> Filter {
-          pcf_get->const TraceFilter& {return *this->data->filter;},
-          pcf_set {this->data->filter = &value;}
+          sw_get->const TraceFilter& {return *this->data->filter;},
+          sw_set {this->data->filter = &value;}
         };
         
         /// @brief Gets or sets the indent level.
         /// @return int32 The indent level. The default is zero.
         /// @remarks The IndentLevel property represents the number of times that the indent specified by the IndentSize property is applied. This property is stored on per-thread/per-request basis.
         Property<int32> IndentLevel {
-          pcf_get {return this->data->indentLevel;},
-          pcf_set {this->data->indentLevel = value;}
+          sw_get {return this->data->indentLevel;},
+          sw_set {this->data->indentLevel = value;}
         };
         
         /// @brief Gets or sets the number of spaces in an indent.
@@ -71,10 +71,10 @@ namespace Switch {
         /// @exception ArgumentOutOfRangeException Set operation failed because the value is less than zero.
         /// @remarks The property is stored on per-thread/per-request basis.
         Property<int32> IndentSize {
-          pcf_get {return this->data->indentSize;},
-          pcf_set {
+          sw_get {return this->data->indentSize;},
+          sw_set {
             if (value < 0)
-              throw ArgumentOutOfRangeException(pcf_current_information);
+              throw ArgumentOutOfRangeException(sw_current_information);
             this->data->indentSize = value;
           }
         };
@@ -83,15 +83,15 @@ namespace Switch {
         /// @return bool true if the trace listener is thread safe; otherwise, false. The default is false.
         /// @remarks The value of IsThreadSafe is used to determine whether to use a global lock when writing to the listener. If the value of IsThreadSafe is false, the global lock is used regardless of the value of UseGlobalLock. The global lock is not used only if the value of IsThreadSafe is true and the value of UseGlobalLock is false. The default behavior is to use the global lock whenever writing to the listener.
         Property<bool, ReadOnly> IsThreadSafe {
-          pcf_get {return this->data->isThreadSafe;}
+          sw_get {return this->data->isThreadSafe;}
         };
         
         /// @brief Gets or sets a name for this TraceListener.
         /// @return string A name for this TraceListener. The default is an empty string ("").
         /// @remarks The name can be used to organize and access listeners in a TraceListenerCollection collection.
         Property<string> Name {
-          pcf_get {return this->data->name;},
-          pcf_set {this->data->name = value;}
+          sw_get {return this->data->name;},
+          sw_set {this->data->name = value;}
         };
 
         /// @brief Gets or sets the trace output options.
@@ -102,8 +102,8 @@ namespace Switch {
         /// * The Write and WriteLine methods of the ConsoleTraceListener, DefaultTraceListener, and TextWriterTraceListener classes.
         /// * The Write and WriteLine methods of the TraceListener class when they are not overridden in a derived class.
         Property<TraceOptions> TraceOutputOptions {
-          pcf_get {return this->data->traceOutputOptions;},
-          pcf_set {this->data->traceOutputOptions = value;}
+          sw_get {return this->data->traceOutputOptions;},
+          sw_set {this->data->traceOutputOptions = value;}
         };
 
         /// @brief When overridden in a derived class, closes the output stream so it no longer receives tracing or debugging output.
@@ -292,8 +292,8 @@ namespace Switch {
         /// @return bool true if the output should be indented; otherwise, false.
         /// @remarks The WriteIndent method, called by the DefaultTraceListener and TextWriterTraceListener classes, sets the NeedIndent property value to false to prevent later, unnecessary indents. You must set the NeedIndent property to true each time you wish to indent trace output.
         Property<bool> NeedIndent {
-          pcf_get {return this->data->needIndent;},
-          pcf_set {this->data->needIndent = value;}
+          sw_get {return this->data->needIndent;},
+          sw_set {this->data->needIndent = value;}
         };
         
         /// @brief Writes the indent to the listener you create when you implement this class, and resets the NeedIndent property to false.
@@ -331,7 +331,7 @@ namespace Switch {
           TraceOptions traceOutputOptions = TraceOptions::None;
           };
 
-        refptr<TraceListenerData> data = pcf_new<TraceListenerData>();
+        refptr<TraceListenerData> data = sw_new<TraceListenerData>();
       };
     }
   }

@@ -17,7 +17,7 @@ namespace Switch {
     /// The WebRequest and WebResponse classes form the basis of what are called pluggable protocols, an implementation of network services that enables you to develop applications that use Internet resources without worrying about the specific details of the individual protocols.
     namespace Net {
       /// @brief Identifies a network address. This is an abstract class.
-      class pcf_public EndPoint : public Object {
+      class sw_public EndPoint : public Object {
       public:
         /// @cond
         EndPoint() {}
@@ -33,7 +33,7 @@ namespace Switch {
         /// @brief Gets the address family to which the endpoint belongs.
         /// @return One of the AddressFamily values.
         Property<Sockets::AddressFamily, ReadOnly> AddressFamily {
-          pcf_get {return this->addressFamily;}
+          sw_get {return this->addressFamily;}
         };
 
         /// @brief Serializes endpoint information into a SocketAddress instance.

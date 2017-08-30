@@ -9,92 +9,92 @@ namespace SwitchUnitTests {
   class UnboxTest : public TestFixture {
   protected:
     void UnboxingBoolean() {
-      Assert::IsTrue(IsBool(Unbox(Boolean(true))), pcf_current_information);
+      Assert::IsTrue(IsBool(Unbox(Boolean(true))), sw_current_information);
     }
     
     void UnboxingByte() {
-      Assert::IsTrue(IsByte(Unbox(Byte(42))), pcf_current_information);
+      Assert::IsTrue(IsByte(Unbox(Byte(42))), sw_current_information);
     }
     
     void UnboxingChar() {
-      Assert::IsTrue(IsChar32(Unbox(Char('c'))), pcf_current_information);
+      Assert::IsTrue(IsChar32(Unbox(Char('c'))), sw_current_information);
     }
     
     void UnboxingDouble() {
-      Assert::IsTrue(IsDouble(Unbox(Double(42))), pcf_current_information);
+      Assert::IsTrue(IsDouble(Unbox(Double(42))), sw_current_information);
     }
     
     void UnboxingInt16() {
-      Assert::IsTrue(IsInt16(Unbox(Int16(42))), pcf_current_information);
+      Assert::IsTrue(IsInt16(Unbox(Int16(42))), sw_current_information);
     }
     
     void UnboxingInt32() {
-      Assert::IsTrue(IsInt32(Unbox(Int32(42))), pcf_current_information);
+      Assert::IsTrue(IsInt32(Unbox(Int32(42))), sw_current_information);
     }
     
     void UnboxingInt64() {
-      Assert::IsTrue(IsInt64(Unbox(Int64(42))), pcf_current_information);
+      Assert::IsTrue(IsInt64(Unbox(Int64(42))), sw_current_information);
     }
     
     void UnboxingIntPtr() {
-      Assert::IsTrue(IsIntPtr(Unbox(IntPtr((intptr)42))), pcf_current_information);
+      Assert::IsTrue(IsIntPtr(Unbox(IntPtr((intptr)42))), sw_current_information);
     }
     
     void UnboxingSByte() {
-      Assert::IsTrue(IsSByte(Unbox(SByte(42))), pcf_current_information);
+      Assert::IsTrue(IsSByte(Unbox(SByte(42))), sw_current_information);
     }
     
     void UnboxingSingle() {
-      Assert::IsTrue(IsSingle(Unbox(Single(42))), pcf_current_information);
+      Assert::IsTrue(IsSingle(Unbox(Single(42))), sw_current_information);
     }
     
     void UnboxingString() {
-      Assert::IsTrue(IsConstCharPointer(Unbox(string("Forty two"))), pcf_current_information);
+      Assert::IsTrue(IsConstCharPointer(Unbox(string("Forty two"))), sw_current_information);
     }
     
     void UnboxingUInt16() {
-      Assert::IsTrue(IsUInt16(Unbox(UInt16(42))), pcf_current_information);
+      Assert::IsTrue(IsUInt16(Unbox(UInt16(42))), sw_current_information);
     }
     
     void UnboxingUInt32() {
-      Assert::IsTrue(IsUInt32(Unbox(UInt32(42))), pcf_current_information);
+      Assert::IsTrue(IsUInt32(Unbox(UInt32(42))), sw_current_information);
     }
     
     void UnboxingUInt64() {
-      Assert::IsTrue(IsUInt64(Unbox(UInt64(42))), pcf_current_information);
+      Assert::IsTrue(IsUInt64(Unbox(UInt64(42))), sw_current_information);
     }
     
     void UnboxingUIntPtr() {
-      Assert::IsTrue(IsUIntPtr(Unbox(UIntPtr((uintptr)42))), pcf_current_information);
+      Assert::IsTrue(IsUIntPtr(Unbox(UIntPtr((uintptr)42))), sw_current_information);
     }
     
     void UnboxingConstCharPointer() {
-      Assert::IsTrue(IsConstCharPointer(Unbox("Forty two")), pcf_current_information);
+      Assert::IsTrue(IsConstCharPointer(Unbox("Forty two")), sw_current_information);
     }
     
     void UnboxingConstWCharPointer() {
-      Assert::IsTrue(IsConstWCharPointer(Unbox(L"Forty two")), pcf_current_information);
+      Assert::IsTrue(IsConstWCharPointer(Unbox(L"Forty two")), sw_current_information);
     }
     
     void UnboxingConstChar16Pointer() {
-      Assert::IsTrue(IsConstChar16Pointer(Unbox(u"Forty two")), pcf_current_information);
+      Assert::IsTrue(IsConstChar16Pointer(Unbox(u"Forty two")), sw_current_information);
     }
     
     void UnboxingConstChar32Pointer() {
-      Assert::IsTrue(IsConstChar32Pointer(Unbox(U"Forty two")), pcf_current_information);
+      Assert::IsTrue(IsConstChar32Pointer(Unbox(U"Forty two")), sw_current_information);
     }
     
     void UnboxingTimeSpan() {
-      Assert::IsTrue(is<TimeSpan>(Unbox(12_h + 24_min + 32_s)), pcf_current_information);
+      Assert::IsTrue(is<TimeSpan>(Unbox(12_h + 24_min + 32_s)), sw_current_information);
     }
     
     void UnboxingAny() {
-      Assert::IsTrue(is<Int32>(Unbox(Any(42))), pcf_current_information);
+      Assert::IsTrue(is<Int32>(Unbox(Any(42))), sw_current_information);
     }
     
     void UnboxingMyStruct() {
       struct MyStruct {};
-      Assert::IsTrue(is<MyStruct>(Unbox(MyStruct())), pcf_current_information);
+      Assert::IsTrue(is<MyStruct>(Unbox(MyStruct())), sw_current_information);
     }
 
     bool IsBool(bool) {return true;}
@@ -143,25 +143,25 @@ namespace SwitchUnitTests {
     template<typename T> bool IsVoidPointer(T) {return false;}
   };
   
-  pcf_test(UnboxTest, UnboxingBoolean)
-  pcf_test(UnboxTest, UnboxingByte)
-  pcf_test(UnboxTest, UnboxingChar)
-  pcf_test(UnboxTest, UnboxingDouble)
-  pcf_test(UnboxTest, UnboxingInt16)
-  pcf_test(UnboxTest, UnboxingInt32)
-  pcf_test(UnboxTest, UnboxingInt64)
-  pcf_test(UnboxTest, UnboxingIntPtr)
-  pcf_test(UnboxTest, UnboxingSByte)
-  pcf_test(UnboxTest, UnboxingSingle)
-  pcf_test(UnboxTest, UnboxingString)
-  pcf_test(UnboxTest, UnboxingUInt16)
-  pcf_test(UnboxTest, UnboxingUInt32)
-  pcf_test(UnboxTest, UnboxingUInt64)
-  pcf_test(UnboxTest, UnboxingUIntPtr)
-  pcf_test(UnboxTest, UnboxingConstCharPointer)
-  pcf_test(UnboxTest, UnboxingConstWCharPointer)
-  pcf_test(UnboxTest, UnboxingConstChar16Pointer)
-  pcf_test(UnboxTest, UnboxingConstChar32Pointer)
-  pcf_test(UnboxTest, UnboxingAny)
-  pcf_test(UnboxTest, UnboxingMyStruct)
+  sw_test(UnboxTest, UnboxingBoolean)
+  sw_test(UnboxTest, UnboxingByte)
+  sw_test(UnboxTest, UnboxingChar)
+  sw_test(UnboxTest, UnboxingDouble)
+  sw_test(UnboxTest, UnboxingInt16)
+  sw_test(UnboxTest, UnboxingInt32)
+  sw_test(UnboxTest, UnboxingInt64)
+  sw_test(UnboxTest, UnboxingIntPtr)
+  sw_test(UnboxTest, UnboxingSByte)
+  sw_test(UnboxTest, UnboxingSingle)
+  sw_test(UnboxTest, UnboxingString)
+  sw_test(UnboxTest, UnboxingUInt16)
+  sw_test(UnboxTest, UnboxingUInt32)
+  sw_test(UnboxTest, UnboxingUInt64)
+  sw_test(UnboxTest, UnboxingUIntPtr)
+  sw_test(UnboxTest, UnboxingConstCharPointer)
+  sw_test(UnboxTest, UnboxingConstWCharPointer)
+  sw_test(UnboxTest, UnboxingConstChar16Pointer)
+  sw_test(UnboxTest, UnboxingConstChar32Pointer)
+  sw_test(UnboxTest, UnboxingAny)
+  sw_test(UnboxTest, UnboxingMyStruct)
 }

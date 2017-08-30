@@ -13,7 +13,7 @@ namespace SwitchUnitTests {
       static string result;
       result = "";
       struct MyStruct {
-        pcf_async(Task<>, AsyncTask, {result = "Forty two";});
+        sw_async(Task<>, AsyncTask, {result = "Forty two";});
       };
       
       MyStruct myStruct;
@@ -23,7 +23,7 @@ namespace SwitchUnitTests {
     
     void RunningAsyncTaskInt32() {
       struct MyStruct {
-        pcf_async(Task<int32>, AsyncTask, {return 42;});
+        sw_async(Task<int32>, AsyncTask, {return 42;});
       };
       
       MyStruct myStruct;
@@ -33,7 +33,7 @@ namespace SwitchUnitTests {
     
     void RunningAsyncTaskString() {
       struct MyStruct {
-        pcf_async(Task<string>, AsyncTask, {return "Forty two";});
+        sw_async(Task<string>, AsyncTask, {return "Forty two";});
       };
       
       MyStruct myStruct;
@@ -42,7 +42,7 @@ namespace SwitchUnitTests {
     }
   };
   
-  pcf_test(AsyncTest, RunningAsyncTask)
-  pcf_test(AsyncTest, RunningAsyncTaskInt32)
-  pcf_test(AsyncTest, RunningAsyncTaskString)
+  sw_test(AsyncTest, RunningAsyncTask)
+  sw_test(AsyncTest, RunningAsyncTaskInt32)
+  sw_test(AsyncTest, RunningAsyncTaskString)
 }

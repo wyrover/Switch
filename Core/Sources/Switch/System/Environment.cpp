@@ -86,23 +86,23 @@ namespace {
     
     static void SignalIllegalInstructionHandler(int32 signal) {
       ::signal(signal, SignalCatcher::SignalIllegalInstructionHandler);
-      throw System::InvalidOperationException(pcf_current_information);
+      throw System::InvalidOperationException(sw_current_information);
     }
     
     static void SignalAbortExceptionHandler(int32 signal) {
       ::signal(signal, SignalCatcher::SignalAbortExceptionHandler);
-      //throw System::Threading::ThreadAbortException(pcf_current_information);
+      //throw System::Threading::ThreadAbortException(sw_current_information);
       exit(-1);
     }
     
     static void SignalFloatingPointExceptionHandler(int32 signal) {
       ::signal(signal, SignalCatcher::SignalFloatingPointExceptionHandler);
-      throw System::ArithmeticException(pcf_current_information);
+      throw System::ArithmeticException(sw_current_information);
     }
     
     static void SignalSegmentationViolationHandler(int32 signal) {
       ::signal(signal, SignalCatcher::SignalSegmentationViolationHandler);
-      throw System::AccessViolationException(pcf_current_information);
+      throw System::AccessViolationException(sw_current_information);
     }
   };
 
@@ -134,7 +134,7 @@ namespace {
 Property<String, ReadOnly> Environment::CommandLine {
   [] {
     if (commandLineArgs->Length == 0)
-      throw InvalidOperationException("You must call System::Environment::SetCommandLineArgs(argv, argc); method in main before.", pcf_current_information);
+      throw InvalidOperationException("You must call System::Environment::SetCommandLineArgs(argv, argc); method in main before.", sw_current_information);
       
     string commandLine = string::Format("\"{0}\" ", commandLineArgs.ToObject()[0]);
     for (int i = 1; i < commandLineArgs->Length; i++)
@@ -147,11 +147,11 @@ Property<string> Environment::CurrentDirectory {
   [] {return __OS::CoreApi::Directory::GetCurrentDirectory();},
   [](string value) {
     if (String::IsNullOrEmpty(value))
-      throw ArgumentException(pcf_current_information);
+      throw ArgumentException(sw_current_information);
     if (!System::IO::Directory::Exists(value))
-      throw IO::DirectoryNotFoundException(pcf_current_information);
+      throw IO::DirectoryNotFoundException(sw_current_information);
     if (__OS::CoreApi::Directory::SetCurrentDirectory(value) != 0)
-      throw IO::IOException(pcf_current_information);
+      throw IO::IOException(sw_current_information);
   }
 };
 
@@ -265,13 +265,13 @@ String Environment::ExpandEnvironmentVariables(const String& name) {
 
 const Array<String>& Environment::GetCommandLineArgs() {
   if (commandLineArgs->Length == 0)
-    throw InvalidOperationException("You must call System::Environment::SetCommandLineArgs(argv, argc); method in main before.", pcf_current_information);
+    throw InvalidOperationException("You must call System::Environment::SetCommandLineArgs(argv, argc); method in main before.", sw_current_information);
   return commandLineArgs();
 }
 
 String Environment::GetEnvironmentVariable(const String& variable, EnvironmentVariableTarget target) {
   if (!Enum<EnvironmentVariableTarget>::GetValues().Contains(target))
-    throw ArgumentException(pcf_current_information);
+    throw ArgumentException(sw_current_information);
   
   if (target == EnvironmentVariableTarget::Process) {
     char* value = getenv(variable.Data());
@@ -283,7 +283,7 @@ String Environment::GetEnvironmentVariable(const String& variable, EnvironmentVa
 
 const Collections::Generic::IDictionary<String, String>& Environment::GetEnvironmentVariables(EnvironmentVariableTarget target) {
   if (!Enum<EnvironmentVariableTarget>::GetValues().Contains(target))
-    throw ArgumentException(pcf_current_information);
+    throw ArgumentException(sw_current_information);
   
   if (target == EnvironmentVariableTarget::Process)
     return EnvironmentVariables;
@@ -298,7 +298,7 @@ const Collections::Generic::IDictionary<String, String>& Environment::GetEnviron
 
 String Environment::GetFolderPath(Environment::SpecialFolder folder, Environment::SpecialFolderOption option) {
   if (!Enum<Environment::SpecialFolderOption>::GetValues().Contains(option))
-    throw ArgumentException(pcf_current_information);
+    throw ArgumentException(sw_current_information);
   
   string path = __OS::CoreApi::Directory::GetKnowFolderPath(folder);
 
@@ -317,17 +317,17 @@ Array<String> Environment::GetLogicalDrives() {
 
 void Environment::SetEnvironmentVariable(const String& name, const String& value, EnvironmentVariableTarget target) {
   if (name.IsEmpty())
-    throw ArgumentException(pcf_current_information);
+    throw ArgumentException(sw_current_information);
   
   if (target == EnvironmentVariableTarget::Process) {
     if (value.IsEmpty()) {
       EnvironmentVariables().Remove(name);
       if (__OS::CoreApi::Environment::UnsetEnv(name) != 0)
-        throw ArgumentException(pcf_current_information);
+        throw ArgumentException(sw_current_information);
     } else {
       EnvironmentVariables()[name] = value;
       if (__OS::CoreApi::Environment::SetEnv(name, value) != 0)
-        throw ArgumentException(pcf_current_information);
+        throw ArgumentException(sw_current_information);
     }
   } else {
     Microsoft::Win32::RegistryKey key = target == EnvironmentVariableTarget::User ? Microsoft::Win32::Registry::CurrentUser().CreateSubKey("Environment") : Microsoft::Win32::Registry::LocalMachine().CreateSubKey("System").CreateSubKey("CurrentControlSet").CreateSubKey("Control").CreateSubKey("Session Manager").CreateSubKey("Environment");
@@ -340,14 +340,14 @@ void Environment::SetEnvironmentVariable(const String& name, const String& value
 
 Array<string> Environment::SetCommandLineArgs(char* argv[], int argc) {
   if (commandLineArgs != null)
-    throw InvalidOperationException("Can be called only once", pcf_current_information);
+    throw InvalidOperationException("Can be called only once", sw_current_information);
 
-  socketInit = pcf_new<SocketInit>();
-  consoleChangeCodePage = pcf_new<ConsoleChangeCodePage>();
-  consoleInterceptSignals = pcf_new<ConsoleInterceptSignals>();
-  signalCatcher = pcf_new<SignalCatcher>();
+  socketInit = sw_new<SocketInit>();
+  consoleChangeCodePage = sw_new<ConsoleChangeCodePage>();
+  consoleInterceptSignals = sw_new<ConsoleInterceptSignals>();
+  signalCatcher = sw_new<SignalCatcher>();
   System::Threading::Thread::RegisterCurrentThread();
-  commandLineArgs = pcf_new<Array<string>>(std::vector<string>(argv, argv+argc));
+  commandLineArgs = sw_new<Array<string>>(std::vector<string>(argv, argv+argc));
   return Array<string>(std::vector<string>(argv+1, argv+argc));
 }
 

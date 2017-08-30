@@ -13,7 +13,7 @@ namespace Switch {
       /// @brief The Switch::System::Windows::Forms namespace contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system, Apple macOS and Linux like Ubuntu operating system.
       namespace Forms {
         /// @brief Represents a Windows button control.
-        class pcf_public ButtonBase : public Control {
+        class sw_public ButtonBase : public Control {
         public:
           ButtonBase() : autoElipsis(false) {}
           ButtonBase(const string& text, int32 left, int32 top, int32 height, int32 width) : Control(text, left, top, height, width), autoElipsis(false) {}

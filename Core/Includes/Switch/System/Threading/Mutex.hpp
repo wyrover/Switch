@@ -18,7 +18,7 @@ namespace Switch {
     /// In addition to classes for synchronizing thread activities and access to data ( Mutex, Monitor, Interlocked, AutoResetEvent, and so on), this namespace includes a ThreadPool class that allows you to use a pool of system-supplied threads, and a Timer class that executes callback methods on thread pool threads.
     namespace Threading {
       /// @brief A synchronization primitive that can also be used for interprocess synchronization.
-      class pcf_public Mutex: public WaitHandle {
+      class sw_public Mutex: public WaitHandle {
       private:
       public:
         /// @brief Initializes a new instance of the System::Threading::Mutex class with a Boolean value that indicates whether the calling thread should have initial ownership of the mutex.
@@ -89,7 +89,7 @@ namespace Switch {
         /// @exception ApplicationException The calling thread does not own the mutex.
         void ReleaseMutex() {
           if (this->mutex.IsNull())
-            throw ObjectClosedException(pcf_current_information);
+            throw ObjectClosedException(sw_current_information);
           this->mutex->unlock();
         }
 
@@ -117,9 +117,9 @@ namespace Switch {
         
         bool Wait(int32 millisecondsTimeOut) override {
           if (this->mutex.IsNull() == true)
-            throw ObjectClosedException(pcf_current_information);
+            throw ObjectClosedException(sw_current_information);
           if (millisecondsTimeOut < -1)
-            throw ArgumentOutOfRangeException(pcf_current_information);
+            throw ArgumentOutOfRangeException(sw_current_information);
           if (millisecondsTimeOut == -1) {
             this->mutex->lock();
             return true;
@@ -127,8 +127,8 @@ namespace Switch {
           return this->mutex->try_lock_for(std::chrono::milliseconds(millisecondsTimeOut));
         }
 
-        refptr<std::recursive_timed_mutex> mutex = pcf_new<std::recursive_timed_mutex>();
-        refptr<string> name = pcf_new<string>();
+        refptr<std::recursive_timed_mutex> mutex = sw_new<std::recursive_timed_mutex>();
+        refptr<string> name = sw_new<string>();
       };
     }
   }

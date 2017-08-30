@@ -95,393 +95,393 @@ EXPECT_EQ(b16, bytes[8]);\
 
 namespace {
   TEST(BitConverter, GetBytesBoolean) {
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(false)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(false)) {
      EXPECT_B1(0, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(true)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(true)) {
       EXPECT_B1(1, bytes);
     }
   }
   
   TEST(BitConverter, GetBytesChar) {
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(' ')) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(' ')) {
       EXPECT_B4(0x20, 0x00, 0x00, 0x00, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes('*')) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes('*')) {
       EXPECT_B4(0x2A, 0x00, 0x00, 0x00, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes('3')) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes('3')) {
       EXPECT_B4(0x33, 0x00, 0x00, 0x00, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes('A')) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes('A')) {
       EXPECT_B4(0x41, 0x00, 0x00, 0x00, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes('[')) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes('[')) {
       EXPECT_B4(0x5B, 0x00, 0x00, 0x00, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes('a')) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes('a')) {
       EXPECT_B4(0x61, 0x00, 0x00, 0x00, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes('{')) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes('{')) {
       EXPECT_B4(0x7B, 0x00, 0x00, 0x00, bytes);
     }
   }
   
   TEST(BitConverter, GetBytesDouble) {
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(0.0)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(0.0)) {
       EXPECT_B8(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(1.0)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(1.0)) {
       EXPECT_B8(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xF0, 0x3F, bytes);
     }
 
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(255.0)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(255.0)) {
       EXPECT_B8(0x00, 0x00, 0x00, 0x00, 0x00, 0xE0, 0x6F, 0x40, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(4294967295.0)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(4294967295.0)) {
       EXPECT_B8(0x00, 0x00, 0xE0, 0xFF, 0xFF, 0xFF, 0xEF, 0x41, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(0.00390625)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(0.00390625)) {
       EXPECT_B8(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x70, 0x3F, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(0.00000000023283064365386962890625)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(0.00000000023283064365386962890625)) {
       EXPECT_B8(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xF0, 0x3D, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(1.23456789012345E-300)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(1.23456789012345E-300)) {
       EXPECT_B8(0xDF, 0x88, 0x1E, 0x1C, 0xFE, 0x74, 0xAA, 0x01, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(1.2345678901234565)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(1.2345678901234565)) {
       EXPECT_B8(0xFA, 0x59, 0x8C, 0x42, 0xCA, 0xC0, 0xF3, 0x3F, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(1.2345678901234567)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(1.2345678901234567)) {
       EXPECT_B8(0xFB, 0x59, 0x8C, 0x42, 0xCA, 0xC0, 0xF3, 0x3F, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(1.2345678901234569)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(1.2345678901234569)) {
       EXPECT_B8(0xFC, 0x59, 0x8C, 0x42, 0xCA, 0xC0, 0xF3, 0x3F, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(1.23456789012345678E+300)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(1.23456789012345678E+300)) {
       EXPECT_B8(0x52, 0xD3, 0xBB, 0xBC, 0xE8, 0x7E, 0x3D, 0x7E, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(Double::MinValue)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(Double::MinValue)) {
       EXPECT_B8(0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xEF, 0xFF, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(Double::MaxValue)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(Double::MaxValue)) {
       EXPECT_B8(0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xEF, 0x7F, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(Double::Epsilon)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(Double::Epsilon)) {
       EXPECT_B8(0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(Double::NaN)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(Double::NaN)) {
       EXPECT_B8(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xF8, 0x7F, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(Double::NegativeInfinity)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(Double::NegativeInfinity)) {
       EXPECT_B8(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xF0, 0xFF, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(Double::PositiveInfinity)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(Double::PositiveInfinity)) {
       EXPECT_B8(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xF0, 0x7F, bytes);
     }
   }
   
   TEST(BitConverter, GetBytesInt16) {
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(int16(0))) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(int16(0))) {
       EXPECT_B2(0x00, 0x00, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(int16(15))) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(int16(15))) {
       EXPECT_B2(0x0F, 0x00, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(int16(-15))) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(int16(-15))) {
       EXPECT_B2(0xF1, 0xFF, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(int16(10000))) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(int16(10000))) {
       EXPECT_B2(0x10, 0x27, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(int16(-10000))) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(int16(-10000))) {
       EXPECT_B2(0xF0, 0xD8, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(Int16::MinValue)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(Int16::MinValue)) {
       EXPECT_B2(0x00, 0x80, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(Int16::MaxValue)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(Int16::MaxValue)) {
       EXPECT_B2(0xFF, 0x7F, bytes);
     }
   }
   
   TEST(BitConverter, GetBytesInt32) {
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(0)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(0)) {
       EXPECT_B4(0x00, 0x00, 0x00, 0x00, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(15)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(15)) {
       EXPECT_B4(0x0F, 0x00, 0x00, 0x00, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(-15)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(-15)) {
       EXPECT_B4(0xF1, 0xFF, 0xFF, 0xFF, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(1048576)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(1048576)) {
       EXPECT_B4(0x00, 0x00, 0x10, 0x00, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(-1048576)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(-1048576)) {
       EXPECT_B4(0x00, 0x00, 0xF0, 0xFF, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(1000000000)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(1000000000)) {
       EXPECT_B4(0x00, 0xCA, 0x9A, 0x3B, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(-1000000000)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(-1000000000)) {
       EXPECT_B4(0x00, 0x36, 0x65, 0xC4, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(Int32::MinValue)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(Int32::MinValue)) {
       EXPECT_B4(0x00, 0x00, 0x00, 0x80, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(Int32::MaxValue)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(Int32::MaxValue)) {
       EXPECT_B4(0xFF, 0xFF, 0xFF, 0x7F, bytes);
     }
   }
   
   TEST(BitConverter, GetBytesInt64) {
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(0LL)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(0LL)) {
       EXPECT_B8(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(0xFFFFFFLL)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(0xFFFFFFLL)) {
       EXPECT_B8(0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(1000000000LL)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(1000000000LL)) {
       EXPECT_B8(0x00, 0xCA, 0x9A, 0x3B, 0x00, 0x00, 0x00, 0x00, bytes);
     }
 
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(-1000000000LL)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(-1000000000LL)) {
       EXPECT_B8(0x00, 0x36, 0x65, 0xC4, 0xFF, 0xFF, 0xFF, 0xFF, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(0x100000000LL)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(0x100000000LL)) {
       EXPECT_B8(0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(-0x100000000LL)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(-0x100000000LL)) {
       EXPECT_B8(0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(0xAAAAAAAAAAAALL)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(0xAAAAAAAAAAAALL)) {
       EXPECT_B8(0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0x00, 0x00, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(-0xAAAAAAAAAAAALL)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(-0xAAAAAAAAAAAALL)) {
       EXPECT_B8(0x56, 0x55, 0x55, 0x55, 0x55, 0x55, 0xFF, 0xFF, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(1000000000000000000LL)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(1000000000000000000LL)) {
       EXPECT_B8(0x00, 0x00, 0x64, 0xA7, 0xB3, 0xB6, 0xE0, 0x0D, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(-1000000000000000000LL)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(-1000000000000000000LL)) {
       EXPECT_B8(0x00, 0x00, 0x9C, 0x58, 0x4C, 0x49, 0x1F, 0xF2, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(Int64::MinValue)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(Int64::MinValue)) {
       EXPECT_B8(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(Int64::MaxValue)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(Int64::MaxValue)) {
       EXPECT_B8(0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x7F, bytes);
     }
   }
   
   TEST(BitConverter, GetBytesSingle) {
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(0.0f)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(0.0f)) {
       EXPECT_B4(0x00, 0x00, 0x00, 0x00, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(1.0f)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(1.0f)) {
       EXPECT_B4(0x00, 0x00, 0x80, 0x3F, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(15.0f)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(15.0f)) {
       EXPECT_B4(0x00, 0x00, 0x70, 0x41, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(65535.0f)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(65535.0f)) {
       EXPECT_B4(0x00, 0xFF, 0x7F, 0x47, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(0.00390625f)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(0.00390625f)) {
       EXPECT_B4(0x00, 0x00, 0x80, 0x3B, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(0.00000000023283064365386962890625f)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(0.00000000023283064365386962890625f)) {
       EXPECT_B4(0x00, 0x00, 0x80, 0x2F, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(1.2345E-35f)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(1.2345E-35f)) {
       EXPECT_B4(0x49, 0x46, 0x83, 0x05, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(1.2345671f)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(1.2345671f)) {
       EXPECT_B4(0x4B, 0x06, 0x9E, 0x3F, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(1.2345673f)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(1.2345673f)) {
       EXPECT_B4(0x4D, 0x06, 0x9E, 0x3F, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(1.2345677f)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(1.2345677f)) {
       EXPECT_B4(0x50, 0x06, 0x9E, 0x3F, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(1.23456789E+35f)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(1.23456789E+35f)) {
       EXPECT_B4(0x1E, 0x37, 0xBE, 0x79, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(Single::MinValue)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(Single::MinValue)) {
       EXPECT_B4(0xFF, 0xFF, 0x7F, 0xFF, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(Single::MaxValue)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(Single::MaxValue)) {
       EXPECT_B4(0xFF, 0xFF, 0x7F, 0x7F, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(Single::Epsilon)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(Single::Epsilon)) {
       EXPECT_B4(0x01, 0x00, 0x00, 0x00, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(Single::NaN)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(Single::NaN)) {
       EXPECT_B4(0x00, 0x00, 0xC0, 0x7F, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(Single::NegativeInfinity)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(Single::NegativeInfinity)) {
       EXPECT_B4(0x00, 0x00, 0x80, 0xFF, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(Single::PositiveInfinity)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(Single::PositiveInfinity)) {
       EXPECT_B4(0x00, 0x00, 0x80, 0x7F, bytes);
     }
   }
   
   TEST(BitConverter, GetBytesUInt16) {
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(uint16(15))) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(uint16(15))) {
       EXPECT_B2(0x0F, 0x00, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(uint16(1023))) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(uint16(1023))) {
       EXPECT_B2(0xFF, 0x03, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(uint16(10000))) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(uint16(10000))) {
       EXPECT_B2(0x10, 0x27, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(uint16(0))) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(uint16(0))) {
       EXPECT_B2(0x00, 0x00, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(uint16(Int16::MaxValue))) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(uint16(Int16::MaxValue))) {
       EXPECT_B2(0xFF, 0x7F, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(UInt16::MaxValue)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(UInt16::MaxValue)) {
       EXPECT_B2(0xFF, 0xFF, bytes);
     }
   }
   
   TEST(BitConverter, GetBytesUInt32) {
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(15U)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(15U)) {
       EXPECT_B4(0x0F, 0x00, 0x00, 0x00, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(1023U)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(1023U)) {
       EXPECT_B4(0xFF, 0x03, 0x00, 0x00, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(0x100000U)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(0x100000U)) {
       EXPECT_B4(0x00, 0x00, 0x10, 0x00, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(1000000000U)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(1000000000U)) {
       EXPECT_B4(0x00, 0xCA, 0x9A, 0x3B, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(UInt32::MinValue)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(UInt32::MinValue)) {
       EXPECT_B4(0x00, 0x00, 0x00, 0x00, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(uint32(Int32::MaxValue))) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(uint32(Int32::MaxValue))) {
       EXPECT_B4(0xFF, 0xFF, 0xFF, 0x7F, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(UInt32::MaxValue)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(UInt32::MaxValue)) {
       EXPECT_B4(0xFF, 0xFF, 0xFF, 0xFF, bytes);
     }
   }
   
   TEST(BitConverter, GetBytesUInt64) {
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(0xFFFFFFULL)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(0xFFFFFFULL)) {
       EXPECT_B8(0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(1000000000ULL)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(1000000000ULL)) {
       EXPECT_B8(0x00, 0xCA, 0x9A, 0x3B, 0x00, 0x00, 0x00, 0x00, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(0x100000000ULL)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(0x100000000ULL)) {
       EXPECT_B8(0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(0xAAAAAAAAAAAAULL)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(0xAAAAAAAAAAAAULL)) {
       EXPECT_B8(0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0x00, 0x00, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(1000000000000000000ULL)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(1000000000000000000ULL)) {
       EXPECT_B8(0x00, 0x00, 0x64, 0xA7, 0xB3, 0xB6, 0xE0, 0x0D, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(10000000000000000000ULL)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(10000000000000000000ULL)) {
       EXPECT_B8(0x00, 0x00, 0xE8, 0x89, 0x04, 0x23, 0xC7, 0x8A, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(UInt64::MinValue)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(UInt64::MinValue)) {
       EXPECT_B8(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(uint64(Int64::MaxValue))) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(uint64(Int64::MaxValue))) {
       EXPECT_B8(0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x7F, bytes);
     }
     
-    pcf_using(Array<byte> bytes = BitConverter::GetBytes(UInt64::MaxValue)) {
+    sw_using(Array<byte> bytes = BitConverter::GetBytes(UInt64::MaxValue)) {
       EXPECT_B8(0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, bytes);
     }
   }

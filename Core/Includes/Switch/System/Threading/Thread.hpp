@@ -95,7 +95,7 @@ namespace Switch {
       /// @par Examples
       /// The following code example demonstrates simple threading functionality.
       /// @include Thread.cpp
-      class pcf_public Thread : public object {
+      class sw_public Thread : public object {
       public:        
         /// @brief Initializes a new instance of the Thread class.
         /// @param start A ThreadStart delegate that represents the methods to be invoked when this thread begins executing.
@@ -136,7 +136,7 @@ namespace Switch {
         static Property<Thread&, ReadOnly> CurrentThread;
         
         Property<intptr, ReadOnly> Handle {
-          pcf_get {
+          sw_get {
             if (this->data->managedThreadId == NoneManagedThreadId)
               return (intptr)-1;
             return (intptr)this->data->thread.native_handle();}
@@ -145,16 +145,16 @@ namespace Switch {
         /// @brief Gets a value indicating the execution status of the current thread.
         /// @return Boolean true if this thread has been started and has not terminated normally or aborted; otherwise, false.
         Property<bool, ReadOnly> IsAlive {
-          pcf_get {return !Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Unstarted) && !Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Stopped) && !Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Aborted);}
+          sw_get {return !Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Unstarted) && !Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Stopped) && !Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Aborted);}
         };
         
         /// @brief Gets a value indicating whether or not a thread is a background thread.
         /// @return Boolean true if this thread is or is to become a background thread; otherwise, false.
         Property<bool> IsBackground {
-          pcf_get {return Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Background);},
-          pcf_set {
+          sw_get {return Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Background);},
+          sw_set {
             if (this->data->managedThreadId == NoneManagedThreadId || this->data->managedThreadId == MainManagedThreadId)
-              throw InvalidOperationException(pcf_current_information);
+              throw InvalidOperationException(sw_current_information);
             
             if (value)
               this->data->state |= System::Threading::ThreadState::Background;
@@ -164,23 +164,23 @@ namespace Switch {
         };
         
         Property<bool, ReadOnly> IsThreadPoolThread {
-          pcf_get {return this->data->isThreadPoolThread;}
+          sw_get {return this->data->isThreadPoolThread;}
         };
         
         /// @brief Gets a unique identifier for the current managed thread.
         /// @return An integer that represents a unique identifier for this managed thread.
         Property<int32, ReadOnly> ManagedThreadId {
-          pcf_get {return this->data->managedThreadId;
+          sw_get {return this->data->managedThreadId;
           }
         };
         
         /// @brief Gets or sets the name of the thread.
         /// @return A string containing the name of the thread, or null if no name was set.
         Property<string> Name {
-          pcf_get {return this->data->name;},
-          pcf_set {
+          sw_get {return this->data->name;},
+          sw_set {
             if (this->data->managedThreadId == NoneManagedThreadId)
-              throw InvalidOperationException(pcf_current_information);
+              throw InvalidOperationException(sw_current_information);
             this->SetName(value);
           }
         };
@@ -189,10 +189,10 @@ namespace Switch {
         /// @return One of the System::Threading::ThreadPriority values. The default value is ThreadPriorityNormal.
         /// @exception ThreadStateException The thread has reached a final state, such as ThreadStateAborted.
         Property<ThreadPriority> Priority {
-          pcf_get {return this->data->priority;},
-          pcf_set {
+          sw_get {return this->data->priority;},
+          sw_set {
             if (this->data->managedThreadId == NoneManagedThreadId)
-              throw InvalidOperationException(pcf_current_information);
+              throw InvalidOperationException(sw_current_information);
             this->SetPriority(value);
           }
         };
@@ -200,7 +200,7 @@ namespace Switch {
         /// @brief Gets a value containing the states of the current thread.
         /// @return One of the System::Threading::ThreadState values indicating the state of the current thread. The initial value is ThreadStateUnstarted.
         Property<System::Threading::ThreadState, ReadOnly> ThreadState {
-          pcf_get {return this->data->state;}
+          sw_get {return this->data->state;}
         };
         
         /// @brief Raises a ThreadAbortedException in the thread on which it is invoked, to begin the process of terminating the thread. Calling this method usually terminates the thread.
@@ -210,7 +210,7 @@ namespace Switch {
         /// @brief Notifies a host that execution is about to enter a region of code in which the effects of a thread abort.
         static void BeginCriticalRegion() {
           if (CurrentThread().data->managedThreadId == NoneManagedThreadId)
-            throw InvalidOperationException(pcf_current_information);
+            throw InvalidOperationException(sw_current_information);
           CurrentThread().data->criticalRegion = true;
         }
         
@@ -235,7 +235,7 @@ namespace Switch {
         /// @brief Notifies a host that execution is about to leave a region of code in which the effects of a thread abort.
         static void EndCriticalRegion() {
           if (CurrentThread().data->managedThreadId == NoneManagedThreadId)
-            throw InvalidOperationException(pcf_current_information);
+            throw InvalidOperationException(sw_current_information);
           CurrentThread().data->criticalRegion = false;
         }
         
@@ -260,12 +260,12 @@ namespace Switch {
         /// @exception ArgumentOutOfRangeException millisecondsTimeout is a negative number other than -1, which represents an infinite time-out.
         bool Join(int32 millisecondsTimeout) {
           if (this->data->managedThreadId == NoneManagedThreadId || this->data->managedThreadId == MainManagedThreadId)
-            throw InvalidOperationException(pcf_current_information);
+            throw InvalidOperationException(sw_current_information);
           if (Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Unstarted))
-            throw ThreadStateException(pcf_current_information);
+            throw ThreadStateException(sw_current_information);
           
           if (millisecondsTimeout < Timeout::Infinite)
-            throw ArgumentOutOfRangeException(pcf_current_information);
+            throw ArgumentOutOfRangeException(sw_current_information);
           
           if (this->data->interrupted == true)
             this->Interrupt();
@@ -303,7 +303,7 @@ namespace Switch {
         /// @exception ArgumentException millisecondsTimeout is a negative number other than -1, which represents an infinite time-out.
         static void Sleep(int32 millisecondsTimeout) {
           if (millisecondsTimeout < Timeout::Infinite)
-            throw ArgumentException(pcf_current_information);
+            throw ArgumentException(sw_current_information);
           
           if (CurrentThread().data->interrupted)
             CurrentThread().Interrupt();
@@ -400,7 +400,7 @@ namespace Switch {
           std::lock_guard<std::recursive_mutex> lock(mutex);
           for (const Thread& item : threads)
             if (item.data->managedThreadId == MainManagedThreadId)
-              throw InvalidOperationException(pcf_current_information);
+              throw InvalidOperationException(sw_current_information);
           Thread thread;
           thread.data->managedThreadId = MainManagedThreadId;
           thread.data->mainThreadId = std::this_thread::get_id();
@@ -413,13 +413,13 @@ namespace Switch {
         
         void ThreadStart(const object* obj) {
           if (!Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Unstarted))
-            throw ThreadStateException(pcf_current_information);
+            throw ThreadStateException(sw_current_information);
           
           if (obj == null && this->data->threadStart.IsEmpty() && this->data->parameterizedThreadStart.IsEmpty())
-            throw InvalidOperationException(pcf_current_information);
+            throw InvalidOperationException(sw_current_information);
           
           if (obj != null && this->data->parameterizedThreadStart.IsEmpty())
-            throw InvalidOperationException(pcf_current_information);
+            throw InvalidOperationException(sw_current_information);
           
           std::lock_guard<std::recursive_mutex> lock(mutex);
           threads.Add(*this);

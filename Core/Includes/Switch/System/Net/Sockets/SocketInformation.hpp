@@ -19,7 +19,7 @@ namespace Switch {
       namespace Sockets {
         /// @brief Encapsulates the information that is necessary to duplicate a Socket.
         /// @remarks Socket::DuplicateAndClose creates a SocketInformation instance for use with the Socket::Socket(SocketInformation) constructor.
-        class pcf_public SocketInformation : public Object {
+        class sw_public SocketInformation : public Object {
         public:
           /// @brief Create a new instance of SocketInformation class.
           SocketInformation() {}
@@ -33,16 +33,16 @@ namespace Switch {
           /// @param options A SocketInformationOptions instance.
           /// @return SocketInformationOptions A SocketInformationOptions instance.
           Property<const SocketInformationOptions&> Options {
-            pcf_get->const SocketInformationOptions& {return this->options;},
-            pcf_set {this->options = value;}
+            sw_get->const SocketInformationOptions& {return this->options;},
+            sw_set {this->options = value;}
           };
 
           /// @brief Gets or sets the protocol information for a Socket.
           /// @param protocolInformation An array of type Byte.
           /// @return Array<Byte> An array of type Byte.
           Property<const Array<byte>&> ProtocolInformation {
-            pcf_get->const Array<byte>& {return this->protocolInfrmation;},
-            pcf_set {this->protocolInfrmation = value;}
+            sw_get->const Array<byte>& {return this->protocolInfrmation;},
+            sw_set {this->protocolInfrmation = value;}
           };
 
         private:

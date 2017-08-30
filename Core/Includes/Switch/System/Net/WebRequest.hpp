@@ -26,7 +26,7 @@ namespace Switch {
       /// @end cond
       
       ///@brief Makes a request to a Uniform Resource Identifier (URI). This is an abstract class.
-      class pcf_public WebRequest pcf_abstract {
+      class sw_public WebRequest sw_abstract {
         /// @cond
         friend class System::Net::WebResponse;
         /// @endcond
@@ -63,7 +63,7 @@ namespace Switch {
             int32 bufferSize = 0;
             int32 bufferOffset = 0;
           };
-          refptr<WebRequestStreamData> data = pcf_new<WebRequestStreamData>();
+          refptr<WebRequestStreamData> data = sw_new<WebRequestStreamData>();
         };
         
 
@@ -96,27 +96,27 @@ namespace Switch {
         static refptr<WebRequest> Create(const Uri& requestUriString);
 
         Property<int64> ContentLength {
-          pcf_get {return this->GetContentLength();},
-          pcf_set {this->SetContentLength(value);}
+          sw_get {return this->GetContentLength();},
+          sw_set {this->SetContentLength(value);}
         };
         
         Property<string> Method {
-          pcf_get {return this->GetMethod();},
-          pcf_set {this->SetMethod(value);}
+          sw_get {return this->GetMethod();},
+          sw_set {this->SetMethod(value);}
         };
         
         Property<const System::Net::NetworkCredential&> Credentials {
-          pcf_get->System::Net::NetworkCredential& {return this->GetCredential();},
-          pcf_set {this->SetCredential(value);}
+          sw_get->System::Net::NetworkCredential& {return this->GetCredential();},
+          sw_set {this->SetCredential(value);}
         };
         
         Property<System::Uri, ReadOnly> RequestUri {
-          pcf_get {return this->GetRequestUri();}
+          sw_get {return this->GetRequestUri();}
         };
 
         Property<int32> Timeout {
-          pcf_get {return this->timeout;},
-          pcf_set {this->timeout = value;}
+          sw_get {return this->timeout;},
+          sw_set {this->timeout = value;}
         };
         
         virtual WebResponse& GetResponse() = 0;

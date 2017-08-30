@@ -35,7 +35,7 @@ namespace Switch {
       /// @par Examples
       /// The following example uses Trace to indicate the beginning and the end of a program's execution. The example also uses the Trace.Indent and Trace.Unindent methods to distinguish the tracing output.
       /// @include Trace.cpp
-      class pcf_public Trace pcf_static {
+      class sw_public Trace sw_static {
       public:
         /// @brief Gets or sets whether Flush should be called on the Listeners after every write.
         /// @return bool true if Flush is called on the Listeners after every write; otherwise, false.
@@ -103,7 +103,7 @@ namespace Switch {
           TraceEventCache eventCache;
           for (auto& listener : Listeners()) {
             if (!listener.IsThreadSafe && UseGlobalLock) {
-              pcf_lock(lock)
+              sw_lock(lock)
               listener.Fail(message);
             } else
               listener.Fail(message);
@@ -122,7 +122,7 @@ namespace Switch {
           TraceEventCache eventCache;
           for (auto& listener : Listeners()) {
             if (!listener.IsThreadSafe && UseGlobalLock) {
-              pcf_lock(lock)
+              sw_lock(lock)
               listener.Fail(message, detailMessage);
             } else
               listener.Fail(message, detailMessage);
@@ -208,7 +208,7 @@ namespace Switch {
 #if defined(TRACE)
           for (auto& listener : Listeners())
             if (!listener.IsThreadSafe && UseGlobalLock) {
-              pcf_lock(lock)
+              sw_lock(lock)
               listener.Write(value);
             } else
               listener.Write(value);
@@ -227,7 +227,7 @@ namespace Switch {
 #if defined(TRACE)
           for (auto& listener : Listeners()) {
             if (!listener.IsThreadSafe && UseGlobalLock) {
-              pcf_lock(lock)
+              sw_lock(lock)
               listener.Write(value, category);
             } else
               listener.Write(value, category);
@@ -245,7 +245,7 @@ namespace Switch {
 #if defined(TRACE)
           for (auto& listener : Listeners()) {
             if (!listener.IsThreadSafe && UseGlobalLock) {
-              pcf_lock(lock)
+              sw_lock(lock)
               listener.Write(message);
             } else
               listener.Write(message);
@@ -265,7 +265,7 @@ namespace Switch {
 #if defined(TRACE)
           for (auto& listener : Listeners()) {
             if (!listener.IsThreadSafe && UseGlobalLock) {
-              pcf_lock(lock)
+              sw_lock(lock)
               listener.Write(message, category);
             } else
               listener.Write(message, category);
@@ -283,7 +283,7 @@ namespace Switch {
 #if defined(TRACE)
           for (auto& listener : Listeners()) {
             if (!listener.IsThreadSafe && UseGlobalLock) {
-              pcf_lock(lock)
+              sw_lock(lock)
               listener.WriteLine(value);
             } else
               listener.WriteLine(value);
@@ -303,7 +303,7 @@ namespace Switch {
 #if defined(TRACE)
           for (auto& listener : Listeners()) {
             if (!listener.IsThreadSafe && UseGlobalLock) {
-              pcf_lock(lock)
+              sw_lock(lock)
               listener.WriteLine(value, category);
             } else
               listener.WriteLine(value, category);
@@ -321,7 +321,7 @@ namespace Switch {
 #if defined(TRACE)
           for (auto& listener : Listeners()) {
             if (!listener.IsThreadSafe && UseGlobalLock) {
-              pcf_lock(lock)
+              sw_lock(lock)
               listener.WriteLine(message);
             } else
               listener.WriteLine(message);
@@ -341,7 +341,7 @@ namespace Switch {
 #if defined(TRACE)
           for (auto& listener : Listeners()) {
             if (!listener.IsThreadSafe && UseGlobalLock) {
-              pcf_lock(lock)
+              sw_lock(lock)
               listener.WriteLine(message, category);
             } else
               listener.WriteLine(message, category);
@@ -415,7 +415,7 @@ namespace Switch {
           static string sourceName = System::IO::Path::GetFileName(Environment::GetCommandLineArgs()[0]);
           for (auto& listener : Listeners()) {
             if (!listener.IsThreadSafe && UseGlobalLock) {
-              pcf_lock(lock)
+              sw_lock(lock)
               listener.TraceEvent(eventCache, sourceName, traceEventType, 0, message);
             } else
               listener.TraceEvent(eventCache, sourceName, traceEventType, 0, message);

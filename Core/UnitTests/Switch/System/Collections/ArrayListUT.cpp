@@ -10,8 +10,8 @@ namespace {
   TEST(ArrayList, DefaultConstructor) {
     ArrayList arrayList;
     
-    Assert::AreEqual(0, arrayList.Count, pcf_current_information);
-    Assert::AreEqual(0, arrayList.Capacity, pcf_current_information);
+    Assert::AreEqual(0, arrayList.Count, sw_current_information);
+    Assert::AreEqual(0, arrayList.Capacity, sw_current_information);
   }
   
   TEST(ArrayList, ConstructorFromCapacityTo0) {
@@ -19,8 +19,8 @@ namespace {
     
     ArrayList arrayList(capacity);
     
-    Assert::AreEqual(0, arrayList.Count, pcf_current_information);
-    Assert::AreEqual(0, arrayList.Capacity, pcf_current_information);
+    Assert::AreEqual(0, arrayList.Count, sw_current_information);
+    Assert::AreEqual(0, arrayList.Capacity, sw_current_information);
   }
   
   TEST(ArrayList, ConstructorFromCapacityTo25) {
@@ -28,8 +28,8 @@ namespace {
     
     ArrayList arrayList(capacity);
     
-    Assert::AreEqual(0, arrayList.Count, pcf_current_information);
-    Assert::AreEqual(25, arrayList.Capacity, pcf_current_information);
+    Assert::AreEqual(0, arrayList.Count, sw_current_information);
+    Assert::AreEqual(25, arrayList.Capacity, sw_current_information);
   }
   
   TEST(ArrayList, ConstructorFromCapacityToNegative) {
@@ -44,11 +44,11 @@ namespace {
 
     ArrayList arrayList(enumerable);
     
-    Assert::AreEqual(3, arrayList.Count, pcf_current_information);
+    Assert::AreEqual(3, arrayList.Count, sw_current_information);
     ASSERT_NE(0, arrayList.Capacity);
-    Assert::AreEqual("Tyrannosaurus", as<String>(arrayList[0]), pcf_current_information);
-    Assert::AreEqual("Compsognathus", as<String>(arrayList[1]), pcf_current_information);
-    Assert::AreEqual("Amargasaurus", as<String>(arrayList[2]), pcf_current_information);
+    Assert::AreEqual("Tyrannosaurus", as<String>(arrayList[0]), sw_current_information);
+    Assert::AreEqual("Compsognathus", as<String>(arrayList[1]), sw_current_information);
+    Assert::AreEqual("Amargasaurus", as<String>(arrayList[2]), sw_current_information);
   }
   
   TEST(ArrayList, ConstructorFromIEnumerable) {
@@ -57,11 +57,11 @@ namespace {
 
     ArrayList arrayList(enumerable);
     
-    Assert::AreEqual(3, arrayList.Count, pcf_current_information);
+    Assert::AreEqual(3, arrayList.Count, sw_current_information);
     ASSERT_NE(0, arrayList.Capacity);
-    Assert::AreEqual("Tyrannosaurus", as<String>(arrayList[0]), pcf_current_information);
-    Assert::AreEqual("Compsognathus", as<String>(arrayList[1]), pcf_current_information);
-    Assert::AreEqual("Amargasaurus", as<String>(arrayList[2]), pcf_current_information);
+    Assert::AreEqual("Tyrannosaurus", as<String>(arrayList[0]), sw_current_information);
+    Assert::AreEqual("Compsognathus", as<String>(arrayList[1]), sw_current_information);
+    Assert::AreEqual("Amargasaurus", as<String>(arrayList[2]), sw_current_information);
   }
   
   TEST(ArrayList, AddSpObject) {
@@ -73,12 +73,12 @@ namespace {
     arrayList.Add(String("Deinonychus"));
     arrayList.Add(String("Compsognathus"));
     
-    Assert::AreEqual(5, arrayList.Count, pcf_current_information);
-    Assert::AreEqual("Tyrannosaurus", as<String>(arrayList[0]), pcf_current_information);
-    Assert::AreEqual("Amargasaurus", as<String>(arrayList[1]), pcf_current_information);
-    Assert::AreEqual("Mamenchisaurus", as<String>(arrayList[2]), pcf_current_information);
-    Assert::AreEqual("Deinonychus", as<String>(arrayList[3]), pcf_current_information);
-    Assert::AreEqual("Compsognathus", as<String>(arrayList[4]), pcf_current_information);
+    Assert::AreEqual(5, arrayList.Count, sw_current_information);
+    Assert::AreEqual("Tyrannosaurus", as<String>(arrayList[0]), sw_current_information);
+    Assert::AreEqual("Amargasaurus", as<String>(arrayList[1]), sw_current_information);
+    Assert::AreEqual("Mamenchisaurus", as<String>(arrayList[2]), sw_current_information);
+    Assert::AreEqual("Deinonychus", as<String>(arrayList[3]), sw_current_information);
+    Assert::AreEqual("Compsognathus", as<String>(arrayList[4]), sw_current_information);
   }
   
   TEST(ArrayList, AddSpString) {
@@ -90,12 +90,12 @@ namespace {
     arrayList.Add("Deinonychus");
     arrayList.Add("Compsognathus");
     
-    Assert::AreEqual(5, arrayList.Count, pcf_current_information);
-    Assert::AreEqual("Tyrannosaurus", as<String>(arrayList[0]), pcf_current_information);
-    Assert::AreEqual("Amargasaurus", as<String>(arrayList[1]), pcf_current_information);
-    Assert::AreEqual("Mamenchisaurus", as<String>(arrayList[2]), pcf_current_information);
-    Assert::AreEqual("Deinonychus", as<String>(arrayList[3]), pcf_current_information);
-    Assert::AreEqual("Compsognathus", as<String>(arrayList[4]), pcf_current_information);
+    Assert::AreEqual(5, arrayList.Count, sw_current_information);
+    Assert::AreEqual("Tyrannosaurus", as<String>(arrayList[0]), sw_current_information);
+    Assert::AreEqual("Amargasaurus", as<String>(arrayList[1]), sw_current_information);
+    Assert::AreEqual("Mamenchisaurus", as<String>(arrayList[2]), sw_current_information);
+    Assert::AreEqual("Deinonychus", as<String>(arrayList[3]), sw_current_information);
+    Assert::AreEqual("Compsognathus", as<String>(arrayList[4]), sw_current_information);
   }
   
   TEST(ArrayList, AddNewObject) {
@@ -107,12 +107,12 @@ namespace {
     arrayList.Add(String("Deinonychus"));
     arrayList.Add(String("Compsognathus"));
     
-    Assert::AreEqual(5, arrayList.Count, pcf_current_information);
-    Assert::AreEqual("Tyrannosaurus", as<String>(arrayList[0]), pcf_current_information);
-    Assert::AreEqual("Amargasaurus", as<String>(arrayList[1]), pcf_current_information);
-    Assert::AreEqual("Mamenchisaurus", as<String>(arrayList[2]), pcf_current_information);
-    Assert::AreEqual("Deinonychus", as<String>(arrayList[3]), pcf_current_information);
-    Assert::AreEqual("Compsognathus", as<String>(arrayList[4]), pcf_current_information);
+    Assert::AreEqual(5, arrayList.Count, sw_current_information);
+    Assert::AreEqual("Tyrannosaurus", as<String>(arrayList[0]), sw_current_information);
+    Assert::AreEqual("Amargasaurus", as<String>(arrayList[1]), sw_current_information);
+    Assert::AreEqual("Mamenchisaurus", as<String>(arrayList[2]), sw_current_information);
+    Assert::AreEqual("Deinonychus", as<String>(arrayList[3]), sw_current_information);
+    Assert::AreEqual("Compsognathus", as<String>(arrayList[4]), sw_current_information);
   }
   
   TEST(ArrayList, AddObject) {
@@ -124,12 +124,12 @@ namespace {
     arrayList.Add(String("Deinonychus"));
     arrayList.Add(String("Compsognathus"));
     
-    Assert::AreEqual(5, arrayList.Count, pcf_current_information);
-    Assert::AreEqual("Tyrannosaurus", as<String>(arrayList[0]), pcf_current_information);
-    Assert::AreEqual("Amargasaurus", as<String>(arrayList[1]), pcf_current_information);
-    Assert::AreEqual("Mamenchisaurus", as<String>(arrayList[2]), pcf_current_information);
-    Assert::AreEqual("Deinonychus", as<String>(arrayList[3]), pcf_current_information);
-    Assert::AreEqual("Compsognathus", as<String>(arrayList[4]), pcf_current_information);
+    Assert::AreEqual(5, arrayList.Count, sw_current_information);
+    Assert::AreEqual("Tyrannosaurus", as<String>(arrayList[0]), sw_current_information);
+    Assert::AreEqual("Amargasaurus", as<String>(arrayList[1]), sw_current_information);
+    Assert::AreEqual("Mamenchisaurus", as<String>(arrayList[2]), sw_current_information);
+    Assert::AreEqual("Deinonychus", as<String>(arrayList[3]), sw_current_information);
+    Assert::AreEqual("Compsognathus", as<String>(arrayList[4]), sw_current_information);
   }
   
   TEST(ArrayList, AddValueType) {
@@ -141,12 +141,12 @@ namespace {
     arrayList.Add("Deinonychus");
     arrayList.Add("Compsognathus");
     
-    Assert::AreEqual(5, arrayList.Count, pcf_current_information);
-    Assert::AreEqual("Tyrannosaurus", as<String>(arrayList[0]), pcf_current_information);
-    Assert::AreEqual("Amargasaurus", as<String>(arrayList[1]), pcf_current_information);
-    Assert::AreEqual("Mamenchisaurus", as<String>(arrayList[2]), pcf_current_information);
-    Assert::AreEqual("Deinonychus", as<String>(arrayList[3]), pcf_current_information);
-    Assert::AreEqual("Compsognathus", as<String>(arrayList[4]), pcf_current_information);
+    Assert::AreEqual(5, arrayList.Count, sw_current_information);
+    Assert::AreEqual("Tyrannosaurus", as<String>(arrayList[0]), sw_current_information);
+    Assert::AreEqual("Amargasaurus", as<String>(arrayList[1]), sw_current_information);
+    Assert::AreEqual("Mamenchisaurus", as<String>(arrayList[2]), sw_current_information);
+    Assert::AreEqual("Deinonychus", as<String>(arrayList[3]), sw_current_information);
+    Assert::AreEqual("Compsognathus", as<String>(arrayList[4]), sw_current_information);
   }
   
   TEST(ArrayList, AddRangeGenericIEnumerable) {
@@ -155,10 +155,10 @@ namespace {
     
     added.AddRange(array);
     
-    Assert::AreEqual(3, added.Count, pcf_current_information);
-    Assert::AreEqual("Tyrannosaurus", as<String>(added[0]), pcf_current_information);
-    Assert::AreEqual("Compsognathus", as<String>(added[1]), pcf_current_information);
-    Assert::AreEqual("Amargasaurus", as<String>(added[2]), pcf_current_information);
+    Assert::AreEqual(3, added.Count, sw_current_information);
+    Assert::AreEqual("Tyrannosaurus", as<String>(added[0]), sw_current_information);
+    Assert::AreEqual("Compsognathus", as<String>(added[1]), sw_current_information);
+    Assert::AreEqual("Amargasaurus", as<String>(added[2]), sw_current_information);
   }
   
   TEST(ArrayList, AddRangeIEnumerable) {
@@ -167,19 +167,19 @@ namespace {
     
     added.AddRange(arrayList);
     
-    Assert::AreEqual(3, added.Count, pcf_current_information);
-    Assert::AreEqual("Tyrannosaurus", as<String>(added[0]), pcf_current_information);
-    Assert::AreEqual("Compsognathus", as<String>(added[1]), pcf_current_information);
-    Assert::AreEqual("Amargasaurus", as<String>(added[2]), pcf_current_information);
+    Assert::AreEqual(3, added.Count, sw_current_information);
+    Assert::AreEqual("Tyrannosaurus", as<String>(added[0]), sw_current_information);
+    Assert::AreEqual("Compsognathus", as<String>(added[1]), sw_current_information);
+    Assert::AreEqual("Amargasaurus", as<String>(added[2]), sw_current_information);
   }
   
   TEST(ArrayList, Clear) {
     ArrayList arrayList(Array<Any> {String("Tyrannosaurus"), String("Compsognathus"), String("Amargasaurus")});
-    Assert::AreEqual(3, arrayList.Count, pcf_current_information);
+    Assert::AreEqual(3, arrayList.Count, sw_current_information);
     
     arrayList.Clear();
     
-    Assert::AreEqual(0, arrayList.Count, pcf_current_information);
+    Assert::AreEqual(0, arrayList.Count, sw_current_information);
   }
   
   TEST(ArrayList, ContainsSpObjectFound) {
@@ -307,11 +307,11 @@ namespace {
     Array<Any> array(arrayList.Count);
     arrayList.CopyTo(array);
     
-    Assert::AreEqual("Tyrannosaurus", as<String>(array[0]), pcf_current_information);
-    Assert::AreEqual("Amargasaurus", as<String>(array[1]), pcf_current_information);
-    Assert::AreEqual("Mamenchisaurus", as<String>(array[2]), pcf_current_information);
-    Assert::AreEqual("Deinonychus", as<String>(array[3]), pcf_current_information);
-    Assert::AreEqual("Compsognathus", as<String>(array[4]), pcf_current_information);
+    Assert::AreEqual("Tyrannosaurus", as<String>(array[0]), sw_current_information);
+    Assert::AreEqual("Amargasaurus", as<String>(array[1]), sw_current_information);
+    Assert::AreEqual("Mamenchisaurus", as<String>(array[2]), sw_current_information);
+    Assert::AreEqual("Deinonychus", as<String>(array[3]), sw_current_information);
+    Assert::AreEqual("Compsognathus", as<String>(array[4]), sw_current_information);
   }
   
   TEST(ArrayList, CopyAllToArrayTooSmall) {
@@ -342,11 +342,11 @@ namespace {
     ASSERT_FALSE(array[2].HasValue());
     ASSERT_FALSE(array[3].HasValue());
     ASSERT_FALSE(array[4].HasValue());
-    Assert::AreEqual("Tyrannosaurus", as<String>(array[5]), pcf_current_information);
-    Assert::AreEqual("Amargasaurus", as<String>(array[6]), pcf_current_information);
-    Assert::AreEqual("Mamenchisaurus", as<String>(array[7]), pcf_current_information);
-    Assert::AreEqual("Deinonychus", as<String>(array[8]), pcf_current_information);
-    Assert::AreEqual("Compsognathus", as<String>(array[9]), pcf_current_information);
+    Assert::AreEqual("Tyrannosaurus", as<String>(array[5]), sw_current_information);
+    Assert::AreEqual("Amargasaurus", as<String>(array[6]), sw_current_information);
+    Assert::AreEqual("Mamenchisaurus", as<String>(array[7]), sw_current_information);
+    Assert::AreEqual("Deinonychus", as<String>(array[8]), sw_current_information);
+    Assert::AreEqual("Compsognathus", as<String>(array[9]), sw_current_information);
     ASSERT_FALSE(array[10].HasValue());
     ASSERT_FALSE(array[11].HasValue());
     ASSERT_FALSE(array[12].HasValue());
@@ -394,8 +394,8 @@ namespace {
     ASSERT_FALSE(array[2].HasValue());
     ASSERT_FALSE(array[3].HasValue());
     ASSERT_FALSE(array[4].HasValue());
-    Assert::AreEqual("Mamenchisaurus", as<String>(array[5]), pcf_current_information);
-    Assert::AreEqual("Deinonychus", as<String>(array[6]), pcf_current_information);
+    Assert::AreEqual("Mamenchisaurus", as<String>(array[5]), sw_current_information);
+    Assert::AreEqual("Deinonychus", as<String>(array[6]), sw_current_information);
     ASSERT_FALSE(array[7].HasValue());
     ASSERT_FALSE(array[8].HasValue());
     ASSERT_FALSE(array[9].HasValue());
@@ -419,9 +419,9 @@ namespace {
 
     Enumerator enumerator = arrayList.GetEnumerator();
     while (enumerator.MoveNext()) {
-      Assert::AreEqual(array[index++], as<String>(enumerator.Current()), pcf_current_information);
+      Assert::AreEqual(array[index++], as<String>(enumerator.Current()), sw_current_information);
     }
-    Assert::AreEqual(5, index, pcf_current_information);
+    Assert::AreEqual(5, index, sw_current_information);
   }
   
   TEST(ArrayList, Foreach) {
@@ -435,9 +435,9 @@ namespace {
     const char* array[] = {"Tyrannosaurus", "Amargasaurus", "Mamenchisaurus", "Deinonychus", "Compsognathus"};
     int32 index = 0;
     for (auto item : arrayList) {
-      Assert::AreEqual(array[index++], as<String>(item), pcf_current_information);
+      Assert::AreEqual(array[index++], as<String>(item), sw_current_information);
     }
-    Assert::AreEqual(5, index, pcf_current_information);
+    Assert::AreEqual(5, index, sw_current_information);
   }
   
 }

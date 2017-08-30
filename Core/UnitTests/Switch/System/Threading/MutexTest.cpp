@@ -12,33 +12,33 @@ namespace SwitchUnitTests {
   protected:
     void CreateMutex() {
       Mutex mutex;
-      Assert::AreEqual("Switch::System::Threading::Mutex", mutex.ToString(), pcf_current_information);
+      Assert::AreEqual("Switch::System::Threading::Mutex", mutex.ToString(), sw_current_information);
     }
     
     void CreateTwoMutex() {
       Mutex mutex1;
       Mutex mutex2;
-      Assert::AreNotEqual(mutex1, mutex2, pcf_current_information);
+      Assert::AreNotEqual(mutex1, mutex2, sw_current_information);
     }
     
     void CreateMutexByCopy() {
       Mutex mutex1;
       Mutex mutex2(mutex1);
-      Assert::AreEqual(mutex1, mutex2, pcf_current_information);
+      Assert::AreEqual(mutex1, mutex2, sw_current_information);
     }
     
     void CreateMutexAndCopy() {
       Mutex mutex1;
       Mutex mutex2;
-      Assert::AreNotEqual(mutex1, mutex2, pcf_current_information);
+      Assert::AreNotEqual(mutex1, mutex2, sw_current_information);
       mutex2 = mutex1;
-      Assert::AreEqual(mutex1, mutex2, pcf_current_information);
+      Assert::AreEqual(mutex1, mutex2, sw_current_information);
     }
     
     void CreateMutexWithInitiallyOwnedToFalse() {
       Mutex mutex(false);
-      Thread thread(ThreadStart(pcf_delegate {
-        Assert::IsTrue(mutex.WaitOne(0), pcf_current_information);
+      Thread thread(ThreadStart(sw_delegate {
+        Assert::IsTrue(mutex.WaitOne(0), sw_current_information);
       }));
       thread.Start();
       thread.Join();
@@ -46,8 +46,8 @@ namespace SwitchUnitTests {
     
     void CreateMutexWithInitiallyOwnedToTrue() {
       Mutex mutex(true);
-      Thread thread(ThreadStart(pcf_delegate {
-        Assert::IsFalse(mutex.WaitOne(0), pcf_current_information);
+      Thread thread(ThreadStart(sw_delegate {
+        Assert::IsFalse(mutex.WaitOne(0), sw_current_information);
       }));
       thread.Start();
       thread.Join();
@@ -56,96 +56,96 @@ namespace SwitchUnitTests {
     void CreateMutexWithSameName() {
       Mutex mutex1(false, "MyMutex");
       Mutex mutex2(false, "MyMutex");
-      Assert::AreEqual(mutex1, mutex2, pcf_current_information);
+      Assert::AreEqual(mutex1, mutex2, sw_current_information);
     }
     
     void CreateMutexWithSameNameAndCreatedNew() {
       bool createdNew;
       Mutex mutex1(false, "MyMutex", createdNew);
-      Assert::IsTrue(createdNew, pcf_current_information);
+      Assert::IsTrue(createdNew, sw_current_information);
       Mutex mutex2(false, "MyMutex", createdNew);
-      Assert::IsFalse(createdNew, pcf_current_information);
+      Assert::IsFalse(createdNew, sw_current_information);
     }
     
     void CreateMutexWithDifferentName() {
       Mutex mutex1(false, "MyMutex1");
       Mutex mutex2(false, "MyMutex2");
-      Assert::AreNotEqual(mutex1, mutex2, pcf_current_information);
+      Assert::AreNotEqual(mutex1, mutex2, sw_current_information);
     }
     
     void CreateMutexWithDifferentNameAndCreatedNew() {
       bool createdNew;
       Mutex mutex1(false, "MyMutex1", createdNew);
-      Assert::IsTrue(createdNew, pcf_current_information);
+      Assert::IsTrue(createdNew, sw_current_information);
       Mutex mutex2(false, "MyMutex2", createdNew);
-      Assert::IsTrue(createdNew, pcf_current_information);
+      Assert::IsTrue(createdNew, sw_current_information);
     }
     
     void Close() {
       Mutex mutex;
       mutex.Close();
-      Assert::Throws<ObjectClosedException>(pcf_delegate {
+      Assert::Throws<ObjectClosedException>(sw_delegate {
         mutex.WaitOne();
-      }, pcf_current_information);
+      }, sw_current_information);
     }
     
     void OpenExistingWithSameName() {
       Mutex mutex1(false, "MyMutex");
       Mutex mutex2 = Mutex::OpenExisting("MyMutex");
-      Assert::AreEqual(mutex1, mutex2, pcf_current_information);
+      Assert::AreEqual(mutex1, mutex2, sw_current_information);
     }
     
     void OpenExistingWithDifferentName() {
       Mutex mutex1(false, "MyMutex1");
-      Assert::Throws<WaitHandleCannotBeOpenedException>(pcf_delegate {
+      Assert::Throws<WaitHandleCannotBeOpenedException>(sw_delegate {
         Mutex mutex2 = Mutex::OpenExisting("MyMutex2");
-      }, pcf_current_information);
+      }, sw_current_information);
     }
     
     void TryOpenExistingWithSameName() {
       Mutex mutex1(false, "MyMutex");
       Mutex mutex2;
-      Assert::IsTrue(Mutex::TryOpenExisting("MyMutex", mutex2), pcf_current_information);
-      Assert::AreEqual(mutex1, mutex2, pcf_current_information);
+      Assert::IsTrue(Mutex::TryOpenExisting("MyMutex", mutex2), sw_current_information);
+      Assert::AreEqual(mutex1, mutex2, sw_current_information);
     }
     
     void TryOpenExistingWithDifferentName() {
       Mutex mutex1(false, "MyMutex1");
       Mutex mutex2;
-      Assert::IsFalse(Mutex::TryOpenExisting("MyMutex2", mutex2), pcf_current_information);
+      Assert::IsFalse(Mutex::TryOpenExisting("MyMutex2", mutex2), sw_current_information);
     }
     
     void WaitAndRealese() {
       Mutex mutex;
-      Assert::IsTrue(mutex.WaitOne(0), pcf_current_information);
-      Assert::DoesNotThrows(pcf_delegate {
+      Assert::IsTrue(mutex.WaitOne(0), sw_current_information);
+      Assert::DoesNotThrows(sw_delegate {
         mutex.ReleaseMutex();
-      }, pcf_current_information);
+      }, sw_current_information);
     }
     
     void MulitpleWaitAndRealese() {
       Mutex mutex;
-      Assert::IsTrue(mutex.WaitOne(0), pcf_current_information);
-      Assert::IsTrue(mutex.WaitOne(0), pcf_current_information);
+      Assert::IsTrue(mutex.WaitOne(0), sw_current_information);
+      Assert::IsTrue(mutex.WaitOne(0), sw_current_information);
       mutex.ReleaseMutex();
     }
   };
   
-  pcf_test(MutexTest, CreateMutex)
-  pcf_test(MutexTest, CreateTwoMutex)
-  pcf_test(MutexTest, CreateMutexByCopy)
-  pcf_test(MutexTest, CreateMutexAndCopy)
-  pcf_test(MutexTest, CreateMutexWithInitiallyOwnedToFalse)
-  pcf_test(MutexTest, CreateMutexWithInitiallyOwnedToTrue)
-  pcf_test(MutexTest, CreateMutexWithSameName)
-  pcf_test(MutexTest, CreateMutexWithSameNameAndCreatedNew)
-  pcf_test(MutexTest, CreateMutexWithDifferentName)
-  pcf_test(MutexTest, CreateMutexWithDifferentNameAndCreatedNew)
-  pcf_test(MutexTest, Close)
-  pcf_test(MutexTest, OpenExistingWithSameName)
-  pcf_test(MutexTest, OpenExistingWithDifferentName)
-  pcf_test(MutexTest, TryOpenExistingWithSameName)
-  pcf_test(MutexTest, TryOpenExistingWithDifferentName)
-  pcf_test(MutexTest, WaitAndRealese)
-  pcf_test(MutexTest, MulitpleWaitAndRealese)
+  sw_test(MutexTest, CreateMutex)
+  sw_test(MutexTest, CreateTwoMutex)
+  sw_test(MutexTest, CreateMutexByCopy)
+  sw_test(MutexTest, CreateMutexAndCopy)
+  sw_test(MutexTest, CreateMutexWithInitiallyOwnedToFalse)
+  sw_test(MutexTest, CreateMutexWithInitiallyOwnedToTrue)
+  sw_test(MutexTest, CreateMutexWithSameName)
+  sw_test(MutexTest, CreateMutexWithSameNameAndCreatedNew)
+  sw_test(MutexTest, CreateMutexWithDifferentName)
+  sw_test(MutexTest, CreateMutexWithDifferentNameAndCreatedNew)
+  sw_test(MutexTest, Close)
+  sw_test(MutexTest, OpenExistingWithSameName)
+  sw_test(MutexTest, OpenExistingWithDifferentName)
+  sw_test(MutexTest, TryOpenExistingWithSameName)
+  sw_test(MutexTest, TryOpenExistingWithDifferentName)
+  sw_test(MutexTest, WaitAndRealese)
+  sw_test(MutexTest, MulitpleWaitAndRealese)
 }

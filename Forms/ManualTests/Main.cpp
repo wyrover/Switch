@@ -35,4 +35,4 @@ namespace ManualTests {
   };
 }
 
-pcf_startup(ManualTests::Program)
+sw_startup(ManualTests::Program)

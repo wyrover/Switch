@@ -27,7 +27,7 @@ namespace Switch {
     /// &nbsp;Make sure that the memory that you are attempting to access has not been corrupted.
     ///
     /// If several read or write operations have occurred through bad pointers, memory may be corrupted. This typically occurs when reading or writing to addresses outside of a predefined buffer.
-    class pcf_public AccessViolationException : public SystemException {
+    class sw_public AccessViolationException : public SystemException {
     public:
       /// @brief Create a new instance of class AccessViolationException
       /// @remarks Message is set with the default message associate to the error.
@@ -39,7 +39,7 @@ namespace Switch {
       AccessViolationException(const AccessViolationException& value) : SystemException(value) {}
       
       /// @brief Create a new instance of class AccessViolationException
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #pcf_current_information.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
       /// @remarks Message is set with the default message associate to the error.
       AccessViolationException(const CurrentInformation& information) : SystemException(information) {}
       
@@ -49,13 +49,13 @@ namespace Switch {
       
       /// @brief Create a new instance of class AccessViolationException
       /// @param message Message string associate to the error.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #pcf_current_information.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
       AccessViolationException(const System::String& message, const CurrentInformation& information) : SystemException(message, information) {}
       
       /// @brief Create a new instance of class AccessViolationException
       /// @param message Message string associate to the error.
       /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #pcf_current_information.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
       AccessViolationException(const System::String& message, const System::Exception& innerException, const CurrentInformation& information) : SystemException(message, innerException, information) {}
       
     private:

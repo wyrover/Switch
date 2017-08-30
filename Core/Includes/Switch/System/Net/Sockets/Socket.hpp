@@ -47,7 +47,7 @@ namespace Switch {
         /// @remarks When you are finished sending and receiving data, use the Shutdown method to disable the Socket. After calling Shutdown, call the Close method to release all resources associated with the Socket.
         /// @remarks The Socket class allows you to configure your Socket using the SetSocketOption method. Retrieve these settings using the GetSocketOption method.
         /// @note If you are writing a relatively simple application and do not require maximum performance, consider using TcpClient, TcpListener, and UdpClient. These classes provide a simpler and more user-friendly interface to Socket communications.
-        class pcf_public Socket : public Object {
+        class sw_public Socket : public Object {
         public:          
           /// @brief Initializes a new instance of the Socket class using the specified address family, socket type and protocol.
           /// @param addressFamily One of the AddressFamily values.
@@ -75,7 +75,7 @@ namespace Switch {
           /// @return AddressFamily One of the AddressFamily values.
           /// @remarks The AddressFamily specifies the addressing scheme that an instance of the Socket class can use. This property is read-only and is set when the Socket is created.
           Property<System::Net::Sockets::AddressFamily, ReadOnly> AddressFamily {
-            pcf_get {return this->data->addressFamily;}
+            sw_get {return this->data->addressFamily;}
           };
           
           /// @brief Gets the amount of data that has been received from the network and is available to be read.
@@ -85,7 +85,7 @@ namespace Switch {
           /// @remarks If you are using a non-blocking Socket, Available is a good way to determine whether data is queued for reading, before calling Receive. The available data is the total amount of data queued in the network buffer for reading. If no data is queued in the network buffer, Available returns 0.
           /// @remarks If the remote host shuts down or closes the connection, Available can throw a SocketException. If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
           Property<int32, ReadOnly> Available {
-            pcf_get {return this->GetAvailable();}
+            sw_get {return this->GetAvailable();}
           };
           
           /// @brief Gets a value that indicates whether the Socket is in blocking mode.
@@ -97,14 +97,14 @@ namespace Switch {
           /// @note If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
           Property<bool> Blocking {
-            pcf_get {return this->GetBlocking();},
-            pcf_set {this->SetBlocking(value);}
+            sw_get {return this->GetBlocking();},
+            sw_set {this->SetBlocking(value);}
           };
           
           /// @brief Gets a value that indicates whether a Socket is connected to a remote host as of the last Send or Receive operation.
           /// @return bool true if the Socket was connected to a remote resource as of the most recent operation; otherwise, false.
           Property<bool, ReadOnly> Connected {
-            pcf_get {return this->data->connected;}
+            sw_get {return this->data->connected;}
           };
           
           /// @brief Gets a Boolean value that specifies whether the Socket allows Internet Protocol (IP) datagrams to be fragmented.
@@ -114,15 +114,15 @@ namespace Switch {
           /// @remarks Datagrams require fragmentation when their size exceeds the Maximum Transfer Unit (MTU) of the transmission medium. Datagrams may be fragmented by the sending host (all Internet Protocol versions) or an intermediate router (Internet Protocol Version 4 only). If a datagram must be fragmented, and the DontFragment option is set, the datagram is discarded, and an Internet Control Message Protocol (ICMP) error message is sent back to the sender of the datagram.
           /// @remarks Setting this property on a Transmission Control Protocol (TCP) socket will have no effect.
           Property<bool> DontFragment {
-            pcf_get {return this->GetDontFragment();},
-            pcf_set {this->SetDontFragment(value);}
+            sw_get {return this->GetDontFragment();},
+            sw_set {this->SetDontFragment(value);}
           };
           
           /// @brief Gets or sets a Boolean value that specifies whether the Socket is a dual-mode socket used for both IPv4 and IPv6.
           /// @return bool true if the Socket is a dual-mode socket; otherwise, false. The default is false.
           Property<bool> DualMode {
-            pcf_get {return this->GetDualMode();},
-            pcf_set {this->SetDualMode(value);}
+            sw_get {return this->GetDualMode();},
+            sw_set {this->SetDualMode(value);}
           };
           
           /// @brief Gets a Boolean value that specifies whether the Socket can send or receive broadcast packets.
@@ -132,8 +132,8 @@ namespace Switch {
           /// @remarks Broadcasting is limited to a specific subnet, and must use User Datagram Protocol (UDP.) For Internet Protocol version 4, you can broadcast to your local subnet by sending a packet to 255.255.255.255; or you can use the directed broadcast address, which is the network portion of an Internet Protocol (IP) address with all bits set in the host portion. For example, if your IP address is 192.168.1.40 (a Class C address, with a netmask of 255.255.255.0 -- the network portion is the first three octets, and the host portion is the last octet), your directed broadcast address is 192.168.1.255.
           /// @remarks Setting this property on a Transmission Control Protocol (TCP) socket will have no effect.
           Property<bool> EnableBroadcast {
-            pcf_get {return this->GetEnableBroadcast();},
-            pcf_set {this->SetEnableBroadcast(value);}
+            sw_get {return this->GetEnableBroadcast();},
+            sw_set {this->SetEnableBroadcast(value);}
           };
           
           /// @brief Gets or sets a Boolean value that specifies whether the Socket allows only one process to bind to a port.
@@ -144,21 +144,21 @@ namespace Switch {
           /// @remarks If ExclusiveAddressUse is true, the first use of the Bind method to attempt to bind to a particular port, regardless of Internet Protocol (IP) address, will succeed; all subsequent uses of the Bind method to attempt to bind to that port will fail until the original bound socket is destroyed.
           /// @remarks This property must be set before Bind is called; otherwise an InvalidOperationException will be thrown.
           Property<bool> ExclusiveAddressUse {
-            pcf_get {return this->GetExclusiveAddressUse();},
-            pcf_set {this->SetExclusiveAddressUse(value);}
+            sw_get {return this->GetExclusiveAddressUse();},
+            sw_set {this->SetExclusiveAddressUse(value);}
           };
           
           /// @brief Gets the operating system handle for the Socket.
           /// @return IntPtr An IntPtr that represents the operating system handle for the Socket.
           Property<intptr, ReadOnly> Handle {
-            pcf_get {return (intptr)this->data->socket;}
+            sw_get {return (intptr)this->data->socket;}
           };
 
           /// @brief Gets a value that indicates whether the Socket is bound to a specific local port.
           /// @return bool true if the Socket is bound to a local port; otherwise, false.
           /// @remarks A socket is considered bound to a local port if it is explicitly bound by calling the Bind method, or implicitly bound by calling members like Connect, SendTo, or ReceiveFrom, which use an ephemeral local port (a free port greater than 1024, selected by the operating system.) Servers use the Bind method to bind to a well-known port so that clients may connect to them.
           Property<bool, ReadOnly> IsBound {
-            pcf_get {return this->data->bound;}
+            sw_get {return this->data->bound;}
           };
           
           /// @brief Gets os sets a value that specifies whether the Socket will delay closing a socket in an attempt to send all pending data.
@@ -178,8 +178,8 @@ namespace Switch {
           /// @remarks he IP stack computes the default IP protocol time-out period to use based on the round trip time of the connection. In most cases, the time-out computed by the stack is more relevant than one defined by an application. This is the default behavior for a socket when the LingerState property is not set.
           /// @remarks When the LingerTime property stored in the LingerState property is set greater than the default IP protocol time-out, the default IP protocol time-out will still apply and virtual.
           Property<LingerOption> LingerState {
-            pcf_get {return this->GetLingerState();},
-            pcf_set {this->SetLingerState(value);}
+            sw_get {return this->GetLingerState();},
+            sw_set {this->SetLingerState(value);}
           };
           
           /// @brief Gets the local endpoint.
@@ -191,7 +191,7 @@ namespace Switch {
           /// @note If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
           Property<const EndPoint&, ReadOnly> LocalEndPoint {
-            pcf_get->const EndPoint& {return this->GetLocalEndPoint();}
+            sw_get->const EndPoint& {return this->GetLocalEndPoint();}
           };
           
           /// @brief Gets a value that specifies whether outgoing multicast packets are delivered to the sending application.
@@ -201,8 +201,8 @@ namespace Switch {
           /// @remarks Multicast is a scalable method for many-to-many communication on the Internet. A process subscribes to a multicast address; then, any packets sent by a subscribed process are received by every other process subscribed to the multicast address.
           /// @remarks Setting this property on a Transmission Control Protocol (TCP) socket will have no effect.
           Property<bool> MulticastLoopback {
-            pcf_get {return this->GetMulticastLoopback();},
-            pcf_set {this->SetMulticastLoopback(value);}
+            sw_get {return this->GetMulticastLoopback();},
+            sw_set {this->SetMulticastLoopback(value);}
           };
           
           /// @brief Gets a Boolean value that specifies whether the stream Socket is using the Nagle algorithm.
@@ -213,8 +213,8 @@ namespace Switch {
           /// @remarks The majority of network applications should use the Nagle algorithm.
           /// @remarks Setting this property on a User Datagram Protocol (UDP) socket will have no effect.
           Property<bool> NoDelay {
-            pcf_get {return this->GetNoDelay();},
-            pcf_set {this->SetNoDelay(value);}
+            sw_get {return this->GetNoDelay();},
+            sw_set {this->SetNoDelay(value);}
           };
           
           /// @brief Indicates whether the underlying operating system and network adaptors support Internet Protocol version 4 (IPv4).
@@ -231,7 +231,7 @@ namespace Switch {
           /// @return One of the ProtocolType values.
           /// @remarks The ProtocolType property is set when the Socket is created, and specifies the protocol used by that Socket.
           Property<System::Net::Sockets::ProtocolType, ReadOnly> ProtocolType {
-            pcf_get {return this->data->protocolType;}
+            sw_get {return this->data->protocolType;}
           };
           
           /// @brief Gets a value that specifies the size of the receive buffer of the Socket.
@@ -240,8 +240,8 @@ namespace Switch {
           /// @exception ObjectClosedException The Socket has been closed.
           /// @remarks A larger buffer size potentially reduces the number of empty acknowledgements (TCP packets with no data portion), but might also delay the recognition of connection difficulties. Consider increasing the buffer size if you are transferring large files, or you are using a high bandwidth, high latency connection (such as a satellite broadband provider.)
           Property<int32> ReceiveBufferSize {
-            pcf_get {return this->GetReceiveBufferSize();},
-            pcf_set {this->SetReceiveBufferSize(value);}
+            sw_get {return this->GetReceiveBufferSize();},
+            sw_set {this->SetReceiveBufferSize(value);}
           };
           
           /// @brief Gets a value that specifies the amount of time after which a synchronous Receive call will time out.
@@ -250,8 +250,8 @@ namespace Switch {
           /// @exception ObjectClosedException The Socket has been closed.
           /// @remarks This option applies to synchronous Receive calls only. If the time-out period is exceeded, the Receive method will throw a SocketException.
           Property<int32> ReceiveTimeout {
-            pcf_get {return this->GetReceiveTimeout();},
-            pcf_set {this->SetReceiveTimeout(value);}
+            sw_get {return this->GetReceiveTimeout();},
+            sw_set {this->SetReceiveTimeout(value);}
           };
           
           /// @brief Gets the remote endpoint.
@@ -262,7 +262,7 @@ namespace Switch {
           /// @remarks The RemoteEndPoint is set after a call to either Accept or Connect. If you try to access this property earlier, RemoteEndPoint will throw a SocketException. If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
           Property<const EndPoint&, ReadOnly> RemoteEndPoint {
-            pcf_get->const EndPoint& {return this->GetRemoteEndPoint();}
+            sw_get->const EndPoint& {return this->GetRemoteEndPoint();}
           };
           
           /// @brief Gets a value that specifies the size of the send buffer of the Socket.
@@ -271,8 +271,8 @@ namespace Switch {
           /// @exception ObjectClosedException The Socket has been closed.
           /// @remarks A larger buffer size potentially reduces the number of empty acknowledgements (TCP packets with no data portion), but might also delay the recognition of connection difficulties. Consider increasing the buffer size if you are transferring large files, or you are using a high bandwidth, high latency connection (such as a satellite broadband provider.)
           Property<int32> SendBufferSize {
-            pcf_get {return this->GetSendBufferSize();},
-            pcf_set {this->SetSendBufferSize(value);}
+            sw_get {return this->GetSendBufferSize();},
+            sw_set {this->SetSendBufferSize(value);}
           };
           
           /// @brief Gets a value that specifies the amount of time after which a synchronous Send call will time out.
@@ -281,15 +281,15 @@ namespace Switch {
           /// @exception ObjectClosedException The Socket has been closed.
           /// @remarks This option applies to synchronous Receive calls only. If the time-out period is exceeded, the Receive method will throw a SocketException.
           Property<int32> SendTimeout {
-            pcf_get {return this->GetSendTimeout();},
-            pcf_set {this->SetSendTimeout(value);}
+            sw_get {return this->GetSendTimeout();},
+            sw_set {this->SetSendTimeout(value);}
           };
           
           /// @brief Gets the type of the Socket.
           /// @return SocketType One of the SocketType values.
           /// @remarks SocketType is read-only and is set when the Socket is created.
           Property<System::Net::Sockets::SocketType, ReadOnly> SocketType {
-            pcf_get {return this->data->socketType;}
+            sw_get {return this->data->socketType;}
           };
           
           /// @brief Gets a value that specifies the Time To Live (TTL) value of Internet Protocol (IP) packets sent by the Socket.
@@ -301,8 +301,8 @@ namespace Switch {
           /// @remarks Setting this property on a Transmission Control Protocol (TCP) socket is ignored by the TCP/IP stack if a successful connection has been established using the socket.
           /// @remarks If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
           Property<int32> Ttl {
-            pcf_get {return this->GetTtl();},
-            pcf_set {this->SetTtl(value);}
+            sw_get {return this->GetTtl();},
+            sw_set {this->SetTtl(value);}
           };
 
           /// @brief Creates a new Socket for a newly created connection.
@@ -330,7 +330,7 @@ namespace Switch {
           template<typename TEndPoint>
           void Bind(const TEndPoint& localEndPoint) {
             if (this->data->socket == 0)
-              throw ObjectClosedException(pcf_current_information);
+              throw ObjectClosedException(sw_current_information);
             
             this->data->localEndPoint = as<EndPoint>(localEndPoint.template MemberwiseClone<TEndPoint>());
             InnerBind();
@@ -359,9 +359,9 @@ namespace Switch {
           template<typename TEndPoint>
           void Connect(const TEndPoint& endPoint) {
             if (this->data->socket == 0)
-              throw ObjectClosedException(pcf_current_information);
+              throw ObjectClosedException(sw_current_information);
             if (this->data->listening == true)
-              throw InvalidOperationException(pcf_current_information);
+              throw InvalidOperationException(sw_current_information);
             
             this->data->remoteEndPoint = as<EndPoint>(endPoint.template MemberwiseClone<TEndPoint>());
             InnerConnect();
@@ -995,7 +995,7 @@ namespace Switch {
             bool nonBlocking = false;
             bool bound = false;
           };
-          refptr<SocketData> data = pcf_new<SocketData>();
+          refptr<SocketData> data = sw_new<SocketData>();
           
         };
       }

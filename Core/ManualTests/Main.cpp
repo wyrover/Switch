@@ -14,5 +14,5 @@ namespace Examples {
   };
 }
 
-pcf_startup (Examples::Program)
+sw_startup (Examples::Program)
 

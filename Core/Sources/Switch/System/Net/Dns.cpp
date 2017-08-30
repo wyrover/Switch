@@ -28,11 +28,11 @@ IPHostEntry Dns::GetHostEntry(const string& hostNameOrAddress) {
   if (IPAddress::TryParse(hostNameOrAddress, address) == false) {
     host = __OS::CoreApi::Dns::GetHostByName(hostNameOrAddress);
     if (host == 0)
-      throw InvalidOperationException(pcf_current_information);
+      throw InvalidOperationException(sw_current_information);
   } else {
     host = __OS::CoreApi::Dns::GetHostByAddress(address.ToString(), address.AddressFamily());
     if (host == 0)
-      throw InvalidOperationException(pcf_current_information);
+      throw InvalidOperationException(sw_current_information);
   }
   IPHostEntry hostEntry(__OS::CoreApi::Dns::GetAddresses(host), __OS::CoreApi::Dns::GetAliases(host), __OS::CoreApi::Dns::GetHostName(host));
   __OS::CoreApi::Dns::Destroy(host);
@@ -43,6 +43,6 @@ string Dns::GetHostName() {
   Hostent hotent;
   string hostName;
   if(__OS::CoreApi::Dns::GetHostName(hostName) != 0)
-    throw InvalidOperationException(pcf_current_information);
+    throw InvalidOperationException(sw_current_information);
   return hostName;
 }

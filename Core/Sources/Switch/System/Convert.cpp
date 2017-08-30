@@ -7,7 +7,7 @@ using namespace System;
 IFormatProvider* Convert::provider = null;
 
 void __throw_cast_exception__() {
-  throw System::InvalidCastException(pcf_current_information);
+  throw System::InvalidCastException(sw_current_information);
 }
 
 byte Convert::ToByte(Any& value) {
@@ -141,7 +141,7 @@ DateTime Convert::ToDateTime(const object& value) {
   if (is<UInt16>(value)) return ToDateTime(static_cast<const UInt16&>(value));
   if (is<UInt32>(value)) return ToDateTime(static_cast<const UInt32&>(value));
   if (is<UInt64>(value)) return ToDateTime(static_cast<const UInt64&>(value));
-  throw InvalidCastException(pcf_current_information);
+  throw InvalidCastException(sw_current_information);
 }
 
 DateTime Convert::ToDateTime(bool value) {

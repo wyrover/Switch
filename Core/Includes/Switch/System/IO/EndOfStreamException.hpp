@@ -11,7 +11,7 @@ namespace Switch {
     /// @brief The System::IO namespace contains types that allow reading and writing to files and data streams, and types that provide basic file and directory support.
     namespace IO {
       /// @brief The exception that is thrown when reading is attempted past the end of a stream.
-      class pcf_public EndOfStreamException : public IOException {
+      class sw_public EndOfStreamException : public IOException {
       public:
         /// @brief Create a new instance of class EndOfStreamException
         /// @remarks Message is set with the default message associate to the error.
@@ -23,7 +23,7 @@ namespace Switch {
         EndOfStreamException(const EndOfStreamException& value) : IOException(value) {}
         
         /// @brief Create a new instance of class EndOfStreamException
-        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #pcf_current_information.
+        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
         /// @remarks Message is set with the default message associate to the error.
         EndOfStreamException(const CurrentInformation& information) : IOException(information) {}
         
@@ -33,13 +33,13 @@ namespace Switch {
         
         /// @brief Create a new instance of class EndOfStreamException
         /// @param message Message string associate to the error.
-        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #pcf_current_information.
+        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
         EndOfStreamException(const System::String& message, const CurrentInformation& information) : IOException(message, information) {}
         
         /// @brief Create a new instance of class EndOfStreamException
         /// @param message Message string associate to the error.
         /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
-        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #pcf_current_information.
+        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
         EndOfStreamException(const System::String& message, const System::Exception& innerException, const CurrentInformation& information) : IOException(message, innerException, information) {}
         
       private:

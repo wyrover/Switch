@@ -17,7 +17,7 @@ namespace Switch {
       namespace Ports {
         /// @brief Provides data for the PinChanged event.
         /// @remarks This class is used with the PinChanged event.|
-        class pcf_public SerialPinChangedEventArgs : public System::EventArgs {
+        class sw_public SerialPinChangedEventArgs : public System::EventArgs {
         public:
           SerialPinChangedEventArgs(SerialPinChange eventType) : eventType(eventType) {}
           SerialPinChangedEventArgs(const SerialPinChangedEventArgs& spcea) : eventType(spcea.eventType) {}
@@ -26,7 +26,7 @@ namespace Switch {
           /// @return One of the SerialPinChange values.
           /// @remarks This property provides information about the event type that caused the PinChanged event.
           Property<SerialPinChange, ReadOnly> EventType {
-            pcf_get {return this->eventType;}
+            sw_get {return this->eventType;}
           };
 
         private:

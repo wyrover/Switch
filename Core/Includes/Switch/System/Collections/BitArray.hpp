@@ -22,7 +22,7 @@ namespace Switch {
       /// @par Examples
       /// The following code example shows how to create and initialize a BitArray and how to print out its values.
       /// @include BitArray.cpp
-      class pcf_public BitArray : public Object, public Generic::ICollection<bool>, public System::ICloneable {
+      class sw_public BitArray : public Object, public Generic::ICollection<bool>, public System::ICloneable {
       public:
         /// @brief Initializes a new instance of the BitArray class that contains bit values copied from the specified array of bytes.
         /// @param values An array of bytes containing the values to copy, where each byte represents eight consecutive bits.
@@ -84,7 +84,7 @@ namespace Switch {
         /// @remarks This constructor is an O(n) operation, where n is length.
         BitArray(int32 length) {
           if (length < 0)
-            throw ArgumentOutOfRangeException(pcf_current_information);
+            throw ArgumentOutOfRangeException(sw_current_information);
 
           this->length = length;
           while (this->bitArray.Count < GetListLength(this->length)) {
@@ -99,7 +99,7 @@ namespace Switch {
         /// @remarks This constructor is an O(n) operation, where n is length.
         BitArray(int32 length, bool defaultValue) {
           if (length < 0)
-            throw ArgumentOutOfRangeException(pcf_current_information);
+            throw ArgumentOutOfRangeException(sw_current_information);
 
           this->length = length;
           while (this->bitArray.Count < GetListLength(this->length))
@@ -121,7 +121,7 @@ namespace Switch {
         /// @return int32 The number of elements contained in the BitArray.
         /// @remarks Length and Count return the same value. Length can be set to a specific value.
         Property<int32, ReadOnly> Length {
-          pcf_get {return this->length;}
+          sw_get {return this->length;}
         };
         
         /// @brief Performs the bitwise AND operation on the elements in the current BitArray against the corresponding elements in the specified BitArray.
@@ -134,7 +134,7 @@ namespace Switch {
         const BitArray& And(const BitArray& value) {
 
           if (this->Count != value.Count)
-            throw System::ArgumentException(pcf_current_information);
+            throw System::ArgumentException(sw_current_information);
 
           for (int32 index = 0; index < this->Count; index++)
             (*this)[index] = (*this)[index] & value[index];
@@ -146,7 +146,7 @@ namespace Switch {
         /// @return object A new object that is a copy of this instance.
         /// @return @see object
         refptr<object> Clone() const override {
-          return pcf_new<BitArray>(*this);
+          return sw_new<BitArray>(*this);
         }
 
         /// @brief Determines whether this instance of BitArray and a specified object, which must also be a BitArray object, have the same value.
@@ -183,7 +183,7 @@ namespace Switch {
         /// @remarks This method is an O(1) operation.
         bool Get(int32 index) const {
           if (index >= this->length || index < 0)
-            throw ArgumentOutOfRangeException(pcf_current_information);
+            throw ArgumentOutOfRangeException(sw_current_information);
 
           const_cast<BooleanRef&>(this->valueRef).FromBoolean(const_cast<BitArray*>(this));
 
@@ -198,7 +198,7 @@ namespace Switch {
 
         bool& Get(int32 index) {
           if (index >= this->length || index < 0)
-            throw ArgumentOutOfRangeException(pcf_current_information);
+            throw ArgumentOutOfRangeException(sw_current_information);
 
           this->valueRef.FromBoolean(this);
           return this->valueRef.GetBooleanRef(GetBitValue(index), index);
@@ -218,7 +218,7 @@ namespace Switch {
         /// @return @see object
         void CopyTo(Array<bool>& array, int32 index) const override {
           //return this->bitArray.CopyTo(array, index);
-          throw NotSupportedException(pcf_current_information);
+          throw NotSupportedException(sw_current_information);
         }
 
         /// @brief Inverts all the bit values in the current BitArray, so that elements set to true are changed to false, and elements set to false are changed to true.
@@ -240,7 +240,7 @@ namespace Switch {
         /// @remarks This method is an O(n) operation, where n is Count.
         const BitArray& Or(const BitArray& value) {
           if (this->Count != value.Count)
-            throw ArgumentException(pcf_current_information);
+            throw ArgumentException(sw_current_information);
 
           for (int32 index = 0; index < this->Count; index++)
             (*this)[index] = (*this)[index] | value[index];
@@ -274,7 +274,7 @@ namespace Switch {
         /// @remarks This method is an O(n) operation, where n is Count.
         const BitArray& Xor(const BitArray& value) {
           if (this->Count != value.Count)
-            throw ArgumentException(pcf_current_information);
+            throw ArgumentException(sw_current_information);
 
           for (int32 index = 0; index < this->Count; index++)
             (*this)[index] = (*this)[index] ^ value[index];
@@ -288,7 +288,7 @@ namespace Switch {
         /// @exception ArgumentOutOfRangeException index is less than 0 or index is equal to or greater than Count.
         const bool& operator[](int32 index) const {
           if (index >= this->length || index < 0)
-            throw ArgumentOutOfRangeException(pcf_current_information);
+            throw ArgumentOutOfRangeException(sw_current_information);
 
           const_cast<BooleanRef&>(this->valueRef).FromBoolean(const_cast<BitArray*>(this));
 
@@ -302,7 +302,7 @@ namespace Switch {
         bool& operator[](int32 index)
         {
           if (index >= this->length || index < 0)
-            throw ArgumentOutOfRangeException(pcf_current_information);
+            throw ArgumentOutOfRangeException(sw_current_information);
 
           this->valueRef.FromBoolean(this);
           return this->valueRef.GetBooleanRef(GetBitValue(index), index);
@@ -323,7 +323,7 @@ namespace Switch {
         protected:
           const bool& GetCurrent() const {
             if (this->pos == -1 || this->pos >= this->bitArray->Length)
-              throw InvalidOperationException(pcf_current_information);
+              throw InvalidOperationException(sw_current_information);
             
             return (*this->bitArray)[this->pos];
           }
@@ -380,10 +380,10 @@ namespace Switch {
         System::Collections::Generic::List<int32> bitArray;
         int32 length = 0;
 
-        void Add(const bool&) override {throw InvalidOperationException(pcf_current_information);}
-        void Clear() override {throw InvalidOperationException(pcf_current_information);}
-        bool Contains(const bool&) const override {throw InvalidOperationException(pcf_current_information);}
-        bool Remove(const bool&) override {throw InvalidOperationException(pcf_current_information);}
+        void Add(const bool&) override {throw InvalidOperationException(sw_current_information);}
+        void Clear() override {throw InvalidOperationException(sw_current_information);}
+        bool Contains(const bool&) const override {throw InvalidOperationException(sw_current_information);}
+        bool Remove(const bool&) override {throw InvalidOperationException(sw_current_information);}
       };
     }
   }

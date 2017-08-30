@@ -12,7 +12,7 @@ namespace Switch {
     /// @brief The System::Drawing namespace provides access to GDI+ basic graphics functionality. More advanced functionality is provided in the System::Drawing::Drawing2D, System::Drawing::Imaging, and System::Drawing::Text namespaces.
     namespace Drawing {
       /// @brief Specifies a range of character positions within a string.
-      class pcf_public CharacterRange : public object {
+      class sw_public CharacterRange : public object {
       public:
         /// @brief Initializes a new instance of the CharacterRange structure, with default value (0, 0).
         CharacterRange() {}
@@ -38,14 +38,14 @@ namespace Switch {
 
         /// @brief Gets or sets the position in the string of the first character of this CharacterRange.
         Property<int32> First {
-          pcf_get {return this->first;},
-          pcf_set {this->first = value;}
+          sw_get {return this->first;},
+          sw_set {this->first = value;}
         };
         
         /// @brief Gets or sets the number of positions in this CharacterRange.
         Property<int32> Length {
-          pcf_get {return this->length;},
-          pcf_set {this->length = value;}
+          sw_get {return this->length;},
+          sw_set {this->length = value;}
         };
 
         /// @brief Determines whether this instance of CharacterRange and a specified object, which must also be a CharacterRange object, have the same value.

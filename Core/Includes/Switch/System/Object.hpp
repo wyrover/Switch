@@ -23,7 +23,7 @@ namespace Switch {
     /// @par Examples
     /// The following example defines a Point type derived from the Object class and virtuals many of the virtual methods of the Object class. In addition, the example shows how to call many of the static and instance methods of the Object class.
     /// @include Object.cpp
-    class pcf_public Object {
+    class sw_public Object {
     public:
       /// @brief Create a new instance of the ultimate base class Object
       /// @remarks This constructor is called by constructors in derived classes, but it can also be used to directly create an instance of the Object class.
@@ -71,7 +71,7 @@ namespace Switch {
       /// The following code example shows how to copy an instance of a class using MemberwiseClone.
       /// @include ObjectMemberwiseClone.cpp
       template<typename T>
-      refptr<Object> MemberwiseClone() const {return pcf_new<T>(as<T>(*this));}
+      refptr<Object> MemberwiseClone() const {return sw_new<T>(as<T>(*this));}
 
       /// @brief Determines whether the specified Object instances are the same instance.
       /// @param objectA The first Object to compare.

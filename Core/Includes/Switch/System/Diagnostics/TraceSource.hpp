@@ -15,7 +15,7 @@ namespace Switch {
     /// @brief The System::Diagnostics namespace provides classes that allow you to interact with system processes, event logs, and performance counters.
     namespace Diagnostics {
       /// @brief Provides a set of methods and properties that enable applications to trace the execution of code and associate trace messages with their source.
-      class pcf_public TraceSource :  public Object {
+      class sw_public TraceSource :  public Object {
       public:
         TraceSource() {}
 
@@ -26,13 +26,13 @@ namespace Switch {
         /// @endcond
 
         Property<TraceListenerCollection&> Listeners {
-          pcf_get->TraceListenerCollection& {return this->data->listeners;},
-          pcf_set {this->data->listeners = value;}
+          sw_get->TraceListenerCollection& {return this->data->listeners;},
+          sw_set {this->data->listeners = value;}
         };
 
         Property<string> Name {
-          pcf_get {return this->data->name;},
-          pcf_set {this->data->name = value;}
+          sw_get {return this->data->name;},
+          sw_set {this->data->name = value;}
         };
 
         /// @brief Writes trace data to the trace listeners in the Listeners collection using the specified event type, event identifier, and trace data.

@@ -844,7 +844,7 @@ namespace {
     refptr<IEnumerator<string>> enumerators[50];
     
     for (Int32 index = 0; index < 50; index++) {
-      enumerators[index] = pcf_new<Enumerator<string>>(dinosaurs.GetEnumerator());
+      enumerators[index] = sw_new<Enumerator<string>>(dinosaurs.GetEnumerator());
       enumerators[index]->MoveNext();
       EXPECT_EQ("Tyrannosaurus", enumerators[index]->Current());
     }
@@ -872,7 +872,7 @@ namespace {
     Thread myThread((ParameterizedThreadStart)MyThread);
     myThread.Start(dinosaurs);
     
-    pcf_lock (dinosaurs.SyncRoot) {
+    sw_lock (dinosaurs.SyncRoot) {
       // Add 9 items
       dinosaurs.Add("Tyrannosaurus");
       Thread::Sleep(0);

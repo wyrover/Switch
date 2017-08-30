@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains #pcf_lock keyword.
+/// @brief Contains #sw_lock keyword.
 #pragma once
 
 #include "System/Delegate.hpp"

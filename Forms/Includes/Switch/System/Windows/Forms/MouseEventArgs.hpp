@@ -15,7 +15,7 @@ namespace Switch {
         class Control;
         /// @endcond
 
-        class pcf_public MouseEventArgs : public EventArgs {
+        class sw_public MouseEventArgs : public EventArgs {
         public:
           MouseEventArgs() {}
 
@@ -34,27 +34,27 @@ namespace Switch {
           /// @endcond
 
           Property<MouseButtons, ReadOnly> Button {
-            pcf_get {return this->button;}
+            sw_get {return this->button;}
           };
 
           Property<const System::Drawing::Point&, ReadOnly> Location {
-            pcf_get->const System::Drawing::Point& {return this->location;}
+            sw_get->const System::Drawing::Point& {return this->location;}
           };
 
           Property<int32, ReadOnly> Clicks {
-            pcf_get {return this->clicks;}
+            sw_get {return this->clicks;}
           };
 
           Property<int32, ReadOnly> Delta {
-            pcf_get {return this->delta;}
+            sw_get {return this->delta;}
           };
 
           Property<int32, ReadOnly> X {
-            pcf_get {return this->Location().X();}
+            sw_get {return this->Location().X();}
           };
 
           Property<int32, ReadOnly> Y {
-            pcf_get {return this->Location().Y();}
+            sw_get {return this->Location().Y();}
           };
 
         private:

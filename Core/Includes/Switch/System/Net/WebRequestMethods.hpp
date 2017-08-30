@@ -15,9 +15,9 @@ namespace Switch {
     /// The WebRequest and WebResponse classes form the basis of what are called pluggable protocols, an implementation of network services that enables you to develop applications that use Internet resources without worrying about the specific details of the individual protocols.
     namespace Net {
       /// @brief Container class for WebRequestMethods.Ftp, WebRequestMethods.File, and WebRequestMethods.Http classes. This class cannot be inherited
-      class pcf_public WebRequestMethods pcf_static {
+      class sw_public WebRequestMethods sw_static {
       public:
-        class File pcf_static {
+        class File sw_static {
         public:
           /// @brief Represents the FILE GET protocol method that is used to retrieve a file from a specified location.
           /// @return string
@@ -29,7 +29,7 @@ namespace Switch {
         };
         
         /// @brief Represents the types of FTP protocol methods that can be used with an FTP request. This class cannot be inherited.
-        class Ftp pcf_static {
+        class Ftp sw_static {
         public:
           /// @brief
           /// @return string
@@ -53,7 +53,7 @@ namespace Switch {
         };
 
         /// @brief Represents the types of HTTP protocol methods that can be used with an HTTP request.
-        class Http pcf_static {
+        class Http sw_static {
         public:
           /// @brief
           /// @return string

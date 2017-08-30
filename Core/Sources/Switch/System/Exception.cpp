@@ -20,7 +20,7 @@ string Exception::GetStackTrace() const {
   return string::Join("\n", this->stackTrace());
 }
 
-Exception::Exception() : currentInformation(pcf_current_information) {
+Exception::Exception() : currentInformation(sw_current_information) {
   this->SetStackTrace(*this);
   this->SetHResult(__HResults::COR_E_EXCEPTION);
 }
@@ -39,7 +39,7 @@ Exception::Exception(const Exception& value) {
   this-> stackTrace = value.stackTrace;
 }
 
-Exception::Exception(const string& message) : message(message), currentInformation(pcf_current_information) {
+Exception::Exception(const string& message) : message(message), currentInformation(sw_current_information) {
   this->SetStackTrace(*this);
   this->SetHResult(__HResults::COR_E_EXCEPTION);
 }
@@ -88,13 +88,13 @@ string Exception::GetDefaultMessage() const {
 
 void Exception::SetStackTrace(const Exception& exception) {
   if (Exception::stackTraceEnabled == false) {
-    this->stackTrace = pcf_new<Array<string>>(1);
+    this->stackTrace = sw_new<Array<string>>(1);
     this->stackTrace()[0] = String::Format("  in {0}:{1}{2}", this->currentInformation.FileName, this->currentInformation.Line, Environment::NewLine);
     return;
   }
   
   Diagnostics::StackTrace stackTrace(1, true);
-  this->stackTrace = pcf_new<Array<string>>(stackTrace.FrameCount() + 1);
+  this->stackTrace = sw_new<Array<string>>(stackTrace.FrameCount() + 1);
 
   if (stackTrace.FrameCount() == 0) {
     this->stackTrace()[0] = String::Format("  in {0}:{1}{2}", this->currentInformation.FileName, this->currentInformation.Line, Environment::NewLine);

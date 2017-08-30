@@ -22,7 +22,7 @@ namespace Switch {
     /// In addition to classes for synchronizing thread activities and access to data ( Mutex, Monitor, Interlocked, AutoResetEvent, and so on), this namespace includes a ThreadPool class that allows you to use a pool of system-supplied threads, and a Timer class that executes callback methods on thread pool threads.
     namespace Threading {
       /// @brief Limits the number of threads that can access a resource or pool of resources concurrently.
-      class pcf_public Semaphore: public WaitHandle {
+      class sw_public Semaphore: public WaitHandle {
       public:
         /// @brief Initializes a new instance of the System::Threading::Semaphore class
         /// @remarks The count is equals to 0 and the maximumCount is equal to Int32::MaxValue.
@@ -33,7 +33,7 @@ namespace Switch {
         /// @param initialCount The initial number of requests for the semaphore that can be granted concurrently.
         /// @param maximumCount The maximum number of requests for the semaphore that can be granted concurrently.
         /// @exception IO::IOException An Io error occurred.
-        Semaphore(int32 initialCount, int32 maximumCount) : count(pcf_new<int32>(initialCount)), maxCount(pcf_new<int32>(maximumCount)) {}
+        Semaphore(int32 initialCount, int32 maximumCount) : count(sw_new<int32>(initialCount)), maxCount(sw_new<int32>(maximumCount)) {}
 
         /// @brief Initializes a new instance of the System::Threading::Semaphore class, specifying the maximum number of concurrent entries, optionally reserving some entries
         /// for the calling thread, and optionally specifying the name of a system semaphore
@@ -101,10 +101,10 @@ namespace Switch {
         /// @exception IO::IOException An Io error occurred.
         int32 Release(int32 releaseCount) {
           if (this->guard.IsNull())
-            throw ObjectClosedException(pcf_current_information);
+            throw ObjectClosedException(sw_current_information);
           std::unique_lock<std::mutex> lock(*this->guard);
           if (*this->count + releaseCount > *this->maxCount)
-            throw SemaphoreFullException(pcf_current_information);
+            throw SemaphoreFullException(sw_current_information);
           *this->count += releaseCount;
           this->signal->notify_all();
           return *this->count - releaseCount;
@@ -124,9 +124,9 @@ namespace Switch {
         
         bool Wait(int32 millisecondsTimeOut) override {
           if (this->guard.IsNull())
-            throw ObjectClosedException(pcf_current_information);
+            throw ObjectClosedException(sw_current_information);
           if (millisecondsTimeOut < -1)
-            throw AbandonedMutexException(pcf_current_information);
+            throw AbandonedMutexException(sw_current_information);
               
           std::unique_lock<std::mutex> lock(*this->guard);
           while(*this->count == 0) {
@@ -140,11 +140,11 @@ namespace Switch {
           return true;
         }
 
-        refptr<std::mutex> guard = pcf_new<std::mutex>();
-        refptr<std::condition_variable> signal = pcf_new<std::condition_variable>();
-        refptr<int32> count = pcf_new<int32>(0);
-        refptr<int32> maxCount = pcf_new<int32>(Int32::MaxValue());
-        refptr<string> name = pcf_new<string>();
+        refptr<std::mutex> guard = sw_new<std::mutex>();
+        refptr<std::condition_variable> signal = sw_new<std::condition_variable>();
+        refptr<int32> count = sw_new<int32>(0);
+        refptr<int32> maxCount = sw_new<int32>(Int32::MaxValue());
+        refptr<string> name = sw_new<string>();
       };
     }
   }

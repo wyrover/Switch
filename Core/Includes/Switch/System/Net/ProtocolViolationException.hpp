@@ -12,7 +12,7 @@ namespace Switch {
     /// The WebRequest and WebResponse classes form the basis of what are called pluggable protocols, an implementation of network services that enables you to develop applications that use Internet resources without worrying about the specific details of the individual protocols.
     namespace Net {
       /// @brief The exception that is thrown when an error is made while using a network protocol.
-      class pcf_public ProtocolViolationException : public InvalidOperationException {
+      class sw_public ProtocolViolationException : public InvalidOperationException {
       public:
         /// @brief Create a new instance of class ProtocolViolationException
         /// @remarks Message is set with the default message associate to the error.
@@ -24,7 +24,7 @@ namespace Switch {
         ProtocolViolationException(const ProtocolViolationException& value) : InvalidOperationException(value) {}
         
         /// @brief Create a new instance of class ProtocolViolationException
-        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #pcf_current_information.
+        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
         /// @remarks Message is set with the default message associate to the error.
         ProtocolViolationException(const CurrentInformation& information) : InvalidOperationException(information) {}
         
@@ -34,13 +34,13 @@ namespace Switch {
         
         /// @brief Create a new instance of class ProtocolViolationException
         /// @param message Message string associate to the error.
-        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #pcf_current_information.
+        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
         ProtocolViolationException(const System::String& message, const CurrentInformation& information) : InvalidOperationException(message, information) {}
         
         /// @brief Create a new instance of class ProtocolViolationException
         /// @param message Message string associate to the error.
         /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
-        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #pcf_current_information.
+        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
         ProtocolViolationException(const System::String& message, const System::Exception& innerException, const CurrentInformation& information) : InvalidOperationException(message, innerException, information) {}
         
       private:

@@ -12,7 +12,7 @@ namespace {
     
     uint64 value = x + y;
     if (value < x)
-      throw OverflowException(pcf_current_information);
+      throw OverflowException(sw_current_information);
     return value;
   }
   
@@ -63,19 +63,19 @@ namespace Switch {
       if (base == (int32)NumberRepresentationBase::Hexadecimal) {
         if (c == 'x' || c == 'X') {
           ++it;
-          if (it == end) throw FormatException(pcf_current_information);
+          if (it == end) throw FormatException(sw_current_information);
           c = *it;
-          if (c != '0') throw FormatException(pcf_current_information);
+          if (c != '0') throw FormatException(sw_current_information);
           it++;
         }
       }
       if (base == (int32)NumberRepresentationBase::Binary) {
         if (c == 'b' || c == 'B') {
           if (it == end)
-            throw FormatException(pcf_current_information);
+            throw FormatException(sw_current_information);
           c = *it;
           if (c != '0')
-            throw FormatException(pcf_current_information);
+            throw FormatException(sw_current_information);
           ++it;
         }
       }
@@ -101,7 +101,7 @@ namespace Switch {
         }
         if (c == ' ')
           return sign;
-        throw FormatException(pcf_current_information);
+        throw FormatException(sw_current_information);
       } while (it != end);
       return sign;
     }
@@ -114,7 +114,7 @@ namespace Switch {
       if (sign == '-') {
         ++it;
         if (value > 9223372036854775808ULL)
-          throw OverflowException(pcf_current_information);
+          throw OverflowException(sw_current_information);
         if (value == 9223372036854775808ULL)
           return Int64::MinValue;
         return -Convert::ToInt64(value);
@@ -130,7 +130,7 @@ namespace Switch {
         c = *it;
         if (!IsDigit(c, base)) {
           if (oneDigitSeen) return value;
-          throw FormatException(pcf_current_information);
+          throw FormatException(sw_current_information);
         } else {
           uint32 curDigit = ToDigit(c);
           oneDigitSeen = true;
@@ -162,22 +162,22 @@ namespace Switch {
     
     int64 NumericalParsing::ParseSigned(const string& str, int32 base, int32 nbBits) {
       if (base <2 || base > 32)
-        throw ArgumentException(pcf_current_information);
+        throw ArgumentException(sw_current_information);
       
       string::const_reverse_iterator it = str.rbegin();
       if (it == str.rend())
-        throw FormatException(pcf_current_information);
+        throw FormatException(sw_current_information);
       char32 c;
       
       // trim
       IgnoreSpaces(it, str.rend(), c);
       if (it == str.rend())
-        throw FormatException(pcf_current_information);
+        throw FormatException(sw_current_information);
       
       // suffix
       IgnoreValidSuffix(it, str.rend(), c, base);
       if (it == str.rend())
-        throw FormatException(pcf_current_information);
+        throw FormatException(sw_current_information);
       
       // digits
       uint64 value = ReadInteger(it, str.rend(), c, base);
@@ -199,7 +199,7 @@ namespace Switch {
       //trim out
       IgnoreSpaces(it, str.rend(),c);
       if (it != str.rend())
-        throw FormatException(pcf_current_information);
+        throw FormatException(sw_current_information);
       else return value;
     }
     
@@ -210,27 +210,27 @@ namespace Switch {
         return;
       }
       if (sign == '-')
-        throw OverflowException(pcf_current_information);
+        throw OverflowException(sw_current_information);
     }
     
     uint64 NumericalParsing::ParseUnsigned(const string& str, int32 base) {
       if (base <2 || base > 32)
-        throw ArgumentException(pcf_current_information);
+        throw ArgumentException(sw_current_information);
       
       string::const_reverse_iterator it = str.rbegin();
       if (it == str.rend())
-        throw FormatException(pcf_current_information);
+        throw FormatException(sw_current_information);
       char32 c;
       
       // trim
       IgnoreSpaces(it, str.rend(), c);
       if (it == str.rend())
-         throw FormatException(pcf_current_information);
+         throw FormatException(sw_current_information);
       
       // suffix
       IgnoreValidSuffix(it, str.rend(), c, base);
       if (it == str.rend())
-        throw FormatException(pcf_current_information);
+        throw FormatException(sw_current_information);
       
       // digits
       uint64 value = ReadInteger(it, str.rend(), c, base);
@@ -250,7 +250,7 @@ namespace Switch {
       //trim out
       IgnoreSpaces(it, str.rend(), c);
       if (it != str.rend())
-        throw FormatException(pcf_current_information);
+        throw FormatException(sw_current_information);
       else return value;
     }
     

@@ -11,4 +11,4 @@ namespace {
   };
 }
 
-pcf_startup (MainTest)
+sw_startup (MainTest)

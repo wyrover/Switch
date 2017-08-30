@@ -27,11 +27,11 @@ namespace {
     
     int32 Read(Array<byte>& buffer, int32 offset, int32 count) override {
       if (count < 0 || offset < 0)
-        throw ArgumentOutOfRangeException(pcf_current_information);
+        throw ArgumentOutOfRangeException(sw_current_information);
       if (offset + count > buffer.Length)
-        throw ArgumentException(pcf_current_information);
+        throw ArgumentException(sw_current_information);
       if (IsClosed())
-        throw ObjectClosedException(pcf_current_information);
+        throw ObjectClosedException(sw_current_information);
       if (feof(this->stream))
         return -1;
       return (int32)fread((char*)&buffer.Data[offset], sizeof(char), count, this->stream);

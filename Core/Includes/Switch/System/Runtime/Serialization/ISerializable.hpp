@@ -21,7 +21,7 @@ namespace Switch {
 
         /// @interface ISerializable
         /// @brief Allows an object to control its own serialization and deserialization.
-        class pcf_public ISerializable pcf_interface {
+        class sw_public ISerializable sw_interface {
         public:
           /// @brief Populates a SerializationInfo with the data needed to serialize the target object.
           /// @param info The SerializationInfo to populate with data.

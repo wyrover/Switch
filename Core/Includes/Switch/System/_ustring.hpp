@@ -11,7 +11,7 @@
 
 /// @cond
 namespace std {
-  class pcf_public ustring {
+  class sw_public ustring {
   public:
     ustring();
     ustring(const char* str);

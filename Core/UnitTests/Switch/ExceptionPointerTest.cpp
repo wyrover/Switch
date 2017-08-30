@@ -10,64 +10,64 @@ namespace SwitchUnitTests {
   protected:
     void CreateExceptionPointerEmptyThenRethrow() {
       ExceptionPtr ep;
-      Assert::IsTrue(ep.IsNull(), pcf_current_information);
-      Assert::DoesNotThrows(pcf_delegate {ep.Rethrow();}, pcf_current_information);
+      Assert::IsTrue(ep.IsNull(), sw_current_information);
+      Assert::DoesNotThrows(sw_delegate {ep.Rethrow();}, sw_current_information);
     }
     
     void CreateKnownExceptionThenRethrow() {
       ExceptionPtr ep = ExceptionPtr::Create(InvalidCastException());
       Assert::IsFalse(ep.IsNull());
-      Assert::Throws<InvalidCastException>(pcf_delegate {ep.Rethrow();}, pcf_current_information);
+      Assert::Throws<InvalidCastException>(sw_delegate {ep.Rethrow();}, sw_current_information);
     }
     
     void CreateUnknownExceptionThenRethrow() {
       struct MyException {};
       ExceptionPtr ep = ExceptionPtr::Create(MyException());
       Assert::IsFalse(ep.IsNull());
-      Assert::Throws<MyException>(pcf_delegate {ep.Rethrow();}, pcf_current_information);
+      Assert::Throws<MyException>(sw_delegate {ep.Rethrow();}, sw_current_information);
     }
    
     void GetCurrentExceptionOnNullExceptionThenRethrow() {
       ExceptionPtr ep;
-      pcf_using() {
+      sw_using() {
         ep = ExceptionPtr::CurrentException;
       }
-      Assert::IsTrue(ep.IsNull(), pcf_current_information);
-      Assert::DoesNotThrows(pcf_delegate {ep.Rethrow();}, pcf_current_information);
+      Assert::IsTrue(ep.IsNull(), sw_current_information);
+      Assert::DoesNotThrows(sw_delegate {ep.Rethrow();}, sw_current_information);
     }
     
     void GetCurrentExceptionOnKnownExceptionThenRethrow() {
       ExceptionPtr ep;
-      pcf_using() {
+      sw_using() {
         try {
           throw InvalidOperationException();
         } catch(...) {
           ep = ExceptionPtr::CurrentException;
         }
       }
-      Assert::IsFalse(ep.IsNull(), pcf_current_information);
-      Assert::Throws<InvalidOperationException>(pcf_delegate {ep.Rethrow();}, pcf_current_information);
+      Assert::IsFalse(ep.IsNull(), sw_current_information);
+      Assert::Throws<InvalidOperationException>(sw_delegate {ep.Rethrow();}, sw_current_information);
     }
     
     void GetCurrentExceptionOnUnknownExceptionThenRethrow() {
       struct MyException {};
       ExceptionPtr ep;
-      pcf_using() {
+      sw_using() {
         try {
           throw MyException();
         } catch(...) {
           ep = ExceptionPtr::CurrentException;
         }
       }
-      Assert::IsFalse(ep.IsNull(), pcf_current_information);
-      Assert::Throws<MyException>(pcf_delegate {ep.Rethrow();}, pcf_current_information);
+      Assert::IsFalse(ep.IsNull(), sw_current_information);
+      Assert::Throws<MyException>(sw_delegate {ep.Rethrow();}, sw_current_information);
     }
   };
   
-  pcf_test(ExceptionPointerTest, CreateExceptionPointerEmptyThenRethrow)
-  pcf_test(ExceptionPointerTest, CreateKnownExceptionThenRethrow)
-  pcf_test(ExceptionPointerTest, CreateUnknownExceptionThenRethrow)
-  pcf_test(ExceptionPointerTest, GetCurrentExceptionOnNullExceptionThenRethrow)
-  pcf_test(ExceptionPointerTest, GetCurrentExceptionOnKnownExceptionThenRethrow)
-  pcf_test(ExceptionPointerTest, GetCurrentExceptionOnUnknownExceptionThenRethrow)
+  sw_test(ExceptionPointerTest, CreateExceptionPointerEmptyThenRethrow)
+  sw_test(ExceptionPointerTest, CreateKnownExceptionThenRethrow)
+  sw_test(ExceptionPointerTest, CreateUnknownExceptionThenRethrow)
+  sw_test(ExceptionPointerTest, GetCurrentExceptionOnNullExceptionThenRethrow)
+  sw_test(ExceptionPointerTest, GetCurrentExceptionOnKnownExceptionThenRethrow)
+  sw_test(ExceptionPointerTest, GetCurrentExceptionOnUnknownExceptionThenRethrow)
 }

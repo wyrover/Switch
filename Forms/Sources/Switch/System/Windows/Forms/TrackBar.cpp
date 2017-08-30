@@ -79,7 +79,7 @@ void TrackBar::SetSmallChange(int32 smallChange) {
 
 void TrackBar::SetTickFrequency(int32 tickFrequency) {
   if (tickFrequency < 0)
-    throw ArgumentOutOfRangeException(pcf_current_information);
+    throw ArgumentOutOfRangeException(sw_current_information);
   if (this->tickFrequency != tickFrequency) {
     this->tickFrequency = tickFrequency;
     if (this->IsHandleCreated)

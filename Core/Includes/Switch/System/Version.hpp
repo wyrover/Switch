@@ -21,7 +21,7 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief Provides methods for creating, manipulating, searching, and sorting arrays, thereby serving as the base class for all arrays.
-    class pcf_public Version final : public Object, public ICloneable, public IComparable, public Runtime::Serialization::ISerializable {
+    class sw_public Version final : public Object, public ICloneable, public IComparable, public Runtime::Serialization::ISerializable {
     public:
       /// @brief Initializes a new instance of the Version class.
       /// @remarks Version is initialized with default values :
@@ -35,7 +35,7 @@ namespace Switch {
       /// @exception ArgumentOutOfRangeException major or minor is less than zero.
       Version(int32 major, int32 minor) : major(major), minor(minor) {
         if (major < 0 || minor < 0)
-          throw ArgumentOutOfRangeException(pcf_current_information);
+          throw ArgumentOutOfRangeException(sw_current_information);
       }
       
       /// @brief Initializes a new instance of the Version class using the specified major, minor and build values.
@@ -45,7 +45,7 @@ namespace Switch {
       /// @exception ArgumentOutOfRangeException major, minor or build is less than zero.
       Version(int32 major, int32 minor, int32 build) : major(major), minor(minor), build(build) {
         if (major < 0 || minor < 0 || build < 0)
-          throw ArgumentOutOfRangeException(pcf_current_information);
+          throw ArgumentOutOfRangeException(sw_current_information);
       }
       
       /// @brief Initializes a new instance of the Version class using the specified major, minor, build and revision values.
@@ -56,7 +56,7 @@ namespace Switch {
       /// @exception ArgumentOutOfRangeException major, minor, build or revision is less than zero.
       Version(int32 major, int32 minor, int32 build, int32 revision) : major(major), minor(minor), build(build), revision(revision) {
         if (major < 0 || minor < 0 || build < 0 || revision < 0)
-          throw ArgumentOutOfRangeException(pcf_current_information);
+          throw ArgumentOutOfRangeException(sw_current_information);
       }
       
       /// @cond
@@ -73,13 +73,13 @@ namespace Switch {
       /// @brief Gets the value of the build component of the version number for the current Version object.
       /// @return int32 The build number, or -1 if the build number is undefined.
       Property<int32, ReadOnly> Build {
-        pcf_get {return this->build;}
+        sw_get {return this->build;}
       };
 
       /// @brief Gets the value of the major component of the version number for the current Version object.
       /// @return int32 The major version number.
       Property<int32, ReadOnly> Major {
-        pcf_get {return this->major;}
+        sw_get {return this->major;}
       };
 
       /// @brief Gets the high 16 bits of the revision number.
@@ -89,13 +89,13 @@ namespace Switch {
       /// @remarks In this case, encode the identification information in the high and low 16-bit portions of the 32-bit revision number.
       /// @remarks Use the Revision property to obtain the entire revision number, use the MajorRevision property to obtain the high 16 bits, and use the MinorRevision property to obtain the low 16 bits.
       Property<int16, ReadOnly> MajorRevision {
-        pcf_get {return (int16)((this->revision & 0xFFFF0000) >> 16);}
+        sw_get {return (int16)((this->revision & 0xFFFF0000) >> 16);}
       };
 
       /// @brief Gets the value of the minor component of the version number for the current Version object.
       /// @return int32 The minor version number.
       Property<int32, ReadOnly> Minor {
-        pcf_get {return this->minor;}
+        sw_get {return this->minor;}
       };
 
       /// @brief Gets the low 16 bits of the revision number.
@@ -105,18 +105,18 @@ namespace Switch {
       /// @remarks In this case, encode the identification information in the high and low 16-bit portions of the 32-bit revision number.
       /// @remarks Use the Revision property to obtain the entire revision number, use the MajorRevision property to obtain the high 16 bits, and use the MinorRevision property to obtain the low 16 bits.
       Property<int16, ReadOnly> MinorRevision {
-        pcf_get {return (int16)(this->revision & 0x0000FFFF);}
+        sw_get {return (int16)(this->revision & 0x0000FFFF);}
       };
 
       /// @brief Gets the value of the revision component of the version number for the current Version object.
       /// @return int32 The revision number, or -1 if the revision number is undefined.
       Property<int32, ReadOnly> Revision {
-        pcf_get {return this->revision;}
+        sw_get {return this->revision;}
       };
 
       /// @brief Returns a new Version object whose value is the same as the current Version object.
       /// @return object* A new object whose values are a copy of the current Version object.
-      refptr<object> Clone() const override {return pcf_new<Version>(*this);}
+      refptr<object> Clone() const override {return sw_new<Version>(*this);}
 
       /// @brief Compares the current Version object to a specified object and returns an indication of their relative values.
       /// @param obj An object to compare with this instance.
@@ -183,7 +183,7 @@ namespace Switch {
           case 3: return Version(Convert::ToInt32(versions[0]), Convert::ToInt32(versions[1]), Convert::ToInt32(versions[2]));;
           case 4: return Version(Convert::ToInt32(versions[0]), Convert::ToInt32(versions[1]), Convert::ToInt32(versions[2]), Convert::ToInt32(versions[3]));
         }
-        throw ArgumentException(pcf_current_information);
+        throw ArgumentException(sw_current_information);
       }
       
       static bool TryParse(const String& version, Version& result) {
@@ -202,7 +202,7 @@ namespace Switch {
       
       String ToString(int32 fieldCount) const {
         if (fieldCount < 0 || fieldCount> 4 || (fieldCount >= 3 && this->build == -1) || (fieldCount == 4 && this->revision == -1))
-          throw ArgumentOutOfRangeException(pcf_current_information);
+          throw ArgumentOutOfRangeException(sw_current_information);
         string result;
         if (fieldCount >= 1)
           result += string::Format("{0}", this->major);

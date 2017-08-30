@@ -40,7 +40,7 @@ namespace Switch {
         /// @endcond
         
         /// @brief Provides functionality for formatting serialized objects.
-        class pcf_public SerializationInfo : public Object, public System::Collections::Generic::IEnumerable<System::Collections::Generic::KeyValuePair<System::String, SerializationEntry>> {
+        class sw_public SerializationInfo : public Object, public System::Collections::Generic::IEnumerable<System::Collections::Generic::KeyValuePair<System::String, SerializationEntry>> {
         public:
           /// @brief Initializes a new instance of the SerializationInfo interface.
           SerializationInfo() {}
@@ -188,7 +188,7 @@ namespace Switch {
             if (is<System::Runtime::Serialization::SerializationInfo>(entry.Value().ToObject()))
               return T::Deserialize(as<System::Runtime::Serialization::SerializationInfo>(entry.Value()).ToObject());
             else
-              throw System::Runtime::Serialization::SerializationException(pcf_current_information);
+              throw System::Runtime::Serialization::SerializationException(sw_current_information);
           }
 
           const String& GetObjectType() const { return this->objectType; }

@@ -194,7 +194,7 @@ namespace Switch {
       
       static Collections::Generic::SortedDictionary<int64, String>& Values();
       void LoadValues() {
-        pcf_using (System::Threading::LockGuard lock(this->values)) {
+        sw_using (System::Threading::LockGuard lock(this->values)) {
           if (values.Count == 0)
             this->InitValues(values);
         }

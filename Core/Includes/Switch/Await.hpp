@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains Switch::Await class and #pcf_await keyword.
+/// @brief Contains Switch::Await class and #sw_await keyword.
 #pragma once
 
 #include "Async.hpp"
@@ -10,7 +10,7 @@ namespace Switch {
   /// @par Examples
   /// This example demontrate how to use async and await
   /// @include Async1.cpp
-  class pcf_public Await {
+  class sw_public Await {
   public:
     Await() {}
    
@@ -53,7 +53,7 @@ namespace Switch {
   /// This example demontrate how to use async and await
   /// @include Async2.cpp
   /// @ingroup Switch
-  #define pcf_await await() <<
+  #define sw_await await() <<
 }
 
 using namespace Switch;

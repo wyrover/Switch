@@ -25,7 +25,7 @@ void FormsApi::Application::Exit() {
 }
 
 void FormsApi::Application::MessageLoop(const System::Windows::Forms::Form& mainForm, EventHandler idle) {
-  Glib::signal_idle().connect(pcf_delegate {
+  Glib::signal_idle().connect(sw_delegate {
     idle.Invoke(object(), EventArgs::Empty);
     return mainForm.Visible() && !idle.IsEmpty();
   });
@@ -69,7 +69,7 @@ namespace {
 
 DialogResult FormsApi::Application::ShowMessageBox(const string& message, const string& caption, MessageBoxButtons buttons, MessageBoxIcon icon, MessageBoxDefaultButton defaultButton, MessageBoxOptions options, bool displayHelpButton) {
   static System::Collections::Generic::SortedDictionary<MessageBoxIcon, Gtk::MessageType> icons = {{MessageBoxIcon::None, Gtk::MESSAGE_OTHER}, {MessageBoxIcon::Error, Gtk::MESSAGE_ERROR}, {MessageBoxIcon::Question, Gtk::MESSAGE_QUESTION}, {MessageBoxIcon::Warning, Gtk::MESSAGE_WARNING}, {MessageBoxIcon::Information, Gtk::MESSAGE_INFO}};
-  static refptr<Gtk::Window> emptyWindow = pcf_new<Gtk::Window>();
+  static refptr<Gtk::Window> emptyWindow = sw_new<Gtk::Window>();
   Gtk::Window* activeWindow = __application__->get_active_window();
   if (activeWindow == null) activeWindow = emptyWindow.ToPointer();
   Gtk::MessageDialog dialog(*activeWindow, caption.c_str(), true /* use_markup */, icons[icon], Gtk::BUTTONS_NONE, true);

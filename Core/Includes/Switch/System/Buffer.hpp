@@ -18,7 +18,7 @@ namespace Switch {
     /// Buffer only affects arrays of primitive types; this class does ! apply to objects. Each primitive type is treated as a series of bytes without regard to any behavior || limitation associated with the primitive type.
     /// Buffer provides methods to copy bytes from one array of primitive types to another array of primitive types, get a byte from an array, set a byte in an array, && obtain the length of an array. This class provides better performance for manipulating primitive types than similar methods in the System::Array class.
     /// Buffer is applicable to the following primitive types: #bool, #char, #char32, #sbyte, #byte, #int16, #uint16, #int32, #uint32, #int64, #uint64, #void*, #uintptr, #float, && #double.
-    class pcf_public Buffer final {
+    class sw_public Buffer final {
     public:
       /// @cond
       Buffer() = delete;
@@ -43,9 +43,9 @@ namespace Switch {
       template<typename TSource, typename TDestination>
       static int32 BlockCompare(const Array<TSource>& blk1, int32 blk1Offset, const Array<TDestination>& blk2, int32 blk2Offset, int32 count) {
         if (blk1Offset < 0 || blk2Offset < 0 || count < 0)
-          throw ArgumentOutOfRangeException(pcf_current_information);
+          throw ArgumentOutOfRangeException(sw_current_information);
         if (!IsPrimitive<TSource>() || !IsPrimitive<TDestination>() || blk1Offset + count > Buffer::ByteLength(blk1) || blk2Offset + count > Buffer::ByteLength(blk2))
-          throw ArgumentException(pcf_current_information);
+          throw ArgumentException(sw_current_information);
         
         const byte *blk1Ptr = (const byte*)blk1.GetData();
         const byte *blk2Ptr = (const byte*)blk2.GetData();
@@ -87,9 +87,9 @@ namespace Switch {
       template<typename TSource, typename TDestination>
       static void BlockCopy(const Array<TSource>& src, int32 srcOffset, Array<TDestination>& dst, int32 dstOffset, int32 count) {
         if (srcOffset < 0 || dstOffset < 0 || count < 0)
-          throw ArgumentOutOfRangeException(pcf_current_information);
+          throw ArgumentOutOfRangeException(sw_current_information);
         if (!IsPrimitive<TSource>() || !IsPrimitive<TDestination>() || srcOffset + count > Buffer::ByteLength(src) || dstOffset + count > Buffer::ByteLength(dst))
-          throw ArgumentException(pcf_current_information);
+          throw ArgumentException(sw_current_information);
         
         const byte *srcPtr = (const byte*)src.Data();
         byte *dstPtr = const_cast<byte*>((const byte*)dst.Data());
@@ -119,9 +119,9 @@ namespace Switch {
       template<typename TDestination>
       static void BlockFill(byte filler, Array<TDestination>& dst, int32 dstOffset, int32 count) {
         if (dstOffset < 0 || count < 0)
-          throw ArgumentOutOfRangeException(pcf_current_information);
+          throw ArgumentOutOfRangeException(sw_current_information);
         if (!IsPrimitive<TDestination>() || dstOffset + count > Buffer::ByteLength(dst))
-          throw ArgumentException(pcf_current_information);
+          throw ArgumentException(sw_current_information);
         
         byte *dstPtr = const_cast<byte*>((const byte*)dst.Data());
         memset(&dstPtr[dstOffset], filler, count);
@@ -164,7 +164,7 @@ namespace Switch {
       template<typename T>
       static int32 ByteLength(const Array<T>& array) {
         if (!IsPrimitive<T>())
-          throw ArgumentException(pcf_current_information);
+          throw ArgumentException(sw_current_information);
         
         return Convert::ToInt32((int64)sizeof(T) * array.Length);
       }
@@ -179,9 +179,9 @@ namespace Switch {
       template<typename T>
       static byte GetByte(const Array<T>& array, int32 index) {
         if (!IsPrimitive<T>())
-          throw ArgumentException(pcf_current_information);
+          throw ArgumentException(sw_current_information);
         if (0 < index && index >= Buffer::ByteLength(array))
-          throw ArgumentOutOfRangeException(pcf_current_information);
+          throw ArgumentOutOfRangeException(sw_current_information);
         
         const byte *bytePtr = (const byte*)array.Data();
         return (byte)(bytePtr[index]);
@@ -197,9 +197,9 @@ namespace Switch {
       template<typename T>
       static void SetByte(const Array<T>& array, int32 index, byte value) {
         if (!IsPrimitive<T>())
-          throw ArgumentException(pcf_current_information);
+          throw ArgumentException(sw_current_information);
         if (0 < index && index >= Buffer::ByteLength(array))
-          throw ArgumentOutOfRangeException(pcf_current_information);
+          throw ArgumentOutOfRangeException(sw_current_information);
         
         byte *bytePtr = const_cast<byte*>((const byte*)array.Data());
         bytePtr[index] = value;

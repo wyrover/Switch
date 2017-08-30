@@ -9,7 +9,7 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The exception that is thrown when a feature does not run on a particular platform.
-    class pcf_public PlatformNotSupportedException : public NotSupportedException {
+    class sw_public PlatformNotSupportedException : public NotSupportedException {
     public:
       /// @brief Create a new instance of class PlatformNotSupportedException
       /// @remarks Message is set with the default message associate to the error.
@@ -21,7 +21,7 @@ namespace Switch {
       PlatformNotSupportedException(const PlatformNotSupportedException& value) : NotSupportedException(value) {}
       
       /// @brief Create a new instance of class PlatformNotSupportedException
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #pcf_current_information.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
       /// @remarks Message is set with the default message associate to the error.
       PlatformNotSupportedException(const CurrentInformation& information) : NotSupportedException(information) {}
       
@@ -31,13 +31,13 @@ namespace Switch {
       
       /// @brief Create a new instance of class PlatformNotSupportedException
       /// @param message Message string associate to the error.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #pcf_current_information.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
       PlatformNotSupportedException(const System::String& message, const CurrentInformation& information) : NotSupportedException(message, information) {}
       
       /// @brief Create a new instance of class PlatformNotSupportedException
       /// @param message Message string associate to the error.
       /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #pcf_current_information.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
       PlatformNotSupportedException(const System::String& message, const System::Exception& innerException, const CurrentInformation& information) : NotSupportedException(message, innerException, information) {}
       
     private:

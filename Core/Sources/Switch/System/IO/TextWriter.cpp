@@ -28,6 +28,6 @@ SynchronizedTextWriter::SynchronizedTextWriter(System::IO::TextWriter& writer) :
 }
 
 void SynchronizedTextWriter::Write(const string& value) {
-  pcf_using(System::Threading::LockGuard lock(*this->writer))
+  sw_using(System::Threading::LockGuard lock(*this->writer))
     this->writer->Write(value);
 }

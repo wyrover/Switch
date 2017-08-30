@@ -13,7 +13,7 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief Implements the IFormatProvider interface to format data as a string
-    class pcf_public FormatProvider : public Object, public IFormatProvider, public ICustomFormatter {
+    class sw_public FormatProvider : public Object, public IFormatProvider, public ICustomFormatter {
     public:
       /// @brief Returns an object that provides formatting services for the specified type.
       /// @param type An object that specifies the type of format object to return.

@@ -14,7 +14,7 @@ namespace Switch {
     /// @brief The System::Diagnostics namespace provides classes that allow you to interact with system processes, event logs, and performance counters.
     namespace Diagnostics {
       /// @brief Provides the default output methods and behavior for tracing.
-      class pcf_public DefaultTraceListener : public TraceListener {
+      class sw_public DefaultTraceListener : public TraceListener {
       public:
         DefaultTraceListener() {}
         
@@ -57,8 +57,8 @@ namespace Switch {
         
         /// @brief Get or Sets the name of a log file to write trace or debug msgs to.
         Property<String> LogFileName {
-          pcf_get {return this->data->logFileName;},
-          pcf_set {
+          sw_get {return this->data->logFileName;},
+          sw_set {
             this->data->logFileName = value;
             this->data->logWriter = new System::IO::StreamWriter(this->data->logFileName);
           }

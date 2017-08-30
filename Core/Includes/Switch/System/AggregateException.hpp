@@ -90,12 +90,12 @@ namespace Switch {
     /// @par Examples
     /// The following example catches the AggregateException exception and calls the Handle method to handle each exception it contains. Compiling and running the example with the first task1 variable should result in an AggregateException object that contains an UnauthorizedAccessException exception. Commenting out that line, uncommenting the second task1 variable, and compiling and running the example produces an AggregateException object that contains an IndexOutOfRangeException exception.
     /// @include AggregateException.cpp
-    class pcf_public AggregateException : public Exception {
+    class sw_public AggregateException : public Exception {
     public:
       /// @brief Gets a read-only collection of the Exception instances that caused the current exception.
       /// @return Returns a read-only collection of the Exception instances that caused the current exception.
       Property<const Array<excptr>&, ReadOnly> InnerExceptions {
-        pcf_get->const Array<excptr>& {return this->innerExceptions;}
+        sw_get->const Array<excptr>& {return this->innerExceptions;}
       };
  
       /// @brief Initializes a new instance of the AggregateException class with references to the inner exceptions that are the cause of this exception.
@@ -119,12 +119,12 @@ namespace Switch {
       
       /// @brief Initializes a new instance of the AggregateException class with references to the inner exceptions that are the cause of this exception.
       /// @param innerExceptions The exceptions that are the cause of the current exception.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #pcf_current_information.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
       AggregateException(const Array<excptr>& innerExceptions, const CurrentInformation& information) : Exception(information), innerExceptions(innerExceptions) {}
 
       /// @brief Initializes a new instance of the AggregateException class with references to the inner exceptions that are the cause of this exception.
       /// @param innerExceptions The exceptions that are the cause of the current exception.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #pcf_current_information.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
       AggregateException(const Array<ref<Exception>>& innerExceptions, const CurrentInformation& information) : Exception(information) {
         this->innerExceptions = Array<excptr>(innerExceptions.Count);
         for (int index= 0; index < innerExceptions.Count; index++)
@@ -137,7 +137,7 @@ namespace Switch {
       
       /// @brief Initializes a new instance of the AggregateException class with references to the inner exceptions that are the cause of this exception.
       /// @param innerExceptions The exceptions that are the cause of the current exception.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #pcf_current_information.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
       AggregateException(const System::Collections::Generic::IEnumerable<excptr>& innerExceptions, const CurrentInformation& information) : Exception(information), innerExceptions(innerExceptions) {}
       
       /// @brief Create a new instance of class AggregateException
@@ -150,7 +150,7 @@ namespace Switch {
       AggregateException(const AggregateException& value) : Exception(value), innerExceptions(value.innerExceptions) {}
       
       /// @brief Create a new instance of class AggregateException
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #pcf_current_information.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
       /// @remarks Message is set with the default message associate to the error.
       AggregateException(const CurrentInformation& information) : Exception(information) {}
       
@@ -160,13 +160,13 @@ namespace Switch {
       
       /// @brief Create a new instance of class AggregateException
       /// @param message Message string associate to the error.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #pcf_current_information.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
       AggregateException(const System::String& message, const CurrentInformation& information) : Exception(message, information) {}
       
       /// @brief Create a new instance of class AggregateException
       /// @param message Message string associate to the error.
       /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #pcf_current_information.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
       AggregateException(const System::String& message, const System::Exception& innerException, const CurrentInformation& information) : Exception(message, information) {
         this->innerExceptions = Array<excptr>(1);
         this->innerExceptions[0] = excptr::Create(innerException);
@@ -189,13 +189,13 @@ namespace Switch {
       /// @brief Initializes a new instance of the AggregateException class with a specified error message and references to the inner exceptions that are the cause of this exception.
       /// @param message Message string associate to the error.
       /// @param innerExceptions The exceptions that are the cause of the current exception.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #pcf_current_information.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
       AggregateException(const System::String& message, const Array<excptr>& innerExceptions, const CurrentInformation& information) : Exception(message, information), innerExceptions(innerExceptions) {}
       
       /// @brief Initializes a new instance of the AggregateException class with a specified error message and references to the inner exceptions that are the cause of this exception.
       /// @param message Message string associate to the error.
       /// @param innerExceptions The exceptions that are the cause of the current exception.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #pcf_current_information.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
       AggregateException(const System::String& message, const Array<ref<Exception>>& innerExceptions, const CurrentInformation& information) : Exception(message, information) {
         this->innerExceptions = Array<excptr>(innerExceptions.Count);
         for (int index= 0; index < innerExceptions.Count; index++)
@@ -217,7 +217,7 @@ namespace Switch {
         }
         
         if (notHandledExceptions.Count != 0) {
-          throw AggregateException(notHandledExceptions, pcf_current_information);
+          throw AggregateException(notHandledExceptions, sw_current_information);
         }
       }
       

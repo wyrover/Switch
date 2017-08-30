@@ -30,15 +30,15 @@ namespace {
   }
     
   TEST(File, AppendText) {
-    pcf_using(IO::StreamWriter sw = IO::File::CreateText("Test.txt")) {
+    sw_using(IO::StreamWriter sw = IO::File::CreateText("Test.txt")) {
       sw.WriteLine("First line");
     }
 
-    pcf_using(IO::StreamWriter sw = IO::File::AppendText("Test.txt")) {
+    sw_using(IO::StreamWriter sw = IO::File::AppendText("Test.txt")) {
       sw.WriteLine("Second line");
     }
 
-    pcf_using(Array<string> lines = IO::File::ReadAllLines("Test.txt")) {
+    sw_using(Array<string> lines = IO::File::ReadAllLines("Test.txt")) {
       EXPECT_EQ(2, lines.Length);
       int32 index = 0;
       EXPECT_EQ("First line", lines[index++]);
@@ -54,7 +54,7 @@ namespace {
     EXPECT_TRUE(IO::File::Exists("2copy.txt"));
     EXPECT_TRUE(IO::File::Exists("copied.txt"));
 
-    pcf_using(Array<string> lines = IO::File::ReadAllLines("copied.txt")) {
+    sw_using(Array<string> lines = IO::File::ReadAllLines("copied.txt")) {
       EXPECT_EQ(4, lines.Length);
       int32 index = 0;
       EXPECT_EQ("First line", lines[index++]);
@@ -74,7 +74,7 @@ namespace {
     EXPECT_TRUE(IO::File::Exists("2copy.txt"));
     EXPECT_TRUE(IO::File::Exists("copied.txt"));
 
-    pcf_using(Array<string> lines = IO::File::ReadAllLines("copied.txt")) {
+    sw_using(Array<string> lines = IO::File::ReadAllLines("copied.txt")) {
       EXPECT_EQ(4, lines.Length);
       int32 index = 0;
       EXPECT_EQ("First line", lines[index++]);

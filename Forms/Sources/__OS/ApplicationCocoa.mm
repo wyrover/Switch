@@ -10,7 +10,7 @@ using namespace __OS;
 ref<System::Windows::Forms::Form> __mainForm;
 
 namespace {
-  class ApplicationApi pcf_static {
+  class ApplicationApi sw_static {
   public:
     static void MessageLoop(EventHandler idle) {
       @autoreleasepool {
@@ -120,7 +120,7 @@ namespace {
   
   bool ApplicationApi::messageLoopRunning = false;
 
-  class MessageBoxApi pcf_static {
+  class MessageBoxApi sw_static {
   public:
     static void MessageBoxAddButtonsOK(NSAlert *alert) {
       [alert addButtonWithTitle:@"OK"];

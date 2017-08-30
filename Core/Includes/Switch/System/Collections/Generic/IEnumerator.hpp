@@ -16,7 +16,7 @@ namespace Switch {
         /// @interface IEnumerator
         /// @brief Supports a simple iteration over a generic collection.
         template<typename T>
-        class IEnumerator pcf_interface {
+        class IEnumerator sw_interface {
         public:
           /// @cond
           IEnumerator() {}
@@ -26,7 +26,7 @@ namespace Switch {
           /// After an enumerator is created or after a Reset, MoveNext must be called to advance the enumerator to the first element of the collection before calling GetCurrent; otherwise it throws System::InvalidOperationException.
           /// @return T The current element in the collection.
           Property<const T&, ReadOnly> Current {
-            pcf_get->const T& {return this->GetCurrent();}
+            sw_get->const T& {return this->GetCurrent();}
           };
           
           /// @brief Advances the enumerator to the next element of the collection.

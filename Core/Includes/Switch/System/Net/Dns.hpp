@@ -17,7 +17,7 @@ namespace Switch {
     /// The WebRequest and WebResponse classes form the basis of what are called pluggable protocols, an implementation of network services that enables you to develop applications that use Internet resources without worrying about the specific details of the individual protocols.
     namespace Net {
       /// @brief Provides simple domain name resolution functionality.
-      class pcf_public Dns pcf_static {
+      class sw_public Dns sw_static {
       public:
         /// @brief Returns the Internet Protocol (IP) addresses for the specified host.
         /// @param hostNameOrAddress The host name or IP address to resolve.

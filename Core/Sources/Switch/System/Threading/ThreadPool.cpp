@@ -63,7 +63,7 @@ void ThreadPool::GetMinThreads(int32& workerThreads, int32& completionPortThread
 bool ThreadPool::QueueUserWorkItem(const WaitCallback& callBack) {
   if (threads.Count == 0)
     CreateThreads();
-  pcf_lock(threadPoolItems.SyncRoot) {
+  sw_lock(threadPoolItems.SyncRoot) {
     if (threadPoolItems.Count() == maxThreads)
       return false;
     threadPoolItems.Enqueue(new ThreadPoolItem(callBack));
@@ -75,7 +75,7 @@ bool ThreadPool::QueueUserWorkItem(const WaitCallback& callBack) {
 bool ThreadPool::QueueUserWorkItem(const WaitCallback& callBack, object& state) {
   if (threads.Count == 0)
     CreateThreads();
-  pcf_lock(threadPoolItems.SyncRoot) {
+  sw_lock(threadPoolItems.SyncRoot) {
     if (threadPoolItems.Count() == maxThreads)
       return false;
     threadPoolItems.Enqueue(new ThreadPoolItem(callBack, state));
@@ -88,7 +88,7 @@ RegisteredWaitHandle ThreadPool::RegisterWaitForSingleObject(WaitHandle& waitObj
   if (asynchronousIOThreads.Count == 0)
     CreateAsynchronousIOThreads();
   RegisteredWaitHandle result;
-  pcf_lock(threadPoolAsynchronousIOItems.SyncRoot) {
+  sw_lock(threadPoolAsynchronousIOItems.SyncRoot) {
     if (threadPoolAsynchronousIOItems.Count() == maxAsynchronousIOThreads) {
       return result;
     }
@@ -107,9 +107,9 @@ bool ThreadPool::SetMaxThreads(int32 workerThreads, int32 completionPortThreads)
   maxThreads = workerThreads;
   maxAsynchronousIOThreads = completionPortThreads;
   
-  pcf_lock(threadPoolItems.SyncRoot)
+  sw_lock(threadPoolItems.SyncRoot)
     semaphore = Semaphore(semaphore.Release(), maxThreads);
-  pcf_lock(threadPoolAsynchronousIOItems.SyncRoot)
+  sw_lock(threadPoolAsynchronousIOItems.SyncRoot)
     asynchronousIOSemaphore = Semaphore(asynchronousIOSemaphore.Release(), maxAsynchronousIOThreads);
   
   return true;
@@ -158,7 +158,7 @@ void ThreadPool::Run() {
     semaphore.WaitOne();
     if (!closed) {
       refptr<ThreadPoolItem> item;
-      pcf_lock(threadPoolItems.SyncRoot)
+      sw_lock(threadPoolItems.SyncRoot)
         item = threadPoolItems.Dequeue();
       item->callback(*item->state);
     }
@@ -170,7 +170,7 @@ void ThreadPool::AsynchronousIORun() {
     asynchronousIOSemaphore.WaitOne();
     if (!closed) {
       refptr<ThreadPoolAsynchronousIOItem> item;
-      pcf_lock(threadPoolAsynchronousIOItems.SyncRoot)
+      sw_lock(threadPoolAsynchronousIOItems.SyncRoot)
       item = threadPoolAsynchronousIOItems.Dequeue();
       
       do {

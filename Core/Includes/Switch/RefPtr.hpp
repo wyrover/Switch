@@ -15,7 +15,7 @@ namespace Switch {
   template<typename T>
   class RefPtr;
 }
-class pcf_public __opaque_sub_object__ {
+class sw_public __opaque_sub_object__ {
   template<typename T>
   friend class Switch::RefPtr;
   __opaque_sub_object__() : UseCount(0) {}
@@ -509,7 +509,7 @@ namespace Switch {
   using r = RefPtr<T>;
   
   template<typename T, typename ...Args>
-  refptr<T> pcf_new(Args&&... args) {return refptr<T>(new T(args...));}
+  refptr<T> sw_new(Args&&... args) {return refptr<T>(new T(args...));}
   
   template<typename T, typename ...Args>
   refptr<T> ref_new(Args&&... args) {return refptr<T>(new T(args...));}

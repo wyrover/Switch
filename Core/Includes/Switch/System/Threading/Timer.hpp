@@ -21,7 +21,7 @@ namespace Switch {
       /// @par Examples
       /// This example show how to use Timer class
       /// @include Timer.cpp
-      class pcf_public Timer: public Object {
+      class sw_public Timer: public Object {
       public:
         /// @brief Initializes a new instance of the Timer class with an infinite period and an infinite due time, using the newly created Timer object as the state object.
         /// @param callback the address of a method to be executed
@@ -130,9 +130,9 @@ namespace Switch {
         /// @exception ArgumentOutOfRangeException The dueTime or period parameter is negative and is not equal to Timeout::Infinite.
         void Change(int32 dueTime, int32 period) {
           if (this->data->callback.IsEmpty())
-            throw InvalidOperationException(pcf_current_information);
+            throw InvalidOperationException(sw_current_information);
           if (dueTime < Timeout::Infinite || period < Timeout::Infinite)
-            throw ArgumentOutOfRangeException(pcf_current_information);
+            throw ArgumentOutOfRangeException(sw_current_information);
           
           this->data->dueTime = dueTime;
           this->data->period = period;
@@ -173,7 +173,7 @@ namespace Switch {
           AutoResetEvent event {false};
           int32 period {-1};
           Object* state{this};
-          Thread thread {ThreadStart {pcf_delegate {
+          Thread thread {ThreadStart {sw_delegate {
             bool runOnce = false;
             while (!this->closed) {
               if (!this->event.WaitOne(runOnce ? this->period : this->dueTime)) {

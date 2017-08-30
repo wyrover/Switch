@@ -64,33 +64,33 @@ namespace Switch {
           /// @remarks Task IDs are assigned on-demand and do not necessarily represent the order in which task instances are created. Note that although collisions are very rare, task identifiers are not guaranteed to be unique.
           /// @remarks To get the task ID of the currently executing task from within code that that task is executing, use the CurrentId property.
           Property<int32, ReadOnly> Id {
-            pcf_get {return this->data->id;}
+            sw_get {return this->data->id;}
           };
           
           /// @brief Gets whether this Task instance has completed execution due to being canceled.
           /// @return true if the task has completed due to being canceled; otherwise false.
           Property<bool, ReadOnly> IsCanceled {
-            pcf_get {return this->data->status == TaskStatus::Canceled;}
+            sw_get {return this->data->status == TaskStatus::Canceled;}
           };
           
           /// @brief Gets whether this Task has completed.
           /// @return rue if the task has completed; otherwise false.
           /// @remarks IsCompleted will return true when the task is in one of the three final states: RanToCompletion, Faulted, or Canceled.
           Property<bool, ReadOnly> IsCompleted {
-            pcf_get {return this->data->status == TaskStatus::RanToCompletion || this->data->status == TaskStatus::Faulted || this->data->status == TaskStatus::Canceled;}
+            sw_get {return this->data->status == TaskStatus::RanToCompletion || this->data->status == TaskStatus::Faulted || this->data->status == TaskStatus::Canceled;}
           };
           
           /// @brief Gets whether the Task completed due to an unhandled exception.
           /// @return true if the task has thrown an unhandled exception; otherwise false.
           /// @remarks If IsFaulted is true, the task's Status is equal to Faulted, and its Exception property will be non-null.
           Property<bool, ReadOnly> IsFaulted {
-            pcf_get {return this->data->status == TaskStatus::Faulted;}
+            sw_get {return this->data->status == TaskStatus::Faulted;}
           };
 
           /// @brief Gets the TaskStatus of this task.
           /// @return The current TaskStatus of this task instance.
           Property<TaskStatus, ReadOnly> Status {
-            pcf_get {return this->data->status;}
+            sw_get {return this->data->status;}
           };
           
           /// @brief Creates a task that completes after a specified time interval.
@@ -182,7 +182,7 @@ namespace Switch {
           /// @remarks Tasks executed by calling the RunSynchronously method are instantiated by calling a Task or Task<TResult> class constructor. The task to be run synchronously must be in the TaskStatus.Created state. A task may be started and run only once. Any attempts to schedule a task a second time results in an exception.
           void RunSynchronously() {
             if (this->data->status != TaskStatus::Created)
-              throw InvalidOperationException(pcf_current_information);
+              throw InvalidOperationException(sw_current_information);
             this->data->status = TaskStatus::WaitingToRun;
             this->data->waitOrTimerCallback(*this->data->state, false);
             this->data->startEvent.Set();
@@ -196,7 +196,7 @@ namespace Switch {
           /// @remarks For information on handling exceptions thrown by task operations, see Exception Handling (Task Parallel Library).
           void Start() override {
             if (this->data->status != TaskStatus::Created || (this->data->millisecondsDelay == -2 && this->data->task.IsEmpty() && this->data->parameterizedTask.IsEmpty() && this->data->constParameterizedTask.IsEmpty()))
-              throw InvalidOperationException(pcf_current_information);
+              throw InvalidOperationException(sw_current_information);
             
             this->data->status = TaskStatus::WaitingForActivation;
             ThreadPool::RegisterWaitForSingleObject(this->data->startEvent, this->data->waitOrTimerCallback, *this->data->state, Timeout::Infinite, true);
@@ -264,7 +264,7 @@ namespace Switch {
           /// @exception ArgumentOutOfRangeException millisecondsTimeout is a negative number other than -1, which represents an infinite time-out.
           static bool WaitAll(Array<ref<ITask>> tasks, int32 millisecondsTimeout) {
             if (millisecondsTimeout < Timeout::Infinite)
-              ArgumentOutOfRangeException(pcf_current_information);
+              ArgumentOutOfRangeException(sw_current_information);
 
             if (millisecondsTimeout == Timeout::Infinite) {
               for (auto& task : tasks)
@@ -290,7 +290,7 @@ namespace Switch {
           /// @exception ArgumentOutOfRangeException millisecondsTimeout is a negative number other than -1, which represents an infinite time-out.
           static bool WaitAll(Array<Task<>> tasks, int32 millisecondsTimeout) {
             if (millisecondsTimeout < Timeout::Infinite)
-              ArgumentOutOfRangeException(pcf_current_information);
+              ArgumentOutOfRangeException(sw_current_information);
 
             if (millisecondsTimeout == Timeout::Infinite) {
               for (auto& task : tasks)
@@ -375,7 +375,7 @@ namespace Switch {
           /// @exception ArgumentOutOfRangeException millisecondsTimeout is a negative number other than -1, which represents an infinite time-out.
           static int32 WaitAny(Array<ref<ITask>> tasks, int32 millisecondsTimeout) {
             if (millisecondsTimeout < Timeout::Infinite)
-              ArgumentOutOfRangeException(pcf_current_information);
+              ArgumentOutOfRangeException(sw_current_information);
             
             if (millisecondsTimeout == Timeout::Infinite) {
               for (int32 index = 0; index < tasks.Count; index++) {
@@ -409,7 +409,7 @@ namespace Switch {
           /// @exception ArgumentOutOfRangeException millisecondsTimeout is a negative number other than -1, which represents an infinite time-out.
           static int32 WaitAny(Array<Task<>> tasks, int32 millisecondsTimeout) {
             if (millisecondsTimeout < Timeout::Infinite)
-              ArgumentOutOfRangeException(pcf_current_information);
+              ArgumentOutOfRangeException(sw_current_information);
             
             if (millisecondsTimeout == Timeout::Infinite) {
               for (int32 index = 0; index < tasks.Count; index++) {
@@ -493,7 +493,7 @@ namespace Switch {
             object* state = null;
             int32 millisecondsDelay = 0;
             AggregateException aggregateException;
-            WaitOrTimerCallback waitOrTimerCallback = pcf_delegate(object& state, bool timeout) {
+            WaitOrTimerCallback waitOrTimerCallback = sw_delegate(object& state, bool timeout) {
               __opaque_task_id_generator__::currentId = this->id;
               this->status = TaskStatus::Running;
               try {
@@ -508,7 +508,7 @@ namespace Switch {
                 this->status = TaskStatus::WaitingForChildrenToComplete;
                 this->endEvent.Set();
               } catch(...) {
-                this->aggregateException = AggregateException({excptr::CurrentException}, pcf_current_information);
+                this->aggregateException = AggregateException({excptr::CurrentException}, sw_current_information);
                 this->status = TaskStatus::Faulted;
                 this->endEvent.Set();
               }

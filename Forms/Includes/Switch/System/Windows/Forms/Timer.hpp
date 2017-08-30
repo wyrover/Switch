@@ -23,13 +23,13 @@ namespace Switch {
           /// @endcond
 
           Property<bool> Enabled {
-            pcf_get {return this->enabled;},
-            pcf_set {this->SetEnabled(value);}
+            sw_get {return this->enabled;},
+            sw_set {this->SetEnabled(value);}
           };
           
           Property<int32> Interval {
-            pcf_get {return this->interval;},
-            pcf_set {this->SetInterval(value);}
+            sw_get {return this->interval;},
+            sw_set {this->SetInterval(value);}
           };
           
           Switch::System::EventHandler Tick;
@@ -41,7 +41,7 @@ namespace Switch {
           int32 interval = 100;
           bool enabled = false;
           intptr handle = IntPtr::Zero;
-          delegate<void> tick = pcf_delegate {
+          delegate<void> tick = sw_delegate {
             Tick(*this, System::EventArgs::Empty);
           };
         };

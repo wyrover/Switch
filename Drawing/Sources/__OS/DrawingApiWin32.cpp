@@ -86,7 +86,7 @@ System::Drawing::FontFamily DrawingApi::FontFamily::GetFontFamilyFromName(const 
   ReleaseDC(NULL, hdc);
   if (result != null)
     return System::Drawing::FontFamily((intptr)result);
-  throw ArgumentException(pcf_current_information);
+  throw ArgumentException(sw_current_information);
 }
 
 string DrawingApi::FontFamily::GetName(intptr handle) {

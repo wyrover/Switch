@@ -6,15 +6,15 @@
 #define PCF_STATIC 1
 
 #if PCF_STATIC
-#  define pcf_public
+#  define sw_public
 #elif WIN32
 #  if PCF_EXPORTS  
-#    define pcf_public __declspec(dllexport)   
+#    define sw_public __declspec(dllexport)   
 #  else  
-#    define pcf_public __declspec(dllimport)   
+#    define sw_public __declspec(dllimport)   
 #  endif
 #elif __GNUC__ >= 4 || defined(__clang__)
-#  define pcf_public __attribute__((visibility ("default")))
+#  define sw_public __attribute__((visibility ("default")))
 #else
-#  define pcf_public
+#  define sw_public
 #endif

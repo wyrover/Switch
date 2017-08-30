@@ -77,7 +77,7 @@ void SerializationInfo::AddValue(const string& name, const ISerializable& value,
 
 void SerializationInfo::AddValue(const string& name, refptr<Object> value, const string& typeName) {
   if (value.IsNull())
-    throw ArgumentNullException(pcf_current_information);
+    throw ArgumentNullException(sw_current_information);
 
   mItems.Add(name, SerializationEntry(value, typeName));
 }
@@ -191,7 +191,7 @@ refptr<Boolean> SerializationInfo::GetValue<Boolean>(const string& name) const {
   else if (is<IConvertible>(entry.Value().ToObject()))
     return new Boolean(Convert::ToBoolean(entry.Value().ChangeType<IConvertible>().ToObject()));
   else
-    throw SerializationException(pcf_current_information);
+    throw SerializationException(sw_current_information);
 }
 
 template<>
@@ -211,7 +211,7 @@ refptr<Byte> SerializationInfo::GetValue<Byte>(const string& name) const {
   else if (is<IConvertible>(entry.Value().ToObject()))
     return new Byte(Convert::ToByte(entry.Value().ChangeType<IConvertible>().ToObject()));
   else
-    throw SerializationException(pcf_current_information);
+    throw SerializationException(sw_current_information);
 }
 
 template<>
@@ -222,7 +222,7 @@ refptr<SByte> SerializationInfo::GetValue<SByte>(const string& name) const {
   else if (is<IConvertible>(entry.Value().ToObject()))
     return new SByte(Convert::ToSByte(entry.Value().ChangeType<IConvertible>().ToObject()));
   else
-    throw SerializationException(pcf_current_information);
+    throw SerializationException(sw_current_information);
 }
 
 template<>
@@ -233,7 +233,7 @@ refptr<Char> SerializationInfo::GetValue<Char>(const string& name) const {
   else if (is<IConvertible>(entry.Value().ToObject()))
     return new Char(Convert::ToChar(entry.Value().ChangeType<IConvertible>().ToObject()));
   else
-    throw SerializationException(pcf_current_information);
+    throw SerializationException(sw_current_information);
 }
 
 template<>
@@ -244,7 +244,7 @@ refptr<DateTime> SerializationInfo::GetValue<DateTime>(const string& name) const
   else if (is<IConvertible>(entry.Value().ToObject()))
     return new DateTime(Convert::ToDateTime(entry.Value().ChangeType<IConvertible>().ToObject()));
   else
-    throw SerializationException(pcf_current_information);
+    throw SerializationException(sw_current_information);
 }
 
 template<>
@@ -255,7 +255,7 @@ refptr<Single> SerializationInfo::GetValue<Single>(const string& name) const {
   else if (is<IConvertible>(entry.Value().ToObject()))
     return new Single(Convert::ToSingle(entry.Value().ChangeType<IConvertible>().ToObject()));
   else
-    throw SerializationException(pcf_current_information);
+    throw SerializationException(sw_current_information);
 }
 
 template<>
@@ -266,7 +266,7 @@ refptr<Double> SerializationInfo::GetValue<Double>(const string& name) const {
   else if (is<IConvertible>(entry.Value().ToObject()))
     return new Double(Convert::ToDouble(entry.Value().ChangeType<IConvertible>().ToObject()));
   else
-    throw SerializationException(pcf_current_information);
+    throw SerializationException(sw_current_information);
 }
 
 template<>
@@ -277,7 +277,7 @@ refptr<Int16> SerializationInfo::GetValue<Int16>(const string& name) const {
   else if (is<IConvertible>(entry.Value().ToObject()))
     return new Int16(Convert::ToInt16(entry.Value().ChangeType<IConvertible>().ToObject()));
   else
-    throw SerializationException(pcf_current_information);
+    throw SerializationException(sw_current_information);
 }
 
 template<>
@@ -288,7 +288,7 @@ refptr<Int32> SerializationInfo::GetValue<Int32>(const string& name) const {
   else if (is<IConvertible>(entry.Value().ToObject()))
     return new Int32(Convert::ToInt32(entry.Value().ChangeType<IConvertible>().ToObject()));
   else
-    throw SerializationException(pcf_current_information);
+    throw SerializationException(sw_current_information);
 }
 
 template<>
@@ -299,7 +299,7 @@ refptr<Int64> SerializationInfo::GetValue<Int64>(const string& name) const {
   else if (is<IConvertible>(entry.Value().ToObject()))
     return new Int64(Convert::ToInt64(entry.Value().ChangeType<IConvertible>().ToObject()));
   else
-    throw SerializationException(pcf_current_information);
+    throw SerializationException(sw_current_information);
 }
 
 template<>
@@ -310,7 +310,7 @@ refptr<UInt16> SerializationInfo::GetValue<UInt16>(const string& name) const {
   else if (is<IConvertible>(entry.Value().ToObject()))
     return new UInt16(Convert::ToUInt16(entry.Value().ChangeType<IConvertible>().ToObject()));
   else
-    throw SerializationException(pcf_current_information);
+    throw SerializationException(sw_current_information);
 }
 
 template<>
@@ -321,7 +321,7 @@ refptr<UInt32> SerializationInfo::GetValue<UInt32>(const string& name) const {
   else if (is<IConvertible>(entry.Value().ToObject()))
     return new UInt32(Convert::ToUInt32(entry.Value().ChangeType<IConvertible>().ToObject()));
   else
-    throw SerializationException(pcf_current_information);
+    throw SerializationException(sw_current_information);
 }
 
 template<>
@@ -332,5 +332,5 @@ refptr<UInt64> SerializationInfo::GetValue<UInt64>(const string& name) const {
   else if (is<IConvertible>(entry.Value().ToObject()))
     return new UInt64(Convert::ToUInt64(entry.Value().ChangeType<IConvertible>().ToObject()));
   else
-    throw SerializationException(pcf_current_information);
+    throw SerializationException(sw_current_information);
 }

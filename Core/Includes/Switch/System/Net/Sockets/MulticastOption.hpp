@@ -25,7 +25,7 @@ namespace Switch {
         /// | SocketOptionName  | AddMembership        |
         /// | object            | MulticastOption      |
         /// @remarks Use DropMembership to drop a multicast group.
-        class pcf_public MulticastOption : public Object {
+        class sw_public MulticastOption : public Object {
         public:
           /// @brief Initializes a new version of the MulticastOption class for the specified IP multicast group.
           /// @param group The IPAddress of the multicast group.
@@ -55,8 +55,8 @@ namespace Switch {
           /// @param group An IPAddress that contains the Internet address of a multicast group.
           /// @return IPAddress An IPAddress that contains the Internet address of a multicast group.
           Property<const IPAddress&> Group {
-            pcf_get->const IPAddress& {return this->group;},
-            pcf_set {this->group = value;}
+            sw_get->const IPAddress& {return this->group;},
+            sw_set {this->group = value;}
           };
 
           /// @brief Gets or sets the interface index that is associated with a multicast group.
@@ -64,10 +64,10 @@ namespace Switch {
           /// @return int32 A Int32 value that specifies the address of the interface.
           /// @exception ArgumentOutOfRangeException interfaceIndex is less than 0.
           Property<int32> InterfaceIndex {
-            pcf_get {return this->interfaceIndex;},
-            pcf_set {
+            sw_get {return this->interfaceIndex;},
+            sw_set {
               if (value < 0)
-                throw ArgumentOutOfRangeException(pcf_current_information);
+                throw ArgumentOutOfRangeException(sw_current_information);
               this->interfaceIndex = value;
             }
           };
@@ -77,8 +77,8 @@ namespace Switch {
           /// @return IPAddress An IPAddress that contains the local address associated with a multicast group.
           /// @remarks The LocalAddress property contains the IP address of the interface associated with the multicast group membership. If LocalAddress is set to Any, the default interface is used.
           Property<const IPAddress&> LocalAddress {
-            pcf_get->const IPAddress& {return this->localAddress;},
-            pcf_set {this->localAddress = value;}
+            sw_get->const IPAddress& {return this->localAddress;},
+            sw_set {this->localAddress = value;}
           };
 
         private:

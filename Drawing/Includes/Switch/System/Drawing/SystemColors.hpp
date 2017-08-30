@@ -13,7 +13,7 @@ namespace Switch {
     namespace Drawing {
       /// @brief Each property of the System::Drawing::SystemColors class is a System::Drawing::Color structure that is the color of a Windows display element.
       /// @remarks Better performance is achieved by using the properties of the System::Drawing::SystemPens or System::Drawing::SystemBrushes classes rather than creating a new pen or brush based on a value from System::Drawing::SystemColors. For example, if you wanted to get a brush for the face color of a 3-D element, use the SystemBrushes.Control property because it gets a brush that already exists, whereas calling the SolidBrush.#ctor(Color) constructor with a parameter value of SystemColors::Control will create a new brush.
-      class pcf_public SystemColors pcf_static {
+      class sw_public SystemColors sw_static {
       public:
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFD4D0C8. This field is constant.
         static Property<Color, ReadOnly> ActiveBorder;

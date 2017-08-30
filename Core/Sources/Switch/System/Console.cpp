@@ -19,8 +19,8 @@ namespace {
     return output;
   }
   
-  refptr<System::Text::Encoding> inputEncoding = pcf_new<System::Text::UTF8Encoding>(false);
-  refptr<System::Text::Encoding> outputEncoding = pcf_new<System::Text::UTF8Encoding>(false);
+  refptr<System::Text::Encoding> inputEncoding = sw_new<System::Text::UTF8Encoding>(false);
+  refptr<System::Text::Encoding> outputEncoding = sw_new<System::Text::UTF8Encoding>(false);
 
   bool treatControlCAsInput = false;
 }
@@ -83,9 +83,9 @@ Property<ConsoleColor> Console::BackgroundColor {
   [] {return __OS::CoreApi::Console::GetBackgroundColor();},
   [](ConsoleColor value) {
     if (!Enum<ConsoleColor>::IsDefined(value))
-      throw ArgumentException(pcf_current_information);
+      throw ArgumentException(sw_current_information);
     if (!__OS::CoreApi::Console::SetBackgroundColor(value))
-      throw System::IO::IOException(pcf_current_information);
+      throw System::IO::IOException(sw_current_information);
   }
 };
 
@@ -111,7 +111,7 @@ Property<int32> Console::CursorLeft {
   [] {return __OS::CoreApi::Console::GetCursorTop();},
   [](int32 value) {
     if (value < 0 || value >= __OS::CoreApi::Console::GetWindowWidth())
-      throw ArgumentOutOfRangeException(pcf_current_information);
+      throw ArgumentOutOfRangeException(sw_current_information);
       
     __OS::CoreApi::Console::SetCursorLeft(value);
   }
@@ -121,7 +121,7 @@ Property<int32> Console::CursorSize {
   [] {return __OS::CoreApi::Console::GetCursorSize();},
   [](int32 value) {
     if (value < 1 || value > 100)
-      throw ArgumentOutOfRangeException(pcf_current_information);
+      throw ArgumentOutOfRangeException(sw_current_information);
       
     __OS::CoreApi::Console::SetCursorSize(value);
   }
@@ -131,7 +131,7 @@ Property<int32> Console::CursorTop {
   [] {return __OS::CoreApi::Console::GetCursorTop();},
   [](int32 value) {
     if (value < 0 || value >= __OS::CoreApi::Console::GetBufferHeight())
-      throw ArgumentOutOfRangeException(pcf_current_information);
+      throw ArgumentOutOfRangeException(sw_current_information);
       
     __OS::CoreApi::Console::SetCursorTop(value);
   }
@@ -153,7 +153,7 @@ Property<ConsoleColor> Console::ForegroundColor {
   [] {return __OS::CoreApi::Console::GetForegroundColor();},
   [](ConsoleColor value) {
     if (!Enum<ConsoleColor>::IsDefined(value))
-      throw ArgumentException(pcf_current_information);
+      throw ArgumentException(sw_current_information);
     __OS::CoreApi::Console::SetForegroundColor(value);
   }
 };
@@ -260,7 +260,7 @@ ConsoleCancelEventHandler Console::CancelKeyPress;
 
 void Console::Beep(int32 frequency, int32 duration) {
   if (frequency < 37 || frequency > 32767 || duration <= 0)
-    throw ArgumentOutOfRangeException(pcf_current_information);
+    throw ArgumentOutOfRangeException(sw_current_information);
   
   __OS::CoreApi::Console::Beep(frequency, duration);
 }
@@ -364,7 +364,7 @@ void Console::Write(float value) {
 }
 
 void Console::Write(const String& value) {
-  pcf_lock(*out)
+  sw_lock(*out)
     out->Write(value);
 }
 

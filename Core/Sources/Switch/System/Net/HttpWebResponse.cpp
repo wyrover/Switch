@@ -17,7 +17,7 @@ WebResponse::WebResponseStream HttpWebResponse::GetResponseStream() {
   if (this->webRequest->Method() == WebRequestMethods::Http::Get || this->webRequest->Method() == WebRequestMethods::Http::Post) {
     return WebResponse::GetResponseStream();
   } else {
-    throw InvalidOperationException(pcf_current_information);
+    throw InvalidOperationException(sw_current_information);
   }
 }
 

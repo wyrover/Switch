@@ -17,7 +17,7 @@ namespace Switch {
       /// @par Examples
       /// The following example uses an instance of StreamReader to read text from a file.
       /// @include StreamReader.cpp
-      class pcf_public StreamReader: public TextReader {
+      class sw_public StreamReader: public TextReader {
       public:
         static Property<StreamReader, ReadOnly> Null;
 
@@ -29,7 +29,7 @@ namespace Switch {
           static_assert(!std::is_same<System::IO::Stream, TStream>::value, "Must not be System::IO::Stream but inherited");
           static_assert(std::is_base_of<System::IO::Stream, TStream>::value, "Is not inherited from System::IO::Stream");
           if (stream.CanRead() == false)
-            throw ArgumentException(pcf_current_information);
+            throw ArgumentException(sw_current_information);
           this->data->stream = stream.template MemberwiseClone<TStream>().template As<Stream>();
           this->data->encoding = utf8Encoding;
           
@@ -42,7 +42,7 @@ namespace Switch {
         /// @exception ArgumentException The stream to be read.
         StreamReader(refptr<Stream> stream) {
           if (stream->CanRead() == false)
-            throw ArgumentException(pcf_current_information);
+            throw ArgumentException(sw_current_information);
           this->data->stream = stream;
           this->data->encoding = utf8Encoding;
           
@@ -59,7 +59,7 @@ namespace Switch {
           static_assert(!std::is_same<System::IO::Stream, TStream>::value, "Must not be System::IO::Stream but inherited");
           static_assert(std::is_base_of<System::IO::Stream, TStream>::value, "Is not inherited from System::IO::Stream");
           if (stream.CanRead() == false)
-            throw ArgumentException(pcf_current_information);
+            throw ArgumentException(sw_current_information);
           this->data->stream = stream.template MemberwiseClone<TStream>().template As<Stream>();
           this->data->encoding = encoding;
          
@@ -91,19 +91,19 @@ namespace Switch {
         /// @brief Gets the underlying stream that interfaces with a backing store.
         /// @return refptr<Stream> The stream this StreamReader is writing to.
         Property<Stream&, ReadOnly> BaseStream {
-          pcf_get->Stream& {return *this->data->stream;}
+          sw_get->Stream& {return *this->data->stream;}
         };
 
         /// @brief Gets the current character encoding that the current StreamReader object is using.
         /// @return refptr<Text::Encoding> The current character encoding used by the current reader. The value can be different after the first call to any Read method of StreamReader, since encoding autodetection is not done until the first call to a Read method.
         Property<Text::Encoding&, ReadOnly> CurrentEncoding {
-          pcf_get->Text::Encoding& {return *this->data->encoding;}
+          sw_get->Text::Encoding& {return *this->data->encoding;}
         };
 
         /// @brief Gets a value that indicates whether the current stream position is at the end of the stream.
         /// @return true if the current stream position is at the end of the stream; otherwise false.
         Property<bool, ReadOnly> EndOfStream {
-          pcf_get {return this->Peek() == -1;}
+          sw_get {return this->Peek() == -1;}
         };
 
         /// @brief Closes the current StreamReader object and the underlying stream. (Overrides TextReader::Close().).

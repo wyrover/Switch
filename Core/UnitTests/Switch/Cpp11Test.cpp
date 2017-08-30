@@ -13,7 +13,7 @@ namespace SwitchUnitTests {
       
       int32 i = 0;
       for (auto c : str)
-        Assert::AreEqual(c, char32_t(chars[i++]), pcf_current_information);
+        Assert::AreEqual(c, char32_t(chars[i++]), sw_current_information);
     }
     
     void InitializerList() {
@@ -22,8 +22,8 @@ namespace SwitchUnitTests {
       
       int32 i = 0;
       for (const auto& value : values)
-        Assert::AreEqual(value, results[i++], pcf_current_information);
-      Assert::AreEqual(10, i, pcf_current_information);
+        Assert::AreEqual(value, results[i++], sw_current_information);
+      Assert::AreEqual(10, i, sw_current_information);
     }
     
     void Thread() {
@@ -33,13 +33,13 @@ namespace SwitchUnitTests {
         result = "thread launched";
       });
       
-      Assert::True(t.joinable(), pcf_current_information);
+      Assert::True(t.joinable(), sw_current_information);
       t.join();
-      Assert::AreEqual("thread launched", result, pcf_current_information);
+      Assert::AreEqual("thread launched", result, sw_current_information);
     }
   };
   
-  pcf_test(Cpp11Test, Auto)
-  pcf_test(Cpp11Test, InitializerList)
-  pcf_test(Cpp11Test, Thread)
+  sw_test(Cpp11Test, Auto)
+  sw_test(Cpp11Test, InitializerList)
+  sw_test(Cpp11Test, Thread)
 }

@@ -53,7 +53,7 @@ namespace {
   int TestPointer::cpt = 0;
   
   TEST(Sp, SetNull) {
-    pcf_using(refptr<int> ptr) {
+    sw_using(refptr<int> ptr) {
       EXPECT_THROW(ptr.ToPointer(), std::exception);
       EXPECT_TRUE(ptr.IsNull());
       EXPECT_THROW(*ptr, std::exception);
@@ -63,7 +63,7 @@ namespace {
   
   TEST(Sp, SetNotNull) {
     TestPointer::ResetCpt();
-    pcf_using(refptr<TestPointer> ptr(new TestPointer())) {
+    sw_using(refptr<TestPointer> ptr(new TestPointer())) {
       EXPECT_EQ(1, TestPointer::GetCpt());
       EXPECT_NE((TestPointer*)null, ptr.ToPointer());
       EXPECT_FALSE(ptr.IsNull());
@@ -77,7 +77,7 @@ namespace {
     TestPointer::ResetCpt();
     TestPointer* tp = new TestPointer();
     EXPECT_EQ(1, TestPointer::GetCpt());
-    pcf_using(refptr<TestPointer> ptr(tp)) {
+    sw_using(refptr<TestPointer> ptr(tp)) {
       EXPECT_NE((TestPointer*)null, ptr.ToPointer());
       EXPECT_FALSE(ptr.IsNull());
       EXPECT_NO_THROW(*ptr);
@@ -89,7 +89,7 @@ namespace {
   
   TEST(Sp, SetFromEqual) {
     TestPointer::ResetCpt();
-    pcf_using(refptr<TestPointer> ptr = new TestPointer()) {
+    sw_using(refptr<TestPointer> ptr = new TestPointer()) {
       EXPECT_EQ(1, TestPointer::GetCpt());
       EXPECT_NE((TestPointer*)null, ptr.ToPointer());
       EXPECT_FALSE(ptr.IsNull());
@@ -101,9 +101,9 @@ namespace {
   
   TEST(Sp, SetFromSharedPointer) {
     TestPointer::ResetCpt();
-    pcf_using(refptr<TestPointer> ptr1(new TestPointer())) {
+    sw_using(refptr<TestPointer> ptr1(new TestPointer())) {
       EXPECT_EQ(1, TestPointer::GetCpt());
-      pcf_using(refptr<TestPointer> ptr2(ptr1)) {
+      sw_using(refptr<TestPointer> ptr2(ptr1)) {
         EXPECT_EQ(1, TestPointer::GetCpt());
         EXPECT_EQ(2, ptr1.GetUseCount());
         EXPECT_EQ(2, ptr2.GetUseCount());
@@ -125,9 +125,9 @@ namespace {
   
   TEST(Sp, SetFromEqualSharedPointer) {
     TestPointer::ResetCpt();
-    pcf_using(refptr<TestPointer> ptr1(new TestPointer())) {
+    sw_using(refptr<TestPointer> ptr1(new TestPointer())) {
       EXPECT_EQ(1, TestPointer::GetCpt());
-      pcf_using(refptr<TestPointer> ptr2 = ptr1) {
+      sw_using(refptr<TestPointer> ptr2 = ptr1) {
         EXPECT_EQ(1, TestPointer::GetCpt());
         EXPECT_EQ(2, ptr1.GetUseCount());
         EXPECT_EQ(2, ptr2.GetUseCount());

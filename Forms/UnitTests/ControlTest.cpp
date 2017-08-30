@@ -29,7 +29,7 @@ namespace SwitchUnitTests {
     void SetBackColorToAColor() {
       Control control;
       Color newBackColor;
-      control.BackColorChanged += pcf_delegate(const object& sender, const EventArgs& e) {
+      control.BackColorChanged += sw_delegate(const object& sender, const EventArgs& e) {
         newBackColor = as<Control>(sender).BackColor;
       };
       
@@ -42,7 +42,7 @@ namespace SwitchUnitTests {
     void SetForeColorToAColor() {
       Control control;
       Color newForeColor;
-      control.ForeColorChanged += pcf_delegate(const object& sender, const EventArgs& e) {
+      control.ForeColorChanged += sw_delegate(const object& sender, const EventArgs& e) {
         newForeColor = as<Control>(sender).ForeColor;
       };
       
@@ -56,7 +56,7 @@ namespace SwitchUnitTests {
       Control parent;
       Control control;
       ref<Control> newParent;
-      control.ParentChanged += pcf_delegate(const object& sender, const EventArgs& e) {
+      control.ParentChanged += sw_delegate(const object& sender, const EventArgs& e) {
         newParent = as<Control>(sender).Parent;
       };
       
@@ -66,8 +66,8 @@ namespace SwitchUnitTests {
     }*/
   };
   
-  pcf_test (ControlTest, DefaultConstructor)
-  pcf_test (ControlTest, SetBackColorToAColor)
-  pcf_test (ControlTest, SetForeColorToAColor)
-  //pcf_test (ControlTest, SetParentToControl)
+  sw_test (ControlTest, DefaultConstructor)
+  sw_test (ControlTest, SetBackColorToAColor)
+  sw_test (ControlTest, SetForeColorToAColor)
+  //sw_test (ControlTest, SetParentToControl)
 }

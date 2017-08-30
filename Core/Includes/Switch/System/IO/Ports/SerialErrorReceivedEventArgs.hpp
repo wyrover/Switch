@@ -17,7 +17,7 @@ namespace Switch {
       namespace Ports {
         /// @brief Prepares data for the ErrorReceived event.
         /// @remarks This class is used with the ErrorReceived event.
-        class pcf_public SerialErrorReceivedEventArgs : public System::EventArgs {
+        class sw_public SerialErrorReceivedEventArgs : public System::EventArgs {
         public:
           SerialErrorReceivedEventArgs(SerialError eventType) : eventType(eventType) {}
           SerialErrorReceivedEventArgs(const SerialErrorReceivedEventArgs& serea) : eventType(serea.eventType) {}
@@ -26,7 +26,7 @@ namespace Switch {
           /// @return One of the SerialError values.
           /// @remarks This property provides information about the event type that caused the ErrorReceived event.
           Property<SerialError, ReadOnly> EventType {
-            pcf_get {return this->eventType;}
+            sw_get {return this->eventType;}
           };
 
         private:

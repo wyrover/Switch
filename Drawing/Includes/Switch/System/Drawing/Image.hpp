@@ -38,7 +38,7 @@ namespace Switch {
       
       /// @brief An abstract base class that provides functionality for the System::Drawing::Bitmap and System::Drawing::Imaging::Metafile descended classes.
       /// @remarks To draw an System::Drawing::Image on a Windows Form, you should use one of the Graphics::DrawImage(Image, Point) methods.
-      class pcf_public Image : public object, public IComparable {
+      class sw_public Image : public object, public IComparable {
       public:
         /// @cond
         Image();
@@ -46,7 +46,7 @@ namespace Switch {
         /// @endcond
 
         Property<const byte*, ReadOnly> Data {
-          pcf_get {return this->rawData.Data();}
+          sw_get {return this->rawData.Data();}
         };
         
         static Property<Image, ReadOnly> None;
@@ -72,53 +72,53 @@ namespace Switch {
         /// | IImageFlagsCaching           | 131072                 |
         /// @remarks For example, if the Image::Flags property for an image returned 77960, the System::Drawing::Imaging::ImageFlags for the image would be System::Drawing::Imaging::ImageFlags::ReadOnly, System::Drawing::Imaging::ImageFlags::HasRealDpi, System::Drawing::Imaging::ImageFlags::HasRealPixelSize, System::Drawing::Imaging::ImageFlags::ColorSpaceYcbcr, and System::Drawing::Imaging::ImageFlags::PartiallyScalable.
         Property<int32, ReadOnly> Flags {
-          pcf_get {return (int32)this->flags;}
+          sw_get {return (int32)this->flags;}
         };
 
         Property<Array<System::Guid>, ReadOnly> FrameDimensionsList {
-          pcf_get {return frameDimensionList;}
+          sw_get {return frameDimensionList;}
         };
 
         Property<int32, ReadOnly> Height {
-          pcf_get {return this->size.Height();}
+          sw_get {return this->size.Height();}
         };
 
         Property<float, ReadOnly> HorizontalResolution {
-          pcf_get {return this->horizontalResolution;}
+          sw_get {return this->horizontalResolution;}
         };
 
         Property<Imaging::ColorPalette> Palette {
-          pcf_get {return this->palette;},
-          pcf_set {this->palette = value;}
+          sw_get {return this->palette;},
+          sw_set {this->palette = value;}
         };
         
         Property<SizeF, ReadOnly> PhysicalDimension {
-          pcf_get {return SizeF(Convert::ToSingle(this->size.Width()) * this->horizontalResolution, Convert::ToSingle(this->size.Height()) * this->verticalResolution);}
+          sw_get {return SizeF(Convert::ToSingle(this->size.Width()) * this->horizontalResolution, Convert::ToSingle(this->size.Height()) * this->verticalResolution);}
         };
 
         Property<Imaging::PixelFormat, ReadOnly> PixelFormat {
-          pcf_get {return this->pixelFormat;}
+          sw_get {return this->pixelFormat;}
         };
 
         Property<Imaging::ImageFormat, ReadOnly> RawFormat {
-          pcf_get {return this->rawFormat;}
+          sw_get {return this->rawFormat;}
         };
 
         Property<System::Drawing::Size, ReadOnly> Size {
-          pcf_get {return this->size;}
+          sw_get {return this->size;}
         };
 
         Property<const object&> Tag {
-          pcf_get->const object& {return *this->tag;},
-          pcf_set {this->tag = &value;}
+          sw_get->const object& {return *this->tag;},
+          sw_set {this->tag = &value;}
         };
         
         Property<float, ReadOnly> VerticalResolution {
-          pcf_get {return this->verticalResolution;}
+          sw_get {return this->verticalResolution;}
         };
 
         Property<int32, ReadOnly> Width {
-          pcf_get {return this->size.Width();}
+          sw_get {return this->size.Width();}
         };
 
         static refptr<Image> FromFile(const string& fileName);

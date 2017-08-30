@@ -12,7 +12,7 @@ namespace Switch {
     /// SystemException addition to classes for synchronizing thread activities and access to data ( Mutex, Monitor, Interlocked, AutoResetEvent, and so on), this namespace includes a ThreadPool class that allows you to use a pool of system-supplied threads, and a Timer class that executes callback methods on thread pool threads.
     namespace Threading {
       /// @brief The exception that is thrown when the Semaphore.Release method is called on a semaphore whose count is already at the maximum.
-      class pcf_public SemaphoreFullException : public SystemException {
+      class sw_public SemaphoreFullException : public SystemException {
       public:
         /// @brief Create a new instance of class SemaphoreFullException
         /// @remarks Message is set with the default message associate to the error.
@@ -24,7 +24,7 @@ namespace Switch {
         SemaphoreFullException(const SemaphoreFullException& value) : SystemException(value) {}
         
         /// @brief Create a new instance of class SemaphoreFullException
-        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #pcf_current_information.
+        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
         /// @remarks Message is set with the default message associate to the error.
         SemaphoreFullException(const CurrentInformation& information) : SystemException(information) {}
         
@@ -34,13 +34,13 @@ namespace Switch {
         
         /// @brief Create a new instance of class SemaphoreFullException
         /// @param message Message string associate to the error.
-        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #pcf_current_information.
+        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
         SemaphoreFullException(const System::String& message, const CurrentInformation& information) : SystemException(message, information) {}
         
         /// @brief Create a new instance of class SemaphoreFullException
         /// @param message Message string associate to the error.
         /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
-        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #pcf_current_information.
+        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
         SemaphoreFullException(const System::String& message, const System::Exception& innerException, const CurrentInformation& information) : SystemException(message, innerException, information) {}
         
       private:

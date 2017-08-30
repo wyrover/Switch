@@ -20,8 +20,8 @@ namespace SwitchUnitTests {
       bag.Add(5);
       int index = 0;
       for (int item : bag)
-        Assert::AreEqual(values[index++], item, pcf_current_information);
-      Assert::AreEqual(6, index, pcf_current_information);
+        Assert::AreEqual(values[index++], item, sw_current_information);
+      Assert::AreEqual(6, index, sw_current_information);
     }
 
     void GetEnumerator() {
@@ -31,45 +31,45 @@ namespace SwitchUnitTests {
       bag.Add(6);
       int index = 0;
       while (enumerator.MoveNext())
-        Assert::AreEqual(values[index++], enumerator.Current(), pcf_current_information);
-      Assert::AreEqual(6, index, pcf_current_information);
+        Assert::AreEqual(values[index++], enumerator.Current(), sw_current_information);
+      Assert::AreEqual(6, index, sw_current_information);
     }
     
     void TryPeek() {
       ConcurrentBag<int> bag = {0, 1, 2, 3, 4, 5};
       int result;
-      Assert::IsTrue(bag.TryPeek(result), pcf_current_information);
-      Assert::AreEqual(5, result, pcf_current_information);
+      Assert::IsTrue(bag.TryPeek(result), sw_current_information);
+      Assert::AreEqual(5, result, sw_current_information);
     }
     
     void TryTake() {
       ConcurrentBag<int> bag = {0, 1, 2, 3, 4, 5};
       int result;
-      Assert::IsTrue(bag.TryTake(result), pcf_current_information);
-      Assert::AreEqual(5, result, pcf_current_information);
-      Assert::AreEqual(5, bag.Count, pcf_current_information);
-      Assert::IsTrue(bag.TryTake(result), pcf_current_information);
-      Assert::AreEqual(4, result, pcf_current_information);
-      Assert::AreEqual(4, bag.Count, pcf_current_information);
-      Assert::IsTrue(bag.TryTake(result), pcf_current_information);
-      Assert::AreEqual(3, result, pcf_current_information);
-      Assert::AreEqual(3, bag.Count, pcf_current_information);
-      Assert::IsTrue(bag.TryTake(result), pcf_current_information);
-      Assert::AreEqual(2, result, pcf_current_information);
-      Assert::AreEqual(2, bag.Count, pcf_current_information);
-      Assert::IsTrue(bag.TryTake(result), pcf_current_information);
-      Assert::AreEqual(1, result, pcf_current_information);
-      Assert::AreEqual(1, bag.Count, pcf_current_information);
-      Assert::IsTrue(bag.TryTake(result), pcf_current_information);
-      Assert::AreEqual(0, result, pcf_current_information);
-      Assert::AreEqual(0, bag.Count, pcf_current_information);
-      Assert::IsFalse(bag.TryTake(result), pcf_current_information);
+      Assert::IsTrue(bag.TryTake(result), sw_current_information);
+      Assert::AreEqual(5, result, sw_current_information);
+      Assert::AreEqual(5, bag.Count, sw_current_information);
+      Assert::IsTrue(bag.TryTake(result), sw_current_information);
+      Assert::AreEqual(4, result, sw_current_information);
+      Assert::AreEqual(4, bag.Count, sw_current_information);
+      Assert::IsTrue(bag.TryTake(result), sw_current_information);
+      Assert::AreEqual(3, result, sw_current_information);
+      Assert::AreEqual(3, bag.Count, sw_current_information);
+      Assert::IsTrue(bag.TryTake(result), sw_current_information);
+      Assert::AreEqual(2, result, sw_current_information);
+      Assert::AreEqual(2, bag.Count, sw_current_information);
+      Assert::IsTrue(bag.TryTake(result), sw_current_information);
+      Assert::AreEqual(1, result, sw_current_information);
+      Assert::AreEqual(1, bag.Count, sw_current_information);
+      Assert::IsTrue(bag.TryTake(result), sw_current_information);
+      Assert::AreEqual(0, result, sw_current_information);
+      Assert::AreEqual(0, bag.Count, sw_current_information);
+      Assert::IsFalse(bag.TryTake(result), sw_current_information);
     }
     
   };
   
-  pcf_test(ConcurrentBagTest, Add)
-  pcf_test(ConcurrentBagTest, GetEnumerator)
-  pcf_test(ConcurrentBagTest, TryPeek)
-  pcf_test(ConcurrentBagTest, TryTake)
+  sw_test(ConcurrentBagTest, Add)
+  sw_test(ConcurrentBagTest, GetEnumerator)
+  sw_test(ConcurrentBagTest, TryPeek)
+  sw_test(ConcurrentBagTest, TryTake)
 }

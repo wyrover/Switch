@@ -30,9 +30,9 @@ namespace Switch {
       class Png : public object {
       public:
         template<typename TStream>
-        Png(const TStream& stream) : reader(pcf_new<System::IO::BinaryReader>(stream)) {}
+        Png(const TStream& stream) : reader(sw_new<System::IO::BinaryReader>(stream)) {}
         
-        Png(refptr<System::IO::Stream> stream) : reader(pcf_new<System::IO::BinaryReader>(stream)) {}
+        Png(refptr<System::IO::Stream> stream) : reader(sw_new<System::IO::BinaryReader>(stream)) {}
 
         void Read(Image& image) {
           png_infop info = null;
@@ -42,11 +42,11 @@ namespace Switch {
           if (!pp || !info) {
             if (pp)
               png_destroy_read_struct(&pp, null, null);
-            throw OutOfMemoryException(pcf_current_information);
+            throw OutOfMemoryException(sw_current_information);
           }
           if (setjmp(png_jmpbuf(pp))) {
             png_destroy_read_struct(&pp, &info, null);
-            throw OutOfMemoryException(pcf_current_information);
+            throw OutOfMemoryException(sw_current_information);
           }
 
           Array<byte> streamData((int32)reader->BaseStream().Length());

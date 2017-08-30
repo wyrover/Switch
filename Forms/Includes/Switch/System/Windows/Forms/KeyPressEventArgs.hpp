@@ -14,7 +14,7 @@ namespace Switch {
         class Control;
         /// @endcond
 
-        class pcf_public KeyPressEventArgs : public EventArgs {
+        class sw_public KeyPressEventArgs : public EventArgs {
         public:
           KeyPressEventArgs() {}
           KeyPressEventArgs(char32 keyChar) : keyChar(keyChar), handled(false) {}
@@ -29,12 +29,12 @@ namespace Switch {
           /// @endcond
 
           Property<bool> Handled {
-            pcf_get {return this->handled;},
-            pcf_set {this->handled = value;}
+            sw_get {return this->handled;},
+            sw_set {this->handled = value;}
           };
 
           Property<char32, ReadOnly> KeyChar {
-            pcf_get {return this->keyChar;}
+            sw_get {return this->keyChar;}
           };
 
         private:

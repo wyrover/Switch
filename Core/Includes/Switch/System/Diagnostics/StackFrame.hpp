@@ -17,7 +17,7 @@ namespace Switch {
       /// @endcond
 
       /// @brief Provides information about a StackFrame, which represents a function call on the call stack for the current thread.
-      class pcf_public StackFrame : public Object {
+      class sw_public StackFrame : public Object {
         /// @cond
         friend class StackTrace;
         /// @endcond

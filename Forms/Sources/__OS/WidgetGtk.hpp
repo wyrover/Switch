@@ -7,7 +7,7 @@
 #include "FormsApi.hpp"
 
 namespace __OS {
-  class IWidget pcf_interface {
+  class IWidget sw_interface {
   public:
     virtual const Gtk::Widget& ToWidget() const = 0;
     virtual Gtk::Widget& ToWidget() = 0;
@@ -39,7 +39,7 @@ namespace __OS {
     Gtk::RadioButtonGroup& RadioButtonGroup() {return this->radioButtonGroup;}
     
     virtual void RegisterEvent() {
-      this->ToWidget().signal_event().connect(pcf_delegate(GdkEvent* event)->bool {
+      this->ToWidget().signal_event().connect(sw_delegate(GdkEvent* event)->bool {
         System::Collections::Generic::SortedDictionary<int32, System::Delegate<int32, GdkEvent&>> events {
           {GDK_BUTTON_PRESS, {*this, &Widget::GdkButtonPress}},
           {GDK_BUTTON_RELEASE, {*this, &Widget::GdkButtonRelease}},
@@ -76,25 +76,25 @@ namespace __OS {
   private:
     int32 GetMouseButtonDown() const {
       switch (this->button) {
-        case 0: throw System::Exception(pcf_current_information);
+        case 0: throw System::Exception(sw_current_information);
         case 1: return WM_LBUTTONDOWN;
         case 2 :return WM_MBUTTONDOWN;
         case 3 :return WM_RBUTTONDOWN;
         case 4 :return WM_XBUTTONDOWN;
         case 5 :return WM_XBUTTONDOWN;
-        default: throw System::Exception(pcf_current_information);
+        default: throw System::Exception(sw_current_information);
       }
     }
     
     int32 GetMouseButtonUp() const {
       switch (this->button) {
-        case 0: throw System::Exception(pcf_current_information);
+        case 0: throw System::Exception(sw_current_information);
         case 1: return WM_LBUTTONUP;
         case 2 :return WM_MBUTTONUP;
         case 3 :return WM_RBUTTONUP;
         case 4 :return WM_XBUTTONUP;
         case 5 :return WM_XBUTTONUP;
-        default: throw System::Exception(pcf_current_information);
+        default: throw System::Exception(sw_current_information);
       }
     }
 

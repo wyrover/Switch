@@ -16,8 +16,8 @@ namespace SwitchUnitTests {
       
       int32 i = 0;
       for (const auto& value : collection.values)
-        Assert::AreEqual(value, results[i++], pcf_current_information);
-      Assert::AreEqual(10, i, pcf_current_information);
+        Assert::AreEqual(value, results[i++], sw_current_information);
+      Assert::AreEqual(10, i, sw_current_information);
     }
 
     void CreateCollectionWithInitializerListThenIterateIt() {
@@ -32,11 +32,11 @@ namespace SwitchUnitTests {
       
       int32 i = 0;
       for (const auto& value : collection.values)
-        Assert::AreEqual(value, results[i++], pcf_current_information);
-      Assert::AreEqual(10, i, pcf_current_information);
+        Assert::AreEqual(value, results[i++], sw_current_information);
+      Assert::AreEqual(10, i, sw_current_information);
     }
   };
   
-  pcf_test(InitializerListTest, CreateCollectionWithInitializerList)
-  pcf_test(InitializerListTest, CreateCollectionWithInitializerListThenIterateIt)
+  sw_test(InitializerListTest, CreateCollectionWithInitializerList)
+  sw_test(InitializerListTest, CreateCollectionWithInitializerListThenIterateIt)
 }

@@ -12,7 +12,7 @@ namespace Switch {
     namespace Windows {
       /// @brief The Switch::System::Windows::Forms namespace contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system, Apple macOS and Linux like Ubuntu operating system.
       namespace Forms {
-        struct pcf_public Message : public object {
+        struct sw_public Message : public object {
         public:
           /// @cond
           Message() {}
@@ -20,34 +20,34 @@ namespace Switch {
           /// @cond
 
           Property<intptr> HWnd {
-            pcf_get {return this->hwnd;},
-            pcf_set {this->hwnd = value;}
+            sw_get {return this->hwnd;},
+            sw_set {this->hwnd = value;}
           };
 
           Property<intptr> LParam {
-            pcf_get{return this->lParam;},
-            pcf_set{this->lParam = value;}
+            sw_get{return this->lParam;},
+            sw_set{this->lParam = value;}
           };
 
           Property<int32> Msg {
-            pcf_get{return this->msg;},
-            pcf_set{this->msg = value;}
+            sw_get{return this->msg;},
+            sw_set{this->msg = value;}
           };
 
           Property<intptr> Result {
-            pcf_get{return this->result;},
-            pcf_set{this->result = value;}
+            sw_get{return this->result;},
+            sw_set{this->result = value;}
           };
           
           Property<intptr> WParam {
-            pcf_get{return this->wParam;},
-            pcf_set{this->wParam = value;}
+            sw_get{return this->wParam;},
+            sw_set{this->wParam = value;}
           };
           
           /// @cond
           Property<intptr> Handle {
-            pcf_get{return this->handle;},
-            pcf_set{this->handle = value;}
+            sw_get{return this->handle;},
+            sw_set{this->handle = value;}
           };
           /// @endcond
           

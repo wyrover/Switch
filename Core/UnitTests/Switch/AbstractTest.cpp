@@ -19,14 +19,14 @@ namespace SwitchUnitTests {
         ~NotInheritedFromAnAbstract() {result += "~NotInheritedFromAnAbstract";}
       };
       
-      pcf_using (refptr<NotAnAbstract> value = pcf_new<NotInheritedFromAnAbstract>());
+      sw_using (refptr<NotAnAbstract> value = sw_new<NotInheritedFromAnAbstract>());
       Assert::AreEqual("~NotAnAbstract", result);
     }
 
     void CreateClassInheritedFromAnAbstract() {
       static string result;
       result = "";
-      struct AnAbstract pcf_abstract {
+      struct AnAbstract sw_abstract {
         ~AnAbstract() {result += "~AnAbstract";}
       };
       
@@ -34,11 +34,11 @@ namespace SwitchUnitTests {
         ~InheritedFromAnAbstract() {result += "~InheritedFromAnAbstract";}
       };
       
-      pcf_using (refptr<AnAbstract> value = pcf_new<InheritedFromAnAbstract>());
+      sw_using (refptr<AnAbstract> value = sw_new<InheritedFromAnAbstract>());
       Assert::AreEqual("~InheritedFromAnAbstract~AnAbstract", result);
     }
   };
   
-  pcf_test(AbstractTest, CreateClassNotInheritedFromAnAbstract)
-  pcf_test(AbstractTest, CreateClassInheritedFromAnAbstract)
+  sw_test(AbstractTest, CreateClassNotInheritedFromAnAbstract)
+  sw_test(AbstractTest, CreateClassInheritedFromAnAbstract)
 }

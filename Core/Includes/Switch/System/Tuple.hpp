@@ -57,57 +57,57 @@ namespace Switch {
       /// @brief Gets the value of the current Tuple <T1, T2, T3, T4, T5, T6, T7, TRest> object's first component.
       /// @param T1 The value of the current Tuple <T1, T2, T3, T4, T5, T6, T7, TRest> object's first component.
       Property<T1> Item1 {
-        pcf_get {return std::get<0>(this->tuple);},
-        pcf_set {std::get<0>(this->tuple) = value;}
+        sw_get {return std::get<0>(this->tuple);},
+        sw_set {std::get<0>(this->tuple) = value;}
       };
       
       /// @brief Gets the value of the current Tuple <T1, T2, T3, T4, T5, T6, T7, TRest> object's second component.
       /// @param T2 The value of the current Tuple <T1, T2, T3, T4, T5, T6, T7, TRest> object's second component.
       Property<T2> Item2 {
-        pcf_get {return std::get<1>(this->tuple);},
-        pcf_set {std::get<1>(this->tuple) = value;}
+        sw_get {return std::get<1>(this->tuple);},
+        sw_set {std::get<1>(this->tuple) = value;}
       };
       
       /// @brief Gets the value of the current Tuple <T1, T2, T3, T4, T5, T6, T7, TRest> object's third component.
       /// @param T3 The value of the current Tuple <T1, T2, T3, T4, T5, T6, T7, TRest> object's third component.
       Property<T3> Item3 {
-        pcf_get {return std::get<2>(this->tuple);},
-        pcf_set {std::get<2>(this->tuple) = value;}
+        sw_get {return std::get<2>(this->tuple);},
+        sw_set {std::get<2>(this->tuple) = value;}
       };
       
       /// @brief Gets the value of the current Tuple <T1, T2, T3, T4, T5, T6, T7, TRest> object's fourth component.
       /// @param T4 The value of the current Tuple <T1, T2, T3, T4, T5, T6, T7, TRest> object's fourth component.
       Property<T4> Item4 {
-        pcf_get {return std::get<3>(this->tuple);},
-        pcf_set {std::get<3>(this->tuple) = value;}
+        sw_get {return std::get<3>(this->tuple);},
+        sw_set {std::get<3>(this->tuple) = value;}
       };
       
       /// @brief Gets the value of the current Tuple <T1, T2, T3, T4, T5, T6, T7, TRest> object's fifth component.
       /// @param T5 The value of the current Tuple <T1, T2, T3, T4, T5, T6, T7, TRest> object's fifth component.
       Property<T5> Item5 {
-        pcf_get {return std::get<4>(this->tuple);},
-        pcf_set {std::get<4>(this->tuple) = value;}
+        sw_get {return std::get<4>(this->tuple);},
+        sw_set {std::get<4>(this->tuple) = value;}
       };
       
       /// @brief Gets the value of the current Tuple <T1, T2, T3, T4, T5, T6, T7, TRest> object's sixth component.
       /// @param T6 The value of the current Tuple <T1, T2, T3, T4, T5, T6, T7, TRest> object's sixth component.
       Property<T6> Item6 {
-        pcf_get {return std::get<5>(this->tuple);},
-        pcf_set {std::get<5>(this->tuple) = value;}
+        sw_get {return std::get<5>(this->tuple);},
+        sw_set {std::get<5>(this->tuple) = value;}
       };
       
       /// @brief Gets the value of the current Tuple <T1, T2, T3, T4, T5, T6, T7, TRest> object's seventh component.
       /// @param T7 The value of the current Tuple <T1, T2, T3, T4, T5, T6, T7, TRest> object's seventh component.
       Property<T7> Item7 {
-        pcf_get {return std::get<6>(this->tuple);},
-        pcf_set {std::get<6>(this->tuple) = value;}
+        sw_get {return std::get<6>(this->tuple);},
+        sw_set {std::get<6>(this->tuple) = value;}
       };
       
       /// @brief Gets the value of the current Tuple <T1, T2, T3, T4, T5, T6, T7, TRest> object's remaining component.
       /// @param TRest The value of the current Tuple <T1, T2, T3, T4, T5, T6, T7, TRest> object's remaining component.
       Property<TRest> Rest {
-        pcf_get {return std::get<7>(this->tuple);},
-        pcf_set {std::get<7>(this->tuple) = value;}
+        sw_get {return std::get<7>(this->tuple);},
+        sw_set {std::get<7>(this->tuple) = value;}
       };
 
       /// @brief Compares the current Version object to a specified object and returns an indication of their relative values.
@@ -186,50 +186,50 @@ namespace Switch {
       /// @brief Gets the value of the current Tuple <T1, T2, T3, T4, T5, T6, T7> object's first component.
       /// @param T1 The value of the current Tuple <T1, T2, T3, T4, T5, T6, T7> object's first component.
       Property<T1> Item1 {
-        pcf_get {return std::get<0>(this->tuple);},
-        pcf_set {std::get<0>(this->tuple) = value;}
+        sw_get {return std::get<0>(this->tuple);},
+        sw_set {std::get<0>(this->tuple) = value;}
       };
       
       /// @brief Gets the value of the current Tuple <T1, T2, T3, T4, T5, T6, T7> object's second component.
       /// @param T2 The value of the current Tuple <T1, T2, T3, T4, T5, T6, T7> object's second component.
       Property<T2> Item2 {
-        pcf_get {return std::get<1>(this->tuple);},
-        pcf_set {std::get<1>(this->tuple) = value;}
+        sw_get {return std::get<1>(this->tuple);},
+        sw_set {std::get<1>(this->tuple) = value;}
       };
       
       /// @brief Gets the value of the current Tuple <T1, T2, T3, T4, T5, T6, T7> object's third component.
       /// @param T3 The value of the current Tuple <T1, T2, T3, T4, T5, T6, T7> object's third component.
       Property<T3> Item3 {
-        pcf_get {return std::get<2>(this->tuple);},
-        pcf_set {std::get<2>(this->tuple) = value;}
+        sw_get {return std::get<2>(this->tuple);},
+        sw_set {std::get<2>(this->tuple) = value;}
       };
       
       /// @brief Gets the value of the current Tuple <T1, T2, T3, T4, T5, T6, T7> object's fourth component.
       /// @param T4 The value of the current Tuple <T1, T2, T3, T4, T5, T6, T7> object's fourth component.
       Property<T4> Item4 {
-        pcf_get {return std::get<3>(this->tuple);},
-        pcf_set {std::get<3>(this->tuple) = value;}
+        sw_get {return std::get<3>(this->tuple);},
+        sw_set {std::get<3>(this->tuple) = value;}
       };
       
       /// @brief Gets the value of the current Tuple <T1, T2, T3, T4, T5, T6, T7> object's fifth component.
       /// @param T5 The value of the current Tuple <T1, T2, T3, T4, T5, T6, T7> object's fifth component.
       Property<T5> Item5 {
-        pcf_get {return std::get<4>(this->tuple);},
-        pcf_set {std::get<4>(this->tuple) = value;}
+        sw_get {return std::get<4>(this->tuple);},
+        sw_set {std::get<4>(this->tuple) = value;}
       };
       
       /// @brief Gets the value of the current Tuple <T1, T2, T3, T4, T5, T6, T7> object's sixth component.
       /// @param T6 The value of the current Tuple <T1, T2, T3, T4, T5, T6, T7> object's sixth component.
       Property<T6> Item6 {
-        pcf_get {return std::get<5>(this->tuple);},
-        pcf_set {std::get<5>(this->tuple) = value;}
+        sw_get {return std::get<5>(this->tuple);},
+        sw_set {std::get<5>(this->tuple) = value;}
       };
       
       /// @brief Gets the value of the current Tuple <T1, T2, T3, T4, T5, T6, T7> object's seventh component.
       /// @param T7 The value of the current Tuple <T1, T2, T3, T4, T5, T6, T7> object's seventh component.
       Property<T7> Item7 {
-        pcf_get {return std::get<6>(this->tuple);},
-        pcf_set {std::get<6>(this->tuple) = value;}
+        sw_get {return std::get<6>(this->tuple);},
+        sw_set {std::get<6>(this->tuple) = value;}
       };
       
       /// @brief Compares the current Version object to a specified object and returns an indication of their relative values.
@@ -306,43 +306,43 @@ namespace Switch {
       /// @brief Gets the value of the current Tuple <T1, T2, T3, T4, T5, T6> object's first component.
       /// @param T1 The value of the current Tuple <T1, T2, T3, T4, T5, T6> object's first component.
       Property<T1> Item1 {
-        pcf_get {return std::get<0>(this->tuple);},
-        pcf_set {std::get<0>(this->tuple) = value;}
+        sw_get {return std::get<0>(this->tuple);},
+        sw_set {std::get<0>(this->tuple) = value;}
       };
       
       /// @brief Gets the value of the current Tuple <T1, T2, T3, T4, T5, T6> object's second component.
       /// @param T2 The value of the current Tuple <T1, T2, T3, T4, T5, T6> object's second component.
       Property<T2> Item2 {
-        pcf_get {return std::get<1>(this->tuple);},
-        pcf_set {std::get<1>(this->tuple) = value;}
+        sw_get {return std::get<1>(this->tuple);},
+        sw_set {std::get<1>(this->tuple) = value;}
       };
       
       /// @brief Gets the value of the current Tuple <T1, T2, T3, T4, T5, T6> object's third component.
       /// @param T3 The value of the current Tuple <T1, T2, T3, T4, T5, T6> object's third component.
       Property<T3> Item3 {
-        pcf_get {return std::get<2>(this->tuple);},
-        pcf_set {std::get<2>(this->tuple) = value;}
+        sw_get {return std::get<2>(this->tuple);},
+        sw_set {std::get<2>(this->tuple) = value;}
       };
       
       /// @brief Gets the value of the current Tuple <T1, T2, T3, T4, T5, T6> object's fourth component.
       /// @param T4 The value of the current Tuple <T1, T2, T3, T4, T5, T6> object's fourth component.
       Property<T4> Item4 {
-        pcf_get {return std::get<3>(this->tuple);},
-        pcf_set {std::get<3>(this->tuple) = value;}
+        sw_get {return std::get<3>(this->tuple);},
+        sw_set {std::get<3>(this->tuple) = value;}
       };
       
       /// @brief Gets the value of the current Tuple <T1, T2, T3, T4, T5, T6> object's fifth component.
       /// @param T5 The value of the current Tuple <T1, T2, T3, T4, T5, T6> object's fifth component.
       Property<T5> Item5 {
-        pcf_get {return std::get<4>(this->tuple);},
-        pcf_set {std::get<4>(this->tuple) = value;}
+        sw_get {return std::get<4>(this->tuple);},
+        sw_set {std::get<4>(this->tuple) = value;}
       };
       
       /// @brief Gets the value of the current Tuple <T1, T2, T3, T4, T5, T6> object's sixth component.
       /// @param T6 The value of the current Tuple <T1, T2, T3, T4, T5, T6> object's sixth component.
       Property<T6> Item6 {
-        pcf_get {return std::get<5>(this->tuple);},
-        pcf_set {std::get<5>(this->tuple) = value;}
+        sw_get {return std::get<5>(this->tuple);},
+        sw_set {std::get<5>(this->tuple) = value;}
       };
       
       /// @brief Compares the current Version object to a specified object and returns an indication of their relative values.
@@ -417,36 +417,36 @@ namespace Switch {
       /// @brief Gets the value of the current Tuple <T1, T2, T3, T4, T5> object's first component.
       /// @param T1 The value of the current Tuple <T1, T2, T3, T4, T5> object's first component.
       Property<T1> Item1 {
-        pcf_get {return std::get<0>(this->tuple);},
-        pcf_set {std::get<0>(this->tuple) = value;}
+        sw_get {return std::get<0>(this->tuple);},
+        sw_set {std::get<0>(this->tuple) = value;}
       };
       
       /// @brief Gets the value of the current Tuple <T1, T2, T3, T4, T5> object's second component.
       /// @param T2 The value of the current Tuple <T1, T2, T3, T4, T5> object's second component.
       Property<T2> Item2 {
-        pcf_get {return std::get<1>(this->tuple);},
-        pcf_set {std::get<1>(this->tuple) = value;}
+        sw_get {return std::get<1>(this->tuple);},
+        sw_set {std::get<1>(this->tuple) = value;}
       };
       
       /// @brief Gets the value of the current Tuple <T1, T2, T3, T4, T5> object's third component.
       /// @param T3 The value of the current Tuple <T1, T2, T3, T4, T5> object's third component.
       Property<T3> Item3 {
-        pcf_get {return std::get<2>(this->tuple);},
-        pcf_set {std::get<2>(this->tuple) = value;}
+        sw_get {return std::get<2>(this->tuple);},
+        sw_set {std::get<2>(this->tuple) = value;}
       };
       
       /// @brief Gets the value of the current Tuple <T1, T2, T3, T4, T5> object's fourth component.
       /// @param T4 The value of the current Tuple <T1, T2, T3, T4, T5> object's fourth component.
       Property<T4> Item4 {
-        pcf_get {return std::get<3>(this->tuple);},
-        pcf_set {std::get<3>(this->tuple) = value;}
+        sw_get {return std::get<3>(this->tuple);},
+        sw_set {std::get<3>(this->tuple) = value;}
       };
       
       /// @brief Gets the value of the current Tuple <T1, T2, T3, T4, T5> object's fifth component.
       /// @param T5 The value of the current Tuple <T1, T2, T3, T4, T5> object's fifth component.
       Property<T5> Item5 {
-        pcf_get {return std::get<4>(this->tuple);},
-        pcf_set {std::get<4>(this->tuple) = value;}
+        sw_get {return std::get<4>(this->tuple);},
+        sw_set {std::get<4>(this->tuple) = value;}
       };
       
       /// @brief Compares the current Version object to a specified object and returns an indication of their relative values.
@@ -519,29 +519,29 @@ namespace Switch {
       /// @brief Gets the value of the current Tuple <T1, T2, T3, T4> object's first component.
       /// @param T1 The value of the current Tuple <T1, T2, T3, T4> object's first component.
       Property<T1> Item1 {
-        pcf_get {return std::get<0>(this->tuple);},
-        pcf_set {std::get<0>(this->tuple) = value;}
+        sw_get {return std::get<0>(this->tuple);},
+        sw_set {std::get<0>(this->tuple) = value;}
       };
       
       /// @brief Gets the value of the current Tuple <T1, T2, T3, T4> object's second component.
       /// @param T2 The value of the current Tuple <T1, T2, T3, T4> object's second component.
       Property<T2> Item2 {
-        pcf_get {return std::get<1>(this->tuple);},
-        pcf_set {std::get<1>(this->tuple) = value;}
+        sw_get {return std::get<1>(this->tuple);},
+        sw_set {std::get<1>(this->tuple) = value;}
       };
       
       /// @brief Gets the value of the current Tuple <T1, T2, T3, T4> object's third component.
       /// @param T3 The value of the current Tuple <T1, T2, T3, T4> object's third component.
       Property<T3> Item3 {
-        pcf_get {return std::get<2>(this->tuple);},
-        pcf_set {std::get<2>(this->tuple) = value;}
+        sw_get {return std::get<2>(this->tuple);},
+        sw_set {std::get<2>(this->tuple) = value;}
       };
       
       /// @brief Gets the value of the current Tuple <T1, T2, T3, T4> object's fourth component.
       /// @param T4 The value of the current Tuple <T1, T2, T3, T4> object's fourth component.
       Property<T4> Item4 {
-        pcf_get {return std::get<3>(this->tuple);},
-        pcf_set {std::get<3>(this->tuple) = value;}
+        sw_get {return std::get<3>(this->tuple);},
+        sw_set {std::get<3>(this->tuple) = value;}
       };
       
       /// @brief Compares the current Version object to a specified object and returns an indication of their relative values.
@@ -612,22 +612,22 @@ namespace Switch {
       /// @brief Gets the value of the current Tuple <T1, T2, T3> object's first component.
       /// @param T1 The value of the current Tuple <T1, T2, T3> object's first component.
       Property<T1> Item1 {
-        pcf_get {return std::get<0>(this->tuple);},
-        pcf_set {std::get<0>(this->tuple) = value;}
+        sw_get {return std::get<0>(this->tuple);},
+        sw_set {std::get<0>(this->tuple) = value;}
       };
       
       /// @brief Gets the value of the current Tuple <T1, T2, T3> object's second component.
       /// @param T2 The value of the current Tuple <T1, T2, T3> object's second component.
       Property<T2> Item2 {
-        pcf_get {return std::get<1>(this->tuple);},
-        pcf_set {std::get<1>(this->tuple) = value;}
+        sw_get {return std::get<1>(this->tuple);},
+        sw_set {std::get<1>(this->tuple) = value;}
       };
       
       /// @brief Gets the value of the current Tuple <T1, T2, T3> object's third component.
       /// @param T3 The value of the current Tuple <T1, T2, T3> object's third component.
       Property<T3> Item3 {
-        pcf_get {return std::get<2>(this->tuple);},
-        pcf_set {std::get<2>(this->tuple) = value;}
+        sw_get {return std::get<2>(this->tuple);},
+        sw_set {std::get<2>(this->tuple) = value;}
       };
       
       /// @brief Compares the current Version object to a specified object and returns an indication of their relative values.
@@ -704,15 +704,15 @@ namespace Switch {
       /// @brief Gets the value of the current Tuple <T1, T2> object's first component.
       /// @param T1 The value of the current Tuple <T1, T2> object's first component.
       Property<T1> Item1 {
-        pcf_get {return std::get<0>(this->tuple);},
-        pcf_set {std::get<0>(this->tuple) = value;}
+        sw_get {return std::get<0>(this->tuple);},
+        sw_set {std::get<0>(this->tuple) = value;}
       };
       
       /// @brief Gets the value of the current Tuple <T1, T2> object's second component.
       /// @param T2 The value of the current Tuple <T1, T2> object's second component.
       Property<T2> Item2 {
-        pcf_get {return std::get<1>(this->tuple);},
-        pcf_set {std::get<1>(this->tuple) = value;}
+        sw_get {return std::get<1>(this->tuple);},
+        sw_set {std::get<1>(this->tuple) = value;}
       };
       
       /// @brief Compares the current Version object to a specified object and returns an indication of their relative values.
@@ -779,8 +779,8 @@ namespace Switch {
       /// @brief Gets the value of the current Tuple <T1> object's first component.
       /// @param T1 The value of the current Tuple <T1> object's first component.
       Property<T1> Item1 {
-        pcf_get {return std::get<0>(this->tuple);},
-        pcf_set {std::get<0>(this->tuple) = value;}
+        sw_get {return std::get<0>(this->tuple);},
+        sw_set {std::get<0>(this->tuple) = value;}
       };
       
       /// @brief Compares the current Version object to a specified object and returns an indication of their relative values.
@@ -827,7 +827,7 @@ namespace Switch {
     /// @see System::Tuple <T1, T2, T3, T4, T5, T6, T7>
     /// @see System::Tuple <T1, T2, T3, T4, T5, T6, T7, TRest>
     template<>
-    class Tuple<> pcf_static {
+    class Tuple<> sw_static {
     public:
       /// @brief Creates a new 8-tuple, or octuple.
       /// @param item1 The value of the first component of the tuple.

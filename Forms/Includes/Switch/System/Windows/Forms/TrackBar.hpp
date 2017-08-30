@@ -19,7 +19,7 @@ namespace Switch {
         /// @remarks The TrackBar is a scrollable control similar to the ScrollBar control. You can configure ranges through which the value of the Value property of a track bar scrolls by setting the Minimum property to specify the lower end of the range and the Maximum property to specify the upper end of the range.
         /// @remarks The LargeChange property defines the increment to add or subtract from the Value property when clicks occur on either side of the scroll box. The track bar can be displayed horizontally or vertically.
         /// @remarks You can use this control to input numeric data obtained through the Value property. You can display this numeric data in a control or use it in code.
-        class pcf_public TrackBar : public Control {
+        class sw_public TrackBar : public Control {
         public:
           TrackBar() : Control("", 0, 0, 104, 45) {
             this->SetStyle(ControlStyles::UserPaint, false);
@@ -27,46 +27,46 @@ namespace Switch {
           }
 
           Property<int32> LargeChange {
-            pcf_get{ return this->largeChange; },
-            pcf_set{ this->SetLargeChange(value); },
+            sw_get{ return this->largeChange; },
+            sw_set{ this->SetLargeChange(value); },
           };
 
           Property<Forms::Orientation> Orientation {
-            pcf_get{ return this->orientation; },
-            pcf_set{ this->SetOrientation(value); },
+            sw_get{ return this->orientation; },
+            sw_set{ this->SetOrientation(value); },
           };
 
           Property<int32> Maximum {
-            pcf_get{ return this->maximum; },
-            pcf_set{ this->SetMaximum(value); },
+            sw_get{ return this->maximum; },
+            sw_set{ this->SetMaximum(value); },
           };
 
           Property<int32> Minimum {
-            pcf_get{ return this->minimum; },
-            pcf_set{ this->SetMinimum(value); },
+            sw_get{ return this->minimum; },
+            sw_set{ this->SetMinimum(value); },
           };
 
           Property<int32> SmallChange{
-            pcf_get{ return this->smallChange; },
-            pcf_set{ this->SetSmallChange(value); },
+            sw_get{ return this->smallChange; },
+            sw_set{ this->SetSmallChange(value); },
           };
 
           Property<TickStyle> Style {
-            pcf_get{ return this->style; },
-            pcf_set{ this->SetTickStyle(value); },
+            sw_get{ return this->style; },
+            sw_set{ this->SetTickStyle(value); },
           };
 
           Property<int32> TickFrequency {
-            pcf_get{ return this->tickFrequency; },
-            pcf_set{ this->SetTickFrequency(value); },
+            sw_get{ return this->tickFrequency; },
+            sw_set{ this->SetTickFrequency(value); },
           };
 
           Property<int32> Value {
-            pcf_get {
+            sw_get {
               this->value = this->GetValue();
               return this->value;
             },
-            pcf_set{ this->SetValue(value); },
+            sw_set{ this->SetValue(value); },
           };
 
           EventHandler Scroll;

@@ -18,7 +18,7 @@ namespace Switch {
     /// @brief The System::IO namespace contains types that allow reading and writing to files and data streams, and types that provide basic file and directory support.
     namespace IO {
       /// @brief Reads primitive data types as binary values in a specific encoding.
-      class pcf_public BinaryReader : public Object {
+      class sw_public BinaryReader : public Object {
       public:
         /// @brief Initializes a new instance of the System::IO::BinaryReader class.
         BinaryReader() {}
@@ -32,7 +32,7 @@ namespace Switch {
           static_assert(!std::is_same<System::IO::Stream, TStream>::value, "Must not be System::IO::Stream but inherited");
           static_assert(std::is_base_of<System::IO::Stream, TStream>::value, "Is not inherited from System::IO::Stream");
           if (!stream.CanRead())
-            throw ArgumentException(pcf_current_information);
+            throw ArgumentException(sw_current_information);
         }
         
         /// @brief Initializes a new instance of the System::IO::BinaryReader class for the specified Sream pointer.
@@ -41,7 +41,7 @@ namespace Switch {
         /// @exception ArgumentException stream is not readable.
         BinaryReader(refptr<Stream> stream) : stream(stream) {
           if (!stream->CanRead())
-            throw ArgumentException(pcf_current_information);
+            throw ArgumentException(sw_current_information);
         }
 
         /// @cond
@@ -51,7 +51,7 @@ namespace Switch {
         /// @brief Gets the underlying stream that interfaces with a backing store.
         /// @return The stream this BinaryReader is reading from.
         Property<Stream&, ReadOnly> BaseStream {
-          pcf_get->Stream& {return this->GetBaseStream();}
+          sw_get->Stream& {return this->GetBaseStream();}
         };
 
         /// @brief Closes the current BinaryReader object and the underlying stream.
@@ -113,7 +113,7 @@ namespace Switch {
         virtual Array<byte> ReadBytes(int32 count) {
           Array<byte> values(count);
           if (Read(values, 0, count) != count)
-            throw EndOfStreamException(pcf_current_information);
+            throw EndOfStreamException(sw_current_information);
           return values;
         }
 

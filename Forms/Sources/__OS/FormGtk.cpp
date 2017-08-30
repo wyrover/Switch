@@ -20,12 +20,12 @@ namespace __OS {
       this->add(this->scrolledWindow);
       this->scrolledWindow.add(this->fixed);
       
-      this->signal_show().connect(pcf_delegate {
+      this->signal_show().connect(sw_delegate {
         this->scrolledWindow.show();
         this->fixed.show();
       });
       
-      this->signal_hide().connect(pcf_delegate {
+      this->signal_hide().connect(sw_delegate {
         System::Windows::Forms::Control::FromHandle((intptr)this)().Visible = false;
       });
     }

@@ -9,52 +9,52 @@ namespace {
   class UriTest : public TestFixture {
     protected:
       void ConstructorWithAbsoluteUri() {
-        Assert::DoesNotThrows(pcf_delegate{Uri("http://www.contoso.com");}, pcf_current_information);
+        Assert::DoesNotThrows(sw_delegate{Uri("http://www.contoso.com");}, sw_current_information);
       }
 
       void ConstructorWithAbsoluteUriAndUriKindRelativeOrAbsoluteSpecified() {
-        Assert::DoesNotThrows(pcf_delegate{Uri("http://www.contoso.com", UriKind::RelativeOrAbsolute);}, pcf_current_information);
+        Assert::DoesNotThrows(sw_delegate{Uri("http://www.contoso.com", UriKind::RelativeOrAbsolute);}, sw_current_information);
       }
 
       void ConstructorWithAbsoluteUriAndUriKindAbsoluteSpecified() {
-        Assert::DoesNotThrows(pcf_delegate{Uri("http://www.contoso.com", UriKind::Absolute);}, pcf_current_information);
+        Assert::DoesNotThrows(sw_delegate{Uri("http://www.contoso.com", UriKind::Absolute);}, sw_current_information);
       }
 
       void ConstructorWithAbsoluteUriAndUriKindRelativeSpecified() {
-        Assert::Throws<UriFormatException>(pcf_delegate{Uri("http://www.contoso.com", UriKind::Relative);}, pcf_current_information);
+        Assert::Throws<UriFormatException>(sw_delegate{Uri("http://www.contoso.com", UriKind::Relative);}, sw_current_information);
       }
 
       void ConstructorWithRelativeUri() {
-        Assert::Throws<UriFormatException>(pcf_delegate{Uri("www.contoso.com");}, pcf_current_information);
+        Assert::Throws<UriFormatException>(sw_delegate{Uri("www.contoso.com");}, sw_current_information);
       }
 
       void ConstructorWithRelativeUriAndUriKindRelativeOrAbsoluteSpecified() {
-        Assert::DoesNotThrows(pcf_delegate{Uri("www.contoso.com", UriKind::RelativeOrAbsolute);}, pcf_current_information);
+        Assert::DoesNotThrows(sw_delegate{Uri("www.contoso.com", UriKind::RelativeOrAbsolute);}, sw_current_information);
       }
 
       void ConstructorWithRelativeUriAndUriKindAbsoluteSpecified() {
-        Assert::Throws<UriFormatException>(pcf_delegate{Uri("www.contoso.com", UriKind::Absolute);}, pcf_current_information);
+        Assert::Throws<UriFormatException>(sw_delegate{Uri("www.contoso.com", UriKind::Absolute);}, sw_current_information);
       }
 
       void ConstructorWithRelativeUriAndUriKindRelativeSpecified() {
-        Assert::DoesNotThrows(pcf_delegate{Uri("www.contoso.com", UriKind::Relative);}, pcf_current_information);
+        Assert::DoesNotThrows(sw_delegate{Uri("www.contoso.com", UriKind::Relative);}, sw_current_information);
       }
 
       void ConstructorWithInvalidUri() {
-        Assert::Throws<UriFormatException>(pcf_delegate{Uri("://www.contoso.com");}, pcf_current_information);
+        Assert::Throws<UriFormatException>(sw_delegate{Uri("://www.contoso.com");}, sw_current_information);
       }
 
   };
 
-  pcf_test(UriTest, ConstructorWithAbsoluteUri)
-  pcf_test(UriTest, ConstructorWithAbsoluteUriAndUriKindRelativeOrAbsoluteSpecified)
-  pcf_test(UriTest, ConstructorWithAbsoluteUriAndUriKindAbsoluteSpecified)
-  pcf_test(UriTest, ConstructorWithAbsoluteUriAndUriKindRelativeSpecified)
-  pcf_test(UriTest, ConstructorWithRelativeUri)
-  pcf_test(UriTest, ConstructorWithRelativeUriAndUriKindRelativeOrAbsoluteSpecified)
-  pcf_test(UriTest, ConstructorWithRelativeUriAndUriKindAbsoluteSpecified)
-  pcf_test(UriTest, ConstructorWithRelativeUriAndUriKindRelativeSpecified)
-  pcf_test(UriTest, ConstructorWithInvalidUri)
+  sw_test(UriTest, ConstructorWithAbsoluteUri)
+  sw_test(UriTest, ConstructorWithAbsoluteUriAndUriKindRelativeOrAbsoluteSpecified)
+  sw_test(UriTest, ConstructorWithAbsoluteUriAndUriKindAbsoluteSpecified)
+  sw_test(UriTest, ConstructorWithAbsoluteUriAndUriKindRelativeSpecified)
+  sw_test(UriTest, ConstructorWithRelativeUri)
+  sw_test(UriTest, ConstructorWithRelativeUriAndUriKindRelativeOrAbsoluteSpecified)
+  sw_test(UriTest, ConstructorWithRelativeUriAndUriKindAbsoluteSpecified)
+  sw_test(UriTest, ConstructorWithRelativeUriAndUriKindRelativeSpecified)
+  sw_test(UriTest, ConstructorWithInvalidUri)
 
   TEST(Uri, Constructor) {
     ASSERT_TRUE(Uri("http://www.contoso.com").IsAbsoluteUri());

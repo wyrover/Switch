@@ -28,7 +28,7 @@ namespace Switch {
         /// @remarks Call the Stop method to close the TcpListener.
         /// @note The Stop method does not close any accepted connections. You are responsible for closing these separately.
         /// @note The 0 for local port functionality is not available.
-        class pcf_public TcpListener : public Object {
+        class sw_public TcpListener : public Object {
         public:
           /// @brief Initializes a new instance of the TcpListener class with the specified local endpoint.
           /// @param ipEndPoint An IPEndPoint that represents the local endpoint to which to bind the listener Socket.
@@ -75,10 +75,10 @@ namespace Switch {
           /// @remarks Set this property before calling Start, or call the Stop method and then set this property.
           /// @note Not available on MacOs/Linux/Android
           Property<bool> ExclusiveAddressUse {
-            pcf_get {return this->data->serverSocket.ExclusiveAddressUse(); },
-            pcf_set {
+            sw_get {return this->data->serverSocket.ExclusiveAddressUse(); },
+            sw_set {
               if (this->data->active)
-                throw ApplicationException(pcf_current_information); // tcplistener must be stopped
+                throw ApplicationException(sw_current_information); // tcplistener must be stopped
 
               this->data->serverSocket.ExclusiveAddressUse = value;
             }
@@ -90,7 +90,7 @@ namespace Switch {
           /// @remarks after a socket connection has been made. You must first cast this EndPoint to an IPEndPoint. You can then call the IPEndPoint::Address property to retrieve
           /// @remarks the local IP address, and the IPEndPoint::Port property to retrieve the local port number.
           Property<const EndPoint&, ReadOnly> LocalEndPoint {
-            pcf_get->const EndPoint& { return this->data->serverSocket.LocalEndPoint(); }
+            sw_get->const EndPoint& { return this->data->serverSocket.LocalEndPoint(); }
           };
 
           /// @brief Gets the underlying network Socket.
@@ -101,7 +101,7 @@ namespace Switch {
           /// @note request and obtain a Socket for sending and receiving data. You can also use the AcceptTcpClient method to accept a pending connection request and obtain a
           /// @note TcpClient for sending and receiving data.
           Property<Socket, ReadOnly> Server {
-            pcf_get {return this->data->serverSocket; }
+            sw_get {return this->data->serverSocket; }
           };
 
           /// @brief Creates a new TcpListener instance to listen on the specified port.
@@ -179,7 +179,7 @@ namespace Switch {
           /// @remarks Classes deriving from TcpListener can use this property to determine if the Socket is currently listening for incoming connection attempts.
           /// @remarks The Active property can be used to avoid redundant Start attempts.
           Property<bool, ReadOnly> Active {
-            pcf_get {return this->data->active; }
+            sw_get {return this->data->active; }
           };
           
         private:
@@ -188,7 +188,7 @@ namespace Switch {
             Socket serverSocket;
             bool active = false;
           };
-          refptr<TcpListenerData> data = pcf_new<TcpListenerData>();
+          refptr<TcpListenerData> data = sw_new<TcpListenerData>();
         };
       }
     }

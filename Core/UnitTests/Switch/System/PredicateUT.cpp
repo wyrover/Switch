@@ -15,29 +15,29 @@ namespace {
     };
     
     void Static() {
-      pcf_using(Predicate<const string&> p(&MyClass::IsEmpty)) {
-        Assert::IsFalse(p("Not empty"), pcf_current_information);
-        Assert::IsTrue(p(""), pcf_current_information);
+      sw_using(Predicate<const string&> p(&MyClass::IsEmpty)) {
+        Assert::IsFalse(p("Not empty"), sw_current_information);
+        Assert::IsTrue(p(""), sw_current_information);
       }
     }
     
     void Member() {
       MyClass m;
-      pcf_using(Predicate<const string&> p(m, &MyClass::IsNotEmpty)) {
-        Assert::IsTrue(p("Not empty"), pcf_current_information);
-        Assert::IsFalse(p(""), pcf_current_information);
+      sw_using(Predicate<const string&> p(m, &MyClass::IsNotEmpty)) {
+        Assert::IsTrue(p("Not empty"), sw_current_information);
+        Assert::IsFalse(p(""), sw_current_information);
       }
     }
     
     void Empty() {
-      pcf_using(Predicate<const string&> p) {
-        Assert::DoesNotThrows(pcf_delegate {p("Not empty");}, pcf_current_information);
-        Assert::DoesNotThrows(pcf_delegate {p("");}, pcf_current_information);
+      sw_using(Predicate<const string&> p) {
+        Assert::DoesNotThrows(sw_delegate {p("Not empty");}, sw_current_information);
+        Assert::DoesNotThrows(sw_delegate {p("");}, sw_current_information);
       }
     }
   };
   
-  pcf_test(PrediacateTest, Static)
-  pcf_test(PrediacateTest, Member)
-  pcf_test(PrediacateTest, Empty)
+  sw_test(PrediacateTest, Static)
+  sw_test(PrediacateTest, Member)
+  sw_test(PrediacateTest, Empty)
 }

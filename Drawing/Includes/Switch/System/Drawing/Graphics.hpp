@@ -40,19 +40,19 @@ namespace Switch {
         Far
       };
       
-      class pcf_public StringFormat {
+      class sw_public StringFormat {
       public:
         StringFormat() {}
         StringFormat(const StringFormat& stringFormat) : alignment(stringFormat.alignment), lineAlignment(stringFormat.lineAlignment) {}
 
         Property<StringAlignment> Alignment {
-          pcf_get {return this->alignment;},
-          pcf_set {this->alignment = value;}
+          sw_get {return this->alignment;},
+          sw_set {this->alignment = value;}
         };
         
         Property<StringAlignment> LineAlignment {
-          pcf_get {return this->lineAlignment;},
-          pcf_set {this->lineAlignment = value;}
+          sw_get {return this->lineAlignment;},
+          sw_set {this->lineAlignment = value;}
         };
         
       private:
@@ -60,14 +60,14 @@ namespace Switch {
         StringAlignment lineAlignment = StringAlignment::Near;
       };
       
-      class pcf_public pcf_public Graphics : public Object {
+      class sw_public sw_public Graphics : public Object {
       public:
         /// @cond
         ~Graphics();
         /// @endcond
 
         Property<RectangleF, ReadOnly> ClipBounds {
-          pcf_get { return this->clipRectangle; }
+          sw_get { return this->clipRectangle; }
         };
 
         void Clear(const Color& color);

@@ -17,7 +17,7 @@ namespace Switch {
       /// @endcond
 
       /// @brief Stores an ordered pair of singles, which specify a X and Y.
-      class pcf_public PointF : public object {
+      class sw_public PointF : public object {
       public:
         /// @brief Gets a PointF class that has a X and Y value of 0. This field is constant.
         static Property<PointF, ReadOnly> Empty;
@@ -44,16 +44,16 @@ namespace Switch {
         /// @return int32 The X component of this PointF class, typically measured in pixels.
         /// @remarks The unit for the X and Y of the PointF class depend on the PageUnit and PageScale settings for the Graphics object that is used to draw.
         Property<float> X {
-          pcf_get {return this->x;},
-          pcf_set {this->x = value;}
+          sw_get {return this->x;},
+          sw_set {this->x = value;}
         };
 
         /// @brief Gets or sets the Y component of this PointF class.
         /// @return int32 The Y component of this PointF class, typically measured in pixels.
         /// @remarks The unit for the X and Y of the PointF class depend on the PageUnit and PageScale settings for the Graphics object that is used to draw.
         Property<float> Y {
-          pcf_get {return this->y;},
-          pcf_set {this->y = value;}
+          sw_get {return this->y;},
+          sw_set {this->y = value;}
         };
 
         /// @brief Determines whether this instance of PointF and a specified object, which must also be a PointF object, have the same value.

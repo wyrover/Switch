@@ -18,7 +18,7 @@ namespace Switch {
         /// @brief Provides information about the current system environment.
         /// @remarks The SystemInformation class provides static properties that can be used to get information about the current system environment. The class provides access to information such as Windows display element sizes, operating system settings, network availability, and the capabilities of hardware installed on the system. This class cannot be instantiated.
         /// @remarks For more information about system-wide parameters, see "SystemParametersInfo" in the Platform SDK documentation at http://msdn.microsoft.com.
-        class pcf_public SystemInformation pcf_static {
+        class sw_public SystemInformation sw_static {
         public:
           /// @brief Gets the active window tracking delay.
           /// @return int32 The active window tracking delay, in milliseconds.

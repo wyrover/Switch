@@ -18,7 +18,7 @@ namespace {
 }
 
 namespace __OS {
-  class IWidget pcf_interface {
+  class IWidget sw_interface {
   public:
     virtual const Fl_Widget& ToWidget() const = 0;
     virtual Fl_Widget& ToWidget() = 0;
@@ -45,7 +45,7 @@ Array<System::Drawing::FontFamily> DrawingApi::FontFamily::GetInstalledFontFamil
 }
 
 System::Drawing::FontFamily DrawingApi::FontFamily::GetFontFamilyFromName(const string& name) {
-  throw ArgumentException(pcf_current_information);
+  throw ArgumentException(sw_current_information);
 }
 
 string DrawingApi::FontFamily::GetName(intptr handle) {

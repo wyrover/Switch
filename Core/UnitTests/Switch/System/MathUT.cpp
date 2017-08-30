@@ -224,104 +224,104 @@ namespace {
   }
   
   TEST(Math, DivRemInt32) {
-    pcf_using(int32 remainder = 0) {
+    sw_using(int32 remainder = 0) {
       EXPECT_EQ(1073741, Math::DivRem(Int32::MaxValue, int32(2000), remainder));
       EXPECT_EQ(1647, remainder);
     }
     
-    pcf_using(int32 remainder = 0) {
+    sw_using(int32 remainder = 0) {
       EXPECT_EQ(6, Math::DivRem(int32(13952), int32(2000), remainder));
       EXPECT_EQ(1952, remainder);
     }
     
-    pcf_using(int32 remainder = 0) {
+    sw_using(int32 remainder = 0) {
       EXPECT_EQ(0, Math::DivRem(int32(0), int32(2000), remainder));
       EXPECT_EQ(0, remainder);
     }
     
-    pcf_using(int32 remainder = 0) {
+    sw_using(int32 remainder = 0) {
       EXPECT_EQ(-7, Math::DivRem(int32(-14032), int32(2000), remainder));
       EXPECT_EQ(-32, remainder);
     }
     
-    pcf_using(int32 remainder = 0) {
+    sw_using(int32 remainder = 0) {
       EXPECT_EQ(-1073741, Math::DivRem(Int32::MinValue, int32(2000), remainder));
       EXPECT_EQ(-1648, remainder);
     }
 
-    pcf_using(int32 remainder = 0) {
+    sw_using(int32 remainder = 0) {
       EXPECT_EQ(-1073741, Math::DivRem(Int32::MaxValue, int32(-2000), remainder));
       EXPECT_EQ(1647, remainder);
     }
     
-    pcf_using(int32 remainder = 0) {
+    sw_using(int32 remainder = 0) {
       EXPECT_EQ(-6, Math::DivRem(int32(13952), int32(-2000), remainder));
       EXPECT_EQ(1952, remainder);
     }
     
-    pcf_using(int32 remainder = 0) {
+    sw_using(int32 remainder = 0) {
       EXPECT_EQ(0, Math::DivRem(int32(0), int32(-2000), remainder));
       EXPECT_EQ(0, remainder);
     }
     
-    pcf_using(int32 remainder = 0) {
+    sw_using(int32 remainder = 0) {
       EXPECT_EQ(7, Math::DivRem(int32(-14032), int32(-2000), remainder));
       EXPECT_EQ(-32, remainder);
     }
     
-    pcf_using(int32 remainder = 0) {
+    sw_using(int32 remainder = 0) {
       EXPECT_EQ(1073741, Math::DivRem(Int32::MinValue, int32(-2000), remainder));
       EXPECT_EQ(-1648, remainder);
     }
   }
   
   TEST(Math, DivRemInt64) {
-    pcf_using(int64 remainder = 0) {
+    sw_using(int64 remainder = 0) {
       EXPECT_EQ(4611686018427387LL, Math::DivRem(Int64::MaxValue, int64(2000), remainder));
       EXPECT_EQ(1807, remainder);
     }
     
-    pcf_using(int64 remainder = 0) {
+    sw_using(int64 remainder = 0) {
       EXPECT_EQ(6, Math::DivRem(int64(13952), int64(2000), remainder));
       EXPECT_EQ(1952, remainder);
     }
     
-    pcf_using(int64 remainder = 0) {
+    sw_using(int64 remainder = 0) {
       EXPECT_EQ(0, Math::DivRem(int64(0), int64(2000), remainder));
       EXPECT_EQ(0, remainder);
     }
     
-    pcf_using(int64 remainder = 0) {
+    sw_using(int64 remainder = 0) {
       EXPECT_EQ(-7, Math::DivRem(int64(-14032), int64(2000), remainder));
       EXPECT_EQ(-32, remainder);
     }
     
-    pcf_using(int64 remainder = 0) {
+    sw_using(int64 remainder = 0) {
       EXPECT_EQ(-4611686018427387LL, Math::DivRem(Int64::MinValue, int64(2000), remainder));
       EXPECT_EQ(-1808, remainder);
     }
     
-    pcf_using(int64 remainder = 0) {
+    sw_using(int64 remainder = 0) {
       EXPECT_EQ(-4611686018427387LL, Math::DivRem(Int64::MaxValue, int64(-2000), remainder));
       EXPECT_EQ(1807, remainder);
     }
     
-    pcf_using(int64 remainder = 0) {
+    sw_using(int64 remainder = 0) {
       EXPECT_EQ(-6, Math::DivRem(int64(13952), int64(-2000), remainder));
       EXPECT_EQ(1952, remainder);
     }
     
-    pcf_using(int64 remainder = 0) {
+    sw_using(int64 remainder = 0) {
       EXPECT_EQ(0, Math::DivRem(int64(0), int64(-2000), remainder));
       EXPECT_EQ(0, remainder);
     }
     
-    pcf_using(int64 remainder = 0) {
+    sw_using(int64 remainder = 0) {
       EXPECT_EQ(7, Math::DivRem(int64(-14032), int64(-2000), remainder));
       EXPECT_EQ(-32, remainder);
     }
     
-    pcf_using(int64 remainder = 0) {
+    sw_using(int64 remainder = 0) {
       EXPECT_EQ(4611686018427387LL, Math::DivRem(Int64::MinValue, int64(-2000), remainder));
       EXPECT_EQ(-1808, remainder);
     }

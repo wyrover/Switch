@@ -137,7 +137,7 @@ namespace Switch {
           }
         }
         if (found == false)
-          throw FormatException(pcf_current_information);
+          throw FormatException(sw_current_information);
       }
 
       return (T)result;

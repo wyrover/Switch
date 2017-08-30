@@ -14,7 +14,7 @@ namespace Switch {
     namespace Net {
       /// @brief Represents a network endpoint as an IP address and a port number.
       /// @remarks The IPEndPoint class contains the host and local or remote port information needed by an application to connect to a service on a host. By combining the host's IP address and port number of a service, the IPEndPoint class forms a connection point to a service.
-      class pcf_public IPEndPoint : public EndPoint {
+      class sw_public IPEndPoint : public EndPoint {
       public:
         /// @brief Specifies the minimum value that can be assigned to the Port property. The MinPort value is set to 0x00000000. This field is read-only.
         static Property<int32, ReadOnly> MinPort;
@@ -50,16 +50,16 @@ namespace Switch {
         /// @param value An IPAddress instance containing the IP address of the endpoint.
         /// @exception ArgumentNullException The address parameter is a null.
         Property<const IPAddress&> Address{
-          pcf_get->const IPAddress& { return this->address; },
-          pcf_set {this->SetAddress(value);}
+          sw_get->const IPAddress& { return this->address; },
+          sw_set {this->SetAddress(value);}
         };
 
         /// @brief Gets or sets the port number of the endpoint.
         /// @param value An integer value in the range MinPort to MaxPort indicating the port number of the endpoint.
         /// @exception ArgumentOutOfRangeException port is less than IPEndPoint::MinPort. -or- port is greater than IPEndPoint::MaxPort.
         Property<int32> Port {
-          pcf_get { return this->port; },
-          pcf_set {this->SetPort(value);}
+          sw_get { return this->port; },
+          sw_set {this->SetPort(value);}
         };
 
         /// @brief Serializes endpoint information into a SocketAddress instance.

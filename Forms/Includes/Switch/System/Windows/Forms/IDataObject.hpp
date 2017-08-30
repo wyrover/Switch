@@ -23,7 +23,7 @@ namespace Switch {
         /// @remarks Call the GetFormats method to retrieve an array of all the formats in which the data is available. Set the autoConvert parameter to false to get only the formats in which the data is stored. To get all the formats in which the data is available, set autoConvert to true, or do not use this parameter.
         /// @remarks Call the GetDataPresent method to determine whether stored data is available in a certain format. If you do not want stored data to be converted to the specified format, set the autoConvert parameter to false.
         /// @remarks See the DataObject class for an implementation of this interface. See the DataFormats class for the predefined Clipboard data formats.
-        class pcf_public IDataObject pcf_interface {
+        class sw_public IDataObject sw_interface {
         public:
 
         };

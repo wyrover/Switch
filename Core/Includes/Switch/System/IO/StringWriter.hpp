@@ -17,7 +17,7 @@ namespace Switch {
       /// @par Examples
       /// The following code example demonstrates the creation of a continuous paragraph from a group of double-spaced sentences, and then the conversion of the paragraph back to the original text.
       /// @include StringReader.cpp
-      class pcf_public StringWriter : public TextWriter {
+      class sw_public StringWriter : public TextWriter {
       public:
         static Property<StringWriter, ReadOnly> Null;
         

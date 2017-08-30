@@ -16,7 +16,7 @@ namespace Switch {
     
     /// @interface ICloneable
     /// @brief Supports cloning, which creates a new instance of a class with the same value as an existing instance.
-    class pcf_public ICloneable pcf_interface {
+    class sw_public ICloneable sw_interface {
     public:
       /// @brief Creates a new object that is a copy of the current instance.
       /// @return object A new object that is a copy of this instance.

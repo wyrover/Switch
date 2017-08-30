@@ -8,13 +8,13 @@
 
 using namespace System;
 
-Type::Type(const Type& type) : FullName(pcf_delegate {return this->GetFullName();}),  Name(pcf_delegate {return this->GetName();}), Namespace(pcf_delegate {return this->GetNamespace();}), type(type.type) {
+Type::Type(const Type& type) : FullName(sw_delegate {return this->GetFullName();}),  Name(sw_delegate {return this->GetName();}), Namespace(sw_delegate {return this->GetNamespace();}), type(type.type) {
 }
 
-Type::Type() : FullName(pcf_delegate {return this->GetFullName();}),  Name(pcf_delegate {return this->GetName();}), Namespace(pcf_delegate {return this->GetNamespace();}), type(typeid(*this)) {
+Type::Type() : FullName(sw_delegate {return this->GetFullName();}),  Name(sw_delegate {return this->GetName();}), Namespace(sw_delegate {return this->GetNamespace();}), type(typeid(*this)) {
 }
 
-Type::Type(const ::type& type) : FullName(pcf_delegate {return this->GetFullName();}),  Name(pcf_delegate {return this->GetName();}), Namespace(pcf_delegate {return this->GetNamespace();}), type(type) {
+Type::Type(const ::type& type) : FullName(sw_delegate {return this->GetFullName();}),  Name(sw_delegate {return this->GetName();}), Namespace(sw_delegate {return this->GetNamespace();}), type(type) {
 }
 
 Type& Type::operator =(const Type& type) {

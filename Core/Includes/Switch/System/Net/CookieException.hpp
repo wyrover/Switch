@@ -12,7 +12,7 @@ namespace Switch {
     /// The WebRequest and WebResponse classes form the basis of what are called pluggable protocols, an implementation of network services that enables you to develop applications that use Internet resources without worrying about the specific details of the individual protocols.
     namespace Net {
       /// @brief The exception that is thrown when an error is made adding a Cookie to a CookieContainer.
-      class pcf_public CookieException : public FormatException {
+      class sw_public CookieException : public FormatException {
       public:
         /// @brief Create a new instance of class CookieException
         /// @remarks Message is set with the default message associate to the error.
@@ -24,7 +24,7 @@ namespace Switch {
         CookieException(const CookieException& value) : FormatException(value) {}
         
         /// @brief Create a new instance of class CookieException
-        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #pcf_current_information.
+        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
         /// @remarks Message is set with the default message associate to the error.
         CookieException(const CurrentInformation& information) : FormatException(information) {}
         
@@ -34,13 +34,13 @@ namespace Switch {
         
         /// @brief Create a new instance of class CookieException
         /// @param message Message string associate to the error.
-        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #pcf_current_information.
+        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
         CookieException(const System::String& message, const CurrentInformation& information) : FormatException(message, information) {}
         
         /// @brief Create a new instance of class CookieException
         /// @param message Message string associate to the error.
         /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
-        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #pcf_current_information.
+        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
         CookieException(const System::String& message, const System::Exception& innerException, const CurrentInformation& information) : FormatException(message, innerException, information) {}
         
       private:

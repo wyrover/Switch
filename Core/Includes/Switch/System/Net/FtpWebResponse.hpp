@@ -12,14 +12,14 @@ namespace Switch {
     /// @brief The System::Net namespace provides a simple programming interface for many of the protocols used on networks today.
     /// The WebRequest and WebResponse classes form the basis of what are called pluggable protocols, an implementation of network services that enables you to develop applications that use Internet resources without worrying about the specific details of the individual protocols.
     namespace Net {
-      class pcf_public FtpWebResponse : public System::Net::WebResponse {
+      class sw_public FtpWebResponse : public System::Net::WebResponse {
       public:
         Property<System::Net::FtpStatusCode, ReadOnly> StatusCode {
-          pcf_get {return this->GetStatusCode();}
+          sw_get {return this->GetStatusCode();}
         };
         
         Property<string, ReadOnly> StatusDescription {
-          pcf_get {return this->GetStatusDescription();}
+          sw_get {return this->GetStatusDescription();}
         };
         
         WebResponse::WebResponseStream GetResponseStream() override;

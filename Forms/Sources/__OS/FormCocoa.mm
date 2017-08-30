@@ -9,7 +9,7 @@ using namespace System::Windows::Forms;
 using namespace __OS;
 
 namespace {
-  class CocoaApi pcf_static {
+  class CocoaApi sw_static {
   public:
     static NSWindowStyleMask FormToNSWindowStyleMask(const Form& form) {
       constexpr int CP_NOCLOSE_BUTTON = 0x200;

@@ -25,7 +25,7 @@ namespace Switch {
     /// The following example demonstrates how to read data from, and write data to, the standard input and output streams. Note that these streams can be redirected by using the SetIn and SetOut methods.
     /// @include Console.cpp
     /// @include ConsoleOut.cpp
-    class pcf_public Console pcf_static {
+    class sw_public Console sw_static {
     public:
       class StandardInput : public System::IO::TextReader {
       public:

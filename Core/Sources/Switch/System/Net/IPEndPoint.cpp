@@ -25,7 +25,7 @@ IPEndPoint::IPEndPoint(const IPAddress& address, int32 port) {
 }
 
 refptr<EndPoint> IPEndPoint::Create(const SocketAddress& socketAddress) const {
-  refptr<IPEndPoint> endPoint = pcf_new<IPEndPoint>(0, 0);
+  refptr<IPEndPoint> endPoint = sw_new<IPEndPoint>(0, 0);
   
   endPoint->addressFamily = socketAddress.GetAddressFamily();
   endPoint->port = IPAddress::NetworkToHostOrder(BitConverter::ToUInt16(socketAddress.bytes, 2));
@@ -60,7 +60,7 @@ void IPEndPoint::SetAddress(const IPAddress &address) {
 
 void IPEndPoint::SetPort(int32 port) {
   if (port < MinPort || port > MaxPort)
-    throw ArgumentOutOfRangeException(pcf_current_information);
+    throw ArgumentOutOfRangeException(sw_current_information);
   
   this->port = port;
 }

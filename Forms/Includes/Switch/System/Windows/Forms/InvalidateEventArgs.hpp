@@ -10,7 +10,7 @@ namespace Switch {
     namespace Windows {
       namespace Forms {
         /// @brief Provides data for the Invalidated event.
-        class pcf_public InvalidateEventArgs : public EventArgs {
+        class sw_public InvalidateEventArgs : public EventArgs {
         public:
           /// @brief Initializes a new instance of the InvalidateEventArgs class.
           /// @param invalidRect The Rectangle that contains the invalidated window area.

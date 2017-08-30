@@ -21,14 +21,14 @@ namespace Switch {
     class Object;
   }
   
-  template<typename T> System::Type pcf_typeof();
-  template<typename T> System::Type pcf_typeof(const T& value);
+  template<typename T> System::Type sw_typeof();
+  template<typename T> System::Type sw_typeof(const T& value);
   /// @endcond
   
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief Represents type declarations: class types, interface types, array types, value types, enumeration types, type parameters, generic type definitions, and open or closed constructed generic types.
-    class pcf_public Type : public Object {
+    class sw_public Type : public Object {
     public:
       /// @cond
       Type(const Type& type);
@@ -87,8 +87,8 @@ namespace Switch {
       String GetName() const;
       String GetNamespace() const;
       
-      template<typename T> friend Type Switch::pcf_typeof();
-      template<typename T> friend Type Switch::pcf_typeof(const T& value);
+      template<typename T> friend Type Switch::sw_typeof();
+      template<typename T> friend Type Switch::sw_typeof(const T& value);
       friend class Object;
       
       Type();
@@ -99,10 +99,10 @@ namespace Switch {
     };
   }
   
-  /// @brief Used to obtain the type Object for a type. A pcf_typeof expression takes the following form:
+  /// @brief Used to obtain the type Object for a type. A sw_typeof expression takes the following form:
   /// @par Examples
   /// @code
-  /// Type type = pcf_typeof<Int32>();
+  /// Type type = sw_typeof<Int32>();
   /// @endcode
   /// @par Examples
   /// To obtain the run-time type of an expression, you can use the Switch method GetType, as in the following example:
@@ -110,18 +110,18 @@ namespace Switch {
   /// Int32 i = 0;
   /// System::Type type = i.GetType();
   /// @endcode
-  /// @remarks The pcf_typeof operator cannot be overloaded.
+  /// @remarks The sw_typeof operator cannot be overloaded.
   /// @ingroup Switch
   template<typename T>
-  System::Type pcf_typeof() {
+  System::Type sw_typeof() {
     return System::Type(typeid(T));
   }
   
-  /// @brief Used to obtain the type Object for a type. A pcf_typeof expression takes the following form:
+  /// @brief Used to obtain the type Object for a type. A sw_typeof expression takes the following form:
   /// @par Examples
   /// @code
   /// Int32 i = 42;
-  /// type atype& = pcf_typeof(i);
+  /// type atype& = sw_typeof(i);
   /// @endcode
   /// @par Examples
   /// To obtain the run-time type of an expression, you can use the Switch method GetType, as in the following example:
@@ -129,27 +129,27 @@ namespace Switch {
   /// Int32 42 = 0;
   /// System::Type Type = i.GetType();
   /// @endcode
-  /// @remarks The pcf_typeof operator cannot be overloaded.
+  /// @remarks The sw_typeof operator cannot be overloaded.
   /// @see System::Type
   /// @ingroup Switch
   template<typename T>
-  System::Type pcf_typeof(const T& value) {
+  System::Type sw_typeof(const T& value) {
     return System::Type(typeid(value));
   }
   
 #if defined(__APPLE__) || defined(__clang__)
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wkeyword-macro"
-#define typeof pcf_typeof
+#define typeof sw_typeof
 #pragma clang diagnostic pop
 #elif defined(__linux__)
-#define typeof pcf_typeof
+#define typeof sw_typeof
 #else
   template<typename T>
-  System::Type typeof() {return pcf_typeof<T>();}
+  System::Type typeof() {return sw_typeof<T>();}
 
   template<typename T>
-  System::Type typeof(const T& value) {return pcf_typeof(value);}
+  System::Type typeof(const T& value) {return sw_typeof(value);}
 #endif
 }
 

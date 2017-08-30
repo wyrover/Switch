@@ -35,7 +35,7 @@ namespace Switch {
       /// @endcond
       
       /// @brief Represents a writer that can write a sequential series of characters.
-      class pcf_public TextWriter: public Object {
+      class sw_public TextWriter: public Object {
       public:
         /// @brief Provides a TextWriter with no backing store that can be written to, but not read from.
         /// @remarks Use cNull to redirect output to a stream that will not consume any operating system resources.
@@ -44,13 +44,13 @@ namespace Switch {
 
         /// @brief When overridden in a derived class, returns the character encoding in which the output is written.
         Property<Text::Encoding&, ReadOnly> Encoding {
-          pcf_get->Text::Encoding& {return this->GetEncoding();}
+          sw_get->Text::Encoding& {return this->GetEncoding();}
         };
         
         /// @brief Gets or sets the line terminator string used by the current TextWriter.
         Property<const string&> NewLine {
-          pcf_get->const string& {return this->GetNewLine();},
-          pcf_set {this->SetNewLine(value);}
+          sw_get->const string& {return this->GetNewLine();},
+          sw_set {this->SetNewLine(value);}
         };
 
         /// @brief Closes the current writer and releases any system resources associated with the writer.

@@ -14,7 +14,7 @@ namespace Switch {
   namespace System {
     /// @brief Specifies the standard keys on a console.
     /// @see Console
-    struct pcf_public ConsoleKeyInfo : public Object {
+    struct sw_public ConsoleKeyInfo : public Object {
     public:
       /// @brief Create a new instance of ConsoleKeyInfo class.
       /// @remarks This type is not intended to be created by users. Instead, it is returned to the user in response to calling the Console::ReadKey method.
@@ -55,19 +55,19 @@ namespace Switch {
       /// @brief Gets the console key represented by the current ConsoleKeyInfo object.
       /// @param A System::ConsoleKey value that identifies the console key that was pressed
       Property<ConsoleKey, ReadOnly> Key {
-        pcf_get {return this->key;}
+        sw_get {return this->key;}
       };
 
       /// @brief Gets the Unicode character represented by the current ConsoleKeyInfo object.
       /// @param An char32 object that corresponds to the console key represented by the current ConsoleKeyInfo object.
       Property<char32, ReadOnly> KeyChar {
-        pcf_get {return this->keyChar;}
+        sw_get {return this->keyChar;}
       };
 
       /// @brief Gets a bitwise combination of System::ConsoleModifiers values that specifies one or more modifier keys pressed simultaneously with the console key.
       /// @param A bitwise combination of System::ConsoleModifiers values. There is no default value.
       Property<ConsoleModifiers, ReadOnly> Modifiers {
-        pcf_get {return this->modifiers;}
+        sw_get {return this->modifiers;}
       };
 
       /// @brief Determines whether the specified object is equal to the current object.

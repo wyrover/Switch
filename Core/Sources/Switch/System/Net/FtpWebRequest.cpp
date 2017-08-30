@@ -19,12 +19,12 @@ WebRequest::WebRequestStream FtpWebRequest::GetRequestStream() {
   if (GetMethod()==WebRequestMethods::Ftp::UploadFile)
     return WebRequest::GetRequestStream();
 
-  throw InvalidOperationException(pcf_current_information);
+  throw InvalidOperationException(sw_current_information);
 }
 
 void FtpWebRequest::SetUseBinary(bool useBinary) {
   if (Curl::GetOSSupportsWebOperations() == false)
-    throw NotSupportedException(pcf_current_information);
+    throw NotSupportedException(sw_current_information);
 
   this->useBinary = useBinary;
 
@@ -42,7 +42,7 @@ bool FtpWebRequest::GetUseBinary() {
 
 void FtpWebRequest::ProcessMakeDirectory() {
   if (Curl::GetOSSupportsWebOperations() == false)
-    throw NotSupportedException(pcf_current_information);
+    throw NotSupportedException(sw_current_information);
 
   Curl::SetCreateDirectoryIfDirectoryMissing(this->requestHandle);
   this->internalError = Curl::Perform(this->requestHandle);
@@ -50,14 +50,14 @@ void FtpWebRequest::ProcessMakeDirectory() {
 
 void FtpWebRequest::ProcessListDirectory() {
   if (Curl::GetOSSupportsWebOperations() == false)
-    throw NotSupportedException(pcf_current_information);
+    throw NotSupportedException(sw_current_information);
 
   Curl::SetDirectoryListOnly(this->requestHandle, 1L);
 }
 
 void FtpWebRequest::ProcessListDirectoryDetails() {
   if (Curl::GetOSSupportsWebOperations() == false)
-    throw NotSupportedException(pcf_current_information);
+    throw NotSupportedException(sw_current_information);
 }
 
 WebResponse& FtpWebRequest::GetInternalResponse() {

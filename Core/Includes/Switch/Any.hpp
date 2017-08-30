@@ -29,7 +29,7 @@ namespace Switch {
   /// @par Examples
   /// This example show how to use Any:
   /// @include Any.cpp
-  class pcf_public Any : public System::IComparable, public object {
+  class sw_public Any : public System::IComparable, public object {
     template <typename T, typename Bool>
     struct EnumOrOtherToAny {};
     
@@ -110,7 +110,7 @@ namespace Switch {
     template <typename T>
     operator T() const {
       if(!this->HasValue)
-        throw System::InvalidOperationException(pcf_current_information);
+        throw System::InvalidOperationException(sw_current_information);
       return To<T>();
     }
     
@@ -161,16 +161,16 @@ namespace Switch {
     /// @return true if the current Nullable<T> object has a value; false if the current Nullable<T> object has no value.
     /// @remarks If the HasValue property is true, the value of the current Nullable<T> object can be accessed with the Value property. Otherwise, attempting to access its value throws an InvalidOperationException exception.
     Property<bool, ReadOnly> HasValue {
-      pcf_get {return !this->value.IsNull();}
+      sw_get {return !this->value.IsNull();}
     };
     
     /// @brief Gets the value of the current Any object if it has been assigned a valid underlying value.
     /// @return The value of the current Any object if the HasValue property is true. An exception is thrown if the HasValue property is false.
     /// @exception InvalidOperationException The HasValue property is false.
     Property<const object&, ReadOnly> Value {
-      pcf_get->const object& {
+      sw_get->const object& {
         if(!this->HasValue)
-          throw System::InvalidOperationException(pcf_current_information);
+          throw System::InvalidOperationException(sw_current_information);
         return this->value.ToObject();
       }
     };
@@ -185,7 +185,7 @@ namespace Switch {
     template<typename T>
     T& As() {
       if(!this->HasValue)
-        throw System::InvalidOperationException(pcf_current_information);
+        throw System::InvalidOperationException(sw_current_information);
       return as<T>(this->value.ToObject());
     }
     
@@ -199,7 +199,7 @@ namespace Switch {
     template<typename T>
     const T& As() const {
       if(!this->HasValue)
-        throw System::InvalidOperationException(pcf_current_information);
+        throw System::InvalidOperationException(sw_current_information);
       return as<T>(this->value.ToObject());
     }
     

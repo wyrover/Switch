@@ -25,13 +25,13 @@ namespace Switch {
           /// @brief Gets the number of elements contained in the ISet.
           /// @return Int32 The number of elements contained in the ICollection.
           Property<int32, ReadOnly> Count {
-            pcf_get {return this->GetCount();}
+            sw_get {return this->GetCount();}
           };
           
           /// @brief Gets a value indicating whether the ISet is read-only.
           /// @return Boolean true if the ISet is read-only; otherwise; otherwise, false.
           Property<bool, ReadOnly> IsReadOnly {
-            pcf_get {return this->GetIsReadOnly();}
+            sw_get {return this->GetIsReadOnly();}
           };
           
           /// @brief Adds an element to the current set and returns a value to indicate if the element was successfully added.

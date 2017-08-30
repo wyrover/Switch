@@ -51,7 +51,7 @@ namespace Switch {
   /// @brief Represents a null pointer value.
   /// @par Examples
   /// @code
-  /// refptr<Foo> foo = pcf_new<Foo>();
+  /// refptr<Foo> foo = sw_new<Foo>();
   /// ...
   /// foo = null; // release the reference pointer.
   /// @endcode

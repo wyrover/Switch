@@ -25,7 +25,7 @@ namespace Switch {
         /// @note If you want to send connectionless datagrams in synchronous blocking mode, use the UdpClient class.
         /// @note To send and receive data, use the GetStream method to obtain a NetworkStream. Call the Write and Read methods of the NetworkStream
         /// @note to send and receive data with the remote host. Use the Close method to release all resources associated with the TcpClient.
-        class pcf_public TcpClient : public Object {
+        class sw_public TcpClient : public Object {
         public:
           /// @brief Initializes a new instance of the TcpClient class
           /// @remarks This constructor creates a new TcpClient and allows the underlying service provider to assign the most appropriate local IP address and port number. You must first call the Connect method before sending and receiving data.
@@ -65,8 +65,8 @@ namespace Switch {
           /// @brief Gets or sets a value that indicates whether a connection has been made.
           /// @return bool true if the connection has been made; otherwise, false.
           Property<bool> Active {
-            pcf_get {return this->data->active;},
-            pcf_set {this->data->active = value;}
+            sw_get {return this->data->active;},
+            sw_set {this->data->active = value;}
           };
           
           /// @brief Gets the amount of data that has been received from the network and is available to be read.
@@ -77,7 +77,7 @@ namespace Switch {
           /// @remarks The available data is the total amount of data queued in the network buffer for reading. If no data is queued in the network buffer, Available returns 0.
           /// @remarks If the remote host shuts down or closes the connection, Available may throw a SocketException. If you receive a SocketException, use SocketException.ErrorCode to obtain the specific error code.
           Property<int32, ReadOnly> Available {
-            pcf_get {return this->data->clientSocket.Available();}
+            sw_get {return this->data->clientSocket.Available();}
           };
           
           /// @brief Gets or sets the underlying network Socket
@@ -87,8 +87,8 @@ namespace Switch {
           /// @remarks You can also use Client to set the underlying Socket to an existing Socket. This might be useful if you want to take advantage of the simplicity
           /// @remarks of TcpClient using a pre-existing Socket.
           Property<Socket> Client {
-            pcf_get {return this->data->clientSocket;},
-            pcf_set {this->data->clientSocket = value;}
+            sw_get {return this->data->clientSocket;},
+            sw_set {this->data->clientSocket = value;}
           };
           
           /// @brief Gets a value that indicates whether a Socket is connected to a remote host as of the last Send or Receive operation.
@@ -100,7 +100,7 @@ namespace Switch {
           /// @remarks You cannot reliably test the state of the connection because, in the time between the test and a send/receive,
           /// @remarks the connection could have been lost. Your code should assume the socket is connected, and gracefully handle failed transmissions.
           Property<bool, ReadOnly> Connected {
-            pcf_get {return this->data->clientSocket.Connected();}
+            sw_get {return this->data->clientSocket.Connected();}
           };
           
           /// @brief Gets or sets a bool value that specifies whether the TcpClient allows only one client to use a port.
@@ -112,8 +112,8 @@ namespace Switch {
           /// @remarks This property must be set before the underlying socket is bound to a client port. If you call Connect, BeginConnect, TcpClient(IPEndPoint),
           /// @remarks or TcpClient(string, int32), the client port is bound as a side effect of the method, and you cannot subsequently set the ExclusiveAddressUse property
           Property<bool> ExclusiveAddressUse {
-            pcf_get {return this->data->clientSocket.ExclusiveAddressUse();},
-            pcf_set {this->data->clientSocket.ExclusiveAddressUse(value);}
+            sw_get {return this->data->clientSocket.ExclusiveAddressUse();},
+            sw_set {this->data->clientSocket.ExclusiveAddressUse(value);}
           };
 
           /// @brief Gets a value that specifies whether the Socket will delay closing a socket in an attempt to send all pending data.
@@ -134,8 +134,8 @@ namespace Switch {
           /// @remarks When the LingerTime property stored in the LingerState property is set greater than the default IP protocol time-out, the default IP protocol time-out will still apply and virtual.
           /// @note Not available on MacOs/Linux/Android
           Property<LingerOption> LingerState {
-            pcf_get {return this->data->clientSocket.LingerState();},
-            pcf_set {this->data->clientSocket.LingerState(value);}
+            sw_get {return this->data->clientSocket.LingerState();},
+            sw_set {this->data->clientSocket.LingerState(value);}
           };
           
           /// @brief Gets or sets a bool value that specifies whether the stream Socket is using the Nagle algorithm.
@@ -148,8 +148,8 @@ namespace Switch {
           /// @remarks network efficiency versus application requirements.
           /// @note Not available on MacOs/Linux/Android
           Property<bool> NoDelay {
-            pcf_get {return this->data->clientSocket.NoDelay();},
-            pcf_set {this->data->clientSocket.NoDelay(value);}
+            sw_get {return this->data->clientSocket.NoDelay();},
+            sw_set {this->data->clientSocket.NoDelay(value);}
           };
           
           /// @brief Gets or sets the size of the receive buffer.
@@ -160,16 +160,16 @@ namespace Switch {
           /// @remarks Your network buffer should be at least as large as your application buffer to ensure that the desired data will be available when you call the NetworkStream.Read method. Use the ReceiveBufferSize property to set this size. If your application will be receiving bulk data, you should pass the Read method a very large application buffer.
           /// @remarks If the network buffer is smaller than the amount of data you request in the Read method, you will not be able to retrieve the desired amount of data in one read operation. This incurs the overhead of additional calls to the Read method.
           Property<int32> ReceiveBufferSize {
-            pcf_get {return this->data->clientSocket.ReceiveBufferSize();},
-            pcf_set {this->data->clientSocket.ReceiveBufferSize(value);}
+            sw_get {return this->data->clientSocket.ReceiveBufferSize();},
+            sw_set {this->data->clientSocket.ReceiveBufferSize(value);}
           };
           
           /// @brief Gets or sets the amount of time a TcpClient will wait to receive data once a read operation is initiated.
           /// @return int32 The time-out value of the connection in milliseconds. The default value is 0.
           /// @remarks The ReceiveTimeout property determines the amount of time that the Read method will block until it is able to receive data. This time is measured in milliseconds. If the time-out expires before Read successfully completes, TcpClient throws a IOException. There is no time-out by default.
           Property<int32> ReceiveTimeout {
-            pcf_get {return this->data->clientSocket.ReceiveTimeout();},
-            pcf_set {this->data->clientSocket.ReceiveTimeout(value);}
+            sw_get {return this->data->clientSocket.ReceiveTimeout();},
+            sw_set {this->data->clientSocket.ReceiveTimeout(value);}
           };
           
           /// @brief Gets or sets the size of the send buffer.
@@ -178,8 +178,8 @@ namespace Switch {
           /// @remarks Your network buffer should be at least as large as your application buffer to ensure that the desired data will be stored and sent in one operation. Use the SendBufferSize property to set this size. If your application will be sending bulk data, you should pass the Write method a very large application buffer.
           /// @remarks If the network buffer is smaller than the amount of data you provide the Write method, several network send operations will be performed for every call you make to the Write method. You can achieve greater data throughput by ensuring that your network buffer is at least as large as your application buffer.
           Property<int32> SendBufferSize {
-            pcf_get {return this->data->clientSocket.SendBufferSize();},
-            pcf_set {this->data->clientSocket.SendBufferSize(value);}
+            sw_get {return this->data->clientSocket.SendBufferSize();},
+            sw_set {this->data->clientSocket.SendBufferSize(value);}
           };
           
           /// @brief Gets or sets the amount of time a TcpClient will wait for a send operation to complete successfully.
@@ -187,8 +187,8 @@ namespace Switch {
           /// @remarks The SendTimeout property determines the amount of time that the Send method will block until it is able to return successfully. This time is measured in milliseconds..
           /// @remarks After you call the Write method, the underlying Socket returns the number of bytes actually sent to the host. The SendTimeout property determines the amount of time a TcpClient will wait before receiving the number of bytes returned. If the time-out expires before the Send method successfully completes, TcpClient will throw a SocketException. There is no time-out by default.
           Property<int32> SendTimeout {
-            pcf_get {return this->data->clientSocket.SendTimeout();},
-            pcf_set {this->data->clientSocket.SendTimeout(value);}
+            sw_get {return this->data->clientSocket.SendTimeout();},
+            sw_set {this->data->clientSocket.SendTimeout(value);}
           };
           
           /// @brief Disposes this TcpClient instance and requests that the underlying TCP connection be closed.
@@ -246,7 +246,7 @@ namespace Switch {
             Socket clientSocket {AddressFamily::InterNetwork, SocketType::Stream, ProtocolType::Tcp};
             bool active = false;
           };
-          refptr<TcpClientData> data = pcf_new<TcpClientData>();
+          refptr<TcpClientData> data = sw_new<TcpClientData>();
         };
       }
     }

@@ -45,7 +45,7 @@ namespace {
   protected:
     const string& GetCurrent() const override {
       if(this->handle == null)
-        throw System::InvalidOperationException(pcf_current_information);
+        throw System::InvalidOperationException(sw_current_information);
       return this->current;
     }
 

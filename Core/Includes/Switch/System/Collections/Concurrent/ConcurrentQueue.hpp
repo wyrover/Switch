@@ -51,7 +51,7 @@ namespace Switch {
           /// @brief Gets a value that indicates whether the ConcurrentQueue<T> is empty.
           /// @return Boolean true if the ConcurrentQueue<T> is empty; otherwise, false.
           Property<bool, ReadOnly> IsEmpty {
-            pcf_get {
+            sw_get {
               return this->queue.Count == 0;
             }
           };
@@ -74,7 +74,7 @@ namespace Switch {
           /// @param index The zero-based index in array at which copying begins;
           void CopyTo(System::Array<T>& array, int32 index) const override {
             if (index + this->queue.Count > array.Length)
-              throw System::ArgumentOutOfRangeException(pcf_current_information);
+              throw System::ArgumentOutOfRangeException(sw_current_information);
 
             System::Threading::LockGuard lock(this->queue.SyncRoot);
             System::Int32 pos = index;
@@ -156,7 +156,7 @@ namespace Switch {
           protected:
             const T& GetCurrent() const {
               if (this->index < 0 || this->index >= this->array.Length)
-                throw InvalidOperationException(pcf_current_information);
+                throw InvalidOperationException(sw_current_information);
               
               return this->array[this->index];
             }

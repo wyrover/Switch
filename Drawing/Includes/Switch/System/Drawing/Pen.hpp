@@ -29,7 +29,7 @@ namespace Switch {
 
     /// @brief The System::Drawing namespace provides access to GDI+ basic graphics functionality. More advanced functionality is provided in the System::Drawing::Drawing2D, System::Drawing::Imaging, and System::Drawing::Text namespaces.
     namespace Drawing {
-      class pcf_public Pen : public object {
+      class sw_public Pen : public object {
       public:
         Pen() {}
 
@@ -49,22 +49,22 @@ namespace Switch {
 
         Pen(const Brush& brush, float width) : brush(as<System::Drawing::Brush>(brush.Clone())), width(width) { this->Create(); }
 
-        Pen(System::Drawing::Color color) : brush(as<System::Drawing::Brush>(pcf_new<SolidBrush>(color))) { this->Create(); }
+        Pen(System::Drawing::Color color) : brush(as<System::Drawing::Brush>(sw_new<SolidBrush>(color))) { this->Create(); }
 
-        Pen(System::Drawing::Color color, float width) : brush(as<System::Drawing::Brush>(pcf_new<SolidBrush>(color))), width(width) { this->Create(); }
+        Pen(System::Drawing::Color color, float width) : brush(as<System::Drawing::Brush>(sw_new<SolidBrush>(color))), width(width) { this->Create(); }
 
         Property<const System::Drawing::Brush&> Brush{
-          pcf_get->const System::Drawing::Brush& { return this->brush(); },
-          pcf_set {this->brush = as<System::Drawing::Brush>(value.Clone()); }
+          sw_get->const System::Drawing::Brush& { return this->brush(); },
+          sw_set {this->brush = as<System::Drawing::Brush>(value.Clone()); }
         };
 
         Property<System::Drawing::Color, ReadOnly> Color{
-          pcf_get{ return as<SolidBrush>(this->brush)().Color(); }
+          sw_get{ return as<SolidBrush>(this->brush)().Color(); }
         };
 
         Property<System::Drawing::Drawing2D::DashStyle> DashStyle {
-          pcf_get {return this->dashStyle;},
-          pcf_set {
+          sw_get {return this->dashStyle;},
+          sw_set {
             if (this->dashStyle != value) {
               this->dashStyle = value;
               this->Create();
@@ -73,8 +73,8 @@ namespace Switch {
         };
 
         Property<float> Width{
-          pcf_get {return this->width;},
-          pcf_set {this->width = value;}
+          sw_get {return this->width;},
+          sw_set {this->width = value;}
         };
 
       private:
@@ -83,7 +83,7 @@ namespace Switch {
         intptr GetNativePen() const { return this->pen; }
         void Create();
         void Destroy();
-        refptr<System::Drawing::Brush> brush  = as<System::Drawing::Brush>(pcf_new<SolidBrush>(System::Drawing::Color::Black()));
+        refptr<System::Drawing::Brush> brush  = as<System::Drawing::Brush>(sw_new<SolidBrush>(System::Drawing::Color::Black()));
         System::Drawing::Drawing2D::DashStyle dashStyle = System::Drawing::Drawing2D::DashStyle::Solid;
         float width = 1;
         intptr pen = IntPtr::Zero;

@@ -17,7 +17,7 @@ namespace Switch {
     /// The WebRequest and WebResponse classes form the basis of what are called pluggable protocols, an implementation of network services that enables you to develop applications that use Internet resources without worrying about the specific details of the individual protocols.
     namespace Net {
       /// @brief Provides an Internet Protocol (IP) address.
-      class pcf_public IPAddress : public Object {
+      class sw_public IPAddress : public Object {
       public:
         /// @brief Provides an IP address that indicates that the server must listen for client activity on all network interfaces. This field is constant.
         /// @remarks The cAny field is equivalent to 0.0.0.0 in dotted-quad notation
@@ -89,7 +89,7 @@ namespace Switch {
         /// @brief Gets the address family of the IP address.
         /// @return Returns InterNetwork for IPv4 or InterNetworkV6 for IPv6.
         Property<Sockets::AddressFamily, ReadOnly> AddressFamily {
-          pcf_get {return this->GetAddressFamily();}
+          sw_get {return this->GetAddressFamily();}
         };
         
         /// @brief Gets the IPv6 address scope identifier.
@@ -98,26 +98,26 @@ namespace Switch {
         /// @exception SocketException AddressFamily = AddressFamilyInterNetwork
         /// @exception ArgumentOutOfRangeException scopeId < 0 or scopeId > 0x00000000FFFFFFFF.
         Property<int64> ScopeId {
-          pcf_get {return this->GetScopeId();},
-          pcf_set {this->SetScopeId(value);}
+          sw_get {return this->GetScopeId();},
+          sw_set {this->SetScopeId(value);}
         };
 
         /// @brief Gets whether the address is an IPv6 link local address.
         /// @return bool true if the IP address is an IPv6 link local address; otherwise, false.
         Property<bool, ReadOnly> IsIPv6LinkLocal {
-          pcf_get {return this->GetIsIPv6LinkLocal();}
+          sw_get {return this->GetIsIPv6LinkLocal();}
         };
 
         /// @brief Gets whether the address is an IPv6 multicast global address.
         /// @return bool true if the IP address is an IPv6 multicast global address; otherwise, false.
         Property<bool, ReadOnly> IsIPv6Multicast {
-          pcf_get {return this->GetIsIPv6Multicast();}
+          sw_get {return this->GetIsIPv6Multicast();}
         };
         
         /// @brief Gets whether the address is an IPv6 site local address.
         /// @return bool true if the IP address is an IPv6 site local address; otherwise, false.
         Property<bool, ReadOnly> IsIPv6SiteLocal {
-          pcf_get {return this->GetIsIPv6SiteLocal();}
+          sw_get {return this->GetIsIPv6SiteLocal();}
         };
         
         /// @brief Determines whether this instance of IPAddress and a specified object, which must also be a IPAddress object, have the same value.

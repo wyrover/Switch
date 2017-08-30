@@ -15,7 +15,7 @@ namespace Switch {
     namespace IO {
       /// @brief Performs operations on System::string instances that contain file or directory
       /// path information. These operations are performed in a cross-platform manner.
-      class pcf_public Path pcf_static {
+      class sw_public Path sw_static {
       public:
         /// @brief Provides a platform-specific alternate character used to separate directory levels in a path string that reflects a hierarchical file system organization.
         /// @par Examples
@@ -63,7 +63,7 @@ namespace Switch {
         /// @exception ArgumentException path contains one or more of the invalid characters
         static string Combine(const string& path1, const string& path2) {
           if (path1.IndexOfAny(GetInvalidPathChars()) != -1 || path2.IndexOfAny(GetInvalidPathChars()) != -1)
-            throw ArgumentException(pcf_current_information);
+            throw ArgumentException(sw_current_information);
           
           if (string::IsNullOrEmpty(path2))
             return path1;

@@ -11,7 +11,7 @@ namespace Switch {
   namespace System {
     /// @interface IComparable
     /// @brief Defines a generalized comparison method that a value type or class implements to create a type-specific comparison method.
-    class pcf_public IComparable pcf_interface {
+    class sw_public IComparable sw_interface {
     public:
       /// @brief Compares the current instance with another object of the same type.
       /// @param obj An object to compare with this instance.

@@ -31,7 +31,7 @@ Array<System::Drawing::FontFamily> DrawingApi::FontFamily::GetInstalledFontFamil
 }
 
 System::Drawing::FontFamily DrawingApi::FontFamily::GetFontFamilyFromName(const string& name) {
-  throw ArgumentException(pcf_current_information);
+  throw ArgumentException(sw_current_information);
 }
 
 string DrawingApi::FontFamily::GetName(intptr handle) {

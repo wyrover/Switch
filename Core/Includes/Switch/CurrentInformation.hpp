@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains Switch::CurrentInformation class and #pcf_current_information keyword.
+/// @brief Contains Switch::CurrentInformation class and #sw_current_information keyword.
 #pragma once
 
 #include "Types.hpp"
@@ -10,14 +10,14 @@
 namespace Switch {
   /// @brief Current information class is used to store current file, current line and current function information.
   /// @par Examples
-  /// Use #pcf_current_information to get current information.
+  /// Use #sw_current_information to get current information.
   /// @code
-  /// CurrentInformation currentInformation = pcf_current_information;
+  /// CurrentInformation currentInformation = sw_current_information;
   /// Console::WriteLine("File = {0}", currentInformation.FileName);
   /// Console::WriteLine("Line = {0}", currentInformation.Line);
   /// Console::WriteLine("Function = {0}", currentInformation.FunctionName);
   /// @endcode
-  class pcf_public CurrentInformation : public System::Object {
+  class sw_public CurrentInformation : public System::Object {
   public:
     CurrentInformation() {}
     CurrentInformation(const System::String& fileName, int32 line) : fileName(fileName), line(line) {}
@@ -35,15 +35,15 @@ namespace Switch {
     
     /// Gets the FileName
     Property<const System::String&, ReadOnly> FileName {
-      pcf_get->const System::String& {return this->fileName;}
+      sw_get->const System::String& {return this->fileName;}
     };
     
     Property<int32, ReadOnly> Line {
-      pcf_get {return this->line;}
+      sw_get {return this->line;}
     };
     
     Property<const System::String&, ReadOnly> FunctionName {
-      pcf_get->const System::String& {return this->functionName;}
+      sw_get->const System::String& {return this->functionName;}
     };
     
     System::String ToString() const override {
@@ -64,13 +64,13 @@ namespace Switch {
   /// @return CurrentInformation Current informations.
   /// @par Examples
   /// @code
-  /// CurrentInformation currentInformation = pcf_current_information;
+  /// CurrentInformation currentInformation = sw_current_information;
   /// Console::WriteLine("File = {0}", currentInformation.FileName);
   /// Console::WriteLine("Line = {0}", currentInformation.Line);
   /// Console::WriteLine("Function = {0}", currentInformation.FunctionName);
   /// @endcode
   /// @ingroup Switch
-  #define pcf_current_information CurrentInformation(__FILE__, __LINE__, __func__)
+  #define sw_current_information CurrentInformation(__FILE__, __LINE__, __func__)
 }
 
 using namespace Switch;

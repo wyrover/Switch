@@ -11,16 +11,16 @@
 namespace Switch {
   /// @brief The TUnit namespace contains a unit test framework.
   /// @par Examples
-  /// This example how to use TestFixture class, Assert class and #pcf_test method:
+  /// This example how to use TestFixture class, Assert class and #sw_test method:
   /// @include Assert.cpp
   /// @par Examples
-  /// This example how to use TestFixture class, Expect class and #pcf_test method:
+  /// This example how to use TestFixture class, Expect class and #sw_test method:
   /// @include Expect.cpp
   namespace TUnit {
     /// @brief The base class that all unit tests inherit from.
     /// This example how to use TestFixture class:
     /// @include Assert.cpp
-    class pcf_public TestFixture : public testing::Test {
+    class sw_public TestFixture : public testing::Test {
     protected:
       /// @cond
       TestFixture() {}
@@ -39,10 +39,10 @@ namespace Switch {
     /// @param fixture The class inerited from TestFixture class that contains the unit test method to execute
     /// @param method The method that contains the unit test to execute
     /// @par Examples
-    /// This example how to use TestFixture class, Expect class and #pcf_test method:
+    /// This example how to use TestFixture class, Expect class and #sw_test method:
     /// @include Expect.cpp
     /// @ingroup Switch
-    #define pcf_test(fixture, method) \
+    #define sw_test(fixture, method) \
     GTEST_TEST_(fixture, method, fixture, ::testing::internal::GetTypeId<fixture>()) { \
       try { \
         method(); \
@@ -55,10 +55,10 @@ namespace Switch {
     /// @param fixture The class inerited from TestFixture class that contains the unit test method to execute
     /// @param method The method that contains the unit test to execute
     /// @par Examples
-    /// This example how to use TestFixture class, Expect class and #pcf_test method:
+    /// This example how to use TestFixture class, Expect class and #sw_test method:
     /// @include Expect.cpp
     /// @ingroup Switch
-    #define pcf_ignore_test(fixture, method) \
+    #define sw_ignore_test(fixture, method) \
     GTEST_TEST_(fixture, DISABLED_##method, fixture, ::testing::internal::GetTypeId<fixture>()) { \
       try { \
         method(); \

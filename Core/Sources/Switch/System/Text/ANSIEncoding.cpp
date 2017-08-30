@@ -37,18 +37,18 @@ int32 ANSIEncoding::GetByteCount(char32) const {
 }
 
 int32 ANSIEncoding::GetCharCount(const byte bytes[], int32 bytesSize, int32 index, int32 count) const {
-  if (bytes == null && bytesSize != 0) throw ArgumentNullException(pcf_current_information);
+  if (bytes == null && bytesSize != 0) throw ArgumentNullException(sw_current_information);
   ValidateGCC(bytesSize, index, count);
   return count;
 }
 
 int32 ANSIEncoding::GetMaxByteCount(int32 charCount) const {
-  if (charCount < 0) throw ArgumentOutOfRangeException(pcf_current_information);
+  if (charCount < 0) throw ArgumentOutOfRangeException(sw_current_information);
   return charCount;
 }
 
 int32 ANSIEncoding::GetMaxCharCount(int32 byteCount) const {
-  if (byteCount < 0) throw ArgumentOutOfRangeException(pcf_current_information);
+  if (byteCount < 0) throw ArgumentOutOfRangeException(sw_current_information);
   return byteCount;
 }
 
@@ -68,19 +68,19 @@ CodePage437Encoding::CodePage437Encoding() : ANSIEncoding(437) {
 }
 
 refptr<Encoding::Decoder> CodePage437Encoding::CreateDecoder() const {
-  return pcf_new<Decoder>();
+  return sw_new<Decoder>();
 }
 
 refptr<Encoding::Encoder> CodePage437Encoding::CreateEncoder() const {
-  return pcf_new<Encoder>();
+  return sw_new<Encoder>();
 }
 
 int32 CodePage437Encoding::GetBytes(char32 c, byte bytes[], int32 bytesLength, int32 index) const {
-  if (bytes == null && bytesLength > 0) throw ArgumentNullException(pcf_current_information);
-  if (index < 0) throw ArgumentOutOfRangeException(pcf_current_information);
+  if (bytes == null && bytesLength > 0) throw ArgumentNullException(sw_current_information);
+  if (index < 0) throw ArgumentOutOfRangeException(sw_current_information);
   
   int32 count = GetByteCount(c);
-  if (index + count > bytesLength) throw ArgumentOutOfRangeException(pcf_current_information);
+  if (index + count > bytesLength) throw ArgumentOutOfRangeException(sw_current_information);
   
   Encoder encoder;
   encoder.Encode(c, &bytes[index]);
@@ -95,19 +95,19 @@ CodePage28591Encoding::CodePage28591Encoding() : ANSIEncoding(28591) {
 }
 
 refptr<Encoding::Decoder> CodePage28591Encoding::CreateDecoder() const {
-  return pcf_new<Decoder>();
+  return sw_new<Decoder>();
 }
 
 refptr<Encoding::Encoder> CodePage28591Encoding::CreateEncoder() const {
-  return pcf_new<Encoder>();
+  return sw_new<Encoder>();
 }
 
 int32 CodePage28591Encoding::GetBytes(char32 c, byte bytes[], int32 bytesLength, int32 index) const {
-  if (bytes == null && bytesLength > 0) throw ArgumentNullException(pcf_current_information);
-  if (index < 0) throw ArgumentOutOfRangeException(pcf_current_information);
+  if (bytes == null && bytesLength > 0) throw ArgumentNullException(sw_current_information);
+  if (index < 0) throw ArgumentOutOfRangeException(sw_current_information);
   
   int32 count = GetByteCount(c);
-  if (index + count > bytesLength) throw ArgumentOutOfRangeException(pcf_current_information);
+  if (index + count > bytesLength) throw ArgumentOutOfRangeException(sw_current_information);
   
   Encoder encoder;
   encoder.Encode(c, &bytes[index]);
@@ -123,19 +123,19 @@ CodePage28592Encoding::CodePage28592Encoding() : ANSIEncoding(28592) {
 }
 
 refptr<Encoding::Decoder> CodePage28592Encoding::CreateDecoder() const {
-  return pcf_new<Decoder>();
+  return sw_new<Decoder>();
 }
 
 refptr<Encoding::Encoder> CodePage28592Encoding::CreateEncoder() const {
-  return pcf_new<Encoder>();
+  return sw_new<Encoder>();
 }
 
 int32 CodePage28592Encoding::GetBytes(char32 c, byte bytes[], int32 bytesLength, int32 index) const {
-  if (bytes == null && bytesLength > 0) throw ArgumentNullException(pcf_current_information);
-  if (index < 0) throw ArgumentOutOfRangeException(pcf_current_information);
+  if (bytes == null && bytesLength > 0) throw ArgumentNullException(sw_current_information);
+  if (index < 0) throw ArgumentOutOfRangeException(sw_current_information);
   
   int32 count = GetByteCount(c);
-  if (index + count > bytesLength) throw ArgumentOutOfRangeException(pcf_current_information);
+  if (index + count > bytesLength) throw ArgumentOutOfRangeException(sw_current_information);
   
   Encoder encoder;
   encoder.Encode(c, &bytes[index]);

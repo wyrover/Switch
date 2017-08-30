@@ -45,7 +45,7 @@ IPAddress::IPAddress() {
 
 IPAddress::IPAddress(int64 address) {
   if (address < 0 || address > 0x0000000FFFFFFFFLL)
-    throw ArgumentOutOfRangeException(pcf_current_information);
+    throw ArgumentOutOfRangeException(sw_current_information);
 
   this->address = Convert::ToUInt32(address);
 }
@@ -67,7 +67,7 @@ IPAddress& IPAddress::operator =(const IPAddress& address) {
 
 IPAddress::IPAddress(const Array<byte>& address) {
   if (address.Length != 4 && address.Length != 16)
-    throw ArgumentException(pcf_current_information);
+    throw ArgumentException(sw_current_information);
   
   if (address.Length == 4) {
     this->family = Sockets::AddressFamily::InterNetwork;
@@ -82,7 +82,7 @@ IPAddress::IPAddress(const Array<byte>& address) {
 
 IPAddress::IPAddress(const std::vector<byte>& address) {
   if (address.size() != 4 && address.size() != 16)
-    throw ArgumentException(pcf_current_information);
+    throw ArgumentException(sw_current_information);
   
   if (address.size() == 4) {
     this->family = Sockets::AddressFamily::InterNetwork;
@@ -98,10 +98,10 @@ IPAddress::IPAddress(const std::vector<byte>& address) {
 
 IPAddress::IPAddress(const Array<byte>& address, int64 scopeId) : family(Sockets::AddressFamily::InterNetworkV6) {
   if (address.Length != 16)
-    throw ArgumentException(pcf_current_information);
+    throw ArgumentException(sw_current_information);
 
   if (scopeId < 0 || scopeId > 0x00000000FFFFFFFFLL)
-    throw ArgumentOutOfRangeException(pcf_current_information);
+    throw ArgumentOutOfRangeException(sw_current_information);
 
   this->scopeId = Convert::ToUInt32(scopeId);
   Buffer::BlockCopy(address, 0, this->numbers, 0, 16);
@@ -163,7 +163,7 @@ int32 IPAddress::GetHashCode() const {
 
 int64 IPAddress::GetScopeId() const {
   if (this->family == Sockets::AddressFamily::InterNetwork)
-    throw SocketException(pcf_current_information);
+    throw SocketException(sw_current_information);
 
   return this->scopeId;
 }
@@ -274,7 +274,7 @@ IPAddress IPAddress::Parse(const string& str) {
   string workIpString = ((str[0] == '[' && str[str.Length()-1] == ']') ? str.Substring(1, str.Length()-2) : str);
   
   // Parse IP v4 Address
-  pcf_using(Array<String> addressParts = workIpString.Split('.')) {
+  sw_using(Array<String> addressParts = workIpString.Split('.')) {
     if (addressParts.Length == 4) {
       Array<byte> addresses(4);
       for (int32 index = 0; index < addressParts.Length; index++)
@@ -291,7 +291,7 @@ IPAddress IPAddress::Parse(const string& str) {
   };
   
   // Parse IP v6 Address
-  pcf_using(Array<String> addressParts = workIpString.Split(':')) {
+  sw_using(Array<String> addressParts = workIpString.Split(':')) {
     if (addressParts.Length == 8) {
       for (int32 index = 0; index < addressParts.Length; index++)
         value.numbers[index] = UInt16::Parse(addressParts[index]);
@@ -299,15 +299,15 @@ IPAddress IPAddress::Parse(const string& str) {
     }
   }
   
-  throw ArgumentException(pcf_current_information);
+  throw ArgumentException(sw_current_information);
 }
 
 void IPAddress::SetScopeId(int64 scopeId) {
   if (this->family == Sockets::AddressFamily::InterNetwork)
-    throw SocketException(pcf_current_information);
+    throw SocketException(sw_current_information);
 
   if (scopeId < 0 || scopeId > 0xFFFFFFFF)
-    throw ArgumentOutOfRangeException(pcf_current_information);
+    throw ArgumentOutOfRangeException(sw_current_information);
 
   this->scopeId = Convert::ToUInt32(scopeId);
 }

@@ -108,17 +108,17 @@ bool Int64::ToBoolean(const IFormatProvider&) const {
 
 byte Int64::ToByte(const IFormatProvider&) const {
   if (this->value < Byte::MinValue)
-    throw OverflowException(pcf_current_information);
+    throw OverflowException(sw_current_information);
   
   if (this->value > Byte::MaxValue)
-    throw OverflowException(pcf_current_information);
+    throw OverflowException(sw_current_information);
   
   return (sbyte)this->value;
 }
 
 char32 Int64::ToChar(const IFormatProvider&) const {
   if (this->value < 0 || this->value > static_cast<int64>(Char::MaxValue))
-    throw OverflowException(pcf_current_information);
+    throw OverflowException(sw_current_information);
   
   return (char)this->value;
 }
@@ -133,20 +133,20 @@ double Int64::ToDouble(const IFormatProvider&) const {
 
 int16 Int64::ToInt16(const IFormatProvider&) const {
   if (this->value < Int16::MinValue)
-    throw OverflowException(pcf_current_information);
+    throw OverflowException(sw_current_information);
   
   if (this->value > Int16::MaxValue)
-    throw OverflowException(pcf_current_information);
+    throw OverflowException(sw_current_information);
   
   return (int16)this->value;
 }
 
 int32 Int64::ToInt32(const IFormatProvider&) const {
   if (this->value < Int32::MinValue)
-    throw OverflowException(pcf_current_information);
+    throw OverflowException(sw_current_information);
   
   if (this->value > Int32::MaxValue)
-    throw OverflowException(pcf_current_information);
+    throw OverflowException(sw_current_information);
   
   return (int32)this->value;
 }
@@ -157,40 +157,40 @@ int64 Int64::ToInt64(const IFormatProvider&) const {
 
 uint16 Int64::ToUInt16(const IFormatProvider&) const {
   if (this->value < UInt16::MinValue)
-    throw OverflowException(pcf_current_information);
+    throw OverflowException(sw_current_information);
   
   if (this->value > UInt16::MaxValue)
-    throw OverflowException(pcf_current_information);
+    throw OverflowException(sw_current_information);
   
   return (uint16)this->value;
 }
 
 uint32 Int64::ToUInt32(const IFormatProvider&) const {
   if (this->value < 0)
-    throw OverflowException(pcf_current_information);
+    throw OverflowException(sw_current_information);
   
   if (this->value > UInt32::MaxValue)
-    throw OverflowException(pcf_current_information);
+    throw OverflowException(sw_current_information);
   
   return (uint32)this->value;
 }
 
 uint64 Int64::ToUInt64(const IFormatProvider&) const {
   if (this->value < 0)
-    throw OverflowException(pcf_current_information);
+    throw OverflowException(sw_current_information);
   
   if ((uint64)this->value > UInt64::MaxValue)
-    throw OverflowException(pcf_current_information);
+    throw OverflowException(sw_current_information);
   
   return (uint64)this->value;
 }
 
 sbyte Int64::ToSByte(const IFormatProvider&) const {
   if (this->value < SByte::MinValue)
-    throw OverflowException(pcf_current_information);
+    throw OverflowException(sw_current_information);
   
   if (this->value > SByte::MaxValue)
-    throw OverflowException(pcf_current_information);
+    throw OverflowException(sw_current_information);
   
   return (sbyte)this->value;
 }
@@ -229,7 +229,7 @@ Int64& Int64::operator *=(const Int64& value)  {
 
 Int64& Int64::operator /=(const Int64& value) {
   if (value == 0)
-    throw DivideByZeroException(pcf_current_information);
+    throw DivideByZeroException(sw_current_information);
 
   this->value /= value.value;
   return *this;
@@ -237,7 +237,7 @@ Int64& Int64::operator /=(const Int64& value) {
 
 Int64& Int64::operator %=(const Int64& value) {
   if (value == 0)
-    throw DivideByZeroException(pcf_current_information);
+    throw DivideByZeroException(sw_current_information);
 
   this->value %= value;
   return *this;

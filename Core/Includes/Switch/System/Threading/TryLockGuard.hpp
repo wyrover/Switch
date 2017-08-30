@@ -12,7 +12,7 @@
 namespace Switch {
   namespace System {
     namespace Threading {
-      class pcf_public TryLockGuard : public object {
+      class sw_public TryLockGuard : public object {
       public:
         explicit TryLockGuard(const object& lock);
         TryLockGuard(const object& lock, int32 timeout);
@@ -21,7 +21,7 @@ namespace Switch {
         ~TryLockGuard();
         
         Property<bool, ReadOnly> Result {
-          pcf_get {return this->result;}
+          sw_get {return this->result;}
         };
         
       private:

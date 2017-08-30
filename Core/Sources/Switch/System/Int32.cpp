@@ -107,17 +107,17 @@ bool Int32::ToBoolean(const IFormatProvider&) const {
 
 byte Int32::ToByte(const IFormatProvider&) const {
   if (this->value < Byte::MinValue)
-    throw OverflowException(pcf_current_information);
+    throw OverflowException(sw_current_information);
   
   if (this->value > Byte::MaxValue)
-    throw OverflowException(pcf_current_information);
+    throw OverflowException(sw_current_information);
   
   return (byte)this->value;
 }
 
 char32 Int32::ToChar(const IFormatProvider&) const {
   if (this->value < 0 || this->value > static_cast<int32>(Char::MaxValue))
-    throw OverflowException(pcf_current_information);
+    throw OverflowException(sw_current_information);
   
   return char32(this->value);
 }
@@ -132,10 +132,10 @@ double Int32::ToDouble(const IFormatProvider&) const {
 
 int16 Int32::ToInt16(const IFormatProvider&) const {
   if (this->value < Int16::MinValue)
-    throw OverflowException(pcf_current_information);
+    throw OverflowException(sw_current_information);
   
   if (this->value > Int16::MaxValue)
-    throw OverflowException(pcf_current_information);
+    throw OverflowException(sw_current_information);
   
   return (int16)this->value;
 }
@@ -150,34 +150,34 @@ int64 Int32::ToInt64(const IFormatProvider&) const {
 
 uint16 Int32::ToUInt16(const IFormatProvider&) const {
   if (this->value < 0)
-    throw OverflowException(pcf_current_information);
+    throw OverflowException(sw_current_information);
   
   if (this->value > UInt16::MaxValue)
-    throw OverflowException(pcf_current_information);
+    throw OverflowException(sw_current_information);
   
   return (uint16)this->value;
 }
 
 uint32 Int32::ToUInt32(const IFormatProvider&) const {
   if (this->value < 0)
-    throw OverflowException(pcf_current_information);
+    throw OverflowException(sw_current_information);
 
   return (uint32)this->value;
 }
 
 uint64 Int32::ToUInt64(const IFormatProvider&) const {
   if (this->value < 0)
-    throw OverflowException(pcf_current_information);
+    throw OverflowException(sw_current_information);
 
   return (uint64)this->value;
 }
 
 sbyte Int32::ToSByte(const IFormatProvider&) const {
   if (this->value < SByte::MinValue)
-    throw OverflowException(pcf_current_information);
+    throw OverflowException(sw_current_information);
   
   if (this->value > SByte::MaxValue)
-    throw OverflowException(pcf_current_information);
+    throw OverflowException(sw_current_information);
   
   return (sbyte)this->value;
 }
@@ -216,7 +216,7 @@ Int32& Int32::operator *=(const Int32& value) {
 
 Int32& Int32::operator /=(const Int32& value) {
   if (value == 0)
-    throw DivideByZeroException(pcf_current_information);
+    throw DivideByZeroException(sw_current_information);
 
   this->value /= value.value;
   return *this;
@@ -224,7 +224,7 @@ Int32& Int32::operator /=(const Int32& value) {
 
 Int32& Int32::operator %=(const Int32& value) {
   if (value == 0)
-    throw DivideByZeroException(pcf_current_information);
+    throw DivideByZeroException(sw_current_information);
 
   this->value %= value;
   return *this;

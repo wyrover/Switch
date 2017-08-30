@@ -5,7 +5,7 @@
 typedef HWND__* HWND;
 
 namespace __OS {
-  class WindowProcedure pcf_static {
+  class WindowProcedure sw_static {
   public:
     static System::Collections::Generic::Dictionary<int64, intptr(__stdcall*)(HWND, uint32, uintptr, int64)> DefWindowProcs;
 

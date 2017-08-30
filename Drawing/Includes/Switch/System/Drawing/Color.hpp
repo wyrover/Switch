@@ -16,7 +16,7 @@ namespace Switch {
     /// @brief The System::Drawing namespace provides access to GDI+ basic graphics functionality. More advanced functionality is provided in the System::Drawing::Drawing2D, System::Drawing::Imaging, and System::Drawing::Text namespaces.
     namespace Drawing {
       /// @brief Represents an ARGB (alpha, red, green, blue) color.
-      class pcf_public Color : public object, public IComparable {
+      class sw_public Color : public object, public IComparable {
       public:
         /// @brief Gets a system-defined color that has an ARGB value of 0x00FFFFFF. This field is constant.
         static Property<Color, ReadOnly> Transparent;
@@ -457,58 +457,58 @@ namespace Switch {
         /// @return byte The alpha component value of this Color.
         /// @remarks The color of each pixel is represented as a 32-bit number: 8 bits each for alpha, red, green, and blue (ARGB). The alpha component specifies the transparency of the color: 0 is fully transparent, and 255 is fully opaque. Likewise, an A value of 255 represents an opaque color. An A value from 1 through 254 represents a semitransparent color. The color becomes more opaque as A approaches 255.
         Property<byte, ReadOnly> A {
-          pcf_get {return byte((this->argb & 0xFF000000)>>24);}
+          sw_get {return byte((this->argb & 0xFF000000)>>24);}
         };
 
         /// @brief Gets the blue component value of this Color class.
         /// @return byte The blue component value of this Color.
         /// @remarks The color of each pixel is represented as a 32-bit number: 8 bits each for alpha, red, green, and blue (ARGB). The alpha component specifies the transparency of the color: 0 is fully transparent, and 255 is fully opaque. Likewise, an A value of 255 represents an opaque color. An A value from 1 through 254 represents a semitransparent color. The color becomes more opaque as A approaches 255.
         Property<byte, ReadOnly> B {
-          pcf_get {return byte(this->argb & 0x000000FF);}
+          sw_get {return byte(this->argb & 0x000000FF);}
         };
 
         /// @brief Gets the green component value of this Color class.
         /// @return byte The green component value of this Color.
         /// @remarks The color of each pixel is represented as a 32-bit number: 8 bits each for alpha, red, green, and blue (ARGB). The alpha component specifies the transparency of the color: 0 is fully transparent, and 255 is fully opaque. Likewise, an A value of 255 represents an opaque color. An A value from 1 through 254 represents a semitransparent color. The color becomes more opaque as A approaches 255.
         Property<byte, ReadOnly> G {
-          pcf_get {return byte((this->argb & 0x0000FF00)>>8);}
+          sw_get {return byte((this->argb & 0x0000FF00)>>8);}
         };
 
         /// @brief Gets the red component value of this Color class.
         /// @return byte The red component value of this Color.
         /// @remarks The color of each pixel is represented as a 32-bit number: 8 bits each for alpha, red, green, and blue (ARGB). The alpha component specifies the transparency of the color: 0 is fully transparent, and 255 is fully opaque. Likewise, an A value of 255 represents an opaque color. An A value from 1 through 254 represents a semitransparent color. The color becomes more opaque as A approaches 255.
         Property<byte, ReadOnly> R {
-          pcf_get {return byte((this->argb & 0x00FF0000)>>16);}
+          sw_get {return byte((this->argb & 0x00FF0000)>>16);}
         };
 
         /// @brief Gets the name of this Color.
         /// @return string The name of this Color.
         Property<string, ReadOnly> Name {
-          pcf_get {return this->GetName();}
+          sw_get {return this->GetName();}
         };
         
         /// @brief Specifies whether this Color class is uninitialized.
         /// @return bool Returns true if this color is uninitialized; otherwise, false.
         Property<bool, ReadOnly> IsEmpty {
-          pcf_get {return this->argb == 0 && this->knownColor == (KnownColor)0;}
+          sw_get {return this->argb == 0 && this->knownColor == (KnownColor)0;}
         };
 
         /// @brief Gets a value indicating whether this Color structure is a predefined color. Predefined colors are represented by the elements of the KnownColor enumeration.
         /// @return bool Returns true if this Color was created from a predefined color by using either the FromName method or the FromKnownColor method; otherwise, false.
         Property<bool, ReadOnly> IsKnownColor {
-          pcf_get {return this->knownColor != (KnownColor)0;}
+          sw_get {return this->knownColor != (KnownColor)0;}
         };
 
         /// @brief Gets a value indicating whether this Color structure is a named color or a member of the KnownColor enumeration.
         /// @return bool Returns true if this Color was created by using either the FromName method or the FromKnownColor method; otherwise, false.
         Property<bool, ReadOnly> IsNamedColor {
-          pcf_get {return this->knownColor != (KnownColor)0;}
+          sw_get {return this->knownColor != (KnownColor)0;}
         };
 
         /// @brief Gets a value indicating whether this Color structure is a system color. A system color is a color that is used in a Windows display element. System colors are represented by elements of the KnownColor enumeration.
         /// @return bool Returns true if this Color was created from a system color by using either the FromName method or the FromKnownColor method; otherwise, false.
         Property<bool, ReadOnly> IsSystemColor {
-          pcf_get {return this->GetIsSystemColor();}
+          sw_get {return this->GetIsSystemColor();}
         };
         
         /// @brief Creates a Color class from a 32-bit ARGB value.

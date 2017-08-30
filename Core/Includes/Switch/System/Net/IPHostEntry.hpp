@@ -15,7 +15,7 @@ namespace Switch {
     /// The WebRequest and WebResponse classes form the basis of what are called pluggable protocols, an implementation of network services that enables you to develop applications that use Internet resources without worrying about the specific details of the individual protocols.
     namespace Net {
       /// @brief Provides a container class for Internet host address information.
-      class pcf_public IPHostEntry : public Object {
+      class sw_public IPHostEntry : public Object {
       public:
         /// @brief Initializes a new instance of the IPHostEntry.
         IPHostEntry() {}
@@ -32,19 +32,19 @@ namespace Switch {
         /// @brief Get List of IP addresses that are associated with a host.
         /// @return Array<IPAddress> An IPAddress array on List of IP addresses that are associated with a host.
         Property<const Array<IPAddress>&, ReadOnly> AddressList {
-          pcf_get->const Array<IPAddress>& {return this->GetAddressList();}
+          sw_get->const Array<IPAddress>& {return this->GetAddressList();}
         };
         
         /// @brief Get List of aliases that are associated with a host.
         /// @return Array<string> A string array on List of aliases that are associated with a host.
         Property<const Array<string>&, ReadOnly> Aliases {
-          pcf_get->const Array<string>& {return this->GetAliases();}
+          sw_get->const Array<string>& {return this->GetAliases();}
         };
 
         /// @brief Get the DNS name of the host.
         /// @return string A string represent the DNS name of the host.
         Property<const string&, ReadOnly> HostName {
-          pcf_get->const string& {return this->GetHostName();}
+          sw_get->const string& {return this->GetHostName();}
         };
  
       private:

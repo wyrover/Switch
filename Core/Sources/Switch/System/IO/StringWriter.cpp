@@ -31,7 +31,7 @@ void StringWriter::Close() {
 
 void StringWriter::Write(const String& value) {
   if (this->data->close)
-    throw ObjectClosedException(pcf_current_information);
+    throw ObjectClosedException(sw_current_information);
   this->data->str += value;
   
 }

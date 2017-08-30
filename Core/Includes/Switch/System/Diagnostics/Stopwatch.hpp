@@ -20,7 +20,7 @@ namespace Switch {
       /// @par Examples
       /// The following example demonstrates how to use the Stopwatch class to determine the execution time for an application.
       /// @include Stopwatch.cpp
-      class pcf_public Stopwatch : public Object {
+      class sw_public Stopwatch : public Object {
       public:
         /// @brief Gets the frequency of the timer as the number of ticks per second. This field is read-only.
         /// @return The frequency of the timer as the number of ticks per second.
@@ -56,7 +56,7 @@ namespace Switch {
         /// @remarks You can query the properties Elapsed, ElapsedMilliseconds, and ElapsedTicks while the Stopwatch instance is running or stopped. The elapsed time properties steadily increase while the Stopwatch is running; they remain constant when the instance is stopped.
         /// @remarks By default, the elapsed time value of a Stopwatch instance equals the total of all measured time intervals. Each call to Start begins counting at the cumulative elapsed time; each call to Stop ends the current interval measurement and freezes the cumulative elapsed time value. Use the Reset method to clear the cumulative elapsed time in an existing Stopwatch instance.
         Property<TimeSpan, ReadOnly> Elapsed {
-          pcf_get {return TimeSpan::FromTicks(ElapsedTicks);}
+          sw_get {return TimeSpan::FromTicks(ElapsedTicks);}
         };
 
         /// @brief Gets the total elapsed time measured by the current instance, in milliseconds.
@@ -65,7 +65,7 @@ namespace Switch {
         /// @remarks You can query the properties Elapsed, ElapsedMilliseconds, and ElapsedTicks while the Stopwatch instance is running or stopped. The elapsed time properties steadily increase while the Stopwatch is running; they remain constant when the instance is stopped.
         /// @remarks By default, the elapsed time value of a Stopwatch instance equals the total of all measured time intervals. Each call to Start begins counting at the cumulative elapsed time; each call to Stop ends the current interval measurement and freezes the cumulative elapsed time value. Use the Reset method to clear the cumulative elapsed time in an existing Stopwatch instance.
         Property<int64, ReadOnly> ElapsedMilliseconds {
-          pcf_get {return this->GetElapsedTicks() / TimeSpan::TicksPerMillisecond;}
+          sw_get {return this->GetElapsedTicks() / TimeSpan::TicksPerMillisecond;}
         };
 
         /// @brief Gets the total elapsed time measured by the current instance, in timer ticks.
@@ -74,14 +74,14 @@ namespace Switch {
         /// @remarks You can query the properties Elapsed, ElapsedMilliseconds, and ElapsedTicks while the Stopwatch instance is running or stopped. The elapsed time properties steadily increase while the Stopwatch is running; they remain constant when the instance is stopped.
         /// @remarks By default, the elapsed time value of a Stopwatch instance equals the total of all measured time intervals. Each call to Start begins counting at the cumulative elapsed time; each call to Stop ends the current interval measurement and freezes the cumulative elapsed time value. Use the Reset method to clear the cumulative elapsed time in an existing Stopwatch instance.
         Property<int64, ReadOnly> ElapsedTicks {
-          pcf_get {return this->GetElapsedTicks();}
+          sw_get {return this->GetElapsedTicks();}
         };
         
         /// @brief Gets a value indicating whether the Stopwatch timer is running.
         /// @return true if the Stopwatch instance is currently running and measuring elapsed time for an interval; otherwise, false.
         /// @remarks A Stopwatch instance begins running with a call to Start or StartNew. The instance stops running with a call to Stop or Reset.
         Property<bool, ReadOnly> IsRunning {
-          pcf_get {return this->running;}
+          sw_get {return this->running;}
         };
 
         /// @brief Gets the current number of ticks in the timer mechanism.
