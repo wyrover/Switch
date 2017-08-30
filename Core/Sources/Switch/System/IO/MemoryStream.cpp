@@ -1,5 +1,5 @@
-#include "../../../../Includes/Pcf/System/IO/MemoryStream.hpp"
-#include "../../../../Includes/Pcf/System/Convert.hpp"
+#include "../../../../Includes/Switch/System/IO/MemoryStream.hpp"
+#include "../../../../Includes/Switch/System/Convert.hpp"
 
 using namespace System;
 using namespace System::IO;

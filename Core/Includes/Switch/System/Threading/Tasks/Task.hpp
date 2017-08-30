@@ -1,11 +1,11 @@
 /// @file
-/// @brief Contains Pcf::System::Threading::Tasks::Task <> class.
+/// @brief Contains Switch::System::Threading::Tasks::Task <> class.
 #pragma once
 
 #include "TaskTResult.hpp"
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The System::Threading namespace provides classes and interfaces that enable multithreaded programming. In addition to classes for synchronizing thread activities and access to data ( Mutex, Monitor, Interlocked, AutoResetEvent, and so on), this namespace includes a ThreadPool class that allows you to use a pool of system-supplied threads, and a Timer class that executes callback methods on thread pool threads.
@@ -525,7 +525,7 @@ namespace Pcf {
 #include "TaskFactory.hpp"
 
 /// @cond
-namespace Pcf { namespace System { namespace Threading { namespace Tasks {
+namespace Switch { namespace System { namespace Threading { namespace Tasks {
   template<typename TResult>
   Property<Nullable<int32>, ReadOnly> Task<TResult>::CurrentId {
     [] {
@@ -544,4 +544,4 @@ namespace Pcf { namespace System { namespace Threading { namespace Tasks {
 }}}}
 /// @endcond
 
-using namespace Pcf;
+using namespace Switch;

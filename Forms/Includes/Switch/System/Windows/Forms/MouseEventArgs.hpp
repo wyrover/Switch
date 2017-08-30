@@ -1,13 +1,13 @@
 /// @file
-/// @brief Contains Pcf::System::Windows::Forms::MouseEventArgs class.
+/// @brief Contains Switch::System::Windows::Forms::MouseEventArgs class.
 #pragma once
 
-#include <Pcf/System/EventArgs.hpp>
-#include <Pcf/System/Drawing/Point.hpp>
+#include <Switch/System/EventArgs.hpp>
+#include <Switch/System/Drawing/Point.hpp>
 
 #include "MouseButtons.hpp"
 
-namespace Pcf {
+namespace Switch {
   namespace System {
     namespace Windows {
       namespace Forms {

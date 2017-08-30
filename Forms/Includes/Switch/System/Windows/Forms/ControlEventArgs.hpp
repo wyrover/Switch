@@ -1,12 +1,12 @@
 /// @file
-/// @brief Contains Pcf::System::Windows::Forms::ControlEventArgs class.
+/// @brief Contains Switch::System::Windows::Forms::ControlEventArgs class.
 #pragma once
 
-#include <Pcf/System/EventArgs.hpp>
+#include <Switch/System/EventArgs.hpp>
 
 #include "UICues.hpp"
 
-namespace Pcf {
+namespace Switch {
   namespace System {
     namespace Windows {
       namespace Forms {

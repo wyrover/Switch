@@ -1,14 +1,14 @@
-#include <Pcf/Lock.hpp>
-#include <Pcf/System/Diagnostics/Stopwatch.hpp>
-#include <Pcf/TUnit/Assert.hpp>
-#include <Pcf/TUnit/TestFixture.hpp>
+#include <Switch/Lock.hpp>
+#include <Switch/System/Diagnostics/Stopwatch.hpp>
+#include <Switch/TUnit/Assert.hpp>
+#include <Switch/TUnit/TestFixture.hpp>
 
 using namespace System;
 using namespace System::Threading;
 using namespace System::Diagnostics;
 using namespace TUnit;
 
-namespace PcfUnitTests {
+namespace SwitchUnitTests {
   class LockGuardTest : public TestFixture {
   protected:
     void SingleLock() {

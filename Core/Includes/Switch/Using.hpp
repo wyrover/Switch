@@ -2,8 +2,8 @@
 /// @brief Contains #pcf_using keyword.
 #pragma once
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The specified expression is cleared automaticaly when the scope is ended.
   /// @par Examples
   /// @code
@@ -12,10 +12,10 @@ namespace Pcf {
   ///   Console::WriteLine(sr->ReadToEnd());
   /// }
   /// @endcode
-  /// @ingroup Pcf
+  /// @ingroup Switch
   #define pcf_using(expression)\
   for (bool __pcf_using__ = true; __pcf_using__; __pcf_using__ = false)\
     for (expression; __pcf_using__; __pcf_using__ = false)
 }
 
-using namespace Pcf;
+using namespace Switch;

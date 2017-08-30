@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains Pcf::System::Net::Sockets::NetworkStream class.
+/// @brief Contains Switch::System::Net::Sockets::NetworkStream class.
 #pragma once
 
 #include "../../../Types.hpp"
@@ -9,8 +9,8 @@
 #include "../../NotImplementedException.hpp"
 #include "Socket.hpp"
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The System::Net namespace provides a simple programming interface for many of the protocols used on networks today. The WebRequest and WebResponse classes form the basis of what are called pluggable protocols, an implementation of network services that enables you to develop applications that use Internet resources without worrying about the specific details of the individual protocols.
@@ -154,4 +154,4 @@ namespace Pcf {
   }
 }
 
-using namespace Pcf;
+using namespace Switch;

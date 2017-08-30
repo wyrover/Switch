@@ -1,8 +1,8 @@
-#include "../../../../../Includes/Pcf/System/ArgumentNullException.hpp"
-#include "../../../../../Includes/Pcf/System/ObjectClosedException.hpp"
-#include "../../../../../Includes/Pcf/System/Net/Sockets/NetworkStream.hpp"
-#include "../../../../../Includes/Pcf/System/Net/Sockets/SocketException.hpp"
-#include "../../../../../Includes/Pcf/System/IO/IOException.hpp"
+#include "../../../../../Includes/Switch/System/ArgumentNullException.hpp"
+#include "../../../../../Includes/Switch/System/ObjectClosedException.hpp"
+#include "../../../../../Includes/Switch/System/Net/Sockets/NetworkStream.hpp"
+#include "../../../../../Includes/Switch/System/Net/Sockets/SocketException.hpp"
+#include "../../../../../Includes/Switch/System/IO/IOException.hpp"
 
 using namespace System;
 using namespace System::IO;

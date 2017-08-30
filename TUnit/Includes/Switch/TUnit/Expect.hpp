@@ -1,19 +1,19 @@
 /// @file
-/// @brief Contains Pcf::TUnit::Expect class.
+/// @brief Contains Switch::TUnit::Expect class.
 #pragma once
 
 #include "AssertionException.hpp"
 #include "AssertionResult.hpp"
 #include "Is.hpp"
-#include <Pcf/System/BitConverter.hpp>
-#include <Pcf/System/Console.hpp>
-#include <Pcf/System/Environment.hpp>
-#include <Pcf/System/Object.hpp>
-#include <Pcf/System/String.hpp>
-#include <Pcf/System/SystemException.hpp>
+#include <Switch/System/BitConverter.hpp>
+#include <Switch/System/Console.hpp>
+#include <Switch/System/Environment.hpp>
+#include <Switch/System/Object.hpp>
+#include <Switch/System/String.hpp>
+#include <Switch/System/SystemException.hpp>
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The TUnit namespace contains a unit test framework.
   /// @par Examples
   /// This example how to use TestFixture class, Assert class and #pcf_test method:
@@ -22,7 +22,7 @@ namespace Pcf {
   /// This example how to use TestFixture class, Expect class and #pcf_test method:
   /// @include Expect.cpp
   namespace TUnit {
-    /// @brief The Expect class contains a collection of static methods that implement the most common assertions used in Pcf::TUnit.
+    /// @brief The Expect class contains a collection of static methods that implement the most common assertions used in Switch::TUnit.
     /// @par Examples
     /// This example show how to used some methods :
     /// @include Expect.cpp
@@ -365,7 +365,7 @@ namespace Pcf {
         }
       }
       
-      /// @brief The Equals method throws an Pcf::TUnit::AssertionException. This is done to make sure there is no mistake by calling this function.
+      /// @brief The Equals method throws an Switch::TUnit::AssertionException. This is done to make sure there is no mistake by calling this function.
       static inline bool Equals(const Object&, const Object&) { throw AssertionException(pcf_current_information); }
       
       /// @brief Show a message. This is used by the other Expectt functions.
@@ -1991,7 +1991,7 @@ namespace Pcf {
       template<typename TPointer>
       static inline void Null(const refptr<TPointer>& pointer, const string& message, const CurrentInformation& currentInformation) {IsNull(pointer, message, currentInformation);}
       
-      /// @brief The ReferenceEquals method throws an Pcf::TUnit::AssertionException. This is done to make sure there is no mistake by calling this function.
+      /// @brief The ReferenceEquals method throws an Switch::TUnit::AssertionException. This is done to make sure there is no mistake by calling this function.
       static inline bool ReferenceEquals(const Object&, const Object&) { throw AssertionException(pcf_current_information); }
       
       /// @brief Generates a success with a generic message. This is used by the other Expectt functions.
@@ -2285,4 +2285,4 @@ namespace Pcf {
   }
 }
 
-using namespace Pcf;
+using namespace Switch;

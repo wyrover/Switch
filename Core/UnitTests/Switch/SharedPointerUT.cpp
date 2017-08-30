@@ -1,6 +1,6 @@
-#include <Pcf/RefPtr.hpp>
-#include <Pcf/TUnit/Assert.hpp>
-#include <Pcf/TUnit/TestFixture.hpp>
+#include <Switch/RefPtr.hpp>
+#include <Switch/TUnit/Assert.hpp>
+#include <Switch/TUnit/TestFixture.hpp>
 
 using namespace System;
 using namespace TUnit;
@@ -498,7 +498,7 @@ namespace {
   }
   
   TEST(Sp, Equality) {
-    Pcf::refptr<std::string> s1 = new std::string("string 1");
+    Switch::refptr<std::string> s1 = new std::string("string 1");
   }
   
   TEST(Sp, CopyCast) {

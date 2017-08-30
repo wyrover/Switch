@@ -1,11 +1,11 @@
 /// @file
-/// @brief Contains Pcf::System::TypeInitializationException exception.
+/// @brief Contains Switch::System::TypeInitializationException exception.
 #pragma once
 
 #include "SystemException.hpp"
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The exception that is thrown as a wrapper around the exception thrown by the class initializer.
@@ -35,5 +35,5 @@ namespace Pcf {
   }
 }
 
-using namespace Pcf;
+using namespace Switch;
 

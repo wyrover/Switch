@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains Pcf::System::Action class.
+/// @brief Contains Switch::System::Action class.
 #pragma once
 
 #include <cstddef>
@@ -7,8 +7,8 @@
 #include "../Types.hpp"
 #include "Delegate.hpp"
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief Encapsulates a method that has 0 to 16 parameters and does not return a value.
@@ -32,4 +32,4 @@ namespace Pcf {
   }
 }
 
-using namespace Pcf;
+using namespace Switch;

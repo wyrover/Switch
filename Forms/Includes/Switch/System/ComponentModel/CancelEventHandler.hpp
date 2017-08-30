@@ -1,12 +1,12 @@
 /// @file
-/// @brief Contains Pcf::System::ComponentModel::CancelEventHandler event handler.
+/// @brief Contains Switch::System::ComponentModel::CancelEventHandler event handler.
 #pragma once
 
-#include <Pcf/System/EventHandler.hpp>
+#include <Switch/System/EventHandler.hpp>
 
 #include "CancelEventArgs.hpp"
 
-namespace Pcf {
+namespace Switch {
   namespace System {
     namespace ComponentModel {
       using CancelEventHandler = GenericEventHandler<CancelEventArgs&>;

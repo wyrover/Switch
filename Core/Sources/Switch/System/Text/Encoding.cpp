@@ -1,9 +1,9 @@
-#include "../../../../Includes/Pcf/System/Text/Encoding.hpp"
-#include "../../../../Includes/Pcf/System/Text/ANSIEncoding.hpp"
-#include "../../../../Includes/Pcf/System/Text/ASCIIEncoding.hpp"
-#include "../../../../Includes/Pcf/System/Text/UnicodeEncoding.hpp"
-#include "../../../../Includes/Pcf/System/Text/UTF32Encoding.hpp"
-#include "../../../../Includes/Pcf/System/Text/UTF8Encoding.hpp"
+#include "../../../../Includes/Switch/System/Text/Encoding.hpp"
+#include "../../../../Includes/Switch/System/Text/ANSIEncoding.hpp"
+#include "../../../../Includes/Switch/System/Text/ASCIIEncoding.hpp"
+#include "../../../../Includes/Switch/System/Text/UnicodeEncoding.hpp"
+#include "../../../../Includes/Switch/System/Text/UTF32Encoding.hpp"
+#include "../../../../Includes/Switch/System/Text/UTF8Encoding.hpp"
 #include "../ArrayAlgorithms.hpp"
 
 using namespace System;

@@ -1,11 +1,11 @@
 /// @file
-/// @brief Contains Pcf::System::Threading::RegisteredWaitHandle class.
+/// @brief Contains Switch::System::Threading::RegisteredWaitHandle class.
 #pragma once
 
 #include "../Object.hpp"
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The System::Threading namespace provides classes and interfaces that enable multithreaded programming.
@@ -44,4 +44,4 @@ namespace Pcf {
   }
 }
 
-using namespace Pcf;
+using namespace Switch;

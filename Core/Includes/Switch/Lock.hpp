@@ -5,7 +5,7 @@
 #include "System/Threading/LockGuard.hpp"
 #include "Using.hpp"
 
-namespace Pcf {
+namespace Switch {
   /// @brief The pcf_lock keyword marks a statement block as a critical section by obtaining the mutual-exclusion lock for a given object, executing a statement, and then releasing the lock. The following example includes a lock statement.
   /// @code
   /// class Account : public object {
@@ -36,7 +36,7 @@ namespace Pcf {
   /// @par Examples
   /// The following sample shows a simple use of threads without locking in C++.
   /// @code
-  /// #include <Pcf/Pcf>
+  /// #include <Switch/Switch>
   ///
   /// using namespace System;
   /// using namespace System::Threading;
@@ -61,9 +61,9 @@ namespace Pcf {
   /// @par Examples
   /// The following sample uses threads and pcf_lock. As long as the lock statement is present, the statement block is a critical section and balance will never become a negative number.
   /// @include Lock.cpp
-  /// @ingroup Pcf
+  /// @ingroup Switch
   #define pcf_lock(object)\
   pcf_using (System::Threading::LockGuard __pcf_lock_guard__(object))
 }
 
-using namespace Pcf;
+using namespace Switch;

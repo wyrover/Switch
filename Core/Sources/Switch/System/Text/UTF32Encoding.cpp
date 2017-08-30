@@ -1,4 +1,4 @@
-#include "../../../../Includes/Pcf/System/Text/UTF32Encoding.hpp"
+#include "../../../../Includes/Switch/System/Text/UTF32Encoding.hpp"
 #include "../../../__OS/CoreApi.hpp"
 
 using namespace System;

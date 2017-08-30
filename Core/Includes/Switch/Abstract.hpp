@@ -4,8 +4,8 @@
 
 #include "System/Object.hpp"
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief Represent an abstract class.
   struct pcf_public Abstract : public System::Object {
     ~Abstract() override = 0;
@@ -18,7 +18,7 @@ namespace Pcf {
   /// @brief This keyword is used to represents an abstract class.
   /// @par Examples
   /// @code
-  /// #include <Pcf/Pcf>
+  /// #include <Switch/Switch>
   ///
   /// using namespace System;
   ///
@@ -69,9 +69,9 @@ namespace Pcf {
   ///
   /// pcf_startup (TestReader::Program)
   /// @endcode
-  /// @ingroup Pcf
+  /// @ingroup Switch
   #define pcf_abstract\
   : public Abstract
 }
 
-using namespace Pcf;
+using namespace Switch;

@@ -1,8 +1,8 @@
-#include "../../../../Includes/Pcf/System/Net/FtpWebResponse.hpp"
-#include "../../../../Includes/Pcf/System/Convert.hpp"
-#include "../../../../Includes/Pcf/System/Collections/Generic/Dictionary.hpp"
-#include "../../../../Includes/Pcf/System/Net/WebRequest.hpp"
-#include "../../../../Includes/Pcf/System/Net/WebRequestMethods.hpp"
+#include "../../../../Includes/Switch/System/Net/FtpWebResponse.hpp"
+#include "../../../../Includes/Switch/System/Convert.hpp"
+#include "../../../../Includes/Switch/System/Collections/Generic/Dictionary.hpp"
+#include "../../../../Includes/Switch/System/Net/WebRequest.hpp"
+#include "../../../../Includes/Switch/System/Net/WebRequestMethods.hpp"
 
 using namespace System;
 using namespace System::Collections::Generic;

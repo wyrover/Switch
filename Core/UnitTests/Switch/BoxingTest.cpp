@@ -1,11 +1,11 @@
-#include <Pcf/Boxing.hpp>
-#include <Pcf/TUnit/Assert.hpp>
-#include <Pcf/TUnit/TestFixture.hpp>
+#include <Switch/Boxing.hpp>
+#include <Switch/TUnit/Assert.hpp>
+#include <Switch/TUnit/TestFixture.hpp>
 
 using namespace System;
 using namespace TUnit;
 
-namespace PcfUnitTests {
+namespace SwitchUnitTests {
   class BoxTest : public TestFixture {
   protected:
     void BoxingBoolean() {

@@ -1,10 +1,10 @@
 /// @file
-/// @brief Contains Pcf::System::Windows::Forms::MethodInvoker delegate.
+/// @brief Contains Switch::System::Windows::Forms::MethodInvoker delegate.
 #pragma once
 
-#include <Pcf/System/Delegate.hpp>
+#include <Switch/System/Delegate.hpp>
 
-namespace Pcf {
+namespace Switch {
   namespace System {
     namespace Windows {
       namespace Forms {

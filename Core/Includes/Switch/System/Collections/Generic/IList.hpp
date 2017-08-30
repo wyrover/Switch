@@ -1,11 +1,11 @@
 /// @file
-/// @brief Contains Pcf::System::Collections::Generic::IList <T> class.
+/// @brief Contains Switch::System::Collections::Generic::IList <T> class.
 #pragma once
 
 #include "ICollection.hpp"
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The System::Collections namespace contains interfaces and classes that define various collections of objects, such as lists, queues, bit arrays, hash tables and dictionaries.
@@ -63,4 +63,4 @@ namespace Pcf {
   }
 }
 
-using namespace Pcf;
+using namespace Switch;

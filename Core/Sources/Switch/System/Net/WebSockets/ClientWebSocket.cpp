@@ -1,6 +1,6 @@
 #include <easywsclient/easywsclient.hpp>
-#include "../../../../../Includes/Pcf/System/Net/WebSockets/ClientWebSocket.hpp"
-#include "../../../../../Includes/Pcf/System/Threading/Thread.hpp"
+#include "../../../../../Includes/Switch/System/Net/WebSockets/ClientWebSocket.hpp"
+#include "../../../../../Includes/Switch/System/Threading/Thread.hpp"
 
 using namespace System;
 using namespace System::Net::WebSockets;

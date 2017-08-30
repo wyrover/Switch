@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains Pcf::System::Convert class.
+/// @brief Contains Switch::System::Convert class.
 #pragma once
 
 #include "../NullPtr.hpp"
@@ -26,8 +26,8 @@
 #include "UInt32.hpp"
 #include "UInt64.hpp"
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @cond
   class Any;
   /// @endcond
@@ -3453,4 +3453,4 @@ namespace Pcf {
 
 #include "../LiteralOperatorConverter.hpp"
 
-using namespace Pcf;
+using namespace Switch;

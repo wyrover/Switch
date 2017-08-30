@@ -1,6 +1,6 @@
-#include "../../../../Includes/Pcf/System/IO/TextReader.hpp"
-#include "../../../../Includes/Pcf/System/Convert.hpp"
-#include "../../../../Includes/Pcf/System/Text/Encoding.hpp"
+#include "../../../../Includes/Switch/System/IO/TextReader.hpp"
+#include "../../../../Includes/Switch/System/Convert.hpp"
+#include "../../../../Includes/Switch/System/Text/Encoding.hpp"
 
 using namespace System;
 using namespace System::IO;

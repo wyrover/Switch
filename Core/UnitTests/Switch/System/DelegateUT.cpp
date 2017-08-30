@@ -1,11 +1,11 @@
-#include <Pcf/System/Delegate.hpp>
-#include <Pcf/System/ConsoleKey.hpp>
-#include <Pcf/System/ConsoleColor.hpp>
-#include <Pcf/System/ConsoleModifiers.hpp>
-#include <Pcf/System/ConsoleKey.hpp>
-#include <Pcf/System/EventArgs.hpp>
-#include <Pcf/TUnit/Assert.hpp>
-#include <Pcf/TUnit/TestFixture.hpp>
+#include <Switch/System/Delegate.hpp>
+#include <Switch/System/ConsoleKey.hpp>
+#include <Switch/System/ConsoleColor.hpp>
+#include <Switch/System/ConsoleModifiers.hpp>
+#include <Switch/System/ConsoleKey.hpp>
+#include <Switch/System/EventArgs.hpp>
+#include <Switch/TUnit/Assert.hpp>
+#include <Switch/TUnit/TestFixture.hpp>
 
 using namespace System;
 using namespace TUnit;

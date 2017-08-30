@@ -1,11 +1,11 @@
 /// @file
-/// @brief Contains Pcf::TUnit::AssertionException exception.
+/// @brief Contains Switch::TUnit::AssertionException exception.
 #pragma once
 
-#include <Pcf/System/SystemException.hpp>
+#include <Switch/System/SystemException.hpp>
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The TUnit namespace contains a unit test framework.
   /// @par Examples
   /// This example how to use TestFixture class, Assert class and #pcf_test method:
@@ -52,4 +52,4 @@ namespace Pcf {
   }
 }
 
-using namespace Pcf;
+using namespace Switch;

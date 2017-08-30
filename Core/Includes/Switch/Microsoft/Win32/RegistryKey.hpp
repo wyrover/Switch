@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains Pcf::Microsoft::Win32::RegistryKey class.
+/// @brief Contains Switch::Microsoft::Win32::RegistryKey class.
 #pragma once
 
 #include "../../System/Object.hpp"
@@ -13,7 +13,7 @@
 #include "RegistryKeyPermissionCheck.hpp"
 #include "RegistryValueKind.hpp"
 
-namespace Pcf {
+namespace Switch {
   /// @brief The Microsoft namespace provide Microsoft specific classes.
   namespace Microsoft {
     namespace Win32 {
@@ -75,7 +75,7 @@ namespace Pcf {
         /// @exception ArgumentNullException subKey is null.
         /// @exception UnauthorizedAccessException The RegistryKey cannot be written to; for example, it was ! opened as a writable key , || the user does ! have the necessary access rights.
         /// @exception IOException The nesting level exceeds 510. -||- A system error occurred, such as deletion of the key, || an attempt to create a key in the LocalMachine root.
-        RegistryKey CreateSubKey(const System::String& subKey) { return this->CreateSubKey(subKey, Pcf::Microsoft::Win32::RegistryKeyPermissionCheck(Pcf::Microsoft::Win32::RegistryKeyPermissionCheck::ReadWriteSubTree)); }
+        RegistryKey CreateSubKey(const System::String& subKey) { return this->CreateSubKey(subKey, Switch::Microsoft::Win32::RegistryKeyPermissionCheck(Switch::Microsoft::Win32::RegistryKeyPermissionCheck::ReadWriteSubTree)); }
 
         /// @brief Creates a new subkey || opens an existing subkey with the specified access.
         /// @param subKey TThe name || path of the subkey to create || open. This System::String is ! case-sensitive.
@@ -180,7 +180,7 @@ namespace Pcf {
 
         template<typename T>
         const object& GetValue(const System::String& name, const T& defaultValue) const {
-          return this->GetValue(name, Pcf::Box(defaultValue), true);
+          return this->GetValue(name, Switch::Box(defaultValue), true);
         }
 
         RegistryValueKind GetValueKind(const System::String& name) const  {
@@ -226,14 +226,14 @@ namespace Pcf {
         void SetValue(const System::String& name, T value) {
           if (this->permission != RegistryKeyPermissionCheck::ReadWriteSubTree)
             throw System::UnauthorizedAccessException(pcf_current_information);
-          if (is<System::Int32>(Pcf::Box(value)))
-            this->values[name.ToLower()] = RegistryKeyValue(name, Pcf::Box(value), Pcf::Microsoft::Win32::RegistryValueKind::DWord);
-          else if (is<System::Array<System::String>>(Pcf::Box(value)))
-            this->values[name.ToLower()] = RegistryKeyValue(name, Pcf::Box(value), Pcf::Microsoft::Win32::RegistryValueKind::MultiString);
-          else if (is<System::Array<byte>>(Pcf::Box(value)))
-            this->values[name.ToLower()] = RegistryKeyValue(name, Pcf::Box(value), Pcf::Microsoft::Win32::RegistryValueKind::Binary);
+          if (is<System::Int32>(Switch::Box(value)))
+            this->values[name.ToLower()] = RegistryKeyValue(name, Switch::Box(value), Switch::Microsoft::Win32::RegistryValueKind::DWord);
+          else if (is<System::Array<System::String>>(Switch::Box(value)))
+            this->values[name.ToLower()] = RegistryKeyValue(name, Switch::Box(value), Switch::Microsoft::Win32::RegistryValueKind::MultiString);
+          else if (is<System::Array<byte>>(Switch::Box(value)))
+            this->values[name.ToLower()] = RegistryKeyValue(name, Switch::Box(value), Switch::Microsoft::Win32::RegistryValueKind::Binary);
           else
-            this->values[name.ToLower()] = RegistryKeyValue(name, Pcf::Box(value).ToString(), Pcf::Microsoft::Win32::RegistryValueKind::String);
+            this->values[name.ToLower()] = RegistryKeyValue(name, Switch::Box(value).ToString(), Switch::Microsoft::Win32::RegistryValueKind::String);
           Flush();
         }
 
@@ -242,15 +242,15 @@ namespace Pcf {
         /// @param value The data to be stored.
         /// @param valueKind The registry data type to use when storing the data.
         template<typename T>
-        void SetValue(const System::String& name, T value, Pcf::Microsoft::Win32::RegistryValueKind valueKind) {
+        void SetValue(const System::String& name, T value, Switch::Microsoft::Win32::RegistryValueKind valueKind) {
           if (this->permission != RegistryKeyPermissionCheck::ReadWriteSubTree)
             throw System::UnauthorizedAccessException(pcf_current_information);
           switch (valueKind) {
-            case RegistryValueKind::Binary: this->values[name.ToLower()] = RegistryKeyValue(name, Pcf::Box(value), valueKind); break;
-            case RegistryValueKind::MultiString: this->values[name.ToLower()] = RegistryKeyValue(name, Pcf::Box(value), valueKind); break;
-            case RegistryValueKind::DWord: this->values[name.ToLower()] = RegistryKeyValue(name, Pcf::Box(System::Convert::ToInt32(value)), valueKind); break;
-            case RegistryValueKind::QWord: this->values[name.ToLower()] = RegistryKeyValue(name, Pcf::Box(System::Convert::ToInt64(value)), valueKind); break;
-            default: this->values[name.ToLower()] = RegistryKeyValue(name, Pcf::Box(value).ToString(), valueKind); break;
+            case RegistryValueKind::Binary: this->values[name.ToLower()] = RegistryKeyValue(name, Switch::Box(value), valueKind); break;
+            case RegistryValueKind::MultiString: this->values[name.ToLower()] = RegistryKeyValue(name, Switch::Box(value), valueKind); break;
+            case RegistryValueKind::DWord: this->values[name.ToLower()] = RegistryKeyValue(name, Switch::Box(System::Convert::ToInt32(value)), valueKind); break;
+            case RegistryValueKind::QWord: this->values[name.ToLower()] = RegistryKeyValue(name, Switch::Box(System::Convert::ToInt64(value)), valueKind); break;
+            default: this->values[name.ToLower()] = RegistryKeyValue(name, Switch::Box(value).ToString(), valueKind); break;
           }
           Flush();
         }

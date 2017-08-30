@@ -1,11 +1,11 @@
-#include <Pcf/System/Enum.hpp>
-#include <Pcf/TUnit/Assert.hpp>
-#include <Pcf/TUnit/TestFixture.hpp>
+#include <Switch/System/Enum.hpp>
+#include <Switch/TUnit/Assert.hpp>
+#include <Switch/TUnit/TestFixture.hpp>
 
 using namespace System;
 using namespace TUnit;
 
-namespace PcfUnitTests {
+namespace SwitchUnitTests {
   enum class Pet {
     None = 0x00,
     Dog = 0x01,
@@ -75,36 +75,36 @@ namespace PcfUnitTests {
 
 /// @cond
 template<>
-class EnumToStrings<PcfUnitTests::Pet> {
+class EnumToStrings<SwitchUnitTests::Pet> {
 public:
   void operator ()(System::Collections::Generic::SortedDictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)PcfUnitTests::Pet::None, "None"}, {(int64)PcfUnitTests::Pet::Dog, "Dog"}, {(int64)PcfUnitTests::Pet::Cat, "Cat"}, {(int64)PcfUnitTests::Pet::Bird, "Bird"}};
+    values = {{(int64)SwitchUnitTests::Pet::None, "None"}, {(int64)SwitchUnitTests::Pet::Dog, "Dog"}, {(int64)SwitchUnitTests::Pet::Cat, "Cat"}, {(int64)SwitchUnitTests::Pet::Bird, "Bird"}};
     flags = false;
   }
 };
 
 template<>
-class EnumToStrings<PcfUnitTests::Number> {
+class EnumToStrings<SwitchUnitTests::Number> {
 public:
   void operator ()(System::Collections::Generic::SortedDictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)PcfUnitTests::Number::Zero, "Zero"}, {(int64)PcfUnitTests::Number::One, "One"}, {(int64)PcfUnitTests::Number::Two, "Two"}, {(int64)PcfUnitTests::Number::Three, "Three"}, {(int64)PcfUnitTests::Number::Four, "Four"}, {(int64)PcfUnitTests::Number::Five, "Five"}, {(int64)PcfUnitTests::Number::Six, "Six"}, {(int64)PcfUnitTests::Number::Seven, "Seven"}, {(int64)PcfUnitTests::Number::Eight, "Eight"}, {(int64)PcfUnitTests::Number::Nine, "Nine"}};
+    values = {{(int64)SwitchUnitTests::Number::Zero, "Zero"}, {(int64)SwitchUnitTests::Number::One, "One"}, {(int64)SwitchUnitTests::Number::Two, "Two"}, {(int64)SwitchUnitTests::Number::Three, "Three"}, {(int64)SwitchUnitTests::Number::Four, "Four"}, {(int64)SwitchUnitTests::Number::Five, "Five"}, {(int64)SwitchUnitTests::Number::Six, "Six"}, {(int64)SwitchUnitTests::Number::Seven, "Seven"}, {(int64)SwitchUnitTests::Number::Eight, "Eight"}, {(int64)SwitchUnitTests::Number::Nine, "Nine"}};
     flags = false;
   }
 };
 
-template <> class AddFlagOperators<PcfUnitTests::Letter> : public TrueType {};
+template <> class AddFlagOperators<SwitchUnitTests::Letter> : public TrueType {};
 
 template<>
-class EnumToStrings<PcfUnitTests::Letter> {
+class EnumToStrings<SwitchUnitTests::Letter> {
 public:
   void operator ()(System::Collections::Generic::SortedDictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)PcfUnitTests::Letter::None, "None"}, {(int64)PcfUnitTests::Letter::A, "A"}, {(int64)PcfUnitTests::Letter::B, "B"}, {(int64)PcfUnitTests::Letter::C, "C"}, {(int64)PcfUnitTests::Letter::D, "D"}, {(int64)PcfUnitTests::Letter::E, "E"}, {(int64)PcfUnitTests::Letter::F, "F"}, {(int64)PcfUnitTests::Letter::G, "G"}, {(int64)PcfUnitTests::Letter::H, "H"}, {(int64)PcfUnitTests::Letter::I, "I"}, {(int64)PcfUnitTests::Letter::J, "J"}, {(int64)PcfUnitTests::Letter::K, "K"}, {(int64)PcfUnitTests::Letter::L, "L"}, {(int64)PcfUnitTests::Letter::M, "M"}, {(int64)PcfUnitTests::Letter::N, "N"}, {(int64)PcfUnitTests::Letter::O, "O"}, {(int64)PcfUnitTests::Letter::P, "P"}, {(int64)PcfUnitTests::Letter::Q, "Q"}, {(int64)PcfUnitTests::Letter::R, "R"}, {(int64)PcfUnitTests::Letter::S, "S"}, {(int64)PcfUnitTests::Letter::T, "T"}, {(int64)PcfUnitTests::Letter::U, "U"}, {(int64)PcfUnitTests::Letter::V, "V"}, {(int64)PcfUnitTests::Letter::W, "W"}, {(int64)PcfUnitTests::Letter::X, "X"}, {(int64)PcfUnitTests::Letter::Y, "Y"}, {(int64)PcfUnitTests::Letter::Z, "Z"}};
+    values = {{(int64)SwitchUnitTests::Letter::None, "None"}, {(int64)SwitchUnitTests::Letter::A, "A"}, {(int64)SwitchUnitTests::Letter::B, "B"}, {(int64)SwitchUnitTests::Letter::C, "C"}, {(int64)SwitchUnitTests::Letter::D, "D"}, {(int64)SwitchUnitTests::Letter::E, "E"}, {(int64)SwitchUnitTests::Letter::F, "F"}, {(int64)SwitchUnitTests::Letter::G, "G"}, {(int64)SwitchUnitTests::Letter::H, "H"}, {(int64)SwitchUnitTests::Letter::I, "I"}, {(int64)SwitchUnitTests::Letter::J, "J"}, {(int64)SwitchUnitTests::Letter::K, "K"}, {(int64)SwitchUnitTests::Letter::L, "L"}, {(int64)SwitchUnitTests::Letter::M, "M"}, {(int64)SwitchUnitTests::Letter::N, "N"}, {(int64)SwitchUnitTests::Letter::O, "O"}, {(int64)SwitchUnitTests::Letter::P, "P"}, {(int64)SwitchUnitTests::Letter::Q, "Q"}, {(int64)SwitchUnitTests::Letter::R, "R"}, {(int64)SwitchUnitTests::Letter::S, "S"}, {(int64)SwitchUnitTests::Letter::T, "T"}, {(int64)SwitchUnitTests::Letter::U, "U"}, {(int64)SwitchUnitTests::Letter::V, "V"}, {(int64)SwitchUnitTests::Letter::W, "W"}, {(int64)SwitchUnitTests::Letter::X, "X"}, {(int64)SwitchUnitTests::Letter::Y, "Y"}, {(int64)SwitchUnitTests::Letter::Z, "Z"}};
     flags = true;
   }
 };
 /// @endcond
 
-namespace PcfUnitTests {
+namespace SwitchUnitTests {
   class EnumTest : public TestFixture {
   protected:
     void SetUp() override {}

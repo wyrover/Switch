@@ -4,7 +4,7 @@
 #include <gtkmm/application.h>
 #include <gtkmm/messagedialog.h>
 #include <gtkmm/window.h>
-#include <Pcf/System/Console.hpp>
+#include <Switch/System/Console.hpp>
 #include "WidgetGtk.hpp"
 
 using namespace System;

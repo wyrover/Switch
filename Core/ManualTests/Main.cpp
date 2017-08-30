@@ -1,5 +1,5 @@
-#include <Pcf/Startup.hpp>
-#include <Pcf/System/Console.hpp>
+#include <Switch/Startup.hpp>
+#include <Switch/System/Console.hpp>
 
 using namespace System;
 

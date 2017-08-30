@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains Pcf::System::String class.
+/// @brief Contains Switch::System::String class.
 #pragma once
 
 #include "_ustring.hpp"
@@ -20,8 +20,8 @@
 class __opaque_format_item__;
 /// @endcond
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @cond
@@ -1100,4 +1100,4 @@ namespace Pcf {
 
 std::ostream& operator<<(std::ostream& os, const System::String& value);
 
-using namespace Pcf;
+using namespace Switch;

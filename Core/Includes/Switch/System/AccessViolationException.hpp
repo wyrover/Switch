@@ -1,11 +1,11 @@
 /// @file
-/// @brief Contains Pcf::System::AccessViolationException exception.
+/// @brief Contains Switch::System::AccessViolationException exception.
 #pragma once
 
 #include "SystemException.hpp"
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The exception that is thrown when there is an attempt to read or write protected memory.
@@ -64,5 +64,5 @@ namespace Pcf {
   }
 }
 
-using namespace Pcf;
+using namespace Switch;
 

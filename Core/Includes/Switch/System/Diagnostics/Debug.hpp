@@ -1,11 +1,11 @@
 ﻿/// @file
-/// @brief Contains Pcf::System::Diagnostics::Debug class.
+/// @brief Contains Switch::System::Diagnostics::Debug class.
 #pragma once
 
 #include "Trace.hpp"
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The System::Diagnostics namespace provides classes that allow you to interact with system processes, event logs, and performance counters.
@@ -321,7 +321,7 @@ namespace Pcf {
         /// @brief Writes a formatted message followed by a line terminator to the trace listeners in the Listeners collection.
         /// @param format A composite format string (see Remarks) that contains text intermixed with zero or more format items, which correspond to objects in the args array.
         /// @param args An object array that contains zero or more objects to format.
-        /// @remarks This method uses the of the Pcf to convert the value of an object to its text representation and embed that representation in a string.
+        /// @remarks This method uses the of the Switch to convert the value of an object to its text representation and embed that representation in a string.
         /// @remarks The keyword in the syntax for this method implies that the object array can be a single value. The exception to this is the String object. Explicit overloads take precedence, so an arg value of a single string will default to the Debug.WriteLine(String, String) overload.
         /// @remarks By default, the output is written to an instance of DefaultTraceListener.
         /// @remarks This method calls the WriteLine method of the trace listener.
@@ -421,4 +421,4 @@ namespace Pcf {
   }
 }
 
-using namespace Pcf;
+using namespace Switch;

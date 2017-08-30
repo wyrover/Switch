@@ -9,8 +9,8 @@
 
 extern System::Threading::ThreadLocal<any> __enumerable__;
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @cond
   enum __order__ {
     ascending,
@@ -24,7 +24,7 @@ namespace Pcf {
   /// @par Examples
   /// The following code example demonstrates how to reverse the order of words in a string by using Aggregate.
   /// @include LinqAgregate.cpp
-  /// @ingroup Pcf
+  /// @ingroup Switch
   template<typename TSource>
   auto agregate(const System::Func<const TSource&, const TSource&, TSource>& func) {
     return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->Agregate(func);
@@ -37,7 +37,7 @@ namespace Pcf {
   /// @par Examples
   /// The following code example demonstrates how to use Aggregate to apply an accumulator function and use a seed value.
   /// @include LinqAgregate2.cpp
-  /// @ingroup Pcf
+  /// @ingroup Switch
   template<typename TSource, typename TAccumulate>
   auto agregate(const TAccumulate& seed, const System::Func<const TAccumulate&, const TSource&, TAccumulate>& func)  {
     return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->Agregate(seed, func);
@@ -53,7 +53,7 @@ namespace Pcf {
   /// @par Examples
   /// The following code example demonstrates how to use Aggregate to apply an accumulator function and use a seed value.
   /// @include LinqAgregate3.cpp
-  /// @ingroup Pcf
+  /// @ingroup Switch
   template<typename TSource, typename TAccumulate, typename TResult>
   auto agregate(const TAccumulate& seed, const System::Func<const TAccumulate&, const TSource&, TAccumulate>& func, const System::Func<const TAccumulate&, TResult>& resultSelector)  {
     return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->Agregate(seed, func, resultSelector);
@@ -147,4 +147,4 @@ namespace Pcf {
   }
 }
 
-using namespace Pcf;
+using namespace Switch;

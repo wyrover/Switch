@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains Pcf::__opaque_function_pointer__ <TResult, ...Arguments> class.
+/// @brief Contains Switch::__opaque_function_pointer__ <TResult, ...Arguments> class.
 #pragma once
 
 #include <cstddef>
@@ -2028,4 +2028,4 @@ private:
 };
 /// @endcond
 
-using namespace Pcf;
+using namespace Switch;

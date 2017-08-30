@@ -1,11 +1,11 @@
 /// @file
-/// @brief Contains Pcf::Await class and #pcf_await keyword.
+/// @brief Contains Switch::Await class and #pcf_await keyword.
 #pragma once
 
 #include "Async.hpp"
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The await object is applied to a task in an asynchronous method to suspend the execution of the method until the awaited task completes.
   /// @par Examples
   /// This example demontrate how to use async and await
@@ -52,8 +52,8 @@ namespace Pcf {
   /// @par Examples
   /// This example demontrate how to use async and await
   /// @include Async2.cpp
-  /// @ingroup Pcf
+  /// @ingroup Switch
   #define pcf_await await() <<
 }
 
-using namespace Pcf;
+using namespace Switch;

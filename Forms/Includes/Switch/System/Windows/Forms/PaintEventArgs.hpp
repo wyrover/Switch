@@ -1,14 +1,14 @@
 /// @file
-/// @brief Contains Pcf::System::Windows::Forms::PaintEventArgs class.
+/// @brief Contains Switch::System::Windows::Forms::PaintEventArgs class.
 #pragma once
 
-#include <Pcf/System/EventArgs.hpp>
-#include <Pcf/System/Drawing/Graphics.hpp>
-#include <Pcf/System/Drawing/Rectangle.hpp>
+#include <Switch/System/EventArgs.hpp>
+#include <Switch/System/Drawing/Graphics.hpp>
+#include <Switch/System/Drawing/Rectangle.hpp>
 
 #include "Keys.hpp"
 
-namespace Pcf {
+namespace Switch {
   namespace System {
     namespace Windows {
       namespace Forms {

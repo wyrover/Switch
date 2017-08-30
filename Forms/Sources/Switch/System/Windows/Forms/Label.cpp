@@ -1,5 +1,5 @@
-#include "../../../../../Includes/Pcf/System/Windows/Forms/Application.hpp"
-#include "../../../../../Includes/Pcf/System/Windows/Forms/Label.hpp"
+#include "../../../../../Includes/Switch/System/Windows/Forms/Application.hpp"
+#include "../../../../../Includes/Switch/System/Windows/Forms/Label.hpp"
 #include "../../../../__OS/FormsApi.hpp"
 
 using namespace System;

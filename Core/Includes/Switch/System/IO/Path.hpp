@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains Pcf::System::IO::Path class.
+/// @brief Contains Switch::System::IO::Path class.
 #pragma once
 
 #include "../../Types.hpp"
@@ -7,8 +7,8 @@
 #include "../Convert.hpp"
 #include "../String.hpp"
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The System::IO namespace contains types that allow reading and writing to files and data streams, and types that provide basic file and directory support.
@@ -201,4 +201,4 @@ namespace Pcf {
   }
 }
 
-using namespace Pcf;
+using namespace Switch;

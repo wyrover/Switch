@@ -1,14 +1,14 @@
 #include <codecvt>
 #include <locale>
-#include "../../../Includes/Pcf/System/String.hpp"
-#include "../../../Includes/Pcf/System/Array.hpp"
-#include "../../../Includes/Pcf/System/Convert.hpp"
-#include "../../../Includes/Pcf/System/FormatProvider.hpp"
-#include "../../../Includes/Pcf/System/Math.hpp"
-#include "../../../Includes/Pcf/System/StringSplitOptions.hpp"
-#include "../../../Includes/Pcf/System/Text/UTF8Encoding.hpp"
-#include "../../../Includes/Pcf/System/Text/ANSIEncoding.hpp"
-#include "../../../Includes/Pcf/Boxing.hpp"
+#include "../../../Includes/Switch/System/String.hpp"
+#include "../../../Includes/Switch/System/Array.hpp"
+#include "../../../Includes/Switch/System/Convert.hpp"
+#include "../../../Includes/Switch/System/FormatProvider.hpp"
+#include "../../../Includes/Switch/System/Math.hpp"
+#include "../../../Includes/Switch/System/StringSplitOptions.hpp"
+#include "../../../Includes/Switch/System/Text/UTF8Encoding.hpp"
+#include "../../../Includes/Switch/System/Text/ANSIEncoding.hpp"
+#include "../../../Includes/Switch/Boxing.hpp"
 #include "ArrayAlgorithms.hpp"
 
 #if defined(_WIN32)

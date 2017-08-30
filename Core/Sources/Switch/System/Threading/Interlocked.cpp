@@ -1,5 +1,5 @@
-#include "../../../../Includes/Pcf/System/Array.hpp"
-#include "../../../../Includes/Pcf/System/Threading/Interlocked.hpp"
+#include "../../../../Includes/Switch/System/Array.hpp"
+#include "../../../../Includes/Switch/System/Threading/Interlocked.hpp"
 #include "../../../__OS/CoreApi.hpp"
 
 using namespace System;

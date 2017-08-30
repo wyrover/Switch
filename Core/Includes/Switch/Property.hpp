@@ -1,11 +1,11 @@
 /// @file
-/// @brief Contains Pcf::Property class, #pcf_get and #pcf_set keywords.
+/// @brief Contains Switch::Property class, #pcf_get and #pcf_set keywords.
 #pragma once
 
 //#include <functional>
 #include "__opaque_function_pointer__.hpp"
 
-namespace Pcf {
+namespace Switch {
   class ReadOnly {
   public:
     static constexpr bool CanRead = true;
@@ -135,7 +135,7 @@ namespace Pcf {
   ///   string name;
   /// };
   /// @endcode
-  /// @ingroup Pcf
+  /// @ingroup Switch
   #define pcf_get\
   [&]()
   
@@ -156,10 +156,10 @@ namespace Pcf {
   ///   string name;
   /// };
   /// @endcode
-  /// @ingroup Pcf
+  /// @ingroup Switch
   #define pcf_set\
   [&](const auto& value)
 }
 
-using namespace Pcf;
+using namespace Switch;
   

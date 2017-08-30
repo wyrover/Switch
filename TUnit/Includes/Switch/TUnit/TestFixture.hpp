@@ -1,14 +1,14 @@
 /// @file
-/// @brief Contains Pcf::TUnit::TestFixture class.
+/// @brief Contains Switch::TUnit::TestFixture class.
 #pragma once
 
 #include <gtest/gtest.h>
-#include <Pcf/System/Object.hpp>
-#include <Pcf/System/String.hpp>
-#include <Pcf/System/SystemException.hpp>
+#include <Switch/System/Object.hpp>
+#include <Switch/System/String.hpp>
+#include <Switch/System/SystemException.hpp>
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The TUnit namespace contains a unit test framework.
   /// @par Examples
   /// This example how to use TestFixture class, Assert class and #pcf_test method:
@@ -41,7 +41,7 @@ namespace Pcf {
     /// @par Examples
     /// This example how to use TestFixture class, Expect class and #pcf_test method:
     /// @include Expect.cpp
-    /// @ingroup Pcf
+    /// @ingroup Switch
     #define pcf_test(fixture, method) \
     GTEST_TEST_(fixture, method, fixture, ::testing::internal::GetTypeId<fixture>()) { \
       try { \
@@ -57,7 +57,7 @@ namespace Pcf {
     /// @par Examples
     /// This example how to use TestFixture class, Expect class and #pcf_test method:
     /// @include Expect.cpp
-    /// @ingroup Pcf
+    /// @ingroup Switch
     #define pcf_ignore_test(fixture, method) \
     GTEST_TEST_(fixture, DISABLED_##method, fixture, ::testing::internal::GetTypeId<fixture>()) { \
       try { \
@@ -69,4 +69,4 @@ namespace Pcf {
   }
 }
 
-using namespace Pcf;
+using namespace Switch;

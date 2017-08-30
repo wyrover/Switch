@@ -1,8 +1,8 @@
-#include "../../../Includes/Pcf/System/IntPtr.hpp"
-#include "../../../Includes/Pcf/System/Array.hpp"
-#include "../../../Includes/Pcf/System/Int32.hpp"
-#include "../../../Includes/Pcf/System/Int64.hpp"
-#include "../../../Includes/Pcf/System/OverflowException.hpp"
+#include "../../../Includes/Switch/System/IntPtr.hpp"
+#include "../../../Includes/Switch/System/Array.hpp"
+#include "../../../Includes/Switch/System/Int32.hpp"
+#include "../../../Includes/Switch/System/Int64.hpp"
+#include "../../../Includes/Switch/System/OverflowException.hpp"
 
 using namespace System;
 

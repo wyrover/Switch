@@ -1,10 +1,10 @@
-#include "../../../../../Includes/Pcf/System/NullReferenceException.hpp"
-#include "../../../../../Includes/Pcf/System/OutOfMemoryException.hpp"
-#include "../../../../../Includes/Pcf/System/StackOverflowException.hpp"
-#include "../../../../../Includes/Pcf/System/Net/Sockets/TcpClient.hpp"
-#include "../../../../../Includes/Pcf/System/Net/Dns.hpp"
-#include "../../../../../Includes/Pcf/System/Net/Sockets/SocketException.hpp"
-#include "../../../../../Includes/Pcf/System/Threading/ThreadInterruptedException.hpp"
+#include "../../../../../Includes/Switch/System/NullReferenceException.hpp"
+#include "../../../../../Includes/Switch/System/OutOfMemoryException.hpp"
+#include "../../../../../Includes/Switch/System/StackOverflowException.hpp"
+#include "../../../../../Includes/Switch/System/Net/Sockets/TcpClient.hpp"
+#include "../../../../../Includes/Switch/System/Net/Dns.hpp"
+#include "../../../../../Includes/Switch/System/Net/Sockets/SocketException.hpp"
+#include "../../../../../Includes/Switch/System/Threading/ThreadInterruptedException.hpp"
 
 using namespace System;
 using namespace System::Net;

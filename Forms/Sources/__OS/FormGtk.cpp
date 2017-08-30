@@ -5,7 +5,7 @@
 #include <gtkmm/window.h>
 
 #include "WidgetGtk.hpp"
-#include <Pcf/System/Random.hpp>
+#include <Switch/System/Random.hpp>
 
 using namespace System;
 using namespace System::Drawing;

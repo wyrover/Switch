@@ -1,12 +1,12 @@
 /// @file
-/// @brief Contains Pcf::System::Runtime::Serialization::ISerializable interface.
+/// @brief Contains Switch::System::Runtime::Serialization::ISerializable interface.
 #pragma once
 
 #include "../../../Interface.hpp"
 #include "SerializationInfo.hpp"
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The System::Runtime namespaces contain types that support an application's interaction with the common language runtime, and types that enable features such as application data caching, advanced exception handling, application activation within application domains, COM interop, distributed applications, serialization and deserialization, and versioning.
@@ -36,4 +36,4 @@ namespace Pcf {
   }
 }
 
-using namespace Pcf;
+using namespace Switch;

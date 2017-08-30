@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains Pcf::char16, Pcf::int32, ... types.
+/// @brief Contains Switch::char16, Switch::int32, ... types.
 #pragma once
 
 /// @todo Remove when CMakelists.txt ready

@@ -2,8 +2,8 @@
 #pragma comment(linker,"\"/manifestdependency:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
 
 #include <windows.h>
-#include <Pcf/Undef.hpp>
-#include <Pcf/System/Diagnostics/Debug.hpp>
+#include <Switch/Undef.hpp>
+#include <Switch/System/Diagnostics/Debug.hpp>
 
 #include "FormsApi.hpp"
 

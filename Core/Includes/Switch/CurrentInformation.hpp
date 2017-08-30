@@ -1,13 +1,13 @@
 /// @file
-/// @brief Contains Pcf::CurrentInformation class and #pcf_current_information keyword.
+/// @brief Contains Switch::CurrentInformation class and #pcf_current_information keyword.
 #pragma once
 
 #include "Types.hpp"
 #include "System/Object.hpp"
 #include "System/_String.hpp"
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief Current information class is used to store current file, current line and current function information.
   /// @par Examples
   /// Use #pcf_current_information to get current information.
@@ -69,8 +69,8 @@ namespace Pcf {
   /// Console::WriteLine("Line = {0}", currentInformation.Line);
   /// Console::WriteLine("Function = {0}", currentInformation.FunctionName);
   /// @endcode
-  /// @ingroup Pcf
+  /// @ingroup Switch
   #define pcf_current_information CurrentInformation(__FILE__, __LINE__, __func__)
 }
 
-using namespace Pcf;
+using namespace Switch;

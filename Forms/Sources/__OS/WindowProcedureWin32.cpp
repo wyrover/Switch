@@ -3,12 +3,12 @@
 #include <windows.h>
 #include <Windowsx.h>
 #include <Uxtheme.h>
-#include <Pcf/Undef.hpp>
+#include <Switch/Undef.hpp>
 
 #include "FormsApi.hpp"
 #include "WindowProcedureWin32.hpp"
-#include "../../Includes/Pcf/System/Windows/Forms/Control.hpp"
-#include "../../Includes/Pcf/System/Windows/Forms/Message.hpp"
+#include "../../Includes/Switch/System/Windows/Forms/Control.hpp"
+#include "../../Includes/Switch/System/Windows/Forms/Message.hpp"
 
 using namespace System;
 using namespace System::Collections::Generic;

@@ -1,17 +1,17 @@
 /// @file
-/// @brief Contains Pcf::System::ConsoleCancelEventArgs class.
+/// @brief Contains Switch::System::ConsoleCancelEventArgs class.
 #pragma once
 
 #include "ConsoleSpecialKey.hpp"
 #include "EventArgs.hpp"
 #include "../Property.hpp"
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief Provides data for the Console::CancelKeyPress event. This class cannot be inherited.
-    /// @remarks A user can interrupt a console application process by simultaneously pressing the Control modifier key and the C console key (Ctrl+C), or the Control modifier key and the Break console key (Ctrl+Break). The Pcf consequently provides a ConsoleCancelEventArgs object to the event handler for the Console.CancelKeyPress event to specify whether the process should be cancelled.
+    /// @remarks A user can interrupt a console application process by simultaneously pressing the Control modifier key and the C console key (Ctrl+C), or the Control modifier key and the Break console key (Ctrl+Break). The Switch consequently provides a ConsoleCancelEventArgs object to the event handler for the Console.CancelKeyPress event to specify whether the process should be cancelled.
     /// @remarks If the Cancel property is set to true in the event handler, the process is resumed; otherwise, the process is terminated. By default, the value of the ConsoleCancelEventArgs property is false, and the process terminates.
     class pcf_public ConsoleCancelEventArgs final : public EventArgs {
     public:
@@ -52,4 +52,4 @@ namespace Pcf {
   }
 }
 
-using namespace Pcf;
+using namespace Switch;

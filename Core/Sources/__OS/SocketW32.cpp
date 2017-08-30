@@ -4,10 +4,10 @@
 #include <cstdlib>
 
 #include <Winsock2.h>
-#include "../../Includes/Pcf/Undef.hpp"
+#include "../../Includes/Switch/Undef.hpp"
 
 #include "CoreApi.hpp"
-#include "../../Includes/Pcf/System/Collections/Generic/SortedDictionary.hpp"
+#include "../../Includes/Switch/System/Collections/Generic/SortedDictionary.hpp"
 
 namespace {
   static int32 ProtocolTypeToNative(System::Net::Sockets::ProtocolType protocolType) {

@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains Pcf::System::UInt64 struct.
+/// @brief Contains Switch::System::UInt64 struct.
 #pragma once
 
 #include "Object.hpp"
@@ -10,8 +10,8 @@
 #include "IFormattable.hpp"
 #include "ValueType.hpp"
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief Represents a 64-bit unsigned integer.
@@ -175,4 +175,4 @@ namespace Pcf {
   }
 }
 
-using namespace Pcf;
+using namespace Switch;

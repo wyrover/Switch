@@ -1,10 +1,10 @@
 /// @file
-/// @brief Contains Pcf::System::ArraySegment type.
+/// @brief Contains Switch::System::ArraySegment type.
 #pragma once
 
 #include "Array.hpp"
 
-namespace Pcf {
+namespace Switch {
   namespace System {
     /// @brief Delimits a section of a one-dimensional array.
     /// @todo Write Decimal class.
@@ -13,4 +13,4 @@ namespace Pcf {
   }
 }
 
-using namespace Pcf;
+using namespace Switch;

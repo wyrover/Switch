@@ -1,5 +1,5 @@
-#include "../../../../Includes/Pcf/System/Drawing/PointF.hpp"
-#include "../../../../Includes/Pcf/System/Drawing/SizeF.hpp"
+#include "../../../../Includes/Switch/System/Drawing/PointF.hpp"
+#include "../../../../Includes/Switch/System/Drawing/SizeF.hpp"
 
 using namespace System;
 using namespace System::Drawing;

@@ -1,4 +1,4 @@
-#include "../../../../Includes/Pcf/System/Net/Dns.hpp"
+#include "../../../../Includes/Switch/System/Net/Dns.hpp"
 #include "../../../__OS/CoreApi.hpp"
 
 using namespace System::Net;

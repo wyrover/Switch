@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../../Includes/Pcf/Types.hpp"
-#include "../../../Includes/Pcf/System/SystemException.hpp"
+#include "../../../Includes/Switch/Types.hpp"
+#include "../../../Includes/Switch/System/SystemException.hpp"
 
 namespace {
   class ArrayAlgorithms {
@@ -38,4 +38,4 @@ namespace {
   };
 }
 
-using namespace Pcf;
+using namespace Switch;

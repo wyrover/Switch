@@ -1,13 +1,13 @@
-#include <Pcf/System/Net/Sockets/Socket.hpp>
-#include <Pcf/TUnit/Assert.hpp>
-#include <Pcf/TUnit/TestFixture.hpp>
+#include <Switch/System/Net/Sockets/Socket.hpp>
+#include <Switch/TUnit/Assert.hpp>
+#include <Switch/TUnit/TestFixture.hpp>
 
 using namespace System;
 using namespace System::Net;
 using namespace System::Net::Sockets;
 using namespace TUnit;
 
-namespace PcfUnitTests {
+namespace SwitchUnitTests {
   class SocketTest : public TestFixture {
   protected:
     void SetUp() override {}

@@ -1,5 +1,5 @@
-#include <Pcf/System/IO/File.hpp>
-#include "../../../../Includes/Pcf/System/Drawing/Image.hpp"
+#include <Switch/System/IO/File.hpp>
+#include "../../../../Includes/Switch/System/Drawing/Image.hpp"
 
 #include <csetjmp>
 #include <cstdio>
@@ -93,7 +93,7 @@ void Image::ReadStream(refptr<System::IO::Stream> stream) {
   refptr<BinaryReader> reader = new BinaryReader(stream);
   
   uint16 magicNumber = reader->ReadUInt16();
-  reader->BaseStream().Seek(0, Pcf::System::IO::SeekOrigin::Begin);
+  reader->BaseStream().Seek(0, Switch::System::IO::SeekOrigin::Begin);
   
   // List of file signatures
   // http://en.wikipedia.org/wiki/List_of_file_signatures

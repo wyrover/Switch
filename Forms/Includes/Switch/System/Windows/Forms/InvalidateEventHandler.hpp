@@ -1,12 +1,12 @@
 /// @file
-/// @brief Contains Pcf::System::Windows::Forms::InvalidateEventHandler event handler.
+/// @brief Contains Switch::System::Windows::Forms::InvalidateEventHandler event handler.
 #pragma once
 
-#include <Pcf/System/EventHandler.hpp>
+#include <Switch/System/EventHandler.hpp>
 
 #include "InvalidateEventArgs.hpp"
 
-namespace Pcf {
+namespace Switch {
   namespace System {
     namespace Windows {
       namespace Forms {

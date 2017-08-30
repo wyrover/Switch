@@ -1,72 +1,72 @@
-#include <Pcf/System/AccessViolationException.hpp>
-#include <Pcf/System/AppDomainUnloadedException.hpp>
-#include <Pcf/System/ArrayTypeMismatchException.hpp>
-#include <Pcf/System/BadImageFormatException.hpp>
-#include <Pcf/System/CannotUnloadAppDomainException.hpp>
-#include <Pcf/System/ContextMarshalException.hpp>
-#include <Pcf/System/DataMisalignedException.hpp>
-#include <Pcf/System/DivideByZeroException.hpp>
-#include <Pcf/System/DllNotFoundException.hpp>
-#include <Pcf/System/DuplicateWaitObjectException.hpp>
-#include <Pcf/System/EntryPointNotFoundException.hpp>
-#include <Pcf/System/FieldAccessException.hpp>
-#include <Pcf/System/ExecutionEngineException.hpp>
-#include <Pcf/System/Exception.hpp>
-#include <Pcf/System/InsufficientExecutionStackException.hpp>
-#include <Pcf/System/InsufficientMemoryException.hpp>
-#include <Pcf/System/InvalidProgramException.hpp>
-#include <Pcf/System/InvalidTimeZoneException.hpp>
-#include <Pcf/System/MemberAccessException.hpp>
-#include <Pcf/System/MethodAccessException.hpp>
-#include <Pcf/System/MissingFieldException.hpp>
-#include <Pcf/System/MissingMemberException.hpp>
-#include <Pcf/System/MissingMethodException.hpp>
-#include <Pcf/System/MulticastNotSupportedException.hpp>
-#include <Pcf/System/NotFiniteNumberException.hpp>
-#include <Pcf/System/NotImplementedException.hpp>
-#include <Pcf/System/NullPointerException.hpp>
-#include <Pcf/System/NullReferenceException.hpp>
-#include <Pcf/System/ObjectClosedException.hpp>
-#include <Pcf/System/OperationCanceledException.hpp>
-#include <Pcf/System/PlatformNotSupportedException.hpp>
-#include <Pcf/System/StackOverflowException.hpp>
-#include <Pcf/System/SystemException.hpp>
-#include <Pcf/System/TimeoutException.hpp>
-#include <Pcf/System/TimeZoneNotFoundException.hpp>
-#include <Pcf/System/TypeAccessException.hpp>
-#include <Pcf/System/TypeUnloadedException.hpp>
-#include <Pcf/System/UnauthorizedAccessException.hpp>
-#include <Pcf/System/UriFormatException.hpp>
-#include <Pcf/System/UriTemplateMatchException.hpp>
-#include <Pcf/System/IO/DirectoryNotFoundException.hpp>
-#include <Pcf/System/IO/DriveNotFoundException.hpp>
-#include <Pcf/System/IO/EndOfStreamException.hpp>
-#include <Pcf/System/IO/FileFormatException.hpp>
-#include <Pcf/System/IO/FileLoadException.hpp>
-#include <Pcf/System/IO/FileNotFoundException.hpp>
-#include <Pcf/System/IO/InternalBufferOverflowException.hpp>
-#include <Pcf/System/IO/InvalidDataException.hpp>
-#include <Pcf/System/IO/IOException.hpp>
-#include <Pcf/System/IO/PathTooLongException.hpp>
-#include <Pcf/System/IO/PipeException.hpp>
-#include <Pcf/System/Net/CookieException.hpp>
-#include <Pcf/System/Net/HttpListenerException.hpp>
-#include <Pcf/System/Net/ProtocolViolationException.hpp>
-#include <Pcf/System/Net/WebException.hpp>
-#include <Pcf/System/Net/Sockets/SocketException.hpp>
-#include <Pcf/System/Threading/AbandonedMutexException.hpp>
-#include <Pcf/System/Threading/BarrierPostPhaseException.hpp>
-#include <Pcf/System/Threading/LockRecursionException.hpp>
-#include <Pcf/System/Threading/SemaphoreFullException.hpp>
-#include <Pcf/System/Threading/SynchronizationLockException.hpp>
-#include <Pcf/System/Threading/ThreadAbortException.hpp>
-#include <Pcf/System/Threading/ThreadInterruptedException.hpp>
-#include <Pcf/System/Threading/ThreadStartException.hpp>
-#include <Pcf/System/Threading/ThreadStateException.hpp>
-#include <Pcf/System/Threading/WaitHandleCannotBeOpenedException.hpp>
-#include <Pcf/System/Runtime/Serialization/SerializationException.hpp>
-#include <Pcf/TUnit/Assert.hpp>
-#include <Pcf/TUnit/TestFixture.hpp>
+#include <Switch/System/AccessViolationException.hpp>
+#include <Switch/System/AppDomainUnloadedException.hpp>
+#include <Switch/System/ArrayTypeMismatchException.hpp>
+#include <Switch/System/BadImageFormatException.hpp>
+#include <Switch/System/CannotUnloadAppDomainException.hpp>
+#include <Switch/System/ContextMarshalException.hpp>
+#include <Switch/System/DataMisalignedException.hpp>
+#include <Switch/System/DivideByZeroException.hpp>
+#include <Switch/System/DllNotFoundException.hpp>
+#include <Switch/System/DuplicateWaitObjectException.hpp>
+#include <Switch/System/EntryPointNotFoundException.hpp>
+#include <Switch/System/FieldAccessException.hpp>
+#include <Switch/System/ExecutionEngineException.hpp>
+#include <Switch/System/Exception.hpp>
+#include <Switch/System/InsufficientExecutionStackException.hpp>
+#include <Switch/System/InsufficientMemoryException.hpp>
+#include <Switch/System/InvalidProgramException.hpp>
+#include <Switch/System/InvalidTimeZoneException.hpp>
+#include <Switch/System/MemberAccessException.hpp>
+#include <Switch/System/MethodAccessException.hpp>
+#include <Switch/System/MissingFieldException.hpp>
+#include <Switch/System/MissingMemberException.hpp>
+#include <Switch/System/MissingMethodException.hpp>
+#include <Switch/System/MulticastNotSupportedException.hpp>
+#include <Switch/System/NotFiniteNumberException.hpp>
+#include <Switch/System/NotImplementedException.hpp>
+#include <Switch/System/NullPointerException.hpp>
+#include <Switch/System/NullReferenceException.hpp>
+#include <Switch/System/ObjectClosedException.hpp>
+#include <Switch/System/OperationCanceledException.hpp>
+#include <Switch/System/PlatformNotSupportedException.hpp>
+#include <Switch/System/StackOverflowException.hpp>
+#include <Switch/System/SystemException.hpp>
+#include <Switch/System/TimeoutException.hpp>
+#include <Switch/System/TimeZoneNotFoundException.hpp>
+#include <Switch/System/TypeAccessException.hpp>
+#include <Switch/System/TypeUnloadedException.hpp>
+#include <Switch/System/UnauthorizedAccessException.hpp>
+#include <Switch/System/UriFormatException.hpp>
+#include <Switch/System/UriTemplateMatchException.hpp>
+#include <Switch/System/IO/DirectoryNotFoundException.hpp>
+#include <Switch/System/IO/DriveNotFoundException.hpp>
+#include <Switch/System/IO/EndOfStreamException.hpp>
+#include <Switch/System/IO/FileFormatException.hpp>
+#include <Switch/System/IO/FileLoadException.hpp>
+#include <Switch/System/IO/FileNotFoundException.hpp>
+#include <Switch/System/IO/InternalBufferOverflowException.hpp>
+#include <Switch/System/IO/InvalidDataException.hpp>
+#include <Switch/System/IO/IOException.hpp>
+#include <Switch/System/IO/PathTooLongException.hpp>
+#include <Switch/System/IO/PipeException.hpp>
+#include <Switch/System/Net/CookieException.hpp>
+#include <Switch/System/Net/HttpListenerException.hpp>
+#include <Switch/System/Net/ProtocolViolationException.hpp>
+#include <Switch/System/Net/WebException.hpp>
+#include <Switch/System/Net/Sockets/SocketException.hpp>
+#include <Switch/System/Threading/AbandonedMutexException.hpp>
+#include <Switch/System/Threading/BarrierPostPhaseException.hpp>
+#include <Switch/System/Threading/LockRecursionException.hpp>
+#include <Switch/System/Threading/SemaphoreFullException.hpp>
+#include <Switch/System/Threading/SynchronizationLockException.hpp>
+#include <Switch/System/Threading/ThreadAbortException.hpp>
+#include <Switch/System/Threading/ThreadInterruptedException.hpp>
+#include <Switch/System/Threading/ThreadStartException.hpp>
+#include <Switch/System/Threading/ThreadStateException.hpp>
+#include <Switch/System/Threading/WaitHandleCannotBeOpenedException.hpp>
+#include <Switch/System/Runtime/Serialization/SerializationException.hpp>
+#include <Switch/TUnit/Assert.hpp>
+#include <Switch/TUnit/TestFixture.hpp>
 
 using namespace System;
 using namespace System::Collections::Generic;
@@ -176,7 +176,7 @@ namespace {
   }
   
   TEST(Exception, GetMessage) {
-    try { throw Exception(pcf_current_information); } catch (const Exception& e) { EXPECT_EQ( "Exception of type 'Pcf::System::Exception' was thrown.", e.Message()); }
+    try { throw Exception(pcf_current_information); } catch (const Exception& e) { EXPECT_EQ( "Exception of type 'Switch::System::Exception' was thrown.", e.Message()); }
     try { throw SystemException(pcf_current_information); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "System error."); }
     try { throw AccessViolationException(pcf_current_information); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "Attempted to read or write protected memory. This is often an indication that other memory is corrupt."); }
     //try { throw AggregateException(pcf_current_information); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "One or more errors occured."); }
@@ -258,7 +258,7 @@ namespace {
   
     try { throw AbandonedMutexException(pcf_current_information); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "The wait completed due to an abandoned mutex."); }
     try { throw BarrierPostPhaseException(pcf_current_information); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "The postPhaseAction failed with an exception."); }
-    try { throw LockRecursionException(pcf_current_information); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "Exception of type 'Pcf::System::Threading::LockRecursionException' was thrown."); }
+    try { throw LockRecursionException(pcf_current_information); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "Exception of type 'Switch::System::Threading::LockRecursionException' was thrown."); }
     try { throw SemaphoreFullException(pcf_current_information); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "Adding the specified countto the semaphore wold cause it to exceed its maximum count."); }
     try { throw SynchronizationLockException(pcf_current_information); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "Object synchronization method was called from an unsynchronized block of code."); }
     try { throw ThreadAbortException(pcf_current_information); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "Thread was aborted."); }

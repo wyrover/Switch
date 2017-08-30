@@ -1,12 +1,12 @@
 /// @file
-/// @brief Contains Pcf::System::ComponentModel::Component class.
+/// @brief Contains Switch::System::ComponentModel::Component class.
 #pragma once
 
-#include <Pcf/System/Delegate.hpp>
+#include <Switch/System/Delegate.hpp>
 
-namespace Pcf {
+namespace Switch {
   namespace System {
-    /// @brief The Pcf::System::ComponentModel namespace provides classes that are used to implement the run-time and design-time behavior of components and controls. This namespace includes the base classes and interfaces for implementing attributes and type converters, binding to data sources, and licensing components.
+    /// @brief The Switch::System::ComponentModel namespace provides classes that are used to implement the run-time and design-time behavior of components and controls. This namespace includes the base classes and interfaces for implementing attributes and type converters, binding to data sources, and licensing components.
     /// The classes in this namespace divide into the following categories:
     /// * Core component classes. See the Component, IComponent, Container, and IContainer classes.
     /// * Component licensing. See the License, LicenseManager, LicenseProvider, and LicenseProviderAttribute classes.

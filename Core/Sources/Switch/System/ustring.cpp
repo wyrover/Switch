@@ -1,7 +1,7 @@
-#include "../../../Includes/Pcf/System/_ustring.hpp"
-#include "../../../Includes/Pcf/System/Array.hpp"
-#include "../../../Includes/Pcf/System/ArgumentNullException.hpp"
-#include "../../../Includes/Pcf/System/ArgumentOutOfRangeException.hpp"
+#include "../../../Includes/Switch/System/_ustring.hpp"
+#include "../../../Includes/Switch/System/Array.hpp"
+#include "../../../Includes/Switch/System/ArgumentNullException.hpp"
+#include "../../../Includes/Switch/System/ArgumentOutOfRangeException.hpp"
 #include "../../__OS/CoreApi.hpp"
 
 namespace std {

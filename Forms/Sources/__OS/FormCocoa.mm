@@ -1,6 +1,6 @@
 #if defined(__APPLE__)
 #include "WindowProcedureCocoa.hpp"
-#include <Pcf/System/Random.hpp>
+#include <Switch/System/Random.hpp>
 
 using namespace System;
 using namespace System::Collections::Generic;

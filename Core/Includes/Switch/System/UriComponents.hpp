@@ -1,11 +1,11 @@
 /// @file
-/// @brief Contains Pcf::System::UriComponents enum.
+/// @brief Contains Switch::System::UriComponents enum.
 #pragma once
 
 #include "Enum.hpp"
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief This enumeration has a FlagsAttribute attribute that allows a bitwise combination of its member values.
@@ -62,4 +62,4 @@ public:
 };
 /// @endcond
 
-using namespace Pcf;
+using namespace Switch;

@@ -1,16 +1,16 @@
-#include <Pcf/System/Threading/Timer.hpp>
-#include <Pcf/System/Threading/Interlocked.hpp>
-#include <Pcf/System/Double.hpp>
-#include <Pcf/System/Math.hpp>
-#include <Pcf/TUnit/Assert.hpp>
-#include <Pcf/TUnit/TestFixture.hpp>
-#include <Pcf/LiteralOperatorConverter.hpp>
+#include <Switch/System/Threading/Timer.hpp>
+#include <Switch/System/Threading/Interlocked.hpp>
+#include <Switch/System/Double.hpp>
+#include <Switch/System/Math.hpp>
+#include <Switch/TUnit/Assert.hpp>
+#include <Switch/TUnit/TestFixture.hpp>
+#include <Switch/LiteralOperatorConverter.hpp>
 
 using namespace System;
 using namespace System::Threading;
 using namespace TUnit;
 
-namespace PcfUnitTests {
+namespace SwitchUnitTests {
   class InterlockedTest : public TestFixture {
   protected:
     void AddInt32() {

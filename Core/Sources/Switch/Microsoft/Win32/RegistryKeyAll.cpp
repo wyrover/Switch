@@ -1,11 +1,11 @@
 #if defined(__linux__) || defined(__APPLE__)
 
-#include "../../../../Includes/Pcf/Microsoft/Win32/Registry.hpp"
-#include "../../../../Includes/Pcf/Microsoft/Win32/RegistryKey.hpp"
-#include "../../../../Includes/Pcf/System/IO/Directory.hpp"
-#include "../../../../Includes/Pcf/System/IO/DirectoryInfo.hpp"
-#include "../../../../Includes/Pcf/System/IO/File.hpp"
-#include "../../../../Includes/Pcf/System/IO/Path.hpp"
+#include "../../../../Includes/Switch/Microsoft/Win32/Registry.hpp"
+#include "../../../../Includes/Switch/Microsoft/Win32/RegistryKey.hpp"
+#include "../../../../Includes/Switch/System/IO/Directory.hpp"
+#include "../../../../Includes/Switch/System/IO/DirectoryInfo.hpp"
+#include "../../../../Includes/Switch/System/IO/File.hpp"
+#include "../../../../Includes/Switch/System/IO/Path.hpp"
 
 using namespace System;
 using namespace System::IO;
@@ -60,7 +60,7 @@ RegistryKey::RegistryKey(): permission(RegistryKeyPermissionCheck::ReadWriteSubT
 }
 
 RegistryKey::RegistryKey(RegistryHive rhive)  : name(ToName(rhive)), permission(RegistryKeyPermissionCheck::ReadWriteSubTree) {
-  this->path = Path::Combine(Environment::GetFolderPath(Environment::SpecialFolder::UserProfile), ".Pcf", "Registry", ToName(rhive));
+  this->path = Path::Combine(Environment::GetFolderPath(Environment::SpecialFolder::UserProfile), ".Switch", "Registry", ToName(rhive));
   if (not Directory::Exists(this->path)) {
     Directory::CreateDirectory(this->path);
     ::CreateDefaultFile(Path::Combine(this->path, "Values.xml"));

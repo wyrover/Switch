@@ -1,8 +1,8 @@
 /// @file
-/// @brief Contains Pcf::System::Drawing::Pen class.
+/// @brief Contains Switch::System::Drawing::Pen class.
 #pragma once
 
-#include <Pcf/System/Object.hpp>
+#include <Switch/System/Object.hpp>
 
 #include "Drawing2D/DashStyle.hpp"
 #include "Brush.hpp"
@@ -15,8 +15,8 @@ namespace __OS {
 }
 /// @endcond
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @cond

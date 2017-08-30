@@ -1,10 +1,10 @@
 /// @file
-/// @brief Contains Pcf::System::Windows::Forms::Shortcut enum.
+/// @brief Contains Switch::System::Windows::Forms::Shortcut enum.
 #pragma once
 
-#include <Pcf/System/Enum.hpp>
+#include <Switch/System/Enum.hpp>
 
-namespace Pcf {
+namespace Switch {
   namespace System {
     namespace Windows {
       namespace Forms {
@@ -181,4 +181,4 @@ public:
 };
 /// @endcond
 
-using namespace Pcf;
+using namespace Switch;

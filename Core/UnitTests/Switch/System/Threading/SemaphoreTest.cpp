@@ -1,19 +1,19 @@
-#include <Pcf/System/Threading/Semaphore.hpp>
-#include <Pcf/System/Threading/Mutex.hpp>
-#include <Pcf/System/Threading/Thread.hpp>
-#include <Pcf/TUnit/Assert.hpp>
-#include <Pcf/TUnit/TestFixture.hpp>
+#include <Switch/System/Threading/Semaphore.hpp>
+#include <Switch/System/Threading/Mutex.hpp>
+#include <Switch/System/Threading/Thread.hpp>
+#include <Switch/TUnit/Assert.hpp>
+#include <Switch/TUnit/TestFixture.hpp>
 
 using namespace System;
 using namespace System::Threading;
 using namespace TUnit;
 
-namespace PcfUnitTests {
+namespace SwitchUnitTests {
   class SemaphoreTest : public TestFixture {
   protected:
     void CreateSemaphore() {
       Semaphore semaphore(0, 1);
-      Assert::AreEqual("Pcf::System::Threading::Semaphore", semaphore.ToString(), pcf_current_information);
+      Assert::AreEqual("Switch::System::Threading::Semaphore", semaphore.ToString(), pcf_current_information);
     }
     
     void CreateTwoSemaphore() {

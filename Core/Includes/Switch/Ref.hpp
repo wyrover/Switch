@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains Pcf::Reference class and Pcf::Ref <> operator.
+/// @brief Contains Switch::Reference class and Switch::Ref <> operator.
 #pragma once
 
 #include <exception>
@@ -10,7 +10,7 @@
 #include "NullPtr.hpp"
 #include "Types.hpp"
 
-namespace Pcf {
+namespace Switch {
   /// @brief Represent a reference.
   template<typename T>
   class Ref {
@@ -224,9 +224,9 @@ namespace Pcf {
     /// @return string A string that represents the current object.
     std::string ToString() const {
       if (this->ptr == null)
-        return "Pcf::Ref [Reference=null]";
+        return "Switch::Ref [Reference=null]";
       std::stringstream s;
-      s << "Pcf::Ref [Reference=" << this->ptr << "]";
+      s << "Switch::Ref [Reference=" << this->ptr << "]";
       return s.str();
     }
     
@@ -281,4 +281,4 @@ namespace Pcf {
   using ref = Ref<T>;
 }
 
-using namespace Pcf;
+using namespace Switch;

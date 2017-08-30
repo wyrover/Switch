@@ -1,9 +1,9 @@
-#include "../../../../../Includes/Pcf/System/NotImplementedException.hpp"
-#include "../../../../../Includes/Pcf/System/ObjectClosedException.hpp"
-#include "../../../../../Includes/Pcf/System/Net/Dns.hpp"
-#include "../../../../../Includes/Pcf/System/Net/Sockets/Socket.hpp"
-#include "../../../../../Includes/Pcf/System/Net/Sockets/MulticastOption.hpp"
-#include "../../../../../Includes/Pcf/System/Net/Sockets/SocketException.hpp"
+#include "../../../../../Includes/Switch/System/NotImplementedException.hpp"
+#include "../../../../../Includes/Switch/System/ObjectClosedException.hpp"
+#include "../../../../../Includes/Switch/System/Net/Dns.hpp"
+#include "../../../../../Includes/Switch/System/Net/Sockets/Socket.hpp"
+#include "../../../../../Includes/Switch/System/Net/Sockets/MulticastOption.hpp"
+#include "../../../../../Includes/Switch/System/Net/Sockets/SocketException.hpp"
 #include "../../../../__OS/CoreApi.hpp"
 
 using namespace System;

@@ -1,17 +1,17 @@
 /// @file
-/// @brief Contains Pcf::System::Windows::Forms::SystemInformation class.
+/// @brief Contains Switch::System::Windows::Forms::SystemInformation class.
 #pragma once
 
-#include <Pcf/Property.hpp>
-#include <Pcf/Static.hpp>
-#include <Pcf/Types.hpp>
-#include <Pcf/System/Drawing/Font.hpp>
-#include <Pcf/System/Drawing/Size.hpp>
+#include <Switch/Property.hpp>
+#include <Switch/Static.hpp>
+#include <Switch/Types.hpp>
+#include <Switch/System/Drawing/Font.hpp>
+#include <Switch/System/Drawing/Size.hpp>
 #include "ArrangeDirection.hpp"
 #include "ArrangeStartingPosition.hpp"
 #include "BootMode.hpp"
 
-namespace Pcf {
+namespace Switch {
   namespace System {
     namespace Windows {
       namespace Forms {
@@ -324,4 +324,4 @@ namespace Pcf {
   }
 }
 
-using namespace Pcf;
+using namespace Switch;

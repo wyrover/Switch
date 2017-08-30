@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains Pcf::Any class.
+/// @brief Contains Switch::Any class.
 #pragma once
 
 #include "Boxing.hpp"
@@ -23,8 +23,8 @@
 #include "System/UInt32.hpp"
 #include "System/UInt64.hpp"
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief Represent a polymorphic wrapper capable of holding any type.
   /// @par Examples
   /// This example show how to use Any:
@@ -178,8 +178,8 @@ namespace Pcf {
     /// @brief Used to static cast a type into another type. A To expression takes the following form:
     /// @par Examples
     /// @code
-    /// refptr<string> str = new Pcf::string("A new string");
-    /// refptr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
+    /// refptr<string> str = new Switch::string("A new string");
+    /// refptr<System::IComparable> comparable = as<Switch::System::IComparable>(str);
     /// @endcode
     /// @exception InvalidOperationException The parameters is null.
     template<typename T>
@@ -192,8 +192,8 @@ namespace Pcf {
     /// @brief Used to static cast a type into another type. A To expression takes the following form:
     /// @par Examples
     /// @code
-    /// refptr<string> str = new Pcf::string("A new string");
-    /// refptr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
+    /// refptr<string> str = new Switch::string("A new string");
+    /// refptr<System::IComparable> comparable = as<Switch::System::IComparable>(str);
     /// @endcode
     /// @exception InvalidOperationException The parameters is null.
     template<typename T>
@@ -271,7 +271,7 @@ namespace Pcf {
     /// System::Int32 i = 0;
     /// bool isInt32 = is<System::Int32>(i);
     /// @endcode
-    /// @see Pcf::System::Type
+    /// @see Switch::System::Type
     template<typename T>
     bool Is() {
       if(!this->HasValue) return false;
@@ -284,7 +284,7 @@ namespace Pcf {
     /// System::Int32 i = 0;
     /// bool isInt32 = is<System::Int32>(i);
     /// @endcode
-    /// @see Pcf::System::Type
+    /// @see Switch::System::Type
     template<typename T>
     bool Is() const {
       if(!this->HasValue) return false;
@@ -395,8 +395,8 @@ namespace Pcf {
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
   /// @par Examples
   /// @code
-  /// refptr<string> str = new Pcf::string("A new string");
-  /// refptr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
+  /// refptr<string> str = new Switch::string("A new string");
+  /// refptr<System::IComparable> comparable = as<Switch::System::IComparable>(str);
   /// @endcode
   /// @exception ArgumentNullException The parameters is null.
   template<typename T>
@@ -407,8 +407,8 @@ namespace Pcf {
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
   /// @par Examples
   /// @code
-  /// refptr<string> str = new Pcf::string("A new string");
-  /// refptr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
+  /// refptr<string> str = new Switch::string("A new string");
+  /// refptr<System::IComparable> comparable = as<Switch::System::IComparable>(str);
   /// @endcode
   /// @exception ArgumentNullException The parameters is null.
   template<typename T>
@@ -422,7 +422,7 @@ namespace Pcf {
   /// System::Int32 i = 0;
   /// bool isInt32 = is<System::Int32>(i);
   /// @endcode
-  /// @see Pcf::System::Type
+  /// @see Switch::System::Type
   template<typename T>
   bool is(const Any& value) {
     return value.Is<T>();
@@ -434,7 +434,7 @@ namespace Pcf {
   /// System::Int32 i = 0;
   /// bool isInt32 = is<System::Int32>(i);
   /// @endcode
-  /// @see Pcf::System::Type
+  /// @see Switch::System::Type
   template<typename T>
   bool is(Any& value) {
     return value.Is<T>();
@@ -577,6 +577,6 @@ namespace Pcf {
   using any = Any;
 }
 
-using namespace Pcf;
+using namespace Switch;
 
 #include "System/String.hpp"

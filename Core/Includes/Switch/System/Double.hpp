@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains Pcf::System::Double struct.
+/// @brief Contains Switch::System::Double struct.
 #pragma once
 
 #include "../Property.hpp"
@@ -12,8 +12,8 @@
 #include "TypeCode.hpp"
 #include "ValueType.hpp"
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief Represents a double-precision floating-point number.
@@ -157,4 +157,4 @@ namespace Pcf {
   }
 }
 
-using namespace Pcf;
+using namespace Switch;

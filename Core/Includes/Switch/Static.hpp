@@ -1,12 +1,12 @@
 /// @file
-/// @brief Contains Pcf::Static class and #pcf_static keyword.
+/// @brief Contains Switch::Static class and #pcf_static keyword.
 #pragma once
 
 #include "Types.hpp"
 #include "Allocator.hpp"
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief Represent a static class.
   struct pcf_public Static {
     /// @cond
@@ -24,9 +24,9 @@ namespace Pcf {
   ///   static string ToString() {return "Foo";}
   /// };
   /// @endcode
-  /// @ingroup Pcf
+  /// @ingroup Switch
   #define pcf_static\
   final : Static
 }
 
-using namespace Pcf;
+using namespace Switch;

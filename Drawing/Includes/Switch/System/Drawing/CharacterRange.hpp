@@ -1,12 +1,12 @@
 /// @file
-/// @brief Contains Pcf::System::Drawing::CharacterRange class.
+/// @brief Contains Switch::System::Drawing::CharacterRange class.
 #pragma once
 
-#include <Pcf/System/Object.hpp>
-#include <Pcf/Property.hpp>
+#include <Switch/System/Object.hpp>
+#include <Switch/Property.hpp>
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The System::Drawing namespace provides access to GDI+ basic graphics functionality. More advanced functionality is provided in the System::Drawing::Drawing2D, System::Drawing::Imaging, and System::Drawing::Text namespaces.

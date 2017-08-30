@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains Pcf::RefPtr <T> class.
+/// @brief Contains Switch::RefPtr <T> class.
 #pragma once
 
 #include <atomic>
@@ -11,13 +11,13 @@
 #include "UniquePtr.hpp"
 
 /// @cond
-namespace Pcf {
+namespace Switch {
   template<typename T>
   class RefPtr;
 }
 class pcf_public __opaque_sub_object__ {
   template<typename T>
-  friend class Pcf::RefPtr;
+  friend class Switch::RefPtr;
   __opaque_sub_object__() : UseCount(0) {}
   __opaque_sub_object__(const __opaque_sub_object__& so) : UseCount(so.UseCount.load()) {}
   
@@ -25,7 +25,7 @@ class pcf_public __opaque_sub_object__ {
 };
 /// @endcond
 
-namespace Pcf {
+namespace Switch {
   /// @cond
   template <typename T>
   class RefPtr;
@@ -401,9 +401,9 @@ namespace Pcf {
     /// @return string A string that represents the current RefPtr.
     std::string ToString() const {
       if (this->ptr == null)
-        return "Pcf::RefPtr [Pointer=null]";
+        return "Switch::RefPtr [Pointer=null]";
       std::stringstream s;
-      s << "Pcf::RefPtr [Pointer=" << this->ptr << ", UseCount=" << this->GetUseCount() << "]";
+      s << "Switch::RefPtr [Pointer=" << this->ptr << ", UseCount=" << this->GetUseCount() << "]";
       return s.str();
     }
     
@@ -486,7 +486,7 @@ namespace Pcf {
   /// @par Examples
   /// This example show how to used RefPtr :
   /// @include RefPtr.cpp
-  /// @ingroup Pcf
+  /// @ingroup Switch
   template<typename T>
   using refptr = RefPtr<T>;
   
@@ -504,7 +504,7 @@ namespace Pcf {
   /// @par Examples
   /// This example show how to used RefPtr :
   /// @include RefPtr.cpp
-  /// @ingroup Pcf
+  /// @ingroup Switch
   template<typename T>
   using r = RefPtr<T>;
   
@@ -518,4 +518,4 @@ namespace Pcf {
   refptr<T> gcnew(Args&&... args) {return refptr<T>(new T(args...));}
 }
 
-using namespace Pcf;
+using namespace Switch;

@@ -5,7 +5,7 @@
 #include "System/Delegate.hpp"
 #include "System/Environment.hpp"
 
-namespace Pcf {
+namespace Switch {
   /// @brief Defines the entry point to be called when the application loads. Generally this is set either to the main form in your application or to the Main procedure that should run when the application starts.
   /// @param mainClass The class that contains the static Main method.
   /// @par Examples
@@ -20,7 +20,7 @@ namespace Pcf {
   /// @par
   /// This example show a Main method with argument and return code
   /// @include Main4.cpp
-  /// @ingroup Pcf
+  /// @ingroup Switch
   #define pcf_startup(mainClass)\
   int main(int argc, char* argv[]) {\
     struct Startup {\

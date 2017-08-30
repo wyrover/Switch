@@ -3,11 +3,11 @@
 #include <cwchar>
 #include <iostream>
 
-#include "../../../Includes/Pcf/System/IO/IOException.hpp"
-#include "../../../Includes/Pcf/System/Buffer.hpp"
-#include "../../../Includes/Pcf/System/Console.hpp"
-#include "../../../Includes/Pcf/System/Environment.hpp"
-#include "../../../Includes/Pcf/System/Text/UTF8Encoding.hpp"
+#include "../../../Includes/Switch/System/IO/IOException.hpp"
+#include "../../../Includes/Switch/System/Buffer.hpp"
+#include "../../../Includes/Switch/System/Console.hpp"
+#include "../../../Includes/Switch/System/Environment.hpp"
+#include "../../../Includes/Switch/System/Text/UTF8Encoding.hpp"
 #include "../../__OS/CoreApi.hpp"
 
 namespace {

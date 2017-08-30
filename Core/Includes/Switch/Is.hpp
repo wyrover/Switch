@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains Pcf::is <> operator.
+/// @brief Contains Switch::is <> operator.
 #pragma once
 
 #include "Ref.hpp"
@@ -7,15 +7,15 @@
 #include "UniquePtr.hpp"
 #include "Types.hpp"
 
-namespace Pcf {
+namespace Switch {
   /// @brief Return true if specified value is the specified Type. A Is expression takes the following form:
   /// @par Examples
   /// @code
   /// System::Int32 i = 0;
   /// bool isInt32 = is<System::Int32>(i);
   /// @endcode
-  /// @see Pcf::System::Type
-  /// @ingroup Pcf
+  /// @see Switch::System::Type
+  /// @ingroup Switch
   template<typename TT, typename T>
   bool is(const ref<T>& value) {
     return value.template Is<TT>();
@@ -27,8 +27,8 @@ namespace Pcf {
   /// System::Int32 i = 0;
   /// bool isInt32 = is<System::Int32>(i);
   /// @endcode
-  /// @see Pcf::System::Type
-  /// @ingroup Pcf
+  /// @see Switch::System::Type
+  /// @ingroup Switch
   template<typename TT, typename T>
   bool is(ref<T>& value) {
     return value.template Is<TT>();
@@ -40,8 +40,8 @@ namespace Pcf {
   /// System::Int32 i = 0;
   /// bool isInt32 = is<System::Int32>(i);
   /// @endcode
-  /// @see Pcf::System::Type
-  /// @ingroup Pcf
+  /// @see Switch::System::Type
+  /// @ingroup Switch
   template<typename TT, typename T>
   bool is(const refptr<T>& value) {
     return value.template Is<TT>();
@@ -53,8 +53,8 @@ namespace Pcf {
   /// System::Int32 i = 0;
   /// bool isInt32 = is<System::Int32>(i);
   /// @endcode
-  /// @see Pcf::System::Type
-  /// @ingroup Pcf
+  /// @see Switch::System::Type
+  /// @ingroup Switch
   template<typename TT, typename T>
   bool is(refptr<T>& value) {
     return value.template Is<TT>();
@@ -66,8 +66,8 @@ namespace Pcf {
   /// System::Int32 i = 0;
   /// bool isInt32 = is<System::Int32>(i);
   /// @endcode
-  /// @see Pcf::System::Type
-  /// @ingroup Pcf
+  /// @see Switch::System::Type
+  /// @ingroup Switch
   template<typename TT, typename T>
   bool is(UniquePtr<T>& value) {
     return value.template Is<TT>();
@@ -79,8 +79,8 @@ namespace Pcf {
   /// System::Int32 i = 0;
   /// bool isInt32 = is<System::Int32>(i);
   /// @endcode
-  /// @see Pcf::System::Type
-  /// @ingroup Pcf
+  /// @see Switch::System::Type
+  /// @ingroup Switch
   template<typename TT, typename T>
   bool is(const T* value) {
     try {
@@ -98,7 +98,7 @@ namespace Pcf {
   /// System::Int32 i = 0;
   /// bool isInt32 = is<System::Int32>(i);
   /// @endcode
-  /// @see Pcf::System::Type
+  /// @see Switch::System::Type
   template<typename TT, typename T>
   bool is(T* value) {
     try {
@@ -116,8 +116,8 @@ namespace Pcf {
   /// System::Int32 i = 0;
   /// bool isInt32 = is<System::Int32>(i);
   /// @endcode
-  /// @see Pcf::System::Type
-  /// @ingroup Pcf
+  /// @see Switch::System::Type
+  /// @ingroup Switch
   template<typename TT, typename T>
   bool is(const T& value) {
     return is<TT>(&value);
@@ -129,8 +129,8 @@ namespace Pcf {
   /// System::Int32 i = 0;
   /// bool isInt32 = is<System::Int32>(i);
   /// @endcode
-  /// @see Pcf::System::Type
-  /// @ingroup Pcf
+  /// @see Switch::System::Type
+  /// @ingroup Switch
   template<typename TT, typename T>
   bool is(T& value) {
     return is<TT>(&value);
@@ -167,4 +167,4 @@ namespace Pcf {
   }
 }
 
-using namespace Pcf;
+using namespace Switch;

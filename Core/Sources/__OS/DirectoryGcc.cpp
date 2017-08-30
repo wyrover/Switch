@@ -4,9 +4,9 @@
 #include <unistd.h>
 #include <sys/stat.h>
 
-#include "../../Includes/Pcf/System/Collections/Generic/SortedDictionary.hpp"
-#include "../../Includes/Pcf/System/IO/FileAttributes.hpp"
-#include "../../Includes/Pcf/System/Environment.hpp"
+#include "../../Includes/Switch/System/Collections/Generic/SortedDictionary.hpp"
+#include "../../Includes/Switch/System/IO/FileAttributes.hpp"
+#include "../../Includes/Switch/System/Environment.hpp"
 #include "CoreApi.hpp"
 
 namespace {

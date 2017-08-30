@@ -1,13 +1,13 @@
-#include <Pcf/TUnit/Assert.hpp>
-#include <Pcf/TUnit/TestFixture.hpp>
-#include <Pcf/System/Windows/Forms/Control.hpp>
+#include <Switch/TUnit/Assert.hpp>
+#include <Switch/TUnit/TestFixture.hpp>
+#include <Switch/System/Windows/Forms/Control.hpp>
 
 using namespace System;
 using namespace System::Drawing;
 using namespace System::Windows::Forms;
 using namespace TUnit;
 
-namespace PcfUnitTests {
+namespace SwitchUnitTests {
   class ControlTest : public TestFixture {
   protected:
     void DefaultConstructor() {

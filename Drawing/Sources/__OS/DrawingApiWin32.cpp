@@ -1,10 +1,10 @@
 ﻿#if defined(_WIN32)
 #include <windows.h>
-#include <Pcf/Undef.hpp>
+#include <Switch/Undef.hpp>
 
 #include "DrawingApi.hpp"
-#include <Pcf/System/Diagnostics/Debug.hpp>
-#include <Pcf/System/ArgumentException.hpp>
+#include <Switch/System/Diagnostics/Debug.hpp>
+#include <Switch/System/ArgumentException.hpp>
 
 using namespace System;
 using namespace System::Collections::Generic;

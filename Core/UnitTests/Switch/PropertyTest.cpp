@@ -1,18 +1,18 @@
-#include <Pcf/Lock.hpp>
-#include <Pcf/System/Collections/Concurrent/ConcurrentBag.hpp>
-#include <Pcf/System/Collections/Concurrent/ConcurrentQueue.hpp>
-#include <Pcf/System/Collections/Concurrent/ConcurrentStack.hpp>
-#include <Pcf/System/Collections/Generic/Dictionary.hpp>
-#include <Pcf/System/Collections/Generic/HashSet.hpp>
-#include <Pcf/System/Collections/Generic/LinkedList.hpp>
-#include <Pcf/System/Collections/Generic/List.hpp>
-#include <Pcf/System/Collections/Generic/Queue.hpp>
-#include <Pcf/System/Collections/Generic/SortedDictionary.hpp>
-#include <Pcf/System/Collections/Generic/SortedSet.hpp>
-#include <Pcf/System/Collections/Generic/Stack.hpp>
-#include <Pcf/System/Collections/BitArray.hpp>
-#include <Pcf/TUnit/Assert.hpp>
-#include <Pcf/TUnit/TestFixture.hpp>
+#include <Switch/Lock.hpp>
+#include <Switch/System/Collections/Concurrent/ConcurrentBag.hpp>
+#include <Switch/System/Collections/Concurrent/ConcurrentQueue.hpp>
+#include <Switch/System/Collections/Concurrent/ConcurrentStack.hpp>
+#include <Switch/System/Collections/Generic/Dictionary.hpp>
+#include <Switch/System/Collections/Generic/HashSet.hpp>
+#include <Switch/System/Collections/Generic/LinkedList.hpp>
+#include <Switch/System/Collections/Generic/List.hpp>
+#include <Switch/System/Collections/Generic/Queue.hpp>
+#include <Switch/System/Collections/Generic/SortedDictionary.hpp>
+#include <Switch/System/Collections/Generic/SortedSet.hpp>
+#include <Switch/System/Collections/Generic/Stack.hpp>
+#include <Switch/System/Collections/BitArray.hpp>
+#include <Switch/TUnit/Assert.hpp>
+#include <Switch/TUnit/TestFixture.hpp>
 
 using namespace System;
 using namespace System::Collections;
@@ -20,7 +20,7 @@ using namespace System::Collections::Concurrent;
 using namespace System::Collections::Generic;
 using namespace TUnit;
 
-namespace PcfUnitTests {
+namespace SwitchUnitTests {
   class PropertyTest : public TestFixture {
   protected:
     void ReadWriteCanRead() {

@@ -1,7 +1,7 @@
-#include "../../../../Includes/Pcf/System/Net/IPAddress.hpp"
-#include "../../../../Includes/Pcf/System/Net/SocketAddress.hpp"
-#include "../../../../Includes/Pcf/System/BitConverter.hpp"
-#include "../../../../Includes/Pcf/System/Convert.hpp"
+#include "../../../../Includes/Switch/System/Net/IPAddress.hpp"
+#include "../../../../Includes/Switch/System/Net/SocketAddress.hpp"
+#include "../../../../Includes/Switch/System/BitConverter.hpp"
+#include "../../../../Includes/Switch/System/Convert.hpp"
 #include "../../../__OS/CoreApi.hpp"
 
 using namespace System;

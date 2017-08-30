@@ -1,12 +1,12 @@
-#include <Pcf/Any.hpp>
-#include <Pcf/As.hpp>
-#include <Pcf/TUnit/Assert.hpp>
-#include <Pcf/TUnit/TestFixture.hpp>
+#include <Switch/Any.hpp>
+#include <Switch/As.hpp>
+#include <Switch/TUnit/Assert.hpp>
+#include <Switch/TUnit/TestFixture.hpp>
 
 using namespace System;
 using namespace TUnit;
 
-namespace PcfUnitTests {
+namespace SwitchUnitTests {
   class AsTest : public TestFixture {
   protected:
     void StringAsString() {

@@ -1,11 +1,11 @@
 /// @file
-/// @brief Contains Pcf::System::Diagnostics::TraceEventType class.
+/// @brief Contains Switch::System::Diagnostics::TraceEventType class.
 #pragma once
 
 #include "../Enum.hpp"
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The System::Diagnostics namespace provides classes that allow you to interact with system processes, event logs, and performance counters.
@@ -49,4 +49,4 @@ public:
 };
 /// @endcond
 
-using namespace Pcf;
+using namespace Switch;

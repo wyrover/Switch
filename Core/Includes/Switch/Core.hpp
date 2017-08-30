@@ -2,7 +2,7 @@
 /// @brief Contains include files of Core library.
 #pragma once
 
-/// @defgroup Pcf Pcf
+/// @defgroup Switch Switch
 /// @brief The base module of the Portable C++ Framework wich aim to be independant from the OS.
 
 #include "Microsoft/Win32/Registry.hpp"

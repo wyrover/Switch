@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains Pcf::System::Uri class.
+/// @brief Contains Switch::System::Uri class.
 #pragma once
 
 #include "../Property.hpp"
@@ -20,8 +20,8 @@
 #include "Net/IPAddress.hpp"
 #include "Runtime/Serialization/ISerializable.hpp"
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief Provides an object representation of a uniform resource identifier (URI) && easy access to the parts of the URI.
@@ -941,4 +941,4 @@ namespace Pcf {
   }
 }
 
-using namespace Pcf;
+using namespace Switch;

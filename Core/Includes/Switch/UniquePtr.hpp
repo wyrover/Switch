@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains Pcf::UniquePtr <T> class.
+/// @brief Contains Switch::UniquePtr <T> class.
 #pragma once
 
 #include <exception>
@@ -9,7 +9,7 @@
 #include "Types.hpp"
 #include "Ref.hpp"
 
-namespace Pcf {
+namespace Switch {
   /// @brief Manages the storage of a pointer, providing a limited garbage-collection facility, with little to no overhead over built-in pointers.
   template<typename T>
   class UniquePtr {
@@ -330,9 +330,9 @@ namespace Pcf {
     /// @return string A string that represents the current object.
     std::string ToString() const {
       if (this->ptr == null)
-        return "Pcf::UniquePtr [Pointer=null]";
+        return "Switch::UniquePtr [Pointer=null]";
       std::stringstream s;
-      s << "Pcf::UniquePtr [Pointer=" << this->ptr << "]";
+      s << "Switch::UniquePtr [Pointer=" << this->ptr << "]";
       return s.str();
     }
     
@@ -547,9 +547,9 @@ namespace Pcf {
     /// @return string A string that represents the current object.
     std::string ToString() const {
       if (this->ptr == null)
-        return "Pcf::UniquePtr [Pointer=null]";
+        return "Switch::UniquePtr [Pointer=null]";
       std::stringstream s;
-      s << "Pcf::UniquePtr [Pointer=" << this->ptr << "]";
+      s << "Switch::UniquePtr [Pointer=" << this->ptr << "]";
       return s.str();
     }
     
@@ -651,4 +651,4 @@ namespace Pcf {
   /// @endcond
 }
 
-using namespace Pcf;
+using namespace Switch;

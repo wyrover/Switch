@@ -1,11 +1,11 @@
 /// @file
-/// @brief Contains Pcf::System::Globalization::NumberStyles enum.
+/// @brief Contains Switch::System::Globalization::NumberStyles enum.
 #pragma once
 
 #include "../Enum.hpp"
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The System::Globalization namespace contains classes that define culture-related information, including language, country/region, calendars in use, format patterns for dates, currency, and numbers, and sort order for strings. These classes are useful for writing globalized (internationalized) applications. Classes such as StringInfo and TextInfo provide advanced globalization functionalities, including surrogate support and text element processing.
@@ -51,4 +51,4 @@ public:
 };
 /// @endcond
 
-using namespace Pcf;
+using namespace Switch;

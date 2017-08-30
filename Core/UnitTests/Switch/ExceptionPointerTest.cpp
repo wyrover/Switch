@@ -1,11 +1,11 @@
-#include <Pcf/ExceptionPtr.hpp>
-#include <Pcf/TUnit/Assert.hpp>
-#include <Pcf/TUnit/TestFixture.hpp>
+#include <Switch/ExceptionPtr.hpp>
+#include <Switch/TUnit/Assert.hpp>
+#include <Switch/TUnit/TestFixture.hpp>
 
 using namespace System;
 using namespace TUnit;
 
-namespace PcfUnitTests {
+namespace SwitchUnitTests {
   class ExceptionPointerTest : public TestFixture {
   protected:
     void CreateExceptionPointerEmptyThenRethrow() {

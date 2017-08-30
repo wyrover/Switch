@@ -1,12 +1,12 @@
-﻿#include <Pcf/System/IO/Directory.hpp>
-#include <Pcf/System/IO/Path.hpp>
-#include <Pcf/TUnit/Assert.hpp>
-#include <Pcf/TUnit/TestFixture.hpp>
+﻿#include <Switch/System/IO/Directory.hpp>
+#include <Switch/System/IO/Path.hpp>
+#include <Switch/TUnit/Assert.hpp>
+#include <Switch/TUnit/TestFixture.hpp>
 
 using namespace System;
 using namespace TUnit;
 
-namespace PcfUnitTests {
+namespace SwitchUnitTests {
   class DirectoryTest : public TestFixture {
   protected:
     void SetUp() override {

@@ -1,16 +1,16 @@
 /// @file
-/// @brief Contains Pcf::System::Windows::Forms::AnchorStyles enum.
+/// @brief Contains Switch::System::Windows::Forms::AnchorStyles enum.
 #pragma once
 
-#include <Pcf/System/Enum.hpp>
+#include <Switch/System/Enum.hpp>
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
-  /// @brief The Pcf::System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
+  /// @brief The Switch::System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
-    /// @brief The Pcf::System::Windows namespaces including animation clients, user interface controls, data binding, and type conversion. Pcf::System::Windows::Forms and its child namespaces are used for developing Windows Forms applications.
+    /// @brief The Switch::System::Windows namespaces including animation clients, user interface controls, data binding, and type conversion. Switch::System::Windows::Forms and its child namespaces are used for developing Windows Forms applications.
     namespace Windows {
-      /// @brief The Pcf::System::Windows::Forms namespace contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system, Apple macOS and Linux like Ubuntu operating system.
+      /// @brief The Switch::System::Windows::Forms namespace contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system, Apple macOS and Linux like Ubuntu operating system.
       namespace Forms {
         /// @brief Specifies how a control anchors to the edges of its container.
         /// @remarks When a control is anchored to an edge of its container, the distance between the control and the specified edge remains constant when the container resizes. For example, if a control is anchored to the right edge of its container, the distance between the right edge of the control and the right edge of the container remains constant when the container resizes. A control can be anchored to any combination of control edges. If the control is anchored to opposite edges of its container (for example, to the top and bottom), it resizes when the container resizes. If a control has its Anchor property set to AnchorStyles.None, the control moves half of the distance that the container of the control is resized. For example, if a Button has its Anchor property set to AnchorStyles.None and the Form that the control is located on is resized by 20 pixels in either direction, the button will be moved 10 pixels in both directions.
@@ -45,4 +45,4 @@ public:
 };
 /// @endcond
 
-using namespace Pcf;
+using namespace Switch;

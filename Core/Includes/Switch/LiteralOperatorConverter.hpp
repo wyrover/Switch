@@ -1,11 +1,11 @@
 /// @file
-/// @brief Contains Pcf::operator""_b, Pcf::operator""_c, Pcf::operator""_s, ... operators.
+/// @brief Contains Switch::operator""_b, Switch::operator""_c, Switch::operator""_s, ... operators.
 #pragma once
 
 #include "System/Convert.hpp"
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief Used to convert specified value into byte:
   /// @code
   /// System::Console::WriteLine(1.6_b);
@@ -284,56 +284,56 @@ namespace Pcf {
   
   /// @brief Used to convert specified value into System::String:
   /// @code
-  /// Pcf::string s = "This is a "_S + "simple test"_S;
+  /// Switch::string s = "This is a "_S + "simple test"_S;
   /// System::Console::WriteLine(s);
   /// @endcode
   inline System::String operator""_s(const char* s, size_t) {return System::String(s);}
   
   /// @brief Used to convert specified value into System::String:
   /// @code
-  /// Pcf::string s = u"This is a "_S + "simple test"_S;
+  /// Switch::string s = u"This is a "_S + "simple test"_S;
   /// System::Console::WriteLine(s);
   /// @endcode
   inline System::String operator""_s(const char16* s, size_t) {return System::String(s);}
   
   /// @brief Used to convert specified value into System::String:
   /// @code
-  /// Pcf::string s = U"This is a "_S + "simple test"_S;
+  /// Switch::string s = U"This is a "_S + "simple test"_S;
   /// System::Console::WriteLine(s);
   /// @endcode
   inline System::String operator""_s(const char32* s, size_t) {return System::String(s);}
   
   /// @brief Used to convert specified value into System::String:
   /// @code
-  /// Pcf::string s = L"This is a "_S + "simple test"_S;
+  /// Switch::string s = L"This is a "_S + "simple test"_S;
   /// System::Console::WriteLine(s);
   /// @endcode
   inline System::String operator""_s(const wchar* s, size_t) {return System::String(s);}
 
   /// @brief Used to convert specified value into System::String:
   /// @code
-  /// Pcf::string s = "This is a "_S + "simple test"_S;
+  /// Switch::string s = "This is a "_S + "simple test"_S;
   /// System::Console::WriteLine(s);
   /// @endcode
   inline System::String operator""_S(const char* s, size_t) {return System::String(s);}
   
   /// @brief Used to convert specified value into System::String:
   /// @code
-  /// Pcf::string s = u"This is a "_S + "simple test"_S;
+  /// Switch::string s = u"This is a "_S + "simple test"_S;
   /// System::Console::WriteLine(s);
   /// @endcode
   inline System::String operator""_S(const char16* s, size_t) {return System::String(s);}
   
   /// @brief Used to convert specified value into System::String:
   /// @code
-  /// Pcf::string s = U"This is a "_S + "simple test"_S;
+  /// Switch::string s = U"This is a "_S + "simple test"_S;
   /// System::Console::WriteLine(s);
   /// @endcode
   inline System::String operator""_S(const char32* s, size_t) {return System::String(s);}
   
   /// @brief Used to convert specified value into System::String:
   /// @code
-  /// Pcf::string s = L"This is a "_S + "simple test"_S;
+  /// Switch::string s = L"This is a "_S + "simple test"_S;
   /// System::Console::WriteLine(s);
   /// @endcode
   inline System::String operator""_S(const wchar* s, size_t) {return System::String(s);}
@@ -483,4 +483,4 @@ namespace Pcf {
   inline System::UInt64 operator""_U64(const char* s, size_t) { return System::Convert::ToUInt64(s); }
 }
 
-using namespace Pcf;
+using namespace Switch;

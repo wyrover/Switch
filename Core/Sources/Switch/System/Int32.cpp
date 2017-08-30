@@ -1,9 +1,9 @@
 #include <limits>
-#include "../../../Includes/Pcf/System/Int32.hpp"
-#include "../../../Includes/Pcf/System/Convert.hpp"
-#include "../../../Includes/Pcf/System/DivideByZeroException.hpp"
-#include "../../../Includes/Pcf/System/NumericalFormat.hpp"
-#include "../../../Includes/Pcf/System/NumericalParsing.hpp"
+#include "../../../Includes/Switch/System/Int32.hpp"
+#include "../../../Includes/Switch/System/Convert.hpp"
+#include "../../../Includes/Switch/System/DivideByZeroException.hpp"
+#include "../../../Includes/Switch/System/NumericalFormat.hpp"
+#include "../../../Includes/Switch/System/NumericalParsing.hpp"
 
 using namespace System;
 

@@ -1,4 +1,4 @@
-#include "../../../../../Includes/Pcf/System/Windows/Forms/SystemInformation.hpp"
+#include "../../../../../Includes/Switch/System/Windows/Forms/SystemInformation.hpp"
 #include "../../../../__OS/FormsApi.hpp"
 
 using namespace System;

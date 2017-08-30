@@ -1,13 +1,13 @@
-#include <Pcf/System/Guid.hpp>
-#include <Pcf/System/Collections/Generic/SortedSet.hpp>
-#include <Pcf/TUnit/Assert.hpp>
-#include <Pcf/TUnit/TestFixture.hpp>
+#include <Switch/System/Guid.hpp>
+#include <Switch/System/Collections/Generic/SortedSet.hpp>
+#include <Switch/TUnit/Assert.hpp>
+#include <Switch/TUnit/TestFixture.hpp>
 
 using namespace System;
 using namespace System::Collections::Generic;
 using namespace TUnit;
 
-namespace PcfUnitTests {
+namespace SwitchUnitTests {
   class GuidTest : public TestFixture {
   protected:
     void CreateGuid() {

@@ -1,10 +1,10 @@
-#include <Pcf/System/BitConverter.hpp>
-#include <Pcf/System/Diagnostics/Debug.hpp>
-#include <Pcf/System/Drawing/Graphics.hpp>
-#include <Pcf/System/Drawing/SolidBrush.hpp>
-#include "../../../../../Includes/Pcf/System/Windows/Forms/Application.hpp"
-#include "../../../../../Includes/Pcf/System/Windows/Forms/Control.hpp"
-#include "../../../../../Includes/Pcf/System/Windows/Forms/Form.hpp"
+#include <Switch/System/BitConverter.hpp>
+#include <Switch/System/Diagnostics/Debug.hpp>
+#include <Switch/System/Drawing/Graphics.hpp>
+#include <Switch/System/Drawing/SolidBrush.hpp>
+#include "../../../../../Includes/Switch/System/Windows/Forms/Application.hpp"
+#include "../../../../../Includes/Switch/System/Windows/Forms/Control.hpp"
+#include "../../../../../Includes/Switch/System/Windows/Forms/Form.hpp"
 #include "../../../../__OS/FormsApi.hpp"
 
 using namespace System;

@@ -1,6 +1,6 @@
 #include "curl.hpp"
 
-#include "../../../../../Includes/Pcf/Types.hpp"
+#include "../../../../../Includes/Switch/Types.hpp"
 
 #include <curl/curl.h>
 

@@ -5,8 +5,8 @@
 #include "Version.hpp"
 #include "Collections/Generic/SortedDictionary.hpp"
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   namespace System {
     namespace Reflexion {
       class Assembly : public object {
@@ -77,9 +77,9 @@ namespace Pcf {
     }
   }
   
-  /// @brief Get Pcf library Version
-  /// @return Pcf library Version
+  /// @brief Get Switch library Version
+  /// @return Switch library Version
   const System::Version& GetVersion();
 }
 
-using namespace Pcf;
+using namespace Switch;

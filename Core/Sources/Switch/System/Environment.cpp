@@ -6,17 +6,17 @@
 
 #include "SocketInit.hpp"
 
-#include "../../../Includes/Pcf/Microsoft/Win32/Registry.hpp"
-#include "../../../Includes/Pcf/System/AccessViolationException.hpp"
-#include "../../../Includes/Pcf/System/Console.hpp"
-#include "../../../Includes/Pcf/System/Environment.hpp"
-#include "../../../Includes/Pcf/System/SystemVersion.hpp"
-#include "../../../Includes/Pcf/System/IO/Directory.hpp"
-#include "../../../Includes/Pcf/System/IO/DirectoryNotFoundException.hpp"
-#include "../../../Includes/Pcf/System/Diagnostics/StackTrace.hpp"
-#include "../../../Includes/Pcf/System/SystemException.hpp"
-#include "../../../Includes/Pcf/System/Threading/Thread.hpp"
-#include "../../../Includes/Pcf/System/Threading/AbandonedMutexException.hpp"
+#include "../../../Includes/Switch/Microsoft/Win32/Registry.hpp"
+#include "../../../Includes/Switch/System/AccessViolationException.hpp"
+#include "../../../Includes/Switch/System/Console.hpp"
+#include "../../../Includes/Switch/System/Environment.hpp"
+#include "../../../Includes/Switch/System/SystemVersion.hpp"
+#include "../../../Includes/Switch/System/IO/Directory.hpp"
+#include "../../../Includes/Switch/System/IO/DirectoryNotFoundException.hpp"
+#include "../../../Includes/Switch/System/Diagnostics/StackTrace.hpp"
+#include "../../../Includes/Switch/System/SystemException.hpp"
+#include "../../../Includes/Switch/System/Threading/Thread.hpp"
+#include "../../../Includes/Switch/System/Threading/AbandonedMutexException.hpp"
 #include "../../__OS/CoreApi.hpp"
 
 using namespace System;
@@ -232,7 +232,7 @@ Property<String, ReadOnly> Environment::UserName {
 };
 
 Property<const System::Version&, ReadOnly> Environment::Version {
-  []()->const System::Version& {return Pcf::GetVersion();}
+  []()->const System::Version& {return Switch::GetVersion();}
 };
 
 Property<int64, ReadOnly> Environment::WorkingSet {

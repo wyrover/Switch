@@ -1,13 +1,13 @@
 /// @file
-/// @brief Contains Pcf::TUnit::ConsoleEventListener class.
+/// @brief Contains Switch::TUnit::ConsoleEventListener class.
 #pragma once
 
 #include <gtest/gtest.h>
-#include <Pcf/System/ConsoleColor.hpp>
-#include <Pcf/System/String.hpp>
+#include <Switch/System/ConsoleColor.hpp>
+#include <Switch/System/String.hpp>
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The TUnit namespace contains a unit test framework.
   /// @remarks This example how to use TestFixture class, Assert class and #pcf_test method:
   /// @include Assert.cpp
@@ -77,4 +77,4 @@ namespace Pcf {
   }
 }
 
-using namespace Pcf;
+using namespace Switch;

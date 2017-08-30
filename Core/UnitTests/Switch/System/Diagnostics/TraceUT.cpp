@@ -1,9 +1,9 @@
-#include <Pcf/System/Diagnostics/Trace.hpp>
-#include <Pcf/System/Diagnostics/DefaultTraceListener.hpp>
-#include <Pcf/System/Diagnostics/TraceSource.hpp>
-#include <Pcf/System/Console.hpp>
-#include <Pcf/TUnit/Assert.hpp>
-#include <Pcf/TUnit/TestFixture.hpp>
+#include <Switch/System/Diagnostics/Trace.hpp>
+#include <Switch/System/Diagnostics/DefaultTraceListener.hpp>
+#include <Switch/System/Diagnostics/TraceSource.hpp>
+#include <Switch/System/Console.hpp>
+#include <Switch/TUnit/Assert.hpp>
+#include <Switch/TUnit/TestFixture.hpp>
 
 using namespace System;
 using namespace System::Diagnostics;

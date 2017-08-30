@@ -50,7 +50,7 @@ class __opaque_format_item__ {
     refptr<object> ptr;
   };
   
-  friend class Pcf::System::String;
+  friend class Switch::System::String;
   template <typename T, typename Bool>
   struct EnumOrOtherToAny {};
   
@@ -290,4 +290,4 @@ System::String System::String::Format(const IFormatProvider& provider, const Sys
   return System::String::FormatToString(provider, format, System::Array<__opaque_format_item__> {args...});
 }
 
-using namespace Pcf;
+using namespace Switch;

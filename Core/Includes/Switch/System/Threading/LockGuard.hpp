@@ -1,10 +1,10 @@
 /// @file
-/// @brief Contains Pcf::System::Threading::LockGuard class.
+/// @brief Contains Switch::System::Threading::LockGuard class.
 #pragma once
 
 #include "../Object.hpp"
 
-namespace Pcf {
+namespace Switch {
   namespace System {
     namespace Threading {
       /// @cond
@@ -25,4 +25,4 @@ namespace Pcf {
   }
 }
 
-using namespace Pcf;
+using namespace Switch;

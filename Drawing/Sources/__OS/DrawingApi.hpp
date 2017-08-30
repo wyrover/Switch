@@ -1,13 +1,13 @@
 #pragma once
 
-#include <Pcf/Static.hpp>
-#include <Pcf/System/Array.hpp>
+#include <Switch/Static.hpp>
+#include <Switch/System/Array.hpp>
 
-#include "../../Includes/Pcf/System/Drawing/Brush.hpp"
-#include "../../Includes/Pcf/System/Drawing/Color.hpp"
-#include "../../Includes/Pcf/System/Drawing/FontFamily.hpp"
-#include "../../Includes/Pcf/System/Drawing/Pen.hpp"
-#include "../../Includes/Pcf/System/Drawing/Rectangle.hpp"
+#include "../../Includes/Switch/System/Drawing/Brush.hpp"
+#include "../../Includes/Switch/System/Drawing/Color.hpp"
+#include "../../Includes/Switch/System/Drawing/FontFamily.hpp"
+#include "../../Includes/Switch/System/Drawing/Pen.hpp"
+#include "../../Includes/Switch/System/Drawing/Rectangle.hpp"
 
 namespace __OS {
   class DrawingApi pcf_static {

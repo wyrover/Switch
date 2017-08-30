@@ -1,11 +1,11 @@
 /// @file
-/// @brief Contains Pcf::System::ExecutionEngineException exception.
+/// @brief Contains Switch::System::ExecutionEngineException exception.
 #pragma once
 
 #include "SystemException.hpp"
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
    /// @brief The exception that is thrown when an attempt to load a class fails due to the absence of an entry method.
@@ -46,5 +46,5 @@ namespace Pcf {
   }
 }
 
-using namespace Pcf;
+using namespace Switch;
 

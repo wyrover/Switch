@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains Pcf::System::String class.
+/// @brief Contains Switch::System::String class.
 #pragma once
 
 #include "_String.hpp"

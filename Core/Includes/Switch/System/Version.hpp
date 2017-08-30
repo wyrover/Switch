@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains Pcf::System::Version class.
+/// @brief Contains Switch::System::Version class.
 #pragma once
 
 #include "../Property.hpp"
@@ -16,8 +16,8 @@
 #undef major
 #undef minor
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief Provides methods for creating, manipulating, searching, and sorting arrays, thereby serving as the base class for all arrays.
@@ -236,4 +236,4 @@ namespace Pcf {
   }
 }
 
-using namespace Pcf;
+using namespace Switch;

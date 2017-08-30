@@ -1,8 +1,8 @@
-#include <Pcf/System/Convert.hpp>
-#include <Pcf/System/Math.hpp>
-#include "../../../../Includes/Pcf/System/Drawing/Point.hpp"
-#include "../../../../Includes/Pcf/System/Drawing/PointF.hpp"
-#include "../../../../Includes/Pcf/System/Drawing/Size.hpp"
+#include <Switch/System/Convert.hpp>
+#include <Switch/System/Math.hpp>
+#include "../../../../Includes/Switch/System/Drawing/Point.hpp"
+#include "../../../../Includes/Switch/System/Drawing/PointF.hpp"
+#include "../../../../Includes/Switch/System/Drawing/Size.hpp"
 
 using namespace System;
 using namespace System::Drawing;

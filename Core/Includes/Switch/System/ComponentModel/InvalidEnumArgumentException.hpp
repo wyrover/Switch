@@ -1,14 +1,14 @@
 /// @file
-/// @brief Contains Pcf::System::ArgumentNullException exception.
+/// @brief Contains Switch::System::ArgumentNullException exception.
 #pragma once
 
 #include "../ArgumentException.hpp"
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
-    /// @brief The Pcf::System::ComponentModel namespace provides classes that are used to implement the run-time and design-time behavior of components and controls. This namespace includes the base classes and interfaces for implementing attributes and type converters, binding to data sources, and licensing components.
+    /// @brief The Switch::System::ComponentModel namespace provides classes that are used to implement the run-time and design-time behavior of components and controls. This namespace includes the base classes and interfaces for implementing attributes and type converters, binding to data sources, and licensing components.
     namespace ComponentModel {
       /// @brief The exception thrown when using invalid arguments that are enumerators.
       class pcf_public InvalidEnumArgumentException : public ArgumentException {
@@ -46,5 +46,5 @@ namespace Pcf {
   }
 }
 
-using namespace Pcf;
+using namespace Switch;
 

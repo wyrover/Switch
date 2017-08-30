@@ -1,10 +1,10 @@
 /// @file
-/// @brief Contains Pcf::Microsoft::Win32::RegistryKeyPermissionCheck enum.
+/// @brief Contains Switch::Microsoft::Win32::RegistryKeyPermissionCheck enum.
 #pragma once
 
 #include "../../System/Enum.hpp"
 
-namespace Pcf {
+namespace Switch {
   namespace Microsoft {
     namespace Win32 {
       /// @brief Specifies whether security checks are performed when opening registry keys and accessing their name/value pairs.
@@ -31,4 +31,4 @@ public:
 };
 /// @endcond
 
-using namespace Pcf;
+using namespace Switch;

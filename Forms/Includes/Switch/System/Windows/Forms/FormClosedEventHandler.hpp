@@ -1,12 +1,12 @@
 /// @file
-/// @brief Contains Pcf::System::Windows::Forms::FormClosedEventHandler event handler.
+/// @brief Contains Switch::System::Windows::Forms::FormClosedEventHandler event handler.
 #pragma once
 
-#include <Pcf/System/EventHandler.hpp>
+#include <Switch/System/EventHandler.hpp>
 
 #include "FormClosedEventArgs.hpp"
 
-namespace Pcf {
+namespace Switch {
   namespace System {
     namespace Windows {
       namespace Forms {

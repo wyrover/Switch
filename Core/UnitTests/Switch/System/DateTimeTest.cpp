@@ -2,14 +2,14 @@
 //                                                                                                                                                                DateTime2.cpp
 //#pragma once
 
-#include <Pcf/System/Object.hpp>
-#include <Pcf/System/ArgumentOutOfRangeException.hpp>
-#include <Pcf/System/Convert.hpp>
-#include <Pcf/System/DateTimeKind.hpp>
-#include <Pcf/System/DayOfWeek.hpp>
-#include <Pcf/System/TimeZoneInfo.hpp>
+#include <Switch/System/Object.hpp>
+#include <Switch/System/ArgumentOutOfRangeException.hpp>
+#include <Switch/System/Convert.hpp>
+#include <Switch/System/DateTimeKind.hpp>
+#include <Switch/System/DayOfWeek.hpp>
+#include <Switch/System/TimeZoneInfo.hpp>
 
-namespace Pcf {
+namespace Switch {
   namespace System {
     class DateTime2 : public object {
     public:
@@ -314,12 +314,12 @@ namespace Pcf {
   }
 }
 
-using namespace Pcf;
+using namespace Switch;
 
 //____________________________________________________________________________________________________________________________________________________________________________
 //                                                                                                                                                                DateTime2.cpp
 #include <chrono>
-//#include <../../Include/Pcf/System/DateTime.hpp>
+//#include <../../Include/Switch/System/DateTime.hpp>
 
 using namespace System;
 
@@ -363,9 +363,9 @@ constexpr int32 DateTime2::DaysToMonth366[13];
 //____________________________________________________________________________________________________________________________________________________________________________
 //                                                                                                                                                            DateTimeTest.cpp
 
-#include <Pcf/TUnit/Assert.hpp>
-#include <Pcf/TUnit/TestFixture.hpp>
-#include <Pcf/System/Console.hpp>
+#include <Switch/TUnit/Assert.hpp>
+#include <Switch/TUnit/TestFixture.hpp>
+#include <Switch/System/Console.hpp>
 
 using namespace System;
 using namespace TUnit;

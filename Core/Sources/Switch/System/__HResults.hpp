@@ -1,7 +1,7 @@
-#include "../../../Includes/Pcf/Static.hpp"
-#include "../../../Includes/Pcf/Types.hpp"
+#include "../../../Includes/Switch/Static.hpp"
+#include "../../../Includes/Switch/Types.hpp"
 
-namespace Pcf {
+namespace Switch {
   namespace System {
     class __HResults pcf_static {
     public:

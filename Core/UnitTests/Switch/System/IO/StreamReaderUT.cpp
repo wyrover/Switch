@@ -1,8 +1,8 @@
-#include <Pcf/System/IO/MemoryStream.hpp>
-#include <Pcf/System/IO/StringReader.hpp>
-#include <Pcf/System/IO/StreamReader.hpp>
-#include <Pcf/TUnit/Assert.hpp>
-#include <Pcf/TUnit/TestFixture.hpp>
+#include <Switch/System/IO/MemoryStream.hpp>
+#include <Switch/System/IO/StringReader.hpp>
+#include <Switch/System/IO/StreamReader.hpp>
+#include <Switch/TUnit/Assert.hpp>
+#include <Switch/TUnit/TestFixture.hpp>
 
 using namespace System;
 using namespace System::IO;

@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains Pcf::System::Type class.
+/// @brief Contains Switch::System::Type class.
 #pragma once
 
 #include "../As.hpp"
@@ -13,8 +13,8 @@
 #include "TypeCode.hpp"
 #include "ValueType.hpp"
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @cond
   namespace System {
     class Type;
@@ -87,8 +87,8 @@ namespace Pcf {
       String GetName() const;
       String GetNamespace() const;
       
-      template<typename T> friend Type Pcf::pcf_typeof();
-      template<typename T> friend Type Pcf::pcf_typeof(const T& value);
+      template<typename T> friend Type Switch::pcf_typeof();
+      template<typename T> friend Type Switch::pcf_typeof(const T& value);
       friend class Object;
       
       Type();
@@ -105,13 +105,13 @@ namespace Pcf {
   /// Type type = pcf_typeof<Int32>();
   /// @endcode
   /// @par Examples
-  /// To obtain the run-time type of an expression, you can use the Pcf method GetType, as in the following example:
+  /// To obtain the run-time type of an expression, you can use the Switch method GetType, as in the following example:
   /// @code
   /// Int32 i = 0;
   /// System::Type type = i.GetType();
   /// @endcode
   /// @remarks The pcf_typeof operator cannot be overloaded.
-  /// @ingroup Pcf
+  /// @ingroup Switch
   template<typename T>
   System::Type pcf_typeof() {
     return System::Type(typeid(T));
@@ -124,14 +124,14 @@ namespace Pcf {
   /// type atype& = pcf_typeof(i);
   /// @endcode
   /// @par Examples
-  /// To obtain the run-time type of an expression, you can use the Pcf method GetType, as in the following example:
+  /// To obtain the run-time type of an expression, you can use the Switch method GetType, as in the following example:
   /// @code
   /// Int32 42 = 0;
   /// System::Type Type = i.GetType();
   /// @endcode
   /// @remarks The pcf_typeof operator cannot be overloaded.
   /// @see System::Type
-  /// @ingroup Pcf
+  /// @ingroup Switch
   template<typename T>
   System::Type pcf_typeof(const T& value) {
     return System::Type(typeid(value));
@@ -153,4 +153,4 @@ namespace Pcf {
 #endif
 }
 
-using namespace Pcf;
+using namespace Switch;

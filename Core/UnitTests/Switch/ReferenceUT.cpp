@@ -1,6 +1,6 @@
-#include <Pcf/Ref.hpp>
-#include <Pcf/TUnit/Assert.hpp>
-#include <Pcf/TUnit/TestFixture.hpp>
+#include <Switch/Ref.hpp>
+#include <Switch/TUnit/Assert.hpp>
+#include <Switch/TUnit/TestFixture.hpp>
 
 using namespace System;
 using namespace TUnit;
@@ -109,15 +109,15 @@ TEST(ReferenceTest, SetPointerFromANativePointerAndGetPointer) {
 
 TEST(ReferenceTest, SetNullToPointerAndGetToString) {
   ref<string> ptr;
-  EXPECT_EQ("Pcf::Ref [Reference=null]", ptr.ToString());
+  EXPECT_EQ("Switch::Ref [Reference=null]", ptr.ToString());
 }
 
 TEST(ReferenceTest, SetPointerFromANativePointerAndGetToString) {
   string str = "Test Reference!";
   ref<string> ptr(str);
-  EXPECT_TRUE(string(ptr.ToString().c_str()).StartsWith("Pcf::Ref [Reference="));
+  EXPECT_TRUE(string(ptr.ToString().c_str()).StartsWith("Switch::Ref [Reference="));
   EXPECT_TRUE(string(ptr.ToString().c_str()).EndsWith("]"));
-  EXPECT_NE("Pcf::Ref [Reference=null]", ptr.ToString());
+  EXPECT_NE("Switch::Ref [Reference=null]", ptr.ToString());
 }
 
 }

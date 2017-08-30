@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains Pcf::SharedPtr <T> class.
+/// @brief Contains Switch::SharedPtr <T> class.
 #pragma once
 
 #include <atomic>
@@ -10,7 +10,7 @@
 #include "Types.hpp"
 #include "RefPtr.hpp"
 
-namespace Pcf {
+namespace Switch {
   /// @brief Represents a Reference Pointer class. A SharedPtr is a memory-managing pointer to an object.
   /// @remarks A Reference Pointer is basically a pointer with a destructor. The destructor ensures that the object pointed to is deleted when it is no longer being used. You can have multiple pointers to the same object, so the object is only deleted when the last pointer is destroyed.
   /// @remarks A Reference Pointer has to have slightly different characteristics to a conventional C pointer. These differences show up in the behaviour of the pointer on assignment and when the pointer's address (i.e. the object being pointed to) is changed. Deciding the exact behaviour is difficult and very subjective. This could be solved by having a range of different classes with slightly different behaviour. You could then choose which one suits your problem. However, I don't agree with this approach - I think you get quickly bogged down with the subtle differences and lose sight of the program you are actually trying to write. So I provide just one kind of Reference Pointer which I believe is the most general-purpose. I think this is consistent with the STL, which provides just one kind of vector, map, list etc.
@@ -25,7 +25,7 @@ namespace Pcf {
   /// @par Examples
   /// This example show how to used SharedPtr :
   /// @include SharedPtr.cpp
-  /// @ingroup Pcf
+  /// @ingroup Switch
   template<typename T>
   using SharedPtr = RefPtr<T>;
   
@@ -33,4 +33,4 @@ namespace Pcf {
   SharedPtr<T> MakeShared(Args&&... args) {return SharedPtr<T>(new T(args...));}
 }
 
-using namespace Pcf;
+using namespace Switch;

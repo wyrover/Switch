@@ -1,13 +1,13 @@
 /// @file
-/// @brief Contains Pcf::Interface struct and #pcf_interface keyword.
+/// @brief Contains Switch::Interface struct and #pcf_interface keyword.
 #pragma once
 
 #include "Types.hpp"
 #include "Allocator.hpp"
 #include "NullPtr.hpp"
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief Represent an interface class.
   struct pcf_public Interface {
     /// @cond
@@ -38,9 +38,9 @@ namespace Pcf {
   ///   String ToString() const override {return "Foo";}
   /// };
   /// @endcode
-  /// @ingroup Pcf
+  /// @ingroup Switch
   #define pcf_interface\
   : public Interface
 }
 
-using namespace Pcf;
+using namespace Switch;

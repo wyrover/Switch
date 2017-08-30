@@ -1,6 +1,6 @@
 ﻿#if defined(_WIN32)
 
-#include <Pcf/System/Collections/Generic/Dictionary.hpp>
+#include <Switch/System/Collections/Generic/Dictionary.hpp>
 
 typedef HWND__* HWND;
 

@@ -1,11 +1,11 @@
 /// @file
-/// @brief Contains Pcf::System::Windows::Forms::InvalidateEventArgs class.
+/// @brief Contains Switch::System::Windows::Forms::InvalidateEventArgs class.
 #pragma once
 
-#include <Pcf/System/EventArgs.hpp>
-#include <Pcf/System/Drawing/Rectangle.hpp>
+#include <Switch/System/EventArgs.hpp>
+#include <Switch/System/Drawing/Rectangle.hpp>
 
-namespace Pcf {
+namespace Switch {
   namespace System {
     namespace Windows {
       namespace Forms {
@@ -14,14 +14,14 @@ namespace Pcf {
         public:
           /// @brief Initializes a new instance of the InvalidateEventArgs class.
           /// @param invalidRect The Rectangle that contains the invalidated window area.
-          InvalidateEventArgs(const Pcf::System::Drawing::Rectangle& invalidRect) : invalidRect(invalidRect) {}
+          InvalidateEventArgs(const Switch::System::Drawing::Rectangle& invalidRect) : invalidRect(invalidRect) {}
 
           /// @brief Gets the Rectangle that contains the invalidated window area.
           /// @return The invalidated window area.
-          const Pcf::System::Drawing::Rectangle& InvalidRect() const { return this->invalidRect; }
+          const Switch::System::Drawing::Rectangle& InvalidRect() const { return this->invalidRect; }
 
         private:
-          Pcf::System::Drawing::Rectangle invalidRect;
+          Switch::System::Drawing::Rectangle invalidRect;
         };
       }
     }

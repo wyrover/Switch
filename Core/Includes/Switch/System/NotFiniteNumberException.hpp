@@ -1,11 +1,11 @@
 /// @file
-/// @brief Contains Pcf::System::NotFiniteNumberException exception.
+/// @brief Contains Switch::System::NotFiniteNumberException exception.
 #pragma once
 
 #include "ArithmeticException.hpp"
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The exception that is thrown when a floating-point value is positive infinity, negative infinity, or Not-a-Number (NaN).
@@ -46,5 +46,5 @@ namespace Pcf {
   }
 }
 
-using namespace Pcf;
+using namespace Switch;
 

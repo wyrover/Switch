@@ -1,12 +1,12 @@
-#include <Pcf/System/Text/StringBuilder.hpp>
-#include <Pcf/TUnit/Assert.hpp>
-#include <Pcf/TUnit/TestFixture.hpp>
+#include <Switch/System/Text/StringBuilder.hpp>
+#include <Switch/TUnit/Assert.hpp>
+#include <Switch/TUnit/TestFixture.hpp>
 
 using namespace System;
 using namespace System::Text;
 using namespace TUnit;
 
-namespace PcfUnitTests {
+namespace SwitchUnitTests {
   class StringBuilderTest : public TestFixture {
   protected:
     void DefaultConstructor() {

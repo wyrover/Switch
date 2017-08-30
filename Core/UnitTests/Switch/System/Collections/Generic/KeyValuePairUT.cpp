@@ -1,7 +1,7 @@
-#include <Pcf/System/Collections/Generic/KeyValuePair.hpp>
-#include <Pcf/System/ConsoleColor.hpp>
-#include <Pcf/TUnit/Assert.hpp>
-#include <Pcf/TUnit/TestFixture.hpp>
+#include <Switch/System/Collections/Generic/KeyValuePair.hpp>
+#include <Switch/System/ConsoleColor.hpp>
+#include <Switch/TUnit/Assert.hpp>
+#include <Switch/TUnit/TestFixture.hpp>
 
 using namespace System;
 using namespace System::Collections::Generic;

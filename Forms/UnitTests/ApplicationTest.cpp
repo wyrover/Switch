@@ -1,11 +1,11 @@
-#include <Pcf/TUnit/Assert.hpp>
-#include <Pcf/TUnit/TestFixture.hpp>
-#include <Pcf/System/Windows/Forms/Application.hpp>
+#include <Switch/TUnit/Assert.hpp>
+#include <Switch/TUnit/TestFixture.hpp>
+#include <Switch/System/Windows/Forms/Application.hpp>
 
 using namespace System::Windows::Forms;
 using namespace TUnit;
 
-namespace PcfUnitTests {
+namespace SwitchUnitTests {
   class ApplicationTest : public TestFixture {
   protected:
     void EnableVisualStyles() {

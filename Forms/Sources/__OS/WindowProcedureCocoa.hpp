@@ -2,8 +2,8 @@
 #import <Cocoa/Cocoa.h>
 #import <Foundation/Foundation.h>
 
-#include <Pcf/System/Double.hpp>
-#include <Pcf/System/Collections/Generic/SortedDictionary.hpp>
+#include <Switch/System/Double.hpp>
+#include <Switch/System/Collections/Generic/SortedDictionary.hpp>
 #include "FormsApi.hpp"
 #include "WindowMessage.hpp"
 #include "WindowMessageKey.hpp"

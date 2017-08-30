@@ -1,6 +1,6 @@
-#include <Pcf/UniquePtr.hpp>
-#include <Pcf/TUnit/Assert.hpp>
-#include <Pcf/TUnit/TestFixture.hpp>
+#include <Switch/UniquePtr.hpp>
+#include <Switch/TUnit/Assert.hpp>
+#include <Switch/TUnit/TestFixture.hpp>
 
 using namespace System;
 using namespace TUnit;
@@ -204,14 +204,14 @@ namespace {
 
   TEST(Up, ToString) {
     pcf_using(UniquePtr<string> ptr) {
-      EXPECT_EQ(string("Pcf::UniquePtr [Pointer=null]"), ptr.ToString().c_str());
+      EXPECT_EQ(string("Switch::UniquePtr [Pointer=null]"), ptr.ToString().c_str());
     }
 
     string* str = new string("Test Pointer!");
     pcf_using(UniquePtr<string> ptr(str)) {
-      EXPECT_TRUE(string(ptr.ToString().c_str()).StartsWith("Pcf::UniquePtr [Pointer="));
+      EXPECT_TRUE(string(ptr.ToString().c_str()).StartsWith("Switch::UniquePtr [Pointer="));
       EXPECT_TRUE(string(ptr.ToString().c_str()).EndsWith("]"));
-      EXPECT_NE(string("Pcf::UniquePtr [Pointer=null]"), ptr.ToString().c_str());
+      EXPECT_NE(string("Switch::UniquePtr [Pointer=null]"), ptr.ToString().c_str());
     }
 
   }

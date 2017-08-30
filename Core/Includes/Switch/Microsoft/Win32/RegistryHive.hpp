@@ -1,10 +1,10 @@
 /// @file
-/// @brief Contains Pcf::Microsoft::Win32::RegistryHive enum.
+/// @brief Contains Switch::Microsoft::Win32::RegistryHive enum.
 #pragma once
 
 #include "../../System/Enum.hpp"
 
-namespace Pcf {
+namespace Switch {
   namespace Microsoft {
     namespace Win32 {
       /// @brief Represents the possible values for a top-level node on a foreign machine.
@@ -39,4 +39,4 @@ public:
 };
 /// @endcond
 
-using namespace Pcf;
+using namespace Switch;

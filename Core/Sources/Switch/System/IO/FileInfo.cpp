@@ -1,10 +1,10 @@
-#include "../../../../Includes/Pcf/Types.hpp"
-#include "../../../../Includes/Pcf/System/IO/FileInfo.hpp"
-#include "../../../../Includes/Pcf/System/Security/SecurityException.hpp"
-#include "../../../../Includes/Pcf/System/IO/DirectoryInfo.hpp"
-#include "../../../../Includes/Pcf/System/IO/File.hpp"
-#include "../../../../Includes/Pcf/System/IO/FileNotFoundException.hpp"
-#include "../../../../Includes/Pcf/System/IO/Path.hpp"
+#include "../../../../Includes/Switch/Types.hpp"
+#include "../../../../Includes/Switch/System/IO/FileInfo.hpp"
+#include "../../../../Includes/Switch/System/Security/SecurityException.hpp"
+#include "../../../../Includes/Switch/System/IO/DirectoryInfo.hpp"
+#include "../../../../Includes/Switch/System/IO/File.hpp"
+#include "../../../../Includes/Switch/System/IO/FileNotFoundException.hpp"
+#include "../../../../Includes/Switch/System/IO/Path.hpp"
 #include "../../../__OS/CoreApi.hpp"
 
 using namespace System;

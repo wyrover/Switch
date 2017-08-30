@@ -1,12 +1,12 @@
 /// @file
-/// @brief Contains Pcf::System::ComponentModel::ISite interface.
+/// @brief Contains Switch::System::ComponentModel::ISite interface.
 #pragma once
 
-#include <Pcf/Interface.hpp>
+#include <Switch/Interface.hpp>
 
 #include "IComponent.hpp"
 
-namespace Pcf {
+namespace Switch {
   namespace System {
     namespace ComponentModel {
       class IComponenent;

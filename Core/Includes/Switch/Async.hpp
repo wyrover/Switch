@@ -1,11 +1,11 @@
 /// @file
-/// @brief Contains Pcf::Async class and #pcf_async keyword.
+/// @brief Contains Switch::Async class and #pcf_async keyword.
 #pragma once
 
 #include "System/Threading/Tasks/Task.hpp"
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief Represent an asynchronous task
   /// @par Examples
   /// This example demontrate how to use async and await
@@ -37,8 +37,8 @@ namespace Pcf {
   /// @par Examples
   /// This example demontrate how to use async and await
   /// @include Async2.cpp
-  /// @ingroup Pcf
+  /// @ingroup Switch
   #define pcf_async(Task, name, method) async<Task> name{[&] method}
 }
 
-using namespace Pcf;
+using namespace Switch;

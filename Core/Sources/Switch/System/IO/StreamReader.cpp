@@ -1,9 +1,9 @@
-#include "../../../../Includes/Pcf/System/IO/StreamReader.hpp"
-#include "../../../../Includes/Pcf/System/Array.hpp"
-#include "../../../../Includes/Pcf/System/Convert.hpp"
-#include "../../../../Includes/Pcf/System/ObjectClosedException.hpp"
-#include "../../../../Includes/Pcf/System/IO/FileStream.hpp"
-#include "../../../../Includes/Pcf/System/Text/StringBuilder.hpp"
+#include "../../../../Includes/Switch/System/IO/StreamReader.hpp"
+#include "../../../../Includes/Switch/System/Array.hpp"
+#include "../../../../Includes/Switch/System/Convert.hpp"
+#include "../../../../Includes/Switch/System/ObjectClosedException.hpp"
+#include "../../../../Includes/Switch/System/IO/FileStream.hpp"
+#include "../../../../Includes/Switch/System/Text/StringBuilder.hpp"
 
 using namespace System;
 using namespace System::IO;

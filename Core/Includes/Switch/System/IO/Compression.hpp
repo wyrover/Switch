@@ -1,4 +1,4 @@
 /// @file
-/// @brief Contains Pcf::System::IO::Compression namespace.
+/// @brief Contains Switch::System::IO::Compression namespace.
 #pragma once
 

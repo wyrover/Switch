@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains Pcf::System::FormatProvider class.
+/// @brief Contains Switch::System::FormatProvider class.
 #pragma once
 
 #include "ICustomFormatter.hpp"
@@ -8,8 +8,8 @@
 #include "String.hpp"
 #include "Type.hpp"
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief Implements the IFormatProvider interface to format data as a string
@@ -24,4 +24,4 @@ namespace Pcf {
   }
 }
 
-using namespace Pcf;
+using namespace Switch;

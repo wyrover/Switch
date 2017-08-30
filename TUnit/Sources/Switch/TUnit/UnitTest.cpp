@@ -1,8 +1,8 @@
-#include <Pcf/TUnit/UnitTest.hpp>
-#include <Pcf/System/Console.hpp>
-#include <Pcf/System/Environment.hpp>
-#include <Pcf/System/String.hpp>
-#include <Pcf/Startup.hpp>
+#include <Switch/TUnit/UnitTest.hpp>
+#include <Switch/System/Console.hpp>
+#include <Switch/System/Environment.hpp>
+#include <Switch/System/String.hpp>
+#include <Switch/Startup.hpp>
 #include <gtest/gtest.h>
 #include "ConsoleEventListener.hpp"
 

@@ -1,10 +1,10 @@
-#include "../../../../Includes/Pcf/Types.hpp"
-#include "../../../../Includes/Pcf/System/Net/WebResponse.hpp"
-#include "../../../../Includes/Pcf/System/Buffer.hpp"
-#include "../../../../Includes/Pcf/System/Math.hpp"
-#include "../../../../Includes/Pcf/System/TimeoutException.hpp"
-#include "../../../../Includes/Pcf/System/IO/IOException.hpp"
-#include "../../../../Includes/Pcf/System/Net/WebRequest.hpp"
+#include "../../../../Includes/Switch/Types.hpp"
+#include "../../../../Includes/Switch/System/Net/WebResponse.hpp"
+#include "../../../../Includes/Switch/System/Buffer.hpp"
+#include "../../../../Includes/Switch/System/Math.hpp"
+#include "../../../../Includes/Switch/System/TimeoutException.hpp"
+#include "../../../../Includes/Switch/System/IO/IOException.hpp"
+#include "../../../../Includes/Switch/System/Net/WebRequest.hpp"
 #include "Internals/curl.hpp"
 
 using namespace System;

@@ -1,7 +1,7 @@
-﻿#include <Pcf/System/Windows/Forms/Application.hpp>
-#include <Pcf/System/Windows/Forms/Button.hpp>
-#include <Pcf/System/Windows/Forms/TabControl.hpp>
-#include <Pcf/Startup.hpp>
+﻿#include <Switch/System/Windows/Forms/Application.hpp>
+#include <Switch/System/Windows/Forms/Button.hpp>
+#include <Switch/System/Windows/Forms/TabControl.hpp>
+#include <Switch/Startup.hpp>
 
 using namespace System;
 using namespace System::Drawing;

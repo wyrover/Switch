@@ -1,7 +1,7 @@
-#include "../../../../Includes/Pcf/System/Array.hpp"
-#include "../../../../Includes/Pcf/System/Threading/Monitor.hpp"
-#include "../../../../Includes/Pcf/System/Threading/Mutex.hpp"
-#include "../../../../Includes/Pcf/System/Threading/TimeOut.hpp"
+#include "../../../../Includes/Switch/System/Array.hpp"
+#include "../../../../Includes/Switch/System/Threading/Monitor.hpp"
+#include "../../../../Includes/Switch/System/Threading/Mutex.hpp"
+#include "../../../../Includes/Switch/System/Threading/TimeOut.hpp"
 
 namespace {
   std::recursive_mutex mutex;

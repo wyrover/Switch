@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains Pcf::System::Nullable struct.
+/// @brief Contains Switch::System::Nullable struct.
 #pragma once
 
 #include "../NullPtr.hpp"
@@ -10,7 +10,7 @@
 #include "InvalidOperationException.hpp"
 #include "Object.hpp"
 
-namespace Pcf {
+namespace Switch {
   namespace System {
     /// @brief Represents a value type that can be assigned null.
     /// @par Examples

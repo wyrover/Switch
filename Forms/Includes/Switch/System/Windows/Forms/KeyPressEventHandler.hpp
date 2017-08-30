@@ -1,12 +1,12 @@
 /// @file
-/// @brief Contains Pcf::System::Windows::Forms::KeyPressEventHandler event handler.
+/// @brief Contains Switch::System::Windows::Forms::KeyPressEventHandler event handler.
 #pragma once
 
-#include <Pcf/System/EventHandler.hpp>
+#include <Switch/System/EventHandler.hpp>
 
 #include "KeyPressEventArgs.hpp"
 
-namespace Pcf {
+namespace Switch {
   namespace System {
     namespace Windows {
       namespace Forms {

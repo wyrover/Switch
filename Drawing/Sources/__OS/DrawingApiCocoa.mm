@@ -1,8 +1,8 @@
 #if defined(__APPLE__)
 #import <Cocoa/Cocoa.h>
 #import <Foundation/Foundation.h>
-#include <Pcf/System/Diagnostics/Debug.hpp>
-#include <Pcf/System/ArgumentException.hpp>
+#include <Switch/System/Diagnostics/Debug.hpp>
+#include <Switch/System/ArgumentException.hpp>
 #include "DrawingApi.hpp"
 
 using namespace System;

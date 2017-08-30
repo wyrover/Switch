@@ -1,9 +1,9 @@
-#include "../../../../../Includes/Pcf/System/Windows/Forms/TabPage.hpp"
-#include "../../../../../Includes/Pcf/System/Windows/Forms/TabControl.hpp"
+#include "../../../../../Includes/Switch/System/Windows/Forms/TabPage.hpp"
+#include "../../../../../Includes/Switch/System/Windows/Forms/TabControl.hpp"
 #include "../../../../__OS/FormsApi.hpp"
 
-#include <Pcf/System/EventArgs.hpp>
-#include <Pcf/System/Drawing/SystemColors.hpp>
+#include <Switch/System/EventArgs.hpp>
+#include <Switch/System/Drawing/SystemColors.hpp>
 
 using namespace System;
 using namespace System::ComponentModel;

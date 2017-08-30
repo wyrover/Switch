@@ -1,12 +1,12 @@
-﻿#include <Pcf/System/String.hpp>
-#include <Pcf/TUnit/Assert.hpp>
-#include <Pcf/TUnit/TestFixture.hpp>
-#include <Pcf/LiteralOperatorConverter.hpp>
+﻿#include <Switch/System/String.hpp>
+#include <Switch/TUnit/Assert.hpp>
+#include <Switch/TUnit/TestFixture.hpp>
+#include <Switch/LiteralOperatorConverter.hpp>
 
 using namespace System;
 using namespace TUnit;
 
-namespace PcfUnitTests {
+namespace SwitchUnitTests {
   class StringTest : public TestFixture {
   protected:
     void SetUp() override {}
@@ -173,19 +173,19 @@ namespace PcfUnitTests {
     }
     
     void OperatorLitteralChar() {
-      TUnit::Assert::AreEqual("Pcf::System::String", pcf_typeof("Test"_S).ToString(), pcf_current_information);
+      TUnit::Assert::AreEqual("Switch::System::String", pcf_typeof("Test"_S).ToString(), pcf_current_information);
     }
     
     void OperatorLitteralChar16() {
-      TUnit::Assert::AreEqual("Pcf::System::String", pcf_typeof(u"Test"_S).ToString(), pcf_current_information);
+      TUnit::Assert::AreEqual("Switch::System::String", pcf_typeof(u"Test"_S).ToString(), pcf_current_information);
     }
     
     void OperatorLitteralChar32() {
-      TUnit::Assert::AreEqual("Pcf::System::String", pcf_typeof(U"Test"_S).ToString(), pcf_current_information);
+      TUnit::Assert::AreEqual("Switch::System::String", pcf_typeof(U"Test"_S).ToString(), pcf_current_information);
     }
     
     void OperatorLitteralWChar() {
-      TUnit::Assert::AreEqual("Pcf::System::String", pcf_typeof(L"Test"_S).ToString(), pcf_current_information);
+      TUnit::Assert::AreEqual("Switch::System::String", pcf_typeof(L"Test"_S).ToString(), pcf_current_information);
     }
     
     void OperatorAddConstCharPointer() {

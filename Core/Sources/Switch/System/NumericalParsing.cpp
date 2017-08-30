@@ -1,7 +1,7 @@
-#include "../../../Includes/Pcf/System/NumericalParsing.hpp"
-#include "../../../Includes/Pcf/System/Convert.hpp"
-#include "../../../Includes/Pcf/System/NumberRepresentationBase.hpp"
-#include "../../../Includes/Pcf/System/SystemException.hpp"
+#include "../../../Includes/Switch/System/NumericalParsing.hpp"
+#include "../../../Includes/Switch/System/Convert.hpp"
+#include "../../../Includes/Switch/System/NumberRepresentationBase.hpp"
+#include "../../../Includes/Switch/System/SystemException.hpp"
 
 using namespace System;
 
@@ -31,7 +31,7 @@ namespace {
   }
 }
 
-namespace Pcf {
+namespace Switch {
   namespace System {
     
     static inline uint32 ToDigit(char32 c) {
@@ -255,4 +255,4 @@ namespace Pcf {
     }
     
   } // System
-} // Pcf
+} // Switch

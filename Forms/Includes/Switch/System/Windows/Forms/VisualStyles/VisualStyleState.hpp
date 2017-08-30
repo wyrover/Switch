@@ -1,14 +1,14 @@
 /// @file
-/// @brief Contains Pcf::System::Windows::Forms::VisualStyles::VisualStyleState enum.
+/// @brief Contains Switch::System::Windows::Forms::VisualStyles::VisualStyleState enum.
 #pragma once
 
-#include <Pcf/System/Enum.hpp>
+#include <Switch/System/Enum.hpp>
 
-namespace Pcf {
+namespace Switch {
   namespace System {
     namespace Windows {
       namespace Forms {
-        /// @brief The Pcf::System::Windows::Forms::VisualStyles namespace contains classes for rendering controls and other Windows user interface (UI) elements with visual styles in operating systems that support them.
+        /// @brief The Switch::System::Windows::Forms::VisualStyles namespace contains classes for rendering controls and other Windows user interface (UI) elements with visual styles in operating systems that support them.
         namespace VisualStyles {
           /// @brief Enumeration.
           /// Specifies how visual styles are applied to the current application.
@@ -40,4 +40,4 @@ public:
 };
 /// @endcond
 
-using namespace Pcf;
+using namespace Switch;

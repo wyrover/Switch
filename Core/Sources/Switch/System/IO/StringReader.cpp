@@ -1,7 +1,7 @@
-#include "../../../../Includes/Pcf/System/IO/StringReader.hpp"
-#include "../../../../Includes/Pcf/System/Array.hpp"
-#include "../../../../Includes/Pcf/System/ObjectClosedException.hpp"
-#include "../../../../Includes/Pcf/System/IO/IOException.hpp"
+#include "../../../../Includes/Switch/System/IO/StringReader.hpp"
+#include "../../../../Includes/Switch/System/Array.hpp"
+#include "../../../../Includes/Switch/System/ObjectClosedException.hpp"
+#include "../../../../Includes/Switch/System/IO/IOException.hpp"
 
 using namespace System;
 using namespace System::IO;

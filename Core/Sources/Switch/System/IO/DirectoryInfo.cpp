@@ -1,9 +1,9 @@
-#include "../../../../Includes/Pcf/System/IO/Directory.hpp"
-#include "../../../../Includes/Pcf/System/IO/File.hpp"
-#include "../../../../Includes/Pcf/System/IO/DirectoryNotFoundException.hpp"
-#include "../../../../Includes/Pcf/System/IO/Path.hpp"
-#include "../../../../Includes/Pcf/System/Security/SecurityException.hpp"
-#include "../../../../Includes/Pcf/System/Text/StringBuilder.hpp"
+#include "../../../../Includes/Switch/System/IO/Directory.hpp"
+#include "../../../../Includes/Switch/System/IO/File.hpp"
+#include "../../../../Includes/Switch/System/IO/DirectoryNotFoundException.hpp"
+#include "../../../../Includes/Switch/System/IO/Path.hpp"
+#include "../../../../Includes/Switch/System/Security/SecurityException.hpp"
+#include "../../../../Includes/Switch/System/Text/StringBuilder.hpp"
 #include "../../../__OS/CoreApi.hpp"
 
 using namespace System;

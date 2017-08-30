@@ -2,8 +2,8 @@
 #include <cstddef>
 #include <cstring>
 
-#include "../../../Includes/Pcf/System/Array.hpp"
-#include "../../../Includes/Pcf/System/Type.hpp"
+#include "../../../Includes/Switch/System/Array.hpp"
+#include "../../../Includes/Switch/System/Type.hpp"
 #include "../../__OS/CoreApi.hpp"
 
 using namespace System;
@@ -32,7 +32,7 @@ bool Type::Equals(const Type& type) const {
 
 String Type::GetFullName() const {
   String fullName = __OS::CoreApi::Type::Demangle(this->type.name());
-  Array<string> containsNullPtrTypes = {"Pcf::System::Func", "Pcf::System::Tuple"};
+  Array<string> containsNullPtrTypes = {"Switch::System::Func", "Switch::System::Tuple"};
   for (string item : containsNullPtrTypes) {
     if (fullName.StartsWith(item)) {
       fullName = fullName.Replace(", std::nullptr_t", "");

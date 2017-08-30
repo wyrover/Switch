@@ -1,11 +1,11 @@
 /// @file
-/// @brief Contains Pcf::System::MethodAccessException exception.
+/// @brief Contains Switch::System::MethodAccessException exception.
 #pragma once
 
 #include "MemberAccessException.hpp"
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The exception that is thrown when there is an invalid attempt to access a method, such as accessing a private method from partially trusted code.
@@ -46,5 +46,5 @@ namespace Pcf {
   }
 }
 
-using namespace Pcf;
+using namespace Switch;
 

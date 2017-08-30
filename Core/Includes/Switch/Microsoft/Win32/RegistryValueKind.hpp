@@ -1,10 +1,10 @@
 /// @file
-/// @brief Contains Pcf::Microsoft::Win32::RegistryValueKind enum.
+/// @brief Contains Switch::Microsoft::Win32::RegistryValueKind enum.
 #pragma once
 
 #include "../../System/Enum.hpp"
 
-namespace Pcf {
+namespace Switch {
   /// @brief The Microsoft namespace provide Microsoft specific classes.
   namespace Microsoft {
     /// @brief The Microsoft::Win32 namespace provides two types of classes: those that handle events raised by the operating system and those that manipulate the system registry.
@@ -44,4 +44,4 @@ public:
 };
 /// @endcond
 
-using namespace Pcf;
+using namespace Switch;

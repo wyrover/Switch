@@ -3,7 +3,7 @@
 #include <gtkmm/fixed.h>
 #include <gtkmm/radiobuttongroup.h>
 #include <gtkmm/widget.h>
-#include <Pcf/System/Diagnostics/Debug.hpp>
+#include <Switch/System/Diagnostics/Debug.hpp>
 #include "FormsApi.hpp"
 
 namespace __OS {

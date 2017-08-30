@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains Pcf::ExceptionPtr class.
+/// @brief Contains Switch::ExceptionPtr class.
 #pragma once
 
 #include <exception>
@@ -84,8 +84,8 @@
 #include "System/Threading/WaitHandleCannotBeOpenedException.hpp"
 #include "System/Runtime/Serialization/SerializationException.hpp"
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief Smart pointer type that can refer to exception objects.
   /// @remarks It is a shared pointer-like type: The pointed exception is guaranteed to remain valid for as long as at least one exception_ptr points to it, potentially extending its lifetime beyond the scope of a catch statement or across threads.
   /// @remarks Different libraries may implement this type differently, but it shall at least support the following operations without throwing:
@@ -256,4 +256,4 @@ namespace Pcf {
   using excptr = ExceptionPtr;
 }
 
-using namespace Pcf;
+using namespace Switch;

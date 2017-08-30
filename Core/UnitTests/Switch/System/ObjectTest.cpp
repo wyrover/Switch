@@ -1,11 +1,11 @@
-#include <Pcf/System/Object.hpp>
-#include <Pcf/TUnit/Assert.hpp>
-#include <Pcf/TUnit/TestFixture.hpp>
+#include <Switch/System/Object.hpp>
+#include <Switch/TUnit/Assert.hpp>
+#include <Switch/TUnit/TestFixture.hpp>
 
 using namespace System;
 using namespace TUnit;
 
-namespace PcfUnitTests {
+namespace SwitchUnitTests {
   class ObjectTest : public TestFixture {
   protected:
     void SetUp() override {}
@@ -79,11 +79,11 @@ namespace PcfUnitTests {
     }
     
     void GetTypeOnObject() {
-      TUnit::Assert::AreEqual("Pcf::System::Object", Object().GetType().FullName(), pcf_current_information);
+      TUnit::Assert::AreEqual("Switch::System::Object", Object().GetType().FullName(), pcf_current_information);
     }
     
     void GetTypeOnString() {
-      TUnit::Assert::AreEqual("Pcf::System::String", String().GetType().FullName(), pcf_current_information);
+      TUnit::Assert::AreEqual("Switch::System::String", String().GetType().FullName(), pcf_current_information);
     }
     
     void MemberwiseCloneOnString() {
@@ -127,7 +127,7 @@ namespace PcfUnitTests {
     }
     
     void ObjectToString() {
-      TUnit::Assert::AreEqual("Pcf::System::Object", Object().ToString(), pcf_current_information);
+      TUnit::Assert::AreEqual("Switch::System::Object", Object().ToString(), pcf_current_information);
     }
     
     void ObjectStringToString() {

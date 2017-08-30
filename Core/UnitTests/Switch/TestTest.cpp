@@ -1,7 +1,7 @@
 ﻿// Internal Test (Remove comment to test...)
 /*
-#include <Pcf/TUnit/Assert.hpp>
-#include <Pcf/TUnit/TestFixture.hpp>
+#include <Switch/TUnit/Assert.hpp>
+#include <Switch/TUnit/TestFixture.hpp>
 
 using namespace System;
 using namespace TUnit;
@@ -50,7 +50,7 @@ TEST_F(GTestTest, ThrowIndexOutOfRangeException) {
   ASSERT_THROW(throw ArgumentNullException(pcf_current_information), IndexOutOfRangeException);
 }
 
-namespace PcfUnitTests {
+namespace SwitchUnitTests {
   class TUnitTest : public TestFixture {
   public:
     void SetUp() override {}

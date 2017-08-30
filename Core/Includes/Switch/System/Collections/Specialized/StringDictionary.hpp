@@ -1,12 +1,12 @@
 /// @file
-/// @brief Contains Pcf::System::Collections::Specialized::StringDictionary, Pcf::System::Collections::Specialized::StringKeyValuePair, Pcf::System::Collections::Specialized::StringKeyValuePairEnumerator classes and Pcf::System::Collections::Specialized::IStringKeyValuePairEnumerator interface.
+/// @brief Contains Switch::System::Collections::Specialized::StringDictionary, Switch::System::Collections::Specialized::StringKeyValuePair, Switch::System::Collections::Specialized::StringKeyValuePairEnumerator classes and Switch::System::Collections::Specialized::IStringKeyValuePairEnumerator interface.
 #pragma once
 
 #include "../../String.hpp"
 #include "../Generic/SortedDictionary.hpp"
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The System::Collections namespace contains interfaces and classes that define various collections of objects, such as lists, queues, bit arrays, hash tables and dictionaries.

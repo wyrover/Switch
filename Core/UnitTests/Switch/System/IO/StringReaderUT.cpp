@@ -1,7 +1,7 @@
-#include <Pcf/System/IO/StringReader.hpp>
-#include <Pcf/System/ObjectClosedException.hpp>
-#include <Pcf/TUnit/Assert.hpp>
-#include <Pcf/TUnit/TestFixture.hpp>
+#include <Switch/System/IO/StringReader.hpp>
+#include <Switch/System/ObjectClosedException.hpp>
+#include <Switch/TUnit/Assert.hpp>
+#include <Switch/TUnit/TestFixture.hpp>
 
 using namespace System;
 using namespace System::IO;
@@ -48,14 +48,14 @@ namespace {
   }
 
   TEST(StringReader, ReadLine) {
-    StringReader reader("pcf\r\nthis is a second line\r\n");
-    EXPECT_EQ("pcf", reader.ReadLine());
+    StringReader reader("switch\r\nthis is a second line\r\n");
+    EXPECT_EQ("switch", reader.ReadLine());
     EXPECT_EQ("this is a second line", reader.ReadLine());
     EXPECT_EQ(-1, reader.Peek());
   }
 
   TEST(StringReader, ReadLine___Throws_ObjectClosedException_When_Closed) {
-    StringReader reader("pcf\r\nthis is a second line\r\n");
+    StringReader reader("switch\r\nthis is a second line\r\n");
     reader.Close();
     EXPECT_THROW(reader.ReadLine(), ObjectClosedException);
   }
@@ -66,16 +66,16 @@ namespace {
   }
 
   TEST(StringReader, ReadToEnd___Throws_ObjectClosedException_When_Closed) {
-    StringReader reader("pcf\r\nthis is a second line\r\n");
+    StringReader reader("switch\r\nthis is a second line\r\n");
     reader.Close();
     EXPECT_THROW(reader.ReadToEnd(), ObjectClosedException);
   }
 
   TEST(StringReader, ReadToEnd) {
-    StringReader reader("pcf\r\nthis is a second line\r\n");
-    EXPECT_EQ('p', reader.Peek());
-    EXPECT_EQ('p', reader.Read());
-    EXPECT_EQ("cf", reader.ReadLine());
+    StringReader reader("switch\r\nthis is a second line\r\n");
+    EXPECT_EQ('s', reader.Peek());
+    EXPECT_EQ('s', reader.Read());
+    EXPECT_EQ("witch", reader.ReadLine());
     EXPECT_EQ('t', reader.Peek());
     EXPECT_EQ("this is a second line\r\n", reader.ReadToEnd());
     EXPECT_EQ(-1, reader.Peek());

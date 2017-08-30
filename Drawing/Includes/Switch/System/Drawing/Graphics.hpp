@@ -1,10 +1,10 @@
 /// @file
-/// @brief Contains Pcf::System::Drawing::Graphics class.
+/// @brief Contains Switch::System::Drawing::Graphics class.
 #pragma once
 
-#include <Pcf/System/Object.hpp>
-#include <Pcf/System/String.hpp>
-#include <Pcf/System/Convert.hpp>
+#include <Switch/System/Object.hpp>
+#include <Switch/System/String.hpp>
+#include <Switch/System/Convert.hpp>
 
 #include "Brush.hpp"
 #include "Color.hpp"
@@ -18,7 +18,7 @@
 #include "SizeF.hpp"
 
 /// @cond
-namespace Pcf {
+namespace Switch {
   namespace System {
     namespace Windows {
       namespace Forms {
@@ -29,7 +29,7 @@ namespace Pcf {
 };
 /// @endcond
 
-namespace Pcf {
+namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The System::Drawing namespace provides access to GDI+ basic graphics functionality. More advanced functionality is provided in the System::Drawing::Drawing2D, System::Drawing::Imaging, and System::Drawing::Text namespaces.
@@ -129,7 +129,7 @@ namespace Pcf {
         static Graphics FromHdcInternal(intptr hdc);
 
       private:
-        friend class Pcf::System::Windows::Forms::Control;
+        friend class Switch::System::Windows::Forms::Control;
         void SetRectangle(const Rectangle& clipRectangle) { this->clipRectangle = clipRectangle; }
         Graphics(intptr hdc, const Rectangle& clipRectangle) : hdc(hdc), clipRectangle(clipRectangle) {}
         Graphics(intptr hwnd, intptr hdc, const Rectangle& clipRectangle) : hwnd(hwnd), hdc(hdc), clipRectangle(clipRectangle) {}

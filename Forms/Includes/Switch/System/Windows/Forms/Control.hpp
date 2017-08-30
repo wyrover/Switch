@@ -1,14 +1,14 @@
 /// @file
-/// @brief Contains Pcf::System::Windows::Forms::Control class.
+/// @brief Contains Switch::System::Windows::Forms::Control class.
 #pragma once
 
-#include <Pcf/System/Collections/Generic/Dictionary.hpp>
-#include <Pcf/System/Collections/Generic/List.hpp>
-#include <Pcf/System/Drawing/Color.hpp>
-#include <Pcf/System/Drawing/SolidBrush.hpp>
-#include <Pcf/System/Drawing/SystemColors.hpp>
-#include <Pcf/System/Drawing/Font.hpp>
-#include <Pcf/System/Nullable.hpp>
+#include <Switch/System/Collections/Generic/Dictionary.hpp>
+#include <Switch/System/Collections/Generic/List.hpp>
+#include <Switch/System/Drawing/Color.hpp>
+#include <Switch/System/Drawing/SolidBrush.hpp>
+#include <Switch/System/Drawing/SystemColors.hpp>
+#include <Switch/System/Drawing/Font.hpp>
+#include <Switch/System/Nullable.hpp>
 #include "../../ComponentModel/Component.hpp"
 #include "../../ComponentModel/EventHandlerList.hpp"
 #include "ControlStyles.hpp"
@@ -19,7 +19,7 @@
 #include "MouseEventHandler.hpp"
 #include "PaintEventHandler.hpp"
 
-namespace Pcf {
+namespace Switch {
   namespace System {
     namespace Windows {
       namespace Forms {

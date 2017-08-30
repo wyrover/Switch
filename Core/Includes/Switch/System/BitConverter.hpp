@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains Pcf::System::BitConverter class.
+/// @brief Contains Switch::System::BitConverter class.
 #pragma once
 
 #include "../Property.hpp"
@@ -11,8 +11,8 @@
 #include "String.hpp"
 #include "Text/StringBuilder.hpp"
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief Converts base data types to an array of bytes, and an array of bytes to base data types.
@@ -367,5 +367,5 @@ namespace Pcf {
   }
 }
 
-using namespace Pcf;
+using namespace Switch;
 

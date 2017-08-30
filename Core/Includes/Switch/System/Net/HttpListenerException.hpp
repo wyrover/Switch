@@ -1,12 +1,12 @@
 /// @file
-/// @brief Contains Pcf::System::Net::HttpListenerException exception.
+/// @brief Contains Switch::System::Net::HttpListenerException exception.
 #pragma once
 
 #include "../SystemException.hpp"
 
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The System::Net namespace provides a simple programming interface for many of the protocols used on networks today.
@@ -51,4 +51,4 @@ namespace Pcf {
   }
 }
 
-using namespace Pcf;
+using namespace Switch;

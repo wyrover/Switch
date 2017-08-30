@@ -1,9 +1,9 @@
 /// @file
-/// @brief Contains Pcf::System::Text::Decoder class.
+/// @brief Contains Switch::System::Text::Decoder class.
 #pragma once
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The System::Text namespace contains classes that represent ASCII and Unicode character encodings; abstract base classes for converting blocks of characters to and from blocks of bytes; and a helper class that manipulates and formats string objects without creating intermediate instances of string.
@@ -13,4 +13,4 @@ namespace Pcf {
   }
 }
 
-using namespace Pcf;
+using namespace Switch;

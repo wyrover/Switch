@@ -1,10 +1,10 @@
 /// @file
-/// @brief Contains Pcf::System::ComponentModel::IContainer interface.
+/// @brief Contains Switch::System::ComponentModel::IContainer interface.
 #pragma once
 
-#include <Pcf/Interface.hpp>
+#include <Switch/Interface.hpp>
 
-namespace Pcf {
+namespace Switch {
   namespace System {
     namespace ComponentModel {
       class IComponenent;

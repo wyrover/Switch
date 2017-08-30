@@ -1,15 +1,15 @@
 /// @file
-/// @brief Contains Pcf::System::Drawing::Bitmap class.
+/// @brief Contains Switch::System::Drawing::Bitmap class.
 #pragma once
 
-#include <Pcf/RefPtr.hpp>
-#include <Pcf/System/String.hpp>
-#include <Pcf/System/IO/Stream.hpp>
+#include <Switch/RefPtr.hpp>
+#include <Switch/System/String.hpp>
+#include <Switch/System/IO/Stream.hpp>
 
 #include "Image.hpp"
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The System::Drawing namespace provides access to GDI+ basic graphics functionality. More advanced functionality is provided in the System::Drawing::Drawing2D, System::Drawing::Imaging, and System::Drawing::Text namespaces.

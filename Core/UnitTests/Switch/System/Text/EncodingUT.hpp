@@ -1,6 +1,6 @@
-#include <Pcf/System/Array.hpp>
-#include <Pcf/System/Collections/Generic/List.hpp>
-#include <Pcf/System/Text/Encoding.hpp>
+#include <Switch/System/Array.hpp>
+#include <Switch/System/Collections/Generic/List.hpp>
+#include <Switch/System/Text/Encoding.hpp>
 
 using namespace System;
 
@@ -32,8 +32,8 @@ namespace EncodingUT {
       character = c;
       for(int32 i = 0; i < byteCount; i += 1)
         bytes.Add(b[i]);
-      if(byteCount == 1 && b[0] == Pcf::System::Text::Encoding::Unknown())
-        decodedCharacter = Pcf::System::Text::Encoding::Unknown();
+      if(byteCount == 1 && b[0] == Switch::System::Text::Encoding::Unknown())
+        decodedCharacter = Switch::System::Text::Encoding::Unknown();
       else
         decodedCharacter = character;
     }
@@ -48,7 +48,7 @@ namespace EncodingUT {
 
     bool operator==(const UnicodeCharacter& c) const;
 
-    Pcf::System::String ToString() const {
+    Switch::System::String ToString() const {
       return string() + character;
     }
 
@@ -65,7 +65,7 @@ namespace EncodingUT {
   protected:
     char32 character;
     char32 decodedCharacter;
-    Pcf::System::Collections::Generic::List<byte> bytes;
+    Switch::System::Collections::Generic::List<byte> bytes;
   };
 
   class UnicodeSequence {
@@ -80,7 +80,7 @@ namespace EncodingUT {
       decodedChars.Add(c.DecodedCharacter());
     }
 
-    UnicodeSequence(const Pcf::System::Array<UnicodeCharacter>& chars) { 
+    UnicodeSequence(const Switch::System::Array<UnicodeCharacter>& chars) { 
       for(int32 i = 0; i < chars.Length; i++)
         *this += chars[i];
     }
@@ -94,8 +94,8 @@ namespace EncodingUT {
     UnicodeSequence operator+(const UnicodeSequence& info) const;
     UnicodeSequence& operator+=(const UnicodeSequence& info);
 
-    Pcf::System::String ToString() const {
-      return Pcf::System::String(chars.Data(), chars.Count);
+    Switch::System::String ToString() const {
+      return Switch::System::String(chars.Data(), chars.Count);
     }
 
     const byte* Bytes() const { return bytes.Data(); }
@@ -106,8 +106,8 @@ namespace EncodingUT {
     int32 Count() const { return chars.Count; }
 
   protected:
-    Pcf::System::Collections::Generic::List<char32> chars;
-    Pcf::System::Collections::Generic::List<char32> decodedChars;
-    Pcf::System::Collections::Generic::List<byte> bytes;
+    Switch::System::Collections::Generic::List<char32> chars;
+    Switch::System::Collections::Generic::List<char32> decodedChars;
+    Switch::System::Collections::Generic::List<byte> bytes;
   };
 }

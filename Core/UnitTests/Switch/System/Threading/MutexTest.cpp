@@ -1,18 +1,18 @@
-#include <Pcf/System/Threading/Mutex.hpp>
-#include <Pcf/System/Threading/Thread.hpp>
-#include <Pcf/TUnit/Assert.hpp>
-#include <Pcf/TUnit/TestFixture.hpp>
+#include <Switch/System/Threading/Mutex.hpp>
+#include <Switch/System/Threading/Thread.hpp>
+#include <Switch/TUnit/Assert.hpp>
+#include <Switch/TUnit/TestFixture.hpp>
 
 using namespace System;
 using namespace System::Threading;
 using namespace TUnit;
 
-namespace PcfUnitTests {
+namespace SwitchUnitTests {
   class MutexTest : public TestFixture {
   protected:
     void CreateMutex() {
       Mutex mutex;
-      Assert::AreEqual("Pcf::System::Threading::Mutex", mutex.ToString(), pcf_current_information);
+      Assert::AreEqual("Switch::System::Threading::Mutex", mutex.ToString(), pcf_current_information);
     }
     
     void CreateTwoMutex() {

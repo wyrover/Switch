@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains Pcf::System::Text::StringBuilder class.
+/// @brief Contains Switch::System::Text::StringBuilder class.
 #pragma once
 
 #include <codecvt>
@@ -23,7 +23,7 @@
 #include "../_ustring.hpp"
 #include "../_String.hpp"
 
-namespace Pcf {
+namespace Switch {
   namespace System {
     namespace Text {
       /// @brief Represents a mutable string of characters. This class cannot be inherited.
@@ -215,7 +215,7 @@ namespace Pcf {
         /// @brief Gets the maximum capacity of this instance.
         /// @return The maximum number of characters this instance can hold.
         /// @remarks The maximum capacity for this implementation is Int32.MaxValue. However, this value is implementation-specific and might be different in other or later implementations. You can explicitly set the maximum capacity of a StringBuilder object by calling the StringBuilder(Int32, Int32) constructor.
-        /// @remarks In the Pcf when you instantiate the StringBuilder object by calling the StringBuilder(Int32, Int32) constructor, both the length and the capacity of the StringBuilder instance can grow beyond the value of its MaxCapacity property. This can occur particularly when you call the Append and AppendFormat methods to append small strings.
+        /// @remarks In the Switch when you instantiate the StringBuilder object by calling the StringBuilder(Int32, Int32) constructor, both the length and the capacity of the StringBuilder instance can grow beyond the value of its MaxCapacity property. This can occur particularly when you call the Append and AppendFormat methods to append small strings.
         Property<int32, ReadOnly> MaxCapacity {
           pcf_get {return this->maxCapacity;}
         };
@@ -713,4 +713,4 @@ namespace Pcf {
   }
 }
 
-using namespace Pcf;
+using namespace Switch;

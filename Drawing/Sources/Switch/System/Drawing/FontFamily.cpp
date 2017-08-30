@@ -1,6 +1,6 @@
-#include <Pcf/System/Collections/Generic/List.hpp>
-#include "../../../../Includes/Pcf/System/Drawing/FontFamily.hpp"
-#include "../../../../Includes/Pcf/System/Drawing/Text/InstalledFontCollection.hpp"
+#include <Switch/System/Collections/Generic/List.hpp>
+#include "../../../../Includes/Switch/System/Drawing/FontFamily.hpp"
+#include "../../../../Includes/Switch/System/Drawing/Text/InstalledFontCollection.hpp"
 #include "../../../__OS/DrawingApi.hpp"
 
 namespace {

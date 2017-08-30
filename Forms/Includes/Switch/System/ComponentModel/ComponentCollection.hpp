@@ -1,13 +1,13 @@
 /// @file
-/// @brief Contains Pcf::System::ComponentModel::ComponentCollection class.
+/// @brief Contains Switch::System::ComponentModel::ComponentCollection class.
 #pragma once
 
-#include <Pcf/System/Object.hpp>
-#include <Pcf/RefPtr.hpp>
-#include <Pcf/System/Array.hpp>
-#include <Pcf/System/Collections/ArrayList.hpp>
+#include <Switch/System/Object.hpp>
+#include <Switch/RefPtr.hpp>
+#include <Switch/System/Array.hpp>
+#include <Switch/System/Collections/ArrayList.hpp>
 
-namespace Pcf {
+namespace Switch {
   namespace System {
     namespace ComponentModel {
       class IComponent;

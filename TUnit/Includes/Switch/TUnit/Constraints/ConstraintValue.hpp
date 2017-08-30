@@ -1,12 +1,12 @@
 /// @file
-/// @brief Contains Pcf::TUnit::Constraints::ConstraintValue class.
+/// @brief Contains Switch::TUnit::Constraints::ConstraintValue class.
 #pragma once
 
-#include <Pcf/Any.hpp>
-#include <Pcf/System/Object.hpp>
+#include <Switch/Any.hpp>
+#include <Switch/System/Object.hpp>
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The TUnit namespace contains a unit test framework.
   /// @par Examples
   /// This example how to use TestFixture class, Assert class and #pcf_test method:
@@ -80,7 +80,7 @@ namespace Pcf {
   /// TUnit::Constraints::ContraintValue v = "Test";
   /// bool isString = is<string>(v);
   /// @endcode
-  /// @see Pcf::System::Type
+  /// @see Switch::System::Type
   template<typename T>
   bool is(const TUnit::Constraints::ConstraintValue& value) {
     return ((const any&)value).Is<T>();
@@ -92,12 +92,12 @@ namespace Pcf {
   /// TUnit::Constraints::ContraintValue v = "Test";
   /// bool isString = is<string>(v);
   /// @endcode
-  /// @see Pcf::System::Type
+  /// @see Switch::System::Type
   template<typename T>
   bool is(TUnit::Constraints::ConstraintValue& value) {
     return ((any&)value).Is<T>();
   }
 }
 
-using namespace Pcf;
+using namespace Switch;
 

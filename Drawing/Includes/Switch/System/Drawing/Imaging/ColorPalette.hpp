@@ -1,13 +1,13 @@
 /// @file
-/// @brief Contains Pcf::System::Drawing::Imaging::ColorPalette class.
+/// @brief Contains Switch::System::Drawing::Imaging::ColorPalette class.
 #pragma once
 
-#include <Pcf/System/Object.hpp>
-#include <Pcf/System/Array.hpp>
+#include <Switch/System/Object.hpp>
+#include <Switch/System/Array.hpp>
 #include "../Color.hpp"
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The System::Drawing namespace provides access to GDI+ basic graphics functionality. More advanced functionality is provided in the System::Drawing::Drawing2D, System::Drawing::Imaging, and System::Drawing::Text namespaces.
@@ -33,8 +33,8 @@ namespace Pcf {
           };
 
         private:
-          friend class Pcf::System::Drawing::Bmp;
-          friend class Pcf::System::Drawing::Image;
+          friend class Switch::System::Drawing::Bmp;
+          friend class Switch::System::Drawing::Image;
           ColorPalette() : flags(0) {}
 
           Array<Color> entries;

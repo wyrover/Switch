@@ -1,15 +1,15 @@
 #include <cstdio>
 #include <cstring>
 
-#include "../../../Includes/Pcf/Types.hpp"
-#include "../../../Includes/Pcf/System/NumericalFormat.hpp"
-#include "../../../Includes/Pcf/System/Collections/Generic/List.hpp"
-#include "../../../Includes/Pcf/System/SystemException.hpp"
+#include "../../../Includes/Switch/Types.hpp"
+#include "../../../Includes/Switch/System/NumericalFormat.hpp"
+#include "../../../Includes/Switch/System/Collections/Generic/List.hpp"
+#include "../../../Includes/Switch/System/SystemException.hpp"
 #include "../../__OS/CoreApi.hpp"
 
 using namespace System;
 
-namespace Pcf {
+namespace Switch {
   namespace System {
     static inline bool IsDigit(char32  c ) {
       return c >= '0' && c <= '9';
@@ -361,4 +361,4 @@ namespace Pcf {
     //Double& arg TEMP_FORMAT("%g");
     
   } // System
-} // Pcf
+} // Switch

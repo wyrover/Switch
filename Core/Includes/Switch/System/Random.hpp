@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains Pcf::System::Random class.
+/// @brief Contains Switch::System::Random class.
 #pragma once
 
 #include "../Types.hpp"
@@ -7,8 +7,8 @@
 #include "Object.hpp"
 #include "Convert.hpp"
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief Represents a pseudo-random number generator, a device that produces a sequence of numbers that meet certain statistical requirements for randomness.
@@ -19,9 +19,9 @@ namespace Pcf {
     /// @remarks To improve performance, create one Random object to generate many random numbers over time, instead of repeatedly creating a new Random objects to generate one random number.
     /// @remarks To generate a cryptographically secure random number suitable for creating a random password, for example, use a class derived from System::Security::Cryptography.RandomNumberGenerator such as System::Security::Cryptography.RNGCryptoServiceProvider.
     /// @par Notes to Callers
-    /// The implementation of the random number generator in the Random class is not guaranteed to remain the same across major versions of the Pcf. As a result, your application code should not assume that the same seed will result in the same pseudo-random sequence in different versions of the Pcf.
+    /// The implementation of the random number generator in the Random class is not guaranteed to remain the same across major versions of the Switch. As a result, your application code should not assume that the same seed will result in the same pseudo-random sequence in different versions of the Switch.
     /// @par Notes to Inheritors
-    /// In tPcf, the behavior of the Random.Next(), Random::Next(int32, int32), and NextBytes methods have changed so that these methods do not necessarily call the derived class implementation of the Sample method. As a result, classes derived from Random that target the Pcf should also virtual these three methods.
+    /// In Switch, the behavior of the Random.Next(), Random::Next(int32, int32), and NextBytes methods have changed so that these methods do not necessarily call the derived class implementation of the Sample method. As a result, classes derived from Random that target the Switch should also virtual these three methods.
     /// @par Examples
     /// The following example creates a single random number generator and calls its NextBytes, Next, and NextDouble methods to generate sequences of random numbers within different ranges.
     /// @include Random2.cpp
@@ -81,4 +81,4 @@ namespace Pcf {
   }
 }
 
-using namespace Pcf;
+using namespace Switch;

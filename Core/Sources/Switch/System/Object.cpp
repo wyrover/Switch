@@ -1,6 +1,6 @@
-#include "../../../Includes/Pcf/System/Object.hpp"
-#include "../../../Includes/Pcf/System/String.hpp"
-#include "../../../Includes/Pcf/System/Type.hpp"
+#include "../../../Includes/Switch/System/Object.hpp"
+#include "../../../Includes/Switch/System/String.hpp"
+#include "../../../Includes/Switch/System/Type.hpp"
 
 using namespace System;
 

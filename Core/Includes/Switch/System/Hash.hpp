@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains Pcf::System::Hash class.
+/// @brief Contains Switch::System::Hash class.
 #pragma once
 
 #include "../Any.hpp"
@@ -8,8 +8,8 @@
 #include "../Types.hpp"
 #include "../RefPtr.hpp"
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief Generate a hash code for generic type T.
   /// @param[in] value For which the hashcode is generated.
   /// @return int32 An integer value being the generated hashcode.
@@ -140,4 +140,4 @@ namespace Pcf {
   int32 GetHashCode(const float& value);
 }
 
-using namespace Pcf;
+using namespace Switch;

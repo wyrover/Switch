@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains Pcf::System::Int32 struct.
+/// @brief Contains Switch::System::Int32 struct.
 #pragma once
 
 #include "../Property.hpp"
@@ -11,8 +11,8 @@
 #include "_String.hpp"
 #include "ValueType.hpp"
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief Represents a 32-bit signed integer.
@@ -181,7 +181,7 @@ namespace Pcf {
   /// System::Int32 i = 0;
   /// bool isInt32 = is<System::Int32>(i);
   /// @endcode
-  /// @see Pcf::System::Type
+  /// @see Switch::System::Type
   template<>
   inline bool is<int32, object>(const object& value) {
     return is<System::Int32>(value);
@@ -193,7 +193,7 @@ namespace Pcf {
   /// System::Int32 i = 0;
   /// bool isInt32 = is<System::Int32>(i);
   /// @endcode
-  /// @see Pcf::System::Type
+  /// @see Switch::System::Type
   template<>
   inline bool is<int32, object>(object& value) {
     return is<System::Int32>(value);
@@ -205,7 +205,7 @@ namespace Pcf {
   /// System::Int32 i = 0;
   /// bool isInt32 = is<System::Int32>(i);
   /// @endcode
-  /// @see Pcf::System::Type
+  /// @see Switch::System::Type
   template<>
   inline bool is<int32, object>(const object* value) {
     return is<System::Int32>(value);
@@ -217,12 +217,12 @@ namespace Pcf {
   /// System::Int32 i = 0;
   /// bool isInt32 = is<System::Int32>(i);
   /// @endcode
-  /// @see Pcf::System::Type
+  /// @see Switch::System::Type
   template<>
   inline bool is<int32, object>(object* value) {
     return is<System::Int32>(value);
   }
 }
 
-using namespace Pcf;
+using namespace Switch;
 

@@ -1,7 +1,7 @@
-#include <Pcf/System/Diagnostics/ProcessStartInfo.hpp>
-#include <Pcf/System/Console.hpp>
-#include <Pcf/TUnit/Assert.hpp>
-#include <Pcf/TUnit/TestFixture.hpp>
+#include <Switch/System/Diagnostics/ProcessStartInfo.hpp>
+#include <Switch/System/Console.hpp>
+#include <Switch/TUnit/Assert.hpp>
+#include <Switch/TUnit/TestFixture.hpp>
 
 using namespace System;
 using namespace System::Diagnostics;

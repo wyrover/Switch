@@ -1,12 +1,12 @@
-﻿#include <Pcf/System/Drawing/Rectangle.hpp>
-#include <Pcf/TUnit/Assert.hpp>
-#include <Pcf/TUnit/TestFixture.hpp>
+﻿#include <Switch/System/Drawing/Rectangle.hpp>
+#include <Switch/TUnit/Assert.hpp>
+#include <Switch/TUnit/TestFixture.hpp>
 
 using namespace System;
 using namespace System::Drawing;
 using namespace TUnit;
 
-namespace PcfUnitTests {
+namespace SwitchUnitTests {
   class RectangleTest : public TestFixture {
   public:
     void Empty() {

@@ -1,6 +1,6 @@
-#include "../../../../Includes/Pcf/System/Threading/TryLockGuard.hpp"
-#include "../../../../Includes/Pcf/System/Threading/Monitor.hpp"
-#include "../../../../Includes/Pcf/System/Threading/TimeOut.hpp"
+#include "../../../../Includes/Switch/System/Threading/TryLockGuard.hpp"
+#include "../../../../Includes/Switch/System/Threading/Monitor.hpp"
+#include "../../../../Includes/Switch/System/Threading/TimeOut.hpp"
 
 using namespace System;
 using namespace System::Threading;

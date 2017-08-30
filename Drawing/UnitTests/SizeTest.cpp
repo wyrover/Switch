@@ -1,12 +1,12 @@
-﻿#include <Pcf/System/Drawing/Size.hpp>
-#include <Pcf/System/Drawing/Point.hpp>
-#include <Pcf/TUnit/Assert.hpp>
-#include <Pcf/TUnit/TestFixture.hpp>
+﻿#include <Switch/System/Drawing/Size.hpp>
+#include <Switch/System/Drawing/Point.hpp>
+#include <Switch/TUnit/Assert.hpp>
+#include <Switch/TUnit/TestFixture.hpp>
 
 using namespace System;
 using namespace TUnit;
 
-namespace PcfUnitTests {
+namespace SwitchUnitTests {
   class Size : public TestFixture {
   public:
     void Empty() {

@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../../../../../Includes/Pcf/Types.hpp"
-#include "../../../../../Includes/Pcf/System/String.hpp"
+#include "../../../../../Includes/Switch/Types.hpp"
+#include "../../../../../Includes/Switch/System/String.hpp"
 
-namespace Pcf {
+namespace Switch {
   namespace System {
     namespace Net {
       class Curl {
@@ -47,4 +47,4 @@ namespace Pcf {
   }
 }
 
-using namespace Pcf; 
+using namespace Switch; 

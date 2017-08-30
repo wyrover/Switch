@@ -1,6 +1,6 @@
-#include "../../../../Includes/Pcf/System/IO/TextWriter.hpp"
-#include "../../../../Includes/Pcf/System/Environment.hpp"
-#include "../../../../Includes/Pcf/System/Text/UTF8Encoding.hpp"
+#include "../../../../Includes/Switch/System/IO/TextWriter.hpp"
+#include "../../../../Includes/Switch/System/Environment.hpp"
+#include "../../../../Includes/Switch/System/Text/UTF8Encoding.hpp"
 
 using namespace System;
 using namespace System::IO;

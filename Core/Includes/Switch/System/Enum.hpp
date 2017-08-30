@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains Pcf::System::Enum class.
+/// @brief Contains Switch::System::Enum class.
 #pragma once
 
 #include "../Types.hpp"
@@ -10,7 +10,7 @@
 #include "BoxEnum.hpp"
 #include "_String.hpp"
 
-namespace Pcf {
+namespace Switch {
   using FalseType = std::false_type;
   using TrueType = std::true_type;
 }
@@ -77,8 +77,8 @@ template <typename T, typename std::enable_if<AddFlagOperators<T>::value>::type*
 inline T operator ~(T rhs) {return static_cast<T>(~static_cast<typename std::underlying_type<T>::type>(rhs));}
 /// @endcond
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief Provides the base class for enumerations.
@@ -158,4 +158,4 @@ namespace Pcf {
   }
 }
 
-using namespace Pcf;
+using namespace Switch;

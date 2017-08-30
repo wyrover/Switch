@@ -1,10 +1,10 @@
-#include <Pcf/System/Object.hpp>
-#include <Pcf/System/IO//BinaryReader.hpp>
+#include <Switch/System/Object.hpp>
+#include <Switch/System/IO//BinaryReader.hpp>
 
-#include "../../../../Includes/Pcf/System/Drawing/Image.hpp"
-#include "../../../../Includes/Pcf/System/Drawing/Imaging/FrameDimension.hpp"
+#include "../../../../Includes/Switch/System/Drawing/Image.hpp"
+#include "../../../../Includes/Switch/System/Drawing/Imaging/FrameDimension.hpp"
 
-namespace Pcf {
+namespace Switch {
   namespace System {
     namespace Drawing {
       class Tif : public object {

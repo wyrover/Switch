@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains Pcf::System::Delegate <Result, ...Arguments> class.
+/// @brief Contains Switch::System::Delegate <Result, ...Arguments> class.
 #pragma once
 
 #include <algorithm>
@@ -13,8 +13,8 @@
 #include "NullReferenceException.hpp"
 #include "Type.hpp"
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief Represents a delegate, which is a data structure that refers to a static method or to a class instance && an instance method of that class.
@@ -311,7 +311,7 @@ namespace Pcf {
   /// @par Examples
   /// The following example shows how to define a delegate named myMethodDelegate. Instances of this delegate are created for an instance method && a static method of the nested mySampleClass class. The delegate for the instance method requires an instance of mySampleClass. The mySampleClass instance is saved in a variable named mySC.
   /// @include Delegate.cpp
-  /// @ingroup Pcf
+  /// @ingroup Switch
   template<typename Result, typename... Arguments>
   using delegate = System::Delegate<Result, Arguments...>;
   
@@ -322,9 +322,9 @@ namespace Pcf {
   ///   MessageBox::Show("Button click!", "Message", MessageBoxButtons::OK);
   /// };
   /// @endcode
-  /// @ingroup Pcf
+  /// @ingroup Switch
   #define pcf_delegate \
   [&]
 }
 
-using namespace Pcf;
+using namespace Switch;

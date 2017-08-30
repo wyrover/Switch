@@ -1,16 +1,16 @@
 /// @file
-/// @brief Contains Pcf::Microsoft::Win32::Registry class.
+/// @brief Contains Switch::Microsoft::Win32::Registry class.
 #pragma once
 
 #include "RegistryHive.hpp"
 #include "RegistryKey.hpp"
 #include "RegistryOptions.hpp"
 
-namespace Pcf {
+namespace Switch {
   /// @brief The Microsoft namespace provide Microsoft specific classes.
   namespace Microsoft {
     namespace Win32 {
-      //class Pcf::Microsoft::Win32::RegistryKey  ClassesRoot;
+      //class Switch::Microsoft::Win32::RegistryKey  ClassesRoot;
       /// @brief Provides RegistryKey objects that represent the root keys in the Windows registry, and static methods to access key/value pairs.
       class pcf_public Registry : public object {
       private:
@@ -60,8 +60,8 @@ namespace Pcf {
         static RegistryKey CurrentUser() { return RegistryKey::OpenBaseKey(RegistryHive::CurrentUser); }
 
         /// @brief Contains dynamic registry data. This field reads the Windows registry base key HKEY_DYN_DATA.
-        /// @deprecated Replaced by Pcf::Microsoft::Win32::Registry::PerformanceData()
-        [[deprecated("Replaced by Pcf::Microsoft::Win32::Registry::PerformanceData()")]]
+        /// @deprecated Replaced by Switch::Microsoft::Win32::Registry::PerformanceData()
+        [[deprecated("Replaced by Switch::Microsoft::Win32::Registry::PerformanceData()")]]
         static RegistryKey DynData() { return RegistryKey::OpenBaseKey(RegistryHive::DynData); }
 
         /// @brief Contains the configuration data for the local machine. This field reads the Windows registry base key HKEY_LOCAL_MACHINE.

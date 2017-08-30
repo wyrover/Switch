@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains Pcf::System::Environment class.
+/// @brief Contains Switch::System::Environment class.
 #pragma once
 
 #include "../Property.hpp"
@@ -19,7 +19,7 @@
 class __start_up__;
 
 /// @cond
-namespace Pcf {
+namespace Switch {
   namespace System {
     namespace Diagnoastics {
       class Process;
@@ -28,13 +28,13 @@ namespace Pcf {
 }
 /// @endcond
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief Provides information about, and means to manipulate, the current environment
     /// and platform. This class cannot be inherited.
-    /// @remarks Use the Environment class to retrieve information such as command-line arguments, the exit code, environment variable settings, contents of the call stack, time since last system boot, and the version of the Pcf.
+    /// @remarks Use the Environment class to retrieve information such as command-line arguments, the exit code, environment variable settings, contents of the call stack, time since last system boot, and the version of the Switch.
     /// @par Examples
     /// The following example demonstrates displays a list of information about the current environment.
     /// @include Environment.cpp
@@ -269,7 +269,7 @@ namespace Pcf {
       
       /// @brief Gets the newline string defined for this environment.
       /// @return string A string containing "\r\n" for non-Unix platforms, or a string containing "\n" for Unix platforms.
-      /// @remarks The property value of NewLine is a constant customized specifically for the current platform and implementation of the Pcf. For more information about the escape characters in the property value, see Character Escapes in Regular Expressions.
+      /// @remarks The property value of NewLine is a constant customized specifically for the current platform and implementation of the Switch. For more information about the escape characters in the property value, see Character Escapes in Regular Expressions.
       /// @remarks The functionality provided by NewLine is often what is meant by the terms newline, line feed, line break, carriage return, CRLF, and end of line.
       /// @remarks NewLine is automatically appended to text processed by the Console.WriteLine and StringBuilder.AppendLine methods.
       /// @par Example
@@ -363,10 +363,10 @@ namespace Pcf {
       /// @include EnvironmentUserName.cpp
       static Property<String, ReadOnly> UserName;
       
-      /// @brief Gets a Version object that describes the major, minor, build, and revision numbers of the Pcf.
-      /// @return Version An object that displays the version of the Pcf.
+      /// @brief Gets a Version object that describes the major, minor, build, and revision numbers of the Switch.
+      /// @return Version An object that displays the version of the Switch.
       /// @par Example
-      /// The following example displays the version of the Pcf.
+      /// The following example displays the version of the Switch.
       /// @include EnvironmentVersion.cpp
       static Property<const System::Version&, ReadOnly> Version;
       
@@ -583,5 +583,5 @@ public:
 };
 /// @endcond
 
-using namespace Pcf;
+using namespace Switch;
 

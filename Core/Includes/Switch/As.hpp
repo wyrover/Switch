@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains Pcf::as <> operator.
+/// @brief Contains Switch::as <> operator.
 #pragma once
 
 #include "Ref.hpp"
@@ -10,15 +10,15 @@
 void __throw_cast_exception__();
 /// @endcond
 
-namespace Pcf {
+namespace Switch {
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
   /// @par Examples
   /// @code
-  /// refptr<string> str = new Pcf::string("A new string");
-  /// refptr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
+  /// refptr<string> str = new Switch::string("A new string");
+  /// refptr<System::IComparable> comparable = as<Switch::System::IComparable>(str);
   /// @endcode
   /// @exception ArgumentNullException The parameters is null.
-  /// @ingroup Pcf
+  /// @ingroup Switch
   template<typename TT, typename T>
   ref<TT> as(const ref<T>& value) {
     return value.template As<TT>();
@@ -27,11 +27,11 @@ namespace Pcf {
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
   /// @par Examples
   /// @code
-  /// refptr<string> str = new Pcf::string("A new string");
-  /// refptr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
+  /// refptr<string> str = new Switch::string("A new string");
+  /// refptr<System::IComparable> comparable = as<Switch::System::IComparable>(str);
   /// @endcode
   /// @exception ArgumentNullException The parameters is null.
-  /// @ingroup Pcf
+  /// @ingroup Switch
   template<typename TT, typename T>
   ref<TT> as(ref<T>& value) {
     return value.template As<TT>();
@@ -40,11 +40,11 @@ namespace Pcf {
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
   /// @par Examples
   /// @code
-  /// refptr<string> str = new Pcf::string("A new string");
-  /// refptr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
+  /// refptr<string> str = new Switch::string("A new string");
+  /// refptr<System::IComparable> comparable = as<Switch::System::IComparable>(str);
   /// @endcode
   /// @exception ArgumentNullException The parameters is null.
-  /// @ingroup Pcf
+  /// @ingroup Switch
   template<typename TT, typename T>
   refptr<TT> as(const refptr<T>& value) {
     return value.template As<TT>();
@@ -53,11 +53,11 @@ namespace Pcf {
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
   /// @par Examples
   /// @code
-  /// refptr<string> str = new Pcf::string("A new string");
-  /// refptr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
+  /// refptr<string> str = new Switch::string("A new string");
+  /// refptr<System::IComparable> comparable = as<Switch::System::IComparable>(str);
   /// @endcode
   /// @exception ArgumentNullException The parameters is null.
-  /// @ingroup Pcf
+  /// @ingroup Switch
   template<typename TT, typename T>
   refptr<TT> as(refptr<T>& value) {
     return value.template As<TT>();
@@ -66,11 +66,11 @@ namespace Pcf {
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
   /// @par Examples
   /// @code
-  /// refptr<string> str = new Pcf::string("A new string");
-  /// refptr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
+  /// refptr<string> str = new Switch::string("A new string");
+  /// refptr<System::IComparable> comparable = as<Switch::System::IComparable>(str);
   /// @endcode
   /// @exception ArgumentNullException The parameters is null.
-  /// @ingroup Pcf
+  /// @ingroup Switch
   template<typename TT, typename T>
   UniquePtr<TT> as(UniquePtr<T>& value) {
     return value.template As<TT>();
@@ -79,11 +79,11 @@ namespace Pcf {
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
   /// @par Examples
   /// @code
-  /// refptr<string> str = new Pcf::string("A new string");
-  /// refptr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
+  /// refptr<string> str = new Switch::string("A new string");
+  /// refptr<System::IComparable> comparable = as<Switch::System::IComparable>(str);
   /// @endcode
   /// @exception ArgumentNullException The parameters is null.
-  /// @ingroup Pcf
+  /// @ingroup Switch
   template<typename TT, typename T>
   UniquePtr<TT> as(UniquePtr<T>&& value) {
     return value.template As<TT>();
@@ -92,11 +92,11 @@ namespace Pcf {
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
   /// @par Examples
   /// @code
-  /// refptr<string> str = new Pcf::string("A new string");
-  /// refptr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
+  /// refptr<string> str = new Switch::string("A new string");
+  /// refptr<System::IComparable> comparable = as<Switch::System::IComparable>(str);
   /// @endcode
   /// @exception ArgumentNullException The parameters is null.
-  /// @ingroup Pcf
+  /// @ingroup Switch
   template<typename TT, typename T>
   const TT& as(const T& value) {
     try {
@@ -110,11 +110,11 @@ namespace Pcf {
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
   /// @par Examples
   /// @code
-  /// refptr<string> str = new Pcf::string("A new string");
-  /// refptr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
+  /// refptr<string> str = new Switch::string("A new string");
+  /// refptr<System::IComparable> comparable = as<Switch::System::IComparable>(str);
   /// @endcode
   /// @exception ArgumentNullException The parameters is null.
-  /// @ingroup Pcf
+  /// @ingroup Switch
   template<typename TT, typename T>
   TT& as(T& value) {
     try {
@@ -128,11 +128,11 @@ namespace Pcf {
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
   /// @par Examples
   /// @code
-  /// refptr<string> str = new Pcf::string("A new string");
-  /// refptr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
+  /// refptr<string> str = new Switch::string("A new string");
+  /// refptr<System::IComparable> comparable = as<Switch::System::IComparable>(str);
   /// @endcode
   /// @exception ArgumentNullException The parameters is null.
-  /// @ingroup Pcf
+  /// @ingroup Switch
   template<typename TT, typename T>
   const TT* as(const T* value) {
     if (value == null)
@@ -143,11 +143,11 @@ namespace Pcf {
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
   /// @par Examples
   /// @code
-  /// refptr<string> str = new Pcf::string("A new string");
-  /// refptr<System::IComparable> comparable = as<Pcf::System::IComparable>(str);
+  /// refptr<string> str = new Switch::string("A new string");
+  /// refptr<System::IComparable> comparable = as<Switch::System::IComparable>(str);
   /// @endcode
   /// @exception ArgumentNullException The parameters is null.
-  /// @ingroup Pcf
+  /// @ingroup Switch
   template<typename TT, typename T>
   TT* as(T* value) {
     if (value == null)
@@ -156,4 +156,4 @@ namespace Pcf {
   }
 }
 
-using namespace Pcf;
+using namespace Switch;

@@ -1,10 +1,10 @@
-﻿#include <Pcf/System/Uri.hpp>
-#include <Pcf/TUnit/Expect.hpp>
-#include <Pcf/TUnit/TestFixture.hpp>
+﻿#include <Switch/System/Uri.hpp>
+#include <Switch/TUnit/Expect.hpp>
+#include <Switch/TUnit/TestFixture.hpp>
 
 using namespace TUnit;
 
-namespace PcfUnitTests {
+namespace SwitchUnitTests {
   class ExpectTest : public TestFixture {
   protected:
     ExpectTest() {}

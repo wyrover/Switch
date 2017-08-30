@@ -1,13 +1,13 @@
-#include <Pcf/System/Array.hpp>
-#include <Pcf/System/Object.hpp>
-#include <Pcf/System/Math.hpp>
-#include <Pcf/System/OutOfMemoryException.hpp>
-#include <Pcf/System/IO//BinaryReader.hpp>
+#include <Switch/System/Array.hpp>
+#include <Switch/System/Object.hpp>
+#include <Switch/System/Math.hpp>
+#include <Switch/System/OutOfMemoryException.hpp>
+#include <Switch/System/IO//BinaryReader.hpp>
 
-#include "../../../../Includes/Pcf/System/Drawing/Image.hpp"
-#include "../../../../Includes/Pcf/System/Drawing/Imaging/FrameDimension.hpp"
+#include "../../../../Includes/Switch/System/Drawing/Image.hpp"
+#include "../../../../Includes/Switch/System/Drawing/Imaging/FrameDimension.hpp"
 
-namespace Pcf {
+namespace Switch {
   namespace System {
     namespace Drawing {
       struct BitmapFileHeader {
@@ -48,7 +48,7 @@ namespace Pcf {
           BitmapFileHeader bmpFile = ReadBitmapFileHeader();
           BitmapInfoHeader bmpInfo = ReadBitmapInfoHeader();
 
-          this->reader.BaseStream().Seek(bmpInfo.size - (bmpInfo.size < 40 ? 12 : 40), Pcf::System::IO::SeekOrigin::Current);
+          this->reader.BaseStream().Seek(bmpInfo.size - (bmpInfo.size < 40 ? 12 : 40), Switch::System::IO::SeekOrigin::Current);
 
           Array<Color> colors;
           if (bmpInfo.compression == bitmapInfoCompressionRgb && bmpInfo.bitCount <= 8)
@@ -58,7 +58,7 @@ namespace Pcf {
           if (bmpInfo.bitCount == 16)
             pixelFormatInfo = this->reader.ReadInt32();
 
-          this->reader.BaseStream().Seek(bmpFile.offBits, Pcf::System::IO::SeekOrigin::Begin);
+          this->reader.BaseStream().Seek(bmpFile.offBits, Switch::System::IO::SeekOrigin::Begin);
 
           System::Array<byte> rawData = ReadData(bmpInfo.width, bmpInfo.height, bmpInfo.bitCount, bmpInfo.compression, pixelFormatInfo, colors);
 

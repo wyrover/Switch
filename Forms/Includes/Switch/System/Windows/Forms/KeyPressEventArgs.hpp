@@ -1,12 +1,12 @@
 /// @file
-/// @brief Contains Pcf::System::Windows::Forms::KeyPressEventArgs class.
+/// @brief Contains Switch::System::Windows::Forms::KeyPressEventArgs class.
 #pragma once
 
-#include <Pcf/System/EventArgs.hpp>
+#include <Switch/System/EventArgs.hpp>
 
 #include "Keys.hpp"
 
-namespace Pcf {
+namespace Switch {
   namespace System {
     namespace Windows {
       namespace Forms {

@@ -1,13 +1,13 @@
 /// @file
-/// @brief Contains Pcf::System::Drawing::Image class.
+/// @brief Contains Switch::System::Drawing::Image class.
 #pragma once
 
-#include <Pcf/System/Object.hpp>
-#include <Pcf/System/String.hpp>
-#include <Pcf/RefPtr.hpp>
-#include <Pcf/System/Array.hpp>
-#include <Pcf/System/IComparable.hpp>
-#include <Pcf/System/IO/Stream.hpp>
+#include <Switch/System/Object.hpp>
+#include <Switch/System/String.hpp>
+#include <Switch/RefPtr.hpp>
+#include <Switch/System/Array.hpp>
+#include <Switch/System/IComparable.hpp>
+#include <Switch/System/IO/Stream.hpp>
 
 #include "Imaging/ColorPalette.hpp"
 #include "Imaging/ImageFlags.hpp"
@@ -16,8 +16,8 @@
 #include "Size.hpp"
 #include "SizeF.hpp"
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @cond
   /// TODO : To remove as soon as possible...
   namespace Resources {

@@ -1,10 +1,10 @@
 /// @file
-/// @brief Contains Pcf::System::ComponentModel::CancelEventArgs class.
+/// @brief Contains Switch::System::ComponentModel::CancelEventArgs class.
 #pragma once
 
-#include <Pcf/System/EventArgs.hpp>
+#include <Switch/System/EventArgs.hpp>
 
-namespace Pcf {
+namespace Switch {
   namespace System {
     namespace ComponentModel {
       class pcf_public CancelEventArgs : public EventArgs {

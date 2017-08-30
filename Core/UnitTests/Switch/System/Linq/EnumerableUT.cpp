@@ -1,12 +1,12 @@
-#include <Pcf/System/Collections/Generic/HashSet.hpp>
-#include <Pcf/System/Collections/Generic/LinkedList.hpp>
-#include <Pcf/System/Collections/Generic/SortedSet.hpp>
-#include <Pcf/System/Collections/ArrayList.hpp>
-#include <Pcf/System/Array.hpp>
-#include <Pcf/System/Math.hpp>
-#include <Pcf/System/String.hpp>
-#include <Pcf/TUnit/Assert.hpp>
-#include <Pcf/TUnit/TestFixture.hpp>
+#include <Switch/System/Collections/Generic/HashSet.hpp>
+#include <Switch/System/Collections/Generic/LinkedList.hpp>
+#include <Switch/System/Collections/Generic/SortedSet.hpp>
+#include <Switch/System/Collections/ArrayList.hpp>
+#include <Switch/System/Array.hpp>
+#include <Switch/System/Math.hpp>
+#include <Switch/System/String.hpp>
+#include <Switch/TUnit/Assert.hpp>
+#include <Switch/TUnit/TestFixture.hpp>
 
 using namespace System;
 using namespace System::Collections::Generic;

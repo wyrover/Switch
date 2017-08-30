@@ -1,15 +1,15 @@
 /// @file
-/// @brief Contains Pcf::NullPtr struct.
+/// @brief Contains Switch::NullPtr struct.
 #pragma once
 
 #include <cstddef>
 #include "Public.hpp"
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @cond
   using NullPtr = std::nullptr_t;
   /// @endcond
 }
 
-using namespace Pcf;
+using namespace Switch;

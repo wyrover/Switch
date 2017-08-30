@@ -1,12 +1,12 @@
 /// @file
-/// @brief Contains Pcf::System::Collections::IEnumerator interface.
+/// @brief Contains Switch::System::Collections::IEnumerator interface.
 #pragma once
 
 #include "../../Any.hpp"
 #include "Generic/IEnumerator.hpp"
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The System::Collections namespace contains interfaces and classes that define various collections of objects, such as lists, queues, bit arrays, hash tables and dictionaries.
   namespace System {
     /// @brief The System::Collections namespace contains interfaces and classes that define various collections of objects, such as lists, queues, bit arrays, hash tables and dictionaries.
@@ -19,4 +19,4 @@ namespace Pcf {
   }
 }
 
-using namespace Pcf;
+using namespace Switch;

@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains Pcf::System::Object class.
+/// @brief Contains Switch::System::Object class.
 #pragma once
 
 #include <ostream>
@@ -8,8 +8,8 @@
 #include "../As.hpp"
 #include "../RefPtr.hpp"
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @cond
@@ -17,8 +17,8 @@ namespace Pcf {
     class String;
     /// @endcond
 
-    /// @brief Supports all classes in the Pcf class hierarchy and provides low-level services to derived classes.
-    /// This is the ultimate base class of all classes in the Pcf.
+    /// @brief Supports all classes in the Switch class hierarchy and provides low-level services to derived classes.
+    /// This is the ultimate base class of all classes in the Switch.
     /// It is the root of the type hierarchy.
     /// @par Examples
     /// The following example defines a Point type derived from the Object class and virtuals many of the virtual methods of the Object class. In addition, the example shows how to call many of the static and instance methods of the Object class.
@@ -91,7 +91,7 @@ namespace Pcf {
     };
   }
 
-  /// @brief Supports all classes in the Pcf class hierarchy and provides low-level services to derived classes.
+  /// @brief Supports all classes in the Switch class hierarchy and provides low-level services to derived classes.
   /// @see System::Object
   using object = System::Object;
 }
@@ -101,4 +101,4 @@ std::ostream& operator<<(std::ostream& os, const System::Object& value);
 #include "_String.hpp"
 #include "Type.hpp"
 
-using namespace Pcf;
+using namespace Switch;

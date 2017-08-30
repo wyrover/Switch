@@ -1,14 +1,14 @@
 /// @file
-/// @brief Contains Pcf::System::Security::XmlSyntaxException exception.
+/// @brief Contains Switch::System::Security::XmlSyntaxException exception.
 #pragma once
 
 #include "../SystemException.hpp"
 
-/// @brief The Pcf library contains all fundamental classes to access Hardware, Os, System, and more.
-namespace Pcf {
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
-    /// @brief The System.Security namespaces contain classes that represent the Pcf Framework security system and permissions. Child namespaces provide types that control access to and audit securable objects, allow authentication, provide crytographic services, control access to operations and resources based on policy, and support rights management of application-created content.
+    /// @brief The System.Security namespaces contain classes that represent the Switch Framework security system and permissions. Child namespaces provide types that control access to and audit securable objects, allow authentication, provide crytographic services, control access to operations and resources based on policy, and support rights management of application-created content.
     namespace Security {
       /// @brief The exception that is thrown when there is a syntax error in XML parsing. This class cannot be inherited.
       class pcf_public XmlSyntaxException : public SystemException {
@@ -49,4 +49,4 @@ namespace Pcf {
   }
 }
 
-using namespace Pcf;
+using namespace Switch;

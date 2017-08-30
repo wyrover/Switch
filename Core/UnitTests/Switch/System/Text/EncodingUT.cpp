@@ -1,11 +1,11 @@
 ﻿#include "EncodingUT.hpp"
-#include <Pcf/System/Text/ASCIIEncoding.hpp>
-#include <Pcf/System/Text/ANSIEncoding.hpp>
-#include <Pcf/System/Text/UnicodeEncoding.hpp>
-#include <Pcf/System/Text/UTF8Encoding.hpp>
-#include <Pcf/System/Text/UTF32Encoding.hpp>
-#include <Pcf/TUnit/Assert.hpp>
-#include <Pcf/TUnit/TestFixture.hpp>
+#include <Switch/System/Text/ASCIIEncoding.hpp>
+#include <Switch/System/Text/ANSIEncoding.hpp>
+#include <Switch/System/Text/UnicodeEncoding.hpp>
+#include <Switch/System/Text/UTF8Encoding.hpp>
+#include <Switch/System/Text/UTF32Encoding.hpp>
+#include <Switch/TUnit/Assert.hpp>
+#include <Switch/TUnit/TestFixture.hpp>
 
 using namespace System;
 using namespace System::Collections;

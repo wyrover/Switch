@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains Pcf::System::Threading::TryLockGuard class.
+/// @brief Contains Switch::System::Threading::TryLockGuard class.
 #pragma once
 
 #include "../Object.hpp"
@@ -9,7 +9,7 @@
 #include "../../Using.hpp"
 
 /// @cond
-namespace Pcf {
+namespace Switch {
   namespace System {
     namespace Threading {
       class pcf_public TryLockGuard : public object {
@@ -37,4 +37,4 @@ namespace Pcf {
 }
 /// @endcond
 
-using namespace Pcf;
+using namespace Switch;

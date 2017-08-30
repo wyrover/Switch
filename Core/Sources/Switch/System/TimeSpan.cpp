@@ -1,13 +1,13 @@
-#include "../../../Includes/Pcf/System/TimeSpan.hpp"
-#include "../../../Includes/Pcf/System/Array.hpp"
-#include "../../../Includes/Pcf/System/Convert.hpp"
-#include "../../../Includes/Pcf/System/Int32.hpp"
-#include "../../../Includes/Pcf/System/Int64.hpp"
-#include "../../../Includes/Pcf/System/Math.hpp"
-#include "../../../Includes/Pcf/System/String.hpp"
-#include "../../../Includes/Pcf/System/StringSplitOptions.hpp"
-#include "../../../Includes/Pcf/System/SystemException.hpp"
-#include "../../../Includes/Pcf/Boxing.hpp"
+#include "../../../Includes/Switch/System/TimeSpan.hpp"
+#include "../../../Includes/Switch/System/Array.hpp"
+#include "../../../Includes/Switch/System/Convert.hpp"
+#include "../../../Includes/Switch/System/Int32.hpp"
+#include "../../../Includes/Switch/System/Int64.hpp"
+#include "../../../Includes/Switch/System/Math.hpp"
+#include "../../../Includes/Switch/System/String.hpp"
+#include "../../../Includes/Switch/System/StringSplitOptions.hpp"
+#include "../../../Includes/Switch/System/SystemException.hpp"
+#include "../../../Includes/Switch/Boxing.hpp"
 
 using namespace System;
 
