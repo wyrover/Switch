@@ -155,4 +155,4 @@ You can download latest stable version on SourceForge
 Before running examples you must install Switch. To install it read See [Install.md](Install.md) file.
 
 # Switch Web Site
-For more information see https://gammasoft71.wixsite.com/pcfpro
+For more information see https://gammasoft71.wixsite.com/switch
