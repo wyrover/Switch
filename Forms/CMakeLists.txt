@@ -1,111 +1,111 @@
 set(INCLUDE_FILES
-  Includes/Pcf/System/ComponentModel/CancelEventArgs.hpp
-  Includes/Pcf/System/ComponentModel/CancelEventHandler.hpp
-  Includes/Pcf/System/ComponentModel/Component.hpp
-  Includes/Pcf/System/ComponentModel/ComponentCollection.hpp
-  Includes/Pcf/System/ComponentModel/EventHandlerList.hpp
-  Includes/Pcf/System/ComponentModel/IComponent.hpp
-  Includes/Pcf/System/ComponentModel/IContainer.hpp
-  Includes/Pcf/System/ComponentModel/ISite.hpp
-  Includes/Pcf/System/Media/SystemSound.hpp
-  Includes/Pcf/System/Media/SystemSounds.hpp
-  Includes/Pcf/System/Windows/Forms/VisualStyles/VisualStyleState.hpp
-  Includes/Pcf/System/Windows/Forms/AccessibleEvents.hpp
-  Includes/Pcf/System/Windows/Forms/AccessibleNavigation.hpp
-  Includes/Pcf/System/Windows/Forms/AccessibleRole.hpp
-  Includes/Pcf/System/Windows/Forms/AnchorStyles.hpp
-  Includes/Pcf/System/Windows/Forms/Application.hpp
-  Includes/Pcf/System/Windows/Forms/ArrangeDirection.hpp
-  Includes/Pcf/System/Windows/Forms/ArrangeStartingPosition.hpp
-  Includes/Pcf/System/Windows/Forms/AutoSizeMode.hpp
-  Includes/Pcf/System/Windows/Forms/BootMode.hpp
-  Includes/Pcf/System/Windows/Forms/BorderStyle.hpp
-  Includes/Pcf/System/Windows/Forms/Button.hpp
-  Includes/Pcf/System/Windows/Forms/ButtonBase.hpp
-  Includes/Pcf/System/Windows/Forms/CheckBox.hpp
-#  Includes/Pcf/System/Windows/Forms/CheckedListBox.hpp
-  Includes/Pcf/System/Windows/Forms/CheckState.hpp
-  Includes/Pcf/System/Windows/Forms/CloseReason.hpp
-  Includes/Pcf/System/Windows/Forms/ContainerControl.hpp
-  Includes/Pcf/System/Windows/Forms/Control.hpp
-  Includes/Pcf/System/Windows/Forms/ControlEventArgs.hpp
-  Includes/Pcf/System/Windows/Forms/ControlEventHandler.hpp
-  Includes/Pcf/System/Windows/Forms/ControlStyles.hpp
-#  Includes/Pcf/System/Windows/Forms/Cursor.hpp
-#  Includes/Pcf/System/Windows/Forms/Cursors.hpp
-  Includes/Pcf/System/Windows/Forms/DataFormats.hpp
-  Includes/Pcf/System/Windows/Forms/DialogResult.hpp
-  Includes/Pcf/System/Windows/Forms/DockStyle.hpp
-  Includes/Pcf/System/Windows/Forms/DragDropEffects.hpp
-  Includes/Pcf/System/Windows/Forms/DragEventArgs.hpp
-  Includes/Pcf/System/Windows/Forms/DragEventHandler.hpp
-#  Includes/Pcf/System/Windows/Forms/FolderBrowserDialog.hpp
-  Includes/Pcf/System/Windows/Forms/Form.hpp
-  Includes/Pcf/System/Windows/Forms/FormBorderStyle.hpp
-  Includes/Pcf/System/Windows/Forms/FormClosedEventArgs.hpp
-  Includes/Pcf/System/Windows/Forms/FormClosedEventHandler.hpp
-  Includes/Pcf/System/Windows/Forms/FormClosingEventArgs.hpp
-  Includes/Pcf/System/Windows/Forms/FormClosingEventHandler.hpp
-  Includes/Pcf/System/Windows/Forms/FormStartPosition.hpp
-  Includes/Pcf/System/Windows/Forms/GiveFeedbackEventArgs.hpp
-  Includes/Pcf/System/Windows/Forms/GiveFeedbackEventHandler.hpp
-  Includes/Pcf/System/Windows/Forms/GroupBox.hpp
-  Includes/Pcf/System/Windows/Forms/HelpEventArgs.hpp
-  Includes/Pcf/System/Windows/Forms/HelpEventHandler.hpp
-  Includes/Pcf/System/Windows/Forms/IDataObject.hpp
-#  Includes/Pcf/System/Windows/Forms/ImageList.hpp
-  Includes/Pcf/System/Windows/Forms/ImageLayout.hpp
-  Includes/Pcf/System/Windows/Forms/InvalidateEventArgs.hpp
-  Includes/Pcf/System/Windows/Forms/InvalidateEventHandler.hpp
-  Includes/Pcf/System/Windows/Forms/KeyEventArgs.hpp
-  Includes/Pcf/System/Windows/Forms/KeyEventHandler.hpp
-  Includes/Pcf/System/Windows/Forms/KeyPressEventArgs.hpp
-  Includes/Pcf/System/Windows/Forms/KeyPressEventHandler.hpp
-  Includes/Pcf/System/Windows/Forms/Keys.hpp
-  Includes/Pcf/System/Windows/Forms/Label.hpp
-#  Includes/Pcf/System/Windows/Forms/ListBox.hpp
-  Includes/Pcf/System/Windows/Forms/ListControl.hpp
-#  Includes/Pcf/System/Windows/Forms/MainMenu.hpp
-#  Includes/Pcf/System/Windows/Forms/MaskedTextBox.hpp
-#  Includes/Pcf/System/Windows/Forms/Menu.hpp
-#  Includes/Pcf/System/Windows/Forms/MenuItem.hpp
-  Includes/Pcf/System/Windows/Forms/Message.hpp
-  Includes/Pcf/System/Windows/Forms/MessageBox.hpp
-  Includes/Pcf/System/Windows/Forms/MessageBoxButtons.hpp
-  Includes/Pcf/System/Windows/Forms/MessageBoxDefaultButton.hpp
-  Includes/Pcf/System/Windows/Forms/MessageBoxIcon.hpp
-  Includes/Pcf/System/Windows/Forms/MessageBoxOptions.hpp
-  Includes/Pcf/System/Windows/Forms/MethodInvoker.hpp
-  Includes/Pcf/System/Windows/Forms/MouseButtons.hpp
-  Includes/Pcf/System/Windows/Forms/MouseEventArgs.hpp
-  Includes/Pcf/System/Windows/Forms/MouseEventHandler.hpp
-#  Includes/Pcf/System/Windows/Forms/NumericUpDown.hpp
-#  Includes/Pcf/System/Windows/Forms/OpenFileDialog.hpp
-  Includes/Pcf/System/Windows/Forms/Orientation.hpp
-  Includes/Pcf/System/Windows/Forms/PaintEventArgs.hpp
-  Includes/Pcf/System/Windows/Forms/PaintEventHandler.hpp
-  Includes/Pcf/System/Windows/Forms/Panel.hpp
-#  Includes/Pcf/System/Windows/Forms/PictureBox.hpp
-  Includes/Pcf/System/Windows/Forms/ProgressBar.hpp
-  Includes/Pcf/System/Windows/Forms/ProgressBarStyle.hpp
-  Includes/Pcf/System/Windows/Forms/RadioButton.hpp
-#  Includes/Pcf/System/Windows/Forms/RichTextBox.hpp
-#  Includes/Pcf/System/Windows/Forms/SaveFileDialog.hpp
-#  Includes/Pcf/System/Windows/Forms/Screen.hpp
-  Includes/Pcf/System/Windows/Forms/ScrollableControl.hpp
-  Includes/Pcf/System/Windows/Forms/Shortcut.hpp
-  Includes/Pcf/System/Windows/Forms/SystemInformation.hpp
-  Includes/Pcf/System/Windows/Forms/TabAlignment.hpp
-  Includes/Pcf/System/Windows/Forms/TabControl.hpp
-  Includes/Pcf/System/Windows/Forms/TabPage.hpp
-#  Includes/Pcf/System/Windows/Forms/TextBox.hpp
-  Includes/Pcf/System/Windows/Forms/TickStyle.hpp
-  Includes/Pcf/System/Windows/Forms/Timer.hpp
-  Includes/Pcf/System/Windows/Forms/TrackBar.hpp
-  Includes/Pcf/System/Windows/Forms/UICues.hpp
-  Includes/Pcf/System/Windows/Forms/UICuesEventArgs.hpp
-  Includes/Pcf/System/Windows/Forms/UICuesEventHandler.hpp
-  Includes/Pcf/Forms.hpp
+  Includes/Switch/System/ComponentModel/CancelEventArgs.hpp
+  Includes/Switch/System/ComponentModel/CancelEventHandler.hpp
+  Includes/Switch/System/ComponentModel/Component.hpp
+  Includes/Switch/System/ComponentModel/ComponentCollection.hpp
+  Includes/Switch/System/ComponentModel/EventHandlerList.hpp
+  Includes/Switch/System/ComponentModel/IComponent.hpp
+  Includes/Switch/System/ComponentModel/IContainer.hpp
+  Includes/Switch/System/ComponentModel/ISite.hpp
+  Includes/Switch/System/Media/SystemSound.hpp
+  Includes/Switch/System/Media/SystemSounds.hpp
+  Includes/Switch/System/Windows/Forms/VisualStyles/VisualStyleState.hpp
+  Includes/Switch/System/Windows/Forms/AccessibleEvents.hpp
+  Includes/Switch/System/Windows/Forms/AccessibleNavigation.hpp
+  Includes/Switch/System/Windows/Forms/AccessibleRole.hpp
+  Includes/Switch/System/Windows/Forms/AnchorStyles.hpp
+  Includes/Switch/System/Windows/Forms/Application.hpp
+  Includes/Switch/System/Windows/Forms/ArrangeDirection.hpp
+  Includes/Switch/System/Windows/Forms/ArrangeStartingPosition.hpp
+  Includes/Switch/System/Windows/Forms/AutoSizeMode.hpp
+  Includes/Switch/System/Windows/Forms/BootMode.hpp
+  Includes/Switch/System/Windows/Forms/BorderStyle.hpp
+  Includes/Switch/System/Windows/Forms/Button.hpp
+  Includes/Switch/System/Windows/Forms/ButtonBase.hpp
+  Includes/Switch/System/Windows/Forms/CheckBox.hpp
+#  Includes/Switch/System/Windows/Forms/CheckedListBox.hpp
+  Includes/Switch/System/Windows/Forms/CheckState.hpp
+  Includes/Switch/System/Windows/Forms/CloseReason.hpp
+  Includes/Switch/System/Windows/Forms/ContainerControl.hpp
+  Includes/Switch/System/Windows/Forms/Control.hpp
+  Includes/Switch/System/Windows/Forms/ControlEventArgs.hpp
+  Includes/Switch/System/Windows/Forms/ControlEventHandler.hpp
+  Includes/Switch/System/Windows/Forms/ControlStyles.hpp
+#  Includes/Switch/System/Windows/Forms/Cursor.hpp
+#  Includes/Switch/System/Windows/Forms/Cursors.hpp
+  Includes/Switch/System/Windows/Forms/DataFormats.hpp
+  Includes/Switch/System/Windows/Forms/DialogResult.hpp
+  Includes/Switch/System/Windows/Forms/DockStyle.hpp
+  Includes/Switch/System/Windows/Forms/DragDropEffects.hpp
+  Includes/Switch/System/Windows/Forms/DragEventArgs.hpp
+  Includes/Switch/System/Windows/Forms/DragEventHandler.hpp
+#  Includes/Switch/System/Windows/Forms/FolderBrowserDialog.hpp
+  Includes/Switch/System/Windows/Forms/Form.hpp
+  Includes/Switch/System/Windows/Forms/FormBorderStyle.hpp
+  Includes/Switch/System/Windows/Forms/FormClosedEventArgs.hpp
+  Includes/Switch/System/Windows/Forms/FormClosedEventHandler.hpp
+  Includes/Switch/System/Windows/Forms/FormClosingEventArgs.hpp
+  Includes/Switch/System/Windows/Forms/FormClosingEventHandler.hpp
+  Includes/Switch/System/Windows/Forms/FormStartPosition.hpp
+  Includes/Switch/System/Windows/Forms/GiveFeedbackEventArgs.hpp
+  Includes/Switch/System/Windows/Forms/GiveFeedbackEventHandler.hpp
+  Includes/Switch/System/Windows/Forms/GroupBox.hpp
+  Includes/Switch/System/Windows/Forms/HelpEventArgs.hpp
+  Includes/Switch/System/Windows/Forms/HelpEventHandler.hpp
+  Includes/Switch/System/Windows/Forms/IDataObject.hpp
+#  Includes/Switch/System/Windows/Forms/ImageList.hpp
+  Includes/Switch/System/Windows/Forms/ImageLayout.hpp
+  Includes/Switch/System/Windows/Forms/InvalidateEventArgs.hpp
+  Includes/Switch/System/Windows/Forms/InvalidateEventHandler.hpp
+  Includes/Switch/System/Windows/Forms/KeyEventArgs.hpp
+  Includes/Switch/System/Windows/Forms/KeyEventHandler.hpp
+  Includes/Switch/System/Windows/Forms/KeyPressEventArgs.hpp
+  Includes/Switch/System/Windows/Forms/KeyPressEventHandler.hpp
+  Includes/Switch/System/Windows/Forms/Keys.hpp
+  Includes/Switch/System/Windows/Forms/Label.hpp
+#  Includes/Switch/System/Windows/Forms/ListBox.hpp
+  Includes/Switch/System/Windows/Forms/ListControl.hpp
+#  Includes/Switch/System/Windows/Forms/MainMenu.hpp
+#  Includes/Switch/System/Windows/Forms/MaskedTextBox.hpp
+#  Includes/Switch/System/Windows/Forms/Menu.hpp
+#  Includes/Switch/System/Windows/Forms/MenuItem.hpp
+  Includes/Switch/System/Windows/Forms/Message.hpp
+  Includes/Switch/System/Windows/Forms/MessageBox.hpp
+  Includes/Switch/System/Windows/Forms/MessageBoxButtons.hpp
+  Includes/Switch/System/Windows/Forms/MessageBoxDefaultButton.hpp
+  Includes/Switch/System/Windows/Forms/MessageBoxIcon.hpp
+  Includes/Switch/System/Windows/Forms/MessageBoxOptions.hpp
+  Includes/Switch/System/Windows/Forms/MethodInvoker.hpp
+  Includes/Switch/System/Windows/Forms/MouseButtons.hpp
+  Includes/Switch/System/Windows/Forms/MouseEventArgs.hpp
+  Includes/Switch/System/Windows/Forms/MouseEventHandler.hpp
+#  Includes/Switch/System/Windows/Forms/NumericUpDown.hpp
+#  Includes/Switch/System/Windows/Forms/OpenFileDialog.hpp
+  Includes/Switch/System/Windows/Forms/Orientation.hpp
+  Includes/Switch/System/Windows/Forms/PaintEventArgs.hpp
+  Includes/Switch/System/Windows/Forms/PaintEventHandler.hpp
+  Includes/Switch/System/Windows/Forms/Panel.hpp
+#  Includes/Switch/System/Windows/Forms/PictureBox.hpp
+  Includes/Switch/System/Windows/Forms/ProgressBar.hpp
+  Includes/Switch/System/Windows/Forms/ProgressBarStyle.hpp
+  Includes/Switch/System/Windows/Forms/RadioButton.hpp
+#  Includes/Switch/System/Windows/Forms/RichTextBox.hpp
+#  Includes/Switch/System/Windows/Forms/SaveFileDialog.hpp
+#  Includes/Switch/System/Windows/Forms/Screen.hpp
+  Includes/Switch/System/Windows/Forms/ScrollableControl.hpp
+  Includes/Switch/System/Windows/Forms/Shortcut.hpp
+  Includes/Switch/System/Windows/Forms/SystemInformation.hpp
+  Includes/Switch/System/Windows/Forms/TabAlignment.hpp
+  Includes/Switch/System/Windows/Forms/TabControl.hpp
+  Includes/Switch/System/Windows/Forms/TabPage.hpp
+#  Includes/Switch/System/Windows/Forms/TextBox.hpp
+  Includes/Switch/System/Windows/Forms/TickStyle.hpp
+  Includes/Switch/System/Windows/Forms/Timer.hpp
+  Includes/Switch/System/Windows/Forms/TrackBar.hpp
+  Includes/Switch/System/Windows/Forms/UICues.hpp
+  Includes/Switch/System/Windows/Forms/UICuesEventArgs.hpp
+  Includes/Switch/System/Windows/Forms/UICuesEventHandler.hpp
+  Includes/Switch/Forms.hpp
 )
 
 set(SOURCE_FILES
@@ -164,83 +164,83 @@ set(SOURCE_FILES
   Sources/__OS/WindowProcedureWin32.cpp
   Sources/__OS/WindowProcedureCocoa.hpp
   Sources/__OS/WindowProcedureWin32.hpp
-  Sources/Pcf/System/Media/SystemSound.cpp
-  Sources/Pcf/System/Media/SystemSounds.cpp
-  Sources/Pcf/System/Windows/Forms/Application.cpp
-  Sources/Pcf/System/Windows/Forms/Button.cpp
-  Sources/Pcf/System/Windows/Forms/CheckBox.cpp
-#  Sources/Pcf/System/Windows/Forms/CheckedListBox.cpp
-  Sources/Pcf/System/Windows/Forms/Control.cpp
-#  Sources/Pcf/System/Windows/Forms/Cursor.cpp
-#  Sources/Pcf/System/Windows/Forms/Cursors.cpp
-#  Sources/Pcf/System/Windows/Forms/Exclamation.hpp
-#  Sources/Pcf/System/Windows/Forms/FolderBrowserDialog.cpp
-  Sources/Pcf/System/Windows/Forms/Form.cpp
-  Sources/Pcf/System/Windows/Forms/GroupBox.cpp
-#  Sources/Pcf/System/Windows/Forms/ImageList.cpp
-#  Sources/Pcf/System/Windows/Forms/Information.hpp
-  Sources/Pcf/System/Windows/Forms/Label.cpp
-#  Sources/Pcf/System/Windows/Forms/ListBox.cpp
-#  Sources/Pcf/System/Windows/Forms/MainMenu.cpp
-#  Sources/Pcf/System/Windows/Forms/MaskedTextBox.cpp
-#  Sources/Pcf/System/Windows/Forms/Menu.cpp
-#  Sources/Pcf/System/Windows/Forms/MenuItem.cpp
-  Sources/Pcf/System/Windows/Forms/Message.cpp
-  Sources/Pcf/System/Windows/Forms/MessageBox.cpp
-#  Sources/Pcf/System/Windows/Forms/NumericUpDown.cpp
-#  Sources/Pcf/System/Windows/Forms/OpenFileDialog.cpp
-  Sources/Pcf/System/Windows/Forms/Panel.cpp
-#  Sources/Pcf/System/Windows/Forms/PictureBox.cpp
-  Sources/Pcf/System/Windows/Forms/ProgressBar.cpp
-#  Sources/Pcf/System/Windows/Forms/Question.hpp
-  Sources/Pcf/System/Windows/Forms/RadioButton.cpp
-#  Sources/Pcf/System/Windows/Forms/RichTextBox.cpp
-#  Sources/Pcf/System/Windows/Forms/SaveFileDialog.cpp
-#  Sources/Pcf/System/Windows/Forms/Screen.cpp
-#  Sources/Pcf/System/Windows/Forms/Stop.hpp
-  Sources/Pcf/System/Windows/Forms/SystemInformation.cpp
-  Sources/Pcf/System/Windows/Forms/TabControl.cpp
-  Sources/Pcf/System/Windows/Forms/TabPage.cpp
-#  Sources/Pcf/System/Windows/Forms/TextBox.cpp
-  Sources/Pcf/System/Windows/Forms/Timer.cpp
-  Sources/Pcf/System/Windows/Forms/TrackBar.cpp
+  Sources/Switch/System/Media/SystemSound.cpp
+  Sources/Switch/System/Media/SystemSounds.cpp
+  Sources/Switch/System/Windows/Forms/Application.cpp
+  Sources/Switch/System/Windows/Forms/Button.cpp
+  Sources/Switch/System/Windows/Forms/CheckBox.cpp
+#  Sources/Switch/System/Windows/Forms/CheckedListBox.cpp
+  Sources/Switch/System/Windows/Forms/Control.cpp
+#  Sources/Switch/System/Windows/Forms/Cursor.cpp
+#  Sources/Switch/System/Windows/Forms/Cursors.cpp
+#  Sources/Switch/System/Windows/Forms/Exclamation.hpp
+#  Sources/Switch/System/Windows/Forms/FolderBrowserDialog.cpp
+  Sources/Switch/System/Windows/Forms/Form.cpp
+  Sources/Switch/System/Windows/Forms/GroupBox.cpp
+#  Sources/Switch/System/Windows/Forms/ImageList.cpp
+#  Sources/Switch/System/Windows/Forms/Information.hpp
+  Sources/Switch/System/Windows/Forms/Label.cpp
+#  Sources/Switch/System/Windows/Forms/ListBox.cpp
+#  Sources/Switch/System/Windows/Forms/MainMenu.cpp
+#  Sources/Switch/System/Windows/Forms/MaskedTextBox.cpp
+#  Sources/Switch/System/Windows/Forms/Menu.cpp
+#  Sources/Switch/System/Windows/Forms/MenuItem.cpp
+  Sources/Switch/System/Windows/Forms/Message.cpp
+  Sources/Switch/System/Windows/Forms/MessageBox.cpp
+#  Sources/Switch/System/Windows/Forms/NumericUpDown.cpp
+#  Sources/Switch/System/Windows/Forms/OpenFileDialog.cpp
+  Sources/Switch/System/Windows/Forms/Panel.cpp
+#  Sources/Switch/System/Windows/Forms/PictureBox.cpp
+  Sources/Switch/System/Windows/Forms/ProgressBar.cpp
+#  Sources/Switch/System/Windows/Forms/Question.hpp
+  Sources/Switch/System/Windows/Forms/RadioButton.cpp
+#  Sources/Switch/System/Windows/Forms/RichTextBox.cpp
+#  Sources/Switch/System/Windows/Forms/SaveFileDialog.cpp
+#  Sources/Switch/System/Windows/Forms/Screen.cpp
+#  Sources/Switch/System/Windows/Forms/Stop.hpp
+  Sources/Switch/System/Windows/Forms/SystemInformation.cpp
+  Sources/Switch/System/Windows/Forms/TabControl.cpp
+  Sources/Switch/System/Windows/Forms/TabPage.cpp
+#  Sources/Switch/System/Windows/Forms/TextBox.cpp
+  Sources/Switch/System/Windows/Forms/Timer.cpp
+  Sources/Switch/System/Windows/Forms/TrackBar.cpp
 )
 
 source_group(Includes REGULAR_EXPRESSION "/Includes/[-_,A-Za-z0-9]+\\.hpp*")
-source_group(Includes\\Pcf\\System REGULAR_EXPRESSION "/Includes/Pcf/System/[-_,A-Za-z0-9]+\\.hpp*")
-source_group(Includes\\Pcf\\System\\ComponentModel REGULAR_EXPRESSION "/Includes/Pcf/System/ComponentModel/[-_,A-Za-z0-9]+\\.hpp*")
-source_group(Includes\\Pcf\\System\\Media REGULAR_EXPRESSION "/Includes/Pcf/System/Media/[-_,A-Za-z0-9]+\\.hpp*")
-source_group(Includes\\Pcf\\System\\Windows REGULAR_EXPRESSION "/Includes/Pcf/System/Windows/[-_,A-Za-z0-9]+\\.hpp*")
-source_group(Includes\\Pcf\\System\\Windows\\Forms REGULAR_EXPRESSION "/Includes/Pcf/System/Windows/Forms/[-_,A-Za-z0-9]+\\.hpp*")
-source_group(Includes\\Pcf\\System\\Windows\\Forms\\VisualStyles REGULAR_EXPRESSION "/Includes/Pcf/System/Windows/Forms/VisualStyles/[-_,A-Za-z0-9]+\\.hpp*")
-source_group(Includes\\Pcf REGULAR_EXPRESSION "/Includes/Pcf/[-_,A-Za-z0-9]+\\.hpp*")
-source_group(Includes\\Pcf REGULAR_EXPRESSION "/Includes/Pcf/[-_,A-Za-z0-9]")
+source_group(Includes\\Switch\\System REGULAR_EXPRESSION "/Includes/Switch/System/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Switch\\System\\ComponentModel REGULAR_EXPRESSION "/Includes/Switch/System/ComponentModel/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Switch\\System\\Media REGULAR_EXPRESSION "/Includes/Switch/System/Media/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Switch\\System\\Windows REGULAR_EXPRESSION "/Includes/Switch/System/Windows/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Switch\\System\\Windows\\Forms REGULAR_EXPRESSION "/Includes/Switch/System/Windows/Forms/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Switch\\System\\Windows\\Forms\\VisualStyles REGULAR_EXPRESSION "/Includes/Switch/System/Windows/Forms/VisualStyles/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Switch REGULAR_EXPRESSION "/Includes/Switch/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Switch REGULAR_EXPRESSION "/Includes/Switch/[-_,A-Za-z0-9]")
 
 source_group(Sources REGULAR_EXPRESSION "/Sources/[-_,A-Za-z0-9]+\\.c*")
 source_group(Sources\\__OS REGULAR_EXPRESSION "/Sources/__OS/[-_,A-Za-z0-9]+\\.*")
-source_group(Sources\\Pcf REGULAR_EXPRESSION "/Sources/Pcf/[-_,A-Za-z0-9]+\\.c*")
-source_group(Sources\\Pcf\\System REGULAR_EXPRESSION "/Sources/Pcf/System/[-_,A-Za-z0-9]+\\.c*")
-source_group(Sources\\Pcf\\System\\ComponentModel REGULAR_EXPRESSION "/Sources/Pcf/System/ComponentModel/[-_,A-Za-z0-9]+\\.c*")
-source_group(Sources\\Pcf\\System\\Media REGULAR_EXPRESSION "/Sources/Pcf/System/Media/[-_,A-Za-z0-9]+\\.c*")
-source_group(Sources\\Pcf\\System\\Windows REGULAR_EXPRESSION "/Sources/Pcf/System/Windows/[-_,A-Za-z0-9]+\\.c*")
-source_group(Sources\\Pcf\\System\\Windows\\Forms REGULAR_EXPRESSION "/Sources/Pcf/System/Windows/Forms/[-_,A-Za-z0-9]+\\.(c*|h*|m*)")
-source_group(Sources\\Pcf\\System\\Windows\\Forms\\VisualStyles REGULAR_EXPRESSION "/Sources/Pcf/System/Windows/Forms/VisualStyles/[-_,A-Za-z0-9]+\\.c*")
+source_group(Sources\\Switch REGULAR_EXPRESSION "/Sources/Switch/[-_,A-Za-z0-9]+\\.c*")
+source_group(Sources\\Switch\\System REGULAR_EXPRESSION "/Sources/Switch/System/[-_,A-Za-z0-9]+\\.c*")
+source_group(Sources\\Switch\\System\\ComponentModel REGULAR_EXPRESSION "/Sources/Switch/System/ComponentModel/[-_,A-Za-z0-9]+\\.c*")
+source_group(Sources\\Switch\\System\\Media REGULAR_EXPRESSION "/Sources/Switch/System/Media/[-_,A-Za-z0-9]+\\.c*")
+source_group(Sources\\Switch\\System\\Windows REGULAR_EXPRESSION "/Sources/Switch/System/Windows/[-_,A-Za-z0-9]+\\.c*")
+source_group(Sources\\Switch\\System\\Windows\\Forms REGULAR_EXPRESSION "/Sources/Switch/System/Windows/Forms/[-_,A-Za-z0-9]+\\.(c*|h*|m*)")
+source_group(Sources\\Switch\\System\\Windows\\Forms\\VisualStyles REGULAR_EXPRESSION "/Sources/Switch/System/Windows/Forms/VisualStyles/[-_,A-Za-z0-9]+\\.c*")
 
-add_library(Pcf.Forms STATIC ${INCLUDE_FILES} ${SOURCE_FILES})
-target_include_directories(Pcf.Forms PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Includes> $<INSTALL_INTERFACE:include>)
-target_link_libraries(Pcf.Forms Pcf.Drawing)
-set_target_properties(Pcf.Forms PROPERTIES FOLDER Pcf/Forms)
+add_library(Switch.Forms STATIC ${INCLUDE_FILES} ${SOURCE_FILES})
+target_include_directories(Switch.Forms PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Includes> $<INSTALL_INTERFACE:include>)
+target_link_libraries(Switch.Forms Switch.Drawing)
+set_target_properties(Switch.Forms PROPERTIES FOLDER Switch/Forms)
 
 if (BUILD_TESTS)
   add_subdirectory("ManualTests")
   add_subdirectory("UnitTests")
 endif()
 
-install(TARGETS Pcf.Forms EXPORT Pcf DESTINATION lib)
-install(DIRECTORY "Includes/Pcf/." DESTINATION include/Pcf)
+install(TARGETS Switch.Forms EXPORT Switch DESTINATION lib)
+install(DIRECTORY "Includes/Switch/." DESTINATION include/Switch)
 if(MSVC)
-  target_compile_options(Pcf.Forms PRIVATE "$<$<CONFIG:Debug>:/Fd$<TARGET_FILE_DIR:Pcf.Forms>/Pcf.Forms${CMAKE_DEBUG_POSTFIX}.pdb>")
-  target_compile_options(Pcf.Forms PRIVATE "$<$<CONFIG:Release>:/Fd$<TARGET_FILE_DIR:Pcf.Forms>/Pcf.Forms::pdb>")
-  install(FILES "$<TARGET_FILE_DIR:Pcf.Forms>/Pcf.Forms${CMAKE_DEBUG_POSTFIX}.pdb" DESTINATION lib CONFIGURATIONS Debug OPTIONAL)
-  install(FILES "$<TARGET_FILE_DIR:Pcf.Forms>/Pcf.Forms::pdb" DESTINATION lib CONFIGURATIONS Release OPTIONAL)
+  target_compile_options(Switch.Forms PRIVATE "$<$<CONFIG:Debug>:/Fd$<TARGET_FILE_DIR:Switch.Forms>/Switch.Forms${CMAKE_DEBUG_POSTFIX}.pdb>")
+  target_compile_options(Switch.Forms PRIVATE "$<$<CONFIG:Release>:/Fd$<TARGET_FILE_DIR:Switch.Forms>/Switch.Forms::pdb>")
+  install(FILES "$<TARGET_FILE_DIR:Switch.Forms>/Switch.Forms${CMAKE_DEBUG_POSTFIX}.pdb" DESTINATION lib CONFIGURATIONS Debug OPTIONAL)
+  install(FILES "$<TARGET_FILE_DIR:Switch.Forms>/Switch.Forms::pdb" DESTINATION lib CONFIGURATIONS Release OPTIONAL)
 endif()

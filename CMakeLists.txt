@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.2)
 
-project(Pcf VERSION 0.3.0)
+project(Switch VERSION 0.3.0)
 
-option(BUILD_CORE "Build Pcf.Core library" ON)
-option(BUILD_DRAWING "Build Pcf.Drawing library" ON)
-option(BUILD_FORMS "Build Pcf.Forms library" ON)
-option(BUILD_TUNIT "Build Pcf.TUnit and Pcf.TUnit.Main libraries" ON)
+option(BUILD_CORE "Build Switch.Core library" ON)
+option(BUILD_DRAWING "Build Switch.Drawing library" ON)
+option(BUILD_FORMS "Build Switch.Forms library" ON)
+option(BUILD_TUNIT "Build Switch.TUnit and Switch.TUnit.Main libraries" ON)
 option(BUILD_TESTS "Build unittests libraries" OFF)
 
 enable_testing()
@@ -30,7 +30,7 @@ else ()
   set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/${CMAKE_BUILD_TYPE})
 endif ()
 
-include(PcfDependencies.cmake)
+include(SwitchDependencies.cmake)
 
 if (BUILD_CORE)
   add_subdirectory("Core")
@@ -49,13 +49,13 @@ if (BUILD_TUNIT)
   add_subdirectory("TUnit.Main")
 endif()
 
-add_subdirectory("Pcf")
+add_subdirectory("Switch")
 
-install(EXPORT Pcf DESTINATION cmake)
-install(FILES PcfConfig.cmake PcfDependencies.cmake DESTINATION cmake)
+install(EXPORT Switch DESTINATION cmake)
+install(FILES SwitchConfig.cmake SwitchDependencies.cmake DESTINATION cmake)
 
 find_package(Doxygen)
 if(DOXYGEN_FOUND)
-  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Pcf.Doxyfile ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
+  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Switch.Doxyfile ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
   add_custom_target(documentation ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} COMMENT "Generating API documentation with Doxygen" VERBATIM)
 endif(DOXYGEN_FOUND)

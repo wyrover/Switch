@@ -54,8 +54,8 @@ else ()
   configure_file(./isPunctuation.map ${EXECUTABLE_OUTPUT_PATH}/isPunctuation.map COPYONLY)
 endif ()
 
-add_executable(Pcf.Core.IntegrationTests ${tests_files})
+add_executable(Switch.Core.IntegrationTests ${tests_files})
 
-target_link_libraries(Pcf.Core.IntegrationTests Pcf.Core Pcf.TUnit)
+target_link_libraries(Switch.Core.IntegrationTests Switch.Core Switch.TUnit)
 
-set_target_properties(Pcf.Core.IntegrationTests PROPERTIES FOLDER Pcf/Core)
+set_target_properties(Switch.Core.IntegrationTests PROPERTIES FOLDER Switch/Core)

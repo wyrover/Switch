@@ -1,8 +1,8 @@
-project(Pcf.Forms.ManualTests)
+project(Switch.Forms.ManualTests)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 source_group(ManualTests REGULAR_EXPRESSION "/[-_,A-Za-z0-9]+\\.(c|h)*")
 
-add_executable(Pcf.Forms.ManualTests ${PCF_GUI} Main.cpp)
-set_target_properties(Pcf.Forms.ManualTests PROPERTIES FOLDER Pcf/Forms)
-target_link_libraries(Pcf.Forms.ManualTests Pcf.Forms)
+add_executable(Switch.Forms.ManualTests ${SWITCH_GUI} Main.cpp)
+set_target_properties(Switch.Forms.ManualTests PROPERTIES FOLDER Switch/Forms)
+target_link_libraries(Switch.Forms.ManualTests Switch.Forms)
