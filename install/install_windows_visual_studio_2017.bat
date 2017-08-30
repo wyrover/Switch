@@ -10,10 +10,10 @@ cmake -G "Visual Studio 15 2017 Win64" -D CMAKE_INSTALL_PREFIX:STRING="C:/usr/lo
 
 cd..
 cmake -G "Visual Studio 15 2017 Win64" -D CMAKE_INSTALL_PREFIX:STRING="C:/usr/local" ..
-"devenv" "Pcf.sln" /project documentation /build Debug
+"devenv" "Switch.sln" /project documentation /build Debug
 start Help/html/index.html
-"devenv" "Pcf.sln" /project install /build Debug
-"devenv" "Pcf.sln" /project install /build Release
+"devenv" "Switch.sln" /project install /build Debug
+"devenv" "Switch.sln" /project install /build Release
 
 cd Examples
 cmake -G "Visual Studio 15 2017 Win64" -D CMAKE_INSTALL_PREFIX:STRING="C:/usr/local" ../../Examples

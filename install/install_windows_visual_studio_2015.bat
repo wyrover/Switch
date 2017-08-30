@@ -10,10 +10,10 @@ cmake -G "Visual Studio 14 2015 Win64" -D CMAKE_INSTALL_PREFIX:STRING="C:/usr/lo
 
 cd..
 cmake -G "Visual Studio 14 2015 Win64" -D CMAKE_INSTALL_PREFIX:STRING="C:/usr/local" ..
-"%VS140COMNTOOLS%\..\IDE\devenv" "Pcf.sln" /project documentation /build Debug
+"%VS140COMNTOOLS%\..\IDE\devenv" "Switch.sln" /project documentation /build Debug
 start Help/html/index.html
-"%VS140COMNTOOLS%\..\IDE\devenv" "Pcf.sln" /project install /build Debug
-"%VS140COMNTOOLS%\..\IDE\devenv" "Pcf.sln" /project install /build Release
+"%VS140COMNTOOLS%\..\IDE\devenv" "Switch.sln" /project install /build Debug
+"%VS140COMNTOOLS%\..\IDE\devenv" "Switch.sln" /project install /build Release
 
 cd Examples
 cmake -G "Visual Studio 14 2015 Win64" -D CMAKE_INSTALL_PREFIX:STRING="C:/usr/local" ../../Examples
