@@ -7,7 +7,7 @@ using namespace System;
 namespace DesignPatterns {
   namespace Structural {
     // The 'Component' abstract class
-    class Component : public Abstract {
+    class Component sw_abstract {
     public:
       virtual void Operation() const = 0;
     };

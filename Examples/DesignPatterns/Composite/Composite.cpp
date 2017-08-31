@@ -8,7 +8,7 @@ using namespace System::Collections::Generic;
 namespace DesignPatterns {
   namespace Structural {
     // The 'Component' abstract class
-    class Component : public Abstract {
+    class Component sw_abstract {
     public:
       // Constructor
       Component(const string& name) : name(name) {}
