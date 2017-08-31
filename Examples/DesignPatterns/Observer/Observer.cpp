@@ -75,9 +75,9 @@ namespace DesignPatterns {
         // Configure Observer pattern
         refptr<ConcreteSubject> s = sw_new<ConcreteSubject>();
         
-        s->Attach(new ConcreteObserver(s, "X"));
-        s->Attach(new ConcreteObserver(s, "Y"));
-        s->Attach(new ConcreteObserver(s, "Z"));
+        s->Attach(sw_new<ConcreteObserver>(s, "X"));
+        s->Attach(sw_new<ConcreteObserver>(s, "Y"));
+        s->Attach(sw_new<ConcreteObserver>(s, "Z"));
         
         // Change subject and notify observers
         s->SubjectState = "ABC";
