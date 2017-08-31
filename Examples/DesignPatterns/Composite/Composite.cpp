@@ -8,7 +8,7 @@ using namespace System::Collections::Generic;
 namespace DesignPatterns {
   namespace Structural {
     // The 'Component' abstract class
-    class Component : public Abstract {
+    class Component sw_abstract {
     public:
       // Constructor
       Component(const string& name) : name(name) {}
@@ -64,15 +64,15 @@ namespace DesignPatterns {
       static void Main() {
         // Create a tree structure
         refptr<Composite> root = sw_new<Composite>("root");
-        root->Add(new Leaf("Leaf A"));
-        root->Add(new Leaf("Leaf B"));
+        root->Add(sw_new<Leaf>("Leaf A"));
+        root->Add(sw_new<Leaf>("Leaf B"));
         
         refptr<Composite> comp = sw_new<Composite>("Composite X");
-        comp->Add(new Leaf("Leaf XA"));
-        comp->Add(new Leaf("Leaf XB"));
+        comp->Add(sw_new<Leaf>("Leaf XA"));
+        comp->Add(sw_new<Leaf>("Leaf XB"));
         
         root->Add(as<Component>(comp));
-        root->Add(new Leaf("Leaf C"));
+        root->Add(sw_new<Leaf>("Leaf C"));
         
         // Add and remove a leaf
         refptr<Leaf> leaf = sw_new<Leaf>("Leaf D");
