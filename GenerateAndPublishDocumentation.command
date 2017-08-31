@@ -2,15 +2,15 @@ echo "Generate and publish Switch Documentation version 0.3.0, copyright GAMMA S
 echo ""
 
 echo "Generate documentation..."
-cd ~/Projects/Pcf/bin
-rm -r ~/Projects/Pcf/bin/Help
+cd ~/Projects/Switch/bin
+rm -r ~/Projects/Switch/bin/Help
 xcodebuild -target documentation -configuration Debug
 
 echo "Publish documentation..."
-cd ~/Projects/Pcf-Doc
+cd ~/Projects/Switch-Doc
 git pull
-rm -r ~/Projects/Pcf-Doc/docs
-cp -R ~/Projects/Pcf/bin/Help/html/. ~/Projects/Pcf-Doc/docs
+rm -r ~/Projects/Switch-Doc/docs
+cp -R ~/Projects/Switch/bin/Help/html/. ~/Projects/Switch-Doc/docs
 git add --all
 git commit -m "add documentation"
 git push
