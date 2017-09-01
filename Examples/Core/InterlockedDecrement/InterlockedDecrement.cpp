@@ -39,7 +39,7 @@ namespace Examples {
       
       // Create 100000 instances of CountClass.
       for (int i = 0; i < 100000; i++) {
-        coutClass = sw_new<CountClass>();
+        coutClass = ref_new<CountClass>();
       }
     }
   };
@@ -48,7 +48,7 @@ namespace Examples {
   int MyInterlockedDecrementClass::CountClass::SafeInstanceCount = 0;
 }
       
-sw_startup (Examples::MyInterlockedDecrementClass)
+_startup (Examples::MyInterlockedDecrementClass)
 
 // This code produces the following output:
 //

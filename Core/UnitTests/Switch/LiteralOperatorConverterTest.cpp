@@ -9,381 +9,381 @@ namespace {
   class LiteralOperatorConverterTest : public TestFixture {
   protected:
     void DoubleTo_byte() {
-      Assert::IsTrue(IsByte(1.6_b), sw_current_information);
-      Assert::AreEqual(2, 1.6_b, sw_current_information);
+      Assert::IsTrue(IsByte(1.6_b), _current_information);
+      Assert::AreEqual(2, 1.6_b, _current_information);
     }
     
     void UInt64To_byte() {
-      Assert::IsTrue(IsByte(42_b), sw_current_information);
-      Assert::AreEqual(42, 42_b, sw_current_information);
+      Assert::IsTrue(IsByte(42_b), _current_information);
+      Assert::AreEqual(42, 42_b, _current_information);
     }
     
     void StringTo_byte() {
-      Assert::IsTrue(IsByte("42"_b), sw_current_information);
-      Assert::AreEqual(42, "42"_b, sw_current_information);
+      Assert::IsTrue(IsByte("42"_b), _current_information);
+      Assert::AreEqual(42, "42"_b, _current_information);
     }
     
     void CharTo_char32() {
-      Assert::IsTrue(IsChar32('A'_c), sw_current_information);
-      Assert::AreEqual(U'A', 'A'_c, sw_current_information);
+      Assert::IsTrue(IsChar32('A'_c), _current_information);
+      Assert::AreEqual(U'A', 'A'_c, _current_information);
     }
     
     void Char16To_char32() {
-      Assert::IsTrue(IsChar32(u'A'_c), sw_current_information);
-      Assert::AreEqual(U'A', u'A'_c, sw_current_information);
+      Assert::IsTrue(IsChar32(u'A'_c), _current_information);
+      Assert::AreEqual(U'A', u'A'_c, _current_information);
     }
     
     void Char32To_char32() {
-      Assert::IsTrue(IsChar32(U'A'_c), sw_current_information);
-      Assert::AreEqual(U'A', U'A'_c, sw_current_information);
+      Assert::IsTrue(IsChar32(U'A'_c), _current_information);
+      Assert::AreEqual(U'A', U'A'_c, _current_information);
     }
     
     void WCharTo_char32() {
-      Assert::IsTrue(IsChar32(L'A'_c), sw_current_information);
-      Assert::AreEqual(U'A', L'A'_c, sw_current_information);
+      Assert::IsTrue(IsChar32(L'A'_c), _current_information);
+      Assert::AreEqual(U'A', L'A'_c, _current_information);
     }
     
     void UInt64To_char32() {
-      Assert::IsTrue(IsChar32(65_c), sw_current_information);
-      Assert::AreEqual(U'A', 65_c, sw_current_information);
+      Assert::IsTrue(IsChar32(65_c), _current_information);
+      Assert::AreEqual(U'A', 65_c, _current_information);
     }
     
     void DoubleTo_double() {
-      Assert::IsTrue(IsDouble(1.6_d), sw_current_information);
-      Assert::AreEqual(1.6, 1.6_d, sw_current_information);
+      Assert::IsTrue(IsDouble(1.6_d), _current_information);
+      Assert::AreEqual(1.6, 1.6_d, _current_information);
     }
     
     void UInt64To_double() {
-      Assert::IsTrue(IsDouble(42_d), sw_current_information);
-      Assert::AreEqual(42.0, 42_d, sw_current_information);
+      Assert::IsTrue(IsDouble(42_d), _current_information);
+      Assert::AreEqual(42.0, 42_d, _current_information);
     }
     
     void StringTo_double() {
-      Assert::IsTrue(IsDouble("1.6"_d), sw_current_information);
-      Assert::AreEqual(1.6, "1.6"_d, sw_current_information);
+      Assert::IsTrue(IsDouble("1.6"_d), _current_information);
+      Assert::AreEqual(1.6, "1.6"_d, _current_information);
     }
     
     void DoubleTo_int16() {
-      Assert::IsTrue(IsInt16(1.6_s16), sw_current_information);
-      Assert::AreEqual(2, 1.6_s16, sw_current_information);
+      Assert::IsTrue(IsInt16(1.6_s16), _current_information);
+      Assert::AreEqual(2, 1.6_s16, _current_information);
     }
     
     void UInt64To_int16() {
-      Assert::IsTrue(IsInt16(42_s16), sw_current_information);
-      Assert::AreEqual(42, 42_s16, sw_current_information);
+      Assert::IsTrue(IsInt16(42_s16), _current_information);
+      Assert::AreEqual(42, 42_s16, _current_information);
     }
     
     void StringTo_int16() {
-      Assert::IsTrue(IsInt16("42"_s16), sw_current_information);
-      Assert::AreEqual(42, "42"_s16, sw_current_information);
+      Assert::IsTrue(IsInt16("42"_s16), _current_information);
+      Assert::AreEqual(42, "42"_s16, _current_information);
     }
     
     void DoubleTo_int32() {
-      Assert::IsTrue(IsInt32(1.6_s32), sw_current_information);
-      Assert::AreEqual(2, 1.6_s32, sw_current_information);
+      Assert::IsTrue(IsInt32(1.6_s32), _current_information);
+      Assert::AreEqual(2, 1.6_s32, _current_information);
     }
     
     void UInt64To_int32() {
-      Assert::IsTrue(IsInt32(42_s32), sw_current_information);
-      Assert::AreEqual(42, 42_s32, sw_current_information);
+      Assert::IsTrue(IsInt32(42_s32), _current_information);
+      Assert::AreEqual(42, 42_s32, _current_information);
     }
     
     void StringTo_int32() {
-      Assert::IsTrue(IsInt32("42"_s32), sw_current_information);
-      Assert::AreEqual(42, "42"_s32, sw_current_information);
+      Assert::IsTrue(IsInt32("42"_s32), _current_information);
+      Assert::AreEqual(42, "42"_s32, _current_information);
     }
     
     void DoubleTo_int64() {
-      Assert::IsTrue(IsInt64(1.6_s64), sw_current_information);
-      Assert::AreEqual(2, 1.6_s64, sw_current_information);
+      Assert::IsTrue(IsInt64(1.6_s64), _current_information);
+      Assert::AreEqual(2, 1.6_s64, _current_information);
     }
     
     void UInt64To_int64() {
-      Assert::IsTrue(IsInt64(42_s64), sw_current_information);
-      Assert::AreEqual(42, 42_s64, sw_current_information);
+      Assert::IsTrue(IsInt64(42_s64), _current_information);
+      Assert::AreEqual(42, 42_s64, _current_information);
     }
     
     void StringTo_int64() {
-      Assert::IsTrue(IsInt64("42"_s64), sw_current_information);
-      Assert::AreEqual(42, "42"_s64, sw_current_information);
+      Assert::IsTrue(IsInt64("42"_s64), _current_information);
+      Assert::AreEqual(42, "42"_s64, _current_information);
     }
     
     void DoubleTo_sbyte() {
-      Assert::IsTrue(IsSByte(1.6_sb), sw_current_information);
-      Assert::AreEqual(2, 1.6_sb, sw_current_information);
+      Assert::IsTrue(IsSByte(1.6_sb), _current_information);
+      Assert::AreEqual(2, 1.6_sb, _current_information);
     }
     
     void UInt64To_sbyte() {
-      Assert::IsTrue(IsSByte(42_sb), sw_current_information);
-      Assert::AreEqual(42, 42_sb, sw_current_information);
+      Assert::IsTrue(IsSByte(42_sb), _current_information);
+      Assert::AreEqual(42, 42_sb, _current_information);
     }
     
     void StringTo_sbyte() {
-      Assert::IsTrue(IsSByte("42"_sb), sw_current_information);
-      Assert::AreEqual(42, "42"_sb, sw_current_information);
+      Assert::IsTrue(IsSByte("42"_sb), _current_information);
+      Assert::AreEqual(42, "42"_sb, _current_information);
     }
     
     void DoubleTo_single() {
-      Assert::IsTrue(IsSingle(1.6_f), sw_current_information);
-      Assert::AreEqual(1.6f, 1.6_f, sw_current_information);
+      Assert::IsTrue(IsSingle(1.6_f), _current_information);
+      Assert::AreEqual(1.6f, 1.6_f, _current_information);
     }
     
     void UInt64To_single() {
-      Assert::IsTrue(IsSingle(42_f), sw_current_information);
-      Assert::AreEqual(42.0f, 42_f, sw_current_information);
+      Assert::IsTrue(IsSingle(42_f), _current_information);
+      Assert::AreEqual(42.0f, 42_f, _current_information);
     }
     
     void StringTo_single() {
-      Assert::IsTrue(IsSingle("1.6"_f), sw_current_information);
-      Assert::AreEqual(1.6f, "1.6"_f, sw_current_information);
+      Assert::IsTrue(IsSingle("1.6"_f), _current_information);
+      Assert::AreEqual(1.6f, "1.6"_f, _current_information);
     }
     
     void DoubleTo_uint16() {
-      Assert::IsTrue(IsUInt16(1.6_u16), sw_current_information);
-      Assert::AreEqual(2u, 1.6_u16, sw_current_information);
+      Assert::IsTrue(IsUInt16(1.6_u16), _current_information);
+      Assert::AreEqual(2u, 1.6_u16, _current_information);
     }
     
     void UInt64To_uint16() {
-      Assert::IsTrue(IsUInt16(42_u16), sw_current_information);
-      Assert::AreEqual(42u, 42_u16, sw_current_information);
+      Assert::IsTrue(IsUInt16(42_u16), _current_information);
+      Assert::AreEqual(42u, 42_u16, _current_information);
     }
     
     void StringTo_uint16() {
-      Assert::IsTrue(IsUInt16("42"_u16), sw_current_information);
-      Assert::AreEqual(42u, "42"_u16, sw_current_information);
+      Assert::IsTrue(IsUInt16("42"_u16), _current_information);
+      Assert::AreEqual(42u, "42"_u16, _current_information);
     }
     
     void DoubleTo_uint32() {
-      Assert::IsTrue(IsUInt32(1.6_u32), sw_current_information);
-      Assert::AreEqual(2u, 1.6_u32, sw_current_information);
+      Assert::IsTrue(IsUInt32(1.6_u32), _current_information);
+      Assert::AreEqual(2u, 1.6_u32, _current_information);
     }
     
     void UInt64To_uint32() {
-      Assert::IsTrue(IsUInt32(42_u32), sw_current_information);
-      Assert::AreEqual(42u, 42_u32, sw_current_information);
+      Assert::IsTrue(IsUInt32(42_u32), _current_information);
+      Assert::AreEqual(42u, 42_u32, _current_information);
     }
     
     void StringTo_uint32() {
-      Assert::IsTrue(IsUInt32("42"_u32), sw_current_information);
-      Assert::AreEqual(42u, "42"_u32, sw_current_information);
+      Assert::IsTrue(IsUInt32("42"_u32), _current_information);
+      Assert::AreEqual(42u, "42"_u32, _current_information);
     }
     
     void DoubleTo_uint64() {
-      Assert::IsTrue(IsUInt64(1.6_u64), sw_current_information);
-      Assert::AreEqual(2u, 1.6_u64, sw_current_information);
+      Assert::IsTrue(IsUInt64(1.6_u64), _current_information);
+      Assert::AreEqual(2u, 1.6_u64, _current_information);
     }
     
     void UInt64To_uint64() {
-      Assert::IsTrue(IsUInt64(42_u64), sw_current_information);
-      Assert::AreEqual(42u, 42_u64, sw_current_information);
+      Assert::IsTrue(IsUInt64(42_u64), _current_information);
+      Assert::AreEqual(42u, 42_u64, _current_information);
     }
     
     void StringTo_uint64() {
-      Assert::IsTrue(IsUInt64("42"_u64), sw_current_information);
-      Assert::AreEqual(42u, "42"_u64, sw_current_information);
+      Assert::IsTrue(IsUInt64("42"_u64), _current_information);
+      Assert::AreEqual(42u, "42"_u64, _current_information);
     }
     
     void DoubleToByte() {
-      Assert::IsInstanceOfType<Byte>(1.6_B, sw_current_information);
-      Assert::AreEqual(2, 1.6_B, sw_current_information);
+      Assert::IsInstanceOfType<Byte>(1.6_B, _current_information);
+      Assert::AreEqual(2, 1.6_B, _current_information);
     }
     
     void UInt64ToByte() {
-      Assert::IsInstanceOfType<Byte>(42_B, sw_current_information);
-      Assert::AreEqual(42, 42_B, sw_current_information);
+      Assert::IsInstanceOfType<Byte>(42_B, _current_information);
+      Assert::AreEqual(42, 42_B, _current_information);
     }
     
     void StringToByte() {
-      Assert::IsInstanceOfType<Byte>("42"_B, sw_current_information);
-      Assert::AreEqual(42, "42"_B, sw_current_information);
+      Assert::IsInstanceOfType<Byte>("42"_B, _current_information);
+      Assert::AreEqual(42, "42"_B, _current_information);
     }
     
     void CharToChar() {
-      Assert::IsInstanceOfType<Char>('A'_C, sw_current_information);
-      Assert::AreEqual(U'A', 'A'_C, sw_current_information);
+      Assert::IsInstanceOfType<Char>('A'_C, _current_information);
+      Assert::AreEqual(U'A', 'A'_C, _current_information);
     }
     
     void Char16ToChar() {
-      Assert::IsInstanceOfType<Char>(u'A'_C, sw_current_information);
-      Assert::AreEqual(U'A', u'A'_C, sw_current_information);
+      Assert::IsInstanceOfType<Char>(u'A'_C, _current_information);
+      Assert::AreEqual(U'A', u'A'_C, _current_information);
     }
     
     void Char32ToChar() {
-      Assert::IsInstanceOfType<Char>(U'A'_C, sw_current_information);
-      Assert::AreEqual(U'A', U'A'_C, sw_current_information);
+      Assert::IsInstanceOfType<Char>(U'A'_C, _current_information);
+      Assert::AreEqual(U'A', U'A'_C, _current_information);
     }
     
     void WCharToChar() {
-      Assert::IsInstanceOfType<Char>(L'A'_C, sw_current_information);
-      Assert::AreEqual(U'A', L'A'_C, sw_current_information);
+      Assert::IsInstanceOfType<Char>(L'A'_C, _current_information);
+      Assert::AreEqual(U'A', L'A'_C, _current_information);
     }
     
     void UInt64ToChar() {
-      Assert::IsInstanceOfType<Char>(65_C, sw_current_information);
-      Assert::AreEqual(U'A', 65_C, sw_current_information);
+      Assert::IsInstanceOfType<Char>(65_C, _current_information);
+      Assert::AreEqual(U'A', 65_C, _current_information);
     }
     
     void DoubleToDouble() {
-      Assert::IsInstanceOfType<Double>(1.6_D, sw_current_information);
-      Assert::AreEqual(1.6, 1.6_D, sw_current_information);
+      Assert::IsInstanceOfType<Double>(1.6_D, _current_information);
+      Assert::AreEqual(1.6, 1.6_D, _current_information);
     }
     
     void UInt64ToDouble() {
-      Assert::IsInstanceOfType<Double>(42_D, sw_current_information);
-      Assert::AreEqual(42.0, 42_D, sw_current_information);
+      Assert::IsInstanceOfType<Double>(42_D, _current_information);
+      Assert::AreEqual(42.0, 42_D, _current_information);
     }
     
     void StringToDouble() {
-      Assert::IsInstanceOfType<Double>("1.6"_D, sw_current_information);
-      Assert::AreEqual(1.6, "1.6"_D, sw_current_information);
+      Assert::IsInstanceOfType<Double>("1.6"_D, _current_information);
+      Assert::AreEqual(1.6, "1.6"_D, _current_information);
     }
     
     void CharPointerToString() {
-      Assert::IsInstanceOfType<String>("Fourty Two"_s, sw_current_information);
-      Assert::AreEqual("Fourty Two", "Fourty Two"_s, sw_current_information);
-      Assert::IsInstanceOfType<String>("Fourty Two"_S, sw_current_information);
-      Assert::AreEqual("Fourty Two", "Fourty Two"_S, sw_current_information);
+      Assert::IsInstanceOfType<String>("Fourty Two"_s, _current_information);
+      Assert::AreEqual("Fourty Two", "Fourty Two"_s, _current_information);
+      Assert::IsInstanceOfType<String>("Fourty Two"_S, _current_information);
+      Assert::AreEqual("Fourty Two", "Fourty Two"_S, _current_information);
     }
     
     void Char16PointerToString() {
-      Assert::IsInstanceOfType<String>(u"Fourty Two"_s, sw_current_information);
-      Assert::AreEqual("Fourty Two", u"Fourty Two"_s, sw_current_information);
-      Assert::IsInstanceOfType<String>(u"Fourty Two"_S, sw_current_information);
-      Assert::AreEqual("Fourty Two", u"Fourty Two"_S, sw_current_information);
+      Assert::IsInstanceOfType<String>(u"Fourty Two"_s, _current_information);
+      Assert::AreEqual("Fourty Two", u"Fourty Two"_s, _current_information);
+      Assert::IsInstanceOfType<String>(u"Fourty Two"_S, _current_information);
+      Assert::AreEqual("Fourty Two", u"Fourty Two"_S, _current_information);
     }
     
     void Char32PointerToString() {
-      Assert::IsInstanceOfType<String>(U"Fourty Two"_s, sw_current_information);
-      Assert::AreEqual("Fourty Two", U"Fourty Two"_s, sw_current_information);
-      Assert::IsInstanceOfType<String>(U"Fourty Two"_S, sw_current_information);
-      Assert::AreEqual("Fourty Two", U"Fourty Two"_S, sw_current_information);
+      Assert::IsInstanceOfType<String>(U"Fourty Two"_s, _current_information);
+      Assert::AreEqual("Fourty Two", U"Fourty Two"_s, _current_information);
+      Assert::IsInstanceOfType<String>(U"Fourty Two"_S, _current_information);
+      Assert::AreEqual("Fourty Two", U"Fourty Two"_S, _current_information);
     }
     
     void WCharPointerToString() {
-      Assert::IsInstanceOfType<String>(L"Fourty Two"_s, sw_current_information);
-      Assert::AreEqual("Fourty Two", L"Fourty Two"_s, sw_current_information);
-      Assert::IsInstanceOfType<String>(L"Fourty Two"_S, sw_current_information);
-      Assert::AreEqual("Fourty Two", L"Fourty Two"_S, sw_current_information);
+      Assert::IsInstanceOfType<String>(L"Fourty Two"_s, _current_information);
+      Assert::AreEqual("Fourty Two", L"Fourty Two"_s, _current_information);
+      Assert::IsInstanceOfType<String>(L"Fourty Two"_S, _current_information);
+      Assert::AreEqual("Fourty Two", L"Fourty Two"_S, _current_information);
     }
     
     void DoubleToInt16() {
-      Assert::IsInstanceOfType<Int16>(1.6_S16, sw_current_information);
-      Assert::AreEqual(2, 1.6_S16, sw_current_information);
+      Assert::IsInstanceOfType<Int16>(1.6_S16, _current_information);
+      Assert::AreEqual(2, 1.6_S16, _current_information);
     }
     
     void UInt64ToInt16() {
-      Assert::IsInstanceOfType<Int16>(42_S16, sw_current_information);
-      Assert::AreEqual(42, 42_S16, sw_current_information);
+      Assert::IsInstanceOfType<Int16>(42_S16, _current_information);
+      Assert::AreEqual(42, 42_S16, _current_information);
     }
     
     void StringToInt16() {
-      Assert::IsInstanceOfType<Int16>("42"_S16, sw_current_information);
-      Assert::AreEqual(42, "42"_S16, sw_current_information);
+      Assert::IsInstanceOfType<Int16>("42"_S16, _current_information);
+      Assert::AreEqual(42, "42"_S16, _current_information);
     }
     
     void DoubleToInt32() {
-      Assert::IsInstanceOfType<Int32>(1.6_S32, sw_current_information);
-      Assert::AreEqual(2, 1.6_S32, sw_current_information);
+      Assert::IsInstanceOfType<Int32>(1.6_S32, _current_information);
+      Assert::AreEqual(2, 1.6_S32, _current_information);
     }
     
     void UInt64ToInt32() {
-      Assert::IsInstanceOfType<Int32>(42_S32, sw_current_information);
-      Assert::AreEqual(42, 42_S32, sw_current_information);
+      Assert::IsInstanceOfType<Int32>(42_S32, _current_information);
+      Assert::AreEqual(42, 42_S32, _current_information);
     }
     
     void StringToInt32() {
-      Assert::IsInstanceOfType<Int32>("42"_S32, sw_current_information);
-      Assert::AreEqual(42, "42"_S32, sw_current_information);
+      Assert::IsInstanceOfType<Int32>("42"_S32, _current_information);
+      Assert::AreEqual(42, "42"_S32, _current_information);
     }
     
     void DoubleToInt64() {
-      Assert::IsInstanceOfType<Int64>(1.6_S64, sw_current_information);
-      Assert::AreEqual(2, 1.6_S64, sw_current_information);
+      Assert::IsInstanceOfType<Int64>(1.6_S64, _current_information);
+      Assert::AreEqual(2, 1.6_S64, _current_information);
     }
     
     void UInt64ToInt64() {
-      Assert::IsInstanceOfType<Int64>(42_S64, sw_current_information);
-      Assert::AreEqual(42, 42_S64, sw_current_information);
+      Assert::IsInstanceOfType<Int64>(42_S64, _current_information);
+      Assert::AreEqual(42, 42_S64, _current_information);
     }
     
     void StringToInt64() {
-      Assert::IsInstanceOfType<Int64>("42"_S64, sw_current_information);
-      Assert::AreEqual(42, "42"_S64, sw_current_information);
+      Assert::IsInstanceOfType<Int64>("42"_S64, _current_information);
+      Assert::AreEqual(42, "42"_S64, _current_information);
     }
     
     void DoubleToSByte() {
-      Assert::IsInstanceOfType<SByte>(1.6_SB, sw_current_information);
-      Assert::AreEqual(2, 1.6_SB, sw_current_information);
+      Assert::IsInstanceOfType<SByte>(1.6_SB, _current_information);
+      Assert::AreEqual(2, 1.6_SB, _current_information);
     }
     
     void UInt64ToSByte() {
-      Assert::IsInstanceOfType<SByte>(42_SB, sw_current_information);
-      Assert::AreEqual(42, 42_SB, sw_current_information);
+      Assert::IsInstanceOfType<SByte>(42_SB, _current_information);
+      Assert::AreEqual(42, 42_SB, _current_information);
     }
     
     void StringToSByte() {
-      Assert::IsInstanceOfType<SByte>("42"_SB, sw_current_information);
-      Assert::AreEqual(42, "42"_SB, sw_current_information);
+      Assert::IsInstanceOfType<SByte>("42"_SB, _current_information);
+      Assert::AreEqual(42, "42"_SB, _current_information);
     }
     
     void DoubleToSingle() {
-      Assert::IsInstanceOfType<Single>(1.6_F, sw_current_information);
-      Assert::AreEqual(1.6f, 1.6_F, sw_current_information);
+      Assert::IsInstanceOfType<Single>(1.6_F, _current_information);
+      Assert::AreEqual(1.6f, 1.6_F, _current_information);
     }
     
     void UInt64ToSingle() {
-      Assert::IsInstanceOfType<Single>(42_F, sw_current_information);
-      Assert::AreEqual(42.0f, 42_F, sw_current_information);
+      Assert::IsInstanceOfType<Single>(42_F, _current_information);
+      Assert::AreEqual(42.0f, 42_F, _current_information);
     }
     
     void StringToSingle() {
-      Assert::IsInstanceOfType<Single>("1.6"_F, sw_current_information);
-      Assert::AreEqual(1.6f, "1.6"_F, sw_current_information);
+      Assert::IsInstanceOfType<Single>("1.6"_F, _current_information);
+      Assert::AreEqual(1.6f, "1.6"_F, _current_information);
     }
     
     void DoubleToUInt16() {
-      Assert::IsInstanceOfType<UInt16>(1.6_U16, sw_current_information);
-      Assert::AreEqual(2u, 1.6_U16, sw_current_information);
+      Assert::IsInstanceOfType<UInt16>(1.6_U16, _current_information);
+      Assert::AreEqual(2u, 1.6_U16, _current_information);
     }
     
     void UInt64ToUInt16() {
-      Assert::IsInstanceOfType<UInt16>(42_U16, sw_current_information);
-      Assert::AreEqual(42u, 42_U16, sw_current_information);
+      Assert::IsInstanceOfType<UInt16>(42_U16, _current_information);
+      Assert::AreEqual(42u, 42_U16, _current_information);
     }
     
     void StringToUInt16() {
-      Assert::IsInstanceOfType<UInt16>("42"_U16, sw_current_information);
-      Assert::AreEqual(42u, "42"_U16, sw_current_information);
+      Assert::IsInstanceOfType<UInt16>("42"_U16, _current_information);
+      Assert::AreEqual(42u, "42"_U16, _current_information);
     }
     
     void DoubleToUInt32() {
-      Assert::IsInstanceOfType<UInt32>(1.6_U32, sw_current_information);
-      Assert::AreEqual(2u, 1.6_U32, sw_current_information);
+      Assert::IsInstanceOfType<UInt32>(1.6_U32, _current_information);
+      Assert::AreEqual(2u, 1.6_U32, _current_information);
     }
     
     void UInt64ToUInt32() {
-      Assert::IsInstanceOfType<UInt32>(42_U32, sw_current_information);
-      Assert::AreEqual(42u, 42_U32, sw_current_information);
+      Assert::IsInstanceOfType<UInt32>(42_U32, _current_information);
+      Assert::AreEqual(42u, 42_U32, _current_information);
     }
     
     void StringToUInt32() {
-      Assert::IsInstanceOfType<UInt32>("42"_U32, sw_current_information);
-      Assert::AreEqual(42u, "42"_U32, sw_current_information);
+      Assert::IsInstanceOfType<UInt32>("42"_U32, _current_information);
+      Assert::AreEqual(42u, "42"_U32, _current_information);
     }
     
     void DoubleToUInt64() {
-      Assert::IsInstanceOfType<UInt64>(1.6_U64, sw_current_information);
-      Assert::AreEqual(2u, 1.6_U64, sw_current_information);
+      Assert::IsInstanceOfType<UInt64>(1.6_U64, _current_information);
+      Assert::AreEqual(2u, 1.6_U64, _current_information);
     }
     
     void UInt64ToUInt64() {
-      Assert::IsInstanceOfType<UInt64>(42_U64, sw_current_information);
-      Assert::AreEqual(42u, 42_U64, sw_current_information);
+      Assert::IsInstanceOfType<UInt64>(42_U64, _current_information);
+      Assert::AreEqual(42u, 42_U64, _current_information);
     }
     
     void StringToUInt64() {
-      Assert::IsInstanceOfType<UInt64>("42"_U64, sw_current_information);
-      Assert::AreEqual(42u, "42"_U64, sw_current_information);
+      Assert::IsInstanceOfType<UInt64>("42"_U64, _current_information);
+      Assert::AreEqual(42u, "42"_U64, _current_information);
     }
     
     bool IsBool(bool) {return true;}
@@ -432,78 +432,78 @@ namespace {
     template<typename T> bool IsVoidPointer(T) {return false;}
 };
   
-  sw_test(LiteralOperatorConverterTest, DoubleTo_byte)
-  sw_test(LiteralOperatorConverterTest, UInt64To_byte)
-  sw_test(LiteralOperatorConverterTest, StringTo_byte)
-  sw_test(LiteralOperatorConverterTest, CharTo_char32)
-  sw_test(LiteralOperatorConverterTest, Char16To_char32)
-  sw_test(LiteralOperatorConverterTest, Char32To_char32)
-  sw_test(LiteralOperatorConverterTest, WCharTo_char32)
-  sw_test(LiteralOperatorConverterTest, UInt64To_char32)
-  sw_test(LiteralOperatorConverterTest, DoubleTo_double)
-  sw_test(LiteralOperatorConverterTest, UInt64To_double)
-  sw_test(LiteralOperatorConverterTest, StringTo_double)
-  sw_test(LiteralOperatorConverterTest, DoubleTo_int16)
-  sw_test(LiteralOperatorConverterTest, UInt64To_int16)
-  sw_test(LiteralOperatorConverterTest, StringTo_int16)
-  sw_test(LiteralOperatorConverterTest, DoubleTo_int32)
-  sw_test(LiteralOperatorConverterTest, UInt64To_int32)
-  sw_test(LiteralOperatorConverterTest, StringTo_int32)
-  sw_test(LiteralOperatorConverterTest, DoubleTo_int64)
-  sw_test(LiteralOperatorConverterTest, UInt64To_int64)
-  sw_test(LiteralOperatorConverterTest, StringTo_int64)
-  sw_test(LiteralOperatorConverterTest, DoubleTo_sbyte)
-  sw_test(LiteralOperatorConverterTest, UInt64To_sbyte)
-  sw_test(LiteralOperatorConverterTest, StringTo_sbyte)
-  sw_test(LiteralOperatorConverterTest, DoubleTo_single)
-  sw_test(LiteralOperatorConverterTest, UInt64To_single)
-  sw_test(LiteralOperatorConverterTest, StringTo_single)
-  sw_test(LiteralOperatorConverterTest, DoubleTo_uint16)
-  sw_test(LiteralOperatorConverterTest, UInt64To_uint16)
-  sw_test(LiteralOperatorConverterTest, StringTo_uint16)
-  sw_test(LiteralOperatorConverterTest, DoubleTo_uint32)
-  sw_test(LiteralOperatorConverterTest, UInt64To_uint32)
-  sw_test(LiteralOperatorConverterTest, StringTo_uint32)
-  sw_test(LiteralOperatorConverterTest, DoubleTo_uint64)
-  sw_test(LiteralOperatorConverterTest, UInt64To_uint64)
-  sw_test(LiteralOperatorConverterTest, StringTo_uint64)
-  sw_test(LiteralOperatorConverterTest, DoubleToByte)
-  sw_test(LiteralOperatorConverterTest, UInt64ToByte)
-  sw_test(LiteralOperatorConverterTest, StringToByte)
-  sw_test(LiteralOperatorConverterTest, CharToChar)
-  sw_test(LiteralOperatorConverterTest, Char16ToChar)
-  sw_test(LiteralOperatorConverterTest, Char32ToChar)
-  sw_test(LiteralOperatorConverterTest, WCharToChar)
-  sw_test(LiteralOperatorConverterTest, UInt64ToChar)
-  sw_test(LiteralOperatorConverterTest, DoubleToDouble)
-  sw_test(LiteralOperatorConverterTest, UInt64ToDouble)
-  sw_test(LiteralOperatorConverterTest, StringToDouble)
-  sw_test(LiteralOperatorConverterTest, CharPointerToString)
-  sw_test(LiteralOperatorConverterTest, Char16PointerToString)
-  sw_test(LiteralOperatorConverterTest, Char32PointerToString)
-  sw_test(LiteralOperatorConverterTest, WCharPointerToString)
-  sw_test(LiteralOperatorConverterTest, DoubleToInt16)
-  sw_test(LiteralOperatorConverterTest, UInt64ToInt16)
-  sw_test(LiteralOperatorConverterTest, StringToInt16)
-  sw_test(LiteralOperatorConverterTest, DoubleToInt32)
-  sw_test(LiteralOperatorConverterTest, UInt64ToInt32)
-  sw_test(LiteralOperatorConverterTest, StringToInt32)
-  sw_test(LiteralOperatorConverterTest, DoubleToInt64)
-  sw_test(LiteralOperatorConverterTest, UInt64ToInt64)
-  sw_test(LiteralOperatorConverterTest, StringToInt64)
-  sw_test(LiteralOperatorConverterTest, DoubleToSByte)
-  sw_test(LiteralOperatorConverterTest, UInt64ToSByte)
-  sw_test(LiteralOperatorConverterTest, StringToSByte)
-  sw_test(LiteralOperatorConverterTest, DoubleToSingle)
-  sw_test(LiteralOperatorConverterTest, UInt64ToSingle)
-  sw_test(LiteralOperatorConverterTest, StringToSingle)
-  sw_test(LiteralOperatorConverterTest, DoubleToUInt16)
-  sw_test(LiteralOperatorConverterTest, UInt64ToUInt16)
-  sw_test(LiteralOperatorConverterTest, StringToUInt16)
-  sw_test(LiteralOperatorConverterTest, DoubleToUInt32)
-  sw_test(LiteralOperatorConverterTest, UInt64ToUInt32)
-  sw_test(LiteralOperatorConverterTest, StringToUInt32)
-  sw_test(LiteralOperatorConverterTest, DoubleToUInt64)
-  sw_test(LiteralOperatorConverterTest, UInt64ToUInt64)
-  sw_test(LiteralOperatorConverterTest, StringToUInt64)
+  _test(LiteralOperatorConverterTest, DoubleTo_byte)
+  _test(LiteralOperatorConverterTest, UInt64To_byte)
+  _test(LiteralOperatorConverterTest, StringTo_byte)
+  _test(LiteralOperatorConverterTest, CharTo_char32)
+  _test(LiteralOperatorConverterTest, Char16To_char32)
+  _test(LiteralOperatorConverterTest, Char32To_char32)
+  _test(LiteralOperatorConverterTest, WCharTo_char32)
+  _test(LiteralOperatorConverterTest, UInt64To_char32)
+  _test(LiteralOperatorConverterTest, DoubleTo_double)
+  _test(LiteralOperatorConverterTest, UInt64To_double)
+  _test(LiteralOperatorConverterTest, StringTo_double)
+  _test(LiteralOperatorConverterTest, DoubleTo_int16)
+  _test(LiteralOperatorConverterTest, UInt64To_int16)
+  _test(LiteralOperatorConverterTest, StringTo_int16)
+  _test(LiteralOperatorConverterTest, DoubleTo_int32)
+  _test(LiteralOperatorConverterTest, UInt64To_int32)
+  _test(LiteralOperatorConverterTest, StringTo_int32)
+  _test(LiteralOperatorConverterTest, DoubleTo_int64)
+  _test(LiteralOperatorConverterTest, UInt64To_int64)
+  _test(LiteralOperatorConverterTest, StringTo_int64)
+  _test(LiteralOperatorConverterTest, DoubleTo_sbyte)
+  _test(LiteralOperatorConverterTest, UInt64To_sbyte)
+  _test(LiteralOperatorConverterTest, StringTo_sbyte)
+  _test(LiteralOperatorConverterTest, DoubleTo_single)
+  _test(LiteralOperatorConverterTest, UInt64To_single)
+  _test(LiteralOperatorConverterTest, StringTo_single)
+  _test(LiteralOperatorConverterTest, DoubleTo_uint16)
+  _test(LiteralOperatorConverterTest, UInt64To_uint16)
+  _test(LiteralOperatorConverterTest, StringTo_uint16)
+  _test(LiteralOperatorConverterTest, DoubleTo_uint32)
+  _test(LiteralOperatorConverterTest, UInt64To_uint32)
+  _test(LiteralOperatorConverterTest, StringTo_uint32)
+  _test(LiteralOperatorConverterTest, DoubleTo_uint64)
+  _test(LiteralOperatorConverterTest, UInt64To_uint64)
+  _test(LiteralOperatorConverterTest, StringTo_uint64)
+  _test(LiteralOperatorConverterTest, DoubleToByte)
+  _test(LiteralOperatorConverterTest, UInt64ToByte)
+  _test(LiteralOperatorConverterTest, StringToByte)
+  _test(LiteralOperatorConverterTest, CharToChar)
+  _test(LiteralOperatorConverterTest, Char16ToChar)
+  _test(LiteralOperatorConverterTest, Char32ToChar)
+  _test(LiteralOperatorConverterTest, WCharToChar)
+  _test(LiteralOperatorConverterTest, UInt64ToChar)
+  _test(LiteralOperatorConverterTest, DoubleToDouble)
+  _test(LiteralOperatorConverterTest, UInt64ToDouble)
+  _test(LiteralOperatorConverterTest, StringToDouble)
+  _test(LiteralOperatorConverterTest, CharPointerToString)
+  _test(LiteralOperatorConverterTest, Char16PointerToString)
+  _test(LiteralOperatorConverterTest, Char32PointerToString)
+  _test(LiteralOperatorConverterTest, WCharPointerToString)
+  _test(LiteralOperatorConverterTest, DoubleToInt16)
+  _test(LiteralOperatorConverterTest, UInt64ToInt16)
+  _test(LiteralOperatorConverterTest, StringToInt16)
+  _test(LiteralOperatorConverterTest, DoubleToInt32)
+  _test(LiteralOperatorConverterTest, UInt64ToInt32)
+  _test(LiteralOperatorConverterTest, StringToInt32)
+  _test(LiteralOperatorConverterTest, DoubleToInt64)
+  _test(LiteralOperatorConverterTest, UInt64ToInt64)
+  _test(LiteralOperatorConverterTest, StringToInt64)
+  _test(LiteralOperatorConverterTest, DoubleToSByte)
+  _test(LiteralOperatorConverterTest, UInt64ToSByte)
+  _test(LiteralOperatorConverterTest, StringToSByte)
+  _test(LiteralOperatorConverterTest, DoubleToSingle)
+  _test(LiteralOperatorConverterTest, UInt64ToSingle)
+  _test(LiteralOperatorConverterTest, StringToSingle)
+  _test(LiteralOperatorConverterTest, DoubleToUInt16)
+  _test(LiteralOperatorConverterTest, UInt64ToUInt16)
+  _test(LiteralOperatorConverterTest, StringToUInt16)
+  _test(LiteralOperatorConverterTest, DoubleToUInt32)
+  _test(LiteralOperatorConverterTest, UInt64ToUInt32)
+  _test(LiteralOperatorConverterTest, StringToUInt32)
+  _test(LiteralOperatorConverterTest, DoubleToUInt64)
+  _test(LiteralOperatorConverterTest, UInt64ToUInt64)
+  _test(LiteralOperatorConverterTest, StringToUInt64)
 }

@@ -7,7 +7,7 @@ using namespace System;
 namespace DesignPatterns {
   namespace Structural {
     // The 'Component' abstract class
-    class Component sw_abstract {
+    class Component _abstract {
     public:
       virtual void Operation() const = 0;
     };
@@ -61,9 +61,9 @@ namespace DesignPatterns {
       // Entry point into console application.
       static void Main() {
         // Create ConcreteComponent and two Decorators
-        refptr<ConcreteComponent> c = sw_new<ConcreteComponent>();
-        refptr<ConcreteDecoratorA> d1 = sw_new<ConcreteDecoratorA>();
-        refptr<ConcreteDecoratorB> d2 = sw_new<ConcreteDecoratorB>();
+        refptr<ConcreteComponent> c = ref_new<ConcreteComponent>();
+        refptr<ConcreteDecoratorA> d1 = ref_new<ConcreteDecoratorA>();
+        refptr<ConcreteDecoratorB> d2 = ref_new<ConcreteDecoratorB>();
         
         // Link decorators
         d1->SetComponent(as<Component>(c));
@@ -76,7 +76,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-sw_startup (DesignPatterns::Structural::MainApp)
+_startup (DesignPatterns::Structural::MainApp)
 
 // This code produces the following output:
 //

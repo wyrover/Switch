@@ -25,7 +25,7 @@ namespace DesignPatterns {
     };
 
     // The 'Builder' abstract class
-    class Builder sw_abstract {
+    class Builder _abstract {
     public:
       virtual void BuildPartA() = 0;
       virtual void BuildPartB() = 0;
@@ -73,8 +73,8 @@ namespace DesignPatterns {
         // Create director and builders
         Director director;
         
-        refptr<Builder> b1 = sw_new<ConcreteBuilder1>();
-        refptr<Builder> b2 = sw_new<ConcreteBuilder2>();
+        refptr<Builder> b1 = ref_new<ConcreteBuilder1>();
+        refptr<Builder> b2 = ref_new<ConcreteBuilder2>();
         
         // Construct two products
         director.Construct(*b1);
@@ -90,7 +90,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-sw_startup (DesignPatterns::Creational::MainApp)
+_startup (DesignPatterns::Creational::MainApp)
 
 // This code produces the following output:
 //

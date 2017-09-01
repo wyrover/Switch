@@ -21,7 +21,7 @@ namespace Switch {
       /// @remarks To draw rectangles, you need a Graphics object and a Pen object. The Graphics object provides the DrawRectangle method, and the Pen object stores features of the line, such as color and width. The units the rectangle is drawn in is determined by the PageUnit and PageScale properties of the graphics object used for drawing. The default unit is pixels.
       /// @remarks To draw a Rectangle filled with color, you need a Graphics object and an object derived from Brush such as SolidBrush or LinearGradientBrush. The Graphics object provides the FillRectangle method and the Brush object provides the color and fill information.
       /// @remarks For more advanced shapes, use a Region object.
-      class sw_public RectangleF : public object {
+      class _public RectangleF : public object {
       public:
         /// @brief Represents a Rectangle structure with its properties left uninitialized.
         static Property<RectangleF, ReadOnly> Empty;
@@ -54,28 +54,28 @@ namespace Switch {
         /// @return int32 The height of this Rectangle structure. The default is 0.
         /// @remarks The value of the Bottom property represents the y-coordinate of the first point at the bottom edge of the Rectangle that is not contained in the Rectangle.
         Property<float, ReadOnly> Bottom {
-          sw_get {return this->y + this->height;}
+          _get {return this->y + this->height;}
         };
 
         /// @brief Gets or sets the height of this Rectangle structure.
         /// @return int32 The height of this Rectangle structure. The default is 0.
         /// @remarks Changing the Height property will also cause a change in the Bottom property of the Rectangle. The units the rectangle is drawn in is determined by the PageUnit and PageScale properties of the graphics object used for drawing. The default unit is pixels.
         Property<float> Height {
-          sw_get {return this->height;},
-          sw_set {this->height = value;}
+          _get {return this->height;},
+          _set {this->height = value;}
         };
         
         /// @brief Gets the x-coordinate of the left edge of this Rectangle structure.
         /// @return int32 The x-coordinate of the left edge of this Rectangle structure.
         Property<float, ReadOnly> Left {
-          sw_get {return this->x;}
+          _get {return this->x;}
         };
 
         /// @brief Gets or sets the coordinates of the upper-left corner of this Rectangle structure.
         /// @return A Point that represents the upper-left corner of this Rectangle structure.
         Property<PointF> Location {
-          sw_get {return PointF(this->x, this->y);},
-          sw_set {
+          _get {return PointF(this->x, this->y);},
+          _set {
             this->x = value.X;
             this->y = value.Y;
           }
@@ -85,14 +85,14 @@ namespace Switch {
         /// @return int32 The x-coordinate that is the sum of X and Width of this Rectangle.
         /// @remarks The value of the Right property represents the x-coordinate of the first point at the right edge of the rectangle that is not contained in the rectangle.
         Property<float, ReadOnly> Right {
-          sw_get {return this->x + this->width;}
+          _get {return this->x + this->width;}
         };
 
         /// @brief Gets the size of this Rectangle.
         /// @return A Size that represents the width and height of this Rectangle structure.
         Property<SizeF> Size {
-          sw_get {return SizeF(this->width, this->height);},
-          sw_set {
+          _get {return SizeF(this->width, this->height);},
+          _set {
             this->width = value.Width;
             this->height = value.Height;
           }
@@ -101,31 +101,31 @@ namespace Switch {
         /// @brief Gets the y-coordinate of the top edge of this Rectangle structure.
         /// @return int32 The y-coordinate of the top edge of this Rectangle structure.
         Property<float, ReadOnly> Top {
-          sw_get {return this->y;}
+          _get {return this->y;}
         };
 
         /// @brief Gets or sets the wisth of this Rectangle structure.
         /// @return int32 The width of this Rectangle structure. The default is 0.
         /// @remarks Changing the Width property will also cause a change in the Rigth property of the Rectangle. The units the rectangle is drawn in is determined by the PageUnit and PageScale properties of the graphics object used for drawing. The default unit is pixels.
         Property<float> Width {
-          sw_get {return this->width;},
-          sw_set {this->width = value;}
+          _get {return this->width;},
+          _set {this->width = value;}
         };
         
         /// @brief Gets or sets the x-coordinate of the upper-left corner of this Rectangle structure.
         /// @return int32 The x-coordinate of the upper-left corner of this Rectangle structure. The default is 0.
         /// @remarks Changing the X property will also cause a change in the Right property of the Rectangle.
         Property<float> X {
-          sw_get {return this->x;},
-          sw_set {this->x = value;}
+          _get {return this->x;},
+          _set {this->x = value;}
         };
         
         /// @brief Gets or sets the y-coordinate of the upper-left corner of this Rectangle structure.
         /// @return int32 The y-coordinate of the upper-left corner of this Rectangle structure. The default is 0.
         /// @remarks Changing the y property will also cause a change in the Bottom property of the Rectangle.
         Property<float> Y {
-          sw_get {return this->y;},
-          sw_set {this->y = value;}
+          _get {return this->y;},
+          _set {this->y = value;}
         };
 
         /// @brief Determines if the specified point is contained within this Rectangle structure.

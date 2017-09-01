@@ -8,7 +8,7 @@ using namespace System::Windows::Forms;
 using namespace __OS;
 
 namespace {
-  class CocoaApi sw_static {
+  class CocoaApi _static {
   public:
     static NSColor* FromColor(const System::Drawing::Color& color) {
       return [NSColor colorWithCalibratedRed:as<double>(color.R()) / 0xFF green:as<double>(color.G()) / 0xFF blue:as<double>(color.B()) / 0xFF alpha:as<double>(color.A()) / 0xFF];

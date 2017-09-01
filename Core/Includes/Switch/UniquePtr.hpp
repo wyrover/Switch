@@ -625,27 +625,27 @@ namespace Switch {
   };
   
   template <class T>
-  struct sw_remove_extent {
+  struct _remove_extent {
     using type = T;
   };
   template <class T>
-  struct sw_remove_extent<T[]> {
+  struct _remove_extent<T[]> {
     using type = T;
   };
   template <class T, size_t N>
-  struct sw_remove_extent<T[N]> {
+  struct _remove_extent<T[N]> {
     using type = T;
   };
   
   template <class T>
-  using sw_remove_extent_t = typename sw_remove_extent<T>::type;
+  using _remove_extent_t = typename _remove_extent<T>::type;
   
   template<typename T, typename ...Args>
   typename __pcf_unique_if<T>::__unique_single MakeUnique(Args&&... args) {return UniquePtr<T>(new T(args...));}
   
   template<typename T>
   typename __pcf_unique_if<T>::__unique_array_known_bound MakeUnique(size_t size) {
-    using TT = typename sw_remove_extent<T>::type;
+    using TT = typename _remove_extent<T>::type;
     return UniquePtr<T>(new TT[size]());
   }
   /// @endcond

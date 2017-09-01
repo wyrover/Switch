@@ -18,7 +18,7 @@ namespace Examples {
       clientWebSocket.Connect("ws://localhost:8126/foo");
       
       // Create receiver thread for client web socket
-      System::Threading::Thread receiver(System::Threading::ThreadStart(sw_delegate {
+      System::Threading::Thread receiver(System::Threading::ThreadStart(_delegate {
         string message;
         do {
           /// Client web socket receive
@@ -46,4 +46,4 @@ namespace Examples {
   };
 }
 
-sw_startup (Examples::ClientWebSocket)
+_startup (Examples::ClientWebSocket)

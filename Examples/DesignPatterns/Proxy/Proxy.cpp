@@ -7,7 +7,7 @@ using namespace System;
 namespace DesignPatterns {
   namespace Structural {
     // The 'Subject' abstract class
-    class Subject sw_abstract {
+    class Subject _abstract {
     public:
       virtual void Request() const = 0;
     };
@@ -44,7 +44,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-sw_startup (DesignPatterns::Structural::MainApp)
+_startup (DesignPatterns::Structural::MainApp)
 
 // This code produces the following output:
 //

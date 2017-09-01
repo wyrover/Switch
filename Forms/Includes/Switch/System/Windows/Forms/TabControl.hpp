@@ -15,7 +15,7 @@ namespace Switch {
       /// @brief The Switch::System::Windows::Forms namespace contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system, Apple macOS and Linux like Ubuntu operating system.
       namespace Forms {
         /// @brief Used to group collections of controls.
-        class sw_public TabControl : public ContainerControl {
+        class _public TabControl : public ContainerControl {
         public:
           using TabPageCollection = ControlCollection;
 
@@ -24,12 +24,12 @@ namespace Switch {
           }
 
           Property<TabAlignment> Alignment{
-            sw_get {return this->alignment;},
-            sw_set {this->SetAlignment(value);}
+            _get {return this->alignment;},
+            _set {this->SetAlignment(value);}
           };
 
           Property<TabPageCollection&, ReadOnly> TabPages{
-            sw_get->TabPageCollection& {return this->Controls();}
+            _get->TabPageCollection& {return this->Controls();}
           };
 
         protected:

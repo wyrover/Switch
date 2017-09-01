@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains Switch::Property class, #sw_get and #sw_set keywords.
+/// @brief Contains Switch::Property class, #_get and #_set keywords.
 #pragma once
 
 //#include <functional>
@@ -127,8 +127,8 @@ namespace Switch {
   ///   Person(const Person& person) : name(person.name) {}
   ///
   ///   Property<string> Name {
-  ///     sw_get {return this->name},
-  ///     sw_set {this->name = value.ToUpper();}
+  ///     _get {return this->name},
+  ///     _set {this->name = value.ToUpper();}
   ///   };
   ///
   /// private:
@@ -136,7 +136,7 @@ namespace Switch {
   /// };
   /// @endcode
   /// @ingroup Switch
-  #define sw_get\
+  #define _get\
   [&]()
   
   /// @brief The set keyword defines an accessor method in a property or indexer that assigns the value of the property or the indexer element.
@@ -148,8 +148,8 @@ namespace Switch {
   ///   Person(const Person& person) : name(person.name) {}
   ///
   ///   Property<string> Name {
-  ///     sw_get {return this->name},
-  ///     sw_set {this->name = value.ToUpper();}
+  ///     _get {return this->name},
+  ///     _set {this->name = value.ToUpper();}
   ///   };
   ///
   /// private:
@@ -157,7 +157,7 @@ namespace Switch {
   /// };
   /// @endcode
   /// @ingroup Switch
-  #define sw_set\
+  #define _set\
   [&](const auto& value)
 }
 

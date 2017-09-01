@@ -12,7 +12,7 @@ namespace Switch {
     namespace Win32 {
       //class Switch::Microsoft::Win32::RegistryKey  ClassesRoot;
       /// @brief Provides RegistryKey objects that represent the root keys in the Windows registry, and static methods to access key/value pairs.
-      class sw_public Registry : public object {
+      class _public Registry : public object {
       private:
         Registry() {}
 
@@ -32,7 +32,7 @@ namespace Switch {
           if (name == "HKEY_DYN_DATA")
             return RegistryHive::DynData;
 
-          throw System::ArgumentException(sw_current_information);
+          throw System::ArgumentException(_current_information);
         }
 
       public:

@@ -12,7 +12,7 @@ namespace Examples {
     // The main entry point for the application.
     static void Main() {
       Console::WriteLine("Press Ctrl+C to quit...");
-      Thread server(ThreadStart(sw_delegate {
+      Thread server(ThreadStart(_delegate {
         UdpClient udpClient(IPEndPoint(IPAddress::Any, 8082));
         while (true) {
           Array<byte> receiveBytes(256);
@@ -23,7 +23,7 @@ namespace Examples {
       }));
       server.Start();
       
-      Thread client(ThreadStart(sw_delegate {
+      Thread client(ThreadStart(_delegate {
         UdpClient udpClient;
         int counter = Random().Next(1, 20000);
         while (true) {
@@ -39,7 +39,7 @@ namespace Examples {
   };
 }
 
-sw_startup (Examples::UdpClientExample)
+_startup (Examples::UdpClientExample)
 
 // This code example can produce the following output:
 //

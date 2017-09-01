@@ -116,7 +116,7 @@ namespace Switch {
           /// @exception InvalidOperationException The Stack<T> is Empty.
           T Peek() {
             if (this->stack.Count == 0)
-              throw InvalidOperationException(sw_current_information);
+              throw InvalidOperationException(_current_information);
 
             return this->stack[0];
           }

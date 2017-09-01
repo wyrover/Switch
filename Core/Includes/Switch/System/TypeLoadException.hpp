@@ -9,7 +9,7 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The exception that is thrown when there is an attempt to access an unloaded class.
-    class sw_public TypeLoadException : public SystemException {
+    class _public TypeLoadException : public SystemException {
     public:
       /// @brief Create a new instance of class TypeLoadException
       /// @remarks Message is set with the default message associate to the error.
@@ -21,7 +21,7 @@ namespace Switch {
       TypeLoadException(const TypeLoadException& value) : SystemException(value) {}
       
       /// @brief Create a new instance of class TypeLoadException
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
       /// @remarks Message is set with the default message associate to the error.
       TypeLoadException(const CurrentInformation& information) : SystemException(information) {}
       
@@ -31,13 +31,13 @@ namespace Switch {
       
       /// @brief Create a new instance of class TypeLoadException
       /// @param message Message string associate to the error.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
       TypeLoadException(const System::String& message, const CurrentInformation& information) : SystemException(message, information) {}
       
       /// @brief Create a new instance of class TypeLoadException
       /// @param message Message string associate to the error.
       /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
       TypeLoadException(const System::String& message, const System::Exception& innerException, const CurrentInformation& information) : SystemException(message, innerException, information) {}
       
     private:

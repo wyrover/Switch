@@ -18,7 +18,7 @@ namespace Examples {
       names.ForEach(Print);
       
       // The following demonstrates the lambda of C++ to display the contents of the list to the console.
-      names.ForEach(sw_delegate(const string& name) {
+      names.ForEach(_delegate(const string& name) {
         Console::WriteLine(name);
       });
     }
@@ -30,7 +30,7 @@ namespace Examples {
   };
 }
 
-sw_startup (Examples::Program)
+_startup (Examples::Program)
 
 // This code produces the following output:
 //

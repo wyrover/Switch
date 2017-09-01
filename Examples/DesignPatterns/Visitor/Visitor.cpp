@@ -10,7 +10,7 @@ namespace DesignPatterns {
     class Visitor;
     
     // The 'Element' abstract class
-    class Element sw_abstract {
+    class Element _abstract {
     public:
       virtual void Accept(refptr<Visitor> visitor) = 0;
     };
@@ -34,7 +34,7 @@ namespace DesignPatterns {
     };
     
     // The 'Visitor' abstract class
-    class Visitor sw_abstract {
+    class Visitor _abstract {
     public:
       virtual void VisitConcreteElementA(const ConcreteElementA& concreteElementA) = 0;
       virtual void VisitConcreteElementB(const ConcreteElementB& concreteElementB) = 0;
@@ -99,12 +99,12 @@ namespace DesignPatterns {
       static void Main() {
         // Setup structure
         ObjectStructure o;
-        o.Attach(sw_new<ConcreteElementA>());
-        o.Attach(sw_new<ConcreteElementB>());
+        o.Attach(ref_new<ConcreteElementA>());
+        o.Attach(ref_new<ConcreteElementB>());
         
         // Create visitor objects
-        refptr<ConcreteVisitor1> v1 = sw_new<ConcreteVisitor1>();
-        refptr<ConcreteVisitor2> v2 = sw_new<ConcreteVisitor2>();
+        refptr<ConcreteVisitor1> v1 = ref_new<ConcreteVisitor1>();
+        refptr<ConcreteVisitor2> v2 = ref_new<ConcreteVisitor2>();
         
         // Structure accepting visitors
         o.Accept(v1);
@@ -115,7 +115,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-sw_startup (DesignPatterns::Behavioral::MainApp)
+_startup (DesignPatterns::Behavioral::MainApp)
 
 // This code produces the following output:
 //

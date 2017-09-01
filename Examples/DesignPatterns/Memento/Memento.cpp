@@ -16,7 +16,7 @@ namespace DesignPatterns {
       
       // Gets or sets state
       Property<string, ReadOnly> State {
-        sw_get { return this->state; }
+        _get { return this->state; }
       };
 
     private:
@@ -28,8 +28,8 @@ namespace DesignPatterns {
     public:
       // Property
       Property<string> State {
-        sw_get { return this->state; },
-        sw_set {
+        _get { return this->state; },
+        _set {
           this->state = value;
           Console::WriteLine("State = " + this->state);
         }
@@ -57,8 +57,8 @@ namespace DesignPatterns {
       
       // Gets or sets memento
       Property<DesignPatterns::Behavioral::Memento> Memento {
-        sw_get { return this->memento; },
-        sw_set { this->memento = value; }
+        _get { return this->memento; },
+        _set { this->memento = value; }
       };
 
     private:
@@ -89,7 +89,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-sw_startup (DesignPatterns::Behavioral::MainApp)
+_startup (DesignPatterns::Behavioral::MainApp)
 
 // This code produces the following output:
 //

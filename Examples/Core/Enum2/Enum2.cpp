@@ -174,4 +174,4 @@ public:
   }
 };
 
-sw_startup (Program)
+_startup (Program)

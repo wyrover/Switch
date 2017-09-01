@@ -7,7 +7,7 @@ namespace Examples {
   public:
     // The main entry point for the application.
     static void Main() {
-      Console::CancelKeyPress += sw_delegate(const object& sender, System::ConsoleCancelEventArgs& e) {
+      Console::CancelKeyPress += _delegate(const object& sender, System::ConsoleCancelEventArgs& e) {
         Console::WriteLine("Signal {0} intercepted !", e.SpecialKey);
         e.Cancel = true;
       };
@@ -23,4 +23,4 @@ namespace Examples {
   };
 }
 
-sw_startup (Examples::Program)
+_startup (Examples::Program)

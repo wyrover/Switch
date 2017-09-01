@@ -9,7 +9,7 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The exception that is thrown when a floating-point value is positive infinity, negative infinity, or Not-a-Number (NaN).
-    class sw_public NotFiniteNumberException : public ArithmeticException {
+    class _public NotFiniteNumberException : public ArithmeticException {
     public:
       /// @brief Create a new instance of class NotFiniteNumberException
       /// @remarks Message is set with the default message associate to the error.
@@ -21,7 +21,7 @@ namespace Switch {
       NotFiniteNumberException(const NotFiniteNumberException& value) : ArithmeticException(value) {}
       
       /// @brief Create a new instance of class NotFiniteNumberException
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
       /// @remarks Message is set with the default message associate to the error.
       NotFiniteNumberException(const CurrentInformation& information) : ArithmeticException(information) {}
       
@@ -31,13 +31,13 @@ namespace Switch {
       
       /// @brief Create a new instance of class NotFiniteNumberException
       /// @param message Message string associate to the error.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
       NotFiniteNumberException(const System::String& message, const CurrentInformation& information) : ArithmeticException(message, information) {}
       
       /// @brief Create a new instance of class NotFiniteNumberException
       /// @param message Message string associate to the error.
       /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
       NotFiniteNumberException(const System::String& message, const System::Exception& innerException, const CurrentInformation& information) : ArithmeticException(message, innerException, information) {}
       
     private:

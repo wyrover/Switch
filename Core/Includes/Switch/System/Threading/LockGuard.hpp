@@ -8,7 +8,7 @@ namespace Switch {
   namespace System {
     namespace Threading {
       /// @cond
-      class sw_public LockGuard : public object {
+      class _public LockGuard : public object {
       public:
         explicit LockGuard(const object& lock);
         ~LockGuard();

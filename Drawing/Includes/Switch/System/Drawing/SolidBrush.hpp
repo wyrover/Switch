@@ -11,17 +11,17 @@ namespace Switch {
   namespace System {
     /// @brief The System::Drawing namespace provides access to GDI+ basic graphics functionality. More advanced functionality is provided in the System::Drawing::Drawing2D, System::Drawing::Imaging, and System::Drawing::Text namespaces.
     namespace Drawing {
-      class sw_public SolidBrush : public Brush {
+      class _public SolidBrush : public Brush {
       public:
         explicit SolidBrush(const System::Drawing::Color& color);
         SolidBrush(const SolidBrush& brush) : SolidBrush(brush.color) {}
         SolidBrush& operator=(const SolidBrush& brush);
 
         Property<System::Drawing::Color, ReadOnly> Color {
-          sw_get {return this->color;}
+          _get {return this->color;}
         };
 
-        refptr<object> Clone() const override {return sw_new<SolidBrush>(this->color);};
+        refptr<object> Clone() const override {return ref_new<SolidBrush>(this->color);};
 
       private:
         System::Drawing::Color color;

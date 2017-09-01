@@ -14,7 +14,7 @@ namespace Switch {
     namespace Drawing {
       /// @brief The System::Drawing::Imaging namespace provides advanced GDI+ imaging functionality. Basic graphics functionality is provided by the System::Drawing namespace.
       namespace Imaging {
-        class sw_public FrameDimension : public object {
+        class _public FrameDimension : public object {
         public:
           static Property<FrameDimension, ReadOnly> Page;
           
@@ -28,11 +28,11 @@ namespace Switch {
           FrameDimension(const FrameDimension& fd) : guid(fd.guid), name(fd.name) {}
           
           Property<System::Guid, ReadOnly> Guid {
-            sw_get {return this->guid;}
+            _get {return this->guid;}
           };
           
           Property<string, ReadOnly> Name {
-            sw_get {return this->name;}
+            _get {return this->name;}
           };
 
         private:

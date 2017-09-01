@@ -15,11 +15,11 @@ namespace SwitchUnitTests {
       int value = 0;
       object lock;
       
-      sw_lock (lock) {
+      _lock (lock) {
         ++value;
       }
       
-      Assert::AreEqual(1, value, sw_current_information);
+      Assert::AreEqual(1, value, _current_information);
     }
     
     void DoubleLockOnDifferentObjects() {
@@ -27,51 +27,51 @@ namespace SwitchUnitTests {
       object lock;
       object lock2;
       
-      sw_lock (lock) {
+      _lock (lock) {
         ++value;
-        sw_lock (lock2) {
+        _lock (lock2) {
           ++value;
         }
       }
       
-      Assert::AreEqual(2, value, sw_current_information);
+      Assert::AreEqual(2, value, _current_information);
     }
     
     void DoubleLockOnSameObject() {
       int value = 0;
       object lock;
       
-      sw_lock (lock) {
+      _lock (lock) {
         ++value;
-        sw_lock (lock) {
+        _lock (lock) {
           ++value;
         }
       }
       
-      Assert::AreEqual(2, value, sw_current_information);
+      Assert::AreEqual(2, value, _current_information);
     }
     
     void LockDuration() {
       object lock;
       int value = 0;
       Stopwatch duration = Stopwatch::StartNew();
-      sw_lock (lock) {
+      _lock (lock) {
         ++value;
       }
       duration.Stop();
-      Assert::LessOrEqual(duration.ElapsedMilliseconds(), 1, sw_current_information);
+      Assert::LessOrEqual(duration.ElapsedMilliseconds(), 1, _current_information);
     }
     
     void Thread() {
       string s;
-      std::thread t1(sw_delegate {
-        sw_lock(s) {
+      std::thread t1(_delegate {
+        _lock(s) {
           for (int i = 0; i < 500; i++)
             s += '1';
         }
       });
-      std::thread t2(sw_delegate {
-        sw_lock(s) {
+      std::thread t2(_delegate {
+        _lock(s) {
           for (int i = 0; i < 500; i++)
             s += '2';
         }
@@ -86,15 +86,15 @@ namespace SwitchUnitTests {
       int32 i = 0;
       for (char32 c : s) {
         if (o == 0) o = c;
-        Assert::IsFalse(++i < 500 && o != c, sw_current_information);
+        Assert::IsFalse(++i < 500 && o != c, _current_information);
       }
       
     }
   };
   
-  sw_test(LockTest, SingleLock)
-  sw_test(LockTest, DoubleLockOnDifferentObjects)
-  sw_test(LockTest, DoubleLockOnSameObject)
-  sw_test(LockTest, LockDuration)
-  sw_test(LockTest, Thread)
+  _test(LockTest, SingleLock)
+  _test(LockTest, DoubleLockOnDifferentObjects)
+  _test(LockTest, DoubleLockOnSameObject)
+  _test(LockTest, LockDuration)
+  _test(LockTest, Thread)
 }

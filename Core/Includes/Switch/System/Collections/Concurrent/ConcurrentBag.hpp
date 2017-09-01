@@ -52,7 +52,7 @@ namespace Switch {
           /// @brief Gets a value that indicates whether the ConcurrentBag<T> is empty.
           /// @return Boolean true if the ConcurrentBag<T> is empty; otherwise, false.
           Property<bool, ReadOnly> IsEmpty {
-            sw_get {
+            _get {
               return this->list.Count == 0;
             }
           };
@@ -69,7 +69,7 @@ namespace Switch {
           /// @param index The zero-based index in array at which copying begins;
           void CopyTo(System::Array<T>& array, int32 index) const override {
             if (index + this->list.Count > array.Length)
-              throw ArgumentOutOfRangeException(sw_current_information);
+              throw ArgumentOutOfRangeException(_current_information);
 
             System::Threading::LockGuard lock(this->list.SyncRoot);
             for (T item : this->list)
@@ -162,7 +162,7 @@ namespace Switch {
           protected:
             const T& GetCurrent() const {
               if (this->index < 0 || this->index >= this->array.Length)
-                throw InvalidOperationException(sw_current_information);
+                throw InvalidOperationException(_current_information);
               return this->array[this->index];
             }
             

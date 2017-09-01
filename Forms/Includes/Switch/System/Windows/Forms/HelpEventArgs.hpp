@@ -9,7 +9,7 @@ namespace Switch {
     namespace Windows {
       namespace Forms {
         /// @brief Provides data for the HelpRequested event.
-        class sw_public HelpEventArgs : public EventArgs {
+        class _public HelpEventArgs : public EventArgs {
         public:
           /// @brief Initializes a new instance of the HelpEventArgs class.
           HelpEventArgs() : handled(false) {}

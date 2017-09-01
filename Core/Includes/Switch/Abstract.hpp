@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains #sw_abstract keyword.
+/// @brief Contains #_abstract keyword.
 #pragma once
 
 #include "System/Object.hpp"
@@ -7,7 +7,7 @@
 /// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
   /// @brief Represent an abstract class.
-  struct sw_public Abstract : public System::Object {
+  struct _public Abstract : public System::Object {
     ~Abstract() override = 0;
   };
   
@@ -23,7 +23,7 @@ namespace Switch {
   /// using namespace System;
   ///
   /// namespace TestReader {
-  ///   class TextReader sw_abstract {
+  ///   class TextReader _abstract {
   ///   public:
   ///     virtual int ReadByte() = 0;
   ///
@@ -67,10 +67,10 @@ namespace Switch {
   ///   };
   /// }
   ///
-  /// sw_startup (TestReader::Program)
+  /// _startup (TestReader::Program)
   /// @endcode
   /// @ingroup Switch
-  #define sw_abstract\
+  #define _abstract\
   : public Abstract
 }
 

@@ -20,7 +20,7 @@ namespace SwitchUnitTests {
     }
     
     void AreEqualInternalValue() {
-      Assert::AreEqual(42, this->value, sw_current_information);
+      Assert::AreEqual(42, this->value, _current_information);
     }
     
     void AreEqualInt32() {
@@ -30,7 +30,7 @@ namespace SwitchUnitTests {
     
     void AreEqualInt32WithCurrentInformation() {
       int32 fourtyTwo = 42;
-      Assert::AreEqual(42, fourtyTwo, sw_current_information);
+      Assert::AreEqual(42, fourtyTwo, _current_information);
     }
     
     void AreEqualInt32WithMessage() {
@@ -40,7 +40,7 @@ namespace SwitchUnitTests {
     
     void AreEqualInt32WithMessageAndCurrentInformation() {
       int32 fourtyTwo = 42;
-      Assert::AreEqual(42, fourtyTwo, "My message", sw_current_information);
+      Assert::AreEqual(42, fourtyTwo, "My message", _current_information);
     }
     
     void AreEqualConstCharPointer() {
@@ -50,7 +50,7 @@ namespace SwitchUnitTests {
     
     void AreEqualConstCharPointerWithCurrentInformation() {
       const char* fourtyTwo = "Forty two";
-      Assert::AreEqual("Forty two", fourtyTwo, sw_current_information);
+      Assert::AreEqual("Forty two", fourtyTwo, _current_information);
     }
     
     void AreEqualConstCharPointerWithMessage() {
@@ -60,7 +60,7 @@ namespace SwitchUnitTests {
     
     void AreEqualConstCharPointerWithMessageAndCurrentInformation() {
       const char* fourtyTwo = "Forty two";
-      Assert::AreEqual("Forty two", fourtyTwo, "My message", sw_current_information);
+      Assert::AreEqual("Forty two", fourtyTwo, "My message", _current_information);
     }
     
     void AreEqualString() {
@@ -70,7 +70,7 @@ namespace SwitchUnitTests {
     
     void AreEqualStringWithCurrentInformation() {
       string fourtyTwo = "Forty two";
-      Assert::AreEqual("Forty two", fourtyTwo, sw_current_information);
+      Assert::AreEqual("Forty two", fourtyTwo, _current_information);
     }
     
     void AreEqualStringWithMessage() {
@@ -80,7 +80,7 @@ namespace SwitchUnitTests {
     
     void AreEqualStringWithMessageAndCurrentInformation() {
       string fourtyTwo = "Forty two";
-      Assert::AreEqual("Forty two", fourtyTwo, "My message", sw_current_information);
+      Assert::AreEqual("Forty two", fourtyTwo, "My message", _current_information);
     }
     
     void AreEqualTimeSpan() {
@@ -90,7 +90,7 @@ namespace SwitchUnitTests {
     
     void AreEqualTimeSpanWithCurrentInformation() {
       TimeSpan duration = 42_min;
-      Assert::AreEqual(42_min, duration, sw_current_information);
+      Assert::AreEqual(42_min, duration, _current_information);
     }
     
     void AreEqualTimeSpanWithMessage() {
@@ -100,35 +100,35 @@ namespace SwitchUnitTests {
     
     void AreEqualTimeSpanWithMessageAndCurrentInformation() {
       TimeSpan duration = 42_min;
-      Assert::AreEqual(42_min, duration, "My message", sw_current_information);
+      Assert::AreEqual(42_min, duration, "My message", _current_information);
     }
     
     void AreEqualProperty() {
       Property<int32, ReadOnly> fourtyTwo {
-        sw_get {return 42;}
+        _get {return 42;}
       };
       Assert::AreEqual(42, fourtyTwo);
     }
     
     void AreEqualPropertyWithCurrentInformation() {
       Property<int32, ReadOnly> fourtyTwo {
-        sw_get {return 42;}
+        _get {return 42;}
       };
-      Assert::AreEqual(42, fourtyTwo, sw_current_information);
+      Assert::AreEqual(42, fourtyTwo, _current_information);
     }
     
     void AreEqualPropertyWithMessage() {
       Property<int32, ReadOnly> fourtyTwo {
-        sw_get {return 42;}
+        _get {return 42;}
       };
       Assert::AreEqual(42, fourtyTwo, "My message");
     }
     
     void AreEqualPropertyWithMessageAndCurrentInformation() {
       Property<int32, ReadOnly> fourtyTwo {
-        sw_get {return 42;}
+        _get {return 42;}
       };
-      Assert::AreEqual(42, fourtyTwo, "My message", sw_current_information);
+      Assert::AreEqual(42, fourtyTwo, "My message", _current_information);
     }
     
     void AreEqualAny() {
@@ -138,7 +138,7 @@ namespace SwitchUnitTests {
     
     void AreEqualAnyWithCurrentInformation() {
       any fourtyTwo = 42;
-      Assert::AreEqual(42, fourtyTwo, sw_current_information);
+      Assert::AreEqual(42, fourtyTwo, _current_information);
     }
     
     void AreEqualAnyWithMessage() {
@@ -148,7 +148,7 @@ namespace SwitchUnitTests {
     
     void AreEqualAnyWithMessageAndCurrentInformation() {
       any fourtyTwo = 42;
-      Assert::AreEqual(42, fourtyTwo, "My message", sw_current_information);
+      Assert::AreEqual(42, fourtyTwo, "My message", _current_information);
     }
     
     void AreEqualMyStruct() {
@@ -173,7 +173,7 @@ namespace SwitchUnitTests {
         bool operator!=(const MyStruct& ms) const {return !this->operator==(ms);}
       };
       MyStruct fourtyTwo(42);
-      Expect::AreEqual(MyStruct(42), fourtyTwo, sw_current_information);
+      Expect::AreEqual(MyStruct(42), fourtyTwo, _current_information);
     }
     
     void AreEqualMyStructWithMessage() {
@@ -195,128 +195,128 @@ namespace SwitchUnitTests {
         bool operator!=(const MyStruct& ms) const {return !this->operator==(ms);}
       };
       MyStruct fourtyTwo(42);
-      Assert::AreEqual(MyStruct(42), fourtyTwo, "My message", sw_current_information);
+      Assert::AreEqual(MyStruct(42), fourtyTwo, "My message", _current_information);
     }
     
     void AreNotEqual() {
       String string = "Test";
-      Assert::AreNotEqual("Tes", string, sw_current_information);
+      Assert::AreNotEqual("Tes", string, _current_information);
     }
     
     void AreNotSame() {
       Uri uri1("http://www.contoso.com/index.htm?date=today");
       Uri uri2("http://www.contoso.com/index.htm?date=today");
-      Assert::AreNotSame(uri2, uri1, sw_current_information);
+      Assert::AreNotSame(uri2, uri1, _current_information);
     }
     
     void AreSame() {
       System::DateTime date1 = System::DateTime::Now;
       System::DateTime* date2 = &date1;
-      Assert::AreSame(date1, *date2, sw_current_information);
+      Assert::AreSame(date1, *date2, _current_information);
     }
     
     void DoesNotThrows() {
       const char* string1 = "Not null";
-      Assert::DoesNotThrows(sw_delegate {System::String string2(string1);}, sw_current_information);
+      Assert::DoesNotThrows(_delegate {System::String string2(string1);}, _current_information);
     }
     
     void Greater() {
       int32 fourtyTwo = 42;
-      Assert::Greater(fourtyTwo, 40, sw_current_information);
+      Assert::Greater(fourtyTwo, 40, _current_information);
     }
     
     void GreaterOrEqual() {
       int32 fourtyTwo = 42;
-      Assert::GreaterOrEqual(fourtyTwo, 40, sw_current_information);
-      Assert::GreaterOrEqual(fourtyTwo, 42, sw_current_information);
+      Assert::GreaterOrEqual(fourtyTwo, 40, _current_information);
+      Assert::GreaterOrEqual(fourtyTwo, 42, _current_information);
     }
     
     void IsFalse() {
       bool boolean = false;
-      Assert::IsFalse(boolean, sw_current_information);
+      Assert::IsFalse(boolean, _current_information);
     }
     
     void IsNull() {
       System::Object* pointer = null;
-      Assert::IsNull(pointer, sw_current_information);
+      Assert::IsNull(pointer, _current_information);
     }
     
     void IsTrue() {
       bool boolean = true;
-      Assert::IsTrue(boolean, sw_current_information);
+      Assert::IsTrue(boolean, _current_information);
     }
     
     void Less() {
       int32 fourtyTwo = 42;
-      Assert::Less(fourtyTwo, 44, sw_current_information);
+      Assert::Less(fourtyTwo, 44, _current_information);
     }
     
     void LessOrEqual() {
       int32 fourtyTwo = 42;
-      Assert::LessOrEqual(fourtyTwo, 44, sw_current_information);
-      Assert::LessOrEqual(fourtyTwo, 42, sw_current_information);
+      Assert::LessOrEqual(fourtyTwo, 44, _current_information);
+      Assert::LessOrEqual(fourtyTwo, 42, _current_information);
     }
     
     
     void Throws() {
       const char* string1 = null;
-      Assert::Throws<System::ArgumentNullException>(sw_delegate {System::String string2(string1);}, sw_current_information);
+      Assert::Throws<System::ArgumentNullException>(_delegate {System::String string2(string1);}, _current_information);
     }
     
     void ThrowsAny() {
       System::Array<System::String> array(10);
-      Assert::ThrowsAny(sw_delegate {array[10];}, sw_current_information);
+      Assert::ThrowsAny(_delegate {array[10];}, _current_information);
     }
 
     void AnyTest() {
-      Assert::AreEqual(10, 10, sw_current_information);
+      Assert::AreEqual(10, 10, _current_information);
     }
 
   private:
     int32 value;
   };
   
-  sw_test(AssertTest, AreEqualInternalValue)
-  sw_test(AssertTest, AreEqualInt32)
-  sw_test(AssertTest, AreEqualInt32WithCurrentInformation)
-  sw_test(AssertTest, AreEqualInt32WithMessage)
-  sw_test(AssertTest, AreEqualInt32WithMessageAndCurrentInformation)
-  sw_test(AssertTest, AreEqualConstCharPointer)
-  sw_test(AssertTest, AreEqualConstCharPointerWithCurrentInformation)
-  sw_test(AssertTest, AreEqualConstCharPointerWithMessage)
-  sw_test(AssertTest, AreEqualConstCharPointerWithMessageAndCurrentInformation)
-  sw_test(AssertTest, AreEqualString)
-  sw_test(AssertTest, AreEqualStringWithCurrentInformation)
-  sw_test(AssertTest, AreEqualStringWithMessage)
-  sw_test(AssertTest, AreEqualStringWithMessageAndCurrentInformation)
-  sw_test(AssertTest, AreEqualTimeSpan)
-  sw_test(AssertTest, AreEqualTimeSpanWithCurrentInformation)
-  sw_test(AssertTest, AreEqualTimeSpanWithMessage)
-  sw_test(AssertTest, AreEqualTimeSpanWithMessageAndCurrentInformation)
-  sw_test(AssertTest, AreEqualProperty)
-  sw_test(AssertTest, AreEqualPropertyWithCurrentInformation)
-  sw_test(AssertTest, AreEqualPropertyWithMessage)
-  sw_test(AssertTest, AreEqualPropertyWithMessageAndCurrentInformation)
-  sw_test(AssertTest, AreEqualAny)
-  sw_test(AssertTest, AreEqualAnyWithCurrentInformation)
-  sw_test(AssertTest, AreEqualAnyWithMessage)
-  sw_test(AssertTest, AreEqualAnyWithMessageAndCurrentInformation)
-  sw_test(AssertTest, AreEqualMyStruct)
-  sw_test(AssertTest, AreEqualMyStructWithCurrentInformation)
-  sw_test(AssertTest, AreEqualMyStructWithMessage)
-  sw_test(AssertTest, AreEqualMyStructWithMessageAndCurrentInformation)
-  sw_test(AssertTest, AreNotEqual)
-  sw_test(AssertTest, AreNotSame)
-  sw_test(AssertTest, AreSame)
-  sw_test(AssertTest, DoesNotThrows)
-  sw_test(AssertTest, Greater)
-  sw_test(AssertTest, GreaterOrEqual)
-  sw_test(AssertTest, IsFalse)
-  sw_test(AssertTest, IsNull)
-  sw_test(AssertTest, IsTrue)
-  sw_test(AssertTest, Less)
-  sw_test(AssertTest, LessOrEqual)
-  sw_test(AssertTest, Throws)
-  sw_test(AssertTest, ThrowsAny)
-  sw_ignore_test(AssertTest, AnyTest)
+  _test(AssertTest, AreEqualInternalValue)
+  _test(AssertTest, AreEqualInt32)
+  _test(AssertTest, AreEqualInt32WithCurrentInformation)
+  _test(AssertTest, AreEqualInt32WithMessage)
+  _test(AssertTest, AreEqualInt32WithMessageAndCurrentInformation)
+  _test(AssertTest, AreEqualConstCharPointer)
+  _test(AssertTest, AreEqualConstCharPointerWithCurrentInformation)
+  _test(AssertTest, AreEqualConstCharPointerWithMessage)
+  _test(AssertTest, AreEqualConstCharPointerWithMessageAndCurrentInformation)
+  _test(AssertTest, AreEqualString)
+  _test(AssertTest, AreEqualStringWithCurrentInformation)
+  _test(AssertTest, AreEqualStringWithMessage)
+  _test(AssertTest, AreEqualStringWithMessageAndCurrentInformation)
+  _test(AssertTest, AreEqualTimeSpan)
+  _test(AssertTest, AreEqualTimeSpanWithCurrentInformation)
+  _test(AssertTest, AreEqualTimeSpanWithMessage)
+  _test(AssertTest, AreEqualTimeSpanWithMessageAndCurrentInformation)
+  _test(AssertTest, AreEqualProperty)
+  _test(AssertTest, AreEqualPropertyWithCurrentInformation)
+  _test(AssertTest, AreEqualPropertyWithMessage)
+  _test(AssertTest, AreEqualPropertyWithMessageAndCurrentInformation)
+  _test(AssertTest, AreEqualAny)
+  _test(AssertTest, AreEqualAnyWithCurrentInformation)
+  _test(AssertTest, AreEqualAnyWithMessage)
+  _test(AssertTest, AreEqualAnyWithMessageAndCurrentInformation)
+  _test(AssertTest, AreEqualMyStruct)
+  _test(AssertTest, AreEqualMyStructWithCurrentInformation)
+  _test(AssertTest, AreEqualMyStructWithMessage)
+  _test(AssertTest, AreEqualMyStructWithMessageAndCurrentInformation)
+  _test(AssertTest, AreNotEqual)
+  _test(AssertTest, AreNotSame)
+  _test(AssertTest, AreSame)
+  _test(AssertTest, DoesNotThrows)
+  _test(AssertTest, Greater)
+  _test(AssertTest, GreaterOrEqual)
+  _test(AssertTest, IsFalse)
+  _test(AssertTest, IsNull)
+  _test(AssertTest, IsTrue)
+  _test(AssertTest, Less)
+  _test(AssertTest, LessOrEqual)
+  _test(AssertTest, Throws)
+  _test(AssertTest, ThrowsAny)
+  _ignore_test(AssertTest, AnyTest)
 }

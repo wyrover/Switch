@@ -9,7 +9,7 @@ namespace Examples {
     // The main entry point for the application.
     static void Main() {
       // Create a new regiqstry sub key "HKEY_CURRENT_USER\SwitchRegistryTest" and add value
-      sw_using(RegistryKey key = Registry::CurrentUser().CreateSubKey("SwitchRegistryTest")) {
+      _using(RegistryKey key = Registry::CurrentUser().CreateSubKey("SwitchRegistryTest")) {
         key.SetValue("MyKey", "MyValue");
       }
 
@@ -22,7 +22,7 @@ namespace Examples {
   };
 }
 
-sw_startup (Examples::Program)
+_startup (Examples::Program)
 
 // This code produces the following output:
 //

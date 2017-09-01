@@ -9,69 +9,69 @@ namespace SwitchUnitTests {
   class PropertyReadOnlyTest : public TestFixture {
   protected:
     void ReadOnlyCanRead() {
-      Assert::IsTrue(ReadOnly::CanRead, sw_current_information);
+      Assert::IsTrue(ReadOnly::CanRead, _current_information);
     }
     
     void ReadOnlyCanWrite() {
-      Assert::IsFalse(ReadOnly::CanWrite, sw_current_information);
+      Assert::IsFalse(ReadOnly::CanWrite, _current_information);
     }
     
     void PropertyCanRead() {
-      Assert::IsTrue(Property<int32, ReadOnly>::CanRead, sw_current_information);
+      Assert::IsTrue(Property<int32, ReadOnly>::CanRead, _current_information);
     }
     
     void PropertyCanWrite() {
-      Assert::IsFalse(Property<int32, ReadOnly>::CanWrite, sw_current_information);
+      Assert::IsFalse(Property<int32, ReadOnly>::CanWrite, _current_information);
     }
     
     void CreatePropertyAndGetItWithImplicitCastOperator() {
       int32 v = 42;
       Property<int32, ReadOnly> Value {
-        sw_get {return v;}
+        _get {return v;}
       };
       
-      Assert::AreEqual(42, v, sw_current_information);
-      Assert::AreEqual(42, Value, sw_current_information);
+      Assert::AreEqual(42, v, _current_information);
+      Assert::AreEqual(42, Value, _current_information);
     }
     
     void CreatePropertyAndGetItWithGetFunction() {
       int32 v = 42;
       Property<int32, ReadOnly> Value {
-        sw_get {return v;}
+        _get {return v;}
       };
       
-      Assert::AreEqual(42, v, sw_current_information);
-      Assert::AreEqual(42, Value.Get(), sw_current_information);
+      Assert::AreEqual(42, v, _current_information);
+      Assert::AreEqual(42, Value.Get(), _current_information);
     }
     
     void CreatePropertyAndGetItWithFunctor() {
       int32 v = 42;
       Property<int32, ReadOnly> Value {
-        sw_get {return v;}
+        _get {return v;}
       };
       
-      Assert::AreEqual(42, v, sw_current_information);
-      Assert::AreEqual(42, Value(), sw_current_information);
+      Assert::AreEqual(42, v, _current_information);
+      Assert::AreEqual(42, Value(), _current_information);
     }
     
     void PropertyEqualityOperator() {
       int32 v = 42;
       Property<int32, ReadOnly> Value {
-        sw_get {return v;}
+        _get {return v;}
       };
       
-      Assert::IsTrue(Value == 42, sw_current_information);
-      Assert::IsFalse(Value == 24, sw_current_information);
+      Assert::IsTrue(Value == 42, _current_information);
+      Assert::IsFalse(Value == 24, _current_information);
     }
     
     void PropertyInequalityOperator() {
       int32 v = 42;
       Property<int32, ReadOnly> Value {
-        sw_get {return v;}
+        _get {return v;}
       };
       
-      Assert::IsTrue(Value != 24, sw_current_information);
-      Assert::IsFalse(Value != 42, sw_current_information);
+      Assert::IsTrue(Value != 24, _current_information);
+      Assert::IsFalse(Value != 42, _current_information);
     }
     
     class PropertyTestClass {
@@ -80,7 +80,7 @@ namespace SwitchUnitTests {
       PropertyTestClass(const PropertyTestClass& property) : name(property.name) {}
       
       Property<string, ReadOnly> Name {
-        sw_get {return this->name;}
+        _get {return this->name;}
       };
       
     private:
@@ -88,30 +88,30 @@ namespace SwitchUnitTests {
     };
     
     void PropertyCopyConstructor() {
-      refptr<PropertyTestClass> p1 = sw_new<PropertyTestClass>();
-      refptr<PropertyTestClass> p2 = sw_new<PropertyTestClass>(*p1);
+      refptr<PropertyTestClass> p1 = ref_new<PropertyTestClass>();
+      refptr<PropertyTestClass> p2 = ref_new<PropertyTestClass>(*p1);
       p1 = null;
-      Assert::AreEqual("Test property", p2->Name, sw_current_information);
+      Assert::AreEqual("Test property", p2->Name, _current_information);
     }
     
     void PropertyEqualOperator() {
-      refptr<PropertyTestClass> p1 = sw_new<PropertyTestClass>();
-      refptr<PropertyTestClass> p2 = sw_new<PropertyTestClass>();
+      refptr<PropertyTestClass> p1 = ref_new<PropertyTestClass>();
+      refptr<PropertyTestClass> p2 = ref_new<PropertyTestClass>();
       *p2 = *p1;
       p1 = null;
-      Assert::AreEqual("Test property", p2->Name, sw_current_information);
+      Assert::AreEqual("Test property", p2->Name, _current_information);
     }
   };
   
-  sw_test(PropertyReadOnlyTest, ReadOnlyCanRead)
-  sw_test(PropertyReadOnlyTest, ReadOnlyCanWrite)
-  sw_test(PropertyReadOnlyTest, PropertyCanRead)
-  sw_test(PropertyReadOnlyTest, PropertyCanWrite)
-  sw_test(PropertyReadOnlyTest, CreatePropertyAndGetItWithImplicitCastOperator)
-  sw_test(PropertyReadOnlyTest, CreatePropertyAndGetItWithGetFunction)
-  sw_test(PropertyReadOnlyTest, CreatePropertyAndGetItWithFunctor)
-  sw_test(PropertyReadOnlyTest, PropertyEqualityOperator)
-  sw_test(PropertyReadOnlyTest, PropertyInequalityOperator)
-  sw_test(PropertyReadOnlyTest, PropertyCopyConstructor)
-  sw_test(PropertyReadOnlyTest, PropertyEqualOperator)
+  _test(PropertyReadOnlyTest, ReadOnlyCanRead)
+  _test(PropertyReadOnlyTest, ReadOnlyCanWrite)
+  _test(PropertyReadOnlyTest, PropertyCanRead)
+  _test(PropertyReadOnlyTest, PropertyCanWrite)
+  _test(PropertyReadOnlyTest, CreatePropertyAndGetItWithImplicitCastOperator)
+  _test(PropertyReadOnlyTest, CreatePropertyAndGetItWithGetFunction)
+  _test(PropertyReadOnlyTest, CreatePropertyAndGetItWithFunctor)
+  _test(PropertyReadOnlyTest, PropertyEqualityOperator)
+  _test(PropertyReadOnlyTest, PropertyInequalityOperator)
+  _test(PropertyReadOnlyTest, PropertyCopyConstructor)
+  _test(PropertyReadOnlyTest, PropertyEqualOperator)
 }

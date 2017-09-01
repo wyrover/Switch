@@ -16,14 +16,14 @@ namespace Examples {
       // new sentence to reverse the word order.
       string reversed = from<string>(words1)
                         | concat<string>(words2)
-                        | agregate<string>(sw_delegate(const string& workingSentence, const string& next) {return next + " " + workingSentence;});
+                        | agregate<string>(_delegate(const string& workingSentence, const string& next) {return next + " " + workingSentence;});
       
       Console::WriteLine(reversed);
     }
   };
 }
 
-sw_startup (Examples::Program)
+_startup (Examples::Program)
 
 // This code produces the following output:
 //

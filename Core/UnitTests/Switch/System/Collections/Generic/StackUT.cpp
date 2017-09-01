@@ -116,7 +116,7 @@ namespace {
 
   TEST(Stack, GetSyncRoot) {
     Stack<Int32> stack(10);
-    sw_lock (stack.SyncRoot) {
+    _lock (stack.SyncRoot) {
       stack.Push(1);
       stack.Push(2);
       stack.Push(3);
@@ -188,7 +188,7 @@ namespace {
     int32 index = 0;
     ThreadingHelper *threadingHelper = &(ThreadingHelper&)args;
     while (index < 10) {
-      sw_lock (threadingHelper->mStack.SyncRoot) {
+      _lock (threadingHelper->mStack.SyncRoot) {
         Thread::Sleep(20 + index); // Simulate threatment
         threadingHelper->mStack.Push(index++);
       }
@@ -203,7 +203,7 @@ namespace {
   
     while (index < 10) {
       threadingHelper->mEvent.WaitOne();
-      sw_lock (threadingHelper->mStack.SyncRoot) {
+      _lock (threadingHelper->mStack.SyncRoot) {
         EXPECT_EQ(threadingHelper->mStack.Pop(), index++);
         Thread::Sleep(10 + index); // Simulate threatment
       }

@@ -9,7 +9,7 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The exception that is thrown when the value of an argument is outside the allowable range of values as defined by the invoked method.
-    class sw_public ArgumentOutOfRangeException : public ArgumentException {
+    class _public ArgumentOutOfRangeException : public ArgumentException {
     public:
       /// @brief Create a new instance of class ArgumentOutOfRangeException
       /// @remarks Message is set with the default message associate to the error.
@@ -21,7 +21,7 @@ namespace Switch {
       ArgumentOutOfRangeException(const ArgumentOutOfRangeException& value) : ArgumentException(value) {}
       
       /// @brief Create a new instance of class ArgumentOutOfRangeException
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
       /// @remarks Message is set with the default message associate to the error.
       ArgumentOutOfRangeException(const CurrentInformation& information) : ArgumentException(information) {}
       
@@ -31,13 +31,13 @@ namespace Switch {
       
       /// @brief Create a new instance of class ArgumentOutOfRangeException
       /// @param message Message string associate to the error.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
       ArgumentOutOfRangeException(const System::String& message, const CurrentInformation& information) : ArgumentException(message, information) {}
       
       /// @brief Create a new instance of class ArgumentOutOfRangeException
       /// @param message Message string associate to the error.
       /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
       ArgumentOutOfRangeException(const System::String& message, const System::Exception& innerException, const CurrentInformation& information) : ArgumentException(message, innerException, information) {}
       
     private:

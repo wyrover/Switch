@@ -20,7 +20,7 @@ namespace Switch {
     /// @par Examples
     /// This class cannot be inherited.
     /// @include Math.cpp
-    class sw_public Math sw_static {
+    class _public Math _static {
     public:
       /// @brief Represents the natural logarithmic base, specified by the constant, e. This field is constant.
       /// @remarks The value of this field is 2.7182818284590452354.
@@ -45,7 +45,7 @@ namespace Switch {
       /// @exception OverflowException value equals Int16::MinValue.
       static int16 Abs(int16 value) {
         if (value == Int16::MinValue)
-          throw OverflowException(sw_current_information);
+          throw OverflowException(_current_information);
         
         if (value < 0)
           return -value;
@@ -58,7 +58,7 @@ namespace Switch {
       /// @exception OverflowException value equals Int32::MinValue.
       static int32 Abs(int32 value) {
         if (value == Int32::MinValue)
-          throw OverflowException(sw_current_information);
+          throw OverflowException(_current_information);
         
         if (value < 0)
           return -value;
@@ -71,7 +71,7 @@ namespace Switch {
       /// @exception OverflowException value equals Int64::MinValue.
       static int64 Abs(int64 value) {
         if (value == Int64::MinValue)
-          throw OverflowException(sw_current_information);
+          throw OverflowException(_current_information);
         
         if (value < 0)
           return -value;
@@ -84,7 +84,7 @@ namespace Switch {
       /// @exception OverflowException value equals SByte::MinValue.
       static sbyte Abs(sbyte value) {
         if (value == SByte::MinValue)
-          throw OverflowException(sw_current_information);
+          throw OverflowException(_current_information);
         
         if (value < 0)
           return -value;
@@ -428,7 +428,7 @@ namespace Switch {
       /// @exception ArithmeticException value is equal to NaN.
       static int32 Sign(double value) {
         if (Double::IsNaN(value))
-          throw ArithmeticException(sw_current_information);
+          throw ArithmeticException(_current_information);
         
         if (value < 0) return -1;
         if (value == 0) return 0;
@@ -502,7 +502,7 @@ namespace Switch {
       /// @exception ArithmeticException value is equal to NaN.
       static int32 Sign(float value) {
         if (Single::IsNaN(value))
-          throw ArithmeticException(sw_current_information);
+          throw ArithmeticException(_current_information);
         
         if (value < 0) return -1;
         if (value == 0) return 0;

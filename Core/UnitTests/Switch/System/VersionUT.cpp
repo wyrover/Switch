@@ -11,54 +11,54 @@ namespace {
     void CreateVersionWithDefaultConstructor() {
       Version version;
       
-      Assert::AreEqual(0, version.Major, sw_current_information);
-      Assert::AreEqual(0, version.Minor, sw_current_information);
-      Assert::AreEqual(-1, version.Build, sw_current_information);
-      Assert::AreEqual(-1, version.Revision, sw_current_information);
+      Assert::AreEqual(0, version.Major, _current_information);
+      Assert::AreEqual(0, version.Minor, _current_information);
+      Assert::AreEqual(-1, version.Build, _current_information);
+      Assert::AreEqual(-1, version.Revision, _current_information);
     }
     
     void CreateVersionWithSpecifiedMajorAndMinor() {
       Version version(4, 2);
       
-      Assert::AreEqual(4, version.Major, sw_current_information);
-      Assert::AreEqual(2, version.Minor, sw_current_information);
-      Assert::AreEqual(-1, version.Build, sw_current_information);
-      Assert::AreEqual(-1, version.Revision, sw_current_information);
+      Assert::AreEqual(4, version.Major, _current_information);
+      Assert::AreEqual(2, version.Minor, _current_information);
+      Assert::AreEqual(-1, version.Build, _current_information);
+      Assert::AreEqual(-1, version.Revision, _current_information);
     }
     
     void CreateVersionWithSpecifiedMajorMinorAndRevision() {
       Version version(4, 2, 1);
       
-      Assert::AreEqual(4, version.Major, sw_current_information);
-      Assert::AreEqual(2, version.Minor, sw_current_information);
-      Assert::AreEqual(1, version.Build, sw_current_information);
-      Assert::AreEqual(-1, version.Revision, sw_current_information);
+      Assert::AreEqual(4, version.Major, _current_information);
+      Assert::AreEqual(2, version.Minor, _current_information);
+      Assert::AreEqual(1, version.Build, _current_information);
+      Assert::AreEqual(-1, version.Revision, _current_information);
     }
     
     void CreateVersionWithSpecifiedMajorMinorRevisionAndBuild() {
       Version version(4, 2, 1, 3);
       
-      Assert::AreEqual(4, version.Major, sw_current_information);
-      Assert::AreEqual(2, version.Minor, sw_current_information);
-      Assert::AreEqual(1, version.Build, sw_current_information);
-      Assert::AreEqual(3, version.Revision, sw_current_information);
+      Assert::AreEqual(4, version.Major, _current_information);
+      Assert::AreEqual(2, version.Minor, _current_information);
+      Assert::AreEqual(1, version.Build, _current_information);
+      Assert::AreEqual(3, version.Revision, _current_information);
     }
     
     void CreateVersionWithSpecifiedMajorMinorRevisionAndBuildToZero() {
       Version version(0, 0, 0, 0);
       
-      Assert::AreEqual(0, version.Major, sw_current_information);
-      Assert::AreEqual(0, version.Minor, sw_current_information);
-      Assert::AreEqual(0, version.Build, sw_current_information);
-      Assert::AreEqual(0, version.Revision, sw_current_information);
+      Assert::AreEqual(0, version.Major, _current_information);
+      Assert::AreEqual(0, version.Minor, _current_information);
+      Assert::AreEqual(0, version.Build, _current_information);
+      Assert::AreEqual(0, version.Revision, _current_information);
     }
   };
 
-  sw_test(VersionTest, CreateVersionWithDefaultConstructor)
-  sw_test(VersionTest, CreateVersionWithSpecifiedMajorAndMinor)
-  sw_test(VersionTest, CreateVersionWithSpecifiedMajorMinorAndRevision)
-  sw_test(VersionTest, CreateVersionWithSpecifiedMajorMinorRevisionAndBuild)
-  sw_test(VersionTest, CreateVersionWithSpecifiedMajorMinorRevisionAndBuildToZero)
+  _test(VersionTest, CreateVersionWithDefaultConstructor)
+  _test(VersionTest, CreateVersionWithSpecifiedMajorAndMinor)
+  _test(VersionTest, CreateVersionWithSpecifiedMajorMinorAndRevision)
+  _test(VersionTest, CreateVersionWithSpecifiedMajorMinorRevisionAndBuild)
+  _test(VersionTest, CreateVersionWithSpecifiedMajorMinorRevisionAndBuildToZero)
 
   TEST(Version, Constructor) {
     EXPECT_EQ(Version().ToString(), "0.0");

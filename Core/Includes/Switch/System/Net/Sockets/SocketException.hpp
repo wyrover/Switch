@@ -15,7 +15,7 @@ namespace Switch {
       /// @brief The System::Net::Sockets namespace provides a managed implementation of the Berkeley Sockets interface for developers who need to tightly control access to the network.
       namespace Sockets {
         /// @brief The exception that is thrown when a socket error occurs.
-        class sw_public SocketException : public SystemException {
+        class _public SocketException : public SystemException {
         public:
           /// @brief Create a new instance of class SocketException
           /// @remarks Message is set with the default message associate to the error.
@@ -27,7 +27,7 @@ namespace Switch {
           SocketException(const SocketException& value) : SystemException(value), error(value.error) {}
           
           /// @brief Create a new instance of class SocketException
-          /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
+          /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
           /// @remarks Message is set with the default message associate to the error.
           SocketException(const CurrentInformation& information) : SystemException(information) {}
           
@@ -37,24 +37,24 @@ namespace Switch {
           
           /// @brief Create a new instance of class SocketException
           /// @param message Message string associate to the error.
-          /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
+          /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
           SocketException(const System::String& message, const CurrentInformation& information) : SystemException(message, information) {}
           
           /// @brief Create a new instance of class SocketException
           /// @param message Message string associate to the error.
           /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
-          /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
+          /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
           SocketException(const System::String& message, const System::Exception& innerException, const CurrentInformation& information) : SystemException(message, innerException, information) {}
 
           /// @brief Create a new instance of class SocketException
           /// @param error The error code that indicates the error that occurred.
-          /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
+          /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
           SocketException(int32 error, const CurrentInformation& information) : SystemException("The Socket operation failed.", information), error((System::Net::Sockets::SocketError)error) {}
           
           /// @brief Get the SocketError associated with this exception
           /// @return An error code associated with the exception
           Property<const Sockets::SocketError&, ReadOnly> SocketErrorCode {
-            sw_get->const Sockets::SocketError& {return this->error; }
+            _get->const Sockets::SocketError& {return this->error; }
           };
 
         private:

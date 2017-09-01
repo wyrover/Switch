@@ -9,7 +9,7 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief Defines the base class for predefined exceptions in the System namespace.
-    class sw_public SystemException : public Exception {
+    class _public SystemException : public Exception {
     public:
       /// @brief Create a new instance of class SystemException
       /// @remarks Message is set with the default message associate to the error.
@@ -21,7 +21,7 @@ namespace Switch {
       SystemException(const SystemException& value) : Exception(value) {}
       
       /// @brief Create a new instance of class SystemException
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
       /// @remarks Message is set with the default message associate to the error.
       SystemException(const CurrentInformation& information) : Exception(information) {}
       
@@ -31,13 +31,13 @@ namespace Switch {
       
       /// @brief Create a new instance of class SystemException
       /// @param message Message string associate to the error.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
       SystemException(const System::String& message, const CurrentInformation& information) : Exception(message, information) {}
       
       /// @brief Create a new instance of class SystemException
       /// @param message Message string associate to the error.
       /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
       SystemException(const System::String& message, const System::Exception& innerException, const CurrentInformation& information) : Exception(message, innerException, information) {}
       
     private:

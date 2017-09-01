@@ -15,7 +15,7 @@ namespace Switch {
       /// @brief The System::Net::Sockets namespace provides a managed implementation of the Berkeley Sockets interface for developers who need to tightly control access to the network.
       namespace Sockets {
         /// @brief Contains option values for joining an IPv6 multicast group.
-        class sw_public IPv6MulticastOption : public Object {
+        class _public IPv6MulticastOption : public Object {
         public:
           /// @brief Initializes a new version of the IPv6MulticastOption class for the specified IP multicast group.
           /// @param group The IPAddress of the multicast group.
@@ -38,8 +38,8 @@ namespace Switch {
           /// @return IPAddress An IPAddress that contains the Internet address of a multicast group.
           /// @exception ArgumentNullException group is null.
           Property<const IPAddress&> Group {
-            sw_get->const IPAddress& {return this->group;},
-            sw_set {this->group = value;}
+            _get->const IPAddress& {return this->group;},
+            _set {this->group = value;}
           };
 
           /// @brief Gets the interface index that is associated with a multicast group.
@@ -47,10 +47,10 @@ namespace Switch {
           /// @return int64 A Int64 value that specifies the address of the interface.
           /// @exception ArgumentOutOfRangeException interfaceIndex is less than 0. -or- interfaceIndex is greater than 0x00000000FFFFFFFF.
           Property<int64> InterfaceIndex {
-            sw_get {return this->interfaceIndex;},
-            sw_set {
+            _get {return this->interfaceIndex;},
+            _set {
               if (value < 0 || value > 0x00000000FFFFFFFF)
-                throw ArgumentOutOfRangeException(sw_current_information);
+                throw ArgumentOutOfRangeException(_current_information);
               this->interfaceIndex = int32(value);
             }
           };

@@ -16,7 +16,7 @@ namespace Switch {
 
     /// @interface IFormatProvider
     /// @brief Provides a mechanism for retrieving an object to control formatting.
-    class sw_public IFormatProvider sw_interface {
+    class _public IFormatProvider _interface {
     public:
       /// @brief Returns an object that provides formatting services for the specified type.
       /// @param type An object that specifies the type of format object to return.

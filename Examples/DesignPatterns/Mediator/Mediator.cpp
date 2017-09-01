@@ -9,7 +9,7 @@ namespace DesignPatterns {
     class Mediator;
     
     // The 'Colleague' abstract class
-    class Colleague sw_abstract {
+    class Colleague _abstract {
     public:
       // Constructor
       Colleague(Mediator& mediator) : mediator(mediator)  {}
@@ -19,7 +19,7 @@ namespace DesignPatterns {
     };
     
     // The 'Mediator' abstract class
-    class Mediator sw_abstract {
+    class Mediator _abstract {
     public:
       virtual void Send(const string& message, Colleague& colleague) = 0;
     };
@@ -58,11 +58,11 @@ namespace DesignPatterns {
     class ConcreteMediator : public Mediator {
     public:
       Property<ConcreteColleague1, WriteOnly> Colleague1 {
-        sw_set { colleague1 = value; }
+        _set { colleague1 = value; }
       };
       
       Property<ConcreteColleague2, WriteOnly> Colleague2 {
-        sw_set { colleague2 = value; }
+        _set { colleague2 = value; }
       };
       
       void Send(const string& message, Colleague& colleague) override {
@@ -101,7 +101,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-sw_startup (DesignPatterns::Behavioral::MainApp)
+_startup (DesignPatterns::Behavioral::MainApp)
 
 // This code produces the following output:
 //

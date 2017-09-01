@@ -7,7 +7,7 @@ namespace Test {
   public:
     /// @brief The main entry point for the application.
     static void Main() {
-      refptr<string> p1 = sw_new<string>("First string****");
+      refptr<string> p1 = ref_new<string>("First string****");
       
       if (p1 == null)
         Console::WriteLine("p1 == null");
@@ -15,7 +15,7 @@ namespace Test {
       Console::WriteLine("*p1 = {0}", *p1);
       Console::WriteLine("p1 UseCount =  {0}{1}", p1.GetUseCount(), Environment::NewLine);
       
-      sw_using (refptr<string> p2 = p1) {
+      _using (refptr<string> p2 = p1) {
         Console::WriteLine("*p2 = {0}", *p2);
         Console::WriteLine("p1 UseCount =  {0}{1}", p1.GetUseCount(), Environment::NewLine);
         
@@ -36,7 +36,7 @@ namespace Test {
   };
 }
 
-sw_startup (Test::Program)
+_startup (Test::Program)
 
 // This code produces the following output :
 //

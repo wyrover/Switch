@@ -28,7 +28,7 @@ namespace Switch {
       /// @remarks byte buffer uses zero-based indexing. You can also use the Family and Size properties to get the
       /// @remarks AddressFamily value and the buffer size, respectively. To view any of this information as a string,
       /// @remarks use the ToString method.
-      class sw_public SocketAddress : public Object {
+      class _public SocketAddress : public Object {
       public:
         /// @brief Creates a new instance of the SocketAddress class for the given address family.
         SocketAddress(Sockets::AddressFamily addressFamily) : SocketAddress(addressFamily, 32) {}
@@ -47,13 +47,13 @@ namespace Switch {
         /// @brief Gets the address family to which the endpoint belongs.
         /// @return One of the AddressFamily values.
         Property<Sockets::AddressFamily, ReadOnly> AddressFamily {
-          sw_get {return this->GetAddressFamily();}
+          _get {return this->GetAddressFamily();}
         };
 
         /// @brief Gets the underlying buffer size of the SocketAddress.
         /// @return int32 The underlying buffer size of the SocketAddress.
         Property<int32, ReadOnly> Size {
-          sw_get {return this->bytes.Length();}
+          _get {return this->bytes.Length();}
         };
 
         /// @brief Gets or sets the specified index element in the underlying buffer.

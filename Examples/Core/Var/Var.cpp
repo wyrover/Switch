@@ -16,16 +16,16 @@ namespace Examples {
       pets["Persian"] = "Cat";
       pets["Pied Mutation Cockatiel"] = "Bird";
       
-      // you can use sw_var type insted :
+      // you can use _var type insted :
       // System::Collections::Specialized::StringKeyValuePair item
-      for (sw_var item : pets) {
+      for (_var item : pets) {
         Console::WriteLine(item);
       }
     }
   };
 }
 
-sw_startup (Examples::Program)
+_startup (Examples::Program)
 
 // This code produces the following output:
 //

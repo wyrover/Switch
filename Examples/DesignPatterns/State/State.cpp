@@ -8,7 +8,7 @@ namespace DesignPatterns {
   namespace Behavioral {
     class Context;
     // The 'State' abstract class
-    class State sw_abstract {
+    class State _abstract {
     public:
       virtual void Handle(Context& context) = 0;
     };
@@ -23,8 +23,8 @@ namespace DesignPatterns {
       
       // Gets or sets the state
       Property<refptr<DesignPatterns::Behavioral::State>> State {
-        sw_get { return this->state; },
-        sw_set {
+        _get { return this->state; },
+        _set {
           this->state = value;
           Console::WriteLine("State: " + this->state->GetType().Name);
         }
@@ -51,11 +51,11 @@ namespace DesignPatterns {
     };
 
     inline void ConcreteStateA::Handle(Context& context) {
-      context.State = sw_new<ConcreteStateB>();
+      context.State = ref_new<ConcreteStateB>();
     }
 
     inline void ConcreteStateB::Handle(Context& context) {
-      context.State = sw_new<ConcreteStateA>();
+      context.State = ref_new<ConcreteStateA>();
     }
 
     // MainApp startup class for Behavioral
@@ -65,7 +65,7 @@ namespace DesignPatterns {
       // Entry point into console application.
       static void Main() {
         // Setup context in a state
-        Context c(sw_new<ConcreteStateA>());
+        Context c(ref_new<ConcreteStateA>());
         
         // Issue requests, which toggles state
         c.Request();
@@ -78,7 +78,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-sw_startup (DesignPatterns::Behavioral::MainApp)
+_startup (DesignPatterns::Behavioral::MainApp)
 
 // This code produces the following output:
 //

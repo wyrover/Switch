@@ -38,7 +38,7 @@ namespace Switch {
     /// @par Examples
     /// The following example demonstrates displays a list of information about the current environment.
     /// @include Environment.cpp
-    class sw_public Environment sw_static {
+    class _public Environment _static {
     public:
       /// @enum SpecialFolder
       /// @brief Specifies enumerated constants used to retrieve directory paths to system special folders.
@@ -403,7 +403,7 @@ namespace Switch {
       /// @remarks Use the FailFast method instead of the Exit method to terminate your application if the state of your application is damaged beyond repair, and executing your application's try/catch blocks and finalizers will corrupt program resources.
       /// @remarks Information is reported to Microsoft by using Windows Error Reporting. For more information, see Windows Error Reporting: Getting Started.
       /// @exception NotImplementedException This method always throw NotImplementedException.
-      static void FailFast(const string& message) {throw NotImplementedException("Use System::Environment::Exit method instead", sw_current_information);}
+      static void FailFast(const string& message) {throw NotImplementedException("Use System::Environment::Exit method instead", _current_information);}
       
       /// @brief Returns a string array containing the command-line arguments for the current process.
       /// @return Array<string> An array of string where each element contains a command-line argument. The first element is the executable file name, and the following zero or more elements contain the remaining command-line arguments.
@@ -512,7 +512,7 @@ namespace Switch {
       /// @return Array<string> A string array that contains the arguments without the command line.
       /// @exception InvalidOperationException Call more than once. CommandeLine has already been set and is not empty.
       /// @remarks This methode must be call only once in main.
-      /// @remarks if you use #sw_startup (default) you don't need to call this method; otherwise if you use the standerd C++ main method you need to call it.
+      /// @remarks if you use #_startup (default) you don't need to call this method; otherwise if you use the standerd C++ main method you need to call it.
       /// @par Example
       /// This example show how to call SetCommandLineArgs with sandard C++ main method:
       /// @include Main5.cpp

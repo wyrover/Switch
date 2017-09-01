@@ -21,7 +21,7 @@ namespace {
   int TestPointer::cpt = 0;
 
   TEST(Up, SetNull) {
-    sw_using(UniquePtr<int> ptr) {
+    _using(UniquePtr<int> ptr) {
       EXPECT_THROW(ptr.ToPointer(), std::exception);
       EXPECT_TRUE(ptr.IsNull());
       EXPECT_THROW(*ptr, std::exception);
@@ -31,7 +31,7 @@ namespace {
 
   TEST(Up, SetNotNull) {
     TestPointer::ResetCpt();
-    sw_using(UniquePtr<TestPointer> ptr(new TestPointer())) {
+    _using(UniquePtr<TestPointer> ptr(new TestPointer())) {
       EXPECT_EQ(1, TestPointer::GetCpt());
       EXPECT_NE((TestPointer*)null, ptr.ToPointer());
       EXPECT_FALSE(ptr.IsNull());
@@ -46,7 +46,7 @@ namespace {
     TestPointer* tp = new TestPointer();
     EXPECT_EQ(1, TestPointer::GetCpt());
   
-    sw_using(UniquePtr<TestPointer> ptr(tp)) {
+    _using(UniquePtr<TestPointer> ptr(tp)) {
       EXPECT_NE((TestPointer*)null, ptr.ToPointer());
       EXPECT_FALSE(ptr.IsNull());
       EXPECT_NO_THROW(*ptr);
@@ -58,7 +58,7 @@ namespace {
 
   TEST(Up, FromEqual) {
     TestPointer::ResetCpt();
-    sw_using(UniquePtr<TestPointer> ptr = new TestPointer()) {
+    _using(UniquePtr<TestPointer> ptr = new TestPointer()) {
       EXPECT_EQ(1, TestPointer::GetCpt());
       EXPECT_NE((TestPointer*)null, ptr.ToPointer());
       EXPECT_FALSE(ptr.IsNull());
@@ -73,7 +73,7 @@ namespace {
     UniquePtr<TestPointer> ptr1(new TestPointer());
     EXPECT_EQ(1, TestPointer::GetCpt());
   
-    sw_using(UniquePtr<TestPointer> ptr2(ptr1)) {
+    _using(UniquePtr<TestPointer> ptr2(ptr1)) {
       EXPECT_EQ(1, TestPointer::GetCpt());
       EXPECT_THROW(ptr1.ToPointer(), std::exception);
       EXPECT_NE((TestPointer*)null, ptr2.ToPointer());
@@ -89,7 +89,7 @@ namespace {
     UniquePtr<TestPointer> ptr1(new TestPointer());
     EXPECT_EQ(1, TestPointer::GetCpt());
   
-    sw_using(UniquePtr<TestPointer> ptr2 = ptr1) {
+    _using(UniquePtr<TestPointer> ptr2 = ptr1) {
       EXPECT_EQ(1, TestPointer::GetCpt());
       EXPECT_THROW(ptr1.ToPointer(), std::exception);
       EXPECT_NE((TestPointer*)null, ptr2.ToPointer());
@@ -114,7 +114,7 @@ namespace {
     TestPointer* pt = new TestPointer();
     EXPECT_EQ(1, TestPointer::GetCpt());
 
-    sw_using(UniquePtr<TestPointer> ptr(pt)) {
+    _using(UniquePtr<TestPointer> ptr(pt)) {
       EXPECT_EQ(1, TestPointer::GetCpt());
       EXPECT_NO_THROW(ptr.Reset());
       EXPECT_THROW(ptr.ToPointer(), std::exception);
@@ -133,7 +133,7 @@ namespace {
     TestPointer* pt = new TestPointer();
     EXPECT_EQ(1, TestPointer::GetCpt());
   
-    sw_using(UniquePtr<TestPointer> ptr(pt)) {
+    _using(UniquePtr<TestPointer> ptr(pt)) {
       EXPECT_FALSE(ptr.IsNull());
       EXPECT_EQ(1, TestPointer::GetCpt());
     }
@@ -146,7 +146,7 @@ namespace {
     TestPointer* pt = new TestPointer();
     EXPECT_EQ(1, TestPointer::GetCpt());
   
-    sw_using(UniquePtr<TestPointer> ptr) {
+    _using(UniquePtr<TestPointer> ptr) {
       EXPECT_NO_THROW(ptr.Reset(pt));
       EXPECT_EQ(pt, ptr.ToPointer());
       EXPECT_EQ(1, TestPointer::GetCpt());
@@ -161,7 +161,7 @@ namespace {
     TestPointer* pt2 = new TestPointer();
     EXPECT_EQ(2, TestPointer::GetCpt());
  
-    sw_using(UniquePtr<TestPointer> ptr(pt1)) {
+    _using(UniquePtr<TestPointer> ptr(pt1)) {
       EXPECT_EQ(2, TestPointer::GetCpt());
       EXPECT_NO_THROW(ptr.Reset(pt2));
       EXPECT_EQ(pt2, ptr.ToPointer());
@@ -177,7 +177,7 @@ namespace {
     TestPointer* pt2 = new TestPointer();
     EXPECT_EQ(2, TestPointer::GetCpt());
 
-    sw_using(UniquePtr<TestPointer> ptr(pt1)) {
+    _using(UniquePtr<TestPointer> ptr(pt1)) {
       UniquePtr<TestPointer> ptr2(pt2);
       EXPECT_EQ(2, TestPointer::GetCpt());
       EXPECT_NO_THROW(ptr.Swap(ptr2));
@@ -190,25 +190,25 @@ namespace {
 
   TEST(Up, SetFromANativePointerAndGetValue) {
     string* str = new string("Test Pointer!");
-    sw_using(UniquePtr<string> ptr(str)) {
+    _using(UniquePtr<string> ptr(str)) {
       EXPECT_EQ(*str, ptr.ToObject());
     }
   }
 
   TEST(Up, SetFromANativePointerAndGetPointer) {
     string* str = new string("Test Pointer!");
-    sw_using(UniquePtr<string> ptr(str)) {
+    _using(UniquePtr<string> ptr(str)) {
       EXPECT_EQ(str, ptr.ToPointer());
     }
   }
 
   TEST(Up, ToString) {
-    sw_using(UniquePtr<string> ptr) {
+    _using(UniquePtr<string> ptr) {
       EXPECT_EQ(string("Switch::UniquePtr [Pointer=null]"), ptr.ToString().c_str());
     }
 
     string* str = new string("Test Pointer!");
-    sw_using(UniquePtr<string> ptr(str)) {
+    _using(UniquePtr<string> ptr(str)) {
       EXPECT_TRUE(string(ptr.ToString().c_str()).StartsWith("Switch::UniquePtr [Pointer="));
       EXPECT_TRUE(string(ptr.ToString().c_str()).EndsWith("]"));
       EXPECT_NE(string("Switch::UniquePtr [Pointer=null]"), ptr.ToString().c_str());

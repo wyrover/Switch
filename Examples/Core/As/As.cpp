@@ -22,7 +22,7 @@ namespace Examples {
       s2 = as<string>(a);
       Console::WriteLine("a = {0}, Convert::ToString(a) = {1}, as<string>(a) = {2}", a, s1, s2);
       
-      refptr<object> o = sw_new<Uri>("http://www.gammasoft.com");
+      refptr<object> o = ref_new<Uri>("http://www.gammasoft.com");
       refptr<Uri> u = as<Uri>(o);
       Console::WriteLine("o = {0}, as<Uri>(o) = {1}", *o, *u);
       
@@ -37,7 +37,7 @@ namespace Examples {
         Console::WriteLine("Bad cast : {0} !", e.Message);
       }
       
-      refptr<object> version = sw_new<Version>(1, 1, 5);
+      refptr<object> version = ref_new<Version>(1, 1, 5);
       refptr<string> str = as<string>(version);
       if (str == null) {
         Console::WriteLine("Bad cast!");
@@ -52,7 +52,7 @@ namespace Examples {
   };
 }
 
-sw_startup (Examples::Program)
+_startup (Examples::Program)
 
 // This code produces output similar to the following:
 //

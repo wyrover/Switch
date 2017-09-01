@@ -39,7 +39,7 @@ namespace Test {
   };
 }
 
-sw_startup (Test::Program)
+_startup (Test::Program)
 
 // This code produces the following output:
 //

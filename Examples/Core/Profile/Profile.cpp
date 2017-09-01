@@ -18,7 +18,7 @@ namespace Examples {
       Stopwatch stopWatch;
       stopWatch.Start();
       while (index < Profile::CountMax()) {
-        sw_lock (sync) {
+        _lock (sync) {
           int cpt = Profile::Counter;
           if (cpt != Profile::Counter)
             Console::WriteLine("cpt != Counter : {0}", cpt + Profile::Counter);
@@ -39,7 +39,7 @@ namespace Examples {
       
       static void LockThread(const Object& sync) {
         for (int index = 0; index < CountMax(); index++) {
-          sw_lock (sync)
+          _lock (sync)
             Counter++;
         }
       }
@@ -48,7 +48,7 @@ namespace Examples {
   int Program::Profile::Counter = 0;
 }
 
-sw_startup (Examples::Program)
+_startup (Examples::Program)
 
 // This code produces the following output :
 //

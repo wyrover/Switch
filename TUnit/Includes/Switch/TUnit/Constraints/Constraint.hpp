@@ -10,38 +10,38 @@
 namespace Switch {
   /// @brief The TUnit namespace contains a unit test framework.
   /// @par Examples
-  /// This example how to use TestFixture class, Assert class and #sw_test method:
+  /// This example how to use TestFixture class, Assert class and #_test method:
   /// @include Assert.cpp
   /// @par Examples
-  /// This example how to use TestFixture class, Expect class and #sw_test method:
+  /// This example how to use TestFixture class, Expect class and #_test method:
   /// @include Expect.cpp
   namespace TUnit {
     /// @brief The TUnit::Constrains conatains ConstraintValue that contain vaule to verify, the base class Contraints, the base class ConstraintExpression, all Constraint inherited classes and all ContraintExpression inherited classes.
     namespace Constraints {
-      class sw_public Constraint sw_abstract {
+      class _public Constraint _abstract {
       public:
         Property<::CurrentInformation> CurrentInformation {
-          sw_get {return this->currentInformation;},
-          sw_set {this->currentInformation = value;}
+          _get {return this->currentInformation;},
+          _set {this->currentInformation = value;}
         };
         
         Property<ConstraintValue> Actual {
-          sw_get {return this->actual;},
-          sw_set {this->actual = value;}
+          _get {return this->actual;},
+          _set {this->actual = value;}
         };
         
         Property<ConstraintValue> Expect {
-          sw_get {return this->expect;},
-          sw_set {this->expect = value;}
+          _get {return this->expect;},
+          _set {this->expect = value;}
         };
         
         Property<string, ReadOnly> Error {
-          sw_get {return string::Format("Expected: {0}{2}But was: {1}", ToString(), this->actual, System::Environment::NewLine);}
+          _get {return string::Format("Expected: {0}{2}But was: {1}", ToString(), this->actual, System::Environment::NewLine);}
         };
         
         Property<string> Message {
-          sw_get {return this->message;},
-          sw_set {this->message = value;}
+          _get {return this->message;},
+          _set {this->message = value;}
         };
         
         template<typename T>

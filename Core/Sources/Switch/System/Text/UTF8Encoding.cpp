@@ -78,11 +78,11 @@ UTF8Encoding& UTF8Encoding::operator =(const UTF8Encoding& encoding) {
 }
 
 refptr<Encoding::Decoder> UTF8Encoding::CreateDecoder() const {
-  return sw_new<Decoder>();
+  return ref_new<Decoder>();
 }
 
 refptr<Encoding::Encoder> UTF8Encoding::CreateEncoder() const {
-  return sw_new<Encoder>();
+  return ref_new<Encoder>();
 }
 
 int32 UTF8Encoding::GetByteCount(char32 c) const {
@@ -90,7 +90,7 @@ int32 UTF8Encoding::GetByteCount(char32 c) const {
 }
 
 int32 UTF8Encoding::GetCharCount(const byte bytes[], int32 bytesSize, int32 index, int32 count) const {
-  if (bytes == null && bytesSize != 0) throw ArgumentNullException(sw_current_information);
+  if (bytes == null && bytesSize != 0) throw ArgumentNullException(_current_information);
   ValidateGCC(bytesSize, index, count);
   
   std::string s;
@@ -101,12 +101,12 @@ int32 UTF8Encoding::GetCharCount(const byte bytes[], int32 bytesSize, int32 inde
 }
 
 int32 UTF8Encoding::GetMaxByteCount(int32 charCount) const {
-  if (charCount < 0 || charCount > Int32::MaxValue / 4 ) throw ArgumentOutOfRangeException(sw_current_information);
+  if (charCount < 0 || charCount > Int32::MaxValue / 4 ) throw ArgumentOutOfRangeException(_current_information);
   return 4 * charCount;
 }
 
 int32 UTF8Encoding::GetMaxCharCount(int32 byteCount) const {
-  if (byteCount < 0) throw ArgumentOutOfRangeException(sw_current_information);
+  if (byteCount < 0) throw ArgumentOutOfRangeException(_current_information);
   return byteCount;
 }
 
@@ -126,11 +126,11 @@ bool UTF8Encoding::Equals(const object& obj) const {
 }
 
 int32 UTF8Encoding::GetBytes(char32 c, byte bytes[], int32 bytesLength, int32 index) const {
-  if (bytes == null && bytesLength > 0) throw ArgumentNullException(sw_current_information);
-  if (index < 0) throw ArgumentOutOfRangeException(sw_current_information);
+  if (bytes == null && bytesLength > 0) throw ArgumentNullException(_current_information);
+  if (index < 0) throw ArgumentOutOfRangeException(_current_information);
   
   int32 count = GetByteCount(c);
-  if (index + count > bytesLength) throw ArgumentOutOfRangeException(sw_current_information);
+  if (index + count > bytesLength) throw ArgumentOutOfRangeException(_current_information);
   
   Encoder encoder;
   encoder.Encode(c, &bytes[index]);

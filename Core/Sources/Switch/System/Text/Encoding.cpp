@@ -18,7 +18,7 @@ Encoding::Encoding() {
 }
 
 Encoding::Encoding(int32 codePage) {
-  if (codePage < 0) throw ArgumentOutOfRangeException(sw_current_information);
+  if (codePage < 0) throw ArgumentOutOfRangeException(_current_information);
   this->codePage = codePage;
 }
 
@@ -51,46 +51,46 @@ string Encoding::GetEncodingName() const {
 }
 
 refptr<Encoding> Encoding::ASCII() {
-  return sw_new<ASCIIEncoding>();
+  return ref_new<ASCIIEncoding>();
 }
 
 refptr<Encoding> Encoding::UTF8() {
-  return sw_new<UTF8Encoding>(true);
+  return ref_new<UTF8Encoding>(true);
 }
 
 refptr<Encoding> Encoding::Unicode() {
-  return sw_new<UnicodeEncoding>(false,true);
+  return ref_new<UnicodeEncoding>(false,true);
 }
 
 refptr<Encoding> Encoding::BigEndianUnicode() {
-  return sw_new<UnicodeEncoding>(true,true);
+  return ref_new<UnicodeEncoding>(true,true);
 }
 
 refptr<Encoding> Encoding::UTF16LE() {
-  return sw_new<UnicodeEncoding>(false,true);
+  return ref_new<UnicodeEncoding>(false,true);
 }
 
 refptr<Encoding> Encoding::UTF16BE() {
-  return sw_new<UnicodeEncoding>(true,true);
+  return ref_new<UnicodeEncoding>(true,true);
 }
 
 refptr<Encoding> Encoding::UTF32() {
-  return sw_new<UTF32Encoding>(false,true);
+  return ref_new<UTF32Encoding>(false,true);
 }
 
 refptr<Encoding> Encoding::CreateEncoding(int32 codePage) {
   switch(codePage) {
-    case 437   : { return sw_new<CodePage437Encoding>(); }
-    case 1200  : { return sw_new<UnicodeEncoding>(false,true); }
-    case 1201  : { return sw_new<UnicodeEncoding>(true,true); }
-    case 12000 : { return sw_new<UTF32Encoding>(false,true); }
-    case 12001 : { return sw_new<UTF32Encoding>(true,true); }
-    case 20127 : { return sw_new<ASCIIEncoding>(); }
-    case 28591 : { return sw_new<CodePage28591Encoding>(); }
-    case 28592 : { return sw_new<CodePage28592Encoding>(); }
-    case 65001 : { return sw_new<UTF8Encoding>(); }
+    case 437   : { return ref_new<CodePage437Encoding>(); }
+    case 1200  : { return ref_new<UnicodeEncoding>(false,true); }
+    case 1201  : { return ref_new<UnicodeEncoding>(true,true); }
+    case 12000 : { return ref_new<UTF32Encoding>(false,true); }
+    case 12001 : { return ref_new<UTF32Encoding>(true,true); }
+    case 20127 : { return ref_new<ASCIIEncoding>(); }
+    case 28591 : { return ref_new<CodePage28591Encoding>(); }
+    case 28592 : { return ref_new<CodePage28592Encoding>(); }
+    case 65001 : { return ref_new<UTF8Encoding>(); }
   }
-  throw NotSupportedException(sw_current_information);
+  throw NotSupportedException(_current_information);
 }
 
 refptr<Encoding> Encoding::CreateEncoding(const string& codePageName) {
@@ -103,7 +103,7 @@ refptr<Encoding> Encoding::CreateEncoding(const string& codePageName) {
   if (codePageName == "IBM437") return CreateEncoding(437);
   if (codePageName == "utf-32") return CreateEncoding(12000);
   if (codePageName == "utf-32BE") return CreateEncoding(12001);
-  throw NotSupportedException(sw_current_information);
+  throw NotSupportedException(_current_information);
 }
 
 Array<byte> Encoding::Convert(const Encoding& srcEncoding, const Encoding& dstEncoding, const byte bytes[], int32 bytesSize) {
@@ -204,7 +204,7 @@ int32 Encoding::GetBytes(const char32 chars[], int32 charsSize, int32 charIndex,
   ArrayAlgorithms::ValidateRange(charsSize, charIndex, charCount);
   ArrayAlgorithms::ValidateIndex(byteIndex, bytesSize);
 
-  if (byteIndex < 0) throw ArgumentOutOfRangeException(sw_current_information);
+  if (byteIndex < 0) throw ArgumentOutOfRangeException(_current_information);
   int32 count = 0;
   for (int32 i = charIndex; i < charIndex + charCount; i += 1) {
     count += GetBytes(chars[i], bytes, bytesSize, byteIndex + count);
@@ -229,7 +229,7 @@ int32 Encoding::GetBytes(const String& source, int32 charIndex, int32 charCount,
   }
 
   if (iteration <= charIndex && charIndex > 0)
-    throw ArgumentOutOfRangeException(sw_current_information);
+    throw ArgumentOutOfRangeException(_current_information);
 
   return index;
 }
@@ -277,7 +277,7 @@ int32 Encoding::GetChars(const byte bytes[], int32 bytesLength, int32 byteIndex,
     decoder->Add(bytes[i]);
     if (decoder->CodePointDefined()) {
       if (index >= charsLength)
-        throw ArgumentException(sw_current_information);
+        throw ArgumentException(_current_information);
       chars[index++] = decoder->CodePoint();
     }
   }
@@ -317,7 +317,7 @@ string Encoding::GetString(const byte bytes[], int32 bytesSize) const {
 }
 
 string Encoding::GetString(const byte bytes[], int32 bytesSize, int32 index, int32 count) const {
-  if (bytes == null && bytesSize != 0) throw ArgumentNullException(sw_current_information);
+  if (bytes == null && bytesSize != 0) throw ArgumentNullException(_current_information);
 
   if (bytesSize == 0) return string();
   int32 nbChars = GetCharCount(bytes, bytesSize,index,count);
@@ -339,22 +339,22 @@ string Encoding::ToString() const {
 
 void Encoding::ValidateGBC(int32 charsLength, int32 index, int32 count) const {
   if (index < 0 || count < 0 || index > charsLength || index + count > charsLength)
-    throw ArgumentOutOfRangeException(sw_current_information);
+    throw ArgumentOutOfRangeException(_current_information);
 }
 
 void Encoding::ValidateGCC(int32 bytesLength, int32 index, int32 count) const {
   if (index < 0 || count < 0 || (index > bytesLength && index > 0))
-    throw ArgumentOutOfRangeException(sw_current_information);
+    throw ArgumentOutOfRangeException(_current_information);
 
   if (index + count > bytesLength)
-    throw ArgumentOutOfRangeException(sw_current_information);
+    throw ArgumentOutOfRangeException(_current_information);
 }
 
 void Encoding::ValidateGC(int32 bytesLength, int32 byteIndex, int32 byteCount, int32 charsLength, int32 charIndex) const {
   if (byteIndex < 0 || byteCount < 0 || byteIndex > bytesLength || byteIndex + byteCount > bytesLength)
-    throw ArgumentOutOfRangeException(sw_current_information);
+    throw ArgumentOutOfRangeException(_current_information);
 
   if (charIndex < 0 || charIndex >= charsLength)
-    throw ArgumentOutOfRangeException(sw_current_information);
+    throw ArgumentOutOfRangeException(_current_information);
 }
 

@@ -26,7 +26,7 @@ namespace Switch {
       /// @end cond
       
       ///@brief Makes a request to a Uniform Resource Identifier (URI). This is an abstract class.
-      class sw_public WebRequest sw_abstract {
+      class _public WebRequest _abstract {
         /// @cond
         friend class System::Net::WebResponse;
         /// @endcond
@@ -63,7 +63,7 @@ namespace Switch {
             int32 bufferSize = 0;
             int32 bufferOffset = 0;
           };
-          refptr<WebRequestStreamData> data = sw_new<WebRequestStreamData>();
+          refptr<WebRequestStreamData> data = ref_new<WebRequestStreamData>();
         };
         
 
@@ -96,27 +96,27 @@ namespace Switch {
         static refptr<WebRequest> Create(const Uri& requestUriString);
 
         Property<int64> ContentLength {
-          sw_get {return this->GetContentLength();},
-          sw_set {this->SetContentLength(value);}
+          _get {return this->GetContentLength();},
+          _set {this->SetContentLength(value);}
         };
         
         Property<string> Method {
-          sw_get {return this->GetMethod();},
-          sw_set {this->SetMethod(value);}
+          _get {return this->GetMethod();},
+          _set {this->SetMethod(value);}
         };
         
         Property<const System::Net::NetworkCredential&> Credentials {
-          sw_get->System::Net::NetworkCredential& {return this->GetCredential();},
-          sw_set {this->SetCredential(value);}
+          _get->System::Net::NetworkCredential& {return this->GetCredential();},
+          _set {this->SetCredential(value);}
         };
         
         Property<System::Uri, ReadOnly> RequestUri {
-          sw_get {return this->GetRequestUri();}
+          _get {return this->GetRequestUri();}
         };
 
         Property<int32> Timeout {
-          sw_get {return this->timeout;},
-          sw_set {this->timeout = value;}
+          _get {return this->timeout;},
+          _set {this->timeout = value;}
         };
         
         virtual WebResponse& GetResponse() = 0;

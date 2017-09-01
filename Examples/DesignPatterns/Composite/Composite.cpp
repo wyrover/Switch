@@ -8,7 +8,7 @@ using namespace System::Collections::Generic;
 namespace DesignPatterns {
   namespace Structural {
     // The 'Component' abstract class
-    class Component sw_abstract {
+    class Component _abstract {
     public:
       // Constructor
       Component(const string& name) : name(name) {}
@@ -63,19 +63,19 @@ namespace DesignPatterns {
       // Entry point into console application.
       static void Main() {
         // Create a tree structure
-        refptr<Composite> root = sw_new<Composite>("root");
-        root->Add(sw_new<Leaf>("Leaf A"));
-        root->Add(sw_new<Leaf>("Leaf B"));
+        refptr<Composite> root = ref_new<Composite>("root");
+        root->Add(ref_new<Leaf>("Leaf A"));
+        root->Add(ref_new<Leaf>("Leaf B"));
         
-        refptr<Composite> comp = sw_new<Composite>("Composite X");
-        comp->Add(sw_new<Leaf>("Leaf XA"));
-        comp->Add(sw_new<Leaf>("Leaf XB"));
+        refptr<Composite> comp = ref_new<Composite>("Composite X");
+        comp->Add(ref_new<Leaf>("Leaf XA"));
+        comp->Add(ref_new<Leaf>("Leaf XB"));
         
         root->Add(as<Component>(comp));
-        root->Add(sw_new<Leaf>("Leaf C"));
+        root->Add(ref_new<Leaf>("Leaf C"));
         
         // Add and remove a leaf
-        refptr<Leaf> leaf = sw_new<Leaf>("Leaf D");
+        refptr<Leaf> leaf = ref_new<Leaf>("Leaf D");
         root->Add(as<Component>(leaf));
         root->Remove(as<Component>(leaf));
         
@@ -87,7 +87,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-sw_startup (DesignPatterns::Structural::MainApp)
+_startup (DesignPatterns::Structural::MainApp)
 
 // This code produces the following output:
 //

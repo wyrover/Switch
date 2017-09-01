@@ -11,7 +11,7 @@
 
 /// @cond
 namespace std {
-  class sw_public ustring {
+  class _public ustring {
   public:
     ustring();
     ustring(const char* str);

@@ -7,8 +7,8 @@ namespace Examples {
   class Program {
   public:
     static void Main() {
-      auto t = Task<>::Run<int>(sw_delegate {
-        sw_await Task<>::Delay(TimeSpan::FromSeconds(1.5));
+      auto t = Task<>::Run<int>(_delegate {
+        _await Task<>::Delay(TimeSpan::FromSeconds(1.5));
         return 42;
       });
       t.Wait();
@@ -17,7 +17,7 @@ namespace Examples {
   };
 }
 
-sw_startup (Examples::Program)
+_startup (Examples::Program)
 
 // The example displays the following output:
 //

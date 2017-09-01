@@ -8,7 +8,7 @@ using namespace System::Collections;
 namespace DesignPatterns {
   namespace Behavioral {
     // The 'Iterator' abstract class
-    class Iterator sw_abstract {
+    class Iterator _abstract {
     public:
       virtual any First() const = 0;
       virtual any Next() const = 0;
@@ -17,7 +17,7 @@ namespace DesignPatterns {
     };
     
     // The 'Aggregate' abstract class
-    class Aggregate sw_abstract {
+    class Aggregate _abstract {
     public:
       virtual refptr<Iterator> CreateIterator() = 0;
     };
@@ -51,12 +51,12 @@ namespace DesignPatterns {
     class ConcreteAggregate : public Aggregate {
     public:
       refptr<Iterator> CreateIterator() override {
-        return sw_new<ConcreteIterator>(*this);
+        return ref_new<ConcreteIterator>(*this);
       }
       
       // Gets item count
       Property<int, ReadOnly> Count {
-        sw_get { return this->items.Count(); }
+        _get { return this->items.Count(); }
       };
       
       void Insert(int index, any item) {
@@ -114,7 +114,7 @@ namespace DesignPatterns {
         a.Insert(3, "Item D");
         
         // Create Iterator and provide aggregate
-        refptr<Iterator> i = sw_new<ConcreteIterator>(a);
+        refptr<Iterator> i = ref_new<ConcreteIterator>(a);
         
         Console::WriteLine("Iterating over collection:");
         
@@ -129,7 +129,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-sw_startup (DesignPatterns::Behavioral::MainApp);
+_startup (DesignPatterns::Behavioral::MainApp);
 
 // This code produces the following output:
 //

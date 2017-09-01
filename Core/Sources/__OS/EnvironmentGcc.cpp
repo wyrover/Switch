@@ -39,7 +39,7 @@ System::PlatformID __OS::CoreApi::Environment::GetOsPlatformID() {
 
 int32 __OS::CoreApi::Environment::GetOsVersion(int32& major, int32& minor, int32& build, int32& revision) {
 #if defined(__APPLE__)
-  System::Array<string> numbers = CreateProcess("sw_vers -productVersion").Split({'.', '\n'});
+  System::Array<string> numbers = CreateProcess("_vers -productVersion").Split({'.', '\n'});
 #else
   System::Array<string> numbers = CreateProcess("uname -r").Split({'.', '-', '\n'});
 #endif

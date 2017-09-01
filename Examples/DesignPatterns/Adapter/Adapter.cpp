@@ -41,7 +41,7 @@ namespace DesignPatterns {
       // Entry point into console application.
       static void Main() {
         // Create adapter and place a request
-        refptr<Target> target = sw_new<Adapter>();
+        refptr<Target> target = ref_new<Adapter>();
         target->Request();
       }
     };
@@ -49,7 +49,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-sw_startup (DesignPatterns::Structural::MainApp)
+_startup (DesignPatterns::Structural::MainApp)
 
 // This code produces the following output:
 //

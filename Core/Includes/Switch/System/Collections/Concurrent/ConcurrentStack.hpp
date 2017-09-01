@@ -50,7 +50,7 @@ namespace Switch {
           /// @brief Gets a value that indicates whether the ConcurrentStack<T> is empty.
           /// @return Boolean true if the ConcurrentStack<T> is empty; otherwise, false.
           Property<bool, ReadOnly> IsEmpty {
-            sw_get {
+            _get {
               return this->stack.Count == 0;
             }
           };
@@ -76,10 +76,10 @@ namespace Switch {
           /// @exception ArgumentException startIndex + count is greater than the length of items.
           void PushRange(const System::Array<T>& items, int32 startIndex, int32 count) {
             if (startIndex < 0 || count < 0 || startIndex > items.Length)
-              throw ArgumentOutOfRangeException(sw_current_information);
+              throw ArgumentOutOfRangeException(_current_information);
 
             if (startIndex + count > items.Length)
-              throw ArgumentException(sw_current_information);
+              throw ArgumentException(_current_information);
 
             System::Threading::LockGuard lock(this->stack.SyncRoot);
             for (int32 i = startIndex; i < startIndex + count; i++)
@@ -154,10 +154,10 @@ namespace Switch {
           /// @exception ArgumentException startIndex + count is greater than the length of items.
           int32 TryPopRange(System::Array<T>& results, int32 startIndex, int32 count) {
             if (startIndex < 0 || count < 0 || startIndex > results.Length)
-              throw ArgumentOutOfRangeException(sw_current_information);
+              throw ArgumentOutOfRangeException(_current_information);
 
             if (startIndex + count > results.Length)
-              throw ArgumentException(sw_current_information);
+              throw ArgumentException(_current_information);
 
             System::Threading::LockGuard lock(this->stack.SyncRoot);
             int32 nbItemPoped = 0;
@@ -205,7 +205,7 @@ namespace Switch {
           protected:
             const T& GetCurrent() const {
               if (this->index < 0 || this->index >= this->array.Length)
-                throw InvalidOperationException(sw_current_information);
+                throw InvalidOperationException(_current_information);
               return this->array[this->index];
             }
             

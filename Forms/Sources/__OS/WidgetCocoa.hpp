@@ -6,7 +6,7 @@
 #include "FormsApi.hpp"
 
 namespace __OS {
-  class IWidget sw_interface {
+  class IWidget _interface {
   public:
   };
 }

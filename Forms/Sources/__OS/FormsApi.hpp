@@ -27,9 +27,9 @@
 #include "WindowMessageKey.hpp"
 
 namespace __OS {
-  class FormsApi sw_static {
+  class FormsApi _static {
   public:
-    class Application sw_static {
+    class Application _static {
     public:
       static void EnableVisualStyles() { visualStylesEnabled = true; }
       static void Exit();
@@ -44,20 +44,20 @@ namespace __OS {
       static bool visualStylesEnabled;
     };
 
-    class Button sw_static {
+    class Button _static {
     public:
       static intptr Create(const System::Windows::Forms::Button& button);
       static void SetIsDefault(const System::Windows::Forms::Button& button);
     };
 
-    class CheckBox sw_static {
+    class CheckBox _static {
     public:
       static intptr Create(const System::Windows::Forms::CheckBox& checkBox);
       static void SetAutoCheck(const System::Windows::Forms::CheckBox& checkBox);
       static void SetChecked(const System::Windows::Forms::CheckBox& checkBox);
     };
 
-    class Control sw_static {
+    class Control _static {
     public:
       static intptr Create(const System::Windows::Forms::Control& control);
       static void DefWndProc(System::Windows::Forms::Message& message);
@@ -91,29 +91,29 @@ namespace __OS {
       }
     };
 
-    class Form sw_static {
+    class Form _static {
     public:
       static void Close(System::Windows::Forms::Form& form);
       static intptr Create(System::Windows::Forms::Form& form);
     };
 
-    class GroupBox sw_static {
+    class GroupBox _static {
     public:
       static intptr Create(const System::Windows::Forms::GroupBox& groupBox);
     };
 
-    class Label sw_static {
+    class Label _static {
     public:
       static intptr Create(const System::Windows::Forms::Label& label);
     };
 
-    class Panel sw_static {
+    class Panel _static {
     public:
       static intptr Create(const System::Windows::Forms::Panel& panel);
       static void SetBorderStyle(const System::Windows::Forms::Panel& panel);
     };
 
-    class ProgressBar sw_static {
+    class ProgressBar _static {
     public:
       static intptr Create(const System::Windows::Forms::ProgressBar& progressBar);
       static void SetMaximum(const System::Windows::Forms::ProgressBar& progressBar);
@@ -122,14 +122,14 @@ namespace __OS {
       static void SetValue(const System::Windows::Forms::ProgressBar& progressBar);
     };
 
-    class RadioButton sw_static {
+    class RadioButton _static {
     public:
       static intptr Create(const System::Windows::Forms::RadioButton& radioButton);
       static void SetChecked(const System::Windows::Forms::RadioButton& radioButton);
       static void SetGroup(const System::Windows::Forms::RadioButton& radioButton);
     };
 
-    class SystemInformation sw_static {
+    class SystemInformation _static {
     public:
       static int32 GetActiveWindowTrackingDelay();
       static System::Windows::Forms::ArrangeDirection GetArrangeDirection();
@@ -191,24 +191,24 @@ namespace __OS {
       static int32 GetMenuHeight();
     };
 
-    class TabPage sw_static {
+    class TabPage _static {
     public:
       static intptr Create(const System::Windows::Forms::TabPage& tabPage);
     };
 
-    class TabControl sw_static {
+    class TabControl _static {
     public:
       static intptr Create(const System::Windows::Forms::TabControl& tabControl);
       static void SetAlignment(const System::Windows::Forms::TabControl& tabControl);
     };
 
-    class Timer sw_static {
+    class Timer _static {
     public:
       static intptr Create(int32 interval, delegate<void> tick);
       static void Destroy(intptr handle);
     };
 
-    class TrackBar sw_static {
+    class TrackBar _static {
     public:
       static intptr Create(const System::Windows::Forms::TrackBar& trackBar);
       static void SetLargeChange(const System::Windows::Forms::TrackBar& trackBar);

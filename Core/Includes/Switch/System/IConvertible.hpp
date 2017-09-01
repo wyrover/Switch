@@ -18,7 +18,7 @@ namespace Switch {
 
     /// @interface IConvertible
     /// @brief Defines a generalized comparison method that a value type or class implements to create a type-specific comparison method.
-    class sw_public IConvertible sw_interface {
+    class _public IConvertible _interface {
     public:
       /// @brief Returns the TypeCode for this instance.
       /// @return TypeCode The enumerated constant that is the TypeCode of the class or value type that implements this interface.

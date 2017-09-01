@@ -33,7 +33,7 @@ namespace Examples {
     // Add item of polymorphic objects
     template<typename T>
     static void Add(const T& obj) {
-      items.Add(sw_new<T>(obj));
+      items.Add(ref_new<T>(obj));
     }
     
     static System::Collections::Generic::List<refptr<object>> items;
@@ -43,7 +43,7 @@ namespace Examples {
   System::Collections::Generic::List<refptr<object>> Program::items;
 }
 
-sw_startup (Examples::Program)
+_startup (Examples::Program)
 
 // This code produces the following output:
 //

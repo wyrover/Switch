@@ -15,7 +15,7 @@ namespace Switch {
     /// @brief The System::Drawing namespace provides access to GDI+ basic graphics functionality. More advanced functionality is provided in the System::Drawing::Drawing2D, System::Drawing::Imaging, and System::Drawing::Text namespaces.
     namespace Drawing {
       /// @brief Defines a particular format for text, including font face, size, and style attributes. This class cannot be inherited.
-      class sw_public Font : public object {
+      class _public Font : public object {
       public:
         Font(const string& name) {this->FromName(name, this->data().size, this->data().fontStyle);}
 
@@ -31,35 +31,35 @@ namespace Switch {
         /// @endcond
 
         Property<bool, ReadOnly> Bold{
-          sw_get{ return (this->data().fontStyle & System::Drawing::FontStyle::Bold) == System::Drawing::FontStyle::Bold; }
+          _get{ return (this->data().fontStyle & System::Drawing::FontStyle::Bold) == System::Drawing::FontStyle::Bold; }
         };
 
         Property<System::Drawing::FontFamily, ReadOnly> FontFamily{
-          sw_get{ return this->data().fontFamily; }
+          _get{ return this->data().fontFamily; }
         };
 
         Property<bool, ReadOnly> Italic{
-          sw_get{ return (this->data().fontStyle & System::Drawing::FontStyle::Italic) == System::Drawing::FontStyle::Italic; }
+          _get{ return (this->data().fontStyle & System::Drawing::FontStyle::Italic) == System::Drawing::FontStyle::Italic; }
         };
 
         Property<bool, ReadOnly> Strikeout{
-          sw_get{ return (this->data().fontStyle & System::Drawing::FontStyle::Strikeout) == System::Drawing::FontStyle::Strikeout; }
+          _get{ return (this->data().fontStyle & System::Drawing::FontStyle::Strikeout) == System::Drawing::FontStyle::Strikeout; }
         };
 
         Property<bool, ReadOnly> Underline{
-          sw_get{ return (this->data().fontStyle & System::Drawing::FontStyle::Underline) == System::Drawing::FontStyle::Underline; }
+          _get{ return (this->data().fontStyle & System::Drawing::FontStyle::Underline) == System::Drawing::FontStyle::Underline; }
         };
 
         Property<const string&, ReadOnly> Name {
-          sw_get->const string& {return this->data().name;}
+          _get->const string& {return this->data().name;}
         };
 
         Property<System::Drawing::FontStyle, ReadOnly> Style {
-          sw_get {return this->data().fontStyle;}
+          _get {return this->data().fontStyle;}
         };
 
         Property<float, ReadOnly> Size {
-          sw_get {return this->data().size;}
+          _get {return this->data().size;}
         };
 
         static System::Drawing::Font FromHdc(intptr hdc);
@@ -96,7 +96,7 @@ namespace Switch {
           string name;
           float size = .0f;
         };
-        refptr<FontData> data = sw_new<FontData>();
+        refptr<FontData> data = ref_new<FontData>();
       };
     }
   }

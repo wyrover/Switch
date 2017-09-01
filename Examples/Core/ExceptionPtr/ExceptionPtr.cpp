@@ -10,9 +10,9 @@ namespace Examples {
     static void Main() {
       ExceptionPtr exceptionPtr;
       
-      Thread thread(ThreadStart(sw_delegate {
+      Thread thread(ThreadStart(_delegate {
         try {
-          throw ArgumentNullException("Ouch there are an error !", sw_current_information);
+          throw ArgumentNullException("Ouch there are an error !", _current_information);
         } catch(...) {
           exceptionPtr = ExceptionPtr::CurrentException;
         }
@@ -31,7 +31,7 @@ namespace Examples {
   };
 }
 
-sw_startup (Examples::Program)
+_startup (Examples::Program)
 
 // This code produces the following output:
 //

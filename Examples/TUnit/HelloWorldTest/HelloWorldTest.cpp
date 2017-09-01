@@ -17,8 +17,8 @@ namespace UnitTests {
     }
   };
   
-  sw_test (HelloWorldTest, CreateStringFromLiteral)
-  sw_test (HelloWorldTest, CreateStringFromChar32Array)
+  _test (HelloWorldTest, CreateStringFromLiteral)
+  _test (HelloWorldTest, CreateStringFromChar32Array)
 }
 
 // This code produces the following output:

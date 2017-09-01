@@ -26,7 +26,7 @@ namespace Switch {
       /// @endcond
       
       /// @brief Provides a generic view of a sequence of bytes. This is an abstract class.
-      class sw_public Stream sw_abstract {
+      class _public Stream _abstract {
       public:
         static Property<NullStream&, ReadOnly> Null;
 
@@ -39,66 +39,66 @@ namespace Switch {
         /// stream supports reading.
         /// @return true if the stream supports reading; otherwise, false.
         Property<bool, ReadOnly> CanRead {
-          sw_get {return this->GetCanRead();}
+          _get {return this->GetCanRead();}
         };
 
         /// @brief When overridden in a derived class, gets a value indicating whether the current
         /// stream supports seeking.
         /// @return true if the stream supports seeking; otherwise, false.
         Property<bool, ReadOnly> CanSeek {
-          sw_get {return this->GetCanSeek();}
+          _get {return this->GetCanSeek();}
         };
 
         /// @brief Gets a value that determines whether the current stream can time out.
         /// @return A value that determines whether the current stream can time out.
         /// @remarks The CanTimeout() function always returns false. Some stream implementations require different behavior, such as NetworkStream, which times out if network connectivity is interrupted or lost. If you are implementing a stream that must be able to time out, this property should be overridden to return true.
         Property<bool, ReadOnly> CanTimeout {
-          sw_get {return this->GetCanTimeout();}
+          _get {return this->GetCanTimeout();}
         };
 
         /// @brief When overridden in a derived class, gets a value indicating whether the current
         /// stream supports writing.
         /// @return true if the stream supports writing; otherwise, false.
         Property<bool, ReadOnly> CanWrite {
-          sw_get {return this->GetCanWrite();}
+          _get {return this->GetCanWrite();}
         };
 
         /// @brief When overridden in a derived class, gets the length in bytes of the stream.
         /// @param length The desired length of the current stream in bytes.
         /// @return A long value representing the length of the stream in bytes.
         Property<int64> Length {
-          sw_get {return this->GetLength();},
-          sw_set {this->SetLength(value);}
+          _get {return this->GetLength();},
+          _set {this->SetLength(value);}
         };
 
         /// @brief When overridden in a derived class, gets the position within the current stream.
         /// @param position the position within the stream
         /// @return The current position within the stream.
         Property<int64> Position {
-          sw_get {return this->GetPosition();},
-          sw_set {this->SetPosition(value);}
+          _get {return this->GetPosition();},
+          _set {this->SetPosition(value);}
         };
 
         /// @brief Gets a value, in miliseconds, that determines how long the stream will attempt to read before timing out.
         /// @param readTimeout A value, in miliseconds, that determines how long the stream will attempt to read before timing out
         /// @return A value, in miliseconds, that determines how long the stream will attempt to read before timing out.
         Property<int32> ReadTimeout {
-          sw_get {return this->GetReadTimeout();},
-          sw_set {this->SetReadTimeout(value);}
+          _get {return this->GetReadTimeout();},
+          _set {this->SetReadTimeout(value);}
         };
 
         /// @brief Gets a value, in miliseconds, that determines how long the stream will attempt to write before timing out.
         /// @param writeTimeout A value, in miliseconds, that determines how long the stream will attempt to write before timing out
         /// @return A value, in miliseconds, that determines how long the stream will attempt to write before timing out.
         Property<int32> WriteTimeout {
-          sw_get {return this->GetWriteTimeout();},
-          sw_set {this->SetWriteTimeout(value);}
+          _get {return this->GetWriteTimeout();},
+          _set {this->SetWriteTimeout(value);}
         };
         
         /// @brief Indicates if the stream is closed
         /// @return true if the stream is closed, false otherwise
         Property<bool, ReadOnly> IsClosed {
-          sw_get {return this->GetIsClosed();}
+          _get {return this->GetIsClosed();}
         };
 
         /// @brief Begins an asynchronous read operation.

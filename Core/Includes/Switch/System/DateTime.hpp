@@ -57,7 +57,7 @@ namespace Switch {
     /// @par Examples
     /// The following example demonstrates how to compare roughly equivalent DateTime values, accepting a small margin of difference when declaring them equal.
     /// @include DateTime.cpp
-    struct sw_public DateTime : public ValueType, public IComparable, public IConvertible {
+    struct _public DateTime : public ValueType, public IComparable, public IConvertible {
     public:
       /// @brief Represents the largest possible value of an DateTime (03:14:07, Janyaury 19, 2038). This field is constant.
       static DateTime MaxValue;
@@ -136,55 +136,55 @@ namespace Switch {
       /// @brief Gets the date component of this instance.
       /// @param A new DateTime with the same date as this instance, and the time value set to 12:00:00 midnight (00:00:00).
       Property<DateTime, ReadOnly> Date {
-        sw_get {return DateTime(Year(), Month(), Day(), 0 ,0, 0, 0, this->kind);}
+        _get {return DateTime(Year(), Month(), Day(), 0 ,0, 0, 0, this->kind);}
       };
 
       /// @brief Gets the day of the month represented by this instance.
       /// @param The day component, expressed as a value between 1 and 31.
       Property<int32, ReadOnly> Day {
-        sw_get {return this->GetDay();}
+        _get {return this->GetDay();}
       };
 
       /// @brief Gets the day of the week represented by this instance.
       /// @param DayOfWeek A DayOfWeek enumerated constant that indicates the day of the week. This property value ranges from zero, indicating Sunday, to six, indicating Saturday.
       Property<System::DayOfWeek, ReadOnly> DayOfWeek {
-        sw_get {return this->GetDayOfWeek();}
+        _get {return this->GetDayOfWeek();}
       };
 
       /// @brief Gets the day of the year represented by this instance.
       /// @param The day of the year, expressed as a value between 1 and 366.
       Property<int32, ReadOnly> DayOfYear {
-        sw_get {return this->GetDayOfYear();}
+        _get {return this->GetDayOfYear();}
       };
 
       /// @brief Gets the hour component of the date represented by this instance.
       /// @param The hour component, expressed as a value between 0 and 23.
       Property<int32, ReadOnly> Hour {
-        sw_get {return this->GetHour();}
+        _get {return this->GetHour();}
       };
 
       /// @brief Gets a value that indicates whether the time represented by this instance is based on local time, Coordinated Universal Time (UTC), or neither.
       /// @return DateTimeKind One of the DateTimeKind values. The default is DateTimeKindUnspecified.
       Property<DateTimeKind, ReadOnly> Kind {
-        sw_get {return this->GetKind();}
+        _get {return this->GetKind();}
       };
 
       /// @brief Gets the millisecond component of the date represented by this instance.
       /// @return The millisecond component, expressed as a value between 0 and 999.
       Property<int32, ReadOnly> Millisecond {
-        sw_get {return this->GetMillisecond();}
+        _get {return this->GetMillisecond();}
       };
 
       /// @brief Gets the minute component of the date represented by this instance.
       /// @return The minute component, expressed as a value between 0 and 59.
       Property<int32, ReadOnly> Minute {
-        sw_get {return this->GetMinute();}
+        _get {return this->GetMinute();}
       };
 
       /// @brief Gets the month component of the date represented by this instance.
       /// @return The month component, expressed as a value between 1 and 12.
       Property<int32, ReadOnly> Month {
-        sw_get {return this->GetMonth();}
+        _get {return this->GetMonth();}
       };
       
       /// @brief Gets a DateTime object that is set to the current date and time on this computer, expressed as the local time.
@@ -194,20 +194,20 @@ namespace Switch {
       /// @brief Gets the second component of the date represented by this instance.
       /// @return The second component, expressed as a value between 0 and 59.
       Property<int32, ReadOnly> Second {
-        sw_get {return this->GetSecond();}
+        _get {return this->GetSecond();}
       };
 
       /// @brief Gets the number of ticks component of the date represented by this instance.
       /// @return The number of ticks that represent the date and time of this instance. The value is between DateTime::MinValue and DateTime::MaxValue.
       Property<int64, ReadOnly> Ticks {
-        sw_get {return this->GetTicks();}
+        _get {return this->GetTicks();}
       };
 
       /// @brief Gets the time of day for this instance.
       /// @return TimeSpan A TimeSpan that represents the fraction of the day that has elapsed since midnight.
       /// @remarks The return value is a DateTime whose Kind property returns DateTimeKindLocal.
       Property<TimeSpan, ReadOnly> TimeOfDay {
-        sw_get {return this->GetTimeOfDay();}
+        _get {return this->GetTimeOfDay();}
       };
 
       /// @brief Gets the current date.
@@ -222,7 +222,7 @@ namespace Switch {
       /// @brief Gets the year component of the date represented by this instance.
       /// @return The year component, expressed as a value between 1 and 9999.
       Property<int32, ReadOnly> Year {
-        sw_get {return this->GetYear();}
+        _get {return this->GetYear();}
       };
 
       /// @brief Adds the value of the specified TimeSpan to the value of this instance.

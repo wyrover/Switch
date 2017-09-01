@@ -7,7 +7,7 @@ using namespace System;
 namespace DesignPatterns {
   namespace Behavioral {
     // The 'Handler' abstract class
-    class Handler sw_abstract {
+    class Handler _abstract {
     public:
       void SetSuccessor(refptr<Handler> successor) {this->successor = successor;}
       
@@ -60,9 +60,9 @@ namespace DesignPatterns {
       // Entry point into console application.
       static void Main() {
         // Setup Chain of Responsibility
-        refptr<Handler> h1 = sw_new<ConcreteHandler1>();
-        refptr<Handler> h2 = sw_new<ConcreteHandler2>();
-        refptr<Handler> h3 = sw_new<ConcreteHandler3>();
+        refptr<Handler> h1 = ref_new<ConcreteHandler1>();
+        refptr<Handler> h2 = ref_new<ConcreteHandler2>();
+        refptr<Handler> h3 = ref_new<ConcreteHandler3>();
         h1->SetSuccessor(h2);
         h2->SetSuccessor(h3);
         
@@ -78,7 +78,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-sw_startup (DesignPatterns::Behavioral::MainApp)
+_startup (DesignPatterns::Behavioral::MainApp)
 
 // This code produces the following output:
 //

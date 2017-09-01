@@ -14,14 +14,14 @@ Property<FileInfo, ReadOnly> FileInfo::Empty {
   [] {return FileInfo();}
 };
 
-FileInfo::FileInfo() : Directory(sw_delegate {return this->GetDirectory();}) {
+FileInfo::FileInfo() : Directory(_delegate {return this->GetDirectory();}) {
 }
 
-FileInfo::FileInfo(const string& fileName) : Directory(sw_delegate {return this->GetDirectory();}) {
+FileInfo::FileInfo(const string& fileName) : Directory(_delegate {return this->GetDirectory();}) {
   this->fullPath = Path::GetFullPath(fileName);
 }
 
-FileInfo::FileInfo(const FileInfo& fileInfo) : FileSystemInfo(fileInfo), Directory(sw_delegate {return this->GetDirectory();}) { }
+FileInfo::FileInfo(const FileInfo& fileInfo) : FileSystemInfo(fileInfo), Directory(_delegate {return this->GetDirectory();}) { }
 
 bool FileInfo::GetExists() const {
   System::IO::FileAttributes fileAttributes = (System::IO::FileAttributes)0;
@@ -42,26 +42,26 @@ string FileInfo::GetName() const {
 
 void FileInfo::Delete() {
   if (__OS::CoreApi::Directory::RemoveFile(this->fullPath.ToCCharArray().Data()) != 0)
-    throw System::Security::SecurityException(sw_current_information);
+    throw System::Security::SecurityException(_current_information);
 }
 
 FileInfo FileInfo::CopyTo(const string& destFileName) {
   if (!Exists())
-    throw FileNotFoundException(sw_current_information);
+    throw FileNotFoundException(_current_information);
   
   if (File::Exists(destFileName))
-    throw IOException(sw_current_information);
+    throw IOException(_current_information);
   
   string fullPathDestFileName = Path::GetFullPath(destFileName);
   
   FILE* source = fopen(this->fullPath.ToCCharArray().Data(), "rb");
   if (source == null)
-    throw IOException(sw_current_information);
+    throw IOException(_current_information);
   
   FILE* target = fopen(fullPathDestFileName.ToCCharArray().Data(), "wb");
   if (target == null) {
     fclose(source);
-    throw IOException(sw_current_information);
+    throw IOException(_current_information);
   }
   
   int32 count = 0;
@@ -89,14 +89,14 @@ FileInfo FileInfo::CopyTo(const string& destFileName, bool overwrite) {
 
 void FileInfo::MoveTo(const string& destFileName) {
   if (!Exists())
-    throw FileNotFoundException(sw_current_information);
+    throw FileNotFoundException(_current_information);
   
   if (!Path::HasExtension(destFileName))
-    throw ArgumentException(sw_current_information);
+    throw ArgumentException(_current_information);
   
   string fullPathDestFileName = Path::GetFullPath(destFileName);
   if (__OS::CoreApi::Directory::RenameFile(this->fullPath, fullPathDestFileName) != 0)
-    throw IOException(sw_current_information);
+    throw IOException(_current_information);
   
   this->fullPath = fullPathDestFileName;
 }

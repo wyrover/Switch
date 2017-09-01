@@ -12,8 +12,8 @@ namespace SwitchEvents {
     CustomEventArgs(const CustomEventArgs& cea) : message(cea.message) {}
     
     Property<string> Message {
-      sw_get { return this->message; },
-      sw_set { this->message = value; }
+      _get { return this->message; },
+      _set { this->message = value; }
     };
     
   private:
@@ -83,7 +83,7 @@ namespace SwitchEvents {
   };
 }
 
-sw_startup (SwitchEvents::Program)
+_startup (SwitchEvents::Program)
 
 // This code produces output similar to the following:
 //

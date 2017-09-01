@@ -20,7 +20,7 @@ namespace Switch {
       /// @endcond
 
       /// @brief Stores an ordered pair of singles, which specify a Height and Width.
-      class sw_public SizeF : public object {
+      class _public SizeF : public object {
       public:
         /// @brief Gets a SizeF class that has a Height and Width value of 0.0f. This field is constant.
         static Property<SizeF, ReadOnly> Empty;
@@ -44,16 +44,16 @@ namespace Switch {
         /// @return single The vertical component of this SizeF class, typically measured in pixels.
         /// @remarks The unit for the Height and Width of the SizeF class depend on the PageUnit and PageScale settings for the Graphics object that is used to draw.
         Property<float> Height {
-          sw_get {return this->height;},
-          sw_set {this->height = value;}
+          _get {return this->height;},
+          _set {this->height = value;}
         };
 
         /// @brief Gets the horizontal component of this SizeF class.
         /// @return single The horizontal component of this SizeF class, typically measured in pixels.
         /// @remarks The unit for the Height and Width of the SizeF class depend on the PageUnit and PageScale settings for the Graphics object that is used to draw.
         Property<float> Width {
-          sw_get {return this->width;},
-          sw_set {this->width = value;}
+          _get {return this->width;},
+          _set {this->width = value;}
         };
 
         /// @brief Determines whether this instance of SizeF and a specified object, which must also be a SizeF object, have the same value.

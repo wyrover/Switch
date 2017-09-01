@@ -7,7 +7,7 @@ using namespace System;
 namespace DesignPatterns {
   namespace Behavioral {
     // The 'AbstractClass' abstract class
-    class AbstractClass sw_abstract {
+    class AbstractClass _abstract {
     public:
       virtual void PrimitiveOperation1() = 0;
       virtual void PrimitiveOperation2() = 0;
@@ -50,10 +50,10 @@ namespace DesignPatterns {
     public:
       // Entry point into console application.
       static void Main() {
-        refptr<AbstractClass> aA = sw_new<ConcreteClassA>();
+        refptr<AbstractClass> aA = ref_new<ConcreteClassA>();
         aA->TemplateMethod();
         
-        refptr<AbstractClass> aB = sw_new<ConcreteClassB>();
+        refptr<AbstractClass> aB = ref_new<ConcreteClassB>();
         aB->TemplateMethod();
       }
     };
@@ -61,7 +61,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-sw_startup (DesignPatterns::Behavioral::MainApp)
+_startup (DesignPatterns::Behavioral::MainApp)
 
 // This code produces the following output:
 //

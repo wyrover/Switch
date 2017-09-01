@@ -19,15 +19,15 @@ namespace {
     ProcessInfo(const ProcessInfo& pi) : pid(pi.pid),  name(pi.name), path(pi.path) {}
     
     Property<intptr, ReadOnly> Id {
-      sw_get {return this->pid;}
+      _get {return this->pid;}
     };
     
     Property<string, ReadOnly> Name {
-      sw_get {return this->name;}
+      _get {return this->name;}
     };
     
     Property<string, ReadOnly> Path {
-      sw_get {return this->path;}
+      _get {return this->path;}
     };
     
     String ToString() const override {return string::Format("{{pid={0}, Name={1}, Path={2}}}", this->pid, this->name, this->path);}
@@ -41,7 +41,7 @@ namespace {
   string GetProcessPath(pid_t id) {
     char path[PROC_PIDPATHINFO_SIZE+1] = {0};
     if (proc_pidinfo(id, PROC_PIDPATHINFO, 0, &path, PROC_PIDPATHINFO_SIZE) != 0)
-      throw System::InvalidOperationException(sw_current_information);
+      throw System::InvalidOperationException(_current_information);
     return path;
   }
   

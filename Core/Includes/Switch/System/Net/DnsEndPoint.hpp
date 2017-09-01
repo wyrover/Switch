@@ -16,7 +16,7 @@ namespace Switch {
     namespace Net {
       /// @brief Represents a network endpoint as a host name or a string representation of an IP address and a port number.
       /// @remarks The DnsEndPoint class contains a host name or an IP address and remote port information needed by an application to connect to a service on a host. By combining the host name or IP address and port number of a service, the DnsEndPoint class forms a connection point to a service.
-      class sw_public DnsEndPoint : public EndPoint {
+      class _public DnsEndPoint : public EndPoint {
       public:
         /// @brief Initializes a new instance of the DnsEndPoint class with the host name or string representation of an IP address and a port number.
         /// @param host The host name or a string representation of the IP address.
@@ -48,16 +48,16 @@ namespace Switch {
         /// @exception ArgumentException The host parameter contains an empty string.
         /// @exception ArgumentNullException The host parameter is a null.
         Property<const String&> Host {
-          sw_get->const string& {return this->host;},
-          sw_set {this->SetHost(value);}
+          _get->const string& {return this->host;},
+          _set {this->SetHost(value);}
         };
 
         /// @brief Gets the port number of the endpoint.
         /// @param value An integer value in the range IPEndPoint::MinPort to IPEndPoint::MaxPort indicating the port number of the endpoint.
         /// @exception ArgumentOutOfRangeException port is less than IPEndPoint::MinPort. -or- port is greater than IPEndPoint::MaxPort.
         Property<int32> Port {
-          sw_get {return this->port;},
-          sw_set {this->SetPort(value);}
+          _get {return this->port;},
+          _set {this->SetPort(value);}
         };
 
         /// @brief Serializes endpoint information into a SocketAddress instance.

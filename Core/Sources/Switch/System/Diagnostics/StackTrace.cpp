@@ -18,15 +18,15 @@ int32 StackTrace::FrameCount() const {
 }
 
 void StackTrace::FillFrames(int32 skipFrames, bool needFileInfo) {
-  this->stackTrace = sw_new<CallStack>();
+  this->stackTrace = ref_new<CallStack>();
   FillFrames(((stacktrace::call_stack*)this->stackTrace->handle), skipFrames, needFileInfo);
 }
 
 void StackTrace::FillFrames(const String& str, int32 skipFrames, bool needFileInfo) {
   if (skipFrames < 0 )
-    throw ArgumentOutOfRangeException(sw_current_information);
+    throw ArgumentOutOfRangeException(_current_information);
   
-  this->stackTrace = sw_new<CallStack>();
+  this->stackTrace = ref_new<CallStack>();
 
   int32 skipFramesBeforeStr = 0;
   for (int32 index = 0; index < StackFrame::GetFrameCount(((stacktrace::call_stack*)this->stackTrace->handle)); index++) {
@@ -39,7 +39,7 @@ void StackTrace::FillFrames(const String& str, int32 skipFrames, bool needFileIn
 
 void StackTrace::FillFrames(void* stackTrace, int32 skipFrames, bool needFileInfo) {
   if (skipFrames < 0)
-    throw ArgumentOutOfRangeException(sw_current_information);
+    throw ArgumentOutOfRangeException(_current_information);
 
   int32 length = skipFrames < StackFrame::GetFrameCount(stackTrace) ? StackFrame::GetFrameCount(stackTrace)-skipFrames : 0;
   for (int32 index = 0; index  < length; index++) {

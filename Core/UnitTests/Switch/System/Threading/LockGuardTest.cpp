@@ -18,7 +18,7 @@ namespace SwitchUnitTests {
       LockGuard lockGuard(lock);
       ++value;
       
-      Assert::AreEqual(1, value, sw_current_information);
+      Assert::AreEqual(1, value, _current_information);
     }
     
     void DoubleLockOnDifferentObjects() {
@@ -31,7 +31,7 @@ namespace SwitchUnitTests {
       LockGuard lockGuard2(lock2);
       ++value;
       
-      Assert::AreEqual(2, value, sw_current_information);
+      Assert::AreEqual(2, value, _current_information);
     }
     
     void DoubleLockOnSameObject() {
@@ -43,7 +43,7 @@ namespace SwitchUnitTests {
       LockGuard lockGuard2(lock);
       ++value;
       
-      Assert::AreEqual(2, value, sw_current_information);
+      Assert::AreEqual(2, value, _current_information);
     }
     
     void LockDuration() {
@@ -55,17 +55,17 @@ namespace SwitchUnitTests {
         ++value;
       }
       duration.Stop();
-      Assert::LessOrEqual(duration.ElapsedMilliseconds(), 1, sw_current_information);
+      Assert::LessOrEqual(duration.ElapsedMilliseconds(), 1, _current_information);
     }
  
     void Thread() {
       string s;
-      std::thread t1(sw_delegate {
+      std::thread t1(_delegate {
         LockGuard lockGuard(s);
         for (int i = 0; i < 500; i++)
           s += '1';
       });
-      std::thread t2(sw_delegate {
+      std::thread t2(_delegate {
         LockGuard lockGuard(s);
         for (int i = 0; i < 500; i++)
           s += '2';
@@ -80,14 +80,14 @@ namespace SwitchUnitTests {
       int32 i = 0;
       for (char32 c : s) {
         if (o == 0) o = c;
-        Assert::IsFalse(++i < 500 && o != c, sw_current_information);
+        Assert::IsFalse(++i < 500 && o != c, _current_information);
       }
     }
   };
   
-  sw_test(LockGuardTest, SingleLock)
-  sw_test(LockGuardTest, DoubleLockOnDifferentObjects)
-  sw_test(LockGuardTest, DoubleLockOnSameObject)
-  sw_test(LockGuardTest, LockDuration)
-  sw_test(LockGuardTest, Thread)
+  _test(LockGuardTest, SingleLock)
+  _test(LockGuardTest, DoubleLockOnDifferentObjects)
+  _test(LockGuardTest, DoubleLockOnSameObject)
+  _test(LockGuardTest, LockDuration)
+  _test(LockGuardTest, Thread)
 }

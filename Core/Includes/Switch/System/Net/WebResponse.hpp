@@ -20,7 +20,7 @@ namespace Switch {
     namespace Net {
       class WebRequest;
 
-      class sw_public WebResponse : public Object {
+      class _public WebResponse : public Object {
       public:
         class WebResponseStream: public System::IO::Stream {
         public:
@@ -61,16 +61,16 @@ namespace Switch {
             bool started = false;
             bool finished = false;
           };
-          refptr<WebRequestStreamData> data = sw_new<WebRequestStreamData>();
+          refptr<WebRequestStreamData> data = ref_new<WebRequestStreamData>();
         };
         
         Property<int64> ContentLength {
-          sw_get {return this->GetContentLength();},
-          sw_set {this->SetContentLength(value);}
+          _get {return this->GetContentLength();},
+          _set {this->SetContentLength(value);}
         };
         
         Property<string, ReadOnly> ContentType {
-          sw_get {return this->GetContentType();}
+          _get {return this->GetContentType();}
         };
         
         virtual ~WebResponse();

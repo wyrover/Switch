@@ -380,6 +380,7 @@ set(INCLUDE_FILES
   Includes/Switch/Core.hpp
   Includes/Switch/Event.hpp
   Includes/Switch/ExceptionPtr.hpp
+  Includes/Switch/Foreach.hpp
   Includes/Switch/CurrentInformation.hpp
   Includes/Switch/InitializerList.hpp
   Includes/Switch/Interface.hpp

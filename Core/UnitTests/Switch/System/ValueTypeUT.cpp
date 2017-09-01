@@ -288,183 +288,183 @@ namespace {
   }
   
   TEST(ValueType, Format) {
-    sw_using(Byte value = 32) {
+    _using(Byte value = 32) {
       EXPECT_EQ("32", string::Format("{0}", value));
     }
     
-    sw_using(Int16 value = 32) {
+    _using(Int16 value = 32) {
       EXPECT_EQ("32", string::Format("{0}", value));
     }
     
-    sw_using(Int32 value = 32) {
+    _using(Int32 value = 32) {
       EXPECT_EQ("32", string::Format("{0}", value));
     }
     
-    sw_using(Int64 value = 32) {
+    _using(Int64 value = 32) {
       EXPECT_EQ("32", string::Format("{0}", value));
     }
     
-    sw_using(IntPtr value = 32) {
+    _using(IntPtr value = 32) {
       EXPECT_EQ("32", string::Format("{0}", value));
     }
     
-    sw_using(SByte value = 32) {
+    _using(SByte value = 32) {
       EXPECT_EQ("32", string::Format("{0}", value));
     }
     
-    sw_using(UInt16 value = 32) {
+    _using(UInt16 value = 32) {
       EXPECT_EQ("32", string::Format("{0}", value));
     }
     
-    sw_using(UInt32 value = 32) {
+    _using(UInt32 value = 32) {
       EXPECT_EQ("32", string::Format("{0}", value));
     }
     
-    sw_using(UInt64 value = 32) {
+    _using(UInt64 value = 32) {
       EXPECT_EQ("32", string::Format("{0}", value));
     }
     
-    sw_using(UInt64 value = 32) {
+    _using(UInt64 value = 32) {
       EXPECT_EQ("32", string::Format("{0}", value));
     }
     
-    sw_using(UIntPtr value = uint32(32)) {
+    _using(UIntPtr value = uint32(32)) {
       EXPECT_EQ("32", string::Format("{0}", value));
     }
     
-    sw_using(Char value = 32) {
+    _using(Char value = 32) {
       EXPECT_EQ(" ", string::Format("{0}", value));
     }
     
-    sw_using(Boolean value = true) {
+    _using(Boolean value = true) {
       EXPECT_EQ("True", string::Format("{0}", value));
     }
     
-    sw_using(Single value = 32) {
+    _using(Single value = 32) {
       EXPECT_EQ("32", string::Format("{0}", value));
     }
     
-    sw_using(Double value = 32) {
+    _using(Double value = 32) {
       EXPECT_EQ("32", string::Format("{0}", value));
     }
     
-    sw_using(string value = "32") {
+    _using(string value = "32") {
       EXPECT_EQ("32", string::Format("{0}", value));
     }
     
-    sw_using(byte value = 32) {
+    _using(byte value = 32) {
       EXPECT_EQ("32", string::Format("{0}", value));
     }
     
-    sw_using(int16 value = 32) {
+    _using(int16 value = 32) {
       EXPECT_EQ("32", string::Format("{0}", value));
     }
     
-    sw_using(int32 value = 32) {
+    _using(int32 value = 32) {
       EXPECT_EQ("32", string::Format("{0}", value));
     }
     
-    sw_using(int64 value = 32) {
+    _using(int64 value = 32) {
       EXPECT_EQ("32", string::Format("{0}", value));
     }
     
-    sw_using(sbyte value = 32) {
+    _using(sbyte value = 32) {
       EXPECT_EQ("32", string::Format("{0}", value));
     }
     
-    sw_using(uint16 value = 32) {
+    _using(uint16 value = 32) {
       EXPECT_EQ("32", string::Format("{0}", value));
     }
     
-    sw_using(uint32 value = 32) {
+    _using(uint32 value = 32) {
       EXPECT_EQ("32", string::Format("{0}", value));
     }
     
-    sw_using(uint64 value = 32) {
+    _using(uint64 value = 32) {
       EXPECT_EQ("32", string::Format("{0}", value));
     }
     
-    sw_using(uint64 value = 32) {
+    _using(uint64 value = 32) {
       EXPECT_EQ("32", string::Format("{0}", value));
     }
     
-    sw_using(char32 value = 32) {
+    _using(char32 value = 32) {
       EXPECT_EQ(" ", string::Format("{0}", value));
     }
     
-    sw_using(bool value = true) {
+    _using(bool value = true) {
       EXPECT_EQ("True", string::Format("{0}", value));
     }
     
-    sw_using(float value = 32) {
+    _using(float value = 32) {
       EXPECT_EQ("32", string::Format("{0}", value));
     }
     
-    sw_using(double value = 32) {
+    _using(double value = 32) {
       EXPECT_EQ("32", string::Format("{0}", value));
     }
     
-    sw_using(char* value = (char*)"32") {
+    _using(char* value = (char*)"32") {
       EXPECT_EQ("32", string::Format("{0}", value));
     }
     
-    sw_using(const char* value = "32") {
+    _using(const char* value = "32") {
       EXPECT_EQ("32", string::Format("{0}", value));
     }
     
-    sw_using(char value = 32) {
+    _using(char value = 32) {
       EXPECT_EQ(" ", string::Format("{0}", value));
     }
     
-    sw_using(unsigned char value = 32) {
+    _using(unsigned char value = 32) {
       EXPECT_EQ("32", string::Format("{0}", value));
     }
     
-    sw_using(short value = 32) {
+    _using(short value = 32) {
       EXPECT_EQ("32", string::Format("{0}", value));
     }
     
-    sw_using(unsigned short value = 32) {
+    _using(unsigned short value = 32) {
       EXPECT_EQ("32", string::Format("{0}", value));
     }
     
-    sw_using(short int value = 32) {
+    _using(short int value = 32) {
       EXPECT_EQ("32", string::Format("{0}", value));
     }
     
-    sw_using(unsigned short int value = 32) {
+    _using(unsigned short int value = 32) {
       EXPECT_EQ("32", string::Format("{0}", value));
     }
     
-    sw_using(int value = 32) {
+    _using(int value = 32) {
       EXPECT_EQ("32", string::Format("{0}", value));
     }
     
-    sw_using(unsigned int value = 32) {
+    _using(unsigned int value = 32) {
       EXPECT_EQ("32", string::Format("{0}", value));
     }
     
-    sw_using(long value = 32) {
+    _using(long value = 32) {
       EXPECT_EQ("32", string::Format("{0}", value));
     }
     
-    sw_using(unsigned long value = 32) {
+    _using(unsigned long value = 32) {
       EXPECT_EQ("32", string::Format("{0}", value));
     }
     
-    sw_using(long int value = 32) {
+    _using(long int value = 32) {
       EXPECT_EQ("32", string::Format("{0}", value));
     }
     
-    sw_using(unsigned long int value = 32) {
+    _using(unsigned long int value = 32) {
       EXPECT_EQ("32", string::Format("{0}", value));
     }
     
-    sw_using(long long value = 32) {
+    _using(long long value = 32) {
       EXPECT_EQ("32", string::Format("{0}", value));
     }
     
-    sw_using(unsigned long long value = 32) {
+    _using(unsigned long long value = 32) {
       EXPECT_EQ("32", string::Format("{0}", value));
     }
   }

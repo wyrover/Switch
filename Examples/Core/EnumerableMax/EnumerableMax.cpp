@@ -12,11 +12,11 @@ namespace Examples {
       Pet(const Pet& pet) : name(pet.name), age(pet.age) {}
       
       Property<int, ReadOnly> Age {
-        sw_get {return this->age;}
+        _get {return this->age;}
       };
       
       Property<string, ReadOnly> Name {
-        sw_get {return this->name;}
+        _get {return this->name;}
       };
       
       virtual bool Equals(const object& other) const {
@@ -60,7 +60,7 @@ namespace Examples {
   };
 }
 
-sw_startup (Examples::Program)
+_startup (Examples::Program)
 
 // This code produces the following output:
 //

@@ -16,7 +16,7 @@ namespace MessageBoxExample {
       this->buttonShowMessage.Location = System::Drawing::Point(10, 10);
       this->buttonShowMessage.Width = 100;
       this->buttonShowMessage.Text = "MessageBox";
-      this->buttonShowMessage.Click += sw_delegate(const object& sender, const EventArgs& e) {
+      this->buttonShowMessage.Click += _delegate(const object& sender, const EventArgs& e) {
         DialogResult result = MessageBox::Show("Hello, World!", "Message", MessageBoxButtons::OKCancel, MessageBoxIcon::Asterisk);
         labelDialogResult.Text = string::Format("DialogResult = {0}", result);
       };
@@ -36,4 +36,4 @@ namespace MessageBoxExample {
   };
 }
 
-sw_startup (MessageBoxExample::Form1)
+_startup (MessageBoxExample::Form1)

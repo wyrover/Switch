@@ -18,7 +18,7 @@ namespace Switch {
       /// The namespace includes enumerations that simplify the control of serial ports, such as Handshake, Parity, SerialPinChange, and StopBits.
       namespace Ports {
         /// @brief Represents a serial port resource.
-        class sw_public SerialPort : public Object {
+        class _public SerialPort : public Object {
         public:
           SerialPort() {}
           /// @cond
@@ -39,23 +39,23 @@ namespace Switch {
           static Array<String> GetPortNames();
 
           Property<int32, ReadOnly> BaudRate {
-            sw_get {return this->baudRate;}
+            _get {return this->baudRate;}
           };
 
           Property<int32, ReadOnly> DataBits {
-            sw_get {return this->dataBits;}
+            _get {return this->dataBits;}
           };
           
           Property<System::IO::Ports::Parity, ReadOnly> Parity {
-            sw_get {return this->parity;}
+            _get {return this->parity;}
           };
           
           Property<const string&, ReadOnly> Port {
-            sw_get->const string& {return this->port;}
+            _get->const string& {return this->port;}
           };
           
           Property<System::IO::Ports::StopBits, ReadOnly> StopBits {
-            sw_get {return this->stopBits;}
+            _get {return this->stopBits;}
           };
 
         private:

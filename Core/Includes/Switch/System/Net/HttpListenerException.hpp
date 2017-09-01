@@ -13,7 +13,7 @@ namespace Switch {
     /// The WebRequest and WebResponse classes form the basis of what are called pluggable protocols, an implementation of network services that enables you to develop applications that use Internet resources without worrying about the specific details of the individual protocols.
     namespace Net {
       /// @brief The exception that is thrown when an error occurs processing an HTTP request.
-      class sw_public HttpListenerException : public SystemException {
+      class _public HttpListenerException : public SystemException {
       public:
         /// @brief Create a new instance of class HttpListenerException
         /// @remarks Message is set with the default message associate to the error.
@@ -25,7 +25,7 @@ namespace Switch {
         HttpListenerException(const HttpListenerException& value) : SystemException(value) {}
         
         /// @brief Create a new instance of class HttpListenerException
-        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
+        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
         /// @remarks Message is set with the default message associate to the error.
         HttpListenerException(const CurrentInformation& information) : SystemException(information) {}
         
@@ -35,13 +35,13 @@ namespace Switch {
         
         /// @brief Create a new instance of class HttpListenerException
         /// @param message Message string associate to the error.
-        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
+        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
         HttpListenerException(const System::String& message, const CurrentInformation& information) : SystemException(message, information) {}
         
         /// @brief Create a new instance of class HttpListenerException
         /// @param message Message string associate to the error.
         /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
-        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
+        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
         HttpListenerException(const System::String& message, const System::Exception& innerException, const CurrentInformation& information) : SystemException(message, innerException, information) {}
         
       private:

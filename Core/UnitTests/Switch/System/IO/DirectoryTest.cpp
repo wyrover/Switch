@@ -47,7 +47,7 @@ namespace SwitchUnitTests {
     string workingDirectory = System::IO::Path::Combine(System::IO::Directory::GetCurrentDirectory(), "UnitTest");
   };
   
-  sw_test(DirectoryTest, CreateDirectory)
-  sw_test(DirectoryTest, CreateAndDeleteAnEmptyDirectory)
-  sw_test(DirectoryTest, CreateAndDeleteANonEmptyDirectory)
+  _test(DirectoryTest, CreateDirectory)
+  _test(DirectoryTest, CreateAndDeleteAnEmptyDirectory)
+  _test(DirectoryTest, CreateAndDeleteANonEmptyDirectory)
 }

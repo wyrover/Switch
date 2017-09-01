@@ -16,13 +16,13 @@ public:
   }
   
   Property<string> RoleName {
-    sw_get->const string& {return this->roleName;},
-    sw_set {this->roleName = value;}
+    _get->const string& {return this->roleName;},
+    _set {this->roleName = value;}
   };
   
   Property<byte> Flags {
-    sw_get {return this->flags;},
-    sw_set {this->flags = value;}
+    _get {return this->flags;},
+    _set {this->flags = value;}
   };
   
   virtual void GetObjectData(System::Runtime::Serialization::SerializationInfo& info) const {
@@ -33,7 +33,7 @@ public:
 
   static refptr<Role> Deserialize(const System::Runtime::Serialization::SerializationInfo& info) {    
     if (!info.GetObjectType().Equals("Role"))
-      throw System::Runtime::Serialization::SerializationException(sw_current_information);
+      throw System::Runtime::Serialization::SerializationException(_current_information);
 
     refptr<Role> role = new Role();
     role->RoleName = info.GetString("RoleName");
@@ -60,7 +60,7 @@ public:
 
   static refptr<Person> Deserialize(const System::Runtime::Serialization::SerializationInfo& info) {
     if (!info.GetObjectType().Equals("Person"))
-      throw System::Runtime::Serialization::SerializationException(sw_current_information);
+      throw System::Runtime::Serialization::SerializationException(_current_information);
 
     refptr<Person> person = new Person();
 

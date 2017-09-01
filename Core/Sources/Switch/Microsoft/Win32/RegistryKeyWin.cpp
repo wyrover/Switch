@@ -11,7 +11,7 @@ using namespace Microsoft::Win32;
 
 RegistryKey::RegistryHandle::RegistryHandle(intptr key, const string& name) {
   if (__OS::CoreApi::Registry::CreateSubKey(key, name, this->handle) != 0)
-    throw IO::IOException(sw_current_information);
+    throw IO::IOException(_current_information);
 }
 
 RegistryKey::RegistryHandle::RegistryHandle(RegistryHive rhive) {
@@ -23,7 +23,7 @@ RegistryKey::RegistryHandle::~RegistryHandle() {
 }
 
 RegistryKey::RegistryKey(RegistryHive rhive) : name(ToName(rhive)), permission(RegistryKeyPermissionCheck::ReadWriteSubTree) {
-  handle = sw_new<RegistryHandle>(rhive);
+  handle = ref_new<RegistryHandle>(rhive);
   this->Load();
 }
 
@@ -48,7 +48,7 @@ RegistryKey RegistryKey::CreateSubKey(const string& subKey, RegistryKeyPermissio
     return key;
 
   if (this->permission != RegistryKeyPermissionCheck::ReadWriteSubTree)
-    throw UnauthorizedAccessException(sw_current_information);
+    throw UnauthorizedAccessException(_current_information);
 
   key.handle = new RegistryHandle(this->handle->Handle(), subKey);
   key.path = string::Format("{0}\\{1}", this->name, subKey);
@@ -60,33 +60,33 @@ RegistryKey RegistryKey::CreateSubKey(const string& subKey, RegistryKeyPermissio
 
 void  RegistryKey::DeleteSubKey(const string& subKey, bool throwOnMissingSubKey) {
   if (subKey == "")
-    throw InvalidOperationException(sw_current_information);
+    throw InvalidOperationException(_current_information);
 
   if (IsBaseKey(subKey))
-    throw ArgumentException(sw_current_information);
+    throw ArgumentException(_current_information);
 
   //if (__OS::CoreApi::Registry::NumberOfSubKey)
 
   int32 result = __OS::CoreApi::Registry::DeleteSubKey(this->handle->Handle(), subKey);
 
   if (result == 2 && throwOnMissingSubKey)
-    throw ArgumentException(sw_current_information);
+    throw ArgumentException(_current_information);
 
   if (result != 0 && result != 2)
-    throw IO::IOException(sw_current_information);
+    throw IO::IOException(_current_information);
 }
 
 void  RegistryKey::DeleteSubKeyTree(const string& subKey, bool throwOnMissingSubKey) {
   if (subKey == "" || IsBaseKey(subKey))
-    throw ArgumentException(sw_current_information);
+    throw ArgumentException(_current_information);
 
   int32 result = __OS::CoreApi::Registry::DeleteTree(this->handle->Handle(), subKey);
 
   if (result == 2 && throwOnMissingSubKey)
-    throw ArgumentException(sw_current_information);
+    throw ArgumentException(_current_information);
 
   if (result != 0 && result != 2)
-    throw IO::IOException(sw_current_information);
+    throw IO::IOException(_current_information);
 }
 
 namespace {
@@ -201,7 +201,7 @@ RegistryKey RegistryKey::OpenSubKey(const string& subKeyName, RegistryKeyPermiss
   intptr handle = 0;
 
   if (this->handle == null)
-    throw ArgumentNullException(sw_current_information);
+    throw ArgumentNullException(_current_information);
 
   if (__OS::CoreApi::Registry::OpenSubKey(this->handle->Handle(), subKeyName.Data(), handle) != 0)
     return RegistryKey::Null();

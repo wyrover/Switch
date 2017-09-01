@@ -11,7 +11,7 @@ Property<int32, ReadOnly> StackFrame::METHODS_TO_SKIP {
 
 void StackFrame::FillFrame(int32 skipFrames, bool needFileInfo) {
   if (skipFrames < 0)
-    throw ArgumentOutOfRangeException(sw_current_information);
+    throw ArgumentOutOfRangeException(_current_information);
   
   stacktrace::call_stack st;
   FillFrame(&st, skipFrames, needFileInfo);
@@ -19,7 +19,7 @@ void StackFrame::FillFrame(int32 skipFrames, bool needFileInfo) {
 
 void StackFrame::FillFrame(void* callStack, int32 skipFrames, bool needFileInfo) {
   if (skipFrames < 0)
-    throw ArgumentOutOfRangeException(sw_current_information);
+    throw ArgumentOutOfRangeException(_current_information);
   
   if (skipFrames < GetFrameCount(callStack)) {
     if (needFileInfo) {

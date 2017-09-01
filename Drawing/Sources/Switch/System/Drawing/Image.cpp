@@ -47,7 +47,7 @@ refptr<Image> Image::FromFile(const string& fileName) {
 }
 
 refptr<Image> Image::FromData(const char* data[]) {
-  refptr<Image> image = sw_new<Image>();
+  refptr<Image> image = ref_new<Image>();
   
   Array<string> infos = string(data[0]).Split(' ');
   int32 columns = Int32::Parse(infos[0]);
@@ -105,6 +105,6 @@ void Image::ReadStream(refptr<System::IO::Stream> stream) {
     case 0x5089: Png(stream).Read(*this); break;
     case 0x4949: Tif(stream).Read(*this); break;
     case 0x4D4D: Tif(stream).Read(*this); break;
-    default: throw OutOfMemoryException(sw_current_information); break;
+    default: throw OutOfMemoryException(_current_information); break;
   }
 }

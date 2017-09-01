@@ -14,14 +14,14 @@ TcpListener::TcpListener(const IPEndPoint& ipEndPoint) {
 
 Socket TcpListener::AcceptSocket() {
 	if (!this->data->active)
-		throw InvalidOperationException(sw_current_information);
+		throw InvalidOperationException(_current_information);
 
 	return this->data->serverSocket.Accept();
 }
 
 TcpClient TcpListener::AcceptTcpClient() {
 	if (!this->data->active)
-		throw InvalidOperationException(sw_current_information);
+		throw InvalidOperationException(_current_information);
 
 	Socket pacceptedSocket = this->data->serverSocket.Accept();
 	return TcpClient(pacceptedSocket);
@@ -55,7 +55,7 @@ void TcpListener::Stop() {
 
 bool TcpListener::Pending() {
 	if (!this->data->active)
-		throw InvalidOperationException(sw_current_information); // net stopped 
+		throw InvalidOperationException(_current_information); // net stopped 
 
 	return this->data->serverSocket.Poll(0, SelectMode::SelectRead);
 }

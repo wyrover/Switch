@@ -10,7 +10,7 @@ namespace Switch {
       class IComponenent;
       /// @interface IContainer
       /// @brief Provides functionality for containers. Containers are objects that logically contain zero or more components.
-      class sw_public IContainer sw_interface {
+      class _public IContainer _interface {
       public:
       };
     }

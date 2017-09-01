@@ -17,7 +17,7 @@ namespace Switch {
     /// @brief The System::Text namespace contains classes that represent ASCII and Unicode character encodings; abstract base classes for converting blocks of characters to and from blocks of bytes; and a helper class that manipulates and formats String objects without creating intermediate instances of String.
     namespace Text {
     /// @brief Represents a character encoding
-      class sw_public Encoding sw_abstract {
+      class _public Encoding _abstract {
       public:
         static char Unknown() { return '?'; }
 
@@ -294,7 +294,7 @@ namespace Switch {
         //_____________________________________________________________________
         //                                                              Encoder
 
-        class Encoder sw_abstract {
+        class Encoder _abstract {
         public:
           Encoder() { }
           Encoder(const Encoder&) { }
@@ -316,7 +316,7 @@ namespace Switch {
         //_____________________________________________________________________
         //                                                              Decoder
 
-        class Decoder sw_abstract {
+        class Decoder _abstract {
         public:
           Decoder();
           Decoder(const Decoder& cpb);

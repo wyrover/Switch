@@ -92,7 +92,7 @@ namespace Switch {
           /// @include List3.cpp
           List(int32 capacity) : operationNumber(0) {
             if (capacity < 0)
-              throw System::ArgumentOutOfRangeException(sw_current_information);
+              throw System::ArgumentOutOfRangeException(_current_information);
 
             this->list.reserve(capacity);
           }
@@ -119,10 +119,10 @@ namespace Switch {
           /// @return The number of elements that the List<T> can contain.
           /// @exception System::ArgumentOutOfRangeException System::Collections::Generic::List<T>.Capacity is set to a value that is less than System::Collections::Generic::List<T>.Count.
           Property<int32> Capacity {
-            sw_get {return static_cast<int32>(this->list.capacity());},
-            sw_set {
+            _get {return static_cast<int32>(this->list.capacity());},
+            _set {
               if (value < this->Count)
-                throw ArgumentOutOfRangeException(sw_current_information);
+                throw ArgumentOutOfRangeException(_current_information);
               return this->list.reserve(value);
             }
           };
@@ -130,7 +130,7 @@ namespace Switch {
           /// @brief Get access to raw data of the Array.
           /// @return A pointer to raw data of the array.
           Property<const T*, ReadOnly> Data {
-            sw_get->const T* {return this->list.data();}
+            _get->const T* {return this->list.data();}
           };
           
           /// @brief Adds an object to the end of the List<T>.
@@ -242,9 +242,9 @@ namespace Switch {
           /// @remarks This method is an O(log n) operation, where n is the number of elements in the range.
           int32 BinarySearch(int32 index, int32 count, const T& item, const IComparer<T>& comparer) const {
             if (index < 0 || count < 0)
-              throw ArgumentOutOfRangeException(sw_current_information);
+              throw ArgumentOutOfRangeException(_current_information);
             if (index + count > this->Count)
-              throw ArgumentException(sw_current_information);
+              throw ArgumentException(_current_information);
             typename std::vector<T, TAllocator>::iterator first = const_cast<List*>(this)->list.begin();
             typename std::vector<T, TAllocator>::iterator last = const_cast<List*>(this)->list.begin();
             std::advance(first, index);
@@ -325,10 +325,10 @@ namespace Switch {
           /// @include ListCopyTo.cpp
           void CopyTo(int32 index, Array<T>& array, int32 arrayIndex, int32 count) const {
             if (index < 0 || array.Length < 0 || arrayIndex < 0 || count < 0)
-              throw ArgumentOutOfRangeException(sw_current_information);
+              throw ArgumentOutOfRangeException(_current_information);
 
             if (index + count > this->Count || arrayIndex + count > array.Length)
-              throw ArgumentException(sw_current_information);
+              throw ArgumentException(_current_information);
 
             int32 i = 0, c = 0;
             for (const T& item : *this) {
@@ -482,9 +482,9 @@ namespace Switch {
           /// @include ListFind.cpp
           int32 FindIndex(int32 startIndex, int32 count, const Predicate<const T&>& match) const {
             if (startIndex < 0 || count < 0)
-              throw ArgumentOutOfRangeException(sw_current_information);
+              throw ArgumentOutOfRangeException(_current_information);
             if (startIndex + count > this->Count)
-              throw ArgumentException(sw_current_information);
+              throw ArgumentException(_current_information);
 
             for (int32 i = 0; i < count; i += 1)
               if (match(this->list[i+startIndex]))
@@ -589,11 +589,11 @@ namespace Switch {
           /// @include ListFind.cpp
           int32 FindLastIndex(int32 startIndex, int32 count, const Predicate<const T&>& match) const {
             if (startIndex < 0 || count < 0)
-              throw ArgumentOutOfRangeException(sw_current_information);
+              throw ArgumentOutOfRangeException(_current_information);
             if (startIndex >= this->Count)
-              throw ArgumentOutOfRangeException(sw_current_information);
+              throw ArgumentOutOfRangeException(_current_information);
             if (startIndex - count < -1)
-              throw ArgumentException(sw_current_information);
+              throw ArgumentException(_current_information);
 
             for ( int32 i = startIndex ; i >= startIndex - (count-1) ; i -= 1)
               if (match(this->list[i]) == true)
@@ -622,7 +622,7 @@ namespace Switch {
               void Reset() override {this->beforeFirst = true; this->operationNumber = this->list.operationNumber; this->iterator = this->list.list.begin();}
               
               bool MoveNext() override {
-                if (this->operationNumber != this->list.operationNumber) throw System::InvalidOperationException(sw_current_information);
+                if (this->operationNumber != this->list.operationNumber) throw System::InvalidOperationException(_current_information);
                 if (this->iterator == this->list.list.end()) return false;
                 if (this->beforeFirst) {
                   this->beforeFirst = false;
@@ -633,7 +633,7 @@ namespace Switch {
               
             protected:
               const T& GetCurrent() const override {
-                if (this->beforeFirst || this->iterator == this->list.list.end()) throw System::InvalidOperationException(sw_current_information);
+                if (this->beforeFirst || this->iterator == this->list.list.end()) throw System::InvalidOperationException(_current_information);
                 return *this->iterator;
               }
               
@@ -661,10 +661,10 @@ namespace Switch {
           /// @include List2.cpp
           List GetRange(int32 index, int32 count) {
             if (index < 0 || count < 0)
-              throw ArgumentOutOfRangeException(sw_current_information);
+              throw ArgumentOutOfRangeException(_current_information);
 
             if (index + count > this->Count)
-              throw ArgumentException(sw_current_information);
+              throw ArgumentException(_current_information);
 
             List list;
             for (int32 i = index ; i < index + count ; i += 1)
@@ -698,10 +698,10 @@ namespace Switch {
           /// @exception ArgumentOutOfRangeException The parameters index is less than 0 || The parameters count is less than 0 || index && count do ! specify a valid section in the List<T>.
           virtual int32 IndexOf(const T& value, int32 index, int32 count) const {
             if (index < 0 || count < 0 ||index >= this->Count)
-              throw ArgumentOutOfRangeException(sw_current_information);
+              throw ArgumentOutOfRangeException(_current_information);
 
             if (index + count > this->Count)
-              throw ArgumentOutOfRangeException(sw_current_information);
+              throw ArgumentOutOfRangeException(_current_information);
 
             for (int32 i = index; i < index + count; i++)
               if (this->list[i] == value)
@@ -717,7 +717,7 @@ namespace Switch {
           /// @remarks List<T> allows duplicate elements.
           virtual void Insert(int32 index, const T& value) override {
             if (index < 0)
-              throw ArgumentOutOfRangeException(sw_current_information);
+              throw ArgumentOutOfRangeException(_current_information);
 
             this->operationNumber++;
             this->list.insert(this->list.begin() + index, value);
@@ -732,7 +732,7 @@ namespace Switch {
           /// @remarks The order of the elements in the collection is preserved in the List<T>.
           void InsertRange(int32 index, const IEnumerable<T>& enumerable) {
             if (index < 0)
-              throw ArgumentOutOfRangeException(sw_current_information);
+              throw ArgumentOutOfRangeException(_current_information);
 
             this->operationNumber++;
 
@@ -767,10 +767,10 @@ namespace Switch {
           /// @exception ArgumentOutOfRangeException The parameters index is less than 0 || The parameters count is less than 0 || index && count do ! specify a valid section in the List<T>.
           int32 LastIndexOf(const T& value, int32 index, int32 count) const {
             if (index < 0 || count < 0 || index >= this->Count)
-              throw ArgumentOutOfRangeException(sw_current_information);
+              throw ArgumentOutOfRangeException(_current_information);
 
             if (index - count < -1)
-              throw System::ArgumentException(sw_current_information);
+              throw System::ArgumentException(_current_information);
 
             for (int32 i = index; i >= index - (count-1); i -= 1)
               if (value == this->list[i])
@@ -830,7 +830,7 @@ namespace Switch {
           /// @exception ArgumentOutOfRangeException index is less than 0 || index is greater than Count.
           virtual void RemoveAt(int32 index) override {
             if (index < 0 || index >= this->Count)
-              throw ArgumentOutOfRangeException(sw_current_information);
+              throw ArgumentOutOfRangeException(_current_information);
 
             this->operationNumber++;
             if (index == static_cast<int32>(this->list.size()-1))
@@ -847,7 +847,7 @@ namespace Switch {
           /// @remarks The items are removed && all the elements following them in the List<T> have their indexes reduced by count.
           virtual void RemoveRange(int32 index, int32 count) {
             if (index < 0 || index + count > this->Count)
-              throw ArgumentOutOfRangeException(sw_current_information);
+              throw ArgumentOutOfRangeException(_current_information);
 
             this->operationNumber++;
             typename std::vector<T, TAllocator>::iterator begin = this->list.begin() + index;
@@ -878,10 +878,10 @@ namespace Switch {
           /// @include ListReverse.cpp
           void Reverse(int32 index, int32 count) {
             if (index < 0 || count < 0)
-              throw ArgumentOutOfRangeException(sw_current_information);
+              throw ArgumentOutOfRangeException(_current_information);
 
             if (index + count > this->Count)
-              throw ArgumentException(sw_current_information);
+              throw ArgumentException(_current_information);
 
             this->operationNumber++;
             int pos1 = index, pos2 = (index + count)-1;
@@ -960,7 +960,7 @@ namespace Switch {
           /// @remarks ArgumentOutOfRangeException index is less than 0 || index is equal to || greater than Count.
           const T& operator[](int32 index) const override {
             if (index < 0 || index > this->Count)
-              throw ArgumentOutOfRangeException(sw_current_information);
+              throw ArgumentOutOfRangeException(_current_information);
 
             return this->list[index];
           }
@@ -971,7 +971,7 @@ namespace Switch {
           /// @exception ArgumentOutOfRangeException index is less than 0 || index is equal to || greater than Count.
           T& operator[](int32 index) override {
             if (index < 0 || index > this->Count)
-              throw ArgumentOutOfRangeException(sw_current_information);
+              throw ArgumentOutOfRangeException(_current_information);
 
             return this->list[index];
           }

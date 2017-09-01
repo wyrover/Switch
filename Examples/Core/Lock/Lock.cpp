@@ -11,10 +11,10 @@ namespace Examples {
     int Withdraw(int amount) {
       // This condition never is true unless the lock statement is commented out.
       if (this->balance < 0)
-        throw Exception("Negative Balance", sw_current_information);
+        throw Exception("Negative Balance", _current_information);
       
       // Comment out the next line to see the effect of leaving out the lock keyword.
-      sw_lock (this->lock)
+      _lock (this->lock)
       {
         if (this->balance >= amount) {
           Console::WriteLine("Balance before Withdrawal :  {0}", this->balance);
@@ -51,4 +51,4 @@ namespace Examples {
   };
 }
 
-sw_startup (Examples::Program)
+_startup (Examples::Program)

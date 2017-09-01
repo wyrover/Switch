@@ -16,7 +16,7 @@ namespace Switch {
         /// @interface IComparer
         /// @brief Exposes a method that compares two objects.
         template<typename T>
-        class IComparer sw_interface {
+        class IComparer _interface {
         public:
           /// @brief Compares two entities and returns a value indicating whether one is less than, equal to, or greater than the other.
           /// @param x The first entity to compare.

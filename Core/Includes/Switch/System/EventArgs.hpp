@@ -11,7 +11,7 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief EventArgs is the base class for classes containing event data.
-    class sw_public EventArgs : public Object {
+    class _public EventArgs : public Object {
     public:
       /// @brief Represents an event with no event data.
       static Property<EventArgs, ReadOnly> Empty;

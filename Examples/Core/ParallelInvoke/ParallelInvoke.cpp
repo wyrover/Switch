@@ -12,12 +12,12 @@ namespace Examples {
       try {
         Parallel::Invoke(
                          BasicAction,  // Param #0 - static method
-                         sw_delegate {     // Param #1 - lambda expression
-                           sw_lock(lck)
+                         _delegate {     // Param #1 - lambda expression
+                           _lock(lck)
                              Console::WriteLine("Method=beta, Thread={0}", Thread::CurrentThread().ManagedThreadId);
                          },
-                         delegate<void> {sw_delegate {    // Param #2 - in-line delegate
-                           sw_lock(lck)
+                         delegate<void> {_delegate {    // Param #2 - in-line delegate
+                           _lock(lck)
                              Console::WriteLine("Method=gamma, Thread={0}", Thread::CurrentThread().ManagedThreadId);
                            }}
                          );
@@ -30,7 +30,7 @@ namespace Examples {
     }
     
     static void BasicAction() {
-      sw_lock(lck)
+      _lock(lck)
         Console::WriteLine("Method=alpha, Thread={0}", Thread::CurrentThread().ManagedThreadId);
     }
     
@@ -40,7 +40,7 @@ namespace Examples {
   object Program::lck;
 }
 
-sw_startup (Examples::Program)
+_startup (Examples::Program)
 
 // This code produces the following output:
 //

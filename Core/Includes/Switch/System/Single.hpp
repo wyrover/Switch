@@ -16,7 +16,7 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief Represents a single-precision floating-point number.
-    struct sw_public Single final : public ValueType, public IComparable, public IConvertible, public IFormattable {
+    struct _public Single final : public ValueType, public IComparable, public IConvertible, public IFormattable {
     public:
       /// @brief Represents the smallest positive Single value greater than zero. This field is constant.
       static Property<float, ReadOnly> Epsilon;

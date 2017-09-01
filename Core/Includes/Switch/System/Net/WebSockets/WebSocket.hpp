@@ -18,7 +18,7 @@ namespace Switch {
       /// @brief The System::Net::WebSockets namespace provides a managed implementation of the WebSocket interface for developers.
       namespace WebSockets {
         /// @brief The WebSocket class allows applications to send and receive data after the WebSocket upgrade has completed.
-        class sw_public WebSocket sw_abstract {
+        class _public WebSocket _abstract {
         protected:
           /// @brief Creates an instance of the WebSocket class.
           WebSocket() {}
@@ -27,12 +27,12 @@ namespace Switch {
           /// @brief Indicates the reason why the remote endpoint initiated the close handshake.
           /// @property value Returns WebSocketCloseStatus.
           Property<WebSocketCloseStatus, ReadOnly> CloseStatus {
-            sw_get {return this->GetCloseStatus();}
+            _get {return this->GetCloseStatus();}
           };
           
           /// @brief Allows the remote endpoint to describe the reason why the connection was closed.
           Property<string, ReadOnly> CloseStatusDescription {
-            sw_get {return this->GetCloseStatusDescription();}
+            _get {return this->GetCloseStatusDescription();}
           };
           
           /// @brief Gets the default WebSocket protocol keep-alive interval in milliseconds.
@@ -41,12 +41,12 @@ namespace Switch {
           
           /// @brief Allows the remote endpoint to describe the reason why the connection was closed.
           Property<WebSocketState, ReadOnly> State {
-            sw_get {return this->GetState();}
+            _get {return this->GetState();}
           };
           
           /// @brief The subprotocol that was negotiated during the opening handshake.
           Property<string, ReadOnly> SubProtocol {
-            sw_get {return this->GetSubProtocol();}
+            _get {return this->GetSubProtocol();}
           };
           
           /// @brief Aborts the WebSocket connection and cancels any pending IO operations.

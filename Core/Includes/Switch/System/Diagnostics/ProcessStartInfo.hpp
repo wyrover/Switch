@@ -18,7 +18,7 @@ namespace Switch {
     /// @brief The System::Diagnostics namespace provides classes that allow you to interact with system processes, event logs, and performance counters.
     namespace Diagnostics {
       /// @brief Specifies a set of values that are used when you start a process.
-      class sw_public ProcessStartInfo final : public Object {
+      class _public ProcessStartInfo final : public Object {
       public:
         /// @brief Initializes a new instance of the ProcessStartInfo class without specifying a file name with which to start the process.
         /// @remarks You must set at least the SetFileName() property before you start the process. The file name is any application or document. In this case, a document is defined to be any file type that has an open or default action associated with it. You can view registered file types and their associated applications for your computer by using the Folder Options dialog box, which is available through the operating system. The Advanced button leads to a dialog box that shows whether there is an open action associated with a specific registered file type.
@@ -48,8 +48,8 @@ namespace Switch {
         /// @brief Sets or Gets the set of command-line arguments to use when starting the application.
         /// @return string File type–specific arguments that the system can associate with the application specified in the FileName property. The default is an empty string (""). On Windows Vista and earlier versions of the Windows operating system, the length of the arguments added to the length of the full path to the process must be less than 2080. On Windows 7 and later versions, the length must be less than 32699.
         Property<string> Arguments {
-          sw_get {return this->data->arguments;},
-          sw_set {this->data->arguments = value;}
+          _get {return this->data->arguments;},
+          _set {this->data->arguments = value;}
         };
 
         /// @brief Gets a value indicating whether to start the process in a new window.
@@ -57,38 +57,38 @@ namespace Switch {
         /// @return Boolean true if the process should be started without creating a new window to contain it; otherwise, false. The default is false.
         /// @remarks If the UseShellExecute property is true or the UserName and Password properties are not null, the CreateNoWindow property value is ignored and a new window is created.
         Property<bool> CreateNoWindow {
-          sw_get {return this->data->createNoWindow;},
-          sw_set {this->data->createNoWindow = value;}
+          _get {return this->data->createNoWindow;},
+          _set {this->data->createNoWindow = value;}
         };
 
         /// @brief Gets a value that identifies the domain to use when starting the process.
         /// @return string The Active Directory domain to use when starting the process. The domain property is primarily of interest to users within enterprise environments that use Active Directory.
         Property<string> Domain {
-          sw_get {return this->data->domain;},
-          sw_set {this->data->domain = value;}
+          _get {return this->data->domain;},
+          _set {this->data->domain = value;}
         };
 
         /// @brief Gets search paths for files, directories for temporary files, application-specific options, and other similar information.
         /// @return Dictionary<string, string> A string dictionary that provides environment variables that apply to this process and child processes. The default is empty.
         /// @remarks Although you cannot set the EnvironmentVariables property, you can modify the StringDictionary returned by the property. For example, the following code adds a TempPath environment variable: myProcess.StartInfo.EnvironmentVariables.Add("TempPath", "C:\\Temp"). You must set the UseShellExecute property to false to start the process after changing the EnvironmentVariables property. If UseShellExecute is true, an InvalidOperationException is thrown when the Start method is called.
         Property<Collections::Generic::Dictionary<string, string>&, ReadOnly> EnvironmentVariables {
-          sw_get->Collections::Generic::Dictionary<string, string>& {return this->data->environmentVariables;}
+          _get->Collections::Generic::Dictionary<string, string>& {return this->data->environmentVariables;}
         };
 
         /// @brief Gets or sets a value indicating whether an error dialog box is displayed to the user if the process cannot be started.
         /// @return bool true if an error dialog box should be displayed on the screen if the process cannot be started; otherwise, false. The default is false.
         /// @note UseShellExecute must be true if you want to set ErrorDialog to true.
         Property<bool> ErrorDialog {
-          sw_get {return this->data->errorDialog;},
-          sw_set {this->data->errorDialog = value;}
+          _get {return this->data->errorDialog;},
+          _set {this->data->errorDialog = value;}
         };
         
         /// @brief Gets or sets the window handle to use when an error dialog box is shown for a process that cannot be started.
         /// @return intptr A pointer to the handle of the error dialog box that results from a process start failure.
         /// @remarks If ErrorDialog is true, the ErrorDialogParentHandle property specifies the parent window for the dialog box that is shown. It is useful to specify a parent to keep the dialog box in front of the application.
         Property<intptr> ErrorDialogParamHandle {
-          sw_get {return this->data->errorDialogParamHandle;},
-          sw_set {this->data->errorDialogParamHandle = value;}
+          _get {return this->data->errorDialogParamHandle;},
+          _set {this->data->errorDialogParamHandle = value;}
         };
         
         /// @brief Gets the application or document to start.
@@ -97,8 +97,8 @@ namespace Switch {
         /// @remarks The set of file types available to you depends in part on the value of the UseShellExecute property. If UseShellExecute is true, you can start any document and perform operations on the file, such as printing, with the Process component. When UseShellExecute is false, you can start only executables with the Process component.
         /// @remarks You can start a ClickOnce application by setting the FileName property to the location (for example, a Web address) from which you originally installed the application. Do not start a ClickOnce application by specifying its installed location on your hard disk.
         Property<string> FileName {
-          sw_get {return this->data->fileName;},
-          sw_set {this->data->fileName = value;}
+          _get {return this->data->fileName;},
+          _set {this->data->fileName = value;}
         };
         
         /// @brief Gets or sets a value that indicates whether the Windows user profile is to be loaded from the registry.
@@ -106,8 +106,8 @@ namespace Switch {
         /// @remarks This property is referenced if the process is being started by using the user name, password, and domain.
         /// @remarks If the value is true, the user's profile in the HKEY_USERS registry key is loaded. Loading the profile can be time-consuming. Therefore, it is best to use this value only if you must access the information in the HKEY_CURRENT_USER registry key.
         Property<bool> LoadUserProfile {
-          sw_get {return this->data->loadUserProfile;},
-          sw_set {this->data->loadUserProfile = value;}
+          _get {return this->data->loadUserProfile;},
+          _set {this->data->loadUserProfile = value;}
         };
         
         /// @brief Gets or sets a secure string that contains the user password to use when starting the process.
@@ -119,15 +119,15 @@ namespace Switch {
         /// @remarks For more information about secure strings and an example of how to obtain a password to set this property, see the SecureString class.
         /// @note If you provide a value for the Password property, the UseShellExecute property must be false, or an InvalidOperationException will be thrown when the Process.Start(ProcessStartInfo) method is called.
         Property<System::Security::SecureString> Pasword {
-          sw_get {return this->data->password;},
-          sw_set {this->data->password = value;}
+          _get {return this->data->password;},
+          _set {this->data->password = value;}
         };
         
         /// @brief Gets or sets the user password in clear text to use when starting the process.
         /// @return string The user password in clear text.
         Property<string> PasswordInClearText {
-          sw_get {return this->GetPasswordInClearText();},
-          sw_set {this->SetPasswordInClearText(value);}
+          _get {return this->GetPasswordInClearText();},
+          _set {this->SetPasswordInClearText(value);}
         };
         
         /// @brief Gets or sets a value that indicates whether the error output of an application is written to the Process.StandardError stream.
@@ -170,8 +170,8 @@ namespace Switch {
         /// @remarks The code example avoids the deadlock condition by performing asynchronous read operations on the StandardOutput stream. A deadlock condition results if the parent process calls p.StandardOutput.ReadToEnd followed by p.StandardError.ReadToEnd and the child process writes enough text to fill its error stream. The parent process would wait indefinitely for the child process to close its StandardOutput stream. The child process would wait indefinitely for the parent to read from the full StandardError stream.
         /// @remarks You can use asynchronous read operations to avoid these dependencies and their deadlock potential. Alternately, you can avoid the deadlock condition by creating two threads and reading the output of each stream on a separate thread.
         Property<bool> RedirectStandardError {
-          sw_get {return this->data->redirectStandardError;},
-          sw_set {this->data->redirectStandardError = value;}
+          _get {return this->data->redirectStandardError;},
+          _set {this->data->redirectStandardError = value;}
         };
         
         /// @biref Gets or sets a value indicating whether the input for an application is read from the Process.StandardInput stream.
@@ -179,8 +179,8 @@ namespace Switch {
         /// @remarks A Process can read input text from its standard input stream, typically the keyboard. By redirecting the StandardInput stream, you can programmatically specify the input of a process. For example, instead of using keyboard input, you can provide text from the contents of a designated file or output from another application.
         /// @note You must set UseShellExecute to false if you want to set RedirectStandardInput to true. Otherwise, writing to the StandardInput stream throws an exception.
         Property<bool> RedirectStandardInput {
-          sw_get {return this->data->redirectStandardInput;},
-          sw_set {this->data->redirectStandardInput = value;}
+          _get {return this->data->redirectStandardInput;},
+          _set {this->data->redirectStandardInput = value;}
         };
         
         /// @brief Gets or sets a value that indicates whether the textual output of an application is written to the Process.StandardOutput stream.
@@ -215,8 +215,8 @@ namespace Switch {
         /// @remarks The code example avoids the deadlock condition by performing asynchronous read operations on the StandardOutput stream. A deadlock condition results if the parent process calls p.StandardOutput.ReadToEnd followed by p.StandardError.ReadToEnd and the child process writes enough text to fill its error stream. The parent process would wait indefinitely for the child process to close its StandardOutput stream. The child process would wait indefinitely for the parent to read from the full StandardError stream.
         /// @remarks You can use asynchronous read operations to avoid these dependencies and their deadlock potential. Alternately, you can avoid the deadlock condition by creating two threads and reading the output of each stream on a separate thread.
         Property<bool> RedirectStandardOutput {
-          sw_get {return this->data->redirectStandardOutput;},
-          sw_set {this->data->redirectStandardOutput = value;}
+          _get {return this->data->redirectStandardOutput;},
+          _set {this->data->redirectStandardOutput = value;}
         };
         
         /// @brief Gets or sets the user name to be used when starting the process.
@@ -225,8 +225,8 @@ namespace Switch {
         /// The WorkingDirectory property must be set if UserName and Password are provided. If the property is not set, the default working directory is %SYSTEMROOT%\system32.
         /// @remarks If the UserName property is not an empty string, the UseShellExecute property must be false, or an InvalidOperationException will be thrown when the Process.Start(ProcessStartInfo) method is called.
         Property<string> UserName {
-          sw_get {return this->data->userName;},
-          sw_set {this->data->userName = value;}
+          _get {return this->data->userName;},
+          _set {this->data->userName = value;}
         };
         
         /// @brief Gets or sets a value indicating whether to use the operating system shell to start the process.
@@ -238,8 +238,8 @@ namespace Switch {
         /// @remarks The WorkingDirectory property behaves differently depending on the value of the UseShellExecute property. When UseShellExecute is true, the WorkingDirectory property specifies the location of the executable. If WorkingDirectory is an empty string, it is assumed that the current directory contains the executable.
         /// @remarks When UseShellExecute is false, the WorkingDirectory property is not used to find the executable. Instead, it is used only by the process that is started and has meaning only within the context of the new process. When UseShellExecute is false, the FileName property can be either a fully qualified path to the executable, or a simple executable name that the system will attempt to find within folders specified by the PATH environment variable.
         Property<bool> UseShellExecute {
-          sw_get {return this->data->useShellExecute;},
-          sw_set {this->data->useShellExecute = value;}
+          _get {return this->data->useShellExecute;},
+          _set {this->data->useShellExecute = value;}
         };
         
         /// @brief Gets or sets the verb to use when opening the application or document specified by the FileName property.
@@ -247,8 +247,8 @@ namespace Switch {
         /// @remarks Each file name extension has its own set of verbs, which can be obtained by using the Verbs property. For example, the "print" verb will print a document specified by using FileName. The default verb can be specified by using an empty string (""). Examples of verbs are "Edit", "Open", "OpenAsReadOnly", "Print", and "Printto". You should use only verbs that appear in the set of verbs returned by the Verbs property.
         /// @remarks When you use the Verb property, you must include the file name extension when you set the value of the FileName property. The file name does not need to have an extension if you manually enter a value for the Verb property.
         Property<string> Verb {
-          sw_get {return this->data->verb;},
-          sw_set {this->data->verb = value;}
+          _get {return this->data->verb;},
+          _set {this->data->verb = value;}
         };
         
         /// @brief Gets the set of verbs associated with the type of file specified by the FileName property.
@@ -256,17 +256,17 @@ namespace Switch {
         /// @remarks The Verbs property enables you to determine the verbs that can be used with the file specified by the FileName property. You can set the Verb property to the value of any verb in the set. Examples of verbs are "Edit", "Open", "OpenAsReadOnly", "Print", and "Printto".
         /// @remarks When you use the Verbs property, you must include the file name extension when you set the value of the FileName property. The file name extension determines the set of possible verbs.
         Property<Array<string>, ReadOnly> Verbs {
-          sw_get {return this->data->verbs;}
+          _get {return this->data->verbs;}
         };
         
         /// @brief Gets or sets the window state to use when the process is started.
         /// @return ProcessWindowStyle One of the enumeration values that indicates whether the process is started in a window that is maximized, minimized, normal (neither maximized nor minimized), or not visible. The default is Normal.
         /// @exception InvalidEnumArgumentException The window style is not one of the ProcessWindowStyle enumeration members.
         Property<ProcessWindowStyle> WindowStyle {
-          sw_get {return this->data->windowStyle;},
-          sw_set {
+          _get {return this->data->windowStyle;},
+          _set {
             if (!Enum<ProcessWindowStyle>::IsDefined(value))
-              throw System::ComponentModel::InvalidEnumArgumentException(sw_current_information);
+              throw System::ComponentModel::InvalidEnumArgumentException(_current_information);
             this->data->windowStyle = value;
           }
         };
@@ -280,8 +280,8 @@ namespace Switch {
         /// @note When UseShellExecute is true, the working directory of the application that starts the executable is also the working directory of the executable.
         /// @remarks When UseShellExecute is false, the WorkingDirectory property is not used to find the executable. Instead, its value applies to the process that is started and only has meaning within the context of the new process.
         Property<string> WorkingDirectory {
-          sw_get {return this->data->workingDirectory;},
-          sw_set {this->data->workingDirectory = value;}
+          _get {return this->data->workingDirectory;},
+          _set {this->data->workingDirectory = value;}
         };
 
       private:
@@ -308,7 +308,7 @@ namespace Switch {
           ProcessWindowStyle windowStyle = ProcessWindowStyle::Normal;
           string workingDirectory;
         };
-        refptr<ProcessStartInfoData> data = sw_new<ProcessStartInfoData>();
+        refptr<ProcessStartInfoData> data = ref_new<ProcessStartInfoData>();
       };
     }
   }

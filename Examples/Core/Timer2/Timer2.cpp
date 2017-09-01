@@ -57,7 +57,7 @@ namespace Examples {
   };
 }
 
-sw_startup (Examples::TimerExample)
+_startup (Examples::TimerExample)
 
 // This code produces the following output:
 //

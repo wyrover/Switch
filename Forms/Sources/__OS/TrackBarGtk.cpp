@@ -16,7 +16,7 @@ namespace __OS {
     TrackBar(Gtk::Orientation orientation) : Gtk::Scale(orientation) {this->RegisterEvent();}
     void RegisterEvent() override {
       __OS::Widget::RegisterEvent();
-      this->signal_value_changed().connect(sw_delegate {
+      this->signal_value_changed().connect(_delegate {
         ref<System::Windows::Forms::Control> control = System::Windows::Forms::Control::FromHandle((intptr)this);
         if (control == null) return;
         Message event = Message::Create((intptr)this, as<System::Windows::Forms::TrackBar>(control)().Orientation == Orientation::Vertical ? WM_VSCROLL : WM_HSCROLL, 0, (intptr)this, 0, 0);

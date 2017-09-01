@@ -9,7 +9,7 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The exception that is thrown when an object appears more than once in an array of synchronization objects.
-    class sw_public DuplicateWaitObjectException : public ArgumentException {
+    class _public DuplicateWaitObjectException : public ArgumentException {
     public:
       /// @brief Create a new instance of class DuplicateWaitObjectException
       /// @remarks Message is set with the default message associate to the error.
@@ -21,7 +21,7 @@ namespace Switch {
       DuplicateWaitObjectException(const DuplicateWaitObjectException& value) : ArgumentException(value) {}
       
       /// @brief Create a new instance of class DuplicateWaitObjectException
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
       /// @remarks Message is set with the default message associate to the error.
       DuplicateWaitObjectException(const CurrentInformation& information) : ArgumentException(information) {}
       
@@ -31,13 +31,13 @@ namespace Switch {
       
       /// @brief Create a new instance of class DuplicateWaitObjectException
       /// @param message Message string associate to the error.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
       DuplicateWaitObjectException(const System::String& message, const CurrentInformation& information) : ArgumentException(message, information) {}
       
       /// @brief Create a new instance of class DuplicateWaitObjectException
       /// @param message Message string associate to the error.
       /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
       DuplicateWaitObjectException(const System::String& message, const System::Exception& innerException, const CurrentInformation& information) : ArgumentException(message, innerException, information) {}
       
     private:

@@ -34,4 +34,4 @@ namespace FormExample {
   };
 }
 
-sw_startup (FormExample::Form1)
+_startup (FormExample::Form1)

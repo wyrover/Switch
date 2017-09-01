@@ -19,7 +19,7 @@ namespace Switch {
         /// @remarks The KeyDown event occurs when the user presses any key. The KeyUp event occurs when the user releases the key. Duplicate KeyDown events occur each time the key repeats, if the key is held down, but only one KeyUp event is generated when the user releases the key.
         /// @remarks The KeyPress event also occurs when a key is pressed. A KeyPressEventArgs is passed with each KeyPress event, and specifies the character that was composed as a result of each key press.
         /// @remarks For information about the event model, see Handling and Raising Events.
-        class sw_public KeyEventArgs : public EventArgs {
+        class _public KeyEventArgs : public EventArgs {
         public:
           /// @brief Initializes a new instance of the KeyEventArgs class.
           KeyEventArgs() {}
@@ -38,48 +38,48 @@ namespace Switch {
           /// @endcond
           
           Property<bool, ReadOnly> Alt {
-            sw_get {return Enum<Keys>(this->keyData).HasFlag(Keys::Alt);}
+            _get {return Enum<Keys>(this->keyData).HasFlag(Keys::Alt);}
           };
 
           Property<bool, ReadOnly> Command {
-            sw_get {return Enum<Keys>(this->keyData).HasFlag(Keys::Command);}
+            _get {return Enum<Keys>(this->keyData).HasFlag(Keys::Command);}
           };
 
           Property<bool, ReadOnly> Control {
-            sw_get {return Enum<Keys>(this->keyData).HasFlag(Keys::Control);}
+            _get {return Enum<Keys>(this->keyData).HasFlag(Keys::Control);}
           };
 
           Property<bool> Handled {
-            sw_get {return this->handled;},
-            sw_set {this->handled = value;}
+            _get {return this->handled;},
+            _set {this->handled = value;}
           };
 
           Property<Keys, ReadOnly> KeyCode {
-            sw_get {return Keys(this->keyData & Keys::KeyCode);}
+            _get {return Keys(this->keyData & Keys::KeyCode);}
           };
 
           /// @brief Gets the key data for a KeyDown or KeyUp event.
           /// @return A Keys representing the key code for the key that was pressed, combined with modifier flags that indicate which combination of CTRL, SHIFT, and ALT keys was pressed at the same time.
           /// @remarks You can use constants from Keys to extract information from the KeyData property. Use the bitwise AND operator to compare data returned by KeyData with constants in Keys to obtain information about which keys the user pressed. To determine whether a specific modifier key was pressed, use the Control, Shift, and Alt properties.
           Property<Keys, ReadOnly> KeyData {
-            sw_get {return this->keyData;}
+            _get {return this->keyData;}
           };
 
           Property<int32, ReadOnly> KeyValue {
-            sw_get {return (int32)(this->keyData)&0xFFFF;}
+            _get {return (int32)(this->keyData)&0xFFFF;}
           };
 
           Property<Keys, ReadOnly> Modifiers {
-            sw_get {return Keys(this->keyData & Keys::Modifiers);}
+            _get {return Keys(this->keyData & Keys::Modifiers);}
           };
 
           Property<bool, ReadOnly> Shift {
-            sw_get {return Enum<Keys>(this->keyData).HasFlag(Keys::Shift);}
+            _get {return Enum<Keys>(this->keyData).HasFlag(Keys::Shift);}
           };
 
           Property<bool> SuppressKeyPress {
-            sw_get {return this->suppressKeyPress;},
-            sw_set {this->suppressKeyPress = value;}
+            _get {return this->suppressKeyPress;},
+            _set {this->suppressKeyPress = value;}
           };
 
         private:

@@ -34,7 +34,7 @@ TEST_F(GTestTest, AreNotEqualString) {
 }
 
 TEST_F(GTestTest, ThrowException) {
-  throw ArgumentNullException(sw_current_information);
+  throw ArgumentNullException(_current_information);
 }
 
 TEST_F(GTestTest, IsTrueBoolean) {
@@ -43,11 +43,11 @@ TEST_F(GTestTest, IsTrueBoolean) {
 }
 
 TEST_F(GTestTest, ThrowArgumentNullException) {
-  ASSERT_THROW(throw ArgumentNullException(sw_current_information), ArgumentNullException);
+  ASSERT_THROW(throw ArgumentNullException(_current_information), ArgumentNullException);
 }
 
 TEST_F(GTestTest, ThrowIndexOutOfRangeException) {
-  ASSERT_THROW(throw ArgumentNullException(sw_current_information), IndexOutOfRangeException);
+  ASSERT_THROW(throw ArgumentNullException(_current_information), IndexOutOfRangeException);
 }
 
 namespace SwitchUnitTests {
@@ -79,7 +79,7 @@ namespace SwitchUnitTests {
     }
     
     void ThrowException() {
-      throw ArgumentNullException(sw_current_information);
+      throw ArgumentNullException(_current_information);
     }
     
     void IsTrueBoolean() {
@@ -87,21 +87,21 @@ namespace SwitchUnitTests {
     }
     
     void ThrowArgumentNullException() {
-      Assert::Throws<ArgumentNullException>(sw_delegate {throw ArgumentNullException(sw_current_information);}, sw_current_information);
+      Assert::Throws<ArgumentNullException>(_delegate {throw ArgumentNullException(_current_information);}, _current_information);
     }
     
     void ThrowIndexOutOfRangeException() {
-      Assert::Throws<IndexOutOfRangeException>(sw_delegate {throw ArgumentNullException(sw_current_information);}, sw_current_information);
+      Assert::Throws<IndexOutOfRangeException>(_delegate {throw ArgumentNullException(_current_information);}, _current_information);
     }
   };
   
-  sw_test(TUnitTest, AreEqualInt32);
-  sw_test(TUnitTest, AreNotEqualInt32);
-  sw_test(TUnitTest, AreEqualtring);
-  sw_test(TUnitTest, AreNotEqualString);
-  sw_test(TUnitTest, ThrowException);
-  sw_test(TUnitTest, IsTrueBoolean);
-  sw_test(TUnitTest, ThrowArgumentNullException);
-  sw_test(TUnitTest, ThrowIndexOutOfRangeException);
+  _test(TUnitTest, AreEqualInt32);
+  _test(TUnitTest, AreNotEqualInt32);
+  _test(TUnitTest, AreEqualtring);
+  _test(TUnitTest, AreNotEqualString);
+  _test(TUnitTest, ThrowException);
+  _test(TUnitTest, IsTrueBoolean);
+  _test(TUnitTest, ThrowArgumentNullException);
+  _test(TUnitTest, ThrowIndexOutOfRangeException);
 }
 */

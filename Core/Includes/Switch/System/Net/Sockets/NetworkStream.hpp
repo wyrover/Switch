@@ -23,7 +23,7 @@ namespace Switch {
         /// @remarks Use the Write and Read methods for simple single thread synchronous blocking I/O. If you want to process your I/O using separate threads, consider using the BeginWrite and EndWrite methods, or the BeginRead and EndRead methods for communication.
         /// @remarks The NetworkStream does not support random access to the network data stream. The value of the CanSeek property, which indicates whether the stream supports seeking, is always false; reading the Position property, reading the Length property, or calling the Seek method will throw a NotSupportedException.
         /// @remarks Read and write operations can be performed simultaneously on an instance of the NetworkStream class without the need for synchronization. As long as there is one unique thread for the write operations and one unique thread for the read operations, there will be no cross-interference between read and write threads and no synchronization is required.
-        class sw_public NetworkStream : public System::IO::Stream {
+        class _public NetworkStream : public System::IO::Stream {
         public:
           /// @brief Creates a new instance of the NetworkStream class for the specified Socket.
           /// @param socket The Socket that the NetworkStream will use to send and receive data.
@@ -71,14 +71,14 @@ namespace Switch {
           /// @brief Gets a value that indicates whether data is available on the NetworkStream to be read.
           /// @return true if data is available on the stream to be read; otherwise, false.
           Property<bool, ReadOnly> DataAvailable {
-            sw_get {return this->GetDataAvailable();}
+            _get {return this->GetDataAvailable();}
           };
           
           /// @brief Gets the underlying Socket.
           /// @return A Socket that represents the underlying network connection.
           /// @remarks Classes deriving from NetworkStream can use this property to get the underlying Socket. Use the underlying Socket returned from the Socket property if you require access beyond that which NetworkStream provides.
           Property<System::Net::Sockets::Socket, ReadOnly> Socket {
-            sw_get {return this->data->streamSocket;}
+            _get {return this->data->streamSocket;}
           };
 
           /// @brief Reads data from the NetworkStream.
@@ -92,7 +92,7 @@ namespace Switch {
 		      int32 Read(Array<byte>& buffer, int32 offset, int32 count) override;
           
           /// @brief Sets the current position of the stream to the given value. This method is not currently supported and always throws a NotSupportedException.
-          int64 Seek(int64, System::IO::SeekOrigin) override {throw NotSupportedException(sw_current_information);}
+          int64 Seek(int64, System::IO::SeekOrigin) override {throw NotSupportedException(_current_information);}
 
           /// @brief Writes data to the NetworkStream.
           /// @param buffer An array of bytes. This method copies count bytes from buffer to the current stream.
@@ -109,8 +109,8 @@ namespace Switch {
           /// @param readable  true to indicate that the NetworkStream can be read; otherwise, false. The default value is true.
           /// @return true to indicate that the NetworkStream can be read; otherwise, false. The default value is true.
           Property<bool> Readable {
-            sw_get {return this->GetReadable();},
-            sw_set {this->SetReadable(value);}
+            _get {return this->GetReadable();},
+            _set {this->SetReadable(value);}
           };
         
           /// @brief Gets a value that indicates whether the NetworkStream is writable.
@@ -118,7 +118,7 @@ namespace Switch {
           /// @remarks You must derive from the NetworkStream class to use the Writeable property. If Writeable is true, NetworkStream allows calls to the Write method. You can also determine whether a NetworkStream is writable by checking the publicly accessible CanWrite property.
           /// @remarks The Writeable property is set when the NetworkStream is initialized.
           Property<bool, ReadOnly> Writeable {
-            sw_get {return this->GetWriteable();}
+            _get {return this->GetWriteable();}
           };
 
           virtual bool GetDataAvailable() const {return (this->data->streamSocket.Available() != 0);}
@@ -131,9 +131,9 @@ namespace Switch {
           bool GetCanSeek() const override {return false;}
           bool GetCanTimeout() const override {return true;}
           bool GetCanWrite() const override {return this->data->writeable;}
-          int64 GetLength() const override {throw NotImplementedException(sw_current_information);}
-          int64 GetPosition() const override {throw NotImplementedException(sw_current_information);}
-          void SetPosition(int64 position) override {throw NotImplementedException(sw_current_information);}
+          int64 GetLength() const override {throw NotImplementedException(_current_information);}
+          int64 GetPosition() const override {throw NotImplementedException(_current_information);}
+          void SetPosition(int64 position) override {throw NotImplementedException(_current_information);}
           int32 GetReadTimeout() const override {return this->data->streamSocket.ReceiveTimeout();}
           void SetReadTimeout(int32 timeout) override {this->data->streamSocket.ReceiveTimeout(timeout);}
           int32 GetWriteTimeout() const override {return this->data->streamSocket.SendTimeout();}
@@ -147,7 +147,7 @@ namespace Switch {
             bool writeable = false;
 		        bool ownsSocket = false;
           };
-          refptr<NetworkStreamData> data = sw_new<NetworkStreamData>();
+          refptr<NetworkStreamData> data = ref_new<NetworkStreamData>();
         };
       }
     }

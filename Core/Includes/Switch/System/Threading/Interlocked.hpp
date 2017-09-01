@@ -26,7 +26,7 @@ namespace Switch {
       /// @par Examples
       /// The following code example shows a thread-safe resource locking mechanism.
       /// @include Interlocked.cpp
-      class sw_public Interlocked sw_static {
+      class _public Interlocked _static {
       public:
         /// @brief Adds two 32-bit integers and replaces the first integer with the sum, as an atomic operation.
         /// @param location A variable containing the first value to be added. The sum of the two values is stored in location.
@@ -194,7 +194,7 @@ namespace Switch {
         /// @brief Synchronizes memory access as follows: The processor that executes the current thread cannot reorder instructions in such a way that memory accesses before the call to MemoryBarrier execute after memory accesses that follow the call to MemoryBarrier.
         /// @remarks This method was added to the Interlocked class in the .NET Framework 4.5 as a convenience; it's a wrapper for the Thread.MemoryBarrier method.
         /// @remarks MemoryBarrier is required only on multiprocessor systems that have weak memory ordering (for example, a system that employs multiple Intel Itanium processors).
-        /// @remarks For most purposes, the sw_lock statement, or the Monitor class provide easier ways to synchronize data.
+        /// @remarks For most purposes, the _lock statement, or the Monitor class provide easier ways to synchronize data.
         static void MemoryBarrier();
 
         /// @brief Returns a 64-bit value, loaded as an atomic operation.

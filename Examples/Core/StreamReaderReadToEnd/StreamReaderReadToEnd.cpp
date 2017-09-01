@@ -15,14 +15,14 @@ namespace Examples {
           File::Delete(path);
         }
         
-        sw_using (StreamWriter sw(path)) {
+        _using (StreamWriter sw(path)) {
           sw.WriteLine("This");
           sw.WriteLine("is some text");
           sw.WriteLine("to test");
           sw.WriteLine("Reading");
         }
         
-        sw_using (StreamReader sr(path)) {
+        _using (StreamReader sr(path)) {
           //This allows you to do one Read operation.
           Console::WriteLine(sr.ReadToEnd());
         }
@@ -33,7 +33,7 @@ namespace Examples {
   };
 }
 
-sw_startup (Examples::Program)
+_startup (Examples::Program)
 
 // This code produces the following output:
 //

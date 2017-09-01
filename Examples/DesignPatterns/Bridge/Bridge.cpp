@@ -7,7 +7,7 @@ using namespace System;
 namespace DesignPatterns {
   namespace Structural {
     // The 'Implementor' abstract class
-    class Implementor sw_abstract {
+    class Implementor _abstract {
     public:
       virtual void Operation() const = 0;
     };
@@ -17,7 +17,7 @@ namespace DesignPatterns {
     public:
       // Property
       Property<refptr<DesignPatterns::Structural::Implementor>, WriteOnly> Implementor {
-        sw_set {this->implementor = value;}
+        _set {this->implementor = value;}
       };
       
       virtual void Operation() const {
@@ -58,14 +58,14 @@ namespace DesignPatterns {
     public:
       // Entry point into console application.
       static void Main() {
-        refptr<Abstraction> ab = sw_new<RefinedAbstraction>();
+        refptr<Abstraction> ab = ref_new<RefinedAbstraction>();
         
         // Set implementation and call
-        ab->Implementor = sw_new<ConcreteImplementorA>();
+        ab->Implementor = ref_new<ConcreteImplementorA>();
         ab->Operation();
         
         // Change implemention and call
-        ab->Implementor = sw_new<ConcreteImplementorB>();
+        ab->Implementor = ref_new<ConcreteImplementorB>();
         ab->Operation();
       }
     };
@@ -73,7 +73,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-sw_startup (DesignPatterns::Structural::MainApp)
+_startup (DesignPatterns::Structural::MainApp)
 
 // This code produces the following output:
 //

@@ -120,7 +120,7 @@ namespace Switch {
           /// @include DictionaryAdd.cpp
           void Add(const TKey& key, const TValue& value) override {
             if (ContainsKey(key))
-              throw ArgumentException(sw_current_information);
+              throw ArgumentException(_current_information);
             (*this)[key] = value;
           }
           
@@ -166,7 +166,7 @@ namespace Switch {
           /// @remarks The elements are copied to the Array in the same order in which the enumerator iterates through the List<T>.
           void CopyTo(System::Array<KeyValuePair<TKey,TValue>>& array, int32 index) const override {
             if (index < 0 || array.Length < index + this->Count)
-              throw System::ArgumentOutOfRangeException(sw_current_information);
+              throw System::ArgumentOutOfRangeException(_current_information);
             int32 count = 0;
             for (const Item& item : *this)
               array[count++] = Item(item);
@@ -238,7 +238,7 @@ namespace Switch {
           /// @include DictionaryOperators.cpp
           const TValue& operator[](const TKey& key) const override {
             if (! ContainsKey(key))
-              throw ArgumentException(sw_current_information);
+              throw ArgumentException(_current_information);
             return const_cast<std::unordered_map<TKey, TValue, Hasher, EqualTo, TAllocator>&>(this->hashmap)[key];
           }
           
@@ -314,7 +314,7 @@ namespace Switch {
             
             virtual bool MoveNext() {
               if (this->operationNumber != this->dictionary.operationNumber)
-                throw System::InvalidOperationException(sw_current_information);
+                throw System::InvalidOperationException(_current_information);
               
               if (IsFinished())
                 return false;
@@ -327,14 +327,14 @@ namespace Switch {
               if (IsFinished())
                 return false;
               
-              this->currentKeyValuePair = sw_new<Item>((*this->iterator).first,(*this->iterator).second);
+              this->currentKeyValuePair = ref_new<Item>((*this->iterator).first,(*this->iterator).second);
               return true;
             }
             
           protected:
             const KeyValuePair<TKey, TValue>& GetCurrent() const {
               if (this->beforeFirst || IsFinished())
-                throw System::InvalidOperationException(sw_current_information);
+                throw System::InvalidOperationException(_current_information);
               return *this->currentKeyValuePair;
             }
             

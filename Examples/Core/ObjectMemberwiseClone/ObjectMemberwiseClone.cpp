@@ -30,7 +30,7 @@ namespace Examples {
     // The main entry point for the application.
     static void Main() {
       // Create an instance of Person and assign values to its fields.
-      refptr<Person> person1 = sw_new<Person>();
+      refptr<Person> person1 = ref_new<Person>();
       person1->age = 42;
       person1->name = "Sam";
       person1->idInfo = new IdInfo(6565);
@@ -78,7 +78,7 @@ namespace Examples {
   };
 }
 
-sw_startup (Examples::Program)
+_startup (Examples::Program)
 
 // This code produces the following output:
 //

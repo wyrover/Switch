@@ -9,7 +9,7 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The exception that is thrown when there is an invalid attempt to access a method, such as accessing a private method from partially trusted code.
-    class sw_public MethodAccessException : public MemberAccessException {
+    class _public MethodAccessException : public MemberAccessException {
     public:
       /// @brief Create a new instance of class MethodAccessException
       /// @remarks Message is set with the default message associate to the error.
@@ -21,7 +21,7 @@ namespace Switch {
       MethodAccessException(const MethodAccessException& value) : MemberAccessException(value) {}
       
       /// @brief Create a new instance of class MethodAccessException
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
       /// @remarks Message is set with the default message associate to the error.
       MethodAccessException(const CurrentInformation& information) : MemberAccessException(information) {}
       
@@ -31,13 +31,13 @@ namespace Switch {
       
       /// @brief Create a new instance of class MethodAccessException
       /// @param message Message string associate to the error.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
       MethodAccessException(const System::String& message, const CurrentInformation& information) : MemberAccessException(message, information) {}
       
       /// @brief Create a new instance of class MethodAccessException
       /// @param message Message string associate to the error.
       /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
       MethodAccessException(const System::String& message, const System::Exception& innerException, const CurrentInformation& information) : MemberAccessException(message, innerException, information) {}
       
     private:

@@ -18,20 +18,20 @@ namespace UnitTests {
     }
     
     void ChangeCurrentDirectoryWithDownloads() {
-      Assert::DoesNotThrows(sw_delegate {Environment::CurrentDirectory = System::IO::Path::Combine(Environment::GetFolderPath(Environment::SpecialFolder::Personal), "Downloads");}, sw_current_information);
+      Assert::DoesNotThrows(_delegate {Environment::CurrentDirectory = System::IO::Path::Combine(Environment::GetFolderPath(Environment::SpecialFolder::Personal), "Downloads");}, _current_information);
     }
     
     void ChangeCurrentDirectoryWithPotatoes() {
-      Assert::DoesNotThrows(sw_delegate {Environment::CurrentDirectory = System::IO::Path::Combine(Environment::GetFolderPath(Environment::SpecialFolder::Personal), "Potatoes");}, sw_current_information);
+      Assert::DoesNotThrows(_delegate {Environment::CurrentDirectory = System::IO::Path::Combine(Environment::GetFolderPath(Environment::SpecialFolder::Personal), "Potatoes");}, _current_information);
     }
     
   private:
     string savedCurrentDirecory;
   };
 
-  // Used sw_test to add unit test to execute at the unit test suit.
-  sw_test(DirectoryTest, ChangeCurrentDirectoryWithDownloads);
-  sw_test(DirectoryTest, ChangeCurrentDirectoryWithPotatoes);
+  // Used _test to add unit test to execute at the unit test suit.
+  _test(DirectoryTest, ChangeCurrentDirectoryWithDownloads);
+  _test(DirectoryTest, ChangeCurrentDirectoryWithPotatoes);
 }
 
 // This code produces the following output if directory Downloads exists and Potatos doesn't exist in your home direcory:

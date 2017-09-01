@@ -13,11 +13,11 @@ namespace Examples {
       Pet(const Pet& pet) : name(pet.name), age(pet.age) {}
       
       Property<int, ReadOnly> Age {
-        sw_get {return this->age;}
+        _get {return this->age;}
       };
       
       Property<string, ReadOnly> Name {
-        sw_get {return this->name;}
+        _get {return this->name;}
       };
       
     private:
@@ -34,7 +34,7 @@ namespace Examples {
         {"Whiskers", 1}
       };
  
-      refptr<IEnumerable<Pet>> query = pets.OrderByDescending<string>(sw_delegate(const Pet& pet) {return  pet.Name();});
+      refptr<IEnumerable<Pet>> query = pets.OrderByDescending<string>(_delegate(const Pet& pet) {return  pet.Name();});
       
       for (Pet& pet : *query)
         Console::WriteLine("{0} - {1}", pet.Name, pet.Age);
@@ -42,7 +42,7 @@ namespace Examples {
   };
 }
 
-sw_startup (Examples::Program)
+_startup (Examples::Program)
 
 // This code produces the following output:
 //

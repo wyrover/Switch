@@ -18,7 +18,7 @@ namespace Switch {
       /// @endcond
 
       /// @brief Stores an ordered pair of integers, which specify a X and Y.
-      class sw_public Point : public object {
+      class _public Point : public object {
       public:
         /// @brief Gets a Point class that has a X and Y value of 0. This field is constant.
         static Property<Point, ReadOnly> Empty;
@@ -47,16 +47,16 @@ namespace Switch {
         /// @return int32 The X component of this Point class, typically measured in pixels.
         /// @remarks The unit for the X and Y of the Point class depend on the PageUnit and PageScale settings for the Graphics object that is used to draw.
         Property<int32> X {
-          sw_get {return this->x;},
-          sw_set {this->x = value;}
+          _get {return this->x;},
+          _set {this->x = value;}
         };
 
         /// @brief Gets or sets the Y component of this Point class.
         /// @return int32 The Y component of this Point class, typically measured in pixels.
         /// @remarks The unit for the X and Y of the Point class depend on the PageUnit and PageScale settings for the Graphics object that is used to draw.
         Property<int32> Y {
-          sw_get {return this->y;},
-          sw_set {this->y = value;}
+          _get {return this->y;},
+          _set {this->y = value;}
         };
 
         /// @brief Determines whether this instance of Point and a specified object, which must also be a Point object, have the same value.

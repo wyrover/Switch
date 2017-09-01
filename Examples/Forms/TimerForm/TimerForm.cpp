@@ -26,7 +26,7 @@ namespace TimerExample {
       this->label.ForeColor = System::Drawing::Color::DodgerBlue;
       
       this->timer.Interval = 100;
-      this->timer.Tick += sw_delegate(const object& sender, const EventArgs& e) {
+      this->timer.Tick += _delegate(const object& sender, const EventArgs& e) {
         this->label.Text = string::Format("{0:N1}", as<double>(++this->counter)/10);
       };
 
@@ -34,7 +34,7 @@ namespace TimerExample {
       this->button.Text = "Start";
       this->button.Location = System::Drawing::Point(10, 90);
       
-      this->button.Click += sw_delegate(const object& sender, const EventArgs& e) {
+      this->button.Click += _delegate(const object& sender, const EventArgs& e) {
         this->timer.Enabled = !this->timer.Enabled;
         this->button.Text = this->timer.Enabled ? "Stop" : "Start";
       };
@@ -48,4 +48,4 @@ namespace TimerExample {
   };
 }
 
-sw_startup (TimerExample::Form1)
+_startup (TimerExample::Form1)

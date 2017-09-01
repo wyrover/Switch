@@ -61,7 +61,7 @@ namespace Switch {
         ///   }
         /// }
         /// @endcode
-        class sw_public DragEventArgs : public EventArgs {
+        class _public DragEventArgs : public EventArgs {
         public:
           /// @brief Initializes a new instance of the DragEventArgs class.
           DragEventArgs() {}
@@ -84,11 +84,11 @@ namespace Switch {
           /// @brief Gets which drag-and-drop operations are allowed by the originator (or source) of the drag event.
           /// @return One of the DragDropEffects values.
           Property<DragDropEffects, ReadOnly> AllowedEffect {
-            sw_get {return this->allowedEffect;}
+            _get {return this->allowedEffect;}
           };
 
           Property<const object&, ReadOnly> Data {
-            sw_get->const object& {return *this->data;}
+            _get->const object& {return *this->data;}
           };
 
           /// @brief Gets or sets the target drop effect in a drag-and-drop operation.
@@ -143,8 +143,8 @@ namespace Switch {
           /// }
           /// @endcode
           Property<DragDropEffects> Effect {
-            sw_get {return this->effect;},
-            sw_set {this->effect = value;}
+            _get {return this->effect;},
+            _set {this->effect = value;}
           };
 
           /// @brief Gets the current state of the SHIFT, CTRL, and ALT keys, as well as the state of the mouse buttons.
@@ -209,15 +209,15 @@ namespace Switch {
           /// }
           /// @endcode
           Property<int32, ReadOnly> KeyState {
-            sw_get {return this->keyState;}
+            _get {return this->keyState;}
           };
 
           Property<int32, ReadOnly> X {
-            sw_get {return this->x;}
+            _get {return this->x;}
           };
 
           Property<int32, ReadOnly> Y {
-            sw_get {return this->y;}
+            _get {return this->y;}
           };
 
         private:

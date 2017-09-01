@@ -22,7 +22,7 @@ namespace Switch {
 
       /// @brief Provides instance methods for the creation, copying, deletion, moving, and opening of files, and aids in the creation of System::IO::FileStream objects.
       /// This class cannot be inherited.
-      class sw_public FileInfo final : public FileSystemInfo {
+      class _public FileInfo final : public FileSystemInfo {
       public:
         /// @brief Represents the uninitialized file object. This field is constant.
         static Property<FileInfo, ReadOnly> Empty;
@@ -50,7 +50,7 @@ namespace Switch {
         /// @brief Gets a string representing the directory's full path.
         /// @return A string representing the directory's full path.
         Property<String, ReadOnly> DirectoryName {
-          sw_get {return this->GetDirectoryName();}
+          _get {return this->GetDirectoryName();}
         };
 
         /// @brief Permanently deletes a file.

@@ -10,8 +10,8 @@ namespace Examples {
     static void Main() {
       try {
         // Create an instance of StreamReader to read from a file.
-        // The sw_using statement also closes the StreamReader.
-        sw_using (StreamReader sr("TestFile.txt")) {
+        // The _using statement also closes the StreamReader.
+        _using (StreamReader sr("TestFile.txt")) {
           string line;
           // Read and display lines from the file until the end of
           // the file is reached.
@@ -29,7 +29,7 @@ namespace Examples {
   };
 }
 
-sw_startup (Examples::Program)
+_startup (Examples::Program)
 
 // This code produces the following output:
 //

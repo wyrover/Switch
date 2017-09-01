@@ -19,7 +19,7 @@ namespace __OS {
       this->add(this->scrolledWindow);
       this->scrolledWindow.add(this->fixed);
 
-      this->signal_show().connect(sw_delegate {
+      this->signal_show().connect(_delegate {
         this->scrolledWindow.show();
         this->fixed.show();
       });

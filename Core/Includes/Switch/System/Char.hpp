@@ -14,7 +14,7 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief Represents a Unicode Character.
-    struct sw_public Char final : public ValueType, public IComparable, public IConvertible {
+    struct _public Char final : public ValueType, public IComparable, public IConvertible {
       
     public:
       /// @brief Create a new instance of struct Char

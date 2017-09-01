@@ -13,7 +13,7 @@ namespace Switch {
     /// @brief The System::Net namespace provides a simple programming interface for many of the protocols used on networks today.
     /// The WebRequest and WebResponse classes form the basis of what are called pluggable protocols, an implementation of network services that enables you to develop applications that use Internet resources without worrying about the specific details of the individual protocols.
     namespace Net {
-      class sw_public NetworkCredential : public Object {
+      class _public NetworkCredential : public Object {
       public:
         NetworkCredential() {}
 
@@ -28,13 +28,13 @@ namespace Switch {
         /// @endcond
 
         Property<const string&> UserName {
-          sw_get->const string& {return this->userName;},
-          sw_set {this->userName = value;}
+          _get->const string& {return this->userName;},
+          _set {this->userName = value;}
         };
         
         Property<const string&> Password {
-          sw_get->const string& {return this->password;},
-          sw_set {this->password = value;}
+          _get->const string& {return this->password;},
+          _set {this->password = value;}
         };
 
       private:

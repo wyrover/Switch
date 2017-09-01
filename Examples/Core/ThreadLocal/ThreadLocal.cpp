@@ -13,12 +13,12 @@ namespace Examples {
     //      One usage of ThreadLocal<T>
     static void Main() {
       // Thread-Local variable that yields a name for a thread
-      ThreadLocal<string> threadName(sw_delegate {
+      ThreadLocal<string> threadName(_delegate {
         return "Thread"_s + Thread::CurrentThread().ManagedThreadId;
       });
       
       // Action that prints out ThreadName for the current thread
-      Action<> action = sw_delegate {
+      Action<> action = _delegate {
         // If ThreadName.IsValueCreated is true, it means that we are not the
         // first action to run on this thread.
         bool repeat = threadName.IsValueCreated;
@@ -32,7 +32,7 @@ namespace Examples {
   };
 }
 
-sw_startup (Examples::Program)
+_startup (Examples::Program)
 
 // This code produces output similar to the following:
 //

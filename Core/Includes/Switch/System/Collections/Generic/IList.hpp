@@ -24,7 +24,7 @@ namespace Switch {
           /// @brief Gets a value indicating whether the IList has a fixed size.
           /// @return Boolean true if the IList has a fixed size; otherwise, false.
           Property<bool, ReadOnly> IsFixedSize {
-            sw_get {return this->GetIsFixedSize();}
+            _get {return this->GetIsFixedSize();}
           };
           
           /// @brief Determines the index of a specific item in the IList.

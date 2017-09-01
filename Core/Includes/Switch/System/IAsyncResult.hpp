@@ -18,30 +18,30 @@ namespace Switch {
 
     /// @interface IAsyncResult
     /// @brief Represents the status of an asynchronous operation.
-    class sw_public IAsyncResult sw_interface {
+    class _public IAsyncResult _interface {
     public:
       /// @brief Gets a user-defined object that qualifies or contains information about an asynchronous operation.
       /// @return A user-defined object that qualifies or contains information about an asynchronous operation.
       Property<const Object&, ReadOnly> AsyncState {
-        sw_get->const object& {return this->GetAsyncState();}
+        _get->const object& {return this->GetAsyncState();}
       };
 
       /// @brief Gets a WaitHandle that is used to wait for an asynchronous operation to complete.
       /// @return A WaitHandle that is used to wait for an asynchronous operation to complete.
       Property<const System::Threading::WaitHandle&,ReadOnly> AsyncWaitHandle {
-        sw_get->const System::Threading::WaitHandle& {return this->GetAsyncWaitHandle();}
+        _get->const System::Threading::WaitHandle& {return this->GetAsyncWaitHandle();}
       };
 
       /// @brief Gets an indication of whether the asynchronous operation completed synchronously.
       /// @return true if the asynchronous operation completed synchronously; otherwise, false.
       Property<bool, ReadOnly> CompletedSynchronously {
-        sw_get {return this->GetCompletedSynchronously();}
+        _get {return this->GetCompletedSynchronously();}
       };
 
       /// @brief Gets an indication whether the asynchronous operation has completed.
       /// @return true if the operation is complete; otherwise, false.
       Property<bool, ReadOnly> IsCompleted {
-        sw_get {return this->GetIsCompleted();}
+        _get {return this->GetIsCompleted();}
       };
       
     protected:

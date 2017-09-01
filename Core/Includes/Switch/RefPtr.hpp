@@ -15,7 +15,7 @@ namespace Switch {
   template<typename T>
   class RefPtr;
 }
-class sw_public __opaque_sub_object__ {
+class _public __opaque_sub_object__ {
   template<typename T>
   friend class Switch::RefPtr;
   __opaque_sub_object__() : UseCount(0) {}
@@ -503,13 +503,13 @@ namespace Switch {
   /// @remarks For more information see also  http://stlplus.sourceforge.net/stlplus3/docs/smart_ptr.html
   /// @par Examples
   /// This example show how to used RefPtr :
-  /// @include RefPtr.cpp
+  /// @include RefPtr2.cpp
   /// @ingroup Switch
   template<typename T>
-  using r = RefPtr<T>;
+  using _ = RefPtr<T>;
   
   template<typename T, typename ...Args>
-  refptr<T> sw_new(Args&&... args) {return refptr<T>(new T(args...));}
+  refptr<T> _new(Args&&... args) {return refptr<T>(new T(args...));}
   
   template<typename T, typename ...Args>
   refptr<T> ref_new(Args&&... args) {return refptr<T>(new T(args...));}

@@ -21,7 +21,7 @@ namespace Switch {
     /// In addition to classes for synchronizing thread activities and access to data ( Mutex, Monitor, Interlocked, AutoResetEvent, and so on), this namespace includes a ThreadPool class that allows you to use a pool of system-supplied threads, and a Timer class that executes callback methods on thread pool threads.
     namespace Threading {
       /// @brief Represents a thread synchronization event.
-      class sw_public EventWaitHandle: public WaitHandle {
+      class _public EventWaitHandle: public WaitHandle {
       public:
         /// @brief Initializes a new instance of the System::Threading::EventWaitHandle class.
         /// @exception IO::IOException A Win32 error occurred.
@@ -31,7 +31,7 @@ namespace Switch {
         /// @param initialState true to set the initial state to signaled if the named event is created as a result of this call; false to set it to nonsignaled.
         /// @param mode One of the System::Threading::EventResetMode values that determines whether the event resets automatically or manually.
         /// @exception IO::IOException A Win32 error occurred.
-        EventWaitHandle(bool initialState, EventResetMode mode) : mode(sw_new<EventResetMode>(mode)) {
+        EventWaitHandle(bool initialState, EventResetMode mode) : mode(ref_new<EventResetMode>(mode)) {
           if (initialState)
             this->Set();
         }
@@ -83,7 +83,7 @@ namespace Switch {
         /// @return true if the operation succeeds; otherwise, false.
         bool Reset() {
           if (this->guard.IsNull())
-            throw ObjectClosedException(sw_current_information);
+            throw ObjectClosedException(_current_information);
           std::unique_lock<std::mutex> lock(*this->guard);
           *this->event = false;
           return true;
@@ -93,7 +93,7 @@ namespace Switch {
         /// @return true if the operation succeeds; otherwise, false.
         bool Set() {
           if (this->guard.IsNull())
-            throw ObjectClosedException(sw_current_information);
+            throw ObjectClosedException(_current_information);
           std::unique_lock<std::mutex> lock(*this->guard);
           *this->event = true;
           this->signal->notify_all();
@@ -117,9 +117,9 @@ namespace Switch {
         
         bool Wait(int32 millisecondsTimeOut) override {
           if (this->guard.IsNull())
-            throw ObjectClosedException(sw_current_information);
+            throw ObjectClosedException(_current_information);
           if (millisecondsTimeOut < -1)
-            throw AbandonedMutexException(sw_current_information);
+            throw AbandonedMutexException(_current_information);
               
           std::unique_lock<std::mutex> lock(*this->guard);
           while(*this->event == false) {
@@ -134,11 +134,11 @@ namespace Switch {
           return true;
         }
         
-        refptr<std::mutex> guard = sw_new<std::mutex>();
-        refptr<std::condition_variable> signal = sw_new<std::condition_variable>();
-        refptr<bool> event = sw_new<bool>(false);
-        refptr<EventResetMode> mode = sw_new<EventResetMode>(EventResetMode::ManualReset);
-        refptr<string> name = sw_new<string>();
+        refptr<std::mutex> guard = ref_new<std::mutex>();
+        refptr<std::condition_variable> signal = ref_new<std::condition_variable>();
+        refptr<bool> event = ref_new<bool>(false);
+        refptr<EventResetMode> mode = ref_new<EventResetMode>(EventResetMode::ManualReset);
+        refptr<string> name = ref_new<string>();
       };
     }
   }

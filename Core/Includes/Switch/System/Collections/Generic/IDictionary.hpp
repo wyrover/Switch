@@ -34,13 +34,13 @@ namespace Switch {
           /// @brief Gets an ICollection<T> containing the keys of the IDictionary<TKey, TValue>.
           /// @return ICollection<TKey> An ICollection<T> containing the keys of the object that implements IDictionary<TKey, TValue>.
           Property<KeyCollection, ReadOnly> Keys {
-            sw_get {return this->GetKeys();}
+            _get {return this->GetKeys();}
           };
 
           /// @brief Gets an ICollection<T> containing the values of the IDictionary<TKey, TValue>.
           /// @return ICollection<TValue> An ICollection<T> containing the values of the object that implements IDictionary<TKey, TValue>.
           Property<ValueCollection, ReadOnly> Values {
-            sw_get {return this->GetValues();}
+            _get {return this->GetValues();}
           };
           
           using ICollection<KeyValuePair<TKey,TValue>>::Add;

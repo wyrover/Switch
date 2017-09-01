@@ -15,7 +15,7 @@ namespace Examples {
   };
 }
 
-sw_startup (Examples::Program)
+_startup (Examples::Program)
 
 // This code can produces the following output if you run it on macOS Sierra :
 //

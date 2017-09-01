@@ -18,20 +18,20 @@ namespace Switch {
       /// Formatters that serialize and deserialize objects to and from a particular format can be found in the System::Runtime::Serialization::Formatters namespace.
       namespace Serialization {
         /// @brief Holds the value, Type, and name of a serialized object.
-        class sw_public SerializationEntry : public Object {
+        class _public SerializationEntry : public Object {
         public:
           /// @brief Gets the value contained in the object.
           /// @param value The value contained in the object.
           Property<refptr<Object>> Value {
-            sw_get {return this->value;},
-            sw_set {this->value = value;}
+            _get {return this->value;},
+            _set {this->value = value;}
           };
           
           /// @brief Gets the value contained in the object.
           /// @param vlue The value contained in the object.
           Property<const String&> TypeName {
-            sw_get->const String& {return this->typeName;},
-            sw_set {this->typeName = value;}
+            _get->const String& {return this->typeName;},
+            _set {this->typeName = value;}
           };
           
           SerializationEntry() {}

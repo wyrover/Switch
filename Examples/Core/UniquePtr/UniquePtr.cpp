@@ -20,7 +20,7 @@ namespace Test {
       Console::WriteLine(*str2);
       str2 = null;
       Console::WriteLine("str2 = {0}", str2.ToString());
-      SharedPtr<string> sp = sw_new<string>("Test sp");
+      SharedPtr<string> sp = ref_new<string>("Test sp");
       Console::WriteLine("sp = {0}", sp.ToString());
       UniquePtr<int> a = MakeUnique<int>(234);
       Console::WriteLine("a = {0}", a.ToString());
@@ -30,7 +30,7 @@ namespace Test {
   };
 }
 
-sw_startup (Test::Program)
+_startup (Test::Program)
 
 // This code produces the following output:
 //

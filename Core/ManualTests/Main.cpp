@@ -1,4 +1,6 @@
+#include <Switch/Foreach.hpp>
 #include <Switch/Startup.hpp>
+#include <Switch/Var.hpp>
 #include <Switch/System/Console.hpp>
 
 using namespace System;
@@ -8,11 +10,15 @@ namespace Examples {
   public:
     // The main entry point for the application.
     static void Main() {
-      r<Version> version = ref_new<Version>(1, 2, 3);
+      _<Version> version = gcnew<Version>(1, 2, 3);
       Console::WriteLine("version = {0}", version());
+      
+      Array<int> a = {1, 2, 3, 4, 5};
+      _foreach(_var i _in a)
+        Console::WriteLine(i);
     }
   };
 }
 
-sw_startup (Examples::Program)
+_startup (Examples::Program)
 

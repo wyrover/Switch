@@ -150,7 +150,7 @@ TEST(Queue, Foreach_NonConst) {
 TEST(Queue, GetSyncRoot) {
   Queue<int32> myQueue(10);
   
-  sw_lock (myQueue.SyncRoot) {
+  _lock (myQueue.SyncRoot) {
     myQueue.Enqueue(1);
     myQueue.Enqueue(2);
     myQueue.Enqueue(3);

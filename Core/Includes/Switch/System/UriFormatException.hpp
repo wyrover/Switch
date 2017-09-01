@@ -9,7 +9,7 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The exception that is thrown when an invalid Uniform Resource Identifier (URI) is detected.
-    class sw_public UriFormatException : public FormatException {
+    class _public UriFormatException : public FormatException {
     public:
       /// @brief Create a new instance of class UriFormatException
       /// @remarks Message is set with the default message associate to the error.
@@ -21,7 +21,7 @@ namespace Switch {
       UriFormatException(const UriFormatException& value) : FormatException(value) {}
       
       /// @brief Create a new instance of class UriFormatException
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
       /// @remarks Message is set with the default message associate to the error.
       UriFormatException(const CurrentInformation& information) : FormatException(information) {}
       
@@ -31,13 +31,13 @@ namespace Switch {
       
       /// @brief Create a new instance of class UriFormatException
       /// @param message Message string associate to the error.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
       UriFormatException(const System::String& message, const CurrentInformation& information) : FormatException(message, information) {}
       
       /// @brief Create a new instance of class UriFormatException
       /// @param message Message string associate to the error.
       /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
       UriFormatException(const System::String& message, const System::Exception& innerException, const CurrentInformation& information) : FormatException(message, innerException, information) {}
       
     private:

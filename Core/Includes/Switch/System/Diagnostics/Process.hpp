@@ -17,7 +17,7 @@ namespace Switch {
     /// @brief The System::Diagnostics namespace provides classes that allow you to interact with system processes, event logs, and performance counters.
     namespace Diagnostics {
       /// @brief Provides access to local and remote processes and enables you to start and stop local system processes.
-      class sw_public Process : public Object {
+      class _public Process : public Object {
         refptr<IO::Stream> GetStandardOutput() const;
       public:
         /// @cond
@@ -28,28 +28,28 @@ namespace Switch {
         /// @endcond
         
         Property<int32, ReadOnly> ExitCode {
-          sw_get {return this->data->exitCode;}
+          _get {return this->data->exitCode;}
         };
         
         Property<int32, ReadOnly> Id {
-          sw_get {return *((int32*)&this->data->handle);}
+          _get {return *((int32*)&this->data->handle);}
         };
         
         Property<string, ReadOnly> ProcessName {
-          sw_get {return this->GetName();}
+          _get {return this->GetName();}
         };
         
         Property<string, ReadOnly> Path {
-          sw_get {return this->GetPath();}
+          _get {return this->GetPath();}
         };
         
         Property<ProcessStartInfo&> StartInfo {
-          sw_get->ProcessStartInfo& {return this->data->startInfo;},
-          sw_set {this->data->startInfo = value;}
+          _get->ProcessStartInfo& {return this->data->startInfo;},
+          _set {this->data->startInfo = value;}
         };
         
         Property<System::IO::StreamReader, ReadOnly> StandardOutput {
-          sw_get {return this->GetStreamReader();}
+          _get {return this->GetStreamReader();}
         };
         
         void Close();
@@ -83,7 +83,7 @@ namespace Switch {
           refptr<System::IO::Stream> outputStream;
           ProcessStartInfo startInfo;
         };
-        refptr<ProcessData> data = sw_new<ProcessData>();
+        refptr<ProcessData> data = ref_new<ProcessData>();
       };
     }
   }

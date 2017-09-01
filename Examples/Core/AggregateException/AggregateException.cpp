@@ -12,14 +12,14 @@ namespace Examples {
       string path = Directory::GetParent(Environment::GetFolderPath(Environment::SpecialFolder::UserProfile)).FullName;
       
       // Use this line to throw UnauthorizedAccessException, which we handle.
-      //Task<Array<string>> task1 = Task<>::Factory().StartNew<Array<string>>(sw_delegate {return GetAllFiles(path);});
+      //Task<Array<string>> task1 = Task<>::Factory().StartNew<Array<string>>(_delegate {return GetAllFiles(path);});
       
       // Use this line to throw an exception that is not handled.
-      Task<> task1 = Task<>::Factory().StartNew(sw_delegate {throw IndexOutOfRangeException();});
+      Task<> task1 = Task<>::Factory().StartNew(_delegate {throw IndexOutOfRangeException();});
       try {
         task1.Wait();
       } catch (const AggregateException& ae) {
-        ae.Handle(sw_delegate(const Exception& x)->bool {
+        ae.Handle(_delegate(const Exception& x)->bool {
           if (is<UnauthorizedAccessException>(x)) {// This we know how to handle.
             Console::WriteLine("You do not have permission to access all folders in this path.");
             Console::WriteLine("See your network administrator or try another path.");
@@ -41,4 +41,4 @@ namespace Examples {
   };
 }
 
-sw_startup (Examples::Program)
+_startup (Examples::Program)

@@ -10,9 +10,9 @@ namespace Examples {
       Action<const string&> messageTarget;
       
       if (Environment::GetCommandLineArgs().Length > 1)
-        messageTarget = sw_delegate(const string& s) { ShowWindowsMessage(s); };
+        messageTarget = _delegate(const string& s) { ShowWindowsMessage(s); };
       else
-        messageTarget = sw_delegate(const string& s) { WriteLine(s); };
+        messageTarget = _delegate(const string& s) { WriteLine(s); };
       
       messageTarget("Hello, World!");
     }
@@ -28,4 +28,4 @@ namespace Examples {
   };
 }
 
-sw_startup (Examples::Program)
+_startup (Examples::Program)

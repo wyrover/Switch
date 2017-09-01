@@ -63,4 +63,4 @@ namespace Examples {
   int MyInterlockedExchangeClass::usingResource = 0;
 }
 
-sw_startup (Examples::MyInterlockedExchangeClass)
+_startup (Examples::MyInterlockedExchangeClass)

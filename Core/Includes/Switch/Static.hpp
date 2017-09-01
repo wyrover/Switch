@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains Switch::Static class and #sw_static keyword.
+/// @brief Contains Switch::Static class and #_static keyword.
 #pragma once
 
 #include "Types.hpp"
@@ -8,7 +8,7 @@
 /// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
   /// @brief Represent a static class.
-  struct sw_public Static {
+  struct _public Static {
     /// @cond
     Static() = delete;
     Static(const Static&) = delete;
@@ -19,13 +19,13 @@ namespace Switch {
   /// @brief This keyword is use to represent a static class.
   /// @par Examples
   /// @code
-  /// class Foo sw_static {
+  /// class Foo _static {
   /// public:
   ///   static string ToString() {return "Foo";}
   /// };
   /// @endcode
   /// @ingroup Switch
-  #define sw_static\
+  #define _static\
   final : Static
 }
 

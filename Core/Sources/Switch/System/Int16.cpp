@@ -109,17 +109,17 @@ bool Int16::ToBoolean(const IFormatProvider&) const {
 
 byte Int16::ToByte(const IFormatProvider&) const {
   if (this->value < Byte::MinValue)
-    throw OverflowException(sw_current_information);
+    throw OverflowException(_current_information);
 
   if (this->value > Byte::MaxValue)
-    throw OverflowException(sw_current_information);
+    throw OverflowException(_current_information);
 
   return (sbyte)value;
 }
 
 char32 Int16::ToChar(const IFormatProvider&) const {
   if (this->value < 0)
-    throw OverflowException(sw_current_information);
+    throw OverflowException(_current_information);
   
   return this->value;
 }
@@ -146,31 +146,31 @@ int64 Int16::ToInt64(const IFormatProvider&) const {
 
 uint16 Int16::ToUInt16(const IFormatProvider&) const {
   if (this->value < UInt16::MinValue)
-    throw OverflowException(sw_current_information);
+    throw OverflowException(_current_information);
   
   return (uint16)this->value;
 }
 
 uint32 Int16::ToUInt32(const IFormatProvider&) const {
   if (this->value < 0)
-    throw OverflowException(sw_current_information);
+    throw OverflowException(_current_information);
     
   return (uint32)this->value;
 }
 
 uint64 Int16::ToUInt64(const IFormatProvider&) const {
   if (this->value < 0)
-    throw OverflowException(sw_current_information);
+    throw OverflowException(_current_information);
     
   return (uint64)this->value;
 }
 
 sbyte Int16::ToSByte(const IFormatProvider&) const {
   if (this->value < SByte::MinValue)
-    throw OverflowException(sw_current_information);
+    throw OverflowException(_current_information);
   
   if (this->value > SByte::MaxValue)
-    throw OverflowException(sw_current_information);
+    throw OverflowException(_current_information);
   
   return (sbyte)this->value;
 }
@@ -209,7 +209,7 @@ Int16& Int16::operator *=(const Int16& value) {
 
 Int16& Int16::operator /=(const Int16& value) {
   if (value == 0)
-    throw DivideByZeroException(sw_current_information);
+    throw DivideByZeroException(_current_information);
   
   this->value /= value.value;
   return *this;
@@ -217,7 +217,7 @@ Int16& Int16::operator /=(const Int16& value) {
 
 Int16& Int16::operator %=(const Int16& value) {
   if (value == 0)
-    throw DivideByZeroException(sw_current_information);
+    throw DivideByZeroException(_current_information);
   
   this->value %= value;
   return *this;

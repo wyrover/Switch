@@ -19,18 +19,18 @@ namespace Switch {
         /// @remarks When you display a form using the ShowDialog method, you can use the DialogResult property of a button to specify the return value of ShowDialog.
         /// @remarks You can change the button's appearance. For example, to make it appear flat for a Web look, set the FlatStyle property to FlatStyle.Flat. The FlatStyle property can also be set to FlatStyle.Popup, which appears flat until the mouse pointer passes over the button; then the button takes on the standard Windows button appearance.
         /// @note If the control that has focus accepts and processes the ENTER key press, the Button does not process it. For example, if a multiline TextBox or another button has focus, that control processes the ENTER key press instead of the accept button.
-        class sw_public CheckBox : public ButtonBase {
+        class _public CheckBox : public ButtonBase {
         public:
           CheckBox() : ButtonBase("", 0, 0, 104, 24) { this->SetStyle(ControlStyles::UserPaint, false); }
 
           Property<bool> AutoCheck {
-            sw_get{ return this->autoCheck; },
-            sw_set{ this->SetAutoCheck(value); }
+            _get{ return this->autoCheck; },
+            _set{ this->SetAutoCheck(value); }
           };
 
           Property<bool> Checked {
-            sw_get {return this->CheckState != System::Windows::Forms::CheckState::Unchecked;},
-            sw_set {
+            _get {return this->CheckState != System::Windows::Forms::CheckState::Unchecked;},
+            _set {
               if (this->Checked != value) {
                 this->CheckState = value ? System::Windows::Forms::CheckState::Checked : System::Windows::Forms::CheckState::Unchecked;
               }
@@ -38,8 +38,8 @@ namespace Switch {
           };
           
           Property<System::Windows::Forms::CheckState> CheckState {
-            sw_get {return this->checkState;},
-            sw_set {this->SetCheckState(value);}
+            _get {return this->checkState;},
+            _set {this->SetCheckState(value);}
           };
 
           EventHandler CheckedChanged;

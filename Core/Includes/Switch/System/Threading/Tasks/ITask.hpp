@@ -13,7 +13,7 @@ namespace Switch {namespace System {namespace Threading {namespace Tasks {
   class Task;
 }}}}
 
-class sw_public __opaque_task_id_generator__ {
+class _public __opaque_task_id_generator__ {
   template <typename TResult>
   friend class System::Threading::Tasks::Task;
   int32 operator()() {
@@ -34,7 +34,7 @@ namespace Switch {
       /// @brief The System::Threading::Tasks namespace provides types that simplify the work of writing concurrent and asynchronous code. The main types are System::Threading::Tasks::Task which represents an asynchronous operation that can be waited on and cancelled, and System::Threading::Tasks::Task<TResult>, which is a task that can return a value. The System::Threading::Tasks::TaskFactory class provides static methods for creating and starting tasks, and the System::Threading::Tasks::TaskScheduler class provides the default thread scheduling infrastructure.
       namespace Tasks {
         /// @brief Represents an interface for an asynchronous operation.
-        class sw_public ITask sw_interface {
+        class _public ITask _interface {
         public:
           /// @brief Starts the Task, scheduling it for execution to the current TaskScheduler.
           virtual void Start() = 0;

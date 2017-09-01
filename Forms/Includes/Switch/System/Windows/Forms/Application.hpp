@@ -16,7 +16,7 @@ namespace Switch {
       /// @brief The Switch::System::Windows::Forms namespace contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system, Apple macOS and Linux like Ubuntu operating system.
       namespace Forms {
         /// @brief Provides static methods and properties to manage an application, such as methods to start and stop an application, to process Windows messages, and properties to get information about an application. This class cannot be inherited.
-        class sw_public Application sw_static {
+        class _public Application _static {
         public:
           static void EnableVisualStyles();
 
@@ -46,7 +46,7 @@ namespace Switch {
             Start();
             Application::mainForm = as<Form>(mainForm);
             Application::mainForm().Visible = true;
-            Application::mainForm().FormClosed += sw_delegate(const object& sender, const FormClosedEventArgs& e) {
+            Application::mainForm().FormClosed += _delegate(const object& sender, const FormClosedEventArgs& e) {
               Exit();
             };
             MessageLoop();

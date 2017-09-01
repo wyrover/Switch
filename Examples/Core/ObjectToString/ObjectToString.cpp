@@ -14,19 +14,19 @@ namespace Examples {
   public:
     // The main entry point for the application.
     static void Main() {
-      refptr<Object> obj1 = sw_new<ObjectTest::Object1>();
+      refptr<Object> obj1 = ref_new<ObjectTest::Object1>();
       Console::WriteLine(obj1->ToString());
       
-      refptr<Object> obj2 = sw_new<DateTime>(1971, 1, 5, 23, 5, 0);
+      refptr<Object> obj2 = ref_new<DateTime>(1971, 1, 5, 23, 5, 0);
       Console::WriteLine(obj2->ToString());
       
-      refptr<Object> obj3 = sw_new<Boolean>();
+      refptr<Object> obj3 = ref_new<Boolean>();
       Console::WriteLine(obj3->ToString());
     }
   };
 }
 
-sw_startup (Examples::Program)
+_startup (Examples::Program)
 
 // This code produces the following output:
 //

@@ -109,7 +109,7 @@ const TimeZoneInfo& TimeZoneInfo::TimeFindSystemTimeZoneById(const String& id) {
     if (item.id == id)
       return item;
   
-  throw TimeZoneNotFoundException(sw_current_information);
+  throw TimeZoneNotFoundException(_current_information);
 }
 
 

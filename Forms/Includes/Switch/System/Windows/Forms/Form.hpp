@@ -17,7 +17,7 @@ namespace Switch {
       /// @brief The Switch::System::Windows::Forms namespace contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system, Apple macOS and Linux like Ubuntu operating system.
       namespace Forms {
         /// @brief Represents a window or dialog box that makes up an application's user interface.
-        class sw_public Form : public ContainerControl {
+        class _public Form : public ContainerControl {
         public:
           Form() : ContainerControl("", 0, 0, 300, 300) {
             this->visible = false;
@@ -26,23 +26,23 @@ namespace Switch {
           }
 
           Property<System::Windows::Forms::FormBorderStyle> FormBorderStyle {
-            sw_get{return this->formBorderStyle;},
-            sw_set{this->formBorderStyle = value;}
+            _get{return this->formBorderStyle;},
+            _set{this->formBorderStyle = value;}
           };
           
           Property<bool> MaximizeBox {
-            sw_get {return this->maximizeBox;},
-            sw_set {this->maximizeBox = value;}
+            _get {return this->maximizeBox;},
+            _set {this->maximizeBox = value;}
           };
           
           Property<bool> MinimizeBox {
-            sw_get {return this->minimizeBox;},
-            sw_set {this->minimizeBox = value;}
+            _get {return this->minimizeBox;},
+            _set {this->minimizeBox = value;}
           };
           
 		      Property<FormStartPosition> StartPosition{
-			      sw_get{return this->startPosition;},
-			      sw_set{this->startPosition = value;}
+			      _get{return this->startPosition;},
+			      _set{this->startPosition = value;}
 		      };
 
           void Close() override;

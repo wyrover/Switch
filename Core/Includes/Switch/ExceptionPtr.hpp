@@ -99,7 +99,7 @@ namespace Switch {
   /// @par Examples
   /// This example show how to use ExceptionPtr, ExceptionPtr::CurrentExeption and Rethrow() :
   /// @include ExceptionPtr.Cpp
-  class sw_public ExceptionPtr {
+  class _public ExceptionPtr {
   public:
     /// @cond
     ExceptionPtr() {}

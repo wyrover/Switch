@@ -7,7 +7,7 @@ using namespace System;
 namespace DesignPatterns {
   namespace Creational {
     // The 'Prototype' abstract class
-    class Prototype sw_abstract {
+    class Prototype _abstract {
     public:
       // Constructor
       Prototype(const string& id) : id(id) {}
@@ -15,7 +15,7 @@ namespace DesignPatterns {
       
       // Gets id
       Property<string, ReadOnly> Id {
-        sw_get {return this->id;}
+        _get {return this->id;}
       };
       
       virtual refptr<Prototype> Clone() const = 0;
@@ -52,11 +52,11 @@ namespace DesignPatterns {
       static void Main() {
         // Create two instances and clone each
         
-        refptr<ConcretePrototype1> p1 = sw_new<ConcretePrototype1>("I");
+        refptr<ConcretePrototype1> p1 = ref_new<ConcretePrototype1>("I");
         refptr<ConcretePrototype1> c1 = as<ConcretePrototype1>(p1->Clone());
         Console::WriteLine("Cloned: {0}", c1->Id);
         
-        refptr<ConcretePrototype2> p2 = sw_new<ConcretePrototype2>("II");
+        refptr<ConcretePrototype2> p2 = ref_new<ConcretePrototype2>("II");
         refptr<ConcretePrototype2> c2 = as<ConcretePrototype2>(p2->Clone());
         Console::WriteLine("Cloned: {0}", c2->Id);
       }
@@ -65,7 +65,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-sw_startup (DesignPatterns::Creational::MainApp)
+_startup (DesignPatterns::Creational::MainApp)
 
 // This code produces the following output:
 //

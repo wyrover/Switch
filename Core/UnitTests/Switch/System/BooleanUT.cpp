@@ -13,39 +13,39 @@ namespace SwitchUnitTests {
     void TearDown() override {}
     
     void ConstructorDefault() {
-      TUnit::Assert::IsFalse(Boolean(), sw_current_information);
+      TUnit::Assert::IsFalse(Boolean(), _current_information);
     }
     
     void ConstructorWithFalse() {
-      TUnit::Assert::IsFalse(Boolean(false), sw_current_information);
+      TUnit::Assert::IsFalse(Boolean(false), _current_information);
     }
     
     void ConstructorWithTrue() {
-      TUnit::Assert::IsTrue(Boolean(true), sw_current_information);
+      TUnit::Assert::IsTrue(Boolean(true), _current_information);
     }
     
     void ConstructorWith0() {
-      TUnit::Assert::IsFalse(Boolean(0), sw_current_information);
+      TUnit::Assert::IsFalse(Boolean(0), _current_information);
     }
     
     void ConstructorWith1() {
-      TUnit::Assert::IsTrue(Boolean(1), sw_current_information);
+      TUnit::Assert::IsTrue(Boolean(1), _current_information);
     }
     
     void ConstructorWithBooleanFalse() {
-      TUnit::Assert::IsFalse(Boolean(Boolean::False), sw_current_information);
+      TUnit::Assert::IsFalse(Boolean(Boolean::False), _current_information);
     }
     
     void ConstructorWithBooleanTrue() {
-      TUnit::Assert::IsTrue(Boolean(Boolean::True), sw_current_information);
+      TUnit::Assert::IsTrue(Boolean(Boolean::True), _current_information);
     }
     
     void ConstructorByCopyWithBooleanFalse() {
-      TUnit::Assert::IsFalse(Boolean(Boolean(false)), sw_current_information);
+      TUnit::Assert::IsFalse(Boolean(Boolean(false)), _current_information);
     }
     
     void ConstructorByCopyWithBooleanTrue() {
-      TUnit::Assert::IsTrue(Boolean(Boolean(true)), sw_current_information);
+      TUnit::Assert::IsTrue(Boolean(Boolean(true)), _current_information);
     }
     
     void ParseBooleanFalseString() {
@@ -105,45 +105,45 @@ namespace SwitchUnitTests {
     }
     
     void ParseBadFormatFalseString() {
-      TUnit::Assert::Throws<FormatException>(sw_delegate {Boolean::Parse("fal se");});
+      TUnit::Assert::Throws<FormatException>(_delegate {Boolean::Parse("fal se");});
     }
     
     void ParseABadFormatTrueString() {
-      TUnit::Assert::Throws<FormatException>(sw_delegate {Boolean::Parse("tru e");});
+      TUnit::Assert::Throws<FormatException>(_delegate {Boolean::Parse("tru e");});
     }
     
     void ParseABadFormatString() {
-      TUnit::Assert::Throws<FormatException>(sw_delegate {Boolean::Parse("Not true or false");});
+      TUnit::Assert::Throws<FormatException>(_delegate {Boolean::Parse("Not true or false");});
     }
     
   };
   
-  sw_test(BooleanTest, ConstructorDefault)
-  sw_test(BooleanTest, ConstructorWithFalse)
-  sw_test(BooleanTest, ConstructorWithTrue)
-  sw_test(BooleanTest, ConstructorWith0)
-  sw_test(BooleanTest, ConstructorWith1)
-  sw_test(BooleanTest, ConstructorWithBooleanFalse)
-  sw_test(BooleanTest, ConstructorWithBooleanTrue)
-  sw_test(BooleanTest, ConstructorByCopyWithBooleanFalse)
-  sw_test(BooleanTest, ConstructorByCopyWithBooleanTrue)
-  sw_test(BooleanTest, ParseBooleanFalseString)
-  sw_test(BooleanTest, ParseBooleanTrueString)
-  sw_test(BooleanTest, ParseFalseString)
-  sw_test(BooleanTest, ParseTrueString)
-  sw_test(BooleanTest, ParseTrailedWithSpaceFalseString)
-  sw_test(BooleanTest, ParseTrailedWithSpaceTrueString)
-  sw_test(BooleanTest, ParsePrecededWithSpaceFalseString)
-  sw_test(BooleanTest, ParsePrecededWithSpaceTrueString)
-  sw_test(BooleanTest, ParseLowerCaseFalseString)
-  sw_test(BooleanTest, ParseLowerCaseTrueString)
-  sw_test(BooleanTest, ParseUpperCaseFalseString)
-  sw_test(BooleanTest, ParseUpperCaseTrueString)
-  sw_test(BooleanTest, ParseAnyCaseFalseString)
-  sw_test(BooleanTest, ParseAnyCaseTrueString)
-  sw_test(BooleanTest, ParseBadFormatFalseString)
-  sw_test(BooleanTest, ParseABadFormatTrueString)
-  sw_test(BooleanTest, ParseABadFormatString)
+  _test(BooleanTest, ConstructorDefault)
+  _test(BooleanTest, ConstructorWithFalse)
+  _test(BooleanTest, ConstructorWithTrue)
+  _test(BooleanTest, ConstructorWith0)
+  _test(BooleanTest, ConstructorWith1)
+  _test(BooleanTest, ConstructorWithBooleanFalse)
+  _test(BooleanTest, ConstructorWithBooleanTrue)
+  _test(BooleanTest, ConstructorByCopyWithBooleanFalse)
+  _test(BooleanTest, ConstructorByCopyWithBooleanTrue)
+  _test(BooleanTest, ParseBooleanFalseString)
+  _test(BooleanTest, ParseBooleanTrueString)
+  _test(BooleanTest, ParseFalseString)
+  _test(BooleanTest, ParseTrueString)
+  _test(BooleanTest, ParseTrailedWithSpaceFalseString)
+  _test(BooleanTest, ParseTrailedWithSpaceTrueString)
+  _test(BooleanTest, ParsePrecededWithSpaceFalseString)
+  _test(BooleanTest, ParsePrecededWithSpaceTrueString)
+  _test(BooleanTest, ParseLowerCaseFalseString)
+  _test(BooleanTest, ParseLowerCaseTrueString)
+  _test(BooleanTest, ParseUpperCaseFalseString)
+  _test(BooleanTest, ParseUpperCaseTrueString)
+  _test(BooleanTest, ParseAnyCaseFalseString)
+  _test(BooleanTest, ParseAnyCaseTrueString)
+  _test(BooleanTest, ParseBadFormatFalseString)
+  _test(BooleanTest, ParseABadFormatTrueString)
+  _test(BooleanTest, ParseABadFormatString)
   
   TEST(Boolean, TryParse) {
     bool result;

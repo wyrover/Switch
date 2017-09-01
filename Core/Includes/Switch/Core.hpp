@@ -374,6 +374,7 @@
 #include "CurrentInformation.hpp"
 #include "Event.hpp"
 #include "ExceptionPtr.hpp"
+#include "Foreach.hpp"
 #include "InitializerList.hpp"
 #include "Interface.hpp"
 #include "Is.hpp"

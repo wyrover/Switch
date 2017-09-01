@@ -25,7 +25,7 @@ namespace Switch {
           KeyNotFoundException(const KeyNotFoundException& value) : SystemException(value) {}
           
           /// @brief Create a new instance of class KeyNotFoundException
-          /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
+          /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
           /// @remarks Message is set with the default message associate to the error.
           KeyNotFoundException(const CurrentInformation& information) : SystemException(information) {}
           
@@ -35,13 +35,13 @@ namespace Switch {
           
           /// @brief Create a new instance of class KeyNotFoundException
           /// @param message Message string associate to the error.
-          /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
+          /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
           KeyNotFoundException(const System::String& message, const CurrentInformation& information) : SystemException(message, information) {}
           
           /// @brief Create a new instance of class KeyNotFoundException
           /// @param message Message string associate to the error.
           /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
-          /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
+          /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
           KeyNotFoundException(const System::String& message, const System::Exception& innerException, const CurrentInformation& information) : SystemException(message, innerException, information) {}
           
         private:

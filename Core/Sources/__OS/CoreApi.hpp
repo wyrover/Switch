@@ -25,9 +25,9 @@
 #include "../../Includes/Switch/Types.hpp"
 
 namespace __OS {
-  class CoreApi sw_static {
+  class CoreApi _static {
   public:
-    class Console sw_static {
+    class Console _static {
     public:
       static void Beep(int32 freq, int32 dur);
       static void Clrscr();
@@ -72,7 +72,7 @@ namespace __OS {
       static bool SetWindowWidth(int32 width);
     };
 
-    struct DateTime sw_static {
+    struct DateTime _static {
     public:
       static int32 Ftime(int64& seconds, int32& milliseconds, int32& timeZone, bool& daylight);
       static int32 Gmtime(int64 time, int32& year, int32& month, int32& day, int32& hour, int32& minute, int32& second, int32& dayOfYear, int32& dayOfWeek);
@@ -83,12 +83,12 @@ namespace __OS {
       static bool IsDaylight(int64 localTime);
     };
     
-    struct Debugger sw_static {
+    struct Debugger _static {
     public:
       static void Log(int32 level, const string& category, const string& message);
     };
 
-    class Directory sw_static {
+    class Directory _static {
     public:
       static char32 AltDirectorySeparatorChar();
       static char32 DirectorySeparatorChar();
@@ -111,7 +111,7 @@ namespace __OS {
       static string GetTempPath();
     };
 
-    class Drive sw_static {
+    class Drive _static {
     public:
       static bool GetAvailableFreeSpace(const string& rootPathName, int64& freeBytes, int64& totalNumberOfBytes, int64& totalNumberOfFreeBytes);
       static System::IO::DriveType GetDriveType(const string& rootPathName);
@@ -120,7 +120,7 @@ namespace __OS {
       static bool SetVolumeLabel(const string& rootPathName, const string& volumeName);
     };
     
-    class Dns sw_static {
+    class Dns _static {
     public:
       static void Destroy(intptr host);
       static void EndHostent();
@@ -133,7 +133,7 @@ namespace __OS {
       static void SetHostent(bool stayOpen);
     };
     
-    class Environment sw_static {
+    class Environment _static {
     public:
       static string NewLine();
       static System::PlatformID GetOsPlatformID();
@@ -149,7 +149,7 @@ namespace __OS {
       static System::Guid NewGuid();
     };
     
-    class Format sw_static {
+    class Format _static {
     public:
       static const string& Integer();
       static const string& IntegerWithPrecision();
@@ -159,7 +159,7 @@ namespace __OS {
       static const string& LowerHexadecimalWithPrecision();
     };
     
-    class Interlocked sw_static {
+    class Interlocked _static {
     public:
       static int32 Add(int32& location, int32 value);
       static int64 Add(int64& location, int64 value);
@@ -177,7 +177,7 @@ namespace __OS {
       static int64 Increment(int64& location);
     };
     
-    class Process sw_static {
+    class Process _static {
     public:
       static intptr Start(const System::Diagnostics::ProcessStartInfo& processStartInfo);
       static bool Close(intptr handle);
@@ -191,7 +191,7 @@ namespace __OS {
       static bool WaitForExit(intptr handle, int32 timeout, int32& exitCode);
     };
     
-    class Registry sw_static {
+    class Registry _static {
     public:
       static int32 CloseKey(intptr key);
       static int32 CreateSubKey(intptr rootKey, const string& subKey, intptr& key);
@@ -211,7 +211,7 @@ namespace __OS {
       static int32 SetValue(intptr key, const string& keyName, Microsoft::Win32::RegistryValueKind type, const byte* data, int32 length);
     };
 
-    class Security sw_static {
+    class Security _static {
     public:
       static System::Security::SecureString ToSecureSecureString(const string& unsecureString);
       static string ToSecureString(const string& unsecureString);
@@ -219,7 +219,7 @@ namespace __OS {
       static string ToUnsecureString(const string& secureString);
     };
     
-    class Socket sw_static {
+    class Socket _static {
     public:
       static int32 AddressFamilyToNative(System::Net::Sockets::AddressFamily addressFamily);
       static System::Net::Sockets::AddressFamily NativeToAddressFamily(int32 addressFamily);
@@ -246,7 +246,7 @@ namespace __OS {
       static int32 Shutdown(intptr handle, int32 how);
     };
     
-    class Thread sw_static {
+    class Thread _static {
     public:
       static bool Cancel(intptr handle);
       static intptr GetCurrent();
@@ -256,12 +256,12 @@ namespace __OS {
       static void Suspend(intptr handle);
     };
     
-    class Type sw_static {
+    class Type _static {
     public:
       static string Demangle(const string& name);
     };
 
-    class UnicodeCharacters sw_static {
+    class UnicodeCharacters _static {
     public:
       static bool ValidateCodePoint(uint32 codePoint);
       static bool IsAlpha(uint32 codePoint);
@@ -269,13 +269,13 @@ namespace __OS {
       static bool IsPunctuation(uint32 codePoint);
     };
 
-    class UnicodeEncodings sw_static {
+    class UnicodeEncodings _static {
     public:
-      class ASCII sw_static {
+      class ASCII _static {
       public:
       };
 
-      class UTF8 sw_static {
+      class UTF8 _static {
       public:
         static byte GetFormat(byte b);
         static int32 GetNextCodeIndex(const std::string& str, int32 pos);
@@ -290,7 +290,7 @@ namespace __OS {
         static System::Array<byte> ToBytes(uint32 code);
       };
 
-      class UTF16 sw_static {
+      class UTF16 _static {
       public:
         static int32 GetByteCount(uint32 code);
         static int32 Encode(uint32 code, byte bytes[], bool big_endian);
@@ -298,7 +298,7 @@ namespace __OS {
         static int32 GetLength(const byte* bytes, uint32 nb_bytes, bool big_endian);
       };
 
-      class UTF32 sw_static {
+      class UTF32 _static {
       public:
         static void Encode(uint32 code, byte& b1, byte& b2, byte& b3, byte& b4, bool big_endian);
         static uint32 Decode(byte b1, byte b2, byte b3, byte b4, bool big_endian);

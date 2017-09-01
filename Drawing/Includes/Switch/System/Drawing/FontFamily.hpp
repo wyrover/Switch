@@ -14,7 +14,7 @@ namespace Switch {
     /// @brief The System::Drawing namespace provides access to GDI+ basic graphics functionality. More advanced functionality is provided in the System::Drawing::Drawing2D, System::Drawing::Imaging, and System::Drawing::Text namespaces.
     namespace Drawing {
       /// @brief Defines a group of type faces having a similar basic design and certain variations in styles. This class cannot be inherited.
-      class sw_public FontFamily final : public object {
+      class _public FontFamily final : public object {
       public:
         FontFamily(const string& name);
         FontFamily(System::Drawing::Text::GenericFontFamilies genericFamily);
@@ -37,7 +37,7 @@ namespace Switch {
         static Property<FontFamily, ReadOnly> GenericSerif;
 
         Property<string, ReadOnly> Name{
-          sw_get {return this->GetName();}
+          _get {return this->GetName();}
         };
 
         bool IsStyleAvailable(FontStyle style) const;
@@ -47,7 +47,7 @@ namespace Switch {
         struct FontFamilyData {
           intptr handle = 0;
         };
-        refptr<FontFamilyData> data = sw_new<FontFamilyData>();
+        refptr<FontFamilyData> data = ref_new<FontFamilyData>();
       };
     }
   }

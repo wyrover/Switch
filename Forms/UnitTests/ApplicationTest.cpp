@@ -12,5 +12,5 @@ namespace SwitchUnitTests {
     }
   };
   
-  sw_test (ApplicationTest, EnableVisualStyles)
+  _test (ApplicationTest, EnableVisualStyles)
 }

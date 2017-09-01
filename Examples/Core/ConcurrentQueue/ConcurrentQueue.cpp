@@ -31,7 +31,7 @@ namespace Examples {
       Array<refptr<Thread>> actions(4);
       
       for (int i = 0; i < 4; i++) {
-        actions[i] = sw_new<Thread>((ThreadStart)&Program::ActionTryDequeue);
+        actions[i] = ref_new<Thread>((ThreadStart)&Program::ActionTryDequeue);
       }
       
       // Start 4 concurrent consuming actions.
@@ -65,7 +65,7 @@ namespace Examples {
   int Program::outerSum = 0;
 }
 
-sw_startup (Examples::Program)
+_startup (Examples::Program)
 
 
 // This code example produces the following output:

@@ -15,7 +15,7 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief Represents a time interval.
-    struct sw_public TimeSpan : public object, public IComparable {
+    struct _public TimeSpan : public object, public IComparable {
     public:
       /// @brief Represents the maximum TimeSpan value. This field is constant.
       /// @remarks The value of this field is equivalent to Int64::MaxValue ticks. The String representation of this value is positive 106751990248054775807
@@ -86,67 +86,67 @@ namespace Switch {
       /// @brief Gets the number of whole days represented by the current TimeSpan class.
       /// @return int32 The total number of days represented by this instance
       Property<int32, ReadOnly> Days {
-        sw_get {return static_cast<int32>(this->value / TimeSpan::TicksPerDay);}
+        _get {return static_cast<int32>(this->value / TimeSpan::TicksPerDay);}
       };
 
       /// @brief Gets the number of whole hours represented by the current TimeSpan class.
       /// @return int32 The total number of hours represented by this instance
       Property<int32, ReadOnly> Hours {
-        sw_get {return static_cast<int32>((this->value % TimeSpan::TicksPerDay) / TimeSpan::TicksPerHour);}
+        _get {return static_cast<int32>((this->value % TimeSpan::TicksPerDay) / TimeSpan::TicksPerHour);}
       };
 
       /// @brief Gets the number of whole milliseconds represented by the current TimeSpan class.
       /// @return int32 The total number of millisecond represented by this instance
       Property<int32, ReadOnly> Milliseconds {
-        sw_get {return static_cast<int32>(((((this->value % TimeSpan::TicksPerDay) % TimeSpan::TicksPerHour) % TicksPerMinute) % TimeSpan::TicksPerSecond) / TimeSpan::TicksPerMillisecond);}
+        _get {return static_cast<int32>(((((this->value % TimeSpan::TicksPerDay) % TimeSpan::TicksPerHour) % TicksPerMinute) % TimeSpan::TicksPerSecond) / TimeSpan::TicksPerMillisecond);}
       };
 
       /// @brief Gets the number of whole minutes represented by the current TimeSpan class.
       /// @return int32 The total number of minutes represented by this instance
       Property<int32, ReadOnly> Minutes {
-        sw_get {return static_cast<int32>(((this->value % TimeSpan::TicksPerDay) % TimeSpan::TicksPerHour) / TimeSpan::TicksPerMinute); }
+        _get {return static_cast<int32>(((this->value % TimeSpan::TicksPerDay) % TimeSpan::TicksPerHour) / TimeSpan::TicksPerMinute); }
       };
 
       /// @brief Gets the number of whole seconds represented by the current TimeSpan class.
       /// @return int32 The total number of seconds represented by this instance
       Property<int32, ReadOnly> Seconds {
-        sw_get {return static_cast<int32>((((this->value % TimeSpan::TicksPerDay) % TimeSpan::TicksPerHour) % TimeSpan::TicksPerMinute) / TimeSpan::TicksPerSecond);}
+        _get {return static_cast<int32>((((this->value % TimeSpan::TicksPerDay) % TimeSpan::TicksPerHour) % TimeSpan::TicksPerMinute) / TimeSpan::TicksPerSecond);}
       };
 
       /// @brief Gets the number of whole tisks represented by the current TimeSpan class.
       /// @return int64 The tick component of this instance. The return value can be positive or negative
       Property<int64, ReadOnly> Ticks {
-        sw_get {return this->value;}
+        _get {return this->value;}
       };
 
       /// @brief Gets the value of the current TimeSpan class expressed in whole and fractional days.
       /// @return double The day component of this instance. The return value can be positive or negative
       Property<double, ReadOnly> TotalDays {
-        sw_get {return static_cast<double>(this->value) / TimeSpan::TicksPerDay;}
+        _get {return static_cast<double>(this->value) / TimeSpan::TicksPerDay;}
       };
 
       /// @brief Gets the value of the current TimeSpan class expressed in whole and fractional hours.
       /// @return double The hour component of this instance. The return value can be positive or negative
       Property<double, ReadOnly> TotalHours {
-        sw_get {return static_cast<double>(this->value) / TimeSpan::TicksPerHour;}
+        _get {return static_cast<double>(this->value) / TimeSpan::TicksPerHour;}
       };
 
       /// @brief Gets the value of the current TimeSpan class expressed in whole and fractional millisecond.
       /// @return double The millisecond component of this instance. The return value can be positive or negative
       Property<double, ReadOnly> TotalMilliseconds {
-        sw_get {return static_cast<double>(this->value) / TimeSpan::TicksPerMillisecond;}
+        _get {return static_cast<double>(this->value) / TimeSpan::TicksPerMillisecond;}
       };
 
       /// @brief Gets the value of the current TimeSpan class expressed in whole and fractional minutes.
       /// @return double The minute component of this instance. The return value can be positive or negative
       Property<double, ReadOnly> TotalMinutes {
-        sw_get {return static_cast<double>(this->value) / TimeSpan::TicksPerMinute;}
+        _get {return static_cast<double>(this->value) / TimeSpan::TicksPerMinute;}
       };
 
       /// @brief Gets the value of the current TimeSpan class expressed in whole and fractional seconds.
       /// @return double The second component of this instance. The return value can be positive or negative
       Property<double, ReadOnly> TotalSeconds {
-        sw_get {return static_cast<double>(this->value) / TimeSpan::TicksPerSecond;}
+        _get {return static_cast<double>(this->value) / TimeSpan::TicksPerSecond;}
       };
 
       /// @brief Adds the specified TimeSpan to this instance

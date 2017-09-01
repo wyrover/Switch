@@ -13,36 +13,36 @@ namespace SwitchUnitTests {
       static string result;
       result = "";
       struct MyStruct {
-        sw_async(Task<>, AsyncTask, {result = "Forty two";});
+        _async(Task<>, AsyncTask, {result = "Forty two";});
       };
       
       MyStruct myStruct;
-      sw_await myStruct.AsyncTask;
+      _await myStruct.AsyncTask;
       Assert::AreEqual("Forty two", result);
     }
     
     void RunningAsyncTaskInt32AndAwait() {
       struct MyStruct {
-        sw_async(Task<int32>, AsyncTask, {return 42;});
+        _async(Task<int32>, AsyncTask, {return 42;});
       };
       
       MyStruct myStruct;
-      int32 result = sw_await myStruct.AsyncTask;
+      int32 result = _await myStruct.AsyncTask;
       Assert::AreEqual(42, result);
     }
     
     void RunningAsyncTaskStringAndAwait() {
       struct MyStruct {
-        sw_async(Task<string>, AsyncTask, {return "Forty two";});
+        _async(Task<string>, AsyncTask, {return "Forty two";});
       };
       
       MyStruct myStruct;
-      string result = sw_await myStruct.AsyncTask;
+      string result = _await myStruct.AsyncTask;
       Assert::AreEqual("Forty two", result);
     }
   };
   
-  sw_test(AwaitTest, RunningAsyncTaskAndAwait)
-  sw_test(AwaitTest, RunningAsyncTaskInt32AndAwait)
-  sw_test(AwaitTest, RunningAsyncTaskStringAndAwait)
+  _test(AwaitTest, RunningAsyncTaskAndAwait)
+  _test(AwaitTest, RunningAsyncTaskInt32AndAwait)
+  _test(AwaitTest, RunningAsyncTaskStringAndAwait)
 }

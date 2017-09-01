@@ -8,13 +8,13 @@ using namespace System::Collections::Generic;
 namespace DesignPatterns {
   namespace Behavioral {
     // The 'Observer' abstract class
-    class Observer sw_abstract {
+    class Observer _abstract {
     public:
       virtual void Update() = 0;
     };
 
     // The 'Subject' abstract class
-    class Subject sw_abstract {
+    class Subject _abstract {
     public:
       void Attach(refptr<Observer> observer) {this->observers.Add(observer);}
 
@@ -35,8 +35,8 @@ namespace DesignPatterns {
     public:
       // Gets or sets subject state
       Property<string> SubjectState {
-        sw_get { return this->subjectState; },
-        sw_set { this->subjectState = value; }
+        _get { return this->subjectState; },
+        _set { this->subjectState = value; }
       };
 
     private:
@@ -56,8 +56,8 @@ namespace DesignPatterns {
 
       // Gets or sets subject
       Property<refptr<ConcreteSubject>> Subject {
-        sw_get { return this->subject; },
-        sw_set { this->subject = value; }
+        _get { return this->subject; },
+        _set { this->subject = value; }
       };
 
     private:
@@ -73,11 +73,11 @@ namespace DesignPatterns {
       // Entry point into console application.
       static void Main() {
         // Configure Observer pattern
-        refptr<ConcreteSubject> s = sw_new<ConcreteSubject>();
+        refptr<ConcreteSubject> s = ref_new<ConcreteSubject>();
         
-        s->Attach(sw_new<ConcreteObserver>(s, "X"));
-        s->Attach(sw_new<ConcreteObserver>(s, "Y"));
-        s->Attach(sw_new<ConcreteObserver>(s, "Z"));
+        s->Attach(ref_new<ConcreteObserver>(s, "X"));
+        s->Attach(ref_new<ConcreteObserver>(s, "Y"));
+        s->Attach(ref_new<ConcreteObserver>(s, "Z"));
         
         // Change subject and notify observers
         s->SubjectState = "ABC";
@@ -88,7 +88,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-sw_startup (DesignPatterns::Behavioral::MainApp)
+_startup (DesignPatterns::Behavioral::MainApp)
 
 // This code produces the following output:
 //

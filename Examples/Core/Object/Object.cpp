@@ -36,7 +36,7 @@ class App final {
 public:
   static void Main() {
     // Construct a Point object.
-    refptr<ObjectTest::Point> p1 = sw_new<ObjectTest::Point>(1, 2);
+    refptr<ObjectTest::Point> p1 = ref_new<ObjectTest::Point>(1, 2);
     
     // Make another Point object that is a copy of the first.
     refptr<ObjectTest::Point> p2 = p1->Copy();
@@ -58,7 +58,7 @@ public:
   }
 };
 
-sw_startup (App)
+_startup (App)
 
 // This code produces the following output:
 //

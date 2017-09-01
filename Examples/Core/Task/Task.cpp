@@ -9,13 +9,13 @@ namespace Examples {
   public:
     static void Main() {
       // Create a counter task
-      Task<> counterTask = Task<>::Run(sw_delegate {
+      Task<> counterTask = Task<>::Run(_delegate {
         for (int counter = 1; counter <= 5; counter++)
           Console::WriteLine("counter = {0}", counter);
       });
       
       // Create a string result task
-      Task<string> stringResultTask = Task<>::Run<string>(sw_delegate() {
+      Task<string> stringResultTask = Task<>::Run<string>(_delegate() {
         return "This is a string result";
       });
       
@@ -26,7 +26,7 @@ namespace Examples {
       Console::WriteLine(stringResultTask.Result);
       
       // Create action
-      Action<> parallelAction = sw_delegate {
+      Action<> parallelAction = _delegate {
         Console::WriteLine("[TaskId {0}] Run this action in parallel!", Task<>::CurrentId);
       };
       
@@ -36,7 +36,7 @@ namespace Examples {
   };
 }
 
-sw_startup (Examples::Program)
+_startup (Examples::Program)
 
 // This code produces output similar to the following:
 //

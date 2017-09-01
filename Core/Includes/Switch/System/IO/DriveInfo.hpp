@@ -15,7 +15,7 @@ namespace Switch {
       /// @brief Provides instance methods for the creation, copying, deletion, moving, and
       /// opening of files, and aids in the creation of System::IO::FileStream objects.
       /// This class cannot be inherited.
-      class sw_public DriveInfo final : public Object {
+      class _public DriveInfo final : public Object {
       public:
         /// @brief Provides access to information on drive.
         DriveInfo() { }
@@ -39,53 +39,53 @@ namespace Switch {
         /// @return The amount of free space available on the drive, in bytes.
         /// @exception IO::IOException An I/O error occurred (for example, a disk error or a drive was not ready).
         Property<int64, ReadOnly> AvailableFreeSpace {
-          sw_get {return this->GetAvailableFreeSpace();}
+          _get {return this->GetAvailableFreeSpace();}
         };
 
         /// @brief Gets the name of the file system, such as NTFS or FAT32.
         /// @return The name of the file system on the specified drive.
         /// @exception IO::IOException An I/O error occurred (for example, a disk error or a drive was not ready).
         Property<string, ReadOnly> DriveFormat {
-          sw_get {return this->GetDriveFormat();}
+          _get {return this->GetDriveFormat();}
         };
 
         /// @brief Gets the drive type.
         /// @return One of the System::IO::DriveType values.
         /// @exception IO::IOException An I/O error occurred.
         Property<System::IO::DriveType, ReadOnly> DriveType {
-          sw_get {return this->GetDriveType();}
+          _get {return this->GetDriveType();}
         };
 
         /// @brief Gets a value indicating whether a drive is ready.
         /// @return true if the drive is ready; false if the drive is not ready.
         Property<bool, ReadOnly> IsReady {
-          sw_get {return this->GetIsReady();}
+          _get {return this->GetIsReady();}
         };
 
         /// @brief Gets the name of a drive.
         /// @return The name of the drive.
         Property<String, ReadOnly> Name {
-          sw_get {return this->GetName();}
+          _get {return this->GetName();}
         };
 
         /// @brief Gets the root directory of a drive.
         /// @return A System::IO::DirectoryInfo object that contains the root directory of the drive.
         Property<DirectoryInfo, ReadOnly> RootDirectory {
-          sw_get {return this->GetRootDirectory();}
+          _get {return this->GetRootDirectory();}
         };
 
         /// @brief Gets the total amount of free space available on a drive.
         /// @return The total free space available on a drive, in bytes.
         /// @exception IO::IOException An I/O error occurred (for example, a disk error or a drive was not ready).
         Property<int64, ReadOnly> TotalFreeSpace {
-          sw_get {return this->GetTotalFreeSpace();}
+          _get {return this->GetTotalFreeSpace();}
         };
 
         /// @brief Gets the total size of storage space on a drive.
         /// @return The total size of the drive, in bytes.
         /// @exception IO::IOException An I/O error occurred (for example, a disk error or a drive was not ready).
         Property<int64, ReadOnly> TotalSize {
-          sw_get {return this->GetTotalSize();}
+          _get {return this->GetTotalSize();}
         };
 
         /// @brief Gets or sets the volume label of a drive.
@@ -96,8 +96,8 @@ namespace Switch {
         /// @exception IO::IOException An I/O error occurred (for example, a disk error or a drive was not ready).
         /// @exception UnauthorizedAccessException The volume label is being set on a network or CD-ROM drive.
         Property<string> VolumeLabel {
-          sw_get {return this->GetVolumeLabel();},
-          sw_set {this->SetVolumeLabel(value);}
+          _get {return this->GetVolumeLabel();},
+          _set {this->SetVolumeLabel(value);}
         };
 
         /// @brief Retrieves the drive names of all logical drives on a computer.

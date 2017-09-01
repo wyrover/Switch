@@ -66,7 +66,7 @@ RegistryKey::RegistryKey(RegistryHive rhive)  : name(ToName(rhive)), permission(
     ::CreateDefaultFile(Path::Combine(this->path, "Values.xml"));
   }
   
-  this->handle = sw_new<RegistryHandle>();
+  this->handle = ref_new<RegistryHandle>();
   this->Load();
 }
 
@@ -87,9 +87,9 @@ RegistryKey RegistryKey::CreateSubKey(const System::String& subKey, RegistryKeyP
       return key;
   
   if (this->permission != RegistryKeyPermissionCheck::ReadWriteSubTree)
-    throw UnauthorizedAccessException(sw_current_information);
+    throw UnauthorizedAccessException(_current_information);
   
-  key.handle = sw_new<RegistryHandle>();
+  key.handle = ref_new<RegistryHandle>();
   key.path = ::MakePath(this->path, subKey);
   Directory::CreateDirectory(key.path);
   ::CreateDefaultFile(Path::Combine(key.path, "Values.xml"));
@@ -101,26 +101,26 @@ RegistryKey RegistryKey::CreateSubKey(const System::String& subKey, RegistryKeyP
 
 void  RegistryKey::DeleteSubKey(const System::String& subKey, bool throwOnMissingSubKey) {
   if (subKey == "")
-    throw InvalidOperationException(sw_current_information);
+    throw InvalidOperationException(_current_information);
   
   if (IsBaseKey(subKey))
-    throw ArgumentException(sw_current_information);
+    throw ArgumentException(_current_information);
   
   System::String path = ::MakePath(this->path, subKey);
   if (::ExistSubKey(this->path, subKey)) {
     if (DirectoryInfo(path).GetDirectories().Count != 0)
-      throw InvalidOperationException(sw_current_information);
+      throw InvalidOperationException(_current_information);
     Directory::Delete(path, true);
     return;
   }
   
   if (throwOnMissingSubKey)
-    throw ArgumentException(sw_current_information);
+    throw ArgumentException(_current_information);
 }
 
 void  RegistryKey::DeleteSubKeyTree(const System::String& subKey, bool throwOnMissingSubKey) {
   if (subKey == "" or IsBaseKey(subKey))
-    throw ArgumentNullException(sw_current_information);
+    throw ArgumentNullException(_current_information);
   
   System::String path = ::MakePath(this->path, subKey);
   if (::ExistSubKey(this->path, subKey)) {
@@ -129,7 +129,7 @@ void  RegistryKey::DeleteSubKeyTree(const System::String& subKey, bool throwOnMi
   }
   
   if (throwOnMissingSubKey)
-    throw ArgumentException(sw_current_information);
+    throw ArgumentException(_current_information);
 }
 
 Array<System::String> RegistryKey::GetSubKeyNames() {
@@ -172,7 +172,7 @@ void RegistryKey::Load() {
       this->values[rkv.Key().ToLower()] = rkv;
     }
   } catch(const System::Exception& e) {
-    throw System::FormatException(sw_current_information);
+    throw System::FormatException(_current_information);
   }
 }
 

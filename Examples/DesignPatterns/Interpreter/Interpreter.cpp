@@ -12,7 +12,7 @@ namespace DesignPatterns {
     };
     
     // The 'AbstractExpression' abstract class
-    class AbstractExpression sw_abstract {
+    class AbstractExpression _abstract {
     public:
       virtual void Interpret(const Context& context) const =0;
     };
@@ -56,7 +56,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-sw_startup (DesignPatterns::Behavioral::MainApp)
+_startup (DesignPatterns::Behavioral::MainApp)
 
 // This code produces the following output:
 //

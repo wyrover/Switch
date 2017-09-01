@@ -65,7 +65,7 @@ namespace Examples {
         Console::Write(msg);
         keyPressed = Console::ReadKey();
         Console::WriteLine();
-        if (Array<>::Exists<char32>(validChars, sw_delegate(const char32& ch) {return Char(ch).Equals(Char::ToUpper(keyPressed.KeyChar));}))
+        if (Array<>::Exists<char32>(validChars, _delegate(const char32& ch) {return Char(ch).Equals(Char::ToUpper(keyPressed.KeyChar));}))
           valid = true;
         
       } while (! valid);
@@ -74,7 +74,7 @@ namespace Examples {
   };
 }
 
-sw_startup (Examples::Program)
+_startup (Examples::Program)
 
 // This code produces the following output:
 //

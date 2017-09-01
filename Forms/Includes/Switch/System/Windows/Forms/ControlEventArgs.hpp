@@ -61,7 +61,7 @@ namespace Switch {
         ///   }
         /// }
         /// @endcode
-        class sw_public ControlEventArgs : public EventArgs {
+        class _public ControlEventArgs : public EventArgs {
         public:
           /// @brief nitializes a new instance of the ControlEventArgs class.
           ControlEventArgs() {}

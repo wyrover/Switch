@@ -23,10 +23,10 @@ namespace SwitchUnitTests {
       for (Int32 item : collection) {
         checksum1 += 100 + index;
         checksum2 += item;
-        Assert::AreEqual(100 + index++, item, sw_current_information);
+        Assert::AreEqual(100 + index++, item, _current_information);
       }
       
-      Assert::AreEqual(checksum1, checksum2, sw_current_information);
+      Assert::AreEqual(checksum1, checksum2, _current_information);
     }
     
     void List() {
@@ -42,10 +42,10 @@ namespace SwitchUnitTests {
       for (int32 item : collection) {
         checksum1 += 100 + index;
         checksum2 += item;
-        Assert::AreEqual(100 + index++, item, sw_current_information);
+        Assert::AreEqual(100 + index++, item, _current_information);
       }
       
-      Assert::AreEqual(checksum1, checksum2, sw_current_information);
+      Assert::AreEqual(checksum1, checksum2, _current_information);
     }
     
     void LinkedList() {
@@ -61,10 +61,10 @@ namespace SwitchUnitTests {
       for (int32 item : collection) {
         checksum1 += 100 + index;
         checksum2 += item;
-        Assert::AreEqual(100 + index++, item, sw_current_information);
+        Assert::AreEqual(100 + index++, item, _current_information);
       }
       
-      Assert::AreEqual(checksum1, checksum2, sw_current_information);
+      Assert::AreEqual(checksum1, checksum2, _current_information);
     }
     
     void HashSet() {
@@ -78,7 +78,7 @@ namespace SwitchUnitTests {
         checksum2 += item;
       }
       
-      Assert::AreEqual(checksum1, checksum2, sw_current_information);
+      Assert::AreEqual(checksum1, checksum2, _current_information);
     }
     
     void SortedSet() {
@@ -92,7 +92,7 @@ namespace SwitchUnitTests {
         checksum2 += item;
       }
       
-      Assert::AreEqual(checksum1, checksum2, sw_current_information);
+      Assert::AreEqual(checksum1, checksum2, _current_information);
     }
     
     void SortedDictionary() {
@@ -106,7 +106,7 @@ namespace SwitchUnitTests {
         checksum2 += item.Value();
       }
       
-      Assert::AreEqual(checksum1, checksum2, sw_current_information);
+      Assert::AreEqual(checksum1, checksum2, _current_information);
     }
     
     void ListT() {
@@ -122,29 +122,29 @@ namespace SwitchUnitTests {
       // test foreach without scope
       index = 1;
       for (Int32 i : testList)
-        Assert::AreEqual(index++, i, sw_current_information);
+        Assert::AreEqual(index++, i, _current_information);
       
-      Assert::AreEqual(index, 6, sw_current_information);
+      Assert::AreEqual(index, 6, _current_information);
       
       // test full enumeration
       index = 0;
       count = 0;
       for (Int32 i : testList)  {
-        Assert::AreEqual(++index, i, sw_current_information);
+        Assert::AreEqual(++index, i, _current_information);
         count++;
       }
-      Assert::AreEqual(count, 5, sw_current_information);
+      Assert::AreEqual(count, 5, _current_information);
       
       // test break
       index = 0;
       count = 0;
       for (Int32 i : testList) {
-        Assert::AreEqual(++index, i, sw_current_information);
+        Assert::AreEqual(++index, i, _current_information);
         count++;
         if (count == 2)
           break;
       }
-      Assert::AreEqual(count, 2, sw_current_information);
+      Assert::AreEqual(count, 2, _current_information);
       
       // test modification
       for (Int32& i : testList) {
@@ -153,7 +153,7 @@ namespace SwitchUnitTests {
       
       index = 1;
       for (Int32 i : testList) {
-        Assert::AreEqual(++index, i, sw_current_information);
+        Assert::AreEqual(++index, i, _current_information);
       }
     }
     
@@ -170,10 +170,10 @@ namespace SwitchUnitTests {
       for (int32 item : collection) {
         checksum1 += 100 + index;
         checksum2 += item;
-        Assert::AreEqual(100 + index++, item, sw_current_information);
+        Assert::AreEqual(100 + index++, item, _current_information);
       }
       
-      Assert::AreEqual(checksum1, checksum2, sw_current_information);
+      Assert::AreEqual(checksum1, checksum2, _current_information);
     }
     
     void Array2() {
@@ -190,27 +190,27 @@ namespace SwitchUnitTests {
       for (uint32 i : testArray)
         index = i;
       
-      Assert::AreEqual(index, 5u, sw_current_information);
+      Assert::AreEqual(index, 5u, _current_information);
       
       // test full enumeration
       index = 0;
       count = 0;
       for (uint32 i : testArray) {
-        Assert::AreEqual(++index, i, sw_current_information);
+        Assert::AreEqual(++index, i, _current_information);
         count++;
       }
-      Assert::AreEqual(count, 5u, sw_current_information);
+      Assert::AreEqual(count, 5u, _current_information);
       
       // test break
       index = 0;
       count = 0;
       for (uint32 i : testArray) {
-        Assert::AreEqual(++index, i, sw_current_information);
+        Assert::AreEqual(++index, i, _current_information);
         count++;
         if (count == 2)
           break;
       }
-      Assert::AreEqual(count, 2u, sw_current_information);
+      Assert::AreEqual(count, 2u, _current_information);
       
       // test modification
       for (uint32& i : testArray) {
@@ -219,7 +219,7 @@ namespace SwitchUnitTests {
       
       index = 1;
       for (uint32 i : testArray) {
-        Assert::AreEqual(++index, i, sw_current_information);
+        Assert::AreEqual(++index, i, _current_information);
       }
     }
     
@@ -234,7 +234,7 @@ namespace SwitchUnitTests {
         checksum2 += item.Value();
       }
       
-      Assert::AreEqual(checksum1, checksum2, sw_current_information);
+      Assert::AreEqual(checksum1, checksum2, _current_information);
     }
     
     void Dictionary2() {
@@ -250,17 +250,17 @@ namespace SwitchUnitTests {
       // test foreach without scope
       for (auto i : testDictionary)
         count += i.Key();
-      Assert::AreEqual(15u, count, sw_current_information);
+      Assert::AreEqual(15u, count, _current_information);
       
       // test full enumeration
       count = 0u;
       for (auto i : testDictionary) {
-        Assert::GreaterOrEqual(i.Key(), 1u, sw_current_information);
-        Assert::LessOrEqual(i.Key(), 5u, sw_current_information);
-        Assert::AreEqual(UInt32(i.Key()).ToString(), i.Value(), sw_current_information);
+        Assert::GreaterOrEqual(i.Key(), 1u, _current_information);
+        Assert::LessOrEqual(i.Key(), 5u, _current_information);
+        Assert::AreEqual(UInt32(i.Key()).ToString(), i.Value(), _current_information);
         count++;
       }
-      Assert::AreEqual(5u, count, sw_current_information);
+      Assert::AreEqual(5u, count, _current_information);
       
       // test break
       count = 0u;
@@ -269,7 +269,7 @@ namespace SwitchUnitTests {
           break;
       }
       
-      Assert::AreEqual(count, 2u, sw_current_information);
+      Assert::AreEqual(count, 2u, _current_information);
     }
     
     void String() {
@@ -283,7 +283,7 @@ namespace SwitchUnitTests {
         checksum2 += item;
       }
       
-      Assert::AreEqual(checksum1, checksum2, sw_current_information);
+      Assert::AreEqual(checksum1, checksum2, _current_information);
     }
     
     
@@ -292,22 +292,22 @@ namespace SwitchUnitTests {
       
       byte i = 0;
       for (byte b : bytes) {
-        Assert::AreEqual(i++, b, sw_current_information);
+        Assert::AreEqual(i++, b, _current_information);
       }
     }
   };
   
-  sw_test(ForeachTest, Vector)
-  sw_test(ForeachTest, List)
-  sw_test(ForeachTest, LinkedList)
-  sw_test(ForeachTest, HashSet)
-  sw_test(ForeachTest, SortedSet)
-  sw_test(ForeachTest, SortedDictionary)
-  sw_test(ForeachTest, ListT)
-  sw_test(ForeachTest, Array)
-  sw_test(ForeachTest, Array2)
-  sw_test(ForeachTest, Dictionary)
-  sw_test(ForeachTest, Dictionary2)
-  sw_test(ForeachTest, String)
-  sw_test(ForeachTest, NativeArray)
+  _test(ForeachTest, Vector)
+  _test(ForeachTest, List)
+  _test(ForeachTest, LinkedList)
+  _test(ForeachTest, HashSet)
+  _test(ForeachTest, SortedSet)
+  _test(ForeachTest, SortedDictionary)
+  _test(ForeachTest, ListT)
+  _test(ForeachTest, Array)
+  _test(ForeachTest, Array2)
+  _test(ForeachTest, Dictionary)
+  _test(ForeachTest, Dictionary2)
+  _test(ForeachTest, String)
+  _test(ForeachTest, NativeArray)
 }

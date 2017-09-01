@@ -9,7 +9,7 @@ using namespace System::IO;
 FileAttributes FileSystemInfo::GetAttributes() const {
   System::IO::FileAttributes fileAttributes = (System::IO::FileAttributes)0;
   if (__OS::CoreApi::Directory::GetFileAttributes(this->fullPath.ToCCharArray().Data(), fileAttributes) != 0)
-    throw IOException(sw_current_information);
+    throw IOException(_current_information);
   
   return fileAttributes;
 }
@@ -18,7 +18,7 @@ DateTime FileSystemInfo::GetCreationTime() const {
   int64 time = 0;
   int64 dummy;
   if (__OS::CoreApi::Directory::GetFileTime(this->fullPath.ToCCharArray().Data(), time, dummy, dummy) != 0)
-    throw IOException(sw_current_information);
+    throw IOException(_current_information);
   
   return DateTime::FromFileTime((int64)time*10000000LL);
 }
@@ -35,7 +35,7 @@ DateTime FileSystemInfo::GetLastAccessTime() const {
   int64 time = 0;
   int64 dummy;
   if (__OS::CoreApi::Directory::GetFileTime(this->fullPath.ToCCharArray().Data(), dummy, time, dummy) != 0)
-    throw IOException(sw_current_information);
+    throw IOException(_current_information);
   
   return DateTime::FromFileTime((int64)time);
 }
@@ -48,7 +48,7 @@ DateTime FileSystemInfo::GetLastWriteTime() const {
   int64 time = 0;
   int64 dummy;
   if (__OS::CoreApi::Directory::GetFileTime(this->fullPath.ToCCharArray().Data(), dummy, dummy, time) != 0)
-    throw IOException(sw_current_information);
+    throw IOException(_current_information);
   
   return DateTime::FromFileTime((int64)time);
 }

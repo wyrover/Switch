@@ -11,4 +11,4 @@ namespace {
   };
 }
 
-sw_startup (MainTest)
+_startup (MainTest)

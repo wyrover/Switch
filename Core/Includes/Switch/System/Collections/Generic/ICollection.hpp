@@ -29,19 +29,19 @@ namespace Switch {
           /// @brief Gets the number of elements contained in the ICollection.
           /// @return Int32 The number of elements contained in the ICollection.
           Property<int32, ReadOnly> Count {
-            sw_get {return this->GetCount();}
+            _get {return this->GetCount();}
           };
           
           /// @brief Gets a value indicating whether the ICollection is read-only.
           /// @return Boolean true if the ICollection is read-only; otherwise; otherwise, false.
           Property<bool, ReadOnly> IsReadOnly {
-            sw_get {return this->GetIsReadOnly();}
+            _get {return this->GetIsReadOnly();}
           };
           
           /// @brief Gets a value indicating whether access to the ICollection is synchronized (thread safe).
           /// @return Boolean true if access to the ICollection is synchronized (thread safe); otherwise, false.
           Property<bool, ReadOnly> IsSynchronized {
-            sw_get {return this->GetIsSynchronized();}
+            _get {return this->GetIsSynchronized();}
           };
 
           /// @brief Gets an object that can be used to synchronize access to the ICollection.
@@ -50,12 +50,12 @@ namespace Switch {
           /// @code
           /// refptr<ICollection> collection;
           /// // Instantiate and populate the collection
-          /// sw_lock (collection->SyncRoot) {
+          /// _lock (collection->SyncRoot) {
           ///   // Some operation on the collection, which is now thread safe.
           /// }
           /// @endcode
           Property<const Object&, ReadOnly> SyncRoot {
-            sw_get->const object& {return this->GetSyncRoot();}
+            _get->const object& {return this->GetSyncRoot();}
           };
           
           /// @brief Adds an item to the IList.
@@ -105,7 +105,7 @@ namespace Switch {
           /// @code
           /// refptr<ICollection> collection;
           /// // Instantiate and populate the collection
-          /// sw_lock (collection->SyncRoot) {
+          /// _lock (collection->SyncRoot) {
           ///   // Some operation on the collection, which is now thread safe.
           /// }
           /// @endcode

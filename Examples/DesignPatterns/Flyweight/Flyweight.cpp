@@ -8,7 +8,7 @@ using namespace System::Collections::Generic;
 namespace DesignPatterns {
   namespace Structural {
     // The 'Flyweight' abstract class
-    class Flyweight sw_abstract {
+    class Flyweight _abstract {
     public:
       virtual void Operation(int extrinsicstate) const =0;
     };
@@ -26,9 +26,9 @@ namespace DesignPatterns {
     public:
       // Constructor
       FlyweightFactory() {
-        flyweights.Add("X", sw_new<ConcreteFlyweight>());
-        flyweights.Add("Y", sw_new<ConcreteFlyweight>());
-        flyweights.Add("Z", sw_new<ConcreteFlyweight>());
+        flyweights.Add("X", ref_new<ConcreteFlyweight>());
+        flyweights.Add("Y", ref_new<ConcreteFlyweight>());
+        flyweights.Add("Z", ref_new<ConcreteFlyweight>());
       }
       
       refptr<Flyweight> GetFlyweight(const string& key) const {return flyweights[key];}
@@ -64,7 +64,7 @@ namespace DesignPatterns {
         refptr<Flyweight> fz = factory.GetFlyweight("Z");
         fz->Operation(--extrinsicstate);
         
-        refptr<UnsharedConcreteFlyweight> fu = sw_new<UnsharedConcreteFlyweight>();
+        refptr<UnsharedConcreteFlyweight> fu = ref_new<UnsharedConcreteFlyweight>();
         fu->Operation(--extrinsicstate);
       }
     };
@@ -72,7 +72,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-sw_startup (DesignPatterns::Structural::MainApp)
+_startup (DesignPatterns::Structural::MainApp)
 
 // This code produces the following output:
 //

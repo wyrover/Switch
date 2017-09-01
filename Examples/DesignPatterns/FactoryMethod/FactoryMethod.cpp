@@ -7,7 +7,7 @@ using namespace System;
 namespace DesignPatterns {
   namespace Creational {
     // The 'Product' abstract class
-    class Product sw_abstract {
+    class Product _abstract {
     public:
       ~Product() = 0;
     };
@@ -23,7 +23,7 @@ namespace DesignPatterns {
     };
     
     // The 'Creator' abstract class
-    class Creator sw_abstract {
+    class Creator _abstract {
     public:
       virtual refptr<Product> FactoryMethod() const = 0;
     };
@@ -31,13 +31,13 @@ namespace DesignPatterns {
     // A 'ConcreteCreator' class
     class ConcreteCreatorA : public Creator {
     public:
-      refptr<Product> FactoryMethod() const override {return sw_new<ConcreteProductA>();}
+      refptr<Product> FactoryMethod() const override {return ref_new<ConcreteProductA>();}
     };
     
     // A 'ConcreteCreator' class
     class ConcreteCreatorB : public Creator {
     public:
-      refptr<Product> FactoryMethod() const override {return sw_new<ConcreteProductB>();}
+      refptr<Product> FactoryMethod() const override {return ref_new<ConcreteProductB>();}
     };
     
     // MainApp startup class for Creational
@@ -49,8 +49,8 @@ namespace DesignPatterns {
         // An array of creators
         Array<refptr<Creator>> creators(2);
         
-        creators[0] = sw_new<ConcreteCreatorA>();
-        creators[1] = sw_new<ConcreteCreatorB>();
+        creators[0] = ref_new<ConcreteCreatorA>();
+        creators[1] = ref_new<ConcreteCreatorB>();
         
         // Iterate over creators and create products
         for (refptr<Creator> creator : creators) {
@@ -63,7 +63,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-sw_startup (DesignPatterns::Creational::MainApp)
+_startup (DesignPatterns::Creational::MainApp)
 
 // This code produces the following output:
 //

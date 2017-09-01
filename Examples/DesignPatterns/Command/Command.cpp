@@ -13,7 +13,7 @@ namespace DesignPatterns {
     };
     
     // The 'Command' abstract class
-    class Command sw_abstract {
+    class Command _abstract {
     public:
       // Constructor
       Command(refptr<Receiver> receiver) : receiver(receiver) {}
@@ -53,9 +53,9 @@ namespace DesignPatterns {
       // Entry point into console application.
       static void Main() {
         // Create receiver, command, and invoker
-        refptr<Receiver> receiver = sw_new<Receiver>();
-        refptr<Command> command = sw_new<ConcreteCommand>(receiver);
-        refptr<Invoker> invoker = sw_new<Invoker>();
+        refptr<Receiver> receiver = ref_new<Receiver>();
+        refptr<Command> command = ref_new<ConcreteCommand>(receiver);
+        refptr<Invoker> invoker = ref_new<Invoker>();
         
         // Set and execute command
         invoker->SetCommand(command);
@@ -66,7 +66,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-sw_startup (DesignPatterns::Behavioral::MainApp)
+_startup (DesignPatterns::Behavioral::MainApp)
 
 // This code produces the following output:
 //

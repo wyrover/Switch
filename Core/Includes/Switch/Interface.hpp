@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains Switch::Interface struct and #sw_interface keyword.
+/// @brief Contains Switch::Interface struct and #_interface keyword.
 #pragma once
 
 #include "Types.hpp"
@@ -9,7 +9,7 @@
 /// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
   /// @brief Represent an interface class.
-  struct sw_public Interface {
+  struct _public Interface {
     /// @cond
     virtual ~Interface() {}
     /// @endcond
@@ -26,7 +26,7 @@ namespace Switch {
   /// @brief This keyword is use to represent an interface.
   /// @par Examples
   /// @code
-  /// class IStringable sw_interface {
+  /// class IStringable _interface {
   /// public:
   ///   virtual String ToString() const = 0;
   /// };
@@ -39,7 +39,7 @@ namespace Switch {
   /// };
   /// @endcode
   /// @ingroup Switch
-  #define sw_interface\
+  #define _interface\
   : public Interface
 }
 

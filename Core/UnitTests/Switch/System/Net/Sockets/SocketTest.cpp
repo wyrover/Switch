@@ -22,10 +22,10 @@ namespace SwitchUnitTests {
       try {
         socket.Receive(bytes);
       } catch(const SocketException& e) {
-        Assert::AreEqual(SocketError::TimedOut, e.SocketErrorCode(), sw_current_information);
+        Assert::AreEqual(SocketError::TimedOut, e.SocketErrorCode(), _current_information);
       }
     }
   };
   
-  sw_test(SocketTest, CatchExecptionWithTimeoutSocketErrorOnReceive)
+  _test(SocketTest, CatchExecptionWithTimeoutSocketErrorOnReceive)
 }

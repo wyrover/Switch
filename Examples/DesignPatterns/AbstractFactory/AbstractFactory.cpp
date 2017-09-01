@@ -7,7 +7,7 @@ using namespace System;
 namespace DesignPatterns {
   namespace Creational {
     // The 'AbstractProductA' abstract class
-    class AbstractProductA sw_abstract {
+    class AbstractProductA _abstract {
     public:
       ~AbstractProductA() = 0;
     };
@@ -15,13 +15,13 @@ namespace DesignPatterns {
     inline AbstractProductA::~AbstractProductA() {}
     
     // The 'AbstractProductB' abstract class
-    class AbstractProductB sw_abstract {
+    class AbstractProductB _abstract {
     public:
       virtual void Interact(const AbstractProductA& a) const = 0;
     };
     
     // The 'AbstractFactory' abstract class
-    class AbstractFactory sw_abstract {
+    class AbstractFactory _abstract {
     public:
       virtual refptr<AbstractProductA> CreateProductA() const = 0;
       virtual refptr<AbstractProductB> CreateProductB() const = 0;
@@ -50,15 +50,15 @@ namespace DesignPatterns {
     // The 'ConcreteFactory1' class
     class ConcreteFactory1 : public AbstractFactory {
     public:
-      refptr<AbstractProductA> CreateProductA() const override {return sw_new<ProductA1>();}
-      refptr<AbstractProductB> CreateProductB() const override {return sw_new<ProductB1>();}
+      refptr<AbstractProductA> CreateProductA() const override {return ref_new<ProductA1>();}
+      refptr<AbstractProductB> CreateProductB() const override {return ref_new<ProductB1>();}
     };
     
     // The 'ConcreteFactory2' class
     class ConcreteFactory2 : public AbstractFactory {
     public:
-      refptr<AbstractProductA> CreateProductA() const override {return sw_new<ProductA2>();}
-      refptr<AbstractProductB> CreateProductB() const override {return sw_new<ProductB2>();}
+      refptr<AbstractProductA> CreateProductA() const override {return ref_new<ProductA2>();}
+      refptr<AbstractProductB> CreateProductB() const override {return ref_new<ProductB2>();}
     };
     
     // The 'Client' class. Interaction environment for the products.
@@ -84,12 +84,12 @@ namespace DesignPatterns {
       // The main entry point for the application.
       static void Main() {
         // Abstract factory #1
-        refptr<AbstractFactory> factory1 = sw_new<ConcreteFactory1>();
+        refptr<AbstractFactory> factory1 = ref_new<ConcreteFactory1>();
         Client client1(*factory1);
         client1.Run();
         
         // Abstract factory #2
-        refptr<AbstractFactory> factory2 = sw_new<ConcreteFactory2>();
+        refptr<AbstractFactory> factory2 = ref_new<ConcreteFactory2>();
         Client client2(*factory2);
         client2.Run();
       }
@@ -98,7 +98,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-sw_startup (DesignPatterns::Creational::MainApp)
+_startup (DesignPatterns::Creational::MainApp)
 
 // This code produces the following output:
 //

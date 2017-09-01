@@ -7,7 +7,7 @@ using namespace System;
 namespace DesignPatterns {
   namespace Behavioral {
     // The 'Strategy' abstract class
-    class Strategy sw_abstract {
+    class Strategy _abstract {
     public:
       virtual void AlgorithmInterface() = 0;
     };
@@ -61,13 +61,13 @@ namespace DesignPatterns {
         Context context;
         
         // Three contexts following different strategies
-        context = Context(sw_new<ConcreteStrategyA>());
+        context = Context(ref_new<ConcreteStrategyA>());
         context.ContextInterface();
         
-        context = Context(sw_new<ConcreteStrategyB>());
+        context = Context(ref_new<ConcreteStrategyB>());
         context.ContextInterface();
         
-        context = Context(sw_new<ConcreteStrategyC>());
+        context = Context(ref_new<ConcreteStrategyC>());
         context.ContextInterface();
       }
     };
@@ -75,7 +75,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-sw_startup (DesignPatterns::Behavioral::MainApp)
+_startup (DesignPatterns::Behavioral::MainApp)
 
 // This code produces the following output:
 //

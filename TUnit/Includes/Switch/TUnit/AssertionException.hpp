@@ -8,14 +8,14 @@
 namespace Switch {
   /// @brief The TUnit namespace contains a unit test framework.
   /// @par Examples
-  /// This example how to use TestFixture class, Assert class and #sw_test method:
+  /// This example how to use TestFixture class, Assert class and #_test method:
   /// @include Assert.cpp
   /// @par Examples
-  /// This example how to use TestFixture class, Expect class and #sw_test method:
+  /// This example how to use TestFixture class, Expect class and #_test method:
   /// @include Expect.cpp
   namespace TUnit {
     /// @brief Thrown when an assertion failed.
-    class sw_public AssertionException : public System::Exception {
+    class _public AssertionException : public System::Exception {
     public:
       /// @brief Create a new instance of class AssertionException
       /// @remarks Message is set with the default message associate to the error.
@@ -27,7 +27,7 @@ namespace Switch {
       AssertionException(const AssertionException& value) : System::Exception(value) {}
       
       /// @brief Create a new instance of class AssertionException
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
       /// @remarks Message is set with the default message associate to the error.
       AssertionException(const CurrentInformation& information) : System::Exception(information) {}
       
@@ -37,13 +37,13 @@ namespace Switch {
       
       /// @brief Create a new instance of class AssertionException
       /// @param message Message string associate to the error.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
       AssertionException(const System::String& message, const CurrentInformation& information) : System::Exception(message, information) {}
       
       /// @brief Create a new instance of class AssertionException
       /// @param message Message string associate to the error.
       /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
       AssertionException(const System::String& message, const System::Exception& innerException, const CurrentInformation& information) : System::Exception(message, innerException, information) {}
 
     private:

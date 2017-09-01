@@ -14,14 +14,14 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief Represents errors that occur during application execution.
-    class sw_public Exception: public Object, public std::exception {
+    class _public Exception: public Object, public std::exception {
     public:
       /// @brief Create a new instance of class Exception
       /// @remarks Message is set with the default message associate to the error.
       Exception();
       
       /// @brief Create a new instance of class Exception
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
       /// @remarks Message is set with the default message associate to the error.
       Exception(const CurrentInformation& information);
       
@@ -31,7 +31,7 @@ namespace Switch {
       
       /// @brief Create a new instance of class Exception
       /// @param message Message string associate to the error.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
       Exception(const String& message, const CurrentInformation& information);
       
       /// @brief Create a new instance of class Exception
@@ -42,7 +42,7 @@ namespace Switch {
       /// @brief Create a new instance of class Exception
       /// @param message Message string associate to the error.
       /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
       Exception(const String& message, const Exception& innerException, const CurrentInformation& information);
       
       /// @cond
@@ -53,49 +53,49 @@ namespace Switch {
       /// @brief Get File where Exception occurred
       /// @return string A string represent File where Exception occurred
       Property<const String&, ReadOnly> File {
-        sw_get->const string& {return this->currentInformation.FileName();}
+        _get->const string& {return this->currentInformation.FileName();}
       };
       
       /// @brief Gets a link to the help file associated with this exception.
       /// @return string A string represent a link to Help file associated with Exception
       Property<const String&, ReadOnly> HelpLink {
-        sw_get->const string& {return this->helpLink;}
+        _get->const string& {return this->helpLink;}
       };
       
       /// @brief Get Error associate to the Exception
       /// @return Error A ErrorCode represent a Error associate to the Exception
       Property<int32, ReadOnly> HResult {
-        sw_get {return this->hresult;}
+        _get {return this->hresult;}
       };
       
       /// @brief Gets If other Exception instance that caused the current exception.
       /// @return Exception An instance of Exception that describes the error that caused the current exception. The InnerException property returns the same value as was passed into the constructor, or a null reference if the inner exception value was not supplied to the constructor.
       Property<bool, ReadOnly> HasInnerException {
-        sw_get {return !this->innerException.IsNull();}
+        _get {return !this->innerException.IsNull();}
       };
       
       /// @brief Gets the Exception instance that caused the current exception.
       /// @return Exception An instance of Exception that describes the error that caused the current exception. The InnerException property returns the same value as was passed into the constructor, or a null reference if the inner exception value was not supplied to the constructor.
       Property<const Exception&, ReadOnly> InnerException {
-        sw_get->const Exception& {return this->innerException();}
+        _get->const Exception& {return this->innerException();}
       };
       
       /// @brief Get Line where the Exception occurred
       /// @return Int32 the number of line where Exception occurred
       Property<int32, ReadOnly> Line {
-        sw_get {return this->currentInformation.Line();}
+        _get {return this->currentInformation.Line();}
       };
       
       /// @brief Get message associate to the Exception
       /// @return string A string represent a massage associate to the Exception
       Property<const String&, ReadOnly> Message {
-        sw_get->const string& {return this->GetMessage();}
+        _get->const string& {return this->GetMessage();}
       };
       
       /// @brief Gets a string representation of the immediate frames on the call stack.
       /// @return string A string that describes the immediate frames of the call stack.
       Property<String, ReadOnly> StackTrace {
-        sw_get {return this->GetStackTrace();}
+        _get {return this->GetStackTrace();}
       };
       
       /// @brief Determines whether this instance of Exception and a specified object, which must also be a DelegateItem object, have the same value.

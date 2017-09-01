@@ -35,7 +35,7 @@ namespace Examples {
   const string Program::formatter = "{0,10}{1,16}";
 }
 
-sw_startup (Examples::Program)
+_startup (Examples::Program)
 
 // This code produces the following output:
 //

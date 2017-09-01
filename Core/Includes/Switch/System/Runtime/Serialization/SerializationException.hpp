@@ -15,7 +15,7 @@ namespace Switch {
       /// Formatters that serialize and deserialize objects to and from a particular format can be found in the System::Runtime::Serialization::Formatters namespace.
       namespace Serialization {
         /// @brief The exception thrown when an error occurs during serialization or deserialization.
-        class sw_public SerializationException : public SystemException {
+        class _public SerializationException : public SystemException {
         public:
           /// @brief Create a new instance of class SerializationException
           /// @remarks Message is set with the default message associate to the error.
@@ -27,7 +27,7 @@ namespace Switch {
           SerializationException(const SerializationException& value) : SystemException(value) {}
           
           /// @brief Create a new instance of class SerializationException
-          /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
+          /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
           /// @remarks Message is set with the default message associate to the error.
           SerializationException(const CurrentInformation& information) : SystemException(information) {}
           
@@ -37,13 +37,13 @@ namespace Switch {
           
           /// @brief Create a new instance of class SerializationException
           /// @param message Message string associate to the error.
-          /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
+          /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
           SerializationException(const System::String& message, const CurrentInformation& information) : SystemException(message, information) {}
           
           /// @brief Create a new instance of class SerializationException
           /// @param message Message string associate to the error.
           /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
-          /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
+          /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
           SerializationException(const System::String& message, const System::Exception& innerException, const CurrentInformation& information) : SystemException(message, innerException, information) {}
           
         private:

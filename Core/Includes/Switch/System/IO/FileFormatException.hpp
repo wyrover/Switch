@@ -11,7 +11,7 @@ namespace Switch {
     /// @brief The System::IO namespace contains types that allow reading and writing to files and data streams, and types that provide basic file and directory support.
     namespace IO {
       /// @brief The exception that is thrown when an input file or a data stream that is supposed to conform to a certain file format specification is malformed.
-      class sw_public FileFormatException : public FormatException {
+      class _public FileFormatException : public FormatException {
       public:
         /// @brief Create a new instance of class FileFormatException
         /// @remarks Message is set with the default message associate to the error.
@@ -23,7 +23,7 @@ namespace Switch {
         FileFormatException(const FileFormatException& value) : FormatException(value) {}
         
         /// @brief Create a new instance of class FileFormatException
-        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
+        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
         /// @remarks Message is set with the default message associate to the error.
         FileFormatException(const CurrentInformation& information) : FormatException(information) {}
         
@@ -33,13 +33,13 @@ namespace Switch {
         
         /// @brief Create a new instance of class FileFormatException
         /// @param message Message string associate to the error.
-        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
+        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
         FileFormatException(const System::String& message, const CurrentInformation& information) : FormatException(message, information) {}
         
         /// @brief Create a new instance of class FileFormatException
         /// @param message Message string associate to the error.
         /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
-        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #sw_current_information.
+        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
         FileFormatException(const System::String& message, const System::Exception& innerException, const CurrentInformation& information) : FormatException(message, innerException, information) {}
         
       private:

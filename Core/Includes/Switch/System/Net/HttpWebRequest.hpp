@@ -12,18 +12,18 @@ namespace Switch {
     /// @brief The System::Net namespace provides a simple programming interface for many of the protocols used on networks today.
     /// The WebRequest and WebResponse classes form the basis of what are called pluggable protocols, an implementation of network services that enables you to develop applications that use Internet resources without worrying about the specific details of the individual protocols.
     namespace Net {
-      class sw_public HttpWebRequest: public System::Net::WebRequest {
+      class _public HttpWebRequest: public System::Net::WebRequest {
       public:
         ~HttpWebRequest();
 
         Property<bool> AllowAutoRedirect {
-          sw_get {return this->GetAllowAutoRedirect();},
-          sw_set {this->SetAllowAutoRedirect(value);}
+          _get {return this->GetAllowAutoRedirect();},
+          _set {this->SetAllowAutoRedirect(value);}
         };
 
         Property<const string&> ContentType {
-          sw_get->const string& {return this->GetContentType();},
-          sw_set {this->SetContentType(value);}
+          _get->const string& {return this->GetContentType();},
+          _set {this->SetContentType(value);}
         };
         
         WebResponse& GetResponse() override;

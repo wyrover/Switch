@@ -198,7 +198,7 @@ System::String System::String::Concat(const System::Collections::Generic::IEnume
 template<typename T, int32 length>
 System::String System::String::Concat(const T (&objs)[length]) {
   if (objs == null)
-    throw ArgumentNullException(sw_current_information);
+    throw ArgumentNullException(_current_information);
 
   int32 size = 0;
   for (int32 i = 0; i < length; i ++)
@@ -219,7 +219,7 @@ System::String System::String::Join(const System::String& separator, const Syste
 template<typename T>
 System::String System::String::Join(const System::String& separator, const System::Array<T>& objs, int32 startIndex, int32 count) {
   if (startIndex < 0 || count < 0 || startIndex + count > objs.Length)
-    throw ArgumentOutOfRangeException(sw_current_information);
+    throw ArgumentOutOfRangeException(_current_information);
   System::String str;
   bool first = true;
   for (int32 i = startIndex; i < startIndex + count; i++) {
@@ -249,7 +249,7 @@ System::String System::String::Join(const System::String& separator, const Syste
 template<typename T>
 System::String System::String::Join(const System::String& separator, const System::Collections::Generic::IEnumerable<T>& objs, int32 startIndex, int32 count) {
   if (startIndex < 0 || count < 0 || startIndex + count > objs.Length)
-    throw ArgumentOutOfRangeException(sw_current_information);
+    throw ArgumentOutOfRangeException(_current_information);
   System::String str;
   bool first = true;
   int32 index = 0;
