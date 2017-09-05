@@ -899,7 +899,6 @@ namespace Switch {
           ///   - SocketOptionNameMulticastInterface
           ///   - SocketOptionNameMulticastLoopback
           ///   - SocketOptionNameMulticastTimeToLive
-          ///   - SocketOptionNamepcf_typeofService
           ///   - SocketOptionNameUseLoopback
           /// - SocketOptionLevelTcp options that can be set using this overload:
           ///   - SocketOptionNameBsdUrgent

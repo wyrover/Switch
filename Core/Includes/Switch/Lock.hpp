@@ -63,7 +63,7 @@ namespace Switch {
   /// @include Lock.cpp
   /// @ingroup Switch
   #define _lock(object)\
-  _using (System::Threading::LockGuard __pcf_lock_guard__(object))
+  _using (System::Threading::LockGuard __switch_lock_guard__(object))
 }
 
 using namespace Switch;

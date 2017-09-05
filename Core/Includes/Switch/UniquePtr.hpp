@@ -610,17 +610,17 @@ namespace Switch {
   
   /// @cond
   template<class T>
-  struct __pcf_unique_if {
+  struct __switch_unique_if {
     using __unique_single = UniquePtr<T>;
   };
   
   template<class T>
-  struct __pcf_unique_if<T[]> {
+  struct __switch_unique_if<T[]> {
     using __unique_array_unknown_bound = UniquePtr<T[]>;
   };
   
   template<class T, size_t N>
-  struct __pcf_unique_if<T[N]> {
+  struct __switch_unique_if<T[N]> {
     using __unique_array_known_bound = void;
   };
   
@@ -641,10 +641,10 @@ namespace Switch {
   using _remove_extent_t = typename _remove_extent<T>::type;
   
   template<typename T, typename ...Args>
-  typename __pcf_unique_if<T>::__unique_single MakeUnique(Args&&... args) {return UniquePtr<T>(new T(args...));}
+  typename __switch_unique_if<T>::__unique_single MakeUnique(Args&&... args) {return UniquePtr<T>(new T(args...));}
   
   template<typename T>
-  typename __pcf_unique_if<T>::__unique_array_known_bound MakeUnique(size_t size) {
+  typename __switch_unique_if<T>::__unique_array_known_bound MakeUnique(size_t size) {
     using TT = typename _remove_extent<T>::type;
     return UniquePtr<T>(new TT[size]());
   }

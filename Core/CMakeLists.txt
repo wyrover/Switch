@@ -609,7 +609,6 @@ target_link_libraries(Switch.Core call_stack ${CURL_LIBRARIES} easywsclient Rs23
 set_target_properties(Switch.Core PROPERTIES FOLDER Switch/Core)
 
 if (BUILD_TESTS)
-  #add_subdirectory("IntegrationTests")
   add_subdirectory("ManualTests")
   add_subdirectory("UnitTests")
 endif()
