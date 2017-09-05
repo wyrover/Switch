@@ -23,13 +23,18 @@ namespace Switch {
     static constexpr bool CanRead = true;
     static constexpr bool CanWrite = true;
   };
+
+  /// @cond
+  template <class T, class Attribute = ReadWrite>
+  class Property;
+  /// @endcond
   
   /// @brief A Property is a member that provides a flexible mechanism to read, write, or compute the value of a private field. Properties can be used as if they are public data members, but they are actually special methods called accessors. This enables data to be accessed easily and still helps promote the safety and flexibility of methods.
   /// @remarks The copy constructor is deleted. So the copy constructor of the owner class must be specified (the implicit or default copy contructor doesn't build).
   /// @par Examples
   /// This sample shows a Person class that has two properties: Name (string) and Age (int). Both properties are read/write.
   /// @include Properties.cpp
-  template <class T, class Attribute = ReadWrite>
+  template <class T, class Attribute>
   class Property : public Attribute {
     // Don't use std::function<> because the build became very slow
     //using Getter = std::function<T()>;

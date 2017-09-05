@@ -3,12 +3,12 @@
 #pragma once
 
 /// @todo Remove when CMakelists.txt ready
-#define PCF_STATIC 1
+#define SWITCH_STATIC 1
 
-#if PCF_STATIC
+#if SWITCH_STATIC
 #  define _public
 #elif WIN32
-#  if PCF_EXPORTS  
+#  if SWITCH_EXPORTS
 #    define _public __declspec(dllexport)   
 #  else  
 #    define _public __declspec(dllimport)   

@@ -14,8 +14,8 @@ namespace Switch {
   /// @endcode
   /// @ingroup Switch
   #define _using(expression)\
-  for (bool __pcf_using__ = true; __pcf_using__; __pcf_using__ = false)\
-    for (expression; __pcf_using__; __pcf_using__ = false)
+  for (bool __switch_using__ = true; __switch_using__; __switch_using__ = false)\
+    for (expression; __switch_using__; __switch_using__ = false)
 }
 
 using namespace Switch;
