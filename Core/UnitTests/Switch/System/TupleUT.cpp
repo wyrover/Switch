@@ -180,7 +180,7 @@ namespace {
     }
     
     void CreateTuple7() {
-      auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', 21);
+      auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21);
       Assert::AreEqual("Value", t.Item1);
       Assert::AreEqual(42, t.Item2);
       Assert::AreEqual(true, t.Item3);
@@ -191,7 +191,7 @@ namespace {
     }
     
     void CreateTupleRest() {
-      auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', 21, 12_h + 23_min + 2_s);
+      auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21, 12_h + 23_min + 2_s);
       Assert::AreEqual("Value", t.Item1);
       Assert::AreEqual(42, t.Item2);
       Assert::AreEqual(true, t.Item3);
@@ -203,7 +203,7 @@ namespace {
     }
     
     void CreateTupleRestWithTuple() {
-      auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', 21, Tuple<>::Create(12_h + 23_min + 2_s, Version(1, 2, 3)));
+      auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21, Tuple<>::Create(12_h + 23_min + 2_s, Version(1, 2, 3)));
       Assert::AreEqual("Value", t.Item1);
       Assert::AreEqual(42, t.Item2);
       Assert::AreEqual(true, t.Item3);
@@ -412,7 +412,7 @@ namespace {
     }
     
     void CreateTuple7AndSetItem1() {
-      auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', 21);
+      auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21);
       t.Item1 = "Other";
       Assert::AreEqual("Other", t.Item1);
       Assert::AreEqual(42, t.Item2);
@@ -424,7 +424,7 @@ namespace {
     }
     
     void CreateTuple7AndSetItem2() {
-      auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', 21);
+      auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21);
       t.Item2 = 84;
       Assert::AreEqual("Value", t.Item1);
       Assert::AreEqual(84, t.Item2);
@@ -436,7 +436,7 @@ namespace {
     }
     
     void CreateTuple7AndSetItem3() {
-      auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', 21);
+      auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21);
       t.Item3 = false;
       Assert::AreEqual("Value", t.Item1);
       Assert::AreEqual(42, t.Item2);
@@ -448,7 +448,7 @@ namespace {
     }
     
     void CreateTuple7AndSetItem4() {
-      auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', 21);
+      auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21);
       t.Item4 = DayOfWeek::Sunday;
       Assert::AreEqual("Value", t.Item1);
       Assert::AreEqual(42, t.Item2);
@@ -460,7 +460,7 @@ namespace {
     }
     
     void CreateTuple7AndSetItem5() {
-      auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', 21);
+      auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21);
       t.Item5 = .21;
       Assert::AreEqual("Value", t.Item1);
       Assert::AreEqual(42, t.Item2);
@@ -472,7 +472,7 @@ namespace {
     }
     
     void CreateTuple7AndSetItem6() {
-      auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', 21);
+      auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21);
       t.Item6 = U'b';
       Assert::AreEqual("Value", t.Item1);
       Assert::AreEqual(42, t.Item2);
@@ -484,7 +484,7 @@ namespace {
     }
     
     void CreateTuple7AndSetItem7() {
-      auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', 21);
+      auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21);
       t.Item7 = 42;
       Assert::AreEqual("Value", t.Item1);
       Assert::AreEqual(42, t.Item2);
@@ -496,7 +496,7 @@ namespace {
     }
     
     void CreateTupleRestAndSetItem1() {
-      auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', 21, 12_h + 23_min + 2_s);
+      auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21, 12_h + 23_min + 2_s);
       t.Item1 = "Other";
       Assert::AreEqual("Other", t.Item1);
       Assert::AreEqual(42, t.Item2);
@@ -509,7 +509,7 @@ namespace {
     }
     
     void CreateTupleRestAndSetItem2() {
-      auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', 21, 12_h + 23_min + 2_s);
+      auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21, 12_h + 23_min + 2_s);
       t.Item2 = 84;
       Assert::AreEqual("Value", t.Item1);
       Assert::AreEqual(84, t.Item2);
@@ -522,7 +522,7 @@ namespace {
     }
     
     void CreateTupleRestAndSetItem3() {
-      auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', 21, 12_h + 23_min + 2_s);
+      auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21, 12_h + 23_min + 2_s);
       t.Item3 = false;
       Assert::AreEqual("Value", t.Item1);
       Assert::AreEqual(42, t.Item2);
@@ -535,7 +535,7 @@ namespace {
     }
     
     void CreateTupleRestAndSetItem4() {
-      auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', 21, 12_h + 23_min + 2_s);
+      auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21, 12_h + 23_min + 2_s);
       t.Item4 = DayOfWeek::Sunday;
       Assert::AreEqual("Value", t.Item1);
       Assert::AreEqual(42, t.Item2);
@@ -548,7 +548,7 @@ namespace {
     }
     
     void CreateTupleRestAndSetItem5() {
-      auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', 21, 12_h + 23_min + 2_s);
+      auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21, 12_h + 23_min + 2_s);
       t.Item5 = .21;
       Assert::AreEqual("Value", t.Item1);
       Assert::AreEqual(42, t.Item2);
@@ -561,7 +561,7 @@ namespace {
     }
     
     void CreateTupleRestAndSetItem6() {
-      auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', 21, 12_h + 23_min + 2_s);
+      auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21, 12_h + 23_min + 2_s);
       t.Item6 = U'b';
       Assert::AreEqual("Value", t.Item1);
       Assert::AreEqual(42, t.Item2);
@@ -574,7 +574,7 @@ namespace {
     }
     
     void CreateTupleRestAndSetItem7() {
-      auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', 21, 12_h + 23_min + 2_s);
+      auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21, 12_h + 23_min + 2_s);
       t.Item7 = 42;
       Assert::AreEqual("Value", t.Item1);
       Assert::AreEqual(42, t.Item2);
@@ -587,7 +587,7 @@ namespace {
     }
     
     void CreateTupleRestAndSetRest() {
-      auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', 21, 12_h + 23_min + 2_s);
+      auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21, 12_h + 23_min + 2_s);
       t.Rest = TimeSpan(5, 28, 19);
       Assert::AreEqual("Value", t.Item1);
       Assert::AreEqual(42, t.Item2);
