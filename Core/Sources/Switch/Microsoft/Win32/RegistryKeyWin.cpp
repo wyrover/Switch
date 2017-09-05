@@ -156,7 +156,7 @@ namespace {
   Array<string> BytesToMultiString(const Array<byte>& bytes) {
     Array<string> values;
     for (wchar* line = (wchar*)bytes.Data(); line[0] != 0; line += wcslen(line) + 1) {
-      Array<string>::Resize(values, values.Length + 1);
+      Array<>::Resize(values, values.Length + 1);
       values[values.Length - 1] = line;
     }
     return values;

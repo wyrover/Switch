@@ -74,7 +74,7 @@ int32 __OS::CoreApi::Registry::GetValue(intptr hkey, const string& subKey, Micro
   if (RegQueryValueEx((HKEY)hkey, subKey.w_str().c_str(), 0, (DWORD*)&type, NULL, (LPDWORD)&size) != ERROR_SUCCESS)
     return -1;
   
-  data.Resize(size);
+  System::Array<>::Resize(data, size);
   return RegQueryValueEx((HKEY)hkey, subKey.w_str().c_str(), 0, (DWORD*)&type, (LPBYTE)data.Data(), (LPDWORD)&size);
 }
 
