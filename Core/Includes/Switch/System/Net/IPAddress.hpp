@@ -360,7 +360,7 @@ namespace Switch {
         bool GetIsIPv6SiteLocal() const;
         
         uint32 address = 0xFFFFFFFF; // IPv4 value
-        Array<uint16> numbers = Array<uint16>(8); // IPv6 value
+        Array<uint16> numbers = Array<>::CreateInstance<uint16>(8); // IPv6 value
         uint32 scopeId = 0;
         Sockets::AddressFamily family = Sockets::AddressFamily::InterNetwork;
       };

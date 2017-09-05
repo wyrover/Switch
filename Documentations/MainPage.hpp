@@ -1,13 +1,13 @@
 /// @mainpage Switch - Reference Guide Documentation
 ///
-/// @section ThePcfLibrariesAreSection The Switch framework are...
+/// @section TheSwitchLibrariesAreSection The Switch framework are...
 ///   * a collection of C++ classes libraries, similar to the .NET Framework;
 ///   * written in efficient, modern C++14;
 ///   * and highly portable and available on many different platforms;
 ///
 /// @image HTML SwitchArchitecture.png
 ///
-/// @section Pcfiscomposedof4librariesSection Switch is composed of 4 libraries
+/// @section Switchiscomposedof4librariesSection Switch is composed of 4 libraries
 ///   * <b>Switch.Core</b> library is a library of classes, interfaces, and value types that provide access to system functionality. It is the foundation on which c++ applications, components, and controls are built.
 ///   * <b>Switch.Drawing</b> library contains types that support basic GDI+ graphics functionality. Child namespaces support advanced two-dimensional and vector graphics functionality, advanced imaging functionality, and print-related and typographical services. A child namespace also contains types that extend design-time user-interface logic and drawing.
 ///   * <b>Switch.Forms</b> library contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system.
@@ -47,7 +47,7 @@
 ///   };
 /// }
 ///
-/// sw_startup (HelloWorld::Program)
+/// _startup (HelloWorld::Program)
 /// @endcode
 ///
 /// CMakeLists.txt:
@@ -79,7 +79,7 @@
 ///       Button button;
 ///       button.Text = "Click me";
 ///       button.Location = Point(10, 10);
-///       button.Click += sw_delegate(const object& sender, const EventArgs& e) {
+///       button.Click += _delegate(const object& sender, const EventArgs& e) {
 ///         MessageBox::Show("Hello, World!");
 ///       };
 ///
@@ -92,7 +92,7 @@
 ///   };
 /// }
 ///
-/// sw_startup (HelloWorld::Program)
+/// _startup (HelloWorld::Program)
 /// @endcode
 ///
 /// CMakeLists.txt:
@@ -128,8 +128,8 @@
 ///     }
 ///   };
 ///
-///   sw_test (HelloWorldTest, CreateStringFromLiteral)
-///   sw_test (HelloWorldTest, CreateStringFromChar32Array)
+///   _test (HelloWorldTest, CreateStringFromLiteral)
+///   _test (HelloWorldTest, CreateStringFromChar32Array)
 /// }
 /// @endcode
 ///
@@ -143,16 +143,16 @@
 /// target_link_libraries(HelloWorldTest Switch.TUnit.Main)
 /// @endcode
 ///
-/// For more Examples see https://github.com/gammasoft71/Pcf/blob/master/Examples
+/// For more Examples see https://github.com/gammasoft71/Switch/tree/master/Examples
 ///
 /// @section DownloadSection Download Switch 0.2.1
 ///
 /// You can download latest stable version on SourceForge
 ///
-/// https://sourceforge.net/projects/pcfpro/files/latest/download
+/// https://sourceforge.net/projects/switchpro/files/latest/download
 ///
 /// @section InstallSection Install
-/// Before running examples you must install Switch. To install it read See https://github.com/gammasoft71/Pcf/blob/master/Install.md file.
+/// Before running examples you must install Switch. To install it read See https://github.com/gammasoft71/Switch/tree/master/Install.md file.
 ///
-/// @section PcfWebSizeSEction Switch Web Site
+/// @section SwktchWebSizeSEction Switch Web Site
 /// For more information see https://gammasoft71.wixsite.com/switch

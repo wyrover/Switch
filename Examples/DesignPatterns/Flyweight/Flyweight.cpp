@@ -10,7 +10,7 @@ namespace DesignPatterns {
     // The 'Flyweight' abstract class
     class Flyweight _abstract {
     public:
-      virtual void Operation(int extrinsicstate) const =0;
+      virtual void Operation(int extrinsicstate) const = 0;
     };
     
     // The 'ConcreteFlyweight' class

@@ -76,10 +76,10 @@ _startup (DesignPatterns::Structural::MainApp)
 // This code produces the following output:
 //
 // MethodA() ----
-// SubSystemOne Method
-// SubSystemTwo Method
-// SubSystemFour Method
+//  SubSystemOne Method
+//  SubSystemTwo Method
+//  SubSystemFour Method
 //
 // MethodB() ----
-// SubSystemTwo Method
-// SubSystemThree Method
+//  SubSystemTwo Method
+//  SubSystemThree Method

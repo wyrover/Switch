@@ -13,9 +13,9 @@ namespace DesignPatterns {
       // Constructor
       Component(const string& name) : name(name) {}
       
-      virtual void Add(refptr<Component> c) =0;
-      virtual void Remove(refptr<Component> c) =0;
-      virtual void Display(int depth) const =0;
+      virtual void Add(refptr<Component> c) = 0;
+      virtual void Remove(refptr<Component> c) = 0;
+      virtual void Display(int depth) const = 0;
 
     protected:
       string name;
