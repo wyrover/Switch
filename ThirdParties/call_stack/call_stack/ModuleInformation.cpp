@@ -31,7 +31,6 @@ namespace stacktrace {
 
     list<ModuleInformation> moduleInformations;
 
-    //if ((HANDLE)snapshot == INVALID_HANDLE_VALUE) pcf_throw(System::InvalidOperationException);
     if ((HANDLE)snapshot == INVALID_HANDLE_VALUE) return moduleInformations;
 
     MODULEENTRY32 moduleInfo;
