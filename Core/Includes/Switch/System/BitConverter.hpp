@@ -169,8 +169,8 @@ namespace Switch {
       static Array<byte> GetBytes(uint64 value){return {byte(value&0x00000000000000FF), byte((value&0x000000000000FF00)>> 8), byte((value&0x0000000000FF0000)>> 16), byte((value&0x00000000FF000000)>> 24), byte((value&0x000000FF00000000)>> 32), byte((value&0x0000FF0000000000)>> 40), byte((value&0x00FF000000000000)>> 48), byte((value&0xFF00000000000000)>> 56)};}
 
       /// @cond
-      static Array<byte> GetBytes(llong value) {return GetBytes(uint32(value));}
-      static Array<byte> GetBytes(ullong value) {return GetBytes(uint32(value));}
+      static Array<byte> GetBytes(llong value) {return GetBytes(uint64(value));}
+      static Array<byte> GetBytes(ullong value) {return GetBytes(uint64(value));}
       /// @endcond
 
       /// @brief Converts the specified 32-bit signed integer to a single-precision floating point number.

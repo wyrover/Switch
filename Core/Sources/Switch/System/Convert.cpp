@@ -261,6 +261,14 @@ DateTime Convert::ToDateTime(const UInt64& value) {
   return value.ToDateTime(*provider);
 }
 
+DateTime Convert::ToDateTime(llong value) {
+  return Int64(value).ToDateTime(*provider);
+}
+
+DateTime Convert::ToDateTime(ullong value) {
+  return UInt64(value).ToDateTime(*provider);
+}
+
 double Convert::ToDouble(const DateTime& value) {
   return value.ToDouble(*provider);
 }

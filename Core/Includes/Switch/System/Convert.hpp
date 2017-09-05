@@ -227,6 +227,8 @@ namespace Switch {
       static bool ToBoolean(T value) { return ToBoolean(CastToUnderlyingTypeIfEnumClass<T, typename std::conditional_t<std::is_enum<T>::value, std::true_type, std::false_type>::type>::Cast(value)); }
       
       /// @cond
+      static double ToBoolean(llong value) { return Int64((uint64)value).ToBoolean(*provider); }
+      static double ToBoolean(ullong value) { return UInt64((uint64)value).ToBoolean(*provider); }
       template<class T, class Attribute>
       static bool ToBoolean(const Property<T, Attribute>& value) { return ToBoolean(value()); }
       /// @endcond
@@ -381,12 +383,6 @@ namespace Switch {
       /// @exception OverflowException value is less than System::Byte::MinValue or greater than System::Byte::MaxValue.
       static byte ToByte(const Int64& value) { return value.ToByte(*provider); }
       
-      /// @brief Convert uint64 to byte
-      /// @param value uint64 to convert
-      /// @return byte A new byte object converted from value
-      /// @exception OverflowException value is less than System::Byte::MinValue or greater than System::Byte::MaxValue.
-      static byte ToByte(llong value) { return Int64(value).ToByte(*provider); }
-      
       /// @brief Convert sbyte to byte
       /// @param value sbyte to convert
       /// @return byte A new byte object converted from value
@@ -476,12 +472,6 @@ namespace Switch {
       /// @exception OverflowException value is less than System::Byte::MinValue or greater than System::Byte::MaxValue.
       static byte ToByte(const UInt64& value) { return value.ToByte(*provider); }
       
-      /// @brief Convert uint64 to byte
-      /// @param value uint64 to convert
-      /// @return byte A new byte object converted from value
-      /// @exception OverflowException value is less than System::Byte::MinValue or greater than System::Byte::MaxValue.
-      static byte ToByte(ullong value) { return UInt64(value).ToByte(*provider); }
-      
       /// @brief Convert T to byte
       /// @param value T to convert
       /// @remarks Always throw ArgumentException
@@ -490,7 +480,9 @@ namespace Switch {
       static byte ToByte(T value) { return ToByte(CastToUnderlyingTypeIfEnumClass<T, typename std::conditional_t<std::is_enum<T>::value, std::true_type, std::false_type>::type>::Cast(value)); }
       
       /// @cond
-      template<class T, class Attribute>
+      static byte ToByte(llong value) { return Int64((uint64)value).ToByte(*provider); }
+      static byte ToByte(ullong value) { return UInt64((uint64)value).ToByte(*provider); }
+       template<class T, class Attribute>
       static byte ToByte(const Property<T, Attribute>& value) { return ToByte(value()); }
       /// @endcond
       
@@ -708,6 +700,8 @@ namespace Switch {
       static char32 ToChar(T value) { return ToChar(CastToUnderlyingTypeIfEnumClass<T, typename std::conditional_t<std::is_enum<T>::value, std::true_type, std::false_type>::type>::Cast(value)); }
       
       /// @cond
+      static char32 ToChar(llong value) { return Int64((uint64)value).ToChar(*provider); }
+      static char32 ToChar(ullong value) { return UInt64((uint64)value).ToChar(*provider); }
       template<class T, class Attribute>
       static char32 ToChar(const Property<T, Attribute>& value) { return ToChar(value()); }
       /// @endcond
@@ -918,6 +912,8 @@ namespace Switch {
        */
       
       /// @cond
+      static DateTime ToDateTime(llong value);
+      static DateTime ToDateTime(ullong value);
       template<class T, class Attribute>
       static DateTime ToDateTime(const Property<T, Attribute>& value) { return ToDateTime(value()); }
       /// @endcond
@@ -1116,7 +1112,7 @@ namespace Switch {
       /// @return double A new double object converted from value
       /// @exception OverflowException value is greater than System::Double::MaxValue.
       static double ToDouble(const UInt64& value) { return value.ToDouble(*provider); }
-      
+
       /// @brief Convert T to double
       /// @param value T to convert
       /// @remarks Always throw ArgumentException
@@ -1125,6 +1121,8 @@ namespace Switch {
       static double ToDouble(T value) { return ToDouble(CastToUnderlyingTypeIfEnumClass<T, typename std::conditional_t<std::is_enum<T>::value, std::true_type, std::false_type>::type>::Cast(value)); }
       
       /// @cond
+      static double ToDouble(llong value) { return Int64((uint64)value).ToDouble(*provider); }
+      static double ToDouble(ullong value) { return UInt64((uint64)value).ToDouble(*provider); }
       template<class T, class Attribute>
       static double ToDouble(const Property<T, Attribute>& value) { return ToDouble(value()); }
       /// @endcond
@@ -1375,6 +1373,8 @@ namespace Switch {
       static int16 ToInt16(T value) { return ToInt16(CastToUnderlyingTypeIfEnumClass<T, typename std::conditional_t<std::is_enum<T>::value, std::true_type, std::false_type>::type>::Cast(value)); }
       
       /// @cond
+      static int16 ToInt16(llong value) { return Int64((uint64)value).ToInt16(*provider); }
+      static int16 ToInt16(ullong value) { return UInt64((uint64)value).ToInt16(*provider); }
       template<class T, class Attribute>
       static int16 ToInt16(const Property<T, Attribute>& value) { return ToInt16(value()); }
       /// @endcond
@@ -1606,11 +1606,6 @@ namespace Switch {
       /// @exception OverflowException value is greater than System::Int32::MaxValue.
       static int32 ToInt32(const UInt64& value) { return value.ToInt32(*provider); }
 
-      /// @cond
-      static int32 ToInt32(llong value) { return Int64(value).ToInt32(*provider); }
-      static int32 ToInt32(ullong value) { return UInt64(value).ToInt32(*provider); }
-      /// @endcond
-
       /// @brief Convert T to int32
       /// @param value T to convert
       /// @remarks Always throw ArgumentException
@@ -1619,6 +1614,8 @@ namespace Switch {
       static int32 ToInt32(T value) { return ToInt32(CastToUnderlyingTypeIfEnumClass<T, typename std::conditional_t<std::is_enum<T>::value, std::true_type, std::false_type>::type>::Cast(value)); }
       
       /// @cond
+      static int32 ToInt32(llong value) { return Int64(value).ToInt32(*provider); }
+      static int32 ToInt32(ullong value) { return UInt64(value).ToInt32(*provider); }
       template<class T, class Attribute>
       static int32 ToInt32(const Property<T, Attribute>& value) { return ToInt32(value()); }
       /// @endcond
@@ -1853,6 +1850,8 @@ namespace Switch {
       static int64 ToInt64(T value) { return ToInt64(CastToUnderlyingTypeIfEnumClass<T, typename std::conditional_t<std::is_enum<T>::value, std::true_type, std::false_type>::type>::Cast(value)); }
       
       /// @cond
+      static int64 ToInt64(llong value) { return Int64(value).ToInt64(*provider); }
+      static int64 ToInt64(ullong value) { return UInt64(value).ToInt64(*provider); }
       template<class T, class Attribute>
       static int64 ToInt64(const Property<T, Attribute>& value) { return ToInt64(value()); }
       /// @endcond
@@ -2118,6 +2117,8 @@ namespace Switch {
       static sbyte ToSByte(T value) { return ToSByte(CastToUnderlyingTypeIfEnumClass<T, typename std::conditional_t<std::is_enum<T>::value, std::true_type, std::false_type>::type>::Cast(value)); }
       
       /// @cond
+      static sbyte ToSByte(llong value) { return Int64(value).ToSByte(*provider); }
+      static sbyte ToSByte(ullong value) { return UInt64(value).ToSByte(*provider); }
       template<class T, class Attribute>
       static sbyte ToSByte(const Property<T, Attribute>& value) { return ToSByte(value()); }
       /// @endcond
@@ -2341,6 +2342,8 @@ namespace Switch {
       static float ToSingle(T value) { return ToSingle(CastToUnderlyingTypeIfEnumClass<T, typename std::conditional_t<std::is_enum<T>::value, std::true_type, std::false_type>::type>::Cast(value)); }
       
       /// @cond
+      static float ToSingle(llong value) { return Int64(value).ToSingle(*provider); }
+      static float ToSingle(ullong value) { return UInt64(value).ToSingle(*provider); }
       template<class T, class Attribute>
       static float ToSingle(const Property<T, Attribute>& value) { return ToSingle(value()); }
       /// @endcond
@@ -2562,6 +2565,8 @@ namespace Switch {
        */
       
       /// @cond
+      static string ToString(llong value) { return Int64(value).ToString(*provider); }
+      static string ToString(ullong value) { return UInt64(value).ToString(*provider); }
       template<class T, class Attribute>
       static string ToString(const Property<T, Attribute>& value) { return ToString(value()); }
       /// @endcond
@@ -2739,6 +2744,8 @@ namespace Switch {
       static uint16 ToUInt16(T value) { return ToUInt16(CastToUnderlyingTypeIfEnumClass<T, typename std::conditional_t<std::is_enum<T>::value, std::true_type, std::false_type>::type>::Cast(value)); }
       
       /// @cond
+      static uint16 ToUInt16(llong value) { return Int64(value).ToUInt16(*provider); }
+      static uint16 ToUInt16(ullong value) { return UInt64(value).ToUInt16(*provider); }
       template<class T, class Attribute>
       static uint16 ToUInt16(const Property<T, Attribute>& value) { return ToUInt16(value()); }
       /// @endcond
@@ -2966,11 +2973,6 @@ namespace Switch {
       /// @exception OverflowException value is greater than System::UInt32::MaxValue.
       static uint32 ToUInt32(const UInt64& value) { return value.ToUInt32(*provider); }
       
-      /// @cond
-      static uint32 ToUInt32(llong value) { return Int64(value).ToUInt32(*provider); }
-      static uint32 ToUInt32(ullong value) { return UInt64(value).ToUInt32(*provider); }
-      /// @endcond
-      
       /// @brief Convert T to uint32
       /// @param value T to convert
       /// @remarks Always throw ArgumentException
@@ -2979,6 +2981,8 @@ namespace Switch {
       static uint32 ToUInt32(T value) { return ToUInt32(CastToUnderlyingTypeIfEnumClass<T, typename std::conditional_t<std::is_enum<T>::value, std::true_type, std::false_type>::type>::Cast(value)); }
       
       /// @cond
+      static uint32 ToUInt32(llong value) { return Int64(value).ToUInt32(*provider); }
+      static uint32 ToUInt32(ullong value) { return UInt64(value).ToUInt32(*provider); }
       template<class T, class Attribute>
       static uint32 ToUInt32(const Property<T, Attribute>& value) { return ToUInt32(value()); }
       /// @endcond
@@ -3213,6 +3217,8 @@ namespace Switch {
       static uint64 ToUInt64(T value) { return ToUInt64(CastToUnderlyingTypeIfEnumClass<T, typename std::conditional_t<std::is_enum<T>::value, std::true_type, std::false_type>::type>::Cast(value)); }
       
       /// @cond
+      static uint64 ToUInt64(llong value) { return Int64(value).ToUInt64(*provider); }
+      static uint64 ToUInt64(ullong value) { return UInt64(value).ToUInt64(*provider); }
       template<class T, class Attribute>
       static uint64 ToUInt64(const Property<T, Attribute>& value) { return ToUInt64(value()); }
       /// @endcond
@@ -3448,6 +3454,38 @@ namespace Switch {
   template<> inline uint16 as<uint16>(uint64 value) {return System::Convert::ToUInt16(value);}
   template<> inline uint32 as<uint32>(uint64 value) {return System::Convert::ToUInt32(value);}
   template<> inline uint64 as<uint64>(uint64 value) {return System::Convert::ToUInt64(value);}
+
+  template<typename TT> inline TT as(llong value) {return static_cast<TT>(value);}
+  template<> inline bool as<bool>(llong value) {return System::Convert::ToBoolean(value);}
+  template<> inline byte as<byte>(llong value) {return System::Convert::ToByte(value);}
+  template<> inline char32 as<char32>(llong value) {return System::Convert::ToChar(value);}
+  template<> inline System::DateTime as<System::DateTime>(llong value) {return System::Convert::ToDateTime(value);}
+  template<> inline double as<double>(llong value) {return System::Convert::ToDouble(value);}
+  template<> inline int16 as<int16>(llong value) {return System::Convert::ToInt16(value);}
+  template<> inline int32 as<int32>(llong value) {return System::Convert::ToInt32(value);}
+  template<> inline int64 as<int64>(llong value) {return System::Convert::ToInt64(value);}
+  template<> inline sbyte as<sbyte>(llong value) {return System::Convert::ToSByte(value);}
+  template<> inline float as<float>(llong value) {return System::Convert::ToSingle(value);}
+  template<> inline string as<string>(llong value) {return System::Convert::ToString(value);}
+  template<> inline uint16 as<uint16>(llong value) {return System::Convert::ToUInt16(value);}
+  template<> inline uint32 as<uint32>(llong value) {return System::Convert::ToUInt32(value);}
+  template<> inline uint64 as<uint64>(llong value) {return System::Convert::ToUInt64(value);}
+
+  template<typename TT> inline TT as(ullong value) {return static_cast<TT>(value);}
+  template<> inline bool as<bool>(ullong value) {return System::Convert::ToBoolean(value);}
+  template<> inline byte as<byte>(ullong value) {return System::Convert::ToByte(value);}
+  template<> inline char32 as<char32>(ullong value) {return System::Convert::ToChar(value);}
+  template<> inline System::DateTime as<System::DateTime>(ullong value) {return System::Convert::ToDateTime(value);}
+  template<> inline double as<double>(ullong value) {return System::Convert::ToDouble(value);}
+  template<> inline int16 as<int16>(ullong value) {return System::Convert::ToInt16(value);}
+  template<> inline int32 as<int32>(ullong value) {return System::Convert::ToInt32(value);}
+  template<> inline int64 as<int64>(ullong value) {return System::Convert::ToInt64(value);}
+  template<> inline sbyte as<sbyte>(ullong value) {return System::Convert::ToSByte(value);}
+  template<> inline float as<float>(ullong value) {return System::Convert::ToSingle(value);}
+  template<> inline string as<string>(ullong value) {return System::Convert::ToString(value);}
+  template<> inline uint16 as<uint16>(ullong value) {return System::Convert::ToUInt16(value);}
+  template<> inline uint32 as<uint32>(ullong value) {return System::Convert::ToUInt32(value);}
+  template<> inline uint64 as<uint64>(ullong value) {return System::Convert::ToUInt64(value);}
   /// @endcond
 }
 
