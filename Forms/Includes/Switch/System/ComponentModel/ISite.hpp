@@ -6,10 +6,19 @@
 
 #include "IComponent.hpp"
 
+/// @cond
 namespace Switch {
   namespace System {
     namespace ComponentModel {
       class IComponenent;
+    }
+  }
+}
+/// @endcond
+
+namespace Switch {
+  namespace System {
+    namespace ComponentModel {
       /// @interface ISite
       /// @brief Provides functionality required by sites.
       class _public ISite _interface {

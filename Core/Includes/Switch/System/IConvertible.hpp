@@ -5,17 +5,21 @@
 #include "../Interface.hpp"
 #include "../Types.hpp"
 
-/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+/// @cond
 namespace Switch {
-  /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
-    /// @cond
     struct DateTime;
     class IFormatProvider;
     enum class TypeCode;
     class String;
-    /// @endcond
+  }
+}
+/// @endcond
 
+/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
+  /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
+  namespace System {
     /// @interface IConvertible
     /// @brief Defines a generalized comparison method that a value type or class implements to create a type-specific comparison method.
     class _public IConvertible _interface {

@@ -60,7 +60,7 @@ namespace Switch {
       /// @brief Gets the general display name that represents the time zone.
       /// @return string The time zone's general display name.
       /// @remarks The display name is localized based on the culture installed with the Windows operating system.
-      /// @remarks Time zone display names for Windows system time zones follow a fairly standard format. The first portion of the display name is the time zone's base offset from Coordinated Universal Time, which is indicated by the acronym GMT (for Greenwich Mean Time), enclosed in parentheses. For Coordinated Universal Time, the GMT acronym with no offset is enclosed in parentheses. This is followed by a string that identifies the time zone || one || more of the cities, regions, || countries in the time zone. For example:
+      /// @remarks Time zone display names for Windows system time zones follow a fairly standard format. The first portion of the display name is the time zone's base offset from Coordinated Universal Time, which is indicated by the acronym GMT (for Greenwich Mean Time), enclosed in parentheses. For Coordinated Universal Time, the GMT acronym with no offset is enclosed in parentheses. This is followed by a string that identifies the time zone || one || more of the cities, regions, or countries in the time zone. For example:
       /// @verbatim
       /// (GMT) Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London
       /// (GMT+02:00) Athens, Beirut, Istanbul, Minsk
@@ -93,7 +93,7 @@ namespace Switch {
 
       /// @brief Gets a value indicating whether the time zone has any daylight saving time rules.*
       /// @return bool true if the time zone supports daylight saving time; otherwise, false.
-      /// @remarks The value of the SupportsDaylightSavingTime property for the local time zone returned by the TimeZoneInfo.Local property reflects the setting of the Control Panel Date and Time application's checkbox that defines whether the system automatically adjusts for daylight saving time. If it is unchecked, || if no checkbox is displayed for a time zone, the value of this property is false.
+      /// @remarks The value of the SupportsDaylightSavingTime property for the local time zone returned by the TimeZoneInfo.Local property reflects the setting of the Control Panel Date and Time application's checkbox that defines whether the system automatically adjusts for daylight saving time. If it is unchecked, or if no checkbox is displayed for a time zone, the value of this property is false.
       Property<bool, ReadOnly> SupportsDaylightSavingTime {
         _get {return this->supportsDaylightSavingTime;}
       };
@@ -148,7 +148,7 @@ namespace Switch {
       /// @param id The time zone identifier, which corresponds to the Id property.
       /// @return An object whose identifier is the value of the id parameter.
       /// @exception ArgumentNullException The id parameter is null.
-      /// @exception TimeZoneNotFoundException The time zone identifier specified by id was not found. This means that a registry key whose name matches id does not exist, || that the key exists but does not contain any time zone data.
+      /// @exception TimeZoneNotFoundException The time zone identifier specified by id was not found. This means that a registry key whose name matches id does not exist, or that the key exists but does not contain any time zone data.
       static const TimeZoneInfo& TimeFindSystemTimeZoneById(const String& id);
      
       /// @cond

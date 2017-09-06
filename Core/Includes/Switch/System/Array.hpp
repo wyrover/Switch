@@ -408,7 +408,7 @@ namespace Switch {
       object syncRoot;
     };
     
-    /// @brief Provides methods for creating, manipulating, searching, && sorting arrays, thereby serving as the base class for all arrays.
+    /// @brief Provides methods for creating, manipulating, searching, and sorting arrays, thereby serving as the base class for all arrays.
     /// @remarks The Array class is not part of the System.Collections namespaces. However, it is still considered a collection because it is based on the IList interface.
     /// @remarks An element is a value in an Array. The length of an Array is the total number of elements it can contain. The lower bound of an Array is the index of its first element. An Array can have any lower bound, but it has a lower bound of zero by default. A different lower bound can be defined when creating an instance of the Array class using CreateInstance.A multidimensional Array can have different bounds for each dimension. An array can have a maximum of 32 dimensions.
     /// @remarks Unlike the classes in the System.Collections namespaces, Array has a fixed capacity. To increase the capacity, you must create a new Array object with the required capacity, copy the elements from the old Array object to the new one, and delete the old Array.
@@ -497,7 +497,7 @@ namespace Switch {
       int32 GetRank() const override {return rank;}
     };
     
-    /// @brief Provides methods for creating, manipulating, searching, && sorting arrays, thereby serving as the base class for all arrays.
+    /// @brief Provides methods for creating, manipulating, searching, and sorting arrays, thereby serving as the base class for all arrays.
     /// @remarks The Array class is not part of the System.Collections namespaces. However, it is still considered a collection because it is based on the IList interface.
     /// @remarks An element is a value in an Array. The length of an Array is the total number of elements it can contain. The lower bound of an Array is the index of its first element. An Array can have any lower bound, but it has a lower bound of zero by default. A different lower bound can be defined when creating an instance of the Array class using CreateInstance.A multidimensional Array can have different bounds for each dimension. An array can have a maximum of 32 dimensions.
     /// @remarks Unlike the classes in the System.Collections namespaces, Array has a fixed capacity. To increase the capacity, you must create a new Array object with the required capacity, copy the elements from the old Array object to the new one, and delete the old Array.
@@ -682,7 +682,7 @@ namespace Switch {
       int32 GetRank() const override {return 1;}
     };
     
-    /// @brief Provides methods for creating, manipulating, searching, && sorting arrays, thereby serving as the base class for all arrays.
+    /// @brief Provides methods for creating, manipulating, searching, and sorting arrays, thereby serving as the base class for all arrays.
     /// @remarks The Array class is not part of the System.Collections namespaces. However, it is still considered a collection because it is based on the IList interface.
     /// @remarks An element is a value in an Array. The length of an Array is the total number of elements it can contain. The lower bound of an Array is the index of its first element. An Array can have any lower bound, but it has a lower bound of zero by default. A different lower bound can be defined when creating an instance of the Array class using CreateInstance.A multidimensional Array can have different bounds for each dimension. An array can have a maximum of 32 dimensions.
     /// @remarks Unlike the classes in the System.Collections namespaces, Array has a fixed capacity. To increase the capacity, you must create a new Array object with the required capacity, copy the elements from the old Array object to the new one, and delete the old Array.
@@ -788,7 +788,7 @@ namespace Switch {
       int32 GetRank() const override {return 2;}
     };
     
-    /// @brief Provides methods for creating, manipulating, searching, && sorting arrays, thereby serving as the base class for all arrays.
+    /// @brief Provides methods for creating, manipulating, searching, and sorting arrays, thereby serving as the base class for all arrays.
     /// @remarks The Array class is not part of the System.Collections namespaces. However, it is still considered a collection because it is based on the IList interface.
     /// @remarks An element is a value in an Array. The length of an Array is the total number of elements it can contain. The lower bound of an Array is the index of its first element. An Array can have any lower bound, but it has a lower bound of zero by default. A different lower bound can be defined when creating an instance of the Array class using CreateInstance.A multidimensional Array can have different bounds for each dimension. An array can have a maximum of 32 dimensions.
     /// @remarks Unlike the classes in the System.Collections namespaces, Array has a fixed capacity. To increase the capacity, you must create a new Array object with the required capacity, copy the elements from the old Array object to the new one, and delete the old Array.
@@ -900,7 +900,7 @@ namespace Switch {
       int32 GetRank() const override {return 3;}
     };
     
-    /// @brief Provides methods for creating, manipulating, searching, && sorting arrays, thereby serving as the base class for all arrays.
+    /// @brief Provides methods for creating, manipulating, searching, and sorting arrays, thereby serving as the base class for all arrays.
     /// @remarks The Array class is not part of the System.Collections namespaces. However, it is still considered a collection because it is based on the IList interface.
     /// @remarks An element is a value in an Array. The length of an Array is the total number of elements it can contain. The lower bound of an Array is the index of its first element. An Array can have any lower bound, but it has a lower bound of zero by default. A different lower bound can be defined when creating an instance of the Array class using CreateInstance.A multidimensional Array can have different bounds for each dimension. An array can have a maximum of 32 dimensions.
     /// @remarks Unlike the classes in the System.Collections namespaces, Array has a fixed capacity. To increase the capacity, you must create a new Array object with the required capacity, copy the elements from the old Array object to the new one, and delete the old Array.
@@ -1173,7 +1173,7 @@ namespace Switch {
       }
       
       /// @brief Changes the number of elements of a one-dimensional array to the specified new size.
-      /// @param array The one-dimensional, zero-based array to resize, || null to create a new array with the specified size.
+      /// @param array The one-dimensional, zero-based array to resize, or null to create a new array with the specified size.
       /// @param newSize The size of the new array.
       /// @exception ArgumentOutOfRangeException newSize is less than zero.
       /// @remarks This method allocates a new array with the specified size, copies elements from the old array to the new one, and then replaces the old array with the new one. array must be a one-dimensional array.

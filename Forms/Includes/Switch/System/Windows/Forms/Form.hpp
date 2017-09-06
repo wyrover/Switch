@@ -40,11 +40,11 @@ namespace Switch {
             _set {this->minimizeBox = value;}
           };
           
-		      Property<FormStartPosition> StartPosition{
-			      _get{return this->startPosition;},
-			      _set{this->startPosition = value;}
-		      };
-
+          Property<FormStartPosition> StartPosition{
+            _get{return this->startPosition;},
+            _set{this->startPosition = value;}
+          };
+          
           void Close() override;
 
           void WndProc(Message& message) override;

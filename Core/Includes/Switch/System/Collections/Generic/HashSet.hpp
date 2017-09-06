@@ -17,11 +17,11 @@ namespace Switch {
       /// @brief The System::Collections::Generic namespace contains interfaces and classes that define generic collections, which allow users to create strongly typed collections that provide better type safety and performance than non-generic strongly typed collections.
       namespace Generic {
         /// @brief Represents a set of values.
-        /// @remarks The HashSet<T> class provides high-performance set operations. A set is a collection that contains no duplicate elements, && whose elements are in no particular order.
+        /// @remarks The HashSet<T> class provides high-performance set operations. A set is a collection that contains no duplicate elements, and whose elements are in no particular order.
         /// @remarks The capacity of a HashSet<T> object is the number of elements that the object can hold. A HashSet<T> object's capacity automatically increases as elements are added to the object.
         /// @remarks For very large HashSet<T> objects, you can increase the maximum capacity to 2 billion elements on a 64-bit system by setting the enabled attribute of the gcAllowVeryLargeObjects configuration element to true in the run-time environment.
         /// @par Examples
-        /// The following example demonstrates how to merge two disparate sets. This example creates two HashSet<T> objects, && populates them with even && odd numbers, respectively. A third HashSet<T> object is created from the set that contains the even numbers. The example then calls the UnionWith method, which adds the odd number set to the third set.
+        /// The following example demonstrates how to merge two disparate sets. This example creates two HashSet<T> objects, and populates them with even && odd numbers, respectively. A third HashSet<T> object is created from the set that contains the even numbers. The example then calls the UnionWith method, which adds the odd number set to the third set.
         /// @include HashSet.cpp
         template<typename T, typename TAllocator=Allocator<T>>
         class HashSet : public Object, public System::Linq::Extension::Enumerable<HashSet<T, TAllocator>, T>, public ISet<T> {
@@ -56,7 +56,7 @@ namespace Switch {
           }
           /// @endcond
           
-          /// @brief Initializes a new instance of the HashSet<T> class that uses the default equality comparer for the set type, contains elements copied from the specified collection, && has sufficient capacity to accommodate the number of elements copied.
+          /// @brief Initializes a new instance of the HashSet<T> class that uses the default equality comparer for the set type, contains elements copied from the specified collection, and has sufficient capacity to accommodate the number of elements copied.
           /// @param collection The elements to copy
           HashSet(const IEnumerable<T>& collection) : operationNumber(0), comparer(new System::Collections::Generic::Comparer<T>()) {
             for (const T& item : collection)

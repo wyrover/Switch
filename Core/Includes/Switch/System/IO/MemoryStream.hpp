@@ -78,7 +78,7 @@ namespace Switch {
         };
 
         /// @brief Returns the array of unsigned bytes from which this stream was created.
-        /// @return The byte array from which this stream was created, || the underlying array if a byte array was ! provided to the System::IO::MemoryStream constructor during construction of the current instance.
+        /// @return The byte array from which this stream was created, or the underlying array if a byte array was ! provided to the System::IO::MemoryStream constructor during construction of the current instance.
         /// @exception System::UnauthorizedAccessException The MemoryStream instance was ! created with a publicly visible buffer.
         virtual const byte* Buffer() const;
 
@@ -118,7 +118,7 @@ namespace Switch {
         /// @param offset The zero-based byte offset in buffer at which to begin copying bytes to the current stream.
         /// @param count The maximum number of bytes to write.
         /// @exception System::ArgumentNullException buffer is null.
-        /// @exception System::NotSupportedException The stream does ! support writing. For additional information see System::IO::Stream.CanWrite. or The current position is closer than count bytes to the end of the stream, && the capacity cannot be modified.
+        /// @exception System::NotSupportedException The stream does ! support writing. For additional information see System::IO::Stream.CanWrite. or The current position is closer than count bytes to the end of the stream, and the capacity cannot be modified.
         /// @exception System::ArgumentException offset subtracted from the buffer length is less than count.
         /// @exception System::ArgumentOutOfRangeException offset || count are negative.
         /// @exception System::IO::IOException An I/O error occurs.
@@ -127,7 +127,7 @@ namespace Switch {
 
         /// @brief Writes a byte to the current stream at the current position.
         /// @param value The byte to write.
-        /// @exception System::NotSupportedException The stream does ! support writing. For additional information see System::IO::Stream.CanWrite. or The current position is at the end of the stream, && the capacity cannot be modified.
+        /// @exception System::NotSupportedException The stream does ! support writing. For additional information see System::IO::Stream.CanWrite. or The current position is at the end of the stream, and the capacity cannot be modified.
         /// @exception System::ObjectDisposedException The current stream is IsClosed().
         void WriteByte(byte value) override;
 

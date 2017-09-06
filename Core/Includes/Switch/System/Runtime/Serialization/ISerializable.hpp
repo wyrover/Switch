@@ -5,6 +5,18 @@
 #include "../../../Interface.hpp"
 #include "SerializationInfo.hpp"
 
+/// @cond
+namespace Switch {
+  namespace System {
+    namespace Runtime {
+      namespace Serialization {
+        class SerializationInfo;
+      }
+    }
+  }
+}
+/// @endcond
+
 /// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
@@ -15,10 +27,6 @@ namespace Switch {
       /// The ISerializable interface provides a way for classes to control their own serialization behavior. Classes in the System::Runtime::Serialization::Formatters namespace control the actual formatting of various data types encapsulated in the serialized objects.
       /// Formatters that serialize and deserialize objects to and from a particular format can be found in the System::Runtime::Serialization::Formatters namespace.
       namespace Serialization {
-        /// @cond
-        class SerializationInfo;
-        /// @endcond
-
         /// @interface ISerializable
         /// @brief Allows an object to control its own serialization and deserialization.
         class _public ISerializable _interface {
