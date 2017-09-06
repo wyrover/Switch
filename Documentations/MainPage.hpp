@@ -145,7 +145,7 @@
 ///
 /// For more Examples see https://github.com/gammasoft71/Switch/tree/master/Examples
 ///
-/// @section DownloadSection Download Switch 0.2.1
+/// @section DownloadSection Download Switch 0.3.0
 ///
 /// You can download latest stable version on SourceForge
 ///
@@ -154,5 +154,5 @@
 /// @section InstallSection Install
 /// Before running examples you must install Switch. To install it read See https://github.com/gammasoft71/Switch/tree/master/Install.md file.
 ///
-/// @section SwktchWebSizeSEction Switch Web Site
+/// @section SwitchWebSizeSEction Switch Web Site
 /// For more information see https://gammasoft71.wixsite.com/switch
