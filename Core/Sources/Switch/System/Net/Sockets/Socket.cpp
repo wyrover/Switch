@@ -426,7 +426,7 @@ void Socket::SetDontFragment(bool dontFragment) {
 }
 
 void Socket::SetDualMode(bool dualMode) {
-  SetSocketOption(SocketOptionLevel::Socket, SocketOptionName::IPv6Only, !dualMode);
+  SetSocketOption(SocketOptionLevel::Socket, SocketOptionName::IPv6Only, notdualMode);
 }
 
 void Socket::SetEnableBroadcast(bool enableBroadcast) {
