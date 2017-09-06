@@ -12,11 +12,11 @@ namespace Examples {
       Package(const string& company, double weight) : company(company), weight(weight) {}
       Package(const Package& package) : company(package.company), weight(package.weight) {}
       
-      Property<string, ReadOnly> Company {
+      property<string, readonly> Company {
         [&] { return this->company; }
       };
       
-      Property<double, ReadOnly> Weight {
+      property<double, readonly> Weight {
         [&] { return this->weight; }
       };
       

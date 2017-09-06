@@ -48,7 +48,7 @@ namespace Switch {
 
         /// @brief Gets the underlying stream that interfaces with a backing store.
         /// @return The stream this StreamWriter is writing to.
-        Property<Stream&, ReadOnly> BaseStream {
+        property<Stream&, readonly> BaseStream {
           _get->Stream& {return this->GetBaseStream();}
         };
 

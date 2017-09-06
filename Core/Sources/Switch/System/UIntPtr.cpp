@@ -7,11 +7,11 @@
 
 using namespace System;
 
-Property<uintptr, ReadOnly> UIntPtr::Zero {
+property<uintptr, readonly> UIntPtr::Zero {
   [] {return 0;}
 };
 
-Property<int32, ReadOnly> UIntPtr::Size {
+property<int32, readonly> UIntPtr::Size {
   [] {return static_cast<int32>(sizeof(void*));}
 };
 

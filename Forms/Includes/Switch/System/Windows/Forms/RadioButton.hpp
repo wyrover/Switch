@@ -22,7 +22,7 @@ namespace Switch {
         public:
           RadioButton() : ButtonBase("", 0, 0, 104, 24) { this->SetStyle(ControlStyles::UserPaint, false); }
 
-          Property<bool> AutoCheck {
+          property<bool> AutoCheck {
             _get {return this->autoCheck;},
             _set {
               if (this->autoCheck != value)
@@ -30,7 +30,7 @@ namespace Switch {
             }
           };
 
-          Property<bool> Checked{
+          property<bool> Checked{
             _get {return this->checked;},
             _set {this->SetChecked(value);}
           };

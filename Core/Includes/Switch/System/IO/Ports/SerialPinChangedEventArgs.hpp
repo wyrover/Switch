@@ -25,7 +25,7 @@ namespace Switch {
           /// @brief Gets the event type.
           /// @return One of the SerialPinChange values.
           /// @remarks This property provides information about the event type that caused the PinChanged event.
-          Property<SerialPinChange, ReadOnly> EventType {
+          property<SerialPinChange, readonly> EventType {
             _get {return this->eventType;}
           };
 

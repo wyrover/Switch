@@ -33,7 +33,7 @@ namespace Switch {
 
         /// @brief Indicates that a System::Threading::WaitHandle::WaitAny(const System::Threading::WaitHandle[], int32, bool)
         /// operation timed out before any of the wait handles were signaled. This field is constant.
-        static Property<int32, ReadOnly> WaitTimeout;
+        static property<int32, readonly> WaitTimeout;
 
         /// @brief Initializes a new instance of the System::IO::WaitHandle class.
         WaitHandle() {}

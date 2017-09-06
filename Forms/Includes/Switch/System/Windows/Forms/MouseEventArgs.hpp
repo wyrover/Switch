@@ -33,27 +33,27 @@ namespace Switch {
           }
           /// @endcond
 
-          Property<MouseButtons, ReadOnly> Button {
+          property<MouseButtons, readonly> Button {
             _get {return this->button;}
           };
 
-          Property<const System::Drawing::Point&, ReadOnly> Location {
+          property<const System::Drawing::Point&, readonly> Location {
             _get->const System::Drawing::Point& {return this->location;}
           };
 
-          Property<int32, ReadOnly> Clicks {
+          property<int32, readonly> Clicks {
             _get {return this->clicks;}
           };
 
-          Property<int32, ReadOnly> Delta {
+          property<int32, readonly> Delta {
             _get {return this->delta;}
           };
 
-          Property<int32, ReadOnly> X {
+          property<int32, readonly> X {
             _get {return this->Location().X();}
           };
 
-          Property<int32, ReadOnly> Y {
+          property<int32, readonly> Y {
             _get {return this->Location().Y();}
           };
 

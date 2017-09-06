@@ -23,25 +23,9 @@ using namespace TUnit;
 namespace SwitchUnitTests {
   class PropertyTest : public TestFixture {
   protected:
-    void ReadWriteCanRead() {
-      Assert::IsTrue(ReadWrite::CanRead, _current_information);
-    }
-    
-    void ReadWriteCanWrite() {
-      Assert::IsTrue(ReadWrite::CanWrite, _current_information);
-    }
-    
-    void PropertyCanRead() {
-      Assert::IsTrue(Property<int>::CanRead, _current_information);
-    }
-    
-    void PropertyCanWrite() {
-      Assert::IsTrue(ReadWrite::CanWrite, _current_information);
-    }
-    
     void CreateReadWritePropertyAndGetIt() {
       int32 v = 42;
-      Property<int32> Value {
+      property<int32> Value {
         _get {return v;},
         _set {v = value;}
       };
@@ -54,7 +38,7 @@ namespace SwitchUnitTests {
     
     void CreateReadWritePropertyAndSetItAndGetIt() {
       int32 v = 42;
-      Property<int32> Value {
+      property<int32> Value {
         _get {return v;},
         _set {v = value;}
       };
@@ -74,7 +58,7 @@ namespace SwitchUnitTests {
     
     void CreateReadOnlyPropertyAndGetIt() {
       int32 v = 42;
-      Property<int32, ReadOnly> Value {
+      property<int32, readonly> Value {
         _get {return v;}
       };
       
@@ -86,7 +70,7 @@ namespace SwitchUnitTests {
     
     void CreateWriteOnlyPropertyAndSetIt() {
       int32 v = 42;
-      Property<int32, WriteOnly> Value {
+      property<int32, writeonly> Value {
         _set {v = value;}
       };
       
@@ -107,7 +91,7 @@ namespace SwitchUnitTests {
       PropertyReadOnly() {}
       PropertyReadOnly(const PropertyReadOnly& propertyReadOnly) : name(propertyReadOnly.name) {}
       
-      Property<string, ReadOnly> Name {
+      property<string, readonly> Name {
         _get {return this->name;}
       };
       
@@ -135,7 +119,7 @@ namespace SwitchUnitTests {
       PropertyWriteOnly() {}
       PropertyWriteOnly(const PropertyWriteOnly& propertyWriteOnly) : name(propertyWriteOnly.name) {}
       
-      Property<string, WriteOnly> Name {
+      property<string, writeonly> Name {
         _set {this->name = value;}
       };
       
@@ -164,7 +148,7 @@ namespace SwitchUnitTests {
       PropertyReadWrite() {}
       PropertyReadWrite(const PropertyReadWrite& propertyReadWrite) : name(propertyReadWrite.name) {}
       
-      Property<string> Name {
+      property<string> Name {
         _get {return this->name;},
         _set {this->name = value;}
       };
@@ -193,10 +177,6 @@ namespace SwitchUnitTests {
     }
   };
   
-  _test(PropertyTest, ReadWriteCanRead)
-  _test(PropertyTest, ReadWriteCanWrite)
-  _test(PropertyTest, PropertyCanRead)
-  _test(PropertyTest, PropertyCanWrite)
   _test(PropertyTest, CreateReadWritePropertyAndGetIt)
   _test(PropertyTest, CreateReadWritePropertyAndSetItAndGetIt)
   _test(PropertyTest, CreateReadOnlyPropertyAndGetIt)

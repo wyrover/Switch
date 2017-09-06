@@ -2141,7 +2141,7 @@ namespace Switch {
       }
       
       template<typename TValue, typename TAttribute>
-      static System::String ValueToString(const Property<TValue, TAttribute>& value) {return ValueToString(value());}
+      static System::String ValueToString(const property<TValue, TAttribute>& value) {return ValueToString(value());}
       
       template<typename TValue>
       static System::String ValueToString(const TValue* value) {return ValueToString((const void*)value);}

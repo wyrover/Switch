@@ -7,11 +7,11 @@
 
 using namespace System;
 
-Property<int64, ReadOnly> Int64::MaxValue{
+property<int64, readonly> Int64::MaxValue{
   [] {return std::numeric_limits<int64>::max();}
 };
 
-Property<int64, ReadOnly> Int64::MinValue{
+property<int64, readonly> Int64::MinValue{
   [] {return std::numeric_limits<int64>::min();}
 };
 

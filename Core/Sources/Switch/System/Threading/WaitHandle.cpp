@@ -9,11 +9,11 @@ using namespace System;
 using namespace System::Diagnostics;
 using namespace System::Threading;
 
-Property<int32, ReadOnly> Timeout::Infinite {
+property<int32, readonly> Timeout::Infinite {
   [] {return -1;}
 };
 
-Property<int32, ReadOnly> WaitHandle::WaitTimeout {
+property<int32, readonly> WaitHandle::WaitTimeout {
   [] {return -1;} // 258 in .Net
 };
 

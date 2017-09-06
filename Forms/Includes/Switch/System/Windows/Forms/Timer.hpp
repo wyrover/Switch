@@ -22,12 +22,12 @@ namespace Switch {
           ~Timer() {this->Enabled = false;}
           /// @endcond
 
-          Property<bool> Enabled {
+          property<bool> Enabled {
             _get {return this->enabled;},
             _set {this->SetEnabled(value);}
           };
           
-          Property<int32> Interval {
+          property<int32> Interval {
             _get {return this->interval;},
             _set {this->SetInterval(value);}
           };

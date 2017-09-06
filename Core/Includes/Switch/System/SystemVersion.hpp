@@ -18,35 +18,35 @@ namespace Switch {
         Assembly(const Assembly& assembly) : company(assembly.company), configuration(assembly.configuration), copyright(assembly.copyright), description(assembly.description), name(assembly.name) {}
         /// @endcond
         
-        Property<string, ReadOnly> Company {
+        property<string, readonly> Company {
           _get {return this->company;}
         };
         
-        Property<string, ReadOnly> Configuration {
+        property<string, readonly> Configuration {
           _get {return this->configuration;}
         };
         
-        Property<string, ReadOnly> Copyright {
+        property<string, readonly> Copyright {
           _get {return this->copyright;}
         };
         
-        Property<string, ReadOnly> Description {
+        property<string, readonly> Description {
           _get {return this->description;}
         };
         
-        Property<string, ReadOnly> Name {
+        property<string, readonly> Name {
           _get {return this->name;}
         };
         
-        Property<string, ReadOnly> Product {
+        property<string, readonly> Product {
           _get {return this->product;}
         };
         
-        Property<string, ReadOnly> Trademark {
+        property<string, readonly> Trademark {
           _get {return this->trademark;}
         };
         
-        Property<System::Version, ReadOnly> Version {
+        property<System::Version, readonly> Version {
           _get {return this->version;}
         };
         

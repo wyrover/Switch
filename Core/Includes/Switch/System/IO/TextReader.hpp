@@ -25,7 +25,7 @@ namespace Switch {
         /// @remarks Read and Peek methods return -1.
         /// @remarks ReadBlock method returns zero.
         /// @remarks ReadLine and ReadToEnd methods return a string Empty.
-        static Property<NullTextReader, ReadOnly> Null;
+        static property<NullTextReader, readonly> Null;
 
         /// @brief Closes the System::IO::TextReader and releases any system resources associated with the TextReader
         virtual void Close() {}

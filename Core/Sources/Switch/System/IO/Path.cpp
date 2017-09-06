@@ -12,19 +12,19 @@
 using namespace System;
 using namespace System::IO;
 
-Property<char32, ReadOnly> Path::AltDirectorySeparatorChar {
+property<char32, readonly> Path::AltDirectorySeparatorChar {
   [] {return __OS::CoreApi::Directory::AltDirectorySeparatorChar();}
 };
 
-Property<char32, ReadOnly> Path::DirectorySeparatorChar {
+property<char32, readonly> Path::DirectorySeparatorChar {
   [] {return __OS::CoreApi::Directory::DirectorySeparatorChar();}
 };
 
-Property<char32, ReadOnly> Path::PathSeparator {
+property<char32, readonly> Path::PathSeparator {
   [] {return __OS::CoreApi::Directory::PathSeparator();}
 };
 
-Property<char32, ReadOnly> Path::VolumeSeparatorChar {
+property<char32, readonly> Path::VolumeSeparatorChar {
   [] {return __OS::CoreApi::Directory::VolumeSeparator();}
 };
 

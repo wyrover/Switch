@@ -19,10 +19,10 @@ namespace Switch {
     struct _public UInt16 final : public ValueType, public IComparable, public IConvertible, public IFormattable {
     public:
       /// @brief Represents the largest possible value of an UInt16 65535 (0xFFFF). This field is constant.
-      static Property<uint16, ReadOnly> MaxValue;
+      static property<uint16, readonly> MaxValue;
 
       /// @brief Represents the smallest possible value of UInt16 0 (0x0000). This field is constant.
-      static Property<uint16, ReadOnly> MinValue;
+      static property<uint16, readonly> MinValue;
 
       /// @brief Create a new instance of struct UInt16
       /// @remarks UInt16 is initialized by default value 0.

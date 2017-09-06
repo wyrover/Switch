@@ -20,7 +20,7 @@ namespace Switch {
       class _public PointF : public object {
       public:
         /// @brief Gets a PointF class that has a X and Y value of 0. This field is constant.
-        static Property<PointF, ReadOnly> Empty;
+        static property<PointF, readonly> Empty;
 
         /// @brief Initializes a new instance of the PointF class that has a X and Y value of 0.0f.
         PointF() {}
@@ -43,7 +43,7 @@ namespace Switch {
         /// @brief Gets or sets the X component of this PointF Class.
         /// @return int32 The X component of this PointF class, typically measured in pixels.
         /// @remarks The unit for the X and Y of the PointF class depend on the PageUnit and PageScale settings for the Graphics object that is used to draw.
-        Property<float> X {
+        property<float> X {
           _get {return this->x;},
           _set {this->x = value;}
         };
@@ -51,7 +51,7 @@ namespace Switch {
         /// @brief Gets or sets the Y component of this PointF class.
         /// @return int32 The Y component of this PointF class, typically measured in pixels.
         /// @remarks The unit for the X and Y of the PointF class depend on the PageUnit and PageScale settings for the Graphics object that is used to draw.
-        Property<float> Y {
+        property<float> Y {
           _get {return this->y;},
           _set {this->y = value;}
         };

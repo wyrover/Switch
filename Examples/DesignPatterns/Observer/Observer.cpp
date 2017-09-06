@@ -34,7 +34,7 @@ namespace DesignPatterns {
     class ConcreteSubject : public Subject {
     public:
       // Gets or sets subject state
-      Property<string> SubjectState {
+      property<string> SubjectState {
         _get { return this->subjectState; },
         _set { this->subjectState = value; }
       };
@@ -55,7 +55,7 @@ namespace DesignPatterns {
       }
 
       // Gets or sets subject
-      Property<refptr<ConcreteSubject>> Subject {
+      property<refptr<ConcreteSubject>> Subject {
         _get { return this->subject; },
         _set { this->subject = value; }
       };

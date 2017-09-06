@@ -45,11 +45,11 @@ namespace Switch {
         Image(const Image& image);
         /// @endcond
 
-        Property<const byte*, ReadOnly> Data {
+        property<const byte*, readonly> Data {
           _get {return this->rawData.Data();}
         };
         
-        static Property<Image, ReadOnly> None;
+        static property<Image, readonly> None;
 
         /// @brief Gets attribute flags for the pixel data of this System::Drawing::Image.
         /// @return a value of System::Drawing::Imaging::ImageFlags.
@@ -71,53 +71,53 @@ namespace Switch {
         /// | IImageFlagsReadOnly          | 65536                  |
         /// | IImageFlagsCaching           | 131072                 |
         /// @remarks For example, if the Image::Flags property for an image returned 77960, the System::Drawing::Imaging::ImageFlags for the image would be System::Drawing::Imaging::ImageFlags::ReadOnly, System::Drawing::Imaging::ImageFlags::HasRealDpi, System::Drawing::Imaging::ImageFlags::HasRealPixelSize, System::Drawing::Imaging::ImageFlags::ColorSpaceYcbcr, and System::Drawing::Imaging::ImageFlags::PartiallyScalable.
-        Property<int32, ReadOnly> Flags {
+        property<int32, readonly> Flags {
           _get {return (int32)this->flags;}
         };
 
-        Property<Array<System::Guid>, ReadOnly> FrameDimensionsList {
+        property<Array<System::Guid>, readonly> FrameDimensionsList {
           _get {return frameDimensionList;}
         };
 
-        Property<int32, ReadOnly> Height {
+        property<int32, readonly> Height {
           _get {return this->size.Height();}
         };
 
-        Property<float, ReadOnly> HorizontalResolution {
+        property<float, readonly> HorizontalResolution {
           _get {return this->horizontalResolution;}
         };
 
-        Property<Imaging::ColorPalette> Palette {
+        property<Imaging::ColorPalette> Palette {
           _get {return this->palette;},
           _set {this->palette = value;}
         };
         
-        Property<SizeF, ReadOnly> PhysicalDimension {
+        property<SizeF, readonly> PhysicalDimension {
           _get {return SizeF(Convert::ToSingle(this->size.Width()) * this->horizontalResolution, Convert::ToSingle(this->size.Height()) * this->verticalResolution);}
         };
 
-        Property<Imaging::PixelFormat, ReadOnly> PixelFormat {
+        property<Imaging::PixelFormat, readonly> PixelFormat {
           _get {return this->pixelFormat;}
         };
 
-        Property<Imaging::ImageFormat, ReadOnly> RawFormat {
+        property<Imaging::ImageFormat, readonly> RawFormat {
           _get {return this->rawFormat;}
         };
 
-        Property<System::Drawing::Size, ReadOnly> Size {
+        property<System::Drawing::Size, readonly> Size {
           _get {return this->size;}
         };
 
-        Property<const object&> Tag {
+        property<const object&> Tag {
           _get->const object& {return *this->tag;},
           _set {this->tag = &value;}
         };
         
-        Property<float, ReadOnly> VerticalResolution {
+        property<float, readonly> VerticalResolution {
           _get {return this->verticalResolution;}
         };
 
-        Property<int32, ReadOnly> Width {
+        property<int32, readonly> Width {
           _get {return this->size.Width();}
         };
 

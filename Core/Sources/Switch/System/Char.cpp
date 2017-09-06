@@ -12,11 +12,11 @@
 
 using namespace System;
 
-Property<char32, ReadOnly> Char::MaxValue {
+property<char32, readonly> Char::MaxValue {
   [] {return 0x0010FFFF;}
 };
 
-Property<char32, ReadOnly> Char::MinValue = {
+property<char32, readonly> Char::MinValue = {
   [] {return 0;}
 };
 

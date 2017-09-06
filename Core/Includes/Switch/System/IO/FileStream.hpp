@@ -87,7 +87,7 @@ namespace Switch {
 
         /// @brief Gets the name of the FileStream that was passed to the constructor.
         /// @return string that is the name of the FileStream.
-        Property<String, ReadOnly> Name {
+        property<String, readonly> Name {
           _get {return this->data->fullPath;}
         };
 

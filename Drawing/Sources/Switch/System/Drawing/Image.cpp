@@ -23,7 +23,7 @@ using namespace System;
 using namespace System::Drawing;
 using namespace System::IO;
 
-Property<Image, ReadOnly> Image::None {
+property<Image, readonly> Image::None {
   [] {return Image();}
 };
 

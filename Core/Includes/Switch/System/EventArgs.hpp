@@ -14,7 +14,7 @@ namespace Switch {
     class _public EventArgs : public Object {
     public:
       /// @brief Represents an event with no event data.
-      static Property<EventArgs, ReadOnly> Empty;
+      static property<EventArgs, readonly> Empty;
 
       /// @brief Create a new instance of class EventArgs
       EventArgs() {}

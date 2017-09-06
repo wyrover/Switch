@@ -120,7 +120,7 @@ namespace Switch {
         /// @brief Gets the number of elements contained in the BitArray.
         /// @return int32 The number of elements contained in the BitArray.
         /// @remarks Length and Count return the same value. Length can be set to a specific value.
-        Property<int32, ReadOnly> Length {
+        property<int32, readonly> Length {
           _get {return this->length;}
         };
         

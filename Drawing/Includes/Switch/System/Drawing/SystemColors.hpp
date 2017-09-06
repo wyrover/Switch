@@ -16,103 +16,103 @@ namespace Switch {
       class _public SystemColors _static {
       public:
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFD4D0C8. This field is constant.
-        static Property<Color, ReadOnly> ActiveBorder;
+        static property<Color, readonly> ActiveBorder;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF0054E3. This field is constant.
-        static Property<Color, ReadOnly> ActiveCaption;
+        static property<Color, readonly> ActiveCaption;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFFFFFF. This field is constant.
-        static Property<Color, ReadOnly> ActiveCaptionText;
+        static property<Color, readonly> ActiveCaptionText;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF808080. This field is constant.
-        static Property<Color, ReadOnly> AppWorkspace;
+        static property<Color, readonly> AppWorkspace;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFECE9D8. This field is constant.
-        static Property<Color, ReadOnly> Control;
+        static property<Color, readonly> Control;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFACA899. This field is constant.
-        static Property<Color, ReadOnly> ControlDark;
+        static property<Color, readonly> ControlDark;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF716F64. This field is constant.
-        static Property<Color, ReadOnly> ControlDarkDark;
+        static property<Color, readonly> ControlDarkDark;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFF1EFE2. This field is constant.
-        static Property<Color, ReadOnly> ControlLight;
+        static property<Color, readonly> ControlLight;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFFFFFF. This field is constant.
-        static Property<Color, ReadOnly> ControlLightLight;
+        static property<Color, readonly> ControlLightLight;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF000000. This field is constant.
-        static Property<Color, ReadOnly> ControlText;
+        static property<Color, readonly> ControlText;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF004E98. This field is constant.
-        static Property<Color, ReadOnly> Desktop;
+        static property<Color, readonly> Desktop;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFACA899. This field is constant.
-        static Property<Color, ReadOnly> GrayText;
+        static property<Color, readonly> GrayText;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF316AC5. This field is constant.
-        static Property<Color, ReadOnly> Highlight;
+        static property<Color, readonly> Highlight;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFFFFFF. This field is constant.
-        static Property<Color, ReadOnly> HighlightText;
+        static property<Color, readonly> HighlightText;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF000080. This field is constant.
-        static Property<Color, ReadOnly> HotTrack;
+        static property<Color, readonly> HotTrack;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFD4D0C8. This field is constant.
-        static Property<Color, ReadOnly> InactiveBorder;
+        static property<Color, readonly> InactiveBorder;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF7A96DF. This field is constant.
-        static Property<Color, ReadOnly> InactiveCaption;
+        static property<Color, readonly> InactiveCaption;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFD8E4F8. This field is constant.
-        static Property<Color, ReadOnly> InactiveCaptionText;
+        static property<Color, readonly> InactiveCaptionText;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFFFFE1. This field is constant.
-        static Property<Color, ReadOnly> Info;
+        static property<Color, readonly> Info;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF000000. This field is constant.
-        static Property<Color, ReadOnly> InfoText;
+        static property<Color, readonly> InfoText;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFFFFFF. This field is constant.
-        static Property<Color, ReadOnly> Menu;
+        static property<Color, readonly> Menu;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF000000. This field is constant.
-        static Property<Color, ReadOnly> MenuText;
+        static property<Color, readonly> MenuText;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFD4D0C8. This field is constant.
-        static Property<Color, ReadOnly> ScrollBar;
+        static property<Color, readonly> ScrollBar;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFFFFFF. This field is constant.
-        static Property<Color, ReadOnly> Window;
+        static property<Color, readonly> Window;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF000000. This field is constant.
-        static Property<Color, ReadOnly> WindowFrame;
+        static property<Color, readonly> WindowFrame;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF000000. This field is constant.
-        static Property<Color, ReadOnly> WindowText;
+        static property<Color, readonly> WindowText;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFECE9D8. This field is constant.
-        static Property<Color, ReadOnly> ButtonFace;
+        static property<Color, readonly> ButtonFace;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFFFFFF. This field is constant.
-        static Property<Color, ReadOnly> ButtonHighlight;
+        static property<Color, readonly> ButtonHighlight;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFACA899. This field is constant.
-        static Property<Color, ReadOnly> ButtonShadow;
+        static property<Color, readonly> ButtonShadow;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF3D95FF. This field is constant.
-        static Property<Color, ReadOnly> GradientActiveCaption;
+        static property<Color, readonly> GradientActiveCaption;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF9DB9EB. This field is constant.
-        static Property<Color, ReadOnly> GradientInactiveCaption;
+        static property<Color, readonly> GradientInactiveCaption;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFECE9D8. This field is constant.
-        static Property<Color, ReadOnly> MenuBar;
+        static property<Color, readonly> MenuBar;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF316AC5. This field is constant.
-        static Property<Color, ReadOnly> MenuHighlight;
+        static property<Color, readonly> MenuHighlight;
       };
     }
   }

@@ -21,10 +21,10 @@ namespace Switch {
     struct _public Int64 final : public ValueType, public IComparable, public IConvertible, public IFormattable {
     public:
       /// @brief Represents the largest possible value of an Int64 9223372036854775807 (0x7FFFFFFFFFFFFFFF). This field is constant.
-      static Property<int64, ReadOnly> MaxValue;
+      static property<int64, readonly> MaxValue;
 
       /// @brief Represents the smallest possible value of Int64 -9223372036854775808 (0x8000000000000000). This field is constant.
-      static Property<int64, ReadOnly> MinValue;
+      static property<int64, readonly> MinValue;
 
       /// @brief Create a new instance of struct Int64
       /// @remarks Int64 initialized by default to 0.

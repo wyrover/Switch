@@ -29,12 +29,12 @@ namespace Switch {
           /// @note To maintain better performance, do not set the size of a control in its constructor. The preferred method is to virtual the DefaultSize property.
           ScrollableControl(const string& text, int32 left, int32 top, int32 width, int32 height) : Control(text, left, top, width, height) {}
 
-          Property<bool> HScroll {
+          property<bool> HScroll {
             _get {return this->hscroll;},
             _set {this->hscroll = value;}
           };
 
-          Property<bool> VScroll {
+          property<bool> VScroll {
             _get {return this->vscroll;},
             _set {this->vscroll = value;}
           };

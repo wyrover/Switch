@@ -11,7 +11,7 @@ namespace {
   Text::UTF8Encoding utf8Encoding(false);
 }
 
-Property<StreamWriter, ReadOnly> StreamWriter::Null {
+property<StreamWriter, readonly> StreamWriter::Null {
   [] {return StreamWriter();}
 };
 

@@ -534,7 +534,7 @@ namespace Switch {
   inline const T& Box(const T& value) {return TypeBoxer::Boxing(value);}
 
   template<typename T, typename Attribute>
-  inline T Box(const Property<T, Attribute>& value) {return T(Box(value()));}
+  inline T Box(const property<T, Attribute>& value) {return T(Box(value()));}
   /// @endcond
   
   /// @brief Support unboxing of type

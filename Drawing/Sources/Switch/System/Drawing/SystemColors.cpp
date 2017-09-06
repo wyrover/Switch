@@ -3,134 +3,134 @@
 using namespace System;
 using namespace System::Drawing;
 
-Property<Color, ReadOnly> SystemColors::ActiveBorder {
+property<Color, readonly> SystemColors::ActiveBorder {
   [] {return Color::FromKnownColor(KnownColor::ActiveBorder);}
 };
 
-Property<Color, ReadOnly> SystemColors::ActiveCaption {
+property<Color, readonly> SystemColors::ActiveCaption {
   [] {return Color::FromKnownColor(KnownColor::ActiveCaption);}
 };
 
-Property<Color, ReadOnly> SystemColors::ActiveCaptionText {
+property<Color, readonly> SystemColors::ActiveCaptionText {
   [] {return Color::FromKnownColor(KnownColor::ActiveCaptionText);}
 };
 
-Property<Color, ReadOnly> SystemColors::AppWorkspace {
+property<Color, readonly> SystemColors::AppWorkspace {
   [] {return Color::FromKnownColor(KnownColor::AppWorkspace);}
 };
 
-Property<Color, ReadOnly> SystemColors::Control {
+property<Color, readonly> SystemColors::Control {
   [] {return Color::FromKnownColor(KnownColor::Control);}
 };
 
-Property<Color, ReadOnly> SystemColors::ControlDark {
+property<Color, readonly> SystemColors::ControlDark {
   [] {return Color::FromKnownColor(KnownColor::ControlDark);}
 };
 
-Property<Color, ReadOnly> SystemColors::ControlDarkDark {
+property<Color, readonly> SystemColors::ControlDarkDark {
   [] {return Color::FromKnownColor(KnownColor::ControlDarkDark);}
 };
 
-Property<Color, ReadOnly> SystemColors::ControlLight {
+property<Color, readonly> SystemColors::ControlLight {
   [] {return Color::FromKnownColor(KnownColor::ControlLight);}
 };
 
-Property<Color, ReadOnly> SystemColors::ControlLightLight {
+property<Color, readonly> SystemColors::ControlLightLight {
   [] {return Color::FromKnownColor(KnownColor::ControlLightLight);}
 };
 
-Property<Color, ReadOnly> SystemColors::ControlText {
+property<Color, readonly> SystemColors::ControlText {
   [] {return Color::FromKnownColor(KnownColor::ControlText);}
 };
 
-Property<Color, ReadOnly> SystemColors::Desktop {
+property<Color, readonly> SystemColors::Desktop {
   [] {return Color::FromKnownColor(KnownColor::Desktop);}
 };
 
-Property<Color, ReadOnly> SystemColors::GrayText {
+property<Color, readonly> SystemColors::GrayText {
   [] {return Color::FromKnownColor(KnownColor::GrayText);}
 };
 
-Property<Color, ReadOnly> SystemColors::Highlight {
+property<Color, readonly> SystemColors::Highlight {
   [] {return Color::FromKnownColor(KnownColor::Highlight);}
 };
 
-Property<Color, ReadOnly> SystemColors::HighlightText {
+property<Color, readonly> SystemColors::HighlightText {
   [] {return Color::FromKnownColor(KnownColor::HighlightText);}
 };
 
-Property<Color, ReadOnly> SystemColors::HotTrack {
+property<Color, readonly> SystemColors::HotTrack {
   [] {return Color::FromKnownColor(KnownColor::HotTrack);}
 };
 
-Property<Color, ReadOnly> SystemColors::InactiveBorder {
+property<Color, readonly> SystemColors::InactiveBorder {
   [] {return Color::FromKnownColor(KnownColor::InactiveBorder);}
 };
 
-Property<Color, ReadOnly> SystemColors::InactiveCaption {
+property<Color, readonly> SystemColors::InactiveCaption {
   [] {return Color::FromKnownColor(KnownColor::InactiveCaption);}
 };
 
-Property<Color, ReadOnly> SystemColors::InactiveCaptionText {
+property<Color, readonly> SystemColors::InactiveCaptionText {
   [] {return Color::FromKnownColor(KnownColor::InactiveCaptionText);}
 };
 
-Property<Color, ReadOnly> SystemColors::Info {
+property<Color, readonly> SystemColors::Info {
   [] {return Color::FromKnownColor(KnownColor::Info);}
 };
 
-Property<Color, ReadOnly> SystemColors::InfoText {
+property<Color, readonly> SystemColors::InfoText {
   [] {return Color::FromKnownColor(KnownColor::InfoText);}
 };
 
-Property<Color, ReadOnly> SystemColors::Menu {
+property<Color, readonly> SystemColors::Menu {
   [] {return Color::FromKnownColor(KnownColor::Menu);}
 };
 
-Property<Color, ReadOnly> SystemColors::MenuText {
+property<Color, readonly> SystemColors::MenuText {
   [] {return Color::FromKnownColor(KnownColor::MenuText);}
 };
 
-Property<Color, ReadOnly> SystemColors::ScrollBar {
+property<Color, readonly> SystemColors::ScrollBar {
   [] {return Color::FromKnownColor(KnownColor::ScrollBar);}
 };
 
-Property<Color, ReadOnly> SystemColors::Window {
+property<Color, readonly> SystemColors::Window {
   [] {return Color::FromKnownColor(KnownColor::Window);}
 };
 
-Property<Color, ReadOnly> SystemColors::WindowFrame {
+property<Color, readonly> SystemColors::WindowFrame {
   [] {return Color::FromKnownColor(KnownColor::WindowFrame);}
 };
 
-Property<Color, ReadOnly> SystemColors::WindowText {
+property<Color, readonly> SystemColors::WindowText {
   [] {return Color::FromKnownColor(KnownColor::WindowText);}
 };
 
-Property<Color, ReadOnly> SystemColors::ButtonFace {
+property<Color, readonly> SystemColors::ButtonFace {
   [] {return Color::FromKnownColor(KnownColor::ButtonFace);}
 };
 
-Property<Color, ReadOnly> SystemColors::ButtonHighlight {
+property<Color, readonly> SystemColors::ButtonHighlight {
   [] {return Color::FromKnownColor(KnownColor::ButtonHighlight);}
 };
 
-Property<Color, ReadOnly> SystemColors::ButtonShadow {
+property<Color, readonly> SystemColors::ButtonShadow {
   [] {return Color::FromKnownColor(KnownColor::ButtonShadow);}
 };
 
-Property<Color, ReadOnly> SystemColors::GradientActiveCaption {
+property<Color, readonly> SystemColors::GradientActiveCaption {
   [] {return Color::FromKnownColor(KnownColor::GradientActiveCaption);}
 };
 
-Property<Color, ReadOnly> SystemColors::GradientInactiveCaption {
+property<Color, readonly> SystemColors::GradientInactiveCaption {
   [] {return Color::FromKnownColor(KnownColor::GradientInactiveCaption);}
 };
 
-Property<Color, ReadOnly> SystemColors::MenuBar {
+property<Color, readonly> SystemColors::MenuBar {
   [] {return Color::FromKnownColor(KnownColor::MenuBar);}
 };
 
-Property<Color, ReadOnly> SystemColors::MenuHighlight {
+property<Color, readonly> SystemColors::MenuHighlight {
   [] {return Color::FromKnownColor(KnownColor::MenuHighlight);}
 };

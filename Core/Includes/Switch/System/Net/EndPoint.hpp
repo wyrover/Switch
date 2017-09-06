@@ -32,7 +32,7 @@ namespace Switch {
 
         /// @brief Gets the address family to which the endpoint belongs.
         /// @return One of the AddressFamily values.
-        Property<Sockets::AddressFamily, ReadOnly> AddressFamily {
+        property<Sockets::AddressFamily, readonly> AddressFamily {
           _get {return this->addressFamily;}
         };
 

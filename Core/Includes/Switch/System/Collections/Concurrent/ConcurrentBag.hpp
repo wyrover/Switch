@@ -51,7 +51,7 @@ namespace Switch {
           
           /// @brief Gets a value that indicates whether the ConcurrentBag<T> is empty.
           /// @return Boolean true if the ConcurrentBag<T> is empty; otherwise, false.
-          Property<bool, ReadOnly> IsEmpty {
+          property<bool, readonly> IsEmpty {
             _get {
               return this->list.Count == 0;
             }

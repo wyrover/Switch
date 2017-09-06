@@ -74,7 +74,7 @@ namespace Switch {
           /// @brief Gets the address family of the Socket.
           /// @return AddressFamily One of the AddressFamily values.
           /// @remarks The AddressFamily specifies the addressing scheme that an instance of the Socket class can use. This property is read-only and is set when the Socket is created.
-          Property<System::Net::Sockets::AddressFamily, ReadOnly> AddressFamily {
+          property<System::Net::Sockets::AddressFamily, readonly> AddressFamily {
             _get {return this->data->addressFamily;}
           };
           
@@ -84,7 +84,7 @@ namespace Switch {
           /// @exception ObjectClosedException The Socket has been closed.
           /// @remarks If you are using a non-blocking Socket, Available is a good way to determine whether data is queued for reading, before calling Receive. The available data is the total amount of data queued in the network buffer for reading. If no data is queued in the network buffer, Available returns 0.
           /// @remarks If the remote host shuts down or closes the connection, Available can throw a SocketException. If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
-          Property<int32, ReadOnly> Available {
+          property<int32, readonly> Available {
             _get {return this->GetAvailable();}
           };
           
@@ -96,14 +96,14 @@ namespace Switch {
           /// @remarks If you are in blocking mode, and you make a method call which does not complete immediately, your application will block execution until the requested operation completes. If you want execution to continue even though the requested operation is not complete, change the Blocking property to false. The Blocking property has no effect on asynchronous methods. If you are sending and receiving data asynchronously and want to block execution, use the ManualResetEvent class.
           /// @note If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
-          Property<bool> Blocking {
+          property<bool> Blocking {
             _get {return this->GetBlocking();},
             _set {this->SetBlocking(value);}
           };
           
           /// @brief Gets a value that indicates whether a Socket is connected to a remote host as of the last Send or Receive operation.
           /// @return bool true if the Socket was connected to a remote resource as of the most recent operation; otherwise, false.
-          Property<bool, ReadOnly> Connected {
+          property<bool, readonly> Connected {
             _get {return this->data->connected;}
           };
           
@@ -113,14 +113,14 @@ namespace Switch {
           /// @exception ObjectClosedException The Socket has been closed.
           /// @remarks Datagrams require fragmentation when their size exceeds the Maximum Transfer Unit (MTU) of the transmission medium. Datagrams may be fragmented by the sending host (all Internet Protocol versions) or an intermediate router (Internet Protocol Version 4 only). If a datagram must be fragmented, and the DontFragment option is set, the datagram is discarded, and an Internet Control Message Protocol (ICMP) error message is sent back to the sender of the datagram.
           /// @remarks Setting this property on a Transmission Control Protocol (TCP) socket will have no effect.
-          Property<bool> DontFragment {
+          property<bool> DontFragment {
             _get {return this->GetDontFragment();},
             _set {this->SetDontFragment(value);}
           };
           
           /// @brief Gets or sets a Boolean value that specifies whether the Socket is a dual-mode socket used for both IPv4 and IPv6.
           /// @return bool true if the Socket is a dual-mode socket; otherwise, false. The default is false.
-          Property<bool> DualMode {
+          property<bool> DualMode {
             _get {return this->GetDualMode();},
             _set {this->SetDualMode(value);}
           };
@@ -131,7 +131,7 @@ namespace Switch {
           /// @exception ObjectClosedException The Socket has been closed.
           /// @remarks Broadcasting is limited to a specific subnet, and must use User Datagram Protocol (UDP.) For Internet Protocol version 4, you can broadcast to your local subnet by sending a packet to 255.255.255.255; or you can use the directed broadcast address, which is the network portion of an Internet Protocol (IP) address with all bits set in the host portion. For example, if your IP address is 192.168.1.40 (a Class C address, with a netmask of 255.255.255.0 -- the network portion is the first three octets, and the host portion is the last octet), your directed broadcast address is 192.168.1.255.
           /// @remarks Setting this property on a Transmission Control Protocol (TCP) socket will have no effect.
-          Property<bool> EnableBroadcast {
+          property<bool> EnableBroadcast {
             _get {return this->GetEnableBroadcast();},
             _set {this->SetEnableBroadcast(value);}
           };
@@ -143,21 +143,21 @@ namespace Switch {
           /// @remarks If ExclusiveAddressUse is false, multiple sockets can use the Bind method to bind to a specific port; however only one of the sockets can perform operations on the network traffic sent to the port. If more than one socket attempts to use the Bind(EndPoint) method to bind to a particular port, then the one with the more specific IP address will handle the network traffic sent to that port.
           /// @remarks If ExclusiveAddressUse is true, the first use of the Bind method to attempt to bind to a particular port, regardless of Internet Protocol (IP) address, will succeed; all subsequent uses of the Bind method to attempt to bind to that port will fail until the original bound socket is destroyed.
           /// @remarks This property must be set before Bind is called; otherwise an InvalidOperationException will be thrown.
-          Property<bool> ExclusiveAddressUse {
+          property<bool> ExclusiveAddressUse {
             _get {return this->GetExclusiveAddressUse();},
             _set {this->SetExclusiveAddressUse(value);}
           };
           
           /// @brief Gets the operating system handle for the Socket.
           /// @return IntPtr An IntPtr that represents the operating system handle for the Socket.
-          Property<intptr, ReadOnly> Handle {
+          property<intptr, readonly> Handle {
             _get {return (intptr)this->data->socket;}
           };
 
           /// @brief Gets a value that indicates whether the Socket is bound to a specific local port.
           /// @return bool true if the Socket is bound to a local port; otherwise, false.
           /// @remarks A socket is considered bound to a local port if it is explicitly bound by calling the Bind method, or implicitly bound by calling members like Connect, SendTo, or ReceiveFrom, which use an ephemeral local port (a free port greater than 1024, selected by the operating system.) Servers use the Bind method to bind to a well-known port so that clients may connect to them.
-          Property<bool, ReadOnly> IsBound {
+          property<bool, readonly> IsBound {
             _get {return this->data->bound;}
           };
           
@@ -177,7 +177,7 @@ namespace Switch {
           /// | true (enabled)                      | A zero timeout.                            | Discards any pending data. For connection-oriented socket (TCP, for example), Winsock resets the connection.                      |
           /// @remarks he IP stack computes the default IP protocol time-out period to use based on the round trip time of the connection. In most cases, the time-out computed by the stack is more relevant than one defined by an application. This is the default behavior for a socket when the LingerState property is not set.
           /// @remarks When the LingerTime property stored in the LingerState property is set greater than the default IP protocol time-out, the default IP protocol time-out will still apply and virtual.
-          Property<LingerOption> LingerState {
+          property<LingerOption> LingerState {
             _get {return this->GetLingerState();},
             _set {this->SetLingerState(value);}
           };
@@ -190,7 +190,7 @@ namespace Switch {
           /// @remarks The LocalEndPoint property is usually set after you make a call to the Bind method. If you allow the system to assign your socket's local IP address and port number, the LocalEndPoint property will be set after the first I/O operation. For connection-oriented protocols, the first I/O operation would be a call to the Connect or Accept method. For connectionless protocols, the first I/O operation would be any of the send or receive calls.
           /// @note If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
-          Property<const EndPoint&, ReadOnly> LocalEndPoint {
+          property<const EndPoint&, readonly> LocalEndPoint {
             _get->const EndPoint& {return this->GetLocalEndPoint();}
           };
           
@@ -200,7 +200,7 @@ namespace Switch {
           /// @exception ObjectClosedException The Socket has been closed.
           /// @remarks Multicast is a scalable method for many-to-many communication on the Internet. A process subscribes to a multicast address; then, any packets sent by a subscribed process are received by every other process subscribed to the multicast address.
           /// @remarks Setting this property on a Transmission Control Protocol (TCP) socket will have no effect.
-          Property<bool> MulticastLoopback {
+          property<bool> MulticastLoopback {
             _get {return this->GetMulticastLoopback();},
             _set {this->SetMulticastLoopback(value);}
           };
@@ -212,7 +212,7 @@ namespace Switch {
           /// @remarks The Nagle algorithm is designed to reduce network traffic by causing the socket to buffer small packets and then combine and send them in one packet under certain circumstances. A TCP packet consists of 40 bytes of header plus the data being sent. When small packets of data are sent with TCP, the overhead resulting from the TCP header can become a significant part of the network traffic. On heavily loaded networks, the congestion resulting from this overhead can result in lost datagrams and retransmissions, as well as excessive propagation time caused by congestion. The Nagle algorithm inhibits the sending of new TCP segments when new outgoing data arrives from the user if any previouslytransmitted data on the connection remains unacknowledged.
           /// @remarks The majority of network applications should use the Nagle algorithm.
           /// @remarks Setting this property on a User Datagram Protocol (UDP) socket will have no effect.
-          Property<bool> NoDelay {
+          property<bool> NoDelay {
             _get {return this->GetNoDelay();},
             _set {this->SetNoDelay(value);}
           };
@@ -220,17 +220,17 @@ namespace Switch {
           /// @brief Indicates whether the underlying operating system and network adaptors support Internet Protocol version 4 (IPv4).
           /// @return bool true if the operating system and network adaptors support the IPv4 protocol; otherwise, false.
           /// @remarks The majority of operating system may support both IPv4 and IPv6 protocols.
-          static Property<bool, ReadOnly> OSSupportsIPv4;
+          static property<bool, readonly> OSSupportsIPv4;
           
           /// @brief Indicates whether the underlying operating system and network adaptors support Internet Protocol version 6 (IPv6).
           /// @return bool true if the operating system and network adaptors support the IPv6 protocol; otherwise, false.
           /// @remarks The majority of operating system may support both IPv4 and IPv6 protocols.
-          static Property<bool, ReadOnly> OSSupportsIPv6;
+          static property<bool, readonly> OSSupportsIPv6;
           
           /// @brief Gets the protocol type of the Socket.
           /// @return One of the ProtocolType values.
           /// @remarks The ProtocolType property is set when the Socket is created, and specifies the protocol used by that Socket.
-          Property<System::Net::Sockets::ProtocolType, ReadOnly> ProtocolType {
+          property<System::Net::Sockets::ProtocolType, readonly> ProtocolType {
             _get {return this->data->protocolType;}
           };
           
@@ -239,7 +239,7 @@ namespace Switch {
           /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
           /// @exception ObjectClosedException The Socket has been closed.
           /// @remarks A larger buffer size potentially reduces the number of empty acknowledgements (TCP packets with no data portion), but might also delay the recognition of connection difficulties. Consider increasing the buffer size if you are transferring large files, or you are using a high bandwidth, high latency connection (such as a satellite broadband provider.)
-          Property<int32> ReceiveBufferSize {
+          property<int32> ReceiveBufferSize {
             _get {return this->GetReceiveBufferSize();},
             _set {this->SetReceiveBufferSize(value);}
           };
@@ -249,7 +249,7 @@ namespace Switch {
           /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
           /// @exception ObjectClosedException The Socket has been closed.
           /// @remarks This option applies to synchronous Receive calls only. If the time-out period is exceeded, the Receive method will throw a SocketException.
-          Property<int32> ReceiveTimeout {
+          property<int32> ReceiveTimeout {
             _get {return this->GetReceiveTimeout();},
             _set {this->SetReceiveTimeout(value);}
           };
@@ -261,7 +261,7 @@ namespace Switch {
           /// @remarks If you are using a connection-oriented protocol, the RemoteEndPoint property gets the EndPoint that contains the remote IP address and port number to which the Socket is connected. If you are using a connectionless protocol, RemoteEndPoint contains the default remote IP address and port number with which the Socket will communicate. You must cast this EndPoint to an IPEndPoint before retrieving any information. You can then call the IPEndPoint.Address method to retrieve the remote IPAddress, and the IPEndPoint.Port method to retrieve the remote port number.
           /// @remarks The RemoteEndPoint is set after a call to either Accept or Connect. If you try to access this property earlier, RemoteEndPoint will throw a SocketException. If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
-          Property<const EndPoint&, ReadOnly> RemoteEndPoint {
+          property<const EndPoint&, readonly> RemoteEndPoint {
             _get->const EndPoint& {return this->GetRemoteEndPoint();}
           };
           
@@ -270,7 +270,7 @@ namespace Switch {
           /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
           /// @exception ObjectClosedException The Socket has been closed.
           /// @remarks A larger buffer size potentially reduces the number of empty acknowledgements (TCP packets with no data portion), but might also delay the recognition of connection difficulties. Consider increasing the buffer size if you are transferring large files, or you are using a high bandwidth, high latency connection (such as a satellite broadband provider.)
-          Property<int32> SendBufferSize {
+          property<int32> SendBufferSize {
             _get {return this->GetSendBufferSize();},
             _set {this->SetSendBufferSize(value);}
           };
@@ -280,7 +280,7 @@ namespace Switch {
           /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
           /// @exception ObjectClosedException The Socket has been closed.
           /// @remarks This option applies to synchronous Receive calls only. If the time-out period is exceeded, the Receive method will throw a SocketException.
-          Property<int32> SendTimeout {
+          property<int32> SendTimeout {
             _get {return this->GetSendTimeout();},
             _set {this->SetSendTimeout(value);}
           };
@@ -288,7 +288,7 @@ namespace Switch {
           /// @brief Gets the type of the Socket.
           /// @return SocketType One of the SocketType values.
           /// @remarks SocketType is read-only and is set when the Socket is created.
-          Property<System::Net::Sockets::SocketType, ReadOnly> SocketType {
+          property<System::Net::Sockets::SocketType, readonly> SocketType {
             _get {return this->data->socketType;}
           };
           
@@ -300,7 +300,7 @@ namespace Switch {
           /// @remarks The TTL value may be set to a value from 0 to 255. When this property is not set, the default TTL value for a socket is 32.
           /// @remarks Setting this property on a Transmission Control Protocol (TCP) socket is ignored by the TCP/IP stack if a successful connection has been established using the socket.
           /// @remarks If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
-          Property<int32> Ttl {
+          property<int32> Ttl {
             _get {return this->GetTtl();},
             _set {this->SetTtl(value);}
           };

@@ -21,11 +21,11 @@ namespace Switch {
         public:
           /// @brief Represents the FILE GET protocol method that is used to retrieve a file from a specified location.
           /// @return string
-          static Property<string, ReadOnly> DownloadFile;
+          static property<string, readonly> DownloadFile;
           
           /// @brief Represents the FILE PUT protocol method that is used to copy a file to a specified location.
           /// @return string
-          static Property<string, ReadOnly> UploadFile;
+          static property<string, readonly> UploadFile;
         };
         
         /// @brief Represents the types of FTP protocol methods that can be used with an FTP request. This class cannot be inherited.
@@ -33,23 +33,23 @@ namespace Switch {
         public:
           /// @brief
           /// @return string
-          static Property<string, ReadOnly> UploadFile;
+          static property<string, readonly> UploadFile;
 
           /// @brief
           /// @return string
-          static Property<string, ReadOnly> DownloadFile;
+          static property<string, readonly> DownloadFile;
           
           /// @brief
           /// @return string
-          static Property<string, ReadOnly> ListDirectory;
+          static property<string, readonly> ListDirectory;
           
           /// @brief
           /// @return string
-          static Property<string, ReadOnly> ListDirectoryDetails;
+          static property<string, readonly> ListDirectoryDetails;
           
           /// @brief
           /// @return string
-          static Property<string, ReadOnly> MakeDirectory;
+          static property<string, readonly> MakeDirectory;
         };
 
         /// @brief Represents the types of HTTP protocol methods that can be used with an HTTP request.
@@ -57,31 +57,31 @@ namespace Switch {
         public:
           /// @brief
           /// @return string
-          static Property<string, ReadOnly> Get;
+          static property<string, readonly> Get;
           
           /// @brief
           /// @return string
-          static Property<string, ReadOnly> Head;
+          static property<string, readonly> Head;
           
           /// @brief
           /// @return string
-          static Property<string, ReadOnly> Post;
+          static property<string, readonly> Post;
           
           /// @brief
           /// @return string
-          static Property<string, ReadOnly> Put;
+          static property<string, readonly> Put;
           
           /// @brief
           /// @return string
-          static Property<string, ReadOnly> Delete;
+          static property<string, readonly> Delete;
           
           /// @brief
           /// @return string
-          static Property<string, ReadOnly> Trace;
+          static property<string, readonly> Trace;
           
           /// @brief
           /// @return string
-          static Property<string, ReadOnly> Options;
+          static property<string, readonly> Options;
         };
       };
     }

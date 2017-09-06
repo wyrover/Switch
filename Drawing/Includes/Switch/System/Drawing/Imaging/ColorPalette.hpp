@@ -24,11 +24,11 @@ namespace Switch {
           /// @cond
           ColorPalette(const ColorPalette& colorPalette) : entries(colorPalette.entries), flags(colorPalette.flags) {}
           /// @endcond
-          Property<Array<Color>, ReadOnly> Entries {
+          property<Array<Color>, readonly> Entries {
             _get {return this->entries;}
           };
 
-          Property<int32, ReadOnly> Falgs {
+          property<int32, readonly> Falgs {
             _get {return this->flags;}
           };
 

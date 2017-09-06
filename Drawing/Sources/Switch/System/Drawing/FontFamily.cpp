@@ -27,19 +27,19 @@ System::Drawing::FontFamily::~FontFamily() {
     __OS::DrawingApi::FontFamily::ReleaseResource(this->data().handle);
 }
 
-Property<System::Array<System::Drawing::FontFamily>, ReadOnly> System::Drawing::FontFamily::Families {
+property<System::Array<System::Drawing::FontFamily>, readonly> System::Drawing::FontFamily::Families {
   [] {return System::Drawing::Text::InstalledFontCollection().Families();}
 };
 
-Property<System::Drawing::FontFamily, ReadOnly> System::Drawing::FontFamily::GenericMonospace {
+property<System::Drawing::FontFamily, readonly> System::Drawing::FontFamily::GenericMonospace {
   [] {return FontFamily(System::Drawing::Text::GenericFontFamilies::Monospace);}
 };
 
-Property<System::Drawing::FontFamily, ReadOnly> System::Drawing::FontFamily::GenericSansSerif {
+property<System::Drawing::FontFamily, readonly> System::Drawing::FontFamily::GenericSansSerif {
   [] {return FontFamily(System::Drawing::Text::GenericFontFamilies::SansSerif);}
 };
 
-Property<System::Drawing::FontFamily, ReadOnly> System::Drawing::FontFamily::GenericSerif {
+property<System::Drawing::FontFamily, readonly> System::Drawing::FontFamily::GenericSerif {
   [] {return FontFamily(System::Drawing::Text::GenericFontFamilies::Serif);}
 };
 

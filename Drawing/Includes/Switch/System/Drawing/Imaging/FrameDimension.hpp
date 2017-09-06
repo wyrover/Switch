@@ -16,22 +16,22 @@ namespace Switch {
       namespace Imaging {
         class _public FrameDimension : public object {
         public:
-          static Property<FrameDimension, ReadOnly> Page;
+          static property<FrameDimension, readonly> Page;
           
-          static Property<FrameDimension, ReadOnly> Resolution;
+          static property<FrameDimension, readonly> Resolution;
           
-          static Property<FrameDimension, ReadOnly> Time;
+          static property<FrameDimension, readonly> Time;
           
           FrameDimension(const Guid& guid) : guid(guid) {}
           FrameDimension(const Guid& guid, const string name) : guid(guid), name(name) {}
           FrameDimension(const string& guid, const string name) : guid(guid), name(name) {}
           FrameDimension(const FrameDimension& fd) : guid(fd.guid), name(fd.name) {}
           
-          Property<System::Guid, ReadOnly> Guid {
+          property<System::Guid, readonly> Guid {
             _get {return this->guid;}
           };
           
-          Property<string, ReadOnly> Name {
+          property<string, readonly> Name {
             _get {return this->name;}
           };
 

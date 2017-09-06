@@ -20,7 +20,7 @@ namespace Switch {
             this->SetStyle(ControlStyles::UserPaint, false);
           }
 
-          Property<System::Windows::Forms::BorderStyle> BorderStyle {
+          property<System::Windows::Forms::BorderStyle> BorderStyle {
             _get{return this->borderStyle;},
             _set{this->SetBorderStyle (value);}
           };

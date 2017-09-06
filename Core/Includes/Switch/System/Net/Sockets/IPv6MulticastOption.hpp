@@ -37,7 +37,7 @@ namespace Switch {
           /// @param group An IPAddress that contains the Internet address of a multicast group.
           /// @return IPAddress An IPAddress that contains the Internet address of a multicast group.
           /// @exception ArgumentNullException group is null.
-          Property<const IPAddress&> Group {
+          property<const IPAddress&> Group {
             _get->const IPAddress& {return this->group;},
             _set {this->group = value;}
           };
@@ -46,7 +46,7 @@ namespace Switch {
           /// @param interfaceIndex A Int64 value that specifies the address of the interface.
           /// @return int64 A Int64 value that specifies the address of the interface.
           /// @exception ArgumentOutOfRangeException interfaceIndex is less than 0. -or- interfaceIndex is greater than 0x00000000FFFFFFFF.
-          Property<int64> InterfaceIndex {
+          property<int64> InterfaceIndex {
             _get {return this->interfaceIndex;},
             _set {
               if (value < 0 || value > 0x00000000FFFFFFFF)

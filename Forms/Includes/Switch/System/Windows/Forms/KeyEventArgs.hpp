@@ -37,47 +37,47 @@ namespace Switch {
           }
           /// @endcond
           
-          Property<bool, ReadOnly> Alt {
+          property<bool, readonly> Alt {
             _get {return Enum<Keys>(this->keyData).HasFlag(Keys::Alt);}
           };
 
-          Property<bool, ReadOnly> Command {
+          property<bool, readonly> Command {
             _get {return Enum<Keys>(this->keyData).HasFlag(Keys::Command);}
           };
 
-          Property<bool, ReadOnly> Control {
+          property<bool, readonly> Control {
             _get {return Enum<Keys>(this->keyData).HasFlag(Keys::Control);}
           };
 
-          Property<bool> Handled {
+          property<bool> Handled {
             _get {return this->handled;},
             _set {this->handled = value;}
           };
 
-          Property<Keys, ReadOnly> KeyCode {
+          property<Keys, readonly> KeyCode {
             _get {return Keys(this->keyData & Keys::KeyCode);}
           };
 
           /// @brief Gets the key data for a KeyDown or KeyUp event.
           /// @return A Keys representing the key code for the key that was pressed, combined with modifier flags that indicate which combination of CTRL, SHIFT, and ALT keys was pressed at the same time.
           /// @remarks You can use constants from Keys to extract information from the KeyData property. Use the bitwise AND operator to compare data returned by KeyData with constants in Keys to obtain information about which keys the user pressed. To determine whether a specific modifier key was pressed, use the Control, Shift, and Alt properties.
-          Property<Keys, ReadOnly> KeyData {
+          property<Keys, readonly> KeyData {
             _get {return this->keyData;}
           };
 
-          Property<int32, ReadOnly> KeyValue {
+          property<int32, readonly> KeyValue {
             _get {return (int32)(this->keyData)&0xFFFF;}
           };
 
-          Property<Keys, ReadOnly> Modifiers {
+          property<Keys, readonly> Modifiers {
             _get {return Keys(this->keyData & Keys::Modifiers);}
           };
 
-          Property<bool, ReadOnly> Shift {
+          property<bool, readonly> Shift {
             _get {return Enum<Keys>(this->keyData).HasFlag(Keys::Shift);}
           };
 
-          Property<bool> SuppressKeyPress {
+          property<bool> SuppressKeyPress {
             _get {return this->suppressKeyPress;},
             _set {this->suppressKeyPress = value;}
           };

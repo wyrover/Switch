@@ -53,7 +53,7 @@ namespace Switch {
           
           /// @brief Get the SocketError associated with this exception
           /// @return An error code associated with the exception
-          Property<const Sockets::SocketError&, ReadOnly> SocketErrorCode {
+          property<const Sockets::SocketError&, readonly> SocketErrorCode {
             _get->const Sockets::SocketError& {return this->error; }
           };
 

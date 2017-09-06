@@ -8,25 +8,9 @@ using namespace TUnit;
 namespace SwitchUnitTests {
   class PropertyReadOnlyTest : public TestFixture {
   protected:
-    void ReadOnlyCanRead() {
-      Assert::IsTrue(ReadOnly::CanRead, _current_information);
-    }
-    
-    void ReadOnlyCanWrite() {
-      Assert::IsFalse(ReadOnly::CanWrite, _current_information);
-    }
-    
-    void PropertyCanRead() {
-      Assert::IsTrue(Property<int32, ReadOnly>::CanRead, _current_information);
-    }
-    
-    void PropertyCanWrite() {
-      Assert::IsFalse(Property<int32, ReadOnly>::CanWrite, _current_information);
-    }
-    
     void CreatePropertyAndGetItWithImplicitCastOperator() {
       int32 v = 42;
-      Property<int32, ReadOnly> Value {
+      property<int32, readonly> Value {
         _get {return v;}
       };
       
@@ -36,7 +20,7 @@ namespace SwitchUnitTests {
     
     void CreatePropertyAndGetItWithGetFunction() {
       int32 v = 42;
-      Property<int32, ReadOnly> Value {
+      property<int32, readonly> Value {
         _get {return v;}
       };
       
@@ -46,7 +30,7 @@ namespace SwitchUnitTests {
     
     void CreatePropertyAndGetItWithFunctor() {
       int32 v = 42;
-      Property<int32, ReadOnly> Value {
+      property<int32, readonly> Value {
         _get {return v;}
       };
       
@@ -56,7 +40,7 @@ namespace SwitchUnitTests {
     
     void PropertyEqualityOperator() {
       int32 v = 42;
-      Property<int32, ReadOnly> Value {
+      property<int32, readonly> Value {
         _get {return v;}
       };
       
@@ -66,7 +50,7 @@ namespace SwitchUnitTests {
     
     void PropertyInequalityOperator() {
       int32 v = 42;
-      Property<int32, ReadOnly> Value {
+      property<int32, readonly> Value {
         _get {return v;}
       };
       
@@ -79,7 +63,7 @@ namespace SwitchUnitTests {
       PropertyTestClass() {}
       PropertyTestClass(const PropertyTestClass& property) : name(property.name) {}
       
-      Property<string, ReadOnly> Name {
+      property<string, readonly> Name {
         _get {return this->name;}
       };
       
@@ -103,10 +87,6 @@ namespace SwitchUnitTests {
     }
   };
   
-  _test(PropertyReadOnlyTest, ReadOnlyCanRead)
-  _test(PropertyReadOnlyTest, ReadOnlyCanWrite)
-  _test(PropertyReadOnlyTest, PropertyCanRead)
-  _test(PropertyReadOnlyTest, PropertyCanWrite)
   _test(PropertyReadOnlyTest, CreatePropertyAndGetItWithImplicitCastOperator)
   _test(PropertyReadOnlyTest, CreatePropertyAndGetItWithGetFunction)
   _test(PropertyReadOnlyTest, CreatePropertyAndGetItWithFunctor)

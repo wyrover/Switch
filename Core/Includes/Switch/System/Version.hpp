@@ -72,13 +72,13 @@ namespace Switch {
 
       /// @brief Gets the value of the build component of the version number for the current Version object.
       /// @return int32 The build number, or -1 if the build number is undefined.
-      Property<int32, ReadOnly> Build {
+      property<int32, readonly> Build {
         _get {return this->build;}
       };
 
       /// @brief Gets the value of the major component of the version number for the current Version object.
       /// @return int32 The major version number.
-      Property<int32, ReadOnly> Major {
+      property<int32, readonly> Major {
         _get {return this->major;}
       };
 
@@ -88,13 +88,13 @@ namespace Switch {
       /// @remarks The temporary version does not warrant a new revision number, but it does need to be identified as a different version.
       /// @remarks In this case, encode the identification information in the high and low 16-bit portions of the 32-bit revision number.
       /// @remarks Use the Revision property to obtain the entire revision number, use the MajorRevision property to obtain the high 16 bits, and use the MinorRevision property to obtain the low 16 bits.
-      Property<int16, ReadOnly> MajorRevision {
+      property<int16, readonly> MajorRevision {
         _get {return (int16)((this->revision & 0xFFFF0000) >> 16);}
       };
 
       /// @brief Gets the value of the minor component of the version number for the current Version object.
       /// @return int32 The minor version number.
-      Property<int32, ReadOnly> Minor {
+      property<int32, readonly> Minor {
         _get {return this->minor;}
       };
 
@@ -104,13 +104,13 @@ namespace Switch {
       /// @remarks The temporary version does not warrant a new revision number, but it does need to be identified as a different version.
       /// @remarks In this case, encode the identification information in the high and low 16-bit portions of the 32-bit revision number.
       /// @remarks Use the Revision property to obtain the entire revision number, use the MajorRevision property to obtain the high 16 bits, and use the MinorRevision property to obtain the low 16 bits.
-      Property<int16, ReadOnly> MinorRevision {
+      property<int16, readonly> MinorRevision {
         _get {return (int16)(this->revision & 0x0000FFFF);}
       };
 
       /// @brief Gets the value of the revision component of the version number for the current Version object.
       /// @return int32 The revision number, or -1 if the revision number is undefined.
-      Property<int32, ReadOnly> Revision {
+      property<int32, readonly> Revision {
         _get {return this->revision;}
       };
 

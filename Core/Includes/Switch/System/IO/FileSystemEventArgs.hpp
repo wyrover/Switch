@@ -26,15 +26,15 @@ namespace Switch {
         }
         /// @endcond
         
-        Property<WatcherChangeTypes, ReadOnly> ChangeType {
+        property<WatcherChangeTypes, readonly> ChangeType {
           _get {return this->changeType;}
         };
         
-        Property<string, ReadOnly> Directory {
+        property<string, readonly> Directory {
           _get {return this->directory;}
         };
         
-        Property<string, ReadOnly> Name {
+        property<string, readonly> Name {
           _get {return this->name;}
         };
         

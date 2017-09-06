@@ -53,43 +53,43 @@ namespace Switch {
           /// @brief Returns the ID of the currently executing Task.
           /// @return An integer that was assigned by the system to the currently-executing task.
           /// @remarks CurrentId is a static property that is used to get the identifier of the currently executing task from the code that the task is executing. It differs from the Id property, which returns the identifier of a particular Task instance. If you attempt to retrieve the CurrentId value from outside the code that a task is executing, the property returns null.
-          static Property<Nullable<int32>, ReadOnly> CurrentId;
+          static property<Nullable<int32>, readonly> CurrentId;
           
           /// @brief Provides access to factory methods for creating and configuring Task and Task<TResult> instances.
           /// @return A factory object that can create a variety of Task and Task<TResult> objects.
-          static Property<TaskFactory, ReadOnly> Factory;
+          static property<TaskFactory, readonly> Factory;
           
           /// @brief Gets an ID for this Task instance.
           /// @brief The identifier that is assigned by the system to this Task instance.
           /// @remarks Task IDs are assigned on-demand and do not necessarily represent the order in which task instances are created. Note that although collisions are very rare, task identifiers are not guaranteed to be unique.
           /// @remarks To get the task ID of the currently executing task from within code that that task is executing, use the CurrentId property.
-          Property<int32, ReadOnly> Id {
+          property<int32, readonly> Id {
             _get {return this->data->id;}
           };
           
           /// @brief Gets whether this Task instance has completed execution due to being canceled.
           /// @return true if the task has completed due to being canceled; otherwise false.
-          Property<bool, ReadOnly> IsCanceled {
+          property<bool, readonly> IsCanceled {
             _get {return this->data->status == TaskStatus::Canceled;}
           };
           
           /// @brief Gets whether this Task has completed.
           /// @return rue if the task has completed; otherwise false.
           /// @remarks IsCompleted will return true when the task is in one of the three final states: RanToCompletion, Faulted, or Canceled.
-          Property<bool, ReadOnly> IsCompleted {
+          property<bool, readonly> IsCompleted {
             _get {return this->data->status == TaskStatus::RanToCompletion || this->data->status == TaskStatus::Faulted || this->data->status == TaskStatus::Canceled;}
           };
           
           /// @brief Gets whether the Task completed due to an unhandled exception.
           /// @return true if the task has thrown an unhandled exception; otherwise false.
           /// @remarks If IsFaulted is true, the task's Status is equal to Faulted, and its Exception property will be non-null.
-          Property<bool, ReadOnly> IsFaulted {
+          property<bool, readonly> IsFaulted {
             _get {return this->data->status == TaskStatus::Faulted;}
           };
 
           /// @brief Gets the TaskStatus of this task.
           /// @return The current TaskStatus of this task instance.
-          Property<TaskStatus, ReadOnly> Status {
+          property<TaskStatus, readonly> Status {
             _get {return this->data->status;}
           };
           
@@ -527,7 +527,7 @@ namespace Switch {
 /// @cond
 namespace Switch { namespace System { namespace Threading { namespace Tasks {
   template<typename TResult>
-  Property<Nullable<int32>, ReadOnly> Task<TResult>::CurrentId {
+  property<Nullable<int32>, readonly> Task<TResult>::CurrentId {
     [] {
       if (__opaque_task_id_generator__::currentId == 0)
         return Nullable<int32>();
@@ -536,7 +536,7 @@ namespace Switch { namespace System { namespace Threading { namespace Tasks {
   };
   
   template<typename TResult>
-  Property<TaskFactory, ReadOnly> Task<TResult>::Factory {
+  property<TaskFactory, readonly> Task<TResult>::Factory {
     [] {
       return TaskFactory();
     }

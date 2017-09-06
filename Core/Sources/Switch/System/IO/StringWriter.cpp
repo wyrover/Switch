@@ -11,7 +11,7 @@ namespace {
   Text::UTF8Encoding utf8Encoding(false);
 }
 
-Property<StringWriter, ReadOnly> StringWriter::Null {
+property<StringWriter, readonly> StringWriter::Null {
   [] {return StringWriter();}
 };
 

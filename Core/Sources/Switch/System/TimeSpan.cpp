@@ -11,35 +11,35 @@
 
 using namespace System;
 
-Property<TimeSpan, ReadOnly> TimeSpan::MaxValue {
+property<TimeSpan, readonly> TimeSpan::MaxValue {
   [] {return TimeSpan(Int64::MaxValue());}
 };
 
-Property<TimeSpan, ReadOnly> TimeSpan::MinValue {
+property<TimeSpan, readonly> TimeSpan::MinValue {
   [] {return TimeSpan(Int64::MinValue());}
 };
 
-Property<int64, ReadOnly> TimeSpan::TicksPerDay {
+property<int64, readonly> TimeSpan::TicksPerDay {
   [] {return 864000000000LL;}
 };
 
-Property<int64, ReadOnly> TimeSpan::TicksPerHour {
+property<int64, readonly> TimeSpan::TicksPerHour {
   [] {return 36000000000LL;}
 };
 
-Property<int64, ReadOnly> TimeSpan::TicksPerMillisecond {
+property<int64, readonly> TimeSpan::TicksPerMillisecond {
   [] {return 10000LL;}
 };
 
-Property<int64, ReadOnly> TimeSpan::TicksPerMinute {
+property<int64, readonly> TimeSpan::TicksPerMinute {
   [] {return 600000000LL;}
 };
 
-Property<int64, ReadOnly> TimeSpan::TicksPerSecond{
+property<int64, readonly> TimeSpan::TicksPerSecond{
   [] {return 10000000LL;}
 };
 
-Property<TimeSpan, ReadOnly> TimeSpan::Zero {
+property<TimeSpan, readonly> TimeSpan::Zero {
   [] {return TimeSpan(0);}
 };
 

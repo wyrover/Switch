@@ -8,25 +8,9 @@ using namespace TUnit;
 namespace SwitchUnitTests {
   class PropertyWriteOnlyTest : public TestFixture {
   protected:
-    void WriteOnlyCanRead() {
-      Assert::IsFalse(WriteOnly::CanRead, _current_information);
-    }
-    
-    void WriteOnlyCanWrite() {
-      Assert::IsTrue(WriteOnly::CanWrite, _current_information);
-    }
-
-    void PropertyCanRead() {
-      Assert::IsFalse(Property<int, WriteOnly>::CanRead, _current_information);
-    }
-    
-    void PropertyCanWrite() {
-      Assert::IsTrue(Property<int, WriteOnly>::CanWrite, _current_information);
-    }
-    
     void CreatePropertyAndSetItWithEqualOperator() {
       int32 v = 42;
-      Property<int32, WriteOnly> Value {
+      property<int32, writeonly> Value {
         _set {v = value;}
       };
 
@@ -36,7 +20,7 @@ namespace SwitchUnitTests {
     
     void CreatePropertyAndSetItWithSetFunction() {
       int32 v = 42;
-      Property<int32, WriteOnly> Value {
+      property<int32, writeonly> Value {
         _set {v = value;}
       };
       
@@ -46,7 +30,7 @@ namespace SwitchUnitTests {
     
     void CreatePropertyAndSetItWithFunctor() {
       int32 v = 42;
-      Property<int32, WriteOnly> Value {
+      property<int32, writeonly> Value {
         _set {v = value;}
       };
       
@@ -59,7 +43,7 @@ namespace SwitchUnitTests {
       PropertyTestClass() {}
       PropertyTestClass(const PropertyTestClass& property) : name(property.name) {}
       
-      Property<string, WriteOnly> Name {
+      property<string, writeonly> Name {
         _set {this->name = value;}
       };
       
@@ -85,10 +69,6 @@ namespace SwitchUnitTests {
     }
   };
   
-  _test(PropertyWriteOnlyTest, WriteOnlyCanRead)
-  _test(PropertyWriteOnlyTest, WriteOnlyCanWrite)
-  _test(PropertyWriteOnlyTest, PropertyCanRead)
-  _test(PropertyWriteOnlyTest, PropertyCanWrite)
   _test(PropertyWriteOnlyTest, CreatePropertyAndSetItWithEqualOperator)
   _test(PropertyWriteOnlyTest, CreatePropertyAndSetItWithSetFunction)
   _test(PropertyWriteOnlyTest, CreatePropertyAndSetItWithFunctor)

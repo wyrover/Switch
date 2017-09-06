@@ -4,7 +4,7 @@
 using namespace System;
 using namespace System::Drawing;
 
-Property<SizeF, ReadOnly> SizeF::Empty {
+property<SizeF, readonly> SizeF::Empty {
   [] {return SizeF();}
 };
 

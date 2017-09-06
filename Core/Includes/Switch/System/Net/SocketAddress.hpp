@@ -46,13 +46,13 @@ namespace Switch {
         
         /// @brief Gets the address family to which the endpoint belongs.
         /// @return One of the AddressFamily values.
-        Property<Sockets::AddressFamily, ReadOnly> AddressFamily {
+        property<Sockets::AddressFamily, readonly> AddressFamily {
           _get {return this->GetAddressFamily();}
         };
 
         /// @brief Gets the underlying buffer size of the SocketAddress.
         /// @return int32 The underlying buffer size of the SocketAddress.
-        Property<int32, ReadOnly> Size {
+        property<int32, readonly> Size {
           _get {return this->bytes.Length();}
         };
 

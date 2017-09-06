@@ -12,11 +12,11 @@ namespace Examples {
       Pet(const string& name, int age) : name(name), age(age) {}
       Pet(const Pet& pet) : name(pet.name), age(pet.age) {}
       
-      Property<int, ReadOnly> Age {
+      property<int, readonly> Age {
         _get {return this->age;}
       };
       
-      Property<string, ReadOnly> Name {
+      property<string, readonly> Name {
         _get {return this->name;}
       };
       

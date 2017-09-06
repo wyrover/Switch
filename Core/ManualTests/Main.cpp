@@ -13,7 +13,7 @@ namespace Examples {
       Data() = default;
       Data(const Data& data) : items(data.items) {};
       
-      Property<Array<int>> Items {
+      property<Array<int>> Items {
         _get {return this->items;},
         _set {this->items = value;}
       };

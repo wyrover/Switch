@@ -85,11 +85,11 @@ const TimeZoneInfo& TimeZoneInfo::__local() {
   return local;
 }
 
-Property<const TimeZoneInfo&, ReadOnly> TimeZoneInfo::Local {
+property<const TimeZoneInfo&, readonly> TimeZoneInfo::Local {
   []()->const TimeZoneInfo& {return TimeZoneInfo::__local();}
 };
 
-Property<const TimeZoneInfo&, ReadOnly> TimeZoneInfo::Utc{
+property<const TimeZoneInfo&, readonly> TimeZoneInfo::Utc{
   []()->const TimeZoneInfo& {return utc;}
 };
 

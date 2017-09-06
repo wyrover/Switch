@@ -19,10 +19,10 @@ namespace Switch {
     struct _public Int16 final : public ValueType, public IComparable, public IConvertible, public IFormattable {
     public:
       /// @brief Represents the largest possible value of an Int16 32767 (0x7FFF). This field is constant.
-      static Property<int16, ReadOnly> MaxValue;
+      static property<int16, readonly> MaxValue;
 
       /// @brief Represents the smallest possible value of Int16 -32768 (0x8000). This field is constant.
-      static Property<int16, ReadOnly> MinValue;
+      static property<int16, readonly> MinValue;
 
       /// @brief Create a new instance of struct Int16
       /// @remarks Int16 is initialized by default to 0.

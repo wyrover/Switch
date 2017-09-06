@@ -22,7 +22,7 @@ namespace DesignPatterns {
       }
       
       // Gets or sets the state
-      Property<refptr<DesignPatterns::Behavioral::State>> State {
+      property<refptr<DesignPatterns::Behavioral::State>> State {
         _get { return this->state; },
         _set {
           this->state = value;

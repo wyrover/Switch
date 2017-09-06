@@ -30,35 +30,35 @@ namespace Switch {
         Font(const System::Drawing::Font& font) : data(font.data) {}
         /// @endcond
 
-        Property<bool, ReadOnly> Bold{
+        property<bool, readonly> Bold{
           _get{ return (this->data().fontStyle & System::Drawing::FontStyle::Bold) == System::Drawing::FontStyle::Bold; }
         };
 
-        Property<System::Drawing::FontFamily, ReadOnly> FontFamily{
+        property<System::Drawing::FontFamily, readonly> FontFamily{
           _get{ return this->data().fontFamily; }
         };
 
-        Property<bool, ReadOnly> Italic{
+        property<bool, readonly> Italic{
           _get{ return (this->data().fontStyle & System::Drawing::FontStyle::Italic) == System::Drawing::FontStyle::Italic; }
         };
 
-        Property<bool, ReadOnly> Strikeout{
+        property<bool, readonly> Strikeout{
           _get{ return (this->data().fontStyle & System::Drawing::FontStyle::Strikeout) == System::Drawing::FontStyle::Strikeout; }
         };
 
-        Property<bool, ReadOnly> Underline{
+        property<bool, readonly> Underline{
           _get{ return (this->data().fontStyle & System::Drawing::FontStyle::Underline) == System::Drawing::FontStyle::Underline; }
         };
 
-        Property<const string&, ReadOnly> Name {
+        property<const string&, readonly> Name {
           _get->const string& {return this->data().name;}
         };
 
-        Property<System::Drawing::FontStyle, ReadOnly> Style {
+        property<System::Drawing::FontStyle, readonly> Style {
           _get {return this->data().fontStyle;}
         };
 
-        Property<float, ReadOnly> Size {
+        property<float, readonly> Size {
           _get {return this->data().size;}
         };
 

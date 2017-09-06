@@ -14,11 +14,11 @@ namespace Switch {
     namespace Net {
       class _public FtpWebResponse : public System::Net::WebResponse {
       public:
-        Property<System::Net::FtpStatusCode, ReadOnly> StatusCode {
+        property<System::Net::FtpStatusCode, readonly> StatusCode {
           _get {return this->GetStatusCode();}
         };
         
-        Property<string, ReadOnly> StatusDescription {
+        property<string, readonly> StatusDescription {
           _get {return this->GetStatusDescription();}
         };
         

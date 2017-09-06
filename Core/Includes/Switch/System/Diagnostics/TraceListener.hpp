@@ -49,11 +49,11 @@ namespace Switch {
         /// @brief Gets the custom trace listener attributes defined in the application configuration file.
         /// @return A StringDictionary containing the custom attributes for the trace listener.
         /// @remarks Classes that inherit from the TraceListener class can add custom attributes by overriding the GetSupportedAttributes method and returning a string array of custom attribute names. The Attributes property identifies the custom attributes that are referenced in the application's configuration file. For example, in the following configuration file excerpt the DelimitedListTraceListener custom attribute "delimiter" is referenced. In this case, the Attributes property returns a StringDictionary containing the string "delimiter".
-        Property<const Collections::Specialized::StringDictionary&, ReadOnly> Attributes {
+        property<const Collections::Specialized::StringDictionary&, readonly> Attributes {
           _get->const Collections::Specialized::StringDictionary& {return this->data->attibutes;}
         };
         
-        Property<const TraceFilter&> Filter {
+        property<const TraceFilter&> Filter {
           _get->const TraceFilter& {return *this->data->filter;},
           _set {this->data->filter = &value;}
         };
@@ -61,7 +61,7 @@ namespace Switch {
         /// @brief Gets or sets the indent level.
         /// @return int32 The indent level. The default is zero.
         /// @remarks The IndentLevel property represents the number of times that the indent specified by the IndentSize property is applied. This property is stored on per-thread/per-request basis.
-        Property<int32> IndentLevel {
+        property<int32> IndentLevel {
           _get {return this->data->indentLevel;},
           _set {this->data->indentLevel = value;}
         };
@@ -70,7 +70,7 @@ namespace Switch {
         /// @return int32 The number of spaces in an indent. The default is four spaces.
         /// @exception ArgumentOutOfRangeException Set operation failed because the value is less than zero.
         /// @remarks The property is stored on per-thread/per-request basis.
-        Property<int32> IndentSize {
+        property<int32> IndentSize {
           _get {return this->data->indentSize;},
           _set {
             if (value < 0)
@@ -82,14 +82,14 @@ namespace Switch {
         /// @brief Gets a value indicating whether the trace listener is thread safe.
         /// @return bool true if the trace listener is thread safe; otherwise, false. The default is false.
         /// @remarks The value of IsThreadSafe is used to determine whether to use a global lock when writing to the listener. If the value of IsThreadSafe is false, the global lock is used regardless of the value of UseGlobalLock. The global lock is not used only if the value of IsThreadSafe is true and the value of UseGlobalLock is false. The default behavior is to use the global lock whenever writing to the listener.
-        Property<bool, ReadOnly> IsThreadSafe {
+        property<bool, readonly> IsThreadSafe {
           _get {return this->data->isThreadSafe;}
         };
         
         /// @brief Gets or sets a name for this TraceListener.
         /// @return string A name for this TraceListener. The default is an empty string ("").
         /// @remarks The name can be used to organize and access listeners in a TraceListenerCollection collection.
-        Property<string> Name {
+        property<string> Name {
           _get {return this->data->name;},
           _set {this->data->name = value;}
         };
@@ -101,7 +101,7 @@ namespace Switch {
         /// * The EventLogTraceListener class, because it can cause a large volume of data to be written to the log.
         /// * The Write and WriteLine methods of the ConsoleTraceListener, DefaultTraceListener, and TextWriterTraceListener classes.
         /// * The Write and WriteLine methods of the TraceListener class when they are not overridden in a derived class.
-        Property<TraceOptions> TraceOutputOptions {
+        property<TraceOptions> TraceOutputOptions {
           _get {return this->data->traceOutputOptions;},
           _set {this->data->traceOutputOptions = value;}
         };
@@ -291,7 +291,7 @@ namespace Switch {
         /// @brief Gets or sets a value indicating whether to indent the output.
         /// @return bool true if the output should be indented; otherwise, false.
         /// @remarks The WriteIndent method, called by the DefaultTraceListener and TextWriterTraceListener classes, sets the NeedIndent property value to false to prevent later, unnecessary indents. You must set the NeedIndent property to true each time you wish to indent trace output.
-        Property<bool> NeedIndent {
+        property<bool> NeedIndent {
           _get {return this->data->needIndent;},
           _set {this->data->needIndent = value;}
         };

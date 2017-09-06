@@ -18,10 +18,10 @@ namespace Switch {
     struct _public UInt64 final : public ValueType, public IComparable, public IConvertible, public IFormattable {
     public:
       /// @brief Represents the largest possible value of an UInt64 18446744073709551615 (0xFFFFFFFFFFFFFFFF). This field is constant.
-      static Property<uint64, ReadOnly> MaxValue;
+      static property<uint64, readonly> MaxValue;
 
       /// @brief Represents the smallest possible value of UInt64 0 (0x0000000000000000). This field is constant.
-      static Property<uint64, ReadOnly> MinValue;
+      static property<uint64, readonly> MinValue;
 
       /// @brief Create a new instance of struct UInt64
       /// @remarks UInt64 is initialized with default value 0.

@@ -19,10 +19,10 @@ namespace Switch {
     struct _public SByte final : public ValueType, public IComparable, public IConvertible, public IFormattable {
     public:
       /// @brief Represents the largest possible value of an SByte 127 (0x7F). This field is constant.
-      static Property<sbyte, ReadOnly> MaxValue;
+      static property<sbyte, readonly> MaxValue;
 
       /// @brief Represents the smallest possible value of SByte -128 (0x80). This field is constant.
-      static Property<sbyte, ReadOnly> MinValue;
+      static property<sbyte, readonly> MinValue;
 
       /// @brief Create a new instance of struct SByte
       /// @remarks SByte is initialized with default value 0.

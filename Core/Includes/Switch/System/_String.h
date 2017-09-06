@@ -128,10 +128,10 @@ private:
   __opaque_format_item__(Any value) : value(new Any(value)) {}
   
   template<typename T, typename Attribute>
-  __opaque_format_item__(const Property<const T&, Attribute>& value) : __opaque_format_item__(value()) {}
+  __opaque_format_item__(const property<const T&, Attribute>& value) : __opaque_format_item__(value()) {}
 
   template<typename T, typename Attribute>
-  __opaque_format_item__(const Property<T, Attribute>& value) : __opaque_format_item__(value(), true) {}
+  __opaque_format_item__(const property<T, Attribute>& value) : __opaque_format_item__(value(), true) {}
   
   template<typename T>
   __opaque_format_item__(const T& value) : value(ObjectOrEnumOrOtherToAny<T>()(value, false)) {}

@@ -25,7 +25,7 @@ namespace Switch {
       class _public FileInfo final : public FileSystemInfo {
       public:
         /// @brief Represents the uninitialized file object. This field is constant.
-        static Property<FileInfo, ReadOnly> Empty;
+        static property<FileInfo, readonly> Empty;
 
         /// @brief Initializes a new instance of the System::IO::FileInfo class, which acts as a wrapper for a file path.
         FileInfo();
@@ -45,11 +45,11 @@ namespace Switch {
         
         /// @brief Gets an instance of the parent directory.
         /// @return A System::IO::DirectoryInfo object representing the parent directory of this file.
-        Property<DirectoryInfo, ReadOnly> Directory;
+        property<DirectoryInfo, readonly> Directory;
         
         /// @brief Gets a string representing the directory's full path.
         /// @return A string representing the directory's full path.
-        Property<String, ReadOnly> DirectoryName {
+        property<String, readonly> DirectoryName {
           _get {return this->GetDirectoryName();}
         };
 

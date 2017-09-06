@@ -55,7 +55,7 @@ namespace DesignPatterns {
       }
       
       // Gets item count
-      Property<int, ReadOnly> Count {
+      property<int, readonly> Count {
         _get { return this->items.Count(); }
       };
       

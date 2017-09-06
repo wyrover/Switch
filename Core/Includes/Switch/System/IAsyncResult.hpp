@@ -26,25 +26,25 @@ namespace Switch {
     public:
       /// @brief Gets a user-defined object that qualifies or contains information about an asynchronous operation.
       /// @return A user-defined object that qualifies or contains information about an asynchronous operation.
-      Property<const Object&, ReadOnly> AsyncState {
+      property<const Object&, readonly> AsyncState {
         _get->const object& {return this->GetAsyncState();}
       };
 
       /// @brief Gets a WaitHandle that is used to wait for an asynchronous operation to complete.
       /// @return A WaitHandle that is used to wait for an asynchronous operation to complete.
-      Property<const System::Threading::WaitHandle&,ReadOnly> AsyncWaitHandle {
+      property<const System::Threading::WaitHandle&, readonly> AsyncWaitHandle {
         _get->const System::Threading::WaitHandle& {return this->GetAsyncWaitHandle();}
       };
 
       /// @brief Gets an indication of whether the asynchronous operation completed synchronously.
       /// @return true if the asynchronous operation completed synchronously; otherwise, false.
-      Property<bool, ReadOnly> CompletedSynchronously {
+      property<bool, readonly> CompletedSynchronously {
         _get {return this->GetCompletedSynchronously();}
       };
 
       /// @brief Gets an indication whether the asynchronous operation has completed.
       /// @return true if the operation is complete; otherwise, false.
-      Property<bool, ReadOnly> IsCompleted {
+      property<bool, readonly> IsCompleted {
         _get {return this->GetIsCompleted();}
       };
       

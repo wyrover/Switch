@@ -22,14 +22,14 @@ namespace Switch {
         public:
           /// @brief Gets the value contained in the object.
           /// @param value The value contained in the object.
-          Property<refptr<Object>> Value {
+          property<refptr<Object>> Value {
             _get {return this->value;},
             _set {this->value = value;}
           };
           
           /// @brief Gets the value contained in the object.
           /// @param vlue The value contained in the object.
-          Property<const String&> TypeName {
+          property<const String&> TypeName {
             _get->const String& {return this->typeName;},
             _set {this->typeName = value;}
           };

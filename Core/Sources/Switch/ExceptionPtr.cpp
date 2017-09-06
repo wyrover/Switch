@@ -2,6 +2,6 @@
 
 using namespace System;
 
-Property<ExceptionPtr, ReadOnly> ExceptionPtr::CurrentException {
+property<ExceptionPtr, readonly> ExceptionPtr::CurrentException {
   [] {return std::current_exception();}
 };

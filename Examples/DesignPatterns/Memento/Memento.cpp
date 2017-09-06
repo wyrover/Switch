@@ -15,7 +15,7 @@ namespace DesignPatterns {
       Memento(const Memento& memento) : state(memento.state) {}
       
       // Gets or sets state
-      Property<string, ReadOnly> State {
+      property<string, readonly> State {
         _get { return this->state; }
       };
 
@@ -27,7 +27,7 @@ namespace DesignPatterns {
     class Originator : public object {
     public:
       // Property
-      Property<string> State {
+      property<string> State {
         _get { return this->state; },
         _set {
           this->state = value;
@@ -56,7 +56,7 @@ namespace DesignPatterns {
       Caretaker() {}
       
       // Gets or sets memento
-      Property<DesignPatterns::Behavioral::Memento> Memento {
+      property<DesignPatterns::Behavioral::Memento> Memento {
         _get { return this->memento; },
         _set { this->memento = value; }
       };

@@ -10,7 +10,7 @@
 using namespace System;
 using namespace System::IO;
 
-Property<FileInfo, ReadOnly> FileInfo::Empty {
+property<FileInfo, readonly> FileInfo::Empty {
   [] {return FileInfo();}
 };
 

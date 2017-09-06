@@ -19,22 +19,22 @@ namespace Switch {
     struct _public Single final : public ValueType, public IComparable, public IConvertible, public IFormattable {
     public:
       /// @brief Represents the smallest positive Single value greater than zero. This field is constant.
-      static Property<float, ReadOnly> Epsilon;
+      static property<float, readonly> Epsilon;
 
       /// @brief Represents the largest possible value of an Single 3.40282e+038f. This field is constant.
-      static Property<float, ReadOnly> MaxValue;
+      static property<float, readonly> MaxValue;
 
       /// @brief Represents the smallest possible value of Single -3.40282e+038f. This field is constant.
-      static Property<float, ReadOnly> MinValue;
+      static property<float, readonly> MinValue;
 
       /// @brief Represents not a number (NaN). This field is constant.
-      static Property<float, ReadOnly> NaN;
+      static property<float, readonly> NaN;
 
       /// @brief Represents negative infinity. This field is constant.
-      static Property<float, ReadOnly> NegativeInfinity;
+      static property<float, readonly> NegativeInfinity;
 
       /// @brief Represents positive infinity. This field is constant.
-      static Property<float, ReadOnly> PositiveInfinity;
+      static property<float, readonly> PositiveInfinity;
 
       /// @brief Create a new instance of struct Single
       /// @remarks Single is initialized with the default value 0.

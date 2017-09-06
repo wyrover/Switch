@@ -19,7 +19,7 @@ namespace Switch {
       class _public DirectoryInfo final : public FileSystemInfo {
       public:
         /// @brief Represents the uninitialized directory object. This field is constant.
-        static Property<DirectoryInfo, ReadOnly> Empty;
+        static property<DirectoryInfo, readonly> Empty;
 
         /// @brief Initializes a new instance of the System::IO::DirectoryInfo class on the specified path.
         DirectoryInfo() { }
@@ -36,13 +36,13 @@ namespace Switch {
         
         /// @brief Gets the parent directory of a specified subdirectory.
         /// @return The parent directory, or the empty directory if the path is null or if the file path denotes a root (such as "\", "C:", or * "\\server\share").
-        Property<DirectoryInfo, ReadOnly> Parent {
+        property<DirectoryInfo, readonly> Parent {
           _get {return this->GetParent();}
         };
 
         /// @brief Gets the root portion of a path.
         /// @return A System::IO::DirectoryInfo object representing the root of a path.
-        Property<DirectoryInfo, ReadOnly> Root {
+        property<DirectoryInfo, readonly> Root {
           _get {return this->GetRoot();}
         };
 

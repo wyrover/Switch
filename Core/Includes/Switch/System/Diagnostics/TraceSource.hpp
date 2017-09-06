@@ -25,12 +25,12 @@ namespace Switch {
         ~TraceSource() {}
         /// @endcond
 
-        Property<TraceListenerCollection&> Listeners {
+        property<TraceListenerCollection&> Listeners {
           _get->TraceListenerCollection& {return this->data->listeners;},
           _set {this->data->listeners = value;}
         };
 
-        Property<string> Name {
+        property<string> Name {
           _get {return this->data->name;},
           _set {this->data->name = value;}
         };

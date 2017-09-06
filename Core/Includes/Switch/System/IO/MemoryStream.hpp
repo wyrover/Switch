@@ -72,7 +72,7 @@ namespace Switch {
         /// @exception System::ArgumentOutOfRangeException A capacity is set that is negative or less than the current length of the stream.
         /// @exception System::ObjectDisposedException The current stream is IsClosed().
         /// @exception System::NotSupportedException set is invoked on a stream whose capacity cannot be modified.
-        Property<int32> Capacity {
+        property<int32> Capacity {
           _get {return this->GetCapacity();},
           _set {this->SetCapacity(value);}
         };

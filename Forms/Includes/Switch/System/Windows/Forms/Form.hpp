@@ -25,22 +25,22 @@ namespace Switch {
             //this->BackColor = System::Drawing::SystemColors::Window;
           }
 
-          Property<System::Windows::Forms::FormBorderStyle> FormBorderStyle {
+          property<System::Windows::Forms::FormBorderStyle> FormBorderStyle {
             _get{return this->formBorderStyle;},
             _set{this->formBorderStyle = value;}
           };
           
-          Property<bool> MaximizeBox {
+          property<bool> MaximizeBox {
             _get {return this->maximizeBox;},
             _set {this->maximizeBox = value;}
           };
           
-          Property<bool> MinimizeBox {
+          property<bool> MinimizeBox {
             _get {return this->minimizeBox;},
             _set {this->minimizeBox = value;}
           };
           
-          Property<FormStartPosition> StartPosition{
+          property<FormStartPosition> StartPosition{
             _get{return this->startPosition;},
             _set{this->startPosition = value;}
           };

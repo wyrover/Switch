@@ -29,11 +29,11 @@ namespace Switch {
           }
           /// @endcond
 
-          Property<const System::Drawing::Rectangle&, ReadOnly> ClipRectangle {
+          property<const System::Drawing::Rectangle&, readonly> ClipRectangle {
             _get->const System::Drawing::Rectangle& {return this->clipRectangle;}
           };
           
-          Property<System::Drawing::Graphics&, ReadOnly> Graphics {
+          property<System::Drawing::Graphics&, readonly> Graphics {
             _get->System::Drawing::Graphics& {return *this->graphics;}
           };
 

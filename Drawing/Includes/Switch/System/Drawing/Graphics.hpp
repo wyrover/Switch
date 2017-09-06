@@ -45,12 +45,12 @@ namespace Switch {
         StringFormat() {}
         StringFormat(const StringFormat& stringFormat) : alignment(stringFormat.alignment), lineAlignment(stringFormat.lineAlignment) {}
 
-        Property<StringAlignment> Alignment {
+        property<StringAlignment> Alignment {
           _get {return this->alignment;},
           _set {this->alignment = value;}
         };
         
-        Property<StringAlignment> LineAlignment {
+        property<StringAlignment> LineAlignment {
           _get {return this->lineAlignment;},
           _set {this->lineAlignment = value;}
         };
@@ -66,7 +66,7 @@ namespace Switch {
         ~Graphics();
         /// @endcond
 
-        Property<RectangleF, ReadOnly> ClipBounds {
+        property<RectangleF, readonly> ClipBounds {
           _get { return this->clipRectangle; }
         };
 

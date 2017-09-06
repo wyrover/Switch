@@ -28,12 +28,12 @@ namespace Switch {
           }
           /// @endcond
 
-          Property<bool> Handled {
+          property<bool> Handled {
             _get {return this->handled;},
             _set {this->handled = value;}
           };
 
-          Property<char32, ReadOnly> KeyChar {
+          property<char32, readonly> KeyChar {
             _get {return this->keyChar;}
           };
 

@@ -34,14 +34,14 @@ namespace Switch {
       
       /// @brief Gets or sets a value that indicates whether simultaneously pressing the Control modifier key and the C console key (Ctrl+C) or the Ctrl+Break keys terminates the current process. The default is false, which terminates the current process.
       /// @return true if the current process should resume when the event handler concludes; false if the current process should terminate. The default value is false; the current process terminates when the event handler returns. If true, the current process continues.
-      Property<bool> Cancel {
+      property<bool> Cancel {
         _get {return this->cancel;},
         _set {this->cancel = value;}
       };
       
       /// @brief Gets the combination of modifier and console keys that interrupted the current process.
       /// @return One of the enumeration values that specifies the key combination that interrupted the current process. There is no default value.
-      Property<ConsoleSpecialKey, ReadOnly> SpecialKey {
+      property<ConsoleSpecialKey, readonly> SpecialKey {
         _get {return this->specialKey;}
       };
       

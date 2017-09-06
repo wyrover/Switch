@@ -79,11 +79,11 @@ Control::Control() {
   SetStyle(ControlStyles((int32)ControlStyles::AllPaintingInWmPaint | (int32)ControlStyles::UserPaint | (int32)ControlStyles::StandardClick | (int32)ControlStyles::StandardDoubleClick | (int32)ControlStyles::UseTextForAccessibility | (int32)ControlStyles::Selectable), true);
 }
 
-Property<System::Drawing::Color, ReadOnly> Control::DefaultBackColor {
+property<System::Drawing::Color, readonly> Control::DefaultBackColor {
   [] { return System::Drawing::SystemColors::Control(); }
 };
 
-Property<System::Drawing::Color, ReadOnly> Control::DefaultForeColor {
+property<System::Drawing::Color, readonly> Control::DefaultForeColor {
   [] { return System::Drawing::SystemColors::ControlText(); }
 };
 

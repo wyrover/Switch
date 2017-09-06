@@ -5,7 +5,7 @@
 using namespace System;
 using namespace System::IO;
 
-Property<NullTextReader, ReadOnly> TextReader::Null {
+property<NullTextReader, readonly> TextReader::Null {
   [] {return NullTextReader();}
 };
 

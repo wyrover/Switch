@@ -25,27 +25,27 @@ namespace Switch {
             this->TabStop = false;
           }
 
-          Property<int32> MarqueeAnimationSpeed {
+          property<int32> MarqueeAnimationSpeed {
             _get{ return this->marqueeAnimationSpeed; },
             _set{ this->SetMarqueeAnimationSpeed(value); },
           };
 
-          Property<int32> Maximum{
+          property<int32> Maximum{
             _get{ return this->maximum; },
             _set{ this->SetMaximum(value); },
           };
 
-          Property<int32> Minimum{
+          property<int32> Minimum{
             _get{ return this->minimum; },
             _set{ this->SetMinimum(value); },
           };
 
-          Property<ProgressBarStyle> Style{
+          property<ProgressBarStyle> Style{
             _get{ return this->style; },
             _set{ this->SetProgressStyle(value); },
           };
 
-          Property<int32> Value{
+          property<int32> Value{
             _get{ return this->value; },
             _set{ this->SetValue(value); },
           };

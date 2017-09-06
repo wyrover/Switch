@@ -22,7 +22,7 @@ namespace Switch {
           /// @endcond
           
           /// @brief Returns a default sort order comparer for the type specified by the generic argument
-          static Property<const IComparer<T>&, ReadOnly> Default;
+          static property<const IComparer<T>&, readonly> Default;
 
           /// @brief Compares two entities and returns a value indicating whether one is less than, equal to, or greater than the other.
           /// @param x The first entity to compare.
@@ -42,7 +42,7 @@ namespace Switch {
         }
 
         template <typename T>
-        Property<const IComparer<T>&, ReadOnly> Comparer<T>::Default = {&__get_default_comparer__<T>};
+        property<const IComparer<T>&, readonly> Comparer<T>::Default = {&__get_default_comparer__<T>};
         /// @endcond
       }
     }

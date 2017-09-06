@@ -25,7 +25,7 @@ namespace Switch {
             this->SetStyle(ControlStyles::UserPaint, false);
           }
 
-          Property<bool> IsDefault {
+          property<bool> IsDefault {
             _get {return this->isDefault;},
             _set {this->SetIsDefault(value);}
           };

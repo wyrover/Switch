@@ -79,7 +79,7 @@ namespace {
   System::IO::TextWriter* out = &sout;
 }
 
-Property<ConsoleColor> Console::BackgroundColor {
+property<ConsoleColor> Console::BackgroundColor {
   [] {return __OS::CoreApi::Console::GetBackgroundColor();},
   [](ConsoleColor value) {
     if (!Enum<ConsoleColor>::IsDefined(value))
@@ -89,25 +89,25 @@ Property<ConsoleColor> Console::BackgroundColor {
   }
 };
 
-Property<int32> Console::BufferHeight{
+property<int32> Console::BufferHeight{
   [] {return __OS::CoreApi::Console::GetBufferHeight(); },
   [](int32 value) {
     __OS::CoreApi::Console::SetBufferHeight(value);
   }
 };
 
-Property<int32> Console::BufferWidth{
+property<int32> Console::BufferWidth{
   [] {return __OS::CoreApi::Console::GetBufferWidth(); },
   [](int32 value) {
     __OS::CoreApi::Console::SetBufferWidth(value);
   }
 };
 
-Property<bool, ReadOnly> Console::CapsLock {
+property<bool, readonly> Console::CapsLock {
   [] {return __OS::CoreApi::Console::GetCapsLock();}
 };
 
-Property<int32> Console::CursorLeft {
+property<int32> Console::CursorLeft {
   [] {return __OS::CoreApi::Console::GetCursorTop();},
   [](int32 value) {
     if (value < 0 || value >= __OS::CoreApi::Console::GetWindowWidth())
@@ -117,7 +117,7 @@ Property<int32> Console::CursorLeft {
   }
 };
 
-Property<int32> Console::CursorSize {
+property<int32> Console::CursorSize {
   [] {return __OS::CoreApi::Console::GetCursorSize();},
   [](int32 value) {
     if (value < 1 || value > 100)
@@ -127,7 +127,7 @@ Property<int32> Console::CursorSize {
   }
 };
 
-Property<int32> Console::CursorTop {
+property<int32> Console::CursorTop {
   [] {return __OS::CoreApi::Console::GetCursorTop();},
   [](int32 value) {
     if (value < 0 || value >= __OS::CoreApi::Console::GetBufferHeight())
@@ -137,19 +137,19 @@ Property<int32> Console::CursorTop {
   }
 };
 
-Property<bool> Console::CursorVisible {
+property<bool> Console::CursorVisible {
   [] {return __OS::CoreApi::Console::GetCursorVisible();},
   [](bool value) {__OS::CoreApi::Console::SetCursorVisible(value);}
 };
 
-Property<Console::StandardErrorOutput&, ReadOnly> Console::Error {
+property<Console::StandardErrorOutput&, readonly> Console::Error {
   []()->Console::StandardErrorOutput& {
     static StandardErrorOutput e;
     return e;
   }
 };
 
-Property<ConsoleColor> Console::ForegroundColor {
+property<ConsoleColor> Console::ForegroundColor {
   [] {return __OS::CoreApi::Console::GetForegroundColor();},
   [](ConsoleColor value) {
     if (!Enum<ConsoleColor>::IsDefined(value))
@@ -158,14 +158,14 @@ Property<ConsoleColor> Console::ForegroundColor {
   }
 };
 
-Property<Console::StandardInput&, ReadOnly> Console::In {
+property<Console::StandardInput&, readonly> Console::In {
   []()->Console::StandardInput& {
     static StandardInput i;
     return i;
   }
 };
 
-Property<const refptr<System::Text::Encoding>&> Console::InputEncoding {
+property<const refptr<System::Text::Encoding>&> Console::InputEncoding {
   []()->const refptr<System::Text::Encoding>& {return inputEncoding;},
   [](const refptr<System::Text::Encoding>& value) {
     inputEncoding = value;
@@ -173,44 +173,44 @@ Property<const refptr<System::Text::Encoding>&> Console::InputEncoding {
   }
 };
 
-Property<bool, ReadOnly> Console::IsErrorRedirected{
+property<bool, readonly> Console::IsErrorRedirected{
   [] {return error != defaultError; }
 };
 
-Property<bool, ReadOnly> Console::IsInputRedirected{
+property<bool, readonly> Console::IsInputRedirected{
   [] {return in != defaultIn; }
 };
 
-Property<bool, ReadOnly> Console::IsOutputRedirected{
+property<bool, readonly> Console::IsOutputRedirected{
   [] {return out != defaultOut; }
 };
 
-Property<bool, ReadOnly> Console::KeyAvailable {
+property<bool, readonly> Console::KeyAvailable {
   [] {
     Console::__f();
     return __OS::CoreApi::Console::KeyAvailable();}
 };
 
-Property<int32, ReadOnly> Console::LargestWindowHeight{
+property<int32, readonly> Console::LargestWindowHeight{
   [] {return __OS::CoreApi::Console::GetLargestWindowHeight(); }
 };
 
-Property<int32, ReadOnly> Console::LargestWindowWidth{
+property<int32, readonly> Console::LargestWindowWidth{
   [] {return __OS::CoreApi::Console::GetLargestWindowWidth(); }
 };
 
-Property<bool, ReadOnly> Console::NumberLock{
+property<bool, readonly> Console::NumberLock{
   [] {return __OS::CoreApi::Console::GetNumberLock(); }
 };
 
-Property<Console::StandardOutput&, ReadOnly> Console::Out {
+property<Console::StandardOutput&, readonly> Console::Out {
   []()->Console::StandardOutput& {
     static StandardOutput o;
     return o;
   }
 };
 
-Property<const refptr<System::Text::Encoding>&> Console::OutputEncoding {
+property<const refptr<System::Text::Encoding>&> Console::OutputEncoding {
   []()->const refptr<System::Text::Encoding>& {return outputEncoding;},
   [](const refptr<System::Text::Encoding>& value) {
     outputEncoding = value;
@@ -218,38 +218,38 @@ Property<const refptr<System::Text::Encoding>&> Console::OutputEncoding {
   }
 };
 
-Property<string> Console::Title {
+property<string> Console::Title {
   [] {return __OS::CoreApi::Console::GetTitle(); },
   [](const string& value) {__OS::CoreApi::Console::SetTitle(value);}
 };
 
-Property<bool> Console::TreatControlCAsInput {
+property<bool> Console::TreatControlCAsInput {
   [] {return treatControlCAsInput;},
   [](bool value) {treatControlCAsInput = value;}
 };
 
-Property<int32> Console::WindowHeight {
+property<int32> Console::WindowHeight {
   []{return __OS::CoreApi::Console::GetWindowHeight(); },
   [](int32 value) {
     __OS::CoreApi::Console::SetWindowHeight(value);
   }
 };
 
-Property<int32> Console::WindowLeft {
+property<int32> Console::WindowLeft {
   []{return __OS::CoreApi::Console::GetWindowLeft(); },
   [](int32 value) {
     __OS::CoreApi::Console::SetWindowLeft(value);
   }
 };
 
-Property<int32> Console::WindowTop {
+property<int32> Console::WindowTop {
   []{return __OS::CoreApi::Console::GetWindowTop(); },
   [](int32 value) {
     __OS::CoreApi::Console::SetWindowTop(value);
   }
 };
 
-Property<int32> Console::WindowWidth {
+property<int32> Console::WindowWidth {
   [] {return __OS::CoreApi::Console::GetWindowWidth(); },
   [](int32 value) {
     __OS::CoreApi::Console::SetWindowWidth(value);

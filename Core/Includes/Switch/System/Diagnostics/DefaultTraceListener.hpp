@@ -56,7 +56,7 @@ namespace Switch {
         }
         
         /// @brief Get or Sets the name of a log file to write trace or debug msgs to.
-        Property<String> LogFileName {
+        property<String> LogFileName {
           _get {return this->data->logFileName;},
           _set {
             this->data->logFileName = value;

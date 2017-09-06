@@ -3,58 +3,58 @@
 using namespace System;
 using namespace System::Net;
 
-Property<string, ReadOnly> WebRequestMethods::File::DownloadFile {
+property<string, readonly> WebRequestMethods::File::DownloadFile {
   [] {return "GET";}
 };
 
-Property<string, ReadOnly> WebRequestMethods::File::UploadFile {
+property<string, readonly> WebRequestMethods::File::UploadFile {
   [] {return "PUT";}
 };
 
-Property<string, ReadOnly> WebRequestMethods::Ftp::DownloadFile {
+property<string, readonly> WebRequestMethods::Ftp::DownloadFile {
   [] {return "FtpDownloadFile";}
 };
 
-Property<string, ReadOnly> WebRequestMethods::Ftp::UploadFile {
+property<string, readonly> WebRequestMethods::Ftp::UploadFile {
   [] {return "FtpUploadFile";}
 };
 
-Property<string, ReadOnly> WebRequestMethods::Ftp::ListDirectory {
+property<string, readonly> WebRequestMethods::Ftp::ListDirectory {
   [] {return "ListDirectory";}
 };
 
-Property<string, ReadOnly> WebRequestMethods::Ftp::ListDirectoryDetails {
+property<string, readonly> WebRequestMethods::Ftp::ListDirectoryDetails {
   [] {return "ListDirectoryDetails";}
 };
 
-Property<string, ReadOnly> WebRequestMethods::Ftp::MakeDirectory {
+property<string, readonly> WebRequestMethods::Ftp::MakeDirectory {
   [] {return "MakeDirectory";}
 };
 
-Property<string, ReadOnly> WebRequestMethods::Http::Get {
+property<string, readonly> WebRequestMethods::Http::Get {
   [] {return "GET";}
 };
 
-Property<string, ReadOnly> WebRequestMethods::Http::Head {
+property<string, readonly> WebRequestMethods::Http::Head {
   [] {return "HEAD";}
 };
 
-Property<string, ReadOnly> WebRequestMethods::Http::Post {
+property<string, readonly> WebRequestMethods::Http::Post {
   [] {return "POST";}
 };
 
-Property<string, ReadOnly> WebRequestMethods::Http::Put {
+property<string, readonly> WebRequestMethods::Http::Put {
   [] {return "PUT";}
 };
 
-Property<string, ReadOnly> WebRequestMethods::Http::Delete {
+property<string, readonly> WebRequestMethods::Http::Delete {
   [] {return "DELETE";}
 };
 
-Property<string, ReadOnly> WebRequestMethods::Http::Trace {
+property<string, readonly> WebRequestMethods::Http::Trace {
   [] {return "TRACE";}
 };
 
-Property<string, ReadOnly> WebRequestMethods::Http::Options {
+property<string, readonly> WebRequestMethods::Http::Options {
   [] {return "OPTIONS";}
 };

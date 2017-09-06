@@ -2,7 +2,7 @@
 
 using namespace System;
 
-Property<bool, ReadOnly> BitConverter::IsLittleEndian {
+property<bool, readonly> BitConverter::IsLittleEndian {
   [] {
     int32 endian = 1;
     return *(sbyte *)&endian == 1;

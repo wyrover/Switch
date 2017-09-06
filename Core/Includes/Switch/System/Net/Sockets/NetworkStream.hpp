@@ -70,14 +70,14 @@ namespace Switch {
 
           /// @brief Gets a value that indicates whether data is available on the NetworkStream to be read.
           /// @return true if data is available on the stream to be read; otherwise, false.
-          Property<bool, ReadOnly> DataAvailable {
+          property<bool, readonly> DataAvailable {
             _get {return this->GetDataAvailable();}
           };
           
           /// @brief Gets the underlying Socket.
           /// @return A Socket that represents the underlying network connection.
           /// @remarks Classes deriving from NetworkStream can use this property to get the underlying Socket. Use the underlying Socket returned from the Socket property if you require access beyond that which NetworkStream provides.
-          Property<System::Net::Sockets::Socket, ReadOnly> Socket {
+          property<System::Net::Sockets::Socket, readonly> Socket {
             _get {return this->data->streamSocket;}
           };
 
@@ -108,7 +108,7 @@ namespace Switch {
           /// @brief Gets or Sets a value that indicates whether the NetworkStream can be read.
           /// @param readable  true to indicate that the NetworkStream can be read; otherwise, false. The default value is true.
           /// @return true to indicate that the NetworkStream can be read; otherwise, false. The default value is true.
-          Property<bool> Readable {
+          property<bool> Readable {
             _get {return this->GetReadable();},
             _set {this->SetReadable(value);}
           };
@@ -117,7 +117,7 @@ namespace Switch {
           /// @param writeable  true if data can be written to the stream; otherwise, false. The default value is true.
           /// @remarks You must derive from the NetworkStream class to use the Writeable property. If Writeable is true, NetworkStream allows calls to the Write method. You can also determine whether a NetworkStream is writable by checking the publicly accessible CanWrite property.
           /// @remarks The Writeable property is set when the NetworkStream is initialized.
-          Property<bool, ReadOnly> Writeable {
+          property<bool, readonly> Writeable {
             _get {return this->GetWriteable();}
           };
 

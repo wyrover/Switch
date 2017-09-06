@@ -17,10 +17,10 @@ namespace Switch {
       class _public IPEndPoint : public EndPoint {
       public:
         /// @brief Specifies the minimum value that can be assigned to the Port property. The MinPort value is set to 0x00000000. This field is read-only.
-        static Property<int32, ReadOnly> MinPort;
+        static property<int32, readonly> MinPort;
         
         /// @brief Specifies the maximum value that can be assigned to the Port property. The MaxPort value is set to 0x0000FFFF. This field is read-only.
-        static Property<int32, ReadOnly> MaxPort;
+        static property<int32, readonly> MaxPort;
 
         /// @brief Initializes a new instance of the EndPoint class.
         /// @param address The IP address of the Internet host.
@@ -49,7 +49,7 @@ namespace Switch {
         /// @brief Gets the IP address of the endpoint.
         /// @param value An IPAddress instance containing the IP address of the endpoint.
         /// @exception ArgumentNullException The address parameter is a null.
-        Property<const IPAddress&> Address{
+        property<const IPAddress&> Address{
           _get->const IPAddress& { return this->address; },
           _set {this->SetAddress(value);}
         };
@@ -57,7 +57,7 @@ namespace Switch {
         /// @brief Gets or sets the port number of the endpoint.
         /// @param value An integer value in the range MinPort to MaxPort indicating the port number of the endpoint.
         /// @exception ArgumentOutOfRangeException port is less than IPEndPoint::MinPort. -or- port is greater than IPEndPoint::MaxPort.
-        Property<int32> Port {
+        property<int32> Port {
           _get { return this->port; },
           _set {this->SetPort(value);}
         };

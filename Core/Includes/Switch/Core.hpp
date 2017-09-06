@@ -114,7 +114,6 @@
 #include "System/IO/IOException.hpp"
 #include "System/IO/IsolatedStorage.hpp"
 #include "System/IO/MemoryStream.hpp"
-#include "System/IO/Packaging.hpp"
 #include "System/IO/Path.hpp"
 #include "System/IO/PathTooLongException.hpp"
 #include "System/IO/Pipes.hpp"

@@ -7,7 +7,7 @@
 using namespace System;
 using namespace System::Drawing;
 
-Property<Point, ReadOnly> Point::Empty {
+property<Point, readonly> Point::Empty {
   [] {return Point();}
 };
 

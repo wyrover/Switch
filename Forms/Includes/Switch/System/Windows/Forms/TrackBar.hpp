@@ -26,42 +26,42 @@ namespace Switch {
             this->TabStop = false;
           }
 
-          Property<int32> LargeChange {
+          property<int32> LargeChange {
             _get{ return this->largeChange; },
             _set{ this->SetLargeChange(value); },
           };
 
-          Property<Forms::Orientation> Orientation {
+          property<Forms::Orientation> Orientation {
             _get{ return this->orientation; },
             _set{ this->SetOrientation(value); },
           };
 
-          Property<int32> Maximum {
+          property<int32> Maximum {
             _get{ return this->maximum; },
             _set{ this->SetMaximum(value); },
           };
 
-          Property<int32> Minimum {
+          property<int32> Minimum {
             _get{ return this->minimum; },
             _set{ this->SetMinimum(value); },
           };
 
-          Property<int32> SmallChange{
+          property<int32> SmallChange{
             _get{ return this->smallChange; },
             _set{ this->SetSmallChange(value); },
           };
 
-          Property<TickStyle> Style {
+          property<TickStyle> Style {
             _get{ return this->style; },
             _set{ this->SetTickStyle(value); },
           };
 
-          Property<int32> TickFrequency {
+          property<int32> TickFrequency {
             _get{ return this->tickFrequency; },
             _set{ this->SetTickFrequency(value); },
           };
 
-          Property<int32> Value {
+          property<int32> Value {
             _get {
               this->value = this->GetValue();
               return this->value;

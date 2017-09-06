@@ -19,33 +19,33 @@ namespace Switch {
           Message(const Message& message) : hwnd(message.hwnd), msg(message.msg), wParam(message.wParam), lParam(message.lParam), result(message.result) {}
           /// @cond
 
-          Property<intptr> HWnd {
+          property<intptr> HWnd {
             _get {return this->hwnd;},
             _set {this->hwnd = value;}
           };
 
-          Property<intptr> LParam {
+          property<intptr> LParam {
             _get{return this->lParam;},
             _set{this->lParam = value;}
           };
 
-          Property<int32> Msg {
+          property<int32> Msg {
             _get{return this->msg;},
             _set{this->msg = value;}
           };
 
-          Property<intptr> Result {
+          property<intptr> Result {
             _get{return this->result;},
             _set{this->result = value;}
           };
           
-          Property<intptr> WParam {
+          property<intptr> WParam {
             _get{return this->wParam;},
             _set{this->wParam = value;}
           };
           
           /// @cond
-          Property<intptr> Handle {
+          property<intptr> Handle {
             _get{return this->handle;},
             _set{this->handle = value;}
           };

@@ -50,7 +50,7 @@ namespace Switch {
 
           /// @brief Gets a value that indicates whether the ConcurrentQueue<T> is empty.
           /// @return Boolean true if the ConcurrentQueue<T> is empty; otherwise, false.
-          Property<bool, ReadOnly> IsEmpty {
+          property<bool, readonly> IsEmpty {
             _get {
               return this->queue.Count == 0;
             }

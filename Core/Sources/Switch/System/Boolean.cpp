@@ -4,19 +4,19 @@
 
 using namespace System;
 
-Property<bool, ReadOnly> Boolean::False {
+property<bool, readonly> Boolean::False {
   [] {return false;}
 };
 
-Property<bool, ReadOnly> Boolean::True {
+property<bool, readonly> Boolean::True {
   [] {return true;}
 };
 
-Property<String, ReadOnly> Boolean::FalseString{
+property<String, readonly> Boolean::FalseString{
   [] {return "False";}
 };
 
-Property<String, ReadOnly> Boolean::TrueString {
+property<String, readonly> Boolean::TrueString {
   [] {return "True";}
 };
 

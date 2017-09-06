@@ -37,17 +37,17 @@ namespace Switch {
       /// @brief Gets the fully qualified name of the Type, including the namespace of the Type.
       /// @return The fully qualified name of the Type, including the namespace of the Type.
       /// @remarks For example, the fully qualified name of the String type is String.
-      Property<String, ReadOnly> FullName;
+      property<String, readonly> FullName;
       
       /// @brief Gets the name of the Type.
       /// @return The name of the Type.
       /// @remarks For example, the name of the String type is String.
-      Property<String, ReadOnly> Name;
+      property<String, readonly> Name;
       
       /// @brief Gets the namespace of the Type.
       /// @return The namespace of the Type.
       /// @remarks For example, the namespace of the String type is System::
-      Property<String, ReadOnly> Namespace;
+      property<String, readonly> Namespace;
       
       /// @brief Determines whether the specified Object is equal to the current Object.
       /// @param obj The Object to compare with the current Object.

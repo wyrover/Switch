@@ -56,13 +56,13 @@ namespace Switch {
         
         /// @brief Gets whether Value is initialized on the current thread.
         /// @return true if Value is initialized on the current thread; otherwise false.
-        Property<bool, ReadOnly> IsValueCreated {
+        property<bool, readonly> IsValueCreated {
           _get {return this->values.ContainsKey(Thread::CurrentThread().ManagedThreadId);}
         };
         
         /// @brief Gets or sets the value of this instance for the current thread.
         /// @return Returns an instance of the object that this ThreadLocal is responsible for initializing.
-        Property<T> Value {
+        property<T> Value {
           _get {return this->GetValue();},
           _set {this->SetValue(value);}
         };
@@ -70,7 +70,7 @@ namespace Switch {
         /// @brief Gets a list for all of the values currently stored by all of the threads that have accessed this instance.
         /// @return A array for all of the values currently stored by all of the threads that have accessed this instance.
         /// @exception InvalidOperationException Values stored by all threads are not available because this instance was initialized with the trackAllValues argument set to false in the call to a class constructor.
-        Property<Array<T>, ReadOnly> Values {
+        property<Array<T>, readonly> Values {
           _get {return this->GetValues();}
         };
         

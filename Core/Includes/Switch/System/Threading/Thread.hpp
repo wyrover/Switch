@@ -133,9 +133,9 @@ namespace Switch {
         /// @brief Gets the currently running thread.
         /// @return A System::Threading::Thread that is the representation of the currently running
         /// @return thread.
-        static Property<Thread&, ReadOnly> CurrentThread;
+        static property<Thread&, readonly> CurrentThread;
         
-        Property<intptr, ReadOnly> Handle {
+        property<intptr, readonly> Handle {
           _get {
             if (this->data->managedThreadId == NoneManagedThreadId)
               return (intptr)-1;
@@ -144,13 +144,13 @@ namespace Switch {
         
         /// @brief Gets a value indicating the execution status of the current thread.
         /// @return Boolean true if this thread has been started and has not terminated normally or aborted; otherwise, false.
-        Property<bool, ReadOnly> IsAlive {
+        property<bool, readonly> IsAlive {
           _get {return !Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Unstarted) && !Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Stopped) && !Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Aborted);}
         };
         
         /// @brief Gets a value indicating whether or not a thread is a background thread.
         /// @return Boolean true if this thread is or is to become a background thread; otherwise, false.
-        Property<bool> IsBackground {
+        property<bool> IsBackground {
           _get {return Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Background);},
           _set {
             if (this->data->managedThreadId == NoneManagedThreadId || this->data->managedThreadId == MainManagedThreadId)
@@ -163,20 +163,20 @@ namespace Switch {
           }
         };
         
-        Property<bool, ReadOnly> IsThreadPoolThread {
+        property<bool, readonly> IsThreadPoolThread {
           _get {return this->data->isThreadPoolThread;}
         };
         
         /// @brief Gets a unique identifier for the current managed thread.
         /// @return An integer that represents a unique identifier for this managed thread.
-        Property<int32, ReadOnly> ManagedThreadId {
+        property<int32, readonly> ManagedThreadId {
           _get {return this->data->managedThreadId;
           }
         };
         
         /// @brief Gets or sets the name of the thread.
         /// @return A string containing the name of the thread, or null if no name was set.
-        Property<string> Name {
+        property<string> Name {
           _get {return this->data->name;},
           _set {
             if (this->data->managedThreadId == NoneManagedThreadId)
@@ -188,7 +188,7 @@ namespace Switch {
         /// @brief Gets or sets a value indicating the scheduling priority of a thread.
         /// @return One of the System::Threading::ThreadPriority values. The default value is ThreadPriorityNormal.
         /// @exception ThreadStateException The thread has reached a final state, such as ThreadStateAborted.
-        Property<ThreadPriority> Priority {
+        property<ThreadPriority> Priority {
           _get {return this->data->priority;},
           _set {
             if (this->data->managedThreadId == NoneManagedThreadId)
@@ -199,7 +199,7 @@ namespace Switch {
         
         /// @brief Gets a value containing the states of the current thread.
         /// @return One of the System::Threading::ThreadState values indicating the state of the current thread. The initial value is ThreadStateUnstarted.
-        Property<System::Threading::ThreadState, ReadOnly> ThreadState {
+        property<System::Threading::ThreadState, readonly> ThreadState {
           _get {return this->data->state;}
         };
         

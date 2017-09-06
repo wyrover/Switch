@@ -7,11 +7,11 @@
 
 using namespace System;
 
-Property<uint16, ReadOnly> UInt16::MaxValue {
+property<uint16, readonly> UInt16::MaxValue {
   [] {return std::numeric_limits<uint16>::max();}
 };
 
-Property<uint16, ReadOnly> UInt16::MinValue {
+property<uint16, readonly> UInt16::MinValue {
   [] {return std::numeric_limits<uint16>::min();}
 };
 

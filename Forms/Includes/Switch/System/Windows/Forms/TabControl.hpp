@@ -23,12 +23,12 @@ namespace Switch {
             this->SetStyle(ControlStyles::UserPaint, false);
           }
 
-          Property<TabAlignment> Alignment{
+          property<TabAlignment> Alignment{
             _get {return this->alignment;},
             _set {this->SetAlignment(value);}
           };
 
-          Property<TabPageCollection&, ReadOnly> TabPages{
+          property<TabPageCollection&, readonly> TabPages{
             _get->TabPageCollection& {return this->Controls();}
           };
 

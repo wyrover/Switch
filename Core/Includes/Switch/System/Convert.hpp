@@ -230,7 +230,7 @@ namespace Switch {
       static double ToBoolean(llong value) { return Int64((uint64)value).ToBoolean(*provider); }
       static double ToBoolean(ullong value) { return UInt64((uint64)value).ToBoolean(*provider); }
       template<class T, class Attribute>
-      static bool ToBoolean(const Property<T, Attribute>& value) { return ToBoolean(value()); }
+      static bool ToBoolean(const property<T, Attribute>& value) { return ToBoolean(value()); }
       /// @endcond
       
       /// @brief Convert IConvertible object to byte
@@ -483,7 +483,7 @@ namespace Switch {
       static byte ToByte(llong value) { return Int64((uint64)value).ToByte(*provider); }
       static byte ToByte(ullong value) { return UInt64((uint64)value).ToByte(*provider); }
        template<class T, class Attribute>
-      static byte ToByte(const Property<T, Attribute>& value) { return ToByte(value()); }
+      static byte ToByte(const property<T, Attribute>& value) { return ToByte(value()); }
       /// @endcond
       
       /// @brief Convert IConvertible object to char32
@@ -703,7 +703,7 @@ namespace Switch {
       static char32 ToChar(llong value) { return Int64((uint64)value).ToChar(*provider); }
       static char32 ToChar(ullong value) { return UInt64((uint64)value).ToChar(*provider); }
       template<class T, class Attribute>
-      static char32 ToChar(const Property<T, Attribute>& value) { return ToChar(value()); }
+      static char32 ToChar(const property<T, Attribute>& value) { return ToChar(value()); }
       /// @endcond
       
       /// @brief Convert IConvertible object to DateTime
@@ -915,7 +915,7 @@ namespace Switch {
       static DateTime ToDateTime(llong value);
       static DateTime ToDateTime(ullong value);
       template<class T, class Attribute>
-      static DateTime ToDateTime(const Property<T, Attribute>& value) { return ToDateTime(value()); }
+      static DateTime ToDateTime(const property<T, Attribute>& value) { return ToDateTime(value()); }
       /// @endcond
       
       /// @brief Convert IConvertible object to double
@@ -1124,7 +1124,7 @@ namespace Switch {
       static double ToDouble(llong value) { return Int64((uint64)value).ToDouble(*provider); }
       static double ToDouble(ullong value) { return UInt64((uint64)value).ToDouble(*provider); }
       template<class T, class Attribute>
-      static double ToDouble(const Property<T, Attribute>& value) { return ToDouble(value()); }
+      static double ToDouble(const property<T, Attribute>& value) { return ToDouble(value()); }
       /// @endcond
       
       /// @brief Convert IConvertible object to int16
@@ -1376,7 +1376,7 @@ namespace Switch {
       static int16 ToInt16(llong value) { return Int64((uint64)value).ToInt16(*provider); }
       static int16 ToInt16(ullong value) { return UInt64((uint64)value).ToInt16(*provider); }
       template<class T, class Attribute>
-      static int16 ToInt16(const Property<T, Attribute>& value) { return ToInt16(value()); }
+      static int16 ToInt16(const property<T, Attribute>& value) { return ToInt16(value()); }
       /// @endcond
       
       /// @brief Convert IConvertible object to int32
@@ -1617,7 +1617,7 @@ namespace Switch {
       static int32 ToInt32(llong value) { return Int64(value).ToInt32(*provider); }
       static int32 ToInt32(ullong value) { return UInt64(value).ToInt32(*provider); }
       template<class T, class Attribute>
-      static int32 ToInt32(const Property<T, Attribute>& value) { return ToInt32(value()); }
+      static int32 ToInt32(const property<T, Attribute>& value) { return ToInt32(value()); }
       /// @endcond
       
       /// @brief Convert IConvertible object to int64
@@ -1853,7 +1853,7 @@ namespace Switch {
       static int64 ToInt64(llong value) { return Int64(value).ToInt64(*provider); }
       static int64 ToInt64(ullong value) { return UInt64(value).ToInt64(*provider); }
       template<class T, class Attribute>
-      static int64 ToInt64(const Property<T, Attribute>& value) { return ToInt64(value()); }
+      static int64 ToInt64(const property<T, Attribute>& value) { return ToInt64(value()); }
       /// @endcond
       
       /// @brief Convert int32 to void*
@@ -2120,7 +2120,7 @@ namespace Switch {
       static sbyte ToSByte(llong value) { return Int64(value).ToSByte(*provider); }
       static sbyte ToSByte(ullong value) { return UInt64(value).ToSByte(*provider); }
       template<class T, class Attribute>
-      static sbyte ToSByte(const Property<T, Attribute>& value) { return ToSByte(value()); }
+      static sbyte ToSByte(const property<T, Attribute>& value) { return ToSByte(value()); }
       /// @endcond
       
       /// @brief Convert IConvertible object to single
@@ -2345,7 +2345,7 @@ namespace Switch {
       static float ToSingle(llong value) { return Int64(value).ToSingle(*provider); }
       static float ToSingle(ullong value) { return UInt64(value).ToSingle(*provider); }
       template<class T, class Attribute>
-      static float ToSingle(const Property<T, Attribute>& value) { return ToSingle(value()); }
+      static float ToSingle(const property<T, Attribute>& value) { return ToSingle(value()); }
       /// @endcond
       
       /// @brief Convert an object to string
@@ -2565,7 +2565,7 @@ namespace Switch {
       static string ToString(llong value) { return Int64(value).ToString(*provider); }
       static string ToString(ullong value) { return UInt64(value).ToString(*provider); }
       template<class T, class Attribute>
-      static string ToString(const Property<T, Attribute>& value) { return ToString(value()); }
+      static string ToString(const property<T, Attribute>& value) { return ToString(value()); }
       /// @endcond
       
       /// @brief Convert IConvertible object to uint16
@@ -2744,7 +2744,7 @@ namespace Switch {
       static uint16 ToUInt16(llong value) { return Int64(value).ToUInt16(*provider); }
       static uint16 ToUInt16(ullong value) { return UInt64(value).ToUInt16(*provider); }
       template<class T, class Attribute>
-      static uint16 ToUInt16(const Property<T, Attribute>& value) { return ToUInt16(value()); }
+      static uint16 ToUInt16(const property<T, Attribute>& value) { return ToUInt16(value()); }
       /// @endcond
       
       /// @brief Convert IConvertible object to uint32
@@ -2981,7 +2981,7 @@ namespace Switch {
       static uint32 ToUInt32(llong value) { return Int64(value).ToUInt32(*provider); }
       static uint32 ToUInt32(ullong value) { return UInt64(value).ToUInt32(*provider); }
       template<class T, class Attribute>
-      static uint32 ToUInt32(const Property<T, Attribute>& value) { return ToUInt32(value()); }
+      static uint32 ToUInt32(const property<T, Attribute>& value) { return ToUInt32(value()); }
       /// @endcond
       
       /// @brief Convert IConvertible object to uint64
@@ -3217,7 +3217,7 @@ namespace Switch {
       static uint64 ToUInt64(llong value) { return Int64(value).ToUInt64(*provider); }
       static uint64 ToUInt64(ullong value) { return UInt64(value).ToUInt64(*provider); }
       template<class T, class Attribute>
-      static uint64 ToUInt64(const Property<T, Attribute>& value) { return ToUInt64(value()); }
+      static uint64 ToUInt64(const property<T, Attribute>& value) { return ToUInt64(value()); }
       /// @endcond
       
     private:

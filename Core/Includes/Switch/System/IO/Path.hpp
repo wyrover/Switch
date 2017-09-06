@@ -21,25 +21,25 @@ namespace Switch {
         /// @par Examples
         /// The following code example demonstrates the use of the AltDirectorySeparatorChar() property.
         /// @include DirectorySeparatorChar.cpp
-        static Property<char32, ReadOnly> AltDirectorySeparatorChar;
+        static property<char32, readonly> AltDirectorySeparatorChar;
 
         /// @brief Provides a platform-specific character used to separate directory levels in a path string that reflects a hierarchical file system organization.
         /// @par Examples
         /// The following code example demonstrates the use of the DirectorySeparatorChar() property.
         /// @include DirectorySeparatorChar.cpp
-        static Property<char32, ReadOnly> DirectorySeparatorChar;
+        static property<char32, readonly> DirectorySeparatorChar;
 
         /// @brief A platform-specific separator character used to separate path strings in environment variables.
         /// @par Examples
         /// The following code example demonstrates the use of the PathSeparator() property.
         /// @include DirectorySeparatorChar.cpp
-        static Property<char32, ReadOnly> PathSeparator;
+        static property<char32, readonly> PathSeparator;
 
         /// @brief Provides a platform-specific volume separator character.
         /// @par Examples
         /// The following code example demonstrates the use of the VolumeSeparatorChar() property.
         /// @include DirectorySeparatorChar.cpp
-        static Property<char32, ReadOnly> VolumeSeparatorChar;
+        static property<char32, readonly> VolumeSeparatorChar;
 
         /// @brief Changes the extension of a path string.
         /// @param path The path information to modify. The path cannot contain any of the characters defined in GetInvalidPathChars.

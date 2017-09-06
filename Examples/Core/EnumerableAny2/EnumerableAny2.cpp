@@ -11,15 +11,15 @@ namespace Examples {
       Pet(const string& name, int age, bool vaccinated) : name(name), age(age), vaccinated(vaccinated) {}
       Pet(const Pet& pet) : name(pet.name), age(pet.age), vaccinated(pet.vaccinated) {}
       
-      Property<int, ReadOnly> Age {
+      property<int, readonly> Age {
         _get { return this->age; }
       };
       
-      Property<bool, ReadOnly> IsVaccinated {
+      property<bool, readonly> IsVaccinated {
         _get { return this->vaccinated; }
       };
       
-      Property<string, ReadOnly> Name {
+      property<string, readonly> Name {
         _get { return this->name; }
       };
       

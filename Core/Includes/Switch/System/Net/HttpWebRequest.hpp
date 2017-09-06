@@ -16,12 +16,12 @@ namespace Switch {
       public:
         ~HttpWebRequest();
 
-        Property<bool> AllowAutoRedirect {
+        property<bool> AllowAutoRedirect {
           _get {return this->GetAllowAutoRedirect();},
           _set {this->SetAllowAutoRedirect(value);}
         };
 
-        Property<const string&> ContentType {
+        property<const string&> ContentType {
           _get->const string& {return this->GetContentType();},
           _set {this->SetContentType(value);}
         };

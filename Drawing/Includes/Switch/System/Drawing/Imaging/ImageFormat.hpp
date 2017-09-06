@@ -16,25 +16,25 @@ namespace Switch {
       namespace Imaging {
         class _public ImageFormat : public object {
         public:
-          static Property<ImageFormat, ReadOnly> Bmp;
+          static property<ImageFormat, readonly> Bmp;
           
-          static Property<ImageFormat, ReadOnly> Emf;
+          static property<ImageFormat, readonly> Emf;
           
-          static Property<ImageFormat, ReadOnly> Exif;
+          static property<ImageFormat, readonly> Exif;
           
-          static Property<ImageFormat, ReadOnly> Gif;
+          static property<ImageFormat, readonly> Gif;
           
-          static Property<ImageFormat, ReadOnly> Icon;
+          static property<ImageFormat, readonly> Icon;
           
-          static Property<ImageFormat, ReadOnly> Jpeg;
+          static property<ImageFormat, readonly> Jpeg;
           
-          static Property<ImageFormat, ReadOnly> MemoryBmp;
+          static property<ImageFormat, readonly> MemoryBmp;
           
-          static Property<ImageFormat, ReadOnly> Png;
+          static property<ImageFormat, readonly> Png;
           
-          static  Property<ImageFormat, ReadOnly> Tiff;
+          static  property<ImageFormat, readonly> Tiff;
           
-          static Property<ImageFormat, ReadOnly> Wmf;
+          static property<ImageFormat, readonly> Wmf;
           
           ImageFormat() {}
           ImageFormat(const Guid& guid) : guid(guid) {}
@@ -42,11 +42,11 @@ namespace Switch {
           ImageFormat(const string name, const string& guid) : name(name), guid(guid) {}
           ImageFormat(const ImageFormat& format) : name(format.name), guid(format.guid) {}
           
-          Property<System::Guid, ReadOnly> Guid {
+          property<System::Guid, readonly> Guid {
             _get {return this->guid;}
           };
           
-          Property<string, ReadOnly> Name {
+          property<string, readonly> Name {
             _get {return this->name;}
           };
 

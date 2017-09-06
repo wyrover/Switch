@@ -40,15 +40,15 @@ namespace Switch {
         /// @brief Provides a TextWriter with no backing store that can be written to, but not read from.
         /// @remarks Use cNull to redirect output to a stream that will not consume any operating system resources.
         /// @remarks When the TextWriter::Write methods are invoked on cNull, the call simply returns, and no data is actually written to any backing store.
-        static Property<NullTextWriter&, ReadOnly> Null;
+        static property<NullTextWriter&, readonly> Null;
 
         /// @brief When overridden in a derived class, returns the character encoding in which the output is written.
-        Property<Text::Encoding&, ReadOnly> Encoding {
+        property<Text::Encoding&, readonly> Encoding {
           _get->Text::Encoding& {return this->GetEncoding();}
         };
         
         /// @brief Gets or sets the line terminator string used by the current TextWriter.
-        Property<const string&> NewLine {
+        property<const string&> NewLine {
           _get->const string& {return this->GetNewLine();},
           _set {this->SetNewLine(value);}
         };

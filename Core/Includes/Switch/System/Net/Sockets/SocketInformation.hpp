@@ -32,7 +32,7 @@ namespace Switch {
           /// @brief Gets or sets the options for a Socket.
           /// @param options A SocketInformationOptions instance.
           /// @return SocketInformationOptions A SocketInformationOptions instance.
-          Property<const SocketInformationOptions&> Options {
+          property<const SocketInformationOptions&> Options {
             _get->const SocketInformationOptions& {return this->options;},
             _set {this->options = value;}
           };
@@ -40,7 +40,7 @@ namespace Switch {
           /// @brief Gets or sets the protocol information for a Socket.
           /// @param protocolInformation An array of type Byte.
           /// @return Array<Byte> An array of type Byte.
-          Property<const Array<byte>&> ProtocolInformation {
+          property<const Array<byte>&> ProtocolInformation {
             _get->const Array<byte>& {return this->protocolInfrmation;},
             _set {this->protocolInfrmation = value;}
           };

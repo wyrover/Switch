@@ -76,37 +76,37 @@ namespace Switch {
       /// @endcond
 
       /// @brief Specifies the characters that separate the communication protocol scheme from the address portion of the URI. This field is read-only.
-      static Property<string, ReadOnly> SchemeDelimiter;
+      static property<string, readonly> SchemeDelimiter;
       
       /// @brief Specifies that the URI is a pointer to a file. This field is read-only.
-      static Property<string, ReadOnly> UriSchemeFile;
+      static property<string, readonly> UriSchemeFile;
       
       /// @brief Specifies that the URI is accessed through the File Transfer Protocol (FTP). This field is read-only.
-      static Property<string, ReadOnly> UriSchemeFtp;
+      static property<string, readonly> UriSchemeFtp;
       
       /// @brief Specifies that the URI is accessed through the Gopher protocol. This field is read-only.
-      static Property<string, ReadOnly> UriSchemeGopher;
+      static property<string, readonly> UriSchemeGopher;
       
       /// @brief Specifies that the URI is accessed through the Hypertext Transfer Protocol (HTTP). This field is read-only.
-      static Property<string, ReadOnly> UriSchemeHttp;
+      static property<string, readonly> UriSchemeHttp;
       
       /// @brief Specifies that the URI is accessed through the Hypertext Transfer Protocol (HTTPS). This field is read-only.
-      static Property<string, ReadOnly> UriSchemeHttps;
+      static property<string, readonly> UriSchemeHttps;
       
       /// @brief Specifies that the URI is an e-mail address && is accessed through the Simple Mail Transport Protocol (SMTP). This field is read-only.
-      static Property<string, ReadOnly> UriSchemeMailto;
+      static property<string, readonly> UriSchemeMailto;
       
       /// @brief Specifies that the URI is accessed through the NetPipe scheme used by Windows Communication Foundation (WCF). This field is read-only.
-      static Property<string, ReadOnly> UriSchemeNetPipe;
+      static property<string, readonly> UriSchemeNetPipe;
       
       /// @brief Specifies that the URI is accessed through the NetTcp scheme used by Windows Communication Foundation (WCF). This field is read-only.
-      static Property<string, ReadOnly> UriSchemeNetTcp;
+      static property<string, readonly> UriSchemeNetTcp;
       
       /// @brief Specifies that the URI is an Internet news group && is accessed through the Network News Transport Protocol (NNTP). This field is read-only.
-      static Property<string, ReadOnly> UriSchemeNews;
+      static property<string, readonly> UriSchemeNews;
       
       /// @brief Specifies that the URI is an Internet news group && is accessed through the Network News Transport Protocol (NNTP). This field is read-only.
-      static Property<string, ReadOnly> UriSchemeNntp;
+      static property<string, readonly> UriSchemeNntp;
       
       /// @brief Initializes a new instance of the Uri class.
       Uri() {}
@@ -149,7 +149,7 @@ namespace Switch {
       /// @exception InvalidOperationException This instance represents a relative URI, and this property is valid only for absolute URIs.
       /// @remarks The AbsolutePath property contains the path information that the server uses to resolve requests for information. Typically this is the path to the desired information on the server's file system, although it also can indicate the application || script the server must run to provide the information.
       /// @remarks The path information does ! include the scheme, host name, or query portion of the URI.
-      Property<String, ReadOnly> AbsolutePath {
+      property<String, readonly> AbsolutePath {
         _get {return this->GetComponents(UriComponents::Path, UriFormat::UriEscaped);}
       };
 
@@ -157,7 +157,7 @@ namespace Switch {
       /// @return string A string containing the entire URI.
       /// @exception InvalidOperationException This instance represents a relative URI, and this property is valid only for absolute URIs.
       /// @remarks The AbsoluteUri property includes the entire URI stored in the Uri instance, including all fragments && query strings.
-      Property<String, ReadOnly> AbsoluteUri {
+      property<String, readonly> AbsoluteUri {
         _get {return this->GetComponents(UriComponents::AbsoluteUri, UriFormat::UriEscaped);}
       };
 
@@ -165,7 +165,7 @@ namespace Switch {
       /// @return string A string containing the authority component of the URI represented by this instance.
       /// @exception InvalidOperationException This instance represents a relative URI, and this property is valid only for absolute URIs.
       /// @remarks The Authority property is typically a server DNS host name || IP address. This property might include the service port number if it differs from the default port for the URI. If the Authority component contains reserved characters, these are escaped in the string value returned by this property.
-      Property<String, ReadOnly> Authority {
+      property<String, readonly> Authority {
         _get {return this->GetComponents(UriComponents::UserInfo|UriComponents::KeepDelimiter, UriFormat::UriEscaped) + GetComponents(UriComponents::Host|UriComponents::KeepDelimiter, UriFormat::UriEscaped) + GetComponents(UriComponents::Port|UriComponents::KeepDelimiter, UriFormat::UriEscaped);}
       };
 
@@ -173,7 +173,7 @@ namespace Switch {
       /// @return string A string that contains the unescaped host part of the URI that is suitable for DNS resolution; || the original unescaped host string, if it is already suitable for resolution.
       /// @exception InvalidOperationException This instance represents a relative URI, and this property is valid only for absolute URIs.
       /// @remarks For IPv6 addresses, the brackets ([]) are removed && the ScopeId property is set, if one was specified when this instance was constructed.
-      Property<String, ReadOnly> DnsSafeHost {
+      property<String, readonly> DnsSafeHost {
         _get {return this->GetComponents(UriComponents::Host, UriFormat::SafeUnescaped);}
       };
 
@@ -182,7 +182,7 @@ namespace Switch {
       /// @exception InvalidOperationException This instance represents a relative URI, and this property is valid only for absolute URIs.
       /// @remarks The Fragment property gets any text following a fragment marker (#) in the URI, including the fragment marker itself. Given the URI http://www.contoso.com/index.htm#main, the Fragment property would return #main.
       /// @remarks The Fragment property is ! considered in any Equals comparison.
-      Property<String, ReadOnly> Fragment {
+      property<String, readonly> Fragment {
         _get {return this->GetComponents(UriComponents::Fragment|UriComponents::KeepDelimiter, UriFormat::UriEscaped);}
       };
 
@@ -190,14 +190,14 @@ namespace Switch {
       /// @return string A string that contains the host name. This is usually the DNS host name || IP address of the server.
       /// @exception InvalidOperationException This instance represents a relative URI, and this property is valid only for absolute URIs.
       /// @remarks Unlike the Authority property, this property value does ! include the port number.
-      Property<String, ReadOnly> Host {
+      property<String, readonly> Host {
         _get {return this->GetComponents(UriComponents::Host, UriFormat::UriEscaped);}
       };
 
       /// @brief Gets the type of the host name specified in the URI.
       /// @return UriHostNameType A member of the UriHostNameType enumeration.
       /// @exception InvalidOperationException This instance represents a relative URI, and this property is valid only for absolute URIs.
-      Property<UriHostNameType, ReadOnly> HostNameType {
+      property<UriHostNameType, readonly> HostNameType {
         _get {
           if (this->kind!= UriKind::Absolute)
             throw InvalidOperationException(_current_information);
@@ -224,14 +224,14 @@ namespace Switch {
       /// @brief Gets whether the Uri instance is absolute.
       /// @return bool A bool value that is true if the Uri instance is absolute; otherwise, false.
       /// @remarks This property is true if the string || Uri instance that was passed into the constructor can be parsed as an absolute Uri instance, which contains a scheme, an authority, and a path. Otherwise, the Uri instance is treated as relative && might omit the scheme || other URI components.
-      Property<bool, ReadOnly> IsAbsoluteUri {
+      property<bool, readonly> IsAbsoluteUri {
         _get {return this->kind == UriKind::Absolute;}
       };
 
       /// @brief Gets whether the port value of the URI is the default for this scheme.
       /// @return bool A bool value that is true if the value in the Port property is the default port for this scheme; otherwise, false.
       /// @exception InvalidOperationException This instance represents a relative URI, and this property is valid only for absolute URIs.
-      Property<bool, ReadOnly> IsDefaultPort {
+      property<bool, readonly> IsDefaultPort {
         _get {
           if (this->kind != UriKind::Absolute)
             throw InvalidOperationException(_current_information);
@@ -244,7 +244,7 @@ namespace Switch {
       /// @return bool A bool value that is true if the Uri is a file URI; otherwise, false.
       /// @exception InvalidOperationException This instance represents a relative URI, and this property is valid only for absolute URIs.
       /// @remarks The IsFile property is true when the Scheme property equals UriSchemeFile.
-      Property<bool, ReadOnly> IsFile {
+      property<bool, readonly> IsFile {
         _get {
           if (this->kind != UriKind::Absolute)
             throw InvalidOperationException(_current_information);
@@ -257,7 +257,7 @@ namespace Switch {
       /// @return bool A bool value that is true if this Uri references the local host; otherwise, false.
       /// @exception InvalidOperationException This instance represents a relative URI, and this property is valid only for absolute URIs.
       /// @remarks IsLoopback returns true if the URI specified when this instance was created was 127.0.0.1, loopback, or localhost, or if the URI did ! specify host information (for example, file:///c:Dir/file.txt). All other URIs return false.
-      Property<bool, ReadOnly> IsLoopback {
+      property<bool, readonly> IsLoopback {
         _get {
           if (this->kind != UriKind::Absolute)
             throw InvalidOperationException(_current_information);
@@ -270,7 +270,7 @@ namespace Switch {
       /// @return bool A bool value that is true if the Uri is a UNC path; otherwise, false.
       /// @exception InvalidOperationException This instance represents a relative URI, and this property is valid only for absolute URIs.
       /// @remarks The IsUnc property is true if the specified Uri instance is a UNC path (such as \\server\folder || file://server/folder). This property always returns true if the URI has the file:// scheme && specifies a host component.
-      Property<bool, ReadOnly> IsUnc {
+      property<bool, readonly> IsUnc {
         _get {
           if (this->kind != UriKind::Absolute)
             throw InvalidOperationException(_current_information);
@@ -287,7 +287,7 @@ namespace Switch {
       /// @remarks When International Resource Identifier (IRI) && Internationalized Domain Name (IDN) support are enabled, OriginalString returns the original non normalized string with Punycode host name if one was used to initialize the Uri instance. Punycode names contain only ASCII characters && always start with the xn-- prefix.
       /// @remarks For more information on IRI support, see the Remarks section for the Uri class.
       /// @remarks When a Uri object is serialized, the OriginalString is ! preserved. The serialization process uses the fully escaped && canonicalized AbsoluteUri property when serializing. For a Uri that contains an IPv6 address, the IPv6 address && the scope ID are included in the serialized Uri object.
-      Property<String, ReadOnly> LocalPath {
+      property<String, readonly> LocalPath {
         _get {return this->GetComponents(UriComponents::Path, UriFormat::Unescaped).Replace('/', System::IO::Path::DirectorySeparatorChar);}
       };
 
@@ -299,7 +299,7 @@ namespace Switch {
       /// @remarks When International Resource Identifier (IRI) && Internationalized Domain Name (IDN) support are enabled, OriginalString returns the original non normalized string with Punycode host name if one was used to initialize the Uri instance. Punycode names contain only ASCII characters && always start with the xn-- prefix.
       /// @remarks For more information on IRI support, see the Remarks section for the Uri class.
       /// @remarks When a Uri object is serialized, the OriginalString is ! preserved. The serialization process uses the fully escaped && canonicalized AbsoluteUri property when serializing. For a Uri that contains an IPv6 address, the IPv6 address && the scope ID are included in the serialized Uri object.
-      Property<const String&, ReadOnly> OriginalString {
+      property<const String&, readonly> OriginalString {
         _get->const string& {
           if (this->kind != UriKind::Absolute)
             throw InvalidOperationException(_current_information);
@@ -314,7 +314,7 @@ namespace Switch {
       /// @remarks The PathAndQuery property contains the absolute path on the server && the query information sent with the request. It is identical to concatenating the AbsolutePath && Query properties.
       /// @remarks The PathAndQuery property is escaped according to RFC 2396 by default. If International Resource Identifiers (IRIs) || Internationalized Domain Name (IDN) parsing is enabled, the PathAndQuery property is escaped according to RFC 3986 && RFC 3987.
       /// @remarks For more information on IRI support, see the Remarks section for the Uri class.
-      Property<String, ReadOnly> PathAndQuery {
+      property<String, readonly> PathAndQuery {
         _get {return this->GetComponents(UriComponents::PathAndQuery, UriFormat::UriEscaped);}
       };
 
@@ -322,7 +322,7 @@ namespace Switch {
       /// @return int32 An int32 value that contains the port number for this URI.
       /// @exception InvalidOperationException This instance represents a relative URI, and this property is valid only for absolute URIs.
       /// @remarks The port number defines the protocol port used for contacting the server referenced in the URI. If a port is ! specified as part of the URI, the Port property returns the default value for the protocol. If there is no default port number, this property returns -1.
-      Property<int32, ReadOnly> Port {
+      property<int32, readonly> Port {
         _get {
           int32 port = -1;
           if (Int32::TryParse(this->GetComponents(UriComponents::Port, UriFormat::UriEscaped), port) == true)
@@ -352,7 +352,7 @@ namespace Switch {
       /// @remarks The Query property contains any query information included in the URI. Query information is separated from the path information by a question mark (?) && continues to the end of the URI. The query information returned includes the leading question mark.
       /// @remarks The query information is escaped according to RFC 2396 by default. If International Resource Identifiers (IRIs) || Internationalized Domain Name (IDN) parsing is enabled, the query information is escaped according to RFC 3986 && RFC 3987.
       /// @remarks For more information on IRI support, see the Remarks section for the Uri class.
-      Property<String, ReadOnly> Query {
+      property<String, readonly> Query {
         _get {return this->GetComponents(UriComponents::Query|UriComponents::KeepDelimiter, UriFormat::UriEscaped);}
       };
 
@@ -376,7 +376,7 @@ namespace Switch {
       /// | nntp     | The resource is accessed through the NNTP protocol.                                            |
       /// | telnet   | The resource is accessed through the TELNET protocol.                                          |
       /// | uuid     | The resource is accessed through a unique UUID endpoint name for communicating with a service. |
-      Property<String, ReadOnly> Scheme {
+      property<String, readonly> Scheme {
         _get {return GetComponents(UriComponents::Scheme, UriFormat::UriEscaped);}
       };
 
@@ -398,7 +398,7 @@ namespace Switch {
       /// @remarks Segments
       /// @remarks     /Chapters/Chapter1/Sections/Section1.htm
       /// @remarks Note that because the absolute path starts with a '/', the first segment contains it && nothing else.
-      Property<Array<String>, ReadOnly> Segments {
+      property<Array<String>, readonly> Segments {
         _get {
           String absolutePath = this->AbsolutePath();
           if (string::IsNullOrEmpty(absolutePath) == true)
@@ -431,7 +431,7 @@ namespace Switch {
       /// @return string A string that contains the user information associated with the URI. The returned value does ! include the '@' character reserved for delimiting the user information part of the URI.
       /// @exception InvalidOperationException This instance represents a relative URI, and this property is valid only for absolute URIs.
       /// @remarks The value returned by this property is usually in the format "userName:password".
-      Property<String, ReadOnly> UserInfo {
+      property<String, readonly> UserInfo {
         _get {return GetComponents(UriComponents::UserInfo, UriFormat::UriEscaped);}
       };
       
