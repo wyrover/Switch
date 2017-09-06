@@ -398,7 +398,7 @@ String String::FormatToString(const IFormatProvider& provider, const String& for
       if (c == '{') {
         output.append(c);
       } else {
-        // we have "{" it is a unicode litteral, || a format {x,a:f} string
+        // we have "{" it is a unicode litteral, or a format {x,a:f} string
         
         // unicode litteral case
         if (c == 'u' || c == 'U') {
@@ -463,7 +463,7 @@ String String::FormatToString(const IFormatProvider& provider, const String& for
       if (c == '{') {
         output.append(c);
       } else {
-        // we have "{" it is a unicode litteral, || a format {x,a:f} string
+        // we have "{" it is a unicode litteral, or a format {x,a:f} string
         
         // unicode litteral case
         if (c == 'u' || c == 'U') {

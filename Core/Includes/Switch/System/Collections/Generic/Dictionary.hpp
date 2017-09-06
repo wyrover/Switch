@@ -27,8 +27,8 @@ namespace Switch {
         /// @brief Represents a non-generic collection of objects that can be individually accessed by index.
         /// @par Examples
         /// The following code example creates an empty Dictionary<TKey, TValue> of strings with string keys && uses the Add method to add some elements. The example demonstrates that the Add method throws an ArgumentException when attempting to add a duplicate key.
-        /// The example uses the Item property to retrieve values, demonstrating that a KeyNotFoundException is thrown when a requested key is ! present, && showing that the value associated with a key can be replaced.
-        /// The example shows how to use the TryGetValue method as a more efficient way to retrieve values if a program often must try key values that are ! in the dictionary, && it shows how to use the ContainsKey method to test whether a key exists before calling the Add method.
+        /// The example uses the Item property to retrieve values, demonstrating that a KeyNotFoundException is thrown when a requested key is ! present, and showing that the value associated with a key can be replaced.
+        /// The example shows how to use the TryGetValue method as a more efficient way to retrieve values if a program often must try key values that are ! in the dictionary, and it shows how to use the ContainsKey method to test whether a key exists before calling the Add method.
         /// The example shows how to enumerate the keys && values in the dictionary && how to enumerate the keys && values alone using the Keys property && the Values property.
         /// Finally, the example demonstrates the Remove method.
         /// @include Dictionary.cpp

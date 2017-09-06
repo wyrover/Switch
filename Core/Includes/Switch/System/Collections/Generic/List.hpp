@@ -31,17 +31,17 @@ namespace Switch {
     namespace Collections {
       /// @brief The System::Collections::Generic namespace contains interfaces and classes that define generic collections, which allow users to create strongly typed collections that provide better type safety and performance than non-generic strongly typed collections.
       namespace Generic {
-        /// @brief Represents a strongly typed list of objects that can be accessed by index. Provides methods to search, sort, && manipulate lists.
+        /// @brief Represents a strongly typed list of objects that can be accessed by index. Provides methods to search, sort, and manipulate lists.
         /// @remarks The List<T> class is the generic equivalent of the ArrayList class. It implements the IList<T> generic interface using an array whose size is dynamically increased as required.
         /// @remarks The List<T> class uses both an equality comparer && an ordering comparer.
-        /// @remarks Methods such as Contains, IndexOf, LastIndexOf, && Remove use an equality comparer for the list elements. The default equality comparer for type T is determined as follows. If type T implements the IEquatable<T> generic interface, then the equality comparer is the Equals(T) method of that interface; otherwise, the default equality comparer is object.Equals(object).
-        /// @remarks Methods such as BinarySearch && Sort use an ordering comparer for the list elements. The default comparer for type T is determined as follows. If type T implements the IComparable<T> generic interface, then the default comparer is the CompareTo(T) method of that interface; otherwise, if type T implements the nongeneric IComparable interface, then the default comparer is the CompareTo(object) method of that interface. If type T implements neither interface, then there is no default comparer, && a comparer || comparison delegate must be provided explicitly.
+        /// @remarks Methods such as Contains, IndexOf, LastIndexOf, and Remove use an equality comparer for the list elements. The default equality comparer for type T is determined as follows. If type T implements the IEquatable<T> generic interface, then the equality comparer is the Equals(T) method of that interface; otherwise, the default equality comparer is object.Equals(object).
+        /// @remarks Methods such as BinarySearch && Sort use an ordering comparer for the list elements. The default comparer for type T is determined as follows. If type T implements the IComparable<T> generic interface, then the default comparer is the CompareTo(T) method of that interface; otherwise, if type T implements the nongeneric IComparable interface, then the default comparer is the CompareTo(object) method of that interface. If type T implements neither interface, then there is no default comparer, and a comparer || comparison delegate must be provided explicitly.
         /// @remarks The List<T> is ! guaranteed to be sorted. You must sort the List<T> before performing operations (such as BinarySearch) that require the List<T> to be sorted.
         /// @remarks Elements in this collection can be accessed using an integer index. Indexes in this collection are zero-based.
         /// @remarks For very large List<T> objects, you can increase the maximum capacity to 2 billion elements on a 64-bit system by setting the enabled attribute of the gcAllowVeryLargeObjects configuration element to true in the run-time environment.
         /// @remarks List<T> accepts null as a valid value for reference types && allows duplicate elements.
         /// @par Examples
-        /// The following code example demonstrates the TrimExcess method. Several properties && methods of the List<T> class are used to add, insert, && remove items from a list of strings. Then the TrimExcess method is used to reduce the capacity to match the count, && the Capacity && Count properties are displayed. If the unused capacity had been less than 10 percent of total capacity, the list would ! have been resized. Finally, the contents of the list are cleared.
+        /// The following code example demonstrates the TrimExcess method. Several properties && methods of the List<T> class are used to add, insert, and remove items from a list of strings. Then the TrimExcess method is used to reduce the capacity to match the count, and the Capacity && Count properties are displayed. If the unused capacity had been less than 10 percent of total capacity, the list would ! have been resized. Finally, the contents of the list are cleared.
         /// @include List.cpp
         template<typename T, typename TAllocator>
         class List : public Object, public System::Linq::Extension::Enumerable<List<T, TAllocator>, T>, public IList<T> {
@@ -86,9 +86,9 @@ namespace Switch {
           /// @remarks If the size of the collection can be estimated, specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the List<T>.
           /// @remarks The capacity can be decreased by calling the TrimExcess method || by setting the Capacity property explicitly. Decreasing the capacity reallocates memory && copies all the elements in the List<T>.
           /// @remarks This constructor is an O(n) operation, where n is capacity.
-          /// @remarks The following code example demonstrates the AsReadOnly method. A List<T> of strings with a capacity of 4 is created, because the ultimate size of the list is known to be exactly 4. The list is populated with four strings, && the AsReadOnly method is used to get a read-only IList<T> generic interface implementation that wraps the original list.
+          /// @remarks The following code example demonstrates the AsReadOnly method. A List<T> of strings with a capacity of 4 is created, because the ultimate size of the list is known to be exactly 4. The list is populated with four strings, and the AsReadOnly method is used to get a read-only IList<T> generic interface implementation that wraps the original list.
           /// @par Examples
-          /// An element of the original list is set to "Coelophysis" using the Item property, && the contents of the read-only list are displayed again to demonstrate that it is just a wrapper for the original list.
+          /// An element of the original list is set to "Coelophysis" using the Item property, and the contents of the read-only list are displayed again to demonstrate that it is just a wrapper for the original list.
           /// @include List3.cpp
           List(int32 capacity) : operationNumber(0) {
             if (capacity < 0)
@@ -136,11 +136,11 @@ namespace Switch {
           /// @brief Adds an object to the end of the List<T>.
           /// @param value The object to be added to the end of the List<T>. The value can be null for reference types.
           /// @remarks List<T> accepts null as a valid value for reference types && allows duplicate elements.
-          /// @remarks If Count already equals Capacity, the capacity of the List<T> is increased by automatically reallocating the internal array, && the existing elements are copied to the new array before the new element is added.
+          /// @remarks If Count already equals Capacity, the capacity of the List<T> is increased by automatically reallocating the internal array, and the existing elements are copied to the new array before the new element is added.
           /// @remarks If Count is less than Capacity, this method is an O(1) operation. If the capacity needs to be increased to accommodate the new element, this method becomes an O(n) operation, where n is Count.
-          /// @remarks The following code example demonstrates several properties && methods of the List<T> generic class, including the Add method. The default constructor is used to create a list of strings with a capacity of 0. The Capacity property is displayed, && then the Add method is used to add several items. The items are listed, && the Capacity property is displayed again, along with the Count property, to show that the capacity has been increased as needed.
+          /// @remarks The following code example demonstrates several properties && methods of the List<T> generic class, including the Add method. The default constructor is used to create a list of strings with a capacity of 0. The Capacity property is displayed, and then the Add method is used to add several items. The items are listed, and the Capacity property is displayed again, along with the Count property, to show that the capacity has been increased as needed.
           /// @par Examples
-          /// Other properties && methods are used to search for, insert, && remove elements from the list, && finally to clear the list.
+          /// Other properties && methods are used to search for, insert, and remove elements from the list, and finally to clear the list.
           /// @include List.cpp
           void Add(const T& value) override {
             this->list.push_back(value);
@@ -150,7 +150,7 @@ namespace Switch {
           /// @param collection The collection whose elements should be added to the end of the List<T>. The value can ! be null && can contains reference element null.
           /// @exception ArgumentNullException The parameters collection is null || element reference null in collection.
           /// @remarks The order of the elements in the collection is preserved in the List<T>.
-          /// @remarks If the new Count (the current Count plus the size of the collection) will be greater than Capacity, the capacity of the List<T> is increased by automatically reallocating the internal array to accommodate the new elements, && the existing elements are copied to the new array before the new elements are added.
+          /// @remarks If the new Count (the current Count plus the size of the collection) will be greater than Capacity, the capacity of the List<T> is increased by automatically reallocating the internal array to accommodate the new elements, and the existing elements are copied to the new array before the new elements are added.
           /// @remarks If the List<T> can accommodate the new elements without increasing the Capacity, this method is an O(n) operation, where n is the number of elements to be added. If the capacity needs to be increased to accommodate the new elements, this method becomes an O(n + m) operation, where n is the number of elements to be added && m is Count.
           /// @par Examples
           /// The following code example demonstrates the List<T> constructor && various methods of the List<T> class that act on ranges. An array of strings is created && passed to the constructor, populating the list with the elements of the array. The Capacity property is then displayed, to show that the initial capacity is exactly what is required to hold the input elements.
@@ -171,7 +171,7 @@ namespace Switch {
           /// @param collection The collection whose elements should be added to the end of the List<T>. The value can ! be null && can contains reference element null.
           /// @exception ArgumentNullException The parameters collection is null || element reference null in collection.
           /// @remarks The order of the elements in the collection is preserved in the List<T>.
-          /// @remarks If the new Count (the current Count plus the size of the collection) will be greater than Capacity, the capacity of the List<T> is increased by automatically reallocating the internal array to accommodate the new elements, && the existing elements are copied to the new array before the new elements are added.
+          /// @remarks If the new Count (the current Count plus the size of the collection) will be greater than Capacity, the capacity of the List<T> is increased by automatically reallocating the internal array to accommodate the new elements, and the existing elements are copied to the new array before the new elements are added.
           /// @remarks If the List<T> can accommodate the new elements without increasing the Capacity, this method is an O(n) operation, where n is the number of elements to be added. If the capacity needs to be increased to accommodate the new elements, this method becomes an O(n + m) operation, where n is the number of elements to be added && m is Count.
           /// @par Examples
           /// The following code example demonstrates the List<T> constructor && various methods of the List<T> class that act on ranges. An array of strings is created && passed to the constructor, populating the list with the elements of the array. The Capacity property is then displayed, to show that the initial capacity is exactly what is required to hold the input elements.
@@ -186,9 +186,9 @@ namespace Switch {
           /// @remarks To prevent any modifications to List<T>, expose List<T> only through this wrapper.
           /// @remarks A collection that is read-only is simply a collection with a wrapper that prevents modifying the collection; therefore, if changes are made to the underlying collection, the read-only collection reflects those changes.
           /// @remarks This method is an O(1) operation.
-          /// @remarks The following code example demonstrates the AsReadOnly method. A List<T> of strings with a capacity of 4 is created, because the ultimate size of the list is known to be exactly 4. The list is populated with four strings, && the AsReadOnly method is used to get a read-only IList<T> generic interface implementation that wraps the original list.
+          /// @remarks The following code example demonstrates the AsReadOnly method. A List<T> of strings with a capacity of 4 is created, because the ultimate size of the list is known to be exactly 4. The list is populated with four strings, and the AsReadOnly method is used to get a read-only IList<T> generic interface implementation that wraps the original list.
           /// @par Examples
-          /// An element of the original list is set to "Coelophysis" using the Item property, && the contents of the read-only list are displayed again to demonstrate that it is just a wrapper for the original list.
+          /// An element of the original list is set to "Coelophysis" using the Item property, and the contents of the read-only list are displayed again to demonstrate that it is just a wrapper for the original list.
           /// @include List3.cpp
           ObjectModel::ReadOnlyCollection<T> AsReadOnly() {return ObjectModel::ReadOnlyCollection<T>(*this);}
 
@@ -199,12 +199,12 @@ namespace Switch {
           /// @remarks This method uses the default comparer Comparer<T>.Default for type T to determine the order of list elements. The Comparer<T>.Default property checks whether type T implements the IComparable<T> generic interface && uses that implementation, if available. If !, Comparer<T>.Default checks whether type T implements the IComparable interface. If type T does ! implement either interface, Comparer<T>.Default throws an InvalidOperationException.
           /// @remarks The List<T> must already be sorted according to the comparer implementation; otherwise, the result is incorrect.
           /// @remarks Comparing null with any reference type is allowed && does ! generate an exception when using the IComparable<T> generic interface. When sorting, null is considered to be less than any other object.
-          /// @remarks If the List<T> contains more than one element with the same value, the method returns only one of the occurrences, && it might return any one of the occurrences, ! necessarily the first one.
+          /// @remarks If the List<T> contains more than one element with the same value, the method returns only one of the occurrences, and it might return any one of the occurrences, ! necessarily the first one.
           /// @remarks If the List<T> does ! contain the specified value, the method returns a negative integer. You can apply the bitwise complement operation (~) to this negative integer to get the index of the first element that is larger than the search value. When inserting the value into the List<T>, this index should be used as the insertion point to maintain the sort order.
           /// @remarks This method is an O(log n) operation, where n is the number of elements in the range.
-          /// @remarks The following code example demonstrates the Sort() method overload && the BinarySearch(T) method overload. A List<T> of strings is created && populated with four strings, in no particular order. The list is displayed, sorted, && displayed again.
+          /// @remarks The following code example demonstrates the Sort() method overload && the BinarySearch(T) method overload. A List<T> of strings is created && populated with four strings, in no particular order. The list is displayed, sorted, and displayed again.
           /// @par Examples
-          /// The BinarySearch(T) method overload is then used to search for two strings that are ! in the list, && the Insert method is used to insert them. The return value of the BinarySearch(T) method is negative in each case, because the strings are ! in the list. Taking the bitwise complement of this negative number produces the index of the first element in the list that is larger than the search string, && inserting at this location preserves the sort order. The second search string is larger than any element in the list, so the insertion position is at the end of the list.
+          /// The BinarySearch(T) method overload is then used to search for two strings that are ! in the list, and the Insert method is used to insert them. The return value of the BinarySearch(T) method is negative in each case, because the strings are ! in the list. Taking the bitwise complement of this negative number produces the index of the first element in the list that is larger than the search string, and inserting at this location preserves the sort order. The second search string is larger than any element in the list, so the insertion position is at the end of the list.
           /// @include ListBinarySearch.cpp
           int32 BinarySearch(const T& item) const {return BinarySearch(0, this->Count, item, System::Collections::Generic::Comparer<T>::Default());}
 
@@ -212,13 +212,13 @@ namespace Switch {
           /// @param item The object to locate. The value can be null for reference types.
           /// @param comparer The IComparer<T> implementation to use when comparing elements. -||- null to use the default comparer Comparer<T>.Default.
           /// @return int32 The zero-based index of item in the sorted List<T>, if item is found; otherwise, a negative number that is the bitwise complement of the index of the next element that is larger than item or, if there is no larger element, the bitwise complement of Count.
-          /// @exception InvalidOperationException comparer is null, && the default comparer Comparer<T>.Default cannot find an implementation of the IComparable<T> generic interface || the IComparable interface for type T.
+          /// @exception InvalidOperationException comparer is null, and the default comparer Comparer<T>.Default cannot find an implementation of the IComparable<T> generic interface || the IComparable interface for type T.
           /// @remarks The comparer customizes how the elements are compared. For example, you can use a CaseInsensitiveComparer instance as the comparer to perform case-insensitive string searches.
           /// @remarks If comparer is provided, the elements of the List<T> are compared to the specified value using the specified IComparer<T> implementation.
           /// @remarks If comparer is null, the default comparer Comparer<T>.Default checks whether type T implements the IComparable<T> generic interface && uses that implementation, if available. If !, Comparer<T>.Default checks whether type T implements the IComparable interface. If type T does ! implement either interface, Comparer<T>.Default throws InvalidOperationException.
           /// @remarks The List<T> must already be sorted according to the comparer implementation; otherwise, the result is incorrect.
           /// @remarks Comparing null with any reference type is allowed && does ! generate an exception when using the IComparable<T> generic interface. When sorting, null is considered to be less than any other object.
-          /// @remarks If the List<T> contains more than one element with the same value, the method returns only one of the occurrences, && it might return any one of the occurrences, ! necessarily the first one.
+          /// @remarks If the List<T> contains more than one element with the same value, the method returns only one of the occurrences, and it might return any one of the occurrences, ! necessarily the first one.
           /// @remarks If the List<T> does ! contain the specified value, the method returns a negative integer. You can apply the bitwise complement operation (~) to this negative integer to get the index of the first element that is larger than the search value. When inserting the value into the List<T>, this index should be used as the insertion point to maintain the sort order.
           /// @remarks This method is an O(log n) operation, where n is the number of elements in the range.
           int32 BinarySearch(const T& item, const IComparer<T>& comparer) const {return BinarySearch(0, this->Count, item, comparer);}
@@ -258,12 +258,12 @@ namespace Switch {
           }
 
           /// @brief Removes all elements from the List<T>.
-          /// @remarks Count is set to 0, && references to other objects from elements of the collection are also released.
+          /// @remarks Count is set to 0, and references to other objects from elements of the collection are also released.
           /// @remarks Capacity remains unchanged. To reset the capacity of the List<T>, call the TrimExcess method || set the Capacity property directly. Decreasing the capacity reallocates memory && copies all the elements in the List<T>. Trimming an empty List<T> sets the capacity of the List<T> to the default capacity.
           /// @remarks This method is an O(n) operation, where n is Count.
-          /// @remarks The following code example demonstrates several properties && methods of the List<T> generic class, including the Add method. The default constructor is used to create a list of strings with a capacity of 0. The Capacity property is displayed, && then the Add method is used to add several items. The items are listed, && the Capacity property is displayed again, along with the Count property, to show that the capacity has been increased as needed.
+          /// @remarks The following code example demonstrates several properties && methods of the List<T> generic class, including the Add method. The default constructor is used to create a list of strings with a capacity of 0. The Capacity property is displayed, and then the Add method is used to add several items. The items are listed, and the Capacity property is displayed again, along with the Count property, to show that the capacity has been increased as needed.
           /// @par Examples
-          /// Other properties && methods are used to search for, insert, && remove elements from the list, && finally to clear the list.
+          /// Other properties && methods are used to search for, insert, and remove elements from the list, and finally to clear the list.
           /// @include List.cpp
           void Clear() override {
             while (this->Count)
@@ -291,7 +291,7 @@ namespace Switch {
           /// @remarks The elements are copied to the Array in the same order in which the enumerator iterates through the List<T>.
           /// @remarks This method is an O(n) operation, where n is Count.
           /// @par Examples
-          /// The following code example demonstrates all three overloads of the CopyTo method. A List<T> of strings is created && populated with 5 strings. An empty string array of 15 elements is created, && the CopyTo(T[]) method overload is used to copy all the elements of the list to the array beginning at the first element of the array. The CopyTo(T[], Int32) method overload is used to copy all the elements of the list to the array beginning at array index 6 (leaving index 5 empty). Finally, the CopyTo(Int32, T[], Int32, Int32) method overload is used to copy 3 elements from the list, beginning with index 2, to the array beginning at array index 12 (leaving index 11 empty). The contents of the array are then displayed.
+          /// The following code example demonstrates all three overloads of the CopyTo method. A List<T> of strings is created && populated with 5 strings. An empty string array of 15 elements is created, and the CopyTo(T[]) method overload is used to copy all the elements of the list to the array beginning at the first element of the array. The CopyTo(T[], Int32) method overload is used to copy all the elements of the list to the array beginning at array index 6 (leaving index 5 empty). Finally, the CopyTo(Int32, T[], Int32, Int32) method overload is used to copy 3 elements from the list, beginning with index 2, to the array beginning at array index 12 (leaving index 11 empty). The contents of the array are then displayed.
           /// @include ListCopyTo.cpp
           void CopyTo(Array<T>& array) const {this->CopyTo(0, array, 0, this->Count);}
 
@@ -305,7 +305,7 @@ namespace Switch {
           /// @remarks The elements are copied to the Array in the same order in which the enumerator iterates through the List<T>.
           /// @remarks This method is an O(n) operation, where n is Count.
           /// @par Examples
-          /// The following code example demonstrates all three overloads of the CopyTo method. A List<T> of strings is created && populated with 5 strings. An empty string array of 15 elements is created, && the CopyTo(T[]) method overload is used to copy all the elements of the list to the array beginning at the first element of the array. The CopyTo(T[], Int32) method overload is used to copy all the elements of the list to the array beginning at array index 6 (leaving index 5 empty). Finally, the CopyTo(Int32, T[], Int32, Int32) method overload is used to copy 3 elements from the list, beginning with index 2, to the array beginning at array index 12 (leaving index 11 empty). The contents of the array are then displayed.
+          /// The following code example demonstrates all three overloads of the CopyTo method. A List<T> of strings is created && populated with 5 strings. An empty string array of 15 elements is created, and the CopyTo(T[]) method overload is used to copy all the elements of the list to the array beginning at the first element of the array. The CopyTo(T[], Int32) method overload is used to copy all the elements of the list to the array beginning at array index 6 (leaving index 5 empty). Finally, the CopyTo(Int32, T[], Int32, Int32) method overload is used to copy 3 elements from the list, beginning with index 2, to the array beginning at array index 12 (leaving index 11 empty). The contents of the array are then displayed.
           /// @include ListCopyTo.cpp
           virtual void CopyTo(Array<T>& array, int32 arrayIndex) const override {this->CopyTo(0, array, arrayIndex, this->Count);}
 
@@ -321,7 +321,7 @@ namespace Switch {
           /// @remarks The elements are copied to the Array in the same order in which the enumerator iterates through the List<T>.
           /// @remarks This method is an O(n) operation, where n is Count.
           /// @par Examples
-          /// The following code example demonstrates all three overloads of the CopyTo method. A List<T> of strings is created && populated with 5 strings. An empty string array of 15 elements is created, && the CopyTo(T[]) method overload is used to copy all the elements of the list to the array beginning at the first element of the array. The CopyTo(T[], Int32) method overload is used to copy all the elements of the list to the array beginning at array index 6 (leaving index 5 empty). Finally, the CopyTo(Int32, T[], Int32, Int32) method overload is used to copy 3 elements from the list, beginning with index 2, to the array beginning at array index 12 (leaving index 11 empty). The contents of the array are then displayed.
+          /// The following code example demonstrates all three overloads of the CopyTo method. A List<T> of strings is created && populated with 5 strings. An empty string array of 15 elements is created, and the CopyTo(T[]) method overload is used to copy all the elements of the list to the array beginning at the first element of the array. The CopyTo(T[], Int32) method overload is used to copy all the elements of the list to the array beginning at array index 6 (leaving index 5 empty). Finally, the CopyTo(Int32, T[], Int32, Int32) method overload is used to copy 3 elements from the list, beginning with index 2, to the array beginning at array index 12 (leaving index 11 empty). The contents of the array are then displayed.
           /// @include ListCopyTo.cpp
           void CopyTo(int32 index, Array<T>& array, int32 arrayIndex, int32 count) const {
             if (index < 0 || array.Length < 0 || arrayIndex < 0 || count < 0)
@@ -346,11 +346,11 @@ namespace Switch {
           /// @param match The Predicate pointer function that defines the conditions of the elements to search for.
           /// @return Boolean true if the List<T> contains one || more elements that match the conditions defined by the specified predicate; otherwise, false.
           /// @exception ArgumentNUllException The parameters match is null.
-          /// @remarks The Predicate is a pointer to a method that returns true if the object passed to it matches the conditions defined in the pointer function. The elements of the current List<T> are individually passed to the Predicate pointer function, && processing is stopped when a match is found.
+          /// @remarks The Predicate is a pointer to a method that returns true if the object passed to it matches the conditions defined in the pointer function. The elements of the current List<T> are individually passed to the Predicate pointer function, and processing is stopped when a match is found.
           /// @remarks This method is an O(n) operation, where n is Count.
           /// @remarks The following code example demonstrates the RemoveAll method && several other methods that use the Predicate<T> generic delegate.
           /// @remarks A List<T> of strings is created, containing 8 dinosaur names, two of which (at positions 1 && 5) end with "saurus". The code example also defines a search predicate method named EndsWithSaurus, which accepts a string parameter && returns a Boolean value indicating whether the input string ends in "saurus".
-          /// @remarks The Find, FindLast, && FindAll methods are used to search the list with the search predicate method.
+          /// @remarks The Find, FindLast, and FindAll methods are used to search the list with the search predicate method.
           /// @par Examples
           /// The RemoveAll method is used to remove all entries ending with "saurus". It traverses the list from the beginning, passing each element in turn to the EndsWithSaurus method. The element is removed if the EndsWithSaurus method returns true.
           /// @include ListExists.cpp
@@ -362,7 +362,7 @@ namespace Switch {
             return false;
           }
 
-          /// @brief Searches for an element that matches the conditions defined by the specified predicate, && returns the first occurrence within the entire List<T>.
+          /// @brief Searches for an element that matches the conditions defined by the specified predicate, and returns the first occurrence within the entire List<T>.
           /// @param match The Predicate pointer function that defines the conditions of the elements to search for.
           /// @return The first element that matches the conditions defined by the specified predicate, if found; otherwise, the default value for type T.
           /// @exception ArgumentNUllException match is null.
@@ -394,7 +394,7 @@ namespace Switch {
           /// @param match The Predicate<T> delegate that defines the conditions of the elements to search for.
           /// @return A List<T> containing all the elements that match the conditions defined by the specified predicate, if found; otherwise, an empty List<T>.
           /// @exception ArgumentNUllException match is null.
-          /// @remarks The Predicate<T> is a delegate to a method that returns true if the object passed to it matches the conditions defined in the delegate. The elements of the current List<T> are individually passed to the Predicate<T> delegate, && the elements that match the conditions are saved in the returned List<T>.
+          /// @remarks The Predicate<T> is a delegate to a method that returns true if the object passed to it matches the conditions defined in the delegate. The elements of the current List<T> are individually passed to the Predicate<T> delegate, and the elements that match the conditions are saved in the returned List<T>.
           /// @remarks This method performs a linear search; therefore, this method is an O(n) operation, where n is Count.
           /// @remarks The following example demonstrates the find methods for the List<T> class. The example for the List<T> class contains book objects, of class Book, using the data from the Sample XML File: Books (LINQ to XML). The FillList method in the example uses LINQ to XML [from BPUEDev11] to parse the values from the XML to property values of the book objects.
           /// @remarks The following table describes the examples provided for the find methods.
@@ -419,7 +419,7 @@ namespace Switch {
             return list;
           }
 
-          /// @brief Searches for an element that matches the conditions defined by the specified predicate, && returns the zero-based index of first occurrence within the entire List<T>.
+          /// @brief Searches for an element that matches the conditions defined by the specified predicate, and returns the zero-based index of first occurrence within the entire List<T>.
           /// @param match The Predicate pointer function that defines the conditions of the elements to search for.
           /// @return Int32 The first zero-based index of the first occurrence of an element that matches the conditions defined by match, if found; otherwise, -1.
           /// @exception ArgumentNullException The parameters match is null.
@@ -439,7 +439,7 @@ namespace Switch {
           /// @include ListFind.cpp
           int32 FindIndex(const Predicate<const T&>& match) const {return this->FindIndex(0, this->Count, match);}
 
-          /// @brief Searches for an element that matches the conditions defined by the specified predicate, && returns the zero-based index of first occurrence within the entire List<T>.
+          /// @brief Searches for an element that matches the conditions defined by the specified predicate, and returns the zero-based index of first occurrence within the entire List<T>.
           /// @param sratIndex The zero-based starting index of the search.
           /// @param match The Predicate pointer function that defines the conditions of the elements to search for.
           /// @return Int32 The first zero-based index of the first occurrence of an element that matches the conditions defined by match, if found; otherwise, -1.
@@ -460,7 +460,7 @@ namespace Switch {
           /// @include ListFind.cpp
           int32 FindIndex(int32 startIndex, const Predicate<const T&>& match) const {return this->FindIndex(startIndex, this->Count-startIndex, match);}
 
-          /// @brief Searches for an element that matches the conditions defined by the specified predicate, && returns the zero-based index of first occurrence within the entire List<T>.
+          /// @brief Searches for an element that matches the conditions defined by the specified predicate, and returns the zero-based index of first occurrence within the entire List<T>.
           /// @param startIndex The zero-based starting index of the search.
           /// @param count The number of elements in the section to search.
           /// @param match The Predicate pointer function that defines the conditions of the elements to search for.
@@ -493,7 +493,7 @@ namespace Switch {
             return -1;
           }
 
-          /// @brief Searches for an element that matches the conditions defined by the specified predicate, && returns the last occurrence within the entire List<T>.
+          /// @brief Searches for an element that matches the conditions defined by the specified predicate, and returns the last occurrence within the entire List<T>.
           /// @param match The Predicate pointer function that defines the conditions of the elements to search for.
           /// @return T The last element that matches the conditions defined by the specified predicate, if found; otherwise, the default value for type T.
           /// @exception ArgumentNullException The parameters match is null.
@@ -526,7 +526,7 @@ namespace Switch {
             return T();
           }
 
-          /// @brief Searches for an element that matches the conditions defined by the specified predicate, && returns the zero-based index of last occurrence within the entire List<T>.
+          /// @brief Searches for an element that matches the conditions defined by the specified predicate, and returns the zero-based index of last occurrence within the entire List<T>.
           /// @param match The Predicate pointer function that defines the conditions of the elements to search for.
           /// @return Int32 The first zero-based index of the last occurrence of an element that matches the conditions defined by match, if found; otherwise, -1.
           /// @exception ArgumentNullException The parameters match is null.
@@ -546,7 +546,7 @@ namespace Switch {
           /// @include ListFind.cpp
           int32 FindLastIndex(const Predicate<const T&>& match) const {return this->FindLastIndex(this->Count-1, this->Count, match);}
 
-          /// @brief Searches for an element that matches the conditions defined by the specified predicate, && returns the zero-based index of the last occurrence within the range of elements in the List<T> that extends from the first element to the specified index.
+          /// @brief Searches for an element that matches the conditions defined by the specified predicate, and returns the zero-based index of the last occurrence within the range of elements in the List<T> that extends from the first element to the specified index.
           /// @param startIndex The zero-based starting index of the search.
           /// @param match The Predicate pointer function that defines the conditions of the elements to search for.
           /// @return Int32 The first zero-based index of the last occurrence of an element that matches the conditions defined by match, if found; otherwise, -1.
@@ -567,7 +567,7 @@ namespace Switch {
           /// @include ListFind.cpp
           int32 FindLastIndex(int32 startIndex, const Predicate<const T&>& match) const {return this->FindLastIndex(startIndex, startIndex+1, match);}
 
-          /// @brief Searches for an element that matches the conditions defined by the specified predicate, && returns the zero-based index of the last occurrence within the range of elements in the List<T> that contains the specified number of elements && ends at the specified index.
+          /// @brief Searches for an element that matches the conditions defined by the specified predicate, and returns the zero-based index of the last occurrence within the range of elements in the List<T> that contains the specified number of elements && ends at the specified index.
           /// @param startIndex The zero-based starting index of the search.
           /// @param count The number of elements in the section to search.
           /// @param match The Predicate pointer function that defines the conditions of the elements to search for.
@@ -652,8 +652,8 @@ namespace Switch {
           /// @return A shallow copy of a range of elements in the source List<T>.
           /// @exception ArgumentOutOfRangeException index is less than 0. -||- count is less than 0.
           /// @exception ArgumentException index && count do ! denote a valid range of elements in the List<T>.
-          /// @remarks A shallow copy of a collection of reference types, || a subset of that collection, contains only the references to the elements of the collection. The objects themselves are ! copied. The references in the new list point to the same objects as the references in the original list.
-          /// @remarks A shallow copy of a collection of value types, || a subset of that collection, contains the elements of the collection. However, if the elements of the collection contain references to other objects, those objects are ! copied. The references in the elements of the new collection point to the same objects as the references in the elements of the original collection.
+          /// @remarks A shallow copy of a collection of reference types, or a subset of that collection, contains only the references to the elements of the collection. The objects themselves are ! copied. The references in the new list point to the same objects as the references in the original list.
+          /// @remarks A shallow copy of a collection of value types, or a subset of that collection, contains the elements of the collection. However, if the elements of the collection contain references to other objects, those objects are ! copied. The references in the elements of the new collection point to the same objects as the references in the elements of the original collection.
           /// @remarks In contrast, a deep copy of a collection copies the elements && everything directly || indirectly referenced by the elements.
           /// @remarks This method is an O(n) operation, where n is count.
           /// @par Examples
@@ -800,11 +800,11 @@ namespace Switch {
           /// @param match The Predicate<T> delegate that defines the conditions of the elements to remove.
           /// @return The number of elements removed from the List<T> .
           /// @exception ArgumentNullException match is null
-          /// @remarks The Predicate<T> is a delegate to a method that returns true if the object passed to it matches the conditions defined in the delegate. The elements of the current List<T> are individually passed to the Predicate<T> delegate, && the elements that match the conditions are removed from the List<T>.
+          /// @remarks The Predicate<T> is a delegate to a method that returns true if the object passed to it matches the conditions defined in the delegate. The elements of the current List<T> are individually passed to the Predicate<T> delegate, and the elements that match the conditions are removed from the List<T>.
           /// @remarks This method performs a linear search; therefore, this method is an O(n) operation, where n is Count.
           /// @remarks The following code example demonstrates the RemoveAll method && several other methods that use the Predicate<T> generic delegate.
           /// @remarks A List<T> of strings is created, containing 8 dinosaur names, two of which (at positions 1 && 5) end with "saurus". The code example also defines a search predicate method named EndsWithSaurus, which accepts a string parameter && returns a Boolean value indicating whether the input string ends in "saurus".
-          /// @remarks The Find, FindLast, && FindAll methods are used to search the list with the search predicate method.
+          /// @remarks The Find, FindLast, and FindAll methods are used to search the list with the search predicate method.
           /// @par Examples
           /// The RemoveAll method is used to remove all entries ending with "saurus". It traverses the list from the beginning, passing each element in turn to the EndsWithSaurus method. The element is removed if the EndsWithSaurus method returns true.
           /// @include ListExists.cpp
@@ -859,7 +859,7 @@ namespace Switch {
           /// @remarks This method uses Array.Reverse to reverse the order of the elements, such that the element at List<T>[i], where i is any index within the range, moves to List<T>[j], where j equals index plus index plus count minus i minus 1.
           /// @remarks This method is an O(n) operation, where n is Count.
           /// @par Examples
-          /// The following code example demonstrates both overloads of the Reverse method. The code example creates a List<T> of strings && adds six strings. The Reverse() method overload is used to reverse the list, && then the Reverse(Int32, Int32) method overload is used to reverse the middle of the list, beginning with element 1 && encompassing four elements.
+          /// The following code example demonstrates both overloads of the Reverse method. The code example creates a List<T> of strings && adds six strings. The Reverse() method overload is used to reverse the list, and then the Reverse(Int32, Int32) method overload is used to reverse the middle of the list, beginning with element 1 && encompassing four elements.
           /// @include ListReverse.cpp
           void Reverse() {
             this->operationNumber++;
@@ -874,7 +874,7 @@ namespace Switch {
           /// @remarks This method uses Array.Reverse to reverse the order of the elements, such that the element at List<T>[i], where i is any index within the range, moves to List<T>[j], where j equals index plus index plus count minus i minus 1.
           /// @remarks This method is an O(n) operation, where n is Count.
           /// @par Examples
-          /// The following code example demonstrates both overloads of the Reverse method. The code example creates a List<T> of strings && adds six strings. The Reverse() method overload is used to reverse the list, && then the Reverse(Int32, Int32) method overload is used to reverse the middle of the list, beginning with element 1 && encompassing four elements.
+          /// The following code example demonstrates both overloads of the Reverse method. The code example creates a List<T> of strings && adds six strings. The Reverse() method overload is used to reverse the list, and then the Reverse(Int32, Int32) method overload is used to reverse the middle of the list, beginning with element 1 && encompassing four elements.
           /// @include ListReverse.cpp
           void Reverse(int32 index, int32 count) {
             if (index < 0 || count < 0)
@@ -896,9 +896,9 @@ namespace Switch {
           /// @remarks This method uses the default comparer Comparer<T>.Default for type T to determine the order of list elements. The Comparer<T>.Default property checks whether type T implements the IComparable<T> generic interface && uses that implementation, if available. If !, Comparer<T>.Default checks whether type T implements the IComparable interface. If type T does ! implement either interface, Comparer<T>.Default throws an InvalidOperationException.
           /// @remarks This method uses Array.Sort, which uses the QuickSort algorithm. This implementation performs an unstable sort; that is, if two elements are equal, their order might ! be preserved. In contrast, a stable sort preserves the order of elements that are equal.
           /// @remarks On average, this method is an O(n log n) operation, where n is Count; in the worst case it is an O(n ^ 2) operation.
-          /// @remarks The following code example demonstrates the Sort() method overload && the BinarySearch(T) method overload. A List<T> of strings is created && populated with four strings, in no particular order. The list is displayed, sorted, && displayed again.
+          /// @remarks The following code example demonstrates the Sort() method overload && the BinarySearch(T) method overload. A List<T> of strings is created && populated with four strings, in no particular order. The list is displayed, sorted, and displayed again.
           /// @par Examples
-          /// The BinarySearch(T) method overload is then used to search for two strings that are ! in the list, && the Insert method is used to insert them. The return value of the BinarySearch(T) method is negative in each case, because the strings are ! in the list. Taking the bitwise complement of this negative number produces the index of the first element in the list that is larger than the search string, && inserting at this location preserves the sort order. The second search string is larger than any element in the list, so the insertion position is at the end of the list.
+          /// The BinarySearch(T) method overload is then used to search for two strings that are ! in the list, and the Insert method is used to insert them. The return value of the BinarySearch(T) method is negative in each case, because the strings are ! in the list. Taking the bitwise complement of this negative number produces the index of the first element in the list that is larger than the search string, and inserting at this location preserves the sort order. The second search string is larger than any element in the list, so the insertion position is at the end of the list.
           /// @include ListBinarySearch.cpp
           void Sort() {this->Sort(System::Collections::Generic::Comparer<T>::Default());}
 
@@ -908,8 +908,8 @@ namespace Switch {
           }
 
           /// @brief Sorts the elements in the entire List<T> using the specified comparer.
-          /// @param comparer The IComparer<T> implementation to use when comparing elements, || null to use the default comparer Comparer<T>::Default.
-          /// @exception InvalidOperationException comparer is null, && the default comparer Comparer<T>.Default cannot find implementation of the IComparable<T> generic interface || the IComparable interface for type T.
+          /// @param comparer The IComparer<T> implementation to use when comparing elements, or null to use the default comparer Comparer<T>::Default.
+          /// @exception InvalidOperationException comparer is null, and the default comparer Comparer<T>.Default cannot find implementation of the IComparable<T> generic interface || the IComparable interface for type T.
           /// @remarks If comparer is provided, the elements of the List<T> are sorted using the specified IComparer<T> implementation.
           /// @remarks If comparer is null, an exception ArgumentNullException is thrown;
           /// @remarks This method uses Array.Sort, which uses the QuickSort algorithm. This implementation performs an unstable sort; that is, if two elements are equal, their order might ! be preserved. In contrast, a stable sort preserves the order of elements that are equal.
@@ -942,7 +942,7 @@ namespace Switch {
           /// @param match The Predicate pointer function that defines the conditions of the elements to search for.
           /// @return Boolean true if the List<T> contains one || more elements that match the conditions defined by the specified predicate; otherwise, false.
           /// @exception ArgumentNullException The parameters match is null.
-          /// @remarks The Predicate is a pointer to a method that returns true if the object passed to it matches the conditions defined in the pointer function. The elements of the current List<T> are individually passed to the Predicate pointer function, && processing is stopped when a match is found.
+          /// @remarks The Predicate is a pointer to a method that returns true if the object passed to it matches the conditions defined in the pointer function. The elements of the current List<T> are individually passed to the Predicate pointer function, and processing is stopped when a match is found.
           /// @remarks This method is an O(n) operation, where n is Count.
           bool TrueForAll(const Predicate<const T&>& match) {
             for (const T& elem : *this)

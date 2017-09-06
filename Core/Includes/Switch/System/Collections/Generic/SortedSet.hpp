@@ -31,7 +31,7 @@ namespace Switch {
         /// @brief Represents a collection of objects that is maintained in sorted order.
         /// @remarks A SortedSet<T> object maintains a sorted order without affecting performance as elements are inserted && deleted. Duplicate elements are ! allowed. Changing the sort values of existing items is ! supported && may lead to unexpected behavior.
         /// @par Examples
-        /// The following example demonstrates how to merge two disparate sets. This example creates two SortedSet<T> objects, && populates them with even && odd numbers, respectively. A third SortedSet<T> object is created from the set that contains the even numbers. The example then calls the UnionWith method, which adds the odd number set to the third set.
+        /// The following example demonstrates how to merge two disparate sets. This example creates two SortedSet<T> objects, and populates them with even && odd numbers, respectively. A third SortedSet<T> object is created from the set that contains the even numbers. The example then calls the UnionWith method, which adds the odd number set to the third set.
         /// @include SortedSet.cpp
         template<typename T, typename TAllocator=Allocator<T>>
         class SortedSet : public Object, public System::Linq::Extension::Enumerable<SortedSet<T, TAllocator>, T>, public ISet<T> {

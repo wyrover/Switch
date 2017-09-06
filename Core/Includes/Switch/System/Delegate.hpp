@@ -184,7 +184,7 @@ namespace Switch {
       
       /// @brief Concatenates the invocation lists of an array of delegates.
       /// @param delagates The array of delegates to combine.
-      /// @return Delegte A new delegate with an invocation list that concatenates the invocation lists of the delegates in the delegates array. Returns null if delegates is null, if delegates contains zero elements, || if every entry in delegates is null.
+      /// @return Delegte A new delegate with an invocation list that concatenates the invocation lists of the delegates in the delegates array. Returns null if delegates is null, if delegates contains zero elements, or if every entry in delegates is null.
       /// @remarks If the delegates array contains entries that are null, those entries are ignored.
       /// @remarks The invocation list can contain duplicate entries; that is, entries that refer to the same method on the same object.
       static Delegate Combine(const System::Array<Delegate>& delegates) {
@@ -229,7 +229,7 @@ namespace Switch {
       /// @brief Removes all occurrences of the invocation list of a delegate from the invocation list of another delegate.
       /// @param source The delegate from which to remove the invocation list of value.
       /// @param value The delegate that supplies the invocation list to remove from the invocation list of source.
-      /// @return Delegate A new delegate with an invocation list formed by taking the invocation list of source && removing all occurrences of the invocation list of value, if the invocation list of value is found within the invocation list of source. Returns source if value is null || if the invocation list of value is ! found within the invocation list of source. Returns a null reference if the invocation list of value is equal to the invocation list of source, if source contains only a series of invocation lists that are equal to the invocation list of value, || if source is a null reference.
+      /// @return Delegate A new delegate with an invocation list formed by taking the invocation list of source && removing all occurrences of the invocation list of value, if the invocation list of value is found within the invocation list of source. Returns source if value is null || if the invocation list of value is ! found within the invocation list of source. Returns a null reference if the invocation list of value is equal to the invocation list of source, if source contains only a series of invocation lists that are equal to the invocation list of value, or if source is a null reference.
       /// @remarks If the invocation list of value matches a contiguous set of elements in the invocation list of source, then the invocation list of value is said to occur within the invocation list of source. If the invocation list of value occurs more than once in the invocation list of source, all occurrences are removed.
       static Delegate RemoveAll(const Delegate& source, const Delegate& value) {
         Delegate result = source;
