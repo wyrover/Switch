@@ -6,7 +6,7 @@
 #include <Switch/System/Environment.hpp>
 #include "ConstraintValue.hpp"
 
-/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+/// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
   /// @brief The TUnit namespace contains a unit test framework.
   /// @par Examples

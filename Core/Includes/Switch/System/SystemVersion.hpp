@@ -5,7 +5,7 @@
 #include "Version.hpp"
 #include "Collections/Generic/SortedDictionary.hpp"
 
-/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+/// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
   namespace System {
     namespace Reflexion {

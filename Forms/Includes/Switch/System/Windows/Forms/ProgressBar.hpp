@@ -6,7 +6,7 @@
 #include "Control.hpp"
 #include "ProgressBarStyle.hpp"
 
-/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+/// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
   /// @brief The Switch::System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {

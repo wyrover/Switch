@@ -4,7 +4,7 @@
 
 #include "Async.hpp"
 
-/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+/// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
   /// @brief The await object is applied to a task in an asynchronous method to suspend the execution of the method until the awaited task completes.
   /// @par Examples

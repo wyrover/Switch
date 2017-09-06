@@ -4,7 +4,7 @@
 
 #include "System/Threading/Tasks/Task.hpp"
 
-/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+/// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
   /// @brief Represent an asynchronous task
   /// @par Examples

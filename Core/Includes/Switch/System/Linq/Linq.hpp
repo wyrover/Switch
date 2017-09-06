@@ -9,7 +9,7 @@
 
 extern System::Threading::ThreadLocal<any> __enumerable__;
 
-/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+/// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
   /// @cond
   enum __order__ {

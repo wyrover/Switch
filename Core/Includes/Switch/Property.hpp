@@ -5,22 +5,47 @@
 //#include <functional>
 #include "__opaque_function_pointer__.hpp"
 
+/// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
+  /// @brief ReadOnly class represent a Property read only attribute.
   class ReadOnly {
   public:
+    /// @brief Get information about read
+    /// @return true if can read; otherwise false
+    /// @remarks Property<T, ReadOnly> return always true.
     static constexpr bool CanRead = true;
+
+    /// @brief Get information about read
+    /// @return true if can write; otherwise false
+    /// @remarks Property<T, ReadOnly> return always false.
     static constexpr bool CanWrite = false;
   };
   
+  /// @brief WriteOnly class represent a Property write only attribute.
   class WriteOnly {
   public:
+    /// @brief Get information about read
+    /// @return true if can read; otherwise false
+    /// @remarks Property<T, WriteOnly> return always false.
     static constexpr bool CanRead = false;
+    
+    /// @brief Get information about read
+    /// @return true if can write; otherwise false
+    /// @remarks Property<T, WriteOnly> return always true.
     static constexpr bool CanWrite = true;
   };
 
+  /// @brief ReadWrite class represent a Property read write attribute.
   class ReadWrite {
   public:
+    /// @brief Get information about read
+    /// @return true if can read; otherwise false
+    /// @remarks Property<T, ReadWrite> return always true.
     static constexpr bool CanRead = true;
+    
+    /// @brief Get information about read
+    /// @return true if can write; otherwise false
+    /// @remarks Property<T, ReadWrite> return always true.
     static constexpr bool CanWrite = true;
   };
 
@@ -43,9 +68,21 @@ namespace Switch {
     using Setter = __opaque_function_pointer__<void, T>;
     
   public:
+    /// @brief Initialize Property with getter and setter specified.
+    /// @param getter Getter method called when get value.
+    /// @param setter Setter method called when set value.
+    /// This sample shows a Person class that has two properties: Name (string) and Age (int). Both properties are read/write.
+    /// @include Properties.cpp
     Property(const Getter& getter, const Setter& setter) : getter(getter), setter(setter) {}
-    
+
+    /// @brief Get value method
+    /// @return value getted by getter method
+    /// @remarks call getter specified at creation.
     T Get() const {return this->getter();}
+
+    /// @brief Get value operator
+    /// @return value getted by getter method
+    /// @remarks call getter specified at creation.
     T operator ()() const {return this->getter();}
     
     /// @cond
@@ -55,7 +92,14 @@ namespace Switch {
     bool operator !=(T value) const {return this->getter() != value;}
     /// @endcond
     
+    /// @brief Set value method
+    /// @param value setted by setter method
+    /// @remarks call setter specified at creation.
     T Set(T value) {this->setter(value); return this->getter();}
+
+    /// @brief Set value operator
+    /// @param value setted by setter method
+    /// @remarks call setter specified at creation.
     T operator ()(T value) {this->setter(value); return this->getter();}
 
     /// @cond

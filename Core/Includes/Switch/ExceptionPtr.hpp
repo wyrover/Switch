@@ -84,7 +84,7 @@
 #include "System/Threading/WaitHandleCannotBeOpenedException.hpp"
 #include "System/Runtime/Serialization/SerializationException.hpp"
 
-/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+/// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
   /// @brief Smart pointer type that can refer to exception objects.
   /// @remarks It is a shared pointer-like type: The pointed exception is guaranteed to remain valid for as long as at least one exception_ptr points to it, potentially extending its lifetime beyond the scope of a catch statement or across threads.

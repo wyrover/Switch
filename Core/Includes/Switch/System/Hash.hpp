@@ -8,7 +8,7 @@
 #include "../Types.hpp"
 #include "../RefPtr.hpp"
 
-/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+/// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
   /// @brief Generate a hash code for generic type T.
   /// @param[in] value For which the hashcode is generated.

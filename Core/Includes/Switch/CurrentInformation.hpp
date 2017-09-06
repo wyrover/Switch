@@ -6,7 +6,7 @@
 #include "System/Object.hpp"
 #include "System/_String.hpp"
 
-/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+/// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
   /// @brief Current information class is used to store current file, current line and current function information.
   /// @par Examples

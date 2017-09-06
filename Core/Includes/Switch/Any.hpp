@@ -23,7 +23,7 @@
 #include "System/UInt32.hpp"
 #include "System/UInt64.hpp"
 
-/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+/// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
   /// @brief Represent a polymorphic wrapper capable of holding any type.
   /// @par Examples

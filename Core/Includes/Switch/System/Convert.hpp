@@ -26,7 +26,7 @@
 #include "UInt32.hpp"
 #include "UInt64.hpp"
 
-/// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
+/// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
   /// @cond
   class Any;
