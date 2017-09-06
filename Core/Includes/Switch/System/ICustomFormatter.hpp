@@ -7,14 +7,18 @@
 #include "Object.hpp"
 #include "String.hpp"
 
+/// @cond
+namespace Switch {
+  namespace System {
+    class IFormatProvider;
+  }
+}
+/// @endcond
+
 /// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
-    /// @cond
-    class IFormatProvider;
-    /// @endcond
-
     /// @interface ICustomFormatter
     /// @brief Defines a method that supports custom, user-defined formatting of the value of an object.
     class _public ICustomFormatter _interface {

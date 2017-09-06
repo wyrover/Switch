@@ -6,14 +6,18 @@
 #include "Object.hpp"
 #include "Type.hpp"
 
+/// @cond
+namespace Switch {
+  namespace System {
+    class Type;
+  }
+}
+/// @endcond
+
 /// @brief The Switch library contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
-    /// @cond
-    class Type;
-    /// @endcond
-
     /// @interface IFormatProvider
     /// @brief Provides a mechanism for retrieving an object to control formatting.
     class _public IFormatProvider _interface {
