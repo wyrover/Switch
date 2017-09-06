@@ -1,5 +1,5 @@
 @echo off
-echo Install Switch libraries version 0.3.1, copyright GAMMA Soft, 2017
+echo Install Switch libraries version 0.3.2, copyright GAMMA Soft, 2017
 echo.
 
 if "%1" == "" (

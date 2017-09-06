@@ -148,7 +148,7 @@ target_link_libraries(HelloWorldTest Switch.TUnit.Main)
 
 For more Examples see [Examples](Examples)
 
-# Download Switch 0.3.0
+# Download Switch 0.3.1
 You can download latest stable version on SourceForge
 
 [![Download Portable C++ Framework](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/switchpro/files/latest/download)

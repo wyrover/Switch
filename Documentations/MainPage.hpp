@@ -145,7 +145,7 @@
 ///
 /// For more Examples see https://github.com/gammasoft71/Switch/tree/master/Examples
 ///
-/// @section DownloadSection Download Switch 0.3.0
+/// @section DownloadSection Download Switch 0.3.1
 ///
 /// You can download latest stable version on SourceForge
 ///
