@@ -3,7 +3,7 @@ ________________________________________________________________________________
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) 
 [![Build Status](https://travis-ci.org/yfiumefreddo/Pcf.svg)](https://travis-ci.org/yfiumefreddo/Pcf) 
-[![Download Portable C++ Framework](https://sourceforge.net/sflogo.php?type=8&group_id=2794431)](https://sourceforge.net/p/pcfpro/)
+[![Download Portable C++ Framework](https://sourceforge.net/sflogo.php?type=8&group_id=2794431)](https://sourceforge.net/p/switchpro/)
 ______________________________________________________________________________________________________________
 
 # The Switch framework are...
@@ -148,10 +148,10 @@ target_link_libraries(HelloWorldTest Switch.TUnit.Main)
 
 For more Examples see [Examples](Examples)
 
-# Download Switch 0.2.1
+# Download Switch 0.3.0
 You can download latest stable version on SourceForge
 
-[![Download Portable C++ Framework](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/pcfpro/files/latest/download)
+[![Download Portable C++ Framework](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/switchpro/files/latest/download)
 
 # Install
 Before running examples you must install Switch. To install it read See [Install.md](Install.md) file.
