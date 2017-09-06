@@ -436,90 +436,6 @@ namespace {
       Assert::IsFalse(is<Int32>(o), _current_information);
     }
     
-    void UpStringIsString() {
-      UniquePtr<string> s = MakeUnique<String>("Test");
-      Assert::IsTrue(is<string>(s), _current_information);
-    }
-    
-    void UpStringIsObject() {
-      UniquePtr<string> s = MakeUnique<String>("Test");
-      Assert::IsTrue(is<object>(s), _current_information);
-    }
-    
-    void UpStringIsIComparable() {
-      UniquePtr<string> s = MakeUnique<String>("Test");
-      Assert::IsTrue(is<IComparable>(s), _current_information);
-    }
-    
-    void UpStringIsInt32() {
-      UniquePtr<string> s = MakeUnique<String>("Test");
-      Assert::IsFalse(is<Int32>(s), _current_information);
-    }
-    
-    void UpObjectFromUpStringIsString() {
-      UniquePtr<object> o = MakeUnique<string>("Test");
-      Assert::IsTrue(is<string>(o), _current_information);
-    }
-    
-    void UpObjectFromUpStringIsObject() {
-      UniquePtr<object> o = MakeUnique<string>("Test");
-      Assert::IsTrue(is<object>(o), _current_information);
-    }
-    
-    void UpObjectFormUpStringIsIComparable() {
-      UniquePtr<object> o = MakeUnique<string>("Test");
-      Assert::IsTrue(is<IComparable>(o), _current_information);
-    }
-    
-    void UpObjectFormUpStringIsInt32() {
-      UniquePtr<object> o = MakeUnique<string>("Test");
-      Assert::IsFalse(is<Int32>(o), _current_information);
-    }
-    
-    void UpStringNullIsString() {
-      UniquePtr<string> s = UniquePtr<string>::Null();
-      Assert::IsFalse(is<string>(s), _current_information);
-    }
-    
-    void UpStringNullIsObject() {
-      UniquePtr<string> s = UniquePtr<string>::Null();
-      Assert::IsFalse(is<object>(s), _current_information);
-    }
-    
-    void UpStringNullIsIComparable() {
-      UniquePtr<string> s = UniquePtr<string>::Null();
-      Assert::IsFalse(is<IComparable>(s), _current_information);
-    }
-    
-    void UpStringNullIsInt32() {
-      UniquePtr<string> s = UniquePtr<string>::Null();
-      Assert::IsFalse(is<Int32>(s), _current_information);
-    }
-    
-    void UpObjectFromUpStringNullIsString() {
-      UniquePtr<string> s = UniquePtr<string>::Null();
-      UniquePtr<object> o = as<object>(s);
-      Assert::IsFalse(is<string>(o), _current_information);
-    }
-    
-    void UpObjectFromUpStringNullIsObject() {
-      UniquePtr<string> s = UniquePtr<string>::Null();
-      UniquePtr<object> o = as<object>(s);
-      Assert::IsFalse(is<object>(o), _current_information);
-    }
-    
-    void UpObjectFormUpStringNullIsIComparable() {
-      UniquePtr<string> s = UniquePtr<string>::Null();
-      UniquePtr<object> o = as<object>(s);
-      Assert::IsFalse(is<IComparable>(o), _current_information);
-    }
-    
-    void UpObjectFormUpStringNullIsInt32() {
-      UniquePtr<string> s = UniquePtr<string>::Null();
-      UniquePtr<object> o = as<object>(s);
-      Assert::IsFalse(is<Int32>(o), _current_information);
-    }
-    
     void RefStringIsString() {
       string str = "Test";
       ref<string> s = str;
@@ -777,22 +693,6 @@ namespace {
   _test(IsTest, ConstSpObjectFromConstSpStringNullIsObject)
   _test(IsTest, ConstSpObjectFormConstSpStringNullIsIComparable)
   _test(IsTest, ConstSpObjectFormConstSpStringNullIsInt32)
-  _test(IsTest, UpStringIsString)
-  _test(IsTest, UpStringIsObject)
-  _test(IsTest, UpStringIsIComparable)
-  _test(IsTest, UpStringIsInt32)
-  _test(IsTest, UpObjectFromUpStringIsString)
-  _test(IsTest, UpObjectFromUpStringIsObject)
-  _test(IsTest, UpObjectFormUpStringIsIComparable)
-  _test(IsTest, UpObjectFormUpStringIsInt32)
-  _test(IsTest, UpStringNullIsString)
-  _test(IsTest, UpStringNullIsObject)
-  _test(IsTest, UpStringNullIsIComparable)
-  _test(IsTest, UpStringNullIsInt32)
-  _test(IsTest, UpObjectFromUpStringNullIsString)
-  _test(IsTest, UpObjectFromUpStringNullIsObject)
-  _test(IsTest, UpObjectFormUpStringNullIsIComparable)
-  _test(IsTest, UpObjectFormUpStringNullIsInt32)
   _test(IsTest, RefStringIsString)
   _test(IsTest, RefStringIsObject)
   _test(IsTest, RefStringIsIComparable)

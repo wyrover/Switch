@@ -1230,63 +1230,6 @@ namespace Switch {
       /// @param pointer The pointer to check is null.
       /// @par Examples
       /// @code
-      /// refptr<string> s1 = ref_new<string>("A string");
-      /// refptr<string> s2;
-      /// Assert::IsNotNull(s1); // test ok
-      /// Assert::IsNotNull(s2); // test throws an AssertionException.
-      /// @endcode
-      template<typename TPointer>
-      static inline void IsNotNull(const UniquePtr<TPointer>& pointer) {IsNotNull(pointer, "", CurrentInformation());}
-      
-      /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
-      /// @param pointer The pointer to check is null.
-      /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      /// @par Examples
-      /// @code
-      /// refptr<string> s1 = ref_new<string>("A string");
-      /// refptr<string> s2;
-      /// Assert::IsNotNull(s1, "User message..."); // test ok
-      /// Assert::IsNotNull(s2, "User message..."); // test throws an AssertionException.
-      /// @endcode
-      template<typename TPointer>
-      static inline void IsNotNull(const UniquePtr<TPointer>& pointer, const string& message) {IsNotNull(pointer, message, CurrentInformation());}
-      
-      /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
-      /// @param pointer The pointer to check is null.
-      /// @param currentInformation Contains information about current file and current line.
-      /// @par Examples
-      /// @code
-      /// refptr<string> s1 = ref_new<string>("A string");
-      /// refptr<string> s2;
-      /// Assert::IsNotNull(s1, _current_information); // test ok
-      /// Assert::IsNotNull(s2, _current_information); // test throws an AssertionException.
-      /// @endcode
-      template<typename TPointer>
-      static inline void IsNotNull(const UniquePtr<TPointer>& pointer, const CurrentInformation& currentInformation) {IsNotNull(pointer, "", currentInformation);}
-      
-      /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
-      /// @param pointer The pointer to check is null.
-      /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      /// @param currentInformation Contains information about current file and current line.
-      /// @par Examples
-      /// @code
-      /// refptr<string> s1 = ref_new<string>("A string");
-      /// refptr<string> s2;
-      /// Assert::IsNotNull(s1, "User message...", _current_information); // test ok
-      /// Assert::IsNotNull(s2, "User message...", _current_information); // test throws an AssertionException.
-      /// @endcode
-      template<typename TPointer>
-      static inline void IsNotNull(const UniquePtr<TPointer>& pointer, const string& message, const CurrentInformation& currentInformation) {
-        if (pointer != null)
-          Succeed(message, currentInformation);
-        else
-          Fail(string::Format("Expected: not null{0}But was:  null", System::Environment::NewLine), message, currentInformation);
-      }
-      
-      /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
-      /// @param pointer The pointer to check is null.
-      /// @par Examples
-      /// @code
       /// refptr<string> s1(new string("A string"));
       /// refptr<string> s2;
       /// Assert::IsNotNull(s1); // test ok
@@ -1399,63 +1342,6 @@ namespace Switch {
       /// @endcode
       template<typename TPointer>
       static inline void IsNull(const TPointer* pointer, const string& message, const CurrentInformation& currentInformation) {
-        if (pointer == null)
-          Succeed(message, currentInformation);
-        else
-          Fail(string::Format("Expected: null{0}But was:  {1}", System::Environment::NewLine, ValueToString(*pointer)), message, currentInformation);
-      }
-      
-      /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
-      /// @param pointer The pointer to check is null.
-      /// @par Examples
-      /// @code
-      /// UniquePtr<string> s1;
-      /// UniquePtr<string> s2(new string("A string"));
-      /// Assert::IsNull(s1); // test ok
-      /// Assert::IsNull(s2); // test throws an AssertionException.
-      /// @endcode
-      template<typename TPointer>
-      static inline void IsNull(const UniquePtr<TPointer>& pointer) {IsNull(pointer, "", CurrentInformation());}
-      
-      /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
-      /// @param pointer The pointer to check is null.
-      /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      /// @par Examples
-      /// @code
-      /// UniquePtr<string> s1;
-      /// UniquePtr<string> s2(new string("A string"));
-      /// Assert::IsNull(s1, "User message..."); // test ok
-      /// Assert::IsNull(s2, "User message..."); // test throws an AssertionException.
-      /// @endcode
-      template<typename TPointer>
-      static inline void IsNull(const UniquePtr<TPointer>& pointer, const string& message) {IsNull(pointer, message, CurrentInformation());}
-      
-      /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
-      /// @param pointer The pointer to check is null.
-      /// @param currentInformation Contains information about current file and current line.
-      /// @par Examples
-      /// @code
-      /// UniquePtr<string> s1;
-      /// UniquePtr<string> s2(new string("A string"));
-      /// Assert::IsNull(s1, _current_information); // test ok
-      /// Assert::IsNull(s2, _current_information); // test throws an AssertionException.
-      /// @endcode
-      template<typename TPointer>
-      static inline void IsNull(const UniquePtr<TPointer>& pointer, const CurrentInformation& currentInformation) {IsNull(pointer, "", currentInformation);}
-      
-      /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
-      /// @param pointer The pointer to check is null.
-      /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      /// @param currentInformation Contains information about current file and current line.
-      /// @par Examples
-      /// @code
-      /// UniquePtr<string> s1;
-      /// UniquePtr<string> s2(new string("A string"));
-      /// Assert::IsNull(s1, "User message...", _current_information); // test ok
-      /// Assert::IsNull(s2, "User message...", _current_information); // test throws an AssertionException.
-      /// @endcode
-      template<typename TPointer>
-      static inline void IsNull(const UniquePtr<TPointer>& pointer, const string& message, const CurrentInformation& currentInformation) {
         if (pointer == null)
           Succeed(message, currentInformation);
         else
@@ -1803,58 +1689,6 @@ namespace Switch {
       /// @param pointer The pointer to check is null.
       /// @par Examples
       /// @code
-      /// refptr<string> s1 = ref_new<string>("A string");
-      /// refptr<string> s2;
-      /// Assert::NotNull(s1); // test ok
-      /// Assert::NotNull(s2); // test throws an AssertionException.
-      /// @endcode
-      template<typename TPointer>
-      static inline void NotNull(const UniquePtr<TPointer>& pointer) {IsNotNull(pointer, "", CurrentInformation());}
-      
-      /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
-      /// @param pointer The pointer to check is null.
-      /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      /// @par Examples
-      /// @code
-      /// refptr<string> s1 = ref_new<string>("A string");
-      /// refptr<string> s2;
-      /// Assert::NotNull(s1, "User message..."); // test ok
-      /// Assert::NotNull(s2, "User message..."); // test throws an AssertionException.
-      /// @endcode
-      template<typename TPointer>
-      static inline void NotNull(const UniquePtr<TPointer>& pointer, const string& message) {IsNotNull(pointer, message, CurrentInformation());}
-      
-      /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
-      /// @param pointer The pointer to check is null.
-      /// @param currentInformation Contains information about current file and current line.
-      /// @par Examples
-      /// @code
-      /// refptr<string> s1 = ref_new<string>("A string");
-      /// refptr<string> s2;
-      /// Assert::NotNull(s1, _current_information); // test ok
-      /// Assert::NotNull(s2, _current_information); // test throws an AssertionException.
-      /// @endcode
-      template<typename TPointer>
-      static inline void NotNull(const UniquePtr<TPointer>& pointer, const CurrentInformation& currentInformation) {IsNotNull(pointer, "", currentInformation);}
-      
-      /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
-      /// @param pointer The pointer to check is null.
-      /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      /// @param currentInformation Contains information about current file and current line.
-      /// @par Examples
-      /// @code
-      /// refptr<string> s1 = ref_new<string>("A string");
-      /// refptr<string> s2;
-      /// Assert::NotNull(s1, "User message...", _current_information); // test ok
-      /// Assert::NotNull(s2, "User message...", _current_information); // test throws an AssertionException.
-      /// @endcode
-      template<typename TPointer>
-      static inline void NotNull(const UniquePtr<TPointer>& pointer, const string& message, const CurrentInformation& currentInformation) {IsNotNull(pointer, message, currentInformation);}
-      
-      /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
-      /// @param pointer The pointer to check is null.
-      /// @par Examples
-      /// @code
       /// refptr<string> s1(new string("A string"));
       /// refptr<string> s2;
       /// Assert::IsNotNull(s1); // test ok
@@ -1962,59 +1796,7 @@ namespace Switch {
       /// @endcode
       template<typename TPointer>
       static inline void Null(const TPointer* pointer, const string& message, const CurrentInformation& currentInformation) {IsNull(pointer, message, currentInformation);}
-      
-      /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
-      /// @param pointer The pointer to check is null.
-      /// @par Examples
-      /// @code
-      /// UniquePtr<string> s1;
-      /// UniquePtr<string> s2(new string("A string"));
-      /// Assert::Null(s1); // test ok
-      /// Assert::Null(s2); // test throws an AssertionException.
-      /// @endcode
-      template<typename TPointer>
-      static inline void Null(const UniquePtr<TPointer>& pointer) {IsNull(pointer, "", CurrentInformation());}
-      
-      /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
-      /// @param pointer The pointer to check is null.
-      /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      /// @par Examples
-      /// @code
-      /// UniquePtr<string> s1;
-      /// UniquePtr<string> s2(new string("A string"));
-      /// Assert::Null(s1, "User message..."); // test ok
-      /// Assert::Null(s2, "User message..."); // test throws an AssertionException.
-      /// @endcode
-      template<typename TPointer>
-      static inline void Null(const UniquePtr<TPointer>& pointer, const string& message) {IsNull(pointer, message, CurrentInformation());}
-      
-      /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
-      /// @param pointer The pointer to check is null.
-      /// @param currentInformation Contains information about current file and current line.
-      /// @par Examples
-      /// @code
-      /// UniquePtr<string> s1;
-      /// UniquePtr<string> s2(new string("A string"));
-      /// Assert::Null(s1, _current_information); // test ok
-      /// Assert::Null(s2, _current_information); // test throws an AssertionException.
-      /// @endcode
-      template<typename TPointer>
-      static inline void Null(const UniquePtr<TPointer>& pointer, const CurrentInformation& currentInformation) {IsNull(pointer, "", currentInformation);}
-      
-      /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
-      /// @param pointer The pointer to check is null.
-      /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      /// @param currentInformation Contains information about current file and current line.
-      /// @par Examples
-      /// @code
-      /// UniquePtr<string> s1;
-      /// UniquePtr<string> s2(new string("A string"));
-      /// Assert::Null(s1, "User message...", _current_information); // test ok
-      /// Assert::Null(s2, "User message...", _current_information); // test throws an AssertionException.
-      /// @endcode
-      template<typename TPointer>
-      static inline void Null(const UniquePtr<TPointer>& pointer, const string& message, const CurrentInformation& currentInformation) {IsNull(pointer, message, currentInformation);}
-      
+            
       /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
       /// @par Examples

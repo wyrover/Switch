@@ -4,7 +4,6 @@
 
 #include "Ref.hpp"
 #include "RefPtr.hpp"
-#include "UniquePtr.hpp"
 #include "Types.hpp"
 
 namespace Switch {
@@ -57,19 +56,6 @@ namespace Switch {
   /// @ingroup Switch
   template<typename TT, typename T>
   bool is(refptr<T>& value) {
-    return value.template Is<TT>();
-  }
-  
-  /// @brief Return true if specified value is the specified Type. A Is expression takes the following form:
-  /// @par Examples
-  /// @code
-  /// System::Int32 i = 0;
-  /// bool isInt32 = is<System::Int32>(i);
-  /// @endcode
-  /// @see Switch::System::Type
-  /// @ingroup Switch
-  template<typename TT, typename T>
-  bool is(UniquePtr<T>& value) {
     return value.template Is<TT>();
   }
 

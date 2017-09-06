@@ -115,7 +115,6 @@ set(SOURCE_FILES
   Switch/SharedPointerUT.cpp
   Switch/TestTest.cpp
   Switch/UnboxingTest.cpp
-  Switch/UniquePointerUT.cpp
   CMakeLists.txt
 )
 

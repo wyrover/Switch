@@ -8,7 +8,6 @@
 #include <sstream>
 
 #include "Types.hpp"
-#include "UniquePtr.hpp"
 
 /// @cond
 namespace Switch {
@@ -77,9 +76,6 @@ namespace Switch {
     /// @remarks The obj pointer must be create by operator new. If obj is a pointer on the stack, a error will occured at used.
     RefPtr(T* obj) { Reset(obj); }
 
-    template<typename TT>
-    RefPtr(UniquePtr<TT> up) { Reset(up.template As<T>().Release()); }
-    
     /// @brief Delete the current object. Set the current object to null.
     /// @remarks UseCount is decremented. If alias count equal 0 the object T is deleted.
     void Delete() { Reset(); }
@@ -435,12 +431,6 @@ namespace Switch {
     
     RefPtr<T>& operator=(T* obj) {
       Reset(obj);
-      return *this;
-    }
-    
-    template<typename TT>
-    RefPtr<T>& operator=(UniquePtr<TT> up)  {
-      Reset(up.template As<T>().Release());
       return *this;
     }
     

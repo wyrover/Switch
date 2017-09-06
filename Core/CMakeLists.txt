@@ -393,12 +393,10 @@ set(INCLUDE_FILES
   Includes/Switch/Public.hpp
   Includes/Switch/Ref.hpp
   Includes/Switch/RefPtr.hpp
-  Includes/Switch/SharedPtr.hpp
   Includes/Switch/Startup.hpp
   Includes/Switch/Static.hpp
   Includes/Switch/Types.hpp
   Includes/Switch/Undef.hpp
-  Includes/Switch/UniquePtr.hpp
   Includes/Switch/Unused.hpp
   Includes/Switch/Using.hpp
   Includes/Switch/Var.hpp

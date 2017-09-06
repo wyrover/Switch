@@ -536,111 +536,7 @@ namespace SwitchUnitTests {
       const refptr<Int32> r = as<Int32>(o);
       Assert::IsTrue(r.IsNull(), _current_information);
     }
-    
-    void UpStringAsString() {
-      UniquePtr<string> s = MakeUnique<string>("Test");
-      UniquePtr<string> r = as<string>(s);
-      Assert::AreEqual("Test", r->ToString(), _current_information);
-    }
-    
-    void UpStringAsObject() {
-      UniquePtr<string> s = MakeUnique<string>("Test");
-      UniquePtr<object> r = as<object>(s);
-      Assert::AreEqual("Test", r->ToString(), _current_information);
-    }
-    
-    void UpStringAsIComparable() {
-      UniquePtr<string> s = MakeUnique<string>("Test");
-      UniquePtr<IComparable> r = as<IComparable>(s);
-      Assert::AreEqual("Test", as<object>(r)->ToString(), _current_information);
-    }
-    
-    void UpStringAsInt32() {
-      UniquePtr<string> s = MakeUnique<string>("Test");
-      UniquePtr<Int32> r = as<Int32>(s);
-      Assert::IsTrue(r.IsNull(), _current_information);
-    }
-    
-    void UpObjectFromStringAsString() {
-      UniquePtr<string> s = MakeUnique<string>("Test");
-      UniquePtr<object> o = as<object>(s);
-      UniquePtr<string> r = as<string>(o);
-      Assert::AreEqual("Test", r->ToString(), _current_information);
-    }
-    
-    void UpObjectFromStringAsObject() {
-      UniquePtr<string> s = MakeUnique<string>("Test");
-      UniquePtr<object> o = as<object>(s);
-      UniquePtr<object> r = as<object>(o);
-      Assert::AreEqual("Test", r->ToString(), _current_information);
-    }
-    
-    void UpObjectFromStringAsIComparable() {
-      UniquePtr<string> s = MakeUnique<string>("Test");
-      UniquePtr<object> o = as<object>(s);
-      UniquePtr<IComparable> r = as<IComparable>(o);
-      Assert::AreEqual("Test", as<object>(r)->ToString(), _current_information);
-    }
-    
-    void UpObjectFromStringAsInt32() {
-      UniquePtr<string> s = MakeUnique<string>("Test");
-      UniquePtr<object> o = as<object>(s);
-      UniquePtr<Int32> r = as<Int32>(o);
-      Assert::IsTrue(r.IsNull(), _current_information);
-    }
-    
-    void UpStringNullAsString() {
-      UniquePtr<string> s = UniquePtr<string>::Null();
-      UniquePtr<string> r = as<string>(s);
-      Assert::IsTrue(r.IsNull(), _current_information);
-    }
-    
-    void UpStringNullAsObject() {
-      UniquePtr<string> s = UniquePtr<string>::Null();
-      UniquePtr<object> r = as<object>(s);
-      Assert::IsTrue(r.IsNull(), _current_information);
-    }
-    
-    void UpStringNullAsIComparable() {
-      UniquePtr<string> s = UniquePtr<string>::Null();
-      UniquePtr<IComparable> r = as<IComparable>(s);
-      Assert::IsTrue(r.IsNull(), _current_information);
-    }
-    
-    void UpStringNullAsInt32() {
-      UniquePtr<string> s = UniquePtr<string>::Null();
-      UniquePtr<Int32> r = as<Int32>(s);
-      Assert::IsTrue(r.IsNull(), _current_information);
-    }
-    
-    void UpObjectFromStringNullAsString() {
-      UniquePtr<string> s = UniquePtr<string>::Null();
-      UniquePtr<object> o = as<object>(s);
-      UniquePtr<string> r = as<string>(o);
-      Assert::IsTrue(r.IsNull(), _current_information);
-    }
-    
-    void UpObjectFromStringNullAsObject() {
-      UniquePtr<string> s = UniquePtr<string>::Null();
-      UniquePtr<object> o = as<object>(s);
-      UniquePtr<object> r = as<object>(o);
-      Assert::IsTrue(r.IsNull(), _current_information);
-    }
-    
-    void UpObjectFromStringNullAsIComparable() {
-      UniquePtr<string> s = UniquePtr<string>::Null();
-      UniquePtr<object> o = as<object>(s);
-      UniquePtr<IComparable> r = as<IComparable>(o);
-      Assert::IsTrue(r.IsNull(), _current_information);
-    }
-    
-    void UpObjectFromStringNullAsInt32() {
-      UniquePtr<string> s = UniquePtr<string>::Null();
-      UniquePtr<object> o = as<object>(s);
-      UniquePtr<Int32> r = as<Int32>(o);
-      Assert::IsTrue(r.IsNull(), _current_information);
-    }
-    
+        
     void RefStringAsString() {
       string str = "Test";
       ref<string> s = str;
@@ -982,22 +878,6 @@ namespace SwitchUnitTests {
   _test(AsTest, ConstSpObjectFromStringNullAsObject)
   _test(AsTest, ConstSpObjectFromStringNullAsIComparable)
   _test(AsTest, ConstSpObjectFromStringNullAsInt32)
-  _test(AsTest, UpStringAsString)
-  _test(AsTest, UpStringAsObject)
-  _test(AsTest, UpStringAsIComparable)
-  _test(AsTest, UpStringAsInt32)
-  _test(AsTest, UpObjectFromStringAsString)
-  _test(AsTest, UpObjectFromStringAsObject)
-  _test(AsTest, UpObjectFromStringAsIComparable)
-  _test(AsTest, UpObjectFromStringAsInt32)
-  _test(AsTest, UpStringNullAsString)
-  _test(AsTest, UpStringNullAsObject)
-  _test(AsTest, UpStringNullAsIComparable)
-  _test(AsTest, UpStringNullAsInt32)
-  _test(AsTest, UpObjectFromStringNullAsString)
-  _test(AsTest, UpObjectFromStringNullAsObject)
-  _test(AsTest, UpObjectFromStringNullAsIComparable)
-  _test(AsTest, UpObjectFromStringNullAsInt32)
   _test(AsTest, RefStringAsString)
   _test(AsTest, RefStringAsObject)
   _test(AsTest, RefStringAsIComparable)

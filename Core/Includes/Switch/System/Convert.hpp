@@ -2372,9 +2372,6 @@ namespace Switch {
       static string ToString(refptr<T> value) { return value.ToString().c_str(); }
       
       template<typename T>
-      static string ToString(UniquePtr<T> value) { return value.ToString().c_str(); }
-      
-      template<typename T>
       static string ToString(ref<T> value) { return value.ToString().c_str(); }
       
       /// @brief Convert bool to string

@@ -4,7 +4,6 @@
 
 #include "Ref.hpp"
 #include "RefPtr.hpp"
-#include "UniquePtr.hpp"
 
 /// @cond
 void __throw_cast_exception__();
@@ -60,32 +59,6 @@ namespace Switch {
   /// @ingroup Switch
   template<typename TT, typename T>
   refptr<TT> as(refptr<T>& value) {
-    return value.template As<TT>();
-  }
-  
-  /// @brief Used to static cast a type into another type. A To expression takes the following form:
-  /// @par Examples
-  /// @code
-  /// refptr<string> str = new Switch::string("A new string");
-  /// refptr<System::IComparable> comparable = as<Switch::System::IComparable>(str);
-  /// @endcode
-  /// @exception ArgumentNullException The parameters is null.
-  /// @ingroup Switch
-  template<typename TT, typename T>
-  UniquePtr<TT> as(UniquePtr<T>& value) {
-    return value.template As<TT>();
-  }
-  
-  /// @brief Used to static cast a type into another type. A To expression takes the following form:
-  /// @par Examples
-  /// @code
-  /// refptr<string> str = new Switch::string("A new string");
-  /// refptr<System::IComparable> comparable = as<Switch::System::IComparable>(str);
-  /// @endcode
-  /// @exception ArgumentNullException The parameters is null.
-  /// @ingroup Switch
-  template<typename TT, typename T>
-  UniquePtr<TT> as(UniquePtr<T>&& value) {
     return value.template As<TT>();
   }
   
