@@ -1090,6 +1090,12 @@ namespace Switch {
     String operator +(const String& str, llong value);
     String operator +(const String& str, ullong value);
 
+    template<typename T, typename Attribute>
+    String operator +(const char str[], const Property<T, Attribute>& value) { return String(str) + value(); }
+
+    template<typename T, typename Attribute>
+    String operator +(const String& str, const Property<T, Attribute>& value) { return str + value(); }
+
     /// @endcond
   }
   
