@@ -572,7 +572,7 @@ source_group(Includes\\Switch\\System\\Runtime REGULAR_EXPRESSION "/Includes/Swi
 source_group(Includes\\Switch\\System\\Text REGULAR_EXPRESSION "/Includes/Switch/System/Text/[-_,A-Za-z0-9]+\\.hpp*")
 source_group(Includes\\Switch\\System\\Threading REGULAR_EXPRESSION "/Includes/Switch/System/Threading/[-_,A-Za-z0-9]+\\.hpp*")
 source_group(Includes\\Switch\\System\\Threading\\Tasks REGULAR_EXPRESSION "/Includes/Switch/System/Threading/Tasks/[-_,A-Za-z0-9]+\\.hpp*")
-source_group(Includes\\Switch\\System REGULAR_EXPRESSION "/Includes/Switch/System/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Switch\\System REGULAR_EXPRESSION "/Includes/Switch/System/[-_,A-Za-z0-9]+\\.h*")
 source_group(Includes\\Switch REGULAR_EXPRESSION "/Includes/Switch/[-_,A-Za-z0-9]+\\.hpp*")
 source_group(Includes\\Switch REGULAR_EXPRESSION "/Includes/Switch/[-_,A-Za-z0-9]")
 source_group(Includes REGULAR_EXPRESSION "/Includes/[-_,A-Za-z0-9]+\\.hpp*")
