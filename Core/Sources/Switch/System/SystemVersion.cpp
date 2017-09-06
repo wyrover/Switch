@@ -3,7 +3,7 @@
 System::Collections::Generic::SortedDictionary<string, System::Reflexion::Assembly> System::Reflexion::Assembly::assemblies;
 
 const System::Version& Switch::GetVersion() {
-  static System::Version version(0, 3, 0);
+  static System::Version version(0, 3, 1);
   return version;
 }
 
