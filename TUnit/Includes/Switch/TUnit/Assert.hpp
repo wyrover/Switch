@@ -16,7 +16,7 @@
 namespace Switch {
   /// @brief The TUnit namespace contains a unit test framework.
   /// @par Examples
-  /// This example how to use TestFixture class, Assert class and #_test method:
+  /// This example shows how to use TestFixture class, Assert class and #_test method:c
   /// @include Assert.cpp
   /// @par Examples
   /// This example how to use TestFixture class, Expect class and #_test method:

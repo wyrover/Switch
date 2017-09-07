@@ -18,8 +18,8 @@ namespace Switch {
   /// @include Expect.cpp
   namespace TUnit {
     /// @brief The base class that all unit tests inherit from.
-    /// This example how to use TestFixture class:
-    /// @include Assert.cpp
+    /// This example code shows how to use TestFixture class:
+    /// @include TestFixture.cpp
     class _public TestFixture : public testing::Test {
     protected:
       /// @cond
