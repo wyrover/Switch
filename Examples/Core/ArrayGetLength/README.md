@@ -5,7 +5,7 @@ This code example demonstrates methods to get the length of an array.
 ```
 Lengths of single dimension array
     Total length of the array = 5
-//
+
 Lengths of 3 dimension array
     Length of dimension(0) = 5
     Length of dimension(1) = 3
