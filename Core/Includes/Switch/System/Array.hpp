@@ -420,7 +420,7 @@ namespace Switch {
     /// The following code example demonstrates different methods to create an array.
     /// @include Array1.cpp
     /// @par Examples
-    /// The following code example creates && initializes an Array && displays its properties && its elements.
+    /// The following code example creates and initializes an Array and displays its properties and its elements.
     /// @include Array2.cpp
     template<typename T, int32 rank, typename TAllocator>
     class Array : public GenericArrayObject<T, TAllocator>, public ICloneable {
@@ -509,7 +509,7 @@ namespace Switch {
     /// The following code example demonstrates different methods to create an array.
     /// @include Array1.cpp
     /// @par Examples
-    /// The following code example creates && initializes an Array && displays its properties && its elements.
+    /// The following code example creates and initializes an Array and displays its properties and its elements.
     /// @include Array2.cpp
     template<typename T, typename TAllocator>
     class Array<T, 1, TAllocator> : public GenericArrayObject<T, TAllocator>, public ICloneable {
@@ -694,7 +694,7 @@ namespace Switch {
     /// The following code example demonstrates different methods to create an array.
     /// @include Array1.cpp
     /// @par Examples
-    /// The following code example creates && initializes an Array && displays its properties && its elements.
+    /// The following code example creates and initializes an Array and displays its properties and its elements.
     /// @include Array2.cpp
     template<typename T, typename TAllocator>
     class Array<T, 2, TAllocator> : public GenericArrayObject<T, TAllocator>, public ICloneable {
@@ -800,7 +800,7 @@ namespace Switch {
     /// The following code example demonstrates different methods to create an array.
     /// @include Array1.cpp
     /// @par Examples
-    /// The following code example creates && initializes an Array && displays its properties && its elements.
+    /// The following code example creates and initializes an Array and displays its properties and its elements.
     /// @include Array2.cpp
     template<typename T, typename TAllocator>
     class Array<T, 3, TAllocator> : public GenericArrayObject<T, TAllocator>, public ICloneable {
@@ -912,7 +912,7 @@ namespace Switch {
     /// The following code example demonstrates different methods to create an array.
     /// @include Array1.cpp
     /// @par Examples
-    /// The following code example creates && initializes an Array && displays its properties && its elements.
+    /// The following code example creates and initializes an Array and displays its properties and its elements.
     /// @include Array2.cpp
     template<>
     class Array<> _static {

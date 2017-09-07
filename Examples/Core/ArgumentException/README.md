@@ -1,4 +1,4 @@
-# Any
+# ArgumentException
 This example demonstrates how to throw and catch an ArgumentException.
 
 ## Output
