@@ -1142,6 +1142,13 @@ namespace Switch {
       template<typename TT, typename TValue>
       static inline void IsNotInstanceOfType(const TValue& value, const string& message, const CurrentInformation& currentInformation) {IsNotInstanceOf<TT>(value, message, currentInformation);}
       
+      /// @cond
+      static inline void IsNotNull(NullPtr pointer) {IsNotNull(pointer, "", CurrentInformation());}
+      static inline void IsNotNull(NullPtr pointer, const string& message) {IsNotNull(pointer, message, CurrentInformation());}
+      static inline void IsNotNull(NullPtr pointer, const CurrentInformation& currentInformation) {IsNotNull(pointer, "", CurrentInformation());}
+      static inline void IsNotNull(NullPtr pointer, const string& message, const CurrentInformation& currentInformation) {Fail(string::Format("Expected: not null{0}But was:  null", System::Environment::NewLine), message, currentInformation);}
+      /// @endcond
+      
       /// @brief Expect that the pointer is not null. If the pointer is null the method show an error message.
       /// @param pointer The pointer to check is null.
       /// @par Examples
@@ -1263,6 +1270,13 @@ namespace Switch {
         else
           Fail(string::Format("Expected: not null{0}But was:  null", System::Environment::NewLine), message, currentInformation);
       }
+      
+      /// @cond
+      static inline void IsNull(NullPtr pointer) {IsNull(pointer, "", CurrentInformation());}
+      static inline void IsNull(NullPtr pointer, const string& message) {IsNull(pointer, message, CurrentInformation());}
+      static inline void IsNull(NullPtr pointer, const CurrentInformation& currentInformation) {IsNull(pointer, "", CurrentInformation());}
+      static inline void IsNull(NullPtr pointer, const string& message, const CurrentInformation& currentInformation) {Succeed(message, currentInformation);}
+      /// @endcond
       
       /// @brief Expect that the pointer is null. If the pointer is null the method show an error message.
       /// @param pointer The pointer to check is null.
@@ -1549,6 +1563,13 @@ namespace Switch {
           Fail(string::Format("Expected: less than or equal to {0}{1}But was:  {2}", ValueToString(val2), System::Environment::NewLine, ValueToString(val1)), message, currentInformation);
       }
       
+      /// @cond
+      static inline void NotNull(NullPtr pointer) {IsNotNull(pointer, "", CurrentInformation());}
+      static inline void NotNull(NullPtr pointer, const string& message) {IsNotNull(pointer, message, CurrentInformation());}
+      static inline void NotNull(NullPtr pointer, const CurrentInformation& currentInformation) {IsNotNull(pointer, "", CurrentInformation());}
+      static inline void NotNull(NullPtr pointer, const string& message, const CurrentInformation& currentInformation) {Fail(string::Format("Expected: not null{0}But was:  null", System::Environment::NewLine), message, currentInformation);}
+      /// @endcond
+      
       /// @brief Expect that the pointer is not null. If the pointer is null the method show an error message.
       /// @param pointer The pointer to check is null.
       /// @par Examples
@@ -1660,6 +1681,13 @@ namespace Switch {
       /// @endcode
       template<typename TPointer>
       static inline void NotNull(const refptr<TPointer>& pointer, const string& message, const CurrentInformation& currentInformation) {IsNotNull(pointer, message, currentInformation);}
+      
+      /// @cond
+      static inline void Null(NullPtr pointer) {IsNull(pointer, "", CurrentInformation());}
+      static inline void Null(NullPtr pointer, const string& message) {IsNull(pointer, message, CurrentInformation());}
+      static inline void Null(NullPtr pointer, const CurrentInformation& currentInformation) {IsNull(pointer, "", CurrentInformation());}
+      static inline void Null(NullPtr pointer, const string& message, const CurrentInformation& currentInformation) {Succeed(message, currentInformation);}
+      /// @endcond
       
       /// @brief Expect that the pointer is null. If the pointer is null the method show an error message.
       /// @param pointer The pointer to check is null.
