@@ -2070,17 +2070,22 @@ INCLUDE_FILE_PATTERNS  =
 # This tag requires that the tag ENABLE_PREPROCESSING is set to YES.
 
 PREDEFINED             = "_abstract=: public Abstract" \
+                         _async= \
+                         "_await=await() <<" \
                          "_current_information=CurrentInformation(__FILE__, __LINE__)" \
                          _delegate=[&] \
+                         _foreach=for \
                          _get=[&]() \
                          _ignore_test= \
+                         "_in=:" \
                          "_interface=: public Interface" \
                          _lock= \
                          "_set=[&](auto value)" \
                          _startup= \
                          "_static=final: public Static" \
                          _test= \
-                         _using=
+                         _using= \
+                         _var=auto
 
 # If the MACRO_EXPANSION and EXPAND_ONLY_PREDEF tags are set to YES then this
 # tag can be used to specify a list of macro names that should be expanded. The
