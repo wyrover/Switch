@@ -8,7 +8,7 @@ namespace UnitTests {
   protected:
     // With current information
     void TestWithCurrentInformation() {
-      Assert::False(true, _current_information);
+      Expect::False(true, _current_information);
     }
   };
   
@@ -16,7 +16,7 @@ namespace UnitTests {
   protected:
     // Without current information
     void TestWithoutCurrentInformation() {
-      Assert::False(true);
+      Expect::False(true);
     }
   };
   
@@ -30,7 +30,7 @@ namespace UnitTests {
 //   Start 1 test from UserTest1
 // Expected: False
 // But was:  True
-// error: !---OMITTED---!/AssertCurrentInformation/AssertCurrentInformation.cpp:11
+// error: !---OMITTED---!/AssertCurrentInformation/ExpectCurrentInformation.cpp:11
 // *** FAILED UserTest1.TestWithCurrentInformation (3 ms)
 //   End 1 test from UserTest1 (3 ms total)
 //

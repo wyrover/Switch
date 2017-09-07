@@ -8,7 +8,7 @@ Start 2 tests from 1 test case
     PASSED DirectoryTest.ChangeCurrentDirectoryWithDownloads (2 ms)
 Expected: No Exception to be thrown
 But was:  <Switch::System::IO::DirectoryNotFoundException>
-error: /YourFolder/Switch/Examples/TUnit/TestFixture/Sources/TestFixture.cpp:25
+error: !---OMITTED---!/TestFixture/Sources/TestFixture.cpp:25
 *** FAILED DirectoryTest.ChangeCurrentDirectoryWithPotatoes (4 ms)
   End 2 tests from DirectoryTest (8 ms total)
 

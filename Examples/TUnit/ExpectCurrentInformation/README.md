@@ -1,5 +1,5 @@
 # Assert
-This code example shows how to use Asset with current information.
+This code example shows how to use Expect with current information.
 
 ## Output
 ```
@@ -7,7 +7,7 @@ Start 2 tests from 2 test cases
   Start 1 test from UserTest1
 Expected: False
 But was:  True
-error: !---OMITTED---!/AssertCurrentInformation/AssertCurrentInformation.cpp:11
+error: !---OMITTED---!/AssertCurrentInformation/ExpectCurrentInformation.cpp:11
 *** FAILED UserTest1.TestWithCurrentInformation (3 ms)
   End 1 test from UserTest1 (3 ms total)
 
