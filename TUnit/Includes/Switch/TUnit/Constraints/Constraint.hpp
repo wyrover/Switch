@@ -36,7 +36,7 @@ namespace Switch {
         };
         
         property<string, readonly> Error {
-          _get {return string::Format("Expected: {0}{2}But was: {1}", ToString(), this->actual, System::Environment::NewLine);}
+          _get {return string::Format("Expected: {0}{2}But was:  {1}", ToString(), this->actual, System::Environment::NewLine);}
         };
         
         property<string> Message {
