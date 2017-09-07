@@ -10,20 +10,11 @@ namespace Examples {
       Action<const string&> messageTarget;
       
       if (Environment::GetCommandLineArgs().Length > 1)
-        messageTarget = _delegate(const string& s) { ShowWindowsMessage(s); };
+        messageTarget = _delegate(const string& s) { MessageBox::Show(s); };
       else
-        messageTarget = _delegate(const string& s) { WriteLine(s); };
+        messageTarget = _delegate(const string& s) { Console::WriteLine(s); };
       
       messageTarget("Hello, World!");
-    }
-    
-  private:
-    static void ShowWindowsMessage(const string& message) {
-      MessageBox::Show(message);
-    }
-    
-    static void WriteLine(const string& message) {
-      Console::WriteLine(message);
     }
   };
 }
