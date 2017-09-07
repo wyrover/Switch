@@ -46,7 +46,7 @@ namespace Examples {
         System::Diagnostics::Process::Start(System::Diagnostics::ProcessStartInfo("calc"));
       }
       
-      //System::Diagnostics::Process::Start(System::Diagnostics::ProcessStartInfo("http://www.google.com"));
+      //System::Diagnostics::Process::Start(System::Diagnostics::ProcessStartInfo("https://www.gammasoft71.wixsite.com/switch"));
        */
     }
   };

@@ -7,7 +7,7 @@ namespace Examples {
   class Program {
   public:
     static void Main() {
-      ArrayList arrayList = {42, "This is a string", DayOfWeek::Wednesday, "Another string", Uri("http://www.gammasoft.com"), 4.2f, TimeSpan(2, 25, 43)};
+      ArrayList arrayList = {42, "This is a string", DayOfWeek::Wednesday, "Another string", Uri("https://www.gammasoft71.wixsite.com/switch"), 4.2f, TimeSpan(2, 25, 43)};
       
       Console::WriteLine("arrayList = [{0}]", string::Join(", ", arrayList));
       Console::WriteLine();
@@ -25,12 +25,12 @@ _startup (Examples::Program)
 
 // This code example produces the following output:
 //
-// arrayList = [42, This is a string, Wednesday, Another string, http://www.gammasoft.com/, 4.2, 02:25:43]
+// arrayList = [42, This is a string, Wednesday, Another string, https://www.gammasoft71.wixsite.com/switch, 4.2, 02:25:43]
 //
 // 42
 // "THIS IS A STRING"
 // Wednesday
 // "ANOTHER STRING"
-// http://www.gammasoft.com/
+// https://www.gammasoft71.wixsite.com/switch
 // 4.2
 // 02:25:43

@@ -22,7 +22,7 @@ namespace Examples {
       s2 = as<string>(a);
       Console::WriteLine("a = {0}, Convert::ToString(a) = {1}, as<string>(a) = {2}", a, s1, s2);
       
-      refptr<object> o = ref_new<Uri>("http://www.gammasoft.com");
+      refptr<object> o = ref_new<Uri>("https://www.gammasoft71.wixsite.com/switch");
       refptr<Uri> u = as<Uri>(o);
       Console::WriteLine("o = {0}, as<Uri>(o) = {1}", *o, *u);
       
@@ -59,7 +59,7 @@ _startup (Examples::Program)
 // d = 41.6, Convert::ToInt32(d) = 42, as<int>(d) = 42
 // i = 42, Convert::ToString(i) = 42, as<string>(i) = 42
 // a = string, Convert::ToString(a) = string, as<string>(a) = string
-// o = http://www.gammasoft.com/, as<Uri>(o) = http://www.gammasoft.com/
+// o = https://www.gammasoft71.wixsite.com/switch, as<Uri>(o) = https://www.gammasoft71.wixsite.com/switch
 // value = a, as<string>(value) = a
 // Bad cast : Specified cast is not valid. !
 // Bad cast!
