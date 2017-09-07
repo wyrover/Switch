@@ -96,10 +96,10 @@ namespace SwitchUnitTests {
       Assert::AreEqual(a6(4), 50, _current_information);
       
       Array<int32> a8(10);
-      for (int32 i = 0; i < 10; i++)
-        a8(i) = i;
-      for (int32 i = 0; i < 10; i++)
-        Assert::AreEqual(a8(i), i, _current_information);
+      for (int32 index = 0; index < 10; index++)
+        a8(index) = index;
+      for (int32 index = 0; index < 10; index++)
+        Assert::AreEqual(a8(index), index, _current_information);
       
       int32 a11[] = {100, 200, 300, 400, 500, 600, 700, 800, 900};
       Array<int32> a12(a11, 3);
@@ -200,24 +200,24 @@ namespace SwitchUnitTests {
     EXPECT_THROW(a7(15, 5), IndexOutOfRangeException);
     
     Array<Int32, 2> a9(10, 8);
-    for (Int32 i = 0; i < 10; i++)
-      for (Int32 j = 0; j < 8; j++)
-        a9(i, j) = (i*10) + j;
+    for (Int32 index1 = 0; index1 < 10; index1++)
+      for (Int32 index2 = 0; index2 < 8; index2++)
+        a9(index1, index2) = (index1*10) + index2;
     
-    for (Int32 i = 0; i < 10; i++)
-      for (Int32 j = 0; j < 8; j++)
-        Assert::AreEqual(a9(i, j), (i*10) + j);
+    for (Int32 index1 = 0; index1 < 10; index1++)
+      for (Int32 index2 = 0; index2 < 8; index2++)
+        Assert::AreEqual(a9(index1, index2), (index1*10) + index2);
     
     Array<Int32, 3> a10(10, 10, 10);
-    for (Int32 i = 0; i < 10; i++)
-      for (Int32 j = 0; j < 10; j++)
-        for (Int32 k = 0; k < 10; k++)
-          a10(i, j, k) = (i*100) + (j*10) + k;
+    for (Int32 index1 = 0; index1 < 10; index1++)
+      for (Int32 index2 = 0; index2 < 10; index2++)
+        for (Int32 index3 = 0; index3 < 10; index3++)
+          a10(index1, index2, index3) = (index1*100) + (index2*10) + index3;
     
-    for (Int32 i = 0; i < 10; i++)
-      for (Int32 j = 0; j < 10; j++)
-        for (Int32 k = 0; k < 10; k++)
-          Assert::AreEqual(a10(i, j, k), (i*100) + (j*10) + k);
+    for (Int32 index1 = 0; index1 < 10; index1++)
+      for (Int32 index2 = 0; index2 < 10; index2++)
+        for (Int32 index3 = 0; index3 < 10; index3++)
+          Assert::AreEqual(a10(index1, index2, index3), (index1*100) + (index2*10) + index3);
   }
   
   TEST(Array, Resize) {
@@ -367,8 +367,8 @@ namespace SwitchUnitTests {
   
   TEST(Array, GetEnumerator) {
     Array<int32> array(10);
-    for (int32 i = 0; i < 10; i++)
-      array[i] = (i+10)*2;
+    for (int32 index = 0; index < 10; index++)
+      array[index] = (index+10)*2;
     
     _using(System::Collections::Generic::Enumerator<int32> enumerator = array.GetEnumerator()) {
       int32 index = 0;

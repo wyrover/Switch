@@ -132,7 +132,8 @@ int32 Encoding::GetByteCount(const char32 chars[], int32 charsSize) const {
   ArrayAlgorithms::ValidateArray(chars, charsSize);
   if (charsSize == 0) return 0;
   int32 count = 0;
-  for (int32 i = 0; i < charsSize; i++) count += GetByteCount(chars[i]);
+  for (int32 index = 0; index < charsSize; index++)
+    count += GetByteCount(chars[index]);
   return count;
 }
 

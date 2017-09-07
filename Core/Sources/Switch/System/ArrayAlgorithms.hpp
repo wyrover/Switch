@@ -13,8 +13,8 @@ namespace {
     
     template<typename T>
     inline static bool Contains(const T array[], int32 size, const T& item) {
-      for (int32 i = 0; i < size; i++)
-        if (array[i] == item)
+      for (int32 index = 0; index < size; index++)
+        if (array[index] == item)
           return true;
       return false;
     }

@@ -11,19 +11,19 @@ namespace SwitchUnitTests {
       string str = "Test string";
       const char chars[] = "Test string";
       
-      int32 i = 0;
+      int32 index = 0;
       for (auto c : str)
-        Assert::AreEqual(c, char32_t(chars[i++]), _current_information);
+        Assert::AreEqual(c, char32_t(chars[index++]), _current_information);
     }
     
     void InitializerList() {
       Array<int> values = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
       const int results[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
       
-      int32 i = 0;
+      int32 index = 0;
       for (const auto& value : values)
-        Assert::AreEqual(value, results[i++], _current_information);
-      Assert::AreEqual(10, i, _current_information);
+        Assert::AreEqual(value, results[index++], _current_information);
+      Assert::AreEqual(10, index, _current_information);
     }
     
     void Thread() {

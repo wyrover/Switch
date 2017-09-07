@@ -201,13 +201,13 @@ System::String System::String::Concat(const T (&objs)[length]) {
     throw ArgumentNullException(_current_information);
 
   int32 size = 0;
-  for (int32 i = 0; i < length; i ++)
-    size += System::Convert::ToString(objs[i]).string.length();
+  for (int32 index = 0; index < length; index ++)
+    size += System::Convert::ToString(objs[index]).string.length();
 
   StringType str;
   str.reserve(size);
-  for (int32 i = 0; i < length; i ++)
-    str.append(System::Convert::ToString(objs[i]).string);
+  for (int32 index = 0; index < length; index ++)
+    str.append(System::Convert::ToString(objs[index]).string);
   return str.c_str();
 }
 
@@ -270,12 +270,12 @@ System::String System::String::Join(const System::String& separator, const T (&o
   System::String str;
   bool first = true;
  
-  for(int32 i = 0; i < len; i++) {
+  for(int32 index = 0; index < len; index++) {
     if (first)
       first = false;
     else
       str += separator;
-    str += System::Convert::ToString(objs[i]);
+    str += System::Convert::ToString(objs[index]);
   }
   return str;
 }

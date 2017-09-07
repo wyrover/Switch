@@ -30,16 +30,13 @@ namespace EncodingUT {
   }
 
   UnicodeSequence& UnicodeSequence::operator+=(const UnicodeSequence& info) {
-    for (int32 i = 0; i < info.chars.Count; i += 1) {
-      chars.Add(info.chars[i]);
-    }
-    for (int32  i = 0; i < info.bytes.Count; i += 1) {
-      bytes.Add(info.bytes[i]);
-    }
-    for (int32  i = 0; i < info.decodedChars.Count; i += 1) {
-      decodedChars.Add(info.decodedChars[i]);
-    }
-    return *this;    
+    for (int32 index = 0; index < info.chars.Count; index += 1)
+      chars.Add(info.chars[index]);
+    for (int32 index = 0; index < info.bytes.Count; index += 1)
+      bytes.Add(info.bytes[index]);
+    for (int32 index = 0; index < info.decodedChars.Count; index += 1)
+      decodedChars.Add(info.decodedChars[index]);
+    return *this;
   }
 
   int32 ConcatBytes(byte destBytes[], int32 index, const byte bytes[], int32 size) {
@@ -49,27 +46,27 @@ namespace EncodingUT {
 
   void EXPECT_CHARS(const char32 expected[], int32 size, Array<char32> actual) {
     ASSERT_EQ(size, actual.Length);
-    for (int32 i = 0; i < size; i += 1) {
-      ASSERT_EQ(expected[i], actual[i]);
+    for (int32 index = 0; index < size; index += 1) {
+      ASSERT_EQ(expected[index], actual[index]);
     }
   }
 
   void EXPECT_CHARS(const char32 expected[], int32 size, const char32 actual[]) {
-    for (int32 i = 0; i < size; i += 1) {
-      ASSERT_EQ(expected[i], actual[i]);
+    for (int32 index = 0; index < size; index += 1) {
+      ASSERT_EQ(expected[index], actual[index]);
     }
   }
 
   void EXPECT_BYTES(const byte expected[], int32 size, Array<byte> actual) {
     ASSERT_EQ(size, actual.Length);
-    for (int32 i = 0; i < size; i += 1) {
-      ASSERT_EQ(expected[i], actual[i]);
+    for (int32 index = 0; index < size; index += 1) {
+      ASSERT_EQ(expected[index], actual[index]);
     }
   }
 
   void EXPECT_BYTES(const byte expected[], int32 size, const byte actual[]) {
-    for (int32 i = 0; i < size; i += 1) {
-      ASSERT_EQ(expected[i], actual[i]);
+    for (int32 index = 0; index < size; index += 1) {
+      ASSERT_EQ(expected[index], actual[index]);
     }
   }
 

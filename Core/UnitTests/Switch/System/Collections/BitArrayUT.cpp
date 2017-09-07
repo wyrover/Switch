@@ -15,29 +15,29 @@ TEST(BitArray, Constructor) {
 TEST(BitArray, Constructor_Size) {
   Collections::BitArray falseBits(33);
   EXPECT_EQ(33, falseBits.Count);
-  for (int32 i = 0; i < falseBits.Length; i++)
-    EXPECT_FALSE(falseBits[i]);
+  for (int32 index = 0; index < falseBits.Length; index++)
+    EXPECT_FALSE(falseBits[index]);
 }
 
 TEST(BitArray, Constructor_Size_True) {
   Collections::BitArray trueBits(Int32(33), true);
   EXPECT_EQ(trueBits.Count, 33);
-  for (Int32 i = 0; i < trueBits.Length; i++)
-    EXPECT_TRUE(trueBits[i]);
+  for (Int32 index = 0; index < trueBits.Length; index++)
+    EXPECT_TRUE(trueBits[index]);
 }
 
 TEST(BitArray, Constructor_Copy) {
   Collections::BitArray falseBits(33);
   Collections::BitArray copyFalseBits(falseBits);
   EXPECT_EQ(copyFalseBits.Count, 33);
-  for (Int32 i = 0; i < copyFalseBits.Length; i++)
-    EXPECT_FALSE(copyFalseBits[i]);
+  for (Int32 index = 0; index < copyFalseBits.Length; index++)
+    EXPECT_FALSE(copyFalseBits[index]);
   
   Collections::BitArray trueBits(Int32(33), true);
   Collections::BitArray copyTrueBits(trueBits);
   EXPECT_EQ(copyTrueBits.Count, 33);
-  for (Int32 i = 0; i < copyTrueBits.Length; i++)
-    EXPECT_TRUE(copyTrueBits[i]);
+  for (Int32 index = 0; index < copyTrueBits.Length; index++)
+    EXPECT_TRUE(copyTrueBits[index]);
 }
 
 TEST(BitArray, Constructor_Array_Byte) {
@@ -45,11 +45,11 @@ TEST(BitArray, Constructor_Array_Byte) {
   Collections::BitArray bytesBits(bytes); // 00000000 10000000 01000000 00100000 00010000
   EXPECT_EQ(bytesBits.Count, 40);         //          |8        |17       |26       |35
 
-  for (int32 i = 0; i<40 ; i++)
-    if (i == 8 || i == 17 || i == 26 || i == 35)
-      ASSERT_TRUE(bytesBits[i]);
+  for (int32 index = 0; index < 40 ; index++)
+    if (index == 8 || index == 17 || index == 26 || index == 35)
+      ASSERT_TRUE(bytesBits[index]);
     else
-      ASSERT_FALSE(bytesBits[i]);
+      ASSERT_FALSE(bytesBits[index]);
 }
 
 TEST(BitArray, Constructor_Array_Int32) {
@@ -57,11 +57,11 @@ TEST(BitArray, Constructor_Array_Int32) {
   Collections::BitArray int32sBits(int32s); // 0100...         10  100...
   EXPECT_EQ(int32sBits.Count, 64);          //  |1             |32 |34
 
-  for (int32 i = 0; i<64; i++)
-    if (i == 1 || i == 32 || i == 34)
-      ASSERT_TRUE(int32sBits[i]);
+  for (int32 index = 0; index < 64; index++)
+    if (index == 1 || index == 32 || index == 34)
+      ASSERT_TRUE(int32sBits[index]);
     else
-      ASSERT_FALSE(int32sBits[i]);
+      ASSERT_FALSE(int32sBits[index]);
 }
 
 TEST(BitArray, Length) {

@@ -167,10 +167,10 @@ namespace Switch {
       /// @return Result The return value.
       Result operator()(Arguments... arguments) const {
         if (this->functions.size() == 0) return Result();
-        for(size_t i = 0; i < this->functions.size()-1; i++) {
-          if (this->functions[i] == null)
+        for(size_t index = 0; index < this->functions.size()-1; index++) {
+          if (this->functions[index] == null)
             throw NullReferenceException(_current_information);
-          this->functions[i](arguments...);
+          this->functions[index](arguments...);
         }
         if (this->functions.back() == null)
           throw NullReferenceException(_current_information);
@@ -252,8 +252,8 @@ namespace Switch {
         if (this->functions.size () != delegate.functions.size())
           return false;
         
-        for (size_t i = 0; i < this->functions.size(); i++)
-          if (!AreEquals(this->functions[i], delegate.functions[i]))
+        for (size_t index = 0; index < this->functions.size(); index++)
+          if (!AreEquals(this->functions[index], delegate.functions[index]))
             return false;
         
         return true;

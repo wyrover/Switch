@@ -131,8 +131,8 @@ namespace Switch {
         /// @exception IO::IOException An I/O error occurs.
         virtual Array<char32> ReadChars(int32 count) {
           Array<char32> values(count);
-          for (int32 i = 0; i < count; i++)
-            values[i] = BitConverter::ToChar(ReadBytes(sizeof(char32)), 0);
+          for (int32 index = 0; index < count; index++)
+            values[index] = BitConverter::ToChar(ReadBytes(sizeof(char32)), 0);
           return values;
         }
 

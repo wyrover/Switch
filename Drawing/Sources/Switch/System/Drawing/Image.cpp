@@ -57,8 +57,8 @@ refptr<Image> Image::FromData(const char* data[]) {
   
   System::Collections::Generic::Dictionary<String, Color> palette;
   
-  for (int32 i = 0; i < colors; i++) {
-    string colorLine(data[1+i]);
+  for (int32 index1 = 0; index1 < colors; index1++) {
+    string colorLine(data[1+index1]);
     if (colorLine.Contains("None"))
       palette[colorLine.Substring(0, charPerPixel)] = Color::Transparent;
     else
@@ -67,14 +67,14 @@ refptr<Image> Image::FromData(const char* data[]) {
   
   image->rawData = Array<byte>(columns * rows * 3);
   
-  for (int32 i = 0; i < rows; i++) {
-    string colorLine(data[1+colors+i]);
-    for (int32 j = 0; j < columns; j++) {
+  for (int32 index1 = 0; index1 < rows; index1++) {
+    string colorLine(data[1+colors+index1]);
+    for (int32 index2 = 0; index2 < columns; index2++) {
       string pixel = colorLine.Substring(0, charPerPixel);
       colorLine = colorLine.Remove(0, charPerPixel);
-      image->rawData[(i*columns*3)+(j*3)] = static_cast<byte>(palette[pixel].R());
-      image->rawData[(i*columns*3)+(j*3)+1] = static_cast<byte>(palette[pixel].G());
-      image->rawData[(i*columns*3)+(j*3)+2] = static_cast<byte>(palette[pixel].B());
+      image->rawData[(index1*columns*3)+(index2*3)] = static_cast<byte>(palette[pixel].R());
+      image->rawData[(index1*columns*3)+(index2*3)+1] = static_cast<byte>(palette[pixel].G());
+      image->rawData[(index1*columns*3)+(index2*3)+2] = static_cast<byte>(palette[pixel].B());
     }
   }
  

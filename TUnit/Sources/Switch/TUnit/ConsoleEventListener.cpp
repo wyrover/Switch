@@ -107,14 +107,14 @@ void ConsoleEventListener::OnTestIterationEnd(const testing::UnitTest& unitTest,
     WriteLine(String::Format("{0} {1}, listed below:", failedTestCount,  failedTestCount == 1 ? "test" : "tests"));
     
     if (numFailures > 0) {
-      for (int i = 0; i < unitTest.total_test_case_count(); ++i) {
-        const testing::TestCase& testCase = *unitTest.GetTestCase(i);
+      for (int index1 = 0; index1 < unitTest.total_test_case_count(); ++index1) {
+        const testing::TestCase& testCase = *unitTest.GetTestCase(index1);
         
         if (!testCase.should_run() || (testCase.failed_test_count() == 0))
           continue;
         
-        for (int j = 0; j < testCase.total_test_count(); ++j) {
-          const testing::TestInfo& testInfo = *testCase.GetTestInfo(j);
+        for (int index2 = 0; index2 < testCase.total_test_count(); ++index2) {
+          const testing::TestInfo& testInfo = *testCase.GetTestInfo(index2);
           
           if (!testInfo.should_run() || testInfo.result()->Passed())
             continue;

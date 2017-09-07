@@ -224,9 +224,9 @@ namespace Switch {
         if (index + count > array.Length)
           throw System::ArgumentException(_current_information);
         
-        for (int32 i = 0; i < count; i++) {
-          if (array[index+i] == value)
-            return index+i;
+        for (int32 increment = 0; increment < count; increment++) {
+          if (array[index+increment] == value)
+            return index+increment;
         }
         return -1;
       }
@@ -261,8 +261,8 @@ namespace Switch {
         if (index < 0) throw System::ArgumentOutOfRangeException(_current_information);
         if (index + this->Length > array.Length) throw System::ArgumentException(_current_information);
         
-        for (int32 i = 0; i < this->Length; i++)
-          array[index+i] = (*this)[i];
+        for (int32 increment = 0; increment < this->Length; increment++)
+          array[index+increment] = (*this)[increment];
       }
       void Resize(int32 newSize) {
         if (newSize < 0) throw System::ArgumentOutOfRangeException(_current_information);
@@ -629,7 +629,7 @@ namespace Switch {
       /// @remarks This method is an O(n) operation, where n is Length.It performs a shallow copy only.
       /// @par Examples
       /// The following code example shows how to copy an Array to another native Array.
-      /// @include ArrayCopyTo2.cpp
+      /// @include ArrayCopyTo.cpp
       void CopyTo(Array<T>& array, int32 index) const override {this->GenericArrayObject<T, TAllocator>::CopyTo(array, index);}
       
       /// @brief Copies all the elements of the current one-dimensional array to the specified one-dimensional array starting at the specified destination array index. The index is specified as a 64-bit integer.
@@ -648,8 +648,8 @@ namespace Switch {
         if (index < 0) throw System::ArgumentOutOfRangeException(_current_information);
         if (index + this->Length > array.Length) throw System::ArgumentException(_current_information);
         
-        for (int32 i = 0; i < this->Length; i++)
-          array[index+i] = (*this)[i];
+        for (int32 increment = 0; increment < this->Length; increment++)
+          array[index+increment] = (*this)[increment];
       }
       
       /// @brief Creates a shallow copy of the Array.
