@@ -227,8 +227,8 @@ namespace Switch {
       static bool ToBoolean(T value) { return ToBoolean(CastToUnderlyingTypeIfEnumClass<T, typename std::conditional_t<std::is_enum<T>::value, std::true_type, std::false_type>::type>::Cast(value)); }
       
       /// @cond
-      static double ToBoolean(llong value) { return Int64((uint64)value).ToBoolean(*provider); }
-      static double ToBoolean(ullong value) { return UInt64((uint64)value).ToBoolean(*provider); }
+      static bool ToBoolean(llong value) { return Int64((uint64)value).ToBoolean(*provider); }
+      static bool ToBoolean(ullong value) { return UInt64((uint64)value).ToBoolean(*provider); }
       template<class T, class Attribute>
       static bool ToBoolean(const property<T, Attribute>& value) { return ToBoolean(value()); }
       /// @endcond
