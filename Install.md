@@ -8,18 +8,19 @@ In order to build Switch, you first need download and install Microsoft Visual S
 2. Install CMake
 
 After Microsoft Visual Studio, to build Switch, you need to install the latest version cmake from https://cmake.org/download/
-Remarks: Verify if you can execute cmake --version in "Developer Command Prompt for VS 2017", if it's no, add cmake install directory to your path.
+*Remarks: Verify if you can execute cmake --version in "Developer Command Prompt for VS 2017", if it's no, add cmake install directory to your path.*
 
 3. Install Doxygen
 
 After CMake, to generate Switch documentation, you need to install the latest version Doxygen from http://www.stack.nl/~dimitri/doxygen/download.html
-Remarks: Verify if you can execute doxygen --version in "Developer Command Prompt for VS 2017", if it's no, add doxygen install directory to your path.
+*Remarks: Verify if you can execute doxygen --version in "Developer Command Prompt for VS 2017", if it's no, add doxygen install directory to your path.*
 
 4. After installing Microsoft Visual Studio, Cmake and Doxygen, do the following in "Developer Command Prompt for VS 2017" to Build and install Switch :
-Remarks, this operation depand of your hardware and can be very long
-
-C:\Users\You> cd FolderWhereSwitchIsDownloaded\
-C:\Users\You\FolderWhereSwitchIsDownloaded> install.bat
+```
+cd C:\Users\YourName\Switch\
+install.bat
+```
+*Remarks, this operation depand of your hardware and can be very long*
 
 5. Enjoy and be creative with Switch ;-)
 
@@ -37,7 +38,7 @@ macOS 10.12 or later
 1. Install Xcode
 
 In order to build Switch, you first need download and install Xcode from App Store and install "Commands line tools".
-Remarks: Verify if you can execute clang --version in terminal.
+*Remarks: Verify if you can execute clang --version in terminal.*
 
 2. Install Homebrew
 
@@ -45,11 +46,12 @@ After Xcode, to build Switch, you need to install the latest version cmake, curl
 The easiest way to get this is from Homebrew (http://brew.sh/).
 
 3. After installing brew, do the following in "Terminal" to Build and install Switch :
-Remarks, this operation depand of your hardware and can be very long
 
-~$ cd FolderWhereSwitchIsDownloaded
-
-~$ ./install.sh
+```
+cd /Users/YourName/Switch
+./install.sh
+```
+*Remarks, this operation depand of your hardware and can be very long*
 
 4. Enjoy and be creative with Switch ;-)
 
@@ -59,11 +61,12 @@ Ubuntu 16.04 or later
 ---------------------
 
 1. Do the following in "Terminal" to Build and install Switch :
-Remarks, this operation depend of your hardware and can be very long
 
-~$ cd FolderWhereSwitchIsDownloaded
-
-~$ ./install.sh
+```
+cd /home/YourName/Switch
+./install.sh
+```
+*Remarks, this operation depend of your hardware and can be very long*
 
 2. Enjoy and be creative with Switch ;-)
 
@@ -72,43 +75,45 @@ ________________________________________________________________________________
 CentOS 7 or later
 -----------------
 
-  1. Do the following in "Terminal" to Build and install Switch :
-     Remarks, this operation depand of your hardware and can be very long
+1. Do the following in "Terminal" to Build and install Switch :
   
-     ~$ cd FolderWhereSwitchIsDownloaded
-     
-     ~$ ./install.sh
+```
+cd /home/YourName/Switch
+./install.sh
+```
+*Remarks, this operation depand of your hardware and can be very long*
   
-  2. Enjoy and be creative with Switch ;-)
+2. Enjoy and be creative with Switch ;-)
 
 ______________________________________________________________________________________________________________
 
 Other linux Distribution
 ------------------------
 
-  1. Install clang 4.0.0 or later
+1. Install clang 4.0.0 or later
   
-     In order to build Switch, you first need download and install clang 4.0.0 or later.
-     Remarks: Verify if you can execute clang --version in terminal.
+In order to build Switch, you first need download and install clang 4.0.0 or later.
+*Remarks: Verify if you can execute clang --version in terminal.*
 
-  2. Install CMake
+2. Install CMake
     
-     After clang, to build Switch, you need to install the latest version cmake from https://cmake.org/download/
-     Remarks: Verify if you can execute cmake --version in terminal.
+After clang, to build Switch, you need to install the latest version cmake from https://cmake.org/download/
+*Remarks: Verify if you can execute cmake --version in terminal.*
 
-  3. Install Doxygen
+3. Install Doxygen
 
-     After CMake, to generate Switch documentation, you need to install the latest version Doxygen from http://www.stack.nl/~dimitri/doxygen/download.html
-     Remarks: Verify if you can execute doxygen --version in terminal.
+After CMake, to generate Switch documentation, you need to install the latest version Doxygen from http://www.stack.nl/~dimitri/doxygen/download.html
+*Remarks: Verify if you can execute doxygen --version in terminal.*
 
-  4. After installing Doxygen, you need to install gtkmm 3 on your system. See https://developer.gnome.org/gtkmm-tutorial/stable/chapter-installation.html for more information.
+4. After installing Doxygen, you need to install gtkmm 3 on your system. See https://developer.gnome.org/gtkmm-tutorial/stable/chapter-installation.html for more information.
   
-  5. After installing gtkmm, do the following in "Terminal" to Build and install Switch :
-     Remarks, this operation depand of your hardware and can be very long
+5. After installing gtkmm, do the following in "Terminal" to Build and install Switch :
   
-     ~$ cd FolderWhereSwitchIsDownloaded
-     
-     ~$ ./install.sh
+```
+cd /home/YourName/Switch
+./install.sh
+```
+*Remarks, this operation depand of your hardware and can be very long*
   
-  5. Enjoy and be creative with Switch ;-)
+5. Enjoy and be creative with Switch ;-)
   
