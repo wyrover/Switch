@@ -59,6 +59,18 @@ namespace Switch {
           throw ArgumentOutOfRangeException(_current_information);
       }
       
+      /// @brief Initializes a new instance of the Version class using the specified string.
+      /// @param version A string containing the major, minor, build, and revision numbers, where each number is delimited with a period character ('.').
+      /// @exception ArgumentException version has fewer than two components or more than four components.
+      /// @exception ArgumentOutOfRangeException A major, minor, build, or revision component is less than zero.
+      /// @exception FormatException At least one component of version does not parse to an integer.
+      /// @exception OverflowException At least one component of version represents a number greater than MaxValue.
+      /// @remarks The version parameter can contain only the components major, minor, build, and revision, in that order, and all separated by periods. There must be at least two components, and at most four. The first two components are assumed to be major and minor. The value of unspecified components is undefined.
+      /// @remarks The format of the version number is as follows. Optional components are shown in square brackets ('[' and ']'):
+      /// @remarks major.minor[.build[.revision]]
+      /// @remarks All defined components must be integers greater than or equal to 0. For example, if the major number is 6, the minor number is 2, the build number is 1, and the revision number is 3, then version should be "6.2.1.3".
+      Version(const string& version) {this->operator=(Version::Parse(version));}
+      
       /// @cond
       Version(const Version& version) : major(version.major), minor(version.minor), build(version.build), revision(version.revision) {}
       Version& operator =(const Version& version) {
