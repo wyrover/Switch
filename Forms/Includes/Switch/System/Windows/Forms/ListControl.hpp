@@ -29,6 +29,10 @@ namespace Switch {
           /// @note To maintain better performance, do not set the size of a control in its constructor. The preferred method is to virtual the DefaultSize property.
           ListControl(const string& text, int32 left, int32 top, int32 width, int32 height) /*: Control(text, left, top, width, height)*/ {
           }
+          
+          /// @cond
+          ListControl(const ListControl& listControl) : Control(listControl) {}
+          /// @endcond
 
           const string& ValueMember() const {
             return this->valueMember;

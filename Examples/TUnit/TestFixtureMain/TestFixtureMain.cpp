@@ -22,6 +22,8 @@ namespace UnitTests {
     // The main entry point for the test application.
     static int Main(const Array<string>& args) {
       // You can add your own code here.
+
+      // Create UnitTest and run it
       return TUnit::UnitTest(args).Run();
     }
   };

@@ -24,6 +24,10 @@ namespace Switch {
             this->SetStyle(ControlStyles::UserPaint, false);
             this->TabStop = false;
           }
+          
+          /// @cond
+          ProgressBar(const ProgressBar& progressBar) : Control(progressBar), marqueeAnimationSpeed(progressBar.marqueeAnimationSpeed), maximum(progressBar.maximum), minimum(progressBar.minimum), style(progressBar.style), value(progressBar.value) {}
+          /// @endcond
 
           property<int32> MarqueeAnimationSpeed {
             _get{ return this->marqueeAnimationSpeed; },

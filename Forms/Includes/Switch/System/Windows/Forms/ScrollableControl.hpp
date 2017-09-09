@@ -28,6 +28,10 @@ namespace Switch {
           /// @remarks This version of the Control constructor sets the initial Text property value to the text parameter value. The initial Size and Location of the control are determined by the left, top, width and height parameter values.
           /// @note To maintain better performance, do not set the size of a control in its constructor. The preferred method is to virtual the DefaultSize property.
           ScrollableControl(const string& text, int32 left, int32 top, int32 width, int32 height) : Control(text, left, top, width, height) {}
+          
+          /// @cond
+          ScrollableControl(const ScrollableControl& scrollableControl) : Control(scrollableControl) {}
+          /// @endcond
 
           property<bool> HScroll {
             _get {return this->hscroll;},

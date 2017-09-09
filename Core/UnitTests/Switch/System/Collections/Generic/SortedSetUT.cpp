@@ -627,14 +627,14 @@ TEST(SortedSet, UnionWith_WithComparer) {
   set.Add(Person("Peter", "PARKER"));
 
   SortedSet<Person> set2(new NameOnlyComparer());
-  set.Add(Person("Gwen", "DECAUWERS"));
-  set.Add(Person("Julien", "MICHEL"));
-  set.Add(Person("Gwen", "BERGMANS"));
+  set.Add(Person("May", "PARKER"));
+  set.Add(Person("Ben", "PARKER"));
+  set.Add(Person("George", "STACY"));
 
   set.UnionWith(set2);
   for (Person p : set) {
-    if (p.GetName().Equals("Gwen"))
-      EXPECT_TRUE(string("STACY").Equals(p.GetSurname()));
+    if (p.GetName().Equals("Ben"))
+      EXPECT_TRUE(string("PARKER").Equals(p.GetSurname()));
   }
 
 }

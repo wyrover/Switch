@@ -24,6 +24,9 @@ namespace Switch {
           Button() : ButtonBase("", 0, 0, 75, 25) {
             this->SetStyle(ControlStyles::UserPaint, false);
           }
+          /// @cond
+          Button(const Button& button) : ButtonBase(button), isDefault(button.isDefault) {};
+          /// @endcond
 
           property<bool> IsDefault {
             _get {return this->isDefault;},

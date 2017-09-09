@@ -22,6 +22,10 @@ namespace Switch {
           TabControl() {
             this->SetStyle(ControlStyles::UserPaint, false);
           }
+          
+          /// @cond
+          TabControl(const TabControl& tabControl) : ContainerControl(tabControl), alignment(tabControl.alignment) {}
+          /// @endcond
 
           property<TabAlignment> Alignment{
             _get {return this->alignment;},

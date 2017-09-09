@@ -18,6 +18,10 @@ namespace Switch {
           TabPage() {
             this->SetStyle(ControlStyles::UserPaint, false);
           }
+          
+          /// @cond
+          TabPage(const TabPage& tabPage) : Panel(tabPage) {}
+          /// @endcond
 
         protected:
           void CreateHandle() override;

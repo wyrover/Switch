@@ -24,6 +24,10 @@ namespace Switch {
             this->SetStyle(ControlStyles::UserPaint, false);
             //this->BackColor = System::Drawing::SystemColors::Window;
           }
+          
+          /// @cond
+          Form(const Form& form) : ContainerControl(form), formBorderStyle(form.formBorderStyle), maximizeBox(form.maximizeBox), minimizeBox(form.minimizeBox), startPosition(form.startPosition), messageActions(form.messageActions) {}
+          /// @endcond
 
           property<System::Windows::Forms::FormBorderStyle> FormBorderStyle {
             _get{return this->formBorderStyle;},

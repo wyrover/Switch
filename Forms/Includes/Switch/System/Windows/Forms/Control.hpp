@@ -128,8 +128,9 @@ namespace Switch {
           }
 
           /// @cond
-          Control(const Control& control) = delete;
-          Control(Control&& control) = default;
+          Control(const Control& control) : backColor(control.backColor), backBrush(control.backBrush), clientSize(control.clientSize), controls(control.controls), defaultBackColor(control.defaultBackColor),
+          defaultForeColor(control.defaultForeColor), enabled(control.enabled), foreColor(control.foreColor), /*handle(control.handle),*/ location(control.location), messageActions(control.messageActions),
+          name(control.name), parent(control.parent), size(control.size), state(control.state), style(control.style), tabStop(control.tabStop), text(control.text), visible(control.visible) {}
           ~Control() {
             if (this->Parent() != null)
               this->Parent()().controls.Remove(*this);

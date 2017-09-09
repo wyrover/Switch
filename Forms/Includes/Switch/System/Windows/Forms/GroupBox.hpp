@@ -16,6 +16,10 @@ namespace Switch {
         class _public GroupBox : public ContainerControl {
         public:
           GroupBox();
+          
+          /// @cond
+          GroupBox(const GroupBox& groupBox) : ContainerControl(groupBox) {}
+          /// @endcond
 
         protected:
           void CreateHandle() override;

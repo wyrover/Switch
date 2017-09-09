@@ -25,6 +25,10 @@ namespace Switch {
             this->SetStyle(ControlStyles::UserPaint, false);
             this->TabStop = false;
           }
+          
+          /// @cond
+          TrackBar(const TrackBar& trackBar) : Control(trackBar), largeChange(trackBar.largeChange), maximum(trackBar.maximum), minimum(trackBar.minimum), smallChange(trackBar.smallChange), style(trackBar.style), tickFrequency(trackBar.tickFrequency), value(trackBar.value) {}
+          /// @endcond
 
           property<int32> LargeChange {
             _get{ return this->largeChange; },

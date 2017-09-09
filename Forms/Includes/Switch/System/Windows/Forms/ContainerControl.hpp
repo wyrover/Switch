@@ -33,7 +33,7 @@ namespace Switch {
           }
 
           /// @cond
-          //ContainerControl(const ContainerControl& containerControl) : ScrollableControl(containerControl) {}
+          ContainerControl(const ContainerControl& containerControl) : ScrollableControl(containerControl) {}
           /// @endcond
 
           property<const System::ComponentModel::IContainer&, readonly> Container {
