@@ -56,7 +56,7 @@ namespace Switch {
 
       /// @brief Serves as a hash function for a particular type.
       /// @return int32 A hash code for the current Object.
-      virtual int32 GetHashCode() const {return static_cast<int32>(reinterpret_cast<int64>(this) & 0x00000000FFFFFFFF) ^ static_cast<int32>((reinterpret_cast<int64>(this)>>32) & 0x00000000FFFFFFFF);}
+      virtual int32 GetHashCode() const {return int32(int64(this) & 0x00000000FFFFFFFF) ^ int32((int64(this)>>32) & 0x00000000FFFFFFFF);}
       
       /// @brief Gets the Type of the current instance.
       /// @return Type The Type instance that represents the exact runtime type of the current instance.

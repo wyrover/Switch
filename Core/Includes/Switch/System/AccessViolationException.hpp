@@ -18,15 +18,23 @@ namespace Switch {
     ///
     /// In either case, you can identify and correct the cause of the AccessViolationException exception as follows:
     ///
-    /// &nbsp;Make sure that the memory that you are attempting to access has been allocated.
+    /// Make sure that the memory that you are attempting to access has been allocated.
     ///
-    /// &nbsp;An AccessViolationException exception is always thrown by an attempt to access protected memory -- that is, to access memory that is not allocated or that is not owned by a process.
+    /// <pre>
+    ///      AccessViolationException exception is always thrown by an attempt to access protected memory -- that is, to access
+    ///      memory that is not allocated or that is not owned by a process.
     ///
-    /// Automatic memory management is one of the services that the common language runtime provides. If managed code provides the same functionality as your unmanagede code, you may wish to move to managed code to take advantage of this functionality. For more information, see Automatic Memory Management.
+    ///      Automatic memory management is one of the services that the common language runtime provides. If managed code provides
+    ///      the same functionality as your unmanagede code, you may wish to move to managed code to take advantage of this functionality.
+    ///      For more information, see Automatic Memory Management.
+    /// </pre>
     ///
-    /// &nbsp;Make sure that the memory that you are attempting to access has not been corrupted.
+    /// Make sure that the memory that you are attempting to access has not been corrupted.
     ///
-    /// If several read or write operations have occurred through bad pointers, memory may be corrupted. This typically occurs when reading or writing to addresses outside of a predefined buffer.
+    /// <pre>
+    ///      If several read or write operations have occurred through bad pointers, memory may be corrupted. This typically occurs when
+    ///      reading or writing to addresses outside of a predefined buffer.
+    /// </pre>
     class _public AccessViolationException : public SystemException {
     public:
       /// @brief Create a new instance of class AccessViolationException
