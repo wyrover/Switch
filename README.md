@@ -6,7 +6,7 @@ ________________________________________________________________________________
 [![Download Portable C++ Framework](https://sourceforge.net/sflogo.php?type=8&group_id=2794431)](https://sourceforge.net/p/switchpro/)
 ______________________________________________________________________________________________________________
 
-# The Switch framework are...
+# The Switch framework is...
 - a collection of native C++ classes libraries, similar to the .NET Framework;
 - written in efficient, modern C++14;
 - and highly portable and available on many different platforms (Windows, Mac Os X, Linux);

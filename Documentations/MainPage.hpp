@@ -1,6 +1,6 @@
 /// @mainpage Switch - Reference Guide Documentation
 ///
-/// @section TheSwitchLibrariesAreSection The Switch framework are...
+/// @section TheSwitchLibrariesIsSection The Switch framework is...
 ///   * a collection of C++ classes libraries, similar to the .NET Framework;
 ///   * written in efficient, modern C++14;
 ///   * and highly portable and available on many different platforms;
