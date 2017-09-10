@@ -2,11 +2,11 @@
 /// @brief Contains Switch::System::Hash class.
 #pragma once
 
-#include "../Any.hpp"
-#include "../NullPtr.hpp"
-#include "../Static.hpp"
-#include "../Types.hpp"
-#include "../RefPtr.hpp"
+#include "Any.hpp"
+#include "NullPtr.hpp"
+#include "Static.hpp"
+#include "Types.hpp"
+#include "RefPtr.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
@@ -22,7 +22,7 @@ namespace Switch {
   /// @exception System::ArgumentNullException The parameters converter is null.
   template<typename T>
   int32 GetHashCode(const refptr<T>& value) {
-    return *((int32*)value.ToPointer());
+    return int32(int64(value.ToPointer()) & 0x00000000FFFFFFFF) ^ int32((int64(value.ToPointer())>>32) & 0x00000000FFFFFFFF);
   }
   
   /// @brief Generate a hash code for void*.
