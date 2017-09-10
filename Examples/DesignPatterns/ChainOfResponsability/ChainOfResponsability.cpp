@@ -23,7 +23,7 @@ namespace DesignPatterns {
       void HandleRequest(int request) const override {
         if (request >= 0 && request < 10) {
           Console::WriteLine("{0} handled request {1}", this->GetType().Name, request);
-        } else if (!this->successor.IsNull()) {
+        } else if (this->successor != null) {
           successor->HandleRequest(request);
         }
       }
@@ -35,7 +35,7 @@ namespace DesignPatterns {
       void HandleRequest(int request) const override {
         if (request >= 10 && request < 20) {
           Console::WriteLine("{0} handled request {1}", this->GetType().Name, request);
-        } else if (!this->successor.IsNull()) {
+        } else if (this->successor != null) {
           successor->HandleRequest(request);
         }
       }
@@ -47,7 +47,7 @@ namespace DesignPatterns {
       void HandleRequest(int request) const override {
         if (request >= 20 && request < 30) {
           Console::WriteLine("{0} handled request {1}", this->GetType().Name, request);
-        } else if (!this->successor.IsNull()) {
+        } else if (this->successor != null) {
           successor->HandleRequest(request);
         }
       }
