@@ -887,7 +887,7 @@ namespace Switch {
           return;
         }
 
-        this->path = escapeUri .IsEmpty() ? "/" : escapeUri;
+        this->path = string::IsNullOrEmpty(escapeUri) ? "/" : escapeUri;
         escapeUri = string::Empty;
       }
 

@@ -12,7 +12,7 @@ using namespace System;
 using namespace System::IO;
 
 FileStream::FileStream(const string& path, FileMode mode, FileAccess access, FileShare share) {
-  if (path.IsEmpty() || path.IndexOfAny(Path::GetInvalidPathChars()) != -1)
+  if (string::IsNullOrEmpty(path) || path.IndexOfAny(Path::GetInvalidPathChars()) != -1)
     throw ArgumentException(_current_information);
   
   this->data->fullPath = Path::GetFullPath(path);

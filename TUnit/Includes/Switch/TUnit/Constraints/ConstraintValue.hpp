@@ -37,7 +37,7 @@ namespace Switch {
         operator any&() {return this->value;}
         
         string ToString() const {
-          if (is<string>(this->value) && as<string>(this->value).IsEmpty())
+          if (is<string>(this->value) && string::IsNullOrEmpty(as<string>(this->value)))
             return "<string::Empty>";
           if (is<string>(this->value))
             return string::Format("\"{0}\"", this->value);

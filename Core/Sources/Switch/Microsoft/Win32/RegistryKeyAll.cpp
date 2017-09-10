@@ -166,7 +166,7 @@ void RegistryKey::Load() {
 
     System::String s = System::IO::File::ReadAllText(Path::Combine(this->path, "Values.xml"));
     System::String toParse = s.Remove(s.IndexOf("</Values>\n")).Substring(s.IndexOf("<Values>\n")+9).Replace(System::Environment::NewLine, "");
-    while (! toParse.IsEmpty()) {
+    while (!string::IsNullOrEmpty(toParse)) {
       RegistryKeyValue rkv = RegistryKeyValue::Parse(toParse.Substring(0, toParse.IndexOf("</Value>")+8));
       toParse = toParse.Remove(0, toParse.IndexOf("</Value>")+8);
       this->values[rkv.Key().ToLower()] = rkv;

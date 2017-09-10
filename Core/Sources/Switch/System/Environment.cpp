@@ -316,11 +316,11 @@ Array<String> Environment::GetLogicalDrives() {
 }
 
 void Environment::SetEnvironmentVariable(const String& name, const String& value, EnvironmentVariableTarget target) {
-  if (name.IsEmpty())
+  if (string::IsNullOrEmpty(name))
     throw ArgumentException(_current_information);
   
   if (target == EnvironmentVariableTarget::Process) {
-    if (value.IsEmpty()) {
+    if (string::IsNullOrEmpty(value)) {
       EnvironmentVariables().Remove(name);
       if (__OS::CoreApi::Environment::UnsetEnv(name) != 0)
         throw ArgumentException(_current_information);
@@ -331,7 +331,7 @@ void Environment::SetEnvironmentVariable(const String& name, const String& value
     }
   } else {
     Microsoft::Win32::RegistryKey key = target == EnvironmentVariableTarget::User ? Microsoft::Win32::Registry::CurrentUser().CreateSubKey("Environment") : Microsoft::Win32::Registry::LocalMachine().CreateSubKey("System").CreateSubKey("CurrentControlSet").CreateSubKey("Control").CreateSubKey("Session Manager").CreateSubKey("Environment");
-    if (value.IsEmpty())
+    if (string::IsNullOrEmpty(value))
       key.DeleteValue(name);
     else
       key.SetValue(name, value);

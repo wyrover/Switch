@@ -53,10 +53,10 @@ namespace {
     
   private:
     bool PatternCompare(const string& fileName, const string& pattern) {
-      if (pattern.IsEmpty())
-        return fileName.IsEmpty();
+      if (string::IsNullOrEmpty(pattern))
+        return string::IsNullOrEmpty(fileName);
       
-      if (fileName.IsEmpty())
+      if (string::IsNullOrEmpty(fileName))
         return false;
       
       if (pattern == "*")

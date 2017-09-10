@@ -147,7 +147,7 @@ void Thread::Resume() {
 }
 
 void Thread::SetName(const string &name) {
-  if (!this->data->name.IsEmpty())
+  if (!string::IsNullOrEmpty(this->data->name))
     throw InvalidOperationException(_current_information);
   
   this->data->name = name;

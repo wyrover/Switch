@@ -167,7 +167,7 @@ int32 Encoding::GetBytes(const String& s, byte bytes[], int32 bytesSize) const {
 }
 
 Array<byte> Encoding::GetBytes(const string& s) const {
-  if (s.IsEmpty()) return Array<byte>();
+  if (string::IsNullOrEmpty(s)) return Array<byte>();
   int32 nbBytes = GetByteCount(s);
   Array<byte> bytes(nbBytes);
   GetBytes(s, (byte*)bytes.Data(), nbBytes);

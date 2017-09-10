@@ -24,7 +24,7 @@ namespace Switch {
         
       private:
         bool Verify(const ConstraintValue& actual) const override {
-          if (is<string>(actual) && as<string>(actual).IsEmpty())
+          if (is<string>(actual) && string::IsNullOrEmpty(as<string>(actual)))
             return true;
           //if (is<System::Collections::Generic::ICollection<auto>>(actual) && as<System::Collections::Generic::ICollection<auto>>(actual).Count == 0)
           //  return true;

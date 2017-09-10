@@ -399,7 +399,7 @@ namespace Switch {
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @param currentInformation Contains information about current file and current line.
       static inline void Fail(const string& error, const string& message, const CurrentInformation& currentInformation) {
-        if (!message.IsEmpty())
+        if (!string::IsNullOrEmpty(message))
           System::Console::WriteLine(message);
         //::testing::internal::AssertHelper(::testing::TestPartResult::kFatalFailure, currentInformation.FileName().Data, currentInformation.Line, error.Data) = ::testing::Message(message.Data);
         ::testing::internal::AssertHelper(::testing::TestPartResult::kFatalFailure, currentInformation.FileName().Data, currentInformation.Line, error.Data) = ::testing::Message();
@@ -611,7 +611,7 @@ namespace Switch {
       /// Assert::IsEmpty(v2, "User message...", _current_information); // test throws an AssertionException.
       /// @endcode
       static inline void IsEmpty(const string& value, const string& message, const CurrentInformation& currentInformation) {
-        if (value.IsEmpty())
+        if (string::IsNullOrEmpty(value))
           Succeed(message, currentInformation);
         else
           Fail(string::Format("Expected: <Empty>{0}But was:  {1}", System::Environment::NewLine, ValueToString(value)), message, currentInformation);
@@ -989,7 +989,7 @@ namespace Switch {
       /// Assert::IsNotEmpty(v2, "User message...", _current_information); // test throws an AssertionException.
       /// @endcode
       static inline void IsNotEmpty(const string& value, const string& message, const CurrentInformation& currentInformation) {
-        if (!value.IsEmpty())
+        if (!string::IsNullOrEmpty(value))
           Succeed(message, currentInformation);
         else
           Fail(string::Format("Expected: not <empty>{0}But was:  <empty>", System::Environment::NewLine), message, currentInformation);
@@ -2096,12 +2096,12 @@ namespace Switch {
       
       template<typename TValue>
       static string ToString(const string& operation, const TValue& value) {
-        return string::Format("Expected:{0}{1}But was:  {2}", operation.IsEmpty() ? "" : string::Format(" {0}", operation), System::Environment::NewLine, ValueToString(value));
+        return string::Format("Expected:{0}{1}But was:  {2}", string::IsNullOrEmpty(operation) ? "" : string::Format(" {0}", operation), System::Environment::NewLine, ValueToString(value));
       }
       
       template<typename TExpected, typename TActual>
       static string ToString(const string& operation, const TExpected& expected, const TActual& actual) {
-        return string::Format("Expected:{0} {1} {2}But was:  {3}", operation.IsEmpty() ? "" : string::Format(" {0}", operation), ValueToString(expected), System::Environment::NewLine, ValueToString(actual));
+        return string::Format("Expected:{0} {1} {2}But was:  {3}", string::IsNullOrEmpty(operation) ? "" : string::Format(" {0}", operation), ValueToString(expected), System::Environment::NewLine, ValueToString(actual));
       }
       
       static System::String ValueToString(bool value) {return string::Format("{0}", value);}
@@ -2144,7 +2144,7 @@ namespace Switch {
       static System::String ValueToString(const System::UInt64& value) {return string::Format("{0}", value);}
       static System::String ValueToString(const System::Object& value) {return string::Format("<{0}>", value);}
       static System::String ValueToString(const string& value) {
-        if (value.IsEmpty()) return "<string::Empty>";
+        if (string::IsNullOrEmpty(value)) return "<string::Empty>";
         return string::Format("\"{0}\"", value);
       }
       

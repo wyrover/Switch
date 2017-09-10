@@ -686,10 +686,6 @@ String String::Insert(int32 startIndex, const String& value) const {
   return inserted;
 }
 
-bool String::IsEmpty() const {
-  return this->string.size() == 0;
-}
-
 bool String::IsNullOrEmpty(const String& value) {
   return value.string.size() == 0;
 }

@@ -11,7 +11,7 @@ using namespace System::IO;
 DirectoryInfo Directory::CreateDirectory(const string& path) {
   DirectoryInfo dirInfo(path);
   if (!dirInfo.Exists()) {
-    if (!dirInfo.Parent().FullName().IsEmpty())
+    if (!string::IsNullOrEmpty(dirInfo.Parent().FullName))
       Directory::CreateDirectory(dirInfo.Parent().FullName());
     dirInfo.Create();
   }

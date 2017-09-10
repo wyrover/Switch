@@ -529,10 +529,6 @@ namespace Switch {
       /// @return bool true if the value parameter is null or an empty String (""); otherwise, false.
       static bool IsNullOrEmpty(const String& value);
 
-      /// @brief Indicates if the string is empty.
-      /// @return bool true indicates the string is empty; otherwise false.
-      bool IsEmpty() const;
-
       /// @brief Concatenates a specified separator String between each element of a specified String array, yielding a single concatenated String.
       /// @param separator A String separator.
       /// @param values An array of String.

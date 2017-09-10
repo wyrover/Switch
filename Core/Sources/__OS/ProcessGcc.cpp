@@ -47,7 +47,7 @@ namespace {
   
   string GetProcessName(pid_t id) {
     char name[1024] = {0};
-    if (proc_name(id, name, 1024) != 0 || string(name).IsEmpty())
+    if (proc_name(id, name, 1024) != 0 || string::IsNullOrEmpty(name))
       return System::IO::Path::GetFileNameWithoutExtension(GetProcessPath(id));
     return name;
   }
@@ -91,7 +91,7 @@ System::Array<intptr> GetProcesses() {
 intptr __OS::CoreApi::Process::Start(const System::Diagnostics::ProcessStartInfo& processStartInfo) {
   pid_t processId = fork();
   if (processId == 0) {
-    System::Array<string> subStrings = string::Format("{0}{1}{2}", processStartInfo.FileName, processStartInfo.Arguments().IsEmpty() ? "" : " ", processStartInfo.Arguments()).Split(' ');
+    System::Array<string> subStrings = string::Format("{0}{1}{2}", processStartInfo.FileName, string::IsNullOrEmpty(processStartInfo.Arguments) ? "" : " ", processStartInfo.Arguments()).Split(' ');
     System::Array<const char*> arguments(subStrings.Length + 1);
     for (int i = 0; i < subStrings.Length; i++)
       arguments[i] = subStrings[i].Data();

@@ -25,7 +25,7 @@ namespace Switch {
         /// @endcond
 
         void Flush() override {
-          if (!this->data->messageLine.IsEmpty())
+          if (!string::IsNullOrEmpty(this->data->messageLine))
             this->WriteLine("");
           if (this->data->logWriter != null)
             this->data->logWriter->Flush();

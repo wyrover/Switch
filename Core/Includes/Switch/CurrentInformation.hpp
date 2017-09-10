@@ -47,9 +47,9 @@ namespace Switch {
     };
     
     System::String ToString() const override {
-      if (this->fileName.IsEmpty() && this->line == 0 && this->functionName.IsEmpty())
+      if (string::IsNullOrEmpty(this->fileName) && this->line == 0 && string::IsNullOrEmpty(this->functionName))
         return "{Empty}";
-      if (this->functionName.IsEmpty())
+      if (string::IsNullOrEmpty(this->functionName))
         return System::String::Format("{{File=\"{0}\", Line={1}}}", this->fileName, this->line);
       return System::String::Format("{{File=\"{0}\", Line={1}, Function=\"{2}\"}}", this->fileName, this->line, this->functionName);
     }

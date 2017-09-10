@@ -21,7 +21,7 @@ namespace {
 }
 
 void __OS::CoreApi::Debugger::Log(int32 level, const string& category, const string &message) {
-  if (category.IsEmpty())
+  if (string::IsNullOrEmpty(category))
     syslog(LevelToNative(level) | LOG_USER, "%s", message.Data());
   else
     syslog(LevelToNative(level) | LOG_USER, "%.256s: %s", category.Data(), message.Data());
