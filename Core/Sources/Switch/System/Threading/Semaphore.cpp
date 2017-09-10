@@ -31,7 +31,7 @@ Semaphore::Semaphore(int32 initialCount, int32 maximumCount, const string& name,
 }
 
 void Semaphore::Close() {
-  if (this->guard.IsNull())
+  if (this->guard == null)
     return;
   if (this->name() != "")
     ::semaphores.Remove(this->name());

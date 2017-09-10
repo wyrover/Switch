@@ -14,7 +14,7 @@ const string& Exception::GetMessage() const {
 }
 
 string Exception::GetStackTrace() const {
-  if (this->stackTrace.IsNull() || this->stackTrace().Length == 0)
+  if (this->stackTrace == null || this->stackTrace().Length == 0)
     return "";
   
   return string::Join("\n", this->stackTrace());
@@ -114,7 +114,7 @@ const char* Exception::what() const noexcept {
 }
 
 string Exception::GetStackTrace(const string& filter) const {
-  if (this->stackTrace.IsNull() || this->stackTrace().Length == 0)
+  if (this->stackTrace == null || this->stackTrace().Length == 0)
     return "";
 
   int32 startIndex= 0;

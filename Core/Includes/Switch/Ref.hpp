@@ -36,11 +36,7 @@ namespace Switch {
 
     /// @brief Return true if this instance is null.
     /// @return true if this instance is null; otherwise false.
-    bool IsNull() const { return this->ptr == null; }
-    
-    /// @brief Return true if this instance is null.
-    /// @return true if this instance is null; otherwise false.
-    static bool IsNullOrInvalid(const Ref<T>& ref) { return &ref == null || ref.IsNull(); }
+    static bool IsNullOrInvalid(const Ref<T>& ref) { return &ref == null || ref == null; }
     
     /// @brief Set to null.
     void Reset() { this->ptr = null; }
@@ -257,11 +253,15 @@ namespace Switch {
       Reset(*ref.ptr);
       return *this;
     }
+
+    bool operator==(NullPtr) const { return this->ptr == null; }
     
     bool operator==(const T& ref) const { return this->ptr == &ref; }
     
     bool operator==(const Ref<T>& ref) const { return this->ptr == ref.ptr; }
     
+    bool operator!=(NullPtr) const { return this->ptr != null; }
+
     bool operator!=(const T& ref) const { return this->ptr != &ref; }
     
     bool operator!=(const Ref<T>& ref) const { return this->ptr != ref.ptr; }

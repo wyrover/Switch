@@ -82,7 +82,7 @@ namespace Switch {
         /// @brief Sets the state of the event to nonsignaled, causing threads to block.
         /// @return true if the operation succeeds; otherwise, false.
         bool Reset() {
-          if (this->guard.IsNull())
+          if (this->guard == null)
             throw ObjectClosedException(_current_information);
           std::unique_lock<std::mutex> lock(*this->guard);
           *this->event = false;
@@ -92,7 +92,7 @@ namespace Switch {
         /// @brief Sets the state of the event to signaled, allowing one or more waiting threads to proceed.
         /// @return true if the operation succeeds; otherwise, false.
         bool Set() {
-          if (this->guard.IsNull())
+          if (this->guard == null)
             throw ObjectClosedException(_current_information);
           std::unique_lock<std::mutex> lock(*this->guard);
           *this->event = true;
@@ -116,7 +116,7 @@ namespace Switch {
         bool Signal() override {return this->Set();}
         
         bool Wait(int32 millisecondsTimeOut) override {
-          if (this->guard.IsNull())
+          if (this->guard == null)
             throw ObjectClosedException(_current_information);
           if (millisecondsTimeOut < -1)
             throw AbandonedMutexException(_current_information);

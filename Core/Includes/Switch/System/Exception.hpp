@@ -75,7 +75,7 @@ namespace Switch {
       /// @brief Gets If other Exception instance that caused the current exception.
       /// @return Exception An instance of Exception that describes the error that caused the current exception. The InnerException property returns the same value as was passed into the constructor, or a null reference if the inner exception value was not supplied to the constructor.
       property<bool, readonly> HasInnerException {
-        _get {return !this->innerException.IsNull();}
+        _get {return this->innerException != null;}
       };
       
       /// @brief Gets the Exception instance that caused the current exception.

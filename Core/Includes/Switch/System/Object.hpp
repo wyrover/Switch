@@ -6,10 +6,11 @@
 
 #include "../Types.hpp"
 #include "../As.hpp"
-#include "../RefPtr.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
+  template<typename T>
+  class RefPtr;
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @cond
@@ -71,7 +72,7 @@ namespace Switch {
       /// The following code example shows how to copy an instance of a class using MemberwiseClone.
       /// @include ObjectMemberwiseClone.cpp
       template<typename T>
-      refptr<Object> MemberwiseClone() const {return ref_new<T>(as<T>(*this));}
+      RefPtr<Object> MemberwiseClone() const;
 
       /// @brief Determines whether the specified Object instances are the same instance.
       /// @param objectA The first Object to compare.
@@ -100,5 +101,14 @@ std::ostream& operator<<(std::ostream& os, const System::Object& value);
 
 #include "_String.hpp"
 #include "Type.hpp"
+
+#include "../RefPtr.hpp"
+
+namespace Switch {
+  namespace System {
+    template<typename T>
+    RefPtr<Object> Object::MemberwiseClone() const {return ref_new<T>(as<T>(*this));}
+  }
+}
 
 using namespace Switch;

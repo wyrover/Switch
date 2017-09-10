@@ -33,7 +33,7 @@ EventWaitHandle::EventWaitHandle(bool initialState, EventResetMode mode, const s
 }
 
 void EventWaitHandle::Close() {
-  if (this->guard.IsNull())
+  if (this->guard == null)
     return;
   if (this->name() != "")
     ::events.Remove(this->name());

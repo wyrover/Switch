@@ -100,7 +100,7 @@ namespace Switch {
         /// @exception SemaphoreFullException The semaphore count is already at the maximum value.
         /// @exception IO::IOException An Io error occurred.
         int32 Release(int32 releaseCount) {
-          if (this->guard.IsNull())
+          if (this->guard == null)
             throw ObjectClosedException(_current_information);
           std::unique_lock<std::mutex> lock(*this->guard);
           if (*this->count + releaseCount > *this->maxCount)
@@ -123,7 +123,7 @@ namespace Switch {
         }
         
         bool Wait(int32 millisecondsTimeOut) override {
-          if (this->guard.IsNull())
+          if (this->guard == null)
             throw ObjectClosedException(_current_information);
           if (millisecondsTimeOut < -1)
             throw AbandonedMutexException(_current_information);

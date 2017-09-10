@@ -329,108 +329,108 @@ namespace SwitchUnitTests {
       Assert::IsNull(r, _current_information);
     }
     
-    void SpStringAsString() {
+    void RefPtrStringAsString() {
       refptr<string> s = ref_new<string>("Test");
       refptr<string> r = as<string>(s);
       Assert::AreEqual(s.ToPointer(), r.ToPointer(), _current_information);
     }
     
-    void SpStringAsObject() {
+    void RefPtrStringAsObject() {
       refptr<string> s = ref_new<string>("Test");
       refptr<object> r = as<object>(s);
       Assert::AreEqual(s.ToPointer(), r.ToPointer(), _current_information);
     }
     
-    void SpStringAsIComparable() {
+    void RefPtrStringAsIComparable() {
       refptr<string> s = ref_new<string>("Test");
       refptr<IComparable> r = as<IComparable>(s);
       Assert::AreEqual(s.ToPointer(), r.ToPointer(), _current_information);
     }
     
-    void SpStringAsInt32() {
+    void RefPtrStringAsInt32() {
       refptr<string> s = ref_new<string>("Test");
       refptr<Int32> r = as<Int32>(s);
-      Assert::IsTrue(r.IsNull(), _current_information);
+      Assert::IsTrue(r == null, _current_information);
     }
     
-    void SpObjectFromStringAsString() {
+    void RefPtrObjectFromStringAsString() {
       refptr<string> s = ref_new<string>("Test");
       refptr<object> o = as<object>(s);
       refptr<string> r = as<string>(o);
       Assert::AreEqual(s.ToPointer(), r.ToPointer(), _current_information);
     }
     
-    void SpObjectFromStringAsObject() {
+    void RefPtrObjectFromStringAsObject() {
       refptr<string> s = ref_new<string>("Test");
       refptr<object> o = as<object>(s);
       refptr<object> r = as<object>(o);
       Assert::AreEqual(s.ToPointer(), r.ToPointer(), _current_information);
     }
     
-    void SpObjectFromStringAsIComparable() {
+    void RefPtrObjectFromStringAsIComparable() {
       refptr<string> s = ref_new<string>("Test");
       refptr<object> o = as<object>(s);
       refptr<IComparable> r = as<IComparable>(o);
       Assert::AreEqual(s.ToPointer(), r.ToPointer(), _current_information);
     }
     
-    void SpObjectFromStringAsInt32() {
+    void RefPtrObjectFromStringAsInt32() {
       refptr<string> s = ref_new<string>("Test");
       refptr<object> o = as<object>(s);
       refptr<Int32> r = as<Int32>(o);
-      Assert::IsTrue(r.IsNull(), _current_information);
+      Assert::IsTrue(r == null, _current_information);
     }
     
-    void SpStringNullAsString() {
+    void RefPtrStringNullAsString() {
       refptr<string> s = refptr<string>::Null();
       refptr<string> r = as<string>(s);
-      Assert::IsTrue(r.IsNull(), _current_information);
+      Assert::IsTrue(r == null, _current_information);
     }
     
-    void SpStringNullAsObject() {
+    void RefPtrStringNullAsObject() {
       refptr<string> s = refptr<string>::Null();
       refptr<object> r = as<object>(s);
-      Assert::IsTrue(r.IsNull(), _current_information);
+      Assert::IsTrue(r == null, _current_information);
     }
     
-    void SpStringNullAsIComparable() {
+    void RefPtrStringNullAsIComparable() {
       refptr<string> s = refptr<string>::Null();
       refptr<IComparable> r = as<IComparable>(s);
-      Assert::IsTrue(r.IsNull(), _current_information);
+      Assert::IsTrue(r == null, _current_information);
     }
     
-    void SpStringNullAsInt32() {
+    void RefPtrStringNullAsInt32() {
       refptr<string> s = refptr<string>::Null();
       refptr<Int32> r = as<Int32>(s);
-      Assert::IsTrue(r.IsNull(), _current_information);
+      Assert::IsTrue(r == null, _current_information);
     }
     
-    void SpObjectFromStringNullAsString() {
+    void RefPtrObjectFromStringNullAsString() {
       refptr<string> s = refptr<string>::Null();
       refptr<object> o = as<object>(s);
       refptr<string> r = as<string>(o);
-      Assert::IsTrue(r.IsNull(), _current_information);
+      Assert::IsTrue(r == null, _current_information);
     }
     
-    void SpObjectFromStringNullAsObject() {
+    void RefPtrObjectFromStringNullAsObject() {
       refptr<string> s = refptr<string>::Null();
       refptr<object> o = as<object>(s);
       refptr<object> r = as<object>(o);
-      Assert::IsTrue(r.IsNull(), _current_information);
+      Assert::IsTrue(r == null, _current_information);
     }
     
-    void SpObjectFromStringNullAsIComparable() {
+    void RefPtrObjectFromStringNullAsIComparable() {
       refptr<string> s = refptr<string>::Null();
       refptr<object> o = as<object>(s);
       refptr<IComparable> r = as<IComparable>(o);
-      Assert::IsTrue(r.IsNull(), _current_information);
+      Assert::IsTrue(r == null, _current_information);
     }
     
-    void SpObjectFromStringNullAsInt32() {
+    void RefPtrObjectFromStringNullAsInt32() {
       refptr<string> s = refptr<string>::Null();
       refptr<object> o = as<object>(s);
       refptr<Int32> r = as<Int32>(o);
-      Assert::IsTrue(r.IsNull(), _current_information);
+      Assert::IsTrue(r == null, _current_information);
     }
     
     void ConstSpStringAsString() {
@@ -454,7 +454,7 @@ namespace SwitchUnitTests {
     void ConstSpStringAsInt32() {
       const refptr<string> s = ref_new<string>("Test");
       const refptr<Int32> r = as<Int32>(s);
-      Assert::IsTrue(r.IsNull(), _current_information);
+      Assert::IsTrue(r == null, _current_information);
     }
     
     void ConstSpObjectFromStringAsString() {
@@ -482,59 +482,59 @@ namespace SwitchUnitTests {
       const refptr<string> s = ref_new<string>("Test");
       const refptr<object> o = as<object>(s);
       const refptr<Int32> r = as<Int32>(o);
-      Assert::IsTrue(r.IsNull(), _current_information);
+      Assert::IsTrue(r == null, _current_information);
     }
     
     void ConstSpStringNullAsString() {
       const refptr<string> s = refptr<string>::Null();
       const refptr<string> r = as<string>(s);
-      Assert::IsTrue(r.IsNull(), _current_information);
+      Assert::IsTrue(r == null, _current_information);
     }
     
     void ConstSpStringNullAsObject() {
       const refptr<string> s = refptr<string>::Null();
       const refptr<object> r = as<object>(s);
-      Assert::IsTrue(r.IsNull(), _current_information);
+      Assert::IsTrue(r == null, _current_information);
     }
     
     void ConstSpStringNullAsIComparable() {
       const refptr<string> s = refptr<string>::Null();
       const refptr<IComparable> r = as<IComparable>(s);
-      Assert::IsTrue(r.IsNull(), _current_information);
+      Assert::IsTrue(r == null, _current_information);
     }
     
     void ConstSpStringNullAsInt32() {
       const refptr<string> s = refptr<string>::Null();
       const refptr<Int32> r = as<Int32>(s);
-      Assert::IsTrue(r.IsNull(), _current_information);
+      Assert::IsTrue(r == null, _current_information);
     }
     
     void ConstSpObjectFromStringNullAsString() {
       const refptr<string> s = refptr<string>::Null();
       const refptr<object> o = as<object>(s);
       const refptr<string> r = as<string>(o);
-      Assert::IsTrue(r.IsNull(), _current_information);
+      Assert::IsTrue(r == null, _current_information);
     }
     
     void ConstSpObjectFromStringNullAsObject() {
       const refptr<string> s = refptr<string>::Null();
       const refptr<object> o = as<object>(s);
       const refptr<object> r = as<object>(o);
-      Assert::IsTrue(r.IsNull(), _current_information);
+      Assert::IsTrue(r == null, _current_information);
     }
     
     void ConstSpObjectFromStringNullAsIComparable() {
       const refptr<string> s = refptr<string>::Null();
       const refptr<object> o = as<object>(s);
       const refptr<IComparable> r = as<IComparable>(o);
-      Assert::IsTrue(r.IsNull(), _current_information);
+      Assert::IsTrue(r == null, _current_information);
     }
     
     void ConstSpObjectFromStringNullAsInt32() {
       const refptr<string> s = refptr<string>::Null();
       const refptr<object> o = as<object>(s);
       const refptr<Int32> r = as<Int32>(o);
-      Assert::IsTrue(r.IsNull(), _current_information);
+      Assert::IsTrue(r == null, _current_information);
     }
         
     void RefStringAsString() {
@@ -562,7 +562,7 @@ namespace SwitchUnitTests {
       string str = "Test";
       ref<string> s = str;
       ref<Int32> r = as<Int32>(s);
-      Assert::IsTrue(r.IsNull(), _current_information);
+      Assert::IsTrue(r == null, _current_information);
     }
     
     void RefObjectFromStringAsString() {
@@ -594,59 +594,59 @@ namespace SwitchUnitTests {
       ref<string> s = str;
       ref<object> o = as<object>(s);
       ref<Int32> r = as<Int32>(o);
-      Assert::IsTrue(r.IsNull(), _current_information);
+      Assert::IsTrue(r == null, _current_information);
     }
     
     void RefStringNullAsString() {
       ref<string> s = ref<string>::Null();
       ref<string> r = as<string>(s);
-      Assert::IsTrue(r.IsNull(), _current_information);
+      Assert::IsTrue(r == null, _current_information);
     }
     
     void RefStringNullAsObject() {
       ref<string> s = ref<string>::Null();
       ref<object> r = as<object>(s);
-      Assert::IsTrue(r.IsNull(), _current_information);
+      Assert::IsTrue(r == null, _current_information);
     }
     
     void RefStringNullAsIComparable() {
       ref<string> s = ref<string>::Null();
       ref<IComparable> r = as<IComparable>(s);
-      Assert::IsTrue(r.IsNull(), _current_information);
+      Assert::IsTrue(r == null, _current_information);
     }
     
     void RefStringNullAsInt32() {
       ref<string> s = ref<string>::Null();
       ref<Int32> r = as<Int32>(s);
-      Assert::IsTrue(r.IsNull(), _current_information);
+      Assert::IsTrue(r == null, _current_information);
     }
     
     void RefObjectFromStringNullAsString() {
       ref<string> s = ref<string>::Null();
       ref<object> o = as<object>(s);
       ref<string> r = as<string>(o);
-      Assert::IsTrue(r.IsNull(), _current_information);
+      Assert::IsTrue(r == null, _current_information);
     }
     
     void RefObjectFromStringNullAsObject() {
       ref<string> s = ref<string>::Null();
       ref<object> o = as<object>(s);
       ref<object> r = as<object>(o);
-      Assert::IsTrue(r.IsNull(), _current_information);
+      Assert::IsTrue(r == null, _current_information);
     }
     
     void RefObjectFromStringNullAsIComparable() {
       ref<string> s = ref<string>::Null();
       ref<object> o = as<object>(s);
       ref<IComparable> r = as<IComparable>(o);
-      Assert::IsTrue(r.IsNull(), _current_information);
+      Assert::IsTrue(r == null, _current_information);
     }
     
     void RefObjectFromStringNullAsInt32() {
       ref<string> s = ref<string>::Null();
       ref<object> o = as<object>(s);
       ref<Int32> r = as<Int32>(o);
-      Assert::IsTrue(r.IsNull(), _current_information);
+      Assert::IsTrue(r == null, _current_information);
     }
     
     void ConstRefStringAsString() {
@@ -674,7 +674,7 @@ namespace SwitchUnitTests {
       const string str = "Test";
       const ref<string> s = str;
       const ref<Int32> r = as<Int32>(s);
-      Assert::IsTrue(r.IsNull(), _current_information);
+      Assert::IsTrue(r == null, _current_information);
     }
     
     void ConstRefObjectFromStringAsString() {
@@ -706,59 +706,59 @@ namespace SwitchUnitTests {
       const ref<string> s = str;
       const ref<object> o = as<object>(s);
       const ref<Int32> r = as<Int32>(o);
-      Assert::IsTrue(r.IsNull(), _current_information);
+      Assert::IsTrue(r == null, _current_information);
     }
     
     void ConstRefStringNullAsString() {
       const ref<string> s = ref<string>::Null();
       const ref<string> r = as<string>(s);
-      Assert::IsTrue(r.IsNull(), _current_information);
+      Assert::IsTrue(r == null, _current_information);
     }
     
     void ConstRefStringNullAsObject() {
       const ref<string> s = ref<string>::Null();
       const ref<object> r = as<object>(s);
-      Assert::IsTrue(r.IsNull(), _current_information);
+      Assert::IsTrue(r == null, _current_information);
     }
     
     void ConstRefStringNullAsIComparable() {
       const ref<string> s = ref<string>::Null();
       const ref<IComparable> r = as<IComparable>(s);
-      Assert::IsTrue(r.IsNull(), _current_information);
+      Assert::IsTrue(r == null, _current_information);
     }
     
     void ConstRefStringNullAsInt32() {
       const ref<string> s = ref<string>::Null();
       const ref<Int32> r = as<Int32>(s);
-      Assert::IsTrue(r.IsNull(), _current_information);
+      Assert::IsTrue(r == null, _current_information);
     }
     
     void ConstRefObjectFromStringNullAsString() {
       const ref<string> s = ref<string>::Null();
       const ref<object> o = as<object>(s);
       const ref<string> r = as<string>(o);
-      Assert::IsTrue(r.IsNull(), _current_information);
+      Assert::IsTrue(r == null, _current_information);
     }
     
     void ConstRefObjectFromStringNullAsObject() {
       const ref<string> s = ref<string>::Null();
       const ref<object> o = as<object>(s);
       const ref<object> r = as<object>(o);
-      Assert::IsTrue(r.IsNull(), _current_information);
+      Assert::IsTrue(r == null, _current_information);
     }
     
     void ConstRefObjectFromStringNullAsIComparable() {
       const ref<string> s = ref<string>::Null();
       const ref<object> o = as<object>(s);
       const ref<IComparable> r = as<IComparable>(o);
-      Assert::IsTrue(r.IsNull(), _current_information);
+      Assert::IsTrue(r == null, _current_information);
     }
     
     void ConstRefObjectFromStringNullAsInt32() {
       const ref<string> s = ref<string>::Null();
       const ref<object> o = as<object>(s);
       const ref<Int32> r = as<Int32>(o);
-      Assert::IsTrue(r.IsNull(), _current_information);
+      Assert::IsTrue(r == null, _current_information);
     }
     
     void AnyInt32ToInt32() {
@@ -846,22 +846,22 @@ namespace SwitchUnitTests {
   _test(AsTest, ConstObjectPtrFromStringPtrNullAsObject)
   _test(AsTest, ConstObjectPtrFromStringPtrNullAsIComparable)
   _test(AsTest, ConstObjectPtrFromStringPtrNullAsInt32)
-  _test(AsTest, SpStringAsString)
-  _test(AsTest, SpStringAsObject)
-  _test(AsTest, SpStringAsIComparable)
-  _test(AsTest, SpStringAsInt32)
-  _test(AsTest, SpObjectFromStringAsString)
-  _test(AsTest, SpObjectFromStringAsObject)
-  _test(AsTest, SpObjectFromStringAsIComparable)
-  _test(AsTest, SpObjectFromStringAsInt32)
-  _test(AsTest, SpStringNullAsString)
-  _test(AsTest, SpStringNullAsObject)
-  _test(AsTest, SpStringNullAsIComparable)
-  _test(AsTest, SpStringNullAsInt32)
-  _test(AsTest, SpObjectFromStringNullAsString)
-  _test(AsTest, SpObjectFromStringNullAsObject)
-  _test(AsTest, SpObjectFromStringNullAsIComparable)
-  _test(AsTest, SpObjectFromStringNullAsInt32)
+  _test(AsTest, RefPtrStringAsString)
+  _test(AsTest, RefPtrStringAsObject)
+  _test(AsTest, RefPtrStringAsIComparable)
+  _test(AsTest, RefPtrStringAsInt32)
+  _test(AsTest, RefPtrObjectFromStringAsString)
+  _test(AsTest, RefPtrObjectFromStringAsObject)
+  _test(AsTest, RefPtrObjectFromStringAsIComparable)
+  _test(AsTest, RefPtrObjectFromStringAsInt32)
+  _test(AsTest, RefPtrStringNullAsString)
+  _test(AsTest, RefPtrStringNullAsObject)
+  _test(AsTest, RefPtrStringNullAsIComparable)
+  _test(AsTest, RefPtrStringNullAsInt32)
+  _test(AsTest, RefPtrObjectFromStringNullAsString)
+  _test(AsTest, RefPtrObjectFromStringNullAsObject)
+  _test(AsTest, RefPtrObjectFromStringNullAsIComparable)
+  _test(AsTest, RefPtrObjectFromStringNullAsInt32)
   _test(AsTest, ConstSpStringAsString)
   _test(AsTest, ConstSpStringAsObject)
   _test(AsTest, ConstSpStringAsIComparable)

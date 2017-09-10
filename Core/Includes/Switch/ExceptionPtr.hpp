@@ -110,13 +110,11 @@ namespace Switch {
     ~ExceptionPtr() {}
     operator bool() const {return this->exception.operator bool();}
     bool operator!() const {return !this->operator bool();}
+    bool operator==(NullPtr) const {return this->operator!();}
     bool operator==(const ExceptionPtr& eptr) const {return this->exception == eptr.exception;}
+    bool operator!=(NullPtr) const {return !this->operator!();}
     bool operator!=(const ExceptionPtr& eptr) const {return !this->operator==(eptr);}
     /// @endcond
-    
-    /// @brief Return true if this instance is null.
-    /// @return true if this instance is null; otherwise false.
-    bool IsNull() const {return this->operator!();}
     
     /// @brief Get a ExceptionPtr object to current exception.
     /// @return An ExceptionPtr object pointing to the currently handled exception, or some other exception if the internal process of the function would raise a new exception.

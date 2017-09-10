@@ -10,20 +10,20 @@ namespace SwitchUnitTests {
   protected:
     void CreateExceptionPointerEmptyThenRethrow() {
       ExceptionPtr ep;
-      Assert::IsTrue(ep.IsNull(), _current_information);
+      Assert::IsTrue(ep == null, _current_information);
       Assert::DoesNotThrows(_delegate {ep.Rethrow();}, _current_information);
     }
     
     void CreateKnownExceptionThenRethrow() {
       ExceptionPtr ep = ExceptionPtr::Create(InvalidCastException());
-      Assert::IsFalse(ep.IsNull());
+      Assert::IsFalse(ep == null);
       Assert::Throws<InvalidCastException>(_delegate {ep.Rethrow();}, _current_information);
     }
     
     void CreateUnknownExceptionThenRethrow() {
       struct MyException {};
       ExceptionPtr ep = ExceptionPtr::Create(MyException());
-      Assert::IsFalse(ep.IsNull());
+      Assert::IsFalse(ep == null);
       Assert::Throws<MyException>(_delegate {ep.Rethrow();}, _current_information);
     }
    
@@ -32,7 +32,7 @@ namespace SwitchUnitTests {
       _using() {
         ep = ExceptionPtr::CurrentException;
       }
-      Assert::IsTrue(ep.IsNull(), _current_information);
+      Assert::IsTrue(ep == null, _current_information);
       Assert::DoesNotThrows(_delegate {ep.Rethrow();}, _current_information);
     }
     
@@ -45,7 +45,7 @@ namespace SwitchUnitTests {
           ep = ExceptionPtr::CurrentException;
         }
       }
-      Assert::IsFalse(ep.IsNull(), _current_information);
+      Assert::IsFalse(ep == null, _current_information);
       Assert::Throws<InvalidOperationException>(_delegate {ep.Rethrow();}, _current_information);
     }
     
@@ -59,7 +59,7 @@ namespace SwitchUnitTests {
           ep = ExceptionPtr::CurrentException;
         }
       }
-      Assert::IsFalse(ep.IsNull(), _current_information);
+      Assert::IsFalse(ep == null, _current_information);
       Assert::Throws<MyException>(_delegate {ep.Rethrow();}, _current_information);
     }
   };

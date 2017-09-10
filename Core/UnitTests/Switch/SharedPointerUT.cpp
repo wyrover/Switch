@@ -55,7 +55,7 @@ namespace {
   TEST(Sp, SetNull) {
     _using(refptr<int> ptr) {
       EXPECT_THROW(ptr.ToPointer(), std::exception);
-      EXPECT_TRUE(ptr.IsNull());
+      EXPECT_TRUE(ptr == null);
       EXPECT_THROW(*ptr, std::exception);
       EXPECT_THROW(ptr.ToObject(), std::exception);
     }
@@ -66,7 +66,7 @@ namespace {
     _using(refptr<TestPointer> ptr(new TestPointer())) {
       EXPECT_EQ(1, TestPointer::GetCpt());
       EXPECT_NE((TestPointer*)null, ptr.ToPointer());
-      EXPECT_FALSE(ptr.IsNull());
+      EXPECT_FALSE(ptr == null);
       EXPECT_NO_THROW(*ptr);
       EXPECT_NO_THROW(ptr.ToObject());
     }
@@ -79,7 +79,7 @@ namespace {
     EXPECT_EQ(1, TestPointer::GetCpt());
     _using(refptr<TestPointer> ptr(tp)) {
       EXPECT_NE((TestPointer*)null, ptr.ToPointer());
-      EXPECT_FALSE(ptr.IsNull());
+      EXPECT_FALSE(ptr == null);
       EXPECT_NO_THROW(*ptr);
       EXPECT_NO_THROW(ptr.ToObject());
       EXPECT_EQ(tp, ptr.ToPointer());
@@ -92,7 +92,7 @@ namespace {
     _using(refptr<TestPointer> ptr = new TestPointer()) {
       EXPECT_EQ(1, TestPointer::GetCpt());
       EXPECT_NE((TestPointer*)null, ptr.ToPointer());
-      EXPECT_FALSE(ptr.IsNull());
+      EXPECT_FALSE(ptr == null);
       EXPECT_NO_THROW(*ptr);
       EXPECT_NO_THROW(ptr.ToObject());
     }
@@ -110,8 +110,8 @@ namespace {
         EXPECT_NE((TestPointer*)null, ptr1.ToPointer());
         EXPECT_NE((TestPointer*)null, ptr2.ToPointer());
         EXPECT_TRUE(ptr1 == ptr2);
-        EXPECT_FALSE(ptr1.IsNull());
-        EXPECT_FALSE(ptr2.IsNull());
+        EXPECT_FALSE(ptr1 == null);
+        EXPECT_FALSE(ptr2 == null);
         EXPECT_NO_THROW(*ptr2);
         EXPECT_NO_THROW(ptr2.ToObject());
         EXPECT_EQ("TestPointer", ptr2.ToObject().ToString());
@@ -134,8 +134,8 @@ namespace {
         EXPECT_NE((TestPointer*)null, ptr1.ToPointer());
         EXPECT_NE((TestPointer*)null, ptr2.ToPointer());
         EXPECT_TRUE(ptr1 == ptr2);
-        EXPECT_FALSE(ptr1.IsNull());
-        EXPECT_FALSE(ptr2.IsNull());
+        EXPECT_FALSE(ptr1 == null);
+        EXPECT_FALSE(ptr2 == null);
         EXPECT_NO_THROW(*ptr2);
         EXPECT_NO_THROW(ptr2.ToObject());
         EXPECT_EQ("TestPointer", ptr2.ToObject().ToString());
@@ -149,7 +149,7 @@ namespace {
   
   TEST(Sp, Constructor) {
     refptr<string> stringEmpty;
-    EXPECT_TRUE(stringEmpty.IsNull());
+    EXPECT_TRUE(stringEmpty == null);
     EXPECT_TRUE(refptr<string>::IsNullOrInvalid(stringEmpty));
     EXPECT_THROW(stringEmpty.ToObject(), std::exception);
     EXPECT_THROW(stringEmpty.ToPointer(), std::exception);

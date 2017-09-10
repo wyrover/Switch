@@ -33,7 +33,7 @@ namespace Examples {
       p1->Name = "John";
       _<Person> p2 = null;
       
-      // The following throws a NullReferenceException.
+      // The following throws a std::exception.
       Console::WriteLine("p1 = p2: {0}", p1->MyEquals(p2));
     }
   };

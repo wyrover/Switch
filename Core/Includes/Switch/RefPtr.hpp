@@ -7,7 +7,9 @@
 #include <string>
 #include <sstream>
 
+#include "NullPtr.hpp"
 #include "Types.hpp"
+//#include "System/NullReferenceException.hpp"
 
 /// @cond
 namespace Switch {
@@ -90,14 +92,10 @@ namespace Switch {
       return this->subObject->UseCount;
     }
     
-    /// @brief Indicates whether the SharePointer is null.
-    /// @return bool true if the SharePointer is null; otherwise, false.
-    bool IsNull() const { return this->subObject == null; }
-    
     /// @brief Indicates whether the specified sp SharPointer is an null or Empty.
     /// @param sp A RefPtr reference.
     /// @return bool true if the smartPointer parameter is null or an empty RefPtr; otherwise, false.
-    static bool IsNullOrInvalid(const RefPtr<T>& sp) { return sp.IsNull(); }
+    static bool IsNullOrInvalid(const RefPtr<T>& sp) { return sp == null; }
     
     /// @brief Gets a bool indicate is the current RefPtr<T> is unique (UseCount = 1).
     /// @return Return true if the current SharePointer is unique; otherwise false.
@@ -434,11 +432,15 @@ namespace Switch {
       return *this;
     }
     
-    bool operator==(const T* ptr) { return this->ptr == ptr; }
+    bool operator==(NullPtr) const { return this->subObject == null; }
+    
+    bool operator==(const T* ptr) const { return this->ptr == ptr; }
     
     bool operator==(const RefPtr<T>& sp) const { return this->subObject == sp.subObject && this->ptr == sp.ptr; }
     
-    bool operator!=(const T* ptr) { return this->ptr != ptr; }
+    bool operator!=(NullPtr) const { return this->subObject != null; }
+    
+    bool operator!=(const T* ptr) const { return this->ptr != ptr; }
     
     bool operator!=(const RefPtr<T>& sp) const { return this->subObject != sp.subObject || this->ptr != sp.ptr; }
     

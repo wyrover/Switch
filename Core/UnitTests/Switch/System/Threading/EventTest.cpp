@@ -127,17 +127,17 @@ namespace SwitchUnitTests {
     }
     
     void OpenExistingWithoutCreatingEventBebore() {
-      //Assert::IsTrue(EventWaitHandle::OpenExisting("Event").IsNull(), _current_information);
+      //Assert::IsTrue(EventWaitHandle::OpenExisting("Event") == null, _current_information);
     }
     
     void OpenExistingWithCreatingAnotherEventBebore() {
       EventWaitHandle ev(false, EventResetMode::ManualReset, "Event");
-     // Assert::IsTrue(EventWaitHandle::OpenExisting("Event 1").IsNull(), _current_information);
+     // Assert::IsTrue(EventWaitHandle::OpenExisting("Event 1") == null, _current_information);
     }
     
     void OpenExistingWithCreatingEventBebore() {
       EventWaitHandle ev(false, EventResetMode::ManualReset, "Event");
-     // Assert::IsFalse(EventWaitHandle::OpenExisting("Event").IsNull(), _current_information);
+     // Assert::IsFalse(EventWaitHandle::OpenExisting("Event") == null, _current_information);
     }
     
     void DoubleAutoResesetEvent() {

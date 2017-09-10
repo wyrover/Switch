@@ -161,7 +161,7 @@ namespace Switch {
     /// @return true if the current Nullable<T> object has a value; false if the current Nullable<T> object has no value.
     /// @remarks If the HasValue property is true, the value of the current Nullable<T> object can be accessed with the Value property. Otherwise, attempting to access its value throws an InvalidOperationException exception.
     property<bool, readonly> HasValue {
-      _get {return !this->value.IsNull();}
+      _get {return this->value != null;}
     };
     
     /// @brief Gets the value of the current Any object if it has been assigned a valid underlying value.

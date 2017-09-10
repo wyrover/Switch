@@ -39,8 +39,8 @@ class __opaque_format_item__ {
     template<typename T>
     refobj(T* value) : ptr(value) {}
     
-    const object& operator*() const { return !this->ptr.IsNull() ? this->ptr() : this->ref(); }
-    object& operator*() { return !this->ptr.IsNull() ? this->ptr() : this->ref(); }
+    const object& operator*() const { return this->ptr != null ? this->ptr() : this->ref(); }
+    object& operator*() { return this->ptr != null ? this->ptr() : this->ref(); }
    
     bool operator==(const refobj& refobj) const {return this->ref == refobj.ref && this->ptr == refobj.ptr;}
     bool operator!=(const refobj& refobj) const {return !this->operator==(refobj);}

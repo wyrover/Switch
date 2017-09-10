@@ -76,7 +76,7 @@ void SerializationInfo::AddValue(const string& name, const ISerializable& value,
 }
 
 void SerializationInfo::AddValue(const string& name, refptr<Object> value, const string& typeName) {
-  if (value.IsNull())
+  if (value == null)
     throw ArgumentNullException(_current_information);
 
   mItems.Add(name, SerializationEntry(value, typeName));

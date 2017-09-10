@@ -88,7 +88,7 @@ namespace Switch {
         /// @return A System::Threading::Mutex object that represents a named system mutex.
         /// @exception ApplicationException The calling thread does not own the mutex.
         void ReleaseMutex() {
-          if (this->mutex.IsNull())
+          if (this->mutex == null)
             throw ObjectClosedException(_current_information);
           this->mutex->unlock();
         }
@@ -116,7 +116,7 @@ namespace Switch {
         }
         
         bool Wait(int32 millisecondsTimeOut) override {
-          if (this->mutex.IsNull() == true)
+          if (this->mutex == null)
             throw ObjectClosedException(_current_information);
           if (millisecondsTimeOut < -1)
             throw ArgumentOutOfRangeException(_current_information);

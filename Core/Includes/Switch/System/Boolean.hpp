@@ -4,6 +4,7 @@
 
 #include <cstdbool>
 
+#include "../Is.hpp"
 #include "../Property.hpp"
 #include "../Types.hpp"
 #include "IComparable.hpp"

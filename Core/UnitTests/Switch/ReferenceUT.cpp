@@ -9,7 +9,7 @@ namespace {
 
 TEST(ReferenceTest, SetNullToPointer) {
   ref<int> ptr;
-  EXPECT_TRUE(ptr.IsNull());
+  EXPECT_TRUE(ptr == null);
   EXPECT_THROW(ptr(), std::exception);
   EXPECT_THROW(ptr.ToObject(), std::exception);
   EXPECT_THROW(ptr.ToPointer(), std::exception);
@@ -18,7 +18,7 @@ TEST(ReferenceTest, SetNullToPointer) {
 TEST(ReferenceTest, SetNotNullToPointer) {
   String str("Test Reference!");
   ref<string> ref(str);
-  EXPECT_FALSE(ref.IsNull());
+  EXPECT_FALSE(ref == null);
   EXPECT_NO_THROW(ref());
   EXPECT_NO_THROW(ref.ToObject());  
 }
@@ -27,7 +27,7 @@ TEST(ReferenceTest, SetPointerFromEqual) {
   string str = "Test Reference!";
   ref<string> ptr(str);
   EXPECT_NE((string*)null, ptr.ToPointer());
-  EXPECT_FALSE(ptr.IsNull());
+  EXPECT_FALSE(ptr == null);
   EXPECT_NO_THROW(ptr());
   EXPECT_NO_THROW(ptr.ToObject());
 }
@@ -37,7 +37,7 @@ TEST(ReferenceTest, SetPointerFromPointer) {
   ref<string> str(s);
   ref<string> ptr(str);
   EXPECT_NE((string*)null, ptr.ToPointer());
-  EXPECT_FALSE(ptr.IsNull());
+  EXPECT_FALSE(ptr == null);
   EXPECT_NO_THROW(ptr());
   EXPECT_NO_THROW(ptr.ToObject());
   
@@ -59,13 +59,13 @@ TEST(ReferenceTest, SetPointerFromANativePointerAndReset) {
 
 TEST(ReferenceTest, SetNullToPointerAndCheckIsNullOrEmpty) {
   ref<string> ptr;
-  EXPECT_TRUE(ptr.IsNull());
+  EXPECT_TRUE(ptr == null);
 }
 
 TEST(ReferenceTest, SetPointerFromANativePointerAndCheckIsNullOrEmpty) {
   string str = "Test Reference!";
   ref<string> ptr(str);
-  EXPECT_FALSE(ptr.IsNull());
+  EXPECT_FALSE(ptr == null);
 }
 
 TEST(ReferenceTest, SetNullToPointerAndResetResetToANativePointer) {

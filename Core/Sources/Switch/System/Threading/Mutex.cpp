@@ -31,7 +31,7 @@ Mutex::Mutex(bool initiallyOwned, const string& name, bool& createdNew) {
 }
 
 void Mutex::Close() {
-  if (this->mutex.IsNull())
+  if (this->mutex == null)
     return;
   if (*this->name != "")
     mutexes.Remove(*this->name);
