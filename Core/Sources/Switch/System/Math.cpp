@@ -26,9 +26,7 @@ double Math::Atan(double value) {
 }
 
 double Math::Atan2(double y, double x) {
-  if (Double::IsInfinity(y) && Double::IsInfinity(x))
-    return Double::NaN;
-  return atan2(y, x);
+  return Double::IsInfinity(y) && Double::IsInfinity(x) ? Double::NaN : atan2(y, x);
 }
 
 double Math::Ceiling(double value) {

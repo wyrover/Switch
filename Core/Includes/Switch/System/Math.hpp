@@ -33,11 +33,7 @@ namespace Switch {
       /// @brief Returns the absolute value of a double-precision floating-point number
       /// @param value A number in the range double::MinValue <= value <= double::MaxValue
       /// @return double A double-precision floating-point number, x, such that 0 <= x <= double::MaxValue
-      static double Abs(double value) {
-        if (value < 0)
-          return -value;
-        return value;
-      }
+      static double Abs(double value) {return value < 0 ? -value : value;}
       
       /// @brief Returns the absolute value of a 16-bit signed integer.
       /// @param value A number in the range int16::MinValue < value <= int16::MaxValue
@@ -46,10 +42,7 @@ namespace Switch {
       static int16 Abs(int16 value) {
         if (value == Int16::MinValue)
           throw OverflowException(_current_information);
-        
-        if (value < 0)
-          return -value;
-        return value;
+        return value < 0 ? -value : value;
       }
       
       /// @brief Returns the absolute value of a 32-bit signed integer
@@ -59,10 +52,7 @@ namespace Switch {
       static int32 Abs(int32 value) {
         if (value == Int32::MinValue)
           throw OverflowException(_current_information);
-        
-        if (value < 0)
-          return -value;
-        return value;
+        return value < 0 ? -value : value;
       }
       
       /// @brief Returns the absolute value of a 64-bit signed integer
@@ -72,10 +62,7 @@ namespace Switch {
       static int64 Abs(int64 value) {
         if (value == Int64::MinValue)
           throw OverflowException(_current_information);
-        
-        if (value < 0)
-          return -value;
-        return value;
+        return value < 0 ? -value : value;
       }
       
       /// @brief Returns the absolute value of a 8-bit signed integer.
@@ -85,20 +72,13 @@ namespace Switch {
       static sbyte Abs(sbyte value) {
         if (value == SByte::MinValue)
           throw OverflowException(_current_information);
-        
-        if (value < 0)
-          return -value;
-        return value;
+        return value < 0 ? -value : value;
       }
       
       /// @brief Returns the absolute value of a single-precision floating-point number
       /// @param value A number in the range single::MinValue <= value <= single::MaxValue
       /// @return single A single-precision floating-point number, x, such that 0 <= x <= single::MaxValue
-      static float Abs(float value) {
-        if (value < 0)
-          return -value;
-        return value;
-      }
+      static float Abs(float value) {return value < 0 ? -value : value;}
       
       /// @brief Returns the angle whose cosine is the specified number.
       /// @param value A number representing a cosine, where -1 <= value <= 1.
@@ -194,11 +174,7 @@ namespace Switch {
       /// @return double A number equal to x - (y Q), where Q is the quotient of x / y rounded to the nearest integer (if x / y falls halfway between two integers, the even integer is returned).
       /// * If x - (y Q) is zero, the value +0 is returned if x is positive, or -0 if x is negative.
       /// * If y = 0, NaN is returned.
-      static double IEEERemainder(double dividend, double divisor) {
-        if (divisor == 0)
-          return Double::NaN;
-        return dividend - (divisor * Round(dividend / divisor));
-      }
+      static double IEEERemainder(double dividend, double divisor) {return divisor == 0 ? Double::NaN : dividend - (divisor * Round(dividend / divisor));}
       
       /// @brief Returns the natural (base e) logarithm of a specified number.
       /// @param value A number whose logarithm is to be found.
@@ -429,10 +405,7 @@ namespace Switch {
       static int32 Sign(double value) {
         if (Double::IsNaN(value))
           throw ArithmeticException(_current_information);
-        
-        if (value < 0) return -1;
-        if (value == 0) return 0;
-        return 1;
+        return value < 0 ? -1 : value == 0 ? 0 : 1;
       }
       
       /// @brief Returns a value indicating the sign of a 16-bit signed integer.
@@ -443,11 +416,7 @@ namespace Switch {
       /// | -1           | value is less than zero.    |
       /// | 0            | value is equal to zero.     |
       /// | 1            | value is greater than zero. |
-      static int32 Sign(int16 value) {
-        if (value < 0) return -1;
-        if (value == 0) return 0;
-        return 1;
-      }
+      static int32 Sign(int16 value) {return value < 0 ? -1 : value == 0 ? 0 : 1;}
       
       /// @brief Returns a value indicating the sign of a 32-bit signed integer.
       /// @param value A signed number.
@@ -457,11 +426,7 @@ namespace Switch {
       /// | -1           | value is less than zero.    |
       /// | 0            | value is equal to zero.     |
       /// | 1            | value is greater than zero. |
-      static int32 Sign(int32 value) {
-        if (value < 0) return -1;
-        if (value == 0) return 0;
-        return 1;
-      }
+      static int32 Sign(int32 value) {return value < 0 ? -1 : value == 0 ? 0 : 1;}
       
       /// @brief Returns a value indicating the sign of a 64-bit signed integer.
       /// @param value A signed number.
@@ -471,11 +436,7 @@ namespace Switch {
       /// | -1           | value is less than zero.    |
       /// | 0            | value is equal to zero.     |
       /// | 1            | value is greater than zero. |
-      static int32 Sign(int64 value) {
-        if (value < 0) return -1;
-        if (value == 0) return 0;
-        return 1;
-      }
+      static int32 Sign(int64 value) {return value < 0 ? -1 : value == 0 ? 0 : 1;}
       
       /// @brief Returns a value indicating the sign of an 8-bit signed integer.
       /// @param value A signed number.
@@ -485,11 +446,7 @@ namespace Switch {
       /// | -1           | value is less than zero.    |
       /// | 0            | value is equal to zero.     |
       /// | 1            | value is greater than zero. |
-      static int32 Sign(sbyte value) {
-        if (value < 0) return -1;
-        if (value == 0) return 0;
-        return 1;
-      }
+      static int32 Sign(sbyte value) {return value < 0 ? -1 : value == 0 ? 0 : 1;}
       
       /// @brief Returns a value indicating the sign of a single-precision floating-point number.
       /// @param value A signed number.
@@ -503,10 +460,7 @@ namespace Switch {
       static int32 Sign(float value) {
         if (Single::IsNaN(value))
           throw ArithmeticException(_current_information);
-        
-        if (value < 0) return -1;
-        if (value == 0) return 0;
-        return 1;
+        return value < 0 ? -1 : value == 0 ? 0 : 1;
       }
       
       /// @brief Returns the sine of the specified angle.
