@@ -289,7 +289,6 @@ set(INCLUDE_FILES
   Includes/Switch/System/FormatException.hpp
   Includes/Switch/System/Func.hpp
   Includes/Switch/System/Guid.hpp
-  Includes/Switch/System/Hash.hpp
   Includes/Switch/System/IAsyncResult.hpp
   Includes/Switch/System/ICloneable.hpp
   Includes/Switch/System/IComparable.hpp
@@ -382,6 +381,7 @@ set(INCLUDE_FILES
   Includes/Switch/ExceptionPtr.hpp
   Includes/Switch/Foreach.hpp
   Includes/Switch/CurrentInformation.hpp
+  Includes/Switch/Hash.hpp
   Includes/Switch/InitializerList.hpp
   Includes/Switch/Interface.hpp
   Includes/Switch/Is.hpp
@@ -521,7 +521,6 @@ set(SOURCE_FILES
   Sources/Switch/System/EventArgs.cpp
   Sources/Switch/System/Exception.cpp
   Sources/Switch/System/Guid.cpp
-  Sources/Switch/System/Hash.cpp
   Sources/Switch/System/Int16.cpp
   Sources/Switch/System/Int32.cpp
   Sources/Switch/System/Int64.cpp
@@ -547,6 +546,7 @@ set(SOURCE_FILES
   Sources/Switch/System/Uri.cpp
   Sources/Switch/System/ustring.cpp
   Sources/Switch/ExceptionPtr.cpp
+  Sources/Switch/Hash.cpp
 )
 
 source_group(Includes\\Switch\\Microsoft\\Win32 REGULAR_EXPRESSION "/Includes/Switch/Microsoft/Win32/[-_,A-Za-z0-9]+\\.hpp*")
