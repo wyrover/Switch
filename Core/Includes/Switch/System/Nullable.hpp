@@ -2,10 +2,10 @@
 /// @brief Contains Switch::System::Nullable struct.
 #pragma once
 
+#include "../Hash.hpp"
 #include "../NullPtr.hpp"
 #include "../Property.hpp"
 #include "Convert.hpp"
-#include "Hash.hpp"
 #include "IComparable.hpp"
 #include "InvalidOperationException.hpp"
 #include "Object.hpp"

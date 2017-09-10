@@ -5,11 +5,11 @@
 #include <unordered_map>
 
 #include "../../../Allocator.hpp"
+#include "../../../Hash.hpp"
 #include "../../../InitializerList.hpp"
 #include "../../../Move.hpp"
 #include "../../../Types.hpp"
 #include "../../Array.hpp"
-#include "../../Hash.hpp"
 #include "../../Object.hpp"
 #include "../../String.hpp"
 #include "../../Linq/Enumerable.hpp"

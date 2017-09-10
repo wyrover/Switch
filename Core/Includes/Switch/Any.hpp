@@ -3,6 +3,7 @@
 #pragma once
 
 #include "Boxing.hpp"
+#include "Hash.hpp"
 #include "RefPtr.hpp"
 #include "NullPtr.hpp"
 #include "Types.hpp"
@@ -16,7 +17,6 @@
 #include "System/Int64.hpp"
 #include "System/IntPtr.hpp"
 #include "System/InvalidCastException.hpp"
-#include "System/Hash.hpp"
 #include "System/SByte.hpp"
 #include "System/Single.hpp"
 #include "System/UInt16.hpp"
