@@ -76,10 +76,10 @@ namespace Switch {
           /// @exception ArgumentException startIndex + count is greater than the length of items.
           void PushRange(const System::Array<T>& items, int32 startIndex, int32 count) {
             if (startIndex < 0 || count < 0 || startIndex > items.Length)
-              throw ArgumentOutOfRangeException(_current_information);
+              throw ArgumentOutOfRangeException(_caller);
 
             if (startIndex + count > items.Length)
-              throw ArgumentException(_current_information);
+              throw ArgumentException(_caller);
 
             System::Threading::LockGuard lock(this->stack.SyncRoot);
             for (int32 i = startIndex; i < startIndex + count; i++)
@@ -154,10 +154,10 @@ namespace Switch {
           /// @exception ArgumentException startIndex + count is greater than the length of items.
           int32 TryPopRange(System::Array<T>& results, int32 startIndex, int32 count) {
             if (startIndex < 0 || count < 0 || startIndex > results.Length)
-              throw ArgumentOutOfRangeException(_current_information);
+              throw ArgumentOutOfRangeException(_caller);
 
             if (startIndex + count > results.Length)
-              throw ArgumentException(_current_information);
+              throw ArgumentException(_caller);
 
             System::Threading::LockGuard lock(this->stack.SyncRoot);
             int32 nbItemPoped = 0;
@@ -205,7 +205,7 @@ namespace Switch {
           protected:
             const T& GetCurrent() const {
               if (this->index < 0 || this->index >= this->array.Length)
-                throw InvalidOperationException(_current_information);
+                throw InvalidOperationException(_caller);
               return this->array[this->index];
             }
             

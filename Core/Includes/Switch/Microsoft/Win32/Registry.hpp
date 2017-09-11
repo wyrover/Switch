@@ -32,7 +32,7 @@ namespace Switch {
           if (name == "HKEY_DYN_DATA")
             return RegistryHive::DynData;
 
-          throw System::ArgumentException(_current_information);
+          throw System::ArgumentException(_caller);
         }
 
       public:

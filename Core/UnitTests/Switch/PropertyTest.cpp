@@ -30,10 +30,10 @@ namespace SwitchUnitTests {
         _set {v = value;}
       };
       
-      Assert::AreEqual(42, v, _current_information);
-      Assert::AreEqual(42, Value, _current_information);
-      Assert::AreEqual(42, Value(), _current_information);
-      Assert::AreEqual(42, Value.Get(), _current_information);
+      Assert::AreEqual(42, v, _caller);
+      Assert::AreEqual(42, Value, _caller);
+      Assert::AreEqual(42, Value(), _caller);
+      Assert::AreEqual(42, Value.Get(), _caller);
     }
     
     void CreateReadWritePropertyAndSetItAndGetIt() {
@@ -44,16 +44,16 @@ namespace SwitchUnitTests {
       };
       
       Value = 24;
-      Assert::AreEqual(24, Value, _current_information);
-      Assert::AreEqual(24, v, _current_information);
+      Assert::AreEqual(24, Value, _caller);
+      Assert::AreEqual(24, v, _caller);
       
       Value(84);
-      Assert::AreEqual(84, Value, _current_information);
-      Assert::AreEqual(84, v, _current_information);
+      Assert::AreEqual(84, Value, _caller);
+      Assert::AreEqual(84, v, _caller);
       
       Value.Set(48);
-      Assert::AreEqual(48, Value, _current_information);
-      Assert::AreEqual(48, v, _current_information);
+      Assert::AreEqual(48, Value, _caller);
+      Assert::AreEqual(48, v, _caller);
     }
     
     void CreateReadOnlyPropertyAndGetIt() {
@@ -62,10 +62,10 @@ namespace SwitchUnitTests {
         _get {return v;}
       };
       
-      Assert::AreEqual(42, v, _current_information);
-      Assert::AreEqual(42, Value, _current_information);
-      Assert::AreEqual(42, Value(), _current_information);
-      Assert::AreEqual(42, Value.Get(), _current_information);
+      Assert::AreEqual(42, v, _caller);
+      Assert::AreEqual(42, Value, _caller);
+      Assert::AreEqual(42, Value(), _caller);
+      Assert::AreEqual(42, Value.Get(), _caller);
     }
     
     void CreateWriteOnlyPropertyAndSetIt() {
@@ -74,16 +74,16 @@ namespace SwitchUnitTests {
         _set {v = value;}
       };
       
-      Assert::AreEqual(42, v, _current_information);
+      Assert::AreEqual(42, v, _caller);
       
       Value = 24;
-      Assert::AreEqual(24, v, _current_information);
+      Assert::AreEqual(24, v, _caller);
       
       Value(84);
-      Assert::AreEqual(84, v, _current_information);
+      Assert::AreEqual(84, v, _caller);
       
       Value.Set(48);
-      Assert::AreEqual(48, v, _current_information);
+      Assert::AreEqual(48, v, _caller);
     }
     
     class PropertyReadOnly {
@@ -103,7 +103,7 @@ namespace SwitchUnitTests {
       refptr<PropertyReadOnly> propertyReadOnly1 = ref_new<PropertyReadOnly>();
       refptr<PropertyReadOnly> propertyReadOnly2 = ref_new<PropertyReadOnly>(*propertyReadOnly1);
       propertyReadOnly1 = null;
-      Assert::AreEqual("Test property", propertyReadOnly2->Name, _current_information);
+      Assert::AreEqual("Test property", propertyReadOnly2->Name, _caller);
     }
     
     void PropertyReadOnlyAndEqualOperator() {
@@ -111,7 +111,7 @@ namespace SwitchUnitTests {
       refptr<PropertyReadOnly> propertyReadOnly2 = ref_new<PropertyReadOnly>();
       *propertyReadOnly2 = *propertyReadOnly1;
       propertyReadOnly1 = null;
-      Assert::AreEqual("Test property", propertyReadOnly2->Name, _current_information);
+      Assert::AreEqual("Test property", propertyReadOnly2->Name, _caller);
     }
     
     class PropertyWriteOnly {
@@ -131,7 +131,7 @@ namespace SwitchUnitTests {
       refptr<PropertyWriteOnly> propertyWriteOnly2 = ref_new<PropertyWriteOnly>(*propertyWriteOnly1);
       propertyWriteOnly1 = null;
       propertyWriteOnly2->Name = "Other thing";
-      Assert::AreEqual("Other thing", propertyWriteOnly2->name, _current_information);
+      Assert::AreEqual("Other thing", propertyWriteOnly2->name, _caller);
     }
     
     void PropertyWriteOnlyAndEqualOperator() {
@@ -140,7 +140,7 @@ namespace SwitchUnitTests {
       *propertyWriteOnly2 = *propertyWriteOnly1;
       propertyWriteOnly1 = null;
       propertyWriteOnly2->Name = "Other thing";
-      Assert::AreEqual("Other thing", propertyWriteOnly2->name, _current_information);
+      Assert::AreEqual("Other thing", propertyWriteOnly2->name, _caller);
     }
     
     class PropertyReadWrite {
@@ -161,9 +161,9 @@ namespace SwitchUnitTests {
       refptr<PropertyReadWrite> propertyReadWrite1 = ref_new<PropertyReadWrite>();
       refptr<PropertyReadWrite> propertyReadWrite2 = ref_new<PropertyReadWrite>(*propertyReadWrite1);
       propertyReadWrite1 = null;
-      Assert::AreEqual("Test property", propertyReadWrite2->Name, _current_information);
+      Assert::AreEqual("Test property", propertyReadWrite2->Name, _caller);
       propertyReadWrite2->Name = "Other thing";
-      Assert::AreEqual("Other thing", propertyReadWrite2->Name, _current_information);
+      Assert::AreEqual("Other thing", propertyReadWrite2->Name, _caller);
     }
     
     void PropertyReadWriteAndEqualOperator() {
@@ -171,9 +171,9 @@ namespace SwitchUnitTests {
       refptr<PropertyReadWrite> propertyReadWrite2 = ref_new<PropertyReadWrite>();
       *propertyReadWrite2 = *propertyReadWrite1;
       propertyReadWrite1 = null;
-      Assert::AreEqual("Test property", propertyReadWrite2->Name, _current_information);
+      Assert::AreEqual("Test property", propertyReadWrite2->Name, _caller);
       propertyReadWrite2->Name = "Other thing";
-      Assert::AreEqual("Other thing", propertyReadWrite2->Name, _current_information);
+      Assert::AreEqual("Other thing", propertyReadWrite2->Name, _caller);
     }
   };
   

@@ -96,7 +96,7 @@ namespace Switch {
         
         Array<T> GetValues() const {
           if (!trackAllValues)
-            throw InvalidOperationException(_current_information);
+            throw InvalidOperationException(_caller);
           _lock(this->values.SyncRoot) {
             return Array<T>(this->values.Values());
           }

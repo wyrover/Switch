@@ -20,12 +20,12 @@ string Exception::GetStackTrace() const {
   return string::Join("\n", this->stackTrace());
 }
 
-Exception::Exception() : currentInformation(_current_information) {
+Exception::Exception() : caller(_caller) {
   this->SetStackTrace(*this);
   this->SetHResult(__HResults::COR_E_EXCEPTION);
 }
 
-Exception::Exception(const CurrentInformation& information) : currentInformation(information) {
+Exception::Exception(const Caller& information) : caller(information) {
   this->SetStackTrace(*this);
   this->SetHResult(__HResults::COR_E_EXCEPTION);
 }
@@ -33,18 +33,18 @@ Exception::Exception(const CurrentInformation& information) : currentInformation
 Exception::Exception(const Exception& value) {
   this->message = value.message;
   this->helpLink = value.helpLink;
-  this->currentInformation = value.currentInformation;
+  this->caller = value.caller;
   this->innerException = value.innerException;
   this->hresult = value.hresult;
   this-> stackTrace = value.stackTrace;
 }
 
-Exception::Exception(const string& message) : message(message), currentInformation(_current_information) {
+Exception::Exception(const string& message) : message(message), caller(_caller) {
   this->SetStackTrace(*this);
   this->SetHResult(__HResults::COR_E_EXCEPTION);
 }
 
-Exception::Exception(const string& message, const CurrentInformation& information) : message(message), currentInformation(information) {
+Exception::Exception(const string& message, const Caller& information) : message(message), caller(information) {
   this->SetStackTrace(*this);
   this->SetHResult(__HResults::COR_E_EXCEPTION);
 }
@@ -54,13 +54,13 @@ Exception::Exception(const string& message, const Exception& innerExeption) : me
   this->SetHResult(__HResults::COR_E_EXCEPTION);
 }
 
-Exception::Exception(const string& message, const Exception& innerExeption, const CurrentInformation& information) : message(message), currentInformation(information), innerException(innerExeption) {
+Exception::Exception(const string& message, const Exception& innerExeption, const Caller& information) : message(message), caller(information), innerException(innerExeption) {
   this->SetStackTrace(*this);
   this->SetHResult(__HResults::COR_E_EXCEPTION);
 }
 
 bool Exception::Equals(const Exception& value) const {
-  return this->hresult == value.hresult && this->message == value.message && this->currentInformation == value.currentInformation && this->innerException == value.innerException;
+  return this->hresult == value.hresult && this->message == value.message && this->caller == value.caller && this->innerException == value.innerException;
 }
 
 bool Exception::Equals(const object& obj) const {
@@ -74,7 +74,7 @@ string Exception::ToString() const {
 Exception& Exception::operator =(const Exception& value) {
   this->message = value.message;
   this->helpLink = value.helpLink;
-  this->currentInformation = value.currentInformation;
+  this->caller = value.caller;
   this->innerException = value.innerException;
   this->hresult = value.hresult;
   this-> stackTrace = value.stackTrace;
@@ -89,7 +89,7 @@ string Exception::GetDefaultMessage() const {
 void Exception::SetStackTrace(const Exception& exception) {
   if (Exception::stackTraceEnabled == false) {
     this->stackTrace = ref_new<Array<string>>(1);
-    this->stackTrace()[0] = String::Format("  in {0}:{1}{2}", this->currentInformation.FilePath, this->currentInformation.LineNumber, Environment::NewLine);
+    this->stackTrace()[0] = String::Format("  in {0}:{1}{2}", this->caller.FilePath, this->caller.LineNumber, Environment::NewLine);
     return;
   }
   
@@ -97,9 +97,9 @@ void Exception::SetStackTrace(const Exception& exception) {
   this->stackTrace = ref_new<Array<string>>(stackTrace.FrameCount() + 1);
 
   if (stackTrace.FrameCount() == 0) {
-    this->stackTrace()[0] = String::Format("  in {0}:{1}{2}", this->currentInformation.FilePath, this->currentInformation.LineNumber, Environment::NewLine);
+    this->stackTrace()[0] = String::Format("  in {0}:{1}{2}", this->caller.FilePath, this->caller.LineNumber, Environment::NewLine);
   } else {
-    this->stackTrace()[0] = String::Format("  at {0} [0x{1:X8}] in {2}:{3}{4}", stackTrace.GetFrame(0).GetMethod(), stackTrace.GetFrame(0).GetOffset(), this->currentInformation.FilePath, this->currentInformation.LineNumber, Environment::NewLine);
+    this->stackTrace()[0] = String::Format("  at {0} [0x{1:X8}] in {2}:{3}{4}", stackTrace.GetFrame(0).GetMethod(), stackTrace.GetFrame(0).GetOffset(), this->caller.FilePath, this->caller.LineNumber, Environment::NewLine);
     for (int32 index = 0; index < stackTrace.FrameCount(); index++) {
       this->stackTrace()[index + 1] = String::Format("  at {0}", stackTrace.GetFrame(index).GetMethod());
       if (!string::IsNullOrEmpty(stackTrace.GetFrame(index).GetFileName()))
@@ -126,7 +126,7 @@ string Exception::GetStackTrace(const string& filter) const {
   string output;
   for (int32 i = startIndex; i < this->stackTrace().Length; i++) {
     if (i == startIndex) {
-      output = string::Format("{0} in {1}:{2}{3}", this->stackTrace()[i].Remove(this->stackTrace()[i].IndexOf(" in ")), this->currentInformation.FilePath, this->currentInformation.LineNumber, Environment::NewLine);
+      output = string::Format("{0} in {1}:{2}{3}", this->stackTrace()[i].Remove(this->stackTrace()[i].IndexOf(" in ")), this->caller.FilePath, this->caller.LineNumber, Environment::NewLine);
     } else {
       output += this->stackTrace()[i];
     }

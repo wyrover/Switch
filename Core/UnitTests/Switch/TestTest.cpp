@@ -34,7 +34,7 @@ TEST_F(GTestTest, AreNotEqualString) {
 }
 
 TEST_F(GTestTest, ThrowException) {
-  throw ArgumentNullException(_current_information);
+  throw ArgumentNullException(_caller);
 }
 
 TEST_F(GTestTest, IsTrueBoolean) {
@@ -43,11 +43,11 @@ TEST_F(GTestTest, IsTrueBoolean) {
 }
 
 TEST_F(GTestTest, ThrowArgumentNullException) {
-  ASSERT_THROW(throw ArgumentNullException(_current_information), ArgumentNullException);
+  ASSERT_THROW(throw ArgumentNullException(_caller), ArgumentNullException);
 }
 
 TEST_F(GTestTest, ThrowIndexOutOfRangeException) {
-  ASSERT_THROW(throw ArgumentNullException(_current_information), IndexOutOfRangeException);
+  ASSERT_THROW(throw ArgumentNullException(_caller), IndexOutOfRangeException);
 }
 
 namespace SwitchUnitTests {
@@ -79,7 +79,7 @@ namespace SwitchUnitTests {
     }
     
     void ThrowException() {
-      throw ArgumentNullException(_current_information);
+      throw ArgumentNullException(_caller);
     }
     
     void IsTrueBoolean() {
@@ -87,11 +87,11 @@ namespace SwitchUnitTests {
     }
     
     void ThrowArgumentNullException() {
-      Assert::Throws<ArgumentNullException>(_delegate {throw ArgumentNullException(_current_information);}, _current_information);
+      Assert::Throws<ArgumentNullException>(_delegate {throw ArgumentNullException(_caller);}, _caller);
     }
     
     void ThrowIndexOutOfRangeException() {
-      Assert::Throws<IndexOutOfRangeException>(_delegate {throw ArgumentNullException(_current_information);}, _current_information);
+      Assert::Throws<IndexOutOfRangeException>(_delegate {throw ArgumentNullException(_caller);}, _caller);
     }
   };
   

@@ -330,7 +330,7 @@ namespace Switch {
           template<typename TEndPoint>
           void Bind(const TEndPoint& localEndPoint) {
             if (this->data->socket == 0)
-              throw ObjectClosedException(_current_information);
+              throw ObjectClosedException(_caller);
             
             this->data->localEndPoint = as<EndPoint>(localEndPoint.template MemberwiseClone<TEndPoint>());
             InnerBind();
@@ -359,9 +359,9 @@ namespace Switch {
           template<typename TEndPoint>
           void Connect(const TEndPoint& endPoint) {
             if (this->data->socket == 0)
-              throw ObjectClosedException(_current_information);
+              throw ObjectClosedException(_caller);
             if (this->data->listening == true)
-              throw InvalidOperationException(_current_information);
+              throw InvalidOperationException(_caller);
             
             this->data->remoteEndPoint = as<EndPoint>(endPoint.template MemberwiseClone<TEndPoint>());
             InnerConnect();

@@ -23,7 +23,7 @@ _property<String, _readonly> Boolean::TrueString {
 bool Boolean::Parse(const String& str) {
   bool value;
   if (TryParse(str, value) == false)
-    throw FormatException(_current_information);
+    throw FormatException(_caller);
   return value;
 }
 

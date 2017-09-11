@@ -64,7 +64,7 @@ namespace Switch {
             free(max_destroy_decompress_err);
             free(max_finish_decompress_err);
 
-            throw OutOfMemoryException(_current_information);
+            throw OutOfMemoryException(_caller);
           }
 
           jpeg_create_decompress(&dinfo);

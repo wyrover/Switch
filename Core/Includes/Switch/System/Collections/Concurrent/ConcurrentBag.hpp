@@ -69,7 +69,7 @@ namespace Switch {
           /// @param index The zero-based index in array at which copying begins;
           void CopyTo(System::Array<T>& array, int32 index) const override {
             if (index + this->list.Count > array.Length)
-              throw ArgumentOutOfRangeException(_current_information);
+              throw ArgumentOutOfRangeException(_caller);
 
             System::Threading::LockGuard lock(this->list.SyncRoot);
             for (T item : this->list)
@@ -162,7 +162,7 @@ namespace Switch {
           protected:
             const T& GetCurrent() const {
               if (this->index < 0 || this->index >= this->array.Length)
-                throw InvalidOperationException(_current_information);
+                throw InvalidOperationException(_caller);
               return this->array[this->index];
             }
             

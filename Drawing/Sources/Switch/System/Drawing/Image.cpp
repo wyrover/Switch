@@ -105,6 +105,6 @@ void Image::ReadStream(refptr<System::IO::Stream> stream) {
     case 0x5089: Png(stream).Read(*this); break;
     case 0x4949: Tif(stream).Read(*this); break;
     case 0x4D4D: Tif(stream).Read(*this); break;
-    default: throw OutOfMemoryException(_current_information); break;
+    default: throw OutOfMemoryException(_caller); break;
   }
 }

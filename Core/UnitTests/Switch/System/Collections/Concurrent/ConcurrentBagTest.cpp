@@ -20,8 +20,8 @@ namespace SwitchUnitTests {
       bag.Add(5);
       int index = 0;
       for (int item : bag)
-        Assert::AreEqual(values[index++], item, _current_information);
-      Assert::AreEqual(6, index, _current_information);
+        Assert::AreEqual(values[index++], item, _caller);
+      Assert::AreEqual(6, index, _caller);
     }
 
     void GetEnumerator() {
@@ -31,39 +31,39 @@ namespace SwitchUnitTests {
       bag.Add(6);
       int index = 0;
       while (enumerator.MoveNext())
-        Assert::AreEqual(values[index++], enumerator.Current(), _current_information);
-      Assert::AreEqual(6, index, _current_information);
+        Assert::AreEqual(values[index++], enumerator.Current(), _caller);
+      Assert::AreEqual(6, index, _caller);
     }
     
     void TryPeek() {
       ConcurrentBag<int> bag = {0, 1, 2, 3, 4, 5};
       int result;
-      Assert::IsTrue(bag.TryPeek(result), _current_information);
-      Assert::AreEqual(5, result, _current_information);
+      Assert::IsTrue(bag.TryPeek(result), _caller);
+      Assert::AreEqual(5, result, _caller);
     }
     
     void TryTake() {
       ConcurrentBag<int> bag = {0, 1, 2, 3, 4, 5};
       int result;
-      Assert::IsTrue(bag.TryTake(result), _current_information);
-      Assert::AreEqual(5, result, _current_information);
-      Assert::AreEqual(5, bag.Count, _current_information);
-      Assert::IsTrue(bag.TryTake(result), _current_information);
-      Assert::AreEqual(4, result, _current_information);
-      Assert::AreEqual(4, bag.Count, _current_information);
-      Assert::IsTrue(bag.TryTake(result), _current_information);
-      Assert::AreEqual(3, result, _current_information);
-      Assert::AreEqual(3, bag.Count, _current_information);
-      Assert::IsTrue(bag.TryTake(result), _current_information);
-      Assert::AreEqual(2, result, _current_information);
-      Assert::AreEqual(2, bag.Count, _current_information);
-      Assert::IsTrue(bag.TryTake(result), _current_information);
-      Assert::AreEqual(1, result, _current_information);
-      Assert::AreEqual(1, bag.Count, _current_information);
-      Assert::IsTrue(bag.TryTake(result), _current_information);
-      Assert::AreEqual(0, result, _current_information);
-      Assert::AreEqual(0, bag.Count, _current_information);
-      Assert::IsFalse(bag.TryTake(result), _current_information);
+      Assert::IsTrue(bag.TryTake(result), _caller);
+      Assert::AreEqual(5, result, _caller);
+      Assert::AreEqual(5, bag.Count, _caller);
+      Assert::IsTrue(bag.TryTake(result), _caller);
+      Assert::AreEqual(4, result, _caller);
+      Assert::AreEqual(4, bag.Count, _caller);
+      Assert::IsTrue(bag.TryTake(result), _caller);
+      Assert::AreEqual(3, result, _caller);
+      Assert::AreEqual(3, bag.Count, _caller);
+      Assert::IsTrue(bag.TryTake(result), _caller);
+      Assert::AreEqual(2, result, _caller);
+      Assert::AreEqual(2, bag.Count, _caller);
+      Assert::IsTrue(bag.TryTake(result), _caller);
+      Assert::AreEqual(1, result, _caller);
+      Assert::AreEqual(1, bag.Count, _caller);
+      Assert::IsTrue(bag.TryTake(result), _caller);
+      Assert::AreEqual(0, result, _caller);
+      Assert::AreEqual(0, bag.Count, _caller);
+      Assert::IsFalse(bag.TryTake(result), _caller);
     }
     
   };

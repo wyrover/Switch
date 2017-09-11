@@ -35,7 +35,7 @@ namespace Switch {
       /// @exception ArgumentOutOfRangeException major or minor is less than zero.
       Version(int32 major, int32 minor) : major(major), minor(minor) {
         if (major < 0 || minor < 0)
-          throw ArgumentOutOfRangeException(_current_information);
+          throw ArgumentOutOfRangeException(_caller);
       }
       
       /// @brief Initializes a new instance of the Version class using the specified major, minor and build values.
@@ -45,7 +45,7 @@ namespace Switch {
       /// @exception ArgumentOutOfRangeException major, minor or build is less than zero.
       Version(int32 major, int32 minor, int32 build) : major(major), minor(minor), build(build) {
         if (major < 0 || minor < 0 || build < 0)
-          throw ArgumentOutOfRangeException(_current_information);
+          throw ArgumentOutOfRangeException(_caller);
       }
       
       /// @brief Initializes a new instance of the Version class using the specified major, minor, build and revision values.
@@ -56,7 +56,7 @@ namespace Switch {
       /// @exception ArgumentOutOfRangeException major, minor, build or revision is less than zero.
       Version(int32 major, int32 minor, int32 build, int32 revision) : major(major), minor(minor), build(build), revision(revision) {
         if (major < 0 || minor < 0 || build < 0 || revision < 0)
-          throw ArgumentOutOfRangeException(_current_information);
+          throw ArgumentOutOfRangeException(_caller);
       }
       
       /// @brief Initializes a new instance of the Version class using the specified string.
@@ -195,7 +195,7 @@ namespace Switch {
           case 3: return Version(Convert::ToInt32(versions[0]), Convert::ToInt32(versions[1]), Convert::ToInt32(versions[2]));;
           case 4: return Version(Convert::ToInt32(versions[0]), Convert::ToInt32(versions[1]), Convert::ToInt32(versions[2]), Convert::ToInt32(versions[3]));
         }
-        throw ArgumentException(_current_information);
+        throw ArgumentException(_caller);
       }
       
       static bool TryParse(const String& version, Version& result) {
@@ -214,7 +214,7 @@ namespace Switch {
       
       String ToString(int32 fieldCount) const {
         if (fieldCount < 0 || fieldCount> 4 || (fieldCount >= 3 && this->build == -1) || (fieldCount == 4 && this->revision == -1))
-          throw ArgumentOutOfRangeException(_current_information);
+          throw ArgumentOutOfRangeException(_caller);
         string result;
         if (fieldCount >= 1)
           result += string::Format("{0}", this->major);

@@ -74,7 +74,7 @@ namespace Switch {
           _get {return this->data->indentSize;},
           _set {
             if (value < 0)
-              throw ArgumentOutOfRangeException(_current_information);
+              throw ArgumentOutOfRangeException(_caller);
             this->data->indentSize = value;
           }
         };

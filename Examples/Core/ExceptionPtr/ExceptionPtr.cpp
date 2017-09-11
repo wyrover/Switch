@@ -12,7 +12,7 @@ namespace Examples {
       
       Thread thread(ThreadStart(_delegate {
         try {
-          throw ArgumentNullException("Ouch there are an error !", _current_information);
+          throw ArgumentNullException("Ouch there are an error !", _caller);
         } catch(...) {
           exceptionPtr = ExceptionPtr::CurrentException;
         }

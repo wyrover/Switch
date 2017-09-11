@@ -58,20 +58,20 @@ namespace Switch {
 
         if (this->kind == UriKind::Absolute) {
           if (this->scheme.Length() == 0)
-            throw UriFormatException(_current_information);
+            throw UriFormatException(_caller);
 
           if (this->scheme != "news" && this->host.Length() == 0)
-            throw UriFormatException(_current_information);
+            throw UriFormatException(_caller);
 
           if (CheckSchemeName(this->scheme) == false)
-            throw UriFormatException(_current_information);
+            throw UriFormatException(_caller);
         } else if (this->kind == UriKind::Relative) {
           if (this->scheme.Length() != 0 && this->host.Length() != 0)
-            throw UriFormatException(_current_information);
+            throw UriFormatException(_caller);
         }
 
         if (originalUri.Length() != 0)
-          throw UriFormatException(_current_information);
+          throw UriFormatException(_caller);
       }
       /// @endcond
 
@@ -200,7 +200,7 @@ namespace Switch {
       _property<UriHostNameType, _readonly> HostNameType {
         _get {
           if (this->kind!= UriKind::Absolute)
-            throw InvalidOperationException(_current_information);
+            throw InvalidOperationException(_caller);
             
           if (!String::IsNullOrEmpty(this->Host)) {
             System::Net::IPAddress ipAddress;
@@ -234,7 +234,7 @@ namespace Switch {
       _property<bool, _readonly> IsDefaultPort {
         _get {
           if (this->kind != UriKind::Absolute)
-            throw InvalidOperationException(_current_information);
+            throw InvalidOperationException(_caller);
             
           return (this->Port() == -1 || this->Port() == 21 || this->Port() == 70 || this->Port() == 80 || this->Port() == 443 || this->Port() == 389 || this->Port() == 25 || this->Port() == 119);
         }
@@ -247,7 +247,7 @@ namespace Switch {
       _property<bool, _readonly> IsFile {
         _get {
           if (this->kind != UriKind::Absolute)
-            throw InvalidOperationException(_current_information);
+            throw InvalidOperationException(_caller);
             
           return this->Scheme() == UriSchemeFile;
         }
@@ -260,7 +260,7 @@ namespace Switch {
       _property<bool, _readonly> IsLoopback {
         _get {
           if (this->kind != UriKind::Absolute)
-            throw InvalidOperationException(_current_information);
+            throw InvalidOperationException(_caller);
             
           return this->Host() == System::Net::IPAddress::Loopback().ToString() || this->Host() == System::Net::IPAddress::IPv6Loopback().ToString() || this->Host() == "loopback" || this->Host() == "localhost" || String::IsNullOrEmpty(this->Host());
         }
@@ -273,7 +273,7 @@ namespace Switch {
       _property<bool, _readonly> IsUnc {
         _get {
           if (this->kind != UriKind::Absolute)
-            throw InvalidOperationException(_current_information);
+            throw InvalidOperationException(_caller);
             
           return this->Scheme() == Uri::UriSchemeFile && !String::IsNullOrEmpty(this->Host());
         }
@@ -302,7 +302,7 @@ namespace Switch {
       _property<const String&, _readonly> OriginalString {
         _get->const string& {
           if (this->kind != UriKind::Absolute)
-            throw InvalidOperationException(_current_information);
+            throw InvalidOperationException(_caller);
             
           return this->originalUri;
         }
@@ -467,7 +467,7 @@ namespace Switch {
       /// @remarks For more information on IRI support, see the Remarks section for the Uri class.
       static String EscapeDataString(const String& value) {
         if (value.Length() > 32766)
-          throw UriFormatException(_current_information);
+          throw UriFormatException(_caller);
 
         bool escapeNeeded = false;
         for (int32 index = 0; !escapeNeeded && index < value.Length(); index++)
@@ -499,7 +499,7 @@ namespace Switch {
       /// @remarks For more information on IRI support, see the Remarks section for the Uri class.
       static String EscapeUriString(const String& value) {
         if (value.Length() > 32766)
-          throw UriFormatException(_current_information);
+          throw UriFormatException(_caller);
 
         bool escapeNeeded = false;
         for (int32 index = 0; !escapeNeeded && index < value.Length(); index++)
@@ -534,7 +534,7 @@ namespace Switch {
         if ('A' <= digit && digit <= 'F')
           return 10 + digit - 'A';
         
-        throw ArgumentException(_current_information);
+        throw ArgumentException(_caller);
       }
       
       /// @brief Gets the specified components of the current instance using the specified escaping for special characters.
@@ -548,7 +548,7 @@ namespace Switch {
       /// @remarks For more information on IRI support, see the Remarks section for the Uri class.
       String GetComponents(UriComponents components, UriFormat format) const {
         if (this->kind != UriKind::Absolute)
-          throw InvalidOperationException(_current_information);
+          throw InvalidOperationException(_caller);
         
         String str;
         
@@ -619,7 +619,7 @@ namespace Switch {
           case UriPartial::Query: return GetComponents(UriComponents::Scheme|UriComponents::UserInfo|UriComponents::Host|UriComponents::Port|UriComponents::PathAndQuery, UriFormat::UriEscaped);
           default: break;
         }
-        throw ArgumentException(_current_information);
+        throw ArgumentException(_caller);
       }
       
       /// @brief Returns the data needed to serialize the current instance.
@@ -645,7 +645,7 @@ namespace Switch {
       /// @exception ArgumentOutOfRangeException character is greater than 255.
       static String HexEscape(char32 character) {
         if (character > 255)
-          throw ArgumentOutOfRangeException(_current_information);
+          throw ArgumentOutOfRangeException(_caller);
 
         return String::Format("%{0:X2}", Convert::ToInt32(character));
       }
@@ -874,7 +874,7 @@ namespace Switch {
 
           escapeUri = escapeUri.Substring(indexStart);
         } catch(...) {
-          throw UriFormatException(_current_information);
+          throw UriFormatException(_caller);
         }
       }
 

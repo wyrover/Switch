@@ -8,12 +8,12 @@ namespace UnitTests {
   protected:
     void PassedTestAreEqual() {
       string s = "One";
-      Expect::AreEqual("One", s, _current_information);
+      Expect::AreEqual("One", s, _caller);
     }
 
     void FailedTestAreEqual() {
       int32 i = 42;
-      Expect::AreEqual(123, i, _current_information);
+      Expect::AreEqual(123, i, _caller);
     }
   };
 

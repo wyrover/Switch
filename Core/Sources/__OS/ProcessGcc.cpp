@@ -41,7 +41,7 @@ namespace {
   string GetProcessPath(pid_t id) {
     char path[PROC_PIDPATHINFO_SIZE+1] = {0};
     if (proc_pidinfo(id, PROC_PIDPATHINFO, 0, &path, PROC_PIDPATHINFO_SIZE) != 0)
-      throw System::InvalidOperationException(_current_information);
+      throw System::InvalidOperationException(_caller);
     return path;
   }
   

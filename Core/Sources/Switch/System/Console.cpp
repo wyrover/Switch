@@ -83,9 +83,9 @@ _property<ConsoleColor> Console::BackgroundColor {
   [] {return __OS::CoreApi::Console::GetBackgroundColor();},
   [](ConsoleColor value) {
     if (!Enum<ConsoleColor>::IsDefined(value))
-      throw ArgumentException(_current_information);
+      throw ArgumentException(_caller);
     if (!__OS::CoreApi::Console::SetBackgroundColor(value))
-      throw System::IO::IOException(_current_information);
+      throw System::IO::IOException(_caller);
   }
 };
 
@@ -111,7 +111,7 @@ _property<int32> Console::CursorLeft {
   [] {return __OS::CoreApi::Console::GetCursorTop();},
   [](int32 value) {
     if (value < 0 || value >= __OS::CoreApi::Console::GetWindowWidth())
-      throw ArgumentOutOfRangeException(_current_information);
+      throw ArgumentOutOfRangeException(_caller);
       
     __OS::CoreApi::Console::SetCursorLeft(value);
   }
@@ -121,7 +121,7 @@ _property<int32> Console::CursorSize {
   [] {return __OS::CoreApi::Console::GetCursorSize();},
   [](int32 value) {
     if (value < 1 || value > 100)
-      throw ArgumentOutOfRangeException(_current_information);
+      throw ArgumentOutOfRangeException(_caller);
       
     __OS::CoreApi::Console::SetCursorSize(value);
   }
@@ -131,7 +131,7 @@ _property<int32> Console::CursorTop {
   [] {return __OS::CoreApi::Console::GetCursorTop();},
   [](int32 value) {
     if (value < 0 || value >= __OS::CoreApi::Console::GetBufferHeight())
-      throw ArgumentOutOfRangeException(_current_information);
+      throw ArgumentOutOfRangeException(_caller);
       
     __OS::CoreApi::Console::SetCursorTop(value);
   }
@@ -153,7 +153,7 @@ _property<ConsoleColor> Console::ForegroundColor {
   [] {return __OS::CoreApi::Console::GetForegroundColor();},
   [](ConsoleColor value) {
     if (!Enum<ConsoleColor>::IsDefined(value))
-      throw ArgumentException(_current_information);
+      throw ArgumentException(_caller);
     __OS::CoreApi::Console::SetForegroundColor(value);
   }
 };
@@ -260,7 +260,7 @@ ConsoleCancelEventHandler Console::CancelKeyPress;
 
 void Console::Beep(int32 frequency, int32 duration) {
   if (frequency < 37 || frequency > 32767 || duration <= 0)
-    throw ArgumentOutOfRangeException(_current_information);
+    throw ArgumentOutOfRangeException(_caller);
   
   __OS::CoreApi::Console::Beep(frequency, duration);
 }

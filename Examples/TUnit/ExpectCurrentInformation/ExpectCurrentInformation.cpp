@@ -8,7 +8,7 @@ namespace UnitTests {
   protected:
     // With current information
     void TestWithCurrentInformation() {
-      Expect::False(true, _current_information);
+      Expect::False(true, _caller);
     }
   };
   

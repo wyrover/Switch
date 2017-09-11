@@ -9,39 +9,39 @@ namespace {
   class UriTest : public TestFixture {
     protected:
       void ConstructorWithAbsoluteUri() {
-        Assert::DoesNotThrows(_delegate{Uri("http://www.contoso.com");}, _current_information);
+        Assert::DoesNotThrows(_delegate{Uri("http://www.contoso.com");}, _caller);
       }
 
       void ConstructorWithAbsoluteUriAndUriKindRelativeOrAbsoluteSpecified() {
-        Assert::DoesNotThrows(_delegate{Uri("http://www.contoso.com", UriKind::RelativeOrAbsolute);}, _current_information);
+        Assert::DoesNotThrows(_delegate{Uri("http://www.contoso.com", UriKind::RelativeOrAbsolute);}, _caller);
       }
 
       void ConstructorWithAbsoluteUriAndUriKindAbsoluteSpecified() {
-        Assert::DoesNotThrows(_delegate{Uri("http://www.contoso.com", UriKind::Absolute);}, _current_information);
+        Assert::DoesNotThrows(_delegate{Uri("http://www.contoso.com", UriKind::Absolute);}, _caller);
       }
 
       void ConstructorWithAbsoluteUriAndUriKindRelativeSpecified() {
-        Assert::Throws<UriFormatException>(_delegate{Uri("http://www.contoso.com", UriKind::Relative);}, _current_information);
+        Assert::Throws<UriFormatException>(_delegate{Uri("http://www.contoso.com", UriKind::Relative);}, _caller);
       }
 
       void ConstructorWithRelativeUri() {
-        Assert::Throws<UriFormatException>(_delegate{Uri("www.contoso.com");}, _current_information);
+        Assert::Throws<UriFormatException>(_delegate{Uri("www.contoso.com");}, _caller);
       }
 
       void ConstructorWithRelativeUriAndUriKindRelativeOrAbsoluteSpecified() {
-        Assert::DoesNotThrows(_delegate{Uri("www.contoso.com", UriKind::RelativeOrAbsolute);}, _current_information);
+        Assert::DoesNotThrows(_delegate{Uri("www.contoso.com", UriKind::RelativeOrAbsolute);}, _caller);
       }
 
       void ConstructorWithRelativeUriAndUriKindAbsoluteSpecified() {
-        Assert::Throws<UriFormatException>(_delegate{Uri("www.contoso.com", UriKind::Absolute);}, _current_information);
+        Assert::Throws<UriFormatException>(_delegate{Uri("www.contoso.com", UriKind::Absolute);}, _caller);
       }
 
       void ConstructorWithRelativeUriAndUriKindRelativeSpecified() {
-        Assert::DoesNotThrows(_delegate{Uri("www.contoso.com", UriKind::Relative);}, _current_information);
+        Assert::DoesNotThrows(_delegate{Uri("www.contoso.com", UriKind::Relative);}, _caller);
       }
 
       void ConstructorWithInvalidUri() {
-        Assert::Throws<UriFormatException>(_delegate{Uri("://www.contoso.com");}, _current_information);
+        Assert::Throws<UriFormatException>(_delegate{Uri("://www.contoso.com");}, _caller);
       }
 
   };

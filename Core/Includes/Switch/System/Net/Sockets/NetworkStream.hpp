@@ -92,7 +92,7 @@ namespace Switch {
 		      int32 Read(Array<byte>& buffer, int32 offset, int32 count) override;
           
           /// @brief Sets the current position of the stream to the given value. This method is not currently supported and always throws a NotSupportedException.
-          int64 Seek(int64, System::IO::SeekOrigin) override {throw NotSupportedException(_current_information);}
+          int64 Seek(int64, System::IO::SeekOrigin) override {throw NotSupportedException(_caller);}
 
           /// @brief Writes data to the NetworkStream.
           /// @param buffer An array of bytes. This method copies count bytes from buffer to the current stream.
@@ -131,9 +131,9 @@ namespace Switch {
           bool GetCanSeek() const override {return false;}
           bool GetCanTimeout() const override {return true;}
           bool GetCanWrite() const override {return this->data->writeable;}
-          int64 GetLength() const override {throw NotImplementedException(_current_information);}
-          int64 GetPosition() const override {throw NotImplementedException(_current_information);}
-          void SetPosition(int64 position) override {throw NotImplementedException(_current_information);}
+          int64 GetLength() const override {throw NotImplementedException(_caller);}
+          int64 GetPosition() const override {throw NotImplementedException(_caller);}
+          void SetPosition(int64 position) override {throw NotImplementedException(_caller);}
           int32 GetReadTimeout() const override {return this->data->streamSocket.ReceiveTimeout();}
           void SetReadTimeout(int32 timeout) override {this->data->streamSocket.ReceiveTimeout(timeout);}
           int32 GetWriteTimeout() const override {return this->data->streamSocket.SendTimeout();}

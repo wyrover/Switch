@@ -20,9 +20,9 @@ namespace Switch {
     namespace Constraints {
       class _export Constraint _abstract {
       public:
-        _property<::CurrentInformation> CurrentInformation {
-          _get {return this->currentInformation;},
-          _set {this->currentInformation = value;}
+        _property<::Caller> Caller {
+          _get {return this->caller;},
+          _set {this->caller = value;}
         };
         
         _property<ConstraintValue> Actual {
@@ -59,7 +59,7 @@ namespace Switch {
         mutable ConstraintValue actual;
         ConstraintValue expect;
         mutable string message;
-        mutable ::CurrentInformation currentInformation;
+        mutable ::Caller caller;
       };
     }
   }

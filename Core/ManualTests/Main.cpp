@@ -21,11 +21,11 @@ namespace Examples {
       Array<int> items = Array<>::CreateInstance<int>(8);
     };
     
-    static void TraceMessage(string message, const CurrentInformation& currentInformation) {
+    static void TraceMessage(string message, const Caller& caller) {
       Console::WriteLine("message: "_s + message);
-      Console::WriteLine("member name: "_s + currentInformation.MemberNamne);
-      Console::WriteLine("source file path: "_s + currentInformation.FilePath);
-      Console::WriteLine("source line number: "_s + currentInformation.LineNumber);
+      Console::WriteLine("member name: "_s + caller.MemberNamne);
+      Console::WriteLine("source file path: "_s + caller.FilePath);
+      Console::WriteLine("source line number: "_s + caller.LineNumber);
     }
 
     // The main entry point for the application.
@@ -34,7 +34,7 @@ namespace Examples {
       data.Items = {12, 24, 48};
       Console::WriteLine("{0} = {{{1}}}", _nameof(data.Items), _typeof(data.Items()));
       Console::WriteLine("{0} = {{{1}}}", _nameof(data.Items), string::Join(", ", data.Items()));
-      TraceMessage("Hello, Me!", _current_information);
+      TraceMessage("Hello, Me!", _caller);
     }
   };
 }

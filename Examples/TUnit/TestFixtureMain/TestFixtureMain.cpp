@@ -10,7 +10,7 @@ namespace UnitTests {
   class UserTest : public TestFixture {
   protected:
     void AnyTest() {
-      Assert::Null(null, _current_information);
+      Assert::Null(null, _caller);
     }
   };
   

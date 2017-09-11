@@ -44,7 +44,7 @@ void Semaphore::Close() {
 
 Semaphore Semaphore::OpenExisting(const string& name) {
   if (!semaphores.Conatains(name))
-    throw WaitHandleCannotBeOpenedException(_current_information);
+    throw WaitHandleCannotBeOpenedException(_caller);
   bool createNew;
   Semaphore value = semaphores.AddOrCreate(name, createNew);
   return value;

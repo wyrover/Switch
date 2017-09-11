@@ -7,46 +7,46 @@ namespace UnitTests {
   class TeastCase1 : public TestFixture {
   protected:
     void TestOne() {
-      Assert::IsTrue(true, _current_information);
+      Assert::IsTrue(true, _caller);
     }
     
     void TestTwo() {
-      Assert::IsFalse(false, _current_information);
+      Assert::IsFalse(false, _caller);
     }
     
     void TestThree() {
-      Assert::IsEmpty("", _current_information);
+      Assert::IsEmpty("", _caller);
     }
   };
   
   class TeastCase2 : public TestFixture {
   protected:
     void TestOne() {
-      Assert::IsTrue(true, _current_information);
+      Assert::IsTrue(true, _caller);
     }
     
     void TestTwo() {
-      Assert::IsFalse(false, _current_information);
+      Assert::IsFalse(false, _caller);
     }
     
     void TestThree() {
-      Assert::IsEmpty("", _current_information);
+      Assert::IsEmpty("", _caller);
     }
     
     void TestFour() {
-      Assert::IsEmpty({}, _current_information);
+      Assert::IsEmpty({}, _caller);
     }
   };
   
   class TeastCase3 : public TestFixture {
   protected:
     void TestOne() {
-      Assert::IsNull(null, _current_information);
+      Assert::IsNull(null, _caller);
     }
     
     void TestTwo() {
       _<string> str;
-      Assert::IsNull(str, _current_information);
+      Assert::IsNull(str, _caller);
     }
   };
   

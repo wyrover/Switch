@@ -15,7 +15,7 @@ namespace SwitchUnitTests {
       };
 
       Value = 24;
-      Assert::AreEqual(24, v, _current_information);
+      Assert::AreEqual(24, v, _caller);
     }
     
     void CreatePropertyAndSetItWithSetFunction() {
@@ -25,7 +25,7 @@ namespace SwitchUnitTests {
       };
       
       Value.Set(24);
-      Assert::AreEqual(24, v, _current_information);
+      Assert::AreEqual(24, v, _caller);
     }
     
     void CreatePropertyAndSetItWithFunctor() {
@@ -35,7 +35,7 @@ namespace SwitchUnitTests {
       };
       
       Value(24);
-      Assert::AreEqual(24, v, _current_information);
+      Assert::AreEqual(24, v, _caller);
     }
     
     class PropertyTestClass {
@@ -56,7 +56,7 @@ namespace SwitchUnitTests {
       refptr<PropertyTestClass> p2 = ref_new<PropertyTestClass>(*p1);
       p2->Name = "Other Value";
       p1 = null;
-      Assert::AreEqual("Other Value", p2->name, _current_information);
+      Assert::AreEqual("Other Value", p2->name, _caller);
     }
     
     void PropertyEqualOperator() {
@@ -65,7 +65,7 @@ namespace SwitchUnitTests {
       *p2 = *p1;
       p2->Name = "Other Value";
       p1 = null;
-      Assert::AreEqual("Other Value", p2->name, _current_information);
+      Assert::AreEqual("Other Value", p2->name, _caller);
     }
   };
   

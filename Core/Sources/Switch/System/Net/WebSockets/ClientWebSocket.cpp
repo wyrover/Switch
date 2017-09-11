@@ -17,7 +17,7 @@ ClientWebSocket::~ClientWebSocket() {
 void ClientWebSocket::Connect(const string& uri) {
   this->socket = easywsclient::WebSocket::from_url(uri.Data());
   if (this->socket == null)
-    throw InvalidOperationException(_current_information);
+    throw InvalidOperationException(_caller);
   
   this->thread = System::Threading::Thread(System::Threading::ThreadStart(_delegate {
     while (this->State == WebSocketState::Connecting)
@@ -45,7 +45,7 @@ void ClientWebSocket::Close(WebSocketCloseStatus closeStatus, const string& stat
 
 ArraySegment<byte> ClientWebSocket::Receive() {
   if (this->socket == null)
-    throw InvalidOperationException(_current_information);
+    throw InvalidOperationException(_caller);
   
   string buffer;
   if (this->items.TryDequeue(buffer) == false) {
@@ -57,12 +57,12 @@ ArraySegment<byte> ClientWebSocket::Receive() {
 
 void ClientWebSocket::Send(const ArraySegment<byte>& buffer, WebSocketMessageType messageType, bool endOfMessage) {
   if (this->socket == null)
-    throw InvalidOperationException(_current_information);
+    throw InvalidOperationException(_caller);
   
   switch (messageType) {
     case WebSocketMessageType::Text: this->socket->send(std::string(reinterpret_cast<const char*>(buffer.Data()), buffer.Length)); break;
     case WebSocketMessageType::Binary: this->socket->sendBinary(std::vector<byte>(buffer.Data(), buffer.Data() + buffer.Length)); break;
-    default: throw InvalidOperationException(_current_information);
+    default: throw InvalidOperationException(_caller);
   }
 }
 

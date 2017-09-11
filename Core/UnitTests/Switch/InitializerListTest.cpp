@@ -16,8 +16,8 @@ namespace SwitchUnitTests {
       
       int32 i = 0;
       for (const auto& value : collection.values)
-        Assert::AreEqual(value, results[i++], _current_information);
-      Assert::AreEqual(10, i, _current_information);
+        Assert::AreEqual(value, results[i++], _caller);
+      Assert::AreEqual(10, i, _caller);
     }
 
     void CreateCollectionWithInitializerListThenIterateIt() {
@@ -32,8 +32,8 @@ namespace SwitchUnitTests {
       
       int32 i = 0;
       for (const auto& value : collection.values)
-        Assert::AreEqual(value, results[i++], _current_information);
-      Assert::AreEqual(10, i, _current_information);
+        Assert::AreEqual(value, results[i++], _caller);
+      Assert::AreEqual(10, i, _caller);
     }
   };
   

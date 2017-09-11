@@ -20,7 +20,7 @@ namespace SwitchUnitTests {
     }
     
     void AreEqualInternalValue() {
-      Assert::AreEqual(42, this->value, _current_information);
+      Assert::AreEqual(42, this->value, _caller);
     }
     
     void AreEqualInt32() {
@@ -30,7 +30,7 @@ namespace SwitchUnitTests {
     
     void AreEqualInt32WithCurrentInformation() {
       int32 fourtyTwo = 42;
-      Assert::AreEqual(42, fourtyTwo, _current_information);
+      Assert::AreEqual(42, fourtyTwo, _caller);
     }
     
     void AreEqualInt32WithMessage() {
@@ -40,7 +40,7 @@ namespace SwitchUnitTests {
     
     void AreEqualInt32WithMessageAndCurrentInformation() {
       int32 fourtyTwo = 42;
-      Assert::AreEqual(42, fourtyTwo, "My message", _current_information);
+      Assert::AreEqual(42, fourtyTwo, "My message", _caller);
     }
     
     void AreEqualConstCharPointer() {
@@ -50,7 +50,7 @@ namespace SwitchUnitTests {
     
     void AreEqualConstCharPointerWithCurrentInformation() {
       const char* fourtyTwo = "Forty two";
-      Assert::AreEqual("Forty two", fourtyTwo, _current_information);
+      Assert::AreEqual("Forty two", fourtyTwo, _caller);
     }
     
     void AreEqualConstCharPointerWithMessage() {
@@ -60,7 +60,7 @@ namespace SwitchUnitTests {
     
     void AreEqualConstCharPointerWithMessageAndCurrentInformation() {
       const char* fourtyTwo = "Forty two";
-      Assert::AreEqual("Forty two", fourtyTwo, "My message", _current_information);
+      Assert::AreEqual("Forty two", fourtyTwo, "My message", _caller);
     }
     
     void AreEqualString() {
@@ -70,7 +70,7 @@ namespace SwitchUnitTests {
     
     void AreEqualStringWithCurrentInformation() {
       string fourtyTwo = "Forty two";
-      Assert::AreEqual("Forty two", fourtyTwo, _current_information);
+      Assert::AreEqual("Forty two", fourtyTwo, _caller);
     }
     
     void AreEqualStringWithMessage() {
@@ -80,7 +80,7 @@ namespace SwitchUnitTests {
     
     void AreEqualStringWithMessageAndCurrentInformation() {
       string fourtyTwo = "Forty two";
-      Assert::AreEqual("Forty two", fourtyTwo, "My message", _current_information);
+      Assert::AreEqual("Forty two", fourtyTwo, "My message", _caller);
     }
     
     void AreEqualTimeSpan() {
@@ -90,7 +90,7 @@ namespace SwitchUnitTests {
     
     void AreEqualTimeSpanWithCurrentInformation() {
       TimeSpan duration = 42_min;
-      Assert::AreEqual(42_min, duration, _current_information);
+      Assert::AreEqual(42_min, duration, _caller);
     }
     
     void AreEqualTimeSpanWithMessage() {
@@ -100,7 +100,7 @@ namespace SwitchUnitTests {
     
     void AreEqualTimeSpanWithMessageAndCurrentInformation() {
       TimeSpan duration = 42_min;
-      Assert::AreEqual(42_min, duration, "My message", _current_information);
+      Assert::AreEqual(42_min, duration, "My message", _caller);
     }
     
     void AreEqualProperty() {
@@ -114,7 +114,7 @@ namespace SwitchUnitTests {
       _property<int32, _readonly> fourtyTwo {
         _get {return 42;}
       };
-      Assert::AreEqual(42, fourtyTwo, _current_information);
+      Assert::AreEqual(42, fourtyTwo, _caller);
     }
     
     void AreEqualPropertyWithMessage() {
@@ -128,7 +128,7 @@ namespace SwitchUnitTests {
       _property<int32, _readonly> fourtyTwo {
         _get {return 42;}
       };
-      Assert::AreEqual(42, fourtyTwo, "My message", _current_information);
+      Assert::AreEqual(42, fourtyTwo, "My message", _caller);
     }
     
     void AreEqualAny() {
@@ -138,7 +138,7 @@ namespace SwitchUnitTests {
     
     void AreEqualAnyWithCurrentInformation() {
       any fourtyTwo = 42;
-      Assert::AreEqual(42, fourtyTwo, _current_information);
+      Assert::AreEqual(42, fourtyTwo, _caller);
     }
     
     void AreEqualAnyWithMessage() {
@@ -148,7 +148,7 @@ namespace SwitchUnitTests {
     
     void AreEqualAnyWithMessageAndCurrentInformation() {
       any fourtyTwo = 42;
-      Assert::AreEqual(42, fourtyTwo, "My message", _current_information);
+      Assert::AreEqual(42, fourtyTwo, "My message", _caller);
     }
     
     void AreEqualMyStruct() {
@@ -173,7 +173,7 @@ namespace SwitchUnitTests {
         bool operator!=(const MyStruct& ms) const {return !this->operator==(ms);}
       };
       MyStruct fourtyTwo(42);
-      Expect::AreEqual(MyStruct(42), fourtyTwo, _current_information);
+      Expect::AreEqual(MyStruct(42), fourtyTwo, _caller);
     }
     
     void AreEqualMyStructWithMessage() {
@@ -195,81 +195,81 @@ namespace SwitchUnitTests {
         bool operator!=(const MyStruct& ms) const {return !this->operator==(ms);}
       };
       MyStruct fourtyTwo(42);
-      Assert::AreEqual(MyStruct(42), fourtyTwo, "My message", _current_information);
+      Assert::AreEqual(MyStruct(42), fourtyTwo, "My message", _caller);
     }
     
     void AreNotEqual() {
       String string = "Test";
-      Assert::AreNotEqual("Tes", string, _current_information);
+      Assert::AreNotEqual("Tes", string, _caller);
     }
     
     void AreNotSame() {
       Uri uri1("http://www.contoso.com/index.htm?date=today");
       Uri uri2("http://www.contoso.com/index.htm?date=today");
-      Assert::AreNotSame(uri2, uri1, _current_information);
+      Assert::AreNotSame(uri2, uri1, _caller);
     }
     
     void AreSame() {
       System::DateTime date1 = System::DateTime::Now;
       System::DateTime* date2 = &date1;
-      Assert::AreSame(date1, *date2, _current_information);
+      Assert::AreSame(date1, *date2, _caller);
     }
     
     void DoesNotThrows() {
       const char* string1 = "Not null";
-      Assert::DoesNotThrows(_delegate {System::String string2(string1);}, _current_information);
+      Assert::DoesNotThrows(_delegate {System::String string2(string1);}, _caller);
     }
     
     void Greater() {
       int32 fourtyTwo = 42;
-      Assert::Greater(fourtyTwo, 40, _current_information);
+      Assert::Greater(fourtyTwo, 40, _caller);
     }
     
     void GreaterOrEqual() {
       int32 fourtyTwo = 42;
-      Assert::GreaterOrEqual(fourtyTwo, 40, _current_information);
-      Assert::GreaterOrEqual(fourtyTwo, 42, _current_information);
+      Assert::GreaterOrEqual(fourtyTwo, 40, _caller);
+      Assert::GreaterOrEqual(fourtyTwo, 42, _caller);
     }
     
     void IsFalse() {
       bool boolean = false;
-      Assert::IsFalse(boolean, _current_information);
+      Assert::IsFalse(boolean, _caller);
     }
     
     void IsNull() {
       System::Object* pointer = null;
-      Assert::IsNull(pointer, _current_information);
+      Assert::IsNull(pointer, _caller);
     }
     
     void IsTrue() {
       bool boolean = true;
-      Assert::IsTrue(boolean, _current_information);
+      Assert::IsTrue(boolean, _caller);
     }
     
     void Less() {
       int32 fourtyTwo = 42;
-      Assert::Less(fourtyTwo, 44, _current_information);
+      Assert::Less(fourtyTwo, 44, _caller);
     }
     
     void LessOrEqual() {
       int32 fourtyTwo = 42;
-      Assert::LessOrEqual(fourtyTwo, 44, _current_information);
-      Assert::LessOrEqual(fourtyTwo, 42, _current_information);
+      Assert::LessOrEqual(fourtyTwo, 44, _caller);
+      Assert::LessOrEqual(fourtyTwo, 42, _caller);
     }
     
     
     void Throws() {
       const char* string1 = null;
-      Assert::Throws<System::ArgumentNullException>(_delegate {System::String string2(string1);}, _current_information);
+      Assert::Throws<System::ArgumentNullException>(_delegate {System::String string2(string1);}, _caller);
     }
     
     void ThrowsAny() {
       System::Array<System::String> array(10);
-      Assert::ThrowsAny(_delegate {array[10];}, _current_information);
+      Assert::ThrowsAny(_delegate {array[10];}, _caller);
     }
 
     void AnyTest() {
-      Assert::AreEqual(10, 10, _current_information);
+      Assert::AreEqual(10, 10, _caller);
     }
 
   private:

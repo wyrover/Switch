@@ -20,7 +20,7 @@ void Monitor::Pulse(const Object& obj) {
   mutex.unlock();
   
   if (monitorItem == null)
-    throw InvalidOperationException(_current_information);
+    throw InvalidOperationException(_caller);
   
   monitorItem->event.ReleaseMutex();
 }
@@ -33,7 +33,7 @@ void Monitor::PulseAll(const Object& obj) {
   mutex.unlock();
   
   if (monitorItem == null)
-    throw InvalidOperationException(_current_information);
+    throw InvalidOperationException(_caller);
   
   monitorItem->event.ReleaseMutex();
 }
@@ -46,7 +46,7 @@ void Monitor::PulseAll(const Object& obj) {
    mutex.unlock();
    
    if (monitorItem == null)
-     throw InvalidOperationException(_current_information);
+     throw InvalidOperationException(_caller);
    
    return monitorItem->event.WaitOne(millisecondsTimeout);
  }
@@ -66,7 +66,7 @@ void Monitor::Remove(const Object& obj) {
   mutex.lock();
   if (!IsEntered(obj)) {
     mutex.unlock();
-    throw InvalidOperationException(_current_information);
+    throw InvalidOperationException(_caller);
   }
 
   MonitorItem* monitorData = &monitorItems[&obj];

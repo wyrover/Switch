@@ -8,7 +8,7 @@ namespace UnitTests {
   protected:
     // With current information
     void TestWithCurrentInformation() {
-      Assert::False(true, _current_information);
+      Assert::False(true, _caller);
     }
   };
   

@@ -27,9 +27,9 @@ namespace Switch {
           SocketException(const SocketException& value) : SystemException(value), error(value.error) {}
           
           /// @brief Create a new instance of class SocketException
-          /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
+          /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
           /// @remarks Message is set with the default message associate to the error.
-          SocketException(const CurrentInformation& information) : SystemException(information) {}
+          SocketException(const Caller& information) : SystemException(information) {}
           
           /// @brief Create a new instance of class SocketException
           /// @param message Message string associate to the error.
@@ -37,19 +37,19 @@ namespace Switch {
           
           /// @brief Create a new instance of class SocketException
           /// @param message Message string associate to the error.
-          /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
-          SocketException(const System::String& message, const CurrentInformation& information) : SystemException(message, information) {}
+          /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+          SocketException(const System::String& message, const Caller& information) : SystemException(message, information) {}
           
           /// @brief Create a new instance of class SocketException
           /// @param message Message string associate to the error.
           /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
-          /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
-          SocketException(const System::String& message, const System::Exception& innerException, const CurrentInformation& information) : SystemException(message, innerException, information) {}
+          /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+          SocketException(const System::String& message, const System::Exception& innerException, const Caller& information) : SystemException(message, innerException, information) {}
 
           /// @brief Create a new instance of class SocketException
           /// @param error The error code that indicates the error that occurred.
-          /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
-          SocketException(int32 error, const CurrentInformation& information) : SystemException("The Socket operation failed.", information), error((System::Net::Sockets::SocketError)error) {}
+          /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+          SocketException(int32 error, const Caller& information) : SystemException("The Socket operation failed.", information), error((System::Net::Sockets::SocketError)error) {}
           
           /// @brief Get the SocketError associated with this exception
           /// @return An error code associated with the exception

@@ -9,125 +9,125 @@ namespace SwitchUnitTests {
   class ArrayTest : public TestFixture {
   protected:
     void CreateOneDimensionalArrayWithCreateInstance() {
-      Assert::AreEqual(1, Array<>::CreateInstance<int>(3).Rank, _current_information);
-      Assert::AreEqual(3, Array<>::CreateInstance<int>(3).Length, _current_information);
+      Assert::AreEqual(1, Array<>::CreateInstance<int>(3).Rank, _caller);
+      Assert::AreEqual(3, Array<>::CreateInstance<int>(3).Length, _caller);
     }
     
     void CreateOneDimensionalArrayWithCreateInstanceWithLengthArraySpecified() {
-      Assert::AreEqual(1, Array<>::CreateInstance<int, 1>({3}).Rank, _current_information);
-      Assert::AreEqual(3, Array<>::CreateInstance<int, 1>({3}).Length, _current_information);
+      Assert::AreEqual(1, Array<>::CreateInstance<int, 1>({3}).Rank, _caller);
+      Assert::AreEqual(3, Array<>::CreateInstance<int, 1>({3}).Length, _caller);
     }
     
     void CreateTwoDimensionalArrayWithCreateInstance() {
-      Assert::AreEqual(2, Array<>::CreateInstance<int>(3, 5).Rank, _current_information);
-      Assert::AreEqual(15, Array<>::CreateInstance<int>(3, 5).Length, _current_information);
+      Assert::AreEqual(2, Array<>::CreateInstance<int>(3, 5).Rank, _caller);
+      Assert::AreEqual(15, Array<>::CreateInstance<int>(3, 5).Length, _caller);
     }
     
     void CreateTwoDimensionalArrayWithCreateInstanceWithLengthArraySpecified() {
-      Assert::AreEqual(2, Array<>::CreateInstance<int, 2>({3, 5}).Rank, _current_information);
-      Assert::AreEqual(15, Array<>::CreateInstance<int, 2>({3, 5}).Length, _current_information);
+      Assert::AreEqual(2, Array<>::CreateInstance<int, 2>({3, 5}).Rank, _caller);
+      Assert::AreEqual(15, Array<>::CreateInstance<int, 2>({3, 5}).Length, _caller);
     }
     
     void CreateThreeDimensionalArrayWithCreateInstance() {
-      Assert::AreEqual(3, Array<>::CreateInstance<int>(3, 5, 2).Rank, _current_information);
-      Assert::AreEqual(30, Array<>::CreateInstance<int>(3, 5, 2).Length, _current_information);
+      Assert::AreEqual(3, Array<>::CreateInstance<int>(3, 5, 2).Rank, _caller);
+      Assert::AreEqual(30, Array<>::CreateInstance<int>(3, 5, 2).Length, _caller);
     }
     
     void CreateThreeDimensionalArrayWithCreateInstanceWithLengthArraySpecified() {
-      Assert::AreEqual(3, Array<>::CreateInstance<int, 3>({3, 5, 2}).Rank, _current_information);
-      Assert::AreEqual(30, Array<>::CreateInstance<int, 3>({3, 5, 2}).Length, _current_information);
+      Assert::AreEqual(3, Array<>::CreateInstance<int, 3>({3, 5, 2}).Rank, _caller);
+      Assert::AreEqual(30, Array<>::CreateInstance<int, 3>({3, 5, 2}).Length, _caller);
     }
     
     void CreateFourDimensionalArrayWithCreateInstance() {
-      Assert::AreEqual(4, Array<>::CreateInstance<int, 4>({3, 5, 2, 4}).Rank, _current_information);
-      Assert::AreEqual(120, Array<>::CreateInstance<int, 4>({3, 5, 2, 4}).Length, _current_information);
+      Assert::AreEqual(4, Array<>::CreateInstance<int, 4>({3, 5, 2, 4}).Rank, _caller);
+      Assert::AreEqual(120, Array<>::CreateInstance<int, 4>({3, 5, 2, 4}).Length, _caller);
     }
     
     void ConstructorEmpty() {
       Array<int32> a;
-      Assert::AreEqual(a.Length, 0, _current_information);
+      Assert::AreEqual(a.Length, 0, _caller);
     }
     
     void Length() {
       Array<int32> a;
-      Assert::AreEqual(a.Length, 0, _current_information);
+      Assert::AreEqual(a.Length, 0, _caller);
     }
     
     void AccessExceptions() {
       Array<int32> a;
-      Assert::Throws<ArgumentOutOfRangeException>(_delegate {a[-1];}, _current_information);
-      Assert::Throws<ArgumentOutOfRangeException>(_delegate {a[0];}, _current_information);
-      Assert::Throws<ArgumentOutOfRangeException>(_delegate {a(0);}, _current_information);
-      Assert::Throws<ArgumentOutOfRangeException>(_delegate {a(-1);}, _current_information);
+      Assert::Throws<ArgumentOutOfRangeException>(_delegate {a[-1];}, _caller);
+      Assert::Throws<ArgumentOutOfRangeException>(_delegate {a[0];}, _caller);
+      Assert::Throws<ArgumentOutOfRangeException>(_delegate {a(0);}, _caller);
+      Assert::Throws<ArgumentOutOfRangeException>(_delegate {a(-1);}, _caller);
     }
     
     void ConstructorFromNative() {
       int32 a2[] = {10, 20, 30, 40, 50, 60, 70, 80, 90};
       Array<int32> a3(a2);
-      Assert::AreEqual(a3.Length, 9, _current_information);
-      Assert::Throws<ArgumentOutOfRangeException>(_delegate {a3[-1];}, _current_information);
-      Assert::AreEqual(10, a3[0], _current_information);
-      Assert::AreEqual(20, a3[1], _current_information);
-      Assert::AreEqual(30, a3[2], _current_information);
-      Assert::AreEqual(40, a3[3], _current_information);
-      Assert::AreEqual(50, a3[4], _current_information);
-      Assert::AreEqual(60, a3[5], _current_information);
-      Assert::AreEqual(70, a3[6], _current_information);
-      Assert::AreEqual(80, a3[7], _current_information);
-      Assert::AreEqual(90, a3[8], _current_information);
-      Assert::Throws<ArgumentOutOfRangeException>(_delegate {a3[9];}, _current_information);
+      Assert::AreEqual(a3.Length, 9, _caller);
+      Assert::Throws<ArgumentOutOfRangeException>(_delegate {a3[-1];}, _caller);
+      Assert::AreEqual(10, a3[0], _caller);
+      Assert::AreEqual(20, a3[1], _caller);
+      Assert::AreEqual(30, a3[2], _caller);
+      Assert::AreEqual(40, a3[3], _caller);
+      Assert::AreEqual(50, a3[4], _caller);
+      Assert::AreEqual(60, a3[5], _caller);
+      Assert::AreEqual(70, a3[6], _caller);
+      Assert::AreEqual(80, a3[7], _caller);
+      Assert::AreEqual(90, a3[8], _caller);
+      Assert::Throws<ArgumentOutOfRangeException>(_delegate {a3[9];}, _caller);
       
       Array<int32> a4(5);
       a4[2] = 3;
       a4[4] = 5;
       Assert::AreEqual(a4.Length, 5);
-      Assert::Throws<ArgumentOutOfRangeException>(_delegate {a4[-1];}, _current_information);
-      Assert::AreEqual(a4[0], 0, _current_information);
-      Assert::AreEqual(a4[1], 0, _current_information);
-      Assert::AreEqual(a4[2], 3, _current_information);
-      Assert::AreEqual(a4[3], 0, _current_information);
-      Assert::AreEqual(a4[4], 5, _current_information);
-      Assert::Throws<ArgumentOutOfRangeException>(_delegate {a4[5];}, _current_information);
+      Assert::Throws<ArgumentOutOfRangeException>(_delegate {a4[-1];}, _caller);
+      Assert::AreEqual(a4[0], 0, _caller);
+      Assert::AreEqual(a4[1], 0, _caller);
+      Assert::AreEqual(a4[2], 3, _caller);
+      Assert::AreEqual(a4[3], 0, _caller);
+      Assert::AreEqual(a4[4], 5, _caller);
+      Assert::Throws<ArgumentOutOfRangeException>(_delegate {a4[5];}, _caller);
       
       Array<int32> a6(5);
       a6[2] = 3;
-      Assert::AreEqual(a6[2], 3, _current_information);
+      Assert::AreEqual(a6[2], 3, _caller);
       a6(4) = 50;
-      Assert::AreEqual(a6(4), 50, _current_information);
+      Assert::AreEqual(a6(4), 50, _caller);
       
       Array<int32> a8(10);
       for (int32 index = 0; index < 10; index++)
         a8(index) = index;
       for (int32 index = 0; index < 10; index++)
-        Assert::AreEqual(a8(index), index, _current_information);
+        Assert::AreEqual(a8(index), index, _caller);
       
       int32 a11[] = {100, 200, 300, 400, 500, 600, 700, 800, 900};
       Array<int32> a12(a11, 3);
-      Assert::AreEqual(a12.Length, 3, _current_information);
-      Assert::Throws<ArgumentOutOfRangeException>(_delegate {a12[-1];}, _current_information);
-      Assert::AreEqual(a12[0], 100, _current_information);
-      Assert::AreEqual(a12[1], 200, _current_information);
-      Assert::AreEqual(a12[2], 300, _current_information);
-      Assert::Throws<ArgumentOutOfRangeException>(_delegate {a12[3];}, _current_information);
+      Assert::AreEqual(a12.Length, 3, _caller);
+      Assert::Throws<ArgumentOutOfRangeException>(_delegate {a12[-1];}, _caller);
+      Assert::AreEqual(a12[0], 100, _caller);
+      Assert::AreEqual(a12[1], 200, _caller);
+      Assert::AreEqual(a12[2], 300, _caller);
+      Assert::Throws<ArgumentOutOfRangeException>(_delegate {a12[3];}, _caller);
       
       Array<int32> a13(a12);
-      Assert::AreEqual(a13.Length, a12.Length, _current_information);
+      Assert::AreEqual(a13.Length, a12.Length, _caller);
     }
     
     void ConstructorFromInitializerList() {
       Array<int32> a3 = {10, 20, 30, 40, 50, 60, 70, 80, 90};
-      Assert::AreEqual(a3.Length, 9, _current_information);
-      Assert::Throws<ArgumentOutOfRangeException>(_delegate {a3[-1];}, _current_information);
-      Assert::AreEqual(a3[0], 10, _current_information);
-      Assert::AreEqual(a3[1], 20, _current_information);
-      Assert::AreEqual(a3[2], 30, _current_information);
-      Assert::AreEqual(a3[3], 40, _current_information);
-      Assert::AreEqual(a3[4], 50, _current_information);
-      Assert::AreEqual(a3[5], 60, _current_information);
-      Assert::AreEqual(a3[6], 70, _current_information);
-      Assert::AreEqual(a3[7], 80, _current_information);
-      Assert::AreEqual(a3[8], 90, _current_information);
-      Assert::Throws<ArgumentOutOfRangeException>(_delegate {a3[9];}, _current_information);
+      Assert::AreEqual(a3.Length, 9, _caller);
+      Assert::Throws<ArgumentOutOfRangeException>(_delegate {a3[-1];}, _caller);
+      Assert::AreEqual(a3[0], 10, _caller);
+      Assert::AreEqual(a3[1], 20, _caller);
+      Assert::AreEqual(a3[2], 30, _caller);
+      Assert::AreEqual(a3[3], 40, _caller);
+      Assert::AreEqual(a3[4], 50, _caller);
+      Assert::AreEqual(a3[5], 60, _caller);
+      Assert::AreEqual(a3[6], 70, _caller);
+      Assert::AreEqual(a3[7], 80, _caller);
+      Assert::AreEqual(a3[8], 90, _caller);
+      Assert::Throws<ArgumentOutOfRangeException>(_delegate {a3[9];}, _caller);
     }
   };
   

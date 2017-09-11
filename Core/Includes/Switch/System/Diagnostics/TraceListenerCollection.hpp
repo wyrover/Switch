@@ -126,9 +126,9 @@ namespace Switch {
         const Object& GetSyncRoot() const override {return this->list.SyncRoot();}
         
       private:
-        void Add(const TraceListener& traceListener) override {throw InvalidOperationException(_current_information);}
-        void CopyTo (System::Array<TraceListener>& array, int32 index) const override {throw InvalidOperationException(_current_information);}
-        void Insert(int32 index, const TraceListener& value) override {throw InvalidOperationException(_current_information);}
+        void Add(const TraceListener& traceListener) override {throw InvalidOperationException(_caller);}
+        void CopyTo (System::Array<TraceListener>& array, int32 index) const override {throw InvalidOperationException(_caller);}
+        void Insert(int32 index, const TraceListener& value) override {throw InvalidOperationException(_caller);}
 
         System::Collections::Generic::List<refptr<TraceListener>> list;
       };

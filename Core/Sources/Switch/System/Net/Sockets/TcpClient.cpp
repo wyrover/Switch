@@ -12,7 +12,7 @@ using namespace System::Net::Sockets;
 
 TcpClient::TcpClient(AddressFamily addressFamily) {
   if (addressFamily != AddressFamily::InterNetwork && addressFamily != AddressFamily::InterNetworkV6)
-    throw ArgumentException(_current_information);
+    throw ArgumentException(_caller);
   this->data->clientSocket = Socket(addressFamily, SocketType::Stream, addressFamily == AddressFamily::InterNetworkV6 ? ProtocolType::IPv6 : ProtocolType::Tcp);
 }
 
@@ -31,7 +31,7 @@ TcpClient::TcpClient(const Socket& acceptedSocket) {
 
 void TcpClient::Connect(const IPEndPoint& endPoint) {
   if (this->data->clientSocket.Connected)
-    throw SocketException((int32)SocketError::IsConnected, _current_information);
+    throw SocketException((int32)SocketError::IsConnected, _caller);
   
   this->data->clientSocket.Connect(endPoint);
   this->data->active = true;
@@ -39,7 +39,7 @@ void TcpClient::Connect(const IPEndPoint& endPoint) {
 
 void TcpClient::Connect(const IPAddress& iPAddress, int32 port) {
   if (this->data->clientSocket.Connected)
-    throw SocketException((int32)SocketError::IsConnected, _current_information);
+    throw SocketException((int32)SocketError::IsConnected, _caller);
   
   this->data->clientSocket.Connect(iPAddress, port);
   this->data->active = true;
@@ -47,7 +47,7 @@ void TcpClient::Connect(const IPAddress& iPAddress, int32 port) {
 
 void TcpClient::Connect(const string& hostname, int32 port) {
   if (this->data->clientSocket.Connected)
-    throw SocketException((int32)SocketError::IsConnected, _current_information);
+    throw SocketException((int32)SocketError::IsConnected, _caller);
   
   this->data->clientSocket.Connect(Dns::GetHostAddresses(hostname), port);
   this->data->active = true;
@@ -61,7 +61,7 @@ void TcpClient::Close() {
 
 NetworkStream TcpClient::GetStream() {
   if (!this->data->clientSocket.Connected)
-    throw SocketException((int32)SocketError::NotConnected, _current_information);
+    throw SocketException((int32)SocketError::NotConnected, _caller);
   
   return NetworkStream(this->data->clientSocket, true);
 }

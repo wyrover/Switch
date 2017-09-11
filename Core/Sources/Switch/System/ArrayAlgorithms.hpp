@@ -21,19 +21,19 @@ namespace {
     
     static inline void ValidateArray(const void* array, int32 size) {
       if (size < 0)
-        throw System::ArgumentException(_current_information);
+        throw System::ArgumentException(_caller);
       if (array == null && size > 0)
-        throw System::ArgumentNullException(_current_information);
+        throw System::ArgumentNullException(_caller);
     }
     
     static inline void ValidateIndex(int32 index, int32 size) {
       if (index < 0 || index > size)
-        throw System::ArgumentOutOfRangeException(_current_information);
+        throw System::ArgumentOutOfRangeException(_caller);
     }
     
     static inline void ValidateRange(int32 size, int32 index, int32 count) {
       if (! IsValidRange(size, index, count))
-        throw System::ArgumentOutOfRangeException(_current_information);
+        throw System::ArgumentOutOfRangeException(_caller);
     }
   };
 }

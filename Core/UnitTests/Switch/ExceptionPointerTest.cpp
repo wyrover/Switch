@@ -10,21 +10,21 @@ namespace SwitchUnitTests {
   protected:
     void CreateExceptionPointerEmptyThenRethrow() {
       ExceptionPtr ep;
-      Assert::IsTrue(ep == null, _current_information);
-      Assert::DoesNotThrows(_delegate {ep.Rethrow();}, _current_information);
+      Assert::IsTrue(ep == null, _caller);
+      Assert::DoesNotThrows(_delegate {ep.Rethrow();}, _caller);
     }
     
     void CreateKnownExceptionThenRethrow() {
       ExceptionPtr ep = ExceptionPtr::Create(InvalidCastException());
       Assert::IsFalse(ep == null);
-      Assert::Throws<InvalidCastException>(_delegate {ep.Rethrow();}, _current_information);
+      Assert::Throws<InvalidCastException>(_delegate {ep.Rethrow();}, _caller);
     }
     
     void CreateUnknownExceptionThenRethrow() {
       struct MyException {};
       ExceptionPtr ep = ExceptionPtr::Create(MyException());
       Assert::IsFalse(ep == null);
-      Assert::Throws<MyException>(_delegate {ep.Rethrow();}, _current_information);
+      Assert::Throws<MyException>(_delegate {ep.Rethrow();}, _caller);
     }
    
     void GetCurrentExceptionOnNullExceptionThenRethrow() {
@@ -32,8 +32,8 @@ namespace SwitchUnitTests {
       _using() {
         ep = ExceptionPtr::CurrentException;
       }
-      Assert::IsTrue(ep == null, _current_information);
-      Assert::DoesNotThrows(_delegate {ep.Rethrow();}, _current_information);
+      Assert::IsTrue(ep == null, _caller);
+      Assert::DoesNotThrows(_delegate {ep.Rethrow();}, _caller);
     }
     
     void GetCurrentExceptionOnKnownExceptionThenRethrow() {
@@ -45,8 +45,8 @@ namespace SwitchUnitTests {
           ep = ExceptionPtr::CurrentException;
         }
       }
-      Assert::IsFalse(ep == null, _current_information);
-      Assert::Throws<InvalidOperationException>(_delegate {ep.Rethrow();}, _current_information);
+      Assert::IsFalse(ep == null, _caller);
+      Assert::Throws<InvalidOperationException>(_delegate {ep.Rethrow();}, _caller);
     }
     
     void GetCurrentExceptionOnUnknownExceptionThenRethrow() {
@@ -59,8 +59,8 @@ namespace SwitchUnitTests {
           ep = ExceptionPtr::CurrentException;
         }
       }
-      Assert::IsFalse(ep == null, _current_information);
-      Assert::Throws<MyException>(_delegate {ep.Rethrow();}, _current_information);
+      Assert::IsFalse(ep == null, _caller);
+      Assert::Throws<MyException>(_delegate {ep.Rethrow();}, _caller);
     }
   };
   

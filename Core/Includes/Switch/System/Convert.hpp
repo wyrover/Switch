@@ -70,7 +70,7 @@ namespace Switch {
         if (is<UInt16>(value)) return ToBoolean(static_cast<const UInt16&>(value));
         if (is<UInt32>(value)) return ToBoolean(static_cast<const UInt32&>(value));
         if (is<UInt64>(value)) return ToBoolean(static_cast<const UInt64&>(value));
-        throw InvalidCastException(_current_information);
+        throw InvalidCastException(_caller);
       }
       
       /// @brief Convert Any to bool
@@ -104,16 +104,16 @@ namespace Switch {
       static bool ToBoolean(const Byte& value) { return value != 0; }
       
       /// @brief Calling this method always throws InvalidCastException.
-      static bool ToBoolean(char value) { throw InvalidCastException(_current_information); }
+      static bool ToBoolean(char value) { throw InvalidCastException(_caller); }
       
       /// @brief Calling this method always throws InvalidCastException.
-      static bool ToBoolean(char32 value) { throw InvalidCastException(_current_information); }
+      static bool ToBoolean(char32 value) { throw InvalidCastException(_caller); }
       
       /// @brief Calling this method always throws InvalidCastException.
-      static bool ToBoolean(const Char& value) { throw InvalidCastException(_current_information); }
+      static bool ToBoolean(const Char& value) { throw InvalidCastException(_caller); }
       
       /// @brief Calling this method always throws InvalidCastException.
-      static bool ToBoolean(const DateTime& value) { throw InvalidCastException(_current_information); }
+      static bool ToBoolean(const DateTime& value) { throw InvalidCastException(_caller); }
       
       /// @brief Convert decimal to bool
       /// @param value decimal to convert
@@ -262,7 +262,7 @@ namespace Switch {
         if (is<UInt16>(value)) return ToByte(static_cast<const UInt16&>(value));
         if (is<UInt32>(value)) return ToByte(static_cast<const UInt32&>(value));
         if (is<UInt64>(value)) return ToByte(static_cast<const UInt64&>(value));
-        throw InvalidCastException(_current_information);
+        throw InvalidCastException(_caller);
       }
       
       /// @brief Convert Any to byte
@@ -309,7 +309,7 @@ namespace Switch {
       /// @exception OverflowException value is less than System::Byte::MinValue or greater than System::Byte::MaxValue.
       static byte ToByte(char32 value) {
         if (value > Byte::MaxValue)
-          throw OverflowException(_current_information);
+          throw OverflowException(_caller);
         return static_cast<byte>(value);
       }
       
@@ -319,7 +319,7 @@ namespace Switch {
       /// @exception OverflowException value is less than System::Byte::MinValue or greater than System::Byte::MaxValue.
       static byte ToByte(const Char& value) {
         if (static_cast<char32>(value) > Byte::MaxValue)
-          throw OverflowException(_current_information);
+          throw OverflowException(_caller);
         return static_cast<byte>(static_cast<char32>(value));
       }
       
@@ -327,7 +327,7 @@ namespace Switch {
       /// @param value DateTime to convert
       /// @return byte A new byte object converted from value
       /// @exception OverflowException value is less than System::Byte::MinValue or greater than System::Byte::MaxValue.
-      static byte ToByte(const DateTime& value) { throw InvalidCastException(_current_information); }
+      static byte ToByte(const DateTime& value) { throw InvalidCastException(_caller); }
       
       /// @brief Convert decimal to byte
       /// @param value decimal to convert
@@ -515,7 +515,7 @@ namespace Switch {
         if (is<UInt16>(value)) return ToChar(static_cast<const UInt16&>(value));
         if (is<UInt32>(value)) return ToChar(static_cast<const UInt32&>(value));
         if (is<UInt64>(value)) return ToChar(static_cast<const UInt64&>(value));
-        throw InvalidCastException(_current_information);
+        throw InvalidCastException(_caller);
       }
       
       /// @brief Convert Any to char32
@@ -947,7 +947,7 @@ namespace Switch {
         if (is<UInt16>(value)) return ToDouble(static_cast<const UInt16&>(value));
         if (is<UInt32>(value)) return ToDouble(static_cast<const UInt32&>(value));
         if (is<UInt64>(value)) return ToDouble(static_cast<const UInt64&>(value));
-        throw InvalidCastException(_current_information);
+        throw InvalidCastException(_caller);
       }
       
       /// @brief Convert Any to double
@@ -1156,7 +1156,7 @@ namespace Switch {
         if (is<UInt16>(value)) return ToInt16(static_cast<const UInt16&>(value));
         if (is<UInt32>(value)) return ToInt16(static_cast<const UInt32&>(value));
         if (is<UInt64>(value)) return ToInt16(static_cast<const UInt64&>(value));
-        throw InvalidCastException(_current_information);
+        throw InvalidCastException(_caller);
       }
       
       /// @brief Convert Any to int16
@@ -1408,7 +1408,7 @@ namespace Switch {
         if (is<UInt16>(value)) return ToInt32(static_cast<const UInt16&>(value));
         if (is<UInt32>(value)) return ToInt32(static_cast<const UInt32&>(value));
         if (is<UInt64>(value)) return ToInt32(static_cast<const UInt64&>(value));
-        throw InvalidCastException(_current_information);
+        throw InvalidCastException(_caller);
       }
       
       /// @brief Convert Any to int32
@@ -1649,7 +1649,7 @@ namespace Switch {
         if (is<UInt16>(value)) return ToInt64(static_cast<const UInt16&>(value));
         if (is<UInt32>(value)) return ToInt64(static_cast<const UInt32&>(value));
         if (is<UInt64>(value)) return ToInt64(static_cast<const UInt64&>(value));
-        throw InvalidCastException(_current_information);
+        throw InvalidCastException(_caller);
       }
       
       /// @brief Convert Any to int64
@@ -1867,7 +1867,7 @@ namespace Switch {
       static const void* ToIntPtr(int64 value) {
         size_t size = 4;
         if (sizeof(void*) == size && (value < Int32::MinValue || value > Int32::MaxValue))
-          throw OverflowException(_current_information);
+          throw OverflowException(_caller);
         
         return reinterpret_cast<void*>(value);
       }
@@ -1877,7 +1877,7 @@ namespace Switch {
       /// @remarks Always throw ArgumentException
       /// @exception ArgumentException value is not convertible.
       template<typename T>
-      static const void* ToIntPtr(T value) {throw ArgumentException(_current_information);}
+      static const void* ToIntPtr(T value) {throw ArgumentException(_caller);}
       
       /// @brief Convert IConvertible object to sbyte
       /// @param converter IConvertible object to convert
@@ -1908,7 +1908,7 @@ namespace Switch {
         if (is<UInt16>(value)) return ToSByte(static_cast<const UInt16&>(value));
         if (is<UInt32>(value)) return ToSByte(static_cast<const UInt32&>(value));
         if (is<UInt64>(value)) return ToSByte(static_cast<const UInt64&>(value));
-        throw InvalidCastException(_current_information);
+        throw InvalidCastException(_caller);
       }
       
       /// @brief Convert Any to sbyte
@@ -2152,7 +2152,7 @@ namespace Switch {
         if (is<UInt16>(value)) return ToSingle(static_cast<const UInt16&>(value));
         if (is<UInt32>(value)) return ToSingle(static_cast<const UInt32&>(value));
         if (is<UInt64>(value)) return ToSingle(static_cast<const UInt64&>(value));
-        throw InvalidCastException(_current_information);
+        throw InvalidCastException(_caller);
       }
       
       /// @brief Convert Any to float
@@ -2597,7 +2597,7 @@ namespace Switch {
         if (is<UInt16>(value)) return ToUInt16(static_cast<const UInt16&>(value));
         if (is<UInt32>(value)) return ToUInt16(static_cast<const UInt32&>(value));
         if (is<UInt64>(value)) return ToUInt16(static_cast<const UInt64&>(value));
-        throw InvalidCastException(_current_information);
+        throw InvalidCastException(_caller);
       }
       
       /// @brief Convert Any to uint16
@@ -2776,7 +2776,7 @@ namespace Switch {
         if (is<UInt16>(value)) return ToUInt32(static_cast<const UInt16&>(value));
         if (is<UInt32>(value)) return ToUInt32(static_cast<const UInt32&>(value));
         if (is<UInt64>(value)) return ToUInt32(static_cast<const UInt64&>(value));
-        throw InvalidCastException(_current_information);
+        throw InvalidCastException(_caller);
       }
       
       /// @brief Convert Any to uint32
@@ -3013,7 +3013,7 @@ namespace Switch {
         if (is<UInt16>(value)) return ToUInt64(static_cast<const UInt16&>(value));
         if (is<UInt32>(value)) return ToUInt64(static_cast<const UInt32&>(value));
         if (is<UInt64>(value)) return ToUInt64(static_cast<const UInt64&>(value));
-        throw InvalidCastException(_current_information);
+        throw InvalidCastException(_caller);
       }
       
       /// @brief Convert Any to uint64
@@ -3224,7 +3224,7 @@ namespace Switch {
       template <typename T, typename C>
       struct CastToUnderlyingTypeIfEnumClass {
         static int32 Cast(T value) {
-          throw InvalidCastException(_current_information);
+          throw InvalidCastException(_caller);
         }
       };
       
@@ -3252,7 +3252,7 @@ namespace Switch {
         if (base == 16)
           return string::Format("{0:x}", value);
         
-        throw ArgumentException(_current_information);
+        throw ArgumentException(_caller);
       }
       
       static IFormatProvider* provider;

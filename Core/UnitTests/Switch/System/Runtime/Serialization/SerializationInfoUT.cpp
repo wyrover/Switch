@@ -33,7 +33,7 @@ public:
 
   static refptr<Role> Deserialize(const System::Runtime::Serialization::SerializationInfo& info) {    
     if (!info.GetObjectType().Equals("Role"))
-      throw System::Runtime::Serialization::SerializationException(_current_information);
+      throw System::Runtime::Serialization::SerializationException(_caller);
 
     refptr<Role> role = new Role();
     role->RoleName = info.GetString("RoleName");
@@ -60,7 +60,7 @@ public:
 
   static refptr<Person> Deserialize(const System::Runtime::Serialization::SerializationInfo& info) {
     if (!info.GetObjectType().Equals("Person"))
-      throw System::Runtime::Serialization::SerializationException(_current_information);
+      throw System::Runtime::Serialization::SerializationException(_caller);
 
     refptr<Person> person = new Person();
 

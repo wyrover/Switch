@@ -134,10 +134,10 @@ namespace Switch {
           /// @exception ArgumentOutOfRangeException	index is less than zero || count is less than zero.
           void CopyTo(int32 index, Array<T>& array, int32 arrayIndex, int32 count) const {
             if (index < 0 || array.Length < 0 || arrayIndex < 0 || count < 0)
-              throw ArgumentOutOfRangeException(_current_information);
+              throw ArgumentOutOfRangeException(_caller);
 
             if (index + count > this->Count || arrayIndex + count > array.Length)
-              throw ArgumentException(_current_information);
+              throw ArgumentException(_caller);
 
             int32 i = 0, c = 0;
             for (T item : *this) {
@@ -376,7 +376,7 @@ namespace Switch {
 
             virtual bool MoveNext() {
               if (this->operationNumber != this->set.operationNumber)
-                throw InvalidOperationException(_current_information);
+                throw InvalidOperationException(_caller);
 
               if (IsFinished())
                 return false;
@@ -392,7 +392,7 @@ namespace Switch {
           protected:
             const T& GetCurrent() const {
               if (this->beforeFirst || IsFinished())
-                throw InvalidOperationException(_current_information);
+                throw InvalidOperationException(_caller);
               
               return *this->iterator;
             }
@@ -418,7 +418,7 @@ namespace Switch {
 
             virtual bool MoveNext() {
               if (this->operationNumber != this->set.operationNumber)
-                throw InvalidOperationException(_current_information);
+                throw InvalidOperationException(_caller);
 
               if (IsFinished())
                 return false;
@@ -434,7 +434,7 @@ namespace Switch {
           private:
             const T& GetCurrent() const {
               if (this->beforeFirst || IsFinished())
-                throw InvalidOperationException(_current_information);
+                throw InvalidOperationException(_caller);
               
               return *this->iterator;
             }

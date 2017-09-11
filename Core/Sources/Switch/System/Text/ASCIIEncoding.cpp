@@ -84,18 +84,18 @@ int32 ASCIIEncoding::GetByteCount(char32) const {
 }
 
 int32 ASCIIEncoding::GetCharCount(const byte bytes[], int32 bytesSize, int32 index, int32 count) const {
-  if (bytes == null && bytesSize != 0) throw ArgumentNullException(_current_information);
+  if (bytes == null && bytesSize != 0) throw ArgumentNullException(_caller);
   ValidateGCC(bytesSize, index, count);
   return count;
 }
 
 int32 ASCIIEncoding::GetMaxByteCount(int32 charCount) const {
-  if (charCount < 0) throw ArgumentOutOfRangeException(_current_information);
+  if (charCount < 0) throw ArgumentOutOfRangeException(_caller);
   return charCount;
 }
 
 int32 ASCIIEncoding::GetMaxCharCount(int32 byteCount) const {
-  if (byteCount < 0) throw ArgumentOutOfRangeException(_current_information);
+  if (byteCount < 0) throw ArgumentOutOfRangeException(_caller);
   return byteCount;
 }
 
@@ -104,11 +104,11 @@ bool ASCIIEncoding::Equals(const object& obj) const {
 }
 
 int32 ASCIIEncoding::GetBytes(char32 c, byte bytes[], int32 bytesLength, int32 index) const {
-  if (bytes == null && bytesLength > 0) throw ArgumentNullException(_current_information);
-  if (index < 0) throw ArgumentOutOfRangeException(_current_information);
+  if (bytes == null && bytesLength > 0) throw ArgumentNullException(_caller);
+  if (index < 0) throw ArgumentOutOfRangeException(_caller);
   
   int32 count = GetByteCount(c);
-  if (index + count > bytesLength) throw ArgumentOutOfRangeException(_current_information);
+  if (index + count > bytesLength) throw ArgumentOutOfRangeException(_caller);
   
   Encoder encoder;
   encoder.Encode(c, &bytes[index]);

@@ -2,7 +2,7 @@
 /// @brief Contains Switch::System::Exception exception.
 #pragma once
 
-#include "../CurrentInformation.hpp"
+#include "../Caller.hpp"
 #include "../Property.hpp"
 #include "../RefPtr.hpp"
 #include "../Types.hpp"
@@ -25,9 +25,9 @@ namespace Switch {
       Exception();
       
       /// @brief Create a new instance of class Exception
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
       /// @remarks Message is set with the default message associate to the error.
-      Exception(const CurrentInformation& information);
+      Exception(const Caller& information);
       
       /// @brief Create a new instance of class Exception
       /// @param message Message string associate to the error.
@@ -35,8 +35,8 @@ namespace Switch {
       
       /// @brief Create a new instance of class Exception
       /// @param message Message string associate to the error.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
-      Exception(const String& message, const CurrentInformation& information);
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+      Exception(const String& message, const Caller& information);
       
       /// @brief Create a new instance of class Exception
       /// @param message Message string associate to the error.
@@ -46,8 +46,8 @@ namespace Switch {
       /// @brief Create a new instance of class Exception
       /// @param message Message string associate to the error.
       /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
-      Exception(const String& message, const Exception& innerException, const CurrentInformation& information);
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+      Exception(const String& message, const Exception& innerException, const Caller& information);
       
       /// @cond
       Exception(const Exception& value);
@@ -57,7 +57,7 @@ namespace Switch {
       /// @brief Get file path where Exception occurred
       /// @return string A string represent file path where Exception occurred
       _property<const String&, _readonly> FilePath {
-        _get->const string& {return this->currentInformation.FilePath();}
+        _get->const string& {return this->caller.FilePath();}
       };
       
       /// @brief Gets a link to the help file associated with this exception.
@@ -87,7 +87,7 @@ namespace Switch {
       /// @brief Get Line number where the Exception occurred
       /// @return Int32 the line number where Exception occurred
       _property<int32, _readonly> LineNumber {
-        _get {return this->currentInformation.LineNumber();}
+        _get {return this->caller.LineNumber();}
       };
       
       /// @brief Get message associate to the Exception
@@ -142,7 +142,7 @@ namespace Switch {
     //private:
       String message;
       String helpLink;
-      CurrentInformation currentInformation;
+      Caller caller;
       ref<Exception> innerException;
       int32 hresult = 0;
       refptr<Array<String>> stackTrace;

@@ -26,9 +26,9 @@ namespace Switch {
         int64 GetPosition() const override {return static_cast<int64>(this->data->position);}
         void SetPosition(int64 newPosition) override {
           if (newPosition < 0 || newPosition > static_cast<int64>(Int32::MaxValue))
-            throw ArgumentOutOfRangeException(_current_information);
+            throw ArgumentOutOfRangeException(_caller);
           if (IsClosed())
-            throw ObjectClosedException(_current_information);
+            throw ObjectClosedException(_caller);
           this->data->position = static_cast<int32>(newPosition);
         }
         

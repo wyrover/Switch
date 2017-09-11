@@ -13,7 +13,7 @@ _property<NullStream&, _readonly> Stream::Null {
 };
 
 int32 Stream::ReadByte() {
-  if (this->closed) throw ObjectClosedException(_current_information);
+  if (this->closed) throw ObjectClosedException(_caller);
   static Array<byte> b(1);
   if (Read(b, 0, 1) == 1)
     return int32(b[0]);
@@ -26,7 +26,7 @@ Stream& Stream::Synchronised(Stream& stream) {
 }
 
 void Stream::WriteByte(byte value) {
-  if (this->closed) throw ObjectClosedException(_current_information);
+  if (this->closed) throw ObjectClosedException(_caller);
   Array<byte> b = {value};
   Write(b, 0, 1);
 }

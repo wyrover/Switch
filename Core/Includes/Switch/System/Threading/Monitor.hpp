@@ -43,7 +43,7 @@ namespace Switch {
         /// @remarks Use Monitor to lock objects (that is, reference types), not value types. When you pass a value type variable to Enter, it is boxed as an object. If you pass the same variable to Enter again, the thread is block. The code that Monitor is supposedly protecting is not protected. Furthermore, when you pass the variable to Exit, still another separate object is created. Because the object passed to Exit is different from the object passed to Enter, Monitor throws SynchronizationLockException. For details, see the conceptual topic Monitors.
         static void Enter(const object& obj, bool& lockTaken) {
           if (TryEnter(obj, lockTaken) == false)
-            throw InvalidOperationException(_current_information);
+            throw InvalidOperationException(_caller);
         }
         
         /// @brief Acquires an exclusive lock on the specified obj.

@@ -24,7 +24,7 @@ void StackTrace::FillFrames(int32 skipFrames, bool needFileInfo) {
 
 void StackTrace::FillFrames(const String& str, int32 skipFrames, bool needFileInfo) {
   if (skipFrames < 0 )
-    throw ArgumentOutOfRangeException(_current_information);
+    throw ArgumentOutOfRangeException(_caller);
   
   this->stackTrace = ref_new<CallStack>();
 
@@ -39,7 +39,7 @@ void StackTrace::FillFrames(const String& str, int32 skipFrames, bool needFileIn
 
 void StackTrace::FillFrames(void* stackTrace, int32 skipFrames, bool needFileInfo) {
   if (skipFrames < 0)
-    throw ArgumentOutOfRangeException(_current_information);
+    throw ArgumentOutOfRangeException(_caller);
 
   int32 length = skipFrames < StackFrame::GetFrameCount(stackTrace) ? StackFrame::GetFrameCount(stackTrace)-skipFrames : 0;
   for (int32 index = 0; index  < length; index++) {

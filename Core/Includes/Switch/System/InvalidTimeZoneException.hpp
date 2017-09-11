@@ -21,9 +21,9 @@ namespace Switch {
       InvalidTimeZoneException(const InvalidTimeZoneException& value) : Exception(value) {}
       
       /// @brief Create a new instance of class InvalidTimeZoneException
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
       /// @remarks Message is set with the default message associate to the error.
-      InvalidTimeZoneException(const CurrentInformation& information) : Exception(information) {}
+      InvalidTimeZoneException(const Caller& information) : Exception(information) {}
       
       /// @brief Create a new instance of class InvalidTimeZoneException
       /// @param message Message string associate to the error.
@@ -31,14 +31,14 @@ namespace Switch {
       
       /// @brief Create a new instance of class InvalidTimeZoneException
       /// @param message Message string associate to the error.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
-      InvalidTimeZoneException(const System::String& message, const CurrentInformation& information) : Exception(message, information) {}
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+      InvalidTimeZoneException(const System::String& message, const Caller& information) : Exception(message, information) {}
       
       /// @brief Create a new instance of class InvalidTimeZoneException
       /// @param message Message string associate to the error.
       /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
-      InvalidTimeZoneException(const System::String& message, const System::Exception& innerException, const CurrentInformation& information) : Exception(message, innerException, information) {}
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+      InvalidTimeZoneException(const System::String& message, const System::Exception& innerException, const Caller& information) : Exception(message, innerException, information) {}
       
     private:
       System::String GetDefaultMessage() const override {return "The time zone information is not valid."; }

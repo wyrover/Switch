@@ -68,7 +68,7 @@ namespace Switch {
       _property<T&, _readonly> Value {
         _get->T& {
           if(!this->hasValue)
-            throw System::InvalidOperationException(_current_information);
+            throw System::InvalidOperationException(_caller);
           return this->value;
         }
       };

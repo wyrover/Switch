@@ -32,7 +32,7 @@ namespace Switch {
           static_assert(!std::is_same<System::IO::Stream, TStream>::value, "Must not be System::IO::Stream but inherited");
           static_assert(std::is_base_of<System::IO::Stream, TStream>::value, "Is not inherited from System::IO::Stream");
           if (!stream.CanRead())
-            throw ArgumentException(_current_information);
+            throw ArgumentException(_caller);
         }
         
         /// @brief Initializes a new instance of the System::IO::BinaryReader class for the specified Sream pointer.
@@ -41,7 +41,7 @@ namespace Switch {
         /// @exception ArgumentException stream is not readable.
         BinaryReader(refptr<Stream> stream) : stream(stream) {
           if (!stream->CanRead())
-            throw ArgumentException(_current_information);
+            throw ArgumentException(_caller);
         }
 
         /// @cond
@@ -113,7 +113,7 @@ namespace Switch {
         virtual Array<byte> ReadBytes(int32 count) {
           Array<byte> values(count);
           if (Read(values, 0, count) != count)
-            throw EndOfStreamException(_current_information);
+            throw EndOfStreamException(_caller);
           return values;
         }
 

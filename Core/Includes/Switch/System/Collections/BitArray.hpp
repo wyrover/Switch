@@ -84,7 +84,7 @@ namespace Switch {
         /// @remarks This constructor is an O(n) operation, where n is length.
         BitArray(int32 length) {
           if (length < 0)
-            throw ArgumentOutOfRangeException(_current_information);
+            throw ArgumentOutOfRangeException(_caller);
 
           this->length = length;
           while (this->bitArray.Count < GetListLength(this->length)) {
@@ -99,7 +99,7 @@ namespace Switch {
         /// @remarks This constructor is an O(n) operation, where n is length.
         BitArray(int32 length, bool defaultValue) {
           if (length < 0)
-            throw ArgumentOutOfRangeException(_current_information);
+            throw ArgumentOutOfRangeException(_caller);
 
           this->length = length;
           while (this->bitArray.Count < GetListLength(this->length))
@@ -134,7 +134,7 @@ namespace Switch {
         const BitArray& And(const BitArray& value) {
 
           if (this->Count != value.Count)
-            throw System::ArgumentException(_current_information);
+            throw System::ArgumentException(_caller);
 
           for (int32 index = 0; index < this->Count; index++)
             (*this)[index] = (*this)[index] & value[index];
@@ -183,7 +183,7 @@ namespace Switch {
         /// @remarks This method is an O(1) operation.
         bool Get(int32 index) const {
           if (index >= this->length || index < 0)
-            throw ArgumentOutOfRangeException(_current_information);
+            throw ArgumentOutOfRangeException(_caller);
 
           const_cast<BooleanRef&>(this->valueRef).FromBoolean(const_cast<BitArray*>(this));
 
@@ -198,7 +198,7 @@ namespace Switch {
 
         bool& Get(int32 index) {
           if (index >= this->length || index < 0)
-            throw ArgumentOutOfRangeException(_current_information);
+            throw ArgumentOutOfRangeException(_caller);
 
           this->valueRef.FromBoolean(this);
           return this->valueRef.GetBooleanRef(GetBitValue(index), index);
@@ -218,7 +218,7 @@ namespace Switch {
         /// @return @see object
         void CopyTo(Array<bool>& array, int32 index) const override {
           //return this->bitArray.CopyTo(array, index);
-          throw NotSupportedException(_current_information);
+          throw NotSupportedException(_caller);
         }
 
         /// @brief Inverts all the bit values in the current BitArray, so that elements set to true are changed to false, and elements set to false are changed to true.
@@ -240,7 +240,7 @@ namespace Switch {
         /// @remarks This method is an O(n) operation, where n is Count.
         const BitArray& Or(const BitArray& value) {
           if (this->Count != value.Count)
-            throw ArgumentException(_current_information);
+            throw ArgumentException(_caller);
 
           for (int32 index = 0; index < this->Count; index++)
             (*this)[index] = (*this)[index] | value[index];
@@ -274,7 +274,7 @@ namespace Switch {
         /// @remarks This method is an O(n) operation, where n is Count.
         const BitArray& Xor(const BitArray& value) {
           if (this->Count != value.Count)
-            throw ArgumentException(_current_information);
+            throw ArgumentException(_caller);
 
           for (int32 index = 0; index < this->Count; index++)
             (*this)[index] = (*this)[index] ^ value[index];
@@ -288,7 +288,7 @@ namespace Switch {
         /// @exception ArgumentOutOfRangeException index is less than 0 or index is equal to or greater than Count.
         const bool& operator[](int32 index) const {
           if (index >= this->length || index < 0)
-            throw ArgumentOutOfRangeException(_current_information);
+            throw ArgumentOutOfRangeException(_caller);
 
           const_cast<BooleanRef&>(this->valueRef).FromBoolean(const_cast<BitArray*>(this));
 
@@ -302,7 +302,7 @@ namespace Switch {
         bool& operator[](int32 index)
         {
           if (index >= this->length || index < 0)
-            throw ArgumentOutOfRangeException(_current_information);
+            throw ArgumentOutOfRangeException(_caller);
 
           this->valueRef.FromBoolean(this);
           return this->valueRef.GetBooleanRef(GetBitValue(index), index);
@@ -323,7 +323,7 @@ namespace Switch {
         protected:
           const bool& GetCurrent() const {
             if (this->pos == -1 || this->pos >= this->bitArray->Length)
-              throw InvalidOperationException(_current_information);
+              throw InvalidOperationException(_caller);
             
             return (*this->bitArray)[this->pos];
           }
@@ -380,10 +380,10 @@ namespace Switch {
         System::Collections::Generic::List<int32> bitArray;
         int32 length = 0;
 
-        void Add(const bool&) override {throw InvalidOperationException(_current_information);}
-        void Clear() override {throw InvalidOperationException(_current_information);}
-        bool Contains(const bool&) const override {throw InvalidOperationException(_current_information);}
-        bool Remove(const bool&) override {throw InvalidOperationException(_current_information);}
+        void Add(const bool&) override {throw InvalidOperationException(_caller);}
+        void Clear() override {throw InvalidOperationException(_caller);}
+        bool Contains(const bool&) const override {throw InvalidOperationException(_caller);}
+        bool Remove(const bool&) override {throw InvalidOperationException(_caller);}
       };
     }
   }

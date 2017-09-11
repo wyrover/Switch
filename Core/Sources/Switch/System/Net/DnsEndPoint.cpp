@@ -19,12 +19,12 @@ DnsEndPoint::DnsEndPoint(const string& host, int32 port, Sockets::AddressFamily 
 }
 
 SocketAddress DnsEndPoint::Serialize() const {
-  throw NotSupportedException(_current_information);
+  throw NotSupportedException(_caller);
 }
 
 void DnsEndPoint::SetHost(const string& host) {
   if (string::IsNullOrEmpty(host))
-    throw ArgumentException(_current_information);
+    throw ArgumentException(_caller);
   
   IPHostEntry IPHostEntry = Dns::GetHostEntry(this->host);
   this->host = IPHostEntry.HostName;
@@ -32,7 +32,7 @@ void DnsEndPoint::SetHost(const string& host) {
 
 void DnsEndPoint::SetPort(int32 port) {
   if (port < IPEndPoint::MinPort || port > IPEndPoint::MaxPort)
-    throw ArgumentOutOfRangeException(_current_information);
+    throw ArgumentOutOfRangeException(_caller);
   
   this->port = port;
 }

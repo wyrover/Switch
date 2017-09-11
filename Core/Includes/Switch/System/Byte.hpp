@@ -40,8 +40,8 @@ namespace Switch {
       template<typename T> Byte& operator+=(T value) {this->value += value.value; return *this;}
       template<typename T> Byte& operator-=(T value) {this->value -= value; return *this;}
       template<typename T> Byte& operator*=(T value) {this->value *= value; return *this;}
-      template<typename T> Byte& operator/=(T value) {if (value.value == 0) throw DivideByZeroException(_current_information); this->value /= value.value; return *this;}
-      template<typename T> Byte& operator%=(T value) {if (value.value == 0) throw DivideByZeroException(_current_information); this->value %= value.value; return *this;}
+      template<typename T> Byte& operator/=(T value) {if (value.value == 0) throw DivideByZeroException(_caller); this->value /= value.value; return *this;}
+      template<typename T> Byte& operator%=(T value) {if (value.value == 0) throw DivideByZeroException(_caller); this->value %= value.value; return *this;}
       template<typename T> Byte& operator&=(T value) {this->value &= value; return *this;}
       template<typename T> Byte& operator|=(T value) {this->value |= value; return *this;}
       template<typename T> Byte& operator^=(T value) {this->value ^= value; return *this;}
@@ -169,7 +169,7 @@ namespace Switch {
       uint16 ToUInt16(const IFormatProvider& provider) const override {return this->value;}
       uint32 ToUInt32(const IFormatProvider& provider) const override {return this->value;}
       uint64 ToUInt64(const IFormatProvider& provider) const override {return this->value;}
-      sbyte ToSByte(const IFormatProvider& provider) const override {if (this->value > std::numeric_limits<sbyte>::max()) throw OverflowException(_current_information); return this->value;}
+      sbyte ToSByte(const IFormatProvider& provider) const override {if (this->value > std::numeric_limits<sbyte>::max()) throw OverflowException(_caller); return this->value;}
       float ToSingle(const IFormatProvider& provider) const override {return this->value;}
       String ToString(const IFormatProvider& provider) const override {return ToString();}
 

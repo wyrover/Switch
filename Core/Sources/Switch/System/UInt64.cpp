@@ -125,21 +125,21 @@ bool UInt64::ToBoolean(const IFormatProvider&) const {
 
 byte UInt64::ToByte(const IFormatProvider&) const {
   if (this->value > Byte::MaxValue)
-    throw OverflowException(_current_information);
+    throw OverflowException(_caller);
   
   return (sbyte)this->value;
 }
 
 char32 UInt64::ToChar(const IFormatProvider&) const {
   if (this->value > Char::MaxValue)
-    throw OverflowException(_current_information);
+    throw OverflowException(_caller);
   
   return static_cast<uint32>(this->value);
 }
 
 DateTime UInt64::ToDateTime(const IFormatProvider&) const {
   if (this->value > static_cast<uint64>(DateTime::MaxValue.Ticks()))
-    throw OverflowException(_current_information);
+    throw OverflowException(_caller);
   
   return DateTime((int64)this->value);
 }
@@ -150,35 +150,35 @@ double UInt64::ToDouble(const IFormatProvider&) const {
 
 int16 UInt64::ToInt16(const IFormatProvider&) const {
   if (this->value > (uint16)Int16::MaxValue)
-    throw OverflowException(_current_information);
+    throw OverflowException(_caller);
   
   return (int16)this->value;
 }
 
 int32 UInt64::ToInt32(const IFormatProvider&) const {
   if (this->value > (uint32)Int32::MaxValue)
-    throw OverflowException(_current_information);
+    throw OverflowException(_caller);
   
   return (int32)this->value;
 }
 
 int64 UInt64::ToInt64(const IFormatProvider&) const {
   if (this->value > (uint64)Int64::MaxValue)
-    throw OverflowException(_current_information);
+    throw OverflowException(_caller);
   
   return (int64)this->value;
 }
 
 uint16 UInt64::ToUInt16(const IFormatProvider&) const {
   if (this->value > (uint64)UInt16::MaxValue)
-    throw OverflowException(_current_information);
+    throw OverflowException(_caller);
   
   return (uint16)this->value;
 }
 
 uint32 UInt64::ToUInt32(const IFormatProvider&) const {
   if (this->value > UInt32::MaxValue)
-    throw OverflowException(_current_information);
+    throw OverflowException(_caller);
   
   return (uint32)this->value;
 }
@@ -189,7 +189,7 @@ uint64 UInt64::ToUInt64(const IFormatProvider&) const {
 
 sbyte UInt64::ToSByte(const IFormatProvider&) const {
   if (this->value > (byte)SByte::MaxValue)
-    throw OverflowException(_current_information);
+    throw OverflowException(_caller);
   
   return (sbyte)this->value;
 }
@@ -228,7 +228,7 @@ UInt64& UInt64::operator *=(const UInt64& value) {
 
 UInt64& UInt64::operator /=(const UInt64& value) {
   if (value.value == 0)
-    throw DivideByZeroException(_current_information);
+    throw DivideByZeroException(_caller);
 
   this->value /= value.value;
   return *this;
@@ -236,7 +236,7 @@ UInt64& UInt64::operator /=(const UInt64& value) {
 
 UInt64& UInt64::operator %=(const UInt64& value) {
   if (value.value == 0)
-    throw DivideByZeroException(_current_information);
+    throw DivideByZeroException(_caller);
 
   this->value %= value;
   return *this;

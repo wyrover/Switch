@@ -13,28 +13,28 @@ using namespace System::IO;
 
 FileStream::FileStream(const string& path, FileMode mode, FileAccess access, FileShare share) {
   if (string::IsNullOrEmpty(path) || path.IndexOfAny(Path::GetInvalidPathChars()) != -1)
-    throw ArgumentException(_current_information);
+    throw ArgumentException(_caller);
   
   this->data->fullPath = Path::GetFullPath(path);
   this->data->fileMode = mode;
   this->data->fileAccess = access;
   
   if (access == FileAccess::Read && (mode == FileMode::Create || mode == FileMode::CreateNew))
-      throw ArgumentException(_current_information);
+      throw ArgumentException(_caller);
   
   if (mode == FileMode::Append && access != FileAccess::Write)
-    throw ArgumentException(_current_information);
+    throw ArgumentException(_caller);
   
   if (File::Exists(this->data->fullPath)) {
     if (access == FileAccess::Read && mode == FileMode::Truncate)
-      throw ArgumentException(_current_information);
+      throw ArgumentException(_caller);
     
     if (mode == FileMode::CreateNew)
-      throw IOException(_current_information);
+      throw IOException(_caller);
     
   } else {
     if (mode == FileMode::Open ||  mode == FileMode::Truncate)
-      throw FileNotFoundException(_current_information);
+      throw FileNotFoundException(_caller);
     
     if ((mode == FileMode::Create || mode == FileMode::CreateNew || mode == FileMode::OpenOrCreate)) {
       std::fstream fs(path.Data(), std::fstream::out);
@@ -43,7 +43,7 @@ FileStream::FileStream(const string& path, FileMode mode, FileAccess access, Fil
   }
   
   if (!Directory::Exists(Path::GetDirectoryName(this->data->fullPath)))
-    throw DirectoryNotFoundException(_current_information);
+    throw DirectoryNotFoundException(_caller);
   
   this->data->openMode = std::ios_base::binary;
   if (access == FileAccess::Read || access == FileAccess::ReadWrite)
@@ -61,7 +61,7 @@ FileStream::FileStream(const string& path, FileMode mode, FileAccess access, Fil
   
   this->data->stream.open(path.ToCCharArray().Data(), this->data->openMode);
   if (this->data->stream.fail())
-    throw IOException(_current_information);
+    throw IOException(_caller);
 }
 
 int64 FileStream::GetLength() const {
@@ -77,13 +77,13 @@ int64 FileStream::GetPosition() const {
 
 void FileStream::SetLength(int64 length) {
   if (IsClosed() == true)
-    throw ObjectClosedException(_current_information);
+    throw ObjectClosedException(_caller);
 
   if (length < 0)
-    throw ArgumentOutOfRangeException(_current_information);
+    throw ArgumentOutOfRangeException(_caller);
 
   // todo (?)
-  throw NotSupportedException(_current_information);
+  throw NotSupportedException(_caller);
 }
 
 bool FileStream::GetIsClosed() const {
@@ -102,13 +102,13 @@ void FileStream::Flush() {
 
 int32 FileStream::Read(Array<byte>& buffer, int32 offset, int32 count) {
   if (count < 0 || offset < 0)
-    throw ArgumentOutOfRangeException(_current_information);
+    throw ArgumentOutOfRangeException(_caller);
   if (offset + count > buffer.Length)
-    throw ArgumentException(_current_information);
+    throw ArgumentException(_caller);
   if (IsClosed())
-    throw ObjectClosedException(_current_information);
+    throw ObjectClosedException(_caller);
   if (!CanRead())
-    throw NotSupportedException(_current_information);
+    throw NotSupportedException(_caller);
 
   this->data->stream.read((char*)&const_cast<byte*>(buffer.Data())[offset],count);
   std::fstream::pos_type nbRead = this->data->stream.gcount();
@@ -117,9 +117,9 @@ int32 FileStream::Read(Array<byte>& buffer, int32 offset, int32 count) {
 
 int32 FileStream::ReadByte() {
   if (IsClosed())
-    throw ObjectClosedException(_current_information);
+    throw ObjectClosedException(_caller);
   if (!CanRead())
-    throw NotSupportedException(_current_information);
+    throw NotSupportedException(_caller);
   
   return this->data->stream.get();
 }
@@ -137,21 +137,21 @@ int64 FileStream::Seek(int64 offset, SeekOrigin origin) {
 
 void FileStream::Write(const Array<byte>& buffer, int32 offset, int32 count) {
   if (count < 0 || offset < 0)
-    throw ArgumentOutOfRangeException(_current_information);
+    throw ArgumentOutOfRangeException(_caller);
   if (offset + count > buffer.Length)
-    throw ArgumentException(_current_information);
+    throw ArgumentException(_caller);
   if (IsClosed())
-    throw ObjectClosedException(_current_information);
+    throw ObjectClosedException(_caller);
   if (!CanWrite())
-    throw NotSupportedException(_current_information);
+    throw NotSupportedException(_caller);
 
   this->data->stream.write((const char*)&buffer.Data()[offset],count);
   if (this->data->stream.fail())
-    throw IOException(_current_information);
+    throw IOException(_caller);
 }
 
 int32 FileStream::Peek() {
   if (!CanRead())
-    throw NotSupportedException(_current_information);
+    throw NotSupportedException(_caller);
   return this->data->stream.peek();
 }

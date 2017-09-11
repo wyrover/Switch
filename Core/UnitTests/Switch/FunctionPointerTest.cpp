@@ -12,35 +12,35 @@ namespace SwitchUnitTests {
     
     void CreateFunctionPointerEmptyThenInvoke() {
       __opaque_function_pointer__<> fct;
-      Assert::IsTrue(fct.IsEmpty(), _current_information);
-      Assert::Throws<std::exception>(_delegate {fct.Invoke();}, _current_information);
+      Assert::IsTrue(fct.IsEmpty(), _caller);
+      Assert::Throws<std::exception>(_delegate {fct.Invoke();}, _caller);
     }
     
     void CreateFunctionPointerWithLambdaThenInvoke() {
       __opaque_function_pointer__<> fct = _delegate {
         result = "fct called";
       };
-      Assert::IsFalse(fct.IsEmpty(), _current_information);
+      Assert::IsFalse(fct.IsEmpty(), _caller);
       fct.Invoke();
-      Assert::AreEqual("fct called", result, _current_information);
+      Assert::AreEqual("fct called", result, _caller);
     }
     
     void CreateFunctionPointerWithLambdaAndWithArgumentThenInvoke() {
       __opaque_function_pointer__<void, const string&> fct = _delegate(const string& value) {
         result = value;
       };
-      Assert::IsFalse(fct.IsEmpty(), _current_information);
+      Assert::IsFalse(fct.IsEmpty(), _caller);
       fct.Invoke("fct called");
-      Assert::AreEqual("fct called", result, _current_information);
+      Assert::AreEqual("fct called", result, _caller);
     }
     
     void CreateFunctionPointerWithLambdaAndWithReturnThenInvoke() {
       __opaque_function_pointer__<string> fct = _delegate {
         return "fct called";
       };
-      Assert::IsFalse(fct.IsEmpty(), _current_information);
+      Assert::IsFalse(fct.IsEmpty(), _caller);
       result = fct.Invoke();
-      Assert::AreEqual("fct called", result, _current_information);
+      Assert::AreEqual("fct called", result, _caller);
     }
     
     void CreateFunctionPointerWithStaticMethodThenInvoke() {
@@ -51,9 +51,9 @@ namespace SwitchUnitTests {
         }
       };
       __opaque_function_pointer__<> fct = TestStatic::StaticFunc;
-      Assert::IsFalse(fct.IsEmpty(), _current_information);
+      Assert::IsFalse(fct.IsEmpty(), _caller);
       fct.Invoke();
-      Assert::AreEqual("fct called", result, _current_information);
+      Assert::AreEqual("fct called", result, _caller);
     }
     
     void CreateFunctionPointerWithStaticMethodAndWithArgumentThenInvoke() {
@@ -64,9 +64,9 @@ namespace SwitchUnitTests {
         }
       };
       __opaque_function_pointer__<void, const string&> fct = TestStatic::StaticFunc;
-      Assert::IsFalse(fct.IsEmpty(), _current_information);
+      Assert::IsFalse(fct.IsEmpty(), _caller);
       fct.Invoke("fct called");
-      Assert::AreEqual("fct called", result, _current_information);
+      Assert::AreEqual("fct called", result, _caller);
     }
     
     void CreateFunctionPointerWithStaticMethodAndWithReturnThenInvoke() {
@@ -77,9 +77,9 @@ namespace SwitchUnitTests {
         }
       };
       __opaque_function_pointer__<string> fct = TestStatic::StaticFunc;
-      Assert::IsFalse(fct.IsEmpty(), _current_information);
+      Assert::IsFalse(fct.IsEmpty(), _caller);
       result = fct.Invoke();
-      Assert::AreEqual("fct called", result, _current_information);
+      Assert::AreEqual("fct called", result, _caller);
     }
     
     void CreateFunctionPointerWithMemberMethodThenInvoke() {
@@ -90,9 +90,9 @@ namespace SwitchUnitTests {
       };
       TestMember testMember;
       __opaque_function_pointer__<> fct = __opaque_function_pointer__<>(testMember, &TestMember::MemberFunc);
-      Assert::IsFalse(fct.IsEmpty(), _current_information);
+      Assert::IsFalse(fct.IsEmpty(), _caller);
       fct.Invoke();
-      Assert::AreEqual("fct called", result, _current_information);
+      Assert::AreEqual("fct called", result, _caller);
     }
     
     void CreateFunctionPointerWithMemberMethodAndWithArgumentThenInvoke() {
@@ -103,9 +103,9 @@ namespace SwitchUnitTests {
       };
       TestMember testMember;
       __opaque_function_pointer__<void, const string&> fct = __opaque_function_pointer__<void, const string&>(testMember, &TestMember::MemberFunc);
-      Assert::IsFalse(fct.IsEmpty(), _current_information);
+      Assert::IsFalse(fct.IsEmpty(), _caller);
       fct.Invoke("fct called");
-      Assert::AreEqual("fct called", result, _current_information);
+      Assert::AreEqual("fct called", result, _caller);
     }
     
     void CreateFunctionPointerWithMemberMethodAndWithReturnThenInvoke() {
@@ -116,9 +116,9 @@ namespace SwitchUnitTests {
       };
       TestMember testMember;
       __opaque_function_pointer__<string> fct = __opaque_function_pointer__<string>(testMember, &TestMember::MemberFunc);
-      Assert::IsFalse(fct.IsEmpty(), _current_information);
+      Assert::IsFalse(fct.IsEmpty(), _caller);
       result = fct.Invoke();
-      Assert::AreEqual("fct called", result, _current_information);
+      Assert::AreEqual("fct called", result, _caller);
     }
     
     void CreateFunctionPointerWithFunctorThenInvoke() {
@@ -129,9 +129,9 @@ namespace SwitchUnitTests {
       };
       TestFunctor testFunctor;
       __opaque_function_pointer__<> fct = testFunctor;
-      Assert::IsFalse(fct.IsEmpty(), _current_information);
+      Assert::IsFalse(fct.IsEmpty(), _caller);
       fct.Invoke();
-      Assert::AreEqual("fct called", result, _current_information);
+      Assert::AreEqual("fct called", result, _caller);
     }
     
     void CreateFunctionPointerWithFunctorAndWithArgumentThenInvoke() {
@@ -142,9 +142,9 @@ namespace SwitchUnitTests {
       };
       TestFunctor testFunctor;
       __opaque_function_pointer__<void, const string&> fct = testFunctor;
-      Assert::IsFalse(fct.IsEmpty(), _current_information);
+      Assert::IsFalse(fct.IsEmpty(), _caller);
       fct.Invoke("fct called");
-      Assert::AreEqual("fct called", result, _current_information);
+      Assert::AreEqual("fct called", result, _caller);
     }
     
     void CreateFunctionPointerWithFunctorAndWithReturnThenInvoke() {
@@ -155,9 +155,9 @@ namespace SwitchUnitTests {
       };
       TestFunctor testFunctor;
       __opaque_function_pointer__<string> fct = testFunctor;
-      Assert::IsFalse(fct.IsEmpty(), _current_information);
+      Assert::IsFalse(fct.IsEmpty(), _caller);
       result = fct.Invoke();
-      Assert::AreEqual("fct called", result, _current_information);
+      Assert::AreEqual("fct called", result, _caller);
     }
   };
   

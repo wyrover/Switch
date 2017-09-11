@@ -45,7 +45,7 @@ IPAddress::IPAddress() {
 
 IPAddress::IPAddress(int64 address) {
   if (address < 0 || address > 0x0000000FFFFFFFFLL)
-    throw ArgumentOutOfRangeException(_current_information);
+    throw ArgumentOutOfRangeException(_caller);
 
   this->address = Convert::ToUInt32(address);
 }
@@ -67,7 +67,7 @@ IPAddress& IPAddress::operator =(const IPAddress& address) {
 
 IPAddress::IPAddress(const Array<byte>& address) {
   if (address.Length != 4 && address.Length != 16)
-    throw ArgumentException(_current_information);
+    throw ArgumentException(_caller);
   
   if (address.Length == 4) {
     this->family = Sockets::AddressFamily::InterNetwork;
@@ -82,7 +82,7 @@ IPAddress::IPAddress(const Array<byte>& address) {
 
 IPAddress::IPAddress(const std::vector<byte>& address) {
   if (address.size() != 4 && address.size() != 16)
-    throw ArgumentException(_current_information);
+    throw ArgumentException(_caller);
   
   if (address.size() == 4) {
     this->family = Sockets::AddressFamily::InterNetwork;
@@ -98,10 +98,10 @@ IPAddress::IPAddress(const std::vector<byte>& address) {
 
 IPAddress::IPAddress(const Array<byte>& address, int64 scopeId) : family(Sockets::AddressFamily::InterNetworkV6) {
   if (address.Length != 16)
-    throw ArgumentException(_current_information);
+    throw ArgumentException(_caller);
 
   if (scopeId < 0 || scopeId > 0x00000000FFFFFFFFLL)
-    throw ArgumentOutOfRangeException(_current_information);
+    throw ArgumentOutOfRangeException(_caller);
 
   this->scopeId = Convert::ToUInt32(scopeId);
   Buffer::BlockCopy(address, 0, this->numbers, 0, 16);
@@ -163,7 +163,7 @@ int32 IPAddress::GetHashCode() const {
 
 int64 IPAddress::GetScopeId() const {
   if (this->family == Sockets::AddressFamily::InterNetwork)
-    throw SocketException(_current_information);
+    throw SocketException(_caller);
 
   return this->scopeId;
 }
@@ -299,15 +299,15 @@ IPAddress IPAddress::Parse(const string& str) {
     }
   }
   
-  throw ArgumentException(_current_information);
+  throw ArgumentException(_caller);
 }
 
 void IPAddress::SetScopeId(int64 scopeId) {
   if (this->family == Sockets::AddressFamily::InterNetwork)
-    throw SocketException(_current_information);
+    throw SocketException(_caller);
 
   if (scopeId < 0 || scopeId > 0xFFFFFFFF)
-    throw ArgumentOutOfRangeException(_current_information);
+    throw ArgumentOutOfRangeException(_caller);
 
   this->scopeId = Convert::ToUInt32(scopeId);
 }

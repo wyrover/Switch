@@ -162,7 +162,7 @@ namespace Switch {
             ++count;
           }
           if (count == 0)
-            throw InvalidOperationException(_current_information);
+            throw InvalidOperationException(_caller);
           return average / count;
         }
         
@@ -181,7 +181,7 @@ namespace Switch {
             ++count;
           }
           if (count == 0)
-            throw InvalidOperationException(_current_information);
+            throw InvalidOperationException(_caller);
           return average / count;
         }
         
@@ -200,7 +200,7 @@ namespace Switch {
             ++count;
           }
           if (count == 0)
-            throw InvalidOperationException(_current_information);
+            throw InvalidOperationException(_caller);
           return average / count;
         }
         
@@ -219,7 +219,7 @@ namespace Switch {
             ++count;
           }
           if (count == 0)
-            throw InvalidOperationException(_current_information);
+            throw InvalidOperationException(_caller);
           return average / count;
         }
         

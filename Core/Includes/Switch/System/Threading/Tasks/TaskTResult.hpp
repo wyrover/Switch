@@ -205,7 +205,7 @@ namespace Switch {
           /// @remarks Tasks executed by calling the RunSynchronously method are instantiated by calling a Task or Task<TResult> class constructor. The task to be run synchronously must be in the TaskStatus.Created state. A task may be started and run only once. Any attempts to schedule a task a second time results in an exception.
           void RunSynchronously() {
             if (this->data->status != TaskStatus::Created || (this->data->millisecondsDelay == -2 && this->data->task.IsEmpty() && this->data->parameterizedTask.IsEmpty() && this->data->constParameterizedTask.IsEmpty()))
-              throw InvalidOperationException(_current_information);
+              throw InvalidOperationException(_caller);
             
             this->data->status = TaskStatus::WaitingToRun;
             this->data->waitOrTimerCallback(*this->data->state, false);
@@ -220,7 +220,7 @@ namespace Switch {
           /// @remarks For information on handling exceptions thrown by task operations, see Exception Handling (Task Parallel Library).
           void Start() override {
             if (this->data->status != TaskStatus::Created)
-              throw InvalidOperationException(_current_information);
+              throw InvalidOperationException(_caller);
             this->data->status = TaskStatus::WaitingForActivation;
             ThreadPool::RegisterWaitForSingleObject(this->data->startEvent, this->data->waitOrTimerCallback, *this->data->state, Timeout::Infinite, true);
             this->data->status = TaskStatus::WaitingToRun;
@@ -287,7 +287,7 @@ namespace Switch {
           /// @exception ArgumentOutOfRangeException millisecondsTimeout is a negative number other than -1, which represents an infinite time-out.
           static bool WaitAll(Array<ref<ITask>> tasks, int32 millisecondsTimeout) {
             if (millisecondsTimeout < Timeout::Infinite)
-              ArgumentOutOfRangeException(CurrentInformation(__FILE__, __LINE__));
+              ArgumentOutOfRangeException(Caller(__FILE__, __LINE__));
             
             if (millisecondsTimeout == Timeout::Infinite) {
               for (auto& task : tasks)
@@ -313,7 +313,7 @@ namespace Switch {
           /// @exception ArgumentOutOfRangeException millisecondsTimeout is a negative number other than -1, which represents an infinite time-out.
           static bool WaitAll(Array<Task<TResult>> tasks, int32 millisecondsTimeout) {
             if (millisecondsTimeout < Timeout::Infinite)
-              ArgumentOutOfRangeException(CurrentInformation(__FILE__, __LINE__));
+              ArgumentOutOfRangeException(Caller(__FILE__, __LINE__));
             
             if (millisecondsTimeout == Timeout::Infinite) {
               for (auto& task : tasks)
@@ -340,7 +340,7 @@ namespace Switch {
           template<typename T>
           static bool WaitAll(Array<Task<T>> tasks, int32 millisecondsTimeout) {
             if (millisecondsTimeout < Timeout::Infinite)
-              ArgumentOutOfRangeException(CurrentInformation(__FILE__, __LINE__));
+              ArgumentOutOfRangeException(Caller(__FILE__, __LINE__));
             
             if (millisecondsTimeout == Timeout::Infinite) {
               for (auto& task : tasks)
@@ -398,7 +398,7 @@ namespace Switch {
           /// @exception ArgumentOutOfRangeException millisecondsTimeout is a negative number other than -1, which represents an infinite time-out.
           static int32 WaitAny(Array<ref<ITask>> tasks, int32 millisecondsTimeout) {
             if (millisecondsTimeout < Timeout::Infinite)
-              ArgumentOutOfRangeException(CurrentInformation(__FILE__, __LINE__));
+              ArgumentOutOfRangeException(Caller(__FILE__, __LINE__));
             
             if (millisecondsTimeout == Timeout::Infinite) {
               for (int32 index = 0; index < tasks.Count; index++) {
@@ -432,7 +432,7 @@ namespace Switch {
           /// @exception ArgumentOutOfRangeException millisecondsTimeout is a negative number other than -1, which represents an infinite time-out.
           static int32 WaitAny(Array<Task<TResult>> tasks, int32 millisecondsTimeout) {
             if (millisecondsTimeout < Timeout::Infinite)
-              ArgumentOutOfRangeException(CurrentInformation(__FILE__, __LINE__));
+              ArgumentOutOfRangeException(Caller(__FILE__, __LINE__));
             
             if (millisecondsTimeout == Timeout::Infinite) {
               for (int32 index = 0; index < tasks.Count; index++) {
@@ -467,7 +467,7 @@ namespace Switch {
           template<typename T>
           static int32 WaitAny(Array<Task<T>> tasks, int32 millisecondsTimeout) {
             if (millisecondsTimeout < Timeout::Infinite)
-              ArgumentOutOfRangeException(CurrentInformation(__FILE__, __LINE__));
+              ArgumentOutOfRangeException(Caller(__FILE__, __LINE__));
             
             if (millisecondsTimeout == Timeout::Infinite) {
               for (int32 index = 0; index < tasks.Count; index++) {
@@ -530,7 +530,7 @@ namespace Switch {
                 this->status = TaskStatus::WaitingForChildrenToComplete;
                 this->endEvent.Set();
               } catch(...) {
-                this->aggregateException = AggregateException({excptr::CurrentException}, _current_information);
+                this->aggregateException = AggregateException({excptr::CurrentException}, _caller);
                 this->status = TaskStatus::Faulted;
                 this->endEvent.Set();
               }

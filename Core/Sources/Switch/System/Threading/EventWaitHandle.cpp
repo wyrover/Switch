@@ -46,7 +46,7 @@ void EventWaitHandle::Close() {
 
 EventWaitHandle EventWaitHandle::OpenExisting(const string& name) {
   if (!events.Conatains(name))
-    throw WaitHandleCannotBeOpenedException(_current_information);
+    throw WaitHandleCannotBeOpenedException(_caller);
   bool createNew;
   EventWaitHandle value = events.AddOrCreate(name, createNew);
   return value;

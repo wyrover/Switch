@@ -21,7 +21,7 @@ UIntPtr::UIntPtr(const UInt32& value) {
 
 UIntPtr::UIntPtr(const UInt64& value) {
   if (Size == 4 && value > UInt32::MaxValue)
-    throw OverflowException(_current_information);
+    throw OverflowException(_caller);
 
   this->value = (uint64)value;
 }
@@ -61,7 +61,7 @@ int32 UIntPtr::CompareTo(const IComparable& obj) const {
 
 uint32 UIntPtr::ToUInt32() const {
   if (Size == 8 && this->value > UInt32::MaxValue)
-    throw OverflowException(_current_information);
+    throw OverflowException(_caller);
 
   return *((uint32*)&this->value);
 }

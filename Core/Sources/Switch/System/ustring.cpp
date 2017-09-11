@@ -31,7 +31,7 @@ namespace std {
   
   ustring::ustring(const char* str, int32_t startIndex, int32_t length) {
     if (str == null)
-      throw System::ArgumentNullException(_current_information);
+      throw System::ArgumentNullException(_caller);
     
     std::ustring other(str);
     
@@ -55,7 +55,7 @@ namespace std {
     }
     
     if (begin == -1)
-      throw System::ArgumentOutOfRangeException(_current_information);
+      throw System::ArgumentOutOfRangeException(_caller);
     
     if (end == -1) {
       this->string = other.string.substr(begin);
@@ -67,8 +67,8 @@ namespace std {
   }
   // todo clean code and optimize size calculation
   /*ustring::ustring(const char* str, int32_t startIndex, int32_t length) {
-   if (str == null) throw System::ArgumentNullException(_current_information);
-   if ((size_t(length) != npos && length < 0) || startIndex < 0) throw System::ArgumentOutOfRangeException(_current_information);
+   if (str == null) throw System::ArgumentNullException(_caller);
+   if ((size_t(length) != npos && length < 0) || startIndex < 0) throw System::ArgumentOutOfRangeException(_caller);
    
    std::string other(str);
    int wanted = length;
@@ -98,7 +98,7 @@ namespace std {
    }
    
    if (begin == other.end()) // it has not begun
-   throw System::ArgumentOutOfRangeException(_current_information);
+   throw System::ArgumentOutOfRangeException(_caller);
    
    if (end == other.begin()) { // is has not finished
    this->string.append(begin, other.end());
@@ -106,12 +106,12 @@ namespace std {
    return;
    }
    
-   throw System::ArgumentOutOfRangeException(_current_information);
+   throw System::ArgumentOutOfRangeException(_caller);
    }*/
 
   ustring::ustring(const char32_t* str, int32_t startIndex, int32_t length) {
     if (startIndex < 0 || length < 0)
-      throw System::ArgumentOutOfRangeException(_current_information);
+      throw System::ArgumentOutOfRangeException(_caller);
     this->stringSize = 0;
     for (int i = 0; i < length; i++)
       append(str[i]);
@@ -142,24 +142,24 @@ namespace std {
   
   char32_t ustring::operator [](int i) const {
     if (i<0)
-      throw System::ArgumentOutOfRangeException(_current_information);
+      throw System::ArgumentOutOfRangeException(_caller);
     
     for (std::ustring::const_iterator it = (*this).begin(); it != (*this).end(); it++)
       if (it.get_logical_index() == i)
         return *it;
     
-    throw System::ArgumentOutOfRangeException(_current_information);
+    throw System::ArgumentOutOfRangeException(_caller);
   }
   
   char32_t& ustring::operator [](int i) {
     if (i<0)
-      throw System::ArgumentOutOfRangeException(_current_information);
+      throw System::ArgumentOutOfRangeException(_caller);
     
     for (std::ustring::iterator it = (*this).begin(); it != (*this).end(); it++)
       if (it.get_logical_index() == i)
         return *it;
     
-    throw System::ArgumentOutOfRangeException(_current_information);
+    throw System::ArgumentOutOfRangeException(_caller);
   }
   
   //pos
@@ -184,7 +184,7 @@ namespace std {
     }
     
     if (byteIndexIn == -1)
-      throw System::ArgumentOutOfRangeException(_current_information);
+      throw System::ArgumentOutOfRangeException(_caller);
     
     // if erase all from pos
     if (len == npos) {
@@ -339,7 +339,7 @@ namespace std {
         return it.get_logical_index();
     }
     if (pos != npos && pos > len)
-      throw System::ArgumentOutOfRangeException(_current_information);
+      throw System::ArgumentOutOfRangeException(_caller);
     return npos;
   }
   
@@ -357,7 +357,7 @@ namespace std {
         return it.get_logical_index();
     }
     if (pos != npos && pos > len)
-      throw System::ArgumentOutOfRangeException(_current_information);
+      throw System::ArgumentOutOfRangeException(_caller);
     return npos;
   }
   
@@ -376,7 +376,7 @@ namespace std {
           return it.get_logical_index();
     }
     if (pos != npos && pos > len)
-      throw System::ArgumentOutOfRangeException(_current_information);
+      throw System::ArgumentOutOfRangeException(_caller);
     return npos;
   }
   

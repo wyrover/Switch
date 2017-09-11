@@ -9,92 +9,92 @@ namespace SwitchUnitTests {
   class UnboxTest : public TestFixture {
   protected:
     void UnboxingBoolean() {
-      Assert::IsTrue(IsBool(Unbox(Boolean(true))), _current_information);
+      Assert::IsTrue(IsBool(Unbox(Boolean(true))), _caller);
     }
     
     void UnboxingByte() {
-      Assert::IsTrue(IsByte(Unbox(Byte(42))), _current_information);
+      Assert::IsTrue(IsByte(Unbox(Byte(42))), _caller);
     }
     
     void UnboxingChar() {
-      Assert::IsTrue(IsChar32(Unbox(Char('c'))), _current_information);
+      Assert::IsTrue(IsChar32(Unbox(Char('c'))), _caller);
     }
     
     void UnboxingDouble() {
-      Assert::IsTrue(IsDouble(Unbox(Double(42))), _current_information);
+      Assert::IsTrue(IsDouble(Unbox(Double(42))), _caller);
     }
     
     void UnboxingInt16() {
-      Assert::IsTrue(IsInt16(Unbox(Int16(42))), _current_information);
+      Assert::IsTrue(IsInt16(Unbox(Int16(42))), _caller);
     }
     
     void UnboxingInt32() {
-      Assert::IsTrue(IsInt32(Unbox(Int32(42))), _current_information);
+      Assert::IsTrue(IsInt32(Unbox(Int32(42))), _caller);
     }
     
     void UnboxingInt64() {
-      Assert::IsTrue(IsInt64(Unbox(Int64(42))), _current_information);
+      Assert::IsTrue(IsInt64(Unbox(Int64(42))), _caller);
     }
     
     void UnboxingIntPtr() {
-      Assert::IsTrue(IsIntPtr(Unbox(IntPtr((intptr)42))), _current_information);
+      Assert::IsTrue(IsIntPtr(Unbox(IntPtr((intptr)42))), _caller);
     }
     
     void UnboxingSByte() {
-      Assert::IsTrue(IsSByte(Unbox(SByte(42))), _current_information);
+      Assert::IsTrue(IsSByte(Unbox(SByte(42))), _caller);
     }
     
     void UnboxingSingle() {
-      Assert::IsTrue(IsSingle(Unbox(Single(42))), _current_information);
+      Assert::IsTrue(IsSingle(Unbox(Single(42))), _caller);
     }
     
     void UnboxingString() {
-      Assert::IsTrue(IsConstCharPointer(Unbox(string("Forty two"))), _current_information);
+      Assert::IsTrue(IsConstCharPointer(Unbox(string("Forty two"))), _caller);
     }
     
     void UnboxingUInt16() {
-      Assert::IsTrue(IsUInt16(Unbox(UInt16(42))), _current_information);
+      Assert::IsTrue(IsUInt16(Unbox(UInt16(42))), _caller);
     }
     
     void UnboxingUInt32() {
-      Assert::IsTrue(IsUInt32(Unbox(UInt32(42))), _current_information);
+      Assert::IsTrue(IsUInt32(Unbox(UInt32(42))), _caller);
     }
     
     void UnboxingUInt64() {
-      Assert::IsTrue(IsUInt64(Unbox(UInt64(42))), _current_information);
+      Assert::IsTrue(IsUInt64(Unbox(UInt64(42))), _caller);
     }
     
     void UnboxingUIntPtr() {
-      Assert::IsTrue(IsUIntPtr(Unbox(UIntPtr((uintptr)42))), _current_information);
+      Assert::IsTrue(IsUIntPtr(Unbox(UIntPtr((uintptr)42))), _caller);
     }
     
     void UnboxingConstCharPointer() {
-      Assert::IsTrue(IsConstCharPointer(Unbox("Forty two")), _current_information);
+      Assert::IsTrue(IsConstCharPointer(Unbox("Forty two")), _caller);
     }
     
     void UnboxingConstWCharPointer() {
-      Assert::IsTrue(IsConstWCharPointer(Unbox(L"Forty two")), _current_information);
+      Assert::IsTrue(IsConstWCharPointer(Unbox(L"Forty two")), _caller);
     }
     
     void UnboxingConstChar16Pointer() {
-      Assert::IsTrue(IsConstChar16Pointer(Unbox(u"Forty two")), _current_information);
+      Assert::IsTrue(IsConstChar16Pointer(Unbox(u"Forty two")), _caller);
     }
     
     void UnboxingConstChar32Pointer() {
-      Assert::IsTrue(IsConstChar32Pointer(Unbox(U"Forty two")), _current_information);
+      Assert::IsTrue(IsConstChar32Pointer(Unbox(U"Forty two")), _caller);
     }
     
     void UnboxingTimeSpan() {
-      Assert::IsTrue(is<TimeSpan>(Unbox(12_h + 24_min + 32_s)), _current_information);
+      Assert::IsTrue(is<TimeSpan>(Unbox(12_h + 24_min + 32_s)), _caller);
     }
     
     void UnboxingAny() {
-      Assert::IsTrue(is<Int32>(Unbox(Any(42))), _current_information);
+      Assert::IsTrue(is<Int32>(Unbox(Any(42))), _caller);
     }
     
     void UnboxingMyStruct() {
       struct MyStruct {};
-      Assert::IsTrue(is<MyStruct>(Unbox(MyStruct())), _current_information);
+      Assert::IsTrue(is<MyStruct>(Unbox(MyStruct())), _caller);
     }
 
     bool IsBool(bool) {return true;}

@@ -17,7 +17,7 @@ void ProgressBar::CreateHandle() {
 
 void ProgressBar::SetMarqueeAnimationSpeed(int32 marqueeAnimationSpeed) {
   if (marqueeAnimationSpeed < 0)
-    throw ArgumentOutOfRangeException(_current_information);
+    throw ArgumentOutOfRangeException(_caller);
   if (this->marqueeAnimationSpeed != marqueeAnimationSpeed) {
     this->marqueeAnimationSpeed = marqueeAnimationSpeed;
     if (this->IsHandleCreated)

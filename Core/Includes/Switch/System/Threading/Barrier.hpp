@@ -79,9 +79,9 @@ namespace Switch {
         int64 AddParticipants(int32 participantCount) {
           _lock(*this) {
             if (participantCount < 0 || as<int64>(this->data->participantCount) + participantCount > as<int64>(Int32::MaxValue()))
-              throw ArgumentOutOfRangeException(_current_information);
+              throw ArgumentOutOfRangeException(_caller);
             if (this->data->runPostPhaseAction)
-              throw InvalidOperationException(_current_information);
+              throw InvalidOperationException(_caller);
             this->data->participantCount += participantCount;
             this->data->participantsRemaining += participantCount;
             return this->data->currentPhaseNumber;
@@ -105,11 +105,11 @@ namespace Switch {
         int64 RemoveParticipants(int32 participantCount) {
           _lock(*this) {
             if (participantCount < 0)
-              throw ArgumentOutOfRangeException(_current_information);
+              throw ArgumentOutOfRangeException(_caller);
             if (this->data->participantCount == 0 || this->data->runPostPhaseAction || this->data->participantsRemaining < this->data->participantCount - participantCount)
-              throw InvalidOperationException(_current_information);
+              throw InvalidOperationException(_caller);
             if (this->data->participantCount < participantCount)
-              throw ArgumentOutOfRangeException(_current_information);
+              throw ArgumentOutOfRangeException(_caller);
             this->data->participantCount -= participantCount;
             this->data->participantsRemaining -= participantCount;
             return this->data->currentPhaseNumber;
@@ -130,7 +130,7 @@ namespace Switch {
         /// @return if all participants reached the barrier within the specified time; otherwise false.
         bool SignalAndWait(int32 millisecondsTimeout) {
           if (millisecondsTimeout < -1)
-            throw ArgumentOutOfRangeException(_current_information);
+            throw ArgumentOutOfRangeException(_caller);
           
           std::unique_lock<std::mutex> lock(this->data->mutex);
           int64 currentPhaseNumber = this->data->currentPhaseNumber;
@@ -148,7 +148,7 @@ namespace Switch {
             }
             
             if (this->data->participantsPostPhaseExceptionRemainin-- > 0)
-              throw BarrierPostPhaseException(_current_information);
+              throw BarrierPostPhaseException(_caller);
           }
           return result;
         }
@@ -166,7 +166,7 @@ namespace Switch {
                 this->data->participantsRemaining = this->data->participantCount;
                 this->data->participantsPostPhaseExceptionRemainin = this->data->participantCount-1;
                 this->data->cond.notify_all();
-                throw BarrierPostPhaseException(_current_information);
+                throw BarrierPostPhaseException(_caller);
               }
               this->data->runPostPhaseAction = false;
               this->data->currentPhaseNumber++;

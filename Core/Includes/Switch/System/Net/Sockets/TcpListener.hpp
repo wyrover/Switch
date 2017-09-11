@@ -78,7 +78,7 @@ namespace Switch {
             _get {return this->data->serverSocket.ExclusiveAddressUse(); },
             _set {
               if (this->data->active)
-                throw ApplicationException(_current_information); // tcplistener must be stopped
+                throw ApplicationException(_caller); // tcplistener must be stopped
 
               this->data->serverSocket.ExclusiveAddressUse = value;
             }

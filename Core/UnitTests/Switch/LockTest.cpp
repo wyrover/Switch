@@ -19,7 +19,7 @@ namespace SwitchUnitTests {
         ++value;
       }
       
-      Assert::AreEqual(1, value, _current_information);
+      Assert::AreEqual(1, value, _caller);
     }
     
     void DoubleLockOnDifferentObjects() {
@@ -34,7 +34,7 @@ namespace SwitchUnitTests {
         }
       }
       
-      Assert::AreEqual(2, value, _current_information);
+      Assert::AreEqual(2, value, _caller);
     }
     
     void DoubleLockOnSameObject() {
@@ -48,7 +48,7 @@ namespace SwitchUnitTests {
         }
       }
       
-      Assert::AreEqual(2, value, _current_information);
+      Assert::AreEqual(2, value, _caller);
     }
     
     void LockDuration() {
@@ -59,7 +59,7 @@ namespace SwitchUnitTests {
         ++value;
       }
       duration.Stop();
-      Assert::LessOrEqual(duration.ElapsedMilliseconds(), 1, _current_information);
+      Assert::LessOrEqual(duration.ElapsedMilliseconds(), 1, _caller);
     }
     
     void Thread() {
@@ -86,7 +86,7 @@ namespace SwitchUnitTests {
       int32 i = 0;
       for (char32 c : s) {
         if (o == 0) o = c;
-        Assert::IsFalse(++i < 500 && o != c, _current_information);
+        Assert::IsFalse(++i < 500 && o != c, _caller);
       }
       
     }

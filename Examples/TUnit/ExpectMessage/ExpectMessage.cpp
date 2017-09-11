@@ -8,7 +8,7 @@ namespace UnitTests {
   protected:
     // With your own message
     void TestWithUserMessage() {
-      Expect::False(true, "true can never be equal to false", _current_information);
+      Expect::False(true, "true can never be equal to false", _caller);
     }
   };
   
@@ -16,7 +16,7 @@ namespace UnitTests {
   protected:
     // Without your own message
     void TestWithoutUserMessage() {
-      Expect::False(true, _current_information);
+      Expect::False(true, _caller);
     }
   };
   

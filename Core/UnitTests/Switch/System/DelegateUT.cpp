@@ -312,7 +312,7 @@ namespace {
       Callback callback;
       callback += StaticMethod;
       callback();
-      Assert::AreEqual(1, cpt, _current_information);
+      Assert::AreEqual(1, cpt, _caller);
     }
     
     void AddAndRemoveStaticMethod() {
@@ -321,14 +321,14 @@ namespace {
       callback += {*this, &DelegateTest::MemberMethod};
       callback -= StaticMethod;
       callback();
-      Assert::AreEqual(2, cpt, _current_information);
+      Assert::AreEqual(2, cpt, _caller);
     }
     
     void AddMemberMethod() {
       Callback callback;
       callback += {*this, &DelegateTest::MemberMethod};
       callback();
-      Assert::AreEqual(2, cpt, _current_information);
+      Assert::AreEqual(2, cpt, _caller);
     }
     
     void AddAndRemoveMemberMethod() {
@@ -337,14 +337,14 @@ namespace {
       callback += StaticMethod;
       callback -= {*this, &DelegateTest::MemberMethod};
       callback();
-      Assert::AreEqual(1, cpt, _current_information);
+      Assert::AreEqual(1, cpt, _caller);
     }
     
     void AddConstMemberMethod() {
       Callback callback;
       callback += {*this, &DelegateTest::ConstMemberMethod};
       callback();
-      Assert::AreEqual(3, cpt, _current_information);
+      Assert::AreEqual(3, cpt, _caller);
     }
     
     void AddAndRemoveConstMemberMethod() {
@@ -353,14 +353,14 @@ namespace {
       callback += StaticMethod;
       callback -= {*this, &DelegateTest::ConstMemberMethod};
       callback();
-      Assert::AreEqual(1, cpt, _current_information);
+      Assert::AreEqual(1, cpt, _caller);
     }
     
     void AddFunctor() {
       Callback callback;
       callback += Functor();
       callback();
-      Assert::AreEqual(4, cpt, _current_information);
+      Assert::AreEqual(4, cpt, _caller);
     }
     
     void AddAndRemoveFunctor() {
@@ -369,7 +369,7 @@ namespace {
       callback += StaticMethod;
       callback -= Functor();
       callback();
-      Assert::AreEqual(1, cpt, _current_information);
+      Assert::AreEqual(1, cpt, _caller);
     }
     
     void AddLambdaExpression() {
@@ -377,7 +377,7 @@ namespace {
       Callback callback;
       callback += lambda;
       callback();
-      Assert::AreEqual(5, cpt, _current_information);
+      Assert::AreEqual(5, cpt, _caller);
     }
     
     void AddAndRemoveLambdaExpression() {
@@ -387,7 +387,7 @@ namespace {
       callback += StaticMethod;
       callback -= lambda;
       callback();
-      Assert::AreEqual(1, cpt, _current_information);
+      Assert::AreEqual(1, cpt, _caller);
     }
     
   private:

@@ -20,7 +20,7 @@ namespace Switch {
       
       explicit DateTime2(int64 ticks) {
         if (ticks < MinTicks || ticks > MaxTicks)
-          throw ArgumentOutOfRangeException(_current_information);
+          throw ArgumentOutOfRangeException(_caller);
         this->dateData = Convert::ToUInt64(ticks);
       }
       
@@ -33,9 +33,9 @@ namespace Switch {
       
       DateTime2(int64 ticks, DateTimeKind kind) {
         if (ticks < MinTicks || ticks > MaxTicks)
-          throw ArgumentOutOfRangeException(_current_information);
+          throw ArgumentOutOfRangeException(_caller);
         if (kind < DateTimeKind::Unspecified || kind > DateTimeKind::Local)
-          throw ArgumentOutOfRangeException(_current_information);
+          throw ArgumentOutOfRangeException(_caller);
         this->dateData = Convert::ToUInt64(ticks) | (Convert::ToUInt64(kind) << KindShift);
       }
       
@@ -45,7 +45,7 @@ namespace Switch {
       
       DateTime2(int32 year, int32 month, int32 day, int32 hour, int32 minute, int32 second, DateTimeKind kind) : dateData((Convert::ToUInt64(DateToTicks(year, month, day) + TimeToTicks(hour, minute, second)) | (Convert::ToUInt64(kind) << KindShift))) {
         if (kind < DateTimeKind::Unspecified || kind > DateTimeKind::Local)
-          throw ArgumentException(_current_information);
+          throw ArgumentException(_caller);
       }
       
       _property<DateTime2, _readonly> Date {
@@ -124,7 +124,7 @@ namespace Switch {
  
       static bool IsLeapYear(int32 year) {
         if (year < 1 || year > 9999)
-          throw ArgumentOutOfRangeException(_current_information);
+          throw ArgumentOutOfRangeException(_caller);
         return year % 4 == 0 && (year % 100 != 0 || year % 400 == 0);
       }
       
@@ -156,7 +156,7 @@ namespace Switch {
       
       DateTime2(int64 ticks, DateTimeKind kind, bool isAmbiguousDst) {
         if (ticks < MinTicks || ticks > MaxTicks) {
-          throw ArgumentOutOfRangeException(_current_information);
+          throw ArgumentOutOfRangeException(_caller);
         }
         dateData = (Convert::ToUInt64(ticks) | (isAmbiguousDst ? KindLocalAmbiguousDst : KindLocal));
       }
@@ -249,7 +249,7 @@ namespace Switch {
             return n * TicksPerDay;
           }
         }
-        throw ArgumentOutOfRangeException(_current_information);
+        throw ArgumentOutOfRangeException(_caller);
       }
       
       int32 GetDatePart(int part) const {
@@ -305,10 +305,10 @@ namespace Switch {
         if (hour >= 0 && hour < 24 && minute >= 0 && minute < 60 && second >=0 && second < 60) {
           int64 totalSeconds = Convert::ToInt64(hour * 3600) + Convert::ToInt64(minute * 60) + Convert::ToInt64(second);
           if (totalSeconds > MaxSeconds || totalSeconds < MinSeconds)
-            throw ArgumentOutOfRangeException(_current_information);
+            throw ArgumentOutOfRangeException(_caller);
           return totalSeconds * TicksPerSecond;
         }
-        throw ArgumentOutOfRangeException(_current_information);
+        throw ArgumentOutOfRangeException(_caller);
       }
     };
   }
@@ -374,234 +374,234 @@ namespace {
   class DateTimeTest : public TestFixture {
   protected:
     void MinValue() {
-      Assert::AreEqual(DateTimeKind::Unspecified, DateTime2::MinValue().Kind(), _current_information);
-      Assert::AreEqual(0, DateTime2::MinValue().Ticks(), _current_information);
-      Assert::AreEqual(1, DateTime2::MinValue().Year(), _current_information);
-      Assert::AreEqual(1, DateTime2::MinValue().Month(), _current_information);
-      Assert::AreEqual(1, DateTime2::MinValue().Day(), _current_information);
-      Assert::AreEqual(0, DateTime2::MinValue().Hour(), _current_information);
-      Assert::AreEqual(0, DateTime2::MinValue().Minute(), _current_information);
-      Assert::AreEqual(0, DateTime2::MinValue().Second(), _current_information);
-      Assert::AreEqual(0, DateTime2::MinValue().Millisecond(), _current_information);
-      Assert::AreEqual(DayOfWeek::Monday, DateTime2::MinValue().DayOfWeek(), _current_information);
-      Assert::IsFalse(DateTime2::MinValue().IsDaylightSavingTime(), _current_information);
+      Assert::AreEqual(DateTimeKind::Unspecified, DateTime2::MinValue().Kind(), _caller);
+      Assert::AreEqual(0, DateTime2::MinValue().Ticks(), _caller);
+      Assert::AreEqual(1, DateTime2::MinValue().Year(), _caller);
+      Assert::AreEqual(1, DateTime2::MinValue().Month(), _caller);
+      Assert::AreEqual(1, DateTime2::MinValue().Day(), _caller);
+      Assert::AreEqual(0, DateTime2::MinValue().Hour(), _caller);
+      Assert::AreEqual(0, DateTime2::MinValue().Minute(), _caller);
+      Assert::AreEqual(0, DateTime2::MinValue().Second(), _caller);
+      Assert::AreEqual(0, DateTime2::MinValue().Millisecond(), _caller);
+      Assert::AreEqual(DayOfWeek::Monday, DateTime2::MinValue().DayOfWeek(), _caller);
+      Assert::IsFalse(DateTime2::MinValue().IsDaylightSavingTime(), _caller);
     }
 
     void MaxValue() {
-      Assert::AreEqual(DateTimeKind::Unspecified, DateTime2::MaxValue().Kind(), _current_information);
-      Assert::AreEqual(3155378975999999999LL, DateTime2::MaxValue().Ticks(), _current_information);
-      Assert::AreEqual(9999, DateTime2::MaxValue().Year(), _current_information);
-      Assert::AreEqual(12, DateTime2::MaxValue().Month(), _current_information);
-      Assert::AreEqual(31, DateTime2::MaxValue().Day(), _current_information);
-      Assert::AreEqual(23, DateTime2::MaxValue().Hour(), _current_information);
-      Assert::AreEqual(59, DateTime2::MaxValue().Minute(), _current_information);
-      Assert::AreEqual(59, DateTime2::MaxValue().Second(), _current_information);
-      Assert::AreEqual(999, DateTime2::MaxValue().Millisecond(), _current_information);
-      Assert::AreEqual(DayOfWeek::Friday, DateTime2::MaxValue().DayOfWeek(), _current_information);
-      Assert::IsFalse(DateTime2::MaxValue().IsDaylightSavingTime(), _current_information);
+      Assert::AreEqual(DateTimeKind::Unspecified, DateTime2::MaxValue().Kind(), _caller);
+      Assert::AreEqual(3155378975999999999LL, DateTime2::MaxValue().Ticks(), _caller);
+      Assert::AreEqual(9999, DateTime2::MaxValue().Year(), _caller);
+      Assert::AreEqual(12, DateTime2::MaxValue().Month(), _caller);
+      Assert::AreEqual(31, DateTime2::MaxValue().Day(), _caller);
+      Assert::AreEqual(23, DateTime2::MaxValue().Hour(), _caller);
+      Assert::AreEqual(59, DateTime2::MaxValue().Minute(), _caller);
+      Assert::AreEqual(59, DateTime2::MaxValue().Second(), _caller);
+      Assert::AreEqual(999, DateTime2::MaxValue().Millisecond(), _caller);
+      Assert::AreEqual(DayOfWeek::Friday, DateTime2::MaxValue().DayOfWeek(), _caller);
+      Assert::IsFalse(DateTime2::MaxValue().IsDaylightSavingTime(), _caller);
     }
     
     void DefaultConstructor() {
       DateTime2 dateTime;
-      Assert::AreEqual(DateTimeKind::Unspecified, dateTime.Kind(), _current_information);
-      Assert::AreEqual(0, dateTime.Ticks(), _current_information);
-      Assert::AreEqual(1, dateTime.Year(), _current_information);
-      Assert::AreEqual(1, dateTime.Month(), _current_information);
-      Assert::AreEqual(1, dateTime.Day(), _current_information);
-      Assert::AreEqual(0, dateTime.Hour(), _current_information);
-      Assert::AreEqual(0, dateTime.Minute(), _current_information);
-      Assert::AreEqual(0, dateTime.Second(), _current_information);
-      Assert::AreEqual(0, dateTime.Millisecond(), _current_information);
-      Assert::AreEqual(DayOfWeek::Monday, dateTime.DayOfWeek(), _current_information);
-      Assert::IsFalse(dateTime.IsDaylightSavingTime(), _current_information);
+      Assert::AreEqual(DateTimeKind::Unspecified, dateTime.Kind(), _caller);
+      Assert::AreEqual(0, dateTime.Ticks(), _caller);
+      Assert::AreEqual(1, dateTime.Year(), _caller);
+      Assert::AreEqual(1, dateTime.Month(), _caller);
+      Assert::AreEqual(1, dateTime.Day(), _caller);
+      Assert::AreEqual(0, dateTime.Hour(), _caller);
+      Assert::AreEqual(0, dateTime.Minute(), _caller);
+      Assert::AreEqual(0, dateTime.Second(), _caller);
+      Assert::AreEqual(0, dateTime.Millisecond(), _caller);
+      Assert::AreEqual(DayOfWeek::Monday, dateTime.DayOfWeek(), _caller);
+      Assert::IsFalse(dateTime.IsDaylightSavingTime(), _caller);
     }
     
     void ConstructorByTicksWith0() {
       DateTime2 dateTime(0LL);
-      Assert::AreEqual(DateTimeKind::Unspecified, dateTime.Kind(), _current_information);
-      Assert::AreEqual(0, dateTime.Ticks(), _current_information);
-      Assert::AreEqual(1, dateTime.Year(), _current_information);
-      Assert::AreEqual(1, dateTime.Month(), _current_information);
-      Assert::AreEqual(1, dateTime.Day(), _current_information);
-      Assert::AreEqual(0, dateTime.Hour(), _current_information);
-      Assert::AreEqual(0, dateTime.Minute(), _current_information);
-      Assert::AreEqual(0, dateTime.Second(), _current_information);
-      Assert::AreEqual(0, dateTime.Millisecond(), _current_information);
-      Assert::AreEqual(DayOfWeek::Monday, dateTime.DayOfWeek(), _current_information);
-      Assert::IsFalse(dateTime.IsDaylightSavingTime(), _current_information);
+      Assert::AreEqual(DateTimeKind::Unspecified, dateTime.Kind(), _caller);
+      Assert::AreEqual(0, dateTime.Ticks(), _caller);
+      Assert::AreEqual(1, dateTime.Year(), _caller);
+      Assert::AreEqual(1, dateTime.Month(), _caller);
+      Assert::AreEqual(1, dateTime.Day(), _caller);
+      Assert::AreEqual(0, dateTime.Hour(), _caller);
+      Assert::AreEqual(0, dateTime.Minute(), _caller);
+      Assert::AreEqual(0, dateTime.Second(), _caller);
+      Assert::AreEqual(0, dateTime.Millisecond(), _caller);
+      Assert::AreEqual(DayOfWeek::Monday, dateTime.DayOfWeek(), _caller);
+      Assert::IsFalse(dateTime.IsDaylightSavingTime(), _caller);
     }
     
     void ConstructorByTicksWith0AndDateTimeKindUnspecified() {
       DateTime2 dateTime(0LL, DateTimeKind::Unspecified);
-      Assert::AreEqual(DateTimeKind::Unspecified, dateTime.Kind(), _current_information);
-      Assert::AreEqual(0, dateTime.Ticks(), _current_information);
-      Assert::AreEqual(1, dateTime.Year(), _current_information);
-      Assert::AreEqual(1, dateTime.Month(), _current_information);
-      Assert::AreEqual(1, dateTime.Day(), _current_information);
-      Assert::AreEqual(0, dateTime.Hour(), _current_information);
-      Assert::AreEqual(0, dateTime.Minute(), _current_information);
-      Assert::AreEqual(0, dateTime.Second(), _current_information);
-      Assert::AreEqual(0, dateTime.Millisecond(), _current_information);
-      Assert::AreEqual(DayOfWeek::Monday, dateTime.DayOfWeek(), _current_information);
-      Assert::IsFalse(dateTime.IsDaylightSavingTime(), _current_information);
+      Assert::AreEqual(DateTimeKind::Unspecified, dateTime.Kind(), _caller);
+      Assert::AreEqual(0, dateTime.Ticks(), _caller);
+      Assert::AreEqual(1, dateTime.Year(), _caller);
+      Assert::AreEqual(1, dateTime.Month(), _caller);
+      Assert::AreEqual(1, dateTime.Day(), _caller);
+      Assert::AreEqual(0, dateTime.Hour(), _caller);
+      Assert::AreEqual(0, dateTime.Minute(), _caller);
+      Assert::AreEqual(0, dateTime.Second(), _caller);
+      Assert::AreEqual(0, dateTime.Millisecond(), _caller);
+      Assert::AreEqual(DayOfWeek::Monday, dateTime.DayOfWeek(), _caller);
+      Assert::IsFalse(dateTime.IsDaylightSavingTime(), _caller);
     }
     
     void ConstructorByTicksWith0AndDateTimeKindLocal() {
       DateTime2 dateTime(0LL, DateTimeKind::Local);
-      Assert::AreEqual(DateTimeKind::Local, dateTime.Kind(), _current_information);
-      Assert::AreEqual(0, dateTime.Ticks(), _current_information);
-      Assert::AreEqual(1, dateTime.Year(), _current_information);
-      Assert::AreEqual(1, dateTime.Month(), _current_information);
-      Assert::AreEqual(1, dateTime.Day(), _current_information);
-      Assert::AreEqual(0, dateTime.Hour(), _current_information);
-      Assert::AreEqual(0, dateTime.Minute(), _current_information);
-      Assert::AreEqual(0, dateTime.Second(), _current_information);
-      Assert::AreEqual(0, dateTime.Millisecond(), _current_information);
-      Assert::AreEqual(DayOfWeek::Monday, dateTime.DayOfWeek(), _current_information);
-      Assert::IsFalse(dateTime.IsDaylightSavingTime(), _current_information);
+      Assert::AreEqual(DateTimeKind::Local, dateTime.Kind(), _caller);
+      Assert::AreEqual(0, dateTime.Ticks(), _caller);
+      Assert::AreEqual(1, dateTime.Year(), _caller);
+      Assert::AreEqual(1, dateTime.Month(), _caller);
+      Assert::AreEqual(1, dateTime.Day(), _caller);
+      Assert::AreEqual(0, dateTime.Hour(), _caller);
+      Assert::AreEqual(0, dateTime.Minute(), _caller);
+      Assert::AreEqual(0, dateTime.Second(), _caller);
+      Assert::AreEqual(0, dateTime.Millisecond(), _caller);
+      Assert::AreEqual(DayOfWeek::Monday, dateTime.DayOfWeek(), _caller);
+      Assert::IsFalse(dateTime.IsDaylightSavingTime(), _caller);
     }
     
     void ConstructorByTicksWith0AndDateTimeKindUtc() {
       DateTime2 dateTime(0LL, DateTimeKind::Utc);
-      Assert::AreEqual(DateTimeKind::Utc, dateTime.Kind(), _current_information);
-      Assert::AreEqual(0, dateTime.Ticks(), _current_information);
-      Assert::AreEqual(1, dateTime.Year(), _current_information);
-      Assert::AreEqual(1, dateTime.Month(), _current_information);
-      Assert::AreEqual(1, dateTime.Day(), _current_information);
-      Assert::AreEqual(0, dateTime.Hour(), _current_information);
-      Assert::AreEqual(0, dateTime.Minute(), _current_information);
-      Assert::AreEqual(0, dateTime.Second(), _current_information);
-      Assert::AreEqual(0, dateTime.Millisecond(), _current_information);
-      Assert::AreEqual(DayOfWeek::Monday, dateTime.DayOfWeek(), _current_information);
-      Assert::IsFalse(dateTime.IsDaylightSavingTime(), _current_information);
+      Assert::AreEqual(DateTimeKind::Utc, dateTime.Kind(), _caller);
+      Assert::AreEqual(0, dateTime.Ticks(), _caller);
+      Assert::AreEqual(1, dateTime.Year(), _caller);
+      Assert::AreEqual(1, dateTime.Month(), _caller);
+      Assert::AreEqual(1, dateTime.Day(), _caller);
+      Assert::AreEqual(0, dateTime.Hour(), _caller);
+      Assert::AreEqual(0, dateTime.Minute(), _caller);
+      Assert::AreEqual(0, dateTime.Second(), _caller);
+      Assert::AreEqual(0, dateTime.Millisecond(), _caller);
+      Assert::AreEqual(DayOfWeek::Monday, dateTime.DayOfWeek(), _caller);
+      Assert::IsFalse(dateTime.IsDaylightSavingTime(), _caller);
     }
     
     void ConstructorByTicksWith31241376000000000LL() {
       DateTime2 dateTime(31241376000000000LL);
-      Assert::AreEqual(DateTimeKind::Unspecified, dateTime.Kind(), _current_information);
-      Assert::AreEqual(31241376000000000LL, dateTime.Ticks(), _current_information);
-      Assert::AreEqual(100, dateTime.Year(), _current_information);
-      Assert::AreEqual(1, dateTime.Month(), _current_information);
-      Assert::AreEqual(1, dateTime.Day(), _current_information);
-      Assert::AreEqual(0, dateTime.Hour(), _current_information);
-      Assert::AreEqual(0, dateTime.Minute(), _current_information);
-      Assert::AreEqual(0, dateTime.Second(), _current_information);
-      Assert::AreEqual(0, dateTime.Millisecond(), _current_information);
-      Assert::AreEqual(DayOfWeek::Friday, dateTime.DayOfWeek(), _current_information);
-      Assert::IsFalse(dateTime.IsDaylightSavingTime(), _current_information);
+      Assert::AreEqual(DateTimeKind::Unspecified, dateTime.Kind(), _caller);
+      Assert::AreEqual(31241376000000000LL, dateTime.Ticks(), _caller);
+      Assert::AreEqual(100, dateTime.Year(), _caller);
+      Assert::AreEqual(1, dateTime.Month(), _caller);
+      Assert::AreEqual(1, dateTime.Day(), _caller);
+      Assert::AreEqual(0, dateTime.Hour(), _caller);
+      Assert::AreEqual(0, dateTime.Minute(), _caller);
+      Assert::AreEqual(0, dateTime.Second(), _caller);
+      Assert::AreEqual(0, dateTime.Millisecond(), _caller);
+      Assert::AreEqual(DayOfWeek::Friday, dateTime.DayOfWeek(), _caller);
+      Assert::IsFalse(dateTime.IsDaylightSavingTime(), _caller);
     }
     
     void ConstructorByTicksWith504911232000000000LL() {
       System::DateTime2 dateTime(504911232000000000LL);
-      Assert::AreEqual(DateTimeKind::Unspecified, dateTime.Kind(), _current_information);
-      Assert::AreEqual(504911232000000000LL, dateTime.Ticks(), _current_information);
-      Assert::AreEqual(1601, dateTime.Year(), _current_information);
-      Assert::AreEqual(1, dateTime.Month(), _current_information);
-      Assert::AreEqual(1, dateTime.Day(), _current_information);
-      Assert::AreEqual(0, dateTime.Hour(), _current_information);
-      Assert::AreEqual(0, dateTime.Minute(), _current_information);
-      Assert::AreEqual(0, dateTime.Second(), _current_information);
-      Assert::AreEqual(DayOfWeek::Monday, dateTime.DayOfWeek(), _current_information);
-      Assert::IsFalse(dateTime.IsDaylightSavingTime(), _current_information);
+      Assert::AreEqual(DateTimeKind::Unspecified, dateTime.Kind(), _caller);
+      Assert::AreEqual(504911232000000000LL, dateTime.Ticks(), _caller);
+      Assert::AreEqual(1601, dateTime.Year(), _caller);
+      Assert::AreEqual(1, dateTime.Month(), _caller);
+      Assert::AreEqual(1, dateTime.Day(), _caller);
+      Assert::AreEqual(0, dateTime.Hour(), _caller);
+      Assert::AreEqual(0, dateTime.Minute(), _caller);
+      Assert::AreEqual(0, dateTime.Second(), _caller);
+      Assert::AreEqual(DayOfWeek::Monday, dateTime.DayOfWeek(), _caller);
+      Assert::IsFalse(dateTime.IsDaylightSavingTime(), _caller);
     }
     
     void ConstructorByTicksWith633452274520000000LLAndKindSetToLocal() {
       System::DateTime2 dateTime(633452274520000000LL, DateTimeKind::Local);
-      Assert::AreEqual(DateTimeKind::Local, dateTime.Kind(), _current_information);
-      Assert::AreEqual(633452274520000000LL, dateTime.Ticks(), _current_information);
-      Assert::AreEqual(2008, dateTime.Year(), _current_information);
-      Assert::AreEqual(5, dateTime.Month(), _current_information);
-      Assert::AreEqual(1, dateTime.Day(), _current_information);
-      Assert::AreEqual(8, dateTime.Hour(), _current_information);
-      Assert::AreEqual(30, dateTime.Minute(), _current_information);
-      Assert::AreEqual(52, dateTime.Second(), _current_information);
-      Assert::AreEqual(DayOfWeek::Thursday, dateTime.DayOfWeek(), _current_information);
-      Assert::IsTrue(dateTime.IsDaylightSavingTime(), _current_information);
+      Assert::AreEqual(DateTimeKind::Local, dateTime.Kind(), _caller);
+      Assert::AreEqual(633452274520000000LL, dateTime.Ticks(), _caller);
+      Assert::AreEqual(2008, dateTime.Year(), _caller);
+      Assert::AreEqual(5, dateTime.Month(), _caller);
+      Assert::AreEqual(1, dateTime.Day(), _caller);
+      Assert::AreEqual(8, dateTime.Hour(), _caller);
+      Assert::AreEqual(30, dateTime.Minute(), _caller);
+      Assert::AreEqual(52, dateTime.Second(), _caller);
+      Assert::AreEqual(DayOfWeek::Thursday, dateTime.DayOfWeek(), _caller);
+      Assert::IsTrue(dateTime.IsDaylightSavingTime(), _caller);
     }
     
     void ConstructorByTicksWith633452274520000000LLAndKindSetToUtc() {
       System::DateTime2 dateTime(633452274520000000LL, DateTimeKind::Utc);
-      Assert::AreEqual(633452274520000000LL, dateTime.Ticks(), _current_information);
-      Assert::AreEqual(2008, dateTime.Year(), _current_information);
-      Assert::AreEqual(5, dateTime.Month(), _current_information);
-      Assert::AreEqual(1, dateTime.Day(), _current_information);
-      Assert::AreEqual(8, dateTime.Hour(), _current_information);
-      Assert::AreEqual(30, dateTime.Minute(), _current_information);
-      Assert::AreEqual(52, dateTime.Second(), _current_information);
-      Assert::AreEqual(DateTimeKind::Utc, dateTime.Kind(), _current_information);
-      Assert::IsFalse(dateTime.IsDaylightSavingTime(), _current_information);
+      Assert::AreEqual(633452274520000000LL, dateTime.Ticks(), _caller);
+      Assert::AreEqual(2008, dateTime.Year(), _caller);
+      Assert::AreEqual(5, dateTime.Month(), _caller);
+      Assert::AreEqual(1, dateTime.Day(), _caller);
+      Assert::AreEqual(8, dateTime.Hour(), _caller);
+      Assert::AreEqual(30, dateTime.Minute(), _caller);
+      Assert::AreEqual(52, dateTime.Second(), _caller);
+      Assert::AreEqual(DateTimeKind::Utc, dateTime.Kind(), _caller);
+      Assert::IsFalse(dateTime.IsDaylightSavingTime(), _caller);
     }
     
     void ConstructorByYearMonthDayWithValue() {
       DateTime2 dateTime(2011, 10, 30);
-      Assert::AreEqual(2011, dateTime.Year(), _current_information);
-      Assert::AreEqual(10, dateTime.Month(), _current_information);
-      Assert::AreEqual(30, dateTime.Day(), _current_information);
-      Assert::AreEqual(0, dateTime.Hour(), _current_information);
-      Assert::AreEqual(0, dateTime.Minute(), _current_information);
-      Assert::AreEqual(0, dateTime.Second(), _current_information);
-      Assert::AreEqual(DateTimeKind::Unspecified, dateTime.Kind(), _current_information);
-      Assert::IsFalse(dateTime.IsDaylightSavingTime(), _current_information);
+      Assert::AreEqual(2011, dateTime.Year(), _caller);
+      Assert::AreEqual(10, dateTime.Month(), _caller);
+      Assert::AreEqual(30, dateTime.Day(), _caller);
+      Assert::AreEqual(0, dateTime.Hour(), _caller);
+      Assert::AreEqual(0, dateTime.Minute(), _caller);
+      Assert::AreEqual(0, dateTime.Second(), _caller);
+      Assert::AreEqual(DateTimeKind::Unspecified, dateTime.Kind(), _caller);
+      Assert::IsFalse(dateTime.IsDaylightSavingTime(), _caller);
     }
     
     void ConstructorByYearMonthDayHourMinuteSecondWithValue() {
       DateTime2 dateTime(2011, 10, 30, 1, 59, 59);
-      Assert::AreEqual(2011, dateTime.Year(), _current_information);
-      Assert::AreEqual(10, dateTime.Month(), _current_information);
-      Assert::AreEqual(30, dateTime.Day(), _current_information);
-      Assert::AreEqual(1, dateTime.Hour(), _current_information);
-      Assert::AreEqual(59, dateTime.Minute(), _current_information);
-      Assert::AreEqual(59, dateTime.Second(), _current_information);
-      Assert::AreEqual(DateTimeKind::Unspecified, dateTime.Kind(), _current_information);
-      Assert::IsFalse(dateTime.IsDaylightSavingTime(), _current_information);
+      Assert::AreEqual(2011, dateTime.Year(), _caller);
+      Assert::AreEqual(10, dateTime.Month(), _caller);
+      Assert::AreEqual(30, dateTime.Day(), _caller);
+      Assert::AreEqual(1, dateTime.Hour(), _caller);
+      Assert::AreEqual(59, dateTime.Minute(), _caller);
+      Assert::AreEqual(59, dateTime.Second(), _caller);
+      Assert::AreEqual(DateTimeKind::Unspecified, dateTime.Kind(), _caller);
+      Assert::IsFalse(dateTime.IsDaylightSavingTime(), _caller);
     }
     
     void ConstructorByYearMonthDayHourMinuteSecondKindWithkindToLocalAndValueWithDayligthSet() {
       DateTime2 dateTime(2011, 10, 30, 1, 59, 59, DateTimeKind::Local);
-      Assert::AreEqual(2011, dateTime.Year(), _current_information);
-      Assert::AreEqual(10, dateTime.Month(), _current_information);
-      Assert::AreEqual(30, dateTime.Day(), _current_information);
-      Assert::AreEqual(1, dateTime.Hour(), _current_information);
-      Assert::AreEqual(59, dateTime.Minute(), _current_information);
-      Assert::AreEqual(59, dateTime.Second(), _current_information);
-      Assert::AreEqual(DateTimeKind::Local, dateTime.Kind(), _current_information);
-      Assert::IsTrue(dateTime.IsDaylightSavingTime(), _current_information);
+      Assert::AreEqual(2011, dateTime.Year(), _caller);
+      Assert::AreEqual(10, dateTime.Month(), _caller);
+      Assert::AreEqual(30, dateTime.Day(), _caller);
+      Assert::AreEqual(1, dateTime.Hour(), _caller);
+      Assert::AreEqual(59, dateTime.Minute(), _caller);
+      Assert::AreEqual(59, dateTime.Second(), _caller);
+      Assert::AreEqual(DateTimeKind::Local, dateTime.Kind(), _caller);
+      Assert::IsTrue(dateTime.IsDaylightSavingTime(), _caller);
     }
     
     void ConstructorByYearMonthDayHourMinuteSecondKindWithkindToUtcAndValueWithDayligthSet() {
       DateTime2 dateTime(2011, 10, 30, 1, 59, 59, DateTimeKind::Utc);
-      Assert::AreEqual(2011, dateTime.Year(), _current_information);
-      Assert::AreEqual(10, dateTime.Month(), _current_information);
-      Assert::AreEqual(30, dateTime.Day(), _current_information);
-      Assert::AreEqual(1, dateTime.Hour(), _current_information);
-      Assert::AreEqual(59, dateTime.Minute(), _current_information);
-      Assert::AreEqual(59, dateTime.Second(), _current_information);
-      Assert::AreEqual(DateTimeKind::Utc, dateTime.Kind(), _current_information);
-      Assert::IsFalse(dateTime.IsDaylightSavingTime(), _current_information);
+      Assert::AreEqual(2011, dateTime.Year(), _caller);
+      Assert::AreEqual(10, dateTime.Month(), _caller);
+      Assert::AreEqual(30, dateTime.Day(), _caller);
+      Assert::AreEqual(1, dateTime.Hour(), _caller);
+      Assert::AreEqual(59, dateTime.Minute(), _caller);
+      Assert::AreEqual(59, dateTime.Second(), _caller);
+      Assert::AreEqual(DateTimeKind::Utc, dateTime.Kind(), _caller);
+      Assert::IsFalse(dateTime.IsDaylightSavingTime(), _caller);
     }
     
     void ConstructorByYearMonthDayHourMinuteSecondKindWithkindToLocalAndValueWithoutDayligthSet() {
       DateTime2 dateTime(2011, 10, 30, 3, 0, 1, DateTimeKind::Local);
-      Assert::AreEqual(2011, dateTime.Year(), _current_information);
-      Assert::AreEqual(10, dateTime.Month(), _current_information);
-      Assert::AreEqual(30, dateTime.Day(), _current_information);
-      Assert::AreEqual(3, dateTime.Hour(), _current_information);
-      Assert::AreEqual(0, dateTime.Minute(), _current_information);
-      Assert::AreEqual(1, dateTime.Second(), _current_information);
-      Assert::AreEqual(DateTimeKind::Local, dateTime.Kind(), _current_information);
-      Assert::IsFalse(dateTime.IsDaylightSavingTime(), _current_information);
+      Assert::AreEqual(2011, dateTime.Year(), _caller);
+      Assert::AreEqual(10, dateTime.Month(), _caller);
+      Assert::AreEqual(30, dateTime.Day(), _caller);
+      Assert::AreEqual(3, dateTime.Hour(), _caller);
+      Assert::AreEqual(0, dateTime.Minute(), _caller);
+      Assert::AreEqual(1, dateTime.Second(), _caller);
+      Assert::AreEqual(DateTimeKind::Local, dateTime.Kind(), _caller);
+      Assert::IsFalse(dateTime.IsDaylightSavingTime(), _caller);
     }
     
     void ConstructorByYearMonthDayHourMinuteSecondKindWithkindToUtcAndValueWithoutDayligthSet() {
       DateTime2 dateTime(2011, 10, 30, 3, 0, 1, DateTimeKind::Utc);
-      Assert::AreEqual(2011, dateTime.Year(), _current_information);
-      Assert::AreEqual(10, dateTime.Month(), _current_information);
-      Assert::AreEqual(30, dateTime.Day(), _current_information);
-      Assert::AreEqual(3, dateTime.Hour(), _current_information);
-      Assert::AreEqual(0, dateTime.Minute(), _current_information);
-      Assert::AreEqual(1, dateTime.Second(), _current_information);
-      Assert::AreEqual(DateTimeKind::Utc, dateTime.Kind(), _current_information);
-      Assert::IsFalse(dateTime.IsDaylightSavingTime(), _current_information);
+      Assert::AreEqual(2011, dateTime.Year(), _caller);
+      Assert::AreEqual(10, dateTime.Month(), _caller);
+      Assert::AreEqual(30, dateTime.Day(), _caller);
+      Assert::AreEqual(3, dateTime.Hour(), _caller);
+      Assert::AreEqual(0, dateTime.Minute(), _caller);
+      Assert::AreEqual(1, dateTime.Second(), _caller);
+      Assert::AreEqual(DateTimeKind::Utc, dateTime.Kind(), _caller);
+      Assert::IsFalse(dateTime.IsDaylightSavingTime(), _caller);
     }
     
     void Constructor() {

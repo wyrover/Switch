@@ -63,7 +63,7 @@ namespace Switch {
         /// @exception ArgumentException path contains one or more of the invalid characters
         static string Combine(const string& path1, const string& path2) {
           if (path1.IndexOfAny(GetInvalidPathChars()) != -1 || path2.IndexOfAny(GetInvalidPathChars()) != -1)
-            throw ArgumentException(_current_information);
+            throw ArgumentException(_caller);
           
           if (string::IsNullOrEmpty(path2))
             return path1;

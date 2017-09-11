@@ -43,9 +43,9 @@ namespace Switch {
       template<typename TSource, typename TDestination>
       static int32 BlockCompare(const Array<TSource>& blk1, int32 blk1Offset, const Array<TDestination>& blk2, int32 blk2Offset, int32 count) {
         if (blk1Offset < 0 || blk2Offset < 0 || count < 0)
-          throw ArgumentOutOfRangeException(_current_information);
+          throw ArgumentOutOfRangeException(_caller);
         if (!IsPrimitive<TSource>() || !IsPrimitive<TDestination>() || blk1Offset + count > Buffer::ByteLength(blk1) || blk2Offset + count > Buffer::ByteLength(blk2))
-          throw ArgumentException(_current_information);
+          throw ArgumentException(_caller);
         
         const byte *blk1Ptr = (const byte*)blk1.GetData();
         const byte *blk2Ptr = (const byte*)blk2.GetData();
@@ -87,9 +87,9 @@ namespace Switch {
       template<typename TSource, typename TDestination>
       static void BlockCopy(const Array<TSource>& src, int32 srcOffset, Array<TDestination>& dst, int32 dstOffset, int32 count) {
         if (srcOffset < 0 || dstOffset < 0 || count < 0)
-          throw ArgumentOutOfRangeException(_current_information);
+          throw ArgumentOutOfRangeException(_caller);
         if (!IsPrimitive<TSource>() || !IsPrimitive<TDestination>() || srcOffset + count > Buffer::ByteLength(src) || dstOffset + count > Buffer::ByteLength(dst))
-          throw ArgumentException(_current_information);
+          throw ArgumentException(_caller);
         
         const byte *srcPtr = (const byte*)src.Data();
         byte *dstPtr = const_cast<byte*>((const byte*)dst.Data());
@@ -119,9 +119,9 @@ namespace Switch {
       template<typename TDestination>
       static void BlockFill(byte filler, Array<TDestination>& dst, int32 dstOffset, int32 count) {
         if (dstOffset < 0 || count < 0)
-          throw ArgumentOutOfRangeException(_current_information);
+          throw ArgumentOutOfRangeException(_caller);
         if (!IsPrimitive<TDestination>() || dstOffset + count > Buffer::ByteLength(dst))
-          throw ArgumentException(_current_information);
+          throw ArgumentException(_caller);
         
         byte *dstPtr = const_cast<byte*>((const byte*)dst.Data());
         memset(&dstPtr[dstOffset], filler, count);
@@ -164,7 +164,7 @@ namespace Switch {
       template<typename T>
       static int32 ByteLength(const Array<T>& array) {
         if (!IsPrimitive<T>())
-          throw ArgumentException(_current_information);
+          throw ArgumentException(_caller);
         
         return Convert::ToInt32((int64)sizeof(T) * array.Length);
       }
@@ -179,9 +179,9 @@ namespace Switch {
       template<typename T>
       static byte GetByte(const Array<T>& array, int32 index) {
         if (!IsPrimitive<T>())
-          throw ArgumentException(_current_information);
+          throw ArgumentException(_caller);
         if (0 < index && index >= Buffer::ByteLength(array))
-          throw ArgumentOutOfRangeException(_current_information);
+          throw ArgumentOutOfRangeException(_caller);
         
         const byte *bytePtr = (const byte*)array.Data();
         return (byte)(bytePtr[index]);
@@ -197,9 +197,9 @@ namespace Switch {
       template<typename T>
       static void SetByte(const Array<T>& array, int32 index, byte value) {
         if (!IsPrimitive<T>())
-          throw ArgumentException(_current_information);
+          throw ArgumentException(_caller);
         if (0 < index && index >= Buffer::ByteLength(array))
-          throw ArgumentOutOfRangeException(_current_information);
+          throw ArgumentOutOfRangeException(_caller);
         
         byte *bytePtr = const_cast<byte*>((const byte*)array.Data());
         bytePtr[index] = value;

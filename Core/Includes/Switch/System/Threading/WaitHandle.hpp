@@ -81,7 +81,7 @@ namespace Switch {
         /// @exception ArgumentException millisecondsTimeout is a negative number other than -1, which represents an infinite time-out.
         virtual bool WaitOne(int32 millisecondsTimeOut) {
           if (millisecondsTimeOut < Timeout::Infinite)
-            throw ArgumentException(_current_information);
+            throw ArgumentException(_caller);
           return Wait(millisecondsTimeOut);
         }
         

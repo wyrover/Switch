@@ -74,7 +74,7 @@ namespace Switch {
           /// @param index The zero-based index in array at which copying begins;
           void CopyTo(System::Array<T>& array, int32 index) const override {
             if (index + this->queue.Count > array.Length)
-              throw System::ArgumentOutOfRangeException(_current_information);
+              throw System::ArgumentOutOfRangeException(_caller);
 
             System::Threading::LockGuard lock(this->queue.SyncRoot);
             System::Int32 pos = index;
@@ -156,7 +156,7 @@ namespace Switch {
           protected:
             const T& GetCurrent() const {
               if (this->index < 0 || this->index >= this->array.Length)
-                throw InvalidOperationException(_current_information);
+                throw InvalidOperationException(_caller);
               
               return this->array[this->index];
             }

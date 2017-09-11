@@ -60,7 +60,7 @@ void IPEndPoint::SetAddress(const IPAddress &address) {
 
 void IPEndPoint::SetPort(int32 port) {
   if (port < MinPort || port > MaxPort)
-    throw ArgumentOutOfRangeException(_current_information);
+    throw ArgumentOutOfRangeException(_caller);
   
   this->port = port;
 }

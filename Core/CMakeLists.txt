@@ -379,7 +379,7 @@ set(INCLUDE_FILES
   Includes/Switch/Core.hpp
   Includes/Switch/Event.hpp
   Includes/Switch/ExceptionPtr.hpp
-  Includes/Switch/CurrentInformation.hpp
+  Includes/Switch/Caller.hpp
   Includes/Switch/Hash.hpp
   Includes/Switch/InitializerList.hpp
   Includes/Switch/Interface.hpp

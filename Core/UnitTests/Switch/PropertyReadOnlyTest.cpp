@@ -14,8 +14,8 @@ namespace SwitchUnitTests {
         _get {return v;}
       };
       
-      Assert::AreEqual(42, v, _current_information);
-      Assert::AreEqual(42, Value, _current_information);
+      Assert::AreEqual(42, v, _caller);
+      Assert::AreEqual(42, Value, _caller);
     }
     
     void CreatePropertyAndGetItWithGetFunction() {
@@ -24,8 +24,8 @@ namespace SwitchUnitTests {
         _get {return v;}
       };
       
-      Assert::AreEqual(42, v, _current_information);
-      Assert::AreEqual(42, Value.Get(), _current_information);
+      Assert::AreEqual(42, v, _caller);
+      Assert::AreEqual(42, Value.Get(), _caller);
     }
     
     void CreatePropertyAndGetItWithFunctor() {
@@ -34,8 +34,8 @@ namespace SwitchUnitTests {
         _get {return v;}
       };
       
-      Assert::AreEqual(42, v, _current_information);
-      Assert::AreEqual(42, Value(), _current_information);
+      Assert::AreEqual(42, v, _caller);
+      Assert::AreEqual(42, Value(), _caller);
     }
     
     void PropertyEqualityOperator() {
@@ -44,8 +44,8 @@ namespace SwitchUnitTests {
         _get {return v;}
       };
       
-      Assert::IsTrue(Value == 42, _current_information);
-      Assert::IsFalse(Value == 24, _current_information);
+      Assert::IsTrue(Value == 42, _caller);
+      Assert::IsFalse(Value == 24, _caller);
     }
     
     void PropertyInequalityOperator() {
@@ -54,8 +54,8 @@ namespace SwitchUnitTests {
         _get {return v;}
       };
       
-      Assert::IsTrue(Value != 24, _current_information);
-      Assert::IsFalse(Value != 42, _current_information);
+      Assert::IsTrue(Value != 24, _caller);
+      Assert::IsFalse(Value != 42, _caller);
     }
     
     class PropertyTestClass {
@@ -75,7 +75,7 @@ namespace SwitchUnitTests {
       refptr<PropertyTestClass> p1 = ref_new<PropertyTestClass>();
       refptr<PropertyTestClass> p2 = ref_new<PropertyTestClass>(*p1);
       p1 = null;
-      Assert::AreEqual("Test property", p2->Name, _current_information);
+      Assert::AreEqual("Test property", p2->Name, _caller);
     }
     
     void PropertyEqualOperator() {
@@ -83,7 +83,7 @@ namespace SwitchUnitTests {
       refptr<PropertyTestClass> p2 = ref_new<PropertyTestClass>();
       *p2 = *p1;
       p1 = null;
-      Assert::AreEqual("Test property", p2->Name, _current_information);
+      Assert::AreEqual("Test property", p2->Name, _caller);
     }
   };
   

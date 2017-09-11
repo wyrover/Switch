@@ -403,7 +403,7 @@ namespace Switch {
       /// @remarks Use the FailFast method instead of the Exit method to terminate your application if the state of your application is damaged beyond repair, and executing your application's try/catch blocks and finalizers will corrupt program resources.
       /// @remarks Information is reported to Microsoft by using Windows Error Reporting. For more information, see Windows Error Reporting: Getting Started.
       /// @exception NotImplementedException This method always throw NotImplementedException.
-      static void FailFast(const string& message) {throw NotImplementedException("Use System::Environment::Exit method instead", _current_information);}
+      static void FailFast(const string& message) {throw NotImplementedException("Use System::Environment::Exit method instead", _caller);}
       
       /// @brief Returns a string array containing the command-line arguments for the current process.
       /// @return Array<string> An array of string where each element contains a command-line argument. The first element is the executable file name, and the following zero or more elements contain the remaining command-line arguments.

@@ -30,7 +30,7 @@ namespace Switch {
           static_assert(!std::is_same<System::IO::Stream, TStream>::value, "Must not be System::IO::Stream but inherited");
           static_assert(std::is_base_of<System::IO::Stream, TStream>::value, "Is not inherited from System::IO::Stream");
           if (!stream.CanWrite())
-            throw ArgumentException(_current_information);
+            throw ArgumentException(_caller);
         }
         
         /// @brief Initializes a new instance of the System::IO::BinaryWriter class for the specified file on the specified stream pointer.
@@ -39,7 +39,7 @@ namespace Switch {
         /// @exception ArgumentException stream is not writable.
         BinaryWriter(refptr<Stream> stream) : stream(stream) {
           if (!stream->CanWrite())
-            throw ArgumentException(_current_information);
+            throw ArgumentException(_caller);
         }
 
         /// @cond

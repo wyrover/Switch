@@ -94,7 +94,7 @@ TimeSpan TimeSpan::Parse(const string& str) {
   
   if (items.Length == 5) {
     if (items[4].Length() != 7)
-      throw FormatException(_current_information);
+      throw FormatException(_caller);
 
     days = Int32::Parse(items[0]);
     hours = Int32::Parse(items[1]);
@@ -105,10 +105,10 @@ TimeSpan TimeSpan::Parse(const string& str) {
   }
   
   if (items.Length > 5 || str.LastIndexOf('-') > 0 || (items.Length == 5 && str.LastIndexOf(':') > str.LastIndexOf('.')))
-    throw FormatException(_current_information);
+    throw FormatException(_caller);
   
   if (0 > hours || hours > 24 || 0 > minutes || minutes > 60 || 0 > seconds || seconds > 60 || 0 > milliSeconds || milliSeconds > 999)
-    throw OverflowException(_current_information);
+    throw OverflowException(_caller);
   
   if (str[0] == '-')
     return TimeSpan(days * TicksPerDay + hours * TicksPerHour + minutes * TicksPerMinute + seconds * TicksPerSecond + milliSeconds * TicksPerMillisecond + ticks).Negative();

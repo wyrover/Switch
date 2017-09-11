@@ -16,23 +16,23 @@ namespace {
     
     void Static() {
       _using(Predicate<const string&> p(&MyClass::IsEmpty)) {
-        Assert::IsFalse(p("Not empty"), _current_information);
-        Assert::IsTrue(p(""), _current_information);
+        Assert::IsFalse(p("Not empty"), _caller);
+        Assert::IsTrue(p(""), _caller);
       }
     }
     
     void Member() {
       MyClass m;
       _using(Predicate<const string&> p(m, &MyClass::IsNotEmpty)) {
-        Assert::IsTrue(p("Not empty"), _current_information);
-        Assert::IsFalse(p(""), _current_information);
+        Assert::IsTrue(p("Not empty"), _caller);
+        Assert::IsFalse(p(""), _caller);
       }
     }
     
     void Empty() {
       _using(Predicate<const string&> p) {
-        Assert::DoesNotThrows(_delegate {p("Not empty");}, _current_information);
-        Assert::DoesNotThrows(_delegate {p("");}, _current_information);
+        Assert::DoesNotThrows(_delegate {p("Not empty");}, _caller);
+        Assert::DoesNotThrows(_delegate {p("");}, _caller);
       }
     }
   };

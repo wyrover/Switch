@@ -130,9 +130,9 @@ namespace Switch {
         /// @exception ArgumentOutOfRangeException The dueTime or period parameter is negative and is not equal to Timeout::Infinite.
         void Change(int32 dueTime, int32 period) {
           if (this->data->callback.IsEmpty())
-            throw InvalidOperationException(_current_information);
+            throw InvalidOperationException(_caller);
           if (dueTime < Timeout::Infinite || period < Timeout::Infinite)
-            throw ArgumentOutOfRangeException(_current_information);
+            throw ArgumentOutOfRangeException(_caller);
           
           this->data->dueTime = dueTime;
           this->data->period = period;

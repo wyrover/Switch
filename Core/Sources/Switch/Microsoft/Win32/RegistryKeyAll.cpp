@@ -87,7 +87,7 @@ RegistryKey RegistryKey::CreateSubKey(const System::String& subKey, RegistryKeyP
       return key;
   
   if (this->permission != RegistryKeyPermissionCheck::ReadWriteSubTree)
-    throw UnauthorizedAccessException(_current_information);
+    throw UnauthorizedAccessException(_caller);
   
   key.handle = ref_new<RegistryHandle>();
   key.path = ::MakePath(this->path, subKey);
@@ -101,26 +101,26 @@ RegistryKey RegistryKey::CreateSubKey(const System::String& subKey, RegistryKeyP
 
 void  RegistryKey::DeleteSubKey(const System::String& subKey, bool throwOnMissingSubKey) {
   if (subKey == "")
-    throw InvalidOperationException(_current_information);
+    throw InvalidOperationException(_caller);
   
   if (IsBaseKey(subKey))
-    throw ArgumentException(_current_information);
+    throw ArgumentException(_caller);
   
   System::String path = ::MakePath(this->path, subKey);
   if (::ExistSubKey(this->path, subKey)) {
     if (DirectoryInfo(path).GetDirectories().Count != 0)
-      throw InvalidOperationException(_current_information);
+      throw InvalidOperationException(_caller);
     Directory::Delete(path, true);
     return;
   }
   
   if (throwOnMissingSubKey)
-    throw ArgumentException(_current_information);
+    throw ArgumentException(_caller);
 }
 
 void  RegistryKey::DeleteSubKeyTree(const System::String& subKey, bool throwOnMissingSubKey) {
   if (subKey == "" or IsBaseKey(subKey))
-    throw ArgumentNullException(_current_information);
+    throw ArgumentNullException(_caller);
   
   System::String path = ::MakePath(this->path, subKey);
   if (::ExistSubKey(this->path, subKey)) {
@@ -129,7 +129,7 @@ void  RegistryKey::DeleteSubKeyTree(const System::String& subKey, bool throwOnMi
   }
   
   if (throwOnMissingSubKey)
-    throw ArgumentException(_current_information);
+    throw ArgumentException(_caller);
 }
 
 Array<System::String> RegistryKey::GetSubKeyNames() {
@@ -172,7 +172,7 @@ void RegistryKey::Load() {
       this->values[rkv.Key().ToLower()] = rkv;
     }
   } catch(const System::Exception& e) {
-    throw System::FormatException(_current_information);
+    throw System::FormatException(_caller);
   }
 }
 

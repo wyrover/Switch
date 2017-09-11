@@ -14,15 +14,15 @@ namespace {
       _using(Random rand(1)) {
         for(int i = 0; i < 100; i++) {
           int value = rand.Next();
-          Assert::GreaterOrEqual(value, 0, _current_information);
-          Assert::LessOrEqual(value, Int32::MaxValue), _current_information;
+          Assert::GreaterOrEqual(value, 0, _caller);
+          Assert::LessOrEqual(value, Int32::MaxValue), _caller;
           values.Add(value);
         }
       }
       
       _using(Random rand(1)) {
         for(int i = 0; i < 100; i++)
-          Assert::AreEqual(values[i], rand.Next(), _current_information);
+          Assert::AreEqual(values[i], rand.Next(), _caller);
       }
     }
     
@@ -31,15 +31,15 @@ namespace {
       _using(Random rand(5)) {
         for(int i = 0; i < 100; i++) {
           int value = rand.Next(11);
-          Assert::GreaterOrEqual(value, 0, _current_information);
-          Assert::LessOrEqual(value, Int32::MaxValue), _current_information;
+          Assert::GreaterOrEqual(value, 0, _caller);
+          Assert::LessOrEqual(value, Int32::MaxValue), _caller;
           values.Add(value);
         }
       }
       
       _using(Random rand(5)) {
         for(int i = 0; i < 100; i++)
-          Assert::AreEqual(values[i], rand.Next(0, 11), _current_information);
+          Assert::AreEqual(values[i], rand.Next(0, 11), _caller);
       }
     }
     
@@ -50,7 +50,7 @@ namespace {
   
       _using(Random rand(42)) {
         for(int i = 0; i < 100; i++)
-          Assert::AreEqual(bytes[i], rand.Next(Byte::MaxValue+1), _current_information);
+          Assert::AreEqual(bytes[i], rand.Next(Byte::MaxValue+1), _caller);
       }
     }
   };

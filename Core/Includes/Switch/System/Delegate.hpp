@@ -169,11 +169,11 @@ namespace Switch {
         if (this->functions.size() == 0) return Result();
         for(size_t index = 0; index < this->functions.size()-1; index++) {
           if (this->functions[index] == null)
-            throw NullReferenceException(_current_information);
+            throw NullReferenceException(_caller);
           this->functions[index](arguments...);
         }
         if (this->functions.back() == null)
-          throw NullReferenceException(_current_information);
+          throw NullReferenceException(_caller);
         return this->functions.back()(arguments...);
       }
       

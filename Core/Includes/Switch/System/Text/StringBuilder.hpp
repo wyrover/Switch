@@ -69,7 +69,7 @@ namespace Switch {
         /// @endcode
         explicit StringBuilder(int32 capacity) {
           if (capacity < 0)
-            throw ArgumentOutOfRangeException(_current_information);
+            throw ArgumentOutOfRangeException(_caller);
           this->string.reserve(capacity);
         }
         
@@ -86,7 +86,7 @@ namespace Switch {
         /// @endcode
         StringBuilder(int32 capacity, int32 maxCapacity) : maxCapacity(maxCapacity) {
           if (maxCapacity < 1 || capacity < 0 || maxCapacity < capacity)
-            throw ArgumentOutOfRangeException(_current_information);
+            throw ArgumentOutOfRangeException(_caller);
           this->string.reserve(capacity);
         }
         
@@ -113,7 +113,7 @@ namespace Switch {
         /// @endcode
         StringBuilder(const String& value, int32 capacity) : string((const char32*)std::wstring_convert<std::codecvt_utf8<__char32>, __char32>().from_bytes(value.Data()).c_str()) {
           if (capacity < 0)
-            throw ArgumentOutOfRangeException(_current_information);
+            throw ArgumentOutOfRangeException(_caller);
           this->string.reserve(capacity);
         }
         
@@ -133,11 +133,11 @@ namespace Switch {
         /// @endcode
         StringBuilder(const String& value, int32 startIndex, int32 length, int32 capacity) {
           if (startIndex < 0 || length < 0)
-            throw ArgumentOutOfRangeException(_current_information);
+            throw ArgumentOutOfRangeException(_caller);
           if (startIndex + length > value.Length())
-            throw ArgumentOutOfRangeException(_current_information);
+            throw ArgumentOutOfRangeException(_caller);
           if (capacity < 0)
-            throw ArgumentOutOfRangeException(_current_information);
+            throw ArgumentOutOfRangeException(_caller);
 
           this->string = std::u32string((const char32*)std::wstring_convert<std::codecvt_utf8<__char32>, __char32>().from_bytes(value.Data()).c_str(), startIndex, length);
           this->string.reserve(capacity);
@@ -154,7 +154,7 @@ namespace Switch {
         /// @include StringBuilder.cpp
         char32 operator [](int32 index) const {
           if (index < 0 || index >= static_cast<int32>(this->string.size()))
-            throw IndexOutOfRangeException(_current_information);
+            throw IndexOutOfRangeException(_caller);
           return this->string[index];
         }
         
@@ -169,7 +169,7 @@ namespace Switch {
         /// @include StringBuilder.cpp
         char32& operator [](int32 index) {
           if (index < 0 || index >= static_cast<int32>(this->string.size()))
-            throw ArgumentOutOfRangeException(_current_information);
+            throw ArgumentOutOfRangeException(_caller);
           return this->string[index];
         }
         
@@ -185,7 +185,7 @@ namespace Switch {
           _get {return static_cast<int32>(this->string.capacity());},
           _set {
             if (value < static_cast<int32>(this->string.size()) || value > this->maxCapacity)
-              throw ArgumentOutOfRangeException(_current_information);
+              throw ArgumentOutOfRangeException(_caller);
             this->string.reserve(value);
           }
         };
@@ -204,7 +204,7 @@ namespace Switch {
           _get {return static_cast<int32>(this->string.size());},
           _set {
             if (value < 0 || value >= MaxCapacity())
-              throw ArgumentOutOfRangeException(_current_information);
+              throw ArgumentOutOfRangeException(_caller);
             if (value > static_cast<int32>(this->string.size()))
               this->string.append(value - static_cast<int32>(this->string.size()), 0);
             else
@@ -308,7 +308,7 @@ namespace Switch {
         /// @remarks The capacity of this instance is adjusted as needed.
         StringBuilder& Append(const char* value, int32 valueCount) {
           if (valueCount < 0)
-            throw ArgumentOutOfRangeException(_current_information);
+            throw ArgumentOutOfRangeException(_caller);
           for(int index = 0; index < valueCount; index++)
             this->Append(Char(value[index]).ToString());
           return *this;
@@ -324,7 +324,7 @@ namespace Switch {
         /// @remarks The capacity of this instance is adjusted as needed.
         StringBuilder& Append(const char32* value, int32 valueCount) {
           if (valueCount < 0)
-            throw ArgumentOutOfRangeException(_current_information);
+            throw ArgumentOutOfRangeException(_caller);
           for(int index = 0; index < valueCount; index++)
             this->Append(Char(value[index]).ToString());
           return *this;
@@ -350,7 +350,7 @@ namespace Switch {
         /// @endcode
         StringBuilder& Append(char32 value, int32 repeatCount) {
           if (repeatCount < 0)
-            throw ArgumentOutOfRangeException(_current_information);
+            throw ArgumentOutOfRangeException(_caller);
           this->Capacity += repeatCount;
           this->string.append(repeatCount, value);
           return *this;
@@ -394,7 +394,7 @@ namespace Switch {
         /// @endcode
         StringBuilder& Append(const Array<char32>& value, int32 startIndex, int32 count) {
           if (startIndex < 0 || count < 0 || startIndex + count > value.Length)
-            throw ArgumentOutOfRangeException(_current_information);
+            throw ArgumentOutOfRangeException(_caller);
           this->Capacity += value.Count();
           for (int i = startIndex; i < startIndex+count; i++)
             this->Append(value[i]);
@@ -553,7 +553,7 @@ namespace Switch {
         /// @endcode
         StringBuilder& Append(const String& value) {
           if (this->Length() + value.Length() > this->MaxCapacity())
-            throw ArgumentOutOfRangeException(_current_information);
+            throw ArgumentOutOfRangeException(_caller);
           this->string.append((const char32*)std::wstring_convert<std::codecvt_utf8<__char32>, __char32>().from_bytes(value.Data()).c_str());
           return *this;
         }

@@ -11,19 +11,19 @@ namespace UnitTests {
     void CreateTimeSpanFromDateTime() {
       DateTime n = DateTime(2015, 9, 5, 9, 15, 0);
       TimeSpan ts(n.Ticks);
-      Expect::AreEqual(9, ts.Hours, _current_information);
-      Expect::AreEqual(15, ts.Minutes, _current_information);
+      Expect::AreEqual(9, ts.Hours, _caller);
+      Expect::AreEqual(15, ts.Minutes, _caller);
     }
 
      // Used Expect::IsTrue to virifie if a condition is true
      void TimeSpanIsEqualToAnotherTimeSpan() {
        TimeSpan ts(10, 42, 24);
-       Expect::IsTrue(ts.Equals(TimeSpan(10, 42, 24)), _current_information);
+       Expect::IsTrue(ts.Equals(TimeSpan(10, 42, 24)), _caller);
      }
 
     // Used Expect::IsFalse to virifie if a condition is false
     void DefaultTimeSpanIsEqualToZero() {
-      Expect::IsFalse(TimeSpan(1) == TimeSpan::Zero, _current_information);
+      Expect::IsFalse(TimeSpan(1) == TimeSpan::Zero, _caller);
     }
   };
 

@@ -80,8 +80,8 @@ String Double::ToString(const String& format, const IFormatProvider&) const {
   char32 type = NumericalFormat::GetFormatType(format, precision);
   switch(type) {
     case 0:   return NumericalFormat::Format_Custom(arg,format);
-    case 'b': throw FormatException(_current_information);
-    case 'd': throw FormatException(_current_information);
+    case 'b': throw FormatException(_caller);
+    case 'd': throw FormatException(_caller);
     case 'e': return NumericalFormat::Format_E(this->value, precision == 0 ? 15 : precision, false);
     case 'E': return NumericalFormat::Format_E(this->value, precision == 0 ? 15 : precision, true);
     case 'f':
@@ -99,7 +99,7 @@ String Double::ToString(const String& format, const IFormatProvider&) const {
       if (format.Length() == 1) precision = 2;
       return NumericalFormat::Format_P(this->value, precision);
     case 'x': 
-    case 'X': throw FormatException(_current_information);
+    case 'X': throw FormatException(_caller);
   }
   return format;
 }
@@ -131,25 +131,25 @@ bool Double::ToBoolean(const IFormatProvider&) const {
 
 byte Double::ToByte(const IFormatProvider&) const {
   if (this->value < (double)Byte::MinValue)
-    throw OverflowException(_current_information);
+    throw OverflowException(_caller);
   if (this->value > Byte::MaxValue)
-    throw OverflowException(_current_information);
+    throw OverflowException(_caller);
   return static_cast<sbyte>(Math::Round(this->value));
 }
 
 char32 Double::ToChar(const IFormatProvider&) const {
   if (this->value < Char::MinValue)
-    throw OverflowException(_current_information);
+    throw OverflowException(_caller);
   if (this->value > Char::MaxValue)
-    throw OverflowException(_current_information);
+    throw OverflowException(_caller);
   return static_cast<char>(Math::Round(this->value));
 }
 
 DateTime Double::ToDateTime(const IFormatProvider&) const {
   if (DateTime(static_cast<int64>(this->value)) < DateTime::MinValue)
-    throw OverflowException(_current_information);
+    throw OverflowException(_caller);
   if (DateTime(static_cast<int64>(this->value)) > DateTime::MaxValue)
-    throw OverflowException(_current_information);
+    throw OverflowException(_caller);
   return DateTime((int64)Math::Round(this->value));
 }
 
@@ -159,65 +159,65 @@ double Double::ToDouble(const IFormatProvider&) const {
 
 int16 Double::ToInt16(const IFormatProvider&) const {
   if (this->value < Int16::MinValue)
-    throw OverflowException(_current_information);
+    throw OverflowException(_caller);
   if (this->value > Int16::MaxValue)
-    throw OverflowException(_current_information);
+    throw OverflowException(_caller);
   return (int16)Math::Round(this->value);
 }
 
 int32 Double::ToInt32(const IFormatProvider&) const {
   if (this->value < Int32::MinValue)
-    throw OverflowException(_current_information);
+    throw OverflowException(_caller);
   if (this->value > Int32::MaxValue)
-    throw OverflowException(_current_information);
+    throw OverflowException(_caller);
   return (int32)Math::Round(this->value);
 }
 
 int64 Double::ToInt64(const IFormatProvider&) const {
   if (this->value < Int64::MinValue)
-    throw OverflowException(_current_information);
+    throw OverflowException(_caller);
   if (this->value > Int64::MaxValue)
-    throw OverflowException(_current_information);
+    throw OverflowException(_caller);
   return (int64)Math::Round(this->value);
 }
 
 uint16 Double::ToUInt16(const IFormatProvider&) const {
   if (this->value < UInt16::MinValue)
-    throw OverflowException(_current_information);
+    throw OverflowException(_caller);
   if (this->value > UInt16::MaxValue)
-    throw OverflowException(_current_information);
+    throw OverflowException(_caller);
   return (uint16)Math::Round(this->value);
 }
 
 uint32 Double::ToUInt32(const IFormatProvider&) const {
   if (this->value < UInt32::MinValue)
-    throw OverflowException(_current_information);
+    throw OverflowException(_caller);
   if (this->value > UInt32::MaxValue)
-    throw OverflowException(_current_information);
+    throw OverflowException(_caller);
   return (uint32)Math::Round(this->value);
 }
 
 uint64 Double::ToUInt64(const IFormatProvider&) const {
   if (this->value < UInt64::MinValue)
-    throw OverflowException(_current_information);
+    throw OverflowException(_caller);
   if (this->value > UInt64::MaxValue)
-    throw OverflowException(_current_information);
+    throw OverflowException(_caller);
   return (uint64)Math::Round(this->value);
 }
 
 sbyte Double::ToSByte(const IFormatProvider&) const {
   if (this->value < SByte::MinValue)
-    throw OverflowException(_current_information);
+    throw OverflowException(_caller);
   if (this->value > SByte::MaxValue)
-    throw OverflowException(_current_information);
+    throw OverflowException(_caller);
   return (sbyte)Math::Round(this->value);
 }
 
 float Double::ToSingle(const IFormatProvider&) const {
   if (this->value < Single::MinValue)
-    throw OverflowException(_current_information);
+    throw OverflowException(_caller);
   else if (this->value > Single::MaxValue)
-    throw OverflowException(_current_information);
+    throw OverflowException(_caller);
   return (float)this->value;
 }
 
@@ -251,7 +251,7 @@ Double& Double::operator *=(const Double& value) {
 
 Double& Double::operator /=(const Double& value) {
   if (value == 0)
-    throw DivideByZeroException(_current_information);
+    throw DivideByZeroException(_caller);
 
   this->value /= value.value;
   return *this;

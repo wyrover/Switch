@@ -11,7 +11,7 @@ namespace Examples {
     int Withdraw(int amount) {
       // This condition never is true unless the lock statement is commented out.
       if (this->balance < 0)
-        throw Exception("Negative Balance", _current_information);
+        throw Exception("Negative Balance", _caller);
       
       // Comment out the next line to see the effect of leaving out the lock keyword.
       _lock (this->lock)

@@ -188,7 +188,7 @@ namespace Switch {
             if (is<System::Runtime::Serialization::SerializationInfo>(entry.Value().ToObject()))
               return T::Deserialize(as<System::Runtime::Serialization::SerializationInfo>(entry.Value()).ToObject());
             else
-              throw System::Runtime::Serialization::SerializationException(_current_information);
+              throw System::Runtime::Serialization::SerializationException(_caller);
           }
 
           const String& GetObjectType() const { return this->objectType; }

@@ -9,74 +9,74 @@ namespace SwitchUnitTests {
   class CurrentInformationTest : public TestFixture {
   protected:
     void CreateAnEmptyCurrentInformationThenToString() {
-      CurrentInformation ci;
-      Assert::AreEqual("{Empty}", ci.ToString(), _current_information);
+      Caller ci;
+      Assert::AreEqual("{Empty}", ci.ToString(), _caller);
     }
     
     void CreateAnEmptyCurrentInformationThenGetFileName() {
-      CurrentInformation ci;
-      Assert::AreEqual("", ci.FilePath, _current_information);
+      Caller ci;
+      Assert::AreEqual("", ci.FilePath, _caller);
     }
     
     void CreateAnEmptyCurrentInformationThenGetFunctionName() {
-      CurrentInformation ci;
-      Assert::AreEqual("", ci.MemberNamne, _current_information);
+      Caller ci;
+      Assert::AreEqual("", ci.MemberNamne, _caller);
     }
     
     void CreateAnEmptyCurrentInformationThenGetLine() {
-      CurrentInformation ci;
+      Caller ci;
       Assert::AreEqual(0, ci.LineNumber);
     }
     
     void CreateCurrentInformationWithFileNameAndLineThenToString() {
-      CurrentInformation ci("MyFile.txt", 42);
-      Assert::AreEqual("{FilePath=\"MyFile.txt\", LineNumber=42}", ci.ToString(), _current_information);
+      Caller ci("MyFile.txt", 42);
+      Assert::AreEqual("{FilePath=\"MyFile.txt\", LineNumber=42}", ci.ToString(), _caller);
     }
     
     void CreateCurrentInformationWithFileNameAndLineThenGetFileName() {
-      CurrentInformation ci("MyFile.txt", 42);
-      Assert::AreEqual("MyFile.txt", ci.FilePath, _current_information);
+      Caller ci("MyFile.txt", 42);
+      Assert::AreEqual("MyFile.txt", ci.FilePath, _caller);
     }
     
     void CreateCurrentInformationWithFileNameAndLineThenGetFunctionName() {
-      CurrentInformation ci("MyFile.txt", 42);
-      Assert::AreEqual("", ci.MemberNamne, _current_information);
+      Caller ci("MyFile.txt", 42);
+      Assert::AreEqual("", ci.MemberNamne, _caller);
     }
     
     void CreateCurrentInformationWithFileNameAndLineThenGetLine() {
-      CurrentInformation ci("MyFile.txt", 42);
-      Assert::AreEqual(42, ci.LineNumber, _current_information);
+      Caller ci("MyFile.txt", 42);
+      Assert::AreEqual(42, ci.LineNumber, _caller);
     }
     
     void CreateCurrentInformationWithFileNameLineAndFunctionNameThenToString() {
-      CurrentInformation ci("MyFile.txt", 42, "void MyFunction()");
-      Assert::AreEqual("{FilePath=\"MyFile.txt\", LineNumber=42, MemberName=\"void MyFunction()\"}", ci.ToString(), _current_information);
+      Caller ci("MyFile.txt", 42, "void MyFunction()");
+      Assert::AreEqual("{FilePath=\"MyFile.txt\", LineNumber=42, MemberName=\"void MyFunction()\"}", ci.ToString(), _caller);
     }
     
     void CreateCurrentInformationWithFileNameLineAndFunctionNameThenGetFileName() {
-      CurrentInformation ci("MyFile.txt", 42, "void MyFunction()");
-      Assert::AreEqual("MyFile.txt", ci.FilePath, _current_information);
+      Caller ci("MyFile.txt", 42, "void MyFunction()");
+      Assert::AreEqual("MyFile.txt", ci.FilePath, _caller);
     }
     
     void CreateCurrentInformationWithFileNameLineAndFunctionNameThenGetFunctionName() {
-      CurrentInformation ci("MyFile.txt", 42, "void MyFunction()");
-      Assert::AreEqual("void MyFunction()", ci.MemberNamne, _current_information);
+      Caller ci("MyFile.txt", 42, "void MyFunction()");
+      Assert::AreEqual("void MyFunction()", ci.MemberNamne, _caller);
     }
     
     void CreateCurrentInformationWithFileNameLineAndFunctionNameThenGetLine() {
-      CurrentInformation ci("MyFile.txt", 42, "void MyFunction()");
-      Assert::AreEqual(42, ci.LineNumber, _current_information);
+      Caller ci("MyFile.txt", 42, "void MyFunction()");
+      Assert::AreEqual(42, ci.LineNumber, _caller);
     }
     
     void CreateCurrentInformationByCopyConstructorThenToString() {
-      CurrentInformation ci = CurrentInformation("MyFile.txt", 42, "void MyFunction()");
-      Assert::AreEqual("{FilePath=\"MyFile.txt\", LineNumber=42, MemberName=\"void MyFunction()\"}", ci.ToString(), _current_information);
+      Caller ci = Caller("MyFile.txt", 42, "void MyFunction()");
+      Assert::AreEqual("{FilePath=\"MyFile.txt\", LineNumber=42, MemberName=\"void MyFunction()\"}", ci.ToString(), _caller);
     }
     
     void CreateCurrentInformationByCopyOperatorThenToString() {
-      CurrentInformation ci;
-      ci = CurrentInformation("MyFile.txt", 42, "void MyFunction()");
-      Assert::AreEqual("{FilePath=\"MyFile.txt\", LineNumber=42, MemberName=\"void MyFunction()\"}", ci.ToString(), _current_information);
+      Caller ci;
+      ci = Caller("MyFile.txt", 42, "void MyFunction()");
+      Assert::AreEqual("{FilePath=\"MyFile.txt\", LineNumber=42, MemberName=\"void MyFunction()\"}", ci.ToString(), _caller);
     }
   };
   

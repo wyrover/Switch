@@ -23,9 +23,9 @@ namespace Switch {
         InvalidEnumArgumentException(const InvalidEnumArgumentException& value) : ArgumentException(value) {}
         
         /// @brief Create a new instance of class InvalidEnumArgumentException
-        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
+        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
         /// @remarks Message is set with the default message associate to the error.
-        InvalidEnumArgumentException(const CurrentInformation& information) : ArgumentException(information) {}
+        InvalidEnumArgumentException(const Caller& information) : ArgumentException(information) {}
         
         /// @brief Create a new instance of class InvalidEnumArgumentException
         /// @param message Message string associate to the error.
@@ -33,14 +33,14 @@ namespace Switch {
         
         /// @brief Create a new instance of class InvalidEnumArgumentException
         /// @param message Message string associate to the error.
-        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
-        InvalidEnumArgumentException(const System::String& message, const CurrentInformation& information) : ArgumentException(message, information) {}
+        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+        InvalidEnumArgumentException(const System::String& message, const Caller& information) : ArgumentException(message, information) {}
         
         /// @brief Create a new instance of class InvalidEnumArgumentException
         /// @param message Message string associate to the error.
         /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
-        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
-        InvalidEnumArgumentException(const System::String& message, const System::Exception& innerException, const CurrentInformation& information) : ArgumentException(message, innerException, information) {}
+        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+        InvalidEnumArgumentException(const System::String& message, const System::Exception& innerException, const Caller& information) : ArgumentException(message, innerException, information) {}
       };
     }
   }

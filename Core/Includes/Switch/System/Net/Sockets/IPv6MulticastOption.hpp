@@ -50,7 +50,7 @@ namespace Switch {
             _get {return this->interfaceIndex;},
             _set {
               if (value < 0 || value > 0x00000000FFFFFFFF)
-                throw ArgumentOutOfRangeException(_current_information);
+                throw ArgumentOutOfRangeException(_caller);
               this->interfaceIndex = int32(value);
             }
           };

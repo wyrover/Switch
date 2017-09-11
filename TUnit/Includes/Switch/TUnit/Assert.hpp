@@ -37,7 +37,7 @@ namespace Switch {
       /// TUnit::Assert::AreEqual(23, int32(24)); // test throws an AssertionException.
       /// @endcode
       template<typename TExpected, typename TActual>
-      static inline void AreEqual(const TExpected& expected, const TActual& actual) {AreEqual(expected, actual, "", CurrentInformation());}
+      static inline void AreEqual(const TExpected& expected, const TActual& actual) {AreEqual(expected, actual, "", Caller());}
       
       /// @brief Verifies that two type are equal. If they are not, then an Switch::TUnit::AssertionException is thrown.
       /// @param expected the expected value.
@@ -49,36 +49,36 @@ namespace Switch {
       /// TUnit::Assert::AreEqual(23, int32(24), "User message..."); // test throws an AssertionException.
       /// @endcode
       template<typename TExpected, typename TActual>
-      static inline void AreEqual(const TExpected& expected, const TActual& actual, const string& message) {AreEqual(expected, actual, message, CurrentInformation());}
+      static inline void AreEqual(const TExpected& expected, const TActual& actual, const string& message) {AreEqual(expected, actual, message, Caller());}
       
       /// @brief Verifies that two type are equal. If they are not, then an Switch::TUnit::AssertionException is thrown.
       /// @param expected the expected value.
       /// @param actual the actual value.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// TUnit::Assert::AreEqual(24, int32(24), _current_information); // test ok
-      /// TUnit::Assert::AreEqual(23, int32(24), _current_information); // test throws an AssertionException.
+      /// TUnit::Assert::AreEqual(24, int32(24), _caller); // test ok
+      /// TUnit::Assert::AreEqual(23, int32(24), _caller); // test throws an AssertionException.
       /// @endcode
       template<typename TExpected, typename TActual>
-      static inline void AreEqual(const TExpected& expected, const TActual& actual, const CurrentInformation& currentInformation) {AreEqual(expected, actual, "", currentInformation);}
+      static inline void AreEqual(const TExpected& expected, const TActual& actual, const Caller& caller) {AreEqual(expected, actual, "", caller);}
       
       /// @brief Verifies that two type are equal. If they are not, then an Switch::TUnit::AssertionException is thrown.
       /// @param expected the expected value.
       /// @param actual the actual value.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// TUnit::Assert::AreEqual(24, int32(24), "User message...", _current_information); // test ok
-      /// TUnit::Assert::AreEqual(23, int32(24), "User message...", _current_information); // test throws an AssertionException.
+      /// TUnit::Assert::AreEqual(24, int32(24), "User message...", _caller); // test ok
+      /// TUnit::Assert::AreEqual(23, int32(24), "User message...", _caller); // test throws an AssertionException.
       /// @endcode
       template<typename TExpected, typename TActual>
-      static inline void AreEqual(const TExpected& expected, const TActual& actual, const string& message, const CurrentInformation& currentInformation) {
+      static inline void AreEqual(const TExpected& expected, const TActual& actual, const string& message, const Caller& caller) {
         if (actual == expected)
-          Succeed(message, currentInformation);
+          Succeed(message, caller);
         else
-          Fail(string::Format("Expected: {0}{1}But was:  {2}", ValueToString(expected), System::Environment::NewLine, ValueToString(actual)), message, currentInformation);
+          Fail(string::Format("Expected: {0}{1}But was:  {2}", ValueToString(expected), System::Environment::NewLine, ValueToString(actual)), message, caller);
       }
       
       /// @brief Verifies that two type are not equal. If they are, then an Switch::TUnit::AssertionException is thrown.
@@ -90,7 +90,7 @@ namespace Switch {
       /// TUnit::Assert::AreNotEqual(24, int32(24)); // test throws an AssertionException.
       /// @endcode
       template<typename TExpected, typename TActual>
-      static inline void AreNotEqual(const TExpected& expected, const TActual& actual) {AreNotEqual(expected, actual, "", CurrentInformation());}
+      static inline void AreNotEqual(const TExpected& expected, const TActual& actual) {AreNotEqual(expected, actual, "", Caller());}
       
       /// @brief Verifies that two type are not equal. If they are, then an Switch::TUnit::AssertionException is thrown.
       /// @param expected the expected value.
@@ -98,40 +98,40 @@ namespace Switch {
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @par Examples
       /// @code
-      /// TUnit::Assert::AreNotEqual(23, int32(24), "User message...", _current_information); // test ok
-      /// TUnit::Assert::AreNotEqual(24, int32(24), "User message...", _current_information); // test throws an AssertionException.
+      /// TUnit::Assert::AreNotEqual(23, int32(24), "User message...", _caller); // test ok
+      /// TUnit::Assert::AreNotEqual(24, int32(24), "User message...", _caller); // test throws an AssertionException.
       /// @endcode
       template<typename TExpected, typename TActual>
-      static inline void AreNotEqual(const TExpected& expected, const TActual& actual, const string& message) {AreNotEqual(expected, actual, message, CurrentInformation());}
+      static inline void AreNotEqual(const TExpected& expected, const TActual& actual, const string& message) {AreNotEqual(expected, actual, message, Caller());}
       
       /// @brief Verifies that two type are not equal. If they are, then an Switch::TUnit::AssertionException is thrown.
       /// @param expected the expected value.
       /// @param actual the actual value.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// TUnit::Assert::AreNotEqual(23, int32(24), "User message...", _current_information); // test ok
-      /// TUnit::Assert::AreNotEqual(24, int32(24), "User message...", _current_information); // test throws an AssertionException.
+      /// TUnit::Assert::AreNotEqual(23, int32(24), "User message...", _caller); // test ok
+      /// TUnit::Assert::AreNotEqual(24, int32(24), "User message...", _caller); // test throws an AssertionException.
       /// @endcode
       template<typename TExpected, typename TActual>
-      static inline void AreNotEqual(const TExpected& expected, const TActual& actual, const CurrentInformation& currentInformation) {AreNotEqual(expected, actual, "", currentInformation);}
+      static inline void AreNotEqual(const TExpected& expected, const TActual& actual, const Caller& caller) {AreNotEqual(expected, actual, "", caller);}
       
       /// @brief Verifies that two type are not equal. If they are, then an Switch::TUnit::AssertionException is thrown.
       /// @param expected the expected value.
       /// @param actual the actual value.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// TUnit::Assert::AreNotEqual(23, int32(24), "User message...", _current_information); // test ok
-      /// TUnit::Assert::AreNotEqual(24, int32(24), "User message...", _current_information); // test throws an AssertionException.
+      /// TUnit::Assert::AreNotEqual(23, int32(24), "User message...", _caller); // test ok
+      /// TUnit::Assert::AreNotEqual(24, int32(24), "User message...", _caller); // test throws an AssertionException.
       /// @endcode
       template<typename TExpected, typename TActual>
-      static inline void AreNotEqual(const TExpected& expected, const TActual& actual, const string& message, const CurrentInformation& currentInformation) {
+      static inline void AreNotEqual(const TExpected& expected, const TActual& actual, const string& message, const Caller& caller) {
         if (actual != expected)
-          Succeed(message, currentInformation);
+          Succeed(message, caller);
         else
-          Fail(string::Format("Expected: not {0}{1}But was:  {2}", ValueToString(expected), System::Environment::NewLine, ValueToString(actual)), message, currentInformation);
+          Fail(string::Format("Expected: not {0}{1}But was:  {2}", ValueToString(expected), System::Environment::NewLine, ValueToString(actual)), message, caller);
       }
       
       /// @brief Asserts that two objects do refer to differents objects. If they are the same an Switch::TUnit::AssertionException is thrown.
@@ -146,7 +146,7 @@ namespace Switch {
       /// TUnit::Assert::AreNotSame(b, a); // test throws an AssertionException.
       /// @endcode
       template<typename TExpected, typename TActual>
-      static inline void AreNotSame(const TExpected& expected, const TActual& actual) {AreNotSame(expected, actual, "", CurrentInformation());}
+      static inline void AreNotSame(const TExpected& expected, const TActual& actual) {AreNotSame(expected, actual, "", Caller());}
       
       /// @brief Asserts that two objects do refer to differents objects. If they are the same an Switch::TUnit::AssertionException is thrown.
       /// @param expected the expected value.
@@ -161,42 +161,42 @@ namespace Switch {
       /// TUnit::Assert::AreNotSame(b, a, "User message..."); // test throws an AssertionException.
       /// @endcode
       template<typename TExpected, typename TActual>
-      static inline void AreNotSame(const TExpected& expected, const TActual& actual, const string& message) {AreNotSame(expected, actual, message, CurrentInformation());}
+      static inline void AreNotSame(const TExpected& expected, const TActual& actual, const string& message) {AreNotSame(expected, actual, message, Caller());}
       
       /// @brief Asserts that two objects do refer to differents objects. If they are the same an Switch::TUnit::AssertionException is thrown.
       /// @param expected the expected value.
       /// @param actual the actual value.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// int32 a = 24;
       /// int32& b = a;
       /// int32 c=  24;
-      /// TUnit::Assert::AreNotSame(c, a, _current_information); // test ok
-      /// TUnit::Assert::AreNotSame(b, a, _current_information); // test throws an AssertionException.
+      /// TUnit::Assert::AreNotSame(c, a, _caller); // test ok
+      /// TUnit::Assert::AreNotSame(b, a, _caller); // test throws an AssertionException.
       /// @endcode
       template<typename TExpected, typename TActual>
-      static inline void AreNotSame(const TExpected& expected, const TActual& actual, const CurrentInformation& currentInformation) {AreNotSame(expected, actual, "", currentInformation);}
+      static inline void AreNotSame(const TExpected& expected, const TActual& actual, const Caller& caller) {AreNotSame(expected, actual, "", caller);}
 
       /// @brief Asserts that two objects do refer to differents objects. If they are the same an Switch::TUnit::AssertionException is thrown.
       /// @param expected the expected value.
       /// @param actual the actual value.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// int32 a = 24;
       /// int32& b = a;
       /// int32 c=  24;
-      /// TUnit::Assert::AreNotSame(c, a, "User message...", _current_information); // test ok
-      /// TUnit::Assert::AreNotSame(b, a, "User message...", _current_information); // test throws an AssertionException.
+      /// TUnit::Assert::AreNotSame(c, a, "User message...", _caller); // test ok
+      /// TUnit::Assert::AreNotSame(b, a, "User message...", _caller); // test throws an AssertionException.
       /// @endcode
       template<typename TExpected, typename TActual>
-      static inline void AreNotSame(const TExpected& expected, const TActual& actual, const string& message, const CurrentInformation& currentInformation) {
+      static inline void AreNotSame(const TExpected& expected, const TActual& actual, const string& message, const Caller& caller) {
         if (&actual != &expected)
-          Succeed(message, currentInformation);
+          Succeed(message, caller);
         else
-          Fail(string::Format("Expected: not same as {0}{1}But was:  {2}", ValueToString(expected), System::Environment::NewLine, ValueToString(actual)), message, currentInformation);
+          Fail(string::Format("Expected: not same as {0}{1}But was:  {2}", ValueToString(expected), System::Environment::NewLine, ValueToString(actual)), message, caller);
       }
       
       /// @brief Asserts that two objects do refer to the same object. If they are the same an Switch::TUnit::AssertionException is thrown.
@@ -211,7 +211,7 @@ namespace Switch {
       /// TUnit::Assert::AretSame(c, a); // test throws an AssertionException.
       /// @endcode
       template<typename TExpected, typename TActual>
-      static inline void AreSame(const TExpected& expected, const TActual& actual) {AreSame(expected, actual, "", CurrentInformation());}
+      static inline void AreSame(const TExpected& expected, const TActual& actual) {AreSame(expected, actual, "", Caller());}
       
       /// @brief Asserts that two objects do refer to the same object. If they are the same an Switch::TUnit::AssertionException is thrown.
       /// @param expected the expected value.
@@ -226,42 +226,42 @@ namespace Switch {
       /// TUnit::Assert::AreSame(c, a, "User message..."); // test throws an AssertionException.
       /// @endcode
       template<typename TExpected, typename TActual>
-      static inline void AreSame(const TExpected& expected, const TActual& actual, const string& message) {AreSame(expected, actual, message, CurrentInformation());}
+      static inline void AreSame(const TExpected& expected, const TActual& actual, const string& message) {AreSame(expected, actual, message, Caller());}
       
       /// @brief Asserts that two objects do refer to the same object. If they are the same an Switch::TUnit::AssertionException is thrown.
       /// @param expected the expected value.
       /// @param actual the actual value.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// int32 a = 24;
       /// int32& b = a;
       /// int32 c=  24;
-      /// TUnit::Assert::AreSame(b, a, _current_information); // test ok
-      /// TUnit::Assert::AreSame(c, a, _current_information); // test throws an AssertionException.
+      /// TUnit::Assert::AreSame(b, a, _caller); // test ok
+      /// TUnit::Assert::AreSame(c, a, _caller); // test throws an AssertionException.
       /// @endcode
       template<typename TExpected, typename TActual>
-      static inline void AreSame(const TExpected& expected, const TActual& actual, const CurrentInformation& currentInformation) {AreSame(expected, actual, "", currentInformation);}
+      static inline void AreSame(const TExpected& expected, const TActual& actual, const Caller& caller) {AreSame(expected, actual, "", caller);}
       
       /// @brief Asserts that two objects do refer to the same object. If they are the same an Switch::TUnit::AssertionException is thrown.
       /// @param expected the expected value.
       /// @param actual the actual value.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// int32 a = 24;
       /// int32& b = a;
       /// int32 c=  24;
-      /// TUnit::Assert::AreSame(b, a, "User message...", _current_information); // test ok
-      /// TUnit::Assert::AreSame(c, a, "User message...", _current_information); // test throws an AssertionException.
+      /// TUnit::Assert::AreSame(b, a, "User message...", _caller); // test ok
+      /// TUnit::Assert::AreSame(c, a, "User message...", _caller); // test throws an AssertionException.
       /// @endcode
       template<typename TExpected, typename TActual>
-      static inline void AreSame(const TExpected& expected, const TActual& actual, const string& message, const CurrentInformation& currentInformation) {
+      static inline void AreSame(const TExpected& expected, const TActual& actual, const string& message, const Caller& caller) {
         if (&actual == &expected)
-          Succeed(message, currentInformation);
+          Succeed(message, caller);
         else
-          Fail(string::Format("Expected: same as {0}{1}But was:  {2}", ValueToString(expected), System::Environment::NewLine, ValueToString(actual)), message, currentInformation);
+          Fail(string::Format("Expected: same as {0}{1}But was:  {2}", ValueToString(expected), System::Environment::NewLine, ValueToString(actual)), message, caller);
       }
       
       /// @brief Verifies that collection contains an item. If they are not, then an Switch::TUnit::AssertionException is thrown.
@@ -274,7 +274,7 @@ namespace Switch {
       /// TUnit::Assert::Contains(4, a1); // test throws an AssertionException.
       /// @endcode
       template<typename TItem, typename TItemCollection>
-      static inline void Contains(const TItem& item, const System::Collections::Generic::ICollection<TItemCollection>& collection) {Contains(item, collection, "", CurrentInformation());}
+      static inline void Contains(const TItem& item, const System::Collections::Generic::ICollection<TItemCollection>& collection) {Contains(item, collection, "", Caller());}
       
       /// @brief Verifies that collection contains an item. If they are not, then an Switch::TUnit::AssertionException is thrown.
       /// @param item object to verify.
@@ -287,38 +287,38 @@ namespace Switch {
       /// TUnit::Assert::Contains(4, a1, "User message..."); // test throws an AssertionException.
       /// @endcode
       template<typename TItem, typename TItemCollection>
-      static inline void Contains(const TItem& item, const System::Collections::Generic::ICollection<TItemCollection>& collection, const string& message) {Contains(item, collection, message, CurrentInformation());}
+      static inline void Contains(const TItem& item, const System::Collections::Generic::ICollection<TItemCollection>& collection, const string& message) {Contains(item, collection, message, Caller());}
       
       /// @brief Verifies that collection contains an item. If they are not, then an Switch::TUnit::AssertionException is thrown.
       /// @param item object to verify.
       /// @param collection ICollection that contains object.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// Array<int> a1 = {0, 1, 2, 3};
-      /// TUnit::Assert::Contains(2, a1, _current_information); // test ok
-      /// TUnit::Assert::Contains(4, a1, _current_information); // test throws an AssertionException.
+      /// TUnit::Assert::Contains(2, a1, _caller); // test ok
+      /// TUnit::Assert::Contains(4, a1, _caller); // test throws an AssertionException.
       /// @endcode
       template<typename TItem, typename TItemCollection>
-      static inline void Contains(const TItem& item, const System::Collections::Generic::ICollection<TItemCollection>& collection, const CurrentInformation& currentInformation) {Contains(item, collection, "", currentInformation);}
+      static inline void Contains(const TItem& item, const System::Collections::Generic::ICollection<TItemCollection>& collection, const Caller& caller) {Contains(item, collection, "", caller);}
       
       /// @brief Verifies that collection contains an item. If they are not, then an Switch::TUnit::AssertionException is thrown.
       /// @param item object to verify.
       /// @param collection ICollection that contains object.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// Array<int> a1 = {0, 1, 2, 3};
-      /// TUnit::Assert::Contains(2, a1, "User message...", _current_information); // test ok
-      /// TUnit::Assert::Contains(4, a1, "User message...", _current_information); // test throws an AssertionException.
+      /// TUnit::Assert::Contains(2, a1, "User message...", _caller); // test ok
+      /// TUnit::Assert::Contains(4, a1, "User message...", _caller); // test throws an AssertionException.
       /// @endcode
       template<typename TItem, typename TItemCollection>
-      static inline void Contains(const TItem& item, const System::Collections::Generic::ICollection<TItemCollection>& collection, const string& message, const CurrentInformation& currentInformation) {
+      static inline void Contains(const TItem& item, const System::Collections::Generic::ICollection<TItemCollection>& collection, const string& message, const Caller& caller) {
         if (collection.Contains(item))
-          Succeed(message, currentInformation);
+          Succeed(message, caller);
         else
-          Fail(string::Format("Expected: collection containing {0}{1}But was:  < {2} >", ValueToString(item), System::Environment::NewLine, string::Join(", ", collection)), message, currentInformation);
+          Fail(string::Format("Expected: collection containing {0}{1}But was:  < {2} >", ValueToString(item), System::Environment::NewLine, string::Join(", ", collection)), message, caller);
       }
       
       /// @brief Verifies that the staement does not throw an exception.
@@ -329,7 +329,7 @@ namespace Switch {
       /// Assert::DoesNotThrows(_delegate {a[2];}); // test ok
       /// Assert::DoesNotThrows(_delegate {a[5];}); // test throws an AssertionException.
       /// @endcode
-      static inline void DoesNotThrows(const System::Delegate<void>& statement) {DoesNotThrows(statement, "", CurrentInformation());}
+      static inline void DoesNotThrows(const System::Delegate<void>& statement) {DoesNotThrows(statement, "", Caller());}
       
       /// @brief Verifies that the staement does not throw an exception.
       /// @param statement The statement that verify.
@@ -340,70 +340,70 @@ namespace Switch {
       /// Assert::DoesNotThrows(_delegate {a[2];}, "User message..."); // test ok
       /// Assert::DoesNotThrows(_delegate {a[5];}, "User message..."); // test throws an AssertionException.
       /// @endcode
-      static inline void DoesNotThrows(const System::Delegate<void>& statement, const string& message) {DoesNotThrows(statement, message, CurrentInformation());}
+      static inline void DoesNotThrows(const System::Delegate<void>& statement, const string& message) {DoesNotThrows(statement, message, Caller());}
       
       /// @brief Verifies that the staement does not throw an exception.
       /// @param statement The statement that verify.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// Array<int32> a = {1, 2 ,3, 4};
-      /// Assert::DoesNotThrows(_delegate {a[2];}, _current_information); // test ok
-      /// Assert::DoesNotThrows(_delegate {a[5];}, _current_information); // test throws an AssertionException.
+      /// Assert::DoesNotThrows(_delegate {a[2];}, _caller); // test ok
+      /// Assert::DoesNotThrows(_delegate {a[5];}, _caller); // test throws an AssertionException.
       /// @endcode
-      static inline void DoesNotThrows(const System::Delegate<void>& statement, const CurrentInformation& currentInformation) {DoesNotThrows(statement, "", currentInformation);}
+      static inline void DoesNotThrows(const System::Delegate<void>& statement, const Caller& caller) {DoesNotThrows(statement, "", caller);}
       
       /// @brief Verifies that the staement does not throw an exception.
       /// @param statement The statement that verify.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// Array<int32> a = {1, 2 ,3, 4};
-      /// Assert::DoesNotThrows(_delegate {a[2];}, "User message...", _current_information); // test ok
-      /// Assert::DoesNotThrows(_delegate {a[5];}, "User message...", _current_information); // test throws an AssertionException.
+      /// Assert::DoesNotThrows(_delegate {a[2];}, "User message...", _caller); // test ok
+      /// Assert::DoesNotThrows(_delegate {a[5];}, "User message...", _caller); // test throws an AssertionException.
       /// @endcode
-      static inline void DoesNotThrows(const System::Delegate<void>& statement, const string& message, const CurrentInformation& currentInformation) {
+      static inline void DoesNotThrows(const System::Delegate<void>& statement, const string& message, const Caller& caller) {
         try {
           statement();
-          Succeed(message, currentInformation);
+          Succeed(message, caller);
         } catch (const AssertionException&) {
           throw;
         } catch(const System::Exception& exception) {
-          Fail(string::Format("Expected: No Exception to be thrown{0}But was:  <{1}>", System::Environment::NewLine, exception.GetType().FullName()), message, currentInformation);
+          Fail(string::Format("Expected: No Exception to be thrown{0}But was:  <{1}>", System::Environment::NewLine, exception.GetType().FullName()), message, caller);
         } catch(...) {
-          Fail(string::Format("Expected: No Exception to be thrown{0}But was:  <exception>", System::Environment::NewLine), message, currentInformation);
+          Fail(string::Format("Expected: No Exception to be thrown{0}But was:  <exception>", System::Environment::NewLine), message, caller);
         }
       }
 
       /// @brief The Equals method throws an Switch::TUnit::AssertionException. This is done to make sure there is no mistake by calling this function.
-      static inline bool Equals(const Object&, const Object&) { throw AssertionException(_current_information); }
+      static inline bool Equals(const Object&, const Object&) { throw AssertionException(_caller); }
 
       /// @brief Throws an Switch::TUnit::AssertionException. This is used by the other Assert functions.
-      static inline void Fail() {Fail("", "", CurrentInformation());}
+      static inline void Fail() {Fail("", "", Caller());}
       
       /// @brief Throws an Switch::TUnit::AssertionException. This is used by the other Assert functions.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      static inline void Fail(const string& message) {Fail("", message, CurrentInformation());}
+      static inline void Fail(const string& message) {Fail("", message, Caller());}
       
       /// @brief Throws an Switch::TUnit::AssertionException. This is used by the other Assert functions.
-      /// @param currentInformation Contains information about current file and current line.
-      static inline void Fail(const CurrentInformation& currentInformation) {Fail("", "", currentInformation);}
-      
-      /// @brief Throws an Switch::TUnit::AssertionException. This is used by the other Assert functions.
-      /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      /// @param currentInformation Contains information about current file and current line.
-      static inline void Fail(const string& message, const CurrentInformation& currentInformation) {Fail("", message, currentInformation);}
+      /// @param caller Contains information about current file and current line.
+      static inline void Fail(const Caller& caller) {Fail("", "", caller);}
       
       /// @brief Throws an Switch::TUnit::AssertionException. This is used by the other Assert functions.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      /// @param currentInformation Contains information about current file and current line.
-      static inline void Fail(const string& error, const string& message, const CurrentInformation& currentInformation) {
+      /// @param caller Contains information about current file and current line.
+      static inline void Fail(const string& message, const Caller& caller) {Fail("", message, caller);}
+      
+      /// @brief Throws an Switch::TUnit::AssertionException. This is used by the other Assert functions.
+      /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
+      /// @param caller Contains information about current file and current line.
+      static inline void Fail(const string& error, const string& message, const Caller& caller) {
         if (!string::IsNullOrEmpty(message))
           System::Console::WriteLine(message);
-        //::testing::internal::AssertHelper(::testing::TestPartResult::kFatalFailure, currentInformation.FilePath().Data, currentInformation.Line, error.Data) = ::testing::Message(message.Data);
-        ::testing::internal::AssertHelper(::testing::TestPartResult::kFatalFailure, currentInformation.FilePath().Data, currentInformation.LineNumber, error.Data) = ::testing::Message();
-        throw AssertionException(message, CurrentInformation(currentInformation.FilePath, currentInformation.LineNumber));
+        //::testing::internal::AssertHelper(::testing::TestPartResult::kFatalFailure, caller.FilePath().Data, caller.Line, error.Data) = ::testing::Message(message.Data);
+        ::testing::internal::AssertHelper(::testing::TestPartResult::kFatalFailure, caller.FilePath().Data, caller.LineNumber, error.Data) = ::testing::Message();
+        throw AssertionException(message, Caller(caller.FilePath, caller.LineNumber));
       }
       
       /// @brief Asserts that a condition is false. If the condition is true the method throws an Switch::TUnit::AssertionException.
@@ -415,7 +415,7 @@ namespace Switch {
       /// Assert::False(String::IsNullOrEmpty(s1)); // test ok
       /// Assert::False(String::IsNullOrEmpty(s2)); // test throws an AssertionException.
       /// @endcode
-      static inline void False(bool condition) {return IsFalse(condition, "", CurrentInformation());}
+      static inline void False(bool condition) {return IsFalse(condition, "", Caller());}
       
       /// @brief Asserts that a condition is false. If the condition is true the method throws an Switch::TUnit::AssertionException.
       /// @param condition The condition to check is false.
@@ -427,32 +427,32 @@ namespace Switch {
       /// Assert::False(String::IsNullOrEmpty(s1), "User message..."); // test ok
       /// Assert::False(String::IsNullOrEmpty(s2), "User message..."); // test throws an AssertionException.
       /// @endcode
-      static inline void False(bool condition, const string& message) {IsFalse(condition, message, CurrentInformation());}
+      static inline void False(bool condition, const string& message) {IsFalse(condition, message, Caller());}
       
       /// @brief Asserts that a condition is false. If the condition is true the method throws an Switch::TUnit::AssertionException.
       /// @param condition The condition to check is false.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// string s1 = "Anything";
       /// string s2;
-      /// Assert::False(String::IsNullOrEmpty(s1), _current_information); // test ok
-      /// Assert::False(String::IsNullOrEmpty(s2), _current_information); // test throws an AssertionException.
+      /// Assert::False(String::IsNullOrEmpty(s1), _caller); // test ok
+      /// Assert::False(String::IsNullOrEmpty(s2), _caller); // test throws an AssertionException.
       /// @endcode
-      static inline void False(bool condition, const CurrentInformation& currentInformation) {IsFalse(condition, "", currentInformation);}
+      static inline void False(bool condition, const Caller& caller) {IsFalse(condition, "", caller);}
       
       /// @brief Asserts that a condition is false. If the condition is true the method throws an Switch::TUnit::AssertionException.
       /// @param condition The condition to check is false.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// string s1 = "Anything";
       /// string s2;
-      /// Assert::False(String::IsNullOrEmpty(s1), "User message...", _current_information); // test ok
-      /// Assert::False(String::IsNullOrEmpty(s2), "User message...", _current_information); // test throws an AssertionException.
+      /// Assert::False(String::IsNullOrEmpty(s1), "User message...", _caller); // test ok
+      /// Assert::False(String::IsNullOrEmpty(s2), "User message...", _caller); // test throws an AssertionException.
       /// @endcode
-      static inline void False(bool condition, const string& message, const CurrentInformation& currentInformation) {IsFalse(condition, message, currentInformation);}
+      static inline void False(bool condition, const string& message, const Caller& caller) {IsFalse(condition, message, caller);}
       
       /// @brief Verifies that the first value is greater than the second value. If they are not, then an Switch::TUnit::AssertionException is thrown.
       /// @param val1 the first value.
@@ -463,7 +463,7 @@ namespace Switch {
       /// TUnit::Assert::Greater(24, 48); // test throws an AssertionException.
       /// @endcode
       template<typename TExpected, typename TActual>
-      static inline void Greater(const TExpected& val1, const TActual& val2) {Greater(val1, val2, "", CurrentInformation());}
+      static inline void Greater(const TExpected& val1, const TActual& val2) {Greater(val1, val2, "", Caller());}
       
       /// @brief Verifies that the first value is greater than the second value. If they are not, then an Switch::TUnit::AssertionException is thrown.
       /// @param val1 the first value.
@@ -475,36 +475,36 @@ namespace Switch {
       /// TUnit::Assert::Greater(24, 48, "User message..."); // test throws an AssertionException.
       /// @endcode
       template<typename TValue1, typename TValue2>
-      static inline void Greater(const TValue1& val1, const TValue2& val2, const string& message) {Greater(val1, val2, message, CurrentInformation());}
+      static inline void Greater(const TValue1& val1, const TValue2& val2, const string& message) {Greater(val1, val2, message, Caller());}
       
       /// @brief Verifies that the first value is greater than the second value. If they are not, then an Switch::TUnit::AssertionException is thrown.
       /// @param val1 the first value.
       /// @param val2 the second value.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// TUnit::Assert::Greater(24, 12, _current_information); // test ok
-      /// TUnit::Assert::Greater(24, 48, _current_information); // test throws an AssertionException.
+      /// TUnit::Assert::Greater(24, 12, _caller); // test ok
+      /// TUnit::Assert::Greater(24, 48, _caller); // test throws an AssertionException.
       /// @endcode
       template<typename TValue1, typename TValue2>
-      static inline void Greater(const TValue1& val1, const TValue2& val2, const CurrentInformation& currentInformation) {Greater(val1, val2, "", currentInformation);}
+      static inline void Greater(const TValue1& val1, const TValue2& val2, const Caller& caller) {Greater(val1, val2, "", caller);}
       
       /// @brief Verifies that the first value is greater than the second value. If they are not, then an Switch::TUnit::AssertionException is thrown.
       /// @param val1 the first value.
       /// @param val2 the second value.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// TUnit::Assert::Greater(24, 12, "User message...", _current_information); // test ok
-      /// TUnit::Assert::Greater(24, 48, "User message...", _current_information); // test throws an AssertionException.
+      /// TUnit::Assert::Greater(24, 12, "User message...", _caller); // test ok
+      /// TUnit::Assert::Greater(24, 48, "User message...", _caller); // test throws an AssertionException.
       /// @endcode
       template<typename TValue1, typename TValue2>
-      static inline void Greater(const TValue1& val1, const TValue2& val2, const string& message, const CurrentInformation& currentInformation) {
+      static inline void Greater(const TValue1& val1, const TValue2& val2, const string& message, const Caller& caller) {
         if (val1 > val2)
-          Succeed(message, currentInformation);
+          Succeed(message, caller);
         else
-          Fail(string::Format("Expected: greater than {0}{1}But was:  {2}", ValueToString(val2), System::Environment::NewLine, ValueToString(val1)), message, currentInformation);
+          Fail(string::Format("Expected: greater than {0}{1}But was:  {2}", ValueToString(val2), System::Environment::NewLine, ValueToString(val1)), message, caller);
       }
       
       /// @brief Verifies that the first value is greater or equal than the second value. If they are not, then an Switch::TUnit::AssertionException is thrown.
@@ -517,7 +517,7 @@ namespace Switch {
       /// TUnit::Assert::GreaterOrEqual(24, 48); // test throws an AssertionException.
       /// @endcode
       template<typename TValue1, typename TValue2>
-      static inline void GreaterOrEqual(const TValue1& val1, const TValue2& val2) {GreaterOrEqual(val1, val2, "", CurrentInformation());}
+      static inline void GreaterOrEqual(const TValue1& val1, const TValue2& val2) {GreaterOrEqual(val1, val2, "", Caller());}
       
       /// @brief Verifies that the first value is greater or equal than the second value. If they are not, then an Switch::TUnit::AssertionException is thrown.
       /// @param val1 the first value.
@@ -530,38 +530,38 @@ namespace Switch {
       /// TUnit::Assert::GreaterOrEqual(24, 48, "User message..."); // test throws an AssertionException.
       /// @endcode
       template<typename TValue1, typename TValue2>
-      static inline void GreaterOrEqual(const TValue1& val1, const TValue2& val2, const string& message) {GreaterOrEqual(val1, val2, message, CurrentInformation());}
+      static inline void GreaterOrEqual(const TValue1& val1, const TValue2& val2, const string& message) {GreaterOrEqual(val1, val2, message, Caller());}
       
       /// @brief Verifies that the first value is greater or equal than the second value. If they are not, then an Switch::TUnit::AssertionException is thrown.
       /// @param val1 the first value.
       /// @param val2 the second value.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// TUnit::Assert::GreaterOrEqual(24, 12, _current_information); // test ok
-      /// TUnit::Assert::GreaterOrEqual(24, 24, _current_information); // test ok
-      /// TUnit::Assert::GreaterOrEqual(24, 48, _current_information); // test throws an AssertionException.
+      /// TUnit::Assert::GreaterOrEqual(24, 12, _caller); // test ok
+      /// TUnit::Assert::GreaterOrEqual(24, 24, _caller); // test ok
+      /// TUnit::Assert::GreaterOrEqual(24, 48, _caller); // test throws an AssertionException.
       /// @endcode
       template<typename TValue1, typename TValue2>
-      static inline void GreaterOrEqual(const TValue1& val1, const TValue2& val2, const CurrentInformation& currentInformation) {GreaterOrEqual(val1, val2, "", currentInformation);}
+      static inline void GreaterOrEqual(const TValue1& val1, const TValue2& val2, const Caller& caller) {GreaterOrEqual(val1, val2, "", caller);}
       
       /// @brief Verifies that the first value is greater or equal than the second value. If they are not, then an Switch::TUnit::AssertionException is thrown.
       /// @param val1 the first value.
       /// @param val2 the second value.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// TUnit::Assert::GreaterOrEqual(24, 12, "User message...", _current_information); // test ok
-      /// TUnit::Assert::GreaterOrEqual(24, 24, "User message...", _current_information); // test ok
-      /// TUnit::Assert::GreaterOrEqual(24, 48, "User message...", _current_information); // test throws an AssertionException.
+      /// TUnit::Assert::GreaterOrEqual(24, 12, "User message...", _caller); // test ok
+      /// TUnit::Assert::GreaterOrEqual(24, 24, "User message...", _caller); // test ok
+      /// TUnit::Assert::GreaterOrEqual(24, 48, "User message...", _caller); // test throws an AssertionException.
       /// @endcode
       template<typename TValue1, typename TValue2>
-      static inline void GreaterOrEqual(const TValue1& val1, const TValue2& val2, const string& message, const CurrentInformation& currentInformation) {
+      static inline void GreaterOrEqual(const TValue1& val1, const TValue2& val2, const string& message, const Caller& caller) {
         if (val1 >= val2)
-          Succeed(message, currentInformation);
+          Succeed(message, caller);
         else
-          Fail(string::Format("Expected: greater than or equal to {0}{1}But was:  {2}", ValueToString(val2), System::Environment::NewLine, ValueToString(val1)), message, currentInformation);
+          Fail(string::Format("Expected: greater than or equal to {0}{1}But was:  {2}", ValueToString(val2), System::Environment::NewLine, ValueToString(val1)), message, caller);
       }
       
       /// @brief Asserts that a value is empty. If the value is not Empty the method throws an Switch::TUnit::AssertionException.
@@ -573,7 +573,7 @@ namespace Switch {
       /// Assert::IsEmpty(v1); // test ok
       /// Assert::IsEmpty(v2); // test throws an AssertionException.
       /// @endcode
-      static inline void IsEmpty(const System::String& value) {IsEmpty(value, "", CurrentInformation());}
+      static inline void IsEmpty(const System::String& value) {IsEmpty(value, "", Caller());}
       
       /// @brief Asserts that a value is empty. If the value is not Empty the method throws an Switch::TUnit::AssertionException.
       /// @param value The value to check is empty.
@@ -585,36 +585,36 @@ namespace Switch {
       /// Assert::IsEmpty(v1, "User message..."); // test ok
       /// Assert::IsEmpty(v2, "User message..."); // test throws an AssertionException.
       /// @endcode
-      static inline void IsEmpty(const System::String& value, const string& message) {IsEmpty(value, message, CurrentInformation());}
+      static inline void IsEmpty(const System::String& value, const string& message) {IsEmpty(value, message, Caller());}
       
       /// @brief Asserts that a value is empty. If the value is not Empty the method throws an Switch::TUnit::AssertionException.
       /// @param value The value to check is empty.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// string v1;
       /// string v2 = "Not empty";
-      /// Assert::IsEmpty(v1, _current_information); // test ok
-      /// Assert::IsEmpty(v2, _current_information); // test throws an AssertionException.
+      /// Assert::IsEmpty(v1, _caller); // test ok
+      /// Assert::IsEmpty(v2, _caller); // test throws an AssertionException.
       /// @endcode
-      static inline void IsEmpty(const string& value, const CurrentInformation& currentInformation) {IsEmpty(value, "", currentInformation);}
+      static inline void IsEmpty(const string& value, const Caller& caller) {IsEmpty(value, "", caller);}
       
       /// @brief Asserts that a value is empty. If the value is not Empty the method throws an Switch::TUnit::AssertionException.
       /// @param value The value to check is empty.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// string v1;
       /// string v2 = "Not empty";
-      /// Assert::IsEmpty(v1, "User message...", _current_information); // test ok
-      /// Assert::IsEmpty(v2, "User message...", _current_information); // test throws an AssertionException.
+      /// Assert::IsEmpty(v1, "User message...", _caller); // test ok
+      /// Assert::IsEmpty(v2, "User message...", _caller); // test throws an AssertionException.
       /// @endcode
-      static inline void IsEmpty(const string& value, const string& message, const CurrentInformation& currentInformation) {
+      static inline void IsEmpty(const string& value, const string& message, const Caller& caller) {
         if (string::IsNullOrEmpty(value))
-          Succeed(message, currentInformation);
+          Succeed(message, caller);
         else
-          Fail(string::Format("Expected: <Empty>{0}But was:  {1}", System::Environment::NewLine, ValueToString(value)), message, currentInformation);
+          Fail(string::Format("Expected: <Empty>{0}But was:  {1}", System::Environment::NewLine, ValueToString(value)), message, caller);
       }
       
       /// @brief Asserts that a value is empty. If the value is not Empty the method throws an Switch::TUnit::AssertionException.
@@ -627,7 +627,7 @@ namespace Switch {
       /// Assert::IsEmpty(c2); // test throws an AssertionException.
       /// @endcode
       template<typename TItem>
-      static inline void IsEmpty(const System::Collections::Generic::IEnumerable<TItem>& collection) {IsEmpty(collection, "", CurrentInformation());}
+      static inline void IsEmpty(const System::Collections::Generic::IEnumerable<TItem>& collection) {IsEmpty(collection, "", Caller());}
       
       /// @brief Asserts that a value is empty. If the value is not Empty the method throws an Switch::TUnit::AssertionException.
       /// @param value The value to check is empty.
@@ -640,38 +640,38 @@ namespace Switch {
       /// Assert::IsEmpty(c2, "User message..."); // test throws an AssertionException.
       /// @endcode
       template<typename TItem>
-      static inline void IsEmpty(const System::Collections::Generic::IEnumerable<TItem>& collection, const string& message) {IsEmpty(collection, message, CurrentInformation());}
+      static inline void IsEmpty(const System::Collections::Generic::IEnumerable<TItem>& collection, const string& message) {IsEmpty(collection, message, Caller());}
       
       /// @brief Asserts that a value is empty. If the value is not Empty the method throws an Switch::TUnit::AssertionException.
       /// @param value The value to check is empty.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// Array<int> c1;
       /// Array<int> c2 = {0, 1, 2};
-      /// Assert::IsEmpty(c1, _current_information); // test ok
-      /// Assert::IsEmpty(c2, _current_information); // test throws an AssertionException.
+      /// Assert::IsEmpty(c1, _caller); // test ok
+      /// Assert::IsEmpty(c2, _caller); // test throws an AssertionException.
       /// @endcode
       template<typename TItem>
-      static inline void IsEmpty(const System::Collections::Generic::IEnumerable<TItem>& collection, const CurrentInformation& currentInformation) {IsEmpty(collection, "", currentInformation);}
+      static inline void IsEmpty(const System::Collections::Generic::IEnumerable<TItem>& collection, const Caller& caller) {IsEmpty(collection, "", caller);}
       
       /// @brief Asserts that a value is empty. If the value is not Empty the method throws an Switch::TUnit::AssertionException.
       /// @param value The value to check is empty.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// Array<int> c1;
       /// Array<int> c2 = {0, 1, 2};
-      /// Assert::IsEmpty(c1, "User message...", _current_information); // test ok
-      /// Assert::IsEmpty(c2, "User message...", _current_information); // test throws an AssertionException.
+      /// Assert::IsEmpty(c1, "User message...", _caller); // test ok
+      /// Assert::IsEmpty(c2, "User message...", _caller); // test throws an AssertionException.
       /// @endcode
       template<typename TItem>
-      static inline void IsEmpty(const System::Collections::Generic::IEnumerable<TItem>& collection, const string& message, const CurrentInformation& currentInformation) {
+      static inline void IsEmpty(const System::Collections::Generic::IEnumerable<TItem>& collection, const string& message, const Caller& caller) {
         if (collection.GetEnumerator().MoveNext() == false)
-          Succeed(message, currentInformation);
+          Succeed(message, caller);
         else
-          Fail(string::Format("Expected: <empty>{0}But was:  < {1} >", System::Environment::NewLine, string::Join(", ", collection)), message, currentInformation);
+          Fail(string::Format("Expected: <empty>{0}But was:  < {1} >", System::Environment::NewLine, string::Join(", ", collection)), message, caller);
       }
       
       /// @brief Asserts that a condition is false. If the condition is true the method throws an Switch::TUnit::AssertionException.
@@ -683,7 +683,7 @@ namespace Switch {
       /// Assert::IsFalse(String::IsNullOrEmpty(s1)); // test ok
       /// Assert::IsFalse(String::IsNullOrEmpty(s2)); // test throws an AssertionException.
       /// @endcode
-      static inline void IsFalse(bool condition) {return IsFalse(condition, "", CurrentInformation());}
+      static inline void IsFalse(bool condition) {return IsFalse(condition, "", Caller());}
       
       /// @brief Asserts that a condition is false. If the condition is true the method throws an Switch::TUnit::AssertionException.
       /// @param condition The condition to check is false.
@@ -695,36 +695,36 @@ namespace Switch {
       /// Assert::IsFalse(String::IsNullOrEmpty(s1), "User message..."); // test ok
       /// Assert::IsFalse(String::IsNullOrEmpty(s2), "User message..."); // test throws an AssertionException.
       /// @endcode
-      static inline void IsFalse(bool condition, const string& message) {IsFalse(condition, message, CurrentInformation());}
+      static inline void IsFalse(bool condition, const string& message) {IsFalse(condition, message, Caller());}
       
       /// @brief Asserts that a condition is false. If the condition is true the method throws an Switch::TUnit::AssertionException.
       /// @param condition The condition to check is false.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// string s1 = "Anything";
       /// string s2;
-      /// Assert::IsFalse(String::IsNullOrEmpty(s1), _current_information); // test ok
-      /// Assert::IsFalse(String::IsNullOrEmpty(s2), _current_information); // test throws an AssertionException.
+      /// Assert::IsFalse(String::IsNullOrEmpty(s1), _caller); // test ok
+      /// Assert::IsFalse(String::IsNullOrEmpty(s2), _caller); // test throws an AssertionException.
       /// @endcode
-      static inline void IsFalse(bool condition, const CurrentInformation& currentInformation) {IsFalse(condition, "", currentInformation);}
+      static inline void IsFalse(bool condition, const Caller& caller) {IsFalse(condition, "", caller);}
       
       /// @brief Asserts that a condition is false. If the condition is true the method throws an Switch::TUnit::AssertionException.
       /// @param condition The condition to check is false.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// string s1 = "Anything";
       /// string s2;
-      /// Assert::IsFalse(String::IsNullOrEmpty(s1), "User message...", _current_information); // test ok
-      /// Assert::IsFalse(String::IsNullOrEmpty(s2), "User message...", _current_information); // test throws an AssertionException.
+      /// Assert::IsFalse(String::IsNullOrEmpty(s1), "User message...", _caller); // test ok
+      /// Assert::IsFalse(String::IsNullOrEmpty(s2), "User message...", _caller); // test throws an AssertionException.
       /// @endcode
-      static inline void IsFalse(bool condition, const string& message, const CurrentInformation& currentInformation) {
+      static inline void IsFalse(bool condition, const string& message, const Caller& caller) {
         if (condition == false)
-          Succeed(message, currentInformation);
+          Succeed(message, caller);
         else
-          Fail(string::Format("Expected: False{0}But was:  True", System::Environment::NewLine), message, currentInformation);
+          Fail(string::Format("Expected: False{0}But was:  True", System::Environment::NewLine), message, caller);
       }
       
       /// @brief Verify that an object is of the type supplied or a derived type. If they are not, then an Switch::TUnit::AssertionException is thrown.
@@ -737,7 +737,7 @@ namespace Switch {
       /// TUnit::Assert::IsInstanceOf<Int32>(str); // test throws an AssertionException.
       /// @endcode
       template<typename TT, typename TValue>
-      static inline void IsInstanceOf(const TValue& value) {IsInstanceOf<TT>(value, "", CurrentInformation());}
+      static inline void IsInstanceOf(const TValue& value) {IsInstanceOf<TT>(value, "", Caller());}
       
       /// @brief Verify that an object is of the type supplied or a derived type. If they are not, then an Switch::TUnit::AssertionException is thrown.
       /// @param value The object to verify
@@ -750,11 +750,11 @@ namespace Switch {
       /// TUnit::Assert::IsInstanceOf<Int32>(str); // test throws an AssertionException.
       /// @endcode
       template<typename TT, typename TValue>
-      static inline void IsInstanceOf(const TValue& value, const string& message) {IsInstanceOf<TT>(value, message, CurrentInformation());}
+      static inline void IsInstanceOf(const TValue& value, const string& message) {IsInstanceOf<TT>(value, message, Caller());}
       
       /// @brief Verify that an object is of the type supplied or a derived type. If they are not, then an Switch::TUnit::AssertionException is thrown.
       /// @param value The object to verify
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// string str;
@@ -763,12 +763,12 @@ namespace Switch {
       /// TUnit::Assert::IsInstanceOf<Int32>(str); // test throws an AssertionException.
       /// @endcode
       template<typename TT, typename TValue>
-      static inline void IsInstanceOf(const TValue& value, const CurrentInformation& currentInformation) {IsInstanceOf<TT>(value, "", currentInformation);}
+      static inline void IsInstanceOf(const TValue& value, const Caller& caller) {IsInstanceOf<TT>(value, "", caller);}
       
       /// @brief Verify that an object is of the type supplied or a derived type. If they are not, then an Switch::TUnit::AssertionException is thrown.
       /// @param value The object to verify
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// string str;
@@ -777,11 +777,11 @@ namespace Switch {
       /// TUnit::Assert::IsInstanceOf<Int32>(str); // test throws an AssertionException.
       /// @endcode
       template<typename TT, typename TValue>
-      static inline void IsInstanceOf(const TValue& value, const string& message, const CurrentInformation& currentInformation) {
+      static inline void IsInstanceOf(const TValue& value, const string& message, const Caller& caller) {
         if (is<TT>(value))
-          Succeed(message, currentInformation);
+          Succeed(message, caller);
         else
-          Fail(string::Format("Expected: instance of <{0}>{1}But was:  <{2}>", _typeof(value), System::Environment::NewLine, _typeof<TT>()), message, currentInformation);
+          Fail(string::Format("Expected: instance of <{0}>{1}But was:  <{2}>", _typeof(value), System::Environment::NewLine, _typeof<TT>()), message, caller);
       }
       
       /// @brief Verify that an object is of the type supplied or a derived type. If they are not, then an Switch::TUnit::AssertionException is thrown.
@@ -794,7 +794,7 @@ namespace Switch {
       /// TUnit::Assert::IsInstanceOfType<Int32>(str); // test throws an AssertionException.
       /// @endcode
       template<typename TT, typename TValue>
-      static inline void IsInstanceOfType(const TValue& value) {IsInstanceOf<TT>(value, "", CurrentInformation());}
+      static inline void IsInstanceOfType(const TValue& value) {IsInstanceOf<TT>(value, "", Caller());}
       
       /// @brief Verify that an object is of the type supplied or a derived type. If they are not, then an Switch::TUnit::AssertionException is thrown.
       /// @param value The object to verify
@@ -807,11 +807,11 @@ namespace Switch {
       /// TUnit::Assert::IsInstanceOfType<Int32>(str); // test throws an AssertionException.
       /// @endcode
       template<typename TT, typename TValue>
-      static inline void IsInstanceOfType(const TValue& value, const string& message) {IsInstanceOf<TT>(value, message, CurrentInformation());}
+      static inline void IsInstanceOfType(const TValue& value, const string& message) {IsInstanceOf<TT>(value, message, Caller());}
       
       /// @brief Verify that an object is of the type supplied or a derived type. If they are not, then an Switch::TUnit::AssertionException is thrown.
       /// @param value The object to verify
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// string str;
@@ -820,12 +820,12 @@ namespace Switch {
       /// TUnit::Assert::IsInstanceOfType<Int32>(str); // test throws an AssertionException.
       /// @endcode
       template<typename TT, typename TValue>
-      static inline void IsInstanceOfType(const TValue& value, const CurrentInformation& currentInformation) {IsInstanceOf<TT>(value, "", currentInformation);}
+      static inline void IsInstanceOfType(const TValue& value, const Caller& caller) {IsInstanceOf<TT>(value, "", caller);}
       
       /// @brief Verify that an object is of the type supplied or a derived type. If they are not, then an Switch::TUnit::AssertionException is thrown.
       /// @param value The object to verify
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// string str;
@@ -834,7 +834,7 @@ namespace Switch {
       /// TUnit::Assert::IsInstanceOfType<Int32>(str); // test throws an AssertionException.
       /// @endcode
       template<typename TT, typename TValue>
-      static inline void IsInstanceOfType(const TValue& value, const string& message, const CurrentInformation& currentInformation) {IsInstanceOf<TT, TValue>(value, message, currentInformation);}
+      static inline void IsInstanceOfType(const TValue& value, const string& message, const Caller& caller) {IsInstanceOf<TT, TValue>(value, message, caller);}
       
       /// @brief Asserts that a value is NaN. If the value is not NaN the method throws an Switch::TUnit::AssertionException.
       /// @param value The value to check is NaN.
@@ -845,7 +845,7 @@ namespace Switch {
       /// Assert::IsNaN(v1); // test ok
       /// Assert::IsNaN(v2); // test throws an AssertionException.
       /// @endcode
-      static inline void IsNaN(double value) {IsNaN(value, "", CurrentInformation());}
+      static inline void IsNaN(double value) {IsNaN(value, "", Caller());}
       
       /// @brief Asserts that a value is NaN. If the value is not NaN the method throws an Switch::TUnit::AssertionException.
       /// @param value The value to check is NaN.
@@ -857,36 +857,36 @@ namespace Switch {
       /// Assert::IsNaN(v1, "User message..."); // test ok
       /// Assert::IsNaN(v2, "User message..."); // test throws an AssertionException.
       /// @endcode
-      static inline void IsNaN(double value, const string& message) {IsNaN(value, message, CurrentInformation());}
+      static inline void IsNaN(double value, const string& message) {IsNaN(value, message, Caller());}
       
       /// @brief Asserts that a value is NaN. If the value is not NaN the method throws an Switch::TUnit::AssertionException.
       /// @param value The value to check is NaN.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// double v1 = Double::NaN;
       /// double v2 = Math::PI;
-      /// Assert::IsNaN(v1, _current_information); // test ok
-      /// Assert::IsNaN(v2, _current_information); // test throws an AssertionException.
+      /// Assert::IsNaN(v1, _caller); // test ok
+      /// Assert::IsNaN(v2, _caller); // test throws an AssertionException.
       /// @endcode
-      static inline void IsNaN(double value, const CurrentInformation& currentInformation) {IsNaN(value, "", currentInformation);}
+      static inline void IsNaN(double value, const Caller& caller) {IsNaN(value, "", caller);}
       
       /// @brief Asserts that a value is NaN. If the value is not NaN the method throws an Switch::TUnit::AssertionException.
       /// @param value The value to check is NaN.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// double v1 = Double::NaN;
       /// double v2 = Math::PI;
-      /// Assert::IsNaN(v1, "User message...", _current_information); // test ok
-      /// Assert::IsNaN(v2, "User message...", _current_information); // test throws an AssertionException.
+      /// Assert::IsNaN(v1, "User message...", _caller); // test ok
+      /// Assert::IsNaN(v2, "User message...", _caller); // test throws an AssertionException.
       /// @endcode
-      static inline void IsNaN(double value, const string& message, const CurrentInformation& currentInformation) {
+      static inline void IsNaN(double value, const string& message, const Caller& caller) {
         if (System::Double::IsNaN(value))
-          Succeed(message, currentInformation);
+          Succeed(message, caller);
         else
-          Fail(string::Format("Expected: NaN{0}But was:  {1}", System::Environment::NewLine, ValueToString(value)), message, currentInformation);
+          Fail(string::Format("Expected: NaN{0}But was:  {1}", System::Environment::NewLine, ValueToString(value)), message, caller);
       }
       
       /// @brief Asserts that a value is NaN. If the value is not NaN the method throws an Switch::TUnit::AssertionException.
@@ -898,7 +898,7 @@ namespace Switch {
       /// Assert::IsNaN(v1); // test ok
       /// Assert::IsNaN(v2); // test throws an AssertionException.
       /// @endcode
-      static inline void IsNaN(float value) {IsNaN(value, "", CurrentInformation());}
+      static inline void IsNaN(float value) {IsNaN(value, "", Caller());}
       
       /// @brief Asserts that a value is NaN. If the value is not NaN the method throws an Switch::TUnit::AssertionException.
       /// @param value The value to check is NaN.
@@ -910,36 +910,36 @@ namespace Switch {
       /// Assert::IsNaN(v1, "User message..."); // test ok
       /// Assert::IsNaN(v2, "User message..."); // test throws an AssertionException.
       /// @endcode
-      static inline void IsNaN(float value, const string& message) {IsNaN(value, message, CurrentInformation());}
+      static inline void IsNaN(float value, const string& message) {IsNaN(value, message, Caller());}
       
       /// @brief Asserts that a value is NaN. If the value is not NaN the method throws an Switch::TUnit::AssertionException.
       /// @param value The value to check is NaN.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// float v1 = Single::NaN;
       /// float v2 = Math::PI;
-      /// Assert::IsNaN(v1, _current_information); // test ok
-      /// Assert::IsNaN(v2, _current_information); // test throws an AssertionException.
+      /// Assert::IsNaN(v1, _caller); // test ok
+      /// Assert::IsNaN(v2, _caller); // test throws an AssertionException.
       /// @endcode
-      static inline void IsNaN(float value, const CurrentInformation& currentInformation) {IsNaN(value, "", currentInformation);}
+      static inline void IsNaN(float value, const Caller& caller) {IsNaN(value, "", caller);}
       
       /// @brief Asserts that a value is NaN. If the value is not NaN the method throws an Switch::TUnit::AssertionException.
       /// @param value The value to check is NaN.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// float v1 = Single::NaN;
       /// float v2 = Math::PI;
-      /// Assert::IsNaN(v1, "User message...", _current_information); // test ok
-      /// Assert::IsNaN(v2, "User message...", _current_information); // test throws an AssertionException.
+      /// Assert::IsNaN(v1, "User message...", _caller); // test ok
+      /// Assert::IsNaN(v2, "User message...", _caller); // test throws an AssertionException.
       /// @endcode
-      static inline void IsNaN(float value, const string& message, const CurrentInformation& currentInformation) {
+      static inline void IsNaN(float value, const string& message, const Caller& caller) {
         if (System::Double::IsNaN(value))
-          Succeed(message, currentInformation);
+          Succeed(message, caller);
         else
-          Fail(string::Format("Expected: NaN{0}But was:  {1}", System::Environment::NewLine, ValueToString(value)), message, currentInformation);
+          Fail(string::Format("Expected: NaN{0}But was:  {1}", System::Environment::NewLine, ValueToString(value)), message, caller);
       }
       
       /// @brief Asserts that a value is empty. If the value is not Empty the method throws an Switch::TUnit::AssertionException.
@@ -951,7 +951,7 @@ namespace Switch {
       /// Assert::IsNotEmpty(v1); // test ok
       /// Assert::IsNotEmpty(v2); // test throws an AssertionException.
       /// @endcode
-      static inline void IsNotEmpty(const System::String& value) {IsNotEmpty(value, "", CurrentInformation());}
+      static inline void IsNotEmpty(const System::String& value) {IsNotEmpty(value, "", Caller());}
       
       /// @brief Asserts that a value is empty. If the value is not Empty the method throws an Switch::TUnit::AssertionException.
       /// @param value The value to check is empty.
@@ -963,36 +963,36 @@ namespace Switch {
       /// Assert::IsNotEmpty(v1, "User message..."); // test ok
       /// Assert::IsNotEmpty(v2, "User message..."); // test throws an AssertionException.
       /// @endcode
-      static inline void IsNotEmpty(const System::String& value, const string& message) {IsNotEmpty(value, message, CurrentInformation());}
+      static inline void IsNotEmpty(const System::String& value, const string& message) {IsNotEmpty(value, message, Caller());}
       
       /// @brief Asserts that a value is empty. If the value is not Empty the method throws an Switch::TUnit::AssertionException.
       /// @param value The value to check is empty.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// string v1 = "Not empty";
       /// string v2;
-      /// Assert::IsNotEmpty(v1, _current_information); // test ok
-      /// Assert::IsNotEmpty(v2, _current_information); // test throws an AssertionException.
+      /// Assert::IsNotEmpty(v1, _caller); // test ok
+      /// Assert::IsNotEmpty(v2, _caller); // test throws an AssertionException.
       /// @endcode
-      static inline void IsNotEmpty(const string& value, const CurrentInformation& currentInformation) {IsNotEmpty(value, "", currentInformation);}
+      static inline void IsNotEmpty(const string& value, const Caller& caller) {IsNotEmpty(value, "", caller);}
       
       /// @brief Asserts that a value is empty. If the value is not Empty the method throws an Switch::TUnit::AssertionException.
       /// @param value The value to check is empty.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// string v1 = "Not empty";
       /// string v2;
-      /// Assert::IsNotEmpty(v1, "User message...", _current_information); // test ok
-      /// Assert::IsNotEmpty(v2, "User message...", _current_information); // test throws an AssertionException.
+      /// Assert::IsNotEmpty(v1, "User message...", _caller); // test ok
+      /// Assert::IsNotEmpty(v2, "User message...", _caller); // test throws an AssertionException.
       /// @endcode
-      static inline void IsNotEmpty(const string& value, const string& message, const CurrentInformation& currentInformation) {
+      static inline void IsNotEmpty(const string& value, const string& message, const Caller& caller) {
         if (!string::IsNullOrEmpty(value))
-          Succeed(message, currentInformation);
+          Succeed(message, caller);
         else
-          Fail(string::Format("Expected: not <empty>{0}But was:  <empty>", System::Environment::NewLine), message, currentInformation);
+          Fail(string::Format("Expected: not <empty>{0}But was:  <empty>", System::Environment::NewLine), message, caller);
       }
       
       /// @brief Asserts that a value is empty. If the value is not Empty the method throws an Switch::TUnit::AssertionException.
@@ -1005,7 +1005,7 @@ namespace Switch {
       /// Assert::IsNotEmpty(c2); // test throws an AssertionException.
       /// @endcode
       template<typename TItem>
-      static inline void IsNotEmpty(const System::Collections::Generic::IEnumerable<TItem>& collection) {IsNotEmpty(collection, "", CurrentInformation());}
+      static inline void IsNotEmpty(const System::Collections::Generic::IEnumerable<TItem>& collection) {IsNotEmpty(collection, "", Caller());}
       
       /// @brief Asserts that a value is empty. If the value is not Empty the method throws an Switch::TUnit::AssertionException.
       /// @param value The value to check is empty.
@@ -1018,38 +1018,38 @@ namespace Switch {
       /// Assert::IsNotEmpty(c2, "User message..."); // test throws an AssertionException.
       /// @endcode
       template<typename TItem>
-      static inline void IsNotEmpty(const System::Collections::Generic::IEnumerable<TItem>& collection, const string& message) {IsNotEmpty(collection, message, CurrentInformation());}
+      static inline void IsNotEmpty(const System::Collections::Generic::IEnumerable<TItem>& collection, const string& message) {IsNotEmpty(collection, message, Caller());}
       
       /// @brief Asserts that a value is empty. If the value is not Empty the method throws an Switch::TUnit::AssertionException.
       /// @param value The value to check is empty.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// Array<int> c1 = {0, 1, 2};
       /// Array<int> c2;
-      /// Assert::IsNotEmpty(c1, _current_information); // test ok
-      /// Assert::IsNotEmpty(c2, _current_information); // test throws an AssertionException.
+      /// Assert::IsNotEmpty(c1, _caller); // test ok
+      /// Assert::IsNotEmpty(c2, _caller); // test throws an AssertionException.
       /// @endcode
       template<typename TItem>
-      static inline void IsNotEmpty(const System::Collections::Generic::IEnumerable<TItem>& collection, const CurrentInformation& currentInformation) {IsNotEmpty(collection, "", currentInformation);}
+      static inline void IsNotEmpty(const System::Collections::Generic::IEnumerable<TItem>& collection, const Caller& caller) {IsNotEmpty(collection, "", caller);}
       
       /// @brief Asserts that a value is empty. If the value is not Empty the method throws an Switch::TUnit::AssertionException.
       /// @param value The value to check is empty.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// Array<int> c1 = {0, 1, 2};
       /// Array<int> c2;
-      /// Assert::IsNotEmpty(c1, "User message...", _current_information); // test ok
-      /// Assert::IsNotEmpty(c2, "User message...", _current_information); // test throws an AssertionException.
+      /// Assert::IsNotEmpty(c1, "User message...", _caller); // test ok
+      /// Assert::IsNotEmpty(c2, "User message...", _caller); // test throws an AssertionException.
       /// @endcode
       template<typename TItem>
-      static inline void IsNotEmpty(const System::Collections::Generic::IEnumerable<TItem>& collection, const string& message, const CurrentInformation& currentInformation) {
+      static inline void IsNotEmpty(const System::Collections::Generic::IEnumerable<TItem>& collection, const string& message, const Caller& caller) {
         if (collection.GetEnumerator().MoveNext() == true)
-          Succeed(message, currentInformation);
+          Succeed(message, caller);
         else
-          Fail(string::Format("Expected: not <empty>{0}But was:  <empty>", System::Environment::NewLine), message, currentInformation);
+          Fail(string::Format("Expected: not <empty>{0}But was:  <empty>", System::Environment::NewLine), message, caller);
       }
       
       /// @brief Verify that an object is not of the type supplied or a derived type. If they are not, then an Switch::TUnit::AssertionException is thrown.
@@ -1062,7 +1062,7 @@ namespace Switch {
       /// TUnit::Assert::IsNotInstanceOf<IHashable>(str); // test throws an AssertionException.
       /// @endcode
       template<typename TT, typename TValue>
-      static inline void IsNotInstanceOf(TValue value) {IsNotInstanceOf<TT>(value, "", CurrentInformation());}
+      static inline void IsNotInstanceOf(TValue value) {IsNotInstanceOf<TT>(value, "", Caller());}
       
       /// @brief Verify that an object is not of the type supplied or a derived type. If they are not, then an Switch::TUnit::AssertionException is thrown.
       /// @param value The object to verify
@@ -1075,11 +1075,11 @@ namespace Switch {
       /// TUnit::Assert::IsNotInstanceOf<IHashable>(str); // test throws an AssertionException.
       /// @endcode
       template<typename TT, typename TValue>
-      static inline void IsNotInstanceOf(TValue value, const string& message) {IsNotInstanceOf<TT>(value, message, CurrentInformation());}
+      static inline void IsNotInstanceOf(TValue value, const string& message) {IsNotInstanceOf<TT>(value, message, Caller());}
       
       /// @brief Verify that an object is not of the type supplied or a derived type. If they are not, then an Switch::TUnit::AssertionException is thrown.
       /// @param value The object to verify
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// string str;
@@ -1088,12 +1088,12 @@ namespace Switch {
       /// TUnit::Assert::IsNotInstanceOf<IHashable>(str); // test throws an AssertionException.
       /// @endcode
       template<typename TT, typename TValue>
-      static inline void IsNotInstanceOf(TValue value, const CurrentInformation& currentInformation) {IsNotInstanceOf<TT>(value, "", currentInformation);}
+      static inline void IsNotInstanceOf(TValue value, const Caller& caller) {IsNotInstanceOf<TT>(value, "", caller);}
       
       /// @brief Verify that an object is not of the type supplied or a derived type. If they are not, then an Switch::TUnit::AssertionException is thrown.
       /// @param value The object to verify
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// string str;
@@ -1102,11 +1102,11 @@ namespace Switch {
       /// TUnit::Assert::IsNotInstanceOf<IHashable>(str); // test throws an AssertionException.
       /// @endcode
       template<typename TT, typename TValue>
-      static inline void IsNotInstanceOf(TValue value, const string& message, const CurrentInformation& currentInformation) {
+      static inline void IsNotInstanceOf(TValue value, const string& message, const Caller& caller) {
         if (!is<TT>(value))
-          Succeed(message, currentInformation);
+          Succeed(message, caller);
         else
-          Fail(string::Format("Expected: not instance of <{0}>{1}But was:  <{2}>", _typeof(value), System::Environment::NewLine, _typeof<TT>()), message, currentInformation);
+          Fail(string::Format("Expected: not instance of <{0}>{1}But was:  <{2}>", _typeof(value), System::Environment::NewLine, _typeof<TT>()), message, caller);
       }
       
       /// @brief Verify that an object is not of the type supplied or a derived type. If they are not, then an Switch::TUnit::AssertionException is thrown.
@@ -1119,7 +1119,7 @@ namespace Switch {
       /// TUnit::Assert::IsNotInstanceOfType<IHashable>(str); // test throws an AssertionException.
       /// @endcode
       template<typename TT, typename TValue>
-      static inline void IsNotInstanceOfType(TValue value) {IsNotInstanceOfType<TT>(value, "", CurrentInformation());}
+      static inline void IsNotInstanceOfType(TValue value) {IsNotInstanceOfType<TT>(value, "", Caller());}
       
       /// @brief Verify that an object is not of the type supplied or a derived type. If they are not, then an Switch::TUnit::AssertionException is thrown.
       /// @param value The object to verify
@@ -1132,11 +1132,11 @@ namespace Switch {
       /// TUnit::Assert::IsNotInstanceOfType<IHashable>(str); // test throws an AssertionException.
       /// @endcode
       template<typename TT, typename TValue>
-      static inline void IsNotInstanceOfType(TValue value, const string& message) {IsNotInstanceOfType<TT>(value, message, CurrentInformation());}
+      static inline void IsNotInstanceOfType(TValue value, const string& message) {IsNotInstanceOfType<TT>(value, message, Caller());}
       
       /// @brief Verify that an object is not of the type supplied or a derived type. If they are not, then an Switch::TUnit::AssertionException is thrown.
       /// @param value The object to verify
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// string str;
@@ -1145,12 +1145,12 @@ namespace Switch {
       /// TUnit::Assert::IsNotInstanceOfType<IHashable>(str); // test throws an AssertionException.
       /// @endcode
       template<typename TT, typename TValue>
-      static inline void IsNotInstanceOfType(TValue value, const CurrentInformation& currentInformation) {IsNotInstanceOfType<TT>(value, "", currentInformation);}
+      static inline void IsNotInstanceOfType(TValue value, const Caller& caller) {IsNotInstanceOfType<TT>(value, "", caller);}
       
       /// @brief Verify that an object is not of the type supplied or a derived type. If they are not, then an Switch::TUnit::AssertionException is thrown.
       /// @param value The object to verify
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// string str;
@@ -1159,13 +1159,13 @@ namespace Switch {
       /// TUnit::Assert::IsNotInstanceOfType<IHashable>(str); // test throws an AssertionException.
       /// @endcode
       template<typename TT, typename TValue>
-      static inline void IsNotInstanceOfType(TValue value, const string& message, const CurrentInformation& currentInformation) {IsNotInstanceOf<TT, TValue>(value, message, currentInformation);}
+      static inline void IsNotInstanceOfType(TValue value, const string& message, const Caller& caller) {IsNotInstanceOf<TT, TValue>(value, message, caller);}
       
       /// @cond
-      static inline void IsNotNull(NullPtr pointer) {IsNotNull(pointer, "", CurrentInformation());}
-      static inline void IsNotNull(NullPtr pointer, const string& message) {IsNotNull(pointer, message, CurrentInformation());}
-      static inline void IsNotNull(NullPtr pointer, const CurrentInformation& currentInformation) {IsNotNull(pointer, "", CurrentInformation());}
-      static inline void IsNotNull(NullPtr pointer, const string& message, const CurrentInformation& currentInformation) {Fail(string::Format("Expected: not null{0}But was:  null", System::Environment::NewLine), message, currentInformation);}
+      static inline void IsNotNull(NullPtr pointer) {IsNotNull(pointer, "", Caller());}
+      static inline void IsNotNull(NullPtr pointer, const string& message) {IsNotNull(pointer, message, Caller());}
+      static inline void IsNotNull(NullPtr pointer, const Caller& caller) {IsNotNull(pointer, "", Caller());}
+      static inline void IsNotNull(NullPtr pointer, const string& message, const Caller& caller) {Fail(string::Format("Expected: not null{0}But was:  null", System::Environment::NewLine), message, caller);}
       /// @endcond
       
       /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
@@ -1180,7 +1180,7 @@ namespace Switch {
       /// Assert::IsNotNull(s2); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void IsNotNull(const TPointer* pointer) {IsNotNull(pointer, "", CurrentInformation());}
+      static inline void IsNotNull(const TPointer* pointer) {IsNotNull(pointer, "", Caller());}
       
       /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
@@ -1195,42 +1195,42 @@ namespace Switch {
       /// Assert::IsNotNull(s2, "User message...")); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void IsNotNull(const TPointer* pointer, const string& message) {IsNotNull(pointer, message, CurrentInformation());}
+      static inline void IsNotNull(const TPointer* pointer, const string& message) {IsNotNull(pointer, message, Caller());}
       
       /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// string str = "Anything";
       /// ...
       /// string* s1 = &str;
       /// string* s2 = null;
-      /// Assert::IsNotNull(s1, _current_information); // test ok
-      /// Assert::IsNotNull(s2, _current_information); // test throws an AssertionException.
+      /// Assert::IsNotNull(s1, _caller); // test ok
+      /// Assert::IsNotNull(s2, _caller); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void IsNotNull(const TPointer* pointer, const CurrentInformation& currentInformation) {IsNotNull(pointer, "", currentInformation);}
+      static inline void IsNotNull(const TPointer* pointer, const Caller& caller) {IsNotNull(pointer, "", caller);}
       
       /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// string str = "Anything";
       /// ...
       /// string* s1 = &str;
       /// string* s2 = null;
-      /// Assert::IsNotNull(s1, "User message..."), _current_information); // test ok
-      /// Assert::IsNotNull(s2, "User message..."), _current_information); // test throws an AssertionException.
+      /// Assert::IsNotNull(s1, "User message..."), _caller); // test ok
+      /// Assert::IsNotNull(s2, "User message..."), _caller); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void IsNotNull(const TPointer* pointer, const string& message, const CurrentInformation& currentInformation) {
+      static inline void IsNotNull(const TPointer* pointer, const string& message, const Caller& caller) {
         if (pointer != null)
-          Succeed(message, currentInformation);
+          Succeed(message, caller);
         else
-          Fail(string::Format("Expected: not null{0}But was:  null", System::Environment::NewLine), message, currentInformation);
+          Fail(string::Format("Expected: not null{0}But was:  null", System::Environment::NewLine), message, caller);
       }
       
       /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
@@ -1243,7 +1243,7 @@ namespace Switch {
       /// Assert::IsNotNull(s2); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void IsNotNull(const refptr<TPointer>& pointer) {IsNotNull(pointer, "", CurrentInformation());}
+      static inline void IsNotNull(const refptr<TPointer>& pointer) {IsNotNull(pointer, "", Caller());}
       
       /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
@@ -1256,45 +1256,45 @@ namespace Switch {
       /// Assert::IsNotNull(s2, "User message..."); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void IsNotNull(const refptr<TPointer>& pointer, const string& message) {IsNotNull(pointer, message, CurrentInformation());}
+      static inline void IsNotNull(const refptr<TPointer>& pointer, const string& message) {IsNotNull(pointer, message, Caller());}
       
       /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// refptr<string> s1(new string("A string"));
       /// refptr<string> s2;
-      /// Assert::IsNotNull(s1, _current_information); // test ok
-      /// Assert::IsNotNull(s2, _current_information); // test throws an AssertionException.
+      /// Assert::IsNotNull(s1, _caller); // test ok
+      /// Assert::IsNotNull(s2, _caller); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void IsNotNull(const refptr<TPointer>& pointer, const CurrentInformation& currentInformation) {IsNotNull(pointer, "", currentInformation);}
+      static inline void IsNotNull(const refptr<TPointer>& pointer, const Caller& caller) {IsNotNull(pointer, "", caller);}
       
       /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// refptr<string> s1(new string("A string"));
       /// refptr<string> s2;
-      /// Assert::IsNotNull(s1, "User message...", _current_information); // test ok
-      /// Assert::IsNotNull(s2, "User message...", _current_information); // test throws an AssertionException.
+      /// Assert::IsNotNull(s1, "User message...", _caller); // test ok
+      /// Assert::IsNotNull(s2, "User message...", _caller); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void IsNotNull(const refptr<TPointer>& pointer, const string& message, const CurrentInformation& currentInformation) {
+      static inline void IsNotNull(const refptr<TPointer>& pointer, const string& message, const Caller& caller) {
         if (pointer != null)
-          Succeed(message, currentInformation);
+          Succeed(message, caller);
         else
-          Fail(string::Format("Expected: not null{0}But was:  null", System::Environment::NewLine), message, currentInformation);
+          Fail(string::Format("Expected: not null{0}But was:  null", System::Environment::NewLine), message, caller);
       }
       
       /// @cond
-      static inline void IsNull(NullPtr pointer) {IsNull(pointer, "", CurrentInformation());}
-      static inline void IsNull(NullPtr pointer, const string& message) {IsNull(pointer, message, CurrentInformation());}
-      static inline void IsNull(NullPtr pointer, const CurrentInformation& currentInformation) {IsNull(pointer, "", CurrentInformation());}
-      static inline void IsNull(NullPtr pointer, const string& message, const CurrentInformation& currentInformation) {Succeed(message, currentInformation);}
+      static inline void IsNull(NullPtr pointer) {IsNull(pointer, "", Caller());}
+      static inline void IsNull(NullPtr pointer, const string& message) {IsNull(pointer, message, Caller());}
+      static inline void IsNull(NullPtr pointer, const Caller& caller) {IsNull(pointer, "", Caller());}
+      static inline void IsNull(NullPtr pointer, const string& message, const Caller& caller) {Succeed(message, caller);}
       /// @endcond
       
       /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
@@ -1309,7 +1309,7 @@ namespace Switch {
       /// Assert::IsNull(s2); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void IsNull(const TPointer* pointer) {IsNull(pointer, "", CurrentInformation());}
+      static inline void IsNull(const TPointer* pointer) {IsNull(pointer, "", Caller());}
       
       /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
@@ -1324,42 +1324,42 @@ namespace Switch {
       /// Assert::IsNull(s2, "User message...")); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void IsNull(const TPointer* pointer, const string& message) {IsNull(pointer, message, CurrentInformation());}
+      static inline void IsNull(const TPointer* pointer, const string& message) {IsNull(pointer, message, Caller());}
       
       /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// string str = "Anything";
       /// ...
       /// string* s1 = null;
       /// string* s2 = &str;
-      /// Assert::IsNull(s1, _current_information); // test ok
-      /// Assert::IsNull(s2, _current_information); // test throws an AssertionException.
+      /// Assert::IsNull(s1, _caller); // test ok
+      /// Assert::IsNull(s2, _caller); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void IsNull(const TPointer* pointer, const CurrentInformation& currentInformation) {IsNull(pointer, "", currentInformation);}
+      static inline void IsNull(const TPointer* pointer, const Caller& caller) {IsNull(pointer, "", caller);}
       
       /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// string str = "Anything";
       /// ...
       /// string* s1 = null;
       /// string* s2 = &str;
-      /// Assert::IsNull(s1, "User message..."), _current_information); // test ok
-      /// Assert::IsNull(s2, "User message..."), _current_information); // test throws an AssertionException.
+      /// Assert::IsNull(s1, "User message..."), _caller); // test ok
+      /// Assert::IsNull(s2, "User message..."), _caller); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void IsNull(const TPointer* pointer, const string& message, const CurrentInformation& currentInformation) {
+      static inline void IsNull(const TPointer* pointer, const string& message, const Caller& caller) {
         if (pointer == null)
-          Succeed(message, currentInformation);
+          Succeed(message, caller);
         else
-          Fail(string::Format("Expected: null{0}But was:  {1}", System::Environment::NewLine, ValueToString(*pointer)), message, currentInformation);
+          Fail(string::Format("Expected: null{0}But was:  {1}", System::Environment::NewLine, ValueToString(*pointer)), message, caller);
       }
       
       /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
@@ -1372,7 +1372,7 @@ namespace Switch {
       /// Assert::IsNull(s2); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void IsNull(const refptr<TPointer>& pointer) {IsNull(pointer, "", CurrentInformation());}
+      static inline void IsNull(const refptr<TPointer>& pointer) {IsNull(pointer, "", Caller());}
       
       /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
@@ -1385,38 +1385,38 @@ namespace Switch {
       /// Assert::IsNull(s2, "User message..."); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void IsNull(const refptr<TPointer>& pointer, const string& message) {IsNull(pointer, message, CurrentInformation());}
+      static inline void IsNull(const refptr<TPointer>& pointer, const string& message) {IsNull(pointer, message, Caller());}
       
       /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// refptr<string> s1;
       /// refptr<string> s2(new string("A string"));
-      /// Assert::IsNull(s1, _current_information); // test ok
-      /// Assert::IsNull(s2, _current_information); // test throws an AssertionException.
+      /// Assert::IsNull(s1, _caller); // test ok
+      /// Assert::IsNull(s2, _caller); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void IsNull(const refptr<TPointer>& pointer, const CurrentInformation& currentInformation) {IsNull(pointer, "", currentInformation);}
+      static inline void IsNull(const refptr<TPointer>& pointer, const Caller& caller) {IsNull(pointer, "", caller);}
       
       /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// refptr<string> s1;
       /// refptr<string> s2(new string("A string"));
-      /// Assert::IsNull(s1, "User message...", _current_information); // test ok
-      /// Assert::IsNull(s2, "User message...", _current_information); // test throws an AssertionException.
+      /// Assert::IsNull(s1, "User message...", _caller); // test ok
+      /// Assert::IsNull(s2, "User message...", _caller); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void IsNull(const refptr<TPointer>& pointer, const string& message, const CurrentInformation& currentInformation) {
+      static inline void IsNull(const refptr<TPointer>& pointer, const string& message, const Caller& caller) {
         if (pointer == null)
-          Succeed(message, currentInformation);
+          Succeed(message, caller);
         else
-          Fail(string::Format("Expected: null{0}But was:  {1}", System::Environment::NewLine, ValueToString(*pointer)), message, currentInformation);
+          Fail(string::Format("Expected: null{0}But was:  {1}", System::Environment::NewLine, ValueToString(*pointer)), message, caller);
       }
       
       /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
@@ -1429,7 +1429,7 @@ namespace Switch {
       /// Assert::IsNull(s2); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void IsNull(const ref<TPointer>& pointer) {IsNull(pointer, "", CurrentInformation());}
+      static inline void IsNull(const ref<TPointer>& pointer) {IsNull(pointer, "", Caller());}
       
       /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
@@ -1442,38 +1442,38 @@ namespace Switch {
       /// Assert::IsNull(s2, "User message..."); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void IsNull(const ref<TPointer>& pointer, const string& message) {IsNull(pointer, message, CurrentInformation());}
+      static inline void IsNull(const ref<TPointer>& pointer, const string& message) {IsNull(pointer, message, Caller());}
       
       /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// refptr<string> s1;
       /// refptr<string> s2(new string("A string"));
-      /// Assert::IsNull(s1, _current_information); // test ok
-      /// Assert::IsNull(s2, _current_information); // test throws an AssertionException.
+      /// Assert::IsNull(s1, _caller); // test ok
+      /// Assert::IsNull(s2, _caller); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void IsNull(const ref<TPointer>& pointer, const CurrentInformation& currentInformation) {IsNull(pointer, "", currentInformation);}
+      static inline void IsNull(const ref<TPointer>& pointer, const Caller& caller) {IsNull(pointer, "", caller);}
       
       /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// refptr<string> s1;
       /// refptr<string> s2(new string("A string"));
-      /// Assert::IsNull(s1, "User message...", _current_information); // test ok
-      /// Assert::IsNull(s2, "User message...", _current_information); // test throws an AssertionException.
+      /// Assert::IsNull(s1, "User message...", _caller); // test ok
+      /// Assert::IsNull(s2, "User message...", _caller); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void IsNull(const ref<TPointer>& pointer, const string& message, const CurrentInformation& currentInformation) {
+      static inline void IsNull(const ref<TPointer>& pointer, const string& message, const Caller& caller) {
         if (pointer == null)
-          Succeed(message, currentInformation);
+          Succeed(message, caller);
         else
-          Fail(string::Format("Expected: null{0}But was:  {1}", System::Environment::NewLine, ValueToString(pointer)), message, currentInformation);
+          Fail(string::Format("Expected: null{0}But was:  {1}", System::Environment::NewLine, ValueToString(pointer)), message, caller);
       }
       
       /// @brief Asserts that a condition is true. If the condition is true the method throws an Switch::TUnit::AssertionException.
@@ -1485,7 +1485,7 @@ namespace Switch {
       /// Assert::IsTrue(String::IsNullOrEmpty(s1)); // test ok
       /// Assert::IsTrue(String::IsNullOrEmpty(s2)); // test throws an AssertionException.
       /// @endcode
-      static inline void IsTrue(bool condition) {return IsTrue(condition, "", CurrentInformation());}
+      static inline void IsTrue(bool condition) {return IsTrue(condition, "", Caller());}
       
       /// @brief Asserts that a condition is true. If the condition is true the method throws an Switch::TUnit::AssertionException.
       /// @param condition The condition to check is false.
@@ -1497,36 +1497,36 @@ namespace Switch {
       /// Assert::IsTrue(String::IsNullOrEmpty(s1), "User message..."); // test ok
       /// Assert::IsTrue(String::IsNullOrEmpty(s2), "User message..."); // test throws an AssertionException.
       /// @endcode
-      static inline void IsTrue(bool condition, const string& message) {IsTrue(condition, message, CurrentInformation());}
+      static inline void IsTrue(bool condition, const string& message) {IsTrue(condition, message, Caller());}
       
       /// @brief Asserts that a condition is true. If the condition is true the method throws an Switch::TUnit::AssertionException.
       /// @param condition The condition to check is false.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// string s1;
       /// string s2 = "Anything";
-      /// Assert::IsTrue(String::IsNullOrEmpty(s1), _current_information); // test ok
-      /// Assert::IsTrue(String::IsNullOrEmpty(s2), _current_information); // test throws an AssertionException.
+      /// Assert::IsTrue(String::IsNullOrEmpty(s1), _caller); // test ok
+      /// Assert::IsTrue(String::IsNullOrEmpty(s2), _caller); // test throws an AssertionException.
       /// @endcode
-      static inline void IsTrue(bool condition, const CurrentInformation& currentInformation) {IsTrue(condition, "", currentInformation);}
+      static inline void IsTrue(bool condition, const Caller& caller) {IsTrue(condition, "", caller);}
       
       /// @brief Asserts that a condition is true. If the condition is true the method throws an Switch::TUnit::AssertionException.
       /// @param condition The condition to check is false.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// string s1;
       /// string s2 = "Anything";
-      /// Assert::IsTrue(String::IsNullOrEmpty(s1), "User message...", _current_information); // test ok
-      /// Assert::IsTrue(String::IsNullOrEmpty(s2), "User message...", _current_information); // test throws an AssertionException.
+      /// Assert::IsTrue(String::IsNullOrEmpty(s1), "User message...", _caller); // test ok
+      /// Assert::IsTrue(String::IsNullOrEmpty(s2), "User message...", _caller); // test throws an AssertionException.
       /// @endcode
-      static inline void IsTrue(bool condition, const string& message, const CurrentInformation& currentInformation) {
+      static inline void IsTrue(bool condition, const string& message, const Caller& caller) {
         if (condition == true)
-          Succeed(message, currentInformation);
+          Succeed(message, caller);
         else
-          Fail(string::Format("Expected: True{0}But was:  False", System::Environment::NewLine), message, currentInformation);
+          Fail(string::Format("Expected: True{0}But was:  False", System::Environment::NewLine), message, caller);
       }
       
       /// @brief Verifies that the first value is less than the second value. If they are not, then an Switch::TUnit::AssertionException is thrown.
@@ -1538,7 +1538,7 @@ namespace Switch {
       /// TUnit::Assert::Less(48, 24); // test throws an AssertionException.
       /// @endcode
       template<typename TValue1, typename TValue2>
-      static inline void Less(const TValue1& val1, const TValue2& val2) {Less(val1, val2, "", CurrentInformation());}
+      static inline void Less(const TValue1& val1, const TValue2& val2) {Less(val1, val2, "", Caller());}
       
       /// @brief Verifies that the first value is less than the second value. If they are not, then an Switch::TUnit::AssertionException is thrown.
       /// @param val1 the first value.
@@ -1550,36 +1550,36 @@ namespace Switch {
       /// TUnit::Assert::Less(24, 48, "User message..."); // test throws an AssertionException.
       /// @endcode
       template<typename TValue1, typename TValue2>
-      static inline void Less(const TValue1& val1, const TValue2& val2, const string& message) {Less(val1, val2, message, CurrentInformation());}
+      static inline void Less(const TValue1& val1, const TValue2& val2, const string& message) {Less(val1, val2, message, Caller());}
       
       /// @brief Verifies that the first value is less than the second value. If they are not, then an Switch::TUnit::AssertionException is thrown.
       /// @param val1 the first value.
       /// @param val2 the second value.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// TUnit::Assert::Less(12, 24, _current_information); // test ok
-      /// TUnit::Assert::Less(48, 24, _current_information); // test throws an AssertionException.
+      /// TUnit::Assert::Less(12, 24, _caller); // test ok
+      /// TUnit::Assert::Less(48, 24, _caller); // test throws an AssertionException.
       /// @endcode
       template<typename TValue1, typename TValue2>
-      static inline void Less(const TValue1& val1, const TValue2& val2, const CurrentInformation& currentInformation) {Less(val1, val2, "", currentInformation);}
+      static inline void Less(const TValue1& val1, const TValue2& val2, const Caller& caller) {Less(val1, val2, "", caller);}
       
       /// @brief Verifies that the first value is less than the second value. If they are not, then an Switch::TUnit::AssertionException is thrown.
       /// @param val1 the first value.
       /// @param val2 the second value.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// TUnit::Assert::Less(24, 12, "User message...", _current_information); // test ok
-      /// TUnit::Assert::Less(24, 48, "User message...", _current_information); // test throws an AssertionException.
+      /// TUnit::Assert::Less(24, 12, "User message...", _caller); // test ok
+      /// TUnit::Assert::Less(24, 48, "User message...", _caller); // test throws an AssertionException.
       /// @endcode
       template<typename TValue1, typename TValue2>
-      static inline void Less(const TValue1& val1, const TValue2& val2, const string& message, const CurrentInformation& currentInformation) {
+      static inline void Less(const TValue1& val1, const TValue2& val2, const string& message, const Caller& caller) {
         if (val1 < val2)
-          Succeed(message, currentInformation);
+          Succeed(message, caller);
         else
-          Fail(string::Format("Expected: less than {0}{1}But was:  {2}", ValueToString(val2), System::Environment::NewLine, ValueToString(val1)), message, currentInformation);
+          Fail(string::Format("Expected: less than {0}{1}But was:  {2}", ValueToString(val2), System::Environment::NewLine, ValueToString(val1)), message, caller);
       }
       
       /// @brief Verifies that the first value is less or equal than the second value. If they are not, then an Switch::TUnit::AssertionException is thrown.
@@ -1592,7 +1592,7 @@ namespace Switch {
       /// TUnit::Assert::LessOrEqual(48, 24); // test throws an AssertionException.
       /// @endcode
       template<typename TValue1, typename TValue2>
-      static inline void LessOrEqual(const TValue1& val1, const TValue2& val2) {LessOrEqual(val1, val2, "", CurrentInformation());}
+      static inline void LessOrEqual(const TValue1& val1, const TValue2& val2) {LessOrEqual(val1, val2, "", Caller());}
       
       /// @brief Verifies that the first value is less or equal than the second value. If they are not, then an Switch::TUnit::AssertionException is thrown.
       /// @param val1 the first value.
@@ -1605,45 +1605,45 @@ namespace Switch {
       /// TUnit::Assert::LessOrEqual(24, 48, "User message..."); // test throws an AssertionException.
       /// @endcode
       template<typename TValue1, typename TValue2>
-      static inline void LessOrEqual(const TValue1& val1, const TValue2& val2, const string& message) {LessOrEqual(val1, val2, message, CurrentInformation());}
+      static inline void LessOrEqual(const TValue1& val1, const TValue2& val2, const string& message) {LessOrEqual(val1, val2, message, Caller());}
       
       /// @brief Verifies that the first value is less or equal than the second value. If they are not, then an Switch::TUnit::AssertionException is thrown.
       /// @param val1 the first value.
       /// @param val2 the second value.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// TUnit::Assert::LessOrEqual(12, 24, _current_information); // test ok
-      /// TUnit::Assert::LessOrEqual(24, 24, _current_information); // test ok
-      /// TUnit::Assert::LessOrEqual(48, 24, _current_information); // test throws an AssertionException.
+      /// TUnit::Assert::LessOrEqual(12, 24, _caller); // test ok
+      /// TUnit::Assert::LessOrEqual(24, 24, _caller); // test ok
+      /// TUnit::Assert::LessOrEqual(48, 24, _caller); // test throws an AssertionException.
       /// @endcode
       template<typename TValue1, typename TValue2>
-      static inline void LessOrEqual(const TValue1& val1, const TValue2& val2, const CurrentInformation& currentInformation) {LessOrEqual(val1, val2, "", currentInformation);}
+      static inline void LessOrEqual(const TValue1& val1, const TValue2& val2, const Caller& caller) {LessOrEqual(val1, val2, "", caller);}
       
       /// @brief Verifies that the first value is less or equal than the second value. If they are not, then an Switch::TUnit::AssertionException is thrown.
       /// @param val1 the first value.
       /// @param val2 the second value.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// TUnit::Assert::LessOrEqual(12, 24, "User message...", _current_information); // test ok
-      /// TUnit::Assert::LessOrEqual(24, 24, "User message...", _current_information); // test ok
-      /// TUnit::Assert::LessOrEqual(48, 24, "User message...", _current_information); // test throws an AssertionException.
+      /// TUnit::Assert::LessOrEqual(12, 24, "User message...", _caller); // test ok
+      /// TUnit::Assert::LessOrEqual(24, 24, "User message...", _caller); // test ok
+      /// TUnit::Assert::LessOrEqual(48, 24, "User message...", _caller); // test throws an AssertionException.
       /// @endcode
       template<typename TValue1, typename TValue2>
-      static inline void LessOrEqual(const TValue1& val1, const TValue2& val2, const string& message, const CurrentInformation& currentInformation) {
+      static inline void LessOrEqual(const TValue1& val1, const TValue2& val2, const string& message, const Caller& caller) {
         if (val1 <= val2)
-          Succeed(message, currentInformation);
+          Succeed(message, caller);
         else
-          Fail(string::Format("Expected: less than or equal to {0}{1}But was:  {2}", ValueToString(val2), System::Environment::NewLine, ValueToString(val1)), message, currentInformation);
+          Fail(string::Format("Expected: less than or equal to {0}{1}But was:  {2}", ValueToString(val2), System::Environment::NewLine, ValueToString(val1)), message, caller);
       }
       
       /// @cond
-      static inline void NotNull(NullPtr pointer) {IsNotNull(pointer, "", CurrentInformation());}
-      static inline void NotNull(NullPtr pointer, const string& message) {IsNotNull(pointer, message, CurrentInformation());}
-      static inline void NotNull(NullPtr pointer, const CurrentInformation& currentInformation) {IsNotNull(pointer, "", CurrentInformation());}
-      static inline void NotNull(NullPtr pointer, const string& message, const CurrentInformation& currentInformation) {Fail(string::Format("Expected: not null{0}But was:  null", System::Environment::NewLine), message, currentInformation);}
+      static inline void NotNull(NullPtr pointer) {IsNotNull(pointer, "", Caller());}
+      static inline void NotNull(NullPtr pointer, const string& message) {IsNotNull(pointer, message, Caller());}
+      static inline void NotNull(NullPtr pointer, const Caller& caller) {IsNotNull(pointer, "", Caller());}
+      static inline void NotNull(NullPtr pointer, const string& message, const Caller& caller) {Fail(string::Format("Expected: not null{0}But was:  null", System::Environment::NewLine), message, caller);}
       /// @endcond
       
       /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
@@ -1658,7 +1658,7 @@ namespace Switch {
       /// Assert::NotNull(s2); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void NotNull(const TPointer* pointer) {IsNotNull(pointer, "", CurrentInformation());}
+      static inline void NotNull(const TPointer* pointer) {IsNotNull(pointer, "", Caller());}
       
       /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
@@ -1673,38 +1673,38 @@ namespace Switch {
       /// Assert::NotNull(s2, "User message...")); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void NotNull(const TPointer* pointer, const string& message) {IsNotNull(pointer, message, CurrentInformation());}
+      static inline void NotNull(const TPointer* pointer, const string& message) {IsNotNull(pointer, message, Caller());}
       
       /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// string str = "Anything";
       /// ...
       /// string* s1 = &str;
       /// string* s2 = null;
-      /// Assert::NotNull(s1, _current_information); // test ok
-      /// Assert::NotNull(s2, _current_information); // test throws an AssertionException.
+      /// Assert::NotNull(s1, _caller); // test ok
+      /// Assert::NotNull(s2, _caller); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void NotNull(const TPointer* pointer, const CurrentInformation& currentInformation) {IsNotNull(pointer, "", currentInformation);}
+      static inline void NotNull(const TPointer* pointer, const Caller& caller) {IsNotNull(pointer, "", caller);}
       
       /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// string str = "Anything";
       /// ...
       /// string* s1 = &str;
       /// string* s2 = null;
-      /// Assert::NotNull(s1, "User message..."), _current_information); // test ok
-      /// Assert::NotNull(s2, "User message..."), _current_information); // test throws an AssertionException.
+      /// Assert::NotNull(s1, "User message..."), _caller); // test ok
+      /// Assert::NotNull(s2, "User message..."), _caller); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void NotNull(const TPointer* pointer, const string& message, const CurrentInformation& currentInformation) {IsNotNull(pointer, message, currentInformation);}
+      static inline void NotNull(const TPointer* pointer, const string& message, const Caller& caller) {IsNotNull(pointer, message, caller);}
       
       /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
@@ -1716,7 +1716,7 @@ namespace Switch {
       /// Assert::IsNotNull(s2); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void NotNull(const refptr<TPointer>& pointer) {IsNotNull(pointer, "", CurrentInformation());}
+      static inline void NotNull(const refptr<TPointer>& pointer) {IsNotNull(pointer, "", Caller());}
       
       /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
@@ -1729,40 +1729,40 @@ namespace Switch {
       /// Assert::NotNull(s2, "User message..."); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void NotNull(const refptr<TPointer>& pointer, const string& message) {IsNotNull(pointer, message, CurrentInformation());}
+      static inline void NotNull(const refptr<TPointer>& pointer, const string& message) {IsNotNull(pointer, message, Caller());}
       
       /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// refptr<string> s1(new string("A string"));
       /// refptr<string> s2;
-      /// Assert::NotNull(s1, _current_information); // test ok
-      /// Assert::NotNull(s2, _current_information); // test throws an AssertionException.
+      /// Assert::NotNull(s1, _caller); // test ok
+      /// Assert::NotNull(s2, _caller); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void NotNull(const refptr<TPointer>& pointer, const CurrentInformation& currentInformation) {IsNotNull(pointer, "", currentInformation);}
+      static inline void NotNull(const refptr<TPointer>& pointer, const Caller& caller) {IsNotNull(pointer, "", caller);}
       
       /// @brief Asserts that the pointer is not null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// refptr<string> s1(new string("A string"));
       /// refptr<string> s2;
-      /// Assert::NotNull(s1, "User message...", _current_information); // test ok
-      /// Assert::NotNull(s2, "User message...", _current_information); // test throws an AssertionException.
+      /// Assert::NotNull(s1, "User message...", _caller); // test ok
+      /// Assert::NotNull(s2, "User message...", _caller); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void NotNull(const refptr<TPointer>& pointer, const string& message, const CurrentInformation& currentInformation) {IsNotNull(pointer, message, currentInformation);}
+      static inline void NotNull(const refptr<TPointer>& pointer, const string& message, const Caller& caller) {IsNotNull(pointer, message, caller);}
       
       /// @cond
-      static inline void Null(NullPtr pointer) {IsNull(pointer, "", CurrentInformation());}
-      static inline void Null(NullPtr pointer, const string& message) {IsNull(pointer, message, CurrentInformation());}
-      static inline void Null(NullPtr pointer, const CurrentInformation& currentInformation) {IsNull(pointer, "", CurrentInformation());}
-      static inline void Null(NullPtr pointer, const string& message, const CurrentInformation& currentInformation) {Succeed(message, currentInformation);}
+      static inline void Null(NullPtr pointer) {IsNull(pointer, "", Caller());}
+      static inline void Null(NullPtr pointer, const string& message) {IsNull(pointer, message, Caller());}
+      static inline void Null(NullPtr pointer, const Caller& caller) {IsNull(pointer, "", Caller());}
+      static inline void Null(NullPtr pointer, const string& message, const Caller& caller) {Succeed(message, caller);}
       /// @endcond
       
       /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
@@ -1777,7 +1777,7 @@ namespace Switch {
       /// Assert::Null(s2); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void Null(const TPointer* pointer) {IsNull(pointer, "", CurrentInformation());}
+      static inline void Null(const TPointer* pointer) {IsNull(pointer, "", Caller());}
       
       /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
@@ -1792,38 +1792,38 @@ namespace Switch {
       /// Assert::Null(s2, "User message...")); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void Null(const TPointer* pointer, const string& message) {IsNull(pointer, message, CurrentInformation());}
+      static inline void Null(const TPointer* pointer, const string& message) {IsNull(pointer, message, Caller());}
       
       /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// string str = "Anything";
       /// ...
       /// string* s1 = null;
       /// string* s2 = &str;
-      /// Assert::Null(s1, _current_information); // test ok
-      /// Assert::Null(s2, _current_information); // test throws an AssertionException.
+      /// Assert::Null(s1, _caller); // test ok
+      /// Assert::Null(s2, _caller); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void Null(const TPointer* pointer, const CurrentInformation& currentInformation) {IsNull(pointer, "", currentInformation);}
+      static inline void Null(const TPointer* pointer, const Caller& caller) {IsNull(pointer, "", caller);}
       
       /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// string str = "Anything";
       /// ...
       /// string* s1 = null;
       /// string* s2 = &str;
-      /// Assert::Null(s1, "User message..."), _current_information); // test ok
-      /// Assert::Null(s2, "User message..."), _current_information); // test throws an AssertionException.
+      /// Assert::Null(s1, "User message..."), _caller); // test ok
+      /// Assert::Null(s2, "User message..."), _caller); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void Null(const TPointer* pointer, const string& message, const CurrentInformation& currentInformation) {IsNull(pointer, message, currentInformation);}
+      static inline void Null(const TPointer* pointer, const string& message, const Caller& caller) {IsNull(pointer, message, caller);}
             
       /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
@@ -1835,7 +1835,7 @@ namespace Switch {
       /// Assert::Null(s2); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void Null(const refptr<TPointer>& pointer) {IsNull(pointer, "", CurrentInformation());}
+      static inline void Null(const refptr<TPointer>& pointer) {IsNull(pointer, "", Caller());}
       
       /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
@@ -1848,72 +1848,72 @@ namespace Switch {
       /// Assert::Null(s2, "User message..."); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void Null(const refptr<TPointer>& pointer, const string& message) {IsNull(pointer, message, CurrentInformation());}
+      static inline void Null(const refptr<TPointer>& pointer, const string& message) {IsNull(pointer, message, Caller());}
       
       /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// refptr<string> s1;
       /// refptr<string> s2(new string("A string"));
-      /// Assert::Null(s1, _current_information); // test ok
-      /// Assert::Null(s2, _current_information); // test throws an AssertionException.
+      /// Assert::Null(s1, _caller); // test ok
+      /// Assert::Null(s2, _caller); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void Null(const refptr<TPointer>& pointer, const CurrentInformation& currentInformation) {IsNull(pointer, "", currentInformation);}
+      static inline void Null(const refptr<TPointer>& pointer, const Caller& caller) {IsNull(pointer, "", caller);}
       
       /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// refptr<string> s1;
       /// refptr<string> s2(new string("A string"));
-      /// Assert::Null(s1, "User message...", _current_information); // test ok
-      /// Assert::Null(s2, "User message...", _current_information); // test throws an AssertionException.
+      /// Assert::Null(s1, "User message...", _caller); // test ok
+      /// Assert::Null(s2, "User message...", _caller); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
-      static inline void Null(const refptr<TPointer>& pointer, const string& message, const CurrentInformation& currentInformation) {IsNull(pointer, message, currentInformation);}
+      static inline void Null(const refptr<TPointer>& pointer, const string& message, const Caller& caller) {IsNull(pointer, message, caller);}
       
       /// @brief The ReferenceEquals method throws an Switch::TUnit::AssertionException. This is done to make sure there is no mistake by calling this function.
-      static inline bool ReferenceEquals(const Object&, const Object&) { throw AssertionException(_current_information); }
+      static inline bool ReferenceEquals(const Object&, const Object&) { throw AssertionException(_caller); }
       
       /// @brief Generates a success with a generic message. This is used by the other Assert functions.
-      static inline void Succeed() {Succeed("", CurrentInformation());}
-      
-      /// @brief Generates a success with a generic message. This is used by the other Assert functions.
-      /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      static inline void Succeed(const string& message) {Succeed(message, CurrentInformation());}
-      
-      /// @brief Generates a success with a generic message. This is used by the other Assert functions.
-      /// @param currentInformation Contains information about current file and current line.
-      static inline void Succeed(const CurrentInformation& currentInformation) {Succeed("", currentInformation); }
+      static inline void Succeed() {Succeed("", Caller());}
       
       /// @brief Generates a success with a generic message. This is used by the other Assert functions.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      /// @param currentInformation Contains information about current file and current line.
-      static inline void Succeed(const string& message, const CurrentInformation& currentInformation) {::testing::internal::AssertHelper(::testing::TestPartResult::kSuccess, currentInformation.FilePath().Data, currentInformation.LineNumber, "Succeeded") = ::testing::Message(message.Data);}
+      static inline void Succeed(const string& message) {Succeed(message, Caller());}
+      
+      /// @brief Generates a success with a generic message. This is used by the other Assert functions.
+      /// @param caller Contains information about current file and current line.
+      static inline void Succeed(const Caller& caller) {Succeed("", caller); }
+      
+      /// @brief Generates a success with a generic message. This is used by the other Assert functions.
+      /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
+      /// @param caller Contains information about current file and current line.
+      static inline void Succeed(const string& message, const Caller& caller) {::testing::internal::AssertHelper(::testing::TestPartResult::kSuccess, caller.FilePath().Data, caller.LineNumber, "Succeeded") = ::testing::Message(message.Data);}
 
       template<typename TActual>
-      static void That(const TActual& actual, const Constraints::Constraint& constraint) {That(actual, constraint, "", CurrentInformation());}
+      static void That(const TActual& actual, const Constraints::Constraint& constraint) {That(actual, constraint, "", Caller());}
       
       template<typename TActual>
-      static void That(const TActual& actual, const Constraints::Constraint& constraint, const string message) {That(actual, constraint, message, CurrentInformation());}
+      static void That(const TActual& actual, const Constraints::Constraint& constraint, const string message) {That(actual, constraint, message, Caller());}
       
       template<typename TActual>
-      static void That(const TActual& actual, const Constraints::Constraint& constraint, const ::CurrentInformation& currentInformation) {That(actual, constraint, "", currentInformation);}
+      static void That(const TActual& actual, const Constraints::Constraint& constraint, const ::Caller& caller) {That(actual, constraint, "", caller);}
       
       template<typename TActual>
-      static void That(const TActual& actual, const Constraints::Constraint& constraint, const string message, const ::CurrentInformation& currentInformation) {
+      static void That(const TActual& actual, const Constraints::Constraint& constraint, const string message, const ::Caller& caller) {
         const_cast<Constraints::Constraint&>(constraint).Actual = actual;
         const_cast<Constraints::Constraint&>(constraint).Message = message;
-        const_cast<Constraints::Constraint&>(constraint).CurrentInformation = currentInformation;
+        const_cast<Constraints::Constraint&>(constraint).Caller = caller;
         if (constraint.Verify(actual))
-          Succeed(message, currentInformation);
+          Succeed(message, caller);
         else
-          Fail(constraint.Error, constraint.Message, constraint.CurrentInformation);
+          Fail(constraint.Error, constraint.Message, constraint.Caller);
       }
       
       /// @brief Verifies that the statement throws a particular exception when called.
@@ -1926,7 +1926,7 @@ namespace Switch {
       /// Assert::Throws<ArgumentOutOfRangeException>(_delegate {a[2];}); // test throws an AssertionException.
       /// @endcode
       template<typename ExceptionType>
-      static inline void Throws(const System::Delegate<void>& statement) {Throws<ExceptionType>(statement, CurrentInformation());}
+      static inline void Throws(const System::Delegate<void>& statement) {Throws<ExceptionType>(statement, Caller());}
       
       /// @brief Verifies that the statement throws a particular exception when called.
       /// @param exceptionType The exception type that must be throw.
@@ -1939,20 +1939,20 @@ namespace Switch {
       /// Assert::Throws<ArgumentOutOfRangeException>(_delegate {a[2];}, "User message..."); // test throws an AssertionException.
       /// @endcode
       template<typename ExceptionType>
-      static inline void Throws(const System::Delegate<void>& statement, const string& message) {Throws<ExceptionType>(statement, message, CurrentInformation());}
+      static inline void Throws(const System::Delegate<void>& statement, const string& message) {Throws<ExceptionType>(statement, message, Caller());}
       
       /// @brief Verifies that the statement throws a particular exception when called.
       /// @param exceptionType The exception type that must be throw.
       /// @param statement The statement that verify.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// Array<int32> a = {1, 2 ,3, 4};
-      /// Assert::Throws<ArgumentOutOfRangeException>(_delegate {a[5];}, _current_information); // test ok
-      /// Assert::Throws<ArgumentOutOfRangeException>(_delegate {a[2];}, _current_information); // test throws an AssertionException.
+      /// Assert::Throws<ArgumentOutOfRangeException>(_delegate {a[5];}, _caller); // test ok
+      /// Assert::Throws<ArgumentOutOfRangeException>(_delegate {a[2];}, _caller); // test throws an AssertionException.
       /// @endcode
       template<typename ExceptionType>
-      static inline void Throws(const System::Delegate<void>& statement, const CurrentInformation& currentInformation) {Throws<ExceptionType>(statement, "", currentInformation);}
+      static inline void Throws(const System::Delegate<void>& statement, const Caller& caller) {Throws<ExceptionType>(statement, "", caller);}
       
 #if defined(_WIN32)
 #pragma warning(push)
@@ -1963,26 +1963,26 @@ namespace Switch {
       /// @param exceptionType The exception type that must be throw.
       /// @param statement The statement that verify.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// Array<int32> a = {1, 2 ,3, 4};
-      /// Assert::Throws<ArgumentOutOfRangeException>(_delegate {a[5];}, "User message...", _current_information); // test ok
-      /// Assert::Throws<ArgumentOutOfRangeException>(_delegate {a[2];}, "User message...", _current_information); // test throws an AssertionException.
+      /// Assert::Throws<ArgumentOutOfRangeException>(_delegate {a[5];}, "User message...", _caller); // test ok
+      /// Assert::Throws<ArgumentOutOfRangeException>(_delegate {a[2];}, "User message...", _caller); // test throws an AssertionException.
       /// @endcode
       template<typename ExceptionType>
-      static inline void Throws(const System::Delegate<void>& statement, const string& message, const CurrentInformation& currentInformation) {
+      static inline void Throws(const System::Delegate<void>& statement, const string& message, const Caller& caller) {
         try {
           statement();
-          Fail(string::Format("Expected: <{0}>{1}But was:  <nothing>", _typeof<ExceptionType>().FullName(), System::Environment::NewLine), message, currentInformation);
+          Fail(string::Format("Expected: <{0}>{1}But was:  <nothing>", _typeof<ExceptionType>().FullName(), System::Environment::NewLine), message, caller);
         } catch (const AssertionException&) {
           throw;
         } catch(const ExceptionType&) {
-          Succeed(message, currentInformation);
+          Succeed(message, caller);
         } catch (const System::Exception& exception) {
-          Fail(string::Format("Expected: <{0}>{1}But was:  <{2}>", _typeof<ExceptionType>().FullName(), System::Environment::NewLine, exception.GetType().FullName()), message, currentInformation);
+          Fail(string::Format("Expected: <{0}>{1}But was:  <{2}>", _typeof<ExceptionType>().FullName(), System::Environment::NewLine, exception.GetType().FullName()), message, caller);
         } catch (...) {
-          Fail(string::Format("Expected: <{0}>{1}But was:  <exception>", _typeof<ExceptionType>().FullName(), System::Environment::NewLine), message, currentInformation);
+          Fail(string::Format("Expected: <{0}>{1}But was:  <exception>", _typeof<ExceptionType>().FullName(), System::Environment::NewLine), message, caller);
         }
       }
 
@@ -1998,7 +1998,7 @@ namespace Switch {
       /// Assert::ThrowsAny(_delegate {a[5];}); // test ok
       /// Assert::ThrowsAny(_delegate {a[2];}); // test throws an AssertionException.
       /// @endcode
-      static inline void ThrowsAny(const System::Delegate<void>& statement) {ThrowsAny(statement, "", CurrentInformation());}
+      static inline void ThrowsAny(const System::Delegate<void>& statement) {ThrowsAny(statement, "", Caller());}
       
       /// @brief Verifies that the statement throws any exception when called.
       /// @param statement The statement that verify.
@@ -2009,37 +2009,37 @@ namespace Switch {
       /// Assert::ThrowsAny(_delegate {a[5];}, "User message..."); // test ok
       /// Assert::ThrowsAny(_delegate {a[2];}, "User message..."); // test throws an AssertionException.
       /// @endcode
-      static inline void ThrowsAny(const System::Delegate<void>& statement, const string& message) {ThrowsAny(statement, message, CurrentInformation());}
+      static inline void ThrowsAny(const System::Delegate<void>& statement, const string& message) {ThrowsAny(statement, message, Caller());}
       
       /// @brief Verifies that the statement throws any exception when called.
       /// @param statement The statement that verify.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// Array<int32> a = {1, 2 ,3, 4};
-      /// Assert::ThrowsAny(_delegate {a[5];}, _current_information); // test ok
-      /// Assert::ThrowsAny(_delegate {a[2];}, _current_information); // test throws an AssertionException.
+      /// Assert::ThrowsAny(_delegate {a[5];}, _caller); // test ok
+      /// Assert::ThrowsAny(_delegate {a[2];}, _caller); // test throws an AssertionException.
       /// @endcode
-      static inline void ThrowsAny(const System::Delegate<void>& statement, const CurrentInformation& currentInformation) {ThrowsAny(statement, "", currentInformation);}
+      static inline void ThrowsAny(const System::Delegate<void>& statement, const Caller& caller) {ThrowsAny(statement, "", caller);}
       
       /// @brief Verifies that the statement throws any exception when called.
       /// @param statement The statement that verify.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// Array<int32> a = {1, 2 ,3, 4};
-      /// Assert::ThrowsAny(_delegate {a[5];}, "User message...", _current_information); // test ok
-      /// Assert::ThrowsAny(_delegate {a[2];}, "User message...", _current_information); // test throws an AssertionException.
+      /// Assert::ThrowsAny(_delegate {a[5];}, "User message...", _caller); // test ok
+      /// Assert::ThrowsAny(_delegate {a[2];}, "User message...", _caller); // test throws an AssertionException.
       /// @endcode
-      static inline void ThrowsAny(const System::Delegate<void>& statement, const string& message, const CurrentInformation& currentInformation) {
+      static inline void ThrowsAny(const System::Delegate<void>& statement, const string& message, const Caller& caller) {
         try {
           statement();
-          Fail(string::Format("Expected: <exception>{0}But was:  <nothing>", System::Environment::NewLine), message, currentInformation);
+          Fail(string::Format("Expected: <exception>{0}But was:  <nothing>", System::Environment::NewLine), message, caller);
         } catch (const AssertionException&) {
           throw;
         } catch(...) {
-          Succeed(message, currentInformation);
+          Succeed(message, caller);
         }
       }
       
@@ -2052,7 +2052,7 @@ namespace Switch {
       /// Assert::True(String::IsNullOrEmpty(s1)); // test ok
       /// Assert::True(String::IsNullOrEmpty(s2)); // test throws an AssertionException.
       /// @endcode
-      static inline void True(bool condition) {return IsTrue(condition, "", CurrentInformation());}
+      static inline void True(bool condition) {return IsTrue(condition, "", Caller());}
       
       /// @brief Asserts that a condition is true. If the condition is true the method throws an Switch::TUnit::AssertionException.
       /// @param condition The condition to check is false.
@@ -2064,32 +2064,32 @@ namespace Switch {
       /// Assert::True(String::IsNullOrEmpty(s1), "User message..."); // test ok
       /// Assert::True(String::IsNullOrEmpty(s2), "User message..."); // test throws an AssertionException.
       /// @endcode
-      static inline void True(bool condition, const string& message) {IsTrue(condition, message, CurrentInformation());}
+      static inline void True(bool condition, const string& message) {IsTrue(condition, message, Caller());}
       
       /// @brief Asserts that a condition is true. If the condition is true the method throws an Switch::TUnit::AssertionException.
       /// @param condition The condition to check is false.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// string s1;
       /// string s2 = "Anything";
-      /// Assert::True(String::IsNullOrEmpty(s1), _current_information); // test ok
-      /// Assert::True(String::IsNullOrEmpty(s2), _current_information); // test throws an AssertionException.
+      /// Assert::True(String::IsNullOrEmpty(s1), _caller); // test ok
+      /// Assert::True(String::IsNullOrEmpty(s2), _caller); // test throws an AssertionException.
       /// @endcode
-      static inline void True(bool condition, const CurrentInformation& currentInformation) {IsTrue(condition, "", currentInformation);}
+      static inline void True(bool condition, const Caller& caller) {IsTrue(condition, "", caller);}
       
       /// @brief Asserts that a condition is true. If the condition is true the method throws an Switch::TUnit::AssertionException.
       /// @param condition The condition to check is false.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
-      /// @param currentInformation Contains information about current file and current line.
+      /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
       /// string s1;
       /// string s2 = "Anything";
-      /// Assert::True(String::IsNullOrEmpty(s1), "User message...", _current_information); // test ok
-      /// Assert::True(String::IsNullOrEmpty(s2), "User message...", _current_information); // test throws an AssertionException.
+      /// Assert::True(String::IsNullOrEmpty(s1), "User message...", _caller); // test ok
+      /// Assert::True(String::IsNullOrEmpty(s2), "User message...", _caller); // test throws an AssertionException.
       /// @endcode
-      static inline void True(bool condition, const string& message, const CurrentInformation& currentInformation) {IsTrue(condition, message, currentInformation);}
+      static inline void True(bool condition, const string& message, const Caller& caller) {IsTrue(condition, message, caller);}
 
     private:
       Assert() = delete;

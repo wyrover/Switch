@@ -35,7 +35,7 @@ namespace Switch {
           /// @endcond
           
           /// @brief Aborts the WebSocket connection and cancels any pending IO operations.
-          void Abort() override {throw NotSupportedException(_current_information);}
+          void Abort() override {throw NotSupportedException(_caller);}
           
           /// @brief Connect to a WebSocket server.
           /// @param uri The URI of the WebSocket server to connect to.
@@ -72,7 +72,7 @@ namespace Switch {
               case WebSocketCloseStatus::InvalidPayloadData: return "(1007) The client or server is terminating the connection because it has received data inconsistent with the message type.";
               case WebSocketCloseStatus::PolicyViolation: return "(1008) The connection will be closed because an endpoint has received a message that violates its policy.";
               case WebSocketCloseStatus::MandatoryExtension: return "(1010) The client is terminating the connection because it expected the server to negotiate an extension.";
-              default : throw InvalidOperationException(_current_information);
+              default : throw InvalidOperationException(_caller);
             }
           }
           

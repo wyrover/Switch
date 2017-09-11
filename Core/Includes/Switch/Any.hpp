@@ -110,7 +110,7 @@ namespace Switch {
     template <typename T>
     operator T() const {
       if(!this->HasValue)
-        throw System::InvalidOperationException(_current_information);
+        throw System::InvalidOperationException(_caller);
       return To<T>();
     }
     
@@ -170,7 +170,7 @@ namespace Switch {
     _property<const object&, _readonly> Value {
       _get->const object& {
         if(!this->HasValue)
-          throw System::InvalidOperationException(_current_information);
+          throw System::InvalidOperationException(_caller);
         return this->value.ToObject();
       }
     };
@@ -185,7 +185,7 @@ namespace Switch {
     template<typename T>
     T& As() {
       if(!this->HasValue)
-        throw System::InvalidOperationException(_current_information);
+        throw System::InvalidOperationException(_caller);
       return as<T>(this->value.ToObject());
     }
     
@@ -199,7 +199,7 @@ namespace Switch {
     template<typename T>
     const T& As() const {
       if(!this->HasValue)
-        throw System::InvalidOperationException(_current_information);
+        throw System::InvalidOperationException(_caller);
       return as<T>(this->value.ToObject());
     }
     

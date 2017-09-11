@@ -13,7 +13,7 @@ namespace SwitchUnitTests {
       
       int32 index = 0;
       for (auto c : str)
-        Assert::AreEqual(c, char32_t(chars[index++]), _current_information);
+        Assert::AreEqual(c, char32_t(chars[index++]), _caller);
     }
     
     void InitializerList() {
@@ -22,8 +22,8 @@ namespace SwitchUnitTests {
       
       int32 index = 0;
       for (const auto& value : values)
-        Assert::AreEqual(value, results[index++], _current_information);
-      Assert::AreEqual(10, index, _current_information);
+        Assert::AreEqual(value, results[index++], _caller);
+      Assert::AreEqual(10, index, _caller);
     }
     
     void Thread() {
@@ -33,9 +33,9 @@ namespace SwitchUnitTests {
         result = "thread launched";
       });
       
-      Assert::True(t.joinable(), _current_information);
+      Assert::True(t.joinable(), _caller);
       t.join();
-      Assert::AreEqual("thread launched", result, _current_information);
+      Assert::AreEqual("thread launched", result, _caller);
     }
   };
   

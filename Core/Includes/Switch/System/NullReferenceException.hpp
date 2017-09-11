@@ -21,9 +21,9 @@ namespace Switch {
       NullReferenceException(const NullReferenceException& value) : SystemException(value) {}
       
       /// @brief Create a new instance of class NullReferenceException
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
       /// @remarks Message is set with the default message associate to the error.
-      NullReferenceException(const CurrentInformation& information) : SystemException(information) {}
+      NullReferenceException(const Caller& information) : SystemException(information) {}
       
       /// @brief Create a new instance of class NullReferenceException
       /// @param message Message string associate to the error.
@@ -31,14 +31,14 @@ namespace Switch {
       
       /// @brief Create a new instance of class NullReferenceException
       /// @param message Message string associate to the error.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
-      NullReferenceException(const System::String& message, const CurrentInformation& information) : SystemException(message, information) {}
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+      NullReferenceException(const System::String& message, const Caller& information) : SystemException(message, information) {}
       
       /// @brief Create a new instance of class NullReferenceException
       /// @param message Message string associate to the error.
       /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
-      NullReferenceException(const System::String& message, const System::Exception& innerException, const CurrentInformation& information) : SystemException(message, innerException, information) {}
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+      NullReferenceException(const System::String& message, const System::Exception& innerException, const Caller& information) : SystemException(message, innerException, information) {}
       
     private:
       System::String GetDefaultMessage() const override {return "Object reference not set to an instance of an object."; }

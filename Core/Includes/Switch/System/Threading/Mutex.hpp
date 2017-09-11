@@ -89,7 +89,7 @@ namespace Switch {
         /// @exception ApplicationException The calling thread does not own the mutex.
         void ReleaseMutex() {
           if (this->mutex == null)
-            throw ObjectClosedException(_current_information);
+            throw ObjectClosedException(_caller);
           this->mutex->unlock();
         }
 
@@ -117,9 +117,9 @@ namespace Switch {
         
         bool Wait(int32 millisecondsTimeOut) override {
           if (this->mutex == null)
-            throw ObjectClosedException(_current_information);
+            throw ObjectClosedException(_caller);
           if (millisecondsTimeOut < -1)
-            throw ArgumentOutOfRangeException(_current_information);
+            throw ArgumentOutOfRangeException(_caller);
           if (millisecondsTimeOut == -1) {
             this->mutex->lock();
             return true;

@@ -140,7 +140,7 @@ namespace Switch {
           /// @exception System::ArgumentException An element with the same key already exists in the System::Collections::Generic::SortedDictionary<TKey,TValue>.
           void Add(const TKey& key, const TValue& value) override {
             if (ContainsKey(key))
-              throw System::ArgumentException(_current_information);
+              throw System::ArgumentException(_caller);
 
             (*this)[key] = value;
           }
@@ -208,7 +208,7 @@ namespace Switch {
           ///            array.
           void CopyTo(System::Array<KeyValuePair<TKey,TValue>>& array, int32 index) const override {
             if (index < 0 || array.Length < index + this->Count)
-              throw ArgumentOutOfRangeException(_current_information);
+              throw ArgumentOutOfRangeException(_caller);
 
             int32 count = index;
             for (auto elem : *this)
@@ -287,7 +287,7 @@ namespace Switch {
           /// @include SortedDictionaryOperators.cpp
           const TValue& operator[](const TKey& key) const override {
             if (! ContainsKey(key))
-              throw ArgumentException(_current_information);
+              throw ArgumentException(_caller);
 
             return const_cast<std::map<TKey, TValue, MapComparer, TAllocator>&>(this->map)[key];
           }
@@ -371,7 +371,7 @@ namespace Switch {
             virtual bool MoveNext() {
 
               if (this->operationNumber != this->dictionary.operationNumber)
-                throw InvalidOperationException(_current_information);
+                throw InvalidOperationException(_caller);
 
               if (IsFinished())
                 return false;
@@ -391,7 +391,7 @@ namespace Switch {
           protected:
             const KeyValuePair<TKey,TValue>& GetCurrent() const  {
               if (this->beforeFirst || IsFinished())
-                throw InvalidOperationException(_current_information);
+                throw InvalidOperationException(_caller);
               return this->currentKeyValuePair;
             }
             

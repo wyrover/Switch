@@ -154,7 +154,7 @@ namespace Switch {
           _get {return Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Background);},
           _set {
             if (this->data->managedThreadId == NoneManagedThreadId || this->data->managedThreadId == MainManagedThreadId)
-              throw InvalidOperationException(_current_information);
+              throw InvalidOperationException(_caller);
             
             if (value)
               this->data->state |= System::Threading::ThreadState::Background;
@@ -180,7 +180,7 @@ namespace Switch {
           _get {return this->data->name;},
           _set {
             if (this->data->managedThreadId == NoneManagedThreadId)
-              throw InvalidOperationException(_current_information);
+              throw InvalidOperationException(_caller);
             this->SetName(value);
           }
         };
@@ -192,7 +192,7 @@ namespace Switch {
           _get {return this->data->priority;},
           _set {
             if (this->data->managedThreadId == NoneManagedThreadId)
-              throw InvalidOperationException(_current_information);
+              throw InvalidOperationException(_caller);
             this->SetPriority(value);
           }
         };
@@ -210,7 +210,7 @@ namespace Switch {
         /// @brief Notifies a host that execution is about to enter a region of code in which the effects of a thread abort.
         static void BeginCriticalRegion() {
           if (CurrentThread().data->managedThreadId == NoneManagedThreadId)
-            throw InvalidOperationException(_current_information);
+            throw InvalidOperationException(_caller);
           CurrentThread().data->criticalRegion = true;
         }
         
@@ -235,7 +235,7 @@ namespace Switch {
         /// @brief Notifies a host that execution is about to leave a region of code in which the effects of a thread abort.
         static void EndCriticalRegion() {
           if (CurrentThread().data->managedThreadId == NoneManagedThreadId)
-            throw InvalidOperationException(_current_information);
+            throw InvalidOperationException(_caller);
           CurrentThread().data->criticalRegion = false;
         }
         
@@ -260,12 +260,12 @@ namespace Switch {
         /// @exception ArgumentOutOfRangeException millisecondsTimeout is a negative number other than -1, which represents an infinite time-out.
         bool Join(int32 millisecondsTimeout) {
           if (this->data->managedThreadId == NoneManagedThreadId || this->data->managedThreadId == MainManagedThreadId)
-            throw InvalidOperationException(_current_information);
+            throw InvalidOperationException(_caller);
           if (Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Unstarted))
-            throw ThreadStateException(_current_information);
+            throw ThreadStateException(_caller);
           
           if (millisecondsTimeout < Timeout::Infinite)
-            throw ArgumentOutOfRangeException(_current_information);
+            throw ArgumentOutOfRangeException(_caller);
           
           if (this->data->interrupted == true)
             this->Interrupt();
@@ -303,7 +303,7 @@ namespace Switch {
         /// @exception ArgumentException millisecondsTimeout is a negative number other than -1, which represents an infinite time-out.
         static void Sleep(int32 millisecondsTimeout) {
           if (millisecondsTimeout < Timeout::Infinite)
-            throw ArgumentException(_current_information);
+            throw ArgumentException(_caller);
           
           if (CurrentThread().data->interrupted)
             CurrentThread().Interrupt();
@@ -400,7 +400,7 @@ namespace Switch {
           std::lock_guard<std::recursive_mutex> lock(mutex);
           for (const Thread& item : threads)
             if (item.data->managedThreadId == MainManagedThreadId)
-              throw InvalidOperationException(_current_information);
+              throw InvalidOperationException(_caller);
           Thread thread;
           thread.data->managedThreadId = MainManagedThreadId;
           thread.data->mainThreadId = std::this_thread::get_id();
@@ -413,13 +413,13 @@ namespace Switch {
         
         void ThreadStart(const object* obj) {
           if (!Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Unstarted))
-            throw ThreadStateException(_current_information);
+            throw ThreadStateException(_caller);
           
           if (obj == null && this->data->threadStart.IsEmpty() && this->data->parameterizedThreadStart.IsEmpty())
-            throw InvalidOperationException(_current_information);
+            throw InvalidOperationException(_caller);
           
           if (obj != null && this->data->parameterizedThreadStart.IsEmpty())
-            throw InvalidOperationException(_current_information);
+            throw InvalidOperationException(_caller);
           
           std::lock_guard<std::recursive_mutex> lock(mutex);
           threads.Add(*this);

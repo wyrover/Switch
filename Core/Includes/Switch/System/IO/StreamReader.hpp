@@ -29,7 +29,7 @@ namespace Switch {
           static_assert(!std::is_same<System::IO::Stream, TStream>::value, "Must not be System::IO::Stream but inherited");
           static_assert(std::is_base_of<System::IO::Stream, TStream>::value, "Is not inherited from System::IO::Stream");
           if (stream.CanRead() == false)
-            throw ArgumentException(_current_information);
+            throw ArgumentException(_caller);
           this->data->stream = stream.template MemberwiseClone<TStream>().template As<Stream>();
           this->data->encoding = utf8Encoding;
           
@@ -42,7 +42,7 @@ namespace Switch {
         /// @exception ArgumentException The stream to be read.
         StreamReader(refptr<Stream> stream) {
           if (stream->CanRead() == false)
-            throw ArgumentException(_current_information);
+            throw ArgumentException(_caller);
           this->data->stream = stream;
           this->data->encoding = utf8Encoding;
           
@@ -59,7 +59,7 @@ namespace Switch {
           static_assert(!std::is_same<System::IO::Stream, TStream>::value, "Must not be System::IO::Stream but inherited");
           static_assert(std::is_base_of<System::IO::Stream, TStream>::value, "Is not inherited from System::IO::Stream");
           if (stream.CanRead() == false)
-            throw ArgumentException(_current_information);
+            throw ArgumentException(_caller);
           this->data->stream = stream.template MemberwiseClone<TStream>().template As<Stream>();
           this->data->encoding = encoding;
          

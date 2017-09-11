@@ -13,39 +13,39 @@ namespace SwitchUnitTests {
     void TearDown() override {}
     
     void ConstructorDefault() {
-      TUnit::Assert::IsFalse(Boolean(), _current_information);
+      TUnit::Assert::IsFalse(Boolean(), _caller);
     }
     
     void ConstructorWithFalse() {
-      TUnit::Assert::IsFalse(Boolean(false), _current_information);
+      TUnit::Assert::IsFalse(Boolean(false), _caller);
     }
     
     void ConstructorWithTrue() {
-      TUnit::Assert::IsTrue(Boolean(true), _current_information);
+      TUnit::Assert::IsTrue(Boolean(true), _caller);
     }
     
     void ConstructorWith0() {
-      TUnit::Assert::IsFalse(Boolean(0), _current_information);
+      TUnit::Assert::IsFalse(Boolean(0), _caller);
     }
     
     void ConstructorWith1() {
-      TUnit::Assert::IsTrue(Boolean(1), _current_information);
+      TUnit::Assert::IsTrue(Boolean(1), _caller);
     }
     
     void ConstructorWithBooleanFalse() {
-      TUnit::Assert::IsFalse(Boolean(Boolean::False), _current_information);
+      TUnit::Assert::IsFalse(Boolean(Boolean::False), _caller);
     }
     
     void ConstructorWithBooleanTrue() {
-      TUnit::Assert::IsTrue(Boolean(Boolean::True), _current_information);
+      TUnit::Assert::IsTrue(Boolean(Boolean::True), _caller);
     }
     
     void ConstructorByCopyWithBooleanFalse() {
-      TUnit::Assert::IsFalse(Boolean(Boolean(false)), _current_information);
+      TUnit::Assert::IsFalse(Boolean(Boolean(false)), _caller);
     }
     
     void ConstructorByCopyWithBooleanTrue() {
-      TUnit::Assert::IsTrue(Boolean(Boolean(true)), _current_information);
+      TUnit::Assert::IsTrue(Boolean(Boolean(true)), _caller);
     }
     
     void ParseBooleanFalseString() {

@@ -103,8 +103,8 @@ namespace Switch {
           ///            array.
           virtual void CopyTo(System::Array<T>& array, int32 arrayIndex) const override {
             //_list.CopyTo(array, arrayIndex);
-            if (arrayIndex < 0) throw ArgumentOutOfRangeException(_current_information);
-            if (arrayIndex + this->Count > array.Length) throw ArgumentException(_current_information);
+            if (arrayIndex < 0) throw ArgumentOutOfRangeException(_caller);
+            if (arrayIndex + this->Count > array.Length) throw ArgumentException(_caller);
 
             typename std::list<T, TAllocator>::const_iterator it;
             for (it = this->queue.begin(); it != this->queue.end() ; it++)
@@ -141,14 +141,14 @@ namespace Switch {
           /// @exception System::InvalidOperationException The System::Collections::Generic::Queue<T> is empty.
           const T& Peek() const {
             if (this->queue.size() == 0)
-              throw InvalidOperationException(_current_information);
+              throw InvalidOperationException(_caller);
 
             return this->queue.front();
           }
 
           T& Peek() {
             if (this->queue.size() == 0)
-              throw InvalidOperationException(_current_information);
+              throw InvalidOperationException(_caller);
 
             return this->queue.front();
           }
@@ -220,7 +220,7 @@ namespace Switch {
 
             virtual bool MoveNext() {
               if (this->operationNumber != this->queue.operationNumber)
-                throw InvalidOperationException(_current_information);
+                throw InvalidOperationException(_caller);
 
               if (IsFinished())
                 return false;
@@ -236,7 +236,7 @@ namespace Switch {
           protected:
             const T& GetCurrent() const {
               if (this->beforeFirst || IsFinished())
-                throw InvalidOperationException(_current_information);
+                throw InvalidOperationException(_caller);
               
               return *this->iterator;
             }

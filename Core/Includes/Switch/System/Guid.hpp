@@ -28,7 +28,7 @@ namespace Switch {
       /// @exception System::ArgumentException bytes is not 16 bytes long.
       explicit Guid(const Array<byte>& bytes) {
         if (bytes.Length != this->data.Length)
-          throw ArgumentException(_current_information);
+          throw ArgumentException(_caller);
         this->data = bytes;
       }
 
@@ -38,9 +38,9 @@ namespace Switch {
       template<int32 dataSize>
       Guid(const byte bytes[dataSize]) {
         if (bytes == null)
-          throw ArgumentNullException(_current_information);
+          throw ArgumentNullException(_caller);
         if (dataSize != this->data.Length)
-          throw ArgumentException(_current_information);
+          throw ArgumentException(_caller);
         this->data = Array<byte>(bytes);
       }
 
@@ -49,7 +49,7 @@ namespace Switch {
       /// @exception System::ArgumentNullException bytes is null.
       Guid(const byte bytes[16]) {
         if (bytes == null)
-          throw ArgumentNullException(_current_information);
+          throw ArgumentNullException(_caller);
         this->data = Array<byte>(bytes, 16);
       }
 
@@ -58,9 +58,9 @@ namespace Switch {
       /// @exception System::ArgumentNullException bytes is null.
       Guid(const byte* bytes, int32 dataSize) {
         if (bytes == null)
-          throw ArgumentNullException(_current_information);
+          throw ArgumentNullException(_caller);
         if (dataSize != this->data.Length)
-          throw ArgumentException(_current_information);
+          throw ArgumentException(_caller);
         this->data = Array<byte>(bytes, dataSize);
       }
 
@@ -72,7 +72,7 @@ namespace Switch {
       /// @exception ArgumentException bytes is not 16 bytes long.
       Guid(int32 a, int16 b, int16 c, const Array<byte>& d) {
         if (d.Length != 8)
-          throw ArgumentException(_current_information);
+          throw ArgumentException(_caller);
 
         this->data[0] = (byte)((a&0xFF000000)>>24);
         this->data[1] = (byte)((a&0x00FF0000)>>16);
@@ -97,9 +97,9 @@ namespace Switch {
       template<int32 dataSize>
       Guid(int32 a, int16 b, int16 c, const byte d[dataSize]) {
         if (d == null)
-          throw ArgumentNullException(_current_information);
+          throw ArgumentNullException(_caller);
         if (dataSize != 8)
-          throw ArgumentException(_current_information);
+          throw ArgumentException(_caller);
 
         this->data[0] = (byte)((a&0xFF000000)>>24);
         this->data[1] = (byte)((a&0x00FF0000)>>16);
@@ -123,7 +123,7 @@ namespace Switch {
       /// @exception Pf::System::ArgumentException bytes is not 8 bytes long.
       Guid(int32 a, int16 b, int16 c, const byte d[8]) {
         if (d == null)
-          throw ArgumentNullException(_current_information);
+          throw ArgumentNullException(_caller);
 
         this->data[0] = (byte)((a&0xFF000000)>>24);
         this->data[1] = (byte)((a&0x00FF0000)>>16);
@@ -298,7 +298,7 @@ namespace Switch {
         string result;
 
         if (fmt.Length() != 1 || formats.IndexOf(fmt) == -1)
-          throw FormatException(_current_information);
+          throw FormatException(_caller);
 
         bool hyphens = fmt != "n" && fmt != "x";
         bool braces = fmt == "b";

@@ -21,9 +21,9 @@ namespace Switch {
       DuplicateWaitObjectException(const DuplicateWaitObjectException& value) : ArgumentException(value) {}
       
       /// @brief Create a new instance of class DuplicateWaitObjectException
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
       /// @remarks Message is set with the default message associate to the error.
-      DuplicateWaitObjectException(const CurrentInformation& information) : ArgumentException(information) {}
+      DuplicateWaitObjectException(const Caller& information) : ArgumentException(information) {}
       
       /// @brief Create a new instance of class DuplicateWaitObjectException
       /// @param message Message string associate to the error.
@@ -31,14 +31,14 @@ namespace Switch {
       
       /// @brief Create a new instance of class DuplicateWaitObjectException
       /// @param message Message string associate to the error.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
-      DuplicateWaitObjectException(const System::String& message, const CurrentInformation& information) : ArgumentException(message, information) {}
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+      DuplicateWaitObjectException(const System::String& message, const Caller& information) : ArgumentException(message, information) {}
       
       /// @brief Create a new instance of class DuplicateWaitObjectException
       /// @param message Message string associate to the error.
       /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_current_information.
-      DuplicateWaitObjectException(const System::String& message, const System::Exception& innerException, const CurrentInformation& information) : ArgumentException(message, innerException, information) {}
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+      DuplicateWaitObjectException(const System::String& message, const System::Exception& innerException, const Caller& information) : ArgumentException(message, innerException, information) {}
       
     private:
       System::String GetDefaultMessage() const override {return "Duplicate object in argument."; }

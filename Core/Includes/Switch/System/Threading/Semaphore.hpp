@@ -101,10 +101,10 @@ namespace Switch {
         /// @exception IO::IOException An Io error occurred.
         int32 Release(int32 releaseCount) {
           if (this->guard == null)
-            throw ObjectClosedException(_current_information);
+            throw ObjectClosedException(_caller);
           std::unique_lock<std::mutex> lock(*this->guard);
           if (*this->count + releaseCount > *this->maxCount)
-            throw SemaphoreFullException(_current_information);
+            throw SemaphoreFullException(_caller);
           *this->count += releaseCount;
           this->signal->notify_all();
           return *this->count - releaseCount;
@@ -124,9 +124,9 @@ namespace Switch {
         
         bool Wait(int32 millisecondsTimeOut) override {
           if (this->guard == null)
-            throw ObjectClosedException(_current_information);
+            throw ObjectClosedException(_caller);
           if (millisecondsTimeOut < -1)
-            throw AbandonedMutexException(_current_information);
+            throw AbandonedMutexException(_caller);
               
           std::unique_lock<std::mutex> lock(*this->guard);
           while(*this->count == 0) {

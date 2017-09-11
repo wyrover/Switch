@@ -22,7 +22,7 @@ namespace Switch {
         this->SetStackTrace(*this);
       }
       
-      TypeInitializationException(const String& fullTypeName, ref<System::Exception> innerException, const CurrentInformation& information) : SystemException(information) {
+      TypeInitializationException(const String& fullTypeName, ref<System::Exception> innerException, const Caller& information) : SystemException(information) {
         this->SetInnerException(innerException);
         this->fullTypeName = fullTypeName;
         this->SetStackTrace(*this);

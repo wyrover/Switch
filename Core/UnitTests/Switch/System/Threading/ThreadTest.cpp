@@ -14,135 +14,135 @@ namespace {
 
     void GetMainThreadThenGetManagedThreadId() {
       Thread thread = Thread::CurrentThread;
-      Assert::AreEqual(1, thread.ManagedThreadId, _current_information);
+      Assert::AreEqual(1, thread.ManagedThreadId, _caller);
     }
     
     void GetMainThreadThenGetHandle() {
       Thread thread = Thread::CurrentThread;
-      Assert::AreNotEqual(intptr(-1), thread.Handle, _current_information);
+      Assert::AreNotEqual(intptr(-1), thread.Handle, _caller);
     }
     
     void GetMainThreadThenIsAlive() {
       Thread thread = Thread::CurrentThread;
-      Assert::True(thread.IsAlive, _current_information);
+      Assert::True(thread.IsAlive, _caller);
     }
     
     void GetMainThreadThenIsBackground() {
       Thread thread = Thread::CurrentThread;
-      Assert::False(thread.IsBackground, _current_information);
+      Assert::False(thread.IsBackground, _caller);
     }
     
     void GetMainThreadThenGetName() {
       Thread thread = Thread::CurrentThread;
       if (!hasMainThreadNamedOnlyOnce)
-        Assert::AreEqual("", thread.Name, _current_information);
+        Assert::AreEqual("", thread.Name, _caller);
       else
-        Assert::AreEqual("Main", thread.Name, _current_information);
+        Assert::AreEqual("Main", thread.Name, _caller);
     }
     
     void GetMainThreadThenGetPriority() {
       Thread thread = Thread::CurrentThread;
-      Assert::AreEqual(ThreadPriority::Normal, thread.Priority, _current_information);
+      Assert::AreEqual(ThreadPriority::Normal, thread.Priority, _caller);
     }
     
     void GetMainThreadThenGetThreadState() {
       Thread thread = Thread::CurrentThread;
-      Assert::AreEqual(ThreadState::Running, thread.ThreadState(), _current_information);
+      Assert::AreEqual(ThreadState::Running, thread.ThreadState(), _caller);
     }
     
     void GetMainThreadThenSetName() {
       Thread thread = Thread::CurrentThread;
       if (!hasMainThreadNamedOnlyOnce) {
-        Assert::AreEqual("", thread.Name, _current_information);
-        Assert::DoesNotThrows(_delegate {thread.Name = "Main";}, _current_information);
-        Assert::AreEqual("Main", thread.Name, _current_information);
+        Assert::AreEqual("", thread.Name, _caller);
+        Assert::DoesNotThrows(_delegate {thread.Name = "Main";}, _caller);
+        Assert::AreEqual("Main", thread.Name, _caller);
         hasMainThreadNamedOnlyOnce = true;
       } else {
-        Assert::AreEqual("Main", thread.Name, _current_information);
-        Assert::Throws<InvalidOperationException>(_delegate {thread.Name = "";}, _current_information);
+        Assert::AreEqual("Main", thread.Name, _caller);
+        Assert::Throws<InvalidOperationException>(_delegate {thread.Name = "";}, _caller);
       }
     }
     
     void GetMainThreadThenSetPriority() {
       Thread thread = Thread::CurrentThread;
-      Assert::DoesNotThrows(_delegate {thread.Priority = ThreadPriority::AboveNormal;}, _current_information);
-      Assert::AreEqual(ThreadPriority::AboveNormal, thread.Priority, _current_information);
-      Assert::DoesNotThrows(_delegate {thread.Priority = ThreadPriority::Normal;}, _current_information);
-      Assert::AreEqual(ThreadPriority::Normal, thread.Priority, _current_information);
+      Assert::DoesNotThrows(_delegate {thread.Priority = ThreadPriority::AboveNormal;}, _caller);
+      Assert::AreEqual(ThreadPriority::AboveNormal, thread.Priority, _caller);
+      Assert::DoesNotThrows(_delegate {thread.Priority = ThreadPriority::Normal;}, _caller);
+      Assert::AreEqual(ThreadPriority::Normal, thread.Priority, _caller);
     }
     
     void GetMainThreadThenAbort() {
       Thread thread = Thread::CurrentThread;
       // If you uncomments the next line, the unit tests will be aborted ;-)
-      //Assert::DoesNotThrows(_delegate {thread.Abort();}, _current_information);
+      //Assert::DoesNotThrows(_delegate {thread.Abort();}, _caller);
     }
     
     void GetMainThreadThenSetIsBackgroundToTrue() {
       Thread thread = Thread::CurrentThread;
-      Assert::Throws<InvalidOperationException>(_delegate {thread.IsBackground = true;}, _current_information);
+      Assert::Throws<InvalidOperationException>(_delegate {thread.IsBackground = true;}, _caller);
     }
     
     void GetMainThreadThenGetHashCode() {
       Thread thread = Thread::CurrentThread;
-      Assert::AreEqual(1, thread.GetHashCode(), _current_information);
+      Assert::AreEqual(1, thread.GetHashCode(), _caller);
     }
     
     void GetMainThreadThenInterrupt() {
       Thread thread = Thread::CurrentThread;
-      Assert::Throws<InvalidOperationException>(_delegate {thread.Interrupt();}, _current_information);
+      Assert::Throws<InvalidOperationException>(_delegate {thread.Interrupt();}, _caller);
     }
     
     void GetMainThreadThenJoin() {
       Thread thread = Thread::CurrentThread;
-      Assert::Throws<InvalidOperationException>(_delegate {thread.Join();}, _current_information);
+      Assert::Throws<InvalidOperationException>(_delegate {thread.Join();}, _caller);
     }
     
     void GetMainThreadThenJoinWithBadTimeout() {
       Thread thread = Thread::CurrentThread;
-      Assert::Throws<InvalidOperationException>(_delegate {thread.Join(-2);}, _current_information);
+      Assert::Throws<InvalidOperationException>(_delegate {thread.Join(-2);}, _caller);
     }
     
     void GetMainThreadThenJoinWithInfiniteTimeout() {
       Thread thread = Thread::CurrentThread;
-      Assert::Throws<InvalidOperationException>(_delegate {thread.Join(Timeout::Infinite);}, _current_information);
+      Assert::Throws<InvalidOperationException>(_delegate {thread.Join(Timeout::Infinite);}, _caller);
     }
     
     void GetMainThreadThenJoinWithTimeout() {
       Thread thread = Thread::CurrentThread;
-      Assert::Throws<InvalidOperationException>(_delegate {thread.Join(1);}, _current_information);
+      Assert::Throws<InvalidOperationException>(_delegate {thread.Join(1);}, _caller);
     }
     
     void GetMainThreadThenResume() {
       Thread thread = Thread::CurrentThread;
-      Assert::Throws<InvalidOperationException>(_delegate {thread.Resume();}, _current_information);
+      Assert::Throws<InvalidOperationException>(_delegate {thread.Resume();}, _caller);
     }
     
     void GetMainThreadThenStart() {
       Thread thread = Thread::CurrentThread;
-      Assert::Throws<ThreadStateException>(_delegate {thread.Start();}, _current_information);
+      Assert::Throws<ThreadStateException>(_delegate {thread.Start();}, _caller);
     }
     
     void GetMainThreadThenStartWithThreadStart() {
       Thread thread = Thread::CurrentThread;
       ThreadStart threadStart = _delegate {};
-      Assert::Throws<ThreadStateException>(_delegate {thread.Start(threadStart);}, _current_information);
+      Assert::Throws<ThreadStateException>(_delegate {thread.Start(threadStart);}, _caller);
     }
     
     void GetMainThreadThenStartWithParameterizedThreadStart() {
       Thread thread = Thread::CurrentThread;
       ParameterizedThreadStart parameterizedTeadStart = _delegate(const object&) {};
-      Assert::Throws<ThreadStateException>(_delegate {thread.Start(parameterizedTeadStart);}, _current_information);
+      Assert::Throws<ThreadStateException>(_delegate {thread.Start(parameterizedTeadStart);}, _caller);
     }
     
     void GetMainThreadThenSuspend() {
       Thread thread = Thread::CurrentThread;
-      Assert::Throws<InvalidOperationException>(_delegate {thread.Suspend();}, _current_information);
+      Assert::Throws<InvalidOperationException>(_delegate {thread.Suspend();}, _caller);
     }
     
     void CreateUnmanagedThreadThenGetManagedThreadId() {
       std::function<void()> threadStart = [] {
         Thread thread = Thread::CurrentThread;
-        Assert::AreEqual(0, thread.ManagedThreadId, _current_information);
+        Assert::AreEqual(0, thread.ManagedThreadId, _caller);
       };
       std::thread thread(threadStart);
       thread.join();
@@ -151,7 +151,7 @@ namespace {
     void CreateUnmanagedThreadThenGetHandle() {
       std::function<void()> threadStart = [] {
         Thread thread = Thread::CurrentThread;
-        Assert::AreEqual(intptr(-1), thread.Handle, _current_information);
+        Assert::AreEqual(intptr(-1), thread.Handle, _caller);
       };
       std::thread thread(threadStart);
       thread.join();
@@ -160,7 +160,7 @@ namespace {
     void CreateUnmanagedThreadThenIsAlive() {
       std::function<void()> threadStart = [] {
         Thread thread = Thread::CurrentThread;
-        Assert::True(thread.IsAlive, _current_information);
+        Assert::True(thread.IsAlive, _caller);
       };
       std::thread thread(threadStart);
       thread.join();
@@ -187,7 +187,7 @@ namespace {
     void CreateUnmanagedThreadThenGetPriority() {
       std::function<void()> threadStart = [] {
         Thread thread = Thread::CurrentThread;
-        Assert::AreEqual(ThreadPriority::Normal, thread.Priority, _current_information);
+        Assert::AreEqual(ThreadPriority::Normal, thread.Priority, _caller);
       };
       std::thread thread(threadStart);
       thread.join();
@@ -196,7 +196,7 @@ namespace {
     void CreateUnmanagedThreadThenGetThreadState() {
       std::function<void()> threadStart = [] {
         Thread thread = Thread::CurrentThread;
-        Assert::AreEqual(ThreadState::Running, thread.ThreadState() & ThreadState::Running, _current_information);
+        Assert::AreEqual(ThreadState::Running, thread.ThreadState() & ThreadState::Running, _caller);
       };
       std::thread thread(threadStart);
       thread.join();
@@ -205,7 +205,7 @@ namespace {
     void CreateUnmanagedThreadThenSetName() {
       std::function<void()> threadStart = [] {
         Thread thread = Thread::CurrentThread;
-        Assert::Throws<InvalidOperationException>(_delegate {thread.Name = "Unmanaged";}, _current_information);
+        Assert::Throws<InvalidOperationException>(_delegate {thread.Name = "Unmanaged";}, _caller);
       };
       std::thread thread(threadStart);
       thread.join();
@@ -214,7 +214,7 @@ namespace {
     void CreateUnmanagedThreadThenSetPriority() {
       std::function<void()> threadStart = [] {
         Thread thread = Thread::CurrentThread;
-        Assert::Throws<InvalidOperationException>(_delegate {thread.Priority = ThreadPriority::Highest;}, _current_information);
+        Assert::Throws<InvalidOperationException>(_delegate {thread.Priority = ThreadPriority::Highest;}, _caller);
       };
       std::thread thread(threadStart);
       thread.join();
@@ -223,7 +223,7 @@ namespace {
     void CreateUnmanagedThreadThenAbort() {
       std::function<void()> threadStart = [] {
         Thread thread = Thread::CurrentThread;
-        Assert::Throws<InvalidOperationException>(_delegate {thread.Abort();}, _current_information);
+        Assert::Throws<InvalidOperationException>(_delegate {thread.Abort();}, _caller);
       };
       std::thread thread(threadStart);
       thread.join();
@@ -232,7 +232,7 @@ namespace {
     void CreateUnmanagedThreadThenSetIsBackgroundToTrue() {
       std::function<void()> threadStart = [] {
         Thread thread = Thread::CurrentThread;
-        Assert::Throws<InvalidOperationException>(_delegate {thread.IsBackground = true;}, _current_information);
+        Assert::Throws<InvalidOperationException>(_delegate {thread.IsBackground = true;}, _caller);
       };
       std::thread thread(threadStart);
       thread.join();
@@ -241,7 +241,7 @@ namespace {
     void CreateUnmanagedThreadThenGetHashCode() {
       std::function<void()> threadStart = [] {
         Thread thread = Thread::CurrentThread;
-        Assert::AreEqual(0, thread.GetHashCode(), _current_information);
+        Assert::AreEqual(0, thread.GetHashCode(), _caller);
       };
       std::thread thread(threadStart);
       thread.join();
@@ -250,7 +250,7 @@ namespace {
     void CreateUnmanagedThreadThenInterrupt() {
       std::function<void()> threadStart = [] {
         Thread thread = Thread::CurrentThread;
-        Assert::Throws<InvalidOperationException>(_delegate {thread.Interrupt();}, _current_information);
+        Assert::Throws<InvalidOperationException>(_delegate {thread.Interrupt();}, _caller);
       };
       std::thread thread(threadStart);
       thread.join();
@@ -259,7 +259,7 @@ namespace {
     void CreateUnmanagedThreadThenJoin() {
       std::function<void()> threadStart = [] {
         Thread thread = Thread::CurrentThread;
-        Assert::Throws<InvalidOperationException>(_delegate {thread.Join();}, _current_information);
+        Assert::Throws<InvalidOperationException>(_delegate {thread.Join();}, _caller);
       };
       std::thread thread(threadStart);
       thread.join();
@@ -268,7 +268,7 @@ namespace {
     void CreateUnmanagedThreadThenJoinWithBadTimeout() {
       std::function<void()> threadStart = [] {
         Thread thread = Thread::CurrentThread;
-        Assert::Throws<InvalidOperationException>(_delegate {thread.Join(-2);}, _current_information);
+        Assert::Throws<InvalidOperationException>(_delegate {thread.Join(-2);}, _caller);
       };
       std::thread thread(threadStart);
       thread.join();
@@ -277,7 +277,7 @@ namespace {
     void CreateUnmanagedThreadThenJoinWithInfiniteTimeout() {
       std::function<void()> threadStart = [] {
         Thread thread = Thread::CurrentThread;
-        Assert::Throws<InvalidOperationException>(_delegate {thread.Join(Timeout::Infinite);}, _current_information);
+        Assert::Throws<InvalidOperationException>(_delegate {thread.Join(Timeout::Infinite);}, _caller);
       };
       std::thread thread(threadStart);
       thread.join();
@@ -286,7 +286,7 @@ namespace {
     void CreateUnmanagedThreadThenJoinWithTimeout() {
       std::function<void()> threadStart = [] {
         Thread thread = Thread::CurrentThread;
-        Assert::Throws<InvalidOperationException>(_delegate {thread.Join(1);}, _current_information);
+        Assert::Throws<InvalidOperationException>(_delegate {thread.Join(1);}, _caller);
       };
       std::thread thread(threadStart);
       thread.join();
@@ -295,7 +295,7 @@ namespace {
     void CreateUnmanagedThreadThenResume() {
       std::function<void()> threadStart = [] {
         Thread thread = Thread::CurrentThread;
-        Assert::Throws<InvalidOperationException>(_delegate {thread.Resume();}, _current_information);
+        Assert::Throws<InvalidOperationException>(_delegate {thread.Resume();}, _caller);
       };
       std::thread thread(threadStart);
       thread.join();
@@ -304,7 +304,7 @@ namespace {
     void CreateUnmanagedThreadThenStart() {
       std::function<void()> threadStart = [] {
         Thread thread = Thread::CurrentThread;
-        Assert::Throws<ThreadStateException>(_delegate {thread.Start();}, _current_information);
+        Assert::Throws<ThreadStateException>(_delegate {thread.Start();}, _caller);
       };
       std::thread thread(threadStart);
       thread.join();
@@ -314,7 +314,7 @@ namespace {
       std::function<void()> threadStart = [] {
         Thread thread = Thread::CurrentThread;
         ThreadStart threadStart = _delegate {};
-        Assert::Throws<ThreadStateException>(_delegate {thread.Start(threadStart);}, _current_information);
+        Assert::Throws<ThreadStateException>(_delegate {thread.Start(threadStart);}, _caller);
       };
       std::thread thread(threadStart);
       thread.join();
@@ -324,7 +324,7 @@ namespace {
       std::function<void()> threadStart = [] {
         Thread thread = Thread::CurrentThread;
         ParameterizedThreadStart parameterizedTeadStart = _delegate(const object&) {};
-        Assert::Throws<ThreadStateException>(_delegate {thread.Start(parameterizedTeadStart);}, _current_information);
+        Assert::Throws<ThreadStateException>(_delegate {thread.Start(parameterizedTeadStart);}, _caller);
       };
       std::thread thread(threadStart);
       thread.join();
@@ -333,7 +333,7 @@ namespace {
     void CreateUnmanagedThreadThenSuspend() {
       std::function<void()> threadStart = [] {
         Thread thread = Thread::CurrentThread;
-        Assert::Throws<InvalidOperationException>(_delegate {thread.Suspend();}, _current_information);
+        Assert::Throws<InvalidOperationException>(_delegate {thread.Suspend();}, _caller);
       };
       std::thread thread(threadStart);
       thread.join();
@@ -341,114 +341,114 @@ namespace {
     
     void CreateEmptyThreadThenGetManagedThreadId() {
       Thread thread;
-      Assert::AreEqual(0, thread.ManagedThreadId, _current_information);
+      Assert::AreEqual(0, thread.ManagedThreadId, _caller);
     }
     
     void CreateEmptyThreadThenGetHandle() {
       Thread thread;
-      Assert::AreEqual(intptr(-1), thread.Handle, _current_information);
+      Assert::AreEqual(intptr(-1), thread.Handle, _caller);
     }
     
     void CreateEmptyThreadThenIsAlive() {
       Thread thread;
-      Assert::False(thread.IsAlive, _current_information);
+      Assert::False(thread.IsAlive, _caller);
     }
     
     void CreateEmptyThreadThenIsBackground() {
       Thread thread;
-      Assert::False(thread.IsBackground, _current_information);
+      Assert::False(thread.IsBackground, _caller);
     }
     
     void CreateEmptyThreadThenGetName() {
       Thread thread;
-      Assert::AreEqual("", thread.Name, _current_information);
+      Assert::AreEqual("", thread.Name, _caller);
     }
     
     void CreateEmptyThreadThenGetPriority() {
       Thread thread;
-      Assert::AreEqual(ThreadPriority::Normal, thread.Priority, _current_information);
+      Assert::AreEqual(ThreadPriority::Normal, thread.Priority, _caller);
     }
     
     void CreateEmptyThreadThenGetThreadState() {
       Thread thread;
-      Assert::AreEqual(ThreadState::Unstarted, thread.ThreadState, _current_information);
+      Assert::AreEqual(ThreadState::Unstarted, thread.ThreadState, _caller);
     }
     
     void CreateEmptyThreadThenSetName() {
       Thread thread;
-      Assert::Throws<InvalidOperationException>(_delegate {thread.Name = "Empty";}, _current_information);
+      Assert::Throws<InvalidOperationException>(_delegate {thread.Name = "Empty";}, _caller);
     }
     
     void CreateEmptyThreadThenSetPriority() {
       Thread thread;
-      Assert::Throws<InvalidOperationException>(_delegate {thread.Priority = ThreadPriority::Highest;}, _current_information);
+      Assert::Throws<InvalidOperationException>(_delegate {thread.Priority = ThreadPriority::Highest;}, _caller);
     }
     
     void CreateEmptyThreadThenAbort() {
       Thread thread;
-      Assert::Throws<InvalidOperationException>(_delegate {thread.Abort();}, _current_information);
+      Assert::Throws<InvalidOperationException>(_delegate {thread.Abort();}, _caller);
     }
     
     void CreateEmptyThreadThenSetIsBackgroundToTrue() {
       Thread thread;
-      Assert::Throws<InvalidOperationException>(_delegate {thread.IsBackground = true;}, _current_information);
+      Assert::Throws<InvalidOperationException>(_delegate {thread.IsBackground = true;}, _caller);
     }
     
     void CreateEmptyThreadThenGetHashCode() {
       Thread thread;
-      Assert::AreEqual(0, thread.GetHashCode(), _current_information);
+      Assert::AreEqual(0, thread.GetHashCode(), _caller);
     }
     
     void CreateEmptyThreadThenInterrupt() {
       Thread thread;
-      Assert::Throws<InvalidOperationException>(_delegate {thread.Interrupt();}, _current_information);
+      Assert::Throws<InvalidOperationException>(_delegate {thread.Interrupt();}, _caller);
     }
     
     void CreateEmptyThreadThenJoin() {
       Thread thread;
-      Assert::Throws<InvalidOperationException>(_delegate {thread.Join();}, _current_information);
+      Assert::Throws<InvalidOperationException>(_delegate {thread.Join();}, _caller);
     }
     
     void CreateEmptyThreadThenJoinWithBadTimeout() {
       Thread thread;
-      Assert::Throws<InvalidOperationException>(_delegate {thread.Join(-2);}, _current_information);
+      Assert::Throws<InvalidOperationException>(_delegate {thread.Join(-2);}, _caller);
     }
     
     void CreateEmptyThreadThenJoinWithInfiniteTimeout() {
       Thread thread;
-      Assert::Throws<InvalidOperationException>(_delegate {thread.Join(Timeout::Infinite);}, _current_information);
+      Assert::Throws<InvalidOperationException>(_delegate {thread.Join(Timeout::Infinite);}, _caller);
     }
     
     void CreateEmptyThreadThenJoinWithTimeout() {
       Thread thread;
-      Assert::Throws<InvalidOperationException>(_delegate {thread.Join(1);}, _current_information);
+      Assert::Throws<InvalidOperationException>(_delegate {thread.Join(1);}, _caller);
     }
     
     void CreateEmptyThreadThenResume() {
       Thread thread;
-      Assert::Throws<InvalidOperationException>(_delegate {thread.Resume();}, _current_information);
+      Assert::Throws<InvalidOperationException>(_delegate {thread.Resume();}, _caller);
     }
     
     void CreateEmptyThreadThenStart() {
       Thread thread;
-      Assert::Throws<InvalidOperationException>(_delegate {thread.Start();}, _current_information);
+      Assert::Throws<InvalidOperationException>(_delegate {thread.Start();}, _caller);
     }
     
     void CreateEmptyThreadThenStartWithThreadStart() {
       Thread thread;
       object obj;
-      Assert::Throws<InvalidOperationException>(_delegate {thread.Start(obj);}, _current_information);
+      Assert::Throws<InvalidOperationException>(_delegate {thread.Start(obj);}, _caller);
     }
     
     void CreateEmptyThreadThenStartWithParameterizedThreadStart() {
       Thread thread;
       object obj;
-      Assert::Throws<InvalidOperationException>(_delegate {thread.Start(obj);}, _current_information);
+      Assert::Throws<InvalidOperationException>(_delegate {thread.Start(obj);}, _caller);
     }
     
     void CreateEmptyThreadThenSuspend() {
       Thread thread;
-      Assert::Throws<InvalidOperationException>(_delegate {thread.Suspend();}, _current_information);
+      Assert::Throws<InvalidOperationException>(_delegate {thread.Suspend();}, _caller);
     }
     
     void CreateThreadWithThreadStartThenGetManagedThreadId() {
@@ -458,7 +458,7 @@ namespace {
         counter++;
       };
       Thread thread(threadStart);
-      Assert::Greater(thread.ManagedThreadId, 1, _current_information);
+      Assert::Greater(thread.ManagedThreadId, 1, _caller);
     }
     
     void CreateThreadWithThreadStartThenGetHandle() {
@@ -468,7 +468,7 @@ namespace {
         counter++;
       };
       Thread thread(threadStart);
-      Assert::AreNotEqual(intptr(-1), thread.Handle, _current_information);
+      Assert::AreNotEqual(intptr(-1), thread.Handle, _caller);
     }
     
     void CreateThreadWithThreadStartThenIsAlive() {
@@ -478,7 +478,7 @@ namespace {
         counter++;
       };
       Thread thread(threadStart);
-      Assert::False(thread.IsAlive, _current_information);
+      Assert::False(thread.IsAlive, _caller);
     }
     
     void CreateThreadWithThreadStartStartItThenIsAlive() {
@@ -490,7 +490,7 @@ namespace {
       };
       Thread thread(threadStart);
       thread.Start();
-      Assert::True(thread.IsAlive, _current_information);
+      Assert::True(thread.IsAlive, _caller);
     }
     
     void CreateThreadWithThreadStartThenIsBackground() {
@@ -500,7 +500,7 @@ namespace {
         counter++;
       };
       Thread thread(threadStart);
-      Assert::False(thread.IsBackground, _current_information);
+      Assert::False(thread.IsBackground, _caller);
     }
     
     void CreateThreadWithThreadStartThenGetName() {
@@ -510,7 +510,7 @@ namespace {
         counter++;
       };
       Thread thread(threadStart);
-      Assert::AreEqual("", thread.Name, _current_information);
+      Assert::AreEqual("", thread.Name, _caller);
     }
     
     void CreateThreadWithThreadStartThenGetPriority() {
@@ -520,7 +520,7 @@ namespace {
         counter++;
       };
       Thread thread(threadStart);
-      Assert::AreEqual(ThreadPriority::Normal, thread.Priority, _current_information);
+      Assert::AreEqual(ThreadPriority::Normal, thread.Priority, _caller);
     }
     
     void CreateThreadWithThreadStartThenGetThreadState() {
@@ -530,7 +530,7 @@ namespace {
         counter++;
       };
       Thread thread(threadStart);
-      Assert::AreEqual(ThreadState::Unstarted, thread.ThreadState, _current_information);
+      Assert::AreEqual(ThreadState::Unstarted, thread.ThreadState, _caller);
     }
     
     void CreateThreadWithThreadStartThenSetName() {
@@ -540,7 +540,7 @@ namespace {
         counter++;
       };
       Thread thread(threadStart);
-      Assert::DoesNotThrows(_delegate {thread.Name = "Thread";}, _current_information);
+      Assert::DoesNotThrows(_delegate {thread.Name = "Thread";}, _caller);
       Assert::AreEqual("Thread", thread.Name);
     }
     
@@ -551,7 +551,7 @@ namespace {
         counter++;
       };
       Thread thread(threadStart);
-      Assert::DoesNotThrows(_delegate {thread.Priority = ThreadPriority::Highest;}, _current_information);
+      Assert::DoesNotThrows(_delegate {thread.Priority = ThreadPriority::Highest;}, _caller);
       Assert::AreEqual(ThreadPriority::Highest, thread.Priority);
     }
     
@@ -562,8 +562,8 @@ namespace {
         counter++;
       };
       Thread thread(threadStart);
-      Assert::Throws<ThreadStateException>(_delegate {thread.Abort();}, _current_information);
-      Assert::AreEqual(0, counter, _current_information);
+      Assert::Throws<ThreadStateException>(_delegate {thread.Abort();}, _caller);
+      Assert::AreEqual(0, counter, _caller);
     }
     
     void CreateThreadWithThreadStartStartItThenAbort() {
@@ -576,8 +576,8 @@ namespace {
       Thread thread(threadStart);
       thread.Start();
       Thread::Sleep(5);
-      Assert::Throws<ThreadAbortException>(_delegate {thread.Abort();}, _current_information);
-      Assert::AreEqual(0, counter, _current_information);
+      Assert::Throws<ThreadAbortException>(_delegate {thread.Abort();}, _caller);
+      Assert::AreEqual(0, counter, _caller);
     }
     
     void CreateThreadWithThreadStartThenSetIsBackgroundToTrue() {
@@ -587,7 +587,7 @@ namespace {
         counter++;
       };
       Thread thread(threadStart);
-      Assert::DoesNotThrows(_delegate {thread.IsBackground = true;}, _current_information);
+      Assert::DoesNotThrows(_delegate {thread.IsBackground = true;}, _caller);
     }
     
     void CreateThreadWithThreadStartThenGetHashCode() {
@@ -597,7 +597,7 @@ namespace {
         counter++;
       };
       Thread thread(threadStart);
-      Assert::AreEqual(thread.ManagedThreadId, thread.GetHashCode(), _current_information);
+      Assert::AreEqual(thread.ManagedThreadId, thread.GetHashCode(), _caller);
     }
     
     void CreateThreadWithThreadStartThenInterrupt() {
@@ -607,7 +607,7 @@ namespace {
         counter++;
       };
       Thread thread(threadStart);
-      Assert::Throws<ThreadStateException>(_delegate {thread.Interrupt();}, _current_information);
+      Assert::Throws<ThreadStateException>(_delegate {thread.Interrupt();}, _caller);
     }
     
     void CreateThreadWithThreadStartStartItThenInterrupt() {
@@ -620,7 +620,7 @@ namespace {
       Thread thread(threadStart);
       thread.Start();
       Thread::Sleep(5);
-      Assert::Throws<ThreadInterruptedException>(_delegate {thread.Interrupt();}, _current_information);
+      Assert::Throws<ThreadInterruptedException>(_delegate {thread.Interrupt();}, _caller);
     }
     
     void CreateThreadWithThreadStartThenSuspend() {
@@ -630,7 +630,7 @@ namespace {
         counter++;
       };
       Thread thread(threadStart);
-      Assert::Throws<ThreadStateException>(_delegate {thread.Suspend();}, _current_information);
+      Assert::Throws<ThreadStateException>(_delegate {thread.Suspend();}, _caller);
     }
     
     void CreateThreadWithThreadStartThenResume() {
@@ -640,7 +640,7 @@ namespace {
         counter++;
       };
       Thread thread(threadStart);
-      Assert::Throws<ThreadStateException>(_delegate {thread.Resume();}, _current_information);
+      Assert::Throws<ThreadStateException>(_delegate {thread.Resume();}, _caller);
     }
     
     void CreateThreadWithThreadStartStartItThenResume() {
@@ -651,7 +651,7 @@ namespace {
       };
       Thread thread(threadStart);
       thread.Start();
-      Assert::Throws<ThreadStateException>(_delegate {thread.Resume();}, _current_information);
+      Assert::Throws<ThreadStateException>(_delegate {thread.Resume();}, _caller);
     }
     
     void CreateThreadWithThreadStartStartItSuspendThenResume() {
@@ -664,7 +664,7 @@ namespace {
       Thread thread(threadStart);
       thread.Start();
       thread.Suspend();
-      Assert::DoesNotThrows(_delegate {thread.Resume();}, _current_information);
+      Assert::DoesNotThrows(_delegate {thread.Resume();}, _caller);
     }
     
     void CreateThreadWithThreadStartThenStart() {
@@ -674,7 +674,7 @@ namespace {
         counter++;
       };
       Thread thread(threadStart);
-      Assert::DoesNotThrows(_delegate {thread.Start();}, _current_information);
+      Assert::DoesNotThrows(_delegate {thread.Start();}, _caller);
     }
     
     void CreateThreadWithThreadStartThenStartWithParameterizedThreadStart() {
@@ -685,7 +685,7 @@ namespace {
       };
       Thread thread(threadStart);
       ParameterizedThreadStart parameterizedTeadStart = _delegate(const object&) {};
-      Assert::Throws<InvalidOperationException>(_delegate {thread.Start(parameterizedTeadStart);}, _current_information);
+      Assert::Throws<InvalidOperationException>(_delegate {thread.Start(parameterizedTeadStart);}, _caller);
     }
     
     void CreateThreadWithThreadStartThenJoin() {
@@ -695,7 +695,7 @@ namespace {
         counter++;
       };
       Thread thread(threadStart);
-      Assert::Throws<ThreadStateException>(_delegate {thread.Join();}, _current_information);
+      Assert::Throws<ThreadStateException>(_delegate {thread.Join();}, _caller);
      }
     
     void CreateThreadWithThreadStartStartItThenJoin() {
@@ -706,8 +706,8 @@ namespace {
       };
       Thread thread(threadStart);
       thread.Start();
-      Assert::DoesNotThrows(_delegate {thread.Join();}, _current_information);
-      Assert::AreEqual(1, counter, _current_information);
+      Assert::DoesNotThrows(_delegate {thread.Join();}, _caller);
+      Assert::AreEqual(1, counter, _caller);
     }
     
     void CreateThreadWithThreadStartThenJoinWithBadTimeout() {
@@ -717,7 +717,7 @@ namespace {
         counter++;
       };
       Thread thread(threadStart);
-      Assert::Throws<ThreadStateException>(_delegate {thread.Join(-2);}, _current_information);
+      Assert::Throws<ThreadStateException>(_delegate {thread.Join(-2);}, _caller);
     }
     
     void CreateThreadWithThreadStartStartItThenJoinWithBadTimeout() {
@@ -728,7 +728,7 @@ namespace {
       };
       Thread thread(threadStart);
       thread.Start();
-      Assert::Throws<ArgumentOutOfRangeException>(_delegate {thread.Join(-2);}, _current_information);
+      Assert::Throws<ArgumentOutOfRangeException>(_delegate {thread.Join(-2);}, _caller);
     }
     
     void CreateThreadWithThreadStartThenJoinWithInfiniteTimeout() {
@@ -739,8 +739,8 @@ namespace {
       };
       Thread thread(threadStart);
       thread.Start();
-      Assert::DoesNotThrows(_delegate {thread.Join(Timeout::Infinite);}, _current_information);
-      Assert::AreEqual(1, counter, _current_information);
+      Assert::DoesNotThrows(_delegate {thread.Join(Timeout::Infinite);}, _caller);
+      Assert::AreEqual(1, counter, _caller);
     }
     
     void CreateThreadWithThreadStartThenJoinWithTimeout() {
@@ -750,7 +750,7 @@ namespace {
         counter++;
       };
       Thread thread(threadStart);
-      Assert::Throws<ThreadStateException>(_delegate {thread.Join(5);}, _current_information);
+      Assert::Throws<ThreadStateException>(_delegate {thread.Join(5);}, _caller);
     }
     
     void CreateThreadWithThreadStartStartItThenJoinWithTimeout() {
@@ -761,8 +761,8 @@ namespace {
       };
       Thread thread(threadStart);
       thread.Start();
-      Assert::True(thread.Join(5), _current_information);
-      Assert::AreEqual(1, counter, _current_information);
+      Assert::True(thread.Join(5), _caller);
+      Assert::AreEqual(1, counter, _caller);
    }
     
     void CreateThreadWithThreadStartStartItThenJoinWithTimeSpanTimeout() {
@@ -773,8 +773,8 @@ namespace {
       };
       Thread thread(threadStart);
       thread.Start();
-      Assert::True(thread.Join(TimeSpan::FromMilliseconds(5)), _current_information);
-      Assert::AreEqual(1, counter, _current_information);
+      Assert::True(thread.Join(TimeSpan::FromMilliseconds(5)), _caller);
+      Assert::AreEqual(1, counter, _caller);
     }
     
     void CreateThreadWithThreadStartStartItThenJoinWithToShortTimeout() {
@@ -786,8 +786,8 @@ namespace {
       };
       Thread thread(threadStart);
       thread.Start();
-      Assert::False(thread.Join(2), _current_information);
-      Assert::AreEqual(0, counter, _current_information);
+      Assert::False(thread.Join(2), _caller);
+      Assert::AreEqual(0, counter, _caller);
     }
     
     void CreateThreadWithThreadStartStartItThenJoinWithToShortTimeSpanTimeout() {
@@ -799,8 +799,8 @@ namespace {
       };
       Thread thread(threadStart);
       thread.Start();
-      Assert::False(thread.Join(TimeSpan::FromMilliseconds(2)), _current_information);
-      Assert::AreEqual(0, counter, _current_information);
+      Assert::False(thread.Join(TimeSpan::FromMilliseconds(2)), _caller);
+      Assert::AreEqual(0, counter, _caller);
     }
     
     void CreateThreadWithParameterizedThreadStartThenGetManagedThreadId() {
@@ -810,7 +810,7 @@ namespace {
         counter++;
       };
       Thread thread(parameterizedThreadStart);
-      Assert::Greater(thread.ManagedThreadId, 1, _current_information);
+      Assert::Greater(thread.ManagedThreadId, 1, _caller);
     }
     
     void CreateThreadWithParameterizedThreadStartThenGetHandle() {
@@ -820,7 +820,7 @@ namespace {
         counter++;
       };
       Thread thread(parameterizedThreadStart);
-      Assert::AreNotEqual(intptr(-1), thread.Handle, _current_information);
+      Assert::AreNotEqual(intptr(-1), thread.Handle, _caller);
     }
     
     void CreateThreadWithParameterizedThreadStartThenIsAlive() {
@@ -830,7 +830,7 @@ namespace {
         counter++;
       };
       Thread thread(parameterizedThreadStart);
-      Assert::False(thread.IsAlive, _current_information);
+      Assert::False(thread.IsAlive, _caller);
     }
     
     void CreateThreadWithParameterizedThreadStartStartItThenIsAlive() {
@@ -842,7 +842,7 @@ namespace {
       };
       Thread thread(parameterizedThreadStart);
       thread.Start(counter);
-      Assert::True(thread.IsAlive, _current_information);
+      Assert::True(thread.IsAlive, _caller);
     }
     
     void CreateThreadWithParameterizedThreadStartThenIsBackground() {
@@ -852,7 +852,7 @@ namespace {
         counter++;
       };
       Thread thread(parameterizedThreadStart);
-      Assert::False(thread.IsBackground, _current_information);
+      Assert::False(thread.IsBackground, _caller);
     }
     
     void CreateThreadWithParameterizedThreadStartThenGetName() {
@@ -862,7 +862,7 @@ namespace {
         counter++;
       };
       Thread thread(parameterizedThreadStart);
-      Assert::AreEqual("", thread.Name, _current_information);
+      Assert::AreEqual("", thread.Name, _caller);
     }
     
     void CreateThreadWithParameterizedThreadStartThenGetPriority() {
@@ -872,7 +872,7 @@ namespace {
         counter++;
       };
       Thread thread(parameterizedThreadStart);
-      Assert::AreEqual(ThreadPriority::Normal, thread.Priority, _current_information);
+      Assert::AreEqual(ThreadPriority::Normal, thread.Priority, _caller);
     }
     
     void CreateThreadWithParameterizedThreadStartThenGetThreadState() {
@@ -882,17 +882,17 @@ namespace {
         counter++;
       };
       Thread thread(parameterizedThreadStart);
-      Assert::AreEqual(ThreadState::Unstarted, thread.ThreadState, _current_information);
+      Assert::AreEqual(ThreadState::Unstarted, thread.ThreadState, _caller);
     }
     
     void CreateThreadWithParameterizedThreadStartThenSetName() {
       static Int32 counter;
       counter = 0;
       ParameterizedThreadStart parameterizedThreadStart = _delegate(const object& param) {
-        Assert::AreEqual(0, as<Int32>(param), _current_information);
+        Assert::AreEqual(0, as<Int32>(param), _caller);
       };
       Thread thread(parameterizedThreadStart);
-      Assert::DoesNotThrows(_delegate {thread.Name = "Thread";}, _current_information);
+      Assert::DoesNotThrows(_delegate {thread.Name = "Thread";}, _caller);
       Assert::AreEqual("Thread", thread.Name);
     }
     
@@ -900,10 +900,10 @@ namespace {
       static Int32 counter;
       counter = 0;
       ParameterizedThreadStart parameterizedThreadStart = _delegate(const object& param) {
-        Assert::AreEqual(0, as<Int32>(param), _current_information);
+        Assert::AreEqual(0, as<Int32>(param), _caller);
       };
       Thread thread(parameterizedThreadStart);
-      Assert::DoesNotThrows(_delegate {thread.Priority = ThreadPriority::Highest;}, _current_information);
+      Assert::DoesNotThrows(_delegate {thread.Priority = ThreadPriority::Highest;}, _caller);
       Assert::AreEqual(ThreadPriority::Highest, thread.Priority);
     }
     
@@ -911,11 +911,11 @@ namespace {
       static Int32 counter;
       counter = 0;
       ParameterizedThreadStart parameterizedThreadStart = _delegate(const object& param) {
-        Assert::AreEqual(0, as<Int32>(param), _current_information);
+        Assert::AreEqual(0, as<Int32>(param), _caller);
       };
       Thread thread(parameterizedThreadStart);
-      Assert::Throws<ThreadStateException>(_delegate {thread.Abort();}, _current_information);
-      Assert::AreEqual(0, counter, _current_information);
+      Assert::Throws<ThreadStateException>(_delegate {thread.Abort();}, _caller);
+      Assert::AreEqual(0, counter, _caller);
     }
     
     void CreateThreadWithParameterizedThreadStartStartItThenAbort() {
@@ -923,43 +923,43 @@ namespace {
       counter = 0;
       ParameterizedThreadStart parameterizedThreadStart = _delegate(const object& param) {
         Thread::Sleep(100);
-        Assert::AreEqual(0, as<Int32>(param), _current_information);
+        Assert::AreEqual(0, as<Int32>(param), _caller);
       };
       Thread thread(parameterizedThreadStart);
       thread.Start(counter);
       Thread::Sleep(5);
-      Assert::Throws<ThreadAbortException>(_delegate {thread.Abort();}, _current_information);
-      Assert::AreEqual(0, counter, _current_information);
+      Assert::Throws<ThreadAbortException>(_delegate {thread.Abort();}, _caller);
+      Assert::AreEqual(0, counter, _caller);
     }
     
     void CreateThreadWithParameterizedThreadStartThenSetIsBackgroundToTrue() {
       static Int32 counter;
       counter = 0;
       ParameterizedThreadStart parameterizedThreadStart = _delegate(const object& param) {
-        Assert::AreEqual(0, as<Int32>(param), _current_information);
+        Assert::AreEqual(0, as<Int32>(param), _caller);
       };
       Thread thread(parameterizedThreadStart);
-      Assert::DoesNotThrows(_delegate {thread.IsBackground = true;}, _current_information);
+      Assert::DoesNotThrows(_delegate {thread.IsBackground = true;}, _caller);
     }
     
     void CreateThreadWithParameterizedThreadStartThenGetHashCode() {
       static Int32 counter;
       counter = 0;
       ParameterizedThreadStart parameterizedThreadStart = _delegate(const object& param) {
-        Assert::AreEqual(0, as<Int32>(param), _current_information);
+        Assert::AreEqual(0, as<Int32>(param), _caller);
       };
       Thread thread(parameterizedThreadStart);
-      Assert::AreEqual(thread.ManagedThreadId, thread.GetHashCode(), _current_information);
+      Assert::AreEqual(thread.ManagedThreadId, thread.GetHashCode(), _caller);
     }
     
     void CreateThreadWithParameterizedThreadStartThenInterrupt() {
       static Int32 counter;
       counter = 0;
       ParameterizedThreadStart parameterizedThreadStart = _delegate(const object& param) {
-        Assert::AreEqual(0, as<Int32>(param), _current_information);
+        Assert::AreEqual(0, as<Int32>(param), _caller);
       };
       Thread thread(parameterizedThreadStart);
-      Assert::Throws<ThreadStateException>(_delegate {thread.Interrupt();}, _current_information);
+      Assert::Throws<ThreadStateException>(_delegate {thread.Interrupt();}, _caller);
     }
     
     void CreateThreadWithParameterizedThreadStartStartItThenInterrupt() {
@@ -967,43 +967,43 @@ namespace {
       counter = 0;
       ParameterizedThreadStart parameterizedThreadStart = _delegate(const object& param) {
         Thread::Sleep(100);
-        Assert::AreEqual(0, as<Int32>(param), _current_information);
+        Assert::AreEqual(0, as<Int32>(param), _caller);
       };
       Thread thread(parameterizedThreadStart);
       thread.Start(counter);
       Thread::Sleep(5);
-      Assert::Throws<ThreadInterruptedException>(_delegate {thread.Interrupt();}, _current_information);
+      Assert::Throws<ThreadInterruptedException>(_delegate {thread.Interrupt();}, _caller);
     }
     
     void CreateThreadWithParameterizedThreadStartThenSuspend() {
       static Int32 counter;
       counter = 0;
       ParameterizedThreadStart parameterizedThreadStart = _delegate(const object& param) {
-        Assert::AreEqual(0, as<Int32>(param), _current_information);
+        Assert::AreEqual(0, as<Int32>(param), _caller);
       };
       Thread thread(parameterizedThreadStart);
-      Assert::Throws<ThreadStateException>(_delegate {thread.Suspend();}, _current_information);
+      Assert::Throws<ThreadStateException>(_delegate {thread.Suspend();}, _caller);
     }
     
     void CreateThreadWithParameterizedThreadStartThenResume() {
       static Int32 counter;
       counter = 0;
       ParameterizedThreadStart parameterizedThreadStart = _delegate(const object& param) {
-        Assert::AreEqual(0, as<Int32>(param), _current_information);
+        Assert::AreEqual(0, as<Int32>(param), _caller);
       };
       Thread thread(parameterizedThreadStart);
-      Assert::Throws<ThreadStateException>(_delegate {thread.Resume();}, _current_information);
+      Assert::Throws<ThreadStateException>(_delegate {thread.Resume();}, _caller);
     }
     
     void CreateThreadWithParameterizedThreadStartStartItThenResume() {
       static Int32 counter;
       counter = 0;
       ParameterizedThreadStart parameterizedThreadStart = _delegate(const object& param) {
-        Assert::AreEqual(0, as<Int32>(param), _current_information);
+        Assert::AreEqual(0, as<Int32>(param), _caller);
       };
       Thread thread(parameterizedThreadStart);
       thread.Start(counter);
-      Assert::Throws<ThreadStateException>(_delegate {thread.Resume();}, _current_information);
+      Assert::Throws<ThreadStateException>(_delegate {thread.Resume();}, _caller);
     }
     
     void CreateThreadWithParameterizedThreadStartStartItSuspendThenResume() {
@@ -1011,121 +1011,121 @@ namespace {
       counter = 0;
       ParameterizedThreadStart parameterizedThreadStart = _delegate(const object& param) {
         Thread::Sleep(10);
-        Assert::AreEqual(0, as<Int32>(param), _current_information);
+        Assert::AreEqual(0, as<Int32>(param), _caller);
       };
       Thread thread(parameterizedThreadStart);
       thread.Start(counter);
       thread.Suspend();
-      Assert::DoesNotThrows(_delegate {thread.Resume();}, _current_information);
+      Assert::DoesNotThrows(_delegate {thread.Resume();}, _caller);
     }
     
     void CreateThreadWithParameterizedThreadStartThenStart() {
       static Int32 counter;
       counter = 0;
       ParameterizedThreadStart parameterizedThreadStart = _delegate(const object& param) {
-        Assert::IsInstanceOfType<Thread>(param, _current_information);
+        Assert::IsInstanceOfType<Thread>(param, _caller);
       };
       Thread thread(parameterizedThreadStart);
-      Assert::DoesNotThrows(_delegate {thread.Start();}, _current_information);
+      Assert::DoesNotThrows(_delegate {thread.Start();}, _caller);
     }
     
     void CreateThreadWithParameterizedThreadStartThenStartWithThreadStart() {
       static Int32 counter;
       counter = 0;
       ParameterizedThreadStart parameterizedThreadStart = _delegate(const object& param) {
-        Assert::AreEqual(0, as<Int32>(param), _current_information);
+        Assert::AreEqual(0, as<Int32>(param), _caller);
       };
       Thread thread(parameterizedThreadStart);
-      Assert::DoesNotThrows(_delegate {thread.Start(counter);}, _current_information);
+      Assert::DoesNotThrows(_delegate {thread.Start(counter);}, _caller);
     }
     
     void CreateThreadWithParameterizedThreadStartThenJoin() {
       static Int32 counter;
       counter = 0;
       ParameterizedThreadStart parameterizedThreadStart = _delegate(const object& param) {
-        Assert::AreEqual(0, as<Int32>(param), _current_information);
+        Assert::AreEqual(0, as<Int32>(param), _caller);
       };
       Thread thread(parameterizedThreadStart);
-      Assert::Throws<ThreadStateException>(_delegate {thread.Join();}, _current_information);
+      Assert::Throws<ThreadStateException>(_delegate {thread.Join();}, _caller);
     }
     
     void CreateThreadWithParameterizedThreadStartStartItThenJoin() {
       static Int32 counter;
       counter = 0;
       ParameterizedThreadStart parameterizedThreadStart = _delegate(const object& param) {
-        Assert::AreEqual(0, as<Int32>(param), _current_information);
+        Assert::AreEqual(0, as<Int32>(param), _caller);
       };
       Thread thread(parameterizedThreadStart);
       thread.Start(counter);
-      Assert::DoesNotThrows(_delegate {thread.Join();}, _current_information);
-      Assert::AreEqual(0, counter, _current_information);
+      Assert::DoesNotThrows(_delegate {thread.Join();}, _caller);
+      Assert::AreEqual(0, counter, _caller);
     }
     
     void CreateThreadWithParameterizedThreadStartThenJoinWithBadTimeout() {
       static Int32 counter;
       counter = 0;
       ParameterizedThreadStart parameterizedThreadStart = _delegate(const object& param) {
-        Assert::AreEqual(0, as<Int32>(param), _current_information);
+        Assert::AreEqual(0, as<Int32>(param), _caller);
       };
       Thread thread(parameterizedThreadStart);
-      Assert::Throws<ThreadStateException>(_delegate {thread.Join(-2);}, _current_information);
+      Assert::Throws<ThreadStateException>(_delegate {thread.Join(-2);}, _caller);
     }
     
     void CreateThreadWithParameterizedThreadStartStartItThenJoinWithBadTimeout() {
       static Int32 counter;
       counter = 0;
       ParameterizedThreadStart parameterizedThreadStart = _delegate(const object& param) {
-        Assert::AreEqual(0, as<Int32>(param), _current_information);
+        Assert::AreEqual(0, as<Int32>(param), _caller);
       };
       Thread thread(parameterizedThreadStart);
       thread.Start(counter);
-      Assert::Throws<ArgumentOutOfRangeException>(_delegate {thread.Join(-2);}, _current_information);
+      Assert::Throws<ArgumentOutOfRangeException>(_delegate {thread.Join(-2);}, _caller);
     }
     
     void CreateThreadWithParameterizedThreadStartThenJoinWithInfiniteTimeout() {
       static Int32 counter;
       counter = 0;
       ParameterizedThreadStart parameterizedThreadStart = _delegate(const object& param) {
-        Assert::AreEqual(0, as<Int32>(param), _current_information);
+        Assert::AreEqual(0, as<Int32>(param), _caller);
       };
       Thread thread(parameterizedThreadStart);
       thread.Start(counter);
-      Assert::DoesNotThrows(_delegate {thread.Join(Timeout::Infinite);}, _current_information);
-      Assert::AreEqual(0, counter, _current_information);
+      Assert::DoesNotThrows(_delegate {thread.Join(Timeout::Infinite);}, _caller);
+      Assert::AreEqual(0, counter, _caller);
     }
     
     void CreateThreadWithParameterizedThreadStartThenJoinWithTimeout() {
       static Int32 counter;
       counter = 0;
       ParameterizedThreadStart parameterizedThreadStart = _delegate(const object& param) {
-        Assert::AreEqual(0, as<Int32>(param), _current_information);
+        Assert::AreEqual(0, as<Int32>(param), _caller);
       };
       Thread thread(parameterizedThreadStart);
-      Assert::Throws<ThreadStateException>(_delegate {thread.Join(5);}, _current_information);
+      Assert::Throws<ThreadStateException>(_delegate {thread.Join(5);}, _caller);
     }
     
     void CreateThreadWithParameterizedThreadStartStartItThenJoinWithTimeout() {
       static Int32 counter;
       counter = 0;
       ParameterizedThreadStart parameterizedThreadStart = _delegate(const object& param) {
-        Assert::AreEqual(0, as<Int32>(param), _current_information);
+        Assert::AreEqual(0, as<Int32>(param), _caller);
       };
       Thread thread(parameterizedThreadStart);
       thread.Start(counter);
-      Assert::True(thread.Join(5), _current_information);
-      Assert::AreEqual(0, counter, _current_information);
+      Assert::True(thread.Join(5), _caller);
+      Assert::AreEqual(0, counter, _caller);
     }
     
     void CreateThreadWithParameterizedThreadStartStartItThenJoinWithTimeSpanTimeout() {
       static Int32 counter;
       counter = 0;
       ParameterizedThreadStart parameterizedThreadStart = _delegate(const object& param) {
-        Assert::AreEqual(0, as<Int32>(param), _current_information);
+        Assert::AreEqual(0, as<Int32>(param), _caller);
       };
       Thread thread(parameterizedThreadStart);
       thread.Start(counter);
-      Assert::True(thread.Join(TimeSpan::FromMilliseconds(5)), _current_information);
-      Assert::AreEqual(0, counter, _current_information);
+      Assert::True(thread.Join(TimeSpan::FromMilliseconds(5)), _caller);
+      Assert::AreEqual(0, counter, _caller);
     }
     
     void CreateThreadWithParameterizedThreadStartStartItThenJoinWithToShortTimeout() {
@@ -1133,12 +1133,12 @@ namespace {
       counter = 0;
       ParameterizedThreadStart parameterizedThreadStart = _delegate(const object& param) {
         Thread::Sleep(20);
-        Assert::AreEqual(0, as<Int32>(param), _current_information);
+        Assert::AreEqual(0, as<Int32>(param), _caller);
       };
       Thread thread(parameterizedThreadStart);
       thread.Start(counter);
-      Assert::False(thread.Join(2), _current_information);
-      Assert::AreEqual(0, counter, _current_information);
+      Assert::False(thread.Join(2), _caller);
+      Assert::AreEqual(0, counter, _caller);
     }
     
     void CreateThreadWithParameterizedThreadStartStartItThenJoinWithToShortTimeSpanTimeout() {
@@ -1146,12 +1146,12 @@ namespace {
       counter = 0;
       ParameterizedThreadStart parameterizedThreadStart = _delegate(const object& param) {
         Thread::Sleep(20);
-        Assert::AreEqual(0, as<Int32>(param), _current_information);
+        Assert::AreEqual(0, as<Int32>(param), _caller);
       };
       Thread thread(parameterizedThreadStart);
       thread.Start(counter);
-      Assert::False(thread.Join(TimeSpan::FromMilliseconds(2)), _current_information);
-      Assert::AreEqual(0, counter, _current_information);
+      Assert::False(thread.Join(TimeSpan::FromMilliseconds(2)), _caller);
+      Assert::AreEqual(0, counter, _caller);
     }
   };
   
