@@ -1,4 +1,5 @@
 #include <Switch/Foreach.hpp>
+#include <Switch/Nameof.hpp>
 #include <Switch/Startup.hpp>
 #include <Switch/Var.hpp>
 #include <Switch/System/Console.hpp>
@@ -24,11 +25,10 @@ namespace Examples {
     
     // The main entry point for the application.
     static void Main() {
-      __opaque_function_pointer__<void, const string&> fct = _delegate(const string& value) {
-        Console::WriteLine("value = {0}", value);
-      };
-      
-      fct("Test");
+      Data data;
+      data.Items = {12, 24, 48};
+      Console::WriteLine("{0} = {{{1}}}", nameof(data.Items), typeof(data.Items()));
+      Console::WriteLine("{0} = {{{1}}}", nameof(data.Items), string::Join(", ", data.Items()));
     }
   };
 }

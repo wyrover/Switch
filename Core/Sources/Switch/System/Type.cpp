@@ -4,6 +4,7 @@
 
 #include "../../../Includes/Switch/System/Array.hpp"
 #include "../../../Includes/Switch/System/Type.hpp"
+#include "../../../Includes/Switch/System/Collections/Specialized/StringDictionary.hpp"
 #include "../../__OS/CoreApi.hpp"
 
 using namespace System;
@@ -32,14 +33,19 @@ bool Type::Equals(const Type& type) const {
 
 String Type::GetFullName() const {
   String fullName = __OS::CoreApi::Type::Demangle(this->type.name());
-  Array<string> containsNullPtrTypes = {"Switch::System::Func", "Switch::System::Tuple"};
-  for (string item : containsNullPtrTypes) {
+  for (string item : {"Switch::System::Func", "Switch::System::Tuple"}) {
     if (fullName.StartsWith(item)) {
       fullName = fullName.Replace(", std::nullptr_t", "");
       break;
     }
   }
-  return fullName.TrimEnd('*').Replace(" const", "").Replace("const ", "");
+
+  // replace some keywords by other...
+  for (auto keyValue : System::Collections::Specialized::StringDictionary {{"std::nullptr_t", "Switch::NUllPtr"}, {"std::__1::allocator<int>", "Switch::Allocator"}, {"std::allocator<int>", "Switch::Allocator"}, {"const", ""}, {"__property__", "property"}, {"__readonly__", "readonly"}, {"__writeonly__", "writeonly"}, {"__readwrite__", "readwrite"},}) {
+    if (fullName.Contains(keyValue.Key))
+      fullName = fullName.Replace(keyValue.Key, keyValue.Value);
+  }
+  return fullName.TrimEnd('*');
 }
 
 String Type::GetName() const {

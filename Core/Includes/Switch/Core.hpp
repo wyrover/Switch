@@ -380,6 +380,7 @@
 #include "LiteralOperatorConverter.hpp"
 #include "Lock.hpp"
 #include "Move.hpp"
+#include "Nameof.hpp"
 #include "NullPtr.hpp"
 #include "Property.hpp"
 #include "Ref.hpp"

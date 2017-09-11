@@ -388,6 +388,7 @@ set(INCLUDE_FILES
   Includes/Switch/LiteralOperatorConverter.hpp
   Includes/Switch/Lock.hpp
   Includes/Switch/Move.hpp
+  Includes/Switch/Nameof.hpp
   Includes/Switch/NullPtr.hpp
   Includes/Switch/Property.hpp
   Includes/Switch/Public.hpp
