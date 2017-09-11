@@ -20,7 +20,7 @@ namespace Switch {
       /// @par Examples
       /// The following example demonstrates how to use the Stopwatch class to determine the execution time for an application.
       /// @include Stopwatch.cpp
-      class _public Stopwatch : public Object {
+      class _export Stopwatch : public Object {
       public:
         /// @brief Gets the frequency of the timer as the number of ticks per second. This field is read-only.
         /// @return The frequency of the timer as the number of ticks per second.

@@ -16,7 +16,7 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief Represents a 32-bit signed integer.
-    struct _public Int32 final : public ValueType, public IComparable, public IConvertible, public IFormattable {
+    struct _export Int32 final : public ValueType, public IComparable, public IConvertible, public IFormattable {
     public:
       /// @brief Represents the largest possible value of an Int32 2147483647 (0x7FFFFFFF). This field is constant.
       static property<int32, readonly> MaxValue;

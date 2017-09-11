@@ -9,7 +9,7 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The exception that is thrown when an attempt is made to store an element of the wrong type within an array.
-    class _public ArrayTypeMismatchException : public SystemException {
+    class _export ArrayTypeMismatchException : public SystemException {
     public:
       /// @brief Create a new instance of class ArrayTypeMismatchException
       /// @remarks Message is set with the default message associate to the error.

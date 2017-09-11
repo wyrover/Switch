@@ -25,7 +25,7 @@ namespace Switch {
         /// @par Examples
         /// This example show how to receive and send with ClientWebSocket :
         /// @include ClientWebSocket.cpp
-        class _public ClientWebSocket : public WebSocket {
+        class _export ClientWebSocket : public WebSocket {
         public:
           /// @brief Creates an instance of the ClientWebSocket class.
           ClientWebSocket();

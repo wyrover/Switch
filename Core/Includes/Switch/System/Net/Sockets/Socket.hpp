@@ -47,7 +47,7 @@ namespace Switch {
         /// @remarks When you are finished sending and receiving data, use the Shutdown method to disable the Socket. After calling Shutdown, call the Close method to release all resources associated with the Socket.
         /// @remarks The Socket class allows you to configure your Socket using the SetSocketOption method. Retrieve these settings using the GetSocketOption method.
         /// @note If you are writing a relatively simple application and do not require maximum performance, consider using TcpClient, TcpListener, and UdpClient. These classes provide a simpler and more user-friendly interface to Socket communications.
-        class _public Socket : public Object {
+        class _export Socket : public Object {
         public:          
           /// @brief Initializes a new instance of the Socket class using the specified address family, socket type and protocol.
           /// @param addressFamily One of the AddressFamily values.

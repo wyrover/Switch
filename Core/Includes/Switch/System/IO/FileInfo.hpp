@@ -22,7 +22,7 @@ namespace Switch {
 
       /// @brief Provides instance methods for the creation, copying, deletion, moving, and opening of files, and aids in the creation of System::IO::FileStream objects.
       /// This class cannot be inherited.
-      class _public FileInfo final : public FileSystemInfo {
+      class _export FileInfo final : public FileSystemInfo {
       public:
         /// @brief Represents the uninitialized file object. This field is constant.
         static property<FileInfo, readonly> Empty;

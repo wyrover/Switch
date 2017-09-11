@@ -18,7 +18,7 @@ namespace Switch {
       /// @brief The System::Net::WebSockets namespace provides a managed implementation of the WebSocket interface for developers.
       namespace WebSockets {
         /// @brief The WebSocket class allows applications to send and receive data after the WebSocket upgrade has completed.
-        class _public WebSocket _abstract {
+        class _export WebSocket _abstract {
         protected:
           /// @brief Creates an instance of the WebSocket class.
           WebSocket() {}

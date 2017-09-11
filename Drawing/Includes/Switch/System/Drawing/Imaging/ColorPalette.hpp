@@ -19,7 +19,7 @@ namespace Switch {
 
       /// @brief The System::Drawing::Imaging namespace provides advanced GDI+ imaging functionality. Basic graphics functionality is provided by the System::Drawing namespace.
       namespace Imaging {
-        class _public ColorPalette : public object {
+        class _export ColorPalette : public object {
         public:
           /// @cond
           ColorPalette(const ColorPalette& colorPalette) : entries(colorPalette.entries), flags(colorPalette.flags) {}

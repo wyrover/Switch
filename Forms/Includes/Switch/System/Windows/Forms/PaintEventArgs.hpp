@@ -16,7 +16,7 @@ namespace Switch {
         class Control;
         /// @endcond
 
-        class _public PaintEventArgs : public EventArgs {
+        class _export PaintEventArgs : public EventArgs {
         public:
           PaintEventArgs() {}
           PaintEventArgs(const System::Drawing::Rectangle& clipRectangle, System::Drawing::Graphics& graphics) : clipRectangle(clipRectangle), graphics(&graphics) {}

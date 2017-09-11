@@ -8,7 +8,7 @@
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
   /// @brief Represent a static class.
-  struct _public Static {
+  struct _export Static {
     /// @cond
     Static() = delete;
     Static(const Static&) = delete;

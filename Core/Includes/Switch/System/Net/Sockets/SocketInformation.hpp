@@ -19,7 +19,7 @@ namespace Switch {
       namespace Sockets {
         /// @brief Encapsulates the information that is necessary to duplicate a Socket.
         /// @remarks Socket::DuplicateAndClose creates a SocketInformation instance for use with the Socket::Socket(SocketInformation) constructor.
-        class _public SocketInformation : public Object {
+        class _export SocketInformation : public Object {
         public:
           /// @brief Create a new instance of SocketInformation class.
           SocketInformation() {}

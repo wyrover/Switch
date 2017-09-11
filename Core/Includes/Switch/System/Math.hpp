@@ -20,7 +20,7 @@ namespace Switch {
     /// @par Examples
     /// This class cannot be inherited.
     /// @include Math.cpp
-    class _public Math _static {
+    class _export Math _static {
     public:
       /// @brief Represents the natural logarithmic base, specified by the constant, e. This field is constant.
       /// @remarks The value of this field is 2.7182818284590452354.

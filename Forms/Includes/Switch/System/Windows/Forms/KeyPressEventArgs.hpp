@@ -14,7 +14,7 @@ namespace Switch {
         class Control;
         /// @endcond
 
-        class _public KeyPressEventArgs : public EventArgs {
+        class _export KeyPressEventArgs : public EventArgs {
         public:
           KeyPressEventArgs() {}
           KeyPressEventArgs(char32 keyChar) : keyChar(keyChar), handled(false) {}

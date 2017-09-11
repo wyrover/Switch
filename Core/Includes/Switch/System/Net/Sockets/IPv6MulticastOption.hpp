@@ -15,7 +15,7 @@ namespace Switch {
       /// @brief The System::Net::Sockets namespace provides a managed implementation of the Berkeley Sockets interface for developers who need to tightly control access to the network.
       namespace Sockets {
         /// @brief Contains option values for joining an IPv6 multicast group.
-        class _public IPv6MulticastOption : public Object {
+        class _export IPv6MulticastOption : public Object {
         public:
           /// @brief Initializes a new version of the IPv6MulticastOption class for the specified IP multicast group.
           /// @param group The IPAddress of the multicast group.

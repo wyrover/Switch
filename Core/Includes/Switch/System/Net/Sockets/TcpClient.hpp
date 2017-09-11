@@ -25,7 +25,7 @@ namespace Switch {
         /// @note If you want to send connectionless datagrams in synchronous blocking mode, use the UdpClient class.
         /// @note To send and receive data, use the GetStream method to obtain a NetworkStream. Call the Write and Read methods of the NetworkStream
         /// @note to send and receive data with the remote host. Use the Close method to release all resources associated with the TcpClient.
-        class _public TcpClient : public Object {
+        class _export TcpClient : public Object {
         public:
           /// @brief Initializes a new instance of the TcpClient class
           /// @remarks This constructor creates a new TcpClient and allows the underlying service provider to assign the most appropriate local IP address and port number. You must first call the Connect method before sending and receiving data.

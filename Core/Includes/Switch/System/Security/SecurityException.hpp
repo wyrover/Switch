@@ -11,7 +11,7 @@ namespace Switch {
     /// @brief The System.Security namespaces contain classes that represent the Switch Framework security system and permissions. Child namespaces provide types that control access to and audit securable objects, allow authentication, provide crytographic services, control access to operations and resources based on policy, and support rights management of application-created content.
     namespace Security {
       /// @brief The exception that is thrown when a security error is detected.
-      class _public SecurityException : public SystemException {
+      class _export SecurityException : public SystemException {
       public:
         /// @brief Create a new instance of class SecurityException
         /// @remarks Message is set with the default message associate to the error.

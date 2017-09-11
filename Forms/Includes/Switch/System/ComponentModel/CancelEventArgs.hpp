@@ -7,7 +7,7 @@
 namespace Switch {
   namespace System {
     namespace ComponentModel {
-      class _public CancelEventArgs : public EventArgs {
+      class _export CancelEventArgs : public EventArgs {
       public:
         CancelEventArgs() {}
         CancelEventArgs(const CancelEventArgs& ce) : cancel(ce.cancel) {}

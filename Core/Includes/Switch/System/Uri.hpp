@@ -37,7 +37,7 @@ namespace Switch {
     /// @remarks For hierarchical URIs, if the host is ! terminated with a forward slash (/), one is added.
     /// @remarks By default, any reserved characters in the URI are escaped in accordance with RFC 2396. This behavior changes if International Resource Identifiers || International Domain Name parsing is enabled in which case reserved characters in the URI are escaped in accordance with RFC 3986 && RFC 3987.
     /// @remarks As part of canonicalization in the constructor for some schemes, escaped representations are compacted. The schemes for which URI will compact escaped sequences include the following: file, http, https, net.pipe, and net.tcp. For all other schemes, escaped sequences are ! compacted. For example: if you percent encode the two dots ".." as "%2E%2E" then the URI constructor will compact this sequence for some schemes. For example, the following code sample shows a URI constructor for the http scheme.
-    class _public Uri : public Object, public System::Runtime::Serialization::ISerializable {
+    class _export Uri : public Object, public System::Runtime::Serialization::ISerializable {
     public:
       /// @cond
       void SetUri(const String& uri, UriKind kind) {

@@ -4,19 +4,19 @@
 #include <Switch/Var.hpp>
 #include <Switch/System/Console.hpp>
 
-#undef _public
+#undef _export
 
 #define _internal \
-private :
+private:
 
 #define _private \
-private :
+private:
 
 #define _protected \
-protected :
+protected:
 
 #define _public \
-public :
+public:
 
 using namespace System;
 

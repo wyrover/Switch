@@ -17,7 +17,7 @@ namespace Switch {
     /// The WebRequest and WebResponse classes form the basis of what are called pluggable protocols, an implementation of network services that enables you to develop applications that use Internet resources without worrying about the specific details of the individual protocols.
     namespace Net {
       /// @brief Provides an Internet Protocol (IP) address.
-      class _public IPAddress : public Object {
+      class _export IPAddress : public Object {
       public:
         /// @brief Provides an IP address that indicates that the server must listen for client activity on all network interfaces. This field is constant.
         /// @remarks The cAny field is equivalent to 0.0.0.0 in dotted-quad notation

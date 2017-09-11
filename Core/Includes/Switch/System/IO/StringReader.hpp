@@ -17,7 +17,7 @@ namespace Switch {
       /// @par Examples
       /// The following code example demonstrates the creation of a continuous paragraph from a group of double-spaced sentences, and then the conversion of the paragraph back to the original text.
       /// @include StringReader.cpp
-      class _public StringReader: public TextReader {
+      class _export StringReader: public TextReader {
       public:
         /// @brief Initializes a new instance of the StringReader class that reads from the specified string.
         /// @param s The string to which the StringReader should be initialized.

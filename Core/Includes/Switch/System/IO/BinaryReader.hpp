@@ -18,7 +18,7 @@ namespace Switch {
     /// @brief The System::IO namespace contains types that allow reading and writing to files and data streams, and types that provide basic file and directory support.
     namespace IO {
       /// @brief Reads primitive data types as binary values in a specific encoding.
-      class _public BinaryReader : public Object {
+      class _export BinaryReader : public Object {
       public:
         /// @brief Initializes a new instance of the System::IO::BinaryReader class.
         BinaryReader() {}

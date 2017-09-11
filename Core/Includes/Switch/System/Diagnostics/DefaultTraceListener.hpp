@@ -14,7 +14,7 @@ namespace Switch {
     /// @brief The System::Diagnostics namespace provides classes that allow you to interact with system processes, event logs, and performance counters.
     namespace Diagnostics {
       /// @brief Provides the default output methods and behavior for tracing.
-      class _public DefaultTraceListener : public TraceListener {
+      class _export DefaultTraceListener : public TraceListener {
       public:
         DefaultTraceListener() {}
         

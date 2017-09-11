@@ -26,7 +26,7 @@ namespace Switch {
     /// @par Examples
     /// This example show how to used some methods :
     /// @include Expect.cpp
-    class _public Expect : private object {
+    class _export Expect : private object {
     public:
       /// @brief Verifies that two type are equal. If they are, then an error message is show.
       /// @param expected the expected value.

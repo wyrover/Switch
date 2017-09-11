@@ -23,7 +23,7 @@ namespace Switch {
       /// @par Examples
       /// The following example uses Debug to indicate the beginning and the end of a program's execution. The example also uses the Debug.Indent and Debug.Unindent methods to distinguish the tracing output.
       /// @include Debug.cpp
-      class _public Debug _static {
+      class _export Debug _static {
       public:
         /// @brief Gets or sets whether Flush should be called on the Listeners after every write.
         /// @return bool true if Flush is called on the Listeners after every write; otherwise, false.

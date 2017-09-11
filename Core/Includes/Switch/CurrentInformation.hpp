@@ -17,7 +17,7 @@ namespace Switch {
   /// Console::WriteLine("Line = {0}", currentInformation.Line);
   /// Console::WriteLine("Function = {0}", currentInformation.FunctionName);
   /// @endcode
-  class _public CurrentInformation : public System::Object {
+  class _export CurrentInformation : public System::Object {
   public:
     CurrentInformation() {}
     CurrentInformation(const System::String& fileName, int32 line) : fileName(fileName), line(line) {}

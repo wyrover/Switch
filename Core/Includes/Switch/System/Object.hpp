@@ -24,7 +24,7 @@ namespace Switch {
     /// @par Examples
     /// The following example defines a Point type derived from the Object class and virtuals many of the virtual methods of the Object class. In addition, the example shows how to call many of the static and instance methods of the Object class.
     /// @include Object.cpp
-    class _public Object {
+    class _export Object {
     public:
       /// @brief Create a new instance of the ultimate base class Object
       /// @remarks This constructor is called by constructors in derived classes, but it can also be used to directly create an instance of the Object class.

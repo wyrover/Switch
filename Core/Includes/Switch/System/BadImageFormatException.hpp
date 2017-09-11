@@ -9,7 +9,7 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The exception that is thrown when the file image of a dynamic link library (DLL) or an executable program is invalid.
-    class _public BadImageFormatException : public SystemException {
+    class _export BadImageFormatException : public SystemException {
     public:
       /// @brief Create a new instance of class BadImageFormatException
       /// @remarks Message is set with the default message associate to the error.

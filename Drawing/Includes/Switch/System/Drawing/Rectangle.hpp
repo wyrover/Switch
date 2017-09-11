@@ -24,7 +24,7 @@ namespace Switch {
       /// @remarks To draw rectangles, you need a Graphics object and a Pen object. The Graphics object provides the DrawRectangle method, and the Pen object stores features of the line, such as color and width. The units the rectangle is drawn in is determined by the PageUnit and PageScale properties of the graphics object used for drawing. The default unit is pixels.
       /// @remarks To draw a Rectangle filled with color, you need a Graphics object and an object derived from Brush such as SolidBrush or LinearGradientBrush. The Graphics object provides the FillRectangle method and the Brush object provides the color and fill information.
       /// @remarks For more advanced shapes, use a Region object.
-      class _public Rectangle : public object {
+      class _export Rectangle : public object {
       public:
         /// @brief Represents a Rectangle structure with its properties left uninitialized.
         static property<Rectangle, readonly> Empty;

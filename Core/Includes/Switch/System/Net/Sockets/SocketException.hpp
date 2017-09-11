@@ -15,7 +15,7 @@ namespace Switch {
       /// @brief The System::Net::Sockets namespace provides a managed implementation of the Berkeley Sockets interface for developers who need to tightly control access to the network.
       namespace Sockets {
         /// @brief The exception that is thrown when a socket error occurs.
-        class _public SocketException : public SystemException {
+        class _export SocketException : public SystemException {
         public:
           /// @brief Create a new instance of class SocketException
           /// @remarks Message is set with the default message associate to the error.

@@ -15,7 +15,7 @@ namespace Switch {
         class Control;
         /// @endcond
 
-        class _public MouseEventArgs : public EventArgs {
+        class _export MouseEventArgs : public EventArgs {
         public:
           MouseEventArgs() {}
 

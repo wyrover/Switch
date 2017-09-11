@@ -26,7 +26,7 @@ namespace Switch {
       /// @end cond
       
       ///@brief Makes a request to a Uniform Resource Identifier (URI). This is an abstract class.
-      class _public WebRequest _abstract {
+      class _export WebRequest _abstract {
         /// @cond
         friend class System::Net::WebResponse;
         /// @endcond

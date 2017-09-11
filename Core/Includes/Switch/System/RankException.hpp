@@ -9,7 +9,7 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The exception that is thrown when an array with the wrong number of dimensions is passed to a method.
-    class _public RankException : public SystemException {
+    class _export RankException : public SystemException {
     public:
       /// @brief Create a new instance of class RankException
       /// @remarks Message is set with the default message associate to the error.

@@ -28,7 +28,7 @@ namespace Switch {
       /// @remarks byte buffer uses zero-based indexing. You can also use the Family and Size properties to get the
       /// @remarks AddressFamily value and the buffer size, respectively. To view any of this information as a string,
       /// @remarks use the ToString method.
-      class _public SocketAddress : public Object {
+      class _export SocketAddress : public Object {
       public:
         /// @brief Creates a new instance of the SocketAddress class for the given address family.
         SocketAddress(Sockets::AddressFamily addressFamily) : SocketAddress(addressFamily, 32) {}

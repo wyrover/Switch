@@ -38,7 +38,7 @@ namespace Switch {
     /// @include String3.cpp
     /// @remarks By retrieving a property or calling a method that returns a String. The following example uses the methods of the String class to extract a substring from a larger String.
     /// @include String4.cpp
-    class _public String final : public ValueType, public ICloneable, public IComparable, public IConvertible, public Collections::Generic::IEnumerable<char32> {
+    class _export String final : public ValueType, public ICloneable, public IComparable, public IConvertible, public Collections::Generic::IEnumerable<char32> {
       friend class Convert;
     public:
       using StringType = std::ustring;

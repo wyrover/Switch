@@ -11,7 +11,7 @@ namespace Switch {
     /// @brief The System::IO namespace contains types that allow reading and writing to files and data streams, and types that provide basic file and directory support.
     namespace IO {
       /// @brief The exception that is thrown when an I/O error occurs.
-      class _public IOException : public SystemException {
+      class _export IOException : public SystemException {
       public:
         /// @brief Create a new instance of class IOException
         /// @remarks Message is set with the default message associate to the error.

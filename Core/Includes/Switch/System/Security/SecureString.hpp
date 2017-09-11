@@ -18,7 +18,7 @@ namespace Switch {
       /// @brief The exception that is thrown when a security error is detected.
       /// @remarks SecureString is a string type that provides a measure of security. It tries to avoid storing potentially sensitive strings in process memory as plain text. (For limitations, however, see the How secure is SecureString? section.) The value of an instance of SecureString is automatically protected using a mechanism supported by the underlying platform when the instance is initialized or when the value is modified. Your application can render the instance immutable and prevent further modification by invoking the MakeReadOnly method.
       /// @remarks The maximum length of a SecureString instance is 65,536 characters.
-      class _public SecureString final : public object {
+      class _export SecureString final : public object {
       public:
         /// @brief Initializes a new instance of the SecureString class.
         SecureString() {}

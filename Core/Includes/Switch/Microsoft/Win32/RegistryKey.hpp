@@ -18,7 +18,7 @@ namespace Switch {
   namespace Microsoft {
     namespace Win32 {
       /// @brief Represents a key-level node in the Windows registry. This class is a registry encapsulation.
-      class _public RegistryKey : public object {
+      class _export RegistryKey : public object {
       private:
         friend class Registry;
         RegistryKey(RegistryHive hkey);

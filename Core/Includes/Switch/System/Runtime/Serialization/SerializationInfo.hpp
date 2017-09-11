@@ -40,7 +40,7 @@ namespace Switch {
         /// @endcond
         
         /// @brief Provides functionality for formatting serialized objects.
-        class _public SerializationInfo : public Object, public System::Collections::Generic::IEnumerable<System::Collections::Generic::KeyValuePair<System::String, SerializationEntry>> {
+        class _export SerializationInfo : public Object, public System::Collections::Generic::IEnumerable<System::Collections::Generic::KeyValuePair<System::String, SerializationEntry>> {
         public:
           /// @brief Initializes a new instance of the SerializationInfo interface.
           SerializationInfo() {}

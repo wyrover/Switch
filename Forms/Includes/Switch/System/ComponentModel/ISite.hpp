@@ -21,7 +21,7 @@ namespace Switch {
     namespace ComponentModel {
       /// @interface ISite
       /// @brief Provides functionality required by sites.
-      class _public ISite _interface {
+      class _export ISite _interface {
       public:
         /// @brief A valid value for this property (that is, the value is not null) indicates that the component has been added to a container.
         virtual const IComponenent& GetComponent() const = 0;

@@ -40,7 +40,7 @@ namespace Switch {
         Far
       };
       
-      class _public StringFormat {
+      class _export StringFormat {
       public:
         StringFormat() {}
         StringFormat(const StringFormat& stringFormat) : alignment(stringFormat.alignment), lineAlignment(stringFormat.lineAlignment) {}
@@ -60,7 +60,7 @@ namespace Switch {
         StringAlignment lineAlignment = StringAlignment::Near;
       };
       
-      class _public _public Graphics : public Object {
+      class _export _export Graphics : public Object {
       public:
         /// @cond
         ~Graphics();

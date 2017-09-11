@@ -57,7 +57,7 @@ namespace Switch {
     /// @par Examples
     /// The following example demonstrates how to compare roughly equivalent DateTime values, accepting a small margin of difference when declaring them equal.
     /// @include DateTime.cpp
-    struct _public DateTime : public ValueType, public IComparable, public IConvertible {
+    struct _export DateTime : public ValueType, public IComparable, public IConvertible {
     public:
       /// @brief Represents the largest possible value of an DateTime (03:14:07, Janyaury 19, 2038). This field is constant.
       static DateTime MaxValue;

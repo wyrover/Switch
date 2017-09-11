@@ -20,7 +20,7 @@ namespace Switch {
     /// @brief The base class that all unit tests inherit from.
     /// This example code shows how to use TestFixture class:
     /// @include TestFixture.cpp
-    class _public TestFixture : public testing::Test {
+    class _export TestFixture : public testing::Test {
     protected:
       /// @cond
       TestFixture() {}

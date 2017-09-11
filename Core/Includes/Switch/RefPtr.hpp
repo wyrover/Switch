@@ -16,7 +16,7 @@ namespace Switch {
   template<typename T>
   class RefPtr;
 }
-class _public __opaque_sub_object__ {
+class _export __opaque_sub_object__ {
   template<typename T>
   friend class Switch::RefPtr;
   __opaque_sub_object__() : UseCount(0) {}

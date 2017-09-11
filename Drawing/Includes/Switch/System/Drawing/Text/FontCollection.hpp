@@ -22,7 +22,7 @@ namespace Switch {
       namespace Text {
         /// @brief Provides a base class for installed and private font collections.
         /// @remarks The FontCollection allows you to get a list of the font families contained in the collection with its Families property. For additional information on fonts and text, including example code, see Using Fonts and Text.
-        class _public FontCollection : public object {
+        class _export FontCollection : public object {
         public:
           /// @brief Gets the array of FontFamily objects associated with this FontCollection.
           /// @return Array<FontFamily> An array of FontFamily objects.

@@ -35,7 +35,7 @@ namespace Switch {
     ///      If several read or write operations have occurred through bad pointers, memory may be corrupted. This typically occurs when
     ///      reading or writing to addresses outside of a predefined buffer.
     /// </pre>
-    class _public AccessViolationException : public SystemException {
+    class _export AccessViolationException : public SystemException {
     public:
       /// @brief Create a new instance of class AccessViolationException
       /// @remarks Message is set with the default message associate to the error.

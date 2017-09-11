@@ -90,7 +90,7 @@ namespace Switch {
     /// @par Examples
     /// The following example catches the AggregateException exception and calls the Handle method to handle each exception it contains. Compiling and running the example with the first task1 variable should result in an AggregateException object that contains an UnauthorizedAccessException exception. Commenting out that line, uncommenting the second task1 variable, and compiling and running the example produces an AggregateException object that contains an IndexOutOfRangeException exception.
     /// @include AggregateException.cpp
-    class _public AggregateException : public Exception {
+    class _export AggregateException : public Exception {
     public:
       /// @brief Gets a read-only collection of the Exception instances that caused the current exception.
       /// @return Returns a read-only collection of the Exception instances that caused the current exception.

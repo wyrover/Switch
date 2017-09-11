@@ -16,7 +16,7 @@ namespace Switch {
   namespace TUnit {
     /// @brief The TUnit::Constrains conatains ConstraintValue that contain vaule to verify, the base class Contraints, the base class ConstraintExpression, all Constraint inherited classes and all ContraintExpression inherited classes.
     namespace Constraints {
-      class _public EqualTo : public Constraint {
+      class _export EqualTo : public Constraint {
       public:
         template<typename TExpect>
         EqualTo(const TExpect& expect) : Constraint(expect) {}

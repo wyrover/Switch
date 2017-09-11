@@ -13,7 +13,7 @@ namespace Switch {
     /// @brief The System::Diagnostics namespace provides classes that allow you to interact with system processes, event logs, and performance counters.
     namespace Diagnostics {
       /// @brief Provides the base class for trace filter implementations.
-      class _public TraceFilter _abstract {
+      class _export TraceFilter _abstract {
       public:
         /// @brief Initializes a new instance of the TraceFilter class.
         TraceFilter() {}

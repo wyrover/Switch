@@ -16,7 +16,7 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {    
     /// @brief Represents a 8-bit signed integer.
-    struct _public SByte final : public ValueType, public IComparable, public IConvertible, public IFormattable {
+    struct _export SByte final : public ValueType, public IComparable, public IConvertible, public IFormattable {
     public:
       /// @brief Represents the largest possible value of an SByte 127 (0x7F). This field is constant.
       static property<sbyte, readonly> MaxValue;

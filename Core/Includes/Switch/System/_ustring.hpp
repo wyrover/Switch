@@ -7,11 +7,11 @@
 #include <string>
 #include <vector>
 
-#include "../Public.hpp"
+#include "../Export.hpp"
 
 /// @cond
 namespace std {
-  class _public ustring {
+  class _export ustring {
   public:
     ustring();
     ustring(const char* str);

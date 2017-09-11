@@ -35,7 +35,7 @@ namespace Switch {
       /// @par Examples
       /// The following example uses Trace to indicate the beginning and the end of a program's execution. The example also uses the Trace.Indent and Trace.Unindent methods to distinguish the tracing output.
       /// @include Trace.cpp
-      class _public Trace _static {
+      class _export Trace _static {
       public:
         /// @brief Gets or sets whether Flush should be called on the Listeners after every write.
         /// @return bool true if Flush is called on the Listeners after every write; otherwise, false.

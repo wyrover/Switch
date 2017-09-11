@@ -9,7 +9,7 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The exception that is thrown when a non-fatal application error occurs.
-    class _public ApplicationException : public Exception {
+    class _export ApplicationException : public Exception {
     public:
       /// @brief Create a new instance of class ApplicationException
       /// @remarks Message is set with the default message associate to the error.

@@ -17,7 +17,7 @@ namespace Switch {
       namespace Ports {
         /// @brief Provides data for the PinChanged event.
         /// @remarks This class is used with the PinChanged event.|
-        class _public SerialPinChangedEventArgs : public System::EventArgs {
+        class _export SerialPinChangedEventArgs : public System::EventArgs {
         public:
           SerialPinChangedEventArgs(SerialPinChange eventType) : eventType(eventType) {}
           SerialPinChangedEventArgs(const SerialPinChangedEventArgs& spcea) : eventType(spcea.eventType) {}

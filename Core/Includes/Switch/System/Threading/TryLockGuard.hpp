@@ -12,7 +12,7 @@
 namespace Switch {
   namespace System {
     namespace Threading {
-      class _public TryLockGuard : public object {
+      class _export TryLockGuard : public object {
       public:
         explicit TryLockGuard(const object& lock);
         TryLockGuard(const object& lock, int32 timeout);

@@ -21,7 +21,7 @@ namespace Switch {
       /// @par Examples
       /// The following example shows how to use a barrier:
       /// @include Barrier.cpp
-      class _public Barrier : public object {
+      class _export Barrier : public object {
       public:
         /// @brief Initializes a new instance of the Barrier class.
         /// @param participantCount The number of participating threads.

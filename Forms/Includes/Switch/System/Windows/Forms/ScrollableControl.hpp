@@ -13,7 +13,7 @@ namespace Switch {
       /// @brief The Switch::System::Windows::Forms namespace contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system, Apple macOS and Linux like Ubuntu operating system.
       namespace Forms {
         /// @brief Defines a base class for controls that support auto-scrolling behavior.
-        class _public ScrollableControl : public Control {
+        class _export ScrollableControl : public Control {
         public:
           /// @brief Initializes a new instance of the ScrollableControl class with default settings.
           ScrollableControl() {}

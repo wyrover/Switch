@@ -24,7 +24,7 @@ namespace Switch {
       ///
       /// After running this sample, you can open the TestFile.txt file to see the output.
       /// @include TextWriterTraceListener.cpp
-      class _public TextWriterTraceListener : public TraceListener {
+      class _export TextWriterTraceListener : public TraceListener {
         struct InitTextWriter {
           template<typename TTextWriter>
           void operator()(const TTextWriter& textWriter, TextWriterTraceListener& twtl) {

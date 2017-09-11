@@ -79,7 +79,7 @@ namespace Switch {
   /// Console::WriteLine("ready = {0}", ready);                     // console output : ready = 1
   /// Console::WriteLine("ready = {0}", TypeBoxer::Boxing(ready));  // console output : ready = true
   /// @endcode
-  class _public TypeBoxer {
+  class _export TypeBoxer {
   public:
     /// @cond
     TypeBoxer() = delete;
@@ -207,7 +207,7 @@ namespace Switch {
   /// Console::WriteLine("ready = {0}", ready);                         // console output : ready = true
   /// Console::WriteLine("ready = {0}", TypeUnboxer::Unboxing(ready));  // console output : ready = 1
   /// @endcode
-  class _public TypeUnboxer {
+  class _export TypeUnboxer {
   public:
     /// @cond
     TypeUnboxer() = delete;

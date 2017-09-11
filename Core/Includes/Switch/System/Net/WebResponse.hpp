@@ -20,7 +20,7 @@ namespace Switch {
     namespace Net {
       class WebRequest;
 
-      class _public WebResponse : public Object {
+      class _export WebResponse : public Object {
       public:
         class WebResponseStream: public System::IO::Stream {
         public:

@@ -12,7 +12,7 @@ namespace Switch {
     /// The WebRequest and WebResponse classes form the basis of what are called pluggable protocols, an implementation of network services that enables you to develop applications that use Internet resources without worrying about the specific details of the individual protocols.
     namespace Net {
       /// @brief The exception that is thrown when an error is made adding a Cookie to a CookieContainer.
-      class _public CookieException : public FormatException {
+      class _export CookieException : public FormatException {
       public:
         /// @brief Create a new instance of class CookieException
         /// @remarks Message is set with the default message associate to the error.

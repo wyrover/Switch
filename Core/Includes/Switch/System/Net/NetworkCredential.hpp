@@ -13,7 +13,7 @@ namespace Switch {
     /// @brief The System::Net namespace provides a simple programming interface for many of the protocols used on networks today.
     /// The WebRequest and WebResponse classes form the basis of what are called pluggable protocols, an implementation of network services that enables you to develop applications that use Internet resources without worrying about the specific details of the individual protocols.
     namespace Net {
-      class _public NetworkCredential : public Object {
+      class _export NetworkCredential : public Object {
       public:
         NetworkCredential() {}
 

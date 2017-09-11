@@ -17,7 +17,7 @@ namespace Switch {
       /// @endcond
 
       /// @brief Stores an ordered pair of integers, which specify a Height and Width.
-      class _public Size : public object {
+      class _export Size : public object {
       public:
         /// @brief Gets a Size class that has a Height and Width value of 0. This field is constant.
         static property<Size, readonly> Empty;

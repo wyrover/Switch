@@ -19,7 +19,7 @@ namespace Switch {
       /// @endcond
       
       /// @brief Provides a thread-safe list of TraceListener objects.
-      class _public TraceListenerCollection : public System::Collections::Generic::IList<TraceListener>, public object {
+      class _export TraceListenerCollection : public System::Collections::Generic::IList<TraceListener>, public object {
         friend class Trace;
         friend class TraceSource;
         TraceListenerCollection() {}

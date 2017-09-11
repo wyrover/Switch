@@ -21,7 +21,7 @@ namespace Switch {
   namespace System {
     /// @interface ICustomFormatter
     /// @brief Defines a method that supports custom, user-defined formatting of the value of an object.
-    class _public ICustomFormatter _interface {
+    class _export ICustomFormatter _interface {
     public:
       /// @brief Converts the value of a specified object to an equivalent string representation using specified format and culture-specific formatting information.
       /// @param format A format string containing formatting specifications.

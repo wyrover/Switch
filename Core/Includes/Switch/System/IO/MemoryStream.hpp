@@ -16,7 +16,7 @@ namespace Switch {
     /// @brief The System::IO namespace contains types that allow reading and writing to files and data streams, and types that provide basic file and directory support.
     namespace IO {
       /// @brief Exposes a System::IO::Stream in memory, supporting synchronous read && write operations.
-      class _public MemoryStream : public Stream {
+      class _export MemoryStream : public Stream {
         int64 GetLength() const override;
         void SetLength(int64 len) override;
         bool GetCanRead() const override {return ! IsClosed();}

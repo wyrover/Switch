@@ -10,7 +10,7 @@ namespace Switch {
   /// @par Examples
   /// This example demontrate how to use async and await
   /// @include Async1.cpp
-  class _public Await {
+  class _export Await {
   public:
     Await() {}
    

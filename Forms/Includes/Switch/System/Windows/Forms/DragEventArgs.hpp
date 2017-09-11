@@ -61,7 +61,7 @@ namespace Switch {
         ///   }
         /// }
         /// @endcode
-        class _public DragEventArgs : public EventArgs {
+        class _export DragEventArgs : public EventArgs {
         public:
           /// @brief Initializes a new instance of the DragEventArgs class.
           DragEventArgs() {}

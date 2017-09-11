@@ -23,7 +23,7 @@ namespace Switch {
         /// @remarks Use the Write and Read methods for simple single thread synchronous blocking I/O. If you want to process your I/O using separate threads, consider using the BeginWrite and EndWrite methods, or the BeginRead and EndRead methods for communication.
         /// @remarks The NetworkStream does not support random access to the network data stream. The value of the CanSeek property, which indicates whether the stream supports seeking, is always false; reading the Position property, reading the Length property, or calling the Seek method will throw a NotSupportedException.
         /// @remarks Read and write operations can be performed simultaneously on an instance of the NetworkStream class without the need for synchronization. As long as there is one unique thread for the write operations and one unique thread for the read operations, there will be no cross-interference between read and write threads and no synchronization is required.
-        class _public NetworkStream : public System::IO::Stream {
+        class _export NetworkStream : public System::IO::Stream {
         public:
           /// @brief Creates a new instance of the NetworkStream class for the specified Socket.
           /// @param socket The Socket that the NetworkStream will use to send and receive data.

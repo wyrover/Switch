@@ -28,7 +28,7 @@ namespace Switch {
     namespace Text {
       /// @brief Represents a mutable string of characters. This class cannot be inherited.
       /// @remarks This class represents a string-like object whose value is a mutable sequence of characters.
-      class _public StringBuilder final : public Object {
+      class _export StringBuilder final : public Object {
 #if defined(_WIN32)
         using __char32 = __int32;
 #else

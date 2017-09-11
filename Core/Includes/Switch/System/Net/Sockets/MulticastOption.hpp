@@ -25,7 +25,7 @@ namespace Switch {
         /// | SocketOptionName  | AddMembership        |
         /// | object            | MulticastOption      |
         /// @remarks Use DropMembership to drop a multicast group.
-        class _public MulticastOption : public Object {
+        class _export MulticastOption : public Object {
         public:
           /// @brief Initializes a new version of the MulticastOption class for the specified IP multicast group.
           /// @param group The IPAddress of the multicast group.

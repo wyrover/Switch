@@ -14,7 +14,7 @@ namespace Switch {
     namespace Drawing {
       /// @brief The System::Drawing::Imaging namespace provides advanced GDI+ imaging functionality. Basic graphics functionality is provided by the System::Drawing namespace.
       namespace Imaging {
-        class _public ImageFormat : public object {
+        class _export ImageFormat : public object {
         public:
           static property<ImageFormat, readonly> Bmp;
           

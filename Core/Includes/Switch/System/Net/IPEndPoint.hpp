@@ -14,7 +14,7 @@ namespace Switch {
     namespace Net {
       /// @brief Represents a network endpoint as an IP address and a port number.
       /// @remarks The IPEndPoint class contains the host and local or remote port information needed by an application to connect to a service on a host. By combining the host's IP address and port number of a service, the IPEndPoint class forms a connection point to a service.
-      class _public IPEndPoint : public EndPoint {
+      class _export IPEndPoint : public EndPoint {
       public:
         /// @brief Specifies the minimum value that can be assigned to the Port property. The MinPort value is set to 0x00000000. This field is read-only.
         static property<int32, readonly> MinPort;

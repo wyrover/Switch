@@ -13,7 +13,7 @@ namespace Switch {
     /// @endcond
 
     /// @brief Provides the base class for value types.
-    struct _public ValueType : public Object {
+    struct _export ValueType : public Object {
     };
   }
 }

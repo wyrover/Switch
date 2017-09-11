@@ -26,7 +26,7 @@ namespace Switch {
       /// @endcond
       
       /// @brief Provides a generic view of a sequence of bytes. This is an abstract class.
-      class _public Stream _abstract {
+      class _export Stream _abstract {
       public:
         static property<NullStream&, readonly> Null;
 

@@ -29,7 +29,7 @@ namespace Switch {
   /// @par Examples
   /// This example show how to use Any:
   /// @include Any.cpp
-  class _public Any : public System::IComparable, public object {
+  class _export Any : public System::IComparable, public object {
     template <typename T, typename Bool>
     struct EnumOrOtherToAny {};
     

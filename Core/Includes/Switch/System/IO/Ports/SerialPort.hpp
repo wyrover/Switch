@@ -18,7 +18,7 @@ namespace Switch {
       /// The namespace includes enumerations that simplify the control of serial ports, such as Handshake, Parity, SerialPinChange, and StopBits.
       namespace Ports {
         /// @brief Represents a serial port resource.
-        class _public SerialPort : public Object {
+        class _export SerialPort : public Object {
         public:
           SerialPort() {}
           /// @cond

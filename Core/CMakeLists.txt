@@ -392,7 +392,7 @@ set(INCLUDE_FILES
   Includes/Switch/Nameof.hpp
   Includes/Switch/NullPtr.hpp
   Includes/Switch/Property.hpp
-  Includes/Switch/Public.hpp
+  Includes/Switch/Export.hpp
   Includes/Switch/Ref.hpp
   Includes/Switch/RefPtr.hpp
   Includes/Switch/Startup.hpp

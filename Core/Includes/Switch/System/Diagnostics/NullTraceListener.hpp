@@ -11,7 +11,7 @@ namespace Switch {
     /// @brief The System::Diagnostics namespace provides classes that allow you to interact with system processes, event logs, and performance counters.
     namespace Diagnostics {
       /// @brief Directs tracing or debugging output to either the standard output or the standard error stream.
-      class _public NullTraceListener : public TraceListener {
+      class _export NullTraceListener : public TraceListener {
       public:
         /// @brief Initializes a new instance of the ConsoleTraceListener class with trace output written to the standard output stream.
         /// @remarks This constructor initializes a ConsoleTraceListener object to write messages to either the Console.Out or the Console.Error stream. Its Name property is initialized to an empty string ("").

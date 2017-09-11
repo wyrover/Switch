@@ -38,7 +38,7 @@ namespace Switch {
     /// @par Examples
     /// The following example demonstrates displays a list of information about the current environment.
     /// @include Environment.cpp
-    class _public Environment _static {
+    class _export Environment _static {
     public:
       /// @enum SpecialFolder
       /// @brief Specifies enumerated constants used to retrieve directory paths to system special folders.

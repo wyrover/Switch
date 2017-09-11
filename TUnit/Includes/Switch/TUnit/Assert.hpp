@@ -26,7 +26,7 @@ namespace Switch {
     /// @par Examples
     /// This example show how to used some methods :
     /// @include Assert.cpp
-    class _public Assert : private object {
+    class _export Assert : private object {
     public:
       /// @brief Verifies that two type are equal. If they are not, then an Switch::TUnit::AssertionException is thrown.
       /// @param expected the expected value.

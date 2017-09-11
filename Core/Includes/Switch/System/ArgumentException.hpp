@@ -12,7 +12,7 @@ namespace Switch {
     /// @par Examples
     /// The following example demonstrates how to throw and catch an ArgumentException.
     /// @include ArgumentException.cpp
-    class _public ArgumentException : public SystemException {
+    class _export ArgumentException : public SystemException {
     public:
       /// @brief Create a new instance of class ArgumentException
       /// @remarks Message is set with the default message associate to the error.

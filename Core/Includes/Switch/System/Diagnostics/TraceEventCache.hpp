@@ -16,7 +16,7 @@ namespace Switch {
     /// @brief The System::Diagnostics namespace provides classes that allow you to interact with system processes, event logs, and performance counters.
     namespace Diagnostics {
       /// @brief Provides trace event data specific to a thread and a process.
-      class _public TraceEventCache : public Object {
+      class _export TraceEventCache : public Object {
       public:
         /// @brief Initializes a new instance of the TraceEventCache class.
         TraceEventCache() {}

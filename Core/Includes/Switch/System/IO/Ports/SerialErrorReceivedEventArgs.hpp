@@ -17,7 +17,7 @@ namespace Switch {
       namespace Ports {
         /// @brief Prepares data for the ErrorReceived event.
         /// @remarks This class is used with the ErrorReceived event.
-        class _public SerialErrorReceivedEventArgs : public System::EventArgs {
+        class _export SerialErrorReceivedEventArgs : public System::EventArgs {
         public:
           SerialErrorReceivedEventArgs(SerialError eventType) : eventType(eventType) {}
           SerialErrorReceivedEventArgs(const SerialErrorReceivedEventArgs& serea) : eventType(serea.eventType) {}

@@ -16,7 +16,7 @@ namespace Switch {
   namespace TUnit {
     /// @brief The TUnit::Constrains conatains ConstraintValue that contain vaule to verify, the base class Contraints, the base class ConstraintExpression, all Constraint inherited classes and all ContraintExpression inherited classes.
     namespace Constraints {
-      class _public ConstraintExpression _abstract {
+      class _export ConstraintExpression _abstract {
       public:
         ~ConstraintExpression() = 0;
       };

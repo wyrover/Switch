@@ -9,7 +9,7 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The exception that is thrown when an invoked method is not supported, or when there is an attempt to read, seek, or write to a stream that does not support the invoked functionality.
-    class _public NotSupportedException : public SystemException {
+    class _export NotSupportedException : public SystemException {
     public:
       /// @brief Create a new instance of class NotSupportedException
       /// @remarks Message is set with the default message associate to the error.

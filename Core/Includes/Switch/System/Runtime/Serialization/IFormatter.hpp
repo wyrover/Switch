@@ -21,7 +21,7 @@ namespace Switch {
       namespace Serialization{
         /// @interface IFormatter
         /// @brief Provides functionality for formatting serialized objects.
-        class _public IFormatter _interface {
+        class _export IFormatter _interface {
         public:
           /// @cond
           template<typename T>

@@ -14,7 +14,7 @@ namespace Switch {
     namespace Windows {
       /// @brief The Switch::System::Windows::Forms namespace contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system, Apple macOS and Linux like Ubuntu operating system.
       namespace Forms {
-        class _public FormClosedEventArgs : public EventArgs {
+        class _export FormClosedEventArgs : public EventArgs {
         public:
           FormClosedEventArgs(System::Windows::Forms::CloseReason closeReason) : closeReason(closeReason) {}
           FormClosedEventArgs(const FormClosedEventArgs& e) : closeReason(e.closeReason) {}

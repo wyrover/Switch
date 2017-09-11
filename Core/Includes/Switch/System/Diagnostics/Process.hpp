@@ -17,7 +17,7 @@ namespace Switch {
     /// @brief The System::Diagnostics namespace provides classes that allow you to interact with system processes, event logs, and performance counters.
     namespace Diagnostics {
       /// @brief Provides access to local and remote processes and enables you to start and stop local system processes.
-      class _public Process : public Object {
+      class _export Process : public Object {
         refptr<IO::Stream> GetStandardOutput() const;
       public:
         /// @cond

@@ -22,7 +22,7 @@ namespace Switch {
       /// @par Examples
       /// The following code example shows how to create and initialize a BitArray and how to print out its values.
       /// @include BitArray.cpp
-      class _public BitArray : public Object, public Generic::ICollection<bool>, public System::ICloneable {
+      class _export BitArray : public Object, public Generic::ICollection<bool>, public System::ICloneable {
       public:
         /// @brief Initializes a new instance of the BitArray class that contains bit values copied from the specified array of bytes.
         /// @param values An array of bytes containing the values to copy, where each byte represents eight consecutive bits.

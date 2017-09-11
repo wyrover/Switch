@@ -26,7 +26,7 @@ namespace Switch {
       /// @par Examples
       /// The following code example shows a thread-safe resource locking mechanism.
       /// @include Interlocked.cpp
-      class _public Interlocked _static {
+      class _export Interlocked _static {
       public:
         /// @brief Adds two 32-bit integers and replaces the first integer with the sum, as an atomic operation.
         /// @param location A variable containing the first value to be added. The sum of the two values is stored in location.
