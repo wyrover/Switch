@@ -385,8 +385,8 @@ namespace Switch {
       static inline void Fail(const string& error, const string& message, const CurrentInformation& currentInformation) {
         if (!string::IsNullOrEmpty(message))
           System::Console::WriteLine(message);
-        //::testing::internal::AssertHelper(::testing::TestPartResult::kFatalFailure, currentInformation.FileName().Data, currentInformation.Line, error.Data) = ::testing::Message(message.Data);
-        ::testing::internal::AssertHelper(::testing::TestPartResult::kFatalFailure, currentInformation.FileName().Data, currentInformation.Line, error.Data) = ::testing::Message();
+        //::testing::internal::AssertHelper(::testing::TestPartResult::kFatalFailure, currentInformation.FilePath().Data, currentInformation.Line, error.Data) = ::testing::Message(message.Data);
+        ::testing::internal::AssertHelper(::testing::TestPartResult::kFatalFailure, currentInformation.FilePath().Data, currentInformation.LineNumber, error.Data) = ::testing::Message();
       }
       
       /// @brief Expect that a condition is false. If they are, then an error message is show.
@@ -1818,7 +1818,7 @@ namespace Switch {
       /// @brief Generates a success with a generic message. This is used by the other Expectt functions.
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @param currentInformation Contains information about current file and current line.
-      static inline void Succeed(const string& message, const CurrentInformation& currentInformation) {::testing::internal::AssertHelper(::testing::TestPartResult::kSuccess, currentInformation.FileName().Data, currentInformation.Line, "Succeeded") = ::testing::Message(message.Data);}
+      static inline void Succeed(const string& message, const CurrentInformation& currentInformation) {::testing::internal::AssertHelper(::testing::TestPartResult::kSuccess, currentInformation.FilePath().Data, currentInformation.LineNumber, "Succeeded") = ::testing::Message(message.Data);}
       
       template<typename TValue>
       static void That(const TValue& actual, const Constraints::Constraint& constraint) {That(actual, constraint, "", CurrentInformation());}

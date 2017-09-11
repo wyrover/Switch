@@ -15,68 +15,68 @@ namespace SwitchUnitTests {
     
     void CreateAnEmptyCurrentInformationThenGetFileName() {
       CurrentInformation ci;
-      Assert::AreEqual("", ci.FileName, _current_information);
+      Assert::AreEqual("", ci.FilePath, _current_information);
     }
     
     void CreateAnEmptyCurrentInformationThenGetFunctionName() {
       CurrentInformation ci;
-      Assert::AreEqual("", ci.FunctionName, _current_information);
+      Assert::AreEqual("", ci.MemberNamne, _current_information);
     }
     
     void CreateAnEmptyCurrentInformationThenGetLine() {
       CurrentInformation ci;
-      Assert::AreEqual(0, ci.Line);
+      Assert::AreEqual(0, ci.LineNumber);
     }
     
     void CreateCurrentInformationWithFileNameAndLineThenToString() {
       CurrentInformation ci("MyFile.txt", 42);
-      Assert::AreEqual("{File=\"MyFile.txt\", Line=42}", ci.ToString(), _current_information);
+      Assert::AreEqual("{FilePath=\"MyFile.txt\", LineNumber=42}", ci.ToString(), _current_information);
     }
     
     void CreateCurrentInformationWithFileNameAndLineThenGetFileName() {
       CurrentInformation ci("MyFile.txt", 42);
-      Assert::AreEqual("MyFile.txt", ci.FileName, _current_information);
+      Assert::AreEqual("MyFile.txt", ci.FilePath, _current_information);
     }
     
     void CreateCurrentInformationWithFileNameAndLineThenGetFunctionName() {
       CurrentInformation ci("MyFile.txt", 42);
-      Assert::AreEqual("", ci.FunctionName, _current_information);
+      Assert::AreEqual("", ci.MemberNamne, _current_information);
     }
     
     void CreateCurrentInformationWithFileNameAndLineThenGetLine() {
       CurrentInformation ci("MyFile.txt", 42);
-      Assert::AreEqual(42, ci.Line, _current_information);
+      Assert::AreEqual(42, ci.LineNumber, _current_information);
     }
     
     void CreateCurrentInformationWithFileNameLineAndFunctionNameThenToString() {
       CurrentInformation ci("MyFile.txt", 42, "void MyFunction()");
-      Assert::AreEqual("{File=\"MyFile.txt\", Line=42, Function=\"void MyFunction()\"}", ci.ToString(), _current_information);
+      Assert::AreEqual("{FilePath=\"MyFile.txt\", LineNumber=42, MemberName=\"void MyFunction()\"}", ci.ToString(), _current_information);
     }
     
     void CreateCurrentInformationWithFileNameLineAndFunctionNameThenGetFileName() {
       CurrentInformation ci("MyFile.txt", 42, "void MyFunction()");
-      Assert::AreEqual("MyFile.txt", ci.FileName, _current_information);
+      Assert::AreEqual("MyFile.txt", ci.FilePath, _current_information);
     }
     
     void CreateCurrentInformationWithFileNameLineAndFunctionNameThenGetFunctionName() {
       CurrentInformation ci("MyFile.txt", 42, "void MyFunction()");
-      Assert::AreEqual("void MyFunction()", ci.FunctionName, _current_information);
+      Assert::AreEqual("void MyFunction()", ci.MemberNamne, _current_information);
     }
     
     void CreateCurrentInformationWithFileNameLineAndFunctionNameThenGetLine() {
       CurrentInformation ci("MyFile.txt", 42, "void MyFunction()");
-      Assert::AreEqual(42, ci.Line, _current_information);
+      Assert::AreEqual(42, ci.LineNumber, _current_information);
     }
     
     void CreateCurrentInformationByCopyConstructorThenToString() {
       CurrentInformation ci = CurrentInformation("MyFile.txt", 42, "void MyFunction()");
-      Assert::AreEqual("{File=\"MyFile.txt\", Line=42, Function=\"void MyFunction()\"}", ci.ToString(), _current_information);
+      Assert::AreEqual("{FilePath=\"MyFile.txt\", LineNumber=42, MemberName=\"void MyFunction()\"}", ci.ToString(), _current_information);
     }
     
     void CreateCurrentInformationByCopyOperatorThenToString() {
       CurrentInformation ci;
       ci = CurrentInformation("MyFile.txt", 42, "void MyFunction()");
-      Assert::AreEqual("{File=\"MyFile.txt\", Line=42, Function=\"void MyFunction()\"}", ci.ToString(), _current_information);
+      Assert::AreEqual("{FilePath=\"MyFile.txt\", LineNumber=42, MemberName=\"void MyFunction()\"}", ci.ToString(), _current_information);
     }
   };
   

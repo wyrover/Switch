@@ -13,51 +13,45 @@ namespace Switch {
   /// Use #_current_information to get current information.
   /// @code
   /// CurrentInformation currentInformation = _current_information;
-  /// Console::WriteLine("File = {0}", currentInformation.FileName);
-  /// Console::WriteLine("Line = {0}", currentInformation.Line);
-  /// Console::WriteLine("Function = {0}", currentInformation.FunctionName);
+  /// Console::WriteLine("File = {0}", currentInformation.FilePath);
+  /// Console::WriteLine("LineNumber = {0}", currentInformation.LineNumber);
+  /// Console::WriteLine("Function = {0}", currentInformation.MemberNamne);
   /// @endcode
   class _export CurrentInformation : public System::Object {
   public:
     CurrentInformation() {}
-    CurrentInformation(const System::String& fileName, int32 line) : fileName(fileName), line(line) {}
-    CurrentInformation(const System::String& fileName, int32 line, const System::String& functionName) : fileName(fileName), line(line), functionName(functionName) {}
+    CurrentInformation(const System::String& filePath, int32 lineNumber) : filePath(filePath), lineNumber(lineNumber) {}
+    CurrentInformation(const System::String& filePath, int32 lineNumber, const System::String& memberNamne) : filePath(filePath), lineNumber(lineNumber), memberNamne(memberNamne) {}
 
     /// @cond
-    CurrentInformation(const CurrentInformation& currentInformation) : fileName(currentInformation.fileName), line(currentInformation.line), functionName(currentInformation.functionName) {}
-    CurrentInformation& operator =(const CurrentInformation& currentInformation) {
-      this->fileName = currentInformation.fileName;
-      this->line = currentInformation.line;
-      this->functionName = currentInformation.functionName;
-      return *this;
-    }
+    CurrentInformation(const CurrentInformation& currentInformation) : filePath(currentInformation.filePath),  lineNumber(currentInformation.lineNumber), memberNamne(currentInformation.memberNamne) {}
     /// @endcond
     
-    /// Gets the FileName
-    _property<const System::String&, _readonly> FileName {
-      _get->const System::String& {return this->fileName;}
+    /// Gets the FilePath
+    _property<const System::String&, _readonly> FilePath {
+      _get->const System::String& {return this->filePath;}
     };
     
-    _property<int32, _readonly> Line {
-      _get {return this->line;}
+    _property<int32, _readonly> LineNumber {
+      _get {return this->lineNumber;}
     };
     
-    _property<const System::String&, _readonly> FunctionName {
-      _get->const System::String& {return this->functionName;}
+    _property<const System::String&, _readonly> MemberNamne {
+      _get->const System::String& {return this->memberNamne;}
     };
     
     System::String ToString() const override {
-      if (string::IsNullOrEmpty(this->fileName) && this->line == 0 && string::IsNullOrEmpty(this->functionName))
+      if (string::IsNullOrEmpty(this->filePath) && this->lineNumber == 0 && string::IsNullOrEmpty(this->memberNamne))
         return "{Empty}";
-      if (string::IsNullOrEmpty(this->functionName))
-        return System::String::Format("{{File=\"{0}\", Line={1}}}", this->fileName, this->line);
-      return System::String::Format("{{File=\"{0}\", Line={1}, Function=\"{2}\"}}", this->fileName, this->line, this->functionName);
+      if (string::IsNullOrEmpty(this->memberNamne))
+        return System::String::Format("{{FilePath=\"{0}\", LineNumber={1}}}", this->filePath, this->lineNumber);
+      return System::String::Format("{{FilePath=\"{0}\", LineNumber={1}, MemberName=\"{2}\"}}", this->filePath, this->lineNumber, this->memberNamne);
     }
     
   private:
-    System::String fileName;
-    int32 line = 0;
-    System::String functionName;
+    System::String filePath;
+    int32 lineNumber = 0;
+    System::String memberNamne;
   };
   
   /// @brief Get Current informations
@@ -65,9 +59,9 @@ namespace Switch {
   /// @par Examples
   /// @code
   /// CurrentInformation currentInformation = _current_information;
-  /// Console::WriteLine("File = {0}", currentInformation.FileName);
-  /// Console::WriteLine("Line = {0}", currentInformation.Line);
-  /// Console::WriteLine("Function = {0}", currentInformation.FunctionName);
+  /// Console::WriteLine("File = {0}", currentInformation.FilePath);
+  /// Console::WriteLine("LineNUmber = {0}", currentInformation.LineNumber);
+  /// Console::WriteLine("Function = {0}", currentInformation.MemberNamne);
   /// @endcode
   /// @ingroup Switch
   #define _current_information \

@@ -153,20 +153,20 @@ namespace {
   TEST(Exception, Constructor) {
     ASSERT_TRUE(is<Exception>(Exception()));
     ASSERT_EQ((int32)0x80131500, Exception().HResult());
-    ASSERT_NE(_current_information.FileName, Exception().File());
-    ASSERT_NE(_current_information.Line, Exception().Line());
+    ASSERT_NE(_current_information.FilePath, Exception().FilePath());
+    ASSERT_NE(_current_information.LineNumber, Exception().LineNumber());
     ASSERT_FALSE(Exception().HasInnerException);
     
     ASSERT_TRUE(is<Exception>(Exception(_current_information)));
     ASSERT_EQ((int32)0x80131500, Exception(_current_information).HResult());
-    ASSERT_EQ(_current_information.FileName, Exception(_current_information).File());
-    ASSERT_EQ(_current_information.Line, Exception(_current_information).Line());
+    ASSERT_EQ(_current_information.FilePath, Exception(_current_information).FilePath());
+    ASSERT_EQ(_current_information.LineNumber, Exception(_current_information).LineNumber());
     ASSERT_FALSE(Exception(_current_information).HasInnerException);
     
     ASSERT_TRUE(is<Exception>(Exception("Value is invalid.", _current_information)));
     ASSERT_EQ((int32)0x80131500, Exception("Value is invalid.", _current_information).HResult());
-    ASSERT_EQ(_current_information.FileName, Exception("Value is invalid.", _current_information).File());
-    ASSERT_EQ(_current_information.Line, Exception("Value is invalid.", _current_information).Line());
+    ASSERT_EQ(_current_information.FilePath, Exception("Value is invalid.", _current_information).FilePath());
+    ASSERT_EQ(_current_information.LineNumber, Exception("Value is invalid.", _current_information).LineNumber());
     ASSERT_FALSE(Exception("Value is invalid.", _current_information).HasInnerException);
   }
   

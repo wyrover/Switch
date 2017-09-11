@@ -302,13 +302,13 @@ namespace Switch {
       /// @remarks The StackTrace property lists method calls in reverse chronological order, that is, the most recent method call is described first, and one line of stack trace information is listed for each method call on the stack. However, the StackTrace property might not report as many method calls as expected due to code transformations that occur during optimization.
       /// @note For a hierarchical view of the stack trace information by class, use the StackTrace class.
       /// @remarks The StackTrace property formats the stack trace information for each method call as follows:
-      /// @remarks "at FullClassName.MethodName(MethodParams) in FileName :line LineNumber "
-      /// @remarks The literal "at" is preceded by three spaces, and the entire substring starting with "in" is omitted if debug symbols are not available. The placeholders, FullClassName, MethodName, MethodParams, FileName, and LineNumber, are replaced by actual values, and are defined as follows:
+      /// @remarks "at FullClassName.MethodName(MethodParams) in FilePath :line LineNumber "
+      /// @remarks The literal "at" is preceded by three spaces, and the entire substring starting with "in" is omitted if debug symbols are not available. The placeholders, FullClassName, MethodName, MethodParams, FilePath, and LineNumber, are replaced by actual values, and are defined as follows:
       /// * FullClassName The full name of the class, including the namespace.
       /// * MethodName The name of the method.
       /// * MethodParams The list of parameter type/name pairs. Each pair is separated by a comma (","). This information is omitted if MethodName takes no parameters.
-      /// * FileName The name of the source file where the MethodName method is declared. This information is omitted if debug symbols are not available.
-      /// * LineNumber The number of the line in FileName that contains the source code from MethodName for the instruction that is on the call stack. This information is omitted if debug symbols are not available.
+      /// * FilePath The name of the source file where the MethodName method is declared. This information is omitted if debug symbols are not available.
+      /// * LineNumber The number of the line in FilePath that contains the source code from MethodName for the instruction that is on the call stack. This information is omitted if debug symbols are not available.
       /// @remarks The Environment.NewLine string terminates each line of the stack trace.
       /// @par Example
       /// The following example demonstrates the StackTrace property.

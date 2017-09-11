@@ -89,7 +89,7 @@ string Exception::GetDefaultMessage() const {
 void Exception::SetStackTrace(const Exception& exception) {
   if (Exception::stackTraceEnabled == false) {
     this->stackTrace = ref_new<Array<string>>(1);
-    this->stackTrace()[0] = String::Format("  in {0}:{1}{2}", this->currentInformation.FileName, this->currentInformation.Line, Environment::NewLine);
+    this->stackTrace()[0] = String::Format("  in {0}:{1}{2}", this->currentInformation.FilePath, this->currentInformation.LineNumber, Environment::NewLine);
     return;
   }
   
@@ -97,9 +97,9 @@ void Exception::SetStackTrace(const Exception& exception) {
   this->stackTrace = ref_new<Array<string>>(stackTrace.FrameCount() + 1);
 
   if (stackTrace.FrameCount() == 0) {
-    this->stackTrace()[0] = String::Format("  in {0}:{1}{2}", this->currentInformation.FileName, this->currentInformation.Line, Environment::NewLine);
+    this->stackTrace()[0] = String::Format("  in {0}:{1}{2}", this->currentInformation.FilePath, this->currentInformation.LineNumber, Environment::NewLine);
   } else {
-    this->stackTrace()[0] = String::Format("  at {0} [0x{1:X8}] in {2}:{3}{4}", stackTrace.GetFrame(0).GetMethod(), stackTrace.GetFrame(0).GetOffset(), this->currentInformation.FileName, this->currentInformation.Line, Environment::NewLine);
+    this->stackTrace()[0] = String::Format("  at {0} [0x{1:X8}] in {2}:{3}{4}", stackTrace.GetFrame(0).GetMethod(), stackTrace.GetFrame(0).GetOffset(), this->currentInformation.FilePath, this->currentInformation.LineNumber, Environment::NewLine);
     for (int32 index = 0; index < stackTrace.FrameCount(); index++) {
       this->stackTrace()[index + 1] = String::Format("  at {0}", stackTrace.GetFrame(index).GetMethod());
       if (!string::IsNullOrEmpty(stackTrace.GetFrame(index).GetFileName()))
@@ -126,7 +126,7 @@ string Exception::GetStackTrace(const string& filter) const {
   string output;
   for (int32 i = startIndex; i < this->stackTrace().Length; i++) {
     if (i == startIndex) {
-      output = string::Format("{0} in {1}:{2}{3}", this->stackTrace()[i].Remove(this->stackTrace()[i].IndexOf(" in ")), this->currentInformation.FileName, this->currentInformation.Line, Environment::NewLine);
+      output = string::Format("{0} in {1}:{2}{3}", this->stackTrace()[i].Remove(this->stackTrace()[i].IndexOf(" in ")), this->currentInformation.FilePath, this->currentInformation.LineNumber, Environment::NewLine);
     } else {
       output += this->stackTrace()[i];
     }

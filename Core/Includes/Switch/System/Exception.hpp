@@ -54,10 +54,10 @@ namespace Switch {
       const char* what() const noexcept override;
       /// @endcond
       
-      /// @brief Get File where Exception occurred
-      /// @return string A string represent File where Exception occurred
-      _property<const String&, _readonly> File {
-        _get->const string& {return this->currentInformation.FileName();}
+      /// @brief Get file path where Exception occurred
+      /// @return string A string represent file path where Exception occurred
+      _property<const String&, _readonly> FilePath {
+        _get->const string& {return this->currentInformation.FilePath();}
       };
       
       /// @brief Gets a link to the help file associated with this exception.
@@ -84,10 +84,10 @@ namespace Switch {
         _get->const Exception& {return this->innerException();}
       };
       
-      /// @brief Get Line where the Exception occurred
-      /// @return Int32 the number of line where Exception occurred
-      _property<int32, _readonly> Line {
-        _get {return this->currentInformation.Line();}
+      /// @brief Get Line number where the Exception occurred
+      /// @return Int32 the line number where Exception occurred
+      _property<int32, _readonly> LineNumber {
+        _get {return this->currentInformation.LineNumber();}
       };
       
       /// @brief Get message associate to the Exception
