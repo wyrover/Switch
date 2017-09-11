@@ -70,7 +70,8 @@ namespace Switch {
   /// Console::WriteLine("Function = {0}", currentInformation.FunctionName);
   /// @endcode
   /// @ingroup Switch
-  #define _current_information CurrentInformation(__FILE__, __LINE__, __func__)
+  #define _current_information \
+  CurrentInformation(__FILE__, __LINE__, __func__)
 }
 
 using namespace Switch;

@@ -7,56 +7,60 @@ using namespace System::Net;
 using namespace System::Net::Sockets;
 using namespace TUnit;
 
-#define EXPECT_B4(b1, b2, b3, b4, bytes) \
-EXPECT_EQ(4, bytes.Length);\
-if (System::BitConverter::IsLittleEndian()) {\
-EXPECT_EQ(b1, bytes[0]);\
-EXPECT_EQ(b2, bytes[1]);\
-EXPECT_EQ(b3, bytes[2]);\
-EXPECT_EQ(b4, bytes[3]);\
-} else {\
-EXPECT_EQ(b1, bytes[3]);\
-EXPECT_EQ(b2, bytes[2]);\
-EXPECT_EQ(b3, bytes[1]);\
-EXPECT_EQ(b4, bytes[0]);\
+template<typename T, typename TArray>
+void EXPECT_B4(T b1, T b2, T b3, T b4, TArray bytes) {
+  EXPECT_EQ(4, bytes.Length);
+  if (System::BitConverter::IsLittleEndian()) {
+    EXPECT_EQ(b1, bytes[0]);
+    EXPECT_EQ(b2, bytes[1]);
+    EXPECT_EQ(b3, bytes[2]);
+    EXPECT_EQ(b4, bytes[3]);
+  } else {
+    EXPECT_EQ(b1, bytes[3]);
+    EXPECT_EQ(b2, bytes[2]);
+    EXPECT_EQ(b3, bytes[1]);
+    EXPECT_EQ(b4, bytes[0]);
+  }
 }
 
-#define EXPECT_B16(b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15, b16, bytes) \
-EXPECT_EQ(16, bytes.Length);\
-if (System::BitConverter::IsLittleEndian()) {\
-EXPECT_EQ(b1, bytes[0]);\
-EXPECT_EQ(b2, bytes[1]);\
-EXPECT_EQ(b3, bytes[2]);\
-EXPECT_EQ(b4, bytes[3]);\
-EXPECT_EQ(b5, bytes[4]);\
-EXPECT_EQ(b6, bytes[5]);\
-EXPECT_EQ(b7, bytes[6]);\
-EXPECT_EQ(b8, bytes[7]);\
-EXPECT_EQ(b9, bytes[8]);\
-EXPECT_EQ(b10, bytes[9]);\
-EXPECT_EQ(b11, bytes[10]);\
-EXPECT_EQ(b12, bytes[11]);\
-EXPECT_EQ(b13, bytes[12]);\
-EXPECT_EQ(b14, bytes[13]);\
-EXPECT_EQ(b15, bytes[14]);\
-EXPECT_EQ(b16, bytes[15]);\
-} else {\
-EXPECT_EQ(b1, bytes[7]);\
-EXPECT_EQ(b2, bytes[6]);\
-EXPECT_EQ(b3, bytes[5]);\
-EXPECT_EQ(b4, bytes[4]);\
-EXPECT_EQ(b5, bytes[3]);\
-EXPECT_EQ(b6, bytes[2]);\
-EXPECT_EQ(b7, bytes[1]);\
-EXPECT_EQ(b8, bytes[0]);\
-EXPECT_EQ(b9, bytes[15]);\
-EXPECT_EQ(b10, bytes[14]);\
-EXPECT_EQ(b11, bytes[13]);\
-EXPECT_EQ(b12, bytes[12]);\
-EXPECT_EQ(b13, bytes[11]);\
-EXPECT_EQ(b14, bytes[10]);\
-EXPECT_EQ(b15, bytes[9]);\
-EXPECT_EQ(b16, bytes[8]);\
+template<typename T, typename TArray>
+void EXPECT_B16(T b1, T b2, T b3, T b4, T b5, T b6, T b7, T b8, T b9, T b10, T b11, T b12, T b13, T b14, T b15, T b16, TArray bytes) {
+  EXPECT_EQ(16, bytes.Length);
+  if (System::BitConverter::IsLittleEndian()) {
+    EXPECT_EQ(b1, bytes[0]);
+    EXPECT_EQ(b2, bytes[1]);
+    EXPECT_EQ(b3, bytes[2]);
+    EXPECT_EQ(b4, bytes[3]);
+    EXPECT_EQ(b5, bytes[4]);
+    EXPECT_EQ(b6, bytes[5]);
+    EXPECT_EQ(b7, bytes[6]);
+    EXPECT_EQ(b8, bytes[7]);
+    EXPECT_EQ(b9, bytes[8]);
+    EXPECT_EQ(b10, bytes[9]);
+    EXPECT_EQ(b11, bytes[10]);
+    EXPECT_EQ(b12, bytes[11]);
+    EXPECT_EQ(b13, bytes[12]);
+    EXPECT_EQ(b14, bytes[13]);
+    EXPECT_EQ(b15, bytes[14]);
+    EXPECT_EQ(b16, bytes[15]);
+  } else {
+    EXPECT_EQ(b1, bytes[7]);
+    EXPECT_EQ(b2, bytes[6]);
+    EXPECT_EQ(b3, bytes[5]);
+    EXPECT_EQ(b4, bytes[4]);
+    EXPECT_EQ(b5, bytes[3]);
+    EXPECT_EQ(b6, bytes[2]);
+    EXPECT_EQ(b7, bytes[1]);
+    EXPECT_EQ(b8, bytes[0]);
+    EXPECT_EQ(b9, bytes[15]);
+    EXPECT_EQ(b10, bytes[14]);
+    EXPECT_EQ(b11, bytes[13]);
+    EXPECT_EQ(b12, bytes[12]);
+    EXPECT_EQ(b13, bytes[11]);
+    EXPECT_EQ(b14, bytes[10]);
+    EXPECT_EQ(b15, bytes[9]);
+    EXPECT_EQ(b16, bytes[8]);
+  }
 }
 
 namespace {
