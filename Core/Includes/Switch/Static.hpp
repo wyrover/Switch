@@ -24,8 +24,8 @@ namespace Switch {
   ///   static string ToString() {return "Foo";}
   /// };
   /// @endcode
-  /// @ingroup Switch
-  #define _static\
+  /// @ingroup Keywords
+  #define _static \
   final : Static
 }
 

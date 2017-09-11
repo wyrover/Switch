@@ -1097,6 +1097,7 @@ namespace Switch {
   
   /// @brief Represents text as a series of Unicode characters.
   /// @see System::String class
+  /// @ingroup Types
   using string = System::String;
 }
 

@@ -12,8 +12,8 @@ namespace Switch {
   ///   Console::WriteLine(sr->ReadToEnd());
   /// }
   /// @endcode
-  /// @ingroup Switch
-  #define _using(expression)\
+  /// @ingroup Keywords
+  #define _using(expression) \
   for (bool __switch_using__ = true; __switch_using__; __switch_using__ = false)\
     for (expression; __switch_using__; __switch_using__ = false)
 }

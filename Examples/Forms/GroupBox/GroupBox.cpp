@@ -31,4 +31,4 @@ namespace PanelExample {
   };
 }
 
-startup (PanelExample::Form1)
+_startup (PanelExample::Form1)

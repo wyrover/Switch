@@ -78,7 +78,7 @@ namespace Switch {
 
           /// @brief Gets the NetBIOS computer name of the local computer.
           /// @return string The name of this computer.
-          /// @remarks The ComputerName property retrieves the NetBIOS name of the local computer. This is accomplished with a call into the native System Information function GetComputerName. This name is established at system startup, when the system reads it from the registry. If the local computer is a node in a cluster, ComputerName returns the name of the cluster virtual server.
+          /// @remarks The ComputerName property retrieves the NetBIOS name of the local computer. This is accomplished with a call into the native System Information function GetComputerName. This name is established at system _startup, when the system reads it from the registry. If the local computer is a node in a cluster, ComputerName returns the name of the cluster virtual server.
           /// @remarks You can use the ComputerName method to determine the name of the computer that is displayed to other users on a network.
           static property<string, readonly> ComputerName;
 

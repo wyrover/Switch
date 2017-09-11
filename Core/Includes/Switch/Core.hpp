@@ -2,11 +2,14 @@
 /// @brief Contains include files of Core library.
 #pragma once
 
-/// @defgroup Switch Switch
-/// @brief The base module of the Portable C++ Framework wich aim to be independant from the OS.
-
 /// @defgroup Keywords Keywords
 /// @brief Keywords are predefined, reserved identifiers that have special meanings to the compiler. They cannot be used as identifiers in your program unless they include @ as a prefix. For example, @if is a valid identifier, but if is not because if is a keyword.
+
+/// @defgroup Types Types
+/// @brief Types defiitions
+
+/// @defgroup Switch Switch
+/// @brief The base module of the Portable C++ Framework wich aim to be independant from the OS.
 
 #include "Microsoft/Win32/Registry.hpp"
 #include "Microsoft/Win32/RegistryHive.hpp"

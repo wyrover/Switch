@@ -16,7 +16,7 @@ namespace HttpWebRequestExample {
   };
 }
 
-startup (HttpWebRequestExample::Program)
+_startup (HttpWebRequestExample::Program)
 
 // This code produces the following output :
 //

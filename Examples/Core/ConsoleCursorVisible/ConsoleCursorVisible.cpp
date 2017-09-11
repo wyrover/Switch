@@ -38,7 +38,7 @@ namespace Examples {
   };
 }
 
-startup (Examples::Program)
+_startup (Examples::Program)
 
 // This code produces the following output. Note that these results
 // cannot depict cursor visibility. You must run the example to see the

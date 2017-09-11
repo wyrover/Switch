@@ -139,4 +139,4 @@ namespace Examples {
   List<Book> Program::books;
 }
 
-startup (Examples::Program)
+_startup (Examples::Program)

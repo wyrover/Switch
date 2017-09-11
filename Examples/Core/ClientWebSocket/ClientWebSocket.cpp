@@ -46,4 +46,4 @@ namespace Examples {
   };
 }
 
-startup (Examples::ClientWebSocket)
+_startup (Examples::ClientWebSocket)

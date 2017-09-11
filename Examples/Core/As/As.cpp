@@ -52,7 +52,7 @@ namespace Examples {
   };
 }
 
-startup (Examples::Program)
+_startup (Examples::Program)
 
 // This code produces output similar to the following:
 //

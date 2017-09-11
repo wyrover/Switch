@@ -43,14 +43,15 @@ private:
 /// @endcond
 
 namespace Switch {
-  /// @brief The event keyword is used to declare an event in a publisher class.
+  /// @brief The #_event keyword is used to declare an event in a publisher class.
   /// @remarks
   /// Events are a special kind of multicast delegate that can only be invoked from within the class or struct where they are declared (the publisher class). If other classes or structs subscribe to the event, their event handler methods will be called when the publisher class raises the event.
   /// @par Examples
   /// The following example shows how to declare and raise an event that uses EventHandler as the underlying delegate type.
   /// @include Event.cpp
   /// @ingroup Keywords
-  #define event __event__
+  #define _event \
+  __event__
 }
 
 using namespace Switch;

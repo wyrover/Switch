@@ -100,7 +100,8 @@ private:
 namespace Switch {
   /// @brief __readonly__ class represent a __property__ read only attribute.
   /// @ingroup Keywords
-  #define readonly __readonly__
+  #define readonly \
+  __readonly__
   
   /// @brief __readwrite__ class represent a __property__ read write attribute.
   /// @ingroup Keywords
@@ -108,7 +109,8 @@ namespace Switch {
   
   /// @brief __writeonly__ class represent a __property__ write only attribute.
   /// @ingroup Keywords
-  #define writeonly __writeonly__
+  #define writeonly \
+  __writeonly__
   
   /// @brief A __property__ is a member that provides a flexible mechanism to read, write, or compute the value of a private field. Properties can be used as if they are public data members, but they are actually special methods called accessors. This enables data to be accessed easily and still helps promote the safety and flexibility of methods.
   /// @remarks The copy constructor is deleted. So the copy constructor of the owner class must be specified (the implicit or default copy contructor doesn't build).
@@ -116,7 +118,8 @@ namespace Switch {
   /// This sample shows a Person class that has two properties: Name (string) and Age (int). Both properties are read/write.
   /// @include Properties.cpp
   /// @ingroup Keywords
-  #define property __property__
+  #define property \
+  __property__
   
   /// @brief The get keyword defines an accessor method in a __property__ or indexer that retrieves the value of the __property__ or the indexer element.
   /// @par Examples
@@ -136,7 +139,7 @@ namespace Switch {
   /// };
   /// @endcode
   /// @ingroup Keywords
-  #define _get\
+  #define _get \
   [&]()
   
   /// @brief The set keyword defines an accessor method in a __property__ or indexer that assigns the value of the __property__ or the indexer element.
@@ -157,7 +160,7 @@ namespace Switch {
   /// };
   /// @endcode
   /// @ingroup Keywords
-  #define _set\
+  #define _set \
   [&](const auto& value)
 }
 

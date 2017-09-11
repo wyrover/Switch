@@ -58,7 +58,7 @@ namespace Examples {
   int Program::origCol = 0;
 }
 
-startup (Examples::Program)
+_startup (Examples::Program)
 
 // This code produces the following output:
 //

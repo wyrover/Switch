@@ -44,7 +44,7 @@ namespace DesignPatterns {
       refptr<Prototype> Clone() const override {return as<Prototype>(this->MemberwiseClone<ConcretePrototype2>());}
     };
     
-    // MainApp startup class for Creational
+    // MainApp _startup class for Creational
     // Prototype Design Pattern.
     class MainApp {
     public:
@@ -65,7 +65,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-startup (DesignPatterns::Creational::MainApp)
+_startup (DesignPatterns::Creational::MainApp)
 
 // This code produces the following output:
 //

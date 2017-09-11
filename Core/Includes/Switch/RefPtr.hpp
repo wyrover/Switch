@@ -478,7 +478,7 @@ namespace Switch {
   /// @par Examples
   /// This example show how to used RefPtr :
   /// @include RefPtr.cpp
-  /// @ingroup Switch
+  /// @ingroup Types
   template<typename T>
   using refptr = RefPtr<T>;
   
@@ -496,7 +496,7 @@ namespace Switch {
   /// @par Examples
   /// This example show how to used RefPtr :
   /// @include RefPtr2.cpp
-  /// @ingroup Switch
+  /// @ingroup Types
   template<typename T>
   using _ = RefPtr<T>;
   

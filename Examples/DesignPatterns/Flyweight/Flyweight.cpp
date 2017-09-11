@@ -43,7 +43,7 @@ namespace DesignPatterns {
       void Operation(int extrinsicstate) const override  {Console::WriteLine("UnsharedConcreteFlyweight: {0}", extrinsicstate);}
     };
     
-    // MainApp startup class for Structural
+    // MainApp _startup class for Structural
     // Flyweight Design Pattern.
     class MainApp {
     public:
@@ -72,7 +72,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-startup (DesignPatterns::Structural::MainApp)
+_startup (DesignPatterns::Structural::MainApp)
 
 // This code produces the following output:
 //

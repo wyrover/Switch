@@ -77,7 +77,7 @@ namespace DesignPatterns {
       refptr<AbstractProductB> abstractProductB;
     };
     
-    // MainApp startup class for Creational
+    // MainApp _startup class for Creational
     // Abstract Factory Design Pattern.
     class MainApp {
     public:
@@ -98,7 +98,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-startup (DesignPatterns::Creational::MainApp)
+_startup (DesignPatterns::Creational::MainApp)
 
 // This code produces the following output:
 //

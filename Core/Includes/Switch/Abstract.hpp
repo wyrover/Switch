@@ -67,7 +67,7 @@ namespace Switch {
   ///   };
   /// }
   ///
-  /// startup (TestReader::Program)
+  /// _startup (TestReader::Program)
   /// @endcode
   /// @ingroup Keywords
   #define _abstract\

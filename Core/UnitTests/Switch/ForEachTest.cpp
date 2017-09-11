@@ -3,6 +3,7 @@
 #include <Switch/System/Collections/Generic/SortedSet.hpp>
 #include <Switch/TUnit/Assert.hpp>
 #include <Switch/TUnit/TestFixture.hpp>
+#include <Switch/Foreach.hpp>
 
 using namespace System;
 using namespace TUnit;
@@ -121,7 +122,7 @@ namespace SwitchUnitTests {
       
       // test foreach without scope
       index = 1;
-      for (Int32 i : testList)
+      _foreach (Int32 i _in testList)
         Assert::AreEqual(index++, i, _current_information);
       
       Assert::AreEqual(index, 6, _current_information);
@@ -187,7 +188,7 @@ namespace SwitchUnitTests {
       testArray[4] = 5;
       
       // test foreach without scope
-      for (uint32 i : testArray)
+      _foreach (uint32 i _in testArray)
         index = i;
       
       Assert::AreEqual(index, 5u, _current_information);
@@ -248,7 +249,7 @@ namespace SwitchUnitTests {
       testDictionary[5] = "5";
       
       // test foreach without scope
-      for (auto i : testDictionary)
+      _foreach (auto i _in testDictionary)
         count += i.Key();
       Assert::AreEqual(15u, count, _current_information);
       

@@ -13,18 +13,25 @@
 #include "TypeCode.hpp"
 #include "ValueType.hpp"
 
-/// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
+/// @cond
 namespace Switch {
-  /// @cond
   namespace System {
     class Type;
     class Object;
   }
+}
+
+namespace __s__ {
+  template<typename T>
+  Switch::System::Type __typeof_();
+
+  template<typename T>
+  Switch::System::Type __typeof_(const T& value);
+}
+/// @endcond
   
-  template<typename T> System::Type _typeof();
-  template<typename T> System::Type _typeof(const T& value);
-  /// @endcond
-  
+/// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief Represents type declarations: class types, interface types, array types, value types, enumeration types, type parameters, generic type definitions, and open or closed constructed generic types.
@@ -87,8 +94,10 @@ namespace Switch {
       String GetName() const;
       String GetNamespace() const;
       
-      template<typename T> friend Type Switch::_typeof();
-      template<typename T> friend Type Switch::_typeof(const T& value);
+      template<typename T>
+      friend Type __s__::__typeof_();
+      template<typename T>
+      friend Type __s__::__typeof_(const T& value);
       friend class Object;
       
       Type();
@@ -98,30 +107,31 @@ namespace Switch {
       const std::type_info& type;
     };
   }
-  
-  /// @brief Used to obtain the type Object for a type. A _typeof expression takes the following form:
-  /// @par Examples
-  /// @code
-  /// Type type = _typeof<Int32>();
-  /// @endcode
-  /// @par Examples
-  /// To obtain the run-time type of an expression, you can use the Switch method GetType, as in the following example:
-  /// @code
-  /// Int32 i = 0;
-  /// System::Type type = i.GetType();
-  /// @endcode
-  /// @remarks The _typeof operator cannot be overloaded.
-  /// @ingroup Switch
+}
+
+/// @cond
+namespace __s__ {
   template<typename T>
-  System::Type _typeof() {
+  Switch::System::Type __typeof_() {
     return System::Type(typeid(T));
   }
-  
+
+  template<typename T>
+  Switch::System::Type __typeof_(const T& value) {
+  return System::Type(typeid(value));
+  }
+}
+/// @endcond
+
+/// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
+namespace Switch {
   /// @brief Used to obtain the type Object for a type. A _typeof expression takes the following form:
   /// @par Examples
   /// @code
+  /// Type type1 = _typeof<Int32>();
+  ///
   /// Int32 i = 42;
-  /// type atype& = _typeof(i);
+  /// Type type2 = _typeof(i);
   /// @endcode
   /// @par Examples
   /// To obtain the run-time type of an expression, you can use the Switch method GetType, as in the following example:
@@ -131,26 +141,9 @@ namespace Switch {
   /// @endcode
   /// @remarks The _typeof operator cannot be overloaded.
   /// @see System::Type
-  /// @ingroup Switch
-  template<typename T>
-  System::Type _typeof(const T& value) {
-    return System::Type(typeid(value));
-  }
-  
-#if defined(__APPLE__) || defined(__clang__)
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wkeyword-macro"
-  #define typeof _typeof
-  #pragma clang diagnostic pop
-#elif defined(__linux__)
-  #define typeof _typeof
-#else
-  template<typename T>
-  System::Type typeof() {return _typeof<T>();}
-  
-  template<typename T>
-  System::Type typeof(const T& value) {return _typeof(value);}
-#endif
+  /// @ingroup Keywords
+  #define _typeof  \
+  __s__::__typeof_
 }
 
 using namespace Switch;

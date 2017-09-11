@@ -29,7 +29,7 @@ namespace UnitTests {
   };
 }
 
-startup (UnitTests::MainClass)
+_startup (UnitTests::MainClass)
 
 // This code produces the following output if directory Downloads exists and Potatos doesn't exist in your home direcory:
 //

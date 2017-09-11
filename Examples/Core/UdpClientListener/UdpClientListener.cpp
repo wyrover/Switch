@@ -29,7 +29,7 @@ namespace Examples {
   };
 }
 
-startup (Examples::UdpClientListener)
+_startup (Examples::UdpClientListener)
 
 // This code example can produce the following output:
 //

@@ -29,7 +29,7 @@ namespace DesignPatterns {
       void Interpret(const Context& context) const override {Console::WriteLine("Called Nonterminal.Interpret()");}
     };
     
-    // MainApp startup class for Behavioral
+    // MainApp _startup class for Behavioral
     // Interpreter Design Pattern.
     class MainApp {
     public:
@@ -56,7 +56,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-startup (DesignPatterns::Behavioral::MainApp)
+_startup (DesignPatterns::Behavioral::MainApp)
 
 // This code produces the following output:
 //

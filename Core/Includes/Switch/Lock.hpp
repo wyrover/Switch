@@ -54,14 +54,14 @@ namespace Switch {
   ///   }
   /// };
   ///
-  /// startup (ThreadTest)
+  /// _startup (ThreadTest)
   ///
   /// // Output: RunMe called
   /// @endcode
   /// @par Examples
   /// The following sample uses threads and _lock. As long as the lock statement is present, the statement block is a critical section and balance will never become a negative number.
   /// @include Lock.cpp
-  /// @ingroup Switch
+  /// @ingroup Keywords
   #define _lock(object)\
   _using (System::Threading::LockGuard __switch_lock_guard__(object))
 }

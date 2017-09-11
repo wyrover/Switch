@@ -40,7 +40,7 @@ namespace DesignPatterns {
       refptr<Product> FactoryMethod() const override {return ref_new<ConcreteProductB>();}
     };
     
-    // MainApp startup class for Creational
+    // MainApp _startup class for Creational
     // Factory Method Design Pattern.
     class MainApp {
     public:
@@ -63,7 +63,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-startup (DesignPatterns::Creational::MainApp)
+_startup (DesignPatterns::Creational::MainApp)
 
 // This code produces the following output:
 //

@@ -58,7 +58,7 @@ namespace DesignPatterns {
       context.State = ref_new<ConcreteStateA>();
     }
 
-    // MainApp startup class for Behavioral
+    // MainApp _startup class for Behavioral
     // State Design Pattern.
     class MainApp {
     public:
@@ -78,7 +78,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-startup (DesignPatterns::Behavioral::MainApp)
+_startup (DesignPatterns::Behavioral::MainApp)
 
 // This code produces the following output:
 //

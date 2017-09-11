@@ -55,7 +55,7 @@ namespace DesignPatterns {
       SubSystemFour four;
     };
     
-    // MainApp startup class for Structural
+    // MainApp _startup class for Structural
     // Facade Design Pattern.
     class MainApp {
     public:
@@ -71,7 +71,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-startup (DesignPatterns::Structural::MainApp)
+_startup (DesignPatterns::Structural::MainApp)
 
 // This code produces the following output:
 //

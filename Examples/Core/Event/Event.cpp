@@ -24,7 +24,7 @@ namespace SwitchEvents {
   class Publisher : public object {
   public:
     // Declare the event using EventHandler<T>
-    event<Publisher, GenericEventHandler<const CustomEventArgs&>> RaiseCustomEvent;
+    _event<Publisher, GenericEventHandler<const CustomEventArgs&>> RaiseCustomEvent;
     
     void DoSomething() {
       // Write some code that does something useful here
@@ -83,7 +83,7 @@ namespace SwitchEvents {
   };
 }
 
-startup (SwitchEvents::Program)
+_startup (SwitchEvents::Program)
 
 // This code produces output similar to the following:
 //

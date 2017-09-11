@@ -44,7 +44,7 @@ namespace Examples {
   };
 }
 
-startup (Examples::SocketExample)
+_startup (Examples::SocketExample)
 
 // This code example can produce the following output:
 //

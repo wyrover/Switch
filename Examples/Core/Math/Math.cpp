@@ -71,7 +71,7 @@ namespace Examples {
   };
 }
 
-startup (Examples::MathTrapezoidSample)
+_startup (Examples::MathTrapezoidSample)
 
 // This code produces the following output:
 //

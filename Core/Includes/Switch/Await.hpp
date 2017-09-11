@@ -52,8 +52,9 @@ namespace Switch {
   /// @par Examples
   /// This example demontrate how to use async and await
   /// @include Async2.cpp
-  /// @ingroup Switch
-  #define _await await() <<
+  /// @ingroup Keywords
+  #define _await \
+  await() <<
 }
 
 using namespace Switch;

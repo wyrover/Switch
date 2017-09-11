@@ -2,6 +2,7 @@
 #include <Switch/TUnit/Assert.hpp>
 #include <Switch/TUnit/TestFixture.hpp>
 #include <Switch/LiteralOperatorConverter.hpp>
+#include <Switch/Foreach.hpp>
 
 using namespace System;
 using namespace TUnit;
@@ -491,7 +492,7 @@ namespace SwitchUnitTests {
     void ForeachOnString() {
       string str = "This is a test for foreach";
       string output;
-      for (char32 item : str)
+      _foreach (char32 item _in str)
         output += item;
       TUnit::Assert::AreEqual("This is a test for foreach", output, _current_information);
     }

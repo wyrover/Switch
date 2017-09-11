@@ -13,7 +13,7 @@ namespace Switch {
   /// @par Examples
   /// The following example show hot to use _var
   /// @include Var.cpp
-  /// @ingroup Switch
+  /// @ingroup Keywords
   #define _var \
   auto
 }

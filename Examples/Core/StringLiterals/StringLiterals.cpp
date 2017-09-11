@@ -52,4 +52,4 @@ namespace Examples {
   };
 }
 
-startup (Examples::Program)
+_startup (Examples::Program)

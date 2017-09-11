@@ -29,8 +29,9 @@ namespace Switch {
   ///   }
   /// }
   /// @endcode
-  /// @ingroup Switch
-  #define _nameof(value) System::String(#value)
+  /// @ingroup Keywords
+  #define _nameof(value) \
+  System::String(#value)
 }
 
 using namespace Switch;

@@ -43,7 +43,7 @@ namespace Examples {
   System::Collections::Generic::List<refptr<object>> Program::items;
 }
 
-startup (Examples::Program)
+_startup (Examples::Program)
 
 // This code produces the following output:
 //

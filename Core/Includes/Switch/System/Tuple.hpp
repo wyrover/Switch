@@ -686,7 +686,7 @@ namespace Switch {
     /// @remarks To provide easy access to, and manipulation of, a data set. The following example defines an array of Tuple<T1, T2> objects that contain the names of students and their corresponding test scores. It then iterates the array to calculate the mean test score.
     /// @include Tuple2.cpp
     /// @remarks To return multiple values from a method without the use of out parameters. For example, the following example uses a Tuple<T1, T2> object to return the quotient and the remainder that result from integer division.
-    /// @remarks To pass multiple values to a method through a single parameter. For example, the Thread.Start(object) method has a single parameter that lets you supply one value to the method that the thread executes at startup. If you supply a Tuple<T1, T2> object as the method argument, you can supply the thread’s startup routine with two items of data.
+    /// @remarks To pass multiple values to a method through a single parameter. For example, the Thread.Start(object) method has a single parameter that lets you supply one value to the method that the thread executes at _startup. If you supply a Tuple<T1, T2> object as the method argument, you can supply the thread’s _startup routine with two items of data.
     template<typename T1, typename T2>
     class Tuple<T1, T2> : public TupleObject, public IComparable {
     public:

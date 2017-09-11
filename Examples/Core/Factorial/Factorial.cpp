@@ -25,7 +25,7 @@ namespace FactorialExample {
   };
 }
 
-startup (FactorialExample::Progam)
+_startup (FactorialExample::Progam)
 
 // This code produces the following output:
 //

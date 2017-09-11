@@ -70,7 +70,7 @@ namespace Examples {
 object Examples::TcpClientExample::Reader::lock;
 
 
-startup (Examples::TcpClientExample)
+_startup (Examples::TcpClientExample)
 
 // This code example can produce the following output:
 //
