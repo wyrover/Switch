@@ -83,7 +83,7 @@ namespace SwitchEvents {
   };
 }
 
-_startup (SwitchEvents::Program)
+startup (SwitchEvents::Program)
 
 // This code produces output similar to the following:
 //

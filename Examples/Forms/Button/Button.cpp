@@ -49,4 +49,4 @@ namespace FormExample {
   };
 }
 
-_startup (FormExample::Form1)
+startup (FormExample::Form1)

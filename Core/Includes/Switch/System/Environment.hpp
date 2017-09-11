@@ -512,7 +512,7 @@ namespace Switch {
       /// @return Array<string> A string array that contains the arguments without the command line.
       /// @exception InvalidOperationException Call more than once. CommandeLine has already been set and is not empty.
       /// @remarks This methode must be call only once in main.
-      /// @remarks if you use #_startup (default) you don't need to call this method; otherwise if you use the standerd C++ main method you need to call it.
+      /// @remarks if you use #startup (default) you don't need to call this method; otherwise if you use the standerd C++ main method you need to call it.
       /// @par Example
       /// This example show how to call SetCommandLineArgs with sandard C++ main method:
       /// @include Main5.cpp

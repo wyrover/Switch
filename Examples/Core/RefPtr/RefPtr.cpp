@@ -36,7 +36,7 @@ namespace Test {
   };
 }
 
-_startup (Test::Program)
+startup (Test::Program)
 
 // This code produces the following output :
 //

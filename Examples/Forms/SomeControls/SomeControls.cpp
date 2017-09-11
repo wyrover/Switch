@@ -73,4 +73,4 @@ namespace SomeControls {
   };
 }
 
-_startup(SomeControls::MainForm)
+startup(SomeControls::MainForm)

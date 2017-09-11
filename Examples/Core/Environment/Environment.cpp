@@ -76,7 +76,7 @@ namespace Examples {
   };
 }
 
-_startup (Examples::Program)
+startup (Examples::Program)
 
 // This example produces results similar to the following:
 // (Any result that is lengthy or reveals information that should remain

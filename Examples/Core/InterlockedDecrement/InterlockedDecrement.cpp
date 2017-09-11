@@ -48,7 +48,7 @@ namespace Examples {
   int MyInterlockedDecrementClass::CountClass::SafeInstanceCount = 0;
 }
       
-_startup (Examples::MyInterlockedDecrementClass)
+startup (Examples::MyInterlockedDecrementClass)
 
 // This code produces the following output:
 //

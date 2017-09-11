@@ -15,7 +15,7 @@ namespace Examples {
   };
 }
 
-_startup (Examples::Program)
+startup (Examples::Program)
 
 
 // Output from the example is not shown, since it is:

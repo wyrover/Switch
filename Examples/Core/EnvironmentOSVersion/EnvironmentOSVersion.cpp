@@ -13,7 +13,7 @@ namespace Examples {
   };
 }
 
-_startup (Examples::Program)
+startup (Examples::Program)
 
 
 // This example produces results similar to the following, if you run it on macOS Sierra:

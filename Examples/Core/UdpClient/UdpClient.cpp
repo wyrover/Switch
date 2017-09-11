@@ -39,7 +39,7 @@ namespace Examples {
   };
 }
 
-_startup (Examples::UdpClientExample)
+startup (Examples::UdpClientExample)
 
 // This code example can produce the following output:
 //

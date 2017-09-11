@@ -19,7 +19,7 @@ namespace Examples {
 }
 
 // Specify the Main entry point to System
-_startup (Examples::Program);
+startup (Examples::Program);
 
 // This code produces the following output:
 //

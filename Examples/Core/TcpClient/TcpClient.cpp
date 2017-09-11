@@ -39,7 +39,7 @@ namespace Examples {
   };
 }
 
-_startup (Examples::TcpClientExample)
+startup (Examples::TcpClientExample)
 
 // This code example can produce the following output:
 //

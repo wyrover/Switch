@@ -48,7 +48,7 @@ namespace Examples {
   int Program::Profile::Counter = 0;
 }
 
-_startup (Examples::Program)
+startup (Examples::Program)
 
 // This code produces the following output :
 //

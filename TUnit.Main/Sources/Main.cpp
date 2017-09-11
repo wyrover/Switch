@@ -11,4 +11,4 @@ namespace {
   };
 }
 
-_startup (MainTest)
+startup (MainTest)

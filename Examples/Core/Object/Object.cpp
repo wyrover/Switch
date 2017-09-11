@@ -58,7 +58,7 @@ public:
   }
 };
 
-_startup (App)
+startup (App)
 
 // This code produces the following output:
 //

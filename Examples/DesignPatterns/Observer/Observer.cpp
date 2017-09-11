@@ -88,7 +88,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-_startup (DesignPatterns::Behavioral::MainApp)
+startup (DesignPatterns::Behavioral::MainApp)
 
 // This code produces the following output:
 //

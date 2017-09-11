@@ -31,7 +31,7 @@ namespace Examples {
   };
 }
 
-_startup (Examples::TestAsync)
+startup (Examples::TestAsync)
 
 // This code produces output similar to the following:
 //

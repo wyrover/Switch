@@ -27,4 +27,4 @@ namespace HelloWorld {
   };
 }
 
-_startup (HelloWorld::Program)
+startup (HelloWorld::Program)
