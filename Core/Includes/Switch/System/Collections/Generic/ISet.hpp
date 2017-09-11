@@ -24,13 +24,13 @@ namespace Switch {
 
           /// @brief Gets the number of elements contained in the ISet.
           /// @return Int32 The number of elements contained in the ICollection.
-          property<int32, readonly> Count {
+          _property<int32, _readonly> Count {
             _get {return this->GetCount();}
           };
           
           /// @brief Gets a value indicating whether the ISet is read-only.
           /// @return Boolean true if the ISet is read-only; otherwise; otherwise, false.
-          property<bool, readonly> IsReadOnly {
+          _property<bool, _readonly> IsReadOnly {
             _get {return this->GetIsReadOnly();}
           };
           

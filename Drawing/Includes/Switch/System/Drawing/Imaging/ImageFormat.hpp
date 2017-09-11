@@ -16,25 +16,25 @@ namespace Switch {
       namespace Imaging {
         class _export ImageFormat : public object {
         public:
-          static property<ImageFormat, readonly> Bmp;
+          static _property<ImageFormat, _readonly> Bmp;
           
-          static property<ImageFormat, readonly> Emf;
+          static _property<ImageFormat, _readonly> Emf;
           
-          static property<ImageFormat, readonly> Exif;
+          static _property<ImageFormat, _readonly> Exif;
           
-          static property<ImageFormat, readonly> Gif;
+          static _property<ImageFormat, _readonly> Gif;
           
-          static property<ImageFormat, readonly> Icon;
+          static _property<ImageFormat, _readonly> Icon;
           
-          static property<ImageFormat, readonly> Jpeg;
+          static _property<ImageFormat, _readonly> Jpeg;
           
-          static property<ImageFormat, readonly> MemoryBmp;
+          static _property<ImageFormat, _readonly> MemoryBmp;
           
-          static property<ImageFormat, readonly> Png;
+          static _property<ImageFormat, _readonly> Png;
           
-          static  property<ImageFormat, readonly> Tiff;
+          static  _property<ImageFormat, _readonly> Tiff;
           
-          static property<ImageFormat, readonly> Wmf;
+          static _property<ImageFormat, _readonly> Wmf;
           
           ImageFormat() {}
           ImageFormat(const Guid& guid) : guid(guid) {}
@@ -42,11 +42,11 @@ namespace Switch {
           ImageFormat(const string name, const string& guid) : name(name), guid(guid) {}
           ImageFormat(const ImageFormat& format) : name(format.name), guid(format.guid) {}
           
-          property<System::Guid, readonly> Guid {
+          _property<System::Guid, _readonly> Guid {
             _get {return this->guid;}
           };
           
-          property<string, readonly> Name {
+          _property<string, _readonly> Name {
             _get {return this->name;}
           };
 

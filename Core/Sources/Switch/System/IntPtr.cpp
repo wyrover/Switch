@@ -6,11 +6,11 @@
 
 using namespace System;
 
-property<intptr, readonly> IntPtr::Zero {
+_property<intptr, _readonly> IntPtr::Zero {
   [] {return 0;}
 };
 
-property<int32, readonly> IntPtr::Size {
+_property<int32, _readonly> IntPtr::Size {
   [] {return static_cast<int32>(sizeof(intptr));}
 };
 

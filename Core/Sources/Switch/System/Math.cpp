@@ -5,11 +5,11 @@
 
 using namespace System;
 
-property<double, readonly> Math::E {
+_property<double, _readonly> Math::E {
   [] {return 2.7182818284590452354;}
 };
 
-property<double, readonly> Math::PI {
+_property<double, _readonly> Math::PI {
   [] {return 3.14159265358979323846;}
 };
 

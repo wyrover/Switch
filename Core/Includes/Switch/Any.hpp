@@ -106,7 +106,7 @@ namespace Switch {
     Any(llong value) : value(sizeof(long) == 8 ? (object*)new System::Int64(value) : (object*)new System::Int32(value)) {}
     Any(ullong value) : value(sizeof(long) == 8 ? (object*)new System::UInt64(value) : (object*)new System::UInt32(value)) {}
     template<typename T, typename Attribute>
-    Any(const property<T, Attribute>& value) : value(ObjectOrEnumOrOtherToAny<T>()(value())) {}
+    Any(const _property<T, Attribute>& value) : value(ObjectOrEnumOrOtherToAny<T>()(value())) {}
     template <typename T>
     operator T() const {
       if(!this->HasValue)
@@ -160,14 +160,14 @@ namespace Switch {
     /// @brief Gets a value indicating whether the current Nullable<T> object has a valid value of its underlying type.
     /// @return true if the current Nullable<T> object has a value; false if the current Nullable<T> object has no value.
     /// @remarks If the HasValue property is true, the value of the current Nullable<T> object can be accessed with the Value property. Otherwise, attempting to access its value throws an InvalidOperationException exception.
-    property<bool, readonly> HasValue {
+    _property<bool, _readonly> HasValue {
       _get {return this->value != null;}
     };
     
     /// @brief Gets the value of the current Any object if it has been assigned a valid underlying value.
     /// @return The value of the current Any object if the HasValue property is true. An exception is thrown if the HasValue property is false.
     /// @exception InvalidOperationException The HasValue property is false.
-    property<const object&, readonly> Value {
+    _property<const object&, _readonly> Value {
       _get->const object& {
         if(!this->HasValue)
           throw System::InvalidOperationException(_current_information);

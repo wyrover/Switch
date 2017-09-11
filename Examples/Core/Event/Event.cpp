@@ -11,7 +11,7 @@ namespace SwitchEvents {
     CustomEventArgs(const string& s) : message(s) {}
     CustomEventArgs(const CustomEventArgs& cea) : message(cea.message) {}
     
-    property<string> Message {
+    _property<string> Message {
       _get { return this->message; },
       _set { this->message = value; }
     };

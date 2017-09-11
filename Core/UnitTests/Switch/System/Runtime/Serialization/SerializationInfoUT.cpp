@@ -15,12 +15,12 @@ public:
     return *this;
   }
   
-  property<string> RoleName {
+  _property<string> RoleName {
     _get->const string& {return this->roleName;},
     _set {this->roleName = value;}
   };
   
-  property<byte> Flags {
+  _property<byte> Flags {
     _get {return this->flags;},
     _set {this->flags = value;}
   };

@@ -143,7 +143,7 @@ namespace Switch {
           /// @param color A Color that represents the background color of the control. The default is the value of the DefaultBackColor property.
           /// @remarks The BackColor property does not support transparent colors unless the SupportsTransparentBackColor value of System::Windows::Forms::ControlStyles is set to true.
           /// @remarks The BackColor property is an ambient property. An ambient property is a control property that, if not set, is retrieved from the parent control. For example, a Button will have the same BackColor as its parent Form by default. For more information about ambient properties, see the AmbientProperties class or the Control class overview.
-          property<System::Drawing::Color> BackColor {
+          _property<System::Drawing::Color> BackColor {
             _get { return (!this->backColor.HasValue && this->parent != null) ? this->parent().BackColor : this->backColor.GetValueOrDefault(DefaultBackColor); },
             _set {
               if (this->backColor != value) {
@@ -157,14 +157,14 @@ namespace Switch {
           /// @param value An Int32 representing the distance, in pixels, between the bottom edge of the control and the top edge of its container's client area.
           /// @remarks The value of this property is equal to the sum of the Top property value, and the Height property value.
           /// @remarks he Bottom property is a read-only property. You can manipulate this property value by changing the value of the Top or Height properties or calling the SetBounds, SetBoundsCore, UpdateBounds, or SetClientSizeCore methods.
-          property<int32, readonly> Bottom {
+          _property<int32, _readonly> Bottom {
             _get{ return this->location.Y() + this->size.Height(); }
           };
           
           /// @brief Gets or sets the size and location of the control including its nonclient elements, in pixels, relative to the parent control.
           /// @param value A Rectangle in pixels relative to the parent control that represents the size and location of the control including its nonclient elements.
           /// @remarks The bounds of the control include the nonclient elements such as scroll bars, borders, title bars, and menus. The SetBoundsCore method is called to set the Bounds property. The Bounds property is not always changed through its set method so you should override the SetBoundsCore method to ensure that your code is executed when the Bounds property is set.
-          property<System::Drawing::Rectangle> Bounds {
+          _property<System::Drawing::Rectangle> Bounds {
             _get { return Drawing::Rectangle(this->Location(), this->Size()); },
             _set {
               this->Location(value.Location());
@@ -172,7 +172,7 @@ namespace Switch {
             }
           };
 
-          property<System::Drawing::Size> ClientSize {
+          _property<System::Drawing::Size> ClientSize {
             _get{ return this->clientSize; },
             _set{
               if (this->clientSize != value) {
@@ -188,14 +188,14 @@ namespace Switch {
           /// @remarks You can manipulate the controls in the Control.ControlCollection assigned to the Controls property by using the methods available in the Control.ControlCollection class.
           /// @remarks When adding several controls to a parent control, it is recommended that you call the SuspendLayout method before initializing the controls to be added. After adding the controls to the parent control, call the ResumeLayout method. Doing so will increase the performance of applications with many controls.
           /// @remarks Use the Controls property to iterate through all controls of a form, including nested controls. Use the GetNextControl method to retrieve the previous or next child control in the tab order. Use the ActiveControl property to get or set the active control of a container control.
-          property<ControlCollection&, readonly> Controls {
+          _property<ControlCollection&, _readonly> Controls {
             _get->ControlCollection& {return this->controls; }
           };
 
-          static property<System::Drawing::Color, readonly> DefaultBackColor;
-          static property<System::Drawing::Color, readonly> DefaultForeColor;
+          static _property<System::Drawing::Color, _readonly> DefaultBackColor;
+          static _property<System::Drawing::Color, _readonly> DefaultForeColor;
 
-          property<bool> Enabled{
+          _property<bool> Enabled{
             _get {return this->enabled; },
             _set {
               if (this->enabled != value) {
@@ -205,7 +205,7 @@ namespace Switch {
             }
           };
 
-          property<System::Drawing::Color> ForeColor {
+          _property<System::Drawing::Color> ForeColor {
             _get{ return (!this->foreColor.HasValue && this->parent != null) ? this->parent().ForeColor : this->foreColor.GetValueOrDefault(DefaultForeColor); },
             _set {
               if (this->foreColor != value) {
@@ -218,7 +218,7 @@ namespace Switch {
           /// @brief Gets the window handle that the control is bound to.
           /// @return intptr An IntPtr that contains the window handle (HWND) of the control.
           /// @remarks The value of the Handle property is a Windows HWND. If the handle has not yet been created, referencing this property will force the handle to be created.
-          property<intptr, readonly> Handle {
+          _property<intptr, _readonly> Handle {
             _get {
               if (!this->IsHandleCreated)
                 CreateHandle();
@@ -230,16 +230,16 @@ namespace Switch {
           /// @return int32 The height of the control in pixels.
           /// @remarks Changes made to the Height and Top property values cause the Bottom property value of the control to change.
           /// @note The minimum height for the derived control Splitter is one pixel. The default height for the Splitter control is three pixels. Setting the height of the Splitter control to a value less than one will reset the property value to the default height.
-          property<int32> Height {
+          _property<int32> Height {
             _get { return this->size.Height(); },
             _set { this->Size(System::Drawing::Size(this->size.Width(), value)); }
           };
 
-          property<bool, readonly> IsHandleCreated {
+          _property<bool, _readonly> IsHandleCreated {
             _get { return this->handle != 0; }
           };
 
-          property<int32> Left {
+          _property<int32> Left {
             _get{ return this->location.X(); },
             _set{ this->Location(System::Drawing::Point(value, this->location.Y())); }
           };
@@ -248,7 +248,7 @@ namespace Switch {
           /// @return System::Drawing::Point The Point that represents the upper-left corner of the control relative to the upper-left corner of its container.
           /// @remarks Because the Point class is returned by value, meaning accessing the property returns a copy of the upper-left point of the control. So, adjusting the X or Y properties of the Point returned from this property will not affect the Left, Right, Top, or Bottom property values of the control. To adjust these properties set each property value individually, or set the Location property with a new Point.
           /// @remarks If the Control is a Form, the Location property value represents the upper-left corner of the Form in screen coordinates.
-          property<System::Drawing::Point> Location {
+          _property<System::Drawing::Point> Location {
             _get { return this->location; },
             _set {
               if (this->location != value) {
@@ -261,7 +261,7 @@ namespace Switch {
           /// @brief Gets or sets the name of the control.
           /// @return string The name of the control. The default is an empty string ("").
           /// @remarks The Name property can be used at run time to evaluate the object by name rather than type and programmatic name.
-          property<string> Name {
+          _property<string> Name {
             _get { return this->name; },
             _set {
               if (this->name != value) {
@@ -274,12 +274,12 @@ namespace Switch {
           /// @brief Gets or sets the parent container of the control.
           /// @return Control A Control that represents the parent or container control of the control.
           /// @remarks Setting the Parent property value to null removes the control from the Control.ControlCollection of its current parent control.
-          property<ref<Control>> Parent {
+          _property<ref<Control>> Parent {
             _get {return this->parent;},
             _set {this->SetParent(value);}
           };
 
-          property<int32, readonly> Right{
+          _property<int32, _readonly> Right{
             _get{ return this->location.X() + this->size.Width(); }
           };
 
@@ -287,7 +287,7 @@ namespace Switch {
           /// @return System::Drawing::Size The Size that represents the height and width of the control in pixels.
           /// @remarks Because the Size class is returned by value, meaning accessing the property returns a copy of the size of the control. So, adjusting the Width or Height properties of the Size returned from this property will not affect the Width or Height of the control. To adjust the Width or Height of the control, you must set the control's Width or Height property, or set the Size property with a new Size.
           /// @note To maintain better performance, do not set the Size of a control in its constructor. The preferred method is to override the DefaultSize property.
-          property<System::Drawing::Size> Size {
+          _property<System::Drawing::Size> Size {
             _get { return this->size; },
             _set {
               if (this->size != value) {
@@ -297,7 +297,7 @@ namespace Switch {
             }
           };
 
-          property<bool> TabStop {
+          _property<bool> TabStop {
             _get {return this->tabStop;},
             _set {
               if (this->tabStop != value) {
@@ -311,7 +311,7 @@ namespace Switch {
           /// @return string The text associated with this control.
           /// @remarks The Text property of the control is used differently by each derived class. For example the Text property of a Form is displayed in the title bar at the top of the form, is fairly small in character count, and usually displays the application or document name. However, the Text property of a RichTextBox can be large and can include numerous nonvisual characters used to format the text. For example, the text displayed in a RichTextBox can be formatted by adjusting the Font properties, or by the addition of spaces or tab characters to align the text.
           /// @note When overriding the Text property in a derived class, use the base class's Text property to extend the base implementation. Otherwise, you must provide all the implementation. You are not required to override both the get and setaccessors of the Text property; you can override only one if needed.
-          property<const string&> Text {
+          _property<const string&> Text {
             _get->const string& { return this->text; },
             _set {
               if (this->text != value) {
@@ -321,12 +321,12 @@ namespace Switch {
             }
           };
 
-          property<int32> Top {
+          _property<int32> Top {
             _get{ return this->location.Y(); },
             _set{ this->Location(System::Drawing::Point(this->location.X(), value)); }
           };
 
-          property<bool> Visible {
+          _property<bool> Visible {
             _get { return this->visible; },
             _set {
               if (this->visible != value) {
@@ -336,7 +336,7 @@ namespace Switch {
             }
           };
 
-          property<int32> Width {
+          _property<int32> Width {
             _get { return this->size.Width(); },
             _set { this->Size(System::Drawing::Size(value, this->size.Height())); }
           };
@@ -412,7 +412,7 @@ namespace Switch {
           EventHandler VisibleChanged;
 
         protected:
-          property<System::Drawing::Size, readonly> DefaultSize {
+          _property<System::Drawing::Size, _readonly> DefaultSize {
             _get { return this->GetDefaultSize(); }
           };
 

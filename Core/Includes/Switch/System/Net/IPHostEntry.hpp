@@ -31,19 +31,19 @@ namespace Switch {
 
         /// @brief Get List of IP addresses that are associated with a host.
         /// @return Array<IPAddress> An IPAddress array on List of IP addresses that are associated with a host.
-        property<const Array<IPAddress>&, readonly> AddressList {
+        _property<const Array<IPAddress>&, _readonly> AddressList {
           _get->const Array<IPAddress>& {return this->GetAddressList();}
         };
         
         /// @brief Get List of aliases that are associated with a host.
         /// @return Array<string> A string array on List of aliases that are associated with a host.
-        property<const Array<string>&, readonly> Aliases {
+        _property<const Array<string>&, _readonly> Aliases {
           _get->const Array<string>& {return this->GetAliases();}
         };
 
         /// @brief Get the DNS name of the host.
         /// @return string A string represent the DNS name of the host.
-        property<const string&, readonly> HostName {
+        _property<const string&, _readonly> HostName {
           _get->const string& {return this->GetHostName();}
         };
  

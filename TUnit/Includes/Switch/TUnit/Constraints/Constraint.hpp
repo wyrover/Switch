@@ -20,26 +20,26 @@ namespace Switch {
     namespace Constraints {
       class _export Constraint _abstract {
       public:
-        property<::CurrentInformation> CurrentInformation {
+        _property<::CurrentInformation> CurrentInformation {
           _get {return this->currentInformation;},
           _set {this->currentInformation = value;}
         };
         
-        property<ConstraintValue> Actual {
+        _property<ConstraintValue> Actual {
           _get {return this->actual;},
           _set {this->actual = value;}
         };
         
-        property<ConstraintValue> Expect {
+        _property<ConstraintValue> Expect {
           _get {return this->expect;},
           _set {this->expect = value;}
         };
         
-        property<string, readonly> Error {
+        _property<string, _readonly> Error {
           _get {return string::Format("Expected: {0}{2}But was:  {1}", ToString(), this->actual, System::Environment::NewLine);}
         };
         
-        property<string> Message {
+        _property<string> Message {
           _get {return this->message;},
           _set {this->message = value;}
         };

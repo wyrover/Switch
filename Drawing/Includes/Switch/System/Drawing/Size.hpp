@@ -20,7 +20,7 @@ namespace Switch {
       class _export Size : public object {
       public:
         /// @brief Gets a Size class that has a Height and Width value of 0. This field is constant.
-        static property<Size, readonly> Empty;
+        static _property<Size, _readonly> Empty;
 
         /// @brief Initializes a new instance of the Size class that has a Height and Width value of 0.
         Size() {}
@@ -42,7 +42,7 @@ namespace Switch {
         /// @brief Gets or sets the vertical component of this Size Class.
         /// @return int32 The vertical component of this Size class, typically measured in pixels.
         /// @remarks The unit for the Height and Width of the Size class depend on the PageUnit and PageScale settings for the Graphics object that is used to draw.
-        property<int32> Height {
+        _property<int32> Height {
           _get {return this->height;},
           _set {this->height = value;}
         };
@@ -50,7 +50,7 @@ namespace Switch {
         /// @brief Gets or sets the horizontal component of this Size class.
         /// @return int32 The horizontal component of this Size class, typically measured in pixels.
         /// @remarks The unit for the Height and Width of the Size class depend on the PageUnit and PageScale settings for the Graphics object that is used to draw.
-        property<int32> Width {
+        _property<int32> Width {
           _get {return this->width;},
           _set {this->width = value;}
         };

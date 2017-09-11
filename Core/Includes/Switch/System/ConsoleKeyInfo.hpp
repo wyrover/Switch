@@ -54,19 +54,19 @@ namespace Switch {
 
       /// @brief Gets the console key represented by the current ConsoleKeyInfo object.
       /// @param A System::ConsoleKey value that identifies the console key that was pressed
-      property<ConsoleKey, readonly> Key {
+      _property<ConsoleKey, _readonly> Key {
         _get {return this->key;}
       };
 
       /// @brief Gets the Unicode character represented by the current ConsoleKeyInfo object.
       /// @param An char32 object that corresponds to the console key represented by the current ConsoleKeyInfo object.
-      property<char32, readonly> KeyChar {
+      _property<char32, _readonly> KeyChar {
         _get {return this->keyChar;}
       };
 
       /// @brief Gets a bitwise combination of System::ConsoleModifiers values that specifies one or more modifier keys pressed simultaneously with the console key.
       /// @param A bitwise combination of System::ConsoleModifiers values. There is no default value.
-      property<ConsoleModifiers, readonly> Modifiers {
+      _property<ConsoleModifiers, _readonly> Modifiers {
         _get {return this->modifiers;}
       };
 

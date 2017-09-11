@@ -12,31 +12,31 @@ using namespace System;
 using namespace System::Net;
 using namespace System::Net::Sockets;
 
-property<IPAddress, readonly> IPAddress::Any {
+_property<IPAddress, _readonly> IPAddress::Any {
   [] {return IPAddress(0x0000000000000000LL);}
 };
 
-property<IPAddress, readonly> IPAddress::Broadcast {
+_property<IPAddress, _readonly> IPAddress::Broadcast {
   [] {return IPAddress(0x00000000FFFFFFFFLL);}
 };
 
-property<IPAddress, readonly> IPAddress::IPv6Any {
+_property<IPAddress, _readonly> IPAddress::IPv6Any {
   [] {return IPAddress(Array<byte> {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0});}
 };
 
-property<IPAddress, readonly> IPAddress::IPv6Loopback {
+_property<IPAddress, _readonly> IPAddress::IPv6Loopback {
   [] {return IPAddress(Array<byte> {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1});}
 };
 
-property<IPAddress, readonly> IPAddress::IPv6None {
+_property<IPAddress, _readonly> IPAddress::IPv6None {
   [] {return IPAddress(Array<byte> {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0});}
 };
 
-property<IPAddress, readonly> IPAddress::Loopback {
+_property<IPAddress, _readonly> IPAddress::Loopback {
   [] {return IPAddress(0x000000000100007FLL);}
 };
 
-property<IPAddress, readonly> IPAddress::None {
+_property<IPAddress, _readonly> IPAddress::None {
   [] {return IPAddress(0x00000000FFFFFFFFLL);}
 };
 

@@ -24,7 +24,7 @@ namespace Switch {
           Panel(const Panel& panel) : ContainerControl(panel), borderStyle(panel.borderStyle) {}
           /// @endcond
 
-          property<System::Windows::Forms::BorderStyle> BorderStyle {
+          _property<System::Windows::Forms::BorderStyle> BorderStyle {
             _get{return this->borderStyle;},
             _set{this->SetBorderStyle (value);}
           };

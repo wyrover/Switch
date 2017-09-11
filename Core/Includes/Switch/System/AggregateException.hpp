@@ -94,7 +94,7 @@ namespace Switch {
     public:
       /// @brief Gets a read-only collection of the Exception instances that caused the current exception.
       /// @return Returns a read-only collection of the Exception instances that caused the current exception.
-      property<const Array<excptr>&, readonly> InnerExceptions {
+      _property<const Array<excptr>&, _readonly> InnerExceptions {
         _get->const Array<excptr>& {return this->innerExceptions;}
       };
  

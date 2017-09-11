@@ -72,7 +72,7 @@ namespace Switch {
         
         /// @brief Gets the text writer that receives the tracing or debugging output.
         /// @return System::IO::TextWriter A TextWriter that represents the writer that receives the tracing or debugging output.
-        property<System::IO::TextWriter&, readonly> Writer {
+        _property<System::IO::TextWriter&, _readonly> Writer {
           _get->System::IO::TextWriter& {return *this->textWriter;}
         };
 

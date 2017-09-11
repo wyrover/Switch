@@ -26,7 +26,7 @@ namespace Switch {
         public:
           /// @brief Gets the array of FontFamily objects associated with this FontCollection.
           /// @return Array<FontFamily> An array of FontFamily objects.
-          property<const Array<FontFamily>&, readonly> Families{
+          _property<const Array<FontFamily>&, _readonly> Families{
             _get->const Array<FontFamily>& {return this->families;}
           };
 

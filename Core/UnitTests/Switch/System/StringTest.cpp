@@ -2,7 +2,6 @@
 #include <Switch/TUnit/Assert.hpp>
 #include <Switch/TUnit/TestFixture.hpp>
 #include <Switch/LiteralOperatorConverter.hpp>
-#include <Switch/Foreach.hpp>
 
 using namespace System;
 using namespace TUnit;

@@ -3,6 +3,6 @@
 using namespace System;
 using namespace System::Drawing;
 
-property<RectangleF, readonly> RectangleF::Empty {
+_property<RectangleF, _readonly> RectangleF::Empty {
   [] {return RectangleF();}
 };

@@ -16,7 +16,7 @@ namespace DesignPatterns {
     class Abstraction : public object {
     public:
       // Property
-      property<refptr<DesignPatterns::Structural::Implementor>, writeonly> Implementor {
+      _property<refptr<DesignPatterns::Structural::Implementor>, _writeonly> Implementor {
         _set {this->implementor = value;}
       };
       

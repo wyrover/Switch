@@ -20,22 +20,22 @@ namespace Switch {
     struct _export Double final : public ValueType, public IComparable, public IConvertible, public IFormattable {
     public:
       /// @brief Represents the smallest positive Double value greater than zero. This field is constant.
-      static property<double, readonly> Epsilon;
+      static _property<double, _readonly> Epsilon;
 
       /// @brief Represents the largest possible value of an Double 1.7976931348623157E+308. This field is constant.
-      static property<double, readonly> MaxValue;
+      static _property<double, _readonly> MaxValue;
 
       /// @brief Represents the smallest possible value of Double -1.7976931348623157E+308. This field is constant.
-      static property<double, readonly> MinValue;
+      static _property<double, _readonly> MinValue;
 
       /// @brief Represents not a number (NaN). This field is constant.
-      static property<double, readonly> NaN;
+      static _property<double, _readonly> NaN;
 
       /// @brief Represents negative infinity. This field is constant.
-      static property<double, readonly> NegativeInfinity;
+      static _property<double, _readonly> NegativeInfinity;
 
       /// @brief Represents positive infinity. This field is constant.
-      static property<double, readonly> PositiveInfinity;
+      static _property<double, _readonly> PositiveInfinity;
 
       /// @brief Create a new instance of struct Double
       Double() {}

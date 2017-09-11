@@ -34,15 +34,15 @@ namespace Switch {
     /// @endcond
     
     /// Gets the FileName
-    property<const System::String&, readonly> FileName {
+    _property<const System::String&, _readonly> FileName {
       _get->const System::String& {return this->fileName;}
     };
     
-    property<int32, readonly> Line {
+    _property<int32, _readonly> Line {
       _get {return this->line;}
     };
     
-    property<const System::String&, readonly> FunctionName {
+    _property<const System::String&, _readonly> FunctionName {
       _get->const System::String& {return this->functionName;}
     };
     

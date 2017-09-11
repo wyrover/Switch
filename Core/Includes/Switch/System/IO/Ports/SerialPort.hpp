@@ -38,23 +38,23 @@ namespace Switch {
 
           static Array<String> GetPortNames();
 
-          property<int32, readonly> BaudRate {
+          _property<int32, _readonly> BaudRate {
             _get {return this->baudRate;}
           };
 
-          property<int32, readonly> DataBits {
+          _property<int32, _readonly> DataBits {
             _get {return this->dataBits;}
           };
           
-          property<System::IO::Ports::Parity, readonly> Parity {
+          _property<System::IO::Ports::Parity, _readonly> Parity {
             _get {return this->parity;}
           };
           
-          property<const string&, readonly> Port {
+          _property<const string&, _readonly> Port {
             _get->const string& {return this->port;}
           };
           
-          property<System::IO::Ports::StopBits, readonly> StopBits {
+          _property<System::IO::Ports::StopBits, _readonly> StopBits {
             _get {return this->stopBits;}
           };
 

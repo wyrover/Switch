@@ -2,6 +2,6 @@
 
 using namespace System;
 
-property<EventArgs, readonly> EventArgs::Empty {
+_property<EventArgs, _readonly> EventArgs::Empty {
   [] {return EventArgs(); }
 };

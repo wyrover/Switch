@@ -168,7 +168,7 @@ namespace Switch {
       /// @par Example
       /// The following example displays its own command line.
       /// @include EnvironmentCommandLine.cpp
-      static property<String, readonly> CommandLine;
+      static _property<String, _readonly> CommandLine;
       
       /// @brief Gets or sets the current working directory.
       /// @param The current working directory. An empty string return value indicates an error,
@@ -182,11 +182,11 @@ namespace Switch {
       /// @par Example
       /// The following example demonstrates setting the CurrentDirectory property.
       /// @include EnvironmentCurrentDirectory.cpp
-      static property<string> CurrentDirectory;
+      static _property<string> CurrentDirectory;
       
       /// @brief Gets a unique identifier for the current managed thread.
       /// @return int32 An integer that represents a unique identifier for this managed thread.
-      static property<int32, readonly> CurrentManagedThreadId;
+      static _property<int32, _readonly> CurrentManagedThreadId;
       
       /// @brief Gets or sets the exit code of the process.
       /// @return Int32 A 32-bit signed integer containing the exit code. The default value is zero.
@@ -243,20 +243,20 @@ namespace Switch {
       /// @endcode
       /// Note that code for EnvironmentExitCode is identical in function to the following example, except that the former defines an entry point named Main that has no return value, whereas this example defines an entry point named Main that returns an integer.
       /// @include EnvironmentExitCode2.cpp
-      static property<int32> ExitCode;
+      static _property<int32> ExitCode;
       
       /// @brief Gets a value that indicates whether the current application domain is shutting down.
       /// @return bool true if the current application domain is shutting down; otherwise, false.
       /// @remarks At this time the return value is always false.
-      static property<bool, readonly> HasShutdownStarted;
+      static _property<bool, _readonly> HasShutdownStarted;
       
       /// @brief Determines whether the current operating system is a 64-bit operating system.
       /// @return bool true if the operating system is 64-bit; otherwise, false.
-      static property<bool, readonly> Is64BitOperatingSystem;
+      static _property<bool, _readonly> Is64BitOperatingSystem;
       
       /// @brief Determines whether the current process is a 64-bit process.
       /// @return bool true if the process is 64-bit; otherwise, false.
-      static property<bool, readonly> Is64BitProcess;
+      static _property<bool, _readonly> Is64BitProcess;
       
       /// @brief Gets the NetBIOS name of this local computer.
       /// @return string A string containing the name of this computer.
@@ -265,7 +265,7 @@ namespace Switch {
       /// @par Example
       /// The following example displays the name of the computer that runs the code example. (The machine name is omitted from the example output for security reasons.)
       /// @include EnvironmentMachineName.cpp
-      static property<String, readonly> MachineName;
+      static _property<String, _readonly> MachineName;
       
       /// @brief Gets the newline string defined for this environment.
       /// @return string A string containing "\r\n" for non-Unix platforms, or a string containing "\n" for Unix platforms.
@@ -275,7 +275,7 @@ namespace Switch {
       /// @par Example
       /// The following example displays three lines separated by newlines.
       /// @include EnvironmentNewLine.cpp
-      static property<String, readonly> NewLine;
+      static _property<String, _readonly> NewLine;
       
       /// @brief Gets an OperatingSystem object that contains the current platform identifier and version number.
       /// @return OperatingSystem An object that contains the platform identifier and version number.
@@ -287,7 +287,7 @@ namespace Switch {
       /// @par Example
       /// The following example displays the platform identifier and version number of the computer that runs the code example.
       /// @include EnvironmentOSVersion.cpp
-      static property<const OperatingSystem&, readonly> OSVersion;
+      static _property<const OperatingSystem&, _readonly> OSVersion;
       
       /// @brief Gets the number of processors on the current machine.
       /// @return int32 The 32-bit signed integer that specifies the number of processors on the current machine. There is no default. If the current machine contains multiple processor groups, this property returns the number of logical processors.
@@ -295,7 +295,7 @@ namespace Switch {
       /// @par Example
       /// The following example demonstrates the ProcessorCount property.
       /// @include EnvironmentProcessorCount.cpp
-      static property<int32, readonly> ProcessorCount;
+      static _property<int32, _readonly> ProcessorCount;
       
       /// @brief Gets current stack trace information.
       /// @return string A string containing stack trace information. This value can be string.Empty.
@@ -313,7 +313,7 @@ namespace Switch {
       /// @par Example
       /// The following example demonstrates the StackTrace property.
       /// @include EnvironmentStackTrace.cpp
-      static property<String, readonly> StackTrace;
+      static _property<String, _readonly> StackTrace;
       
       /// @brief Gets the fully qualified path of the system directory.
       /// @return string A string containing a directory path.
@@ -321,14 +321,14 @@ namespace Switch {
       /// @par Example
       /// The following example displays the system directory of the computer that runs the code example. (The system directory is omitted from the example output for security reasons.)
       /// @include EnvironmentsystemDirectory.cpp
-      static property<String, readonly> SystemDirectory;
+      static _property<String, _readonly> SystemDirectory;
       
       /// @brief Gets the number of bytes in the operating system's memory page.
       /// @return The number of bytes in the system memory page.
       /// @remarks This information can be useful when determining whether to use the MemoryMappedFileOptions.DelayAllocatePages option when you work with memory-mapped files.
       /// @remarks In Windows, this value is the dwPageSize member in the SYSTEM_INFO structure.
       /// @remarks At this time the return value is always 4096.
-      static property<int32, readonly> SystemPageSize;
+      static _property<int32, _readonly> SystemPageSize;
       
       /// @brief Gets the number of milliseconds elapsed since the system started.
       /// @return Int32 A 32-bit signed integer containing the amount of time in milliseconds that has passed since the last time the computer was started.
@@ -338,13 +338,13 @@ namespace Switch {
       /// @par Example
       /// The following example demonstrates how to retrieve the positive range of values returned by the TickCount property. The TickCount property cycles between Int32.MinValue, which is a negative number, and Int32.MaxValue once every 49.8 days. This code sample removes the sign bit to yield a nonnegative number that cycles between zero and MaxValue once every 24.9 days.
       /// @include EnvironmentTickCount.cpp
-      static property<int32, readonly> TickCount;
+      static _property<int32, _readonly> TickCount;
       
       /// @brief Gets the network domain name associated with the current user.
       /// @return string The network domain name associated with the current user.
       /// @remarks The domain account credentials for a user are formatted as the user's domain name, the '\' character, and user name. Use the UserDomainName property to obtain the user's domain name without the user name, and the UserName property to obtain the user name without the domain name. For example, if a user's domain name and user name are CORPORATENETWORK\john, the UserDomainName property returns "CORPORATENETWORK".
       /// @remarks The UserDomainName property first attempts to get the domain name component of the Windows account name for the current user. If that attempt fails, this property attempts to get the domain name associated with the user name provided by the UserName property. If that attempt fails because the host computer is not joined to a domain, then the host computer name is returned.
-      static property<String, readonly> UserDomainName;
+      static _property<String, _readonly> UserDomainName;
       
       /// @brief Gets a value indicating whether the current process is running in user interactive mode.
       /// @return bool true if the current process is running in user interactive mode; otherwise, false.
@@ -352,7 +352,7 @@ namespace Switch {
       /// @par Example
       /// The following example displays whether the current process is running in user interactive mode.
       /// @include EnvironmentUserInteractive.cpp
-      static property<bool, readonly> UserInteractive;
+      static _property<bool, _readonly> UserInteractive;
       
       /// @brief Gets the user name of the person who is currently logged on to the Windows operating system.
       /// @return string The user name of the person who is logged on to Windows/Linux/macOS/... .
@@ -361,14 +361,14 @@ namespace Switch {
       /// @par Example
       /// The following example displays the user name of the person who started the current thread.
       /// @include EnvironmentUserName.cpp
-      static property<String, readonly> UserName;
+      static _property<String, _readonly> UserName;
       
       /// @brief Gets a Version object that describes the major, minor, build, and revision numbers of the Switch.
       /// @return Version An object that displays the version of the Switch.
       /// @par Example
       /// The following example displays the version of the Switch.
       /// @include EnvironmentVersion.cpp
-      static property<const System::Version&, readonly> Version;
+      static _property<const System::Version&, _readonly> Version;
       
       /// @brief Gets the amount of physical memory mapped to the process context.
       /// @return Int64 A 64-bit signed integer containing the number of bytes of physical memory mapped to the process context.
@@ -376,7 +376,7 @@ namespace Switch {
       /// @par Example
       /// The following example displays the size of the working set of the computer that runs the code example.
       /// @include EnvironmentWorkingSet.cpp
-      static property<int64, readonly> WorkingSet;
+      static _property<int64, _readonly> WorkingSet;
       
       /// @brief Terminates this process and gives the underlying operating system the specified exit code.
       /// @param exitCode Exit code to be given to the operating system.

@@ -104,28 +104,28 @@ namespace SwitchUnitTests {
     }
     
     void AreEqualProperty() {
-      property<int32, readonly> fourtyTwo {
+      _property<int32, _readonly> fourtyTwo {
         _get {return 42;}
       };
       Assert::AreEqual(42, fourtyTwo);
     }
     
     void AreEqualPropertyWithCurrentInformation() {
-      property<int32, readonly> fourtyTwo {
+      _property<int32, _readonly> fourtyTwo {
         _get {return 42;}
       };
       Assert::AreEqual(42, fourtyTwo, _current_information);
     }
     
     void AreEqualPropertyWithMessage() {
-      property<int32, readonly> fourtyTwo {
+      _property<int32, _readonly> fourtyTwo {
         _get {return 42;}
       };
       Assert::AreEqual(42, fourtyTwo, "My message");
     }
     
     void AreEqualPropertyWithMessageAndCurrentInformation() {
-      property<int32, readonly> fourtyTwo {
+      _property<int32, _readonly> fourtyTwo {
         _get {return 42;}
       };
       Assert::AreEqual(42, fourtyTwo, "My message", _current_information);

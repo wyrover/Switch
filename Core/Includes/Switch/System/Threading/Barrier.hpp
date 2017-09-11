@@ -46,20 +46,20 @@ namespace Switch {
         
         /// @brief Gets the number of the barrier's current phase.
         /// @return Returns the number of the barrier's current phase.
-        property<int64, readonly> CurrentPhaseNumber {
+        _property<int64, _readonly> CurrentPhaseNumber {
           _get {return this->data->currentPhaseNumber;}
         };
         
         /// @brief Gets the total number of participants in the barrier.
         /// @return Returns the total number of participants in the barrier.
-        property<int32, readonly> ParticipantCount {
+        _property<int32, _readonly> ParticipantCount {
           _get {return this->data->participantCount;}
         };
         
         /// @brief Gets the number of participants in the barrier that haven’t yet signaled in the current phase.
         /// @return Returns the number of participants in the barrier that haven’t yet signaled in the current phase.
         /// @remarks This could be 0 during a post-phase action delegate execution or if the ParticipantCount is 0.
-        property<int32, readonly> ParticipantsRemaining {
+        _property<int32, _readonly> ParticipantsRemaining {
           _get {return this->data->participantsRemaining;}
         };
         

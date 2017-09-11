@@ -19,7 +19,7 @@ namespace Switch {
           FormClosedEventArgs(System::Windows::Forms::CloseReason closeReason) : closeReason(closeReason) {}
           FormClosedEventArgs(const FormClosedEventArgs& e) : closeReason(e.closeReason) {}
 
-          property<System::Windows::Forms::CloseReason, readonly> CloseReason {
+          _property<System::Windows::Forms::CloseReason, _readonly> CloseReason {
             _get { return this->closeReason; }
           };
 

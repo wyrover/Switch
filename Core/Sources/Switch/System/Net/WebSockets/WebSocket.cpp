@@ -3,6 +3,6 @@
 using namespace System;
 using namespace System::Net::WebSockets;
 
-property<TimeSpan, readonly> System::Net::WebSockets::WebSocket::DefaultKeepAliveInterval {
+_property<TimeSpan, _readonly> System::Net::WebSockets::WebSocket::DefaultKeepAliveInterval {
   [] {return TimeSpan(30 * TimeSpan::TicksPerSecond);}
 };

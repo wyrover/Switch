@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains Switch::__property__ class, #_get and #_set keywords.
+/// @brief Contains #_property, #_get and #_set keywords.
 #pragma once
 
 //#include <functional>
@@ -98,30 +98,31 @@ private:
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
-  /// @brief __readonly__ class represent a __property__ read only attribute.
+  /// @brief #_readonly keyword represent a __property__ read only attribute.
   /// @ingroup Keywords
-  #define readonly \
+  #define _readonly \
   __readonly__
   
-  /// @brief __readwrite__ class represent a __property__ read write attribute.
+  /// @brief #_readwrite keyword represent a #_property read write attribute.
   /// @ingroup Keywords
-  #define readwrite __readwrite__
+  #define _readwrite \
+  __readwrite__
   
-  /// @brief __writeonly__ class represent a __property__ write only attribute.
+  /// @brief #_writeonly keyword represent a #_property write only attribute.
   /// @ingroup Keywords
-  #define writeonly \
+  #define _writeonly \
   __writeonly__
   
-  /// @brief A __property__ is a member that provides a flexible mechanism to read, write, or compute the value of a private field. Properties can be used as if they are public data members, but they are actually special methods called accessors. This enables data to be accessed easily and still helps promote the safety and flexibility of methods.
+  /// @brief A #_property is a member that provides a flexible mechanism to read, write, or compute the value of a private field. Properties can be used as if they are public data members, but they are actually special methods called accessors. This enables data to be accessed easily and still helps promote the safety and flexibility of methods.
   /// @remarks The copy constructor is deleted. So the copy constructor of the owner class must be specified (the implicit or default copy contructor doesn't build).
   /// @par Examples
   /// This sample shows a Person class that has two properties: Name (string) and Age (int). Both properties are read/write.
   /// @include Properties.cpp
   /// @ingroup Keywords
-  #define property \
+  #define _property \
   __property__
   
-  /// @brief The get keyword defines an accessor method in a __property__ or indexer that retrieves the value of the __property__ or the indexer element.
+  /// @brief The get keyword defines an accessor method in a #_property or indexer that retrieves the value of the #_property or the indexer element.
   /// @par Examples
   /// @code
   /// class Person {
@@ -129,7 +130,7 @@ namespace Switch {
   ///   Person() {}
   ///   Person(const Person& person) : name(person.name) {}
   ///
-  ///   __property__<string> Name {
+  ///   _property<string> Name {
   ///     _get {return this->name},
   ///     _set {this->name = value.ToUpper();}
   ///   };
@@ -142,7 +143,7 @@ namespace Switch {
   #define _get \
   [&]()
   
-  /// @brief The set keyword defines an accessor method in a __property__ or indexer that assigns the value of the __property__ or the indexer element.
+  /// @brief The set keyword defines an accessor method in a #_property or indexer that assigns the value of the #_property or the indexer element.
   /// @par Examples
   /// @code
   /// class Person {
@@ -150,7 +151,7 @@ namespace Switch {
   ///   Person() {}
   ///   Person(const Person& person) : name(person.name) {}
   ///
-  ///   __property__<string> Name {
+  ///   _property<string> Name {
   ///     _get {return this->name},
   ///     _set {this->name = value.ToUpper();}
   ///   };

@@ -14,7 +14,7 @@ namespace DesignPatterns {
       Prototype(const Prototype& prototype) : id(prototype.id) {}
       
       // Gets id
-      property<string, readonly> Id {
+      _property<string, _readonly> Id {
         _get {return this->id;}
       };
       

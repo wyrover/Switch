@@ -25,7 +25,7 @@ namespace Switch {
           /// @brief Gets the event type.
           /// @return One of the SerialData values.
           /// @remarks This property provides information about the event type that caused the DataReceived event.
-          property<SerialData, readonly> EventType {
+          _property<SerialData, _readonly> EventType {
             _get {return this->eventType;}
           };
 

@@ -5,7 +5,7 @@
 using namespace System;
 using namespace System::Diagnostics;
 
-property<int32, readonly> StackFrame::METHODS_TO_SKIP {
+_property<int32, _readonly> StackFrame::METHODS_TO_SKIP {
   [] {return 0;}
 };
 

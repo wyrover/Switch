@@ -33,12 +33,12 @@ namespace Switch {
           ScrollableControl(const ScrollableControl& scrollableControl) : Control(scrollableControl) {}
           /// @endcond
 
-          property<bool> HScroll {
+          _property<bool> HScroll {
             _get {return this->hscroll;},
             _set {this->hscroll = value;}
           };
 
-          property<bool> VScroll {
+          _property<bool> VScroll {
             _get {return this->vscroll;},
             _set {this->vscroll = value;}
           };

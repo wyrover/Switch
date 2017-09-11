@@ -27,12 +27,12 @@ namespace Switch {
         }
         /// @endcond
 
-        property<const string&> UserName {
+        _property<const string&> UserName {
           _get->const string& {return this->userName;},
           _set {this->userName = value;}
         };
         
-        property<const string&> Password {
+        _property<const string&> Password {
           _get->const string& {return this->password;},
           _set {this->password = value;}
         };

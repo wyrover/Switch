@@ -49,8 +49,8 @@ namespace Examples {
       Note() : toneVal((Tone)0), durVal((Duration)0) {}
       
       // Define properties to return the note's tone and duration.
-      property<Tone, readonly> NoteTone { _get{ return toneVal; } };
-      property<Duration, readonly> NoteDuration { _get{ return durVal; } };
+      _property<Tone, _readonly> NoteTone { _get{ return toneVal; } };
+      _property<Duration, _readonly> NoteDuration { _get{ return durVal; } };
     };
     
   public:

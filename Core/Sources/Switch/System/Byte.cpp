@@ -7,11 +7,11 @@
 
 using namespace System;
 
-property<byte, readonly> Byte::MaxValue {
+_property<byte, _readonly> Byte::MaxValue {
   [] {return std::numeric_limits<byte>::max();}
 };
 
-property<byte, readonly> Byte::MinValue {
+_property<byte, _readonly> Byte::MinValue {
   [] {return std::numeric_limits<byte>::min();}
 };
 

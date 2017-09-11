@@ -36,7 +36,7 @@ namespace Switch {
           ContainerControl(const ContainerControl& containerControl) : ScrollableControl(containerControl) {}
           /// @endcond
 
-          property<const System::ComponentModel::IContainer&, readonly> Container {
+          _property<const System::ComponentModel::IContainer&, _readonly> Container {
             _get->const System::ComponentModel::IContainer& {return this->GetContainer();}
           };
           

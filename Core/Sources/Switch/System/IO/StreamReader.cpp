@@ -8,7 +8,7 @@
 using namespace System;
 using namespace System::IO;
 
-property<StreamReader, readonly> StreamReader::Null {
+_property<StreamReader, _readonly> StreamReader::Null {
   [] {return StreamReader();}
 };
 

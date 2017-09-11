@@ -83,11 +83,11 @@ namespace Switch {
 
           /// @brief Gets which drag-and-drop operations are allowed by the originator (or source) of the drag event.
           /// @return One of the DragDropEffects values.
-          property<DragDropEffects, readonly> AllowedEffect {
+          _property<DragDropEffects, _readonly> AllowedEffect {
             _get {return this->allowedEffect;}
           };
 
-          property<const object&, readonly> Data {
+          _property<const object&, _readonly> Data {
             _get->const object& {return *this->data;}
           };
 
@@ -142,7 +142,7 @@ namespace Switch {
           ///   }
           /// }
           /// @endcode
-          property<DragDropEffects> Effect {
+          _property<DragDropEffects> Effect {
             _get {return this->effect;},
             _set {this->effect = value;}
           };
@@ -208,15 +208,15 @@ namespace Switch {
           ///   }
           /// }
           /// @endcode
-          property<int32, readonly> KeyState {
+          _property<int32, _readonly> KeyState {
             _get {return this->keyState;}
           };
 
-          property<int32, readonly> X {
+          _property<int32, _readonly> X {
             _get {return this->x;}
           };
 
-          property<int32, readonly> Y {
+          _property<int32, _readonly> Y {
             _get {return this->y;}
           };
 

@@ -3,11 +3,11 @@
 
 using namespace System::Diagnostics;
 
-property<int64, readonly> Stopwatch::Frequency {
+_property<int64, _readonly> Stopwatch::Frequency {
   [] {return 10000000;}
 };
 
-property<bool, readonly> Stopwatch::IsHighResolution {
+_property<bool, _readonly> Stopwatch::IsHighResolution {
   [] {return true;}
 };
 

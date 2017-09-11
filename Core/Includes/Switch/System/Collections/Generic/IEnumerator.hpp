@@ -25,7 +25,7 @@ namespace Switch {
           /// @brief Gets the element in the collection at the current position of the enumerator.
           /// After an enumerator is created or after a Reset, MoveNext must be called to advance the enumerator to the first element of the collection before calling GetCurrent; otherwise it throws System::InvalidOperationException.
           /// @return T The current element in the collection.
-          property<const T&, readonly> Current {
+          _property<const T&, _readonly> Current {
             _get->const T& {return this->GetCurrent();}
           };
           

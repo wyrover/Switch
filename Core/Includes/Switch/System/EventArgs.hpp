@@ -14,7 +14,7 @@ namespace Switch {
     class _export EventArgs : public Object {
     public:
       /// @brief Represents an event with no event data.
-      static property<EventArgs, readonly> Empty;
+      static _property<EventArgs, _readonly> Empty;
 
       /// @brief Create a new instance of class EventArgs
       EventArgs() {}

@@ -20,7 +20,7 @@ namespace Switch {
         TryLockGuard(const object& lock, const TimeSpan& timeout);
         ~TryLockGuard();
         
-        property<bool, readonly> Result {
+        _property<bool, _readonly> Result {
           _get {return this->result;}
         };
         

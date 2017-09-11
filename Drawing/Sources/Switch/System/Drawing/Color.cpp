@@ -4,567 +4,567 @@
 using namespace System;
 using namespace System::Drawing;
 
-property<Color, readonly> Color::Transparent {
+_property<Color, _readonly> Color::Transparent {
   [] {return Color::FromKnownColor(KnownColor::Transparent);}
 };
 
-property<Color, readonly> Color::AliceBlue {
+_property<Color, _readonly> Color::AliceBlue {
   [] {return Color::FromKnownColor(KnownColor::AliceBlue);}
 };
 
-property<Color, readonly> Color::AntiqueWhite {
+_property<Color, _readonly> Color::AntiqueWhite {
   [] {return Color::FromKnownColor(KnownColor::AntiqueWhite);}
 };
 
-property<Color, readonly> Color::Aqua {
+_property<Color, _readonly> Color::Aqua {
   [] {return Color::FromKnownColor(KnownColor::Aqua);}
 };
 
-property<Color, readonly> Color::Aquamarine {
+_property<Color, _readonly> Color::Aquamarine {
   [] {return Color::FromKnownColor(KnownColor::Aquamarine);}
 };
 
-property<Color, readonly> Color::Azure {
+_property<Color, _readonly> Color::Azure {
   [] {return Color::FromKnownColor(KnownColor::Azure);}
 };
 
-property<Color, readonly> Color::Beige {
+_property<Color, _readonly> Color::Beige {
   [] {return Color::FromKnownColor(KnownColor::Beige);}
 };
 
-property<Color, readonly> Color::Bisque {
+_property<Color, _readonly> Color::Bisque {
   [] {return Color::FromKnownColor(KnownColor::Bisque);}
 };
 
-property<Color, readonly> Color::Black {
+_property<Color, _readonly> Color::Black {
   [] {return Color::FromKnownColor(KnownColor::Black);}
 };
 
-property<Color, readonly> Color::BlanchedAlmond {
+_property<Color, _readonly> Color::BlanchedAlmond {
   [] {return Color::FromKnownColor(KnownColor::BlanchedAlmond);}
 };
 
-property<Color, readonly> Color::Blue {
+_property<Color, _readonly> Color::Blue {
   [] {return Color::FromKnownColor(KnownColor::Blue);}
 };
 
-property<Color, readonly> Color::BlueViolet {
+_property<Color, _readonly> Color::BlueViolet {
   [] {return Color::FromKnownColor(KnownColor::BlueViolet);}
 };
 
-property<Color, readonly> Color::Brown {
+_property<Color, _readonly> Color::Brown {
   [] {return Color::FromKnownColor(KnownColor::Brown);}
 };
 
-property<Color, readonly> Color::BurlyWood {
+_property<Color, _readonly> Color::BurlyWood {
   [] {return Color::FromKnownColor(KnownColor::BurlyWood);}
 };
 
-property<Color, readonly> Color::CadetBlue {
+_property<Color, _readonly> Color::CadetBlue {
   [] {return Color::FromKnownColor(KnownColor::CadetBlue);}
 };
 
-property<Color, readonly> Color::Chartreuse {
+_property<Color, _readonly> Color::Chartreuse {
   [] {return Color::FromKnownColor(KnownColor::Chartreuse);}
 };
 
-property<Color, readonly> Color::Chocolate {
+_property<Color, _readonly> Color::Chocolate {
   [] {return Color::FromKnownColor(KnownColor::Chocolate);}
 };
 
-property<Color, readonly> Color::Coral {
+_property<Color, _readonly> Color::Coral {
   [] {return Color::FromKnownColor(KnownColor::Coral);}
 };
 
-property<Color, readonly> Color::CornflowerBlue {
+_property<Color, _readonly> Color::CornflowerBlue {
   [] {return Color::FromKnownColor(KnownColor::CornflowerBlue);}
 };
 
-property<Color, readonly> Color::Cornsilk {
+_property<Color, _readonly> Color::Cornsilk {
   [] {return Color::FromKnownColor(KnownColor::Cornsilk);}
 };
 
-property<Color, readonly> Color::Crimson {
+_property<Color, _readonly> Color::Crimson {
   [] {return Color::FromKnownColor(KnownColor::Crimson);}
 };
 
-property<Color, readonly> Color::Cyan {
+_property<Color, _readonly> Color::Cyan {
   [] {return Color::FromKnownColor(KnownColor::Cyan);}
 };
 
-property<Color, readonly> Color::DarkBlue {
+_property<Color, _readonly> Color::DarkBlue {
   [] {return Color::FromKnownColor(KnownColor::DarkBlue);}
 };
 
-property<Color, readonly> Color::DarkCyan {
+_property<Color, _readonly> Color::DarkCyan {
   [] {return Color::FromKnownColor(KnownColor::DarkCyan);}
 };
 
-property<Color, readonly> Color::DarkGoldenrod {
+_property<Color, _readonly> Color::DarkGoldenrod {
   [] {return Color::FromKnownColor(KnownColor::DarkGoldenrod);}
 };
 
-property<Color, readonly> Color::DarkGray {
+_property<Color, _readonly> Color::DarkGray {
   [] {return Color::FromKnownColor(KnownColor::DarkGray);}
 };
 
-property<Color, readonly> Color::DarkGreen {
+_property<Color, _readonly> Color::DarkGreen {
   [] {return Color::FromKnownColor(KnownColor::DarkGreen);}
 };
 
-property<Color, readonly> Color::DarkKhaki {
+_property<Color, _readonly> Color::DarkKhaki {
   [] {return Color::FromKnownColor(KnownColor::DarkKhaki);}
 };
 
-property<Color, readonly> Color::DarkMagenta {
+_property<Color, _readonly> Color::DarkMagenta {
   [] {return Color::FromKnownColor(KnownColor::DarkMagenta);}
 };
 
-property<Color, readonly> Color::DarkOliveGreen {
+_property<Color, _readonly> Color::DarkOliveGreen {
   [] {return Color::FromKnownColor(KnownColor::DarkOliveGreen);}
 };
 
-property<Color, readonly> Color::DarkOrange {
+_property<Color, _readonly> Color::DarkOrange {
   [] {return Color::FromKnownColor(KnownColor::DarkOrange);}
 };
 
-property<Color, readonly> Color::DarkOrchid {
+_property<Color, _readonly> Color::DarkOrchid {
   [] {return Color::FromKnownColor(KnownColor::DarkOrchid);}
 };
 
-property<Color, readonly> Color::DarkRed {
+_property<Color, _readonly> Color::DarkRed {
   [] {return Color::FromKnownColor(KnownColor::DarkRed);}
 };
 
-property<Color, readonly> Color::DarkSalmon {
+_property<Color, _readonly> Color::DarkSalmon {
   [] {return Color::FromKnownColor(KnownColor::DarkSalmon);}
 };
 
-property<Color, readonly> Color::DarkSeaGreen {
+_property<Color, _readonly> Color::DarkSeaGreen {
   [] {return Color::FromKnownColor(KnownColor::DarkSeaGreen);}
 };
 
-property<Color, readonly> Color::DarkSlateBlue {
+_property<Color, _readonly> Color::DarkSlateBlue {
   [] {return Color::FromKnownColor(KnownColor::DarkSlateBlue);}
 };
 
-property<Color, readonly> Color::DarkSlateGray {
+_property<Color, _readonly> Color::DarkSlateGray {
   [] {return Color::FromKnownColor(KnownColor::DarkSlateGray);}
 };
 
-property<Color, readonly> Color::DarkTurquoise {
+_property<Color, _readonly> Color::DarkTurquoise {
   [] {return Color::FromKnownColor(KnownColor::DarkTurquoise);}
 };
 
-property<Color, readonly> Color::DarkViolet {
+_property<Color, _readonly> Color::DarkViolet {
   [] {return Color::FromKnownColor(KnownColor::DarkViolet);}
 };
 
-property<Color, readonly> Color::DeepPink {
+_property<Color, _readonly> Color::DeepPink {
   [] {return Color::FromKnownColor(KnownColor::DeepPink);}
 };
 
-property<Color, readonly> Color::DeepSkyBlue {
+_property<Color, _readonly> Color::DeepSkyBlue {
   [] {return Color::FromKnownColor(KnownColor::DeepSkyBlue);}
 };
 
-property<Color, readonly> Color::DimGray {
+_property<Color, _readonly> Color::DimGray {
   [] {return Color::FromKnownColor(KnownColor::DimGray);}
 };
 
-property<Color, readonly> Color::DodgerBlue {
+_property<Color, _readonly> Color::DodgerBlue {
   [] {return Color::FromKnownColor(KnownColor::DodgerBlue);}
 };
 
-property<Color, readonly> Color::Firebrick {
+_property<Color, _readonly> Color::Firebrick {
   [] {return Color::FromKnownColor(KnownColor::Firebrick);}
 };
 
-property<Color, readonly> Color::FloralWhite {
+_property<Color, _readonly> Color::FloralWhite {
   [] {return Color::FromKnownColor(KnownColor::FloralWhite);}
 };
 
-property<Color, readonly> Color::ForestGreen {
+_property<Color, _readonly> Color::ForestGreen {
   [] {return Color::FromKnownColor(KnownColor::ForestGreen);}
 };
 
-property<Color, readonly> Color::Fuchsia {
+_property<Color, _readonly> Color::Fuchsia {
   [] {return Color::FromKnownColor(KnownColor::Fuchsia);}
 };
 
-property<Color, readonly> Color::Gainsboro {
+_property<Color, _readonly> Color::Gainsboro {
   [] {return Color::FromKnownColor(KnownColor::Gainsboro);}
 };
 
-property<Color, readonly> Color::GhostWhite {
+_property<Color, _readonly> Color::GhostWhite {
   [] {return Color::FromKnownColor(KnownColor::GhostWhite);}
 };
 
-property<Color, readonly> Color::Gold {
+_property<Color, _readonly> Color::Gold {
   [] {return Color::FromKnownColor(KnownColor::Gold);}
 };
 
-property<Color, readonly> Color::Goldenrod {
+_property<Color, _readonly> Color::Goldenrod {
   [] {return Color::FromKnownColor(KnownColor::Goldenrod);}
 };
 
-property<Color, readonly> Color::Gray {
+_property<Color, _readonly> Color::Gray {
   [] {return Color::FromKnownColor(KnownColor::Gray);}
 };
 
-property<Color, readonly> Color::Green {
+_property<Color, _readonly> Color::Green {
   [] {return Color::FromKnownColor(KnownColor::Green);}
 };
 
-property<Color, readonly> Color::GreenYellow {
+_property<Color, _readonly> Color::GreenYellow {
   [] {return Color::FromKnownColor(KnownColor::GreenYellow);}
 };
 
-property<Color, readonly> Color::Honeydew {
+_property<Color, _readonly> Color::Honeydew {
   [] {return Color::FromKnownColor(KnownColor::Honeydew);}
 };
 
-property<Color, readonly> Color::HotPink {
+_property<Color, _readonly> Color::HotPink {
   [] {return Color::FromKnownColor(KnownColor::HotPink);}
 };
 
-property<Color, readonly> Color::IndianRed {
+_property<Color, _readonly> Color::IndianRed {
   [] {return Color::FromKnownColor(KnownColor::IndianRed);}
 };
 
-property<Color, readonly> Color::Indigo {
+_property<Color, _readonly> Color::Indigo {
   [] {return Color::FromKnownColor(KnownColor::Indigo);}
 };
 
-property<Color, readonly> Color::Ivory {
+_property<Color, _readonly> Color::Ivory {
   [] {return Color::FromKnownColor(KnownColor::Ivory);}
 };
 
-property<Color, readonly> Color::Khaki {
+_property<Color, _readonly> Color::Khaki {
   [] {return Color::FromKnownColor(KnownColor::Khaki);}
 };
 
-property<Color, readonly> Color::Lavender {
+_property<Color, _readonly> Color::Lavender {
   [] {return Color::FromKnownColor(KnownColor::Lavender);}
 };
 
-property<Color, readonly> Color::LavenderBlush {
+_property<Color, _readonly> Color::LavenderBlush {
   [] {return Color::FromKnownColor(KnownColor::LavenderBlush);}
 };
 
-property<Color, readonly> Color::LawnGreen {
+_property<Color, _readonly> Color::LawnGreen {
   [] {return Color::FromKnownColor(KnownColor::LawnGreen);}
 };
 
-property<Color, readonly> Color::LemonChiffon {
+_property<Color, _readonly> Color::LemonChiffon {
   [] {return Color::FromKnownColor(KnownColor::LemonChiffon);}
 };
 
-property<Color, readonly> Color::LightBlue {
+_property<Color, _readonly> Color::LightBlue {
   [] {return Color::FromKnownColor(KnownColor::LightBlue);}
 };
 
-property<Color, readonly> Color::LightCoral {
+_property<Color, _readonly> Color::LightCoral {
   [] {return Color::FromKnownColor(KnownColor::LightCoral);}
 };
 
-property<Color, readonly> Color::LightCyan {
+_property<Color, _readonly> Color::LightCyan {
   [] {return Color::FromKnownColor(KnownColor::LightCyan);}
 };
 
-property<Color, readonly> Color::LightGoldenrodYellow {
+_property<Color, _readonly> Color::LightGoldenrodYellow {
   [] {return Color::FromKnownColor(KnownColor::LightGoldenrodYellow);}
 };
 
-property<Color, readonly> Color::LightGray {
+_property<Color, _readonly> Color::LightGray {
   [] {return Color::FromKnownColor(KnownColor::LightGray);}
 };
 
-property<Color, readonly> Color::LightGreen {
+_property<Color, _readonly> Color::LightGreen {
   [] {return Color::FromKnownColor(KnownColor::LightGreen);}
 };
 
-property<Color, readonly> Color::LightPink {
+_property<Color, _readonly> Color::LightPink {
   [] {return Color::FromKnownColor(KnownColor::LightPink);}
 };
 
-property<Color, readonly> Color::LightSalmon {
+_property<Color, _readonly> Color::LightSalmon {
   [] {return Color::FromKnownColor(KnownColor::LightSalmon);}
 };
 
-property<Color, readonly> Color::LightSeaGreen {
+_property<Color, _readonly> Color::LightSeaGreen {
   [] {return Color::FromKnownColor(KnownColor::LightSeaGreen);}
 };
 
-property<Color, readonly> Color::LightSkyBlue {
+_property<Color, _readonly> Color::LightSkyBlue {
   [] {return Color::FromKnownColor(KnownColor::LightSkyBlue);}
 };
 
-property<Color, readonly> Color::LightSlateGray {
+_property<Color, _readonly> Color::LightSlateGray {
   [] {return Color::FromKnownColor(KnownColor::LightSlateGray);}
 };
 
-property<Color, readonly> Color::LightSteelBlue {
+_property<Color, _readonly> Color::LightSteelBlue {
   [] {return Color::FromKnownColor(KnownColor::LightSteelBlue);}
 };
 
-property<Color, readonly> Color::LightYellow {
+_property<Color, _readonly> Color::LightYellow {
   [] {return Color::FromKnownColor(KnownColor::LightYellow);}
 };
 
-property<Color, readonly> Color::Lime {
+_property<Color, _readonly> Color::Lime {
   [] {return Color::FromKnownColor(KnownColor::Lime);}
 };
 
-property<Color, readonly> Color::LimeGreen {
+_property<Color, _readonly> Color::LimeGreen {
   [] {return Color::FromKnownColor(KnownColor::LimeGreen);}
 };
 
-property<Color, readonly> Color::Linen {
+_property<Color, _readonly> Color::Linen {
   [] {return Color::FromKnownColor(KnownColor::Linen);}
 };
 
-property<Color, readonly> Color::Magenta {
+_property<Color, _readonly> Color::Magenta {
   [] {return Color::FromKnownColor(KnownColor::Magenta);}
 };
 
-property<Color, readonly> Color::Maroon {
+_property<Color, _readonly> Color::Maroon {
   [] {return Color::FromKnownColor(KnownColor::Maroon);}
 };
 
-property<Color, readonly> Color::MediumAquamarine {
+_property<Color, _readonly> Color::MediumAquamarine {
   [] {return Color::FromKnownColor(KnownColor::MediumAquamarine);}
 };
 
-property<Color, readonly> Color::MediumBlue {
+_property<Color, _readonly> Color::MediumBlue {
   [] {return Color::FromKnownColor(KnownColor::MediumBlue);}
 };
 
-property<Color, readonly> Color::MediumOrchid {
+_property<Color, _readonly> Color::MediumOrchid {
   [] {return Color::FromKnownColor(KnownColor::MediumOrchid);}
 };
 
-property<Color, readonly> Color::MediumPurple {
+_property<Color, _readonly> Color::MediumPurple {
   [] {return Color::FromKnownColor(KnownColor::MediumPurple);}
 };
 
-property<Color, readonly> Color::MediumSeaGreen {
+_property<Color, _readonly> Color::MediumSeaGreen {
   [] {return Color::FromKnownColor(KnownColor::MediumSeaGreen);}
 };
 
-property<Color, readonly> Color::MediumSlateBlue {
+_property<Color, _readonly> Color::MediumSlateBlue {
   [] {return Color::FromKnownColor(KnownColor::MediumSlateBlue);}
 };
 
-property<Color, readonly> Color::MediumSpringGreen {
+_property<Color, _readonly> Color::MediumSpringGreen {
   [] {return Color::FromKnownColor(KnownColor::MediumSpringGreen);}
 };
 
-property<Color, readonly> Color::MediumTurquoise {
+_property<Color, _readonly> Color::MediumTurquoise {
   [] {return Color::FromKnownColor(KnownColor::MediumTurquoise);}
 };
 
-property<Color, readonly> Color::MediumVioletRed {
+_property<Color, _readonly> Color::MediumVioletRed {
   [] {return Color::FromKnownColor(KnownColor::MediumVioletRed);}
 };
 
-property<Color, readonly> Color::MidnightBlue {
+_property<Color, _readonly> Color::MidnightBlue {
   [] {return Color::FromKnownColor(KnownColor::MidnightBlue);}
 };
 
-property<Color, readonly> Color::MintCream {
+_property<Color, _readonly> Color::MintCream {
   [] {return Color::FromKnownColor(KnownColor::MintCream);}
 };
 
-property<Color, readonly> Color::MistyRose {
+_property<Color, _readonly> Color::MistyRose {
   [] {return Color::FromKnownColor(KnownColor::MistyRose);}
 };
 
-property<Color, readonly> Color::Moccasin {
+_property<Color, _readonly> Color::Moccasin {
   [] {return Color::FromKnownColor(KnownColor::Moccasin);}
 };
 
-property<Color, readonly> Color::NavajoWhite {
+_property<Color, _readonly> Color::NavajoWhite {
   [] {return Color::FromKnownColor(KnownColor::NavajoWhite);}
 };
 
-property<Color, readonly> Color::Navy {
+_property<Color, _readonly> Color::Navy {
   [] {return Color::FromKnownColor(KnownColor::Navy);}
 };
 
-property<Color, readonly> Color::OldLace {
+_property<Color, _readonly> Color::OldLace {
   [] {return Color::FromKnownColor(KnownColor::OldLace);}
 };
 
-property<Color, readonly> Color::Olive {
+_property<Color, _readonly> Color::Olive {
   [] {return Color::FromKnownColor(KnownColor::Olive);}
 };
 
-property<Color, readonly> Color::OliveDrab {
+_property<Color, _readonly> Color::OliveDrab {
   [] {return Color::FromKnownColor(KnownColor::OliveDrab);}
 };
 
-property<Color, readonly> Color::Orange {
+_property<Color, _readonly> Color::Orange {
   [] {return Color::FromKnownColor(KnownColor::Orange);}
 };
 
-property<Color, readonly> Color::OrangeRed {
+_property<Color, _readonly> Color::OrangeRed {
   [] {return Color::FromKnownColor(KnownColor::OrangeRed);}
 };
 
-property<Color, readonly> Color::Orchid {
+_property<Color, _readonly> Color::Orchid {
   [] {return Color::FromKnownColor(KnownColor::Orchid);}
 };
 
-property<Color, readonly> Color::PaleGoldenrod {
+_property<Color, _readonly> Color::PaleGoldenrod {
   [] {return Color::FromKnownColor(KnownColor::PaleGoldenrod);}
 };
 
-property<Color, readonly> Color::PaleGreen {
+_property<Color, _readonly> Color::PaleGreen {
   [] {return Color::FromKnownColor(KnownColor::PaleGreen);}
 };
 
-property<Color, readonly> Color::PaleTurquoise {
+_property<Color, _readonly> Color::PaleTurquoise {
   [] {return Color::FromKnownColor(KnownColor::PaleTurquoise);}
 };
 
-property<Color, readonly> Color::PaleVioletRed {
+_property<Color, _readonly> Color::PaleVioletRed {
   [] {return Color::FromKnownColor(KnownColor::PaleVioletRed);}
 };
 
-property<Color, readonly> Color::PapayaWhip {
+_property<Color, _readonly> Color::PapayaWhip {
   [] {return Color::FromKnownColor(KnownColor::PapayaWhip);}
 };
 
-property<Color, readonly> Color::PeachPuff {
+_property<Color, _readonly> Color::PeachPuff {
   [] {return Color::FromKnownColor(KnownColor::PeachPuff);}
 };
 
-property<Color, readonly> Color::Peru {
+_property<Color, _readonly> Color::Peru {
   [] {return Color::FromKnownColor(KnownColor::Peru);}
 };
 
-property<Color, readonly> Color::Pink {
+_property<Color, _readonly> Color::Pink {
   [] {return Color::FromKnownColor(KnownColor::Pink);}
 };
 
-property<Color, readonly> Color::Plum {
+_property<Color, _readonly> Color::Plum {
   [] {return Color::FromKnownColor(KnownColor::Plum);}
 };
 
-property<Color, readonly> Color::PowderBlue {
+_property<Color, _readonly> Color::PowderBlue {
   [] {return Color::FromKnownColor(KnownColor::PowderBlue);}
 };
 
-property<Color, readonly> Color::Purple {
+_property<Color, _readonly> Color::Purple {
   [] {return Color::FromKnownColor(KnownColor::Purple);}
 };
 
-property<Color, readonly> Color::Red {
+_property<Color, _readonly> Color::Red {
   [] {return Color::FromKnownColor(KnownColor::Red);}
 };
 
-property<Color, readonly> Color::RosyBrown {
+_property<Color, _readonly> Color::RosyBrown {
   [] {return Color::FromKnownColor(KnownColor::RosyBrown);}
 };
 
-property<Color, readonly> Color::RoyalBlue {
+_property<Color, _readonly> Color::RoyalBlue {
   [] {return Color::FromKnownColor(KnownColor::RoyalBlue);}
 };
 
-property<Color, readonly> Color::SaddleBrown {
+_property<Color, _readonly> Color::SaddleBrown {
   [] {return Color::FromKnownColor(KnownColor::SaddleBrown);}
 };
 
-property<Color, readonly> Color::Salmon {
+_property<Color, _readonly> Color::Salmon {
   [] {return Color::FromKnownColor(KnownColor::Salmon);}
 };
 
-property<Color, readonly> Color::SandyBrown {
+_property<Color, _readonly> Color::SandyBrown {
   [] {return Color::FromKnownColor(KnownColor::SandyBrown);}
 };
 
-property<Color, readonly> Color::SeaGreen {
+_property<Color, _readonly> Color::SeaGreen {
   [] {return Color::FromKnownColor(KnownColor::SeaGreen);}
 };
 
-property<Color, readonly> Color::SeaShell {
+_property<Color, _readonly> Color::SeaShell {
   [] {return Color::FromKnownColor(KnownColor::SeaShell);}
 };
 
-property<Color, readonly> Color::Sienna {
+_property<Color, _readonly> Color::Sienna {
   [] {return Color::FromKnownColor(KnownColor::Sienna);}
 };
 
-property<Color, readonly> Color::Silver {
+_property<Color, _readonly> Color::Silver {
   [] {return Color::FromKnownColor(KnownColor::Silver);}
 };
 
-property<Color, readonly> Color::SkyBlue {
+_property<Color, _readonly> Color::SkyBlue {
   [] {return Color::FromKnownColor(KnownColor::SkyBlue);}
 };
 
-property<Color, readonly> Color::SlateBlue {
+_property<Color, _readonly> Color::SlateBlue {
   [] {return Color::FromKnownColor(KnownColor::SlateBlue);}
 };
 
-property<Color, readonly> Color::SlateGray {
+_property<Color, _readonly> Color::SlateGray {
   [] {return Color::FromKnownColor(KnownColor::SlateGray);}
 };
 
-property<Color, readonly> Color::Snow {
+_property<Color, _readonly> Color::Snow {
   [] {return Color::FromKnownColor(KnownColor::Snow);}
 };
 
-property<Color, readonly> Color::SpringGreen {
+_property<Color, _readonly> Color::SpringGreen {
   [] {return Color::FromKnownColor(KnownColor::SpringGreen);}
 };
 
-property<Color, readonly> Color::SteelBlue {
+_property<Color, _readonly> Color::SteelBlue {
   [] {return Color::FromKnownColor(KnownColor::SteelBlue);}
 };
 
-property<Color, readonly> Color::Tan {
+_property<Color, _readonly> Color::Tan {
   [] {return Color::FromKnownColor(KnownColor::Tan);}
 };
 
-property<Color, readonly> Color::Teal {
+_property<Color, _readonly> Color::Teal {
   [] {return Color::FromKnownColor(KnownColor::Teal);}
 };
 
-property<Color, readonly> Color::Thistle {
+_property<Color, _readonly> Color::Thistle {
   [] {return Color::FromKnownColor(KnownColor::Thistle);}
 };
 
-property<Color, readonly> Color::Tomato {
+_property<Color, _readonly> Color::Tomato {
   [] {return Color::FromKnownColor(KnownColor::Tomato);}
 };
 
-property<Color, readonly> Color::Turquoise {
+_property<Color, _readonly> Color::Turquoise {
   [] {return Color::FromKnownColor(KnownColor::Turquoise);}
 };
 
-property<Color, readonly> Color::Violet {
+_property<Color, _readonly> Color::Violet {
   [] {return Color::FromKnownColor(KnownColor::Violet);}
 };
 
-property<Color, readonly> Color::Wheat {
+_property<Color, _readonly> Color::Wheat {
   [] {return Color::FromKnownColor(KnownColor::Wheat);}
 };
 
-property<Color, readonly> Color::White {
+_property<Color, _readonly> Color::White {
   [] {return Color::FromKnownColor(KnownColor::White);}
 };
 
-property<Color, readonly> Color::WhiteSmoke {
+_property<Color, _readonly> Color::WhiteSmoke {
   [] {return Color::FromKnownColor(KnownColor::WhiteSmoke);}
 };
 
-property<Color, readonly> Color::Yellow {
+_property<Color, _readonly> Color::Yellow {
   [] {return Color::FromKnownColor(KnownColor::Yellow);}
 };
 
-property<Color, readonly> Color::YellowGreen {
+_property<Color, _readonly> Color::YellowGreen {
   [] {return Color::FromKnownColor(KnownColor::YellowGreen);}
 };
 

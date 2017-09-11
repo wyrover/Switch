@@ -9,7 +9,7 @@
 using namespace System;
 using namespace System::IO;
 
-property<DirectoryInfo, readonly> DirectoryInfo::Empty {
+_property<DirectoryInfo, _readonly> DirectoryInfo::Empty {
   [] {return DirectoryInfo();}
 };
 

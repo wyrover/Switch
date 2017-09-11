@@ -19,7 +19,7 @@ namespace Switch {
       /// @include StreamReader.cpp
       class _export StreamReader: public TextReader {
       public:
-        static property<StreamReader, readonly> Null;
+        static _property<StreamReader, _readonly> Null;
 
         /// @brief Initializes a new instance of the System::IO::StreamReader class for the specified Sream pointer.
         /// @param stream The stream pointer to be read.
@@ -90,19 +90,19 @@ namespace Switch {
 
         /// @brief Gets the underlying stream that interfaces with a backing store.
         /// @return refptr<Stream> The stream this StreamReader is writing to.
-        property<Stream&, readonly> BaseStream {
+        _property<Stream&, _readonly> BaseStream {
           _get->Stream& {return *this->data->stream;}
         };
 
         /// @brief Gets the current character encoding that the current StreamReader object is using.
         /// @return refptr<Text::Encoding> The current character encoding used by the current reader. The value can be different after the first call to any Read method of StreamReader, since encoding autodetection is not done until the first call to a Read method.
-        property<Text::Encoding&, readonly> CurrentEncoding {
+        _property<Text::Encoding&, _readonly> CurrentEncoding {
           _get->Text::Encoding& {return *this->data->encoding;}
         };
 
         /// @brief Gets a value that indicates whether the current stream position is at the end of the stream.
         /// @return true if the current stream position is at the end of the stream; otherwise false.
-        property<bool, readonly> EndOfStream {
+        _property<bool, _readonly> EndOfStream {
           _get {return this->Peek() == -1;}
         };
 

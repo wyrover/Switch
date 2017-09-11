@@ -49,7 +49,7 @@ namespace Switch {
 
           /// @brief Gets a value that indicates whether the ConcurrentStack<T> is empty.
           /// @return Boolean true if the ConcurrentStack<T> is empty; otherwise, false.
-          property<bool, readonly> IsEmpty {
+          _property<bool, _readonly> IsEmpty {
             _get {
               return this->stack.Count == 0;
             }

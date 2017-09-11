@@ -57,7 +57,7 @@ namespace Switch {
       /// @brief Gets a value indicating whether the current Nullable<T> object has a valid value of its underlying type.
       /// @return true if the current Nullable<T> object has a value; false if the current Nullable<T> object has no value.
       /// @remarks If the HasValue property is true, the value of the current Nullable<T> object can be accessed with the Value property. Otherwise, attempting to access its value throws an InvalidOperationException exception.
-      property<bool, readonly> HasValue {
+      _property<bool, _readonly> HasValue {
         _get {return this->hasValue;}
       };
       
@@ -65,7 +65,7 @@ namespace Switch {
       /// @return The value of the current Nullable<T> object if the HasValue property is true. An exception is thrown if the HasValue property is false.
       /// @exception InvalidOperationException The HasValue property is false.
       /// @remarks If a value of type T has not been assigned to the Nullable<T> object, you can compare it to null and retrieve its HasValue property, but you cannot access its Value property or call its other members.
-      property<T&, readonly> Value {
+      _property<T&, _readonly> Value {
         _get->T& {
           if(!this->hasValue)
             throw System::InvalidOperationException(_current_information);

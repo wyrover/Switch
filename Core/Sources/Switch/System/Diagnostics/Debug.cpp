@@ -10,12 +10,12 @@ namespace {
   static bool useGlobalLock = true;
 }
 
-property<bool> Debug::AutoFlush {
+_property<bool> Debug::AutoFlush {
   [] {return autoFlush;},
   [](bool value) {autoFlush = value;}
 };
 
-property<int32> Debug::IndentLevel {
+_property<int32> Debug::IndentLevel {
   [] {return indentLevel;},
   [](int32 value) {
     indentLevel = value;
@@ -24,7 +24,7 @@ property<int32> Debug::IndentLevel {
   }
 };
 
-property<int32> Debug::IndentSize {
+_property<int32> Debug::IndentSize {
   [] {return indentSize;},
   [](int32 value) {
     indentSize = value;
@@ -33,11 +33,11 @@ property<int32> Debug::IndentSize {
   }
 };
 
-property<TraceListenerCollection&, readonly> Debug::Listeners {
+_property<TraceListenerCollection&, _readonly> Debug::Listeners {
   []()->TraceListenerCollection& {return Trace::__get_listeners__();}
 };
 
-property<bool> Debug::UseGlobalLock {
+_property<bool> Debug::UseGlobalLock {
   [] {return useGlobalLock;},
   [](bool value) {useGlobalLock = value;}
 };

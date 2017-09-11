@@ -56,49 +56,49 @@ namespace Switch {
       
       /// @brief Get File where Exception occurred
       /// @return string A string represent File where Exception occurred
-      property<const String&, readonly> File {
+      _property<const String&, _readonly> File {
         _get->const string& {return this->currentInformation.FileName();}
       };
       
       /// @brief Gets a link to the help file associated with this exception.
       /// @return string A string represent a link to Help file associated with Exception
-      property<const String&, readonly> HelpLink {
+      _property<const String&, _readonly> HelpLink {
         _get->const string& {return this->helpLink;}
       };
       
       /// @brief Get Error associate to the Exception
       /// @return Error A ErrorCode represent a Error associate to the Exception
-      property<int32, readonly> HResult {
+      _property<int32, _readonly> HResult {
         _get {return this->hresult;}
       };
       
       /// @brief Gets If other Exception instance that caused the current exception.
       /// @return Exception An instance of Exception that describes the error that caused the current exception. The InnerException property returns the same value as was passed into the constructor, or a null reference if the inner exception value was not supplied to the constructor.
-      property<bool, readonly> HasInnerException {
+      _property<bool, _readonly> HasInnerException {
         _get {return this->innerException != null;}
       };
       
       /// @brief Gets the Exception instance that caused the current exception.
       /// @return Exception An instance of Exception that describes the error that caused the current exception. The InnerException property returns the same value as was passed into the constructor, or a null reference if the inner exception value was not supplied to the constructor.
-      property<const Exception&, readonly> InnerException {
+      _property<const Exception&, _readonly> InnerException {
         _get->const Exception& {return this->innerException();}
       };
       
       /// @brief Get Line where the Exception occurred
       /// @return Int32 the number of line where Exception occurred
-      property<int32, readonly> Line {
+      _property<int32, _readonly> Line {
         _get {return this->currentInformation.Line();}
       };
       
       /// @brief Get message associate to the Exception
       /// @return string A string represent a massage associate to the Exception
-      property<const String&, readonly> Message {
+      _property<const String&, _readonly> Message {
         _get->const string& {return this->GetMessage();}
       };
       
       /// @brief Gets a string representation of the immediate frames on the call stack.
       /// @return string A string that describes the immediate frames of the call stack.
-      property<String, readonly> StackTrace {
+      _property<String, _readonly> StackTrace {
         _get {return this->GetStackTrace();}
       };
       

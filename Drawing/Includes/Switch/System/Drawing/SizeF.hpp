@@ -23,7 +23,7 @@ namespace Switch {
       class _export SizeF : public object {
       public:
         /// @brief Gets a SizeF class that has a Height and Width value of 0.0f. This field is constant.
-        static property<SizeF, readonly> Empty;
+        static _property<SizeF, _readonly> Empty;
 
         /// @brief Initializes a new instance of the SizeF class that has a Height and Width value of 0.0f.
         SizeF() {}
@@ -43,7 +43,7 @@ namespace Switch {
         /// @brief Gets the vertical component of this SizeF Class.
         /// @return single The vertical component of this SizeF class, typically measured in pixels.
         /// @remarks The unit for the Height and Width of the SizeF class depend on the PageUnit and PageScale settings for the Graphics object that is used to draw.
-        property<float> Height {
+        _property<float> Height {
           _get {return this->height;},
           _set {this->height = value;}
         };
@@ -51,7 +51,7 @@ namespace Switch {
         /// @brief Gets the horizontal component of this SizeF class.
         /// @return single The horizontal component of this SizeF class, typically measured in pixels.
         /// @remarks The unit for the Height and Width of the SizeF class depend on the PageUnit and PageScale settings for the Graphics object that is used to draw.
-        property<float> Width {
+        _property<float> Width {
           _get {return this->width;},
           _set {this->width = value;}
         };

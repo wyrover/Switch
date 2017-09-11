@@ -53,16 +53,16 @@ namespace Switch {
 
         Pen(System::Drawing::Color color, float width) : brush(as<System::Drawing::Brush>(ref_new<SolidBrush>(color))), width(width) { this->Create(); }
 
-        property<const System::Drawing::Brush&> Brush{
+        _property<const System::Drawing::Brush&> Brush{
           _get->const System::Drawing::Brush& { return this->brush(); },
           _set {this->brush = as<System::Drawing::Brush>(value.Clone()); }
         };
 
-        property<System::Drawing::Color, readonly> Color{
+        _property<System::Drawing::Color, _readonly> Color{
           _get{ return as<SolidBrush>(this->brush)().Color(); }
         };
 
-        property<System::Drawing::Drawing2D::DashStyle> DashStyle {
+        _property<System::Drawing::Drawing2D::DashStyle> DashStyle {
           _get {return this->dashStyle;},
           _set {
             if (this->dashStyle != value) {
@@ -72,7 +72,7 @@ namespace Switch {
           }
         };
 
-        property<float> Width{
+        _property<float> Width{
           _get {return this->width;},
           _set {this->width = value;}
         };

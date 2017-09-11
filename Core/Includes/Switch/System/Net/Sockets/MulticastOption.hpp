@@ -54,7 +54,7 @@ namespace Switch {
           /// @brief Gets or sets the IP address of a multicast group.
           /// @param group An IPAddress that contains the Internet address of a multicast group.
           /// @return IPAddress An IPAddress that contains the Internet address of a multicast group.
-          property<const IPAddress&> Group {
+          _property<const IPAddress&> Group {
             _get->const IPAddress& {return this->group;},
             _set {this->group = value;}
           };
@@ -63,7 +63,7 @@ namespace Switch {
           /// @param interfaceIndex A int32 value that specifies the address of the interface.
           /// @return int32 A Int32 value that specifies the address of the interface.
           /// @exception ArgumentOutOfRangeException interfaceIndex is less than 0.
-          property<int32> InterfaceIndex {
+          _property<int32> InterfaceIndex {
             _get {return this->interfaceIndex;},
             _set {
               if (value < 0)
@@ -76,7 +76,7 @@ namespace Switch {
           /// @param localAddress An IPAddress that contains the local address associated with a multicast group.
           /// @return IPAddress An IPAddress that contains the local address associated with a multicast group.
           /// @remarks The LocalAddress property contains the IP address of the interface associated with the multicast group membership. If LocalAddress is set to Any, the default interface is used.
-          property<const IPAddress&> LocalAddress {
+          _property<const IPAddress&> LocalAddress {
             _get->const IPAddress& {return this->localAddress;},
             _set {this->localAddress = value;}
           };

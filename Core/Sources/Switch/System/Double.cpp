@@ -19,27 +19,27 @@
 
 using namespace System;
 
-property<double, readonly> Double::Epsilon {
+_property<double, _readonly> Double::Epsilon {
   [] {return 4.94066e-324;}
 };
 
-property<double, readonly> Double::MaxValue {
+_property<double, _readonly> Double::MaxValue {
   [] {return std::numeric_limits<double>::max();}
 };
 
-property<double, readonly> Double::MinValue {
+_property<double, _readonly> Double::MinValue {
   [] {return -std::numeric_limits<double>::max();}
 };
 
-property<double, readonly> Double::NaN {
+_property<double, _readonly> Double::NaN {
   [] {return std::numeric_limits<double>::quiet_NaN();}
 };
 
-property<double, readonly> Double::NegativeInfinity {
+_property<double, _readonly> Double::NegativeInfinity {
   [] {return -std::numeric_limits<double>::infinity();}
 };
 
-property<double, readonly> Double::PositiveInfinity {
+_property<double, _readonly> Double::PositiveInfinity {
   [] {return std::numeric_limits<double>::infinity();}
 };
 

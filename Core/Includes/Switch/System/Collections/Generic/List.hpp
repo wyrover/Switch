@@ -118,7 +118,7 @@ namespace Switch {
           /// @brief Gets or sets the total number of elements the internal data structure.
           /// @return The number of elements that the List<T> can contain.
           /// @exception System::ArgumentOutOfRangeException System::Collections::Generic::List<T>.Capacity is set to a value that is less than System::Collections::Generic::List<T>.Count.
-          property<int32> Capacity {
+          _property<int32> Capacity {
             _get {return static_cast<int32>(this->list.capacity());},
             _set {
               if (value < this->Count)
@@ -129,7 +129,7 @@ namespace Switch {
           
           /// @brief Get access to raw data of the Array.
           /// @return A pointer to raw data of the array.
-          property<const T*, readonly> Data {
+          _property<const T*, _readonly> Data {
             _get->const T* {return this->list.data();}
           };
           

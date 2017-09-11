@@ -52,7 +52,7 @@ bool Thread::ThreadItem::SetPriority(Thread::NativeHandle handle, ThreadPriority
   return __OS::CoreApi::Thread::SetPriority((intptr)handle, (int32)priority);
 }
 
-property<Thread&, readonly> Thread::CurrentThread {
+_property<Thread&, _readonly> Thread::CurrentThread {
   []()->Thread& {return Thread::__CurrentThread__();}
 };
 

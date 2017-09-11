@@ -29,22 +29,22 @@ namespace Switch {
           Form(const Form& form) : ContainerControl(form), formBorderStyle(form.formBorderStyle), maximizeBox(form.maximizeBox), minimizeBox(form.minimizeBox), startPosition(form.startPosition), messageActions(form.messageActions) {}
           /// @endcond
 
-          property<System::Windows::Forms::FormBorderStyle> FormBorderStyle {
+          _property<System::Windows::Forms::FormBorderStyle> FormBorderStyle {
             _get{return this->formBorderStyle;},
             _set{this->formBorderStyle = value;}
           };
           
-          property<bool> MaximizeBox {
+          _property<bool> MaximizeBox {
             _get {return this->maximizeBox;},
             _set {this->maximizeBox = value;}
           };
           
-          property<bool> MinimizeBox {
+          _property<bool> MinimizeBox {
             _get {return this->minimizeBox;},
             _set {this->minimizeBox = value;}
           };
           
-          property<FormStartPosition> StartPosition{
+          _property<FormStartPosition> StartPosition{
             _get{return this->startPosition;},
             _set{this->startPosition = value;}
           };

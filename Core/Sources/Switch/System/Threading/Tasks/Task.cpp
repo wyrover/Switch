@@ -6,11 +6,11 @@ using namespace System::Threading::Tasks;
 
 thread_local int32 __opaque_task_id_generator__::currentId = 0;
 
-property<Nullable<int32>, readonly> Task<void>::CurrentId {
+_property<Nullable<int32>, _readonly> Task<void>::CurrentId {
   [] {return __currentId__();}
 };
 
-property<TaskFactory, readonly> Task<void>::Factory {
+_property<TaskFactory, _readonly> Task<void>::Factory {
   [] {return TaskFactory();}
 };
 

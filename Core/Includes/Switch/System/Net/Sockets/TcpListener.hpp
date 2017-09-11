@@ -74,7 +74,7 @@ namespace Switch {
           /// @remarks You can use the exclusiveAddressUse property to prevent multiple listeners from listening to a specific port.
           /// @remarks Set this property before calling Start, or call the Stop method and then set this property.
           /// @note Not available on MacOs/Linux/Android
-          property<bool> ExclusiveAddressUse {
+          _property<bool> ExclusiveAddressUse {
             _get {return this->data->serverSocket.ExclusiveAddressUse(); },
             _set {
               if (this->data->active)
@@ -89,7 +89,7 @@ namespace Switch {
           /// @remarks You can use the LocalEndpoint property to identify the local network interface and port number being used to listen for incoming client connection requests,
           /// @remarks after a socket connection has been made. You must first cast this EndPoint to an IPEndPoint. You can then call the IPEndPoint::Address property to retrieve
           /// @remarks the local IP address, and the IPEndPoint::Port property to retrieve the local port number.
-          property<const EndPoint&, readonly> LocalEndPoint {
+          _property<const EndPoint&, _readonly> LocalEndPoint {
             _get->const EndPoint& { return this->data->serverSocket.LocalEndPoint(); }
           };
 
@@ -100,7 +100,7 @@ namespace Switch {
           /// @note The Server property only returns the Socket used to listen for incoming client connection requests. Use the AcceptSocket method to accept a pending connection
           /// @note request and obtain a Socket for sending and receiving data. You can also use the AcceptTcpClient method to accept a pending connection request and obtain a
           /// @note TcpClient for sending and receiving data.
-          property<Socket, readonly> Server {
+          _property<Socket, _readonly> Server {
             _get {return this->data->serverSocket; }
           };
 
@@ -178,7 +178,7 @@ namespace Switch {
           /// @return true if TcpListener is actively listening; otherwise, false.
           /// @remarks Classes deriving from TcpListener can use this property to determine if the Socket is currently listening for incoming connection attempts.
           /// @remarks The Active property can be used to avoid redundant Start attempts.
-          property<bool, readonly> Active {
+          _property<bool, _readonly> Active {
             _get {return this->data->active; }
           };
           

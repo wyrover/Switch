@@ -47,7 +47,7 @@ namespace Switch {
         /// @param value The host name or a string representation of the IP address.
         /// @exception ArgumentException The host parameter contains an empty string.
         /// @exception ArgumentNullException The host parameter is a null.
-        property<const String&> Host {
+        _property<const String&> Host {
           _get->const string& {return this->host;},
           _set {this->SetHost(value);}
         };
@@ -55,7 +55,7 @@ namespace Switch {
         /// @brief Gets the port number of the endpoint.
         /// @param value An integer value in the range IPEndPoint::MinPort to IPEndPoint::MaxPort indicating the port number of the endpoint.
         /// @exception ArgumentOutOfRangeException port is less than IPEndPoint::MinPort. -or- port is greater than IPEndPoint::MaxPort.
-        property<int32> Port {
+        _property<int32> Port {
           _get {return this->port;},
           _set {this->SetPort(value);}
         };

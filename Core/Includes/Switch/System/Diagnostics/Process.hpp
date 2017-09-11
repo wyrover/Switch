@@ -27,28 +27,28 @@ namespace Switch {
         virtual ~Process();
         /// @endcond
         
-        property<int32, readonly> ExitCode {
+        _property<int32, _readonly> ExitCode {
           _get {return this->data->exitCode;}
         };
         
-        property<int32, readonly> Id {
+        _property<int32, _readonly> Id {
           _get {return *((int32*)&this->data->handle);}
         };
         
-        property<string, readonly> ProcessName {
+        _property<string, _readonly> ProcessName {
           _get {return this->GetName();}
         };
         
-        property<string, readonly> Path {
+        _property<string, _readonly> Path {
           _get {return this->GetPath();}
         };
         
-        property<ProcessStartInfo&> StartInfo {
+        _property<ProcessStartInfo&> StartInfo {
           _get->ProcessStartInfo& {return this->data->startInfo;},
           _set {this->data->startInfo = value;}
         };
         
-        property<System::IO::StreamReader, readonly> StandardOutput {
+        _property<System::IO::StreamReader, _readonly> StandardOutput {
           _get {return this->GetStreamReader();}
         };
         

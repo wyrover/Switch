@@ -29,27 +29,27 @@ namespace Switch {
           ProgressBar(const ProgressBar& progressBar) : Control(progressBar), marqueeAnimationSpeed(progressBar.marqueeAnimationSpeed), maximum(progressBar.maximum), minimum(progressBar.minimum), style(progressBar.style), value(progressBar.value) {}
           /// @endcond
 
-          property<int32> MarqueeAnimationSpeed {
+          _property<int32> MarqueeAnimationSpeed {
             _get{ return this->marqueeAnimationSpeed; },
             _set{ this->SetMarqueeAnimationSpeed(value); },
           };
 
-          property<int32> Maximum{
+          _property<int32> Maximum{
             _get{ return this->maximum; },
             _set{ this->SetMaximum(value); },
           };
 
-          property<int32> Minimum{
+          _property<int32> Minimum{
             _get{ return this->minimum; },
             _set{ this->SetMinimum(value); },
           };
 
-          property<ProgressBarStyle> Style{
+          _property<ProgressBarStyle> Style{
             _get{ return this->style; },
             _set{ this->SetProgressStyle(value); },
           };
 
-          property<int32> Value{
+          _property<int32> Value{
             _get{ return this->value; },
             _set{ this->SetValue(value); },
           };

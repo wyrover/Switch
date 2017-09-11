@@ -12,15 +12,15 @@ namespace Switch {
     namespace Media {
       class SystemSounds {
       public:
-        static property<SystemSound, readonly> Asterisk;
+        static _property<SystemSound, _readonly> Asterisk;
 
-        static property<SystemSound, readonly> Beep;
+        static _property<SystemSound, _readonly> Beep;
 
-        static property<SystemSound, readonly> Exclamation;
+        static _property<SystemSound, _readonly> Exclamation;
 
-        static property<SystemSound, readonly> Hand;
+        static _property<SystemSound, _readonly> Hand;
 
-        static property<SystemSound, readonly> Question;
+        static _property<SystemSound, _readonly> Question;
       };
     }
   }

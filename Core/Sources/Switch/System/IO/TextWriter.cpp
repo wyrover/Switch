@@ -12,7 +12,7 @@ namespace {
 TextWriter::TextWriter() : encoding(utf8Encoding) {
 } 
 
-property<NullTextWriter&, readonly> TextWriter::Null {
+_property<NullTextWriter&, _readonly> TextWriter::Null {
   []()->NullTextWriter& {
     static NullTextWriter textWriter;
     return textWriter;

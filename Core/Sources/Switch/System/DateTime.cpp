@@ -15,7 +15,7 @@ namespace {
 DateTime DateTime::MaxValue = DateTime(DateTimeMaximumValue);
 DateTime DateTime::MinValue = DateTime(DateTimeMinimumValue);
 
-property<DateTime, readonly> DateTime::Now {
+_property<DateTime, _readonly> DateTime::Now {
   [] {
     int64 secondes = 0;
     int32 milliseconds = 0, timeZone = 0;
@@ -28,7 +28,7 @@ property<DateTime, readonly> DateTime::Now {
   }
 };
 
-property<DateTime, readonly> DateTime::Today {
+_property<DateTime, _readonly> DateTime::Today {
   [] {
     int64 secondes = 0;
     int32 milliseconds = 0, timeZone = 0;
@@ -47,7 +47,7 @@ property<DateTime, readonly> DateTime::Today {
   }
 };
 
-property<DateTime, readonly> DateTime::UtcNow {
+_property<DateTime, _readonly> DateTime::UtcNow {
   [] {
     int64 secondes = 0;
     int32 milliseconds = 0, timeZone = 0;

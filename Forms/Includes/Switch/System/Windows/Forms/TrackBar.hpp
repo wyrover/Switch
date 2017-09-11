@@ -30,42 +30,42 @@ namespace Switch {
           TrackBar(const TrackBar& trackBar) : Control(trackBar), largeChange(trackBar.largeChange), maximum(trackBar.maximum), minimum(trackBar.minimum), smallChange(trackBar.smallChange), style(trackBar.style), tickFrequency(trackBar.tickFrequency), value(trackBar.value) {}
           /// @endcond
 
-          property<int32> LargeChange {
+          _property<int32> LargeChange {
             _get{ return this->largeChange; },
             _set{ this->SetLargeChange(value); },
           };
 
-          property<Forms::Orientation> Orientation {
+          _property<Forms::Orientation> Orientation {
             _get{ return this->orientation; },
             _set{ this->SetOrientation(value); },
           };
 
-          property<int32> Maximum {
+          _property<int32> Maximum {
             _get{ return this->maximum; },
             _set{ this->SetMaximum(value); },
           };
 
-          property<int32> Minimum {
+          _property<int32> Minimum {
             _get{ return this->minimum; },
             _set{ this->SetMinimum(value); },
           };
 
-          property<int32> SmallChange{
+          _property<int32> SmallChange{
             _get{ return this->smallChange; },
             _set{ this->SetSmallChange(value); },
           };
 
-          property<TickStyle> Style {
+          _property<TickStyle> Style {
             _get{ return this->style; },
             _set{ this->SetTickStyle(value); },
           };
 
-          property<int32> TickFrequency {
+          _property<int32> TickFrequency {
             _get{ return this->tickFrequency; },
             _set{ this->SetTickFrequency(value); },
           };
 
-          property<int32> Value {
+          _property<int32> Value {
             _get {
               this->value = this->GetValue();
               return this->value;

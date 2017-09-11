@@ -115,7 +115,7 @@ namespace {
     return envs;
   }
 
-  property<Collections::Specialized::StringDictionary&, readonly> EnvironmentVariables {
+  _property<Collections::Specialized::StringDictionary&, _readonly> EnvironmentVariables {
     []()->Collections::Specialized::StringDictionary& {
       static Collections::Specialized::StringDictionary environmentVariables = GetEnvironmentVariables();
       return environmentVariables;
@@ -131,7 +131,7 @@ namespace {
   refptr<SignalCatcher> signalCatcher;
 }
 
-property<String, readonly> Environment::CommandLine {
+_property<String, _readonly> Environment::CommandLine {
   [] {
     if (commandLineArgs->Length == 0)
       throw InvalidOperationException("You must call System::Environment::SetCommandLineArgs(argv, argc); method in main before.", _current_information);
@@ -143,7 +143,7 @@ property<String, readonly> Environment::CommandLine {
   }
 };
 
-property<string> Environment::CurrentDirectory {
+_property<string> Environment::CurrentDirectory {
   [] {return __OS::CoreApi::Directory::GetCurrentDirectory();},
   [](string value) {
     if (String::IsNullOrEmpty(value))
@@ -155,36 +155,36 @@ property<string> Environment::CurrentDirectory {
   }
 };
 
-property<int32, readonly> Environment::CurrentManagedThreadId {
+_property<int32, _readonly> Environment::CurrentManagedThreadId {
   [] {return System::Threading::Thread::CurrentThread().ManagedThreadId();}
 };
 
-property<int32> Environment::ExitCode {
+_property<int32> Environment::ExitCode {
   [] {return exitCode;},
   [](int32 value) {exitCode = value;}
 };
 
-property<bool, readonly> Environment::HasShutdownStarted {
+_property<bool, _readonly> Environment::HasShutdownStarted {
   [] {return false;}
 };
 
-property<bool, readonly> Environment::Is64BitOperatingSystem {
+_property<bool, _readonly> Environment::Is64BitOperatingSystem {
   [] {return __OS::CoreApi::Environment::IsOs64Bit();}
 };
 
-property<bool, readonly> Environment::Is64BitProcess {
+_property<bool, _readonly> Environment::Is64BitProcess {
   [] {return IntPtr::Size == 8;}
 };
 
-property<String, readonly> Environment::MachineName {
+_property<String, _readonly> Environment::MachineName {
   [] {return __OS::CoreApi::Environment::GetMachineName();}
 };
 
-property<String, readonly> Environment::NewLine {
+_property<String, _readonly> Environment::NewLine {
   [] {return __OS::CoreApi::Environment::NewLine();}
 };
 
-property<const OperatingSystem&, readonly> Environment::OSVersion {
+_property<const OperatingSystem&, _readonly> Environment::OSVersion {
   []()->const OperatingSystem& {
     static OperatingSystem os(PlatformID::Unknown, System::Version());
     if (os.Platform == PlatformID::Unknown) {
@@ -196,46 +196,46 @@ property<const OperatingSystem&, readonly> Environment::OSVersion {
   }
 };
 
-property<int32, readonly> Environment::ProcessorCount {
+_property<int32, _readonly> Environment::ProcessorCount {
   [] {
     static int32 processorCount = as<int32>(std::thread::hardware_concurrency());
     return processorCount;
   }
 };
 
-property<String, readonly> Environment::StackTrace {
+_property<String, _readonly> Environment::StackTrace {
   [] {return Diagnostics::StackTrace(3, true).ToString();}
 };
 
-property<String, readonly> Environment::SystemDirectory {
+_property<String, _readonly> Environment::SystemDirectory {
   [] {return GetFolderPath(Environment::SpecialFolder::System);}
 };
 
-property<int32, readonly> Environment::SystemPageSize {
+_property<int32, _readonly> Environment::SystemPageSize {
   [] {return 4096;}
 };
 
-property<int32, readonly> Environment::TickCount {
+_property<int32, _readonly> Environment::TickCount {
   [] {return __OS::CoreApi::Environment::GetTickCount();}
 };
 
-property<String, readonly> Environment::UserDomainName {
+_property<String, _readonly> Environment::UserDomainName {
   [] {return __OS::CoreApi::Environment::GetUserDomainName();}
 };
 
-property<bool, readonly> Environment::UserInteractive {
+_property<bool, _readonly> Environment::UserInteractive {
   [] {return ::userInteractive;}
 };
 
-property<String, readonly> Environment::UserName {
+_property<String, _readonly> Environment::UserName {
   [] {return __OS::CoreApi::Environment::GetUserName();}
 };
 
-property<const System::Version&, readonly> Environment::Version {
+_property<const System::Version&, _readonly> Environment::Version {
   []()->const System::Version& {return Switch::GetVersion();}
 };
 
-property<int64, readonly> Environment::WorkingSet {
+_property<int64, _readonly> Environment::WorkingSet {
   [] {return __OS::CoreApi::Environment::GetWorkingSet();}
 };
 

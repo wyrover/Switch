@@ -1,22 +1,6 @@
-#include <Switch/Foreach.hpp>
 #include <Switch/Nameof.hpp>
 #include <Switch/Startup.hpp>
-#include <Switch/Var.hpp>
 #include <Switch/System/Console.hpp>
-
-#undef _export
-
-#define _internal \
-private:
-
-#define _private \
-private:
-
-#define _protected \
-protected:
-
-#define _public \
-public:
 
 using namespace System;
 
@@ -24,15 +8,17 @@ namespace Examples {
   class Program {
   public:
     class Data {
-      _public Data() = default;
-      _public Data(const Data& data) : items(data.items) {};
+    public:
+      Data() = default;
+      Data(const Data& data) : items(data.items) {};
       
-      _public property<Array<int>> Items {
+      _property<Array<int>> Items {
         _get {return this->items;},
         _set {this->items = value;}
       };
       
-      _private Array<int> items = Array<>::CreateInstance<int>(8);
+    private:
+      Array<int> items = Array<>::CreateInstance<int>(8);
     };
     
     // The main entry point for the application.

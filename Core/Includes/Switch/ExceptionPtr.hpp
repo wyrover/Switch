@@ -120,7 +120,7 @@ namespace Switch {
     /// @return An ExceptionPtr object pointing to the currently handled exception, or some other exception if the internal process of the function would raise a new exception.
     /// @remarks If no exception is being handled, the ExceptionPtr contains a null-pointer value.
     /// @remarks ExceptionPtr is a shared smart pointer type: The pointed exception is guaranteed to remain valid for as long as at least one exception_ptr points to it, potentially extending the lifetime of the pointed exception object beyond its scope or across threads.
-    static property<ExceptionPtr, readonly> CurrentException;
+    static _property<ExceptionPtr, _readonly> CurrentException;
     
     /// @brief Create an ExceptionPtr object that points to a copy of specified Excpetion.
     /// @param excpetion exception The exception that copyied.

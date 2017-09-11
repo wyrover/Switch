@@ -6,11 +6,11 @@ using namespace System;
 using namespace System::Net;
 using namespace System::Net::Sockets;
 
-property<int32, readonly> IPEndPoint::MinPort {
+_property<int32, _readonly> IPEndPoint::MinPort {
   [] {return 0;}
 };
 
-property<int32, readonly> IPEndPoint::MaxPort {
+_property<int32, _readonly> IPEndPoint::MaxPort {
   [] {return 0xFFFF;}
 };
 

@@ -11,11 +11,11 @@ using namespace System::Net;
 using namespace System::Net::Sockets;
 using namespace System::Collections::Generic;
 
-property<bool, readonly> Socket::OSSupportsIPv4 {
+_property<bool, _readonly> Socket::OSSupportsIPv4 {
   [] {return __OS::CoreApi::Socket::GetOSSupportsIPv4();}
 };
 
-property<bool, readonly> Socket::OSSupportsIPv6 {
+_property<bool, _readonly> Socket::OSSupportsIPv6 {
   [] {return __OS::CoreApi::Socket::GetOSSupportsIPv6();}
 };
 

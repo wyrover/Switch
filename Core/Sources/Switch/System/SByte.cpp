@@ -7,11 +7,11 @@
 
 using namespace System;
 
-property<sbyte, readonly> SByte::MaxValue {
+_property<sbyte, _readonly> SByte::MaxValue {
   [] {return std::numeric_limits<sbyte>::max();}
 };
 
-property<sbyte, readonly> SByte::MinValue {
+_property<sbyte, _readonly> SByte::MinValue {
   [] {return std::numeric_limits<sbyte>::min();}
 };
 

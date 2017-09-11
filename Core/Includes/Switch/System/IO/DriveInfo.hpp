@@ -38,53 +38,53 @@ namespace Switch {
         /// @brief Indicates the amount of available free space on a drive.
         /// @return The amount of free space available on the drive, in bytes.
         /// @exception IO::IOException An I/O error occurred (for example, a disk error or a drive was not ready).
-        property<int64, readonly> AvailableFreeSpace {
+        _property<int64, _readonly> AvailableFreeSpace {
           _get {return this->GetAvailableFreeSpace();}
         };
 
         /// @brief Gets the name of the file system, such as NTFS or FAT32.
         /// @return The name of the file system on the specified drive.
         /// @exception IO::IOException An I/O error occurred (for example, a disk error or a drive was not ready).
-        property<string, readonly> DriveFormat {
+        _property<string, _readonly> DriveFormat {
           _get {return this->GetDriveFormat();}
         };
 
         /// @brief Gets the drive type.
         /// @return One of the System::IO::DriveType values.
         /// @exception IO::IOException An I/O error occurred.
-        property<System::IO::DriveType, readonly> DriveType {
+        _property<System::IO::DriveType, _readonly> DriveType {
           _get {return this->GetDriveType();}
         };
 
         /// @brief Gets a value indicating whether a drive is ready.
         /// @return true if the drive is ready; false if the drive is not ready.
-        property<bool, readonly> IsReady {
+        _property<bool, _readonly> IsReady {
           _get {return this->GetIsReady();}
         };
 
         /// @brief Gets the name of a drive.
         /// @return The name of the drive.
-        property<String, readonly> Name {
+        _property<String, _readonly> Name {
           _get {return this->GetName();}
         };
 
         /// @brief Gets the root directory of a drive.
         /// @return A System::IO::DirectoryInfo object that contains the root directory of the drive.
-        property<DirectoryInfo, readonly> RootDirectory {
+        _property<DirectoryInfo, _readonly> RootDirectory {
           _get {return this->GetRootDirectory();}
         };
 
         /// @brief Gets the total amount of free space available on a drive.
         /// @return The total free space available on a drive, in bytes.
         /// @exception IO::IOException An I/O error occurred (for example, a disk error or a drive was not ready).
-        property<int64, readonly> TotalFreeSpace {
+        _property<int64, _readonly> TotalFreeSpace {
           _get {return this->GetTotalFreeSpace();}
         };
 
         /// @brief Gets the total size of storage space on a drive.
         /// @return The total size of the drive, in bytes.
         /// @exception IO::IOException An I/O error occurred (for example, a disk error or a drive was not ready).
-        property<int64, readonly> TotalSize {
+        _property<int64, _readonly> TotalSize {
           _get {return this->GetTotalSize();}
         };
 
@@ -95,7 +95,7 @@ namespace Switch {
         /// @exception ArgumentNullException volumeLabel is null.
         /// @exception IO::IOException An I/O error occurred (for example, a disk error or a drive was not ready).
         /// @exception UnauthorizedAccessException The volume label is being set on a network or CD-ROM drive.
-        property<string> VolumeLabel {
+        _property<string> VolumeLabel {
           _get {return this->GetVolumeLabel();},
           _set {this->SetVolumeLabel(value);}
         };

@@ -10,7 +10,7 @@ namespace SwitchUnitTests {
   protected:
     void CreatePropertyAndSetItWithEqualOperator() {
       int32 v = 42;
-      property<int32, writeonly> Value {
+      _property<int32, _writeonly> Value {
         _set {v = value;}
       };
 
@@ -20,7 +20,7 @@ namespace SwitchUnitTests {
     
     void CreatePropertyAndSetItWithSetFunction() {
       int32 v = 42;
-      property<int32, writeonly> Value {
+      _property<int32, _writeonly> Value {
         _set {v = value;}
       };
       
@@ -30,7 +30,7 @@ namespace SwitchUnitTests {
     
     void CreatePropertyAndSetItWithFunctor() {
       int32 v = 42;
-      property<int32, writeonly> Value {
+      _property<int32, _writeonly> Value {
         _set {v = value;}
       };
       
@@ -43,7 +43,7 @@ namespace SwitchUnitTests {
       PropertyTestClass() {}
       PropertyTestClass(const PropertyTestClass& property) : name(property.name) {}
       
-      property<string, writeonly> Name {
+      _property<string, _writeonly> Name {
         _set {this->name = value;}
       };
       

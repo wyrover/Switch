@@ -15,11 +15,11 @@
 
 using namespace System;
 
-property<uint64, readonly> UInt64::MaxValue{
+_property<uint64, _readonly> UInt64::MaxValue{
   [] {return std::numeric_limits<uint64>::max();}
 };
 
-property<uint64, readonly> UInt64::MinValue{
+_property<uint64, _readonly> UInt64::MinValue{
   [] {return std::numeric_limits<uint64>::min();}
 };
 

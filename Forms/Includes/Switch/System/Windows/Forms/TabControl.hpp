@@ -27,12 +27,12 @@ namespace Switch {
           TabControl(const TabControl& tabControl) : ContainerControl(tabControl), alignment(tabControl.alignment) {}
           /// @endcond
 
-          property<TabAlignment> Alignment{
+          _property<TabAlignment> Alignment{
             _get {return this->alignment;},
             _set {this->SetAlignment(value);}
           };
 
-          property<TabPageCollection&, readonly> TabPages{
+          _property<TabPageCollection&, _readonly> TabPages{
             _get->TabPageCollection& {return this->Controls();}
           };
 

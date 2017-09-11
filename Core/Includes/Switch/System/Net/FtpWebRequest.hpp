@@ -15,7 +15,7 @@ namespace Switch {
     namespace Net {
       class _export FtpWebRequest: public System::Net::WebRequest {
       public:
-        property<bool> UseBinary {
+        _property<bool> UseBinary {
           _get {return this->GetUseBinary();},
           _set {this->SetUseBinary(value);}
         };

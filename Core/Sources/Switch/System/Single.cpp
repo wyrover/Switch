@@ -8,27 +8,27 @@
 
 using namespace System;
 
-property<float, readonly> Single::Epsilon {
+_property<float, _readonly> Single::Epsilon {
   [] {return 1.401298E-45F;}
 };
 
-property<float, readonly> Single::MaxValue {
+_property<float, _readonly> Single::MaxValue {
   [] {return std::numeric_limits<float>::max();}
 };
 
-property<float, readonly> Single::MinValue {
+_property<float, _readonly> Single::MinValue {
   [] {return -std::numeric_limits<float>::max();}
 };
 
-property<float, readonly> Single::NaN {
+_property<float, _readonly> Single::NaN {
   [] {return std::numeric_limits<float>::quiet_NaN();}
 };
 
-property<float, readonly> Single::NegativeInfinity {
+_property<float, _readonly> Single::NegativeInfinity {
   [] {return -std::numeric_limits<float>::infinity();}
 };
 
-property<float, readonly> Single::PositiveInfinity {
+_property<float, _readonly> Single::PositiveInfinity {
   [] {return std::numeric_limits<float>::infinity();}
 };
 

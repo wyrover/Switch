@@ -3,7 +3,6 @@
 #include <Switch/System/Collections/Generic/SortedSet.hpp>
 #include <Switch/TUnit/Assert.hpp>
 #include <Switch/TUnit/TestFixture.hpp>
-#include <Switch/Foreach.hpp>
 
 using namespace System;
 using namespace TUnit;

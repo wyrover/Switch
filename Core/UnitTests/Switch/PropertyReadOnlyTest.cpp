@@ -10,7 +10,7 @@ namespace SwitchUnitTests {
   protected:
     void CreatePropertyAndGetItWithImplicitCastOperator() {
       int32 v = 42;
-      property<int32, readonly> Value {
+      _property<int32, _readonly> Value {
         _get {return v;}
       };
       
@@ -20,7 +20,7 @@ namespace SwitchUnitTests {
     
     void CreatePropertyAndGetItWithGetFunction() {
       int32 v = 42;
-      property<int32, readonly> Value {
+      _property<int32, _readonly> Value {
         _get {return v;}
       };
       
@@ -30,7 +30,7 @@ namespace SwitchUnitTests {
     
     void CreatePropertyAndGetItWithFunctor() {
       int32 v = 42;
-      property<int32, readonly> Value {
+      _property<int32, _readonly> Value {
         _get {return v;}
       };
       
@@ -40,7 +40,7 @@ namespace SwitchUnitTests {
     
     void PropertyEqualityOperator() {
       int32 v = 42;
-      property<int32, readonly> Value {
+      _property<int32, _readonly> Value {
         _get {return v;}
       };
       
@@ -50,7 +50,7 @@ namespace SwitchUnitTests {
     
     void PropertyInequalityOperator() {
       int32 v = 42;
-      property<int32, readonly> Value {
+      _property<int32, _readonly> Value {
         _get {return v;}
       };
       
@@ -63,7 +63,7 @@ namespace SwitchUnitTests {
       PropertyTestClass() {}
       PropertyTestClass(const PropertyTestClass& property) : name(property.name) {}
       
-      property<string, readonly> Name {
+      _property<string, _readonly> Name {
         _get {return this->name;}
       };
       

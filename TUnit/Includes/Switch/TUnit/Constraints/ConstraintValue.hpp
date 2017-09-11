@@ -29,7 +29,7 @@ namespace Switch {
         ConstraintValue& operator=(const ConstraintValue& value) {this->value = value.value; return *this;}
         /// @endcond
         
-        property<object, readonly> Value {
+        _property<object, _readonly> Value {
           _get {return this->value.Value();}
         };
         

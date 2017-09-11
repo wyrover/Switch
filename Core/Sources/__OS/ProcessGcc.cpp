@@ -18,15 +18,15 @@ namespace {
     ProcessInfo(pid_t pid, const string &name, const string& path) : pid(pid), name(name), path(path) {}
     ProcessInfo(const ProcessInfo& pi) : pid(pi.pid),  name(pi.name), path(pi.path) {}
     
-    property<intptr, readonly> Id {
+    _property<intptr, _readonly> Id {
       _get {return this->pid;}
     };
     
-    property<string, readonly> Name {
+    _property<string, _readonly> Name {
       _get {return this->name;}
     };
     
-    property<string, readonly> Path {
+    _property<string, _readonly> Path {
       _get {return this->path;}
     };
     

@@ -64,7 +64,7 @@ namespace Switch {
           
           /// @brief Gets or sets a value that indicates whether a connection has been made.
           /// @return bool true if the connection has been made; otherwise, false.
-          property<bool> Active {
+          _property<bool> Active {
             _get {return this->data->active;},
             _set {this->data->active = value;}
           };
@@ -76,7 +76,7 @@ namespace Switch {
           /// @remarks Available is a way to determine whether data is queued for reading. If data is available, call Read to get the data.
           /// @remarks The available data is the total amount of data queued in the network buffer for reading. If no data is queued in the network buffer, Available returns 0.
           /// @remarks If the remote host shuts down or closes the connection, Available may throw a SocketException. If you receive a SocketException, use SocketException.ErrorCode to obtain the specific error code.
-          property<int32, readonly> Available {
+          _property<int32, _readonly> Available {
             _get {return this->data->clientSocket.Available();}
           };
           
@@ -86,7 +86,7 @@ namespace Switch {
           /// @remarks Use the underlying Socket returned from Client if you require access beyond that which TcpClient provides.
           /// @remarks You can also use Client to set the underlying Socket to an existing Socket. This might be useful if you want to take advantage of the simplicity
           /// @remarks of TcpClient using a pre-existing Socket.
-          property<Socket> Client {
+          _property<Socket> Client {
             _get {return this->data->clientSocket;},
             _set {this->data->clientSocket = value;}
           };
@@ -99,7 +99,7 @@ namespace Switch {
           /// @remarks After the message send fails, this property no longer returns true. Note that this behavior is by design.
           /// @remarks You cannot reliably test the state of the connection because, in the time between the test and a send/receive,
           /// @remarks the connection could have been lost. Your code should assume the socket is connected, and gracefully handle failed transmissions.
-          property<bool, readonly> Connected {
+          _property<bool, _readonly> Connected {
             _get {return this->data->clientSocket.Connected();}
           };
           
@@ -111,7 +111,7 @@ namespace Switch {
           /// @remarks You can use the ExclusiveAddressUse property to prevent multiple clients from using a specific port.
           /// @remarks This property must be set before the underlying socket is bound to a client port. If you call Connect, BeginConnect, TcpClient(IPEndPoint),
           /// @remarks or TcpClient(string, int32), the client port is bound as a side effect of the method, and you cannot subsequently set the ExclusiveAddressUse property
-          property<bool> ExclusiveAddressUse {
+          _property<bool> ExclusiveAddressUse {
             _get {return this->data->clientSocket.ExclusiveAddressUse();},
             _set {this->data->clientSocket.ExclusiveAddressUse(value);}
           };
@@ -133,7 +133,7 @@ namespace Switch {
           /// @remarks This is the default behavior for a socket when the LingerState property is not set.
           /// @remarks When the LingerTime property stored in the LingerState property is set greater than the default IP protocol time-out, the default IP protocol time-out will still apply and virtual.
           /// @note Not available on MacOs/Linux/Android
-          property<LingerOption> LingerState {
+          _property<LingerOption> LingerState {
             _get {return this->data->clientSocket.LingerState();},
             _set {this->data->clientSocket.LingerState(value);}
           };
@@ -147,7 +147,7 @@ namespace Switch {
           /// @remarks to send very small amounts of data or expect immediate responses from each packet you send. Your decision should weigh the relative importance of
           /// @remarks network efficiency versus application requirements.
           /// @note Not available on MacOs/Linux/Android
-          property<bool> NoDelay {
+          _property<bool> NoDelay {
             _get {return this->data->clientSocket.NoDelay();},
             _set {this->data->clientSocket.NoDelay(value);}
           };
@@ -159,7 +159,7 @@ namespace Switch {
           /// @remarks The ReceiveBufferSize property gets or sets the number of bytes that you are expecting to store in the receive buffer for each read operation. This property actually manipulates the network buffer space allocated for receiving incoming data.
           /// @remarks Your network buffer should be at least as large as your application buffer to ensure that the desired data will be available when you call the NetworkStream.Read method. Use the ReceiveBufferSize property to set this size. If your application will be receiving bulk data, you should pass the Read method a very large application buffer.
           /// @remarks If the network buffer is smaller than the amount of data you request in the Read method, you will not be able to retrieve the desired amount of data in one read operation. This incurs the overhead of additional calls to the Read method.
-          property<int32> ReceiveBufferSize {
+          _property<int32> ReceiveBufferSize {
             _get {return this->data->clientSocket.ReceiveBufferSize();},
             _set {this->data->clientSocket.ReceiveBufferSize(value);}
           };
@@ -167,7 +167,7 @@ namespace Switch {
           /// @brief Gets or sets the amount of time a TcpClient will wait to receive data once a read operation is initiated.
           /// @return int32 The time-out value of the connection in milliseconds. The default value is 0.
           /// @remarks The ReceiveTimeout property determines the amount of time that the Read method will block until it is able to receive data. This time is measured in milliseconds. If the time-out expires before Read successfully completes, TcpClient throws a IOException. There is no time-out by default.
-          property<int32> ReceiveTimeout {
+          _property<int32> ReceiveTimeout {
             _get {return this->data->clientSocket.ReceiveTimeout();},
             _set {this->data->clientSocket.ReceiveTimeout(value);}
           };
@@ -177,7 +177,7 @@ namespace Switch {
           /// @remarks The SendBufferSize property gets or sets the number of bytes that you are expecting to send in each call to the NetworkStream.Write method. This property actually manipulates the network buffer space allocated for send operation.
           /// @remarks Your network buffer should be at least as large as your application buffer to ensure that the desired data will be stored and sent in one operation. Use the SendBufferSize property to set this size. If your application will be sending bulk data, you should pass the Write method a very large application buffer.
           /// @remarks If the network buffer is smaller than the amount of data you provide the Write method, several network send operations will be performed for every call you make to the Write method. You can achieve greater data throughput by ensuring that your network buffer is at least as large as your application buffer.
-          property<int32> SendBufferSize {
+          _property<int32> SendBufferSize {
             _get {return this->data->clientSocket.SendBufferSize();},
             _set {this->data->clientSocket.SendBufferSize(value);}
           };
@@ -186,7 +186,7 @@ namespace Switch {
           /// @return int32 The send time-out value, in milliseconds. The default value is 0.
           /// @remarks The SendTimeout property determines the amount of time that the Send method will block until it is able to return successfully. This time is measured in milliseconds..
           /// @remarks After you call the Write method, the underlying Socket returns the number of bytes actually sent to the host. The SendTimeout property determines the amount of time a TcpClient will wait before receiving the number of bytes returned. If the time-out expires before the Send method successfully completes, TcpClient will throw a SocketException. There is no time-out by default.
-          property<int32> SendTimeout {
+          _property<int32> SendTimeout {
             _get {return this->data->clientSocket.SendTimeout();},
             _set {this->data->clientSocket.SendTimeout(value);}
           };

@@ -135,93 +135,93 @@ namespace Switch {
 
       /// @brief Gets the date component of this instance.
       /// @param A new DateTime with the same date as this instance, and the time value set to 12:00:00 midnight (00:00:00).
-      property<DateTime, readonly> Date {
+      _property<DateTime, _readonly> Date {
         _get {return DateTime(Year(), Month(), Day(), 0 ,0, 0, 0, this->kind);}
       };
 
       /// @brief Gets the day of the month represented by this instance.
       /// @param The day component, expressed as a value between 1 and 31.
-      property<int32, readonly> Day {
+      _property<int32, _readonly> Day {
         _get {return this->GetDay();}
       };
 
       /// @brief Gets the day of the week represented by this instance.
       /// @param DayOfWeek A DayOfWeek enumerated constant that indicates the day of the week. This property value ranges from zero, indicating Sunday, to six, indicating Saturday.
-      property<System::DayOfWeek, readonly> DayOfWeek {
+      _property<System::DayOfWeek, _readonly> DayOfWeek {
         _get {return this->GetDayOfWeek();}
       };
 
       /// @brief Gets the day of the year represented by this instance.
       /// @param The day of the year, expressed as a value between 1 and 366.
-      property<int32, readonly> DayOfYear {
+      _property<int32, _readonly> DayOfYear {
         _get {return this->GetDayOfYear();}
       };
 
       /// @brief Gets the hour component of the date represented by this instance.
       /// @param The hour component, expressed as a value between 0 and 23.
-      property<int32, readonly> Hour {
+      _property<int32, _readonly> Hour {
         _get {return this->GetHour();}
       };
 
       /// @brief Gets a value that indicates whether the time represented by this instance is based on local time, Coordinated Universal Time (UTC), or neither.
       /// @return DateTimeKind One of the DateTimeKind values. The default is DateTimeKindUnspecified.
-      property<DateTimeKind, readonly> Kind {
+      _property<DateTimeKind, _readonly> Kind {
         _get {return this->GetKind();}
       };
 
       /// @brief Gets the millisecond component of the date represented by this instance.
       /// @return The millisecond component, expressed as a value between 0 and 999.
-      property<int32, readonly> Millisecond {
+      _property<int32, _readonly> Millisecond {
         _get {return this->GetMillisecond();}
       };
 
       /// @brief Gets the minute component of the date represented by this instance.
       /// @return The minute component, expressed as a value between 0 and 59.
-      property<int32, readonly> Minute {
+      _property<int32, _readonly> Minute {
         _get {return this->GetMinute();}
       };
 
       /// @brief Gets the month component of the date represented by this instance.
       /// @return The month component, expressed as a value between 1 and 12.
-      property<int32, readonly> Month {
+      _property<int32, _readonly> Month {
         _get {return this->GetMonth();}
       };
       
       /// @brief Gets a DateTime object that is set to the current date and time on this computer, expressed as the local time.
       /// @return DateTime A DateTime object that is set to the current date and time on this computer
-      static property<DateTime, readonly> Now;
+      static _property<DateTime, _readonly> Now;
 
       /// @brief Gets the second component of the date represented by this instance.
       /// @return The second component, expressed as a value between 0 and 59.
-      property<int32, readonly> Second {
+      _property<int32, _readonly> Second {
         _get {return this->GetSecond();}
       };
 
       /// @brief Gets the number of ticks component of the date represented by this instance.
       /// @return The number of ticks that represent the date and time of this instance. The value is between DateTime::MinValue and DateTime::MaxValue.
-      property<int64, readonly> Ticks {
+      _property<int64, _readonly> Ticks {
         _get {return this->GetTicks();}
       };
 
       /// @brief Gets the time of day for this instance.
       /// @return TimeSpan A TimeSpan that represents the fraction of the day that has elapsed since midnight.
       /// @remarks The return value is a DateTime whose Kind property returns DateTimeKindLocal.
-      property<TimeSpan, readonly> TimeOfDay {
+      _property<TimeSpan, _readonly> TimeOfDay {
         _get {return this->GetTimeOfDay();}
       };
 
       /// @brief Gets the current date.
       /// @return DateTime A DateTime set to today's date, with the time component set to 00:00:00.
       /// @remarks The return value is a DateTime whose Kind property returns DateTimeKindLocal.
-      static property<DateTime, readonly> Today;
+      static _property<DateTime, _readonly> Today;
 
       /// @brief Gets a DateTime object that is set to the current date and time on this computer, expressed as the universal time.
       /// @return DateTime A DateTime object that is set to the current date and time on this computer
-      static property<DateTime, readonly> UtcNow;
+      static _property<DateTime, _readonly> UtcNow;
 
       /// @brief Gets the year component of the date represented by this instance.
       /// @return The year component, expressed as a value between 1 and 9999.
-      property<int32, readonly> Year {
+      _property<int32, _readonly> Year {
         _get {return this->GetYear();}
       };
 

@@ -64,12 +64,12 @@ namespace Switch {
           refptr<WebRequestStreamData> data = ref_new<WebRequestStreamData>();
         };
         
-        property<int64> ContentLength {
+        _property<int64> ContentLength {
           _get {return this->GetContentLength();},
           _set {this->SetContentLength(value);}
         };
         
-        property<string, readonly> ContentType {
+        _property<string, _readonly> ContentType {
           _get {return this->GetContentType();}
         };
         

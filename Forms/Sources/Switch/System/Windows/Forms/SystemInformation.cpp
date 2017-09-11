@@ -6,239 +6,239 @@ using namespace System::Drawing;
 using namespace System::Windows::Forms;
 using namespace __OS;
 
-property<int32, readonly> SystemInformation::ActiveWindowTrackingDelay {
+_property<int32, _readonly> SystemInformation::ActiveWindowTrackingDelay {
   [] {return FormsApi::SystemInformation::GetActiveWindowTrackingDelay();}
 };
 
-property<System::Windows::Forms::ArrangeDirection, readonly> SystemInformation::ArrangeDirection{
+_property<System::Windows::Forms::ArrangeDirection, _readonly> SystemInformation::ArrangeDirection{
   [] {return FormsApi::SystemInformation::GetArrangeDirection(); }
 };
 
-property<System::Windows::Forms::ArrangeStartingPosition, readonly> SystemInformation::ArrangeStartingPosition{
+_property<System::Windows::Forms::ArrangeStartingPosition, _readonly> SystemInformation::ArrangeStartingPosition{
   [] {return FormsApi::SystemInformation::GetArrangeStartingPosition(); }
 };
 
-property<System::Windows::Forms::BootMode, readonly> SystemInformation::BootMode{
+_property<System::Windows::Forms::BootMode, _readonly> SystemInformation::BootMode{
   [] {return FormsApi::SystemInformation::GetBootMode(); }
 };
 
-property<System::Drawing::Size, readonly> SystemInformation::Border3DSize{
+_property<System::Drawing::Size, _readonly> SystemInformation::Border3DSize{
   [] {return FormsApi::SystemInformation::GetBorder3DSize(); }
 };
 
-property<int32, readonly> SystemInformation::BorderMultiplierFactor{
+_property<int32, _readonly> SystemInformation::BorderMultiplierFactor{
   [] {return FormsApi::SystemInformation::GetBorderMultiplierFactor(); }
 };
 
-property<System::Drawing::Size, readonly> SystemInformation::BorderSize{
+_property<System::Drawing::Size, _readonly> SystemInformation::BorderSize{
   [] {return FormsApi::SystemInformation::GetBorderSize(); }
 };
 
-property<System::Drawing::Size, readonly> SystemInformation::CaptionButtonSize{
+_property<System::Drawing::Size, _readonly> SystemInformation::CaptionButtonSize{
   [] {return FormsApi::SystemInformation::GetCaptionButtonSize(); }
 };
 
-property<int32, readonly> SystemInformation::CaptionHeight {
+_property<int32, _readonly> SystemInformation::CaptionHeight {
   [] {return FormsApi::SystemInformation::GetCaptionHeight();}
 };
 
-property<int32, readonly> SystemInformation::CaretBlinkTime{
+_property<int32, _readonly> SystemInformation::CaretBlinkTime{
   [] {return FormsApi::SystemInformation::GetCaretBlinkTime(); }
 };
 
-property<int32, readonly> SystemInformation::CaretWidth{
+_property<int32, _readonly> SystemInformation::CaretWidth{
   [] {return FormsApi::SystemInformation::GetCaretWidth(); }
 };
 
-property<string, readonly> SystemInformation::ComputerName{
+_property<string, _readonly> SystemInformation::ComputerName{
   [] {return Environment::MachineName(); }
 };
 
-property<System::Drawing::Size, readonly> SystemInformation::CursorSize{
+_property<System::Drawing::Size, _readonly> SystemInformation::CursorSize{
   [] {return FormsApi::SystemInformation::GetCursorSize(); }
 };
 
-property<bool, readonly> SystemInformation::DbcsEnabled{
+_property<bool, _readonly> SystemInformation::DbcsEnabled{
   [] {return FormsApi::SystemInformation::GetDbcsEnabled(); }
 };
 
-property<bool, readonly> SystemInformation::DebugOS{
+_property<bool, _readonly> SystemInformation::DebugOS{
   [] {return FormsApi::SystemInformation::GetDebugOS(); }
 };
 
-property<System::Drawing::Size, readonly> SystemInformation::DoubleClickSize{
+_property<System::Drawing::Size, _readonly> SystemInformation::DoubleClickSize{
   [] {return FormsApi::SystemInformation::GetDoubleClickSize(); }
 };
 
-property<int32, readonly> SystemInformation::DoubleClickTime{
+_property<int32, _readonly> SystemInformation::DoubleClickTime{
   [] {return FormsApi::SystemInformation::GetDoubleClickTime(); }
 };
 
-property<bool, readonly> SystemInformation::DragFullWindows{
+_property<bool, _readonly> SystemInformation::DragFullWindows{
   [] {return FormsApi::SystemInformation::GetDragFullWindows(); }
 };
 
-property<System::Drawing::Size, readonly> SystemInformation::DragSize{
+_property<System::Drawing::Size, _readonly> SystemInformation::DragSize{
   [] {return FormsApi::SystemInformation::GetDragSize(); }
 };
 
-property<System::Drawing::Size, readonly> SystemInformation::FixedFrameBorderSize{
+_property<System::Drawing::Size, _readonly> SystemInformation::FixedFrameBorderSize{
   [] {return FormsApi::SystemInformation::GetFixedFrameBorderSize(); }
 };
 
-property<int32, readonly> SystemInformation::FontSmoothingContrast{
+_property<int32, _readonly> SystemInformation::FontSmoothingContrast{
   [] {return FormsApi::SystemInformation::GetFontSmoothingContrast(); }
 };
 
-property<int32, readonly> SystemInformation::FontSmoothingType{
+_property<int32, _readonly> SystemInformation::FontSmoothingType{
   [] {return FormsApi::SystemInformation::GetFontSmoothingType(); }
 };
 
-property<System::Drawing::Size, readonly> SystemInformation::FrameBorderSize{
+_property<System::Drawing::Size, _readonly> SystemInformation::FrameBorderSize{
   [] {return FormsApi::SystemInformation::GetFrameBorderSize(); }
 };
 
-property<bool, readonly> SystemInformation::HighContrast{
+_property<bool, _readonly> SystemInformation::HighContrast{
   [] {return FormsApi::SystemInformation::GetHighContrast(); }
 };
 
-property<int32, readonly> SystemInformation::HorizontalFocusThickness{
+_property<int32, _readonly> SystemInformation::HorizontalFocusThickness{
   [] {return FormsApi::SystemInformation::GetHorizontalFocusThickness(); }
 };
 
-property<int32, readonly> SystemInformation::HorizontalResizeBorderThickness{
+_property<int32, _readonly> SystemInformation::HorizontalResizeBorderThickness{
   [] {return FormsApi::SystemInformation::GetHorizontalResizeBorderThickness(); }
 };
 
-property<int32, readonly> SystemInformation::HorizontalScrollBarArrowWidth{
+_property<int32, _readonly> SystemInformation::HorizontalScrollBarArrowWidth{
   [] {return FormsApi::SystemInformation::GetHorizontalScrollBarArrowWidth(); }
 };
 
-property<int32, readonly> SystemInformation::HorizontalScrollBarHeight{
+_property<int32, _readonly> SystemInformation::HorizontalScrollBarHeight{
   [] {return FormsApi::SystemInformation::GetHorizontalScrollBarHeight(); }
 };
 
-property<int32, readonly> SystemInformation::HorizontalScrollBarThumbWidth{
+_property<int32, _readonly> SystemInformation::HorizontalScrollBarThumbWidth{
   [] {return FormsApi::SystemInformation::GetHorizontalScrollBarThumbWidth(); }
 };
 
-property<int32, readonly> SystemInformation::IconHorizontalSpacing{
+_property<int32, _readonly> SystemInformation::IconHorizontalSpacing{
   [] {return FormsApi::SystemInformation::GetIconHorizontalSpacing(); }
 };
 
-property<System::Drawing::Size, readonly> SystemInformation::IconSize{
+_property<System::Drawing::Size, _readonly> SystemInformation::IconSize{
   [] {return FormsApi::SystemInformation::GetIconSize(); }
 };
 
-property<System::Drawing::Size, readonly> SystemInformation::IconSpacingSize{
+_property<System::Drawing::Size, _readonly> SystemInformation::IconSpacingSize{
   [] {return FormsApi::SystemInformation::GetIconSpacingSize(); }
 };
 
-property<int32, readonly> SystemInformation::IconVerticalSpacing{
+_property<int32, _readonly> SystemInformation::IconVerticalSpacing{
   [] {return FormsApi::SystemInformation::GetIconVerticalSpacing(); }
 };
 
-property<bool, readonly> SystemInformation::IsActiveWindowTrackingEnabled{
+_property<bool, _readonly> SystemInformation::IsActiveWindowTrackingEnabled{
   [] {return FormsApi::SystemInformation::GetIsActiveWindowTrackingEnabled(); }
 };
 
-property<bool, readonly> SystemInformation::IsComboBoxAnimationEnabled{
+_property<bool, _readonly> SystemInformation::IsComboBoxAnimationEnabled{
   [] {return FormsApi::SystemInformation::GetIsComboBoxAnimationEnabled(); }
 };
 
-property<bool, readonly> SystemInformation::IsDropShadowEnabled{
+_property<bool, _readonly> SystemInformation::IsDropShadowEnabled{
   [] {return FormsApi::SystemInformation::GetIsDropShadowEnabled(); }
 };
 
-property<bool, readonly> SystemInformation::IsFlatMenuEnabled{
+_property<bool, _readonly> SystemInformation::IsFlatMenuEnabled{
   [] {return FormsApi::SystemInformation::GetIsFlatMenuEnabled(); }
 };
 
-property<bool, readonly> SystemInformation::IsFontSmoothingEnabled{
+_property<bool, _readonly> SystemInformation::IsFontSmoothingEnabled{
   [] {return FormsApi::SystemInformation::GetIsFontSmoothingEnabled(); }
 };
 
-property<bool, readonly> SystemInformation::IsHotTrackingEnabled{
+_property<bool, _readonly> SystemInformation::IsHotTrackingEnabled{
   [] {return FormsApi::SystemInformation::GetIsHotTrackingEnabled(); }
 };
 
-property<bool, readonly> SystemInformation::IsIconTitleWrappingEnabled{
+_property<bool, _readonly> SystemInformation::IsIconTitleWrappingEnabled{
   [] {return FormsApi::SystemInformation::GetIsIconTitleWrappingEnabled(); }
 };
 
-property<bool, readonly> SystemInformation::IsKeyboardPreferred{
+_property<bool, _readonly> SystemInformation::IsKeyboardPreferred{
   [] {return FormsApi::SystemInformation::GetIsKeyboardPreferred(); }
 };
 
-property<bool, readonly> SystemInformation::IsListBoxSmoothScrollingEnabled{
+_property<bool, _readonly> SystemInformation::IsListBoxSmoothScrollingEnabled{
   [] {return FormsApi::SystemInformation::GetIsListBoxSmoothScrollingEnabled(); }
 };
 
-property<bool, readonly> SystemInformation::IsMenuAnimationEnabled{
+_property<bool, _readonly> SystemInformation::IsMenuAnimationEnabled{
   [] {return FormsApi::SystemInformation::GetIsMenuAnimationEnabled(); }
 };
 
-property<bool, readonly> SystemInformation::IsMenuFadeEnabled{
+_property<bool, _readonly> SystemInformation::IsMenuFadeEnabled{
   [] {return FormsApi::SystemInformation::GetIsMenuFadeEnabled(); }
 };
 
-property<bool, readonly> SystemInformation::IsMinimizeRestoreAnimationEnabled{
+_property<bool, _readonly> SystemInformation::IsMinimizeRestoreAnimationEnabled{
   [] {return FormsApi::SystemInformation::GetIsMinimizeRestoreAnimationEnabled(); }
 };
 
-property<bool, readonly> SystemInformation::IsSelectionFadeEnabled{
+_property<bool, _readonly> SystemInformation::IsSelectionFadeEnabled{
   [] {return FormsApi::SystemInformation::GetIsSelectionFadeEnabled(); }
 };
 
-property<bool, readonly> SystemInformation::IsSnapToDefaultEnabled{
+_property<bool, _readonly> SystemInformation::IsSnapToDefaultEnabled{
   [] {return FormsApi::SystemInformation::GetIsSnapToDefaultEnabled(); }
 };
 
-property<bool, readonly> SystemInformation::IsTitleBarGradientEnabled{
+_property<bool, _readonly> SystemInformation::IsTitleBarGradientEnabled{
   [] {return FormsApi::SystemInformation::GetIsTitleBarGradientEnabled(); }
 };
 
-property<bool, readonly> SystemInformation::IsToolTipAnimationEnabled{
+_property<bool, _readonly> SystemInformation::IsToolTipAnimationEnabled{
   [] {return FormsApi::SystemInformation::GetIsToolTipAnimationEnabled(); }
 };
 
-property<int32, readonly> SystemInformation::KanjiWindowHeight{
+_property<int32, _readonly> SystemInformation::KanjiWindowHeight{
   [] {return FormsApi::SystemInformation::GetKanjiWindowHeight(); }
 };
 
-property<int32, readonly> SystemInformation::KeyboardDelay{
+_property<int32, _readonly> SystemInformation::KeyboardDelay{
   [] {return FormsApi::SystemInformation::GetKeyboardDelay(); }
 };
 
-property<int32, readonly> SystemInformation::KeyboardSpeed{
+_property<int32, _readonly> SystemInformation::KeyboardSpeed{
   [] {return FormsApi::SystemInformation::GetKeyboardSpeed(); }
 };
 
-property<System::Drawing::Size, readonly> SystemInformation::MaxWindowTrackSize{
+_property<System::Drawing::Size, _readonly> SystemInformation::MaxWindowTrackSize{
   [] {return FormsApi::SystemInformation::GetMaxWindowTrackSize(); }
 };
 
-property<bool, readonly> SystemInformation::MenuAccessKeysUnderlined{
+_property<bool, _readonly> SystemInformation::MenuAccessKeysUnderlined{
   [] {return FormsApi::SystemInformation::GetMenuAccessKeysUnderlined(); }
 };
 
-property<System::Drawing::Size, readonly> SystemInformation::MenuBarButtonSize{
+_property<System::Drawing::Size, _readonly> SystemInformation::MenuBarButtonSize{
   [] {return FormsApi::SystemInformation::GetMenuBarButtonSize(); }
 };
 
-property<System::Drawing::Size, readonly> SystemInformation::MenuButtonSize{
+_property<System::Drawing::Size, _readonly> SystemInformation::MenuButtonSize{
   [] {return FormsApi::SystemInformation::GetMenuButtonSize(); }
 };
 
-property<System::Drawing::Size, readonly> SystemInformation::MenuCheckSize{
+_property<System::Drawing::Size, _readonly> SystemInformation::MenuCheckSize{
   [] {return FormsApi::SystemInformation::GetMenuCheckSize(); }
 };
 
-property<System::Drawing::Font, readonly> SystemInformation::MenuFont{
+_property<System::Drawing::Font, _readonly> SystemInformation::MenuFont{
   [] {return FormsApi::SystemInformation::GetMenuFont(); }
 };
 
-property<int32, readonly> SystemInformation::MenuHeight{
+_property<int32, _readonly> SystemInformation::MenuHeight{
   [] {return FormsApi::SystemInformation::GetMenuHeight(); }
 };
 

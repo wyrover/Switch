@@ -66,50 +66,50 @@ namespace Switch {
           /// @brief Returns the ID of the currently executing Task.
           /// @return An integer that was assigned by the system to the currently-executing task.
           /// @remarks CurrentId is a static property that is used to get the identifier of the currently executing task from the code that the task is executing. It differs from the Id property, which returns the identifier of a particular Task instance. If you attempt to retrieve the CurrentId value from outside the code that a task is executing, the property returns null.
-          static property<Nullable<int32>, readonly> CurrentId;
+          static _property<Nullable<int32>, _readonly> CurrentId;
 
           /// @brief Provides access to factory methods for creating and configuring Task and Task<TResult> instances.
           /// @return A factory object that can create a variety of Task and Task<TResult> objects.
-          static property<TaskFactory, readonly> Factory;
+          static _property<TaskFactory, _readonly> Factory;
           
           /// @brief Gets an ID for this Task instance.
           /// @brief The identifier that is assigned by the system to this Task instance.
           /// @remarks Task IDs are assigned on-demand and do not necessarily represent the order in which task instances are created. Note that although collisions are very rare, task identifiers are not guaranteed to be unique.
           /// @remarks To get the task ID of the currently executing task from within code that that task is executing, use the CurrentId property.
-          property<int32, readonly> Id {
+          _property<int32, _readonly> Id {
             _get {return this->data->id;}
           };
           
           /// @brief Gets whether this Task instance has completed execution due to being canceled.
           /// @return true if the task has completed due to being canceled; otherwise false.
-          property<bool, readonly> IsCanceled {
+          _property<bool, _readonly> IsCanceled {
             _get {return this->data->status == TaskStatus::Canceled;}
           };
           
           /// @brief Gets whether this Task has completed.
           /// @return rue if the task has completed; otherwise false.
           /// @remarks IsCompleted will return true when the task is in one of the three final states: RanToCompletion, Faulted, or Canceled.
-          property<bool, readonly> IsCompleted {
+          _property<bool, _readonly> IsCompleted {
             _get {return this->data->status == TaskStatus::RanToCompletion || this->data->status == TaskStatus::Faulted || this->data->status == TaskStatus::Canceled;}
           };
           
           /// @brief Gets whether the Task completed due to an unhandled exception.
           /// @return true if the task has thrown an unhandled exception; otherwise false.
           /// @remarks If IsFaulted is true, the task's Status is equal to Faulted, and its Exception property will be non-null.
-          property<bool, readonly> IsFaulted {
+          _property<bool, _readonly> IsFaulted {
             _get {return this->data->status == TaskStatus::Faulted;}
           };
           
           /// @brief Gets the TaskStatus of this task.
           /// @return The current TaskStatus of this task instance.
-          property<TaskStatus, readonly> Status {
+          _property<TaskStatus, _readonly> Status {
             _get {return this->data->status;}
           };
           
           /// @brief Gets the result value of this Task<TResult>.
           /// @return The result value of this Task<TResult>, which is the same type as the task's type parameter.
           /// @remarks Accessing the property's get accessor blocks the calling thread until the asynchronous operation is complete; it is equivalent to calling the Wait method.
-          property<TResult, readonly> Result {
+          _property<TResult, _readonly> Result {
             _get {
               this->Wait();
               return this->data->result;

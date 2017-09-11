@@ -74,7 +74,7 @@ namespace Switch {
       
       /// @brief Get access to raw data of the Array.
       /// @return A pointer to raw data of the array.
-      property<const T*, readonly> Data {
+      _property<const T*, _readonly> Data {
         _get {return this->array.data();}
       };
       
@@ -84,14 +84,14 @@ namespace Switch {
       /// @par Examples
       /// The following code example demonstrates methods to get the length of an array.
       /// @include ArrayGetLength.cpp
-      property<int32, readonly> Length {
+      _property<int32, _readonly> Length {
         _get {return (int32)this->array.size();}
       };
       
       /// @brief Gets a 64-bit integer that represents the total number of elements in all the dimensions of the Array.
       /// @return int64 A 64-bit integer that represents the total number of elements in all the dimensions of the Array; zero if there are no elements in the array.
       /// @remarks Retrieving the value of this property is an O(1) operation.
-      property<int64, readonly> LongLength {
+      _property<int64, _readonly> LongLength {
         _get {return (int64)this->array.size();}
       };
       
@@ -100,7 +100,7 @@ namespace Switch {
       /// @par Examples
       /// The following code example demonstrates methods to get the rank of an array.
       /// @include ArrayGetLength.cpp
-      property<int32, readonly> Rank {
+      _property<int32, _readonly> Rank {
         _get {return this->GetRank();}
       };
       
@@ -451,7 +451,7 @@ namespace Switch {
       
       /// @brief Get access to raw data of the Array.
       /// @return A pointer to raw data of the array.
-      property<const T*, readonly> Data {
+      _property<const T*, _readonly> Data {
         _get{return this->GenericArrayObject<T, TAllocator>::Data();}
       };
       
@@ -461,14 +461,14 @@ namespace Switch {
       /// @par Examples
       /// The following code example demonstrates methods to get the length of an array.
       /// @include ArrayGetLength.cpp
-      property<int32, readonly> Length {
+      _property<int32, _readonly> Length {
         _get {return this->GenericArrayObject<T, TAllocator>::Length();}
       };
       
       /// @brief Gets a 64-bit integer that represents the total number of elements in all the dimensions of the Array.
       /// @return int64 A 64-bit integer that represents the total number of elements in all the dimensions of the Array; zero if there are no elements in the array.
       /// @remarks Retrieving the value of this property is an O(1) operation.
-      property<int64, readonly> LongLength {
+      _property<int64, _readonly> LongLength {
         _get {return this->GenericArrayObject<T, TAllocator>::LongLength();}
       };
       
@@ -477,7 +477,7 @@ namespace Switch {
       /// @par Examples
       /// The following code example demonstrates methods to get the rank of an array.
       /// @include ArrayGetLength.cpp
-      property<int32, readonly> Rank {
+      _property<int32, _readonly> Rank {
         _get {return this->GenericArrayObject<T, TAllocator>::Rank();}
       };
       

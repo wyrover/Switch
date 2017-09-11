@@ -16,11 +16,11 @@ namespace Switch {
       public:
         virtual ~HttpWebResponse();
 
-        property<System::Net::HttpStatusCode, readonly> StatusCode {
+        _property<System::Net::HttpStatusCode, _readonly> StatusCode {
           _get {return this->GetStatusCode();}
         };
         
-        property<string, readonly> StatusDescription {
+        _property<string, _readonly> StatusDescription {
           _get {return this->GetStatusDescription();}
         };
         

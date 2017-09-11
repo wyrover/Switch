@@ -28,19 +28,19 @@ namespace Switch {
 
           /// @brief Gets the number of elements contained in the ICollection.
           /// @return Int32 The number of elements contained in the ICollection.
-          property<int32, readonly> Count {
+          _property<int32, _readonly> Count {
             _get {return this->GetCount();}
           };
           
           /// @brief Gets a value indicating whether the ICollection is read-only.
           /// @return Boolean true if the ICollection is read-only; otherwise; otherwise, false.
-          property<bool, readonly> IsReadOnly {
+          _property<bool, _readonly> IsReadOnly {
             _get {return this->GetIsReadOnly();}
           };
           
           /// @brief Gets a value indicating whether access to the ICollection is synchronized (thread safe).
           /// @return Boolean true if access to the ICollection is synchronized (thread safe); otherwise, false.
-          property<bool, readonly> IsSynchronized {
+          _property<bool, _readonly> IsSynchronized {
             _get {return this->GetIsSynchronized();}
           };
 
@@ -54,7 +54,7 @@ namespace Switch {
           ///   // Some operation on the collection, which is now thread safe.
           /// }
           /// @endcode
-          property<const Object&, readonly> SyncRoot {
+          _property<const Object&, _readonly> SyncRoot {
             _get->const object& {return this->GetSyncRoot();}
           };
           

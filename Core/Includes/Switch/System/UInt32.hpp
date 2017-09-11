@@ -18,10 +18,10 @@ namespace Switch {
     struct _export UInt32 final : public ValueType, public IComparable, public IConvertible, public IFormattable {
     public:
       /// @brief Represents the largest possible value of an UInt32 4294967295 (0xFFFFFFFF). This field is constant.
-      static property<uint32, readonly> MaxValue;
+      static _property<uint32, _readonly> MaxValue;
 
       /// @brief Represents the smallest possible value of UInt32 0 (0x00000000). This field is constant.
-      static property<uint32, readonly> MinValue;
+      static _property<uint32, _readonly> MinValue;
 
       /// @brief Create a new instance of struct UInt32
       /// @remarks UInt32 is initialized with default value 0.

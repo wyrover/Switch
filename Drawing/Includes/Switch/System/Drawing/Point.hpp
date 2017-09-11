@@ -21,7 +21,7 @@ namespace Switch {
       class _export Point : public object {
       public:
         /// @brief Gets a Point class that has a X and Y value of 0. This field is constant.
-        static property<Point, readonly> Empty;
+        static _property<Point, _readonly> Empty;
 
         /// @brief Initializes a new instance of the Point class that has a X and Y value of 0.
         Point() {}
@@ -46,7 +46,7 @@ namespace Switch {
         /// @brief Gets or sets the X component of this Point Class.
         /// @return int32 The X component of this Point class, typically measured in pixels.
         /// @remarks The unit for the X and Y of the Point class depend on the PageUnit and PageScale settings for the Graphics object that is used to draw.
-        property<int32> X {
+        _property<int32> X {
           _get {return this->x;},
           _set {this->x = value;}
         };
@@ -54,7 +54,7 @@ namespace Switch {
         /// @brief Gets or sets the Y component of this Point class.
         /// @return int32 The Y component of this Point class, typically measured in pixels.
         /// @remarks The unit for the X and Y of the Point class depend on the PageUnit and PageScale settings for the Graphics object that is used to draw.
-        property<int32> Y {
+        _property<int32> Y {
           _get {return this->y;},
           _set {this->y = value;}
         };

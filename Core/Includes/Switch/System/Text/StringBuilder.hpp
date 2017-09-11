@@ -181,7 +181,7 @@ namespace Switch {
         /// @par Examples
         /// The following example demonstrates the Capacity property.
         /// @include StringBuilder.Capacity.cpp
-        property<int32> Capacity {
+        _property<int32> Capacity {
           _get {return static_cast<int32>(this->string.capacity());},
           _set {
             if (value < static_cast<int32>(this->string.size()) || value > this->maxCapacity)
@@ -200,7 +200,7 @@ namespace Switch {
         /// @par Examples
         /// The following example demonstrates the Legnth property.
         /// @include StringBuilder.Capacity.cpp
-        property<int32> Length {
+        _property<int32> Length {
           _get {return static_cast<int32>(this->string.size());},
           _set {
             if (value < 0 || value >= MaxCapacity())
@@ -216,7 +216,7 @@ namespace Switch {
         /// @return The maximum number of characters this instance can hold.
         /// @remarks The maximum capacity for this implementation is Int32.MaxValue. However, this value is implementation-specific and might be different in other or later implementations. You can explicitly set the maximum capacity of a StringBuilder object by calling the StringBuilder(Int32, Int32) constructor.
         /// @remarks In the Switch when you instantiate the StringBuilder object by calling the StringBuilder(Int32, Int32) constructor, both the length and the capacity of the StringBuilder instance can grow beyond the value of its MaxCapacity property. This can occur particularly when you call the Append and AppendFormat methods to append small strings.
-        property<int32, readonly> MaxCapacity {
+        _property<int32, _readonly> MaxCapacity {
           _get {return this->maxCapacity;}
         };
         
@@ -591,7 +591,7 @@ namespace Switch {
         }
 
         template<typename T, typename Attribute>
-        StringBuilder& Append(const property<T, Attribute>& value) {return this->Append(value());}        
+        StringBuilder& Append(const _property<T, Attribute>& value) {return this->Append(value());}        
         /// @endcond
         
         /// @brief Appends the string representation of a specified 16-bit unsigned integer to this instance.

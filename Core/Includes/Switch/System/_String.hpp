@@ -153,14 +153,14 @@ namespace Switch {
 
       /// @brief Return the length of String
       /// @return int32 Length of String
-      property<int32, readonly> Length {
+      _property<int32, _readonly> Length {
         _get {return this->GetLength();}
       };
       
       /// @brief Get access to raw data of the String.
       /// @return A pointer to raw data of the String.
       /// @remarks If the String contains unicode characters, this function will return raw unicode encoding data which can be hazardous, therefore prefer usage of ToCCharArray instead.
-      property<const char*, readonly> Data {
+      _property<const char*, _readonly> Data {
        _get->const char* {return this->c_str();}
       };
       
@@ -1087,10 +1087,10 @@ namespace Switch {
     String operator +(const String& str, ullong value);
 
     template<typename T, typename Attribute>
-    String operator +(const char str[], const property<T, Attribute>& value) { return String(str) + value(); }
+    String operator +(const char str[], const _property<T, Attribute>& value) { return String(str) + value(); }
 
     template<typename T, typename Attribute>
-    String operator +(const String& str, const property<T, Attribute>& value) { return str + value(); }
+    String operator +(const String& str, const _property<T, Attribute>& value) { return str + value(); }
 
     /// @endcond
   }

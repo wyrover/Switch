@@ -57,11 +57,11 @@ namespace DesignPatterns {
     // The 'ConcreteMediator' class
     class ConcreteMediator : public Mediator {
     public:
-      property<ConcreteColleague1, writeonly> Colleague1 {
+      _property<ConcreteColleague1, _writeonly> Colleague1 {
         _set { colleague1 = value; }
       };
       
-      property<ConcreteColleague2, writeonly> Colleague2 {
+      _property<ConcreteColleague2, _writeonly> Colleague2 {
         _set { colleague2 = value; }
       };
       

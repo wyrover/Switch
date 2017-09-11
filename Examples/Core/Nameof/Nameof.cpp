@@ -9,7 +9,7 @@ namespace Examples {
     
     class C {
     public:
-      property<int> Value {
+      _property<int> Value {
         _get {return this->value;},
         _set {this->value = value;}
       };
@@ -48,7 +48,7 @@ _startup (Examples::Program)
 // This code produces the following output if 3 is entered on command line:
 //
 // c.Value = 42
-// c.Value = property<int, readwrite>
+// c.Value = _property<int, _readwrite>
 // C
 // C::Method1
 // C::Method2

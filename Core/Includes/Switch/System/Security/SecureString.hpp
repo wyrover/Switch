@@ -39,7 +39,7 @@ namespace Switch {
         
         /// @brief Gets the number of characters in the current secure string.
         /// @return int32 The number of System.Char objects in this secure string.
-        property<int32, readonly> Length {
+        _property<int32, _readonly> Length {
           _get {return this->data.Count();}
         };
         

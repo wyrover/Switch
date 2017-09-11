@@ -28,7 +28,7 @@ namespace Switch {
           Button(const Button& button) : ButtonBase(button), isDefault(button.isDefault) {};
           /// @endcond
 
-          property<bool> IsDefault {
+          _property<bool> IsDefault {
             _get {return this->isDefault;},
             _set {this->SetIsDefault(value);}
           };

@@ -95,26 +95,26 @@ namespace Switch {
         /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
         static refptr<WebRequest> Create(const Uri& requestUriString);
 
-        property<int64> ContentLength {
+        _property<int64> ContentLength {
           _get {return this->GetContentLength();},
           _set {this->SetContentLength(value);}
         };
         
-        property<string> Method {
+        _property<string> Method {
           _get {return this->GetMethod();},
           _set {this->SetMethod(value);}
         };
         
-        property<const System::Net::NetworkCredential&> Credentials {
+        _property<const System::Net::NetworkCredential&> Credentials {
           _get->System::Net::NetworkCredential& {return this->GetCredential();},
           _set {this->SetCredential(value);}
         };
         
-        property<System::Uri, readonly> RequestUri {
+        _property<System::Uri, _readonly> RequestUri {
           _get {return this->GetRequestUri();}
         };
 
-        property<int32> Timeout {
+        _property<int32> Timeout {
           _get {return this->timeout;},
           _set {this->timeout = value;}
         };

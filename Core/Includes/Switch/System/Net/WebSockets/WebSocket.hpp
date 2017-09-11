@@ -26,26 +26,26 @@ namespace Switch {
         public:
           /// @brief Indicates the reason why the remote endpoint initiated the close handshake.
           /// @property value Returns WebSocketCloseStatus.
-          property<WebSocketCloseStatus, readonly> CloseStatus {
+          _property<WebSocketCloseStatus, _readonly> CloseStatus {
             _get {return this->GetCloseStatus();}
           };
           
           /// @brief Allows the remote endpoint to describe the reason why the connection was closed.
-          property<string, readonly> CloseStatusDescription {
+          _property<string, _readonly> CloseStatusDescription {
             _get {return this->GetCloseStatusDescription();}
           };
           
           /// @brief Gets the default WebSocket protocol keep-alive interval in milliseconds.
           /// @property The default WebSocket protocol keep-alive interval in milliseconds. The typical value for this interval is 30 seconds.
-          static property<TimeSpan, readonly> DefaultKeepAliveInterval;
+          static _property<TimeSpan, _readonly> DefaultKeepAliveInterval;
           
           /// @brief Allows the remote endpoint to describe the reason why the connection was closed.
-          property<WebSocketState, readonly> State {
+          _property<WebSocketState, _readonly> State {
             _get {return this->GetState();}
           };
           
           /// @brief The subprotocol that was negotiated during the opening handshake.
-          property<string, readonly> SubProtocol {
+          _property<string, _readonly> SubProtocol {
             _get {return this->GetSubProtocol();}
           };
           

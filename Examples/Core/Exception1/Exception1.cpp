@@ -8,7 +8,7 @@ namespace Examples {
     string name;
     
   public:
-    property<string> Name {
+    _property<string> Name {
       _get { return this->name; },
       _set { this->name = value; }
     };

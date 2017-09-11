@@ -29,17 +29,17 @@ namespace Switch {
       }
       /// @endcond
       
-      property<bool, readonly> IsWindowsFamilly {
+      _property<bool, _readonly> IsWindowsFamilly {
         _get {return this->platform == PlatformID::Win32NT || this->platform == PlatformID::Win32S || this->platform == PlatformID::Win32Windows || this->platform == PlatformID::WinCE || this->platform == PlatformID::Xbox;}
       };
       
-      property<bool, readonly> IsUnixFamilly {
+      _property<bool, _readonly> IsUnixFamilly {
         _get {return this->platform == PlatformID::Unix || this->platform == PlatformID::MacOSX || this->platform == PlatformID::IOs || this->platform == PlatformID::Android;}
       };
       
       /// @brief Gets a System::PlatformID enumeration value that identifies the operating system platform.
       /// @return PlatformID One of the PlatformID values.
-      property<PlatformID, readonly> Platform {
+      _property<PlatformID, _readonly> Platform {
         _get {return this->platform;}
       };
       
@@ -47,7 +47,7 @@ namespace Switch {
       /// @return string The service pack version, if service packs are supported and at least one is installed; otherwise, an empty string ("").
       /// @remarks A service pack is used to distribute software updates for the operating system on which it is installed. However, not every operating system uses service packs.
       /// @remarks The service pack version, if available, is already correctly formatted for display.
-      property<String, readonly> ServicePack {
+      _property<String, _readonly> ServicePack {
         _get {
           //if ((this->platform == PlatformID::Win32S || this->platform == PlatformID::Win32Windows || this->platform == PlatformID::Win32NT || this->platform == PlatformID::WinCE || this->platform == PlatformID::Xbox) && this->version.Build() % 10)
           //  return String::Format("Service Pack {0}", this->version.Minor() % 10);
@@ -58,14 +58,14 @@ namespace Switch {
       /// @brief Gets a System::Version object that identifies the operating system.
       /// @return Version A Version object that describes the major version, minor version, build, and revision numbers for the operating system.
       /// @remarks For Window system only: See http://msdn.microsoft.com/library/windows/desktop/ms724832.aspx on the Windows Dev Center for a list of Windows operating system versions and their corresponding version numbers.
-      property<const System::Version&, readonly> Version {
+      _property<const System::Version&, _readonly> Version {
         _get->const System::Version& {return this->version;}
       };
       
       /// @brief Gets the concatenated string representation of the platform identifier, version, and service pack that are currently installed on the operating system.
       /// @return The string representation of the values returned by the Platform, Version, and ServicePack properties.
       /// @remarks By default, the value returned by VersionString is the same as the value returned by the ToString method. However, an implementation of the .NET Framework for a different platform might return a more appropriate string for that platform.
-      property<String, readonly> VersionString {
+      _property<String, _readonly> VersionString {
         _get {
           String operatingSystem;
           

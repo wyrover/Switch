@@ -25,7 +25,7 @@ namespace SwitchUnitTests {
   protected:
     void CreateReadWritePropertyAndGetIt() {
       int32 v = 42;
-      property<int32> Value {
+      _property<int32> Value {
         _get {return v;},
         _set {v = value;}
       };
@@ -38,7 +38,7 @@ namespace SwitchUnitTests {
     
     void CreateReadWritePropertyAndSetItAndGetIt() {
       int32 v = 42;
-      property<int32> Value {
+      _property<int32> Value {
         _get {return v;},
         _set {v = value;}
       };
@@ -58,7 +58,7 @@ namespace SwitchUnitTests {
     
     void CreateReadOnlyPropertyAndGetIt() {
       int32 v = 42;
-      property<int32, readonly> Value {
+      _property<int32, _readonly> Value {
         _get {return v;}
       };
       
@@ -70,7 +70,7 @@ namespace SwitchUnitTests {
     
     void CreateWriteOnlyPropertyAndSetIt() {
       int32 v = 42;
-      property<int32, writeonly> Value {
+      _property<int32, _writeonly> Value {
         _set {v = value;}
       };
       
@@ -91,7 +91,7 @@ namespace SwitchUnitTests {
       PropertyReadOnly() {}
       PropertyReadOnly(const PropertyReadOnly& propertyReadOnly) : name(propertyReadOnly.name) {}
       
-      property<string, readonly> Name {
+      _property<string, _readonly> Name {
         _get {return this->name;}
       };
       
@@ -119,7 +119,7 @@ namespace SwitchUnitTests {
       PropertyWriteOnly() {}
       PropertyWriteOnly(const PropertyWriteOnly& propertyWriteOnly) : name(propertyWriteOnly.name) {}
       
-      property<string, writeonly> Name {
+      _property<string, _writeonly> Name {
         _set {this->name = value;}
       };
       
@@ -148,7 +148,7 @@ namespace SwitchUnitTests {
       PropertyReadWrite() {}
       PropertyReadWrite(const PropertyReadWrite& propertyReadWrite) : name(propertyReadWrite.name) {}
       
-      property<string> Name {
+      _property<string> Name {
         _get {return this->name;},
         _set {this->name = value;}
       };

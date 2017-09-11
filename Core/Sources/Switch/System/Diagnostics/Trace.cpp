@@ -13,12 +13,12 @@ namespace {
 TraceListenerCollection Trace::listeners  {DefaultTraceListener()};
 object Trace::lock;
 
-property<bool> Trace::AutoFlush {
+_property<bool> Trace::AutoFlush {
   [] {return autoFlush;},
   [](bool value) {autoFlush = value;}
 };
 
-property<int32> Trace::IndentLevel {
+_property<int32> Trace::IndentLevel {
   [] {return indentLevel;},
   [](int32 value) {
     indentLevel = value;
@@ -27,7 +27,7 @@ property<int32> Trace::IndentLevel {
   }
 };
 
-property<int32> Trace::IndentSize {
+_property<int32> Trace::IndentSize {
   [] {return indentSize;},
   [](int32 value) {
     indentSize = value;
@@ -36,11 +36,11 @@ property<int32> Trace::IndentSize {
   }
 };
 
-property<TraceListenerCollection&, readonly> Trace::Listeners {
+_property<TraceListenerCollection&, _readonly> Trace::Listeners {
   []()->TraceListenerCollection& {return __get_listeners__();}
 };
 
-property<bool> Trace::UseGlobalLock {
+_property<bool> Trace::UseGlobalLock {
   [] {return useGlobalLock;},
   [](bool value) {useGlobalLock = value;}
 };

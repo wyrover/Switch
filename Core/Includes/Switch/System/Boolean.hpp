@@ -62,16 +62,16 @@ namespace Switch {
       /// @endcond
       
       /// @brief Represent false bool value
-      static property<bool, readonly> False;
+      static _property<bool, _readonly> False;
       
       /// @brief Represent true bool value
-      static property<bool, readonly> True;
+      static _property<bool, _readonly> True;
       
       /// @brief Returns a string that represents true value.
-      static property<String, readonly> FalseString;
+      static _property<String, _readonly> FalseString;
       
       /// @brief Returns a string that represents false value.
-      static property<String, readonly> TrueString;
+      static _property<String, _readonly> TrueString;
       
       /// @brief Compares this instance to a specified Boolean Object and returns an indication of their relative values.
       /// @param value An Boolean Object to compare with this instance.

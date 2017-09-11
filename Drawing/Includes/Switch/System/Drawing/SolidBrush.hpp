@@ -17,7 +17,7 @@ namespace Switch {
         SolidBrush(const SolidBrush& brush) : SolidBrush(brush.color) {}
         SolidBrush& operator=(const SolidBrush& brush);
 
-        property<System::Drawing::Color, readonly> Color {
+        _property<System::Drawing::Color, _readonly> Color {
           _get {return this->color;}
         };
 

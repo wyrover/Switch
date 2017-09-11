@@ -8,22 +8,22 @@ struct __opaque_snd_access__ {
   }
 };
 
-property<SystemSound, readonly> SystemSounds::Asterisk {
+_property<SystemSound, _readonly> SystemSounds::Asterisk {
   [] {return __opaque_snd_access__()(System::Windows::Forms::MessageBoxIcon::Asterisk);}
 };
 
-property<SystemSound, readonly> SystemSounds::Beep {
+_property<SystemSound, _readonly> SystemSounds::Beep {
   [] {return __opaque_snd_access__()((System::Windows::Forms::MessageBoxIcon)0);}
 };
 
-property<SystemSound, readonly> SystemSounds::Exclamation {
+_property<SystemSound, _readonly> SystemSounds::Exclamation {
   [] {return __opaque_snd_access__()(System::Windows::Forms::MessageBoxIcon::Exclamation);}
 };
 
-property<SystemSound, readonly> SystemSounds::Hand {
+_property<SystemSound, _readonly> SystemSounds::Hand {
   [] {return __opaque_snd_access__()(System::Windows::Forms::MessageBoxIcon::Hand);}
 };
 
-property<SystemSound, readonly> SystemSounds::Question {
+_property<SystemSound, _readonly> SystemSounds::Question {
   [] {return __opaque_snd_access__()(System::Windows::Forms::MessageBoxIcon::Question);}
 };

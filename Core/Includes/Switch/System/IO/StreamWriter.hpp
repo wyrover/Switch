@@ -15,7 +15,7 @@ namespace Switch {
       /// @brief Implements a System::IO::TextWriter for writing characters to a stream in a particular encoding.
       class _export StreamWriter : public TextWriter {
       public:
-        static property<StreamWriter, readonly> Null;
+        static _property<StreamWriter, _readonly> Null;
         
         /// @brief Initializes a new instance of the System::IO::StreamWriter class for the specified file on the specified stream pointer.
         /// @param stream The stream pointer to write to.
@@ -84,14 +84,14 @@ namespace Switch {
         /// @brief Gets or Sets a value indicating whether the System::IO::StreamWriter will flush its buffer to the underlying stream after every call to System::IO::StreamWriter.Write(System::Char).
         /// @param autoFlush true to force System::IO::StreamWriter to flush its buffer; otherwise, false.
         /// @return bool true to force System::IO::StreamWriter to flush its buffer; otherwise, false.
-        property<bool> AutoFlush {
+        _property<bool> AutoFlush {
           _get {return this->GetAutoFlush();},
           _set {this->SetAutoFlush(value);}
         };
 
         /// @brief Gets the underlying stream that interfaces with a backing store.
         /// @return refptr<Stream> The stream this StreamWriter is writing to.
-        property<Stream&, readonly> BaseStream {
+        _property<Stream&, _readonly> BaseStream {
           _get->Stream& {return this->GetBaseStream();}
         };
 

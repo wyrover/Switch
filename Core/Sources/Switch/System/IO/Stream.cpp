@@ -6,7 +6,7 @@ using namespace System;
 using namespace System::IO;
 using namespace System::Threading;
 
-property<NullStream&, readonly> Stream::Null {
+_property<NullStream&, _readonly> Stream::Null {
   []()->NullStream& {
     return Stream::__null__();
   }

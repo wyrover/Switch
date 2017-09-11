@@ -28,15 +28,15 @@ namespace Switch {
 
         /// @brief Returns an array that contains all the FontFamily objects associated with the current graphics context.
         /// @return Array<FontFamily> An array of FontFamily objects associated with the current graphics context.
-        static property<Array<FontFamily>, readonly> Families;
+        static _property<Array<FontFamily>, _readonly> Families;
 
-        static property<FontFamily, readonly> GenericMonospace;
+        static _property<FontFamily, _readonly> GenericMonospace;
 
-        static property<FontFamily, readonly> GenericSansSerif;
+        static _property<FontFamily, _readonly> GenericSansSerif;
 
-        static property<FontFamily, readonly> GenericSerif;
+        static _property<FontFamily, _readonly> GenericSerif;
 
-        property<string, readonly> Name{
+        _property<string, _readonly> Name{
           _get {return this->GetName();}
         };
 

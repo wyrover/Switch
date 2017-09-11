@@ -43,7 +43,7 @@ namespace Switch {
       /// @note The BaseUtcOffset property differs from the GetUtcOffset method in the following ways:
       /// * The BaseUtcOffset property returns the difference between UTC and the time zone's standard time; the GetUtcOffset method returns the difference between UTC and the time zone's time at a particular point in time.
       /// * The GetUtcOffset method reflects the application of any adjustment rules to the time zone; the BaseUtcOffset property does not.
-      property<TimeSpan, readonly> BaseUtcOffset {
+      _property<TimeSpan, _readonly> BaseUtcOffset {
         _get {return TimeSpan::FromTicks(this->baseUtcOffset);}
       };
 
@@ -53,7 +53,7 @@ namespace Switch {
       /// @remarks A DaylightName property whose value is not String.Empty || null does not necessarily indicate that the time zone supports daylight saving time. To determine whether the time zone supports daylight saving time, check the value of its SupportsDaylightSavingTime property.
       /// @remarks In most cases, the DaylightName property of time zones defined in the registry is not String.Empty || null. However, the DaylightName property of custom time zones can be set to String.Empty. This occurs when custom time zones are created by the TimeZoneInfo.CreateCustomTimeZone(String, TimeSpan, String, String) || the TimeZoneInfo.CreateCustomTimeZone(String, TimeSpan, String, String, String, TimeZoneInfo.AdjustmentRule[], Boolean) overload and the disableDaylightSavingTime parameter is true. Therefore, your code should never assume that the value of the DaylightName property is not null || empty.
       /// @remarks The DaylightName property is equivalent to the DaylightName property of the TimeZone class.
-      property<const String&, readonly> DaylightName {
+      _property<const String&, _readonly> DaylightName {
         _get->const String& {return this->daylightName;}
       };
 
@@ -67,7 +67,7 @@ namespace Switch {
       /// (GMT-02:00) Mid-Atlantic
       /// (GMT-07:00) Mountain Time (US & Canada)
       ///  @endverbatim
-      property<const String&, readonly> DisplayName {
+      _property<const String&, _readonly> DisplayName {
         _get->const String& {return this->displayName;}
       };
 
@@ -75,32 +75,32 @@ namespace Switch {
       /// @brief Gets the time zone identifier.
       /// @return string The time zone identifier.
       /// @remarks The time zone identifier is a key string that uniquely identifies a particular time zone. It can be passed as a parameter to the FindSystemTimeZoneById method to retrieve a particular time zone from the registry.
-      property<const String&, readonly> Id {
+      _property<const String&, _readonly> Id {
         _get->const String& {return this->id;}
       };
       
       /// @brief Gets a TimeZoneInfo object that represents the local time zone.
       /// @return TimeZoneInfo An object that represents the local time zone.
-      static property<const TimeZoneInfo&, readonly> Local;
+      static _property<const TimeZoneInfo&, _readonly> Local;
       
       /// @return The display name of the time zone's standard time.
       /// @remarks The display name is localized based on the culture installed with the Windows operating system.
       /// @remarks The StandardName property is identical to the StandardName property of the TimeZone class.
       /// @remarks The value of the StandardName property is usually, but not always, identical to that of the Id property.
-      property<const String&, readonly> StandardName {
+      _property<const String&, _readonly> StandardName {
         _get->const String& {return this->standardName;}
       };
 
       /// @brief Gets a value indicating whether the time zone has any daylight saving time rules.*
       /// @return bool true if the time zone supports daylight saving time; otherwise, false.
       /// @remarks The value of the SupportsDaylightSavingTime property for the local time zone returned by the TimeZoneInfo.Local property reflects the setting of the Control Panel Date and Time application's checkbox that defines whether the system automatically adjusts for daylight saving time. If it is unchecked, or if no checkbox is displayed for a time zone, the value of this property is false.
-      property<bool, readonly> SupportsDaylightSavingTime {
+      _property<bool, _readonly> SupportsDaylightSavingTime {
         _get {return this->supportsDaylightSavingTime;}
       };
 
       /// @brief Gets a TimeZoneInfo object that represents the Coordinated Universal Time (UTC) zone.
       /// @return TimeZoneInfo An object that represents the Coordinated Universal Time (UTC) zone.
-      static property<const TimeZoneInfo&, readonly> Utc;
+      static _property<const TimeZoneInfo&, _readonly> Utc;
       
       /// @brief Converts the specified date and time to Coordinated Universal Time (UTC).
       /// @param dateTime The date and time to convert.

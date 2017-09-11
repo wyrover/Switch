@@ -9,13 +9,13 @@ public:
   Person(const Person& person) : name(person.name), age(person.age) {}
 
   // Declare a Name property of type string:
-  property<string> Name {
+  _property<string> Name {
     _get {return this->name;},
     _set {this->name = value;}
   };
   
   // Declare an Age property of type int:
-  property<int> Age {
+  _property<int> Age {
     _get {return this->age;},
     _set {this->age = value;}
   };

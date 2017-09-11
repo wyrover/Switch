@@ -29,73 +29,73 @@ namespace Switch {
         /// @brief Gets the System::IO::FileAttributes of the current System::IO::FileSystemInfo.
         /// @return System::IO::FileAttributes of the current System::IO::FileSystemInfo.
         /// @exception IOErrorException system error when retrieving the file information
-        property<FileAttributes, readonly> Attributes {
+        _property<FileAttributes, _readonly> Attributes {
           _get {return this->GetAttributes();}
         };
 
         /// @brief Gets the creation time
         /// @return The creation date and time
         /// @exception IOErrorException system error when retrieving the file information
-        property<DateTime, readonly> CreationTime {
+        _property<DateTime, _readonly> CreationTime {
           _get {return this->GetCreationTime();}
         };
         
         /// @brief Gets the creation time, in coordinated universal time (UTC)
         /// @return The creation date and time
         /// @exception IOErrorException system error when retrieving the file information
-        property<DateTime, readonly> CreationTimeUtc {
+        _property<DateTime, _readonly> CreationTimeUtc {
           _get {return this->GetCreationTimeUtc();}
         };
         
         /// @brief Gets a value indicating whether the file or directory exists.
         /// @return true if the file or directory exists; otherwise, false.
-        property<bool, readonly> Exists {
+        _property<bool, _readonly> Exists {
           _get {return this->GetExists();}
         };
 
         /// @brief Gets the string representing the extension part of the file.
         /// @return A string containing the System::IO::FileSystemInfo extension.
-        property<String, readonly> Extension {
+        _property<String, _readonly> Extension {
           _get {return this->GetExtension();}
         };
 
         /// @brief Gets the full path of the directory or file.
         /// @return A string containing the full path.
-        property<String, readonly> FullName {
+        _property<String, _readonly> FullName {
           _get {return this->GetFullName();}
         };
 
         /// @brief Gets the time the current file or directory was last accessed.
         /// @return The time that the current file or directory was last accessed.
         /// @exception IOErrorException system error when retrieving the file information
-        property<DateTime, readonly> LastAccessTime {
+        _property<DateTime, _readonly> LastAccessTime {
           _get {return this->GetLastAccessTime();}
         };
         
         /// @brief Gets the time, in coordinated universal time (UTC), of the current file or directory was last accessed.
         /// @return The time that the current file or directory was last accessed.
         /// @exception IOErrorException system error when retrieving the file information
-        property<DateTime, readonly> LastAccessTimeUtc {
+        _property<DateTime, _readonly> LastAccessTimeUtc {
           _get {return this->GetLastAccessTimeUtc();}
         };
         
         /// @brief Gets or sets the time when the current file or directory was last written to.
         /// @return The time the current file was last written.
         /// @exception IOErrorException system error when retrieving the file information
-        property<DateTime, readonly> LastWriteTime {
+        _property<DateTime, _readonly> LastWriteTime {
           _get {return this->GetLastWriteTime();}
         };
         
         /// @brief Gets or sets the time, in coordinated universal time (UTC), when the current file or directory was last written to.
         /// @return The time the current file was last written.
         /// @exception IOErrorException system error when retrieving the file information
-        property<DateTime, readonly> LastWriteTimeUtc {
+        _property<DateTime, _readonly> LastWriteTimeUtc {
           _get {return this->GetLastWriteTimeUtc();}
         };
         
         /// @brief For files, gets the name of the file. For directories, gets the name of the last directory in the hierarchy if a hierarchy exists. Otherwise, the Name property gets the name of the directory.
         /// @return A string that is the name of the parent directory, the name of the last directory in the hierarchy, or the name of a file, including the file name extension.
-        property<String, readonly> Name {
+        _property<String, _readonly> Name {
           _get {return this->GetName();}
         };
 

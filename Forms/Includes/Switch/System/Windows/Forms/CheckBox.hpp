@@ -23,12 +23,12 @@ namespace Switch {
         public:
           CheckBox() : ButtonBase("", 0, 0, 104, 24) { this->SetStyle(ControlStyles::UserPaint, false); }
 
-          property<bool> AutoCheck {
+          _property<bool> AutoCheck {
             _get{ return this->autoCheck; },
             _set{ this->SetAutoCheck(value); }
           };
 
-          property<bool> Checked {
+          _property<bool> Checked {
             _get {return this->CheckState != System::Windows::Forms::CheckState::Unchecked;},
             _set {
               if (this->Checked != value) {
@@ -37,7 +37,7 @@ namespace Switch {
             }
           };
           
-          property<System::Windows::Forms::CheckState> CheckState {
+          _property<System::Windows::Forms::CheckState> CheckState {
             _get {return this->checkState;},
             _set {this->SetCheckState(value);}
           };

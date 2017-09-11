@@ -50,7 +50,7 @@ namespace Switch {
 
         /// @brief Gets the underlying stream that interfaces with a backing store.
         /// @return The stream this BinaryReader is reading from.
-        property<Stream&, readonly> BaseStream {
+        _property<Stream&, _readonly> BaseStream {
           _get->Stream& {return this->GetBaseStream();}
         };
 

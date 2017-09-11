@@ -28,7 +28,7 @@ namespace Switch {
       /// @brief Provides a generic view of a sequence of bytes. This is an abstract class.
       class _export Stream _abstract {
       public:
-        static property<NullStream&, readonly> Null;
+        static _property<NullStream&, _readonly> Null;
 
         /// @brief Initializes a new instance of the Stream class
         /// @remarks Use Null to redirect output to a stream that will not consume any operating system resources. When the methods of Stream that provide writing are invoked on cNull, the call simply returns, and no data is written.
@@ -38,35 +38,35 @@ namespace Switch {
         /// @brief When overridden in a derived class, gets a value indicating whether the current
         /// stream supports reading.
         /// @return true if the stream supports reading; otherwise, false.
-        property<bool, readonly> CanRead {
+        _property<bool, _readonly> CanRead {
           _get {return this->GetCanRead();}
         };
 
         /// @brief When overridden in a derived class, gets a value indicating whether the current
         /// stream supports seeking.
         /// @return true if the stream supports seeking; otherwise, false.
-        property<bool, readonly> CanSeek {
+        _property<bool, _readonly> CanSeek {
           _get {return this->GetCanSeek();}
         };
 
         /// @brief Gets a value that determines whether the current stream can time out.
         /// @return A value that determines whether the current stream can time out.
         /// @remarks The CanTimeout() function always returns false. Some stream implementations require different behavior, such as NetworkStream, which times out if network connectivity is interrupted or lost. If you are implementing a stream that must be able to time out, this property should be overridden to return true.
-        property<bool, readonly> CanTimeout {
+        _property<bool, _readonly> CanTimeout {
           _get {return this->GetCanTimeout();}
         };
 
         /// @brief When overridden in a derived class, gets a value indicating whether the current
         /// stream supports writing.
         /// @return true if the stream supports writing; otherwise, false.
-        property<bool, readonly> CanWrite {
+        _property<bool, _readonly> CanWrite {
           _get {return this->GetCanWrite();}
         };
 
         /// @brief When overridden in a derived class, gets the length in bytes of the stream.
         /// @param length The desired length of the current stream in bytes.
         /// @return A long value representing the length of the stream in bytes.
-        property<int64> Length {
+        _property<int64> Length {
           _get {return this->GetLength();},
           _set {this->SetLength(value);}
         };
@@ -74,7 +74,7 @@ namespace Switch {
         /// @brief When overridden in a derived class, gets the position within the current stream.
         /// @param position the position within the stream
         /// @return The current position within the stream.
-        property<int64> Position {
+        _property<int64> Position {
           _get {return this->GetPosition();},
           _set {this->SetPosition(value);}
         };
@@ -82,7 +82,7 @@ namespace Switch {
         /// @brief Gets a value, in miliseconds, that determines how long the stream will attempt to read before timing out.
         /// @param readTimeout A value, in miliseconds, that determines how long the stream will attempt to read before timing out
         /// @return A value, in miliseconds, that determines how long the stream will attempt to read before timing out.
-        property<int32> ReadTimeout {
+        _property<int32> ReadTimeout {
           _get {return this->GetReadTimeout();},
           _set {this->SetReadTimeout(value);}
         };
@@ -90,14 +90,14 @@ namespace Switch {
         /// @brief Gets a value, in miliseconds, that determines how long the stream will attempt to write before timing out.
         /// @param writeTimeout A value, in miliseconds, that determines how long the stream will attempt to write before timing out
         /// @return A value, in miliseconds, that determines how long the stream will attempt to write before timing out.
-        property<int32> WriteTimeout {
+        _property<int32> WriteTimeout {
           _get {return this->GetWriteTimeout();},
           _set {this->SetWriteTimeout(value);}
         };
         
         /// @brief Indicates if the stream is closed
         /// @return true if the stream is closed, false otherwise
-        property<bool, readonly> IsClosed {
+        _property<bool, _readonly> IsClosed {
           _get {return this->GetIsClosed();}
         };
 

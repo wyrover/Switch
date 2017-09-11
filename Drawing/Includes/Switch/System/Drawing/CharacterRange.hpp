@@ -37,13 +37,13 @@ namespace Switch {
         /// @endcond
 
         /// @brief Gets or sets the position in the string of the first character of this CharacterRange.
-        property<int32> First {
+        _property<int32> First {
           _get {return this->first;},
           _set {this->first = value;}
         };
         
         /// @brief Gets or sets the number of positions in this CharacterRange.
-        property<int32> Length {
+        _property<int32> Length {
           _get {return this->length;},
           _set {this->length = value;}
         };
