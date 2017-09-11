@@ -16,9 +16,9 @@ namespace Examples {
       pets["Persian"] = "Cat";
       pets["Pied Mutation Cockatiel"] = "Bird";
       
-      // you can use _var type insted :
+      // you can use auto type insted :
       // System::Collections::Specialized::StringKeyValuePair item
-      for (_var item : pets) {
+      for (auto item : pets) {
         Console::WriteLine(item);
       }
     }

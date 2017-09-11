@@ -246,7 +246,7 @@ namespace Switch {
         /// @code
         /// Array<Byte> bytes = { 16, 132, 27, 253 };
         /// System::Text::StringBuilder sb;
-        /// _foreach (auto value _in bytes)
+        /// for (auto value : bytes)
         ///   sb.Append(value).Append(" ");
         ///
         /// Console::WriteLine("The byte array: {0}", sb.ToString());
@@ -507,7 +507,7 @@ namespace Switch {
         /// @code
         /// Array<Byte> bytes = { 16, 132, 27, 253 };
         /// System::Text::StringBuilder sb;
-        /// _foreach (auto value _in bytes)
+        /// for (auto value : bytes)
         ///   sb.Append(value).Append(" ");
         ///
         /// Console::WriteLine("The byte array: {0}", sb.ToString());

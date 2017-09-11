@@ -492,7 +492,7 @@ namespace SwitchUnitTests {
     void ForeachOnString() {
       string str = "This is a test for foreach";
       string output;
-      _foreach (char32 item _in str)
+      for (char32 item : str)
         output += item;
       TUnit::Assert::AreEqual("This is a test for foreach", output, _current_information);
     }

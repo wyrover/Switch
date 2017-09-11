@@ -122,7 +122,7 @@ namespace SwitchUnitTests {
       
       // test foreach without scope
       index = 1;
-      _foreach (Int32 i _in testList)
+      for (Int32 i : testList)
         Assert::AreEqual(index++, i, _current_information);
       
       Assert::AreEqual(index, 6, _current_information);
@@ -188,7 +188,7 @@ namespace SwitchUnitTests {
       testArray[4] = 5;
       
       // test foreach without scope
-      _foreach (uint32 i _in testArray)
+      for (uint32 i : testArray)
         index = i;
       
       Assert::AreEqual(index, 5u, _current_information);
@@ -249,7 +249,7 @@ namespace SwitchUnitTests {
       testDictionary[5] = "5";
       
       // test foreach without scope
-      _foreach (auto i _in testDictionary)
+      for (auto i : testDictionary)
         count += i.Key();
       Assert::AreEqual(15u, count, _current_information);
       

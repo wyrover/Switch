@@ -379,9 +379,7 @@ set(INCLUDE_FILES
   Includes/Switch/Core.hpp
   Includes/Switch/Event.hpp
   Includes/Switch/ExceptionPtr.hpp
-  Includes/Switch/Foreach.hpp
   Includes/Switch/CurrentInformation.hpp
-  Includes/Switch/Global.hpp
   Includes/Switch/Hash.hpp
   Includes/Switch/InitializerList.hpp
   Includes/Switch/Interface.hpp
@@ -401,7 +399,6 @@ set(INCLUDE_FILES
   Includes/Switch/Undef.hpp
   Includes/Switch/Unused.hpp
   Includes/Switch/Using.hpp
-  Includes/Switch/Var.hpp
   Includes/Switch/__opaque_function_pointer__.hpp
 )
 

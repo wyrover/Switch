@@ -378,8 +378,6 @@
 #include "CurrentInformation.hpp"
 #include "Event.hpp"
 #include "ExceptionPtr.hpp"
-#include "Foreach.hpp"
-#include "Global.hpp"
 #include "Hash.hpp"
 #include "InitializerList.hpp"
 #include "Interface.hpp"
@@ -397,4 +395,3 @@
 #include "Types.hpp"
 #include "Unused.hpp"
 #include "Using.hpp"
-#include "Var.hpp"
