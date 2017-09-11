@@ -38,7 +38,7 @@ namespace Switch {
   ///   String ToString() const override {return "Foo";}
   /// };
   /// @endcode
-  /// @ingroup Switch
+  /// @ingroup Keywords
   #define _interface\
   : public Interface
 }

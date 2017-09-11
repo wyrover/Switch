@@ -20,7 +20,7 @@ namespace Switch {
   /// @par
   /// This example show a Main method with argument and return code
   /// @include Main4.cpp
-  /// @ingroup Switch
+  /// @ingroup Keywords
   #define _startup(mainClass)\
   int main(int argc, char* argv[]) {\
     struct Startup {\

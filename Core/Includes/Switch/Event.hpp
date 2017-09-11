@@ -49,9 +49,8 @@ namespace Switch {
   /// @par Examples
   /// The following example shows how to declare and raise an event that uses EventHandler as the underlying delegate type.
   /// @include Event.cpp
-  /// @ingroup Switch
-  template<typename TParent, typename TDelegate>
-  using event = __event__<TParent, TDelegate>;
+  /// @ingroup Keywords
+  #define event __event__
 }
 
 using namespace Switch;

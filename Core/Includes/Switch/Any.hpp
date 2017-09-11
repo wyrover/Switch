@@ -574,6 +574,7 @@ namespace Switch {
   /// @par Examples
   /// This example show how to use any:
   /// @include Any.cpp
+  /// @ingroup Keywords
   using any = Any;
 }
 

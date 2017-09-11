@@ -12,8 +12,8 @@ namespace Switch {
   /// @code
   /// class TestClass : public _global::TestApp { }
   /// @endcode
-  /// @ingroup Switch
-  #define _global
+  /// @ingroup Keywords
+  #define global
 }
 
 using namespace Switch;
