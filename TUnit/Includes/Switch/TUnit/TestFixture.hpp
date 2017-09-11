@@ -41,7 +41,7 @@ namespace Switch {
     /// @par Examples
     /// This example how to use TestFixture class, Expect class and #_test method:
     /// @include Expect.cpp
-    /// @ingroup Switch
+    /// @ingroup TUnit
     #define _test(fixture, method) \
     GTEST_TEST_(fixture, method, fixture, ::testing::internal::GetTypeId<fixture>()) { \
       try { \
@@ -57,7 +57,7 @@ namespace Switch {
     /// @par Examples
     /// This example how to use TestFixture class, Expect class and #_test method:
     /// @include Expect.cpp
-    /// @ingroup Switch
+    /// @ingroup TUnit
     #define _ignore_test(fixture, method) \
     GTEST_TEST_(fixture, DISABLED_##method, fixture, ::testing::internal::GetTypeId<fixture>()) { \
       try { \

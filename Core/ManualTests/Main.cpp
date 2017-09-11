@@ -4,23 +4,35 @@
 #include <Switch/Var.hpp>
 #include <Switch/System/Console.hpp>
 
+#undef _public
+
+#define _internal \
+private :
+
+#define _private \
+private :
+
+#define _protected \
+protected :
+
+#define _public \
+public :
+
 using namespace System;
 
 namespace Examples {
   class Program {
   public:
     class Data {
-    public:
-      Data() = default;
-      Data(const Data& data) : items(data.items) {};
+      _public Data() = default;
+      _public Data(const Data& data) : items(data.items) {};
       
-      property<Array<int>> Items {
+      _public property<Array<int>> Items {
         _get {return this->items;},
         _set {this->items = value;}
       };
       
-    private:
-      Array<int> items = Array<>::CreateInstance<int>(8);
+      _private Array<int> items = Array<>::CreateInstance<int>(8);
     };
     
     // The main entry point for the application.

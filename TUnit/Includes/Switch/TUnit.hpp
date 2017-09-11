@@ -2,6 +2,9 @@
 /// @brief Contains include files of TUnit library.
 #pragma once
 
+/// @defgroup TUnit TUnit
+/// @brief TUnit unit test framework
+
 #include <Switch/Core.hpp>
 #include "TUnit/Constraints/Constraint.hpp"
 #include "TUnit/Constraints/ConstraintExpression.hpp"
