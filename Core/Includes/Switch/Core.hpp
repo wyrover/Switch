@@ -373,6 +373,7 @@
 #include "Event.hpp"
 #include "ExceptionPtr.hpp"
 #include "Foreach.hpp"
+#include "Global.hpp"
 #include "Hash.hpp"
 #include "InitializerList.hpp"
 #include "Interface.hpp"

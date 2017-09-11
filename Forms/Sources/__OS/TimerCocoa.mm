@@ -2,6 +2,8 @@
 #include "WindowProcedureCocoa.hpp"
 #include "FormsApi.hpp"
 
+#undef property
+
 using namespace System;
 using namespace System::Windows::Forms;
 using namespace __OS;

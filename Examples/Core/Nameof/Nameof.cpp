@@ -17,7 +17,7 @@ namespace Examples {
       static int Method1 (const string& x, const string& y) {return 0;}
       int Method2 (int z) {return 0;}
       template<typename T>
-      string f(const T& value) {return nameof(value);}
+      string f(const T& value) {return _nameof(value);}
       
     private:
       int value = 0;
@@ -28,17 +28,17 @@ namespace Examples {
       C c;
       c.Value = 42;
       
-      Console::WriteLine("{0} = {1}", nameof(c.Value), c.Value);
-      Console::WriteLine("{0} = {1}", nameof(c.Value), typeof(c.Value));
+      Console::WriteLine("{0} = {1}", _nameof(c.Value), c.Value);
+      Console::WriteLine("{0} = {1}", _nameof(c.Value), _typeof(c.Value));
       C::Method1("", 24);
       
-      Console::WriteLine(nameof(C));
-      Console::WriteLine(nameof(C::Method1));
-      Console::WriteLine(nameof(C::Method2));
-      Console::WriteLine(nameof(c.Method1));
-      Console::WriteLine(nameof(c.Method2));
+      Console::WriteLine(_nameof(C));
+      Console::WriteLine(_nameof(C::Method1));
+      Console::WriteLine(_nameof(C::Method2));
+      Console::WriteLine(_nameof(c.Method1));
+      Console::WriteLine(_nameof(c.Method2));
       Console::WriteLine(c.f(""));
-      Console::WriteLine(nameof(Stuff));
+      Console::WriteLine(_nameof(Stuff));
     }
   };
 }

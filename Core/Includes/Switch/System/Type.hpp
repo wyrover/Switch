@@ -138,16 +138,16 @@ namespace Switch {
   }
   
 #if defined(__APPLE__) || defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wkeyword-macro"
-#define typeof _typeof
-#pragma clang diagnostic pop
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wkeyword-macro"
+  #define typeof _typeof
+  #pragma clang diagnostic pop
 #elif defined(__linux__)
-#define typeof _typeof
+  #define typeof _typeof
 #else
   template<typename T>
   System::Type typeof() {return _typeof<T>();}
-
+  
   template<typename T>
   System::Type typeof(const T& value) {return _typeof(value);}
 #endif

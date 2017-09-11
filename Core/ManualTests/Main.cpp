@@ -27,8 +27,8 @@ namespace Examples {
     static void Main() {
       Data data;
       data.Items = {12, 24, 48};
-      Console::WriteLine("{0} = {{{1}}}", nameof(data.Items), typeof(data.Items()));
-      Console::WriteLine("{0} = {{{1}}}", nameof(data.Items), string::Join(", ", data.Items()));
+      Console::WriteLine("{0} = {{{1}}}", _nameof(data.Items), _typeof(data.Items()));
+      Console::WriteLine("{0} = {{{1}}}", _nameof(data.Items), string::Join(", ", data.Items()));
     }
   };
 }
