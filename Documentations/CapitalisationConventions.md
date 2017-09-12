@@ -193,6 +193,6 @@ Other Resources
 * [Framework Design Guidelines](FrameworkDesignGuidelines.md)
 * [Naming Guidelines](NamingGuidelines.md)
 
-​______________________________________________________________________________________________
+______________________________________________________________________________________________
 
 © 2010 - 2017 by GAMMA Soft.

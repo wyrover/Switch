@@ -15,6 +15,6 @@ This section provides guidelines for designing libraries that extend and interac
 * [Usage Guidelines](UsageGuidelines.md) Describes guidelines for using common types such as arrays, attributes, and collections, supporting serialisation, and overloading equality operators.
 * [Common Design Patterns](CommonDesignPatterns.md) are solutions to software design problems you find again and again in real-world application development. Patterns are about reusable designs and interactions of objects.
 
-​______________________________________________________________________________________________
+______________________________________________________________________________________________
 
 © 2010 - 2017 by GAMMA Soft.
