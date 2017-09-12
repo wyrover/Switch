@@ -56,8 +56,8 @@ The following table presents several base data types using the Switch type names
 | bool               | bool   | 1             |
 | wchar_t            | char32 | 4             |
 | char*              | string | variable      |
-​
-​**√ DO** use a common name, such as value or item, rather than repeating the type name, in the rare cases when an identifier has no semantic meaning and the type of the parameter is not important.
+
+**√ DO** use a common name, such as value or item, rather than repeating the type name, in the rare cases when an identifier has no semantic meaning and the type of the parameter is not important.
 
 ​For more information about types see Types.
 ​
