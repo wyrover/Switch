@@ -1,11 +1,8 @@
 ![GitHub Logo](Documentations/Images/SwitchNativeC++port.png)
-______________________________________________________________________________________________________________
-
+____________________________________________________________________________________
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) 
 [![Build Status](https://travis-ci.org/yfiumefreddo/Pcf.svg)](https://travis-ci.org/yfiumefreddo/Pcf) 
-[![Download Portable C++ Framework](https://sourceforge.net/sflogo.php?type=8&group_id=2794431)](https://sourceforge.net/p/switchpro/)
-______________________________________________________________________________________________________________
-
+____________________________________________________________________________________
 # The Switch framework is...
 - a collection of native C++ classes libraries, similar to the .NET Framework;
 - written in efficient, modern C++14;
@@ -14,7 +11,9 @@ ________________________________________________________________________________
 ![GitHub Logo](Documentations/Images/SwitchArchitecture.png)
 
 # Libraries
-The framework is composed of 4 libraries :
+
+The framework is composed of 4 libraries:
+
 - **Switch.Core** : The Switch.Core library is a library of classes, interfaces, and value types that provide access to system functionality. It is the foundation on which c++ applications, components, and controls are built.
 - **Switch.Drawing** : The Switch.Drawing library contains types that support basic GDI+ graphics functionality. Child namespaces support advanced two-dimensional and vector graphics functionality, advanced imaging functionality, and print-related and typographical services. A child namespace also contains types that extend design-time user-interface logic and drawing.
 - **Switch.Forms** : The Switch.Forms library contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system.
@@ -38,6 +37,7 @@ The classic first application 'Hello World'.
 
 ## Console
 HelloWorld.cpp:
+
 ```c++
 #include <Switch/Switch>
 
@@ -56,6 +56,7 @@ _startup (HelloWorld::Program)
 ```
 
 CMakeLists.txt:
+
 ```cmake
 cmake_minimum_required(VERSION 3.2)
 
@@ -67,6 +68,7 @@ target_link_libraries(HelloWorld Switch.Core)
 
 ## Forms
 HelloWorldForm.cpp:
+
 ```c++
 #include <Switch/Switch>
 
@@ -100,6 +102,7 @@ _startup (HelloWorld::Program)
 ```
 
 CMakeLists.txt:
+
 ```cmake
 cmake_minimum_required(VERSION 3.2)
 
@@ -111,6 +114,7 @@ target_link_libraries(HelloWorldForm Switch.Forms)
 
 ## TUnit
 HelloWorldTest.cpp:
+
 ```c++
 #include <Switch/Switch>
 
@@ -137,6 +141,7 @@ namespace UnitTests {
 ```
 
 CMakeLists.txt:
+
 ```cmake
 cmake_minimum_required(VERSION 3.2)
 
@@ -157,4 +162,4 @@ You can download latest stable version on SourceForge
 Before running examples you must install Switch. To install it read See [Install.md](Install.md) file.
 
 # Switch Web Site
-For more information see https://gammasoft71.wixsite.com/switch
+For more information see [https://gammasoft71.wixsite.switch](https://gammasoft71.wixsite.com/switch)
