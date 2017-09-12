@@ -47,7 +47,7 @@ Hello, World!
 
 HelloWorldForm.cpp:
 
-```
+```c++
 #include <Switch/Switch>
  
 using namespace System;
@@ -81,7 +81,7 @@ _startup (HelloWorld::Program)
 
 CMakeLists.txt:
 
-```
+```cmake
 cmake_minimum_required(VERSION 3.2)
  
 Project(HelloWorldForm)
@@ -97,7 +97,7 @@ Running application on macOS:
 
 HelloWorldTest.cpp:
 
-```
+```c++
 #include <Switch/Switch>
  
 using namespace System;
@@ -124,7 +124,7 @@ namespace UnitTests {
 
 CMakeLists.txt:
 
-```
+```cmake
 cmake_minimum_required(VERSION 3.2)
 ​
 Project(HelloWorldTest)
