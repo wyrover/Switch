@@ -32,5 +32,6 @@ The framework is composed of 4 libraries:
 - Strong focus on tests (automated unit tests with high coverage)
 - Build on top of solid foundations – use existing proven C libraries (e.g. Curl, rs232, zlib,...) where it makes sense
 
-______________________________________________________________________________________________
+​______________________________________________________________________________________________
+
 © 2010 - 2017 by GAMMA Soft.

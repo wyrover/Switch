@@ -148,5 +148,6 @@ End 2 tests from 1 test case ran. (4 ms total)
 
 [Click here to see more examples](https://github.com/gammasoft71/Switch/tree/master/Examples)
 
-______________________________________________________________________________________________
+​______________________________________________________________________________________________
+
 © 2010 - 2017 by GAMMA Soft.

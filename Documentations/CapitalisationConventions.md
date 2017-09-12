@@ -190,8 +190,9 @@ C++ are case-sensitivity. Even if your language supports it, other languages tha
 ​
 Other Resources
 
-* Framework Design Guidelines
+* [Framework Design Guidelines](FrameworkDesignGuidelines.md)
+* [Naming Guidelines](NamingGuidelines.md)
 
-​
-______________________________________________________________________________________________
+​______________________________________________________________________________________________
+
 © 2010 - 2017 by GAMMA Soft.

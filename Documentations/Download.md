@@ -198,5 +198,6 @@ make
 * If your application is unit tests application, is the same procedure but you must replace the line "target_link_libraries(SwitchConsole Switch.Core)" by "target_link_libraries(SwitchConsole Switch.TUnit.Main)" if you don't have your own main entry point; or "target_link_libraries(SwitchConsole Switch.TUnit)" it you have your own main entry point in CMakeLists.txt file.
 * ​If your application is GUI application, is the same procedure but you must replace the line "add_executable(SwitchConsole SwitchConsole.cpp)" by "add_executable(SwitchConsole ${SWITCH_GUI} SwitchConsole.cpp)" and replace the line "target_link_libraries(SwitchConsole Switch.Core)" by "target_link_libraries(SwitchConsole Switch.Forms)" in CMakeLists.txt file.
 
-______________________________________________________________________________________________
+​______________________________________________________________________________________________
+
 © 2010 - 2017 by GAMMA Soft.

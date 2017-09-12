@@ -17,5 +17,6 @@ This section contains the Switch documentation.
 * [External Products and Libraries](ExternalProductsAndLibraries.md) list the external products and libraries.
 * [Links](Links.md) list the essential links.
 
-______________________________________________________________________________________________
+​______________________________________________________________________________________________
+
 © 2010 - 2017 by GAMMA Soft.

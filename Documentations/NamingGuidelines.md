@@ -21,8 +21,8 @@ Following a consistent set of naming conventions in the development of a framewo
 ​
 Other Resources
 
-* Framework Design Guidelines
+* [Framework Design Guidelines](FrameworkDesignGuidelines.md)
 
-​
-______________________________________________________________________________________________
+​______________________________________________________________________________________________
+
 © 2010 - 2017 by GAMMA Soft.
