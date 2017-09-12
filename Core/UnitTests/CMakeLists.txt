@@ -29,6 +29,7 @@ set(SOURCE_FILES
   Switch/System/Net/IPAddressUT.cpp
   Switch/System/Net/IPEndPointUT.cpp
   Switch/System/Net/Sockets/SocketTest.cpp
+  Switch/System/Runtime/CompilerServices/CallerTest.cpp
   Switch/System/Runtime/Serialization/SerializationInfoUT.cpp
   Switch/System/Text/ASCIIEncodingUT.cpp
   Switch/System/Text/DecoderUT.cpp
@@ -96,7 +97,6 @@ set(SOURCE_FILES
   Switch/AsyncTest.cpp
   Switch/AwaitTest.cpp
   Switch/BoxingTest.cpp
-  Switch/CurrentInformationTest.cpp
   Switch/Cpp11Test.cpp
   Switch/ExceptionPointerTest.cpp
   Switch/ForEachTest.cpp
@@ -133,6 +133,7 @@ source_group(UnitTests\\Switch\\System\\IO\\Ports REGULAR_EXPRESSION "/UnitTests
 source_group(UnitTests\\Switch\\System\\Linq REGULAR_EXPRESSION "/UnitTests/Switch/System/Linq/[-_,A-Za-z0-9]+\\.(c|h)*")
 source_group(UnitTests\\Switch\\System\\Net REGULAR_EXPRESSION "/UnitTests/Switch/System/Net/[-_,A-Za-z0-9]+\\.(c|h)*")
 source_group(UnitTests\\Switch\\System\\Net\\Sockects REGULAR_EXPRESSION "/UnitTests/Switch/System/Net/Sockets/[-_,A-Za-z0-9]+\\.(c|h)*")
+source_group(UnitTests\\Switch\\System\\Runtime\\CompilerServices REGULAR_EXPRESSION "/UnitTests/Switch/System/Runtime/CompilerServices/[-_,A-Za-z0-9]+\\.(c|h)*")
 source_group(UnitTests\\Switch\\System\\Runtime\\Serialization REGULAR_EXPRESSION "/UnitTests/Switch/System/Runtime/Serialization/[-_,A-Za-z0-9]+\\.(c|h)*")
 source_group(UnitTests\\Switch\\System\\Text REGULAR_EXPRESSION "/UnitTests/Switch/System/Text/[-_,A-Za-z0-9]+\\.(c|h)*")
 source_group(UnitTests\\Switch\\System\\Threading REGULAR_EXPRESSION "/UnitTests/Switch/System/Threading/[-_,A-Za-z0-9]+\\.(c|h)*")

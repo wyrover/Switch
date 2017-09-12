@@ -16,34 +16,34 @@ namespace Switch {
       namespace CompilerServices {
         /// @brief Caller information class is used to store current file, current line and current function information.
         /// @par Examples
-        /// Use #_caller to get caller information.
-        /// @code
-        /// Caller caller = _caller;
-        /// Console::WriteLine("File = {0}", caller.FilePath);
-        /// Console::WriteLine("LineNumber = {0}", caller.LineNumber);
-        /// Console::WriteLine("Function = {0}", caller.MemberNamne);
-        /// @endcode
+        /// The following example shows how to use the Caller
+        /// @include Caller.cpp
         class _export Caller : public System::Object {
         public:
           Caller() {}
           Caller(const System::String& filePath, int32 lineNumber) : filePath(filePath), lineNumber(lineNumber) {}
-          Caller(const System::String& filePath, int32 lineNumber, const System::String& memberNamne) : filePath(filePath), lineNumber(lineNumber), memberNamne(memberNamne) {}
+          Caller(const System::String& memberNamne, const System::String& filePath, int32 lineNumber) : memberNamne(memberNamne), filePath(filePath), lineNumber(lineNumber) {}
           
           /// @cond
-          Caller(const Caller& caller) : filePath(caller.filePath),  lineNumber(caller.lineNumber), memberNamne(caller.memberNamne) {}
+          Caller(const Caller& caller) : memberNamne(caller.memberNamne), filePath(caller.filePath),  lineNumber(caller.lineNumber) {}
           /// @endcond
           
-          /// Gets the FilePath
+          /// @brief Gets the member name
+          /// @return string member name
+          _property<const System::String&, _readonly> MemberNamne {
+            _get->const System::String& {return this->memberNamne;}
+          };
+          
+          /// @brief Gets the file path
+          /// @return string file path
           _property<const System::String&, _readonly> FilePath {
             _get->const System::String& {return this->filePath;}
           };
           
+          /// @brief Gets the line number
+          /// @return int32 line number
           _property<int32, _readonly> LineNumber {
             _get {return this->lineNumber;}
-          };
-          
-          _property<const System::String&, _readonly> MemberNamne {
-            _get->const System::String& {return this->memberNamne;}
           };
           
           System::String ToString() const override {
@@ -51,13 +51,13 @@ namespace Switch {
               return "{Empty}";
             if (string::IsNullOrEmpty(this->memberNamne))
               return System::String::Format("{{FilePath=\"{0}\", LineNumber={1}}}", this->filePath, this->lineNumber);
-            return System::String::Format("{{FilePath=\"{0}\", LineNumber={1}, MemberName=\"{2}\"}}", this->filePath, this->lineNumber, this->memberNamne);
+            return System::String::Format("{{MemberName=\"{0}\", FilePath=\"{1}\", LineNumber={2}}}", this->memberNamne, this->filePath, this->lineNumber);
           }
           
         private:
+          System::String memberNamne;
           System::String filePath;
           int32 lineNumber = 0;
-          System::String memberNamne;
         };
       }
     }
@@ -66,15 +66,11 @@ namespace Switch {
   /// @brief Get Caller informations
   /// @return Caller caller informations.
   /// @par Examples
-  /// @code
-  /// Caller caller = _caller;
-  /// Console::WriteLine("File = {0}", caller.FilePath);
-  /// Console::WriteLine("LineNUmber = {0}", caller.LineNumber);
-  /// Console::WriteLine("Function = {0}", caller.MemberNamne);
-  /// @endcode
+  /// The following example shows how to use the _#aller
+  /// @include Caller.cpp
   /// @ingroup Keywords
   #define _caller \
-  Switch::System::Runtime::CompilerServices::Caller(__FILE__, __LINE__, __func__)
+  Switch::System::Runtime::CompilerServices::Caller(__func__, __FILE__, __LINE__)
 }
 
 using namespace Switch;

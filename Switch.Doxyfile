@@ -2072,13 +2072,12 @@ INCLUDE_FILE_PATTERNS  =
 PREDEFINED             = "_abstract=: public Abstract" \
                          _async= \
                          "_await=await() <<" \
-                         "_current_information=CurrentInformation(__FILE__, __LINE__)" \
+                         "_caller=System::Runtime::CompilerServices::Caller(__FILE__, __LINE__)" \
                          _delegate=[&] \
                          _event=[&] __event__\
                          _get=[&]() \
                          _global= \
                          _ignore_test= \
-                         "_in=:" \
                          "_interface=: public Interface" \
                          _lock= \
                          _nameof=System::String
