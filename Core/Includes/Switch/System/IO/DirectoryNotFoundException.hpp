@@ -25,7 +25,7 @@ namespace Switch {
         /// @brief Create a new instance of class DirectoryNotFoundException
         /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
         /// @remarks Message is set with the default message associate to the error.
-        DirectoryNotFoundException(const Caller& information) : IOException(information) {}
+        DirectoryNotFoundException(const System::Runtime::CompilerServices::Caller& information) : IOException(information) {}
         
         /// @brief Create a new instance of class DirectoryNotFoundException
         /// @param message Message string associate to the error.
@@ -34,13 +34,13 @@ namespace Switch {
         /// @brief Create a new instance of class DirectoryNotFoundException
         /// @param message Message string associate to the error.
         /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
-        DirectoryNotFoundException(const System::String& message, const Caller& information) : IOException(message, information) {}
+        DirectoryNotFoundException(const System::String& message, const System::Runtime::CompilerServices::Caller& information) : IOException(message, information) {}
         
         /// @brief Create a new instance of class DirectoryNotFoundException
         /// @param message Message string associate to the error.
         /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
         /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
-        DirectoryNotFoundException(const System::String& message, const System::Exception& innerException, const Caller& information) : IOException(message, innerException, information) {}
+        DirectoryNotFoundException(const System::String& message, const System::Exception& innerException, const System::Runtime::CompilerServices::Caller& information) : IOException(message, innerException, information) {}
         
       private:
         System::String GetDefaultMessage() const override {return "Attempted to access a path that is not on the disk."; }

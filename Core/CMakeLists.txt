@@ -171,6 +171,7 @@ set(INCLUDE_FILES
   Includes/Switch/System/Net/WebRequest.hpp
   Includes/Switch/System/Net/WebRequestMethods.hpp
   Includes/Switch/System/Net/WebResponse.hpp
+  Includes/Switch/System/Runtime/CompilerServices/Caller.hpp
   Includes/Switch/System/Runtime/Serialization/Formatter.hpp
   Includes/Switch/System/Runtime/Serialization/IFormatter.hpp
   Includes/Switch/System/Runtime/Serialization/ISerializable.hpp
@@ -379,7 +380,6 @@ set(INCLUDE_FILES
   Includes/Switch/Core.hpp
   Includes/Switch/Event.hpp
   Includes/Switch/ExceptionPtr.hpp
-  Includes/Switch/Caller.hpp
   Includes/Switch/Hash.hpp
   Includes/Switch/InitializerList.hpp
   Includes/Switch/Interface.hpp
@@ -566,6 +566,7 @@ source_group(Includes\\Switch\\System\\Net\\Sockets REGULAR_EXPRESSION "/Include
 source_group(Includes\\Switch\\System\\Net\\WebSockets REGULAR_EXPRESSION "/Includes/Switch/System/Net/WebSockets/[-_,A-Za-z0-9]+\\.hpp*")
 source_group(Includes\\Switch\\System\\Net REGULAR_EXPRESSION "/Includes/Switch/System/Net/[-_,A-Za-z0-9]+\\.hpp*")
 source_group(Includes\\Switch\\System\\Security REGULAR_EXPRESSION "/Includes/Switch/System/Security/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(Includes\\Switch\\System\\Runtime\\CompilerServices REGULAR_EXPRESSION "/Includes/Switch/System/Runtime/CompilerServices/[-_,A-Za-z0-9]+\\.hpp*")
 source_group(Includes\\Switch\\System\\Runtime\\Serialization REGULAR_EXPRESSION "/Includes/Switch/System/Runtime/Serialization/[-_,A-Za-z0-9]+\\.hpp*")
 source_group(Includes\\Switch\\System\\Runtime REGULAR_EXPRESSION "/Includes/Switch/System/Runtime/[-_,A-Za-z0-9]+\\.hpp*")
 source_group(Includes\\Switch\\System\\Text REGULAR_EXPRESSION "/Includes/Switch/System/Text/[-_,A-Za-z0-9]+\\.hpp*")
@@ -590,6 +591,7 @@ source_group(Sources\\Switch\\System\\Net\\Internals REGULAR_EXPRESSION "/Source
 source_group(Sources\\Switch\\System\\Net\\Sockets REGULAR_EXPRESSION "/Sources/Switch/System/Net/Sockets/[-_,A-Za-z0-9]+\\.c*")
 source_group(Sources\\Switch\\System\\Net\\WebSockets REGULAR_EXPRESSION "/Sources/Switch/System/Net/WebSockets/[-_,A-Za-z0-9]+\\.c*")
 source_group(Sources\\Switch\\System\\Net REGULAR_EXPRESSION "/Sources/Switch/System/Net/[-_,A-Za-z0-9]+\\.c*")
+source_group(Sources\\Switch\\System\\Runtime\\CompilerServices REGULAR_EXPRESSION "/Sources/Switch/System/Runtime/CompilerServices/[-_,A-Za-z0-9]+\\.c*")
 source_group(Sources\\Switch\\System\\Runtime\\Serialization REGULAR_EXPRESSION "/Sources/Switch/System/Runtime/Serialization/[-_,A-Za-z0-9]+\\.c*")
 source_group(Sources\\Switch\\System\\Runtime REGULAR_EXPRESSION "/Sources/Switch/System/Runtime/[-_,A-Za-z0-9]+\\.c*")
 source_group(Sources\\Switch\\System\\Security REGULAR_EXPRESSION "/Sources/Switch/System/Security/[-_,A-Za-z0-9]+\\.c*")

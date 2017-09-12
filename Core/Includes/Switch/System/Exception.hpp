@@ -2,7 +2,7 @@
 /// @brief Contains Switch::System::Exception exception.
 #pragma once
 
-#include "../Caller.hpp"
+#include "Runtime/CompilerServices/Caller.hpp"
 #include "../Property.hpp"
 #include "../RefPtr.hpp"
 #include "../Types.hpp"
@@ -27,7 +27,7 @@ namespace Switch {
       /// @brief Create a new instance of class Exception
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
       /// @remarks Message is set with the default message associate to the error.
-      Exception(const Caller& information);
+      Exception(const System::Runtime::CompilerServices::Caller& information);
       
       /// @brief Create a new instance of class Exception
       /// @param message Message string associate to the error.
@@ -36,7 +36,7 @@ namespace Switch {
       /// @brief Create a new instance of class Exception
       /// @param message Message string associate to the error.
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
-      Exception(const String& message, const Caller& information);
+      Exception(const String& message, const System::Runtime::CompilerServices::Caller& information);
       
       /// @brief Create a new instance of class Exception
       /// @param message Message string associate to the error.
@@ -47,7 +47,7 @@ namespace Switch {
       /// @param message Message string associate to the error.
       /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
-      Exception(const String& message, const Exception& innerException, const Caller& information);
+      Exception(const String& message, const Exception& innerException, const System::Runtime::CompilerServices::Caller& information);
       
       /// @cond
       Exception(const Exception& value);
@@ -142,7 +142,7 @@ namespace Switch {
     //private:
       String message;
       String helpLink;
-      Caller caller;
+      System::Runtime::CompilerServices::Caller caller;
       ref<Exception> innerException;
       int32 hresult = 0;
       refptr<Array<String>> stackTrace;

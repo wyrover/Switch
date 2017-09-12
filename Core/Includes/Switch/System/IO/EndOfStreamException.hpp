@@ -25,7 +25,7 @@ namespace Switch {
         /// @brief Create a new instance of class EndOfStreamException
         /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
         /// @remarks Message is set with the default message associate to the error.
-        EndOfStreamException(const Caller& information) : IOException(information) {}
+        EndOfStreamException(const System::Runtime::CompilerServices::Caller& information) : IOException(information) {}
         
         /// @brief Create a new instance of class EndOfStreamException
         /// @param message Message string associate to the error.
@@ -34,13 +34,13 @@ namespace Switch {
         /// @brief Create a new instance of class EndOfStreamException
         /// @param message Message string associate to the error.
         /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
-        EndOfStreamException(const System::String& message, const Caller& information) : IOException(message, information) {}
+        EndOfStreamException(const System::String& message, const System::Runtime::CompilerServices::Caller& information) : IOException(message, information) {}
         
         /// @brief Create a new instance of class EndOfStreamException
         /// @param message Message string associate to the error.
         /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
         /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
-        EndOfStreamException(const System::String& message, const System::Exception& innerException, const Caller& information) : IOException(message, innerException, information) {}
+        EndOfStreamException(const System::String& message, const System::Exception& innerException, const System::Runtime::CompilerServices::Caller& information) : IOException(message, innerException, information) {}
         
       private:
         System::String GetDefaultMessage() const override {return "Attempted to read past the end of the stream."; }

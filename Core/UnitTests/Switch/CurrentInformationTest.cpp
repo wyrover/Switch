@@ -3,6 +3,7 @@
 #include <Switch/TUnit/TestFixture.hpp>
 
 using namespace System;
+using namespace System::Runtime::CompilerServices;
 using namespace TUnit;
 
 namespace SwitchUnitTests {

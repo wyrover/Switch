@@ -25,7 +25,7 @@ namespace Switch {
         /// @brief Create a new instance of class XmlSyntaxException
         /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
         /// @remarks Message is set with the default message associate to the error.
-        XmlSyntaxException(const Caller& information) : SystemException(information) {}
+        XmlSyntaxException(const System::Runtime::CompilerServices::Caller& information) : SystemException(information) {}
         
         /// @brief Create a new instance of class XmlSyntaxException
         /// @param message Message string associate to the error.
@@ -34,13 +34,13 @@ namespace Switch {
         /// @brief Create a new instance of class XmlSyntaxException
         /// @param message Message string associate to the error.
         /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
-        XmlSyntaxException(const System::String& message, const Caller& information) : SystemException(message, information) {}
+        XmlSyntaxException(const System::String& message, const System::Runtime::CompilerServices::Caller& information) : SystemException(message, information) {}
         
         /// @brief Create a new instance of class XmlSyntaxException
         /// @param message Message string associate to the error.
         /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
         /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
-        XmlSyntaxException(const System::String& message, const System::Exception& innerException, const Caller& information) : SystemException(message, innerException, information) {}
+        XmlSyntaxException(const System::String& message, const System::Exception& innerException, const System::Runtime::CompilerServices::Caller& information) : SystemException(message, innerException, information) {}
         
       private:
         System::String GetDefaultMessage() const override {return "Syntax error in XML."; }

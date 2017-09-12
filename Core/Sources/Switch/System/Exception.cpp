@@ -25,7 +25,7 @@ Exception::Exception() : caller(_caller) {
   this->SetHResult(__HResults::COR_E_EXCEPTION);
 }
 
-Exception::Exception(const Caller& information) : caller(information) {
+Exception::Exception(const System::Runtime::CompilerServices::Caller& information) : caller(information) {
   this->SetStackTrace(*this);
   this->SetHResult(__HResults::COR_E_EXCEPTION);
 }
@@ -44,7 +44,7 @@ Exception::Exception(const string& message) : message(message), caller(_caller) 
   this->SetHResult(__HResults::COR_E_EXCEPTION);
 }
 
-Exception::Exception(const string& message, const Caller& information) : message(message), caller(information) {
+Exception::Exception(const string& message, const System::Runtime::CompilerServices::Caller& information) : message(message), caller(information) {
   this->SetStackTrace(*this);
   this->SetHResult(__HResults::COR_E_EXCEPTION);
 }
@@ -54,7 +54,7 @@ Exception::Exception(const string& message, const Exception& innerExeption) : me
   this->SetHResult(__HResults::COR_E_EXCEPTION);
 }
 
-Exception::Exception(const string& message, const Exception& innerExeption, const Caller& information) : message(message), caller(information), innerException(innerExeption) {
+Exception::Exception(const string& message, const Exception& innerExeption, const System::Runtime::CompilerServices::Caller& information) : message(message), caller(information), innerException(innerExeption) {
   this->SetStackTrace(*this);
   this->SetHResult(__HResults::COR_E_EXCEPTION);
 }

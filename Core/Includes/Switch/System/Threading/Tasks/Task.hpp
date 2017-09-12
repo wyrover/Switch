@@ -317,7 +317,7 @@ namespace Switch {
           template<typename T>
           static bool WaitAll(Array<Task<T>> tasks, int32 millisecondsTimeout) {
             if (millisecondsTimeout < Timeout::Infinite)
-              ArgumentOutOfRangeException(Caller(__FILE__, __LINE__));
+              ArgumentOutOfRangeException(System::Runtime::CompilerServices::Caller(__FILE__, __LINE__));
             
             if (millisecondsTimeout == Timeout::Infinite) {
               for (auto& task : tasks)
@@ -444,7 +444,7 @@ namespace Switch {
           template<typename T>
           static int32 WaitAny(Array<Task<T>> tasks, int32 millisecondsTimeout) {
             if (millisecondsTimeout < Timeout::Infinite)
-              ArgumentOutOfRangeException(Caller(__FILE__, __LINE__));
+              ArgumentOutOfRangeException(System::Runtime::CompilerServices::Caller(__FILE__, __LINE__));
             
             if (millisecondsTimeout == Timeout::Infinite) {
               for (int32 index = 0; index < tasks.Count; index++) {

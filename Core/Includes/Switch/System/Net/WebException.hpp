@@ -26,7 +26,7 @@ namespace Switch {
         /// @brief Create a new instance of class WebException
         /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
         /// @remarks Message is set with the default message associate to the error.
-        WebException(const Caller& information) : InvalidOperationException(information) {}
+        WebException(const System::Runtime::CompilerServices::Caller& information) : InvalidOperationException(information) {}
         
         /// @brief Create a new instance of class WebException
         /// @param message Message string associate to the error.
@@ -35,13 +35,13 @@ namespace Switch {
         /// @brief Create a new instance of class WebException
         /// @param message Message string associate to the error.
         /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
-        WebException(const System::String& message, const Caller& information) : InvalidOperationException(message, information) {}
+        WebException(const System::String& message, const System::Runtime::CompilerServices::Caller& information) : InvalidOperationException(message, information) {}
         
         /// @brief Create a new instance of class WebException
         /// @param message Message string associate to the error.
         /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
         /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
-        WebException(const System::String& message, const System::Exception& innerException, const Caller& information) : InvalidOperationException(message, innerException, information) {}
+        WebException(const System::String& message, const System::Exception& innerException, const System::Runtime::CompilerServices::Caller& information) : InvalidOperationException(message, innerException, information) {}
         
       private:
         System::String GetDefaultMessage() const override {return "Operation is not valid due to the current state of the object."; }

@@ -20,7 +20,7 @@ namespace Switch {
     namespace Constraints {
       class _export Constraint _abstract {
       public:
-        _property<::Caller> Caller {
+        _property< System::Runtime::CompilerServices::Caller> Caller {
           _get {return this->caller;},
           _set {this->caller = value;}
         };
@@ -59,7 +59,7 @@ namespace Switch {
         mutable ConstraintValue actual;
         ConstraintValue expect;
         mutable string message;
-        mutable ::Caller caller;
+        mutable System::Runtime::CompilerServices::Caller caller;
       };
     }
   }

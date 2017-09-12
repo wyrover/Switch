@@ -23,7 +23,7 @@ namespace Switch {
       /// @brief Create a new instance of class EntryPointNotFoundException
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
       /// @remarks Message is set with the default message associate to the error.
-      EntryPointNotFoundException(const Caller& information) : TypeLoadException(information) {}
+      EntryPointNotFoundException(const System::Runtime::CompilerServices::Caller& information) : TypeLoadException(information) {}
       
       /// @brief Create a new instance of class EntryPointNotFoundException
       /// @param message Message string associate to the error.
@@ -32,13 +32,13 @@ namespace Switch {
       /// @brief Create a new instance of class EntryPointNotFoundException
       /// @param message Message string associate to the error.
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
-      EntryPointNotFoundException(const System::String& message, const Caller& information) : TypeLoadException(message, information) {}
+      EntryPointNotFoundException(const System::String& message, const System::Runtime::CompilerServices::Caller& information) : TypeLoadException(message, information) {}
       
       /// @brief Create a new instance of class EntryPointNotFoundException
       /// @param message Message string associate to the error.
       /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
-      EntryPointNotFoundException(const System::String& message, const System::Exception& innerException, const Caller& information) : TypeLoadException(message, innerException, information) {}
+      EntryPointNotFoundException(const System::String& message, const System::Exception& innerException, const System::Runtime::CompilerServices::Caller& information) : TypeLoadException(message, innerException, information) {}
       
     private:
       System::String GetDefaultMessage() const override {return "Entry point was not found."; }

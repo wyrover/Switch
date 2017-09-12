@@ -23,7 +23,7 @@ namespace Switch {
       /// @brief Create a new instance of class FormatException
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
       /// @remarks Message is set with the default message associate to the error.
-      FormatException(const Caller& information) : SystemException(information) {}
+      FormatException(const System::Runtime::CompilerServices::Caller& information) : SystemException(information) {}
       
       /// @brief Create a new instance of class FormatException
       /// @param message Message string associate to the error.
@@ -32,13 +32,13 @@ namespace Switch {
       /// @brief Create a new instance of class FormatException
       /// @param message Message string associate to the error.
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
-      FormatException(const System::String& message, const Caller& information) : SystemException(message, information) {}
+      FormatException(const System::String& message, const System::Runtime::CompilerServices::Caller& information) : SystemException(message, information) {}
       
       /// @brief Create a new instance of class FormatException
       /// @param message Message string associate to the error.
       /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
-      FormatException(const System::String& message, const System::Exception& innerException, const Caller& information) : SystemException(message, innerException, information) {}
+      FormatException(const System::String& message, const System::Exception& innerException, const System::Runtime::CompilerServices::Caller& information) : SystemException(message, innerException, information) {}
       
     private:
       System::String GetDefaultMessage() const override {return "One of identified items is an invalid format."; }

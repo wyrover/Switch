@@ -73,6 +73,7 @@ using namespace System::Collections::Generic;
 using namespace System::IO;
 using namespace System::Net;
 using namespace System::Net::Sockets;
+using namespace System::Runtime::CompilerServices;
 using namespace System::Runtime::Serialization;
 using namespace System::Threading;
 using namespace TUnit;
@@ -82,10 +83,10 @@ namespace {
   public:
     MyFirstGroupException() : System::Exception() {}
     MyFirstGroupException(const MyFirstGroupException& value) : System::Exception(value) {}
-    MyFirstGroupException(const Caller& information) : System::Exception(information) {} \
+    MyFirstGroupException(const System::Runtime::CompilerServices::Caller& information) : System::Exception(information) {} \
     MyFirstGroupException(const System::String& message) : System::Exception(message) {}
-    MyFirstGroupException(const System::String& message, const Caller& information) : System::Exception(message, information) {}
-    MyFirstGroupException(const System::String& message, const System::Exception& innerException, const Caller& information) : System::Exception(message, innerException, information) {}
+    MyFirstGroupException(const System::String& message, const System::Runtime::CompilerServices::Caller& information) : System::Exception(message, information) {}
+    MyFirstGroupException(const System::String& message, const System::Exception& innerException, const System::Runtime::CompilerServices::Caller& information) : System::Exception(message, innerException, information) {}
   private:
     System::String GetDefaultMessage() const override {return "My First Group Exception"; }
   };
@@ -94,10 +95,10 @@ namespace {
   public:
     MySecondGroupException() : System::Exception() {}
     MySecondGroupException(const MySecondGroupException& value) : System::Exception(value) {}
-    MySecondGroupException(const Caller& information) : System::Exception(information) {}
+    MySecondGroupException(const System::Runtime::CompilerServices::Caller& information) : System::Exception(information) {}
     MySecondGroupException(const System::String& message) : System::Exception(message) {}
-    MySecondGroupException(const System::String& message, const Caller& information) : System::Exception(message, information) {}
-    MySecondGroupException(const System::String& message, const System::Exception& innerException, const Caller& information) : System::Exception(message, innerException, information) {}
+    MySecondGroupException(const System::String& message, const System::Runtime::CompilerServices::Caller& information) : System::Exception(message, information) {}
+    MySecondGroupException(const System::String& message, const System::Exception& innerException, const System::Runtime::CompilerServices::Caller& information) : System::Exception(message, innerException, information) {}
   private:
     System::String GetDefaultMessage() const override {return "My Second Group Exception"; }
   };
@@ -106,10 +107,10 @@ namespace {
   public:
     MyFirstOwnException() : MyFirstGroupException() {}
     MyFirstOwnException(const MyFirstOwnException& value) : MyFirstGroupException(value) {}
-    MyFirstOwnException(const Caller& information) : MyFirstGroupException(information) {}
+    MyFirstOwnException(const System::Runtime::CompilerServices::Caller& information) : MyFirstGroupException(information) {}
     MyFirstOwnException(const System::String& message) : MyFirstGroupException(message) {}
-    MyFirstOwnException(const System::String& message, const Caller& information) : MyFirstGroupException(message, information) {}
-    MyFirstOwnException(const System::String& message, const System::Exception& innerException, const Caller& information) : MyFirstGroupException(message, innerException, information) {}
+    MyFirstOwnException(const System::String& message, const System::Runtime::CompilerServices::Caller& information) : MyFirstGroupException(message, information) {}
+    MyFirstOwnException(const System::String& message, const System::Exception& innerException, const System::Runtime::CompilerServices::Caller& information) : MyFirstGroupException(message, innerException, information) {}
   private:
     System::String GetDefaultMessage() const override {return "My First Own Exception"; }
   };
@@ -118,10 +119,10 @@ namespace {
   public:
     MySecondOwnException() : MyFirstGroupException() {}
     MySecondOwnException(const MySecondOwnException& value) : MyFirstGroupException(value) {}
-    MySecondOwnException(const Caller& information) : MyFirstGroupException(information) {}
+    MySecondOwnException(const System::Runtime::CompilerServices::Caller& information) : MyFirstGroupException(information) {}
     MySecondOwnException(const System::String& message) : MyFirstGroupException(message) {}
-    MySecondOwnException(const System::String& message, const Caller& information) : MyFirstGroupException(message, information) {}
-    MySecondOwnException(const System::String& message, const System::Exception& innerException, const Caller& information) : MyFirstGroupException(message, innerException, information) {}
+    MySecondOwnException(const System::String& message, const System::Runtime::CompilerServices::Caller& information) : MyFirstGroupException(message, information) {}
+    MySecondOwnException(const System::String& message, const System::Exception& innerException, const System::Runtime::CompilerServices::Caller& information) : MyFirstGroupException(message, innerException, information) {}
   private:
     System::String GetDefaultMessage() const override {return "My Second Own Exception"; }
   };
@@ -130,10 +131,10 @@ namespace {
   public:
     MyThirdOwnException() : MySecondGroupException() {}
     MyThirdOwnException(const MyThirdOwnException& value) : MySecondGroupException(value) {}
-    MyThirdOwnException(const Caller& information) : MySecondGroupException(information) {}
+    MyThirdOwnException(const System::Runtime::CompilerServices::Caller& information) : MySecondGroupException(information) {}
     MyThirdOwnException(const System::String& message) : MySecondGroupException(message) {}
-    MyThirdOwnException(const System::String& message, const Caller& information) : MySecondGroupException(message, information) {}
-    MyThirdOwnException(const System::String& message, const System::Exception& innerException, const Caller& information) : MySecondGroupException(message, innerException, information) {}
+    MyThirdOwnException(const System::String& message, const System::Runtime::CompilerServices::Caller& information) : MySecondGroupException(message, information) {}
+    MyThirdOwnException(const System::String& message, const System::Exception& innerException, const System::Runtime::CompilerServices::Caller& information) : MySecondGroupException(message, innerException, information) {}
   private:
     System::String GetDefaultMessage() const override {return "My Third Own Exception"; }
   };
@@ -142,10 +143,10 @@ namespace {
   public:
     MyFourthOwnException() : MySecondGroupException() {}
     MyFourthOwnException(const MyFourthOwnException& value) : MySecondGroupException(value) {}
-    MyFourthOwnException(const Caller& information) : MySecondGroupException(information) {}
+    MyFourthOwnException(const System::Runtime::CompilerServices::Caller& information) : MySecondGroupException(information) {}
     MyFourthOwnException(const System::String& message) : MySecondGroupException(message) {}
-    MyFourthOwnException(const System::String& message, const Caller& information) : MySecondGroupException(message, information) {}
-    MyFourthOwnException(const System::String& message, const System::Exception& innerException, const Caller& information) : MySecondGroupException(message, innerException, information) {}
+    MyFourthOwnException(const System::String& message, const System::Runtime::CompilerServices::Caller& information) : MySecondGroupException(message, information) {}
+    MyFourthOwnException(const System::String& message, const System::Exception& innerException, const System::Runtime::CompilerServices::Caller& information) : MySecondGroupException(message, innerException, information) {}
   private:
     System::String GetDefaultMessage() const override {return "My Fourth Own Exception"; }
   };

@@ -23,7 +23,7 @@ namespace Switch {
       /// @brief Create a new instance of class ArrayTypeMismatchException
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
       /// @remarks Message is set with the default message associate to the error.
-      ArrayTypeMismatchException(const Caller& information) : SystemException(information) {}
+      ArrayTypeMismatchException(const System::Runtime::CompilerServices::Caller& information) : SystemException(information) {}
       
       /// @brief Create a new instance of class ArrayTypeMismatchException
       /// @param message Message string associate to the error.
@@ -32,13 +32,13 @@ namespace Switch {
       /// @brief Create a new instance of class ArrayTypeMismatchException
       /// @param message Message string associate to the error.
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
-      ArrayTypeMismatchException(const System::String& message, const Caller& information) : SystemException(message, information) {}
+      ArrayTypeMismatchException(const System::String& message, const System::Runtime::CompilerServices::Caller& information) : SystemException(message, information) {}
       
       /// @brief Create a new instance of class ArrayTypeMismatchException
       /// @param message Message string associate to the error.
       /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
-      ArrayTypeMismatchException(const System::String& message, const System::Exception& innerException, const Caller& information) : SystemException(message, innerException, information) {}
+      ArrayTypeMismatchException(const System::String& message, const System::Exception& innerException, const System::Runtime::CompilerServices::Caller& information) : SystemException(message, innerException, information) {}
       
     private:
       System::String GetDefaultMessage() const override {return "Attempt to access an element as a type incompatible with the array."; }
