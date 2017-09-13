@@ -31,7 +31,7 @@ Or download latest development version on GitHub.
    *Remarks: Verify if you can execute doxygen --version in "Developer Command Prompt for VS 2017", if it's no, add doxygen install directory to your path.*
 
 4. After installing Microsoft Visual Studio, Cmake and Doxygen, do the following in "Developer Command Prompt for VS 2017" to Build and install Switch :
-```
+```shell
 cd C:\Users\YourName\Switch\
 install.bat
 ```
@@ -58,7 +58,7 @@ install.bat
 
 3. After installing brew, do the following in "Terminal" to Build and install Switch :
 
-```
+```shell
 cd /Users/YourName/Switch
 ./install.sh
 ```
@@ -70,7 +70,7 @@ cd /Users/YourName/Switch
 
 1. Do the following in "Terminal" to Build and install Switch :
 
-```
+```shell
 cd /home/YourName/Switch
 ./install.sh
 ```
@@ -82,7 +82,7 @@ cd /home/YourName/Switch
 
 1. Do the following in "Terminal" to Build and install Switch :
   
-```
+```shell
 cd /home/YourName/Switch
 ./install.sh
 ```
@@ -108,7 +108,7 @@ cd /home/YourName/Switch
   
 5. After installing gtkmm, do the following in "Terminal" to Build and install Switch :
   
-```
+```shell
 cd /home/YourName/Switch
 ./install.sh
 ```
@@ -156,7 +156,7 @@ target_link_libraries(SwitchConsole Switch.Core)
 
 To build this wonderful application, open "Developer Command Prompt for VS 2017" and type following lines:
 
-```
+```shell
 cd C:\Users\YourName\Projects\SwitchConsole
 mkdir bin
 cd bin
@@ -168,7 +168,7 @@ The SwitchConsle.sln file was generate, open it with VisualStudio 2017. Select S
 
 To build this wonderful application, open "Terminal" and type following lines:
 
-```
+```shell
 cd /Users/YourName/Projects/SwitchConsole
 mkdir bin
 cd bin
@@ -180,7 +180,7 @@ The SwitchConsle.xcodeproj file was generate, open it with Xcode. Select SwitchC
 
 To build this wonderful application, open "Terminal" and type following lines:
 
-```
+```shell
 cd /home/YourName/Projects/SwitchConsole
 mkdir bin
 cd bin
@@ -188,7 +188,7 @@ cmake -G ..
 ```
 The makefile was generate, in the same "Terminal" type following lines to build and run your first application:
 
-```
+```shell
 make
 ./SwitchConsole
 ```

@@ -25,7 +25,6 @@ public:
   __property__(const Getter& getter, const Setter& setter) : getter(getter), setter(setter) {}
   
   T Get() const {return this->getter();}
-  
   T operator ()() const {return this->getter();}
   
   operator T () const {return this->getter();}
@@ -34,7 +33,6 @@ public:
   bool operator !=(T value) const {return this->getter() != value;}
   
   T Set(T value) {this->setter(value); return this->getter();}
-  
   T operator ()(T value) {this->setter(value); return this->getter();}
   
   __property__& operator =(T value) {this->setter(value); return *this;}
