@@ -172,7 +172,7 @@ For the purposes of this tables, a, b, and c represent valid values (literals, v
 | Division assignment            | a /= b                 | a = a / b  | Yes          | R& K::operator /=(S b);         | R& operator /=(K& a, S b);                 |
 | Modulo assignment              | a %= b                 | a = a % b  | Yes          | R& K::operator %=(S b);         | R& operator %=(K& a, S b);                 |
 | Bitwise AND assignment         | a &= b -or- a end_eq b | a = a & b  | Yes          | R& K::operator &=(S b);         | R& operator &=(K& a, S b);                 |
-| Bitwise OR assignment          | a |= b -or- a or_eq b  | a = a | b  | Yes          | R& K::operator |=(S b);         | R& operator |=(K& a, S b);                 |
+| Bitwise OR assignment          | a \|= b -or- a or_eq b | a = a \| b | Yes          | R& K::operator \|=(S b);        | R& operator \|=(K& a, S b);                |
 | Bitwise XOR assignment         | a ^= b -or- a xor_eq b | a = a^b    | Yes          | R& K::operator ^=(S b);         | R& operator ^=(K& a, S b);                 |
 | Bitwise left shift assignment  | a <<= b                | a = a << b | Yes          | R& K::operator <<=(S b);        | R& operator <<=(K& a, S b);                |
 | Bitwise right shift assignment | a >>= b                | a = a >> b | Yes          | R& K::operator >>=(S b);        | R& operator <<=(K& a, S b);                |
