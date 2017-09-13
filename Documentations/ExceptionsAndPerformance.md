@@ -9,7 +9,7 @@ One common concern related to exceptions is that if exceptions are used for code
 
 To improve performance, it is possible to use either the Tester-Doer Pattern or the Try-Parse Pattern, described in the next two sections.
 
-# TesterDoerPattern
+# Tester-Doer Pattern
 
 Sometimes performance of an exception-throwing member can be improved by breaking the member into two. Let’s look at the Add method of the System::Collections::Generic::ICollection<T> interface.
 
