@@ -120,7 +120,7 @@ cd /home/YourName/Switch
 
 After downloading and install Switch you are ready to build and run your first application. We will call it SwitchConsole (or what you want).
 This application is very simple and it composed of 2 files :
-​
+
 A source file SwitchConsole.cpp :
 
 ```c++
