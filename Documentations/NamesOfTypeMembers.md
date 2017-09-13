@@ -15,7 +15,7 @@ Because methods are the means of taking action, the design guidelines require th
 ```c++
 ​class String : public object {
 ​public:
-  int32 CompareTo(...);
+  int CompareTo(...);
   Array<string> Split(...);
   string Trim();
 };

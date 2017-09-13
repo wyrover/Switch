@@ -41,7 +41,7 @@ For example, a method converting to int64 should be named ToInt64, not ToLong (b
 ​
 The following table presents several base data types using the Switch type names (as well as the corresponding type names for all platform).
 
-| ​C++                |        | Size in bytes |
+| ​C++                | Switch | Size in bytes |
 |--------------------|--------|---------------|
 | char               | sbyte  | 1             |
 | unsigned char      | byte   | 1             |

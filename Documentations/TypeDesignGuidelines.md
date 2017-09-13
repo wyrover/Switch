@@ -34,7 +34,6 @@ Delegates, exceptions, attributes, arrays, and collections are all special cases
 Other Resources
 
 * [Framework Design Guidelines](FrameworkDesignGuidelines.md)
-* [Naming Guidelines](NamingGuidelines.md)
 
 ______________________________________________________________________________________________
 

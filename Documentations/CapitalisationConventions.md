@@ -81,7 +81,7 @@ public:
 ```c++
 class String : public object {
 public:
-  _property<int32> Length {
+  _property<int> Length {
     _get {return this->length;},
     _set {this->length = value;}
   }
@@ -102,7 +102,7 @@ public:
 ```c++
 struct UInt32 : public object {
 public:
-  static const uint32 Min = 0;
+  static const uint Min = 0;
 };
 ```
 
@@ -120,7 +120,7 @@ enum class Values {
 ```c++
 class Convert {
 public:
-  static int32 ToInt32(const string& value);
+  static int ToInt32(const string& value);
 };
 ```
 
@@ -131,7 +131,7 @@ struct UInt32 : public object {
 public:
   ...
 private:
-  uint32 value;
+  uint value;
 };
  
 struct DateTime : public object {
