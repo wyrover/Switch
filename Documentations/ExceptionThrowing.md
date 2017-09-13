@@ -46,7 +46,7 @@ Also, members that throw exceptions are not getting inlined. Moving the throw st
 Other Resources
 
 * [Framework Design Guidelines](FrameworkDesignGuidelines.md)
-* [Usage Guidelines](UsageGuidelines.md)
+* [Design Guidelines for Exception](DesignGuidelinesForException.md)
 
 ______________________________________________________________________________________________
 

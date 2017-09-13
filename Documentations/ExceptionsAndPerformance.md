@@ -62,7 +62,7 @@ When using this pattern, it is important to define the try functionality in stri
 Other Resources
 
 * [Framework Design Guidelines](FrameworkDesignGuidelines.md)
-* [Usage Guidelines](UsageGuidelines.md)
+* [Design Guidelines for Exception](DesignGuidelinesForException.md)
 
 ______________________________________________________________________________________________
 

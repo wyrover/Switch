@@ -57,7 +57,7 @@ It is almost impossible to write code that remains consistent in the presence of
 Other Resources
 
 * [Framework Design Guidelines](FrameworkDesignGuidelines.md)
-* [Usage Guidelines](UsageGuidelines.md)
+* [Design Guidelines for Exception](DesignGuidelinesForException.md)
 
 ______________________________________________________________________________________________
 
