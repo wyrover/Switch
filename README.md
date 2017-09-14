@@ -9,7 +9,7 @@ ________________________________________________________________________________
 - written in efficient, modern C++14;
 - and highly portable and available on many different platforms (Windows, Mac Os X, Linux);
 
-For more information see [https://gammasoft71.wixsite.switch](https://gammasoft71.wixsite.com/switch) or see [Documentations](Documentations)
+For more information see [Switch](https://gammasoft71.wixsite.com/switch) or see [Documentations](Documentations)
 
 
 # Examples
@@ -131,7 +131,7 @@ add_executable(HelloWorldTest HelloWorldTest.cpp)
 target_link_libraries(HelloWorldTest Switch.TUnit.Main)
 ```
 
-For more Examples see [Examples](Examples)
+For more examples see [Examples](Examples)
 
 # Download Switch 0.3.2
 

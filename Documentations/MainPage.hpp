@@ -5,26 +5,7 @@
 ///   * written in efficient, modern C++14;
 ///   * and highly portable and available on many different platforms;
 ///
-/// @image HTML SwitchArchitecture.png
-///
-/// @section Switchiscomposedof4librariesSection Switch is composed of 4 libraries
-///   * <b>Switch.Core</b> library is a library of classes, interfaces, and value types that provide access to system functionality. It is the foundation on which c++ applications, components, and controls are built.
-///   * <b>Switch.Drawing</b> library contains types that support basic GDI+ graphics functionality. Child namespaces support advanced two-dimensional and vector graphics functionality, advanced imaging functionality, and print-related and typographical services. A child namespace also contains types that extend design-time user-interface logic and drawing.
-///   * <b>Switch.Forms</b> library contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system.
-///   * <b>Switch.TUnit</b> library contains unit testing framework.
-///
-/// @section ObjectivesAndMissionSection Objectives and Mission
-///   * <b>Switch</b> is a powerful, yet easy to use platform to build your applications upon
-///   * <b>Switch</b> allows you to build highly portable applications (write once – compile and run anywhere)
-///   * <b>Switch</b> is modular and scalable from embedded applications
-///   * <b>Switch</b> provides consistent, comprehensive and comprehensible programming interfaces
-///   * <b>Switch</b> favors simplicity over complexity ("as simple as possible, but not simpler")
-///   * <b>Switch</b> aims for consistency in design, coding style and documentation
-///   * <b>Switch</b> emphasizes source code quality, in terms of readability, comprehensiveness, consistency, style and testability
-///   * <b>Switch</b> aims to make C++ programming fun again Guiding Principles
-///   * Strong focus on code quality, style, consistency and code readability –all code must satisfy our coding style guide
-///   * Strong focus on tests (automated unit tests with high coverage)
-///   * Build on top of solid foundations – use existing proven C libraries (e.g. Curl, rs232, zlib,...) where it makes sense
+/// For more information see <a href="https://gammasoft71.wixsite.com/switch">Switch</a>  or see <a href=https://github.com/gammasoft71/switch/tree/master/Documentations>Documentations</a>
 ///
 /// @section ExamplesSection Examples
 ///
@@ -143,16 +124,8 @@
 /// target_link_libraries(HelloWorldTest Switch.TUnit.Main)
 /// @endcode
 ///
-/// For more Examples see https://github.com/gammasoft71/Switch/tree/master/Examples
+/// For more examples see <a href="https://github.com/gammasoft71/Switch/tree/master/Examples">Examples</a>.
 ///
-/// @section DownloadSection Download Switch 0.3.2
+/// @section DownloadSection Download Switch
 ///
-/// You can download latest stable version on SourceForge
-///
-/// https://sourceforge.net/projects/switchpro/files/latest/download
-///
-/// @section InstallSection Install
-/// Before running examples you must install Switch. To install it read See https://github.com/gammasoft71/Switch/tree/master/Install.md file.
-///
-/// @section SwitchWebSizeSEction Switch Web Site
-/// For more information see https://gammasoft71.wixsite.com/switch
+/// Before running examples you must download and install Switch. To download and install it read <a href="https://github.com/gammasoft71/Switch/tree/master/Documentations/Download.md">Download.md</a> file.
