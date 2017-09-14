@@ -57,7 +57,7 @@ For explicit boxing a type into corresponding object class use keyword Box or Bo
 Remarks : By default an implicit boxing into corresponding object class is used.
 
 ```c++
-boolean readyUnboxed = true;
+bool readyUnboxed = true;
 Boolean readyBoxed = Box(readyUnboxed);  // explicit
 Boolean readyBoxed2 = readyUnboxed;      // implicit
 ```
@@ -69,8 +69,8 @@ Remarks : By default an implicit unboxing into corresponding type is used.
 
 ```c++
 Boolean readyBoxed = true;
-boolean readyUnboxed = Unbox(readyBoxed);  // explict
-boolean readyUnboxed2 = readyBoxed;        // implicit
+bool readyUnboxed = Unbox(readyBoxed);  // explict
+bool readyUnboxed2 = readyBoxed;        // implicit
 ```
 
 ______________________________________________________________________________________________
