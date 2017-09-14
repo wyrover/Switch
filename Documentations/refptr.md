@@ -9,8 +9,7 @@
 ​
 Other Resources
 
-* [Framework Design Guidelines](FrameworkDesignGuidelines.md)
-* [Usage Guidelines](UsageGuidelines.md)
+* [Tutorials](Tutorials.md)
 
 ______________________________________________________________________________________________
 
