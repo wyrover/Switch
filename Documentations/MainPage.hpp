@@ -128,4 +128,4 @@
 ///
 /// @section DownloadSection Download Switch
 ///
-/// Before running examples you must download and install Switch. To download and install it read <a href="https://github.com/gammasoft71/Switch/tree/master/Documentations/Download.md">Download.md</a> file.
+/// Before running examples you must download and install Switch. To download and install it read <a href="https://gammasoft71.wixsite.com/switch/downloads">Downloads</a> page or <a href="https://github.com/gammasoft71/Switch/tree/master/Documentations/Download.md">Download.md</a> file.
