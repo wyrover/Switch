@@ -5,7 +5,7 @@
 ///   * written in efficient, modern C++14;
 ///   * and highly portable and available on many different platforms;
 ///
-/// For more information see <a href="https://gammasoft71.wixsite.com/switch">Switch</a>  or see <a href=https://github.com/gammasoft71/switch/tree/master/Documentations>Documentations</a>
+/// For more information see <a href="https://gammasoft71.wixsite.com/switch">Switch</a> page or <a href=https://github.com/gammasoft71/switch/tree/master/Documentations>Documentations.md</a> file.
 ///
 /// @section ExamplesSection Examples
 ///
