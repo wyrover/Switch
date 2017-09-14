@@ -8,28 +8,23 @@ using namespace TUnit;
 namespace UnitTests {
   // The class DirectoryTest must be inherited from TestFixture
   class UserTest : public TestFixture {
+  public:
+    // The main entry point for the test application.
+    static int Main(const Array<string>& args) {
+      // You can add your own code here.
+      
+      // Create UnitTest and run it
+      return TUnit::UnitTest(args).Run();
+    }
+
   protected:
     void AnyTest() {
       Assert::Null(null, _caller);
     }
   };
-  
-  // Used _test to add unit test to execute at the unit test suit.
-  _test(UserTest, AnyTest);
-  
-  class MainClass {
-  public:
-    // The main entry point for the test application.
-    static int Main(const Array<string>& args) {
-      // You can add your own code here.
-
-      // Create UnitTest and run it
-      return TUnit::UnitTest(args).Run();
-    }
-  };
 }
 
-_startup (UnitTests::MainClass)
+_startup (UnitTests::UserTest)
 
 // This code produces the following output if directory Downloads exists and Potatos doesn't exist in your home direcory:
 //
