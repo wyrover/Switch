@@ -22,6 +22,9 @@ namespace UnitTests {
       Assert::Null(null, _caller);
     }
   };
+  
+  // Used _test to add unit test to execute at the unit test suit.
+  _test(UserTest, AnyTest);
 }
 
 _startup (UnitTests::UserTest)
