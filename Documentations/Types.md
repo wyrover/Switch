@@ -29,6 +29,7 @@ For more performance prefere used Unboxed type. Used Boxed type when necessary, 
 | uint32       | System::UInt32   | uint32_t    | unsigned int                                 | 4              | Represents a 32-bit unsigned integer.                                         |
 | uint64       | System::UInt64   | uint64_t    | unsigned long long                           | 8              | Represents a 64-bit unsigned integer.                                         |
 | uintptr      | System::UIntPtr  | uintptr_t   | unsigned int* - or - unsigned long long* (1) | 4 - or - 8 (1) | Represent an unsigned pointer or a handle.                                    |
+
 (1) Depend of build : if build in 32 bits the size is 4 bytes, if build in 64 bits the size is 8 bytes.
 
 # Limits
