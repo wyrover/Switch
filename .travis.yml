@@ -39,6 +39,8 @@ script:
   - make all -j6
   - sudo make install
   - cd ..
-  - cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DBUILD_CORE_UNIT_TESTS=ON -DBUILD_DRAWING_UNIT_TESTS=ON -DBUILD_FORMS_UNIT_TESTS=ON -DBUILD_TUNIT_UNIT_TESTS=ON ..
+  - cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=ON ..
   - make all -j6
+  #- sudo make install
+  - ./Switch.Core.UnitTests
   
