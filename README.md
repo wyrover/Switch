@@ -1,7 +1,10 @@
 ![GitHub Logo](Documentations/Images/SwitchNativeC++port.png)
 ____________________________________________________________________________________
+
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) 
+[![Download Switch](https://img.shields.io/sourceforge/dt/switchpro.svg)](https://sourceforge.net/projects/switchpro/files/latest/download)
 [![Build Status](https://travis-ci.org/gammasoft71/Switch.svg)](https://travis-ci.org/gammasoft71/Switch) 
+
 ____________________________________________________________________________________
 
 # The Switch framework is...
