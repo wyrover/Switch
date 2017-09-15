@@ -14,7 +14,7 @@ addons:
       - gcc-5
             
 osx_image: xcode8.3
-group: deprecated-2017Q3
+#group: deprecated-2017Q3
 dist: trusty
 sudo: enabled
 compiler: clang
