@@ -28,7 +28,7 @@ intptr __OS::CoreApi::Process::Start(const System::Diagnostics::ProcessStartInfo
   memset(&startupInfo, 0, sizeof(STARTUPINFO));
   startupInfo.cb = sizeof(STARTUPINFO);
   PROCESS_INFORMATION processInformation;
-  CreateProcess(processStartInfo.FileName().w_str().c_str(), (wchar*)processStartInfo.Arguments().w_str().c_str(), NULL, NULL, FALSE, 0, (LPVOID)vars3, processStartInfo.WorkingDirectory().IsEmpty() ? NULL : processStartInfo.WorkingDirectory().w_str().c_str(), &startupInfo, &processInformation);
+  CreateProcess(processStartInfo.FileName().w_str().c_str(), (wchar*)processStartInfo.Arguments().w_str().c_str(), NULL, NULL, FALSE, 0, (LPVOID)vars3, string::IsNullOrEmpty(processStartInfo.WorkingDirectory()) ? NULL : processStartInfo.WorkingDirectory().w_str().c_str(), &startupInfo, &processInformation);
   //CreateProcess(processStartInfo.FileName().w_str().c_str(), (wchar*)processStartInfo.Arguments().w_str().c_str(), NULL, NULL, FALSE, 0, (LPVOID)*environmentVariables.Data(), processStartInfo.WorkingDirectory().IsEmpty() ? NULL : processStartInfo.WorkingDirectory().w_str().c_str(), &startupInfo, &processInformation);
   ///CreateProcess(processStartInfo.FileName().w_str().c_str(), (wchar*)processStartInfo.Arguments().w_str().c_str(), NULL, NULL, FALSE, 0, NULL, processStartInfo.WorkingDirectory().IsEmpty() ? NULL : processStartInfo.WorkingDirectory().w_str().c_str(), &startupInfo, &processInformation);
   return (intptr)processInformation.hProcess;

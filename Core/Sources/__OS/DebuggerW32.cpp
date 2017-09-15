@@ -6,7 +6,7 @@
 #include "CoreApi.hpp"
 
 void __OS::CoreApi::Debugger::Log(int32 level, const string& category, const string &message) {
-  if (category.IsEmpty())
+  if (string::IsNullOrEmpty(category))
     OutputDebugStringA(message.Data);
   else {
     OutputDebugStringA(category.Data);
