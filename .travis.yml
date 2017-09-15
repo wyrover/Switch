@@ -18,6 +18,7 @@ dist: trusty
 sudo: enabled
 compiler: clang
 language: cpp
+group: deprecated-2017Q3
 
 script:
   - cmake --version
