@@ -157,7 +157,7 @@ int LengthOfNumbers = numbers.Length;
 
 The System::Array class provides many other useful methods/properties, such as methods for sorting, searching, and copying arrays.
 
-# Using foreach on Array
+# Using foreach on Arrays
 
 Switch also provides the foreach statement. This statement provides a simple, clean way to iterate through the elements of an array. For example, the following code creates an array called numbers and iterates through it with the foreach statement:
 
