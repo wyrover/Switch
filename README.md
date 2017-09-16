@@ -6,7 +6,6 @@ ________________________________________________________________________________
 [![Build Status](https://travis-ci.org/gammasoft71/Switch.svg)](https://travis-ci.org/gammasoft71/Switch) 
 [![Download Switch](https://img.shields.io/sourceforge/dt/switchpro.svg)](https://sourceforge.net/projects/switchpro/files/latest/download)
 <!--[![Build status](https://ci.appveyor.com/api/projects/status/kjfq2sl5bc99kut6?svg=true)](https://ci.appveyor.com/project/gammasoft71/switch)-->
-____________________________________________________________________________________
 
 # The Switch framework is...
 - a collection of native C++ classes libraries, similar to the .NET Framework;
