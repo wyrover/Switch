@@ -10,7 +10,7 @@ ________________________________________________________________________________
 # The Switch framework is...
 - a collection of native C++ classes libraries, similar to the .NET Framework;
 - written in efficient, modern C++14;
-- and highly portable and available on many different platforms (Windows, Mac Os X, Linux);
+- and highly portable and available on many different platforms (Windows, macOS, Linux);
 
 For more information see [Switch](https://gammasoft71.wixsite.com/switch) or see [Documentations](Documentations)
 
