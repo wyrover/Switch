@@ -2072,26 +2072,14 @@ INCLUDE_FILE_PATTERNS  =
 PREDEFINED             = "_abstract=: public Abstract" \
                          _async= \
                          "_await=await() <<" \
-                         "_caller=System::Runtime::CompilerServices::Caller(__FILE__, __LINE__)" \
                          _delegate=[&] \
-                         _event=__event__ \
                          _export= \
                          _get=[&]() \
                          _global= \
-                         _ignore_test= \
                          "_interface=: public Interface" \
-                         _lock= \
-                         _nameof=System::String \
-                         _property=__property__ \
-                         _readonly=__readonly__ \
-                         _readwrite=__readwrite__ \
                          "_set=[&](auto value)" \
-                         _startup= \
                          "_static=final: public Static" \
-                         _typeof=__s__::__typeof_ \
-                         _test= \
-                         _using= \
-                         _writeonly= __writeonly__
+                         _using= 
                          
 # If the MACRO_EXPANSION and EXPAND_ONLY_PREDEF tags are set to YES then this
 # tag can be used to specify a list of macro names that should be expanded. The

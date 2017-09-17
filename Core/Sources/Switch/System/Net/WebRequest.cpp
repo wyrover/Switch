@@ -37,7 +37,6 @@ void WebRequest::InitWebRequest() {
     throw NotSupportedException(_caller);
   
   pendingRequest++;
-  //Curl::SetUrl(this->requestHandle, uri.AbsoluteUri);
   Curl::SetUrl(this->requestHandle, uri.ToString());
   Curl::SetVerbose(this->requestHandle, 0L);
 }
