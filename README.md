@@ -136,7 +136,7 @@ target_link_libraries(HelloWorldTest Switch.TUnit.Main)
 
 For more examples see [Examples](Examples)
 
-# Download Switch 0.3.2
+# Download Switch 0.3.3
 
 You can download latest stable version on SourceForge
 
