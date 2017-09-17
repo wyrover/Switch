@@ -1,0 +1,277 @@
+#include <limits>
+#include "../../../Includes/Switch/System/Decimal.hpp"
+#include "../../../Includes/Switch/System/Byte.hpp"
+#include "../../../Includes/Switch/System/Char.hpp"
+#include "../../../Includes/Switch/System/DateTime.hpp"
+#include "../../../Includes/Switch/System/DivideByZeroException.hpp"
+#include "../../../Includes/Switch/System/Int16.hpp"
+#include "../../../Includes/Switch/System/Int32.hpp"
+#include "../../../Includes/Switch/System/Int64.hpp"
+#include "../../../Includes/Switch/System/Math.hpp"
+#include "../../../Includes/Switch/System/SByte.hpp"
+#include "../../../Includes/Switch/System/Single.hpp"
+#include "../../../Includes/Switch/System/SystemException.hpp"
+#include "../../../Includes/Switch/System/TimeSpan.hpp"
+#include "../../../Includes/Switch/System/UInt16.hpp"
+#include "../../../Includes/Switch/System/UInt32.hpp"
+#include "../../../Includes/Switch/System/UInt64.hpp"
+#include "../../../Includes/Switch/System/NumericalFormat.hpp"
+
+using namespace System;
+
+_property<decimal, _readonly> Decimal::Epsilon {
+  [] {return 4.94066e-324;}
+};
+
+_property<decimal, _readonly> Decimal::MaxValue {
+  [] {return std::numeric_limits<decimal>::max();}
+};
+
+_property<decimal, _readonly> Decimal::MinValue {
+  [] {return -std::numeric_limits<decimal>::max();}
+};
+
+_property<decimal, _readonly> Decimal::NaN {
+  [] {return std::numeric_limits<decimal>::quiet_NaN();}
+};
+
+_property<decimal, _readonly> Decimal::NegativeInfinity {
+  [] {return -std::numeric_limits<decimal>::infinity();}
+};
+
+_property<decimal, _readonly> Decimal::PositiveInfinity {
+  [] {return std::numeric_limits<decimal>::infinity();}
+};
+
+decimal Decimal::Parse(const String& str) {
+  return atof(str.Data());
+}
+
+bool Decimal::Equals(const Decimal& value) const {
+  return this->value == value;
+}
+
+bool Decimal::Equals(const object& obj) const {
+  return is<Decimal>(obj) && Equals(static_cast<const Decimal&>(obj));
+}
+
+int32 Decimal::GetHashCode() const {
+  return Int64(*((int64*)&this->value)).GetHashCode();
+}
+
+String Decimal::ToString() const {
+  return ToString("G", ref<IFormatProvider>::Null());
+}
+
+String Decimal::ToString(const String& format) const {
+  return ToString(format, ref<IFormatProvider>::Null());
+}
+
+String Decimal::ToString(const String& format, const IFormatProvider&) const {
+  if (IsNaN(this->value))
+    return "NaN";
+  if (IsNegativeInfinity(this->value))
+    return "-Infinity";
+  if (IsPositiveInfinity(this->value))
+    return "Infinity";
+  
+  int32 precision;
+  decimal arg = this->value;
+  char32 type = NumericalFormat::GetFormatType(format, precision);
+  switch(type) {
+    case 0:   return NumericalFormat::Format_Custom(arg,format);
+    case 'b': throw FormatException(_caller);
+    case 'd': throw FormatException(_caller);
+    case 'e': return NumericalFormat::Format_E(this->value, precision == 0 ? 15 : precision, false);
+    case 'E': return NumericalFormat::Format_E(this->value, precision == 0 ? 15 : precision, true);
+    case 'f':
+      if (format.Length() == 1) precision = 2;
+      return NumericalFormat::Format_F(this->value, precision);
+    case 'g':
+    case 'G': {
+      if (precision == 0) precision = 15;
+      return NumericalFormat::Format_G(arg, precision, type == 'G');
+    }
+    case 'n': 
+      if (format.Length() == 1) precision = 2;
+      return NumericalFormat::Format_N(this->value, precision);
+    case 'p': 
+      if (format.Length() == 1) precision = 2;
+      return NumericalFormat::Format_P(this->value, precision);
+    case 'x': 
+    case 'X': throw FormatException(_caller);
+  }
+  return format;
+}
+
+int32 Decimal::CompareTo(const Decimal& value) const {
+  if (this->value > value)
+    return 1;
+
+  if (this->value < value.value)
+    return -1;
+  
+  return 0;
+}
+
+int32 Decimal::CompareTo(const IComparable& obj) const {
+  if (!is<Decimal>(obj))
+    return 1;
+  
+  return CompareTo(static_cast<const Decimal&>(obj));
+}
+
+TypeCode Decimal::GetTypeCode() const {
+  return TypeCode::Decimal;
+}
+
+bool Decimal::ToBoolean(const IFormatProvider&) const {
+  return this->value != 0;
+}
+
+byte Decimal::ToByte(const IFormatProvider&) const {
+  if (this->value < (decimal)Byte::MinValue)
+    throw OverflowException(_caller);
+  if (this->value > Byte::MaxValue)
+    throw OverflowException(_caller);
+  return static_cast<sbyte>(Math::Round(this->value));
+}
+
+char32 Decimal::ToChar(const IFormatProvider&) const {
+  if (this->value < Char::MinValue)
+    throw OverflowException(_caller);
+  if (this->value > Char::MaxValue)
+    throw OverflowException(_caller);
+  return static_cast<char>(Math::Round(this->value));
+}
+
+DateTime Decimal::ToDateTime(const IFormatProvider&) const {
+  if (DateTime(static_cast<int64>(this->value)) < DateTime::MinValue)
+    throw OverflowException(_caller);
+  if (DateTime(static_cast<int64>(this->value)) > DateTime::MaxValue)
+    throw OverflowException(_caller);
+  return DateTime((int64)Math::Round(this->value));
+}
+
+double Decimal::ToDouble(const IFormatProvider&) const {
+  return (double)this->value;
+}
+
+int16 Decimal::ToInt16(const IFormatProvider&) const {
+  if (this->value < Int16::MinValue)
+    throw OverflowException(_caller);
+  if (this->value > Int16::MaxValue)
+    throw OverflowException(_caller);
+  return (int16)Math::Round(this->value);
+}
+
+int32 Decimal::ToInt32(const IFormatProvider&) const {
+  if (this->value < Int32::MinValue)
+    throw OverflowException(_caller);
+  if (this->value > Int32::MaxValue)
+    throw OverflowException(_caller);
+  return (int32)Math::Round(this->value);
+}
+
+int64 Decimal::ToInt64(const IFormatProvider&) const {
+  if (this->value < Int64::MinValue)
+    throw OverflowException(_caller);
+  if (this->value > Int64::MaxValue)
+    throw OverflowException(_caller);
+  return (int64)Math::Round(this->value);
+}
+
+uint16 Decimal::ToUInt16(const IFormatProvider&) const {
+  if (this->value < UInt16::MinValue)
+    throw OverflowException(_caller);
+  if (this->value > UInt16::MaxValue)
+    throw OverflowException(_caller);
+  return (uint16)Math::Round(this->value);
+}
+
+uint32 Decimal::ToUInt32(const IFormatProvider&) const {
+  if (this->value < UInt32::MinValue)
+    throw OverflowException(_caller);
+  if (this->value > UInt32::MaxValue)
+    throw OverflowException(_caller);
+  return (uint32)Math::Round(this->value);
+}
+
+uint64 Decimal::ToUInt64(const IFormatProvider&) const {
+  if (this->value < UInt64::MinValue)
+    throw OverflowException(_caller);
+  if (this->value > UInt64::MaxValue)
+    throw OverflowException(_caller);
+  return (uint64)Math::Round(this->value);
+}
+
+sbyte Decimal::ToSByte(const IFormatProvider&) const {
+  if (this->value < SByte::MinValue)
+    throw OverflowException(_caller);
+  if (this->value > SByte::MaxValue)
+    throw OverflowException(_caller);
+  return (sbyte)Math::Round(this->value);
+}
+
+float Decimal::ToSingle(const IFormatProvider&) const {
+  if (this->value < Single::MinValue)
+    throw OverflowException(_caller);
+  else if (this->value > Single::MaxValue)
+    throw OverflowException(_caller);
+  return (float)this->value;
+}
+
+String Decimal::ToString(const IFormatProvider&) const {
+  return ToString();
+}
+
+Decimal::operator decimal() const {
+  return this->value;
+}
+
+Decimal& Decimal::operator =(const Decimal& value) {
+  this->value = value.value;
+  return *this;
+}
+
+Decimal& Decimal::operator +=(const Decimal& value) {
+  this->value += value.value;
+  return *this;
+}
+
+Decimal& Decimal::operator -=(const Decimal& value) {
+  this->value -= value.value;
+  return *this;
+}
+
+Decimal& Decimal::operator *=(const Decimal& value) {
+  this->value *= value.value;
+  return *this;
+}
+
+Decimal& Decimal::operator /=(const Decimal& value) {
+  if (value == 0)
+    throw DivideByZeroException(_caller);
+
+  this->value /= value.value;
+  return *this;
+}
+
+Decimal& Decimal::operator ++() {
+  ++this->value;
+  return *this;
+}
+
+const Decimal Decimal::operator ++(int) {
+  return this->value++;
+}
+
+Decimal& Decimal::operator --() {
+  --this->value;
+  return *this;
+}
+
+const Decimal Decimal::operator --(int ) {
+  return this->value--;
+}
+

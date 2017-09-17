@@ -4,6 +4,7 @@
 #include "../Any.hpp"
 #include "../Boxing.hpp"
 #include "Convert.hpp"
+#include "Decimal.hpp"
 #include "Enum.hpp"
 #include "FormatProvider.hpp"
 #include "SystemException.hpp"
@@ -98,6 +99,7 @@ private:
   __opaque_format_item__(wchar value) : value(new System::Char(value)) {}
   __opaque_format_item__(char16 value) : value(new System::Char(value)) {}
   __opaque_format_item__(char32 value) : value(new System::Char(value)) {}
+  __opaque_format_item__(Switch::decimal value) : value(new System::Decimal(value)) {}
   __opaque_format_item__(double value) : value(new System::Double(value)) {}
   __opaque_format_item__(int16 value) : value(new System::Int16(value)) {}
   __opaque_format_item__(int32 value) : value(new System::Int32(value)) {}
@@ -146,6 +148,7 @@ private:
   __opaque_format_item__(wchar value, bool clone) : value(new System::Char(value)) {}
   __opaque_format_item__(char16 value, bool clone) : value(new System::Char(value)) {}
   __opaque_format_item__(char32 value, bool clone) : value(new System::Char(value)) {}
+  __opaque_format_item__(Switch::decimal value, bool clone) : value(new System::Decimal(value)) {}
   __opaque_format_item__(double value, bool clone) : value(new System::Double(value)) {}
   __opaque_format_item__(int16 value, bool clone) : value(new System::Int16(value)) {}
   __opaque_format_item__(int32 value, bool clone) : value(new System::Int32(value)) {}

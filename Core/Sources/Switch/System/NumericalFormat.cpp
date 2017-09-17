@@ -167,9 +167,20 @@ namespace Switch {
     String NumericalFormat::Format_E(double value, int32 precision, bool upper) {
       char cout[192];
       if (upper)
-        sprintf(cout, "%.*E", precision, (double)value);
+      sprintf(cout, "%.*E", precision, (double)value);
       else
-        sprintf(cout, "%.*e", precision, (double)value);
+      sprintf(cout, "%.*e", precision, (double)value);
+      string output = controlLengthExp(cout, upper, 3);
+      if (output == "-0") return "0";
+      return output;
+    }
+    
+    String NumericalFormat::Format_E(decimal value, int32 precision, bool upper) {
+      char cout[192];
+      if (upper)
+      sprintf(cout, "%.*LE", precision, (decimal)value);
+      else
+      sprintf(cout, "%.*Le", precision, (decimal)value);
       string output = controlLengthExp(cout, upper, 3);
       if (output == "-0") return "0";
       return output;
@@ -190,6 +201,12 @@ namespace Switch {
     String NumericalFormat::Format_F(double value, int32 precision) {
       char cout[192];
       sprintf(cout, "%.*f", precision, value);
+      return notMinusZero(cout);
+    }
+    
+    String NumericalFormat::Format_F(decimal value, int32 precision) {
+      char cout[192];
+      sprintf(cout, "%.*Lf", precision, value);
       return notMinusZero(cout);
     }
     
@@ -217,6 +234,14 @@ namespace Switch {
     String NumericalFormat::Format_G(double value, int32 precision, bool upper) {
       char cout[192];
       sprintf(cout, "%.*g",precision, (double)value);
+      string output = controlLengthExp(cout,upper,2);
+      if (output == "-0") return "0";
+      return output;
+    }
+    
+    String NumericalFormat::Format_G(decimal value, int32 precision, bool upper) {
+      char cout[192];
+      sprintf(cout, "%.*Lg",precision, (decimal)value);
       string output = controlLengthExp(cout,upper,2);
       if (output == "-0") return "0";
       return output;
@@ -255,6 +280,11 @@ namespace Switch {
       return InsertGroupSeparator(format_f,'.',',');
     }
     
+    String NumericalFormat::Format_N(decimal value, int32 precision) {
+      String format_f(Format_F(value,precision));
+      return InsertGroupSeparator(format_f,'.',',');
+    }
+    
     String NumericalFormat::Format_P(uint64 value, int32 precision) {
       // no multiplication by 100 when value is zero
       if (value == uint64(0))
@@ -284,7 +314,7 @@ namespace Switch {
     String NumericalFormat::Format_P(double value, int32 precision) {
       // no multiplication by 100 when value is zero
       if (value <= 0.0 && value >= 0.0f)
-        return Format_N(uint64(0),precision) + " %";
+      return Format_N(uint64(0),precision) + " %";
       
       // format with augmented precision (will be multiplied by 100).
       String s = Format_F(value, precision+2);
@@ -294,7 +324,7 @@ namespace Switch {
       
       int32 split = s.IndexOf('.');
       if (split == -1) // in case of "." is not used as separator anymore, and code needs refactoring
-        throw FormatException(_caller);
+      throw FormatException(_caller);
       
       // multiply by 100
       s = s.Remove(split,1);
@@ -302,7 +332,34 @@ namespace Switch {
       
       // add the decimals
       if (precision > 0)
-        s = s.Insert(split,".");
+      s = s.Insert(split,".");
+      
+      // format result
+      return InsertGroupSeparator(s,'.',',') + " %";
+    }
+    
+    String NumericalFormat::Format_P(decimal value, int32 precision) {
+      // no multiplication by 100 when value is zero
+      if (value <= 0.0 && value >= 0.0f)
+      return Format_N(uint64(0),precision) + " %";
+      
+      // format with augmented precision (will be multiplied by 100).
+      String s = Format_F(value, precision+2);
+      
+      if (s.Substring(0,1) == "0") s = s.Substring(1);
+      if (s.Substring(0,2) == "-0") s = "-" + s.Substring(2);
+      
+      int32 split = s.IndexOf('.');
+      if (split == -1) // in case of "." is not used as separator anymore, and code needs refactoring
+      throw FormatException(_caller);
+      
+      // multiply by 100
+      s = s.Remove(split,1);
+      split += 2;
+      
+      // add the decimals
+      if (precision > 0)
+      s = s.Insert(split,".");
       
       // format result
       return InsertGroupSeparator(s,'.',',') + " %";
@@ -347,6 +404,10 @@ namespace Switch {
     }
     
     String NumericalFormat::Format_Custom(double value, const string& format) {
+      return "";
+    }
+    
+    String NumericalFormat::Format_Custom(decimal value, const string& format) {
       return "";
     }
     

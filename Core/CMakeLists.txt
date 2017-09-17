@@ -515,6 +515,7 @@ set(SOURCE_FILES
   Sources/Switch/System/Console.cpp
   Sources/Switch/System/Convert.cpp
   Sources/Switch/System/DateTime.cpp
+  Sources/Switch/System/Decimal.cpp
   Sources/Switch/System/Double.cpp
   Sources/Switch/System/Environment.cpp
   Sources/Switch/System/EventArgs.cpp
