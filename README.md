@@ -1,8 +1,8 @@
-![GitHub Logo](Documentations/Images/SwitchNativeC++port.png)
+[![GitHub Logo](Documentations/Images/SwitchNativeC++port.png)](https://gammasoft71.wixsite.com/switch)
 ____________________________________________________________________________________
 
 [![License: GPL v3](https://img.shields.io/badge/Language-c++14-brightgreen.svg)](http://en.cppreference.com) 
-[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-brightgreen.svg)](https://www.gnu.org/licenses/gpl-3.0) 
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-brightgreen.svg)](https://gammasoft71.wixsite.com/switch/license) 
 [![Build Status](https://travis-ci.org/gammasoft71/Switch.svg)](https://travis-ci.org/gammasoft71/Switch) 
 [![Download Switch](https://img.shields.io/sourceforge/dt/switchpro.svg)](https://sourceforge.net/projects/switchpro/files/latest/download)
 <!--[![Build status](https://ci.appveyor.com/api/projects/status/kjfq2sl5bc99kut6?svg=true)](https://ci.appveyor.com/project/gammasoft71/switch)-->
