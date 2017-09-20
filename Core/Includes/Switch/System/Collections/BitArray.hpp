@@ -45,7 +45,7 @@ namespace Switch {
         /// @param values An array of Booleans to copy.
         /// @exception ArgumentNullException values is null.
         /// @remarks This constructor is an O(n) operation, where n is the number of elements in values.
-        BitArray(const Array<Boolean>& values) {
+        BitArray(const Array<bool>& values) {
           this->length = values.Length;
           while (this->bitArray.Count < GetListLength(this->length)) this->bitArray.Add(0);
 

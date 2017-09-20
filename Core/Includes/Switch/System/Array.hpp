@@ -32,7 +32,7 @@ namespace Switch {
   namespace System {
     /// @cond
     // defined in file ../Interface.hpp
-    //template<typename T = NullPtr, int32 Rank = 1, typename TAllocator = Allocator<T>>
+    //template<typename T = NullPtr, int32 Rank = 1, typename TAllocator = Allocator<typename std::conditional<std::is_same<bool, T>::value, char, T>::type>>
     //class Array;
     
     template<>
@@ -50,7 +50,7 @@ namespace Switch {
     };
     
     /// @brief Generic Base object that represent Array.
-    template<typename T, typename TAllocator = Allocator<T>>
+    template<typename T, typename TAllocator = Allocator<typename std::conditional<std::is_same<bool, T>::value, char, T>::type>>
     class GenericArrayObject : public ArrayObject, public Linq::Extension::Enumerable<GenericArrayObject<T, TAllocator>, T>, public Collections::Generic::IList<T> {
     public:
       /// @cond
@@ -75,7 +75,7 @@ namespace Switch {
       /// @brief Get access to raw data of the Array.
       /// @return A pointer to raw data of the array.
       _property<const T*, _readonly> Data {
-        _get {return this->array.data();}
+        _get {return (const T*)this->array.data();}
       };
       
       /// @brief Gets a 32-bit integer that represents the total number of elements in all the dimensions of the Array.
@@ -128,13 +128,13 @@ namespace Switch {
         protected:
           const T& GetCurrent() const override {
             if (this->beforeFirst || this->iterator == this->array.array.end()) throw System::InvalidOperationException(_caller);
-            return *this->iterator;
+            return (const T&)*this->iterator;
           }
           
           const GenericArrayObject& array;
           bool beforeFirst = true;
           int64 operationNumber;
-          typename std::vector<T, TAllocator>::const_iterator iterator;
+          typename std::vector<typename std::conditional<std::is_same<bool, T>::value, char, T>::type, TAllocator>::const_iterator iterator;
         };
         
         return System::Collections::Generic::Enumerator<T>(new Enumerator(*this));
@@ -232,8 +232,8 @@ namespace Switch {
       }
       
       /// @cond
-      using const_iterator = typename std::vector<T, TAllocator>::const_iterator;
-      using iterator = typename std::vector<T, TAllocator>::iterator;
+      using const_iterator = typename std::vector<typename std::conditional<std::is_same<bool, T>::value, char, T>::type, TAllocator>::const_iterator;
+      using iterator = typename std::vector<typename std::conditional<std::is_same<bool, T>::value, char, T>::type, TAllocator>::iterator;
       
       const_iterator cbegin() const {return this->array.begin();}
       const_iterator cend() const {return this->array.end();}
@@ -248,13 +248,13 @@ namespace Switch {
       T& operator[](int32 index) override {
         if (index >= this->Length || index < 0) throw System::ArgumentOutOfRangeException(_caller);
         
-        return this->array[index];
+        return (T&)this->array[index];
       }
       
       const T& operator[](int32 index) const override {
         if (index >= this->Length || index < 0) throw System::ArgumentOutOfRangeException(_caller);
         
-        return this->array[index];
+        return (T&)this->array[index];
       }
       
       void CopyTo(Array<T>& array, int32 index) const override {
@@ -402,7 +402,8 @@ namespace Switch {
       
       int32 length = 0;
       int64 operationNumber = 0;
-      std::vector<T, TAllocator> array;
+      //std::vector<T, TAllocator> array;
+      std::vector<typename std::conditional<std::is_same<bool, T>::value, char, T>::type, TAllocator> array;
       std::vector<int32> lowerBound;
       std::vector<int32> upperBound;
       object syncRoot;

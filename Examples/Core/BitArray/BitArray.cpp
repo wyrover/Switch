@@ -16,7 +16,7 @@ namespace Examples {
       Array<byte> myBytes = {1, 2, 3, 4, 5};
       BitArray myBA3(myBytes);
       
-      Array<Boolean> myBools = {true, false, true, true, false};
+      Array<bool> myBools = {true, false, true, true, false};
       BitArray myBA4(myBools);
       
       Array<int> myInts  = {6, 7, 8, 9, 10};

@@ -15,9 +15,16 @@ namespace Examples {
   public:
     // The main entry point for the application.
     static void Main() {
+      /*
       refptr<WebRequest> httpWebRequest = WebRequest::Create("https://sourceforge.net/projects/switchpro/files/stats/json?start_date=2017-01-01&end_date=2017-09-17");
       string result = StreamReader(httpWebRequest->GetResponse().GetResponseStream()).ReadToEnd();
       Console::WriteLine(result);
+       */
+      
+      Array<bool> a = {true, false, true, false, false, true};
+      
+      for (bool b : a)
+        Console::WriteLine(b);
     }
   };
 }
