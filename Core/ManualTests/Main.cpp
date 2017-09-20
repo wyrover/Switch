@@ -21,9 +21,12 @@ namespace Examples {
       Console::WriteLine(result);
        */
       
-      Array<bool> a = {true, false, true, false, false, true};
+      auto a = Array<>::CreateInstance<string>(3);
+      a[0] = "One";
+      a[1] = "Two";
+      a[2] = "Three";
       
-      for (bool b : a)
+      for (auto b : a)
         Console::WriteLine(b);
     }
   };

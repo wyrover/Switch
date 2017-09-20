@@ -131,6 +131,11 @@ namespace Switch {
           /// @return @see object
           void Reset() override {this->enumerator->Reset();}
           
+          /// @cond
+          operator refptr<IEnumerator<T>>() const {return this->enumerator;}
+          operator refptr<IEnumerator<T>>() {return this->enumerator;}
+          /// @encond
+
         protected:
           const T& GetCurrent() const override {return this->enumerator->Current();}
           
