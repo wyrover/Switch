@@ -2,7 +2,7 @@
 ____________________________________________________________________________________
 
 [![License: GPL v3](https://img.shields.io/badge/Language-c++17%20ready-brightgreen.svg)](Documentations/C++17Ready.md) 
-[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-brightgreen.svg)](https://gammasoft71.wixsite.com/switch/license) 
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-brightgreen.svg)](Documentations/License.md) 
 [![Build Status](https://travis-ci.org/gammasoft71/Switch.svg)](https://travis-ci.org/gammasoft71/Switch) 
 [![Download Switch](https://img.shields.io/sourceforge/dt/switchpro.svg)](https://sourceforge.net/projects/switchpro/files/latest/download)
 <!--[![Build status](https://ci.appveyor.com/api/projects/status/kjfq2sl5bc99kut6?svg=true)](https://ci.appveyor.com/project/gammasoft71/switch)-->

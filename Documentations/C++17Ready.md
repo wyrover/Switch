@@ -13,7 +13,8 @@ The following table represents some Switch classes and their sandard C++ equival
 | ExceptionPtr                                                   | std::exception_ptr **(C++11)**                                                                                                |
 | ref\<T\>                                                       | std::ref\<T\> **(C++11)**                                                                                                     |
 | refptr\<T\>                                                    | std::shared_ptr\<T\> **(C++11)**                                                                                              |
-| System::Array\<T, 1\>                                          | std::vector\<T\>, std::array\<T\> **(C++11)**                                                                                 |
+| System::Array\<T\>                                             | std::vector\<T\>, std::array\<T\> **(C++11)**                                                                                 |
+| System::Array\<T, N\>                                          | std::vector\<T\>, std::array\<T\> **(C++11)**                                                                                 |
 | System::Console::Error                                         | std::cerr                                                                                                                     |
 | System::Console::In                                            | std::cin                                                                                                                      |
 | System::Console::Out                                           | std::cout                                                                                                                     |
@@ -60,12 +61,13 @@ The following table represents some Switch classes and their sandard C++ equival
 | System::IO::StreamReader                                       | std::istream                                                                                                                  |
 | System::IO::StreamWriter                                       | std::ostream                                                                                                                  |
 | System::Linq::Enumerable                                       | std Algorithms Library functions                                                                                              |
-| System::Threading::Task<>, System::Threading::Task<T>          | std::future **(C++11)**, std::promise **(C++11)**, std::async **(C++11)**, std::launch **(C++11)**                            |
+| System::Threading::Task<>                                      | std::future **(C++11)**, std::promise **(C++11)**, std::async **(C++11)**, std::launch **(C++11)**                            |
+| System::Threading::Task<T>                                     | std::future **(C++11)**, std::promise **(C++11)**, std::async **(C++11)**, std::launch **(C++11)**                            |
 | System::Threading::AutoResetEvent                              | std::condition_variable **(C++11)**, std::condition_variable_any **(C++11)**                                                  |
 | System::Threading::EventWaitHandle                             | std::condition_variable **(C++11)**, std::condition_variable_any **(C++11)**                                                  |
 | System::Threading::Interlocked                                 | std Atomic operations library functions **(C++11)**                                                                           |
 | System::Threading::ManualResetEvent                            | std::condition_variable **(C++11)**, std::condition_variable_any **(C++11)**                                                  |
-| System::Threadind::Mutex                                       | std::mutex **(C++11)**, std::timed_mutex **(C++11)**, std::recursive_mutex **(C++11)**, std::recursive_timed_mutex **(C++11)**|
+| System::Threading::Mutex                                       | std::mutex **(C++11)**, std::timed_mutex **(C++11)**, std::recursive_mutex **(C++11)**, std::recursive_timed_mutex **(C++11)**|
 | System::Threading::Thread                                      | std::thread **(C++11)**                                                                                                       |
 
 For more information see [Switch Reference Guide](https://gammasoft71.github.io/Switch-doc) and [C++ reference](http://en.cppreference.com)
