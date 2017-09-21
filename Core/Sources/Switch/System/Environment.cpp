@@ -351,7 +351,7 @@ Array<string> Environment::SetCommandLineArgs(char* argv[], int argc) {
   return Array<string>(std::vector<string>(argv+1, argv+argc));
 }
 
-void Environment::SetUserInteractive(bool userInteractive) {
-  ::userInteractive = userInteractive;
+void Environment::SetUserInteractive(bool ui) {
+  ::userInteractive = ui;
 }
 
