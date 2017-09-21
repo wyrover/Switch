@@ -12,7 +12,7 @@ namespace Switch {
   namespace System {
     /// @brief The System::IO namespace contains types that allow reading and writing to files and data streams, and types that provide basic file and directory support.
     namespace IO {
-      /// @brief rovides data for the FileSystemWatcher.Error event.
+      /// @brief Provides data for the FileSystemWatcher.Error event.
       /// @remarks ErrorEventArgs contains the Exception that caused the FileSystemWatcher.Error event. This class provides the GetException method to retrieve the exception.
       class _export ErrorEventArgs : public EventArgs {
       public:
