@@ -1,29 +1,41 @@
 #define TRACE
-#include <Switch/Nameof.hpp>
 #include <Switch/Startup.hpp>
 #include <Switch/System/Console.hpp>
-#include <Switch/System/IO/StreamReader.hpp>
-#include <Switch/System/Net/WebResponse.hpp>
-#include <Switch/System/Net/WebRequest.hpp>
+#include <Switch/System/Threading/Monitor.hpp>
+#include <Switch/System/Threading/Thread.hpp>
 
 using namespace System;
-using namespace System::IO;
-using namespace System::Net;
+using namespace System::Threading;
 
 namespace Examples {
   class Program {
   public:
     // The main entry point for the application.
     static void Main() {
-      /*
-      refptr<WebRequest> httpWebRequest = WebRequest::Create("https://sourceforge.net/projects/switchpro/files/stats/json?start_date=2017-01-01&end_date=2017-09-17");
-      string result = StreamReader(httpWebRequest->GetResponse().GetResponseStream()).ReadToEnd();
-      Console::WriteLine(result);
-       */
-
-      Array<int> a = {1, 2, 3, 4};
+      object o1;
+      object o2;
+      string s1 = "lock";
+      string s2 = "lock";
+      System::Threading::Thread thread1(ThreadStart(_delegate {
+        _lock (s1) {
+          for (int counter = 0; counter < 10; counter++) {
+            Console::WriteLine("thread = {0}, counter = {1}", Thread::CurrentThread().ManagedThreadId, counter);
+            Thread::Yield();
+          }
+        }
+      }));
       
-      Console::WriteLine("a = {0}", string::Join(", ", a));
+      System::Threading::Thread thread2(ThreadStart(_delegate {
+        _lock (s2) {
+          for (int counter = 0; counter < 10; counter++) {
+            Console::WriteLine("  thread = {0}, counter = {1}", Thread::CurrentThread().ManagedThreadId, counter);
+            Thread::Yield();
+          }
+        }
+      }));
+      
+      thread1.Start();
+      thread2.Start();
     }
   };
 }

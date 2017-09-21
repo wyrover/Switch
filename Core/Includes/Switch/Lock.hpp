@@ -11,9 +11,9 @@ namespace Switch {
   /// class Account : public object {
   /// public:
   ///   void Withdraw(decimal amount) {
-  ///     _lock (this->Lock) {
+  ///     _lock (this->lock) {
   ///       if (amount > balance)
-  ///         throw new Exception("Insufficient funds");
+  ///         throw Exception("Insufficient funds");
   ///       balance -= amount;
   ///     }
   ///   }

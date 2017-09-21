@@ -1,6 +1,7 @@
 #include "../../../../Includes/Switch/System/Array.hpp"
 #include "../../../../Includes/Switch/System/Threading/Monitor.hpp"
 #include "../../../../Includes/Switch/System/Threading/Mutex.hpp"
+#include "../../../../Includes/Switch/System/Threading/SynchronizationLockException.hpp"
 #include "../../../../Includes/Switch/System/Threading/TimeOut.hpp"
 
 namespace {
@@ -16,7 +17,7 @@ void Monitor::Pulse(const Object& obj) {
   MonitorItem* monitorItem = null;
   mutex.lock();
   if (IsEntered(obj))
-    monitorItem = &monitorItems[&obj];
+    monitorItem = &monitorItems[ToKey(obj)];
   mutex.unlock();
   
   if (monitorItem == null)
@@ -29,7 +30,7 @@ void Monitor::PulseAll(const Object& obj) {
   MonitorItem* monitorItem = null;
   mutex.lock();
   if (IsEntered(obj))
-    monitorItem = &monitorItems[&obj];
+    monitorItem = &monitorItems[ToKey(obj)];
   mutex.unlock();
   
   if (monitorItem == null)
@@ -42,7 +43,7 @@ void Monitor::PulseAll(const Object& obj) {
    MonitorItem* monitorItem = null;
    mutex.lock();
    if (IsEntered(obj))
-     monitorItem = &monitorItems[&obj];
+     monitorItem = &monitorItems[ToKey(obj)];
    mutex.unlock();
    
    if (monitorItem == null)
@@ -54,8 +55,8 @@ void Monitor::PulseAll(const Object& obj) {
 bool Monitor::Add(const Object& obj, int32 millisecondsTimeout) {
   mutex.lock();
   if (!IsEntered(obj))
-    monitorItems[&obj] = MonitorItem();
-  MonitorItem& monitorData = monitorItems[&obj];
+    monitorItems[ToKey(obj)] = MonitorItem();
+  MonitorItem& monitorData = monitorItems[ToKey(obj)];
   monitorData.usedCounter++;
   mutex.unlock();
   return monitorData.event.WaitOne(millisecondsTimeout);
@@ -66,13 +67,13 @@ void Monitor::Remove(const Object& obj) {
   mutex.lock();
   if (!IsEntered(obj)) {
     mutex.unlock();
-    throw InvalidOperationException(_caller);
+    throw SynchronizationLockException(_caller);
   }
 
-  MonitorItem* monitorData = &monitorItems[&obj];
+  MonitorItem* monitorData = &monitorItems[ToKey(obj)];
   if (--monitorData->usedCounter == 0) {
-    saved = monitorItems[&obj];
-    monitorItems.Remove(&obj);
+    saved = monitorItems[ToKey(obj)];
+    monitorItems.Remove(ToKey(obj));
     monitorData = &saved;
   }
   mutex.unlock();
