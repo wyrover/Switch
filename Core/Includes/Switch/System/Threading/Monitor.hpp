@@ -233,7 +233,7 @@ namespace Switch {
         static const object* ToKey(const object& obj) {
           if (is<string>(obj)) {
             for (const auto& item : monitorItems)
-              if (is<string>(*item.Key()) && as<string>(*item.Key()).Equals(as<string>(obj))) {
+              if (item.Value().name.HasValue && item.Value().name.Value().Equals((const string&)obj)) {
                 return item.Key;
               }
           }

@@ -55,7 +55,7 @@ void Monitor::PulseAll(const Object& obj) {
 bool Monitor::Add(const Object& obj, int32 millisecondsTimeout) {
   mutex.lock();
   if (!IsEntered(obj))
-    monitorItems[ToKey(obj)] = MonitorItem();
+    monitorItems[ToKey(obj)] = is<string>(obj) ? MonitorItem((const string&)obj) : MonitorItem();
   MonitorItem& monitorData = monitorItems[ToKey(obj)];
   monitorData.usedCounter++;
   mutex.unlock();

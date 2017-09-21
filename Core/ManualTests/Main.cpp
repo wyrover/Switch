@@ -12,12 +12,8 @@ namespace Examples {
   public:
     // The main entry point for the application.
     static void Main() {
-      object o1;
-      object o2;
-      string s1 = "lock";
-      string s2 = "lock";
       System::Threading::Thread thread1(ThreadStart(_delegate {
-        _lock (s1) {
+        _lock ("myLock"_s) {
           for (int counter = 0; counter < 10; counter++) {
             Console::WriteLine("thread = {0}, counter = {1}", Thread::CurrentThread().ManagedThreadId, counter);
             Thread::Yield();
@@ -26,7 +22,7 @@ namespace Examples {
       }));
       
       System::Threading::Thread thread2(ThreadStart(_delegate {
-        _lock (s2) {
+        _lock ("myLock"_s) {
           for (int counter = 0; counter < 10; counter++) {
             Console::WriteLine("  thread = {0}, counter = {1}", Thread::CurrentThread().ManagedThreadId, counter);
             Thread::Yield();
