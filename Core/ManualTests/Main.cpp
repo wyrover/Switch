@@ -20,14 +20,10 @@ namespace Examples {
       string result = StreamReader(httpWebRequest->GetResponse().GetResponseStream()).ReadToEnd();
       Console::WriteLine(result);
        */
+
+      Array<int> a = {1, 2, 3, 4};
       
-      auto a = Array<>::CreateInstance<string>(3);
-      a[0] = "One";
-      a[1] = "Two";
-      a[2] = "Three";
-      
-      for (auto b : a)
-        Console::WriteLine(b);
+      Console::WriteLine("a = {0}", string::Join(", ", a));
     }
   };
 }
