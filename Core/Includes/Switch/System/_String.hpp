@@ -2,8 +2,7 @@
 /// @brief Contains Switch::System::String class.
 #pragma once
 
-#include "_ustring.hpp"
-
+#include "__opaque_unicode_string__.hpp"
 #include "../Move.hpp"
 #include "../Property.hpp"
 #include "Object.hpp"
@@ -41,7 +40,7 @@ namespace Switch {
     class _export String final : public ValueType, public ICloneable, public IComparable, public IConvertible, public Collections::Generic::IEnumerable<char32> {
       friend class Convert;
     public:
-      using StringType = std::ustring;
+      using StringType = __opaque_unicode_string__;
       /// @brief Represents the empty String. This field is constant.
       static String Empty;
 
@@ -976,6 +975,8 @@ namespace Switch {
     private:
       String(const StringType& string);
       
+      static bool IsDistant(StringType::const_iterator& it, const StringType::const_iterator& end,  int32 count);
+      static bool IsLastElement(const StringType::const_iterator& it, const StringType& str);
       static String FormatToString(const IFormatProvider& provider, const String& format, const Array<__opaque_format_item__>& args);
       static String FormatToString(const IFormatProvider& provider, const String& format, const Array<ref<object>>& args);
       int32 GetLength() const;

@@ -20,7 +20,6 @@
 #include "../UInt16.hpp"
 #include "../UInt32.hpp"
 #include "../UInt64.hpp"
-#include "../_ustring.hpp"
 #include "../_String.hpp"
 
 namespace Switch {

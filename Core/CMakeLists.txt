@@ -231,9 +231,9 @@ set(INCLUDE_FILES
   Includes/Switch/System/Threading/Tasks/TaskFactory.hpp
   Includes/Switch/System/Threading/Tasks/TaskStatus.hpp
   Includes/Switch/System/Threading/Tasks/TaskTResult.hpp
+  Includes/Switch/System/__opaque_unicode_string__.hpp
   Includes/Switch/System/_String.hpp
   Includes/Switch/System/_String.h
-  Includes/Switch/System/_ustring.hpp
   Includes/Switch/System/Action.hpp
   Includes/Switch/System/AccessViolationException.hpp
   Includes/Switch/System/AggregateException.hpp
@@ -506,6 +506,7 @@ set(SOURCE_FILES
   Sources/Switch/System/Threading/WaitHandle.cpp
   Sources/Switch/System/Threading/Tasks/Task.cpp
   Sources/Switch/System/__HResults.hpp
+  Sources/Switch/System/__opaque_unicode_string__.cpp
   Sources/Switch/System/ArrayAlgorithms.hpp
   Sources/Switch/System/BitConverter.cpp
   Sources/Switch/System/Boolean.cpp
@@ -544,7 +545,6 @@ set(SOURCE_FILES
   Sources/Switch/System/UInt64.cpp
   Sources/Switch/System/UIntPtr.cpp
   Sources/Switch/System/Uri.cpp
-  Sources/Switch/System/ustring.cpp
   Sources/Switch/ExceptionPtr.cpp
   Sources/Switch/Hash.cpp
 )

@@ -530,7 +530,7 @@ int32 String::IndexOf(char32 value) const {
   return -1;
 }
 
-static bool isDistant(String::StringType::const_iterator& it, const String::StringType::const_iterator& end,  int32 count) {
+bool String::IsDistant(StringType::const_iterator& it, const StringType::const_iterator& end,  int32 count) {
   while (count--) {
     it++;
     if (it == end)
@@ -569,7 +569,7 @@ int32 String::IndexOf(char32 value, int32 startIndex, int32 count) const {
       if (count > 0) {
         count -= 1;
         if (value == *it) {
-          if (!isDistant(it, this->string.end(), count))
+          if (!IsDistant(it, this->string.end(), count))
             throw ArgumentOutOfRangeException(_caller);
           return it.get_logical_index();  
         }
@@ -648,7 +648,7 @@ int32 String::IndexOfAny(const char32 anyOf[], int32 anyOfSize, int32 startIndex
       if (count > 0) {
         count -= 1;
         if (ArrayAlgorithms::Contains(anyOf, anyOfSize, char32(*it))) {
-          if (!isDistant(it, this->string.end(), count))
+          if (!IsDistant(it, this->string.end(), count))
             throw ArgumentOutOfRangeException(_caller);
           return it.get_logical_index();
         }
@@ -852,7 +852,7 @@ Array<String> String::Split(const Array<char32>& splitCharSeparators, const Stri
   return Split(splitCharSeparators, Int32::MaxValue, options);
 }
 
-static bool IsLastElement(const String::StringType::const_iterator& it, const String::StringType& str) {
+bool String::IsLastElement(const StringType::const_iterator& it, const StringType& str) {
   return it.get_logical_index() == static_cast<int32>(str.size())-1;
 }
 
