@@ -6,37 +6,18 @@
 
 size_t __opaque_unicode_string__::npos = std::string::npos;
 
-__opaque_unicode_string__::__opaque_unicode_string__() {
-}
-
 __opaque_unicode_string__::__opaque_unicode_string__(const char* str) : string(str), stringSize(__OS::CoreApi::UnicodeEncodings::UTF8::GetLength(string)) {
-}
-
-__opaque_unicode_string__::__opaque_unicode_string__(const char32_t* str) {
-  int i = 0;
-  while (str[i] != 0)
-  this->append(str[i++]);
-}
-
-__opaque_unicode_string__::__opaque_unicode_string__(const __opaque_unicode_string__& str) {
-  *this = str;
-}
-
-__opaque_unicode_string__::__opaque_unicode_string__(int length, char c) {
-  this->stringSize = length;
-  while (length--)
-  this->string.push_back(c);
 }
 
 __opaque_unicode_string__::__opaque_unicode_string__(const char* str, int32_t startIndex, int32_t length) {
   if (str == null)
-  throw System::ArgumentNullException(_caller);
+    throw System::ArgumentNullException(_caller);
   
   __opaque_unicode_string__ other(str);
   
   int32_t count = static_cast<int32_t>((static_cast<size_t>(length) == npos) ? other.size() : length);
   if (startIndex + count > static_cast<int32_t>(other.size()))
-  count = static_cast<int32_t>(other.size()) - startIndex;
+    count = static_cast<int32_t>(other.size()) - startIndex;
   
   if (startIndex == static_cast<int32_t>(other.size())) {
     this->stringSize = 0;
@@ -54,7 +35,7 @@ __opaque_unicode_string__::__opaque_unicode_string__(const char* str, int32_t st
   }
   
   if (begin == -1)
-  throw System::ArgumentOutOfRangeException(_caller);
+    throw System::ArgumentOutOfRangeException(_caller);
   
   if (end == -1) {
     this->string = other.string.substr(begin);
@@ -64,84 +45,18 @@ __opaque_unicode_string__::__opaque_unicode_string__(const char* str, int32_t st
     this->stringSize = __OS::CoreApi::UnicodeEncodings::UTF8::GetLength(this->string);
   }
 }
-// todo clean code and optimize size calculation
-/*__opaque_unicode_string__::__opaque_unicode_string__(const char* str, int32_t startIndex, int32_t length) {
- if (str == null) throw System::ArgumentNullException(_caller);
- if ((size_t(length) != npos && length < 0) || startIndex < 0) throw System::ArgumentOutOfRangeException(_caller);
- 
- std::string other(str);
- int wanted = length;
- std::string::iterator begin = other.end();
- std::string::iterator end = other.begin();
- 
- int abstractIndex = 0;
- StringForeach(index, other) {
- if (abstractIndex == startIndex)
- begin = other.begin() + index;
- 
- if (abstractIndex >= startIndex) { // we are reading wanted section
- if (wanted == 0) { // if section is finished
- end += index;
- this->string.append(begin, end);
- this->size = __OS::CoreApi::UnicodeEncodings::UTF8::GetLength(this->string);
- return;
- }
- if (size_t(length) != npos) wanted -= 1;
- }
- abstractIndex += 1;
- }
- 
- if (abstractIndex == startIndex) {
- this->size = __OS::CoreApi::UnicodeEncodings::UTF8::GetLength(this->string);
- return;
- }
- 
- if (begin == other.end()) // it has not begun
- throw System::ArgumentOutOfRangeException(_caller);
- 
- if (end == other.begin()) { // is has not finished
- this->string.append(begin, other.end());
- this->size = __OS::CoreApi::UnicodeEncodings::UTF8::GetLength(this->string);
- return;
- }
- 
- throw System::ArgumentOutOfRangeException(_caller);
- }*/
 
 __opaque_unicode_string__::__opaque_unicode_string__(const char32_t* str, int32_t startIndex, int32_t length) {
   if (startIndex < 0 || length < 0)
-  throw System::ArgumentOutOfRangeException(_caller);
+    throw System::ArgumentOutOfRangeException(_caller);
   this->stringSize = 0;
   for (int i = 0; i < length; i++)
     append(str[i]);
 }
 
-
-__opaque_unicode_string__& __opaque_unicode_string__::append(const __opaque_unicode_string__& other) {
-  this->string.append(other.string);
-  this->stringSize += other.stringSize;
-  return *this;
-}
-
-const char* __opaque_unicode_string__::c_str() const {
-  return this->string.c_str();
-}
-
-__opaque_unicode_string__& __opaque_unicode_string__::operator =(const __opaque_unicode_string__& str) {
-  this->string = str.string;
-  this->stringSize = str.stringSize;
-  return *this;
-}
-
-__opaque_unicode_string__& __opaque_unicode_string__::operator +=(const __opaque_unicode_string__& s) {
-  this->string.append(s.string);
-  this->stringSize += s.stringSize;
-  return *this;
-}
-
-char32_t __opaque_unicode_string__::operator [](int i) const {
+char32_t __opaque_unicode_string__::operator[](int i) const {
   if (i<0)
-  throw System::ArgumentOutOfRangeException(_caller);
+    throw System::ArgumentOutOfRangeException(_caller);
   
   for (__opaque_unicode_string__::const_iterator it = (*this).begin(); it != (*this).end(); it++)
     if (it.get_logical_index() == i)
@@ -150,9 +65,9 @@ char32_t __opaque_unicode_string__::operator [](int i) const {
   throw System::ArgumentOutOfRangeException(_caller);
 }
 
-char32_t& __opaque_unicode_string__::operator [](int i) {
+char32_t& __opaque_unicode_string__::operator[](int i) {
   if (i<0)
-  throw System::ArgumentOutOfRangeException(_caller);
+    throw System::ArgumentOutOfRangeException(_caller);
   
   for (__opaque_unicode_string__::iterator it = (*this).begin(); it != (*this).end(); it++)
     if (it.get_logical_index() == i)
@@ -161,20 +76,12 @@ char32_t& __opaque_unicode_string__::operator [](int i) {
   throw System::ArgumentOutOfRangeException(_caller);
 }
 
-//pos
-//  Position of the first character to be erased.
-//  If this is greater than the String length, it throws out_of_range.
-//  Note: The first character in str is denoted by a value of 0 (not 1).
-//len
-//  Number of characters to erase (if the String is shorter, as many characters as possible are erased).
-//  A value of String::npos indicates all characters until the end of the String.
 __opaque_unicode_string__& __opaque_unicode_string__::erase(size_t pos, size_t len) {
   int byteIndexIn = -1;
   __opaque_unicode_string__::iterator it = begin();
   
   if (len == 0) return *this;
   
-  // find byte index of first element to remove
   for ( ; it != end(); it++) {
     if (static_cast<size_t>(it.get_logical_index()) == pos && byteIndexIn == -1) {
       byteIndexIn = it.get_byte_index();
@@ -185,14 +92,12 @@ __opaque_unicode_string__& __opaque_unicode_string__::erase(size_t pos, size_t l
   if (byteIndexIn == -1)
   throw System::ArgumentOutOfRangeException(_caller);
   
-  // if erase all from pos
   if (len == npos) {
     this->string.erase(byteIndexIn);
     this->stringSize = __OS::CoreApi::UnicodeEncodings::UTF8::GetLength(this->string);
     return *this;
   }
   
-  // find (if possible) byte index of last element to remove
   int byteIndexOut = static_cast<int>(this->string.size());
   for ( ; it != end(); it++) {
     if (--len == 0) {
@@ -207,15 +112,11 @@ __opaque_unicode_string__& __opaque_unicode_string__::erase(size_t pos, size_t l
   return *this;
 }
 
-// Replaces the portion of the String that begins at pos and
-// and spans len characters by new contents (character c repeated n times)
 __opaque_unicode_string__& __opaque_unicode_string__::replace(size_t pos,  size_t len,  size_t n, char c) {
   __opaque_unicode_string__ str(static_cast<int32_t>(n),c);
   return replace(pos, len, str);
 }
 
-// Replaces the portion of the String that begins at pos and
-// and spans len characters by new contents (string str)
 __opaque_unicode_string__& __opaque_unicode_string__::replace(size_t pos,  size_t len,  const __opaque_unicode_string__& str) {
   __opaque_unicode_string__ before = substr(0,pos);
   __opaque_unicode_string__ after = substr(pos).erase(0,len);
@@ -259,12 +160,6 @@ __opaque_unicode_string__& __opaque_unicode_string__::append(char32_t code) {
   return *this;
 }
 
-bool __opaque_unicode_string__::operator==(const __opaque_unicode_string__& str) const {
-  if (this->stringSize != str.stringSize)
-  return false;
-  return this->string == str.string;
-}
-
 bool __opaque_unicode_string__::equals(__opaque_unicode_string__::const_iterator src, const __opaque_unicode_string__::const_iterator& src_end, __opaque_unicode_string__::const_iterator match, const __opaque_unicode_string__::const_iterator& match_end) {
   for ( ;match != match_end; match++, src++) {
     if (src == src_end)
@@ -275,10 +170,6 @@ bool __opaque_unicode_string__::equals(__opaque_unicode_string__::const_iterator
   return true;
 }
 
-//pos
-//Position of the last character in the String to be considered as the beginning of a match.
-//Any value greater or equal than the String length (including npos) means that the entire String is searched.
-//Note: The first character is denoted by a value of 0 (not 1).
 size_t __opaque_unicode_string__::rfind(const __opaque_unicode_string__& match, size_t pos) const {
   size_t foundIndex = npos;
   for (__opaque_unicode_string__::const_iterator it = (*this).begin(); it != (*this).end(); it++) {
@@ -303,7 +194,6 @@ size_t __opaque_unicode_string__::rfind(char32_t match, size_t pos) const {
   return foundIndex;
 }
 
-// Inserts additional characters into the String right before the character indicated by pos
 __opaque_unicode_string__& __opaque_unicode_string__::insert(int32_t pos, const __opaque_unicode_string__& str) {
   __opaque_unicode_string__ before = substr(0,pos);
   __opaque_unicode_string__ after = substr(pos);
@@ -314,16 +204,10 @@ __opaque_unicode_string__& __opaque_unicode_string__::insert(int32_t pos, const 
   return *this;
 }
 
-//Returns a newly constructed String object with its value initialized to a copy of a substring of this object.
-//The substring is the portion of the object that starts at character position pos and
-//spans len characters (or until the end of the String, whichever comes first).
 __opaque_unicode_string__ __opaque_unicode_string__::substr(size_t pos, size_t len) const {
   return __opaque_unicode_string__(this->string.c_str(), static_cast<int32_t>(pos), static_cast<int32_t>(len));
 }
 
-//Searches the String for the first occurrence of the sequence specified by its arguments.
-//When pos is specified, the search only includes characters at or after position pos,
-//ignoring any possible occurrences that include characters before pos.
 size_t __opaque_unicode_string__::find(const __opaque_unicode_string__& match, size_t pos, size_t count) const {
   size_t len = 0;
   for (__opaque_unicode_string__::const_iterator it = (*this).begin(); it != (*this).end(); it++) {
@@ -379,7 +263,6 @@ size_t __opaque_unicode_string__::find_any(const std::vector<char32_t>& any, siz
   return npos;
 }
 
-//todo use reverse iterator
 bool __opaque_unicode_string__::ends_with(const __opaque_unicode_string__& s) const {
   if (s.string.size() > this->string.size())
   return false;
@@ -426,9 +309,6 @@ int __opaque_unicode_string__::compare_ignore_case(const __opaque_unicode_string
   __opaque_unicode_string__ right_op(str.to_lower());
   return left_op.compare(right_op);
 }
-
-//_____________________________________________________________________________
-//                                                    __opaque_unicode_string__ :: const_iterator
 
 __opaque_unicode_string__::const_iterator::const_iterator(const std::string* str, bool at_end) {
   string_pointer = str;
@@ -483,9 +363,6 @@ __opaque_unicode_string__::const_iterator& __opaque_unicode_string__::const_iter
   return *this;
 }
 
-//_____________________________________________________________________________
-//                                                          __opaque_unicode_string__ :: iterator
-
 __opaque_unicode_string__::iterator::iterator(std::string* str, bool at_end) {
   string_pointer = str;
   if (*str == "" || at_end) {
@@ -518,7 +395,6 @@ char32_t __opaque_unicode_string__::iterator::operator*() const {
 }
 
 char32_t& __opaque_unicode_string__::iterator::operator*() {
-  //TODO If usicode length is greater than 1 byte, there are probably a crash
   uint8_t* data = (uint8_t*)string_pointer->data();
   static char32 value;
   value = __OS::CoreApi::UnicodeEncodings::UTF8::GetCode(&data[this->position],format);
@@ -546,9 +422,6 @@ __opaque_unicode_string__::iterator& __opaque_unicode_string__::iterator::operat
   this->position = -1;
   return *this;
 }
-
-//_____________________________________________________________________________
-//                                            __opaque_unicode_string__ :: const_reverse_iterator
 
 __opaque_unicode_string__::const_reverse_iterator::const_reverse_iterator(const const_reverse_iterator& it) {
   string_pointer = it.string_pointer;
@@ -608,9 +481,6 @@ __opaque_unicode_string__::const_reverse_iterator& __opaque_unicode_string__::co
   return *this;
 }
 
-//_____________________________________________________________________________
-//                                                  __opaque_unicode_string__ :: reverse_iterator
-
 __opaque_unicode_string__::reverse_iterator::reverse_iterator(const reverse_iterator& it) {
   string_pointer = it.string_pointer;
   this->position = it.position;
@@ -656,7 +526,6 @@ char32_t __opaque_unicode_string__::reverse_iterator::operator*() const {
 
 char32_t& __opaque_unicode_string__::reverse_iterator::operator*() {
   uint8_t* data = (uint8_t*)string_pointer->data();
-  //TODO If usicode length is greater than 1 byte, there are probably a crash
   return (char32_t&)*data;
 }
 
@@ -674,4 +543,3 @@ __opaque_unicode_string__::reverse_iterator& __opaque_unicode_string__::reverse_
   this->position = -1;
   return *this;
 }
-
