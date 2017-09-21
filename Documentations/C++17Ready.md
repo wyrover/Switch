@@ -5,7 +5,7 @@
 
 # C++17 Ready
 
-The following table represents some Switch class and the sandard C++ equivalent :
+The following table represents some Switch classes and their sandard C++ equivalent :
 
 | Switch C++ Class                                               | Standard C++ equivalent                                                                                                       |
 |----------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
