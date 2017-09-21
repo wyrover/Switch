@@ -1,4 +1,4 @@
-#include <Switch/System/String.hpp>
+﻿#include <Switch/System/String.hpp>
 #include <Switch/TUnit/Assert.hpp>
 #include <Switch/TUnit/TestFixture.hpp>
 #include <Switch/LiteralOperatorConverter.hpp>
