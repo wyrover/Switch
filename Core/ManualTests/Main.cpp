@@ -37,4 +37,3 @@ namespace Examples {
 }
 
 _startup (Examples::Program)
-
