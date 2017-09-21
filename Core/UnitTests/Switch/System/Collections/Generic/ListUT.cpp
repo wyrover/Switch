@@ -857,11 +857,12 @@ namespace {
   static void MyThread(const Object& param) {
     List<string> *dinosaurs = &((List<string>&) param);
     
-    LockGuard lock(dinosaurs->SyncRoot);
-    // Add 9 items
-    for (Int32 index = 1; index < 10; index++) {
-      dinosaurs->Add("Line " + index);
-      Thread::Sleep(0);
+    _lock (dinosaurs->SyncRoot) {
+      // Add 9 items
+      for (Int32 index = 1; index < 10; index++) {
+        dinosaurs->Add("Line " + index);
+        Thread::Sleep(0);
+      }
     }
   }
 

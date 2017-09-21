@@ -15,7 +15,7 @@ namespace Switch {
   namespace System {
     /// @brief Manipulates arrays of primitive types.
     /// This class cannot be inherited.
-    /// Buffer only affects arrays of primitive types; this class does ! apply to objects. Each primitive type is treated as a series of bytes without regard to any behavior || limitation associated with the primitive type.
+    /// Buffer only affects arrays of primitive types; this class does ! apply to objects. Each primitive type is treated as a series of bytes without regard to any behavior or limitation associated with the primitive type.
     /// Buffer provides methods to copy bytes from one array of primitive types to another array of primitive types, get a byte from an array, set a byte in an array, and obtain the length of an array. This class provides better performance for manipulating primitive types than similar methods in the System::Array class.
     /// Buffer is applicable to the following primitive types: #bool, #char, #char32, #sbyte, #byte, #int16, #uint16, #int32, #uint32, #int64, #uint64, #void*, #uintptr, #float, and #double.
     class _export Buffer final {
@@ -39,7 +39,7 @@ namespace Switch {
       /// | Zero              | blk1 is equal to blk2.     |
       /// | Greater than zero | blk1 is greater than blk2. |
       /// @exception ArgumentOutOfRangeException blk1Length, blk1Offset, blk2Length, blk2Offset, or count is less than 0.
-      /// @exception ArgumentException blk1 || blk2 is ! primitive. - || - The number of bytes in blk1 is less than blk1Offset plus count -||- The number of bytes in blk2 is less than blk2Offset plus count.
+      /// @exception ArgumentException blk1 or blk2 is ! primitive. - or - The number of bytes in blk1 is less than blk1Offset plus count -or- The number of bytes in blk2 is less than blk2Offset plus count.
       template<typename TSource, typename TDestination>
       static int32 BlockCompare(const Array<TSource>& blk1, int32 blk1Offset, const Array<TDestination>& blk2, int32 blk2Offset, int32 count) {
         if (blk1Offset < 0 || blk2Offset < 0 || count < 0)
@@ -66,9 +66,9 @@ namespace Switch {
       /// | Less than zero    | blk1 is less than blk2.    |
       /// | Zero              | blk1 is equal to blk2.     |
       /// | Greater than zero | blk1 is greater than blk2. |
-      /// @exception ArgumentNullException blk1 || blk2 is null
+      /// @exception ArgumentNullException blk1 or blk2 is null
       /// @exception ArgumentOutOfRangeException blk1Length, blk1Offset, blk2Length, blk2Offset, or count is less than 0.
-      /// @exception ArgumentException The number of bytes in blk1 is less than blk1Offset plus count -||- The number of bytes in blk2 is less than blk2Offset plus count.
+      /// @exception ArgumentException The number of bytes in blk1 is less than blk1Offset plus count -or- The number of bytes in blk2 is less than blk2Offset plus count.
       template<typename T1, typename T2>
       static int32 BlockCompare(const T1* blk1, int64 blk1Length, int64 blk1Offset, const T2* blk2, int64 blk2Length, int64 blk2Offset, int64 count) {return BlockCompare((const void*)blk1, blk1Length, blk1Offset, (const void *)blk2, blk2Length, blk2Offset, count);}
      
@@ -82,7 +82,7 @@ namespace Switch {
       /// @param dst The destination buffer.
       /// @param dstOffset The zero-based byte offset into dst.
       /// @param count The number of bytes to copy.
-      /// @exception ArgumentException src || dst is ! primitive. - || - The number of bytes in src is less than srcOffset plus count. -|| - The number of bytes in dst is less than dstOffset plus count.
+      /// @exception ArgumentException src or dst is ! primitive. - or - The number of bytes in src is less than srcOffset plus count. -or - The number of bytes in dst is less than dstOffset plus count.
       /// @exception ArgumentOutOfRangeException srcOffset, dstOffset, or count is less than 0.
       template<typename TSource, typename TDestination>
       static void BlockCopy(const Array<TSource>& src, int32 srcOffset, Array<TDestination>& dst, int32 dstOffset, int32 count) {
@@ -104,9 +104,9 @@ namespace Switch {
       /// @param dstLenth Target size
       /// @param dstOffset The zero-based byte offset into dst.
       /// @param count Number of byte to copy
-      /// @exception ArgumentNullException src || dst is null
+      /// @exception ArgumentNullException src or dst is null
       /// @exception ArgumentOutOfRangeException srcLength, srcOffset, dstLenth, dstOffset, or count is less than 0.
-      /// @exception ArgumentException The number of bytes in src is less than srcOffset plus count -||- The number of bytes in dst is less than dstOffset plus count.
+      /// @exception ArgumentException The number of bytes in src is less than srcOffset plus count -or- The number of bytes in dst is less than dstOffset plus count.
       static void BlockCopy(const void* src, int64 srcLength, int64 srcOffset, void* dst, int64 dstLenth, int64 dstOffset, int64 count);
       
       /// @brief Fill a specified number of bytes to a destination buffer starting at a particular offset whith a specified value.
@@ -115,7 +115,7 @@ namespace Switch {
       /// @param dstOffset The zero-based byte offset into dst.
       /// @param count Number of byte to filler
       /// @exception ArgumentOutOfRangeException dstLenth, dstOffset, or count is less than 0.
-      /// @exception ArgumentException dst is ! primitive. - || - The number of bytes in dst is less than dstOffset plus count.
+      /// @exception ArgumentException dst is ! primitive. - or - The number of bytes in dst is less than dstOffset plus count.
       template<typename TDestination>
       static void BlockFill(byte filler, Array<TDestination>& dst, int32 dstOffset, int32 count) {
         if (dstOffset < 0 || count < 0)
@@ -143,7 +143,7 @@ namespace Switch {
       /// @param dstOffset The zero-based byte offset into dst.
       /// @param count Number of byte to clear.
       /// @exception ArgumentOutOfRangeException dstLenth, dstOffset, or count is less than 0.
-      /// @exception ArgumentException st is ! primitive. - || - The number of bytes in dst is less than dstOffset plus count.
+      /// @exception ArgumentException st is ! primitive. - or - The number of bytes in dst is less than dstOffset plus count.
       template<typename TDestination>
       static void BlockZero(Array<TDestination>& dst, int32 dstOffset, int32 count) { BlockFill<TDestination>(0, dst, dstOffset, count); }
       
@@ -174,7 +174,7 @@ namespace Switch {
       /// @param index A location in the array.
       /// @return Returns the index byte in the array.
       /// @exception ArgumentException array is ! primitive.
-      /// @exception ArgumentOutOfRangeException index is negative || greater than the length of array.
+      /// @exception ArgumentOutOfRangeException index is negative or greater than the length of array.
       /// @exception OverflowException array is larger than 2 gigabytes(GB).
       template<typename T>
       static byte GetByte(const Array<T>& array, int32 index) {
@@ -192,7 +192,7 @@ namespace Switch {
       /// @param index A location in the array.
       /// @param value A value to assign.
       /// @exception ArgumentException array is ! primitive.
-      /// @exception ArgumentOutOfRangeException index is negative || greater than the length of array.
+      /// @exception ArgumentOutOfRangeException index is negative or greater than the length of array.
       /// @exception OverflowException array is larger than 2 gigabytes(GB).
       template<typename T>
       static void SetByte(const Array<T>& array, int32 index, byte value) {

@@ -151,7 +151,7 @@ namespace Switch {
       /// @brief Gets a 32-bit integer that represents the total number of elements in all the dimensions of the Array.
       /// @param dimension A zero-based dimension of the Array whose length needs to be determined.
       /// @return int32 A 32-bit integer that represents the total number of elements in all the dimensions of the Array; zero if there are no elements in the array.
-      /// @exception ArgumentOutOfRangeException dimension is less than zero. -||- dimension is equal to || greater than rank.
+      /// @exception ArgumentOutOfRangeException dimension is less than zero. -or- dimension is equal to or greater than rank.
       /// @par Examples
       /// The following code example demonstrates methods to get the length of an array.
       /// @include ArrayGetLength.cpp
@@ -160,7 +160,7 @@ namespace Switch {
       /// @brief Gets the lower bound of the specified dimension in the Array.
       /// @param dimension A zero-based dimension of the Array whose lower bound needs to be determined.
       /// @return int32 The lower bound of the specified dimension in the Array.
-      /// @exception ArgumentOutOfRangeException dimension is less than zero. -||- dimension is equal to || greater than rank.
+      /// @exception ArgumentOutOfRangeException dimension is less than zero. -or- dimension is equal to or greater than rank.
       /// @par Examples
       /// The following code example uses GetLowerBound and GetUpperBound to initialize a one-dimensional array and a multidimensional array.
       /// @include ArrayGetLowerBound.cpp
@@ -173,7 +173,7 @@ namespace Switch {
       /// @brief Gets the upper bound of the specified dimension in the Array.
       /// @param dimension A zero-based dimension of the Array whose upper bound needs to be determined.
       /// @return int32 The upper bound of the specified dimension in the Array.
-      /// @exception ArgumentOutOfRangeException dimension is less than zero. -||- dimension is equal to || greater than rank.
+      /// @exception ArgumentOutOfRangeException dimension is less than zero. -or- dimension is equal to or greater than rank.
       /// @par Examples
       /// The following code example uses GetLowerBound and GetUpperBound to initialize a one-dimensional array and a multidimensional array.
       /// @include ArrayGetLowerBound.cpp
@@ -214,7 +214,7 @@ namespace Switch {
       /// @param index The zero-based starting index of the search.
       /// @param count The number of elements in the section to search
       /// @return int32 The index of value if found in the list; otherwise, -1.
-      /// @exception ArgumentOutOfRangeException The parameters index is less than 0 || The parameters count is less than 0 || index and count do ! specify a valid section in the Array.
+      /// @exception ArgumentOutOfRangeException The parameters index is less than 0 or The parameters count is less than 0 or index and count do ! specify a valid section in the Array.
       /// @par Examples
       /// The following code example shows how to determine the index of the first occurrence of a specified element.
       /// @include ArrayIndexOf.cpp
@@ -610,7 +610,7 @@ namespace Switch {
       /// @param index The zero-based index of the element to get.
       /// @return The value at the specified position in the one-dimensional Array.
       /// @exception ArgumentException The current Array does ! have exactly one dimension.
-      /// @exception IndexOutOfRangeException index is less than 0 || index is equal to || greater than Count.
+      /// @exception IndexOutOfRangeException index is less than 0 or index is equal to or greater than Count.
       /// @par Examples
       /// The following code example shows how to use operator [] to list the elements of an array.
       /// @include ArrayArrayOperator.cpp
@@ -730,7 +730,7 @@ namespace Switch {
       /// @brief Sets the element at in multidimension array the specified index.
       /// @param index The zero-based index of the element to set.
       /// @return T The modified element at the specified index.
-      /// @exception ArgumentOutOfRangeException index is less than 0 || index is equal to || greater than Count.
+      /// @exception ArgumentOutOfRangeException index is less than 0 or index is equal to or greater than Count.
       /// @par Examples
       /// The following code example shows how to use operator [] to list the elements of an array.
       /// @include ArrayArrayOperatorFunctor.cpp
@@ -746,7 +746,7 @@ namespace Switch {
       /// @param index2 A 32-bit integer that represents the second-dimension index of the Array element to get.
       /// @return The value at the specified position in the two-dimensional Array.
       /// @exception ArgumentException The current Array does ! have exactly two dimension.
-      /// @exception IndexOutOfRangeException Either index1 || index2 is outside the range of valid indexes for the corresponding dimension of the current Array.
+      /// @exception IndexOutOfRangeException Either index1 or index2 is outside the range of valid indexes for the corresponding dimension of the current Array.
       /// @par Examples
       /// The following code example shows how to use operator [] to list the elements of an array.
       /// @include ArrayArrayOperatorFunctor.cpp
@@ -772,7 +772,7 @@ namespace Switch {
       /// @param index2 A 32-bit integer that represents the second-dimension index of the Array element to get.
       /// @return The value at the specified position in the two-dimensional Array.
       /// @exception ArgumentException The current Array does ! have exactly two dimension.
-      /// @exception IndexOutOfRangeException Either index1 || index2 is outside the range of valid indexes for the corresponding dimension of the current Array.
+      /// @exception IndexOutOfRangeException Either index1 or index2 is outside the range of valid indexes for the corresponding dimension of the current Array.
       const T& GetValue(int32 index1, int32 index2) const { return this->operator()(index1, index2); }
       
       /// @brief Sets a value to the element at the specified position in the two-dimensional Array.
@@ -780,7 +780,7 @@ namespace Switch {
       /// @param index1 A 32-bit integer that represents the position of the first dimension Array element to set.
       /// @param index2 A 32-bit integer that represents the position of the second dimension of the Array element to set.
       /// @exception ArgumentException The current Array does ! have exactly two dimension.
-      /// @exception IndexOutOfRangeException index1 || index2 is outside the range of valid indexes for the current Array.
+      /// @exception IndexOutOfRangeException index1 or index2 is outside the range of valid indexes for the current Array.
       void SetValue(const T& value, int32 index1, int32 index2) { this->operator()(index1, index2) = value; }
       
     private:
@@ -837,7 +837,7 @@ namespace Switch {
       /// @brief Sets the element at in multidimension array the specified index.
       /// @param index The zero-based index of the element to set.
       /// @return T The modified element at the specified index.
-      /// @exception ArgumentOutOfRangeException index is less than 0 || index is equal to || greater than Count.
+      /// @exception ArgumentOutOfRangeException index is less than 0 or index is equal to or greater than Count.
       /// @par Examples
       /// The following code example shows how to use operator [] to list the elements of an array.
       /// @include ArrayArrayOperatorFunctor.cpp
@@ -855,7 +855,7 @@ namespace Switch {
       /// @param index3 A 32-bit integer that represents the third-dimension index of the Array element to get.
       /// @return The value at the specified position in the three-dimensional Array.
       /// @exception ArgumentException The current Array does ! have exactly three dimension.
-      /// @exception IndexOutOfRangeException Either index1 || index2 || index3 is outside the range of valid indexes for the corresponding dimension of the current Array.
+      /// @exception IndexOutOfRangeException Either index1 or index2 or index3 is outside the range of valid indexes for the corresponding dimension of the current Array.
       /// @par Examples
       /// The following code example shows how to use operator [] to list the elements of an array.
       /// @include ArrayArrayOperatorFunctor.cpp
@@ -883,7 +883,7 @@ namespace Switch {
       /// @param index3 A 32-bit integer that represents the third-dimension index of the Array element to get.
       /// @return The value at the specified position in the three-dimensional Array.
       /// @exception ArgumentException The current Array does ! have exactly three dimension.
-      /// @exception IndexOutOfRangeException Either index1 || index2 || index3 is outside the range of valid indexes for the corresponding dimension of the current Array.
+      /// @exception IndexOutOfRangeException Either index1 or index2 or index3 is outside the range of valid indexes for the corresponding dimension of the current Array.
       const T& GetValue(int32 index1, int32 index2, int32 index3) const { return this->operator()(index1, index2, index3); }
       
       /// @brief Sets a value to the element at the specified position in the three-dimensional Array.
@@ -892,7 +892,7 @@ namespace Switch {
       /// @param index2 A 32-bit integer that represents the position of the second dimension of the Array element to set.
       /// @param index2 A 32-bit integer that represents the position of the third dimension of the Array element to set.
       /// @exception ArgumentException The current Array does ! have exactly three dimension.
-      /// @exception IndexOutOfRangeException index1 || index2 || index3 is outside the range of valid indexes for the current Array.
+      /// @exception IndexOutOfRangeException index1 or index2 or index3 is outside the range of valid indexes for the current Array.
       void SetValue(const T& value, int32 index1, int32 index2, int32 index3)  { this->operator()(index1, index2, index3) = value; }
       
     private:
@@ -1154,7 +1154,7 @@ namespace Switch {
       
       /// @brief Determines whether the List<T> contains elements that match the conditions defined by the specified predicate..
       /// @param match The Predicate pointer function that defines the conditions of the elements to search for.
-      /// @return Boolean true if the List<T> contains one || more elements that match the conditions defined by the specified predicate; otherwise, false.
+      /// @return Boolean true if the List<T> contains one or more elements that match the conditions defined by the specified predicate; otherwise, false.
       /// @exception ArgumentNUllException The parameters match is null.
       /// @remarks The Predicate is a pointer to a method that returns true if the object passed to it matches the conditions defined in the pointer function. The elements of the current List<T> are individually passed to the Predicate pointer function, and processing is stopped when a match is found.
       /// @remarks This method is an O(n) operation, where n is Count.
@@ -1195,7 +1195,7 @@ namespace Switch {
       /// @brief Reverses the order of the elements in the specified range.
       /// @param index The zero-based starting index of the range to reverse.
       /// @param count The number of elements in the range to reverse.
-      /// @exception ArgumentOutOfRangeException index is less than 0. -||- count is less than 0.
+      /// @exception ArgumentOutOfRangeException index is less than 0. -or- count is less than 0.
       /// @exception ArgumentException ndex and count do ! denote a valid range of elements in the List<T>.
       /// @remarks This method uses Array.Reverse to reverse the order of the elements, such that the element at List<T>[i], where i is any index within the range, moves to List<T>[j], where j equals index plus index plus count minus i minus 1.
       /// @remarks This method is an O(n) operation, where n is Count.

@@ -1,8 +1,8 @@
-#include "../../../Includes/Switch/System/__opaque_unicode_string__.hpp"
-#include "../../../Includes/Switch/System/Array.hpp"
-#include "../../../Includes/Switch/System/ArgumentNullException.hpp"
-#include "../../../Includes/Switch/System/ArgumentOutOfRangeException.hpp"
-#include "../../__OS/CoreApi.hpp"
+#include "../../Includes/Switch/__opaque_unicode_string__.hpp"
+#include "../../Includes/Switch/System/Array.hpp"
+#include "../../Includes/Switch/System/ArgumentNullException.hpp"
+#include "../../Includes/Switch/System/ArgumentOutOfRangeException.hpp"
+#include "../__OS/CoreApi.hpp"
 
 size_t __opaque_unicode_string__::npos = std::string::npos;
 

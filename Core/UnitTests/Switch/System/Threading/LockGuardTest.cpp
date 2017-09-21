@@ -15,9 +15,8 @@ namespace SwitchUnitTests {
       int value = 0;
       object lock;
       
-      LockGuard lockGuard(lock);
-      ++value;
-      
+      _lock (lock)
+        ++value;
       Assert::AreEqual(1, value, _caller);
     }
     
@@ -26,10 +25,11 @@ namespace SwitchUnitTests {
       object lock;
       object lock2;
       
-      LockGuard lockGuard(lock);
-      ++value;
-      LockGuard lockGuard2(lock2);
-      ++value;
+      _lock (lock) {
+        ++value;
+        _lock (lock2)
+          ++value;
+      }
       
       Assert::AreEqual(2, value, _caller);
     }
@@ -38,10 +38,11 @@ namespace SwitchUnitTests {
       int value = 0;
       object lock;
       
-      LockGuard lockGuard(lock);
-      ++value;
-      LockGuard lockGuard2(lock);
-      ++value;
+      _lock(lock) {
+        ++value;
+        _lock (lock)
+          ++value;
+      }
       
       Assert::AreEqual(2, value, _caller);
     }
@@ -50,10 +51,10 @@ namespace SwitchUnitTests {
       object lock;
       int value = 0;
       Stopwatch duration = Stopwatch::StartNew();
-      {
-        LockGuard lockGuard(lock);
+
+      _lock (lock)
         ++value;
-      }
+
       duration.Stop();
       Assert::LessOrEqual(duration.ElapsedMilliseconds(), 1, _caller);
     }
@@ -61,14 +62,16 @@ namespace SwitchUnitTests {
     void Thread() {
       string s;
       std::thread t1(_delegate {
-        LockGuard lockGuard(s);
-        for (int i = 0; i < 500; i++)
-          s += '1';
+        _lock (s) {
+          for (int i = 0; i < 500; i++)
+            s += '1';
+        }
       });
       std::thread t2(_delegate {
-        LockGuard lockGuard(s);
-        for (int i = 0; i < 500; i++)
-          s += '2';
+        _lock (s) {
+          for (int i = 0; i < 500; i++)
+            s += '2';
+        }
       });
       
       if (t1.joinable())

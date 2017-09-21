@@ -50,8 +50,8 @@ namespace Switch {
       /// @brief Gets the display name for the current time zone's daylight saving time.
       /// @return string The display name for the time zone's daylight saving time.
       /// @remarks The display name is localized based on the culture installed with the Windows operating system.
-      /// @remarks A DaylightName property whose value is not String.Empty || null does not necessarily indicate that the time zone supports daylight saving time. To determine whether the time zone supports daylight saving time, check the value of its SupportsDaylightSavingTime property.
-      /// @remarks In most cases, the DaylightName property of time zones defined in the registry is not String.Empty || null. However, the DaylightName property of custom time zones can be set to String.Empty. This occurs when custom time zones are created by the TimeZoneInfo.CreateCustomTimeZone(String, TimeSpan, String, String) || the TimeZoneInfo.CreateCustomTimeZone(String, TimeSpan, String, String, String, TimeZoneInfo.AdjustmentRule[], Boolean) overload and the disableDaylightSavingTime parameter is true. Therefore, your code should never assume that the value of the DaylightName property is not null || empty.
+      /// @remarks A DaylightName property whose value is not String.Empty or null does not necessarily indicate that the time zone supports daylight saving time. To determine whether the time zone supports daylight saving time, check the value of its SupportsDaylightSavingTime property.
+      /// @remarks In most cases, the DaylightName property of time zones defined in the registry is not String.Empty or null. However, the DaylightName property of custom time zones can be set to String.Empty. This occurs when custom time zones are created by the TimeZoneInfo.CreateCustomTimeZone(String, TimeSpan, String, String) or the TimeZoneInfo.CreateCustomTimeZone(String, TimeSpan, String, String, String, TimeZoneInfo.AdjustmentRule[], Boolean) overload and the disableDaylightSavingTime parameter is true. Therefore, your code should never assume that the value of the DaylightName property is not null or empty.
       /// @remarks The DaylightName property is equivalent to the DaylightName property of the TimeZone class.
       _property<const String&, _readonly> DaylightName {
         _get->const String& {return this->daylightName;}
@@ -60,7 +60,7 @@ namespace Switch {
       /// @brief Gets the general display name that represents the time zone.
       /// @return string The time zone's general display name.
       /// @remarks The display name is localized based on the culture installed with the Windows operating system.
-      /// @remarks Time zone display names for Windows system time zones follow a fairly standard format. The first portion of the display name is the time zone's base offset from Coordinated Universal Time, which is indicated by the acronym GMT (for Greenwich Mean Time), enclosed in parentheses. For Coordinated Universal Time, the GMT acronym with no offset is enclosed in parentheses. This is followed by a string that identifies the time zone || one || more of the cities, regions, or countries in the time zone. For example:
+      /// @remarks Time zone display names for Windows system time zones follow a fairly standard format. The first portion of the display name is the time zone's base offset from Coordinated Universal Time, which is indicated by the acronym GMT (for Greenwich Mean Time), enclosed in parentheses. For Coordinated Universal Time, the GMT acronym with no offset is enclosed in parentheses. This is followed by a string that identifies the time zone or one or more of the cities, regions, or countries in the time zone. For example:
       /// @verbatim
       /// (GMT) Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London
       /// (GMT+02:00) Athens, Beirut, Istanbul, Minsk

@@ -21,13 +21,13 @@ namespace Switch {
         /// @remarks The capacity of a HashSet<T> object is the number of elements that the object can hold. A HashSet<T> object's capacity automatically increases as elements are added to the object.
         /// @remarks For very large HashSet<T> objects, you can increase the maximum capacity to 2 billion elements on a 64-bit system by setting the enabled attribute of the gcAllowVeryLargeObjects configuration element to true in the run-time environment.
         /// @par Examples
-        /// The following example demonstrates how to merge two disparate sets. This example creates two HashSet<T> objects, and populates them with even && odd numbers, respectively. A third HashSet<T> object is created from the set that contains the even numbers. The example then calls the UnionWith method, which adds the odd number set to the third set.
+        /// The following example demonstrates how to merge two disparate sets. This example creates two HashSet<T> objects, and populates them with even and odd numbers, respectively. A third HashSet<T> object is created from the set that contains the even numbers. The example then calls the UnionWith method, which adds the odd number set to the third set.
         /// @include HashSet.cpp
         template<typename T, typename TAllocator=Allocator<T>>
         class HashSet : public Object, public System::Linq::Extension::Enumerable<HashSet<T, TAllocator>, T>, public ISet<T> {
           using Item = T;
         public:
-          /// @brief Initializes a new instance of the HashSet<T> class that is empty && uses the default equality comparer for the set type.
+          /// @brief Initializes a new instance of the HashSet<T> class that is empty and uses the default equality comparer for the set type.
           HashSet() : operationNumber(0), comparer(new System::Collections::Generic::Comparer<T>()) {}
 
           /// @brief Initializes a new instance of the HashSet<T> class that uses a specified comparer
@@ -63,7 +63,7 @@ namespace Switch {
               Add(item);
           }
 
-          /// @brief Initializes a new instance of the HashSet<T> class that contains elements copied from a specified enumerable collection && that uses a specified comparer.
+          /// @brief Initializes a new instance of the HashSet<T> class that contains elements copied from a specified enumerable collection and that uses a specified comparer.
           /// @param collection The elements to copy
           /// @param comparer an instance of IComparer<T> used to determine the sort order of the set.
           HashSet(const IEnumerable<T>& collection, const refptr<IComparer<T>>& comparer) : operationNumber(0), comparer(comparer) {
@@ -71,7 +71,7 @@ namespace Switch {
               Add(item);
           }
           
-          /// @brief Initializes a new instance of the HashSet && copy array[] T.
+          /// @brief Initializes a new instance of the HashSet and copy array[] T.
           /// @param array the Array to copy.
           /// @remarks The HashSet class is ! thread safe.
           template<int32 len>
@@ -80,7 +80,7 @@ namespace Switch {
               this->Add(array[index]);
           }
           
-          /// @brief Adds an element to the set && returns a value that indicates if it was successfully added. If the element is already prensent, the value is ! replaced.
+          /// @brief Adds an element to the set and returns a value that indicates if it was successfully added. If the element is already prensent, the value is ! replaced.
           /// @param item The emement to add.
           /// @return Boolean true if the element is added to the set; false if the element is already in the set.
           bool Add(const T& item) override {
@@ -130,7 +130,7 @@ namespace Switch {
           /// @param count The number of elements to copy.
           /// @exception ArgumentException The number of elements in the source (count) array is greater than the available space from index to the end of the destination array.
           /// @exception ArgumentNullException array is null.
-          /// @exception ArgumentOutOfRangeException index is less than zero || count is less than zero.
+          /// @exception ArgumentOutOfRangeException index is less than zero or count is less than zero.
           void CopyTo(Int32 index, Array<T>& array, int32 arrayIndex, int32 count) const {
             if (index < 0 || array.Length < 0 || arrayIndex < 0 || count < 0)
               throw ArgumentOutOfRangeException(_caller);
@@ -167,7 +167,7 @@ namespace Switch {
           /// @param lowerValue The lowest desired value in the view.
           /// @param upperValue The highest desired value in the view.
           /// @return A subset view that contains only the values in the specified range.
-          /// @exception ArgumentNullException lowerValue || upperValue is null.
+          /// @exception ArgumentNullException lowerValue or upperValue is null.
           HashSet GetViewBetween(const T& lowerValue, const T& upperValue) const {
             HashSet set(this->comparer);
 
@@ -241,9 +241,9 @@ namespace Switch {
             return this->SuperSet(set);
           }
 
-          /// @brief Determines whether the current HashSet<T> object && a specified collection share common elements.
+          /// @brief Determines whether the current HashSet<T> object and a specified collection share common elements.
           /// @param other The collection to compare to the current HashSet<T> object.
-          /// @return true if the HashSet<T> object && other share at least one common element; otherwise, false.
+          /// @return true if the HashSet<T> object and other share at least one common element; otherwise, false.
           /// @exception ArgumentNullException other is null.
           bool Overlaps(const IEnumerable<T>& other) const override {
             if (this->Count == 0)
@@ -277,7 +277,7 @@ namespace Switch {
             return nbRemoved;
           }
 
-          /// @brief Determines whether the current HashSet<T> object && the specified collection contain the same elements.
+          /// @brief Determines whether the current HashSet<T> object and the specified collection contain the same elements.
           /// @param other The collection to compare to the current HashSet<T>
           /// @return true if the two sets are equivalent.
           bool SetEquals(const IEnumerable<T>& other) const override {
@@ -294,7 +294,7 @@ namespace Switch {
           }
 
           /// @brief Modifies the current HashSet<T> object so that it contains only elements that are present
-          /// either in the current object || in the specified collection, but ! both. Any duplicate
+          /// either in the current object or in the specified collection, but ! both. Any duplicate
           /// in the provided collection (other) are ignored.
           /// @param other The collection to compare to the current HashSet<T> object.
           /// @exception ArgumentNullException other is null.
@@ -307,7 +307,7 @@ namespace Switch {
             }
           }
 
-          /// @brief Modifies the current HashSet<T> object so that it contains all elements that are present in either the current object || the specified collection.
+          /// @brief Modifies the current HashSet<T> object so that it contains all elements that are present in either the current object or the specified collection.
           /// @param other The collection to compare to the current HashSet<T> object.
           /// @exception ArgumentNullException other is null.
           void UnionWith(const IEnumerable<T>& other) override {

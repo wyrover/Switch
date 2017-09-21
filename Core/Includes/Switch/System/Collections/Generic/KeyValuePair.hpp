@@ -28,7 +28,7 @@ namespace Switch {
         template<typename TKey, typename TValue>
         class KeyValuePair : public Object {
         public:
-          /// @brief Initializes a new instance of the KeyValuePair<TKey, TValue> class with the specified key && value.
+          /// @brief Initializes a new instance of the KeyValuePair<TKey, TValue> class with the specified key and value.
           /// @param Key The object defined in each key/value pair
           /// @param value The definition associated with key
           KeyValuePair(const TKey& key, const TValue& value) : pair(std::make_pair(key, value)) {}
@@ -52,8 +52,8 @@ namespace Switch {
             _get->const TValue& {return this->pair.second;}
           };
 
-          /// @brief Returns a String representation of the KeyValuePair<TKey, TValue>, using the String representations of the key && value.
-          /// @return const String A String representation of the KeyValuePair<TKey, TValue>, which includes the String representations of the key && value.
+          /// @brief Returns a String representation of the KeyValuePair<TKey, TValue>, using the String representations of the key and value.
+          /// @return const String A String representation of the KeyValuePair<TKey, TValue>, which includes the String representations of the key and value.
           /// @return String
           String ToString() const override {return String::Format("[{0}, {1}]", this->pair.first, this->pair.second);}
 

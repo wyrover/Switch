@@ -15,7 +15,7 @@ namespace Switch {
   namespace System {
     /// @brief The System::IO namespace contains types that allow reading and writing to files and data streams, and types that provide basic file and directory support.
     namespace IO {
-      /// @brief Exposes a System::IO::Stream in memory, supporting synchronous read && write operations.
+      /// @brief Exposes a System::IO::Stream in memory, supporting synchronous read and write operations.
       class _export MemoryStream : public Stream {
         int64 GetLength() const override;
         void SetLength(int64 len) override;
@@ -82,14 +82,14 @@ namespace Switch {
         /// @exception System::UnauthorizedAccessException The MemoryStream instance was ! created with a publicly visible buffer.
         virtual const byte* Buffer() const;
 
-        /// @brief Reads a block of bytes from the current stream && writes the data to a buffer.
+        /// @brief Reads a block of bytes from the current stream and writes the data to a buffer.
         /// @param buffer When this method returns, contains the specified byte array with the values between offset and (offset + count - 1) replaced by the characters read from the current stream.
         /// @param bufferLength The size of the buffer expressed in bytes.
         /// @param offset The zero-based byte offset in buffer at which to begin storing data from the current stream.
         /// @param count The maximum number of bytes to read.
         /// @return The total number of bytes written into the buffer. This can be less than the number of bytes requested if that number of bytes are ! currently available, or zero if the end of the stream is reached before any bytes are read.
         /// @exception System::ArgumentNullException buffer is null.
-        /// @exception System::ArgumentOutOfRangeException offset || count is negative.
+        /// @exception System::ArgumentOutOfRangeException offset or count is negative.
         /// @exception System::ArgumentException offset subtracted from the buffer length is less than count.
         /// @exception System::ObjectDisposedException The current stream instance is IsClosed().
         int32 Read(Array<byte>& buffer, int32 offset, int32 count) override;
@@ -120,7 +120,7 @@ namespace Switch {
         /// @exception System::ArgumentNullException buffer is null.
         /// @exception System::NotSupportedException The stream does ! support writing. For additional information see System::IO::Stream.CanWrite. or The current position is closer than count bytes to the end of the stream, and the capacity cannot be modified.
         /// @exception System::ArgumentException offset subtracted from the buffer length is less than count.
-        /// @exception System::ArgumentOutOfRangeException offset || count are negative.
+        /// @exception System::ArgumentOutOfRangeException offset or count are negative.
         /// @exception System::IO::IOException An I/O error occurs.
         /// @exception System::ObjectDisposedException The current stream instance is IsClosed().
         void Write(const Array<byte>& buffer, int32 offset, int32 count) override;
@@ -134,7 +134,7 @@ namespace Switch {
         /// @brief Writes the entire contents of this memory stream to another stream.
         /// @param stream The stream to write this memory stream to.
         /// @exception System::ArgumentNullException stream is null.
-        /// @exception System::ObjectDisposedException The current || target stream is IsClosed().
+        /// @exception System::ObjectDisposedException The current or target stream is IsClosed().
         virtual void WriteTo(Stream& stream) const;
 
       private:

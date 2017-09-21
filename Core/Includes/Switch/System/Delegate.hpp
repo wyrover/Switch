@@ -17,9 +17,9 @@
 namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
-    /// @brief Represents a delegate, which is a data structure that refers to a static method or to a class instance && an instance method of that class.
+    /// @brief Represents a delegate, which is a data structure that refers to a static method or to a class instance and an instance method of that class.
     /// @par Examples
-    /// The following example shows how to define a delegate named myMethodDelegate. Instances of this delegate are created for an instance method && a static method of the nested mySampleClass class. The delegate for the instance method requires an instance of mySampleClass. The mySampleClass instance is saved in a variable named mySC.
+    /// The following example shows how to define a delegate named myMethodDelegate. Instances of this delegate are created for an instance method and a static method of the nested mySampleClass class. The delegate for the instance method requires an instance of mySampleClass. The mySampleClass instance is saved in a variable named mySC.
     /// @include Delegate.cpp
     template<typename Result, typename... Arguments>
     class Delegate : public object {
@@ -209,7 +209,7 @@ namespace Switch {
       /// @brief Removes the last occurrence of the invocation list of a delegate from the invocation list of another delegate.
       /// @param source The delegate from which to remove the invocation list of value.
       /// @param value The delegate that supplies the invocation list to remove from the invocation list of source.
-      /// @return Delegate A new delegate with an invocation list formed by taking the invocation list of source and removing the last occurrence of the invocation list of value, if the invocation list of value is found within the invocation list of source. Returns source if value is null || if the invocation list of value is ! found within the invocation list of source. Returns a null reference if the invocation list of value is equal to the invocation list of source || if source is a null reference.
+      /// @return Delegate A new delegate with an invocation list formed by taking the invocation list of source and removing the last occurrence of the invocation list of value, if the invocation list of value is found within the invocation list of source. Returns source if value is null or if the invocation list of value is ! found within the invocation list of source. Returns a null reference if the invocation list of value is equal to the invocation list of source or if source is a null reference.
       /// @remarks If the invocation list of value matches a contiguous set of elements in the invocation list of source, then the invocation list of value is said to occur within the invocation list of source. If the invocation list of value occurs more than once in the invocation list of source, the last occurrence is removed.
       static Delegate Remove(const Delegate& source, const Delegate& value) {
         Delegate result = source;
@@ -229,7 +229,7 @@ namespace Switch {
       /// @brief Removes all occurrences of the invocation list of a delegate from the invocation list of another delegate.
       /// @param source The delegate from which to remove the invocation list of value.
       /// @param value The delegate that supplies the invocation list to remove from the invocation list of source.
-      /// @return Delegate A new delegate with an invocation list formed by taking the invocation list of source && removing all occurrences of the invocation list of value, if the invocation list of value is found within the invocation list of source. Returns source if value is null || if the invocation list of value is ! found within the invocation list of source. Returns a null reference if the invocation list of value is equal to the invocation list of source, if source contains only a series of invocation lists that are equal to the invocation list of value, or if source is a null reference.
+      /// @return Delegate A new delegate with an invocation list formed by taking the invocation list of source and removing all occurrences of the invocation list of value, if the invocation list of value is found within the invocation list of source. Returns source if value is null or if the invocation list of value is ! found within the invocation list of source. Returns a null reference if the invocation list of value is equal to the invocation list of source, if source contains only a series of invocation lists that are equal to the invocation list of value, or if source is a null reference.
       /// @remarks If the invocation list of value matches a contiguous set of elements in the invocation list of source, then the invocation list of value is said to occur within the invocation list of source. If the invocation list of value occurs more than once in the invocation list of source, all occurrences are removed.
       static Delegate RemoveAll(const Delegate& source, const Delegate& value) {
         Delegate result = source;
@@ -307,9 +307,9 @@ namespace Switch {
     };
   }
 
-  /// @brief Represents a delegate, which is a data structure that refers to a static method or to a class instance && an instance method of that class.
+  /// @brief Represents a delegate, which is a data structure that refers to a static method or to a class instance and an instance method of that class.
   /// @par Examples
-  /// The following example shows how to define a delegate named myMethodDelegate. Instances of this delegate are created for an instance method && a static method of the nested mySampleClass class. The delegate for the instance method requires an instance of mySampleClass. The mySampleClass instance is saved in a variable named mySC.
+  /// The following example shows how to define a delegate named myMethodDelegate. Instances of this delegate are created for an instance method and a static method of the nested mySampleClass class. The delegate for the instance method requires an instance of mySampleClass. The mySampleClass instance is saved in a variable named mySC.
   /// @include Delegate.cpp
   /// @ingroup Types
   template<typename Result, typename... Arguments>

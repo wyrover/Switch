@@ -26,10 +26,10 @@ namespace Switch {
       namespace Generic {
         /// @brief Represents a non-generic collection of objects that can be individually accessed by index.
         /// @par Examples
-        /// The following code example creates an empty Dictionary<TKey, TValue> of strings with string keys && uses the Add method to add some elements. The example demonstrates that the Add method throws an ArgumentException when attempting to add a duplicate key.
+        /// The following code example creates an empty Dictionary<TKey, TValue> of strings with string keys and uses the Add method to add some elements. The example demonstrates that the Add method throws an ArgumentException when attempting to add a duplicate key.
         /// The example uses the Item property to retrieve values, demonstrating that a KeyNotFoundException is thrown when a requested key is ! present, and showing that the value associated with a key can be replaced.
         /// The example shows how to use the TryGetValue method as a more efficient way to retrieve values if a program often must try key values that are ! in the dictionary, and it shows how to use the ContainsKey method to test whether a key exists before calling the Add method.
-        /// The example shows how to enumerate the keys && values in the dictionary && how to enumerate the keys && values alone using the Keys property && the Values property.
+        /// The example shows how to enumerate the keys and values in the dictionary and how to enumerate the keys and values alone using the Keys property and the Values property.
         /// Finally, the example demonstrates the Remove method.
         /// @include Dictionary.cpp
         template<typename TKey, typename TValue, typename TAllocator=Allocator<std::pair<const TKey, TValue>>>
@@ -43,7 +43,7 @@ namespace Switch {
           /// @brief Represents the collection of values in a Dictionary<TKey, TValue>. This class cannot be inherited.
           using ValueCollection = typename IDictionary<TKey, TValue>::ValueCollection;
           
-          /// @brief Initializes a new instance of the Dictionary<TKey, TValue> class that is empty && has the default initial capacity (512 items).
+          /// @brief Initializes a new instance of the Dictionary<TKey, TValue> class that is empty and has the default initial capacity (512 items).
           /// @remarks Every key in a Dictionary<TKey, TValue> must be unique according to the default equality comparer.
           /// @remarks The Dictionary<TKey, TValue> class is ! thread safe.
           Dictionary() : operationNumber(0) {}
@@ -74,8 +74,8 @@ namespace Switch {
               Add(item);
           }
           
-          /// @brief Initializes a new instance of the Dictionary<TKey, TValue> class with Tkey && TValue array specified.
-          /// @param array An array of Tkey && TValue to initialize Dictionnary.
+          /// @brief Initializes a new instance of the Dictionary<TKey, TValue> class with Tkey and TValue array specified.
+          /// @param array An array of Tkey and TValue to initialize Dictionnary.
           /// @param capacity The number of elements that the new list can initially store (maximum 512 items).
           /// @exception ArgumentNullException The parameters array is null.
           /// @remarks The Dictionary<TKey, TValue> class is ! thread safe.
@@ -84,7 +84,7 @@ namespace Switch {
               Add(item);
           }
           
-          /// @brief Initializes a new instance of the Dictionary && copy array[] T.
+          /// @brief Initializes a new instance of the Dictionary and copy array[] T.
           /// @param array the Array to copy.
           /// @remarks The Dictionary class is ! thread safe.
           template<int32 len>
@@ -110,7 +110,7 @@ namespace Switch {
           /// @include DictionaryAdd.cpp
           void Add(const Item& item) override {Add(item.Key(), item.Value());}
           
-          /// @brief Adds an element with the provided key && value to the Dictionary<TKey,TValue>.
+          /// @brief Adds an element with the provided key and value to the Dictionary<TKey,TValue>.
           /// @param key The object to use as the key of the element to add.
           /// @param value The object to use as the value of the element to add.
           /// @exception ArgumentNullException key is null.
@@ -242,7 +242,7 @@ namespace Switch {
             return const_cast<std::unordered_map<TKey, TValue, Hasher, EqualTo, TAllocator>&>(this->hashmap)[key];
           }
           
-          /// @brief Clears the list && insert the elements of the list given in argument.
+          /// @brief Clears the list and insert the elements of the list given in argument.
           /// @param dictionnary the list which elements will be inserted from
           /// @return List<T> the list
           /// @exception ArgumentNullException dictionary is null.

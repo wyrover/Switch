@@ -35,16 +35,18 @@ namespace Switch {
           /// @param collection The collection whose elements are copied to the new ConcurrentQueue<T>.
           /// @exception ArgumentNullException collection is a null reference.
           ConcurrentQueue(const Generic::IEnumerable<T>& collection) {
-            System::Threading::LockGuard lock(this->queue.SyncRoot);
-            for (T item : collection)
-              this->queue.Enqueue(item);
+            _lock (this->queue.SyncRoot) {
+              for (T item : collection)
+                this->queue.Enqueue(item);
+            }
           }
           
           /// @cond
           ConcurrentQueue(InitializerList<T> il)  {
-            System::Threading::LockGuard lock(this->queue.SyncRoot);
-            for (T item : il)
-              this->queue.Enqueue(item);
+            _lock (this->queue.SyncRoot) {
+              for (T item : il)
+                this->queue.Enqueue(item);
+            }
           }
           /// @endcond
 
@@ -59,14 +61,14 @@ namespace Switch {
           /// @brief Enqueue an object to the ConcurrentQueue<T>.
           /// @param item The object to be Enqueued to the ConcurrentQueue<T>.
           void Enqueue(const T& item) {
-            System::Threading::LockGuard lock(this->queue.SyncRoot);
-            this->queue.Enqueue(item);
+            _lock (this->queue.SyncRoot)
+              this->queue.Enqueue(item);
           }
 
           /// @brief Removes all objects from the ConcurrentQueue<T>.
           void Clear() override {
-            System::Threading::LockGuard lock(this->queue.SyncRoot);
-            this->queue.Clear();
+            _lock (this->queue.SyncRoot)
+              this->queue.Clear();
           }
 
           /// @brief Copies the elements of the IProducerConsumerCollection<T> to an Array, starting at a specified index.
@@ -76,16 +78,18 @@ namespace Switch {
             if (index + this->queue.Count > array.Length)
               throw System::ArgumentOutOfRangeException(_caller);
 
-            System::Threading::LockGuard lock(this->queue.SyncRoot);
-            System::Int32 pos = index;
-            for (T item : this->queue)
-              array[pos++] = item;
+            _lock (this->queue.SyncRoot) {
+              System::Int32 pos = index;
+              for (T item : this->queue)
+                array[pos++] = item;
+            }
           }
 
           /// @brief Copies the elements contained in the IProducerConsumerCollection<T> to a new array.
           /// @return A new array containing the elements copied from the IProducerConsumerCollection<T>.
           System::Array<T> ToArray() const override {
-            System::Threading::LockGuard lock(this->queue.SyncRoot);
+            _lock(this->queue.SyncRoot)
+              return this->queue.ToArray();
             return this->queue.ToArray();
           }
 
@@ -94,7 +98,8 @@ namespace Switch {
           /// @remarks The enumeration represents a moment-in-time snapshot of the contents of the queue. It does not reflect any updates to the collection after GetEnumerator was called. The enumerator is safe to use concurrently with reads from and writes to the queue.
           /// @remarks The enumerator returns the collection elements in the order in which they were added, which is FIFO order (first-in, first-out).
           Generic::Enumerator<T> GetEnumerator() const override {
-            System::Threading::LockGuard lock(this->queue.SyncRoot);
+            _lock (this->queue.SyncRoot)
+              return Generic::Enumerator<T>(new Enumerator(this));
             return Generic::Enumerator<T>(new Enumerator(this));
           }
 
@@ -102,10 +107,11 @@ namespace Switch {
           /// @param result When this method returns, result contains an object from the ConcurrentQueue<T> or the default value of T if the operation failed.
           /// @return true if and object was returned successfully; otherwise, false.
           bool TryPeek(T& result) {
-            System::Threading::LockGuard lock(this->queue.SyncRoot);
-            if (this->queue.Count > 0) {
-              result = this->queue.Peek();
-              return true;
+            _lock (this->queue.SyncRoot) {
+              if (this->queue.Count > 0) {
+                result = this->queue.Peek();
+                return true;
+              }
             }
             return false;
           }
@@ -114,10 +120,11 @@ namespace Switch {
           /// @param result When this method returns, if the object was removed and returned successfully, item contains the removed object. If no object was available to be removed, the value is unspecified.
           /// @return true if an object was removed and returned successfully; otherwise, false.
           bool TryDequeue(T& result) {
-            System::Threading::LockGuard lock(this->queue.SyncRoot);
-            if (this->queue.Count > 0) {
-              result = this->queue.Dequeue();
-              return true;
+            _lock(this->queue.SyncRoot) {
+              if (this->queue.Count > 0) {
+                result = this->queue.Dequeue();
+                return true;
+              }
             }
             return false;
           }
@@ -134,8 +141,9 @@ namespace Switch {
           void Add(const T& item) override {Enqueue(item);}
 
           bool Contains(const T& value) const override {
-            System::Threading::LockGuard lock(this->queue.SyncRoot);
-            return this->queue.Contains(value);
+            _lock (this->queue.SyncRoot)
+              return this->queue.Contains(value);
+            return false;
           }
 
           bool Remove(const T& value) override {return false;}

@@ -67,8 +67,9 @@ namespace Switch {
       class SynchronizedTextReader : public TextReader {
       public:
         int32 Read() override {
-          System::Threading::LockGuard lock(reader);
-          return this->reader.Read();
+          _lock(reader)
+            return this->reader.Read();
+          return 0;
         }
         
       private:

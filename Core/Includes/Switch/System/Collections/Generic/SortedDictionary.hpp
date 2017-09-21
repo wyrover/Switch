@@ -26,10 +26,10 @@ namespace Switch {
       namespace Generic {
         /// @brief Represents a collection of key/value pairs that are sorted on the key.
         /// @par Examples
-        /// The following code example creates an empty SortedDictionary<TKey, TValue> of strings with string keys && uses the Add method to add some elements. The example demonstrates that the Add method throws an ArgumentException when attempting to add a duplicate key.
+        /// The following code example creates an empty SortedDictionary<TKey, TValue> of strings with string keys and uses the Add method to add some elements. The example demonstrates that the Add method throws an ArgumentException when attempting to add a duplicate key.
         /// The example uses the Item property to retrieve values, demonstrating that a KeyNotFoundException is thrown when a requested key is ! present, and showing that the value associated with a key can be replaced.
         /// The example shows how to use the TryGetValue method as a more efficient way to retrieve values if a program often must try key values that are ! in the dictionary, and it shows how to use the ContainsKey method to test whether a key exists before calling the Add method.
-        /// The example shows how to enumerate the keys && values in the dictionary && how to enumerate the keys && values alone using the Keys property && the Values property.
+        /// The example shows how to enumerate the keys and values in the dictionary and how to enumerate the keys and values alone using the Keys property and the Values property.
         /// Finally, the example demonstrates the Remove method.
         /// @include SortedDictionary.cpp
         template<typename TKey, typename TValue, typename TAllocator=Allocator<std::pair<const TKey, TValue>>>
@@ -43,25 +43,17 @@ namespace Switch {
           using ValueCollection = typename IDictionary<TKey, TValue>::ValueCollection;
           
           /// @brief Initializes a new instance of the System::Collections::Generic::SortedDictionary<TKey,TValue>
-          /// class that is empty && uses the default System::Collections::Generic::IComparer<T>
+          /// class that is empty and uses the default System::Collections::Generic::IComparer<T>
           /// implementation for the key type.
           SortedDictionary() : operationNumber(0), comparer(new System::Collections::Generic::Comparer<TKey>()), map(MapComparer(*this->comparer)) {}
 
-          /// @brief Initializes a new instance of the System::Collections::Generic::SortedDictionary<TKey,TValue>
-          /// class that is empty && uses the specified System::Collections::Generic::IComparer<T>
-          /// implementation to compare keys.
-          /// @param comparer The System::Collections::Generic::IComparer<T> implementation to use when comparing
-          ///                 keys, or null to use the default System::Collections::Generic::Comparer<T> for
-          ///                 the type of the key.
+          /// @brief Initializes a new instance of the System::Collections::Generic::SortedDictionary<TKey,TValue> class that is empty and uses the specified System::Collections::Generic::IComparer<T> implementation to compare keys.
+          /// @param comparer The System::Collections::Generic::IComparer<T> implementation to use when comparing keys, or null to use the default System::Collections::Generic::Comparer<T> for the type of the key.
           SortedDictionary(refptr< IComparer<TKey>>& comparer) : operationNumber(0), comparer(comparer), map(MapComparer(*this->comparer)) {this->init(comparer);}
 
-          /// @brief Initializes a new instance of the System::Collections::Generic::SortedDictionary<TKey,TValue>
-          /// class that contains elements copied from the specified System::Collections::Generic::IDictionary<TKey,TValue>
-          /// && uses the default System::Collections::Generic::IComparer<T> implementation
-          /// for the key type.
-          /// @param dictionary The System::Collections::Generic::IDictionary<TKey,TValue> whose elements are
-          ///                   copied to the new System::Collections::Generic::SortedDictionary<TKey,TValue>.
-          /// @exception System::ArgumentException dictionary contains one || more duplicate keys.
+          /// @brief Initializes a new instance of the System::Collections::Generic::SortedDictionary<TKey,TValue> class that contains elements copied from the specified System::Collections::Generic::IDictionary<TKey,TValue> and uses the default System::Collections::Generic::IComparer<T> implementation for the key type.
+          /// @param dictionary The System::Collections::Generic::IDictionary<TKey,TValue> whose elements are  copied to the new System::Collections::Generic::SortedDictionary<TKey,TValue>.
+          /// @exception System::ArgumentException dictionary contains one or more duplicate keys.
           SortedDictionary(const SortedDictionary& dictionary) : operationNumber(dictionary.operationNumber), comparer(dictionary.comparer), map(MapComparer(*this->comparer)) {
             for (const auto& item : dictionary)
               Add(item);
@@ -79,24 +71,18 @@ namespace Switch {
               Add(item);
           }
 
-          /// @brief Initializes a new instance of the System::Collections::Generic::SortedDictionary<TKey,TValue>
-          /// class that contains elements copied from the specified System::Collections::Generic::IDictionary<TKey,TValue>
-          /// && uses the specified System::Collections::Generic::IComparer<T> implementation
-          /// to compare keys.
-          /// @param dictionary The System::Collections::Generic::IDictionary<TKey,TValue> whose elements are
-          ///                   copied to the new System::Collections::Generic::SortedDictionary<TKey,TValue>.
-          /// @param comparer The System::Collections::Generic::IComparer<T> implementation to use when comparing
-          ///                 keys, or null to use the default System::Collections::Generic::Comparer<T> for
-          ///                 the type of the key.
+          /// @brief Initializes a new instance of the System::Collections::Generic::SortedDictionary<TKey,TValue> class that contains elements copied from the specified System::Collections::Generic::IDictionary<TKey,TValue> and uses the specified System::Collections::Generic::IComparer<T> implementation to compare keys.
+          /// @param dictionary The System::Collections::Generic::IDictionary<TKey,TValue> whose elements are copied to the new System::Collections::Generic::SortedDictionary<TKey,TValue>.
+          /// @param comparer The System::Collections::Generic::IComparer<T> implementation to use when comparing keys, or null to use the default System::Collections::Generic::Comparer<T> for the type of the key.
           /// @exception System::ArgumentNullException dictionary is null.
-          /// @exception System::ArgumentException dictionary contains one || more duplicate keys.
+          /// @exception System::ArgumentException dictionary contains one or more duplicate keys.
           SortedDictionary(const IDictionary<TKey, TValue>& dictionary, refptr< IComparer<TKey>>& comparer) : operationNumber(0), comparer(comparer), map(MapComparer(*this->comparer)) {
             for (auto p : dictionary)
               Add(p.Key(),p.Value());
           }
 
-          /// @brief Initializes a new instance of the SortedDictionary<TKey, TValue> class with Tkey && TValue array specified.
-          /// @param array An array of Tkey && TValue to initialize Dictionnary.
+          /// @brief Initializes a new instance of the SortedDictionary<TKey, TValue> class with Tkey and TValue array specified.
+          /// @param array An array of Tkey and TValue to initialize Dictionnary.
           /// @param capacity The number of elements that the new list can initially store (maximum 512 items).
           /// @exception ArgumentNullException The parameters array is null.
           /// @remarks The SortedDictionary<TKey, TValue> class is ! thread safe.
@@ -105,7 +91,7 @@ namespace Switch {
               Add(elem.Key(),elem.Value());
           }
           
-          /// @brief Initializes a new instance of the SortedDictionary && copy array[] T.
+          /// @brief Initializes a new instance of the SortedDictionary and copy array[] T.
           /// @param array the Array to copy.
           /// @remarks The SortedDictionary class is ! thread safe.
           template<int32 len>
@@ -133,7 +119,7 @@ namespace Switch {
             Add(keyValue.Key(), keyValue.Value());
           }
 
-          /// @brief Adds an element with the specified key && value into the System::Collections::Generic::SortedDictionary<TKey,TValue>.
+          /// @brief Adds an element with the specified key and value into the System::Collections::Generic::SortedDictionary<TKey,TValue>.
           /// @param key The key of the element to add.
           /// @param value The value of the element to add. The value can be null for reference types.
           /// @exception System::ArgumentNullException key is null.
@@ -159,22 +145,17 @@ namespace Switch {
             return keyValue.Value() == (*this)[keyValue.Key()];
           }
 
-          /// @brief Determines whether the System::Collections::Generic::SortedDictionary<TKey,TValue>
-          /// contains an element with the specified key.
+          /// @brief Determines whether the System::Collections::Generic::SortedDictionary<TKey,TValue> contains an element with the specified key.
           /// @param key The key to locate in the System::Collections::Generic::SortedDictionary<TKey,TValue>.
-          /// @return true if the System::Collections::Generic::SortedDictionary<TKey,TValue> contains
-          ///         an element with the specified key; otherwise, false.
+          /// @return true if the System::Collections::Generic::SortedDictionary<TKey,TValue> contains an element with the specified key; otherwise, false.
           /// @exception System::ArgumentNullException key is null.
           virtual bool ContainsKey(const TKey& key) const override {
             return this->map.find(key) != this->map.end();
           }
 
-          /// @brief Determines whether the System::Collections::Generic::SortedDictionary<TKey,TValue>
-          /// contains an element with the specified value.
-          /// @param value The value to locate in the System::Collections::Generic::SortedDictionary<TKey,TValue>.
-          ///              The value can be null for reference types.
-          /// @return true if the System::Collections::Generic::SortedDictionary<TKey,TValue> contains
-          ///         an element with the specified value; otherwise, false.
+          /// @brief Determines whether the System::Collections::Generic::SortedDictionary<TKey,TValue> contains an element with the specified value.
+          /// @param value The value to locate in the System::Collections::Generic::SortedDictionary<TKey,TValue>. The value can be null for reference types.
+          /// @return true if the System::Collections::Generic::SortedDictionary<TKey,TValue> contains an element with the specified value; otherwise, false.
           bool ContainsValue(const TValue& value) const {
             for (auto p : *this) {
               if (p.Value() == value)
@@ -193,19 +174,12 @@ namespace Switch {
             this->CopyTo(array, 0);
           }
 
-          /// @brief Copies the elements of the System::Collections::Generic::SortedDictionary<TKey,TValue>
-          /// to the specified array of System::Collections::Generic::KeyValuePair<TKey,TValue>
-          /// structures, starting at the specified index.
-          /// @param array The one-dimensional array of System::Collections::Generic::KeyValuePair<TKey,TValue>
-          ///              structures that is the destination of the elements copied from the current
-          ///              System::Collections::Generic::SortedDictionary<TKey,TValue> The array must have
-          ///              zero-based indexing.
+          /// @brief Copies the elements of the System::Collections::Generic::SortedDictionary<TKey,TValue> to the specified array of System::Collections::Generic::KeyValuePair<TKey,TValue> structures, starting at the specified index.
+          /// @param array The one-dimensional array of System::Collections::Generic::KeyValuePair<TKey,TValue> structures that is the destination of the elements copied from the current System::Collections::Generic::SortedDictionary<TKey,TValue> The array must have zero-based indexing.
           /// @param index The zero-based index in array at which copying begins.
           /// @exception System::ArgumentNullException array is null.
           /// @exception System::ArgumentOutOfRangeException index is less than 0.
-          /// @exception System::ArgumentException The number of elements in the source System::Collections::Generic::SortedDictionary<TKey,TValue>
-          ///            is greater than the available space from index to the end of the destination
-          ///            array.
+          /// @exception System::ArgumentException The number of elements in the source System::Collections::Generic::SortedDictionary<TKey,TValue> is greater than the available space from index to the end of the destination array.
           void CopyTo(System::Array<KeyValuePair<TKey,TValue>>& array, int32 index) const override {
             if (index < 0 || array.Length < index + this->Count)
               throw ArgumentOutOfRangeException(_caller);
@@ -218,16 +192,14 @@ namespace Switch {
           }
 
           /// @brief Returns an enumerator that iterates through the System::Collections::Generic::SortedDictionary<TKey,TValue>.KeyCollection.
-          /// @return A System::Collections::Generic::SortedDictionary<TKey,TValue>.KeyCollection.Enumerator
-          ///         structure for the System::Collections::Generic::SortedDictionary<TKey,TValue>.KeyCollection.
+          /// @return A System::Collections::Generic::SortedDictionary<TKey,TValue>.KeyCollection.Enumerator structure for the System::Collections::Generic::SortedDictionary<TKey,TValue>.KeyCollection.
           System::Collections::Generic::Enumerator< KeyValuePair<TKey,TValue>> GetEnumerator() const override {
             return System::Collections::Generic::Enumerator< KeyValuePair<TKey,TValue>>(new SortedDictionary::Enumerator(*const_cast<SortedDictionary*>(this)));
           }
 
           /// @brief Removes the element with the specified key from the System::Collections::Generic::SortedDictionary<TKey,TValue>.
           /// @param key The key of the element to remove.
-          /// @return true if the element is successfully removed; otherwise, false. This method
-          ///         also returns false if key is ! found in the System::Collections::Generic::SortedDictionary<TKey,TValue>.
+          /// @return true if the element is successfully removed; otherwise, false. This method also returns false if key is ! found in the System::Collections::Generic::SortedDictionary<TKey,TValue>.
           /// @exception System::ArgumentNullException key is null.
           bool Remove(const KeyValuePair<TKey,TValue>& kvp) override {
             if (!Contains(kvp))
@@ -239,8 +211,7 @@ namespace Switch {
 
           /// @brief Removes the element with the specified key from the System::Collections::Generic::SortedDictionary<TKey,TValue>.
           /// @param key The key of the element to remove.
-          /// @return true if the element is successfully removed; otherwise, false. This method
-          ///         also returns false if key is ! found in the System::Collections::Generic::SortedDictionary<TKey,TValue>.
+          /// @return true if the element is successfully removed; otherwise, false. This method also returns false if key is ! found in the System::Collections::Generic::SortedDictionary<TKey,TValue>.
           /// @exception System::ArgumentNullException key is null.
           virtual bool Remove(const TKey& key) override {
             this->operationNumber++;
@@ -249,11 +220,8 @@ namespace Switch {
 
           /// @brief Gets the value associated with the specified key.
           /// @param key The key of the value to get.
-          /// @param value When this method returns, the value associated with the specified key, if
-          ///              the key is found; otherwise, the default value for the type of the value
-          ///              parameter.
-          /// @return true if the System::Collections::Generic::SortedDictionary<TKey,TValue> contains
-          ///         an element with the specified key; otherwise, false.
+          /// @param value When this method returns, the value associated with the specified key, if the key is found; otherwise, the default value for the type of the value parameter.
+          /// @return true if the System::Collections::Generic::SortedDictionary<TKey,TValue> contains an element with the specified key; otherwise, false.
           /// @exception System::ArgumentNullException key is null.
           virtual bool TryGetValue(const TKey& key, TValue& value) const override {
             if (! ContainsKey(key)) {
@@ -292,7 +260,7 @@ namespace Switch {
             return const_cast<std::map<TKey, TValue, MapComparer, TAllocator>&>(this->map)[key];
           }
 
-          /// @brief Clear the SortedDictionary && insert the element of the SortedDictionary given in argument.
+          /// @brief Clear the SortedDictionary and insert the element of the SortedDictionary given in argument.
           /// @param dictionnary the SortedDictionary which elements will be inserted from
           /// @return a reference to the current SortedDictionary
           /// @exception ArgumentNullException dictionary is null.

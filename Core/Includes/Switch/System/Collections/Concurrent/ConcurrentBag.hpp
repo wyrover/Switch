@@ -36,16 +36,18 @@ namespace Switch {
           /// @param collection The collection whose elements are copied to the new ConcurrentBag<T>.
           /// @exception ArgumentNullException collection is a null reference.
           ConcurrentBag(const Generic::IEnumerable<T>& collection) {
-            System::Threading::LockGuard lock(this->list.SyncRoot);
-            for (T item : collection)
-              this->list.Add(item);
+            _lock (this->list.SyncRoot) {
+              for (T item : collection)
+                this->list.Add(item);
+            }
           }
 
           /// @cond
           ConcurrentBag(InitializerList<T> il)  {
-            System::Threading::LockGuard lock(this->list.SyncRoot);
-            for (T item : il)
-              this->list.Add(item);
+            _lock (this->list.SyncRoot) {
+              for (T item : il)
+                this->list.Add(item);
+            }
           }
           /// @endcond
           
@@ -60,8 +62,8 @@ namespace Switch {
           /// @brief Adds an object to the ConcurrentBag<T>.
           /// @param item The object to be added to the ConcurrentBag<T>.
           void Add(const T& item) override {
-            System::Threading::LockGuard lock(this->list.SyncRoot);
-            this->list.Add(item);
+            _lock (this->list.SyncRoot)
+              this->list.Add(item);
           }
 
           /// @brief Copies the elements of the IProducerConsumerCollection<T> to an Array, starting at a specified index.
@@ -71,22 +73,25 @@ namespace Switch {
             if (index + this->list.Count > array.Length)
               throw ArgumentOutOfRangeException(_caller);
 
-            System::Threading::LockGuard lock(this->list.SyncRoot);
-            for (T item : this->list)
-              array[index++] = item;
+            _lock (this->list.SyncRoot) {
+              for (T item : this->list)
+                array[index++] = item;
+            }
           }
 
           /// @brief Copies the elements contained in the IProducerConsumerCollection<T> to a new array.
           /// @return A new array containing the elements copied from the IProducerConsumerCollection<T>.
           System::Array<T> ToArray() const override {
-            System::Threading::LockGuard lock(this->list.SyncRoot);
+            _lock (this->list.SyncRoot)
+              return this->list.ToArray();
             return this->list.ToArray();
           }
 
           /// @brief Returns an enumerator that iterates through the ConcurrentBag<T>.
           /// @return Int32 A List<T>::Enumerator for the List<T>.
           Generic::Enumerator<T> GetEnumerator() const override {
-            System::Threading::LockGuard lock(this->list.SyncRoot);
+            _lock (this->list.SyncRoot)
+              return Generic::Enumerator<T>(new Enumerator(this));
             return Generic::Enumerator<T>(new Enumerator(this));
           }
 
@@ -95,23 +100,26 @@ namespace Switch {
           /// @return true if the object was added successfully; otherwise, false.
           /// @exception ArgumentException The item was invalid for this collection.
           bool TryAdd(const T& item) override {
-            System::Threading::LockGuard lock(this->list.SyncRoot);
-            try {
-              this->list.Add(item);
-              return true;
-            } catch (...) {
-              return false;
+            _lock(this->list.SyncRoot) {
+              try {
+                this->list.Add(item);
+                return true;
+              } catch (...) {
+                return false;
+              }
             }
+            return false;
           }
 
           /// @brief Attempts to return an object from the ConcurrentBag<T> without removing it.
           /// @param result When this method returns, result contains an object from the ConcurrentBag<T> or the default value of T if the operation failed.
           /// @return true if and object was returned successfully; otherwise, false.
           bool TryPeek(T& result) {
-            System::Threading::LockGuard lock(this->list.SyncRoot);
-            if (this->list.Count > 0) {
-              result = this->list[this->Count-1];
-              return true;
+            _lock (this->list.SyncRoot) {
+              if (this->list.Count > 0) {
+                result = this->list[this->Count-1];
+                return true;
+              }
             }
             return false;
           }
@@ -120,11 +128,12 @@ namespace Switch {
           /// @param result When this method returns, if the object was removed and returned successfully, item contains the removed object. If no object was available to be removed, the value is unspecified.
           /// @return true if an object was removed and returned successfully; otherwise, false.
           bool TryTake(T& result) override {
-            System::Threading::LockGuard lock(this->list.SyncRoot);
-            if (this->list.Count > 0) {
-              result = this->list[this->Count-1];
-              this->list.RemoveAt(this->Count-1);
-              return true;
+            _lock (this->list.SyncRoot) {
+              if (this->list.Count > 0) {
+                result = this->list[this->Count-1];
+                this->list.RemoveAt(this->Count-1);
+                return true;
+              }
             }
             return false;
           }
@@ -139,17 +148,19 @@ namespace Switch {
           const object& GetSyncRoot() const override {return this->list.SyncRoot;}
 
           void Clear() override {
-            System::Threading::LockGuard lock(this->list.SyncRoot);
-            this->list.Clear();
+            _lock (this->list.SyncRoot)
+              this->list.Clear();
           }
 
           bool Contains(const T& value) const override {
-            System::Threading::LockGuard lock(this->list.SyncRoot);
+            _lock (this->list.SyncRoot)
+              return this->list.Contains(value);
             return this->list.Contains(value);
           }
 
           bool Remove(const T& value) override {
-            System::Threading::LockGuard lock(this->list.SyncRoot);
+            _lock (this->list.SyncRoot)
+              return this->list.Remove(value);
             return this->list.Remove(value);
           }
 

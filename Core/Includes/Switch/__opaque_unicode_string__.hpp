@@ -7,7 +7,7 @@
 #include <string>
 #include <vector>
 
-#include "../Export.hpp"
+#include "Export.hpp"
 
 /// @cond
 namespace Switch { namespace System {

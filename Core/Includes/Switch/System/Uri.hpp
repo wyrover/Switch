@@ -24,18 +24,18 @@
 namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
-    /// @brief Provides an object representation of a uniform resource identifier (URI) && easy access to the parts of the URI.
-    /// @remarks A URI is a compact representation of a resource available to your application on the intranet || Internet. The Uri class defines the properties && methods for handling URIs, including parsing, comparing, and combining. The Uri class properties are read-only; to create a modifiable object, use the UriBuilder class.
+    /// @brief Provides an object representation of a uniform resource identifier (URI) and easy access to the parts of the URI.
+    /// @remarks A URI is a compact representation of a resource available to your application on the intranet or Internet. The Uri class defines the properties and methods for handling URIs, including parsing, comparing, and combining. The Uri class properties are read-only; to create a modifiable object, use the UriBuilder class.
     /// @remarks Relative URIs (for example, "/new/index.htm") must be expanded with respect to a base URI so that they are absolute. The MakeRelative method is provided to convert absolute URIs to relative URIs when necessary.
     /// @remarks The Uri constructors do ! escape URI strings if the string is a well-formed URI including a scheme identifier.
     /// @remarks The Uri properties return a canonical data representation in escaped encoding, with all characters with Unicode values greater than 127 replaced with their hexadecimal equivalents. To put the URI in canonical form, the Uri constructor performs the following steps:
     /// @remarks Converts the URI scheme to lowercase.
     /// @remarks Converts the host name to lowercase.
-    /// @remarks If the host name is an IPv6 address, the canonical IPv6 address is used. ScopeId && other optional IPv6 data are removed.
-    /// @remarks Removes default && empty port numbers.
+    /// @remarks If the host name is an IPv6 address, the canonical IPv6 address is used. ScopeId and other optional IPv6 data are removed.
+    /// @remarks Removes default and empty port numbers.
     /// @remarks Canonicalizes the path for hierarchical URIs by compacting sequences such as /./, /../, //, including escaped representations. Note that there are some schemes for which escaped representations are ! compacted.
     /// @remarks For hierarchical URIs, if the host is ! terminated with a forward slash (/), one is added.
-    /// @remarks By default, any reserved characters in the URI are escaped in accordance with RFC 2396. This behavior changes if International Resource Identifiers || International Domain Name parsing is enabled in which case reserved characters in the URI are escaped in accordance with RFC 3986 && RFC 3987.
+    /// @remarks By default, any reserved characters in the URI are escaped in accordance with RFC 2396. This behavior changes if International Resource Identifiers or International Domain Name parsing is enabled in which case reserved characters in the URI are escaped in accordance with RFC 3986 and RFC 3987.
     /// @remarks As part of canonicalization in the constructor for some schemes, escaped representations are compacted. The schemes for which URI will compact escaped sequences include the following: file, http, https, net.pipe, and net.tcp. For all other schemes, escaped sequences are ! compacted. For example: if you percent encode the two dots ".." as "%2E%2E" then the URI constructor will compact this sequence for some schemes. For example, the following code sample shows a URI constructor for the http scheme.
     class _export Uri : public Object, public System::Runtime::Serialization::ISerializable {
     public:
@@ -93,7 +93,7 @@ namespace Switch {
       /// @brief Specifies that the URI is accessed through the Hypertext Transfer Protocol (HTTPS). This field is read-only.
       static _property<string, _readonly> UriSchemeHttps;
       
-      /// @brief Specifies that the URI is an e-mail address && is accessed through the Simple Mail Transport Protocol (SMTP). This field is read-only.
+      /// @brief Specifies that the URI is an e-mail address and is accessed through the Simple Mail Transport Protocol (SMTP). This field is read-only.
       static _property<string, _readonly> UriSchemeMailto;
       
       /// @brief Specifies that the URI is accessed through the NetPipe scheme used by Windows Communication Foundation (WCF). This field is read-only.
@@ -102,10 +102,10 @@ namespace Switch {
       /// @brief Specifies that the URI is accessed through the NetTcp scheme used by Windows Communication Foundation (WCF). This field is read-only.
       static _property<string, _readonly> UriSchemeNetTcp;
       
-      /// @brief Specifies that the URI is an Internet news group && is accessed through the Network News Transport Protocol (NNTP). This field is read-only.
+      /// @brief Specifies that the URI is an Internet news group and is accessed through the Network News Transport Protocol (NNTP). This field is read-only.
       static _property<string, _readonly> UriSchemeNews;
       
-      /// @brief Specifies that the URI is an Internet news group && is accessed through the Network News Transport Protocol (NNTP). This field is read-only.
+      /// @brief Specifies that the URI is an Internet news group and is accessed through the Network News Transport Protocol (NNTP). This field is read-only.
       static _property<string, _readonly> UriSchemeNntp;
       
       /// @brief Initializes a new instance of the Uri class.
@@ -128,7 +128,7 @@ namespace Switch {
         SetUri(uri, kind);
       }
 
-      /// @brief Initializes a new instance of the Uri class based on the specified base URI && relative URI string.
+      /// @brief Initializes a new instance of the Uri class based on the specified base URI and relative URI string.
       /// @param baseUri : The base URI.
       /// @param relativeUri : The relative URI to add to the base URI.
       /// @exception ArgumentNullException uri is null.
@@ -136,7 +136,7 @@ namespace Switch {
         SetUri(baseUri.originalUri + relativeUri, baseUri.kind);
       }
 
-      /// @brief Initializes a new instance of the Uri class based on the combination of a specified base Uri instance && a relative Uri instance.
+      /// @brief Initializes a new instance of the Uri class based on the combination of a specified base Uri instance and a relative Uri instance.
       /// @param baseUri : An absolute Uri that is the base for the new Uri instance.
       /// @param relativeUri : A relative Uri instance that is combined with baseUri.
       /// @exception ArgumentNullException uri is null.
@@ -147,7 +147,7 @@ namespace Switch {
       /// @brief Gets the absolute path of the URI.
       /// @return string A string containing the absolute path to the resource.
       /// @exception InvalidOperationException This instance represents a relative URI, and this property is valid only for absolute URIs.
-      /// @remarks The AbsolutePath property contains the path information that the server uses to resolve requests for information. Typically this is the path to the desired information on the server's file system, although it also can indicate the application || script the server must run to provide the information.
+      /// @remarks The AbsolutePath property contains the path information that the server uses to resolve requests for information. Typically this is the path to the desired information on the server's file system, although it also can indicate the application or script the server must run to provide the information.
       /// @remarks The path information does ! include the scheme, host name, or query portion of the URI.
       _property<String, _readonly> AbsolutePath {
         _get {return this->GetComponents(UriComponents::Path, UriFormat::UriEscaped);}
@@ -156,23 +156,23 @@ namespace Switch {
       /// @brief Gets the absolute URI.
       /// @return string A string containing the entire URI.
       /// @exception InvalidOperationException This instance represents a relative URI, and this property is valid only for absolute URIs.
-      /// @remarks The AbsoluteUri property includes the entire URI stored in the Uri instance, including all fragments && query strings.
+      /// @remarks The AbsoluteUri property includes the entire URI stored in the Uri instance, including all fragments and query strings.
       _property<String, _readonly> AbsoluteUri {
         _get {return this->GetComponents(UriComponents::AbsoluteUri, UriFormat::UriEscaped);}
       };
 
-      /// @brief Gets the Domain Name System (DNS) host name || IP address && the port number for a server.
+      /// @brief Gets the Domain Name System (DNS) host name or IP address and the port number for a server.
       /// @return string A string containing the authority component of the URI represented by this instance.
       /// @exception InvalidOperationException This instance represents a relative URI, and this property is valid only for absolute URIs.
-      /// @remarks The Authority property is typically a server DNS host name || IP address. This property might include the service port number if it differs from the default port for the URI. If the Authority component contains reserved characters, these are escaped in the string value returned by this property.
+      /// @remarks The Authority property is typically a server DNS host name or IP address. This property might include the service port number if it differs from the default port for the URI. If the Authority component contains reserved characters, these are escaped in the string value returned by this property.
       _property<String, _readonly> Authority {
         _get {return this->GetComponents(UriComponents::UserInfo|UriComponents::KeepDelimiter, UriFormat::UriEscaped) + GetComponents(UriComponents::Host|UriComponents::KeepDelimiter, UriFormat::UriEscaped) + GetComponents(UriComponents::Port|UriComponents::KeepDelimiter, UriFormat::UriEscaped);}
       };
 
       /// @brief Gets an unescaped host name that is safe to use for DNS resolution.
-      /// @return string A string that contains the unescaped host part of the URI that is suitable for DNS resolution; || the original unescaped host string, if it is already suitable for resolution.
+      /// @return string A string that contains the unescaped host part of the URI that is suitable for DNS resolution; or the original unescaped host string, if it is already suitable for resolution.
       /// @exception InvalidOperationException This instance represents a relative URI, and this property is valid only for absolute URIs.
-      /// @remarks For IPv6 addresses, the brackets ([]) are removed && the ScopeId property is set, if one was specified when this instance was constructed.
+      /// @remarks For IPv6 addresses, the brackets ([]) are removed and the ScopeId property is set, if one was specified when this instance was constructed.
       _property<String, _readonly> DnsSafeHost {
         _get {return this->GetComponents(UriComponents::Host, UriFormat::SafeUnescaped);}
       };
@@ -187,7 +187,7 @@ namespace Switch {
       };
 
       /// @brief Gets the host component of this instance.
-      /// @return string A string that contains the host name. This is usually the DNS host name || IP address of the server.
+      /// @return string A string that contains the host name. This is usually the DNS host name or IP address of the server.
       /// @exception InvalidOperationException This instance represents a relative URI, and this property is valid only for absolute URIs.
       /// @remarks Unlike the Authority property, this property value does ! include the port number.
       _property<String, _readonly> Host {
@@ -223,7 +223,7 @@ namespace Switch {
 
       /// @brief Gets whether the Uri instance is absolute.
       /// @return bool A bool value that is true if the Uri instance is absolute; otherwise, false.
-      /// @remarks This property is true if the string || Uri instance that was passed into the constructor can be parsed as an absolute Uri instance, which contains a scheme, an authority, and a path. Otherwise, the Uri instance is treated as relative && might omit the scheme || other URI components.
+      /// @remarks This property is true if the string or Uri instance that was passed into the constructor can be parsed as an absolute Uri instance, which contains a scheme, an authority, and a path. Otherwise, the Uri instance is treated as relative and might omit the scheme or other URI components.
       _property<bool, _readonly> IsAbsoluteUri {
         _get {return this->kind == UriKind::Absolute;}
       };
@@ -269,7 +269,7 @@ namespace Switch {
       /// @brief Gets whether the specified Uri is a universal naming convention (UNC) path.
       /// @return bool A bool value that is true if the Uri is a UNC path; otherwise, false.
       /// @exception InvalidOperationException This instance represents a relative URI, and this property is valid only for absolute URIs.
-      /// @remarks The IsUnc property is true if the specified Uri instance is a UNC path (such as \\server\folder || file://server/folder). This property always returns true if the URI has the file:// scheme && specifies a host component.
+      /// @remarks The IsUnc property is true if the specified Uri instance is a UNC path (such as \\server\folder or file://server/folder). This property always returns true if the URI has the file:// scheme and specifies a host component.
       _property<bool, _readonly> IsUnc {
         _get {
           if (this->kind != UriKind::Absolute)
@@ -282,11 +282,11 @@ namespace Switch {
       /// @brief Gets the original URI string that was passed to the Uri constructor.
       /// @return string A string containing the exact URI specified when this instance was constructed; otherwise, Empty.
       /// @exception InvalidOperationException This instance represents a relative URI, and this property is valid only for absolute URIs.
-      /// @remarks If the URI specified to the constructor contained leading || trailing spaces, these spaces are preserved.
-      /// @remarks The value returned by this property differs from ToString && AbsoluteUri. ToString returns the canonically unescaped form of the URI. AbsoluteUri returns the canonically escaped form of the URI.
-      /// @remarks When International Resource Identifier (IRI) && Internationalized Domain Name (IDN) support are enabled, OriginalString returns the original non normalized string with Punycode host name if one was used to initialize the Uri instance. Punycode names contain only ASCII characters && always start with the xn-- prefix.
+      /// @remarks If the URI specified to the constructor contained leading or trailing spaces, these spaces are preserved.
+      /// @remarks The value returned by this property differs from ToString and AbsoluteUri. ToString returns the canonically unescaped form of the URI. AbsoluteUri returns the canonically escaped form of the URI.
+      /// @remarks When International Resource Identifier (IRI) and Internationalized Domain Name (IDN) support are enabled, OriginalString returns the original non normalized string with Punycode host name if one was used to initialize the Uri instance. Punycode names contain only ASCII characters and always start with the xn-- prefix.
       /// @remarks For more information on IRI support, see the Remarks section for the Uri class.
-      /// @remarks When a Uri object is serialized, the OriginalString is ! preserved. The serialization process uses the fully escaped && canonicalized AbsoluteUri property when serializing. For a Uri that contains an IPv6 address, the IPv6 address && the scope ID are included in the serialized Uri object.
+      /// @remarks When a Uri object is serialized, the OriginalString is ! preserved. The serialization process uses the fully escaped and canonicalized AbsoluteUri property when serializing. For a Uri that contains an IPv6 address, the IPv6 address and the scope ID are included in the serialized Uri object.
       _property<String, _readonly> LocalPath {
         _get {return this->GetComponents(UriComponents::Path, UriFormat::Unescaped).Replace('/', System::IO::Path::DirectorySeparatorChar);}
       };
@@ -294,11 +294,11 @@ namespace Switch {
       /// @brief Gets the original URI string that was passed to the Uri constructor.
       /// @return string A string containing the exact URI specified when this instance was constructed; otherwise, Empty.
       /// @exception InvalidOperationException This instance represents a relative URI, and this property is valid only for absolute URIs.
-      /// @remarks If the URI specified to the constructor contained leading || trailing spaces, these spaces are preserved.
-      /// @remarks The value returned by this property differs from ToString && AbsoluteUri. ToString returns the canonically unescaped form of the URI. AbsoluteUri returns the canonically escaped form of the URI.
-      /// @remarks When International Resource Identifier (IRI) && Internationalized Domain Name (IDN) support are enabled, OriginalString returns the original non normalized string with Punycode host name if one was used to initialize the Uri instance. Punycode names contain only ASCII characters && always start with the xn-- prefix.
+      /// @remarks If the URI specified to the constructor contained leading or trailing spaces, these spaces are preserved.
+      /// @remarks The value returned by this property differs from ToString and AbsoluteUri. ToString returns the canonically unescaped form of the URI. AbsoluteUri returns the canonically escaped form of the URI.
+      /// @remarks When International Resource Identifier (IRI) and Internationalized Domain Name (IDN) support are enabled, OriginalString returns the original non normalized string with Punycode host name if one was used to initialize the Uri instance. Punycode names contain only ASCII characters and always start with the xn-- prefix.
       /// @remarks For more information on IRI support, see the Remarks section for the Uri class.
-      /// @remarks When a Uri object is serialized, the OriginalString is ! preserved. The serialization process uses the fully escaped && canonicalized AbsoluteUri property when serializing. For a Uri that contains an IPv6 address, the IPv6 address && the scope ID are included in the serialized Uri object.
+      /// @remarks When a Uri object is serialized, the OriginalString is ! preserved. The serialization process uses the fully escaped and canonicalized AbsoluteUri property when serializing. For a Uri that contains an IPv6 address, the IPv6 address and the scope ID are included in the serialized Uri object.
       _property<const String&, _readonly> OriginalString {
         _get->const string& {
           if (this->kind != UriKind::Absolute)
@@ -308,11 +308,11 @@ namespace Switch {
         }
       };
 
-      /// @brief Gets the AbsolutePath && Query properties separated by a question mark (?).
-      /// @return string A string that contains the AbsolutePath && Query properties separated by a question mark (?).
+      /// @brief Gets the AbsolutePath and Query properties separated by a question mark (?).
+      /// @return string A string that contains the AbsolutePath and Query properties separated by a question mark (?).
       /// @exception InvalidOperationException This instance represents a relative URI, and this property is valid only for absolute URIs.
-      /// @remarks The PathAndQuery property contains the absolute path on the server && the query information sent with the request. It is identical to concatenating the AbsolutePath && Query properties.
-      /// @remarks The PathAndQuery property is escaped according to RFC 2396 by default. If International Resource Identifiers (IRIs) || Internationalized Domain Name (IDN) parsing is enabled, the PathAndQuery property is escaped according to RFC 3986 && RFC 3987.
+      /// @remarks The PathAndQuery property contains the absolute path on the server and the query information sent with the request. It is identical to concatenating the AbsolutePath and Query properties.
+      /// @remarks The PathAndQuery property is escaped according to RFC 2396 by default. If International Resource Identifiers (IRIs) or Internationalized Domain Name (IDN) parsing is enabled, the PathAndQuery property is escaped according to RFC 3986 and RFC 3987.
       /// @remarks For more information on IRI support, see the Remarks section for the Uri class.
       _property<String, _readonly> PathAndQuery {
         _get {return this->GetComponents(UriComponents::PathAndQuery, UriFormat::UriEscaped);}
@@ -349,8 +349,8 @@ namespace Switch {
       /// @brief Gets any query information included in the specified URI.
       /// @return string A string that contains any query information included in the specified URI.
       /// @exception InvalidOperationException This instance represents a relative URI, and this property is valid only for absolute URIs.
-      /// @remarks The Query property contains any query information included in the URI. Query information is separated from the path information by a question mark (?) && continues to the end of the URI. The query information returned includes the leading question mark.
-      /// @remarks The query information is escaped according to RFC 2396 by default. If International Resource Identifiers (IRIs) || Internationalized Domain Name (IDN) parsing is enabled, the query information is escaped according to RFC 3986 && RFC 3987.
+      /// @remarks The Query property contains any query information included in the URI. Query information is separated from the path information by a question mark (?) and continues to the end of the URI. The query information returned includes the leading question mark.
+      /// @remarks The query information is escaped according to RFC 2396 by default. If International Resource Identifiers (IRIs) or Internationalized Domain Name (IDN) parsing is enabled, the query information is escaped according to RFC 3986 and RFC 3987.
       /// @remarks For more information on IRI support, see the Remarks section for the Uri class.
       _property<String, _readonly> Query {
         _get {return this->GetComponents(UriComponents::Query|UriComponents::KeepDelimiter, UriFormat::UriEscaped);}
@@ -369,7 +369,7 @@ namespace Switch {
       /// | http     | The resource is accessed through HTTP.                                                         |
       /// | https    | The resource is accessed through SSL-encrypted HTTP.                                           |
       /// | ldap     | The resource is accessed through the LDAP protocol.                                            |
-      /// | mailto   | The resource is an e-mail address && accessed through the SMTP protocol.                       |
+      /// | mailto   | The resource is an e-mail address and accessed through the SMTP protocol.                      |
       /// | net.pipe | The resource is accessed through a named pipe.                                                 |
       /// | net.tcp  | The resource is accessed from TCP endpoint.                                                    |
       /// | news     | The resource is accessed through the NNTP protocol.                                            |
@@ -383,8 +383,8 @@ namespace Switch {
       /// @brief Gets an array containing the path segments that make up the specified URI.
       /// @return Array<Srtring> A string array that contains the path segments that make up the specified URI.
       /// @exception InvalidOperationException This instance represents a relative URI, and this property is valid only for absolute URIs.
-      /// @remarks The Segments property returns an array of strings containing the "segments" (substrings) that form the URI's absolute path. The first segment is obtained by parsing the absolute path from its first character until you reach a slash (/) || the end of the path. Each additional segment begins at the first character after the preceding segment, and terminates with the next slash || the end of the path. (A URI's absolute path contains everything after the host && port && before the query && fragment.)
-      /// @remarks The following example shows the absolute path && segments for two URIs. The second example illustrates that the fragment && query are ! part of the absolute path && therefore are ! segments.
+      /// @remarks The Segments property returns an array of strings containing the "segments" (substrings) that form the URI's absolute path. The first segment is obtained by parsing the absolute path from its first character until you reach a slash (/) or the end of the path. Each additional segment begins at the first character after the preceding segment, and terminates with the next slash or the end of the path. (A URI's absolute path contains everything after the host and port and before the query and fragment.)
+      /// @remarks The following example shows the absolute path and segments for two URIs. The second example illustrates that the fragment and query are ! part of the absolute path and therefore are ! segments.
       /// @remarks Absolute URI
       /// @remarks     http://www.contoso.com/Chapters/Chapter1/Sections/Section1.htm
       /// @remarks Absolute path
@@ -397,7 +397,7 @@ namespace Switch {
       /// @remarks     /Chapters/Chapter1/Sections/Section1.htm
       /// @remarks Segments
       /// @remarks     /Chapters/Chapter1/Sections/Section1.htm
-      /// @remarks Note that because the absolute path starts with a '/', the first segment contains it && nothing else.
+      /// @remarks Note that because the absolute path starts with a '/', the first segment contains it and nothing else.
       _property<Array<String>, _readonly> Segments {
         _get {
           String absolutePath = this->AbsolutePath();
@@ -438,7 +438,7 @@ namespace Switch {
       /// @brief Determines whether the specified scheme name is valid.
       /// @param scheme The scheme name to validate.
       /// @return bool A bool value that is true if the scheme name is valid; otherwise, false.
-      /// @remarks This method checks the scheme name for validity according to RFC 2396 by default. If International Resource Identifiers (IRIs) || Internationalized Domain Name (IDN) parsing is enabled, this method checks the scheme name for validity according to RFC 3986. The scheme name must begin with a letter && must contain only letters, digits, and the characters ".", "+", or "-".
+      /// @remarks This method checks the scheme name for validity according to RFC 2396 by default. If International Resource Identifiers (IRIs) or Internationalized Domain Name (IDN) parsing is enabled, this method checks the scheme name for validity according to RFC 3986. The scheme name must begin with a letter and must contain only letters, digits, and the characters ".", "+", or "-".
       /// @remarks For more information on IRI support, see the Remarks section for the Uri class.
       static bool CheckSchemeName(const String& scheme) {
         bool first = true;
@@ -461,9 +461,9 @@ namespace Switch {
       /// @return string A string that contains the escaped representation of stringToEscape.
       /// @exception ArgumentNullException value is null.
       /// @exception UriFormatException The length of value exceeds 32766 characters.
-      /// @remarks By default, the EscapeDataString method converts all characters except for RFC 2396 unreserved characters to their hexadecimal representation. If International Resource Identifiers (IRIs) || Internationalized Domain Name (IDN) parsing is enabled, the EscapeDataString method converts all characters, except for RFC 3986 unreserved characters, to their hexadecimal representation. All Unicode characters are converted to UTF-8 format before being escaped.
+      /// @remarks By default, the EscapeDataString method converts all characters except for RFC 2396 unreserved characters to their hexadecimal representation. If International Resource Identifiers (IRIs) or Internationalized Domain Name (IDN) parsing is enabled, the EscapeDataString method converts all characters, except for RFC 3986 unreserved characters, to their hexadecimal representation. All Unicode characters are converted to UTF-8 format before being escaped.
       /// @remarks This method assumes that stringToEscape has no escape sequences in it.
-      /// @remarks By default, the string is escaped according to RFC 2396. If International Resource Identifiers (IRIs) || Internationalized Domain Name (IDN) parsing is enabled, the string is escaped according to RFC 3986 && RFC 3987. See these RFCs for a definition of reserved && unreserved characters.
+      /// @remarks By default, the string is escaped according to RFC 2396. If International Resource Identifiers (IRIs) or Internationalized Domain Name (IDN) parsing is enabled, the string is escaped according to RFC 3986 and RFC 3987. See these RFCs for a definition of reserved and unreserved characters.
       /// @remarks For more information on IRI support, see the Remarks section for the Uri class.
       static String EscapeDataString(const String& value) {
         if (value.Length() > 32766)
@@ -493,9 +493,9 @@ namespace Switch {
       /// @exception ArgumentNullException value is null.
       /// @exception UriFormatException The length of value exceeds 32766 characters.
       /// @remarks Use the EscapeUriString method to prepare an unescaped URI string to be a parameter to the Uri constructor.
-      /// @remarks By default, the EscapeUriString method converts all characters, except RFC 2396 unreserved characters, to their hexadecimal representation. If International Resource Identifiers (IRIs) || Internationalized Domain Name (IDN) parsing is enabled, the EscapeUriString method converts all characters, except for RFC 3986 unreserved characters, to their hexadecimal representation. All Unicode characters are converted to UTF-8 format before being escaped.
+      /// @remarks By default, the EscapeUriString method converts all characters, except RFC 2396 unreserved characters, to their hexadecimal representation. If International Resource Identifiers (IRIs) or Internationalized Domain Name (IDN) parsing is enabled, the EscapeUriString method converts all characters, except for RFC 3986 unreserved characters, to their hexadecimal representation. All Unicode characters are converted to UTF-8 format before being escaped.
       /// @remarks This method assumes that stringToEscape has no escape sequences in it.
-      /// @remarks By default, the string is escaped according to RFC 2396. If International Resource Identifiers (IRIs) || Internationalized Domain Name (IDN) parsing is enabled, the string is escaped according to RFC 3986 && RFC 3987. See these RFCs for a definition of reserved && unreserved characters.
+      /// @remarks By default, the string is escaped according to RFC 2396. If International Resource Identifiers (IRIs) or Internationalized Domain Name (IDN) parsing is enabled, the string is escaped according to RFC 3986 and RFC 3987. See these RFCs for a definition of reserved and unreserved characters.
       /// @remarks For more information on IRI support, see the Remarks section for the Uri class.
       static String EscapeUriString(const String& value) {
         if (value.Length() > 32766)
@@ -542,9 +542,9 @@ namespace Switch {
       /// @param format One of the UriFormat values that controls how special characters are escaped.
       /// @return string A string that contains the components.
       /// @exception InvalidOperationException This instance represents a relative URI, and this property is valid only for absolute URIs.
-      /// @remarks When Query || Fragment is specified alone, the return value includes the delimiter. The Scheme, UserInfo, Host, Port, and Path components do ! include the delimiter. For all other UriComponents values, and combinations of values, the delimiters are included in the returned value.
+      /// @remarks When Query or Fragment is specified alone, the return value includes the delimiter. The Scheme, UserInfo, Host, Port, and Path components do ! include the delimiter. For all other UriComponents values, and combinations of values, the delimiters are included in the returned value.
       /// @remarks The components are returned in the order that they appear in the URI. For example, if Scheme is specified, it appears first.
-      /// @remarks When International Resource Identifier (IRI) && Internationalized Domain Name (IDN) support are enabled, the number of characters returned in the string increases. Punycode names used to support IRI contain only ASCII characters && always start with the xn-- prefix. When IRI && IDN are enabled, Unicode surrogate characters are handled correctly by the GetComponents method.
+      /// @remarks When International Resource Identifier (IRI) and Internationalized Domain Name (IDN) support are enabled, the number of characters returned in the string increases. Punycode names used to support IRI contain only ASCII characters and always start with the xn-- prefix. When IRI and IDN are enabled, Unicode surrogate characters are handled correctly by the GetComponents method.
       /// @remarks For more information on IRI support, see the Remarks section for the Uri class.
       String GetComponents(UriComponents components, UriFormat format) const {
         if (this->kind != UriKind::Absolute)
@@ -600,9 +600,9 @@ namespace Switch {
       /// @remarks GetLeftPart includes delimiters in the following cases:
       /// @remarks   * Scheme includes the scheme delimiter.
       /// @remarks   * Authority does ! include the path delimiter.
-      /// @remarks   * Path includes any delimiters in the original URI up to the query || fragment delimiter.
-      /// @remarks   * Query includes the Path, plus the query && its delimiter.
-      /// @remarks The following examples show a URI && the results of calling GetLeftPart with Scheme, Authority, Path, or Query.
+      /// @remarks   * Path includes any delimiters in the original URI up to the query or fragment delimiter.
+      /// @remarks   * Query includes the Path, plus the query and its delimiter.
+      /// @remarks The following examples show a URI and the results of calling GetLeftPart with Scheme, Authority, Path, or Query.
       /// | URI                                         | Scheme  | Autority                | Path                                       | Query                                       |
       /// |---------------------------------------------|---------|-------------------------|--------------------------------------------|---------------------------------------------|
       /// | http://www.contoso.com/index.htm?date=today | http:// | http://www.contoso.com  | http://www.contoso.com/index.htm           | http://www.contoso.com/index.htm?date=today |
@@ -624,7 +624,7 @@ namespace Switch {
       
       /// @brief Returns the data needed to serialize the current instance.
       /// @param info The SerializationInfo to populate with data.
-      /// @remarks Any objects that are included in the SerializationInfo are automatically tracked && serialized by the formatter.
+      /// @remarks Any objects that are included in the SerializationInfo are automatically tracked and serialized by the formatter.
       /// @remarks Code that calls GetObjectData requires the SecurityPermission for providing serialization services. Associated enumeration: SecurityPermissionFlag.SerializationFormatter.
       /// @note It is ! guaranteed that this method will be called only once per object instance during serialization. Therefore, the method should be implemented in such a way that its behavior will be the same regardless of the number of times it is called.
       void GetObjectData(System::Runtime::Serialization::SerializationInfo& info) const override {
@@ -654,7 +654,7 @@ namespace Switch {
       /// @param pattern The hexadecimal representation of a character.
       /// @param index The location in pattern where the hexadecimal representation of a character begins.
       /// @return Char The character represented by the hexadecimal encoding at position index. If the character at index is ! hexadecimal encoded, the character at index is returned. The value of index is incremented to point to the character following the one returned.
-      /// @exception ArgumentOutOfRangeException index is less than 0 || greater than || equal to the number of characters in pattern.
+      /// @exception ArgumentOutOfRangeException index is less than 0 or greater than or equal to the number of characters in pattern.
       static char32 HexUnescape(const String& pattern, int32& index) {
         index+=3;
         return Int32::Parse(pattern.Substring(index-2, 2), 16);
@@ -664,7 +664,7 @@ namespace Switch {
       /// @param uri The specified Uri instance to test.
       /// @return bool true if the current Uri instance is a base of uri; otherwise, false.
       /// @exception ArgumentNullException uri is null.
-      /// @remarks IsBaseOf is used to compare the current Uri instance to a specified Uri to determine whether this URI is a base for the specified Uri. When comparing two Uri objects to determine a base relationship, the user information (UserInfo) is ! evaluated. When comparing two URIs (uri1 && uri2), uri1 is the base of uri2 if, when you ignore everything in uri2 after the last slash (/), the two URIs are identical. Using http://host/path/path/file?query as the base URI, the following table shows whether it is a base for other URIs.
+      /// @remarks IsBaseOf is used to compare the current Uri instance to a specified Uri to determine whether this URI is a base for the specified Uri. When comparing two Uri objects to determine a base relationship, the user information (UserInfo) is ! evaluated. When comparing two URIs (uri1 and uri2), uri1 is the base of uri2 if, when you ignore everything in uri2 after the last slash (/), the two URIs are identical. Using http://host/path/path/file?query as the base URI, the following table shows whether it is a base for other URIs.
       /// | URI                                   | http://host/path/path/file?query is base of |
       /// |---------------------------------------|---------------------------------------------|
       /// | http://host/path/path/file/           | yes                                         |
@@ -689,14 +689,14 @@ namespace Switch {
       /// @brief  Determines whether a specified character is a valid hexadecimal digit.
       /// @param character The character to validate.
       /// @return bool A bool value that is true if the character is a valid hexadecimal digit; otherwise false.
-      /// @remarks Hexadecimal digits are the digits 0 to 9 && the letters A-F || a-f.
+      /// @remarks Hexadecimal digits are the digits 0 to 9 and the letters A-F or a-f.
       static bool IsHexDigit(char32 character) {return (character >= '0' && character <= '9') || (character >= 'A' && character <= 'F') || (character >= 'a' && character <= 'f');}
 
       /// @brief Determines whether a character in a string is hexadecimal encoded.
       /// @param pattern The string to check.
       /// @param index The location in pattern to check for hexadecimal encoding.
       /// @return bool A bool value that is true if pattern is hexadecimal encoded at the specified location; otherwise, false.
-      /// @remarks The IsHexEncoding method checks for hexadecimal encoding that follows the pattern "%hexhex" in a string, where "hex" is a digit from 0 to 9 || a letter from A-F (case-insensitive).
+      /// @remarks The IsHexEncoding method checks for hexadecimal encoding that follows the pattern "%hexhex" in a string, where "hex" is a digit from 0 to 9 or a letter from A-F (case-insensitive).
       static bool IsHexEncoding(const String& pattern, int32 index) {
         if (index < 0 || pattern.Length() < index + 3)
           return false;
@@ -713,9 +713,9 @@ namespace Switch {
         return true;
       }
 
-      /// @brief Indicates whether the string used to construct this Uri was well-formed && is ! required to be further escaped.
+      /// @brief Indicates whether the string used to construct this Uri was well-formed and is ! required to be further escaped.
       /// @return bool A bool value that is true if the string was well-formed; else false.
-      /// @remarks The string is considered to be well-formed in accordance with RFC 2396 && RFC 2732 by default. If International Resource Identifiers (IRIs) || Internationalized Domain Name (IDN) parsing is enabled, the string is considered to be well-formed in accordance with RFC 3986 && RFC 3987
+      /// @remarks The string is considered to be well-formed in accordance with RFC 2396 and RFC 2732 by default. If International Resource Identifiers (IRIs) or Internationalized Domain Name (IDN) parsing is enabled, the string is considered to be well-formed in accordance with RFC 3986 and RFC 3987
       /// @remarks The string is considered poorly formed, causing the method to return false, if any of the following conditions occur.
       /// | Error                                                                                  | Example                                       |
       /// |----------------------------------------------------------------------------------------|-----------------------------------------------|
@@ -723,10 +723,10 @@ namespace Switch {
       /// | The string is an absolute Uri that represents an implicit file Uri.                    | c:\\directory\filename                        |
       /// | The string is an absolute URI that is missing a slash before the path.                 | file://c:/directory/filename                  |
       /// | The string contains unescaped backslashes even if they are treated as forward slashes. | http:\\host/path/file                         |
-      /// | The string represents a hierarchical absolute Uri && does ! contain "://".             | www.contoso.com/path/file                     |
+      /// | The string represents a hierarchical absolute Uri and does ! contain "://".            | www.contoso.com/path/file                     |
       /// | The parser for the Uri.Scheme indicates that the original string was ! well-formed.    | The example depends on the scheme of the URI. |
-      /// @remarks By default, the string used to construct this Uri are considered well-formed in accordance with RFC 2396 && RFC 2732.
-      /// @remarks When International Resource Identifier (IRI) && Internationalized Domain Name (IDN) support are enabled, the string used to construct this Uri are considered well-formed in accordance with RFC 3986 && RFC 3987. Punycode names used to support IRI contain only ASCII characters && always start with the xn-- prefix.
+      /// @remarks By default, the string used to construct this Uri are considered well-formed in accordance with RFC 2396 and RFC 2732.
+      /// @remarks When International Resource Identifier (IRI) and Internationalized Domain Name (IDN) support are enabled, the string used to construct this Uri are considered well-formed in accordance with RFC 3986 and RFC 3987. Punycode names used to support IRI contain only ASCII characters and always start with the xn-- prefix.
       /// @remarks For more information on IRI support, see the Remarks section for the Uri class.
       bool IsWellFormedOriginalString() {
         bool wellFormatedOriginalString = true;
@@ -749,20 +749,20 @@ namespace Switch {
         return wellFormatedOriginalString;
       }
 
-      /// @brief Indicates whether the string is well-formed by attempting to construct a URI with the string && ensures that the string does ! require further escaping.
+      /// @brief Indicates whether the string is well-formed by attempting to construct a URI with the string and ensures that the string does ! require further escaping.
       /// @param uriString The string used to attempt to construct a Uri.
       /// @param uriKind The type of the Uri in uriString.
       /// @return bool A bool value that is true if the string was well-formed; else false.
-      /// @remarks By default, the string is considered well-formed in accordance with RFC 2396 && RFC 2732. If International Resource Identifiers (IRIs) || Internationalized Domain Name (IDN) parsing is enabled, the string is considered well-formed in accordance with RFC 3986 && RFC 3987.
+      /// @remarks By default, the string is considered well-formed in accordance with RFC 2396 and RFC 2732. If International Resource Identifiers (IRIs) or Internationalized Domain Name (IDN) parsing is enabled, the string is considered well-formed in accordance with RFC 3986 and RFC 3987.
       /// @remarks The string is considered poorly formed, causing the method to return false, if any of the following conditions occur
       /// | Error                                                                                  | Example                                       |
       /// |----------------------------------------------------------------------------------------|-----------------------------------------------|
-      /// | The string is ! correctly escaped.                                                   | http://www.contoso.com/path???/file name      |
+      /// | The string is ! correctly escaped.                                                     | http://www.contoso.com/path???/file name      |
       /// | The string is an absolute Uri that represents an implicit file Uri.                    | c:\\directory\filename                        |
       /// | The string is an absolute URI that is missing a slash before the path.                 | file://c:/directory/filename                  |
       /// | The string contains unescaped backslashes even if they are treated as forward slashes. | http:\\host/path/file                         |
-      /// | The string represents a hierarchical absolute Uri && does ! contain "://".          | www.contoso.com/path/file                     |
-      /// | The parser for the Uri.Scheme indicates that the original string was ! well-formed.  | The example depends on the scheme of the URI. |
+      /// | The string represents a hierarchical absolute Uri and does ! contain "://".            | www.contoso.com/path/file                     |
+      /// | The parser for the Uri.Scheme indicates that the original string was ! well-formed.    | The example depends on the scheme of the URI. |
       /// @remarks For more information on IRI support, see the Remarks section for the Uri class.
       static bool IsWellFormedUriString(const String& uriString, UriKind uriKind) {
         bool wellFormedUriString = true;
@@ -781,7 +781,7 @@ namespace Switch {
       /// @param value The string to unescape.
       /// @return string A string that contains the unescaped representation of stringToUnescape.
       /// @exception ArgumentNullException value is null.
-      /// @remarks You should use this method with care. Unescaping a string that has been previously unescaped can lead to ambiguities && errors.
+      /// @remarks You should use this method with care. Unescaping a string that has been previously unescaped can lead to ambiguities and errors.
       /// @remarks Many Web browsers escape spaces inside of URIs into plus ("+") characters; however, the UnescapeDataString method does ! convert plus characters into spaces because this behavior is ! standard across all URI schemes.
       static String UnescapeDataString(const String& value) {
         // See http://www.geekhideout.com/urlcode.shtml

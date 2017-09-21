@@ -29,9 +29,9 @@ namespace Switch {
       /// @brief The System::Collections::Generic namespace contains interfaces and classes that define generic collections, which allow users to create strongly typed collections that provide better type safety and performance than non-generic strongly typed collections.
       namespace Generic {
         /// @brief Represents a collection of objects that is maintained in sorted order.
-        /// @remarks A SortedSet<T> object maintains a sorted order without affecting performance as elements are inserted && deleted. Duplicate elements are ! allowed. Changing the sort values of existing items is ! supported && may lead to unexpected behavior.
+        /// @remarks A SortedSet<T> object maintains a sorted order without affecting performance as elements are inserted and deleted. Duplicate elements are ! allowed. Changing the sort values of existing items is ! supported and may lead to unexpected behavior.
         /// @par Examples
-        /// The following example demonstrates how to merge two disparate sets. This example creates two SortedSet<T> objects, and populates them with even && odd numbers, respectively. A third SortedSet<T> object is created from the set that contains the even numbers. The example then calls the UnionWith method, which adds the odd number set to the third set.
+        /// The following example demonstrates how to merge two disparate sets. This example creates two SortedSet<T> objects, and populates them with even and odd numbers, respectively. A third SortedSet<T> object is created from the set that contains the even numbers. The example then calls the UnionWith method, which adds the odd number set to the third set.
         /// @include SortedSet.cpp
         template<typename T, typename TAllocator=Allocator<T>>
         class SortedSet : public Object, public System::Linq::Extension::Enumerable<SortedSet<T, TAllocator>, T>, public ISet<T> {
@@ -51,7 +51,7 @@ namespace Switch {
               this->Add(item);
           }
 
-          /// @brief Initializes a new instance of the SortedSet<T> class that contains elements copied from a specified enumerable collection && that uses a specified comparer.
+          /// @brief Initializes a new instance of the SortedSet<T> class that contains elements copied from a specified enumerable collection and that uses a specified comparer.
           /// @param collection The elements to copy
           /// @param comparer an instance of IComparer<T> used to determine the sort order of the set.
           SortedSet(const IEnumerable<T>& collection, const refptr<IComparer<T>>& comparer) : comparer(comparer), set(new std::set<T,SetComparer, TAllocator>(SetComparer(this->comparer.ToPointer()))), operationNumber(0) {
@@ -59,7 +59,7 @@ namespace Switch {
               this->Add(item);
           }
           
-          /// @brief Initializes a new instance of the SortedSet && copy array[] T.
+          /// @brief Initializes a new instance of the SortedSet and copy array[] T.
           /// @param array the Array to copy.
           /// @remarks The SortedSet class is ! thread safe.
           template<int32 len>
@@ -86,7 +86,7 @@ namespace Switch {
           }
           /// @endcond
           
-          /// @brief Adds an element to the set && returns a value that indicates if it was successfully added. If the element is already prensent, the value is ! replaced.
+          /// @brief Adds an element to the set and returns a value that indicates if it was successfully added. If the element is already prensent, the value is ! replaced.
           /// @param item The emement to add.
           /// @return Boolean true if the element is added to the set; false if the element is already in the set.
           bool Add(const T& item) override {
@@ -131,7 +131,7 @@ namespace Switch {
           /// @param count The number of elements to copy.
           /// @exception ArgumentException	The number of elements in the source (count) array is greater than the available space from index to the end of the destination array.
           /// @exception ArgumentNullException	array is null.
-          /// @exception ArgumentOutOfRangeException	index is less than zero || count is less than zero.
+          /// @exception ArgumentOutOfRangeException	index is less than zero or count is less than zero.
           void CopyTo(int32 index, Array<T>& array, int32 arrayIndex, int32 count) const {
             if (index < 0 || array.Length < 0 || arrayIndex < 0 || count < 0)
               throw ArgumentOutOfRangeException(_caller);
@@ -167,7 +167,7 @@ namespace Switch {
           /// @param lowerValue The lowest desired value in the view.
           /// @param upperValue The highest desired value in the view.
           /// @return A subset view that contains only the values in the specified range.
-          /// @exception ArgumentNullException lowerValue || upperValue is null.
+          /// @exception ArgumentNullException lowerValue or upperValue is null.
           SortedSet GetViewBetween(const T& lowerValue, const T& upperValue) const {
             SortedSet set(this->comparer);
             for (T item : *this) {
@@ -231,9 +231,9 @@ namespace Switch {
             return this->SuperSet(set);
           }
 
-          /// @brief Determines whether the current SortedSet<T> object && a specified collection share common elements.
+          /// @brief Determines whether the current SortedSet<T> object and a specified collection share common elements.
           /// @param other The collection to compare to the current SortedSet<T> object.
-          /// @return true if the SortedSet<T> object && other share at least one common element; otherwise, false.
+          /// @return true if the SortedSet<T> object and other share at least one common element; otherwise, false.
           /// @exception ArgumentNullException	other is null.
           bool Overlaps(const IEnumerable<T>& other) const override {
             if (this->Count == 0)
@@ -259,7 +259,7 @@ namespace Switch {
           bool Remove(const T& item) override {
             typename std::set< T, SetComparer, TAllocator>::iterator it = this->set->find(item);
 
-            // if item is ! found, do ! alter the set && return false
+            // if item is ! found, do ! alter the set and return false
             if (it == this->set->end())
               return false;
 
@@ -280,7 +280,7 @@ namespace Switch {
             return nbRemoved;
           }
 
-          /// @brief Determines whether the current SortedSet<T> object && the specified collection contain the same elements.
+          /// @brief Determines whether the current SortedSet<T> object and the specified collection contain the same elements.
           /// @param other The collection to compare to the current SortedSet<T>
           /// @return true if the two sets are equivalent.
           bool SetEquals(const IEnumerable<T>& other) const override {
@@ -295,7 +295,7 @@ namespace Switch {
             return true;
           }
 
-          /// @brief Modifies the current SortedSet<T> object so that it contains only elements that are present either in the current object || in the specified collection, but ! both. Any duplicate in the provided collection (other) are ignored.
+          /// @brief Modifies the current SortedSet<T> object so that it contains only elements that are present either in the current object or in the specified collection, but ! both. Any duplicate in the provided collection (other) are ignored.
           /// @param other The collection to compare to the current SortedSet<T> object.
           /// @exception ArgumentNullException	other is null.
           void SymmetricExceptWith(const IEnumerable<T>& other) override {
@@ -307,7 +307,7 @@ namespace Switch {
             }
           }
 
-          /// @brief Modifies the current SortedSet<T> object so that it contains all elements that are present in either the current object || the specified collection.
+          /// @brief Modifies the current SortedSet<T> object so that it contains all elements that are present in either the current object or the specified collection.
           /// @param other The collection to compare to the current SortedSet<T> object.
           /// @exception ArgumentNullException other is null.
           void UnionWith(const IEnumerable<T>& other) override {

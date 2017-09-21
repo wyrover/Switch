@@ -82,7 +82,6 @@ set(INCLUDE_FILES
   Includes/Switch/System/IO/Ports/SerialPinChangedEventHandler.hpp
   Includes/Switch/System/IO/BinaryReader.hpp
   Includes/Switch/System/IO/BinaryWriter.hpp
-  Includes/Switch/System/IO/Compression.hpp
   Includes/Switch/System/IO/Directory.hpp
   Includes/Switch/System/IO/DirectoryInfo.hpp
   Includes/Switch/System/IO/DirectoryNotFoundException.hpp
@@ -199,7 +198,6 @@ set(INCLUDE_FILES
   Includes/Switch/System/Threading/EventResetMode.hpp
   Includes/Switch/System/Threading/EventWaitHandle.hpp
   Includes/Switch/System/Threading/Interlocked.hpp
-  Includes/Switch/System/Threading/LockGuard.hpp
   Includes/Switch/System/Threading/LockRecursionException.hpp
   Includes/Switch/System/Threading/ManualResetEvent.hpp
   Includes/Switch/System/Threading/Monitor.hpp
@@ -222,7 +220,6 @@ set(INCLUDE_FILES
   Includes/Switch/System/Threading/TimeOut.hpp
   Includes/Switch/System/Threading/TimerCallback.hpp
   Includes/Switch/System/Threading/Timer.hpp
-  Includes/Switch/System/Threading/TryLockGuard.hpp
   Includes/Switch/System/Threading/WaitHandle.hpp
   Includes/Switch/System/Threading/WaitHandleCannotBeOpenedException.hpp
   Includes/Switch/System/Threading/Tasks/ITask.hpp
@@ -231,7 +228,6 @@ set(INCLUDE_FILES
   Includes/Switch/System/Threading/Tasks/TaskFactory.hpp
   Includes/Switch/System/Threading/Tasks/TaskStatus.hpp
   Includes/Switch/System/Threading/Tasks/TaskTResult.hpp
-  Includes/Switch/System/__opaque_unicode_string__.hpp
   Includes/Switch/System/_String.hpp
   Includes/Switch/System/_String.h
   Includes/Switch/System/Action.hpp
@@ -400,6 +396,8 @@ set(INCLUDE_FILES
   Includes/Switch/Unused.hpp
   Includes/Switch/Using.hpp
   Includes/Switch/__opaque_function_pointer__.hpp
+  Includes/Switch/__opaque_lock_guard__.hpp
+  Includes/Switch/__opaque_unicode_string__.hpp
 )
 
 set(SOURCE_FILES
@@ -496,17 +494,14 @@ set(SOURCE_FILES
   Sources/Switch/System/Text/UTF32Encoding.cpp
   Sources/Switch/System/Threading/EventWaitHandle.cpp
   Sources/Switch/System/Threading/Interlocked.cpp
-  Sources/Switch/System/Threading/LockGuard.cpp
   Sources/Switch/System/Threading/Monitor.cpp
   Sources/Switch/System/Threading/Mutex.cpp
   Sources/Switch/System/Threading/Semaphore.cpp
   Sources/Switch/System/Threading/Thread.cpp
   Sources/Switch/System/Threading/ThreadPool.cpp
-  Sources/Switch/System/Threading/TryLockGuard.cpp
   Sources/Switch/System/Threading/WaitHandle.cpp
   Sources/Switch/System/Threading/Tasks/Task.cpp
   Sources/Switch/System/__HResults.hpp
-  Sources/Switch/System/__opaque_unicode_string__.cpp
   Sources/Switch/System/ArrayAlgorithms.hpp
   Sources/Switch/System/BitConverter.cpp
   Sources/Switch/System/Boolean.cpp
@@ -547,6 +542,8 @@ set(SOURCE_FILES
   Sources/Switch/System/Uri.cpp
   Sources/Switch/ExceptionPtr.cpp
   Sources/Switch/Hash.cpp
+  Sources/Switch/__opaque_lock_guard__.cpp
+  Sources/Switch/__opaque_unicode_string__.cpp
 )
 
 source_group(Includes\\Switch\\Microsoft\\Win32 REGULAR_EXPRESSION "/Includes/Switch/Microsoft/Win32/[-_,A-Za-z0-9]+\\.hpp*")

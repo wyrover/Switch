@@ -34,16 +34,18 @@ namespace Switch {
           /// @param collection The collection whose elements are copied to the new ConcurrentStack<T>.
           /// @exception ArgumentNullException collection is a null reference.
           ConcurrentStack(const Generic::IEnumerable<T>& collection) {
-            System::Threading::LockGuard lock(this->stack.SyncRoot);
-            for(T item : collection)
-              this->stack.Push(item);
+            _lock (this->stack.SyncRoot) {
+              for(T item : collection)
+                this->stack.Push(item);
+            }
           }
           
           /// @cond
           ConcurrentStack(InitializerList<T> il)  {
-            System::Threading::LockGuard lock(this->stack.SyncRoot);
-            for (T item : il)
-              this->stack.Push(item);
+            _lock (this->stack.SyncRoot) {
+              for (T item : il)
+                this->stack.Push(item);
+            }
           }
           /// @endcond
 
@@ -58,8 +60,8 @@ namespace Switch {
           /// @brief Inserts multiple objects at the top of the ConcurrentStack<T> atomically.
           /// @param item The object to be inserted to the ConcurrentStack<T>.
           void Push(const T& item) {
-            System::Threading::LockGuard lock(this->stack.SyncRoot);
-            this->stack.Push(item);
+            _lock (this->stack.SyncRoot)
+              this->stack.Push(item);
           }
 
           /// @brief Inserts multiple objects at the top of the ConcurrentStack<T> atomically.
@@ -81,36 +83,39 @@ namespace Switch {
             if (startIndex + count > items.Length)
               throw ArgumentException(_caller);
 
-            System::Threading::LockGuard lock(this->stack.SyncRoot);
-            for (int32 i = startIndex; i < startIndex + count; i++)
-              this->stack.Push(items[i]);
+            _lock (this->stack.SyncRoot) {
+              for (int32 i = startIndex; i < startIndex + count; i++)
+                this->stack.Push(items[i]);
+            }
           }
 
           /// @brief Removes all objects from the ConcurrentStack<T>.
           void Clear() override {
-            System::Threading::LockGuard lock(this->stack.SyncRoot);
-            this->stack.Clear();
+            _lock (this->stack.SyncRoot)
+              this->stack.Clear();
           }
 
           /// @brief Copies the elements of the IProducerConsumerCollection<T> to an Array, starting at a specified index.
           /// @param array TThe one-dimensional Array that is the destination of the elements copied from the IProducerConsumerCollection<T>. The array must have zero-based indexing.
           /// @param index The zero-based index in array at which copying begins;
           void CopyTo(System::Array<T>& array, int32 index) const override {
-          System::Threading::LockGuard lock(this->stack.SyncRoot);
-          this->stack.CopyTo(array, index);
-        }
+            _lock (this->stack.SyncRoot)
+              this->stack.CopyTo(array, index);
+          }
 
           /// @brief Copies the elements contained in the IProducerConsumerCollection<T> to a new array.
           /// @return A new array containing the elements copied from the IProducerConsumerCollection<T>.
           System::Array<T> ToArray() const override {
-            System::Threading::LockGuard lock(this->stack.SyncRoot);
+            _lock (this->stack.SyncRoot)
+              return this->stack.ToArray();
             return this->stack.ToArray();
           }
 
           /// @brief Returns an enumerator that iterates through the ConcurrentStack<T>.
           /// @return Int32 A List<T>::Enumerator for the List<T>.
           Generic::Enumerator<T> GetEnumerator() const override {
-            System::Threading::LockGuard lock(this->stack.SyncRoot);
+            _lock (this->stack.SyncRoot)
+              return Generic::Enumerator<T>(new Enumerator(this));
             return Generic::Enumerator<T>(new Enumerator(this));
           }
 
@@ -118,10 +123,11 @@ namespace Switch {
           /// @param result When this method returns, result contains an object from the ConcurrentStack<T> or the default value of T if the operation failed.
           /// @return true if and object was returned successfully; otherwise, false.
           bool TryPeek(T& result) {
-            System::Threading::LockGuard lock(this->stack.SyncRoot);
-            if (this->stack.Count > 0) {
-              result = this->stack.Peek();
-              return true;
+            _lock(this->stack.SyncRoot) {
+              if (this->stack.Count > 0) {
+                result = this->stack.Peek();
+                return true;
+              }
             }
             return false;
           }
@@ -130,10 +136,11 @@ namespace Switch {
           /// @param result When this method returns, if the object was removed and returned successfully, item contains the removed object. If no object was available to be removed, the value is unspecified.
           /// @return true if an object was removed and returned successfully; otherwise, false.
           bool TryPop(T& result) {
-            System::Threading::LockGuard lock(this->stack.SyncRoot);
-            if (this->stack.Count > 0) {
-              result = this->stack.Pop();
-              return true;
+            _lock (this->stack.SyncRoot) {
+              if (this->stack.Count > 0) {
+                result = this->stack.Pop();
+                return true;
+              }
             }
             return false;
           }
@@ -159,14 +166,15 @@ namespace Switch {
             if (startIndex + count > results.Length)
               throw ArgumentException(_caller);
 
-            System::Threading::LockGuard lock(this->stack.SyncRoot);
             int32 nbItemPoped = 0;
-            for (int32 i = startIndex; i < startIndex + count; i++) {
-              if (this->stack.Count == 0)
-                break;
+            _lock (this->stack.SyncRoot) {
+              for (int32 i = startIndex; i < startIndex + count; i++) {
+                if (this->stack.Count == 0)
+                  break;
               
-              results[i] = this->stack.Pop();
-              nbItemPoped++;
+                results[i] = this->stack.Pop();
+                nbItemPoped++;
+              }
             }
             return nbItemPoped;
           }
@@ -183,7 +191,8 @@ namespace Switch {
           void Add(const T& item) override {Push(item);}
 
           bool Contains(const T& value) const override {
-            System::Threading::LockGuard lock(this->stack.SyncRoot);
+            _lock (this->stack.SyncRoot)
+              return this->stack.Contains(value);
             return this->stack.Contains(value);
           }
 

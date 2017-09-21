@@ -63,38 +63,38 @@ namespace Switch {
           return this->values.Count;
         }
 
-        /// @brief Closes the key && flushes it to disk if its contents have been modified.
+        /// @brief Closes the key and flushes it to disk if its contents have been modified.
         /// @remarks Calling this method on system keys will have no effect, because system keys are never closed.
         /// @remarks This method does nothing if you call it on an instance of RegistryKey that is already closed.
         void Close();
 
-        /// @brief Creates a new subkey || opens an existing subkey for write access.
-        /// @param subKey The name || path of the subkey to create || open. This System::String is ! case-sensitive.
+        /// @brief Creates a new subkey or opens an existing subkey for write access.
+        /// @param subKey The name or path of the subkey to create or open. This System::String is ! case-sensitive.
         /// @return RegistryKey The newly created subkey, or RegistryKey::Null() if the operation failed. If a zero-length System::String is specified for subkey, the current RegistryKey object is returned.
-        /// @remarks In order to perform this action, the user must have permission at this level && below in the registry hierarchy.
+        /// @remarks In order to perform this action, the user must have permission at this level and below in the registry hierarchy.
         /// @exception ArgumentNullException subKey is null.
         /// @exception UnauthorizedAccessException The RegistryKey cannot be written to; for example, it was ! opened as a writable key , or the user does ! have the necessary access rights.
-        /// @exception IOException The nesting level exceeds 510. -||- A system error occurred, such as deletion of the key, or an attempt to create a key in the LocalMachine root.
+        /// @exception IOException The nesting level exceeds 510. -or- A system error occurred, such as deletion of the key, or an attempt to create a key in the LocalMachine root.
         RegistryKey CreateSubKey(const System::String& subKey) { return this->CreateSubKey(subKey, Switch::Microsoft::Win32::RegistryKeyPermissionCheck(Switch::Microsoft::Win32::RegistryKeyPermissionCheck::ReadWriteSubTree)); }
 
-        /// @brief Creates a new subkey || opens an existing subkey with the specified access.
-        /// @param subKey TThe name || path of the subkey to create || open. This System::String is ! case-sensitive.
+        /// @brief Creates a new subkey or opens an existing subkey with the specified access.
+        /// @param subKey TThe name or path of the subkey to create or open. This System::String is ! case-sensitive.
         /// @param writable true to indicate the new subkey is writable; otherwise, false.
         /// @return RegistryKey The newly created subkey, or RegistryKey::Null() if the operation failed. If a zero-length System::String is specified for subkey, the current RegistryKey object is returned.
-        /// @remarks In order to perform this action, the user must have permission at this level && below in the registry hierarchy.
+        /// @remarks In order to perform this action, the user must have permission at this level and below in the registry hierarchy.
         /// @exception ArgumentNullException subKey is null.
         /// @exception UnauthorizedAccessException The RegistryKey cannot be written to; for example, it was ! opened as a writable key , or the user does ! have the necessary access rights.
-        /// @exception IOException The nesting level exceeds 510. -||- A system error occurred, such as deletion of the key, or an attempt to create a key in the LocalMachine root.
+        /// @exception IOException The nesting level exceeds 510. -or- A system error occurred, such as deletion of the key, or an attempt to create a key in the LocalMachine root.
         RegistryKey CreateSubKey(const System::String& subKey, bool writable) { return this->CreateSubKey(subKey, RegistryKeyPermissionCheck(writable ? RegistryKeyPermissionCheck::ReadWriteSubTree : RegistryKeyPermissionCheck::ReadSubTree)); }
 
-        /// @brief Creates a new subkey || opens an existing subkey for write access, using the specified permission check option.
-        /// @param subKey The name || path of the subkey to create || open. This System::String is ! case-sensitive.
-        /// @param permissionCheck One of the enumeration values that specifies whether the key is opened for read || read/write access.
+        /// @brief Creates a new subkey or opens an existing subkey for write access, using the specified permission check option.
+        /// @param subKey The name or path of the subkey to create or open. This System::String is ! case-sensitive.
+        /// @param permissionCheck One of the enumeration values that specifies whether the key is opened for read or read/write access.
         /// @return RegistryKey The newly created subkey, or RegistryKey::Null() if the operation failed. If a zero-length System::String is specified for subkey, the current RegistryKey object is returned.
-        /// @remarks In order to perform this action, the user must have permission at this level && below in the registry hierarchy.
+        /// @remarks In order to perform this action, the user must have permission at this level and below in the registry hierarchy.
         /// @exception ArgumentNullException subKey is null.
         /// @exception UnauthorizedAccessException The RegistryKey cannot be written to; for example, it was ! opened as a writable key , or the user does ! have the necessary access rights.
-        /// @exception IOException The nesting level exceeds 510. -||- A system error occurred, such as deletion of the key, or an attempt to create a key in the LocalMachine root.
+        /// @exception IOException The nesting level exceeds 510. -or- A system error occurred, such as deletion of the key, or an attempt to create a key in the LocalMachine root.
         RegistryKey CreateSubKey(const System::String& subKey, RegistryKeyPermissionCheck permissionCheck);
 
         /// @brief Deletes the specified subkey.
@@ -118,21 +118,21 @@ namespace Switch {
         /// @exception UnauthorizedAccessException The user does ! have the necessary registry rights.
         void DeleteSubKey(const System::String& subKey, bool throwOnMissingSubKey);
 
-        /// @brief Deletes a subkey && any child subkeys recursively.
+        /// @brief Deletes a subkey and any child subkeys recursively.
         /// @param name The subkey to delete. This System::String is ! case-sensitive.
-        /// @remarks You must have appropriate permissions to delete the subkey && its tree.
+        /// @remarks You must have appropriate permissions to delete the subkey and its tree.
         /// @exception ArgumentNullException subKey is null.
-        /// @exception ArgumentException Deletion of a root hive is attempted. -||- subKey does ! specify a valid registry subkey.
+        /// @exception ArgumentException Deletion of a root hive is attempted. -or- subKey does ! specify a valid registry subkey.
         /// @exception IOException An I/O error has occurred.
         /// @exception UnauthorizedAccessException The user does ! have the necessary registry rights.
         void DeleteSubKeyTree(const System::String& name) { this->DeleteSubKeyTree(name, true); }
 
-        /// @brief Deletes the specified subkey && any child subkeys recursively, and specifies whether an exception is raised if the subkey is ! found.
+        /// @brief Deletes the specified subkey and any child subkeys recursively, and specifies whether an exception is raised if the subkey is ! found.
         /// @param name The subkey to delete. This System::String is ! case-sensitive.
         /// @param throwOnMissingSubKey Indicates whether an exception should be raised if the value cannot be found.
-        /// @remarks You must have appropriate permissions to delete the subkey && its tree.
+        /// @remarks You must have appropriate permissions to delete the subkey and its tree.
         /// @exception ArgumentNullException subKey is null.
-        /// @exception ArgumentException Deletion of a root hive is attempted. -||- subKey does ! specify a valid registry subkey.
+        /// @exception ArgumentException Deletion of a root hive is attempted. -or- subKey does ! specify a valid registry subkey.
         /// @exception IOException An I/O error has occurred.
         /// @exception UnauthorizedAccessException The user does ! have the necessary registry rights.
         void DeleteSubKeyTree(const System::String& name, bool throwOnMissingSubKey);
@@ -158,12 +158,12 @@ namespace Switch {
           this->Flush();
         }
 
-        /// @brief Determines whether this instance of RegistryKey && a specified object, which must also be a RegistryKey object, have the same value.
+        /// @brief Determines whether this instance of RegistryKey and a specified object, which must also be a RegistryKey object, have the same value.
         /// @param value The RegistryKey to compare with the current object.
         /// @return bool true if the specified value is equal to the current object. otherwise, false.
         bool Equals(const RegistryKey& value) const { return this->handle == value.handle && this->name == value.name && this->path == value.path; }
 
-        /// @brief Determines whether this instance of RegistryKey && a specified object, which must also be a RegistryKey object, have the same value.
+        /// @brief Determines whether this instance of RegistryKey and a specified object, which must also be a RegistryKey object, have the same value.
         /// @param obj The object to compare with the current object.
         /// @return bool true if the specified object is equal to the current object. otherwise, false.
         bool Equals(const object& obj) const override { return is<RegistryKey>(obj) && Equals(static_cast<const RegistryKey&>(obj)); }
@@ -194,28 +194,28 @@ namespace Switch {
         System::Array<System::String> GetValueNames() { return System::Array<System::String>(values.Keys()); }
 
         /// @brief Writes all the attributes of the specified open registry key into the registry.
-        /// @remarks It is ! necessary to call Flush to write out changes to a key. Registry changes are flushed to disk when the registry uses its lazy flusher. Lazy flushing occurs automatically && regularly after a system-specified time interval. Registry changes are also flushed to disk at system shutdown.
+        /// @remarks It is ! necessary to call Flush to write out changes to a key. Registry changes are flushed to disk when the registry uses its lazy flusher. Lazy flushing occurs automatically and regularly after a system-specified time interval. Registry changes are also flushed to disk at system shutdown.
         /// @remarks Unlike Close, the Flush function returns only when all the data has been written to the registry.
-        /// @remarks The Flush function might also write out parts of || all of the other keys. Calling this function excessively can have a negative effect on an application's performance.
+        /// @remarks The Flush function might also write out parts of or all of the other keys. Calling this function excessively can have a negative effect on an application's performance.
         /// @remarks An application should only call Flush if it must be absolute certain that registry changes are recorded to disk. In general, Flush rarely, if ever, need be used.
         void Flush();
 
         /// @brief Retrieves a subkey as read-only.
-        /// @param hKey The name || path of the subkey to open as read-only.
+        /// @param hKey The name or path of the subkey to open as read-only.
         static RegistryKey OpenBaseKey(RegistryHive hKey) { return RegistryKey(hKey); }
         //static RegistryKey OpenBaseKey(RegistryHive hKey, RegistryView view) { return RegistryKey(hKey); }
 
         /// @brief Retrieves a subkey as read-only.
-        /// @param name The name || path of the subkey to open as read-only.
+        /// @param name The name or path of the subkey to open as read-only.
         RegistryKey OpenSubKey(const System::String& name) { return OpenSubKey(name, RegistryKeyPermissionCheck(RegistryKeyPermissionCheck::ReadSubTree)); }
 
         /// @brief Retrieves a subkey as read-only.
-        /// @param name The name || path of the subkey to open as read-only.
+        /// @param name The name or path of the subkey to open as read-only.
         /// @param writable Set to true if you need write access to the key.
         RegistryKey OpenSubKey(const System::String& name, System::Boolean writable) { return OpenSubKey(name, writable ? RegistryKeyPermissionCheck::ReadWriteSubTree : RegistryKeyPermissionCheck::ReadSubTree); }
 
         /// @brief Retrieves a subkey as read-only.
-        /// @param name The name || path of the subkey to open as read-only.
+        /// @param name The name or path of the subkey to open as read-only.
         /// @param permissionCheck One of the enumeration values that specifies whether the key is opened for read or read/write access.
         RegistryKey OpenSubKey(const System::String& name, RegistryKeyPermissionCheck permissionCheck);
         

@@ -2,7 +2,7 @@
 /// @brief Contains Switch::System::String class.
 #pragma once
 
-#include "__opaque_unicode_string__.hpp"
+#include "../__opaque_unicode_string__.hpp"
 #include "../Move.hpp"
 #include "../Property.hpp"
 #include "Object.hpp"

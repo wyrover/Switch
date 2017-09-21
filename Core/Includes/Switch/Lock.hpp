@@ -2,7 +2,7 @@
 /// @brief Contains #_lock keyword.
 #pragma once
 
-#include "System/Threading/LockGuard.hpp"
+#include "__opaque_lock_guard__.hpp"
 #include "Using.hpp"
 
 namespace Switch {
@@ -63,7 +63,7 @@ namespace Switch {
   /// @include Lock.cpp
   /// @ingroup Keywords
   #define _lock(object)\
-  _using (System::Threading::LockGuard __switch_lock_guard__(object))
+  _using (__opaque_lock_guard__ __switch_lock_guard__(object))
 }
 
 using namespace Switch;
