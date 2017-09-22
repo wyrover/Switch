@@ -7,16 +7,16 @@ using namespace System;
 namespace Examples {
   class Program {
   public:
+    // The main entry point for the application.
+    static void Main() {
+      TraceMessage("Something happened.", _caller);
+    }
+
     static void TraceMessage(const string& message, const System::Runtime::CompilerServices::Caller& caller) {
       System::Diagnostics::Trace::WriteLine("message: "_s + message);
       System::Diagnostics::Trace::WriteLine("member name: "_s + caller.MemberNamne);
       System::Diagnostics::Trace::WriteLine("source file path: "_s + caller.FilePath);
       System::Diagnostics::Trace::WriteLine("source line number: "_s + caller.LineNumber);
-    }
-    
-    // The main entry point for the application.
-    static void Main() {
-      TraceMessage("Something happened.", _caller);
     }
   };
 }
