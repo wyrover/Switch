@@ -126,11 +126,18 @@ namespace Switch {
           }
           
         protected:
+#if defined(_WIN32)
+#pragma warning(push)
+#pragma warning(disable:4172)
+#endif
           const T& GetCurrent() const override {
             if (this->beforeFirst || this->iterator == this->array.array.end()) throw System::InvalidOperationException(_caller);
             return (const T&)*this->iterator;
           }
-          
+#if defined(_WIN32)
+#pragma warning(pop)
+#endif
+
           const GenericArrayObject& array;
           bool beforeFirst = true;
           int64 operationNumber;
