@@ -5,4 +5,4 @@ Avoid coupling the sender of a request to its receiver by giving more than one o
 <BR>
 
 ## UML class diagram
-![GitHub Logo](../../../Documentations/Images/DesignPatterns/chain.gif)
+![GitHub Logo](../../../docs/Pictures/DesignPatterns/chain.gif)

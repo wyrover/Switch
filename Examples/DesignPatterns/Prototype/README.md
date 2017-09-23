@@ -5,4 +5,4 @@ Specify the kind of objects to create using a prototypical instance, and create 
 <BR>
 
 ## UML class diagram
-![GitHub Logo](../../../Documentations/Images/DesignPatterns/prototype.gif)
+![GitHub Logo](../../../docs/Pictures/DesignPatterns/prototype.gif)

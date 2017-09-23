@@ -5,4 +5,4 @@ Without violating encapsulation, capture and externalize an object's internal st
 <BR>
 
 ## UML class diagram
-![GitHub Logo](../../../Documentations/Images/DesignPatterns/memento.gif)
+![GitHub Logo](../../../docs/Pictures/DesignPatterns/memento.gif)

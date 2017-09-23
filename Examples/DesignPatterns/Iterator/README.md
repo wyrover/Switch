@@ -5,4 +5,4 @@ Provide a way to access the elements of an aggregate object sequentially without
 <BR>
 
 ## UML class diagram
-![GitHub Logo](../../../Documentations/Images/DesignPatterns/iterator.gif)
+![GitHub Logo](../../../docs/Pictures/DesignPatterns/iterator.gif)

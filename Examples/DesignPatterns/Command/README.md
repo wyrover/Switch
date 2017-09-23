@@ -5,4 +5,4 @@ Encapsulate a request as an object, thereby letting you parameterize clients wit
 <BR>
 
 ## UML class diagram
-![GitHub Logo](../../../Documentations/Images/DesignPatterns/command.gif)
+![GitHub Logo](../../../docs/Pictures/DesignPatterns/command.gif)

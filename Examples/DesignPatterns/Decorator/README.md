@@ -5,4 +5,4 @@ Attach additional responsibilities to an object dynamically. Decorators provide 
 <BR>
 
 ## UML class diagram
-![GitHub Logo](../../../Documentations/Images/DesignPatterns/decorator.gif)
+![GitHub Logo](../../../docs/Pictures/DesignPatterns/decorator.gif)

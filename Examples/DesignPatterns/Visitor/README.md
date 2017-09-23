@@ -5,4 +5,4 @@ Represent an operation to be performed on the elements of an object structure. V
 <BR>
 
 ## UML class diagram
-![GitHub Logo](../../../Documentations/Images/DesignPatterns/visitor.gif)
+![GitHub Logo](../../../docs/Pictures/DesignPatterns/visitor.gif)

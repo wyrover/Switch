@@ -5,4 +5,4 @@ Given a language, define a representation for its grammar along with an interpre
 <BR>
 
 ## UML class diagram
-![GitHub Logo](../../../Documentations/Images/DesignPatterns/interpreter.gif)
+![GitHub Logo](../../../docs/Pictures/DesignPatterns/interpreter.gif)

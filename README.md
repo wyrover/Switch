@@ -1,8 +1,8 @@
-[![GitHub Logo](Documentations/Images/SwitchNativeC++port.png)](https://gammasoft71.wixsite.com/switch)
+[![GitHub Logo](docs/Pictures/SwitchNativeC++port.png)](https://gammasoft71.wixsite.com/switch)
 ____________________________________________________________________________________
 
-[![License: GPL v3](https://img.shields.io/badge/Language-c++17%20ready-brightgreen.svg)](Documentations/C++17Ready.md) 
-[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-brightgreen.svg)](Documentations/License.md) 
+[![License: GPL v3](https://img.shields.io/badge/Language-c++17%20ready-brightgreen.svg)](docs/C++17Ready.md) 
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-brightgreen.svg)](docs/License.md) 
 [![Build Status](https://travis-ci.org/gammasoft71/Switch.svg)](https://travis-ci.org/gammasoft71/Switch) 
 [![Download Switch](https://img.shields.io/sourceforge/dt/switchpro.svg)](https://sourceforge.net/projects/switchpro/files/latest/download)
 <!--[![Build status](https://ci.appveyor.com/api/projects/status/kjfq2sl5bc99kut6?svg=true)](https://ci.appveyor.com/project/gammasoft71/switch)-->
@@ -12,7 +12,7 @@ ________________________________________________________________________________
 - written in efficient, modern C++14;
 - and highly portable and available on many different platforms (Windows, macOS, Linux);
 
-For more information see [Switch](https://gammasoft71.wixsite.com/switch) or see [Documentations](Documentations)
+For more information see [Switch](https://gammasoft71.wixsite.com/switch) or see [Documentations](docs)
 
 
 # Examples

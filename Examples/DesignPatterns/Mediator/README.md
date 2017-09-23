@@ -5,4 +5,4 @@ Define an object that encapsulates how a set of objects interact. Mediator promo
 <BR>
 
 ## UML class diagram
-![GitHub Logo](../../../Documentations/Images/DesignPatterns/mediator.gif)
+![GitHub Logo](../../../docs/Pictures/DesignPatterns/mediator.gif)

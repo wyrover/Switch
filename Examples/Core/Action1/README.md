@@ -11,14 +11,14 @@ If Action1 is called with any param
 ## Result
 <BR>
 
-![GitHub Logo](../../../Documentations/Images/Examples/Core/Action1W.png)
+![GitHub Logo](../../../docs/Pictures/Examples/Core/Action1W.png)
 <p align="left">Windows</p>
 <BR>
 
-![GitHub Logo](../../../Documentations/Images/Examples/Core/Action1M.png)
+![GitHub Logo](../../../docs/Pictures/Examples/Core/Action1M.png)
 <p align="left">macOS</p>
 <BR>
 
-![GitHub Logo](../../../Documentations/Images/Examples/Core/Action1U.png)
+![GitHub Logo](../../../docs/Pictures/Examples/Core/Action1U.png)
 <p align="left">Ubuntu</p>
 <BR>

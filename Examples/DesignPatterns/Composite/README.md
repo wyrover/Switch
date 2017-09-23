@@ -5,4 +5,4 @@ Compose objects into tree structures to represent part-whole hierarchies. Compos
 <BR>
 
 ## UML class diagram
-![GitHub Logo](../../../Documentations/Images/DesignPatterns/composite.gif)
+![GitHub Logo](../../../docs/Pictures/DesignPatterns/composite.gif)

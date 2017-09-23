@@ -5,4 +5,4 @@ Define a one-to-many dependency between objects so that when one object changes 
 <BR>
 
 ## UML class diagram
-![GitHub Logo](../../../Documentations/Images/DesignPatterns/observer.gif)
+![GitHub Logo](../../../docs/Pictures/DesignPatterns/observer.gif)

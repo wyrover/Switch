@@ -5,4 +5,4 @@ Provide a unified interface to a set of interfaces in a subsystem. Façade defin
 <BR>
 
 ## UML class diagram
-![GitHub Logo](../../../Documentations/Images/DesignPatterns/facade.gif)
+![GitHub Logo](../../../docs/Pictures/DesignPatterns/facade.gif)
