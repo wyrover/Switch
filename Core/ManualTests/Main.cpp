@@ -3,6 +3,7 @@
 #include <Switch/System/Console.hpp>
 #include <Switch/System/Threading/Monitor.hpp>
 #include <Switch/System/Threading/Thread.hpp>
+#include <Switch/System/Threading/Tasks/Task.hpp>
 
 using namespace System;
 using namespace System::Threading;
@@ -11,7 +12,7 @@ namespace Examples {
   class Program {
   public:
     // The main entry point for the application.
-    static void Main() {
+    static void Main() {      
       System::Threading::Thread thread1(ThreadStart(_delegate {
         _lock ("myLock"_s) {
           for (int counter = 0; counter < 10; counter++) {

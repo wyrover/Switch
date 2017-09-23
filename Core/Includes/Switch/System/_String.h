@@ -86,10 +86,6 @@ class __opaque_format_item__ {
 public:
   __opaque_format_item__() {}
   __opaque_format_item__(const __opaque_format_item__& any) : value(any.value) {}
-  __opaque_format_item__& operator=(const __opaque_format_item__& any) {
-    this->value = any.value;
-    return *this;
-  }
   bool operator==(const __opaque_format_item__& any) const {return value == any.value;}
   bool operator!=(const __opaque_format_item__& any) const {return value != any.value;}
  

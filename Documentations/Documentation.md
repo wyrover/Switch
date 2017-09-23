@@ -14,6 +14,7 @@ This section contains the Switch documentation.
 * [Reference Guide](https://gammasoft71.github.io/Switch-doc) provide online user reference guide.
 * [Portability](Portability.md) provide informations about Operating System suported, Compilators and Devepment Environment tools.
 * [External Products and Libraries](ExternalProductsAndLibraries.md) list the external products and libraries.
+* [C++17 Ready](C++17Ready.md) contains some Switch classes and their Standard C++ equivalent.
 * [Links](Links.md) list the essential links.
 
 ______________________________________________________________________________________________

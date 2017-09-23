@@ -7,7 +7,7 @@
 #include <Switch/System/Object.hpp>
 #include "../Windows/Forms/MessageBoxIcon.hpp"
 
-struct __opaque_snd_access__;
+struct __opaque_sound_access__;
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
@@ -29,7 +29,7 @@ namespace Switch {
         intptr Tag() const {return (intptr)this->type;}
 
       private:
-        friend struct ::__opaque_snd_access__;
+        friend struct ::__opaque_sound_access__;
         SystemSound(System::Windows::Forms::MessageBoxIcon type) : type(type) {}
         System::Windows::Forms::MessageBoxIcon type = (System::Windows::Forms::MessageBoxIcon)0;
       };

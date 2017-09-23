@@ -16,6 +16,7 @@ namespace Switch {namespace System {namespace Threading {namespace Tasks {
 class _export __opaque_task_id_generator__ {
   template <typename TResult>
   friend class System::Threading::Tasks::Task;
+  __opaque_task_id_generator__() {}
   int32 operator()() {
     static int32 taskIdCounter = 0;
     taskIdCounter = taskIdCounter == System::Int32::MaxValue ? 1 : taskIdCounter + 1;

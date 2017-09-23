@@ -5,7 +5,7 @@
 
 # C++17 Ready
 
-The following table represents some Switch classes and their sandard C++ equivalent :
+The following table represents some Switch classes and their Standard C++ equivalent :
 
 | Switch C++ Class                                               | Standard C++ equivalent                                                                                                       |
 |----------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
@@ -13,6 +13,7 @@ The following table represents some Switch classes and their sandard C++ equival
 | ExceptionPtr                                                   | std::exception_ptr **(C++11)**                                                                                                |
 | ref\<T\>                                                       | std::ref\<T\> **(C++11)**                                                                                                     |
 | refptr\<T\>                                                    | std::shared_ptr\<T\> **(C++11)**                                                                                              |
+| _\<T\>                                                         | std::shared_ptr\<T\> **(C++11)**                                                                                              |
 | System::Array\<T\>                                             | std::vector\<T\>, std::array\<T\> **(C++11)**                                                                                 |
 | System::Array\<T, N\>                                          | std::vector\<T\>, std::array\<T\> **(C++11)**                                                                                 |
 | System::Console::Error                                         | std::cerr                                                                                                                     |
@@ -22,7 +23,7 @@ The following table represents some Switch classes and their sandard C++ equival
 | System::Exception                                              | std::exception                                                                                                                |
 | System::Nullable\<T\>                                          | std::optional\<T\> **(C++17)**                                                                                                |
 | System::String                                                 | std::string                                                                                                                   |
-| System::Tuple\<...\>                                           | stdt::tuple\<...\> **(C++11)**                                                                                                |
+| System::Tuple\<...\>                                           | std::tuple\<...\> **(C++11)**                                                                                                 |
 | System::Collections::ArrayList                                 | std::vector\<std::any\> **(C++17)**                                                                                           |
 | System::Collections::BitArray                                  | std::bitset\<std::size_t N\>                                                                                                  |
 | System::Collections::DictionaryEntry                           | std::pair\<std::any, std::any\> **(C++17)**                                                                                   |
@@ -54,15 +55,15 @@ The following table represents some Switch classes and their sandard C++ equival
 | System::IO::Directory::EnumerateDirectories                    | std::directory_iterator **(C++17)**, std::recursive_directory_iterator **(C++17)**                                            |
 | System::IO::DicrectoryInfo                                     | std::directory_entry **(C++17)**                                                                                              |
 | System::IO::DriveInfo                                          | std::space_info **(C++17)**                                                                                                   |
-| System::IO::File.                                              | std Filesystem library File functions **(C++17)**                                                                             |
+| System::IO::File                                               | std Filesystem library File functions **(C++17)**                                                                             |
 | System::IO::FileInfo                                           | std::file_status **(C++17)**, std::file_type **(C++17)**, std::file_time_type **(C++17)**                                     |
 | System::IO::FileStream                                         | std::fstream                                                                                                                  |
 | System::IO::Path                                               | std::path **(C++17)**                                                                                                         |
 | System::IO::StreamReader                                       | std::istream                                                                                                                  |
 | System::IO::StreamWriter                                       | std::ostream                                                                                                                  |
 | System::Linq::Enumerable                                       | std Algorithms Library functions                                                                                              |
-| System::Threading::Task<>                                      | std::future **(C++11)**, std::promise **(C++11)**, std::async **(C++11)**, std::launch **(C++11)**                            |
-| System::Threading::Task<T>                                     | std::future **(C++11)**, std::promise **(C++11)**, std::async **(C++11)**, std::launch **(C++11)**                            |
+| System::Threading::Task\<\>                                    | std::future **(C++11)**, std::promise **(C++11)**, std::async **(C++11)**, std::launch **(C++11)**                            |
+| System::Threading::Task\<T\>                                   | std::future **(C++11)**, std::promise **(C++11)**, std::async **(C++11)**, std::launch **(C++11)**                            |
 | System::Threading::AutoResetEvent                              | std::condition_variable **(C++11)**, std::condition_variable_any **(C++11)**                                                  |
 | System::Threading::EventWaitHandle                             | std::condition_variable **(C++11)**, std::condition_variable_any **(C++11)**                                                  |
 | System::Threading::Interlocked                                 | std Atomic operations library functions **(C++11)**                                                                           |
