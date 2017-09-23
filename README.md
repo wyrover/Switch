@@ -8,9 +8,9 @@ ________________________________________________________________________________
 <!--[![Build status](https://ci.appveyor.com/api/projects/status/kjfq2sl5bc99kut6?svg=true)](https://ci.appveyor.com/project/gammasoft71/switch)-->
 
 # The Switch framework is...
-- a collection of native C++ classes libraries, similar to the .NET Framework;
-- written in efficient, modern C++14;
-- and highly portable and available on many different platforms (Windows, macOS, Linux);
+* a collection of native C++ classes libraries, similar to the .NET Framework;
+* written in efficient, modern C++14;
+* and highly portable and available on many different platforms (Windows, macOS, Linux);
 
 For more information see [Switch](https://gammasoft71.wixsite.com/switch) or see [Documentations](docs)
 
