@@ -5,7 +5,7 @@
 
 ![GPL v3 Logo](Pictures/gplv3-127x51.png)
 
-Switch, Copyright (C) 2010-2017, GAMMA Soft.
+Switch, Copyright (C) GAMMA Soft.
  
 # GNU GENERAL PUBLIC LICENSE
 Version 3, 29 June 2007
