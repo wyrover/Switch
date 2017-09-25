@@ -401,6 +401,8 @@ set(INCLUDE_FILES
 )
 
 set(SOURCE_FILES
+  Sources/Switch/System/Threading/Monitor.cpp
+
   Sources/__OS/CoreApi.hpp
   Sources/__OS/ConsoleGcc.cpp
   Sources/__OS/ConsoleW32.cpp
@@ -494,7 +496,6 @@ set(SOURCE_FILES
   Sources/Switch/System/Text/UTF32Encoding.cpp
   Sources/Switch/System/Threading/EventWaitHandle.cpp
   Sources/Switch/System/Threading/Interlocked.cpp
-  Sources/Switch/System/Threading/Monitor.cpp
   Sources/Switch/System/Threading/Mutex.cpp
   Sources/Switch/System/Threading/Semaphore.cpp
   Sources/Switch/System/Threading/Thread.cpp
