@@ -3,114 +3,166 @@
 using namespace System;
 
 namespace Examples {
-  class Firework : public object {
+  class Firework _abstract {
   public:
-    Firework(System::Drawing::Point location, ConsoleColor color, int speed) : location(location), color(color), speed(speed) {}
-    Firework(const Firework& firework) : location(firework.location), color(firework.color) {}
+    Firework(int x, int y, ConsoleColor color, int delay) : x(x), y(y), color(color), delay(delay) {}
+    Firework(const Firework& firework) : x(firework.x), y(firework.y), color(firework.color), delay(firework.delay) {}
     
-    _property<System::ConsoleColor, _readonly> Color {
-      _get {return this->color;}
-    };
-    
-    _property<System::Drawing::Point, _readonly> Location {
-      _get {return this->location;}
-    };
-    
-    _property<int, _readonly> Speed {
-      _get {return this->speed;}
+    _property<int, _readonly> Delay {
+      _get {return this->delay;}
     };
     
     virtual void Paint() const = 0;
     
-    static void Explode(_<Firework>& firexork);
-    
-  private:
-    System::Drawing::Point location;
+  protected:
+    static void Write(int x, int y, const string& str) {
+      System::Console::SetCursorPosition(x, y);
+      System::Console::Write(str);
+    }
+
+    int x;
+    int y;
     System::ConsoleColor color;
-    int speed = 1;
+    int delay;
   };
   
   class FireworkStart : public Firework {
   public:
-    FireworkStart(System::Drawing::Point location, ConsoleColor color, int speed) : Firework(location, color, speed) {}
+    FireworkStart(int x, int y, ConsoleColor color, int speed) : Firework(x, y, color, speed) {}
     FireworkStart(const Firework& firework) : Firework(firework) {}
     
     void Paint() const override {
+      System::Console::ForegroundColor = this->color;
+      Write(this->x, this->y, "+");
     }
   };
   
   class FireworkExploded : public Firework {
   public:
-    FireworkExploded(System::Drawing::Point location, ConsoleColor color, int speed) : Firework(location, color, speed) {}
+    FireworkExploded(int x, int y, ConsoleColor color, int speed) : Firework(x, y, color, speed) {}
     FireworkExploded(const Firework& firework) : Firework(firework) {}
     
     void Paint() const override {
-      System::Console::ForegroundColor = this->Color;
-      System::Console::SetCursorPosition(this->Location().X, this->Location().Y - 1);
-      System::Console::Write("-");
-      System::Console::SetCursorPosition(this->Location().X - 1, this->Location().Y);
-      System::Console::Write("-+-");
-      System::Console::SetCursorPosition(this->Location().X, this->Location().Y + 1);
-      System::Console::Write("-");
+      System::Console::ForegroundColor = this->color;
+      Write(this->x - 1, this->y - 1, " - ");
+      Write(this->x - 1, this->y,     "-+-");
+      Write(this->x - 1, this->y + 1, " - ");
     }
   };
   
+  class FireworkStartExpanded1 : public Firework {
+  public:
+    FireworkStartExpanded1(int x, int y, ConsoleColor color, int speed) : Firework(x, y, color, speed) {}
+    FireworkStartExpanded1(const Firework& firework) : Firework(firework) {}
+    
+    void Paint() const override {
+      System::Console::ForegroundColor = this->color;
+      Write(this->x - 2, this->y - 2, " --- ");
+      Write(this->x - 2, this->y - 1, "-+++-");
+      Write(this->x - 2, this->y,     "-+#+-");
+      Write(this->x - 2, this->y + 1, "-+++-");
+      Write(this->x - 2, this->y + 2, " --- ");
+    }
+  };
+  
+  class FireworkStartExpanded2 : public Firework {
+  public:
+    FireworkStartExpanded2(int x, int y, ConsoleColor color, int speed) : Firework(x, y, color, speed) {}
+    FireworkStartExpanded2(const Firework& firework) : Firework(firework) {}
+    
+    void Paint() const override {
+      System::Console::ForegroundColor = this->color;
+      Write(this->x - 2, this->y - 2, " +++ ");
+      Write(this->x - 2, this->y - 1, "++#++");
+      Write(this->x - 2, this->y,     "-# #-");
+      Write(this->x - 2, this->y + 1, "++#++");
+      Write(this->x - 2, this->y + 2, " +++ ");
+    }
+  };
+  
+  class FireworkStartExpanded3 : public Firework {
+  public:
+    FireworkStartExpanded3(int x, int y, ConsoleColor color, int speed) : Firework(x, y, color, speed) {}
+    FireworkStartExpanded3(const Firework& firework) : Firework(firework) {}
+    
+    void Paint() const override {
+      System::Console::ForegroundColor = this->color;
+      Write(this->x - 2, this->y - 2, "  #  ");
+      Write(this->x - 2, this->y - 1, "## ##");
+      Write(this->x - 2, this->y,     "#   #");
+      Write(this->x - 2, this->y + 1, "## ##");
+      Write(this->x - 2, this->y + 2, "  #  ");
+    }
+  };
+  
+  class FireworkStartExpanded4 : public Firework {
+  public:
+    FireworkStartExpanded4(int x, int y, ConsoleColor color, int speed) : Firework(x, y, color, speed) {}
+    FireworkStartExpanded4(const Firework& firework) : Firework(firework) {}
+    
+    void Paint() const override {
+      System::Console::ForegroundColor = this->color;
+      Write(this->x - 2, this->y - 2, " # # ");
+      Write(this->x - 2, this->y - 1, "#   #");
+      Write(this->x - 2, this->y,     "     ");
+      Write(this->x - 2, this->y + 1, "#   #");
+      Write(this->x - 2, this->y + 2, " # # ");
+    }
+  };
+
   class FireworkEnd : public Firework {
   public:
-    FireworkEnd(System::Drawing::Point location, ConsoleColor color, int speed) : Firework(location, color, speed) {}
+    FireworkEnd(int x, int y, ConsoleColor color, int speed) : Firework(x, y, color, speed) {}
     FireworkEnd(const Firework& firework) : Firework(firework) {}
     
     void Paint() const override {
-      System::Console::ForegroundColor = this->Color;
-      System::Console::SetCursorPosition(this->Location().X, this->Location().Y - 1);
-      System::Console::Write(" ");
-      System::Console::SetCursorPosition(this->Location().X - 1, this->Location().Y);
-      System::Console::Write("   ");
-      System::Console::SetCursorPosition(this->Location().X, this->Location().Y + 1);
-      System::Console::Write(" ");
+      System::Console::ForegroundColor = this->color;
+      Write(this->x - 2, this->y - 2, "     ");
+      Write(this->x - 2, this->y - 1, "     ");
+      Write(this->x - 2, this->y,     "     ");
+      Write(this->x - 2, this->y + 1, "     ");
+      Write(this->x - 2, this->y + 2, "     ");
     }
   };
-  
-  void Firework::Explode(_<Firework>& firework) {
-    static int counter = 1;
-    if (counter % firework->Speed == 0) {
-      if (is<FireworkExploded>(firework)) firework = _new<FireworkEnd>(*firework);
-      if (is<FireworkStart>(firework)) firework = _new<FireworkExploded>(*firework);
-      firework->Paint();
-    }
-    ++counter;
-  }
   
   class Program {
   public:
     // The main entry point for the application.
     static void Main() {
-      Random rand;
-      Console::Clear();
       Console::CursorVisible = false;
+      Console::Clear();
+      
+      Random rand;
       System::Collections::Generic::List<_<Firework>> fireworks;
+      Array<ConsoleColor> colors {ConsoleColor::Blue, ConsoleColor::Green, ConsoleColor::Cyan, ConsoleColor::Red, ConsoleColor::Magenta, ConsoleColor::Yellow, ConsoleColor::White};
+     
       while(!Console::KeyAvailable) {
-        _<Firework> firework = _new<FireworkStart>(System::Drawing::Point(rand.Next(2, Console::WindowWidth-2), rand.Next(2, Console::WindowHeight-2)), (ConsoleColor)rand.Next(9, 16), rand.Next(20, 100));
-        firework->Paint();
-        fireworks.Add(firework);
+        fireworks.Add(_new<FireworkStart>(rand.Next(2, Console::WindowWidth - 2), rand.Next(2, Console::WindowHeight - 2), colors[rand.Next(colors.Length)], rand.Next(1, 5)));
         
         System::Collections::Generic::List<_<Firework>> fireworksToRemove;
         for (_<Firework>& firework : fireworks) {
           if (is<FireworkEnd>(firework))
             fireworksToRemove.Add(firework);
-          Firework::Explode(firework);
+          Explode(firework);
         }
-
-        for (_<Firework> firework : fireworksToRemove)
-          fireworks.Remove(firework);
-
+        fireworksToRemove.ForEach(_delegate(_<Examples::Firework> firework) {fireworks.Remove(firework);});
+        
         System::Threading::Thread::Sleep(100);
       }
-      
-      Console::SetCursorPosition(0, Console::WindowHeight-1);
-      System::Console::ResetColor();
+
+      Console::ResetColor();
       Console::Clear();
       Console::CursorVisible = true;
+    }
+    
+    static void Explode(_<Firework>& firework) {
+      firework->Paint();
+      if (is<FireworkStartExpanded4>(firework)) firework = _new<FireworkEnd>(*firework);
+      if (is<FireworkStartExpanded3>(firework)) firework = _new<FireworkStartExpanded4>(*firework);
+      if (is<FireworkStartExpanded2>(firework)) firework = _new<FireworkStartExpanded3>(*firework);
+      if (is<FireworkStartExpanded1>(firework)) firework = _new<FireworkStartExpanded2>(*firework);
+      if (is<FireworkExploded>(firework)) firework = _new<FireworkStartExpanded1>(*firework);
+      if (DateTime::Now().Ticks % firework->Delay == 0 && is<FireworkStart>(firework)) firework = _new<FireworkExploded>(*firework);
     }
   };
 }
