@@ -17,7 +17,7 @@ echo   cmake_install_prefix_path : Specify the cmake install prefix path. (By
 echo                               default the value is set to "C:/usr/local".)
 echo. 
 echo Example:
-echo   install.bat /VS:2015 D:/Projects/libs
+echo   install.bat /VS:2015:WIN32 D:/Projects/libs
 echo.
 echo Notes
 echo   * If you don't specify cmake_install_prefix_path value, the Switch installer
