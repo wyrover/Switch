@@ -15,7 +15,7 @@ extern HINSTANCE __instance;
 
 namespace{
   static System::Collections::Generic::SortedDictionary<intptr, delegate<void>> ticks;
-  void TimerProc(HWND hwnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime) {
+  void CALLBACK TimerProc(HWND hwnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime) {
     ticks[idEvent]();
   }
 }

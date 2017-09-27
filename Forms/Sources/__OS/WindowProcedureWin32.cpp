@@ -15,7 +15,12 @@ using namespace System::Collections::Generic;
 using namespace System::Windows::Forms;
 using namespace __OS;
 
-Dictionary<intptr, WNDPROC> WindowProcedure::DefWindowProcs;
+#if _WIN64
+Dictionary<int64, intptr(__stdcall*)(HWND, uint32, uintptr, int64)> WindowProcedure::DefWindowProcs;
+#else
+Dictionary<int64, long(__stdcall*)(HWND, unsigned int, unsigned int, long)> WindowProcedure::DefWindowProcs;
+#endif
+//Dictionary<intptr, WNDPROC> WindowProcedure::DefWindowProcs;
 
 void WindowProcedure::SetWindowTheme(HWND handle) {
   if (!FormsApi::Application::HasVisualStylesEnabled())
