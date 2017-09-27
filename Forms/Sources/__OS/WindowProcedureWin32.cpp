@@ -18,7 +18,7 @@ using namespace __OS;
 #if _WIN64
 Dictionary<int64, intptr(__stdcall*)(HWND, uint32, uintptr, int64)> WindowProcedure::DefWindowProcs;
 #else
-Dictionary<int64, long(__stdcall*)(HWND, unsigned int, unsigned int, long)> WindowProcedure::DefWindowProcs;
+Dictionary<int64, long(__stdcall*)(HWND, uint32, uint32, long)> WindowProcedure::DefWindowProcs;
 #endif
 //Dictionary<intptr, WNDPROC> WindowProcedure::DefWindowProcs;
 
