@@ -3,10 +3,10 @@ if not "%3" == "" set cmake_install_prefix_path=%3
 
 set devenv="devenv"
 
-del /q /s bin
-mkdir bin\Examples
-mkdir bin\ThirdParties
-mkdir "%cmake_install_prefix_path%"
+del /q /s bin 2>nul
+mkdir bin\Examples 2>nul
+mkdir bin\ThirdParties 2>nul
+mkdir "%cmake_install_prefix_path%" 2>nul
 
 cd bin\ThirdParties
 cmake %1 %2 -DCMAKE_INSTALL_PREFIX:STRING="%cmake_install_prefix_path%" ../../ThirdParties
