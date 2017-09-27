@@ -1,4 +1,4 @@
-[![GitHub Logo](docs/Pictures/SwitchNativeC++port.png)](https://gammasoft71.wixsite.com/switch)
+[![GitHub Logo](docs/Pictures/SwitchNativeC++port.png)](https://travis-ci.org/gammasoft71/Switch)
 ____________________________________________________________________________________
 
 [![License: GPL v3](https://img.shields.io/badge/Language-c++17%20ready-brightgreen.svg)](docs/C++17Ready.md) 
@@ -12,7 +12,7 @@ ________________________________________________________________________________
 * written in efficient, modern C++14;
 * and highly portable and available on many different platforms (Windows, macOS, Linux);
 
-For more information see [Switch](https://gammasoft71.wixsite.com/switch) or see [Documentations](docs)
+For more information see [Switch](https://gammasoft71.github.io/Switch) or see [Documentations](docs)
 
 
 # Examples
@@ -154,7 +154,7 @@ You can download latest stable version on SourceForge
    *Remarks: Verify if you can execute cmake --version in "Developer Command Prompt for VS 2017", if it's no, add cmake install directory to your path.*
 
 3. Install Doxygen
-   After CMake, to generate Switch documentation, you need to install the latest version Doxygen from http://www.stack.nl/~dimitri/doxygen/download.html
+   After CMake, to generate Switch documentation, you need to install the latest version Doxygen from [http://www.stack.nl/~dimitri/doxygen/download.html](http://www.stack.nl/~dimitri/doxygen/download.html)
    *Remarks: Verify if you can execute doxygen --version in "Developer Command Prompt for VS 2017", if it's no, add doxygen install directory to your path.*
 
 4. After installing Microsoft Visual Studio, Cmake and Doxygen, do the following in "Developer Command Prompt for VS 2017" to Build and install Switch :
@@ -171,7 +171,7 @@ install.bat
 
 * Switch installer set cmake variable CMAKE_INSTALL_PREFIX to "C:/usr/local" for generate, build and install Switch.
 * When install is complete you can find installed Switch files in folder "C:/usr/local".
-* To build your own project using Switch, don't miss to set cmake variable CMAKE_INSTALL_PREFIX to "C:/usr/local"; otherwise cmake don't find Switch libraries and include files. See cmake documentation (http://cmake.org/documentation) for more information.
+* To build your own project using Switch, don't miss to set cmake variable CMAKE_INSTALL_PREFIX to "C:/usr/local"; otherwise cmake don't find Switch libraries and include files. See cmake documentation ([http://cmake.org/documentation](http://cmake.org/documentation)) for more information.
 * type install /? to view usage help page.
 
 ## macOS 10.12 or later
@@ -182,7 +182,7 @@ install.bat
 
 2. Install Homebrew
    After Xcode, to build Switch, you need to install the latest version cmake, curl, doxygen, jpeg, pnglib and zlib, ... 
-   The easiest way to get this is from Homebrew (http://brew.sh/).
+   The easiest way to get this is from Homebrew ([http://brew.sh/](http://brew.sh/)).
 
 3. After installing brew, do the following in "Terminal" to Build and install Switch :
 
@@ -225,14 +225,14 @@ cd /home/YourName/Switch
    *Remarks: Verify if you can execute clang --version in terminal.*
 
 2. Install CMake 
-   After clang, to build Switch, you need to install the latest version cmake from https://cmake.org/download/
+   After clang, to build Switch, you need to install the latest version cmake from [https://cmake.org/download/](https://cmake.org/download/)
    *Remarks: Verify if you can execute cmake --version in terminal.*
 
 3. Install Doxygen
-   After CMake, to generate Switch documentation, you need to install the latest version Doxygen from http://www.stack.nl/~dimitri/doxygen/download.html
+   After CMake, to generate Switch documentation, you need to install the latest version Doxygen from [http://www.stack.nl/~dimitri/doxygen/download.html](http://www.stack.nl/~dimitri/doxygen/download.html)
    *Remarks: Verify if you can execute doxygen --version in terminal.*
 
-4. After installing Doxygen, you need to install gtkmm 3 on your system. See https://developer.gnome.org/gtkmm-tutorial/stable/chapter-installation.html for more information.
+4. After installing Doxygen, you need to install gtkmm 3 on your system. See [https://developer.gnome.org/gtkmm-tutorial/stable/chapter-installation.html](https://developer.gnome.org/gtkmm-tutorial/stable/chapter-installation.html) for more information.
   
 5. After installing gtkmm, do the following in "Terminal" to Build and install Switch :
   
