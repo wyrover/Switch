@@ -11,7 +11,14 @@ namespace {
 }
 
 TraceListenerCollection Trace::listeners  {DefaultTraceListener()};
+#if defined(_WIN32)
+#pragma warning(push)
+#pragma warning(disable:4592)
+#endif
 object Trace::lock;
+#if defined(_WIN32)
+#pragma warning(pop)
+#endif
 
 _property<bool> Trace::AutoFlush {
   [] {return autoFlush;},
