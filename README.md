@@ -1,4 +1,4 @@
-[![GitHub Logo](docs/Pictures/SwitchNativeC++port.png)](https://travis-ci.org/gammasoft71/Switch)
+[![GitHub Logo](docs/Pictures/SwitchNativeC++port.png)](https://gammasoft71.github.io/Switch)
 ____________________________________________________________________________________
 
 [![License: GPL v3](https://img.shields.io/badge/Language-c++17%20ready-brightgreen.svg)](docs/C++17Ready.md) 
