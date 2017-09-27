@@ -1,3 +1,4 @@
+@echo off
 REM Read this first :
 REM =================
 REM
@@ -14,7 +15,6 @@ REM
 REM If you are using Visual Studio 2015 Express Edition upgrade to Visual Studio 2017 
 REM Community Edition (download from https://www.visualstudio.com).
 
-@echo off
 echo Install Switch libraries version 0.3.4, copyright GAMMA Soft, 2017
 echo.
 
@@ -36,6 +36,20 @@ if "%1" == "" (
   set last_visual_version=true
 ) else {
   set last_visual_version=false
+)
+
+if ("%1" == "/DOC" (
+  set generate_doc=true
+) else if ("%2" == "/DOC" (
+  set generate_doc=true
+) if ("%2" == "/DOC" (
+  set generate_doc=true
+) if ("%3" == "/DOC" (
+  set generate_doc=true
+) if ("%4" == "/DOC" (
+  set generate_doc=true
+) else (
+  set generate_doc=false
 )
 
 if "%last_visual_version%" == "true" (

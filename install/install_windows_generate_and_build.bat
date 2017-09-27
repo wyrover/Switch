@@ -15,8 +15,11 @@ cmake %1 %2 -DCMAKE_INSTALL_PREFIX:STRING="%cmake_install_prefix_path%" ../../Th
 
 cd..
 cmake %1 %2 -DCMAKE_INSTALL_PREFIX:STRING="%cmake_install_prefix_path%" ..
-r%devenv% "Switch.sln" /project documentation /build Debug
-start Help/html/index.html
+if ("%genearte_doc%" == "true" (
+  %devenv% "Switch.sln" /project documentation /build Debug
+  start Help/html/index.html
+)
+
 %devenv% "Switch.sln" /project install /build Debug
 %devenv% "Switch.sln" /project install /build Release
 
