@@ -42,11 +42,11 @@ if "%1" == "/DOC" (
   set generate_doc=true
 ) else if "%2" == "/DOC" (
   set generate_doc=true
-) if "%2" == "/DOC" (
+) else if "%2" == "/DOC" (
   set generate_doc=true
-) if "%3" == "/DOC" (
+) else if "%3" == "/DOC" (
   set generate_doc=true
-) if "%4" == "/DOC" (
+) else if "%4" == "/DOC" (
   set generate_doc=true
 ) else (
   set generate_doc=false
