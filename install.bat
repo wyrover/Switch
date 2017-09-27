@@ -20,22 +20,22 @@ echo.
 
 if "%1" == "" (
   set last_visual_version=true
-) else if not "%1" == "/VCPKG" (
-  set last_visual_version=true
-) else if not "%1" == "/VS:2017" (
-  set last_visual_version=true
-) else if not "%1" == "/VS:2017:WIN32" (
-  set last_visual_version=true
-) else if not "%1" == "/VS:2017:WIN64" (
-  set last_visual_version=true
-) else if not "%1" == "/VS:2015" (
-  set last_visual_version=true
-) else if not "%1" == "/VS:2015:WIN32" (
-  set last_visual_version=true
-) else if not "%1" == "/VS:2015:WIN64" (
-  set last_visual_version=true
-) else {
+) else if "%1" == "/VCPKG" (
   set last_visual_version=false
+) else if "%1" == "/VS:2017" (
+  set last_visual_version=false
+) else if "%1" == "/VS:2017:WIN32" (
+  set last_visual_version=false
+) else if "%1" == "/VS:2017:WIN64" (
+  set last_visual_version=false
+) else if "%1" == "/VS:2015" (
+  set last_visual_version=false
+) else if "%1" == "/VS:2015:WIN32" (
+  set last_visual_version=false
+) else if "%1" == "/VS:2015:WIN64" (
+  set last_visual_version=false
+) else {
+  set last_visual_version=true
 )
 
 if "%1" == "/DOC" (
