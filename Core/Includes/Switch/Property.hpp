@@ -6,15 +6,15 @@
 #include "__opaque_function_pointer__.hpp"
 
 /// @cond
-struct __readonly__ {};
-struct __writeonly__ {};
-struct __readwrite__ {};
+struct _readonly {};
+struct _writeonly {};
+struct _readwrite {};
 
-template <class T, class Attribute = __readwrite__>
-class __property__;
+template <class T, class Attribute = _readwrite>
+class _property;
 
 template <class T, class Attribute>
-class __property__ : public Attribute {
+class _property : public Attribute {
   // Don't use std::function<> because the build became very slow
   //using Getter = std::function<T()>;
   //using Setter = std::function<void(T)>;
@@ -22,20 +22,20 @@ class __property__ : public Attribute {
   using Setter = __opaque_function_pointer__<void, T>;
   
 public:
-  __property__(const Getter& getter, const Setter& setter) : getter(getter), setter(setter) {}
+  _property(const Getter& getter, const Setter& setter) : getter(getter), setter(setter) {}
   
   T Get() const {return this->getter();}
   T operator ()() const {return this->getter();}
   
   operator T () const {return this->getter();}
-  __property__& operator =(const __property__& __property__) {this->setter(__property__.getter()); return *this;}
+  _property& operator =(const _property& _property) {this->setter(_property.getter()); return *this;}
   bool operator ==(T value) const {return this->getter() == value;}
   bool operator !=(T value) const {return this->getter() != value;}
   
   T Set(T value) {this->setter(value); return this->getter();}
   T operator ()(T value) {this->setter(value); return this->getter();}
   
-  __property__& operator =(T value) {this->setter(value); return *this;}
+  _property& operator =(T value) {this->setter(value); return *this;}
   void operator +=(T value) {this->setter(this->getter() + value);}
   void operator -=(T value) {this->setter(this->getter() - value);}
   void operator *=(T value) {this->setter(this->getter() * value);}
@@ -48,20 +48,20 @@ public:
   void operator >>=(T value) {this->setter(this->getter() >> value);}
   
 private:
-  __property__(const __property__& __property__)  = delete;
+  _property(const _property& _property)  = delete;
   Getter getter;
   Setter setter;
 };
 
 template <class T>
-class __property__<T, __readonly__> : public __readonly__ {
+class _property<T, _readonly> : public _readonly {
   // Don't use std::function<> because the build became very slow
   //using Getter = std::function<T()>;
   using Getter = __opaque_function_pointer__<T>;
   
 public:
-  __property__(const Getter& getter) : getter(getter) {}
-  __property__& operator =(const __property__& __property__) {return *this;}
+  _property(const Getter& getter) : getter(getter) {}
+  _property& operator =(const _property& _property) {return *this;}
   
   T Get() const {return this->getter();}
   T operator ()() const {return this->getter();}
@@ -70,46 +70,46 @@ public:
   bool operator !=(T value) const {return this->getter() != value;}
   
 private:
-  __property__(const __property__& __property__)  = delete;
+  _property(const _property& _property)  = delete;
   Getter getter;
 };
 
 template <class T>
-class __property__<T, __writeonly__> : public __writeonly__ {
+class _property<T, _writeonly> : public _writeonly {
   // Don't use std::function<> because the build became very slow
   //using Setter = std::function<void(T)>;
   using Setter = __opaque_function_pointer__<void, T>;
   
 public:
-  __property__(const Setter& setter) : setter(setter) {}
-  __property__& operator =(const __property__& __property__) {return *this;}
+  _property(const Setter& setter) : setter(setter) {}
+  _property& operator =(const _property& _property) {return *this;}
   
   void Set(T value) {this->setter(value);}
   void operator ()(T value) {this->setter(value);}
   void operator =(T value) {this->setter(value);}
   
 private:
-  __property__(const __property__& __property__)  = delete;
+  _property(const _property& _property)  = delete;
   Setter setter;
 };
 /// @endcond
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
-  /// @brief #_readonly keyword represent a __property__ read only attribute.
+  /// @brief #_readonly keyword represent a _property read only attribute.
   /// @ingroup Keywords
   #define _readonly \
-  __readonly__
+  _readonly
   
   /// @brief #_readwrite keyword represent a #_property read write attribute.
   /// @ingroup Keywords
   #define _readwrite \
-  __readwrite__
+  _readwrite
   
   /// @brief #_writeonly keyword represent a #_property write only attribute.
   /// @ingroup Keywords
   #define _writeonly \
-  __writeonly__
+  _writeonly
   
   /// @brief A #_property is a member that provides a flexible mechanism to read, write, or compute the value of a private field. Properties can be used as if they are public data members, but they are actually special methods called accessors. This enables data to be accessed easily and still helps promote the safety and flexibility of methods.
   /// @remarks The copy constructor is deleted. So the copy constructor of the owner class must be specified (the implicit or default copy contructor doesn't build).
@@ -118,7 +118,7 @@ namespace Switch {
   /// @include Properties.cpp
   /// @ingroup Keywords
   #define _property \
-  __property__
+  _property
   
   /// @brief The get keyword defines an accessor method in a #_property or indexer that retrieves the value of the #_property or the indexer element.
   /// @par Examples
