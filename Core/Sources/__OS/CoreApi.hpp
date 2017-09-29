@@ -304,6 +304,9 @@ namespace __OS {
         static uint32 Decode(byte b1, byte b2, byte b3, byte b4, bool big_endian);
       };
 
+      static bool IsDigit(uint32 c);
+      static bool IsAlpha(uint32 c);
+      static bool IsPunctuation(uint32 c);
       static uint32 ToLower(uint32 c);
       static uint32 ToUpper(uint32 c);
       static uint32 ToTitle(uint32 c);
