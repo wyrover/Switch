@@ -1,4 +1,4 @@
-﻿#include <Switch/System/Text/ASCIIEncoding.hpp>
+#include <Switch/System/Text/ASCIIEncoding.hpp>
 #include <Switch/System/Text/ANSIEncoding.hpp>
 #include <Switch/System/Text/UnicodeEncoding.hpp>
 #include <Switch/System/Text/UTF8Encoding.hpp>
@@ -152,9 +152,6 @@ TEST(Decoder, CodePointDefined_GetCodePoint_88592_charSpecialT) {
   EXPECT_EQ(charSpecialT, decoder.CodePoint());
 }
 
-//_____________________________________________________________________________
-//                                                                         UTF8
-
 TEST(Decoder, CodePointDefined_GetCodePoint_UTF8_charA) {
   UTF8Encoding::Decoder decoder;
   EXPECT_FALSE(decoder.CodePointDefined());
@@ -241,9 +238,6 @@ TEST(Decoder, CodePointDefined_GetCodePoint_UTF8_koala) {
   EXPECT_EQ(koala, decoder.CodePoint());
 }
 
-//_____________________________________________________________________________
-//                                                                        UTF16
-
 TEST(Decoder, CodePointDefined_GetCodePoint_UTF16_charA) {
   UnicodeEncoding::Decoder decoder(false);
   EXPECT_FALSE(decoder.CodePointDefined());
@@ -328,9 +322,6 @@ TEST(Decoder, CodePointDefined_GetCodePoint_UTF16_koala) {
   EXPECT_EQ(koala, decoder.CodePoint());
 }
 
-//_____________________________________________________________________________
-//                                                                      UTF16BE
-
 TEST(Decoder, CodePointDefined_GetCodePoint_UTF16BE_charA) {
   UnicodeEncoding::Decoder decoder(true);
   EXPECT_FALSE(decoder.CodePointDefined());
@@ -414,9 +405,6 @@ TEST(Decoder, CodePointDefined_GetCodePoint_UTF16BE_koala) {
   EXPECT_TRUE(decoder.CodePointDefined());
   EXPECT_EQ(koala, decoder.CodePoint());
 }
-
-//_____________________________________________________________________________
-//                                                                        UTF32
 
 TEST(Decoder, CodePointDefined_GetCodePoint_UTF32_charA) {
   UTF32Encoding::Decoder decoder(false);
@@ -529,9 +517,6 @@ TEST(Decoder, CodePointDefined_GetCodePoint_UTF32_koala) {
   EXPECT_TRUE(decoder.CodePointDefined());
   EXPECT_EQ(koala, decoder.CodePoint());
 }
-
-//_____________________________________________________________________________
-//                                                                        UTF32
 
 TEST(Decoder, CodePointDefined_GetCodePoint_UTF32BE_charA) {
   UTF32Encoding::Decoder decoder(true);

@@ -1,13 +1,7 @@
-﻿#include "../../../../Includes/Switch/System/Text/ANSIEncoding.hpp"
+#include "../../../../Includes/Switch/System/Text/ANSIEncoding.hpp"
 
 using namespace System;
 using namespace System::Text;
-
-//___________________________________________________________________________
-//                                                                  ENCODINGS
-
-//___________________________________________________________________________
-//                                                               ANSIEncoding
 
 ANSIEncoding::ANSIEncoding() : Encoding(0) {
   
@@ -60,9 +54,6 @@ bool ANSIEncoding::Equals(const object& obj) const {
   return this->codePage == enc->codePage;
 }
 
-//_____________________________________________________________________________
-//                                                          CodePage437Encoding
-
 CodePage437Encoding::CodePage437Encoding() : ANSIEncoding(437) {
   
 }
@@ -86,9 +77,6 @@ int32 CodePage437Encoding::GetBytes(char32 c, byte bytes[], int32 bytesLength, i
   encoder.Encode(c, &bytes[index]);
   return count;
 }
-
-//_____________________________________________________________________________
-//                                                        CodePage28591Encoding
 
 CodePage28591Encoding::CodePage28591Encoding() : ANSIEncoding(28591) {
   
@@ -115,8 +103,6 @@ int32 CodePage28591Encoding::GetBytes(char32 c, byte bytes[], int32 bytesLength,
 }
 
 
-//_____________________________________________________________________________
-//                                                        CodePage28592Encoding
 
 CodePage28592Encoding::CodePage28592Encoding() : ANSIEncoding(28592) {
   
@@ -141,12 +127,6 @@ int32 CodePage28592Encoding::GetBytes(char32 c, byte bytes[], int32 bytesLength,
   encoder.Encode(c, &bytes[index]);
   return count;
 }
-
-//___________________________________________________________________________
-//                                                                   ENCODERS
-
-//_____________________________________________________________________________
-//                                                                  ANSIEncoder
 
 ANSIEncoding::Encoder::Encoder(int32 cp) : Encoding::Encoder() {
   codePage = cp;
@@ -174,10 +154,6 @@ void ANSIEncoding::Encoder::Encode(char32 codePoint, byte* bytes) const {
 String ANSIEncoding::Encoder::ToString() const {
   return String::Format("Code Page {0} Encoder", codePage);
 }
-
-
-//_____________________________________________________________________________
-//                                                         CodePage437::Encoder
 
 byte CodePage437Encoding::Encoder::GetByte(char32 cp) {
   if (cp < 0x80) return static_cast<byte>(cp);
@@ -352,18 +328,12 @@ byte CodePage437Encoding::Encoder::GetByte(char32 cp) {
   return '?';
 }
 
-//_____________________________________________________________________________
-//                                                       CodePage28591::Encoder
-
 byte CodePage28591Encoding::Encoder::GetByte(char32 cp) {
   if (cp > 0xFF)
     return '?';
   return static_cast<byte>(cp);
 
 }
-
-//_____________________________________________________________________________
-//                                                         CodePage28592::Encoder
 
 byte CodePage28592Encoding::Encoder::GetByte(char32 cp) {
   if (cp < 0xA1) return static_cast<byte>(cp);
@@ -467,12 +437,6 @@ byte CodePage28592Encoding::Encoder::GetByte(char32 cp) {
   return '?';
 }
 
-//_____________________________________________________________________________
-//                                                                     DECODERS
-
-//_____________________________________________________________________________
-//                                                                  ANSIDecoder
-
 ANSIEncoding::Decoder::Decoder(const ANSIEncoding::Decoder& b) : Encoding::Decoder(b) {
   codePage = b.codePage;
 }
@@ -502,9 +466,6 @@ char32 ANSIEncoding::Decoder::GetCodePoint(byte b, const std::vector<char32>& co
   if (static_cast<char32>(b) < unchanged) return b;
   return codePoints[b - unchanged];
 }
-
-//_____________________________________________________________________________
-//                                                                 CP437Decoder
 
 char32 CodePage437Encoding::Decoder::GetCodePoint(byte b) {
   if (b < 0x80) return b;
@@ -641,15 +602,9 @@ char32 CodePage437Encoding::Decoder::GetCodePoint(byte b) {
   return 0;
 }
 
-//_____________________________________________________________________________
-//                                                               CP28591Decoder
-
 char32 CodePage28591Encoding::Decoder::GetCodePoint(byte b) {
   return b;
 }
-
-//_____________________________________________________________________________
-//                                                               CP28592Decoder
 
 char32 CodePage28592Encoding::Decoder::GetCodePoint(byte b) {
   if (b < 0xA1) return b;

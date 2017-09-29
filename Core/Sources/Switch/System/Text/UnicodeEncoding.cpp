@@ -4,9 +4,6 @@
 using namespace System;
 using namespace System::Text;
 
-//_____________________________________________________________________________
-//                                                                 UTF16Encoder
-
 UnicodeEncoding::Encoder& UnicodeEncoding::Encoder::operator =(const UnicodeEncoding::Encoder& b) {
   Encoding::Encoder::operator =(b);
   this->bigEndian = b.bigEndian;
@@ -27,9 +24,6 @@ String UnicodeEncoding::Encoder::ToString() const {
   else
     return "UnicodeEncoder";
 }
-
-//_____________________________________________________________________________
-//                                                                 UTF16Decoder
 
 UnicodeEncoding::Decoder& UnicodeEncoding::Decoder::operator =(const UnicodeEncoding::Decoder& b) {
   Encoding::Decoder::operator =(b);
@@ -65,9 +59,6 @@ String UnicodeEncoding::Decoder::ToString() const {
   else
     return "UnicodeDecoder";
 }
-
-//_____________________________________________________________________________
-//                                                              UnicodeEncoding
 
 UnicodeEncoding::UnicodeEncoding()
 : Encoding(1200) {

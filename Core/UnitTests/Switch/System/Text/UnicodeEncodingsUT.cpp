@@ -239,9 +239,6 @@ namespace {
   
   TYPED_TEST_CASE(Encoding, TestedCodePages);
   
-  //___________________________________________________________________________
-  //                                    virtual Array<byte> GetPreamble() const
-  
   TEST(EncodingTest, GetPreamble___CodePage437) {
     Text::CodePage437Encoding encoding;
     EXPECT_EQ(0, encoding.GetPreamble().Length);
@@ -306,50 +303,30 @@ namespace {
     EXPECT_EQ(0xFFFE, bom.value);
   }
   
-  //___________________________________________________________________________
-  //                                          virtual int32 GetCodePage() const
-  
   TYPED_TEST(Encoding, GetCodePage) {
     EXPECT_EQ(TypeParam::codePage, TypeParam::encoding.GetCodePage());
   }
-  
-  //___________________________________________________________________________
-  //                                          virtual bool IsSingleByte() const
   
   TYPED_TEST(Encoding, IsSingleByte) {
     EXPECT_EQ(TypeParam::isSingleByte, TypeParam::encoding.IsSingleByte());
   }
   
-  //___________________________________________________________________________
-  //                                     virtual String GetEncodingName() const
-  
   TYPED_TEST(Encoding, GetEncodingName) {
     EXPECT_EQ(TypeParam::encodingName, TypeParam::encoding.GetEncodingName());
   }
   
-  //___________________________________________________________________________
-  //                                                    bool IsReadOnly() const
-  
-  TYPED_TEST(Encoding, IsReadOnly) {
+ TYPED_TEST(Encoding, IsReadOnly) {
     EXPECT_TRUE(TypeParam::encoding.IsReadOnly());
   }
   
-  //___________________________________________________________________________
-  //                               virtual bool Equals(const object& obj) const
   TYPED_TEST(Encoding, Equals) {
     refptr<Text::Encoding> byCodePage = Text::Encoding::CreateEncoding(TypeParam::codePage);
     EXPECT_TRUE(TypeParam::encoding.Equals(*byCodePage));
   }
   
-  //___________________________________________________________________________
-  //                                            bool IsAlwaysNormalized() const
-  
   TYPED_TEST(Encoding, IsAlwaysNormalized) {
     EXPECT_FALSE(TypeParam::encoding.IsAlwaysNormalized());
   }
-  
-  //___________________________________________________________________________
-  //                                 virtual int32 GetByteCount(char32 c) const
   
   TYPED_TEST(Encoding, GetByteCount___A) {
     EXPECT_EQ(Encoding<TypeParam>::charA.Size(), TypeParam::encoding.GetByteCount(Encoding<TypeParam>::charA.Character()));
@@ -383,9 +360,6 @@ namespace {
     EXPECT_EQ(Encoding<TypeParam>::koala.Size(), TypeParam::encoding.GetByteCount(Encoding<TypeParam>::koala.Character()));
   }
   
-  //___________________________________________________________________________
-  //            int32 GetByteCount(const char32 chars[], int32 charsSize) const
-  
   TYPED_TEST(Encoding, GetByteCount_Chars) {
     EncodingUT::UnicodeSequence sequence =
     Encoding<TypeParam>::charA +
@@ -409,9 +383,6 @@ namespace {
     EXPECT_THROW(TypeParam::encoding.GetByteCount(chars, -1), ArgumentException);
   }
   
-  //___________________________________________________________________________
-  // int32 GetByteCount(const char32 chars[], int32 charsSize, int32 index, int32 count) const
-  
   TYPED_TEST(Encoding, GetByteCount_Chars_Index_Count) {
     EncodingUT::UnicodeSequence sequence = Encoding<TypeParam>::charA + Encoding<TypeParam>::cjk + Encoding<TypeParam>::koala;
     EXPECT_EQ(Encoding<TypeParam>::charA.Size(), TypeParam::encoding.GetByteCount(sequence.Chars(), 3, 0, 1));
@@ -432,9 +403,6 @@ namespace {
     EXPECT_THROW(TypeParam::encoding.GetByteCount(sequence.Chars(), 3, 3, 1), ArgumentOutOfRangeException);
   }
   
-  //___________________________________________________________________________
-  //                                  int32 GetByteCount(const String& s) const
-  
   TYPED_TEST(Encoding, GetByteCount_String) {
     EXPECT_EQ(Encoding<TypeParam>::charA.Size(), TypeParam::encoding.GetByteCount(Encoding<TypeParam>::charA.ToString()));
     EXPECT_EQ(Encoding<TypeParam>::koala.Size(), TypeParam::encoding.GetByteCount(Encoding<TypeParam>::koala.ToString()));
@@ -447,9 +415,6 @@ namespace {
     EXPECT_EQ(0, TypeParam::encoding.GetByteCount(empty));
   }
   
-  //___________________________________________________________________________
-  //                       virtual int32 GetMaxByteCount(int32 charCount) const
-  
   TYPED_TEST(Encoding, GetMaxByteCount) {
     EXPECT_EQ(0, TypeParam::encoding.GetMaxByteCount(0));
     EXPECT_EQ(TypeParam::maxByteSize, TypeParam::encoding.GetMaxByteCount(1));
@@ -460,9 +425,6 @@ namespace {
       EXPECT_THROW(TypeParam::encoding.GetMaxByteCount((Int32::MaxValue/2)+1), ArgumentOutOfRangeException);
     }
   }
-  
-  //___________________________________________________________________________
-  //                       virtual int32 GetMaxCharCount(int32 byteCount) const
   
   TYPED_TEST(Encoding, GetMaxCharCount) {
     EXPECT_EQ(0, TypeParam::encoding.GetMaxCharCount(0));
@@ -481,9 +443,6 @@ namespace {
       EXPECT_EQ(0, TypeParam::encoding.GetMaxCharCount(3));
     }
   }
-  
-  //___________________________________________________________________________
-  //       int32 GetBytes(const String& s, byte bytes[], int32 bytesSize) const
   
   TYPED_TEST(Encoding, GetBytes_String_Bytes___Exact_Buffer) {
     EncodingUT::UnicodeSequence sequence = Encoding<TypeParam>::charA + Encoding<TypeParam>::cjk + Encoding<TypeParam>::koala;
@@ -513,9 +472,6 @@ namespace {
     EXPECT_EQ(0, TypeParam::encoding.GetBytes(str, bytes, 10));
     
   }
-  
-  //_______________________________________________________________________________________________
-  //     int32 GetBytes(const char32 chars[], int32 charsSize, byte bytes[], int32 bytesSize) const
   
   TYPED_TEST(Encoding, GetBytes_Chars_Bytes) {
     EncodingUT::UnicodeSequence sequence = Encoding<TypeParam>::charA + Encoding<TypeParam>::cjk + Encoding<TypeParam>::koala;
@@ -562,9 +518,6 @@ namespace {
     EXPECT_THROW(TypeParam::encoding.GetBytes(chars, 1, bytes, -1), ArgumentException);
   }
   
-  //_______________________________________________________________________________________________
-  //                             Array<byte> GetBytes(const char32 chars[], int32 charsSize) const
-  
   TYPED_TEST(Encoding, GetBytes_Array) {
     EncodingUT::UnicodeSequence sequence = Encoding<TypeParam>::charA + Encoding<TypeParam>::cjk + Encoding<TypeParam>::koala;
     Array<byte> bytes = TypeParam::encoding.GetBytes(sequence.Chars(), 3);
@@ -581,9 +534,6 @@ namespace {
   TYPED_TEST(Encoding, GetBytes_Array_Null) {
     EXPECT_THROW(TypeParam::encoding.GetBytes(null, 1), ArgumentNullException);
   }
-  
-  //___________________________________________________________________________
-  //                               Array<byte> GetBytes(const String& s) const
   
   TYPED_TEST(Encoding, GetBytes_String_A) {
     EncodingUT::EXPECT_BYTES(Encoding<TypeParam>::charA.Bytes(), Encoding<TypeParam>::charA.Size(), TypeParam::encoding.GetBytes(Encoding<TypeParam>::charA.ToString()));
@@ -612,9 +562,6 @@ namespace {
     EXPECT_EQ(0, TypeParam::encoding.GetBytes(s).Length);
   }
   
-  //___________________________________________________________________________
-  // Array<byte> GetBytes(const char32 chars[], int32 charsSize, int32 index, int32 count) const
-  
   TYPED_TEST(Encoding, GetBytes_Array_Index_Count_1char32_Exceptions) {
     EXPECT_THROW(TypeParam::encoding.GetBytes(Encoding<TypeParam>::cjk.Chars(), Encoding<TypeParam>::cjk.Count() , -1, 0), ArgumentOutOfRangeException);
     EXPECT_THROW(TypeParam::encoding.GetBytes(Encoding<TypeParam>::cjk.Chars(), Encoding<TypeParam>::cjk.Count(), 0, -1), ArgumentOutOfRangeException);
@@ -628,9 +575,6 @@ namespace {
   TYPED_TEST(Encoding, GetBytes_Array_index_count_Null) {
     EXPECT_THROW(TypeParam::encoding.GetBytes(null, 1, 0, 0), ArgumentNullException);
   }
-  
-  //_______________________________________________________________________________________________
-  // int32 GetBytes(const char32 chars[], int32 charsSize, int32 index, int32 count, byte bytes[], int32 bytesSize) const
   
   TYPED_TEST(Encoding, GetBytes_Chars_Index_Count_Bytes) {
     EncodingUT::UnicodeSequence sequence = Encoding<TypeParam>::charA + Encoding<TypeParam>::charSpecialT + Encoding<TypeParam>::fullBlock + Encoding<TypeParam>::koala;
@@ -735,9 +679,6 @@ namespace {
     EXPECT_EQ(0, TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), index, 0, (byte*)bytes.Data(), bytesSize));
   }
   
-  //___________________________________________________________________________
-  // int32 GetBytes(const char32 chars[], int32 charsSize, int32 charIndex, int32 charCount, byte bytes[], int32 bytesSize, int32 byteIndex) const
-  
   TYPED_TEST(Encoding, GetBytes_Chars_Index_Count_Bytes_Index___Chars_Is_Null) {
     char32* chars = null;
     byte bytes[1];
@@ -812,9 +753,6 @@ namespace {
     EXPECT_THROW(TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), 4, 0, bytes, 3, 0),ArgumentException);
   }
   
-  //_______________________________________________________________________________________________
-  //int32 GetBytes(const String& s, int32 charIndex, int32 charCount, byte bytes[], int32 bytesLength, int32 byteIndex) const
-  
   TYPED_TEST(Encoding, GetBytes_String_Index_Count_Bytes_Index___Bytes_Is_Null) {
     String str("ok");
     byte* bytes = null;
@@ -883,9 +821,6 @@ namespace {
     EXPECT_THROW(TypeParam::encoding.GetBytes(sequence.ToString(), 4, 0, bytes, 3, 0), ArgumentException);
   }
   
-  //_______________________________________________________________________________________________
-  //         virtual int32 GetBytes(char32 c, byte bytes[], int32 bytesSize, int32 byteIndex) const
-  
   TYPED_TEST(Encoding, GetBytes_char32_Bytes_Index) {
     EncodingUT::UnicodeSequence sequence = Encoding<TypeParam>::charA + Encoding<TypeParam>::charAE + Encoding<TypeParam>::charSpecialT + Encoding<TypeParam>::sigma + Encoding<TypeParam>::syriacSemkath + Encoding<TypeParam>::fullBlock + Encoding<TypeParam>::cjk + Encoding<TypeParam>::koala;
     int32 size = sequence.Size();
@@ -926,9 +861,6 @@ namespace {
     
     EncodingUT::EXPECT_BYTES(sequence.Bytes(), sequence.Size(), (byte*)bytes.Data());
   }
-  
-  //_______________________________________________________________________________________________
-  //                         Array<byte> GetBytes(const String& s, int32 index, int32 count) const
   
   TYPED_TEST(Encoding, GetBytes_String_Index_Count___String_Is_Empty) {
     EXPECT_EQ(0, TypeParam::encoding.GetBytes("", 0, 0).Length);
@@ -992,9 +924,6 @@ namespace {
     
   }
   
-  //_______________________________________________________________________________________________
-  //                                  int32 GetCharCount(const byte bytes[], int32 bytesSize) const
-  
   using UnicodeCharacters = Array<EncodingUT::UnicodeCharacter>;
   
   int32 GetCompleteChars(const UnicodeCharacters& chars, int32 index) {
@@ -1044,17 +973,11 @@ namespace {
     EXPECT_THROW(TypeParam::encoding.GetCharCount(null, 1), ArgumentNullException);
   }
   
-  //_______________________________________________________________________________________________
-  // virtual int32 GetCharCount(const byte bytes[], int32 bytesSize, int32 index, int32 count) const
-  
   TYPED_TEST(Encoding, GetCharCount_byte_array_index_count_null) {
     EXPECT_EQ(0, TypeParam::encoding.GetCharCount(null, 0, 0, 0));
     EXPECT_THROW(TypeParam::encoding.GetCharCount(null, 0, 0, 1), ArgumentOutOfRangeException);
     EXPECT_THROW(TypeParam::encoding.GetCharCount(null, 1, 0, 1), ArgumentNullException);
   }
-  
-  //_______________________________________________________________________________________________
-  //                             Array<char32> GetChars(const byte bytes[], int32 bytesSize) const
   
   TYPED_TEST(Encoding, GetChars_Bytes___BytesEmpty) {
     byte bytes[1] = { 32 };
@@ -1076,9 +999,6 @@ namespace {
     EncodingUT::EXPECT_CHARS(sequence.DecodedChars(), 4,
                              TypeParam::encoding.GetChars(sequence.Bytes(), Encoding<TypeParam>::charA.Size() + Encoding<TypeParam>::charAE.Size() + Encoding<TypeParam>::sigma.Size() + Encoding<TypeParam>::fullBlock.Size()));
   }
-  
-  //_______________________________________________________________________________________________
-  //     int32 GetChars(const byte bytes[], int32 bytesSize, char32 chars[], int32 charsSize) const
   
   TYPED_TEST(Encoding, GetChars_Bytes_Chars) {
     EncodingUT::UnicodeSequence sequence = Encoding<TypeParam>::charA + Encoding<TypeParam>::charAE + Encoding<TypeParam>::cjk + Encoding<TypeParam>::koala;
@@ -1131,9 +1051,6 @@ namespace {
     char32 chars[1];
     EXPECT_THROW(TypeParam::encoding.GetChars(bytes, 1, chars, -1), ArgumentException);
   }
-  
-  //_______________________________________________________________________________________________
-  // int32 GetChars(const byte bytes[], int32 bytesSize, int32 index, int32 count, char32 chars[], int32 charsSize) const
   
   TYPED_TEST(Encoding, GetChars_Bytes_Index_Count_Chars___Bytes_Is_Null) {
     byte* bytes = null;
@@ -1253,9 +1170,6 @@ namespace {
     }
   }
   
-  //______________________________________________________________________________________________
-  //  Array<char32> GetChars(const byte bytes[], int32 bytesSize, int32 index, int32 count) const
-  
   TYPED_TEST(Encoding, GetChars_Bytes_Index_Count___Bytes_Is_Null) {
     byte* bytes = null;
     EXPECT_THROW(TypeParam::encoding.GetChars(bytes, 1, 0, 0), ArgumentNullException);
@@ -1335,9 +1249,6 @@ namespace {
       EXPECT_THROW(TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), i, (sequence.Size()-i)+1), ArgumentOutOfRangeException);
     }
   }
-  
-  //__________________________________________________________________________________________________________________________________________________
-  // int32 GetChars(const byte bytes[], int32 bytesLength, int32 byteIndex, int32 byteCount, char32 chars[], int32 charsLength, int32 charIndex) const
   
   TYPED_TEST(Encoding, GetChars_Bytes_Index_Count_Chars_Index) {
     EncodingUT::UnicodeSequence sequence = Encoding<TypeParam>::charA + Encoding<TypeParam>::charAE + Encoding<TypeParam>::charSpecialT + Encoding<TypeParam>::sigma + Encoding<TypeParam>::syriacSemkath + Encoding<TypeParam>::fullBlock + Encoding<TypeParam>::cjk + Encoding<TypeParam>::koala;
@@ -1457,9 +1368,6 @@ namespace {
     }
   }
   
-  //_______________________________________________________________________________________________
-  //                                    string GetString(const byte bytes[], int32 bytesSize) const
-  
   String FromCharactersToDecodedString(UnicodeCharacters& characters, int32 index, int32 count) {
     String concat;
     for (EncodingUT::UnicodeCharacter character : characters) {
@@ -1507,9 +1415,6 @@ namespace {
     EXPECT_THROW(TypeParam::encoding.GetString(null, -1), ArgumentException);
   }
   
-  //_______________________________________________________________________________________________
-  //          string GetString(const byte bytes[], int32 bytesSize, int32 index, int32 count) const
-  
   TYPED_TEST(Encoding, GetString_Bytes_Index_Count___Index_Is_Zero) {
     UnicodeCharacters chars = {Encoding<TypeParam>::charA, Encoding<TypeParam>::charAE, Encoding<TypeParam>::charSpecialT, Encoding<TypeParam>::sigma, Encoding<TypeParam>::syriacSemkath, Encoding<TypeParam>::fullBlock, Encoding<TypeParam>::cjk, Encoding<TypeParam>::koala};
     EncodingUT::UnicodeSequence sequence(chars);
@@ -1546,9 +1451,6 @@ namespace {
     byte bytes[1] = { 32 };
     EXPECT_THROW(TypeParam::encoding.GetString(bytes, 1, 0, -1), ArgumentOutOfRangeException);
   }
-  
-  //_____________________________________________________________________________________________
-  //                                                              virtual String ToString() const
   
   TYPED_TEST(Encoding, ToString) {
     EXPECT_EQ(TypeParam::encodingName, TypeParam::encoding.GetEncodingName());

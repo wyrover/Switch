@@ -106,9 +106,6 @@ namespace Switch {
         /// @endcond
       };
       
-      //_______________________________________________________________________
-      //                                                            CodePage437
-      
       class CodePage437Encoding : public ANSIEncoding {
       public:
         CodePage437Encoding();
@@ -129,9 +126,6 @@ namespace Switch {
           byte GetByte(char32 cp) override;
         };
       };
-      
-      //_______________________________________________________________________
-      //                                                          CodePage28591
       
       class CodePage28591Encoding : public ANSIEncoding {
       public:
@@ -154,9 +148,6 @@ namespace Switch {
         };
       };
       
-      //_______________________________________________________________________
-      //                                                          CodePage28592
-      
       class CodePage28592Encoding : public ANSIEncoding {
       public:
         CodePage28592Encoding();
@@ -177,7 +168,6 @@ namespace Switch {
           byte GetByte(char32 cp) override;
         };
       };
-      
     }
   }
 }

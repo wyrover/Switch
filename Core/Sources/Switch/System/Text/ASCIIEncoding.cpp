@@ -3,15 +3,10 @@
 using namespace System;
 using namespace System::Text;
 
-//_____________________________________________________________________________
-//                                                                      Decoder
-
 ASCIIEncoding::Decoder::Decoder() : Encoding::Decoder() {
-  
 }
 
 ASCIIEncoding::Decoder::Decoder(const ASCIIEncoding::Decoder& b) : Encoding::Decoder(b) {
-  
 }
 
 ASCIIEncoding::Decoder& ASCIIEncoding::Decoder::operator =(const ASCIIEncoding::Decoder& b) {
@@ -33,9 +28,6 @@ String ASCIIEncoding::Decoder::ToString() const {
   return "ASCIIDecoder";
 }
 
-//_____________________________________________________________________________
-//                                                                      Encoder
-
 ASCIIEncoding::Encoder& ASCIIEncoding::Encoder::operator =(const ASCIIEncoding::Encoder& b) {
   Encoding::Encoder::operator =(b);
   return *this;
@@ -53,17 +45,10 @@ String ASCIIEncoding::Encoder::ToString() const {
   return "ASCIIEncoder";
 }
 
-//_____________________________________________________________________________
-//                                                                ASCIIEncoding
-
-ASCIIEncoding::ASCIIEncoding()
-: Encoding(20127) {
-  
+ASCIIEncoding::ASCIIEncoding() : Encoding(20127) {
 }
 
-ASCIIEncoding::ASCIIEncoding(const ASCIIEncoding& encoding)
-: Encoding(encoding) {
-  
+ASCIIEncoding::ASCIIEncoding(const ASCIIEncoding& encoding) : Encoding(encoding) {
 }
 
 ASCIIEncoding& ASCIIEncoding::operator =(const ASCIIEncoding& encoding) {

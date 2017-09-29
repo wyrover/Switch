@@ -1296,9 +1296,6 @@ String System::operator +(const String& str, ullong value) {
   
 }
 
-//_____________________________________________________________________________
-//                                                                   Enumerator
-
 String::Enumerator::Enumerator(const String& str) : string(&str.string), iterator(str.string.begin()) {
   Reset();
 }
@@ -1360,10 +1357,6 @@ bool String::Enumerator::Equals(const Object& obj) const {
   if (this->string != other->string) return false;
   return this->iterator == other->iterator;
 }
-
-
-//_____________________________________________________________________________
-//                                                           Reverse Enumerator
 
 String::ReverseEnumerator::ReverseEnumerator(const String& str) : string(&str.string), iterator(str.string.rbegin()) {
   Reset();

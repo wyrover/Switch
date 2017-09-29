@@ -291,9 +291,6 @@ namespace Switch {
         /// @exception System::ArgumentNullException encoding is null.
         Encoding(const Encoding& encoding);
 
-        //_____________________________________________________________________
-        //                                                              Encoder
-
         class Encoder _abstract {
         public:
           Encoder() { }
@@ -312,9 +309,6 @@ namespace Switch {
           virtual void Encode(char32 c, byte* bytes) const = 0;
           virtual String ToString() const = 0;
         };
-
-        //_____________________________________________________________________
-        //                                                              Decoder
 
         class Decoder _abstract {
         public:

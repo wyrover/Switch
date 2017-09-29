@@ -4,9 +4,6 @@
 using namespace System;
 using namespace System::Text;
 
-//_____________________________________________________________________________
-//                                                                 UTF32Encoder
-
 UTF32Encoding::Encoder& UTF32Encoding::Encoder::operator =(const UTF32Encoding::Encoder& b) {
   Encoding::Encoder::operator =(b);
   this->bigEndian = b.bigEndian;
@@ -23,9 +20,6 @@ String UTF32Encoding::Encoder::ToString() const {
   else
     return "UTF32Encoder";
 }
-
-//_____________________________________________________________________________
-//                                                                 UTF32Decoder
 
 UTF32Encoding::Decoder& UTF32Encoding::Decoder::operator =(const UTF32Encoding::Decoder& b) {
   Encoding::Decoder::operator =(b);
@@ -47,9 +41,6 @@ String UTF32Encoding::Decoder::ToString() const {
   else
     return "UTF32Decoder";
 }
-
-//_____________________________________________________________________________
-//                                                                UTF32Encoding
 
 UTF32Encoding::UTF32Encoding()
 : Encoding(12000) {
