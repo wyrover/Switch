@@ -89,6 +89,10 @@ find_package(Switch REQUIRED)
 add_executable(HelloWorldForm ${SWITCH_GUI} HelloWorldForm.cpp)
 target_link_libraries(HelloWorldForm Switch.Forms)
 ```
+Running application on Windows:
+
+![HelloWorldForms](Pictures/Examples/Forms/HelloWorldFormW.png)
+
 Running application on macOS:
 
 ![HelloWorldForms](Pictures/Examples/Forms/HelloWorldFormM.png)

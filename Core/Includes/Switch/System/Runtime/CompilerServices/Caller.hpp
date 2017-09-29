@@ -63,10 +63,10 @@ namespace Switch {
     }
   }
   
-  /// @brief Get Caller informations
-  /// @return Caller caller informations.
+  /// @brief Get Switch::System::Runtime::CompilerServices::Caller informations
+  /// @return Switch::System::Runtime::CompilerServices::Caller caller informations.
   /// @par Examples
-  /// The following example shows how to use the _#aller
+  /// The following example shows how to use the #_caller.
   /// @include Caller.cpp
   /// @ingroup Keywords
   #define _caller \

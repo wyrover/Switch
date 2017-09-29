@@ -12,5 +12,5 @@ _property<bool, _readonly> Stopwatch::IsHighResolution {
 };
 
 int64 Stopwatch::GetTimestamp() {
-  return std::chrono::high_resolution_clock::now().time_since_epoch().count()/100;
+  return std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count()/100;
 }

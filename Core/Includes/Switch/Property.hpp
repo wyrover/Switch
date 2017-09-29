@@ -96,7 +96,7 @@ private:
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
-  /// @brief #_readonly keyword represent a _property read only attribute.
+  /// @brief #_readonly keyword represent a #_property read only attribute.
   /// @ingroup Keywords
   #define _readonly \
   _readonly
