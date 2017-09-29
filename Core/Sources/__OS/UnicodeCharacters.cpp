@@ -5,9 +5,7 @@
 #include "CoreApi.hpp"
 
 bool __OS::CoreApi::UnicodeCharacters::ValidateCodePoint(uint32 codePoint) {
-  if (codePoint > 0x0010FFFFu) return false;
-  if (codePoint >= 0xD800u && codePoint <= 0xDFFFu) return false;
-  return true;
+  return codePoint <= 0x0010FFFFu && !(codePoint >= 0xD800u && codePoint <= 0xDFFFu);
 }
 
 bool __OS::CoreApi::UnicodeCharacters::IsAlpha(uint32 codePoint) {
