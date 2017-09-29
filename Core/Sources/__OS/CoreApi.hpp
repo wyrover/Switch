@@ -304,9 +304,9 @@ namespace __OS {
         static uint32 Decode(byte b1, byte b2, byte b3, byte b4, bool big_endian);
       };
 
-      static uint32 to_lower(uint32 c);
-      static uint32 to_upper(uint32 c);
-      static uint32 to_title(uint32 c);
+      static uint32 ToLower(uint32 c);
+      static uint32 ToUpper(uint32 c);
+      static uint32 ToTitle(uint32 c);
     };
   };
 }

@@ -5,6 +5,7 @@
 #include "AssertionException.hpp"
 #include "AssertionResult.hpp"
 #include "Is.hpp"
+#include "TestFixture.hpp"
 #include <Switch/System/BitConverter.hpp>
 #include <Switch/System/Console.hpp>
 #include <Switch/System/Environment.hpp>

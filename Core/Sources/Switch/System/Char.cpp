@@ -49,7 +49,7 @@ bool Char::IsLetterOrDigit(const String& value, int32 index) {
 }
 
 bool Char::IsLower(char32 value) {
-  return __OS::CoreApi::UnicodeEncodings::to_lower(value) == value;
+  return __OS::CoreApi::UnicodeEncodings::ToLower(value) == value;
 }
 
 bool Char::IsLower(const String& value, int32 index) {
@@ -77,7 +77,7 @@ bool Char::IsSymbol(const String& value, int32 index) {
 }
 
 bool Char::IsUpper(char32 value) {
-  return __OS::CoreApi::UnicodeEncodings::to_upper(value) == value;
+  return __OS::CoreApi::UnicodeEncodings::ToUpper(value) == value;
 }
 
 bool Char::IsUpper(const String& value, int32 index) {

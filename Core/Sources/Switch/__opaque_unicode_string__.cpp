@@ -273,14 +273,14 @@ bool __opaque_unicode_string__::ends_with(const __opaque_unicode_string__& s) co
 __opaque_unicode_string__ __opaque_unicode_string__::to_lower() const {
   __opaque_unicode_string__ lower;
   for (__opaque_unicode_string__::const_iterator it = (*this).begin(); it != (*this).end(); it++)
-    lower.append(__OS::CoreApi::UnicodeEncodings::to_lower(*it));
+    lower.append(__OS::CoreApi::UnicodeEncodings::ToLower(*it));
   return lower;
 }
 
 __opaque_unicode_string__ __opaque_unicode_string__::to_upper() const {
   __opaque_unicode_string__ upper;
   for (__opaque_unicode_string__::const_iterator it = (*this).begin(); it != (*this).end(); it++)
-    upper.append(__OS::CoreApi::UnicodeEncodings::to_upper(*it));
+    upper.append(__OS::CoreApi::UnicodeEncodings::ToUpper(*it));
   return upper;
 }
 

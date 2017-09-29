@@ -40,6 +40,7 @@ target_link_libraries(Switch.TUnit ${GTEST_LIBRARIES} Switch.Core)
 set_target_properties(Switch.TUnit PROPERTIES FOLDER Switch/TUnit)
 
 if (BUILD_TESTS)
+  add_subdirectory("ManualTests")
   add_subdirectory("UnitTests")
 endif()
 
