@@ -5,22 +5,29 @@
 #include "CoreApi.hpp"
 
 byte __OS::CoreApi::UnicodeEncodings::UTF8::GetFormat(byte b) {
-  if (b  < 0x80)          return 1;  // 0XXXXXXX
-  if ((b & 0xE0) == 0xC0) return 2;  // 110XXXXX & 11100000 = 11000000
-  if ((b & 0xF0) == 0xE0) return 3;  // 1110XXXX & 11110000 = 11100000
-  if ((b & 0xF8) == 0xF0) return 4;  // 11110XXX & 11111000 = 11110000
-  if ((b & 0xFC) == 0xF8) return 5;  // 111110XX & 11111000 = 11111000
-  if ((b & 0xFE) == 0xFC) return 6;  // 1111110X & 11111100 = 11111100
-  if ((b & 0xC0) == 0x80) return 0;  // 10XXXXXX & 11000000 = 10000000
+  if (b  < 0x80)
+    return 1; // 0XXXXXXX
+  if ((b & 0xE0) == 0xC0)
+    return 2; // 110XXXXX & 11100000 = 11000000
+  if ((b & 0xF0) == 0xE0)
+    return 3; // 1110XXXX & 11110000 = 11100000
+  if ((b & 0xF8) == 0xF0)
+    return 4; // 11110XXX & 11111000 = 11110000
+  if ((b & 0xFC) == 0xF8)
+    return 5; // 111110XX & 11111000 = 11111000
+  if ((b & 0xFE) == 0xFC)
+    return 6; // 1111110X & 11111100 = 11111100
+  if ((b & 0xC0) == 0x80)
+    return 0; // 10XXXXXX & 11000000 = 10000000
   return 0xFF;
 }
 
 static bool readZeroFormats(const std::string& str, uint32 pos, byte nb) {
   for (uint32 i = pos+1; i < str.size() ; i += 1) {
-    if (nb-- <= 0) return true;
-    byte format = __OS::CoreApi::UnicodeEncodings::UTF8::GetFormat((byte)str[i]);
-    if (format != 0)
-        return false;
+    if (nb-- <= 0)
+      return true;
+    if (__OS::CoreApi::UnicodeEncodings::UTF8::GetFormat((byte)str[i]) != 0)
+      return false;
   }  
   return nb == 0;
 }
@@ -256,17 +263,9 @@ void __OS::CoreApi::UnicodeEncodings::UTF32::Encode(uint32 code, byte& b1, byte&
 
 uint32 __OS::CoreApi::UnicodeEncodings::UTF32::Decode(byte b1, byte b2, byte b3, byte b4, bool bigEndian) {
   if (bigEndian) {
-    return 
-      (static_cast<uint32>(b1) << 24) | 
-      (static_cast<uint32>(b2) << 16) | 
-      (static_cast<uint32>(b3) <<  8) | 
-       static_cast<uint32>(b4);
+    return (static_cast<uint32>(b1) << 24) | (static_cast<uint32>(b2) << 16) | (static_cast<uint32>(b3) <<  8) | static_cast<uint32>(b4);
   } else {
-    return 
-      (static_cast<uint32>(b4) << 24) |
-      (static_cast<uint32>(b3) << 16) | 
-      (static_cast<uint32>(b2) <<  8) | 
-       static_cast<uint32>(b1);
+    return (static_cast<uint32>(b4) << 24) | (static_cast<uint32>(b3) << 16) | (static_cast<uint32>(b2) <<  8) | static_cast<uint32>(b1);
   }
 }
 
