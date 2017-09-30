@@ -97,6 +97,10 @@ Running application on macOS:
 
 ![HelloWorldForms](Pictures/Examples/Forms/HelloWorldFormM.png)
 
+Running application on Ubuntu:
+
+![HelloWorldForms](Pictures/Examples/Forms/HelloWorldFormU.png)
+
 # TUnit
 
 HelloWorldTest.cpp:
