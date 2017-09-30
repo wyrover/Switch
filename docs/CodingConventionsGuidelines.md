@@ -90,7 +90,7 @@ namespace Switch {
       
       /// @cond
       Object(const Object&) = default;
-      Object& operator =(const Object&) = default;
+      Object& operator=(const Object&) = default;
       virtual ~Object() = default;
       bool operator==(const Object& obj) const {return Equals(obj);}
       bool operator!=(const Object& obj) const {return !this->operator==(obj);}
@@ -368,6 +368,193 @@ void Example(int i, int j) {
 
 ```c++
 void Example() {
+}
+```
+
+## Set spacing for method calls
+
+**X DO NOT** Insert space between method name and its opening parenthesis
+
+```c++
+void Example() {
+  Test();
+}
+```
+
+**X DO NOT** Insert space within argument list parentheses
+
+```c++
+void Example() {
+  Test(int i, int j);
+}
+```
+
+
+**X DO NOT** Insert space within empty argument list parentheses
+
+```c++
+void Example() {
+  Test();
+}
+```
+
+## Set other spacing options
+
+**√ DO** Insert space after keywords in control flow statements
+
+```c++
+void Example() {
+  if (condition) {
+  }
+}
+```
+
+**X DO NOT** Insert space within parentheses of expressions
+
+```c++
+void Example() {
+  i = (5 + 3) * 2;
+}
+```
+
+**X DO NOT** Insert space within parentheses of type casts
+
+```c++
+void Example() {
+  test = (const ITest&)o;
+}
+```
+**X DO NOT** Insert space within parentheses of control flow statements
+
+```c++
+void Example() {
+  if (condition) {
+  }
+}
+```
+
+**X DO NOT** Insert space after casts
+
+```c++
+void Example() {
+  test = (const ITest&)o;
+}
+```
+
+**X DO NOT** Insert space in declaration statements
+
+```c++
+void Example() {
+  int x = 5;
+}
+```
+
+## Set spacing for square brackets
+
+**X DO NOT** Insert space before open square bracket
+
+```c++
+void Example() {
+  i[5] = 3;
+}
+```
+
+**X DO NOT** Insert space within empty square brackets
+
+```c++
+void Example() {
+  new int[] {1, 2};
+}
+```
+
+**X DO NOT** Insert space within square brackets
+
+```c++
+void Example() {
+  i[5] = 3;
+}
+```
+
+## Set spacing for brackets
+
+**√ DO** Insert space after colon for base or interface in type declaration
+
+```c++
+class Foo : public Bar {
+}
+```
+
+**√ DO** Insert space after comma
+
+```c++
+void Example() {
+  for (int i = 0; i < 10, i > 5; i++) {
+  }
+}
+```
+
+**X DO NOT** Insert space after dot
+
+```c++
+void Example() {
+  Foo.Bar.Test();
+}
+```
+
+**X DO NOT** Insert space after Structure or class dereference 
+
+```c++
+void Example() {
+  Foo->Bar->Test();
+}
+```
+
+**√ DO** Insert space after semicolon in "for" statement
+
+```c++
+void Example() {
+  for (int i = 0; i < 10; i++) {
+  }
+}
+```
+
+**√ DO** Insert space before colon for base or interface in type declaration
+
+```c++
+class Foo : public Bar {
+}
+```
+
+**X DO NOT** Insert space before dot
+
+```c++
+void Example() {
+  Foo.Bar.Test();
+}
+```
+
+**X DO NOT** Insert space before Structure or class dereference 
+
+```c++
+void Example() {
+  Foo->Bar->Test();
+}
+```
+
+**X DO NOT** Insert space before semicolon in "for" statement
+
+```c++
+void Example() {
+  for (int i = 0; i < 10; i++) {
+  }
+}
+```
+
+**√ DO** Set spacing for operators
+
+```c++
+void Example() {
+  i = (5 + 3) * 2;
 }
 ```
 

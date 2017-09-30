@@ -7,7 +7,7 @@ This section contains the Switch documentation.
 ​
 # In This Section
 
-* [Coding Conventions Guidelines](CodingConventionsGuidelines.md) provides guidelines for indentations, new lines, spacing, wrapping and styles coding conventions.
+* [Coding Conventions Guidelines](CodingConventionsGuidelines.md) provides guidelines for comments, documentation, indentations, new lines and spacing coding conventions.
 * [Framework Design Guidelines](FrameworkDesignGuidelines.md) provides guidelines for designing libraries that extend and interact with the Switch Framework.
 * [Types](Types.md) contains the Switch define the unboxed and boxed types.
 * [Articles and Overviews](ArticlesAndOverviews.md) provide articles and overviews of different themes.
