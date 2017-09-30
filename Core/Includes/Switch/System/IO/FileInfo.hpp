@@ -33,7 +33,7 @@ namespace Switch {
         /// @brief Initializes a new instance of the System::IO::FileInfo class, which acts as
         /// a wrapper for a file path.
         /// @param fileName The fully qualified name of the new file, or the relative file name.
-        /// @exception InvalidParamException fileName is null
+        /// @exception ArgumentException fileName is null
         /// -or- fileName contains one or more of the invalid characters
         /// -or- The system could not retrieve the absolute path.
         FileInfo(const String& fileName);

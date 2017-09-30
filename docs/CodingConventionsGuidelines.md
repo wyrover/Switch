@@ -5,11 +5,19 @@
 
 # Editor
 
-**√ DO** Replace tab by two space in your editor or IDE properties. 
+**√ DO** Replace tab character with double spaces in your editor or IDE properties. 
+
+```c++
+class MyCLass : public object {
+public:
+  MyCLass() {}
+  MyCLass(const MyCLass&) = default;
+};
+```
 
 # Comments
 
-**√ DO** Using simple line comment // as block comment /* */
+**√ DO** Using always simple line comment **//** instead block comment **/* */**
 
 ```c++
 // This is my
@@ -21,9 +29,28 @@ int x = 3;
 
 The documentation is generate by Doxygen.
 
-**√ DO** Document only in header file (.hpp).
+**√ DO** Write Doxygen documentation only in header file (**.hpp**).
 
-There is an example of doxygen decumented class :
+**√ DO** All documentation comment must start by triple slash **///**
+
+```c++
+/// @brief MyClass do something
+class MyClass {
+};
+```
+
+**√ DO** Doxygen command start with at-sign **@**
+
+```c++
+/// @brief MyFunc do something
+/// @param name A stringthat contains the name.
+/// @remarks The name must be begin by a uppercase; otherwise ArgumentException throws.
+/// @exception ArgumentException name not started by uppercase.
+void MyFunc(string name) {
+};
+```
+
+This example of doxygen documented class (Object.hpp) shows somes doxygen commands:
 
 ```c++
 /// @file
@@ -132,7 +159,7 @@ using namespace Switch;
 
 ```
 
-For more informations see [doxygen documentation](http://www.doxygen.org)
+For more commands see [Doxygen Special commands](http://www.stack.nl/~dimitri/doxygen/manual/commands.html) and for more informations see [Doxygen Manual](http://www.stack.nl/~dimitri/doxygen/manual/index.html)
 
 # Indentation
 
