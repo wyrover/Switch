@@ -7,6 +7,7 @@ This section provides guidelines for designing libraries that extend and interac
  
 # In This Section
 
+* [Coding Conventions Guidelines](CodingConventionsGuidelines.md) provides guidelines for comments, documentation, indentations, new lines and spacing coding conventions.
 * [Naming Guidelines](NamingGuidelines.md) Provides guidelines for naming libraries, namespaces, types, and members in class libraries.
 * [Type Design Guidelines](TypeDesignGuidelines.md) Provides guidelines for using static and abstract classes, interfaces, enumerations, structures, and other types.
 * [Member Design Guidelines](MemberDesignGuidelines.md) Provides guidelines for designing and using properties, methods, constructors, fields, events, operators, and parameters.
