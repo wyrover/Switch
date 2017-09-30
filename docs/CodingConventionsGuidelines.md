@@ -17,7 +17,7 @@ public:
 
 # Comments
 
-**√ DO** Using always simple line comment **//** instead block comment **/* */**
+**√ DO** Using always simple line comment **//** instead block comment /* */
 
 ```c++
 // This is my
