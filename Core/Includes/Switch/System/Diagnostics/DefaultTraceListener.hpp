@@ -20,7 +20,7 @@ namespace Switch {
         
         /// @cond
         DefaultTraceListener(const DefaultTraceListener& dtl) : data(dtl.data) { }
-        DefaultTraceListener& operator =(const DefaultTraceListener& dtl) {this->data = dtl.data; return *this;}
+        DefaultTraceListener& operator=(const DefaultTraceListener& dtl) {this->data = dtl.data; return *this;}
         ~DefaultTraceListener() {this->Flush();}
         /// @endcond
 

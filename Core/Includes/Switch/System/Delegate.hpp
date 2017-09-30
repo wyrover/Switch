@@ -248,7 +248,7 @@ namespace Switch {
       /// @brief Determines whether this instance and another specified DelegateType object have the same value.
       /// @param value The DelegateType to compare.
       /// @return bool true if the value of this instance is the same as the value of value; otherwise, false.
-      bool operator ==(const Delegate& delegate) const {
+      bool operator==(const Delegate& delegate) const {
         if (this->functions.size () != delegate.functions.size())
           return false;
         
@@ -264,29 +264,29 @@ namespace Switch {
       /// @return bool true if the value of this instance is the same as the value of value; otherwise, false.
       bool operator !=(const Delegate& delegate) const {return !this->operator==(delegate);}
       
-      Delegate& operator =(const Delegate& delegate) {
+      Delegate& operator=(const Delegate& delegate) {
         this->functions = delegate.functions;
         return *this;
       }
       
-      Delegate& operator +=(const Delegate& delegate) {
+      Delegate& operator+=(const Delegate& delegate) {
         *this = Delegate::Combine(*this, delegate);
         return *this;
       }
       
       template<typename Fn>
-      Delegate& operator +=(Fn function) {
+      Delegate& operator+=(Fn function) {
         *this = Delegate::Combine(*this, Delegate(function));
         return *this;
       }
       
-      Delegate& operator -=(const Delegate& delegate) {
+      Delegate& operator-=(const Delegate& delegate) {
         *this = Delegate::Remove(*this, delegate);
         return *this;
       }
       
       template<typename Fn>
-      Delegate& operator -=(Fn function) {
+      Delegate& operator-=(Fn function) {
         *this = Delegate::Remove(*this, Delegate(function));
         return *this;
       }

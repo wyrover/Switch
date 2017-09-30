@@ -18,7 +18,7 @@ namespace Switch {
         
         /// @cond
         FileSystemEventArgs(const FileSystemEventArgs& fsea) : changeType(fsea.changeType), directory(fsea.directory), name(fsea.name) {}
-        FileSystemEventArgs& operator =(const FileSystemEventArgs& fsea) {
+        FileSystemEventArgs& operator=(const FileSystemEventArgs& fsea) {
           this->changeType = fsea.changeType;
           this->directory = fsea.directory;
           this->name = fsea.name;

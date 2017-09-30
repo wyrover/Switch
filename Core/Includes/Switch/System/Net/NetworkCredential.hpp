@@ -20,7 +20,7 @@ namespace Switch {
         NetworkCredential(const String& userName, const String& password): userName(userName), password(password) {}
         /// @cond
         NetworkCredential(const NetworkCredential& networkCredential) : userName(networkCredential.userName), password(networkCredential.password) {}
-        NetworkCredential& operator =(const NetworkCredential& networkCredential) {
+        NetworkCredential& operator=(const NetworkCredential& networkCredential) {
           this->userName = networkCredential.userName;
           this->password = networkCredential.password;
           return *this;

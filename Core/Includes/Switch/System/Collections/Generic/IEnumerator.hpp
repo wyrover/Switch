@@ -63,7 +63,7 @@ namespace Switch {
                 this->pos = -1;
             }
             
-            Iterator& operator ++() {
+            Iterator& operator++() {
               if (this->pos != -1) {
                 ++this->pos;
                 if (this->enumerator->MoveNext() == false)
@@ -72,7 +72,7 @@ namespace Switch {
               return *this;
             }
             
-            Iterator operator ++(int) {
+            Iterator operator++(int) {
               Iterator iterator(*this);
               if (this->pos != -1) {
                 ++this->pos;
@@ -82,14 +82,14 @@ namespace Switch {
               return iterator;
             }
             
-            bool operator ==(const Iterator& rhs) const {return this->pos == rhs.pos;}
+            bool operator==(const Iterator& rhs) const {return this->pos == rhs.pos;}
             bool operator !=(const Iterator& rhs) const {return !this->operator==(rhs);}
             
-            const T& operator *() const  {
+            const T& operator*() const  {
               return this->enumerator->Current();
             }
             
-            T& operator *()  {
+            T& operator*()  {
               return const_cast<T&>(this->enumerator->Current());
             }
             

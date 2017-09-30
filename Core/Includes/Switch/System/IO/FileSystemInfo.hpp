@@ -22,7 +22,7 @@ namespace Switch {
 
         /// @cond
         FileSystemInfo(const FileSystemInfo& fileSystemInfo) : fullPath(fileSystemInfo.fullPath) { }
-        FileSystemInfo& operator =(const FileSystemInfo& fileSystemInfo) {this->fullPath = fileSystemInfo.fullPath; return *this;}
+        FileSystemInfo& operator=(const FileSystemInfo& fileSystemInfo) {this->fullPath = fileSystemInfo.fullPath; return *this;}
         /// @endcond
         
       public:

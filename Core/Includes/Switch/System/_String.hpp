@@ -989,7 +989,7 @@ namespace Switch {
         void Reset() override;
         bool MoveNext() override;
         
-        Enumerator& operator =(const Enumerator& other);
+        Enumerator& operator=(const Enumerator& other);
         bool Equals(const Object& other) const override;
         
       protected:
@@ -1010,7 +1010,7 @@ namespace Switch {
         void Reset() override;
         bool MoveNext() override;
         
-        ReverseEnumerator& operator =(const ReverseEnumerator& other);
+        ReverseEnumerator& operator=(const ReverseEnumerator& other);
         bool Equals(const Object& other) const override;
         
       protected:
@@ -1041,57 +1041,57 @@ namespace Switch {
 
       /// @cond
     public:
-      String& operator =(const String& str);
-      String& operator =(const char str[]);
+      String& operator=(const String& str);
+      String& operator=(const char str[]);
       char32 operator [](int32 index) const;
-      bool operator ==(const String& str) const;
+      bool operator==(const String& str) const;
       bool operator !=(const String& str) const;
-      bool operator <(const String& str) const;
-      bool operator >(const String& str) const;
-      bool operator <=(const String& str) const;
-      bool operator >=(const String& str) const;
+      bool operator<(const String& str) const;
+      bool operator>(const String& str) const;
+      bool operator<=(const String& str) const;
+      bool operator>=(const String& str) const;
       
-      String& operator +=(const String& str);
-      String& operator +=(const char value[]);
-      String& operator +=(bool value);
-      String& operator +=(char value);
-      String& operator +=(char16 value);
-      String& operator +=(char32 value);
-      String& operator +=(wchar value);
-      String& operator +=(const Object& value);
+      String& operator+=(const String& str);
+      String& operator+=(const char value[]);
+      String& operator+=(bool value);
+      String& operator+=(char value);
+      String& operator+=(char16 value);
+      String& operator+=(char32 value);
+      String& operator+=(wchar value);
+      String& operator+=(const Object& value);
 
-      String operator +(const Object& value) const;
+      String operator+(const Object& value) const;
       /// @endcond
     };
 
     /// @cond
-    String operator +(const char str[], const Object& obj);
-    String operator +(const Object& obj, const char str[]);
+    String operator+(const char str[], const Object& obj);
+    String operator+(const Object& obj, const char str[]);
     
-    String operator +(const String& str, const char value[]);
-    String operator +(const String& str, bool value);
-    String operator +(const String& str, byte value);
-    String operator +(const String& str, char value);
-    String operator +(const String& str, char16 value);
-    String operator +(const String& str, char32 value);
-    String operator +(const String& str, wchar value);
-    String operator +(const String& str, double value);
-    String operator +(const String& str, int16 value);
-    String operator +(const String& str, int32 value);
-    String operator +(const String& str, int64 value);
-    String operator +(const String& str, sbyte value);
-    String operator +(const String& str, float value);
-    String operator +(const String& str, uint16 value);
-    String operator +(const String& str, uint32 value);
-    String operator +(const String& str, uint64 value);
-    String operator +(const String& str, llong value);
-    String operator +(const String& str, ullong value);
+    String operator+(const String& str, const char value[]);
+    String operator+(const String& str, bool value);
+    String operator+(const String& str, byte value);
+    String operator+(const String& str, char value);
+    String operator+(const String& str, char16 value);
+    String operator+(const String& str, char32 value);
+    String operator+(const String& str, wchar value);
+    String operator+(const String& str, double value);
+    String operator+(const String& str, int16 value);
+    String operator+(const String& str, int32 value);
+    String operator+(const String& str, int64 value);
+    String operator+(const String& str, sbyte value);
+    String operator+(const String& str, float value);
+    String operator+(const String& str, uint16 value);
+    String operator+(const String& str, uint32 value);
+    String operator+(const String& str, uint64 value);
+    String operator+(const String& str, llong value);
+    String operator+(const String& str, ullong value);
 
     template<typename T, typename Attribute>
-    String operator +(const char str[], const _property<T, Attribute>& value) { return String(str) + value(); }
+    String operator+(const char str[], const _property<T, Attribute>& value) { return String(str) + value(); }
 
     template<typename T, typename Attribute>
-    String operator +(const String& str, const _property<T, Attribute>& value) { return str + value(); }
+    String operator+(const String& str, const _property<T, Attribute>& value) { return str + value(); }
 
     /// @endcond
   }

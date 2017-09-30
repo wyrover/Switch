@@ -296,7 +296,7 @@ namespace Switch {
           Encoder() { }
           Encoder(const Encoder&) { }
           virtual ~Encoder() { }
-          Encoder& operator =(const Encoder&);
+          Encoder& operator=(const Encoder&);
 
          /// @brief Calculates the number of bytes needed to encode a given code point.
          /// @param c The given code point.
@@ -315,7 +315,7 @@ namespace Switch {
           Decoder();
           Decoder(const Decoder& cpb);
           virtual ~Decoder();
-          Decoder& operator =(const Decoder& b);
+          Decoder& operator=(const Decoder& b);
 
          /// @brief Adds a new byte to the current sequence of encoded bytes.
          /// @param b The byte to add.
@@ -357,7 +357,7 @@ namespace Switch {
         /// @brief Changes the current instance to match the one given as argument.
         /// @param encoding The source encoding.
         /// @exception System::ArgumentNullException encoding is null.
-        virtual Encoding& operator =(const Encoding& encoding);
+        virtual Encoding& operator=(const Encoding& encoding);
 
         /// @cond
         void ValidateGBC(int32 charsLength, int32 index, int32 count) const;

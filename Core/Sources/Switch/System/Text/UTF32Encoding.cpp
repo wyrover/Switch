@@ -4,8 +4,8 @@
 using namespace System;
 using namespace System::Text;
 
-UTF32Encoding::Encoder& UTF32Encoding::Encoder::operator =(const UTF32Encoding::Encoder& b) {
-  Encoding::Encoder::operator =(b);
+UTF32Encoding::Encoder& UTF32Encoding::Encoder::operator=(const UTF32Encoding::Encoder& b) {
+  Encoding::Encoder::operator=(b);
   this->bigEndian = b.bigEndian;
   return *this;
 }
@@ -21,8 +21,8 @@ String UTF32Encoding::Encoder::ToString() const {
     return "UTF32Encoder";
 }
 
-UTF32Encoding::Decoder& UTF32Encoding::Decoder::operator =(const UTF32Encoding::Decoder& b) {
-  Encoding::Decoder::operator =(b);
+UTF32Encoding::Decoder& UTF32Encoding::Decoder::operator=(const UTF32Encoding::Decoder& b) {
+  Encoding::Decoder::operator=(b);
   bigEndian = b.bigEndian;
   return *this;
 }
@@ -66,8 +66,8 @@ UTF32Encoding::UTF32Encoding(const UTF32Encoding& encoding)
   this->bigEndian = encoding.bigEndian;
 }
 
-UTF32Encoding& UTF32Encoding::operator =(const UTF32Encoding& encoding) {
-  Encoding::operator =(encoding);
+UTF32Encoding& UTF32Encoding::operator=(const UTF32Encoding& encoding) {
+  Encoding::operator=(encoding);
   this->shouldEmitPreamble = encoding.shouldEmitPreamble;
   this->bigEndian = encoding.bigEndian;
   return *this;

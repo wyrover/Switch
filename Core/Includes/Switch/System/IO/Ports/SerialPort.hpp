@@ -23,7 +23,7 @@ namespace Switch {
           SerialPort() {}
           /// @cond
           SerialPort(const SerialPort& serialPort) = delete;
-          SerialPort& operator =(const SerialPort& serialPort) = delete;
+          SerialPort& operator=(const SerialPort& serialPort) = delete;
           /// @endcond
           
           SerialPort(const String& port) : port(port) {}

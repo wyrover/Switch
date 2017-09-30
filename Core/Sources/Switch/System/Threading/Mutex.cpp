@@ -11,7 +11,7 @@ namespace {
 Mutex::Mutex(bool initiallyOwned, const string& name) {
   bool createdNew = true;
   if (name != "")
-    this->operator =(mutexes.AddOrCreate(name, createdNew));
+    this->operator=(mutexes.AddOrCreate(name, createdNew));
   if (createdNew) {
     *this->name = name;
     if (initiallyOwned)
@@ -22,7 +22,7 @@ Mutex::Mutex(bool initiallyOwned, const string& name) {
 Mutex::Mutex(bool initiallyOwned, const string& name, bool& createdNew) {
   createdNew = true;
   if (name != "")
-    this->operator =(mutexes.AddOrCreate(name, createdNew));
+    this->operator=(mutexes.AddOrCreate(name, createdNew));
   if (createdNew) {
     *this->name = name;
     if (initiallyOwned)

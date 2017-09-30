@@ -28,7 +28,7 @@ namespace Switch {
         /// @brief Changes the current instance to match an instance of the System::Text::UTF8Encoding class.
         /// @param encoding The source encoding.
         /// @exception System::ArgumentNullException encoding is null.
-        virtual UTF8Encoding& operator =(const UTF8Encoding& encoding);
+        virtual UTF8Encoding& operator=(const UTF8Encoding& encoding);
         
         /// @brief Gets a value indicating whether the current encoding uses single-byte code points.
         /// @return This property is always false.
@@ -87,7 +87,7 @@ namespace Switch {
           Encoder() : Encoding::Encoder() { }
           Encoder(const Encoder& e) : Encoding::Encoder(e) { }
           
-          Encoder& operator =(const Encoder& b);
+          Encoder& operator=(const Encoder& b);
           int32 GetNbBytes(char32 c) const override;
           void Encode(char32 c, byte bytes[]) const override;
           String ToString() const override;
@@ -102,7 +102,7 @@ namespace Switch {
           Decoder() : Encoding::Decoder() { format = 0; }
           Decoder(const Decoder& b) : Encoding::Decoder(b) { format = b.format; }
           
-          Decoder& operator =(const Decoder& b);
+          Decoder& operator=(const Decoder& b);
           
           void Add(byte b) override;
           void Reset() override;

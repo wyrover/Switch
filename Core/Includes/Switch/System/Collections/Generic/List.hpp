@@ -980,7 +980,7 @@ namespace Switch {
           /// @param list the List<T> which elements will be inserted from
           /// @return List<T> the list
           /// @exception ArgumentNullException list argument is null
-          List& operator =(const List& list) {
+          List& operator=(const List& list) {
             this->operationNumber++;
             this->list = list.list;
             return *this;
@@ -1007,7 +1007,7 @@ namespace Switch {
           public:
             Comparer(const IComparer<T>* comparer) : comparer(comparer) {}
             Comparer(const Comparer& comparer) {*this = comparer;}
-            Comparer& operator =(const Comparer& comparer) {this->comparer = comparer.comparer; return *this;}
+            Comparer& operator=(const Comparer& comparer) {this->comparer = comparer.comparer; return *this;}
             bool operator()(const T& e1, const T& e2) const {return this->comparer->Compare(e1, e2) < 0;}
           private:
             const IComparer<T>* comparer;
@@ -1023,7 +1023,7 @@ namespace Switch {
             ComparisonComparer(const ComparisonComparer& lc) {*this = lc;}
             ~ComparisonComparer() {}
             
-            ComparisonComparer& operator =(const ComparisonComparer& lc) {comparer = lc.comparer; return *this;}
+            ComparisonComparer& operator=(const ComparisonComparer& lc) {comparer = lc.comparer; return *this;}
             bool operator()(const T& e1, const T& e2) const {return comparer(e1,e2) < 0;}
           };
 

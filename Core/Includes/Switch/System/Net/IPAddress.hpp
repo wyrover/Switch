@@ -57,7 +57,7 @@ namespace Switch {
         /// @exception ArgumentNUllException address is null.
         IPAddress(const IPAddress& address);
         /// @cond
-        IPAddress& operator =(const IPAddress& address);
+        IPAddress& operator=(const IPAddress& address);
         /// @endcond
 
         /// @brief Initializes a new instance of the IPAddress class with the address specified as an Int64.

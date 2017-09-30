@@ -13,7 +13,7 @@ public:
 private:
   __opaque_lock_guard__() = delete;
   __opaque_lock_guard__(const __opaque_lock_guard__&) = delete;
-  __opaque_lock_guard__& operator =(const __opaque_lock_guard__&) = delete;
+  __opaque_lock_guard__& operator=(const __opaque_lock_guard__&) = delete;
   
   const object& lock;
 };

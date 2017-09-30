@@ -9,8 +9,8 @@ ASCIIEncoding::Decoder::Decoder() : Encoding::Decoder() {
 ASCIIEncoding::Decoder::Decoder(const ASCIIEncoding::Decoder& b) : Encoding::Decoder(b) {
 }
 
-ASCIIEncoding::Decoder& ASCIIEncoding::Decoder::operator =(const ASCIIEncoding::Decoder& b) {
-  Encoding::Decoder::operator =(b);
+ASCIIEncoding::Decoder& ASCIIEncoding::Decoder::operator=(const ASCIIEncoding::Decoder& b) {
+  Encoding::Decoder::operator=(b);
   return *this;
 }
 
@@ -28,8 +28,8 @@ String ASCIIEncoding::Decoder::ToString() const {
   return "ASCIIDecoder";
 }
 
-ASCIIEncoding::Encoder& ASCIIEncoding::Encoder::operator =(const ASCIIEncoding::Encoder& b) {
-  Encoding::Encoder::operator =(b);
+ASCIIEncoding::Encoder& ASCIIEncoding::Encoder::operator=(const ASCIIEncoding::Encoder& b) {
+  Encoding::Encoder::operator=(b);
   return *this;
 }
 
@@ -51,8 +51,8 @@ ASCIIEncoding::ASCIIEncoding() : Encoding(20127) {
 ASCIIEncoding::ASCIIEncoding(const ASCIIEncoding& encoding) : Encoding(encoding) {
 }
 
-ASCIIEncoding& ASCIIEncoding::operator =(const ASCIIEncoding& encoding) {
-  Encoding::operator =(encoding);
+ASCIIEncoding& ASCIIEncoding::operator=(const ASCIIEncoding& encoding) {
+  Encoding::operator=(encoding);
   return *this;
 }
 

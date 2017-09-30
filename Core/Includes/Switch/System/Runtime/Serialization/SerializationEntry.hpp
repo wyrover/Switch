@@ -38,7 +38,7 @@ namespace Switch {
           SerializationEntry(const SerializationEntry& entry) : value(entry.value), typeName(entry.typeName) {}
           
           /// @cond
-          SerializationEntry& operator =(const SerializationEntry& entry) {
+          SerializationEntry& operator=(const SerializationEntry& entry) {
             this->value = entry.value;
             this->typeName = entry.typeName;
             return *this;

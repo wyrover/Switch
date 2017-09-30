@@ -26,7 +26,7 @@ namespace Switch {
           
           /// @cond
           SocketInformation(const SocketInformation&) = delete;
-          SocketInformation& operator =(const SocketInformation&) = delete;
+          SocketInformation& operator=(const SocketInformation&) = delete;
           /// @endcond
 
           /// @brief Gets or sets the options for a Socket.

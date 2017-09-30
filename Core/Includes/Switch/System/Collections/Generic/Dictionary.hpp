@@ -246,7 +246,7 @@ namespace Switch {
           /// @param dictionnary the list which elements will be inserted from
           /// @return List<T> the list
           /// @exception ArgumentNullException dictionary is null.
-          Dictionary& operator =(const Dictionary& dictionary) {
+          Dictionary& operator=(const Dictionary& dictionary) {
             this->hashmap = dictionary.hashmap;
             this->operationNumber++;
             return *this;

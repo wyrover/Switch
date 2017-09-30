@@ -21,7 +21,7 @@ namespace Switch {
         IPHostEntry() {}
         /// @cond
         IPHostEntry(const IPHostEntry& ipHostEntry) : addresses(ipHostEntry.addresses), aliases(ipHostEntry.aliases), hostName(ipHostEntry.hostName) {}
-        IPHostEntry& operator =(const IPHostEntry& ipHostEntry) {
+        IPHostEntry& operator=(const IPHostEntry& ipHostEntry) {
           this->addresses = ipHostEntry.addresses;
           this->aliases = ipHostEntry.aliases;
           this->hostName = ipHostEntry.hostName;

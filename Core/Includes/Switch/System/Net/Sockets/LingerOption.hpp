@@ -48,7 +48,7 @@ namespace Switch {
           
           /// @cond
           LingerOption(const LingerOption& lingerOption) : enabled(lingerOption.enabled), lingerTime(lingerOption.lingerTime) {}
-          LingerOption& operator =(const LingerOption& lingerOption) {
+          LingerOption& operator=(const LingerOption& lingerOption) {
             this->enabled = lingerOption.enabled;
             this->lingerTime = lingerOption.lingerTime;
             return *this;

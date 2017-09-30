@@ -33,7 +33,7 @@ namespace Switch {
         /// @brief Changes the current instance to match an instance of the System::Text::UTF32Encoding class.
         /// @param encoding The source encoding.
         /// @exception System::ArgumentNullException encoding is null.
-        virtual UTF32Encoding& operator =(const UTF32Encoding& encoding);
+        virtual UTF32Encoding& operator=(const UTF32Encoding& encoding);
         
         /// @brief Gets a value indicating whether the current encoding uses single-byte code points.
         /// @return This property is always false.
@@ -92,7 +92,7 @@ namespace Switch {
           Encoder(bool bigE) : Encoding::Encoder() { this->bigEndian = bigE; }
           Encoder(const Encoder& e) : Encoding::Encoder(e) { this->bigEndian = e.bigEndian; }
           
-          Encoder& operator =(const Encoder& b);
+          Encoder& operator=(const Encoder& b);
           
           int32 GetNbBytes(char32) const override { return 4; }
           void Encode(char32 c, byte bytes[]) const override;
@@ -107,7 +107,7 @@ namespace Switch {
           Decoder(bool be) : Encoding::Decoder() { bigEndian = be; }
           Decoder(const Decoder& b) : Encoding::Decoder(b) { bigEndian = b.bigEndian; }
           
-          Decoder& operator =(const Decoder& b);
+          Decoder& operator=(const Decoder& b);
           void Add(byte b) override;
           virtual char32 GetCodePoint() const { return codePoint; }
           String ToString() const override;

@@ -78,7 +78,7 @@ namespace Switch {
           
           SortedSet(SortedSet&& s) : comparer(s.comparer), set(Move(s.set)), operationNumber(s.operationNumber) {s.operationNumber= 0; s.set = new std::set<T, SetComparer, TAllocator>(SetComparer(s.comparer.ToPointer()));}
           
-          SortedSet& operator =(const SortedSet& s) {
+          SortedSet& operator=(const SortedSet& s) {
             this->comparer = s.comparer;
             *this->set = *s.set;
             this->operationNumber++;
@@ -330,7 +330,7 @@ namespace Switch {
             SetComparer(const SetComparer& mc) { *this = mc; }
             ~SetComparer() { }
 
-            SetComparer& operator =(const SetComparer& mc) { comparer = mc.comparer; return *this; }
+            SetComparer& operator=(const SetComparer& mc) { comparer = mc.comparer; return *this; }
             bool operator()(const T& e1, const T& e2) const { return comparer->Compare(e1,e2) < 0; }
           };
 

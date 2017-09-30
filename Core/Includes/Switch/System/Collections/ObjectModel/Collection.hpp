@@ -219,7 +219,7 @@ namespace Switch {
           /// @brief Clear the Collection and insert the element of the Collection given in argument.
           /// @param collection the Collection which elements will be inserted from
           /// @return Collection<T> the Collection
-          Collection<T>& operator =(const Collection<T>& collection) {this->collection = collection.collection;}
+          Collection<T>& operator=(const Collection<T>& collection) {this->collection = collection.collection;}
 
         protected:
           /// @cond

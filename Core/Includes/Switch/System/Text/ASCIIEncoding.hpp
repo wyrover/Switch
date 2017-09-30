@@ -24,7 +24,7 @@ namespace Switch {
         /// @brief Changes the current instance to match an instance of the System::Text::ASCIIEncoding class.
         /// @param encoding The source ascii encoding.
         /// @exception System::ArgumentNullException encoding is null.
-        virtual ASCIIEncoding& operator =(const ASCIIEncoding& encoding);
+        virtual ASCIIEncoding& operator=(const ASCIIEncoding& encoding);
         
         /// @brief Gets a value indicating whether the current encoding uses single-byte code points.
         /// @return This property is always true.
@@ -78,7 +78,7 @@ namespace Switch {
         public:
           Decoder();
           Decoder(const Decoder& b);
-          Decoder& operator =(const Decoder& b);
+          Decoder& operator=(const Decoder& b);
           
           virtual void Add(byte b);
           virtual void Reset();
@@ -89,7 +89,7 @@ namespace Switch {
         public:
           Encoder() : Encoding::Encoder() { }
           Encoder(const Encoder& e) : Encoding::Encoder(e) { }
-          Encoder& operator =(const Encoder& b);
+          Encoder& operator=(const Encoder& b);
           virtual int32 GetNbBytes(char32) const;
           virtual void Encode(char32 c, byte* bytes) const;
           virtual String ToString() const;

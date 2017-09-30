@@ -45,7 +45,7 @@ namespace Switch {
         /// @cond
         StringBuilder(const StringBuilder& sb) : string(sb.string) {this->string.reserve(sb.string.capacity());}
 
-        StringBuilder& operator =(const StringBuilder& sb) {
+        StringBuilder& operator=(const StringBuilder& sb) {
           this->string = sb.string;
           this->string.reserve(sb.string.capacity());
           return *this;

@@ -1106,12 +1106,12 @@ string String::ToString(const IFormatProvider&) const {
   return ToString();
 }
 
-String& String::operator =(const String& str) {
+String& String::operator=(const String& str) {
   this->string = str.string;
   return *this;
 }
 
-String& String::operator =(const char str[]) {
+String& String::operator=(const char str[]) {
   if (str == null)
     throw ArgumentNullException(_caller);
 
@@ -1126,7 +1126,7 @@ char32 String::operator [](int32 index) const {
   return char32(this->string[index]);
 }
 
-bool String::operator ==(const String& str) const {
+bool String::operator==(const String& str) const {
   return Equals(str);
 }
 
@@ -1134,58 +1134,58 @@ bool String::operator !=(const String& str) const {
   return !Equals(str);
 }
 
-bool String::operator <(const String& str) const {
+bool String::operator<(const String& str) const {
   return CompareTo(str) < 0;
 }
 
-bool String::operator >(const String& str) const {
+bool String::operator>(const String& str) const {
   return CompareTo(str) > 0;
 }
 
-bool String::operator <=(const String& str) const {
+bool String::operator<=(const String& str) const {
   return CompareTo(str) <= 0;
 }
 
-bool String::operator >=(const String& str) const {
+bool String::operator>=(const String& str) const {
   return CompareTo(str) >= 0;
 }
 
-String& String::operator +=(const String& str) {
+String& String::operator+=(const String& str) {
   this->string.append(str.string);
   return *this;
 }
 
-String& String::operator +=(char value) {
+String& String::operator+=(char value) {
   this->string.append(value);
   return *this;
 }
 
-String& String::operator +=(bool value) {
+String& String::operator+=(bool value) {
   this->string.append(Boolean(value).ToString().string);
   return *this;
 }
 
-String& String::operator +=(char16 value) {
+String& String::operator+=(char16 value) {
   this->string.append(value);
   return *this;
 }
 
-String& String::operator +=(char32 value) {
+String& String::operator+=(char32 value) {
   this->string.append(value);
   return *this;
 }
 
-String& String::operator +=(wchar value) {
+String& String::operator+=(wchar value) {
   this->string.append(value);
   return *this;
 }
 
-String& String::operator +=(const object& value) {
+String& String::operator+=(const object& value) {
   this->string.append(value.ToString().string);
   return *this;
 }
 
-String& String::operator +=(const char str[]) {
+String& String::operator+=(const char str[]) {
   if (str == null)
     throw ArgumentNullException(_caller);
   
@@ -1193,105 +1193,105 @@ String& String::operator +=(const char str[]) {
   return *this;
 }
 
-String String::operator +(const object& obj) const {
+String String::operator+(const object& obj) const {
   return String(*this, obj.ToString());
 }
 
-String System::operator +(const char str[], const object& obj) {
+String System::operator+(const char str[], const object& obj) {
   if (str == null)
     throw ArgumentNullException(_caller);
   return String(str,obj.ToString());
 }
 
-String System::operator +(const object& obj, const char str[]) {
+String System::operator+(const object& obj, const char str[]) {
   if (str == null)
     throw ArgumentNullException(_caller);
   return String(obj.ToString(), str);
 }
 
-String System::operator +(const String& obj, const char str[]) {
+String System::operator+(const String& obj, const char str[]) {
   return String(obj, str);
 }
 
-String System::operator +(const String& str, bool value) {
+String System::operator+(const String& str, bool value) {
   return String(str, Boolean(value).ToString());
 }
 
-String System::operator +(const String& str, byte value) {
+String System::operator+(const String& str, byte value) {
   return String(str, Byte(value).ToString());
 }
 
-String System::operator +(const String& str, char value) {
+String System::operator+(const String& str, char value) {
   string copy(str);
   copy += value;
   return copy;
 }
 
-String System::operator +(const String& str, char16 value) {
+String System::operator+(const String& str, char16 value) {
   string copy(str);
   copy += value;
   return copy;
 }
 
-String System::operator +(const String& str, char32 value) {
+String System::operator+(const String& str, char32 value) {
   string copy(str);
   copy += value;
   return copy;
 }
 
-String System::operator +(const String& str, wchar value) {
+String System::operator+(const String& str, wchar value) {
   string copy(str);
   copy += value;
   return copy;
 }
 
-String System::operator +(const String& str, double value) {
+String System::operator+(const String& str, double value) {
   return String(str, Double(value).ToString());
 }
 
-String System::operator +(const String& str, int16 value) {
+String System::operator+(const String& str, int16 value) {
   return String(str, Int16(value).ToString());
 }
 
-String System::operator +(const String& str, int32 value) {
+String System::operator+(const String& str, int32 value) {
   return String(str, Int32(value).ToString());
 }
 
-String System::operator +(const String& str, int64 value) {
+String System::operator+(const String& str, int64 value) {
   return String(str, Int64(value).ToString());
 }
 
 /*
-String System::operator +(const String& str, void* value) {
+String System::operator+(const String& str, void* value) {
   return String(str, IntPtr(value).ToString("%p"));
 }
 */
 
-String System::operator +(const String& str, sbyte value) {
+String System::operator+(const String& str, sbyte value) {
   return String(str, SByte(value).ToString());
 }
 
-String System::operator +(const String& str, float value) {
+String System::operator+(const String& str, float value) {
   return String(str, Single(value).ToString());
 }
 
-String System::operator +(const String& str, uint16 value) {
+String System::operator+(const String& str, uint16 value) {
   return String(str, UInt16(value).ToString());
 }
 
-String System::operator +(const String& str, uint32 value) {
+String System::operator+(const String& str, uint32 value) {
   return String(str, UInt32(value).ToString());
 }
 
-String System::operator +(const String& str, uint64 value) {
+String System::operator+(const String& str, uint64 value) {
   return String(str, UInt64(value).ToString());
 }
 
-String System::operator +(const String& str, llong value) {
+String System::operator+(const String& str, llong value) {
   return String(str, Int64(value).ToString());
 }
 
-String System::operator +(const String& str, ullong value) {
+String System::operator+(const String& str, ullong value) {
   return String(str, UInt64(value).ToString());
   
 }
@@ -1341,7 +1341,7 @@ bool String::Enumerator::IsFinished() const {
   return this->iterator == this->string->end();
 }
 
-String::Enumerator& String::Enumerator::operator =(const String::Enumerator& other) {
+String::Enumerator& String::Enumerator::operator=(const String::Enumerator& other) {
   this->operationNumber = other.operationNumber;
   this->beforeFirst = other.beforeFirst;
   this->string = other.string;
@@ -1403,7 +1403,7 @@ bool String::ReverseEnumerator::IsFinished() const {
   return this->iterator == this->string->rend();
 }
 
-String::ReverseEnumerator& String::ReverseEnumerator::operator =(const String::ReverseEnumerator& other) {
+String::ReverseEnumerator& String::ReverseEnumerator::operator=(const String::ReverseEnumerator& other) {
   this->operationNumber = other.operationNumber;
   this->beforeFirst = other.beforeFirst;
   this->string = other.string;

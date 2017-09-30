@@ -4,8 +4,8 @@
 using namespace System;
 using namespace System::Text;
 
-UnicodeEncoding::Encoder& UnicodeEncoding::Encoder::operator =(const UnicodeEncoding::Encoder& b) {
-  Encoding::Encoder::operator =(b);
+UnicodeEncoding::Encoder& UnicodeEncoding::Encoder::operator=(const UnicodeEncoding::Encoder& b) {
+  Encoding::Encoder::operator=(b);
   this->bigEndian = b.bigEndian;
   return *this;
 }
@@ -25,8 +25,8 @@ String UnicodeEncoding::Encoder::ToString() const {
     return "UnicodeEncoder";
 }
 
-UnicodeEncoding::Decoder& UnicodeEncoding::Decoder::operator =(const UnicodeEncoding::Decoder& b) {
-  Encoding::Decoder::operator =(b);
+UnicodeEncoding::Decoder& UnicodeEncoding::Decoder::operator=(const UnicodeEncoding::Decoder& b) {
+  Encoding::Decoder::operator=(b);
   bigEndian = b.bigEndian;
   return *this;
 }
@@ -84,8 +84,8 @@ UnicodeEncoding::UnicodeEncoding(const UnicodeEncoding& encoding)
   this->bigEndian = encoding.bigEndian;
 }
 
-UnicodeEncoding& UnicodeEncoding::operator =(const UnicodeEncoding& encoding)  {
-  Encoding::operator =(encoding);
+UnicodeEncoding& UnicodeEncoding::operator=(const UnicodeEncoding& encoding)  {
+  Encoding::operator=(encoding);
   this->shouldEmitPreamble = encoding.shouldEmitPreamble;
   this->bigEndian = encoding.bigEndian;
   return *this;

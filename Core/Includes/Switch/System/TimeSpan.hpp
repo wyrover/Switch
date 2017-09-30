@@ -270,15 +270,15 @@ namespace Switch {
 
     public:
       /// @cond
-      TimeSpan& operator =(const TimeSpan& value);
-      TimeSpan& operator +=(const TimeSpan& value);
-      TimeSpan& operator -=(const TimeSpan& value);
-      TimeSpan operator +(const TimeSpan& value);
-      TimeSpan operator -(const TimeSpan& value);
-      TimeSpan& operator ++();
-      TimeSpan operator ++(int);
-      TimeSpan& operator --();
-      TimeSpan operator --(int);
+      TimeSpan& operator=(const TimeSpan& value);
+      TimeSpan& operator+=(const TimeSpan& value);
+      TimeSpan& operator-=(const TimeSpan& value);
+      TimeSpan operator+(const TimeSpan& value);
+      TimeSpan operator-(const TimeSpan& value);
+      TimeSpan& operator++();
+      TimeSpan operator++(int);
+      TimeSpan& operator--();
+      TimeSpan operator--(int);
       /// @endcond
     };
   }

@@ -37,7 +37,7 @@ namespace {
     
     Dinosaur(const Dinosaur& dinosaur) : name(dinosaur.name), numberOfLegsUsedToWalk(dinosaur.numberOfLegsUsedToWalk) {}
     
-    Dinosaur& operator =(const Dinosaur& dinasaure) {
+    Dinosaur& operator=(const Dinosaur& dinasaure) {
       name = dinasaure.name;
       numberOfLegsUsedToWalk = dinasaure.numberOfLegsUsedToWalk;
       return *this;

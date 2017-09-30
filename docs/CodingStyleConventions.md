@@ -1,3 +1,31 @@
+![Switch Header](Pictures/SwitchNativeC++port.png)
+
+| [Home](Home.md) | [Gallery](Gallery.md) | [Examples](Examples.md) | [Downloads](Downloads.md) | [Documentation](Documentation.md) | [Project](https://sourceforge.net/projects/switchpro) | [Source](https://github.com/gammasoft71/switch) | [License](License.md) | [Contact](Contact.md) | [GAMMA Soft](https://gammasoft71.wixsite.com/gammasoft) |
+|-----------------|-----------------------|-------------------------|-------------------------|-----------------------------------|-------------------------------------------------------|-------------------------------------------------|-----------------------|-----------------------|---------------------------------------------------------|
+
+# Editor
+
+**√ DO** Replace tab by two space in your editor or IDE properties. 
+
+# Comments
+
+**√ DO** Using simple line comment // as block comment /* */
+
+```c++
+// This is my
+// mulitline comment
+int x = 3;
+```
+
+# Documentation
+
+The documentation is generate by Doxygen.
+
+**√ DO** Document only in header file (.hpp).
+
+There is an example of doxygen decumented class :
+
+```c++
 /// @file
 /// @brief Contains Switch::System::Object class.
 #pragma once
@@ -13,7 +41,7 @@ namespace Switch {
   template<typename T>
   class RefPtr;
   /// @endcond
-
+  
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @cond
@@ -35,7 +63,7 @@ namespace Switch {
       
       /// @cond
       Object(const Object&) = default;
-      Object& operator=(const Object&) = default;
+      Object& operator =(const Object&) = default;
       virtual ~Object() = default;
       bool operator==(const Object& obj) const {return Equals(obj);}
       bool operator!=(const Object& obj) const {return !this->operator==(obj);}
@@ -100,18 +128,229 @@ namespace Switch {
   using object = System::Object;
 }
 
-std::ostream& operator<<(std::ostream& os, const System::Object& value);
+using namespace Switch;
 
-#include "_String.hpp"
-#include "Type.hpp"
+```
 
-#include "../RefPtr.hpp"
+For more informations see [doxygen documentation](http://www.doxygen.org)
 
-namespace Switch {
-  namespace System {
-    template<typename T>
-    RefPtr<Object> Object::MemberwiseClone() const {return ref_new<T>(as<T>(*this));}
+# Indentation
+
+**√ DO** Indent block contents
+
+```c++
+namespace Test {
+  class AClass {
+    void Method() {
+      int x;
+      int y;
+    }
+  };
+}
+```
+
+**X DO NOT** Indent open and close braces
+
+```c++
+class AClass {
+  int aField;
+
+  void AMethod() {
+  }
+};
+```
+
+**X DO NOT** Indent switch sections
+
+```c++
+class AClass {
+  void Method(int x) {
+    switch (x) {
+    case 1:
+      break;
+    }
+  }
+};
+```
+
+**√ DO** Indent case sections
+
+```c++
+class AClass {
+  void Method(int x) {
+    switch (x) {
+    case 1:
+      break;
+    }
+  }
+};
+```
+
+**X DO NOT** Indent label
+
+```c++
+class Test {
+  void Method() {
+  label:
+    Console::WriteLine("Hello World");
+  }
+};
+```
+
+# New lines
+
+## New line options for braces
+
+**X DO NOT** Place open brace on new line for types
+
+```c++
+class Example {
+};
+```
+
+**X DO NOT** Place open brace on new line for methods
+
+```c++
+void Example() {
+}
+```
+
+**X DO NOT** Place open brace on new line for properties
+
+```c++
+_property<int> Example {
+  _get {
+    return 1;
+  },
+  _set {
+    // nothing
+  }
+};
+
+```
+
+**X DO NOT** Place open brace on new line for property accessors
+
+```c++
+_property<int> Example {
+  _get {
+    return 1;
+  },
+  _set {
+    // nothing
+  }
+};
+
+```
+
+**X DO NOT** Place open brace on new line for lambda expressions
+
+```c++
+void Example() {
+  auto del = _delegate(int i, int j) {
+  };
+}
+```
+
+**X DO NOT** Place open brace on new line for control blocks
+
+```c++
+void Example() {
+  if (true) {
   }
 }
+```
 
-using namespace Switch;
+**X DO NOT** Place open brace on new line for object initializers
+
+```c++
+void Example() {
+  new ArrayList {
+    "One", 2, 3_min
+  };
+}
+```
+
+## New line options for keywords
+
+**X DO NOT** Place "else" on new line
+
+```c++
+void Example() {
+  if (true) {
+    // ...
+  } else {
+    // ...
+  }
+}
+```
+
+**X DO NOT** Place "catch" on new line
+
+```c++
+void Example() {
+  try {
+    // ...
+  } catch(...) {
+    // ...
+  }
+}
+```
+
+## New line options for expressions
+
+**X DO NOT** Place memberin object initializers on new line
+
+```c++
+void Example() {
+  new ArrayList {
+    "One", 2, 3_min
+  };
+}
+```
+
+**X DO NOT** Place query expression clauses on new line
+
+```c++
+void Example() {
+  auto q = _from a _in e 
+           _from b _in e _select a * b;
+}
+```
+
+# Spacing
+
+## Set spacing for method declarations
+
+**X DO NOT** Insert space between method name and its opening parenthesis
+
+```c++
+void Example() {
+}
+```
+
+**X DO NOT** Insert space within argument list parentheses
+
+```c++
+void Example(int i, int j) {
+}
+```
+
+
+**X DO NOT** Insert space within empty argument list parentheses
+
+```c++
+void Example() {
+}
+```
+
+
+# See also
+​
+Other Resources
+
+* [Framework Design Guidelines](FrameworkDesignGuidelines.md)
+
+______________________________________________________________________________________________
+
+© 2010 - 2017 by GAMMA Soft.

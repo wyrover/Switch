@@ -18,7 +18,7 @@ Type::Type() : FullName(_delegate {return this->GetFullName();}),  Name(_delegat
 Type::Type(const ::type& type) : FullName(_delegate {return this->GetFullName();}),  Name(_delegate {return this->GetName();}), Namespace(_delegate {return this->GetNamespace();}), type(type) {
 }
 
-Type& Type::operator =(const Type& type) {
+Type& Type::operator=(const Type& type) {
   memcpy((void*)&this->type, (void*)&type.type, sizeof(type.type));
   return *this;
 }

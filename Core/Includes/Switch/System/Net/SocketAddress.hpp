@@ -41,7 +41,7 @@ namespace Switch {
         
         /// @cond
         SocketAddress(const SocketAddress& socketAddress): bytes(socketAddress.bytes) {}
-        SocketAddress& operator =(const SocketAddress& socketAddress) {this->bytes = socketAddress.bytes; return *this;}
+        SocketAddress& operator=(const SocketAddress& socketAddress) {this->bytes = socketAddress.bytes; return *this;}
         /// @endcond
         
         /// @brief Gets the address family to which the endpoint belongs.

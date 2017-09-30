@@ -119,7 +119,7 @@ namespace Switch {
       /// @brief Explicit operator equal between Exception
       /// @param value Value to assign this instance.
       /// @return Exception& This instance assigned
-      Exception& operator =(const Exception& value);
+      Exception& operator=(const Exception& value);
 
       /// @brief Check if the generation of the stack trace is enabled.
       /// @return true if stack trace generation is enabled.

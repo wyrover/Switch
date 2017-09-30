@@ -206,22 +206,22 @@ UInt64::operator uint64() const {
   return this->value;
 }
 
-UInt64& UInt64::operator =(const UInt64& value) {
+UInt64& UInt64::operator=(const UInt64& value) {
   this->value = value.value;
   return *this;
 }
 
-UInt64& UInt64::operator +=(const UInt64& value) {
+UInt64& UInt64::operator+=(const UInt64& value) {
   this->value += value.value;
   return *this;
 }
 
-UInt64& UInt64::operator -=(const UInt64& value) {
+UInt64& UInt64::operator-=(const UInt64& value) {
   this->value -= value.value;
   return *this;
 }
 
-UInt64& UInt64::operator *=(const UInt64& value) {
+UInt64& UInt64::operator*=(const UInt64& value) {
   this->value *= value.value;
   return *this;
 }
@@ -257,31 +257,31 @@ UInt64& UInt64::operator ^=(const UInt64& value) {
    return *this;
 }
 
-UInt64& UInt64::operator <<=(const UInt64& value) {
+UInt64& UInt64::operator<<=(const UInt64& value) {
    this->value <<= value.value;
    return *this;
 }
 
-UInt64& UInt64::operator >>=(const UInt64& value) {
+UInt64& UInt64::operator>>=(const UInt64& value) {
    this->value >>= value.value;
    return *this;
 }
 
-UInt64& UInt64::operator ++() {
+UInt64& UInt64::operator++() {
   ++this->value;
   return *this;
 }
 
-const UInt64 UInt64::operator ++(int) {
+const UInt64 UInt64::operator++(int) {
   return this->value++;
 }
 
-UInt64& UInt64::operator --() {
+UInt64& UInt64::operator--() {
   --this->value;
   return *this;
 }
 
-const UInt64 UInt64::operator --(int) {
+const UInt64 UInt64::operator--(int) {
   return this->value--;
 }
 

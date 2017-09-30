@@ -27,7 +27,7 @@ namespace Switch {
       ConsoleKeyInfo(const ConsoleKeyInfo& keyInfo) : keyChar(keyInfo.keyChar), key(keyInfo.key), modifiers(keyInfo.modifiers) {}
       
       /// @cond
-      ConsoleKeyInfo& operator =(const ConsoleKeyInfo& keyInfo) {
+      ConsoleKeyInfo& operator=(const ConsoleKeyInfo& keyInfo) {
         this->keyChar = keyInfo.keyChar;
         this->key = keyInfo.key;
         this->modifiers = keyInfo.modifiers;

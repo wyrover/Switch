@@ -28,7 +28,7 @@ namespace Switch {
         RegistryKey();
         RegistryKey(const RegistryKey& rk) : handle(rk.handle), name(rk.name), path(rk.path), permission(rk.permission), values(rk.values) {}
 
-        RegistryKey& operator =(const RegistryKey& rk) {
+        RegistryKey& operator=(const RegistryKey& rk) {
           this->handle = rk.handle;
           this->name = rk.name;
           this->path = rk.path;
@@ -302,7 +302,7 @@ namespace Switch {
             }
           }
 
-          RegistryKeyValue& operator =(const RegistryKeyValue& rkv) {
+          RegistryKeyValue& operator=(const RegistryKeyValue& rkv) {
             this->key = rkv.key;
             this->value = rkv.value;
             this->kind = rkv.kind;

@@ -70,7 +70,7 @@ namespace Switch {
         public:
           Decoder(int32 cp) : Encoding::Decoder(), codePage(cp) { }
           Decoder(const Decoder& b);
-          Decoder& operator =(const Decoder& b);
+          Decoder& operator=(const Decoder& b);
           void Add(byte b) override;
           void Reset() override;
           String ToString() const override;
@@ -87,7 +87,7 @@ namespace Switch {
         public:
           Encoder(int32 cp);
           Encoder(const Encoder& e);
-          Encoder& operator =(const Encoder& b);
+          Encoder& operator=(const Encoder& b);
           int32 GetNbBytes(char32) const override;
           void Encode(char32 codePoint, byte* bytes) const override;
           String ToString() const override;
@@ -101,8 +101,8 @@ namespace Switch {
       private:
         ANSIEncoding();
         ANSIEncoding(const ANSIEncoding& encoding);
-        virtual ANSIEncoding& operator =(const ANSIEncoding& encoding);
-        Encoding& operator =(const Encoding& encoding) override;
+        virtual ANSIEncoding& operator=(const ANSIEncoding& encoding);
+        Encoding& operator=(const Encoding& encoding) override;
         /// @endcond
       };
       

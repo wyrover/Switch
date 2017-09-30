@@ -26,7 +26,7 @@ namespace Switch {
       
       DateTime2(const DateTime2& date) : dateData(date.dateData) {}
       
-      DateTime2& operator =(const DateTime2& date ) {
+      DateTime2& operator=(const DateTime2& date ) {
         this->dateData = date.dateData;
         return *this;
       }

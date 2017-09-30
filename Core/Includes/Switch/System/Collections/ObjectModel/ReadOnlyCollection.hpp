@@ -133,7 +133,7 @@ namespace Switch {
           /// @brief Clear the Collection and insert the element of the Collection given in argument.
           /// @param collection the Collection which elements will be inserted from
           /// @return Collection<T> the Collection
-          ReadOnlyCollection<T>& operator =(const ReadOnlyCollection<T>& collection) {throw NotSupportedException("Collection is read-only.", _caller);}
+          ReadOnlyCollection<T>& operator=(const ReadOnlyCollection<T>& collection) {throw NotSupportedException("Collection is read-only.", _caller);}
 
         protected:
           /// @cond

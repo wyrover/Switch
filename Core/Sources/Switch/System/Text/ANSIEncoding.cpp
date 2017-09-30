@@ -15,14 +15,14 @@ ANSIEncoding::ANSIEncoding(const ANSIEncoding& encoding) : Encoding(encoding) {
   
 }
 
-ANSIEncoding& ANSIEncoding::operator =(const ANSIEncoding& encoding) {
-  Encoding::operator =(encoding);
+ANSIEncoding& ANSIEncoding::operator=(const ANSIEncoding& encoding) {
+  Encoding::operator=(encoding);
   return *this;
 }
 
-Encoding& ANSIEncoding::operator =(const Encoding& encoding) {
+Encoding& ANSIEncoding::operator=(const Encoding& encoding) {
   if (!is<ANSIEncoding>(encoding))
-    return Encoding::operator =(encoding);
+    return Encoding::operator=(encoding);
   return operator= (static_cast<const ANSIEncoding&>(encoding));
 }
 
@@ -136,8 +136,8 @@ ANSIEncoding::Encoder::Encoder(const ANSIEncoding::Encoder& e) : Encoding::Encod
   codePage = e.codePage;
 }
 
-ANSIEncoding::Encoder& ANSIEncoding::Encoder::operator =(const ANSIEncoding::Encoder& b) {
-  Encoding::Encoder::operator =(b);
+ANSIEncoding::Encoder& ANSIEncoding::Encoder::operator=(const ANSIEncoding::Encoder& b) {
+  Encoding::Encoder::operator=(b);
   codePage = b.codePage;
   return *this;
 }
@@ -441,8 +441,8 @@ ANSIEncoding::Decoder::Decoder(const ANSIEncoding::Decoder& b) : Encoding::Decod
   codePage = b.codePage;
 }
 
-ANSIEncoding::Decoder& ANSIEncoding::Decoder::operator =(const ANSIEncoding::Decoder& b) {
-  Encoding::Decoder::operator =(b);
+ANSIEncoding::Decoder& ANSIEncoding::Decoder::operator=(const ANSIEncoding::Decoder& b) {
+  Encoding::Decoder::operator=(b);
   codePage = b.codePage;
   return *this;
 }

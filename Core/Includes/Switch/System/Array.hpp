@@ -375,7 +375,7 @@ namespace Switch {
       public:
         Comparer(const System::Collections::Generic::IComparer<T>* comparer) : comparer(comparer) { }
         Comparer(const Comparer& comparer) { *this = comparer; }
-        Comparer& operator =(const Comparer& comparer) {this->comparer = comparer.comparer; return *this;}
+        Comparer& operator=(const Comparer& comparer) {this->comparer = comparer.comparer; return *this;}
         bool operator()(const T& e1, const T& e2) const { return this->comparer->Compare(e1,e2) < 0; }
       private:
         const System::Collections::Generic::IComparer<T>* comparer;
@@ -390,7 +390,7 @@ namespace Switch {
         ComparisonComparer(const ComparisonComparer& mc) { *this = mc; }
         ~ComparisonComparer() { }
         
-        ComparisonComparer& operator =(const ComparisonComparer& mc) { comparer = mc.comparer; return *this; }
+        ComparisonComparer& operator=(const ComparisonComparer& mc) { comparer = mc.comparer; return *this; }
         bool operator()(const T& e1, const T& e2) const { return comparer(e1,e2) < 0; }
       };
       

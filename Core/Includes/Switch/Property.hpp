@@ -28,24 +28,24 @@ public:
   T operator ()() const {return this->getter();}
   
   operator T () const {return this->getter();}
-  _property& operator =(const _property& _property) {this->setter(_property.getter()); return *this;}
-  bool operator ==(T value) const {return this->getter() == value;}
+  _property& operator=(const _property& _property) {this->setter(_property.getter()); return *this;}
+  bool operator==(T value) const {return this->getter() == value;}
   bool operator !=(T value) const {return this->getter() != value;}
   
   T Set(T value) {this->setter(value); return this->getter();}
   T operator ()(T value) {this->setter(value); return this->getter();}
   
-  _property& operator =(T value) {this->setter(value); return *this;}
-  void operator +=(T value) {this->setter(this->getter() + value);}
-  void operator -=(T value) {this->setter(this->getter() - value);}
-  void operator *=(T value) {this->setter(this->getter() * value);}
+  _property& operator=(T value) {this->setter(value); return *this;}
+  void operator+=(T value) {this->setter(this->getter() + value);}
+  void operator-=(T value) {this->setter(this->getter() - value);}
+  void operator*=(T value) {this->setter(this->getter() * value);}
   void operator /=(T value) {this->setter(this->getter() / value);}
   void operator %=(T value) {this->setter(this->getter() % value);}
   void operator &=(T value) {this->setter(this->getter() & value);}
   void operator |=(T value) {this->setter(this->getter() | value);}
   void operator ^=(T value) {this->setter(this->getter() ^ value);}
-  void operator <<=(T value) {this->setter(this->getter() << value);}
-  void operator >>=(T value) {this->setter(this->getter() >> value);}
+  void operator<<=(T value) {this->setter(this->getter() << value);}
+  void operator>>=(T value) {this->setter(this->getter() >> value);}
   
 private:
   _property(const _property& _property)  = delete;
@@ -61,12 +61,12 @@ class _property<T, _readonly> : public _readonly {
   
 public:
   _property(const Getter& getter) : getter(getter) {}
-  _property& operator =(const _property& _property) {return *this;}
+  _property& operator=(const _property& _property) {return *this;}
   
   T Get() const {return this->getter();}
   T operator ()() const {return this->getter();}
   operator T () const {return this->getter();}
-  bool operator ==(T value) const {return this->getter() == value;}
+  bool operator==(T value) const {return this->getter() == value;}
   bool operator !=(T value) const {return this->getter() != value;}
   
 private:
@@ -82,11 +82,11 @@ class _property<T, _writeonly> : public _writeonly {
   
 public:
   _property(const Setter& setter) : setter(setter) {}
-  _property& operator =(const _property& _property) {return *this;}
+  _property& operator=(const _property& _property) {return *this;}
   
   void Set(T value) {this->setter(value);}
   void operator ()(T value) {this->setter(value);}
-  void operator =(T value) {this->setter(value);}
+  void operator=(T value) {this->setter(value);}
   
 private:
   _property(const _property& _property)  = delete;

@@ -29,13 +29,13 @@ template <typename T>
 class AddFlagOperators<T, true> : public FalseType { };
 
 template <typename T, typename std::enable_if<AddFlagOperators<T>::value>::type* = nullptr>
-inline T& operator +=(T& lhs, T rhs) {
+inline T& operator+=(T& lhs, T rhs) {
   lhs = static_cast<T>(static_cast<typename std::underlying_type<T>::type>(lhs) + static_cast<typename std::underlying_type<T>::type>(rhs));
   return lhs;
 }
 
 template <typename T, typename std::enable_if<AddFlagOperators<T>::value>::type* = nullptr>
-inline T& operator -=(T& lhs, T rhs) {
+inline T& operator-=(T& lhs, T rhs) {
   lhs = static_cast<T>(static_cast<typename std::underlying_type<T>::type>(lhs) - static_cast<typename std::underlying_type<T>::type>(rhs));
   return lhs;
 }
@@ -59,10 +59,10 @@ inline T& operator ^=(T& lhs, T rhs) {
 }
 
 template <typename T, typename std::enable_if<AddFlagOperators<T>::value>::type* = nullptr>
-inline T operator +(T lhs, T rhs) {return static_cast<T>(static_cast<typename std::underlying_type<T>::type>(lhs) + static_cast<typename std::underlying_type<T>::type>(rhs));}
+inline T operator+(T lhs, T rhs) {return static_cast<T>(static_cast<typename std::underlying_type<T>::type>(lhs) + static_cast<typename std::underlying_type<T>::type>(rhs));}
 
 template <typename T, typename std::enable_if<AddFlagOperators<T>::value>::type* = nullptr>
-inline T operator -(T lhs, T rhs) {return static_cast<T>(static_cast<typename std::underlying_type<T>::type>(lhs) - static_cast<typename std::underlying_type<T>::type>(rhs));}
+inline T operator-(T lhs, T rhs) {return static_cast<T>(static_cast<typename std::underlying_type<T>::type>(lhs) - static_cast<typename std::underlying_type<T>::type>(rhs));}
 
 template <typename T, typename std::enable_if<AddFlagOperators<T>::value>::type* = nullptr>
 inline T operator &(T lhs, T rhs) {return static_cast<T>(static_cast<typename std::underlying_type<T>::type>(lhs) & static_cast<typename std::underlying_type<T>::type>(rhs));}

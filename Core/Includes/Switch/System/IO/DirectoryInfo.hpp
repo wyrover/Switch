@@ -31,7 +31,7 @@ namespace Switch {
 
         /// @cond
         DirectoryInfo(const DirectoryInfo& directoryInfo) : FileSystemInfo(directoryInfo) { }
-        DirectoryInfo& operator =(const DirectoryInfo& directoryInfo) {this->FileSystemInfo::operator=(directoryInfo); return *this;}
+        DirectoryInfo& operator=(const DirectoryInfo& directoryInfo) {this->FileSystemInfo::operator=(directoryInfo); return *this;}
         /// @endcond
         
         /// @brief Gets the parent directory of a specified subdirectory.

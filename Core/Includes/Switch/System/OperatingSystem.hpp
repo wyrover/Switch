@@ -22,7 +22,7 @@ namespace Switch {
       OperatingSystem(PlatformID platform, const Version& version) : platform(platform), version(version) {}
       /// @cond
       OperatingSystem(const OperatingSystem& operatingSystem) : platform(operatingSystem.platform), version(operatingSystem.version) {}
-      OperatingSystem& operator =(const OperatingSystem& operatingSystem) {
+      OperatingSystem& operator=(const OperatingSystem& operatingSystem) {
         this->platform = operatingSystem.platform;
         this->version = operatingSystem.version;
         return *this;

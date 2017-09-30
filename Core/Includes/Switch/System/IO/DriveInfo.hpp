@@ -22,7 +22,7 @@ namespace Switch {
 
         /// @cond
         DriveInfo(const DriveInfo& driveInfo) : driveName(driveInfo.driveName) { }
-        DriveInfo& operator =(const DriveInfo& driveInfo) {
+        DriveInfo& operator=(const DriveInfo& driveInfo) {
           this->driveName = driveInfo.driveName;
           return *this;
         }

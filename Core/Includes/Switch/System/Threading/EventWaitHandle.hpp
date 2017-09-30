@@ -58,7 +58,7 @@ namespace Switch {
         /// @cond
         EventWaitHandle(const EventWaitHandle& evh) : guard(evh.guard), signal(evh.signal), event(evh.event), mode(evh.mode), name(evh.name) {}
         ~EventWaitHandle()  {Close();}
-        EventWaitHandle& operator =(const EventWaitHandle& evh) {
+        EventWaitHandle& operator=(const EventWaitHandle& evh) {
           this->guard = evh.guard;
           this->signal = evh.signal;
           this->event = evh.event;

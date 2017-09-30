@@ -264,7 +264,7 @@ namespace Switch {
           /// @param dictionnary the SortedDictionary which elements will be inserted from
           /// @return a reference to the current SortedDictionary
           /// @exception ArgumentNullException dictionary is null.
-          SortedDictionary& operator =(const SortedDictionary& dictionary) {
+          SortedDictionary& operator=(const SortedDictionary& dictionary) {
             this->comparer = dictionary.comparer;
             this->map = dictionary.map;
             this->operationNumber = 0;
@@ -282,7 +282,7 @@ namespace Switch {
               MapComparer(const MapComparer& mc) { comparer = mc.comparer; }
               ~MapComparer() { }
 
-              MapComparer& operator =(const MapComparer& mc) { comparer = mc.comparer; return *this; }
+              MapComparer& operator=(const MapComparer& mc) { comparer = mc.comparer; return *this; }
               bool operator()(const TKey& e1, const TKey& e2) const { return comparer().Compare(e1,e2) < 0; }
           };
           /// @endcond

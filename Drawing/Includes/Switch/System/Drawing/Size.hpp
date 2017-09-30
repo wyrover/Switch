@@ -93,10 +93,10 @@ namespace Switch {
       public:
         /// @cond
         Size& operator=(const Size& sz);
-        Size operator +(const Size& sz) const;
-        Size operator -(const Size& sz) const;
-        Size& operator +=(const Size& sz);
-        Size& operator -=(const Size& sz);
+        Size operator+(const Size& sz) const;
+        Size operator-(const Size& sz) const;
+        Size& operator+=(const Size& sz);
+        Size& operator-=(const Size& sz);
         /// @endcond
       };
     }

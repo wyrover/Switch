@@ -25,7 +25,7 @@ namespace Switch {
 
       /// @cond
       ConsoleCancelEventArgs(const ConsoleCancelEventArgs& consoleCancelSpecialEventArgs) : cancel(consoleCancelSpecialEventArgs.cancel), specialKey(consoleCancelSpecialEventArgs.specialKey) {}
-      ConsoleCancelEventArgs& operator =(const ConsoleCancelEventArgs& consoleCancelSpecialEventArgs) {
+      ConsoleCancelEventArgs& operator=(const ConsoleCancelEventArgs& consoleCancelSpecialEventArgs) {
         this->cancel = consoleCancelSpecialEventArgs.cancel;
         this->specialKey = consoleCancelSpecialEventArgs.specialKey;
         return *this;

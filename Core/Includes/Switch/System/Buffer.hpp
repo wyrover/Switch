@@ -23,7 +23,7 @@ namespace Switch {
       /// @cond
       Buffer() = delete;
       Buffer(const Buffer&) = delete;
-      Buffer& operator =(const Buffer&) = delete;
+      Buffer& operator=(const Buffer&) = delete;
       /// @endcond
 
       /// @brief Compare a specified number of bytes from a first buffer starting at a particular offset to a second buffer starting at a particular offset.

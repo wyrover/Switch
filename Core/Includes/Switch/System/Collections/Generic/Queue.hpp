@@ -173,7 +173,7 @@ namespace Switch {
 
           /// @brief Copies the elements in queue to the current queue (they are equal after this operation).
           /// @return a reference to the current queue.
-          Queue& operator =(const Queue& queue) {
+          Queue& operator=(const Queue& queue) {
             this->operationNumber++;
             this->queue.clear();
             typename std::list<T, TAllocator>::const_iterator it;

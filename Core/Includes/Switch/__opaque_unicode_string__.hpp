@@ -36,13 +36,13 @@ class _export __opaque_unicode_string__ {
   __opaque_unicode_string__(__opaque_unicode_string__&& str) : string(std::move(str.string)), stringSize(str.stringSize) {str.stringSize = 0;}
   
   bool operator==(const __opaque_unicode_string__& str) const {return this->stringSize == str.stringSize && this->string == str.string;}
-  __opaque_unicode_string__& operator =(const __opaque_unicode_string__& str) {
+  __opaque_unicode_string__& operator=(const __opaque_unicode_string__& str) {
     this->string = str.string;
     this->stringSize = str.stringSize;
     return *this;
   }
   
-  __opaque_unicode_string__& operator +=(const __opaque_unicode_string__& s) {
+  __opaque_unicode_string__& operator+=(const __opaque_unicode_string__& s) {
     this->string.append(s.string);
     this->stringSize += s.stringSize;
     return *this;
@@ -88,11 +88,11 @@ class _export __opaque_unicode_string__ {
   class const_iterator : public std::iterator<std::forward_iterator_tag, char32_t> {
   public:
     const_iterator(const const_iterator& it);
-    const_iterator& operator ++();
-    const_iterator operator ++(int);
-    bool operator ==(const const_iterator& rhs) const;
+    const_iterator& operator++();
+    const_iterator operator++(int);
+    bool operator==(const const_iterator& rhs) const;
     bool operator !=(const const_iterator& rhs) const;
-    char32_t operator *() const;
+    char32_t operator*() const;
     
     int get_byte_index() const { return this->position; }
     int get_format() const { return this->format; }
@@ -116,7 +116,7 @@ class _export __opaque_unicode_string__ {
     bool operator==(const iterator& rhs) const;
     bool operator!=(const iterator& rhs) const;
     char32_t operator*() const;
-    char32_t& operator *();
+    char32_t& operator*();
     
     int get_byte_index() const { return this->position; }
     int get_format() const { return this->format; }

@@ -40,7 +40,7 @@ namespace Switch {
 
         /// @cond
         FileInfo(const FileInfo& fileInfo);
-        FileInfo& operator =(const FileInfo& fileInfo) {this->FileSystemInfo::operator=(fileInfo); return *this;}
+        FileInfo& operator=(const FileInfo& fileInfo) {this->FileSystemInfo::operator=(fileInfo); return *this;}
         /// @endcond
         
         /// @brief Gets an instance of the parent directory.

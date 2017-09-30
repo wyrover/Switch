@@ -74,7 +74,7 @@ private:
       free(this->value);
   }
   
-  __opaque_inner_function_ptr__& operator =(const __opaque_inner_function_ptr__& rhs) {
+  __opaque_inner_function_ptr__& operator=(const __opaque_inner_function_ptr__& rhs) {
     if (this->value != null && this->size != 0)
       free(this->value);
     
@@ -86,7 +86,7 @@ private:
     return *this;
   }
   
-  bool operator ==(const __opaque_inner_function_ptr__& rhs) const {
+  bool operator==(const __opaque_inner_function_ptr__& rhs) const {
     if (this->size != rhs.size)
       return false;
     return memcmp(this->value, rhs.value, this->size) == 0;
@@ -150,7 +150,7 @@ public:
   template<typename T>
   __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
   
-  FunctionType& operator =(const FunctionType& function) {
+  FunctionType& operator=(const FunctionType& function) {
     this->target = function.target;
     this->method = function.method;
     this->invoker = function.invoker;
@@ -161,7 +161,7 @@ public:
   
   TResult operator ()(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13, T14 a14, T15 a15, T16 a16) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16); }
   
-  bool operator ==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
+  bool operator==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
   
   bool operator !=(const FunctionType& other) const { return this->target != other.target || this->method != other.method; }
   
@@ -264,7 +264,7 @@ public:
   template<typename T>
   __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
   
-  FunctionType& operator =(const FunctionType& function) {
+  FunctionType& operator=(const FunctionType& function) {
     this->target = function.target;
     this->method = function.method;
     this->invoker = function.invoker;
@@ -275,7 +275,7 @@ public:
   
   TResult operator ()(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13, T14 a14, T15 a15) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15); }
   
-  bool operator ==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
+  bool operator==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
   
   bool operator !=(const FunctionType& other) const { return this->target != other.target || this->method != other.method; }
   
@@ -378,7 +378,7 @@ public:
   template<typename T>
   __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
   
-  FunctionType& operator =(const FunctionType& function) {
+  FunctionType& operator=(const FunctionType& function) {
     this->target = function.target;
     this->method = function.method;
     this->invoker = function.invoker;
@@ -389,7 +389,7 @@ public:
   
   TResult operator ()(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13, T14 a14) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14); }
   
-  bool operator ==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
+  bool operator==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
   
   bool operator !=(const FunctionType& other) const { return this->target != other.target || this->method != other.method; }
   
@@ -492,7 +492,7 @@ public:
   template<typename T>
   __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
   
-  FunctionType& operator =(const FunctionType& function) {
+  FunctionType& operator=(const FunctionType& function) {
     this->target = function.target;
     this->method = function.method;
     this->invoker = function.invoker;
@@ -503,7 +503,7 @@ public:
   
   TResult operator ()(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13); }
   
-  bool operator ==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
+  bool operator==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
   
   bool operator !=(const FunctionType& other) const { return this->target != other.target || this->method != other.method; }
   
@@ -606,7 +606,7 @@ public:
   template<typename T>
   __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
   
-  FunctionType& operator =(const FunctionType& function) {
+  FunctionType& operator=(const FunctionType& function) {
     this->target = function.target;
     this->method = function.method;
     this->invoker = function.invoker;
@@ -617,7 +617,7 @@ public:
   
   TResult operator ()(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12); }
   
-  bool operator ==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
+  bool operator==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
   
   bool operator !=(const FunctionType& other) const { return this->target != other.target || this->method != other.method; }
   
@@ -720,7 +720,7 @@ public:
   template<typename T>
   __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
   
-  FunctionType& operator =(const FunctionType& function) {
+  FunctionType& operator=(const FunctionType& function) {
     this->target = function.target;
     this->method = function.method;
     this->invoker = function.invoker;
@@ -731,7 +731,7 @@ public:
   
   TResult operator ()(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11); }
   
-  bool operator ==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
+  bool operator==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
   
   bool operator !=(const FunctionType& other) const { return this->target != other.target || this->method != other.method; }
   
@@ -834,7 +834,7 @@ public:
   template<typename T>
   __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
   
-  FunctionType& operator =(const FunctionType& function) {
+  FunctionType& operator=(const FunctionType& function) {
     this->target = function.target;
     this->method = function.method;
     this->invoker = function.invoker;
@@ -845,7 +845,7 @@ public:
   
   TResult operator ()(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10); }
   
-  bool operator ==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
+  bool operator==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
   
   bool operator !=(const FunctionType& other) const { return this->target != other.target || this->method != other.method; }
   
@@ -948,7 +948,7 @@ public:
   template<typename T>
   __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
   
-  FunctionType& operator =(const FunctionType& function) {
+  FunctionType& operator=(const FunctionType& function) {
     this->target = function.target;
     this->method = function.method;
     this->invoker = function.invoker;
@@ -959,7 +959,7 @@ public:
   
   TResult operator ()(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5, a6, a7, a8, a9); }
   
-  bool operator ==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
+  bool operator==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
   
   bool operator !=(const FunctionType& other) const { return this->target != other.target || this->method != other.method; }
   
@@ -1061,7 +1061,7 @@ public:
   template<typename T>
   __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
   
-  FunctionType& operator =(const FunctionType& function) {
+  FunctionType& operator=(const FunctionType& function) {
     this->target = function.target;
     this->method = function.method;
     this->invoker = function.invoker;
@@ -1072,7 +1072,7 @@ public:
   
   TResult operator ()(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5, a6, a7, a8); }
   
-  bool operator ==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
+  bool operator==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
   
   bool operator !=(const FunctionType& other) const { return this->target != other.target || this->method != other.method; }
   
@@ -1175,7 +1175,7 @@ public:
   template<typename T>
   __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
   
-  FunctionType& operator =(const FunctionType& function) {
+  FunctionType& operator=(const FunctionType& function) {
     this->target = function.target;
     this->method = function.method;
     this->invoker = function.invoker;
@@ -1186,7 +1186,7 @@ public:
   
   TResult operator ()(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5, a6, a7); }
   
-  bool operator ==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
+  bool operator==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
   
   bool operator !=(const FunctionType& other) const { return this->target != other.target || this->method != other.method; }
   
@@ -1288,7 +1288,7 @@ public:
   template<typename T>
   __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
   
-  FunctionType& operator =(const FunctionType& function) {
+  FunctionType& operator=(const FunctionType& function) {
     this->target = function.target;
     this->method = function.method;
     this->invoker = function.invoker;
@@ -1299,7 +1299,7 @@ public:
   
   TResult operator ()(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5, a6); }
   
-  bool operator ==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
+  bool operator==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
   
   bool operator !=(const FunctionType& other) const { return this->target != other.target || this->method != other.method; }
   
@@ -1402,7 +1402,7 @@ public:
   template<typename T>
   __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
   
-  FunctionType& operator =(const FunctionType& function) {
+  FunctionType& operator=(const FunctionType& function) {
     this->target = function.target;
     this->method = function.method;
     this->invoker = function.invoker;
@@ -1413,7 +1413,7 @@ public:
   
   TResult operator ()(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5); }
   
-  bool operator ==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
+  bool operator==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
   
   bool operator !=(const FunctionType& other) const { return this->target != other.target || this->method != other.method; }
   
@@ -1497,7 +1497,7 @@ public:
   template<typename T>
   __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
   
-  FunctionType& operator =(const FunctionType& function) {
+  FunctionType& operator=(const FunctionType& function) {
     this->target = function.target;
     this->method = function.method;
     this->invoker = function.invoker;
@@ -1508,7 +1508,7 @@ public:
   
   TResult operator ()(T1 a1, T2 a2, T3 a3, T4 a4) const { return this->invoker(this->target, this->method, a1, a2, a3, a4); }
   
-  bool operator ==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
+  bool operator==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
   
   bool operator !=(const FunctionType& other) const { return this->target != other.target || this->method != other.method; }
   
@@ -1611,7 +1611,7 @@ public:
   template<typename T>
   __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
   
-  FunctionType& operator =(const FunctionType& function) {
+  FunctionType& operator=(const FunctionType& function) {
     this->target = function.target;
     this->method = function.method;
     this->invoker = function.invoker;
@@ -1622,7 +1622,7 @@ public:
   
   TResult operator ()(T1 a1, T2 a2, T3 a3) const { return this->invoker(this->target, this->method, a1, a2, a3); }
   
-  bool operator ==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
+  bool operator==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
   
   bool operator !=(const FunctionType& other) const { return this->target != other.target || this->method != other.method; }
   
@@ -1725,7 +1725,7 @@ public:
   template<typename T>
   __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
   
-  FunctionType& operator =(const FunctionType& function) {
+  FunctionType& operator=(const FunctionType& function) {
     this->target = function.target;
     this->method = function.method;
     this->invoker = function.invoker;
@@ -1736,7 +1736,7 @@ public:
   
   TResult operator ()(T1 a1, T2 a2) const { return this->invoker(this->target, this->method, a1, a2); }
   
-  bool operator ==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
+  bool operator==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
   
   bool operator !=(const FunctionType& other) const { return this->target != other.target || this->method != other.method; }
   
@@ -1836,7 +1836,7 @@ public:
   template<typename T>
   __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
   
-  FunctionType& operator =(const FunctionType& function) {
+  FunctionType& operator=(const FunctionType& function) {
     this->target = function.target;
     this->method = function.method;
     this->invoker = function.invoker;
@@ -1847,7 +1847,7 @@ public:
   
   TResult operator ()(T1 a1) const { return this->invoker(this->target, this->method, a1); }
   
-  bool operator ==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
+  bool operator==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
   
   bool operator !=(const FunctionType& other) const { return this->target != other.target || this->method != other.method; }
   
@@ -1949,7 +1949,7 @@ public:
   template<typename T>
   __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
   
-  FunctionType& operator =(const FunctionType& function) {
+  FunctionType& operator=(const FunctionType& function) {
     this->target = function.target;
     this->method = function.method;
     this->invoker = function.invoker;
@@ -1960,7 +1960,7 @@ public:
   
   TResult operator ()() const { return this->invoker(this->target, this->method); }
   
-  bool operator ==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
+  bool operator==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
   
   bool operator !=(const FunctionType& other) const { return this->target != other.target || this->method != other.method; }
   

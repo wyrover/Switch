@@ -47,7 +47,7 @@ namespace Switch {
   
           HashSet(HashSet&& s) : hashset(Move(s.hashset)), operationNumber(s.operationNumber), comparer(Move(s.comparer)) {s.operationNumber= 0;}
           
-          HashSet& operator =(const HashSet& s) {
+          HashSet& operator=(const HashSet& s) {
             this->operationNumber = s.operationNumber;
             this->comparer = s._comparer;
             for (T elem : s)

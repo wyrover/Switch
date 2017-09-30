@@ -65,7 +65,7 @@ namespace Switch {
         /// @cond
         Mutex(const Mutex& mutex) : mutex(mutex.mutex), name(mutex.name) {}
         ~Mutex() {Close();}
-        Mutex& operator =(const Mutex& mutex) {
+        Mutex& operator=(const Mutex& mutex) {
           this->mutex = mutex.mutex;
           this->name = mutex.name;
           return *this;
