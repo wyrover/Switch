@@ -43,7 +43,7 @@ class MyClass {
 
 ```c++
 /// @brief MyFunc do something
-/// @param name A stringthat contains the name.
+/// @param name A string that contains the name.
 /// @remarks The name must be begin by a uppercase; otherwise ArgumentException throws.
 /// @exception ArgumentException name not started by uppercase.
 void MyFunc(string name) {
@@ -159,7 +159,7 @@ using namespace Switch;
 
 ```
 
-For more commands see [Doxygen Special commands](http://www.stack.nl/~dimitri/doxygen/manual/commands.html) and for more informations see [Doxygen Manual](http://www.stack.nl/~dimitri/doxygen/manual/index.html)
+For more commands see [Doxygen Special commands](http://www.stack.nl/~dimitri/doxygen/manual/commands.html) and for more informations see [Doxygen Manual](http://www.stack.nl/~dimitri/doxygen/manual/index.html).
 
 # Indentation
 
@@ -292,7 +292,7 @@ void Example() {
 
 ```c++
 void Example() {
-  new ArrayList {
+  ArrayList {
     "One", 2, 3_min
   };
 }
@@ -441,7 +441,7 @@ void Example() {
 }
 ```
 
-**X DO NOT** Insert space in declaration statements
+**√ DO** Insert space in declaration statements
 
 ```c++
 void Example() {
@@ -501,7 +501,7 @@ void Example() {
 }
 ```
 
-**X DO NOT** Insert space after Structure or class dereference 
+**X DO NOT** Insert space after structure or class dereference 
 
 ```c++
 void Example() {
