@@ -34,10 +34,8 @@ set(INCLUDE_FILES
 
 set(SOURCE_FILES
   Sources/__OS/DrawingApi.hpp
-  Sources/__OS/DrawingApiFltk.cpp
   Sources/__OS/DrawingApiGtk.cpp
   Sources/__OS/DrawingApiWin32.cpp
-  Sources/__OS/SystemColorsFltk.cpp
   Sources/__OS/SystemColorsGtk.cpp
   Sources/__OS/SystemColorsWin32.cpp
   Sources/Switch/System/Drawing/Imaging/FrameDimension.cpp
