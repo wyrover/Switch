@@ -21,7 +21,7 @@ public:
 
 ```c++
 // This is my
-// mulitline comment
+// multiline comment
 int x = 3;
 ```
 
