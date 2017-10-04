@@ -19,7 +19,10 @@ dist: trusty
 sudo: enabled
 compiler: clang
 language: cpp
-
+before_install:
+  - pip install --user codecov
+after_success:
+  - codecov --file coverage/lcov.info --disable search
 script:
   - cmake --version
   - mkdir -p Build/Examples
@@ -33,7 +36,7 @@ script:
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then export CC=clang-3.8; fi
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then export CXX=clang++-3.8; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew update; fi
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install curl doxygen fltk gtkmm3 jpeg libpng zlib -y; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install curl doxygen gtkmm3 jpeg libpng zlib -y; fi
   - cd Build/ThirdParties
   - cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ../../ThirdParties 
   - make all -j6
@@ -41,7 +44,5 @@ script:
   - cd ..
   - cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=ON ..
   - make all -j6
-  #- sudo make install
-  #- cd Release
-  #- ./Switch.Core.UnitTests
+  #- ./Release/Switch.Core.UnitTests
   
