@@ -2,6 +2,7 @@
 /// @brief Contains Switch::System::Math class.
 #pragma once
 
+#include <cmath>
 #include "../Static.hpp"
 #include "Convert.hpp"
 #include "Double.hpp"
@@ -508,3 +509,8 @@ namespace Switch {
 }
 
 using namespace Switch;
+
+/// @cond
+inline float operator%(const System::Single& a , const System::Single& b) {return std::fmod(a, b);}
+inline double operator%(const System::Double& a , const System::Double& b) {return std::fmod(a, b);}
+/// @endcond

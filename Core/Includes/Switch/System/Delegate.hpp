@@ -59,7 +59,7 @@ namespace Switch {
       
       /// @cond
       template<typename Fn>
-      Delegate(Fn function) {this->functions.push_back(function);}
+      Delegate(Fn function) {this->functions.push_back(Function(function));}
 
       template<typename Object, typename A1>
       Delegate(const Object& object, Result(Object::*member)(A1) const) {
