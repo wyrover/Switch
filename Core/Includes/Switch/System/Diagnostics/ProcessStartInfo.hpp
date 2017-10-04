@@ -3,7 +3,7 @@
 #pragma once
 
 #include "../Security/SecureString.hpp"
-#include "../Collections/Generic/Dictionary.hpp"
+#include "../Collections/Specialized/StringDictionary.hpp"
 #include "../ComponentModel/InvalidEnumArgumentException.hpp"
 #include "../Environment.hpp"
 #include "../Nullable.hpp"
@@ -18,6 +18,13 @@ namespace Switch {
     /// @brief The System::Diagnostics namespace provides classes that allow you to interact with system processes, event logs, and performance counters.
     namespace Diagnostics {
       /// @brief Specifies a set of values that are used when you start a process.
+      /// @remarks ProcessStartInfo is used together with the Process component. When you start a process using the Process class, you have access to process information in addition to that available when attaching to a running process.
+      /// @remarks You can use the ProcessStartInfo class for better control over the process you start. You must at least set the FileName property, either manually or using the constructor. The file name is any application or document. Here a document is defined to be any file type that has an open or default action associated with it. You can view registered file types and their associated applications for your computer by using the Folder Options dialog box, which is available through the operating system. The Advanced button leads to a dialog box that shows whether there is an open action associated with a specific registered file type.
+      /// @remarks In addition, you can set other properties that define actions to take with that file. You can specify a value specific to the type of the FileName property for the Verb property. For example, you can specify "print" for a document type. Additionally, you can specify Arguments property values to be command-line arguments to pass to the file's open procedure. For example, if you specify a text editor application in the FileName property, you can use the Arguments property to specify a text file to be opened by the editor.
+      /// @remarks Standard input is usually the keyboard, and standard output and standard error are usually the monitor screen. However, you can use the RedirectStandardInput, RedirectStandardOutput, and RedirectStandardError properties to cause the process to get input from or return output to a file or other device. If you use the StandardInput, StandardOutput, or StandardError properties on the Process component, you must first set the corresponding value on the ProcessStartInfo property. Otherwise, the system throws an exception when you read or write to the stream.
+      /// @remarks Set UseShellExecute to specify whether to start the process by using the operating system shell.
+      /// @remarks You can change the value of any ProcessStartInfo property up to the time that the process starts. After you start the process, changing these values has no effect.
+      /// @note This class contains a link demand at the class level that applies to all members. A SecurityException is thrown when the immediate caller does not have full-trust permission. For details about security demands, see Link Demands.
       class _export ProcessStartInfo final : public Object {
       public:
         /// @brief Initializes a new instance of the ProcessStartInfo class without specifying a file name with which to start the process.
@@ -68,11 +75,19 @@ namespace Switch {
           _set {this->data->domain = value;}
         };
 
+        /// @brief Gets the environment variables that apply to this process and its child processes.
+        /// @return IDictionary<string, string> A generic dictionary containing the environment variables that apply to this process and its child processes.
+        /// @remarks The environment variables contain search paths for files, directories for temporary files, application-specific options, and other similar information. Although you cannot directly set the Environment property, you can modify the generic dictionary returned by the property. For example, the following code adds a TempPath environment variable: myProcess.StartInfo.Environment.Add("TempPath", "C:\\Temp"). You must set the UseShellExecute property to false to start the process after changing the Environment property. If UseShellExecute is true, an InvalidOperationException is thrown when the Start method is called.
+        /// @remarks On Switch Framework applications, using the Environment property is the same as using the EnvironmentVariables property.
+        _property<Collections::Generic::IDictionary<string, string>&, _readonly> Environment {
+          _get->Collections::Generic::IDictionary<string, string>&{ return this->data->environmentVariables; }
+        };
+
         /// @brief Gets search paths for files, directories for temporary files, application-specific options, and other similar information.
         /// @return Dictionary<string, string> A string dictionary that provides environment variables that apply to this process and child processes. The default is empty.
         /// @remarks Although you cannot set the EnvironmentVariables property, you can modify the StringDictionary returned by the property. For example, the following code adds a TempPath environment variable: myProcess.StartInfo.EnvironmentVariables.Add("TempPath", "C:\\Temp"). You must set the UseShellExecute property to false to start the process after changing the EnvironmentVariables property. If UseShellExecute is true, an InvalidOperationException is thrown when the Start method is called.
-        _property<Collections::Generic::Dictionary<string, string>&, _readonly> EnvironmentVariables {
-          _get->Collections::Generic::Dictionary<string, string>& {return this->data->environmentVariables;}
+        _property<Collections::Specialized::StringDictionary&, _readonly> EnvironmentVariables {
+          _get->Collections::Specialized::StringDictionary&{ return this->data->environmentVariables; }
         };
 
         /// @brief Gets or sets a value indicating whether an error dialog box is displayed to the user if the process cannot be started.
@@ -294,7 +309,7 @@ namespace Switch {
           String domain;
           bool errorDialog = false;
           intptr errorDialogParamHandle = 0;
-          Collections::Generic::Dictionary<String, String> environmentVariables;
+          Collections::Specialized::StringDictionary environmentVariables;
           String fileName;
           bool loadUserProfile = false;
           System::Security::SecureString password;

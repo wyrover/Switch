@@ -53,6 +53,7 @@ set(INCLUDE_FILES
   Includes/Switch/System/Diagnostics/NullTraceListener.hpp
   Includes/Switch/System/Diagnostics/Process.hpp
   Includes/Switch/System/Diagnostics/ProcessStartInfo.hpp
+  Includes/Switch/System/Diagnostics/ProcessPriorityClass.hpp
   Includes/Switch/System/Diagnostics/ProcessWindowStyle.hpp
   Includes/Switch/System/Diagnostics/StackFrame.hpp
   Includes/Switch/System/Diagnostics/StackTrace.hpp
