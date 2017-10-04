@@ -23,9 +23,9 @@ namespace FormExample {
       this->StartPosition = FormStartPosition::Manual;
       this->Location = System::Drawing::Point(300, 200);
       this->Size = System::Drawing::Size(640, 480);
-      this->Controls().Add(button);
+      this->Controls().Add(this->button);
       this->FormClosing += _delegate(const object& sender, FormClosingEventArgs& e) {
-        e.Cancel = MessageBox::Show("Do you really want to save and exit?", "Close Form", MessageBoxButtons::YesNoCancel, MessageBoxIcon::Question) ==  DialogResult::Cancel;
+        e.Cancel = MessageBox::Show("Are you sure you want exit?", "Close Form", MessageBoxButtons::YesNo, MessageBoxIcon::Question) ==  DialogResult::No;
       };
     }
     
