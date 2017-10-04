@@ -14,13 +14,6 @@ namespace Examples {
   public:
     // The main entry point for the application.
     static void Main() {
-      delegate<void, const object&, const EventArgs&> Click;
-      
-      Click += _delegate {
-        Console::WriteLine("Clicked");
-      };
-      
-      Click.Invoke(object(), EventArgs());
     }
   };
 }
