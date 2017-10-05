@@ -3,7 +3,7 @@ source_group(src REGULAR_EXPRESSION "/src/[-_,A-Za-z0-9]+\\.c*")
 add_library(Switch.TUnit.Main STATIC src/Main.cpp)
 target_link_libraries(Switch.TUnit.Main Switch.TUnit)
 
-set_target_properties(Switch.TUnit.Main PROPERTIES FOLDER src/TUnit.Main)
+set_target_properties(Switch.TUnit.Main PROPERTIES FOLDER src)
 
 install(TARGETS Switch.TUnit.Main EXPORT Switch DESTINATION lib)
 if(MSVC)

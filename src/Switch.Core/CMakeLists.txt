@@ -605,7 +605,7 @@ source_group(src REGULAR_EXPRESSION "/src/[-_,A-Za-z0-9]+\\.c*")
 add_library(Switch.Core STATIC ${INCLUDE_FILES} ${SOURCE_FILES})
 target_include_directories(Switch.Core PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include> $<INSTALL_INTERFACE:include>)
 target_link_libraries(Switch.Core call_stack ${CURL_LIBRARIES} easywsclient Rs232 ZLIB::ZLIB Threads::Threads ${STANDARD_CORE_LINK_LIBRARIES})
-set_target_properties(Switch.Core PROPERTIES FOLDER src/Core)
+set_target_properties(Switch.Core PROPERTIES FOLDER src)
 
 if (BUILD_TESTS)
   add_subdirectory("ManualTests")
