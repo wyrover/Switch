@@ -31,7 +31,7 @@ else ()
   set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/${CMAKE_BUILD_TYPE})
 endif ()
 
-include(SwitchDependencies.cmake)
+include(scripts/cmake/SwitchDependencies.cmake)
 
 # Summary
 message(STATUS "Building Switch ${Switch_VERSION}")
@@ -70,30 +70,30 @@ message(STATUS "System [${CMAKE_SYSTEM}]")
 message(STATUS "Build type [${CMAKE_BUILD_TYPE}]")
 
 if (BUILD_CORE)
-  add_subdirectory("sources/Core")
+  add_subdirectory("src/Core")
 endif()
 
 if (BUILD_DRAWING)
-  add_subdirectory("sources/Drawing")
+  add_subdirectory("src/Drawing")
 endif()
 
 if (BUILD_FORMS)
-  add_subdirectory("sources/Forms")
+  add_subdirectory("src/Forms")
 endif()
 
 if (BUILD_SYSTEM)
-  add_subdirectory("sources/System")
+  add_subdirectory("src/System")
 endif()
 
 if (BUILD_TUNIT)
-  add_subdirectory("sources/TUnit")
-  add_subdirectory("sources/TUnit.Main")
+  add_subdirectory("src/TUnit")
+  add_subdirectory("src/TUnit.Main")
 endif()
 
-add_subdirectory("sources/Switch")
+add_subdirectory("src/Switch")
 
 install(EXPORT Switch DESTINATION cmake)
-install(FILES SwitchConfig.cmake SwitchDependencies.cmake DESTINATION cmake)
+install(FILES scripts/cmake/SwitchConfig.cmake scripts/cmake/SwitchDependencies.cmake DESTINATION cmake)
 
 find_package(Doxygen)
 if(DOXYGEN_FOUND)

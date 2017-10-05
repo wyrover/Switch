@@ -154,7 +154,7 @@ Start 2 tests from 1 test case
 End 2 tests from 1 test case ran. (4 ms total)
 ```
 
-[Click here to see more examples](https://github.com/gammasoft71/Switch/tree/master/Examples)
+[Click here to see more examples](https://github.com/gammasoft71/Switch/tree/master/examples)
 
 ______________________________________________________________________________________________
 

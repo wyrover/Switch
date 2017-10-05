@@ -135,7 +135,7 @@ add_executable(HelloWorldTest HelloWorldTest.cpp)
 target_link_libraries(HelloWorldTest Switch.TUnit.Main)
 ```
 
-For more examples see [Examples](Examples)
+For more examples see [Examples](examples)
 
 # Download Switch 0.3.3
 
