@@ -29,7 +29,7 @@ set(INCLUDE_FILES
   include/Switch/System/Drawing/Size.hpp
   include/Switch/System/Drawing/SizeF.hpp
   include/Switch/System/Drawing/SystemColors.hpp
-  include/Switch/Drawing.hpp
+  include/Switch/System.Drawing.hpp
 )
 
 set(SOURCE_FILES
@@ -71,22 +71,22 @@ set(COCOA_SOURCE_FILES
 )
 endif ()
 
-source_group(include\\Switch\\System REGULAR_EXPRESSION "/include/Switch/System/[-_,A-Za-z0-9]+\\.hpp*")
-source_group(include\\Switch\\System\\Drawing REGULAR_EXPRESSION "/include/Switch/System/Drawing/[-_,A-Za-z0-9]+\\.hpp*")
-source_group(include\\Switch\\System\\Drawing\\Drawing2D REGULAR_EXPRESSION "/include/Switch/System/Drawing/Drawing2D/[-_,A-Za-z0-9]+\\.hpp*")
-source_group(include\\Switch\\System\\Drawing\\Imaging REGULAR_EXPRESSION "/include/Switch/System/Drawing/Imaging/[-_,A-Za-z0-9]+\\.hpp*")
-source_group(include\\Switch\\System\\Drawing\\Text REGULAR_EXPRESSION "/include/Switch/System/Drawing/Text/[-_,A-Za-z0-9]+\\.hpp*")
-source_group(include\\Switch REGULAR_EXPRESSION "/include/Switch/[-_,A-Za-z0-9]+\\.hpp*")
-source_group(include\\Switch REGULAR_EXPRESSION "/include/Switch/[-_,A-Za-z0-9]")
-source_group(include REGULAR_EXPRESSION "/include/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(src\\Switch\\System REGULAR_EXPRESSION "src/Switch/System/[-_,A-Za-z0-9]+\\.c*")
+source_group(src\\Switch\\System\\Drawing REGULAR_EXPRESSION "src/Switch/System/Drawing/[-_,A-Za-z0-9]+\\.*")
+source_group(src\\Switch\\System\\Drawing\\Imaging REGULAR_EXPRESSION "src/Switch/System/Drawing/Imaging/[-_,A-Za-z0-9]+\\.*")
+source_group(src\\Switch\\System\\Drawing\\Text REGULAR_EXPRESSION "src/Switch/System/Drawing/Text/[-_,A-Za-z0-9]+\\.*")
+source_group(src\\Switch REGULAR_EXPRESSION "src/Switch/[-_,A-Za-z0-9]+\\.c*")
+source_group(src\\__OS REGULAR_EXPRESSION "src/__OS/[-_,A-Za-z0-9]+\\.*")
+source_group(src REGULAR_EXPRESSION "src/[-_,A-Za-z0-9]+\\.c*")
 
-source_group(src\\Switch\\System REGULAR_EXPRESSION "/src/Switch/System/[-_,A-Za-z0-9]+\\.c*")
-source_group(src\\Switch\\System\\Drawing REGULAR_EXPRESSION "/src/Switch/System/Drawing/[-_,A-Za-z0-9]+\\.*")
-source_group(src\\Switch\\System\\Drawing\\Imaging REGULAR_EXPRESSION "/src/Switch/System/Drawing/Imaging/[-_,A-Za-z0-9]+\\.*")
-source_group(src\\Switch\\System\\Drawing\\Text REGULAR_EXPRESSION "/src/Switch/System/Drawing/Text/[-_,A-Za-z0-9]+\\.*")
-source_group(src\\Switch REGULAR_EXPRESSION "/src/Switch/[-_,A-Za-z0-9]+\\.c*")
-source_group(src\\__OS REGULAR_EXPRESSION "/src/__OS/[-_,A-Za-z0-9]+\\.*")
-source_group(src REGULAR_EXPRESSION "/src/[-_,A-Za-z0-9]+\\.c*")
+source_group(include\\Switch\\System REGULAR_EXPRESSION "include/Switch/System/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(include\\Switch\\System\\Drawing REGULAR_EXPRESSION "include/Switch/System/Drawing/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(include\\Switch\\System\\Drawing\\Drawing2D REGULAR_EXPRESSION "include/Switch/System/Drawing/Drawing2D/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(include\\Switch\\System\\Drawing\\Imaging REGULAR_EXPRESSION "include/Switch/System/Drawing/Imaging/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(include\\Switch\\System\\Drawing\\Text REGULAR_EXPRESSION "include/Switch/System/Drawing/Text/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(include\\Switch REGULAR_EXPRESSION "include/Switch/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(include\\Switch REGULAR_EXPRESSION "include/Switch/[-_,A-Za-z0-9]")
+source_group(include REGULAR_EXPRESSION "include/[-_,A-Za-z0-9]+\\.hpp*")
 
 add_library(Switch.System.Drawing STATIC ${INCLUDE_FILES} ${SOURCE_FILES} ${COCOA_SOURCE_FILES})
 target_include_directories(Switch.System.Drawing PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include> $<INSTALL_INTERFACE:include>)

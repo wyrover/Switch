@@ -105,7 +105,7 @@ set(INCLUDE_FILES
   include/Switch/System/Windows/Forms/UICues.hpp
   include/Switch/System/Windows/Forms/UICuesEventArgs.hpp
   include/Switch/System/Windows/Forms/UICuesEventHandler.hpp
-  include/Switch/Forms.hpp
+  include/Switch/System.Windows.Forms.hpp
 )
 
 set(SOURCE_FILES
@@ -206,25 +206,25 @@ set(SOURCE_FILES
   src/Switch/System/Windows/Forms/TrackBar.cpp
 )
 
-source_group(include REGULAR_EXPRESSION "/include/[-_,A-Za-z0-9]+\\.hpp*")
-source_group(include\\Switch\\System REGULAR_EXPRESSION "/include/Switch/System/[-_,A-Za-z0-9]+\\.hpp*")
-source_group(include\\Switch\\System\\ComponentModel REGULAR_EXPRESSION "/include/Switch/System/ComponentModel/[-_,A-Za-z0-9]+\\.hpp*")
-source_group(include\\Switch\\System\\Media REGULAR_EXPRESSION "/include/Switch/System/Media/[-_,A-Za-z0-9]+\\.hpp*")
-source_group(include\\Switch\\System\\Windows REGULAR_EXPRESSION "/include/Switch/System/Windows/[-_,A-Za-z0-9]+\\.hpp*")
-source_group(include\\Switch\\System\\Windows\\Forms REGULAR_EXPRESSION "/include/Switch/System/Windows/Forms/[-_,A-Za-z0-9]+\\.hpp*")
-source_group(include\\Switch\\System\\Windows\\Forms\\VisualStyles REGULAR_EXPRESSION "/include/Switch/System/Windows/Forms/VisualStyles/[-_,A-Za-z0-9]+\\.hpp*")
-source_group(include\\Switch REGULAR_EXPRESSION "/include/Switch/[-_,A-Za-z0-9]+\\.hpp*")
-source_group(include\\Switch REGULAR_EXPRESSION "/include/Switch/[-_,A-Za-z0-9]")
+source_group(src REGULAR_EXPRESSION "src/[-_,A-Za-z0-9]+\\.c*")
+source_group(src\\__OS REGULAR_EXPRESSION "src/__OS/[-_,A-Za-z0-9]+\\.*")
+source_group(src\\Switch REGULAR_EXPRESSION "src/Switch/[-_,A-Za-z0-9]+\\.c*")
+source_group(src\\Switch\\System REGULAR_EXPRESSION "src/Switch/System/[-_,A-Za-z0-9]+\\.c*")
+source_group(src\\Switch\\System\\ComponentModel REGULAR_EXPRESSION "src/Switch/System/ComponentModel/[-_,A-Za-z0-9]+\\.c*")
+source_group(src\\Switch\\System\\Media REGULAR_EXPRESSION "src/Switch/System/Media/[-_,A-Za-z0-9]+\\.c*")
+source_group(src\\Switch\\System\\Windows REGULAR_EXPRESSION "src/Switch/System/Windows/[-_,A-Za-z0-9]+\\.c*")
+source_group(src\\Switch\\System\\Windows\\Forms REGULAR_EXPRESSION "src/Switch/System/Windows/Forms/[-_,A-Za-z0-9]+\\.(c*|h*|m*)")
+source_group(src\\Switch\\System\\Windows\\Forms\\VisualStyles REGULAR_EXPRESSION "src/Switch/System/Windows/Forms/VisualStyles/[-_,A-Za-z0-9]+\\.c*")
 
-source_group(src REGULAR_EXPRESSION "/src/[-_,A-Za-z0-9]+\\.c*")
-source_group(src\\__OS REGULAR_EXPRESSION "/src/__OS/[-_,A-Za-z0-9]+\\.*")
-source_group(src\\Switch REGULAR_EXPRESSION "/src/Switch/[-_,A-Za-z0-9]+\\.c*")
-source_group(src\\Switch\\System REGULAR_EXPRESSION "/src/Switch/System/[-_,A-Za-z0-9]+\\.c*")
-source_group(src\\Switch\\System\\ComponentModel REGULAR_EXPRESSION "/src/Switch/System/ComponentModel/[-_,A-Za-z0-9]+\\.c*")
-source_group(src\\Switch\\System\\Media REGULAR_EXPRESSION "/src/Switch/System/Media/[-_,A-Za-z0-9]+\\.c*")
-source_group(src\\Switch\\System\\Windows REGULAR_EXPRESSION "/src/Switch/System/Windows/[-_,A-Za-z0-9]+\\.c*")
-source_group(src\\Switch\\System\\Windows\\Forms REGULAR_EXPRESSION "/src/Switch/System/Windows/Forms/[-_,A-Za-z0-9]+\\.(c*|h*|m*)")
-source_group(src\\Switch\\System\\Windows\\Forms\\VisualStyles REGULAR_EXPRESSION "/src/Switch/System/Windows/Forms/VisualStyles/[-_,A-Za-z0-9]+\\.c*")
+source_group(include REGULAR_EXPRESSION "include/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(include\\Switch\\System REGULAR_EXPRESSION "include/Switch/System/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(include\\Switch\\System\\ComponentModel REGULAR_EXPRESSION "include/Switch/System/ComponentModel/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(include\\Switch\\System\\Media REGULAR_EXPRESSION "include/Switch/System/Media/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(include\\Switch\\System\\Windows REGULAR_EXPRESSION "include/Switch/System/Windows/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(include\\Switch\\System\\Windows\\Forms REGULAR_EXPRESSION "include/Switch/System/Windows/Forms/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(include\\Switch\\System\\Windows\\Forms\\VisualStyles REGULAR_EXPRESSION "include/Switch/System/Windows/Forms/VisualStyles/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(include\\Switch REGULAR_EXPRESSION "include/Switch/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(include\\Switch REGULAR_EXPRESSION "include/Switch/[-_,A-Za-z0-9]")
 
 add_library(Switch.System.Windows.Forms STATIC ${INCLUDE_FILES} ${SOURCE_FILES})
 target_include_directories(Switch.System.Windows.Forms PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include> $<INSTALL_INTERFACE:include>)

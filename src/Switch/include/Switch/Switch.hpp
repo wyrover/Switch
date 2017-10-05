@@ -1,6 +1,6 @@
 #pragma once
 
 #include "Switch/Core.hpp"
-#include "Switch/Drawing.hpp"
-#include "Switch/Forms.hpp"
+#include "Switch/System.Drawing.hpp"
+#include "Switch/System.Windows.Forms.hpp"
 #include "Switch/TUnit.hpp"

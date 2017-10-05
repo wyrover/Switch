@@ -1,4 +1,4 @@
-source_group(src REGULAR_EXPRESSION "/src/[-_,A-Za-z0-9]+\\.c*")
+source_group(src REGULAR_EXPRESSION "src/[-_,A-Za-z0-9]+\\.c*")
 
 add_library(Switch.TUnit.Main STATIC src/Main.cpp)
 target_link_libraries(Switch.TUnit.Main Switch.TUnit)
