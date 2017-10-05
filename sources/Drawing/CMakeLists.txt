@@ -92,7 +92,7 @@ add_library(Switch.Drawing STATIC ${INCLUDE_FILES} ${SOURCE_FILES} ${COCOA_SOURC
 target_include_directories(Switch.Drawing PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Includes> $<INSTALL_INTERFACE:include>)
 #target_link_libraries(Switch.Drawing Switch.Core ${JPEG_LIBRARIES} PNG::PNG ${STANDARD_GRAPHIC_LINK_LIBRARIES} ${COCOA_FRAMEWORK})
 target_link_libraries(Switch.Drawing Switch.Core ${JPEG_LIBRARIES} ${PNG_LIBRARY} ${STANDARD_GRAPHIC_LINK_LIBRARIES} ${COCOA_FRAMEWORK})
-set_target_properties(Switch.Drawing PROPERTIES FOLDER Switch/Drawing)
+set_target_properties(Switch.Drawing PROPERTIES FOLDER sources/Drawing)
 
 if (BUILD_TESTS)
   add_subdirectory("UnitTests")

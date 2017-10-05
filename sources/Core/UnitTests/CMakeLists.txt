@@ -140,6 +140,6 @@ source_group(UnitTests\\Switch\\System\\Threading REGULAR_EXPRESSION "/UnitTests
 
 add_executable(Switch.Core.UnitTests ${SOURCE_FILES})
 target_link_libraries(Switch.Core.UnitTests Switch.TUnit.Main Switch.TUnit Switch.Core)
-set_target_properties(Switch.Core.UnitTests PROPERTIES FOLDER Switch/Core)
+set_target_properties(Switch.Core.UnitTests PROPERTIES FOLDER sources/Core)
 
 add_test(NAME Switch.Core.UnitTests COMMAND $<TARGET_FILE_NAME:Switch.Core.UnitTests> --tunit_filter=*.* --tunit_output=xml:Switch.Core.UnitTests.xml WORKING_DIRECTORY $<TARGET_FILE_DIR:Switch.Core.UnitTests>)

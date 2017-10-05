@@ -70,27 +70,27 @@ message(STATUS "System [${CMAKE_SYSTEM}]")
 message(STATUS "Build type [${CMAKE_BUILD_TYPE}]")
 
 if (BUILD_CORE)
-  add_subdirectory("Switch/Core")
+  add_subdirectory("sources/Core")
 endif()
 
 if (BUILD_DRAWING)
-  add_subdirectory("Switch/Drawing")
+  add_subdirectory("sources/Drawing")
 endif()
 
 if (BUILD_FORMS)
-  add_subdirectory("Switch/Forms")
+  add_subdirectory("sources/Forms")
 endif()
 
 if (BUILD_SYSTEM)
-  add_subdirectory("Switch/System")
+  add_subdirectory("sources/System")
 endif()
 
 if (BUILD_TUNIT)
-  add_subdirectory("Switch/TUnit")
-  add_subdirectory("Switch/TUnit.Main")
+  add_subdirectory("sources/TUnit")
+  add_subdirectory("sources/TUnit.Main")
 endif()
 
-add_subdirectory("Switch/Switch")
+add_subdirectory("sources/Switch")
 
 install(EXPORT Switch DESTINATION cmake)
 install(FILES SwitchConfig.cmake SwitchDependencies.cmake DESTINATION cmake)

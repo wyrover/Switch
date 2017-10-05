@@ -11,7 +11,7 @@ source_group(Sources\\Switch\\Microsoft\\Win32 REGULAR_EXPRESSION "/Sources/Swit
 add_library(Switch.System STATIC ${INCLUDE_FILES} ${SOURCE_FILES})
 target_include_directories(Switch.System PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Includes> $<INSTALL_INTERFACE:include>)
 target_link_libraries(Switch.System call_stack ${CURL_LIBRARIES} easywsclient Rs232 ZLIB::ZLIB Threads::Threads ${STANDARD_CORE_LINK_LIBRARIES})
-set_target_properties(Switch.System PROPERTIES FOLDER Switch/System)
+set_target_properties(Switch.System PROPERTIES FOLDER sources/System)
 
 if (BUILD_TESTS)
 #  add_subdirectory("ManualTests")

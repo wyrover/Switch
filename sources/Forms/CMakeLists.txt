@@ -229,7 +229,7 @@ source_group(Sources\\Switch\\System\\Windows\\Forms\\VisualStyles REGULAR_EXPRE
 add_library(Switch.Forms STATIC ${INCLUDE_FILES} ${SOURCE_FILES})
 target_include_directories(Switch.Forms PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Includes> $<INSTALL_INTERFACE:include>)
 target_link_libraries(Switch.Forms Switch.Drawing)
-set_target_properties(Switch.Forms PROPERTIES FOLDER Switch/Forms)
+set_target_properties(Switch.Forms PROPERTIES FOLDER sources/Forms)
 
 if (BUILD_TESTS)
   add_subdirectory("ManualTests")

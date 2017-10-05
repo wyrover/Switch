@@ -14,4 +14,4 @@ add_custom_target(Switch.Includes ALL SOURCES ${INCLUDE_FILES})
 
 install(FILES Includes/Switch/Switch Includes/Switch/Switch.hpp DESTINATION include/Switch)
 
-set_target_properties(Switch.Includes PROPERTIES FOLDER Switch/Switch)
+set_target_properties(Switch.Includes PROPERTIES FOLDER sources/Switch)

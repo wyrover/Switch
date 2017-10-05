@@ -37,7 +37,7 @@ add_library(Switch.TUnit STATIC ${INCLUDE_FILES} ${SOURCE_FILES})
 target_include_directories(Switch.TUnit PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Includes> $<INSTALL_INTERFACE:include>)
 #target_link_libraries(Switch.TUnit GTest::GTest Switch.Core)
 target_link_libraries(Switch.TUnit ${GTEST_LIBRARIES} Switch.Core)
-set_target_properties(Switch.TUnit PROPERTIES FOLDER Switch/TUnit)
+set_target_properties(Switch.TUnit PROPERTIES FOLDER sources/TUnit)
 
 if (BUILD_TESTS)
   add_subdirectory("ManualTests")
