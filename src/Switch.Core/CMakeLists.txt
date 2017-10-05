@@ -607,11 +607,6 @@ target_include_directories(Switch.Core PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_
 target_link_libraries(Switch.Core call_stack ${CURL_LIBRARIES} easywsclient Rs232 ZLIB::ZLIB Threads::Threads ${STANDARD_CORE_LINK_LIBRARIES})
 set_target_properties(Switch.Core PROPERTIES FOLDER src)
 
-if (BUILD_TESTS)
-  add_subdirectory("ManualTests")
-  add_subdirectory("UnitTests")
-endif()
-
 install(TARGETS Switch.Core EXPORT Switch DESTINATION lib)
 install(DIRECTORY "include/Switch/." DESTINATION include/Switch)
 if (MSVC)

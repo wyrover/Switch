@@ -39,11 +39,6 @@ target_include_directories(Switch.TUnit PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT
 target_link_libraries(Switch.TUnit ${GTEST_LIBRARIES} Switch.Core)
 set_target_properties(Switch.TUnit PROPERTIES FOLDER src)
 
-if (BUILD_TESTS)
-  add_subdirectory("ManualTests")
-  add_subdirectory("UnitTests")
-endif()
-
 install(TARGETS Switch.TUnit EXPORT Switch DESTINATION lib)
 install(DIRECTORY "include/Switch/." DESTINATION include/Switch)
 if(MSVC)

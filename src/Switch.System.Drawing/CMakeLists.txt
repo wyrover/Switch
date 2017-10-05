@@ -94,10 +94,6 @@ target_include_directories(Switch.Drawing PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRE
 target_link_libraries(Switch.Drawing Switch.Core ${JPEG_LIBRARIES} ${PNG_LIBRARY} ${STANDARD_GRAPHIC_LINK_LIBRARIES} ${COCOA_FRAMEWORK})
 set_target_properties(Switch.Drawing PROPERTIES FOLDER src)
 
-if (BUILD_TESTS)
-  add_subdirectory("UnitTests")
-endif()
-
 install(TARGETS Switch.Drawing EXPORT Switch DESTINATION lib)
 install(DIRECTORY "include/Switch/." DESTINATION include/Switch)
 if(MSVC)

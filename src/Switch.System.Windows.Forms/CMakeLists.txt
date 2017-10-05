@@ -231,11 +231,6 @@ target_include_directories(Switch.Forms PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT
 target_link_libraries(Switch.Forms Switch.Drawing)
 set_target_properties(Switch.Forms PROPERTIES FOLDER src)
 
-if (BUILD_TESTS)
-  add_subdirectory("ManualTests")
-  add_subdirectory("UnitTests")
-endif()
-
 install(TARGETS Switch.Forms EXPORT Switch DESTINATION lib)
 install(DIRECTORY "include/Switch/." DESTINATION include/Switch)
 if(MSVC)
