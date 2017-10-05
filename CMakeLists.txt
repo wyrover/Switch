@@ -1,19 +1,3 @@
-macro(GroupSources curdir)
-  file(GLOB children RELATIVE ${PROJECT_SOURCE_DIR}/${curdir} ${PROJECT_SOURCE_DIR}/${curdir}/*)
-  foreach(child ${children})
-    if(IS_DIRECTORY ${PROJECT_SOURCE_DIR}/${curdir}/${child})
-      GroupSources(${curdir}/${child})
-    else()
-      string(REPLACE "/" "\\" groupname ${curdir})
-      string(REPLACE ".\\" "" groupname ${groupname})
-      if (${groupname} STREQUAL ".")
-        set(groupname "")        
-      endif()
-      source_group(${groupname} FILES ${PROJECT_SOURCE_DIR}/${curdir}/${child})
-    endif()
-  endforeach()
-endmacro()
-
 cmake_minimum_required(VERSION 3.2)
 
 project(Switch VERSION 0.3.4)
@@ -47,6 +31,7 @@ else ()
   set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/${CMAKE_BUILD_TYPE})
 endif ()
 
+include(scripts/cmake/GroupSources.cmake)
 include(scripts/cmake/SwitchDependencies.cmake)
 
 file(WRITE src/Switch/include/Switch/Switch.hpp "#pragma once\n\n")
@@ -142,10 +127,10 @@ endif()
 
 add_subdirectory("src/Switch")
 
-
 message(STATUS "Compiler [${CMAKE_CXX_COMPILER_ID}]")
 message(STATUS "System [${CMAKE_SYSTEM}]")
 message(STATUS "Build type [${CMAKE_BUILD_TYPE}]")
+message(STATUS "Install prefix [${CMAKE_INSTALL_PREFIX}]")
 
 install(EXPORT Switch DESTINATION cmake)
 install(FILES scripts/cmake/SwitchConfig.cmake scripts/cmake/SwitchDependencies.cmake DESTINATION cmake)
