@@ -17,6 +17,8 @@ namespace Switch {
       namespace Concurrent {
         /// @brief Represents a thread-safe, unordered collection of objects.
         /// @remarks Bags are useful for storing objects when ordering doesn't matter, and unlike sets, bags support duplicates. ConcurrentBag<T> is a thread-safe bag implementation, optimized for scenarios where the same thread will be both producing and consuming data stored in the bag.
+        /// @par Library
+        /// Switch.System
         /// @par Examples
         /// The following example shows how to add and remove items from a ConcurrentBag<T>:
         /// @include ConcurrentBag.cpp

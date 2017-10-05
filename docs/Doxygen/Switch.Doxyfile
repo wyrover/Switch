@@ -791,15 +791,17 @@ WARN_LOGFILE           =
 # Note: If this tag is empty the current directory is searched.
 
 INPUT                  = . \
-                         ../../Core/Includes \
-                         ../../Drawing/Includes \
-                         ../../Forms/Includes \
-                         ../../TUnit/Includes \
+                         ../../Switch/Core/Includes \
+                         ../../Switch/Drawing/Includes \
+                         ../../Switch/Forms/Includes \
+                         ../../Switch/System/Includes \
+                         ../../Switch/TUnit/Includes \
                          @CMAKE_CURRENT_SOURCE_DIR@/docs \
-                         @CMAKE_CURRENT_SOURCE_DIR@/Core/Includes \
-                         @CMAKE_CURRENT_SOURCE_DIR@/Drawing/Includes \
-                         @CMAKE_CURRENT_SOURCE_DIR@/Forms/Includes \
-                         @CMAKE_CURRENT_SOURCE_DIR@/TUnit/Includes
+                         @CMAKE_CURRENT_SOURCE_DIR@/Switch/Core/Includes \
+                         @CMAKE_CURRENT_SOURCE_DIR@/Switch/Drawing/Includes \
+                         @CMAKE_CURRENT_SOURCE_DIR@/Switch/Forms/Includes \
+                         @CMAKE_CURRENT_SOURCE_DIR@/Switch/System/Includes \
+                         @CMAKE_CURRENT_SOURCE_DIR@/Switch/TUnit/Includes
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses
