@@ -5,15 +5,17 @@
 
 # Download Switch 0.3.3
 
-You can download latest stable version on SourceForge
+You can download latest stable version on [SourceForge](https://sourceforge.net/projects/switchpro)
 
 [![Download Portable C++ Framework](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/switchpro/files/latest/download)
 
 # Switch Development
 
-Or download latest development version on GitHub.
+Or clone latest development version on [GitHub](https://github.com/gammasoft71/Switch).
 
-[Sources on GitHub](https://github.com/gammasoft71/Switch)
+```shell
+git clone https://github.com/gammasoft71/Switch .
+```
 
 # Installation
 
