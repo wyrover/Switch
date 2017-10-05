@@ -1,3 +1,5 @@
+project(Switch.TUnit)
+
 set(INCLUDE_FILES
   include/Switch/TUnit/Constraints/Constraint.hpp
   include/Switch/TUnit/Constraints/ConstraintExpression.hpp
@@ -22,16 +24,7 @@ set(SOURCE_FILES
   src/Switch/TUnit/UnitTest.cpp
 )
 
-source_group(src REGULAR_EXPRESSION "src/[-_,A-Za-z0-9]+\\.c*")
-source_group(src\\Switch REGULAR_EXPRESSION "src/Switch/[-_,A-Za-z0-9]+\\.c*")
-source_group(src\\Switch\\TUnit REGULAR_EXPRESSION "src/Switch/TUnit/[-_,A-Za-z0-9]+\\.(c|h)*")
-source_group(src\\Switch\\TUnit\\Constraints REGULAR_EXPRESSION "src/Switch/TUnit/Constraints/[-_,A-Za-z0-9]+\\.c*")
-
-source_group(include REGULAR_EXPRESSION "include/[-_,A-Za-z0-9]+\\.hpp*")
-source_group(include\\Switch REGULAR_EXPRESSION "include/Switch/[-_,A-Za-z0-9]+\\.hpp*")
-source_group(include\\Switch REGULAR_EXPRESSION "include/Switch/[-_,A-Za-z0-9]")
-source_group(include\\Switch\\TUnit REGULAR_EXPRESSION "include/Switch/TUnit/[-_,A-Za-z0-9]+\\.hpp*")
-source_group(include\\Switch\\TUnit\\Constraints REGULAR_EXPRESSION "include/Switch/TUnit/Constraints/[-_,A-Za-z0-9]+\\.hpp*")
+GroupSources(.)
 
 add_library(Switch.TUnit STATIC ${INCLUDE_FILES} ${SOURCE_FILES})
 target_include_directories(Switch.TUnit PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include> $<INSTALL_INTERFACE:include>)

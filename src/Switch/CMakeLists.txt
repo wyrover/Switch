@@ -1,10 +1,11 @@
+Project(Switch.)
+
 set(INCLUDE_FILES
   include/Switch/Switch
   include/Switch/Switch.hpp
 )
 
-source_group(include REGULAR_EXPRESSION "/include/[-_,A-Za-z0-9]+\\.hpp*")
-source_group(include\\Switch REGULAR_EXPRESSION "/include/Switch/[-_,A-Za-z0-9]+\\.hpp*")
+GroupSources(.)
 
 add_library(Switch INTERFACE)
 target_include_directories(Switch INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include> $<INSTALL_INTERFACE:include>)
