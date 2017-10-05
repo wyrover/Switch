@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.2)
 
-project(ThirdParties)
+project(3rdparty)
 
 #________________________________________________________________________________
 #                                                                      call_stack
