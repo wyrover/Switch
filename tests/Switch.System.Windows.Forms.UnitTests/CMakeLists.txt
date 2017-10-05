@@ -1,9 +1,11 @@
+project(Switch.System.Windows.Forms.UnitTests)
+
 set(SOURCE_FILES
-  ApplicationTest.cpp
-  ControlTest.cpp
+  Switch/System/Windows/Forms/ApplicationTest.cpp
+  Switch/System/Windows/Forms/ControlTest.cpp
 )
 
-source_group(UnitTests REGULAR_EXPRESSION "/UnitTests/[-_,A-Za-z0-9]+\\.(c|h)*")
+GRoupSources(.)
 
 add_executable(Switch.System.Windows.Forms.UnitTests ${SOURCE_FILES})
 set_target_properties(Switch.System.Windows.Forms.UnitTests PROPERTIES FOLDER tests)

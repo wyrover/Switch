@@ -1,12 +1,14 @@
+project(Switch.System.Drawing.UnitTests)
+
 set(SOURCE_FILES
-  ColorTest.cpp
-  PointTest.cpp
-  RectangleTest.cpp
-  SizeTest.cpp
-  SystemColorsTest.cpp
+  Switch/System/Drawing/ColorTest.cpp
+  Switch/System/Drawing/PointTest.cpp
+  Switch/System/Drawing/RectangleTest.cpp
+  Switch/System/Drawing/SizeTest.cpp
+  Switch/System/Drawing/SystemColorsTest.cpp
 )
 
-source_group(UnitTests REGULAR_EXPRESSION "/UnitTests/[-_,A-Za-z0-9]+\\.(c|h)*")
+GroupSources(.)
 
 add_executable(Switch.System.Drawing.UnitTests ${SOURCE_FILES})
 target_link_libraries(Switch.System.Drawing.UnitTests Switch.TUnit.Main Switch.TUnit Switch.System.Drawing)

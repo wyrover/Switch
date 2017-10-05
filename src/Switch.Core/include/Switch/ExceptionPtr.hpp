@@ -50,8 +50,6 @@
 #include "System/TypeInitializationException.hpp"
 #include "System/TypeUnloadedException.hpp"
 #include "System/UnauthorizedAccessException.hpp"
-#include "System/UriFormatException.hpp"
-#include "System/UriTemplateMatchException.hpp"
 #include "System/IO/DirectoryNotFoundException.hpp"
 #include "System/IO/DriveNotFoundException.hpp"
 #include "System/IO/EndOfStreamException.hpp"
@@ -64,7 +62,6 @@
 #include "System/IO/PathTooLongException.hpp"
 #include "System/IO/PipeException.hpp"
 #include "System/Net/CookieException.hpp"
-#include "System/Net/HttpListenerException.hpp"
 #include "System/Net/ProtocolViolationException.hpp"
 #include "System/Net/WebException.hpp"
 #include "System/Net/Sockets/SocketException.hpp"
@@ -164,7 +161,6 @@ namespace Switch {
       
       if (is<System::IO::FileFormatException>(exception)) return ExceptionPtr::Create(as<System::IO::FileFormatException>(exception));
       if (is<System::Net::CookieException>(exception)) return ExceptionPtr::Create(as<System::Net::CookieException>(exception));
-      if (is<UriFormatException>(exception)) return ExceptionPtr::Create(as<UriFormatException>(exception));
       if (is<FormatException>(exception)) return ExceptionPtr::Create(as<FormatException>(exception));
       
       if (is<IndexOutOfRangeException>(exception)) return ExceptionPtr::Create(as<IndexOutOfRangeException>(exception));
@@ -188,7 +184,6 @@ namespace Switch {
       if (is<MemberAccessException>(exception)) return ExceptionPtr::Create(as<MemberAccessException>(exception));
       
       if (is<MulticastNotSupportedException>(exception)) return ExceptionPtr::Create(as<MulticastNotSupportedException>(exception));
-      if (is<System::Net::HttpListenerException>(exception)) return ExceptionPtr::Create(as<System::Net::HttpListenerException>(exception));
       if (is<System::Net::Sockets::SocketException>(exception)) return ExceptionPtr::Create(as<System::Net::Sockets::SocketException>(exception));
       if (is<NotImplementedException>(exception)) return ExceptionPtr::Create(as<NotImplementedException>(exception));
       
@@ -227,7 +222,6 @@ namespace Switch {
       
       if (is<TypeUnloadedException>(exception)) return ExceptionPtr::Create(as<TypeUnloadedException>(exception));
       if (is<UnauthorizedAccessException>(exception)) return ExceptionPtr::Create(as<UnauthorizedAccessException>(exception));
-      if (is<UriTemplateMatchException>(exception)) return ExceptionPtr::Create(as<UriTemplateMatchException>(exception));
       
       //if (is<AggregateException>(exception)) return ExceptionPtr::Create(as<AggregateException>(exception));
       if (is<ApplicationException>(exception)) return ExceptionPtr::Create(as<ApplicationException>(exception));

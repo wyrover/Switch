@@ -36,8 +36,6 @@
 #include <Switch/System/TypeAccessException.hpp>
 #include <Switch/System/TypeUnloadedException.hpp>
 #include <Switch/System/UnauthorizedAccessException.hpp>
-#include <Switch/System/UriFormatException.hpp>
-#include <Switch/System/UriTemplateMatchException.hpp>
 #include <Switch/System/IO/DirectoryNotFoundException.hpp>
 #include <Switch/System/IO/DriveNotFoundException.hpp>
 #include <Switch/System/IO/EndOfStreamException.hpp>
@@ -50,7 +48,6 @@
 #include <Switch/System/IO/PathTooLongException.hpp>
 #include <Switch/System/IO/PipeException.hpp>
 #include <Switch/System/Net/CookieException.hpp>
-#include <Switch/System/Net/HttpListenerException.hpp>
 #include <Switch/System/Net/ProtocolViolationException.hpp>
 #include <Switch/System/Net/WebException.hpp>
 #include <Switch/System/Net/Sockets/SocketException.hpp>
@@ -231,8 +228,6 @@ namespace {
     //try { throw TypeInitializationException(Type::GetName(Int32()), NullReferenceException(), _caller); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "The type initializer for '" + Type::GetName(Int32()) + "' threw an exception."); }
     try { throw TypeUnloadedException(_caller); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "Type had been unloaded."); }
     try { throw UnauthorizedAccessException(_caller); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "Attempt to perform an unauthorized operation."); }
-    try { throw UriFormatException(_caller); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "One of identified items was an invalid format."); }
-    try { throw UriTemplateMatchException(_caller); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "System error."); }
   
     try { throw KeyNotFoundException(_caller); } catch (const Exception& e) { EXPECT_EQ("The given key was not present in the dictionnary.", e.Message()); }
   
@@ -249,7 +244,6 @@ namespace {
     try { throw PipeException(_caller); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "I/O error occured."); }
   
     try { throw CookieException(_caller); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "One of identified items is an invalid format."); }
-    try { throw HttpListenerException(_caller); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "The HTTP request failed."); }
     try { throw ProtocolViolationException(_caller); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "Operation is not valid due to the current state of the object."); }
     try { throw WebException(_caller); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "Operation is not valid due to the current state of the object."); }
   

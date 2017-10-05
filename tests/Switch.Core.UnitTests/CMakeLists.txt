@@ -1,3 +1,5 @@
+project(witch.Core.UnitTests)
+
 set(SOURCE_FILES
   Switch/Microsoft/Win32/RegistryKeyUT.cpp
   Switch/Microsoft/Win32/RegistryUT.cpp
@@ -88,7 +90,6 @@ set(SOURCE_FILES
   Switch/System/UInt16UT.cpp
   Switch/System/UInt32UT.cpp
   Switch/System/UInt64UT.cpp
-  Switch/System/UriUT.cpp
   Switch/System/ValueTypeUT.cpp
   Switch/System/VersionUT.cpp
   Switch/AbstractTest.cpp
@@ -118,25 +119,7 @@ set(SOURCE_FILES
   CMakeLists.txt
 )
 
-source_group(UnitTests REGULAR_EXPRESSION "/UnitTests/[-_,A-Za-z0-9]+\\.(c|h)*")
-source_group(UnitTests\\Switch REGULAR_EXPRESSION "/UnitTests/Switch/[-_,A-Za-z0-9]+\\.(c|h)*")
-source_group(UnitTests\\Switch\\Microsoft REGULAR_EXPRESSION "/UnitTests/Switch/Microsoft/[-_,A-Za-z0-9]+\\.(c|h)*")
-source_group(UnitTests\\Switch\\Microsoft\\Win32 REGULAR_EXPRESSION "/UnitTests/Switch/Microsoft/Win32/[-_,A-Za-z0-9]+\\.(c|h)*")
-source_group(UnitTests\\Switch\\System REGULAR_EXPRESSION "/UnitTests/Switch/System/[-_,A-Za-z0-9]+\\.(c|h)*")
-source_group(UnitTests\\Switch\\System\\Collections REGULAR_EXPRESSION "/UnitTests/Switch/System/Collections/[-_,A-Za-z0-9]+\\.(c|h)*")
-source_group(UnitTests\\Switch\\System\\Collections\\Concurrent REGULAR_EXPRESSION "/UnitTests/Switch/System/Collections/Concurrent/[-_,A-Za-z0-9]+\\.(c|h)*")
-source_group(UnitTests\\Switch\\System\\Collections\\Generic REGULAR_EXPRESSION "/UnitTests/Switch/System/Collections/Generic/[-_,A-Za-z0-9]+\\.(c|h)*")
-source_group(UnitTests\\Switch\\System\\Collections\\ObjectModel REGULAR_EXPRESSION "/UnitTests/Switch/System/Collections/ObjectModel/[-_,A-Za-z0-9]+\\.(c|h)*")
-source_group(UnitTests\\Switch\\System\\Diagnostics REGULAR_EXPRESSION "/UnitTests/Switch/System/Diagnostics/[-_,A-Za-z0-9]+\\.(c|h)*")
-source_group(UnitTests\\Switch\\System\\IO REGULAR_EXPRESSION "/UnitTests/Switch/System/IO/[-_,A-Za-z0-9]+\\.(c|h)*")
-source_group(UnitTests\\Switch\\System\\IO\\Ports REGULAR_EXPRESSION "/UnitTests/Switch/System/IO/Ports/[-_,A-Za-z0-9]+\\.(c|h)*")
-source_group(UnitTests\\Switch\\System\\Linq REGULAR_EXPRESSION "/UnitTests/Switch/System/Linq/[-_,A-Za-z0-9]+\\.(c|h)*")
-source_group(UnitTests\\Switch\\System\\Net REGULAR_EXPRESSION "/UnitTests/Switch/System/Net/[-_,A-Za-z0-9]+\\.(c|h)*")
-source_group(UnitTests\\Switch\\System\\Net\\Sockects REGULAR_EXPRESSION "/UnitTests/Switch/System/Net/Sockets/[-_,A-Za-z0-9]+\\.(c|h)*")
-source_group(UnitTests\\Switch\\System\\Runtime\\CompilerServices REGULAR_EXPRESSION "/UnitTests/Switch/System/Runtime/CompilerServices/[-_,A-Za-z0-9]+\\.(c|h)*")
-source_group(UnitTests\\Switch\\System\\Runtime\\Serialization REGULAR_EXPRESSION "/UnitTests/Switch/System/Runtime/Serialization/[-_,A-Za-z0-9]+\\.(c|h)*")
-source_group(UnitTests\\Switch\\System\\Text REGULAR_EXPRESSION "/UnitTests/Switch/System/Text/[-_,A-Za-z0-9]+\\.(c|h)*")
-source_group(UnitTests\\Switch\\System\\Threading REGULAR_EXPRESSION "/UnitTests/Switch/System/Threading/[-_,A-Za-z0-9]+\\.(c|h)*")
+GroupSources(.)
 
 add_executable(Switch.Core.UnitTests ${SOURCE_FILES})
 target_link_libraries(Switch.Core.UnitTests Switch.TUnit.Main Switch.TUnit Switch.Core)

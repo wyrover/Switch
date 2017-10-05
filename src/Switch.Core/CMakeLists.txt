@@ -8,7 +8,6 @@ set(INCLUDE_FILES
   include/Switch/Microsoft/Win32/RegistryOptions.hpp
   include/Switch/Microsoft/Win32/RegistryValueKind.hpp
   include/Switch/Microsoft/Win32/RegistryValueOptions.hpp
-  include/Switch/System/Collections/Concurrent/ConcurrentBag.hpp
   include/Switch/System/Collections/Concurrent/ConcurrentQueue.hpp
   include/Switch/System/Collections/Concurrent/ConcurrentStack.hpp
   include/Switch/System/Collections/Concurrent/IProducerConsumerCollection.hpp
@@ -159,20 +158,10 @@ set(INCLUDE_FILES
   include/Switch/System/Net/IPAddress.hpp
   include/Switch/System/Net/IPEndPoint.hpp
   include/Switch/System/Net/IPHostEntry.hpp
-  include/Switch/System/Net/HttpListenerException.hpp
-  include/Switch/System/Net/HttpStatusCode.hpp
-  include/Switch/System/Net/HttpWebRequest.hpp
-  include/Switch/System/Net/HttpWebResponse.hpp
-  include/Switch/System/Net/FtpStatusCode.hpp
-  include/Switch/System/Net/FtpWebRequest.hpp
-  include/Switch/System/Net/FtpWebResponse.hpp
   include/Switch/System/Net/NetworkCredential.hpp
   include/Switch/System/Net/ProtocolViolationException.hpp
   include/Switch/System/Net/SocketAddress.hpp
   include/Switch/System/Net/WebException.hpp
-  include/Switch/System/Net/WebRequest.hpp
-  include/Switch/System/Net/WebRequestMethods.hpp
-  include/Switch/System/Net/WebResponse.hpp
   include/Switch/System/Runtime/CompilerServices/Caller.hpp
   include/Switch/System/Runtime/Serialization/Formatter.hpp
   include/Switch/System/Runtime/Serialization/IFormatter.hpp
@@ -359,14 +348,6 @@ set(INCLUDE_FILES
   include/Switch/System/UInt64.hpp
   include/Switch/System/UIntPtr.hpp
   include/Switch/System/UnauthorizedAccessException.hpp
-  include/Switch/System/Uri.hpp
-  include/Switch/System/UriComponents.hpp
-  include/Switch/System/UriFormat.hpp
-  include/Switch/System/UriFormatException.hpp
-  include/Switch/System/UriKind.hpp
-  include/Switch/System/UriHostNameType.hpp
-  include/Switch/System/UriPartial.hpp
-  include/Switch/System/UriTemplateMatchException.hpp
   include/Switch/System/ValueType.hpp
   include/Switch/System/Version.hpp
   include/Switch/Abstract.hpp
@@ -468,19 +449,10 @@ set(SOURCE_FILES
   src/Switch/System/Net/Dns.cpp
   src/Switch/System/Net/DnsEndPoint.cpp
   src/Switch/System/Net/EndPoint.cpp
-  src/Switch/System/Net/Internals/curl.cpp
-  src/Switch/System/Net/Internals/curl.hpp
   src/Switch/System/Net/IPAddress.cpp
   src/Switch/System/Net/IPEndPoint.cpp
   src/Switch/System/Net/IPHostEntry.cpp
   src/Switch/System/Net/SocketAddress.cpp
-  src/Switch/System/Net/HttpWebRequest.cpp
-  src/Switch/System/Net/HttpWebResponse.cpp
-  src/Switch/System/Net/FtpWebRequest.cpp
-  src/Switch/System/Net/FtpWebResponse.cpp
-  src/Switch/System/Net/WebRequest.cpp
-  src/Switch/System/Net/WebRequestMethods.cpp
-  src/Switch/System/Net/WebResponse.cpp
   src/Switch/System/Net/Sockets/Socket.cpp
   src/Switch/System/Net/Sockets/UdpClient.cpp
   src/Switch/System/Net/Sockets/NetworkStream.cpp
@@ -543,7 +515,6 @@ set(SOURCE_FILES
   src/Switch/System/UInt32.cpp
   src/Switch/System/UInt64.cpp
   src/Switch/System/UIntPtr.cpp
-  src/Switch/System/Uri.cpp
   src/Switch/ExceptionPtr.cpp
   src/Switch/Hash.cpp
   src/Switch/__opaque_lock_guard__.cpp
@@ -554,7 +525,7 @@ GroupSources(.)
 
 add_library(Switch.Core STATIC ${INCLUDE_FILES} ${SOURCE_FILES})
 target_include_directories(Switch.Core PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include> $<INSTALL_INTERFACE:include>)
-target_link_libraries(Switch.Core call_stack ${CURL_LIBRARIES} easywsclient Rs232 ZLIB::ZLIB Threads::Threads ${STANDARD_CORE_LINK_LIBRARIES})
+target_link_libraries(Switch.Core call_stack easywsclient Rs232 ZLIB::ZLIB Threads::Threads ${STANDARD_CORE_LINK_LIBRARIES})
 set_target_properties(Switch.Core PROPERTIES FOLDER src)
 
 install(TARGETS Switch.Core EXPORT Switch DESTINATION lib)

@@ -1,10 +1,12 @@
+project(Switch.TUnit.UnitTests)
+
 set(SOURCE_FILES
-  AssertTest.cpp
-  ExpectTest.cpp
+  Switch/TUnit/AssertTest.cpp
+  Switch/TUnit/ExpectTest.cpp
   CMakeLists.txt
 )
 
-source_group(TUnit REGULAR_EXPRESSION "/TUnit/[-_,A-Za-z0-9]+\\.(c|h)*")
+GroupSources(.)
 
 add_executable(Switch.TUnit.UnitTests ${SOURCE_FILES})
 target_link_libraries(Switch.TUnit.UnitTests Switch.TUnit.Main Switch.TUnit)

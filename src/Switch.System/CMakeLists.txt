@@ -1,16 +1,46 @@
+project(Switch.System)
+
 set(INCLUDE_FILES
+  include/Switch/System/Collections/Concurrent/ConcurrentBag.hpp
+  include/Switch/System/Net/FtpStatusCode.hpp
+  include/Switch/System/Net/FtpWebRequest.hpp
+  include/Switch/System/Net/FtpWebResponse.hpp
+  include/Switch/System/Net/HttpListenerException.hpp
+  include/Switch/System/Net/HttpStatusCode.hpp
+  include/Switch/System/Net/HttpWebRequest.hpp
+  include/Switch/System/Net/HttpWebResponse.hpp
+  include/Switch/System/Net/WebRequest.hpp
+  include/Switch/System/Net/WebRequestMethods.hpp
+  include/Switch/System/Net/WebResponse.hpp
+  include/Switch/System/Uri.hpp
+  include/Switch/System/UriComponents.hpp
+  include/Switch/System/UriFormat.hpp
+  include/Switch/System/UriFormatException.hpp
+  include/Switch/System/UriKind.hpp
+  include/Switch/System/UriHostNameType.hpp
+  include/Switch/System/UriPartial.hpp
+  include/Switch/System/UriTemplateMatchException.hpp
+  include/Switch/System.hpp
 )
 
 set(SOURCE_FILES
+  src/Switch/System/Net/Internals/curl.cpp
+  src/Switch/System/Net/Internals/curl.hpp
+  src/Switch/System/Net/HttpWebRequest.cpp
+  src/Switch/System/Net/HttpWebResponse.cpp
+  src/Switch/System/Net/FtpWebRequest.cpp
+  src/Switch/System/Net/FtpWebResponse.cpp
+  src/Switch/System/Net/WebRequest.cpp
+  src/Switch/System/Net/WebRequestMethods.cpp
+  src/Switch/System/Net/WebResponse.cpp
+  src/Switch/System/Uri.cpp
 )
 
-source_group(include\\Switch\\Microsoft\\Win32 REGULAR_EXPRESSION "/include/Switch/Microsoft/Win32/[-_,A-Za-z0-9]+\\.hpp*")
-
-source_group(src\\Switch\\Microsoft\\Win32 REGULAR_EXPRESSION "/src/Switch/Microsoft/Win32/[-_,A-Za-z0-9]+\\.c*")
+GroupSources(.)
 
 add_library(Switch.System STATIC ${INCLUDE_FILES} ${SOURCE_FILES})
 target_include_directories(Switch.System PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include> $<INSTALL_INTERFACE:include>)
-target_link_libraries(Switch.System call_stack ${CURL_LIBRARIES} easywsclient Rs232 ZLIB::ZLIB Threads::Threads ${STANDARD_CORE_LINK_LIBRARIES})
+target_link_libraries(Switch.System Switch.Core ${CURL_LIBRARIES})
 set_target_properties(Switch.System PROPERTIES FOLDER src)
 
 install(TARGETS Switch.System EXPORT Switch DESTINATION lib)
