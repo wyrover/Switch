@@ -10,11 +10,9 @@
 
 ![Switch Architecture](Pictures/SwitchArchitecture.png)
 
-# Libraries
+# Switch is composed of 5 libraries
 
-The framework is composed of 4 libraries:
-
-- **Switch.Core** : The Switch.Core library is a library of classes, interfaces, and value types that provide access to system functionality. It is the foundation on which c++ applications, components, and controls are built.
+- **Switch.Core & Switch.System** : The Switch.Core & Swirtch.System libraries are a libraries of classes, interfaces, and value types that provide access to system functionality. It is the foundation on which c++ applications, components, and controls are built.
 - **Switch.Drawing** : The Switch.Drawing library contains types that support basic GDI+ graphics functionality. Child namespaces support advanced two-dimensional and vector graphics functionality, advanced imaging functionality, and print-related and typographical services. A child namespace also contains types that extend design-time user-interface logic and drawing.
 - **Switch.Forms** : The Switch.Forms library contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system.
 - **Switch.TUnit** : The Switch.TUnit library is a unit-testing framework for modern C++14. Initially ported from NUnit.
