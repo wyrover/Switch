@@ -1,40 +1,40 @@
 set(INCLUDE_FILES
-  Includes/Switch/TUnit/Constraints/Constraint.hpp
-  Includes/Switch/TUnit/Constraints/ConstraintExpression.hpp
-  Includes/Switch/TUnit/Constraints/ConstraintValue.hpp
-  Includes/Switch/TUnit/Constraints/Empty.hpp
-  Includes/Switch/TUnit/Constraints/EqualTo.hpp
-  Includes/Switch/TUnit.hpp
-  Includes/Switch/TUnit/Assert.hpp
-  Includes/Switch/TUnit/AssertionException.hpp
-  Includes/Switch/TUnit/AssertionResult.hpp
-  Includes/Switch/TUnit/Expect.hpp
-  Includes/Switch/TUnit/Is.hpp
-  Includes/Switch/TUnit/TestFixture.hpp
-  Includes/Switch/TUnit/UnitTest.hpp
-  Includes/Switch/TUnit.hpp
+  include/Switch/TUnit/Constraints/Constraint.hpp
+  include/Switch/TUnit/Constraints/ConstraintExpression.hpp
+  include/Switch/TUnit/Constraints/ConstraintValue.hpp
+  include/Switch/TUnit/Constraints/Empty.hpp
+  include/Switch/TUnit/Constraints/EqualTo.hpp
+  include/Switch/TUnit.hpp
+  include/Switch/TUnit/Assert.hpp
+  include/Switch/TUnit/AssertionException.hpp
+  include/Switch/TUnit/AssertionResult.hpp
+  include/Switch/TUnit/Expect.hpp
+  include/Switch/TUnit/Is.hpp
+  include/Switch/TUnit/TestFixture.hpp
+  include/Switch/TUnit/UnitTest.hpp
+  include/Switch/TUnit.hpp
 )
 
 set(SOURCE_FILES
-  Sources/Switch/TUnit/AssertionResult.cpp
-  Sources/Switch/TUnit/ConsoleEventListener.hpp
-  Sources/Switch/TUnit/ConsoleEventListener.cpp
-  Sources/Switch/TUnit/UnitTest.cpp
+  src/Switch/TUnit/AssertionResult.cpp
+  src/Switch/TUnit/ConsoleEventListener.hpp
+  src/Switch/TUnit/ConsoleEventListener.cpp
+  src/Switch/TUnit/UnitTest.cpp
 )
 
-source_group(Includes REGULAR_EXPRESSION "/Includes/[-_,A-Za-z0-9]+\\.hpp*")
-source_group(Includes\\Switch REGULAR_EXPRESSION "/Includes/Switch/[-_,A-Za-z0-9]+\\.hpp*")
-source_group(Includes\\Switch REGULAR_EXPRESSION "/Includes/Switch/[-_,A-Za-z0-9]")
-source_group(Includes\\Switch\\TUnit REGULAR_EXPRESSION "/Includes/Switch/TUnit/[-_,A-Za-z0-9]+\\.hpp*")
-source_group(Includes\\Switch\\TUnit\\Constraints REGULAR_EXPRESSION "/Includes/Switch/TUnit/Constraints/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(include REGULAR_EXPRESSION "/include/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(include\\Switch REGULAR_EXPRESSION "/include/Switch/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(include\\Switch REGULAR_EXPRESSION "/include/Switch/[-_,A-Za-z0-9]")
+source_group(include\\Switch\\TUnit REGULAR_EXPRESSION "/include/Switch/TUnit/[-_,A-Za-z0-9]+\\.hpp*")
+source_group(include\\Switch\\TUnit\\Constraints REGULAR_EXPRESSION "/include/Switch/TUnit/Constraints/[-_,A-Za-z0-9]+\\.hpp*")
 
-source_group(Sources REGULAR_EXPRESSION "/Sources/[-_,A-Za-z0-9]+\\.c*")
-source_group(Sources\\Switch REGULAR_EXPRESSION "/Sources/Switch/[-_,A-Za-z0-9]+\\.c*")
-source_group(Sources\\Switch\\TUnit REGULAR_EXPRESSION "/Sources/Switch/TUnit/[-_,A-Za-z0-9]+\\.(c|h)*")
-source_group(Sources\\Switch\\TUnit\\Constraints REGULAR_EXPRESSION "/Sources/Switch/TUnit/Constraints/[-_,A-Za-z0-9]+\\.c*")
+source_group(src REGULAR_EXPRESSION "/src/[-_,A-Za-z0-9]+\\.c*")
+source_group(src\\Switch REGULAR_EXPRESSION "/src/Switch/[-_,A-Za-z0-9]+\\.c*")
+source_group(src\\Switch\\TUnit REGULAR_EXPRESSION "/src/Switch/TUnit/[-_,A-Za-z0-9]+\\.(c|h)*")
+source_group(src\\Switch\\TUnit\\Constraints REGULAR_EXPRESSION "/src/Switch/TUnit/Constraints/[-_,A-Za-z0-9]+\\.c*")
 
 add_library(Switch.TUnit STATIC ${INCLUDE_FILES} ${SOURCE_FILES})
-target_include_directories(Switch.TUnit PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Includes> $<INSTALL_INTERFACE:include>)
+target_include_directories(Switch.TUnit PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include> $<INSTALL_INTERFACE:include>)
 #target_link_libraries(Switch.TUnit GTest::GTest Switch.Core)
 target_link_libraries(Switch.TUnit ${GTEST_LIBRARIES} Switch.Core)
 set_target_properties(Switch.TUnit PROPERTIES FOLDER src/TUnit)
@@ -45,7 +45,7 @@ if (BUILD_TESTS)
 endif()
 
 install(TARGETS Switch.TUnit EXPORT Switch DESTINATION lib)
-install(DIRECTORY "Includes/Switch/." DESTINATION include/Switch)
+install(DIRECTORY "include/Switch/." DESTINATION include/Switch)
 if(MSVC)
   target_compile_options(Switch.TUnit PRIVATE "$<$<CONFIG:Debug>:/Fd$<TARGET_FILE_DIR:Switch.TUnit>/Switch.TUnit${CMAKE_DEBUG_POSTFIX}.pdb>")
   target_compile_options(Switch.TUnit PRIVATE "$<$<CONFIG:Release>:/Fd$<TARGET_FILE_DIR:Switch.TUnit>/Switch.TUnit.pdb>")
