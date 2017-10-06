@@ -2,6 +2,7 @@
 /// @brief Contains include files of System library.
 #pragma once
 
+#include <Switch/Core.hpp>
 #include "System/Collections/Concurrent/ConcurrentBag.hpp"
 #include "System/Net/FtpStatusCode.hpp"
 #include "System/Net/FtpWebRequest.hpp"

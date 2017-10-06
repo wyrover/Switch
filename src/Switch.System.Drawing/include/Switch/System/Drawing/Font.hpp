@@ -15,6 +15,8 @@ namespace Switch {
     /// @brief The System::Drawing namespace provides access to GDI+ basic graphics functionality. More advanced functionality is provided in the System::Drawing::Drawing2D, System::Drawing::Imaging, and System::Drawing::Text namespaces.
     namespace Drawing {
       /// @brief Defines a particular format for text, including font face, size, and style attributes. This class cannot be inherited.
+      /// @par Library
+      /// Switch.System.Drawing
       class _export Font : public object {
       public:
         Font(const string& name) {this->FromName(name, this->data().size, this->data().fontStyle);}

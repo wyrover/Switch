@@ -3,7 +3,7 @@ project(Switch.TUnit.Main)
 GroupSources(.)
 
 add_library(Switch.TUnit.Main STATIC src/Main.cpp)
-target_link_libraries(Switch.TUnit.Main Switch.TUnit)
+target_link_libraries(Switch.TUnit.Main Switch.TUnit.Core)
 
 set_target_properties(Switch.TUnit.Main PROPERTIES FOLDER src)
 

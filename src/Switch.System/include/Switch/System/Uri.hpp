@@ -37,15 +37,17 @@ namespace Switch {
     /// @remarks For hierarchical URIs, if the host is ! terminated with a forward slash (/), one is added.
     /// @remarks By default, any reserved characters in the URI are escaped in accordance with RFC 2396. This behavior changes if International Resource Identifiers or International Domain Name parsing is enabled in which case reserved characters in the URI are escaped in accordance with RFC 3986 and RFC 3987.
     /// @remarks As part of canonicalization in the constructor for some schemes, escaped representations are compacted. The schemes for which URI will compact escaped sequences include the following: file, http, https, net.pipe, and net.tcp. For all other schemes, escaped sequences are ! compacted. For example: if you percent encode the two dots ".." as "%2E%2E" then the URI constructor will compact this sequence for some schemes. For example, the following code sample shows a URI constructor for the http scheme.
+    /// @par Library
+    /// Switch.System
     class _export Uri : public Object, public System::Runtime::Serialization::ISerializable {
     public:
       /// @cond
       void SetUri(const String& uri, UriKind kind) {
         this->originalUri = uri;
         this->kind = kind;
-
+        
         String originalUri = this->originalUri.TrimStart(' ').TrimEnd(' ');
-
+        
         SetScheme(originalUri);
         if (this->scheme != "news") {
           SetUserInfo(originalUri);
@@ -55,26 +57,26 @@ namespace Switch {
         SetPath(originalUri);
         SetFragment(originalUri);
         SetQuery(originalUri);
-
+        
         if (this->kind == UriKind::Absolute) {
           if (this->scheme.Length() == 0)
             throw UriFormatException(_caller);
-
+          
           if (this->scheme != "news" && this->host.Length() == 0)
             throw UriFormatException(_caller);
-
+          
           if (CheckSchemeName(this->scheme) == false)
             throw UriFormatException(_caller);
         } else if (this->kind == UriKind::Relative) {
           if (this->scheme.Length() != 0 && this->host.Length() != 0)
             throw UriFormatException(_caller);
         }
-
+        
         if (originalUri.Length() != 0)
           throw UriFormatException(_caller);
       }
       /// @endcond
-
+      
       /// @brief Specifies the characters that separate the communication protocol scheme from the address portion of the URI. This field is read-only.
       static _property<string, _readonly> SchemeDelimiter;
       
@@ -113,21 +115,21 @@ namespace Switch {
       
       /// @brief Initializes a new instance of the Uri class by copy.
       Uri(const Uri& uri) : originalUri(uri.originalUri), scheme(uri.scheme), schemeDelimiter(uri.schemeDelimiter), userInfo(uri.userInfo), host(uri.host), port(uri.port), path(uri.path), query(uri.query), fragment(uri.fragment), kind(uri.kind) {}
-
+      
       /// @brief Initializes a new instance of the Uri class with the specified URI.
       /// @param uri : A URI.
       /// @exception ArgumentNullException uri is null.
       Uri(const String& uri) {
         SetUri(uri, UriKind::Absolute);
       }
-
+      
       /// @brief Initializes a new instance of the Uri class with the specified URI.
       /// @param uri : A URI.
       /// @exception ArgumentNullException uri is null.
       Uri(const String& uri, UriKind kind) {
         SetUri(uri, kind);
       }
-
+      
       /// @brief Initializes a new instance of the Uri class based on the specified base URI and relative URI string.
       /// @param baseUri : The base URI.
       /// @param relativeUri : The relative URI to add to the base URI.
@@ -135,7 +137,7 @@ namespace Switch {
       Uri(const Uri& baseUri, const String& relativeUri) {
         SetUri(baseUri.originalUri + relativeUri, baseUri.kind);
       }
-
+      
       /// @brief Initializes a new instance of the Uri class based on the combination of a specified base Uri instance and a relative Uri instance.
       /// @param baseUri : An absolute Uri that is the base for the new Uri instance.
       /// @param relativeUri : A relative Uri instance that is combined with baseUri.
@@ -143,7 +145,7 @@ namespace Switch {
       Uri(const Uri& baseUri, const Uri& relativeUri) {
         SetUri(baseUri.originalUri + relativeUri.originalUri, baseUri.kind);
       }
-
+      
       /// @brief Gets the absolute path of the URI.
       /// @return string A string containing the absolute path to the resource.
       /// @exception InvalidOperationException This instance represents a relative URI, and this property is valid only for absolute URIs.
@@ -152,7 +154,7 @@ namespace Switch {
       _property<String, _readonly> AbsolutePath {
         _get {return this->GetComponents(UriComponents::Path, UriFormat::UriEscaped);}
       };
-
+      
       /// @brief Gets the absolute URI.
       /// @return string A string containing the entire URI.
       /// @exception InvalidOperationException This instance represents a relative URI, and this property is valid only for absolute URIs.
@@ -160,15 +162,15 @@ namespace Switch {
       _property<String, _readonly> AbsoluteUri {
         _get {return this->GetComponents(UriComponents::AbsoluteUri, UriFormat::UriEscaped);}
       };
-
+      
       /// @brief Gets the Domain Name System (DNS) host name or IP address and the port number for a server.
       /// @return string A string containing the authority component of the URI represented by this instance.
       /// @exception InvalidOperationException This instance represents a relative URI, and this property is valid only for absolute URIs.
       /// @remarks The Authority property is typically a server DNS host name or IP address. This property might include the service port number if it differs from the default port for the URI. If the Authority component contains reserved characters, these are escaped in the string value returned by this property.
       _property<String, _readonly> Authority {
-        _get {return this->GetComponents(UriComponents::UserInfo|UriComponents::KeepDelimiter, UriFormat::UriEscaped) + GetComponents(UriComponents::Host|UriComponents::KeepDelimiter, UriFormat::UriEscaped) + GetComponents(UriComponents::Port|UriComponents::KeepDelimiter, UriFormat::UriEscaped);}
+        _get {return this->GetComponents(UriComponents((int32)UriComponents::UserInfo|(int32)UriComponents::KeepDelimiter), UriFormat::UriEscaped) + GetComponents(UriComponents((int32)UriComponents::Host|(int32)UriComponents::KeepDelimiter), UriFormat::UriEscaped) + GetComponents(UriComponents((int32)UriComponents::Port|(int32)UriComponents::KeepDelimiter), UriFormat::UriEscaped);}
       };
-
+      
       /// @brief Gets an unescaped host name that is safe to use for DNS resolution.
       /// @return string A string that contains the unescaped host part of the URI that is suitable for DNS resolution; or the original unescaped host string, if it is already suitable for resolution.
       /// @exception InvalidOperationException This instance represents a relative URI, and this property is valid only for absolute URIs.
@@ -176,16 +178,16 @@ namespace Switch {
       _property<String, _readonly> DnsSafeHost {
         _get {return this->GetComponents(UriComponents::Host, UriFormat::SafeUnescaped);}
       };
-
+      
       /// @brief Gets the escaped URI fragment.
       /// @return string A string that contains any URI fragment information.
       /// @exception InvalidOperationException This instance represents a relative URI, and this property is valid only for absolute URIs.
       /// @remarks The Fragment property gets any text following a fragment marker (#) in the URI, including the fragment marker itself. Given the URI http://www.contoso.com/index.htm#main, the Fragment property would return #main.
       /// @remarks The Fragment property is ! considered in any Equals comparison.
       _property<String, _readonly> Fragment {
-        _get {return this->GetComponents(UriComponents::Fragment|UriComponents::KeepDelimiter, UriFormat::UriEscaped);}
+        _get {return this->GetComponents(UriComponents((int32)UriComponents::Fragment|(int32)UriComponents::KeepDelimiter), UriFormat::UriEscaped);}
       };
-
+      
       /// @brief Gets the host component of this instance.
       /// @return string A string that contains the host name. This is usually the DNS host name or IP address of the server.
       /// @exception InvalidOperationException This instance represents a relative URI, and this property is valid only for absolute URIs.
@@ -193,7 +195,7 @@ namespace Switch {
       _property<String, _readonly> Host {
         _get {return this->GetComponents(UriComponents::Host, UriFormat::UriEscaped);}
       };
-
+      
       /// @brief Gets the type of the host name specified in the URI.
       /// @return UriHostNameType A member of the UriHostNameType enumeration.
       /// @exception InvalidOperationException This instance represents a relative URI, and this property is valid only for absolute URIs.
@@ -202,17 +204,17 @@ namespace Switch {
           if (this->kind!= UriKind::Absolute)
             throw InvalidOperationException(_caller);
             
-          if (!String::IsNullOrEmpty(this->Host)) {
-            System::Net::IPAddress ipAddress;
-            if (System::Net::IPAddress::TryParse(this->Host, ipAddress) == false)
-              return UriHostNameType::Dns;
+            if (!String::IsNullOrEmpty(this->Host)) {
+              System::Net::IPAddress ipAddress;
+              if (System::Net::IPAddress::TryParse(this->Host, ipAddress) == false)
+                return UriHostNameType::Dns;
               
-            if (ipAddress.AddressFamily == System::Net::Sockets::AddressFamily::InterNetwork)
-              return UriHostNameType::IPv4;
-            
-            if (ipAddress.AddressFamily == System::Net::Sockets::AddressFamily::InterNetworkV6)
-              return UriHostNameType::IPv6;
-          }
+              if (ipAddress.AddressFamily == System::Net::Sockets::AddressFamily::InterNetwork)
+                return UriHostNameType::IPv4;
+              
+              if (ipAddress.AddressFamily == System::Net::Sockets::AddressFamily::InterNetworkV6)
+                return UriHostNameType::IPv6;
+            }
           
           if (this->Scheme() == Uri::UriSchemeMailto || this->Scheme() == Uri::UriSchemeFile)
             return UriHostNameType::Basic;
@@ -220,14 +222,14 @@ namespace Switch {
           return UriHostNameType::Unknown;
         }
       };
-
+      
       /// @brief Gets whether the Uri instance is absolute.
       /// @return bool A bool value that is true if the Uri instance is absolute; otherwise, false.
       /// @remarks This property is true if the string or Uri instance that was passed into the constructor can be parsed as an absolute Uri instance, which contains a scheme, an authority, and a path. Otherwise, the Uri instance is treated as relative and might omit the scheme or other URI components.
       _property<bool, _readonly> IsAbsoluteUri {
         _get {return this->kind == UriKind::Absolute;}
       };
-
+      
       /// @brief Gets whether the port value of the URI is the default for this scheme.
       /// @return bool A bool value that is true if the value in the Port property is the default port for this scheme; otherwise, false.
       /// @exception InvalidOperationException This instance represents a relative URI, and this property is valid only for absolute URIs.
@@ -236,10 +238,10 @@ namespace Switch {
           if (this->kind != UriKind::Absolute)
             throw InvalidOperationException(_caller);
             
-          return (this->Port() == -1 || this->Port() == 21 || this->Port() == 70 || this->Port() == 80 || this->Port() == 443 || this->Port() == 389 || this->Port() == 25 || this->Port() == 119);
+            return (this->Port() == -1 || this->Port() == 21 || this->Port() == 70 || this->Port() == 80 || this->Port() == 443 || this->Port() == 389 || this->Port() == 25 || this->Port() == 119);
         }
       };
-
+      
       /// @brief Gets a value indicating whether the specified Uri is a file URI.
       /// @return bool A bool value that is true if the Uri is a file URI; otherwise, false.
       /// @exception InvalidOperationException This instance represents a relative URI, and this property is valid only for absolute URIs.
@@ -249,10 +251,10 @@ namespace Switch {
           if (this->kind != UriKind::Absolute)
             throw InvalidOperationException(_caller);
             
-          return this->Scheme() == UriSchemeFile;
-        }
+            return this->Scheme() == UriSchemeFile;
+            }
       };
-
+      
       /// @brief Gets whether the specified Uri references the local host.
       /// @return bool A bool value that is true if this Uri references the local host; otherwise, false.
       /// @exception InvalidOperationException This instance represents a relative URI, and this property is valid only for absolute URIs.
@@ -262,10 +264,10 @@ namespace Switch {
           if (this->kind != UriKind::Absolute)
             throw InvalidOperationException(_caller);
             
-          return this->Host() == System::Net::IPAddress::Loopback().ToString() || this->Host() == System::Net::IPAddress::IPv6Loopback().ToString() || this->Host() == "loopback" || this->Host() == "localhost" || String::IsNullOrEmpty(this->Host());
-        }
+            return this->Host() == System::Net::IPAddress::Loopback().ToString() || this->Host() == System::Net::IPAddress::IPv6Loopback().ToString() || this->Host() == "loopback" || this->Host() == "localhost" || String::IsNullOrEmpty(this->Host());
+            }
       };
-
+      
       /// @brief Gets whether the specified Uri is a universal naming convention (UNC) path.
       /// @return bool A bool value that is true if the Uri is a UNC path; otherwise, false.
       /// @exception InvalidOperationException This instance represents a relative URI, and this property is valid only for absolute URIs.
@@ -275,10 +277,10 @@ namespace Switch {
           if (this->kind != UriKind::Absolute)
             throw InvalidOperationException(_caller);
             
-          return this->Scheme() == Uri::UriSchemeFile && !String::IsNullOrEmpty(this->Host());
-        }
+            return this->Scheme() == Uri::UriSchemeFile && !String::IsNullOrEmpty(this->Host());
+            }
       };
-
+      
       /// @brief Gets the original URI string that was passed to the Uri constructor.
       /// @return string A string containing the exact URI specified when this instance was constructed; otherwise, Empty.
       /// @exception InvalidOperationException This instance represents a relative URI, and this property is valid only for absolute URIs.
@@ -290,7 +292,7 @@ namespace Switch {
       _property<String, _readonly> LocalPath {
         _get {return this->GetComponents(UriComponents::Path, UriFormat::Unescaped).Replace('/', System::IO::Path::DirectorySeparatorChar);}
       };
-
+      
       /// @brief Gets the original URI string that was passed to the Uri constructor.
       /// @return string A string containing the exact URI specified when this instance was constructed; otherwise, Empty.
       /// @exception InvalidOperationException This instance represents a relative URI, and this property is valid only for absolute URIs.
@@ -304,10 +306,10 @@ namespace Switch {
           if (this->kind != UriKind::Absolute)
             throw InvalidOperationException(_caller);
             
-          return this->originalUri;
+            return this->originalUri;
         }
       };
-
+      
       /// @brief Gets the AbsolutePath and Query properties separated by a question mark (?).
       /// @return string A string that contains the AbsolutePath and Query properties separated by a question mark (?).
       /// @exception InvalidOperationException This instance represents a relative URI, and this property is valid only for absolute URIs.
@@ -317,7 +319,7 @@ namespace Switch {
       _property<String, _readonly> PathAndQuery {
         _get {return this->GetComponents(UriComponents::PathAndQuery, UriFormat::UriEscaped);}
       };
-
+      
       /// @brief Gets the port number of this URI.
       /// @return int32 An int32 value that contains the port number for this URI.
       /// @exception InvalidOperationException This instance represents a relative URI, and this property is valid only for absolute URIs.
@@ -327,7 +329,7 @@ namespace Switch {
           int32 port = -1;
           if (Int32::TryParse(this->GetComponents(UriComponents::Port, UriFormat::UriEscaped), port) == true)
             return port;
-
+          
           if (Scheme() == Uri::UriSchemeFtp)
             return 21;
           if (Scheme() == Uri::UriSchemeGopher)
@@ -345,7 +347,7 @@ namespace Switch {
           return -1;
         }
       };
-
+      
       /// @brief Gets any query information included in the specified URI.
       /// @return string A string that contains any query information included in the specified URI.
       /// @exception InvalidOperationException This instance represents a relative URI, and this property is valid only for absolute URIs.
@@ -353,9 +355,9 @@ namespace Switch {
       /// @remarks The query information is escaped according to RFC 2396 by default. If International Resource Identifiers (IRIs) or Internationalized Domain Name (IDN) parsing is enabled, the query information is escaped according to RFC 3986 and RFC 3987.
       /// @remarks For more information on IRI support, see the Remarks section for the Uri class.
       _property<String, _readonly> Query {
-        _get {return this->GetComponents(UriComponents::Query|UriComponents::KeepDelimiter, UriFormat::UriEscaped);}
+        _get {return this->GetComponents(UriComponents((int32)UriComponents::Query | (int32)UriComponents::KeepDelimiter), UriFormat::UriEscaped);}
       };
-
+      
       /// @brief Gets the scheme name for this URI.
       /// @return string A string that contains the scheme for this URI, converted to lowercase.
       /// @exception InvalidOperationException This instance represents a relative URI, and this property is valid only for absolute URIs.
@@ -379,7 +381,7 @@ namespace Switch {
       _property<String, _readonly> Scheme {
         _get {return GetComponents(UriComponents::Scheme, UriFormat::UriEscaped);}
       };
-
+      
       /// @brief Gets an array containing the path segments that make up the specified URI.
       /// @return Array<Srtring> A string array that contains the path segments that make up the specified URI.
       /// @exception InvalidOperationException This instance represents a relative URI, and this property is valid only for absolute URIs.
@@ -403,30 +405,30 @@ namespace Switch {
           String absolutePath = this->AbsolutePath();
           if (string::IsNullOrEmpty(absolutePath) == true)
             return Array<String>();
-
-          Array<String> segments;
+            
+            Array<String> segments;
           int32 startIndex = 0;
           int32 length = 1;
-            
+          
           if (absolutePath[startIndex] == '/') {
             Array<>::Resize(segments, segments.Length+1);
             segments[segments.Length-1] = absolutePath.Substring(startIndex, length);
             startIndex += length;
           }
-            
+          
           while (startIndex < absolutePath.Length()) {
             length = absolutePath.IndexOf('/', startIndex);
             if (length == -1)
               length = absolutePath.Length() - startIndex;
-                
-            Array<>::Resize(segments, segments.Length+1);
-            segments[segments.Length-1] = absolutePath.Substring(startIndex, length);
-            startIndex += length;
-          }
+              
+              Array<>::Resize(segments, segments.Length+1);
+              segments[segments.Length-1] = absolutePath.Substring(startIndex, length);
+              startIndex += length;
+              }
           return segments;
         }
       };
-
+      
       /// @brief Gets the user name, password, or other user-specific information associated with the specified URI.
       /// @return string A string that contains the user information associated with the URI. The returned value does ! include the '@' character reserved for delimiting the user information part of the URI.
       /// @exception InvalidOperationException This instance represents a relative URI, and this property is valid only for absolute URIs.
@@ -455,7 +457,7 @@ namespace Switch {
         
         return ! first;
       }
-
+      
       /// @brief Converts a string to its escaped representation.
       /// @param value The string to escape.
       /// @return string A string that contains the escaped representation of stringToEscape.
@@ -468,11 +470,11 @@ namespace Switch {
       static String EscapeDataString(const String& value) {
         if (value.Length() > 32766)
           throw UriFormatException(_caller);
-
+        
         bool escapeNeeded = false;
         for (int32 index = 0; !escapeNeeded && index < value.Length(); index++)
           escapeNeeded = !IsHexEncoding(value, index) && NeedToEscapeDataChar(value[index]);
-
+        
         if (escapeNeeded) {
           String retValue;
           for (int32 index = 0; index < value.Length(); index++) {
@@ -483,10 +485,10 @@ namespace Switch {
           }
           return retValue;
         }
-
+        
         return value;
       }
-
+      
       /// @brief Converts a URI string to its escaped representation.
       /// @param value The string to escape.
       /// @return string A string that contains the escaped representation of stringToEscape.
@@ -500,11 +502,11 @@ namespace Switch {
       static String EscapeUriString(const String& value) {
         if (value.Length() > 32766)
           throw UriFormatException(_caller);
-
+        
         bool escapeNeeded = false;
         for (int32 index = 0; !escapeNeeded && index < value.Length(); index++)
           escapeNeeded = !IsHexEncoding(value, index) && NeedToEscapeUriChar(value[index]);
-
+        
         if (escapeNeeded) {
           String retValue;
           for (int32 index = 0; index < value.Length(); index++) {
@@ -515,7 +517,7 @@ namespace Switch {
           }
           return retValue;
         }
-
+        
         return value;
       }
       
@@ -613,10 +615,10 @@ namespace Switch {
       /// | file://server/filename.ext                  | file:// | file://server           | file://server/filename.ext                 | file://server/filename.ext                  |
       String GetLeftPart(UriPartial part) const {
         switch (part) {
-          case UriPartial::Scheme: return GetComponents(UriComponents::Scheme|UriComponents::KeepDelimiter, UriFormat::UriEscaped);
-          case UriPartial::Authority: return GetComponents(UriComponents::Scheme|UriComponents::UserInfo|UriComponents::Host|UriComponents::Port, UriFormat::UriEscaped);
-          case UriPartial::Path: return GetComponents(UriComponents::Scheme|UriComponents::UserInfo|UriComponents::Host|UriComponents::Port|UriComponents::Path, UriFormat::UriEscaped);
-          case UriPartial::Query: return GetComponents(UriComponents::Scheme|UriComponents::UserInfo|UriComponents::Host|UriComponents::Port|UriComponents::PathAndQuery, UriFormat::UriEscaped);
+          case UriPartial::Scheme: return GetComponents(UriComponents((int32)UriComponents::Scheme|(int32)UriComponents::KeepDelimiter), UriFormat::UriEscaped);
+          case UriPartial::Authority: return GetComponents(UriComponents((int32)UriComponents::Scheme|(int32)UriComponents::UserInfo|(int32)UriComponents::Host|(int32)UriComponents::Port), UriFormat::UriEscaped);
+          case UriPartial::Path: return GetComponents(UriComponents((int32)UriComponents::Scheme|(int32)UriComponents::UserInfo|(int32)UriComponents::Host|(int32)UriComponents::Port|(int32)UriComponents::Path), UriFormat::UriEscaped);
+          case UriPartial::Query: return GetComponents(UriComponents((int32)UriComponents::Scheme|(int32)UriComponents::UserInfo|(int32)UriComponents::Host|(int32)UriComponents::Port|(int32)UriComponents::PathAndQuery), UriFormat::UriEscaped);
           default: break;
         }
         throw ArgumentException(_caller);
@@ -638,7 +640,7 @@ namespace Switch {
         info.AddValue(Enum<UriComponents>::ToString(UriComponents::Fragment), this->fragment);
         info.AddValue("UriKind", (int32)this->kind);
       }
-
+      
       /// @brief Converts a specified character into its hexadecimal equivalent.
       /// @param character The character to convert to hexadecimal representation.
       /// @return string The hexadecimal representation of the specified character.
@@ -646,10 +648,10 @@ namespace Switch {
       static String HexEscape(char32 character) {
         if (character > 255)
           throw ArgumentOutOfRangeException(_caller);
-
+        
         return String::Format("%{0:X2}", Convert::ToInt32(character));
       }
-
+      
       /// @brief Converts a specified hexadecimal representation of a character to the character.
       /// @param pattern The hexadecimal representation of a character.
       /// @param index The location in pattern where the hexadecimal representation of a character begins.
@@ -659,7 +661,7 @@ namespace Switch {
         index+=3;
         return Int32::Parse(pattern.Substring(index-2, 2), 16);
       }
-
+      
       /// @brief Determines whether the current Uri instance is a base of the specified Uri instance.
       /// @param uri The specified Uri instance to test.
       /// @return bool true if the current Uri instance is a base of uri; otherwise, false.
@@ -682,16 +684,16 @@ namespace Switch {
       bool IsBasOf(const Uri& uri) const {
         String path = (this->path.Remove(this->path.Length()-1).LastIndexOf('/') == -1 ? this->path : this->path.Remove(this->path.Remove(this->path.Length()-1).LastIndexOf('/')));
         String uripath = (uri.path.Remove(uri.path.Length()-1).LastIndexOf('/') == -1 ? uri.path : uri.path.Remove(uri.path.Remove(uri.path.Length()-1).LastIndexOf('/')));
-
+        
         return this->scheme == uri.scheme && this->schemeDelimiter == uri.schemeDelimiter && this->host == uri.host && this->port == uri.port && path == uripath;
       }
-
+      
       /// @brief  Determines whether a specified character is a valid hexadecimal digit.
       /// @param character The character to validate.
       /// @return bool A bool value that is true if the character is a valid hexadecimal digit; otherwise false.
       /// @remarks Hexadecimal digits are the digits 0 to 9 and the letters A-F or a-f.
       static bool IsHexDigit(char32 character) {return (character >= '0' && character <= '9') || (character >= 'A' && character <= 'F') || (character >= 'a' && character <= 'f');}
-
+      
       /// @brief Determines whether a character in a string is hexadecimal encoded.
       /// @param pattern The string to check.
       /// @param index The location in pattern to check for hexadecimal encoding.
@@ -700,7 +702,7 @@ namespace Switch {
       static bool IsHexEncoding(const String& pattern, int32 index) {
         if (index < 0 || pattern.Length() < index + 3)
           return false;
-
+        
         System::Collections::Generic::Enumerator<char32> enumerator = pattern.GetEnumerator();
         enumerator.MoveNext();
         while (index--) enumerator.MoveNext();
@@ -709,10 +711,10 @@ namespace Switch {
         if (! IsHexDigit(enumerator.Current)) return false;
         enumerator.MoveNext();
         if (! IsHexDigit(enumerator.Current)) return false;
-
+        
         return true;
       }
-
+      
       /// @brief Indicates whether the string used to construct this Uri was well-formed and is ! required to be further escaped.
       /// @return bool A bool value that is true if the string was well-formed; else false.
       /// @remarks The string is considered to be well-formed in accordance with RFC 2396 and RFC 2732 by default. If International Resource Identifiers (IRIs) or Internationalized Domain Name (IDN) parsing is enabled, the string is considered to be well-formed in accordance with RFC 3986 and RFC 3987
@@ -730,25 +732,25 @@ namespace Switch {
       /// @remarks For more information on IRI support, see the Remarks section for the Uri class.
       bool IsWellFormedOriginalString() {
         bool wellFormatedOriginalString = true;
-
+        
         for (int32 index = 0; !wellFormatedOriginalString && index < this->originalUri.Length(); index++)
           wellFormatedOriginalString = !(IsHexEncoding(this->originalUri, index) || NeedToEscapeUriChar(this->originalUri[index]));
-
+        
         if (wellFormatedOriginalString == true)
           wellFormatedOriginalString = IO::Path::IsPathRooted(this->originalUri);
-
+        
         if (wellFormatedOriginalString == true)
           wellFormatedOriginalString = this->originalUri.IndexOf('\\') != -1;
-
+        
         if (wellFormatedOriginalString == true)
           wellFormatedOriginalString = !(this->schemeDelimiter.Length() == 0 && this->host.Length() != 0);
-
+        
         if (wellFormatedOriginalString == true)
           wellFormatedOriginalString = CheckSchemeName(this->scheme);
-
+        
         return wellFormatedOriginalString;
       }
-
+      
       /// @brief Indicates whether the string is well-formed by attempting to construct a URI with the string and ensures that the string does ! require further escaping.
       /// @param uriString The string used to attempt to construct a Uri.
       /// @param uriKind The type of the Uri in uriString.
@@ -766,17 +768,17 @@ namespace Switch {
       /// @remarks For more information on IRI support, see the Remarks section for the Uri class.
       static bool IsWellFormedUriString(const String& uriString, UriKind uriKind) {
         bool wellFormedUriString = true;
-
+        
         try {
           Uri uri(uriString, uriString);
           wellFormedUriString = uri.IsWellFormedOriginalString();
         } catch (...) {
           wellFormedUriString = false;
         }
-
+        
         return wellFormedUriString;
       }
-
+      
       /// @brief Converts a string to its unescaped representation.
       /// @param value The string to unescape.
       /// @return string A string that contains the unescaped representation of stringToUnescape.
@@ -788,10 +790,10 @@ namespace Switch {
         bool unescapeNeeded = false;
         for (int32 index = 0; !unescapeNeeded && index < value.Length(); index++)
           unescapeNeeded = IsHexEncoding(value, index);
-
+        
         if (!unescapeNeeded)
           return value;
-
+        
         String retValue;
         int32 index = 0;
         while (index < value.Length()) {
@@ -802,7 +804,7 @@ namespace Switch {
         }
         return retValue;
       }
-
+      
       bool Equals(const Uri& uri) const {
         return this->scheme == uri.scheme && this->schemeDelimiter == uri.schemeDelimiter && this->host == uri.host && this->port == uri.port && this->path == uri.path && this->query == uri.query && this->kind == uri.kind;
       }
@@ -815,8 +817,8 @@ namespace Switch {
       /// @return string A string instance that contains the unescaped canonical representation of the Uri instance. All characters are unescaped except #, ?, and %.
       /// @remarks The string returned by this method does ! contain port information when the port is the default port for the scheme.
       String ToString() const override { return GetComponents(UriComponents::AbsoluteUri, UriFormat::Unescaped); }
-
-    private :
+      
+      private :
       void SetScheme(String& escapeUri) {
         int32 indexStart = escapeUri.IndexOf(SchemeDelimiter);
         if (indexStart != -1)
@@ -826,13 +828,13 @@ namespace Switch {
           if (indexStart != -1)
             this->schemeDelimiter = ":";
         }
-
+        
         if (indexStart != -1) {
           this->scheme = escapeUri.Remove(indexStart).ToLower();
           escapeUri = escapeUri.Substring(indexStart + this->schemeDelimiter.Length());
         }
       }
-
+      
       void SetUserInfo(String& escapeUri) {
         static Array<char32> endHostChars = {char32('/'), char32('?'), char32('#')};
         int32 indexStart = escapeUri.IndexOf('@');
@@ -843,7 +845,7 @@ namespace Switch {
           escapeUri = escapeUri.Substring(indexStart);
         }
       }
-
+      
       void SetHost(String& escapeUri) {
         static Array<char32> endHostChars = {char32(':'), char32('/'), char32('?'), char32('#')};
         int32 indexStart = escapeUri.IndexOfAny(endHostChars);
@@ -854,30 +856,30 @@ namespace Switch {
           escapeUri = escapeUri.Substring(indexStart);
         }
       }
-
+      
       void SetPort(String& escapeUri) {
         try {
           int32 indexStart = escapeUri.IndexOf(':');
           if (indexStart == -1)
             return;
-
+          
           escapeUri = escapeUri.Substring(1);
           indexStart = escapeUri.IndexOf('/');
           if (indexStart == -1)
             indexStart = escapeUri.Length();
-
+          
           if (indexStart == -1)
             return;
-
+          
           this->port = escapeUri.Remove(indexStart);
           Int32::Parse(this->port);
-
+          
           escapeUri = escapeUri.Substring(indexStart);
         } catch(...) {
           throw UriFormatException(_caller);
         }
       }
-
+      
       void SetPath(String& escapeUri) {
         static Array<char32> endPathChars = {char32('?'), char32('#')};
         int32 indexStart = escapeUri.IndexOfAny(endPathChars);
@@ -886,47 +888,47 @@ namespace Switch {
           escapeUri = escapeUri.Substring(indexStart);
           return;
         }
-
+        
         this->path = string::IsNullOrEmpty(escapeUri) ? "/" : escapeUri;
         escapeUri = string::Empty;
       }
-
+      
       void SetFragment(String& escapeUri) {
         int32 indexStart = escapeUri.IndexOf('#')+1;
         if (indexStart == 0)
           indexStart = escapeUri.Length();
         if (indexStart == -1)
           return;
-
+        
         this->fragment = escapeUri.Substring(indexStart, escapeUri.Length()-indexStart);
         if (indexStart != escapeUri.Length())
           escapeUri = escapeUri.Remove(indexStart-1, escapeUri.Length()-indexStart+1);
       }
-
+      
       void SetQuery(String& escapeUri) {
         int32 indexStart = escapeUri.IndexOf('?')+1;
         if (indexStart == 0)
           indexStart = escapeUri.Length();
         if (indexStart == -1)
           return;
-
+        
         this->query = escapeUri.Substring(indexStart, escapeUri.Length()-indexStart);
         if (indexStart != escapeUri.Length())
           escapeUri = escapeUri.Remove(indexStart-1, escapeUri.Length()-indexStart+1);
       }
-
+      
       static bool NeedToEscapeDataChar(char32 character) {
         static String notEscapedChars = "!-_.~";
-
+        
         return !(Char::IsLetterOrDigit(character) || notEscapedChars.IndexOf(character) != -1);
       }
-
+      
       static bool NeedToEscapeUriChar(char32 character) {
         static String notEscapedChars = "!@#=?/:-_.~";
-
+        
         return !(Char::IsLetterOrDigit(character) || notEscapedChars.IndexOf(character) != -1);
       }
-
+      
       String originalUri;
       String scheme;
       String schemeDelimiter;
@@ -937,8 +939,9 @@ namespace Switch {
       String query;
       String fragment;
       UriKind kind = UriKind::Absolute;
-   };
+    };
   }
 }
 
 using namespace Switch;
+

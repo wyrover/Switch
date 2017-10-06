@@ -16,6 +16,8 @@ namespace Switch {
       namespace Concurrent {
         /// @interface IProducerConsumerCollection
         /// @brief Defines methods to manipulate thread-safe collections intended for producer/consumer usage. This interface provides a unified representation for producer/consumer collections so that higher level abstractions such as System::Collections::Concurrent::BlockingCollection<T> can use the collection as the underlying storage mechanism.
+        /// @par Library
+        /// Switch.Core
         template<typename T>
         class IProducerConsumerCollection : public Generic::ICollection<T> {
         public:

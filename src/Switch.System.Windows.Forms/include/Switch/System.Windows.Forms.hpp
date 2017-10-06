@@ -2,7 +2,7 @@
 /// @brief Contains include files of Forms library.
 #pragma once
 
-#include <Switch/Drawing.hpp>
+#include <Switch/System.Drawing.hpp>
 #include "System/Media/SystemSound.hpp"
 #include "System/Media/SystemSounds.hpp"
 #include "System/ComponentModel/Component.hpp"

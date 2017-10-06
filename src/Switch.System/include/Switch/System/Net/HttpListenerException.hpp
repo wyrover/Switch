@@ -13,6 +13,8 @@ namespace Switch {
     /// The WebRequest and WebResponse classes form the basis of what are called pluggable protocols, an implementation of network services that enables you to develop applications that use Internet resources without worrying about the specific details of the individual protocols.
     namespace Net {
       /// @brief The exception that is thrown when an error occurs processing an HTTP request.
+      /// @par Library
+      /// Switch.System
       class _export HttpListenerException : public SystemException {
       public:
         /// @brief Create a new instance of class HttpListenerException

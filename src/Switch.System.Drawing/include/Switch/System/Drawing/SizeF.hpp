@@ -20,6 +20,8 @@ namespace Switch {
       /// @endcond
 
       /// @brief Stores an ordered pair of singles, which specify a Height and Width.
+      /// @par Library
+      /// Switch.System.Drawing
       class _export SizeF : public object {
       public:
         /// @brief Gets a SizeF class that has a Height and Width value of 0.0f. This field is constant.

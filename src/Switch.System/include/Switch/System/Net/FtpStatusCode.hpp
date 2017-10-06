@@ -12,6 +12,8 @@ namespace Switch {
     /// The WebRequest and WebResponse classes form the basis of what are called pluggable protocols, an implementation of network services that enables you to develop applications that use Internet resources without worrying about the specific details of the individual protocols.
     namespace Net {
       /// @brief Specifies the status codes returned for a File Transfer Protocol (FTP) operation.
+      /// @par Library
+      /// Switch.System
       enum class FtpStatusCode {
         /// @brief Included for completeness, this value is never returned by servers.
         Undefined = 0,

@@ -21,6 +21,8 @@ namespace Switch {
         /// @cond Represents the fonts installed on the system. This class cannot be inherited.
         /// @remarks The InstalledFontCollection allows you to get a list of fonts families that are installed on the computer running the application with its Families property. For additional information on fonts and text, including example code, see Using Fonts and Text.
         /// @remarks Do not use the InstalledFontCollection class to install a font to Windows. Instead use the GDI AddFontResource function. An InstalledFontCollection object sees only fonts that are installed in Windows before the object is created.
+        /// @par Library
+        /// Switch.System.Drawing
         class _export InstalledFontCollection final : public FontCollection {
         public:
           /// @brief Initializes a new instance of the InstalledFontCollection class.

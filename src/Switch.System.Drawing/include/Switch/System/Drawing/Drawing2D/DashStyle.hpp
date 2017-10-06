@@ -13,6 +13,8 @@ namespace Switch {
       /// @brief The System.Drawing::Drawing2D namespace provides advanced two-dimensional and vector graphics functionality.
       namespace Drawing2D {
         /// @brief Specifies the style of dashed lines drawn with a System::Drawing::Pen object.
+        /// @par Library
+        /// Switch.System.Drawing
         enum class DashStyle {
           /// @brief Specifies a solid line.
           Solid = 0,

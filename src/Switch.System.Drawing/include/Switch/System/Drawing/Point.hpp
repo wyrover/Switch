@@ -18,6 +18,8 @@ namespace Switch {
       /// @endcond
 
       /// @brief Stores an ordered pair of integers, which specify a X and Y.
+      /// @par Library
+      /// Switch.System.Drawing
       class _export Point : public object {
       public:
         /// @brief Gets a Point class that has a X and Y value of 0. This field is constant.

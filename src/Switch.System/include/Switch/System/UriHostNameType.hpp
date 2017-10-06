@@ -9,6 +9,8 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief Defines host name types for the Uri.CheckHostName method.
+    /// @par Library
+    /// Switch.System
     /// @remarks The UriHostNameType enumeration defines the values that the Uri.CheckHostName method can return.
     enum class UriHostNameType {
       /// @brief The type of the host name is not supplied.

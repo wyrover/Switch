@@ -11,6 +11,8 @@ namespace Switch {
     /// @brief The System::Drawing namespace provides access to GDI+ basic graphics functionality. More advanced functionality is provided in the System::Drawing::Drawing2D, System::Drawing::Imaging, and System::Drawing::Text namespaces.
     namespace Drawing {
       /// @brief This enumeration has a FlagsAttribute attribute that allows a bitwise combination of its member values.
+      /// @par Library
+      /// Switch.System.Drawing
       enum class GraphicsUnit {
         /// @brief Specifies the unit of measure for the given data.
         World = 0 ,

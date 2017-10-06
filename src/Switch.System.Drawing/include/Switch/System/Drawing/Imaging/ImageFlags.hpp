@@ -13,6 +13,8 @@ namespace Switch {
       /// @brief The System::Drawing::Imaging namespace provides advanced GDI+ imaging functionality. Basic graphics functionality is provided by the System::Drawing namespace.
       namespace Imaging {
         /// @brief Specifies the attributes of the pixel data contained in an System::Drawing::Image object. The System::Drawing::Image::Flags property returns a member of this enumeration.
+        /// @par Library
+        /// Switch.System.Drawing
         enum class ImageFlags {
           /// @brief There is no format information.
           None = 0,

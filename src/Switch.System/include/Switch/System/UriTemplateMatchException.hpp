@@ -9,6 +9,8 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief Represents an error when matching a Uri to a UriTemplateTable.
+    /// @par Library
+    /// Switch.System
     class _export UriTemplateMatchException : public SystemException {
     public:
       /// @brief Create a new instance of class UriTemplateMatchException

@@ -14,6 +14,8 @@ namespace Switch {
       /// @brief The System::Drawing::Text namespace provides advanced GDI+ typography functionality.
       namespace Text {
         /// @brief Specifies a generic FontFamily object.
+        /// @par Library
+        /// Switch.System.Drawing
         enum class GenericFontFamilies {
           /// @brief A generic Serif FontFamily object.
           Serif,

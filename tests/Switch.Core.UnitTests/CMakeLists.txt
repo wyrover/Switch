@@ -122,7 +122,7 @@ set(SOURCE_FILES
 GroupSources(.)
 
 add_executable(Switch.Core.UnitTests ${SOURCE_FILES})
-target_link_libraries(Switch.Core.UnitTests Switch.TUnit.Main Switch.TUnit Switch.Core)
+target_link_libraries(Switch.Core.UnitTests Switch.TUnit.Main Switch.Core)
 set_target_properties(Switch.Core.UnitTests PROPERTIES FOLDER tests)
 
 add_test(NAME Switch.Core.UnitTests COMMAND $<TARGET_FILE_NAME:Switch.Core.UnitTests> --tunit_filter=*.* --tunit_output=xml:Switch.Core.UnitTests.xml WORKING_DIRECTORY $<TARGET_FILE_DIR:Switch.Core.UnitTests>)

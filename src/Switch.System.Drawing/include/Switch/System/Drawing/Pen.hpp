@@ -28,6 +28,8 @@ namespace Switch {
     /// @endcond
 
     /// @brief The System::Drawing namespace provides access to GDI+ basic graphics functionality. More advanced functionality is provided in the System::Drawing::Drawing2D, System::Drawing::Imaging, and System::Drawing::Text namespaces.
+    /// @par Library
+    /// Switch.System.Drawing
     namespace Drawing {
       class _export Pen : public object {
       public:

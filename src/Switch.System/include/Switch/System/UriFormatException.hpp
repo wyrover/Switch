@@ -9,6 +9,8 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The exception that is thrown when an invalid Uniform Resource Identifier (URI) is detected.
+    /// @par Library
+    /// Switch.System
     class _export UriFormatException : public FormatException {
     public:
       /// @brief Create a new instance of class UriFormatException

@@ -29,6 +29,8 @@ namespace Switch {
         };
         
         /// @brief Represents the types of FTP protocol methods that can be used with an FTP request. This class cannot be inherited.
+        /// @par Library
+        /// Switch.System
         class Ftp _static {
         public:
           /// @brief

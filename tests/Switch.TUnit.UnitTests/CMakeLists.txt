@@ -9,7 +9,7 @@ set(SOURCE_FILES
 GroupSources(.)
 
 add_executable(Switch.TUnit.UnitTests ${SOURCE_FILES})
-target_link_libraries(Switch.TUnit.UnitTests Switch.TUnit.Main Switch.TUnit)
+target_link_libraries(Switch.TUnit.UnitTests Switch.TUnit.Main)
 set_target_properties(Switch.TUnit.UnitTests PROPERTIES FOLDER tests)
 
 enable_testing()

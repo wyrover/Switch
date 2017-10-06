@@ -16,6 +16,8 @@ namespace Switch {
       /// @brief The System::Collections::Concurrent namespace provides several thread-safe collection classes that should be used in place of the corresponding types in the System::Collections and System::Collections::Generic namespaces whenever multiple threads are accessing the collection concurrently.
       namespace Concurrent {
         /// @brief Represents a thread-safe first in-first out (FIFO) collection.
+        /// @par Library
+        /// Switch.Core
         /// @par Examples
         /// The following example shows how to use a ConcurrentQueue<T> to enqueue and dequeue items:
         /// @include ConcurrentQueue.cpp

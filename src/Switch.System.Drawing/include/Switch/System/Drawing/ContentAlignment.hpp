@@ -11,6 +11,8 @@ namespace Switch {
     /// @brief The System::Drawing namespace provides access to GDI+ basic graphics functionality. More advanced functionality is provided in the System::Drawing::Drawing2D, System::Drawing::Imaging, and System::Drawing::Text namespaces.
     namespace Drawing {
       /// @brief Specifies alignment of content on the drawing surface.
+      /// @par Library
+      /// Switch.System.Drawing
       enum class ContentAlignment {
         /// @brief Content is vertically aligned at the top, and horizontally aligned on the left.
         TopLeft = 1,

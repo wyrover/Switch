@@ -9,6 +9,8 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief Defines the kinds of Uris for the Uri.IsWellFormedUriString(string, UriKind) and several Uri.Uri methods.
+    /// @par Library
+    /// Switch.System
     enum class UriKind {
       /// @brief The kind of the Uri is indeterminate.
       RelativeOrAbsolute = 0,

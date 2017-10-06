@@ -13,7 +13,7 @@ ________________________________________________________________________________
 * written in efficient, modern C++14;
 * and highly portable and available on many different platforms (Windows, macOS, Linux);
 
-For more information see [Switch website](https://gammasoft71.github.io/Switch) (or [markdown Documentations](docs)) and [Reference Guide](https://gammasoft71.github.io/Switch-doc)
+For more information see [Switch website](https://gammasoft71.github.io/Switch) (or [markdown Documentations](./docs)) and [Reference Guide](https://gammasoft71.github.io/Switch-doc)
 
 
 # Examples

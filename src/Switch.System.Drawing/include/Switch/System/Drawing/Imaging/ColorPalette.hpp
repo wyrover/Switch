@@ -18,6 +18,8 @@ namespace Switch {
       /// @endcond
 
       /// @brief The System::Drawing::Imaging namespace provides advanced GDI+ imaging functionality. Basic graphics functionality is provided by the System::Drawing namespace.
+      /// @par Library
+      /// Switch.System.Drawing
       namespace Imaging {
         class _export ColorPalette : public object {
         public:

@@ -9,6 +9,8 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief This enumeration has a FlagsAttribute attribute that allows a bitwise combination of its member values.
+    /// @par Library
+    /// Switch.System
     enum class UriComponents {
       /// @brief None data.
       None = 0x00000000,

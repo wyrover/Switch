@@ -11,6 +11,8 @@ namespace Switch {
     /// @brief The System::Drawing namespace provides access to GDI+ basic graphics functionality. More advanced functionality is provided in the System::Drawing::Drawing2D, System::Drawing::Imaging, and System::Drawing::Text namespaces.
     namespace Drawing {
       /// @brief Specifies the known system colors.
+      /// @par Library
+      /// Switch.System.Drawing
       /// @see Color
       enum class KnownColor {
         /// @brief A system-defined color.
