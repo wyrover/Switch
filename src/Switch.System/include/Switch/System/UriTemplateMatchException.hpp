@@ -2,7 +2,7 @@
 /// @brief Contains Switch::System::UriTemplateMatchException exception.
 #pragma once
 
-#include <Switch/system/SystemException.hpp>
+#include <Switch/System/SystemException.hpp>
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
