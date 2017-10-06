@@ -38,48 +38,101 @@ REM see https://github.com/Microsoft/vcpkg and https://vcpkg.readthedocs.io/en/l
 echo Install Switch libraries version 0.3.4, copyright GAMMA Soft, 2017
 echo.
 
+set switch_install_devenv="devenv"
+
 if "%1" == "" (
-  set option=/VS:2017:WIN64
+  set switch_install_option=/VS:2017:WIN64
 ) else if "%1" == "/VCPKG" (
-  set option=%1
+  set switch_install_option=%1
+  set switch_nstall_vcpkg_path=%2
+  if "%3" == "/DOC" (
+    set switch_install_cmake_install_prefix_path=%4
+  ) else (
+    set switch_install_cmake_install_prefix_path=%3
+  )
 ) else if "%1" == "/VS:2017" (
-  set option=/VS:2017:WIN64
+  set switch_install_option=/VS:2017:WIN64
+  if "%2" == "/DOC" (
+    set switch_install_cmake_install_prefix_path=%3
+  ) else (
+    set switch_install_cmake_install_prefix_path=%2
+  )
 ) else if "%1" == "/VS:2017:WIN32" (
-  set option=%1
+  set switch_install_option=%1
+  if "%2" == "/DOC" (
+    set switch_install_cmake_install_prefix_path=%3
+  ) else (
+    set switch_install_cmake_install_prefix_path=%2
+  )
 ) else if "%1" == "/VS:2017:WIN64" (
-  set option=%1
+  set switch_install_option=%1
+  if "%2" == "/DOC" (
+    set switch_install_cmake_install_prefix_path=%3
+  ) else (
+    set switch_install_cmake_install_prefix_path=%2
+  )
 ) else if "%1" == "/VS:2015" (
-  set option=/VS:2015:WIN64
+  set switch_install_option=/VS:2015:WIN64
+  if "%2" == "/DOC" (
+    set switch_install_cmake_install_prefix_path=%3
+  ) else (
+    set switch_install_cmake_install_prefix_path=%2
+  )
 ) else if "%1" == "/VS:2015:WIN32" (
-  set option=%1
+  set switch_install_option=%1
+  if "%2" == "/DOC" (
+    set switch_install_cmake_install_prefix_path=%3
+  ) else (
+    set switch_install_cmake_install_prefix_path=%2
+  )
 ) else if "%1" == "/VS:2015:WIN64" (
-  set option=%1
+  set switch_install_option=%1
+  if "%2" == "/DOC" (
+    set switch_install_cmake_install_prefix_path=%3
+  ) else (
+    set switch_install_cmake_install_prefix_path=%2
+  )
+) else if "%1" == "/DOC" (
+  set switch_install_cmake_install_prefix_path=%2
+) else (
+  set switch_install_cmake_install_prefix_path=%1
 )
+
+if "%switch_install_cmake_install_prefix_path%" == "" set switch_install_cmake_install_prefix_path=C:/usr/local
 
 if "%1" == "/DOC" (
-  set generate_doc=true
+  set switch_install_generate_doc=true
 ) else if "%2" == "/DOC" (
-  set generate_doc=true
+  set switch_install_generate_doc=true
 ) else if "%2" == "/DOC" (
-  set generate_doc=true
+  set switch_install_generate_doc=true
 ) else if "%3" == "/DOC" (
-  set generate_doc=true
+  set switch_install_generate_doc=true
 ) else if "%4" == "/DOC" (
-  set generate_doc=true
+  set switch_install_generate_doc=true
 ) else (
-  set generate_doc=false
+  set switch_install_generate_doc=false
 )
 
-if "%option%" == "/VCPKG" (
-  call install\install_windows_vcpkg.bat %2 %3
-) else if "%option%" == "/VS:2017:WIN64" (
-  call install\install_windows_generate_and_build.bat -G "Visual Studio 15 2017 Win64" %2
-) else if "%option%" == "/VS:2017:WIN32" (
-  call install\install_windows_generate_and_build.bat -G "Visual Studio 15 2017" %2
-) else if "%option%" == "/VS:2015:WIN64" (
-  call install\install_windows_generate_and_build.bat -G "Visual Studio 14 2015 Win64" %2
-) else if "%option%" == "/VS:2015:WIN32" (
-  call install\install_windows_generate_and_build.bat -G "Visual Studio 14 2015" %2
+if "%switch_install_option%" == "/VCPKG" (
+  "%switch_nstall_vcpkg_path%\vcpkg" install curl gtest libjpeg-turbo zlib libpng
+  "%switch_nstall_vcpkg_path%\vcpkg" integrate install
+  call scripts\install\install_windows_generate_and_build.bat "" "-DCMAKE_TOOLCHAIN_FILE=%switch_nstall_vcpkg_path%/scripts/buildsystems/vcpkg.cmake"
+) else if "%switch_install_option%" == "/VS:2017:WIN64" (
+  call scripts\install\install_windows_generate_and_build.bat -G "Visual Studio 15 2017 Win64"
+) else if "%switch_install_option%" == "/VS:2017:WIN32" (
+  call scripts\install\install_windows_generate_and_build.bat -G "Visual Studio 15 2017"
+) else if "%switch_install_option%" == "/VS:2015:WIN64" (
+  call scripts\install\install_windows_generate_and_build.bat -G "Visual Studio 14 2015 Win64"
+) else if "%switch_install_option%" == "/VS:2015:WIN32" (
+  call scripts\install\install_windows_generate_and_build.bat -G "Visual Studio 14 2015"
 ) else (
-  call install\install_windows_usage.bat 
+  call scripts\install\install_windows_usage.bat 
 ) 
+
+set switch_install_devenv=
+set switch_install_option=
+set switch_nstall_vcpkg_path=
+set switch_install_cmake_install_prefix_path=
+set switch_install_generate_doc=
+
