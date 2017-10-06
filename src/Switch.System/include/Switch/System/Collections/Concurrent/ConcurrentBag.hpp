@@ -5,7 +5,7 @@
 #include <Switch/Lock.hpp>
 #include <Switch/Property.hpp>
 #include <Switch/System/Collections/Generic/List.hpp>
-#include <Switch/system/Collections/Concurrent/IProducerConsumerCollection.hpp>
+#include <Switch/System/Collections/Concurrent/IProducerConsumerCollection.hpp>
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
