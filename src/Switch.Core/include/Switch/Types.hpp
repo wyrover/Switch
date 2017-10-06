@@ -97,14 +97,8 @@ namespace Switch {
 /// @endcond
 }
 
-// On windows byte and boolean have definition (with different type for boolean) in global scope so if a new definition in Switch namespace and "using namepsace Switch" activate in header file, there are a confict.
+// On windows byte has definition in global scope so if a new definition in Switch namespace and "using namepsace Switch" activate in header file, there are a confict.
 // The solution remove using namespace Switch, but it's not that I want to mimic .net Framework.
-
-/*
-/// @brief Represents a boolean.
-/// @ingroup Types
-using boolean = bool;
-*/
 
 /// @brief Represents a 8-bit unsigned integer.
 /// @ingroup Types
