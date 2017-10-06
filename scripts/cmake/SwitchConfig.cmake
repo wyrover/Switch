@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include(${CMAKE_CURRENT_LIST_DIR}/SwitchDependencies.cmake)
 
-SET(Switch_LIBRARIES Switch.TUnit.Core Switch.Forms Switch.Drawing Switch.Core)
+SET(Switch_LIBRARIES Switch.TUnit.Core Switch.System.Windows.Forms Switch.System.Drawing Switch.System Switch.Core)
 SET(Switch_WITH_TUNIT_MAIN_LIBRARIES Switch.TUnit.Main ${Switch_LIBRARIES})
 
 set(Switch_FOUND TRUE)
