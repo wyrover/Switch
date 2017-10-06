@@ -10,8 +10,8 @@ mkdir "%switch_install_cmake_install_prefix_path%" 2>nul
 
 cd bin\3rdparty
 cmake %1 %2 -DCMAKE_INSTALL_PREFIX:STRING="%switch_install_cmake_install_prefix_path%" ../../3rdparty
-%switch_install_devenv% "ThirdParties.sln" /project install /build Debug
-%switch_install_devenv% "ThirdParties.sln" /project install /build Release
+%switch_install_devenv% "3rdparty.sln" /project install /build Debug
+%switch_install_devenv% "3rdparty.sln" /project install /build Release
 
 cd..
 cmake %1 %2 -DCMAKE_INSTALL_PREFIX:STRING="%switch_install_cmake_install_prefix_path%" ..

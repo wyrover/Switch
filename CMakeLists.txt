@@ -11,12 +11,12 @@ option(BUILD_TESTS "Build tests" OFF)
 
 enable_testing()
 
-if (APPLE)
+if (MSVC)
+  set(CMAKE_CXX_FLAGS "/D_WINSOCK_DEPRECATED_NO_WARNINGS /DCURL_STATICLIB /DWIN32 /D_WINDOWS /DUNICODE /D_UNICODE /D_CRT_SECURE_NO_WARNINGS /D_CRT_NON_CONFORMING_SWPRINTFS /Zm1000 /bigobj /EHsc /GR /MP /Oy- /W4 /wd4003 /wd4100 /wd4127 /wd4132 /wd4133 /wd4189 /wd4244 /wd4245 /wd4310 /wd4312 /wd4355 /wd4389 /wd4456 /wd4458 /wd4505 /wd4510 /wd4512 /wd4610 /wd4701 /wd4702 /wd4706 /wd4996")
+elseif (APPLE)
   SET(CMAKE_CXX_FLAGS "-Wall -Wextra -Wpedantic -Wdeprecated-declarations -Wno-unknown-pragmas -Wno-unused-parameter")
 elseif (UNIX)
   SET(CMAKE_CXX_FLAGS "-Wall -Wpedantic -Wdeprecated-declarations -Wno-unknown-pragmas -Wno-unused-parameter")
-elseif (MSVC)
-  set(CMAKE_CXX_FLAGS "/D_WINSOCK_DEPRECATED_NO_WARNINGS /DCURL_STATICLIB /DWIN32 /D_WINDOWS /DUNICODE /D_UNICODE /D_CRT_SECURE_NO_WARNINGS /D_CRT_NON_CONFORMING_SWPRINTFS /Zm1000 /bigobj /EHsc /GR /MP /Oy- /W4 /wd4003 /wd4100 /wd4127 /wd4132 /wd4133 /wd4189 /wd4244 /wd4245 /wd4310 /wd4312 /wd4355 /wd4389 /wd4456 /wd4458 /wd4505 /wd4510 /wd4512 /wd4610 /wd4701 /wd4702 /wd4706 /wd4996")
 endif ()
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)

@@ -9,19 +9,25 @@ export CC=/usr/bin/clang
 export CXX=/usr/bin/clang++
 
 cd bin/3rdparty
+cmake -G "Unix Makefiles" -DCMAKE_bin_TYPE=Debug ../../3rdparty
+make all -j6
+sudo make install
 cmake -G "Unix Makefiles" -DCMAKE_bin_TYPE=Release ../../3rdparty
 make all -j6
 sudo make install
 
 cd ..
+cmake -G "Unix Makefiles" -DCMAKE_bin_TYPE=Debug ..
+#make documentation -j6
+#xdg-open Help/html/index.html &>/dev/null &
+make all -j6
+sudo make install
 cmake -G "Unix Makefiles" -DCMAKE_bin_TYPE=Release ..
-make documentation -j6
-xdg-open Help/html/index.html &>/dev/null &
 make all -j6
 sudo make install
 
 cd Examples
-#cmake -G "Unix Makefiles" -DCMAKE_bin_TYPE=Release ../../Examples
-#make all -j6
+#cmake -G "Unix Makefiles" -DCMAKE_bin_TYPE=Debug ../../Examples
+cmake -G "Unix Makefiles" -DCMAKE_bin_TYPE=Release ../../Examples
 cd ../..
 
