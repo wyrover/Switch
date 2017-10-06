@@ -29,7 +29,7 @@ GroupSources(.)
 add_library(Switch.TUnit.Core STATIC ${INCLUDE_FILES} ${SOURCE_FILES})
 target_include_directories(Switch.TUnit.Core PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include> $<INSTALL_INTERFACE:include>)
 #target_link_libraries(Switch.TUnit.Core GTest::GTest Switch.System)
-target_link_libraries(Switch.TUnit.Core ${GTEST_LIBRARIES} Switch.System)
+target_link_libraries(Switch.TUnit.Core ${GTEST_LIBRARIES} Switch.Core)
 set_target_properties(Switch.TUnit.Core PROPERTIES FOLDER src)
 
 install(TARGETS Switch.TUnit.Core EXPORT Switch DESTINATION lib)

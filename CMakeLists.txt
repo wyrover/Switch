@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.2)
 project(Switch VERSION 0.3.4)
 
 option(BUILD_SWITCH_CORE "Build Switch.Core library" ON)
-option(BUILD_SWITCH_SYSTEM "Build Switch.System library" OFF)
+option(BUILD_SWITCH_SYSTEM "Build Switch.System library" ON)
 option(BUILD_SWITCH_SYSTEM_DRAWING "Build Switch.System.Drawing library" ON)
 option(BUILD_SWITCH_SYSTEM_WINDOWS_FORMS "Build Switch.System.Windows.Forms library" ON)
 option(BUILD_SWITCH_TUNIT "Build Switch.TUnit.Core and Switch.TUnit.Main libraries" ON)
