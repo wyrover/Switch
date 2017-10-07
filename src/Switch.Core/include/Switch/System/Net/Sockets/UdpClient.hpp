@@ -30,24 +30,24 @@ namespace Switch {
           UdpClient();
 
           /// @brief Initializes a new instance of the UdpClient class
-          /// @param addressFamily: one of the AddressFamily values that specifies the addressing scheme of the socket.
+          /// @param addressFamily one of the AddressFamily values that specifies the addressing scheme of the socket.
           UdpClient(AddressFamily addressFamily);
 
           /// @brief Initializes a new instance of the UdpClient class and binds it to the local port number provided.
-          /// @param port: the local port number to use.
+          /// @param port the local port number to use.
           UdpClient(int32 port);
 
           /// @brief Initializes a new instance of the UdpClient class and binds it to the specified local endpoint.
           UdpClient(const IPEndPoint& endPoint);
 
           /// @brief Initializes a new instance of the UdpClient class and binds to the provided local port
-          /// @param port: the local port number to use.
-          /// @param addressFamily: one of the AddressFamily values that specifies the addressing scheme of the socket.
+          /// @param port the local port number to use.
+          /// @param addressFamily one of the AddressFamily values that specifies the addressing scheme of the socket.
           UdpClient(int32 port, AddressFamily addressFamily);
 
           /// @brief Initializes a new instance of the UdpClient class and connects to specified host@port
-          /// @param hostname: the hostname to connect to.
-          /// @param port: the local port number to use.
+          /// @param hostname the hostname to connect to.
+          /// @param port the local port number to use.
           UdpClient(const String& hostname, int32 port);
 
           /// @brief Gets the amount of data that has been received from the network and is available to be read.
@@ -65,7 +65,7 @@ namespace Switch {
           const refptr<Socket> GetClient() const;
 
           /// @brief Sets the underlying network Socket
-          /// @param client: the socket to use
+          /// @param client the socket to use
           void SetClient(const refptr<Socket>& client);
 
           /// @brief Gets a value that indicates whether a Socket is connected to a remote host as of the last Send or Receive operation.
@@ -114,32 +114,41 @@ namespace Switch {
           void Close();
 
           /// @brief Establishes a default remote host using the specified network endpoint
-          /// @param endPoint: An IPEndPoint that specifies the network endpoint to which you intend to send data
+          /// @param endPoint An IPEndPoint that specifies the network endpoint to which you intend to send data
           void Connect(const IPEndPoint& endPoint);
 
           /// @brief Establishes a default remote host using the specified IP address and port number
-          /// @param ipAddress: The IPAddress of the remote host to which you intend to send data
-          /// @param port: The port number to which you intend send data
+          /// @param ipAddress The IPAddress of the remote host to which you intend to send data
+          /// @param port The port number to which you intend send data
           void Connect(const IPAddress& ipAddress, int32 port);
 
           /// @brief Establishes a default remote host using the specified hostname and port number
-          /// @param hostname: the hostname to connect to.
-          /// @param port: The port number to which you intend send data
+          /// @param hostname the hostname to connect to.
+          /// @param port The port number to which you intend send data
           void Connect(const String& hostname, int32 port);
 
           /// @brief Adds a UdpClient to a multicast group.
-          /// @param multicastAddress: the address of the multicast group
-          /// @param ifIndex: the interface index
-          /// @param ttl: the TTL in router hops
-          /// @param localAddress: the local address
+          /// @param multicastAddress the address of the multicast group
           void JoinMulticastGroup(const IPAddress& multicastAddress);
+
+          /// @brief Adds a UdpClient to a multicast group.
+          /// @param ifIndex the interface index
+          /// @param multicastAddress the address of the multicast group
           void JoinMulticastGroup(int32 ifIndex, const IPAddress& multicastAddress);
+
+          /// @brief Adds a UdpClient to a multicast group.
+          /// @param multicastAddress the address of the multicast group
+          /// @param ttl the TTL in router hops
           void JoinMulticastGroup(const IPAddress& multicastAddress, int32 ttl);
+
+          /// @brief Adds a UdpClient to a multicast group.
+          /// @param multicastAddress the address of the multicast group
+          /// @param localAddress the local address
           void JoinMulticastGroup(const IPAddress& multicastAddress, const IPAddress& localAddress);
 
           /// @brief Returns a UDP datagram sent by a remote host
           /// @param buffer:
-          /// @param endPoint: will be filled with the sender information
+          /// @param endPoint will be filled with the sender information
           /// @remarks The Receive method will block until a datagram arrives from a remote host.
           /// @remarks When data is available, the Receive method will read the first enqueued
           /// @remarks datagram and return the data portion as a byte array. This method populates
@@ -149,7 +158,7 @@ namespace Switch {
           int32 Receive(Array<byte>& buffer, IPEndPoint& endPoint);
 
           /// @brief Sends a UDP datagram to a remote host
-          /// @param data: the data to send
+          /// @param data the data to send
           /// @return the number of bytes successfully sent
           /// @remarks This overload sends datagrams to the remote host established in the Connect method
           /// @remarks and returns the number of bytes sent. If you do not call Connect before calling this
@@ -163,15 +172,15 @@ namespace Switch {
           int32 Send(const Array<byte>& data);
 
           /// @brief Sends a UDP datagram to the specified end point
-          /// @param data: the data to send
-          /// @param endPoint: the end point to send data to
+          /// @param data the data to send
+          /// @param endPoint the end point to send data to
           /// @return the number of bytes successfully sent
           int32 Send(const Array<byte>& data, const IPEndPoint& endPoint);
 
           /// @brief Sends a UDP datagram to the specified end point
-          /// @param data: the data to send
-          /// @param hostname: the hostname where to send data or "255.255.255.255" (default broadcast address)
-          /// @param port: The port number to which you intend send data
+          /// @param data the data to send
+          /// @param hostname the hostname where to send data or "255.255.255.255" (default broadcast address)
+          /// @param port The port number to which you intend send data
           /// @return the number of bytes successfully sent
           int32 Send(const Array<byte>& data, const String& hostname, int32 port);
 
