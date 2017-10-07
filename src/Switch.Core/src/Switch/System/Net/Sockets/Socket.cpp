@@ -133,41 +133,6 @@ bool Socket::GetBlocking() const {
   return !this->data->nonBlocking;
 }
 
-bool Socket::GetDontFragment() const {
-  if (this->data->socket == IntPtr::Zero())
-    throw ObjectClosedException(_caller);
-  
-  return GetSocketOption(SocketOptionLevel::Socket, SocketOptionName::DontFragment).ChangeType<Int32>().ToObject() == 1;
-}
-
-bool Socket::GetDualMode() const {
-  if (this->data->socket == IntPtr::Zero())
-    throw ObjectClosedException(_caller);
-  
-  return GetSocketOption(SocketOptionLevel::Socket, SocketOptionName::IPv6Only).ChangeType<Int32>().ToObject() == 0;
-}
-
-bool Socket::GetEnableBroadcast() const {
-  if (this->data->socket == IntPtr::Zero())
-    throw ObjectClosedException(_caller);
-  
-  return GetSocketOption(SocketOptionLevel::Socket, SocketOptionName::Broadcast).ChangeType<Int32>().ToObject() == 1;
-}
-
-bool Socket::GetExclusiveAddressUse() const {
-  if (this->data->socket == IntPtr::Zero())
-    throw ObjectClosedException(_caller);
-  
-  return GetSocketOption(SocketOptionLevel::Socket, SocketOptionName::ExclusiveAddressUse).ChangeType<Int32>().ToObject() == 1;
-}
-
-LingerOption Socket::GetLingerState() const {
-  if (this->data->socket == IntPtr::Zero())
-    throw ObjectClosedException(_caller);
-  
-  return LingerOption(GetSocketOption(SocketOptionLevel::Socket, SocketOptionName::Linger).ChangeType<LingerOption>().ToObject());
-}
-
 const EndPoint& Socket::GetLocalEndPoint() const {
   if (this->data->socket == IntPtr::Zero())
     throw ObjectClosedException(_caller);
@@ -175,53 +140,11 @@ const EndPoint& Socket::GetLocalEndPoint() const {
   return *this->data->localEndPoint;
 }
 
-bool Socket::GetMulticastLoopback() const {
-  if (this->data->socket == IntPtr::Zero())
-    throw ObjectClosedException(_caller);
-  
-  return GetSocketOption(SocketOptionLevel::IP, SocketOptionName::MulticastLoopback).ChangeType<Int32>().ToObject() == 1;
-}
-
-bool Socket::GetNoDelay() const {
-  if (this->data->socket == IntPtr::Zero())
-    throw ObjectClosedException(_caller);
-  
-  return GetSocketOption(SocketOptionLevel::Tcp, SocketOptionName::NoDelay).ChangeType<Int32>().ToObject() == 1;
-}
-
-int32 Socket::GetReceiveBufferSize() const {
-  if (this->data->socket == IntPtr::Zero())
-    throw ObjectClosedException(_caller);
-  
-  return GetSocketOption(SocketOptionLevel::Socket, SocketOptionName::ReceiveBuffer).ChangeType<Int32>().ToObject();
-}
-
-int32 Socket::GetReceiveTimeout() const {
-  if (this->data->socket == IntPtr::Zero())
-    throw ObjectClosedException(_caller);
-  
-  return GetSocketOption(SocketOptionLevel::Socket, SocketOptionName::ReceiveTimeout).ChangeType<Int32>().ToObject();
-}
-
 const EndPoint& Socket::GetRemoteEndPoint() const {
   if (this->data->socket == IntPtr::Zero())
     throw ObjectClosedException(_caller);
   
   return *this->data->remoteEndPoint;
-}
-
-int32 Socket::GetSendBufferSize() const {
-  if (this->data->socket == IntPtr::Zero())
-    throw ObjectClosedException(_caller);
-  
-  return GetSocketOption(SocketOptionLevel::Socket, SocketOptionName::SendBuffer).ChangeType<Int32>().ToObject();
-}
-
-int32 Socket::GetSendTimeout() const {
-  if (this->data->socket == IntPtr::Zero())
-    throw ObjectClosedException(_caller);
-  
-  return GetSocketOption(SocketOptionLevel::Socket, SocketOptionName::SendTimeout).ChangeType<Int32>().ToObject();
 }
 
 refptr<object> Socket::GetSocketOption(SocketOptionLevel socketOptionLevel, SocketOptionName socketOptionName) const {
@@ -248,13 +171,6 @@ refptr<object> Socket::GetSocketOption(SocketOptionLevel socketOptionLevel, Sock
   if (__OS::CoreApi::Socket::GetSocketOption(this->data->socket, socketOptionLevel, socketOptionName, &socketOption, &size) == -1)
     throw SocketException(__OS::CoreApi::Socket::GetLastError(), _caller);
   return ref_new<Int32>(socketOption);
-}
-
-int32 Socket::GetTtl() const {
-  if (this->data->socket == IntPtr::Zero())
-    throw ObjectClosedException(_caller);
-  
-  return GetSocketOption(SocketOptionLevel::Socket, SocketOptionName::SendTimeout).ChangeType<Int32>().ToObject();
 }
 
 int32 Socket::IOControl(System::Net::Sockets::IOControlCode /*ioControlCode*/, const Array<byte>& /*optionInValue*/, Array<byte>& /*optionOutValue*/) {

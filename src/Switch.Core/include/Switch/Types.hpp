@@ -28,10 +28,6 @@ namespace Switch {
   /// @ingroup Types
   using char32 = char32_t;
   
-  /// @brief Represents a wide character.
-  /// @ingroup Types
-  using wchar = wchar_t;
-  
   /// @brief Represents a decimal-precision floating-point number.
   /// @ingroup Types
   using decimal = long double;
@@ -73,6 +69,14 @@ namespace Switch {
   /// @brief Stores information about a type.
   /// @ingroup Types
   using type = std::type_info;
+
+  /// @brief Represents a 8-bit unsigned integer.
+  /// @ingroup Types
+  using uchar = unsigned char;
+
+  /// @brief Represents a 32-bit unsigned integer.
+  /// @ingroup Types
+  using uint = unsigned int;
   
   /// @brief Represents a 16-bit unsigned integer.
   /// @ingroup Types
@@ -90,21 +94,17 @@ namespace Switch {
   /// @ingroup Types
   using uintptr = uintptr_t;
 
-  /// @brief Represents a 8-bit unsigned integer.
-  /// @ingroup Types
-  using uchar = unsigned char;
-
   /// @brief Represents a 16-bit unsigned integer.
   /// @ingroup Types
   using ushort = unsigned short;
 
-  /// @brief Represents a 32-bit unsigned integer.
-  /// @ingroup Types
-  using uint = unsigned int;
-
   /// @brief Represents a 32-bit or 64-bit unsigned integer.
   /// @ingroup Types
   using ulong = unsigned long;
+  
+  /// @brief Represents a wide character.
+  /// @ingroup Types
+  using wchar = wchar_t;
 
   /// @cond
 #if defined(__linux__) && defined(_LP64)

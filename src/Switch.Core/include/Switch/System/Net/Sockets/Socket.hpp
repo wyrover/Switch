@@ -954,20 +954,20 @@ namespace Switch {
           void InnerConnect();
           int32 GetAvailable() const;
           bool GetBlocking() const;
-          bool GetDontFragment() const;
-          bool GetDualMode() const;
-          bool GetEnableBroadcast() const;
-          bool GetExclusiveAddressUse() const;
-          LingerOption GetLingerState() const;
+          bool GetDontFragment() const {return GetSocketOption(SocketOptionLevel::Socket, SocketOptionName::DontFragment).ChangeType<Int32>().ToObject() == 1;}
+          bool GetDualMode() const {return GetSocketOption(SocketOptionLevel::Socket, SocketOptionName::IPv6Only).ChangeType<Int32>().ToObject() == 0;}
+          bool GetEnableBroadcast() const {return GetSocketOption(SocketOptionLevel::Socket, SocketOptionName::Broadcast).ChangeType<Int32>().ToObject() == 1;}
+          bool GetExclusiveAddressUse() const {return GetSocketOption(SocketOptionLevel::Socket, SocketOptionName::ExclusiveAddressUse).ChangeType<Int32>().ToObject() == 1;}
+          LingerOption GetLingerState() const {return LingerOption(GetSocketOption(SocketOptionLevel::Socket, SocketOptionName::Linger).ChangeType<LingerOption>().ToObject());}
           const EndPoint& GetLocalEndPoint() const;
-          bool GetMulticastLoopback() const;
-          bool GetNoDelay() const;
-          int32 GetReceiveBufferSize() const;
-          int32 GetReceiveTimeout() const;
+          bool GetMulticastLoopback() const {return GetSocketOption(SocketOptionLevel::IP, SocketOptionName::MulticastLoopback).ChangeType<Int32>().ToObject() == 1;}
+          bool GetNoDelay() const {return GetSocketOption(SocketOptionLevel::Tcp, SocketOptionName::NoDelay).ChangeType<Int32>().ToObject() == 1;}
+          int32 GetReceiveBufferSize() const {return GetSocketOption(SocketOptionLevel::Socket, SocketOptionName::ReceiveBuffer).ChangeType<Int32>().ToObject();}
+          int32 GetReceiveTimeout() const {return GetSocketOption(SocketOptionLevel::Socket, SocketOptionName::ReceiveTimeout).ChangeType<Int32>().ToObject();}
           const EndPoint& GetRemoteEndPoint() const;
-          int32 GetSendBufferSize() const;
-          int32 GetSendTimeout() const;
-          int32 GetTtl() const;
+          int32 GetSendBufferSize() const {return GetSocketOption(SocketOptionLevel::Socket, SocketOptionName::SendBuffer).ChangeType<Int32>().ToObject();}
+          int32 GetSendTimeout() const {return GetSocketOption(SocketOptionLevel::Socket, SocketOptionName::SendTimeout).ChangeType<Int32>().ToObject();}
+          int32 GetTtl() const {return GetSocketOption(SocketOptionLevel::Socket, SocketOptionName::SendTimeout).ChangeType<Int32>().ToObject();}
           void SetBlocking(bool blocking);
           void SetDontFragment(bool dontFragment);
           void SetDualMode(bool dualMode);
