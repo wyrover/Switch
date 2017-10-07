@@ -16,6 +16,10 @@
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
+  /// @brief Represents a 8-bit unsigned integer.
+  /// @ingroup Types
+  using byte = uint8_t;
+
   /// @brief Represents a 16-bit unicode character.
   /// @ingroup Types
   using char16 = char16_t;
@@ -86,6 +90,22 @@ namespace Switch {
   /// @ingroup Types
   using uintptr = uintptr_t;
 
+  /// @brief Represents a 8-bit unsigned integer.
+  /// @ingroup Types
+  using uchar = unsigned char;
+
+  /// @brief Represents a 16-bit unsigned integer.
+  /// @ingroup Types
+  using ushort = unsigned short;
+
+  /// @brief Represents a 32-bit unsigned integer.
+  /// @ingroup Types
+  using uint = unsigned int;
+
+  /// @brief Represents a 32-bit or 64-bit unsigned integer.
+  /// @ingroup Types
+  using ulong = unsigned long;
+
   /// @cond
 #if defined(__linux__) && defined(_LP64)
   using llong = long long int;
@@ -96,28 +116,5 @@ namespace Switch {
 #endif
 /// @endcond
 }
-
-// On windows byte has definition in global scope so if a new definition in Switch namespace and "using namepsace Switch" activate in header file, there are a confict.
-// The solution remove using namespace Switch, but it's not that I want to mimic .net Framework.
-
-/// @brief Represents a 8-bit unsigned integer.
-/// @ingroup Types
-using byte = uint8_t;
-
-/// @brief Represents a 8-bit unsigned integer.
-/// @ingroup Types
-using uchar = unsigned char;
-
-/// @brief Represents a 16-bit unsigned integer.
-/// @ingroup Types
-using ushort = unsigned short;
-
-/// @brief Represents a 32-bit unsigned integer.
-/// @ingroup Types
-using uint = unsigned int;
-
-/// @brief Represents a 32-bit or 64-bit unsigned integer.
-/// @ingroup Types
-using ulong = unsigned long;
 
 using namespace Switch;
