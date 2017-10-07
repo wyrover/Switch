@@ -1,4 +1,4 @@
-﻿#include <Switch/System/String.hpp>
+#include <Switch/System/String.hpp>
 #include <Switch/TUnit/Assert.hpp>
 #include <Switch/TUnit/TestFixture.hpp>
 #include <Switch/LiteralOperatorConverter.hpp>
@@ -444,7 +444,7 @@ namespace SwitchUnitTests {
     
     void ConcatArray() {
       TUnit::Assert::AreEqual("264128378842", string::Concat<>(Array<Int32> {264, 128, 378, 842}), _caller);
-      TUnit::Assert::AreEqual("TrueFalseTrue", string::Concat<>(Array<bool> {true, false, true}), _caller);
+      TUnit::Assert::AreEqual("TrueFalseTrue", string::Concat<>(Array<Boolean> {true, false, true}), _caller);
       TUnit::Assert::AreEqual("string To Concat", string::Concat<>(Array<string> {"string ", "To ", "Concat"}), _caller);
     }
     
