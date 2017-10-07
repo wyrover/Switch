@@ -1,19 +1,10 @@
 #define TRACE
 
-#include <Windows.h>
-#include <Switch/Undef.hpp>
-
 #include <Switch/Nameof.hpp>
 #include <Switch/Startup.hpp>
 #include <Switch/System/Console.hpp>
-#include <Switch/System/Net/IPAddress.hpp>
-#include <Switch/System/Threading/Monitor.hpp>
-#include <Switch/System/Threading/Thread.hpp>
-#include <Switch/System/Threading/Tasks/Task.hpp>
-#include <Switch/System/BitConverter.hpp>
 
 using namespace System;
-using namespace System::Threading;
 
 namespace Examples {
   class Program {
