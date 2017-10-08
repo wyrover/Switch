@@ -27,27 +27,27 @@ class __opaque_format_item__ {
   public:
     refobj() {}
     
-    refobj(const refobj& refobj) : ref(refobj.ref), ptr(refobj.ptr) {}
+    refobj(const refobj& refobj) : obj(refobj.obj), ptr(refobj.ptr) {}
     
     template<typename T>
     refobj(const T& value, bool clone) {
       if (clone == true)
         ptr = new T(value);
       else
-        ref = value;
+        obj = value;
     }
     
     template<typename T>
     refobj(T* value) : ptr(value) {}
     
-    const object& operator*() const { return this->ptr != null ? this->ptr() : this->ref(); }
-    object& operator*() { return this->ptr != null ? this->ptr() : this->ref(); }
+    const object& operator*() const { return this->ptr != null ? this->ptr() : this->obj(); }
+    object& operator*() { return this->ptr != null ? this->ptr() : this->obj(); }
    
-    bool operator==(const refobj& refobj) const {return this->ref == refobj.ref && this->ptr == refobj.ptr;}
+    bool operator==(const refobj& refobj) const {return this->obj == refobj.obj && this->ptr == refobj.ptr;}
     bool operator!=(const refobj& refobj) const {return !this->operator==(refobj);}
     
   private:
-    ref<object> ref;
+    ref<object> obj;
     refptr<object> ptr;
   };
   

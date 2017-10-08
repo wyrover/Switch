@@ -204,17 +204,17 @@ namespace Switch {
           if (this->kind!= UriKind::Absolute)
             throw InvalidOperationException(_caller);
             
-            if (!String::IsNullOrEmpty(this->Host)) {
-              System::Net::IPAddress ipAddress;
-              if (System::Net::IPAddress::TryParse(this->Host, ipAddress) == false)
-                return UriHostNameType::Dns;
-              
-              if (ipAddress.AddressFamily == System::Net::Sockets::AddressFamily::InterNetwork)
-                return UriHostNameType::IPv4;
-              
-              if (ipAddress.AddressFamily == System::Net::Sockets::AddressFamily::InterNetworkV6)
-                return UriHostNameType::IPv6;
-            }
+          if (!String::IsNullOrEmpty(this->Host)) {
+            System::Net::IPAddress ipAddress;
+            if (System::Net::IPAddress::TryParse(this->Host, ipAddress) == false)
+              return UriHostNameType::Dns;
+
+            if (ipAddress.AddressFamily == System::Net::Sockets::AddressFamily::InterNetwork)
+              return UriHostNameType::IPv4;
+
+            if (ipAddress.AddressFamily == System::Net::Sockets::AddressFamily::InterNetworkV6)
+              return UriHostNameType::IPv6;
+          }
           
           if (this->Scheme() == Uri::UriSchemeMailto || this->Scheme() == Uri::UriSchemeFile)
             return UriHostNameType::Basic;
@@ -238,7 +238,7 @@ namespace Switch {
           if (this->kind != UriKind::Absolute)
             throw InvalidOperationException(_caller);
             
-            return (this->Port() == -1 || this->Port() == 21 || this->Port() == 70 || this->Port() == 80 || this->Port() == 443 || this->Port() == 389 || this->Port() == 25 || this->Port() == 119);
+          return (this->Port() == -1 || this->Port() == 21 || this->Port() == 70 || this->Port() == 80 || this->Port() == 443 || this->Port() == 389 || this->Port() == 25 || this->Port() == 119);
         }
       };
       
@@ -251,8 +251,8 @@ namespace Switch {
           if (this->kind != UriKind::Absolute)
             throw InvalidOperationException(_caller);
             
-            return this->Scheme() == UriSchemeFile;
-            }
+          return this->Scheme() == UriSchemeFile;
+        }
       };
       
       /// @brief Gets whether the specified Uri references the local host.
@@ -264,8 +264,8 @@ namespace Switch {
           if (this->kind != UriKind::Absolute)
             throw InvalidOperationException(_caller);
             
-            return this->Host() == System::Net::IPAddress::Loopback().ToString() || this->Host() == System::Net::IPAddress::IPv6Loopback().ToString() || this->Host() == "loopback" || this->Host() == "localhost" || String::IsNullOrEmpty(this->Host());
-            }
+          return this->Host() == System::Net::IPAddress::Loopback().ToString() || this->Host() == System::Net::IPAddress::IPv6Loopback().ToString() || this->Host() == "loopback" || this->Host() == "localhost" || String::IsNullOrEmpty(this->Host());
+        }
       };
       
       /// @brief Gets whether the specified Uri is a universal naming convention (UNC) path.
@@ -277,8 +277,8 @@ namespace Switch {
           if (this->kind != UriKind::Absolute)
             throw InvalidOperationException(_caller);
             
-            return this->Scheme() == Uri::UriSchemeFile && !String::IsNullOrEmpty(this->Host());
-            }
+          return this->Scheme() == Uri::UriSchemeFile && !String::IsNullOrEmpty(this->Host());
+        }
       };
       
       /// @brief Gets the original URI string that was passed to the Uri constructor.
@@ -306,7 +306,7 @@ namespace Switch {
           if (this->kind != UriKind::Absolute)
             throw InvalidOperationException(_caller);
             
-            return this->originalUri;
+          return this->originalUri;
         }
       };
       
@@ -406,7 +406,7 @@ namespace Switch {
           if (string::IsNullOrEmpty(absolutePath) == true)
             return Array<String>();
             
-            Array<String> segments;
+          Array<String> segments;
           int32 startIndex = 0;
           int32 length = 1;
           
@@ -421,10 +421,10 @@ namespace Switch {
             if (length == -1)
               length = absolutePath.Length() - startIndex;
               
-              Array<>::Resize(segments, segments.Length+1);
-              segments[segments.Length-1] = absolutePath.Substring(startIndex, length);
-              startIndex += length;
-              }
+            Array<>::Resize(segments, segments.Length+1);
+            segments[segments.Length-1] = absolutePath.Substring(startIndex, length);
+            startIndex += length;
+          }
           return segments;
         }
       };
