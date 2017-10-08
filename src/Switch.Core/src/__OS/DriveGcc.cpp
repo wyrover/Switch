@@ -27,11 +27,11 @@ bool __OS::CoreApi::Drive::GetAvailableFreeSpace(const string& rootPathName, int
 namespace {
   string rootDrive = {"/"};
 #if defined(__APPLE__)
-  string amovibleMountedPoint = "/Volumes";
+  string AmovibleMountedPoint() {return "/Volumes";}
   System::Array<string> ramDrives = {"/Dev"};
   System::Array<string> networkDrives = {"/net", "/home"};
 #else
-  string amovibleMountedPoint = System::Environment::ExpandEnvironmentVariables("/media/%USER%");
+  string AmovibleMountedPoint() {return System::Environment::ExpandEnvironmentVariables("/media/%USER%");}
   System::Array<string> ramDrives = {"/run/vmblock-fuse", "/run/user/1000/gvfs"};
   System::Array<string> networkDrives = {"/net", "/home", "/Network/Servers"};
 #endif
@@ -40,7 +40,7 @@ namespace {
 System::IO::DriveType __OS::CoreApi::Drive::GetDriveType(const string& rootPathName) {
   if (ramDrives.Contains(rootPathName))
     return System::IO::DriveType::Ram;
-  if (rootPathName.StartsWith(amovibleMountedPoint))
+  if (rootPathName.StartsWith(AmovibleMountedPoint()))
     return System::IO::DriveType::CDRom;
   if (networkDrives.Contains(rootPathName))
     return System::IO::DriveType::Network;
@@ -53,7 +53,7 @@ System::Array<string> __OS::CoreApi::Drive::GetDrives() {
   drives.AddRange(ramDrives);
   drives.AddRange(networkDrives);
 
-  for(string drive : __OS::CoreApi::Directory::EnumerateDirectories(amovibleMountedPoint, "*")) {
+  for(string drive : __OS::CoreApi::Directory::EnumerateDirectories(AmovibleMountedPoint(), "*")) {
     struct statfs stat;
 #if defined(__APPLE__)
     if (statfs(drive.Data(), &stat) == 0 && string(stat.f_mntonname) != rootDrive)
