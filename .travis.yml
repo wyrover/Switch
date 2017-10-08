@@ -48,5 +48,5 @@ script:
   - ./Release/Switch.System.UnitTests
   - ./Release/Switch.System.Drawing.UnitTests
   - ./Release/Switch.System.Windows.Forms.UnitTests
-  - ./Release/Switch.System.TUnit.UnitTests
+  - ./Release/Switch.TUnit.UnitTests
   
