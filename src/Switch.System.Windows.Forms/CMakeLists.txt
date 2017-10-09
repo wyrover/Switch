@@ -130,6 +130,8 @@ set(SOURCE_FILES
   src/__OS/PanelWin32.cpp
   src/__OS/ProgressBarGtk.cpp
   src/__OS/ProgressBarWin32.cpp
+  src/__OS/RadioButtonGtk.cpp
+  src/__OS/RadioButtonWin32.cpp
   src/__OS/SystemInformationGtk.cpp
   src/__OS/SystemInformationWin32.cpp
   src/__OS/TabControlGtk.cpp
@@ -201,8 +203,6 @@ set(COCOA_SOURCE_FILES
   src/__OS/PanelCocoa.mm
   src/__OS/ProgressBarCocoa.mm
   src/__OS/RadioButtonCocoa.mm
-  src/__OS/RadioButtonGtk.cpp
-  src/__OS/RadioButtonWin32.cpp
   src/__OS/SystemInformationCocoa.mm
   src/__OS/TabControlCocoa.mm
   src/__OS/TabPageCocoa.mm

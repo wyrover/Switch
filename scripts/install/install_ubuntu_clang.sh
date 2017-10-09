@@ -4,12 +4,9 @@ sudo apt install clang cmake doxygen libcurlpp-dev libgtkmm-3.0-dev libjpeg8-dev
 export CC=/usr/bin/clang
 export CXX=/usr/bin/clang++
 
-rm  -r -q bin
-mkdir -p bin/3rdparty
-cd bin/3rdparty
-cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug ../../3rdparty
-make all -j6
-sudo make install
+rm  -r -q build
+mkdir -p build/3rdparty
+cd build/3rdparty
 cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ../../3rdparty
 make all -j6
 sudo make install
