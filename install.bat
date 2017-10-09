@@ -45,74 +45,30 @@ if "%1" == "" (
 ) else if "%1" == "/VCPKG" (
   set switch_install_option=%1
   set switch_nstall_vcpkg_path=%2
-  if "%3" == "/DOC" (
-    set switch_install_cmake_install_prefix_path=%4
-  ) else (
-    set switch_install_cmake_install_prefix_path=%3
-  )
+  set switch_install_cmake_install_prefix_path=%3
 ) else if "%1" == "/VS:2017" (
   set switch_install_option=/VS:2017:WIN64
-  if "%2" == "/DOC" (
-    set switch_install_cmake_install_prefix_path=%3
-  ) else (
-    set switch_install_cmake_install_prefix_path=%2
-  )
+  set switch_install_cmake_install_prefix_path=%2
 ) else if "%1" == "/VS:2017:WIN32" (
   set switch_install_option=%1
-  if "%2" == "/DOC" (
-    set switch_install_cmake_install_prefix_path=%3
-  ) else (
-    set switch_install_cmake_install_prefix_path=%2
-  )
+  set switch_install_cmake_install_prefix_path=%2
 ) else if "%1" == "/VS:2017:WIN64" (
   set switch_install_option=%1
-  if "%2" == "/DOC" (
-    set switch_install_cmake_install_prefix_path=%3
-  ) else (
-    set switch_install_cmake_install_prefix_path=%2
-  )
+  set switch_install_cmake_install_prefix_path=%2
 ) else if "%1" == "/VS:2015" (
   set switch_install_option=/VS:2015:WIN64
-  if "%2" == "/DOC" (
-    set switch_install_cmake_install_prefix_path=%3
-  ) else (
-    set switch_install_cmake_install_prefix_path=%2
-  )
+  set switch_install_cmake_install_prefix_path=%2
 ) else if "%1" == "/VS:2015:WIN32" (
   set switch_install_option=%1
-  if "%2" == "/DOC" (
-    set switch_install_cmake_install_prefix_path=%3
-  ) else (
-    set switch_install_cmake_install_prefix_path=%2
-  )
+  set switch_install_cmake_install_prefix_path=%2
 ) else if "%1" == "/VS:2015:WIN64" (
   set switch_install_option=%1
-  if "%2" == "/DOC" (
-    set switch_install_cmake_install_prefix_path=%3
-  ) else (
-    set switch_install_cmake_install_prefix_path=%2
-  )
-) else if "%1" == "/DOC" (
   set switch_install_cmake_install_prefix_path=%2
 ) else (
   set switch_install_cmake_install_prefix_path=%1
 )
 
 if "%switch_install_cmake_install_prefix_path%" == "" set switch_install_cmake_install_prefix_path=C:/usr/local
-
-if "%1" == "/DOC" (
-  set switch_install_generate_doc=true
-) else if "%2" == "/DOC" (
-  set switch_install_generate_doc=true
-) else if "%2" == "/DOC" (
-  set switch_install_generate_doc=true
-) else if "%3" == "/DOC" (
-  set switch_install_generate_doc=true
-) else if "%4" == "/DOC" (
-  set switch_install_generate_doc=true
-) else (
-  set switch_install_generate_doc=false
-)
 
 if "%switch_install_option%" == "/VCPKG" (
   "%switch_nstall_vcpkg_path%\vcpkg" install curl gtest libjpeg-turbo zlib libpng
@@ -134,5 +90,4 @@ set switch_install_devenv=
 set switch_install_option=
 set switch_nstall_vcpkg_path=
 set switch_install_cmake_install_prefix_path=
-set switch_install_generate_doc=
 

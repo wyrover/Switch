@@ -1,7 +1,7 @@
 @echo off
 echo Usage
 echo   install.bat [/VS:2017[:WIN32 ^| :WIN64] ^| /VS:2015[:WIN32 ^| :WIN64] ^|
-echo   /VCPKG vcpkg_install_path] [cmake_install_prefix_path]  [/DOC]
+echo   /VCPKG vcpkg_install_path] [cmake_install_prefix_path]
 echo.
 echo   /VS:2017                  : Install 64 bits version for Visual Studio 2017.
 echo                               (default is no specified param)
@@ -15,8 +15,6 @@ echo                               install for defined Visual Studio solution an
 echo                               use thirdparty packages.
 echo   cmake_install_prefix_path : Specify the cmake install prefix path. (By
 echo                               default the value is set to "C:/usr/local".)
-echo   /DOC                      : Install Doxygen documentations in 
-echo                               ".\bin\help\html".
 echo. 
 echo Example:
 echo   install.bat /VS:2015:WIN32 D:/Projects/libs
