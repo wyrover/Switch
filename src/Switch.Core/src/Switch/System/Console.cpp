@@ -8,7 +8,7 @@
 #include "../../../include/Switch/System/Console.hpp"
 #include "../../../include/Switch/System/Environment.hpp"
 #include "../../../include/Switch/System/Text/UTF8Encoding.hpp"
-#include "../../__OS/CoreApi.hpp"
+#include "../../Native/CoreApi.hpp"
 
 namespace {
   // This hack is necessary in windows because std::cout does not work properly with Utf8 and unicode code page
@@ -80,66 +80,66 @@ namespace {
 }
 
 _property<ConsoleColor> Console::BackgroundColor {
-  [] {return __OS::CoreApi::Console::GetBackgroundColor();},
+  [] {return Native::CoreApi::Console::GetBackgroundColor();},
   [](ConsoleColor value) {
     if (!Enum<ConsoleColor>::IsDefined(value))
       throw ArgumentException(_caller);
-    if (!__OS::CoreApi::Console::SetBackgroundColor(value))
+    if (!Native::CoreApi::Console::SetBackgroundColor(value))
       throw System::IO::IOException(_caller);
   }
 };
 
 _property<int32> Console::BufferHeight{
-  [] {return __OS::CoreApi::Console::GetBufferHeight(); },
+  [] {return Native::CoreApi::Console::GetBufferHeight(); },
   [](int32 value) {
-    __OS::CoreApi::Console::SetBufferHeight(value);
+    Native::CoreApi::Console::SetBufferHeight(value);
   }
 };
 
 _property<int32> Console::BufferWidth{
-  [] {return __OS::CoreApi::Console::GetBufferWidth(); },
+  [] {return Native::CoreApi::Console::GetBufferWidth(); },
   [](int32 value) {
-    __OS::CoreApi::Console::SetBufferWidth(value);
+    Native::CoreApi::Console::SetBufferWidth(value);
   }
 };
 
 _property<bool, _readonly> Console::CapsLock {
-  [] {return __OS::CoreApi::Console::GetCapsLock();}
+  [] {return Native::CoreApi::Console::GetCapsLock();}
 };
 
 _property<int32> Console::CursorLeft {
-  [] {return __OS::CoreApi::Console::GetCursorTop();},
+  [] {return Native::CoreApi::Console::GetCursorTop();},
   [](int32 value) {
-    if (value < 0 || value >= __OS::CoreApi::Console::GetWindowWidth())
+    if (value < 0 || value >= Native::CoreApi::Console::GetWindowWidth())
       throw ArgumentOutOfRangeException(_caller);
       
-    __OS::CoreApi::Console::SetCursorLeft(value);
+    Native::CoreApi::Console::SetCursorLeft(value);
   }
 };
 
 _property<int32> Console::CursorSize {
-  [] {return __OS::CoreApi::Console::GetCursorSize();},
+  [] {return Native::CoreApi::Console::GetCursorSize();},
   [](int32 value) {
     if (value < 1 || value > 100)
       throw ArgumentOutOfRangeException(_caller);
       
-    __OS::CoreApi::Console::SetCursorSize(value);
+    Native::CoreApi::Console::SetCursorSize(value);
   }
 };
 
 _property<int32> Console::CursorTop {
-  [] {return __OS::CoreApi::Console::GetCursorTop();},
+  [] {return Native::CoreApi::Console::GetCursorTop();},
   [](int32 value) {
-    if (value < 0 || value >= __OS::CoreApi::Console::GetBufferHeight())
+    if (value < 0 || value >= Native::CoreApi::Console::GetBufferHeight())
       throw ArgumentOutOfRangeException(_caller);
       
-    __OS::CoreApi::Console::SetCursorTop(value);
+    Native::CoreApi::Console::SetCursorTop(value);
   }
 };
 
 _property<bool> Console::CursorVisible {
-  [] {return __OS::CoreApi::Console::GetCursorVisible();},
-  [](bool value) {__OS::CoreApi::Console::SetCursorVisible(value);}
+  [] {return Native::CoreApi::Console::GetCursorVisible();},
+  [](bool value) {Native::CoreApi::Console::SetCursorVisible(value);}
 };
 
 _property<Console::StandardErrorOutput&, _readonly> Console::Error {
@@ -150,11 +150,11 @@ _property<Console::StandardErrorOutput&, _readonly> Console::Error {
 };
 
 _property<ConsoleColor> Console::ForegroundColor {
-  [] {return __OS::CoreApi::Console::GetForegroundColor();},
+  [] {return Native::CoreApi::Console::GetForegroundColor();},
   [](ConsoleColor value) {
     if (!Enum<ConsoleColor>::IsDefined(value))
       throw ArgumentException(_caller);
-    __OS::CoreApi::Console::SetForegroundColor(value);
+    Native::CoreApi::Console::SetForegroundColor(value);
   }
 };
 
@@ -169,7 +169,7 @@ _property<const refptr<System::Text::Encoding>&> Console::InputEncoding {
   []()->const refptr<System::Text::Encoding>& {return inputEncoding;},
   [](const refptr<System::Text::Encoding>& value) {
     inputEncoding = value;
-    __OS::CoreApi::Console::SetInputCodePage(inputEncoding->GetCodePage());
+    Native::CoreApi::Console::SetInputCodePage(inputEncoding->GetCodePage());
   }
 };
 
@@ -188,19 +188,19 @@ _property<bool, _readonly> Console::IsOutputRedirected{
 _property<bool, _readonly> Console::KeyAvailable {
   [] {
     Console::__f();
-    return __OS::CoreApi::Console::KeyAvailable();}
+    return Native::CoreApi::Console::KeyAvailable();}
 };
 
 _property<int32, _readonly> Console::LargestWindowHeight{
-  [] {return __OS::CoreApi::Console::GetLargestWindowHeight(); }
+  [] {return Native::CoreApi::Console::GetLargestWindowHeight(); }
 };
 
 _property<int32, _readonly> Console::LargestWindowWidth{
-  [] {return __OS::CoreApi::Console::GetLargestWindowWidth(); }
+  [] {return Native::CoreApi::Console::GetLargestWindowWidth(); }
 };
 
 _property<bool, _readonly> Console::NumberLock{
-  [] {return __OS::CoreApi::Console::GetNumberLock(); }
+  [] {return Native::CoreApi::Console::GetNumberLock(); }
 };
 
 _property<Console::StandardOutput&, _readonly> Console::Out {
@@ -214,13 +214,13 @@ _property<const refptr<System::Text::Encoding>&> Console::OutputEncoding {
   []()->const refptr<System::Text::Encoding>& {return outputEncoding;},
   [](const refptr<System::Text::Encoding>& value) {
     outputEncoding = value;
-    __OS::CoreApi::Console::SetOutputCodePage(outputEncoding->GetCodePage());
+    Native::CoreApi::Console::SetOutputCodePage(outputEncoding->GetCodePage());
   }
 };
 
 _property<string> Console::Title {
-  [] {return __OS::CoreApi::Console::GetTitle(); },
-  [](const string& value) {__OS::CoreApi::Console::SetTitle(value);}
+  [] {return Native::CoreApi::Console::GetTitle(); },
+  [](const string& value) {Native::CoreApi::Console::SetTitle(value);}
 };
 
 _property<bool> Console::TreatControlCAsInput {
@@ -229,30 +229,30 @@ _property<bool> Console::TreatControlCAsInput {
 };
 
 _property<int32> Console::WindowHeight {
-  []{return __OS::CoreApi::Console::GetWindowHeight(); },
+  []{return Native::CoreApi::Console::GetWindowHeight(); },
   [](int32 value) {
-    __OS::CoreApi::Console::SetWindowHeight(value);
+    Native::CoreApi::Console::SetWindowHeight(value);
   }
 };
 
 _property<int32> Console::WindowLeft {
-  []{return __OS::CoreApi::Console::GetWindowLeft(); },
+  []{return Native::CoreApi::Console::GetWindowLeft(); },
   [](int32 value) {
-    __OS::CoreApi::Console::SetWindowLeft(value);
+    Native::CoreApi::Console::SetWindowLeft(value);
   }
 };
 
 _property<int32> Console::WindowTop {
-  []{return __OS::CoreApi::Console::GetWindowTop(); },
+  []{return Native::CoreApi::Console::GetWindowTop(); },
   [](int32 value) {
-    __OS::CoreApi::Console::SetWindowTop(value);
+    Native::CoreApi::Console::SetWindowTop(value);
   }
 };
 
 _property<int32> Console::WindowWidth {
-  [] {return __OS::CoreApi::Console::GetWindowWidth(); },
+  [] {return Native::CoreApi::Console::GetWindowWidth(); },
   [](int32 value) {
-    __OS::CoreApi::Console::SetWindowWidth(value);
+    Native::CoreApi::Console::SetWindowWidth(value);
   }
 };
 
@@ -262,11 +262,11 @@ void Console::Beep(int32 frequency, int32 duration) {
   if (frequency < 37 || frequency > 32767 || duration <= 0)
     throw ArgumentOutOfRangeException(_caller);
   
-  __OS::CoreApi::Console::Beep(frequency, duration);
+  Native::CoreApi::Console::Beep(frequency, duration);
 }
 
 void Console::Clear() {
-  __OS::CoreApi::Console::Clrscr();
+  Native::CoreApi::Console::Clrscr();
 }
 
 void Console::MoveBufferArea(int32 sourceLeft, int32 sourceTop, int32 sourceWidth, int32 sourceHeight, int32 targetLeft, int32 targetTop, char32 sourceChar, ConsoleColor sourceForeColor, ConsoleColor sourceBackColor) {
@@ -280,8 +280,8 @@ int32 Console::Read() {
 }
 
 struct AutoEchoVisible {
-  AutoEchoVisible() {__OS::CoreApi::Console::SetEchoVisible(true);}
-  ~AutoEchoVisible() {__OS::CoreApi::Console::SetEchoVisible(false);}
+  AutoEchoVisible() {Native::CoreApi::Console::SetEchoVisible(true);}
+  ~AutoEchoVisible() {Native::CoreApi::Console::SetEchoVisible(false);}
 };
 
 String Console::ReadLine() {
@@ -303,7 +303,7 @@ ConsoleKeyInfo Console::ReadKey(bool intercept) {
   ConsoleKeyInfo keyInfo;
   
   out->Flush();
-  __OS::CoreApi::Console::ReadKey(KeyChar, KeyCode, alt, shift, ctrl);
+  Native::CoreApi::Console::ReadKey(KeyChar, KeyCode, alt, shift, ctrl);
   keyInfo = ConsoleKeyInfo(KeyChar, (ConsoleKey)KeyCode, shift, alt, ctrl);
 
   if (intercept == false)
@@ -313,7 +313,7 @@ ConsoleKeyInfo Console::ReadKey(bool intercept) {
 }
 
 void Console::ResetColor() {
-  __OS::CoreApi::Console::ResetColor();
+  Native::CoreApi::Console::ResetColor();
 }
 
 void Console::SetError(System::IO::TextWriter& e) { error = &e; }

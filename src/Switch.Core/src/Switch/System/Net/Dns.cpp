@@ -1,5 +1,5 @@
 #include "../../../../include/Switch/System/Net/Dns.hpp"
-#include "../../../__OS/CoreApi.hpp"
+#include "../../../Native/CoreApi.hpp"
 
 using namespace System::Net;
 using namespace System::Net::Sockets;
@@ -7,8 +7,8 @@ using namespace System::Net::Sockets;
 namespace {
   class Hostent {
   public:
-    Hostent() {__OS::CoreApi::Dns::SetHostent(true);}
-    ~Hostent() {__OS::CoreApi::Dns::EndHostent();}
+    Hostent() {Native::CoreApi::Dns::SetHostent(true);}
+    ~Hostent() {Native::CoreApi::Dns::EndHostent();}
   };
 }
 
@@ -26,23 +26,23 @@ IPHostEntry Dns::GetHostEntry(const string& hostNameOrAddress) {
   IPAddress address;
   intptr host;
   if (IPAddress::TryParse(hostNameOrAddress, address) == false) {
-    host = __OS::CoreApi::Dns::GetHostByName(hostNameOrAddress);
+    host = Native::CoreApi::Dns::GetHostByName(hostNameOrAddress);
     if (host == 0)
       throw InvalidOperationException(_caller);
   } else {
-    host = __OS::CoreApi::Dns::GetHostByAddress(address.ToString(), address.AddressFamily());
+    host = Native::CoreApi::Dns::GetHostByAddress(address.ToString(), address.AddressFamily());
     if (host == 0)
       throw InvalidOperationException(_caller);
   }
-  IPHostEntry hostEntry(__OS::CoreApi::Dns::GetAddresses(host), __OS::CoreApi::Dns::GetAliases(host), __OS::CoreApi::Dns::GetHostName(host));
-  __OS::CoreApi::Dns::Destroy(host);
+  IPHostEntry hostEntry(Native::CoreApi::Dns::GetAddresses(host), Native::CoreApi::Dns::GetAliases(host), Native::CoreApi::Dns::GetHostName(host));
+  Native::CoreApi::Dns::Destroy(host);
   return hostEntry;
 }
 
 string Dns::GetHostName() {
   Hostent hotent;
   string hostName;
-  if(__OS::CoreApi::Dns::GetHostName(hostName) != 0)
+  if(Native::CoreApi::Dns::GetHostName(hostName) != 0)
     throw InvalidOperationException(_caller);
   return hostName;
 }

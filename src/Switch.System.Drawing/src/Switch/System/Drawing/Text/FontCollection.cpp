@@ -1,5 +1,5 @@
 #include "../../../../../include/Switch/System/Drawing/Text/FontCollection.hpp"
-#include "../../../../__OS/DrawingApi.hpp"
+#include "../../../../Native/DrawingApi.hpp"
 
-System::Drawing::Text::FontCollection::FontCollection() : families(__OS::DrawingApi::FontFamily::GetInstalledFontFamilies()) {
+System::Drawing::Text::FontCollection::FontCollection() : families(Native::DrawingApi::FontFamily::GetInstalledFontFamilies()) {
 }

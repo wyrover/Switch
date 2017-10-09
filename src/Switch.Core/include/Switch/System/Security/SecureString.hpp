@@ -6,7 +6,7 @@
 #include "../Char.hpp"
 
 /// @cond
-namespace __OS { class CoreApi; }
+namespace Native { class CoreApi; }
 /// @endcond
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
@@ -102,7 +102,7 @@ namespace Switch {
         
       private:
         /// @cond
-        friend class __OS::CoreApi;
+        friend class Native::CoreApi;
         /// @endcond
         System::Collections::Generic::List<char32> data;
         bool readOnly = false;

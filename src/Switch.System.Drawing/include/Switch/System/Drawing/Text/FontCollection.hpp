@@ -7,7 +7,7 @@
 #include "../FontFamily.hpp"
 
 /// @cond
-namespace __OS {
+namespace Native {
   class DrawingApi;
 }
 /// @endcond

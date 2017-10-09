@@ -3,7 +3,7 @@
 #include "../../../../include/Switch/System/UnauthorizedAccessException.hpp"
 #include "../../../../include/Switch/System/IO/DriveInfo.hpp"
 #include "../../../../include/Switch/System/IO/IOException.hpp"
-#include "../../../__OS/CoreApi.hpp"
+#include "../../../Native/CoreApi.hpp"
 
 using namespace System;
 using namespace System::IO;
@@ -16,7 +16,7 @@ DriveInfo::DriveInfo(const String& name) {
 
 int64 DriveInfo::GetAvailableFreeSpace() const {
   int64 freeBytes = 0, dummy;
-  if (!__OS::CoreApi::Drive::GetAvailableFreeSpace(this->driveName.Data(), freeBytes, dummy, dummy))
+  if (!Native::CoreApi::Drive::GetAvailableFreeSpace(this->driveName.Data(), freeBytes, dummy, dummy))
     throw IOException(_caller);
   
   return freeBytes;
@@ -24,19 +24,19 @@ int64 DriveInfo::GetAvailableFreeSpace() const {
 
 String DriveInfo::GetDriveFormat() const {
   string volumeName, fileSystemName;
-  if (!__OS::CoreApi::Drive::GetVolumeInformation(this->driveName, volumeName, fileSystemName))
+  if (!Native::CoreApi::Drive::GetVolumeInformation(this->driveName, volumeName, fileSystemName))
     throw IOException(_caller);
   
   return fileSystemName;
 }
 
 System::IO::DriveType DriveInfo::GetDriveType() const {
-  return (System::IO::DriveType)__OS::CoreApi::Drive::GetDriveType(this->driveName);
+  return (System::IO::DriveType)Native::CoreApi::Drive::GetDriveType(this->driveName);
 }
 
 bool DriveInfo::GetIsReady() const {
   string volumeName, fileSystemName;
-  return __OS::CoreApi::Drive::GetVolumeInformation(this->driveName, volumeName, fileSystemName);
+  return Native::CoreApi::Drive::GetVolumeInformation(this->driveName, volumeName, fileSystemName);
 }
 
 String DriveInfo::GetName() const {
@@ -49,7 +49,7 @@ DirectoryInfo DriveInfo::GetRootDirectory() const {
 
 int64 DriveInfo::GetTotalFreeSpace() const {
   int64 totalNumberOfFreeBytes = 0, dummy;
-  if (!__OS::CoreApi::Drive::GetAvailableFreeSpace(this->driveName.Data(), dummy, dummy, totalNumberOfFreeBytes))
+  if (!Native::CoreApi::Drive::GetAvailableFreeSpace(this->driveName.Data(), dummy, dummy, totalNumberOfFreeBytes))
     throw IOException(_caller);
   
   return totalNumberOfFreeBytes;
@@ -57,7 +57,7 @@ int64 DriveInfo::GetTotalFreeSpace() const {
 
 int64 DriveInfo::GetTotalSize() const {
   int64 totalNumberOfBytes = 0, dummy;
-  if (!__OS::CoreApi::Drive::GetAvailableFreeSpace(this->driveName.Data(), dummy, totalNumberOfBytes, dummy))
+  if (!Native::CoreApi::Drive::GetAvailableFreeSpace(this->driveName.Data(), dummy, totalNumberOfBytes, dummy))
     throw IOException(_caller);
   
   return totalNumberOfBytes;
@@ -65,7 +65,7 @@ int64 DriveInfo::GetTotalSize() const {
 
 string DriveInfo::GetVolumeLabel() const {
   string volumeName, fileSystemName;
-  if (!__OS::CoreApi::Drive::GetVolumeInformation(this->driveName, volumeName, fileSystemName))
+  if (!Native::CoreApi::Drive::GetVolumeInformation(this->driveName, volumeName, fileSystemName))
     throw IOException(_caller);
   return volumeName;
 }
@@ -75,13 +75,13 @@ void DriveInfo::SetVolumeLabel(const String& label) {
   if (drive == System::IO::DriveType::CDRom || drive == System::IO::DriveType::Network)
     throw UnauthorizedAccessException(_caller);
 
-  if (!__OS::CoreApi::Drive::SetVolumeLabel(this->driveName.Data(), label.Data()))
+  if (!Native::CoreApi::Drive::SetVolumeLabel(this->driveName.Data(), label.Data()))
     throw IOException(_caller);
 }
 
 Array<DriveInfo> DriveInfo::GetDrives() {
   System::Collections::Generic::List<DriveInfo> drives;
-  for (string drive : __OS::CoreApi::Drive::GetDrives())
+  for (string drive : Native::CoreApi::Drive::GetDrives())
     drives.Add(DriveInfo(drive));
   return drives.ToArray();
 }

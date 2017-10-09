@@ -2,11 +2,11 @@
 #include "../../include/Switch/System/Array.hpp"
 #include "../../include/Switch/System/ArgumentNullException.hpp"
 #include "../../include/Switch/System/ArgumentOutOfRangeException.hpp"
-#include "../__OS/CoreApi.hpp"
+#include "../Native/CoreApi.hpp"
 
 size_t __opaque_unicode_string__::npos = std::string::npos;
 
-__opaque_unicode_string__::__opaque_unicode_string__(const char* str) : string(str), stringSize(__OS::CoreApi::UnicodeEncodings::UTF8::GetLength(string)) {
+__opaque_unicode_string__::__opaque_unicode_string__(const char* str) : string(str), stringSize(Native::CoreApi::UnicodeEncodings::UTF8::GetLength(string)) {
 }
 
 __opaque_unicode_string__::__opaque_unicode_string__(const char* str, int32_t startIndex, int32_t length) {
@@ -42,7 +42,7 @@ __opaque_unicode_string__::__opaque_unicode_string__(const char* str, int32_t st
     this->stringSize = other.size() - startIndex;
   } else {
     this->string = other.string.substr(begin, end - begin);
-    this->stringSize = __OS::CoreApi::UnicodeEncodings::UTF8::GetLength(this->string);
+    this->stringSize = Native::CoreApi::UnicodeEncodings::UTF8::GetLength(this->string);
   }
 }
 
@@ -94,21 +94,21 @@ __opaque_unicode_string__& __opaque_unicode_string__::erase(size_t pos, size_t l
   
   if (len == npos) {
     this->string.erase(byteIndexIn);
-    this->stringSize = __OS::CoreApi::UnicodeEncodings::UTF8::GetLength(this->string);
+    this->stringSize = Native::CoreApi::UnicodeEncodings::UTF8::GetLength(this->string);
     return *this;
   }
   
   int byteIndexOut = static_cast<int>(this->string.size());
   for ( ; it != end(); it++) {
     if (--len == 0) {
-      int next = __OS::CoreApi::UnicodeEncodings::UTF8::GetNextCodeIndex(this->string, it.get_byte_index());
+      int next = Native::CoreApi::UnicodeEncodings::UTF8::GetNextCodeIndex(this->string, it.get_byte_index());
       if (next != -1)
       byteIndexOut = next;
     }
   }
   
   this->string.erase(byteIndexIn, byteIndexOut-byteIndexIn);
-  this->stringSize = __OS::CoreApi::UnicodeEncodings::UTF8::GetLength(this->string);
+  this->stringSize = Native::CoreApi::UnicodeEncodings::UTF8::GetLength(this->string);
   return *this;
 }
 
@@ -143,19 +143,19 @@ __opaque_unicode_string__& __opaque_unicode_string__::trim_end(const std::vector
   return *this;
   
   this->string.erase(byteIndex);
-  this->stringSize = __OS::CoreApi::UnicodeEncodings::UTF8::GetLength(this->string);
+  this->stringSize = Native::CoreApi::UnicodeEncodings::UTF8::GetLength(this->string);
   return *this;
 }
 
 __opaque_unicode_string__& __opaque_unicode_string__::append(size_t n, char32_t code) {
   for (size_t i = 0; i < n; i++)
-    __OS::CoreApi::UnicodeEncodings::UTF8::Encode(code, string);
+    Native::CoreApi::UnicodeEncodings::UTF8::Encode(code, string);
   this->stringSize += n;
   return *this;
 }
 
 __opaque_unicode_string__& __opaque_unicode_string__::append(char32_t code) {
-  __OS::CoreApi::UnicodeEncodings::UTF8::Encode(code, string);
+  Native::CoreApi::UnicodeEncodings::UTF8::Encode(code, string);
   this->stringSize += 1;
   return *this;
 }
@@ -273,14 +273,14 @@ bool __opaque_unicode_string__::ends_with(const __opaque_unicode_string__& s) co
 __opaque_unicode_string__ __opaque_unicode_string__::to_lower() const {
   __opaque_unicode_string__ lower;
   for (__opaque_unicode_string__::const_iterator it = (*this).begin(); it != (*this).end(); it++)
-    lower.append(__OS::CoreApi::UnicodeEncodings::ToLower(*it));
+    lower.append(Native::CoreApi::UnicodeEncodings::ToLower(*it));
   return lower;
 }
 
 __opaque_unicode_string__ __opaque_unicode_string__::to_upper() const {
   __opaque_unicode_string__ upper;
   for (__opaque_unicode_string__::const_iterator it = (*this).begin(); it != (*this).end(); it++)
-    upper.append(__OS::CoreApi::UnicodeEncodings::ToUpper(*it));
+    upper.append(Native::CoreApi::UnicodeEncodings::ToUpper(*it));
   return upper;
 }
 
@@ -318,7 +318,7 @@ __opaque_unicode_string__::const_iterator::const_iterator(const std::string* str
     this->format = 0;
   } else {
     this->index = this->position = 0;
-    this->format = __OS::CoreApi::UnicodeEncodings::UTF8::GetFormat((uint8_t)string_pointer->operator[](this->position));
+    this->format = Native::CoreApi::UnicodeEncodings::UTF8::GetFormat((uint8_t)string_pointer->operator[](this->position));
   }
 }
 
@@ -338,7 +338,7 @@ bool __opaque_unicode_string__::const_iterator::operator!=(const const_iterator&
 
 char32_t __opaque_unicode_string__::const_iterator::operator*() const {
   const uint8_t* data = (const uint8_t*)string_pointer->data();
-  return __OS::CoreApi::UnicodeEncodings::UTF8::GetCode(&data[this->position],format);
+  return Native::CoreApi::UnicodeEncodings::UTF8::GetCode(&data[this->position],format);
 }
 
 __opaque_unicode_string__::const_iterator::const_iterator(const const_iterator& it) {
@@ -352,7 +352,7 @@ __opaque_unicode_string__::const_iterator& __opaque_unicode_string__::const_iter
   if (this->position == -1) return *this;
   for (size_t i = this->position+1; i < string_pointer->size() ; i += 1) {
     uint8_t b = (uint8_t)(*string_pointer)[i];
-    this->format = __OS::CoreApi::UnicodeEncodings::UTF8::GetFormat(b);
+    this->format = Native::CoreApi::UnicodeEncodings::UTF8::GetFormat(b);
     if (this->format > 0) {
       this->index += 1;
       this->position = (int)i;
@@ -371,7 +371,7 @@ __opaque_unicode_string__::iterator::iterator(std::string* str, bool at_end) {
     this->format = 0;
   } else {
     this->index = this->position = 0;
-    this->format = __OS::CoreApi::UnicodeEncodings::UTF8::GetFormat((uint8_t)string_pointer->operator[](this->position));
+    this->format = Native::CoreApi::UnicodeEncodings::UTF8::GetFormat((uint8_t)string_pointer->operator[](this->position));
   }
 }
 
@@ -391,13 +391,13 @@ bool __opaque_unicode_string__::iterator::operator!=(const iterator& rhs) const{
 
 char32_t __opaque_unicode_string__::iterator::operator*() const {
   const uint8_t* data = (const uint8_t*)string_pointer->data();
-  return __OS::CoreApi::UnicodeEncodings::UTF8::GetCode(&data[this->position],format);
+  return Native::CoreApi::UnicodeEncodings::UTF8::GetCode(&data[this->position],format);
 }
 
 char32_t& __opaque_unicode_string__::iterator::operator*() {
   uint8_t* data = (uint8_t*)string_pointer->data();
   static char32 value;
-  value = __OS::CoreApi::UnicodeEncodings::UTF8::GetCode(&data[this->position],format);
+  value = Native::CoreApi::UnicodeEncodings::UTF8::GetCode(&data[this->position],format);
   return value;
 }
 
@@ -412,7 +412,7 @@ __opaque_unicode_string__::iterator& __opaque_unicode_string__::iterator::operat
   if (this->position == -1) return *this;
   for (size_t i = this->position+1; i < string_pointer->size() ; i += 1) {
     uint8_t b = (uint8_t)(*string_pointer)[i];
-    this->format = __OS::CoreApi::UnicodeEncodings::UTF8::GetFormat(b);
+    this->format = Native::CoreApi::UnicodeEncodings::UTF8::GetFormat(b);
     if (this->format > 0) {
       this->index += 1;
       this->position = (int)i;
@@ -437,12 +437,12 @@ __opaque_unicode_string__::const_reverse_iterator::const_reverse_iterator(const 
     this->index = -1;
     this->format = 0;
   } else {
-    this->index = __OS::CoreApi::UnicodeEncodings::UTF8::GetLength(*str)-1;
-    this->position = __OS::CoreApi::UnicodeEncodings::UTF8::GetLastIndex(*str);
+    this->index = Native::CoreApi::UnicodeEncodings::UTF8::GetLength(*str)-1;
+    this->position = Native::CoreApi::UnicodeEncodings::UTF8::GetLastIndex(*str);
     if (this->position == -1) {
       this->format = 0;
     } else {
-      this->format = __OS::CoreApi::UnicodeEncodings::UTF8::GetFormat((uint8_t)string_pointer->operator[](this->position));
+      this->format = Native::CoreApi::UnicodeEncodings::UTF8::GetFormat((uint8_t)string_pointer->operator[](this->position));
     }
   }
 }
@@ -463,14 +463,14 @@ bool __opaque_unicode_string__::const_reverse_iterator::operator!=(const const_r
 
 char32_t __opaque_unicode_string__::const_reverse_iterator::operator*() const {
   const uint8_t* data = (const uint8_t*)string_pointer->data();
-  return __OS::CoreApi::UnicodeEncodings::UTF8::GetCode(&data[this->position],format);
+  return Native::CoreApi::UnicodeEncodings::UTF8::GetCode(&data[this->position],format);
 }
 
 __opaque_unicode_string__::const_reverse_iterator& __opaque_unicode_string__::const_reverse_iterator::operator++() {
   if (this->position == -1) return *this;
   for (int32_t i = this->position-1 ; i >= 0 ; i -= 1) {
     uint8_t b = (uint8_t)(*string_pointer)[i];
-    this->format = __OS::CoreApi::UnicodeEncodings::UTF8::GetFormat(b);
+    this->format = Native::CoreApi::UnicodeEncodings::UTF8::GetFormat(b);
     if (this->format > 0) {
       this->index -= 1;
       this->position = i;
@@ -495,12 +495,12 @@ __opaque_unicode_string__::reverse_iterator::reverse_iterator(std::string* str, 
     this->index = -1;
     this->format = 0;
   } else {
-    this->index = __OS::CoreApi::UnicodeEncodings::UTF8::GetLength(*str)-1;
-    this->position = __OS::CoreApi::UnicodeEncodings::UTF8::GetLastIndex(*str);
+    this->index = Native::CoreApi::UnicodeEncodings::UTF8::GetLength(*str)-1;
+    this->position = Native::CoreApi::UnicodeEncodings::UTF8::GetLastIndex(*str);
     if (this->position == -1) {
       this->format = 0;
     } else {
-      this->format = __OS::CoreApi::UnicodeEncodings::UTF8::GetFormat((uint8_t)string_pointer->operator[](this->position));
+      this->format = Native::CoreApi::UnicodeEncodings::UTF8::GetFormat((uint8_t)string_pointer->operator[](this->position));
     }
   }
 }
@@ -521,7 +521,7 @@ bool __opaque_unicode_string__::reverse_iterator::operator!=(const reverse_itera
 
 char32_t __opaque_unicode_string__::reverse_iterator::operator*() const {
   const uint8_t* data = (const uint8_t*)string_pointer->data();
-  return __OS::CoreApi::UnicodeEncodings::UTF8::GetCode(&data[this->position],format);
+  return Native::CoreApi::UnicodeEncodings::UTF8::GetCode(&data[this->position],format);
 }
 
 char32_t& __opaque_unicode_string__::reverse_iterator::operator*() {
@@ -533,7 +533,7 @@ __opaque_unicode_string__::reverse_iterator& __opaque_unicode_string__::reverse_
   if (this->position == -1) return *this;
   for (int32_t i = this->position-1 ; i >= 0 ; i -= 1) {
     uint8_t b = (uint8_t)(*string_pointer)[i];
-    this->format = __OS::CoreApi::UnicodeEncodings::UTF8::GetFormat(b);
+    this->format = Native::CoreApi::UnicodeEncodings::UTF8::GetFormat(b);
     if (this->format > 0) {
       this->index -= 1;
       this->position = i;

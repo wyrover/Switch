@@ -7,25 +7,25 @@
 #include "../../../../include/Switch/System/IO/FileAttributes.hpp"
 #include "../../../../include/Switch/System/Char.hpp"
 #include "../../../../include/Switch/System/Random.hpp"
-#include "../../../__OS/CoreApi.hpp"
+#include "../../../Native/CoreApi.hpp"
 
 using namespace System;
 using namespace System::IO;
 
 _property<char32, _readonly> Path::AltDirectorySeparatorChar {
-  [] {return __OS::CoreApi::Directory::AltDirectorySeparatorChar();}
+  [] {return Native::CoreApi::Directory::AltDirectorySeparatorChar();}
 };
 
 _property<char32, _readonly> Path::DirectorySeparatorChar {
-  [] {return __OS::CoreApi::Directory::DirectorySeparatorChar();}
+  [] {return Native::CoreApi::Directory::DirectorySeparatorChar();}
 };
 
 _property<char32, _readonly> Path::PathSeparator {
-  [] {return __OS::CoreApi::Directory::PathSeparator();}
+  [] {return Native::CoreApi::Directory::PathSeparator();}
 };
 
 _property<char32, _readonly> Path::VolumeSeparatorChar {
-  [] {return __OS::CoreApi::Directory::VolumeSeparator();}
+  [] {return Native::CoreApi::Directory::VolumeSeparator();}
 };
 
 Array<char32> DirectorySeparatorChars = {'/', '\\'};
@@ -66,11 +66,11 @@ string Path::GetFullPath(const string& path) {
   if (path.IndexOfAny(GetInvalidPathChars()) != -1)
     throw ArgumentException(_caller);
   
-  return __OS::CoreApi::Directory::GetFullPath(path);
+  return Native::CoreApi::Directory::GetFullPath(path);
 }
 
 Array<char32> Path::GetInvalidPathChars() {
-  return Array<char32>(__OS::CoreApi::Directory::InvalidPathChars());
+  return Array<char32>(Native::CoreApi::Directory::InvalidPathChars());
 }
 
 namespace {
@@ -106,7 +106,7 @@ string Path::GetRandomFileName() {
 }
 
 string Path::GetTempPath() {
-  return __OS::CoreApi::Directory::GetTempPath();
+  return Native::CoreApi::Directory::GetTempPath();
 }
 
 string Path::GetTempFileName() {

@@ -4,7 +4,7 @@
 #include "../../../../../include/Switch/System/Net/Sockets/Socket.hpp"
 #include "../../../../../include/Switch/System/Net/Sockets/MulticastOption.hpp"
 #include "../../../../../include/Switch/System/Net/Sockets/SocketException.hpp"
-#include "../../../../__OS/CoreApi.hpp"
+#include "../../../../Native/CoreApi.hpp"
 
 using namespace System;
 using namespace System::Net;
@@ -12,11 +12,11 @@ using namespace System::Net::Sockets;
 using namespace System::Collections::Generic;
 
 _property<bool, _readonly> Socket::OSSupportsIPv4 {
-  [] {return __OS::CoreApi::Socket::GetOSSupportsIPv4();}
+  [] {return Native::CoreApi::Socket::GetOSSupportsIPv4();}
 };
 
 _property<bool, _readonly> Socket::OSSupportsIPv6 {
-  [] {return __OS::CoreApi::Socket::GetOSSupportsIPv6();}
+  [] {return Native::CoreApi::Socket::GetOSSupportsIPv6();}
 };
 
 Socket::Socket(System::Net::Sockets::AddressFamily addressFamily, System::Net::Sockets::SocketType socketType, System::Net::Sockets::ProtocolType protocolType) {
@@ -24,8 +24,8 @@ Socket::Socket(System::Net::Sockets::AddressFamily addressFamily, System::Net::S
   this->data->protocolType = protocolType;
   this->data->socketType = socketType;
   
-  if (__OS::CoreApi::Socket::Open(this->data->addressFamily, this->data->socketType, this->data->protocolType, &this->data->socket) != 0)
-    throw SocketException(__OS::CoreApi::Socket::GetLastError(), _caller);
+  if (Native::CoreApi::Socket::Open(this->data->addressFamily, this->data->socketType, this->data->protocolType, &this->data->socket) != 0)
+    throw SocketException(Native::CoreApi::Socket::GetLastError(), _caller);
 }
 
 Socket::Socket(intptr socket) {
@@ -45,8 +45,8 @@ Socket Socket::Accept() {
  
   SocketAddress socketAddress(this->data->addressFamily);
   intptr socketHandle = 0;
-  if (__OS::CoreApi::Socket::Accept(this->data->socket, (byte*)socketAddress.bytes.Data(), socketAddress.Size, &socketHandle) != 0)
-    throw SocketException(__OS::CoreApi::Socket::GetLastError(), _caller);
+  if (Native::CoreApi::Socket::Accept(this->data->socket, (byte*)socketAddress.bytes.Data(), socketAddress.Size, &socketHandle) != 0)
+    throw SocketException(Native::CoreApi::Socket::GetLastError(), _caller);
   
   Socket socketNewlyCreated(socketHandle);
   socketNewlyCreated.data->addressFamily = this->data->addressFamily;
@@ -60,8 +60,8 @@ Socket Socket::Accept() {
 
 void Socket::InnerBind() {
   SocketAddress socketAddress = this->data->localEndPoint->Serialize();
-  if (__OS::CoreApi::Socket::Bind(this->data->socket, (byte*)socketAddress.bytes.Data(), socketAddress.Size()) != 0)
-    throw SocketException(__OS::CoreApi::Socket::GetLastError(), _caller);
+  if (Native::CoreApi::Socket::Bind(this->data->socket, (byte*)socketAddress.bytes.Data(), socketAddress.Size()) != 0)
+    throw SocketException(Native::CoreApi::Socket::GetLastError(), _caller);
 
   this->data->bound = true;
 }
@@ -71,15 +71,15 @@ void Socket::Close() {
   this->data->bound = false;
   this->data->listening = false;
   if (this->data->socket != IntPtr::Zero()) {
-    __OS::CoreApi::Socket::Close(this->data->socket);
+    Native::CoreApi::Socket::Close(this->data->socket);
     this->data->socket = IntPtr::Zero();
   }
 }
 
 void Socket::InnerConnect() {
   SocketAddress socketAddress = this->data->remoteEndPoint->Serialize();
-  if (__OS::CoreApi::Socket::Connect(this->data->socket, (byte*)socketAddress.bytes.Data(), socketAddress.Size) != 0)
-    throw SocketException(__OS::CoreApi::Socket::GetLastError(), _caller);
+  if (Native::CoreApi::Socket::Connect(this->data->socket, (byte*)socketAddress.bytes.Data(), socketAddress.Size) != 0)
+    throw SocketException(Native::CoreApi::Socket::GetLastError(), _caller);
 
   this->data->connected = true;
 }
@@ -103,8 +103,8 @@ void Socket::Disconnect(bool reuseSocket) {
   if (this->data->connected == false)
     throw ObjectClosedException(_caller);
 
-  if (__OS::CoreApi::Socket::Connect(this->data->socket, null, 0) != 0)
-    throw SocketException(__OS::CoreApi::Socket::GetLastError(), _caller);
+  if (Native::CoreApi::Socket::Connect(this->data->socket, null, 0) != 0)
+    throw SocketException(Native::CoreApi::Socket::GetLastError(), _caller);
 
   this->data->connected = false;
   this->data->bound = false;
@@ -122,7 +122,7 @@ int32 Socket::GetAvailable() const {
     throw ObjectClosedException(_caller);
   
   int32 nbrBytesAvailable = 0;
-  __OS::CoreApi::Socket::GetAvailable(this->data->socket, &nbrBytesAvailable);
+  Native::CoreApi::Socket::GetAvailable(this->data->socket, &nbrBytesAvailable);
   return nbrBytesAvailable;
 }
 
@@ -168,8 +168,8 @@ refptr<object> Socket::GetSocketOption(SocketOptionLevel socketOptionLevel, Sock
 
   int32 socketOption = 0;
   int32 size = sizeof(int32);
-  if (__OS::CoreApi::Socket::GetSocketOption(this->data->socket, socketOptionLevel, socketOptionName, &socketOption, &size) == -1)
-    throw SocketException(__OS::CoreApi::Socket::GetLastError(), _caller);
+  if (Native::CoreApi::Socket::GetSocketOption(this->data->socket, socketOptionLevel, socketOptionName, &socketOption, &size) == -1)
+    throw SocketException(Native::CoreApi::Socket::GetLastError(), _caller);
   return ref_new<Int32>(socketOption);
 }
 
@@ -187,16 +187,16 @@ void Socket::Listen(int32 backlog) {
   if (backlog > (int32)SocketOptionName::MaxConnections || backlog < 0)
     throw ArgumentOutOfRangeException(_caller);
 
-  __OS::CoreApi::Socket::Listen(this->data->socket, backlog);
+  Native::CoreApi::Socket::Listen(this->data->socket, backlog);
 
   this->data->listening = true;
 }
 
 bool Socket::Poll(int32 microseconds, SelectMode mode) {
-  int32 status = __OS::CoreApi::Socket::Poll(this->data->socket, microseconds, (int32)mode);
+  int32 status = Native::CoreApi::Socket::Poll(this->data->socket, microseconds, (int32)mode);
 
   if (status < 0)
-    throw SocketException(__OS::CoreApi::Socket::GetLastError(), _caller);
+    throw SocketException(Native::CoreApi::Socket::GetLastError(), _caller);
   
   return (status > 0);
 }
@@ -215,8 +215,8 @@ int32 Socket::Receive(Array<byte>& buffer, int32 offset, int32 size, SocketFlags
   if (this->data->socket == 0)
     throw ObjectClosedException(_caller);
   
-  int32 numberOfBytesReceived = __OS::CoreApi::Socket::Receive(this->data->socket, (byte*)&buffer.Data()[offset], size, (int32)socketFlags);
-  errorCode = numberOfBytesReceived == -1 ? (SocketError)__OS::CoreApi::Socket::GetLastError() : SocketError::Success;
+  int32 numberOfBytesReceived = Native::CoreApi::Socket::Receive(this->data->socket, (byte*)&buffer.Data()[offset], size, (int32)socketFlags);
+  errorCode = numberOfBytesReceived == -1 ? (SocketError)Native::CoreApi::Socket::GetLastError() : SocketError::Success;
   return numberOfBytesReceived;
 }
 
@@ -227,9 +227,9 @@ int32 Socket::ReceiveFrom(Array<byte>& buffer, int32 offset, int32 size, SocketF
     throw ObjectClosedException(_caller);
 
   SocketAddress socketAddress(this->data->addressFamily);
-  int32 numberOfBytesReceived = __OS::CoreApi::Socket::ReceiveFrom(this->data->socket, (byte*)&buffer.Data()[offset], size, (int32)socketFlags, (byte*)socketAddress.bytes.Data(), socketAddress.Size);
+  int32 numberOfBytesReceived = Native::CoreApi::Socket::ReceiveFrom(this->data->socket, (byte*)&buffer.Data()[offset], size, (int32)socketFlags, (byte*)socketAddress.bytes.Data(), socketAddress.Size);
   if (numberOfBytesReceived == -1)
-    throw SocketException(__OS::CoreApi::Socket::GetLastError(), _caller);
+    throw SocketException(Native::CoreApi::Socket::GetLastError(), _caller);
   endPoint = endPoint.Create(socketAddress).ChangeType<IPEndPoint>().ToObject();
 
   return numberOfBytesReceived;
@@ -254,10 +254,10 @@ int32 Socket::Select(IList<Socket>& checkRead, IList<Socket>& checkWrite, IList<
   for (int32 i = 0; i < nbCheckError; i++)
     checkErrorHandles[i] = checkError[i].data->socket;
   
-  int32 status = __OS::CoreApi::Socket::Select((intptr*)checkReadHandles.Data(), nbCheckRead, (intptr*)checkWriteHandles.Data(), nbCheckWrite, (intptr*)checkErrorHandles.Data(), nbCheckError, microseconds);
+  int32 status = Native::CoreApi::Socket::Select((intptr*)checkReadHandles.Data(), nbCheckRead, (intptr*)checkWriteHandles.Data(), nbCheckWrite, (intptr*)checkErrorHandles.Data(), nbCheckError, microseconds);
   
   if (status < 0)
-    throw SocketException(__OS::CoreApi::Socket::GetLastError(), _caller);
+    throw SocketException(Native::CoreApi::Socket::GetLastError(), _caller);
   
   // List the null sockets
   List<Socket> readToRemove;
@@ -309,8 +309,8 @@ int32 Socket::Send(const Array<byte>& buffer, int32 offset, int32 size, SocketFl
   if (this->data->socket == 0)
     throw ObjectClosedException(_caller);
   
-  int32 numberOfBytesSended = __OS::CoreApi::Socket::Send(this->data->socket, (byte*)&buffer.Data()[offset], size, (int32)socketFlags);
-  errorCode = numberOfBytesSended == -1 ? (SocketError)__OS::CoreApi::Socket::GetLastError() : SocketError::Success;
+  int32 numberOfBytesSended = Native::CoreApi::Socket::Send(this->data->socket, (byte*)&buffer.Data()[offset], size, (int32)socketFlags);
+  errorCode = numberOfBytesSended == -1 ? (SocketError)Native::CoreApi::Socket::GetLastError() : SocketError::Success;
   return numberOfBytesSended;
 }
 
@@ -321,9 +321,9 @@ int32 Socket::SendTo(const Array<byte>& buffer, int32 offset, int32 size, Socket
     throw ObjectClosedException(_caller);
 
   SocketAddress socketAddress = endPoint.Serialize();
-  int32 numberOfBytesSended = __OS::CoreApi::Socket::SendTo(this->data->socket, (byte*)&buffer.Data()[offset], size, (int32)socketFlags, (byte*)socketAddress.bytes.Data(), socketAddress.Size);
+  int32 numberOfBytesSended = Native::CoreApi::Socket::SendTo(this->data->socket, (byte*)&buffer.Data()[offset], size, (int32)socketFlags, (byte*)socketAddress.bytes.Data(), socketAddress.Size);
   if (numberOfBytesSended == -1)
-    throw SocketException(__OS::CoreApi::Socket::GetLastError(), _caller);
+    throw SocketException(Native::CoreApi::Socket::GetLastError(), _caller);
   return numberOfBytesSended;
 }
 
@@ -331,8 +331,8 @@ void Socket::SetBlocking(bool blocking) {
   if (this->data->socket == IntPtr::Zero())
     throw ObjectClosedException(_caller);
   
-  if (__OS::CoreApi::Socket::SetBlocking(this->data->socket, blocking) == -1)
-    throw SocketException(__OS::CoreApi::Socket::GetLastError(), _caller);
+  if (Native::CoreApi::Socket::SetBlocking(this->data->socket, blocking) == -1)
+    throw SocketException(Native::CoreApi::Socket::GetLastError(), _caller);
 
   this->data->nonBlocking = !blocking;
 }
@@ -373,22 +373,22 @@ void Socket::SetSocketOption(SocketOptionLevel socketOptionLevel, SocketOptionNa
   if (optionValue)
     option = 0xFFFFFFFF;
 
-  if (__OS::CoreApi::Socket::SetSocketOption(this->data->socket, socketOptionLevel, socketOptionName, (int32 *)&option, sizeof(option)) == -1)
-    throw SocketException(__OS::CoreApi::Socket::GetLastError(), _caller);
+  if (Native::CoreApi::Socket::SetSocketOption(this->data->socket, socketOptionLevel, socketOptionName, (int32 *)&option, sizeof(option)) == -1)
+    throw SocketException(Native::CoreApi::Socket::GetLastError(), _caller);
 }
 
 void Socket::SetSocketOption(SocketOptionLevel socketOptionLevel, SocketOptionName socketOptionName, const Array<byte>& optionValue) {
   if (this->data->socket == IntPtr::Zero())
     throw ObjectClosedException(_caller);
-  if (__OS::CoreApi::Socket::SetSocketOption(this->data->socket, socketOptionLevel, socketOptionName, (byte*)optionValue.Data(), optionValue.Length) == -1)
-    throw SocketException(__OS::CoreApi::Socket::GetLastError(), _caller);
+  if (Native::CoreApi::Socket::SetSocketOption(this->data->socket, socketOptionLevel, socketOptionName, (byte*)optionValue.Data(), optionValue.Length) == -1)
+    throw SocketException(Native::CoreApi::Socket::GetLastError(), _caller);
 }
 
 void Socket::SetSocketOption(SocketOptionLevel socketOptionLevel, SocketOptionName socketOptionName, int32 optionValue) {
   if (this->data->socket == IntPtr::Zero())
     throw ObjectClosedException(_caller);
-  if (__OS::CoreApi::Socket::SetSocketOption(this->data->socket, socketOptionLevel, socketOptionName, (byte *)&optionValue, sizeof(optionValue)) == -1)
-    throw SocketException(__OS::CoreApi::Socket::GetLastError(), _caller);
+  if (Native::CoreApi::Socket::SetSocketOption(this->data->socket, socketOptionLevel, socketOptionName, (byte *)&optionValue, sizeof(optionValue)) == -1)
+    throw SocketException(Native::CoreApi::Socket::GetLastError(), _caller);
 }
 
 void Socket::SetSocketOption(SocketOptionLevel socketOptionLevel, SocketOptionName socketOptionName, const object& optionValue) {
@@ -444,6 +444,6 @@ void Socket::SetTtl(int32 ttl) {
 void Socket::Shutdown(SocketShutdown how) {
   if (this->data->socket == 0)
     throw ObjectClosedException(_caller);
-  if (__OS::CoreApi::Socket::Shutdown(this->data->socket, Enum<SocketShutdown>::ToInt32(how)) != 0)
-    throw SocketException(__OS::CoreApi::Socket::GetLastError(), _caller);
+  if (Native::CoreApi::Socket::Shutdown(this->data->socket, Enum<SocketShutdown>::ToInt32(how)) != 0)
+    throw SocketException(Native::CoreApi::Socket::GetLastError(), _caller);
 }

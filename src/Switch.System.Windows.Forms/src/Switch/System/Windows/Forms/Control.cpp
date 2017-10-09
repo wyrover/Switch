@@ -5,7 +5,7 @@
 #include "../../../../../include/Switch/System/Windows/Forms/Application.hpp"
 #include "../../../../../include/Switch/System/Windows/Forms/Control.hpp"
 #include "../../../../../include/Switch/System/Windows/Forms/Form.hpp"
-#include "../../../../__OS/FormsApi.hpp"
+#include "../../../../Native/FormsApi.hpp"
 
 using namespace System;
 using namespace System::Drawing;
@@ -101,68 +101,68 @@ void Control::CreateControl() {
 
 void Control::CreateHandle() {
   if (!this->IsHandleCreated)
-    this->handle = __OS::FormsApi::Control::Create(*this);
+    this->handle = Native::FormsApi::Control::Create(*this);
   handles.Add(this->handle, *this);
   this->backBrush = System::Drawing::SolidBrush(this->BackColor);
-  __OS::FormsApi::Control::SetParent(*this); // Must be first
+  Native::FormsApi::Control::SetParent(*this); // Must be first
   if (this->setClientSizeAfterHandleCreated)
-    __OS::FormsApi::Control::SetClientSize(*this);
+    Native::FormsApi::Control::SetClientSize(*this);
   else
-    __OS::FormsApi::Control::SetSize(*this);
-  __OS::FormsApi::Control::SetLocation(*this); // Must be after SetClientSize or SetSize
+    Native::FormsApi::Control::SetSize(*this);
+  Native::FormsApi::Control::SetLocation(*this); // Must be after SetClientSize or SetSize
   if (this->backColor.HasValue)
-    __OS::FormsApi::Control::SetBackColor(*this);
-  __OS::FormsApi::Control::SetEnabled(*this);
+    Native::FormsApi::Control::SetBackColor(*this);
+  Native::FormsApi::Control::SetEnabled(*this);
   if (this->foreColor.HasValue)
-    __OS::FormsApi::Control::SetForeColor(*this);
-  __OS::FormsApi::Control::SetTabStop(*this);
-  __OS::FormsApi::Control::SetText(*this);
+    Native::FormsApi::Control::SetForeColor(*this);
+  Native::FormsApi::Control::SetTabStop(*this);
+  Native::FormsApi::Control::SetText(*this);
   if (this->setFocusAfterHandleCreated)
-    __OS::FormsApi::Control::SetFocus(*this);
-  __OS::FormsApi::Control::SetVisible(*this); // Must be last
+    Native::FormsApi::Control::SetFocus(*this);
+  Native::FormsApi::Control::SetVisible(*this); // Must be last
 }
 
 void Control::DestroyHandle() {
   if (this->IsHandleCreated) {
-    __OS::FormsApi::Control::Destroy(*this);
+    Native::FormsApi::Control::Destroy(*this);
     handles.Remove(this->handle);
     this->handle = 0;
   }
 }
 
 void Control::DefWndProc(Message& message) {
-  __OS::FormsApi::Control::DefWndProc(message);
+  Native::FormsApi::Control::DefWndProc(message);
 }
 
 bool Control::Focus() {
   if (this->IsHandleCreated)
-    return __OS::FormsApi::Control::SetFocus(*this);
+    return Native::FormsApi::Control::SetFocus(*this);
   this->setFocusAfterHandleCreated = true;
   return true;
 }
 
 void Control::Invalidate(bool invalidateChildren) {
   if (this->IsHandleCreated)
-    __OS::FormsApi::Control::Invalidate(*this, invalidateChildren);
+    Native::FormsApi::Control::Invalidate(*this, invalidateChildren);
   this->OnInvalidated(InvalidateEventArgs(Rectangle(Point(0, 0), this->ClientSize)));
 }
 
 void Control::Invalidate(const System::Drawing::Rectangle& rect, bool invalidateChildren) {
   if (this->IsHandleCreated)
-    __OS::FormsApi::Control::Invalidate(*this, rect, invalidateChildren);
+    Native::FormsApi::Control::Invalidate(*this, rect, invalidateChildren);
   this->OnInvalidated(InvalidateEventArgs(rect));
 }
 
 void Control::OnBackColorChanged(const EventArgs& e) {
   this->backBrush = System::Drawing::SolidBrush(this->BackColor);
   if (this->IsHandleCreated)
-    __OS::FormsApi::Control::SetBackColor(*this);
+    Native::FormsApi::Control::SetBackColor(*this);
   this->BackColorChanged(*this, e);
 }
 
 void Control::OnClientSizeChanged(const EventArgs& e) {
   if (this->IsHandleCreated)
-    __OS::FormsApi::Control::SetClientSize(*this);
+    Native::FormsApi::Control::SetClientSize(*this);
   else
     setClientSizeAfterHandleCreated = true;
   this->ClientSizeChanged(*this, e);
@@ -170,31 +170,31 @@ void Control::OnClientSizeChanged(const EventArgs& e) {
 
 void Control::OnEnabledChanged(const EventArgs& e) {
   if (this->IsHandleCreated)
-    __OS::FormsApi::Control::SetEnabled(*this);
+    Native::FormsApi::Control::SetEnabled(*this);
   this->ForeColorChanged(*this, e);
 }
 
 void Control::OnForeColorChanged(const EventArgs& e) {
   if (this->IsHandleCreated)
-    __OS::FormsApi::Control::SetForeColor(*this);
+    Native::FormsApi::Control::SetForeColor(*this);
   this->ForeColorChanged(*this, e);
 }
 
 void Control::OnLocationChanged(const EventArgs& e) {
   if (this->IsHandleCreated)
-    __OS::FormsApi::Control::SetLocation(*this);
+    Native::FormsApi::Control::SetLocation(*this);
   this->LocationChanged(*this, e);
 }
 
 void Control::OnParentChanged(const EventArgs& e) {
   if (this->IsHandleCreated)
-    __OS::FormsApi::Control::SetParent(*this);
+    Native::FormsApi::Control::SetParent(*this);
   this->ParentChanged(*this, e);
 }
 
 void Control::OnSizeChanged(const EventArgs& e) {
   if (this->IsHandleCreated)
-    __OS::FormsApi::Control::SetSize(*this);
+    Native::FormsApi::Control::SetSize(*this);
   else
     setClientSizeAfterHandleCreated = false;
   this->SizeChanged(*this, e);
@@ -202,13 +202,13 @@ void Control::OnSizeChanged(const EventArgs& e) {
 
 void Control::OnTabStopChanged(const EventArgs& e) {
   if (this->IsHandleCreated)
-    __OS::FormsApi::Control::SetTabStop(*this);
+    Native::FormsApi::Control::SetTabStop(*this);
   this->TabStopChanged(*this, e);
 }
 
 void Control::OnTextChanged(const EventArgs& e) {
   if (this->IsHandleCreated)
-    __OS::FormsApi::Control::SetText(*this);
+    Native::FormsApi::Control::SetText(*this);
   this->TextChanged(*this, e);
 }
 
@@ -216,16 +216,16 @@ void Control::OnVisibleChanged(const EventArgs& e) {
   if (this->visible == true)
     CreateControl();
   if (this->IsHandleCreated)
-    __OS::FormsApi::Control::SetVisible(*this);
+    Native::FormsApi::Control::SetVisible(*this);
   this->VisibleChanged(*this, e);
 }
 
 System::Drawing::Point Control::PointToClient(System::Drawing::Point point) const {
-  return __OS::FormsApi::Control::PointToClient(*this, point);
+  return Native::FormsApi::Control::PointToClient(*this, point);
 }
 
 System::Drawing::Point Control::PointToScreen(System::Drawing::Point point) const {
-  return __OS::FormsApi::Control::PointToScreen(*this, point);
+  return Native::FormsApi::Control::PointToScreen(*this, point);
 }
 
 bool Control::PreProcessMessage(const Message& msg) {
@@ -240,7 +240,7 @@ bool Control::ReflectMessage(intptr hWnd, Message& message) {
 }
 
 intptr Control::SendMessage(int32 msg, intptr wparam, intptr lparam) const {
-  return __OS::FormsApi::Control::SendMessage(this->handle, msg, wparam, lparam);
+  return Native::FormsApi::Control::SendMessage(this->handle, msg, wparam, lparam);
 }
 
 void Control::WndProc(Message& message) {
@@ -302,8 +302,8 @@ void Control::WmCtlColorControl(Message& message) {
   if (control == null)
     this->DefWndProc(message);
   else {
-    __OS::FormsApi::Control::SetBackColor(message.WParam());
-    __OS::FormsApi::Control::SetForeColor(message.WParam());
+    Native::FormsApi::Control::SetBackColor(message.WParam());
+    Native::FormsApi::Control::SetForeColor(message.WParam());
     message.Result = (intptr)control().backBrush.GetNativeBrush();
   }
 }

@@ -4,22 +4,22 @@
 #include "../../../../include/Switch/Microsoft/Win32/RegistryKey.hpp"
 #include "../../../../include/Switch/System/IO/IOException.hpp"
 #include "../../../../include/Switch/System/Console.hpp"
-#include "../../../__OS/CoreApi.hpp"
+#include "../../../Native/CoreApi.hpp"
 
 using namespace System;
 using namespace Microsoft::Win32;
 
 RegistryKey::RegistryHandle::RegistryHandle(intptr key, const string& name) {
-  if (__OS::CoreApi::Registry::CreateSubKey(key, name, this->handle) != 0)
+  if (Native::CoreApi::Registry::CreateSubKey(key, name, this->handle) != 0)
     throw IO::IOException(_caller);
 }
 
 RegistryKey::RegistryHandle::RegistryHandle(RegistryHive rhive) {
-  __OS::CoreApi::Registry::GetHandleBaseKey(rhive, this->handle);
+  Native::CoreApi::Registry::GetHandleBaseKey(rhive, this->handle);
 }
 
 RegistryKey::RegistryHandle::~RegistryHandle() {
-  __OS::CoreApi::Registry::CloseKey(this->handle);
+  Native::CoreApi::Registry::CloseKey(this->handle);
 }
 
 RegistryKey::RegistryKey(RegistryHive rhive) : name(ToName(rhive)), permission(RegistryKeyPermissionCheck::ReadWriteSubTree) {
@@ -35,7 +35,7 @@ RegistryKey::~RegistryKey() {
 }
 
 int32 RegistryKey::SubKeyCount() const {
-  return __OS::CoreApi::Registry::NumberOfSubKey(this->handle->Handle());
+  return Native::CoreApi::Registry::NumberOfSubKey(this->handle->Handle());
 }
 
 void RegistryKey::Close() {
@@ -65,9 +65,9 @@ void  RegistryKey::DeleteSubKey(const string& subKey, bool throwOnMissingSubKey)
   if (IsBaseKey(subKey))
     throw ArgumentException(_caller);
 
-  //if (__OS::CoreApi::Registry::NumberOfSubKey)
+  //if (Native::CoreApi::Registry::NumberOfSubKey)
 
-  int32 result = __OS::CoreApi::Registry::DeleteSubKey(this->handle->Handle(), subKey);
+  int32 result = Native::CoreApi::Registry::DeleteSubKey(this->handle->Handle(), subKey);
 
   if (result == 2 && throwOnMissingSubKey)
     throw ArgumentException(_caller);
@@ -80,7 +80,7 @@ void  RegistryKey::DeleteSubKeyTree(const string& subKey, bool throwOnMissingSub
   if (subKey == "" || IsBaseKey(subKey))
     throw ArgumentException(_caller);
 
-  int32 result = __OS::CoreApi::Registry::DeleteTree(this->handle->Handle(), subKey);
+  int32 result = Native::CoreApi::Registry::DeleteTree(this->handle->Handle(), subKey);
 
   if (result == 2 && throwOnMissingSubKey)
     throw ArgumentException(_caller);
@@ -91,17 +91,17 @@ void  RegistryKey::DeleteSubKeyTree(const string& subKey, bool throwOnMissingSub
 
 namespace {
   void SetValue(intptr key, const string& keyName, RegistryValueKind kind, const Array<byte>& value) {
-    __OS::CoreApi::Registry::SetValue(key, keyName, kind, (const byte*)value.Data(), value.Length());
+    Native::CoreApi::Registry::SetValue(key, keyName, kind, (const byte*)value.Data(), value.Length());
   }
 
   void SetValue(intptr key, const string& keyName, RegistryValueKind kind, const Int32& value) {
     int32 i = value;
-    __OS::CoreApi::Registry::SetValue(key, keyName, kind, (const byte*)&i, 4);
+    Native::CoreApi::Registry::SetValue(key, keyName, kind, (const byte*)&i, 4);
   }
 
   void SetValue(intptr key, const string& keyName, RegistryValueKind kind, const Int64& value) {
     int64 i = value;
-    __OS::CoreApi::Registry::SetValue(key, keyName, kind, (const byte*)&i, 8);
+    Native::CoreApi::Registry::SetValue(key, keyName, kind, (const byte*)&i, 8);
   }
 
   void SetValue(intptr key, const string& keyName, RegistryValueKind kind, const Array<string>& values) {
@@ -116,17 +116,17 @@ namespace {
       index += (int32)s.length() + 1;
     }
     str[index] = 0;
-    __OS::CoreApi::Registry::SetValue(key, keyName, kind, (const byte*)str.c_str(), (int32)str.length() * sizeof(wchar_t));
+    Native::CoreApi::Registry::SetValue(key, keyName, kind, (const byte*)str.c_str(), (int32)str.length() * sizeof(wchar_t));
   }
 
   void SetValue(intptr key, const string& keyName, RegistryValueKind kind, const string& value) {
     std::wstring str = value.w_str();
-    __OS::CoreApi::Registry::SetValue(key, keyName, kind, (const byte*)str.c_str(), (int32)str.length() * sizeof(wchar_t));
+    Native::CoreApi::Registry::SetValue(key, keyName, kind, (const byte*)str.c_str(), (int32)str.length() * sizeof(wchar_t));
   }
 
   void SetValue(intptr key, const string& keyName, RegistryValueKind kind, const object& value) {
     std::wstring str = value.ToString().w_str();
-    __OS::CoreApi::Registry::SetValue(key, keyName, kind, (const byte*)str.c_str(), (int32)str.length() * sizeof(wchar_t));
+    Native::CoreApi::Registry::SetValue(key, keyName, kind, (const byte*)str.c_str(), (int32)str.length() * sizeof(wchar_t));
   }
 }
 
@@ -176,16 +176,16 @@ void RegistryKey::Load() {
 
   int32 subKeyNumber = 0;
   int32 keyvalueNumber = 0;
-  if (__OS::CoreApi::Registry::QueryInfoKey(this->handle->Handle(), subKeyNumber, keyvalueNumber) != 0)
+  if (Native::CoreApi::Registry::QueryInfoKey(this->handle->Handle(), subKeyNumber, keyvalueNumber) != 0)
     return;
   
   for (int32 index = 0; index < keyvalueNumber; index++) {
     string keyName;
     RegistryValueKind kind;
-    if (__OS::CoreApi::Registry::EnumValues(this->handle->Handle(), index, keyName, kind) != 0)
+    if (Native::CoreApi::Registry::EnumValues(this->handle->Handle(), index, keyName, kind) != 0)
       break;
     Array<byte> data;
-    __OS::CoreApi::Registry::GetValue(this->handle->Handle(), keyName, kind, data);
+    Native::CoreApi::Registry::GetValue(this->handle->Handle(), keyName, kind, data);
 
     switch (kind) {
     case RegistryValueKind::Binary: this->values[keyName.ToLower()] = RegistryKeyValue(keyName, BytesToBinary(data), kind); break;
@@ -203,7 +203,7 @@ RegistryKey RegistryKey::OpenSubKey(const string& subKeyName, RegistryKeyPermiss
   if (this->handle == null)
     throw ArgumentNullException(_caller);
 
-  if (__OS::CoreApi::Registry::OpenSubKey(this->handle->Handle(), subKeyName.Data(), handle) != 0)
+  if (Native::CoreApi::Registry::OpenSubKey(this->handle->Handle(), subKeyName.Data(), handle) != 0)
     return RegistryKey::Null();
 
   RegistryKey key;
@@ -218,12 +218,12 @@ RegistryKey RegistryKey::OpenSubKey(const string& subKeyName, RegistryKeyPermiss
 Array<string> RegistryKey::GetSubKeyNames() {
   int32 subKeyNumber = 0;
   int32 keyvalueNumber = 0;
-  if (__OS::CoreApi::Registry::QueryInfoKey(this->handle->Handle(), subKeyNumber, keyvalueNumber) != 0)
+  if (Native::CoreApi::Registry::QueryInfoKey(this->handle->Handle(), subKeyNumber, keyvalueNumber) != 0)
     return Array<string>();
 
   Array<string> subKeys(subKeyNumber);
   for (int32 index = 0; index < subKeyNumber; index++)
-    if (__OS::CoreApi::Registry::EnumKey(this->handle->Handle(), index, subKeys[index]) != 0)
+    if (Native::CoreApi::Registry::EnumKey(this->handle->Handle(), index, subKeys[index]) != 0)
       break;
   return subKeys;
 }

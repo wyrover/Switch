@@ -1,5 +1,5 @@
 #include "../../../../include/Switch/System/Drawing/Brush.hpp"
-#include "../../../__OS/DrawingApi.hpp"
+#include "../../../Native/DrawingApi.hpp"
 
 using namespace System;
 using namespace System::Drawing;
@@ -15,6 +15,6 @@ void Brush::SetNativeBrush(intptr brush) {
 
 void Brush::ReleaseNativeBrush() {
   if (this->brush != IntPtr::Zero)
-    __OS::DrawingApi::Brush::DeleteBrush(this->brush);
+    Native::DrawingApi::Brush::DeleteBrush(this->brush);
   this->brush = IntPtr::Zero;
 }

@@ -6,7 +6,7 @@
 #include <Switch/System/Object.hpp>
 
 /// @cond
-namespace __OS {
+namespace Native {
   class DrawingApi;
 }
 /// @endcond
@@ -41,7 +41,7 @@ namespace Switch {
         /// @param brush A pointer to the GDI+ brush object.
         void SetNativeBrush(intptr brush);
       private:
-        friend class __OS::DrawingApi;
+        friend class Native::DrawingApi;
         friend class Windows::Forms::Control;
         intptr GetNativeBrush() const { return this->brush; }
 

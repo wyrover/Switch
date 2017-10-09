@@ -1,7 +1,7 @@
 #include <Switch/System/Collections/Generic/List.hpp>
 #include "../../../../include/Switch/System/Drawing/FontFamily.hpp"
 #include "../../../../include/Switch/System/Drawing/Text/InstalledFontCollection.hpp"
-#include "../../../__OS/DrawingApi.hpp"
+#include "../../../Native/DrawingApi.hpp"
 
 namespace {
   const string genericFontFamilySerifName = "Times New Roman";
@@ -10,7 +10,7 @@ namespace {
 }
 
 System::Drawing::FontFamily::FontFamily(const string& name) {
-  *this = __OS::DrawingApi::FontFamily::GetFontFamilyFromName(name);
+  *this = Native::DrawingApi::FontFamily::GetFontFamilyFromName(name);
 }
 
 System::Drawing::FontFamily::FontFamily(System::Drawing::Text::GenericFontFamilies genericFamily) {
@@ -24,7 +24,7 @@ System::Drawing::FontFamily::FontFamily(System::Drawing::Text::GenericFontFamili
 
 System::Drawing::FontFamily::~FontFamily() {
   if (this->data.IsUnique())
-    __OS::DrawingApi::FontFamily::ReleaseResource(this->data().handle);
+    Native::DrawingApi::FontFamily::ReleaseResource(this->data().handle);
 }
 
 _property<System::Array<System::Drawing::FontFamily>, _readonly> System::Drawing::FontFamily::Families {
@@ -44,9 +44,9 @@ _property<System::Drawing::FontFamily, _readonly> System::Drawing::FontFamily::G
 };
 
 string System::Drawing::FontFamily::GetName() const {
-  return __OS::DrawingApi::FontFamily::GetName(this->data().handle);
+  return Native::DrawingApi::FontFamily::GetName(this->data().handle);
 }
 
 bool System::Drawing::FontFamily::IsStyleAvailable(System::Drawing::FontStyle style) const {
-  return __OS::DrawingApi::FontFamily::IsStyleAvailable(this->data().handle, style);
+  return Native::DrawingApi::FontFamily::IsStyleAvailable(this->data().handle, style);
 }

@@ -1,4 +1,4 @@
-#include "../../../../__OS/FormsApi.hpp"
+#include "../../../../Native/FormsApi.hpp"
 #include "../../../../../include/Switch/System/Windows/Forms/Application.hpp"
 
 using namespace System;
@@ -8,19 +8,19 @@ ref<Form> Application::mainForm;
 EventHandler Application::Idle;
 
 void Application::EnableVisualStyles() {
-  __OS::FormsApi::Application::EnableVisualStyles();
+  Native::FormsApi::Application::EnableVisualStyles();
 }
 
 void Application::Exit() {
-  __OS::FormsApi::Application::Exit();
+  Native::FormsApi::Application::Exit();
 }
 
 void Application::Start() {
-  __OS::FormsApi::Application::Start();
+  Native::FormsApi::Application::Start();
 }
 
 void Application::MessageLoop() {
-  __OS::FormsApi::Application::MessageLoop(mainForm(), Idle);
+  Native::FormsApi::Application::MessageLoop(mainForm(), Idle);
   Idle = EventHandler();
-  __OS::FormsApi::Application::Stop();
+  Native::FormsApi::Application::Stop();
 }

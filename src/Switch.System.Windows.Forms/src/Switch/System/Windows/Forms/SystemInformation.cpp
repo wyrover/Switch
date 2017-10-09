@@ -1,53 +1,52 @@
 #include "../../../../../include/Switch/System/Windows/Forms/SystemInformation.hpp"
-#include "../../../../__OS/FormsApi.hpp"
+#include "../../../../Native/FormsApi.hpp"
 
 using namespace System;
 using namespace System::Drawing;
 using namespace System::Windows::Forms;
-using namespace __OS;
 
 _property<int32, _readonly> SystemInformation::ActiveWindowTrackingDelay {
-  [] {return FormsApi::SystemInformation::GetActiveWindowTrackingDelay();}
+  [] {return Native::FormsApi::SystemInformation::GetActiveWindowTrackingDelay();}
 };
 
 _property<System::Windows::Forms::ArrangeDirection, _readonly> SystemInformation::ArrangeDirection{
-  [] {return FormsApi::SystemInformation::GetArrangeDirection(); }
+  [] {return Native::FormsApi::SystemInformation::GetArrangeDirection(); }
 };
 
 _property<System::Windows::Forms::ArrangeStartingPosition, _readonly> SystemInformation::ArrangeStartingPosition{
-  [] {return FormsApi::SystemInformation::GetArrangeStartingPosition(); }
+  [] {return Native::FormsApi::SystemInformation::GetArrangeStartingPosition(); }
 };
 
 _property<System::Windows::Forms::BootMode, _readonly> SystemInformation::BootMode{
-  [] {return FormsApi::SystemInformation::GetBootMode(); }
+  [] {return Native::FormsApi::SystemInformation::GetBootMode(); }
 };
 
 _property<System::Drawing::Size, _readonly> SystemInformation::Border3DSize{
-  [] {return FormsApi::SystemInformation::GetBorder3DSize(); }
+  [] {return Native::FormsApi::SystemInformation::GetBorder3DSize(); }
 };
 
 _property<int32, _readonly> SystemInformation::BorderMultiplierFactor{
-  [] {return FormsApi::SystemInformation::GetBorderMultiplierFactor(); }
+  [] {return Native::FormsApi::SystemInformation::GetBorderMultiplierFactor(); }
 };
 
 _property<System::Drawing::Size, _readonly> SystemInformation::BorderSize{
-  [] {return FormsApi::SystemInformation::GetBorderSize(); }
+  [] {return Native::FormsApi::SystemInformation::GetBorderSize(); }
 };
 
 _property<System::Drawing::Size, _readonly> SystemInformation::CaptionButtonSize{
-  [] {return FormsApi::SystemInformation::GetCaptionButtonSize(); }
+  [] {return Native::FormsApi::SystemInformation::GetCaptionButtonSize(); }
 };
 
 _property<int32, _readonly> SystemInformation::CaptionHeight {
-  [] {return FormsApi::SystemInformation::GetCaptionHeight();}
+  [] {return Native::FormsApi::SystemInformation::GetCaptionHeight();}
 };
 
 _property<int32, _readonly> SystemInformation::CaretBlinkTime{
-  [] {return FormsApi::SystemInformation::GetCaretBlinkTime(); }
+  [] {return Native::FormsApi::SystemInformation::GetCaretBlinkTime(); }
 };
 
 _property<int32, _readonly> SystemInformation::CaretWidth{
-  [] {return FormsApi::SystemInformation::GetCaretWidth(); }
+  [] {return Native::FormsApi::SystemInformation::GetCaretWidth(); }
 };
 
 _property<string, _readonly> SystemInformation::ComputerName{
@@ -55,190 +54,190 @@ _property<string, _readonly> SystemInformation::ComputerName{
 };
 
 _property<System::Drawing::Size, _readonly> SystemInformation::CursorSize{
-  [] {return FormsApi::SystemInformation::GetCursorSize(); }
+  [] {return Native::FormsApi::SystemInformation::GetCursorSize(); }
 };
 
 _property<bool, _readonly> SystemInformation::DbcsEnabled{
-  [] {return FormsApi::SystemInformation::GetDbcsEnabled(); }
+  [] {return Native::FormsApi::SystemInformation::GetDbcsEnabled(); }
 };
 
 _property<bool, _readonly> SystemInformation::DebugOS{
-  [] {return FormsApi::SystemInformation::GetDebugOS(); }
+  [] {return Native::FormsApi::SystemInformation::GetDebugOS(); }
 };
 
 _property<System::Drawing::Size, _readonly> SystemInformation::DoubleClickSize{
-  [] {return FormsApi::SystemInformation::GetDoubleClickSize(); }
+  [] {return Native::FormsApi::SystemInformation::GetDoubleClickSize(); }
 };
 
 _property<int32, _readonly> SystemInformation::DoubleClickTime{
-  [] {return FormsApi::SystemInformation::GetDoubleClickTime(); }
+  [] {return Native::FormsApi::SystemInformation::GetDoubleClickTime(); }
 };
 
 _property<bool, _readonly> SystemInformation::DragFullWindows{
-  [] {return FormsApi::SystemInformation::GetDragFullWindows(); }
+  [] {return Native::FormsApi::SystemInformation::GetDragFullWindows(); }
 };
 
 _property<System::Drawing::Size, _readonly> SystemInformation::DragSize{
-  [] {return FormsApi::SystemInformation::GetDragSize(); }
+  [] {return Native::FormsApi::SystemInformation::GetDragSize(); }
 };
 
 _property<System::Drawing::Size, _readonly> SystemInformation::FixedFrameBorderSize{
-  [] {return FormsApi::SystemInformation::GetFixedFrameBorderSize(); }
+  [] {return Native::FormsApi::SystemInformation::GetFixedFrameBorderSize(); }
 };
 
 _property<int32, _readonly> SystemInformation::FontSmoothingContrast{
-  [] {return FormsApi::SystemInformation::GetFontSmoothingContrast(); }
+  [] {return Native::FormsApi::SystemInformation::GetFontSmoothingContrast(); }
 };
 
 _property<int32, _readonly> SystemInformation::FontSmoothingType{
-  [] {return FormsApi::SystemInformation::GetFontSmoothingType(); }
+  [] {return Native::FormsApi::SystemInformation::GetFontSmoothingType(); }
 };
 
 _property<System::Drawing::Size, _readonly> SystemInformation::FrameBorderSize{
-  [] {return FormsApi::SystemInformation::GetFrameBorderSize(); }
+  [] {return Native::FormsApi::SystemInformation::GetFrameBorderSize(); }
 };
 
 _property<bool, _readonly> SystemInformation::HighContrast{
-  [] {return FormsApi::SystemInformation::GetHighContrast(); }
+  [] {return Native::FormsApi::SystemInformation::GetHighContrast(); }
 };
 
 _property<int32, _readonly> SystemInformation::HorizontalFocusThickness{
-  [] {return FormsApi::SystemInformation::GetHorizontalFocusThickness(); }
+  [] {return Native::FormsApi::SystemInformation::GetHorizontalFocusThickness(); }
 };
 
 _property<int32, _readonly> SystemInformation::HorizontalResizeBorderThickness{
-  [] {return FormsApi::SystemInformation::GetHorizontalResizeBorderThickness(); }
+  [] {return Native::FormsApi::SystemInformation::GetHorizontalResizeBorderThickness(); }
 };
 
 _property<int32, _readonly> SystemInformation::HorizontalScrollBarArrowWidth{
-  [] {return FormsApi::SystemInformation::GetHorizontalScrollBarArrowWidth(); }
+  [] {return Native::FormsApi::SystemInformation::GetHorizontalScrollBarArrowWidth(); }
 };
 
 _property<int32, _readonly> SystemInformation::HorizontalScrollBarHeight{
-  [] {return FormsApi::SystemInformation::GetHorizontalScrollBarHeight(); }
+  [] {return Native::FormsApi::SystemInformation::GetHorizontalScrollBarHeight(); }
 };
 
 _property<int32, _readonly> SystemInformation::HorizontalScrollBarThumbWidth{
-  [] {return FormsApi::SystemInformation::GetHorizontalScrollBarThumbWidth(); }
+  [] {return Native::FormsApi::SystemInformation::GetHorizontalScrollBarThumbWidth(); }
 };
 
 _property<int32, _readonly> SystemInformation::IconHorizontalSpacing{
-  [] {return FormsApi::SystemInformation::GetIconHorizontalSpacing(); }
+  [] {return Native::FormsApi::SystemInformation::GetIconHorizontalSpacing(); }
 };
 
 _property<System::Drawing::Size, _readonly> SystemInformation::IconSize{
-  [] {return FormsApi::SystemInformation::GetIconSize(); }
+  [] {return Native::FormsApi::SystemInformation::GetIconSize(); }
 };
 
 _property<System::Drawing::Size, _readonly> SystemInformation::IconSpacingSize{
-  [] {return FormsApi::SystemInformation::GetIconSpacingSize(); }
+  [] {return Native::FormsApi::SystemInformation::GetIconSpacingSize(); }
 };
 
 _property<int32, _readonly> SystemInformation::IconVerticalSpacing{
-  [] {return FormsApi::SystemInformation::GetIconVerticalSpacing(); }
+  [] {return Native::FormsApi::SystemInformation::GetIconVerticalSpacing(); }
 };
 
 _property<bool, _readonly> SystemInformation::IsActiveWindowTrackingEnabled{
-  [] {return FormsApi::SystemInformation::GetIsActiveWindowTrackingEnabled(); }
+  [] {return Native::FormsApi::SystemInformation::GetIsActiveWindowTrackingEnabled(); }
 };
 
 _property<bool, _readonly> SystemInformation::IsComboBoxAnimationEnabled{
-  [] {return FormsApi::SystemInformation::GetIsComboBoxAnimationEnabled(); }
+  [] {return Native::FormsApi::SystemInformation::GetIsComboBoxAnimationEnabled(); }
 };
 
 _property<bool, _readonly> SystemInformation::IsDropShadowEnabled{
-  [] {return FormsApi::SystemInformation::GetIsDropShadowEnabled(); }
+  [] {return Native::FormsApi::SystemInformation::GetIsDropShadowEnabled(); }
 };
 
 _property<bool, _readonly> SystemInformation::IsFlatMenuEnabled{
-  [] {return FormsApi::SystemInformation::GetIsFlatMenuEnabled(); }
+  [] {return Native::FormsApi::SystemInformation::GetIsFlatMenuEnabled(); }
 };
 
 _property<bool, _readonly> SystemInformation::IsFontSmoothingEnabled{
-  [] {return FormsApi::SystemInformation::GetIsFontSmoothingEnabled(); }
+  [] {return Native::FormsApi::SystemInformation::GetIsFontSmoothingEnabled(); }
 };
 
 _property<bool, _readonly> SystemInformation::IsHotTrackingEnabled{
-  [] {return FormsApi::SystemInformation::GetIsHotTrackingEnabled(); }
+  [] {return Native::FormsApi::SystemInformation::GetIsHotTrackingEnabled(); }
 };
 
 _property<bool, _readonly> SystemInformation::IsIconTitleWrappingEnabled{
-  [] {return FormsApi::SystemInformation::GetIsIconTitleWrappingEnabled(); }
+  [] {return Native::FormsApi::SystemInformation::GetIsIconTitleWrappingEnabled(); }
 };
 
 _property<bool, _readonly> SystemInformation::IsKeyboardPreferred{
-  [] {return FormsApi::SystemInformation::GetIsKeyboardPreferred(); }
+  [] {return Native::FormsApi::SystemInformation::GetIsKeyboardPreferred(); }
 };
 
 _property<bool, _readonly> SystemInformation::IsListBoxSmoothScrollingEnabled{
-  [] {return FormsApi::SystemInformation::GetIsListBoxSmoothScrollingEnabled(); }
+  [] {return Native::FormsApi::SystemInformation::GetIsListBoxSmoothScrollingEnabled(); }
 };
 
 _property<bool, _readonly> SystemInformation::IsMenuAnimationEnabled{
-  [] {return FormsApi::SystemInformation::GetIsMenuAnimationEnabled(); }
+  [] {return Native::FormsApi::SystemInformation::GetIsMenuAnimationEnabled(); }
 };
 
 _property<bool, _readonly> SystemInformation::IsMenuFadeEnabled{
-  [] {return FormsApi::SystemInformation::GetIsMenuFadeEnabled(); }
+  [] {return Native::FormsApi::SystemInformation::GetIsMenuFadeEnabled(); }
 };
 
 _property<bool, _readonly> SystemInformation::IsMinimizeRestoreAnimationEnabled{
-  [] {return FormsApi::SystemInformation::GetIsMinimizeRestoreAnimationEnabled(); }
+  [] {return Native::FormsApi::SystemInformation::GetIsMinimizeRestoreAnimationEnabled(); }
 };
 
 _property<bool, _readonly> SystemInformation::IsSelectionFadeEnabled{
-  [] {return FormsApi::SystemInformation::GetIsSelectionFadeEnabled(); }
+  [] {return Native::FormsApi::SystemInformation::GetIsSelectionFadeEnabled(); }
 };
 
 _property<bool, _readonly> SystemInformation::IsSnapToDefaultEnabled{
-  [] {return FormsApi::SystemInformation::GetIsSnapToDefaultEnabled(); }
+  [] {return Native::FormsApi::SystemInformation::GetIsSnapToDefaultEnabled(); }
 };
 
 _property<bool, _readonly> SystemInformation::IsTitleBarGradientEnabled{
-  [] {return FormsApi::SystemInformation::GetIsTitleBarGradientEnabled(); }
+  [] {return Native::FormsApi::SystemInformation::GetIsTitleBarGradientEnabled(); }
 };
 
 _property<bool, _readonly> SystemInformation::IsToolTipAnimationEnabled{
-  [] {return FormsApi::SystemInformation::GetIsToolTipAnimationEnabled(); }
+  [] {return Native::FormsApi::SystemInformation::GetIsToolTipAnimationEnabled(); }
 };
 
 _property<int32, _readonly> SystemInformation::KanjiWindowHeight{
-  [] {return FormsApi::SystemInformation::GetKanjiWindowHeight(); }
+  [] {return Native::FormsApi::SystemInformation::GetKanjiWindowHeight(); }
 };
 
 _property<int32, _readonly> SystemInformation::KeyboardDelay{
-  [] {return FormsApi::SystemInformation::GetKeyboardDelay(); }
+  [] {return Native::FormsApi::SystemInformation::GetKeyboardDelay(); }
 };
 
 _property<int32, _readonly> SystemInformation::KeyboardSpeed{
-  [] {return FormsApi::SystemInformation::GetKeyboardSpeed(); }
+  [] {return Native::FormsApi::SystemInformation::GetKeyboardSpeed(); }
 };
 
 _property<System::Drawing::Size, _readonly> SystemInformation::MaxWindowTrackSize{
-  [] {return FormsApi::SystemInformation::GetMaxWindowTrackSize(); }
+  [] {return Native::FormsApi::SystemInformation::GetMaxWindowTrackSize(); }
 };
 
 _property<bool, _readonly> SystemInformation::MenuAccessKeysUnderlined{
-  [] {return FormsApi::SystemInformation::GetMenuAccessKeysUnderlined(); }
+  [] {return Native::FormsApi::SystemInformation::GetMenuAccessKeysUnderlined(); }
 };
 
 _property<System::Drawing::Size, _readonly> SystemInformation::MenuBarButtonSize{
-  [] {return FormsApi::SystemInformation::GetMenuBarButtonSize(); }
+  [] {return Native::FormsApi::SystemInformation::GetMenuBarButtonSize(); }
 };
 
 _property<System::Drawing::Size, _readonly> SystemInformation::MenuButtonSize{
-  [] {return FormsApi::SystemInformation::GetMenuButtonSize(); }
+  [] {return Native::FormsApi::SystemInformation::GetMenuButtonSize(); }
 };
 
 _property<System::Drawing::Size, _readonly> SystemInformation::MenuCheckSize{
-  [] {return FormsApi::SystemInformation::GetMenuCheckSize(); }
+  [] {return Native::FormsApi::SystemInformation::GetMenuCheckSize(); }
 };
 
 _property<System::Drawing::Font, _readonly> SystemInformation::MenuFont{
-  [] {return FormsApi::SystemInformation::GetMenuFont(); }
+  [] {return Native::FormsApi::SystemInformation::GetMenuFont(); }
 };
 
 _property<int32, _readonly> SystemInformation::MenuHeight{
-  [] {return FormsApi::SystemInformation::GetMenuHeight(); }
+  [] {return Native::FormsApi::SystemInformation::GetMenuHeight(); }
 };
 

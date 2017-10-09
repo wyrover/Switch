@@ -387,36 +387,36 @@ set(INCLUDE_FILES
 set(SOURCE_FILES
   src/Switch/System/Threading/Monitor.cpp
 
-  src/__OS/CoreApi.hpp
-  src/__OS/ConsoleGcc.cpp
-  src/__OS/ConsoleW32.cpp
-  src/__OS/DateTimeGcc.cpp
-  src/__OS/DateTimeW32.cpp
-  src/__OS/DebuggerGcc.cpp
-  src/__OS/DebuggerW32.cpp
-  src/__OS/DirectoryGcc.cpp
-  src/__OS/DirectoryW32.cpp
-  src/__OS/Dns.cpp
-  src/__OS/DriveGcc.cpp
-  src/__OS/DriveW32.cpp
-  src/__OS/EnvironmentGcc.cpp
-  src/__OS/EnvironmentW32.cpp
-  src/__OS/Format.cpp
-  src/__OS/InterlockedGcc.cpp
-  src/__OS/InterlockedW32.cpp
-  src/__OS/ProcessGcc.cpp
-  src/__OS/ProcessW32.cpp
-  src/__OS/RegistryGcc.cpp
-  src/__OS/RegistryW32.cpp
-  src/__OS/Security.cpp
-  src/__OS/SocketGcc.cpp
-  src/__OS/SocketW32.cpp
-  src/__OS/ThreadGcc.cpp
-  src/__OS/ThreadW32.cpp
-  src/__OS/TypeGcc.cpp
-  src/__OS/TypeW32.cpp
-  src/__OS/UnicodeCharacters.cpp
-  src/__OS/UnicodeEncodings.cpp
+  src/Native/CoreApi.hpp
+  src/Native/ConsoleGcc.cpp
+  src/Native/ConsoleW32.cpp
+  src/Native/DateTimeGcc.cpp
+  src/Native/DateTimeW32.cpp
+  src/Native/DebuggerGcc.cpp
+  src/Native/DebuggerW32.cpp
+  src/Native/DirectoryGcc.cpp
+  src/Native/DirectoryW32.cpp
+  src/Native/Dns.cpp
+  src/Native/DriveGcc.cpp
+  src/Native/DriveW32.cpp
+  src/Native/EnvironmentGcc.cpp
+  src/Native/EnvironmentW32.cpp
+  src/Native/Format.cpp
+  src/Native/InterlockedGcc.cpp
+  src/Native/InterlockedW32.cpp
+  src/Native/ProcessGcc.cpp
+  src/Native/ProcessW32.cpp
+  src/Native/RegistryGcc.cpp
+  src/Native/RegistryW32.cpp
+  src/Native/Security.cpp
+  src/Native/SocketGcc.cpp
+  src/Native/SocketW32.cpp
+  src/Native/ThreadGcc.cpp
+  src/Native/ThreadW32.cpp
+  src/Native/TypeGcc.cpp
+  src/Native/TypeW32.cpp
+  src/Native/UnicodeCharacters.cpp
+  src/Native/UnicodeEncodings.cpp
   src/Switch/Microsoft/Win32/RegistryKeyWin.cpp
   src/Switch/Microsoft/Win32/RegistryKeyAll.cpp
   src/Switch/System/Diagnostics/Debug.cpp

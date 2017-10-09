@@ -3,7 +3,7 @@
 #include "../../../../include/Switch/System/Environment.hpp"
 #include "../../../../include/Switch/System/IO/File.hpp"
 #include "../../../../include/Switch/System/IO/Path.hpp"
-#include "../../../__OS/CoreApi.hpp"
+#include "../../../Native/CoreApi.hpp"
 
 using namespace System;
 using namespace System::IO;
@@ -27,19 +27,19 @@ void Directory::Delete(const string& path, bool recursive) {
 }
 
 System::Collections::Generic::Enumerator<string> Directory::EnumerateDirectories(const string& path) {
-  return __OS::CoreApi::Directory::EnumerateDirectories(path, "*");
+  return Native::CoreApi::Directory::EnumerateDirectories(path, "*");
 }
 
 System::Collections::Generic::Enumerator<string> Directory::EnumerateDirectories(const string& path, const string& pattern) {
-  return __OS::CoreApi::Directory::EnumerateDirectories(path, pattern);
+  return Native::CoreApi::Directory::EnumerateDirectories(path, pattern);
 }
 
 System::Collections::Generic::Enumerator<string> Directory::EnumerateFiles(const string& path) {
-  return __OS::CoreApi::Directory::EnumerateFiles(path, "*");
+  return Native::CoreApi::Directory::EnumerateFiles(path, "*");
 }
 
 System::Collections::Generic::Enumerator<string> Directory::EnumerateFiles(const string& path, const string& pattern) {
-  return __OS::CoreApi::Directory::EnumerateFiles(path, pattern);
+  return Native::CoreApi::Directory::EnumerateFiles(path, pattern);
 }
 
 bool Directory::Exists(const string& path) {

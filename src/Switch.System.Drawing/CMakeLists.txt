@@ -35,11 +35,11 @@ set(INCLUDE_FILES
 )
 
 set(SOURCE_FILES
-  src/__OS/DrawingApi.hpp
-  src/__OS/DrawingApiGtk.cpp
-  src/__OS/DrawingApiWin32.cpp
-  src/__OS/SystemColorsGtk.cpp
-  src/__OS/SystemColorsWin32.cpp
+  src/Native/DrawingApi.hpp
+  src/Native/DrawingApiGtk.cpp
+  src/Native/DrawingApiWin32.cpp
+  src/Native/SystemColorsGtk.cpp
+  src/Native/SystemColorsWin32.cpp
   src/Switch/System/Drawing/Imaging/FrameDimension.cpp
   src/Switch/System/Drawing/Imaging/ImageFormat.cpp
   src/Switch/System/Drawing/Text/FontCollection.cpp
@@ -68,8 +68,8 @@ set(SOURCE_FILES
 
 if (APPLE)
 set(COCOA_SOURCE_FILES
-  src/__OS/DrawingApiCocoa.mm
-  src/__OS/SystemColorsCocoa.mm
+  src/Native/DrawingApiCocoa.mm
+  src/Native/SystemColorsCocoa.mm
 )
 endif ()
 

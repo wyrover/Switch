@@ -10,7 +10,7 @@
 #include "Color.hpp"
 
 /// @cond
-namespace __OS {
+namespace Native {
   class DrawingApi;
 }
 /// @endcond
@@ -80,7 +80,7 @@ namespace Switch {
         };
 
       private:
-        friend class __OS::DrawingApi;
+        friend class Native::DrawingApi;
         friend class Windows::Forms::Control;
         intptr GetNativePen() const { return this->pen; }
         void Create();

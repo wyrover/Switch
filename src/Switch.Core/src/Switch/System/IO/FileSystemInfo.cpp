@@ -1,14 +1,14 @@
 #include "../../../../include/Switch/System/IO/FileSystemInfo.hpp"
 #include "../../../../include/Switch/System/IO/IOException.hpp"
 #include "../../../../include/Switch/System/IO/Path.hpp"
-#include "../../../__OS/CoreApi.hpp"
+#include "../../../Native/CoreApi.hpp"
 
 using namespace System;
 using namespace System::IO;
 
 FileAttributes FileSystemInfo::GetAttributes() const {
   System::IO::FileAttributes fileAttributes = (System::IO::FileAttributes)0;
-  if (__OS::CoreApi::Directory::GetFileAttributes(this->fullPath.ToCCharArray().Data(), fileAttributes) != 0)
+  if (Native::CoreApi::Directory::GetFileAttributes(this->fullPath.ToCCharArray().Data(), fileAttributes) != 0)
     throw IOException(_caller);
   
   return fileAttributes;
@@ -17,7 +17,7 @@ FileAttributes FileSystemInfo::GetAttributes() const {
 DateTime FileSystemInfo::GetCreationTime() const {
   int64 time = 0;
   int64 dummy;
-  if (__OS::CoreApi::Directory::GetFileTime(this->fullPath.ToCCharArray().Data(), time, dummy, dummy) != 0)
+  if (Native::CoreApi::Directory::GetFileTime(this->fullPath.ToCCharArray().Data(), time, dummy, dummy) != 0)
     throw IOException(_caller);
   
   return DateTime::FromFileTime((int64)time*10000000LL);
@@ -34,7 +34,7 @@ string FileSystemInfo::GetExtension() const {
 DateTime FileSystemInfo::GetLastAccessTime() const {
   int64 time = 0;
   int64 dummy;
-  if (__OS::CoreApi::Directory::GetFileTime(this->fullPath.ToCCharArray().Data(), dummy, time, dummy) != 0)
+  if (Native::CoreApi::Directory::GetFileTime(this->fullPath.ToCCharArray().Data(), dummy, time, dummy) != 0)
     throw IOException(_caller);
   
   return DateTime::FromFileTime((int64)time);
@@ -47,7 +47,7 @@ DateTime FileSystemInfo::GetLastAccessTimeUtc() const {
 DateTime FileSystemInfo::GetLastWriteTime() const {
   int64 time = 0;
   int64 dummy;
-  if (__OS::CoreApi::Directory::GetFileTime(this->fullPath.ToCCharArray().Data(), dummy, dummy, time) != 0)
+  if (Native::CoreApi::Directory::GetFileTime(this->fullPath.ToCCharArray().Data(), dummy, dummy, time) != 0)
     throw IOException(_caller);
   
   return DateTime::FromFileTime((int64)time);
