@@ -26,7 +26,7 @@ namespace Switch {
       }
     }
   }
-};
+}
 /// @endcond
 
 namespace Switch {
