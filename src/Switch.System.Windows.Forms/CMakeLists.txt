@@ -110,58 +110,40 @@ set(INCLUDE_FILES
 )
 
 set(SOURCE_FILES
-  src/__OS/ApplicationCocoa.mm
   src/__OS/ApplicationGtk.cpp
   src/__OS/ApplicationWin32.cpp
-  src/__OS/ButtonCocoa.mm
   src/__OS/ButtonGtk.cpp
   src/__OS/ButtonWin32.cpp
-  src/__OS/CheckBoxCocoa.mm
   src/__OS/CheckBoxGtk.cpp
   src/__OS/CheckBoxWin32.cpp
-  src/__OS/ControlCocoa.mm
   src/__OS/ControlGtk.cpp
   src/__OS/ControlWin32.cpp
-  src/__OS/FormCocoa.mm
   src/__OS/FormsApi.hpp
   src/__OS/FormGtk.cpp
   src/__OS/FormWin32.cpp
-  src/__OS/GroupBoxCocoa.mm
   src/__OS/GroupBoxGtk.cpp
   src/__OS/GroupBoxWin32.cpp
-  src/__OS/LabelCocoa.mm
   src/__OS/LabelGtk.cpp
   src/__OS/LabelWin32.cpp
   src/__OS/MainWin32.cpp
-  src/__OS/PanelCocoa.mm
   src/__OS/PanelGtk.cpp
   src/__OS/PanelWin32.cpp
-  src/__OS/ProgressBarCocoa.mm
   src/__OS/ProgressBarGtk.cpp
   src/__OS/ProgressBarWin32.cpp
-  src/__OS/RadioButtonCocoa.mm
-  src/__OS/RadioButtonGtk.cpp
-  src/__OS/RadioButtonWin32.cpp
-  src/__OS/SystemInformationCocoa.mm
   src/__OS/SystemInformationGtk.cpp
   src/__OS/SystemInformationWin32.cpp
-  src/__OS/TabControlCocoa.mm
   src/__OS/TabControlGtk.cpp
   src/__OS/TabControlWin32.cpp
-  src/__OS/TabPageCocoa.mm
   src/__OS/TabPageGtk.cpp
   src/__OS/TabPageWin32.cpp
-  src/__OS/TimerCocoa.mm
   src/__OS/TimerGtk.cpp
   src/__OS/TimerWin32.cpp
-  src/__OS/TrackBarCocoa.mm
   src/__OS/TrackBarGtk.cpp
   src/__OS/TrackBarWin32.cpp
   src/__OS/WidgetCocoa.hpp
   src/__OS/WidgetGtk.hpp
   src/__OS/WindowMessage.hpp
   src/__OS/WindowMessageKey.hpp
-  src/__OS/WindowProcedureCocoa.mm
   src/__OS/WindowProcedureWin32.cpp
   src/__OS/WindowProcedureCocoa.hpp
   src/__OS/WindowProcedureWin32.hpp
@@ -207,9 +189,33 @@ set(SOURCE_FILES
   src/Switch/System/Windows/Forms/TrackBar.cpp
 )
 
+if (APPLE)
+set(COCOA_SOURCE_FILES
+  src/__OS/ApplicationCocoa.mm
+  src/__OS/ButtonCocoa.mm
+  src/__OS/CheckBoxCocoa.mm
+  src/__OS/ControlCocoa.mm
+  src/__OS/FormCocoa.mm
+  src/__OS/GroupBoxCocoa.mm
+  src/__OS/LabelCocoa.mm
+  src/__OS/PanelCocoa.mm
+  src/__OS/ProgressBarCocoa.mm
+  src/__OS/RadioButtonCocoa.mm
+  src/__OS/RadioButtonGtk.cpp
+  src/__OS/RadioButtonWin32.cpp
+  src/__OS/SystemInformationCocoa.mm
+  src/__OS/TabControlCocoa.mm
+  src/__OS/TabPageCocoa.mm
+  src/__OS/TimerCocoa.mm
+  src/__OS/TrackBarCocoa.mm
+  src/__OS/WindowProcedureCocoa.mm
+)
+endif ()
+
+
 GroupSources(.)
 
-add_library(Switch.System.Windows.Forms STATIC ${INCLUDE_FILES} ${SOURCE_FILES})
+add_library(Switch.System.Windows.Forms STATIC ${INCLUDE_FILES} ${SOURCE_FILES} ${COCOA_SOURCE_FILES})
 target_include_directories(Switch.System.Windows.Forms PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include> $<INSTALL_INTERFACE:include>)
 target_link_libraries(Switch.System.Windows.Forms Switch.System.Drawing)
 set_target_properties(Switch.System.Windows.Forms PROPERTIES FOLDER src)
