@@ -14,7 +14,7 @@ xcodebuild -target install -configuration Debug
 xcodebuild -target install -configuration Release
 
 mkdir examples
-cd Examples
-cmake -G "Xcode" ../../Examples
+cd examples
+cmake -G "Xcode" ../../examples
 open Examples.xcodeproj
 cd ../..
