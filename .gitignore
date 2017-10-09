@@ -1,8 +1,6 @@
 .DS_Store
-bin-*
-bin
 build-*
-Build
+build
 CMakeLists.txt.user
 x64
 Libraries/Pcf/Help
