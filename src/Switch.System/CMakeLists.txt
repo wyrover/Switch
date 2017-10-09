@@ -42,6 +42,7 @@ add_library(Switch.System STATIC ${INCLUDE_FILES} ${SOURCE_FILES})
 target_include_directories(Switch.System PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include> $<INSTALL_INTERFACE:include>)
 target_link_libraries(Switch.System Switch.Core ${CURL_LIBRARIES})
 set_target_properties(Switch.System PROPERTIES FOLDER src)
+add_custom_command(TARGET Switch.System POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:Switch.System> ${CMAKE_HOME_DIRECTORY}/lib/$<TARGET_FILE_NAME:Switch.System>)
 
 install(TARGETS Switch.System EXPORT Switch DESTINATION lib)
 install(DIRECTORY "include/Switch/." DESTINATION include/Switch)

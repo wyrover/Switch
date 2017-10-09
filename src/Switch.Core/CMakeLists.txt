@@ -527,6 +527,7 @@ add_library(Switch.Core STATIC ${INCLUDE_FILES} ${SOURCE_FILES})
 target_include_directories(Switch.Core PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include> $<INSTALL_INTERFACE:include>)
 target_link_libraries(Switch.Core call_stack easywsclient Rs232 ZLIB::ZLIB Threads::Threads ${STANDARD_CORE_LINK_LIBRARIES})
 set_target_properties(Switch.Core PROPERTIES FOLDER src)
+add_custom_command(TARGET Switch.Core POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:Switch.Core> ${CMAKE_HOME_DIRECTORY}/lib/$<TARGET_FILE_NAME:Switch.Core>)
 
 install(TARGETS Switch.Core EXPORT Switch DESTINATION lib)
 install(DIRECTORY "include/Switch/." DESTINATION include/Switch)

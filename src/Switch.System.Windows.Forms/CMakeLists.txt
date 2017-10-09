@@ -219,6 +219,7 @@ add_library(Switch.System.Windows.Forms STATIC ${INCLUDE_FILES} ${SOURCE_FILES} 
 target_include_directories(Switch.System.Windows.Forms PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include> $<INSTALL_INTERFACE:include>)
 target_link_libraries(Switch.System.Windows.Forms Switch.System.Drawing)
 set_target_properties(Switch.System.Windows.Forms PROPERTIES FOLDER src)
+add_custom_command(TARGET Switch.System.Windows.Forms POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:Switch.System.Windows.Forms> ${CMAKE_HOME_DIRECTORY}/lib/$<TARGET_FILE_NAME:Switch.System.Windows.Forms>)
 
 install(TARGETS Switch.System.Windows.Forms EXPORT Switch DESTINATION lib)
 install(DIRECTORY "include/Switch/." DESTINATION include/Switch)

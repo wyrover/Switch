@@ -8,6 +8,7 @@ endif()
 
 add_library(easywsclient STATIC easywsclient/easywsclient.hpp easywsclient/easywsclient.cpp)
 target_include_directories(easywsclient PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}> $<INSTALL_INTERFACE:include>)
+add_custom_command(TARGET easywsclient POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:easywsclient> ${CMAKE_HOME_DIRECTORY}/../lib/$<TARGET_FILE_NAME:easywsclient>)
 
 install(EXPORT easywsclient DESTINATION cmake)  
 install(FILES easywsclientConfig.cmake DESTINATION cmake)

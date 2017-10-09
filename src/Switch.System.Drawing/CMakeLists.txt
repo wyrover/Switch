@@ -80,6 +80,7 @@ target_include_directories(Switch.System.Drawing PUBLIC $<BUILD_INTERFACE:${CMAK
 #target_link_libraries(Switch.System.Drawing Switch.Core ${JPEG_LIBRARIES} PNG::PNG ${STANDARD_GRAPHIC_LINK_LIBRARIES} ${COCOA_FRAMEWORK})
 target_link_libraries(Switch.System.Drawing Switch.Core ${JPEG_LIBRARIES} ${PNG_LIBRARY} ${STANDARD_GRAPHIC_LINK_LIBRARIES} ${COCOA_FRAMEWORK})
 set_target_properties(Switch.System.Drawing PROPERTIES FOLDER src)
+add_custom_command(TARGET Switch.System.Drawing POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:Switch.System.Drawing> ${CMAKE_HOME_DIRECTORY}/lib/$<TARGET_FILE_NAME:Switch.System.Drawing>)
 
 install(TARGETS Switch.System.Drawing EXPORT Switch DESTINATION lib)
 install(DIRECTORY "include/Switch/." DESTINATION include/Switch)

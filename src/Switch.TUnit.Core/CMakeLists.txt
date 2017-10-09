@@ -31,6 +31,7 @@ target_include_directories(Switch.TUnit.Core PUBLIC $<BUILD_INTERFACE:${CMAKE_CU
 #target_link_libraries(Switch.TUnit.Core GTest::GTest Switch.System)
 target_link_libraries(Switch.TUnit.Core ${GTEST_LIBRARIES} Switch.Core)
 set_target_properties(Switch.TUnit.Core PROPERTIES FOLDER src)
+add_custom_command(TARGET Switch.TUnit.Core POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:Switch.TUnit.Core> ${CMAKE_HOME_DIRECTORY}/lib/$<TARGET_FILE_NAME:Switch.TUnit.Core>)
 
 install(TARGETS Switch.TUnit.Core EXPORT Switch DESTINATION lib)
 install(DIRECTORY "include/Switch/." DESTINATION include/Switch)

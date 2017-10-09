@@ -38,6 +38,7 @@ set(Includes_SRCS
 add_library(libpng STATIC "${PNG_SRCS}")
 target_include_directories(libpng PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}> $<INSTALL_INTERFACE:include>)
 target_link_libraries(libpng ${ZLIB_LIBRARIES})
+add_custom_command(TARGET libpng POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:libpng> ${CMAKE_HOME_DIRECTORY}/../lib/$<TARGET_FILE_NAME:libpng>)
 
 install(EXPORT libpng DESTINATION cmake)  
 install(FILES libpngConfig.cmake DESTINATION cmake)

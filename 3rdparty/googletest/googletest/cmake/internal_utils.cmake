@@ -149,6 +149,7 @@ function(cxx_library_with_type name type cxx_flags)
   # type can be either STATIC or SHARED to denote a static or shared library.
   # ARGN refers to additional arguments after 'cxx_flags'.
   add_library(${name} ${type} ${ARGN})
+  add_custom_command(TARGET ${name} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${name}> ${CMAKE_HOME_DIRECTORY}/../lib/$<TARGET_FILE_NAME:${name}>)
   set_target_properties(${name}
     PROPERTIES
     COMPILE_FLAGS "${cxx_flags}")

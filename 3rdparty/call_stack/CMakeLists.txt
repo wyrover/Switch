@@ -32,6 +32,7 @@ source_group(Sources\\StackWalker REGULAR_EXPRESSION "/Sources/StackWalker/[-_,A
 add_library(call_stack STATIC ${INCLUDE_FILES} ${SOURCE_FILES})
 target_link_libraries(call_stack)
 target_include_directories(call_stack PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}> $<INSTALL_INTERFACE:include>)
+add_custom_command(TARGET call_stack POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:call_stack> ${CMAKE_HOME_DIRECTORY}/../lib/$<TARGET_FILE_NAME:call_stack>)
 
 install(EXPORT call_stack DESTINATION cmake)  
 install(FILES call_stackConfig.cmake DESTINATION cmake)
