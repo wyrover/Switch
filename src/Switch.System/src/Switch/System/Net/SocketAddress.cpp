@@ -3,21 +3,21 @@
 #include "../../../../include/Switch/System/Net/IPAddress.hpp"
 #include <Switch/System/BitConverter.hpp>
 #include <Switch/System/Convert.hpp>
-#include "../../../Native/SystemApi.hpp"
+#include "../../../Native/Api.hpp"
 
 using namespace System;
 using namespace System::Net;
 using namespace System::Net::Sockets;
 
 SocketAddress::SocketAddress(Sockets::AddressFamily addressFamily, int32 bufferSize) : bytes(bufferSize) {
-  this->bytes[0] = Native::SystemApi::Socket::AddressFamilyToNative(addressFamily);
+  this->bytes[0] = Native::SocketApi::AddressFamilyToNative(addressFamily);
   this->bytes[1] = 0;
 }
 
 SocketAddress::SocketAddress(const Array<byte>& buffer) : bytes(buffer) {}
 
 Sockets::AddressFamily SocketAddress::GetAddressFamily() const {
-  return Native::SystemApi::Socket::NativeToAddressFamily(this->bytes[0]);
+  return Native::SocketApi::NativeToAddressFamily(this->bytes[0]);
 }
 
 string SocketAddress::ToString() const {

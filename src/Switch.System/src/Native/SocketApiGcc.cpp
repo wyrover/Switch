@@ -11,7 +11,7 @@
 #include <sys/socket.h>
 #include <sys/ioctl.h>
 
-#include "SystemApi.hpp"
+#include "Api.hpp"
 #include <Switch/System/BitConverter.hpp>
 #include <Switch/System/Diagnostics/Debug.hpp>
 
@@ -77,7 +77,7 @@ namespace {
   }
 }
 
-int32 Native::SystemApi::Socket::AddressFamilyToNative(System::Net::Sockets::AddressFamily addressFamily) {
+int32 Native::SocketApi::AddressFamilyToNative(System::Net::Sockets::AddressFamily addressFamily) {
 #if defined(__APPLE__)
   static System::Collections::Generic::SortedDictionary<System::Net::Sockets::AddressFamily, int32> addressFamilies = {{System::Net::Sockets::AddressFamily::Unknown, AF_UNSPEC}, {System::Net::Sockets::AddressFamily::Unspecified, AF_UNSPEC}, {System::Net::Sockets::AddressFamily::Unix, AF_UNIX}, {System::Net::Sockets::AddressFamily::InterNetwork, AF_INET}, {System::Net::Sockets::AddressFamily::ImpLink, AF_IMPLINK}, {System::Net::Sockets::AddressFamily::Pup, AF_PUP}, {System::Net::Sockets::AddressFamily::Chaos, AF_CHAOS}, {System::Net::Sockets::AddressFamily::NS, AF_NS}, {System::Net::Sockets::AddressFamily::Iso, AF_ISO}, {System::Net::Sockets::AddressFamily::Ecma, AF_ECMA}, {System::Net::Sockets::AddressFamily::DataKit, AF_DATAKIT}, {System::Net::Sockets::AddressFamily::Ccitt, AF_CCITT}, {System::Net::Sockets::AddressFamily::Sna, AF_SNA}, {System::Net::Sockets::AddressFamily::DecNet, AF_DECnet}, {System::Net::Sockets::AddressFamily::DataLink, AF_DLI}, {System::Net::Sockets::AddressFamily::Lat, AF_LAT}, {System::Net::Sockets::AddressFamily::HyperChannel, AF_HYLINK}, {System::Net::Sockets::AddressFamily::AppleTalk, AF_APPLETALK}, {System::Net::Sockets::AddressFamily::NetBios, AF_NETBIOS}, {System::Net::Sockets::AddressFamily::VoiceView, AF_UNSPEC}, {System::Net::Sockets::AddressFamily::FireFox, AF_UNSPEC}, {System::Net::Sockets::AddressFamily::Banyan, AF_UNSPEC}, {System::Net::Sockets::AddressFamily::Atm, AF_NATM}, {System::Net::Sockets::AddressFamily::InterNetworkV6, AF_INET6}, {System::Net::Sockets::AddressFamily::Cluster, AF_UNSPEC}, {System::Net::Sockets::AddressFamily::Ieee12844, AF_UNSPEC}, {System::Net::Sockets::AddressFamily::Irda, AF_UNSPEC}, {System::Net::Sockets::AddressFamily::NetworkDesigners, AF_UNSPEC}, {System::Net::Sockets::AddressFamily::Max, AF_MAX}};
 #else
@@ -89,7 +89,7 @@ int32 Native::SystemApi::Socket::AddressFamilyToNative(System::Net::Sockets::Add
   return addressFamilies[addressFamily];
 }
 
-System::Net::Sockets::AddressFamily Native::SystemApi::Socket::NativeToAddressFamily(int32 addressFamily) {
+System::Net::Sockets::AddressFamily Native::SocketApi::NativeToAddressFamily(int32 addressFamily) {
 #if defined(__APPLE__)
   static System::Collections::Generic::SortedDictionary<int32, System::Net::Sockets::AddressFamily> addressFamilies = {{AF_UNSPEC, System::Net::Sockets::AddressFamily::Unspecified}, {AF_UNIX, System::Net::Sockets::AddressFamily::Unix}, {AF_INET, System::Net::Sockets::AddressFamily::InterNetwork}, {AF_IMPLINK, System::Net::Sockets::AddressFamily::ImpLink}, {AF_PUP, System::Net::Sockets::AddressFamily::Pup}, {AF_CHAOS, System::Net::Sockets::AddressFamily::Chaos}, {AF_NS, System::Net::Sockets::AddressFamily::NS}, {AF_ISO, System::Net::Sockets::AddressFamily::Iso}, {AF_ECMA, System::Net::Sockets::AddressFamily::Ecma}, {AF_DATAKIT, System::Net::Sockets::AddressFamily::DataKit}, {AF_CCITT, System::Net::Sockets::AddressFamily::Ccitt}, {AF_SNA, System::Net::Sockets::AddressFamily::Sna}, {AF_DECnet, System::Net::Sockets::AddressFamily::DecNet}, {AF_DLI, System::Net::Sockets::AddressFamily::DataLink}, {AF_LAT, System::Net::Sockets::AddressFamily::Lat}, {AF_HYLINK, System::Net::Sockets::AddressFamily::HyperChannel}, {AF_APPLETALK, System::Net::Sockets::AddressFamily::AppleTalk}, {AF_NETBIOS, System::Net::Sockets::AddressFamily::NetBios}, {AF_NATM, System::Net::Sockets::AddressFamily::Atm}, {AF_INET6, System::Net::Sockets::AddressFamily::InterNetworkV6}, {AF_MAX, System::Net::Sockets::AddressFamily::Max}};
 #else
@@ -101,7 +101,7 @@ System::Net::Sockets::AddressFamily Native::SystemApi::Socket::NativeToAddressFa
   return addressFamilies[addressFamily];
 }
 
-int32 Native::SystemApi::Socket::Accept(intptr handle, byte* socketAddress, int32 addressLength, intptr* socket) {
+int32 Native::SocketApi::Accept(intptr handle, byte* socketAddress, int32 addressLength, intptr* socket) {
   *socket = (intptr)accept(*(int32*)&handle, (struct sockaddr*)socketAddress, (socklen_t*)&addressLength);
   if (*socket == (intptr)-1)
     return -1;
@@ -114,36 +114,36 @@ int32 Native::SystemApi::Socket::Accept(intptr handle, byte* socketAddress, int3
   return 0;
 }
 
-int32 Native::SystemApi::Socket::Bind(intptr handle, byte* socketAddress, int32 addressLength) {
+int32 Native::SocketApi::Bind(intptr handle, byte* socketAddress, int32 addressLength) {
   int32 result = bind(*(int32*)&handle, (struct sockaddr*)socketAddress, (socklen_t)addressLength);
   return result;
 }
 
-int32 Native::SystemApi::Socket::Close(intptr handle) {
+int32 Native::SocketApi::Close(intptr handle) {
   return close(*(int32*)&handle);
 }
 
-int32 Native::SystemApi::Socket::Connect(intptr handle, byte *socketAddress, int32 addressLength) {
+int32 Native::SocketApi::Connect(intptr handle, byte *socketAddress, int32 addressLength) {
   return ::connect(*(int32*)&handle, (struct sockaddr*)socketAddress, addressLength);
 }
 
-int32 Native::SystemApi::Socket::GetAvailable(intptr handle, int32* nbrBytesAvailable) {
+int32 Native::SocketApi::GetAvailable(intptr handle, int32* nbrBytesAvailable) {
   return ioctl(*(int32*)&handle, FIONREAD, nbrBytesAvailable);
 }
 
-int32 Native::SystemApi::Socket::GetLastError() {
+int32 Native::SocketApi::GetLastError() {
   return NativeToSocketError(errno);
 }
 
-bool Native::SystemApi::Socket::GetOSSupportsIPv4() {
+bool Native::SocketApi::GetOSSupportsIPv4() {
   return true;
 }
 
-bool Native::SystemApi::Socket::GetOSSupportsIPv6() {
+bool Native::SocketApi::GetOSSupportsIPv6() {
   return true;
 }
 
-int32 Native::SystemApi::Socket::GetSocketOption(intptr handle, System::Net::Sockets::SocketOptionLevel socketLevel, System::Net::Sockets::SocketOptionName socketOptionName, void* option, int32* optionLength) {
+int32 Native::SocketApi::GetSocketOption(intptr handle, System::Net::Sockets::SocketOptionLevel socketLevel, System::Net::Sockets::SocketOptionName socketOptionName, void* option, int32* optionLength) {
   if (socketLevel == System::Net::Sockets::SocketOptionLevel::Socket && (socketOptionName == System::Net::Sockets::SocketOptionName::SendTimeout || socketOptionName == System::Net::Sockets::SocketOptionName::ReceiveTimeout)) {
     struct timeval tv = {0, 0};
     int32 retValue = getsockopt(*(int32*)&handle, SocketOptionLevelToNative(socketLevel), SocketOptionNameToNative(socketOptionName), &tv, (socklen_t *)optionLength);
@@ -154,22 +154,22 @@ int32 Native::SystemApi::Socket::GetSocketOption(intptr handle, System::Net::Soc
   return getsockopt(*(int32*)&handle, SocketOptionLevelToNative(socketLevel), SocketOptionNameToNative(socketOptionName), option, (socklen_t *)optionLength);
 }
 
-int32 Native::SystemApi::Socket::IoCtl(intptr handle, int32 ioControl, byte* optionInValue, int32 optionInValueSize, byte* optionOutValue, int32 optionOutValueSize, int32* optionOutValueSizeReturned) {
+int32 Native::SocketApi::IoCtl(intptr handle, int32 ioControl, byte* optionInValue, int32 optionInValueSize, byte* optionOutValue, int32 optionOutValueSize, int32* optionOutValueSizeReturned) {
   return -1;
 }
 
-int32 Native::SystemApi::Socket::Listen(intptr handle, int32 backLog) {
+int32 Native::SocketApi::Listen(intptr handle, int32 backLog) {
   return listen(*(int32*)&handle, backLog);
 }
 
-int32 Native::SystemApi::Socket::Open(System::Net::Sockets::AddressFamily addressFamily, System::Net::Sockets::SocketType socketType, System::Net::Sockets::ProtocolType protocolType, intptr* socket) {
+int32 Native::SocketApi::Open(System::Net::Sockets::AddressFamily addressFamily, System::Net::Sockets::SocketType socketType, System::Net::Sockets::ProtocolType protocolType, intptr* socket) {
   if (socket != null && (*socket = (intptr)::socket(AddressFamilyToNative(addressFamily), SocketTypeToNative(socketType), ProtocolTypeToNative(protocolType))) != (intptr)-1)
     return 0;
   
   return -1;
 }
 
-int32 Native::SystemApi::Socket::Poll(intptr handle, int32 microseconds, int32 mode) {
+int32 Native::SocketApi::Poll(intptr handle, int32 microseconds, int32 mode) {
   if (handle == 0 || microseconds < 0 || mode < 0 || mode > 2)
     return -1;
 
@@ -185,7 +185,7 @@ int32 Native::SystemApi::Socket::Poll(intptr handle, int32 microseconds, int32 m
   return poll(&pollFd, 1, microseconds);
 }
 
-int32 Native::SystemApi::Socket::Select(intptr* checkRead, int32 nbCheckRead, intptr* checkWrite, int32 nbCheckWrite, intptr* checkError, int32 nbCheckError, int32 microseconds) {
+int32 Native::SocketApi::Select(intptr* checkRead, int32 nbCheckRead, intptr* checkWrite, int32 nbCheckWrite, intptr* checkError, int32 nbCheckError, int32 microseconds) {
   int nfds = 0;
   
   fd_set readfds;
@@ -257,7 +257,7 @@ int32 Native::SystemApi::Socket::Select(intptr* checkRead, int32 nbCheckRead, in
   return result;
 }
 
-int32 Native::SystemApi::Socket::Receive(intptr handle,  byte *buffer, int32 bufferLength, int32 flags) {
+int32 Native::SocketApi::Receive(intptr handle,  byte *buffer, int32 bufferLength, int32 flags) {
   int32 retValue = (int32)recv(*(int32*)&handle, buffer, bufferLength, flags);
   
   if (retValue == -1 && errno == EBADF)
@@ -268,7 +268,7 @@ int32 Native::SystemApi::Socket::Receive(intptr handle,  byte *buffer, int32 buf
   return retValue;
 }
 
-int32 Native::SystemApi::Socket::ReceiveFrom(intptr handle, byte* buffer, int32 bufferLength, int32 flags, byte *socketAddress, int32 addressLength) {
+int32 Native::SocketApi::ReceiveFrom(intptr handle, byte* buffer, int32 bufferLength, int32 flags, byte *socketAddress, int32 addressLength) {
   int32 retValue = (int32)recvfrom(*(int32*)&handle, (char*)buffer, bufferLength, flags, reinterpret_cast<sockaddr*>(socketAddress), reinterpret_cast<socklen_t*>(&addressLength));
 
 #if defined(__APPLE__)
@@ -284,15 +284,15 @@ int32 Native::SystemApi::Socket::ReceiveFrom(intptr handle, byte* buffer, int32 
   return retValue;
 }
 
-int32 Native::SystemApi::Socket::Send(intptr handle,  byte *buffer, int32 bufferLength, int32 flags) {
+int32 Native::SocketApi::Send(intptr handle,  byte *buffer, int32 bufferLength, int32 flags) {
   return (int32)send(*(int32*)&handle, buffer, bufferLength, flags);
 }
 
-int32 Native::SystemApi::Socket::SendTo(intptr handle, byte* buffer, int32 bufferLength, int32 flags, byte *socketAddress, int32 addressLength) {
+int32 Native::SocketApi::SendTo(intptr handle, byte* buffer, int32 bufferLength, int32 flags, byte *socketAddress, int32 addressLength) {
   return (int32)sendto(*(int32*)&handle, (char*)buffer, bufferLength, flags, reinterpret_cast<sockaddr*>(socketAddress), addressLength);
 }
 
-int32 Native::SystemApi::Socket::SetBlocking(intptr handle, bool blocking) {
+int32 Native::SocketApi::SetBlocking(intptr handle, bool blocking) {
   int32 retValue = -1;
   
   if ((retValue = fcntl(*(int32*)&handle, F_GETFL, 0)) != -1) {
@@ -308,7 +308,7 @@ int32 Native::SystemApi::Socket::SetBlocking(intptr handle, bool blocking) {
   return retValue;
 }
 
-int32 Native::SystemApi::Socket::SetSocketOption(intptr handle, System::Net::Sockets::SocketOptionLevel socketLevel, System::Net::Sockets::SocketOptionName socketOptionName, void* option, int32 optionLength) {
+int32 Native::SocketApi::SetSocketOption(intptr handle, System::Net::Sockets::SocketOptionLevel socketLevel, System::Net::Sockets::SocketOptionName socketOptionName, void* option, int32 optionLength) {
   if (socketLevel == System::Net::Sockets::SocketOptionLevel::Socket && (socketOptionName == System::Net::Sockets::SocketOptionName::SendTimeout || socketOptionName == System::Net::Sockets::SocketOptionName::ReceiveTimeout)) {
     struct timeval tv = {*(int32*)option/1000, *(int32*)option%1000*1000};
     return ::setsockopt(*(int32*)&handle, SocketOptionLevelToNative(socketLevel), SocketOptionNameToNative(socketOptionName), &tv, sizeof(struct timeval));
@@ -317,7 +317,7 @@ int32 Native::SystemApi::Socket::SetSocketOption(intptr handle, System::Net::Soc
   return setsockopt(*(int32*)&handle, SocketOptionLevelToNative(socketLevel), SocketOptionNameToNative(socketOptionName), option, (socklen_t)optionLength);
 }
 
-int32 Native::SystemApi::Socket::Shutdown(intptr handle, int32 how) {
+int32 Native::SocketApi::Shutdown(intptr handle, int32 how) {
   int32 retValue = shutdown(*(int32*)&handle, how);
   
   if (how == 2 && retValue == -1 && errno == ENOTCONN) {

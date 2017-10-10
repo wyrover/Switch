@@ -70,6 +70,7 @@ namespace Switch {
   /// _startup (TestReader::Program)
   /// @endcode
   /// @ingroup Keywords
+  /// @ingroup Switch.Core
   #define _abstract\
   : public Abstract
 }

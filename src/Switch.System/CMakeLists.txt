@@ -79,13 +79,12 @@ set(INCLUDE_FILES
 )
 
 set(SOURCE_FILES
-  src/Native/SystemApi.hpp
-  src/Native/Dns.cpp
-  src/Native/SocketGcc.cpp
-  src/Native/SocketW32.cpp
+  src/Native/Api.hpp
+  src/Native/CurlApi.cpp
+  src/Native/DnsApi.cpp
+  src/Native/SocketApiGcc.cpp
+  src/Native/SocketApiW32.cpp
   src/Switch/System/IO/Ports/SerialPort.cpp
-  src/Switch/System/Net/Internals/curl.cpp
-  src/Switch/System/Net/Internals/curl.hpp
   src/Switch/System/Net/Sockets/Socket.cpp
   src/Switch/System/Net/Sockets/UdpClient.cpp
   src/Switch/System/Net/Sockets/NetworkStream.cpp

@@ -1,6 +1,6 @@
 #include "../../../../include/Switch/System/Net/FtpWebRequest.hpp"
 #include "../../../../include/Switch/System/Net/WebRequestMethods.hpp"
-#include "Internals/curl.hpp"
+#include "../../../Native/Api.hpp"
 
 using namespace System;
 using namespace System::Net;
@@ -23,17 +23,17 @@ WebRequest::WebRequestStream FtpWebRequest::GetRequestStream() {
 }
 
 void FtpWebRequest::SetUseBinary(bool useBinary) {
-  if (Curl::GetOSSupportsWebOperations() == false)
+  if (Native::CurlApi::GetOSSupportsWebOperations() == false)
     throw NotSupportedException(_caller);
 
   this->useBinary = useBinary;
 
   if (useBinary) {
-    Curl::SetTransfertText(this->requestHandle, 0L);
-    Curl::SetCarriageReturnLinefeed(this->requestHandle, 0L);
+    Native::CurlApi::SetTransfertText(this->requestHandle, 0L);
+    Native::CurlApi::SetCarriageReturnLinefeed(this->requestHandle, 0L);
   }
   else
-    Curl::SetTransfertText(this->requestHandle, 1L);
+    Native::CurlApi::SetTransfertText(this->requestHandle, 1L);
 }
 
 bool FtpWebRequest::GetUseBinary() {
@@ -41,22 +41,22 @@ bool FtpWebRequest::GetUseBinary() {
 }
 
 void FtpWebRequest::ProcessMakeDirectory() {
-  if (Curl::GetOSSupportsWebOperations() == false)
+  if (Native::CurlApi::GetOSSupportsWebOperations() == false)
     throw NotSupportedException(_caller);
 
-  Curl::SetCreateDirectoryIfDirectoryMissing(this->requestHandle);
-  this->internalError = Curl::Perform(this->requestHandle);
+  Native::CurlApi::SetCreateDirectoryIfDirectoryMissing(this->requestHandle);
+  this->internalError = Native::CurlApi::Perform(this->requestHandle);
 }
 
 void FtpWebRequest::ProcessListDirectory() {
-  if (Curl::GetOSSupportsWebOperations() == false)
+  if (Native::CurlApi::GetOSSupportsWebOperations() == false)
     throw NotSupportedException(_caller);
 
-  Curl::SetDirectoryListOnly(this->requestHandle, 1L);
+  Native::CurlApi::SetDirectoryListOnly(this->requestHandle, 1L);
 }
 
 void FtpWebRequest::ProcessListDirectoryDetails() {
-  if (Curl::GetOSSupportsWebOperations() == false)
+  if (Native::CurlApi::GetOSSupportsWebOperations() == false)
     throw NotSupportedException(_caller);
 }
 

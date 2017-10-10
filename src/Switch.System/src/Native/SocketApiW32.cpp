@@ -6,7 +6,7 @@
 #include <Winsock2.h>
 #include <Switch/Undef.hpp>
 
-#include "SystemApi.hpp"
+#include "Api.hpp"
 #include <Switch/System/Collections/Generic/SortedDictionary.hpp>
 
 namespace {
@@ -43,7 +43,7 @@ namespace {
   }
 }
 
-int32 Native::SystemApi::Socket::AddressFamilyToNative(System::Net::Sockets::AddressFamily addressFamily) {
+int32 Native::SocketApi::AddressFamilyToNative(System::Net::Sockets::AddressFamily addressFamily) {
   static System::Collections::Generic::SortedDictionary<System::Net::Sockets::AddressFamily, int32> addressFamilies = {{System::Net::Sockets::AddressFamily::Unknown, AF_UNSPEC}, {System::Net::Sockets::AddressFamily::Unspecified, AF_UNSPEC}, {System::Net::Sockets::AddressFamily::Unix, AF_UNIX}, {System::Net::Sockets::AddressFamily::InterNetwork, AF_INET}, {System::Net::Sockets::AddressFamily::ImpLink, AF_IMPLINK}, {System::Net::Sockets::AddressFamily::Pup, AF_PUP}, {System::Net::Sockets::AddressFamily::Chaos, AF_CHAOS}, {System::Net::Sockets::AddressFamily::NS, AF_NS}, {System::Net::Sockets::AddressFamily::Iso, AF_ISO}, {System::Net::Sockets::AddressFamily::Ecma, AF_ECMA}, {System::Net::Sockets::AddressFamily::DataKit, AF_DATAKIT}, {System::Net::Sockets::AddressFamily::Ccitt, AF_CCITT}, {System::Net::Sockets::AddressFamily::Sna, AF_SNA}, {System::Net::Sockets::AddressFamily::DecNet, AF_DECnet}, {System::Net::Sockets::AddressFamily::DataLink, AF_DLI}, {System::Net::Sockets::AddressFamily::Lat, AF_LAT}, {System::Net::Sockets::AddressFamily::HyperChannel, AF_HYLINK}, {System::Net::Sockets::AddressFamily::AppleTalk, AF_APPLETALK}, {System::Net::Sockets::AddressFamily::NetBios, AF_NETBIOS}, {System::Net::Sockets::AddressFamily::VoiceView, AF_VOICEVIEW}, {System::Net::Sockets::AddressFamily::FireFox, AF_FIREFOX}, {System::Net::Sockets::AddressFamily::Banyan, AF_BAN}, {System::Net::Sockets::AddressFamily::Atm, AF_ATM}, {System::Net::Sockets::AddressFamily::InterNetworkV6, AF_INET6}, {System::Net::Sockets::AddressFamily::Cluster, AF_CLUSTER}, {System::Net::Sockets::AddressFamily::Ieee12844, AF_12844}, {System::Net::Sockets::AddressFamily::Irda, AF_IRDA}, {System::Net::Sockets::AddressFamily::NetworkDesigners, AF_NETDES}, {System::Net::Sockets::AddressFamily::Max, AF_MAX}};
 
   if (!addressFamilies.ContainsKey(addressFamily))
@@ -51,7 +51,7 @@ int32 Native::SystemApi::Socket::AddressFamilyToNative(System::Net::Sockets::Add
   return addressFamilies[addressFamily];
 }
 
-System::Net::Sockets::AddressFamily Native::SystemApi::Socket::NativeToAddressFamily(int32 addressFamily) {
+System::Net::Sockets::AddressFamily Native::SocketApi::NativeToAddressFamily(int32 addressFamily) {
   static System::Collections::Generic::SortedDictionary<int32, System::Net::Sockets::AddressFamily> addressFamilies = {{AF_UNSPEC, System::Net::Sockets::AddressFamily::Unspecified}, {AF_UNIX, System::Net::Sockets::AddressFamily::Unix}, {AF_INET, System::Net::Sockets::AddressFamily::InterNetwork}, {AF_IMPLINK, System::Net::Sockets::AddressFamily::ImpLink}, {AF_PUP, System::Net::Sockets::AddressFamily::Pup}, {AF_CHAOS, System::Net::Sockets::AddressFamily::Chaos}, {AF_NS, System::Net::Sockets::AddressFamily::NS}, {AF_ISO, System::Net::Sockets::AddressFamily::Iso}, {AF_ECMA, System::Net::Sockets::AddressFamily::Ecma}, {AF_DATAKIT, System::Net::Sockets::AddressFamily::DataKit}, {AF_CCITT, System::Net::Sockets::AddressFamily::Ccitt}, {AF_SNA, System::Net::Sockets::AddressFamily::Sna}, {AF_DECnet, System::Net::Sockets::AddressFamily::DecNet}, {AF_DLI, System::Net::Sockets::AddressFamily::DataLink}, {AF_LAT, System::Net::Sockets::AddressFamily::Lat}, {AF_HYLINK, System::Net::Sockets::AddressFamily::HyperChannel}, {AF_APPLETALK, System::Net::Sockets::AddressFamily::AppleTalk}, {AF_NETBIOS, System::Net::Sockets::AddressFamily::NetBios}, {AF_VOICEVIEW, System::Net::Sockets::AddressFamily::VoiceView}, {AF_FIREFOX, System::Net::Sockets::AddressFamily::FireFox}, {AF_BAN, System::Net::Sockets::AddressFamily::Banyan}, {AF_ATM, System::Net::Sockets::AddressFamily::Atm}, {AF_INET6, System::Net::Sockets::AddressFamily::InterNetworkV6}, {AF_CLUSTER, System::Net::Sockets::AddressFamily::Cluster}, {AF_12844, System::Net::Sockets::AddressFamily::Ieee12844}, {AF_IRDA, System::Net::Sockets::AddressFamily::Irda}, {AF_NETDES, System::Net::Sockets::AddressFamily::NetworkDesigners}, {AF_MAX, System::Net::Sockets::AddressFamily::Max}};
 
   if (!addressFamilies.ContainsKey(addressFamily))
@@ -59,7 +59,7 @@ System::Net::Sockets::AddressFamily Native::SystemApi::Socket::NativeToAddressFa
   return addressFamilies[addressFamily];
 }
 
-int32 Native::SystemApi::Socket::Accept(intptr handle, byte* socketAddress, int32 addressLength, intptr* handleResult) {
+int32 Native::SocketApi::Accept(intptr handle, byte* socketAddress, int32 addressLength, intptr* handleResult) {
   *handleResult = (intptr)::accept(*(int32*)&handle, (SOCKADDR*)socketAddress, &addressLength);
 
   if (*handleResult == (intptr)-1)
@@ -68,47 +68,47 @@ int32 Native::SystemApi::Socket::Accept(intptr handle, byte* socketAddress, int3
   return 0;
 }
 
-int32 Native::SystemApi::Socket::Bind(intptr handle, byte* socketAddress, int32 addressLength) {
+int32 Native::SocketApi::Bind(intptr handle, byte* socketAddress, int32 addressLength) {
   return ::bind(*(int32*)&handle, (SOCKADDR*)socketAddress, (int)addressLength);
 }
 
-int32 Native::SystemApi::Socket::Close(intptr handle) {
+int32 Native::SocketApi::Close(intptr handle) {
   return ::closesocket(*(int32*)&handle);
 }
 
-int32 Native::SystemApi::Socket::Connect(intptr handle, byte* socketAddress, int32 addressLength) {
+int32 Native::SocketApi::Connect(intptr handle, byte* socketAddress, int32 addressLength) {
   return ::connect(*(SOCKET*)&handle, (SOCKADDR*)socketAddress, addressLength);
 }
 
-int32 Native::SystemApi::Socket::GetAvailable(intptr handle, int32* nbrBytesAvailable) {
+int32 Native::SocketApi::GetAvailable(intptr handle, int32* nbrBytesAvailable) {
   return ioctlsocket(*(int32*)&handle, FIONREAD, (u_long*)nbrBytesAvailable);
 }
 
-int32 Native::SystemApi::Socket::GetLastError() {
+int32 Native::SocketApi::GetLastError() {
   return WSAGetLastError();
 }
 
-bool Native::SystemApi::Socket::GetOSSupportsIPv4() {
+bool Native::SocketApi::GetOSSupportsIPv4() {
   return true;
 }
 
-bool Native::SystemApi::Socket::GetOSSupportsIPv6() {
+bool Native::SocketApi::GetOSSupportsIPv6() {
   return true;
 }
 
-int32 Native::SystemApi::Socket::GetSocketOption(intptr handle, System::Net::Sockets::SocketOptionLevel socketLevel, System::Net::Sockets::SocketOptionName socketOptionName, void* option, int32* optionLength) {
+int32 Native::SocketApi::GetSocketOption(intptr handle, System::Net::Sockets::SocketOptionLevel socketLevel, System::Net::Sockets::SocketOptionName socketOptionName, void* option, int32* optionLength) {
   return ::getsockopt(*(int32*)&handle, SocketOptionLevelToNative(socketLevel), SocketOptionNameToNative(socketOptionName), (char*)option, (int*)optionLength);
 }
 
-int32 Native::SystemApi::Socket::IoCtl(intptr handle, int32 ioControl, byte* optionInValue, int32 optionInValueSize, byte* optionOutValue, int32 optionOutValueSize, int32* optionOutValueSizeReturned) {
+int32 Native::SocketApi::IoCtl(intptr handle, int32 ioControl, byte* optionInValue, int32 optionInValueSize, byte* optionOutValue, int32 optionOutValueSize, int32* optionOutValueSizeReturned) {
   return WSAIoctl(*(int32*)&handle, ioControl, optionInValue, optionInValueSize, optionOutValue, optionOutValueSize, (LPDWORD)optionOutValueSizeReturned, null, null);
 }
 
-int32 Native::SystemApi::Socket::Listen(intptr handle, int32 backLog) {
+int32 Native::SocketApi::Listen(intptr handle, int32 backLog) {
   return ::listen(*(int32*)&handle, backLog);
 }
 
-int32 Native::SystemApi::Socket::Open(System::Net::Sockets::AddressFamily addrFamily, System::Net::Sockets::SocketType socketType, System::Net::Sockets::ProtocolType protocolType, intptr* handle) {
+int32 Native::SocketApi::Open(System::Net::Sockets::AddressFamily addrFamily, System::Net::Sockets::SocketType socketType, System::Net::Sockets::ProtocolType protocolType, intptr* handle) {
   if (handle == null)
     return -1;
 
@@ -119,7 +119,7 @@ int32 Native::SystemApi::Socket::Open(System::Net::Sockets::AddressFamily addrFa
   return -1;
 }
 
-int32 Native::SystemApi::Socket::Poll(intptr handle, int32 microSec, int32 mode) {
+int32 Native::SocketApi::Poll(intptr handle, int32 microSec, int32 mode) {
   /* The call to WSAPoll is removed to ensure compatibility with Windows XP.
    The Poll action can be executed by the "select(...)" function.*/
 
@@ -166,7 +166,7 @@ int32 Native::SystemApi::Socket::Poll(intptr handle, int32 microSec, int32 mode)
 
 #pragma warning(push)
 #pragma warning(disable:4127)
-int32 Native::SystemApi::Socket::Select(intptr* checkRead, int32 nbCheckRead, intptr* checkWrite, int32 nbCheckWrite, intptr* checkError, int32 nbCheckError, int32 microseconds) {
+int32 Native::SocketApi::Select(intptr* checkRead, int32 nbCheckRead, intptr* checkWrite, int32 nbCheckWrite, intptr* checkError, int32 nbCheckError, int32 microseconds) {
   SOCKET nfds = 0;
 
   fd_set readfds;
@@ -239,32 +239,32 @@ int32 Native::SystemApi::Socket::Select(intptr* checkRead, int32 nbCheckRead, in
 }
 #pragma warning(pop)
 
-int32 Native::SystemApi::Socket::Receive(intptr handle, byte* buffer, int32 bufferLength, int32 flags) {
+int32 Native::SocketApi::Receive(intptr handle, byte* buffer, int32 bufferLength, int32 flags) {
   return ::recv(*(int32*)&handle, (char*)buffer, bufferLength, flags);
 }
 
-int32 Native::SystemApi::Socket::ReceiveFrom(intptr handle, byte* buffer, int32 bufferLength, int32 flags, byte *socketAddress, int32 addressLength) {
+int32 Native::SocketApi::ReceiveFrom(intptr handle, byte* buffer, int32 bufferLength, int32 flags, byte *socketAddress, int32 addressLength) {
   return ::recvfrom(*(int32*)&handle, (char*)buffer, bufferLength, flags, (sockaddr*)socketAddress, &addressLength);
 }
 
-int32 Native::SystemApi::Socket::Send(intptr handle, byte* buffer, int32 bufferLength, int32 flags) {
+int32 Native::SocketApi::Send(intptr handle, byte* buffer, int32 bufferLength, int32 flags) {
   return ::send(*(int32*)&handle, (char*)buffer, bufferLength, flags);
 }
 
-int32 Native::SystemApi::Socket::SendTo(intptr handle, byte* buffer, int32 bufferLength, int32 flags, byte *socketAddress, int32 addressLength) {
+int32 Native::SocketApi::SendTo(intptr handle, byte* buffer, int32 bufferLength, int32 flags, byte *socketAddress, int32 addressLength) {
   return ::sendto(*(int32*)&handle, (char*)buffer, bufferLength, flags, (sockaddr*)socketAddress, addressLength);
 }
 
-int32 Native::SystemApi::Socket::SetBlocking(intptr handle, bool blocking) {
+int32 Native::SocketApi::SetBlocking(intptr handle, bool blocking) {
   uint32 mode = blocking ? 0 : 1;
   return ::ioctlsocket((SOCKET)handle, FIONBIO, (u_long*)&mode);
 }
 
-int32 Native::SystemApi::Socket::SetSocketOption(intptr handle, System::Net::Sockets::SocketOptionLevel socketLevel, System::Net::Sockets::SocketOptionName socketOptionName, void* option, int32 optionLength) {
+int32 Native::SocketApi::SetSocketOption(intptr handle, System::Net::Sockets::SocketOptionLevel socketLevel, System::Net::Sockets::SocketOptionName socketOptionName, void* option, int32 optionLength) {
   return ::setsockopt(*(int32*)&handle, SocketOptionLevelToNative(socketLevel), SocketOptionNameToNative(socketOptionName), (const char*)option, (int)optionLength);
 }
 
-int32 Native::SystemApi::Socket::Shutdown(intptr handle, int32 how) {
+int32 Native::SocketApi::Shutdown(intptr handle, int32 how) {
   return ::shutdown((SOCKET)handle, how);
 }
 

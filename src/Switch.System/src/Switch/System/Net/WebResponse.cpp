@@ -6,7 +6,7 @@
 #include <Switch/System/TimeoutException.hpp>
 #include <Switch/System/IO/IOException.hpp>
 #include "../../../../include/Switch/System/Net/WebRequest.hpp"
-#include "Internals/curl.hpp"
+#include "../../../Native/Api.hpp"
 
 using namespace System;
 using namespace System::Net;
@@ -14,12 +14,12 @@ using namespace System::IO;
 using namespace System::Threading;
 
 WebResponse::WebResponse() {
-  if (!Curl::GetOSSupportsWebOperations())
+  if (!Native::CurlApi::GetOSSupportsWebOperations())
     throw NotSupportedException(_caller);
 }
 
 void WebResponse::SetWebRequest(WebRequest& webRequest) {
-  if (!Curl::GetOSSupportsWebOperations())
+  if (!Native::CurlApi::GetOSSupportsWebOperations())
     throw NotSupportedException(_caller);
 
   this->webRequest = &webRequest;
@@ -54,11 +54,11 @@ void WebResponse::EndTransfert() {
 }
 
 int64 WebResponse::GetResponseCode() const {
-  if (!Curl::GetOSSupportsWebOperations())
+  if (!Native::CurlApi::GetOSSupportsWebOperations())
     throw NotSupportedException(_caller);
 
   int64 code = 0;
-  Curl::GetResponseCode(this->webRequest->GetRequestHandle(), code);
+  Native::CurlApi::GetResponseCode(this->webRequest->GetRequestHandle(), code);
   return int64(code);
 }
 

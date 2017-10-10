@@ -11,7 +11,7 @@
 #include "../../../../include/Switch/System/Net/FtpWebRequest.hpp"
 #include "../../../../include/Switch/System/Net/HttpWebRequest.hpp"
 #include "../../../../include/Switch/System/Net/WebRequestMethods.hpp"
-#include "Internals/curl.hpp"
+#include "../../../Native/Api.hpp"
 
 using namespace System;
 using namespace System::Net;
@@ -29,31 +29,31 @@ WebRequest::WebRequest(const Uri& uri) : uri(uri) {
 }
 
 void WebRequest::InitWebRequest() {
-  if (Curl::GetOSSupportsWebOperations() == false || (pendingRequest == 0 && Curl::GlobalInit() != 0))
+  if (Native::CurlApi::GetOSSupportsWebOperations() == false || (pendingRequest == 0 && Native::CurlApi::GlobalInit() != 0))
     throw NotSupportedException(_caller);
   
-  Curl::Init(this->requestHandle);
+  Native::CurlApi::Init(this->requestHandle);
   
   if (this->requestHandle == IntPtr::Zero)
     throw NotSupportedException(_caller);
   
   pendingRequest++;
-  Curl::SetUrl(this->requestHandle, uri.ToString());
-  Curl::SetVerbose(this->requestHandle, 0L);
+  Native::CurlApi::SetUrl(this->requestHandle, uri.ToString());
+  Native::CurlApi::SetVerbose(this->requestHandle, 0L);
 }
 
 WebRequest::~WebRequest() {
   if (this->requestHandle != IntPtr::Zero) {
-    Curl::Cleanup(this->requestHandle);
+    Native::CurlApi::Cleanup(this->requestHandle);
     pendingRequest--;
     
     if (pendingRequest == 0)
-      Curl::GlobalCleanup();
+      Native::CurlApi::GlobalCleanup();
   }
 }
 
 refptr<WebRequest> WebRequest::Create(const Uri& requestUriString) {
-  if (Curl::GetOSSupportsWebOperations() == false)
+  if (Native::CurlApi::GetOSSupportsWebOperations() == false)
     throw NotSupportedException(_caller);
   
   if (requestUriString.Scheme == Uri::UriSchemeFtp)
@@ -81,29 +81,29 @@ bool WebRequest::IsResponseStreamNeeded() const {
 }
 
 void WebRequest::SetCredential(const NetworkCredential& credential) {
-  if (Curl::GetOSSupportsWebOperations() == false)
+  if (Native::CurlApi::GetOSSupportsWebOperations() == false)
     throw NotSupportedException(_caller);
   
   if (this->requestHandle == IntPtr::Zero)
     throw NotSupportedException(_caller);
   
-  Curl::SetUserName(this->requestHandle, credential.UserName);
-  Curl::SetPassword(this->requestHandle, credential.Password);
+  Native::CurlApi::SetUserName(this->requestHandle, credential.UserName);
+  Native::CurlApi::SetPassword(this->requestHandle, credential.Password);
   this->credential = credential;
 }
 
 void WebRequest::ProccessRequestThread() {
-  if (Curl::GetOSSupportsWebOperations() == false)
+  if (Native::CurlApi::GetOSSupportsWebOperations() == false)
     throw NotSupportedException(_caller);
   
   try {
-    this->internalError = Curl::Perform(this->GetRequestHandle());
+    this->internalError = Native::CurlApi::Perform(this->GetRequestHandle());
     if (this->internalError == 0) {
       double contentLength;
-      if (Curl::GetContentDownloadLength(this->GetRequestHandle(), contentLength) == 0)
+      if (Native::CurlApi::GetContentDownloadLength(this->GetRequestHandle(), contentLength) == 0)
         this->GetInternalResponse().contentLength = Convert::ToInt64(Double(contentLength));
       
-      this->internalError = Curl::GetContentType(this->GetRequestHandle(), this->GetInternalResponse().contentType);
+      this->internalError = Native::CurlApi::GetContentType(this->GetRequestHandle(), this->GetInternalResponse().contentType);
     }
     this->Finished(this->internalError);
   } catch (const Exception&) {
@@ -113,7 +113,7 @@ void WebRequest::ProccessRequestThread() {
 }
 
 void WebRequest::Finished(int32 error) {
-  if (!Curl::GetOSSupportsWebOperations())
+  if (!Native::CurlApi::GetOSSupportsWebOperations())
     throw NotSupportedException(_caller);
   
   //Unlock write thread if finished before sending
@@ -126,33 +126,33 @@ void WebRequest::Finished(int32 error) {
 }
 
 void WebRequest::ProccessRequest() {
-  if (!Curl::GetOSSupportsWebOperations())
+  if (!Native::CurlApi::GetOSSupportsWebOperations())
     throw NotSupportedException(_caller);
   
   //Thread already opened by the other stream (response or request)
   if (this->requestThread.IsAlive())
     return;
   
-  Curl::SetTimeout(this->requestHandle, Timeout());
+  Native::CurlApi::SetTimeout(this->requestHandle, Timeout());
   
   if (IsResponseStreamNeeded()) {
-    Curl::SetWriteFunction(this->requestHandle, WebResponse::WriteStream);
-    Curl::SetWriteData(this->requestHandle, &GetInternalResponse().responseStream);
+    Native::CurlApi::SetWriteFunction(this->requestHandle, WebResponse::WriteStream);
+    Native::CurlApi::SetWriteData(this->requestHandle, &GetInternalResponse().responseStream);
   } else
-    Curl::SetWriteFunction(this->requestHandle, WebResponse::WriteNullStream);
+    Native::CurlApi::SetWriteFunction(this->requestHandle, WebResponse::WriteNullStream);
   
   if (IsRequestStreamNeeded()) {
-    Curl::SetReadFunction(this->requestHandle, WebRequest::ReadStream);
-    Curl::SetReadData(this->requestHandle, &this->requestStream);
+    Native::CurlApi::SetReadFunction(this->requestHandle, WebRequest::ReadStream);
+    Native::CurlApi::SetReadData(this->requestHandle, &this->requestStream);
     
     if (GetMethod()==WebRequestMethods::Http::Post) {
-      Curl::SetUpload(this->requestHandle, 0L);
+      Native::CurlApi::SetUpload(this->requestHandle, 0L);
       if (this->contentLength > 0)
-        Curl::SetPostFieldSize(this->requestHandle, this->contentLength);
+        Native::CurlApi::SetPostFieldSize(this->requestHandle, this->contentLength);
     } else {
-      Curl::SetUpload(this->requestHandle, 1L);
+      Native::CurlApi::SetUpload(this->requestHandle, 1L);
       if (this->contentLength > 0)
-        Curl::SetInFileSize(this->requestHandle, this->contentLength);
+        Native::CurlApi::SetInFileSize(this->requestHandle, this->contentLength);
     }
   }
   

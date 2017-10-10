@@ -9,7 +9,7 @@
 #include <netinet/in.h>
 #include <sys/socket.h>
 #endif
-#include "SystemApi.hpp"
+#include "Api.hpp"
 
 namespace {
   std::mutex mutex;
@@ -20,15 +20,15 @@ namespace {
 #endif
 }
 
-void Native::SystemApi::Dns::Destroy(intptr host) {
+void Native::DnsApi::Destroy(intptr host) {
   delete (Hostent*)host;
 }
 
-void Native::SystemApi::Dns::EndHostent() {
+void Native::DnsApi::EndHostent() {
   endhostent();
 }
 
-intptr Native::SystemApi::Dns::GetHostByAddress(const string& hostAddress, System::Net::Sockets::AddressFamily hostAddressType) {
+intptr Native::DnsApi::GetHostByAddress(const string& hostAddress, System::Net::Sockets::AddressFamily hostAddressType) {
   std::lock_guard<std::mutex> lock(mutex);
   int64 internetAddress;
   inet_pton((int)hostAddressType, hostAddress.Data(), &internetAddress);
@@ -38,7 +38,7 @@ intptr Native::SystemApi::Dns::GetHostByAddress(const string& hostAddress, Syste
   return (intptr)new Hostent(*host);
 }
 
-intptr Native::SystemApi::Dns::GetHostByName(const string& hostName) {
+intptr Native::DnsApi::GetHostByName(const string& hostName) {
   std::lock_guard<std::mutex> lock(mutex);
   Hostent* host = gethostbyname(hostName.Data());
   if (host == null)
@@ -46,7 +46,7 @@ intptr Native::SystemApi::Dns::GetHostByName(const string& hostName) {
   return (intptr)new Hostent(*host);
 }
 
-System::Array<string> Native::SystemApi::Dns::GetAliases(intptr host) {
+System::Array<string> Native::DnsApi::GetAliases(intptr host) {
   int32 index = 0;
   System::Collections::Generic::List<string> aliases;
   while (((Hostent*)host)->h_aliases[index] != null)
@@ -54,7 +54,7 @@ System::Array<string> Native::SystemApi::Dns::GetAliases(intptr host) {
   return aliases.ToArray();
 }
 
-System::Array<System::Net::IPAddress> Native::SystemApi::Dns::GetAddresses(intptr host) {
+System::Array<System::Net::IPAddress> Native::DnsApi::GetAddresses(intptr host) {
   int32 index = 0;
   System::Collections::Generic::List<System::Net::IPAddress> addresses;
   while (((Hostent*)host)->h_addr_list[index] != null)
@@ -62,17 +62,17 @@ System::Array<System::Net::IPAddress> Native::SystemApi::Dns::GetAddresses(intpt
   return addresses.ToArray();
 }
 
-string Native::SystemApi::Dns::GetHostName(intptr host) {
+string Native::DnsApi::GetHostName(intptr host) {
   return ((Hostent*)host)->h_name;
 }
 
-int Native::SystemApi::Dns::GetHostName(string& hostName) {
+int Native::DnsApi::GetHostName(string& hostName) {
   char host[1024];
   int result =  gethostname(host, 1024);
   hostName = host;
   return result;
 }
 
-void Native::SystemApi::Dns::SetHostent(bool stayOpen) {
+void Native::DnsApi::SetHostent(bool stayOpen) {
   sethostent(stayOpen);
 }
