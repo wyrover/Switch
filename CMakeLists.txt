@@ -124,7 +124,6 @@ if (BUILD_TESTS)
     message(STATUS "  [ ] Switch.TUnit.UnitTests")
   endif()
 endif()
-
 add_subdirectory("src/Switch")
 
 message(STATUS "Compiler [${CMAKE_CXX_COMPILER_ID}]")
