@@ -1,6 +1,7 @@
+#include "../../../../include/Switch/System/Net/FtpWebResponse.hpp"
+
 #include <Switch/System/Convert.hpp>
 #include <Switch/System/Collections/Generic/Dictionary.hpp>
-#include "../../../../include/Switch/System/Net/FtpWebResponse.hpp"
 #include "../../../../include/Switch/System/Net/WebRequest.hpp"
 #include "../../../../include/Switch/System/Net/WebRequestMethods.hpp"
 

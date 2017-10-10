@@ -1,3 +1,5 @@
+#include "../../../../include/Switch/System/Net/WebRequest.hpp"
+
 #include <Switch/System/Buffer.hpp>
 #include <Switch/System/Convert.hpp>
 #include <Switch/System/Math.hpp>
@@ -6,7 +8,6 @@
 #include <Switch/System/IO/IOException.hpp>
 #include <Switch/System/Threading/TimeOut.hpp>
 #include <Switch/System/Net/WebException.hpp>
-#include "../../../../include/Switch/System/Net/WebRequest.hpp"
 #include "../../../../include/Switch/System/Net/FtpWebRequest.hpp"
 #include "../../../../include/Switch/System/Net/HttpWebRequest.hpp"
 #include "../../../../include/Switch/System/Net/WebRequestMethods.hpp"

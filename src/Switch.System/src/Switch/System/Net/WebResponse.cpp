@@ -1,9 +1,10 @@
+#include "../../../../include/Switch/System/Net/WebResponse.hpp"
+
 #include <Switch/Types.hpp>
 #include <Switch/System/Buffer.hpp>
 #include <Switch/System/Math.hpp>
 #include <Switch/System/TimeoutException.hpp>
 #include <Switch/System/IO/IOException.hpp>
-#include "../../../../include/Switch/System/Net/WebResponse.hpp"
 #include "../../../../include/Switch/System/Net/WebRequest.hpp"
 #include "Internals/curl.hpp"
 

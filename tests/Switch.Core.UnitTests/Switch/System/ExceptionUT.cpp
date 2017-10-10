@@ -47,14 +47,8 @@
 #include <Switch/System/IO/IOException.hpp>
 #include <Switch/System/IO/PathTooLongException.hpp>
 #include <Switch/System/IO/PipeException.hpp>
-#include <Switch/System/Net/CookieException.hpp>
-#include <Switch/System/Net/ProtocolViolationException.hpp>
-#include <Switch/System/Net/WebException.hpp>
-#include <Switch/System/Net/Sockets/SocketException.hpp>
 #include <Switch/System/Threading/AbandonedMutexException.hpp>
-#include <Switch/System/Threading/BarrierPostPhaseException.hpp>
 #include <Switch/System/Threading/LockRecursionException.hpp>
-#include <Switch/System/Threading/SemaphoreFullException.hpp>
 #include <Switch/System/Threading/SynchronizationLockException.hpp>
 #include <Switch/System/Threading/ThreadAbortException.hpp>
 #include <Switch/System/Threading/ThreadInterruptedException.hpp>
@@ -68,8 +62,6 @@
 using namespace System;
 using namespace System::Collections::Generic;
 using namespace System::IO;
-using namespace System::Net;
-using namespace System::Net::Sockets;
 using namespace System::Runtime::CompilerServices;
 using namespace System::Runtime::Serialization;
 using namespace System::Threading;
@@ -243,18 +235,10 @@ namespace {
     try { throw PathTooLongException(_caller); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "The specified path, file name, or both are too long. The fully ualified file name must be less than 260 caracters, and the directory name must be less than 248 caracters."); }
     try { throw PipeException(_caller); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "I/O error occured."); }
   
-    try { throw CookieException(_caller); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "One of identified items is an invalid format."); }
-    try { throw ProtocolViolationException(_caller); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "Operation is not valid due to the current state of the object."); }
-    try { throw WebException(_caller); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "Operation is not valid due to the current state of the object."); }
-  
-    try { throw SocketException(_caller); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "The Socket operation failed."); }
-  
     try { throw SerializationException(_caller); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "Serialization error."); }
   
     try { throw AbandonedMutexException(_caller); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "The wait completed due to an abandoned mutex."); }
-    try { throw BarrierPostPhaseException(_caller); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "The postPhaseAction failed with an exception."); }
     try { throw LockRecursionException(_caller); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "Exception of type 'Switch::System::Threading::LockRecursionException' was thrown."); }
-    try { throw SemaphoreFullException(_caller); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "Adding the specified countto the semaphore wold cause it to exceed its maximum count."); }
     try { throw SynchronizationLockException(_caller); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "Object synchronization method was called from an unsynchronized block of code."); }
     try { throw ThreadAbortException(_caller); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "Thread was aborted."); }
     try { throw ThreadInterruptedException(_caller); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "Thread was interrupted from a waiting state."); }

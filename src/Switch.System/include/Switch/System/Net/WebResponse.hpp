@@ -18,8 +18,13 @@ namespace Switch {
     /// @brief The System::Net namespace provides a simple programming interface for many of the protocols used on networks today.
     /// The WebRequest and WebResponse classes form the basis of what are called pluggable protocols, an implementation of network services that enables you to develop applications that use Internet resources without worrying about the specific details of the individual protocols.
     namespace Net {
+      /// @cond
       class WebRequest;
+      /// @endcond
 
+      /// @brief Provides a response from a Uniform Resource Identifier (URI). This is an abstract class.
+      /// @par Library
+      /// Switch.System
       class _export WebResponse : public Object {
       public:
         class WebResponseStream: public System::IO::Stream {

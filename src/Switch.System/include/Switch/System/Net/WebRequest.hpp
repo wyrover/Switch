@@ -11,7 +11,7 @@
 #include <Switch/System/Threading/ManualResetEvent.hpp>
 #include <Switch/System/Threading/Thread.hpp>
 #include <Switch/System/Threading/TimeOut.hpp>
-#include <Switch/System/Net/NetworkCredential.hpp>
+#include "NetworkCredential.hpp"
 #include "../Uri.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.

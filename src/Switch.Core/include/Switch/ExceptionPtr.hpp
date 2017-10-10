@@ -61,18 +61,12 @@
 #include "System/IO/IOException.hpp"
 #include "System/IO/PathTooLongException.hpp"
 #include "System/IO/PipeException.hpp"
-#include "System/Net/CookieException.hpp"
-#include "System/Net/ProtocolViolationException.hpp"
-#include "System/Net/WebException.hpp"
-#include "System/Net/Sockets/SocketException.hpp"
 #include "System/Security/HostProtectionException.hpp"
 #include "System/Security/SecurityException.hpp"
 #include "System/Security/VerificationException.hpp"
 #include "System/Security/XmlSyntaxException.hpp"
 #include "System/Threading/AbandonedMutexException.hpp"
-#include "System/Threading/BarrierPostPhaseException.hpp"
 #include "System/Threading/LockRecursionException.hpp"
-#include "System/Threading/SemaphoreFullException.hpp"
 #include "System/Threading/SynchronizationLockException.hpp"
 #include "System/Threading/ThreadAbortException.hpp"
 #include "System/Threading/ThreadInterruptedException.hpp"
@@ -160,15 +154,12 @@ namespace Switch {
       if (is<DataMisalignedException>(exception)) return ExceptionPtr::Create(as<DataMisalignedException>(exception));
       
       if (is<System::IO::FileFormatException>(exception)) return ExceptionPtr::Create(as<System::IO::FileFormatException>(exception));
-      if (is<System::Net::CookieException>(exception)) return ExceptionPtr::Create(as<System::Net::CookieException>(exception));
       if (is<FormatException>(exception)) return ExceptionPtr::Create(as<FormatException>(exception));
       
       if (is<IndexOutOfRangeException>(exception)) return ExceptionPtr::Create(as<IndexOutOfRangeException>(exception));
       if (is<InsufficientExecutionStackException>(exception)) return ExceptionPtr::Create(as<InsufficientExecutionStackException>(exception));
       if (is<InvalidCastException>(exception)) return ExceptionPtr::Create(as<InvalidCastException>(exception));
       
-      if (is<System::Net::ProtocolViolationException>(exception)) return ExceptionPtr::Create(as<System::Net::ProtocolViolationException>(exception));
-      if (is<System::Net::WebException>(exception)) return ExceptionPtr::Create(as<System::Net::WebException>(exception));
       if (is<ObjectClosedException>(exception)) return ExceptionPtr::Create(as<ObjectClosedException>(exception));
       if (is<ObjectDisposedException>(exception)) return ExceptionPtr::Create(as<ObjectDisposedException>(exception));
       if (is<InvalidOperationException>(exception)) return ExceptionPtr::Create(as<InvalidOperationException>(exception));
@@ -184,7 +175,6 @@ namespace Switch {
       if (is<MemberAccessException>(exception)) return ExceptionPtr::Create(as<MemberAccessException>(exception));
       
       if (is<MulticastNotSupportedException>(exception)) return ExceptionPtr::Create(as<MulticastNotSupportedException>(exception));
-      if (is<System::Net::Sockets::SocketException>(exception)) return ExceptionPtr::Create(as<System::Net::Sockets::SocketException>(exception));
       if (is<NotImplementedException>(exception)) return ExceptionPtr::Create(as<NotImplementedException>(exception));
       
       if (is<PlatformNotSupportedException>(exception)) return ExceptionPtr::Create(as<PlatformNotSupportedException>(exception));
@@ -205,7 +195,6 @@ namespace Switch {
       if (is<System::Security::XmlSyntaxException>(exception)) return ExceptionPtr::Create(as<System::Security::XmlSyntaxException>(exception));
       if (is<StackOverflowException>(exception)) return ExceptionPtr::Create(as<StackOverflowException>(exception));
       if (is<System::Threading::AbandonedMutexException>(exception)) return ExceptionPtr::Create(as<System::Threading::AbandonedMutexException>(exception));
-      if (is<System::Threading::SemaphoreFullException>(exception)) return ExceptionPtr::Create(as<System::Threading::SemaphoreFullException>(exception));
       if (is<System::Threading::SynchronizationLockException>(exception)) return ExceptionPtr::Create(as<System::Threading::SynchronizationLockException>(exception));
       if (is<System::Threading::ThreadAbortException>(exception)) return ExceptionPtr::Create(as<System::Threading::ThreadAbortException>(exception));
       if (is<System::Threading::ThreadInterruptedException>(exception)) return ExceptionPtr::Create(as<System::Threading::ThreadInterruptedException>(exception));
@@ -227,7 +216,6 @@ namespace Switch {
       if (is<ApplicationException>(exception)) return ExceptionPtr::Create(as<ApplicationException>(exception));
       if (is<InvalidTimeZoneException>(exception)) return ExceptionPtr::Create(as<InvalidTimeZoneException>(exception));
       if (is<SystemException>(exception)) return ExceptionPtr::Create(as<SystemException>(exception));
-      if (is<System::Threading::BarrierPostPhaseException>(exception)) return ExceptionPtr::Create(as<System::Threading::BarrierPostPhaseException>(exception));
       if (is<System::Threading::LockRecursionException>(exception)) return ExceptionPtr::Create(as<System::Threading::LockRecursionException>(exception));
       
       return ExceptionPtr::Create(as<Exception>(exception));

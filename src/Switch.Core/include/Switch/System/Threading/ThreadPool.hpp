@@ -7,7 +7,6 @@
 #include "../../Static.hpp"
 #include "../TimeSpan.hpp"
 #include "../Collections/Generic/Queue.hpp"
-#include "Semaphore.hpp"
 #include "Thread.hpp"
 #include "RegisteredWaitHandle.hpp"
 #include "WaitHandle.hpp"
@@ -170,8 +169,6 @@ namespace Switch {
         static void CreateAsynchronousIOThreads();
         
         friend class RegisteredWaitHandle;
-        static Semaphore semaphore;
-        static Semaphore asynchronousIOSemaphore;
         class ThreadArray : public Array<Thread> {
         public:
           ThreadArray() {}

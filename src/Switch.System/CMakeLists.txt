@@ -2,6 +2,50 @@ project(Switch.System)
 
 set(INCLUDE_FILES
   include/Switch/System/Collections/Concurrent/ConcurrentBag.hpp
+  include/Switch/System/IO/Ports/Handshake.hpp
+  include/Switch/System/IO/Ports/Parity.hpp
+  include/Switch/System/IO/Ports/SerialData.hpp
+  include/Switch/System/IO/Ports/SerialError.hpp
+  include/Switch/System/IO/Ports/SerialPinChange.hpp
+  include/Switch/System/IO/Ports/SerialPort.hpp
+  include/Switch/System/IO/Ports/StopBits.hpp
+  include/Switch/System/IO/Ports/SerialDataReceivedEventArgs.hpp
+  include/Switch/System/IO/Ports/SerialErrorReceivedEventArgs.hpp
+  include/Switch/System/IO/Ports/SerialPinChangedEventArgs.hpp
+  include/Switch/System/IO/Ports/SerialDataReceivedEventHandler.hpp
+  include/Switch/System/IO/Ports/SerialErrorReceivedEventHandler.hpp
+  include/Switch/System/IO/Ports/SerialPinChangedEventHandler.hpp
+  include/Switch/System/Net/Sockets/AddressFamily.hpp
+  include/Switch/System/Net/Sockets/IOControlCode.hpp
+  include/Switch/System/Net/Sockets/IPv6MulticastOption.hpp
+  include/Switch/System/Net/Sockets/LingerOption.hpp
+  include/Switch/System/Net/Sockets/MulticastOption.hpp
+  include/Switch/System/Net/Sockets/NetworkStream.hpp
+  include/Switch/System/Net/Sockets/ProtocolFamily.hpp
+  include/Switch/System/Net/Sockets/ProtocolType.hpp
+  include/Switch/System/Net/Sockets/SelectMode.hpp
+  include/Switch/System/Net/Sockets/Socket.hpp
+  include/Switch/System/Net/Sockets/SocketError.hpp
+  include/Switch/System/Net/Sockets/SocketFlags.hpp
+  include/Switch/System/Net/Sockets/SocketInformation.hpp
+  include/Switch/System/Net/Sockets/SocketInformationOptions.hpp
+  include/Switch/System/Net/Sockets/SocketOptionLevel.hpp
+  include/Switch/System/Net/Sockets/SocketOptionName.hpp
+  include/Switch/System/Net/Sockets/SocketShutdown.hpp
+  include/Switch/System/Net/Sockets/SocketException.hpp
+  include/Switch/System/Net/Sockets/SocketType.hpp
+  include/Switch/System/Net/Sockets/UdpClient.hpp
+  include/Switch/System/Net/Sockets/TcpClient.hpp
+  include/Switch/System/Net/Sockets/TcpListener.hpp
+  include/Switch/System/Net/WebSockets/ClientWebSocket.hpp
+  include/Switch/System/Net/WebSockets/WebSocket.hpp
+  include/Switch/System/Net/WebSockets/WebSocketCloseStatus.hpp
+  include/Switch/System/Net/WebSockets/WebSocketMessageType.hpp
+  include/Switch/System/Net/WebSockets/WebSocketState.hpp
+  include/Switch/System/Net/CookieException.hpp
+  include/Switch/System/Net/Dns.hpp
+  include/Switch/System/Net/DnsEndPoint.hpp
+  include/Switch/System/Net/EndPoint.hpp
   include/Switch/System/Net/FtpStatusCode.hpp
   include/Switch/System/Net/FtpWebRequest.hpp
   include/Switch/System/Net/FtpWebResponse.hpp
@@ -9,9 +53,20 @@ set(INCLUDE_FILES
   include/Switch/System/Net/HttpStatusCode.hpp
   include/Switch/System/Net/HttpWebRequest.hpp
   include/Switch/System/Net/HttpWebResponse.hpp
+  include/Switch/System/Net/IPAddress.hpp
+  include/Switch/System/Net/IPEndPoint.hpp
+  include/Switch/System/Net/IPHostEntry.hpp
+  include/Switch/System/Net/NetworkCredential.hpp
+  include/Switch/System/Net/ProtocolViolationException.hpp
+  include/Switch/System/Net/SocketAddress.hpp
+  include/Switch/System/Net/WebException.hpp
   include/Switch/System/Net/WebRequest.hpp
   include/Switch/System/Net/WebRequestMethods.hpp
   include/Switch/System/Net/WebResponse.hpp
+  include/Switch/System/Threading/Barrier.hpp
+  include/Switch/System/Threading/BarrierPostPhaseException.hpp
+  include/Switch/System/Threading/Semaphore.hpp
+  include/Switch/System/Threading/SemaphoreFullException.hpp
   include/Switch/System/Uri.hpp
   include/Switch/System/UriComponents.hpp
   include/Switch/System/UriFormat.hpp
@@ -24,15 +79,35 @@ set(INCLUDE_FILES
 )
 
 set(SOURCE_FILES
+  src/Native/SystemApi.hpp
+  src/Native/Dns.cpp
+  src/Native/SocketGcc.cpp
+  src/Native/SocketW32.cpp
+  src/Switch/System/IO/Ports/SerialPort.cpp
   src/Switch/System/Net/Internals/curl.cpp
   src/Switch/System/Net/Internals/curl.hpp
-  src/Switch/System/Net/HttpWebRequest.cpp
-  src/Switch/System/Net/HttpWebResponse.cpp
+  src/Switch/System/Net/Sockets/Socket.cpp
+  src/Switch/System/Net/Sockets/UdpClient.cpp
+  src/Switch/System/Net/Sockets/NetworkStream.cpp
+  src/Switch/System/Net/Sockets/TcpClient.cpp
+  src/Switch/System/Net/Sockets/TcpListener.cpp
+  src/Switch/System/Net/WebSockets/ClientWebSocket.cpp
+  src/Switch/System/Net/WebSockets/WebSocket.cpp
+  src/Switch/System/Net/Dns.cpp
+  src/Switch/System/Net/DnsEndPoint.cpp
+  src/Switch/System/Net/EndPoint.cpp
   src/Switch/System/Net/FtpWebRequest.cpp
   src/Switch/System/Net/FtpWebResponse.cpp
+  src/Switch/System/Net/HttpWebRequest.cpp
+  src/Switch/System/Net/HttpWebResponse.cpp
+  src/Switch/System/Net/IPAddress.cpp
+  src/Switch/System/Net/IPEndPoint.cpp
+  src/Switch/System/Net/IPHostEntry.cpp
+  src/Switch/System/Net/SocketAddress.cpp
   src/Switch/System/Net/WebRequest.cpp
   src/Switch/System/Net/WebRequestMethods.cpp
   src/Switch/System/Net/WebResponse.cpp
+  src/Switch/System/Threading/Semaphore.cpp
   src/Switch/System/Uri.cpp
 )
 

@@ -1,4 +1,5 @@
 #include "../../../../include/Switch/System/Net/HttpWebRequest.hpp"
+
 #include "../../../../include/Switch/System/Net/WebRequestMethods.hpp"
 #include "Internals/curl.hpp"
 

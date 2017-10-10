@@ -69,19 +69,6 @@ set(INCLUDE_FILES
   include/Switch/System/Diagnostics/TraceOptions.hpp
   include/Switch/System/Diagnostics/TraceSource.hpp
   include/Switch/System/Globalization/NumberStyles.hpp
-  include/Switch/System/IO/Ports/Handshake.hpp
-  include/Switch/System/IO/Ports/Parity.hpp
-  include/Switch/System/IO/Ports/SerialData.hpp
-  include/Switch/System/IO/Ports/SerialError.hpp
-  include/Switch/System/IO/Ports/SerialPinChange.hpp
-  include/Switch/System/IO/Ports/SerialPort.hpp
-  include/Switch/System/IO/Ports/StopBits.hpp
-  include/Switch/System/IO/Ports/SerialDataReceivedEventArgs.hpp
-  include/Switch/System/IO/Ports/SerialErrorReceivedEventArgs.hpp
-  include/Switch/System/IO/Ports/SerialPinChangedEventArgs.hpp
-  include/Switch/System/IO/Ports/SerialDataReceivedEventHandler.hpp
-  include/Switch/System/IO/Ports/SerialErrorReceivedEventHandler.hpp
-  include/Switch/System/IO/Ports/SerialPinChangedEventHandler.hpp
   include/Switch/System/IO/BinaryReader.hpp
   include/Switch/System/IO/BinaryWriter.hpp
   include/Switch/System/IO/Directory.hpp
@@ -124,44 +111,6 @@ set(INCLUDE_FILES
   include/Switch/System/IO/WatcherChangeTypes.hpp
   include/Switch/System/Linq/Enumerable.hpp
   include/Switch/System/Linq/Linq.hpp
-  include/Switch/System/Net/Sockets/AddressFamily.hpp
-  include/Switch/System/Net/Sockets/IOControlCode.hpp
-  include/Switch/System/Net/Sockets/IPv6MulticastOption.hpp
-  include/Switch/System/Net/Sockets/LingerOption.hpp
-  include/Switch/System/Net/Sockets/MulticastOption.hpp
-  include/Switch/System/Net/Sockets/NetworkStream.hpp
-  include/Switch/System/Net/Sockets/ProtocolFamily.hpp
-  include/Switch/System/Net/Sockets/ProtocolType.hpp
-  include/Switch/System/Net/Sockets/SelectMode.hpp
-  include/Switch/System/Net/Sockets/Socket.hpp
-  include/Switch/System/Net/Sockets/SocketError.hpp
-  include/Switch/System/Net/Sockets/SocketFlags.hpp
-  include/Switch/System/Net/Sockets/SocketInformation.hpp
-  include/Switch/System/Net/Sockets/SocketInformationOptions.hpp
-  include/Switch/System/Net/Sockets/SocketOptionLevel.hpp
-  include/Switch/System/Net/Sockets/SocketOptionName.hpp
-  include/Switch/System/Net/Sockets/SocketShutdown.hpp
-  include/Switch/System/Net/Sockets/SocketException.hpp
-  include/Switch/System/Net/Sockets/SocketType.hpp
-  include/Switch/System/Net/Sockets/UdpClient.hpp
-  include/Switch/System/Net/Sockets/TcpClient.hpp
-  include/Switch/System/Net/Sockets/TcpListener.hpp
-  include/Switch/System/Net/WebSockets/ClientWebSocket.hpp
-  include/Switch/System/Net/WebSockets/WebSocket.hpp
-  include/Switch/System/Net/WebSockets/WebSocketCloseStatus.hpp
-  include/Switch/System/Net/WebSockets/WebSocketMessageType.hpp
-  include/Switch/System/Net/WebSockets/WebSocketState.hpp
-  include/Switch/System/Net/CookieException.hpp
-  include/Switch/System/Net/Dns.hpp
-  include/Switch/System/Net/DnsEndPoint.hpp
-  include/Switch/System/Net/EndPoint.hpp
-  include/Switch/System/Net/IPAddress.hpp
-  include/Switch/System/Net/IPEndPoint.hpp
-  include/Switch/System/Net/IPHostEntry.hpp
-  include/Switch/System/Net/NetworkCredential.hpp
-  include/Switch/System/Net/ProtocolViolationException.hpp
-  include/Switch/System/Net/SocketAddress.hpp
-  include/Switch/System/Net/WebException.hpp
   include/Switch/System/Runtime/CompilerServices/Caller.hpp
   include/Switch/System/Runtime/Serialization/Formatter.hpp
   include/Switch/System/Runtime/Serialization/IFormatter.hpp
@@ -185,8 +134,6 @@ set(INCLUDE_FILES
   include/Switch/System/Text/UTF32Encoding.hpp
   include/Switch/System/Threading/AbandonedMutexException.hpp
   include/Switch/System/Threading/AutoResetEvent.hpp
-  include/Switch/System/Threading/Barrier.hpp
-  include/Switch/System/Threading/BarrierPostPhaseException.hpp
   include/Switch/System/Threading/EventResetMode.hpp
   include/Switch/System/Threading/EventWaitHandle.hpp
   include/Switch/System/Threading/Interlocked.hpp
@@ -196,8 +143,6 @@ set(INCLUDE_FILES
   include/Switch/System/Threading/Mutex.hpp
   include/Switch/System/Threading/ParameterizedThreadStart.hpp
   include/Switch/System/Threading/RegisteredWaitHandle.hpp
-  include/Switch/System/Threading/Semaphore.hpp
-  include/Switch/System/Threading/SemaphoreFullException.hpp
   include/Switch/System/Threading/SynchronizationLockException.hpp
   include/Switch/System/Threading/Thread.hpp
   include/Switch/System/Threading/ThreadLocal.hpp
@@ -396,7 +341,6 @@ set(SOURCE_FILES
   src/Native/DebuggerW32.cpp
   src/Native/DirectoryGcc.cpp
   src/Native/DirectoryW32.cpp
-  src/Native/Dns.cpp
   src/Native/DriveGcc.cpp
   src/Native/DriveW32.cpp
   src/Native/EnvironmentGcc.cpp
@@ -409,8 +353,6 @@ set(SOURCE_FILES
   src/Native/RegistryGcc.cpp
   src/Native/RegistryW32.cpp
   src/Native/Security.cpp
-  src/Native/SocketGcc.cpp
-  src/Native/SocketW32.cpp
   src/Native/ThreadGcc.cpp
   src/Native/ThreadW32.cpp
   src/Native/TypeGcc.cpp
@@ -437,7 +379,6 @@ set(SOURCE_FILES
   src/Switch/System/IO/FileSystemInfo.cpp
   src/Switch/System/IO/MemoryStream.cpp
   src/Switch/System/IO/Path.cpp
-  src/Switch/System/IO/Ports/SerialPort.cpp
   src/Switch/System/IO/Stream.cpp
   src/Switch/System/IO/StreamReader.cpp
   src/Switch/System/IO/StringReader.cpp
@@ -446,20 +387,6 @@ set(SOURCE_FILES
   src/Switch/System/IO/TextReader.cpp
   src/Switch/System/IO/TextWriter.cpp
   src/Switch/System/Linq/Linq.cpp
-  src/Switch/System/Net/Dns.cpp
-  src/Switch/System/Net/DnsEndPoint.cpp
-  src/Switch/System/Net/EndPoint.cpp
-  src/Switch/System/Net/IPAddress.cpp
-  src/Switch/System/Net/IPEndPoint.cpp
-  src/Switch/System/Net/IPHostEntry.cpp
-  src/Switch/System/Net/SocketAddress.cpp
-  src/Switch/System/Net/Sockets/Socket.cpp
-  src/Switch/System/Net/Sockets/UdpClient.cpp
-  src/Switch/System/Net/Sockets/NetworkStream.cpp
-  src/Switch/System/Net/Sockets/TcpClient.cpp
-  src/Switch/System/Net/Sockets/TcpListener.cpp
-  src/Switch/System/Net/WebSockets/ClientWebSocket.cpp
-  src/Switch/System/Net/WebSockets/WebSocket.cpp
   src/Switch/System/Security/SecureString.cpp
   src/Switch/System/Text/ANSIEncoding.cpp
   src/Switch/System/Text/ASCIIEncoding.cpp
@@ -472,7 +399,6 @@ set(SOURCE_FILES
   src/Switch/System/Threading/EventWaitHandle.cpp
   src/Switch/System/Threading/Interlocked.cpp
   src/Switch/System/Threading/Mutex.cpp
-  src/Switch/System/Threading/Semaphore.cpp
   src/Switch/System/Threading/Thread.cpp
   src/Switch/System/Threading/ThreadPool.cpp
   src/Switch/System/Threading/WaitHandle.cpp

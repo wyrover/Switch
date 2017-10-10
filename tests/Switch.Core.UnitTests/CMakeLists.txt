@@ -28,9 +28,6 @@ set(SOURCE_FILES
   Switch/System/IO/StreamReaderUT.cpp
   Switch/System/IO/StreamWriterUT.cpp
   Switch/System/Linq/EnumerableUT.cpp
-  Switch/System/Net/IPAddressUT.cpp
-  Switch/System/Net/IPEndPointUT.cpp
-  Switch/System/Net/Sockets/SocketTest.cpp
   Switch/System/Runtime/CompilerServices/CallerTest.cpp
   Switch/System/Runtime/Serialization/SerializationInfoUT.cpp
   Switch/System/Text/ASCIIEncodingUT.cpp
@@ -46,7 +43,6 @@ set(SOURCE_FILES
   Switch/System/Threading/InterlockedTest.cpp
   Switch/System/Threading/LockGuardTest.cpp
   Switch/System/Threading/MutexTest.cpp
-  Switch/System/Threading/SemaphoreTest.cpp
   Switch/System/Threading/ThreadTest.cpp
   Switch/System/Threading/TimerTest.cpp
   Switch/System/ArrayUT.cpp

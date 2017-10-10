@@ -4,9 +4,84 @@
 #include "../../../../include/Switch/System/Threading/Mutex.hpp"
 #include "../../../../include/Switch/System/Threading/ThreadInterruptedException.hpp"
 #include "../../../../include/Switch/System/Threading/TimeOut.hpp"
+#include "NamedHandleCollection.hpp"
 
 using namespace System;
 using namespace System::Threading;
+
+namespace {
+  class Semaphore: public WaitHandle {
+  public:
+    Semaphore() {}
+    Semaphore(int32 initialCount, int32 maximumCount) : count(ref_new<int32>(initialCount)), maxCount(ref_new<int32>(maximumCount)) {}
+    Semaphore(const Semaphore& semaphore) : guard(semaphore.guard), signal(semaphore.signal), count(semaphore.count), maxCount(semaphore.maxCount), name(semaphore.name) {}
+    ~Semaphore() {this->Close();}
+    Semaphore& operator =(const Semaphore& semaphore) {
+      this->guard = semaphore.guard;
+      this->signal = semaphore.signal;
+      this->count = semaphore.count;
+      this->maxCount = semaphore.maxCount;
+      this->name = semaphore.name;
+      return *this;
+    }
+    
+    void Close() override {
+      if (this->guard == null)
+        return;
+      if (this->name() != "")
+        this->name.Reset();
+      this->guard.Reset();
+      this->signal.Reset();
+      this->count.Reset();
+      this->maxCount.Reset();
+    }
+    
+    bool Equals(const Semaphore& value) const {return this->guard == value.guard && this->signal == value.signal && this->count == value.count &&  this->maxCount == value.maxCount && this->name == value.name;}
+    bool Equals(const Object& obj) const override {return is<Semaphore>(obj) && this->Equals((const Semaphore&)obj);}
+    
+    int32 Release() {return this->Release(1);}
+    int32 Release(int32 releaseCount) {
+      if (this->guard == null)
+        throw ObjectClosedException(_caller);
+      std::unique_lock<std::mutex> lock(*this->guard);
+      if (*this->count + releaseCount > *this->maxCount)
+        throw InvalidOperationException(_caller);
+      *this->count += releaseCount;
+      this->signal->notify_all();
+      return *this->count - releaseCount;
+    }
+    
+  private:
+    bool Signal() override {
+      this->Release();
+      return true;
+    }
+    
+    bool Wait(int32 millisecondsTimeOut) override {
+      if (this->guard == null)
+        throw ObjectClosedException(_caller);
+      if (millisecondsTimeOut < -1)
+        throw AbandonedMutexException(_caller);
+      
+      std::unique_lock<std::mutex> lock(*this->guard);
+      while(*this->count == 0) {
+        if (millisecondsTimeOut == -1)
+          this->signal->wait(lock);
+        else if (this->signal->wait_for(lock, std::chrono::milliseconds(millisecondsTimeOut)) == std::cv_status::timeout)
+          return false;
+      }
+      
+      *this->count -= 1;
+      return true;
+    }
+    
+    refptr<std::mutex> guard = ref_new<std::mutex>();
+    refptr<std::condition_variable> signal = ref_new<std::condition_variable>();
+    refptr<int32> count = ref_new<int32>(0);
+    refptr<int32> maxCount = ref_new<int32>(Int32::MaxValue());
+    refptr<string> name = ref_new<string>();
+  };
+}
 
 int32 ThreadPool::maxThreads = 800;
 int32 ThreadPool::maxAsynchronousIOThreads = 800;
@@ -16,8 +91,8 @@ bool ThreadPool::closed = false;
 ThreadPool::ThreadPoolItemCollection ThreadPool::threadPoolItems;
 ThreadPool::ThreadPoolAsynchronousIOItemCollection ThreadPool::threadPoolAsynchronousIOItems;
 
-Semaphore ThreadPool::semaphore = Semaphore(0, maxThreads);
-Semaphore ThreadPool::asynchronousIOSemaphore = Semaphore(0, maxAsynchronousIOThreads);
+Semaphore semaphore = Semaphore(0, Int32::MaxValue);
+Semaphore asynchronousIOSemaphore = Semaphore(0, Int32::MaxValue);
 ThreadPool::ThreadArray ThreadPool::threads;
 ThreadPool::AsynchronousThreadArray ThreadPool::asynchronousIOThreads;
 
@@ -103,14 +178,14 @@ RegisteredWaitHandle ThreadPool::RegisterWaitForSingleObject(WaitHandle& waitObj
 bool ThreadPool::SetMaxThreads(int32 workerThreads, int32 completionPortThreads) {
   if (workerThreads < Environment::ProcessorCount || completionPortThreads < Environment::ProcessorCount)
     return false;
-
+  
   maxThreads = workerThreads;
   maxAsynchronousIOThreads = completionPortThreads;
   
   _lock(threadPoolItems.SyncRoot)
-    semaphore = Semaphore(semaphore.Release(), maxThreads);
+  semaphore = Semaphore(semaphore.Release(), maxThreads);
   _lock(threadPoolAsynchronousIOItems.SyncRoot)
-    asynchronousIOSemaphore = Semaphore(asynchronousIOSemaphore.Release(), maxAsynchronousIOThreads);
+  asynchronousIOSemaphore = Semaphore(asynchronousIOSemaphore.Release(), maxAsynchronousIOThreads);
   
   return true;
 }
@@ -159,7 +234,7 @@ void ThreadPool::Run() {
     if (!closed) {
       refptr<ThreadPoolItem> item;
       _lock(threadPoolItems.SyncRoot)
-        item = threadPoolItems.Dequeue();
+      item = threadPoolItems.Dequeue();
       item->callback(*item->state);
     }
   }
@@ -199,3 +274,4 @@ bool RegisteredWaitHandle::Unregister(WaitHandle& waitObject) {
   item.unregistered = true;
   return waitObject.Signal();
 }
+

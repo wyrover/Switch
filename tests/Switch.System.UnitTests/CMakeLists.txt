@@ -1,6 +1,10 @@
 project(Switch.System.UnitTests)
 
 set(SOURCE_FILES
+  Switch/System/Net/IPAddressUT.cpp
+  Switch/System/Net/IPEndPointUT.cpp
+  Switch/System/Net/Sockets/SocketTest.cpp
+  Switch/System/Threading/SemaphoreTest.cpp
   Switch/System/UriTest.cpp
   CMakeLists.txt
 )
