@@ -6,7 +6,6 @@ set(INCLUDE_FILES
   include/Switch/TUnit/Constraints/ConstraintValue.hpp
   include/Switch/TUnit/Constraints/Empty.hpp
   include/Switch/TUnit/Constraints/EqualTo.hpp
-  include/Switch/TUnit.hpp
   include/Switch/TUnit/Assert.hpp
   include/Switch/TUnit/AssertionException.hpp
   include/Switch/TUnit/AssertionResult.hpp
@@ -14,7 +13,8 @@ set(INCLUDE_FILES
   include/Switch/TUnit/Is.hpp
   include/Switch/TUnit/TestFixture.hpp
   include/Switch/TUnit/UnitTest.hpp
-  include/Switch/TUnit.hpp
+  include/Switch/Switch.TUnit.Core.hpp
+  include/Switch/Switch.TUnit.Core
 )
 
 set(SOURCE_FILES

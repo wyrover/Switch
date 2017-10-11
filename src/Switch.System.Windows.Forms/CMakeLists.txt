@@ -106,7 +106,8 @@ set(INCLUDE_FILES
   include/Switch/System/Windows/Forms/UICues.hpp
   include/Switch/System/Windows/Forms/UICuesEventArgs.hpp
   include/Switch/System/Windows/Forms/UICuesEventHandler.hpp
-  include/Switch/System.Windows.Forms.hpp
+  include/Switch/Switch.System.Windows.Forms.hpp
+  include/Switch/Switch.System.Windows.Forms
 )
 
 set(SOURCE_FILES

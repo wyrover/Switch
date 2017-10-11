@@ -31,7 +31,8 @@ set(INCLUDE_FILES
   include/Switch/System/Drawing/Size.hpp
   include/Switch/System/Drawing/SizeF.hpp
   include/Switch/System/Drawing/SystemColors.hpp
-  include/Switch/System.Drawing.hpp
+  include/Switch/Switch.System.Drawing.hpp
+  include/Switch/Switch.System.Drawing
 )
 
 set(SOURCE_FILES

@@ -2,7 +2,7 @@
 /// @brief Contains include files of Drawing library.
 #pragma once
 
-#include <Switch/System.hpp>
+#include <Switch/Switch.System>
 #include "System/Drawing/Drawing2D/DashStyle.hpp"
 #include "System/Drawing/Imaging/ColorPalette.hpp"
 #include "System/Drawing/Imaging/FrameDimension.hpp"

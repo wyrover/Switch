@@ -302,7 +302,6 @@ set(INCLUDE_FILES
   include/Switch/Async.hpp
   include/Switch/Await.hpp
   include/Switch/Boxing.hpp
-  include/Switch/Core.hpp
   include/Switch/Event.hpp
   include/Switch/ExceptionPtr.hpp
   include/Switch/Hash.hpp
@@ -320,6 +319,8 @@ set(INCLUDE_FILES
   include/Switch/RefPtr.hpp
   include/Switch/Startup.hpp
   include/Switch/Static.hpp
+  include/Switch/Switch.Core.hpp
+  include/Switch/Switch.Core
   include/Switch/Types.hpp
   include/Switch/Undef.hpp
   include/Switch/Unused.hpp

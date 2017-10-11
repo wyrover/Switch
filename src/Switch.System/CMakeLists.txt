@@ -75,7 +75,8 @@ set(INCLUDE_FILES
   include/Switch/System/UriHostNameType.hpp
   include/Switch/System/UriPartial.hpp
   include/Switch/System/UriTemplateMatchException.hpp
-  include/Switch/System.hpp
+  include/Switch/Switch.System.hpp
+  include/Switch/Switch.System
 )
 
 set(SOURCE_FILES

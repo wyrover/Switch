@@ -34,7 +34,7 @@ cmake_minimum_required(VERSION 3.2)
 Project(HelloWorld)
 find_package(Switch REQUIRED)
 add_executable(HelloWorld HelloWorld.cpp)
-target_link_libraries(HelloWorld Switch.Core)
+target_link_libraries(HelloWorld Switch.System)
 ```
 
 Console output:
@@ -87,7 +87,7 @@ cmake_minimum_required(VERSION 3.2)
 Project(HelloWorldForm)
 find_package(Switch REQUIRED)
 add_executable(HelloWorldForm ${SWITCH_GUI} HelloWorldForm.cpp)
-target_link_libraries(HelloWorldForm Switch.Forms)
+target_link_libraries(HelloWorldForm Switch.System.Windows.Forms)
 ```
 Running application on Windows:
 

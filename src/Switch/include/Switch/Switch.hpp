@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Switch/Core.hpp"
-#include "Switch/System.hpp"
-#include "Switch/System.Drawing.hpp"
-#include "Switch/System.Windows.Forms.hpp"
-#include "Switch/TUnit.hpp"
+#include "Switch/Switch.Core"
+#include "Switch/Switch.System"
+#include "Switch/Switch.System.Drawing"
+#include "Switch/Switch.System.Windows.Forms"
+#include "Switch/Switch.TUnit.Core"

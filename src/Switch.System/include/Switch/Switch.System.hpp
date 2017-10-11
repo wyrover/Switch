@@ -2,7 +2,7 @@
 /// @brief Contains include files of System library.
 #pragma once
 
-#include <Switch/Core.hpp>
+#include <Switch/Switch.Core>
 #include "System/Collections/Concurrent/ConcurrentBag.hpp"
 #include "System/IO/Ports/Handshake.hpp"
 #include "System/IO/Ports/Parity.hpp"
