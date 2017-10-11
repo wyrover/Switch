@@ -19,7 +19,7 @@ These libreries are grouped by theme :
 - **Forms** : The *Switch.System.Windows.Forms* library contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system.
 - **TUnit** : The *Switch.TUnit.Core* and *Switch.Tunit.Main* libraries are a unit-testing framework for modern C++14. Initially ported from NUnit.
 
-See [Switch Libraries hierarchy](Libraries.md).
+See [Switch libraries hierarchy](Libraries.md).
 
 # Objectives and Mission
 - **Switch** is a powerful, yet easy to use platform to build your applications upon
