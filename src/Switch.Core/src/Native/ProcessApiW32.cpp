@@ -4,9 +4,9 @@
 #include <tlhelp32.h>
 #include "../../include/Switch/Undef.hpp"
 
-#include "CoreApi.hpp"
+#include "Api.hpp"
 
-intptr Native::CoreApi::Process::Start(const System::Diagnostics::ProcessStartInfo& processStartInfo) {
+intptr Native::ProcessApi::Start(const System::Diagnostics::ProcessStartInfo& processStartInfo) {
   System::Array<string> variables(processStartInfo.EnvironmentVariables().Count + 1);
   System::Array<const char*> environmentVariables(processStartInfo.EnvironmentVariables().Count + 1);
   int32 index = 0;
@@ -34,19 +34,19 @@ intptr Native::CoreApi::Process::Start(const System::Diagnostics::ProcessStartIn
   return (intptr)processInformation.hProcess;
 }
 
-bool Native::CoreApi::Process::Close(intptr handle) {
+bool Native::ProcessApi::Close(intptr handle) {
   return CloseHandle((HANDLE)handle) != FALSE;
 }
 
-bool Native::CoreApi::Process::Kill(intptr handle) {
+bool Native::ProcessApi::Kill(intptr handle) {
   return TerminateProcess((HANDLE)handle, -1) != FALSE;
 }
 
-intptr Native::CoreApi::Process::GetCurrent() {
+intptr Native::ProcessApi::GetCurrent() {
   return (intptr)GetCurrentProcess();
 }
 
-intptr Native::CoreApi::Process::GetParent() {
+intptr Native::ProcessApi::GetParent() {
   HANDLE hSnapshot;
   PROCESSENTRY32 pe32;
   DWORD ppid = 0, pid = GetCurrentProcessId();
@@ -72,22 +72,22 @@ intptr Native::CoreApi::Process::GetParent() {
   return ppid;
 }
 
-string Native::CoreApi::Process::GetName(intptr handle) {
+string Native::ProcessApi::GetName(intptr handle) {
   return "";  // ::GetProcessName(handle);
 }
 
-string Native::CoreApi::Process::GetPath(intptr handle) {
+string Native::ProcessApi::GetPath(intptr handle) {
   return ""; //::GetProcessPath(handle);
 }
 
-System::Array<intptr> Native::CoreApi::Process::GetProcesses() {
+System::Array<intptr> Native::ProcessApi::GetProcesses() {
   return {}; // ::GetProcesses();
 }
-void Native::CoreApi::Process::WaitForExit(intptr handle, int32& exitCode) {
+void Native::ProcessApi::WaitForExit(intptr handle, int32& exitCode) {
   WaitForSingleObject((HANDLE)handle, INFINITE);
 }
 
-bool Native::CoreApi::Process::WaitForExit(intptr handle, int32 timeout, int32& exitCode) {
+bool Native::ProcessApi::WaitForExit(intptr handle, int32 timeout, int32& exitCode) {
   bool result = WaitForSingleObject((HANDLE)handle, timeout) == 0;
   return result;
 }

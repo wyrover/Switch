@@ -2,7 +2,7 @@
 #include <cstdlib>
 
 #include "../../../../include/Switch/System/Diagnostics/Process.hpp"
-#include "../../../Native/CoreApi.hpp"
+#include "../../../Native/Api.hpp"
 
 using namespace System;
 using namespace System::Diagnostics;
@@ -59,21 +59,21 @@ Process::~Process() {
 
 void Process::Close() {
   if (this->data.IsUnique()) {
-    Native::CoreApi::Process::Close(this->data->handle);
+    Native::ProcessApi::Close(this->data->handle);
     this->data->handle = 0;
   }
 }
 
 void Process::Kill() {
-  Native::CoreApi::Process::Kill(this->data->handle);
+  Native::ProcessApi::Kill(this->data->handle);
 }
 
 Process Process::GetCurrentProcess() {
-  return Native::CoreApi::Process::GetCurrent();
+  return Native::ProcessApi::GetCurrent();
 }
 
 Array<Process> Process::GetProcesses() {
-  Array<intptr> ids = Native::CoreApi::Process::GetProcesses();
+  Array<intptr> ids = Native::ProcessApi::GetProcesses();
   System::Collections::Generic::List<Process> processes;
   for (auto id : ids)
     if (id != 0)
@@ -82,11 +82,11 @@ Array<Process> Process::GetProcesses() {
 }
 
 string Process::GetName() {
-  return Native::CoreApi::Process::GetName(this->data->handle);
+  return Native::ProcessApi::GetName(this->data->handle);
 }
 
 string Process::GetPath() {
-  return Native::CoreApi::Process::GetPath(this->data->handle);
+  return Native::ProcessApi::GetPath(this->data->handle);
 }
 
 StreamReader Process::GetStreamReader() {
@@ -102,11 +102,11 @@ Process Process::Start(const string& fileName, const string& argument) {
 }
 
 Process Process::Start(const ProcessStartInfo& processStartInfo) {
-  return Process((intptr)Native::CoreApi::Process::Start(processStartInfo));
+  return Process((intptr)Native::ProcessApi::Start(processStartInfo));
 }
 
 void Process::WaitForExit() {
   if (this->data->handle != 0)
-    Native::CoreApi::Process::WaitForExit(this->data->handle, this->data->exitCode);
+    Native::ProcessApi::WaitForExit(this->data->handle, this->data->exitCode);
 }
 

@@ -8,7 +8,7 @@
 #include "../../../include/Switch/System/InvalidCastException.hpp"
 #include "../../../include/Switch/System/OverflowException.hpp"
 #include "../../../include/Switch/System/SByte.hpp"
-#include "../../Native/CoreApi.hpp"
+#include "../../Native/Api.hpp"
 
 using namespace System;
 
@@ -29,7 +29,7 @@ bool Char::IsControl(const String& value, int32 index) {
 }
 
 bool Char::IsDigit(char32 value) {
-  return Native::CoreApi::UnicodeCharacters::IsDigit(value);
+  return Native::UnicodeCharactersApi::IsDigit(value);
 }
 
 bool Char::IsDigit(const String& value, int32 index) {
@@ -37,7 +37,7 @@ bool Char::IsDigit(const String& value, int32 index) {
 }
 
 bool Char::IsLetter(char32 value) {
-  return Native::CoreApi::UnicodeCharacters::IsAlpha(value);
+  return Native::UnicodeCharactersApi::IsAlpha(value);
 }
 
 bool Char::IsLetter(const String& value, int32 index) {
@@ -49,7 +49,7 @@ bool Char::IsLetterOrDigit(const String& value, int32 index) {
 }
 
 bool Char::IsLower(char32 value) {
-  return Native::CoreApi::UnicodeEncodings::ToLower(value) == value;
+  return Native::UnicodeEncodingsApi::ToLower(value) == value;
 }
 
 bool Char::IsLower(const String& value, int32 index) {
@@ -57,7 +57,7 @@ bool Char::IsLower(const String& value, int32 index) {
 }
 
 bool Char::IsPunctuation(char32 value) {
-  return Native::CoreApi::UnicodeCharacters::IsPunctuation(value);
+  return Native::UnicodeCharactersApi::IsPunctuation(value);
 }
 
 bool Char::IsPunctuation(const String& value, int32 index) {
@@ -77,7 +77,7 @@ bool Char::IsSymbol(const String& value, int32 index) {
 }
 
 bool Char::IsUpper(char32 value) {
-  return Native::CoreApi::UnicodeEncodings::ToUpper(value) == value;
+  return Native::UnicodeEncodingsApi::ToUpper(value) == value;
 }
 
 bool Char::IsUpper(const String& value, int32 index) {
@@ -109,7 +109,7 @@ char32 Char::ToUpper(char32 value) {
 
 String Char::ToString() const {
   byte bytes[5];
-  int32 count = Native::CoreApi::UnicodeEncodings::UTF8::Encode(this->value, bytes);
+  int32 count = Native::UnicodeEncodingsApi::UTF8::Encode(this->value, bytes);
   bytes[count] = 0;
   return String((char*)bytes);
 }

@@ -4,7 +4,7 @@
 #include <sys/wait.h>
 #include <signal.h>
 #include <unistd.h>
-#include "CoreApi.hpp"
+#include "Api.hpp"
 #include "../../include/Switch/System/IO/Path.hpp"
 #include "../../include/Switch/System/Threading/Thread.hpp"
 
@@ -88,7 +88,7 @@ System::Array<intptr> GetProcesses() {
 }
 #endif
 
-intptr Native::CoreApi::Process::Start(const System::Diagnostics::ProcessStartInfo& processStartInfo) {
+intptr Native::ProcessApi::Start(const System::Diagnostics::ProcessStartInfo& processStartInfo) {
   pid_t processId = fork();
   if (processId == 0) {
     System::Array<string> subStrings = string::Format("{0}{1}{2}", processStartInfo.FileName, string::IsNullOrEmpty(processStartInfo.Arguments) ? "" : " ", processStartInfo.Arguments()).Split(' ');
@@ -102,35 +102,35 @@ intptr Native::CoreApi::Process::Start(const System::Diagnostics::ProcessStartIn
   return processId;
 }
 
-bool Native::CoreApi::Process::Close(intptr handle) {
+bool Native::ProcessApi::Close(intptr handle) {
   return true;
 }
 
-bool Native::CoreApi::Process::Kill(intptr handle) {
+bool Native::ProcessApi::Kill(intptr handle) {
   return kill((pid_t)handle, SIGKILL) == 0;
 }
 
-intptr Native::CoreApi::Process::GetCurrent() {
+intptr Native::ProcessApi::GetCurrent() {
   return getpid();
 }
 
-intptr Native::CoreApi::Process::GetParent() {
+intptr Native::ProcessApi::GetParent() {
   return getppid();
 }
 
-string Native::CoreApi::Process::GetName(intptr handle) {
+string Native::ProcessApi::GetName(intptr handle) {
   return ::GetProcessName((int32_t)handle);
 }
 
-string Native::CoreApi::Process::GetPath(intptr handle) {
+string Native::ProcessApi::GetPath(intptr handle) {
   return ::GetProcessPath((int32_t)handle);
 }
 
-System::Array<intptr> Native::CoreApi::Process::GetProcesses() {
+System::Array<intptr> Native::ProcessApi::GetProcesses() {
   return ::GetProcesses();
 }
 
-void Native::CoreApi::Process::WaitForExit(intptr handle, int32& exitCode) {
+void Native::ProcessApi::WaitForExit(intptr handle, int32& exitCode) {
   siginfo_t waitInfo;
   memset(&waitInfo, 0, sizeof(siginfo_t));
   waitInfo.si_pid = (int32_t)handle;
@@ -138,7 +138,7 @@ void Native::CoreApi::Process::WaitForExit(intptr handle, int32& exitCode) {
   exitCode = waitInfo.si_code;
 }
 
-bool Native::CoreApi::Process::WaitForExit(intptr handle, int32 timeout, int32& exitCode) {
+bool Native::ProcessApi::WaitForExit(intptr handle, int32 timeout, int32& exitCode) {
   return false;
 }
 

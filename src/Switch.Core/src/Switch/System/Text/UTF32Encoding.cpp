@@ -1,5 +1,5 @@
 #include "../../../../include/Switch/System/Text/UTF32Encoding.hpp"
-#include "../../../Native/CoreApi.hpp"
+#include "../../../Native/Api.hpp"
 
 using namespace System;
 using namespace System::Text;
@@ -11,7 +11,7 @@ UTF32Encoding::Encoder& UTF32Encoding::Encoder::operator=(const UTF32Encoding::E
 }
 
 void UTF32Encoding::Encoder::Encode(char32 c, byte bytes[]) const {
-  Native::CoreApi::UnicodeEncodings::UTF32::Encode(c, bytes[0], bytes[1], bytes[2], bytes[3], this->bigEndian);
+  Native::UnicodeEncodingsApi::UTF32::Encode(c, bytes[0], bytes[1], bytes[2], bytes[3], this->bigEndian);
 }
 
 String UTF32Encoding::Encoder::ToString() const {
@@ -31,7 +31,7 @@ void UTF32Encoding::Decoder::Add(byte b) {
   Encoding::Decoder::Add(b);
   if (count == 4) {
     finished = true;
-    codePoint = Native::CoreApi::UnicodeEncodings::UTF32::Decode(bytes[0], bytes[1], bytes[2], bytes[3], bigEndian);
+    codePoint = Native::UnicodeEncodingsApi::UTF32::Decode(bytes[0], bytes[1], bytes[2], bytes[3], bigEndian);
   }
 }
 

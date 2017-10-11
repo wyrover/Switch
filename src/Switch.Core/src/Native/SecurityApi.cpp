@@ -1,4 +1,4 @@
-#include "CoreApi.hpp"
+#include "Api.hpp"
 
 namespace {
   string EncryptDecryptString(const string& value) {
@@ -12,18 +12,18 @@ namespace {
   }
 }
 
-string Native::CoreApi::Security::ToUnsecureString(const System::Security::SecureString& secureString) {
+string Native::SecurityApi::ToUnsecureString(const System::Security::SecureString& secureString) {
   return EncryptDecryptString(string(secureString.data.ToArray()));
 }
 
-string Native::CoreApi::Security::ToUnsecureString(const string& secureString) {
+string Native::SecurityApi::ToUnsecureString(const string& secureString) {
   return EncryptDecryptString(secureString);
 }
 
-System::Security::SecureString Native::CoreApi::Security::ToSecureSecureString(const string& unsecureString) {
+System::Security::SecureString Native::SecurityApi::ToSecureSecureString(const string& unsecureString) {
   return System::Security::SecureString(unsecureString.ToCharArray().Data, unsecureString.Length);
 }
 
-string Native::CoreApi::Security::ToSecureString(const string& unsecureString) {
+string Native::SecurityApi::ToSecureString(const string& unsecureString) {
   return EncryptDecryptString(unsecureString);
 }

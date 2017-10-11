@@ -1,6 +1,6 @@
-#include "CoreApi.hpp"
+#include "Api.hpp"
 
-const string& Native::CoreApi::Format::Integer() {
+const string& Native::FormatApi::Integer() {
 #if defined(__GNUC__)
   static string format = "%ld";
 #else
@@ -9,7 +9,7 @@ const string& Native::CoreApi::Format::Integer() {
   return format;
 }
 
-const string& Native::CoreApi::Format::IntegerWithPrecision() {
+const string& Native::FormatApi::IntegerWithPrecision() {
 #if defined(__GNUC__)
   static string format = "%0*ld";
 #else
@@ -18,7 +18,7 @@ const string& Native::CoreApi::Format::IntegerWithPrecision() {
   return format;
 }
 
-const string& Native::CoreApi::Format::UnsignedInteger() {
+const string& Native::FormatApi::UnsignedInteger() {
 #if defined(__GNUC__)
   static string format = "%lu";
 #else
@@ -27,7 +27,7 @@ const string& Native::CoreApi::Format::UnsignedInteger() {
   return format;
 }
 
-const string& Native::CoreApi::Format::UnsignedIntegerWithPrecision() {
+const string& Native::FormatApi::UnsignedIntegerWithPrecision() {
 #if defined(__GNUC__)
   static string format = "%0*lu";
 #else
@@ -36,7 +36,7 @@ const string& Native::CoreApi::Format::UnsignedIntegerWithPrecision() {
   return format;
 }
 
-const string& Native::CoreApi::Format::HexadecimalWithPrecision() {
+const string& Native::FormatApi::HexadecimalWithPrecision() {
 #if defined(__GNUC__)
   static string format = "%0*lX";
 #else
@@ -45,7 +45,7 @@ const string& Native::CoreApi::Format::HexadecimalWithPrecision() {
   return format;
 }
 
-const string& Native::CoreApi::Format::LowerHexadecimalWithPrecision() {
+const string& Native::FormatApi::LowerHexadecimalWithPrecision() {
 #if defined(__GNUC__)
   static string format = "%0*lx";
 #else

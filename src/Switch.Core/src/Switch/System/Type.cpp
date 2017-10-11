@@ -5,7 +5,7 @@
 #include "../../../include/Switch/System/Array.hpp"
 #include "../../../include/Switch/System/Type.hpp"
 #include "../../../include/Switch/System/Collections/Specialized/StringDictionary.hpp"
-#include "../../Native/CoreApi.hpp"
+#include "../../Native/Api.hpp"
 
 using namespace System;
 
@@ -32,7 +32,7 @@ bool Type::Equals(const Type& type) const {
 }
 
 String Type::GetFullName() const {
-  String fullName = Native::CoreApi::Type::Demangle(this->type.name());
+  String fullName = Native::TypeApi::Demangle(this->type.name());
   for (string item : {"Switch::System::Func", "Switch::System::Tuple"}) {
     if (fullName.StartsWith(item)) {
       fullName = fullName.Replace(", std::nullptr_t", "");

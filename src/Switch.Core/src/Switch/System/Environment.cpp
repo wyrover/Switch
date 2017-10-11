@@ -17,7 +17,7 @@
 #include "../../../include/Switch/System/SystemException.hpp"
 #include "../../../include/Switch/System/Threading/Thread.hpp"
 #include "../../../include/Switch/System/Threading/AbandonedMutexException.hpp"
-#include "../../Native/CoreApi.hpp"
+#include "../../Native/Api.hpp"
 
 using namespace System;
 using namespace System::Collections::Generic;
@@ -31,36 +31,36 @@ using namespace System::Collections::Generic;
 namespace {
   struct ConsoleChangeCodePage {
     ConsoleChangeCodePage() {
-      Native::CoreApi::Console::SetInputCodePage(65001);
-      Native::CoreApi::Console::SetOutputCodePage(65001);
+      Native::ConsoleApi::SetInputCodePage(65001);
+      Native::ConsoleApi::SetOutputCodePage(65001);
     }
     
     ~ConsoleChangeCodePage() {
-      Native::CoreApi::Console::SetInputCodePage(previousInputCodePage);
-      Native::CoreApi::Console::SetOutputCodePage(previousOutputCodePage);
+      Native::ConsoleApi::SetInputCodePage(previousInputCodePage);
+      Native::ConsoleApi::SetOutputCodePage(previousOutputCodePage);
     }
     
   private:
-    int32 previousInputCodePage = Native::CoreApi::Console::GetInputCodePage();
-    int32 previousOutputCodePage = Native::CoreApi::Console::GetOutputCodePage();
+    int32 previousInputCodePage = Native::ConsoleApi::GetInputCodePage();
+    int32 previousOutputCodePage = Native::ConsoleApi::GetOutputCodePage();
   };
   
   struct ConsoleInterceptSignals {
     ConsoleInterceptSignals() {
-      auto signalKeys =Native::CoreApi::Console::GetSignalKeys();
+      auto signalKeys =Native::ConsoleApi::GetSignalKeys();
       for(auto signal : signalKeys)
         ::signal(signal.Key, ConsoleInterceptSignals::SignalHandler);
     }
     
     ~ConsoleInterceptSignals() {
-      auto signalKeys =Native::CoreApi::Console::GetSignalKeys();
+      auto signalKeys =Native::ConsoleApi::GetSignalKeys();
       for(auto signal : signalKeys)
         ::signal(signal.Key, SIG_DFL);
     }
     
   private:
     static void SignalHandler(int32 signal) {
-      static auto signalKeys =Native::CoreApi::Console::GetSignalKeys();
+      static auto signalKeys =Native::ConsoleApi::GetSignalKeys();
       ::signal(signal, ConsoleInterceptSignals::SignalHandler);
       System::ConsoleCancelEventArgs consoleCancel = System::ConsoleCancelEventArgs(false, signalKeys[signal]);
       System::Console::CancelKeyPress(ref<object>::Null(), consoleCancel);
@@ -144,13 +144,13 @@ _property<String, _readonly> Environment::CommandLine {
 };
 
 _property<string> Environment::CurrentDirectory {
-  [] {return Native::CoreApi::Directory::GetCurrentDirectory();},
+  [] {return Native::DirectoryApi::GetCurrentDirectory();},
   [](string value) {
     if (String::IsNullOrEmpty(value))
       throw ArgumentException(_caller);
     if (!System::IO::Directory::Exists(value))
       throw IO::DirectoryNotFoundException(_caller);
-    if (Native::CoreApi::Directory::SetCurrentDirectory(value) != 0)
+    if (Native::DirectoryApi::SetCurrentDirectory(value) != 0)
       throw IO::IOException(_caller);
   }
 };
@@ -169,7 +169,7 @@ _property<bool, _readonly> Environment::HasShutdownStarted {
 };
 
 _property<bool, _readonly> Environment::Is64BitOperatingSystem {
-  [] {return Native::CoreApi::Environment::IsOs64Bit();}
+  [] {return Native::EnvironmentApi::IsOs64Bit();}
 };
 
 _property<bool, _readonly> Environment::Is64BitProcess {
@@ -177,11 +177,11 @@ _property<bool, _readonly> Environment::Is64BitProcess {
 };
 
 _property<String, _readonly> Environment::MachineName {
-  [] {return Native::CoreApi::Environment::GetMachineName();}
+  [] {return Native::EnvironmentApi::GetMachineName();}
 };
 
 _property<String, _readonly> Environment::NewLine {
-  [] {return Native::CoreApi::Environment::NewLine();}
+  [] {return Native::EnvironmentApi::NewLine();}
 };
 
 _property<const OperatingSystem&, _readonly> Environment::OSVersion {
@@ -189,8 +189,8 @@ _property<const OperatingSystem&, _readonly> Environment::OSVersion {
     static OperatingSystem os(PlatformID::Unknown, System::Version());
     if (os.Platform == PlatformID::Unknown) {
       int32 major, minor, build, revision;
-      Native::CoreApi::Environment::GetOsVersion(major, minor, build, revision);
-      os = OperatingSystem(Native::CoreApi::Environment::GetOsPlatformID(), System::Version(major, minor, build, revision));
+      Native::EnvironmentApi::GetOsVersion(major, minor, build, revision);
+      os = OperatingSystem(Native::EnvironmentApi::GetOsPlatformID(), System::Version(major, minor, build, revision));
     }
     return os;
   }
@@ -216,11 +216,11 @@ _property<int32, _readonly> Environment::SystemPageSize {
 };
 
 _property<int32, _readonly> Environment::TickCount {
-  [] {return Native::CoreApi::Environment::GetTickCount();}
+  [] {return Native::EnvironmentApi::GetTickCount();}
 };
 
 _property<String, _readonly> Environment::UserDomainName {
-  [] {return Native::CoreApi::Environment::GetUserDomainName();}
+  [] {return Native::EnvironmentApi::GetUserDomainName();}
 };
 
 _property<bool, _readonly> Environment::UserInteractive {
@@ -228,7 +228,7 @@ _property<bool, _readonly> Environment::UserInteractive {
 };
 
 _property<String, _readonly> Environment::UserName {
-  [] {return Native::CoreApi::Environment::GetUserName();}
+  [] {return Native::EnvironmentApi::GetUserName();}
 };
 
 _property<const System::Version&, _readonly> Environment::Version {
@@ -236,7 +236,7 @@ _property<const System::Version&, _readonly> Environment::Version {
 };
 
 _property<int64, _readonly> Environment::WorkingSet {
-  [] {return Native::CoreApi::Environment::GetWorkingSet();}
+  [] {return Native::EnvironmentApi::GetWorkingSet();}
 };
 
 void Environment::Exit(int32 ec) {
@@ -300,7 +300,7 @@ String Environment::GetFolderPath(Environment::SpecialFolder folder, Environment
   if (!Enum<Environment::SpecialFolderOption>::GetValues().Contains(option))
     throw ArgumentException(_caller);
   
-  string path = Native::CoreApi::Directory::GetKnowFolderPath(folder);
+  string path = Native::DirectoryApi::GetKnowFolderPath(folder);
 
   if (option == Environment::SpecialFolderOption::None)
     return  !System::IO::Directory::Exists(path) ? "" :  path;
@@ -312,7 +312,7 @@ String Environment::GetFolderPath(Environment::SpecialFolder folder, Environment
 }
 
 Array<String> Environment::GetLogicalDrives() {
-  return Native::CoreApi::Drive::GetDrives();
+  return Native::DriveApi::GetDrives();
 }
 
 void Environment::SetEnvironmentVariable(const String& name, const String& value, EnvironmentVariableTarget target) {
@@ -322,11 +322,11 @@ void Environment::SetEnvironmentVariable(const String& name, const String& value
   if (target == EnvironmentVariableTarget::Process) {
     if (string::IsNullOrEmpty(value)) {
       EnvironmentVariables().Remove(name);
-      if (Native::CoreApi::Environment::UnsetEnv(name) != 0)
+      if (Native::EnvironmentApi::UnsetEnv(name) != 0)
         throw ArgumentException(_caller);
     } else {
       EnvironmentVariables()[name] = value;
-      if (Native::CoreApi::Environment::SetEnv(name, value) != 0)
+      if (Native::EnvironmentApi::SetEnv(name, value) != 0)
         throw ArgumentException(_caller);
     }
   } else {

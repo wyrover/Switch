@@ -5,7 +5,7 @@
 #include "../../../include/Switch/System/NumericalFormat.hpp"
 #include "../../../include/Switch/System/Collections/Generic/List.hpp"
 #include "../../../include/Switch/System/SystemException.hpp"
-#include "../../Native/CoreApi.hpp"
+#include "../../Native/Api.hpp"
 
 using namespace System;
 
@@ -79,9 +79,9 @@ namespace Switch {
     String NumericalFormat::Format_D(int64 value, int32 precision) {
       char cout[192];
       if (precision > 0)
-        sprintf(cout, Native::CoreApi::Format::IntegerWithPrecision().Data, precision, value);
+        sprintf(cout, Native::FormatApi::IntegerWithPrecision().Data, precision, value);
       else
-        sprintf(cout, Native::CoreApi::Format::Integer().Data, value);
+        sprintf(cout, Native::FormatApi::Integer().Data, value);
       if (cout[0] == '-') {
         int32 pad = precision - static_cast<int32>(strlen(cout));
         if (pad == 0)
@@ -93,9 +93,9 @@ namespace Switch {
     String NumericalFormat::Format_D(uint64 value, int32 precision) {
       char cout[192];
       if (precision > 0)
-        sprintf(cout, Native::CoreApi::Format::UnsignedIntegerWithPrecision().Data, precision, value);
+        sprintf(cout, Native::FormatApi::UnsignedIntegerWithPrecision().Data, precision, value);
       else
-        sprintf(cout, Native::CoreApi::Format::UnsignedInteger().Data, value);
+        sprintf(cout, Native::FormatApi::UnsignedInteger().Data, value);
       return cout;
     }
     
@@ -144,7 +144,7 @@ namespace Switch {
       else
         sprintf(cout, "%.*e", precision, (double)value);
       if (strchr(cout,'e') == null) {
-        sprintf(cout, Native::CoreApi::Format::UnsignedInteger().Data, value);
+        sprintf(cout, Native::FormatApi::UnsignedInteger().Data, value);
         return cout;
       }
       return controlLengthExp(cout, upper, 3);
@@ -158,7 +158,7 @@ namespace Switch {
         sprintf(cout, "%.*e", precision, (double)value);
       
       if (strchr(cout,'e') == null) {
-        sprintf(cout, Native::CoreApi::Format::Integer().Data, value);
+        sprintf(cout, Native::FormatApi::Integer().Data, value);
         return cout;
       }
       return controlLengthExp(cout, upper, 3);
@@ -214,7 +214,7 @@ namespace Switch {
       char cout[192];
       sprintf(cout, "%.*g",precision, (double)value);
       if (strchr(cout,'e') == null) {
-        sprintf(cout, Native::CoreApi::Format::UnsignedInteger().Data, value);
+        sprintf(cout, Native::FormatApi::UnsignedInteger().Data, value);
         return cout;
       }
       return controlLengthExp(cout,upper,2);
@@ -225,7 +225,7 @@ namespace Switch {
       sprintf(cout, "%.*g",precision, (double)value);
       
       if (strchr(cout,'e') == null) {
-        sprintf(cout, Native::CoreApi::Format::Integer().Data, value);
+        sprintf(cout, Native::FormatApi::Integer().Data, value);
         return cout;
       }
       return controlLengthExp(cout,upper,2);
@@ -369,9 +369,9 @@ namespace Switch {
       char cout[192];
       char* trimmed = cout;
       if (upper)
-        sprintf(cout, Native::CoreApi::Format::HexadecimalWithPrecision().Data, precision, value);
+        sprintf(cout, Native::FormatApi::HexadecimalWithPrecision().Data, precision, value);
       else
-        sprintf(cout, Native::CoreApi::Format::LowerHexadecimalWithPrecision().Data, precision, value);
+        sprintf(cout, Native::FormatApi::LowerHexadecimalWithPrecision().Data, precision, value);
       String output = cout;
       int32 excess = static_cast<int32>(strlen(cout)) - size;
       if (excess > 0) trimmed = &cout[excess];
@@ -384,9 +384,9 @@ namespace Switch {
       char cout[192];
       char* trimmed = cout;
       if (upper)
-        sprintf(cout, Native::CoreApi::Format::HexadecimalWithPrecision().Data, precision, value);
+        sprintf(cout, Native::FormatApi::HexadecimalWithPrecision().Data, precision, value);
       else
-        sprintf(cout, Native::CoreApi::Format::LowerHexadecimalWithPrecision().Data, precision, value);
+        sprintf(cout, Native::FormatApi::LowerHexadecimalWithPrecision().Data, precision, value);
       String output = cout;
       int32 excess = static_cast<int32>(strlen(cout)) - size;
       if (excess > 0) trimmed = &cout[excess];

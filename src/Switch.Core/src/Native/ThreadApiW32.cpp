@@ -3,7 +3,7 @@
 #include <windows.h>
 #include "../../include/Switch/Undef.hpp"
 
-#include "CoreApi.hpp"
+#include "Api.hpp"
 
 namespace {
   // https://msdn.microsoft.com/en-us/library/xcb2z8hs.aspx
@@ -28,30 +28,30 @@ namespace {
   }
 }
 
-bool Native::CoreApi::Thread::Cancel(intptr handle) {
+bool Native::ThreadApi::Cancel(intptr handle) {
   return TerminateThread((HANDLE)handle, -1) != FALSE;
 }
 
-intptr Native::CoreApi::Thread::GetCurrent() {
+intptr Native::ThreadApi::GetCurrent() {
   return (intptr)GetCurrentThread();
 }
 
-void Native::CoreApi::Thread::Resume(intptr handle) {
+void Native::ThreadApi::Resume(intptr handle) {
   ResumeThread((HANDLE)handle);
 }
 
-void Native::CoreApi::Thread::SetNameOfCurrentThread(const string &name) {
+void Native::ThreadApi::SetNameOfCurrentThread(const string &name) {
 #pragma warning(push)
 #pragma warning(disable: 4302 4311)
   ::SetThreadName(GetCurrentThreadId(), name.Data());
 #pragma warning(pop)
 }
 
-bool Native::CoreApi::Thread::SetPriority(intptr handle, int32 priority) {
+bool Native::ThreadApi::SetPriority(intptr handle, int32 priority) {
   return SetThreadPriority((HANDLE)handle, priority - 2) != FALSE;
 }
 
-void Native::CoreApi::Thread::Suspend(intptr handle) {
+void Native::ThreadApi::Suspend(intptr handle) {
   SuspendThread((HANDLE)handle);
 }
 

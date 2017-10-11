@@ -3,10 +3,10 @@
 #include <windows.h>
 #include "../../include/Switch/Undef.hpp"
 
-#include "CoreApi.hpp"
+#include "Api.hpp"
 #include "../../include/Switch/System/Collections/Generic/List.hpp"
 
-bool Native::CoreApi::Drive::GetAvailableFreeSpace(const string& rootPathName, int64& freeBytes, int64& totalNumberOfBytes, int64& totalNumberOfFreeBytes) {
+bool Native::DriveApi::GetAvailableFreeSpace(const string& rootPathName, int64& freeBytes, int64& totalNumberOfBytes, int64& totalNumberOfFreeBytes) {
   bool retValue = false;
   WCHAR rootPathNameName[MAX_PATH];
   if (rootPathName.Length()+1 <= MAX_PATH) {
@@ -16,11 +16,11 @@ bool Native::CoreApi::Drive::GetAvailableFreeSpace(const string& rootPathName, i
   return retValue;
 }
 
-System::IO::DriveType Native::CoreApi::Drive::GetDriveType(const string& rootPathName) {
+System::IO::DriveType Native::DriveApi::GetDriveType(const string& rootPathName) {
   return (System::IO::DriveType)::GetDriveTypeA(rootPathName.Data());
 }
 
-System::Array<string> Native::CoreApi::Drive::GetDrives() {
+System::Array<string> Native::DriveApi::GetDrives() {
   char buffer[MAX_PATH];
   int32 bufferLenght = MAX_PATH;
   if (::GetLogicalDriveStringsA(bufferLenght, buffer) <= 0)
@@ -31,7 +31,7 @@ System::Array<string> Native::CoreApi::Drive::GetDrives() {
   return drives.ToArray();
 }
 
-bool Native::CoreApi::Drive::GetVolumeInformation(const string& rootPathName, string& volumeName, string& fileSystemName) {
+bool Native::DriveApi::GetVolumeInformation(const string& rootPathName, string& volumeName, string& fileSystemName) {
   DWORD fileSystemFlags = 0;
   char volume[MAX_PATH];
   char fileSystem[MAX_PATH];
@@ -44,7 +44,7 @@ bool Native::CoreApi::Drive::GetVolumeInformation(const string& rootPathName, st
   return true;
 }
 
-bool Native::CoreApi::Drive::SetVolumeLabel(const string& rootPathName, const string& volumeName) {
+bool Native::DriveApi::SetVolumeLabel(const string& rootPathName, const string& volumeName) {
   return ::SetVolumeLabelA(rootPathName.Data(), volumeName.Data()) > 0;
 }
 

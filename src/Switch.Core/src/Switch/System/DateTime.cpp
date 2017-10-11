@@ -2,7 +2,7 @@
 
 #include "../../../include/Switch/System/DateTime.hpp"
 #include "../../../include/Switch/System/Convert.hpp"
-#include "../../Native/CoreApi.hpp"
+#include "../../Native/Api.hpp"
 
 using namespace System;
 
@@ -21,7 +21,7 @@ _property<DateTime, _readonly> DateTime::Now {
     int32 milliseconds = 0, timeZone = 0;
     bool daylight = false;
     
-    if (Native::CoreApi::DateTime::Ftime(secondes, milliseconds, timeZone, daylight) != 0)
+    if (Native::DateTimeApi::Ftime(secondes, milliseconds, timeZone, daylight) != 0)
       return DateTime();
       
     return DateTime(secondes * TimeSpan::TicksPerSecond + (int64)milliseconds * TimeSpan::TicksPerMillisecond + TicksTo1970, DateTimeKind::Local);
@@ -34,7 +34,7 @@ _property<DateTime, _readonly> DateTime::Today {
     int32 milliseconds = 0, timeZone = 0;
     bool daylight = false;
     
-    if (Native::CoreApi::DateTime::Ftime(secondes, milliseconds, timeZone, daylight) != 0)
+    if (Native::DateTimeApi::Ftime(secondes, milliseconds, timeZone, daylight) != 0)
       return DateTime();
       
     int64 timeZoneGap = 0;
@@ -53,7 +53,7 @@ _property<DateTime, _readonly> DateTime::UtcNow {
     int32 milliseconds = 0, timeZone = 0;
     bool daylight = false;
     
-    if (Native::CoreApi::DateTime::Ftime(secondes, milliseconds, timeZone, daylight) != 0)
+    if (Native::DateTimeApi::Ftime(secondes, milliseconds, timeZone, daylight) != 0)
       return DateTime();
       
     return DateTime(secondes * TimeSpan::TicksPerSecond + (int64)milliseconds * TimeSpan::TicksPerMillisecond + TicksTo1970, DateTimeKind::Utc);
@@ -192,7 +192,7 @@ DateTime DateTime::FromFileTimeUtc(int64 fileTime) {
 bool DateTime::IsDaylightSavingTime() const {
   if (this->kind != DateTimeKind::Local)
     return false;
-  return Native::CoreApi::DateTime::IsDaylight((this->value - TicksTo1970) / TimeSpan::TicksPerSecond);
+  return Native::DateTimeApi::IsDaylight((this->value - TicksTo1970) / TimeSpan::TicksPerSecond);
 }
 
 const String DateTime::ToLongDateString() const {
@@ -237,9 +237,9 @@ DateTime DateTime::ToLocalTime() const {
     return DateTime(this->value, DateTimeKind::Local);
 
   int32 year = 1, month = 1, day = 1, hour = 0, minute = 0, second = 0, dayOfYear = 0,  dayOfWeek = 0;
-  Native::CoreApi::DateTime::Gmtime((this->value - TicksTo1970) / TimeSpan::TicksPerSecond, year, month, day, hour, minute, second, dayOfYear, dayOfWeek);
+  Native::DateTimeApi::Gmtime((this->value - TicksTo1970) / TimeSpan::TicksPerSecond, year, month, day, hour, minute, second, dayOfYear, dayOfWeek);
   
-  int64 seconds = Native::CoreApi::DateTime::Mkgmtime(year, month, day, hour, minute, second);
+  int64 seconds = Native::DateTimeApi::Mkgmtime(year, month, day, hour, minute, second);
   if (seconds == -1)
     throw InvalidOperationException(_caller);
   
@@ -251,9 +251,9 @@ DateTime DateTime::ToUniversalTime() const {
     return DateTime(this->value, DateTimeKind::Utc);
   
   int32 year = 1, month = 1, day = 1, hour = 0, minute = 0, second = 0, dayOfYear = 0, dayOfWeek = 0;
-  Native::CoreApi::DateTime::Gmtime((this->value - TicksTo1970) / TimeSpan::TicksPerSecond, year, month, day, hour, minute, second, dayOfYear, dayOfWeek);
+  Native::DateTimeApi::Gmtime((this->value - TicksTo1970) / TimeSpan::TicksPerSecond, year, month, day, hour, minute, second, dayOfYear, dayOfWeek);
 
-  int64 seconds = Native::CoreApi::DateTime::Mktime(year, month, day, hour, minute, second);
+  int64 seconds = Native::DateTimeApi::Mktime(year, month, day, hour, minute, second);
   if (seconds == -1)
     throw InvalidOperationException(_caller);
   
@@ -287,7 +287,7 @@ void DateTime::SetDateTime(int32 year, int32 month, int32 day, int32 hour, int32
     throw ArgumentOutOfRangeException(_caller);
   }
   
-  int64 seconds = kind == DateTimeKind::Local ? Native::CoreApi::DateTime::Mktime(year, month, day, hour, minute, second) : Native::CoreApi::DateTime::Mkgmtime(year, month, day, hour, minute, second);
+  int64 seconds = kind == DateTimeKind::Local ? Native::DateTimeApi::Mktime(year, month, day, hour, minute, second) : Native::DateTimeApi::Mkgmtime(year, month, day, hour, minute, second);
   if (seconds == -1)
     throw InvalidOperationException(_caller);
   
@@ -297,9 +297,9 @@ void DateTime::SetDateTime(int32 year, int32 month, int32 day, int32 hour, int32
 
 void DateTime::GetDateTime(int32& year, int32& month, int32& day, int32& hour, int32& minute, int32& second, int32& dayOfYear,  int32& dayOfWeek) const {
   if (this->kind == DateTimeKind::Local)
-    Native::CoreApi::DateTime::Localtime((this->value - TicksTo1970) / TimeSpan::TicksPerSecond, year, month, day, hour, minute, second, dayOfYear, dayOfWeek);
+    Native::DateTimeApi::Localtime((this->value - TicksTo1970) / TimeSpan::TicksPerSecond, year, month, day, hour, minute, second, dayOfYear, dayOfWeek);
   else
-    Native::CoreApi::DateTime::Gmtime((this->value - TicksTo1970) / TimeSpan::TicksPerSecond, year, month, day, hour, minute, second, dayOfYear, dayOfWeek);
+    Native::DateTimeApi::Gmtime((this->value - TicksTo1970) / TimeSpan::TicksPerSecond, year, month, day, hour, minute, second, dayOfYear, dayOfWeek);
 }
 
 bool DateTime::Equals(const DateTime& value) const {
@@ -319,7 +319,7 @@ String DateTime::ToString(const String& format) const {
   GetDateTime(year, month, day, hour, minute, second, dayOfYear, dayOfWeek);
 
   string value;
-  Native::CoreApi::DateTime::Strftime(value, format.Data(), year, month, day, hour, minute, second, dayOfYear, dayOfWeek, IsDaylightSavingTime());
+  Native::DateTimeApi::Strftime(value, format.Data(), year, month, day, hour, minute, second, dayOfYear, dayOfWeek, IsDaylightSavingTime());
   return value;
 }
 

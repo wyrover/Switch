@@ -1,9 +1,9 @@
 #if defined(__linux__) || defined(__APPLE__)
 
 #include <cxxabi.h>
-#include "CoreApi.hpp"
+#include "Api.hpp"
 
-string Native::CoreApi::Type::Demangle(const string &name) {
+string Native::TypeApi::Demangle(const string &name) {
   struct AutoDeleteCharPointer {
     AutoDeleteCharPointer(char* value) : value(value) {}
     ~AutoDeleteCharPointer() {delete value;}

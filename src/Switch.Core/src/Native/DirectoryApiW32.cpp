@@ -11,7 +11,7 @@
 #include <windows.h>
 #include "../../include/Switch/Undef.hpp"
 
-#include "CoreApi.hpp"
+#include "Api.hpp"
 
 namespace {
   class Enumerator : public System::Collections::Generic::IEnumerator<string> {
@@ -58,42 +58,42 @@ namespace {
   };
 }
 
-char32 Native::CoreApi::Directory::AltDirectorySeparatorChar() {
+char32 Native::DirectoryApi::AltDirectorySeparatorChar() {
   return '/';
 }
 
-char32 Native::CoreApi::Directory::DirectorySeparatorChar() {
+char32 Native::DirectoryApi::DirectorySeparatorChar() {
   return '\\';
 }
 
-char32 Native::CoreApi::Directory::PathSeparator() {
+char32 Native::DirectoryApi::PathSeparator() {
   return ';';
 }
 
-System::Array<char32> Native::CoreApi::Directory::InvalidPathChars() {
+System::Array<char32> Native::DirectoryApi::InvalidPathChars() {
   return {34, 60, 62, 124, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 0};
 }
 
-char32 Native::CoreApi::Directory::VolumeSeparator() {
+char32 Native::DirectoryApi::VolumeSeparator() {
   return ':';
 }
 
-System::Collections::Generic::Enumerator<string> Native::CoreApi::Directory::EnumerateDirectories(const string& path, const string& pattern) {
+System::Collections::Generic::Enumerator<string> Native::DirectoryApi::EnumerateDirectories(const string& path, const string& pattern) {
   return System::Collections::Generic::Enumerator<string>(new Enumerator(path, pattern, Enumerator::FileType::Directory));
 }
 
-System::Collections::Generic::Enumerator<string> Native::CoreApi::Directory::EnumerateFiles(const string& path, const string& pattern) {
+System::Collections::Generic::Enumerator<string> Native::DirectoryApi::EnumerateFiles(const string& path, const string& pattern) {
   return System::Collections::Generic::Enumerator<string>(new Enumerator(path, pattern, Enumerator::FileType::File));
 }
 
-int32 Native::CoreApi::Directory::GetFileAttributes(const string& path, System::IO::FileAttributes& attributes) {
+int32 Native::DirectoryApi::GetFileAttributes(const string& path, System::IO::FileAttributes& attributes) {
   attributes = (System::IO::FileAttributes)GetFileAttributesA(path.Data());
   if (attributes == (System::IO::FileAttributes)INVALID_FILE_ATTRIBUTES)
     return -1;
   return 0;
 }
 
-int32 Native::CoreApi::Directory::GetFileTime(const string& path, int64& creationTime, int64& lastAccessTime, int64& lastWriteTime) {
+int32 Native::DirectoryApi::GetFileTime(const string& path, int64& creationTime, int64& lastAccessTime, int64& lastWriteTime) {
   struct stat fileStat;
   if(stat(path.Data(), &fileStat) != 0)
     return -1;
@@ -104,25 +104,25 @@ int32 Native::CoreApi::Directory::GetFileTime(const string& path, int64& creatio
 }
 
 
-string Native::CoreApi::Directory::GetFullPath(const string& relPath) {
+string Native::DirectoryApi::GetFullPath(const string& relPath) {
   char buffer[MAX_PATH];
   if(_fullpath(buffer, relPath.Data(), MAX_PATH) == null)
     return string::Empty;
   return buffer;
 }
 
-string Native::CoreApi::Directory::GetCurrentDirectory() {
+string Native::DirectoryApi::GetCurrentDirectory() {
   char buffer[MAX_PATH];
   if (_getcwd(buffer, MAX_PATH) == null)
     return string::Empty;
   return buffer;
 }
 
-int32 Native::CoreApi::Directory::SetCurrentDirectory(const string& directoryName) {
+int32 Native::DirectoryApi::SetCurrentDirectory(const string& directoryName) {
   return _chdir(directoryName.Data());
 }
 
-int64 Native::CoreApi::Directory::GetFileSize(const string& path) {
+int64 Native::DirectoryApi::GetFileSize(const string& path) {
   WIN32_FIND_DATAA file;
   void* handle = FindFirstFileA(path.Data(), &file);
   if (handle == INVALID_HANDLE_VALUE)
@@ -135,33 +135,33 @@ int64 Native::CoreApi::Directory::GetFileSize(const string& path) {
   return size.QuadPart;
 }
 
-int32 Native::CoreApi::Directory::CreateDirectory(const string& directoryName) {
+int32 Native::DirectoryApi::CreateDirectory(const string& directoryName) {
   return CreateDirectoryA(directoryName.Data(), null) != FALSE ? 0 : -1;
 }
 
-int32 Native::CoreApi::Directory::RemoveDirectory(const string& directoryName) {
+int32 Native::DirectoryApi::RemoveDirectory(const string& directoryName) {
   return RemoveDirectoryA(directoryName.Data()) != FALSE ? 0 : -1;
 }
 
-int32 Native::CoreApi::Directory::RemoveFile(const string& path) {
+int32 Native::DirectoryApi::RemoveFile(const string& path) {
   return ::remove(path.Data());
 }
 
-int32 Native::CoreApi::Directory::RenameFile(const string& oldPath, const string& newPath) {
+int32 Native::DirectoryApi::RenameFile(const string& oldPath, const string& newPath) {
   System::IO::FileAttributes fileAttributes = (System::IO::FileAttributes)0;
   if (GetFileAttributes(newPath, fileAttributes) == 0)
     return -1;  
   return ::rename(oldPath.Data(), newPath.Data());
 }
 
-string Native::CoreApi::Directory::GetKnowFolderPath(System::Environment::SpecialFolder id) {
+string Native::DirectoryApi::GetKnowFolderPath(System::Environment::SpecialFolder id) {
   char path[MAX_PATH];
   if (SHGetFolderPathA(null, static_cast<int>(id), null, SHGFP_TYPE_CURRENT, path) != S_OK)
     return string::Empty;
   return path;
 }
 
-string Native::CoreApi::Directory::GetTempPath() {
+string Native::DirectoryApi::GetTempPath() {
   if (getenv("TMP") != null)
     return getenv("TMP");
   

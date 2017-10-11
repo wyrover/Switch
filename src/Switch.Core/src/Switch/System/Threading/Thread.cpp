@@ -1,6 +1,6 @@
 #include "../../../../include/Switch/System/Threading/Thread.hpp"
 #include "../../../../include/Switch/System/Environment.hpp"
-#include "../../../Native/CoreApi.hpp"
+#include "../../../Native/Api.hpp"
 
 using namespace System;
 using namespace System::Threading;
@@ -41,7 +41,7 @@ void Thread::ThreadItem::RunWithOrWithoutParam(const object* obj, bool withParam
 }
 
 void Thread::ThreadItem::SetNameThreadForDebugger() {
-  Native::CoreApi::Thread::SetNameOfCurrentThread(this->name);
+  Native::ThreadApi::SetNameOfCurrentThread(this->name);
 }
 
 bool Thread::ThreadItem::SetPriority() {
@@ -49,7 +49,7 @@ bool Thread::ThreadItem::SetPriority() {
 }
 
 bool Thread::ThreadItem::SetPriority(Thread::NativeHandle handle, ThreadPriority priority) {
-  return Native::CoreApi::Thread::SetPriority((intptr)handle, (int32)priority);
+  return Native::ThreadApi::SetPriority((intptr)handle, (int32)priority);
 }
 
 _property<Thread&, _readonly> Thread::CurrentThread {
@@ -77,7 +77,7 @@ void Thread::Abort() {
 }
 
 bool Thread::Cancel() {
-  return Native::CoreApi::Thread::Cancel((intptr)this->data->thread.native_handle());
+  return Native::ThreadApi::Cancel((intptr)this->data->thread.native_handle());
 }
 
 void Thread::Close() {
@@ -142,7 +142,7 @@ void Thread::Resume() {
   if (!Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Suspended))
     throw ThreadStateException(_caller);
   
-  Native::CoreApi::Thread::Resume((intptr)this->data->thread.native_handle());
+  Native::ThreadApi::Resume((intptr)this->data->thread.native_handle());
   this->data->state &= ~System::Threading::ThreadState::Suspended;
 }
 
@@ -161,7 +161,7 @@ void Thread::SetPriority(ThreadPriority priority) {
   
   this->data->priority = priority;
   if (this->data->managedThreadId == MainManagedThreadId && CurrentThread().ManagedThreadId == MainManagedThreadId) {
-    if (ThreadItem::SetPriority((Thread::NativeHandle)Native::CoreApi::Thread::GetCurrent(), priority) != true)
+    if (ThreadItem::SetPriority((Thread::NativeHandle)Native::ThreadApi::GetCurrent(), priority) != true)
       throw ThreadStateException(_caller);
     return;
   }
@@ -177,7 +177,7 @@ void Thread::Suspend() {
     throw ThreadStateException(_caller);
   
   this->data->state |= System::Threading::ThreadState::SuspendRequested;
-  Native::CoreApi::Thread::Suspend((intptr)this->data->thread.native_handle());
+  Native::ThreadApi::Suspend((intptr)this->data->thread.native_handle());
   this->data->state |= System::Threading::ThreadState::Suspended;
   this->data->state &= ~System::Threading::ThreadState::SuspendRequested;
 }

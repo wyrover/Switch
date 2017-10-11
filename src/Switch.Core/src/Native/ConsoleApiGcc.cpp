@@ -15,7 +15,7 @@
 #include <sys/ioctl.h>
 #include "../../include/Switch/Undef.hpp"
 
-#include "CoreApi.hpp"
+#include "Api.hpp"
 
 using namespace System;
 
@@ -501,7 +501,7 @@ const int32 KIOCSOUND = 0x4B2F;
 #include <linux/kd.h>
 #endif
 
-void Native::CoreApi::Console::Beep(int32 frequency, int32 duration) {
+void Native::ConsoleApi::Beep(int32 frequency, int32 duration) {
   int32 fd = open("/dev/console", O_WRONLY);
   if (fd == -1) {
     printf("\a");
@@ -516,31 +516,31 @@ void Native::CoreApi::Console::Beep(int32 frequency, int32 duration) {
   }
 }
 
-void Native::CoreApi::Console::Clrscr() {
+void Native::ConsoleApi::Clrscr() {
   if (Terminal::IsAnsiSupported())
     printf("\x1b[H\x1b[2J");
 }
 
-ConsoleColor Native::CoreApi::Console::GetBackgroundColor() {
+ConsoleColor Native::ConsoleApi::GetBackgroundColor() {
   return backColor;
 }
 
-int32 Native::CoreApi::Console::GetBufferHeight() {
+int32 Native::ConsoleApi::GetBufferHeight() {
   /// @todo console buffer Height on linux and macOS
-  return Native::CoreApi::Console::GetWindowHeight();
+  return Native::ConsoleApi::GetWindowHeight();
 }
 
-int32 Native::CoreApi::Console::GetBufferWidth() {
+int32 Native::ConsoleApi::GetBufferWidth() {
   /// @todo console buffer Width on linux and macOS
-  return Native::CoreApi::Console::GetWindowWidth();
+  return Native::ConsoleApi::GetWindowWidth();
 }
 
-bool Native::CoreApi::Console::GetCapsLock() {
+bool Native::ConsoleApi::GetCapsLock() {
   /// @todo caps lock status on linux and macOS
   return false;
 }
 
-int32 Native::CoreApi::Console::GetCursorLeft() {
+int32 Native::ConsoleApi::GetCursorLeft() {
   if (!Terminal::IsAnsiSupported())
     return 0;
 
@@ -558,11 +558,11 @@ int32 Native::CoreApi::Console::GetCursorLeft() {
   return atoi(str.c_str()) - 1;
 }
 
-int32 Native::CoreApi::Console::GetCursorSize() {
+int32 Native::ConsoleApi::GetCursorSize() {
   return 100;
 }
 
-int32 Native::CoreApi::Console::GetCursorTop() {
+int32 Native::ConsoleApi::GetCursorTop() {
   if (!Terminal::IsAnsiSupported())
     return 0;
 
@@ -581,51 +581,51 @@ int32 Native::CoreApi::Console::GetCursorTop() {
   return atoi(str.c_str()) - 1;
 }
 
-bool Native::CoreApi::Console::GetCursorVisible() {
+bool Native::ConsoleApi::GetCursorVisible() {
   return cursorVisible;
 }
 
-ConsoleColor Native::CoreApi::Console::GetForegroundColor() {
+ConsoleColor Native::ConsoleApi::GetForegroundColor() {
   return foreColor;
 }
 
-int32 Native::CoreApi::Console::GetInputCodePage() {
+int32 Native::ConsoleApi::GetInputCodePage() {
   /// @todo console input code page status on linux and macOS
   return 65001;
 }
 
-int32 Native::CoreApi::Console::GetLargestWindowHeight() {
+int32 Native::ConsoleApi::GetLargestWindowHeight() {
   return 1000;
 }
 
-int32 Native::CoreApi::Console::GetLargestWindowWidth() {
+int32 Native::ConsoleApi::GetLargestWindowWidth() {
   return 1000;
 }
 
-bool Native::CoreApi::Console::GetNumberLock() {
+bool Native::ConsoleApi::GetNumberLock() {
   /// @todo number lock status on linux and macOS
   return false;
 }
 
-int32 Native::CoreApi::Console::GetOutputCodePage() {
+int32 Native::ConsoleApi::GetOutputCodePage() {
   /// @todo console output code page status on linux and macOS
   return 65001;
 }
 
-System::Collections::Generic::SortedDictionary<int32, System::ConsoleSpecialKey> Native::CoreApi::Console::GetSignalKeys() {
+System::Collections::Generic::SortedDictionary<int32, System::ConsoleSpecialKey> Native::ConsoleApi::GetSignalKeys() {
   return {{SIGQUIT, System::ConsoleSpecialKey::ControlBackslash}, {SIGTSTP, System::ConsoleSpecialKey::ControlZ}, {SIGINT, System::ConsoleSpecialKey::ControlC}};
 }
 
-string Native::CoreApi::Console::GetTitle() {
+string Native::ConsoleApi::GetTitle() {
   return "";
 }
 
-int32 Native::CoreApi::Console::GetWindowLeft() {
+int32 Native::ConsoleApi::GetWindowLeft() {
   /// @todo get console window left on linux and macOS
   return 0;
 }
 
-int32 Native::CoreApi::Console::GetWindowHeight() {
+int32 Native::ConsoleApi::GetWindowHeight() {
   if (!Terminal::IsAnsiSupported())
     return 24;
   int32 top = GetCursorTop();
@@ -635,12 +635,12 @@ int32 Native::CoreApi::Console::GetWindowHeight() {
   return height;
 }
 
-int32 Native::CoreApi::Console::GetWindowTop() {
+int32 Native::ConsoleApi::GetWindowTop() {
   /// @todo get console window top on linux and macOS
   return 0;
 }
 
-int32 Native::CoreApi::Console::GetWindowWidth() {
+int32 Native::ConsoleApi::GetWindowWidth() {
   if (!Terminal::IsAnsiSupported())
     return 80;
   int32 left = GetCursorLeft();
@@ -650,11 +650,11 @@ int32 Native::CoreApi::Console::GetWindowWidth() {
   return width;
 }
 
-bool Native::CoreApi::Console::KeyAvailable() {
+bool Native::ConsoleApi::KeyAvailable() {
   return KeyInfo::KeyAvailable();
 }
 
-void Native::CoreApi::Console::ReadKey(int32& keyChar, int32& keyCode, bool& alt, bool& shift, bool& ctrl) {
+void Native::ConsoleApi::ReadKey(int32& keyChar, int32& keyCode, bool& alt, bool& shift, bool& ctrl) {
   KeyInfo keyInfo = KeyInfo::Read();
   keyChar = static_cast<int32>(keyInfo.KeyChar());
   keyCode = static_cast<int32>(keyInfo.Key());
@@ -663,7 +663,7 @@ void Native::CoreApi::Console::ReadKey(int32& keyChar, int32& keyCode, bool& alt
   shift = keyInfo.HasShiftModifier();
 }
 
-bool Native::CoreApi::Console::ResetColor() {
+bool Native::ConsoleApi::ResetColor() {
   if (Terminal::IsAnsiSupported()) {
     printf("\033[49m");
     printf("\033[39m");
@@ -671,7 +671,7 @@ bool Native::CoreApi::Console::ResetColor() {
   return true;
 }
 
-bool Native::CoreApi::Console::SetBackgroundColor(ConsoleColor color) {
+bool Native::ConsoleApi::SetBackgroundColor(ConsoleColor color) {
   static System::Collections::Generic::Dictionary<int32, string> colors {{(int32)ConsoleColor::Black, "\033[40m"}, {(int32)ConsoleColor::DarkBlue, "\033[44m"}, {(int32)ConsoleColor::DarkGreen, "\033[42m"}, {(int32)ConsoleColor::DarkCyan, "\033[46m"}, {(int32)ConsoleColor::DarkRed, "\033[41m"}, {(int32)ConsoleColor::DarkMagenta, "\033[45m"}, {(int32)ConsoleColor::DarkYellow, "\033[43m"}, {(int32)ConsoleColor::Gray, "\033[47m"}, {(int32)ConsoleColor::DarkGray, "\033[100m"}, {(int32)ConsoleColor::Blue, "\033[104m"}, {(int32)ConsoleColor::Green, "\033[102m"}, {(int32)ConsoleColor::Cyan, "\033[106m"}, {(int32)ConsoleColor::Red, "\033[101m"}, {(int32)ConsoleColor::Magenta,"\033[105m"}, {(int32)ConsoleColor::Yellow, "\033[103m"}, {(int32)ConsoleColor::White,"\033[107m"}};
   backColor = color;
   if (Terminal::IsAnsiSupported())
@@ -679,29 +679,29 @@ bool Native::CoreApi::Console::SetBackgroundColor(ConsoleColor color) {
   return true;
 }
 
-bool Native::CoreApi::Console::SetBufferHeight(int32 height) {
+bool Native::ConsoleApi::SetBufferHeight(int32 height) {
   /// @todo set console buffer height on linux and macOS
   return true;
 }
 
-bool Native::CoreApi::Console::SetBufferWidth(int32 width) {
+bool Native::ConsoleApi::SetBufferWidth(int32 width) {
   /// @todo set console buffer width on linux and macOS
   return true;
 }
 
-bool Native::CoreApi::Console::SetCursorLeft(int32 left) {
+bool Native::ConsoleApi::SetCursorLeft(int32 left) {
   if (Terminal::IsAnsiSupported())
     printf("\x1b[%d;%df", GetCursorTop() + 1, left + 1);
   return true;
 }
 
-bool Native::CoreApi::Console::SetCursorTop(int32 top) {
+bool Native::ConsoleApi::SetCursorTop(int32 top) {
   if (Terminal::IsAnsiSupported())
     printf("\x1b[%d;%df", top + 1, GetCursorLeft() + 1);
   return true;
 }
 
-void Native::CoreApi::Console::SetCursorSize(int32 size) {
+void Native::ConsoleApi::SetCursorSize(int32 size) {
   if (Terminal::IsAnsiSupported()) {
     if (size < 50)
       printf("\x1b[4 q");
@@ -710,13 +710,13 @@ void Native::CoreApi::Console::SetCursorSize(int32 size) {
   }
 }
 
-void Native::CoreApi::Console::SetCursorVisible(bool visible) {
+void Native::ConsoleApi::SetCursorVisible(bool visible) {
   cursorVisible = visible;
   if (Terminal::IsAnsiSupported())
     printf(cursorVisible ? "\x1b[?25h" : "\x1b[?25l");
 }
 
-void Native::CoreApi::Console::SetEchoVisible(bool visible) {
+void Native::ConsoleApi::SetEchoVisible(bool visible) {
   termios settings;
   tcgetattr(0, &settings);
   if (visible)
@@ -726,7 +726,7 @@ void Native::CoreApi::Console::SetEchoVisible(bool visible) {
   tcsetattr(0, TCSANOW, &settings);
 }
 
-bool Native::CoreApi::Console::SetForegroundColor(ConsoleColor color) {
+bool Native::ConsoleApi::SetForegroundColor(ConsoleColor color) {
   static System::Collections::Generic::Dictionary<int32, string> colors {{(int32)ConsoleColor::Black, "\033[30m"}, {(int32)ConsoleColor::DarkBlue, "\033[34m"}, {(int32)ConsoleColor::DarkGreen, "\033[32m"}, {(int32)ConsoleColor::DarkCyan, "\033[36m"}, {(int32)ConsoleColor::DarkRed, "\033[31m"}, {(int32)ConsoleColor::DarkMagenta, "\033[35m"}, {(int32)ConsoleColor::DarkYellow, "\033[33m"}, {(int32)ConsoleColor::Gray, "\033[37m"}, {(int32)ConsoleColor::DarkGray, "\033[90m"}, {(int32)ConsoleColor::Blue, "\033[94m"}, {(int32)ConsoleColor::Green, "\033[92m"}, {(int32)ConsoleColor::Cyan, "\033[96m"}, {(int32)ConsoleColor::Red, "\033[91m"}, {(int32)ConsoleColor::Magenta,"\033[95m"}, {(int32)ConsoleColor::Yellow, "\033[93m"}, {(int32)ConsoleColor::White,"\033[97m"}};
   foreColor = color;
   if (Terminal::IsAnsiSupported())
@@ -734,40 +734,40 @@ bool Native::CoreApi::Console::SetForegroundColor(ConsoleColor color) {
   return true;
 }
 
-bool Native::CoreApi::Console::SetInputCodePage(int32 codePage) {
+bool Native::ConsoleApi::SetInputCodePage(int32 codePage) {
   /// @todo set console input code page on linux and macOS
   return true;
 }
 
-bool Native::CoreApi::Console::SetOutputCodePage(int32 codePage) {
+bool Native::ConsoleApi::SetOutputCodePage(int32 codePage) {
   /// @todo set console output code page status on linux and macOS
   return true;
 }
 
-bool Native::CoreApi::Console::SetTitle(const string& title) {
+bool Native::ConsoleApi::SetTitle(const string& title) {
   /// @todo set window title on linux and macOS
   if (Terminal::IsAnsiSupported())
     printf("\x1b[0;%s\x7", title.c_str());
   return true;
 }
 
-bool Native::CoreApi::Console::SetWindowLeft(int32 height) {
+bool Native::ConsoleApi::SetWindowLeft(int32 height) {
   /// @todo set console window left on linux and macOS
   return true;
 }
 
-bool Native::CoreApi::Console::SetWindowHeight(int32 height) {
+bool Native::ConsoleApi::SetWindowHeight(int32 height) {
   if (Terminal::IsAnsiSupported())
     printf("\x1b[8;%d;%dt", height, GetWindowWidth());
   return true;
 }
 
-bool Native::CoreApi::Console::SetWindowTop(int32 height) {
+bool Native::ConsoleApi::SetWindowTop(int32 height) {
   /// @todo set console window top on linux and macOS
   return true;
 }
 
-bool Native::CoreApi::Console::SetWindowWidth(int32 width) {
+bool Native::ConsoleApi::SetWindowWidth(int32 width) {
   if (Terminal::IsAnsiSupported())
     printf("\x1b[8;%d;%dt", GetWindowHeight(), width);
   return true;

@@ -11,9 +11,9 @@
 #include <sys/statvfs.h>
 
 #include "../../include/Switch/System/Collections/Generic/SortedDictionary.hpp"
-#include "CoreApi.hpp"
+#include "Api.hpp"
 
-bool Native::CoreApi::Drive::GetAvailableFreeSpace(const string& rootPathName, int64& freeBytes, int64& totalNumberOfBytes, int64& totalNumberOfFreeBytes) {
+bool Native::DriveApi::GetAvailableFreeSpace(const string& rootPathName, int64& freeBytes, int64& totalNumberOfBytes, int64& totalNumberOfFreeBytes) {
   struct statfs stat;
   if (::statfs(rootPathName.Data(), &stat) != 0)
     return false;
@@ -37,7 +37,7 @@ namespace {
 #endif
 }
 
-System::IO::DriveType Native::CoreApi::Drive::GetDriveType(const string& rootPathName) {
+System::IO::DriveType Native::DriveApi::GetDriveType(const string& rootPathName) {
   if (ramDrives.Contains(rootPathName))
     return System::IO::DriveType::Ram;
   if (rootPathName.StartsWith(AmovibleMountedPoint()))
@@ -47,13 +47,13 @@ System::IO::DriveType Native::CoreApi::Drive::GetDriveType(const string& rootPat
   return System::IO::DriveType::Fixed;
 }
 
-System::Array<string> Native::CoreApi::Drive::GetDrives() {
+System::Array<string> Native::DriveApi::GetDrives() {
   System::Collections::Generic::List<string> drives;
   drives.Add(rootDrive);
   drives.AddRange(ramDrives);
   drives.AddRange(networkDrives);
 
-  for(string drive : Native::CoreApi::Directory::EnumerateDirectories(AmovibleMountedPoint(), "*")) {
+  for(string drive : Native::DirectoryApi::EnumerateDirectories(AmovibleMountedPoint(), "*")) {
     struct statfs stat;
 #if defined(__APPLE__)
     if (statfs(drive.Data(), &stat) == 0 && string(stat.f_mntonname) != rootDrive)
@@ -66,7 +66,7 @@ System::Array<string> Native::CoreApi::Drive::GetDrives() {
   return drives.ToArray();
 }
 
-bool Native::CoreApi::Drive::GetVolumeInformation(const string& rootPathName, string& volumeName, string& fileSystemName) {
+bool Native::DriveApi::GetVolumeInformation(const string& rootPathName, string& volumeName, string& fileSystemName) {
   struct statfs stat;
   if (statfs(rootPathName.Data(), &stat) != 0)
     return false;
@@ -84,7 +84,7 @@ bool Native::CoreApi::Drive::GetVolumeInformation(const string& rootPathName, st
   return true;
 }
 
-bool Native::CoreApi::Drive::SetVolumeLabel(const string& rootPathName, const string& volumeName) {
+bool Native::DriveApi::SetVolumeLabel(const string& rootPathName, const string& volumeName) {
   // It's not possible to change volume label on Apple System
   return false;
 }

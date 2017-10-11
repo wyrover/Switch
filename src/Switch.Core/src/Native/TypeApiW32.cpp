@@ -1,8 +1,8 @@
 #if defined(_WIN32)
 
-#include "CoreApi.hpp"
+#include "Api.hpp"
 
-string Native::CoreApi::Type::Demangle(const string &name) {
+string Native::TypeApi::Demangle(const string &name) {
   System::Array<string> types = {"enum ", "class ", "union ", "struct "};
   string result = name;
   for(string item : types)

@@ -5,13 +5,13 @@
 #include <windows.h>
 #include "../../include/Switch/Undef.hpp"
 
-#include "CoreApi.hpp"
+#include "Api.hpp"
 
 namespace {
   const int64 dateFixOs = 116444736000000000ULL; // Diff 01/01/1601 and 01/01/1970
 }
 
-int32 Native::CoreApi::DateTime::Ftime(int64& seconds, int32& milliseconds, int32& timeZone, bool& daylight) {
+int32 Native::DateTimeApi::Ftime(int64& seconds, int32& milliseconds, int32& timeZone, bool& daylight) {
   TIME_ZONE_INFORMATION tzi = { 0 };
   if (GetTimeZoneInformation(&tzi) == TIME_ZONE_ID_UNKNOWN)
     return -1;
@@ -25,7 +25,7 @@ int32 Native::CoreApi::DateTime::Ftime(int64& seconds, int32& milliseconds, int3
   return 0;
 }
 
-int32 Native::CoreApi::DateTime::Gmtime(int64 time, int32& year, int32& month, int32& day, int32& hour, int32& minute, int32& second, int32& dayOfYear, int32& dayOfWeek) {
+int32 Native::DateTimeApi::Gmtime(int64 time, int32& year, int32& month, int32& day, int32& hour, int32& minute, int32& second, int32& dayOfYear, int32& dayOfWeek) {
   ULARGE_INTEGER uli = { 0 };
   uli.QuadPart = (time * 10000000UL) + dateFixOs;
   FILETIME ft = { uli.LowPart, uli.HighPart };
@@ -44,7 +44,7 @@ int32 Native::CoreApi::DateTime::Gmtime(int64 time, int32& year, int32& month, i
   return 0;
 }
 
-int32 Native::CoreApi::DateTime::Localtime(int64 time, int32& year, int32& month, int32& day, int32& hour, int32& minute, int32& second, int32& dayOfYear, int32& dayOfWeek) {
+int32 Native::DateTimeApi::Localtime(int64 time, int32& year, int32& month, int32& day, int32& hour, int32& minute, int32& second, int32& dayOfYear, int32& dayOfWeek) {
   ULARGE_INTEGER uli = { 0 };
   uli.QuadPart = (time * 10000000UL) + dateFixOs;
   FILETIME ft = { uli.LowPart, uli.HighPart };
@@ -67,7 +67,7 @@ int32 Native::CoreApi::DateTime::Localtime(int64 time, int32& year, int32& month
   return 0;
 }
 
-int64 Native::CoreApi::DateTime::Mkgmtime(int32 year, int32 month, int32 day, int32 hour, int32 minute, int32 second) {
+int64 Native::DateTimeApi::Mkgmtime(int32 year, int32 month, int32 day, int32 hour, int32 minute, int32 second) {
   SYSTEMTIME st = { (WORD)year, (WORD)month, 0, (WORD)day, (WORD)hour, (WORD)minute, (WORD)second, 0 };
   FILETIME ft = { 0 };
   if (SystemTimeToFileTime(&st, &ft) == 0)
@@ -79,7 +79,7 @@ int64 Native::CoreApi::DateTime::Mkgmtime(int32 year, int32 month, int32 day, in
   return lt.QuadPart;
 }
 
-int64 Native::CoreApi::DateTime::Mktime(int32 year, int32 month, int32 day, int32 hour, int32 minute, int32 second) {
+int64 Native::DateTimeApi::Mktime(int32 year, int32 month, int32 day, int32 hour, int32 minute, int32 second) {
   SYSTEMTIME st = { (WORD)year, (WORD)month, 0, (WORD)day, (WORD)hour, (WORD)minute, (WORD)second, 0 };
   FILETIME ft = { 0 };
   if (SystemTimeToFileTime(&st, &ft) == 0)
@@ -95,7 +95,7 @@ int64 Native::CoreApi::DateTime::Mktime(int32 year, int32 month, int32 day, int3
   return lt.QuadPart;
 }
 
-int32 Native::CoreApi::DateTime::Strftime(string& output, const string& format, int32 year, int32 month, int32 day, int32 hour, int32 minute, int32 second, int32 dayOfYear, int32 dayOfWeek, bool daylight) {
+int32 Native::DateTimeApi::Strftime(string& output, const string& format, int32 year, int32 month, int32 day, int32 hour, int32 minute, int32 second, int32 dayOfYear, int32 dayOfWeek, bool daylight) {
   struct tm value = { second, minute, hour, day, month-1, year - 1900, dayOfWeek, dayOfYear, daylight == true ? 1 : 0 };
   char buffer[256];
   int32 result = (int32)strftime(buffer, 256, format.Data, &value);
@@ -103,7 +103,7 @@ int32 Native::CoreApi::DateTime::Strftime(string& output, const string& format, 
   return result;
 }
 
-bool Native::CoreApi::DateTime::IsDaylight(int64 localTime) {
+bool Native::DateTimeApi::IsDaylight(int64 localTime) {
   struct tm value = {0, 0, 0, 0, 0, 0, 0, 0, 0};
     localtime_s(&value, &localTime);
   return value.tm_isdst != 0;

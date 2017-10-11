@@ -7,7 +7,7 @@
 #include <windows.h>
 #include "../../include/Switch/Undef.hpp"
 
-#include "CoreApi.hpp"
+#include "Api.hpp"
 
 static string CreateProcess(const string& command) {
   FILE* fs = _popen(command.Data(), "r");
@@ -22,15 +22,15 @@ static string CreateProcess(const string& command) {
   return result;
 }
 
-System::PlatformID Native::CoreApi::Environment::GetOsPlatformID() {
+System::PlatformID Native::EnvironmentApi::GetOsPlatformID() {
   return System::PlatformID::Win32NT;
 }
 
-string Native::CoreApi::Environment::NewLine() {
+string Native::EnvironmentApi::NewLine() {
   return "\r\n";
 }
 
-int32 Native::CoreApi::Environment::GetOsVersion(int32& major, int32& minor, int32& build, int32& revision) {
+int32 Native::EnvironmentApi::GetOsVersion(int32& major, int32& minor, int32& build, int32& revision) {
   string result = CreateProcess("ver");
   System::Array<string> numbers = result.Substring(result.LastIndexOf(" ")).Replace("]", "").Split({ '.', '\n' });
   if (numbers.Length() < 1 || !System::Int32::TryParse(numbers[0], major))
@@ -44,45 +44,45 @@ int32 Native::CoreApi::Environment::GetOsVersion(int32& major, int32& minor, int
   return 0;
 }
 
-bool Native::CoreApi::Environment::IsOs64Bit() {
+bool Native::EnvironmentApi::IsOs64Bit() {
   return string(getenv("PROCESSOR_ARCHITECTURE")).EndsWith("64");
 }
 
-string Native::CoreApi::Environment::GetMachineName() {
+string Native::EnvironmentApi::GetMachineName() {
   char name[512];
   strcpy_s(name, 512, getenv("COMPUTERNAME"));
   return name;
 }
 
-int32 Native::CoreApi::Environment::GetTickCount() {
+int32 Native::EnvironmentApi::GetTickCount() {
   return ::GetTickCount();
 }
 
-string Native::CoreApi::Environment::GetUserDomainName() {
+string Native::EnvironmentApi::GetUserDomainName() {
   char name[512];
   strcpy_s(name, 512, getenv("USERDOMAIN"));
   return name;
 }
 
-string Native::CoreApi::Environment::GetUserName() {
+string Native::EnvironmentApi::GetUserName() {
   char name[512];
   strcpy(name, getenv("USERNAME"));
   return name;
 }
 
-int64 Native::CoreApi::Environment::GetWorkingSet() {
+int64 Native::EnvironmentApi::GetWorkingSet() {
   return 0;
 }
 
-int32 Native::CoreApi::Environment::SetEnv(const string& name, const string& value) {
+int32 Native::EnvironmentApi::SetEnv(const string& name, const string& value) {
   return _putenv(string::Format("{0}={1}", name, value).Data);
 }
 
-int32 Native::CoreApi::Environment::UnsetEnv(const string& name) {
+int32 Native::EnvironmentApi::UnsetEnv(const string& name) {
   return _putenv(string::Format("{0}=", name).Data);
 }
 
-System::Guid Native::CoreApi::Environment::NewGuid() {
+System::Guid Native::EnvironmentApi::NewGuid() {
   UUID guid;
   UuidCreate(&guid);
   return System::Guid(guid.Data1, guid.Data2, guid.Data3, guid.Data4);

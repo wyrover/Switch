@@ -4,7 +4,7 @@
 #include "../../../../include/Switch/System/IO/Path.hpp"
 #include "../../../../include/Switch/System/Security/SecurityException.hpp"
 #include "../../../../include/Switch/System/Text/StringBuilder.hpp"
-#include "../../../Native/CoreApi.hpp"
+#include "../../../Native/Api.hpp"
 
 using namespace System;
 using namespace System::IO;
@@ -19,7 +19,7 @@ DirectoryInfo::DirectoryInfo(const string& path) {
 
 bool DirectoryInfo::GetExists() const {
   System::IO::FileAttributes fileAttributes = (System::IO::FileAttributes)0;
-  return (Native::CoreApi::Directory::GetFileAttributes(this->fullPath.Data(), fileAttributes) == 0 && Enum<FileAttributes>(fileAttributes).HasFlag(FileAttributes::Directory));
+  return (Native::DirectoryApi::GetFileAttributes(this->fullPath.Data(), fileAttributes) == 0 && Enum<FileAttributes>(fileAttributes).HasFlag(FileAttributes::Directory));
 }
 
 string DirectoryInfo::GetName() const {
@@ -40,7 +40,7 @@ DirectoryInfo DirectoryInfo::GetRoot() const {
 }
 
 void DirectoryInfo::Create() {
-  if (Native::CoreApi::Directory::CreateDirectory(this->fullPath) != 0)
+  if (Native::DirectoryApi::CreateDirectory(this->fullPath) != 0)
     throw IOException(_caller);
 }
 
@@ -56,26 +56,26 @@ void DirectoryInfo::Delete(bool recursive) {
     throw Security::SecurityException(_caller);
   
   if (recursive) {
-    for (string item : Native::CoreApi::Directory::EnumerateFiles(this->fullPath, "*"))
+    for (string item : Native::DirectoryApi::EnumerateFiles(this->fullPath, "*"))
       File::Delete(Path::Combine(this->fullPath, item));
-    for (string item : Native::CoreApi::Directory::EnumerateDirectories(this->fullPath, "*"))
+    for (string item : Native::DirectoryApi::EnumerateDirectories(this->fullPath, "*"))
       Directory::Delete(Path::Combine(this->fullPath, item), true);
   }
   
-  if (Native::CoreApi::Directory::RemoveDirectory(this->fullPath) != 0)
+  if (Native::DirectoryApi::RemoveDirectory(this->fullPath) != 0)
     throw IOException(_caller);
 }
 
 Array<FileInfo> DirectoryInfo::GetFiles(const string& searchPattern) const {
   System::Collections::Generic::List<FileInfo> files;
-  for (string item : Native::CoreApi::Directory::EnumerateFiles(this->fullPath, searchPattern))
+  for (string item : Native::DirectoryApi::EnumerateFiles(this->fullPath, searchPattern))
     files.Add(FileInfo(Path::Combine(this->fullPath, item)));
   return files.ToArray();
 }
 
 Array<DirectoryInfo> DirectoryInfo::GetDirectories(const string& searchPattern) const {
   System::Collections::Generic::List<DirectoryInfo> directories;
-  for (string item : Native::CoreApi::Directory::EnumerateDirectories(this->fullPath, searchPattern))
+  for (string item : Native::DirectoryApi::EnumerateDirectories(this->fullPath, searchPattern))
     directories.Add(DirectoryInfo(Path::Combine(this->fullPath, item)));
   return directories.ToArray();
 }
@@ -92,9 +92,9 @@ void DirectoryInfo::MoveTo(const string& destDirName) {
   string targetDirName = Path::Combine(destDirName, this->fullPath.Substring(this->fullPath.LastIndexOf(Path::DirectorySeparatorChar) + 1));
   Directory::CreateDirectory(targetDirName);
   
-  for (string item : Native::CoreApi::Directory::EnumerateFiles(this->fullPath, "*"))
+  for (string item : Native::DirectoryApi::EnumerateFiles(this->fullPath, "*"))
     File::Move(Path::Combine(this->fullPath, item), Path::Combine(targetDirName, item));
-  for (string item : Native::CoreApi::Directory::EnumerateDirectories(this->fullPath, "*"))
+  for (string item : Native::DirectoryApi::EnumerateDirectories(this->fullPath, "*"))
     Directory::Move(Path::Combine(this->fullPath, item), Path::Combine(targetDirName, item));
 
   Delete();

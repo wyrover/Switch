@@ -5,20 +5,20 @@
 #include <windows.h>
 #include "../../include/Switch/Undef.hpp"
 
-#include "CoreApi.hpp"
+#include "Api.hpp"
 
 using namespace System;
 
 namespace {
-  static ConsoleColor backColor = Native::CoreApi::Console::GetBackgroundColor();
-  static ConsoleColor foreColor = Native::CoreApi::Console::GetForegroundColor();
+  static ConsoleColor backColor = Native::ConsoleApi::GetBackgroundColor();
+  static ConsoleColor foreColor = Native::ConsoleApi::GetForegroundColor();
 }
 
-void Native::CoreApi::Console::Beep(int32 frequency, int32 duration) {
+void Native::ConsoleApi::Beep(int32 frequency, int32 duration) {
   ::Beep(frequency, duration);
 }
 
-void Native::CoreApi::Console::Clrscr() {
+void Native::ConsoleApi::Clrscr() {
   CONSOLE_SCREEN_BUFFER_INFO csbi;
   GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE),&csbi);
 
@@ -30,119 +30,119 @@ void Native::CoreApi::Console::Clrscr() {
   SetCursorTop(0);
 }
 
-ConsoleColor Native::CoreApi::Console::GetBackgroundColor() {
+ConsoleColor Native::ConsoleApi::GetBackgroundColor() {
   CONSOLE_SCREEN_BUFFER_INFO bufferInfo;
   GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &bufferInfo);
   return ConsoleColor((bufferInfo.wAttributes & 0x00F0) >> 4);
 }
 
-int32 Native::CoreApi::Console::GetBufferHeight() {
+int32 Native::ConsoleApi::GetBufferHeight() {
   CONSOLE_SCREEN_BUFFER_INFO csbi;
   GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
   return csbi.dwSize.Y;
 }
 
-int32 Native::CoreApi::Console::GetBufferWidth() {
+int32 Native::ConsoleApi::GetBufferWidth() {
   CONSOLE_SCREEN_BUFFER_INFO csbi;
   GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
   return csbi.dwSize.X;
 }
 
-bool Native::CoreApi::Console::GetCapsLock() {
+bool Native::ConsoleApi::GetCapsLock() {
   return (GetKeyState(VK_CAPITAL) & 0x0001) == 0x0001;
 }
 
-int32 Native::CoreApi::Console::GetCursorLeft() {
+int32 Native::ConsoleApi::GetCursorLeft() {
   CONSOLE_SCREEN_BUFFER_INFO csbi;
   GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
   return csbi.dwCursorPosition.X;
 }
 
-int32 Native::CoreApi::Console::GetCursorSize() {
+int32 Native::ConsoleApi::GetCursorSize() {
   CONSOLE_CURSOR_INFO cursorInfo;
   GetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cursorInfo);
   return cursorInfo.dwSize;
 }
 
-int32 Native::CoreApi::Console::GetCursorTop() {
+int32 Native::ConsoleApi::GetCursorTop() {
   CONSOLE_SCREEN_BUFFER_INFO csbi;
   GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
   return csbi.dwCursorPosition.Y;
 }
 
-bool Native::CoreApi::Console::GetCursorVisible() {
+bool Native::ConsoleApi::GetCursorVisible() {
   CONSOLE_CURSOR_INFO cursorInfo;
   GetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cursorInfo);
   return cursorInfo.bVisible != FALSE;
 }
 
-ConsoleColor Native::CoreApi::Console::GetForegroundColor() {
+ConsoleColor Native::ConsoleApi::GetForegroundColor() {
   CONSOLE_SCREEN_BUFFER_INFO bufferInfo;
   GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &bufferInfo);
   return ConsoleColor(bufferInfo.wAttributes & 0x000F);
 }
 
-int32 Native::CoreApi::Console::GetInputCodePage() {
+int32 Native::ConsoleApi::GetInputCodePage() {
   return GetConsoleCP();
 }
 
-int32 Native::CoreApi::Console::GetLargestWindowHeight() {
+int32 Native::ConsoleApi::GetLargestWindowHeight() {
   CONSOLE_SCREEN_BUFFER_INFO csbi;
   GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
   return csbi.dwMaximumWindowSize.Y;
 }
 
-int32 Native::CoreApi::Console::GetLargestWindowWidth() {
+int32 Native::ConsoleApi::GetLargestWindowWidth() {
   CONSOLE_SCREEN_BUFFER_INFO csbi;
   GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
   return csbi.dwMaximumWindowSize.X;
 }
 
-bool Native::CoreApi::Console::GetNumberLock() {
+bool Native::ConsoleApi::GetNumberLock() {
   return (GetKeyState(VK_NUMLOCK) & 0x0001) == 0x0001;
 }
 
-int32 Native::CoreApi::Console::GetOutputCodePage() {
+int32 Native::ConsoleApi::GetOutputCodePage() {
   return GetConsoleOutputCP();
 }
 
-System::Collections::Generic::SortedDictionary<int32, System::ConsoleSpecialKey> Native::CoreApi::Console::GetSignalKeys() {
+System::Collections::Generic::SortedDictionary<int32, System::ConsoleSpecialKey> Native::ConsoleApi::GetSignalKeys() {
   return {{SIGBREAK, System::ConsoleSpecialKey::ControlBreak}, {SIGINT, System::ConsoleSpecialKey::ControlC}};
 }
 
-string Native::CoreApi::Console::GetTitle() {
+string Native::ConsoleApi::GetTitle() {
   return "";
 }
 
-int32 Native::CoreApi::Console::GetWindowHeight() {
+int32 Native::ConsoleApi::GetWindowHeight() {
   CONSOLE_SCREEN_BUFFER_INFO csbi;
   GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
   return csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
 }
 
-int32 Native::CoreApi::Console::GetWindowLeft() {
+int32 Native::ConsoleApi::GetWindowLeft() {
   CONSOLE_SCREEN_BUFFER_INFO csbi;
   GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
   return csbi.srWindow.Left;
 }
 
-int32 Native::CoreApi::Console::GetWindowTop() {
+int32 Native::ConsoleApi::GetWindowTop() {
   CONSOLE_SCREEN_BUFFER_INFO csbi;
   GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
   return csbi.srWindow.Top;
 }
 
-int32 Native::CoreApi::Console::GetWindowWidth() {
+int32 Native::ConsoleApi::GetWindowWidth() {
   CONSOLE_SCREEN_BUFFER_INFO csbi;
   GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
   return csbi.srWindow.Right - csbi.srWindow.Left + 1;
 }
 
-bool Native::CoreApi::Console::KeyAvailable() {
+bool Native::ConsoleApi::KeyAvailable() {
   return _kbhit() != 0;
 }
 
-void Native::CoreApi::Console::ReadKey(int32& keyChar, int32& keyCode, bool& alt, bool& shift, bool& ctrl) {
+void Native::ConsoleApi::ReadKey(int32& keyChar, int32& keyCode, bool& alt, bool& shift, bool& ctrl) {
   INPUT_RECORD inputRecord;
   do {
     DWORD nbEventsRead = 0;
@@ -156,11 +156,11 @@ void Native::CoreApi::Console::ReadKey(int32& keyChar, int32& keyCode, bool& alt
   ctrl = (inputRecord.Event.KeyEvent.dwControlKeyState & LEFT_CTRL_PRESSED) == LEFT_CTRL_PRESSED || (inputRecord.Event.KeyEvent.dwControlKeyState & RIGHT_CTRL_PRESSED) == RIGHT_CTRL_PRESSED;
 }
 
-bool Native::CoreApi::Console::ResetColor() {
+bool Native::ConsoleApi::ResetColor() {
   return SetBackgroundColor(backColor) && SetForegroundColor(foreColor);
 }
 
-bool Native::CoreApi::Console::SetBackgroundColor(ConsoleColor color) {
+bool Native::ConsoleApi::SetBackgroundColor(ConsoleColor color) {
   CONSOLE_SCREEN_BUFFER_INFO csbi;
   GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
 
@@ -169,35 +169,35 @@ bool Native::CoreApi::Console::SetBackgroundColor(ConsoleColor color) {
   return SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), csbi.wAttributes) == TRUE;
 }
 
-bool Native::CoreApi::Console::SetBufferHeight(int32 height) {
+bool Native::ConsoleApi::SetBufferHeight(int32 height) {
   CONSOLE_SCREEN_BUFFER_INFO csbi;
   GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
   csbi.dwSize.Y = height;
   return SetConsoleScreenBufferSize(GetStdHandle(STD_OUTPUT_HANDLE), csbi.dwSize) == TRUE;
 }
 
-bool Native::CoreApi::Console::SetBufferWidth(int32 width) {
+bool Native::ConsoleApi::SetBufferWidth(int32 width) {
   CONSOLE_SCREEN_BUFFER_INFO csbi;
   GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
   csbi.dwSize.X = width;
   return SetConsoleScreenBufferSize(GetStdHandle(STD_OUTPUT_HANDLE), csbi.dwSize) == TRUE;
 }
 
-bool Native::CoreApi::Console::SetCursorLeft(int32 left) {
+bool Native::ConsoleApi::SetCursorLeft(int32 left) {
   CONSOLE_SCREEN_BUFFER_INFO csbi;
   GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
   csbi.dwCursorPosition.X = left;
   return SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), csbi.dwCursorPosition) == TRUE;
 }
 
-bool Native::CoreApi::Console::SetCursorTop(int32 top) {
+bool Native::ConsoleApi::SetCursorTop(int32 top) {
   CONSOLE_SCREEN_BUFFER_INFO csbi;
   GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
   csbi.dwCursorPosition.Y = top;
   return SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), csbi.dwCursorPosition) == TRUE;
 }
 
-void Native::CoreApi::Console::SetCursorSize(int32 size) {
+void Native::ConsoleApi::SetCursorSize(int32 size) {
   CONSOLE_CURSOR_INFO cci;
   GetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cci);
 
@@ -205,7 +205,7 @@ void Native::CoreApi::Console::SetCursorSize(int32 size) {
   SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cci);
 }
 
-void Native::CoreApi::Console::SetCursorVisible(bool visible) {
+void Native::ConsoleApi::SetCursorVisible(bool visible) {
   CONSOLE_CURSOR_INFO cci;
   GetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cci);
   
@@ -213,11 +213,11 @@ void Native::CoreApi::Console::SetCursorVisible(bool visible) {
   SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cci);
 }
 
-void Native::CoreApi::Console::SetEchoVisible(bool visible) {
+void Native::ConsoleApi::SetEchoVisible(bool visible) {
   // Only for Linux terminal...
 }
 
-bool Native::CoreApi::Console::SetForegroundColor(ConsoleColor color) {
+bool Native::ConsoleApi::SetForegroundColor(ConsoleColor color) {
   CONSOLE_SCREEN_BUFFER_INFO csbi;
   GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
 
@@ -226,40 +226,40 @@ bool Native::CoreApi::Console::SetForegroundColor(ConsoleColor color) {
   return SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), csbi.wAttributes) == TRUE;
 }
 
-bool Native::CoreApi::Console::SetInputCodePage(int32 codePage) {
+bool Native::ConsoleApi::SetInputCodePage(int32 codePage) {
   return SetConsoleCP(codePage) == TRUE;
 }
 
-bool Native::CoreApi::Console::SetOutputCodePage(int32 codePage) {
+bool Native::ConsoleApi::SetOutputCodePage(int32 codePage) {
   return SetConsoleOutputCP(codePage) == TRUE;
 }
 
-bool Native::CoreApi::Console::SetTitle(const string& title) {
+bool Native::ConsoleApi::SetTitle(const string& title) {
   return true;
 }
 
-bool Native::CoreApi::Console::SetWindowHeight(int32 height) {
+bool Native::ConsoleApi::SetWindowHeight(int32 height) {
   CONSOLE_SCREEN_BUFFER_INFO csbi;
   GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
   csbi.srWindow.Bottom = csbi.srWindow.Top + height - 1;
   return SetConsoleWindowInfo(GetStdHandle(STD_OUTPUT_HANDLE), TRUE, &csbi.srWindow) == TRUE;
 }
 
-bool Native::CoreApi::Console::SetWindowLeft(int32 left) {
+bool Native::ConsoleApi::SetWindowLeft(int32 left) {
   CONSOLE_SCREEN_BUFFER_INFO csbi;
   GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
   csbi.srWindow.Left = left;
   return SetConsoleWindowInfo(GetStdHandle(STD_OUTPUT_HANDLE), TRUE, &csbi.srWindow) == TRUE;
 }
 
-bool Native::CoreApi::Console::SetWindowTop(int32 top) {
+bool Native::ConsoleApi::SetWindowTop(int32 top) {
   CONSOLE_SCREEN_BUFFER_INFO csbi;
   GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
   csbi.srWindow.Top = top;
   return SetConsoleWindowInfo(GetStdHandle(STD_OUTPUT_HANDLE), TRUE, &csbi.srWindow) == TRUE;
 }
 
-bool Native::CoreApi::Console::SetWindowWidth(int32 width) {
+bool Native::ConsoleApi::SetWindowWidth(int32 width) {
   CONSOLE_SCREEN_BUFFER_INFO csbi;
   GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
   csbi.srWindow.Right = csbi.srWindow.Left + width - 1;

@@ -2,7 +2,7 @@
 
 #include <syslog.h>
 
-#include "CoreApi.hpp"
+#include "Api.hpp"
 
 namespace {
   int32 LevelToNative(int32 level) {
@@ -20,7 +20,7 @@ namespace {
   }
 }
 
-void Native::CoreApi::Debugger::Log(int32 level, const string& category, const string &message) {
+void Native::DebuggerApi::Log(int32 level, const string& category, const string &message) {
   if (string::IsNullOrEmpty(category))
     syslog(LevelToNative(level) | LOG_USER, "%s", message.Data());
   else

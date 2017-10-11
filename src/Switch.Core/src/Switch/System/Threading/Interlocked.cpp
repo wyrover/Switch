@@ -1,6 +1,6 @@
 #include "../../../../include/Switch/System/Array.hpp"
 #include "../../../../include/Switch/System/Threading/Interlocked.hpp"
-#include "../../../Native/CoreApi.hpp"
+#include "../../../Native/Api.hpp"
 
 using namespace System;
 using namespace System::Threading;
@@ -8,11 +8,11 @@ using namespace System::Threading;
 std::mutex Interlocked::guard;
 
 int32 Interlocked::Add(int32& location, int32 value) {
-  return Native::CoreApi::Interlocked::Add(location, value);
+  return Native::InterlockedApi::Add(location, value);
 }
 
 int64 Interlocked::Add(int64& location, int64 value) {
-  return Native::CoreApi::Interlocked::Add(location, value);
+  return Native::InterlockedApi::Add(location, value);
 }
 
 double Interlocked::CompareExchange(double& location, double value, double comparand) {
@@ -24,19 +24,19 @@ double Interlocked::CompareExchange(double& location, double value, double compa
 }
 
 int32 Interlocked::CompareExchange(int32& location, int32 value, int32 comparand) {
-  return Native::CoreApi::Interlocked::CompareExchange(location, value, comparand);
+  return Native::InterlockedApi::CompareExchange(location, value, comparand);
 }
 
 int64 Interlocked::CompareExchange(int64& location, int64 value, int64 comparand) {
-  return Native::CoreApi::Interlocked::CompareExchange(location, value, comparand);
+  return Native::InterlockedApi::CompareExchange(location, value, comparand);
 }
 
 llong Interlocked::CompareExchange(llong& location, llong value, llong comparand) {
-  return Native::CoreApi::Interlocked::CompareExchange(location, value, comparand);
+  return Native::InterlockedApi::CompareExchange(location, value, comparand);
 }
 
 void* Interlocked::CompareExchange(void*& location, void* value, void* comparand) {
-  return Native::CoreApi::Interlocked::CompareExchange(location, value, comparand);
+  return Native::InterlockedApi::CompareExchange(location, value, comparand);
 }
 
 float Interlocked::CompareExchange(float& location, float value, float comparand) {
@@ -48,11 +48,11 @@ float Interlocked::CompareExchange(float& location, float value, float comparand
 }
 
 int32 Interlocked::Decrement(int32& location) {
-  return Native::CoreApi::Interlocked::Decrement(location);
+  return Native::InterlockedApi::Decrement(location);
 }
 
 int64 Interlocked::Decrement(int64& location) {
-  return Native::CoreApi::Interlocked::Decrement(location);
+  return Native::InterlockedApi::Decrement(location);
 }
 
 double Interlocked::Exchange(double& location, double value) {
@@ -63,19 +63,19 @@ double Interlocked::Exchange(double& location, double value) {
 }
 
 int32 Interlocked::Exchange(int32& location, int32 value) {
-  return Native::CoreApi::Interlocked::Exchange(location, value);
+  return Native::InterlockedApi::Exchange(location, value);
 }
 
 int64 Interlocked::Exchange(int64& location, int64 value) {
-  return Native::CoreApi::Interlocked::Exchange(location, value);
+  return Native::InterlockedApi::Exchange(location, value);
 }
 
 llong Interlocked::Exchange(llong& location, llong value) {
-  return Native::CoreApi::Interlocked::Exchange(location, value);
+  return Native::InterlockedApi::Exchange(location, value);
 }
 
 void* Interlocked::Exchange(void*& location, void* value) {
-  return Native::CoreApi::Interlocked::Exchange(location, value);
+  return Native::InterlockedApi::Exchange(location, value);
 }
 
 float Interlocked::Exchange(float& location, float value) {
@@ -86,11 +86,11 @@ float Interlocked::Exchange(float& location, float value) {
 }
 
 int32 Interlocked::Increment(int32& location) {
-  return Native::CoreApi::Interlocked::Increment(location);
+  return Native::InterlockedApi::Increment(location);
 }
 
 int64 Interlocked::Increment(int64& location) {
-  return Native::CoreApi::Interlocked::Increment(location);
+  return Native::InterlockedApi::Increment(location);
 }
 
 void Interlocked::MemoryBarrier() {

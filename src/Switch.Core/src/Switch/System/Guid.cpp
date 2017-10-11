@@ -1,8 +1,8 @@
 #include "../../../include/Switch/System/Guid.hpp"
-#include "../../Native/CoreApi.hpp"
+#include "../../Native/Api.hpp"
 
 System::Guid System::Guid::Empty;
 
 System::Guid System::Guid::NewGuid() {
-  return Native::CoreApi::Environment::NewGuid();
+  return Native::EnvironmentApi::NewGuid();
 }

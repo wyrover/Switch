@@ -5,7 +5,7 @@
 #include "../../../../include/Switch/System/IO/File.hpp"
 #include "../../../../include/Switch/System/IO/FileNotFoundException.hpp"
 #include "../../../../include/Switch/System/IO/Path.hpp"
-#include "../../../Native/CoreApi.hpp"
+#include "../../../Native/Api.hpp"
 
 using namespace System;
 using namespace System::IO;
@@ -25,7 +25,7 @@ FileInfo::FileInfo(const FileInfo& fileInfo) : FileSystemInfo(fileInfo), Directo
 
 bool FileInfo::GetExists() const {
   System::IO::FileAttributes fileAttributes = (System::IO::FileAttributes)0;
-  return (Native::CoreApi::Directory::GetFileAttributes(this->fullPath.ToCCharArray().Data(), fileAttributes) == 0 && !Enum<FileAttributes>(fileAttributes).HasFlag(FileAttributes::Directory));
+  return (Native::DirectoryApi::GetFileAttributes(this->fullPath.ToCCharArray().Data(), fileAttributes) == 0 && !Enum<FileAttributes>(fileAttributes).HasFlag(FileAttributes::Directory));
 }
 
 DirectoryInfo FileInfo::GetDirectory() const {
@@ -41,7 +41,7 @@ string FileInfo::GetName() const {
 }
 
 void FileInfo::Delete() {
-  if (Native::CoreApi::Directory::RemoveFile(this->fullPath.ToCCharArray().Data()) != 0)
+  if (Native::DirectoryApi::RemoveFile(this->fullPath.ToCCharArray().Data()) != 0)
     throw System::Security::SecurityException(_caller);
 }
 
@@ -95,14 +95,14 @@ void FileInfo::MoveTo(const string& destFileName) {
     throw ArgumentException(_caller);
   
   string fullPathDestFileName = Path::GetFullPath(destFileName);
-  if (Native::CoreApi::Directory::RenameFile(this->fullPath, fullPathDestFileName) != 0)
+  if (Native::DirectoryApi::RenameFile(this->fullPath, fullPathDestFileName) != 0)
     throw IOException(_caller);
   
   this->fullPath = fullPathDestFileName;
 }
 
 int64 FileInfo::GetLength() const {
-  return Native::CoreApi::Directory::GetFileSize(this->fullPath);
+  return Native::DirectoryApi::GetFileSize(this->fullPath);
 }
 
 FileStream FileInfo::Open(FileMode mode, FileAccess access) {

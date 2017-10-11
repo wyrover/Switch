@@ -332,33 +332,33 @@ set(INCLUDE_FILES
 set(SOURCE_FILES
   src/Switch/System/Threading/Monitor.cpp
 
-  src/Native/CoreApi.hpp
-  src/Native/ConsoleGcc.cpp
-  src/Native/ConsoleW32.cpp
-  src/Native/DateTimeGcc.cpp
-  src/Native/DateTimeW32.cpp
-  src/Native/DebuggerGcc.cpp
-  src/Native/DebuggerW32.cpp
-  src/Native/DirectoryGcc.cpp
-  src/Native/DirectoryW32.cpp
-  src/Native/DriveGcc.cpp
-  src/Native/DriveW32.cpp
-  src/Native/EnvironmentGcc.cpp
-  src/Native/EnvironmentW32.cpp
-  src/Native/Format.cpp
-  src/Native/InterlockedGcc.cpp
-  src/Native/InterlockedW32.cpp
-  src/Native/ProcessGcc.cpp
-  src/Native/ProcessW32.cpp
-  src/Native/RegistryGcc.cpp
-  src/Native/RegistryW32.cpp
-  src/Native/Security.cpp
-  src/Native/ThreadGcc.cpp
-  src/Native/ThreadW32.cpp
-  src/Native/TypeGcc.cpp
-  src/Native/TypeW32.cpp
-  src/Native/UnicodeCharacters.cpp
-  src/Native/UnicodeEncodings.cpp
+  src/Native/Api.hpp
+  src/Native/ConsoleApiGcc.cpp
+  src/Native/ConsoleApiW32.cpp
+  src/Native/DateTimeApiGcc.cpp
+  src/Native/DateTimeApiW32.cpp
+  src/Native/DebuggerApiGcc.cpp
+  src/Native/DebuggerApiW32.cpp
+  src/Native/DirectoryApiGcc.cpp
+  src/Native/DirectoryApiW32.cpp
+  src/Native/DriveApiGcc.cpp
+  src/Native/DriveApiW32.cpp
+  src/Native/EnvironmentApiGcc.cpp
+  src/Native/EnvironmentApiW32.cpp
+  src/Native/FormatApi.cpp
+  src/Native/InterlockedApiGcc.cpp
+  src/Native/InterlockedApiW32.cpp
+  src/Native/ProcessApiGcc.cpp
+  src/Native/ProcessApiW32.cpp
+  src/Native/RegistryApiGcc.cpp
+  src/Native/RegistryApiW32.cpp
+  src/Native/SecurityApi.cpp
+  src/Native/ThreadApiGcc.cpp
+  src/Native/ThreadApiW32.cpp
+  src/Native/TypeApiGcc.cpp
+  src/Native/TypeApiW32.cpp
+  src/Native/UnicodeCharactersApi.cpp
+  src/Native/UnicodeEncodingsApi.cpp
   src/Switch/Microsoft/Win32/RegistryKeyWin.cpp
   src/Switch/Microsoft/Win32/RegistryKeyAll.cpp
   src/Switch/System/Diagnostics/Debug.cpp
