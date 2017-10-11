@@ -14,7 +14,7 @@
 
 - **System** : The *Switch.Core*, *Switch.System* and *Switch.System.Core* libraries are libraries of classes, interfaces, and value types that provide access to system functionality. It is the foundation on which c++ applications, components, and controls are built.
 - **Drawing** : The *Switch.System.Drawing* library contains types that support basic GDI+ graphics functionality. Child namespaces support advanced two-dimensional and vector graphics functionality, advanced imaging functionality, and print-related and typographical services. A child namespace also contains types that extend design-time user-interface logic and drawing.
-- **Forms** : The *Switch.system.Windows.Forms* library contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system.
+- **Forms** : The *Switch.System.Windows.Forms* library contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system.
 - **TUnit** : The *Switch.TUnit.Core* and *Switch.Tunit.Main* libraries are a unit-testing framework for modern C++14. Initially ported from NUnit.
 
 # Objectives and Mission
