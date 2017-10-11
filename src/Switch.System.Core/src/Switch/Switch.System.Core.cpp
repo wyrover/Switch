@@ -1,5 +1,5 @@
 #include <Switch/System/Environment.hpp>
 
-namespace {
+namespace __SwitchSystemCore {
   System::Version LibraryVersion() {return System::Environment::Version;}
 }
