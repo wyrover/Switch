@@ -10,7 +10,6 @@
 #include "../../../include/Switch/System/AccessViolationException.hpp"
 #include "../../../include/Switch/System/Console.hpp"
 #include "../../../include/Switch/System/Environment.hpp"
-#include "../../../include/Switch/System/SystemVersion.hpp"
 #include "../../../include/Switch/System/IO/Directory.hpp"
 #include "../../../include/Switch/System/IO/DirectoryNotFoundException.hpp"
 #include "../../../include/Switch/System/Diagnostics/StackTrace.hpp"
@@ -231,8 +230,8 @@ _property<String, _readonly> Environment::UserName {
   [] {return Native::EnvironmentApi::GetUserName();}
 };
 
-_property<const System::Version&, _readonly> Environment::Version {
-  []()->const System::Version& {return Switch::GetVersion();}
+_property<const System::Version, _readonly> Environment::Version {
+  [] {return Native::EnvironmentApi::GetVersion();}
 };
 
 _property<int64, _readonly> Environment::WorkingSet {

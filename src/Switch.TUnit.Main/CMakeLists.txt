@@ -2,7 +2,7 @@ project(Switch.TUnit.Main)
 
 GroupSources(.)
 
-add_library(Switch.TUnit.Main STATIC src/Main.cpp)
+add_library(Switch.TUnit.Main STATIC src/Main.cpp src/Switch/Switch.TUnit.Main.cpp)
 target_link_libraries(Switch.TUnit.Main Switch.TUnit.Core)
 set_target_properties(Switch.TUnit.Main PROPERTIES FOLDER src)
 add_custom_command(TARGET Switch.TUnit.Main POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:Switch.TUnit.Main> ${CMAKE_HOME_DIRECTORY}/lib/$<TARGET_FILE_NAME:Switch.TUnit.Main>)

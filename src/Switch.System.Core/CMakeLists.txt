@@ -6,13 +6,14 @@ set(INCLUDE_FILES
 )
 
 set(SOURCE_FILES
+  src/Switch/Switch.System.Core.cpp
 )
 
 GroupSources(.)
 
 add_library(Switch.System.Core STATIC ${INCLUDE_FILES} ${SOURCE_FILES})
 target_include_directories(Switch.System.Core PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include> $<INSTALL_INTERFACE:include>)
-target_link_libraries(Switch.System.Core Switch.System ${CURL_LIBRARIES})
+target_link_libraries(Switch.System.Core Switch.System)
 set_target_properties(Switch.System.Core PROPERTIES FOLDER src)
 add_custom_command(TARGET Switch.System.Core POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:Switch.System.Core> ${CMAKE_HOME_DIRECTORY}/lib/$<TARGET_FILE_NAME:Switch.System>.Core)
 

@@ -65,6 +65,7 @@ set(SOURCE_FILES
   src/Switch/System/Drawing/SolidBrush.cpp
   src/Switch/System/Drawing/SystemColors.cpp
   src/Switch/System/Drawing/Tif.hpp
+  src/Switch/Switch.System.Drawing.cpp
 )
 
 if (APPLE)

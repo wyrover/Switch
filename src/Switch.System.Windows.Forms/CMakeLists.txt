@@ -190,6 +190,7 @@ set(SOURCE_FILES
 #  src/Switch/System/Windows/Forms/TextBox.cpp
   src/Switch/System/Windows/Forms/Timer.cpp
   src/Switch/System/Windows/Forms/TrackBar.cpp
+  src/Switch/Switch.System.Windows.Forms.cpp
 )
 
 if (APPLE)

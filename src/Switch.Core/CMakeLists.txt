@@ -276,7 +276,6 @@ set(INCLUDE_FILES
   include/Switch/System/StackOverflowException.hpp
   include/Switch/System/StringSplitOptions.hpp
   include/Switch/System/SystemException.hpp
-  include/Switch/System/SystemVersion.hpp
   include/Switch/System/TimeoutException.hpp
   include/Switch/System/TimeSpan.hpp
   include/Switch/System/TimeZoneInfo.hpp
@@ -346,6 +345,7 @@ set(SOURCE_FILES
   src/Native/DriveApiW32.cpp
   src/Native/EnvironmentApiGcc.cpp
   src/Native/EnvironmentApiW32.cpp
+  src/Native/EnvironmentVersionApi.cpp
   src/Native/FormatApi.cpp
   src/Native/InterlockedApiGcc.cpp
   src/Native/InterlockedApiW32.cpp
@@ -434,7 +434,6 @@ set(SOURCE_FILES
   src/Switch/System/SocketInit.hpp
   src/Switch/System/Single.cpp
   src/Switch/System/String.cpp
-  src/Switch/System/SystemVersion.cpp
   src/Switch/System/TimeSpan.cpp
   src/Switch/System/TimeZoneInfo.cpp
   src/Switch/System/Type.cpp
@@ -444,6 +443,7 @@ set(SOURCE_FILES
   src/Switch/System/UIntPtr.cpp
   src/Switch/ExceptionPtr.cpp
   src/Switch/Hash.cpp
+  src/Switch/Switch.Core.cpp
   src/Switch/__opaque_lock_guard__.cpp
   src/Switch/__opaque_unicode_string__.cpp
 )

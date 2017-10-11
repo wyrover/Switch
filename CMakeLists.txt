@@ -4,7 +4,7 @@ project(Switch VERSION 0.3.4)
 
 option(BUILD_SWITCH_CORE "Build Switch.Core library" ON)
 option(BUILD_SWITCH_SYSTEM "Build Switch.System library" ON)
-option(BUILD_SWITCH_SYSTEM_CORE "Build Switch.System.Core library" OFF)
+option(BUILD_SWITCH_SYSTEM_CORE "Build Switch.System.Core library" ON)
 option(BUILD_SWITCH_SYSTEM_DRAWING "Build Switch.System.Drawing library" ON)
 option(BUILD_SWITCH_SYSTEM_WINDOWS_FORMS "Build Switch.System.Windows.Forms library" ON)
 option(BUILD_SWITCH_TUNIT_CORE "Build Switch.TUnit.Core library" ON)
@@ -35,6 +35,11 @@ endif()
 
 include(scripts/cmake/GroupSources.cmake)
 include(scripts/cmake/SwitchDependencies.cmake)
+
+file(WRITE src/Switch.Core/src/Native/EnvironmentVersionApi.cpp "#include \"Api.hpp\"\n\n")
+file(APPEND src/Switch.Core/src/Native/EnvironmentVersionApi.cpp "System::Version Native::EnvironmentApi::GetVersion() {\n")
+file(APPEND src/Switch.Core/src/Native/EnvironmentVersionApi.cpp "  return System::Version::Parse(\"${Switch_VERSION}\");\n")
+file(APPEND src/Switch.Core/src/Native/EnvironmentVersionApi.cpp "}\n")
 
 file(WRITE src/Switch/include/Switch/Switch.hpp "#pragma once\n\n")
 

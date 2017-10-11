@@ -368,7 +368,7 @@ namespace Switch {
       /// @par Example
       /// The following example displays the version of the Switch.
       /// @include EnvironmentVersion.cpp
-      static _property<const System::Version&, _readonly> Version;
+      static _property<const System::Version, _readonly> Version;
       
       /// @brief Gets the amount of physical memory mapped to the process context.
       /// @return Int64 A 64-bit signed integer containing the number of bytes of physical memory mapped to the process context.

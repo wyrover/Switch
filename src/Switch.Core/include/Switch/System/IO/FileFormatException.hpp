@@ -2,7 +2,7 @@
 /// @brief Contains Switch::System::IO::FileFormatException exception.
 #pragma once
 
-#include "../SystemVersion.hpp"
+#include "../FormatException.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {

@@ -1,4 +1,4 @@
-#include <Switch/Switch>
+#include <Switch/Switch.Core>
 
 using namespace System;
 

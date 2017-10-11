@@ -109,6 +109,7 @@ set(SOURCE_FILES
   src/Switch/System/Net/WebResponse.cpp
   src/Switch/System/Threading/Semaphore.cpp
   src/Switch/System/Uri.cpp
+  src/Switch/Switch.System.cpp
 )
 
 GroupSources(.)

@@ -22,6 +22,7 @@ set(SOURCE_FILES
   src/Switch/TUnit/ConsoleEventListener.hpp
   src/Switch/TUnit/ConsoleEventListener.cpp
   src/Switch/TUnit/UnitTest.cpp
+  src/Switch/Switch.TUnit.Core.cpp
 )
 
 GroupSources(.)
