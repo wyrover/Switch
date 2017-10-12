@@ -1,5 +1,4 @@
 #include <Switch/Lock.hpp>
-#include <Switch/System/Collections/Concurrent/ConcurrentBag.hpp>
 #include <Switch/System/Collections/Concurrent/ConcurrentQueue.hpp>
 #include <Switch/System/Collections/Concurrent/ConcurrentStack.hpp>
 #include <Switch/System/Collections/Generic/Dictionary.hpp>
@@ -42,13 +41,6 @@ namespace SwitchUnitTests {
       BitArray b2 = Move(b1);
       Assert::AreEqual(0, b1.Count, _caller);
       Assert::AreEqual(10, b2.Count, _caller);
-    }
-    
-    void MoveConcurrentBag() {
-      ConcurrentBag<int32> cb1 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-      ConcurrentBag<int32> cb2 = Move(cb1);
-      Assert::AreEqual(0, cb1.Count, _caller);
-      Assert::AreEqual(10, cb2.Count, _caller);
     }
     
     void MoveConcurrentQueue() {
@@ -125,7 +117,6 @@ namespace SwitchUnitTests {
   _test(MoveTest, MoveString)
   _test(MoveTest, MoveArray)
   _test(MoveTest, MoveBitArray)
-  _test(MoveTest, MoveConcurrentBag)
   _test(MoveTest, MoveConcurrentQueue)
   _test(MoveTest, MoveConcurrentStack)
   _test(MoveTest, MoveDictionary)

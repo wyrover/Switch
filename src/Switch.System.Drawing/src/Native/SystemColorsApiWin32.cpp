@@ -2,10 +2,9 @@
 #include <windows.h>
 #include <Switch/Undef.hpp>
 
-#include "DrawingApi.hpp"
+#include "Api.hpp"
 
 using namespace System;
-using namespace Native;
 
 namespace {
   inline int32 GetSystemColor(int32 index) {

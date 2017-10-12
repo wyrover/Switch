@@ -11,7 +11,7 @@
 
 /// @cond
 namespace Native {
-  class DrawingApi;
+  class GdiApi;
 }
 /// @endcond
 
@@ -80,7 +80,7 @@ namespace Switch {
         };
 
       private:
-        friend class Native::DrawingApi;
+        friend class Native::GdiApi;
         friend class Windows::Forms::Control;
         intptr GetNativePen() const { return this->pen; }
         void Create();

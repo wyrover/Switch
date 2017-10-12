@@ -1,5 +1,4 @@
 #include <Switch/Lock.hpp>
-#include <Switch/System/Collections/Concurrent/ConcurrentBag.hpp>
 #include <Switch/System/Collections/Concurrent/ConcurrentQueue.hpp>
 #include <Switch/System/Collections/Concurrent/ConcurrentStack.hpp>
 #include <Switch/System/Collections/Generic/Dictionary.hpp>

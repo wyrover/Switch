@@ -3,7 +3,6 @@ project(witch.Core.UnitTests)
 set(SOURCE_FILES
   Switch/Microsoft/Win32/RegistryKeyUT.cpp
   Switch/Microsoft/Win32/RegistryUT.cpp
-  Switch/System/Collections/Concurrent/ConcurrentBagTest.cpp
   Switch/System/Collections/Generic/DictionaryUT.cpp
   Switch/System/Collections/Generic/HashSetUT.cpp
   Switch/System/Collections/Generic/KeyValuePairUT.cpp

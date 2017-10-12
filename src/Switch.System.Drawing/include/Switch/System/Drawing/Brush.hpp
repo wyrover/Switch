@@ -7,7 +7,7 @@
 
 /// @cond
 namespace Native {
-  class DrawingApi;
+  class GdiApi;
 }
 /// @endcond
 
@@ -41,7 +41,7 @@ namespace Switch {
         /// @param brush A pointer to the GDI+ brush object.
         void SetNativeBrush(intptr brush);
       private:
-        friend class Native::DrawingApi;
+        friend class Native::GdiApi;
         friend class Windows::Forms::Control;
         intptr GetNativeBrush() const { return this->brush; }
 
