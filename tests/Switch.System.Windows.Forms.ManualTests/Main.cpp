@@ -1,4 +1,4 @@
-﻿#include <Switch/System/Windows/Forms/Application.hpp>
+#include <Switch/System/Windows/Forms/Application.hpp>
 #include <Switch/System/Windows/Forms/Button.hpp>
 #include <Switch/System/Windows/Forms/TabControl.hpp>
 #include <Switch/Startup.hpp>
@@ -23,7 +23,7 @@ namespace ManualTests {
 
       Button button;
       //button.Size = Size(200, 100);
-      button.Text = "My Button";
+      button.Text = "Button";
       button.Location = Point(10, 10);
       
       Form form;

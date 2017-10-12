@@ -1,5 +1,5 @@
 #include "../../../../../include/Switch/System/Windows/Forms/Timer.hpp"
-#include "../../../../Native/FormsApi.hpp"
+#include "../../../../Native/Api.hpp"
 
 using namespace System;
 using namespace System::Windows::Forms;
@@ -8,9 +8,9 @@ void Timer::SetEnabled(bool enabled) {
   if (this->enabled != enabled) {
     this->enabled = enabled;
     if (this->enabled)
-      this->handle = Native::FormsApi::Timer::Create(this->interval, this->tick);
+      this->handle = Native::TimerApi::Create(this->interval, this->tick);
     else
-      Native::FormsApi::Timer::Destroy(this->handle);
+      Native::TimerApi::Destroy(this->handle);
   }
 }
 
@@ -21,8 +21,8 @@ void Timer::SetInterval(int32 interval) {
   if (this->interval != interval) {
     this->interval = interval;
     if (this->enabled) {
-      Native::FormsApi::Timer::Destroy(this->handle);
-      this->handle = Native::FormsApi::Timer::Create(this->interval, this->tick);
+      Native::TimerApi::Destroy(this->handle);
+      this->handle = Native::TimerApi::Create(this->interval, this->tick);
     }
   }
 }

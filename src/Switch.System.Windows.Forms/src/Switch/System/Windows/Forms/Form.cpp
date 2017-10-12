@@ -1,6 +1,6 @@
 #include "../../../../../include/Switch/System/Windows/Forms/Application.hpp"
 #include "../../../../../include/Switch/System/Windows/Forms/Form.hpp"
-#include "../../../../Native/FormsApi.hpp"
+#include "../../../../Native/Api.hpp"
 
 #include <Switch/System/EventArgs.hpp>
 #include <Switch/System/Drawing/SystemColors.hpp>
@@ -12,7 +12,7 @@ using namespace System::Windows::Forms;
 
 void Form::Close() {
   //this->Visible = false;
-  //Native::FormsApi::Form::Close(*this);
+  //Native::FormApi::Close(*this);
   FormClosingEventArgs e;
   this->OnFormClosing(e);
   if (e.Cancel != true)
@@ -23,7 +23,7 @@ void Form::CreateHandle() {
   if (!this->backColor.HasValue && System::Environment::OSVersion().Platform == System::PlatformID::Unix)
     this->backColor = System::Drawing::SystemColors::Window;
   this->messageActions[WM_CLOSE] = {*this, &Form::WmClose};
-  this->handle = Native::FormsApi::Form::Create(*this);
+  this->handle = Native::FormApi::Create(*this);
   this->Control::CreateHandle();
 }
 

@@ -1,6 +1,6 @@
 #include "../../../../../include/Switch/System/Windows/Forms/TabPage.hpp"
 #include "../../../../../include/Switch/System/Windows/Forms/TabControl.hpp"
-#include "../../../../Native/FormsApi.hpp"
+#include "../../../../Native/Api.hpp"
 
 #include <Switch/System/EventArgs.hpp>
 #include <Switch/System/Drawing/SystemColors.hpp>
@@ -11,7 +11,7 @@ using namespace System::Drawing;
 using namespace System::Windows::Forms;
 
 void TabPage::CreateHandle() {
-  this->handle = Native::FormsApi::TabPage::Create(*this);
+  this->handle = Native::TabPageApi::Create(*this);
   this->Control::CreateHandle();
 }
 

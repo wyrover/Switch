@@ -1,22 +1,22 @@
 #include "../../../../../include/Switch/System/Windows/Forms/Application.hpp"
 #include "../../../../../include/Switch/System/Windows/Forms/TrackBar.hpp"
-#include "../../../../Native/FormsApi.hpp"
+#include "../../../../Native/Api.hpp"
 
 using namespace System;
 using namespace System::Drawing;
 using namespace System::Windows::Forms;
 
 void TrackBar::CreateHandle() {
-  this->handle = Native::FormsApi::TrackBar::Create(*this);
+  this->handle = Native::TrackBarApi::Create(*this);
   this->Control::CreateHandle();
-  Native::FormsApi::TrackBar::SetLargeChange(*this);
-  Native::FormsApi::TrackBar::SetMaximum(*this);
-  Native::FormsApi::TrackBar::SetMinimum(*this);
-  Native::FormsApi::TrackBar::SetOrientation(*this);
-  Native::FormsApi::TrackBar::SetSmallChange(*this);
-  Native::FormsApi::TrackBar::SetTickFrequency(*this);
-  Native::FormsApi::TrackBar::SetTickStyle(*this);
-  Native::FormsApi::TrackBar::SetValue(*this);
+  Native::TrackBarApi::SetLargeChange(*this);
+  Native::TrackBarApi::SetMaximum(*this);
+  Native::TrackBarApi::SetMinimum(*this);
+  Native::TrackBarApi::SetOrientation(*this);
+  Native::TrackBarApi::SetSmallChange(*this);
+  Native::TrackBarApi::SetTickFrequency(*this);
+  Native::TrackBarApi::SetTickStyle(*this);
+  Native::TrackBarApi::SetValue(*this);
 }
 
 void TrackBar::WndProc(Message& message) {
@@ -35,7 +35,7 @@ void TrackBar::SetLargeChange(int32 largeChange) {
   if (this->largeChange != largeChange) {
     this->largeChange = largeChange;
     if (this->IsHandleCreated) {
-      Native::FormsApi::TrackBar::SetLargeChange(*this);
+      Native::TrackBarApi::SetLargeChange(*this);
     }
   }
 }
@@ -44,8 +44,8 @@ void TrackBar::SetMaximum(int32 maximum) {
   if (this->maximum != maximum) {
     this->maximum = maximum;
     if (this->IsHandleCreated) {
-      Native::FormsApi::TrackBar::SetMaximum(*this);
-      Native::FormsApi::TrackBar::SetValue(*this);
+      Native::TrackBarApi::SetMaximum(*this);
+      Native::TrackBarApi::SetValue(*this);
     }
   }
 }
@@ -54,8 +54,8 @@ void TrackBar::SetMinimum(int32 minimum) {
   if (this->minimum != minimum) {
     this->minimum = minimum;
     if (this->IsHandleCreated) {
-      Native::FormsApi::TrackBar::SetMinimum(*this);
-      Native::FormsApi::TrackBar::SetValue(*this);
+      Native::TrackBarApi::SetMinimum(*this);
+      Native::TrackBarApi::SetValue(*this);
     }
   }
 }
@@ -64,7 +64,7 @@ void TrackBar::SetOrientation(System::Windows::Forms::Orientation orientation) {
   if (this->orientation != orientation) {
     this->orientation = orientation;
     if (this->IsHandleCreated)
-      Native::FormsApi::TrackBar::SetOrientation(*this);
+      Native::TrackBarApi::SetOrientation(*this);
   }
 }
 
@@ -72,7 +72,7 @@ void TrackBar::SetSmallChange(int32 smallChange) {
   if (this->smallChange != smallChange) {
     this->smallChange = smallChange;
     if (this->IsHandleCreated) {
-      Native::FormsApi::TrackBar::SetSmallChange(*this);
+      Native::TrackBarApi::SetSmallChange(*this);
     }
   }
 }
@@ -83,7 +83,7 @@ void TrackBar::SetTickFrequency(int32 tickFrequency) {
   if (this->tickFrequency != tickFrequency) {
     this->tickFrequency = tickFrequency;
     if (this->IsHandleCreated)
-      Native::FormsApi::TrackBar::SetTickFrequency(*this);
+      Native::TrackBarApi::SetTickFrequency(*this);
   }
 }
 
@@ -91,13 +91,13 @@ void TrackBar::SetTickStyle(System::Windows::Forms::TickStyle style) {
   if (this->style != style) {
     this->style = style;
     if (this->IsHandleCreated)
-      Native::FormsApi::TrackBar::SetTickStyle(*this);
+      Native::TrackBarApi::SetTickStyle(*this);
   }
 }
 
 int32 TrackBar::GetValue() const {
   if (this->IsHandleCreated)
-    return Native::FormsApi::TrackBar::GetValue(*this);
+    return Native::TrackBarApi::GetValue(*this);
   return this->value;
 }
 
@@ -105,7 +105,7 @@ void TrackBar::SetValue(int32 value) {
   if (this->value != value) {
     this->value = value;
     if (this->IsHandleCreated)
-      Native::FormsApi::TrackBar::SetValue(*this);
+      Native::TrackBarApi::SetValue(*this);
     OnValueChanged(EventArgs::Empty);
   }
 }

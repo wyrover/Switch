@@ -3,7 +3,7 @@
 #import <Cocoa/Cocoa.h>
 #import <Foundation/Foundation.h>
 
-#include "FormsApi.hpp"
+#include "Api.hpp"
 
 namespace Native {
   class IWidget _interface {

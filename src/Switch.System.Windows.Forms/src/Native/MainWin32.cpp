@@ -1,8 +1,8 @@
-﻿#if defined(_WIN32)
+#if defined(_WIN32)
 #include <windows.h>
 #include <Switch/Undef.hpp>
 
-#include "FormsApi.hpp"
+#include "Api.hpp"
 
 extern int main(int argc, char* argv[]);
 __declspec(dllimport) extern int __argc;

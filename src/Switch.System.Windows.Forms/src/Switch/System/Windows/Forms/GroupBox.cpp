@@ -1,6 +1,6 @@
 #include "../../../../../include/Switch/System/Windows/Forms/Application.hpp"
 #include "../../../../../include/Switch/System/Windows/Forms/GroupBox.hpp"
-#include "../../../../Native/FormsApi.hpp"
+#include "../../../../Native/Api.hpp"
 
 #include <Switch/System/EventArgs.hpp>
 #include <Switch/System/Drawing/SystemColors.hpp>
@@ -16,7 +16,7 @@ GroupBox::GroupBox() {
 }
 
 void GroupBox::CreateHandle() {
-  this->handle = Native::FormsApi::GroupBox::Create(*this);
+  this->handle = Native::GroupBoxApi::Create(*this);
   this->Control::CreateHandle();
 }
 

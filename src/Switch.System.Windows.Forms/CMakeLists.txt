@@ -111,45 +111,45 @@ set(INCLUDE_FILES
 )
 
 set(SOURCE_FILES
-  src/Native/ApplicationGtk.cpp
-  src/Native/ApplicationWin32.cpp
-  src/Native/ButtonGtk.cpp
-  src/Native/ButtonWin32.cpp
-  src/Native/CheckBoxGtk.cpp
-  src/Native/CheckBoxWin32.cpp
-  src/Native/ControlGtk.cpp
-  src/Native/ControlWin32.cpp
-  src/Native/FormsApi.hpp
-  src/Native/FormGtk.cpp
-  src/Native/FormWin32.cpp
-  src/Native/GroupBoxGtk.cpp
-  src/Native/GroupBoxWin32.cpp
-  src/Native/LabelGtk.cpp
-  src/Native/LabelWin32.cpp
+  src/Native/Api.hpp
+  src/Native/ApplicationApiGtk.cpp
+  src/Native/ApplicationApiWin32.cpp
+  src/Native/ButtonApiGtk.cpp
+  src/Native/ButtonApiWin32.cpp
+  src/Native/CheckBoxApiGtk.cpp
+  src/Native/CheckBoxApiWin32.cpp
+  src/Native/ControlApiGtk.cpp
+  src/Native/ControlApiWin32.cpp
+  src/Native/FormApiGtk.cpp
+  src/Native/FormApiWin32.cpp
+  src/Native/GroupBoxApiGtk.cpp
+  src/Native/GroupBoxApiWin32.cpp
+  src/Native/LabelApiGtk.cpp
+  src/Native/LabelApiWin32.cpp
   src/Native/MainWin32.cpp
-  src/Native/PanelGtk.cpp
-  src/Native/PanelWin32.cpp
-  src/Native/ProgressBarGtk.cpp
-  src/Native/ProgressBarWin32.cpp
-  src/Native/RadioButtonGtk.cpp
-  src/Native/RadioButtonWin32.cpp
-  src/Native/SystemInformationGtk.cpp
-  src/Native/SystemInformationWin32.cpp
-  src/Native/TabControlGtk.cpp
-  src/Native/TabControlWin32.cpp
-  src/Native/TabPageGtk.cpp
-  src/Native/TabPageWin32.cpp
-  src/Native/TimerGtk.cpp
-  src/Native/TimerWin32.cpp
-  src/Native/TrackBarGtk.cpp
-  src/Native/TrackBarWin32.cpp
+  src/Native/PanelApiGtk.cpp
+  src/Native/PanelApiWin32.cpp
+  src/Native/ProgressBarApiGtk.cpp
+  src/Native/ProgressBarApiWin32.cpp
+  src/Native/RadioButtonApiGtk.cpp
+  src/Native/RadioButtonApiWin32.cpp
+  src/Native/SystemInformationApiGtk.cpp
+  src/Native/SystemInformationApiWin32.cpp
+  src/Native/TabControlApiGtk.cpp
+  src/Native/TabControlApiWin32.cpp
+  src/Native/TabPageApiGtk.cpp
+  src/Native/TabPageApiWin32.cpp
+  src/Native/TimerApiGtk.cpp
+  src/Native/TimerApiWin32.cpp
+  src/Native/TrackBarApiGtk.cpp
+  src/Native/TrackBarApiWin32.cpp
   src/Native/WidgetCocoa.hpp
   src/Native/WidgetGtk.hpp
   src/Native/WindowMessage.hpp
   src/Native/WindowMessageKey.hpp
-  src/Native/WindowProcedureWin32.cpp
-  src/Native/WindowProcedureCocoa.hpp
-  src/Native/WindowProcedureWin32.hpp
+  src/Native/WindowProcedureApiWin32.cpp
+  src/Native/WindowProcedureApiCocoa.hpp
+  src/Native/WindowProcedureApiWin32.hpp
   src/Switch/System/Media/SystemSound.cpp
   src/Switch/System/Media/SystemSounds.cpp
   src/Switch/System/Windows/Forms/Application.cpp
@@ -195,22 +195,22 @@ set(SOURCE_FILES
 
 if (APPLE)
 set(COCOA_SOURCE_FILES
-  src/Native/ApplicationCocoa.mm
-  src/Native/ButtonCocoa.mm
-  src/Native/CheckBoxCocoa.mm
-  src/Native/ControlCocoa.mm
-  src/Native/FormCocoa.mm
-  src/Native/GroupBoxCocoa.mm
-  src/Native/LabelCocoa.mm
-  src/Native/PanelCocoa.mm
-  src/Native/ProgressBarCocoa.mm
-  src/Native/RadioButtonCocoa.mm
-  src/Native/SystemInformationCocoa.mm
-  src/Native/TabControlCocoa.mm
-  src/Native/TabPageCocoa.mm
-  src/Native/TimerCocoa.mm
-  src/Native/TrackBarCocoa.mm
-  src/Native/WindowProcedureCocoa.mm
+  src/Native/ApplicationApiCocoa.mm
+  src/Native/ButtonApiCocoa.mm
+  src/Native/CheckBoxApiCocoa.mm
+  src/Native/ControlApiCocoa.mm
+  src/Native/FormApiCocoa.mm
+  src/Native/GroupBoxApiCocoa.mm
+  src/Native/LabelApiCocoa.mm
+  src/Native/PanelApiCocoa.mm
+  src/Native/ProgressBarApiCocoa.mm
+  src/Native/RadioButtonApiCocoa.mm
+  src/Native/SystemInformationApiCocoa.mm
+  src/Native/TabControlApiCocoa.mm
+  src/Native/TabPageApiCocoa.mm
+  src/Native/TimerApiCocoa.mm
+  src/Native/TrackBarApiCocoa.mm
+  src/Native/WindowProcedureApiCocoa.mm
 )
 endif ()
 
