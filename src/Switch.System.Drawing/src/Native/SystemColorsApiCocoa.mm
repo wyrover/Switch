@@ -2,10 +2,9 @@
 #import <Cocoa/Cocoa.h>
 #import <Foundation/Foundation.h>
 
-#include "DrawingApi.hpp"
+#include "Api.hpp"
 
 using namespace System;
-using namespace Native;
 
 namespace {
   System::Drawing::Color ToColor(NSColor* color) {
@@ -14,225 +13,225 @@ namespace {
   }
 }
 
-int32 DrawingApi::SystemColors::GetActiveBorder() {
+int32 Native::SystemColorsApi::GetActiveBorder() {
   @autoreleasepool {
     NSColor* color = [[NSColor controlHighlightColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
     return ToColor(color).ToArgb();
   }
 }
 
-int32 DrawingApi::SystemColors::GetActiveCaption() {
+int32 Native::SystemColorsApi::GetActiveCaption() {
   @autoreleasepool {
     NSColor* color = [[NSColor controlHighlightColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
     return ToColor(color).ToArgb();
   }
 }
 
-int32 DrawingApi::SystemColors::GetActiveCaptionText() {
+int32 Native::SystemColorsApi::GetActiveCaptionText() {
   @autoreleasepool {
     NSColor* color = [[NSColor textColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
     return ToColor(color).ToArgb();
   }
 }
 
-int32 DrawingApi::SystemColors::GetAppWorkspace() {
+int32 Native::SystemColorsApi::GetAppWorkspace() {
   @autoreleasepool {
     NSColor* color = [[NSColor controlBackgroundColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
     return ToColor(color).ToArgb();
   }
 }
 
-int32 DrawingApi::SystemColors::GetButtonFace() {
+int32 Native::SystemColorsApi::GetButtonFace() {
   @autoreleasepool {
     NSColor* color = [[NSColor controlHighlightColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
     return ToColor(color).ToArgb();
   }
 }
 
-int32 DrawingApi::SystemColors::GetButtonHighlight() {
+int32 Native::SystemColorsApi::GetButtonHighlight() {
   @autoreleasepool {
     NSColor* color = [[NSColor controlHighlightColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
     return ToColor(color).ToArgb();
   }
 }
 
-int32 DrawingApi::SystemColors::GetButtonShadow() {
+int32 Native::SystemColorsApi::GetButtonShadow() {
   @autoreleasepool {
     NSColor* color = [[NSColor controlShadowColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
     return ToColor(color).ToArgb();
   }
 }
 
-int32 DrawingApi::SystemColors::GetControl() {
+int32 Native::SystemColorsApi::GetControl() {
   @autoreleasepool {
     NSColor* color = [[NSColor controlHighlightColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
     return ToColor(color).ToArgb();
   }
 }
 
-int32 DrawingApi::SystemColors::GetControlDark() {
+int32 Native::SystemColorsApi::GetControlDark() {
   @autoreleasepool {
     NSColor* color = [[NSColor controlShadowColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
     return ToColor(color).ToArgb();
   }
 }
 
-int32 DrawingApi::SystemColors::GetControlDarkDark() {
+int32 Native::SystemColorsApi::GetControlDarkDark() {
   @autoreleasepool {
     NSColor* color = [[NSColor controlDarkShadowColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
     return ToColor(color).ToArgb();
   }
 }
 
-int32 DrawingApi::SystemColors::GetControlLight() {
+int32 Native::SystemColorsApi::GetControlLight() {
   @autoreleasepool {
     NSColor* color = [[NSColor controlHighlightColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
     return ToColor(color).ToArgb();
   }
 }
 
-int32 DrawingApi::SystemColors::GetControlLightLight() {
+int32 Native::SystemColorsApi::GetControlLightLight() {
   @autoreleasepool {
     NSColor* color = [[NSColor controlLightHighlightColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
     return ToColor(color).ToArgb();
   }
 }
 
-int32 DrawingApi::SystemColors::GetControlText() {
+int32 Native::SystemColorsApi::GetControlText() {
   @autoreleasepool {
     NSColor* color = [[NSColor controlTextColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
     return ToColor(color).ToArgb();
   }
 }
 
-int32 DrawingApi::SystemColors::GetDesktop() {
+int32 Native::SystemColorsApi::GetDesktop() {
   return (int32)0xFF000000;
 }
 
-int32 DrawingApi::SystemColors::GetGradientActiveCaption() {
+int32 Native::SystemColorsApi::GetGradientActiveCaption() {
   @autoreleasepool {
     NSColor* color = [[NSColor controlHighlightColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
     return ToColor(color).ToArgb();
   }
 }
 
-int32 DrawingApi::SystemColors::GetGradientInactiveCaption() {
+int32 Native::SystemColorsApi::GetGradientInactiveCaption() {
   @autoreleasepool {
     NSColor* color = [[NSColor controlHighlightColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
     return ToColor(color).ToArgb();
   }
 }
 
-int32 DrawingApi::SystemColors::GetGrayText() {
+int32 Native::SystemColorsApi::GetGrayText() {
   @autoreleasepool {
     NSColor* color = [[NSColor disabledControlTextColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
     return ToColor(color).ToArgb();
   }
 }
 
-int32 DrawingApi::SystemColors::GetHighlight() {
+int32 Native::SystemColorsApi::GetHighlight() {
   @autoreleasepool {
     NSColor* color = [[NSColor selectedControlColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
     return ToColor(color).ToArgb();
   }
 }
 
-int32 DrawingApi::SystemColors::GetHighlightText() {
+int32 Native::SystemColorsApi::GetHighlightText() {
   @autoreleasepool {
     NSColor* color = [[NSColor selectedTextColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
     return ToColor(color).ToArgb();
   }
 }
 
-int32 DrawingApi::SystemColors::GetHotTrack() {
+int32 Native::SystemColorsApi::GetHotTrack() {
   @autoreleasepool {
     NSColor* color = [[NSColor secondarySelectedControlColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
     return ToColor(color).ToArgb();
   }
 }
 
-int32 DrawingApi::SystemColors::GetInactiveBorder() {
+int32 Native::SystemColorsApi::GetInactiveBorder() {
   @autoreleasepool {
     NSColor* color = [[NSColor controlHighlightColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
     return ToColor(color).ToArgb();
   }
 }
 
-int32 DrawingApi::SystemColors::GetInactiveCaption() {
+int32 Native::SystemColorsApi::GetInactiveCaption() {
   @autoreleasepool {
     NSColor* color = [[NSColor controlHighlightColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
     return ToColor(color).ToArgb();
   }
 }
 
-int32 DrawingApi::SystemColors::GetInactiveCaptionText() {
+int32 Native::SystemColorsApi::GetInactiveCaptionText() {
   @autoreleasepool {
     NSColor* color = [[NSColor disabledControlTextColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
     return ToColor(color).ToArgb();
   }
 }
 
-int32 DrawingApi::SystemColors::GetInfo() {
+int32 Native::SystemColorsApi::GetInfo() {
   return (int32)0xFFFFFFE1;
 }
 
-int32 DrawingApi::SystemColors::GetInfoText() {
+int32 Native::SystemColorsApi::GetInfoText() {
   @autoreleasepool {
     NSColor* color = [[NSColor textColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
     return ToColor(color).ToArgb();
   }
 }
 
-int32 DrawingApi::SystemColors::GetMenu() {
+int32 Native::SystemColorsApi::GetMenu() {
   @autoreleasepool {
     NSColor* color = [[NSColor controlHighlightColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
     return ToColor(color).ToArgb();
   }
 }
 
-int32 DrawingApi::SystemColors::GetMenuBar() {
+int32 Native::SystemColorsApi::GetMenuBar() {
   @autoreleasepool {
     NSColor* color = [[NSColor controlHighlightColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
     return ToColor(color).ToArgb();
   }
 }
 
-int32 DrawingApi::SystemColors::GetMenuHighlight() {
+int32 Native::SystemColorsApi::GetMenuHighlight() {
   @autoreleasepool {
     NSColor* color = [[NSColor selectedMenuItemColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
     return ToColor(color).ToArgb();
   }
 }
 
-int32 DrawingApi::SystemColors::GetMenuText() {
+int32 Native::SystemColorsApi::GetMenuText() {
   @autoreleasepool {
     NSColor* color = [[NSColor textColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
     return ToColor(color).ToArgb();
   }
 }
 
-int32 DrawingApi::SystemColors::GetScrollBar() {
+int32 Native::SystemColorsApi::GetScrollBar() {
   @autoreleasepool {
     NSColor* color = [[NSColor scrollBarColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
     return ToColor(color).ToArgb();
   }
 }
 
-int32 DrawingApi::SystemColors::GetWindow() {
+int32 Native::SystemColorsApi::GetWindow() {
   @autoreleasepool {
     NSColor* color = [[NSColor controlBackgroundColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
     return ToColor(color).ToArgb();
   }
 }
 
-int32 DrawingApi::SystemColors::GetWindowFrame() {
+int32 Native::SystemColorsApi::GetWindowFrame() {
   @autoreleasepool {
     NSColor* color = [[NSColor windowFrameColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
     return ToColor(color).ToArgb();
   }
 }
 
-int32 DrawingApi::SystemColors::GetWindowText() {
+int32 Native::SystemColorsApi::GetWindowText() {
   @autoreleasepool {
     NSColor* color = [[NSColor windowFrameTextColor] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
     return ToColor(color).ToArgb();

@@ -36,11 +36,17 @@ set(INCLUDE_FILES
 )
 
 set(SOURCE_FILES
-  src/Native/DrawingApi.hpp
-  src/Native/DrawingApiGtk.cpp
-  src/Native/DrawingApiWin32.cpp
-  src/Native/SystemColorsGtk.cpp
-  src/Native/SystemColorsWin32.cpp
+  src/Native/Api.hpp
+  src/Native/BrushApiGtk.cpp
+  src/Native/BrushApiWin32.cpp
+  src/Native/FontFamilyApiGtk.cpp
+  src/Native/FontFamilyApiWin32.cpp
+  src/Native/GdiApiGtk.cpp
+  src/Native/GdiApiWin32.cpp
+  src/Native/PenApiGtk.cpp
+  src/Native/PenApiWin32.cpp
+  src/Native/SystemColorsApiGtk.cpp
+  src/Native/SystemColorsApiWin32.cpp
   src/Switch/System/Drawing/Imaging/FrameDimension.cpp
   src/Switch/System/Drawing/Imaging/ImageFormat.cpp
   src/Switch/System/Drawing/Text/FontCollection.cpp
@@ -70,8 +76,11 @@ set(SOURCE_FILES
 
 if (APPLE)
 set(COCOA_SOURCE_FILES
-  src/Native/DrawingApiCocoa.mm
-  src/Native/SystemColorsCocoa.mm
+  src/Native/BrushApiCocoa.mm
+  src/Native/FontFamilyApiCocoa.mm
+  src/Native/GdiApiCocoa.mm
+  src/Native/PenApiCocoa.mm
+  src/Native/SystemColorsApiCocoa.mm
 )
 endif ()
 

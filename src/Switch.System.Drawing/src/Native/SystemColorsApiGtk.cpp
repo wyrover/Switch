@@ -1,4 +1,4 @@
-﻿#if defined(__linux__)
+#if defined(__linux__)
 
 #include <gtkmm.h>
 #include "DrawingApi.hpp"
@@ -14,136 +14,136 @@ namespace {
   }
 }
 
-int32 DrawingApi::SystemColors::GetActiveBorder() {
+int32 Native::SystemColorsApi::GetActiveBorder() {
   return (int32)0xFFB4B4B4;
 }
 
-int32 DrawingApi::SystemColors::GetActiveCaption() {
+int32 Native::SystemColorsApi::GetActiveCaption() {
   return (int32)0xFF99B4D1;
 }
 
-int32 DrawingApi::SystemColors::GetActiveCaptionText() {
+int32 Native::SystemColorsApi::GetActiveCaptionText() {
   return (int32)0xFF000000;
 }
 
-int32 DrawingApi::SystemColors::GetAppWorkspace() {
+int32 Native::SystemColorsApi::GetAppWorkspace() {
   return (int32)0xFFABABAB;
 }
 
-int32 DrawingApi::SystemColors::GetButtonFace() {
+int32 Native::SystemColorsApi::GetButtonFace() {
   return ToColor(Gtk::Button().get_style_context()->get_background_color()).ToArgb();
 }
 
-int32 DrawingApi::SystemColors::GetButtonHighlight() {
+int32 Native::SystemColorsApi::GetButtonHighlight() {
   return (int32)0xFFFFFFFF;
 }
 
-int32 DrawingApi::SystemColors::GetButtonShadow() {
+int32 Native::SystemColorsApi::GetButtonShadow() {
   return (int32)0xFFF0F0F0;
 }
 
-int32 DrawingApi::SystemColors::GetControl() {
+int32 Native::SystemColorsApi::GetControl() {
   return ToColor(Gtk::Button().get_style_context()->get_background_color()).ToArgb();
 }
 
-int32 DrawingApi::SystemColors::GetControlDark() {
+int32 Native::SystemColorsApi::GetControlDark() {
   return ToColor(Gtk::Button().get_style_context()->get_background_color()).ToArgb();
 }
 
-int32 DrawingApi::SystemColors::GetControlDarkDark() {
+int32 Native::SystemColorsApi::GetControlDarkDark() {
   return ToColor(Gtk::Button().get_style_context()->get_background_color()).ToArgb();
 }
 
-int32 DrawingApi::SystemColors::GetControlLight() {
+int32 Native::SystemColorsApi::GetControlLight() {
   return ToColor(Gtk::Button().get_style_context()->get_background_color()).ToArgb();
 }
 
-int32 DrawingApi::SystemColors::GetControlLightLight() {
+int32 Native::SystemColorsApi::GetControlLightLight() {
   return ToColor(Gtk::Button().get_style_context()->get_background_color()).ToArgb();
 }
 
-int32 DrawingApi::SystemColors::GetControlText() {
+int32 Native::SystemColorsApi::GetControlText() {
   //return ToColor(Gtk::Button().get_style_context()->get_color()).ToArgb();
   return ToColor(Gtk::Window().get_style_context()->get_color()).ToArgb();
 }
 
-int32 DrawingApi::SystemColors::GetDesktop() {
+int32 Native::SystemColorsApi::GetDesktop() {
   return (int32)0xFF000000;
 }
 
-int32 DrawingApi::SystemColors::GetGradientActiveCaption() {
+int32 Native::SystemColorsApi::GetGradientActiveCaption() {
   return (int32)0xFF99B4D1;
 }
 
-int32 DrawingApi::SystemColors::GetGradientInactiveCaption() {
+int32 Native::SystemColorsApi::GetGradientInactiveCaption() {
   return (int32)0xFF9DB9EB;
 }
 
-int32 DrawingApi::SystemColors::GetGrayText() {
+int32 Native::SystemColorsApi::GetGrayText() {
   return (int32)0xFF6D6D6D;
 }
 
-int32 DrawingApi::SystemColors::GetHighlight() {
+int32 Native::SystemColorsApi::GetHighlight() {
   return (int32)0xFF3399FF;
 }
 
-int32 DrawingApi::SystemColors::GetHighlightText() {
+int32 Native::SystemColorsApi::GetHighlightText() {
   return (int32)0xFFFFFFFF;
 }
 
-int32 DrawingApi::SystemColors::GetHotTrack() {
+int32 Native::SystemColorsApi::GetHotTrack() {
   return (int32)0xFF0066CC;
 }
 
-int32 DrawingApi::SystemColors::GetInactiveBorder() {
+int32 Native::SystemColorsApi::GetInactiveBorder() {
   return (int32)0xFFF4F7FC;
 }
 
-int32 DrawingApi::SystemColors::GetInactiveCaption() {
+int32 Native::SystemColorsApi::GetInactiveCaption() {
   return (int32)0xFFBFCDDB;
 }
 
-int32 DrawingApi::SystemColors::GetInactiveCaptionText() {
+int32 Native::SystemColorsApi::GetInactiveCaptionText() {
   return (int32)0xFF000000;
 }
 
-int32 DrawingApi::SystemColors::GetInfo() {
+int32 Native::SystemColorsApi::GetInfo() {
   return (int32)0xFFFFFFE1;
 }
 
-int32 DrawingApi::SystemColors::GetInfoText() {
+int32 Native::SystemColorsApi::GetInfoText() {
   return (int32)0xFF000000;
 }
 
-int32 DrawingApi::SystemColors::GetMenu() {
+int32 Native::SystemColorsApi::GetMenu() {
   return (int32)0xFFF0F0F0;
 }
 
-int32 DrawingApi::SystemColors::GetMenuBar() {
+int32 Native::SystemColorsApi::GetMenuBar() {
   return (int32)0xFFF0F0F0;
 }
 
-int32 DrawingApi::SystemColors::GetMenuHighlight() {
+int32 Native::SystemColorsApi::GetMenuHighlight() {
   return (int32)0xFF3399FF;
 }
 
-int32 DrawingApi::SystemColors::GetMenuText() {
+int32 Native::SystemColorsApi::GetMenuText() {
   return (int32)0xFF000000;
 }
 
-int32 DrawingApi::SystemColors::GetScrollBar() {
+int32 Native::SystemColorsApi::GetScrollBar() {
   return (int32)0xFFC8C8C8;
 }
 
-int32 DrawingApi::SystemColors::GetWindow() {
+int32 Native::SystemColorsApi::GetWindow() {
   return ToColor(Gtk::Window().get_style_context()->get_background_color()).ToArgb();
 }
 
-int32 DrawingApi::SystemColors::GetWindowFrame() {
+int32 Native::SystemColorsApi::GetWindowFrame() {
   return ToColor(Gtk::Window().get_style_context()->get_border_color()).ToArgb();
 }
 
-int32 DrawingApi::SystemColors::GetWindowText() {
+int32 Native::SystemColorsApi::GetWindowText() {
   return ToColor(Gtk::Window().get_style_context()->get_color()).ToArgb();
 }
 

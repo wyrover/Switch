@@ -1,13 +1,13 @@
 #include "../../../../include/Switch/System/Drawing/Graphics.hpp"
-#include "../../../Native/DrawingApi.hpp"
+#include "../../../Native/Api.hpp"
 
 using namespace System;
 using namespace System::Drawing;
 
 Graphics::~Graphics() {
   if (this->hwnd != IntPtr::Zero)
-    //Native::DrawingApi::Gdi::EndPaint(this->hwnd, this->hdc);
-    Native::DrawingApi::Gdi::ReleaseDeviceContext(this->hwnd, this->hdc);
+    //Native::GdiApi::EndPaint(this->hwnd, this->hdc);
+    Native::GdiApi::ReleaseDeviceContext(this->hwnd, this->hdc);
 }
 
 void Graphics::Clear(const Color& color) {
@@ -27,18 +27,18 @@ void Graphics::DrawPie(const Pen& pen, int32 x, int32 y, int32 w, int32 h, float
 }
 
 void Graphics::DrawRectangle(const Pen& pen, int32 x, int32 y, int32 w, int32 h) {
-  Native::DrawingApi::Gdi::DrawRectangle(this->hdc, pen, x, y, w, h);
+  Native::GdiApi::DrawRectangle(this->hdc, pen, x, y, w, h);
 }
 
 void Graphics::DrawString(const string& str, const Font& font, const Brush& brush, const RectangleF& layoutRectangle, const StringFormat& format) {
 }
 
 void Graphics::FillPie(const System::Drawing::Brush& brush, int32 x, int32 y, int32 w, int32 h, float startAngle, float sweepAngle) {
-  Native::DrawingApi::Gdi::FillPie(this->hdc, brush, x, y, w, h, startAngle, sweepAngle);
+  Native::GdiApi::FillPie(this->hdc, brush, x, y, w, h, startAngle, sweepAngle);
 }
 
 void Graphics::FillRectangle(const Brush& brush, int32 x, int32 y, int32 w, int32 h) {
-  Native::DrawingApi::Gdi::FillRectangle(this->hdc, brush, x, y, w, h);
+  Native::GdiApi::FillRectangle(this->hdc, brush, x, y, w, h);
 }
 
 void Graphics::SetColor(const System::Drawing::Color& color) {
@@ -49,13 +49,13 @@ SizeF Graphics::MeasureString(const string& str, const Font& font) const {
 }
 
 Graphics Graphics::FromHwndInternal(intptr hwnd) {
-  intptr hdc = Native::DrawingApi::Gdi::GetDeviceContext(hwnd);
-  Rectangle clipRectangle = Native::DrawingApi::Gdi::GetClipRectangleFromHwnd(hwnd);
+  intptr hdc = Native::GdiApi::GetDeviceContext(hwnd);
+  Rectangle clipRectangle = Native::GdiApi::GetClipRectangleFromHwnd(hwnd);
   return Graphics(hwnd, hdc, clipRectangle);
-  //return Graphics(hwnd, Native::DrawingApi::Gdi::GetDeviceContext(hwnd), Native::DrawingApi::Gdi::GetClipRectangleFromHwnd(hwnd));
+  //return Graphics(hwnd, Native::GdiApi::GetDeviceContext(hwnd), Native::GdiApi::GetClipRectangleFromHwnd(hwnd));
 }
 
 Graphics Graphics::FromHdcInternal(intptr hdc) {
-  return Graphics(hdc, Native::DrawingApi::Gdi::GetClipRectangleFromHdc(hdc));
+  return Graphics(hdc, Native::GdiApi::GetClipRectangleFromHdc(hdc));
 }
 

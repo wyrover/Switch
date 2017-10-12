@@ -1,4 +1,4 @@
-﻿#if defined(_WIN32)
+#if defined(_WIN32)
 #include <windows.h>
 #include <Switch/Undef.hpp>
 
@@ -14,135 +14,135 @@ namespace {
   }
 }
 
-int32 DrawingApi::SystemColors::GetActiveBorder() {
+int32 Native::SystemColorsApi::GetActiveBorder() {
   return GetSystemColor(COLOR_ACTIVEBORDER);
 }
 
-int32 DrawingApi::SystemColors::GetActiveCaption() {
+int32 Native::SystemColorsApi::GetActiveCaption() {
   return GetSystemColor(COLOR_ACTIVECAPTION);
 }
 
-int32 DrawingApi::SystemColors::GetActiveCaptionText() {
+int32 Native::SystemColorsApi::GetActiveCaptionText() {
   return GetSystemColor(COLOR_CAPTIONTEXT);
 }
 
-int32 DrawingApi::SystemColors::GetAppWorkspace() {
+int32 Native::SystemColorsApi::GetAppWorkspace() {
   return GetSystemColor(COLOR_APPWORKSPACE);
 }
 
-int32 DrawingApi::SystemColors::GetButtonFace() {
+int32 Native::SystemColorsApi::GetButtonFace() {
   return GetSystemColor(COLOR_BTNFACE);
 }
 
-int32 DrawingApi::SystemColors::GetButtonHighlight() {
+int32 Native::SystemColorsApi::GetButtonHighlight() {
   return GetSystemColor(COLOR_BTNHIGHLIGHT);
 }
 
-int32 DrawingApi::SystemColors::GetButtonShadow() {
+int32 Native::SystemColorsApi::GetButtonShadow() {
   return GetSystemColor(COLOR_BTNSHADOW);
 }
 
-int32 DrawingApi::SystemColors::GetControl() {
+int32 Native::SystemColorsApi::GetControl() {
   return GetSystemColor(COLOR_BTNFACE);
 }
 
-int32 DrawingApi::SystemColors::GetControlDark() {
+int32 Native::SystemColorsApi::GetControlDark() {
   return GetSystemColor(COLOR_BTNSHADOW);
 }
 
-int32 DrawingApi::SystemColors::GetControlDarkDark() {
+int32 Native::SystemColorsApi::GetControlDarkDark() {
   return GetSystemColor(COLOR_3DDKSHADOW);
 }
 
-int32 DrawingApi::SystemColors::GetControlLight() {
+int32 Native::SystemColorsApi::GetControlLight() {
   return GetSystemColor(COLOR_3DLIGHT);
 }
 
-int32 DrawingApi::SystemColors::GetControlLightLight() {
+int32 Native::SystemColorsApi::GetControlLightLight() {
   return GetSystemColor(COLOR_BTNHIGHLIGHT);
 }
 
-int32 DrawingApi::SystemColors::GetControlText() {
+int32 Native::SystemColorsApi::GetControlText() {
   return GetSystemColor(COLOR_BTNTEXT);
 }
 
-int32 DrawingApi::SystemColors::GetDesktop() {
+int32 Native::SystemColorsApi::GetDesktop() {
   return GetSystemColor(COLOR_DESKTOP);
 }
 
-int32 DrawingApi::SystemColors::GetGradientActiveCaption() {
+int32 Native::SystemColorsApi::GetGradientActiveCaption() {
   return GetSystemColor(COLOR_GRADIENTACTIVECAPTION);
 }
 
-int32 DrawingApi::SystemColors::GetGradientInactiveCaption() {
+int32 Native::SystemColorsApi::GetGradientInactiveCaption() {
   return GetSystemColor(COLOR_GRADIENTINACTIVECAPTION);
 }
 
-int32 DrawingApi::SystemColors::GetGrayText() {
+int32 Native::SystemColorsApi::GetGrayText() {
   return GetSystemColor(COLOR_GRAYTEXT);
 }
 
-int32 DrawingApi::SystemColors::GetHighlight() {
+int32 Native::SystemColorsApi::GetHighlight() {
   return GetSystemColor(COLOR_HIGHLIGHT);
 }
 
-int32 DrawingApi::SystemColors::GetHighlightText() {
+int32 Native::SystemColorsApi::GetHighlightText() {
   return GetSystemColor(COLOR_HIGHLIGHTTEXT);
 }
 
-int32 DrawingApi::SystemColors::GetHotTrack() {
+int32 Native::SystemColorsApi::GetHotTrack() {
   return GetSystemColor(COLOR_HOTLIGHT);
 }
 
-int32 DrawingApi::SystemColors::GetInactiveBorder() {
+int32 Native::SystemColorsApi::GetInactiveBorder() {
   return GetSystemColor(COLOR_INACTIVEBORDER);
 }
 
-int32 DrawingApi::SystemColors::GetInactiveCaption() {
+int32 Native::SystemColorsApi::GetInactiveCaption() {
   return GetSystemColor(COLOR_INACTIVECAPTION);
 }
 
-int32 DrawingApi::SystemColors::GetInactiveCaptionText() {
+int32 Native::SystemColorsApi::GetInactiveCaptionText() {
   return GetSystemColor(COLOR_INACTIVECAPTIONTEXT);
 }
 
-int32 DrawingApi::SystemColors::GetInfo() {
+int32 Native::SystemColorsApi::GetInfo() {
   return GetSystemColor(COLOR_INFOBK);
 }
 
-int32 DrawingApi::SystemColors::GetInfoText() {
+int32 Native::SystemColorsApi::GetInfoText() {
   return GetSystemColor(COLOR_INFOTEXT);
 }
 
-int32 DrawingApi::SystemColors::GetMenu() {
+int32 Native::SystemColorsApi::GetMenu() {
   return GetSystemColor(COLOR_MENU);
 }
 
-int32 DrawingApi::SystemColors::GetMenuBar() {
+int32 Native::SystemColorsApi::GetMenuBar() {
   return GetSystemColor(COLOR_MENUBAR);
 }
 
-int32 DrawingApi::SystemColors::GetMenuHighlight() {
+int32 Native::SystemColorsApi::GetMenuHighlight() {
   return GetSystemColor(COLOR_MENUHILIGHT);
 }
 
-int32 DrawingApi::SystemColors::GetMenuText() {
+int32 Native::SystemColorsApi::GetMenuText() {
   return GetSystemColor(COLOR_MENUTEXT);
 }
 
-int32 DrawingApi::SystemColors::GetScrollBar() {
+int32 Native::SystemColorsApi::GetScrollBar() {
   return GetSystemColor(COLOR_SCROLLBAR);
 }
 
-int32 DrawingApi::SystemColors::GetWindow() {
+int32 Native::SystemColorsApi::GetWindow() {
   return GetSystemColor(COLOR_WINDOW);
 }
 
-int32 DrawingApi::SystemColors::GetWindowFrame() {
+int32 Native::SystemColorsApi::GetWindowFrame() {
   return GetSystemColor(COLOR_WINDOWFRAME);
 }
 
-int32 DrawingApi::SystemColors::GetWindowText() {
+int32 Native::SystemColorsApi::GetWindowText() {
   return GetSystemColor(COLOR_WINDOWTEXT);
 }
 
