@@ -62,7 +62,6 @@ set(INCLUDE_FILES
   include/Switch/System/IO/DriveNotFoundException.hpp
   include/Switch/System/IO/DriveType.hpp
   include/Switch/System/IO/EndOfStreamException.hpp
-  include/Switch/System/IO/ErrorEventArgs.hpp
   include/Switch/System/IO/File.hpp
   include/Switch/System/IO/FileAccess.hpp
   include/Switch/System/IO/FileAttributes.hpp

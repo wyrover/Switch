@@ -31,6 +31,7 @@ set(INCLUDE_FILES
   include/Switch/System/IO/Ports/SerialDataReceivedEventHandler.hpp
   include/Switch/System/IO/Ports/SerialErrorReceivedEventHandler.hpp
   include/Switch/System/IO/Ports/SerialPinChangedEventHandler.hpp
+  include/Switch/System/IO/ErrorEventArgs.hpp
   include/Switch/System/Net/Sockets/AddressFamily.hpp
   include/Switch/System/Net/Sockets/IOControlCode.hpp
   include/Switch/System/Net/Sockets/IPv6MulticastOption.hpp

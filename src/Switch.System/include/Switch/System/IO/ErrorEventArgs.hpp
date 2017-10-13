@@ -2,9 +2,9 @@
 /// @brief Contains Switch::System::IO::ErrorEventArgs class.
 #pragma once
 
-#include "../../As.hpp"
-#include "../EventArgs.hpp"
-#include "../Exception.hpp"
+#include <Switch/As.hpp>
+#include <Switch/System/EventArgs.hpp>
+#include <Switch/System/Exception.hpp>
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
@@ -14,6 +14,8 @@ namespace Switch {
     namespace IO {
       /// @brief Provides data for the FileSystemWatcher.Error event.
       /// @remarks ErrorEventArgs contains the Exception that caused the FileSystemWatcher.Error event. This class provides the GetException method to retrieve the exception.
+      /// @par Library
+      /// Switch.System
       class _export ErrorEventArgs : public EventArgs {
       public:
         /// @brief Initializes a new instance of the ErrorEventArgs class.
