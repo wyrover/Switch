@@ -8,8 +8,6 @@ set(INCLUDE_FILES
   include/Switch/System/ComponentModel/IComponent.hpp
   include/Switch/System/ComponentModel/IContainer.hpp
   include/Switch/System/ComponentModel/ISite.hpp
-  include/Switch/System/Media/SystemSound.hpp
-  include/Switch/System/Media/SystemSounds.hpp
   include/Switch/System/Windows/Forms/VisualStyles/VisualStyleState.hpp
   include/Switch/System/Windows/Forms/AccessibleEvents.hpp
   include/Switch/System/Windows/Forms/AccessibleNavigation.hpp
@@ -150,8 +148,6 @@ set(SOURCE_FILES
   src/Native/WindowProcedureApiWin32.cpp
   src/Native/WindowProcedureApiCocoa.hpp
   src/Native/WindowProcedureApiWin32.hpp
-  src/Switch/System/Media/SystemSound.cpp
-  src/Switch/System/Media/SystemSounds.cpp
   src/Switch/System/Windows/Forms/Application.cpp
   src/Switch/System/Windows/Forms/Button.cpp
   src/Switch/System/Windows/Forms/CheckBox.cpp
@@ -213,7 +209,6 @@ set(COCOA_SOURCE_FILES
   src/Native/WindowProcedureApiCocoa.mm
 )
 endif ()
-
 
 GroupSources(.)
 

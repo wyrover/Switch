@@ -195,13 +195,6 @@ void Native::ApplicationApi::Exit() {
   Environment::Exit(0);
 }
 
-void Native::ApplicationApi::MessageBeep(MessageBoxIcon type) {
-  @autoreleasepool {
-    System::Collections::Generic::SortedDictionary<MessageBoxIcon, string> beep = {{(MessageBoxIcon)0, "Funk"}, {MessageBoxIcon::Error, "Sosumi"}, {MessageBoxIcon::Question, "Purr"}, {MessageBoxIcon::Warning, "Hero"}, {MessageBoxIcon::Information, "Glass"}, {(MessageBoxIcon)0xFFFFFFFF, "Funk"}};
-    [[NSSound soundNamed:[NSString stringWithUTF8String:beep[type].c_str()]] play];
-  }
-}
-
 void Native::ApplicationApi::MessageLoop(const System::Windows::Forms::Form& mainForm, EventHandler idle) {
   __mainForm = mainForm;
   ApplicationCocoaApi::MessageLoop(idle);

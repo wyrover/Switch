@@ -31,9 +31,6 @@ void Native::ApplicationApi::MessageLoop(const System::Windows::Forms::Form& mai
   exitCode = __application__->run(as<Gtk::Window>(((Native::IWidget*)mainForm.Handle())->ToWidget()));
 }
 
-void Native::ApplicationApi::MessageBeep(MessageBoxIcon type) {
-}
-
 namespace {
   void AddButtons(Gtk::MessageDialog& dialog, MessageBoxButtons buttons) {
     switch(buttons) {

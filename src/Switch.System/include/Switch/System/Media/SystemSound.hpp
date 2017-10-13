@@ -5,9 +5,10 @@
 #include <Switch/Is.hpp>
 #include <Switch/Types.hpp>
 #include <Switch/System/Object.hpp>
-#include "../Windows/Forms/MessageBoxIcon.hpp"
 
+/// @cond
 struct __opaque_sound_access__;
+/// @endcond
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
@@ -16,6 +17,8 @@ namespace Switch {
     /// @brief The Switch::System::Media namespace contains classes for playing sound files and accessing sounds provided by the system.
     namespace Media {
       /// @brief Provides a collection of Cursor objects for use by a Windows Forms application.
+      /// @par Library
+      /// Switch.System
       class SystemSound : public object {
       public:
         SystemSound() {}
@@ -30,8 +33,8 @@ namespace Switch {
 
       private:
         friend struct ::__opaque_sound_access__;
-        SystemSound(System::Windows::Forms::MessageBoxIcon type) : type(type) {}
-        System::Windows::Forms::MessageBoxIcon type = (System::Windows::Forms::MessageBoxIcon)0;
+        SystemSound(int32 type) : type(type) {}
+        int32 type = 0;
       };
     }
   }

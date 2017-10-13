@@ -10,6 +10,9 @@ namespace Switch {
   namespace System {
     /// @brief The Switch::System::Media namespace contains classes for playing sound files and accessing sounds provided by the system.
     namespace Media {
+      /// @brief Retrieves sounds associated with a set of Windows operating system sound-event types. This class cannot be inherited.
+      /// @par Library
+      /// Switch.System
       class SystemSounds {
       public:
         static _property<SystemSound, _readonly> Asterisk;

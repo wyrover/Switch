@@ -1,5 +1,5 @@
 #include "../../../../../include/Switch/System/Windows/Forms/MessageBox.hpp"
-#include "../../../../../include/Switch/System/Media/SystemSounds.hpp"
+#include <Switch/System/Media/SystemSounds.hpp>
 #include "../../../../Native/Api.hpp"
 
 using namespace System;

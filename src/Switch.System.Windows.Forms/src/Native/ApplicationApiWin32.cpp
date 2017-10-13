@@ -18,10 +18,6 @@ void Native::ApplicationApi::Exit() {
   PostQuitMessage(0);
 }
 
-void Native::ApplicationApi::MessageBeep(MessageBoxIcon type) {
-  ::MessageBeep((uint32)type);
-}
-
 void Native::ApplicationApi::MessageLoop(const System::Windows::Forms::Form& mainForm, EventHandler idle) {
   while (true) {
     MSG msg;

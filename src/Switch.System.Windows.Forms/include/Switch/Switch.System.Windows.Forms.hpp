@@ -3,8 +3,6 @@
 #pragma once
 
 #include <Switch/Switch.System.Drawing>
-#include "System/Media/SystemSound.hpp"
-#include "System/Media/SystemSounds.hpp"
 #include "System/ComponentModel/Component.hpp"
 #include "System/ComponentModel/ComponentCollection.hpp"
 #include "System/ComponentModel/IComponent.hpp"

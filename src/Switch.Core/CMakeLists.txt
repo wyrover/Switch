@@ -67,7 +67,6 @@ set(INCLUDE_FILES
   include/Switch/System/IO/FileMode.hpp
   include/Switch/System/IO/FileShare.hpp
   include/Switch/System/IO/FileStream.hpp
-  include/Switch/System/IO/FileSystemEventArgs.hpp
   include/Switch/System/IO/FileSystemInfo.hpp
   include/Switch/System/IO/InternalBufferOverflowException.hpp
   include/Switch/System/IO/InvalidDataException.hpp

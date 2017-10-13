@@ -115,5 +115,18 @@ namespace Native {
     static int32 ReceiveFrom(intptr handle, byte* buffer, int32 bufferLength, int32 flags, byte* socketAddress, int32 addressLength);
     static int32 Shutdown(intptr handle, int32 how);
   };
+  
+  enum class SoundType {
+    Beep = 0,
+    Hand = 0x00000010,
+    Question = 0x00000020,
+    Exclamation = 0x00000030,
+    Asterisk = 0x00000040,
+  };
+  
+  class SystemSoundApi _static {
+  public:
+    static void Play(SoundType type);
+  };
 }
 

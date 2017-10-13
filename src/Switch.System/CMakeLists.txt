@@ -37,6 +37,9 @@ set(INCLUDE_FILES
   include/Switch/System/IO/Ports/SerialErrorReceivedEventHandler.hpp
   include/Switch/System/IO/Ports/SerialPinChangedEventHandler.hpp
   include/Switch/System/IO/ErrorEventArgs.hpp
+  include/Switch/System/IO/FileSystemEventArgs.hpp
+  include/Switch/System/Media/SystemSound.hpp
+  include/Switch/System/Media/SystemSounds.hpp
   include/Switch/System/Net/Sockets/AddressFamily.hpp
   include/Switch/System/Net/Sockets/IOControlCode.hpp
   include/Switch/System/Net/Sockets/IPv6MulticastOption.hpp
@@ -112,6 +115,8 @@ set(SOURCE_FILES
   src/Native/SecurityApi.cpp
   src/Native/SocketApiGcc.cpp
   src/Native/SocketApiW32.cpp
+  src/Native/SystemSoundApiGtk.cpp
+  src/Native/SystemSoundApiW32.cpp
   src/Switch/System/Diagnostics/Debug.cpp
   src/Switch/System/Diagnostics/DefaultTraceListener.cpp
   src/Switch/System/Diagnostics/Process.cpp
@@ -120,6 +125,8 @@ set(SOURCE_FILES
   src/Switch/System/Diagnostics/Trace.cpp
   src/Switch/System/Diagnostics/TraceSource.cpp
   src/Switch/System/IO/Ports/SerialPort.cpp
+  src/Switch/System/Media/SystemSound.cpp
+  src/Switch/System/Media/SystemSounds.cpp
   src/Switch/System/Net/Sockets/Socket.cpp
   src/Switch/System/Net/Sockets/UdpClient.cpp
   src/Switch/System/Net/Sockets/NetworkStream.cpp
@@ -146,9 +153,15 @@ set(SOURCE_FILES
   src/Switch/Switch.System.cpp
 )
 
+if (APPLE)
+set(COCOA_SOURCE_FILES
+  src/Native/SystemSoundApiCocoa.mm
+)
+endif ()
+
 GroupSources(.)
 
-add_library(Switch.System STATIC ${INCLUDE_FILES} ${SOURCE_FILES})
+add_library(Switch.System STATIC ${INCLUDE_FILES} ${SOURCE_FILES} ${COCOA_SOURCE_FILES})
 target_include_directories(Switch.System PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include> $<INSTALL_INTERFACE:include>)
 target_link_libraries(Switch.System Switch.Core ${CURL_LIBRARIES})
 set_target_properties(Switch.System PROPERTIES FOLDER src)

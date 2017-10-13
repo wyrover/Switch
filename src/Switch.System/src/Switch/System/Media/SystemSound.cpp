@@ -4,5 +4,5 @@
 using namespace System::Media;
 
 void SystemSound::Play() const {
-  Native::ApplicationApi::MessageBeep(this->type);
+  Native::SystemSoundApi::Play((Native::SoundType)this->type);
 }
