@@ -45,13 +45,8 @@ set(INCLUDE_FILES
   include/Switch/System/Collections/Queue.hpp
   include/Switch/System/Collections/Stack.hpp
   include/Switch/System/ComponentModel/InvalidEnumArgumentException.hpp
-  include/Switch/System/Diagnostics/Process.hpp
-  include/Switch/System/Diagnostics/ProcessStartInfo.hpp
-  include/Switch/System/Diagnostics/ProcessPriorityClass.hpp
-  include/Switch/System/Diagnostics/ProcessWindowStyle.hpp
   include/Switch/System/Diagnostics/StackFrame.hpp
   include/Switch/System/Diagnostics/StackTrace.hpp
-  include/Switch/System/Diagnostics/Stopwatch.hpp
   include/Switch/System/Globalization/NumberStyles.hpp
   include/Switch/System/IO/BinaryReader.hpp
   include/Switch/System/IO/BinaryWriter.hpp
@@ -330,8 +325,6 @@ set(SOURCE_FILES
   src/Native/FormatApi.cpp
   src/Native/InterlockedApiGcc.cpp
   src/Native/InterlockedApiW32.cpp
-  src/Native/ProcessApiGcc.cpp
-  src/Native/ProcessApiW32.cpp
   src/Native/RegistryApiGcc.cpp
   src/Native/RegistryApiW32.cpp
   src/Native/SecurityApi.cpp
@@ -343,11 +336,8 @@ set(SOURCE_FILES
   src/Native/UnicodeEncodingsApi.cpp
   src/Switch/Microsoft/Win32/RegistryKeyWin.cpp
   src/Switch/Microsoft/Win32/RegistryKeyAll.cpp
-  src/Switch/System/Diagnostics/Process.cpp
-  src/Switch/System/Diagnostics/ProcessStartInfo.cpp
   src/Switch/System/Diagnostics/StackFrame.cpp
   src/Switch/System/Diagnostics/StackTrace.cpp
-  src/Switch/System/Diagnostics/Stopwatch.cpp
   src/Switch/System/IO/Directory.cpp
   src/Switch/System/IO/DirectoryInfo.cpp
   src/Switch/System/IO/DriveInfo.cpp

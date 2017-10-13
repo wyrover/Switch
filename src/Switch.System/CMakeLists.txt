@@ -9,6 +9,11 @@ set(INCLUDE_FILES
   include/Switch/System/Diagnostics/Debug.hpp
   include/Switch/System/Diagnostics/DefaultTraceListener.hpp
   include/Switch/System/Diagnostics/NullTraceListener.hpp
+  include/Switch/System/Diagnostics/Process.hpp
+  include/Switch/System/Diagnostics/ProcessStartInfo.hpp
+  include/Switch/System/Diagnostics/ProcessPriorityClass.hpp
+  include/Switch/System/Diagnostics/ProcessWindowStyle.hpp
+  include/Switch/System/Diagnostics/Stopwatch.hpp
   include/Switch/System/Diagnostics/TextWriterTraceListener.hpp
   include/Switch/System/Diagnostics/Trace.hpp
   include/Switch/System/Diagnostics/TraceEventCache.hpp
@@ -102,10 +107,16 @@ set(SOURCE_FILES
   src/Native/DebuggerApiGcc.cpp
   src/Native/DebuggerApiW32.cpp
   src/Native/DnsApi.cpp
+  src/Native/ProcessApiGcc.cpp
+  src/Native/ProcessApiW32.cpp
+  src/Native/SecurityApi.cpp
   src/Native/SocketApiGcc.cpp
   src/Native/SocketApiW32.cpp
   src/Switch/System/Diagnostics/Debug.cpp
   src/Switch/System/Diagnostics/DefaultTraceListener.cpp
+  src/Switch/System/Diagnostics/Process.cpp
+  src/Switch/System/Diagnostics/ProcessStartInfo.cpp
+  src/Switch/System/Diagnostics/Stopwatch.cpp
   src/Switch/System/Diagnostics/Trace.cpp
   src/Switch/System/Diagnostics/TraceSource.cpp
   src/Switch/System/IO/Ports/SerialPort.cpp

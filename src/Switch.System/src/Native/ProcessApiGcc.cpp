@@ -5,8 +5,8 @@
 #include <signal.h>
 #include <unistd.h>
 #include "Api.hpp"
-#include "../../include/Switch/System/IO/Path.hpp"
-#include "../../include/Switch/System/Threading/Thread.hpp"
+#include <Switch/System/IO/Path.hpp>
+#include <Switch/System/Threading/Thread.hpp>
 
 #if defined(__APPLE__)
 #include <libproc.h>

@@ -15,7 +15,6 @@ set(SOURCE_FILES
   Switch/System/Collections/ObjectModel/ReadOnlyCollectionUT.cpp
   Switch/System/Collections/ArrayListUT.cpp
   Switch/System/Collections/BitArrayUT.cpp
-  Switch/System/Diagnostics/ProcessStartInfoUnitTests.cpp
   Switch/System/Diagnostics/StackFrameUT.cpp
   Switch/System/IO/Ports/SerialPortUT.cpp
   Switch/System/IO/DirectoryTest.cpp

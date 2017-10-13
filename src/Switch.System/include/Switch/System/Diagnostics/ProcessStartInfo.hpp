@@ -2,12 +2,12 @@
 /// @brief Contains Switch::System::Diagnostics::ProcessStartInfo class.
 #pragma once
 
-#include "../Security/SecureString.hpp"
-#include "../ComponentModel/InvalidEnumArgumentException.hpp"
-#include "../Environment.hpp"
-#include "../Nullable.hpp"
-#include "../Object.hpp"
-#include "../String.hpp"
+#include <Switch/System/Security/SecureString.hpp>
+#include <Switch/System/ComponentModel/InvalidEnumArgumentException.hpp>
+#include <Switch/System/Environment.hpp>
+#include <Switch/System/Nullable.hpp>
+#include <Switch/System/Object.hpp>
+#include <Switch/System/String.hpp>
 #include "ProcessWindowStyle.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
@@ -24,6 +24,8 @@ namespace Switch {
       /// @remarks Set UseShellExecute to specify whether to start the process by using the operating system shell.
       /// @remarks You can change the value of any ProcessStartInfo property up to the time that the process starts. After you start the process, changing these values has no effect.
       /// @note This class contains a link demand at the class level that applies to all members. A SecurityException is thrown when the immediate caller does not have full-trust permission. For details about security demands, see Link Demands.
+      /// @par Library
+      /// Switch.System
       class _export ProcessStartInfo final : public Object {
       public:
         /// @brief Initializes a new instance of the ProcessStartInfo class without specifying a file name with which to start the process.

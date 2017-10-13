@@ -2,11 +2,11 @@
 /// @brief Contains Switch::System::Diagnostics::ProcessStartInfo class.
 #pragma once
 
-#include "../Security/SecureString.hpp"
-#include "../Collections/Generic/Dictionary.hpp"
-#include "../Environment.hpp"
-#include "../Object.hpp"
-#include "../String.hpp"
+#include <Switch/System/Security/SecureString.hpp>
+#include <Switch/System/Collections/Generic/Dictionary.hpp>
+#include <Switch/System/Environment.hpp>
+#include <Switch/System/Object.hpp>
+#include <Switch/System/String.hpp>
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
@@ -15,6 +15,8 @@ namespace Switch {
     /// @brief The System::Diagnostics namespace provides classes that allow you to interact with system processes, event logs, and performance counters.
     namespace Diagnostics {
       /// @brief Specified how a new window should appear when the system starts a process.
+      /// @par Library
+      /// Switch.System
       enum class ProcessWindowStyle {
         /// @brief The normal, visible window style. The system displays a window with Normal style on the screen, in a default location. If a window is visible, the user can supply input to the window and view the window's output. Frequently, an application may initialize a new window to the Hidden style while it customizes the window's appearance, and then make the window style Normal.
         Normal = 0,

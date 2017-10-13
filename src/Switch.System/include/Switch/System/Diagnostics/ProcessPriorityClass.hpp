@@ -2,7 +2,7 @@
 /// @brief Contains Switch::System::Diagnostics::TraceOptions enum.
 #pragma once
 
-#include "../Enum.hpp"
+#include <Switch/System/Enum.hpp>
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
@@ -13,6 +13,8 @@ namespace Switch {
       /// @brief Indicates the priority that the system associates with a process. This value, together with the priority value of each thread of the process, determines each thread's base priority level.
       /// @remarks A process priority class encompasses a range of thread priority levels. Threads with different priorities running in the process run relative to the process's priority class. The operating system uses the base-priority level of all executable threads to determine which thread gets the next slice of processor time.
       /// @remarks Win32 uses four priority classes with seven base priority levels per class. Based on time elapsed or other boosts, the operating system can change the base priority level when a process needs to be put ahead of others for access to the processor. In addition, you can set PriorityBoostEnabled to temporarily boost the priority level of threads that have been taken out of the wait state. The priority is reset when the process returns to the wait state.
+      /// @par Library
+      /// Switch.System
       enum class ProcessPriorityClass {
         /// @brief Specifies that the process has no special scheduling needs.
         Normal = 32,

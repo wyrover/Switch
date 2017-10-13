@@ -1,11 +1,9 @@
 #include <Switch/Lock.hpp>
-#include <Switch/System/Diagnostics/Stopwatch.hpp>
 #include <Switch/TUnit/Assert.hpp>
 #include <Switch/TUnit/TestFixture.hpp>
 
 using namespace System;
 using namespace System::Threading;
-using namespace System::Diagnostics;
 using namespace TUnit;
 
 namespace SwitchUnitTests {
@@ -50,13 +48,12 @@ namespace SwitchUnitTests {
     void LockDuration() {
       object lock;
       int value = 0;
-      Stopwatch duration = Stopwatch::StartNew();
+      int64 start = std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count()/1000000;
 
       _lock (lock)
         ++value;
 
-      duration.Stop();
-      Assert::LessOrEqual(duration.ElapsedMilliseconds(), 1, _caller);
+      Assert::LessOrEqual(std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count()/1000000 - start, 1, _caller);
     }
  
     void Thread() {

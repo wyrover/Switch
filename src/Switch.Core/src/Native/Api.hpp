@@ -4,7 +4,6 @@
 #include "../../include/Switch/Microsoft/Win32/RegistryKey.hpp"
 #include "../../include/Switch/Microsoft/Win32/RegistryValueKind.hpp"
 #include "../../include/Switch/System/Collections/Generic/SortedDictionary.hpp"
-#include "../../include/Switch/System/Diagnostics/ProcessStartInfo.hpp"
 #include "../../include/Switch/System/IO/DriveType.hpp"
 #include "../../include/Switch/System/IO/FileAttributes.hpp"
 #include "../../include/Switch/System/Security/SecureString.hpp"
@@ -150,20 +149,6 @@ namespace Native {
     static void* Exchange(void*& location, void* value);
     static int32 Increment(int32& location);
     static int64 Increment(int64& location);
-  };
-  
-  class ProcessApi _static {
-  public:
-    static intptr Start(const System::Diagnostics::ProcessStartInfo& processStartInfo);
-    static bool Close(intptr handle);
-    static bool Kill(intptr handle);
-    static intptr GetCurrent();
-    static intptr GetParent();
-    static string GetName(intptr handle);
-    static string GetPath(intptr handle);
-    static System::Array<intptr> GetProcesses();
-    static void WaitForExit(intptr handle, int32& exitCode);
-    static bool WaitForExit(intptr handle, int32 timeout, int32& exitCode);
   };
   
   class RegistryApi _static {

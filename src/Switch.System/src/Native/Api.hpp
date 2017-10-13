@@ -2,6 +2,7 @@
 
 #include <Switch/Static.hpp>
 #include <Switch/Types.hpp>
+#include "../../include/Switch/System/Diagnostics/ProcessStartInfo.hpp"
 #include "../../include/Switch/System/Net/Sockets/AddressFamily.hpp"
 #include "../../include/Switch/System/Net/Sockets/ProtocolType.hpp"
 #include "../../include/Switch/System/Net/Sockets/SocketOptionName.hpp"
@@ -66,6 +67,28 @@ namespace Native {
     static void SetHostent(bool stayOpen);
   };
   
+  class ProcessApi _static {
+  public:
+    static intptr Start(const System::Diagnostics::ProcessStartInfo& processStartInfo);
+    static bool Close(intptr handle);
+    static bool Kill(intptr handle);
+    static intptr GetCurrent();
+    static intptr GetParent();
+    static string GetName(intptr handle);
+    static string GetPath(intptr handle);
+    static System::Array<intptr> GetProcesses();
+    static void WaitForExit(intptr handle, int32& exitCode);
+    static bool WaitForExit(intptr handle, int32 timeout, int32& exitCode);
+  };
+  
+  class SecurityApi _static {
+  public:
+    static System::Security::SecureString ToSecureSecureString(const string& unsecureString);
+    static string ToSecureString(const string& unsecureString);
+    static string ToUnsecureString(const System::Security::SecureString& secureString);
+    static string ToUnsecureString(const string& secureString);
+  };
+
   class SocketApi _static {
   public:
     static int32 AddressFamilyToNative(System::Net::Sockets::AddressFamily addressFamily);

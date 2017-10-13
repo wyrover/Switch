@@ -2,10 +2,11 @@
 /// @brief Contains Switch::System::Threading::Tasks::Task <TResult> class.
 #pragma once
 
+#include <chrono>
+
 #include "../../../Move.hpp"
 #include "../../AggregateException.hpp"
 #include "../../ArgumentOutOfRangeException.hpp"
-#include "../../Diagnostics/Stopwatch.hpp"
 #include "../../Nullable.hpp"
 #include "../AutoResetEvent.hpp"
 #include "../ManualResetEvent.hpp"
@@ -296,11 +297,11 @@ namespace Switch {
             }
             
             int32 timeout = millisecondsTimeout;
-            System::Diagnostics::Stopwatch sw = System::Diagnostics::Stopwatch::StartNew();
+            int64 start = std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count()/1000000;
             for (auto& item : tasks) {
               if (item().Wait(timeout) == false)
                 return false;
-              timeout = millisecondsTimeout - (int32)sw.ElapsedMilliseconds();
+              timeout = millisecondsTimeout - (int32)(std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count()/1000000 - start);
               if (timeout < 0)
                 return false;
             }
@@ -322,11 +323,11 @@ namespace Switch {
             }
             
             int32 timeout = millisecondsTimeout;
-            System::Diagnostics::Stopwatch sw = System::Diagnostics::Stopwatch::StartNew();
+            int64 start = std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count()/1000000;
             for (auto& item : tasks) {
               if (item.Wait(timeout) == false)
                 return false;
-              timeout = millisecondsTimeout - (int32)sw.ElapsedMilliseconds();
+              timeout = millisecondsTimeout - (int32)(std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count()/1000000 - start);
               if (timeout < 0)
                 return false;
             }
@@ -349,11 +350,11 @@ namespace Switch {
             }
             
             int32 timeout = millisecondsTimeout;
-            System::Diagnostics::Stopwatch sw = System::Diagnostics::Stopwatch::StartNew();
+            int64 start = std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count()/1000000;
             for (auto& item : tasks) {
               if (item.Wait(timeout) == false)
                 return false;
-              timeout = millisecondsTimeout - (int32)sw.ElapsedMilliseconds();
+              timeout = millisecondsTimeout - (int32)(std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count()/1000000 - start);
               if (timeout < 0)
                 return false;
             }
@@ -411,12 +412,12 @@ namespace Switch {
             }
             
             int32 timeout = millisecondsTimeout;
-            System::Diagnostics::Stopwatch sw = System::Diagnostics::Stopwatch::StartNew();
+            int64 start = std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count()/1000000;
             do {
               for (int32 index = 0; index < tasks.Count; index++) {
                 if (tasks[index]().Wait(0) == true)
                   return index;
-                timeout = millisecondsTimeout - (int32)sw.ElapsedMilliseconds();
+                timeout = millisecondsTimeout - (int32)(std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count()/1000000 - start);
                 if (timeout < 0)
                   return -1;
                 Thread::Yield();
@@ -445,12 +446,12 @@ namespace Switch {
             }
             
             int32 timeout = millisecondsTimeout;
-            System::Diagnostics::Stopwatch sw = System::Diagnostics::Stopwatch::StartNew();
+            int64 start = std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count()/1000000;
             do {
               for (int32 index = 0; index < tasks.Count; index++) {
                 if (tasks[index].Wait(0) == true)
                   return index;
-                timeout = millisecondsTimeout - (int32)sw.ElapsedMilliseconds();
+                timeout = millisecondsTimeout - (int32)(std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count()/1000000 - start);
                 if (timeout < 0)
                   return -1;
                 Thread::Yield();
@@ -480,12 +481,12 @@ namespace Switch {
             }
             
             int32 timeout = millisecondsTimeout;
-            System::Diagnostics::Stopwatch sw = System::Diagnostics::Stopwatch::StartNew();
+            int64 start = std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count()/1000000;
             do {
               for (int32 index = 0; index < tasks.Count; index++) {
                 if (tasks[index].Wait(0) == true)
                   return index;
-                timeout = millisecondsTimeout - (int32)sw.ElapsedMilliseconds();
+                timeout = millisecondsTimeout - (int32)(std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count()/1000000 - start);
                 if (timeout < 0)
                   return -1;
                 Thread::Yield();

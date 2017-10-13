@@ -1,12 +1,10 @@
 #include "../../../../include/Switch/System/Threading/WaitHandle.hpp"
 #include "../../../../include/Switch/System/Threading/Thread.hpp"
-#include "../../../../include/Switch/System/Diagnostics/Stopwatch.hpp"
 #include "../../../../include/Switch/System/Array.hpp"
 #include "../../../../include/Switch/System/Boolean.hpp"
 #include "../../../../include/Switch/System/DateTime.hpp"
 
 using namespace System;
-using namespace System::Diagnostics;
 using namespace System::Threading;
 
 _property<int32, _readonly> Timeout::Infinite {
@@ -32,11 +30,11 @@ bool WaitHandle::WaitAll(Array<ref<WaitHandle>> waitHandles, int32 millisecondsT
   }
   
   int32 timeout = millisecondsTimeout;
-  Stopwatch sw = Stopwatch::StartNew();
+  int64 start = std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count()/1000000;
   for (auto& item : waitHandles) {
     if (item().WaitOne(timeout) == false)
       return false;
-    timeout = millisecondsTimeout - (int32)sw.ElapsedMilliseconds();
+    timeout = millisecondsTimeout - (int32)(std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count()/1000000 - start);
     if (timeout < 0)
       return false;
   }
@@ -66,12 +64,12 @@ int32 WaitHandle::WaitAny(Array<ref<WaitHandle>> waitHandles, int32 milliseconds
   }
   
   int32 timeout = millisecondsTimeout;
-  Stopwatch sw = Stopwatch::StartNew();
+  int64 start = std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count()/1000000;
   do {
     for (int32 index = 0; index < waitHandles.Count; index++) {
       if (waitHandles[index]().WaitOne(0) == true)
         return index;
-      timeout = millisecondsTimeout - (int32)sw.ElapsedMilliseconds();
+      timeout = millisecondsTimeout - (int32)(std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count()/1000000 - start);
       if (timeout < 0)
         return WaitTimeout;
       Thread::Yield();

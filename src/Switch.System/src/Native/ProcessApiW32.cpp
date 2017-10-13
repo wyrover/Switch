@@ -2,7 +2,7 @@
 
 #include <windows.h>
 #include <tlhelp32.h>
-#include "../../include/Switch/Undef.hpp"
+#include <Switch/Undef.hpp>
 
 #include "Api.hpp"
 
