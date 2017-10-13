@@ -75,11 +75,6 @@ namespace Native {
     static bool IsDaylight(int64 localTime);
   };
   
-  struct DebuggerApi _static {
-  public:
-    static void Log(int32 level, const string& category, const string& message);
-  };
-  
   class DirectoryApi _static {
   public:
     static char32 AltDirectorySeparatorChar();

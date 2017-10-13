@@ -2,7 +2,7 @@
 /// @brief Contains Switch::System::Diagnostics::TraceFilter class.
 #pragma once
 
-#include "../../Abstract.hpp"
+#include <Switch/Abstract.hpp>
 #include "TraceEventCache.hpp"
 #include "TraceEventType.hpp"
 
@@ -13,6 +13,8 @@ namespace Switch {
     /// @brief The System::Diagnostics namespace provides classes that allow you to interact with system processes, event logs, and performance counters.
     namespace Diagnostics {
       /// @brief Provides the base class for trace filter implementations.
+      /// @par Library
+      /// Switch.System
       class _export TraceFilter _abstract {
       public:
         /// @brief Initializes a new instance of the TraceFilter class.

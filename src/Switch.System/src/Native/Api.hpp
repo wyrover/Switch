@@ -48,6 +48,11 @@ namespace Native {
     static int32 SetHttpHeader(intptr request, intptr list);
   };
 
+  struct DebuggerApi _static {
+  public:
+    static void Log(int32 level, const string& category, const string& message);
+  };
+  
   class DnsApi _static {
   public:
     static void Destroy(intptr host);

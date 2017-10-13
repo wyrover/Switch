@@ -4,7 +4,6 @@
 
 #include "../../../include/Switch/System/Array.hpp"
 #include "../../../include/Switch/System/Type.hpp"
-#include "../../../include/Switch/System/Collections/Specialized/StringDictionary.hpp"
 #include "../../Native/Api.hpp"
 
 using namespace System;
@@ -41,7 +40,7 @@ String Type::GetFullName() const {
   }
 
   // replace some keywords by other...
-  for (auto keyValue : System::Collections::Specialized::StringDictionary {{"std::nullptr_t", "Switch::NUllPtr"}, {"std::__1::allocator", "Switch::Allocator"}, {"std::allocator", "Switch::Allocator"}, {"std::initializer_list", "Switch::InitializerList"}, {"const", ""}, {"__property__", "_property"}, {"__readonly__", "_readonly"}, {"__writeonly__", "_writeonly"}, {"__readwrite__", "_readwrite"},}) {
+  for (auto keyValue : System::Collections::Generic::SortedDictionary<string, string> {{"std::nullptr_t", "Switch::NUllPtr"}, {"std::__1::allocator", "Switch::Allocator"}, {"std::allocator", "Switch::Allocator"}, {"std::initializer_list", "Switch::InitializerList"}, {"const", ""}, {"__property__", "_property"}, {"__readonly__", "_readonly"}, {"__writeonly__", "_writeonly"}, {"__readwrite__", "_readwrite"},}) {
     if (fullName.Contains(keyValue.Key))
       fullName = fullName.Replace(keyValue.Key, keyValue.Value);
   }

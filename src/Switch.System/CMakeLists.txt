@@ -2,6 +2,22 @@ project(Switch.System)
 
 set(INCLUDE_FILES
   include/Switch/System/Collections/Concurrent/ConcurrentBag.hpp
+  include/Switch/System/Collections/Specialized/StringCollection.hpp
+  include/Switch/System/Collections/Specialized/StringDictionary.hpp
+  include/Switch/System/Collections/Specialized/StringEnumerator.hpp
+  include/Switch/System/Diagnostics/ConsoleTraceListener.hpp
+  include/Switch/System/Diagnostics/Debug.hpp
+  include/Switch/System/Diagnostics/DefaultTraceListener.hpp
+  include/Switch/System/Diagnostics/NullTraceListener.hpp
+  include/Switch/System/Diagnostics/TextWriterTraceListener.hpp
+  include/Switch/System/Diagnostics/Trace.hpp
+  include/Switch/System/Diagnostics/TraceEventCache.hpp
+  include/Switch/System/Diagnostics/TraceEventType.hpp
+  include/Switch/System/Diagnostics/TraceFilter.hpp
+  include/Switch/System/Diagnostics/TraceListener.hpp
+  include/Switch/System/Diagnostics/TraceListenerCollection.hpp
+  include/Switch/System/Diagnostics/TraceOptions.hpp
+  include/Switch/System/Diagnostics/TraceSource.hpp
   include/Switch/System/IO/Ports/Handshake.hpp
   include/Switch/System/IO/Ports/Parity.hpp
   include/Switch/System/IO/Ports/SerialData.hpp
@@ -82,9 +98,15 @@ set(INCLUDE_FILES
 set(SOURCE_FILES
   src/Native/Api.hpp
   src/Native/CurlApi.cpp
+  src/Native/DebuggerApiGcc.cpp
+  src/Native/DebuggerApiW32.cpp
   src/Native/DnsApi.cpp
   src/Native/SocketApiGcc.cpp
   src/Native/SocketApiW32.cpp
+  src/Switch/System/Diagnostics/Debug.cpp
+  src/Switch/System/Diagnostics/DefaultTraceListener.cpp
+  src/Switch/System/Diagnostics/Trace.cpp
+  src/Switch/System/Diagnostics/TraceSource.cpp
   src/Switch/System/IO/Ports/SerialPort.cpp
   src/Switch/System/Net/Sockets/Socket.cpp
   src/Switch/System/Net/Sockets/UdpClient.cpp

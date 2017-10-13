@@ -15,6 +15,8 @@ namespace Switch {
       public:
         /// @brief Initializes a new instance of the ConsoleTraceListener class with trace output written to the standard output stream.
         /// @remarks This constructor initializes a ConsoleTraceListener object to write messages to either the Console.Out or the Console.Error stream. Its Name property is initialized to an empty string ("").
+        /// @par Library
+        /// Switch.System
         NullTraceListener() {}
         
         /// @cond

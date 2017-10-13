@@ -2,8 +2,8 @@
 /// @brief Contains Switch::System::Diagnostics::TraceListenerCollection class.
 #pragma once
 
-#include "../../RefPtr.hpp"
-#include "../Collections/Generic/List.hpp"
+#include <Switch/RefPtr.hpp>
+#include <Switch/System/Collections/Generic/List.hpp>
 #include "DefaultTraceListener.hpp"
 #include "NullTraceListener.hpp"
 
@@ -19,6 +19,8 @@ namespace Switch {
       /// @endcond
       
       /// @brief Provides a thread-safe list of TraceListener objects.
+      /// @par Library
+      /// Switch.System
       class _export TraceListenerCollection : public System::Collections::Generic::IList<TraceListener>, public object {
         friend class Trace;
         friend class TraceSource;

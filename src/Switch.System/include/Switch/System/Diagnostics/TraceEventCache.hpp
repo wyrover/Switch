@@ -2,12 +2,12 @@
 /// @brief Contains Switch::System::Diagnostics::TraceEventCache class.
 #pragma once
 
-#include "../../Types.hpp"
-#include "../DateTime.hpp"
-#include "../Environment.hpp"
-#include "../Collections/Stack.hpp"
-#include "../Threading/Thread.hpp"
-#include "Stopwatch.hpp"
+#include <Switch/Types.hpp>
+#include <Switch/System/DateTime.hpp>
+#include <Switch/System/Environment.hpp>
+#include <Switch/System/Collections/Stack.hpp>
+#include <Switch/System/Threading/Thread.hpp>
+#include <Switch/System/Diagnostics/Stopwatch.hpp>
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
@@ -16,6 +16,8 @@ namespace Switch {
     /// @brief The System::Diagnostics namespace provides classes that allow you to interact with system processes, event logs, and performance counters.
     namespace Diagnostics {
       /// @brief Provides trace event data specific to a thread and a process.
+      /// @par Library
+      /// Switch.System
       class _export TraceEventCache : public Object {
       public:
         /// @brief Initializes a new instance of the TraceEventCache class.

@@ -2,7 +2,7 @@
 /// @brief Contains Switch::System::Diagnostics::TraceEventType class.
 #pragma once
 
-#include "../Enum.hpp"
+#include <Switch/System/Enum.hpp>
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
@@ -11,6 +11,8 @@ namespace Switch {
     /// @brief The System::Diagnostics namespace provides classes that allow you to interact with system processes, event logs, and performance counters.
     namespace Diagnostics {
       /// @brief Identifies the type of event that has caused the trace.
+      /// @par Library
+      /// Switch.System
       /// @see Trace
       enum class TraceEventType {
         /// @brief Fatal error or application crash.

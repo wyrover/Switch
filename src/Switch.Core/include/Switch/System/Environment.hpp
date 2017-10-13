@@ -13,7 +13,6 @@
 #include "String.hpp"
 #include "Version.hpp"
 #include "Collections/Generic/Dictionary.hpp"
-#include "Collections/Specialized/StringDictionary.hpp"
 #include "Threading/Thread.hpp"
 
 class __start_up__;

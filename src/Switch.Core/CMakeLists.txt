@@ -31,9 +31,6 @@ set(INCLUDE_FILES
   include/Switch/System/Collections/Generic/Stack.hpp
   include/Switch/System/Collections/ObjectModel/Collection.hpp
   include/Switch/System/Collections/ObjectModel/ReadOnlyCollection.hpp
-  include/Switch/System/Collections/Specialized/StringCollection.hpp
-  include/Switch/System/Collections/Specialized/StringDictionary.hpp
-  include/Switch/System/Collections/Specialized/StringEnumerator.hpp
   include/Switch/System/Collections/ArrayList.hpp
   include/Switch/System/Collections/BitArray.hpp
   include/Switch/System/Collections/Comparer.hpp
@@ -48,10 +45,6 @@ set(INCLUDE_FILES
   include/Switch/System/Collections/Queue.hpp
   include/Switch/System/Collections/Stack.hpp
   include/Switch/System/ComponentModel/InvalidEnumArgumentException.hpp
-  include/Switch/System/Diagnostics/ConsoleTraceListener.hpp
-  include/Switch/System/Diagnostics/Debug.hpp
-  include/Switch/System/Diagnostics/DefaultTraceListener.hpp
-  include/Switch/System/Diagnostics/NullTraceListener.hpp
   include/Switch/System/Diagnostics/Process.hpp
   include/Switch/System/Diagnostics/ProcessStartInfo.hpp
   include/Switch/System/Diagnostics/ProcessPriorityClass.hpp
@@ -59,15 +52,6 @@ set(INCLUDE_FILES
   include/Switch/System/Diagnostics/StackFrame.hpp
   include/Switch/System/Diagnostics/StackTrace.hpp
   include/Switch/System/Diagnostics/Stopwatch.hpp
-  include/Switch/System/Diagnostics/TextWriterTraceListener.hpp
-  include/Switch/System/Diagnostics/Trace.hpp
-  include/Switch/System/Diagnostics/TraceEventCache.hpp
-  include/Switch/System/Diagnostics/TraceEventType.hpp
-  include/Switch/System/Diagnostics/TraceFilter.hpp
-  include/Switch/System/Diagnostics/TraceListener.hpp
-  include/Switch/System/Diagnostics/TraceListenerCollection.hpp
-  include/Switch/System/Diagnostics/TraceOptions.hpp
-  include/Switch/System/Diagnostics/TraceSource.hpp
   include/Switch/System/Globalization/NumberStyles.hpp
   include/Switch/System/IO/BinaryReader.hpp
   include/Switch/System/IO/BinaryWriter.hpp
@@ -337,8 +321,6 @@ set(SOURCE_FILES
   src/Native/ConsoleApiW32.cpp
   src/Native/DateTimeApiGcc.cpp
   src/Native/DateTimeApiW32.cpp
-  src/Native/DebuggerApiGcc.cpp
-  src/Native/DebuggerApiW32.cpp
   src/Native/DirectoryApiGcc.cpp
   src/Native/DirectoryApiW32.cpp
   src/Native/DriveApiGcc.cpp
@@ -362,15 +344,11 @@ set(SOURCE_FILES
   src/Native/UnicodeEncodingsApi.cpp
   src/Switch/Microsoft/Win32/RegistryKeyWin.cpp
   src/Switch/Microsoft/Win32/RegistryKeyAll.cpp
-  src/Switch/System/Diagnostics/Debug.cpp
-  src/Switch/System/Diagnostics/DefaultTraceListener.cpp
   src/Switch/System/Diagnostics/Process.cpp
   src/Switch/System/Diagnostics/ProcessStartInfo.cpp
   src/Switch/System/Diagnostics/StackFrame.cpp
   src/Switch/System/Diagnostics/StackTrace.cpp
   src/Switch/System/Diagnostics/Stopwatch.cpp
-  src/Switch/System/Diagnostics/Trace.cpp
-  src/Switch/System/Diagnostics/TraceSource.cpp
   src/Switch/System/IO/Directory.cpp
   src/Switch/System/IO/DirectoryInfo.cpp
   src/Switch/System/IO/DriveInfo.cpp

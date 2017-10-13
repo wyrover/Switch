@@ -17,7 +17,6 @@ set(SOURCE_FILES
   Switch/System/Collections/BitArrayUT.cpp
   Switch/System/Diagnostics/ProcessStartInfoUnitTests.cpp
   Switch/System/Diagnostics/StackFrameUT.cpp
-  Switch/System/Diagnostics/TraceUT.cpp
   Switch/System/IO/Ports/SerialPortUT.cpp
   Switch/System/IO/DirectoryTest.cpp
   Switch/System/IO/FileUT.cpp

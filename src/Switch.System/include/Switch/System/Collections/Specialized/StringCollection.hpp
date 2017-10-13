@@ -1,9 +1,9 @@
 /// @file
-/// @brief Contains Switch::System::Collections::Specialized::StringEnumerator class.
+/// @brief Contains Switch::System::Collections::Specialized::StringCollection class.
 #pragma once
 
 #include "../../String.hpp"
-#include "../Generic/IEnumerator.hpp"
+#include "../Generic/List.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
@@ -13,8 +13,16 @@ namespace Switch {
     namespace Collections {
       /// @brief The System::Collections::Specialized namespace contains specialized and strongly-typed collections; for example, a linked list dictionary, a bit vector, and collections that contain only strings.
       namespace Specialized {
-        /// @brief Supports a simple iteration over a StringCollection.
-        using StringEnumerator = System::Collections::Generic::Enumerator<String>;
+        /// @brief Represents a collection of strings.
+        /// @remarks StringCollection allows duplicate elements.
+        /// @remarks string comparisons are case-sensitive.
+        /// @remarks Elements in this collection can be accessed using an integer index. Indexes in this collection are zero-based.
+        /// @par Library
+        /// Switch.System
+        /// @par Examples
+        /// The following code example demonstrates several of the properties and methods of StringCollection.
+        /// @include StringCollection.cpp
+        using StringCollection = Generic::List<String>;
       }
     }
   }

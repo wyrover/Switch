@@ -3,7 +3,6 @@
 #pragma once
 
 #include "../Security/SecureString.hpp"
-#include "../Collections/Specialized/StringDictionary.hpp"
 #include "../ComponentModel/InvalidEnumArgumentException.hpp"
 #include "../Environment.hpp"
 #include "../Nullable.hpp"
@@ -86,8 +85,8 @@ namespace Switch {
         /// @brief Gets search paths for files, directories for temporary files, application-specific options, and other similar information.
         /// @return Dictionary<string, string> A string dictionary that provides environment variables that apply to this process and child processes. The default is empty.
         /// @remarks Although you cannot set the EnvironmentVariables property, you can modify the StringDictionary returned by the property. For example, the following code adds a TempPath environment variable: myProcess.StartInfo.EnvironmentVariables.Add("TempPath", "C:\\Temp"). You must set the UseShellExecute property to false to start the process after changing the EnvironmentVariables property. If UseShellExecute is true, an InvalidOperationException is thrown when the Start method is called.
-        _property<Collections::Specialized::StringDictionary&, _readonly> EnvironmentVariables {
-          _get->Collections::Specialized::StringDictionary&{ return this->data->environmentVariables; }
+        _property<Collections::Generic::SortedDictionary<string, string>&, _readonly> EnvironmentVariables {
+          _get->Collections::Generic::SortedDictionary<string, string>&{ return this->data->environmentVariables; }
         };
 
         /// @brief Gets or sets a value indicating whether an error dialog box is displayed to the user if the process cannot be started.
@@ -309,7 +308,7 @@ namespace Switch {
           String domain;
           bool errorDialog = false;
           intptr errorDialogParamHandle = 0;
-          Collections::Specialized::StringDictionary environmentVariables;
+          Collections::Generic::SortedDictionary<string, string> environmentVariables;
           String fileName;
           bool loadUserProfile = false;
           System::Security::SecureString password;

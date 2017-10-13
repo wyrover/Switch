@@ -2,7 +2,7 @@
 /// @brief Contains Switch::System::Diagnostics::TraceOptions enum.
 #pragma once
 
-#include "../Enum.hpp"
+#include <Switch/System/Enum.hpp>
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
@@ -12,6 +12,8 @@ namespace Switch {
     namespace Diagnostics {
       /// @brief Specifies trace data options to be written to the trace output.
       /// @remarks This enumeration is used by trace listeners to determine which options, or elements, should be included in the trace output. Trace listeners store the trace options in the TraceOutputOptions property.
+      /// @par Library
+      /// Switch.System
       enum class TraceOptions {
         /// @brief Do not write any elements.
         None = 0,

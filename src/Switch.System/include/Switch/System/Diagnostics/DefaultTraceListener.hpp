@@ -2,9 +2,9 @@
 /// @brief Contains Switch::System::Diagnostics::DefaultTraceListener class.
 #pragma once
 
-#include "../../Property.hpp"
-#include "../../Types.hpp"
-#include "../IO/StreamWriter.hpp"
+#include <Switch/Property.hpp>
+#include <Switch/Types.hpp>
+#include <Switch/System/IO/StreamWriter.hpp>
 #include "TraceListener.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
@@ -14,6 +14,8 @@ namespace Switch {
     /// @brief The System::Diagnostics namespace provides classes that allow you to interact with system processes, event logs, and performance counters.
     namespace Diagnostics {
       /// @brief Provides the default output methods and behavior for tracing.
+      /// @par Library
+      /// Switch.System
       class _export DefaultTraceListener : public TraceListener {
       public:
         DefaultTraceListener() {}

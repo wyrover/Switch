@@ -2,9 +2,9 @@
 /// @brief Contains Switch::System::Diagnostics::TraceSource class.
 #pragma once
 
-#include "../../Types.hpp"
-#include "../Object.hpp"
-#include "../String.hpp"
+#include <Switch/Types.hpp>
+#include <Switch/System/Object.hpp>
+#include <Switch/System/String.hpp>
 #include "TraceEventType.hpp"
 #include "Trace.hpp"
 
@@ -15,7 +15,9 @@ namespace Switch {
     /// @brief The System::Diagnostics namespace provides classes that allow you to interact with system processes, event logs, and performance counters.
     namespace Diagnostics {
       /// @brief Provides a set of methods and properties that enable applications to trace the execution of code and associate trace messages with their source.
-      class _export TraceSource :  public Object {
+      /// @par Library
+      /// Switch.System
+     class _export TraceSource :  public Object {
       public:
         TraceSource() {}
 
