@@ -33,7 +33,7 @@ namespace Switch {
 template<>
 class EnumToStrings<System::IO::FileMode> {
 public:
-  void operator ()(System::Collections::Generic::SortedDictionary<int64, string>& values, bool& flags) {
+  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::IO::FileMode::CreateNew, "CreateNew"}, {(int64)System::IO::FileMode::Create, "Create"}, {(int64)System::IO::FileMode::Open, "Open"}, {(int64)System::IO::FileMode::OpenOrCreate, "OpenOrCreate"}, {(int64)System::IO::FileMode::Truncate, "Truncate"}, {(int64)System::IO::FileMode::Append, "Append"}};
     flags = false;
   }

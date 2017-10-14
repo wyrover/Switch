@@ -34,7 +34,7 @@ namespace Switch {
 template<>
 class EnumToStrings<System::Windows::Forms::FormStartPosition> {
 public:
-  void operator ()(System::Collections::Generic::SortedDictionary<int64, string>& values, bool& flags) {
+  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::Windows::Forms::FormStartPosition::Manual, "Manual"}, {(int64)System::Windows::Forms::FormStartPosition::CenterScreen, "CenterScreen"}, {(int64)System::Windows::Forms::FormStartPosition::WindowsDefaultLocation, "WindowsDefaultLocation"}, {(int64)System::Windows::Forms::FormStartPosition::WindowsDefaultBounds, "WindowsDefaultBounds"}, {(int64)System::Windows::Forms::FormStartPosition::CenterParent, "CenterParent"}};
     flags = false;
   }

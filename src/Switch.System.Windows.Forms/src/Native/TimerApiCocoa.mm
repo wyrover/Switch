@@ -8,7 +8,7 @@ using namespace System;
 using namespace System::Windows::Forms;
 
 namespace{
-  static System::Collections::Generic::SortedDictionary<intptr, delegate<void>> ticks;
+  static System::Collections::Generic::Dictionary<intptr, delegate<void>> ticks;
 }
 
 @interface TimerCocoa : NSObject

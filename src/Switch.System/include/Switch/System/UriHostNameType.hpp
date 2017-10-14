@@ -31,7 +31,7 @@ namespace Switch {
 template<>
 class EnumToStrings<System::UriHostNameType> {
 public:
-  void operator ()(System::Collections::Generic::SortedDictionary<int64, string>& values, bool& flags) {
+  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::UriHostNameType::Unknown, "Unknown"}, {(int64)System::UriHostNameType::Basic, "Basic"}, {(int64)System::UriHostNameType::Dns, "Dns"}, {(int64)System::UriHostNameType::IPv4, "IPv4"}, {(int64)System::UriHostNameType::IPv6, "IPv6"}};
     flags = false;
   }

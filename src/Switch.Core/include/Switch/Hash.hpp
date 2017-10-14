@@ -2,7 +2,7 @@
 /// @brief Contains Switch::System::Hash class.
 #pragma once
 
-#include "Any.hpp"
+#include "System/Object.hpp"
 #include "NullPtr.hpp"
 #include "Static.hpp"
 #include "Types.hpp"

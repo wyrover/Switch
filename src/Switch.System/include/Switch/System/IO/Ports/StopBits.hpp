@@ -35,7 +35,7 @@ namespace Switch {
 template<>
 class EnumToStrings<System::IO::Ports::StopBits> {
 public:
-  void operator ()(System::Collections::Generic::SortedDictionary<int64, string>& values, bool& flags) {
+  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::IO::Ports::StopBits::None, "None"}, {(int64)System::IO::Ports::StopBits::One, "One"}, {(int64)System::IO::Ports::StopBits::Two, "Two"}, {(int64)System::IO::Ports::StopBits::OnePointFive, "OnePointFive"}};
     flags = false;
   }

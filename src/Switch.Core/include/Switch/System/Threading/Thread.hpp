@@ -8,7 +8,7 @@
 #include <thread>
 
 #include "../../Types.hpp"
-#include "../Collections/Generic/SortedDictionary.hpp"
+#include "../Collections/Generic/Dictionary.hpp"
 #include "ManualResetEvent.hpp"
 #include "ParameterizedThreadStart.hpp"
 #include "ThreadAbortException.hpp"

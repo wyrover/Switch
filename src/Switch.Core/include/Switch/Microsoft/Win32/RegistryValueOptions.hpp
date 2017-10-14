@@ -25,7 +25,7 @@ namespace Switch {
 template<>
 class EnumToStrings<Microsoft::Win32::RegistryValueOptions> {
 public:
-  void operator ()(System::Collections::Generic::SortedDictionary<int64, string>& values, bool& flags) {
+  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)Microsoft::Win32::RegistryValueOptions::None, "None"}, {(int64)Microsoft::Win32::RegistryValueOptions::DoNotExpandEnvironmentNames, "DoNotExpandEnvironmentNames"}};
     flags = false;
   }

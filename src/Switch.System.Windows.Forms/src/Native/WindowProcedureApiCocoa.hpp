@@ -3,7 +3,7 @@
 #import <Foundation/Foundation.h>
 
 #include <Switch/System/Double.hpp>
-#include <Switch/System/Collections/Generic/SortedDictionary.hpp>
+#include <Switch/System/Collections/Generic/Dictionary.hpp>
 #include "Api.hpp"
 #include "WindowMessage.hpp"
 #include "WindowMessageKey.hpp"
@@ -11,7 +11,7 @@
 namespace Native {
   class WindowProcedure _static {
   public:
-    using ControlDictionary = System::Collections::Generic::SortedDictionary<intptr, ref<System::Windows::Forms::Control>>;
+    using ControlDictionary = System::Collections::Generic::Dictionary<intptr, ref<System::Windows::Forms::Control>>;
     
     static ControlDictionary Controls;
     
@@ -25,7 +25,7 @@ namespace Native {
     
     static void WndProc(NSEvent* event) {
        // {NSEventTypeLeftMouseDragged, WM_...}, {NSEventTypeRightMouseDragged, WM_...}, {NSEventTypeKeyDown, WM_KEYDOWN}, {NSEventTypeKeyUp, WM_KEYUP}, {NSEventTypeFlagsChanged, WM_...}, {NSEventTypeAppKitDefined, WM_...}, {NSEventTypeSystemDefined, WM_...}, {NSEventTypeApplicationDefined, WM_...}, {NSEventTypePeriodic, WM_...}, {NSEventTypeCursorUpdate, WM_SETCURSOR}, {NSEventTypeScrollWheel, WM_MOUSEWHEEL}, {NSEventTypeTabletPoint, WM_...}, {NSEventTypeTabletProximity, WM_...}, {NSEventTypeOtherMouseDragged, WM_...},
-      static System::Collections::Generic::SortedDictionary<int32, delegate<void, NSEvent*, System::Windows::Forms::Control&>> events = {
+      static System::Collections::Generic::Dictionary<int32, delegate<void, NSEvent*, System::Windows::Forms::Control&>> events = {
         {NSEventTypeMouseEntered, WindowProcedure::MouseEnterEvent}, {NSEventTypeMouseExited, WindowProcedure::MouseLeaveEvent}, {NSEventTypeLeftMouseDown, WindowProcedure::LeftMouseDownEvent}, {NSEventTypeLeftMouseUp, WindowProcedure::LeftMouseUpEvent}, {NSEventTypeRightMouseDown, WindowProcedure::RightMouseDownEvent}, {NSEventTypeRightMouseUp, WindowProcedure::RightMouseUpEvent}, {NSEventTypeMouseMoved, WindowProcedure::MouseMoveEvent}, {NSEventTypeOtherMouseDown, WindowProcedure::OtherMouseDownEvent}, {NSEventTypeOtherMouseUp, WindowProcedure::OtherMouseUpEvent}
       };
       @autoreleasepool {

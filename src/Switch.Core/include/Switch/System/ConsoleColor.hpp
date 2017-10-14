@@ -53,7 +53,7 @@ namespace Switch {
 template<>
 class EnumToStrings<System::ConsoleColor> {
 public:
-  void operator ()(System::Collections::Generic::SortedDictionary<int64, string>& values, bool& flags) {
+  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::ConsoleColor::Black, "Black"}, {(int64)System::ConsoleColor::DarkBlue, "DarkBlue"}, {(int64)System::ConsoleColor::DarkGreen, "DarkGreen"}, {(int64)System::ConsoleColor::DarkCyan, "DarkCyan"}, {(int64)System::ConsoleColor::DarkRed, "DarkRed"}, {(int64)System::ConsoleColor::DarkMagenta, "DarkMagenta"}, {(int64)System::ConsoleColor::DarkYellow, "DarkYellow"}, {(int64)System::ConsoleColor::Gray, "Gray"}, {(int64)System::ConsoleColor::DarkGray, "DarkGray"}, {(int64)System::ConsoleColor::Blue, "Blue"}, {(int64)System::ConsoleColor::Green, "Green"}, {(int64)System::ConsoleColor::Cyan, "Cyan"}, {(int64)System::ConsoleColor::Red, "Red"}, {(int64)System::ConsoleColor::Magenta, "Magenta"}, {(int64)System::ConsoleColor::Yellow, "Yellow"}, {(int64)System::ConsoleColor::White, "White"}};
     flags = false;
   }

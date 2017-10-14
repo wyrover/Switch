@@ -8,7 +8,7 @@
 #include "../Array.hpp"
 #include "../Object.hpp"
 #include "../String.hpp"
-#include "../Collections/Generic/SortedDictionary.hpp"
+#include "../Collections/Generic/Dictionary.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
@@ -367,9 +367,9 @@ namespace Switch {
 
       private:
         static void InitCodePages();
-        static refptr< System::Collections::Generic::SortedDictionary<int32, String>> names;
-        static refptr< System::Collections::Generic::SortedDictionary<String, int32>> codePagesFromName;
-        static refptr< System::Collections::Generic::SortedDictionary<int32, String>> displayNames;
+        static refptr< System::Collections::Generic::Dictionary<int32, String>> names;
+        static refptr< System::Collections::Generic::Dictionary<String, int32>> codePagesFromName;
+        static refptr< System::Collections::Generic::Dictionary<int32, String>> displayNames;
         /// @endcond
       };
     }

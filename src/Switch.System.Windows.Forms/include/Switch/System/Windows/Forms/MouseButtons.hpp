@@ -28,7 +28,7 @@ class AddFlagOperators<System::Windows::Forms::MouseButtons> : public TrueType {
 template<>
 class EnumToStrings<System::Windows::Forms::MouseButtons> {
 public:
-  void operator ()(System::Collections::Generic::SortedDictionary<int64, string>& values, bool& flags) {
+  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::Windows::Forms::MouseButtons::None, "None"}, {(int64)System::Windows::Forms::MouseButtons::Left, "Left"}, {(int64)System::Windows::Forms::MouseButtons::Right, "Right"}, {(int64)System::Windows::Forms::MouseButtons::Middle, "Middle"}, {(int64)System::Windows::Forms::MouseButtons::XButton1, "XButton1"}, {(int64)System::Windows::Forms::MouseButtons::XButton2, "XButton2"}};
     flags = true;
   }

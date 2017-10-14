@@ -5,16 +5,19 @@
 #include <unordered_map>
 
 #include "../../../Allocator.hpp"
-#include "../../../Hash.hpp"
 #include "../../../InitializerList.hpp"
 #include "../../../Move.hpp"
+#include "../../Object.hpp"
 #include "../../../Types.hpp"
 #include "../../Array.hpp"
-#include "../../Object.hpp"
-#include "../../String.hpp"
-#include "../../Linq/Enumerable.hpp"
+#include "../../_String.hpp"
+#include "Comparer.hpp"
+#include "IComparer.hpp"
 #include "IDictionary.hpp"
 #include "List.hpp"
+#include "../../Linq/Enumerable.hpp"
+
+#include "../../../Hash.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
@@ -255,7 +258,7 @@ namespace Switch {
         private:
           class Hasher {
           public:
-            size_t operator()(const TKey& key) const { return Switch::GetHashCode(key); }
+            size_t operator()(const TKey& key) const { return Switch::GetHashCode(&key); }
           };
           
           class EqualTo {

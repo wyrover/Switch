@@ -240,7 +240,7 @@ namespace Switch {
           return &obj;
         }
 
-        static System::Collections::Generic::SortedDictionary<const object*, MonitorItem> monitorItems;
+        static System::Collections::Generic::Dictionary<const object*, MonitorItem> monitorItems;
 
         static bool Add(const object& obj, int32 millisecondsTimeout);
         static void Remove(const object& obj);

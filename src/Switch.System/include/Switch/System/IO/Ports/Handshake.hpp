@@ -35,7 +35,7 @@ namespace Switch {
 template<>
 class EnumToStrings<System::IO::Ports::Handshake> {
 public:
-  void operator ()(System::Collections::Generic::SortedDictionary<int64, string>& values, bool& flags) {
+  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::IO::Ports::Handshake::None, "None"}, {(int64)System::IO::Ports::Handshake::XOnXOff, "XOnXOff"}, {(int64)System::IO::Ports::Handshake::RequestToSend, "RequestToSend"}, {(int64)System::IO::Ports::Handshake::RequestToSendXOnXOff, "RequestToSendXOnXOff"}};
     flags = false;
   }

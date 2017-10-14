@@ -57,7 +57,7 @@ namespace Switch {
 template<>
 class EnumToStrings<System::TypeCode> {
 public:
-  void operator ()(System::Collections::Generic::SortedDictionary<int64, string>& values, bool& flags) {
+  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::TypeCode::Empty, "Empty"}, {(int64)System::TypeCode::Object, "Object"}, {(int64)System::TypeCode::Boolean, "Boolean"}, {(int64)System::TypeCode::Char, "Char"}, {(int64)System::TypeCode::SByte, "SByte"}, {(int64)System::TypeCode::Byte, "Byte"}, {(int64)System::TypeCode::Int16, "Int16"}, {(int64)System::TypeCode::UInt16, "UInt16"}, {(int64)System::TypeCode::Int32, "Int32"}, {(int64)System::TypeCode::UInt32, "UInt32"}, {(int64)System::TypeCode::Int64, "Int64"}, {(int64)System::TypeCode::UInt64, "UInt64"}, {(int64)System::TypeCode::Single, "Single"}, {(int64)System::TypeCode::Double, "Double"}, {(int64)System::TypeCode::DateTime, "DateTime"}, {(int64)System::TypeCode::String, "String"}};
     flags = false;
   }

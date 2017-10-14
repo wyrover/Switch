@@ -1,4 +1,5 @@
 #pragma once
+#include <map>
 #include "../../../../include/Switch/System/String.hpp"
 
 namespace {

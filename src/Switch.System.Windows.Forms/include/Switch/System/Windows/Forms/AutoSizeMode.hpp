@@ -30,7 +30,7 @@ namespace Switch {
 template<>
 class EnumToStrings<System::Windows::Forms::AutoSizeMode> {
 public:
-  void operator ()(System::Collections::Generic::SortedDictionary<int64, string>& values, bool& flags) {
+  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::Windows::Forms::AutoSizeMode::GrowAndShrink, "GrowAndShrink"}, {(int64)System::Windows::Forms::AutoSizeMode::GrowOnly, "GrowOnly"}};
     flags = false;
   }

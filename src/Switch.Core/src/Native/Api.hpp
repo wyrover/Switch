@@ -3,7 +3,7 @@
 #include "../../include/Switch/Microsoft/Win32/RegistryHive.hpp"
 #include "../../include/Switch/Microsoft/Win32/RegistryKey.hpp"
 #include "../../include/Switch/Microsoft/Win32/RegistryValueKind.hpp"
-#include "../../include/Switch/System/Collections/Generic/SortedDictionary.hpp"
+#include "../../include/Switch/System/Collections/Generic/Dictionary.hpp"
 #include "../../include/Switch/System/IO/DriveType.hpp"
 #include "../../include/Switch/System/IO/FileAttributes.hpp"
 #include "../../include/Switch/System/Security/SecureString.hpp"
@@ -31,7 +31,7 @@ namespace Native {
     static int32 GetCursorTop();
     static bool GetCursorVisible();
     static System::ConsoleColor GetForegroundColor();
-    static System::Collections::Generic::SortedDictionary<int32, System::ConsoleSpecialKey> GetSignalKeys();
+    static System::Collections::Generic::Dictionary<int32, System::ConsoleSpecialKey> GetSignalKeys();
     static int32 GetInputCodePage();
     static int32 GetLargestWindowHeight();
     static int32 GetLargestWindowWidth();

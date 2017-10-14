@@ -6,7 +6,7 @@
 #include "../Types.hpp"
 #include "Collections/Generic/List.hpp"
 #include "Collections/Generic/KeyValuePair.hpp"
-#include "Collections/Generic/SortedDictionary.hpp"
+#include "Collections/Generic/Dictionary.hpp"
 #include "Int64.hpp"
 #include "Object.hpp"
 #include "_String.hpp"
@@ -186,13 +186,13 @@ namespace Switch {
         }
       }
 
-      virtual void InitValues(Collections::Generic::SortedDictionary<int64, String>& values) = 0;
+      virtual void InitValues(Collections::Generic::Dictionary<int64, String>& values) = 0;
 
     protected:
       T value;
       static bool flags;
       
-      static Collections::Generic::SortedDictionary<int64, String>& Values();
+      static Collections::Generic::Dictionary<int64, String>& Values();
       void LoadValues() {
         _lock (this->values) {
           if (values.Count == 0)
@@ -231,11 +231,11 @@ namespace Switch {
         return str;
       }
       
-      static Collections::Generic::SortedDictionary<int64, String> values;
+      static Collections::Generic::Dictionary<int64, String> values;
     };
     
     template<typename T>
-    System::Collections::Generic::SortedDictionary<int64, String> System::BoxEnum<T>::values;
+    System::Collections::Generic::Dictionary<int64, String> System::BoxEnum<T>::values;
     
     template<typename T>
     bool System::BoxEnum<T>::flags = false;

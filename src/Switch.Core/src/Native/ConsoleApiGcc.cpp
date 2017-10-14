@@ -612,7 +612,7 @@ int32 Native::ConsoleApi::GetOutputCodePage() {
   return 65001;
 }
 
-System::Collections::Generic::SortedDictionary<int32, System::ConsoleSpecialKey> Native::ConsoleApi::GetSignalKeys() {
+System::Collections::Generic::Dictionary<int32, System::ConsoleSpecialKey> Native::ConsoleApi::GetSignalKeys() {
   return {{SIGQUIT, System::ConsoleSpecialKey::ControlBackslash}, {SIGTSTP, System::ConsoleSpecialKey::ControlZ}, {SIGINT, System::ConsoleSpecialKey::ControlC}};
 }
 

@@ -34,7 +34,7 @@ namespace Switch {
 template<>
 class EnumToStrings<System::IO::FileShare> {
 public:
-  void operator ()(System::Collections::Generic::SortedDictionary<int64, string>& values, bool& flags) {
+  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::IO::FileShare::None, "None"}, {(int64)System::IO::FileShare::Read, "Read"}, {(int64)System::IO::FileShare::Write, "Write"}, {(int64)System::IO::FileShare::ReadWrite, "ReadWrite"}, {(int64)System::IO::FileShare::Delete, "Delete"}, {(int64)System::IO::FileShare::Inheritable, "Inheritable"}};
     flags = false;
   }

@@ -28,7 +28,7 @@ namespace Switch {
 template<>
 class EnumToStrings<System::Threading::EventResetMode> {
 public:
-  void operator ()(System::Collections::Generic::SortedDictionary<int64, string>& values, bool& flags) {
+  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::Threading::EventResetMode::AutoReset, "AutoReset"}, {(int64)System::Threading::EventResetMode::ManualReset, "ManualReset"}};
     flags = false;
   }

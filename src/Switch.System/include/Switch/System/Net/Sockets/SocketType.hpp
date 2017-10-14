@@ -41,7 +41,7 @@ namespace Switch {
 template<>
 class EnumToStrings<System::Net::Sockets::SocketType> {
 public:
-  void operator ()(System::Collections::Generic::SortedDictionary<int64, string>& values, bool& flags) {
+  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::Net::Sockets::SocketType::Unknown, "Unknown"}, {(int64)System::Net::Sockets::SocketType::Stream, "Stream"}, {(int64)System::Net::Sockets::SocketType::Dgram, "Dgram"}, {(int64)System::Net::Sockets::SocketType::Raw, "Raw"}, {(int64)System::Net::Sockets::SocketType::Rdm, "Rdm"}, {(int64)System::Net::Sockets::SocketType::Seqpacket, "Seqpacket"}};
     flags = false;
   }

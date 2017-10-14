@@ -24,7 +24,7 @@ namespace Switch {
 template<>
 class EnumToStrings<Microsoft::Win32::RegistryKeyPermissionCheck> {
 public:
-  void operator ()(System::Collections::Generic::SortedDictionary<int64, string>& values, bool& flags) {
+  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)Microsoft::Win32::RegistryKeyPermissionCheck::Default, "Default"}, {(int64)Microsoft::Win32::RegistryKeyPermissionCheck::ReadSubTree, "ReadSubTree"}, {(int64)Microsoft::Win32::RegistryKeyPermissionCheck::ReadWriteSubTree, "ReadWriteSubTree"}};
     flags = false;
   }

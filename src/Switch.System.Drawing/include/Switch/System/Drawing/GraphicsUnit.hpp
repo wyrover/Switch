@@ -37,7 +37,7 @@ namespace Switch {
 template<>
 class EnumToStrings<System::Drawing::GraphicsUnit> {
 public:
-  void operator ()(System::Collections::Generic::SortedDictionary<int64, string>& values, bool& flags) {
+  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::Drawing::GraphicsUnit::World, "World"}, {(int64)System::Drawing::GraphicsUnit::Display, "Display"}, {(int64)System::Drawing::GraphicsUnit::Pixel, "Pixel"}, {(int64)System::Drawing::GraphicsUnit::Point, "Point"}, { (int64)System::Drawing::GraphicsUnit::Inch, "Inch" }, { (int64)System::Drawing::GraphicsUnit::Document, "Document" }, { (int64)System::Drawing::GraphicsUnit::Millimeter, "Millimeter" },};
     flags = false;
   }

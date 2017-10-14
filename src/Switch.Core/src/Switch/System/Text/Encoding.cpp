@@ -9,9 +9,9 @@
 using namespace System;
 using namespace System::Text;
 
-refptr< System::Collections::Generic::SortedDictionary<int32, string>> Encoding::names;
-refptr< System::Collections::Generic::SortedDictionary<string, int32>> Encoding::codePagesFromName;
-refptr< System::Collections::Generic::SortedDictionary<int32, string>> Encoding::displayNames;
+refptr< System::Collections::Generic::Dictionary<int32, string>> Encoding::names;
+refptr< System::Collections::Generic::Dictionary<string, int32>> Encoding::codePagesFromName;
+refptr< System::Collections::Generic::Dictionary<int32, string>> Encoding::displayNames;
 
 Encoding::Encoding() {
   this->codePage = 0;

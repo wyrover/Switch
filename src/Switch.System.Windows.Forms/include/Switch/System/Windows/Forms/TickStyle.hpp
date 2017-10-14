@@ -28,7 +28,7 @@ namespace Switch {
 template<>
 class EnumToStrings<System::Windows::Forms::TickStyle> {
 public:
-  void operator ()(System::Collections::Generic::SortedDictionary<int64, string>& values, bool& flags) {
+  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::Windows::Forms::TickStyle::None, "None"}, {(int64)System::Windows::Forms::TickStyle::TopLeft, "TopLeft"}, {(int64)System::Windows::Forms::TickStyle::BottomRight, "BottomRight"},{ (int64)System::Windows::Forms::TickStyle::Both, "Both" }};
     flags = false;
   }

@@ -1,5 +1,6 @@
-﻿#include <Switch/System/Collections/Generic/HashSet.hpp>
+#include <Switch/System/Collections/Generic/HashSet.hpp>
 #include <Switch/System/Collections/Generic/LinkedList.hpp>
+#include <Switch/System/Collections/Generic/SortedDictionary.hpp>
 #include <Switch/System/Collections/Generic/SortedSet.hpp>
 #include <Switch/TUnit/Assert.hpp>
 #include <Switch/TUnit/TestFixture.hpp>

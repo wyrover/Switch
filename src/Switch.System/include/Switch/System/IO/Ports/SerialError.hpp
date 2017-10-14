@@ -37,7 +37,7 @@ namespace Switch {
 template<>
 class EnumToStrings<System::IO::Ports::SerialError> {
 public:
-  void operator ()(System::Collections::Generic::SortedDictionary<int64, string>& values, bool& flags) {
+  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::IO::Ports::SerialError::RXOver, "RXOver"}, {(int64)System::IO::Ports::SerialError::Overrun, "Overrun"}, {(int64)System::IO::Ports::SerialError::RXParity, "RXParity"}, {(int64)System::IO::Ports::SerialError::Frame, "Frame"}, {(int64)System::IO::Ports::SerialError::TXFull, "TXFull"}};
     flags = false;
   }

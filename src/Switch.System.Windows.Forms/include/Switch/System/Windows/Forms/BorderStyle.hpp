@@ -23,7 +23,7 @@ namespace Switch {
 template<>
 class EnumToStrings<System::Windows::Forms::BorderStyle > {
 public:
-  void operator ()(System::Collections::Generic::SortedDictionary<int64, string>& values, bool& flags) {
+  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::Windows::Forms::BorderStyle::None, "None"}, {(int64)System::Windows::Forms::BorderStyle::FixedSingle, "FixedSingle"}, {(int64)System::Windows::Forms::BorderStyle::Fixed3D, "Fixed3D"}};
     flags = false;
   }

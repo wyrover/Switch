@@ -31,7 +31,7 @@ namespace Switch {
 template<>
 class EnumToStrings<System::Windows::Forms::MessageBoxDefaultButton> {
 public:
-  void operator ()(System::Collections::Generic::SortedDictionary<int64, string>& values, bool& flags) {
+  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::Windows::Forms::MessageBoxDefaultButton::Button1, "Button1"}, {(int64)System::Windows::Forms::MessageBoxDefaultButton::Button2, "Button2"}, {(int64)System::Windows::Forms::MessageBoxDefaultButton::Button3, "Button3"}};
     flags = false;
   }

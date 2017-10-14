@@ -106,7 +106,7 @@ int32 Native::ConsoleApi::GetOutputCodePage() {
   return GetConsoleOutputCP();
 }
 
-System::Collections::Generic::SortedDictionary<int32, System::ConsoleSpecialKey> Native::ConsoleApi::GetSignalKeys() {
+System::Collections::Generic::Dictionary<int32, System::ConsoleSpecialKey> Native::ConsoleApi::GetSignalKeys() {
   return {{SIGBREAK, System::ConsoleSpecialKey::ControlBreak}, {SIGINT, System::ConsoleSpecialKey::ControlC}};
 }
 

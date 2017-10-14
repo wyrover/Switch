@@ -19,7 +19,7 @@ namespace Switch {
 template<typename T>
 class EnumToStrings {
 public:
-  void operator ()(System::Collections::Generic::SortedDictionary<int64, string>& values, bool& flags) {}
+  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {}
 };
 
 template <typename T, bool = std::is_enum<T>::value>
@@ -89,7 +89,7 @@ namespace Switch {
       Enum(T value) : BoxEnum<T>(value) {}
 
     private:
-      virtual void InitValues(Collections::Generic::SortedDictionary<int64, String>& values) {
+      virtual void InitValues(Collections::Generic::Dictionary<int64, String>& values) {
         EnumToStrings<T>()(values, Enum::flags);
       }
     };
@@ -150,7 +150,7 @@ namespace Switch {
     int64 BoxEnum<T>::ToInt64(T value) { return Enum<T>(value).ToInt64(); }
 
     template<typename T>
-    Collections::Generic::SortedDictionary<int64, String>& BoxEnum<T>::Values() {
+    Collections::Generic::Dictionary<int64, String>& BoxEnum<T>::Values() {
       Enum<T>().LoadValues();
       return BoxEnum<T>::values;
     }

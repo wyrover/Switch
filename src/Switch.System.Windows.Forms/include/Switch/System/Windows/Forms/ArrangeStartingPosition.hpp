@@ -33,7 +33,7 @@ class AddFlagOperators<System::Windows::Forms::ArrangeStartingPosition> : public
 template<>
 class EnumToStrings<System::Windows::Forms::ArrangeStartingPosition> {
 public:
-  void operator ()(System::Collections::Generic::SortedDictionary<int64, string>& values, bool& flags) {
+  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::Windows::Forms::ArrangeStartingPosition::BottomLeft, "BottomLeft"}, {(int64)System::Windows::Forms::ArrangeStartingPosition::BottomRight, "BottomRight"}, {(int64)System::Windows::Forms::ArrangeStartingPosition::TopLeft, "TopLeft"},{ (int64)System::Windows::Forms::ArrangeStartingPosition::TopRight, "TopRight" },{ (int64)System::Windows::Forms::ArrangeStartingPosition::Hide, "Hide" },};
     flags = true;
   }

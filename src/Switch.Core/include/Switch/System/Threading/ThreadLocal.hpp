@@ -8,7 +8,7 @@
 #include <thread>
 
 #include "../../Types.hpp"
-#include "../Collections/Generic/SortedDictionary.hpp"
+#include "../Collections/Generic/Dictionary.hpp"
 #include "Thread.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
@@ -103,7 +103,7 @@ namespace Switch {
           return Array<T>(this->values.Values());
         }
 
-        mutable System::Collections::Generic::SortedDictionary<int32, T> values;
+        mutable System::Collections::Generic::Dictionary<int32, T> values;
         Func<T> valueFactory;
        bool trackAllValues = false;
       };

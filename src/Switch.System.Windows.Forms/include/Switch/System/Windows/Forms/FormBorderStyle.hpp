@@ -34,7 +34,7 @@ namespace Switch {
 template<>
 class EnumToStrings<System::Windows::Forms::FormBorderStyle > {
 public:
-  void operator ()(System::Collections::Generic::SortedDictionary<int64, string>& values, bool& flags) {
+  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::Windows::Forms::FormBorderStyle::None, "None"}, {(int64)System::Windows::Forms::FormBorderStyle::FixedSingle, "FixedSingle"}, {(int64)System::Windows::Forms::FormBorderStyle::Fixed3D, "Fixed3D"}, {(int64)System::Windows::Forms::FormBorderStyle::FixedDialog, "FixedDialog"}, {(int64)System::Windows::Forms::FormBorderStyle::Sizable, "Sizable"}, {(int64)System::Windows::Forms::FormBorderStyle::FixedToolWindow, "FixedToolWindow"}, {(int64)System::Windows::Forms::FormBorderStyle::Fixed3D, "SizableToolWindow"},};
     flags = false;
   }

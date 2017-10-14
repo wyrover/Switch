@@ -25,7 +25,7 @@ namespace Switch {
 template<>
 class EnumToStrings<Microsoft::Win32::RegistryOptions> {
 public:
-  void operator ()(System::Collections::Generic::SortedDictionary<int64, string>& values, bool& flags) {
+  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)Microsoft::Win32::RegistryOptions::None, "None"}, {(int64)Microsoft::Win32::RegistryOptions::Volatile, "Volatile"}};
     flags = false;
   }

@@ -31,7 +31,7 @@ class AddFlagOperators<System::Windows::Forms::ArrangeDirection> : public TrueTy
 template<>
 class EnumToStrings<System::Windows::Forms::ArrangeDirection> {
 public:
-  void operator ()(System::Collections::Generic::SortedDictionary<int64, string>& values, bool& flags) {
+  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {/*{(int64)System::Windows::Forms::ArrangeDirection::Down, "Down"},*/ {(int64)System::Windows::Forms::ArrangeDirection::Left, "Left"}, /*{(int64)System::Windows::Forms::ArrangeDirection::Right, "Right"},*/ {(int64)System::Windows::Forms::ArrangeDirection::Up, "Up"},};
     flags = true;
   }

@@ -21,7 +21,7 @@
 #include "../../UInt32.hpp"
 #include "../../UInt64.hpp"
 #include "../../Collections/Generic/KeyValuePair.hpp"
-#include "../../Collections/Generic/SortedDictionary.hpp"
+#include "../../Collections/Generic/Dictionary.hpp"
 #include "SerializationEntry.hpp"
 #include "SerializationException.hpp"
 
@@ -200,7 +200,7 @@ namespace Switch {
         private:
           void AddValue(const String& name, refptr<Object> value, const String& typeName);
           String objectType;
-          System::Collections::Generic::SortedDictionary<String, SerializationEntry> mItems;
+          System::Collections::Generic::Dictionary<String, SerializationEntry> mItems;
         };
 
         template<> refptr<System::Boolean>

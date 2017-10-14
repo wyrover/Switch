@@ -11,7 +11,7 @@ namespace {
 using namespace System;
 using namespace System::Threading;
 
-System::Collections::Generic::SortedDictionary<const object*, Monitor::MonitorItem> Monitor::monitorItems;
+System::Collections::Generic::Dictionary<const object*, Monitor::MonitorItem> Monitor::monitorItems;
 
 void Monitor::Pulse(const Object& obj) {
   MonitorItem* monitorItem = null;

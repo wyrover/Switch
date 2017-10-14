@@ -28,7 +28,7 @@ HttpStatusCode HttpWebResponse::GetStatusCode() const {
 
 const string HttpWebResponse::GetStatusDescription() const {
   string description;
-  static SortedDictionary<int32, string> statusDescriptions;
+  static Dictionary<int32, string> statusDescriptions;
   
   if (statusDescriptions.Count == 0) {
     statusDescriptions[(int32)HttpStatusCode::Continue] = "The server has received the request headers, and the client should proceed to send the request body";

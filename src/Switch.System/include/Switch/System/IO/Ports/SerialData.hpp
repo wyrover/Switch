@@ -31,7 +31,7 @@ namespace Switch {
 template<>
 class EnumToStrings<System::IO::Ports::SerialData> {
 public:
-  void operator ()(System::Collections::Generic::SortedDictionary<int64, string>& values, bool& flags) {
+  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::IO::Ports::SerialData::Chars, "Chars"}, {(int64)System::IO::Ports::SerialData::Eof, "Eof"}};
     flags = false;
   }

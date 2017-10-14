@@ -105,8 +105,8 @@ namespace {
     }
   };
 
-  Collections::Generic::SortedDictionary<string, string> GetEnvironmentVariables() {
-    Collections::Generic::SortedDictionary<string, string> envs;
+  Collections::Generic::Dictionary<string, string> GetEnvironmentVariables() {
+    Collections::Generic::Dictionary<string, string> envs;
     for (int32 index = 0; environ[index] != null; index++) {
       System::Array<string> keyValue = string(environ[index]).Split('=');
       envs[keyValue[0]] = keyValue[1];
@@ -114,9 +114,9 @@ namespace {
     return envs;
   }
 
-  _property<Collections::Generic::SortedDictionary<string, string>&, _readonly> EnvironmentVariables {
-    []()->Collections::Generic::SortedDictionary<string, string>& {
-      static Collections::Generic::SortedDictionary<string, string> environmentVariables = GetEnvironmentVariables();
+  _property<Collections::Generic::Dictionary<string, string>&, _readonly> EnvironmentVariables {
+    []()->Collections::Generic::Dictionary<string, string>& {
+      static Collections::Generic::Dictionary<string, string> environmentVariables = GetEnvironmentVariables();
       return environmentVariables;
     }
   };
@@ -287,7 +287,7 @@ const Collections::Generic::IDictionary<String, String>& Environment::GetEnviron
   if (target == EnvironmentVariableTarget::Process)
     return EnvironmentVariables;
 
-  static Collections::Generic::SortedDictionary<string, string> environmentVariables;
+  static Collections::Generic::Dictionary<string, string> environmentVariables;
   environmentVariables.Clear();
   Microsoft::Win32::RegistryKey key = target == EnvironmentVariableTarget::User ? Microsoft::Win32::Registry::CurrentUser().CreateSubKey("Environment") : Microsoft::Win32::Registry::LocalMachine().CreateSubKey("System").CreateSubKey("CurrentControlSet").CreateSubKey("Control").CreateSubKey("Session Manager").CreateSubKey("Environment");
   for (auto name : key.GetValueNames())

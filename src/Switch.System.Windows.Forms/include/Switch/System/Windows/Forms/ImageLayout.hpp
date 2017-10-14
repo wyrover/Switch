@@ -30,7 +30,7 @@ namespace Switch {
 template<>
 class EnumToStrings<System::Windows::Forms::ImageLayout> {
 public:
-  void operator ()(System::Collections::Generic::SortedDictionary<int64, string>& values, bool& flags) {
+  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::Windows::Forms::ImageLayout::None, "None"}, {(int64)System::Windows::Forms::ImageLayout::Tile, "Tile"}, {(int64)System::Windows::Forms::ImageLayout::Center, "Center"}, {(int64)System::Windows::Forms::ImageLayout::Stretch, "Stretch"}, {(int64)System::Windows::Forms::ImageLayout::Zoom, "Zoom"}};
     flags = false;
   }

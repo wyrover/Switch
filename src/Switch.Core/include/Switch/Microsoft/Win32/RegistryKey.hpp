@@ -7,7 +7,7 @@
 #include "../../System/Environment.hpp"
 #include "../../System/String.hpp"
 #include "../../System/UnauthorizedAccessException.hpp"
-#include "../../System/Collections/Generic/SortedDictionary.hpp"
+#include "../../System/Collections/Generic/Dictionary.hpp"
 #include "../../Boxing.hpp"
 #include "RegistryHive.hpp"
 #include "RegistryKeyPermissionCheck.hpp"
@@ -427,7 +427,7 @@ namespace Switch {
         System::String name;
         System::String path;
         RegistryKeyPermissionCheck permission;
-        System::Collections::Generic::SortedDictionary<System::String, RegistryKeyValue> values;
+        System::Collections::Generic::Dictionary<System::String, RegistryKeyValue> values;
       };
     }
   }
