@@ -4,7 +4,7 @@
 
 #include "../../../Lock.hpp"
 #include "../../../Property.hpp"
-#include "../Generic/Queue.hpp"
+#include "../Generic/List.hpp"
 #include "IProducerConsumerCollection.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
@@ -39,7 +39,7 @@ namespace Switch {
           ConcurrentQueue(const Generic::IEnumerable<T>& collection) {
             _lock (this->queue.SyncRoot) {
               for (T item : collection)
-                this->queue.Enqueue(item);
+                this->queue.Add(item);
             }
           }
           
@@ -47,7 +47,7 @@ namespace Switch {
           ConcurrentQueue(InitializerList<T> il)  {
             _lock (this->queue.SyncRoot) {
               for (T item : il)
-                this->queue.Enqueue(item);
+                this->queue.Add(item);
             }
           }
           /// @endcond
@@ -64,7 +64,7 @@ namespace Switch {
           /// @param item The object to be Enqueued to the ConcurrentQueue<T>.
           void Enqueue(const T& item) {
             _lock (this->queue.SyncRoot)
-              this->queue.Enqueue(item);
+              this->queue.Add(item);
           }
 
           /// @brief Removes all objects from the ConcurrentQueue<T>.
@@ -111,7 +111,7 @@ namespace Switch {
           bool TryPeek(T& result) {
             _lock (this->queue.SyncRoot) {
               if (this->queue.Count > 0) {
-                result = this->queue.Peek();
+                result = this->queue[0];
                 return true;
               }
             }
@@ -124,7 +124,8 @@ namespace Switch {
           bool TryDequeue(T& result) {
             _lock(this->queue.SyncRoot) {
               if (this->queue.Count > 0) {
-                result = this->queue.Dequeue();
+                result = this->queue[0];
+                this->queue.RemoveAt(0);
                 return true;
               }
             }
@@ -175,7 +176,7 @@ namespace Switch {
             System::Array<T, 1, TAllocator> array;
           };
 
-          Generic::Queue<T> queue;
+          Generic::List<T, TAllocator> queue;
         };
       }
     }

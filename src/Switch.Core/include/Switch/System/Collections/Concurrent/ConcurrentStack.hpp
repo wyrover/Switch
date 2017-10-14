@@ -3,7 +3,7 @@
 #pragma once
 
 #include "../../../Lock.hpp"
-#include "../Generic/Stack.hpp"
+#include "../Generic/List.hpp"
 #include "IProducerConsumerCollection.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
@@ -38,7 +38,7 @@ namespace Switch {
           ConcurrentStack(const Generic::IEnumerable<T>& collection) {
             _lock (this->stack.SyncRoot) {
               for(T item : collection)
-                this->stack.Push(item);
+                this->stack.Insert(0, item);
             }
           }
           
@@ -46,7 +46,7 @@ namespace Switch {
           ConcurrentStack(InitializerList<T> il)  {
             _lock (this->stack.SyncRoot) {
               for (T item : il)
-                this->stack.Push(item);
+                this->stack.Insert(0, item);
             }
           }
           /// @endcond
@@ -63,7 +63,7 @@ namespace Switch {
           /// @param item The object to be inserted to the ConcurrentStack<T>.
           void Push(const T& item) {
             _lock (this->stack.SyncRoot)
-              this->stack.Push(item);
+              this->stack.Insert(0, item);
           }
 
           /// @brief Inserts multiple objects at the top of the ConcurrentStack<T> atomically.
@@ -87,7 +87,7 @@ namespace Switch {
 
             _lock (this->stack.SyncRoot) {
               for (int32 i = startIndex; i < startIndex + count; i++)
-                this->stack.Push(items[i]);
+                this->stack.Insert(0, items[i]);
             }
           }
 
@@ -127,7 +127,7 @@ namespace Switch {
           bool TryPeek(T& result) {
             _lock(this->stack.SyncRoot) {
               if (this->stack.Count > 0) {
-                result = this->stack.Peek();
+                result = this->stack[0];
                 return true;
               }
             }
@@ -140,7 +140,8 @@ namespace Switch {
           bool TryPop(T& result) {
             _lock (this->stack.SyncRoot) {
               if (this->stack.Count > 0) {
-                result = this->stack.Pop();
+                result = this->stack[0];
+                this->stack.RemoveAt(0);
                 return true;
               }
             }
@@ -174,7 +175,8 @@ namespace Switch {
                 if (this->stack.Count == 0)
                   break;
               
-                results[i] = this->stack.Pop();
+                results[i] = this->stack[0];
+                this->stack.RemoveAt(0);
                 nbItemPoped++;
               }
             }
@@ -224,7 +226,7 @@ namespace Switch {
             System::Array<T> array;
           };
 
-         Generic::Stack<T, TAllocator> stack;
+         Generic::List<T, TAllocator> stack;
         };
       }
     }
