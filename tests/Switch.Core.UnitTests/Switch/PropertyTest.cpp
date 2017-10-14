@@ -1,22 +1,7 @@
-#include <Switch/Lock.hpp>
-#include <Switch/System/Collections/Concurrent/ConcurrentQueue.hpp>
-#include <Switch/System/Collections/Concurrent/ConcurrentStack.hpp>
-#include <Switch/System/Collections/Generic/Dictionary.hpp>
-#include <Switch/System/Collections/Generic/HashSet.hpp>
-#include <Switch/System/Collections/Generic/LinkedList.hpp>
-#include <Switch/System/Collections/Generic/List.hpp>
-#include <Switch/System/Collections/Generic/Queue.hpp>
-#include <Switch/System/Collections/Generic/SortedDictionary.hpp>
-#include <Switch/System/Collections/Generic/SortedSet.hpp>
-#include <Switch/System/Collections/Generic/Stack.hpp>
-#include <Switch/System/Collections/BitArray.hpp>
 #include <Switch/TUnit/Assert.hpp>
 #include <Switch/TUnit/TestFixture.hpp>
 
 using namespace System;
-using namespace System::Collections;
-using namespace System::Collections::Concurrent;
-using namespace System::Collections::Generic;
 using namespace TUnit;
 
 namespace SwitchUnitTests {

@@ -2,8 +2,8 @@
 /// @brief Contains Switch::System::Collections::Generic::ISet <T> interface.
 #pragma once
 
-#include "../../../Types.hpp"
-#include "IEnumerable.hpp"
+#include <Switch/Types.hpp>
+#include <Switch/System/Collections/Generic/IEnumerable.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {

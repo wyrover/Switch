@@ -4,14 +4,9 @@ set(SOURCE_FILES
   Switch/Microsoft/Win32/RegistryKeyUT.cpp
   Switch/Microsoft/Win32/RegistryUT.cpp
   Switch/System/Collections/Generic/DictionaryUT.cpp
-  Switch/System/Collections/Generic/HashSetUT.cpp
   Switch/System/Collections/Generic/KeyValuePairUT.cpp
-  Switch/System/Collections/Generic/LinkedListUT.cpp
   Switch/System/Collections/Generic/ListUT.cpp
-  Switch/System/Collections/Generic/QueueUT.cpp
-  Switch/System/Collections/Generic/StackUT.cpp
   Switch/System/Collections/Generic/SortedDictionaryUT.cpp
-  Switch/System/Collections/Generic/SortedSetUT.cpp
   Switch/System/Collections/ObjectModel/ReadOnlyCollectionUT.cpp
   Switch/System/Collections/ArrayListUT.cpp
   Switch/System/Collections/BitArrayUT.cpp

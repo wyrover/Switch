@@ -141,7 +141,7 @@ bool ThreadPool::QueueUserWorkItem(const WaitCallback& callBack) {
   _lock(threadPoolItems.SyncRoot) {
     if (threadPoolItems.Count() == maxThreads)
       return false;
-    threadPoolItems.Enqueue(new ThreadPoolItem(callBack));
+    threadPoolItems.Add(new ThreadPoolItem(callBack));
     semaphore.Release();
   }
   return true;
@@ -153,7 +153,7 @@ bool ThreadPool::QueueUserWorkItem(const WaitCallback& callBack, object& state) 
   _lock(threadPoolItems.SyncRoot) {
     if (threadPoolItems.Count() == maxThreads)
       return false;
-    threadPoolItems.Enqueue(new ThreadPoolItem(callBack, state));
+    threadPoolItems.Add(new ThreadPoolItem(callBack, state));
     semaphore.Release();
   }
   return true;
@@ -169,7 +169,7 @@ RegisteredWaitHandle ThreadPool::RegisterWaitForSingleObject(WaitHandle& waitObj
     }
     refptr<ThreadPoolAsynchronousIOItem> item = new ThreadPoolAsynchronousIOItem(callBack, state, waitObject, millisecondsTimeoutInterval, executeOnlyOnce);
     result.item = item.ToPointer();
-    threadPoolAsynchronousIOItems.Enqueue(item);
+    threadPoolAsynchronousIOItems.Add(item);
     asynchronousIOSemaphore.Release();
   }
   return result;
@@ -234,7 +234,8 @@ void ThreadPool::Run() {
     if (!closed) {
       refptr<ThreadPoolItem> item;
       _lock(threadPoolItems.SyncRoot)
-      item = threadPoolItems.Dequeue();
+      item = threadPoolItems[0];
+      threadPoolItems.RemoveAt(0);
       item->callback(*item->state);
     }
   }
@@ -246,8 +247,9 @@ void ThreadPool::AsynchronousIORun() {
     if (!closed) {
       refptr<ThreadPoolAsynchronousIOItem> item;
       _lock(threadPoolAsynchronousIOItems.SyncRoot)
-      item = threadPoolAsynchronousIOItems.Dequeue();
-      
+      item = threadPoolAsynchronousIOItems[0];
+      threadPoolAsynchronousIOItems.RemoveAt(0);
+
       do {
         bool timeout = !item->waitObject->WaitOne(item->millisecondsTimeoutInterval);
         if (!item->unregistered)

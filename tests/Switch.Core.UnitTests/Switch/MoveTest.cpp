@@ -2,13 +2,8 @@
 #include <Switch/System/Collections/Concurrent/ConcurrentQueue.hpp>
 #include <Switch/System/Collections/Concurrent/ConcurrentStack.hpp>
 #include <Switch/System/Collections/Generic/Dictionary.hpp>
-#include <Switch/System/Collections/Generic/HashSet.hpp>
-#include <Switch/System/Collections/Generic/LinkedList.hpp>
 #include <Switch/System/Collections/Generic/List.hpp>
-#include <Switch/System/Collections/Generic/Queue.hpp>
 #include <Switch/System/Collections/Generic/SortedDictionary.hpp>
-#include <Switch/System/Collections/Generic/SortedSet.hpp>
-#include <Switch/System/Collections/Generic/Stack.hpp>
 #include <Switch/System/Collections/BitArray.hpp>
 #include <Switch/TUnit/Assert.hpp>
 #include <Switch/TUnit/TestFixture.hpp>
@@ -64,20 +59,6 @@ namespace SwitchUnitTests {
       Assert::AreEqual(10, d2.Count, _caller);
     }
     
-    void MoveHashSet() {
-      HashSet<int32> hs1 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-      HashSet<int32> hs2 = Move(hs1);
-      Assert::AreEqual(0, hs1.Count, _caller);
-      Assert::AreEqual(10, hs2.Count, _caller);
-    }
-    
-    void MoveLinkedList() {
-      LinkedList<int32> ll1 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-      LinkedList<int32> ll2 = Move(ll1);
-      Assert::AreEqual(0, ll1.Count, _caller);
-      Assert::AreEqual(10, ll2.Count, _caller);
-    }
-    
     void MoveList() {
       List<int32> l1 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
       List<int32> l2 = Move(l1);
@@ -85,32 +66,11 @@ namespace SwitchUnitTests {
       Assert::AreEqual(10, l2.Count, _caller);
     }
     
-    void MoveQueue() {
-      Queue<int32> q1 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-      Queue<int32> q2 = Move(q1);
-      Assert::AreEqual(0, q1.Count, _caller);
-      Assert::AreEqual(10, q2.Count, _caller);
-    }
-    
     void MoveSortedDictionary() {
       SortedDictionary<string, int32> sd1 = {{"One", 1}, {"Two", 2}, {"Three", 3}, {"Four", 4}, {"Five", 5}, {"Six", 6}, {"Seven", 7}, {"Eigth", 8}, {"Nine", 9}, {"Ten", 10}};
       SortedDictionary<string, int32> sd2 = Move(sd1);
       Assert::AreEqual(0, sd1.Count, _caller);
       Assert::AreEqual(10, sd2.Count, _caller);
-    }
-    
-    void MoveSortedSet() {
-      SortedSet<int32> ss1 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-      SortedSet<int32> ss2 = Move(ss1);
-      Assert::AreEqual(0, ss1.Count, _caller);
-      Assert::AreEqual(10, ss2.Count, _caller);
-    }
-    
-    void MoveStack() {
-      Stack<int32> s1 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-      Stack<int32> s2 = Move(s1);
-      Assert::AreEqual(0, s1.Count, _caller);
-      Assert::AreEqual(10, s2.Count, _caller);
     }
  };
   
@@ -120,11 +80,5 @@ namespace SwitchUnitTests {
   _test(MoveTest, MoveConcurrentQueue)
   _test(MoveTest, MoveConcurrentStack)
   _test(MoveTest, MoveDictionary)
-  _test(MoveTest, MoveHashSet)
-  _test(MoveTest, MoveLinkedList)
-  _test(MoveTest, MoveList)
-  _test(MoveTest, MoveQueue)
   _test(MoveTest, MoveSortedDictionary)
-  _test(MoveTest, MoveSortedSet)
-  _test(MoveTest, MoveStack)
 }

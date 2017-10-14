@@ -14,21 +14,15 @@ set(INCLUDE_FILES
   include/Switch/System/Collections/Generic/Comparer.hpp
   include/Switch/System/Collections/Generic/Dictionary.hpp
   include/Switch/System/Collections/Generic/GenericException.hpp
-  include/Switch/System/Collections/Generic/HashSet.hpp
   include/Switch/System/Collections/Generic/ICollection.hpp
   include/Switch/System/Collections/Generic/IComparer.hpp
   include/Switch/System/Collections/Generic/IDictionary.hpp
   include/Switch/System/Collections/Generic/IEnumerable.hpp
   include/Switch/System/Collections/Generic/IEnumerator.hpp
   include/Switch/System/Collections/Generic/IList.hpp
-  include/Switch/System/Collections/Generic/ISet.hpp
   include/Switch/System/Collections/Generic/KeyValuePair.hpp
-  include/Switch/System/Collections/Generic/LinkedList.hpp
   include/Switch/System/Collections/Generic/List.hpp
-  include/Switch/System/Collections/Generic/Queue.hpp
   include/Switch/System/Collections/Generic/SortedDictionary.hpp
-  include/Switch/System/Collections/Generic/SortedSet.hpp
-  include/Switch/System/Collections/Generic/Stack.hpp
   include/Switch/System/Collections/ObjectModel/Collection.hpp
   include/Switch/System/Collections/ObjectModel/ReadOnlyCollection.hpp
   include/Switch/System/Collections/ArrayList.hpp

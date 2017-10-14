@@ -1,4 +1,7 @@
+#include <Switch/System/Collections/Generic/HashSet.hpp>
+#include <Switch/System/Collections/Generic/LinkedList.hpp>
 #include <Switch/System/Collections/Generic/SortedDictionary.hpp>
+#include <Switch/System/Collections/Generic/SortedSet.hpp>
 #include <Switch/TUnit/Assert.hpp>
 #include <Switch/TUnit/TestFixture.hpp>
 
@@ -41,6 +44,53 @@ namespace SwitchUnitTests {
         checksum1 += 100 + index;
         checksum2 += item;
         Assert::AreEqual(100 + index++, item, _caller);
+      }
+      
+      Assert::AreEqual(checksum1, checksum2, _caller);
+    }
+    
+    void LinkedList() {
+      System::Collections::Generic::LinkedList<int32> collection = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+      int32 index = 0;
+      for (int32& item : collection) {
+        item = 100 + index++;
+      }
+      
+      index = 0;
+      int32 checksum1 = 0;
+      int32 checksum2 = 0;
+      for (int32 item : collection) {
+        checksum1 += 100 + index;
+        checksum2 += item;
+        Assert::AreEqual(100 + index++, item, _caller);
+      }
+      
+      Assert::AreEqual(checksum1, checksum2, _caller);
+    }
+    
+    void HashSet() {
+      System::Collections::Generic::HashSet<int32> collection = {100, 101, 102, 103, 104, 105, 106, 107, 108, 109};
+      
+      int32 index = 0;
+      int32 checksum1 = 0;
+      int32 checksum2 = 0;
+      for (int32 item : collection) {
+        checksum1 += 100 + index++;
+        checksum2 += item;
+      }
+      
+      Assert::AreEqual(checksum1, checksum2, _caller);
+    }
+    
+    void SortedSet() {
+      System::Collections::Generic::SortedSet<int32> collection = {100, 101, 102, 103, 104, 105, 106, 107, 108, 109};
+      
+      int32 index = 0;
+      int32 checksum1 = 0;
+      int32 checksum2 = 0;
+      for (int32 item : collection) {
+        checksum1 += 100 + index++;
+        checksum2 += item;
       }
       
       Assert::AreEqual(checksum1, checksum2, _caller);
@@ -250,6 +300,9 @@ namespace SwitchUnitTests {
   
   _test(ForeachTest, Vector)
   _test(ForeachTest, List)
+  _test(ForeachTest, LinkedList)
+  _test(ForeachTest, HashSet)
+  _test(ForeachTest, SortedSet)
   _test(ForeachTest, SortedDictionary)
   _test(ForeachTest, ListT)
   _test(ForeachTest, Array)

@@ -1,5 +1,5 @@
 #include <Switch/System/Guid.hpp>
-#include <Switch/System/Collections/Generic/SortedSet.hpp>
+#include <Switch/System/Collections/Generic/Dictionary.hpp>
 #include <Switch/TUnit/Assert.hpp>
 #include <Switch/TUnit/TestFixture.hpp>
 
@@ -51,11 +51,11 @@ namespace SwitchUnitTests {
     }
     
     void NewGuid() {
-      SortedSet<Guid> guids;
+      Dictionary<Guid, Guid> guids;
       for (int32 i = 0; i < 1'000; i++) {
         Guid guid = Guid::NewGuid();
-        Assert::IsFalse(guids.Contains(guid), _caller);
-        guids.Add(guid);
+        Assert::IsFalse(guids.ContainsKey(guid), _caller);
+        guids.Add(guid, guid);
       }
     }
     

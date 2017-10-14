@@ -1,6 +1,3 @@
-#include <Switch/System/Collections/Generic/HashSet.hpp>
-#include <Switch/System/Collections/Generic/LinkedList.hpp>
-#include <Switch/System/Collections/Generic/SortedSet.hpp>
 #include <Switch/System/Collections/ArrayList.hpp>
 #include <Switch/System/Array.hpp>
 #include <Switch/System/Math.hpp>
@@ -101,8 +98,8 @@ namespace {
   }
   
   TEST(Enumerable, Any2) {
-    ASSERT_TRUE(HashSet<Pet>({Pet("Barley", 8, true), Pet("Boots", 4, false), Pet("Whiskers", 1, false)}).Any([](const Pet& pet) { return pet.IsVaccinated() == false && pet.Age() > 1; }));
-    ASSERT_FALSE(SortedSet<Pet>({Pet("Barley", 8, true), Pet("Boots", 4, false), Pet("Whiskers", 1, false)}).Any([](const Pet& pet) { return pet.IsVaccinated() == false && pet.Age() > 4; }));
+    ASSERT_TRUE(Array<Pet>({Pet("Barley", 8, true), Pet("Boots", 4, false), Pet("Whiskers", 1, false)}).Any([](const Pet& pet) { return pet.IsVaccinated() == false && pet.Age() > 1; }));
+    ASSERT_FALSE(Array<Pet>({Pet("Barley", 8, true), Pet("Boots", 4, false), Pet("Whiskers", 1, false)}).Any([](const Pet& pet) { return pet.IsVaccinated() == false && pet.Age() > 4; }));
   }
   
   TEST(Enumerable, AverageInt32) {
@@ -140,7 +137,7 @@ namespace {
   }
   
   TEST(Enumerable, Max) {
-    ASSERT_EQ("Barley", LinkedList<Pet>({Pet("Barley", 8, true), Pet("Boots", 4, false), Pet("Whiskers", 1, false)}).Max().Name());
+    ASSERT_EQ("Barley", List<Pet>({Pet("Barley", 8, true), Pet("Boots", 4, false), Pet("Whiskers", 1, false)}).Max().Name());
   }
   
   TEST(Enumerable, Min) {

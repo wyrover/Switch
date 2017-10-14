@@ -4,6 +4,11 @@
 
 #include <Switch/Switch.Core>
 #include "System/Collections/Concurrent/ConcurrentBag.hpp"
+#include "System/Collections/Generic/ISet.hpp"
+#include "System/Collections/Generic/LinkedList.hpp"
+#include "System/Collections/Generic/Queue.hpp"
+#include "System/Collections/Generic/SortedSet.hpp"
+#include "System/Collections/Generic/Stack.hpp"
 #include "System/Collections/Specialized/StringCollection.hpp"
 #include "System/Collections/Specialized/StringDictionary.hpp"
 #include "System/Collections/Specialized/StringEnumerator.hpp"

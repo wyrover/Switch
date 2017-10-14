@@ -2,7 +2,7 @@
 /// @brief Contains Switch::System::Collections::Generic::Stack <T> class.
 #pragma once
 
-#include "List.hpp"
+#include <Switch/System/Collections/Generic/List.hpp>
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
@@ -133,7 +133,7 @@ namespace Switch {
           
           /// @brief Sets the capacity to the actual number of elements in the Stack<T>, if that number is less than 90 percent of current capacity.
           /// @remarks This function is not yet implemented so an Exception NotSupportedException is always generate.
-          Stack& operator=(const Stack& stack) {this->stack = stack.stack;}
+          Stack& operator=(const Stack& stack) {this->stack = stack.stack; return *this;}
           
           /// @cond
           using const_iterator = typename List<T, TAllocator>::const_iterator;

@@ -4,21 +4,21 @@
 
 #include <set>
 
-#include "../../../Allocator.hpp"
-#include "../../../InitializerList.hpp"
-#include "../../../Types.hpp"
-#include "../../../RefPtr.hpp"
-#include "../../Array.hpp"
-#include "../../Object.hpp"
-#include "../../Predicate.hpp"
-#include "../../String.hpp"
-#include "../../Type.hpp"
-#include "Comparer.hpp"
-#include "GenericException.hpp"
-#include "IEnumerable.hpp"
-#include "IEnumerator.hpp"
+#include <Switch/Allocator.hpp>
+#include <Switch/InitializerList.hpp>
+#include <Switch/Types.hpp>
+#include <Switch/RefPtr.hpp>
+#include <Switch/System/Array.hpp>
+#include <Switch/System/Object.hpp>
+#include <Switch/System/Predicate.hpp>
+#include <Switch/System/String.hpp>
+#include <Switch/System/Type.hpp>
+#include <Switch/System/Collections/Generic/Comparer.hpp>
+#include <Switch/System/Collections/Generic/GenericException.hpp>
+#include <Switch/System/Collections/Generic/IEnumerable.hpp>
+#include <Switch/System/Collections/Generic/IEnumerator.hpp>
+#include <Switch/System/Linq/Enumerable.hpp>
 #include "ISet.hpp"
-#include "../../Linq/Enumerable.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {

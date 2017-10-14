@@ -1,6 +1,7 @@
 project(Switch.System.Core)
 
 set(INCLUDE_FILES
+  include/Switch/System/Collections/Generic/HashSet.hpp
   include/Switch/Switch.System.Core.hpp
   include/Switch/Switch.System.Core
 )

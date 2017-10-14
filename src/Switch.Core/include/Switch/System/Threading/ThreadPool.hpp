@@ -6,7 +6,7 @@
 #include "../../RefPtr.hpp"
 #include "../../Static.hpp"
 #include "../TimeSpan.hpp"
-#include "../Collections/Generic/Queue.hpp"
+#include "../Collections/Generic/List.hpp"
 #include "Thread.hpp"
 #include "RegisteredWaitHandle.hpp"
 #include "WaitHandle.hpp"
@@ -156,8 +156,8 @@ namespace Switch {
         using ThreadPoolItem = ThreadItem<WaitCallback>;
         using ThreadPoolAsynchronousIOItem = ThreadItem<WaitOrTimerCallback>;
         
-        using ThreadPoolItemCollection = System::Collections::Generic::Queue<refptr<ThreadPoolItem>>;
-        using ThreadPoolAsynchronousIOItemCollection = System::Collections::Generic::Queue<refptr<ThreadPoolAsynchronousIOItem>>;
+        using ThreadPoolItemCollection = System::Collections::Generic::List<refptr<ThreadPoolItem>>;
+        using ThreadPoolAsynchronousIOItemCollection = System::Collections::Generic::List<refptr<ThreadPoolAsynchronousIOItem>>;
         
         static ThreadPoolItemCollection threadPoolItems;
         static ThreadPoolAsynchronousIOItemCollection threadPoolAsynchronousIOItems;

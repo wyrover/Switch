@@ -2,6 +2,11 @@ project(Switch.System)
 
 set(INCLUDE_FILES
   include/Switch/System/Collections/Concurrent/ConcurrentBag.hpp
+  include/Switch/System/Collections/Generic/ISet.hpp
+  include/Switch/System/Collections/Generic/LinkedList.hpp
+  include/Switch/System/Collections/Generic/Queue.hpp
+  include/Switch/System/Collections/Generic/SortedSet.hpp
+  include/Switch/System/Collections/Generic/Stack.hpp
   include/Switch/System/Collections/Specialized/StringCollection.hpp
   include/Switch/System/Collections/Specialized/StringDictionary.hpp
   include/Switch/System/Collections/Specialized/StringEnumerator.hpp

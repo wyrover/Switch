@@ -4,9 +4,9 @@
 
 #include <unordered_set>
 
-#include "../../../InitializerList.hpp"
-#include "Dictionary.hpp"
-#include "ISet.hpp"
+#include <Switch/InitializerList.hpp>
+#include <Switch/System/Collections/Generic/Dictionary.hpp>
+#include <<Switch/System/Collections/Generic/ISet.hpp>
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
