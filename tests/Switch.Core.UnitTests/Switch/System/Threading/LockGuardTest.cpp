@@ -58,14 +58,15 @@ namespace SwitchUnitTests {
  
     void Thread() {
       string s;
+      object lock;
       std::thread t1(_delegate {
-        _lock (s) {
+        _lock (lock) {
           for (int i = 0; i < 500; i++)
             s += '1';
         }
       });
       std::thread t2(_delegate {
-        _lock (s) {
+        _lock (lock) {
           for (int i = 0; i < 500; i++)
             s += '2';
         }

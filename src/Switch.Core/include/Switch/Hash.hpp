@@ -12,12 +12,6 @@
 namespace Switch {
   /// @brief Generate a hash code for generic type T.
   /// @param[in] value For which the hashcode is generated.
-  /// @return int32 An integer value being the generated hashcode.
-  /// @exception System::ArgumentNullException The parameters converter is null.
-  int32 GetHashCode(const object& value);
-  
-  /// @brief Generate a hash code for generic type T.
-  /// @param[in] value For which the hashcode is generated.
   /// @return int32  An integer value being the generated hashcode.
   /// @exception System::ArgumentNullException The parameters converter is null.
   template<typename T>
@@ -138,6 +132,41 @@ namespace Switch {
   /// @return int32 An integer value being the generated hashcode.
   /// @exception System::ArgumentNullException The parameters converter is null.
   int32 GetHashCode(const float& value);
+  
+  /// @cond
+  struct HasherFromObject {
+    template <typename Object>
+    int32 operator()(const Object& value) {return value.GetHashCode();}
+  };
+  
+  struct HasherFromEnum {
+    template <typename Enum>
+    int32 operator()(const Enum& value) {return int32(int64(value) & 0x00000000FFFFFFFF) ^ int32((int64(value)>>32) & 0x00000000FFFFFFFF);}
+  };
+  
+  struct HasherFromOther {
+    template <typename Other>
+    int32 operator()(const Other& value) {return int32(int64(&value) & 0x00000000FFFFFFFF) ^ int32((int64(&value)>>32) & 0x00000000FFFFFFFF);}
+  };
+  /// @cond
+
+  template<typename TValue>
+  int32 GetHashCode(const TValue* value) {
+    using Hasher = typename std::conditional<std::is_base_of<object, TValue>::value, HasherFromObject, typename std::conditional<std::is_enum<TValue>::value, HasherFromEnum, HasherFromOther>::type>::type;
+    Hasher hasher;
+    return hasher(*value);
+  }
+
+  /// @brief Generate a hash code for generic type T.
+  /// @param[in] value For which the hashcode is generated.
+  /// @return int32 An integer value being the generated hashcode.
+  /// @exception System::ArgumentNullException The parameters converter is null.
+  template<typename TValue>
+  int32 GetHashCode(const TValue& value) {
+    using Hasher = typename std::conditional<std::is_base_of<object, TValue>::value, HasherFromObject, typename std::conditional<std::is_enum<TValue>::value, HasherFromEnum, HasherFromOther>::type>::type;
+    Hasher hasher;
+    return hasher(value);
+  }
 }
 
 using namespace Switch;

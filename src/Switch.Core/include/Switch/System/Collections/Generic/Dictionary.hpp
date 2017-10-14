@@ -258,7 +258,7 @@ namespace Switch {
         private:
           class Hasher {
           public:
-            size_t operator()(const TKey& key) const { return Switch::GetHashCode(&key); }
+            size_t operator()(const TKey& key) const { return Switch::GetHashCode(key); }
           };
           
           class EqualTo {
