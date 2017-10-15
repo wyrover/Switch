@@ -1,7 +1,7 @@
 #if defined(__linux__)
 
 #include <gtkmm.h>
-#include "DrawingApi.hpp"
+#include "Api.hpp"
 
 using namespace System;
 using namespace Native;
