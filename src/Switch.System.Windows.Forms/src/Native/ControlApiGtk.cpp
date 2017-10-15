@@ -92,7 +92,7 @@ void Native::ControlApi::SetBackColor(const System::Windows::Forms::Control& con
 void Native::ControlApi::SetClientSize(System::Windows::Forms::Control &control) {
   ((Native::Widget*)control.Handle())->ToWidget().set_size_request(control.ClientSize().Width, control.ClientSize().Height);
   if (is<System::Windows::Forms::Form>(control))
-    control.Size = System::Drawing::Size::Add(control.ClientSize, {0, SystemInformation::GetCaptionHeight()});
+    control.Size = System::Drawing::Size::Add(control.ClientSize, {0, SystemInformationApi::GetCaptionHeight()});
   else
     control.Size = control.ClientSize;
 }
@@ -130,8 +130,8 @@ void Native::ControlApi::SetParent(const System::Windows::Forms::Control& contro
 
 void Native::ControlApi::SetSize(System::Windows::Forms::Control& control) {
   if (is<System::Windows::Forms::Form>(control)) {
-    ((Native::Widget*)control.Handle())->ToWidget().set_size_request(control.Width, control.Height - SystemInformation::GetCaptionHeight());
-    control.ClientSize = System::Drawing::Size::Subtract(control.Size, {0, SystemInformation::GetCaptionHeight()});
+    ((Native::Widget*)control.Handle())->ToWidget().set_size_request(control.Width, control.Height - SystemInformationApi::GetCaptionHeight());
+    control.ClientSize = System::Drawing::Size::Subtract(control.Size, {0, SystemInformationApi::GetCaptionHeight()});
   } else {
     ((Native::Widget*)control.Handle())->ToWidget().set_size_request(control.Width, control.Height);
     control.ClientSize = control.Size;
