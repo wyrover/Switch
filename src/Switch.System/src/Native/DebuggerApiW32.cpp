@@ -1,7 +1,7 @@
 #if defined(_WIN32)
 
 #include <windows.h>
-#include "../../include/Switch/Undef.hpp"
+#include <Switch/Undef.hpp>
 
 #include "Api.hpp"
 
