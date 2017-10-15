@@ -151,12 +151,12 @@ Project(SwitchConsole)
  
 find_package(Switch REQUIRED)
 add_executable(SwitchConsole SwitchConsole.cpp)
-target_link_libraries(SwitchConsole Switch.Core)
+target_link_libraries(SwitchConsole Switch.System)
 ```
 
 ## Build and Run on Windows
 
-To build this wonderful application, open "Developer Command Prompt for VS 2017" and type following lines:
+To build this wonderful application, open "Command Prompt" and type following lines:
 
 ```shell
 cd C:\Users\YourName\Projects\SwitchConsole
@@ -197,8 +197,8 @@ make
 
 ### Remarks
 
-* If your application is unit tests application, is the same procedure but you must replace the line "target_link_libraries(SwitchConsole Switch.Core)" by "target_link_libraries(SwitchConsole Switch.TUnit.Main)" if you don't have your own main entry point; or "target_link_libraries(SwitchConsole Switch.TUnit)" it you have your own main entry point in CMakeLists.txt file.
-* ​If your application is GUI application, is the same procedure but you must replace the line "add_executable(SwitchConsole SwitchConsole.cpp)" by "add_executable(SwitchConsole ${SWITCH_GUI} SwitchConsole.cpp)" and replace the line "target_link_libraries(SwitchConsole Switch.Core)" by "target_link_libraries(SwitchConsole Switch.Forms)" in CMakeLists.txt file.
+* If your application is unit tests application, is the same procedure but you must replace the line **target_link_libraries(SwitchConsole Switch.System)** by **target_link_libraries(SwitchConsole Switch.TUnit.Main)** if you don't have your own main entry point; or **target_link_libraries(SwitchConsole Switch.TUnit.Core)** it you have your own main entry point in **CMakeLists.txt** file.
+* ​If your application is GUI application, is the same procedure but you must replace the line **add_executable(SwitchConsole SwitchConsole.cpp)** by **add_executable(SwitchConsole ${SWITCH_GUI} SwitchConsole.cpp)** and replace the line **target_link_libraries(SwitchConsole Switch.System)** by **target_link_libraries(SwitchConsole Switch.System.Windows.Forms)** in **CMakeLists.txt** file.
 
 ______________________________________________________________________________________________
 
