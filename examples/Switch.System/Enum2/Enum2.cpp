@@ -26,7 +26,7 @@ enum class Color {
 template<>
 class EnumToStrings<Color> {
 public:
-  void operator ()(System::Collections::Generic::SortedDictionary<int64, string>& values, bool& flags) {
+  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)Color::Black, "Black"}, {(int64)Color::DarkBlue, "DarkBlue"}, {(int64)Color::DarkGreen, "DarkGreen"}, {(int64)Color::DarkCyan, "DarkCyan"}, {(int64)Color::DarkRed, "DarkRed"}, {(int64)Color::DarkMagenta, "DarkMagenta"}, {(int64)Color::DarkYellow, "DarkYellow"}, {(int64)Color::Gray, "Gray"}, {(int64)Color::DarkGray, "DarkGray"}, {(int64)Color::Blue, "Blue"}, {(int64)Color::Green, "Green"}, {(int64)Color::Cyan, "Cyan"}, {(int64)Color::Red, "Red"}, {(int64)Color::Magenta, "Magenta"}, {(int64)Color::Yellow, "Yellow"}, {(int64)Color::White, "White"}};
     flags = false;
   }
@@ -70,7 +70,7 @@ class AddFlagOperators<Letters> : public TrueType {};
 template<>
 class EnumToStrings<Letters> {
 public:
-  void operator ()(System::Collections::Generic::SortedDictionary<int64, string>& values, bool& flags) {
+  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)Letters::None, "None"}, {(int64)Letters::A, "A"}, {(int64)Letters::B, "B"}, {(int64)Letters::C, "C"}, {(int64)Letters::D, "D"}, {(int64)Letters::E, "E"}, {(int64)Letters::F, "F"}, {(int64)Letters::G, "G"}, {(int64)Letters::H, "H"}, {(int64)Letters::I, "I"}, {(int64)Letters::J, "J"}, {(int64)Letters::K, "K"}, {(int64)Letters::L, "L"}, {(int64)Letters::M, "M"}, {(int64)Letters::N, "N"}, {(int64)Letters::O, "O"}, {(int64)Letters::P, "P"}, {(int64)Letters::Q, "Q"}, {(int64)Letters::R, "R"}, {(int64)Letters::S, "S"}, {(int64)Letters::T, "T"}, {(int64)Letters::U, "U"}, {(int64)Letters::V, "V"}, {(int64)Letters::W, "W"}, {(int64)Letters::X, "X"}, {(int64)Letters::Y, "Y"}, {(int64)Letters::Z, "Z"}};
     flags = true;
   }
@@ -99,7 +99,7 @@ enum class Pet {
 template<>
 class EnumToStrings<Pet> {
 public:
-  void operator ()(System::Collections::Generic::SortedDictionary<int64, string>& values, bool& flags) {
+  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)Pet::Dog, "Dog"}, {(int64)Pet::Cat, "Cat"}, {(int64)Pet::Fish, "Fish"}, {(int64)Pet::Bird, "Bird"}, {(int64)Pet::Rabbit, "Rabbit"}, {(int64)Pet::Mouse, "Mouse"}, {(int64)Pet::Chicken, "Chicken"}, {(int64)Pet::Snake, "Snake"}, {(int64)Pet::Tigger, "Tigger"}, {(int64)Pet::Lion, "Lion"}, {(int64)Pet::Leopard, "Leopard"}, {(int64)Pet::Goat, "Goat"}, {(int64)Pet::Bear, "Bear"}, {(int64)Pet::Fox, "Fox"}, {(int64)Pet::Eagle, "Eagle"}};
     flags = false;
   }

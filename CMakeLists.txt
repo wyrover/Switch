@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.2)
 
-project(Switch VERSION 0.3.4)
+project(Switch VERSION 0.4.0)
 
 option(BUILD_SWITCH_CORE "Build Switch.Core library" ON)
 option(BUILD_SWITCH_SYSTEM "Build Switch.System library" ON)

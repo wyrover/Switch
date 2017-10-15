@@ -35,7 +35,7 @@ REM -------
 REM by default vcpkg install x86 packages. You can set system environment variable VCPKG_DEFAULT_TRIPLET=x64-windows for x64 packages.
 REM see https://github.com/Microsoft/vcpkg and https://vcpkg.readthedocs.io/en/latest/ for more informations.
 
-echo Install Switch libraries version 0.3.4, copyright GAMMA Soft, 2017
+echo Install Switch libraries version 0.4.0, copyright GAMMA Soft, 2017
 echo.
 
 set switch_install_devenv="devenv"

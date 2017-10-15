@@ -111,7 +111,6 @@ namespace Switch {
         any Peek() {
           if (this->stack.Count == 0)
             throw InvalidOperationException(_caller);
-          
           return this->stack[0];
         }
         

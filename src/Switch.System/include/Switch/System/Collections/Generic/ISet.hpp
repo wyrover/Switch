@@ -3,7 +3,7 @@
 #pragma once
 
 #include <Switch/Types.hpp>
-#include <Switch/System/Collections/Generic/IEnumerable.hpp"
+#include <Switch/System/Collections/Generic/IEnumerable.hpp>
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
@@ -15,6 +15,8 @@ namespace Switch {
       namespace Generic {
         /// @interface ISet
         /// @brief Provides the base interface for the abstraction of sets.
+        /// @par Library
+        /// Switch.System
         template<typename T>
         class ISet : public IEnumerable<T> {
         public:

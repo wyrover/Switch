@@ -17,6 +17,8 @@ namespace Switch {
         /// @remarks The capacity of a Stack<T> is the number of elements the Stack<T> can hold. As elements are added to a Stack<T>, the capacity is automatically increased as required by reallocating the internal array. The capacity can be decreased by calling TrimExcess.
         /// @remarks If Count is less than the capacity of the stack, Push is an O(1) operation. If the capacity needs to be increased to accommodate the new element, Push becomes an O(n) operation, where n is Count. Pop is an O(1) operation.
         /// @remarks Stack<T> accepts null as a valid value for reference types and allows duplicate elements.
+        /// @par Library
+        /// Switch.System
         template<typename T, typename TAllocator=Allocator<T>>
         class Stack : public object, public System::Linq::Extension::Enumerable<Stack<T, TAllocator>, T>, public ICollection<T> {
           using Item = T;

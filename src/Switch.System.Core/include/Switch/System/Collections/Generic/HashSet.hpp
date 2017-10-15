@@ -6,7 +6,7 @@
 
 #include <Switch/InitializerList.hpp>
 #include <Switch/System/Collections/Generic/Dictionary.hpp>
-#include <<Switch/System/Collections/Generic/ISet.hpp>
+#include <Switch/System/Collections/Generic/ISet.hpp>
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
@@ -20,6 +20,8 @@ namespace Switch {
         /// @remarks The HashSet<T> class provides high-performance set operations. A set is a collection that contains no duplicate elements, and whose elements are in no particular order.
         /// @remarks The capacity of a HashSet<T> object is the number of elements that the object can hold. A HashSet<T> object's capacity automatically increases as elements are added to the object.
         /// @remarks For very large HashSet<T> objects, you can increase the maximum capacity to 2 billion elements on a 64-bit system by setting the enabled attribute of the gcAllowVeryLargeObjects configuration element to true in the run-time environment.
+        /// @par Library
+        /// Switch.System.Core
         /// @par Examples
         /// The following example demonstrates how to merge two disparate sets. This example creates two HashSet<T> objects, and populates them with even and odd numbers, respectively. A third HashSet<T> object is created from the set that contains the even numbers. The example then calls the UnionWith method, which adds the odd number set to the third set.
         /// @include HashSet.cpp
