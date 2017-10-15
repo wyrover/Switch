@@ -793,12 +793,14 @@ WARN_LOGFILE           =
 INPUT                  = . \
                          ../../src/Switch.Core/include \
                          ../../src/Switch.System/include \
+                         ../../src/Switch.System.Core/include \
                          ../../src/Switch.System.Drawing/include \
                          ../../src/Switch.System.Windows.Forms/include \
                          ../../src/Switch.TUnit/include \
                          @CMAKE_CURRENT_SOURCE_DIR@/docs \
                          @CMAKE_CURRENT_SOURCE_DIR@/src/Switch.Core/include \
                          @CMAKE_CURRENT_SOURCE_DIR@/src/Switch.System/include \
+                         @CMAKE_CURRENT_SOURCE_DIR@/src/Switch.System.Core/include \
                          @CMAKE_CURRENT_SOURCE_DIR@/src/Switch.System.Drawing/include \
                          @CMAKE_CURRENT_SOURCE_DIR@/src/Switch.System.Windows.Forms/include \
                          @CMAKE_CURRENT_SOURCE_DIR@/src/Switch.TUnit/include
