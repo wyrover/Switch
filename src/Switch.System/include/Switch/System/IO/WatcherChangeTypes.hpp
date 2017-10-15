@@ -2,9 +2,9 @@
 /// @brief Contains Switch::System::IO::WatcherChangeTypes enum.
 #pragma once
 
-#include "../../As.hpp"
-#include "../EventArgs.hpp"
-#include "../Exception.hpp"
+#include <Switch/As.hpp>
+#include <Switch/System/EventArgs.hpp>
+#include <Switch/System/Exception.hpp>
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {

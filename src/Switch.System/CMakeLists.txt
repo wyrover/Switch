@@ -7,9 +7,11 @@ set(INCLUDE_FILES
   include/Switch/System/Collections/Generic/Queue.hpp
   include/Switch/System/Collections/Generic/SortedSet.hpp
   include/Switch/System/Collections/Generic/Stack.hpp
+  include/Switch/System/Collections/Generic/SortedDictionary.hpp
   include/Switch/System/Collections/Specialized/StringCollection.hpp
   include/Switch/System/Collections/Specialized/StringDictionary.hpp
   include/Switch/System/Collections/Specialized/StringEnumerator.hpp
+  include/Switch/System/ComponentModel/InvalidEnumArgumentException.hpp
   include/Switch/System/Diagnostics/ConsoleTraceListener.hpp
   include/Switch/System/Diagnostics/Debug.hpp
   include/Switch/System/Diagnostics/DefaultTraceListener.hpp
@@ -43,6 +45,9 @@ set(INCLUDE_FILES
   include/Switch/System/IO/Ports/SerialPinChangedEventHandler.hpp
   include/Switch/System/IO/ErrorEventArgs.hpp
   include/Switch/System/IO/FileSystemEventArgs.hpp
+  include/Switch/System/IO/InternalBufferOverflowException.hpp
+  include/Switch/System/IO/InvalidDataException.hpp
+  include/Switch/System/IO/WatcherChangeTypes.hpp
   include/Switch/System/Media/SystemSound.hpp
   include/Switch/System/Media/SystemSounds.hpp
   include/Switch/System/Net/Sockets/AddressFamily.hpp

@@ -42,11 +42,8 @@
 #include <Switch/System/IO/FileFormatException.hpp>
 #include <Switch/System/IO/FileLoadException.hpp>
 #include <Switch/System/IO/FileNotFoundException.hpp>
-#include <Switch/System/IO/InternalBufferOverflowException.hpp>
-#include <Switch/System/IO/InvalidDataException.hpp>
 #include <Switch/System/IO/IOException.hpp>
 #include <Switch/System/IO/PathTooLongException.hpp>
-#include <Switch/System/IO/PipeException.hpp>
 #include <Switch/System/Threading/AbandonedMutexException.hpp>
 #include <Switch/System/Threading/LockRecursionException.hpp>
 #include <Switch/System/Threading/SynchronizationLockException.hpp>
@@ -230,10 +227,7 @@ namespace {
     try { throw FileFormatException(_caller); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "Input file or data stream does not conform to the expected file format specification."); }
     try { throw FileLoadException(_caller); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "Could not load the specified file."); }
     try { throw FileNotFoundException(_caller); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "Unable to find the specified file."); }
-    try { throw InternalBufferOverflowException(_caller); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "System error."); }
-    try { throw InvalidDataException(_caller); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "Found invalid data while decoding."); }
     try { throw PathTooLongException(_caller); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "The specified path, file name, or both are too long. The fully ualified file name must be less than 260 caracters, and the directory name must be less than 248 caracters."); }
-    try { throw PipeException(_caller); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "I/O error occured."); }
   
     try { throw SerializationException(_caller); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "Serialization error."); }
   

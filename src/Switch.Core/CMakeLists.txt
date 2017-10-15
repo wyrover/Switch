@@ -22,7 +22,6 @@ set(INCLUDE_FILES
   include/Switch/System/Collections/Generic/IList.hpp
   include/Switch/System/Collections/Generic/KeyValuePair.hpp
   include/Switch/System/Collections/Generic/List.hpp
-  include/Switch/System/Collections/Generic/SortedDictionary.hpp
   include/Switch/System/Collections/ObjectModel/Collection.hpp
   include/Switch/System/Collections/ObjectModel/ReadOnlyCollection.hpp
   include/Switch/System/Collections/ArrayList.hpp
@@ -38,7 +37,6 @@ set(INCLUDE_FILES
   include/Switch/System/Collections/IList.hpp
   include/Switch/System/Collections/Queue.hpp
   include/Switch/System/Collections/Stack.hpp
-  include/Switch/System/ComponentModel/InvalidEnumArgumentException.hpp
   include/Switch/System/Diagnostics/StackFrame.hpp
   include/Switch/System/Diagnostics/StackTrace.hpp
   include/Switch/System/Globalization/NumberStyles.hpp
@@ -62,15 +60,10 @@ set(INCLUDE_FILES
   include/Switch/System/IO/FileShare.hpp
   include/Switch/System/IO/FileStream.hpp
   include/Switch/System/IO/FileSystemInfo.hpp
-  include/Switch/System/IO/InternalBufferOverflowException.hpp
-  include/Switch/System/IO/InvalidDataException.hpp
   include/Switch/System/IO/IOException.hpp
-  include/Switch/System/IO/IsolatedStorage.hpp
   include/Switch/System/IO/MemoryStream.hpp
   include/Switch/System/IO/Path.hpp
   include/Switch/System/IO/PathTooLongException.hpp
-  include/Switch/System/IO/Pipes.hpp
-  include/Switch/System/IO/PipeException.hpp
   include/Switch/System/IO/SeekOrigin.hpp
   include/Switch/System/IO/Stream.hpp
   include/Switch/System/IO/StreamReader.hpp
@@ -79,7 +72,6 @@ set(INCLUDE_FILES
   include/Switch/System/IO/StringWriter.hpp
   include/Switch/System/IO/TextReader.hpp
   include/Switch/System/IO/TextWriter.hpp
-  include/Switch/System/IO/WatcherChangeTypes.hpp
   include/Switch/System/Linq/Enumerable.hpp
   include/Switch/System/Linq/Linq.hpp
   include/Switch/System/Runtime/CompilerServices/Caller.hpp

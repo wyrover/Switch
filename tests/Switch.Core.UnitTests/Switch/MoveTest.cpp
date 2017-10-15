@@ -3,7 +3,6 @@
 #include <Switch/System/Collections/Concurrent/ConcurrentStack.hpp>
 #include <Switch/System/Collections/Generic/Dictionary.hpp>
 #include <Switch/System/Collections/Generic/List.hpp>
-#include <Switch/System/Collections/Generic/SortedDictionary.hpp>
 #include <Switch/System/Collections/BitArray.hpp>
 #include <Switch/TUnit/Assert.hpp>
 #include <Switch/TUnit/TestFixture.hpp>
@@ -65,13 +64,6 @@ namespace SwitchUnitTests {
       Assert::AreEqual(0, l1.Count, _caller);
       Assert::AreEqual(10, l2.Count, _caller);
     }
-    
-    void MoveSortedDictionary() {
-      SortedDictionary<string, int32> sd1 = {{"One", 1}, {"Two", 2}, {"Three", 3}, {"Four", 4}, {"Five", 5}, {"Six", 6}, {"Seven", 7}, {"Eigth", 8}, {"Nine", 9}, {"Ten", 10}};
-      SortedDictionary<string, int32> sd2 = Move(sd1);
-      Assert::AreEqual(0, sd1.Count, _caller);
-      Assert::AreEqual(10, sd2.Count, _caller);
-    }
  };
   
   _test(MoveTest, MoveString)
@@ -80,5 +72,4 @@ namespace SwitchUnitTests {
   _test(MoveTest, MoveConcurrentQueue)
   _test(MoveTest, MoveConcurrentStack)
   _test(MoveTest, MoveDictionary)
-  _test(MoveTest, MoveSortedDictionary)
 }

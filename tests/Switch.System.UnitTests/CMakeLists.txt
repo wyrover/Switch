@@ -2,6 +2,7 @@ project(Switch.System.UnitTests)
 
 set(SOURCE_FILES
   Switch/System/Collections/Concurrent/ConcurrentBagTest.cpp
+  Switch/System/Collections/Generic/SortedDictionaryUT.cpp
   Switch/System/Diagnostics/ProcessStartInfoUnitTests.cpp
   Switch/System/Diagnostics/TraceUT.cpp
   Switch/System/Net/IPAddressUT.cpp

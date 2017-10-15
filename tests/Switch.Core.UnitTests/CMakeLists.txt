@@ -6,7 +6,6 @@ set(SOURCE_FILES
   Switch/System/Collections/Generic/DictionaryUT.cpp
   Switch/System/Collections/Generic/KeyValuePairUT.cpp
   Switch/System/Collections/Generic/ListUT.cpp
-  Switch/System/Collections/Generic/SortedDictionaryUT.cpp
   Switch/System/Collections/ObjectModel/ReadOnlyCollectionUT.cpp
   Switch/System/Collections/ArrayListUT.cpp
   Switch/System/Collections/BitArrayUT.cpp

@@ -4,17 +4,17 @@
 
 #include <map>
 
-#include "../../../Allocator.hpp"
-#include "../../../InitializerList.hpp"
-#include "../../Object.hpp"
-#include "../../../Types.hpp"
-#include "../../Array.hpp"
-#include "../../_String.hpp"
-#include "Comparer.hpp"
-#include "IComparer.hpp"
-#include "IDictionary.hpp"
-#include "List.hpp"
-#include "../../Linq/Enumerable.hpp"
+#include <Switch/Allocator.hpp>
+#include <Switch/InitializerList.hpp>
+#include <Switch/Types.hpp>
+#include <Switch/System/Object.hpp>
+#include <Switch/System/Array.hpp>
+#include <Switch/System/String.hpp>
+#include <Switch/System/Collections/Generic/Comparer.hpp>
+#include <Switch/System/Collections/Generic/IComparer.hpp>
+#include <Switch/System/Collections/Generic/IDictionary.hpp>
+#include <Switch/System/Collections/Generic/List.hpp>
+#include <Switch/System/Linq/Enumerable.hpp>
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {

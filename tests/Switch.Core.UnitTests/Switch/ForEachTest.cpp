@@ -1,4 +1,3 @@
-#include <Switch/System/Collections/Generic/SortedDictionary.hpp>
 #include <Switch/TUnit/Assert.hpp>
 #include <Switch/TUnit/TestFixture.hpp>
 
@@ -41,20 +40,6 @@ namespace SwitchUnitTests {
         checksum1 += 100 + index;
         checksum2 += item;
         Assert::AreEqual(100 + index++, item, _caller);
-      }
-      
-      Assert::AreEqual(checksum1, checksum2, _caller);
-    }
-    
-    void SortedDictionary() {
-      System::Collections::Generic::SortedDictionary<int32, int32> collection = {{0, 100}, {1, 101}, {2, 102}, {3, 103}, {4, 104}, {5, 105}, {6, 106}, {7, 107}, {8, 108}, {9, 109}};
-      
-      int32 index = 0;
-      int32 checksum1 = 0;
-      int32 checksum2 = 0;
-      for (auto item : collection) {
-        checksum1 += 100 + index++;
-        checksum2 += item.Value();
       }
       
       Assert::AreEqual(checksum1, checksum2, _caller);
@@ -250,7 +235,6 @@ namespace SwitchUnitTests {
   
   _test(ForeachTest, Vector)
   _test(ForeachTest, List)
-  _test(ForeachTest, SortedDictionary)
   _test(ForeachTest, ListT)
   _test(ForeachTest, Array)
   _test(ForeachTest, Array2)

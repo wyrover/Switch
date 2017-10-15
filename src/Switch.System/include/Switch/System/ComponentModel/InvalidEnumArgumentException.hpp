@@ -2,7 +2,7 @@
 /// @brief Contains Switch::System::ArgumentNullException exception.
 #pragma once
 
-#include "../ArgumentException.hpp"
+#include <Switch/System/ArgumentException.hpp>
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
