@@ -254,6 +254,7 @@
 #include "System/UInt64.hpp"
 #include "System/UIntPtr.hpp"
 #include "System/UnauthorizedAccessException.hpp"
+#include "System/ValueTuple.hpp"
 #include "System/ValueType.hpp"
 #include "System/Version.hpp"
 #include "Allocator.hpp"

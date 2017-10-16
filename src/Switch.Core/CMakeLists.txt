@@ -253,6 +253,7 @@ set(INCLUDE_FILES
   include/Switch/System/UInt64.hpp
   include/Switch/System/UIntPtr.hpp
   include/Switch/System/UnauthorizedAccessException.hpp
+  include/Switch/System/ValueTuple.hpp
   include/Switch/System/ValueType.hpp
   include/Switch/System/Version.hpp
   include/Switch/Abstract.hpp
