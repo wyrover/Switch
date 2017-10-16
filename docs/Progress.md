@@ -19,7 +19,33 @@
 
 ![Progress](Pictures/Progress100.png) Complete
 
+## Switch.PresentationFramework (PresentationFramework)
+
+### Microsoft::Win32
+
+| class                                                                                  | Type        | Progression                           |
+|----------------------------------------------------------------------------------------|-------------|---------------------------------------|
+| CommonDialog                                                                           | class       | ![Progress](Pictures/Progress0.png)   |
+| FileDialog                                                                             | class       | ![Progress](Pictures/Progress0.png)   |
+| FileDialogCustomPlace                                                                  | class       | ![Progress](Pictures/Progress0.png)   |
+| FileDialogCustomPlaces                                                                 | class       | ![Progress](Pictures/Progress0.png)   |
+| OpenFileDialog                                                                         | class       | ![Progress](Pictures/Progress0.png)   |
+| SaveFileDialog                                                                         | class       | ![Progress](Pictures/Progress0.png)   |
+
 ## Switch.System.Core (mscorelib)
+
+### Microsoft::Win32
+
+| class                                                                                  | Type        | Progression                           |
+|----------------------------------------------------------------------------------------|-------------|---------------------------------------|
+| Registry                                                                               | class       | ![Progress](Pictures/Progress100.png) |
+| RegistryHive                                                                           | enumeration | ![Progress](Pictures/Progress100.png) |
+| RegistryKey                                                                            | class       | ![Progress](Pictures/Progress100.png) |
+| RegistryKeyPermissionCheck                                                             | enumeration | ![Progress](Pictures/Progress100.png) |
+| RegistryOptions                                                                        | enumeration | ![Progress](Pictures/Progress100.png) |
+| RegistryValueKind                                                                      | enumeration | ![Progress](Pictures/Progress100.png) |
+| RegistryValueOptions                                                                   | enumeration | ![Progress](Pictures/Progress100.png) |
+| RegistryView                                                                           | enumeration | ![Progress](Pictures/Progress0.png)   |
 
 ### System 
 
@@ -364,6 +390,31 @@
 | StackTrace                                                                             | class       | ![Progress](Pictures/Progress100.png) |
 
 ## Switch.System (System)
+
+### Microsoft::Win32
+
+| class                                                                                  | Type        | Progression                           |
+|----------------------------------------------------------------------------------------|-------------|---------------------------------------|
+| IntranetZoneCredentialPolicy                                                           | class       | ![Progress](Pictures/Progress0.png)   |
+| PowerModeChangedEventArgs                                                              | class       | ![Progress](Pictures/Progress0.png)   |
+| PowerModeChangedEventHandler                                                           | delegate    | ![Progress](Pictures/Progress0.png)   |
+| PowerModes                                                                             | enumeration | ![Progress](Pictures/Progress0.png)   |
+| SessionEndedEventArgs                                                                  | class       | ![Progress](Pictures/Progress0.png)   |
+| SessionEndedEventHandler                                                               | delegate    | ![Progress](Pictures/Progress0.png)   |
+| SessionEndingEventArgs                                                                 | class       | ![Progress](Pictures/Progress0.png)   |
+| SessionEndingEventHandler                                                              | delegate    | ![Progress](Pictures/Progress0.png)   |
+| SessionEndReasons                                                                      | enumeration | ![Progress](Pictures/Progress0.png)   |
+| SessionSwitchEventArgs                                                                 | class       | ![Progress](Pictures/Progress0.png)   |
+| SessionSwitchEventHandler                                                              | delegate    | ![Progress](Pictures/Progress0.png)   |
+| SessionSwitchReasons                                                                   | enumeration | ![Progress](Pictures/Progress0.png)   |
+| SystemEvents                                                                           | class       | ![Progress](Pictures/Progress0.png)   |
+| TimerElapsedEventArgs                                                                  | class       | ![Progress](Pictures/Progress0.png)   |
+| TimerElapsedEventHandler                                                               | delegate    | ![Progress](Pictures/Progress0.png)   |
+| UserPreferenceCategory                                                                 | enumeration | ![Progress](Pictures/Progress0.png)   |
+| UserPreferenceChangedEventArgs                                                         | class       | ![Progress](Pictures/Progress0.png)   |
+| UserPreferenceChangedEventHandler                                                      | delegate    | ![Progress](Pictures/Progress0.png)   |
+| UserPreferenceChangingEventArgs                                                        | class       | ![Progress](Pictures/Progress0.png)   |
+| UserPreferenceChangingEventHandler                                                     | delegate    | ![Progress](Pictures/Progress0.png)   |
 
 ### System
 
