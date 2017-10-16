@@ -39,7 +39,7 @@
 #include "System/NotImplementedException.hpp"
 #include "System/NullPointerException.hpp"
 #include "System/NullReferenceException.hpp"
-#include "System/ObjectClosedException.hpp"
+#include "System/ObjectDisposedException.hpp"
 #include "System/ObjectDisposedException.hpp"
 #include "System/OperationCanceledException.hpp"
 #include "System/OverflowException.hpp"
@@ -159,7 +159,7 @@ namespace Switch {
       if (is<InsufficientExecutionStackException>(exception)) return ExceptionPtr::Create(as<InsufficientExecutionStackException>(exception));
       if (is<InvalidCastException>(exception)) return ExceptionPtr::Create(as<InvalidCastException>(exception));
       
-      if (is<ObjectClosedException>(exception)) return ExceptionPtr::Create(as<ObjectClosedException>(exception));
+      if (is<ObjectDisposedException>(exception)) return ExceptionPtr::Create(as<ObjectDisposedException>(exception));
       if (is<ObjectDisposedException>(exception)) return ExceptionPtr::Create(as<ObjectDisposedException>(exception));
       if (is<InvalidOperationException>(exception)) return ExceptionPtr::Create(as<InvalidOperationException>(exception));
       

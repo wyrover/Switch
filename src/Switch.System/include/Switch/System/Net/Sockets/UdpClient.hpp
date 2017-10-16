@@ -55,7 +55,7 @@ namespace Switch {
           /// @brief Gets the amount of data that has been received from the network and is available to be read.
           /// @return int32 The number of bytes of data received from the network and available to be read.
           /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
+          /// @exception ObjectDisposedException The Socket has been closed.
           /// @remarks If you are using a non-blocking Socket, Available is a good way to determine whether data is queued for reading, before calling Receive. The available data is the total amount of data queued in the network buffer for reading. If no data is queued in the network buffer, Available returns 0.
           /// @remarks If the remote host shuts down or closes the connection, Available can throw a SocketException. If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
           int32 GetAvailable() const;
@@ -92,7 +92,7 @@ namespace Switch {
 
           /// @brief Gets a value that specifies the Time To Live (TTL) value of Internet Protocol (IP) packets sent by the Socket.
           /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information. - or - socketOptionName was set to the unsupported value SocketOptionNameMaxConnections.
-          /// @exception ObjectClosedException The Socket has been closed.
+          /// @exception ObjectDisposedException The Socket has been closed.
           /// @return The TTL value.
           /// @remarks The TTL value indicates the maximum number of routers the packet can traverse before the router discards the packet and an Internet Control Message Protocol (ICMP) "TTL exceeded" error message is returned to the sender.
           /// @remarks The TTL value may be set to a value from 0 to 255. When this property is not set, the default TTL value for a socket is 32.
@@ -103,7 +103,7 @@ namespace Switch {
           /// @brief Sets a value that specifies the Time To Live (TTL) value of Internet Protocol (IP) packets sent by the Socket.
           /// @param ttl The TTL value.
           /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information. - or - socketOptionName was set to the unsupported value SocketOptionNameMaxConnections.
-          /// @exception ObjectClosedException The Socket has been closed.
+          /// @exception ObjectDisposedException The Socket has been closed.
           /// @exception ArgumentOutOfRangeException The TTL value can't be set to a negative number.
           /// @exception NotSupportedException This property can be set only for sockets in the AddressFamilyInterNetwork or AddressFamilyInterNetworkV6 families.
           /// @remarks The TTL value indicates the maximum number of routers the packet can traverse before the router discards the packet and an Internet Control Message Protocol (ICMP) "TTL exceeded" error message is returned to the sender.

@@ -1,6 +1,6 @@
 #include <cstring>
 
-#include "../../../../include/Switch/System/ObjectClosedException.hpp"
+#include "../../../../include/Switch/System/ObjectDisposedException.hpp"
 #include "../../../../include/Switch/System/IO/Directory.hpp"
 #include "../../../../include/Switch/System/IO/DirectoryNotFoundException.hpp"
 #include "../../../../include/Switch/System/IO/FileStream.hpp"
@@ -77,7 +77,7 @@ int64 FileStream::GetPosition() const {
 
 void FileStream::SetLength(int64 length) {
   if (IsClosed() == true)
-    throw ObjectClosedException(_caller);
+    throw ObjectDisposedException(_caller);
 
   if (length < 0)
     throw ArgumentOutOfRangeException(_caller);
@@ -106,7 +106,7 @@ int32 FileStream::Read(Array<byte>& buffer, int32 offset, int32 count) {
   if (offset + count > buffer.Length)
     throw ArgumentException(_caller);
   if (IsClosed())
-    throw ObjectClosedException(_caller);
+    throw ObjectDisposedException(_caller);
   if (!CanRead())
     throw NotSupportedException(_caller);
 
@@ -117,7 +117,7 @@ int32 FileStream::Read(Array<byte>& buffer, int32 offset, int32 count) {
 
 int32 FileStream::ReadByte() {
   if (IsClosed())
-    throw ObjectClosedException(_caller);
+    throw ObjectDisposedException(_caller);
   if (!CanRead())
     throw NotSupportedException(_caller);
   
@@ -141,7 +141,7 @@ void FileStream::Write(const Array<byte>& buffer, int32 offset, int32 count) {
   if (offset + count > buffer.Length)
     throw ArgumentException(_caller);
   if (IsClosed())
-    throw ObjectClosedException(_caller);
+    throw ObjectDisposedException(_caller);
   if (!CanWrite())
     throw NotSupportedException(_caller);
 

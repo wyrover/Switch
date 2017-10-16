@@ -70,14 +70,14 @@ namespace Switch {
         
         /// @brief Blocks the current thread until the current System::Threading::WaitHandle receives a signal.
         /// @return true if the current instance receives a signal. If the current instance is never signaled, System::Threading::WaitHandle.WaitOne(int32, bool) never returns.
-        /// @exception ObjectClosedException the handle is invalid
+        /// @exception ObjectDisposedException the handle is invalid
         virtual bool WaitOne() {return DoWait(Timeout::Infinite);}
         
         /// @brief Blocks the current thread until the current System::Threading::WaitHandle receives
         /// a signal, using 32-bit signed integer to measure the time interval.
         /// @param millisecondsTimeOut The number of milliseconds to wait, or System::Threading::Timeout.Infinite (-1) to wait indefinitely.
         /// @return if the current instance receives a signal. If the current instance is never signaled, System::Threading::WaitHandle.WaitOne(int32, bool) never returns.
-        /// @exception ObjectClosedException the handle is invalid
+        /// @exception ObjectDisposedException the handle is invalid
         /// @exception ArgumentException millisecondsTimeout is a negative number other than -1, which represents an infinite time-out.
         virtual bool WaitOne(int32 millisecondsTimeOut) {
           if (millisecondsTimeOut < Timeout::Infinite)
@@ -90,7 +90,7 @@ namespace Switch {
         /// @param timeOut A System.TimeSpan that represents the number of milliseconds to wait, or
         /// a System.TimeSpan that represents -1 milliseconds to wait indefinitely.
         /// @return true if the current instance receives a signal. If the current instance is never signaled, System::Threading::WaitHandle.WaitOne(System.Int32, System.Boolean) never returns.
-        /// @exception ObjectClosedException the handle is invalid
+        /// @exception ObjectDisposedException the handle is invalid
         /// @exception ArgumentException timeout is a negative number other than -1 milliseconds, which represents an infinite time-out.  -or- timeout is greater than System.Int32.MaxValue.
         virtual bool WaitOne(const TimeSpan& timeOut) {return WaitOne(as<int32>(timeOut.TotalMilliseconds()));}
         

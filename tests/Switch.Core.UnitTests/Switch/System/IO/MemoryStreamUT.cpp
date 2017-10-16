@@ -438,13 +438,13 @@ TEST(MemoryStream, ReadMsdn) {
   EXPECT_EQ(0, numBytesToRead);
   EXPECT_EQ(122, numBytesRead);
   EXPECT_TRUE(s.IsClosed());
-  EXPECT_THROW(s.ReadByte(), ObjectClosedException);
-  EXPECT_THROW(s.Read(bytes, 0, 1), ObjectClosedException);
-  EXPECT_THROW(s.Seek(0, IO::SeekOrigin::Begin), ObjectClosedException);
-  EXPECT_THROW(s.Capacity = 0, ObjectClosedException);
-  EXPECT_THROW(s.Position = 0, ObjectClosedException);
-  EXPECT_THROW(s.Write({'1', '4', '5'}, 0, 1), ObjectClosedException);
-  EXPECT_THROW(s.WriteByte(1), ObjectClosedException);
+  EXPECT_THROW(s.ReadByte(), ObjectDisposedException);
+  EXPECT_THROW(s.Read(bytes, 0, 1), ObjectDisposedException);
+  EXPECT_THROW(s.Seek(0, IO::SeekOrigin::Begin), ObjectDisposedException);
+  EXPECT_THROW(s.Capacity = 0, ObjectDisposedException);
+  EXPECT_THROW(s.Position = 0, ObjectDisposedException);
+  EXPECT_THROW(s.Write({'1', '4', '5'}, 0, 1), ObjectDisposedException);
+  EXPECT_THROW(s.WriteByte(1), ObjectDisposedException);
 }
 
 }

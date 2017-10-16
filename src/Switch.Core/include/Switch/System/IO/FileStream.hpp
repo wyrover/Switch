@@ -5,7 +5,7 @@
 #include <fstream>
 
 #include "../../Types.hpp"
-#include "../ObjectClosedException.hpp"
+#include "../ObjectDisposedException.hpp"
 #include "../String.hpp"
 #include "FileAccess.hpp"
 #include "FileMode.hpp"
@@ -102,7 +102,7 @@ namespace Switch {
         /// @brief Reads a byte from the stream and advances the position within the stream
         /// by one byte, or returns -1 if at the end of the stream.
         /// @return The unsigned byte cast to an int32, or -1 if at the end of the stream.
-        /// @exception ObjectClosedException The stream is closed.
+        /// @exception ObjectDisposedException The stream is closed.
         /// @exception NotSupportedException The stream does not support reading.
         /// @exception IO::IOException An I/O error occurs.
         int32 ReadByte() override;
@@ -116,7 +116,7 @@ namespace Switch {
         /// @exception ArgumentException The sum of offset and count is greater than the buffer length specified bufferLength.
         /// @exception ArgumentNullException buffer is null.
         /// @exception ArgumentOutOfRangeException offset or count is negative.
-        /// @exception ObjectClosedException The stream is closed.
+        /// @exception ObjectDisposedException The stream is closed.
         /// @exception NotSupportedException The stream does not support writing.
         /// @exception IO::IOException An I/O error occurs.
         int32 Read(Array<byte>& buffer, int32 offset, int32 count) override;
@@ -135,7 +135,7 @@ namespace Switch {
         /// @exception ArgumentException The sum of offset and count is greater than the buffer length specified bufferLength.
         /// @exception ArgumentNullException buffer is null.
         /// @exception ArgumentOutOfRangeException offset or count is negative.
-        /// @exception ObjectClosedException The stream is closed.
+        /// @exception ObjectDisposedException The stream is closed.
         /// @exception NotSupportedException The stream does not support writing.
         /// @exception IO::IOException An I/O error occurs.
         void Write(const Array<byte>& buffer, int32 offset, int32 count) override;

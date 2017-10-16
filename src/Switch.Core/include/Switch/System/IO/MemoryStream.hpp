@@ -4,7 +4,7 @@
 
 #include "../../Types.hpp"
 #include "../Array.hpp"
-#include "../ObjectClosedException.hpp"
+#include "../ObjectDisposedException.hpp"
 #include "IOException.hpp"
 #include "SeekOrigin.hpp"
 #include "Stream.hpp"
@@ -28,7 +28,7 @@ namespace Switch {
           if (newPosition < 0 || newPosition > static_cast<int64>(Int32::MaxValue))
             throw ArgumentOutOfRangeException(_caller);
           if (IsClosed())
-            throw ObjectClosedException(_caller);
+            throw ObjectDisposedException(_caller);
           this->data->position = static_cast<int32>(newPosition);
         }
         

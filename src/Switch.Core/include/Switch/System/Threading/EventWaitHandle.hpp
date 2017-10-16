@@ -7,7 +7,7 @@
 
 #include "../../RefPtr.hpp"
 #include "../String.hpp"
-#include "../ObjectClosedException.hpp"
+#include "../ObjectDisposedException.hpp"
 #include "AbandonedMutexException.hpp"
 #include "WaitHandle.hpp"
 #include "EventResetMode.hpp"
@@ -83,7 +83,7 @@ namespace Switch {
         /// @return true if the operation succeeds; otherwise, false.
         bool Reset() {
           if (this->guard == null)
-            throw ObjectClosedException(_caller);
+            throw ObjectDisposedException(_caller);
           std::unique_lock<std::mutex> lock(*this->guard);
           *this->event = false;
           return true;
@@ -93,7 +93,7 @@ namespace Switch {
         /// @return true if the operation succeeds; otherwise, false.
         bool Set() {
           if (this->guard == null)
-            throw ObjectClosedException(_caller);
+            throw ObjectDisposedException(_caller);
           std::unique_lock<std::mutex> lock(*this->guard);
           *this->event = true;
           this->signal->notify_all();
@@ -117,7 +117,7 @@ namespace Switch {
         
         bool Wait(int32 millisecondsTimeOut) override {
           if (this->guard == null)
-            throw ObjectClosedException(_caller);
+            throw ObjectDisposedException(_caller);
           if (millisecondsTimeOut < -1)
             throw AbandonedMutexException(_caller);
               

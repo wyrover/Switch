@@ -42,7 +42,7 @@ namespace {
     int32 Release() {return this->Release(1);}
     int32 Release(int32 releaseCount) {
       if (this->guard == null)
-        throw ObjectClosedException(_caller);
+        throw ObjectDisposedException(_caller);
       std::unique_lock<std::mutex> lock(*this->guard);
       if (*this->count + releaseCount > *this->maxCount)
         throw InvalidOperationException(_caller);
@@ -59,7 +59,7 @@ namespace {
     
     bool Wait(int32 millisecondsTimeOut) override {
       if (this->guard == null)
-        throw ObjectClosedException(_caller);
+        throw ObjectDisposedException(_caller);
       if (millisecondsTimeOut < -1)
         throw AbandonedMutexException(_caller);
       

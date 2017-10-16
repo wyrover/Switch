@@ -5,7 +5,7 @@
 #include <Switch/Property.hpp>
 #include <Switch/Types.hpp>
 #include <Switch/System/Object.hpp>
-#include <Switch/System/ObjectClosedException.hpp>
+#include <Switch/System/ObjectDisposedException.hpp>
 #include <Switch/System/String.hpp>
 #include <Switch/System/IO/StreamReader.hpp>
 #include "ProcessStartInfo.hpp"

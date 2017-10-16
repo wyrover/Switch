@@ -217,12 +217,10 @@ set(INCLUDE_FILES
   include/Switch/System/NullPointerException.hpp
   include/Switch/System/NullReferenceException.hpp
   include/Switch/System/Nullable.hpp
-  include/Switch/System/NumberRepresentationBase.hpp
   include/Switch/System/NumericalFormat.hpp
   include/Switch/System/NumericalParsing.hpp
   include/Switch/System/FormatProvider.hpp
   include/Switch/System/Object.hpp
-  include/Switch/System/ObjectClosedException.hpp
   include/Switch/System/ObjectDisposedException.hpp
   include/Switch/System/OperatingSystem.hpp
   include/Switch/System/OperationCanceledException.hpp

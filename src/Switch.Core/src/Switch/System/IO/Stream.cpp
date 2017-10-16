@@ -1,6 +1,6 @@
 #include "../../../../include/Switch/System/IO/Stream.hpp"
 #include "../../../../include/Switch/System/Array.hpp"
-#include "../../../../include/Switch/System/ObjectClosedException.hpp"
+#include "../../../../include/Switch/System/ObjectDisposedException.hpp"
 
 using namespace System;
 using namespace System::IO;
@@ -13,7 +13,7 @@ _property<NullStream&, _readonly> Stream::Null {
 };
 
 int32 Stream::ReadByte() {
-  if (this->closed) throw ObjectClosedException(_caller);
+  if (this->closed) throw ObjectDisposedException(_caller);
   static Array<byte> b(1);
   if (Read(b, 0, 1) == 1)
     return int32(b[0]);
@@ -26,7 +26,7 @@ Stream& Stream::Synchronised(Stream& stream) {
 }
 
 void Stream::WriteByte(byte value) {
-  if (this->closed) throw ObjectClosedException(_caller);
+  if (this->closed) throw ObjectDisposedException(_caller);
   Array<byte> b = {value};
   Write(b, 0, 1);
 }

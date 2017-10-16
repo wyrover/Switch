@@ -1,6 +1,5 @@
 #include "../../../include/Switch/System/NumericalParsing.hpp"
 #include "../../../include/Switch/System/Convert.hpp"
-#include "../../../include/Switch/System/NumberRepresentationBase.hpp"
 #include "../../../include/Switch/System/SystemException.hpp"
 
 using namespace System;
@@ -60,7 +59,7 @@ namespace Switch {
     
     static void IgnoreValidPrefix(string::const_reverse_iterator& it, string::const_reverse_iterator end, char32& c, int32 base) {
       c = *it;
-      if (base == (int32)NumberRepresentationBase::Hexadecimal) {
+      if (base == 16) {
         if (c == 'x' || c == 'X') {
           ++it;
           if (it == end) throw FormatException(_caller);
@@ -69,7 +68,7 @@ namespace Switch {
           it++;
         }
       }
-      if (base == (int32)NumberRepresentationBase::Binary) {
+      if (base == 2) {
         if (c == 'b' || c == 'B') {
           if (it == end)
             throw FormatException(_caller);
@@ -84,7 +83,7 @@ namespace Switch {
     static void IgnoreValidSuffix(string::const_reverse_iterator& it, string::const_reverse_iterator end, char32& c, int32 base) {
       c = *it;
       if (c == 'b' || c == 'B') {
-        if (base == (int32)NumberRepresentationBase::Binary)
+        if (base == 2)
           ++it;
       }
     }

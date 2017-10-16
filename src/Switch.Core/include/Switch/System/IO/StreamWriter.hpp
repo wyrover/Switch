@@ -96,7 +96,7 @@ namespace Switch {
         };
 
         /// @brief Closes the current StreamWriter object and the underlying stream. (Overrides TextWriter::Close().).
-        /// @exception ObjectClosedException The stream is closed.
+        /// @exception ObjectDisposedException The stream is closed.
         /// @exception IO::IOException an error occurred while the file is being closed -or- An I/O error occurs.
         void Close() override;
 

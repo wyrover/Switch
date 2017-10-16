@@ -81,7 +81,7 @@ namespace SwitchUnitTests {
     void Close() {
       Semaphore semaphore(1, 1);
       semaphore.Close();
-      Assert::Throws<ObjectClosedException>(_delegate {semaphore.WaitOne();}, _caller);
+      Assert::Throws<ObjectDisposedException>(_delegate {semaphore.WaitOne();}, _caller);
     }
     
     void OpenExistingWithSameName() {

@@ -116,13 +116,13 @@ namespace Switch {
 
         /// @brief Reads the next character from the input stream and advances the character position by one character.
         /// @return The next character from the input stream, or -1 if no more characters are available.
-        /// @exception ObjectClosedException The stream is closed.
+        /// @exception ObjectDisposedException The stream is closed.
         /// @exception IO::IOException An I/O error occurs.
         int32 Read() override;
 
         /// @brief Reads a line of characters from the current stream and returns the data as a System::String.
         /// @return The next line from the input stream, or an empty System::String if the end of the input stream is reached.
-        /// @exception ObjectClosedException The stream is closed.
+        /// @exception ObjectDisposedException The stream is closed.
         /// @exception IO::IOException An I/O error occurs.
         /// @par Examples
         /// The following code example reads lines from a file until the end of the file is reached.
@@ -131,7 +131,7 @@ namespace Switch {
 
         /// @brief Reads all characters from the current position to the end of the TextReader and returns them as one System::String.
         /// @return A System::String containing all characters from the current position to the end of the TextReader.
-        /// @exception ObjectClosedException: The stream is closed.
+        /// @exception ObjectDisposedException: The stream is closed.
         /// @exception IO::IOException An I/O error occurs.
         /// @par Examples
         /// The following code example reads all the way to the end of a file in one operation.

@@ -35,7 +35,7 @@
 #include "NotImplementedException.hpp"
 #include "NullPointerException.hpp"
 #include "NullReferenceException.hpp"
-#include "ObjectClosedException.hpp"
+#include "ObjectDisposedException.hpp"
 #include "ObjectDisposedException.hpp"
 #include "OperationCanceledException.hpp"
 #include "PlatformNotSupportedException.hpp"

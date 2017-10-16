@@ -1,5 +1,5 @@
 #include <Switch/System/IO/StringReader.hpp>
-#include <Switch/System/ObjectClosedException.hpp>
+#include <Switch/System/ObjectDisposedException.hpp>
 #include <Switch/TUnit/Assert.hpp>
 #include <Switch/TUnit/TestFixture.hpp>
 
@@ -19,10 +19,10 @@ namespace {
     EXPECT_EQ('a', reader.Peek());
   }
 
-  TEST(StringReader, Peek___Throws_ObjectClosedException_When_Closed) {
+  TEST(StringReader, Peek___Throws_ObjectDisposedException_When_Closed) {
     StringReader reader("abc");
     reader.Close();
-    EXPECT_THROW(reader.Peek(), ObjectClosedException);
+    EXPECT_THROW(reader.Peek(), ObjectDisposedException);
   }
 
   TEST(StringReader, Read___Fails_On_Empty) {
@@ -35,10 +35,10 @@ namespace {
     EXPECT_EQ('a', reader.Read());
   }
 
-  TEST(StringReader, Read___Throws_ObjectClosedException_When_Closed) {
+  TEST(StringReader, Read___Throws_ObjectDisposedException_When_Closed) {
     StringReader reader("abc");
     reader.Close();
-    EXPECT_THROW(reader.Read(), ObjectClosedException);
+    EXPECT_THROW(reader.Read(), ObjectDisposedException);
   }
 
   TEST(StringReader, ReadLine___Returns_Empty_On_Empty) {
@@ -54,10 +54,10 @@ namespace {
     EXPECT_EQ(-1, reader.Peek());
   }
 
-  TEST(StringReader, ReadLine___Throws_ObjectClosedException_When_Closed) {
+  TEST(StringReader, ReadLine___Throws_ObjectDisposedException_When_Closed) {
     StringReader reader("switch\r\nthis is a second line\r\n");
     reader.Close();
-    EXPECT_THROW(reader.ReadLine(), ObjectClosedException);
+    EXPECT_THROW(reader.ReadLine(), ObjectDisposedException);
   }
 
   TEST(StringReader, ReadToEnd___Returns_Empty_On_Empty) {
@@ -65,10 +65,10 @@ namespace {
     EXPECT_EQ("", reader.ReadToEnd());
   }
 
-  TEST(StringReader, ReadToEnd___Throws_ObjectClosedException_When_Closed) {
+  TEST(StringReader, ReadToEnd___Throws_ObjectDisposedException_When_Closed) {
     StringReader reader("switch\r\nthis is a second line\r\n");
     reader.Close();
-    EXPECT_THROW(reader.ReadToEnd(), ObjectClosedException);
+    EXPECT_THROW(reader.ReadToEnd(), ObjectDisposedException);
   }
 
   TEST(StringReader, ReadToEnd) {

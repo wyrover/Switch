@@ -26,7 +26,7 @@
 #include <Switch/System/NotImplementedException.hpp>
 #include <Switch/System/NullPointerException.hpp>
 #include <Switch/System/NullReferenceException.hpp>
-#include <Switch/System/ObjectClosedException.hpp>
+#include <Switch/System/ObjectDisposedException.hpp>
 #include <Switch/System/OperationCanceledException.hpp>
 #include <Switch/System/PlatformNotSupportedException.hpp>
 #include <Switch/System/StackOverflowException.hpp>
@@ -205,7 +205,7 @@ namespace {
     try { throw NotSupportedException(_caller); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "Specified method is not supported."); }
     try { throw NullPointerException(_caller); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "Object pointer not set to an instance of an object."); }
     try { throw NullReferenceException(_caller); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "Object reference not set to an instance of an object."); }
-    try { throw ObjectClosedException(_caller); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "Cannot access a closed object."); }
+    try { throw ObjectDisposedException(_caller); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "Cannot access a disposed object."); }
     try { throw OperationCanceledException(_caller); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "The operation was canceled."); }
     try { throw OverflowException(_caller); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "Arithmetic operation resulted in an overflow."); }
     try { throw PlatformNotSupportedException(_caller); } catch (const Exception& e) { EXPECT_EQ(e.Message(), "Operation is not supported on this platform."); }

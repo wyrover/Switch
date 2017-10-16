@@ -30,7 +30,7 @@ namespace Switch {
           /// @brief Creates a new instance of the NetworkStream class for the specified Socket.
           /// @param socket The Socket that the NetworkStream will use to send and receive data.
           /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
+          /// @exception ObjectDisposedException The Socket has been closed.
           /// @remarks The NetworkStream is created with read/write access to the specified Socket. The NetworkStream does not own the underlying Socket, so calling the Close method does not close the Socket.
           NetworkStream(const Socket& socket) : NetworkStream(socket, System::IO::FileAccess::ReadWrite) {}
 
@@ -38,7 +38,7 @@ namespace Switch {
           /// @param socket The Socket that the NetworkStream will use to send and receive data.
           /// @param ownsSocket Set to true to indicate that the NetworkStream will take ownership of the Socket; otherwise, false.
           /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
+          /// @exception ObjectDisposedException The Socket has been closed.
           /// @remarks The NetworkStream is created with read/write access to the specified Socket. If the value of ownsSocket parameter is true, the NetworkStream takes ownership of the underlying Socket, and calling the Close method also closes the underlying Socket.
           NetworkStream(const Socket& socket, bool ownsSocket) : NetworkStream(socket, System::IO::FileAccess::ReadWrite) {this->data->ownsSocket = ownsSocket;}
 
@@ -46,7 +46,7 @@ namespace Switch {
           /// @param socket The Socket that the NetworkStream will use to send and receive data.
           /// @param access A bitwise combination of the FileAccess values that specify the type of access given to the NetworkStream over the provided Socket.
           /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
+          /// @exception ObjectDisposedException The Socket has been closed.
           /// @remarks The NetworkStream is created with the specified access to the specified Socket. With this constructor, the NetworkStream does not own the underlying Socket, so calling the Close method does not close the underlying Socket.
           /// @remarks The access parameter sets the CanRead and CanWrite properties of the NetworkStream. If you specify Write, then the NetworkStream allows calls to the Write method. If you specify Read, then the NetworkStream allows calls to the Read method. If you specify ReadWrite, both method calls are allowed.
 		      NetworkStream(const Socket& socket, System::IO::FileAccess access);
@@ -56,7 +56,7 @@ namespace Switch {
           /// @param access A bitwise combination of the FileAccess values that specify the type of access given to the NetworkStream over the provided Socket.
           /// @param ownsSocket  Set to true to indicate that the NetworkStream will take ownership of the Socket; otherwise, false.
           /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
+          /// @exception ObjectDisposedException The Socket has been closed.
           /// @remarks The NetworkStream is created with read/write access to the specified Socket. If the value of the ownsSocket parameter is true, the NetworkStream takes ownership of the underlying Socket, and calling the Close method also closes the underlying Socket.
           /// @remarks The access parameter sets the CanRead and CanWrite properties of the NetworkStream. If you specify Write, then the NetworkStream allows calls to the Write method. If you specify Read, then the NetworkStream allows calls to the Read method. If you specify ReadWrite, both method calls are allowed.
           NetworkStream(const Socket& socket,System::IO::FileAccess access, bool ownsSocket) : NetworkStream(socket, System::IO::FileAccess::ReadWrite) {this->data->ownsSocket = ownsSocket;}

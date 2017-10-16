@@ -1,7 +1,7 @@
 #include "../../../../../include/Switch/System/Net/Sockets/NetworkStream.hpp"
 
 #include <Switch/System/ArgumentNullException.hpp>
-#include <Switch/System/ObjectClosedException.hpp>
+#include <Switch/System/ObjectDisposedException.hpp>
 #include <Switch/System/IO/IOException.hpp>
 #include "../../../../../include/Switch/System/Net/Sockets/SocketException.hpp"
 

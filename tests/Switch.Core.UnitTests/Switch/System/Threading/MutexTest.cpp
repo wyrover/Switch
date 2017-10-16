@@ -84,7 +84,7 @@ namespace SwitchUnitTests {
     void Close() {
       Mutex mutex;
       mutex.Close();
-      Assert::Throws<ObjectClosedException>(_delegate {
+      Assert::Throws<ObjectDisposedException>(_delegate {
         mutex.WaitOne();
       }, _caller);
     }

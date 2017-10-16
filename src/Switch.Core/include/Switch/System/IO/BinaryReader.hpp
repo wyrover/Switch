@@ -73,7 +73,7 @@ namespace Switch {
         /// position by one character.
         /// @return The next character from the input stream, or -1 if no more characters are
         /// @return available.
-        /// @exception ObjectClosedException The stream is closed.
+        /// @exception ObjectDisposedException The stream is closed.
         /// @exception IO::IOException An I/O error occurs.
         virtual int32 Read() {return this->stream->ReadByte();}
 
@@ -86,14 +86,14 @@ namespace Switch {
         /// @param count The maximum number of characters to read.
         /// @return The number of bytes read into buffer. This might be less than the number of bytes requested if that many bytes are not available, or it might be zero if the end of the stream is reached.
         /// @exception ArgumentNullException buffer is null.
-        /// @exception ObjectClosedException The stream is closed.
+        /// @exception ObjectDisposedException The stream is closed.
         /// @exception IO::IOException An I/O error occurs.
         virtual int32 Read(Array<byte>& buffer, int32 index, int32 count) {return this->stream->Read(buffer, index, count);}
 
         /// @brief Reads a bool value from the current stream and advances the current position of the stream by one byte.
         /// @return true if the byte is nonzero; otherwise, false.
         /// @exception EndOfStreamException The end of the stream is reached.
-        /// @exception ObjectClosedException The stream is closed.
+        /// @exception ObjectDisposedException The stream is closed.
         /// @exception IO::IOException An I/O error occurs.
         virtual bool ReadBoolean(){return BitConverter::ToBoolean(ReadBytes(sizeof(bool)), 0);}
 
@@ -101,14 +101,14 @@ namespace Switch {
         /// @brief Reads the next byte from the current stream and advances the current position of the stream by one byte.
         /// @return The next byte read from the current stream.
         /// @exception EndOfStreamException The end of the stream is reached.
-        /// @exception ObjectClosedException The stream is closed.
+        /// @exception ObjectDisposedException The stream is closed.
         /// @exception IO::IOException An I/O error occurs.
         virtual byte ReadByte() {return ReadBytes(1)[0];}
 
         /// @brief Reads the specified number of bytes from the current stream into a byte array and advances the current position by that number of bytes.
         /// @param count The number of bytes to read.
         /// @return A byte array containing data read from the underlying stream. This might be less than the number of bytes requested if the end of the stream is reached.
-        /// @exception ObjectClosedException The stream is closed.
+        /// @exception ObjectDisposedException The stream is closed.
         /// @exception IO::IOException An I/O error occurs.
         virtual Array<byte> ReadBytes(int32 count) {
           Array<byte> values(count);
@@ -120,14 +120,14 @@ namespace Switch {
         /// @brief Reads the next char from the current stream and advances the current position of the stream by one byte.
         /// @return The next byte read from the current stream.
         /// @exception EndOfStreamException The end of the stream is reached.
-        /// @exception ObjectClosedException The stream is closed.
+        /// @exception ObjectDisposedException The stream is closed.
         /// @exception IO::IOException An I/O error occurs.
         virtual char32 ReadChar() {return BitConverter::ToChar(ReadBytes(sizeof(char32)), 0);}
 
         /// @brief Reads the specified number of char from the current stream into a char array and advances the current position by that number of char.
         /// @param count The number of bytes to read.
         /// @return A byte array containing data read from the underlying stream. This might be less than the number of bytes requested if the end of the stream is reached.
-        /// @exception ObjectClosedException The stream is closed.
+        /// @exception ObjectDisposedException The stream is closed.
         /// @exception IO::IOException An I/O error occurs.
         virtual Array<char32> ReadChars(int32 count) {
           Array<char32> values(count);
@@ -139,49 +139,49 @@ namespace Switch {
         /// @brief Reads an 8-byte floating point value from the current stream and advances the current position of the stream by eight bytes.
         /// @return An 8-byte floating point value read from the current stream.
         /// @exception EndOfStreamException The end of the stream is reached.
-        /// @exception ObjectClosedException The stream is closed.
+        /// @exception ObjectDisposedException The stream is closed.
         /// @exception IO::IOException An I/O error occurs.
         virtual double ReadDouble() {return BitConverter::ToDouble(ReadBytes(sizeof(double)), 0);}
 
         /// @brief Reads a 2-byte signed integer from the current stream and advances the current position of the stream by two bytes.
         /// @return A 2-byte signed integer read from the current stream.
         /// @exception EndOfStreamException The end of the stream is reached.
-        /// @exception ObjectClosedException The stream is closed.
+        /// @exception ObjectDisposedException The stream is closed.
         /// @exception IO::IOException An I/O error occurs.
         virtual int16 ReadInt16() {return BitConverter::ToInt16(ReadBytes(sizeof(int16)), 0);}
 
         /// @brief Reads a 4-byte signed integer from the current stream and advances the current position of the stream by four bytes.
         /// @return A 4-byte signed integer read from the current stream.
         /// @exception EndOfStreamException The end of the stream is reached.
-        /// @exception ObjectClosedException The stream is closed.
+        /// @exception ObjectDisposedException The stream is closed.
         /// @exception IO::IOException An I/O error occurs.
         virtual int32 ReadInt32() {return BitConverter::ToInt32(ReadBytes(sizeof(int32)), 0);}
 
         /// @brief Reads a 8-byte signed integer from the current stream and advances the current position of the stream by height bytes.
         /// @return A 8-byte signed integer read from the current stream.
         /// @exception EndOfStreamException The end of the stream is reached.
-        /// @exception ObjectClosedException The stream is closed.
+        /// @exception ObjectDisposedException The stream is closed.
         /// @exception IO::IOException An I/O error occurs.
         virtual int64 ReadInt64() {return BitConverter::ToInt64(ReadBytes(sizeof(int64)), 0);}
 
         /// @brief Reads the next signed byte from the current stream and advances the current position of the stream by one byte.
         /// @return The next signed byte read from the current stream.
         /// @exception EndOfStreamException The end of the stream is reached.
-        /// @exception ObjectClosedException The stream is closed.
+        /// @exception ObjectDisposedException The stream is closed.
         /// @exception IO::IOException An I/O error occurs.
         virtual sbyte ReadSByte() {return (sbyte)ReadBytes(1)[0];}
 
         /// @brief Reads an 4-byte floating point value from the current stream and advances the current position of the stream by four bytes.
         /// @return An 4-byte floating point value read from the current stream.
         /// @exception EndOfStreamException The end of the stream is reached.
-        /// @exception ObjectClosedException The stream is closed.
+        /// @exception ObjectDisposedException The stream is closed.
         /// @exception IO::IOException An I/O error occurs.
         virtual float ReadSingle() {return BitConverter::ToSingle(ReadBytes(sizeof(float)), 0);}
 
         /// @brief Reads a String from the current stream. The String is prefixed with the length, encoded as an integer seven bits at a time.
         /// @return The String being read.
         /// @exception EndOfStreamException The end of the stream is reached.
-        /// @exception ObjectClosedException The stream is closed.
+        /// @exception ObjectDisposedException The stream is closed.
         /// @exception IO::IOException An I/O error occurs.
         virtual String ReadString(){
           int32 length = BitConverter::ToInt32(ReadBytes(sizeof(int32)), 0);
@@ -191,21 +191,21 @@ namespace Switch {
         /// @brief Reads a 2-byte unsigned integer from the current stream and advances the current position of the stream by two bytes.
         /// @return A 2-byte unsigned integer read from the current stream.
         /// @exception EndOfStreamException The end of the stream is reached.
-        /// @exception ObjectClosedException The stream is closed.
+        /// @exception ObjectDisposedException The stream is closed.
         /// @exception IO::IOException An I/O error occurs.
         virtual uint16 ReadUInt16() {return BitConverter::ToUInt16(ReadBytes(sizeof(uint16)), 0);;}
 
         /// @brief Reads a 4-byte unsigned integer from the current stream and advances the current position of the stream by four bytes.
         /// @return A 4-byte unsigned integer read from the current stream.
         /// @exception EndOfStreamException The end of the stream is reached.
-        /// @exception ObjectClosedException The stream is closed.
+        /// @exception ObjectDisposedException The stream is closed.
         /// @exception IO::IOException An I/O error occurs.
         virtual uint32 ReadUInt32() {return BitConverter::ToUInt32(ReadBytes(sizeof(uint32)), 0);}
 
         /// @brief Reads a 8-byte unsigned integer from the current stream and advances the current position of the stream by height bytes.
         /// @return A 8-byte unsigned integer read from the current stream.
         /// @exception EndOfStreamException The end of the stream is reached.
-        /// @exception ObjectClosedException The stream is closed.
+        /// @exception ObjectDisposedException The stream is closed.
         /// @exception IO::IOException An I/O error occurs.
         virtual uint64 ReadUInt64() {return BitConverter::ToUInt64(ReadBytes(sizeof(uint64)), 0);}
 

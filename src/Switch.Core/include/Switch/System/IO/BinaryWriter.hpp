@@ -53,7 +53,7 @@ namespace Switch {
         };
 
         /// @brief Closes the current BinaryWriter object and the underlying stream.
-        /// @exception ObjectClosedException The stream is closed.
+        /// @exception ObjectDisposedException The stream is closed.
         /// @exception IO::IOException an error occurred while the file is being closed -or- An I/O error occurs.
         virtual void Close() {this->stream->Close();}
 

@@ -74,7 +74,7 @@ namespace Switch {
           /// @brief Gets the amount of data that has been received from the network and is available to be read.
           /// @return int32 The number of bytes of data received from the network and available to be read.
           /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
+          /// @exception ObjectDisposedException The Socket has been closed.
           /// @remarks Available is a way to determine whether data is queued for reading. If data is available, call Read to get the data.
           /// @remarks The available data is the total amount of data queued in the network buffer for reading. If no data is queued in the network buffer, Available returns 0.
           /// @remarks If the remote host shuts down or closes the connection, Available may throw a SocketException. If you receive a SocketException, use SocketException.ErrorCode to obtain the specific error code.
@@ -108,7 +108,7 @@ namespace Switch {
           /// @brief Gets or sets a bool value that specifies whether the TcpClient allows only one client to use a port.
           /// @return bool true if the TcpClient allows only one client to use a specific port; otherwise, false.
           /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
+          /// @exception ObjectDisposedException The Socket has been closed.
           /// @remarks By default, multiple clients can use a specific port; however, only one of the clients can perform operations on the network traffic sent to the port.
           /// @remarks You can use the ExclusiveAddressUse property to prevent multiple clients from using a specific port.
           /// @remarks This property must be set before the underlying socket is bound to a client port. If you call Connect, BeginConnect, TcpClient(IPEndPoint),
@@ -121,7 +121,7 @@ namespace Switch {
           /// @brief Gets a value that specifies whether the Socket will delay closing a socket in an attempt to send all pending data.
           /// @return A LingerOption that specifies how to linger while closing a socket.
           /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
+          /// @exception ObjectDisposedException The Socket has been closed.
           /// @remarks The LingerState property changes the way Close method behaves. This property when set modifies the conditions under which the connection can be reset by Winsock. Connection resets can still occur based on the IP protocol behavior.
           /// @remarks This property controls the length of time that the TCP connection will remain open after a call to Close when data remains to be sent. When you call the Write method, data is placed in the outgoing network buffer. This property can be used to ensure that this data is sent to the remote host before the Close method drops the connection.
           /// @remarks To enable lingering, create a LingerOption instance containing the desired values, and set the LingerState property to this instance.
@@ -143,7 +143,7 @@ namespace Switch {
           /// @brief Gets or sets a bool value that specifies whether the stream Socket is using the Nagle algorithm.
           /// @return bool false if the Socket uses the Nagle algorithm; otherwise, true. The default is false.
           /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
+          /// @exception ObjectDisposedException The Socket has been closed.
           /// @remarks When noDelay is false, a TcpClient does not send a packet over the network until it has collected a significant amount of outgoing data.
           /// @remarks Because of the amount of overhead in a TCP segment, sending small amounts of data is inefficient. However, situations do exist where you need
           /// @remarks to send very small amounts of data or expect immediate responses from each packet you send. Your decision should weigh the relative importance of
@@ -157,7 +157,7 @@ namespace Switch {
           /// @brief Gets or sets the size of the receive buffer.
           /// @return An int32 that contains the size, in bytes, of the receive buffer. The default is 8192.
           /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
-          /// @exception ObjectClosedException The Socket has been closed.
+          /// @exception ObjectDisposedException The Socket has been closed.
           /// @remarks The ReceiveBufferSize property gets or sets the number of bytes that you are expecting to store in the receive buffer for each read operation. This property actually manipulates the network buffer space allocated for receiving incoming data.
           /// @remarks Your network buffer should be at least as large as your application buffer to ensure that the desired data will be available when you call the NetworkStream.Read method. Use the ReceiveBufferSize property to set this size. If your application will be receiving bulk data, you should pass the Read method a very large application buffer.
           /// @remarks If the network buffer is smaller than the amount of data you request in the Read method, you will not be able to retrieve the desired amount of data in one read operation. This incurs the overhead of additional calls to the Read method.
@@ -205,7 +205,7 @@ namespace Switch {
           /// @param endPoint The IPEndPoint to which you intend to connect.
           /// @exception ArgumentNullException The localEP parameter is null.
           /// @exception SocketException An error occurred when accessing the socket.
-          /// @exception ObjectClosedException The Socket has been closed.
+          /// @exception ObjectDisposedException The Socket has been closed.
           /// @remarks Call this method to establish a synchronous remote host connection to the specified IPEndPoint. Before you call Connect you must create an instance of
           /// @remarks the IPEndPoint class using an IP address and a port number. Use this IPEndPoint as the remoteEP parameter. The Connect method will block until it either
           /// @remarks connects or fails. After connecting with the remote host, use the GetStream method to obtain the underlying NetworkStream. Use this NetworkStream to send and receive data.
@@ -216,7 +216,7 @@ namespace Switch {
           /// @param port The port number to which you intend send data
           /// @exception ArgumentOutOfRangeException The port parameter is not between MinPort and MaxPort.
           /// @exception SocketException An error occurred when accessing the socket.
-          /// @exception ObjectClosedException The Socket has been closed.
+          /// @exception ObjectDisposedException The Socket has been closed.
           /// @remarks Call this method to establish a synchronous remote host connection to the specified IPAddress and port number.
           /// @remarks The Connect method will block until it either connects or fails.
           /// @remarks After connecting with the remote host, use the GetStream method to obtain the underlying NetworkStream.
@@ -228,7 +228,7 @@ namespace Switch {
           /// @param port The port number of the remote host to which you intend to connect.
           /// @exception ArgumentOutOfRangeException The port parameter is not between MinPort and MaxPort.
           /// @exception SocketException An error occurred when accessing the socket.
-          /// @exception ObjectClosedException The Socket has been closed.
+          /// @exception ObjectDisposedException The Socket has been closed.
           /// @remarks Call this method to establish a synchronous remote host connection to the specified host name and port number. The Connect method will block until it either connects or fails.
           /// @remarks After connecting with the remote host, use the GetStream method to obtain the underlying NetworkStream.
           /// @remarks Use this NetworkStream to send and receive data.

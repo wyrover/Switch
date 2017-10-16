@@ -1,7 +1,7 @@
 #include "../../../../include/Switch/System/IO/StreamReader.hpp"
 #include "../../../../include/Switch/System/Array.hpp"
 #include "../../../../include/Switch/System/Convert.hpp"
-#include "../../../../include/Switch/System/ObjectClosedException.hpp"
+#include "../../../../include/Switch/System/ObjectDisposedException.hpp"
 #include "../../../../include/Switch/System/IO/FileStream.hpp"
 #include "../../../../include/Switch/System/Text/StringBuilder.hpp"
 

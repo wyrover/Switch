@@ -3,7 +3,7 @@
 #include <Switch/System/Buffer.hpp>
 #include <Switch/System/Convert.hpp>
 #include <Switch/System/Math.hpp>
-#include <Switch/System/ObjectClosedException.hpp>
+#include <Switch/System/ObjectDisposedException.hpp>
 #include <Switch/System/TimeoutException.hpp>
 #include <Switch/System/IO/IOException.hpp>
 #include <Switch/System/Threading/TimeOut.hpp>
@@ -181,7 +181,7 @@ void WebRequest::WebRequestStream::Write(const Array<byte>& buffer, int32 offset
   if (offset < 0)
     throw ArgumentOutOfRangeException(_caller);
   if (IsClosed())
-    throw ObjectClosedException(_caller);
+    throw ObjectDisposedException(_caller);
   if (!CanWrite())
     throw NotSupportedException(_caller);
 

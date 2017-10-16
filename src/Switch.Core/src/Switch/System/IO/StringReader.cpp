@@ -1,6 +1,6 @@
 #include "../../../../include/Switch/System/IO/StringReader.hpp"
 #include "../../../../include/Switch/System/Array.hpp"
-#include "../../../../include/Switch/System/ObjectClosedException.hpp"
+#include "../../../../include/Switch/System/ObjectDisposedException.hpp"
 #include "../../../../include/Switch/System/IO/IOException.hpp"
 
 using namespace System;
@@ -31,7 +31,7 @@ void StringReader::Close() {
 
 int32 StringReader::Peek() const {
   if (this->closed)
-    throw ObjectClosedException(_caller);
+    throw ObjectDisposedException(_caller);
   
   if (this->finished)
     return -1;
@@ -61,7 +61,7 @@ string StringReader::ReadLine() {
 
 string StringReader::ReadToEnd() {
   if (this->closed)
-    throw ObjectClosedException(_caller);
+    throw ObjectDisposedException(_caller);
   this->finished = true;
   return this->input.Substring(this->position);
 }

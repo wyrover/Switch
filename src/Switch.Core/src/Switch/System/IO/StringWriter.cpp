@@ -1,4 +1,4 @@
-#include "../../../../include/Switch/System/ObjectClosedException.hpp"
+#include "../../../../include/Switch/System/ObjectDisposedException.hpp"
 #include "../../../../include/Switch/System/IO/StringWriter.hpp"
 #include "../../../../include/Switch/System/IO/File.hpp"
 #include "../../../../include/Switch/System/IO/FileStream.hpp"
@@ -31,7 +31,7 @@ void StringWriter::Close() {
 
 void StringWriter::Write(const String& value) {
   if (this->data->close)
-    throw ObjectClosedException(_caller);
+    throw ObjectDisposedException(_caller);
   this->data->str += value;
   
 }

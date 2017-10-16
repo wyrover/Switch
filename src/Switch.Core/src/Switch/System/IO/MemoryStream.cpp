@@ -18,7 +18,7 @@ MemoryStream::MemoryStream(Array<byte>& buffer, bool writable) {
 }
 
 int64 MemoryStream::GetLength() const {
-  if (IsClosed()) throw ObjectClosedException(_caller);
+  if (IsClosed()) throw ObjectDisposedException(_caller);
   if (IsDynamic()) return this->data->dynamicBuffer.Count;
   return this->data->staticBuffer->Length;
 }
@@ -42,7 +42,7 @@ void MemoryStream::SetLength(int64 value) {
 }
 
 int32 MemoryStream::GetCapacity() const {
-  if (IsClosed()) throw ObjectClosedException(_caller);
+  if (IsClosed()) throw ObjectDisposedException(_caller);
   if (IsDynamic())
     return this->data->dynamicBuffer.Capacity;
   return this->data->staticBufferCapacity;
@@ -50,7 +50,7 @@ int32 MemoryStream::GetCapacity() const {
 
 void MemoryStream::SetCapacity(int32 newCapacity) {
   if (newCapacity < Length()) throw ArgumentOutOfRangeException(_caller);
-  if (IsClosed()) throw ObjectClosedException(_caller);
+  if (IsClosed()) throw ObjectDisposedException(_caller);
   if (!IsDynamic()) throw NotSupportedException(_caller);
   this->data->dynamicBuffer.Capacity = newCapacity;
 }
@@ -68,7 +68,7 @@ int32 MemoryStream::Read(Array<byte>& buffer, int32 offset, int32 count) {
   if (buffer.Length - offset < count)
     throw ArgumentException(_caller);
   if (IsClosed())
-    throw ObjectClosedException(_caller);
+    throw ObjectDisposedException(_caller);
   
   int32 nbRead = Convert::ToInt32(Length()) - this->data->position;
   if (count < nbRead) nbRead = count;
@@ -78,13 +78,13 @@ int32 MemoryStream::Read(Array<byte>& buffer, int32 offset, int32 count) {
 }
 
 int32 MemoryStream::ReadByte() {
-  if (IsClosed()) throw ObjectClosedException(_caller);
+  if (IsClosed()) throw ObjectDisposedException(_caller);
   if (this->data->position >= Length()) return -1;
   return static_cast<int32>(AbstractReadByteUnChecked());
 }
 
 int64 MemoryStream::Seek(int64 offset, SeekOrigin origin) {
-  if (IsClosed()) throw ObjectClosedException(_caller);
+  if (IsClosed()) throw ObjectDisposedException(_caller);
   int64 newPosition = 0;
   bool invalidSeekOrigin = false; /* used in order to be able to have the same priorities of thrown exceptions (cf. .Net) */
   if (origin == SeekOrigin::Begin) {
@@ -113,7 +113,7 @@ Array<byte> MemoryStream::ToArray() const {
 
 void MemoryStream::Write(const Array<byte>& buffer, int32 offset, int32 count) {
   if (IsClosed())
-    throw ObjectClosedException(_caller);
+    throw ObjectDisposedException(_caller);
   if (!CanWrite())
     throw NotSupportedException(_caller);
   if (!IsDynamic() && (this->data->position + count > this->data->staticBufferCapacity))
@@ -130,7 +130,7 @@ void MemoryStream::Write(const Array<byte>& buffer, int32 offset, int32 count) {
 }
 
 void MemoryStream::WriteByte(byte value) {
-  if (IsClosed()) throw ObjectClosedException(_caller);
+  if (IsClosed()) throw ObjectDisposedException(_caller);
   if (!CanWrite()) throw NotSupportedException(_caller);
   if (!IsDynamic() && (this->data->position + 1 > this->data->staticBufferCapacity)) throw NotSupportedException(_caller);
   AbstractWriteByteUnChecked(value);

@@ -31,7 +31,7 @@ namespace {
       if (offset + count > buffer.Length)
         throw ArgumentException(_caller);
       if (IsClosed())
-        throw ObjectClosedException(_caller);
+        throw ObjectDisposedException(_caller);
       if (feof(this->stream))
         return -1;
       return (int32)fread((char*)&buffer.Data[offset], sizeof(char), count, this->stream);

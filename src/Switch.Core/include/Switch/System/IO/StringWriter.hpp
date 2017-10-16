@@ -30,7 +30,7 @@ namespace Switch {
         /// @endcond
         
         /// @brief Closes the current StringWriter object and the underlying StringBuilder. (Overrides TextWriter::Close().).
-        /// @exception ObjectClosedException The StringBuilder is closed.
+        /// @exception ObjectDisposedException The StringBuilder is closed.
         /// @exception IO::IOException an error occurred while the file is being closed -or- An I/O error occurs.
         virtual void Close() override;
         
