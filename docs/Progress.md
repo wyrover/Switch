@@ -389,6 +389,50 @@
 | StackFrame                                                                             | class       | ![Progress](Pictures/Progress100.png) |
 | StackTrace                                                                             | class       | ![Progress](Pictures/Progress100.png) |
 
+### System::Globalization
+
+### System::IO
+
+| class                                                                                  | Type        | Progression                           |
+|----------------------------------------------------------------------------------------|-------------|---------------------------------------|
+| BinaryReader                                                                           | class       | ![Progress](Pictures/Progress100.png) |
+| BinaryReader                                                                           | class       | ![Progress](Pictures/Progress100.png) |
+| BufferedStream                                                                         | class       | ![Progress](Pictures/Progress0.png)   |
+| Directory                                                                              | class       | ![Progress](Pictures/Progress100.png) |
+| DirectoryInfo                                                                          | class       | ![Progress](Pictures/Progress100.png) |
+| DirectoryNotFoundException                                                             | class       | ![Progress](Pictures/Progress100.png) |
+| DriveInfo                                                                              | class       | ![Progress](Pictures/Progress100.png) |
+| DriveType                                                                              | enumeration | ![Progress](Pictures/Progress100.png) |
+| DriveNotFoundException                                                                 | class       | ![Progress](Pictures/Progress100.png) |
+| EndOfStreamExeption                                                                    | class       | ![Progress](Pictures/Progress100.png) |
+| File                                                                                   | class       | ![Progress](Pictures/Progress100.png) |
+| FileAccess                                                                             | enumeration | ![Progress](Pictures/Progress100.png) |
+| FileAttributes                                                                         | enumeration | ![Progress](Pictures/Progress100.png) |
+| FileFormatException                                                                    | class       | ![Progress](Pictures/Progress100.png) |
+| FileInfo                                                                               | class       | ![Progress](Pictures/Progress100.png) |
+| FileLoadException                                                                      | class       | ![Progress](Pictures/Progress100.png) |
+| FileNotFoundException                                                                  | class       | ![Progress](Pictures/Progress100.png) |
+| FileMode                                                                               | enumeration | ![Progress](Pictures/Progress100.png) |
+| FileOptions                                                                            | enumeration | ![Progress](Pictures/Progress0.png)   |
+| FileShare                                                                              | enumeration | ![Progress](Pictures/Progress100.png) |
+| FileStream                                                                             | class       | ![Progress](Pictures/Progress100.png) |
+| FileSystemInfo                                                                         | class       | ![Progress](Pictures/Progress100.png) |
+| IOException                                                                            | class       | ![Progress](Pictures/Progress100.png) |
+| MemoryStream                                                                           | class       | ![Progress](Pictures/Progress100.png) |
+| Path                                                                                   | class       | ![Progress](Pictures/Progress100.png) |
+| PathTooLongException                                                                   | class       | ![Progress](Pictures/Progress100.png) |
+| SearchOption                                                                           | enumeration | ![Progress](Pictures/Progress0.png)   |
+| SeekOrigin                                                                             | enumeration | ![Progress](Pictures/Progress100.png) |
+| Stream                                                                                 | class       | ![Progress](Pictures/Progress100.png) |
+| StreamReader                                                                           | class       | ![Progress](Pictures/Progress100.png) |
+| StreamWriter                                                                           | class       | ![Progress](Pictures/Progress100.png) |
+| StringReader                                                                           | class       | ![Progress](Pictures/Progress100.png) |
+| StringWriter                                                                           | class       | ![Progress](Pictures/Progress100.png) |
+| TextReader                                                                             | class       | ![Progress](Pictures/Progress100.png) |
+| TextWriter                                                                             | class       | ![Progress](Pictures/Progress100.png) |
+| UnmanagedMemoryAccessor                                                                | class       | ![Progress](Pictures/Progress0.png)   |
+| UnmanagedMemoryStream                                                                  | class       | ![Progress](Pictures/Progress0.png)   |
+
 ## Switch.System (System)
 
 ### Microsoft::Win32
@@ -574,6 +618,23 @@
 | TraceSwitch                                                                            | class       | ![Progress](Pictures/Progress0.png)   |
 | XmlWriterTraceListener                                                                 | class       | ![Progress](Pictures/Progress0.png)   |
 
+### System::IO
+
+| class                                                                                  | Type        | Progression                           |
+|----------------------------------------------------------------------------------------|-------------|---------------------------------------|
+| ErrorEventArgs                                                                         | class       | ![Progress](Pictures/Progress100.png) |
+| ErrorEventHandler                                                                      | delegate    | ![Progress](Pictures/Progress100.png) |
+| FileSystemEventArg                                                                     | class       | ![Progress](Pictures/Progress100.png) |
+| FileSystemEventHandler                                                                 | delegate    | ![Progress](Pictures/Progress100.png) |
+| FileSystemWatcher                                                                      | class       | ![Progress](Pictures/Progress0.png)   |
+| InternalBufferOverflowException                                                        | class       | ![Progress](Pictures/Progress100.png) |
+| InvalidDataException                                                                   | class       | ![Progress](Pictures/Progress100.png) |
+| IODescriptionAttribute                                                                 | class       | ![Progress](Pictures/ProgressIna.png) |
+| NotifyFilters                                                                          | enumeration | ![Progress](Pictures/Progress0.png)   |
+| RenamedEventArgs                                                                       | class       | ![Progress](Pictures/Progress100.png) |
+| RenamedEventHandler                                                                    | delegate    | ![Progress](Pictures/Progress100.png) |
+| WatcherChangeTypes                                                                     | enumeration | ![Progress](Pictures/Progress100.png) |
+
 ## Switch.System.Core (System.Core)
 
 ### System::Collections::Generic
@@ -589,6 +650,12 @@
 | UnescapedXmlDiagnosticData                                                             | class       | ![Progress](Pictures/Progress0.png)   |
 | TraceLogRetentionOption                                                                | enumeration | ![Progress](Pictures/Progress0.png)   |
 
+### System::IO
+
+| class                                                                                  | Type        | Progression                           |
+|----------------------------------------------------------------------------------------|-------------|---------------------------------------|
+| HandleInheritability                                                                   | enumeration | ![Progress](Pictures/Progress0.png)   |
+
 ## Switch.System.ServiceModel (System.ServiceModel)
 
 ### System::Collections::Generic
@@ -599,6 +666,12 @@
 | SynchronizedCollection\<T\>                                                            | class       | ![Progress](Pictures/Progress0.png)   |
 | SynchronizedKeyedCollection\<K, T\>                                                    | class       | ![Progress](Pictures/Progress0.png)   |
 | SynchronizedReadOnlyCollection\<T\>                                                    | class       | ![Progress](Pictures/Progress0.png)   |
+
+### System::IO
+
+| class                                                                                  | Type        | Progression                           |
+|----------------------------------------------------------------------------------------|-------------|---------------------------------------|
+| PipeException                                                                          | class       | ![Progress](Pictures/Progress100.png) |
 
 ## Switch.WindowsBase (WindowsBase)
 
