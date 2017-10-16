@@ -195,7 +195,7 @@
 | NotImplementedException                                                                | class       | ![Progress](Pictures/Progress100.png) |
 | NotSupportedException                                                                  | class       | ![Progress](Pictures/Progress100.png) |
 | Nullable                                                                               | class       | ![Progress](Pictures/Progress0.png)   |
-| Nullable<T>                                                                            | struct      | ![Progress](Pictures/Progress100.png) |
+| Nullable\<T\>                                                                            | struct      | ![Progress](Pictures/Progress100.png) |
 | NullReferenceException                                                                 | class       | ![Progress](Pictures/Progress100.png) |
 | Object                                                                                 | class       | ![Progress](Pictures/Progress100.png) |
 | ObjectDisposedException                                                                | class       | ![Progress](Pictures/Progress100.png) |
