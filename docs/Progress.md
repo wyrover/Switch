@@ -637,34 +637,34 @@
 
 ### System
 
-| class                                                                                  | Type          | Progression                           |
-|----------------------------------------------------------------------------------------|---------------|---------------------------------------|
-| FileStyleUriParser                                                                     | class         | ![Progress](Pictures/Progress0.png)   |
-| FtpStyleUriParser                                                                      | class         | ![Progress](Pictures/Progress0.png)   |
-| GenericUriParser                                                                       | class         | ![Progress](Pictures/Progress0.png)   |
-| GenericUriParserOptions                                                                | enumeration   | ![Progress](Pictures/Progress0.png)   |
-| GopherStyleUriParser                                                                   | class         | ![Progress](Pictures/Progress0.png)   |
-| HttpStyleUriParser                                                                     | class         | ![Progress](Pictures/Progress0.png)   |
-| LdapStyleUriParser                                                                     | class         | ![Progress](Pictures/Progress0.png)   |
-| NetPipeStyleUriParser                                                                  | class         | ![Progress](Pictures/Progress0.png)   |
-| NetTcpStyleUriParser                                                                   | class         | ![Progress](Pictures/Progress0.png)   |
-| NewsStyleUriParser                                                                     | class         | ![Progress](Pictures/Progress0.png)   |
-| Uri                                                                                    | class         | ![Progress](Pictures/Progress100.png) |
-| UriBuilder                                                                             | class         | ![Progress](Pictures/Progress0.png)   |
-| UriComponents                                                                          | enumeration   | ![Progress](Pictures/Progress100.png) |
-| UriFormat                                                                              | enumeration   | ![Progress](Pictures/Progress100.png) |
-| UriFormatException                                                                     | class         | ![Progress](Pictures/Progress100.png) |
-| UriHostNameType                                                                        | enumeration   | ![Progress](Pictures/Progress100.png) |
-| UriIdnScope                                                                            | enumeration   | ![Progress](Pictures/Progress0.png)   |
-| UriKind                                                                                | enumeration   | ![Progress](Pictures/Progress100.png) |
-| UriParser                                                                              | class         | ![Progress](Pictures/Progress0.png)   |
-| UriPartial                                                                             | enumeration   | ![Progress](Pictures/Progress100.png) |
-| UriTemplate                                                                            | class         | ![Progress](Pictures/Progress0.png)   |
-| UriTemplateEquivalenceComparer                                                         | class         | ![Progress](Pictures/Progress0.png)   |
-| UriTemplateMatch                                                                       | class         | ![Progress](Pictures/Progress0.png)   |
-| UriTemplateMatchException                                                              | class         | ![Progress](Pictures/Progress100.png) |
-| UriTemplateTable                                                                       | class         | ![Progress](Pictures/Progress0.png)   |
-| UriTypeConverter                                                                       | class         | ![Progress](Pictures/Progress0.png)   |
+| class                                                                                                 | Type          | Progression                           |
+|-------------------------------------------------------------------------------------------------------|---------------|---------------------------------------|
+| FileStyleUriParser                                                                                    | class         | ![Progress](Pictures/Progress0.png)   |
+| FtpStyleUriParser                                                                                     | class         | ![Progress](Pictures/Progress0.png)   |
+| GenericUriParser                                                                                      | class         | ![Progress](Pictures/Progress0.png)   |
+| GenericUriParserOptions                                                                               | enumeration   | ![Progress](Pictures/Progress0.png)   |
+| GopherStyleUriParser                                                                                  | class         | ![Progress](Pictures/Progress0.png)   |
+| HttpStyleUriParser                                                                                    | class         | ![Progress](Pictures/Progress0.png)   |
+| LdapStyleUriParser                                                                                    | class         | ![Progress](Pictures/Progress0.png)   |
+| NetPipeStyleUriParser                                                                                 | class         | ![Progress](Pictures/Progress0.png)   |
+| NetTcpStyleUriParser                                                                                  | class         | ![Progress](Pictures/Progress0.png)   |
+| NewsStyleUriParser                                                                                    | class         | ![Progress](Pictures/Progress0.png)   |
+| [Uri](../src/Switch.System/include/Switch/System/Uri.hpp)                                             | class         | ![Progress](Pictures/Progress100.png) |
+| UriBuilder                                                                                            | class         | ![Progress](Pictures/Progress0.png)   |
+| [UriComponents](../src/Switch.System/include/Switch/System/UriComponents.hpp)                         | enumeration   | ![Progress](Pictures/Progress100.png) |
+| [UriFormat](../src/Switch.System/include/Switch/System/UriFormat.hpp)                                 | enumeration   | ![Progress](Pictures/Progress100.png) |
+| [UriFormatException](../src/Switch.System/include/Switch/System/UriFormatException.hpp)               | class         | ![Progress](Pictures/Progress100.png) |
+| [UriHostNameType](../src/Switch.System/include/Switch/System/UriHostNameType.hpp)                     | enumeration   | ![Progress](Pictures/Progress100.png) |
+| UriIdnScope                                                                                           | enumeration   | ![Progress](Pictures/Progress0.png)   |
+| [UriKind](../src/Switch.System/include/Switch/System/UriKind.hpp)                                     | enumeration   | ![Progress](Pictures/Progress100.png) |
+| UriParser                                                                                             | class         | ![Progress](Pictures/Progress0.png)   |
+| [UriPartial](../src/Switch.System/include/Switch/System/UriPartial.hpp)                               | enumeration   | ![Progress](Pictures/Progress100.png) |
+| UriTemplate                                                                                           | class         | ![Progress](Pictures/Progress0.png)   |
+| UriTemplateEquivalenceComparer                                                                        | class         | ![Progress](Pictures/Progress0.png)   |
+| UriTemplateMatch                                                                                      | class         | ![Progress](Pictures/Progress0.png)   |
+| [UriTemplateMatchException](../src/Switch.System/include/Switch/System/UriTemplateMatchException.hpp) | class         | ![Progress](Pictures/Progress100.png) |
+| UriTemplateTable                                                                                      | class         | ![Progress](Pictures/Progress0.png)   |
+| UriTypeConverter                                                                                      | class         | ![Progress](Pictures/Progress0.png)   |
 
 ### System::Collections::Concurrent
 
@@ -832,9 +832,9 @@
 
 ### System::Collections::Generic
 
-| class                                                                                  | Type          | Progression                           |
-|----------------------------------------------------------------------------------------|---------------|---------------------------------------|
-| HashSet\<T\>                                                                           | class         | ![Progress](Pictures/Progress100.png) |
+| class                                                                                           | Type          | Progression                           |
+|-------------------------------------------------------------------------------------------------|---------------|---------------------------------------|
+| [HashSet\<T\>](../src/Switch.System.Core/include/Switch/System/Collections/Generic/HashSet.hpp) | class         | ![Progress](Pictures/Progress100.png) |
 
 ### System::Diagnostics
 
@@ -849,7 +849,7 @@
 |----------------------|---------------|---------------------------------------|
 | HandleInheritability | enumeration   | ![Progress](Pictures/Progress0.png)   |
  
-## Switch::System::Globalization (sysglobl)
+## Switch.System.Globalization (sysglobl)
 
 ### System::Globalization
 
@@ -871,9 +871,9 @@
 
 ### System::IO
 
-| class                                                                                  | Type          | Progression                           |
-|----------------------------------------------------------------------------------------|---------------|---------------------------------------|
-| PipeException                                                                          | class         | ![Progress](Pictures/Progress100.png) |
+| class                                                                                         | Type          | Progression                           |
+|-----------------------------------------------------------------------------------------------|---------------|---------------------------------------|
+| [PipeException](../src/Switch.System.ServiceModel/include/Switch/System/IO/PipeException.hpp) | class         | ![Progress](Pictures/Progress100.png) |
 
 ## Switch.WindowsBase (WindowsBase)
 
