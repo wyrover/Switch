@@ -23,14 +23,14 @@
 
 ### Microsoft::Win32
 
-| class                                                                                  | Type          | Progression                           |
-|----------------------------------------------------------------------------------------|---------------|---------------------------------------|
-| CommonDialog                                                                           | class         | ![Progress](Pictures/Progress0.png)   |
-| FileDialog                                                                             | class         | ![Progress](Pictures/Progress0.png)   |
-| FileDialogCustomPlace                                                                  | class         | ![Progress](Pictures/Progress0.png)   |
-| FileDialogCustomPlaces                                                                 | class         | ![Progress](Pictures/Progress0.png)   |
-| OpenFileDialog                                                                         | class         | ![Progress](Pictures/Progress0.png)   |
-| SaveFileDialog                                                                         | class         | ![Progress](Pictures/Progress0.png)   |
+| class                  | Type          | Progression                           |
+|------------------------|---------------|---------------------------------------|
+| CommonDialog           | class         | ![Progress](Pictures/Progress0.png)   |
+| FileDialog             | class         | ![Progress](Pictures/Progress0.png)   |
+| FileDialogCustomPlace  | class         | ![Progress](Pictures/Progress0.png)   |
+| FileDialogCustomPlaces | class         | ![Progress](Pictures/Progress0.png)   |
+| OpenFileDialog         | class         | ![Progress](Pictures/Progress0.png)   |
+| SaveFileDialog         | class         | ![Progress](Pictures/Progress0.png)   |
 
 ## Switch.Core (mscorelib)
 
@@ -49,16 +49,16 @@
 
 ### Microsoft::Win32::SafeHandles
 
-| class                                                                                  | Type          | Progression                           |
-|----------------------------------------------------------------------------------------|---------------|---------------------------------------|
-| CriticalHandleMinusOneIsInvalid                                                        | class         | ![Progress](Pictures/Progress0.png)   |
-| CriticalHandleZeroOrMinusOneIsInvalid                                                  | class         | ![Progress](Pictures/Progress0.png)   |
-| SafeAccessTokenHandle                                                                  | class         | ![Progress](Pictures/Progress0.png)   |
-| SafeFileHandle                                                                         | class         | ![Progress](Pictures/Progress0.png)   |
-| SafeHandleMinusOneIsInvalid                                                            | class         | ![Progress](Pictures/Progress0.png)   |
-| SafeHandleZeroOrMinusOneIsInvalid                                                      | class         | ![Progress](Pictures/Progress0.png)   |
-| SafeRegistryHandle                                                                     | class         | ![Progress](Pictures/Progress0.png)   |
-| SafeWaitHandle                                                                         | class         | ![Progress](Pictures/Progress0.png)   |
+| class                                  | Type          | Progression                           |
+|---------------------------------------|---------------|---------------------------------------|
+| CriticalHandleMinusOneIsInvalid       | class         | ![Progress](Pictures/Progress0.png)   |
+| CriticalHandleZeroOrMinusOneIsInvalid | class         | ![Progress](Pictures/Progress0.png)   |
+| SafeAccessTokenHandle                 | class         | ![Progress](Pictures/Progress0.png)   |
+| SafeFileHandle                        | class         | ![Progress](Pictures/Progress0.png)   |
+| SafeHandleMinusOneIsInvalid           | class         | ![Progress](Pictures/Progress0.png)   |
+| SafeHandleZeroOrMinusOneIsInvalid     | class         | ![Progress](Pictures/Progress0.png)   |
+| SafeRegistryHandle                    | class         | ![Progress](Pictures/Progress0.png)   |
+| SafeWaitHandle                        | class         | ![Progress](Pictures/Progress0.png)   |
 
 ### System 
 
@@ -135,32 +135,33 @@
 | [ContextMarshalException](../src/Switch.Core/include/Switch/System/ContextMarshalException.hpp)                                             | class         | ![Progress](Pictures/Progress100.png) |
 | *ContextStaticAttribute*                                                                                                                    | *class*       | ![Progress](Pictures/ProgressIna.png) |
 | [Convert](../src/Switch.Core/include/Switch/System/Convert.hpp)                                                                             | class         | ![Progress](Pictures/Progress100.png) |
-| Converter\<Tinput, TOutput\>](../src/Switch.Core/include/Switch/System/Converter.hpp)                                                       | delegate      | ![Progress](Pictures/Progress100.png) |
-| *Converter*                                                                                                                                 | *delegate*    | ![Progress](Pictures/ProgressIna.png) |
+| [Converter\<Tinput, TOutput\>](../src/Switch.Core/include/Switch/System/Converter.hpp)                                                      | delegate      | ![Progress](Pictures/Progress100.png) |
+| Converter                                                                                                                                   | delegate      | ![Progress](Pictures/Progress0.png)   |
 | CrossAppDomainDelegate                                                                                                                      | delegate      | ![Progress](Pictures/Progress0.png)   |
-| DataMisalignedException                                                                | class         | ![Progress](Pictures/Progress100.png) |
-| DateTime                                                                               | struct        | ![Progress](Pictures/Progress75.png)  |
-| DateTimeKind                                                                           | enumeration   | ![Progress](Pictures/Progress100.png) |
+| [DataMisalignedException](../src/Switch.Core/include/Switch/System/DataMisalignedException.hpp)                                             | class         | ![Progress](Pictures/Progress100.png) |
+| [DateTime](../src/Switch.Core/include/Switch/System/DateTime.hpp)                                                                           | struct        | ![Progress](Pictures/Progress75.png)  |
+| [DateTimeKind](../src/Switch.Core/include/Switch/System/DateTimeKind.hpp)                                                                   | enumeration   | ![Progress](Pictures/Progress100.png) |
 | DateTimeOffset                                                                                                                              | struct        | ![Progress](Pictures/Progress0.png)   |
-| DayOfWeek                                                                              | enumeration   | ![Progress](Pictures/Progress100.png) |
+| [DayOfWeek](../src/Switch.Core/include/Switch/System/DayOfWeek.hpp)                                                                         | enumeration   | ![Progress](Pictures/Progress100.png) |
 | DBNull                                                                                                                                      | class         | ![Progress](Pictures/Progress0.png)   |
-| Decimal                                                                                | struct        | ![Progress](Pictures/Progress100.png) |
-| Delegate                                                                               | class         | ![Progress](Pictures/Progress100.png) |
-| DivideByZeroException                                                                  | class         | ![Progress](Pictures/Progress100.png) |
-| DllNotFoundException                                                                   | class         | ![Progress](Pictures/Progress100.png) |
-| Double                                                                                 | struct        | ![Progress](Pictures/Progress100.png) |
-| DuplicateWaitObjectException                                                           | class         | ![Progress](Pictures/Progress100.png) |
-| EntryPointNotFoundException                                                            | class         | ![Progress](Pictures/Progress100.png) |
-| Enum                                                                                   | class         | ![Progress](Pictures/Progress75.png)  |
-| Environment                                                                            | class         | ![Progress](Pictures/Progress100.png) |
-| EnvironmentVariableTarget                                                              | enumeration   | ![Progress](Pictures/Progress100.png) |
-| EventArgs                                                                              | class         | ![Progress](Pictures/Progress100.png) |
-| EventHandler                                                                           | delegate      | ![Progress](Pictures/Progress100.png) |
-| Exception                                                                              | class         | ![Progress](Pictures/Progress100.png) |
-| ExceptionEngineException                                                               | class         | ![Progress](Pictures/Progress100.png) |
-| FieldAccessException                                                                   | class         | ![Progress](Pictures/Progress100.png) |
+| [Decimal](../src/Switch.Core/include/Switch/System/Decimal.hpp)                                                                             | struct        | ![Progress](Pictures/Progress100.png) |
+| [Delegate](../src/Switch.Core/include/Switch/System/Delegate.hpp)                                                                           | class         | ![Progress](Pictures/Progress100.png) |
+| [DivideByZeroException](../src/Switch.Core/include/Switch/System/DivideByZeroException.hpp)                                                 | class         | ![Progress](Pictures/Progress100.png) |
+| [DllNotFoundException](../src/Switch.Core/include/Switch/System/DllNotFoundException.hpp)                                                   | class         | ![Progress](Pictures/Progress100.png) |
+| [Double](../src/Switch.Core/include/Switch/System/Double.hpp)                                                                               | struct        | ![Progress](Pictures/Progress100.png) |
+| [DuplicateWaitObjectException](../src/Switch.Core/include/Switch/System/DuplicateWaitObjectException.hpp)                                   | class         | ![Progress](Pictures/Progress100.png) |
+| [EntryPointNotFoundException](../src/Switch.Core/include/Switch/System/EntryPointNotFoundException.hpp)                                     | class         | ![Progress](Pictures/Progress100.png) |
+| [Enum](../src/Switch.Core/include/Switch/System/Enum.hpp)                                                                                   | class         | ![Progress](Pictures/Progress75.png)  |
+| [Environment](../src/Switch.Core/include/Switch/System/Environment.hpp)                                                                     | class         | ![Progress](Pictures/Progress100.png) |
+| [EnvironmentVariableTarget](../src/Switch.Core/include/Switch/System/EnvironmentVariableTarget.hpp)                                         | enumeration   | ![Progress](Pictures/Progress100.png) |
+| [EventArgs](../src/Switch.Core/include/Switch/System/EventArgs.hpp)                                                                         | class         | ![Progress](Pictures/Progress100.png) |
+| EventHandler<TEventArgs>                                                                                                                    | delegate      | ![Progress](Pictures/Progress0.png)   |
+| [EventHandler](../src/Switch.Core/include/Switch/System/EventHandler.hpp)                                                                   | delegate      | ![Progress](Pictures/Progress100.png) |
+| [Exception](../src/Switch.Core/include/Switch/System/Exception.hpp)                                                                         | class         | ![Progress](Pictures/Progress100.png) |
+| [ExceptionEngineException](../src/Switch.Core/include/Switch/System/ExceptionEngineException.hpp)                                           | class         | ![Progress](Pictures/Progress100.png) |
+| [FieldAccessException](../src/Switch.Core/include/Switch/System/FileAccessException.hpp)                                                    | class         | ![Progress](Pictures/Progress100.png) |
 | *FlagsAttribute*                                                                                                                            | *class*       | ![Progress](Pictures/ProgressIna.png) |
-| FormatException                                                                        | class         | ![Progress](Pictures/Progress100.png) |
+| [FormatException](../src/Switch.Core/include/Switch/System/FormatException.hpp)                                                             | class         | ![Progress](Pictures/Progress100.png) |
 | FormatableString                                                                                                                            | class         | ![Progress](Pictures/Progress0.png)   |
 | [Func](../src/Switch.Core/include/Switch/System/Func.hpp)                                                                                   | delegate      | ![Progress](Pictures/Progress100.png) |
 | [Func\<TResult\>](../src/Switch.Core/include/Switch/System/Func.hpp)                                                                        | delegate      | ![Progress](Pictures/Progress100.png) |
@@ -180,96 +181,95 @@
 | [Func\<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult\>](../src/Switch.Core/include/Switch/System/Func.hpp)           | delegate      | ![Progress](Pictures/Progress100.png) |
 | [Func\<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult\>](../src/Switch.Core/include/Switch/System/Func.hpp)      | delegate      | ![Progress](Pictures/Progress100.png) |
 | [Func\<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult\>](../src/Switch.Core/include/Switch/System/Func.hpp) | delegate      | ![Progress](Pictures/Progress100.png) |
-| *GC*                                                                                   | *class*       | ![Progress](Pictures/ProgressIna.png) |
-| GCCollectionMode                                                                       | enumeration   | ![Progress](Pictures/Progress0.png)   |
-| GCNotificationStatus                                                                   | enumeration   | ![Progress](Pictures/Progress0.png)   |
-| GenericEventHandler<TEventArgs>                                                        | delegate      | ![Progress](Pictures/Progress100.png) |
-| Guid                                                                                   | struct        | ![Progress](Pictures/Progress100.png) |
-| IAppDomainSetup                                                                        | interface     | ![Progress](Pictures/Progress0.png)   |
-| IAsyncResult                                                                           | interface     | ![Progress](Pictures/Progress100.png) |
-| IClonable                                                                              | interface     | ![Progress](Pictures/Progress100.png) |
-| IComparable\<T\>                                                                       | interface     | ![Progress](Pictures/Progress100.png) |
-| *IComparable*                                                                          | *interface*   | ![Progress](Pictures/ProgressIna.png) |
-| IConvertible                                                                           | interface     | ![Progress](Pictures/Progress100.png) |
-| ICustomFormater                                                                        | interface     | ![Progress](Pictures/Progress100.png) |
-| *IDisposable*                                                                          | *interface*   | ![Progress](Pictures/ProgressIna.png) |
-| IEquatable\<T\>                                                                        | interface     | ![Progress](Pictures/Progress0.png)   |
-| IFormatProvider                                                                        | interface     | ![Progress](Pictures/Progress100.png) |
-| IFormattable                                                                           | interface     | ![Progress](Pictures/Progress100.png) |
-| IndexOutOfRangeException                                                               | class         | ![Progress](Pictures/Progress100.png) |
-| InsufficientExecutionStackException                                                    | class         | ![Progress](Pictures/Progress100.png) |
-| InsufficientMemoryException                                                            | class         | ![Progress](Pictures/Progress100.png) |
-| Int16                                                                                  | struct        | ![Progress](Pictures/Progress100.png) |
-| Int32                                                                                  | struct        | ![Progress](Pictures/Progress100.png) |
-| Int64                                                                                  | struct        | ![Progress](Pictures/Progress100.png) |
-| IntPtr                                                                                 | struct        | ![Progress](Pictures/Progress100.png) |
-| InvalidCastException                                                                   | class         | ![Progress](Pictures/Progress100.png) |
-| InvalidOperationException                                                              | class         | ![Progress](Pictures/Progress100.png) |
-| InvalidProgramException                                                                | class         | ![Progress](Pictures/Progress100.png) |
-| InvalidTimeZoneException                                                               | class         | ![Progress](Pictures/Progress100.png) |
-| IObservable\<T\>                                                                       | interface     | ![Progress](Pictures/Progress0.png)   |
-| IObserver\<T\>                                                                         | interface     | ![Progress](Pictures/Progress0.png)   |
-| IProgress\<T\>                                                                         | interface     | ![Progress](Pictures/Progress0.png)   |
-| IServiceProvider                                                                       | interface     | ![Progress](Pictures/Progress0.png)   |
-| Lazy<T>                                                                                | class         | ![Progress](Pictures/Progress0.png)   |
-| Lazy<T, TMetadata>                                                                     | class         | ![Progress](Pictures/Progress0.png)   |
-| LoaderOptimization                                                                     | enumeration   | ![Progress](Pictures/Progress0.png)   |
-| *LoaderOptimizationAttribute*                                                          | *class*       | ![Progress](Pictures/ProgressIna.png) |
-| *LoaderOptimizationAttribute*                                                          | *class*       | ![Progress](Pictures/ProgressIna.png) |
-| LocalDataStoreSlot                                                                     | class         | ![Progress](Pictures/Progress0.png)   |
-| *MarshalByRefObject*                                                                   | *class*       | ![Progress](Pictures/ProgressIna.png) |
-| Math                                                                                   | class         | ![Progress](Pictures/Progress100.png) |
-| MemberAccessException                                                                  | class         | ![Progress](Pictures/Progress100.png) |
-| MethodAccessException                                                                  | class         | ![Progress](Pictures/Progress100.png) |
-| MidpointRounding                                                                       | enumeration   | ![Progress](Pictures/Progress0.png)   |
-| MissingFieldException                                                                  | class         | ![Progress](Pictures/Progress100.png) |
-| MissingMemberException                                                                 | class         | ![Progress](Pictures/Progress100.png) |
-| MissingMethodException                                                                 | class         | ![Progress](Pictures/Progress100.png) |
-| ModuleHandle                                                                           | struct        | ![Progress](Pictures/Progress0.png)   |
-| *MTAThreadAttribute*                                                                   | *class*       | ![Progress](Pictures/ProgressIna.png) |
-| MulticastDelegate                                                                      | class         | ![Progress](Pictures/Progress0.png)   |
-| MulticastNotSupportedException                                                         | class         | ![Progress](Pictures/Progress100.png) |
-| *NonSerializedAttribute*                                                               | *class*       | ![Progress](Pictures/ProgressIna.png) |
-| NotFiniteNumberException                                                               | class         | ![Progress](Pictures/Progress100.png) |
-| NotImplementedException                                                                | class         | ![Progress](Pictures/Progress100.png) |
-| NotSupportedException                                                                  | class         | ![Progress](Pictures/Progress100.png) |
-| Nullable                                                                               | class         | ![Progress](Pictures/Progress0.png)   |
-| Nullable\<T\>                                                                          | struct        | ![Progress](Pictures/Progress100.png) |
-| NullReferenceException                                                                 | class         | ![Progress](Pictures/Progress100.png) |
-| Object                                                                                 | class         | ![Progress](Pictures/Progress100.png) |
-| ObjectDisposedException                                                                | class         | ![Progress](Pictures/Progress100.png) |
-| ObsoleteAttribute                                                                      | class         | ![Progress](Pictures/Progress100.png) |
-| OpratingSystem                                                                         | class         | ![Progress](Pictures/Progress100.png) |
-| OperationCanceledException                                                             | class         | ![Progress](Pictures/Progress100.png) |
-| OutOfMemoryException                                                                   | class         | ![Progress](Pictures/Progress100.png) |
-| OverflowException                                                                      | class         | ![Progress](Pictures/Progress100.png) |
-| *ParamArrayAttribute*                                                                  | *class*       | ![Progress](Pictures/ProgressIna.png) |
-| PlatformID                                                                             | enumeration   | ![Progress](Pictures/Progress100.png) |
-| PlatformNotSupportedException                                                          | class         | ![Progress](Pictures/Progress100.png) |
-| Predicate                                                                              | delegate      | ![Progress](Pictures/Progress100.png) |
-| Progress                                                                               | class         | ![Progress](Pictures/Progress0.png)   |
-| Random                                                                                 | class         | ![Progress](Pictures/Progress100.png) |
-| RankException                                                                          | class         | ![Progress](Pictures/Progress100.png) |
-| ResolveEventArgs                                                                       | class         | ![Progress](Pictures/Progress0.png)   |
-| PesolveEventHandler                                                                    | delegate      | ![Progress](Pictures/Progress0.png)   |
-| RuntimeArgumentHandle                                                                  | struct        | ![Progress](Pictures/Progress0.png)   |
-| RuntimeFieldHandle                                                                     | struct        | ![Progress](Pictures/Progress0.png)   |
-| RuntimeMethodHandle                                                                    | struct        | ![Progress](Pictures/Progress0.png)   |
-| RuntimeTypeHandle.                                                                     | struct        | ![Progress](Pictures/Progress0.png)   |
-| SByte                                                                                  | struct        | ![Progress](Pictures/Progress100.png) |
-| *SerializableAttribute*                                                                | *class*       | ![Progress](Pictures/ProgressIna.png) |
-| Single                                                                                 | struct        | ![Progress](Pictures/Progress100.png) |
-| StackOverflowException                                                                 | class         | ![Progress](Pictures/Progress100.png) |
-| *STAThreadAttribute*                                                                   | *class*       | ![Progress](Pictures/ProgressIna.png) |
-| String                                                                                 | class         | ![Progress](Pictures/Progress100.png) |
-| StringComparer                                                                         | class         | ![Progress](Pictures/Progress0.png)   |
-| StringComparison                                                                       | enumeration   | ![Progress](Pictures/Progress0.png)   |
-| StringSplitOptions                                                                     | enumeration   | ![Progress](Pictures/Progress100.png) |
-| SystemException                                                                        | class         | ![Progress](Pictures/Progress100.png) |
-| *ThreadStaticAttribute*                                                                | *class*       | ![Progress](Pictures/ProgressIna.png) |
-| TimeoutException                                                                       | class         | ![Progress](Pictures/Progress100.png) |
-| TimeSpan                                                                               | struct        | ![Progress](Pictures/Progress100.png) |
-| TimeZone                                                                               | class         | ![Progress](Pictures/Progress0.png)   |
+| *GC*                                                                                                                                        | *class*       | ![Progress](Pictures/ProgressIna.png) |
+| GCCollectionMode                                                                                                                            | enumeration   | ![Progress](Pictures/Progress0.png)   |
+| GCNotificationStatus                                                                                                                        | enumeration   | ![Progress](Pictures/Progress0.png)   |
+| [Guid](../src/Switch.Core/include/Switch/System/Guid.hpp)                                                                                   | struct        | ![Progress](Pictures/Progress100.png) |
+| IAppDomainSetup                                                                                                                             | interface     | ![Progress](Pictures/Progress0.png)   |
+| [IAsyncResult](../src/Switch.Core/include/Switch/System/IAsyncResult.hpp)                                                                   | interface     | ![Progress](Pictures/Progress100.png) |
+| [IClonable](../src/Switch.Core/include/Switch/System/IClonable.hpp)                                                                         | interface     | ![Progress](Pictures/Progress100.png) |
+| [IComparable\<T\>](../src/Switch.Core/include/Switch/System/IComparable.hpp)                                                                | interface     | ![Progress](Pictures/Progress100.png) |
+| IComparable                                                                                                                                 | interface     | ![Progress](Pictures/Progress0.png)   |
+| [IConvertible](../src/Switch.Core/include/Switch/System/IConvertible.hpp)                                                                   | interface     | ![Progress](Pictures/Progress100.png) |
+| [ICustomFormater](../src/Switch.Core/include/Switch/System/ICustomFormater.hpp)                                                             | interface     | ![Progress](Pictures/Progress100.png) |
+| *IDisposable*                                                                                                                               | *interface*   | ![Progress](Pictures/ProgressIna.png) |
+| IEquatable\<T\>                                                                                                                             | interface     | ![Progress](Pictures/Progress0.png)   |
+| [IFormatProvider](../src/Switch.Core/include/Switch/System/IFormatProvider.hpp)                                                             | interface     | ![Progress](Pictures/Progress100.png) |
+| [IFormattable](../src/Switch.Core/include/Switch/System/IFormatable.hpp)                                                                    | interface     | ![Progress](Pictures/Progress100.png) |
+| [IndexOutOfRangeException](../src/Switch.Core/include/Switch/System/InvexOutOfRangeException.hpp)                                           | class         | ![Progress](Pictures/Progress100.png) |
+| [InsufficientExecutionStackException](../src/Switch.Core/include/Switch/System/InsufficientExecutionStackException.hpp)                     | class         | ![Progress](Pictures/Progress100.png) |
+| [InsufficientMemoryException](../src/Switch.Core/include/Switch/System/InsufficientMemoryException.hpp)                                     | class         | ![Progress](Pictures/Progress100.png) |
+| [Int16](../src/Switch.Core/include/Switch/System/Int16.hpp)                                                                                 | struct        | ![Progress](Pictures/Progress100.png) |
+| [Int32](../src/Switch.Core/include/Switch/System/Int32.hpp)                                                                                 | struct        | ![Progress](Pictures/Progress100.png) |
+| [Int64](../src/Switch.Core/include/Switch/System/Int64.hpp)                                                                                 | struct        | ![Progress](Pictures/Progress100.png) |
+| [IntPtr](../src/Switch.Core/include/Switch/System/IntPtr.hpp)                                                                               | struct        | ![Progress](Pictures/Progress100.png) |
+| [InvalidCastException](../src/Switch.Core/include/Switch/System/InvalidCastEception.hpp)                                                    | class         | ![Progress](Pictures/Progress100.png) |
+| [InvalidOperationException](../src/Switch.Core/include/Switch/System/InvalidOperationException.hpp)                                         | class         | ![Progress](Pictures/Progress100.png) |
+| [InvalidProgramException](../src/Switch.Core/include/Switch/System/InvalidProgramException.hpp)                                             | class         | ![Progress](Pictures/Progress100.png) |
+| [InvalidTimeZoneException](../src/Switch.Core/include/Switch/System/InvalidTimeZoneExcception.hpp)                                          | class         | ![Progress](Pictures/Progress100.png) |
+| IObservable\<T\>                                                                                                                            | interface     | ![Progress](Pictures/Progress0.png)   |
+| IObserver\<T\>                                                                                                                              | interface     | ![Progress](Pictures/Progress0.png)   |
+| IProgress\<T\>                                                                                                                              | interface     | ![Progress](Pictures/Progress0.png)   |
+| IServiceProvider                                                                                                                            | interface     | ![Progress](Pictures/Progress0.png)   |
+| Lazy<T>                                                                                                                                     | class         | ![Progress](Pictures/Progress0.png)   |
+| Lazy<T, TMetadata>                                                                                                                          | class         | ![Progress](Pictures/Progress0.png)   |
+| LoaderOptimization                                                                                                                          | enumeration   | ![Progress](Pictures/Progress0.png)   |
+| *LoaderOptimizationAttribute*                                                                                                               | *class*       | ![Progress](Pictures/ProgressIna.png) |
+| *LoaderOptimizationAttribute*                                                                                                               | *class*       | ![Progress](Pictures/ProgressIna.png) |
+| LocalDataStoreSlot                                                                                                                          | class         | ![Progress](Pictures/Progress0.png)   |
+| *MarshalByRefObject*                                                                                                                        | *class*       | ![Progress](Pictures/ProgressIna.png) |
+| [Math](../src/Switch.Core/include/Switch/System/Math.hpp)                                                                                   | class         | ![Progress](Pictures/Progress100.png) |
+| [MemberAccessException](../src/Switch.Core/include/Switch/System/MemberAccessException.hpp)                                                 | class         | ![Progress](Pictures/Progress100.png) |
+| [MethodAccessException](../src/Switch.Core/include/Switch/System/MethodAccessException.hpp)                                                 | class         | ![Progress](Pictures/Progress100.png) |
+| MidpointRounding                                                                                                                            | enumeration   | ![Progress](Pictures/Progress0.png)   |
+| [MissingFieldException](../src/Switch.Core/include/Switch/System/MissingFieldException.hpp)                                                 | class         | ![Progress](Pictures/Progress100.png) |
+| [MissingMemberException](../src/Switch.Core/include/Switch/System/MissingMemberException.hpp)                                               | class         | ![Progress](Pictures/Progress100.png) |
+| [MissingMethodException](../src/Switch.Core/include/Switch/System/MissingMethodException.hpp)                                               | class         | ![Progress](Pictures/Progress100.png) |
+| ModuleHandle                                                                                                                                | struct        | ![Progress](Pictures/Progress0.png)   |
+| *MTAThreadAttribute*                                                                                                                        | *class*       | ![Progress](Pictures/ProgressIna.png) |
+| MulticastDelegate                                                                                                                           | class         | ![Progress](Pictures/Progress0.png)   |
+| [MulticastNotSupportedException](../src/Switch.Core/include/Switch/System/MulticastNotSupportedException.hpp)                               | class         | ![Progress](Pictures/Progress100.png) |
+| *NonSerializedAttribute*                                                                                                                    | *class*       | ![Progress](Pictures/ProgressIna.png) |
+| [NotFiniteNumberException](../src/Switch.Core/include/Switch/System/NotFiniteNumberException.hpp)                                           | class         | ![Progress](Pictures/Progress100.png) |
+| [NotImplementedException](../src/Switch.Core/include/Switch/System/NotImplementedException.hpp)                                             | class         | ![Progress](Pictures/Progress100.png) |
+| [NotSupportedException](../src/Switch.Core/include/Switch/System/NotSupportedException.hpp)                                                 | class         | ![Progress](Pictures/Progress100.png) |
+| [Nullable\<T\>](../src/Switch.Core/include/Switch/System/Nullable.hpp)                                                                      | struct        | ![Progress](Pictures/Progress100.png) |
+| Nullable                                                                                                                                    | class         | ![Progress](Pictures/Progress0.png)   |
+| [NullReferenceException](../src/Switch.Core/include/Switch/System/NullReferenceException.hpp)                                               | class         | ![Progress](Pictures/Progress100.png) |
+| [Object](../src/Switch.Core/include/Switch/System/Object.hpp)                                                                               | class         | ![Progress](Pictures/Progress100.png) |
+| [ObjectDisposedException](../src/Switch.Core/include/Switch/System/ObjectDisposedException.hpp)                                             | class         | ![Progress](Pictures/Progress100.png) |
+| ObsoleteAttribute                                                                                                                           | class         | ![Progress](Pictures/ProgressIna.png) |
+| [OperatingSystem](../src/Switch.Core/include/Switch/System/OperatingSystem.hpp)                                                             | class         | ![Progress](Pictures/Progress100.png) |
+| [OperationCanceledException](../src/Switch.Core/include/Switch/System/OperationCanceledException.hpp)                                       | class         | ![Progress](Pictures/Progress100.png) |
+| [OutOfMemoryException](../src/Switch.Core/include/Switch/System/OutOfMemoryException.hpp)                                                   | class         | ![Progress](Pictures/Progress100.png) |
+| [OverflowException](../src/Switch.Core/include/Switch/System/OverflowException.hpp)                                                         | class         | ![Progress](Pictures/Progress100.png) |
+| *ParamArrayAttribute*                                                                                                                       | *class*       | ![Progress](Pictures/ProgressIna.png) |
+| [PlatformID](../src/Switch.Core/include/Switch/System/PlatformID.hpp)                                                                       | enumeration   | ![Progress](Pictures/Progress100.png) |
+| [PlatformNotSupportedException](../src/Switch.Core/include/Switch/System/PlatformNotSupportedException.hpp)                                 | class         | ![Progress](Pictures/Progress100.png) |
+| [Predicate](../src/Switch.Core/include/Switch/System/Predicate.hpp)                                                                         | delegate      | ![Progress](Pictures/Progress100.png) |
+| Progress                                                                                                                                    | class         | ![Progress](Pictures/Progress0.png)   |
+| [Random](../src/Switch.Core/include/Switch/System/Random.hpp)                                                                               | class         | ![Progress](Pictures/Progress100.png) |
+| [RankException](../src/Switch.Core/include/Switch/System/RankException.hpp)                                                                 | class         | ![Progress](Pictures/Progress100.png) |
+| ResolveEventArgs                                                                                                                            | class         | ![Progress](Pictures/Progress0.png)   |
+| PesolveEventHandler                                                                                                                         | delegate      | ![Progress](Pictures/Progress0.png)   |
+| RuntimeArgumentHandle                                                                                                                       | struct        | ![Progress](Pictures/Progress0.png)   |
+| RuntimeFieldHandle                                                                                                                          | struct        | ![Progress](Pictures/Progress0.png)   |
+| RuntimeMethodHandle                                                                                                                         | struct        | ![Progress](Pictures/Progress0.png)   |
+| RuntimeTypeHandle                                                                                                                           | struct        | ![Progress](Pictures/Progress0.png)   |
+| [SByte](../src/Switch.Core/include/Switch/System/SByte.hpp)                                                                                 | struct        | ![Progress](Pictures/Progress100.png) |
+| *SerializableAttribute*                                                                                                                     | *class*       | ![Progress](Pictures/ProgressIna.png) |
+| [Single](../src/Switch.Core/include/Switch/System/Single.hpp)                                                                               | struct        | ![Progress](Pictures/Progress100.png) |
+| [StackOverflowException](../src/Switch.Core/include/Switch/System/StackOverflowEception.hpp)                                                | class         | ![Progress](Pictures/Progress100.png) |
+| *STAThreadAttribute*                                                                                                                        | *class*       | ![Progress](Pictures/ProgressIna.png) |
+| [String](../src/Switch.Core/include/Switch/System/String.hpp)                                                                               | class         | ![Progress](Pictures/Progress100.png) |
+| StringComparer                                                                                                                              | class         | ![Progress](Pictures/Progress0.png)   |
+| StringComparison                                                                                                                            | enumeration   | ![Progress](Pictures/Progress0.png)   |
+| [StringSplitOptions](../src/Switch.Core/include/Switch/System/StringSplitoptions.hpp)                                                       | enumeration   | ![Progress](Pictures/Progress100.png) |
+| [SystemException](../src/Switch.Core/include/Switch/System/SystemException.hpp)                                                             | class         | ![Progress](Pictures/Progress100.png) |
+| *ThreadStaticAttribute*                                                                                                                     | *class*       | ![Progress](Pictures/ProgressIna.png) |
+| [TimeoutException](../src/Switch.Core/include/Switch/System/TimeoutException.hpp)                                                           | class         | ![Progress](Pictures/Progress100.png) |
+| [TimeSpan](../src/Switch.Core/include/Switch/System/TimeSpan.hpp)                                                                           | struct        | ![Progress](Pictures/Progress100.png) |
+| TimeZone                                                                                                                                    | class         | ![Progress](Pictures/Progress0.png)   |
 | TimeZoneInfo                                                                           | class         | ![Progress](Pictures/Progress100.png) |
 | TimeZoneNotFoundException                                                              | class         | ![Progress](Pictures/Progress100.png) |
 | Tuple\<\>                                                                              | class         | ![Progress](Pictures/Progress100.png) |
@@ -281,7 +281,7 @@
 | Tuple\<T1, T2, T3, T4, T5, T6\>                                                        | class         | ![Progress](Pictures/Progress100.png) |
 | Tuple\<T1, T2, T3, T4, T5, T6, T7\>                                                    | class         | ![Progress](Pictures/Progress100.png) |
 | Tuple\<T1, T2, T3, T4, T5, T6, T7, TRest\>                                             | class         | ![Progress](Pictures/Progress100.png) |
-| TupleExtensions                                                                        | class         | ![Progress](Pictures/Progress0.png)   |
+| TupleExtensions                                                                                                                             | class         | ![Progress](Pictures/Progress0.png)   |
 | Type                                                                                   | class         | ![Progress](Pictures/Progress75.png)  |
 | TypeAccessException                                                                    | class         | ![Progress](Pictures/Progress100.png) |
 | TypeCode                                                                               | enumeration   | ![Progress](Pictures/Progress100.png) |
@@ -289,13 +289,13 @@
 | TypeInitializationException                                                            | class         | ![Progress](Pictures/Progress100.png) |
 | TypeLoadException                                                                      | class         | ![Progress](Pictures/Progress100.png) |
 | TypeUnloadedException                                                                  | class         | ![Progress](Pictures/Progress100.png) |
-| UInt16                                                                                 | struct        | ![Progress](Pictures/Progress100.png) |
-| UInt32                                                                                 | struct        | ![Progress](Pictures/Progress100.png) |
-| UInt64                                                                                 | struct        | ![Progress](Pictures/Progress100.png) |
-| UIntPtr                                                                                | struct        | ![Progress](Pictures/Progress100.png) |
+| [UInt16](../src/Switch.Core/include/Switch/System/UInt16.hpp)                                                                               | struct        | ![Progress](Pictures/Progress100.png) |
+| [UInt32](../src/Switch.Core/include/Switch/System/UInt32.hpp)                                                                               | struct        | ![Progress](Pictures/Progress100.png) |
+| [UInt64](../src/Switch.Core/include/Switch/System/UInt64.hpp)                                                                               | struct        | ![Progress](Pictures/Progress100.png) |
+| [UIntPtr](../src/Switch.Core/include/Switch/System/UIntPtr.hpp)                                                                             | struct        | ![Progress](Pictures/Progress100.png) |
 | UnauthorizedAccessException                                                            | class         | ![Progress](Pictures/Progress100.png) |
-| UnhandledExceptionEventArgs                                                            | class         | ![Progress](Pictures/Progress0.png)   |
-| UnhandledExceptionEventHandler                                                         | delegate      | ![Progress](Pictures/Progress0.png)   |
+| UnhandledExceptionEventArgs                                                                                                                 | class         | ![Progress](Pictures/Progress0.png)   |
+| UnhandledExceptionEventHandler                                                                                                              | delegate      | ![Progress](Pictures/Progress0.png)   |
 | ValueTuple\<\>                                                                         | class         | ![Progress](Pictures/Progress100.png) |
 | ValueTuple\<T1\>                                                                       | class         | ![Progress](Pictures/Progress100.png) |
 | ValueTuple\<T1, T2\>                                                                   | class         | ![Progress](Pictures/Progress100.png) |
@@ -307,9 +307,9 @@
 | ValueTuple\<T1, T2, T3, T4, T5, T6, T7, TRest\>                                        | class         | ![Progress](Pictures/Progress100.png) |
 | ValueType                                                                              | class         | ![Progress](Pictures/Progress100.png) |
 | Version                                                                                | class         | ![Progress](Pictures/Progress100.png) |
-| Void                                                                                   | struct        | ![Progress](Pictures/Progress0.png)   |
-| WeakReference                                                                          | class         | ![Progress](Pictures/Progress0.png)   |
-| WeakReference\<T\>                                                                     | class         | ![Progress](Pictures/Progress0.png)   |
+| Void                                                                                                                                        | struct        | ![Progress](Pictures/Progress0.png)   |
+| WeakReference                                                                                                                               | class         | ![Progress](Pictures/Progress0.png)   |
+| WeakReference\<T\>                                                                                                                          | class         | ![Progress](Pictures/Progress0.png)   |
 
 ### System::Collections
 

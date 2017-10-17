@@ -10,6 +10,8 @@ namespace Switch {
   namespace System {
     template<typename TInput, typename TOutput>
     using Converter = Delegate<TOutput, TInput>;
+    
+    //using Converter_ = Converter<any, any>;
   }
 }
 
