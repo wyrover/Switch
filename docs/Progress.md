@@ -313,32 +313,32 @@
 
 ### System::Collections
 
-| class                                                                                  | Type          | Progression                           |
-|----------------------------------------------------------------------------------------|---------------|---------------------------------------|
-| ArrayList                                                                              | class         | ![Progress](Pictures/Progress100.png) |
-| BitArray                                                                               | class         | ![Progress](Pictures/Progress100.png) |
-| CaseInsensitiveComparer                                                                | class         | ![Progress](Pictures/Progress0.png)   |
-| CollectionBase                                                                         | class         | ![Progress](Pictures/Progress0.png)   |
-| Comparer                                                                               | class         | ![Progress](Pictures/Progress100.png) |
-| DictionaryBase                                                                         | class         | ![Progress](Pictures/Progress0.png)   |
-| DictionaryEntry                                                                        | struct        | ![Progress](Pictures/Progress100.png) |
-| Hashtable                                                                              | class         | ![Progress](Pictures/Progress100.png) |
-| ICollection                                                                            | interface     | ![Progress](Pictures/Progress100.png) |
-| IComparer                                                                              | interface     | ![Progress](Pictures/Progress100.png) |
-| IDictionary                                                                            | interface     | ![Progress](Pictures/Progress100.png) |
-| IDictionaryEnumerator                                                                  | interface     | ![Progress](Pictures/Progress0.png)   |
-| IEnumerable                                                                            | interface     | ![Progress](Pictures/Progress100.png) |
-| IEnumerator                                                                            | interface     | ![Progress](Pictures/Progress100.png) |
-| IEqualityComparer                                                                      | interface     | ![Progress](Pictures/Progress0.png)   |
-| IHashCodeProvider                                                                      | interface     | ![Progress](Pictures/Progress0.png)   |
-| IList                                                                                  | interface     | ![Progress](Pictures/Progress100.png) |
-| IStructuralComparable                                                                  | interface     | ![Progress](Pictures/Progress0.png)   |
-| IStructuralEquatable                                                                   | interface     | ![Progress](Pictures/Progress0.png)   |
-| Queue                                                                                  | class         | ![Progress](Pictures/Progress100.png) |
-| ReadOnlyCollectionBase                                                                 | class         | ![Progress](Pictures/Progress0.png)   |
-| SortedList                                                                             | class         | ![Progress](Pictures/Progress0.png)   |
-| Stack                                                                                  | class         | ![Progress](Pictures/Progress100.png) |
-| StructuralComparisons                                                                  | class         | ![Progress](Pictures/Progress0.png)   |
+| class                                                                                       | Type          | Progression                           |
+|---------------------------------------------------------------------------------------------|---------------|---------------------------------------|
+| [ArrayList](../src/Switch.Core/include/Switch/System/Collections/ArrayList.hpp)             | class         | ![Progress](Pictures/Progress100.png) |
+| [BitArray](../src/Switch.Core/include/Switch/System/Collections/BitArray.hpp)               | class         | ![Progress](Pictures/Progress100.png) |
+| CaseInsensitiveComparer                                                                     | class         | ![Progress](Pictures/Progress0.png)   |
+| CollectionBase                                                                              | class         | ![Progress](Pictures/Progress0.png)   |
+| [Comparer](../src/Switch.Core/include/Switch/System/Collections/Comparer.hpp)               | class         | ![Progress](Pictures/Progress100.png) |
+| DictionaryBase                                                                              | class         | ![Progress](Pictures/Progress0.png)   |
+| [DictionaryEntry](../src/Switch.Core/include/Switch/System/Collections/DictionaryEntry.hpp) | struct        | ![Progress](Pictures/Progress100.png) |
+| [Hashtable](../src/Switch.Core/include/Switch/System/Collections/Hashtable.hpp)             | class         | ![Progress](Pictures/Progress100.png) |
+| [ICollection](../src/Switch.Core/include/Switch/System/Collections/ICollection.hpp)         | interface     | ![Progress](Pictures/Progress100.png) |
+| [IComparer](../src/Switch.Core/include/Switch/System/Collections/IComparer.hpp)             | interface     | ![Progress](Pictures/Progress100.png) |
+| [IDictionary](../src/Switch.Core/include/Switch/System/Collections/IDictionary.hpp)         | interface     | ![Progress](Pictures/Progress100.png) |
+| IDictionaryEnumerator                                                                       | interface     | ![Progress](Pictures/Progress0.png)   |
+| [IEnumerable](../src/Switch.Core/include/Switch/System/Collections/IEnumerable.hpp)         | interface     | ![Progress](Pictures/Progress100.png) |
+| [IEnumerator](../src/Switch.Core/include/Switch/System/Collections/IEnumerator.hpp)         | interface     | ![Progress](Pictures/Progress100.png) |
+| IEqualityComparer                                                                           | interface     | ![Progress](Pictures/Progress0.png)   |
+| IHashCodeProvider                                                                           | interface     | ![Progress](Pictures/Progress0.png)   |
+| [IList](../src/Switch.Core/include/Switch/System/Collections/IList.hpp)                     | interface     | ![Progress](Pictures/Progress100.png) |
+| IStructuralComparable                                                                       | interface     | ![Progress](Pictures/Progress0.png)   |
+| IStructuralEquatable                                                                        | interface     | ![Progress](Pictures/Progress0.png)   |
+| [Queue](../src/Switch.Core/include/Switch/System/Collections/Queue.hpp)                     | class         | ![Progress](Pictures/Progress100.png) |
+| ReadOnlyCollectionBase                                                                      | class         | ![Progress](Pictures/Progress0.png)   |
+| SortedList                                                                                  | class         | ![Progress](Pictures/Progress0.png)   |
+| [Stack](../src/Switch.Core/include/Switch/System/Collections/Stack.hpp)                     | class         | ![Progress](Pictures/Progress100.png) |
+| StructuralComparisons                                                                       | class         | ![Progress](Pictures/Progress0.png)   |
 
 ### System::Collections::Concurrent
 
