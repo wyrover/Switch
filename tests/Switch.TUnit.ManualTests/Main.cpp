@@ -6,7 +6,6 @@
 using namespace System;
 
 namespace Examples {
-  
   class Program : public TUnit::TestFixture {
   public:
     void MyTest() {
