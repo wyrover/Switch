@@ -422,6 +422,25 @@
 |----------------------------------------------------------------------------------------|---------------|---------------------------------------|
 | *SuppressMessageAttribute*                                                             | *class*       | ![Progress](Pictures/ProgressIna.png) |
 
+### System::Diagnostics::Contract
+
+| class                                                                                  | Type          | Progression                           |
+|----------------------------------------------------------------------------------------|---------------|---------------------------------------|
+| Contract                                                                               | class         | ![Progress](Pictures/Progress0.png)   |
+| *ContractAbbreviatorAttribute*                                                         | *class*       | ![Progress](Pictures/ProgressIna.png) |
+| *ContractArgumentValidatorAttribute*                                                   | *class*       | ![Progress](Pictures/ProgressIna.png) |
+| *ContractClassAttribute*                                                               | *class*       | ![Progress](Pictures/ProgressIna.png) |
+| *ContractClassForAttribute*                                                            | *class*       | ![Progress](Pictures/ProgressIna.png) |
+| ContractFailedEventArgs                                                                | class         | ![Progress](Pictures/Progress0.png)   |
+| ContractFailureKind                                                                    | enumeration   | ![Progress](Pictures/Progress0.png)   |
+| *ContractInvariantMethodAttribute*                                                     | *class*       | ![Progress](Pictures/ProgressIna.png) |
+| *ContractOptionAttribute*                                                              | *class*       | ![Progress](Pictures/ProgressIna.png) |
+| *ContractPublicPropertyNameAttribute*                                                  | *class*       | ![Progress](Pictures/ProgressIna.png) |
+| *ContractReferenceAssemblyAttribute*                                                   | *class*       | ![Progress](Pictures/ProgressIna.png) |
+| *ContractRuntimeIgnoredAttribute*                                                      | *class*       | ![Progress](Pictures/ProgressIna.png) |
+| *ContractVerificationAttribute*                                                        | *class*       | ![Progress](Pictures/ProgressIna.png) |
+| *PureAttribute*                                                                        | *class*       | ![Progress](Pictures/ProgressIna.png) |
+
 ### System::Diagnostics::Tracing
 
 | class                                                                                  | Type          | Progression                           |
