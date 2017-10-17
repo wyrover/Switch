@@ -47,6 +47,19 @@
 | RegistryValueOptions                                                                   | enumeration | ![Progress](Pictures/Progress100.png) |
 | RegistryView                                                                           | enumeration | ![Progress](Pictures/Progress0.png)   |
 
+### Microsoft::Win32::SafeHandles
+
+| class                                                                                  | Type        | Progression                           |
+|----------------------------------------------------------------------------------------|-------------|---------------------------------------|
+| CriticalHandleMinusOneIsInvalid                                                        | class       | ![Progress](Pictures/Progress0.png)   |
+| CriticalHandleZeroOrMinusOneIsInvalid                                                  | class       | ![Progress](Pictures/Progress0.png)   |
+| SafeAccessTokenHandle                                                                  | class       | ![Progress](Pictures/Progress0.png)   |
+| SafeFileHandle                                                                         | class       | ![Progress](Pictures/Progress0.png)   |
+| SafeHandleMinusOneIsInvalid                                                            | class       | ![Progress](Pictures/Progress0.png)   |
+| SafeHandleZeroOrMinusOneIsInvalid                                                      | class       | ![Progress](Pictures/Progress0.png)   |
+| SafeRegistryHandle                                                                     | class       | ![Progress](Pictures/Progress0.png)   |
+| SafeWaitHandle                                                                         | class       | ![Progress](Pictures/Progress0.png)   |
+
 ### System 
 
 | class                                                                                  | Type        | Progression                           |
@@ -370,6 +383,20 @@
 | ReadOnlyColection\<T\>                                                                 | class       | ![Progress](Pictures/Progress100.png) |
 | ReadOnlyDictionary<TKey, TValue>                                                       | class       | ![Progress](Pictures/Progress0.png)   |
 
+### System::Configuration::Assemblies
+
+| class                                                                                  | Type        | Progression                           |
+|----------------------------------------------------------------------------------------|-------------|---------------------------------------|
+| AssemblyHashAlgorithm                                                                  | enumeration | ![Progress](Pictures/Progress0.png)   |
+| AAssemblyVersionCompatibility                                                          | enumeration | ![Progress](Pictures/Progress0.png)   |
+
+### System::Deployment::Internal
+
+| class                                                                                  | Type        | Progression                           |
+|----------------------------------------------------------------------------------------|-------------|---------------------------------------|
+| InternalActivationContextHelper                                                        | class       | ![Progress](Pictures/Progress0.png)   |
+| InternalApplicationIdentityHelper                                                      | class       | ![Progress](Pictures/Progress0.png)   |
+
 ### System::Diagnostics
 
 | class                                                                                  | Type        | Progression                           |
@@ -388,6 +415,42 @@
 | DebuggerVisualizerAttribute                                                            | class       | ![Progress](Pictures/ProgressIna.png) |
 | StackFrame                                                                             | class       | ![Progress](Pictures/Progress100.png) |
 | StackTrace                                                                             | class       | ![Progress](Pictures/Progress100.png) |
+
+### System::Diagnostics::CodeAnalysis
+
+| class                                                                                  | Type        | Progression                           |
+|----------------------------------------------------------------------------------------|-------------|---------------------------------------|
+| SuppressMessageAttribute                                                               | class       | ![Progress](Pictures/ProgressIna.png) |
+
+### System::Diagnostics::Tracing
+
+| class                                                                                  | Type        | Progression                           |
+|----------------------------------------------------------------------------------------|-------------|---------------------------------------|
+| EventActivityOptions                                                                   | class       | ![Progress](Pictures/Progress0.png)   |
+| EventAttribute                                                                         | class       | ![Progress](Pictures/ProgressIna.png) |
+| EventChannel                                                                           | class       | ![Progress](Pictures/Progress0.png)   |
+| EventCommand                                                                           | class       | ![Progress](Pictures/Progress0.png)   |
+| EventCommandEventArgs                                                                  | class       | ![Progress](Pictures/Progress0.png)   |
+| EventDataAttribute                                                                     | class       | ![Progress](Pictures/ProgressIna.png) |
+| EventFieldAttribute                                                                    | class       | ![Progress](Pictures/ProgressIna.png) |
+| EventFieldFormat                                                                       | class       | ![Progress](Pictures/Progress0.png)   |
+| EventFieldTags                                                                         | class       | ![Progress](Pictures/Progress0.png)   |
+| EventIgnoreAttribute                                                                   | class       | ![Progress](Pictures/ProgressIna.png) |
+| EventKeywords                                                                          | class       | ![Progress](Pictures/Progress0.png)   |
+| EventLevel                                                                             | class       | ![Progress](Pictures/Progress0.png)   |
+| EventListener                                                                          | class       | ![Progress](Pictures/Progress0.png)   |
+| EventManifestOptions                                                                   | class       | ![Progress](Pictures/Progress0.png)   |
+| EventOpcode                                                                            | class       | ![Progress](Pictures/Progress0.png)   |
+| EventSource                                                                            | class       | ![Progress](Pictures/Progress0.png)   |
+| EventSourceAttribute                                                                   | class       | ![Progress](Pictures/ProgressIna.png) |
+| EventSourceCreatedEventArgs                                                            | class       | ![Progress](Pictures/Progress0.png)   |
+| EventSourceException                                                                   | class       | ![Progress](Pictures/Progress0.png)   |
+| EventSourceOptions                                                                     | class       | ![Progress](Pictures/Progress0.png)   |
+| EventSourceSettings                                                                    | class       | ![Progress](Pictures/Progress0.png)   |
+| EventTags                                                                              | class       | ![Progress](Pictures/Progress0.png)   |
+| EventTask                                                                              | class       | ![Progress](Pictures/Progress0.png)   |
+| EventWrittenEventArgs                                                                  | class       | ![Progress](Pictures/Progress0.png)   |
+| NonEventAttribute                                                                      | class       | ![Progress](Pictures/ProgressIna.png) |
 
 ### System::Globalization
 
@@ -459,6 +522,13 @@
 | UserPreferenceChangedEventHandler                                                      | delegate    | ![Progress](Pictures/Progress0.png)   |
 | UserPreferenceChangingEventArgs                                                        | class       | ![Progress](Pictures/Progress0.png)   |
 | UserPreferenceChangingEventHandler                                                     | delegate    | ![Progress](Pictures/Progress0.png)   |
+
+### Microsoft::Win32::SafeHandles
+
+| class                                                                                  | Type        | Progression                           |
+|----------------------------------------------------------------------------------------|-------------|---------------------------------------|
+| SafeProcessHandle                                                                      | class       | ![Progress](Pictures/Progress0.png)   |
+| SafeX509ChainHandle                                                                    | class       | ![Progress](Pictures/Progress0.png)   |
 
 ### System
 
@@ -618,6 +688,12 @@
 | TraceSwitch                                                                            | class       | ![Progress](Pictures/Progress0.png)   |
 | XmlWriterTraceListener                                                                 | class       | ![Progress](Pictures/Progress0.png)   |
 
+### System::Diagnostics::CodeAnalysis
+
+| class                                                                                  | Type        | Progression                           |
+|----------------------------------------------------------------------------------------|-------------|---------------------------------------|
+| ExcludeFromCodeCoverageAttribute                                                       | class       | ![Progress](Pictures/ProgressIna.png) |
+
 ### System::IO
 
 | class                                                                                  | Type        | Progression                           |
@@ -636,6 +712,18 @@
 | WatcherChangeTypes                                                                     | enumeration | ![Progress](Pictures/Progress100.png) |
 
 ## Switch.System.Core (System.Core)
+
+### Microsoft::Win32::SafeHandles
+
+| class                                                                                  | Type        | Progression                           |
+|----------------------------------------------------------------------------------------|-------------|---------------------------------------|
+| SafeMemoryMappedFileHandle                                                             | class       | ![Progress](Pictures/Progress0.png)   |
+| SafeMemoryMappedViewHandle                                                             | class       | ![Progress](Pictures/Progress0.png)   |
+| SafeNCryptHandle                                                                       | class       | ![Progress](Pictures/Progress0.png)   |
+| SafeNCryptKeyHandle                                                                    | class       | ![Progress](Pictures/Progress0.png)   |
+| SafeNCryptProviderHandle                                                               | class       | ![Progress](Pictures/Progress0.png)   |
+| SafeNCryptSecretHandle                                                                 | class       | ![Progress](Pictures/Progress0.png)   |
+| SafePipeHandle                                                                         | class       | ![Progress](Pictures/Progress0.png)   |
 
 ### System::Collections::Generic
 
