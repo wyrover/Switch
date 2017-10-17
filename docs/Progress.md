@@ -19,6 +19,31 @@
 
 ![Progress](Pictures/Progress100.png) Complete
 
+## Switch.ISymWrapper (ISymWrapper)
+
+### System::Diagnostics::SymbolStore
+
+| class                 | Type          | Progression                           |
+|-----------------------|---------------|---------------------------------------|
+| SymBinder             | class         | ![Progress](Pictures/Progress0.png)   |
+| SymBinderBase         | class         | ![Progress](Pictures/Progress0.png)   |
+| SymDocument           | class         | ![Progress](Pictures/Progress0.png)   |
+| SymDocumentBase       | class         | ![Progress](Pictures/Progress0.png)   |
+| SymDocumentWriter     | class         | ![Progress](Pictures/Progress0.png)   |
+| SymDocumentWriterBase | class         | ![Progress](Pictures/Progress0.png)   |
+| SymMethod             | class         | ![Progress](Pictures/Progress0.png)   |
+| SymMethodBase         | class         | ![Progress](Pictures/Progress0.png)   |
+| SymReader             | class         | ![Progress](Pictures/Progress0.png)   |
+| SymReaderBase         | class         | ![Progress](Pictures/Progress0.png)   |
+| SymScope              | class         | ![Progress](Pictures/Progress0.png)   |
+| SymScopeBase          | class         | ![Progress](Pictures/Progress0.png)   |
+| SymVariable           | class         | ![Progress](Pictures/Progress0.png)   |
+| SymVariableBase       | class         | ![Progress](Pictures/Progress0.png)   |
+| SymWriter             | class         | ![Progress](Pictures/Progress0.png)   |
+| SymWriterBase         | class         | ![Progress](Pictures/Progress0.png)   |
+| SymBinder             | class         | ![Progress](Pictures/Progress0.png)   |
+| SymBinder             | class         | ![Progress](Pictures/Progress0.png)   |
+
 ## Switch.PresentationFramework (PresentationFramework)
 
 ### Microsoft::Win32
@@ -442,6 +467,25 @@
 | *ContractVerificationAttribute*       | *class*       | ![Progress](Pictures/ProgressIna.png) |
 | *PureAttribute*                       | *class*       | ![Progress](Pictures/ProgressIna.png) |
 
+### System::Diagnostics::SymbolStore
+
+| class                 | Type          | Progression                           |
+|-----------------------|---------------|---------------------------------------|
+| ISymbolBinder         | interface     | ![Progress](Pictures/Progress0.png)   |
+| ISymbolBinder1        | interface     | ![Progress](Pictures/Progress0.png)   |
+| ISymbolDocument       | interface     | ![Progress](Pictures/Progress0.png)   |
+| ISymbolDocumentWriter | interface     | ![Progress](Pictures/Progress0.png)   |
+| ISymbolMethod         | interface     | ![Progress](Pictures/Progress0.png)   |
+| ISymbolNamespace      | interface     | ![Progress](Pictures/Progress0.png)   |
+| ISymbolReader         | interface     | ![Progress](Pictures/Progress0.png)   |
+| ISymbolScope          | interface     | ![Progress](Pictures/Progress0.png)   |
+| ISymbolVariable       | interface     | ![Progress](Pictures/Progress0.png)   |
+| ISymbolWriter         | interface     | ![Progress](Pictures/Progress0.png)   |
+| SymbolToken           | struct        | ![Progress](Pictures/Progress0.png)   |
+| SymDocumentType       | class         | ![Progress](Pictures/Progress0.png)   |
+| SymLanguageType       | class         | ![Progress](Pictures/Progress0.png)   |
+| SymLanguageVendor     | class         | ![Progress](Pictures/Progress0.png)   |
+
 ### System::Diagnostics::Tracing
 
 | class                       | Type          | Progression                           |
@@ -473,6 +517,47 @@
 | *NonEventAttribute*         | *class*       | ![Progress](Pictures/ProgressIna.png) |
 
 ### System::Globalization
+
+| class                                                                                   | Type          | Progression                           |
+|-----------------------------------------------------------------------------------------|---------------|---------------------------------------|
+| Calendar                                                                                | class         | ![Progress](Pictures/Progress0.png)   |
+| CalendarAlgorithmType                                                                   | enumeration   | ![Progress](Pictures/Progress0.png)   |
+| CalendarWeekRule                                                                        | enumeration   | ![Progress](Pictures/Progress0.png)   |
+| CharUnicodeInfo                                                                         | class         | ![Progress](Pictures/Progress0.png)   |
+| ChineseLunisolarCalendar                                                                | class         | ![Progress](Pictures/Progress0.png)   |
+| CompareInfo                                                                             | class         | ![Progress](Pictures/Progress0.png)   |
+| CompareOptions                                                                          | enumeration   | ![Progress](Pictures/Progress0.png)   |
+| CultureInfo                                                                             | class         | ![Progress](Pictures/Progress0.png)   |
+| CultureNotFoundException                                                                | class         | ![Progress](Pictures/Progress0.png)   |
+| CultureTypes                                                                            | enumeration   | ![Progress](Pictures/Progress0.png)   |
+| DateTimeFormatInfo                                                                      | class         | ![Progress](Pictures/Progress0.png)   |
+| DateTimeStyles                                                                          | enumeration   | ![Progress](Pictures/Progress0.png)   |
+| DaylightTime                                                                            | class         | ![Progress](Pictures/Progress0.png)   |
+| DigitShapes                                                                             | enumeration   | ![Progress](Pictures/Progress0.png)   |
+| EastAsianLunisolarCalendar                                                              | class         | ![Progress](Pictures/Progress0.png)   |
+| GregorianCalendar                                                                       | class         | ![Progress](Pictures/Progress0.png)   |
+| GregorianCalendarTypes                                                                  | enumeration   | ![Progress](Pictures/Progress0.png)   |
+| HebrewCalendar                                                                          | class         | ![Progress](Pictures/Progress0.png)   |
+| HijriCalendar                                                                           | class         | ![Progress](Pictures/Progress0.png)   |
+| IdnMapping                                                                              | class         | ![Progress](Pictures/Progress0.png)   |
+| JapaneseCalendar                                                                        | class         | ![Progress](Pictures/Progress0.png)   |
+| JapaneseLunisolarCalendar                                                               | class         | ![Progress](Pictures/Progress0.png)   |
+| JulianCalendar                                                                          | class         | ![Progress](Pictures/Progress0.png)   |
+| KoreanCalendar                                                                          | class         | ![Progress](Pictures/Progress0.png)   |
+| KoreanLunisolarCalendar                                                                 | class         | ![Progress](Pictures/Progress0.png)   |
+| NumberFormatInfo                                                                        | class         | ![Progress](Pictures/Progress0.png)   |
+| [NumberStyles](../src/Switch.Core/include/Switch/System/Globalization/NumberStyles.hpp) | enumeration   | ![Progress](Pictures/Progress100.png) |
+| PersianCalendar                                                                         | class         | ![Progress](Pictures/Progress0.png)   |
+| RegionInfo                                                                              | class         | ![Progress](Pictures/Progress0.png)   |
+| SortKey                                                                                 | class         | ![Progress](Pictures/Progress0.png)   |
+| SortVersion                                                                             | class         | ![Progress](Pictures/Progress0.png)   |
+| StringInfo                                                                              | class         | ![Progress](Pictures/Progress0.png)   |
+| TaiwanCalendar                                                                          | class         | ![Progress](Pictures/Progress0.png)   |
+| TaiwanLunisolarCalendar                                                                 | class         | ![Progress](Pictures/Progress0.png)   |
+| TextElementEnumerator                                                                   | class         | ![Progress](Pictures/Progress0.png)   |
+| TextInfo                                                                                | class         | ![Progress](Pictures/Progress0.png)   |
+| TimeSpanStyles                                                                          | enumeration   | ![Progress](Pictures/Progress0.png)   |
+| UnicodeCategory                                                                         | enumeration   | ![Progress](Pictures/Progress0.png)   |
 
 ### System::IO
 
@@ -716,20 +801,20 @@
 
 ### System::IO
 
-| class                                                                                  | Type          | Progression                           |
-|----------------------------------------------------------------------------------------|---------------|---------------------------------------|
-| ErrorEventArgs                                                                         | class         | ![Progress](Pictures/Progress100.png) |
-| ErrorEventHandler                                                                      | delegate      | ![Progress](Pictures/Progress100.png) |
-| FileSystemEventArg                                                                     | class         | ![Progress](Pictures/Progress100.png) |
-| FileSystemEventHandler                                                                 | delegate      | ![Progress](Pictures/Progress100.png) |
-| FileSystemWatcher                                                                      | class         | ![Progress](Pictures/Progress0.png)   |
-| InternalBufferOverflowException                                                        | class         | ![Progress](Pictures/Progress100.png) |
-| InvalidDataException                                                                   | class         | ![Progress](Pictures/Progress100.png) |
-| *IODescriptionAttribute*                                                               | *class*       | ![Progress](Pictures/ProgressIna.png) |
-| NotifyFilters                                                                          | enumeration   | ![Progress](Pictures/Progress0.png)   |
-| RenamedEventArgs                                                                       | class         | ![Progress](Pictures/Progress100.png) |
-| RenamedEventHandler                                                                    | delegate      | ![Progress](Pictures/Progress100.png) |
-| WatcherChangeTypes                                                                     | enumeration   | ![Progress](Pictures/Progress100.png) |
+| class                                                                                                                | Type          | Progression                           |
+|----------------------------------------------------------------------------------------------------------------------|---------------|---------------------------------------|
+| [ErrorEventArgs](../src/Switch.System/include/Switch/System/IO/ErrorEventArgs.hpp)                                   | class         | ![Progress](Pictures/Progress100.png) |
+| [ErrorEventHandler](../src/Switch.System/include/Switch/System/IO/ErrorEventHandler.hpp)                             | delegate      | ![Progress](Pictures/Progress100.png) |
+| [FileSystemEventArg](../src/Switch.System/include/Switch/System/IO/FileSystemEventArg.hpp)                           | class         | ![Progress](Pictures/Progress100.png) |
+| [FileSystemEventHandler](../src/Switch.System/include/Switch/System/IO/FileSystemEventHandler.hpp)                   | delegate      | ![Progress](Pictures/Progress100.png) |
+| FileSystemWatcher                                                                                                    | class         | ![Progress](Pictures/Progress0.png)   |
+| [InternalBufferOverflowException](../src/Switch.System/include/Switch/System/IO/InternalBufferOverflowException.hpp) | class         | ![Progress](Pictures/Progress100.png) |
+| [InvalidDataException](../src/Switch.System/include/Switch/System/IO/InvalidDataException.hpp)                       | class         | ![Progress](Pictures/Progress100.png) |
+| *IODescriptionAttribute*                                                                                             | *class*       | ![Progress](Pictures/ProgressIna.png) |
+| NotifyFilters                                                                                                        | enumeration   | ![Progress](Pictures/Progress0.png)   |
+| RenamedEventArgs                                                                                                     | class         | ![Progress](Pictures/Progress0.png)   |
+| RenamedEventHandler                                                                                                  | delegate      | ![Progress](Pictures/Progress0.png)   |
+| [WatcherChangeTypes](../src/Switch.System/include/Switch/System/IO/WatcherChangeTypes.hpp)                           | enumeration   | ![Progress](Pictures/Progress100.png) |
 
 ## Switch.System.Core (System.Core)
 
@@ -763,6 +848,15 @@
 | class                | Type          | Progression                           |
 |----------------------|---------------|---------------------------------------|
 | HandleInheritability | enumeration   | ![Progress](Pictures/Progress0.png)   |
+ 
+## Switch::System::Globalization (sysglobl)
+
+### System::Globalization
+
+| class                       | Type          | Progression                           |
+|-----------------------------|---------------|---------------------------------------|
+| CultureAndRegionInfoBuilder | class         | ![Progress](Pictures/Progress0.png)   |
+| CultureAndRegionModifiers   | enumeration   | ![Progress](Pictures/Progress0.png)   |
 
 ## Switch.System.ServiceModel (System.ServiceModel)
 
