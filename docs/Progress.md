@@ -32,20 +32,20 @@
 | OpenFileDialog                                                                         | class       | ![Progress](Pictures/Progress0.png)   |
 | SaveFileDialog                                                                         | class       | ![Progress](Pictures/Progress0.png)   |
 
-## Switch.System.Core (mscorelib)
+## Switch.Core (mscorelib)
 
 ### Microsoft::Win32
 
-| class                                                                                  | Type        | Progression                           |
-|----------------------------------------------------------------------------------------|-------------|---------------------------------------|
-| Registry                                                                               | class       | ![Progress](Pictures/Progress100.png) |
-| RegistryHive                                                                           | enumeration | ![Progress](Pictures/Progress100.png) |
-| RegistryKey                                                                            | class       | ![Progress](Pictures/Progress100.png) |
-| RegistryKeyPermissionCheck                                                             | enumeration | ![Progress](Pictures/Progress100.png) |
-| RegistryOptions                                                                        | enumeration | ![Progress](Pictures/Progress100.png) |
-| RegistryValueKind                                                                      | enumeration | ![Progress](Pictures/Progress100.png) |
-| RegistryValueOptions                                                                   | enumeration | ![Progress](Pictures/Progress100.png) |
-| RegistryView                                                                           | enumeration | ![Progress](Pictures/Progress0.png)   |
+| class                                                                                                       | Type        | Progression                           |
+|-------------------------------------------------------------------------------------------------------------|-------------|---------------------------------------|
+| [Registry](../src/Switch.Core/include/Switch/Microsoft/Win32/Registry.hpp)                                  | class       | ![Progress](Pictures/Progress100.png) |
+| [RegistryHive](../src/Switch.Core/include/Switch/Microsoft/Win32/RegistryHive.hpp)                          | enumeration | ![Progress](Pictures/Progress100.png) |
+| [RegistryKey](../src/Switch.Core/include/Switch/Microsoft/Win32/RegistryKey.hpp)                            | class       | ![Progress](Pictures/Progress100.png) |
+| [RegistryKeyPermissionCheck](../src/Switch.Core/include/Switch/Microsoft/Win32/RegistryPermissionCheck.hpp) | enumeration | ![Progress](Pictures/Progress100.png) |
+| [RegistryOptions](../src/Switch.Core/include/Switch/Microsoft/Win32/RegistryOptions.hpp)                    | enumeration | ![Progress](Pictures/Progress100.png) |
+| [RegistryValueKind](../src/Switch.Core/include/Switch/Microsoft/Win32/RegistryValueKind.hpp)                | enumeration | ![Progress](Pictures/Progress100.png) |
+| [RegistryValueOptions](../src/Switch.Core/include/Switch/Microsoft/Win32/RegistryValueOptions.hpp)          | enumeration | ![Progress](Pictures/Progress100.png) |
+| RegistryView                                                                                                | enumeration | ![Progress](Pictures/Progress0.png)   |
 
 ### Microsoft::Win32::SafeHandles
 
