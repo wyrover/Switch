@@ -668,22 +668,22 @@
 
 ### System::Collections::Concurrent
 
-| class                                                                                  | Type          | Progression                           |
-|----------------------------------------------------------------------------------------|---------------|---------------------------------------|
-| BlockingCollection\<T\>                                                                | class         | ![Progress](Pictures/Progress0.png)   |
-| ConcurrentBag\<T\>                                                                     | class         | ![Progress](Pictures/Progress100.png) |
+| class                                                                                                     | Type          | Progression                           |
+|-----------------------------------------------------------------------------------------------------------|---------------|---------------------------------------|
+| BlockingCollection\<T\>                                                                                   | class         | ![Progress](Pictures/Progress0.png)   |
+| [ConcurrentBag\<T\>](../src/Switch.System/include/Switch/System/Collections/Concurrent/ConcurrentBag.hpp) | class         | ![Progress](Pictures/Progress100.png) |
 
 ### System::Collections::Generic
 
-| class                                                                                  | Type          | Progression                           |
-|----------------------------------------------------------------------------------------|---------------|---------------------------------------|
-| ISet\<T\>                                                                              | interface     | ![Progress](Pictures/Progress100.png) |
-| LinkedList\<T\>                                                                        | class         | ![Progress](Pictures/Progress50.png)  |
-| LinkedListNode\<T\>                                                                    | class         | ![Progress](Pictures/Progress0.png)   |
-| Queue\<T\>                                                                             | class         | ![Progress](Pictures/Progress100.png) |
-| SortedDictionary\<T\>                                                                  | class         | ![Progress](Pictures/Progress100.png) |
-| SortedList\<T\>                                                                        | class         | ![Progress](Pictures/Progress0.png)   |
-| Stack\<T\>                                                                             | class         | ![Progress](Pictures/Progress100.png) |
+| class                                                                                                        | Type          | Progression                           |
+|--------------------------------------------------------------------------------------------------------------|---------------|---------------------------------------|
+| [ISet\<T\>](../src/Switch.System/include/Switch/System/Collections/Generic/ISet.hpp)                         | interface     | ![Progress](Pictures/Progress100.png) |
+| [LinkedList\<T\>](../src/Switch.System/include/Switch/System/Collections/Generic/LinkedList.hpp)             | class         | ![Progress](Pictures/Progress50.png)  |
+| LinkedListNode\<T\>                                                                                          | class         | ![Progress](Pictures/Progress0.png)   |
+| [Queue\<T\>](../src/Switch.System/include/Switch/System/Collections/Generic/Queue.hpp)                       | class         | ![Progress](Pictures/Progress100.png) |
+| [SortedDictionary\<T\>](../src/Switch.System/include/Switch/System/Collections/Generic/SortedDictionary.hpp) | class         | ![Progress](Pictures/Progress100.png) |
+| SortedList\<T\>                                                                                              | class         | ![Progress](Pictures/Progress0.png)   |
+| [Stack\<T\>](../src/Switch.System/include/Switch/System/Collections/Generic/Stack.hpp)                       | class         | ![Progress](Pictures/Progress100.png) |
 
 ### System::Collections::ObjectModel
 
@@ -694,102 +694,102 @@
 
 ### System::Collections::Specialized
 
-| class                                                                                  | Type          | Progression                           |
-|----------------------------------------------------------------------------------------|---------------|---------------------------------------|
-| BitVector32                                                                            | struct        | ![Progress](Pictures/Progress0.png)   |
-| CollectionsUtil                                                                        | class         | ![Progress](Pictures/Progress0.png)   |
-| HybridDictionary                                                                       | class         | ![Progress](Pictures/Progress0.png)   |
-| INotifyCollectionChanged                                                               | class         | ![Progress](Pictures/Progress0.png)   |
-| IOrderedDictionary.                                                                    | class         | ![Progress](Pictures/Progress0.png)   |
-| ListDictionary                                                                         | class         | ![Progress](Pictures/Progress0.png)   |
-| NameObjectCollectionBase                                                               | class         | ![Progress](Pictures/Progress0.png)   |
-| NameValueCollection                                                                    | class         | ![Progress](Pictures/Progress0.png)   |
-| NotifyCollectionChangedEventArgs                                                       | class         | ![Progress](Pictures/Progress0.png)   |
-| NotifyCollectionChangedEventHandler                                                    | delegate      | ![Progress](Pictures/Progress0.png)   |
-| OrderedDictionary                                                                      | class         | ![Progress](Pictures/Progress0.png)   |
-| StringCollection                                                                       | class         | ![Progress](Pictures/Progress100.png) |
-| StringDictionary                                                                       | class         | ![Progress](Pictures/Progress100.png) |
-| StringEnumerator                                                                       | class         | ![Progress](Pictures/Progress100.png) |
+| class                                                                                                       | Type          | Progression                           |
+|-------------------------------------------------------------------------------------------------------------|---------------|---------------------------------------|
+| BitVector32                                                                                                 | struct        | ![Progress](Pictures/Progress0.png)   |
+| CollectionsUtil                                                                                             | class         | ![Progress](Pictures/Progress0.png)   |
+| HybridDictionary                                                                                            | class         | ![Progress](Pictures/Progress0.png)   |
+| INotifyCollectionChanged                                                                                    | class         | ![Progress](Pictures/Progress0.png)   |
+| IOrderedDictionary.                                                                                         | class         | ![Progress](Pictures/Progress0.png)   |
+| ListDictionary                                                                                              | class         | ![Progress](Pictures/Progress0.png)   |
+| NameObjectCollectionBase                                                                                    | class         | ![Progress](Pictures/Progress0.png)   |
+| NameValueCollection                                                                                         | class         | ![Progress](Pictures/Progress0.png)   |
+| NotifyCollectionChangedEventArgs                                                                            | class         | ![Progress](Pictures/Progress0.png)   |
+| NotifyCollectionChangedEventHandler                                                                         | delegate      | ![Progress](Pictures/Progress0.png)   |
+| OrderedDictionary                                                                                           | class         | ![Progress](Pictures/Progress0.png)   |
+| [StringCollection](../src/Switch.System/include/Switch/System/Collections/Specialized/StringCollection.hpp) | class         | ![Progress](Pictures/Progress100.png) |
+| [StringDictionary](../src/Switch.System/include/Switch/System/Collections/Specialized/StringDictionary.hpp) | class         | ![Progress](Pictures/Progress100.png) |
+| [StringEnumerator](../src/Switch.System/include/Switch/System/Collections/Specialized/StringEnumerator.hpp) | class         | ![Progress](Pictures/Progress100.png) |
 
 ### System::Diagnostics
 
-| class                                                                                  | Type          | Progression                           |
-|----------------------------------------------------------------------------------------|---------------|---------------------------------------|
-| BooleanSwitch                                                                          | class         | ![Progress](Pictures/Progress0.png)   |
-| ConsoleTraceListener                                                                   | class         | ![Progress](Pictures/Progress100.png) |
-| CorrelationManager                                                                     | class         | ![Progress](Pictures/Progress0.png)   |
-| CounterCreationData                                                                    | class         | ![Progress](Pictures/Progress0.png)   |
-| CounterCreationDataCollection                                                          | struct        | ![Progress](Pictures/Progress0.png)   |
-| CounterSample                                                                          | class         | ![Progress](Pictures/Progress0.png)   |
-| CounterSampleCalculator                                                                | class         | ![Progress](Pictures/Progress0.png)   |
-| DataReceivedEventArgs                                                                  | class         | ![Progress](Pictures/Progress0.png)   |
-| DataReceivedEventHandler                                                               | delegate      | ![Progress](Pictures/Progress0.png)   |
-| Debug                                                                                  | class         | ![Progress](Pictures/Progress100.png) |
-| DefaultTraceListener                                                                   | class         | ![Progress](Pictures/Progress100.png) |
-| DelimitedListTraceListener                                                             | class         | ![Progress](Pictures/Progress0.png)   |
-| EntryWrittenEventArgs                                                                  | class         | ![Progress](Pictures/Progress0.png)   |
-| EntryWrittenEventHandler                                                               | delegate      | ![Progress](Pictures/Progress0.png)   |
-| EventInstance                                                                          | class         | ![Progress](Pictures/Progress0.png)   |
-| EventLog                                                                               | class         | ![Progress](Pictures/Progress0.png)   |
-| EventLogEntry                                                                          | class         | ![Progress](Pictures/Progress0.png)   |
-| EventLogEntryType                                                                      | enumeration   | ![Progress](Pictures/Progress0.png)   |
-| EventLogEntryCollection                                                                | class         | ![Progress](Pictures/Progress0.png)   |
-| EventLogInstaller                                                                      | class         | ![Progress](Pictures/Progress0.png)   |
-| EventLogPermission                                                                     | class         | ![Progress](Pictures/Progress0.png)   |
-| EventLogPermissionAccess                                                               | enumeration   | ![Progress](Pictures/Progress0.png)   |
-| *EventLogPermissionAttribute*                                                          | *class*       | ![Progress](Pictures/ProgressIna.png) |
-| EventLogPermissionEntry                                                                | class         | ![Progress](Pictures/Progress0.png)   |
-| EventLogPermissionCollection                                                           | class         | ![Progress](Pictures/Progress0.png)   |
-| EventLogTraceListener                                                                  | class         | ![Progress](Pictures/Progress0.png)   |
-| EventSchemaTraceListener                                                               | class         | ![Progress](Pictures/Progress0.png)   |
-| EventSourceCreationData                                                                | class         | ![Progress](Pictures/Progress0.png)   |
-| EventTypeFilter                                                                        | class         | ![Progress](Pictures/Progress0.png)   |
-| FileVersionInfo                                                                        | class         | ![Progress](Pictures/Progress0.png)   |
-| ICollectionData                                                                        | interface     | ![Progress](Pictures/Progress0.png)   |
-| InstanceData                                                                           | class         | ![Progress](Pictures/Progress0.png)   |
-| InstanceDataCollection                                                                 | class         | ![Progress](Pictures/Progress0.png)   |
-| InstanceDataCollectionCollection                                                       | class         | ![Progress](Pictures/Progress0.png)   |
-| *MonitoringDescriptionAttribute*                                                       | *class*       | ![Progress](Pictures/ProgressIna.png) |
-| OverflowAction                                                                         | enumeration   | ![Progress](Pictures/Progress0.png)   |
-| PerformanceCounter                                                                     | class         | ![Progress](Pictures/Progress0.png)   |
-| PerformanceCounterCategory                                                             | class         | ![Progress](Pictures/Progress0.png)   |
-| PerformanceCounterCategoryType                                                         | enumeration   | ![Progress](Pictures/Progress0.png)   |
-| PerformanceCounterInstaller                                                            | class         | ![Progress](Pictures/Progress0.png)   |
-| PerformanceCounterInstanceLifetime                                                     | enumeration   | ![Progress](Pictures/Progress0.png)   |
-| PerformanceCounterPermission                                                           | class         | ![Progress](Pictures/Progress0.png)   |
-| PerformanceCounterPermissionAccess                                                     | enumeration   | ![Progress](Pictures/Progress0.png)   |
-| *PerformanceCounterPermissionAttribute*                                                | *class*       | ![Progress](Pictures/ProgressIna.png) |
-| PerformanceCounterPermissionEntry                                                      | class         | ![Progress](Pictures/Progress0.png)   |
-| PerformanceCounterPermissionEntryCollection                                            | class         | ![Progress](Pictures/Progress0.png)   |
-| PerformanceCounterType                                                                 | enumeration   | ![Progress](Pictures/Progress0.png)   |
-| Process                                                                                | class         | ![Progress](Pictures/Progress50.png)  |
-| ProcessModule                                                                          | class         | ![Progress](Pictures/Progress0.png)   |
-| ProcessModuleCollection                                                                | class         | ![Progress](Pictures/Progress0.png)   |
-| ProcessPriorityClass                                                                   | enumeration   | ![Progress](Pictures/Progress100.png) |
-| ProcessStartInfo                                                                       | class         | ![Progress](Pictures/Progress100.png) |
-| ProcessThread                                                                          | class         | ![Progress](Pictures/Progress0.png)   |
-| ProcessThreadCollection                                                                | class         | ![Progress](Pictures/Progress0.png)   |
-| ProcessWindowStyle                                                                     | enumeration   | ![Progress](Pictures/Progress100.png) |
-| SourceFilter                                                                           | class         | ![Progress](Pictures/Progress0.png)   |
-| SourceLevels                                                                           | enumeration   | ![Progress](Pictures/Progress0.png)   |
-| SourceSwitch                                                                           | class         | ![Progress](Pictures/Progress0.png)   |
-| StopWatch                                                                              | class         | ![Progress](Pictures/Progress100.png) |
-| Switch                                                                                 | class         | ![Progress](Pictures/Progress0.png)   |
-| *SwitchAttribute*                                                                      | *class*       | ![Progress](Pictures/ProgressIna.png) |
-| *SwitchLevelAttribute*                                                                 | *class*       | ![Progress](Pictures/ProgressIna.png) |
-| TextWriterTraceListener                                                                | class         | ![Progress](Pictures/Progress100.png) |
-| ThreadPriorityLevel                                                                    | enumeration   | ![Progress](Pictures/Progress0.png)   |
-| ThreadState                                                                            | enumeration   | ![Progress](Pictures/Progress0.png)   |
-| ThreadWaitReason                                                                       | enumeration   | ![Progress](Pictures/Progress0.png)   |
-| Trace                                                                                  | class         | ![Progress](Pictures/Progress100.png) |
-| TraceLevel                                                                             | enumeration   | ![Progress](Pictures/Progress0.png)   |
-| TraceEventCache                                                                        | class         | ![Progress](Pictures/Progress100.png) |
-| TraceEventType                                                                         | enumeration   | ![Progress](Pictures/Progress100.png) |
-| TraceFilter                                                                            | class         | ![Progress](Pictures/Progress100.png) |
-| TraceListener                                                                          | class         | ![Progress](Pictures/Progress100.png) |
-| TraceListenerCollection                                                                | class         | ![Progress](Pictures/Progress100.png) |
-| TraceOptions                                                                           | enumeration   | ![Progress](Pictures/Progress100.png) |
-| TraceSource                                                                            | class         | ![Progress](Pictures/Progress100.png) |
+| class                                                                                                         | Type          | Progression                           |
+|---------------------------------------------------------------------------------------------------------------|---------------|---------------------------------------|
+| BooleanSwitch                                                                                                 | class         | ![Progress](Pictures/Progress0.png)   |
+| [ConsoleTraceListener](../src/Switch.System/include/Switch/System/Diagnostics/ConsoleTraceListener.hpp)       | class         | ![Progress](Pictures/Progress100.png) |
+| CorrelationManager                                                                                            | class         | ![Progress](Pictures/Progress0.png)   |
+| CounterCreationData                                                                                           | class         | ![Progress](Pictures/Progress0.png)   |
+| CounterCreationDataCollection                                                                                 | struct        | ![Progress](Pictures/Progress0.png)   |
+| CounterSample                                                                                                 | class         | ![Progress](Pictures/Progress0.png)   |
+| CounterSampleCalculator                                                                                       | class         | ![Progress](Pictures/Progress0.png)   |
+| DataReceivedEventArgs                                                                                         | class         | ![Progress](Pictures/Progress0.png)   |
+| DataReceivedEventHandler                                                                                      | delegate      | ![Progress](Pictures/Progress0.png)   |
+| [Debug](../src/Switch.System/include/Switch/System/Diagnostics/Debug.hpp)                                     | class         | ![Progress](Pictures/Progress100.png) |
+| [DefaultTraceListener](../src/Switch.System/include/Switch/System/Diagnostics/DefaultTraceListener.hpp)       | class         | ![Progress](Pictures/Progress100.png) |
+| DelimitedListTraceListener                                                                                    | class         | ![Progress](Pictures/Progress0.png)   |
+| EntryWrittenEventArgs                                                                                         | class         | ![Progress](Pictures/Progress0.png)   |
+| EntryWrittenEventHandler                                                                                      | delegate      | ![Progress](Pictures/Progress0.png)   |
+| EventInstance                                                                                                 | class         | ![Progress](Pictures/Progress0.png)   |
+| EventLog                                                                                                      | class         | ![Progress](Pictures/Progress0.png)   |
+| EventLogEntry                                                                                                 | class         | ![Progress](Pictures/Progress0.png)   |
+| EventLogEntryType                                                                                             | enumeration   | ![Progress](Pictures/Progress0.png)   |
+| EventLogEntryCollection                                                                                       | class         | ![Progress](Pictures/Progress0.png)   |
+| EventLogInstaller                                                                                             | class         | ![Progress](Pictures/Progress0.png)   |
+| EventLogPermission                                                                                            | class         | ![Progress](Pictures/Progress0.png)   |
+| EventLogPermissionAccess                                                                                      | enumeration   | ![Progress](Pictures/Progress0.png)   |
+| *EventLogPermissionAttribute*                                                                                 | *class*       | ![Progress](Pictures/ProgressIna.png) |
+| EventLogPermissionEntry                                                                                       | class         | ![Progress](Pictures/Progress0.png)   |
+| EventLogPermissionCollection                                                                                  | class         | ![Progress](Pictures/Progress0.png)   |
+| EventLogTraceListener                                                                                         | class         | ![Progress](Pictures/Progress0.png)   |
+| EventSchemaTraceListener                                                                                      | class         | ![Progress](Pictures/Progress0.png)   |
+| EventSourceCreationData                                                                                       | class         | ![Progress](Pictures/Progress0.png)   |
+| EventTypeFilter                                                                                               | class         | ![Progress](Pictures/Progress0.png)   |
+| FileVersionInfo                                                                                               | class         | ![Progress](Pictures/Progress0.png)   |
+| ICollectionData                                                                                               | interface     | ![Progress](Pictures/Progress0.png)   |
+| InstanceData                                                                                                  | class         | ![Progress](Pictures/Progress0.png)   |
+| InstanceDataCollection                                                                                        | class         | ![Progress](Pictures/Progress0.png)   |
+| InstanceDataCollectionCollection                                                                              | class         | ![Progress](Pictures/Progress0.png)   |
+| *MonitoringDescriptionAttribute*                                                                              | *class*       | ![Progress](Pictures/ProgressIna.png) |
+| OverflowAction                                                                                                | enumeration   | ![Progress](Pictures/Progress0.png)   |
+| PerformanceCounter                                                                                            | class         | ![Progress](Pictures/Progress0.png)   |
+| PerformanceCounterCategory                                                                                    | class         | ![Progress](Pictures/Progress0.png)   |
+| PerformanceCounterCategoryType                                                                                | enumeration   | ![Progress](Pictures/Progress0.png)   |
+| PerformanceCounterInstaller                                                                                   | class         | ![Progress](Pictures/Progress0.png)   |
+| PerformanceCounterInstanceLifetime                                                                            | enumeration   | ![Progress](Pictures/Progress0.png)   |
+| PerformanceCounterPermission                                                                                  | class         | ![Progress](Pictures/Progress0.png)   |
+| PerformanceCounterPermissionAccess                                                                            | enumeration   | ![Progress](Pictures/Progress0.png)   |
+| *PerformanceCounterPermissionAttribute*                                                                       | *class*       | ![Progress](Pictures/ProgressIna.png) |
+| PerformanceCounterPermissionEntry                                                                             | class         | ![Progress](Pictures/Progress0.png)   |
+| PerformanceCounterPermissionEntryCollection                                                                   | class         | ![Progress](Pictures/Progress0.png)   |
+| PerformanceCounterType                                                                                        | enumeration   | ![Progress](Pictures/Progress0.png)   |
+| [Process](../src/Switch.System/include/Switch/System/Diagnostics/Process.hpp)                                 | class         | ![Progress](Pictures/Progress50.png)  |
+| ProcessModule                                                                                                 | class         | ![Progress](Pictures/Progress0.png)   |
+| ProcessModuleCollection                                                                                       | class         | ![Progress](Pictures/Progress0.png)   |
+| [ProcessPriorityClass](../src/Switch.System/include/Switch/System/Diagnostics/ProcessPriorityClass.hpp)       | enumeration   | ![Progress](Pictures/Progress100.png) |
+| [ProcessStartInfo](../src/Switch.System/include/Switch/System/Diagnostics/ProcessStartInfo.hpp)               | class         | ![Progress](Pictures/Progress100.png) |
+| ProcessThread                                                                                                 | class         | ![Progress](Pictures/Progress0.png)   |
+| ProcessThreadCollection                                                                                       | class         | ![Progress](Pictures/Progress0.png)   |
+| [ProcessWindowStyle](../src/Switch.System/include/Switch/System/Diagnostics/ProcessWindowStyle.hpp)           | enumeration   | ![Progress](Pictures/Progress100.png) |
+| SourceFilter                                                                                                  | class         | ![Progress](Pictures/Progress0.png)   |
+| SourceLevels                                                                                                  | enumeration   | ![Progress](Pictures/Progress0.png)   |
+| SourceSwitch                                                                                                  | class         | ![Progress](Pictures/Progress0.png)   |
+| [StopWatch](../src/Switch.System/include/Switch/System/Diagnostics/StopWatch.hpp)                             | class         | ![Progress](Pictures/Progress100.png) |
+| Switch                                                                                                        | class         | ![Progress](Pictures/Progress0.png)   |
+| *SwitchAttribute*                                                                                             | *class*       | ![Progress](Pictures/ProgressIna.png) |
+| *SwitchLevelAttribute*                                                                                        | *class*       | ![Progress](Pictures/ProgressIna.png) |
+| [TextWriterTraceListener](../src/Switch.System/include/Switch/System/Diagnostics/TextWriterTraceListener.hpp) | class         | ![Progress](Pictures/Progress100.png) |
+| ThreadPriorityLevel                                                                                           | enumeration   | ![Progress](Pictures/Progress0.png)   |
+| ThreadState                                                                                                   | enumeration   | ![Progress](Pictures/Progress0.png)   |
+| ThreadWaitReason                                                                                              | enumeration   | ![Progress](Pictures/Progress0.png)   |
+| [Trace](../src/Switch.System/include/Switch/System/Diagnostics/Trace.hpp)                                     | class         | ![Progress](Pictures/Progress100.png) |
+| TraceLevel                                                                                                    | enumeration   | ![Progress](Pictures/Progress0.png)   |
+| [TraceEventCache](../src/Switch.System/include/Switch/System/Diagnostics/TraceEventCache.hpp)                 | class         | ![Progress](Pictures/Progress100.png) |
+| [TraceEventType](../src/Switch.System/include/Switch/System/Diagnostics/TraceEventType.hpp)                   | enumeration   | ![Progress](Pictures/Progress100.png) |
+| [TraceFilter](../src/Switch.System/include/Switch/System/Diagnostics/TraceFilter.hpp)                         | class         | ![Progress](Pictures/Progress100.png) |
+| [TraceListener](../src/Switch.System/include/Switch/System/Diagnostics/TraceListener.hpp)                     | class         | ![Progress](Pictures/Progress100.png) |
+| [TraceListenerCollection](../src/Switch.System/include/Switch/System/Diagnostics/TraceListenerCollection.hpp) | class         | ![Progress](Pictures/Progress100.png) |
+| [TraceOptions](../src/Switch.System/include/Switch/System/Diagnostics/TraceOptions.hpp)                       | enumeration   | ![Progress](Pictures/Progress100.png) |
+| [TraceSource](../src/Switch.System/include/Switch/System/Diagnostics/TraceSource.hpp)                         | class         | ![Progress](Pictures/Progress100.png) |
 | TraceSwitch                                                                            | class         | ![Progress](Pictures/Progress0.png)   |
 | XmlWriterTraceListener                                                                 | class         | ![Progress](Pictures/Progress0.png)   |
 
