@@ -62,58 +62,58 @@
 
 ### System 
 
-| class                                                                                  | Type          | Progression                           |
-|----------------------------------------------------------------------------------------|---------------|---------------------------------------|
-| _AppDomain                                                                             | interface     | ![Progress](Pictures/Progress0.png)   |
-| AccessViolationException                                                               | class         | ![Progress](Pictures/Progress100.png) |
-| Action                                                                                 | delegate      | ![Progress](Pictures/Progress100.png) |
-| Action\<T\>                                                                            | delegate      | ![Progress](Pictures/Progress100.png) |
-| Action\<T1, T2\>                                                                       | delegate      | ![Progress](Pictures/Progress100.png) |
-| Action\<T1, T2, T3\>                                                                   | delegate      | ![Progress](Pictures/Progress100.png) |
-| Action\<T1, T2, T3, T4\>                                                               | delegate      | ![Progress](Pictures/Progress100.png) |
-| Action\<T1, T2, T3, T4, T5\>                                                           | delegate      | ![Progress](Pictures/Progress100.png) |
-| Action\<T1, T2, T3, T4, T5, T6\>                                                       | delegate      | ![Progress](Pictures/Progress100.png) |
-| Action\<T1, T2, T3, T4, T5, T6, T7\>                                                   | delegate      | ![Progress](Pictures/Progress100.png) |
-| Action\<T1, T2, T3, T4, T5, T6, T7, T8\>                                               | delegate      | ![Progress](Pictures/Progress100.png) |
-| Action\<T1, T2, T3, T4, T5, T6, T7, T8, T9\>                                           | delegate      | ![Progress](Pictures/Progress100.png) |
-| Action\<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10\>                                      | delegate      | ![Progress](Pictures/Progress100.png) |
-| Action\<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11\>                                 | delegate      | ![Progress](Pictures/Progress100.png) |
-| Action\<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12\>                            | delegate      | ![Progress](Pictures/Progress100.png) |
-| Action\<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13\>                       | delegate      | ![Progress](Pictures/Progress100.png) |
-| Action\<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14\>                  | delegate      | ![Progress](Pictures/Progress100.png) |
-| Action\<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15\>             | delegate      | ![Progress](Pictures/Progress100.png) |
-| Action\<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16\>        | delegate      | ![Progress](Pictures/Progress100.png) |
-| ActivationArgument                                                                     | class         | ![Progress](Pictures/Progress0.png)   |
-| ActivationContext                                                                      | class         | ![Progress](Pictures/Progress0.png)   |
-| Activator                                                                              | class         | ![Progress](Pictures/Progress0.png)   |
-| AggregateException                                                                     | class         | ![Progress](Pictures/Progress100.png) |
-| AppContext                                                                             | class         | ![Progress](Pictures/Progress0.png)   |
-| AppDomain                                                                              | class         | ![Progress](Pictures/Progress0.png)   |
-| AppDomainInitializer                                                                   | delegate      | ![Progress](Pictures/Progress0.png)   |
-| AppDomainManager                                                                       | class         | ![Progress](Pictures/Progress0.png)   |
-| AppDomainManagerInitializationOptions                                                  | enumeration   | ![Progress](Pictures/Progress0.png)   |
-| AppDomainSetup                                                                         | class         | ![Progress](Pictures/Progress0.png)   |
-| AppDomainUnloadedException                                                             | class         | ![Progress](Pictures/Progress100.png) |
-| ApplicationActivator                                                                   | class         | ![Progress](Pictures/Progress0.png)   |
-| ApplicationException                                                                   | class         | ![Progress](Pictures/Progress100.png) |
-| ApplicationId                                                                          | class         | ![Progress](Pictures/Progress0.png)   |
-| ApplicationIdentity                                                                    | class         | ![Progress](Pictures/Progress0.png)   |
-| ArgIterator                                                                            | struct        | ![Progress](Pictures/Progress0.png)   |
-| ArgumentException                                                                      | class         | ![Progress](Pictures/Progress100.png) |
-| ArgumentNullException                                                                  | class         | ![Progress](Pictures/Progress100.png) |
-| ArgumentOutOfRangeException                                                            | class         | ![Progress](Pictures/Progress100.png) |
-| ArithmeticException                                                                    | class         | ![Progress](Pictures/Progress100.png) |
-| Array                                                                                  | class         | ![Progress](Pictures/Progress100.png) |
-| ArraySegment<T>                                                                        | struct        | ![Progress](Pictures/Progress75.png)  |
-| ArrayTypeMismatchException                                                             | class         | ![Progress](Pictures/Progress100.png) |
-| AssemblyLoadEventArgs                                                                  | class         | ![Progress](Pictures/Progress0.png)   |
-| AssemblyLoadEventHandler                                                               | delegate      | ![Progress](Pictures/Progress0.png)   |
-| AsyncCallback                                                                          | delegate      | ![Progress](Pictures/Progress100.png) |
-| *Attribute*                                                                            | *class*       | ![Progress](Pictures/ProgressIna.png) |
-| *AttributeUsageAttribute*                                                              | *class*       | ![Progress](Pictures/ProgressIna.png) |
-| *AttributeTargets*                                                                     | *enumeration* | ![Progress](Pictures/ProgressIna.png) |
+| class                                                                                                                                       | Type          | Progression                           |
+|---------------------------------------------------------------------------------------------------------------------------------------------|---------------|---------------------------------------|
+| _AppDomain                                                                                                                                  | interface     | ![Progress](Pictures/Progress0.png)   |
+| [AccessViolationException](../src/Switch.Core/include/Switch/System/AccessViolationException.hpp)                                           | class         | ![Progress](Pictures/Progress100.png) |
+| [Action](../src/Switch.Core/include/Switch/System/Action.hpp)                                                                               | delegate      | ![Progress](Pictures/Progress100.png) |
+| [Action\<T\>](../src/Switch.Core/include/Switch/System/Action.hpp)                                                                          | delegate      | ![Progress](Pictures/Progress100.png) |
+| [Action\<T1, T2\>](../src/Switch.Core/include/Switch/System/Action.hpp)                                                                     | delegate      | ![Progress](Pictures/Progress100.png) |
+| [Action\<T1, T2, T3\>](../src/Switch.Core/include/Switch/System/Action.hpp)                                                                 | delegate      | ![Progress](Pictures/Progress100.png) |
+| [Action\<T1, T2, T3, T4\>](../src/Switch.Core/include/Switch/System/Action.hpp)                                                             | delegate      | ![Progress](Pictures/Progress100.png) |
+| [Action\<T1, T2, T3, T4, T5\>](../src/Switch.Core/include/Switch/System/Action.hpp)                                                         | delegate      | ![Progress](Pictures/Progress100.png) |
+| [Action\<T1, T2, T3, T4, T5, T6\>](../src/Switch.Core/include/Switch/System/Action.hpp)                                                     | delegate      | ![Progress](Pictures/Progress100.png) |
+| [Action\<T1, T2, T3, T4, T5, T6, T7\>](../src/Switch.Core/include/Switch/System/Action.hpp)                                                 | delegate      | ![Progress](Pictures/Progress100.png) |
+| [Action\<T1, T2, T3, T4, T5, T6, T7, T8\>](../src/Switch.Core/include/Switch/System/Action.hpp)                                             | delegate      | ![Progress](Pictures/Progress100.png) |
+| [Action\<T1, T2, T3, T4, T5, T6, T7, T8, T9\>](../src/Switch.Core/include/Switch/System/Action.hpp)                                         | delegate      | ![Progress](Pictures/Progress100.png) |
+| [Action\<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10\>](../src/Switch.Core/include/Switch/System/Action.hpp)                                    | delegate      | ![Progress](Pictures/Progress100.png) |
+| [Action\<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11\>](../src/Switch.Core/include/Switch/System/Action.hpp)                               | delegate      | ![Progress](Pictures/Progress100.png) |
+| [Action\<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12\>](../src/Switch.Core/include/Switch/System/Action.hpp)                          | delegate      | ![Progress](Pictures/Progress100.png) |
+| [Action\<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13\>](../src/Switch.Core/include/Switch/System/Action.hpp)                     | delegate      | ![Progress](Pictures/Progress100.png) |
+| [Action\<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14\>](../src/Switch.Core/include/Switch/System/Action.hpp)                | delegate      | ![Progress](Pictures/Progress100.png) |
+| [Action\<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15\>](../src/Switch.Core/include/Switch/System/Action.hpp)           | delegate      | ![Progress](Pictures/Progress100.png) |
+| [Action\<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16\>](../src/Switch.Core/include/Switch/System/Action.hpp)      | delegate      | ![Progress](Pictures/Progress100.png) |
+| ActivationArgument                                                                                                                          | class         | ![Progress](Pictures/Progress0.png)   |
+| ActivationContext                                                                                                                           | class         | ![Progress](Pictures/Progress0.png)   |
+| Activator                                                                                                                                   | class         | ![Progress](Pictures/Progress0.png)   |
+| [AggregateException](../src/Switch.Core/include/Switch/System/AggregateException.hpp)                                                       | class         | ![Progress](Pictures/Progress100.png) |
+| AppContext                                                                                                                                  | class         | ![Progress](Pictures/Progress0.png)   |
+| AppDomain                                                                                                                                   | class         | ![Progress](Pictures/Progress0.png)   |
+| AppDomainInitializer                                                                                                                        | delegate      | ![Progress](Pictures/Progress0.png)   |
+| AppDomainManager                                                                                                                            | class         | ![Progress](Pictures/Progress0.png)   |
+| AppDomainManagerInitializationOptions                                                                                                       | enumeration   | ![Progress](Pictures/Progress0.png)   |
+| AppDomainSetup                                                                                                                              | class         | ![Progress](Pictures/Progress0.png)   |
+| [AppDomainUnloadedException](../src/Switch.Core/include/Switch/System/AppDomainUnloadedException.hpp)                                       | class         | ![Progress](Pictures/Progress100.png) |
+| ApplicationActivator                                                                                                                        | class         | ![Progress](Pictures/Progress0.png)   |
+| [ApplicationException](../src/Switch.Core/include/Switch/System/ApplicationException.hpp)                                                   | class         | ![Progress](Pictures/Progress100.png) |
+| ApplicationId                                                                                                                               | class         | ![Progress](Pictures/Progress0.png)   |
+| ApplicationIdentity                                                                                                                         | class         | ![Progress](Pictures/Progress0.png)   |
+| ArgIterator                                                                                                                                 | struct        | ![Progress](Pictures/Progress0.png)   |
+| [ArgumentException](../src/Switch.Core/include/Switch/System/ArgumentException.hpp)                                                         | class         | ![Progress](Pictures/Progress100.png) |
+| [ArgumentNullException](../src/Switch.Core/include/Switch/System/ArgumentNullException.hpp)                                                 | class         | ![Progress](Pictures/Progress100.png) |
+| [ArgumentOutOfRangeException](../src/Switch.Core/include/Switch/System/ArgumentOutOfRangeException.hpp)                                     | class         | ![Progress](Pictures/Progress100.png) |
+| [ArithmeticException](../src/Switch.Core/include/Switch/System/ArithmeticException.hpp)                                                     | class         | ![Progress](Pictures/Progress100.png) |
+| [Array](../src/Switch.Core/include/Switch/System/Array.hpp)                                                                                 | class         | ![Progress](Pictures/Progress100.png) |
+| [ArraySegment\<T\>](../src/Switch.Core/include/Switch/System/ArraySegment.hpp)                                                              | struct        | ![Progress](Pictures/Progress75.png)  |
+| [ArrayTypeMismatchException](../src/Switch.Core/include/Switch/System/ArrayTypeMismatchException.hpp)                                       | class         | ![Progress](Pictures/Progress100.png) |
+| AssemblyLoadEventArgs                                                                                                                       | class         | ![Progress](Pictures/Progress0.png)   |
+| AssemblyLoadEventHandler                                                                                                                    | delegate      | ![Progress](Pictures/Progress0.png)   |
+| [AsyncCallback](../src/Switch.Core/include/Switch/System/AsyncCallback.hpp)                                                                 | delegate      | ![Progress](Pictures/Progress100.png) |
+| *Attribute*                                                                                                                                 | *class*       | ![Progress](Pictures/ProgressIna.png) |
+| *AttributeUsageAttribute*                                                                                                                   | *class*       | ![Progress](Pictures/ProgressIna.png) |
+| *AttributeTargets*                                                                                                                          | *enumeration* | ![Progress](Pictures/ProgressIna.png) |
 | BadImageFormatException                                                                | class         | ![Progress](Pictures/Progress100.png) |
-| Base64FormattingOptions                                                                | enumeration   | ![Progress](Pictures/Progress0.png)   |
+| Base64FormattingOptions                                                                                                                     | enumeration   | ![Progress](Pictures/Progress0.png)   |
 | BitConverter                                                                           | class         | ![Progress](Pictures/Progress100.png) |
 | Boolean                                                                                | struct        | ![Progress](Pictures/Progress100.png) |
 | Buffer                                                                                 | class         | ![Progress](Pictures/Progress100.png) |
@@ -121,7 +121,7 @@
 | CannotUnloadAppDomainException                                                         | class         | ![Progress](Pictures/Progress100.png) |
 | Char                                                                                   | struct        | ![Progress](Pictures/Progress100.png) |
 | CharEnumerator                                                                         | class         | ![Progress](Pictures/Progress100.png) |
-| *CLSCompliantAttribute*                                                                | *class*       | ![Progress](Pictures/ProgressIna.png) |
+| *CLSCompliantAttribute*                                                                                                                     | *class*       | ![Progress](Pictures/ProgressIna.png) |
 | Comparison                                                                             | delegate      | ![Progress](Pictures/Progress100.png) |
 | Converter                                                                              | delegate      | ![Progress](Pictures/Progress100.png) |
 | Console                                                                                | class         | ![Progress](Pictures/Progress100.png) |
@@ -132,18 +132,18 @@
 | ConsoleKeyInfo                                                                         | struct        | ![Progress](Pictures/Progress100.png) |
 | ConsoleModifiers                                                                       | enumeration   | ![Progress](Pictures/Progress100.png) |
 | ConsoleSpecialKey                                                                      | enumeration   | ![Progress](Pictures/Progress100.png) |
-| ContextBoundObect                                                                      | class         | ![Progress](Pictures/Progress0.png)   |
+| ContextBoundObect                                                                                                                           | class         | ![Progress](Pictures/Progress0.png)   |
 | ContextMarshalException                                                                | class         | ![Progress](Pictures/Progress100.png) |
-| *ContextStaticAttribute*                                                               | *class*       | ![Progress](Pictures/ProgressIna.png) |
+| *ContextStaticAttribute*                                                                                                                    | *class*       | ![Progress](Pictures/ProgressIna.png) |
 | Convert                                                                                | class         | ![Progress](Pictures/Progress100.png) |
 | Converter\<Tinput, TOutput\>                                                           | delegate      | ![Progress](Pictures/Progress100.png) |
-| CrossAppDomainDelegate                                                                 | delegate      | ![Progress](Pictures/Progress0.png)   |
+| CrossAppDomainDelegate                                                                                                                      | delegate      | ![Progress](Pictures/Progress0.png)   |
 | DataMisalignedException                                                                | class         | ![Progress](Pictures/Progress100.png) |
 | DateTime                                                                               | struct        | ![Progress](Pictures/Progress75.png)  |
 | DateTimeKind                                                                           | enumeration   | ![Progress](Pictures/Progress100.png) |
-| DateTimeOffset                                                                         | struct        | ![Progress](Pictures/Progress0.png)   |
+| DateTimeOffset                                                                                                                              | struct        | ![Progress](Pictures/Progress0.png)   |
 | DayOfWeek                                                                              | enumeration   | ![Progress](Pictures/Progress100.png) |
-| DBNull                                                                                 | class         | ![Progress](Pictures/Progress0.png)   |
+| DBNull                                                                                                                                      | class         | ![Progress](Pictures/Progress0.png)   |
 | Decimal                                                                                | struct        | ![Progress](Pictures/Progress100.png) |
 | Delegate                                                                               | class         | ![Progress](Pictures/Progress100.png) |
 | DivideByZeroException                                                                  | class         | ![Progress](Pictures/Progress100.png) |
@@ -159,27 +159,27 @@
 | Exception                                                                              | class         | ![Progress](Pictures/Progress100.png) |
 | ExceptionEngineException                                                               | class         | ![Progress](Pictures/Progress100.png) |
 | FieldAccessException                                                                   | class         | ![Progress](Pictures/Progress100.png) |
-| *FlagsAttribute*                                                                       | *class*       | ![Progress](Pictures/ProgressIna.png) |
+| *FlagsAttribute*                                                                                                                            | *class*       | ![Progress](Pictures/ProgressIna.png) |
 | FormatException                                                                        | class         | ![Progress](Pictures/Progress100.png) |
-| FormatableString                                                                       | class         | ![Progress](Pictures/Progress0.png)   |
-| Func                                                                                   | delegate      | ![Progress](Pictures/Progress100.png) |
-| Func\<TResult\>                                                                        | delegate      | ![Progress](Pictures/Progress100.png) |
-| Func\<T, TResult\>                                                                     | delegate      | ![Progress](Pictures/Progress100.png) |
-| Func\<T1, T2, TResult\>                                                                | delegate      | ![Progress](Pictures/Progress100.png) |
-| Func\<T1, T2, T3, TResult\>                                                            | delegate      | ![Progress](Pictures/Progress100.png) |
-| Func\<T1, T2, T3, T4, TResult\>                                                        | delegate      | ![Progress](Pictures/Progress100.png) |
-| Func\<T1, T2, T3, T4, T5, TResult\>                                                    | delegate      | ![Progress](Pictures/Progress100.png) |
-| Func\<T1, T2, T3, T4, T5, T6, TResult\>                                                | delegate      | ![Progress](Pictures/Progress100.png) |
-| Func\<T1, T2, T3, T4, T5, T6, T7, TResult\>                                            | delegate      | ![Progress](Pictures/Progress100.png) |
-| Func\<T1, T2, T3, T4, T5, T6, T7, T8, TResult\>                                        | delegate      | ![Progress](Pictures/Progress100.png) |
-| Func\<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult\>                                    | delegate      | ![Progress](Pictures/Progress100.png) |
-| Func\<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult\>                               | delegate      | ![Progress](Pictures/Progress100.png) |
-| Func\<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult\>                          | delegate      | ![Progress](Pictures/Progress100.png) |
-| Func\<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult\>                     | delegate      | ![Progress](Pictures/Progress100.png) |
-| Func\<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult\>                | delegate      | ![Progress](Pictures/Progress100.png) |
-| Func\<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult\>           | delegate      | ![Progress](Pictures/Progress100.png) |
-| Func\<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult\>      | delegate      | ![Progress](Pictures/Progress100.png) |
-| Func\<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult\> | delegate      | ![Progress](Pictures/Progress100.png) |
+| FormatableString                                                                                                                            | class         | ![Progress](Pictures/Progress0.png)   |
+| [Func](../src/Switch.Core/include/Switch/System/Func.hpp)                                                                                   | delegate      | ![Progress](Pictures/Progress100.png) |
+| [Func\<TResult\>](../src/Switch.Core/include/Switch/System/Func.hpp)                                                                        | delegate      | ![Progress](Pictures/Progress100.png) |
+| [Func\<T, TResult\>](../src/Switch.Core/include/Switch/System/Func.hpp)                                                                     | delegate      | ![Progress](Pictures/Progress100.png) |
+| [Func\<T1, T2, TResult\>](../src/Switch.Core/include/Switch/System/Func.hpp)                                                                | delegate      | ![Progress](Pictures/Progress100.png) |
+| [Func\<T1, T2, T3, TResult\>](../src/Switch.Core/include/Switch/System/Func.hpp)                                                            | delegate      | ![Progress](Pictures/Progress100.png) |
+| [Func\<T1, T2, T3, T4, TResult\>](../src/Switch.Core/include/Switch/System/Func.hpp)                                                        | delegate      | ![Progress](Pictures/Progress100.png) |
+| [Func\<T1, T2, T3, T4, T5, TResult\>](../src/Switch.Core/include/Switch/System/Func.hpp)                                                    | delegate      | ![Progress](Pictures/Progress100.png) |
+| [Func\<T1, T2, T3, T4, T5, T6, TResult\>](../src/Switch.Core/include/Switch/System/Func.hpp)                                                | delegate      | ![Progress](Pictures/Progress100.png) |
+| [Func\<T1, T2, T3, T4, T5, T6, T7, TResult\>](../src/Switch.Core/include/Switch/System/Func.hpp)                                            | delegate      | ![Progress](Pictures/Progress100.png) |
+| [Func\<T1, T2, T3, T4, T5, T6, T7, T8, TResult\>](../src/Switch.Core/include/Switch/System/Func.hpp)                                        | delegate      | ![Progress](Pictures/Progress100.png) |
+| [Func\<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult\>](../src/Switch.Core/include/Switch/System/Func.hpp)                                    | delegate      | ![Progress](Pictures/Progress100.png) |
+| [Func\<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult\>](../src/Switch.Core/include/Switch/System/Func.hpp)                               | delegate      | ![Progress](Pictures/Progress100.png) |
+| [Func\<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult\>](../src/Switch.Core/include/Switch/System/Func.hpp)                          | delegate      | ![Progress](Pictures/Progress100.png) |
+| [Func\<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult\>](../src/Switch.Core/include/Switch/System/Func.hpp)                     | delegate      | ![Progress](Pictures/Progress100.png) |
+| [Func\<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult\>](../src/Switch.Core/include/Switch/System/Func.hpp)                | delegate      | ![Progress](Pictures/Progress100.png) |
+| [Func\<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult\>](../src/Switch.Core/include/Switch/System/Func.hpp)           | delegate      | ![Progress](Pictures/Progress100.png) |
+| [Func\<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult\>](../src/Switch.Core/include/Switch/System/Func.hpp)      | delegate      | ![Progress](Pictures/Progress100.png) |
+| [Func\<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult\>](../src/Switch.Core/include/Switch/System/Func.hpp) | delegate      | ![Progress](Pictures/Progress100.png) |
 | *GC*                                                                                   | *class*       | ![Progress](Pictures/ProgressIna.png) |
 | GCCollectionMode                                                                       | enumeration   | ![Progress](Pictures/Progress0.png)   |
 | GCNotificationStatus                                                                   | enumeration   | ![Progress](Pictures/Progress0.png)   |
