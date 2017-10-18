@@ -249,7 +249,7 @@
 | [String](../src/Switch.Core/include/Switch/System/String.hpp)                                                                               | class         | ![Progress](Pictures/Progress100.png) |
 | StringComparer                                                                                                                              | class         | ![Progress](Pictures/Progress0.png)   |
 | StringComparison                                                                                                                            | enumeration   | ![Progress](Pictures/Progress0.png)   |
-| [StringSplitOptions](../src/Switch.Core/include/Switch/System/StringSplitoptions.hpp)                                                       | enumeration   | ![Progress](Pictures/Progress100.png) |
+| [StringSplitOptions](../src/Switch.Core/include/Switch/System/StringSplitOptions.hpp)                                                       | enumeration   | ![Progress](Pictures/Progress100.png) |
 | [SystemException](../src/Switch.Core/include/Switch/System/SystemException.hpp)                                                             | class         | ![Progress](Pictures/Progress100.png) |
 | *ThreadStaticAttribute*                                                                                                                     | *class*       | ![Progress](Pictures/ProgressIna.png) |
 | [TimeoutException](../src/Switch.Core/include/Switch/System/TimeoutException.hpp)                                                           | class         | ![Progress](Pictures/Progress100.png) |
