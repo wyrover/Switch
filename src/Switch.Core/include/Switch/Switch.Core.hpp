@@ -134,7 +134,7 @@
 #include "System/Threading/ThreadStartException.hpp"
 #include "System/Threading/ThreadState.hpp"
 #include "System/Threading/ThreadStateException.hpp"
-#include "System/Threading/TimeOut.hpp"
+#include "System/Threading/Timeout.hpp"
 #include "System/Threading/Timer.hpp"
 #include "System/Threading/TimerCallback.hpp"
 #include "System/Threading/WaitHandle.hpp"

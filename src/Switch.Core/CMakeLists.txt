@@ -117,7 +117,7 @@ set(INCLUDE_FILES
   include/Switch/System/Threading/ThreadStartException.hpp
   include/Switch/System/Threading/ThreadState.hpp
   include/Switch/System/Threading/ThreadStateException.hpp
-  include/Switch/System/Threading/TimeOut.hpp
+  include/Switch/System/Threading/Timeout.hpp
   include/Switch/System/Threading/TimerCallback.hpp
   include/Switch/System/Threading/Timer.hpp
   include/Switch/System/Threading/WaitHandle.hpp
