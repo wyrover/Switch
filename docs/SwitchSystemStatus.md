@@ -189,7 +189,7 @@
 | SourceFilter                                                                                                  | class         | ![Progress](Pictures/Progress0.png)   |
 | SourceLevels                                                                                                  | enumeration   | ![Progress](Pictures/Progress0.png)   |
 | SourceSwitch                                                                                                  | class         | ![Progress](Pictures/Progress0.png)   |
-| [StopWatch](../src/Switch.System/include/Switch/System/Diagnostics/StopWatch.hpp)                             | class         | ![Progress](Pictures/Progress100.png) |
+| [Stopwatch](../src/Switch.System/include/Switch/System/Diagnostics/Stopwatch.hpp)                             | class         | ![Progress](Pictures/Progress100.png) |
 | Switch                                                                                                        | class         | ![Progress](Pictures/Progress0.png)   |
 | *SwitchAttribute*                                                                                             | *class*       | ![Progress](Pictures/ProgressIna.png) |
 | *SwitchLevelAttribute*                                                                                        | *class*       | ![Progress](Pictures/ProgressIna.png) |
