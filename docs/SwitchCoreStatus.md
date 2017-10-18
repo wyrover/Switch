@@ -181,7 +181,7 @@
 | IEquatable\<T\>                                                                                                                             | interface     | ![Progress](Pictures/Progress0.png)   |
 | [IFormatProvider](../src/Switch.Core/include/Switch/System/IFormatProvider.hpp)                                                             | interface     | ![Progress](Pictures/Progress100.png) |
 | [IFormattable](../src/Switch.Core/include/Switch/System/IFormattable.hpp)                                                                   | interface     | ![Progress](Pictures/Progress100.png) |
-| [IndexOutOfRangeException](../src/Switch.Core/include/Switch/System/InvexOutOfRangeException.hpp)                                           | class         | ![Progress](Pictures/Progress100.png) |
+| [IndexOutOfRangeException](../src/Switch.Core/include/Switch/System/IndexOutOfRangeException.hpp)                                           | class         | ![Progress](Pictures/Progress100.png) |
 | [InsufficientExecutionStackException](../src/Switch.Core/include/Switch/System/InsufficientExecutionStackException.hpp)                     | class         | ![Progress](Pictures/Progress100.png) |
 | [InsufficientMemoryException](../src/Switch.Core/include/Switch/System/InsufficientMemoryException.hpp)                                     | class         | ![Progress](Pictures/Progress100.png) |
 | [Int16](../src/Switch.Core/include/Switch/System/Int16.hpp)                                                                                 | struct        | ![Progress](Pictures/Progress100.png) |
