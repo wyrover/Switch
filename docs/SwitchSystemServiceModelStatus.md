@@ -3,7 +3,7 @@
 | [Home](Home.md) | [Gallery](Gallery.md) | [Examples](Examples.md) | [Downloads](Downloads.md) | [Documentation](Documentation.md) | [Project](https://sourceforge.net/projects/switchpro) | [Source](https://github.com/gammasoft71/switch) | [License](License.md) | [Contact](Contact.md) | [GAMMA Soft](https://gammasoft71.wixsite.com/gammasoft) |
 |-----------------|-----------------------|-------------------------|-------------------------|-----------------------------------|-------------------------------------------------------|-------------------------------------------------|-----------------------|-----------------------|---------------------------------------------------------|
 
-# Progression information
+# Status information
 
 ![Progress](Pictures/ProgressIna.png) Not applicable
 
@@ -21,7 +21,7 @@
 
 ## System::Collections::Generic
 
-| Class                               | Type          | Progression                           |
+| Class                               | Type          | Status                                |
 |-------------------------------------|---------------|---------------------------------------|
 | KeyedByTypeCollection\<T\>          | class         | ![Progress](Pictures/Progress0.png)   |
 | SynchronizedCollection\<T\>         | class         | ![Progress](Pictures/Progress0.png)   |
@@ -30,7 +30,7 @@
 
 ## System::IO
 
-| Class                                                                                         | Type          | Progression                           |
+| Class                                                                                         | Type          | Status                                |
 |-----------------------------------------------------------------------------------------------|---------------|---------------------------------------|
 | [PipeException](../src/Switch.System.ServiceModel/include/Switch/System/IO/PipeException.hpp) | class         | ![Progress](Pictures/Progress100.png) |
 
@@ -38,7 +38,7 @@
 ​
 Other Resources
 
-* [Progress](Progress.md)
+* [Switch Status](SwitchStatus.md)
 
 ______________________________________________________________________________________________
 

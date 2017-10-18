@@ -3,7 +3,7 @@
 | [Home](Home.md) | [Gallery](Gallery.md) | [Examples](Examples.md) | [Downloads](Downloads.md) | [Documentation](Documentation.md) | [Project](https://sourceforge.net/projects/switchpro) | [Source](https://github.com/gammasoft71/switch) | [License](License.md) | [Contact](Contact.md) | [GAMMA Soft](https://gammasoft71.wixsite.com/gammasoft) |
 |-----------------|-----------------------|-------------------------|-------------------------|-----------------------------------|-------------------------------------------------------|-------------------------------------------------|-----------------------|-----------------------|---------------------------------------------------------|
 
-# Progression information
+# Status information
 
 ![Progress](Pictures/ProgressIna.png) Not applicable
 
@@ -21,7 +21,7 @@
 
 ## Microsoft::Win32
 
-| Class                               | Type          | Progression                           |
+| Class                               | Type          | Status                                |
 |-------------------------------------|---------------|---------------------------------------|
 | IntranetZoneCredentialPolicy        | class         | ![Progress](Pictures/Progress0.png)   |
 | PowerModeChangedEventArgs           | class         | ![Progress](Pictures/Progress0.png)   |
@@ -46,14 +46,14 @@
 
 ## Microsoft::Win32::SafeHandles
 
-| class               | Type          | Progression                           |
+| class               | Type          | Status                                |
 |---------------------|---------------|---------------------------------------|
 | SafeProcessHandle   | class         | ![Progress](Pictures/Progress0.png)   |
 | SafeX509ChainHandle | class         | ![Progress](Pictures/Progress0.png)   |
 
 ## System
 
-| Class                                                                                                 | Type          | Progression                           |
+| Class                                                                                                 | Type          | Status                                |
 |-------------------------------------------------------------------------------------------------------|---------------|---------------------------------------|
 | FileStyleUriParser                                                                                    | class         | ![Progress](Pictures/Progress0.png)   |
 | FtpStyleUriParser                                                                                     | class         | ![Progress](Pictures/Progress0.png)   |
@@ -84,14 +84,14 @@
 
 ## System::Collections::Concurrent
 
-| Class                                                                                                     | Type          | Progression                           |
+| Class                                                                                                     | Type          | Status                                |
 |-----------------------------------------------------------------------------------------------------------|---------------|---------------------------------------|
 | BlockingCollection\<T\>                                                                                   | class         | ![Progress](Pictures/Progress0.png)   |
 | [ConcurrentBag\<T\>](../src/Switch.System/include/Switch/System/Collections/Concurrent/ConcurrentBag.hpp) | class         | ![Progress](Pictures/Progress100.png) |
 
 ## System::Collections::Generic
 
-| Class                                                                                                        | Type          | Progression                           |
+| Class                                                                                                        | Type          | Status                                |
 |--------------------------------------------------------------------------------------------------------------|---------------|---------------------------------------|
 | [ISet\<T\>](../src/Switch.System/include/Switch/System/Collections/Generic/ISet.hpp)                         | interface     | ![Progress](Pictures/Progress100.png) |
 | [LinkedList\<T\>](../src/Switch.System/include/Switch/System/Collections/Generic/LinkedList.hpp)             | class         | ![Progress](Pictures/Progress50.png)  |
@@ -103,14 +103,14 @@
 
 ## System::Collections::ObjectModel
 
-| Class                             | Type          | Progression                           |
+| Class                             | Type          | Status                                |
 |-----------------------------------|---------------|---------------------------------------|
 | ObservableCollection\<T\>         | class         | ![Progress](Pictures/Progress0.png)   |
 | ReadOnlyObservableCollection\<T\> | class         | ![Progress](Pictures/Progress0.png)   |
 
 ## System::Collections::Specialized
 
-| Class                                                                                                       | Type          | Progression                           |
+| Class                                                                                                       | Type          | Status                                |
 |-------------------------------------------------------------------------------------------------------------|---------------|---------------------------------------|
 | BitVector32                                                                                                 | struct        | ![Progress](Pictures/Progress0.png)   |
 | CollectionsUtil                                                                                             | class         | ![Progress](Pictures/Progress0.png)   |
@@ -129,7 +129,7 @@
 
 ## System::Diagnostics
 
-| Class                                                                                                         | Type          | Progression                           |
+| Class                                                                                                         | Type          | Status                                |
 |---------------------------------------------------------------------------------------------------------------|---------------|---------------------------------------|
 | BooleanSwitch                                                                                                 | class         | ![Progress](Pictures/Progress0.png)   |
 | [ConsoleTraceListener](../src/Switch.System/include/Switch/System/Diagnostics/ConsoleTraceListener.hpp)       | class         | ![Progress](Pictures/Progress100.png) |
@@ -211,13 +211,13 @@
 
 ## System::Diagnostics::CodeAnalysis
 
-| Class                              | Type          | Progression                           |
+| Class                              | Type          | Status                                |
 |------------------------------------|---------------|---------------------------------------|
 | *ExcludeFromCodeCoverageAttribute* | *class*       | ![Progress](Pictures/ProgressIna.png) |
 
 ## System::IO
 
-| Class                                                                                                                | Type          | Progression                           |
+| Class                                                                                                                | Type          | Status                                |
 |----------------------------------------------------------------------------------------------------------------------|---------------|---------------------------------------|
 | [ErrorEventArgs](../src/Switch.System/include/Switch/System/IO/ErrorEventArgs.hpp)                                   | class         | ![Progress](Pictures/Progress100.png) |
 | [ErrorEventHandler](../src/Switch.System/include/Switch/System/IO/ErrorEventHandler.hpp)                             | delegate      | ![Progress](Pictures/Progress100.png) |
@@ -234,7 +234,7 @@
 
 ## System::Threading 
 
-| Class                                                                                                           | Type          | Progression                           |
+| Class                                                                                                           | Type          | Status                                |
 |-----------------------------------------------------------------------------------------------------------------|---------------|---------------------------------------|
 | [Barrier](../src/Switch.System/include/Switch/System/Threading/Barrier.hpp)                                     | class         | ![Progress](Pictures/Progress100.png) |
 | [BarrierPostPhaseException](../src/Switch.System/include/Switch/System/Threading/BarrierPostPhaseException.hpp) | class         | ![Progress](Pictures/Progress100.png) |
@@ -244,7 +244,7 @@
 ​
 Other Resources
 
-* [Progress](Progress.md)
+* [Switch Status](SwitchStatus.md)
 
 ______________________________________________________________________________________________
 

@@ -3,7 +3,7 @@
 | [Home](Home.md) | [Gallery](Gallery.md) | [Examples](Examples.md) | [Downloads](Downloads.md) | [Documentation](Documentation.md) | [Project](https://sourceforge.net/projects/switchpro) | [Source](https://github.com/gammasoft71/switch) | [License](License.md) | [Contact](Contact.md) | [GAMMA Soft](https://gammasoft71.wixsite.com/gammasoft) |
 |-----------------|-----------------------|-------------------------|-------------------------|-----------------------------------|-------------------------------------------------------|-------------------------------------------------|-----------------------|-----------------------|---------------------------------------------------------|
 
-# Progression information
+# Status information
 
 ![Progress](Pictures/ProgressIna.png) Not applicable
 
@@ -21,7 +21,7 @@
 
 ## Microsoft::Win32
 
-| Class                                                                                                       | Type          | Progression                           |
+| Class                                                                                                       | Type          | Status                                |
 |-------------------------------------------------------------------------------------------------------------|---------------|---------------------------------------|
 | [Registry](../src/Switch.Core/include/Switch/Microsoft/Win32/Registry.hpp)                                  | class         | ![Progress](Pictures/Progress100.png) |
 | [RegistryHive](../src/Switch.Core/include/Switch/Microsoft/Win32/RegistryHive.hpp)                          | enumeration   | ![Progress](Pictures/Progress100.png) |
@@ -34,7 +34,7 @@
 
 ## Microsoft::Win32::SafeHandles
 
-| Class                                 | Type          | Progression                          |
+| Class                                 | Type          | Status                               |
 |---------------------------------------|---------------|---------------------------------------|
 | CriticalHandleMinusOneIsInvalid       | class         | ![Progress](Pictures/Progress0.png)   |
 | CriticalHandleZeroOrMinusOneIsInvalid | class         | ![Progress](Pictures/Progress0.png)   |
@@ -47,7 +47,7 @@
 
 ## System 
 
-| Class                                                                                                                                       | Type          | Progression                           |
+| Class                                                                                                                                       | Type          | Status                                |
 |---------------------------------------------------------------------------------------------------------------------------------------------|---------------|---------------------------------------|
 | _AppDomain                                                                                                                                  | interface     | ![Progress](Pictures/Progress0.png)   |
 | [AccessViolationException](../src/Switch.Core/include/Switch/System/AccessViolationException.hpp)                                           | class         | ![Progress](Pictures/Progress100.png) |
@@ -298,7 +298,7 @@
 
 ## System::Collections
 
-| Class                                                                                       | Type          | Progression                           |
+| Class                                                                                       | Type          | Status                                |
 |---------------------------------------------------------------------------------------------|---------------|---------------------------------------|
 | [ArrayList](../src/Switch.Core/include/Switch/System/Collections/ArrayList.hpp)             | class         | ![Progress](Pictures/Progress100.png) |
 | [BitArray](../src/Switch.Core/include/Switch/System/Collections/BitArray.hpp)               | class         | ![Progress](Pictures/Progress100.png) |
@@ -327,7 +327,7 @@
 
 ## System::Collections::Concurrent
 
-| Class                                                                                                                               | Type          | Progression                           |
+| Class                                                                                                                               | Type          | Status                                |
 |-------------------------------------------------------------------------------------------------------------------------------------|---------------|---------------------------------------|
 | ConcurrentDictionary\<TKey, TValue\>                                                                                                | class         | ![Progress](Pictures/Progress0.png)   |
 | [ConcurrentQueue\<T\>](../src/Switch.Core/include/Switch/System/Collections/Concurrent/ConcurrentQueue.hpp)                         | class         | ![Progress](Pictures/Progress100.png) |
@@ -341,7 +341,7 @@
 
 ## System::Collections::Generic
 
-| Class                                                                                                         | Type          | Progression                           |
+| Class                                                                                                         | Type          | Status                                |
 |---------------------------------------------------------------------------------------------------------------|---------------|---------------------------------------|
 | [Comparer\<T\>](../src/Switch.Core/include/Switch/System/Collections/Generic/Comparer.hpp)                    | class         | ![Progress](Pictures/Progress100.png) |
 | [Dictionary\<TKey, TValue\>](../src/Switch.Core/include/Switch/System/Collections/Generic/Dictionary.hpp)     | class         | ![Progress](Pictures/Progress100.png) |
@@ -362,7 +362,7 @@
 
 ## System::Collections::ObjectModel
 
-| Class                                                                                                            | Type          | Progression                           |
+| Class                                                                                                            | Type          | Status                                |
 |------------------------------------------------------------------------------------------------------------------|---------------|---------------------------------------|
 | [Colection\<T\>](../src/Switch.Core/include/Switch/System/Collections/ObjectModel/Colection.hpp)                 | class         | ![Progress](Pictures/Progress100.png) |
 | KeyedCollection<TKey, TItem>                                                                                     | class         | ![Progress](Pictures/Progress0.png)   |
@@ -371,21 +371,21 @@
 
 ## System::Configuration::Assemblies
 
-| Class                         | Type          | Progression                           |
+| Class                         | Type          | Status                                |
 |-------------------------------|---------------|---------------------------------------|
 | AssemblyHashAlgorithm         | enumeration   | ![Progress](Pictures/Progress0.png)   |
 | AAssemblyVersionCompatibility | enumeration   | ![Progress](Pictures/Progress0.png)   |
 
 ## System::Deployment::Internal
 
-| Class                             | Type          | Progression                           |
+| Class                             | Type          | Status                                |
 |-----------------------------------|---------------|---------------------------------------|
 | InternalActivationContextHelper   | class         | ![Progress](Pictures/Progress0.png)   |
 | InternalApplicationIdentityHelper | class         | ![Progress](Pictures/Progress0.png)   |
 
 ## System::Diagnostics
 
-| Class                                                                             | Type          | Progression                           |
+| Class                                                                             | Type          | Status                                |
 |-----------------------------------------------------------------------------------|---------------|---------------------------------------|
 | *ConditionalAttribute*                                                            | *class*       | ![Progress](Pictures/ProgressIna.png) |
 | *DebuggableAttribute*                                                             | *class*       | ![Progress](Pictures/ProgressIna.png) |
@@ -404,13 +404,13 @@
 
 ## System::Diagnostics::CodeAnalysis
 
-| Class                      | Type          | Progression                           |
+| Class                      | Type          | Status                                |
 |----------------------------|---------------|---------------------------------------|
 | *SuppressMessageAttribute* | *class*       | ![Progress](Pictures/ProgressIna.png) |
 
 ## System::Diagnostics::Contract
 
-| Class                                 | Type          | Progression                           |
+| Class                                 | Type          | Status                                |
 |---------------------------------------|---------------|---------------------------------------|
 | Contract                              | class         | ![Progress](Pictures/Progress0.png)   |
 | *ContractAbbreviatorAttribute*        | *class*       | ![Progress](Pictures/ProgressIna.png) |
@@ -429,7 +429,7 @@
 
 ## System::Diagnostics::SymbolStore
 
-| Class                 | Type          | Progression                           |
+| Class                 | Type          | Status                                |
 |-----------------------|---------------|---------------------------------------|
 | ISymbolBinder         | interface     | ![Progress](Pictures/Progress0.png)   |
 | ISymbolBinder1        | interface     | ![Progress](Pictures/Progress0.png)   |
@@ -448,7 +448,7 @@
 
 ## System::Diagnostics::Tracing
 
-| Class                       | Type          | Progression                           |
+| Class                       | Type          | Status                                |
 |-----------------------------|---------------|---------------------------------------|
 | EventActivityOptions        | class         | ![Progress](Pictures/Progress0.png)   |
 | *EventAttribute*            | *class*       | ![Progress](Pictures/ProgressIna.png) |
@@ -478,7 +478,7 @@
 
 ## System::Globalization
 
-| Class                                                                                   | Type          | Progression                           |
+| Class                                                                                   | Type          | Status                                |
 |-----------------------------------------------------------------------------------------|---------------|---------------------------------------|
 | Calendar                                                                                | class         | ![Progress](Pictures/Progress0.png)   |
 | CalendarAlgorithmType                                                                   | enumeration   | ![Progress](Pictures/Progress0.png)   |
@@ -521,7 +521,7 @@
 
 ## System::IO
 
-| Class                                                                                                    | Type          | Progression                           |
+| Class                                                                                                    | Type          | Status                                |
 |----------------------------------------------------------------------------------------------------------|---------------|---------------------------------------|
 | [BinaryReader](../src/Switch.Core/include/Switch/System/IO/BinaryReader.hpp)                             | class         | ![Progress](Pictures/Progress100.png) |
 | [BinaryReader](../src/Switch.Core/include/Switch/System/IO/BinaryReader.hpp)                             | class         | ![Progress](Pictures/Progress100.png) |
@@ -563,7 +563,7 @@
 
 ## System::IO::IsolatedStorage
 
-| Class                          | Type          | Progression                           |
+| Class                          | Type          | Status                                |
 |--------------------------------|---------------|---------------------------------------|
 | INormalizeForIsolatedStorage   | interface     | ![Progress](Pictures/Progress0.png)   |
 | IsolatedStorage                | class         | ![Progress](Pictures/Progress0.png)   |
@@ -576,31 +576,31 @@
 
 ## System::Reflection 
 
-| Class                                                                                                               | Type          | Progression                           |
+| Class                                                                                                               | Type          | Status                                |
 |---------------------------------------------------------------------------------------------------------------------|---------------|---------------------------------------|
 | ...                                                                                                                 | ...           | ![Progress](Pictures/ProgressIna.png) |
 
 ## System::Resources 
 
-| Class                                                                                                               | Type          | Progression                           |
+| Class                                                                                                               | Type          | Status                                |
 |---------------------------------------------------------------------------------------------------------------------|---------------|---------------------------------------|
 | ...                                                                                                                 | ...           | ![Progress](Pictures/Progress0.png)   |
 
 ## System::Runtime 
 
-| Class                                                                                                               | Type          | Progression                           |
+| Class                                                                                                               | Type          | Status                                |
 |---------------------------------------------------------------------------------------------------------------------|---------------|---------------------------------------|
 | ...                                                                                                                 | ...           | ![Progress](Pictures/Progress0.png)   |
 
 ## System::Runtime::CompilerServices
 
-| Class                                                                                                               | Type          | Progression                           |
+| Class                                                                                                               | Type          | Status                                |
 |---------------------------------------------------------------------------------------------------------------------|---------------|---------------------------------------|
 | ...                                                                                                                 | ...           | ![Progress](Pictures/Progress0.png)   |
 
 ## System::Runtime::Serialization 
 
-| Class                                                                                                               | Type          | Progression                           |
+| Class                                                                                                               | Type          | Status                                |
 |---------------------------------------------------------------------------------------------------------------------|---------------|---------------------------------------|
 | ...                                                                                                                 | ...           | ![Progress](Pictures/Progress0.png)   |
 | [Formatter](../src/Switch.Core/include/Switch/System/Runtime/Serialization/Formatter.hpp)                           | class         | ![Progress](Pictures/Progress100.png) |
@@ -613,7 +613,7 @@
 
 ## System::Security 
 
-| Class                                                                                                    | Type          | Progression                           |
+| Class                                                                                                    | Type          | Status                                |
 |----------------------------------------------------------------------------------------------------------|---------------|---------------------------------------|
 | ...                                                                                                      | ...           | ![Progress](Pictures/Progress0.png)   |
 | [HostProtectionException](../src/Switch.Core/include/Switch/System/Security/HostProtectionException.hpp) | class         | ![Progress](Pictures/Progress100.png) |
@@ -625,7 +625,7 @@
 
 ## System::Text 
 
-| Class                                                                                | Type          | Progression                           |
+| Class                                                                                | Type          | Status                                |
 |--------------------------------------------------------------------------------------|---------------|---------------------------------------|
 | [ASCIIEncoding](../src/Switch.Core/include/Switch/System/Text/ASCIIEncoding.hpp)     | class         | ![Progress](Pictures/Progress50.png)  |
 | [Decoder](../src/Switch.Core/include/Switch/System/Text/Decoder.hpp)                 | class         | ![Progress](Pictures/Progress50.png)  |
@@ -656,7 +656,7 @@
 
 ## System::Threading 
 
-| Class                                                                                                                         | Type          | Progression                           |
+| Class                                                                                                                         | Type          | Status                                |
 |-------------------------------------------------------------------------------------------------------------------------------|---------------|---------------------------------------|
 | [AbandonedMutexException](../src/Switch.Core/include/Switch/System/Threading/AbandonedMutexException.hpp)                     | class         | ![Progress](Pictures/Progress100.png) |
 | ApartmentState                                                                                                                | enumeration   | ![Progress](Pictures/Progress0.png)   |
@@ -726,7 +726,7 @@
 ​
 Other Resources
 
-* [Progress](Progress.md)
+* [Switch Status](SwitchStatus.md)
 
 ______________________________________________________________________________________________
 
