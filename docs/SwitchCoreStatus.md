@@ -176,7 +176,7 @@
 | [IComparable\<T\>](../src/Switch.Core/include/Switch/System/IComparable.hpp)                                                                | interface     | ![Progress](Pictures/Progress100.png) |
 | IComparable                                                                                                                                 | interface     | ![Progress](Pictures/Progress0.png)   |
 | [IConvertible](../src/Switch.Core/include/Switch/System/IConvertible.hpp)                                                                   | interface     | ![Progress](Pictures/Progress100.png) |
-| [ICustomFormater](../src/Switch.Core/include/Switch/System/ICustomFormater.hpp)                                                             | interface     | ![Progress](Pictures/Progress100.png) |
+| [ICustomFormatter](../src/Switch.Core/include/Switch/System/ICustomFormatter.hpp)                                                           | interface     | ![Progress](Pictures/Progress100.png) |
 | *IDisposable*                                                                                                                               | *interface*   | ![Progress](Pictures/ProgressIna.png) |
 | IEquatable\<T\>                                                                                                                             | interface     | ![Progress](Pictures/Progress0.png)   |
 | [IFormatProvider](../src/Switch.Core/include/Switch/System/IFormatProvider.hpp)                                                             | interface     | ![Progress](Pictures/Progress100.png) |
