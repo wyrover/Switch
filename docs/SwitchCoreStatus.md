@@ -364,7 +364,7 @@
 
 | Class                                                                                                            | Type          | Status                                |
 |------------------------------------------------------------------------------------------------------------------|---------------|---------------------------------------|
-| [Colection\<T\>](../src/Switch.Core/include/Switch/System/Collections/ObjectModel/Colection.hpp)                 | class         | ![Progress](Pictures/Progress100.png) |
+| [Collection\<T\>](../src/Switch.Core/include/Switch/System/Collections/ObjectModel/Collection.hpp)               | class         | ![Progress](Pictures/Progress100.png) |
 | KeyedCollection<TKey, TItem>                                                                                     | class         | ![Progress](Pictures/Progress0.png)   |
 | [ReadOnlyColection\<T\>](../src/Switch.Core/include/Switch/System/Collections/ObjectModel/ReadOnlyColection.hpp) | class         | ![Progress](Pictures/Progress100.png) |
 | ReadOnlyDictionary<TKey, TValue>                                                                                 | class         | ![Progress](Pictures/Progress0.png)   |
