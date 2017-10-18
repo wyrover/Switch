@@ -239,6 +239,7 @@
 | [Barrier](../src/Switch.System/include/Switch/System/Threading/Barrier.hpp)                                     | class         | ![Progress](Pictures/Progress100.png) |
 | [BarrierPostPhaseException](../src/Switch.System/include/Switch/System/Threading/BarrierPostPhaseException.hpp) | class         | ![Progress](Pictures/Progress100.png) |
 | [Semaphore](../src/Switch.System/include/Switch/System/Threading/Semaphore.hpp)                                 | class         | ![Progress](Pictures/Progress100.png) |
+| [SemaphoreFullException](../src/Switch.System/include/Switch/System/Threading/SemaphoreFullException.hpp)       | class         | ![Progress](Pictures/Progress100.png) |
 
 # See also
 ​
