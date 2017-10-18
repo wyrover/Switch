@@ -532,7 +532,7 @@
 | [DriveInfo](../src/Switch.Core/include/Switch/System/IO/DriveInfo.hpp)                                   | class         | ![Progress](Pictures/Progress100.png) |
 | [DriveType](../src/Switch.Core/include/Switch/System/IO/DriveType.hpp)                                   | enumeration   | ![Progress](Pictures/Progress100.png) |
 | [DriveNotFoundException](../src/Switch.Core/include/Switch/System/IO/DriveNotFoundException.hpp)         | class         | ![Progress](Pictures/Progress100.png) |
-| [EndOfStreamExeption](../src/Switch.Core/include/Switch/System/IO/EndOfStreamExeption.hpp)               | class         | ![Progress](Pictures/Progress100.png) |
+| [EndOfStreamException](../src/Switch.Core/include/Switch/System/IO/EndOfStreamException.hpp)             | class         | ![Progress](Pictures/Progress100.png) |
 | [File](../src/Switch.Core/include/Switch/System/IO/File.hpp)                                             | class         | ![Progress](Pictures/Progress100.png) |
 | [FileAccess](../src/Switch.Core/include/Switch/System/IO/FileAccess.hpp)                                 | enumeration   | ![Progress](Pictures/Progress100.png) |
 | [FileAttributes](../src/Switch.Core/include/Switch/System/IO/FileAccess.hpp)                             | enumeration   | ![Progress](Pictures/Progress100.png) |
