@@ -191,7 +191,7 @@
 | [InvalidCastException](../src/Switch.Core/include/Switch/System/InvalidCastException.hpp)                                                   | class         | ![Progress](Pictures/Progress100.png) |
 | [InvalidOperationException](../src/Switch.Core/include/Switch/System/InvalidOperationException.hpp)                                         | class         | ![Progress](Pictures/Progress100.png) |
 | [InvalidProgramException](../src/Switch.Core/include/Switch/System/InvalidProgramException.hpp)                                             | class         | ![Progress](Pictures/Progress100.png) |
-| [InvalidTimeZoneException](../src/Switch.Core/include/Switch/System/InvalidTimeZoneExcception.hpp)                                          | class         | ![Progress](Pictures/Progress100.png) |
+| [InvalidTimeZoneException](../src/Switch.Core/include/Switch/System/InvalidTimeZoneException.hpp)                                           | class         | ![Progress](Pictures/Progress100.png) |
 | IObservable\<T\>                                                                                                                            | interface     | ![Progress](Pictures/Progress0.png)   |
 | IObserver\<T\>                                                                                                                              | interface     | ![Progress](Pictures/Progress0.png)   |
 | IProgress\<T\>                                                                                                                              | interface     | ![Progress](Pictures/Progress0.png)   |
