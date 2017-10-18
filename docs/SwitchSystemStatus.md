@@ -220,9 +220,9 @@
 | Class                                                                                                                | Type          | Status                                |
 |----------------------------------------------------------------------------------------------------------------------|---------------|---------------------------------------|
 | [ErrorEventArgs](../src/Switch.System/include/Switch/System/IO/ErrorEventArgs.hpp)                                   | class         | ![Progress](Pictures/Progress100.png) |
-| [ErrorEventHandler](../src/Switch.System/include/Switch/System/IO/ErrorEventHandler.hpp)                             | delegate      | ![Progress](Pictures/Progress100.png) |
-| [FileSystemEventArg](../src/Switch.System/include/Switch/System/IO/FileSystemEventArg.hpp)                           | class         | ![Progress](Pictures/Progress100.png) |
-| [FileSystemEventHandler](../src/Switch.System/include/Switch/System/IO/FileSystemEventHandler.hpp)                   | delegate      | ![Progress](Pictures/Progress100.png) |
+| ErrorEventHandler                                                                                                    | delegate      | ![Progress](Pictures/Progress100.png) |
+| [FileSystemEventArgs](../src/Switch.System/include/Switch/System/IO/FileSystemEventArgs.hpp)                         | class         | ![Progress](Pictures/Progress100.png) |
+| FileSystemEventHandler                                                                                               | delegate      | ![Progress](Pictures/Progress100.png) |
 | FileSystemWatcher                                                                                                    | class         | ![Progress](Pictures/Progress0.png)   |
 | [InternalBufferOverflowException](../src/Switch.System/include/Switch/System/IO/InternalBufferOverflowException.hpp) | class         | ![Progress](Pictures/Progress100.png) |
 | [InvalidDataException](../src/Switch.System/include/Switch/System/IO/InvalidDataException.hpp)                       | class         | ![Progress](Pictures/Progress100.png) |
