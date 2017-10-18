@@ -399,8 +399,8 @@
 | *DebuggerStepThroughAttribute*                                                    | *class*       | ![Progress](Pictures/ProgressIna.png) |
 | *DebuggerTypeProxyAttribute*                                                      | *class*       | ![Progress](Pictures/ProgressIna.png) |
 | *DebuggerVisualizerAttribute*                                                     | *class*       | ![Progress](Pictures/ProgressIna.png) |
-| [StackFrame](../src/Switch.Core/include/Switch/System/diagnostics/StackFrame.hpp) | class         | ![Progress](Pictures/Progress100.png) |
-| [StackTrace](../src/Switch.Core/include/Switch/System/diagnostics/StackTrace.hpp) | class         | ![Progress](Pictures/Progress100.png) |
+| [StackFrame](../src/Switch.Core/include/Switch/System/Diagnostics/StackFrame.hpp) | class         | ![Progress](Pictures/Progress100.png) |
+| [StackTrace](../src/Switch.Core/include/Switch/System/Diagnostics/StackTrace.hpp) | class         | ![Progress](Pictures/Progress100.png) |
 
 ## System::Diagnostics::CodeAnalysis
 
