@@ -22,7 +22,7 @@
 | Library                                                                                      | Status                                |
 |----------------------------------------------------------------------------------------------|---------------------------------------|
 | [Switch.Core (mscorelib)](SwitchCoreStatus.md)                                               | ![Progress](Pictures/Progress75.png)  |
-| [Switch.ISymWrapper (ISymWrapper)](StatusISymWrapperStatus.md)                               | ![Progress](Pictures/Progress0.png)   |
+| [Switch.ISymWrapper (ISymWrapper)](SwitchISymWrapperStatus.md)                               | ![Progress](Pictures/Progress0.png)   |
 | [Switch.PresentationFramework (PresentationFramework)](SwitchPresentationFrameworkStatus.md) | ![Progress](Pictures/Progress0.png)   |
 | [Switch.System (System)](SwitchSystemStatus.md)                                              | ![Progress](Pictures/Progress75.png)  |
 | [Switch.System.Core (System.Core)](SwitchSystemCoreStatus.md)                                | ![Progress](Pictures/Progress50.png)  |
