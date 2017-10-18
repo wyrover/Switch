@@ -636,7 +636,7 @@
 | DecoderFallbackException                                                             | class         | ![Progress](Pictures/Progress0.png)   |
 | DecoderReplacementFallback                                                           | class         | ![Progress](Pictures/Progress0.png)   |
 | DecoderReplacementFallbackBuffer                                                     | class         | ![Progress](Pictures/Progress0.png)   |
-| [Ecoder](../src/Switch.Core/include/Switch/System/Text/Encoder.hpp)                  | class         | ![Progress](Pictures/Progress50.png)  |
+| [Encoder](../src/Switch.Core/include/Switch/System/Text/Encoder.hpp)                 | class         | ![Progress](Pictures/Progress50.png)  |
 | EncoderExceptionFallback                                                             | class         | ![Progress](Pictures/Progress0.png)   |
 | EncoderExceptionFallbackBuffer                                                       | class         | ![Progress](Pictures/Progress0.png)   |
 | EncoderFallback                                                                      | class         | ![Progress](Pictures/Progress0.png)   |
