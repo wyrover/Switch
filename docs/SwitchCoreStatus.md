@@ -608,7 +608,7 @@
 | [ISerializable](../src/Switch.Core/include/Switch/System/Runtime/Serialization/ISerializable.hpp)                   | class         | ![Progress](Pictures/Progress100.png) |
 | [SerializationEntry](../src/Switch.Core/include/Switch/System/Runtime/Serialization/SerializationEntry.hpp)         | class         | ![Progress](Pictures/Progress100.png) |
 | [SerializationException](../src/Switch.Core/include/Switch/System/Runtime/Serialization/SerializationException.hpp) | class         | ![Progress](Pictures/Progress100.png) |
-| [Serialization](../src/Switch.Core/include/Switch/System/Runtime/Serialization/Serialization.hpp)                   | class         | ![Progress](Pictures/Progress50.png)  |
+| [SerializationInfo](../src/Switch.Core/include/Switch/System/Runtime/Serialization/SerializationInfo.hpp)           | class         | ![Progress](Pictures/Progress50.png)  |
 | ...                                                                                                                 | ...           | ![Progress](Pictures/Progress0.png)   |
 
 ## System::Security 
