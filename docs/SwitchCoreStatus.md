@@ -109,9 +109,9 @@
 | *CLSCompliantAttribute*                                                                                                                     | *class*       | ![Progress](Pictures/ProgressIna.png) |
 | [Comparison](../src/Switch.Core/include/Switch/System/Comparison.hpp)                                                                       | delegate      | ![Progress](Pictures/Progress100.png) |
 | [Console](../src/Switch.Core/include/Switch/System/Console.hpp)                                                                             | class         | ![Progress](Pictures/Progress100.png) |
-| [ConsoleCancelEventArgs](../src/Switch.Core/include/Switch/System/ConsoleEventArgs.hpp)                                                     | class         | ![Progress](Pictures/Progress100.png) |
-| [ConsoleCancelEventHandler](../src/Switch.Core/include/Switch/System/ConsoleEventHandler.hpp)                                               | delegate      | ![Progress](Pictures/Progress100.png) |
-| [ConsoleColor](../src/Switch.Core/include/Switch/System/ConsoleColor.hpp)                                                                 | enumeration   | ![Progress](Pictures/Progress100.png) |
+| [ConsoleCancelEventArgs](../src/Switch.Core/include/Switch/System/ConsoleCancelEventArgs.hpp)                                               | class         | ![Progress](Pictures/Progress100.png) |
+| [ConsoleCancelEventHandler](../src/Switch.Core/include/Switch/System/ConsoleCancelEventHandler.hpp)                                         | delegate      | ![Progress](Pictures/Progress100.png) |
+| [ConsoleColor](../src/Switch.Core/include/Switch/System/ConsoleColor.hpp)                                                                   | enumeration   | ![Progress](Pictures/Progress100.png) |
 | [ConsoleKey](../src/Switch.Core/include/Switch/System/ConsoleKey.hpp)                                                                       | enumeration   | ![Progress](Pictures/Progress100.png) |
 | [ConsoleKeyInfo](../src/Switch.Core/include/Switch/System/ConsoleKeyInfo.hpp)                                                               | struct        | ![Progress](Pictures/Progress100.png) |
 | [ConsoleModifiers](../src/Switch.Core/include/Switch/System/ConsoleModifiers.hpp)                                                           | enumeration   | ![Progress](Pictures/Progress100.png) |
