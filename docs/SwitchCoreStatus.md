@@ -172,7 +172,7 @@
 | [Guid](../src/Switch.Core/include/Switch/System/Guid.hpp)                                                                                   | struct        | ![Progress](Pictures/Progress100.png) |
 | IAppDomainSetup                                                                                                                             | interface     | ![Progress](Pictures/Progress0.png)   |
 | [IAsyncResult](../src/Switch.Core/include/Switch/System/IAsyncResult.hpp)                                                                   | interface     | ![Progress](Pictures/Progress100.png) |
-| [IClonable](../src/Switch.Core/include/Switch/System/IClonable.hpp)                                                                         | interface     | ![Progress](Pictures/Progress100.png) |
+| [ICloneable](../src/Switch.Core/include/Switch/System/ICloneable.hpp)                                                                       | interface     | ![Progress](Pictures/Progress100.png) |
 | [IComparable\<T\>](../src/Switch.Core/include/Switch/System/IComparable.hpp)                                                                | interface     | ![Progress](Pictures/Progress100.png) |
 | IComparable                                                                                                                                 | interface     | ![Progress](Pictures/Progress0.png)   |
 | [IConvertible](../src/Switch.Core/include/Switch/System/IConvertible.hpp)                                                                   | interface     | ![Progress](Pictures/Progress100.png) |
