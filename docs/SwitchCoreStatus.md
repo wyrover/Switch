@@ -188,7 +188,7 @@
 | [Int32](../src/Switch.Core/include/Switch/System/Int32.hpp)                                                                                 | struct        | ![Progress](Pictures/Progress100.png) |
 | [Int64](../src/Switch.Core/include/Switch/System/Int64.hpp)                                                                                 | struct        | ![Progress](Pictures/Progress100.png) |
 | [IntPtr](../src/Switch.Core/include/Switch/System/IntPtr.hpp)                                                                               | struct        | ![Progress](Pictures/Progress100.png) |
-| [InvalidCastException](../src/Switch.Core/include/Switch/System/InvalidCastEception.hpp)                                                    | class         | ![Progress](Pictures/Progress100.png) |
+| [InvalidCastException](../src/Switch.Core/include/Switch/System/InvalidCastException.hpp)                                                   | class         | ![Progress](Pictures/Progress100.png) |
 | [InvalidOperationException](../src/Switch.Core/include/Switch/System/InvalidOperationException.hpp)                                         | class         | ![Progress](Pictures/Progress100.png) |
 | [InvalidProgramException](../src/Switch.Core/include/Switch/System/InvalidProgramException.hpp)                                             | class         | ![Progress](Pictures/Progress100.png) |
 | [InvalidTimeZoneException](../src/Switch.Core/include/Switch/System/InvalidTimeZoneExcception.hpp)                                          | class         | ![Progress](Pictures/Progress100.png) |
