@@ -120,6 +120,8 @@ set(INCLUDE_FILES
   include/Switch/System/Threading/Timeout.hpp
   include/Switch/System/Threading/TimerCallback.hpp
   include/Switch/System/Threading/Timer.hpp
+  include/Switch/System/Threading/WaitCallback.hpp
+  include/Switch/System/Threading/WaitOrTimerCallback.hpp
   include/Switch/System/Threading/WaitHandle.hpp
   include/Switch/System/Threading/WaitHandleCannotBeOpenedException.hpp
   include/Switch/System/Threading/Tasks/ITask.hpp

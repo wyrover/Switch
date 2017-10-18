@@ -137,6 +137,8 @@
 #include "System/Threading/Timeout.hpp"
 #include "System/Threading/Timer.hpp"
 #include "System/Threading/TimerCallback.hpp"
+#include "System/Threading/WaitCallback.hpp"
+#include "System/Threading/WaitOrTimerCallback.hpp"
 #include "System/Threading/WaitHandle.hpp"
 #include "System/Threading/WaitHandleCannotBeOpenedException.hpp"
 #include "System/AccessViolationException.hpp"

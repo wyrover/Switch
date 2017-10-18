@@ -9,7 +9,9 @@
 #include "../Collections/Generic/List.hpp"
 #include "Thread.hpp"
 #include "RegisteredWaitHandle.hpp"
+#include "WaitCallback.hpp"
 #include "WaitHandle.hpp"
+#include "WaitOrTimerCallback.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
@@ -18,12 +20,6 @@ namespace Switch {
     /// @brief The System::Threading namespace provides classes and interfaces that enable multithreaded programming.
     /// In addition to classes for synchronizing thread activities and access to data ( Mutex, Monitor, Interlocked, AutoResetEvent, and so on), this namespace includes a ThreadPool class that allows you to use a pool of system-supplied threads, and a Timer class that executes callback methods on thread pool threads.
     namespace Threading {
-      /// @brief Represents a method to be called when a WaitHandle is signaled or times out.
-      using WaitCallback = Delegate<void, Object&>;
-      
-      /// @brief Represents a method to be called when a WaitHandle is signaled or times out.
-      using WaitOrTimerCallback = Delegate<void, Object&, bool>;
-      
       /// @brief Provides a pool of threads that can be used to post work items, process asynchronous I/O, wait on behalf of other threads, and process timers.
       class _export ThreadPool _static {
       public:
