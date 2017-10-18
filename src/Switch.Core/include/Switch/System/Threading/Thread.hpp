@@ -17,7 +17,7 @@
 #include "ThreadStart.hpp"
 #include "ThreadState.hpp"
 #include "ThreadStateException.hpp"
-#include "TimeOut.hpp"
+#include "Timeout.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {

@@ -725,6 +725,14 @@
 | [SynchronizationLockException](../src/Switch.Core/include/Switch/System/Threading/SynchronizationLockException.hpp) | class         | ![Progress](Pictures/Progress100.png) |
 | [Thread](../src/Switch.Core/include/Switch/System/Threading/Thread.hpp)                                             | class         | ![Progress](Pictures/Progress100.png) |
 | [ThreadAbortException](../src/Switch.Core/include/Switch/System/Threading/ThreadAbortException.hpp)                 | class         | ![Progress](Pictures/Progress100.png) |
+| ThreadExceptionEventArgs                                                                                            | class         | ![Progress](Pictures/Progress0.png)   |
+| [ThreadInterruptedException](../src/Switch.Core/include/Switch/System/Threading/ThreadInterruptedException.hpp)     | class         | ![Progress](Pictures/Progress100.png) |
+| [ThreadLocal\<T\>](../src/Switch.Core/include/Switch/System/Threading/ThreadLocal.hpp)                              | class         | ![Progress](Pictures/Progress100.png) |
+| [ThreadPool](../src/Switch.Core/include/Switch/System/Threading/ThreadPool.hpp)                                     | class         | ![Progress](Pictures/Progress100.png) |
+| ThreadPoolBoundHandle                                                                                               | class         | ![Progress](Pictures/Progress0.png)   |
+| [ThreadStartException](../src/Switch.Core/include/Switch/System/Threading/ThreadStartException.hpp)                 | class         | ![Progress](Pictures/Progress100.png) |
+| [ThreadStateException](../src/Switch.Core/include/Switch/System/Threading/ThreadStateException.hpp)                 | class         | ![Progress](Pictures/Progress100.png) |
+| [Timeout](../src/Switch.Core/include/Switch/System/Threading/Timeout.hpp)                                     | class         | ![Progress](Pictures/Progress100.png) |
 
 ### System::Threading 
 

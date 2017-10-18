@@ -10,7 +10,7 @@
 #include <Switch/System/Threading/AutoResetEvent.hpp>
 #include <Switch/System/Threading/ManualResetEvent.hpp>
 #include <Switch/System/Threading/Thread.hpp>
-#include <Switch/System/Threading/TimeOut.hpp>
+#include <Switch/System/Threading/Timeout.hpp>
 #include "NetworkCredential.hpp"
 #include "../Uri.hpp"
 

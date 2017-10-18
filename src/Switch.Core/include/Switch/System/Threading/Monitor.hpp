@@ -12,7 +12,7 @@
 #include "../TimeSpan.hpp"
 #include "AutoResetEvent.hpp"
 #include "Mutex.hpp"
-#include "TimeOut.hpp"
+#include "Timeout.hpp"
 #include "../SystemException.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.

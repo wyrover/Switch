@@ -2,7 +2,7 @@
 #include "../../../../include/Switch/System/Threading/Monitor.hpp"
 #include "../../../../include/Switch/System/Threading/Mutex.hpp"
 #include "../../../../include/Switch/System/Threading/SynchronizationLockException.hpp"
-#include "../../../../include/Switch/System/Threading/TimeOut.hpp"
+#include "../../../../include/Switch/System/Threading/Timeout.hpp"
 
 namespace {
   std::recursive_mutex mutex;

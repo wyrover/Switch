@@ -12,7 +12,7 @@
 #include "../IntPtr.hpp"
 #include "../TimeSpan.hpp"
 #include "../Collections/Generic/IList.hpp"
-#include "TimeOut.hpp"
+#include "Timeout.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {

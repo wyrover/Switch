@@ -6,7 +6,7 @@
 #include <Switch/System/ObjectDisposedException.hpp>
 #include <Switch/System/TimeoutException.hpp>
 #include <Switch/System/IO/IOException.hpp>
-#include <Switch/System/Threading/TimeOut.hpp>
+#include <Switch/System/Threading/Timeout.hpp>
 #include <Switch/System/Net/WebException.hpp>
 #include "../../../../include/Switch/System/Net/FtpWebRequest.hpp"
 #include "../../../../include/Switch/System/Net/HttpWebRequest.hpp"

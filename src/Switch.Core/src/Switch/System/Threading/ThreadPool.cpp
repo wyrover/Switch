@@ -3,7 +3,7 @@
 #include "../../../../include/Switch/System/Environment.hpp"
 #include "../../../../include/Switch/System/Threading/Mutex.hpp"
 #include "../../../../include/Switch/System/Threading/ThreadInterruptedException.hpp"
-#include "../../../../include/Switch/System/Threading/TimeOut.hpp"
+#include "../../../../include/Switch/System/Threading/Timeout.hpp"
 #include "NamedHandleCollection.hpp"
 
 using namespace System;
