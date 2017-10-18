@@ -21,16 +21,16 @@
 
 ## Microsoft::Win32
 
-| Class                                                                                                       | Type          | Status                                |
-|-------------------------------------------------------------------------------------------------------------|---------------|---------------------------------------|
-| [Registry](../src/Switch.Core/include/Switch/Microsoft/Win32/Registry.hpp)                                  | class         | ![Progress](Pictures/Progress100.png) |
-| [RegistryHive](../src/Switch.Core/include/Switch/Microsoft/Win32/RegistryHive.hpp)                          | enumeration   | ![Progress](Pictures/Progress100.png) |
-| [RegistryKey](../src/Switch.Core/include/Switch/Microsoft/Win32/RegistryKey.hpp)                            | class         | ![Progress](Pictures/Progress100.png) |
-| [RegistryKeyPermissionCheck](../src/Switch.Core/include/Switch/Microsoft/Win32/RegistryPermissionCheck.hpp) | enumeration   | ![Progress](Pictures/Progress100.png) |
-| [RegistryOptions](../src/Switch.Core/include/Switch/Microsoft/Win32/RegistryOptions.hpp)                    | enumeration   | ![Progress](Pictures/Progress100.png) |
-| [RegistryValueKind](../src/Switch.Core/include/Switch/Microsoft/Win32/RegistryValueKind.hpp)                | enumeration   | ![Progress](Pictures/Progress100.png) |
-| [RegistryValueOptions](../src/Switch.Core/include/Switch/Microsoft/Win32/RegistryValueOptions.hpp)          | enumeration   | ![Progress](Pictures/Progress100.png) |
-| RegistryView                                                                                                | enumeration   | ![Progress](Pictures/Progress0.png)   |
+| Class                                                                                                          | Type          | Status                                |
+|----------------------------------------------------------------------------------------------------------------|---------------|---------------------------------------|
+| [Registry](../src/Switch.Core/include/Switch/Microsoft/Win32/Registry.hpp)                                     | class         | ![Progress](Pictures/Progress100.png) |
+| [RegistryHive](../src/Switch.Core/include/Switch/Microsoft/Win32/RegistryHive.hpp)                             | enumeration   | ![Progress](Pictures/Progress100.png) |
+| [RegistryKey](../src/Switch.Core/include/Switch/Microsoft/Win32/RegistryKey.hpp)                               | class         | ![Progress](Pictures/Progress100.png) |
+| [RegistryKeyPermissionCheck](../src/Switch.Core/include/Switch/Microsoft/Win32/RegistryKeyPermissionCheck.hpp) | enumeration   | ![Progress](Pictures/Progress100.png) |
+| [RegistryOptions](../src/Switch.Core/include/Switch/Microsoft/Win32/RegistryOptions.hpp)                       | enumeration   | ![Progress](Pictures/Progress100.png) |
+| [RegistryValueKind](../src/Switch.Core/include/Switch/Microsoft/Win32/RegistryValueKind.hpp)                   | enumeration   | ![Progress](Pictures/Progress100.png) |
+| [RegistryValueOptions](../src/Switch.Core/include/Switch/Microsoft/Win32/RegistryValueOptions.hpp)             | enumeration   | ![Progress](Pictures/Progress100.png) |
+| RegistryView                                                                                                   | enumeration   | ![Progress](Pictures/Progress0.png)   |
 
 ## Microsoft::Win32::SafeHandles
 
