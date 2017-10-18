@@ -143,7 +143,7 @@
 | EventHandler<TEventArgs>                                                                                                                    | delegate      | ![Progress](Pictures/Progress0.png)   |
 | [EventHandler](../src/Switch.Core/include/Switch/System/EventHandler.hpp)                                                                   | delegate      | ![Progress](Pictures/Progress100.png) |
 | [Exception](../src/Switch.Core/include/Switch/System/Exception.hpp)                                                                         | class         | ![Progress](Pictures/Progress100.png) |
-| [ExceptionEngineException](../src/Switch.Core/include/Switch/System/ExceptionEngineException.hpp)                                           | class         | ![Progress](Pictures/Progress100.png) |
+| [ExecutionEngineException](../src/Switch.Core/include/Switch/System/ExecutionEngineException.hpp)                                           | class         | ![Progress](Pictures/Progress100.png) |
 | [FieldAccessException](../src/Switch.Core/include/Switch/System/FileAccessException.hpp)                                                    | class         | ![Progress](Pictures/Progress100.png) |
 | *FlagsAttribute*                                                                                                                            | *class*       | ![Progress](Pictures/ProgressIna.png) |
 | [FormatException](../src/Switch.Core/include/Switch/System/FormatException.hpp)                                                             | class         | ![Progress](Pictures/Progress100.png) |
