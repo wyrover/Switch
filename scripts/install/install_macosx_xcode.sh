@@ -1,3 +1,4 @@
+sudo chown -R $(whoami) /usr/local/var/homebrew
 brew update
 brew upgrade
 brew install cmake curl doxygen jpeg libpng zlib
