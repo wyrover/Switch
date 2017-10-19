@@ -1,4 +1,4 @@
-rm  -r -q build 2>/dev/null
+rm -r -f build 2>/dev/null
 mkdir -p build/3rdparty
 cd build/3rdparty
 cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ../../3rdparty
