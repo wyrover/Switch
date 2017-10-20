@@ -3,7 +3,7 @@ brew update
 brew upgrade
 brew install cmake curl doxygen jpeg libpng zlib
 
-rm  -r build 2>/dev/null
+rm -r -f build 2>/dev/null
 mkdir -p build/3rdparty
 cd build/3rdparty
 cmake -G "Xcode" ../../3rdparty
