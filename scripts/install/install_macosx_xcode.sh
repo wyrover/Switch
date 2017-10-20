@@ -5,21 +5,19 @@ brew install cmake curl doxygen jpeg libpng zlib
 
 if [ -d /usr/local/cmake ]; then
   sudo mkdir -p /usr/local/cmake
-else
-  sudo chown -R $(whoami) /usr/local/cmake
 fi
 
 if [ -d /usr/local/include ]; then
   sudo mkdir -p /usr/local/include
-else
-  sudo chown -R $(whoami) /usr/local/include
 fi
 
 if [ -d /usr/local/lib ]; then
   sudo mkdir -p /usr/local/lib
-else
-  sudo chown -R $(whoami) /usr/local/lib
 fi
+
+sudo chown -R $(whoami) /usr/local/cmake
+sudo chown -R $(whoami) /usr/local/include
+sudo chown -R $(whoami) /usr/local/lib
 
 if [ -d ./build ]; then
   rm -r -f build
