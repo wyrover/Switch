@@ -271,7 +271,10 @@ void ConsoleEventListener::Write(ConsoleColor color, const String& value) {
   }
   
   static System::ConsoleColor originalForegroundColor = Console::ForegroundColor;
-  Console::ForegroundColor = color;
+    if (color == ConsoleColor::Gray)
+      Console::ResetColor();
+    else
+     Console::ForegroundColor = color;
   Console::Write(value);
   Console::ForegroundColor = originalForegroundColor;
 }
