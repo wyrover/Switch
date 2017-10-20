@@ -3,15 +3,15 @@ brew update
 brew upgrade
 brew install cmake curl doxygen jpeg libpng zlib
 
-if [ -d /usr/local/cmake ]; then
+if [! -d /usr/local/cmake ]; then
   sudo mkdir -p /usr/local/cmake
 fi
 
-if [ -d /usr/local/include ]; then
+if [! -d /usr/local/include ]; then
   sudo mkdir -p /usr/local/include
 fi
 
-if [ -d /usr/local/lib ]; then
+if [! -d /usr/local/lib ]; then
   sudo mkdir -p /usr/local/lib
 fi
 
