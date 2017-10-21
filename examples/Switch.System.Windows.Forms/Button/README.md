@@ -1,15 +1,14 @@
 # Button
 This example demonstrates the use of System::Windows::Forms::Button control.
-<BR>
 
 ![GitHub Logo](../../../docs/Pictures/Examples/Forms/ButtonW.png)
-<p align="left">Windows</p>
-<BR>
+
+Windows
 
 ![GitHub Logo](../../../docs/Pictures/Examples/Forms/ButtonM.png)
-<p align="left">macOS</p>
-<BR>
+
+macOS
 
 ![GitHub Logo](../../../docs/Pictures/Examples/Forms/ButtonU.png)
-<p align="left">Ubuntu</p>
-<BR>
+
+Ubuntu

@@ -1,16 +1,16 @@
 # GroupBoxAndRadioButton
 This example demonstrates the use of 
-System::Windows::Forms::GroupBox and System::Windows::Forms::RadioButton controls.
-<BR>
+System::Windows::Forms::GroupBox and System::Windows::Forms::CheckBox controls.
 
 ![GitHub Logo](../../../docs/Pictures/Examples/Forms/GroupBoxAndCheckBoxW.png)
-<p align="left">Windows</p>
-<BR>
+
+Windows
 
 ![GitHub Logo](../../../docs/Pictures/Examples/Forms/GroupBoxAndCheckBoxM.png)
-<p align="left">macOS</p>
-<BR>
+
+macOS
 
 ![GitHub Logo](../../../docs/Pictures/Examples/Forms/GroupBoxAndCheckBoxU.png)
-<p align="left">Ubuntu</p>
-<BR>
+
+Ubuntu
+
