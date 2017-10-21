@@ -16,7 +16,7 @@ namespace RadioButtonExample {
       this->StartPosition = FormStartPosition::Manual;
       this->Location = System::Drawing::Point(400, 200);
       this->ClientSize = System::Drawing::Size(300, 160);
-      this->Text = "RadioButton example";
+      this->Text = "GroupBox and RadioButton example";
       
       this->groupBox1.Parent = *this;
       this->groupBox1.Text = "Group 1";
