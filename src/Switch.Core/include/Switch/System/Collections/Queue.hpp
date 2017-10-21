@@ -135,15 +135,13 @@ namespace Switch {
         /// @endcond
         
       private:
-        virtual int32 GetCount() const {return this->queue.Count;}
-        virtual bool GetIsReadOnly() const {return false;}
-        virtual bool GetIsSynchronized() const {return this->queue.IsSynchronized;}
-        virtual const object& GetSyncRoot() const {return this->queue.SyncRoot;}
+        int32 GetCount() const override {return this->queue.Count;}
+        bool GetIsReadOnly() const override {return false;}
+        bool GetIsSynchronized() const override {return this->queue.IsSynchronized;}
+        const object& GetSyncRoot() const override {return this->queue.SyncRoot;}
         
-        void Add(const any&) { }
-        virtual int32 IndexOf(const any&) const { return -1; }
-        virtual bool Remove(const any&) { return false; }
-        virtual bool Remove(any*) { return false; }
+        void Add(const any&) override { }
+        bool Remove(const any&) override { return false; }
       };
     }
   }
