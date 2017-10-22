@@ -205,9 +205,9 @@ namespace Switch {
           /// @endcond
 
         private:
-          virtual int32 GetCount() const override {return static_cast<int32>(this->queue.size());}
-          virtual bool GetIsReadOnly() const override {return false;}
-          virtual bool GetIsSynchronized() const override {return false;}
+          int32 GetCount() const override {return static_cast<int32>(this->queue.size());}
+          bool GetIsReadOnly() const override {return false;}
+          bool GetIsSynchronized() const override {return false;}
           const Object& GetSyncRoot() const override {return this->syncRoot;}
 
           class Enumerator : public Object, public IEnumerator<T> {

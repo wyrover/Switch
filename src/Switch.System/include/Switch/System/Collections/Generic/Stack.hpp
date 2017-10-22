@@ -154,15 +154,13 @@ namespace Switch {
           List<T, TAllocator> stack;
           /// @endcond
         private:
-          virtual int32 GetCount() const {return this->stack.Count;}
-          virtual bool GetIsReadOnly() const {return false;}
-          virtual bool GetIsSynchronized() const {return this->stack.IsSynchronized;}
-          virtual const object& GetSyncRoot() const {return this->stack.SyncRoot;}
+          int32 GetCount() const override {return this->stack.Count;}
+          bool GetIsReadOnly() const override {return false;}
+          bool GetIsSynchronized() const override {return this->stack.IsSynchronized;}
+          const object& GetSyncRoot() const override {return this->stack.SyncRoot;}
 
-          void Add(const T&) { }
-          virtual int32 IndexOf(const T&) const { return -1; }
-          virtual bool Remove(const T&) { return false; }
-          virtual bool Remove(T*) { return false; }
+          void Add(const T&) override { }
+          bool Remove(const T&) override { return false; }
         };
       }
     }

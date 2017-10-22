@@ -7,6 +7,7 @@ This section contains the Switch documentation.
 ​
 # In This Section
 
+* [Development Status](SwitchStatus.md) provide information about classes and libraries development status.
 * [Framework Design Guidelines](FrameworkDesignGuidelines.md) provides guidelines for designing libraries that extend and interact with the Switch Framework.
 * [Types](Types.md) contains the Switch define the unboxed and boxed types.
 * [Articles and Overviews](ArticlesAndOverviews.md) provide articles and overviews of different themes.
