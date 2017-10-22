@@ -124,6 +124,7 @@
 #include "System/Threading/Mutex.hpp"
 #include "System/Threading/ParameterizedThreadStart.hpp"
 #include "System/Threading/RegisteredWaitHandle.hpp"
+#include "System/Threading/SpinLock.hpp"
 #include "System/Threading/Thread.hpp"
 #include "System/Threading/ThreadLocal.hpp"
 #include "System/Threading/ThreadAbortException.hpp"

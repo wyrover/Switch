@@ -1,6 +1,7 @@
 #define TRACE
 #include <Switch/Startup.hpp>
 #include <Switch/System/Console.hpp>
+#include <Switch/System/Threading/SpinLock.hpp>
 #
 using namespace System;
 using namespace System::Threading;

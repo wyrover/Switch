@@ -106,6 +106,7 @@ set(INCLUDE_FILES
   include/Switch/System/Threading/Mutex.hpp
   include/Switch/System/Threading/ParameterizedThreadStart.hpp
   include/Switch/System/Threading/RegisteredWaitHandle.hpp
+  include/Switch/System/Threading/SpinLock.hpp
   include/Switch/System/Threading/SynchronizationLockException.hpp
   include/Switch/System/Threading/Thread.hpp
   include/Switch/System/Threading/ThreadLocal.hpp
