@@ -78,6 +78,8 @@ System::Array<System::String> UnitTest::ConvertParam(const System::Array<System:
       convertedArgs[index] = args[index].Replace("--tunit_catch_exceptions", "--gtest_catch_exceptions");
     } else if (args[index].StartsWith("--tunit_pause")) {
       convertedArgs[index] = args[index];
+    } else if (args[index].StartsWith("--gtest_")) {
+      convertedArgs[index] = args[index];
     } else if (args[index].StartsWith("--tunit_")) {
       convertedArgs[index] = "--tunit_help";
     }
