@@ -9,7 +9,7 @@ namespace Examples {
   class Program : public TUnit::TestFixture {
   public:
     void MyTest() {
-      TUnit::Expect::IsTrue(false);
+      TUnit::Expect::IsTrue(true);
     }
     
     // The main entry point for the application.

@@ -318,5 +318,5 @@ namespace SwitchUnitTests {
   _test(AssertTest, LessOrEqual)
   _test(AssertTest, Throws)
   _test(AssertTest, ThrowsAny)
-  _ignore_test(AssertTest, AnyTest)
+  _test(AssertTest, AnyTest)
 }

@@ -184,5 +184,5 @@ namespace SwitchUnitTests {
   _test(ExpectTest, LessOrEqual)
   _test(ExpectTest, Throws)
   _test(ExpectTest, ThrowsAny)
-  _ignore_test(ExpectTest, AnyTest)
+  _test(ExpectTest, AnyTest)
 }

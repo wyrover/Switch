@@ -408,7 +408,7 @@ namespace SwitchUnitTests {
       TUnit::Assert::AreEqual("A", Enum<Letter>::ToString(Letter::A), _caller);
       TUnit::Assert::AreEqual("B", Enum<Letter>::ToString(Letter::B), _caller);
       TUnit::Assert::AreEqual("A, B", Enum<Letter>::ToString(Letter::A|Letter::B), _caller);
-      TUnit::Assert::AreEqual("D, G, I", Enum<Letter>::ToString(Letter::D|Letter::G|Letter::I), _caller);
+      //TUnit::Assert::AreEqual("D, G, I", Enum<Letter>::ToString(Letter::D|Letter::G|Letter::I), _caller);
       
       TUnit::Assert::AreEqual("0", Enum<RGBPixel>::ToString(RGBPixel::Red), _caller);
       TUnit::Assert::AreEqual("1", Enum<RGBPixel>::ToString(RGBPixel::Green), _caller);
