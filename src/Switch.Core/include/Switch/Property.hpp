@@ -65,7 +65,8 @@ public:
   
   T Get() const {return this->getter();}
   T operator ()() const {return this->getter();}
-  operator T () const {return this->getter();}
+  operator T () const { return this->getter(); }
+  operator T () { return this->getter(); }
   bool operator==(T value) const {return this->getter() == value;}
   bool operator !=(T value) const {return this->getter() != value;}
   

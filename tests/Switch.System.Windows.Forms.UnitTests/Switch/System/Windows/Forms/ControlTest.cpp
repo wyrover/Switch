@@ -12,18 +12,18 @@ namespace SwitchUnitTests {
   protected:
     void DefaultConstructor() {
       Control control;
-      Assert::AreEqual(Control::DefaultBackColor, control.BackColor);
-      Assert::AreEqual(0, control.Bottom);
-      Assert::AreEqual(Rectangle(0, 0, 0, 0), control.Bounds);
-      Assert::AreEqual(Size(0, 0), control.ClientSize);
-      Assert::IsEmpty(control.Controls());
-      Assert::AreEqual(Control::DefaultForeColor, control.ForeColor);
-      Assert::AreEqual(0, control.Height);
-      Assert::AreEqual(0, control.Left);
-      Assert::IsNull(control.Parent());
-      Assert::IsEmpty(control.Text);
-      Assert::AreEqual(0, control.Top);
-      Assert::AreEqual(0, control.Width);
+      Assert::AreEqual(Control::DefaultBackColor, control.BackColor, _caller);
+      Assert::AreEqual(0, control.Bottom, _caller);
+      Assert::AreEqual(Rectangle(0, 0, 0, 0), control.Bounds, _caller);
+      Assert::AreEqual(Size(0, 0), control.ClientSize, _caller);
+      Assert::IsEmpty(control.Controls(), _caller);
+      Assert::AreEqual(Control::DefaultForeColor, control.ForeColor, _caller);
+      Assert::AreEqual(0, control.Height, _caller);
+      Assert::AreEqual(0, control.Left, _caller);
+      Assert::IsNull(control.Parent(), _caller);
+      Assert::IsEmpty(control.Text, _caller);
+      Assert::AreEqual(0, control.Top, _caller);
+      Assert::AreEqual(0, control.Width, _caller);
     }
     
     void SetBackColorToAColor() {
@@ -34,9 +34,9 @@ namespace SwitchUnitTests {
       };
       
       control.BackColor = Color::SpringGreen;
-      Assert::AreEqual(Color::SpringGreen, control.BackColor);
+      Assert::AreEqual(Color::SpringGreen(), control.BackColor, _caller);
       
-      Assert::AreEqual(Color::SpringGreen, newBackColor);
+      Assert::AreEqual(Color::SpringGreen(), newBackColor, _caller);
     }
     
     void SetForeColorToAColor() {
@@ -47,8 +47,8 @@ namespace SwitchUnitTests {
       };
       
       control.ForeColor = Color::White;
-      Assert::AreEqual(Color::White, control.ForeColor);
-      Assert::AreEqual(Color::White, newForeColor);
+      Assert::AreEqual(Color::White, control.ForeColor, _caller);
+      Assert::AreEqual(Color::White(), newForeColor, _caller);
     }
     
     /*
