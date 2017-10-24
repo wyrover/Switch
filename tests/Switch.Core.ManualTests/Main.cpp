@@ -1,54 +1,63 @@
 #include <Switch/Startup.hpp>
 #include <Switch/System/Console.hpp>
 
-// to hpp file
-
 namespace TUnit {
-  /// @cond
-  class TestFixture;
-  class UnitTest;
-  
-  struct __opaque_registered_test {
-  protected:
-    friend class UnitTest;
-    __opaque_registered_test(refptr<TestFixture> testFixture, delegate<void> test) : testFixture(testFixture), test(test) {RegisteredTests().Add(*this);}
-    refptr<TestFixture> testFixture;
-
-  private:
-    delegate<void> test;
-    static System::Collections::Generic::List<ref<__opaque_registered_test>>& RegisteredTests() {
-      static System::Collections::Generic::List<ref<__opaque_registered_test>> registeredTests;
-      return registeredTests;
-    }
-  };
-  /// @endcond
-  
   /// @brief TestFixture is...
   class TestFixture : public object {
   public:
-    TestFixture() {}
-
     virtual void SetUp() {}
     virtual void TearDown() {}
   };
-  
+
+  /// @cond
+  class UnitTest;
+  /// @endcond
+
+  struct RegisteredTest {
+  protected:
+    template<typename T>
+    RegisteredTest(void (T::*test)()) : RegisteredTest(test, false) {}
+    template<typename T>
+    RegisteredTest(void (T::*test)(), bool ignore) : testFixture(ref_new<T>()), test(as<T>(testFixture)(), test), ignore(ignore) {RegisteredTests().Add(*this);}
+
+  private:
+    friend class UnitTest;
+    refptr<TUnit::TestFixture> testFixture;
+    delegate<void> test;
+    bool ignore = false;
+    static System::Collections::Generic::List<ref<RegisteredTest>>& RegisteredTests() {
+      static System::Collections::Generic::List<ref<RegisteredTest>> registeredTests;
+      return registeredTests;
+    }
+  };
+
   /// @brief UnitTest is...
   class UnitTest {
   public:
     void Run() {
-      for (auto registeredTest : __opaque_registered_test::RegisteredTests()) {
-        registeredTest().testFixture->SetUp();
-        registeredTest().test();
-        registeredTest().testFixture->TearDown();
+      for (auto registeredTest : RegisteredTest::RegisteredTests()) {
+        if (!registeredTest().ignore) {
+          registeredTest().testFixture().SetUp();
+          registeredTest().test();
+          registeredTest().testFixture().TearDown();
+        }
       }
     }
   };
 }
 
-#define _test(fixtureClass, method) \
-static struct __opaque_registered_test_##fixtureClass##method : public TUnit::__opaque_registered_test { \
-  __opaque_registered_test_##fixtureClass##method() : TUnit::__opaque_registered_test(ref_new<fixtureClass>(), _delegate {as<fixtureClass>(this->testFixture)->method();}) {} \
-} __opaque_registered_test_value_##fixtureClass##method;
+#define __concat(value1, value2) value1 ## value2
+#define __concat2(value1, value2) __concat(value1, value2)
+
+#define _test(method) \
+static struct __concat2(RegisteredTest, __LINE__) : public TUnit::RegisteredTest { \
+  __concat2(RegisteredTest, __LINE__)() : TUnit::RegisteredTest(&method) {} \
+} __concat2(registeredTest, __LINE__);
+
+#define _ignore_test(method) \
+static struct __concat2(RegisteredTest, __LINE__) : public TUnit::RegisteredTest { \
+  __concat2(RegisteredTest, __LINE__)() : TUnit::RegisteredTest(&method, true) {} \
+} __concat2(registeredTest, __LINE__);
 
 using namespace System;
 using namespace System::Threading;
@@ -57,68 +66,60 @@ namespace Examples {
   class TestFixture1 : public TUnit::TestFixture {
   public:
     void SetUp() override {
-      Console::WriteLine("{0}::{1}", _typeof(*this), _caller.MemberNamne);
+      Console::WriteLine("{0}::{1}", _typeof(*this).Name, _caller.MemberNamne);
     }
     
     void TearDown() override {
-      Console::WriteLine("{0}::{1}", _typeof(*this), _caller.MemberNamne);
+      Console::WriteLine("{0}::{1}", _typeof(*this).Name, _caller.MemberNamne);
     }
     
     void Test1() {
-      Console::WriteLine("{0}::{1}", _typeof(*this), _caller.MemberNamne);
+      Console::WriteLine("{0}::{1}", _typeof(*this).Name, _caller.MemberNamne);
     }
   };
-  
-  _test(TestFixture1, Test1)
+ 
+  static struct RegisteredTest1 : public TUnit::RegisteredTest {
+    RegisteredTest1() : TUnit::RegisteredTest(&TestFixture1::Test1) {}
+  } registeredTest1;
+  //_test(TestFixture1::Test1)
 
   class TestFixture2 : public TUnit::TestFixture {
   public:
-    void SetUp() override {
-      Console::WriteLine("{0}::{1}", _typeof(*this), _caller.MemberNamne);
-    }
-    
-    void TearDown() override {
-      Console::WriteLine("{0}::{1}", _typeof(*this), _caller.MemberNamne);
-    }
-    
     void Test1() {
-      Console::WriteLine("{0}::{1}", _typeof(*this), _caller.MemberNamne);
+      Console::WriteLine("{0}::{1}", _typeof(*this).Name, _caller.MemberNamne);
     }
     
     void Test2() {
-      Console::WriteLine("{0}::{1}", _typeof(*this), _caller.MemberNamne);
+      Console::WriteLine("{0}::{1}", _typeof(*this).Name, _caller.MemberNamne);
     }
   };
   
-  _test(TestFixture2, Test1)
-  _test(TestFixture2, Test2)
+  _test(TestFixture2::Test1)
+  _test(TestFixture2::Test2)
 
   class TestFixture3 : public TUnit::TestFixture {
   public:
-    void SetUp() override {
-      Console::WriteLine("{0}::{1}", _typeof(*this), _caller.MemberNamne);
-    }
-    
-    void TearDown() override {
-      Console::WriteLine("{0}::{1}", _typeof(*this), _caller.MemberNamne);
-    }
-    
     void Test1() {
-      Console::WriteLine("{0}::{1}", _typeof(*this), _caller.MemberNamne);
+      Console::WriteLine("{0}::{1}", _typeof(*this).Name, _caller.MemberNamne);
     }
     
     void Test2() {
-      Console::WriteLine("{0}::{1}", _typeof(*this), _caller.MemberNamne);
+      Console::WriteLine("{0}::{1}", _typeof(*this).Name, _caller.MemberNamne);
     }
     
     void Test3() {
-      Console::WriteLine("{0}::{1}", _typeof(*this), _caller.MemberNamne);
+      Console::WriteLine("{0}::{1}", _typeof(*this).Name, _caller.MemberNamne);
+    }
+    
+    void Test4() {
+      Console::WriteLine("{0}::{1}", _typeof(*this).Name, _caller.MemberNamne);
     }
   };
   
-  _test(TestFixture3, Test1)
-  _test(TestFixture3, Test2)
-  _test(TestFixture3, Test3)
+  _test(TestFixture3::Test1)
+  _test(TestFixture3::Test2)
+  _test(TestFixture3::Test3)
+  _ignore_test(TestFixture3::Test4)
 
   class Program {
   public:
@@ -130,4 +131,3 @@ namespace Examples {
 }
 
 _startup (Examples::Program)
-

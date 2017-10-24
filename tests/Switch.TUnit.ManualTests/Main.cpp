@@ -6,19 +6,21 @@
 using namespace System;
 
 namespace Examples {
-  class Program : public TUnit::TestFixture {
-  public:
-    void MyTest() {
-      TUnit::Expect::IsTrue(false);
+  struct TestFixture1 : public TUnit::TestFixture {
+    void Test1() {
+      TUnit::Expect::True(true);
     }
-    
+  };
+  
+  _test(TestFixture1, Test1)
+  
+  class Program {
+  public:
     // The main entry point for the application.
     static void Main(const Array<string>& args) {
       TUnit::UnitTest(args).Run();
     }
   };
-  
-  _test(Program, MyTest)
 }
 
 _startup (Examples::Program)
