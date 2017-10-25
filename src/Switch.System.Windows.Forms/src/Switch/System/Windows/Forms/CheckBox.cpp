@@ -29,8 +29,8 @@ void CheckBox::SetCheckState(System::Windows::Forms::CheckState checkState) {
       Native::CheckBoxApi::SetChecked(*this);
 
     if (oldChecked != this->Checked)
-      this->OnCheckedChanged(EventArgs::Empty);
+      this->OnCheckedChanged(EventArgs::Empty());
 
-    this->OnCheckStateChanged(EventArgs::Empty);
+    this->OnCheckStateChanged(EventArgs::Empty());
   }
 }

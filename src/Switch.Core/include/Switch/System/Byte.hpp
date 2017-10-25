@@ -56,10 +56,10 @@ namespace Switch {
       /// @endcond
       
       /// @brief Represents the largest possible value of an Byte 255 (0xFF). This field is constant.
-      static _property<byte, _readonly> MaxValue;
+      static constexpr byte MaxValue = std::numeric_limits<byte>::max();
 
       /// @brief Represents the smallest possible value of Byte 0 (0x00). This field is constant.
-      static _property<byte, _readonly> MinValue;
+      static constexpr byte MinValue = std::numeric_limits<byte>::min();
       
       /// @brief Compares this instance to a specified Byte object and returns an indication of their relative values.
       /// @param value An Byte object to compare with this instance.

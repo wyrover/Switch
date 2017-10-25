@@ -19,22 +19,22 @@ namespace Switch {
     struct _export Single final : public ValueType, public IComparable, public IConvertible, public IFormattable {
     public:
       /// @brief Represents the smallest positive Single value greater than zero. This field is constant.
-      static _property<float, _readonly> Epsilon;
+      static constexpr float Epsilon = 1.401298E-45F;
 
       /// @brief Represents the largest possible value of an Single 3.40282e+038f. This field is constant.
-      static _property<float, _readonly> MaxValue;
+      static constexpr float MaxValue = std::numeric_limits<float>::max();
 
       /// @brief Represents the smallest possible value of Single -3.40282e+038f. This field is constant.
-      static _property<float, _readonly> MinValue;
+      static constexpr float MinValue = -std::numeric_limits<float>::max();
 
       /// @brief Represents not a number (NaN). This field is constant.
-      static _property<float, _readonly> NaN;
+      static constexpr float NaN = std::numeric_limits<float>::quiet_NaN();
 
       /// @brief Represents negative infinity. This field is constant.
-      static _property<float, _readonly> NegativeInfinity;
+      static constexpr float NegativeInfinity = -std::numeric_limits<float>::infinity();
 
       /// @brief Represents positive infinity. This field is constant.
-      static _property<float, _readonly> PositiveInfinity;
+      static constexpr float PositiveInfinity = std::numeric_limits<float>::infinity();
 
       /// @brief Create a new instance of struct Single
       /// @remarks Single is initialized with the default value 0.

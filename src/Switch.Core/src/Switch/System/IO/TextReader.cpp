@@ -5,9 +5,10 @@
 using namespace System;
 using namespace System::IO;
 
-_property<NullTextReader, _readonly> TextReader::Null {
-  [] {return NullTextReader();}
-};
+NullTextReader& TextReader::Null() {
+  static NullTextReader nullTextReader;
+  return nullTextReader;
+}
 
 string TextReader::ReadLine() {
   string line;

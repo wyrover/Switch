@@ -1,4 +1,3 @@
-#include <limits>
 #include "../../../include/Switch/System/Single.hpp"
 #include "../../../include/Switch/System/Convert.hpp"
 #include "../../../include/Switch/System/DivideByZeroException.hpp"
@@ -8,29 +7,17 @@
 
 using namespace System;
 
-_property<float, _readonly> Single::Epsilon {
-  [] {return 1.401298E-45F;}
-};
+constexpr float Single::Epsilon;
 
-_property<float, _readonly> Single::MaxValue {
-  [] {return std::numeric_limits<float>::max();}
-};
+constexpr float Single::MaxValue;
 
-_property<float, _readonly> Single::MinValue {
-  [] {return -std::numeric_limits<float>::max();}
-};
+constexpr float Single::MinValue;
 
-_property<float, _readonly> Single::NaN {
-  [] {return std::numeric_limits<float>::quiet_NaN();}
-};
+constexpr float Single::NaN;
 
-_property<float, _readonly> Single::NegativeInfinity {
-  [] {return -std::numeric_limits<float>::infinity();}
-};
+constexpr float Single::NegativeInfinity;
 
-_property<float, _readonly> Single::PositiveInfinity {
-  [] {return std::numeric_limits<float>::infinity();}
-};
+constexpr float Single::PositiveInfinity;
 
 float Single::Parse(const string& str) {
   return Convert::ToSingle(atof(str.ToCCharArray().Data()));

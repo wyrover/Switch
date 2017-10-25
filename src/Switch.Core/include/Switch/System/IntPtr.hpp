@@ -22,7 +22,11 @@ namespace Switch {
     struct _export IntPtr final : public object, public IComparable, public IFormattable {
     public:
       /// @brief A read-only field that represents a pointer or handle that has been initialized to zero.
-      static _property<intptr, _readonly> Zero;
+      static constexpr intptr Zero = 0;
+      
+      /// @brief Gets the size of this instance.
+      /// @return Int32 The size of a pointer or handle on this platform, measured in bytes. The value of this property is 4 on a 32-bit platform, and 8 on a 64-bit platform.
+      static constexpr int32 Size = static_cast<int32>(sizeof(intptr));
       
       /// @brief Create a new instance of class IntPtr
       /// @remarks IntPtr is initialized by default to null.
@@ -41,10 +45,6 @@ namespace Switch {
       /// @param value A pointer to an unspecified type.
       IntPtr(intptr value);
 
-      /// @brief Gets the size of this instance.
-      /// @return Int32 The size of a pointer or handle on this platform, measured in bytes. The value of this property is 4 on a 32-bit platform, and 8 on a 64-bit platform.
-      static _property<int32, _readonly> Size;
-      
       /// @brief Determines whether this instance of IntPtr and a specified object, which must also be a IntPtr object, have the same value.
       /// @param value The IntPtr to compare with the current object.
       /// @return bool true if the specified value is equal to the current object. otherwise, false.

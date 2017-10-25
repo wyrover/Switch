@@ -53,11 +53,11 @@ namespace Switch {
           /// @brief Returns the ID of the currently executing Task.
           /// @return An integer that was assigned by the system to the currently-executing task.
           /// @remarks CurrentId is a static property that is used to get the identifier of the currently executing task from the code that the task is executing. It differs from the Id property, which returns the identifier of a particular Task instance. If you attempt to retrieve the CurrentId value from outside the code that a task is executing, the property returns null.
-          static _property<Nullable<int32>, _readonly> CurrentId;
+          static Nullable<int32> CurrentId();
           
           /// @brief Provides access to factory methods for creating and configuring Task and Task<TResult> instances.
           /// @return A factory object that can create a variety of Task and Task<TResult> objects.
-          static _property<TaskFactory, _readonly> Factory;
+          static TaskFactory& Factory();
           
           /// @brief Gets an ID for this Task instance.
           /// @brief The identifier that is assigned by the system to this Task instance.
@@ -475,8 +475,6 @@ namespace Switch {
           /// @brief Creates an awaitable task that asynchronously yields back to the current context when awaited.
           static bool Yield() {return Thread::Yield();}
           
-          static Nullable<int32> __currentId__();
-
         private:
           class TaskData {
             friend class Task<void>;
@@ -508,7 +506,7 @@ namespace Switch {
                 this->status = TaskStatus::WaitingForChildrenToComplete;
                 this->endEvent.Set();
               } catch(...) {
-                this->aggregateException = AggregateException({excptr::CurrentException}, _caller);
+                this->aggregateException = AggregateException(Array<ExceptionPtr> {excptr::CurrentException()}, _caller);
                 this->status = TaskStatus::Faulted;
                 this->endEvent.Set();
               }
@@ -527,19 +525,14 @@ namespace Switch {
 /// @cond
 namespace Switch { namespace System { namespace Threading { namespace Tasks {
   template<typename TResult>
-  _property<Nullable<int32>, _readonly> Task<TResult>::CurrentId {
-    [] {
-      if (__opaque_task_id_generator__::currentId == 0)
-        return Nullable<int32>();
-      return Nullable<int32>(__opaque_task_id_generator__::currentId);
-    }
-  };
+  Nullable<int32> Task<TResult>::CurrentId() {
+    return __opaque_task_id_generator__::currentId == 0 ? Nullable<int32>() : Nullable<int32>(__opaque_task_id_generator__::currentId);
+  }
   
   template<typename TResult>
-  _property<TaskFactory, _readonly> Task<TResult>::Factory {
-    [] {
-      return TaskFactory();
-    }
+  TaskFactory& Task<TResult>::Factory() {
+    static TaskFactory taskFactory;
+    return taskFactory;
   };
 }}}}
 /// @endcond

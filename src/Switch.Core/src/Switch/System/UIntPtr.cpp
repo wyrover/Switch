@@ -7,13 +7,9 @@
 
 using namespace System;
 
-_property<uintptr, _readonly> UIntPtr::Zero {
-  [] {return 0;}
-};
+constexpr uintptr UIntPtr::Zero;
 
-_property<int32, _readonly> UIntPtr::Size {
-  [] {return static_cast<int32>(sizeof(void*));}
-};
+constexpr int32 UIntPtr::Size;
 
 UIntPtr::UIntPtr(const UInt32& value) {
   this->value = (uint32)value;

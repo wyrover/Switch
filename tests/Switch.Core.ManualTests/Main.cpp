@@ -16,17 +16,20 @@ namespace TUnit {
   struct RegisteredTest {
   protected:
     template<typename T>
-    RegisteredTest(void (T::*test)()) : RegisteredTest(test, false) {}
+    RegisteredTest(const string& name, void (T::*test)()) : RegisteredTest(name, test, false) {}
     template<typename T>
-    RegisteredTest(void (T::*test)(), bool ignore) : testFixture(ref_new<T>()), test(as<T>(testFixture)(), test), ignore(ignore) {RegisteredTests().Add(*this);}
+    RegisteredTest(const string& name, void (T::*test)(), bool ignore) : name(name.Split(':')[name.Split(':').Length-1]), testFixture(ref_new<T>()), test(as<T>(testFixture)(), test), ignore(ignore) {
+      RegisteredTests().Add(*this);
+    }
 
   private:
     friend class UnitTest;
+    string name;
     refptr<TUnit::TestFixture> testFixture;
     delegate<void> test;
     bool ignore = false;
     static System::Collections::Generic::List<ref<RegisteredTest>>& RegisteredTests() {
-      static System::Collections::Generic::List<ref<RegisteredTest>> registeredTests;
+       static System::Collections::Generic::List<ref<RegisteredTest>> registeredTests;
       return registeredTests;
     }
   };
@@ -37,6 +40,7 @@ namespace TUnit {
     void Run() {
       for (auto registeredTest : RegisteredTest::RegisteredTests()) {
         if (!registeredTest().ignore) {
+          System::Console::WriteLine("Running {0}.{1}", registeredTest().testFixture->GetType().Name, registeredTest().name);
           registeredTest().testFixture().SetUp();
           registeredTest().test();
           registeredTest().testFixture().TearDown();
@@ -51,12 +55,12 @@ namespace TUnit {
 
 #define _test(method) \
 static struct __concat2(RegisteredTest, __LINE__) : public TUnit::RegisteredTest { \
-  __concat2(RegisteredTest, __LINE__)() : TUnit::RegisteredTest(&method) {} \
+  __concat2(RegisteredTest, __LINE__)() : TUnit::RegisteredTest(#method, &method) {} \
 } __concat2(registeredTest, __LINE__);
 
 #define _ignore_test(method) \
 static struct __concat2(RegisteredTest, __LINE__) : public TUnit::RegisteredTest { \
-  __concat2(RegisteredTest, __LINE__)() : TUnit::RegisteredTest(&method, true) {} \
+  __concat2(RegisteredTest, __LINE__)() : TUnit::RegisteredTest(#method, &method, true) {} \
 } __concat2(registeredTest, __LINE__);
 
 using namespace System;
@@ -79,7 +83,7 @@ namespace Examples {
   };
  
   static struct RegisteredTest1 : public TUnit::RegisteredTest {
-    RegisteredTest1() : TUnit::RegisteredTest(&TestFixture1::Test1) {}
+    RegisteredTest1() : TUnit::RegisteredTest("TestFixture1::Test1", &TestFixture1::Test1) {}
   } registeredTest1;
   //_test(TestFixture1::Test1)
 

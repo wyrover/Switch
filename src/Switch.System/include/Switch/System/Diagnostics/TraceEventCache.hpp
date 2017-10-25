@@ -41,7 +41,7 @@ namespace Switch {
         _property<System::DateTime, _readonly> DateTime {
           _get {
             if (this->dateTime == DateTime::MinValue)
-              this->dateTime = System::DateTime::Now;
+              this->dateTime = System::DateTime::Now();
             return this->dateTime;
           }
         };

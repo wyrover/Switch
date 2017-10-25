@@ -11,10 +11,6 @@ namespace Examples {
   public:
     // The main entry point for the application.
     static void Main() {
-      byte value = 0;
-      Console::WriteLine("value = {0}", _nameof(value));
-      Console::WriteLine("value = {0}", _typeof(value));
-      Console::WriteLine("value = {0}", value);
     }
   };
 }

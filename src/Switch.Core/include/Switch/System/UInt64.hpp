@@ -18,10 +18,10 @@ namespace Switch {
     struct _export UInt64 final : public ValueType, public IComparable, public IConvertible, public IFormattable {
     public:
       /// @brief Represents the largest possible value of an UInt64 18446744073709551615 (0xFFFFFFFFFFFFFFFF). This field is constant.
-      static _property<uint64, _readonly> MaxValue;
+      static constexpr uint64 MaxValue = std::numeric_limits<uint64>::max();
 
       /// @brief Represents the smallest possible value of UInt64 0 (0x0000000000000000). This field is constant.
-      static _property<uint64, _readonly> MinValue;
+      static constexpr uint64 MinValue = std::numeric_limits<uint64>::min();
 
       /// @brief Create a new instance of struct UInt64
       /// @remarks UInt64 is initialized with default value 0.

@@ -15,8 +15,11 @@ namespace Switch {
       /// @brief Implements a System::IO::TextWriter for writing characters to a stream in a particular encoding.
       class _export StreamWriter : public TextWriter {
       public:
-        static _property<StreamWriter, _readonly> Null;
-        
+        static StreamWriter& Null() {
+          static StreamWriter nullStreamWriter;
+          return nullStreamWriter;
+        }
+
         /// @brief Initializes a new instance of the System::IO::StreamWriter class for the specified file on the specified stream pointer.
         /// @param stream The stream pointer to write to.
         /// @exception ArgumentException stream is not writable.

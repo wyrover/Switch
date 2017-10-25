@@ -53,7 +53,7 @@ namespace Switch {
         /// @remarks Use Enter to acquire the Monitor on the object passed as the parameter. If another thread has executed an Enter on the object, but has not yet executed the corresponding Exit, the current thread will block until the other thread releases the object. It is legal for the same thread to invoke Enter more than once without it blocking; however, an equal number of Exit calls must be invoked before other threads waiting on the object will unblock.
         /// @remarks Usex Monitor to lock objects (that is, reference types), not value types. When you pass a value type variable to Enter, it is boxed as an object. If you pass the same variable to Enter again, the thread is block. The code that Monitor is supposedly protecting is not protected. Furthermore, when you pass the variable to Exit, still another separate object is created. Because the object passed to Exit is different from the object passed to Enter, Monitor throws SynchronizationLockException. For details, see the conceptual topic Monitors.
         static bool IsEntered(const object& obj) {
-          return monitorItems.ContainsKey(ToKey(obj));
+          return MonitorItems().ContainsKey(ToKey(obj));
         }
         
         /// @brief Notifies a thread in the waiting queue of a change in the locked object's state.
@@ -232,7 +232,7 @@ namespace Switch {
         
         static const object* ToKey(const object& obj) {
           if (is<string>(obj)) {
-            for (const auto& item : monitorItems)
+            for (const auto& item : MonitorItems())
               if (item.Value().name.HasValue && item.Value().name.Value().Equals((const string&)obj)) {
                 return item.Key;
               }
@@ -240,7 +240,10 @@ namespace Switch {
           return &obj;
         }
 
-        static System::Collections::Generic::Dictionary<const object*, MonitorItem> monitorItems;
+        static System::Collections::Generic::Dictionary<const object*, MonitorItem>& MonitorItems() {
+          static System::Collections::Generic::Dictionary<const object*, MonitorItem> monitorItems;
+          return monitorItems;
+        }
 
         static bool Add(const object& obj, int32 millisecondsTimeout);
         static void Remove(const object& obj);

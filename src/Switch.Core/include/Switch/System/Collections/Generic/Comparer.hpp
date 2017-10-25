@@ -22,7 +22,10 @@ namespace Switch {
           /// @endcond
           
           /// @brief Returns a default sort order comparer for the type specified by the generic argument
-          static _property<const IComparer<T>&, _readonly> Default;
+          static const IComparer<T>& Default() {
+            static Comparer<T> comparer;
+            return comparer;
+          }
 
           /// @brief Compares two entities and returns a value indicating whether one is less than, equal to, or greater than the other.
           /// @param x The first entity to compare.
@@ -32,18 +35,7 @@ namespace Switch {
           /// - Zero                x equals y.
           /// - Greater than zero   x is greater than y.
           virtual int32 Compare(const T& x, const T& y) const {return x < y ? -1 : (x == y ? 0 : 1);}
-        };
-        
-        /// @cond
-        template<class T>
-        inline const IComparer<T>& __get_default_comparer__() {
-          static Comparer<T> comparer;
-          return comparer;
-        }
-
-        template <typename T>
-        _property<const IComparer<T>&, _readonly> Comparer<T>::Default = {&__get_default_comparer__<T>};
-        /// @endcond
+        };        
       }
     }
   }

@@ -6,13 +6,9 @@
 
 using namespace System;
 
-_property<intptr, _readonly> IntPtr::Zero {
-  [] {return 0;}
-};
+constexpr intptr IntPtr::Zero;
 
-_property<int32, _readonly> IntPtr::Size {
-  [] {return static_cast<int32>(sizeof(intptr));}
-};
+constexpr int32 IntPtr::Size;
 
 IntPtr::IntPtr(const Int32& value) {
   this->value = (int32)value;

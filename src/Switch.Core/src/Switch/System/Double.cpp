@@ -1,4 +1,3 @@
-#include <limits>
 #include "../../../include/Switch/System/Double.hpp"
 #include "../../../include/Switch/System/Byte.hpp"
 #include "../../../include/Switch/System/Char.hpp"
@@ -19,29 +18,17 @@
 
 using namespace System;
 
-_property<double, _readonly> Double::Epsilon {
-  [] {return 4.94066e-324;}
-};
+constexpr double Double::Epsilon;
 
-_property<double, _readonly> Double::MaxValue {
-  [] {return std::numeric_limits<double>::max();}
-};
+constexpr double Double::MaxValue;
 
-_property<double, _readonly> Double::MinValue {
-  [] {return -std::numeric_limits<double>::max();}
-};
+constexpr double Double::MinValue;
 
-_property<double, _readonly> Double::NaN {
-  [] {return std::numeric_limits<double>::quiet_NaN();}
-};
+constexpr double Double::NaN;
 
-_property<double, _readonly> Double::NegativeInfinity {
-  [] {return -std::numeric_limits<double>::infinity();}
-};
+constexpr double Double::NegativeInfinity;
 
-_property<double, _readonly> Double::PositiveInfinity {
-  [] {return std::numeric_limits<double>::infinity();}
-};
+constexpr double Double::PositiveInfinity;
 
 double Double::Parse(const String& str) {
   return atof(str.Data());

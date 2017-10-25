@@ -1,4 +1,3 @@
-#include <limits>
 #include "../../../include/Switch/System/UInt32.hpp"
 #include "../../../include/Switch/System/Convert.hpp"
 #include "../../../include/Switch/System/DivideByZeroException.hpp"
@@ -7,13 +6,9 @@
 
 using namespace System;
 
-_property<uint32, _readonly> UInt32::MaxValue {
-  [] {return std::numeric_limits<uint32>::max();}
-};
+constexpr uint32 UInt32::MaxValue;
 
-_property<uint32, _readonly> UInt32::MinValue {
-  [] {return std::numeric_limits<uint32>::min();}
-};
+constexpr uint32 UInt32::MinValue;
 
 uint32 UInt32::Parse(const string& str) {
   return Parse(str,10);

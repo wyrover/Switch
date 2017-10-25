@@ -12,7 +12,7 @@ namespace Examples {
   public:
     // The main entry point for the application.
     static void Main() {
-      int result = Environment::TickCount & Int32::MaxValue();
+      int result = Environment::TickCount & Int32::MaxValue;
       Console::WriteLine("TickCount: {0}", result);
     }
   };

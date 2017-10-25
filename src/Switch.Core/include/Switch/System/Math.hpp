@@ -25,11 +25,11 @@ namespace Switch {
     public:
       /// @brief Represents the natural logarithmic base, specified by the constant, e. This field is constant.
       /// @remarks The value of this field is 2.7182818284590452354.
-      static _property<double, _readonly> E;
+      static constexpr double E = 2.7182818284590452354;
 
       /// @brief Represents the ratio of the circumference of a circle to its diameter, specified by the constant, p. This field is constant.
       /// @remarks The value of this field is 3.14159265358979323846.
-      static _property<double, _readonly> PI;
+      static constexpr double PI = 3.14159265358979323846;
 
       /// @brief Returns the absolute value of a double-precision floating-point number
       /// @param value A number in the range double::MinValue <= value <= double::MaxValue

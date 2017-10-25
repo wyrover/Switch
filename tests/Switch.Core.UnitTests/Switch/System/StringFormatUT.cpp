@@ -52,7 +52,7 @@ TEST(String, Format_BraceMismatch) {
 
 TEST(String, Format_ConsoleBraceMismatch) {
   try {
-    Console::SetOut(System::IO::TextWriter::Null);
+    Console::SetOut(System::IO::TextWriter::Null());
 
     Console::WriteLine("{");
     Console::WriteLine("}");

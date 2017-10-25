@@ -7,7 +7,7 @@ namespace Examples {
   public:
     // The main entry point for the application.
     static void Main() {
-      string string1 = "Today is " + DateTime::Now + ".";
+      string string1 = "Today is " + DateTime::Now() + ".";
       Console::WriteLine(string1);
       
       string string2 = "This is one sentence. "_s + "This is a second. ";

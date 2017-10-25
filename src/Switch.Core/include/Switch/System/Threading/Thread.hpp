@@ -133,7 +133,7 @@ namespace Switch {
         /// @brief Gets the currently running thread.
         /// @return A System::Threading::Thread that is the representation of the currently running
         /// @return thread.
-        static _property<Thread&, _readonly> CurrentThread;
+        static Thread& CurrentThread();
         
         _property<intptr, _readonly> Handle {
           _get {
@@ -345,10 +345,6 @@ namespace Switch {
         /// @remarks Yielding is limited to the processor that is executing the calling thread. The operating system will not switch execution to another processor, even if that processor is idle or is running a thread of lower priority. If there are no other threads that are ready to execute on the current processor, the operating system does not yield execution, and this method returns false.
         /// @remarks This method is equivalent to using platform invoke to call the native Win32 SwitchToThread function. You should call the Yield method instead of using platform invoke, because platform invoke bypasses any custom threading behavior the host has requested.
         static bool Yield() {std::this_thread::yield(); return true;}
-        
-        /// @cond
-        static Thread& __CurrentThread__();
-        /// @endcond
         
       private:
         using NativeHandle = std::thread::native_handle_type;

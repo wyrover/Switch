@@ -93,7 +93,7 @@ namespace SwitchUnitTests {
     }
 
     void AreSame() {
-      System::DateTime date1 = System::DateTime::Now;
+      System::DateTime date1 = System::DateTime::Now();
       System::DateTime* date2 = &date1;
       Expect::AreSame(date1, *date2, _caller);
     }

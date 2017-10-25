@@ -1,4 +1,3 @@
-#include <limits>
 #include "../../../include/Switch/System/Decimal.hpp"
 #include "../../../include/Switch/System/Byte.hpp"
 #include "../../../include/Switch/System/Char.hpp"
@@ -19,29 +18,17 @@
 
 using namespace System;
 
-_property<decimal, _readonly> Decimal::Epsilon {
-  [] {return 4.94066e-324;}
-};
+constexpr decimal Decimal::Epsilon;
 
-_property<decimal, _readonly> Decimal::MaxValue {
-  [] {return std::numeric_limits<decimal>::max();}
-};
+constexpr decimal Decimal::MaxValue;
 
-_property<decimal, _readonly> Decimal::MinValue {
-  [] {return -std::numeric_limits<decimal>::max();}
-};
+constexpr decimal Decimal::MinValue;
 
-_property<decimal, _readonly> Decimal::NaN {
-  [] {return std::numeric_limits<decimal>::quiet_NaN();}
-};
+constexpr decimal Decimal::NaN;
 
-_property<decimal, _readonly> Decimal::NegativeInfinity {
-  [] {return -std::numeric_limits<decimal>::infinity();}
-};
+constexpr decimal Decimal::NegativeInfinity;
 
-_property<decimal, _readonly> Decimal::PositiveInfinity {
-  [] {return std::numeric_limits<decimal>::infinity();}
-};
+constexpr decimal Decimal::PositiveInfinity;
 
 decimal Decimal::Parse(const String& str) {
   return atof(str.Data());

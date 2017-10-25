@@ -22,7 +22,11 @@ namespace Switch {
     struct _export UIntPtr final : public object, public IComparable, public IFormattable {
     public:
       /// @brief A read-only field that represents a pointer or handle that has been initialized to zero.
-      static _property<uintptr, _readonly> Zero;
+      static constexpr uintptr Zero = 0;
+
+      /// @brief Gets the size of this instance.
+      /// @return Int32 The size of a pointer or handle on this platform, measured in bytes. The value of this property is 4 on a 32-bit platform, and 8 on a 64-bit platform.
+      static constexpr int32 Size = static_cast<int32>(sizeof(uintptr));
 
       /// @brief Create a new instance of class UIntPtr
       /// @remarks UIntPtr is initialized by default to null.
@@ -40,10 +44,6 @@ namespace Switch {
       /// @brief Create a new instance of class UIntPtr
       /// @param value A pointer to an unspecified type.
       UIntPtr(uintptr value);
-
-      /// @brief Gets the size of this instance.
-      /// @return Int32 The size of a pointer or handle on this platform, measured in bytes. The value of this property is 4 on a 32-bit platform, and 8 on a 64-bit platform.
-      static _property<int32, _readonly> Size;
       
       /// @brief Determines whether this instance of UIntPtr and a specified object, which must also be a UIntPtr object, have the same value.
       /// @param value The UIntPtr to compare with the current object.

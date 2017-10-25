@@ -78,7 +78,7 @@ namespace {
     refptr<std::mutex> guard = ref_new<std::mutex>();
     refptr<std::condition_variable> signal = ref_new<std::condition_variable>();
     refptr<int32> count = ref_new<int32>(0);
-    refptr<int32> maxCount = ref_new<int32>(Int32::MaxValue());
+    refptr<int32> maxCount = ref_new<int32>(Int32::MaxValue);
     refptr<string> name = ref_new<string>();
   };
 }

@@ -28,7 +28,7 @@ namespace Switch {
       /// @brief Provides a generic view of a sequence of bytes. This is an abstract class.
       class _export Stream _abstract {
       public:
-        static _property<NullStream&, _readonly> Null;
+        static NullStream& Null();
 
         /// @brief Initializes a new instance of the Stream class
         /// @remarks Use Null to redirect output to a stream that will not consume any operating system resources. When the methods of Stream that provide writing are invoked on cNull, the call simply returns, and no data is written.
@@ -241,8 +241,6 @@ namespace Switch {
         /// @exception NotSupportedException The stream does not support writing.
         /// @exception IO::IOException An I/O error occurs.
         virtual void WriteByte(byte value);
-
-        static NullStream& __null__();
 
       protected:
         /// @brief When overridden in a derived class, gets a value indicating whether the current

@@ -2,6 +2,7 @@
 /// @brief Contains Switch::System::Int32 struct.
 #pragma once
 
+#include <limits>
 #include "../Property.hpp"
 #include "../Types.hpp"
 #include "IComparable.hpp"
@@ -19,10 +20,10 @@ namespace Switch {
     struct _export Int32 final : public ValueType, public IComparable, public IConvertible, public IFormattable {
     public:
       /// @brief Represents the largest possible value of an Int32 2147483647 (0x7FFFFFFF). This field is constant.
-      static _property<int32, _readonly> MaxValue;
+      static constexpr int32 MaxValue = std::numeric_limits<int32>::max();
 
       /// @brief Represents the smallest possible value of Int32 -2147483648 (0x80000000). This field is constant.
-      static _property<int32, _readonly> MinValue;
+      static constexpr int32 MinValue = std::numeric_limits<int32>::min();
 
       /// @brief Create a new instance of struct Int32
       /// @remarks Int32 is initialized by default to 0.

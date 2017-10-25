@@ -1,4 +1,3 @@
-#include <limits>
 #include "../../../include/Switch/System/Byte.hpp"
 #include "../../../include/Switch/System/Convert.hpp"
 #include "../../../include/Switch/System/DateTime.hpp"
@@ -7,13 +6,8 @@
 
 using namespace System;
 
-_property<byte, _readonly> Byte::MaxValue {
-  [] {return std::numeric_limits<byte>::max();}
-};
-
-_property<byte, _readonly> Byte::MinValue {
-  [] {return std::numeric_limits<byte>::min();}
-};
+constexpr byte Byte::MaxValue;
+constexpr byte Byte::MinValue;
 
 byte Byte::Parse(const String& str, const int32 base) {
   return Convert::ToByte(NumericalParsing::ParseUnsigned(str,base));

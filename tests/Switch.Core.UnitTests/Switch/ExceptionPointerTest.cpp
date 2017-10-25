@@ -30,7 +30,7 @@ namespace SwitchUnitTests {
     void GetCurrentExceptionOnNullExceptionThenRethrow() {
       ExceptionPtr ep;
       _using() {
-        ep = ExceptionPtr::CurrentException;
+        ep = ExceptionPtr::CurrentException();
       }
       Assert::IsTrue(ep == null, _caller);
       Assert::DoesNotThrows(_delegate {ep.Rethrow();}, _caller);
@@ -42,7 +42,7 @@ namespace SwitchUnitTests {
         try {
           throw InvalidOperationException();
         } catch(...) {
-          ep = ExceptionPtr::CurrentException;
+          ep = ExceptionPtr::CurrentException();
         }
       }
       Assert::IsFalse(ep == null, _caller);
@@ -56,7 +56,7 @@ namespace SwitchUnitTests {
         try {
           throw MyException();
         } catch(...) {
-          ep = ExceptionPtr::CurrentException;
+          ep = ExceptionPtr::CurrentException();
         }
       }
       Assert::IsFalse(ep == null, _caller);

@@ -49,11 +49,11 @@ namespace SwitchUnitTests {
     }
     
     void ParseBooleanFalseString() {
-      TUnit::Assert::IsFalse(Boolean::Parse(Boolean::FalseString));
+      TUnit::Assert::IsFalse(Boolean::Parse(Boolean::FalseString()));
     }
     
     void ParseBooleanTrueString() {
-      TUnit::Assert::IsTrue(Boolean::Parse(Boolean::TrueString));
+      TUnit::Assert::IsTrue(Boolean::Parse(Boolean::TrueString()));
     }
     
     void ParseFalseString() {
@@ -147,10 +147,10 @@ namespace SwitchUnitTests {
   
   TEST(Boolean, TryParse) {
     bool result;
-    TUnit::Assert::IsTrue(Boolean::TryParse(Boolean::TrueString, result));
+    TUnit::Assert::IsTrue(Boolean::TryParse(Boolean::TrueString(), result));
     TUnit::Assert::IsTrue(result);
     
-    TUnit::Assert::IsTrue(Boolean::TryParse(Boolean::FalseString, result));
+    TUnit::Assert::IsTrue(Boolean::TryParse(Boolean::FalseString(), result));
     TUnit::Assert::IsFalse(result);
     
     TUnit::Assert::IsTrue(Boolean::TryParse("True", result));
@@ -217,8 +217,8 @@ namespace SwitchUnitTests {
     TUnit::Assert::AreEqual("False", Boolean().ToString());
     TUnit::Assert::AreEqual("True", Boolean(true).ToString());
     TUnit::Assert::AreEqual("False", Boolean(false).ToString());
-    TUnit::Assert::AreEqual("True", string(Boolean::TrueString));
-    TUnit::Assert::AreEqual("False", string(Boolean::FalseString));
+    TUnit::Assert::AreEqual("True", string(Boolean::TrueString()));
+    TUnit::Assert::AreEqual("False", string(Boolean::FalseString()));
   }
   
   TEST(Boolean, CompareTo) {

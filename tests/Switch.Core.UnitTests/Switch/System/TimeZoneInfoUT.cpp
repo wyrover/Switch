@@ -39,7 +39,7 @@ namespace {
   }
   
   TEST(TimeZoneInfo, ConvertTimeToUtc) {
-    DateTime now = DateTime::Now;
+    DateTime now = DateTime::Now();
     EXPECT_EQ(now.ToUniversalTime(), TimeZoneInfo::ConvertTimeToUtc(now));
 
     //Console::WriteLine("Local {0}", now);

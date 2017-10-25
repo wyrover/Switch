@@ -10,10 +10,6 @@
 using namespace System;
 using namespace System::IO;
 
-_property<FileInfo, _readonly> FileInfo::Empty {
-  [] {return FileInfo();}
-};
-
 FileInfo::FileInfo() : Directory(_delegate {return this->GetDirectory();}) {
 }
 

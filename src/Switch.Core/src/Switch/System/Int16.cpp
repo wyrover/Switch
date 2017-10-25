@@ -1,4 +1,3 @@
-#include <limits>
 #include "../../../include/Switch/System/Int16.hpp"
 #include "../../../include/Switch/System/Convert.hpp"
 #include "../../../include/Switch/System/DivideByZeroException.hpp"
@@ -7,13 +6,9 @@
 
 using namespace System;
 
-_property<int16, _readonly> Int16::MaxValue {
-  [] {return std::numeric_limits<int16>::max();}
-};
+constexpr int16 Int16::MaxValue;
 
-_property<int16, _readonly> Int16::MinValue {
-  [] {return std::numeric_limits<int16>::min();}
-};
+constexpr int16 Int16::MinValue;
 
 int16 Int16::Parse(const string& value) {
   return Parse(value,10);

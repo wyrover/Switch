@@ -19,7 +19,10 @@ namespace Switch {
       /// @include StringReader.cpp
       class _export StringWriter : public TextWriter {
       public:
-        static _property<StringWriter, _readonly> Null;
+        static StringWriter& Null() {
+          static StringWriter nullStringWriter;
+          return nullStringWriter;
+        }
         
         /// @brief Initializes a new instance of the System::IO::StreamWriter class for the specified file on the specified stream pointer.
         StringWriter();

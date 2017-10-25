@@ -360,7 +360,6 @@ set(SOURCE_FILES
   src/Switch/System/Threading/Tasks/Task.cpp
   src/Switch/System/__HResults.hpp
   src/Switch/System/ArrayAlgorithms.hpp
-  src/Switch/System/BitConverter.cpp
   src/Switch/System/Boolean.cpp
   src/Switch/System/Buffer.cpp
   src/Switch/System/Byte.cpp
@@ -371,7 +370,6 @@ set(SOURCE_FILES
   src/Switch/System/Decimal.cpp
   src/Switch/System/Double.cpp
   src/Switch/System/Environment.cpp
-  src/Switch/System/EventArgs.cpp
   src/Switch/System/Exception.cpp
   src/Switch/System/Guid.cpp
   src/Switch/System/Int16.cpp

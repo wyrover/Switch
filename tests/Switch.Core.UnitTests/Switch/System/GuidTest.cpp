@@ -35,8 +35,8 @@ namespace SwitchUnitTests {
     
     void Constructor2() {
       Guid guid = Guid::NewGuid();
-      Assert::Greater(guid.CompareTo(Guid::Empty), 0, _caller);
-      Assert::Less(Guid::Empty.CompareTo(guid), 0, _caller);
+      Assert::Greater(guid.CompareTo(Guid::Empty()), 0, _caller);
+      Assert::Less(Guid::Empty().CompareTo(guid), 0, _caller);
       
       Assert::AreEqual(Guid(Int32(0x00000000), Int16(0x0000), Int16(0x0000), 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01).CompareTo(Guid(Int32(0x00000000), Int16(0x0000), Int16(0x0000), 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01)), 0, _caller);
       Assert::Less(Guid(Int32(0x00000000), Int16(0x0000), Int16(0x0000), 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01).CompareTo(Guid(Int32(0x00000000), Int16(0x0000), Int16(0x0000), 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02)), 0, _caller);
@@ -46,7 +46,7 @@ namespace SwitchUnitTests {
     void Equals() {
       Guid guid = Guid::NewGuid();
       Guid guid2 = Guid::NewGuid();
-      Assert::IsFalse(guid.Equals(Guid::Empty), _caller);
+      Assert::IsFalse(guid.Equals(Guid::Empty()), _caller);
       Assert::IsFalse(guid.Equals(guid2), _caller);
     }
     
@@ -60,21 +60,21 @@ namespace SwitchUnitTests {
     }
     
     void ToString() {
-      Assert::Throws<FormatException>(_delegate {Guid::Empty.ToString("A");}, _caller);
-      Assert::Throws<FormatException>(_delegate {Guid::Empty.ToString("ND");}, _caller);
+      Assert::Throws<FormatException>(_delegate {Guid::Empty().ToString("A");}, _caller);
+      Assert::Throws<FormatException>(_delegate {Guid::Empty().ToString("ND");}, _caller);
       
-      Assert::AreEqual("00000000-0000-0000-0000-000000000000", Guid::Empty.ToString(), _caller);
-      Assert::AreEqual("00000000-0000-0000-0000-000000000000", Guid::Empty.ToString(""), _caller);
-      Assert::AreEqual("00000000000000000000000000000000", Guid::Empty.ToString("N"), _caller);
-      Assert::AreEqual("00000000-0000-0000-0000-000000000000", Guid::Empty.ToString("D"), _caller);
-      Assert::AreEqual("{00000000-0000-0000-0000-000000000000}", Guid::Empty.ToString("B"), _caller);
-      Assert::AreEqual("(00000000-0000-0000-0000-000000000000)", Guid::Empty.ToString("P"), _caller);
-      Assert::AreEqual("{0x00000000,0x0000,0x0000,{0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}}", Guid::Empty.ToString("X"), _caller);
-      Assert::AreEqual("00000000000000000000000000000000", Guid::Empty.ToString("n"), _caller);
-      Assert::AreEqual("00000000-0000-0000-0000-000000000000", Guid::Empty.ToString("d"), _caller);
-      Assert::AreEqual("{00000000-0000-0000-0000-000000000000}", Guid::Empty.ToString("b"), _caller);
-      Assert::AreEqual("(00000000-0000-0000-0000-000000000000)", Guid::Empty.ToString("p"), _caller);
-      Assert::AreEqual("{0x00000000,0x0000,0x0000,{0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}}", Guid::Empty.ToString("x"), _caller);
+      Assert::AreEqual("00000000-0000-0000-0000-000000000000", Guid::Empty().ToString(), _caller);
+      Assert::AreEqual("00000000-0000-0000-0000-000000000000", Guid::Empty().ToString(""), _caller);
+      Assert::AreEqual("00000000000000000000000000000000", Guid::Empty().ToString("N"), _caller);
+      Assert::AreEqual("00000000-0000-0000-0000-000000000000", Guid::Empty().ToString("D"), _caller);
+      Assert::AreEqual("{00000000-0000-0000-0000-000000000000}", Guid::Empty().ToString("B"), _caller);
+      Assert::AreEqual("(00000000-0000-0000-0000-000000000000)", Guid::Empty().ToString("P"), _caller);
+      Assert::AreEqual("{0x00000000,0x0000,0x0000,{0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}}", Guid::Empty().ToString("X"), _caller);
+      Assert::AreEqual("00000000000000000000000000000000", Guid::Empty().ToString("n"), _caller);
+      Assert::AreEqual("00000000-0000-0000-0000-000000000000", Guid::Empty().ToString("d"), _caller);
+      Assert::AreEqual("{00000000-0000-0000-0000-000000000000}", Guid::Empty().ToString("b"), _caller);
+      Assert::AreEqual("(00000000-0000-0000-0000-000000000000)", Guid::Empty().ToString("p"), _caller);
+      Assert::AreEqual("{0x00000000,0x0000,0x0000,{0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}}", Guid::Empty().ToString("x"), _caller);
     }
     
     void CompareTo() {

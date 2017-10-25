@@ -25,8 +25,8 @@ void TrackBar::WndProc(Message& message) {
     int32 value = this->GetValue();
     if (this->value != value) {
       this->value = value;
-      OnScroll(EventArgs::Empty);
-      OnValueChanged(EventArgs::Empty);
+      OnScroll(EventArgs::Empty());
+      OnValueChanged(EventArgs::Empty());
     }
   }
 }
@@ -106,6 +106,6 @@ void TrackBar::SetValue(int32 value) {
     this->value = value;
     if (this->IsHandleCreated)
       Native::TrackBarApi::SetValue(*this);
-    OnValueChanged(EventArgs::Empty);
+    OnValueChanged(EventArgs::Empty());
   }
 }

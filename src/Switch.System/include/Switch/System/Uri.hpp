@@ -290,7 +290,7 @@ namespace Switch {
       /// @remarks For more information on IRI support, see the Remarks section for the Uri class.
       /// @remarks When a Uri object is serialized, the OriginalString is ! preserved. The serialization process uses the fully escaped and canonicalized AbsoluteUri property when serializing. For a Uri that contains an IPv6 address, the IPv6 address and the scope ID are included in the serialized Uri object.
       _property<String, _readonly> LocalPath {
-        _get {return this->GetComponents(UriComponents::Path, UriFormat::Unescaped).Replace('/', System::IO::Path::DirectorySeparatorChar);}
+        _get {return this->GetComponents(UriComponents::Path, UriFormat::Unescaped).Replace('/', System::IO::Path::DirectorySeparatorChar());}
       };
       
       /// @brief Gets the original URI string that was passed to the Uri constructor.

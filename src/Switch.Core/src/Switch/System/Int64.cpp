@@ -1,4 +1,3 @@
-#include <limits>
 #include "../../../include/Switch/System/Int64.hpp"
 #include "../../../include/Switch/System/Convert.hpp"
 #include "../../../include/Switch/System/DivideByZeroException.hpp"
@@ -7,13 +6,9 @@
 
 using namespace System;
 
-_property<int64, _readonly> Int64::MaxValue{
-  [] {return std::numeric_limits<int64>::max();}
-};
+constexpr int64 Int64::MaxValue;
 
-_property<int64, _readonly> Int64::MinValue{
-  [] {return std::numeric_limits<int64>::min();}
-};
+constexpr int64 Int64::MinValue;
 
 int64 Int64::Parse(const string& value) {
   return Parse(value,10);

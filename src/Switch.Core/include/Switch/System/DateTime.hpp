@@ -189,7 +189,7 @@ namespace Switch {
       
       /// @brief Gets a DateTime object that is set to the current date and time on this computer, expressed as the local time.
       /// @return DateTime A DateTime object that is set to the current date and time on this computer
-      static _property<DateTime, _readonly> Now;
+      static DateTime Now();
 
       /// @brief Gets the second component of the date represented by this instance.
       /// @return The second component, expressed as a value between 0 and 59.
@@ -213,11 +213,11 @@ namespace Switch {
       /// @brief Gets the current date.
       /// @return DateTime A DateTime set to today's date, with the time component set to 00:00:00.
       /// @remarks The return value is a DateTime whose Kind property returns DateTimeKindLocal.
-      static _property<DateTime, _readonly> Today;
+      static DateTime Today();
 
       /// @brief Gets a DateTime object that is set to the current date and time on this computer, expressed as the universal time.
       /// @return DateTime A DateTime object that is set to the current date and time on this computer
-      static _property<DateTime, _readonly> UtcNow;
+      static DateTime UtcNow();
 
       /// @brief Gets the year component of the date represented by this instance.
       /// @return The year component, expressed as a value between 1 and 9999.

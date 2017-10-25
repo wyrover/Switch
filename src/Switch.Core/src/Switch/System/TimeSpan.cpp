@@ -11,37 +11,23 @@
 
 using namespace System;
 
-_property<TimeSpan, _readonly> TimeSpan::MaxValue {
-  [] {return TimeSpan(Int64::MaxValue());}
-};
+TimeSpan TimeSpan::MaxValue {Int64::MaxValue};
 
-_property<TimeSpan, _readonly> TimeSpan::MinValue {
-  [] {return TimeSpan(Int64::MinValue());}
-};
+TimeSpan TimeSpan::MinValue {Int64::MinValue};
 
-_property<int64, _readonly> TimeSpan::TicksPerDay {
-  [] {return 864000000000LL;}
-};
+constexpr int64 TimeSpan::TicksPerDay;
 
-_property<int64, _readonly> TimeSpan::TicksPerHour {
-  [] {return 36000000000LL;}
-};
+constexpr int64 TimeSpan::TicksPerHour;
 
-_property<int64, _readonly> TimeSpan::TicksPerMillisecond {
-  [] {return 10000LL;}
-};
+constexpr int64 TimeSpan::TicksPerMillisecond;
 
-_property<int64, _readonly> TimeSpan::TicksPerMinute {
-  [] {return 600000000LL;}
-};
+constexpr int64 TimeSpan::TicksPerMinute;
 
-_property<int64, _readonly> TimeSpan::TicksPerSecond{
-  [] {return 10000000LL;}
-};
+constexpr int64 TimeSpan::TicksPerSecond;
 
-_property<TimeSpan, _readonly> TimeSpan::Zero {
-  [] {return TimeSpan(0);}
-};
+TimeSpan TimeSpan::Zero() {
+  return TimeSpan(0);
+}
 
 TimeSpan::TimeSpan(const TimeSpan& timeSpan) {
   this->value = timeSpan.value;

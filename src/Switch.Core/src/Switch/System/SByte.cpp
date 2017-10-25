@@ -1,4 +1,3 @@
-#include <limits>
 #include "../../../include/Switch/System/SByte.hpp"
 #include "../../../include/Switch/System/Convert.hpp"
 #include "../../../include/Switch/System/DivideByZeroException.hpp"
@@ -7,13 +6,9 @@
 
 using namespace System;
 
-_property<sbyte, _readonly> SByte::MaxValue {
-  [] {return std::numeric_limits<sbyte>::max();}
-};
+constexpr sbyte SByte::MaxValue;
 
-_property<sbyte, _readonly> SByte::MinValue {
-  [] {return std::numeric_limits<sbyte>::min();}
-};
+constexpr sbyte SByte::MinValue;
 
 sbyte SByte::Parse(const string& str) {
   return Parse(str, 10);

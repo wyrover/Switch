@@ -11,13 +11,11 @@ namespace {
 using namespace System;
 using namespace System::Threading;
 
-System::Collections::Generic::Dictionary<const object*, Monitor::MonitorItem> Monitor::monitorItems;
-
 void Monitor::Pulse(const Object& obj) {
   MonitorItem* monitorItem = null;
   mutex.lock();
   if (IsEntered(obj))
-    monitorItem = &monitorItems[ToKey(obj)];
+    monitorItem = &MonitorItems()[ToKey(obj)];
   mutex.unlock();
   
   if (monitorItem == null)
@@ -30,7 +28,7 @@ void Monitor::PulseAll(const Object& obj) {
   MonitorItem* monitorItem = null;
   mutex.lock();
   if (IsEntered(obj))
-    monitorItem = &monitorItems[ToKey(obj)];
+    monitorItem = &MonitorItems()[ToKey(obj)];
   mutex.unlock();
   
   if (monitorItem == null)
@@ -43,7 +41,7 @@ void Monitor::PulseAll(const Object& obj) {
    MonitorItem* monitorItem = null;
    mutex.lock();
    if (IsEntered(obj))
-     monitorItem = &monitorItems[ToKey(obj)];
+     monitorItem = &MonitorItems()[ToKey(obj)];
    mutex.unlock();
    
    if (monitorItem == null)
@@ -55,8 +53,8 @@ void Monitor::PulseAll(const Object& obj) {
 bool Monitor::Add(const Object& obj, int32 millisecondsTimeout) {
   mutex.lock();
   if (!IsEntered(obj))
-    monitorItems[ToKey(obj)] = is<string>(obj) ? MonitorItem((const string&)obj) : MonitorItem();
-  MonitorItem& monitorData = monitorItems[ToKey(obj)];
+    MonitorItems()[ToKey(obj)] = is<string>(obj) ? MonitorItem((const string&)obj) : MonitorItem();
+  MonitorItem& monitorData = MonitorItems()[ToKey(obj)];
   monitorData.usedCounter++;
   mutex.unlock();
   return monitorData.event.WaitOne(millisecondsTimeout);
@@ -70,10 +68,10 @@ void Monitor::Remove(const Object& obj) {
     throw SynchronizationLockException(_caller);
   }
 
-  MonitorItem* monitorData = &monitorItems[ToKey(obj)];
+  MonitorItem* monitorData = &MonitorItems()[ToKey(obj)];
   if (--monitorData->usedCounter == 0) {
-    saved = monitorItems[ToKey(obj)];
-    monitorItems.Remove(ToKey(obj));
+    saved = MonitorItems()[ToKey(obj)];
+    MonitorItems().Remove(ToKey(obj));
     monitorData = &saved;
   }
   mutex.unlock();

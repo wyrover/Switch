@@ -2,6 +2,7 @@
 /// @brief Contains Switch::System::Decimal struct.
 #pragma once
 
+#include <limits>
 #include "../Property.hpp"
 #include "Object.hpp"
 #include "../Types.hpp"
@@ -20,22 +21,22 @@ namespace Switch {
     struct _export Decimal final : public ValueType, public IComparable, public IConvertible, public IFormattable {
     public:
       /// @brief Represents the smallest positive Decimal value greater than zero. This field is constant.
-      static _property<decimal, _readonly> Epsilon;
+      static constexpr decimal Epsilon = 4.94066e-324;
 
       /// @brief Represents the largest possible value of an Decimal 1.7976931348623157E+308. This field is constant.
-      static _property<decimal, _readonly> MaxValue;
+      static constexpr decimal MaxValue = std::numeric_limits<decimal>::max();
 
       /// @brief Represents the smallest possible value of Decimal -1.7976931348623157E+308. This field is constant.
-      static _property<decimal, _readonly> MinValue;
+      static constexpr decimal MinValue = -std::numeric_limits<decimal>::max();
 
       /// @brief Represents not a number (NaN). This field is constant.
-      static _property<decimal, _readonly> NaN;
+      static constexpr decimal NaN = std::numeric_limits<decimal>::quiet_NaN();
 
       /// @brief Represents negative infinity. This field is constant.
-      static _property<decimal, _readonly> NegativeInfinity;
+      static constexpr decimal NegativeInfinity = -std::numeric_limits<decimal>::infinity();
 
       /// @brief Represents positive infinity. This field is constant.
-      static _property<decimal, _readonly> PositiveInfinity;
+      static constexpr decimal PositiveInfinity = std::numeric_limits<decimal>::infinity();
 
       /// @brief Create a new instance of struct Decimal
       Decimal() {}

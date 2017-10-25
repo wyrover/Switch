@@ -8,10 +8,6 @@
 using namespace System;
 using namespace System::IO;
 
-_property<StreamReader, _readonly> StreamReader::Null {
-  [] {return StreamReader();}
-};
-
 Text::UTF8Encoding StreamReader::utf8Encoding {false};
 
 StreamReader::StreamReader() {

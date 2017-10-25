@@ -19,35 +19,35 @@ namespace Switch {
     public:
       /// @brief Represents the maximum TimeSpan value. This field is constant.
       /// @remarks The value of this field is equivalent to Int64::MaxValue ticks. The String representation of this value is positive 106751990248054775807
-      static _property<TimeSpan, _readonly> MaxValue;
+      static TimeSpan MaxValue;
 
       /// @brief Represents the minimum TimeSpan value. This field is constant.
       /// @remarks The value of this field is equivalent to Int64::MinValue ticks. The String representation of this value is negative 106751990248054775808
-      static _property<TimeSpan, _readonly> MinValue;
+      static TimeSpan MinValue;
 
       /// @brief Represents the number of ticks in 1 day. This field is constant.
       /// @remarks The value of this constant is 864 billion; that is 864000000000.
-      static _property<int64, _readonly> TicksPerDay;
+      static constexpr int64 TicksPerDay = 864000000000LL;
 
       /// @brief Represents the number of ticks in 1 hour. This field is constant.
       /// @remarks The value of this constant is 36 billion; that is 36000000000.
-      static _property<int64, _readonly> TicksPerHour;
+      static constexpr int64 TicksPerHour = 36000000000LL;
 
       /// @brief Represents the number of ticks in 1 millisecond. This field is constant.
       /// @remarks The value of this constant is 10 thousand; that is 10000.
-      static _property<int64, _readonly> TicksPerMillisecond;
+      static constexpr int64 TicksPerMillisecond = 10000LL;
 
       /// @brief Represents the number of ticks in 1 minute. This field is constant.
       /// @remarks The value of this constant is 600 million; that is 600000000.
-      static _property<int64, _readonly> TicksPerMinute;
+      static constexpr int64 TicksPerMinute = 600000000LL;
 
       /// @brief Represents the number of ticks in 1 second. This field is constant.
       /// @remarks The value of this constant is 10 million; that is 10000000.
-      static _property<int64, _readonly> TicksPerSecond;
+      static constexpr int64 TicksPerSecond = 10000000LL;
 
       /// @brief Represents the zero TimeSpan value. This field is constant.
       /// @remarks Because it returns a TimeSpan object that represents a zero time value, the Zero constant can be compared with other TimeSpan objects to determine whether the latter represent positive, non-zero, or negative time spans.
-      static _property<TimeSpan, _readonly> Zero;
+      static TimeSpan Zero();
 
       /// @brief Create a new instance of struct TimeSpan
       /// @remarks TimeSpan is initialized with default value 0.

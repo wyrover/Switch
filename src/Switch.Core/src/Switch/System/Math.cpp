@@ -5,13 +5,9 @@
 
 using namespace System;
 
-_property<double, _readonly> Math::E {
-  [] {return 2.7182818284590452354;}
-};
+constexpr double Math::E;
 
-_property<double, _readonly> Math::PI {
-  [] {return 3.14159265358979323846;}
-};
+constexpr double Math::PI;
 
 double Math::Acos(double value) {
   return acos(value);

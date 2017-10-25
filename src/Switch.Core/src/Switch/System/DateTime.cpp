@@ -15,50 +15,44 @@ namespace {
 DateTime DateTime::MaxValue = DateTime(DateTimeMaximumValue);
 DateTime DateTime::MinValue = DateTime(DateTimeMinimumValue);
 
-_property<DateTime, _readonly> DateTime::Now {
-  [] {
-    int64 secondes = 0;
-    int32 milliseconds = 0, timeZone = 0;
-    bool daylight = false;
-    
-    if (Native::DateTimeApi::Ftime(secondes, milliseconds, timeZone, daylight) != 0)
-      return DateTime();
-      
-    return DateTime(secondes * TimeSpan::TicksPerSecond + (int64)milliseconds * TimeSpan::TicksPerMillisecond + TicksTo1970, DateTimeKind::Local);
-  }
-};
+DateTime DateTime::Now() {
+  int64 secondes = 0;
+  int32 milliseconds = 0, timeZone = 0;
+  bool daylight = false;
+  
+  if (Native::DateTimeApi::Ftime(secondes, milliseconds, timeZone, daylight) != 0)
+    return DateTime();
+  
+  return DateTime(secondes * TimeSpan::TicksPerSecond + (int64)milliseconds * TimeSpan::TicksPerMillisecond + TicksTo1970, DateTimeKind::Local);
+}
 
-_property<DateTime, _readonly> DateTime::Today {
-  [] {
-    int64 secondes = 0;
-    int32 milliseconds = 0, timeZone = 0;
-    bool daylight = false;
-    
-    if (Native::DateTimeApi::Ftime(secondes, milliseconds, timeZone, daylight) != 0)
-      return DateTime();
-      
-    int64 timeZoneGap = 0;
-    if (timeZone < 0)
-      timeZoneGap = timeZone - (daylight ? 60 : 0);
-    else
-      timeZoneGap = timeZone + (daylight ? 60 : 0);
-      
-    return DateTime(((secondes) * TimeSpan::TicksPerSecond) / TimeSpan::TicksPerDay * TimeSpan::TicksPerDay + timeZoneGap * TimeSpan::TicksPerMinute +  (int64)milliseconds * TimeSpan::TicksPerMillisecond + TicksTo1970, DateTimeKind::Local);
-  }
-};
+DateTime DateTime::Today() {
+  int64 secondes = 0;
+  int32 milliseconds = 0, timeZone = 0;
+  bool daylight = false;
+  
+  if (Native::DateTimeApi::Ftime(secondes, milliseconds, timeZone, daylight) != 0)
+    return DateTime();
+  
+  int64 timeZoneGap = 0;
+  if (timeZone < 0)
+    timeZoneGap = timeZone - (daylight ? 60 : 0);
+  else
+    timeZoneGap = timeZone + (daylight ? 60 : 0);
+  
+  return DateTime(((secondes) * TimeSpan::TicksPerSecond) / TimeSpan::TicksPerDay * TimeSpan::TicksPerDay + timeZoneGap * TimeSpan::TicksPerMinute +  (int64)milliseconds * TimeSpan::TicksPerMillisecond + TicksTo1970, DateTimeKind::Local);
+}
 
-_property<DateTime, _readonly> DateTime::UtcNow {
-  [] {
-    int64 secondes = 0;
-    int32 milliseconds = 0, timeZone = 0;
-    bool daylight = false;
-    
-    if (Native::DateTimeApi::Ftime(secondes, milliseconds, timeZone, daylight) != 0)
-      return DateTime();
-      
-    return DateTime(secondes * TimeSpan::TicksPerSecond + (int64)milliseconds * TimeSpan::TicksPerMillisecond + TicksTo1970, DateTimeKind::Utc);
-  }
-};
+DateTime DateTime::UtcNow() {
+  int64 secondes = 0;
+  int32 milliseconds = 0, timeZone = 0;
+  bool daylight = false;
+  
+  if (Native::DateTimeApi::Ftime(secondes, milliseconds, timeZone, daylight) != 0)
+    return DateTime();
+  
+  return DateTime(secondes * TimeSpan::TicksPerSecond + (int64)milliseconds * TimeSpan::TicksPerMillisecond + TicksTo1970, DateTimeKind::Utc);
+}
 
 DateTime::DateTime(const DateTime& date) {
   this->value = date.value;

@@ -7,14 +7,6 @@
 using namespace System;
 using namespace System::Threading;
 
-_property<int32, _readonly> Timeout::Infinite {
-  [] {return -1;}
-};
-
-_property<int32, _readonly> WaitHandle::WaitTimeout {
-  [] {return -1;} // 258 in .Net
-};
-
 bool WaitHandle::WaitAll(Array<ref<WaitHandle>> waitHandles) {
   return WaitAll(waitHandles, Timeout::Infinite);
 }

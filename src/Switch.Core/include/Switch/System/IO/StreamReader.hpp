@@ -19,7 +19,10 @@ namespace Switch {
       /// @include StreamReader.cpp
       class _export StreamReader: public TextReader {
       public:
-        static _property<StreamReader, _readonly> Null;
+        static StreamReader& Null() {
+          static StreamReader nullStreamReader;
+          return nullStreamReader;
+        }
 
         /// @brief Initializes a new instance of the System::IO::StreamReader class for the specified Sream pointer.
         /// @param stream The stream pointer to be read.

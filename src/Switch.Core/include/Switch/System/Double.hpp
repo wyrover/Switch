@@ -2,6 +2,7 @@
 /// @brief Contains Switch::System::Double struct.
 #pragma once
 
+#include <limits>
 #include "../Property.hpp"
 #include "Object.hpp"
 #include "../Types.hpp"
@@ -20,22 +21,22 @@ namespace Switch {
     struct _export Double final : public ValueType, public IComparable, public IConvertible, public IFormattable {
     public:
       /// @brief Represents the smallest positive Double value greater than zero. This field is constant.
-      static _property<double, _readonly> Epsilon;
+      static constexpr double Epsilon = 4.94066e-324;
 
       /// @brief Represents the largest possible value of an Double 1.7976931348623157E+308. This field is constant.
-      static _property<double, _readonly> MaxValue;
+      static constexpr double MaxValue = std::numeric_limits<double>::max();
 
       /// @brief Represents the smallest possible value of Double -1.7976931348623157E+308. This field is constant.
-      static _property<double, _readonly> MinValue;
+      static constexpr double MinValue = -std::numeric_limits<double>::max();
 
       /// @brief Represents not a number (NaN). This field is constant.
-      static _property<double, _readonly> NaN;
+      static constexpr double NaN = std::numeric_limits<double>::quiet_NaN();
 
       /// @brief Represents negative infinity. This field is constant.
-      static _property<double, _readonly> NegativeInfinity;
+      static constexpr double NegativeInfinity = -std::numeric_limits<double>::infinity();
 
       /// @brief Represents positive infinity. This field is constant.
-      static _property<double, _readonly> PositiveInfinity;
+      static constexpr double PositiveInfinity = std::numeric_limits<double>::infinity();
 
       /// @brief Create a new instance of struct Double
       Double() {}

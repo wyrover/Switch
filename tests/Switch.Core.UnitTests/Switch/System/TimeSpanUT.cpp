@@ -7,11 +7,11 @@ using namespace TUnit;
 
 namespace {
   TEST(TimeSpan, MaxValue) {
-    EXPECT_EQ(Int64::MaxValue(), TimeSpan::MaxValue().Ticks);
+    EXPECT_EQ(Int64::MaxValue, TimeSpan::MaxValue.Ticks);
   }
 
   TEST(TimeSpan, MinValue) {
-    EXPECT_EQ(Int64::MinValue(), TimeSpan::MinValue().Ticks);
+    EXPECT_EQ(Int64::MinValue, TimeSpan::MinValue.Ticks);
   }
 
   TEST(TimeSpan, TicksPerDay) {
@@ -109,8 +109,8 @@ namespace {
     EXPECT_EQ("00:00:00.0250000", TimeSpan(0, 0, 0, 0, 25).ToString());
     EXPECT_EQ("00:00:00.0000023", TimeSpan(23).ToString());
     EXPECT_EQ("5.01:45:23.3896842", TimeSpan(4383233896842).ToString());
-    EXPECT_EQ("-10675199.02:48:05.4775808", TimeSpan::MinValue().ToString());
-    EXPECT_EQ("10675199.02:48:05.4775807", TimeSpan::MaxValue().ToString());
+    EXPECT_EQ("-10675199.02:48:05.4775808", TimeSpan::MinValue.ToString());
+    EXPECT_EQ("10675199.02:48:05.4775807", TimeSpan::MaxValue.ToString());
   }
   
   TEST(TimeSpan, Add) {

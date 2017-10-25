@@ -12,13 +12,8 @@
 
 using namespace System;
 
-_property<char32, _readonly> Char::MaxValue {
-  [] {return 0x0010FFFF;}
-};
-
-_property<char32, _readonly> Char::MinValue = {
-  [] {return 0;}
-};
+constexpr char32 Char::MaxValue;
+constexpr char32 Char::MinValue;
 
 bool Char::IsControl(char32 value) {
   return iscntrl(value) != 0;
@@ -119,7 +114,7 @@ bool Char::ToBoolean(const IFormatProvider& provider) const {
 }
 
 byte Char::ToByte(const IFormatProvider& provider) const {
-  if (this->value > (char32)Byte::MaxValue())
+  if (this->value > (char32)Byte::MaxValue)
     throw OverflowException(_caller);
   return static_cast<byte>(this->value);
 }
@@ -129,13 +124,13 @@ DateTime Char::ToDateTime(const IFormatProvider& provider) const {
 }
 
 int16 Char::ToInt16(const IFormatProvider& provider) const {
-  if (this->value > (char32)Int16::MaxValue())
+  if (this->value > (char32)Int16::MaxValue)
     throw OverflowException(_caller);
   return static_cast<int16>(this->value);
 }
 
 uint16 Char::ToUInt16(const IFormatProvider& provider) const {
-  if (this->value > (char32)UInt16::MaxValue())
+  if (this->value > (char32)UInt16::MaxValue)
     throw OverflowException(_caller);
   return static_cast<uint16>(this->value);
 }
@@ -147,7 +142,7 @@ sbyte Char::ToSByte(const IFormatProvider& provider) const {
 }
 
 float Char::ToSingle(const IFormatProvider& provider) const {
-  if (this->value > (char32)Single::MaxValue())
+  if (this->value > (char32)Single::MaxValue)
     throw OverflowException(_caller);
   return static_cast<float>(this->value);
 }

@@ -66,7 +66,7 @@ char* tzname[2] = {"Local", "Local"};
 __declspec(dllimport) void __cdecl tzset(void);
 #endif
 
-const TimeZoneInfo& TimeZoneInfo::__local() {
+const TimeZoneInfo& TimeZoneInfo::Local() {
   if (local.id != (const char*)tzname[0]) {
     try {
       tzset();
@@ -85,12 +85,8 @@ const TimeZoneInfo& TimeZoneInfo::__local() {
   return local;
 }
 
-_property<const TimeZoneInfo&, _readonly> TimeZoneInfo::Local {
-  []()->const TimeZoneInfo& {return TimeZoneInfo::__local();}
-};
-
-_property<const TimeZoneInfo&, _readonly> TimeZoneInfo::Utc{
-  []()->const TimeZoneInfo& {return utc;}
+const TimeZoneInfo& TimeZoneInfo::Utc() {
+  return utc;
 };
 
 const Collections::Generic::List<TimeZoneInfo>& TimeZoneInfo::GetSystemTimeZones() {

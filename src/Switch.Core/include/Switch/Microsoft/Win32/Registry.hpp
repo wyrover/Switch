@@ -5,6 +5,7 @@
 #include "RegistryHive.hpp"
 #include "RegistryKey.hpp"
 #include "RegistryOptions.hpp"
+#include "../../System/Threading/ThreadLocal.hpp"
 
 namespace Switch {
   /// @brief The Microsoft namespace provide Microsoft specific classes.
@@ -42,12 +43,12 @@ namespace Switch {
         /// @param defaultValue null if the subkey specified by keyName does not exist; otherwise, the value associated with valueName, or defaultValue if valueName is not found.
         template<typename T>
         static const object& GetValue(const System::String& keyName, const System::String& valueName, const T& defaultValue) {
-          static RegistryKey key;
+          static System::Threading::ThreadLocal<RegistryKey> key;
           System::Array<System::String> subKeys = keyName.Split('\\');
-          key =  RegistryKey::OpenBaseKey(ToRegistryHive(subKeys[0]));
+          key.Value =  RegistryKey::OpenBaseKey(ToRegistryHive(subKeys[0]));
           for (int i = 1; i < subKeys.Length; ++i)
-            key = key.OpenSubKey(subKeys[i]);
-          return key.GetValue(valueName, defaultValue);
+            key.Value = key.Value().OpenSubKey(subKeys[i]);
+          return key.Value().GetValue(valueName, defaultValue);
         }
 
         /// @brief Defines the types (or classes) of documents and the properties associated with those types. This field reads the Windows registry base key HKEY_CLASSES_ROOT.

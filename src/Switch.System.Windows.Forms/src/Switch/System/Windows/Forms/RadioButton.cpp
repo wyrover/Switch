@@ -24,7 +24,7 @@ void RadioButton::SetChecked(bool checked) {
           as<RadioButton>(control)().Checked = false;
       }
     }
-    this->OnCheckedChanged(EventArgs::Empty);
+    this->OnCheckedChanged(EventArgs::Empty());
   }
 }
 

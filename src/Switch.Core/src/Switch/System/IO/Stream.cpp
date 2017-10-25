@@ -6,12 +6,6 @@ using namespace System;
 using namespace System::IO;
 using namespace System::Threading;
 
-_property<NullStream&, _readonly> Stream::Null {
-  []()->NullStream& {
-    return Stream::__null__();
-  }
-};
-
 int32 Stream::ReadByte() {
   if (this->closed) throw ObjectDisposedException(_caller);
   static Array<byte> b(1);
@@ -31,7 +25,7 @@ void Stream::WriteByte(byte value) {
   Write(b, 0, 1);
 }
 
-NullStream& Stream::__null__() {
+NullStream& Stream::Null() {
   static NullStream nullStream;
   return nullStream;
 }

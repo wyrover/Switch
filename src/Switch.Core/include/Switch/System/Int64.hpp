@@ -3,7 +3,6 @@
 #pragma once
 
 #include <limits>
-
 #include "../Property.hpp"
 #include "../Types.hpp"
 #include "IComparable.hpp"
@@ -21,10 +20,10 @@ namespace Switch {
     struct _export Int64 final : public ValueType, public IComparable, public IConvertible, public IFormattable {
     public:
       /// @brief Represents the largest possible value of an Int64 9223372036854775807 (0x7FFFFFFFFFFFFFFF). This field is constant.
-      static _property<int64, _readonly> MaxValue;
+      static constexpr int64 MaxValue = std::numeric_limits<int64>::max();
 
       /// @brief Represents the smallest possible value of Int64 -9223372036854775808 (0x8000000000000000). This field is constant.
-      static _property<int64, _readonly> MinValue;
+      static constexpr int64 MinValue = std::numeric_limits<int64>::min();
 
       /// @brief Create a new instance of struct Int64
       /// @remarks Int64 initialized by default to 0.

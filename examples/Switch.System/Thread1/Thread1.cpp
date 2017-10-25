@@ -16,7 +16,7 @@ namespace Examples {
 
   private:
     static void ExecuteInForeground() {
-      DateTime start = DateTime::Now;
+      DateTime start = DateTime::Now();
       auto sw = Stopwatch::StartNew();
       Console::WriteLine("Thread {0}: {1}, Priority {2}", Thread::CurrentThread().ManagedThreadId, Thread::CurrentThread().ThreadState, Thread::CurrentThread().Priority);
       do {

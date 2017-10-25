@@ -9,10 +9,6 @@
 using namespace System;
 using namespace System::IO;
 
-_property<DirectoryInfo, _readonly> DirectoryInfo::Empty {
-  [] {return DirectoryInfo();}
-};
-
 DirectoryInfo::DirectoryInfo(const string& path) {
   this->fullPath = Path::GetFullPath(path);
 }
@@ -23,7 +19,7 @@ bool DirectoryInfo::GetExists() const {
 }
 
 string DirectoryInfo::GetName() const {
-  Array<string> array = this->fullPath.Split(Path::DirectorySeparatorChar);
+  Array<string> array = this->fullPath.Split(Path::DirectorySeparatorChar());
   if (array.Length == 0)
     return this->fullPath;
   return array[array.Length-1];
@@ -31,7 +27,7 @@ string DirectoryInfo::GetName() const {
 
 DirectoryInfo DirectoryInfo::GetParent() const {
   if (this->fullPath == Path::GetPathRoot(this->fullPath))
-    return Empty;
+    return Empty();
   return DirectoryInfo(Path::Combine(this->fullPath, ".."));
 }
 
@@ -89,7 +85,7 @@ void DirectoryInfo::MoveTo(const string& destDirName) {
   if (!destDirInfo.Exists())
     throw DirectoryNotFoundException(_caller);
   
-  string targetDirName = Path::Combine(destDirName, this->fullPath.Substring(this->fullPath.LastIndexOf(Path::DirectorySeparatorChar) + 1));
+  string targetDirName = Path::Combine(destDirName, this->fullPath.Substring(this->fullPath.LastIndexOf(Path::DirectorySeparatorChar()) + 1));
   Directory::CreateDirectory(targetDirName);
   
   for (string item : Native::DirectoryApi::EnumerateFiles(this->fullPath, "*"))

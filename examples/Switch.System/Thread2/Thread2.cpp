@@ -22,7 +22,7 @@ namespace Examples {
       } catch (InvalidCastException) {
         interval = 5000;
       }
-      DateTime start = DateTime::Now;
+      DateTime start = DateTime::Now();
       auto sw = Stopwatch::StartNew();
       Console::WriteLine("Thread {0}: {1}, Priority {2}", Thread::CurrentThread().ManagedThreadId, Thread::CurrentThread().ThreadState, Thread::CurrentThread().Priority);
       do {

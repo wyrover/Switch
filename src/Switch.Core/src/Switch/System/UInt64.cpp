@@ -15,13 +15,9 @@
 
 using namespace System;
 
-_property<uint64, _readonly> UInt64::MaxValue{
-  [] {return std::numeric_limits<uint64>::max();}
-};
+constexpr uint64 UInt64::MaxValue;
 
-_property<uint64, _readonly> UInt64::MinValue{
-  [] {return std::numeric_limits<uint64>::min();}
-};
+constexpr uint64 UInt64::MinValue;
 
 uint64 UInt64::Parse(const string& str) {
   return Parse(str,10);

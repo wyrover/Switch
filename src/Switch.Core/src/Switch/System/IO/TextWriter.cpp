@@ -12,12 +12,10 @@ namespace {
 TextWriter::TextWriter() : encoding(utf8Encoding) {
 } 
 
-_property<NullTextWriter&, _readonly> TextWriter::Null {
-  []()->NullTextWriter& {
-    static NullTextWriter textWriter;
-    return textWriter;
-  }
-};
+NullTextWriter& TextWriter::Null() {
+  static NullTextWriter textWriter;
+  return textWriter;
+}
 
 
 SynchronizedTextWriter TextWriter::Synchronised(TextWriter& writer) {

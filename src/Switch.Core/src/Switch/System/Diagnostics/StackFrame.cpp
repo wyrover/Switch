@@ -5,10 +5,6 @@
 using namespace System;
 using namespace System::Diagnostics;
 
-_property<int32, _readonly> StackFrame::METHODS_TO_SKIP {
-  [] {return 0;}
-};
-
 void StackFrame::FillFrame(int32 skipFrames, bool needFileInfo) {
   if (skipFrames < 0)
     throw ArgumentOutOfRangeException(_caller);

@@ -12,21 +12,21 @@
 using namespace System;
 using namespace System::IO;
 
-_property<char32, _readonly> Path::AltDirectorySeparatorChar {
-  [] {return Native::DirectoryApi::AltDirectorySeparatorChar();}
-};
+char32 Path::AltDirectorySeparatorChar() {
+  return Native::DirectoryApi::AltDirectorySeparatorChar();
+}
 
-_property<char32, _readonly> Path::DirectorySeparatorChar {
-  [] {return Native::DirectoryApi::DirectorySeparatorChar();}
-};
+char32 Path::DirectorySeparatorChar() {
+  return Native::DirectoryApi::DirectorySeparatorChar();
+}
 
-_property<char32, _readonly> Path::PathSeparator {
-  [] {return Native::DirectoryApi::PathSeparator();}
-};
+char32 Path::PathSeparator() {
+  return Native::DirectoryApi::PathSeparator();
+}
 
-_property<char32, _readonly> Path::VolumeSeparatorChar {
-  [] {return Native::DirectoryApi::VolumeSeparator();}
-};
+char32 Path::VolumeSeparatorChar() {
+  return Native::DirectoryApi::VolumeSeparator();
+}
 
 Array<char32> DirectorySeparatorChars = {'/', '\\'};
 

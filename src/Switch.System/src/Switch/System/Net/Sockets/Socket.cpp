@@ -71,9 +71,9 @@ void Socket::Close() {
   this->data->connected = false;
   this->data->bound = false;
   this->data->listening = false;
-  if (this->data->socket != IntPtr::Zero()) {
+  if (this->data->socket != IntPtr::Zero) {
     Native::SocketApi::Close(this->data->socket);
-    this->data->socket = IntPtr::Zero();
+    this->data->socket = IntPtr::Zero;
   }
 }
 
@@ -119,7 +119,7 @@ SocketInformation Socket::DuplicateAndClose(int32 targetProcessId) {
 }
 
 int32 Socket::GetAvailable() const {
-  if (this->data->socket == IntPtr::Zero())
+  if (this->data->socket == IntPtr::Zero)
     throw ObjectDisposedException(_caller);
   
   int32 nbrBytesAvailable = 0;
@@ -128,28 +128,28 @@ int32 Socket::GetAvailable() const {
 }
 
 bool Socket::GetBlocking() const {
-  if (this->data->socket == IntPtr::Zero())
+  if (this->data->socket == IntPtr::Zero)
     throw ObjectDisposedException(_caller);
   
   return !this->data->nonBlocking;
 }
 
 const EndPoint& Socket::GetLocalEndPoint() const {
-  if (this->data->socket == IntPtr::Zero())
+  if (this->data->socket == IntPtr::Zero)
     throw ObjectDisposedException(_caller);
   
   return *this->data->localEndPoint;
 }
 
 const EndPoint& Socket::GetRemoteEndPoint() const {
-  if (this->data->socket == IntPtr::Zero())
+  if (this->data->socket == IntPtr::Zero)
     throw ObjectDisposedException(_caller);
   
   return *this->data->remoteEndPoint;
 }
 
 refptr<object> Socket::GetSocketOption(SocketOptionLevel socketOptionLevel, SocketOptionName socketOptionName) const {
-  if (this->data->socket == IntPtr::Zero())
+  if (this->data->socket == IntPtr::Zero)
     throw ObjectDisposedException(_caller);
 
   if (socketOptionName == SocketOptionName::MaxConnections)
@@ -182,7 +182,7 @@ void Socket::Listen(int32 backlog) {
   if (this->data->bound == false)
     throw SocketException((int32)SocketError::NotConnected, _caller);
   
-  if (this->data->socket == IntPtr::Zero())
+  if (this->data->socket == IntPtr::Zero)
     throw ObjectDisposedException(_caller);
   
   if (backlog > (int32)SocketOptionName::MaxConnections || backlog < 0)
@@ -329,7 +329,7 @@ int32 Socket::SendTo(const Array<byte>& buffer, int32 offset, int32 size, Socket
 }
 
 void Socket::SetBlocking(bool blocking) {
-  if (this->data->socket == IntPtr::Zero())
+  if (this->data->socket == IntPtr::Zero)
     throw ObjectDisposedException(_caller);
   
   if (Native::SocketApi::SetBlocking(this->data->socket, blocking) == -1)
@@ -367,7 +367,7 @@ void Socket::SetNoDelay(bool noDelay) {
 }
 
 void Socket::SetSocketOption(SocketOptionLevel socketOptionLevel, SocketOptionName socketOptionName, bool optionValue) {
-  if (this->data->socket == IntPtr::Zero())
+  if (this->data->socket == IntPtr::Zero)
     throw ObjectDisposedException(_caller);
   
   int32 option = 0;
@@ -379,21 +379,21 @@ void Socket::SetSocketOption(SocketOptionLevel socketOptionLevel, SocketOptionNa
 }
 
 void Socket::SetSocketOption(SocketOptionLevel socketOptionLevel, SocketOptionName socketOptionName, const Array<byte>& optionValue) {
-  if (this->data->socket == IntPtr::Zero())
+  if (this->data->socket == IntPtr::Zero)
     throw ObjectDisposedException(_caller);
   if (Native::SocketApi::SetSocketOption(this->data->socket, socketOptionLevel, socketOptionName, (byte*)optionValue.Data(), optionValue.Length) == -1)
     throw SocketException(Native::SocketApi::GetLastError(), _caller);
 }
 
 void Socket::SetSocketOption(SocketOptionLevel socketOptionLevel, SocketOptionName socketOptionName, int32 optionValue) {
-  if (this->data->socket == IntPtr::Zero())
+  if (this->data->socket == IntPtr::Zero)
     throw ObjectDisposedException(_caller);
   if (Native::SocketApi::SetSocketOption(this->data->socket, socketOptionLevel, socketOptionName, (byte *)&optionValue, sizeof(optionValue)) == -1)
     throw SocketException(Native::SocketApi::GetLastError(), _caller);
 }
 
 void Socket::SetSocketOption(SocketOptionLevel socketOptionLevel, SocketOptionName socketOptionName, const object& optionValue) {
-  if (this->data->socket == IntPtr::Zero())
+  if (this->data->socket == IntPtr::Zero)
     throw ObjectDisposedException(_caller);
   
   if (is<MulticastOption>(optionValue)) {

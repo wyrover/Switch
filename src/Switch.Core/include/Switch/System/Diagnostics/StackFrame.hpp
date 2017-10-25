@@ -65,7 +65,7 @@ namespace Switch {
         virtual String ToString() const;
 
         /// @brief Defines the default for the number of methods to omit from the stack trace. This field is constant.
-        static _property<int32, _readonly> METHODS_TO_SKIP;
+        static constexpr int32 METHODS_TO_SKIP = 0;
 
       private:
         /// @brief Gets the number of frames in the stack trace.

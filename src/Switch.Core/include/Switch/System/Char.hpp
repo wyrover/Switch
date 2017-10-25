@@ -36,10 +36,10 @@ namespace Switch {
       /// @endcond
       
       /// @brief Represents the largest possible value of an Char (code point 0x0010FFFFu). This field is constant.
-      static _property<char32, _readonly> MaxValue;
+      static constexpr char32 MaxValue = 0x0010FFFF;
       
       /// @brief Represents the smallest possible value of Char 0 (0). This field is constant.
-      static _property<char32, _readonly> MinValue;
+      static constexpr char32 MinValue = 0;
       
       /// @brief Indicates whether the specified Unicode character is categorized as a control character.
       /// @param value A Unicode character.

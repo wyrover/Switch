@@ -21,25 +21,25 @@ namespace Switch {
         /// @par Examples
         /// The following code example demonstrates the use of the AltDirectorySeparatorChar() property.
         /// @include DirectorySeparatorChar.cpp
-        static _property<char32, _readonly> AltDirectorySeparatorChar;
+        static char32 AltDirectorySeparatorChar();
 
         /// @brief Provides a platform-specific character used to separate directory levels in a path string that reflects a hierarchical file system organization.
         /// @par Examples
         /// The following code example demonstrates the use of the DirectorySeparatorChar() property.
         /// @include DirectorySeparatorChar.cpp
-        static _property<char32, _readonly> DirectorySeparatorChar;
+        static char32 DirectorySeparatorChar();
 
         /// @brief A platform-specific separator character used to separate path strings in environment variables.
         /// @par Examples
         /// The following code example demonstrates the use of the PathSeparator() property.
         /// @include DirectorySeparatorChar.cpp
-        static _property<char32, _readonly> PathSeparator;
+        static char32 PathSeparator();
 
         /// @brief Provides a platform-specific volume separator character.
         /// @par Examples
         /// The following code example demonstrates the use of the VolumeSeparatorChar() property.
         /// @include DirectorySeparatorChar.cpp
-        static _property<char32, _readonly> VolumeSeparatorChar;
+        static char32 VolumeSeparatorChar();
 
         /// @brief Changes the extension of a path string.
         /// @param path The path information to modify. The path cannot contain any of the characters defined in GetInvalidPathChars.
@@ -71,7 +71,7 @@ namespace Switch {
           if (string::IsNullOrEmpty(path1) || IsPathRooted(path2))
             return path2;
           
-          return string::Concat(path1, path1.EndsWith(DirectorySeparatorChar) ? string::Empty : Char(DirectorySeparatorChar).ToString(), path2);
+          return string::Concat(path1, path1.EndsWith(DirectorySeparatorChar()) ? string::Empty : Char(DirectorySeparatorChar()).ToString(), path2);
         }
         
         /// @brief Combines three path strings.

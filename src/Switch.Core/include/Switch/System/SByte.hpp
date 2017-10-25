@@ -2,6 +2,7 @@
 /// @brief Contains Switch::System::SByte struct.
 #pragma once
 
+#include <limits>
 #include "../Property.hpp"
 #include "Object.hpp"
 #include "../Types.hpp"
@@ -19,10 +20,10 @@ namespace Switch {
     struct _export SByte final : public ValueType, public IComparable, public IConvertible, public IFormattable {
     public:
       /// @brief Represents the largest possible value of an SByte 127 (0x7F). This field is constant.
-      static _property<sbyte, _readonly> MaxValue;
+      static constexpr sbyte MaxValue = std::numeric_limits<sbyte>::max();
 
       /// @brief Represents the smallest possible value of SByte -128 (0x80). This field is constant.
-      static _property<sbyte, _readonly> MinValue;
+      static constexpr sbyte MinValue = std::numeric_limits<sbyte>::min();
 
       /// @brief Create a new instance of struct SByte
       /// @remarks SByte is initialized with default value 0.

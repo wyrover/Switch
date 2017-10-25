@@ -81,7 +81,7 @@ namespace Switch {
       
       /// @brief Gets a TimeZoneInfo object that represents the local time zone.
       /// @return TimeZoneInfo An object that represents the local time zone.
-      static _property<const TimeZoneInfo&, _readonly> Local;
+      static const TimeZoneInfo& Local();
       
       /// @return The display name of the time zone's standard time.
       /// @remarks The display name is localized based on the culture installed with the Windows operating system.
@@ -100,7 +100,7 @@ namespace Switch {
 
       /// @brief Gets a TimeZoneInfo object that represents the Coordinated Universal Time (UTC) zone.
       /// @return TimeZoneInfo An object that represents the Coordinated Universal Time (UTC) zone.
-      static _property<const TimeZoneInfo&, _readonly> Utc;
+      static const TimeZoneInfo& Utc();
       
       /// @brief Converts the specified date and time to Coordinated Universal Time (UTC).
       /// @param dateTime The date and time to convert.
@@ -150,10 +150,6 @@ namespace Switch {
       /// @exception ArgumentNullException The id parameter is null.
       /// @exception TimeZoneNotFoundException The time zone identifier specified by id was not found. This means that a registry key whose name matches id does not exist, or that the key exists but does not contain any time zone data.
       static const TimeZoneInfo& TimeFindSystemTimeZoneById(const String& id);
-     
-      /// @cond
-      static const TimeZoneInfo& __local();
-      /// @endcond
 
     private:
       String id;

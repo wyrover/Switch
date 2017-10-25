@@ -2,6 +2,8 @@
 
 using namespace System;
 
-_property<ExceptionPtr, _readonly> ExceptionPtr::CurrentException {
-  [] {return std::current_exception();}
-};
+ExceptionPtr ExceptionPtr::CurrentException() {
+  return std::current_exception();
+  
+}
+

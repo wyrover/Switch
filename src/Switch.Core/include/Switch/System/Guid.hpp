@@ -330,7 +330,9 @@ namespace Switch {
       /// @brief Get A read-only instance of the Guid structure whose value is all zeros.
       /// @return Guid A read-only instance of the Guid structure whose value is all zeros.
       /// @remarks You can compare a GUID with the value of the Guid.Empty field to determine whether a GUID is non-zero. The following example uses the Equality operator to compare two GUID values with Guid.Empty to determine whether they consist exclusively of zeros.
-      static Guid Empty;
+      static Guid Empty() {
+        return Guid();
+      }
 
       private :
       Array<byte> data = Array<byte>(16);

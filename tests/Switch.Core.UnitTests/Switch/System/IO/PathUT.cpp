@@ -74,7 +74,7 @@ namespace {
     }
     
     void CombinePath1AndPath2() {
-      Assert::AreEqual(string::Format("Path1{0}Path2", System::IO::Path::DirectorySeparatorChar), System::IO::Path::Combine("Path1", "Path2"), _caller);
+      Assert::AreEqual(string::Format("Path1{0}Path2", System::IO::Path::DirectorySeparatorChar()), System::IO::Path::Combine("Path1", "Path2"), _caller);
     }
     
     void CombinePath1WithInvalidCharAndPath2() {
@@ -86,27 +86,27 @@ namespace {
     }
     
     void CombinePath1AndEmptyPath2() {
-      Assert::AreEqual(string::Format("Path1", System::IO::Path::DirectorySeparatorChar), System::IO::Path::Combine("Path1", ""), _caller);
+      Assert::AreEqual(string::Format("Path1", System::IO::Path::DirectorySeparatorChar()), System::IO::Path::Combine("Path1", ""), _caller);
     }
     
     void CombineEmptyPath1AndPath2() {
-      Assert::AreEqual(string::Format("Path2", System::IO::Path::DirectorySeparatorChar), System::IO::Path::Combine("", "Path2"), _caller);
+      Assert::AreEqual(string::Format("Path2", System::IO::Path::DirectorySeparatorChar()), System::IO::Path::Combine("", "Path2"), _caller);
     }
     
     void CombinePath1EndedWithDirectorySeparatorAndPath2() {
-      Assert::AreEqual(string::Format("Path1{0}Path2", System::IO::Path::DirectorySeparatorChar), System::IO::Path::Combine(string::Format("Path1{0}", System::IO::Path::DirectorySeparatorChar), "Path2"), _caller);
+      Assert::AreEqual(string::Format("Path1{0}Path2", System::IO::Path::DirectorySeparatorChar()), System::IO::Path::Combine(string::Format("Path1{0}", System::IO::Path::DirectorySeparatorChar()), "Path2"), _caller);
     }
     
     void CombinePath1AndPath2EndedWithDirectorySeparator() {
-      Assert::AreEqual(string::Format("Path1{0}Path2{0}", System::IO::Path::DirectorySeparatorChar), System::IO::Path::Combine("Path1", string::Format("Path2{0}", System::IO::Path::DirectorySeparatorChar)), _caller);
+      Assert::AreEqual(string::Format("Path1{0}Path2{0}", System::IO::Path::DirectorySeparatorChar()), System::IO::Path::Combine("Path1", string::Format("Path2{0}", System::IO::Path::DirectorySeparatorChar())), _caller);
     }
     
     void CombinePath1StartedWithDirectorySeparatorAndPath2() {
-      Assert::AreEqual(string::Format("{0}Path1{0}Path2", System::IO::Path::DirectorySeparatorChar), System::IO::Path::Combine(string::Format("{0}Path1", System::IO::Path::DirectorySeparatorChar), "Path2"), _caller);
+      Assert::AreEqual(string::Format("{0}Path1{0}Path2", System::IO::Path::DirectorySeparatorChar()), System::IO::Path::Combine(string::Format("{0}Path1", System::IO::Path::DirectorySeparatorChar()), "Path2"), _caller);
     }
     
     void CombinePath1AndPath2StartedWithDirectorySeparator() {
-      Assert::AreEqual(string::Format("{0}Path2", System::IO::Path::DirectorySeparatorChar), System::IO::Path::Combine("Path1", string::Format("{0}Path2", System::IO::Path::DirectorySeparatorChar)), _caller);
+      Assert::AreEqual(string::Format("{0}Path2", System::IO::Path::DirectorySeparatorChar()), System::IO::Path::Combine("Path1", string::Format("{0}Path2", System::IO::Path::DirectorySeparatorChar())), _caller);
     }
     
     void GetExtensionFromPath() {
@@ -259,9 +259,9 @@ namespace {
     
     void DirectorySeparatorChar() {
       if (Environment::OSVersion().Platform() == PlatformID::Unix || Environment::OSVersion().Platform() == PlatformID::MacOSX || Environment::OSVersion().Platform() == PlatformID::IOs || Environment::OSVersion().Platform() == PlatformID::Android)
-        Assert::AreEqual(char32('/'), System::IO::Path::DirectorySeparatorChar, _caller);
+        Assert::AreEqual(char32('/'), System::IO::Path::DirectorySeparatorChar(), _caller);
       else
-        Assert::AreEqual(char32('\\'), System::IO::Path::DirectorySeparatorChar, _caller);
+        Assert::AreEqual(char32('\\'), System::IO::Path::DirectorySeparatorChar(), _caller);
     }
     
     void GetFullPathOnRelativePath() {

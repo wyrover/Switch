@@ -11,10 +11,6 @@ namespace {
   Text::UTF8Encoding utf8Encoding(false);
 }
 
-_property<StringWriter, _readonly> StringWriter::Null {
-  [] {return StringWriter();}
-};
-
 StringWriter::StringWriter() : TextWriter(utf8Encoding) {
 }
 

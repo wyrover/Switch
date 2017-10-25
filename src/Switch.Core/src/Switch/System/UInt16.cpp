@@ -1,4 +1,3 @@
-#include <limits>
 #include "../../../include/Switch/System/UInt16.hpp"
 #include "../../../include/Switch/System/Convert.hpp"
 #include "../../../include/Switch/System/DivideByZeroException.hpp"
@@ -7,13 +6,9 @@
 
 using namespace System;
 
-_property<uint16, _readonly> UInt16::MaxValue {
-  [] {return std::numeric_limits<uint16>::max();}
-};
+constexpr uint16 UInt16::MaxValue;
 
-_property<uint16, _readonly> UInt16::MinValue {
-  [] {return std::numeric_limits<uint16>::min();}
-};
+constexpr uint16 UInt16::MinValue;
 
 uint16 UInt16::Parse(const string& str) {
   return Parse(str,10);
@@ -114,9 +109,6 @@ byte UInt16::ToByte(const IFormatProvider&) const {
 }
 
 char32 UInt16::ToChar(const IFormatProvider&) const {
-  if (this->value > Char::MaxValue)
-    throw OverflowException(_caller);
-  
   return (char)this->value;
 }
 

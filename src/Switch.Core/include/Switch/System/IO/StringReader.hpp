@@ -19,6 +19,11 @@ namespace Switch {
       /// @include StringReader.cpp
       class _export StringReader: public TextReader {
       public:
+        static StringReader& Null() {
+          static StringReader nullStringReader("");
+          return nullStringReader;
+        }
+
         /// @brief Initializes a new instance of the StringReader class that reads from the specified string.
         /// @param s The string to which the StringReader should be initialized.
         StringReader(const String& s);

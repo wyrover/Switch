@@ -148,7 +148,7 @@ namespace Switch {
             _set {
               if (this->backColor != value) {
                 this->backColor = value;
-                this->OnBackColorChanged(EventArgs::Empty);
+                this->OnBackColorChanged(EventArgs::Empty());
               }
             }
           };
@@ -177,7 +177,7 @@ namespace Switch {
             _set{
               if (this->clientSize != value) {
                 this->clientSize = value;
-                this->OnClientSizeChanged(EventArgs::Empty);
+                this->OnClientSizeChanged(EventArgs::Empty());
               }
             }
           };
@@ -200,7 +200,7 @@ namespace Switch {
             _set {
               if (this->enabled != value) {
                 this->enabled = value;
-                this->OnEnabledChanged(EventArgs::Empty);
+                this->OnEnabledChanged(EventArgs::Empty());
               }
             }
           };
@@ -210,7 +210,7 @@ namespace Switch {
             _set {
               if (this->foreColor != value) {
                 this->foreColor = value;
-                this->OnForeColorChanged(EventArgs::Empty);
+                this->OnForeColorChanged(EventArgs::Empty());
               }
             }
           };
@@ -253,7 +253,7 @@ namespace Switch {
             _set {
               if (this->location != value) {
                 this->location = value;
-                this->OnLocationChanged(EventArgs::Empty);
+                this->OnLocationChanged(EventArgs::Empty());
               }
             }
           };
@@ -266,7 +266,7 @@ namespace Switch {
             _set {
               if (this->name != value) {
                 this->name = value;
-                this->OnNameChanged(EventArgs::Empty);
+                this->OnNameChanged(EventArgs::Empty());
               }
             }
           };
@@ -292,7 +292,7 @@ namespace Switch {
             _set {
               if (this->size != value) {
                 this->size = value;
-                this->OnSizeChanged(EventArgs::Empty);
+                this->OnSizeChanged(EventArgs::Empty());
               }
             }
           };
@@ -302,7 +302,7 @@ namespace Switch {
             _set {
               if (this->tabStop != value) {
                 this->tabStop = value;
-                this->OnTabStopChanged(EventArgs::Empty);
+                this->OnTabStopChanged(EventArgs::Empty());
               }
             }
           };
@@ -316,7 +316,7 @@ namespace Switch {
             _set {
               if (this->text != value) {
                 this->text = value;
-                this->OnTextChanged(EventArgs::Empty);
+                this->OnTextChanged(EventArgs::Empty());
               }
             }
           };
@@ -331,7 +331,7 @@ namespace Switch {
             _set {
               if (this->visible != value) {
                 this->visible = value;
-                this->OnVisibleChanged(EventArgs::Empty);
+                this->OnVisibleChanged(EventArgs::Empty());
               }
             }
           };
@@ -430,7 +430,7 @@ namespace Switch {
                 this->parent().controls.Remove(*this);
               else
                 const_cast<Control&>(parent()).controls.Add(*this);
-              this->OnParentChanged(EventArgs::Empty);
+              this->OnParentChanged(EventArgs::Empty());
             }
           }
 

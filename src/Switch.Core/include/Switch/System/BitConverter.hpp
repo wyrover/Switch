@@ -53,7 +53,10 @@ namespace Switch {
       /// @par Examples
       /// The following code example illustrates the use of the IsLittleEndian field.
       /// @include BitConverterIsLittleEndian.cpp
-      static _property<bool, _readonly> IsLittleEndian;
+      static bool IsLittleEndian() {
+        static const int32 endian = 1;
+        return *(sbyte *)&endian == 1;
+      }
       
       /// @brief Converts the specified double-precision floating point number to a 64-bit signed integer.
       /// @param value The number to convert.

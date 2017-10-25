@@ -209,13 +209,13 @@ namespace {
   }
 
   TEST(Uri, GetLocalPath) {
-    ASSERT_EQ(Uri("  Http://yfi:MyPass@www.Contoso.com:8080/C:a ta%20log/ShowNew.htm?Date=ToDay#bOdy  ").LocalPath(), Char(IO::Path::DirectorySeparatorChar) + "C:a ta log" + IO::Path::DirectorySeparatorChar + "ShowNew.htm");
-    ASSERT_EQ(Uri("http://www.contoso.com/index.htm?date=today").LocalPath(), Char(IO::Path::DirectorySeparatorChar) + "index.htm");
-    ASSERT_EQ(Uri("http://www.contoso.com/index.htm#main").LocalPath(), Char(IO::Path::DirectorySeparatorChar) + "index.htm");
+    ASSERT_EQ(Uri("  Http://yfi:MyPass@www.Contoso.com:8080/C:a ta%20log/ShowNew.htm?Date=ToDay#bOdy  ").LocalPath(), Char(IO::Path::DirectorySeparatorChar()) + "C:a ta log" + IO::Path::DirectorySeparatorChar() + "ShowNew.htm");
+    ASSERT_EQ(Uri("http://www.contoso.com/index.htm?date=today").LocalPath(), Char(IO::Path::DirectorySeparatorChar()) + "index.htm");
+    ASSERT_EQ(Uri("http://www.contoso.com/index.htm#main").LocalPath(), Char(IO::Path::DirectorySeparatorChar()) + "index.htm");
     ASSERT_EQ(Uri("mailto:user@contoso.com?subject=uri").LocalPath(), "");
-    ASSERT_EQ(Uri("nntp://news.contoso.com/123456@contoso.com").LocalPath(), Char(IO::Path::DirectorySeparatorChar) + "123456@contoso.com");
+    ASSERT_EQ(Uri("nntp://news.contoso.com/123456@contoso.com").LocalPath(), Char(IO::Path::DirectorySeparatorChar()) + "123456@contoso.com");
     ASSERT_EQ(Uri("news:123456@contoso.com").LocalPath(), "123456@contoso.com");
-    ASSERT_EQ(Uri("file://server/filename.ext").LocalPath(), Char(IO::Path::DirectorySeparatorChar) + "filename.ext");
+    ASSERT_EQ(Uri("file://server/filename.ext").LocalPath(), Char(IO::Path::DirectorySeparatorChar()) + "filename.ext");
   }
 
   TEST(Uri, GetOriginalString) {

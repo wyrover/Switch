@@ -40,7 +40,7 @@ namespace Switch {
         /// @brief Provides a TextWriter with no backing store that can be written to, but not read from.
         /// @remarks Use cNull to redirect output to a stream that will not consume any operating system resources.
         /// @remarks When the TextWriter::Write methods are invoked on cNull, the call simply returns, and no data is actually written to any backing store.
-        static _property<NullTextWriter&, _readonly> Null;
+        static NullTextWriter& Null();
 
         /// @brief When overridden in a derived class, returns the character encoding in which the output is written.
         _property<Text::Encoding&, _readonly> Encoding {

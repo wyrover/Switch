@@ -52,9 +52,19 @@ bool Thread::ThreadItem::SetPriority(Thread::NativeHandle handle, ThreadPriority
   return Native::ThreadApi::SetPriority((intptr)handle, (int32)priority);
 }
 
-_property<Thread&, _readonly> Thread::CurrentThread {
-  []()->Thread& {return Thread::__CurrentThread__();}
-};
+Thread& Thread::CurrentThread() {
+  ThreadId id = std::this_thread::get_id();
+  std::lock_guard<std::recursive_mutex> lock(mutex);
+  for (auto& item : threads) {
+    if (item.data->thread.get_id() == id || item.data->detachedThreadId == id || item.data->mainThreadId == id)
+      return item;
+  }
+  
+  static Thread thread;
+  thread.data->state &= ~System::Threading::ThreadState::Unstarted;
+  thread.data->state |= System::Threading::ThreadState::Background;
+  return thread;
+}
 
 void Thread::Abort() {
   if (this->data->managedThreadId == NoneManagedThreadId)
@@ -182,16 +192,3 @@ void Thread::Suspend() {
   this->data->state &= ~System::Threading::ThreadState::SuspendRequested;
 }
 
-Thread& Thread::__CurrentThread__() {
-  ThreadId id = std::this_thread::get_id();
-  std::lock_guard<std::recursive_mutex> lock(mutex);
-  for (auto& item : threads) {
-    if (item.data->thread.get_id() == id || item.data->detachedThreadId == id || item.data->mainThreadId == id)
-      return item;
-  }
-  
-  static Thread thread;
-  thread.data->state &= ~System::Threading::ThreadState::Unstarted;
-  thread.data->state |= System::Threading::ThreadState::Background;
-  return thread;
-}

@@ -75,7 +75,7 @@ namespace {
   };
 
   TEST(Trace, Default) {
-    Console::SetOut(System::IO::TextWriter::Null);
+    Console::SetOut(System::IO::TextWriter::Null());
 
     string dataString("Data string");
     const Object& dataObject=string("Data object");
@@ -170,7 +170,7 @@ namespace {
   };
 
   TEST(Trace, Source) {
-    Console::SetOut(System::IO::TextWriter::Null);
+    Console::SetOut(System::IO::TextWriter::Null());
 
     string dataString("Data string");
     const Object& dataObject=string("Data object");
