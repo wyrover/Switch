@@ -13,7 +13,7 @@
 #undef GetWindowText
 #undef major
 #undef max
-#undef minor
+#undef min
 #undef MemoryBarrier
 #undef None
 #undef RemoveDirectory
