@@ -10,12 +10,12 @@ namespace Examples {
       // Get the date and time for the current moment, adjusted
       // to the local time zone.
       
-      DateTime saveNow = DateTime::Now;
+      DateTime saveNow = DateTime::Now();
       
       // Get the date and time for the current moment expressed
       // as coordinated universal time (UTC).
       
-      DateTime saveUtcNow = DateTime::UtcNow;
+      DateTime saveUtcNow = DateTime::UtcNow();
       DateTime myDt;
       
       // Display the value and Kind property of the current moment

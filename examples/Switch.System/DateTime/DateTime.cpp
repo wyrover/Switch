@@ -10,7 +10,7 @@ namespace Examples {
       int window = 10;
       int freq = 60 * 60 * 2; // 2 hours;
       
-      DateTime d1 = DateTime::Now;
+      DateTime d1 = DateTime::Now();
       
       DateTime d2 = d1.AddSeconds(2 * window);
       DateTime d3 = d1.AddSeconds(-2 * window);

@@ -23,7 +23,7 @@ namespace UnitTests {
 
     // Used Assert::IsFalse to virifie if a condition is false
     void DefaultTimeSpanIsEqualToZero() {
-      Assert::IsFalse(TimeSpan(1) == TimeSpan::Zero, _caller);
+      Assert::IsFalse(TimeSpan(1) == TimeSpan::Zero(), _caller);
     }
   };
 

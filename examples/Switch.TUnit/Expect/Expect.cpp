@@ -23,7 +23,7 @@ namespace UnitTests {
 
     // Used Expect::IsFalse to virifie if a condition is false
     void DefaultTimeSpanIsEqualToZero() {
-      Expect::IsFalse(TimeSpan(1) == TimeSpan::Zero, _caller);
+      Expect::IsFalse(TimeSpan(1) == TimeSpan::Zero(), _caller);
     }
   };
 

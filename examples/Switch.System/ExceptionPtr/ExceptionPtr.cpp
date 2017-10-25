@@ -14,7 +14,7 @@ namespace Examples {
         try {
           throw ArgumentNullException("Ouch there are an error !", _caller);
         } catch(...) {
-          exceptionPtr = ExceptionPtr::CurrentException;
+          exceptionPtr = ExceptionPtr::CurrentException();
         }
       }));
       thread.Start();
