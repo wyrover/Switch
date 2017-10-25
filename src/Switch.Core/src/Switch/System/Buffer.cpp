@@ -13,7 +13,7 @@ int32 Buffer::BlockCompare(const void* blk1, int64 blk1Length, int64 blk1Offset,
     throw ArgumentException(_caller);
   
   if (sizeof(void*) == 4) // 32 bits build
-    return memcmp(reinterpret_cast<const void*>((*(int32*)&blk1) + int32(blk1Offset)), reinterpret_cast<const void*>((*(int32*)&blk2) + int32(blk2Offset)), int32(count));
+    return memcmp(reinterpret_cast<const void*>(reinterpret_cast<const char*>(blk1) + int32(blk1Offset)), reinterpret_cast<const void*>(reinterpret_cast<const char*>(blk2) + int32(blk2Offset)), int32(count));
   return memcmp(reinterpret_cast<const void*>((int64)blk1 + blk1Offset), reinterpret_cast<const void*>((int64)blk2 + blk2Offset), (size_t)count);
 }
 

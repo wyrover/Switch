@@ -41,7 +41,7 @@ namespace {
         return character;
       }
       
-      read(0, &character, 1);
+      while (read(0, &character, 1) != 1);
       return character;
     }
     
@@ -52,8 +52,8 @@ namespace {
       this->newSettings.c_cc[VMIN] = 0;
       tcsetattr(0, TCSANOW, &newSettings);
       
-      read(0, &this->peekCharacter, 1);
-      
+      while (read(0, &this->peekCharacter, 1) != 1);
+
       this->newSettings.c_cc[VMIN] = 1;
       tcsetattr(0, TCSANOW, &this->newSettings);
       
