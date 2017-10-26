@@ -5,4 +5,4 @@ Convert the interface of a class into another interface clients expect. Adapter 
 <BR>
 
 ## UML class diagram
-![GitHub Logo](../../../docs/Pictures/DesignPatterns/adapter.gif)
+![GitHub Logo](../../../docs/Diagrams/UML/DesignPatterns/Adapter.png)

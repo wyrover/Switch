@@ -5,4 +5,4 @@ Define an interface for creating an object, but let subclasses decide which clas
 <BR>
 
 ## UML class diagram
-![GitHub Logo](../../../docs/Pictures/DesignPatterns/factory.gif)
+![GitHub Logo](../../../docs/Diagrams/UML/DesignPatterns/FactoryMethod.png)

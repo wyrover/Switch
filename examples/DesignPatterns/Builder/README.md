@@ -5,4 +5,4 @@ Separate the construction of a complex object from its representation so that th
 <BR>
 
 ## UML class diagram
-![GitHub Logo](../../../docs/Pictures/DesignPatterns/builder.gif)
+![GitHub Logo](../../../docs/Diagrams/UML/DesignPatterns/Builder.png)
