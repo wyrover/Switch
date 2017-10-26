@@ -1,0 +1,21 @@
+@startuml
+
+' class parameters
+skinparam classBorderThickness 1
+skinparam classBackgroundColor white
+skinparam classBorderColor black
+skinparam classFontColor black
+skinparam classFontStyle bold
+ 
+' class attribute parameters
+skinparam classAttributeIconSize 0 
+skinparam classFontColor black
+
+' Singleton 
+class Singleton {
+  -instance : Singleton
+  -Singleton()
+  +Instance() : Singleton
+}
+
+@enduml

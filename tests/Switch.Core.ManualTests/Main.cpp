@@ -130,6 +130,8 @@ namespace Examples {
     // The main entry point for the application.
     static void Main() {
       TUnit::UnitTest().Run();
+      TimeSpan duration = 345_s;
+      Console::WriteLine("Duration = {0}", duration);
     }
   };
 }

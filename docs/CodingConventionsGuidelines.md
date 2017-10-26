@@ -3,6 +3,161 @@
 | [Home](Home.md) | [Gallery](Gallery.md) | [Examples](Examples.md) | [Downloads](Downloads.md) | [Documentation](Documentation.md) | [Project](https://sourceforge.net/projects/switchpro) | [Source](https://github.com/gammasoft71/switch) | [License](License.md) | [Contact](Contact.md) | [GAMMA Soft](https://gammasoft71.wixsite.com/gammasoft) |
 |-----------------|-----------------------|-------------------------|-------------------------|-----------------------------------|-------------------------------------------------------|-------------------------------------------------|-----------------------|-----------------------|---------------------------------------------------------|
 
+# Files organization
+
+```
+root
+  +- 3rdparty
+  |    +- curl
+  |    +- easywsclient
+  |    +- ...
+  +- build
+  +- docs
+  |    +- Diagrams
+  |    |    +- UML
+  |    +- Doxygen
+  |    +- Pictures
+  +- examples
+  |    +- DesignPatterns
+  |    +- Switch.System
+  |    +- Switch.System.Drawing
+  |    +- ...
+  +- lib
+  +- scripts
+  |    +- cmake
+  |    +- install
+  +- src
+  |    +- Switch.Core
+  |    |    +- include
+  |    |    |    +- Switch
+  |    |    |         +- Microsoft
+  |    |    |         |    +- ...
+  |    |    |         |- System
+  |    |    |              |- ...
+  |    |    +- src
+  |    |         +- Switch
+  |    |              +- Microsoft
+  |    |              |    +- ...
+  |    |              |- System
+  |    |                   |- ...
+  |    +- ...
+  +- tests
+       +- Switch.Core.UnitTests
+       |    +- Switch
+       |         |- Microsoft
+       |         |- System
+       |              |- ...
+       +- ...
+```
+
+**root** folder is the project folder where Switch was extracted or cloned.
+
+**root/3rdparty** folder contains third party libraries like curl, easywsclient and others.
+
+**root/build** folder contains the build result. This folder is automaticaly create by the install.
+
+**root/docs** folder contains markdown documentations.
+
+**root/docs/Diagrams** folder contains the diagrams used to illustrate the markdown documentation and website.
+
+**root/docs/Diagrams/UML** folder contains the UML diagrams used to illustrate the markdown documentation and website.
+
+**root/docs/Doxygen** folder contains the specific files for Reference guide doxygen generation.
+
+**root/docs/Pictures** folder contains the pictures used to illustrate the markdown documentation and website.
+
+**root/examples** folder contains examples to show how to used Switch libraries.
+
+**root/lib** folder contains builded libraries. This folder is automaticaly create by the build.
+
+**root/script/cmake** folder contains scripts needed by cmake.
+
+**root/script/install** folder contains installation script.
+
+**root/src** folder contains source files orgized by library.
+
+**root/tests** folder contains tests orgized by library and test type.
+
+For example, the **root/src/Switch.Core** folder contains Switch.Core library source files and the **root/src/Switch.System.Drawing** folder contains Switch.System.Drawing library source files.
+
+For exemple, the **root/tests/Switch.Core.UnitTests** contains Switch.Core library unit tests and the **root/tests/Switch.system.Drawing.ManualTets** folder contains Switch.System.Drawing manual tests.
+
+For example, if a Switch.System.Windows.Forms library header file containts :
+
+```c++
+#pragma once
+
+#include <Switch/System/EventArgs.hpp>
+
+#include "../../ComponentModel/CancelEventArgs.hpp"
+#include "CloseReason.hpp"
+
+namespace Switch {
+  namespace System {
+    namespace Windows {
+      namespace Forms {
+        class _export FormClosingEventArgs : public ComponentModel::CancelEventArgs {
+        public:
+          FormClosingEventArgs() {}
+          FormClosingEventArgs(bool cancel, System::Windows::Forms::CloseReason closeReason) : ComponentModel::CancelEventArgs(cancel), closeReason(closeReason) {}
+          FormClosingEventArgs(const FormClosingEventArgs& e) : ComponentModel::CancelEventArgs(e), closeReason(e.closeReason) {}
+
+          _property<System::Windows::Forms::CloseReason, _readonly> CloseReason {
+            _get { return this->closeReason; }
+          };
+
+        private:
+          System::Windows::Forms::CloseReason closeReason = System::Windows::Forms::CloseReason::UserClosing;
+        };
+      }
+    }
+  }
+}
+```
+
+The file will be in root/src/Switch.System.Windows.Forms/include/Switch/System/Windows/Forms/ path
+
+# Diagrams
+
+Diagrams are generate by Draw.IO Desktop. [Draw.IO Desktop](https://chrome.google.com/webstore/detail/drawio-desktop/pebppomjfocnoigkeepgbmcifnnlndla?hl=en-GB) is an Google chrome extension.
+
+# UML diagrams
+
+UML diuagrams are generate by [plantUML](http://plantuml.com).
+
+# File names
+
+**√ DO** Name file with same name of the class, struct, enum, delegate or event that contains.
+
+For example, if file contains :
+
+```c++
+#pragma once
+
+#include <Switch/System/EventHandler.hpp>
+
+#include "FormClosingEventArgs.hpp"
+
+namespace Switch {
+  namespace System {
+    namespace Windows {
+      namespace Forms {
+        using FormClosingEventHandler = GenericEventHandler<FormClosingEventArgs&>;
+      }
+    }
+  }
+}
+```
+
+The file will be named to *FormClosingEventHandler.hpp*.
+
+# File extensions
+
+**√ DO** Use .hpp for header files.
+
+**√ DO** Use .cpp for source files.
+
+
 # Editor
 
 **√ DO** Replace tab character with double spaces in your editor or IDE properties. 
@@ -14,6 +169,50 @@ public:
   MyCLass(const MyCLass&) = default;
 };
 ```
+
+# Order of parts in a class or struct declarations
+
+**√ DO** Put public declaration in first.
+
+**√ DO** Put protected declaration in second.
+
+**√ DO** Put private declaration in last.
+
+```c++
+class MyClass : public object {
+public:
+  /// @brief Return a string that represents the current object.
+  string ToString() const {return NameGenerator();}
+
+protected:
+  /// @brief 
+  virtual string NameGenerator() const {return baseName;}
+
+private:
+  string baseName = "BaseName";
+};
+```
+
+# macros
+
+**X DO NOT** Never use #define for constantes. Use *static constexpr* or *static const* instead.
+
+### header file :
+```c++
+class MyCLass : public object {
+public:
+  static constexpr int maxValue = System::Int32::MaxValue;
+  static const System::TimeSpan maxDuration;
+};
+```
+
+### source file :
+```c++
+int MyClass::MaxValue;
+const System::Timespan MyClass::MaxDuration = 12_s;
+```
+
+# Globals
 
 # Comments
 
