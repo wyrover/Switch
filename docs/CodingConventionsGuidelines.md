@@ -206,9 +206,11 @@ private:
 };
 ```
 
-# macros
+# #define
 
-**X DO NOT** Uses #define for constantes. Use *static constexpr* or *static const* instead.
+**X DO NOT** Use #define for any good or bad reason.
+
+**√ DO** But instead use *static constexpr* or *static const* for constantes.
 
 ### header file :
 ```c++
@@ -223,6 +225,16 @@ public:
 ```c++
 int MyClass::MaxValue;
 const System::Timespan MyClass::MaxDuration = 12_s;
+```
+
+**√ DO** But instead use template method for macros.
+
+```c++
+class Arithmetics _static {
+public:
+  template<typename T>
+  T Max(T value1, T value2) {return value1 >= value2 ? value1 : value2;} // equivalent : #define Max(value1, value2) (value1 >= value2 1 value1 : value2)
+};
 ```
 
 # Globals
