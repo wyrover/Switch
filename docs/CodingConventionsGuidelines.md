@@ -3,7 +3,11 @@
 | [Home](Home.md) | [Gallery](Gallery.md) | [Examples](Examples.md) | [Downloads](Downloads.md) | [Documentation](Documentation.md) | [Project](https://sourceforge.net/projects/switchpro) | [Source](https://github.com/gammasoft71/switch) | [License](License.md) | [Contact](Contact.md) | [GAMMA Soft](https://gammasoft71.wixsite.com/gammasoft) |
 |-----------------|-----------------------|-------------------------|-------------------------|-----------------------------------|-------------------------------------------------------|-------------------------------------------------|-----------------------|-----------------------|---------------------------------------------------------|
 
-# Files organization
+# Folders and files organization
+
+## Folders hierarchy
+
+**√ DO** Respect the project hierarchy
 
 ```
 root
@@ -32,25 +36,25 @@ root
   |    |    |    +- Switch
   |    |    |         +- Microsoft
   |    |    |         |    +- ...
-  |    |    |         |- System
-  |    |    |              |- ...
+  |    |    |         +- System
+  |    |    |              +- ...
   |    |    +- src
   |    |         +- Switch
   |    |              +- Microsoft
   |    |              |    +- ...
-  |    |              |- System
-  |    |                   |- ...
+  |    |              +- System
+  |    |                   +- ...
   |    +- ...
   +- tests
        +- Switch.Core.UnitTests
        |    +- Switch
-       |         |- Microsoft
-       |         |- System
-       |              |- ...
+       |         +- Microsoft
+       |         +- System
+       |              +- ...
        +- ...
 ```
 
-**root** folder is the project folder where Switch was extracted or cloned.
+**root** folder is the project folder where Switch project was extracted or cloned.
 
 **root/3rdparty** folder contains third party libraries like curl, easywsclient and others.
 
@@ -70,19 +74,29 @@ root
 
 **root/lib** folder contains builded libraries. This folder is automaticaly create by the build.
 
-**root/script/cmake** folder contains scripts needed by cmake.
+**root/scripts/cmake** folder contains scripts needed by cmake.
 
-**root/script/install** folder contains installation script.
+**root/scripts/install** folder contains installation scripts.
 
-**root/src** folder contains source files orgized by library.
+**root/src** folder contains source files organized by libraries.
 
-**root/tests** folder contains tests orgized by library and test type.
+For each library the hierarchy is identical :
+
+**root/Switch.LibraryName/include** folder contains include files for Switch.LibraryName library.
+
+**root/Switch.LibraryName/include/Namespace1/Namespace2/...** folder contains include files for Switch.LibraryName library organized by namespaces.
+
+**root/Switch.LibraryName/src** folder contains source files for Switch.LibraryName library.
+
+**root/Switch.LibraryName/src/Namespace1/Namespace2/...** folder contains source files for Switch.LibraryName library organized by namespaces.
+
+**root/tests** folder contains tests organized by library and test types.
 
 For example, the **root/src/Switch.Core** folder contains Switch.Core library source files and the **root/src/Switch.System.Drawing** folder contains Switch.System.Drawing library source files.
 
 For exemple, the **root/tests/Switch.Core.UnitTests** contains Switch.Core library unit tests and the **root/tests/Switch.system.Drawing.ManualTets** folder contains Switch.System.Drawing manual tests.
 
-For example, if a Switch.System.Windows.Forms library header file containts :
+For example, if a Switch.System.Windows.Forms library header file contains :
 
 ```c++
 #pragma once
@@ -117,15 +131,7 @@ namespace Switch {
 
 The file will be in root/src/Switch.System.Windows.Forms/include/Switch/System/Windows/Forms/ path
 
-# Diagrams
-
-Diagrams are generate by Draw.IO Desktop. [Draw.IO Desktop](https://chrome.google.com/webstore/detail/drawio-desktop/pebppomjfocnoigkeepgbmcifnnlndla?hl=en-GB) is an Google chrome extension.
-
-# UML diagrams
-
-UML diuagrams are generate by [plantUML](http://plantuml.com).
-
-# File names
+## File names
 
 **√ DO** Name file with same name of the class, struct, enum, delegate or event that contains.
 
@@ -151,12 +157,19 @@ namespace Switch {
 
 The file will be named to *FormClosingEventHandler.hpp*.
 
-# File extensions
+## File extensions
 
 **√ DO** Use .hpp for header files.
 
 **√ DO** Use .cpp for source files.
 
+# Diagrams
+
+**√ DO** Diagrams are generate by Draw.IO Desktop. [Draw.IO Desktop](https://chrome.google.com/webstore/detail/drawio-desktop/pebppomjfocnoigkeepgbmcifnnlndla?hl=en-GB) is an Google chrome extension.
+
+# UML diagrams
+
+**√ DO** UML diuagrams are generate by [plantUML](http://plantuml.com).
 
 # Editor
 
@@ -195,7 +208,7 @@ private:
 
 # macros
 
-**X DO NOT** Never use #define for constantes. Use *static constexpr* or *static const* instead.
+**X DO NOT** Uses #define for constantes. Use *static constexpr* or *static const* instead.
 
 ### header file :
 ```c++
@@ -213,6 +226,16 @@ const System::Timespan MyClass::MaxDuration = 12_s;
 ```
 
 # Globals
+
+## Global methods
+
+**X DO NOT** Uses glabal methods. All methods are in class. If necessary creates class contener like System::Console or System::Math to group static methods. 
+
+## Gloabal variables
+
+**X DO NOT** Uses glabal variables. All variables are in class. If necessary a global or static variable can create in a source files (.cpp) but it can't visible in the header file (.hpp). 
+
+**√ DO** Uses [factoryMethod](FactoryMethod.md), [Builder](Builder.md) or [Singleton](Singleton.md) patterns to create objects
 
 # Comments
 
