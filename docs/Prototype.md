@@ -9,7 +9,7 @@ Specify the kind of objects to create using a prototypical instance, and create 
 
 # UML class diagram
 
-![AbstractFactory](Pictures/DesignPatterns/prototype.gif)
+![AbstractFactory](Diagrams/UML/DesignPatterns/Prototype.png)
 
 # Sample code
 

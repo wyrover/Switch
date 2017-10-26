@@ -9,7 +9,7 @@ Provide an interface for creating families of related or dependent objects witho
 
 # UML class diagram
 
-![AbstractFactory](Pictures/DesignPatterns/abstract.gif)
+![AbstractFactory](Diagrams/UML/DesignPatterns/AbstractFactory.png)
 
 # Sample code
 

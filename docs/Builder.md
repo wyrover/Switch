@@ -9,7 +9,7 @@ Separate the construction of a complex object from its representation so that th
 
 # UML class diagram
 
-![AbstractFactory](Pictures/DesignPatterns/builder.gif)
+![AbstractFactory](Diagrams/UML/DesignPatterns/Builder.png)
 
 # Sample code
 

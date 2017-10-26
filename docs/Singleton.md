@@ -9,7 +9,7 @@ Ensure a class has only one instance and provide a global point of access to it.
 
 # UML class diagram
 
-![AbstractFactory](Pictures/DesignPatterns/singleton.gif)
+![AbstractFactory](Diagrams/UML/DesignPatterns/Singleton.png)
 
 # Sample code
 

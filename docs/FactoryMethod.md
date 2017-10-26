@@ -9,7 +9,7 @@ Define an interface for creating an object, but let subclasses decide which clas
 
 # UML class diagram
 
-![AbstractFactory](Pictures/DesignPatterns/factory.gif)
+![AbstractFactory](Diagrams/UML/DesignPatterns/FactoryMethod.png)
 
 # Sample code
 

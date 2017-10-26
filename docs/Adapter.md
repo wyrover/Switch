@@ -9,7 +9,7 @@ Convert the interface of a class into another interface clients expect. Adapter 
 
 # UML class diagram
 
-![AbstractFactory](Pictures/DesignPatterns/adapter.gif)
+![AbstractFactory](Diagrams/UML/DesignPatterns/Adapter.png)
 
 # Sample code
 
