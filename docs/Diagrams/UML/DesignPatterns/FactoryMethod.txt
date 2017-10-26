@@ -15,15 +15,15 @@ abstract Creator {
   +AnOperation()
 }
 
-note left
+note left of Creator::FactoryMethod
   product = FactoryMethod()
 end note
 
 class ConcreteCreator {
-  +FactoryMethod()  
+  +FactoryMethod()
 }
 
-note left
+note left of ConcreteCreator::FactoryMethod
   return new ConcreteProduct
 end note
 

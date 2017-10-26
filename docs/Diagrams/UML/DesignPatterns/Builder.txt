@@ -10,7 +10,7 @@ class Director {
   +Construct()
 }
 
-note left
+note left of Director::Construct
   foreach item in structure
   builder.BuildPart()
 end note
