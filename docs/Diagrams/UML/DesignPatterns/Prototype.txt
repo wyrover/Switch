@@ -36,7 +36,7 @@ note left of ConcretePrototype2::Clone
 end note
 
 Client --> Prototype
-Prototype --|> ConcretePrototype1
-Prototype --|> ConcretePrototype2
+Prototype <|-- ConcretePrototype1
+Prototype <|-- ConcretePrototype2
 
 @enduml

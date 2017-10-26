@@ -1,0 +1,39 @@
+@startuml
+
+skinparam classBackgroundColor white
+skinparam classBorderColor black
+skinparam classArrowColor black
+skinparam noteBackgroundColor white
+skinparam noteBorderColor black
+
+class Client
+
+abstract Implementor {
+  +OperationImp()
+}
+
+class Abstraction {
+  +Operation()
+}
+
+note left of Abstraction::Operation
+  Implementor.OperationImp()
+end note
+
+class RafinedAbstraction
+
+class ConcreteImplementorA {
+  +OperationImp()
+}
+
+class ConcreteImplementorB {
+  +OperationImp()
+}
+
+Client --> Abstraction
+Implementor <--o Abstraction
+Abstraction <|-- RafinedAbstraction
+Implementor <|-- ConcreteImplementorA
+Implementor <|-- ConcreteImplementorB
+
+@enduml

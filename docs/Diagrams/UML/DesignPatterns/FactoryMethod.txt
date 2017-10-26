@@ -27,8 +27,8 @@ note left of ConcreteCreator::FactoryMethod
   return new ConcreteProduct
 end note
 
-Creator <|-- ConcreteCreator
 Product <|-- ConcreteProduct
 ConcreteCreator ..> ConcreteProduct
+ConcreteCreator --|> Creator
 
 @enduml

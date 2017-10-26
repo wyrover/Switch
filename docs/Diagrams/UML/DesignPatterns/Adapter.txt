@@ -1,0 +1,31 @@
+@startuml
+
+skinparam classBackgroundColor white
+skinparam classBorderColor black
+skinparam classArrowColor black
+skinparam noteBackgroundColor white
+skinparam noteBorderColor black
+
+class Client
+
+class Target {
+  +Request()
+}
+
+class Adapter {
+  +Request()
+}
+
+note left of Adapter::Request
+  adaptee.SpecificRequest()
+end note
+
+class Adaptee {
+  +SpecificRequest()
+}
+
+Client --> Target
+Target <|-- Adapter
+Adaptee <-- Adapter
+
+@enduml
