@@ -1,0 +1,52 @@
+@startuml
+
+skinparam classBackgroundColor white
+skinparam classBorderColor black
+skinparam classArrowColor black
+skinparam noteBackgroundColor white
+skinparam noteBorderColor black
+
+class Client
+
+abstract AbstractProductA
+
+class ProductA1
+
+class ProductA2
+
+abstract AbstractProductB
+
+class ProductB1
+
+class ProductB2
+
+abstract AbstractFactory {
+  +CreateProductA()
+  +CreateProductB()
+}
+
+class ConcreteFactory1 {
+  +CreateProductA()
+  +CreateProductB()
+}
+
+class ConcreteFactory2 {
+  +CreateProductA()
+  +CreateProductB()
+}
+
+Client --> AbstractProductA
+AbstractProductA <|-- ProductA1
+AbstractProductA <|-- ProductA2
+Client --> AbstractProductB
+AbstractProductB <|-- ProductB1
+AbstractProductB <|-- ProductB2
+Client --> AbstractFactory
+AbstractFactory <|-- ConcreteFactory1
+AbstractFactory <|-- ConcreteFactory2
+ConcreteFactory1 ..> ProductA1
+ConcreteFactory1 ..> ProductB1
+ConcreteFactory2 ..> ProductA2
+ConcreteFactory2 ..> ProductB2
+
+@enduml

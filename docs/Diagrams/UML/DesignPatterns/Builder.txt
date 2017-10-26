@@ -1,0 +1,33 @@
+@startuml
+
+skinparam classBackgroundColor white
+skinparam classBorderColor black
+skinparam classArrowColor black
+skinparam noteBackgroundColor white
+skinparam noteBorderColor black
+
+class Director {
+  +Construct()
+}
+
+note left
+  foreach item in structure
+  builder.BuildPart()
+end note
+
+abstract Builder {
+  +BuildPart()
+}
+
+class ConcreteBuilder {
+  +BuildPart()
+  +GetResult()
+}
+
+class Product
+
+Director o--> Builder : builder
+ConcreteBuilder -|> Builder
+ConcreteBuilder ..> Product
+
+@enduml

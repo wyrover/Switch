@@ -1,0 +1,34 @@
+@startuml
+
+skinparam classBackgroundColor white
+skinparam classBorderColor black
+skinparam classArrowColor black
+skinparam noteBackgroundColor white
+skinparam noteBorderColor black
+
+abstract Product
+
+class ConcreteProduct
+
+abstract Creator {
+  +FactoryMethod()
+  +AnOperation()
+}
+
+note left
+  product = FactoryMethod()
+end note
+
+class ConcreteCreator {
+  +FactoryMethod()  
+}
+
+note left
+  return new ConcreteProduct
+end note
+
+Creator <|-- ConcreteCreator
+Product <|-- ConcreteProduct
+ConcreteCreator ..> ConcreteProduct
+
+@enduml
