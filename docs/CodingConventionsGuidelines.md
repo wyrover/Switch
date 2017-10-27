@@ -241,11 +241,11 @@ public:
 
 ## Global methods
 
-**X DO NOT** Uses glabal methods. All methods are in class. If necessary creates class contener like System::Console or System::Math to group static methods. 
+**X DO NOT** Use glabal methods. All methods are in class. If necessary creates class contener like System::Console or System::Math to group static methods. 
 
 ## Gloabal variables
 
-**X DO NOT** Uses glabal variables. All variables are in class. If necessary a global or static variable can create in a source files (.cpp) but it can't visible in the header file (.hpp). 
+**X DO NOT** Use glabal variables. All variables are in class. If necessary a global or static variable can create in a source files (.cpp) but it can't visible in the header file (.hpp). 
 
 **√ DO** Uses [factoryMethod](FactoryMethod.md), [Builder](Builder.md) or [Singleton](Singleton.md) patterns to create objects
 

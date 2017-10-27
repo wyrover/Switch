@@ -7,6 +7,8 @@
 
 Specify the kind of objects to create using a prototypical instance, and create new objects by copying this prototype.
 
+Usage     ![Usage](Pictures/Usage3.png)     Medium
+
 # UML class diagram
 
 ![AbstractFactory](Diagrams/UML/DesignPatterns/Prototype.png)

@@ -7,6 +7,8 @@
 
 Decouple an abstraction from its implementation so that the two can vary independently.
 
+Usage     ![Usage](Pictures/Usage3.png)     Medium
+
 # UML class diagram
 
 ![AbstractFactory](Diagrams/UML/DesignPatterns/Bridge.png)

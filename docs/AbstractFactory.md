@@ -7,6 +7,8 @@
 
 Provide an interface for creating families of related or dependent objects without specifying their concrete classes.
 
+Usage     ![Usage](Pictures/Usage5.png)     High
+
 # UML class diagram
 
 ![AbstractFactory](Diagrams/UML/DesignPatterns/AbstractFactory.png)
