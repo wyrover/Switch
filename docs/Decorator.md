@@ -7,6 +7,8 @@
 
 Attach additional responsibilities to an object dynamically. Decorators provide a flexible alternative to subclassing for extending functionality.
 
+Usage     ![Usage](Pictures/Usage3.png)     Medium
+
 # UML class diagram
 
 ![AbstractFactory](Pictures/DesignPatterns/decorator.gif)

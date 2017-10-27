@@ -7,6 +7,8 @@
 
 Use sharing to support large numbers of fine-grained objects efficiently.
 
+Usage     ![Usage](Pictures/Usage1.png)     Low
+
 # UML class diagram
 
 ![AbstractFactory](Pictures/DesignPatterns/flyweight.gif)

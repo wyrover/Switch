@@ -7,6 +7,8 @@
 
 Define a family of algorithms, encapsulate each one, and make them interchangeable. Strategy lets the algorithm vary independently from clients that use it.
 
+Usage     ![Usage](Pictures/Usage4.png)     Medium high
+
 # UML class diagram
 
 ![AbstractFactory](Pictures/DesignPatterns/strategy.gif)

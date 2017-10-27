@@ -7,6 +7,8 @@
 
 Provide a way to access the elements of an aggregate object sequentially without exposing its underlying representation.
 
+Usage     ![Usage](Pictures/Usage5.png)     High
+
 # UML class diagram
 
 ![AbstractFactory](Pictures/DesignPatterns/iterator.gif)

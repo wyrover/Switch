@@ -7,6 +7,8 @@
 
 Encapsulate a request as an object, thereby letting you parameterize clients with different requests, queue or log requests, and support undoable operations.
 
+Usage     ![Usage](Pictures/Usage4.png)     Medium high
+
 # UML class diagram
 
 ![AbstractFactory](Pictures/DesignPatterns/command.gif)
