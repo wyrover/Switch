@@ -2,6 +2,7 @@
 /// @brief Contains Switch::System::Single struct.
 #pragma once
 
+#include <limits>
 #include "Object.hpp"
 #include "../Property.hpp"
 #include "../Types.hpp"

@@ -2,6 +2,7 @@
 /// @brief Contains Switch::System::UInt64 struct.
 #pragma once
 
+#include <limits>
 #include "Object.hpp"
 #include "../Types.hpp"
 #include "_String.hpp"

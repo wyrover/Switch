@@ -25,7 +25,7 @@ void Native::ApplicationApi::Exit() {
 
 void Native::ApplicationApi::MessageLoop(const System::Windows::Forms::Form& mainForm, EventHandler idle) {
   Glib::signal_idle().connect(_delegate {
-    idle.Invoke(object(), EventArgs::Empty);
+    idle.Invoke(object(), EventArgs::Empty());
     return mainForm.Visible() && !idle.IsEmpty();
   });
   exitCode = __application__->run(as<Gtk::Window>(((Native::IWidget*)mainForm.Handle())->ToWidget()));
