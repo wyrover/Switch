@@ -11,7 +11,7 @@ Usage     ![Usage](Pictures/Usage4.png)     Medium high
 
 # UML class diagram
 
-![AbstractFactory](Pictures/DesignPatterns/composite.gif)
+![AbstractFactory](Diagrams/UML/DesignPatterns/Composite.png)
 
 # Sample code
 

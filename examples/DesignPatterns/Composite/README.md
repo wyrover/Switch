@@ -7,4 +7,4 @@ Compose objects into tree structures to represent part-whole hierarchies. Compos
 Usage     ![Usage](../../../docs/Pictures/Usage4.png)     Medium high
 
 ## UML class diagram
-![GitHub Logo](../../../docs/Pictures/DesignPatterns/composite.gif)
+![GitHub Logo](../../../docs/Diagrams/UML/DesignPatterns/Composite.png)

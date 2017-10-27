@@ -1,0 +1,39 @@
+@startuml
+
+skinparam classBackgroundColor white
+skinparam classBorderColor black
+skinparam classArrowColor black
+skinparam noteBackgroundColor white
+skinparam noteBorderColor black
+
+class Client
+
+class Component {
+  +Operation()
+  +Add(in Component)
+  +Remove(in Component)
+  +GetChild(in index : int)
+}
+
+class Composite {
+  +Operation()
+  +Add(in Component)
+  +Remove(in Component)
+  +GetChild(in index : int)
+}
+
+note left of Composite::Operation
+  foreach child in children
+    child.Operation()
+end note
+
+class Leaf {
+  +Operation()
+}
+
+Client --> Component
+Component <|-- Leaf
+Component <--o Composite : children
+Component <|-- Composite
+
+@enduml

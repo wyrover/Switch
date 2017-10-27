@@ -12,7 +12,7 @@ class Director {
 
 note left of Director::Construct
   foreach item in structure
-  builder.BuildPart()
+    builder.BuildPart()
 end note
 
 abstract Builder {
