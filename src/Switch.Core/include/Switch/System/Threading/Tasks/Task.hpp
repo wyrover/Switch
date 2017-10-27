@@ -533,7 +533,7 @@ namespace Switch { namespace System { namespace Threading { namespace Tasks {
   TaskFactory& Task<TResult>::Factory() {
     static TaskFactory taskFactory;
     return taskFactory;
-  };
+  }
 }}}}
 /// @endcond
 

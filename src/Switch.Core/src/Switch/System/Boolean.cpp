@@ -10,12 +10,12 @@ constexpr bool Boolean::True;
 const String& Boolean::FalseString() {
   static const string falseString = "False";
   return falseString;
-};
+}
 
 const String& Boolean::TrueString() {
   static const string trueString = "True";
   return trueString;
-};
+}
 
 bool Boolean::Parse(const String& str) {
   bool value;

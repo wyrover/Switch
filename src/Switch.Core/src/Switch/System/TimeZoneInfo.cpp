@@ -87,7 +87,7 @@ const TimeZoneInfo& TimeZoneInfo::Local() {
 
 const TimeZoneInfo& TimeZoneInfo::Utc() {
   return utc;
-};
+}
 
 const Collections::Generic::List<TimeZoneInfo>& TimeZoneInfo::GetSystemTimeZones() {
   FillSystemTimeZones(systemTimeZones);
