@@ -15,6 +15,6 @@ case "$OSTYPE" in
   *"LinuxMint"*) ./scripts/install/install_mint_clang.sh;;
   *"RedHat"*) ./scripts/install/install_redhat_clang.sh;;
   *"Suze"*) ./scripts/install/install_suze_clang.sh;;
-  *"Ubuntu"*) ./scripts/install/install_ubuntu_gcc.sh;;
+  *"Ubuntu"*) ./scripts/install/install_ubuntu_clang.sh;;
   *) ./scripts/install/install_linux_clang.sh;;
 esac

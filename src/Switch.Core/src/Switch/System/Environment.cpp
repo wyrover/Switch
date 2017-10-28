@@ -13,6 +13,7 @@
 #include "../../../include/Switch/System/IO/Directory.hpp"
 #include "../../../include/Switch/System/IO/DirectoryNotFoundException.hpp"
 #include "../../../include/Switch/System/Diagnostics/StackTrace.hpp"
+#include "../../../include/Switch/System/String.hpp"
 #include "../../../include/Switch/System/SystemException.hpp"
 #include "../../../include/Switch/System/Threading/Thread.hpp"
 #include "../../../include/Switch/System/Threading/AbandonedMutexException.hpp"
