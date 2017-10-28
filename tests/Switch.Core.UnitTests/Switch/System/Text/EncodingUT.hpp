@@ -1,3 +1,5 @@
+#pragma once
+
 #include <Switch/System/Array.hpp>
 #include <Switch/System/Collections/Generic/List.hpp>
 #include <Switch/System/Text/Encoding.hpp>

@@ -29,7 +29,7 @@ namespace SwitchUnitTests {
    
     void GetCurrentExceptionOnNullExceptionThenRethrow() {
       ExceptionPtr ep;
-      _using() {
+      {
         ep = ExceptionPtr::CurrentException();
       }
       Assert::IsTrue(ep == null, _caller);
@@ -38,7 +38,7 @@ namespace SwitchUnitTests {
     
     void GetCurrentExceptionOnKnownExceptionThenRethrow() {
       ExceptionPtr ep;
-      _using() {
+      {
         try {
           throw InvalidOperationException();
         } catch(...) {
@@ -52,7 +52,7 @@ namespace SwitchUnitTests {
     void GetCurrentExceptionOnUnknownExceptionThenRethrow() {
       struct MyException {};
       ExceptionPtr ep;
-      _using() {
+      {
         try {
           throw MyException();
         } catch(...) {

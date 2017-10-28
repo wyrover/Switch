@@ -1860,7 +1860,7 @@ namespace Switch {
       /// @param value int32 to convert
       /// @return void* A new void* object converted from value
 	    static const void* ToIntPtr(int32 value) {
-        return reinterpret_cast<const char*>(value);
+        return reinterpret_cast<const char*>(static_cast<int64>(value));
       }
 
       /// @brief Convert int64 to void*

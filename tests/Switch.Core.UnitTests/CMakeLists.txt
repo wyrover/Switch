@@ -1,5 +1,9 @@
 project(witch.Core.UnitTests)
 
+if (MSVC)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /bigobj")
+endif()
+
 set(SOURCE_FILES
   Switch/Microsoft/Win32/RegistryKeyUT.cpp
   Switch/Microsoft/Win32/RegistryUT.cpp

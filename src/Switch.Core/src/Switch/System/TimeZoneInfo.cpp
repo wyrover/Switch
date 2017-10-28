@@ -62,8 +62,7 @@ namespace {
 int daylight = 0;
 long timezone = 0;
 char* tzname[2] = {"Local", "Local"};
-//void __cdecl tzset(void) {}
-__declspec(dllimport) void __cdecl tzset(void);
+#define tzset _tzset
 #endif
 
 const TimeZoneInfo& TimeZoneInfo::Local() {
