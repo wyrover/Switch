@@ -787,7 +787,7 @@ namespace SwitchUnitTests {
     
     void Int32AsByte() {
       int32 a = 42;
-      byte b = as<int32>(a);
+      byte b = as<byte>(a);
       Assert::AreEqual(42, b, _caller);
     }
     

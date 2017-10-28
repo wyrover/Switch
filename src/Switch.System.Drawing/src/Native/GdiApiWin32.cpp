@@ -62,7 +62,7 @@ void Native::GdiApi::DrawRectangle(intptr handle, const System::Drawing::Pen& pe
 
 void Native::GdiApi::FillPie(intptr handle, const System::Drawing::Brush& brush, int32 x, int32 y, int32 w, int32 h, float startAngle, float sweepAngle) {
   RECT rect { x, y, x+w, y+h };
-  Pie((HDC)handle, x,y, w, h, startAngle,sweepAngle, startAngle,sweepAngle);
+  Pie((HDC)handle, x,y, w, h, (int32)startAngle, (int32)sweepAngle, (int32)startAngle, (int32)sweepAngle);
 }
 
 void Native::GdiApi::FillRectangle(intptr handle, const System::Drawing::Brush& brush, int32 x, int32 y, int32 w, int32 h) {

@@ -13,7 +13,7 @@ using namespace System::Drawing;
 namespace {
   LOGFONT CreateLOGFONTWithNameAndCharSet(const string& name, int32 charSet) {
     LOGFONT logFont;
-    logFont.lfCharSet = charSet;
+    logFont.lfCharSet = (byte)charSet;
     wcscpy(logFont.lfFaceName, name.w_str().c_str());
     logFont.lfPitchAndFamily = 0;
     return logFont;

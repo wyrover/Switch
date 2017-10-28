@@ -29,7 +29,7 @@ namespace {
 }
 
 bool Native::ThreadApi::Cancel(intptr handle) {
-  return TerminateThread((HANDLE)handle, -1) != FALSE;
+  return TerminateThread((HANDLE)handle, (DWORD)-1) != FALSE;
 }
 
 intptr Native::ThreadApi::GetCurrent() {

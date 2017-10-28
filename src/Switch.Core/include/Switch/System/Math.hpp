@@ -34,8 +34,13 @@ namespace Switch {
       /// @brief Returns the absolute value of a double-precision floating-point number
       /// @param value A number in the range double::MinValue <= value <= double::MaxValue
       /// @return double A double-precision floating-point number, x, such that 0 <= x <= double::MaxValue
-      static double Abs(double value) {return value < 0 ? -value : value;}
-      
+      static decimal Abs(decimal value) { return value < 0 ? -value : value; }
+
+      /// @brief Returns the absolute value of a double-precision floating-point number
+      /// @param value A number in the range double::MinValue <= value <= double::MaxValue
+      /// @return double A double-precision floating-point number, x, such that 0 <= x <= double::MaxValue
+      static double Abs(double value) { return value < 0 ? -value : value; }
+
       /// @brief Returns the absolute value of a 16-bit signed integer.
       /// @param value A number in the range int16::MinValue < value <= int16::MaxValue
       /// @return int16 A 16-bit signed integer, x, such that 0 <= x <= int16::MaxValue
@@ -123,7 +128,12 @@ namespace Switch {
       /// @param b The second int32 to multiply.
       /// @return int64 The int64 containing the product of the specified numbers.
       static int64 BigMul(int32 a, int32 b) {return as<int64>(a) * as<int64>(b);}
-      
+
+      /// @brief Returns the smallest integer greater than or equal to the specified double-precision floating-point number.
+      /// @param value A double-precision floating-point number.
+      /// @return double The smallest integer greater than or equal to value. If value is equal to NaN, NegativeInfinity, or PositiveInfinity, that value is returned.
+      static decimal Ceiling(decimal value);
+
       /// @brief Returns the smallest integer greater than or equal to the specified double-precision floating-point number.
       /// @param value A double-precision floating-point number.
       /// @return double The smallest integer greater than or equal to value. If value is equal to NaN, NegativeInfinity, or PositiveInfinity, that value is returned.
@@ -163,6 +173,11 @@ namespace Switch {
       /// @param value A number specifying a power.
       /// @return double The number e raised to the power d. If value equals NaN or PositiveInfinity, that value is returned. If value equals NegativeInfinity, 0 is returned.
       static double Exp(double value);
+
+      /// @brief Returns the largest integer less than or equal to the specified decimal number.
+      /// @param value A double-precision floating-point number.
+      /// @return  double The largest integer less than or equal to value.
+      static decimal Floor(decimal value);
 
       /// @brief Returns the largest integer less than or equal to the specified decimal number.
       /// @param value A double-precision floating-point number.
@@ -238,13 +253,19 @@ namespace Switch {
       /// @param b The second of two 8-bit unsigned integers to compare.
       /// @return Parameter a or b, whichever is larger.
       static byte Max(byte a, byte b) {return a > b ? a : b;}
-      
+
       /// @brief Returns the larger of two double single.
       /// @param a The first of two double single to compare.
       /// @param b The second of two double single to compare.
       /// @return Parameter a or b, whichever is larger.
-      static double Max(double a, double b) {return a > b ? a : b;}
-      
+      static decimal Max(decimal a, decimal b) { return a > b ? a : b; }
+
+      /// @brief Returns the larger of two double single.
+      /// @param a The first of two double single to compare.
+      /// @param b The second of two double single to compare.
+      /// @return Parameter a or b, whichever is larger.
+      static double Max(double a, double b) { return a > b ? a : b; }
+
       /// @brief Returns the larger of two 16-bit signed integers.
       /// @param a The first of two 16-bit signed integers to compare.
       /// @param b The second of two 16-bit signed integers to compare.
@@ -298,12 +319,18 @@ namespace Switch {
       /// @param b The second of two 8-bit unsigned integers to compare.
       /// @return Parameter a or b, whichever is smaller.
       static byte Min(byte a, byte b) {return a < b ? a : b;}
-      
+
       /// @brief Returns the smaller of two double single.
       /// @param a The first of two double single to compare.
       /// @param b The second of two double single to compare.
       /// @return Parameter a or b, whichever is smaller.
-      static double Min(double a, double b) {return a < b ? a : b;}
+      static decimal Min(decimal a, decimal b) { return a < b ? a : b; }
+
+      /// @brief Returns the smaller of two double single.
+      /// @param a The first of two double single to compare.
+      /// @param b The second of two double single to compare.
+      /// @return Parameter a or b, whichever is smaller.
+      static double Min(double a, double b) { return a < b ? a : b; }
 
       /// @brief Returns the smaller of two 16-bit signed integers.
       /// @param a The first of two 16-bit signed integers to compare.
@@ -381,7 +408,23 @@ namespace Switch {
       /// @brief Rounds a double-precision floating-point value to the nearest integral value.
       /// @param value A double-precision floating-point number to be rounded.
       /// @return double The integer nearest value. If the fractional component of a is halfway between two integers, one of which is even and the other odd, then the even number is returned. Note that this method returns a double instead of an integral type.
-      static double Round(double value) {return Round(value, 0);}
+      static decimal Round(decimal value) { return Round(value, 0); }
+
+      /// @brief Rounds a decimal value to a specified number of fractional digits.
+      /// @param value A double-precision floating-point number to be rounded.
+      /// @param decimals The number of decimal places in the return value.
+      /// @return The number nearest to d that contains a number of fractional digits equal to decimals.
+      static decimal Round(decimal value, int32 decimals) {
+        decimal muliplicator = 1;
+        for (int32 index = 0; index < decimals; index++)
+          muliplicator *= 10;
+        return Floor((value * muliplicator) + 0.5) / muliplicator;
+      }
+
+      /// @brief Rounds a double-precision floating-point value to the nearest integral value.
+      /// @param value A double-precision floating-point number to be rounded.
+      /// @return double The integer nearest value. If the fractional component of a is halfway between two integers, one of which is even and the other odd, then the even number is returned. Note that this method returns a double instead of an integral type.
+      static double Round(double value) { return Round(value, 0); }
 
       /// @brief Rounds a decimal value to a specified number of fractional digits.
       /// @param value A double-precision floating-point number to be rounded.
@@ -393,7 +436,22 @@ namespace Switch {
           muliplicator *= 10;
         return Floor((value * muliplicator) + 0.5) / muliplicator;
       }
-      
+
+      /// @brief Returns a value indicating the sign of a double-precision floating-point number.
+      /// @param value A signed number.
+      /// @return int32 A number that indicates the sign of value, as shown in the following table.
+      /// | Return value | Meaning                     |
+      /// |--------------|-----------------------------|
+      /// | -1           | value is less than zero.    |
+      /// | 0            | value is equal to zero.     |
+      /// | 1            | value is greater than zero. |
+      /// @exception ArithmeticException value is equal to NaN.
+      static int32 Sign(decimal value) {
+        if (Decimal::IsNaN(value))
+          throw ArithmeticException(_caller);
+        return value < 0 ? -1 : value == 0 ? 0 : 1;
+      }
+
       /// @brief Returns a value indicating the sign of a double-precision floating-point number.
       /// @param value A signed number.
       /// @return int32 A number that indicates the sign of value, as shown in the following table.
@@ -408,7 +466,7 @@ namespace Switch {
           throw ArithmeticException(_caller);
         return value < 0 ? -1 : value == 0 ? 0 : 1;
       }
-      
+
       /// @brief Returns a value indicating the sign of a 16-bit signed integer.
       /// @param value A signed number.
       /// @return int32 A number that indicates the sign of value, as shown in the following table.
@@ -503,7 +561,17 @@ namespace Switch {
       /// | NaN              | NaN              |
       /// | NegativeInfinity | NegativeInfinity |
       /// | PositiveInfinity | PositiveInfinity |
-      static double Truncate(double value) {return (value > 0) ? Floor(value) : Ceiling(value);}
+      static decimal Truncate(decimal value) { return (value > 0) ? Floor(value) : Ceiling(value); }
+
+      /// @brief Calculates the integral part of a specified double-precision floating-point number.
+      /// @param value A number to truncate.
+      /// @return The integral part of d; that is, the number that remains after any fractional digits have been discarded, or one of the values listed in the following table.
+      /// | value            | Return value     |
+      /// |------------------|------------------|
+      /// | NaN              | NaN              |
+      /// | NegativeInfinity | NegativeInfinity |
+      /// | PositiveInfinity | PositiveInfinity |
+      static double Truncate(double value) { return (value > 0) ? Floor(value) : Ceiling(value); }
     };
   }
 }

@@ -25,6 +25,10 @@ double Math::Atan2(double y, double x) {
   return Double::IsInfinity(y) && Double::IsInfinity(x) ? Double::NaN : atan2(y, x);
 }
 
+decimal Math::Ceiling(decimal value) {
+  return ceil(value);
+}
+
 double Math::Ceiling(double value) {
   return ceil(value);
 }
@@ -39,6 +43,10 @@ double Math::Cosh(double value) {
 
 double Math::Exp(double value) {
   return exp(value);
+}
+
+decimal Math::Floor(decimal value) {
+  return floor(value);
 }
 
 double Math::Floor(double value) {

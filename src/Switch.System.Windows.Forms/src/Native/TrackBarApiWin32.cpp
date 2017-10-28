@@ -68,7 +68,7 @@ void Native::TrackBarApi::SetTickStyle(const System::Windows::Forms::TrackBar& t
 }
 
 int32 Native::TrackBarApi::GetValue(const System::Windows::Forms::TrackBar& trackBar) {
-  return SendMessage((HWND)trackBar.Handle(), TBM_GETPOS, 0, 0);
+  return (int32)SendMessage((HWND)trackBar.Handle(), TBM_GETPOS, 0, 0);
 }
 
 void Native::TrackBarApi::SetValue(const System::Windows::Forms::TrackBar& trackBar) {

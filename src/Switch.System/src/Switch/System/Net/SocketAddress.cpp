@@ -10,7 +10,7 @@ using namespace System::Net;
 using namespace System::Net::Sockets;
 
 SocketAddress::SocketAddress(Sockets::AddressFamily addressFamily, int32 bufferSize) : bytes(bufferSize) {
-  this->bytes[0] = Native::SocketApi::AddressFamilyToNative(addressFamily);
+  this->bytes[0] = (byte)Native::SocketApi::AddressFamilyToNative(addressFamily);
   this->bytes[1] = 0;
 }
 

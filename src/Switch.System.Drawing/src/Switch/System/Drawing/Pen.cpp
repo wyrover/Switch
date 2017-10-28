@@ -6,7 +6,7 @@ using namespace System::Drawing;
 
 void Pen::Create() {
   this->Destroy();
-  this->pen = Native::PenApi::CreatePen(this->dashStyle, this->width, as<SolidBrush>(this->brush)().Color);
+  this->pen = Native::PenApi::CreatePen(this->dashStyle, (int32)this->width, as<SolidBrush>(this->brush)().Color);
 }
 
 void Pen::Destroy() {

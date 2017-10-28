@@ -495,7 +495,7 @@ void Control::WmPaint(Message& message) {
     this->DefWndProc(message);
   }
   Graphics graphics = Graphics::FromHwndInternal(this->handle);
-  System::Drawing::Rectangle clipRectangle(graphics.ClipBounds().Left, graphics.ClipBounds().Top, graphics.ClipBounds().Width, graphics.ClipBounds().Height);
+  System::Drawing::Rectangle clipRectangle((int32)graphics.ClipBounds().Left(), (int32)graphics.ClipBounds().Top(), (int32)graphics.ClipBounds().Width(), (int32)graphics.ClipBounds().Height());
   PaintEventArgs paintEventArgs(clipRectangle, graphics);
   this->OnPaint(paintEventArgs);
 }

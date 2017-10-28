@@ -24,7 +24,7 @@ int64 Native::InterlockedApi::CompareExchange(int64& location, int64 value, int6
 }
 
 llong Native::InterlockedApi::CompareExchange(llong& location, llong value, llong comparand) {
-  return InterlockedCompareExchange64((long long*)&location, value, comparand);
+  return InterlockedCompareExchange((llong*)&location, value, comparand);
 }
 
 void* Native::InterlockedApi::CompareExchange(void*& location, void* value, void* comparand) {
@@ -48,7 +48,7 @@ int64 Native::InterlockedApi::Exchange(int64& location, int64 value) {
 }
 
 llong Native::InterlockedApi::Exchange(llong& location, llong value) {
-  return InterlockedExchange64((long long*)&location, value);
+  return InterlockedExchange((llong*)&location, value);
 }
 
 void* Native::InterlockedApi::Exchange(void*& location, void* value) {

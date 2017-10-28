@@ -13,7 +13,6 @@ int32 Native::RegistryApi::CloseKey(intptr key) {
 
 int32 Native::RegistryApi::CreateSubKey(intptr rootKey, const string& subKey, intptr& key) {
   DWORD disposition = 0;
-  HKEY newKey = NULL;
   return RegCreateKeyEx((HKEY)rootKey, subKey.w_str().c_str(), 0, NULL, REG_OPTION_NON_VOLATILE, KEY_ALL_ACCESS | KEY_CREATE_SUB_KEY, NULL, (PHKEY)&key, &disposition);
 }
 

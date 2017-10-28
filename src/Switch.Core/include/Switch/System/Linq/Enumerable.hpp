@@ -39,7 +39,7 @@ namespace Switch {
         template<typename TSource>
         static TSource Agregate(const Collections::Generic::IEnumerable<TSource>& source, const System::Func<const TSource&, const TSource&, TSource>& func)  {
           int nb = 0;
-          TSource agregated;
+          TSource agregated {};
           for (TSource item : source) {
             if (nb++ == 0)
               agregated = item;

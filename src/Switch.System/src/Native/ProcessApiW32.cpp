@@ -21,7 +21,7 @@ intptr Native::ProcessApi::Start(const System::Diagnostics::ProcessStartInfo& pr
   //  System::Console::WriteLine(value);
 
   const char* const vars[] = {"Var1=MyVariable1", "Var2=MyVariable2", null};
-  const char* const* vars2 = environmentVariables.Data();
+  //const char* const* vars2 = environmentVariables.Data();
   const char* const* vars3 = vars;
 
   STARTUPINFO startupInfo;
@@ -39,7 +39,7 @@ bool Native::ProcessApi::Close(intptr handle) {
 }
 
 bool Native::ProcessApi::Kill(intptr handle) {
-  return TerminateProcess((HANDLE)handle, -1) != FALSE;
+  return TerminateProcess((HANDLE)handle, (uint32)-1) != FALSE;
 }
 
 intptr Native::ProcessApi::GetCurrent() {
