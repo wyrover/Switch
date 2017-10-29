@@ -10,6 +10,10 @@ option(BUILD_SWITCH_TUNIT_EXAMPLES "Build Switch.TUnit examples" ON)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
+if(NOT CMAKE_DEBUG_POSTFIX)
+  set(CMAKE_DEBUG_POSTFIX d)
+endif()
+
 if ("${CMAKE_BUILD_TYPE}" STREQUAL "")
   set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR})
 else ()
@@ -68,3 +72,12 @@ if (BUILD_SWITCH_TUNIT_EXAMPLES)
 else()
   message(STATUS "  [ ] Switch.TUnit")
 endif()
+
+message(STATUS "Compiler [${CMAKE_CXX_COMPILER_ID}]")
+message(STATUS "System [${CMAKE_SYSTEM}]")
+if (NOT CMAKE_BUILD_TYPE)
+  message(STATUS "Build type [{null}]")
+else()
+  message(STATUS "Build type [${CMAKE_BUILD_TYPE}]")
+endif()
+message(STATUS "Install prefix [${CMAKE_INSTALL_PREFIX}]")
