@@ -13,10 +13,6 @@ option(BUILD_TESTS "Build tests" OFF)
 
 enable_testing()
 
-if (MSVC)
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP")
-endif()
-
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 if(NOT CMAKE_DEBUG_POSTFIX)
