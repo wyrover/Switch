@@ -1,5 +1,7 @@
 #if defined(_WIN32)
 
+#define UNICODE
+
 #include <windows.h>
 #include <Windowsx.h>
 #include <Uxtheme.h>

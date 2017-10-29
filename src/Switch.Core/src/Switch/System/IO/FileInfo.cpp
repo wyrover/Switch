@@ -1,3 +1,5 @@
+#define _CRT_SECURE_NO_WARNINGS
+
 #include "../../../../include/Switch/Types.hpp"
 #include "../../../../include/Switch/System/IO/FileInfo.hpp"
 #include "../../../../include/Switch/System/Security/SecurityException.hpp"

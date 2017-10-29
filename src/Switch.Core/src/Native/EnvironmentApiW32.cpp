@@ -1,5 +1,7 @@
 #if defined(_WIN32)
 
+#define _CRT_SECURE_NO_WARNINGS
+
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
