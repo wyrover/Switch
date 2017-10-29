@@ -44,7 +44,7 @@ script:
   - cd ..
   - cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=ON ..
   - make all -j6
-  #- ./Release/Switch.Core.UnitTests
+  - ./Release/Switch.Core.UnitTests
   #- ./Release/Switch.System.UnitTests
   #- ./Release/Switch.System.Drawing.UnitTests
   #- ./Release/Switch.System.Windows.Forms.UnitTests
