@@ -35,7 +35,7 @@ target_include_directories(call_stack PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_S
 add_custom_command(TARGET call_stack POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:call_stack> ${CMAKE_HOME_DIRECTORY}/../lib/$<TARGET_FILE_NAME:call_stack>)
 
 install(EXPORT call_stack DESTINATION cmake)  
-install(FILES call_stackConfig.cmake DESTINATION cmake)
+install(FILES ./call_stackConfig.cmake DESTINATION cmake)
 install(TARGETS call_stack EXPORT call_stack DESTINATION lib)
 install (FILES ${INCLUDE_FILES} DESTINATION include/call_stack)
 if(MSVC)

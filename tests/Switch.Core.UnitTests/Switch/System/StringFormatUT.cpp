@@ -203,7 +203,7 @@ TEST(String, Format_Pointer) {
   EXPECT_EQ("ffff        ", String::Format("{0,-12:x}", ptr));
   EXPECT_EQ("    0000ffff", String::Format("{0,12:x8}", ptr));
   int32* ptr2 = (int32*)0x0FFFFFFF;
-  EXPECT_EQ("0FFFFFFF", String::Format("{0:X}", ptr2));
+  EXPECT_EQ("FFFFFFF", String::Format("{0:X}", ptr2));
 }
 
 /*
