@@ -11,7 +11,7 @@ Usage     ![Usage](Pictures/Usage3.png)     Medium
 
 # UML class diagram
 
-![AbstractFactory](Pictures/DesignPatterns/decorator.gif)
+![AbstractFactory](Diagrams/UML/DesignPatterns/Decorator.png)
 
 # Sample code
 

@@ -1,0 +1,23 @@
+@startuml
+
+skinparam classBackgroundColor white
+skinparam classBorderColor black
+skinparam classArrowColor black
+skinparam noteBackgroundColor white
+skinparam noteBorderColor black
+
+class Facade
+
+package Subsystem <<Folder>> {
+  class SubSystemFour
+  class SubSystemThree
+  class SubSystemTwo
+  class SubSystemOne
+}
+
+Facade --> SubSystemOne
+Facade --> SubSystemTwo
+Facade --> SubSystemThree
+Facade --> SubSystemFour
+
+@enduml

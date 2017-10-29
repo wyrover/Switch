@@ -1,0 +1,46 @@
+@startuml
+
+skinparam classBackgroundColor white
+skinparam classBorderColor black
+skinparam classArrowColor black
+skinparam noteBackgroundColor white
+skinparam noteBorderColor black
+
+abstract Component {
+  +Operation()
+}
+
+class ConcreteComponent {
+  +Operation()
+}
+
+abstract Decorator {
+  +Operation()
+}
+
+note left of Decorator::Operation
+  component Operation()
+end note
+
+class ConcreteDecoratorA {
+  -addedState
+  +Operation()
+}
+
+class ConcreteDecoratorB {
+  +Operation()
+  +AddedBehavior()
+}
+
+note left of ConcreteDecoratorB::Operation
+  Decorator::Operation();
+  AddedBehavior();
+end note
+
+Component <|-- ConcreteComponent
+Component <|-- Decorator
+Decorator <|-- ConcreteDecoratorA
+Decorator <|-- ConcreteDecoratorB
+Component <--o Decorator : component
+
+@enduml

@@ -11,7 +11,7 @@ Usage     ![Usage](Pictures/Usage5.png)     High
 
 # UML class diagram
 
-![AbstractFactory](Pictures/DesignPatterns/facade.gif)
+![AbstractFactory](Diagrams/UML/DesignPatterns/Facade.png)
 
 # Sample code
 
