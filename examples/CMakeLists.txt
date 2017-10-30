@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.2)
 
-project(Examples VERSION 0.2.0)
+project(Examples)
 
 option(BUILD_DESIGN_PATTERNS_EXAMPLES "Build DesignPatterns examples" ON)
 option(BUILD_SWITCH_SYSTEM_EXAMPLES "Build Switch.System examples" ON)
