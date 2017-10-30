@@ -11,6 +11,8 @@ namespace Switch {
     /// @brief The System::IO namespace contains types that allow reading and writing to files and data streams, and types that provide basic file and directory support.
     namespace IO {
       /// @brief Thrown when an error occurs within a named pipe.
+        /// @par Library
+        /// Switch.System.ServiceModel
       class _export PipeException : public IOException {
       public:
         /// @brief Create a new instance of class PipeException
