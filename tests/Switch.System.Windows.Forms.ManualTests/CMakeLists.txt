@@ -1,5 +1,4 @@
 project(Switch.System.Windows.Forms.ManualTests)
-set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 GroupSources(.)
 

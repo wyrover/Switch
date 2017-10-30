@@ -26,7 +26,8 @@ else()
   set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/${CMAKE_BUILD_TYPE})
 endif()
 
-include(scripts/cmake/Project.cmake)
+include(scripts/cmake/MakeLibraryProject.cmake)
+include(scripts/cmake/MakeTestProject.cmake)
 include(scripts/cmake/SwitchDependencies.cmake)
 
 file(WRITE src/Switch.Core/src/Native/EnvironmentVersionApi.cpp "#include \"Api.hpp\"\n\nSystem::Version Native::EnvironmentApi::GetVersion() {\n  return System::Version::Parse(\"${Switch_VERSION}\");\n}\n")

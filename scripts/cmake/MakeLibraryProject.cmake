@@ -17,7 +17,7 @@ macro(GroupSources mainDir)
   endforeach()
 endmacro()
 
-macro(MakeProject)
+macro(MakeLibraryProject)
   file(GLOB_RECURSE SOURCE_FILES "*.hpp" "*.cpp")
 
   if (APPLE)
