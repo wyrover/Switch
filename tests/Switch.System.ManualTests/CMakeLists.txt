@@ -1,7 +1,4 @@
 project(Switch.System.ManualTests)
-
-GRoupSources(.)
-
-add_executable(Switch.System.ManualTests Main.cpp)
-set_target_properties(Switch.System.ManualTests PROPERTIES FOLDER tests)
-target_link_libraries(Switch.System.ManualTests Switch.System)
+add_executable(${PROJECT_NAME} Main.cpp)
+set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER tests)
+target_link_libraries(${PROJECT_NAME} Switch.System)
