@@ -19,7 +19,7 @@ UIntPtr::UIntPtr(const UInt64& value) {
   if (Size == 4 && value > UInt32::MaxValue)
     throw OverflowException(_caller);
 
-  this->value = (uint64)value;
+  this->value = (uintptr)value;
 }
 
 UIntPtr::UIntPtr(uintptr value) {

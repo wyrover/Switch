@@ -16,7 +16,7 @@ using namespace System::Windows::Forms;
 #if _WIN64
 Dictionary<int64, intptr(__stdcall*)(HWND, uint32, uintptr, int64)> Native::WindowProcedure::DefWindowProcs;
 #else
-Dictionary<int64, long(__stdcall*)(HWND, uint32, uint32, long)> WindowProcedure::DefWindowProcs;
+Dictionary<int64, long(__stdcall*)(HWND, uint32, uint32, long)> Native::WindowProcedure::DefWindowProcs;
 #endif
 //Dictionary<intptr, WNDPROC> WindowProcedure::DefWindowProcs;
 

@@ -18,7 +18,7 @@ IntPtr::IntPtr(const Int64& value) {
   if (Size == 4 && (value < Int32::MinValue || value > Int32::MaxValue))
     throw OverflowException(_caller);
 
-  this->value = (int64)value;
+  this->value = (intptr)value;
 }
 
 IntPtr::IntPtr(intptr value) {
