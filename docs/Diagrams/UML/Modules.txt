@@ -1,0 +1,29 @@
+@startuml
+
+skinparam classBackgroundColor white
+skinparam classBorderColor black
+skinparam classArrowColor black
+skinparam noteBackgroundColor white
+skinparam noteBorderColor black
+skinparam componentBackgroundColor white
+skinparam componentBorderColor black
+
+[Switch.TUnit.Main] <<static lib>> #eeeeee
+[Switch.TUnit.Core] <<static lib>> #eeeeee
+[Switch.System.Drawing] <<static lib>> #ebfdd1
+[Switch.System.Windows.Forms] <<static lib>> #f8cecd
+[Switch.System.ServiceModel] <<static lib>> #d0e5fc
+[Switch.System.Core] <<static lib>> #d0e5fc
+[Switch.System] <<static lib>> #d0e5fc
+[Switch.Core] <<static lib>> #fffed1
+
+Switch.Core <.. Switch.TUnit.Core
+Switch.Core <.. Switch.System
+Switch.System <.. Switch.System.Core
+Switch.System <.. Switch.System.ServiceModel
+Switch.System <.. Switch.System.Drawing
+Switch.System.Drawing <.. Switch.System.Windows.Forms
+Switch.System.Core <.. Switch.System.Windows.Forms
+Switch.TUnit.Core <.. Switch.TUnit.Main
+
+@enduml

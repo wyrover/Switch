@@ -1,0 +1,126 @@
+@startuml
+
+skinparam classBackgroundColor white
+skinparam classBorderColor black
+skinparam classArrowColor black
+skinparam noteBackgroundColor white
+skinparam noteBorderColor black
+
+package Switch <<Folder>> {
+  package Switch::TUnit <<Folder>> {
+    package Switch::TUnit::Is <<Folder>> {
+    }
+
+    package Switch::TUnit::Constraints <<Folder>> {
+    }
+  }
+ 
+
+  package Switch::System <<Folder>> { 
+    together {
+      package Switch::System::Windows <<Folder>> {
+        package Switch::System::Windows::Forms <<Folder>> {
+          package Switch::System::Windows::Forms::VisualStyles <<Folder>> {
+          }
+        }
+      }
+    
+      package Switch::System::Threading <<Folder>> {
+        package Switch::System::Threading::Tasks <<Folder>> {
+        }
+      }
+    
+      package Switch::System::Text <<Folder>> {
+      }
+    
+      package Switch::System::Security <<Folder>> {
+      }
+    }
+    
+    together {
+      package Switch::System::Runtime <<Folder>> {
+        package Switch::System::Runtime::Serialization <<Folder>> {
+        }
+      
+        package Switch::System::Runtime::CompilerServices <<Folder>> {
+        }
+      }
+    
+      package Switch::System::Net <<Folder>> {      
+        package Switch::System::Net::WebSockets <<Folder>> {
+        }
+
+        package Switch::System::Net::Sockets <<Folder>> {
+        }
+      }
+    }
+    
+    together {
+      package Switch::System::Media <<Folder>> {
+      }
+    
+      package Switch::System::Linq <<Folder>> {
+        package Switch::System::Linq::Extension <<Folder>> {
+        }
+      }
+    
+      package Switch::System::IO <<Folder>> {
+        package Switch::System::IO::Ports <<Folder>> {
+        }
+      }
+    
+      package Switch::System::Globalization <<Folder>> {
+      }
+    }
+    
+    package Switch::System::Drawing <<Folder>> {
+      package Switch::System::Drawing::Text <<Folder>> {
+      }
+
+      package Switch::System::Drawing::Imaging <<Folder>> {
+      }
+
+      package Switch::System::Drawing::Drawing2D <<Folder>> {
+      }
+    }
+    
+    together {
+      package Switch::System::Diagnostics <<Folder>> {
+      }
+    
+      package Switch::System::ComponentModel <<Folder>> {
+      }
+    }
+
+    package Switch::System::Collections <<Folder>> {
+      package Switch::System::Collections::Specialized <<Folder>> {
+      }
+
+      package Switch::System::Collections::ObjectModel <<Folder>> {
+      }
+
+      package Switch::System::Collections::Generic <<Folder>> {
+      }
+
+      package Switch::System::Collections::Concurrent <<Folder>> {
+      }
+    }
+  }
+ 
+
+  package Switch::Microsoft <<Folder>> {
+    package Switch::Microsoft::Win32 <<Folder>> {
+    }
+  }
+  
+   Switch::Microsoft::Win32 -[hidden]-> Switch::System::Security
+   Switch::System::Security -[hidden]-> Switch::System::Net::Sockets
+   Switch::System::Net::Sockets -[hidden]-> Switch::System::Globalization
+   Switch::System::Globalization -[hidden]-> Switch::System::Drawing::Drawing2D
+   Switch::System::Drawing::Drawing2D -[hidden]-> Switch::System::ComponentModel
+   Switch::System::ComponentModel -[hidden]-> Switch::System::Collections::Concurrent
+   Switch::System::Collections::Concurrent -[hidden]-> Switch::System::Collections::Specialized
+   Switch::System::Collections::Specialized -[hidden]-> Switch::TUnit::Constraints
+}
+
+@enduml
