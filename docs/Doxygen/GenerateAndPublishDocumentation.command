@@ -1,4 +1,4 @@
-echo "Generate and publish Switch Documentation version 0.3.4, copyright GAMMA Soft, 2017"
+echo "Generate and publish Switch Documentation, copyright GAMMA Soft, 2017"
 echo ""
 
 echo "Generate documentation..."

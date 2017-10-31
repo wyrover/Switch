@@ -1,2 +1,2 @@
-export switch_version=0.4.0
+export switch_version=0.4.1
 scripts/install/install.sh "$@"
