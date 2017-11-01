@@ -39,7 +39,7 @@ macro(add_subdirectory_childrens CURRENT_DIR)
   endforeach ()
 endmacro ()
 
-message(STATUS "Building Switch Examples")
+message(STATUS "Generating Switch Examples")
 if (BUILD_DESIGN_PATTERNS_EXAMPLES)
   message(STATUS "  [X] DesignPatterns")
   add_subdirectory_childrens("DesignPatterns")

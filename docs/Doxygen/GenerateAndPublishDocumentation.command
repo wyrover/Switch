@@ -1,12 +1,12 @@
 echo "Generate and publish Switch Documentation, copyright GAMMA Soft, 2017"
 echo ""
 
-echo "Generate documentation..."
+echo "Generating documentation..."
 cd ~/Projects/Switch/build
 rm -r ~/Projects/Switch/build/Help
 xcodebuild -target documentation -configuration Debug
 
-echo "Publish documentation..."
+echo "Publishing documentation..."
 cd ~/Projects/Switch-Doc
 git pull
 rm -r ~/Projects/Switch-Doc/docs
