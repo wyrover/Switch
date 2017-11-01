@@ -36,7 +36,7 @@ REM -------
 REM By default vcpkg install x86 packages. You can set system environment variable VCPKG_DEFAULT_TRIPLET=x64-windows for x64 packages.
 REM see https://github.com/Microsoft/vcpkg and https://vcpkg.readthedocs.io/en/latest/ for more informations.
 
-set switch_version=0.4.1
+set switch_version=0.4.0
 if "%1" == "/?" (
   call scripts\install\install.bat /help
 ) else (

@@ -34,7 +34,7 @@ macro(MakeLibraryProject)
 
   install(TARGETS ${PROJECT_NAME} EXPORT Switch DESTINATION lib)
 
-  if (EXISTS include/Switch)
+  if (EXISTS ${PROJECT_SOURCE_DIR}/include/Switch)
     install(DIRECTORY "include/Switch/." DESTINATION include/Switch)
   endif()
 
