@@ -1,27 +1,26 @@
 #include <Switch/Switch>
 
-using namespace System;
 using namespace TUnit;
+using namespace System;
 
 namespace UnitTests {
-  // The class DirectoryTest must be inherited from TestFixture
-  class DirectoryTest : public TestFixture {
-  protected:
+  // The class DirectoryTest must be declared with _test_fixture
+  class _test_fixture (DirectoryTest) {
     // This is the method that is called before any tests in a fixture are run.
-    void SetUp() override {
+    void _set_up(Begin)() {
       savedCurrentDirecory = Environment::CurrentDirectory;
     }
     
     // This is the method that is called after any tests in a fixture are run.
-    void TearDown() override {
+    void _tear_down (End)() {
       Environment::CurrentDirectory = savedCurrentDirecory;
     }
-    
-    void ChangeCurrentDirectoryWithDownloads() {
+
+    void _test (ChangeCurrentDirectoryWithDownloads)() {
       Assert::DoesNotThrows(_delegate {Environment::CurrentDirectory = System::IO::Path::Combine(Environment::GetFolderPath(Environment::SpecialFolder::Personal), "Downloads");}, _caller);
     }
     
-    void ChangeCurrentDirectoryWithPotatoes() {
+    void _test (ChangeCurrentDirectoryWithPotatoes)() {
       Assert::DoesNotThrows(_delegate {Environment::CurrentDirectory = System::IO::Path::Combine(Environment::GetFolderPath(Environment::SpecialFolder::Personal), "Potatoes");}, _caller);
     }
     
@@ -30,8 +29,8 @@ namespace UnitTests {
   };
 
   // Used _test to add unit test to execute at the unit test suit.
-  _test(DirectoryTest, ChangeCurrentDirectoryWithDownloads);
-  _test(DirectoryTest, ChangeCurrentDirectoryWithPotatoes);
+  _add_test (DirectoryTest, ChangeCurrentDirectoryWithDownloads);
+  _add_test (DirectoryTest, ChangeCurrentDirectoryWithPotatoes);
 }
 
 // This code produces the following output if directory Downloads exists and Potatos doesn't exist in your home direcory:
@@ -41,7 +40,7 @@ namespace UnitTests {
 //     PASSED DirectoryTest.ChangeCurrentDirectoryWithDownloads (2 ms)
 // Expected: No Exception to be thrown
 // But was:  <Switch::System::IO::DirectoryNotFoundException>
-// error: !---OMITTED---!/TestFixture/Sources/TestFixture.cpp:25
+// error: !---OMITTED---!/TestFixture/Sources/TestFixture.cpp:24
 // *** FAILED DirectoryTest.ChangeCurrentDirectoryWithPotatoes (4 ms)
 //   End 2 tests from DirectoryTest (8 ms total)
 //

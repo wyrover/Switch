@@ -42,7 +42,7 @@ namespace SwitchUnitTests {
     }
   };
   
-  _test(AsyncTest, RunningAsyncTask)
-  _test(AsyncTest, RunningAsyncTaskInt32)
-  _test(AsyncTest, RunningAsyncTaskString)
+  _add_test (AsyncTest, RunningAsyncTask)
+  _add_test (AsyncTest, RunningAsyncTaskInt32)
+  _add_test (AsyncTest, RunningAsyncTaskString)
 }

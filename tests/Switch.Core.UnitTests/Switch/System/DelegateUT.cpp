@@ -407,14 +407,14 @@ namespace {
 
   int DelegateTest::cpt = 0;
   
-  _test(DelegateTest, AddStaticMethod)
-  _test(DelegateTest, AddAndRemoveStaticMethod)
-  _test(DelegateTest, AddMemberMethod)
-  _test(DelegateTest, AddAndRemoveMemberMethod)
-  _test(DelegateTest, AddConstMemberMethod)
-  _test(DelegateTest, AddAndRemoveConstMemberMethod)
-  _test(DelegateTest, AddLambdaExpression)
-  _test(DelegateTest, AddAndRemoveLambdaExpression)
+  _add_test (DelegateTest, AddStaticMethod)
+  _add_test (DelegateTest, AddAndRemoveStaticMethod)
+  _add_test (DelegateTest, AddMemberMethod)
+  _add_test (DelegateTest, AddAndRemoveMemberMethod)
+  _add_test (DelegateTest, AddConstMemberMethod)
+  _add_test (DelegateTest, AddAndRemoveConstMemberMethod)
+  _add_test (DelegateTest, AddLambdaExpression)
+  _add_test (DelegateTest, AddAndRemoveLambdaExpression)
   
   class ClassInt {
   public:

@@ -1,4 +1,4 @@
-﻿// Internal Test (Remove comment to test...)
+// Internal Test (Remove comment to test...)
 /*
 #include <Switch/TUnit/Assert.hpp>
 #include <Switch/TUnit/TestFixture.hpp>
@@ -95,13 +95,13 @@ namespace SwitchUnitTests {
     }
   };
   
-  _test(TUnitTest, AreEqualInt32);
-  _test(TUnitTest, AreNotEqualInt32);
-  _test(TUnitTest, AreEqualtring);
-  _test(TUnitTest, AreNotEqualString);
-  _test(TUnitTest, ThrowException);
-  _test(TUnitTest, IsTrueBoolean);
-  _test(TUnitTest, ThrowArgumentNullException);
-  _test(TUnitTest, ThrowIndexOutOfRangeException);
+  _add_test (TUnitTest, AreEqualInt32);
+  _add_test (TUnitTest, AreNotEqualInt32);
+  _add_test (TUnitTest, AreEqualtring);
+  _add_test (TUnitTest, AreNotEqualString);
+  _add_test (TUnitTest, ThrowException);
+  _add_test (TUnitTest, IsTrueBoolean);
+  _add_test (TUnitTest, ThrowArgumentNullException);
+  _add_test (TUnitTest, ThrowIndexOutOfRangeException);
 }
 */

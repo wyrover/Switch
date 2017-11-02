@@ -9,10 +9,10 @@
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
   /// @brief The TUnit namespace contains a unit test framework.
-  /// @remarks This example how to use TestFixture class, Assert class and #_test method:
+  /// @remarks This example how to use TestFixture class, Assert class and #_add_test method:
   /// @include Assert.cpp
   /// @par Examples
-  /// This example how to use TestFixture class, Expect class and #_test method:
+  /// This example how to use TestFixture class, Expect class and #_add_test method:
   /// @include Expect.cpp
   namespace TUnit {
     /// @brief The ConsoleEventListener class is used to tracing execution of tests. The methods are organized in the order the corresponding events are fired.

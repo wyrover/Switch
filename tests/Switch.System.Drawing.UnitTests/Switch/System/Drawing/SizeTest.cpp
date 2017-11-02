@@ -1,4 +1,4 @@
-﻿#include <Switch/System/Drawing/Size.hpp>
+#include <Switch/System/Drawing/Size.hpp>
 #include <Switch/System/Drawing/Point.hpp>
 #include <Switch/TUnit/Assert.hpp>
 #include <Switch/TUnit/TestFixture.hpp>
@@ -81,17 +81,17 @@ namespace SwitchUnitTests {
     }
   };
   
-  _test(Size, Empty)
-  _test(Size, CreateEmpty)
-  _test(Size, CreateSizeFromWidthHeight)
-  _test(Size, CreateSizeFromEmptySize)
-  _test(Size, CreateSizeFromSize)
-  _test(Size, CreateSizeFromEmptyPoint)
-  _test(Size, CreateSizeFromPoint)
-  _test(Size, EmptySizeIsEmpty)
-  _test(Size, SizeIsEmpty)
-  _test(Size, EmptySizeToString)
-  _test(Size, SizeToString)
-  _test(Size, AddASize)
-  _test(Size, SubtractASize)
+  _add_test (Size, Empty)
+  _add_test (Size, CreateEmpty)
+  _add_test (Size, CreateSizeFromWidthHeight)
+  _add_test (Size, CreateSizeFromEmptySize)
+  _add_test (Size, CreateSizeFromSize)
+  _add_test (Size, CreateSizeFromEmptyPoint)
+  _add_test (Size, CreateSizeFromPoint)
+  _add_test (Size, EmptySizeIsEmpty)
+  _add_test (Size, SizeIsEmpty)
+  _add_test (Size, EmptySizeToString)
+  _add_test (Size, SizeToString)
+  _add_test (Size, AddASize)
+  _add_test (Size, SubtractASize)
 }

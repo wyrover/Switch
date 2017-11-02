@@ -1,24 +1,23 @@
 #include <Switch/Switch>
 
-using namespace System;
 using namespace TUnit;
+using namespace System;
 
 namespace UnitTests {
-  class UserTest : public TestFixture {
-  protected:
-    void PassedTestAreEqual() {
+  class _test_fixture (UserTest) {
+    void _test (PassedTestAreEqual)() {
       string s = "One";
       Expect::AreEqual("One", s, _caller);
     }
 
-    void FailedTestAreEqual() {
+    void _test (FailedTestAreEqual)() {
       int32 i = 42;
       Expect::AreEqual(123, i, _caller);
     }
   };
 
-  _test(UserTest, PassedTestAreEqual);
-  _test(UserTest, FailedTestAreEqual);
+  _add_test (UserTest, PassedTestAreEqual);
+  _add_test (UserTest, FailedTestAreEqual);
 }
 
 // This code produces the following output:
@@ -28,7 +27,7 @@ namespace UnitTests {
 //     PASSED UserTest.PassedTestAreEqual (0 ms)
 // Expected: 123
 // But was:  42
-// error: !---OMITTED---!/AssertAreEqual/ExpectAreEqual.cpp:16
+// error: !---OMITTED---!/AssertAreEqual/ExpectAreEqual.cpp:15
 // *** FAILED UserTest.FailedTestAreEqual (1 ms)
 //   End 2 tests from UserTest (2 ms total)
 //

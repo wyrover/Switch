@@ -103,25 +103,24 @@ HelloWorldTest.cpp:
 ```c++
 #include <Switch/Switch>
 
-using namespace System;
 using namespace TUnit;
+using namespace System;
 
 namespace UnitTests {
-  class HelloWorldTest : public TestFixture {
-  protected:
-    void CreateStringFromLiteral() {
+  class _test_fixture (HelloWorldTest) {
+    void _test (CreateStringFromLiteral)() {
       string s = "Hello, World!";
       Assert::AreEqual("Hello, World!", s);
     }
 
-    void CreateStringFromChar32Array() {
+    void _test (CreateStringFromChar32Array)() {
       string s = string(Array<char32> {'H', 'e', 'l', 'l', 'o', ',', ' ', 'W', 'o', 'r', 'l', 'd', '!'});
       Assert::AreEqual("Hello, World!", s);
     }
   };
 
-  _test (HelloWorldTest, CreateStringFromLiteral)
-  _test (HelloWorldTest, CreateStringFromChar32Array)
+  _add_test (HelloWorldTest, CreateStringFromLiteral)
+  _add_test (HelloWorldTest, CreateStringFromChar32Array)
 }
 ```
 
@@ -138,6 +137,6 @@ target_link_libraries(HelloWorldTest Switch.TUnit.Main)
 
 For more examples see [Examples](examples)
 
-# Download Switch
+# Download and install Switch
 
 Before running examples you must download and install Switch. To download and install it read [Downloads](https://gammasoft71.wixsite.com/switch/downloads) page or [Downloads.md](./docs/Downloads.md) file.

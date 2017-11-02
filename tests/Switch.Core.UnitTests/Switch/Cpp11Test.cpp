@@ -39,7 +39,7 @@ namespace SwitchUnitTests {
     }
   };
   
-  _test(Cpp11Test, Auto)
-  _test(Cpp11Test, InitializerList)
-  _test(Cpp11Test, Thread)
+  _add_test (Cpp11Test, Auto)
+  _add_test (Cpp11Test, InitializerList)
+  _add_test (Cpp11Test, Thread)
 }

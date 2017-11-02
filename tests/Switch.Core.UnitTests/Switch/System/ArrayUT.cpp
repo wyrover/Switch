@@ -131,18 +131,18 @@ namespace SwitchUnitTests {
     }
   };
   
-  _test(ArrayTest, CreateOneDimensionalArrayWithCreateInstance)
-  _test(ArrayTest, CreateOneDimensionalArrayWithCreateInstanceWithLengthArraySpecified)
-  _test(ArrayTest, CreateTwoDimensionalArrayWithCreateInstance)
-  _test(ArrayTest, CreateTwoDimensionalArrayWithCreateInstanceWithLengthArraySpecified)
-  _test(ArrayTest, CreateThreeDimensionalArrayWithCreateInstance)
-  _test(ArrayTest, CreateThreeDimensionalArrayWithCreateInstanceWithLengthArraySpecified)
-  _test(ArrayTest, CreateFourDimensionalArrayWithCreateInstance)
-  _test(ArrayTest, ConstructorEmpty)
-  _test(ArrayTest, Length)
-  _test(ArrayTest, AccessExceptions)
-  _test(ArrayTest, ConstructorFromNative)
-  _test(ArrayTest, ConstructorFromInitializerList)
+  _add_test (ArrayTest, CreateOneDimensionalArrayWithCreateInstance)
+  _add_test (ArrayTest, CreateOneDimensionalArrayWithCreateInstanceWithLengthArraySpecified)
+  _add_test (ArrayTest, CreateTwoDimensionalArrayWithCreateInstance)
+  _add_test (ArrayTest, CreateTwoDimensionalArrayWithCreateInstanceWithLengthArraySpecified)
+  _add_test (ArrayTest, CreateThreeDimensionalArrayWithCreateInstance)
+  _add_test (ArrayTest, CreateThreeDimensionalArrayWithCreateInstanceWithLengthArraySpecified)
+  _add_test (ArrayTest, CreateFourDimensionalArrayWithCreateInstance)
+  _add_test (ArrayTest, ConstructorEmpty)
+  _add_test (ArrayTest, Length)
+  _add_test (ArrayTest, AccessExceptions)
+  _add_test (ArrayTest, ConstructorFromNative)
+  _add_test (ArrayTest, ConstructorFromInitializerList)
   
   
   class MyType : public System::Object {

@@ -68,8 +68,8 @@ namespace SwitchUnitTests {
     
   };
   
-  _test(ConcurrentBagTest, Add)
-  _test(ConcurrentBagTest, GetEnumerator)
-  _test(ConcurrentBagTest, TryPeek)
-  _test(ConcurrentBagTest, TryTake)
+  _add_test (ConcurrentBagTest, Add)
+  _add_test (ConcurrentBagTest, GetEnumerator)
+  _add_test (ConcurrentBagTest, TryPeek)
+  _add_test (ConcurrentBagTest, TryTake)
 }

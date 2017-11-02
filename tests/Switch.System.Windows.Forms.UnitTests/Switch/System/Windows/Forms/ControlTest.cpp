@@ -66,8 +66,8 @@ namespace SwitchUnitTests {
     }*/
   };
   
-  _test (ControlTest, DefaultConstructor)
-  _test (ControlTest, SetBackColorToAColor)
-  _test (ControlTest, SetForeColorToAColor)
-  //_test (ControlTest, SetParentToControl)
+  _add_test (ControlTest, DefaultConstructor)
+  _add_test (ControlTest, SetBackColorToAColor)
+  _add_test (ControlTest, SetForeColorToAColor)
+  //_add_test (ControlTest, SetParentToControl)
 }

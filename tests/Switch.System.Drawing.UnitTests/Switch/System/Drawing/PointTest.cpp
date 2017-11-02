@@ -1,4 +1,4 @@
-﻿#include <Switch/System/Drawing/Point.hpp>
+#include <Switch/System/Drawing/Point.hpp>
 #include <Switch/System/Drawing/Size.hpp>
 #include <Switch/TUnit/Assert.hpp>
 #include <Switch/TUnit/TestFixture.hpp>
@@ -95,19 +95,19 @@ namespace SwitchUnitTests {
     }
   };
   
-  _test(Point, Empty)
-  _test(Point, CreateEmpty)
-  _test(Point, CreatePointFromXY)
-  _test(Point, CreatePointFromEmptyPoint)
-  _test(Point, CreatePointFromPoint)
-  _test(Point, CreatePointFromEmptySize)
-  _test(Point, CreatePointFromSize)
-  _test(Point, EmptyPointIsEmpty)
-  _test(Point, PointIsEmpty)
-  _test(Point, EmptyPointToString)
-  _test(Point, PointToString)
-  _test(Point, OffsetPoint)
-  _test(Point, OffsetAmount)
-  _test(Point, AddASize)
-  _test(Point, SubtractASize)
+  _add_test (Point, Empty)
+  _add_test (Point, CreateEmpty)
+  _add_test (Point, CreatePointFromXY)
+  _add_test (Point, CreatePointFromEmptyPoint)
+  _add_test (Point, CreatePointFromPoint)
+  _add_test (Point, CreatePointFromEmptySize)
+  _add_test (Point, CreatePointFromSize)
+  _add_test (Point, EmptyPointIsEmpty)
+  _add_test (Point, PointIsEmpty)
+  _add_test (Point, EmptyPointToString)
+  _add_test (Point, PointToString)
+  _add_test (Point, OffsetPoint)
+  _add_test (Point, OffsetAmount)
+  _add_test (Point, AddASize)
+  _add_test (Point, SubtractASize)
 }

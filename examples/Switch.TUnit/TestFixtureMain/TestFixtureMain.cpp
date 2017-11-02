@@ -2,12 +2,12 @@
 
 #include <Switch/Switch>
 
-using namespace System;
 using namespace TUnit;
+using namespace System;
 
 namespace UnitTests {
-  // The class DirectoryTest must be inherited from TestFixture
-  class UserTest : public TestFixture {
+  // The class DirectoryTest must be declared with _test_fixture
+  class _test_fixture (UserTest) {
   public:
     // The main entry point for the test application.
     static int Main(const Array<string>& args) {
@@ -18,13 +18,13 @@ namespace UnitTests {
     }
 
   protected:
-    void AnyTest() {
+    void _test (AnyTest)() {
       Assert::Null(null, _caller);
     }
   };
   
   // Used _test to add unit test to execute at the unit test suit.
-  _test(UserTest, AnyTest);
+  _add_test (UserTest, AnyTest);
 }
 
 _startup (UnitTests::UserTest)

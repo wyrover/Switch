@@ -1,4 +1,4 @@
-﻿#include <Switch/System/IO/Directory.hpp>
+#include <Switch/System/IO/Directory.hpp>
 #include <Switch/System/IO/Path.hpp>
 #include <Switch/TUnit/Assert.hpp>
 #include <Switch/TUnit/TestFixture.hpp>
@@ -47,7 +47,7 @@ namespace SwitchUnitTests {
     string workingDirectory = System::IO::Path::Combine(System::IO::Directory::GetCurrentDirectory(), "UnitTest");
   };
   
-  _test(DirectoryTest, CreateDirectory)
-  _test(DirectoryTest, CreateAndDeleteAnEmptyDirectory)
-  _test(DirectoryTest, CreateAndDeleteANonEmptyDirectory)
+  _add_test (DirectoryTest, CreateDirectory)
+  _add_test (DirectoryTest, CreateAndDeleteAnEmptyDirectory)
+  _add_test (DirectoryTest, CreateAndDeleteANonEmptyDirectory)
 }

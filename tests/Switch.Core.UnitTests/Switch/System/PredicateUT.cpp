@@ -1,4 +1,4 @@
-﻿#include <Switch/System/Predicate.hpp>
+#include <Switch/System/Predicate.hpp>
 #include <Switch/TUnit/Assert.hpp>
 #include <Switch/TUnit/TestFixture.hpp>
 
@@ -37,7 +37,7 @@ namespace {
     }
   };
   
-  _test(PrediacateTest, Static)
-  _test(PrediacateTest, Member)
-  _test(PrediacateTest, Empty)
+  _add_test (PrediacateTest, Static)
+  _add_test (PrediacateTest, Member)
+  _add_test (PrediacateTest, Empty)
 }

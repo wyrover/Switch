@@ -1,4 +1,4 @@
-﻿#include <Switch/System/Drawing/Rectangle.hpp>
+#include <Switch/System/Drawing/Rectangle.hpp>
 #include <Switch/TUnit/Assert.hpp>
 #include <Switch/TUnit/TestFixture.hpp>
 
@@ -150,20 +150,20 @@ namespace SwitchUnitTests {
     }
   };
   
-  _test(RectangleTest, Empty)
-  _test(RectangleTest, CreateEmpty)
-  _test(RectangleTest, CreateRectangleFromXYWidthHeight)
-  _test(RectangleTest, CreateRectangleFromEmptyRectangle)
-  _test(RectangleTest, CreateRectangleFromRectangle)
-  _test(RectangleTest, CreateRectangleFromEmptyPointAndEmtpySize)
-  _test(RectangleTest, CreateRectangleFromPointAndSize)
-  _test(RectangleTest, EmptyRectangleIsEmpty)
-  _test(RectangleTest, RectangleIsEmpty)
-  _test(RectangleTest, EmptyRectangleToString)
-  _test(RectangleTest, RectangleToString)
-  _test(RectangleTest, FromLTRB)
-  _test(RectangleTest, GetLeftTopRightBottom)
-  _test(RectangleTest, RectangleInflateFromXY)
-  _test(RectangleTest, RectangleInflateFromSize)
-  _test(RectangleTest, Intersect)
+  _add_test (RectangleTest, Empty)
+  _add_test (RectangleTest, CreateEmpty)
+  _add_test (RectangleTest, CreateRectangleFromXYWidthHeight)
+  _add_test (RectangleTest, CreateRectangleFromEmptyRectangle)
+  _add_test (RectangleTest, CreateRectangleFromRectangle)
+  _add_test (RectangleTest, CreateRectangleFromEmptyPointAndEmtpySize)
+  _add_test (RectangleTest, CreateRectangleFromPointAndSize)
+  _add_test (RectangleTest, EmptyRectangleIsEmpty)
+  _add_test (RectangleTest, RectangleIsEmpty)
+  _add_test (RectangleTest, EmptyRectangleToString)
+  _add_test (RectangleTest, RectangleToString)
+  _add_test (RectangleTest, FromLTRB)
+  _add_test (RectangleTest, GetLeftTopRightBottom)
+  _add_test (RectangleTest, RectangleInflateFromXY)
+  _add_test (RectangleTest, RectangleInflateFromSize)
+  _add_test (RectangleTest, Intersect)
 }
