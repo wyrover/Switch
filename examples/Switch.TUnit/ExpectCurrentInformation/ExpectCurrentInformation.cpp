@@ -1,7 +1,7 @@
 #include <Switch/Switch>
 
-using namespace System;
 using namespace TUnit;
+using namespace System;
 
 namespace UnitTests {
   class _test_fixture(UserTest) {
