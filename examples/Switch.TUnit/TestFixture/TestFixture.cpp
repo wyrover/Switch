@@ -7,12 +7,12 @@ namespace UnitTests {
   // The class DirectoryTest must be declared with _test_fixture
   class _test_fixture(DirectoryTest) {
     // This is the method that is called before any tests in a fixture are run.
-    void _set_up(Begin)() {
+    void _set_up(Init)() {
       savedCurrentDirecory = Environment::CurrentDirectory;
     }
     
     // This is the method that is called after any tests in a fixture are run.
-    void _tear_down(End)() {
+    void _tear_down(Cleanup)() {
       Environment::CurrentDirectory = savedCurrentDirecory;
     }
 

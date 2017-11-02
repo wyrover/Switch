@@ -10,14 +10,14 @@ namespace UnitTests {
       Assert::AreEqual("Hello, World!", s);
     }
     
-    void _test(CreateStringFromChar32Array)() {
-      string s = string(Array<char32> {'H', 'e', 'l', 'l', 'o', ',', ' ', 'W', 'o', 'r', 'l', 'd', '!'});
+    void _test(CreateStringFromChars)() {
+      string s = {'H', 'e', 'l', 'l', 'o', ',', ' ', 'W', 'o', 'r', 'l', 'd', '!'};
       Assert::AreEqual("Hello, World!", s);
     }
   };
   
   _add_test(HelloWorldTest, CreateStringFromLiteral)
-  _add_test(HelloWorldTest, CreateStringFromChar32Array)
+  _add_test(HelloWorldTest, CreateStringFromChars)
 }
 
 // This code produces the following output:

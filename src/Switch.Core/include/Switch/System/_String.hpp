@@ -3,6 +3,7 @@
 #pragma once
 
 #include "../__opaque_unicode_string__.hpp"
+#include "../InitializerList.hpp"
 #include "../Move.hpp"
 #include "../Property.hpp"
 #include "Object.hpp"
@@ -149,6 +150,28 @@ namespace Switch {
       /// @param c character to fill the String
       /// @param length length of the String
       explicit String(const String& strA, const String& strB);
+      
+      /// @cond
+      String(InitializerList<char> il) {
+        for (auto c : il)
+          this->string.append(c);
+      }
+      
+      String(InitializerList<char16> il) {
+        for (auto c : il)
+          this->string.append(c);
+      }
+      
+      String(InitializerList<char32> il) {
+        for (auto c : il)
+          this->string.append(c);
+      }
+      
+      String(InitializerList<wchar> il) {
+        for (auto c : il)
+          this->string.append(c);
+      }
+      /// @endcond
 
       /// @brief Return the length of String
       /// @return int32 Length of String
