@@ -48,7 +48,7 @@ private:
   int age = 0;
 };
 
-_startup (Person)
+_startup(Person)
 
 // This code produces the following output :
 //

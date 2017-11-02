@@ -54,7 +54,7 @@ namespace Switch {
   ///   }
   /// };
   ///
-  /// _startup (ThreadTest)
+  /// _startup(ThreadTest)
   ///
   /// // Output: RunMe called
   /// @endcode

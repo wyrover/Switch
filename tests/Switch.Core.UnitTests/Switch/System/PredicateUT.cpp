@@ -37,7 +37,7 @@ namespace {
     }
   };
   
-  _add_test (PrediacateTest, Static)
-  _add_test (PrediacateTest, Member)
-  _add_test (PrediacateTest, Empty)
+  _add_test(PrediacateTest, Static)
+  _add_test(PrediacateTest, Member)
+  _add_test(PrediacateTest, Empty)
 }

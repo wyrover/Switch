@@ -55,7 +55,7 @@ namespace {
     }
   };
   
-  _add_test (RandomTest, Next)
-  _add_test (RandomTest, NextWithRange0To10)
-  _add_test (RandomTest, NextBytes)
+  _add_test(RandomTest, Next)
+  _add_test(RandomTest, NextWithRange0To10)
+  _add_test(RandomTest, NextBytes)
 }

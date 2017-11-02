@@ -48,4 +48,4 @@ namespace TimerExample {
   };
 }
 
-_startup (TimerExample::Form1)
+_startup(TimerExample::Form1)

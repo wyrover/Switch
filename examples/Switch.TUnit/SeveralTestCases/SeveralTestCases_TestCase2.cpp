@@ -4,29 +4,29 @@ using namespace System;
 using namespace TUnit;
 
 namespace UnitTests {
-  class _test_fixture (TeastCase2) {
-    void _test (TestOne)() {
+  class _test_fixture(TeastCase2) {
+    void _test(TestOne)() {
       Assert::IsTrue(true, _caller);
     }
     
-    void _test (TestTwo)() {
+    void _test(TestTwo)() {
       Assert::IsFalse(false, _caller);
     }
     
-    void _test (TestThree)() {
+    void _test(TestThree)() {
       Assert::IsEmpty("", _caller);
     }
     
-    void _test (TestFour)() {
+    void _test(TestFour)() {
       Assert::IsEmpty({}, _caller);
     }
   };
   
   // Used _test to add unit test to execute at the unit test suit.
-  _add_test (TeastCase2, TestOne);
-  _add_test (TeastCase2, TestTwo);
-  _add_test (TeastCase2, TestThree);
-  _add_test (TeastCase2, TestFour);
+  _add_test(TeastCase2, TestOne);
+  _add_test(TeastCase2, TestTwo);
+  _add_test(TeastCase2, TestThree);
+  _add_test(TeastCase2, TestFour);
 }
 
 // This code produces the following output:

@@ -4,20 +4,20 @@ using namespace System;
 using namespace TUnit;
 
 namespace UnitTests {
-  class _test_fixture (TeastCase3) {
-    void _test (TestOne)() {
+  class _test_fixture(TeastCase3) {
+    void _test(TestOne)() {
       Assert::IsNull(null, _caller);
     }
     
-    void _test (TestTwo)() {
+    void _test(TestTwo)() {
       _<string> str;
       Assert::IsNull(str, _caller);
     }
   };
   
   // Used _test to add unit test to execute at the unit test suit.
-  _add_test (TeastCase3, TestOne);
-  _add_test (TeastCase3, TestTwo);
+  _add_test(TeastCase3, TestOne);
+  _add_test(TeastCase3, TestTwo);
 }
 
 // This code produces the following output:

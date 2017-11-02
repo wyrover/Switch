@@ -37,6 +37,6 @@ namespace SwitchUnitTests {
     }
   };
   
-  _add_test (InitializerListTest, CreateCollectionWithInitializerList)
-  _add_test (InitializerListTest, CreateCollectionWithInitializerListThenIterateIt)
+  _add_test(InitializerListTest, CreateCollectionWithInitializerList)
+  _add_test(InitializerListTest, CreateCollectionWithInitializerListThenIterateIt)
 }

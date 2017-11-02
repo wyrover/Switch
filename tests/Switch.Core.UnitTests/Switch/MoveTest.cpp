@@ -66,10 +66,10 @@ namespace SwitchUnitTests {
     }
  };
   
-  _add_test (MoveTest, MoveString)
-  _add_test (MoveTest, MoveArray)
-  _add_test (MoveTest, MoveBitArray)
-  _add_test (MoveTest, MoveConcurrentQueue)
-  _add_test (MoveTest, MoveConcurrentStack)
-  _add_test (MoveTest, MoveDictionary)
+  _add_test(MoveTest, MoveString)
+  _add_test(MoveTest, MoveArray)
+  _add_test(MoveTest, MoveBitArray)
+  _add_test(MoveTest, MoveConcurrentQueue)
+  _add_test(MoveTest, MoveConcurrentStack)
+  _add_test(MoveTest, MoveDictionary)
 }

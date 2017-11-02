@@ -42,4 +42,4 @@ namespace TrackBarExample {
   };
 }
 
-_startup (TrackBarExample::Form1)
+_startup(TrackBarExample::Form1)

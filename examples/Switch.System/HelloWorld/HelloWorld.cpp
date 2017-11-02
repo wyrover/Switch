@@ -11,7 +11,7 @@ namespace HelloWorld {
   };
 }
 
-_startup (HelloWorld::Program)
+_startup(HelloWorld::Program)
 
 // This code produces the following output:
 //

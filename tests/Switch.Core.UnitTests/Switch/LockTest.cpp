@@ -90,9 +90,9 @@ namespace SwitchUnitTests {
     }
   };
   
-  _add_test (LockTest, SingleLock)
-  _add_test (LockTest, DoubleLockOnDifferentObjects)
-  _add_test (LockTest, DoubleLockOnSameObject)
-  _add_test (LockTest, LockDuration)
-  _add_test (LockTest, Thread)
+  _add_test(LockTest, SingleLock)
+  _add_test(LockTest, DoubleLockOnDifferentObjects)
+  _add_test(LockTest, DoubleLockOnSameObject)
+  _add_test(LockTest, LockDuration)
+  _add_test(LockTest, Thread)
 }

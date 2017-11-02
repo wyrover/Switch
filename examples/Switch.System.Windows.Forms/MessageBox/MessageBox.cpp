@@ -36,4 +36,4 @@ namespace MessageBoxExample {
   };
 }
 
-_startup (MessageBoxExample::Form1)
+_startup(MessageBoxExample::Form1)

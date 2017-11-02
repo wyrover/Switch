@@ -37,7 +37,7 @@ namespace HelloWorld {
   };
 }
 
-_startup (HelloWorld::Program)
+_startup(HelloWorld::Program)
 ```
 
 CMakeLists.txt:
@@ -83,7 +83,7 @@ namespace HelloWorld {
   };
 }
 
-_startup (HelloWorld::Program)
+_startup(HelloWorld::Program)
 ```
 
 CMakeLists.txt:
@@ -107,20 +107,20 @@ using namespace TUnit;
 using namespace System;
 
 namespace UnitTests {
-  class _test_fixture (HelloWorldTest) {
-    void _test (CreateStringFromLiteral)() {
+  class _test_fixture(HelloWorldTest) {
+    void _test(CreateStringFromLiteral)() {
       string s = "Hello, World!";
       Assert::AreEqual("Hello, World!", s);
     }
 
-    void _test (CreateStringFromChar32Array)() {
+    void _test(CreateStringFromChar32Array)() {
       string s = string(Array<char32> {'H', 'e', 'l', 'l', 'o', ',', ' ', 'W', 'o', 'r', 'l', 'd', '!'});
       Assert::AreEqual("Hello, World!", s);
     }
   };
 
-  _add_test (HelloWorldTest, CreateStringFromLiteral)
-  _add_test (HelloWorldTest, CreateStringFromChar32Array)
+  _add_test(HelloWorldTest, CreateStringFromLiteral)
+  _add_test(HelloWorldTest, CreateStringFromChar32Array)
 }
 ```
 

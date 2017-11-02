@@ -12,7 +12,7 @@ namespace Examples {
     }
   };
   
-  _add_test (TestFixture1, Test1)
+  _add_test(TestFixture1, Test1)
   
   class Program {
   public:
@@ -23,4 +23,4 @@ namespace Examples {
   };
 }
 
-_startup (Examples::Program)
+_startup(Examples::Program)

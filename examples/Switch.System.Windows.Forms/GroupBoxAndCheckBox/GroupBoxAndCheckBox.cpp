@@ -65,4 +65,4 @@ namespace CheckBoxExample {
   };
 }
 
-_startup (CheckBoxExample::Form1)
+_startup(CheckBoxExample::Form1)

@@ -4,9 +4,9 @@ using namespace TUnit;
 using namespace System;
 
 namespace UnitTests {
-  class _test_fixture (UserTest) {
+  class _test_fixture(UserTest) {
     // With current information
-    void _test (TestWithCurrentInformation)() {
+    void _test(TestWithCurrentInformation)() {
       Assert::False(true, _caller);
     }
 
@@ -16,8 +16,8 @@ namespace UnitTests {
     }
   };
   
-  _add_test (UserTest, TestWithCurrentInformation);
-  _add_test (UserTest, TestWithoutCurrentInformation);
+  _add_test(UserTest, TestWithCurrentInformation);
+  _add_test(UserTest, TestWithoutCurrentInformation);
 }
 
 // This code produces the following output:

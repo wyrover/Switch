@@ -64,10 +64,10 @@ namespace SwitchUnitTests {
     }
   };
   
-  _add_test (ExceptionPointerTest, CreateExceptionPointerEmptyThenRethrow)
-  _add_test (ExceptionPointerTest, CreateKnownExceptionThenRethrow)
-  _add_test (ExceptionPointerTest, CreateUnknownExceptionThenRethrow)
-  _add_test (ExceptionPointerTest, GetCurrentExceptionOnNullExceptionThenRethrow)
-  _add_test (ExceptionPointerTest, GetCurrentExceptionOnKnownExceptionThenRethrow)
-  _add_test (ExceptionPointerTest, GetCurrentExceptionOnUnknownExceptionThenRethrow)
+  _add_test(ExceptionPointerTest, CreateExceptionPointerEmptyThenRethrow)
+  _add_test(ExceptionPointerTest, CreateKnownExceptionThenRethrow)
+  _add_test(ExceptionPointerTest, CreateUnknownExceptionThenRethrow)
+  _add_test(ExceptionPointerTest, GetCurrentExceptionOnNullExceptionThenRethrow)
+  _add_test(ExceptionPointerTest, GetCurrentExceptionOnKnownExceptionThenRethrow)
+  _add_test(ExceptionPointerTest, GetCurrentExceptionOnUnknownExceptionThenRethrow)
 }

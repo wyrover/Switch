@@ -4,7 +4,7 @@ using namespace System;
 using namespace TUnit;
 
 namespace UnitTests {
-  class _test_fixture (UserTest) {
+  class _test_fixture(UserTest) {
     // With your own message
     void TestWithUserMessage() {
       Expect::False(true, "true can never be equal to false", _caller);
@@ -16,8 +16,8 @@ namespace UnitTests {
     }
   };
   
-  _add_test (UserTest, TestWithUserMessage);
-  _add_test (UserTest, TestWithoutUserMessage);
+  _add_test(UserTest, TestWithUserMessage);
+  _add_test(UserTest, TestWithoutUserMessage);
 }
 
 // This code produces the following output:

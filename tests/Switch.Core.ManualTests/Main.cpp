@@ -81,17 +81,17 @@ using namespace System;
 using namespace System::Threading;
 
 namespace Examples {
-  class _test_fixture (TestFixture1) {
+  class _test_fixture(TestFixture1) {
   public:
-    void _set_up (Begin)() {
+    void _set_up(Begin)() {
       Console::WriteLine("{0}::{1}", _typeof(*this).Name, _caller.MemberNamne);
     }
     
-    void _tear_down (End)() {
+    void _tear_down(End)() {
       Console::WriteLine("{0}::{1}", _typeof(*this).Name, _caller.MemberNamne);
     }
     
-    void _test (Test1)() {
+    void _test(Test1)() {
       Console::WriteLine("{0}::{1}", _typeof(*this).Name, _caller.MemberNamne);
     }
   };
@@ -99,45 +99,45 @@ namespace Examples {
   static struct RegisteredTest1 : public TUnit::RegisteredTest {
     RegisteredTest1() : TUnit::RegisteredTest("TestFixture1::Test1", &TestFixture1::Test1) {}
   } registeredTest1;
-  //_add_test (TestFixture1::Test1)
+  //_add_test(TestFixture1::Test1)
 
-  class _test_fixture (TestFixture2) {
+  class _test_fixture(TestFixture2) {
   public:
-    void _test (Test1)() {
+    void _test(Test1)() {
       Console::WriteLine("{0}::{1}", _typeof(*this).Name, _caller.MemberNamne);
     }
     
-    void _test (Test2)() {
+    void _test(Test2)() {
       Console::WriteLine("{0}::{1}", _typeof(*this).Name, _caller.MemberNamne);
     }
   };
   
-  _add_test (TestFixture2::Test1)
-  _add_test (TestFixture2::Test2)
+  _add_test(TestFixture2::Test1)
+  _add_test(TestFixture2::Test2)
 
-  class _test_fixture (TestFixture3) {
+  class _test_fixture(TestFixture3) {
   public:
-    void _test (Test1)() {
+    void _test(Test1)() {
       Console::WriteLine("{0}::{1}", _typeof(*this).Name, _caller.MemberNamne);
     }
     
-    void _test (Test2)() {
+    void _test(Test2)() {
       Console::WriteLine("{0}::{1}", _typeof(*this).Name, _caller.MemberNamne);
     }
     
-    void _test (Test3)() {
+    void _test(Test3)() {
       Console::WriteLine("{0}::{1}", _typeof(*this).Name, _caller.MemberNamne);
     }
     
-    void _test (Test4)() {
+    void _test(Test4)() {
       Console::WriteLine("{0}::{1}", _typeof(*this).Name, _caller.MemberNamne);
     }
   };
   
-  _add_test (TestFixture3::Test1)
-  _add_test (TestFixture3::Test2)
-  _add_test (TestFixture3::Test3)
-  _add_ignore_test (TestFixture3::Test4)
+  _add_test(TestFixture3::Test1)
+  _add_test(TestFixture3::Test2)
+  _add_test(TestFixture3::Test3)
+  _add_ignore_test(TestFixture3::Test4)
 
   class Program {
   public:
@@ -150,4 +150,4 @@ namespace Examples {
   };
 }
 
-_startup (Examples::Program)
+_startup(Examples::Program)

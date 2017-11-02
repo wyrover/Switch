@@ -87,11 +87,11 @@ namespace SwitchUnitTests {
     }
   };
   
-  _add_test (PropertyReadOnlyTest, CreatePropertyAndGetItWithImplicitCastOperator)
-  _add_test (PropertyReadOnlyTest, CreatePropertyAndGetItWithGetFunction)
-  _add_test (PropertyReadOnlyTest, CreatePropertyAndGetItWithFunctor)
-  _add_test (PropertyReadOnlyTest, PropertyEqualityOperator)
-  _add_test (PropertyReadOnlyTest, PropertyInequalityOperator)
-  _add_test (PropertyReadOnlyTest, PropertyCopyConstructor)
-  _add_test (PropertyReadOnlyTest, PropertyEqualOperator)
+  _add_test(PropertyReadOnlyTest, CreatePropertyAndGetItWithImplicitCastOperator)
+  _add_test(PropertyReadOnlyTest, CreatePropertyAndGetItWithGetFunction)
+  _add_test(PropertyReadOnlyTest, CreatePropertyAndGetItWithFunctor)
+  _add_test(PropertyReadOnlyTest, PropertyEqualityOperator)
+  _add_test(PropertyReadOnlyTest, PropertyInequalityOperator)
+  _add_test(PropertyReadOnlyTest, PropertyCopyConstructor)
+  _add_test(PropertyReadOnlyTest, PropertyEqualOperator)
 }

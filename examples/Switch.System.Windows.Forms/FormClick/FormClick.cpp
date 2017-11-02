@@ -18,4 +18,4 @@ namespace FormExample {
   };
 }
 
-_startup (FormExample::FormClick)
+_startup(FormExample::FormClick)

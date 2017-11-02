@@ -14,7 +14,7 @@ namespace Examples {
   };
 }
 
-_startup (Examples::Program)
+_startup(Examples::Program)
 
 // This example produces results similar to the following if you run it on Windows 10:
 //

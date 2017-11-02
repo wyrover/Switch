@@ -42,7 +42,7 @@ namespace SwitchUnitTests {
     }
   };
   
-  _add_test (AwaitTest, RunningAsyncTaskAndAwait)
-  _add_test (AwaitTest, RunningAsyncTaskInt32AndAwait)
-  _add_test (AwaitTest, RunningAsyncTaskStringAndAwait)
+  _add_test(AwaitTest, RunningAsyncTaskAndAwait)
+  _add_test(AwaitTest, RunningAsyncTaskInt32AndAwait)
+  _add_test(AwaitTest, RunningAsyncTaskStringAndAwait)
 }

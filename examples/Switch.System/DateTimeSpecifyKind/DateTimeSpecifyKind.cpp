@@ -91,7 +91,7 @@ namespace Examples {
   const string Program::datePatt = "%m/%d/%Y %r";
 }
 
-_startup (Examples::Program)
+_startup(Examples::Program)
 
 // This code produces the following output:
 //

@@ -54,11 +54,11 @@ namespace {
     }
   };
 
-  _add_test (VersionTest, CreateVersionWithDefaultConstructor)
-  _add_test (VersionTest, CreateVersionWithSpecifiedMajorAndMinor)
-  _add_test (VersionTest, CreateVersionWithSpecifiedMajorMinorAndRevision)
-  _add_test (VersionTest, CreateVersionWithSpecifiedMajorMinorRevisionAndBuild)
-  _add_test (VersionTest, CreateVersionWithSpecifiedMajorMinorRevisionAndBuildToZero)
+  _add_test(VersionTest, CreateVersionWithDefaultConstructor)
+  _add_test(VersionTest, CreateVersionWithSpecifiedMajorAndMinor)
+  _add_test(VersionTest, CreateVersionWithSpecifiedMajorMinorAndRevision)
+  _add_test(VersionTest, CreateVersionWithSpecifiedMajorMinorRevisionAndBuild)
+  _add_test(VersionTest, CreateVersionWithSpecifiedMajorMinorRevisionAndBuildToZero)
 
   TEST(Version, Constructor) {
     EXPECT_EQ(Version().ToString(), "0.0");
