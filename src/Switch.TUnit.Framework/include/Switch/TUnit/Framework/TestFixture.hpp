@@ -7,15 +7,62 @@
 namespace Switch {
   namespace TUnit {
     namespace Framework {
+      struct OneTimeSetUpAttribute {
+        template<typename TestFixture>
+        OneTimeSetUpAttribute(const string& name, TestFixture& testFixture, void (TestFixture::*method)()) :  OneTimeSetUpAttribute(name, testFixture, method, System::Runtime::CompilerServices::Caller()) {}
+        template<typename TestFixture>
+        OneTimeSetUpAttribute(const string& name, TestFixture& testFixture, void (TestFixture::*method)(), const System::Runtime::CompilerServices::Caller& caller) {testFixture.AddOneTimeSetUp({name, {testFixture, method}, caller});}
+      };
+      
+      struct OneTimeTearDownAttribute {
+        template<typename TestFixture>
+        OneTimeTearDownAttribute(const string& name, TestFixture& testFixture, void (TestFixture::*method)()) :  OneTimeTearDownAttribute(name, testFixture, method, System::Runtime::CompilerServices::Caller()) {}
+        template<typename TestFixture>
+        OneTimeTearDownAttribute(const string& name, TestFixture& testFixture, void (TestFixture::*method)(), const System::Runtime::CompilerServices::Caller& caller) {testFixture.AddOneTimeTearDown({name, {testFixture, method}, caller});}
+      };
+
+      struct SetUpAttribute {
+        template<typename TestFixture>
+        SetUpAttribute(const string& name, TestFixture& testFixture, void (TestFixture::*method)()) :  SetUpAttribute(name, testFixture, method, System::Runtime::CompilerServices::Caller()) {}
+        template<typename TestFixture>
+        SetUpAttribute(const string& name, TestFixture& testFixture, void (TestFixture::*method)(), const System::Runtime::CompilerServices::Caller& caller) {testFixture.AddSetUp({name, {testFixture, method}, caller});}
+      };
+      
+      struct TearDownAttribute {
+        template<typename TestFixture>
+        TearDownAttribute(const string& name, TestFixture& testFixture, void (TestFixture::*method)()) :  TearDownAttribute(name, testFixture, method, System::Runtime::CompilerServices::Caller()) {}
+        template<typename TestFixture>
+        TearDownAttribute(const string& name, TestFixture& testFixture, void (TestFixture::*method)(), const System::Runtime::CompilerServices::Caller& caller) {testFixture.AddTearDown({name, {testFixture, method}, caller});}
+      };
+      
+      struct TestAttribute {
+        template<typename TestFixture>
+        TestAttribute(const string& name, TestFixture& testFixture, void (TestFixture::*method)()) : TestAttribute(name, testFixture, method, false, System::Runtime::CompilerServices::Caller()) {}
+        template<typename TestFixture>
+        TestAttribute(const string& name, TestFixture& testFixture, void (TestFixture::*method)(), const System::Runtime::CompilerServices::Caller& caller) : TestAttribute(name, testFixture, method, false, _caller) {}
+        template<typename TestFixture>
+        TestAttribute(const string& name, TestFixture& testFixture, void (TestFixture::*method)(), bool ignore)  : TestAttribute(name, testFixture, method, ignore, System::Runtime::CompilerServices::Caller()) {}
+        template<typename TestFixture>
+        TestAttribute(const string& name, TestFixture& testFixture, void (TestFixture::*method)(), bool ignore, const System::Runtime::CompilerServices::Caller& caller) {testFixture.AddTest({name, {testFixture, method}, ignore, caller});}
+      };
+
       struct TestFixture : public object {
-        void AddOneTimeSetUp(const RegisteredMethod& registeredMethod) {this->oneTimeSetUps.Add(registeredMethod);}
+      protected:
         void AddOneTimeTearDown(const RegisteredMethod& registeredMethod) {this->oneTimeTearDowns.Add(registeredMethod);}
         void AddSetUp(const RegisteredMethod& registeredMethod) {this->setUps.Add(registeredMethod);}
         void AddTearDown(const RegisteredMethod& registeredMethod) {this->tearDowns.Add(registeredMethod);}
         void AddTest(const RegisteredMethod& registeredMethod) {this->tests.Add(registeredMethod);}
 
-      protected:
+      private:
         friend class UnitTest;
+        friend struct OneTimeSetUpAttribute;
+        friend struct OneTimeTearDownAttribute;
+        friend struct SetUpAttribute;
+        friend struct TearDownAttribute;
+        friend struct TestAttribute;
+
+        void AddOneTimeSetUp(const RegisteredMethod& registeredMethod) {this->oneTimeSetUps.Add(registeredMethod);}
+        
         System::Collections::Generic::List<RegisteredMethod> oneTimeSetUps;
         System::Collections::Generic::List<RegisteredMethod> oneTimeTearDowns;
         System::Collections::Generic::List<RegisteredMethod> setUps;
@@ -35,56 +82,51 @@ namespace Switch {
 #undef _add_test_fixture
 
 #define _one_time_set_up(methodName) \
-methodName##_one_time_set_up_unused_method() {} \
-struct methodName##_one_time_set_up { \
-  methodName##_one_time_set_up(Test_fixture_type* test) {test->AddOneTimeSetUp({#methodName, {*test, &Test_fixture_type::methodName}, _caller});} \
-} methodName##_one_time_set_up_value {this}; \
-void methodName
+struct methodName##Attribute : public TUnit::Framework::OneTimeSetUpAttribute { \
+template<typename TestFixture> methodName##Attribute(TestFixture& test) : OneTimeSetUpAttribute(#methodName, test, &TestFixture::methodName, _caller) {} \
+} __##methodName##Attribute {*this}; \
+void methodName()
 
 #define _one_time_tear_down(methodName) \
-methodName##_one_time_tear_down_unused_method() {} \
-struct methodName##_one_time_tear_down { \
-  methodName##_one_time_tear_down(Test_fixture_type* test) {test->AddOneTimeTearDown({#methodName, {*test, &Test_fixture_type::methodName}, _caller});} \
-} methodName##_one_time_tear_down_value {this}; \
-void methodName
+struct methodName##Attribute : public TUnit::Framework::OneTimeTearDownAttribute { \
+template<typename TestFixture> methodName##Attribute(TestFixture& test) : OneTimeTearDownAttribute(#methodName, test, &TestFixture::methodName, _caller) {} \
+} __##methodName##Attribute {*this}; \
+void methodName()
 
 #define _set_up(methodName) \
 methodName##_setup_unused_method() {} \
 struct methodName##_setup { \
-  methodName##_setup(Test_fixture_type* test) {test->AddSetUp({#methodName, {*test, &Test_fixture_type::methodName}, _caller});} \
-} methodName##_setup_value {this}; \
+  template<typename TestFixture> \
+  methodName##_setup(TestFixture* test) {test->AddSetUp({#methodName, {*test, &TestFixture::methodName}, _caller});} \
+} __##methodName##_setup_value {this}; \
 void methodName
 
 #define _tear_down(methodName) \
 methodName##_teardown_unused_method() {} \
 struct methodName##_teardown { \
-  methodName##_teardown(Test_fixture_type* test) {test->AddTearDown({#methodName, {*test, &Test_fixture_type::methodName}, _caller});} \
-} methodName##_teardown_value {this}; \
+  template<typename TestFixture> \
+  methodName##_teardown(TestFixture* test) {test->AddTearDown({#methodName, {*test, &TestFixture::methodName}, _caller});} \
+} __##methodName##_teardown_value {this}; \
 void methodName
 
 #define _test_fixture(className) \
-className; \
-using Test_fixture_type = className; \
 class className : public TUnit::Framework::TestFixture
 
 #define _test(methodName) \
 methodName##_test_unused_method() {} \
 struct methodName##_test { \
-  methodName##_test(Test_fixture_type* test) {test->AddTest({#methodName, {*test, &Test_fixture_type::methodName}, _caller});} \
-} methodName##_test_value {this}; \
+  template<typename TestFixture> \
+  methodName##_test(TestFixture* test) {test->AddTest({#methodName, {*test, &TestFixture::methodName}, _caller});} \
+} __##methodName##_test_value {this}; \
 void methodName
 
 #define _ignore_test(methodName) \
 methodName##_test_unused_method() {} \
 struct methodName##_test { \
-  methodName##_test(Test_fixture_type* test) {test->AddTest({#methodName, {*test, &Test_fixture_type::methodName}, true, _caller});} \
-} methodName##_test_value {this}; \
+  template<typename TestFixture> \
+  methodName##_test(TestFixture* test) {test->AddTest({#methodName, {*test, &TestFixture::methodName}, true, _caller});} \
+} __##methodName##_test_value {this}; \
 void methodName
-
-#define _add_test_fixture(className) \
-static struct className##_test_fixture { \
-  className##_test_fixture() {TUnit::Framework::UnitTest::Add({#className, ref_new<className>()});} \
-} className##_test_fixture_value;
 
 #define _add_test(className, methodName)
 
@@ -101,6 +143,3 @@ static struct className##_test_fixture { \
 #define _test_method(methodName) _test(methodName)
 
 #define _ignore_test_method(methodName) _ignore_test(methodName)
-
-#define _add_test_class(className) _add_test_fixture(className)
-

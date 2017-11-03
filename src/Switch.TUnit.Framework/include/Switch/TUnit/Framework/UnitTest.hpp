@@ -13,6 +13,7 @@ namespace Switch {
       /// @brief UnitTest is...
       class UnitTest {
       public:
+        UnitTest() {}
         UnitTest(const System::Array<string>& args) {
           this->alsoRunIgnoredTests = true;
         }
@@ -30,10 +31,13 @@ namespace Switch {
             this->OneTimeTearDown(registeredTestFixture);
           }
         }
+       
+      private:
+        template <typename TestFixture>
+        friend struct TestFixtureAttribute;
         
         static void Add(const RegisteredTestFixture& registeredTestFixture) {RegisteredTestFixtures().Add(registeredTestFixture);}
- 
-      private:
+        
         string ToString(const RegisteredTestFixture& registeredTestFixture, const RegisteredMethod& registeredMethod) {
           return string::Format("{0}{1}::{2}", registeredMethod.ignore ? "ignored " : "" , registeredTestFixture.name, registeredMethod.name);
         }
@@ -74,7 +78,18 @@ namespace Switch {
         
         bool alsoRunIgnoredTests = false;
       };
+
+      
+      template <typename TestFixture>
+      struct TestFixtureAttribute {
+        TestFixtureAttribute(const string& name ) {TUnit::Framework::UnitTest::Add({name, ref_new<TestFixture>()});} \
+      };
     }
   }
 }
+
+#define _add_test_fixture(className) \
+TUnit::Framework::TestFixtureAttribute<className> __##className##Attribute {#className};
+
+#define _add_test_class(className) _add_test_fixture(className)
 
