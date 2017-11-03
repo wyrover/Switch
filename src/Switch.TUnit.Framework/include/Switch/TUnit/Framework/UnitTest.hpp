@@ -14,9 +14,11 @@ namespace Switch {
       class UnitTest {
       public:
         UnitTest() {}
+        
         UnitTest(const System::Array<string>& args) {
           this->alsoRunIgnoredTests = true;
         }
+        
         void Run() {
           for(auto registeredTestFixture : RegisteredTestFixtures()) {
             this->OneTimeSetUp(registeredTestFixture);
@@ -70,7 +72,6 @@ namespace Switch {
           }
         }
         
-
         static System::Collections::Generic::List<TUnit::Framework::RegisteredTestFixture>& RegisteredTestFixtures() {
           static System::Collections::Generic::List<TUnit::Framework::RegisteredTestFixture> registeredTestFixtures;
           return registeredTestFixtures;
@@ -78,18 +79,8 @@ namespace Switch {
         
         bool alsoRunIgnoredTests = false;
       };
-
-      
-      template <typename TestFixture>
-      struct TestFixtureAttribute {
-        TestFixtureAttribute(const string& name ) {TUnit::Framework::UnitTest::Add({name, ref_new<TestFixture>()});} \
-      };
     }
   }
 }
 
-#define _add_test_fixture(className) \
-TUnit::Framework::TestFixtureAttribute<className> __##className##Attribute {#className};
-
-#define _add_test_class(className) _add_test_fixture(className)
-
+using namespace Switch;

@@ -27,3 +27,4 @@ namespace Switch {
   }
 }
 
+using namespace Switch;

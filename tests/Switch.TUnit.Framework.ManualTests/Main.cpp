@@ -4,7 +4,39 @@ using namespace TUnit::Framework;
 using namespace System;
 
 namespace UnitTets {
-  class _test_fixture(Test1) {
+  class Test1 : public TestFixture {
+    OneTimeSetUpAttribute __OneTimeInitAttribute {"OneTimeInit", *this, &Test1::OneTimeInit};
+    void OneTimeInit() {
+    }
+    
+    OneTimeTearDownAttribute __OneTimeCleanupAttribute {"OneTimeCleanup", *this, &Test1::OneTimeCleanup};
+    void OneTimeCleanup() {
+    }
+    
+    SetUpAttribute __InitAttribute {"Init", *this, &Test1::Init};
+    void Init() {
+    }
+    
+    TearDownAttribute __CleanupAttribute {"Cleanup", *this, &Test1::Cleanup};
+    void Cleanup() {
+    }
+    
+    TestAttribute __TestCase1Attribute {"TestCase1", *this, &Test1::TestCase1};
+    void TestCase1() {
+    }
+    
+    TestAttribute __TestCase2Attribute {"TestCase2", *this, &Test1::TestCase2};
+    void TestCase2() {
+    }
+    
+    TestAttribute __TestCase3Attribute {"TestCase3", *this, &Test1::TestCase3, TestState::Ignored};
+    void TestCase3() {
+    }
+  };
+  
+  TestFixtureAttribute<Test1> __Test1Attribute {"Test1"};
+  
+  class _test_fixture(Test2) {
     void _one_time_set_up(OneTimeInit) {
     }
 
@@ -27,9 +59,9 @@ namespace UnitTets {
     }
   };
   
-  _add_test_fixture(Test1)
+  _add_test_fixture(Test2)
 
-  class _test_class(Test2) {
+  class _test_class(Test3) {
     void _test_class_initialize(OneTimeInit) {
     }
     
@@ -52,39 +84,7 @@ namespace UnitTets {
     }
   };
   
-  _add_test_fixture(Test2)
-
-  class Test3 : public TestFixture {
-    OneTimeSetUpAttribute __OneTimeInitAttribute {"OneTimeInit", *this, &Test3::OneTimeInit};
-    void OneTimeInit() {
-    }
-    
-    OneTimeTearDownAttribute __OneTimeCleanupAttribute {"OneTimeCleanup", *this, &Test3::OneTimeCleanup};
-    void OneTimeCleanup() {
-    }
-    
-    SetUpAttribute __InitAttribute {"Init", *this, &Test3::Init};
-    void Init() {
-    }
-    
-    TearDownAttribute __CleanupAttribute {"Cleanup", *this, &Test3::Cleanup};
-    void Cleanup() {
-    }
-    
-    TestAttribute __TestCase1Attribute {"TestCase1", *this, &Test3::TestCase1};
-    void TestCase1() {
-    }
-    
-    TestAttribute __TestCase2Attribute {"TestCase2", *this, &Test3::TestCase2};
-    void TestCase2() {
-    }
-    
-    TestAttribute __TestCase3Attribute {"TestCase3", *this, &Test3::TestCase3, TestState::Ignored};
-    void TestCase3() {
-    }
-  };
-
-  TestFixtureAttribute<Test3> __Test3Attribute {"Test3"};
+  _add_test_fixture(Test3)
 
   class Program {
   public:
