@@ -1,3 +1,3 @@
 project(Switch.TUnit.Framework)
-set(LINK_LIBRARIES Switch.Core)
+set(LINK_LIBRARIES Switch.System)
 MakeLibraryProject()
