@@ -92,25 +92,23 @@
 /// @code
 /// #include <Switch/Switch>
 ///
+/// using namespace TUnit::Framework;
 /// using namespace System;
-/// using namespace TUnit;
 ///
 /// namespace UnitTests {
-///   class HelloWorldTest : public TestFixture {
-///   protected:
-///     void CreateStringFromLiteral() {
+///   class _test_fixture(HelloWorldTest) {
+///     void _test(CreateStringFromLiteral) {
 ///       string s = "Hello, World!";
 ///       Assert::AreEqual("Hello, World!", s);
 ///     }
 ///
-///     void CreateStringFromChar32Array() {
-///       string s = string(Array<char32> {'H', 'e', 'l', 'l', 'o', ',', ' ', 'W', 'o', 'r', 'l', 'd', '!'});
+///     void _test(CreateStringFromChars) {
+///       string s = {'H', 'e', 'l', 'l', 'o', ',', ' ', 'W', 'o', 'r', 'l', 'd', '!'};
 ///       Assert::AreEqual("Hello, World!", s);
 ///     }
 ///   };
 ///
-///   _test (HelloWorldTest, CreateStringFromLiteral)
-///   _test (HelloWorldTest, CreateStringFromChar32Array)
+///   _add_test_fixture(HelloWorldTest)
 /// }
 /// @endcode
 ///

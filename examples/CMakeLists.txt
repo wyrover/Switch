@@ -7,6 +7,7 @@ option(BUILD_SWITCH_SYSTEM_EXAMPLES "Build Switch.System examples" ON)
 option(BUILD_SWITCH_SYSTEM_DRAWING_EXAMPLES "Build Switch.System.Drawing examples" ON)
 option(BUILD_SWITCH_SYSTEM_WINDOWS_FORMS_EXAMPLES "Build SwitchSystem.Windows.Forms examples" ON)
 option(BUILD_SWITCH_TUNIT_EXAMPLES "Build Switch.TUnit examples" ON)
+option(BUILD_SWITCH_TUNIT_FRAMEWORK_EXAMPLES "Build Switch.TUnit.Framework examples" ON)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
@@ -71,6 +72,13 @@ if (BUILD_SWITCH_TUNIT_EXAMPLES)
   add_subdirectory_childrens("Switch.TUnit")
 else()
   message(STATUS "  [ ] Switch.TUnit")
+endif()
+
+if (BUILD_SWITCH_TUNIT_FRAMEWORK_EXAMPLES)
+  message(STATUS "  [X] Switch.TUnit.Framework")
+  add_subdirectory_childrens("Switch.TUnit.Framework")
+else()
+  message(STATUS "  [ ] Switch.TUnit.Framework")
 endif()
 
 message(STATUS "Compiler [${CMAKE_CXX_COMPILER_ID}]")

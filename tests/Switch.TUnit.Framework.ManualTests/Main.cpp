@@ -61,50 +61,50 @@ namespace UnitTets {
   
   _add_test_fixture(Test2)
 
-  class _test_class(Test3) {
-    void _test_class_initialize(OneTimeInit) {
+  TEST_CLASS(Test3) {
+    TEST_CLASS_INITIALIZE(OneTimeInit) {
     }
     
-    void _test_class_cleanup(OneTimeCleanup) {
+    TEST_CLASS_CLEANUP(OneTimeCleanup) {
     }
     
-    void _test_initialize(Init) {
+    TEST_INITIALIZE(Init) {
     }
     
-    void _test_cleanup(Cleanup) {
+    TEST_CLEANUP(Cleanup) {
     }
     
-    void _test_method(TestCase1) {
+    TEST_METHOD(TestCase1) {
     }
     
-    void _test_method(TestCase2) {
+    TEST_METHOD(TestCase2) {
     }
     
-    void _ignore_test_method(TestCase3) {
+    IGNORE_TEST_METHOD(TestCase3) {
     }
   };
   
-  _add_test_fixture(Test3)
+  ADD_TEST_CLASS(Test3)
   
-  class _test_class(Test4) {
-    void _test_class_initialize(OneTimeInit) {
+  class _test_fixture(Test4) {
+    void _one_time_set_up(OneTimeInit) {
     }
     
-    void _test_class_cleanup(OneTimeCleanup) {
+    void _one_time_tear_down(OneTimeCleanup) {
     }
 
-    void _test_method(TestCase1) {
+    void _test(TestCase1) {
     }
   };
   
   class Test5 : public Test4 {
-    void _test_class_initialize(OneTimeInit) {
+    void _one_time_set_up(OneTimeInit) {
     }
     
-    void _test_class_cleanup(OneTimeCleanup) {
+    void _one_time_tear_down(OneTimeCleanup) {
     }
 
-    void _test_method(TestCase2) {
+    void _test(TestCase2) {
     }
   };
 

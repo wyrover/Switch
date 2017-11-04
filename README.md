@@ -103,7 +103,7 @@ HelloWorldTest.cpp:
 ```c++
 #include <Switch/Switch>
 
-using namespace TUnit;
+using namespace TUnit::Framework;
 using namespace System;
 
 namespace UnitTests {
@@ -120,8 +120,6 @@ namespace UnitTests {
   };
 
   _add_test_fixture(HelloWorldTest)
-  _add_test(HelloWorldTest, CreateStringFromLiteral)
-  _add_test(HelloWorldTest, CreateStringFromChars)
 }
 ```
 

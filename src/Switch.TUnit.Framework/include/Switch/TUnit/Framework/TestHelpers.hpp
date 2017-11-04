@@ -83,3 +83,20 @@ void methodName()
 #define _test_method(methodName) _test(methodName)
 
 #define _ignore_test_method(methodName) _ignore_test(methodName)
+
+#define ADD_TEST_CLASS(className) _add_test_fixture(className)
+
+#define TEST_CLASS_INITIALIZE(methodName) void _one_time_set_up(methodName)
+
+#define TEST_CLASS_CLEANUP(methodName) void _one_time_tear_down(methodName)
+
+#define TEST_INITIALIZE(methodName) void _set_up(methodName)
+
+#define TEST_CLEANUP(methodName) void _tear_down(methodName)
+
+#define TEST_CLASS(className) class _test_fixture(className)
+
+#define TEST_METHOD(methodName) void _test(methodName)
+
+#define IGNORE_TEST_METHOD(methodName) void _ignore_test(methodName)
+
