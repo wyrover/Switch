@@ -18,12 +18,13 @@ namespace UnitTests {
     }
 
   protected:
-    void _test(AnyTest)() {
+    void _test(AnyTest) {
       Assert::Null(null, _caller);
     }
   };
   
   // Used _test to add unit test to execute at the unit test suit.
+  _add_test_fixture(UserTest);
   _add_test(UserTest, AnyTest);
 }
 

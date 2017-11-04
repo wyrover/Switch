@@ -7,20 +7,20 @@ namespace UnitTests {
   // The class DirectoryTest must be declared with _test_fixture
   class _test_fixture(DirectoryTest) {
     // This is the method that is called before any tests in a fixture are run.
-    void _set_up(Init)() {
+    void _set_up(Init) {
       savedCurrentDirecory = Environment::CurrentDirectory;
     }
     
     // This is the method that is called after any tests in a fixture are run.
-    void _tear_down(Cleanup)() {
+    void _tear_down(Cleanup) {
       Environment::CurrentDirectory = savedCurrentDirecory;
     }
 
-    void _test(ChangeCurrentDirectoryWithDownloads)() {
+    void _test(ChangeCurrentDirectoryWithDownloads) {
       Assert::DoesNotThrows(_delegate {Environment::CurrentDirectory = System::IO::Path::Combine(Environment::GetFolderPath(Environment::SpecialFolder::Personal), "Downloads");}, _caller);
     }
     
-    void _test(ChangeCurrentDirectoryWithPotatoes)() {
+    void _test(ChangeCurrentDirectoryWithPotatoes) {
       Assert::DoesNotThrows(_delegate {Environment::CurrentDirectory = System::IO::Path::Combine(Environment::GetFolderPath(Environment::SpecialFolder::Personal), "Potatoes");}, _caller);
     }
     
@@ -29,6 +29,7 @@ namespace UnitTests {
   };
 
   // Used _test to add unit test to execute at the unit test suit.
+  _add_test_fixture(DirectoryTest);
   _add_test(DirectoryTest, ChangeCurrentDirectoryWithDownloads);
   _add_test(DirectoryTest, ChangeCurrentDirectoryWithPotatoes);
 }

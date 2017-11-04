@@ -42,17 +42,17 @@ namespace Switch {
     
     #define _set_up(name) \
     SetUp() override {name();} \
-    void name
+    void name()
     
     #define _tear_down(name) \
     TearDown() override {name();} \
     void name
     
     #define _test(name) \
-    name
+    name()
 
     #define _ignore_test(name) \
-    name
+    name()
     
     #define _add_test_fixture(name)
 

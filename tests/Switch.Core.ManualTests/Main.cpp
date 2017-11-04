@@ -68,14 +68,14 @@ static struct __concat2(RegisteredTest, __LINE__) : public TUnit::RegisteredTest
 
 #define _set_up(name) \
   SetUp() override {name();} \
-  void name
+  void name()
 
 #define _tear_down(name) \
   TearDown() override {name();} \
-  void name
+  void name()
 
 #define _test(name) \
-  name
+  name()
 
 using namespace System;
 using namespace System::Threading;
@@ -83,15 +83,15 @@ using namespace System::Threading;
 namespace Examples {
   class _test_fixture(TestFixture1) {
   public:
-    void _set_up(Begin)() {
+    void _set_up(Begin) {
       Console::WriteLine("{0}::{1}", _typeof(*this).Name, _caller.MemberNamne);
     }
     
-    void _tear_down(End)() {
+    void _tear_down(End) {
       Console::WriteLine("{0}::{1}", _typeof(*this).Name, _caller.MemberNamne);
     }
     
-    void _test(Test1)() {
+    void _test(Test1) {
       Console::WriteLine("{0}::{1}", _typeof(*this).Name, _caller.MemberNamne);
     }
   };
@@ -103,11 +103,11 @@ namespace Examples {
 
   class _test_fixture(TestFixture2) {
   public:
-    void _test(Test1)() {
+    void _test(Test1) {
       Console::WriteLine("{0}::{1}", _typeof(*this).Name, _caller.MemberNamne);
     }
     
-    void _test(Test2)() {
+    void _test(Test2) {
       Console::WriteLine("{0}::{1}", _typeof(*this).Name, _caller.MemberNamne);
     }
   };
@@ -117,19 +117,19 @@ namespace Examples {
 
   class _test_fixture(TestFixture3) {
   public:
-    void _test(Test1)() {
+    void _test(Test1) {
       Console::WriteLine("{0}::{1}", _typeof(*this).Name, _caller.MemberNamne);
     }
     
-    void _test(Test2)() {
+    void _test(Test2) {
       Console::WriteLine("{0}::{1}", _typeof(*this).Name, _caller.MemberNamne);
     }
     
-    void _test(Test3)() {
+    void _test(Test3) {
       Console::WriteLine("{0}::{1}", _typeof(*this).Name, _caller.MemberNamne);
     }
     
-    void _test(Test4)() {
+    void _test(Test4) {
       Console::WriteLine("{0}::{1}", _typeof(*this).Name, _caller.MemberNamne);
     }
   };

@@ -7,7 +7,7 @@ using namespace TUnit;
 
 namespace SwitchUnitTests {  
   class _test_fixture(AbstractTest) {
-    void _test(CreateClassNotInheritedFromAnAbstract)() {
+    void _test(CreateClassNotInheritedFromAnAbstract) {
       static string result;
       result = "";
       struct NotAnAbstract {
@@ -22,7 +22,7 @@ namespace SwitchUnitTests {
       Assert::AreEqual("~NotAnAbstract", result);
     }
 
-    void _test(CreateClassInheritedFromAnAbstract)() {
+    void _test(CreateClassInheritedFromAnAbstract) {
       static string result;
       result = "";
       struct AnAbstract _abstract {

@@ -6,7 +6,7 @@ using namespace System;
 namespace UnitTests {
   class _test_fixture(UserTest) {
     // With current information
-    void _test(TestWithCurrentInformation)() {
+    void _test(TestWithCurrentInformation) {
       Assert::False(true, _caller);
     }
 
@@ -16,6 +16,7 @@ namespace UnitTests {
     }
   };
   
+  _add_test_fixture(UserTest);
   _add_test(UserTest, TestWithCurrentInformation);
   _add_test(UserTest, TestWithoutCurrentInformation);
 }

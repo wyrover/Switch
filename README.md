@@ -108,17 +108,18 @@ using namespace System;
 
 namespace UnitTests {
   class _test_fixture(HelloWorldTest) {
-    void _test(CreateStringFromLiteral)() {
+    void _test(CreateStringFromLiteral) {
       string s = "Hello, World!";
       Assert::AreEqual("Hello, World!", s);
     }
 
-    void _test(CreateStringFromChars)() {
+    void _test(CreateStringFromChars) {
       string s = {'H', 'e', 'l', 'l', 'o', ',', ' ', 'W', 'o', 'r', 'l', 'd', '!'};
       Assert::AreEqual("Hello, World!", s);
     }
   };
 
+  _add_test_fixture(HelloWorldTest)
   _add_test(HelloWorldTest, CreateStringFromLiteral)
   _add_test(HelloWorldTest, CreateStringFromChars)
 }

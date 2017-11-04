@@ -5,56 +5,59 @@ using namespace System;
 
 namespace UnitTests {
   class _test_fixture(TeastCase1) {
-    void _test(TestOne)() {
+    void _test(TestOne) {
       Assert::IsTrue(true, _caller);
     }
     
-    void _test(TestTwo)() {
+    void _test(TestTwo) {
       Assert::IsFalse(false, _caller);
     }
     
-    void _test(TestThree)() {
+    void _test(TestThree) {
       Assert::IsEmpty("", _caller);
     }
   };
 
   class _test_fixture(TeastCase2) {
-    void _test(TestOne)() {
+    void _test(TestOne) {
       Assert::IsTrue(true, _caller);
     }
     
-    void _test(TestTwo)() {
+    void _test(TestTwo) {
       Assert::IsFalse(false, _caller);
     }
     
-    void _test(TestThree)() {
+    void _test(TestThree) {
       Assert::IsEmpty("", _caller);
     }
     
-    void _test(TestFour)() {
+    void _test(TestFour) {
       Assert::IsEmpty({}, _caller);
     }
   };
 
   class _test_fixture(TeastCase3) {
-    void _test(TestOne)() {
+    void _test(TestOne) {
       Assert::IsNull(null, _caller);
     }
     
-    void _test(TestTwo)() {
+    void _test(TestTwo) {
       _<string> str;
       Assert::IsNull(str, _caller);
     }
   };
 
   // Used _test to add unit test to execute at the unit test suit.
+  _add_test_fixture(TeastCase1);
   _add_test(TeastCase1, TestOne);
   _add_test(TeastCase1, TestTwo);
   _add_test(TeastCase1, TestThree);
+  _add_test_fixture(TeastCase2);
   _add_test(TeastCase2, TestOne);
   _add_test(TeastCase2, TestTwo);
   _add_test(TeastCase2, TestThree);
   _add_test(TeastCase2, TestFour);
+  _add_test_fixture(TeastCase3);
   _add_test(TeastCase3, TestOne);
   _add_test(TeastCase3, TestTwo);
 }

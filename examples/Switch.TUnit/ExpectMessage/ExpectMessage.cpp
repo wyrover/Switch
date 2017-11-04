@@ -16,6 +16,7 @@ namespace UnitTests {
     }
   };
   
+  _add_test_fixture(UserTest);
   _add_test(UserTest, TestWithUserMessage);
   _add_test(UserTest, TestWithoutUserMessage);
 }
