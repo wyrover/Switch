@@ -13,9 +13,9 @@ namespace Switch {
     namespace Framework {
       struct TestFixture : public object {
       protected:
-        void AddOneTimeTearDown(const RegisteredMethod& registeredMethod) {this->oneTimeTearDowns.Add(registeredMethod);}
+        void AddOneTimeTearDown(const RegisteredMethod& registeredMethod) {this->oneTimeTearDowns.Insert(0, registeredMethod);}
         void AddSetUp(const RegisteredMethod& registeredMethod) {this->setUps.Add(registeredMethod);}
-        void AddTearDown(const RegisteredMethod& registeredMethod) {this->tearDowns.Add(registeredMethod);}
+        void AddTearDown(const RegisteredMethod& registeredMethod) {this->tearDowns.Insert(0, registeredMethod);}
         void AddTest(const RegisteredMethod& registeredMethod) {this->tests.Add(registeredMethod);}
 
       private:

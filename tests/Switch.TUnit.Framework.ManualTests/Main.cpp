@@ -85,8 +85,32 @@ namespace UnitTets {
   };
   
   _add_test_fixture(Test3)
+  
+  class _test_class(Test4) {
+    void _test_class_initialize(OneTimeInit) {
+    }
+    
+    void _test_class_cleanup(OneTimeCleanup) {
+    }
 
-  class Program {
+    void _test_method(TestCase1) {
+    }
+  };
+  
+  class Test5 : public Test4 {
+    void _test_class_initialize(OneTimeInit) {
+    }
+    
+    void _test_class_cleanup(OneTimeCleanup) {
+    }
+
+    void _test_method(TestCase2) {
+    }
+  };
+
+  _add_test_fixture(Test5)
+
+  class MainTest {
   public:
     static void Main(const Array<string>& args) {
       TUnit::Framework::UnitTest(args).Run();
@@ -94,5 +118,5 @@ namespace UnitTets {
   };
 }
 
-_startup(UnitTets::Program)
+_startup(UnitTets::MainTest)
 
