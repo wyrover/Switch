@@ -6,8 +6,8 @@ using namespace TUnit;
 using namespace System;
 
 namespace UnitTests {
-  // The class DirectoryTest must be declared with _test_fixture
-  class _test_fixture(UserTest) {
+  // The class DirectoryTest must be declared with _TestFixture
+  class _TestFixture(UserTest) {
   public:
     // The main entry point for the test application.
     static int Main(const Array<string>& args) {
@@ -18,14 +18,14 @@ namespace UnitTests {
     }
 
   protected:
-    void _test(AnyTest) {
+    void _Test(AnyTest) {
       Assert::Null(null, _caller);
     }
   };
   
-  // Used _test to add unit test to execute at the unit test suit.
-  _add_test_fixture(UserTest);
-  _add_test(UserTest, AnyTest);
+  // Used _Test to add unit test to execute at the unit test suit.
+  _AddTestFixture(UserTest);
+  _AddTest(UserTest, AnyTest);
 }
 
 _startup(UnitTests::UserTest)

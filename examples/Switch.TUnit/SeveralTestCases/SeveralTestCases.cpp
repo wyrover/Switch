@@ -4,62 +4,62 @@ using namespace TUnit;
 using namespace System;
 
 namespace UnitTests {
-  class _test_fixture(TeastCase1) {
-    void _test(TestOne) {
+  class _TestFixture(TeastCase1) {
+    void _Test(TestOne) {
       Assert::IsTrue(true, _caller);
     }
     
-    void _test(TestTwo) {
+    void _Test(TestTwo) {
       Assert::IsFalse(false, _caller);
     }
     
-    void _test(TestThree) {
+    void _Test(TestThree) {
       Assert::IsEmpty("", _caller);
     }
   };
 
-  class _test_fixture(TeastCase2) {
-    void _test(TestOne) {
+  class _TestFixture(TeastCase2) {
+    void _Test(TestOne) {
       Assert::IsTrue(true, _caller);
     }
     
-    void _test(TestTwo) {
+    void _Test(TestTwo) {
       Assert::IsFalse(false, _caller);
     }
     
-    void _test(TestThree) {
+    void _Test(TestThree) {
       Assert::IsEmpty("", _caller);
     }
     
-    void _test(TestFour) {
+    void _Test(TestFour) {
       Assert::IsEmpty({}, _caller);
     }
   };
 
-  class _test_fixture(TeastCase3) {
-    void _test(TestOne) {
+  class _TestFixture(TeastCase3) {
+    void _Test(TestOne) {
       Assert::IsNull(null, _caller);
     }
     
-    void _test(TestTwo) {
+    void _Test(TestTwo) {
       _<string> str;
       Assert::IsNull(str, _caller);
     }
   };
 
-  // Used _test to add unit test to execute at the unit test suit.
-  _add_test_fixture(TeastCase1);
-  _add_test(TeastCase1, TestOne);
-  _add_test(TeastCase1, TestTwo);
-  _add_test(TeastCase1, TestThree);
-  _add_test_fixture(TeastCase2);
-  _add_test(TeastCase2, TestOne);
-  _add_test(TeastCase2, TestTwo);
-  _add_test(TeastCase2, TestThree);
-  _add_test(TeastCase2, TestFour);
-  _add_test_fixture(TeastCase3);
-  _add_test(TeastCase3, TestOne);
-  _add_test(TeastCase3, TestTwo);
+  // Used _Test to add unit test to execute at the unit test suit.
+  _AddTestFixture(TeastCase1);
+  _AddTest(TeastCase1, TestOne);
+  _AddTest(TeastCase1, TestTwo);
+  _AddTest(TeastCase1, TestThree);
+  _AddTestFixture(TeastCase2);
+  _AddTest(TeastCase2, TestOne);
+  _AddTest(TeastCase2, TestTwo);
+  _AddTest(TeastCase2, TestThree);
+  _AddTest(TeastCase2, TestFour);
+  _AddTestFixture(TeastCase3);
+  _AddTest(TeastCase3, TestOne);
+  _AddTest(TeastCase3, TestTwo);
 }
 
 // This code produces the following output:

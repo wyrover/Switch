@@ -4,21 +4,21 @@ using namespace TUnit;
 using namespace System;
 
 namespace UnitTests {
-  class _test_fixture(HelloWorldTest) {
-    void _test(CreateStringFromLiteral) {
+  class _TestFixture(HelloWorldTest) {
+    void _Test(CreateStringFromLiteral) {
       string s = "Hello, World!";
       Assert::AreEqual("Hello, World!", s);
     }
     
-    void _test(CreateStringFromChars) {
+    void _Test(CreateStringFromChars) {
       string s = {'H', 'e', 'l', 'l', 'o', ',', ' ', 'W', 'o', 'r', 'l', 'd', '!'};
       Assert::AreEqual("Hello, World!", s);
     }
   };
   
-  _add_test_fixture(HelloWorldTest)
-  _add_test(HelloWorldTest, CreateStringFromLiteral)
-  _add_test(HelloWorldTest, CreateStringFromChars)
+  _AddTestFixture(HelloWorldTest)
+  _AddTest(HelloWorldTest, CreateStringFromLiteral)
+  _AddTest(HelloWorldTest, CreateStringFromChars)
 }
 
 // This code produces the following output:

@@ -4,7 +4,7 @@ using namespace TUnit::Framework;
 using namespace System;
 
 namespace UnitTests {
-  // The class DirectoryTest must be declared with _test_fixture
+  // The class DirectoryTest must be declared with _TestFixture
   class _TestFixture(Test) {
     void _OneTimeSetUp(OneTimeInit) {
     }
@@ -30,7 +30,7 @@ namespace UnitTests {
     }
   };
 
-  // Used _add_test_fixture to add unit test suit.
+  // Used _AddTestFixture to add unit test suit.
   _AddTestFixture(Test);
 
   class Program _static {

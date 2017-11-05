@@ -4,21 +4,21 @@ using namespace TUnit;
 using namespace System;
 
 namespace UnitTests {
-  class _test_fixture(UserTest) {
-    void _test(PassedTestAreEqual) {
+  class _TestFixture(UserTest) {
+    void _Test(PassedTestAreEqual) {
       string s = "One";
       Assert::AreEqual("One", s, _caller);
     }
 
-    void _test(FailedTestAreEqual) {
+    void _Test(FailedTestAreEqual) {
       int32 i = 42;
       Assert::AreEqual(123, i, _caller);
     }
   };
 
-  _add_test_fixture(UserTest);
-  _add_test(UserTest, PassedTestAreEqual);
-  _add_test(UserTest, FailedTestAreEqual);
+  _AddTestFixture(UserTest);
+  _AddTest(UserTest, PassedTestAreEqual);
+  _AddTest(UserTest, FailedTestAreEqual);
 }
 
 // This code produces the following output:

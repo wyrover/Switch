@@ -4,7 +4,7 @@ using namespace TUnit::Framework;
 using namespace System;
 
 namespace UnitTests {
-  // The class DirectoryTest must be declared with _test_fixture
+  // The class DirectoryTest must be declared with _TestFixture
   class Test : public TestFixture {
     OneTimeSetUpAttribute oneTimeInitAttribute {"OneTimeInit", *this, &Test::OneTimeInit};
     void OneTimeInit() {
