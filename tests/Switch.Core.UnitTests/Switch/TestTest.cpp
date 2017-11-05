@@ -95,13 +95,13 @@ namespace SwitchUnitTests {
     }
   };
   
-  _add_test(TUnitTest, AreEqualInt32);
-  _add_test(TUnitTest, AreNotEqualInt32);
-  _add_test(TUnitTest, AreEqualtring);
-  _add_test(TUnitTest, AreNotEqualString);
-  _add_test(TUnitTest, ThrowException);
-  _add_test(TUnitTest, IsTrueBoolean);
-  _add_test(TUnitTest, ThrowArgumentNullException);
-  _add_test(TUnitTest, ThrowIndexOutOfRangeException);
+  _AddTest(TUnitTest, AreEqualInt32);
+  _AddTest(TUnitTest, AreNotEqualInt32);
+  _AddTest(TUnitTest, AreEqualtring);
+  _AddTest(TUnitTest, AreNotEqualString);
+  _AddTest(TUnitTest, ThrowException);
+  _AddTest(TUnitTest, IsTrueBoolean);
+  _AddTest(TUnitTest, ThrowArgumentNullException);
+  _AddTest(TUnitTest, ThrowIndexOutOfRangeException);
 }
 */

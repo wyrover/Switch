@@ -25,7 +25,7 @@ namespace SwitchUnitTests {
     }
   };
   
-  //_add_test(EnvironmentTest, GetEnvironmentVariables)
-  _add_test(EnvironmentTest, GetEnvironmentVariable)
-  //_add_test(EnvironmentTest, SetEnvironmentVariable)
+  //_AddTest(EnvironmentTest, GetEnvironmentVariables)
+  _AddTest(EnvironmentTest, GetEnvironmentVariable)
+  //_AddTest(EnvironmentTest, SetEnvironmentVariable)
 }

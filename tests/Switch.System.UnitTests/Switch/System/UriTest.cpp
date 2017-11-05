@@ -46,15 +46,15 @@ namespace {
 
   };
 
-  _add_test(UriTest, ConstructorWithAbsoluteUri)
-  _add_test(UriTest, ConstructorWithAbsoluteUriAndUriKindRelativeOrAbsoluteSpecified)
-  _add_test(UriTest, ConstructorWithAbsoluteUriAndUriKindAbsoluteSpecified)
-  _add_test(UriTest, ConstructorWithAbsoluteUriAndUriKindRelativeSpecified)
-  _add_test(UriTest, ConstructorWithRelativeUri)
-  _add_test(UriTest, ConstructorWithRelativeUriAndUriKindRelativeOrAbsoluteSpecified)
-  _add_test(UriTest, ConstructorWithRelativeUriAndUriKindAbsoluteSpecified)
-  _add_test(UriTest, ConstructorWithRelativeUriAndUriKindRelativeSpecified)
-  _add_test(UriTest, ConstructorWithInvalidUri)
+  _AddTest(UriTest, ConstructorWithAbsoluteUri)
+  _AddTest(UriTest, ConstructorWithAbsoluteUriAndUriKindRelativeOrAbsoluteSpecified)
+  _AddTest(UriTest, ConstructorWithAbsoluteUriAndUriKindAbsoluteSpecified)
+  _AddTest(UriTest, ConstructorWithAbsoluteUriAndUriKindRelativeSpecified)
+  _AddTest(UriTest, ConstructorWithRelativeUri)
+  _AddTest(UriTest, ConstructorWithRelativeUriAndUriKindRelativeOrAbsoluteSpecified)
+  _AddTest(UriTest, ConstructorWithRelativeUriAndUriKindAbsoluteSpecified)
+  _AddTest(UriTest, ConstructorWithRelativeUriAndUriKindRelativeSpecified)
+  _AddTest(UriTest, ConstructorWithInvalidUri)
 
   TEST(Uri, Constructor) {
     ASSERT_TRUE(Uri("http://www.contoso.com").IsAbsoluteUri());

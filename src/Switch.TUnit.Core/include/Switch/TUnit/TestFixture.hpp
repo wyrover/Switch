@@ -11,10 +11,10 @@
 namespace Switch {
   /// @brief The TUnit namespace contains a unit test framework.
   /// @par Examples
-  /// This example how to use TestFixture class, Assert class and #_add_test method:
+  /// This example how to use TestFixture class, Assert class and #_AddTest method:
   /// @include Assert.cpp
   /// @par Examples
-  /// This example how to use TestFixture class, Expect class and #_add_test method:
+  /// This example how to use TestFixture class, Expect class and #_AddTest method:
   /// @include Expect.cpp
   namespace TUnit {
     /// @brief The base class that all unit tests inherit from.
@@ -36,34 +36,34 @@ namespace Switch {
     };
 
     
-    #define _test_fixture(name) \
+    #define _TestFixture(name) \
     name##_unused {}; \
     struct name : public TUnit::TestFixture
     
-    #define _set_up(name) \
+    #define _SetUp(name) \
     SetUp() override {name();} \
     void name()
     
-    #define _tear_down(name) \
+    #define _TearDown(name) \
     TearDown() override {name();} \
     void name
     
-    #define _test(name) \
+    #define _Test(name) \
     name()
 
-    #define _ignore_test(name) \
+    #define _IgnoreTest(name) \
     name()
     
-    #define _add_test_fixture(name)
+    #define _AddTestFixture(name)
 
     /// @brief Add spacified unit test to execute at the unit test suit.
     /// @param fixture The class inerited from TestFixture class that contains the unit test method to execute
     /// @param method The method that contains the unit test to execute
     /// @par Examples
-    /// This example how to use TestFixture class, Expect class and #_add_test method:
+    /// This example how to use TestFixture class, Expect class and #_AddTest method:
     /// @include Expect.cpp
     /// @ingroup TUnit
-    #define _add_test(fixture, method) \
+    #define _AddTest(fixture, method) \
     GTEST_TEST_(fixture, method, fixture, ::testing::internal::GetTypeId<fixture>()) { \
       try { \
         method(); \
@@ -76,7 +76,7 @@ namespace Switch {
     /// @param fixture The class inerited from TestFixture class that contains the unit test method to execute
     /// @param method The method that contains the unit test to execute
     /// @par Examples
-    /// This example how to use TestFixture class, Expect class and #_add_test method:
+    /// This example how to use TestFixture class, Expect class and #_AddTest method:
     /// @include Expect.cpp
     /// @ingroup TUnit
     #define _add_ignore_test(fixture, method) \

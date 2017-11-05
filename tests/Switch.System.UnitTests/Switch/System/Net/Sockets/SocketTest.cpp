@@ -27,5 +27,5 @@ namespace SwitchUnitTests {
     }
   };
   
-  _add_test(SocketTest, CatchExecptionWithTimeoutSocketErrorOnReceive)
+  _AddTest(SocketTest, CatchExecptionWithTimeoutSocketErrorOnReceive)
 }

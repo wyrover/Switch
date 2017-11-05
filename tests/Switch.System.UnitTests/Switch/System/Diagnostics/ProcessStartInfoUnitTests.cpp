@@ -84,10 +84,10 @@ namespace UnitTests {
     }
   };
   
-  _add_test(ProcessStartInfoUnitTest, Constructor)
-  _add_test(ProcessStartInfoUnitTest, ConstructorWithFileName)
-  _add_test(ProcessStartInfoUnitTest, ConstructorWithFileNameAndArgument)
-  _add_test(ProcessStartInfoUnitTest, ConstructorByCopy)
-  _add_test(ProcessStartInfoUnitTest, SetPasswordThenCheckPasswordInClearText)
-  _add_test(ProcessStartInfoUnitTest, SetPasswordInClearTextThenCheckPasswordInClearText)
+  _AddTest(ProcessStartInfoUnitTest, Constructor)
+  _AddTest(ProcessStartInfoUnitTest, ConstructorWithFileName)
+  _AddTest(ProcessStartInfoUnitTest, ConstructorWithFileNameAndArgument)
+  _AddTest(ProcessStartInfoUnitTest, ConstructorByCopy)
+  _AddTest(ProcessStartInfoUnitTest, SetPasswordThenCheckPasswordInClearText)
+  _AddTest(ProcessStartInfoUnitTest, SetPasswordInClearTextThenCheckPasswordInClearText)
 }

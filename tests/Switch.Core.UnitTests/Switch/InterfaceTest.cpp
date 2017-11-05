@@ -39,6 +39,6 @@ namespace SwitchUnitTests {
     }
   };
   
-  _add_test(InterfaceTest, CreateClassNotInheritedFromAnInterface)
-  _add_test(InterfaceTest, CreateClassInheritedFromAnInterface)
+  _AddTest(InterfaceTest, CreateClassNotInheritedFromAnInterface)
+  _AddTest(InterfaceTest, CreateClassInheritedFromAnInterface)
 }

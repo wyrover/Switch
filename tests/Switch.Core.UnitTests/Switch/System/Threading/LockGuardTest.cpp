@@ -86,9 +86,9 @@ namespace SwitchUnitTests {
     }
   };
   
-  _add_test(LockGuardTest, SingleLock)
-  _add_test(LockGuardTest, DoubleLockOnDifferentObjects)
-  _add_test(LockGuardTest, DoubleLockOnSameObject)
-  _add_test(LockGuardTest, LockDuration)
-  _add_test(LockGuardTest, Thread)
+  _AddTest(LockGuardTest, SingleLock)
+  _AddTest(LockGuardTest, DoubleLockOnDifferentObjects)
+  _AddTest(LockGuardTest, DoubleLockOnSameObject)
+  _AddTest(LockGuardTest, LockDuration)
+  _AddTest(LockGuardTest, Thread)
 }

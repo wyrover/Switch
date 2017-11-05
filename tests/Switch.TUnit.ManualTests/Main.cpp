@@ -12,7 +12,7 @@ namespace Examples {
     }
   };
   
-  _add_test(TestFixture1, Test1)
+  _AddTest(TestFixture1, Test1)
   
   class Program {
   public:

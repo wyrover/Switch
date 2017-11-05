@@ -233,13 +233,13 @@ namespace SwitchUnitTests {
     }
   };
   
-  _add_test(ForeachTest, Vector)
-  _add_test(ForeachTest, List)
-  _add_test(ForeachTest, ListT)
-  _add_test(ForeachTest, Array)
-  _add_test(ForeachTest, Array2)
-  _add_test(ForeachTest, Dictionary)
-  _add_test(ForeachTest, Dictionary2)
-  _add_test(ForeachTest, String)
-  _add_test(ForeachTest, NativeArray)
+  _AddTest(ForeachTest, Vector)
+  _AddTest(ForeachTest, List)
+  _AddTest(ForeachTest, ListT)
+  _AddTest(ForeachTest, Array)
+  _AddTest(ForeachTest, Array2)
+  _AddTest(ForeachTest, Dictionary)
+  _AddTest(ForeachTest, Dictionary2)
+  _AddTest(ForeachTest, String)
+  _AddTest(ForeachTest, NativeArray)
 }

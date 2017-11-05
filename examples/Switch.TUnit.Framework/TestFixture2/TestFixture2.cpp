@@ -5,33 +5,33 @@ using namespace System;
 
 namespace UnitTests {
   // The class DirectoryTest must be declared with _test_fixture
-  class _test_fixture(Test) {
-    void _one_time_set_up(OneTimeInit) {
+  class _TestFixture(Test) {
+    void _OneTimeSetUp(OneTimeInit) {
     }
     
-    void _one_time_tear_down(OneTimeCleanup) {
+    void _OneTimeTearDown(OneTimeCleanup) {
     }
     
     // This is the method that is called before any tests in a fixture are run.
-    void _set_up(Init) {
+    void _SetUp(Init) {
     }
     
     // This is the method that is called after any tests in a fixture are run.
-    void _tear_down(Cleanup) {
+    void _TearDown(Cleanup) {
     }
 
-    void _test(TestCase1) {
+    void _Test(TestCase1) {
     }
     
-    void _test(TestCase2) {
+    void _Test(TestCase2) {
     }
     
-    void _ignore_test(TestCase3) {
+    void _IgnoreTest(TestCase3) {
     }
   };
 
-  // Used _test to add unit test to execute at the unit test suit.
-  _add_test_fixture(Test);
+  // Used _add_test_fixture to add unit test suit.
+  _AddTestFixture(Test);
 
   class Program _static {
   public:

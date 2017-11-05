@@ -69,9 +69,9 @@ namespace SwitchUnitTests {
     }
   };
   
-  _add_test(PropertyWriteOnlyTest, CreatePropertyAndSetItWithEqualOperator)
-  _add_test(PropertyWriteOnlyTest, CreatePropertyAndSetItWithSetFunction)
-  _add_test(PropertyWriteOnlyTest, CreatePropertyAndSetItWithFunctor)
-  _add_test(PropertyWriteOnlyTest, PropertyCopyConstructor)
-  _add_test(PropertyWriteOnlyTest, PropertyEqualOperator)
+  _AddTest(PropertyWriteOnlyTest, CreatePropertyAndSetItWithEqualOperator)
+  _AddTest(PropertyWriteOnlyTest, CreatePropertyAndSetItWithSetFunction)
+  _AddTest(PropertyWriteOnlyTest, CreatePropertyAndSetItWithFunctor)
+  _AddTest(PropertyWriteOnlyTest, PropertyCopyConstructor)
+  _AddTest(PropertyWriteOnlyTest, PropertyEqualOperator)
 }

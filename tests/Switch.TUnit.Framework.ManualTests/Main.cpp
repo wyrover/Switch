@@ -36,79 +36,54 @@ namespace UnitTets {
   
   TestFixtureAttribute<Test1> __Test1Attribute {"Test1"};
   
-  class _test_fixture(Test2) {
-    void _one_time_set_up(OneTimeInit) {
+  class _TestFixture(Test2) {
+    void _OneTimeSetUp(OneTimeInit) {
     }
 
-    void _one_time_tear_down(OneTimeCleanup) {
+    void _OneTimeTearDown(OneTimeCleanup) {
     }
     
-    void _set_up(Init) {
+    void _SetUp(Init) {
     }
     
-    void _tear_down(Cleanup) {
+    void _TearDown(Cleanup) {
     }
     
-    void _test(TestCase1) {
+    void _Test(TestCase1) {
     }
     
-    void _test(TestCase2) {
+    void _Test(TestCase2) {
     }
     
-    void _ignore_test(TestCase3) {
+    void _IgnoreTest(TestCase3) {
     }
   };
   
-  _add_test_fixture(Test2)
+  _AddTestFixture(Test2)
+  
+  class _TestFixture(Test3) {
+    void _OneTimeSetUp(OneTimeInit) {
+    }
+    
+    void _OneTimeTearDown(OneTimeCleanup) {
+    }
 
-  TEST_CLASS(Test3) {
-    TEST_CLASS_INITIALIZE(OneTimeInit) {
-    }
-    
-    TEST_CLASS_CLEANUP(OneTimeCleanup) {
-    }
-    
-    TEST_INITIALIZE(Init) {
-    }
-    
-    TEST_CLEANUP(Cleanup) {
-    }
-    
-    TEST_METHOD(TestCase1) {
-    }
-    
-    TEST_METHOD(TestCase2) {
-    }
-    
-    IGNORE_TEST_METHOD(TestCase3) {
+    void _Test(TestCase1) {
     }
   };
   
-  ADD_TEST_CLASS(Test3)
-  
-  class _test_fixture(Test4) {
-    void _one_time_set_up(OneTimeInit) {
+  class Test4 : public Test3 {
+    void _OneTimeSetUp(OneTimeInit) {
     }
     
-    void _one_time_tear_down(OneTimeCleanup) {
+    void _OneTimeTearDown(OneTimeCleanup) {
     }
 
-    void _test(TestCase1) {
-    }
-  };
-  
-  class Test5 : public Test4 {
-    void _one_time_set_up(OneTimeInit) {
-    }
-    
-    void _one_time_tear_down(OneTimeCleanup) {
-    }
-
-    void _test(TestCase2) {
+    void _Test(TestCase2) {
     }
   };
 
-  _add_test_fixture(Test5)
+  _AddTestFixture(Test4)
 
   class MainTest {
   public:

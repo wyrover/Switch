@@ -77,16 +77,16 @@ namespace SwitchUnitTests {
     }
   };
  
-  _add_test(NativeTest, SizeOfBool)
-  _add_test(NativeTest, SizeOfChar)
-  _add_test(NativeTest, SizeOfByte)
-  _add_test(NativeTest, SizeOfInt16)
-  _add_test(NativeTest, SizeOfInt32)
-  _add_test(NativeTest, SizeOfInt64)
-  _add_test(NativeTest, SizeOfSByte)
-  _add_test(NativeTest, SizeOfUInt16)
-  _add_test(NativeTest, SizeOfUInt32)
-  _add_test(NativeTest, SizeOfUInt64)
-  _add_test(NativeTest, SizeOfFloat)
-  _add_test(NativeTest, SizeOfDouble)
+  _AddTest(NativeTest, SizeOfBool)
+  _AddTest(NativeTest, SizeOfChar)
+  _AddTest(NativeTest, SizeOfByte)
+  _AddTest(NativeTest, SizeOfInt16)
+  _AddTest(NativeTest, SizeOfInt32)
+  _AddTest(NativeTest, SizeOfInt64)
+  _AddTest(NativeTest, SizeOfSByte)
+  _AddTest(NativeTest, SizeOfUInt16)
+  _AddTest(NativeTest, SizeOfUInt32)
+  _AddTest(NativeTest, SizeOfUInt64)
+  _AddTest(NativeTest, SizeOfFloat)
+  _AddTest(NativeTest, SizeOfDouble)
 }

@@ -10,93 +10,61 @@
 #include "TestFixture.hpp"
 #include "TestFixtureAttribute.hpp"
 
-#undef _ignore_test
-#undef _set_up
-#undef _tear_down
-#undef _test
-#undef _test_fixture
-#undef _add_test
-#undef _add_test_fixture
+#undef _IgnoreTest
+#undef _SetUp
+#undef _TearDown
+#undef _Test
+#undef _TestFixture
+#undef _AddTest
+#undef _AddTestFixture
 
-#define _add_test_fixture(className) \
+#define _AddTest(className, methodName)
+
+#define _AddTestFixture(className) \
 TUnit::Framework::TestFixtureAttribute<className> __##className##Attribute {#className};
 
-#define _one_time_set_up(methodName) \
-methodName##_unused() {} \
+#define _OneTimeSetUp(methodName) \
+__##methodName##_unused() {} \
 struct methodName##Attribute : public TUnit::Framework::OneTimeSetUpAttribute { \
   template<typename TestFixture> methodName##Attribute(TestFixture& test) : OneTimeSetUpAttribute(#methodName, test, &TestFixture::methodName, _caller) {} \
 } __##methodName##Attribute {*this}; \
 void methodName()
 
-#define _one_time_tear_down(methodName) \
-methodName##_unused() {} \
+#define _OneTimeTearDown(methodName) \
+__##methodName##_unused() {} \
 struct methodName##Attribute : public TUnit::Framework::OneTimeTearDownAttribute { \
   template<typename TestFixture> methodName##Attribute(TestFixture& test) : OneTimeTearDownAttribute(#methodName, test, &TestFixture::methodName, _caller) {} \
 } __##methodName##Attribute {*this}; \
 void methodName()
 
-#define _set_up(methodName) \
-methodName##_unused() {} \
+#define _SetUp(methodName) \
+__##methodName##_unused() {} \
 struct methodName##Attribute : public TUnit::Framework::SetUpAttribute { \
   template<typename TestFixture> methodName##Attribute(TestFixture& test) : SetUpAttribute(#methodName, test, &TestFixture::methodName, _caller) {} \
 } __##methodName##Attribute {*this}; \
 void methodName()
 
-#define _tear_down(methodName) \
-methodName##_unused() {} \
+#define _TearDown(methodName) \
+__##methodName##_unused() {} \
 struct methodName##Attribute : public TUnit::Framework::TearDownAttribute { \
   template<typename TestFixture> methodName##Attribute(TestFixture& test) : TearDownAttribute(#methodName, test, &TestFixture::methodName, _caller) {} \
 } __##methodName##Attribute {*this}; \
 void methodName()
 
-#define _test_fixture(className) \
+#define _TestFixture(className) \
 className : public TUnit::Framework::TestFixture
 
-#define _test(methodName) \
-methodName##_unused() {} \
+#define _Test(methodName) \
+__##methodName##_unused() {} \
 struct methodName##Attribute : public TUnit::Framework::TestAttribute { \
   template<typename TestFixture> methodName##Attribute(TestFixture& test) : TestAttribute(#methodName, test, &TestFixture::methodName, _caller) {} \
 } __##methodName##Attribute {*this}; \
 void methodName()
 
-#define _ignore_test(methodName) \
-methodName##_unused() {} \
+#define _IgnoreTest(methodName) \
+__##methodName##_unused() {} \
 struct methodName##Attribute : public TUnit::Framework::TestAttribute { \
 template<typename TestFixture> methodName##Attribute(TestFixture& test) : TestAttribute(#methodName, test, &TestFixture::methodName, TUnit::Framework::TestState::Ignored, _caller) {} \
 } __##methodName##Attribute {*this}; \
 void methodName()
-
-#define _add_test_class(className) _add_test_fixture(className)
-
-#define _add_test(className, methodName)
-
-#define _test_class_initialize(methodName) _one_time_set_up(methodName)
-
-#define _test_class_cleanup(methodName) _one_time_tear_down(methodName)
-
-#define _test_initialize(methodName) _set_up(methodName)
-
-#define _test_cleanup(methodName) _tear_down(methodName)
-
-#define _test_class(className) _test_fixture(className)
-
-#define _test_method(methodName) _test(methodName)
-
-#define _ignore_test_method(methodName) _ignore_test(methodName)
-
-#define ADD_TEST_CLASS(className) _add_test_fixture(className)
-
-#define TEST_CLASS_INITIALIZE(methodName) void _one_time_set_up(methodName)
-
-#define TEST_CLASS_CLEANUP(methodName) void _one_time_tear_down(methodName)
-
-#define TEST_INITIALIZE(methodName) void _set_up(methodName)
-
-#define TEST_CLEANUP(methodName) void _tear_down(methodName)
-
-#define TEST_CLASS(className) class _test_fixture(className)
-
-#define TEST_METHOD(methodName) void _test(methodName)
-
-#define IGNORE_TEST_METHOD(methodName) void _ignore_test(methodName)
 

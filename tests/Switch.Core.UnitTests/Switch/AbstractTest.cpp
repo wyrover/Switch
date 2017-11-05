@@ -6,8 +6,8 @@ using namespace System;
 using namespace TUnit;
 
 namespace SwitchUnitTests {  
-  class _test_fixture(AbstractTest) {
-    void _test(CreateClassNotInheritedFromAnAbstract) {
+  class _TestFixture(AbstractTest) {
+    void _Test(CreateClassNotInheritedFromAnAbstract) {
       static string result;
       result = "";
       struct NotAnAbstract {
@@ -22,7 +22,7 @@ namespace SwitchUnitTests {
       Assert::AreEqual("~NotAnAbstract", result);
     }
 
-    void _test(CreateClassInheritedFromAnAbstract) {
+    void _Test(CreateClassInheritedFromAnAbstract) {
       static string result;
       result = "";
       struct AnAbstract _abstract {
@@ -38,7 +38,7 @@ namespace SwitchUnitTests {
     }
   };
   
-  _add_test_fixture(AbstractTest)
-  _add_test(AbstractTest, CreateClassNotInheritedFromAnAbstract)
-  _add_test(AbstractTest, CreateClassInheritedFromAnAbstract)
+  _AddTestFixture(AbstractTest)
+  _AddTest(AbstractTest, CreateClassNotInheritedFromAnAbstract)
+  _AddTest(AbstractTest, CreateClassInheritedFromAnAbstract)
 }

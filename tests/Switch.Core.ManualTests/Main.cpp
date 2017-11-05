@@ -53,7 +53,7 @@ namespace TUnit {
 #define __concat(value1, value2) value1 ## value2
 #define __concat2(value1, value2) __concat(value1, value2)
 
-#define _add_test(method) \
+#define _AddTest(method) \
 static struct __concat2(RegisteredTest, __LINE__) : public TUnit::RegisteredTest { \
   __concat2(RegisteredTest, __LINE__)() : TUnit::RegisteredTest(#method, &method) {} \
 } __concat2(registeredTest, __LINE__);
@@ -63,35 +63,35 @@ static struct __concat2(RegisteredTest, __LINE__) : public TUnit::RegisteredTest
   __concat2(RegisteredTest, __LINE__)() : TUnit::RegisteredTest(#method, &method, true) {} \
 } __concat2(registeredTest, __LINE__);
 
-#define _test_fixture(name) \
+#define _TestFixture(name) \
   name : public TUnit::TestFixture
 
-#define _set_up(name) \
+#define _SetUp(name) \
   SetUp() override {name();} \
   void name()
 
-#define _tear_down(name) \
+#define _TearDown(name) \
   TearDown() override {name();} \
   void name()
 
-#define _test(name) \
+#define _Test(name) \
   name()
 
 using namespace System;
 using namespace System::Threading;
 
 namespace Examples {
-  class _test_fixture(TestFixture1) {
+  class _TestFixture(TestFixture1) {
   public:
-    void _set_up(Begin) {
+    void _SetUp(Begin) {
       Console::WriteLine("{0}::{1}", _typeof(*this).Name, _caller.MemberNamne);
     }
     
-    void _tear_down(End) {
+    void _TearDown(End) {
       Console::WriteLine("{0}::{1}", _typeof(*this).Name, _caller.MemberNamne);
     }
     
-    void _test(Test1) {
+    void _Test(Test1) {
       Console::WriteLine("{0}::{1}", _typeof(*this).Name, _caller.MemberNamne);
     }
   };
@@ -99,44 +99,44 @@ namespace Examples {
   static struct RegisteredTest1 : public TUnit::RegisteredTest {
     RegisteredTest1() : TUnit::RegisteredTest("TestFixture1::Test1", &TestFixture1::Test1) {}
   } registeredTest1;
-  //_add_test(TestFixture1::Test1)
+  //_AddTest(TestFixture1::Test1)
 
-  class _test_fixture(TestFixture2) {
+  class _TestFixture(TestFixture2) {
   public:
-    void _test(Test1) {
+    void _Test(Test1) {
       Console::WriteLine("{0}::{1}", _typeof(*this).Name, _caller.MemberNamne);
     }
     
-    void _test(Test2) {
+    void _Test(Test2) {
       Console::WriteLine("{0}::{1}", _typeof(*this).Name, _caller.MemberNamne);
     }
   };
   
-  _add_test(TestFixture2::Test1)
-  _add_test(TestFixture2::Test2)
+  _AddTest(TestFixture2::Test1)
+  _AddTest(TestFixture2::Test2)
 
-  class _test_fixture(TestFixture3) {
+  class _TestFixture(TestFixture3) {
   public:
-    void _test(Test1) {
+    void _Test(Test1) {
       Console::WriteLine("{0}::{1}", _typeof(*this).Name, _caller.MemberNamne);
     }
     
-    void _test(Test2) {
+    void _Test(Test2) {
       Console::WriteLine("{0}::{1}", _typeof(*this).Name, _caller.MemberNamne);
     }
     
-    void _test(Test3) {
+    void _Test(Test3) {
       Console::WriteLine("{0}::{1}", _typeof(*this).Name, _caller.MemberNamne);
     }
     
-    void _test(Test4) {
+    void _Test(Test4) {
       Console::WriteLine("{0}::{1}", _typeof(*this).Name, _caller.MemberNamne);
     }
   };
   
-  _add_test(TestFixture3::Test1)
-  _add_test(TestFixture3::Test2)
-  _add_test(TestFixture3::Test3)
+  _AddTest(TestFixture3::Test1)
+  _AddTest(TestFixture3::Test2)
+  _AddTest(TestFixture3::Test3)
   _add_ignore_test(TestFixture3::Test4)
 
   class Program {
