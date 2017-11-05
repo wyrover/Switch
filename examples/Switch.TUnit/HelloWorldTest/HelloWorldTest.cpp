@@ -16,9 +16,9 @@ namespace UnitTests {
     }
   };
   
-  _AddTestFixture(HelloWorldTest)
-  _AddTest(HelloWorldTest, CreateStringFromLiteral)
-  _AddTest(HelloWorldTest, CreateStringFromChars)
+  _AddTestFixture(HelloWorldTest);
+  _AddTest(HelloWorldTest, CreateStringFromLiteral);
+  _AddTest(HelloWorldTest, CreateStringFromChars);
 }
 
 // This code produces the following output:
