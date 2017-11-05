@@ -59,7 +59,7 @@ namespace UnitTets {
     }
   };
   
-  _AddTestFixture(Test2)
+  _AddTestFixture(Test2);
   
   class _TestFixture(Test3) {
     void _OneTimeSetUp(OneTimeInit) {
@@ -83,7 +83,7 @@ namespace UnitTets {
     }
   };
 
-  _AddTestFixture(Test4)
+  _AddTestFixture(Test4);
 
   class MainTest {
   public:

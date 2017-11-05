@@ -21,7 +21,7 @@
 #define _AddTest(className, methodName)
 
 #define _AddTestFixture(className) \
-TUnit::Framework::TestFixtureAttribute<className> __##className##Attribute {#className};
+TUnit::Framework::TestFixtureAttribute<className> __##className##Attribute {#className}
 
 #define _OneTimeSetUp(methodName) \
 __##methodName##_unused() {} \
