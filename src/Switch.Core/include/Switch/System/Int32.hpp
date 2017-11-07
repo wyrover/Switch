@@ -170,14 +170,10 @@ namespace Switch {
       const Int32 operator ++(int);
       Int32& operator --();
       const Int32 operator --(int);
-      //template<typename T> bool operator==(T value) const {return this->value == value;}
-      //template<typename T> bool operator!=(T value) const {return !this->operator==(value);}
+      template<typename T> bool operator==(T value) const {return this->value == value;}
+      template<typename T> bool operator!=(T value) const {return !this->operator==(value);}
       /// @endcond
     };
-    
-    /// @cond
-    //inline bool operator==(int32 valueA, const Int32& valueB) {return valueB == valueA;}
-    /// @endcond
   }
   
   /// @brief Return true if specified value is the specified Type. A Is expression takes the following form:

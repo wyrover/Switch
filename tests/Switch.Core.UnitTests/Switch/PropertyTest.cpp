@@ -129,7 +129,7 @@ namespace SwitchUnitTests {
   public:
     PropertyReadWrite() {}
     PropertyReadWrite(const PropertyReadWrite& propertyReadWrite) : name(propertyReadWrite.name) {}
-    
+
     _property<string> Name {
       _get {return this->name;},
       _set {this->name = value;}

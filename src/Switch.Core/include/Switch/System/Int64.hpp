@@ -170,15 +170,10 @@ namespace Switch {
       const Int64 operator ++(int);
       Int64& operator --();
       const Int64 operator --(int);
-      //template<typename T> bool operator==(T value) const {return this->value == value;}
-      //template<typename T> bool operator!=(T value) const {return !this->operator==(value);}
+      template<typename T> bool operator==(T value) const {return this->value == value;}
+      template<typename T> bool operator!=(T value) const {return !this->operator==(value);}
       /// @endcond
     };
-    
-    /// @cond
-    //inline bool operator==(int32 valueA, const Int64& valueB) {return valueB == valueA;}
-    //inline bool operator==(int64 valueA, const Int64& valueB) {return valueB == valueA;}
-    /// @endcond
   }
 }
 

@@ -55,10 +55,10 @@ namespace SwitchUnitTests {
     ASSERT_FALSE(Value != 42);
   }
   
-  class PropertyTestClass {
+  class PropertyReadClass {
   public:
-    PropertyTestClass() {}
-    PropertyTestClass(const PropertyTestClass& property) : name(property.name) {}
+    PropertyReadClass() {}
+    PropertyReadClass(const PropertyReadClass& property) : name(property.name) {}
     
     _property<string, _readonly> Name {
       _get {return this->name;}
@@ -69,15 +69,15 @@ namespace SwitchUnitTests {
   };
   
   TEST(PropertyReadOnlyTest, PropertyCopyConstructor) {
-    refptr<PropertyTestClass> p1 = ref_new<PropertyTestClass>();
-    refptr<PropertyTestClass> p2 = ref_new<PropertyTestClass>(*p1);
+    refptr<PropertyReadClass> p1 = ref_new<PropertyReadClass>();
+    refptr<PropertyReadClass> p2 = ref_new<PropertyReadClass>(*p1);
     p1 = null;
     ASSERT_EQ("Test property", p2->Name);
   }
   
   TEST(PropertyReadOnlyTest, PropertyEqualOperator) {
-    refptr<PropertyTestClass> p1 = ref_new<PropertyTestClass>();
-    refptr<PropertyTestClass> p2 = ref_new<PropertyTestClass>();
+    refptr<PropertyReadClass> p1 = ref_new<PropertyReadClass>();
+    refptr<PropertyReadClass> p2 = ref_new<PropertyReadClass>();
     *p2 = *p1;
     p1 = null;
     ASSERT_EQ("Test property", p2->Name);
