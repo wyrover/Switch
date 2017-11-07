@@ -1,14 +1,15 @@
 #include <Switch/System/Delegate.hpp>
+#include <Switch/System/Byte.hpp>
 #include <Switch/System/ConsoleKey.hpp>
 #include <Switch/System/ConsoleColor.hpp>
 #include <Switch/System/ConsoleModifiers.hpp>
 #include <Switch/System/ConsoleKey.hpp>
 #include <Switch/System/EventArgs.hpp>
-#include <Switch/TUnit/Assert.hpp>
-#include <Switch/TUnit/TestFixture.hpp>
+#include <Switch/System/IntPtr.hpp>
+#include <Switch/System/String.hpp>
+#include <gtest/gtest.h>
 
 using namespace System;
-using namespace TUnit;
 
 namespace {
   class NewEventArgs : public EventArgs {
@@ -59,13 +60,13 @@ namespace {
     void OnNotify(const DelegateSender& sender, const NewEventArgs& args) {
       DelegateMessage message = sender.GetMessage();
       
-      EXPECT_EQ(message.GetNumber(), 1);
-      EXPECT_EQ(message.GetMessage(), "Message1");
+      ASSERT_EQ(message.GetNumber(), 1);
+      ASSERT_EQ(message.GetMessage(), "Message1");
       
-      EXPECT_EQ(args.GetNumber(), 10);
-      EXPECT_EQ(args.GetArgs(), "Argument10");
+      ASSERT_EQ(args.GetNumber(), 10);
+      ASSERT_EQ(args.GetArgs(), "Argument10");
       
-      EXPECT_TRUE((this->id==1)||(this->id==2));
+      ASSERT_TRUE((this->id==1)||(this->id==2));
       NotifyNumber++;
     }
     
@@ -77,7 +78,7 @@ namespace {
   
   int32 DelegateReceiver::NotifyNumber = 0;
   
-  TEST(Delegate, Ctor) {
+  TEST(DelegateTest, Ctor) {
     DelegateReceiver::NotifyNumber = 0;
     DelegateSender   sender;
     DelegateReceiver receiver1(1);
@@ -86,15 +87,15 @@ namespace {
     sender.Notify += NewEventHandler(receiver1, &DelegateReceiver::OnNotify);
     sender.Notify += NewEventHandler(receiver2, &DelegateReceiver::OnNotify);
     sender.Send(NewEventArgs(10, "Argument10"));
-    EXPECT_EQ(2, DelegateReceiver::NotifyNumber);
+    ASSERT_EQ(2, DelegateReceiver::NotifyNumber);
     
     sender.Notify -= NewEventHandler(receiver1, &DelegateReceiver::OnNotify);
     sender.Send(NewEventArgs(10, "Argument10"));
-    EXPECT_EQ(3, DelegateReceiver::NotifyNumber);
+    ASSERT_EQ(3, DelegateReceiver::NotifyNumber);
     
     sender.Notify -= NewEventHandler(receiver2, &DelegateReceiver::OnNotify);
-    EXPECT_NO_THROW(sender.Send(NewEventArgs(10, "Argument10")));
-    EXPECT_EQ(3, DelegateReceiver::NotifyNumber);
+    ASSERT_NO_THROW(sender.Send(NewEventArgs(10, "Argument10")));
+    ASSERT_EQ(3, DelegateReceiver::NotifyNumber);
   }
   
   class DelegateClass : public object
@@ -147,250 +148,167 @@ namespace {
   
   Int32 DelegateClass::StaticValue = 0;
   
-  TEST(Delegate, CallMemberFctNoArgNoReturn) {
+  TEST(DelegateTest, CallMemberFctNoArgNoReturn) {
     DelegateClass dc;
     Delegate<void> d(dc, &DelegateClass::MemberFctNoArgNoReturn);
     d();
-    EXPECT_EQ(1, dc.MemberValue);
+    ASSERT_EQ(1, dc.MemberValue);
   }
   
-  TEST(Delegate, CallStaticFctNoArgNoReturn) {
+  TEST(DelegateTest, CallStaticFctNoArgNoReturn) {
     Delegate<void> d(&DelegateClass::StaticFctNoArgNoReturn);
     d();
-    EXPECT_EQ(2, DelegateClass::StaticValue);
+    ASSERT_EQ(2, DelegateClass::StaticValue);
   }
   
-  TEST(Delegate, CallMemberFctNoArgReturnInt32) {
+  TEST(DelegateTest, CallMemberFctNoArgReturnInt32) {
     DelegateClass dc;
     Delegate<Int32> d(dc, &DelegateClass::MemberFctNoArgReturnInt32);
-    EXPECT_EQ(3, d());
+    ASSERT_EQ(3, d());
   }
   
-  TEST(Delegate, CallStaticFctNoArgReturnInt32) {
+  TEST(DelegateTest, CallStaticFctNoArgReturnInt32) {
     Delegate<Int32> d(&DelegateClass::StaticFctNoArgReturnInt32);
-    EXPECT_EQ(4, d());
+    ASSERT_EQ(4, d());
   }
   
-  TEST(Delegate, CallMemberFctArgInt32NoReturn) {
+  TEST(DelegateTest, CallMemberFctArgInt32NoReturn) {
     DelegateClass dc;
     Delegate<void, Int32> d(dc, &DelegateClass::MemberFctArgInt32NoReturn);
     d(5);
-    EXPECT_EQ(5, dc.MemberValue);
+    ASSERT_EQ(5, dc.MemberValue);
   }
   
-  TEST(Delegate, CallStaticFctArgInt32NoReturn) {
+  TEST(DelegateTest, CallStaticFctArgInt32NoReturn) {
     Delegate<void, Int32> d(&DelegateClass::StaticFctArgInt32NoReturn);
     d(6);
-    EXPECT_EQ(6, DelegateClass::StaticValue);
+    ASSERT_EQ(6, DelegateClass::StaticValue);
   }
   
-  TEST(Delegate, CallMemberFctArgInt32ReturnString) {
+  TEST(DelegateTest, CallMemberFctArgInt32ReturnString) {
     DelegateClass dc;
     Delegate<string, Int32> d(dc, &DelegateClass::MemberFctArgInt32ReturnString);
-    EXPECT_EQ(string("{7}"), d(7));
+    ASSERT_EQ(string("{7}"), d(7));
   }
   
-  TEST(Delegate, CallStaticFctArgInt32ReturnString) {
+  TEST(DelegateTest, CallStaticFctArgInt32ReturnString) {
     Delegate<string, Int32> d(&DelegateClass::StaticFctArgInt32ReturnString);
-    EXPECT_EQ(string("{8}"), d(8));
+    ASSERT_EQ(string("{8}"), d(8));
   }
   
-  TEST(Delegate, CallMemberFctArgInt32StringReturnString) {
+  TEST(DelegateTest, CallMemberFctArgInt32StringReturnString) {
     DelegateClass dc;
     Delegate<string, Int32, const string&> d(dc, &DelegateClass::MemberFctArgInt32StringReturnString);
-    EXPECT_EQ(string("{7, str}"), d(7, "str"));
+    ASSERT_EQ(string("{7, str}"), d(7, "str"));
   }
   
-  TEST(Delegate, CallStaticFctArgInt32StringReturnString) {
+  TEST(DelegateTest, CallStaticFctArgInt32StringReturnString) {
     Delegate<string, Int32, const string&> d(&DelegateClass::StaticFctArgInt32StringReturnString);
-    EXPECT_EQ(string("{8, str2}"), d(8, "str2"));
+    ASSERT_EQ(string("{8, str2}"), d(8, "str2"));
   }
   
-  TEST(Delegate, CallMemberFctArgInt32StringIntPtrReturnString) {
+  TEST(DelegateTest, CallMemberFctArgInt32StringIntPtrReturnString) {
     DelegateClass dc;
     Delegate<string, Int32, const string&, IntPtr> d(dc, &DelegateClass::MemberFctArgInt32StringIntPtrReturnString);
-    EXPECT_EQ(string("{7, str, 128}"), d(7, "str", IntPtr(Int32(128))));
+    ASSERT_EQ(string("{7, str, 128}"), d(7, "str", IntPtr(Int32(128))));
   }
   
-  TEST(Delegate, CallStaticFctArgInt32StringIntPtrReturnString) {
+  TEST(DelegateTest, CallStaticFctArgInt32StringIntPtrReturnString) {
     Delegate<string, Int32, const string&, IntPtr> d(&DelegateClass::StaticFctArgInt32StringIntPtrReturnString);
-    EXPECT_EQ(string("{8, str2, 256}"), d(8, "str2", IntPtr(Int32(256))));
+    ASSERT_EQ(string("{8, str2, 256}"), d(8, "str2", IntPtr(Int32(256))));
   }
   
-  TEST(Delegate, CallMemberFctArgInt32StringIntPtrStringReturnString) {
+  TEST(DelegateTest, CallMemberFctArgInt32StringIntPtrStringReturnString) {
     DelegateClass dc;
     Delegate<string, Int32, const string&, IntPtr, const string&> d(dc, &DelegateClass::MemberFctArgInt32StringIntPtrStringReturnString);
-    EXPECT_EQ(string("{7, str, 128, other}"), d(7, "str", IntPtr(Int32(128)), "other"));
+    ASSERT_EQ(string("{7, str, 128, other}"), d(7, "str", IntPtr(Int32(128)), "other"));
   }
   
-  TEST(Delegate, CallStaticFctArgInt32StringIntPtrStringReturnString) {
+  TEST(DelegateTest, CallStaticFctArgInt32StringIntPtrStringReturnString) {
     Delegate<string, Int32, const string&, IntPtr, const string&> d(&DelegateClass::StaticFctArgInt32StringIntPtrStringReturnString);
-    EXPECT_EQ(string("{8, str2, 256, other2}"), d(8, "str2", IntPtr(Int32(256)), "other2"));
+    ASSERT_EQ(string("{8, str2, 256, other2}"), d(8, "str2", IntPtr(Int32(256)), "other2"));
   }
   
-  TEST(Delegate, CallMemberFctArgInt32StringIntPtrStringBooleanReturnString) {
+  TEST(DelegateTest, CallMemberFctArgInt32StringIntPtrStringBooleanReturnString) {
     DelegateClass dc;
     Delegate<string, Int32, const string&, IntPtr, const string&, Boolean> d(dc, &DelegateClass::MemberFctArgInt32StringIntPtrStringBooleanReturnString);
-    EXPECT_EQ(string("{7, str, 128, other, True}"), d(7, "str", IntPtr(Int32(128)), "other", true));
+    ASSERT_EQ(string("{7, str, 128, other, True}"), d(7, "str", IntPtr(Int32(128)), "other", true));
   }
   
-  TEST(Delegate, CallStaticFctArgInt32StringIntPtrStringBooleanReturnString) {
+  TEST(DelegateTest, CallStaticFctArgInt32StringIntPtrStringBooleanReturnString) {
     Delegate<string, Int32, const string&, IntPtr, const string&, Boolean> d(&DelegateClass::StaticFctArgInt32StringIntPtrStringBooleanReturnString);
-    EXPECT_EQ(string("{8, str2, 256, other2, False}"), d(8, "str2", IntPtr(Int32(256)), "other2", false));
+    ASSERT_EQ(string("{8, str2, 256, other2, False}"), d(8, "str2", IntPtr(Int32(256)), "other2", false));
   }
   
-  TEST(Delegate, CallMemberFctArgInt32StringIntPtrStringBooleanStringReturnString) {
+  TEST(DelegateTest, CallMemberFctArgInt32StringIntPtrStringBooleanStringReturnString) {
     DelegateClass dc;
     Delegate<string, Int32, const string&, IntPtr, const string&, Boolean, const string&> d(dc, &DelegateClass::MemberFctArgInt32StringIntPtrStringBooleanStringReturnString);
-    EXPECT_EQ(string("{7, str, 128, other, True, Next}"), d(7, "str", IntPtr(Int32(128)), "other", true, "Next"));
+    ASSERT_EQ(string("{7, str, 128, other, True, Next}"), d(7, "str", IntPtr(Int32(128)), "other", true, "Next"));
   }
   
-  TEST(Delegate, CallStaticFctArgInt32StringIntPtrStringBooleanStringReturnString) {
+  TEST(DelegateTest, CallStaticFctArgInt32StringIntPtrStringBooleanStringReturnString) {
     Delegate<string, Int32, const string&, IntPtr, const string&, Boolean, const string&> d(&DelegateClass::StaticFctArgInt32StringIntPtrStringBooleanStringReturnString);
-    EXPECT_EQ(string("{8, str2, 256, other2, False, Prev}"), d(8, "str2", IntPtr(Int32(256)), "other2", false, "Prev"));
+    ASSERT_EQ(string("{8, str2, 256, other2, False, Prev}"), d(8, "str2", IntPtr(Int32(256)), "other2", false, "Prev"));
   }
   
-  TEST(Delegate, CallMemberFctArgInt32StringIntPtrStringBooleanStringConsoleKeyReturnString) {
+  TEST(DelegateTest, CallMemberFctArgInt32StringIntPtrStringBooleanStringConsoleKeyReturnString) {
     DelegateClass dc;
     Delegate<string, Int32, const string&, IntPtr, const string&, Boolean, const string&, ConsoleKey> d(dc, &DelegateClass::MemberFctArgInt32StringIntPtrStringBooleanStringConsoleKeyReturnString);
     
-    EXPECT_EQ(string("{7, str, 128, other, True, Next, Enter}"), d(7, "str", IntPtr(Int32(128)), "other", true, "Next", ConsoleKey::Enter));
+    ASSERT_EQ(string("{7, str, 128, other, True, Next, Enter}"), d(7, "str", IntPtr(Int32(128)), "other", true, "Next", ConsoleKey::Enter));
   }
   
-  TEST(Delegate, CallStaticFctArgInt32StringIntPtrStringBooleanStringConsoleKeyReturnString) {
+  TEST(DelegateTest, CallStaticFctArgInt32StringIntPtrStringBooleanStringConsoleKeyReturnString) {
     Delegate<string, Int32, const string&, IntPtr, const string&, Boolean, const string&, ConsoleKey> d(&DelegateClass::StaticFctArgInt32StringIntPtrStringBooleanStringConsoleKeyReturnString);
     
-    EXPECT_EQ(string("{8, str2, 256, other2, False, Prev, Escape}"), d(8, "str2", IntPtr(Int32(256)), "other2", false, "Prev", ConsoleKey::Escape));
+    ASSERT_EQ(string("{8, str2, 256, other2, False, Prev, Escape}"), d(8, "str2", IntPtr(Int32(256)), "other2", false, "Prev", ConsoleKey::Escape));
   }
   
-  TEST(Delegate, CallMemberFctArgInt32StringIntPtrStringBooleanStringConsoleKeyConsoleColorReturnString) {
+  TEST(DelegateTest, CallMemberFctArgInt32StringIntPtrStringBooleanStringConsoleKeyConsoleColorReturnString) {
     DelegateClass dc;
     Delegate<string, Int32, const string&, IntPtr, const string&, Boolean, const string&, ConsoleKey, ConsoleColor> d(dc, &DelegateClass::MemberFctArgInt32StringIntPtrStringBooleanStringConsoleKeyConsoleColorReturnString);
     
-    EXPECT_EQ(string("{7, str, 128, other, True, Next, Enter, Green}"), d(7, "str", IntPtr(Int32(128)), "other", true, "Next", ConsoleKey::Enter, ConsoleColor::Green));
+    ASSERT_EQ(string("{7, str, 128, other, True, Next, Enter, Green}"), d(7, "str", IntPtr(Int32(128)), "other", true, "Next", ConsoleKey::Enter, ConsoleColor::Green));
   }
   
-  TEST(Delegate, CallStaticFctArgInt32StringIntPtrStringBooleanStringConsoleKeyConsoleColorReturnString) {
+  TEST(DelegateTest, CallStaticFctArgInt32StringIntPtrStringBooleanStringConsoleKeyConsoleColorReturnString) {
     Delegate<string, Int32, const string&, IntPtr, const string&, Boolean, const string&, ConsoleKey, ConsoleColor> d(&DelegateClass::StaticFctArgInt32StringIntPtrStringBooleanStringConsoleKeyConsoleColorReturnString);
     
-    EXPECT_EQ(string("{8, str2, 256, other2, False, Prev, Escape, DarkRed}"), d(8, "str2", IntPtr(Int32(256)), "other2", false, "Prev", ConsoleKey::Escape, ConsoleColor::DarkRed));
+    ASSERT_EQ(string("{8, str2, 256, other2, False, Prev, Escape, DarkRed}"), d(8, "str2", IntPtr(Int32(256)), "other2", false, "Prev", ConsoleKey::Escape, ConsoleColor::DarkRed));
   }
   
-  TEST(Delegate, CallMemberFctArgInt32StringIntPtrStringBooleanStringConsoleKeyConsoleColorConsoleModifiersReturnString) {
+  TEST(DelegateTest, CallMemberFctArgInt32StringIntPtrStringBooleanStringConsoleKeyConsoleColorConsoleModifiersReturnString) {
     DelegateClass dc;
     Delegate<string, Int32, const string&, IntPtr, const string&, Boolean, const string&, ConsoleKey, ConsoleColor, Enum<ConsoleModifiers>> d(dc, &DelegateClass::MemberFctArgInt32StringIntPtrStringBooleanStringConsoleKeyConsoleColorConsoleModifiersReturnString);
     
-    EXPECT_EQ(string("{7, str, 128, other, True, Next, Enter, Green, Control}"), d(7, "str", IntPtr(Int32(128)), "other", true, "Next", ConsoleKey::Enter, ConsoleColor::Green, Enum<ConsoleModifiers>(ConsoleModifiers::Control)));
+    ASSERT_EQ(string("{7, str, 128, other, True, Next, Enter, Green, Control}"), d(7, "str", IntPtr(Int32(128)), "other", true, "Next", ConsoleKey::Enter, ConsoleColor::Green, Enum<ConsoleModifiers>(ConsoleModifiers::Control)));
   }
   
-  TEST(Delegate, CallStaticFctArgInt32StringIntPtrStringBooleanStringConsoleKeyConsoleColorConsoleModifiersReturnString) {
+  TEST(DelegateTest, CallStaticFctArgInt32StringIntPtrStringBooleanStringConsoleKeyConsoleColorConsoleModifiersReturnString) {
     Delegate<string, Int32, const string&, IntPtr, const string&, Boolean, const string&, ConsoleKey, ConsoleColor, Enum<ConsoleModifiers>> d(&DelegateClass::StaticFctArgInt32StringIntPtrStringBooleanStringConsoleKeyConsoleColorConsoleModifiersReturnString);
     
-    EXPECT_EQ(string("{8, str2, 256, other2, False, Prev, Escape, DarkRed, Shift}"), d(8, "str2", IntPtr(Int32(256)), "other2", false, "Prev", ConsoleKey::Escape, ConsoleColor::DarkRed, Enum<ConsoleModifiers>(ConsoleModifiers::Shift)));
+    ASSERT_EQ(string("{8, str2, 256, other2, False, Prev, Escape, DarkRed, Shift}"), d(8, "str2", IntPtr(Int32(256)), "other2", false, "Prev", ConsoleKey::Escape, ConsoleColor::DarkRed, Enum<ConsoleModifiers>(ConsoleModifiers::Shift)));
   }
   
-  TEST(Delegate, CallMemberFctArgInt32StringIntPtrStringBooleanStringConsoleKeyConsoleColorConsoleModifiersByteReturnString) {
+  TEST(DelegateTest, CallMemberFctArgInt32StringIntPtrStringBooleanStringConsoleKeyConsoleColorConsoleModifiersByteReturnString) {
     DelegateClass dc;
     Delegate<string, Int32, const string&, IntPtr, const string&, Boolean, const string&, ConsoleKey, ConsoleColor, Enum<ConsoleModifiers>, Byte> d(dc, &DelegateClass::MemberFctArgInt32StringIntPtrStringBooleanStringConsoleKeyConsoleColorConsoleModifiersByteReturnString);
     
-    EXPECT_EQ(string("{7, str, 128, other, True, Next, Enter, Green, Control, 255}"), d(7, "str", IntPtr(Int32(128)), "other", true, "Next", ConsoleKey::Enter, ConsoleColor::Green, Enum<ConsoleModifiers>(ConsoleModifiers::Control), 255));
+    ASSERT_EQ(string("{7, str, 128, other, True, Next, Enter, Green, Control, 255}"), d(7, "str", IntPtr(Int32(128)), "other", true, "Next", ConsoleKey::Enter, ConsoleColor::Green, Enum<ConsoleModifiers>(ConsoleModifiers::Control), 255));
   }
   
-  TEST(Delegate, CallStaticFctArgInt32StringIntPtrStringBooleanStringConsoleKeyConsoleColorConsoleModifiersByteReturnString) {
+  TEST(DelegateTest, CallStaticFctArgInt32StringIntPtrStringBooleanStringConsoleKeyConsoleColorConsoleModifiersByteReturnString) {
     Delegate<string, Int32, const string&, IntPtr, const string&, Boolean, const string&, ConsoleKey, ConsoleColor, Enum<ConsoleModifiers>, Byte> d(&DelegateClass::StaticFctArgInt32StringIntPtrStringBooleanStringConsoleKeyConsoleColorConsoleModifiersByteReturnString);
     
-    EXPECT_EQ(string("{8, str2, 256, other2, False, Prev, Escape, DarkRed, Shift, 128}"), d(8, "str2", IntPtr(Int32(256)), "other2", false, "Prev", ConsoleKey::Escape, ConsoleColor::DarkRed, Enum<ConsoleModifiers>(ConsoleModifiers::Shift), 128));
+    ASSERT_EQ(string("{8, str2, 256, other2, False, Prev, Escape, DarkRed, Shift, 128}"), d(8, "str2", IntPtr(Int32(256)), "other2", false, "Prev", ConsoleKey::Escape, ConsoleColor::DarkRed, Enum<ConsoleModifiers>(ConsoleModifiers::Shift), 128));
   }
   
-  class DelegateTest : public TestFixture {
-  protected:
+  class CallbackTest {
+  public:
     using Callback = Delegate<void>;
     
-    void SetUp() override {cpt = 0;}
+    CallbackTest() {cpt = 0;}
     
-    void AddStaticMethod() {
-      Callback callback;
-      callback += StaticMethod;
-      callback();
-      Assert::AreEqual(1, cpt, _caller);
-    }
-    
-    void AddAndRemoveStaticMethod() {
-      Callback callback;
-      callback += StaticMethod;
-      callback += {*this, &DelegateTest::MemberMethod};
-      callback -= StaticMethod;
-      callback();
-      Assert::AreEqual(2, cpt, _caller);
-    }
-    
-    void AddMemberMethod() {
-      Callback callback;
-      callback += {*this, &DelegateTest::MemberMethod};
-      callback();
-      Assert::AreEqual(2, cpt, _caller);
-    }
-    
-    void AddAndRemoveMemberMethod() {
-      Callback callback;
-      callback += {*this, &DelegateTest::MemberMethod};
-      callback += StaticMethod;
-      callback -= {*this, &DelegateTest::MemberMethod};
-      callback();
-      Assert::AreEqual(1, cpt, _caller);
-    }
-    
-    void AddConstMemberMethod() {
-      Callback callback;
-      callback += {*this, &DelegateTest::ConstMemberMethod};
-      callback();
-      Assert::AreEqual(3, cpt, _caller);
-    }
-    
-    void AddAndRemoveConstMemberMethod() {
-      Callback callback;
-      callback += {*this, &DelegateTest::ConstMemberMethod};
-      callback += StaticMethod;
-      callback -= {*this, &DelegateTest::ConstMemberMethod};
-      callback();
-      Assert::AreEqual(1, cpt, _caller);
-    }
-    
-    void AddFunctor() {
-      Callback callback;
-      callback += Functor();
-      callback();
-      Assert::AreEqual(4, cpt, _caller);
-    }
-    
-    void AddAndRemoveFunctor() {
-      Callback callback;
-      callback += Functor();
-      callback += StaticMethod;
-      callback -= Functor();
-      callback();
-      Assert::AreEqual(1, cpt, _caller);
-    }
-    
-    void AddLambdaExpression() {
-      auto lambda = [] {cpt += 5;};
-      Callback callback;
-      callback += lambda;
-      callback();
-      Assert::AreEqual(5, cpt, _caller);
-    }
-    
-    void AddAndRemoveLambdaExpression() {
-      auto lambda = [] {cpt += 5;};
-      Callback callback;
-      callback += lambda;
-      callback += StaticMethod;
-      callback -= lambda;
-      callback();
-      Assert::AreEqual(1, cpt, _caller);
-    }
-    
-  private:
     static void StaticMethod() {cpt += 1;}
     
     void MemberMethod() {cpt += 2;}
@@ -401,26 +319,110 @@ namespace {
     public:
       void operator()() {cpt += 4;}
     };
-
+    
     static int cpt;
   };
-
-  int DelegateTest::cpt = 0;
   
-  _AddTest(DelegateTest, AddStaticMethod)
-  _AddTest(DelegateTest, AddAndRemoveStaticMethod)
-  _AddTest(DelegateTest, AddMemberMethod)
-  _AddTest(DelegateTest, AddAndRemoveMemberMethod)
-  _AddTest(DelegateTest, AddConstMemberMethod)
-  _AddTest(DelegateTest, AddAndRemoveConstMemberMethod)
-  _AddTest(DelegateTest, AddLambdaExpression)
-  _AddTest(DelegateTest, AddAndRemoveLambdaExpression)
+  int CallbackTest::cpt = 0;
+  
+  TEST(DelegateTest, AddStaticMethod) {
+    CallbackTest test;
+    CallbackTest::Callback callback;
+    callback += CallbackTest::StaticMethod;
+    callback();
+    ASSERT_EQ(1, test.cpt);
+  }
+  
+  TEST(DelegateTest, AddAndRemoveStaticMethod) {
+    CallbackTest test;
+    CallbackTest::Callback callback;
+    callback += CallbackTest::StaticMethod;
+    callback += {test, &CallbackTest::MemberMethod};
+    callback -= CallbackTest::StaticMethod;
+    callback();
+    ASSERT_EQ(2, test.cpt);
+  }
+  
+  TEST(DelegateTest, AddMemberMethod) {
+    CallbackTest test;
+    CallbackTest::Callback callback;
+    callback += {test, &CallbackTest::MemberMethod};
+    callback();
+    ASSERT_EQ(2, test.cpt);
+  }
+  
+  TEST(DelegateTest, AddAndRemoveMemberMethod) {
+    CallbackTest test;
+    CallbackTest::Callback callback;
+    callback += {test, &CallbackTest::MemberMethod};
+    callback += CallbackTest::StaticMethod;
+    callback -= {test, &CallbackTest::MemberMethod};
+    callback();
+    ASSERT_EQ(1, test.cpt);
+  }
+  
+  TEST(DelegateTest, AddConstMemberMethod) {
+    CallbackTest test;
+    CallbackTest::Callback callback;
+    callback += {test, &CallbackTest::ConstMemberMethod};
+    callback();
+    ASSERT_EQ(3, test.cpt);
+  }
+  
+  TEST(DelegateTest, AddAndRemoveConstMemberMethod) {
+    CallbackTest test;
+    CallbackTest::Callback callback;
+    callback += {test, &CallbackTest::ConstMemberMethod};
+    callback += CallbackTest::StaticMethod;
+    callback -= {test, &CallbackTest::ConstMemberMethod};
+    callback();
+    ASSERT_EQ(1, test.cpt);
+  }
+  
+  TEST(DelegateTest, AddFunctor) {
+    CallbackTest test;
+    CallbackTest::Callback callback;
+    callback += CallbackTest::Functor();
+    callback();
+    ASSERT_EQ(4, test.cpt);
+  }
+  
+  TEST(DelegateTest, AddAndRemoveFunctor) {
+    CallbackTest test;
+    CallbackTest::Callback callback;
+    callback += CallbackTest::Functor();
+    callback += CallbackTest::StaticMethod;
+    callback -= CallbackTest::Functor();
+    callback();
+    ASSERT_EQ(1, test.cpt);
+  }
+  
+  TEST(DelegateTest, AddLambdaExpression) {
+    CallbackTest test;
+    auto lambda = [&] {test.cpt += 5;};
+    CallbackTest::Callback callback;
+    callback += lambda;
+    callback();
+    ASSERT_EQ(5, test.cpt);
+  }
+  
+  TEST(DelegateTest, AddAndRemoveLambdaExpression) {
+    CallbackTest test;
+    auto lambda = [&] {test.cpt += 5;};
+    CallbackTest::Callback callback;
+    callback += lambda;
+    callback += CallbackTest::StaticMethod;
+    callback -= lambda;
+    callback();
+    ASSERT_EQ(1, test.cpt);
+  }
   
   class ClassInt {
   public:
     void MemberFct(int32) {}
-
+    
     void operator()(int32) {}
-
+    
   };
 }
+

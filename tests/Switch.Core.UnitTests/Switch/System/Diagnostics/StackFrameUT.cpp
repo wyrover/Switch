@@ -1,13 +1,11 @@
 #include <Switch/System/Diagnostics/StackFrame.hpp>
-#include <Switch/TUnit/Assert.hpp>
-#include <Switch/TUnit/TestFixture.hpp>
+#include <gtest/gtest.h>
 
 using namespace System;
 using namespace System::Diagnostics;
-using namespace TUnit;
 
 namespace {
-  TEST(StackFrame, Constructor) {
+  TEST(StackFrameTest, Constructor) {
     /*
      Console::Write("");
      

@@ -1,118 +1,117 @@
 #include <Switch/System/Net/IPAddress.hpp>
-#include <Switch/TUnit/Assert.hpp>
-#include <Switch/TUnit/TestFixture.hpp>
+#include <Switch/System/BitConverter.hpp>
+#include <gtest/gtest.h>
 
 using namespace System;
 using namespace System::Net;
 using namespace System::Net::Sockets;
-using namespace TUnit;
 
 template<typename T, typename TArray>
 void EXPECT_B4(T b1, T b2, T b3, T b4, TArray bytes) {
-  EXPECT_EQ(4, bytes.Length);
+  ASSERT_EQ(4, bytes.Length);
   if (System::BitConverter::IsLittleEndian()) {
-    EXPECT_EQ(b1, bytes[0]);
-    EXPECT_EQ(b2, bytes[1]);
-    EXPECT_EQ(b3, bytes[2]);
-    EXPECT_EQ(b4, bytes[3]);
+    ASSERT_EQ(b1, bytes[0]);
+    ASSERT_EQ(b2, bytes[1]);
+    ASSERT_EQ(b3, bytes[2]);
+    ASSERT_EQ(b4, bytes[3]);
   } else {
-    EXPECT_EQ(b1, bytes[3]);
-    EXPECT_EQ(b2, bytes[2]);
-    EXPECT_EQ(b3, bytes[1]);
-    EXPECT_EQ(b4, bytes[0]);
+    ASSERT_EQ(b1, bytes[3]);
+    ASSERT_EQ(b2, bytes[2]);
+    ASSERT_EQ(b3, bytes[1]);
+    ASSERT_EQ(b4, bytes[0]);
   }
 }
 
 template<typename T, typename TArray>
 void EXPECT_B16(T b1, T b2, T b3, T b4, T b5, T b6, T b7, T b8, T b9, T b10, T b11, T b12, T b13, T b14, T b15, T b16, TArray bytes) {
-  EXPECT_EQ(16, bytes.Length);
+  ASSERT_EQ(16, bytes.Length);
   if (System::BitConverter::IsLittleEndian()) {
-    EXPECT_EQ(b1, bytes[0]);
-    EXPECT_EQ(b2, bytes[1]);
-    EXPECT_EQ(b3, bytes[2]);
-    EXPECT_EQ(b4, bytes[3]);
-    EXPECT_EQ(b5, bytes[4]);
-    EXPECT_EQ(b6, bytes[5]);
-    EXPECT_EQ(b7, bytes[6]);
-    EXPECT_EQ(b8, bytes[7]);
-    EXPECT_EQ(b9, bytes[8]);
-    EXPECT_EQ(b10, bytes[9]);
-    EXPECT_EQ(b11, bytes[10]);
-    EXPECT_EQ(b12, bytes[11]);
-    EXPECT_EQ(b13, bytes[12]);
-    EXPECT_EQ(b14, bytes[13]);
-    EXPECT_EQ(b15, bytes[14]);
-    EXPECT_EQ(b16, bytes[15]);
+    ASSERT_EQ(b1, bytes[0]);
+    ASSERT_EQ(b2, bytes[1]);
+    ASSERT_EQ(b3, bytes[2]);
+    ASSERT_EQ(b4, bytes[3]);
+    ASSERT_EQ(b5, bytes[4]);
+    ASSERT_EQ(b6, bytes[5]);
+    ASSERT_EQ(b7, bytes[6]);
+    ASSERT_EQ(b8, bytes[7]);
+    ASSERT_EQ(b9, bytes[8]);
+    ASSERT_EQ(b10, bytes[9]);
+    ASSERT_EQ(b11, bytes[10]);
+    ASSERT_EQ(b12, bytes[11]);
+    ASSERT_EQ(b13, bytes[12]);
+    ASSERT_EQ(b14, bytes[13]);
+    ASSERT_EQ(b15, bytes[14]);
+    ASSERT_EQ(b16, bytes[15]);
   } else {
-    EXPECT_EQ(b1, bytes[7]);
-    EXPECT_EQ(b2, bytes[6]);
-    EXPECT_EQ(b3, bytes[5]);
-    EXPECT_EQ(b4, bytes[4]);
-    EXPECT_EQ(b5, bytes[3]);
-    EXPECT_EQ(b6, bytes[2]);
-    EXPECT_EQ(b7, bytes[1]);
-    EXPECT_EQ(b8, bytes[0]);
-    EXPECT_EQ(b9, bytes[15]);
-    EXPECT_EQ(b10, bytes[14]);
-    EXPECT_EQ(b11, bytes[13]);
-    EXPECT_EQ(b12, bytes[12]);
-    EXPECT_EQ(b13, bytes[11]);
-    EXPECT_EQ(b14, bytes[10]);
-    EXPECT_EQ(b15, bytes[9]);
-    EXPECT_EQ(b16, bytes[8]);
+    ASSERT_EQ(b1, bytes[7]);
+    ASSERT_EQ(b2, bytes[6]);
+    ASSERT_EQ(b3, bytes[5]);
+    ASSERT_EQ(b4, bytes[4]);
+    ASSERT_EQ(b5, bytes[3]);
+    ASSERT_EQ(b6, bytes[2]);
+    ASSERT_EQ(b7, bytes[1]);
+    ASSERT_EQ(b8, bytes[0]);
+    ASSERT_EQ(b9, bytes[15]);
+    ASSERT_EQ(b10, bytes[14]);
+    ASSERT_EQ(b11, bytes[13]);
+    ASSERT_EQ(b12, bytes[12]);
+    ASSERT_EQ(b13, bytes[11]);
+    ASSERT_EQ(b14, bytes[10]);
+    ASSERT_EQ(b15, bytes[9]);
+    ASSERT_EQ(b16, bytes[8]);
   }
 }
 
 namespace {
   TEST(IPAddress, Constructor) {
-    EXPECT_EQ("0.0.0.0", IPAddress::Any().ToString());
-    EXPECT_EQ("255.255.255.255", IPAddress::Broadcast().ToString());
-    EXPECT_EQ("[0:0:0:0:0:0:0:0]", IPAddress::IPv6Any().ToString());
-    EXPECT_EQ("[0:0:0:0:0:0:0:1]", IPAddress::IPv6Loopback().ToString());
-    EXPECT_EQ("[0:0:0:0:0:0:0:0]", IPAddress::IPv6None().ToString());
-    EXPECT_EQ("127.0.0.1", IPAddress::Loopback().ToString());
-    EXPECT_EQ("255.255.255.255", IPAddress::None().ToString());
+    ASSERT_EQ("0.0.0.0", IPAddress::Any().ToString());
+    ASSERT_EQ("255.255.255.255", IPAddress::Broadcast().ToString());
+    ASSERT_EQ("[0:0:0:0:0:0:0:0]", IPAddress::IPv6Any().ToString());
+    ASSERT_EQ("[0:0:0:0:0:0:0:1]", IPAddress::IPv6Loopback().ToString());
+    ASSERT_EQ("[0:0:0:0:0:0:0:0]", IPAddress::IPv6None().ToString());
+    ASSERT_EQ("127.0.0.1", IPAddress::Loopback().ToString());
+    ASSERT_EQ("255.255.255.255", IPAddress::None().ToString());
     
-    EXPECT_EQ("255.255.255.255", IPAddress().ToString());
+    ASSERT_EQ("255.255.255.255", IPAddress().ToString());
     
-    EXPECT_EQ("0.0.0.0", IPAddress(Int64(0x0000000000000000LL)).ToString());
-    EXPECT_EQ("255.255.255.255", IPAddress(Int64(0x00000000FFFFFFFFLL)).ToString());
-    EXPECT_EQ("172.0.10.35", IPAddress(Int64(0x00000000230A00ACLL)).ToString());
+    ASSERT_EQ("0.0.0.0", IPAddress(Int64(0x0000000000000000LL)).ToString());
+    ASSERT_EQ("255.255.255.255", IPAddress(Int64(0x00000000FFFFFFFFLL)).ToString());
+    ASSERT_EQ("172.0.10.35", IPAddress(Int64(0x00000000230A00ACLL)).ToString());
     
-    EXPECT_EQ("0.0.0.0", IPAddress(IPAddress::Any).ToString());
-    EXPECT_EQ("255.255.255.255", IPAddress(IPAddress::Broadcast).ToString());
-    EXPECT_EQ("[0:0:0:0:0:0:0:0]", IPAddress(IPAddress::IPv6Any).ToString());
-    EXPECT_EQ("[0:0:0:0:0:0:0:1]", IPAddress(IPAddress::IPv6Loopback).ToString());
-    EXPECT_EQ("[0:0:0:0:0:0:0:0]", IPAddress(IPAddress::IPv6None).ToString());
-    EXPECT_EQ("127.0.0.1", IPAddress(IPAddress::Loopback).ToString());
-    EXPECT_EQ("255.255.255.255", IPAddress(IPAddress::None).ToString());
+    ASSERT_EQ("0.0.0.0", IPAddress(IPAddress::Any).ToString());
+    ASSERT_EQ("255.255.255.255", IPAddress(IPAddress::Broadcast).ToString());
+    ASSERT_EQ("[0:0:0:0:0:0:0:0]", IPAddress(IPAddress::IPv6Any).ToString());
+    ASSERT_EQ("[0:0:0:0:0:0:0:1]", IPAddress(IPAddress::IPv6Loopback).ToString());
+    ASSERT_EQ("[0:0:0:0:0:0:0:0]", IPAddress(IPAddress::IPv6None).ToString());
+    ASSERT_EQ("127.0.0.1", IPAddress(IPAddress::Loopback).ToString());
+    ASSERT_EQ("255.255.255.255", IPAddress(IPAddress::None).ToString());
     
-    EXPECT_EQ("172.16.10.30", IPAddress(Array<byte> {172, 16, 10, 30}).ToString());
+    ASSERT_EQ("172.16.10.30", IPAddress(Array<byte> {172, 16, 10, 30}).ToString());
     
-    EXPECT_THROW(IPAddress(Array<byte> {172, 16}), ArgumentException);
-    EXPECT_THROW(IPAddress(Array<byte> {172, 16, 10, 30, 25, 42}), ArgumentException);
+    ASSERT_THROW(IPAddress(Array<byte> {172, 16}), ArgumentException);
+    ASSERT_THROW(IPAddress(Array<byte> {172, 16, 10, 30, 25, 42}), ArgumentException);
     
-    EXPECT_EQ("[2001:0:5ef5:73b8:2c2c:3028:2a4e:b283]", IPAddress(Array<byte> {0x20, 0x01, 0x00, 0x00, 0x5e, 0xf5, 0x73, 0xb8, 0x2c, 0x2c, 0x30, 0x28, 0x2a, 0x4e, 0xb2, 0x83}).ToString());
-    EXPECT_EQ("[2001:0:5ef5:73b8:2c2c:3028:2a4e:b283%15]", IPAddress({0x20, 0x01, 0x00, 0x00, 0x5e, 0xf5, 0x73, 0xb8, 0x2c, 0x2c, 0x30, 0x28, 0x2a, 0x4e, 0xb2, 0x83}, 15).ToString());
+    ASSERT_EQ("[2001:0:5ef5:73b8:2c2c:3028:2a4e:b283]", IPAddress(Array<byte> {0x20, 0x01, 0x00, 0x00, 0x5e, 0xf5, 0x73, 0xb8, 0x2c, 0x2c, 0x30, 0x28, 0x2a, 0x4e, 0xb2, 0x83}).ToString());
+    ASSERT_EQ("[2001:0:5ef5:73b8:2c2c:3028:2a4e:b283%15]", IPAddress({0x20, 0x01, 0x00, 0x00, 0x5e, 0xf5, 0x73, 0xb8, 0x2c, 0x2c, 0x30, 0x28, 0x2a, 0x4e, 0xb2, 0x83}, 15).ToString());
     
-    EXPECT_EQ("147.24.35.22", IPAddress(IPAddress(147, 24, 35, 22)).ToString());
+    ASSERT_EQ("147.24.35.22", IPAddress(IPAddress(147, 24, 35, 22)).ToString());
     
-    EXPECT_EQ("0.0.0.0", IPAddress(0, 0, 0, 0).ToString());
-    EXPECT_EQ("10.11.12.35", IPAddress(10, 11, 12, 35).ToString());
-    EXPECT_EQ("255.255.255.255", IPAddress(255, 255, 255, 255).ToString());
+    ASSERT_EQ("0.0.0.0", IPAddress(0, 0, 0, 0).ToString());
+    ASSERT_EQ("10.11.12.35", IPAddress(10, 11, 12, 35).ToString());
+    ASSERT_EQ("255.255.255.255", IPAddress(255, 255, 255, 255).ToString());
   }
   
   TEST(IPAddress, Equals) {
-    EXPECT_TRUE(IPAddress(172, 16, 12, 24).Equals(IPAddress(172, 16, 12, 24)));
-    EXPECT_FALSE(IPAddress(172, 16, 12, 24).Equals(IPAddress(172, 16, 12, 25)));
+    ASSERT_TRUE(IPAddress(172, 16, 12, 24).Equals(IPAddress(172, 16, 12, 24)));
+    ASSERT_FALSE(IPAddress(172, 16, 12, 24).Equals(IPAddress(172, 16, 12, 25)));
     
     IPAddress addr1(172, 16, 12, 24);
     IPAddress addr2(172, 16, 12, 25);
     Object* obj1 = &addr1;
     Object* obj2 = &addr2;
-    EXPECT_TRUE(IPAddress(172, 16, 12, 24).Equals(*obj1));
-    EXPECT_FALSE(IPAddress(172, 16, 12, 24).Equals(*obj2));
-    EXPECT_FALSE(IPAddress(172, 16, 12, 24).Equals(string("172.16.12.24")));
+    ASSERT_TRUE(IPAddress(172, 16, 12, 24).Equals(*obj1));
+    ASSERT_FALSE(IPAddress(172, 16, 12, 24).Equals(*obj2));
+    ASSERT_FALSE(IPAddress(172, 16, 12, 24).Equals(string("172.16.12.24")));
   }
   
   TEST(IPAddress, GetAddressBytes) {
@@ -124,21 +123,21 @@ namespace {
     
     byte quadPartAddress1, quadPartAddress2, quadPartAddress3, quadPartAddress4;
     IPAddress(172, 16, 12, 24).GetAddressBytes(quadPartAddress1, quadPartAddress2, quadPartAddress3, quadPartAddress4);
-    EXPECT_EQ(quadPartAddress1, 172);
-    EXPECT_EQ(quadPartAddress2, 16);
-    EXPECT_EQ(quadPartAddress3, 12);
-    EXPECT_EQ(quadPartAddress4, 24);    
+    ASSERT_EQ(quadPartAddress1, 172);
+    ASSERT_EQ(quadPartAddress2, 16);
+    ASSERT_EQ(quadPartAddress3, 12);
+    ASSERT_EQ(quadPartAddress4, 24);    
   }
   
   TEST(IPAddress, GetAddressFamily) {
-    EXPECT_EQ(AddressFamily(AddressFamily::InterNetwork), IPAddress(Array<byte> {172, 16, 10, 30}).AddressFamily);
-    EXPECT_EQ(AddressFamily(AddressFamily::InterNetworkV6), IPAddress(Array<byte> {0x20, 0x01, 0x00, 0x00, 0x5e, 0xf5, 0x73, 0xb8, 0x2c, 0x2c, 0x30, 0x28, 0x2a, 0x4e, 0xb2, 0x83}).AddressFamily);
+    ASSERT_EQ(AddressFamily(AddressFamily::InterNetwork), IPAddress(Array<byte> {172, 16, 10, 30}).AddressFamily);
+    ASSERT_EQ(AddressFamily(AddressFamily::InterNetworkV6), IPAddress(Array<byte> {0x20, 0x01, 0x00, 0x00, 0x5e, 0xf5, 0x73, 0xb8, 0x2c, 0x2c, 0x30, 0x28, 0x2a, 0x4e, 0xb2, 0x83}).AddressFamily);
   }
   
   TEST(IPAddress, GetScopeId) {
-    EXPECT_THROW(IPAddress(Array<byte> {172, 16, 10, 30}).ScopeId(), SocketException);
-    EXPECT_EQ(0, IPAddress(Array<byte> {0x20, 0x01, 0x00, 0x00, 0x5e, 0xf5, 0x73, 0xb8, 0x2c, 0x2c, 0x30, 0x28, 0x2a, 0x4e, 0xb2, 0x83}).ScopeId);
-    EXPECT_EQ(15, IPAddress(Array<byte> {0x20, 0x01, 0x00, 0x00, 0x5e, 0xf5, 0x73, 0xb8, 0x2c, 0x2c, 0x30, 0x28, 0x2a, 0x4e, 0xb2, 0x83}, 15).ScopeId);
+    ASSERT_THROW(IPAddress(Array<byte> {172, 16, 10, 30}).ScopeId(), SocketException);
+    ASSERT_EQ(0, IPAddress(Array<byte> {0x20, 0x01, 0x00, 0x00, 0x5e, 0xf5, 0x73, 0xb8, 0x2c, 0x2c, 0x30, 0x28, 0x2a, 0x4e, 0xb2, 0x83}).ScopeId);
+    ASSERT_EQ(15, IPAddress(Array<byte> {0x20, 0x01, 0x00, 0x00, 0x5e, 0xf5, 0x73, 0xb8, 0x2c, 0x2c, 0x30, 0x28, 0x2a, 0x4e, 0xb2, 0x83}, 15).ScopeId);
   }
   
   TEST(IPAddress, IsIPv6LinkLocal) {
@@ -147,38 +146,38 @@ namespace {
   
   TEST(IPAddress, HostToNetworkOrder) {
     if (BitConverter::IsLittleEndian()) {
-      EXPECT_EQ(int16(0x3412), IPAddress::HostToNetworkOrder(int16(0x1234)));
-      EXPECT_EQ(int32(0x78563412), IPAddress::HostToNetworkOrder(int32(0x12345678)));
-      EXPECT_EQ(int64(0xF0DEBC9A78563412), IPAddress::HostToNetworkOrder(int64(0x123456789ABCDEF0)));
+      ASSERT_EQ(int16(0x3412), IPAddress::HostToNetworkOrder(int16(0x1234)));
+      ASSERT_EQ(int32(0x78563412), IPAddress::HostToNetworkOrder(int32(0x12345678)));
+      ASSERT_EQ(int64(0xF0DEBC9A78563412), IPAddress::HostToNetworkOrder(int64(0x123456789ABCDEF0)));
     } else {
-      EXPECT_EQ(int16(0x1234), IPAddress::HostToNetworkOrder(int16(0x1234)));
-      EXPECT_EQ(int32(0x12345678), IPAddress::HostToNetworkOrder(int32(0x12345678)));
-      EXPECT_EQ(int64(0x123456789ABCDEF0), IPAddress::HostToNetworkOrder(int64(0x123456789ABCDEF0)));
+      ASSERT_EQ(int16(0x1234), IPAddress::HostToNetworkOrder(int16(0x1234)));
+      ASSERT_EQ(int32(0x12345678), IPAddress::HostToNetworkOrder(int32(0x12345678)));
+      ASSERT_EQ(int64(0x123456789ABCDEF0), IPAddress::HostToNetworkOrder(int64(0x123456789ABCDEF0)));
     }
   }
   
   TEST(IPAddress, IsLoopback) {
-    EXPECT_FALSE(IPAddress::IsLoopback(IPAddress(172, 16, 12, 24)));
-    EXPECT_FALSE(IPAddress::IsLoopback(IPAddress(0, 0, 0, 0)));
-    EXPECT_TRUE(IPAddress::IsLoopback(IPAddress(127, 0, 0, 1)));
-    EXPECT_TRUE(IPAddress::IsLoopback(IPAddress::Loopback));
-    EXPECT_TRUE(IPAddress::IsLoopback(IPAddress::IPv6Loopback));
+    ASSERT_FALSE(IPAddress::IsLoopback(IPAddress(172, 16, 12, 24)));
+    ASSERT_FALSE(IPAddress::IsLoopback(IPAddress(0, 0, 0, 0)));
+    ASSERT_TRUE(IPAddress::IsLoopback(IPAddress(127, 0, 0, 1)));
+    ASSERT_TRUE(IPAddress::IsLoopback(IPAddress::Loopback));
+    ASSERT_TRUE(IPAddress::IsLoopback(IPAddress::IPv6Loopback));
   }
   
   TEST(IPAddress, NetworkToHostOrder) {
     if (BitConverter::IsLittleEndian()) {
-      EXPECT_EQ(int16(0x3412), IPAddress::NetworkToHostOrder(int16(0x1234)));
-      EXPECT_EQ(int32(0x78563412), IPAddress::NetworkToHostOrder(int32(0x12345678)));
-      EXPECT_EQ(int64(0xF0DEBC9A78563412), IPAddress::NetworkToHostOrder(int64(0x123456789ABCDEF0)));
+      ASSERT_EQ(int16(0x3412), IPAddress::NetworkToHostOrder(int16(0x1234)));
+      ASSERT_EQ(int32(0x78563412), IPAddress::NetworkToHostOrder(int32(0x12345678)));
+      ASSERT_EQ(int64(0xF0DEBC9A78563412), IPAddress::NetworkToHostOrder(int64(0x123456789ABCDEF0)));
     } else {
-      EXPECT_EQ(int16(0x1234), IPAddress::NetworkToHostOrder(int16(0x1234)));
-      EXPECT_EQ(int32(0x12345678), IPAddress::NetworkToHostOrder(int32(0x12345678)));
-      EXPECT_EQ(int64(0x123456789ABCDEF0), IPAddress::NetworkToHostOrder(int64(0x123456789ABCDEF0)));
+      ASSERT_EQ(int16(0x1234), IPAddress::NetworkToHostOrder(int16(0x1234)));
+      ASSERT_EQ(int32(0x12345678), IPAddress::NetworkToHostOrder(int32(0x12345678)));
+      ASSERT_EQ(int64(0x123456789ABCDEF0), IPAddress::NetworkToHostOrder(int64(0x123456789ABCDEF0)));
     }
   }
   
   TEST(IPAddress, Parse) {
-    EXPECT_EQ("172.16.12.24", IPAddress::Parse("172.16.12.24").ToString());
+    ASSERT_EQ("172.16.12.24", IPAddress::Parse("172.16.12.24").ToString());
   }
   
 }

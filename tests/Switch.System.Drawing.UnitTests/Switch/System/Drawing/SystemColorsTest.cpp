@@ -1,376 +1,338 @@
 #include <Switch/System/Drawing/SystemColors.hpp>
-#include <Switch/TUnit/Assert.hpp>
-#include <Switch/TUnit/TestFixture.hpp>
+#include <gtest/gtest.h>
 
 using namespace System;
 using namespace System::Drawing;
-using namespace TUnit;
 
 namespace SwitchUnitTests {
-  class SystemColors : public TestFixture {
-  public:
-    void ActiveBorder() {
-      //Assert::AreEqual(0xFFB4B4B4u, (unsigned)Drawing::SystemColors::ActiveBorder().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::SystemColors::ActiveBorder().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::ActiveBorder().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::ActiveBorder().IsNamedColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::ActiveBorder().IsSystemColor(), _caller);
-      Assert::AreEqual("ActiveBorder", Drawing::SystemColors::ActiveBorder().Name(), _caller);
-      Assert::AreEqual("Color [ActiveBorder]", Drawing::SystemColors::ActiveBorder().ToString(), _caller);
-    }
-    
-    void ActiveCaption() {
-      //Assert::AreEqual(0xFF99B4D1u, (unsigned)Drawing::SystemColors::ActiveCaption().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::SystemColors::ActiveCaption().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::ActiveCaption().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::ActiveCaption().IsNamedColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::ActiveCaption().IsSystemColor(), _caller);
-      Assert::AreEqual("ActiveCaption", Drawing::SystemColors::ActiveCaption().Name(), _caller);
-      Assert::AreEqual("Color [ActiveCaption]", Drawing::SystemColors::ActiveCaption().ToString(), _caller);
-    }
-    
-    void ActiveCaptionText() {
-      //Assert::AreEqual(0xFF000000u, (unsigned)Drawing::SystemColors::ActiveCaptionText().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::SystemColors::ActiveCaptionText().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::ActiveCaptionText().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::ActiveCaptionText().IsNamedColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::ActiveCaptionText().IsSystemColor(), _caller);
-      Assert::AreEqual("ActiveCaptionText", Drawing::SystemColors::ActiveCaptionText().Name(), _caller);
-      Assert::AreEqual("Color [ActiveCaptionText]", Drawing::SystemColors::ActiveCaptionText().ToString(), _caller);
-    }
-    
-    void AppWorkspace() {
-      //Assert::AreEqual(0xFFABABABu, (unsigned)Drawing::SystemColors::AppWorkspace().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::SystemColors::AppWorkspace().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::AppWorkspace().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::AppWorkspace().IsNamedColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::AppWorkspace().IsSystemColor(), _caller);
-      Assert::AreEqual("AppWorkspace", Drawing::SystemColors::AppWorkspace().Name(), _caller);
-      Assert::AreEqual("Color [AppWorkspace]", Drawing::SystemColors::AppWorkspace().ToString(), _caller);
-    }
-    
-    void Control() {
-      //Assert::AreEqual(0xFFF0F0F0u, (unsigned)Drawing::SystemColors::Control().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::SystemColors::Control().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::Control().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::Control().IsNamedColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::Control().IsSystemColor(), _caller);
-      Assert::AreEqual("Control", Drawing::SystemColors::Control().Name(), _caller);
-      Assert::AreEqual("Color [Control]", Drawing::SystemColors::Control().ToString(), _caller);
-    }
-    
-    void ControlDark() {
-      //Assert::AreEqual(0xFFA0A0A0u, (unsigned)Drawing::SystemColors::ControlDark().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::SystemColors::ControlDark().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::ControlDark().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::ControlDark().IsNamedColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::ControlDark().IsSystemColor(), _caller);
-      Assert::AreEqual("ControlDark", Drawing::SystemColors::ControlDark().Name(), _caller);
-      Assert::AreEqual("Color [ControlDark]", Drawing::SystemColors::ControlDark().ToString(), _caller);
-    }
-    
-    void ControlDarkDark() {
-      //Assert::AreEqual(0xFF696969u, (unsigned)Drawing::SystemColors::ControlDarkDark().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::SystemColors::ControlDarkDark().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::ControlDarkDark().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::ControlDarkDark().IsNamedColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::ControlDarkDark().IsSystemColor(), _caller);
-      Assert::AreEqual("ControlDarkDark", Drawing::SystemColors::ControlDarkDark().Name(), _caller);
-      Assert::AreEqual("Color [ControlDarkDark]", Drawing::SystemColors::ControlDarkDark().ToString(), _caller);
-    }
-    
-    void ControlLight() {
-      //Assert::AreEqual(0xFFE3E3E3u, (unsigned)Drawing::SystemColors::ControlLight().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::SystemColors::ControlLight().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::ControlLight().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::ControlLight().IsNamedColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::ControlLight().IsSystemColor(), _caller);
-      Assert::AreEqual("ControlLight", Drawing::SystemColors::ControlLight().Name(), _caller);
-      Assert::AreEqual("Color [ControlLight]", Drawing::SystemColors::ControlLight().ToString(), _caller);
-    }
-    
-    void ControlLightLight() {
-      //Assert::AreEqual(0xFFFFFFFFu, (unsigned)Drawing::SystemColors::ControlLightLight().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::SystemColors::ControlLightLight().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::ControlLightLight().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::ControlLightLight().IsNamedColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::ControlLightLight().IsSystemColor(), _caller);
-      Assert::AreEqual("ControlLightLight", Drawing::SystemColors::ControlLightLight().Name(), _caller);
-      Assert::AreEqual("Color [ControlLightLight]", Drawing::SystemColors::ControlLightLight().ToString(), _caller);
-    }
-    
-    void ControlText() {
-      //Assert::AreEqual(0xFF000000u, (unsigned)Drawing::SystemColors::ControlText().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::SystemColors::ControlText().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::ControlText().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::ControlText().IsNamedColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::ControlText().IsSystemColor(), _caller);
-      Assert::AreEqual("ControlText", Drawing::SystemColors::ControlText().Name(), _caller);
-      Assert::AreEqual("Color [ControlText]", Drawing::SystemColors::ControlText().ToString(), _caller);
-    }
-    
-    void Desktop() {
-      //Assert::AreEqual(0xFF000000u, (unsigned)Drawing::SystemColors::Desktop().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::SystemColors::Desktop().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::Desktop().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::Desktop().IsNamedColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::Desktop().IsSystemColor(), _caller);
-      Assert::AreEqual("Desktop", Drawing::SystemColors::Desktop().Name(), _caller);
-      Assert::AreEqual("Color [Desktop]", Drawing::SystemColors::Desktop().ToString(), _caller);
-    }
-    
-    void GrayText() {
-      //Assert::AreEqual(0xFF6D6D6Du, (unsigned)Drawing::SystemColors::GrayText().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::SystemColors::GrayText().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::GrayText().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::GrayText().IsNamedColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::GrayText().IsSystemColor(), _caller);
-      Assert::AreEqual("GrayText", Drawing::SystemColors::GrayText().Name(), _caller);
-      Assert::AreEqual("Color [GrayText]", Drawing::SystemColors::GrayText().ToString(), _caller);
-    }
-    
-    void Highlight() {
-      //Assert::AreEqual(0xFF3399FFu, (unsigned)Drawing::SystemColors::Highlight().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::SystemColors::Highlight().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::Highlight().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::Highlight().IsNamedColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::Highlight().IsSystemColor(), _caller);
-      Assert::AreEqual("Highlight", Drawing::SystemColors::Highlight().Name(), _caller);
-      Assert::AreEqual("Color [Highlight]", Drawing::SystemColors::Highlight().ToString(), _caller);
-    }
-    
-    void HighlightText() {
-      //Assert::AreEqual(0xFFFFFFFFu, (unsigned)Drawing::SystemColors::HighlightText().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::SystemColors::HighlightText().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::HighlightText().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::HighlightText().IsNamedColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::HighlightText().IsSystemColor(), _caller);
-      Assert::AreEqual("HighlightText", Drawing::SystemColors::HighlightText().Name(), _caller);
-      Assert::AreEqual("Color [HighlightText]", Drawing::SystemColors::HighlightText().ToString(), _caller);
-    }
-    
-    void HotTrack() {
-      //Assert::AreEqual(0xFF0066CCu, (unsigned)Drawing::SystemColors::HotTrack().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::SystemColors::HotTrack().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::HotTrack().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::HotTrack().IsNamedColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::HotTrack().IsSystemColor(), _caller);
-      Assert::AreEqual("HotTrack", Drawing::SystemColors::HotTrack().Name(), _caller);
-      Assert::AreEqual("Color [HotTrack]", Drawing::SystemColors::HotTrack().ToString(), _caller);
-    }
-    
-    void InactiveBorder() {
-      //Assert::AreEqual(0xFFF4F7FCu, (unsigned)Drawing::SystemColors::InactiveBorder().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::SystemColors::InactiveBorder().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::InactiveBorder().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::InactiveBorder().IsNamedColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::InactiveBorder().IsSystemColor(), _caller);
-      Assert::AreEqual("InactiveBorder", Drawing::SystemColors::InactiveBorder().Name(), _caller);
-      Assert::AreEqual("Color [InactiveBorder]", Drawing::SystemColors::InactiveBorder().ToString(), _caller);
-    }
-    
-    void InactiveCaption() {
-      //Assert::AreEqual(0xFFBFCDDBu, (unsigned)Drawing::SystemColors::InactiveCaption().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::SystemColors::InactiveCaption().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::InactiveCaption().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::InactiveCaption().IsNamedColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::InactiveCaption().IsSystemColor(), _caller);
-      Assert::AreEqual("InactiveCaption", Drawing::SystemColors::InactiveCaption().Name(), _caller);
-      Assert::AreEqual("Color [InactiveCaption]", Drawing::SystemColors::InactiveCaption().ToString(), _caller);
-    }
-    
-    void InactiveCaptionText() {
-      //Assert::AreEqual(0xFF000000u, (unsigned)Drawing::SystemColors::InactiveCaptionText().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::SystemColors::InactiveCaptionText().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::InactiveCaptionText().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::InactiveCaptionText().IsNamedColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::InactiveCaptionText().IsSystemColor(), _caller);
-      Assert::AreEqual("InactiveCaptionText", Drawing::SystemColors::InactiveCaptionText().Name(), _caller);
-      Assert::AreEqual("Color [InactiveCaptionText]", Drawing::SystemColors::InactiveCaptionText().ToString(), _caller);
-    }
-    
-    void Info() {
-      //Assert::AreEqual(0xFFFFFFE1u, (unsigned)Drawing::SystemColors::Info().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::SystemColors::Info().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::Info().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::Info().IsNamedColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::Info().IsSystemColor(), _caller);
-      Assert::AreEqual("Info", Drawing::SystemColors::Info().Name(), _caller);
-      Assert::AreEqual("Color [Info]", Drawing::SystemColors::Info().ToString(), _caller);
-    }
-    
-    void InfoText() {
-      //Assert::AreEqual(0xFF000000u, (unsigned)Drawing::SystemColors::InfoText().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::SystemColors::InfoText().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::InfoText().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::InfoText().IsNamedColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::InfoText().IsSystemColor(), _caller);
-      Assert::AreEqual("InfoText", Drawing::SystemColors::InfoText().Name(), _caller);
-      Assert::AreEqual("Color [InfoText]", Drawing::SystemColors::InfoText().ToString(), _caller);
-    }
-    
-    void Menu() {
-      //Assert::AreEqual(0xFFF0F0F0u, (unsigned)Drawing::SystemColors::Menu().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::SystemColors::Menu().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::Menu().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::Menu().IsNamedColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::Menu().IsSystemColor(), _caller);
-      Assert::AreEqual("Menu", Drawing::SystemColors::Menu().Name(), _caller);
-      Assert::AreEqual("Color [Menu]", Drawing::SystemColors::Menu().ToString(), _caller);
-    }
-    
-    void MenuText() {
-      //Assert::AreEqual(0xFF000000u, (unsigned)Drawing::SystemColors::MenuText().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::SystemColors::MenuText().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::MenuText().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::MenuText().IsNamedColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::MenuText().IsSystemColor(), _caller);
-      Assert::AreEqual("MenuText", Drawing::SystemColors::MenuText().Name(), _caller);
-      Assert::AreEqual("Color [MenuText]", Drawing::SystemColors::MenuText().ToString(), _caller);
-    }
-    
-    void ScrollBar() {
-      //Assert::AreEqual(0xFFC8C8C8u, (unsigned)Drawing::SystemColors::ScrollBar().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::SystemColors::ScrollBar().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::ScrollBar().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::ScrollBar().IsNamedColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::ScrollBar().IsSystemColor(), _caller);
-      Assert::AreEqual("ScrollBar", Drawing::SystemColors::ScrollBar().Name(), _caller);
-      Assert::AreEqual("Color [ScrollBar]", Drawing::SystemColors::ScrollBar().ToString(), _caller);
-    }
-    
-    void Window() {
-      //Assert::AreEqual(0xFFFFFFFFu, (unsigned)Drawing::SystemColors::Window().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::SystemColors::Window().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::Window().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::Window().IsNamedColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::Window().IsSystemColor(), _caller);
-      Assert::AreEqual("Window", Drawing::SystemColors::Window().Name(), _caller);
-      Assert::AreEqual("Color [Window]", Drawing::SystemColors::Window().ToString(), _caller);
-    }
-    
-    void WindowFrame() {
-      //Assert::AreEqual(0xFF646464u, (unsigned)Drawing::SystemColors::WindowFrame().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::SystemColors::WindowFrame().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::WindowFrame().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::WindowFrame().IsNamedColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::WindowFrame().IsSystemColor(), _caller);
-      Assert::AreEqual("WindowFrame", Drawing::SystemColors::WindowFrame().Name(), _caller);
-      Assert::AreEqual("Color [WindowFrame]", Drawing::SystemColors::WindowFrame().ToString(), _caller);
-    }
-    
-    void WindowText() {
-      //Assert::AreEqual(0xFF000000u, (unsigned)Drawing::SystemColors::WindowText().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::SystemColors::WindowText().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::WindowText().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::WindowText().IsNamedColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::WindowText().IsSystemColor(), _caller);
-      Assert::AreEqual("WindowText", Drawing::SystemColors::WindowText().Name(), _caller);
-      Assert::AreEqual("Color [WindowText]", Drawing::SystemColors::WindowText().ToString(), _caller);
-    }
-    
-    void ButtonFace() {
-      //Assert::AreEqual(0xFFF0F0F0u, (unsigned)Drawing::SystemColors::ButtonFace().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::SystemColors::ButtonFace().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::ButtonFace().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::ButtonFace().IsNamedColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::ButtonFace().IsSystemColor(), _caller);
-      Assert::AreEqual("ButtonFace", Drawing::SystemColors::ButtonFace().Name(), _caller);
-      Assert::AreEqual("Color [ButtonFace]", Drawing::SystemColors::ButtonFace().ToString(), _caller);
-    }
-    
-    void ButtonHighlight() {
-      //Assert::AreEqual(0xFFFFFFFFu, (unsigned)Drawing::SystemColors::ButtonHighlight().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::SystemColors::ButtonHighlight().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::ButtonHighlight().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::ButtonHighlight().IsNamedColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::ButtonHighlight().IsSystemColor(), _caller);
-      Assert::AreEqual("ButtonHighlight", Drawing::SystemColors::ButtonHighlight().Name(), _caller);
-      Assert::AreEqual("Color [ButtonHighlight]", Drawing::SystemColors::ButtonHighlight().ToString(), _caller);
-    }
-    
-    void ButtonShadow() {
-      //Assert::AreEqual(0xFFF0F0F0u, (unsigned)Drawing::SystemColors::ButtonShadow().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::SystemColors::ButtonShadow().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::ButtonShadow().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::ButtonShadow().IsNamedColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::ButtonShadow().IsSystemColor(), _caller);
-      Assert::AreEqual("ButtonShadow", Drawing::SystemColors::ButtonShadow().Name(), _caller);
-      Assert::AreEqual("Color [ButtonShadow]", Drawing::SystemColors::ButtonShadow().ToString(), _caller);
-    }
-    
-    void GradientActiveCaption() {
-      //Assert::AreEqual(0xFFB9D1EAu, (unsigned)Drawing::SystemColors::GradientActiveCaption().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::SystemColors::GradientActiveCaption().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::GradientActiveCaption().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::GradientActiveCaption().IsNamedColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::GradientActiveCaption().IsSystemColor(), _caller);
-      Assert::AreEqual("GradientActiveCaption", Drawing::SystemColors::GradientActiveCaption().Name(), _caller);
-      Assert::AreEqual("Color [GradientActiveCaption]", Drawing::SystemColors::GradientActiveCaption().ToString(), _caller);
-    }
-    
-    void GradientInactiveCaption() {
-      //Assert::AreEqual(0xFFD7E4F2u, (unsigned)Drawing::SystemColors::GradientInactiveCaption().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::SystemColors::GradientInactiveCaption().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::GradientInactiveCaption().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::GradientInactiveCaption().IsNamedColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::GradientInactiveCaption().IsSystemColor(), _caller);
-      Assert::AreEqual("GradientInactiveCaption", Drawing::SystemColors::GradientInactiveCaption().Name(), _caller);
-      Assert::AreEqual("Color [GradientInactiveCaption]", Drawing::SystemColors::GradientInactiveCaption().ToString(), _caller);
-    }
-    
-    void MenuBar() {
-      //Assert::AreEqual(0xFFF0F0F0u, (unsigned)Drawing::SystemColors::MenuBar().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::SystemColors::MenuBar().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::MenuBar().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::MenuBar().IsNamedColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::MenuBar().IsSystemColor(), _caller);
-      Assert::AreEqual("MenuBar", Drawing::SystemColors::MenuBar().Name(), _caller);
-      Assert::AreEqual("Color [MenuBar]", Drawing::SystemColors::MenuBar().ToString(), _caller);
-    }
-    
-    void MenuHighlight() {
-      //Assert::AreEqual(0xFF3399FFu, (unsigned)Drawing::SystemColors::MenuHighlight().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::SystemColors::MenuHighlight().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::MenuHighlight().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::MenuHighlight().IsNamedColor(), _caller);
-      Assert::IsTrue(Drawing::SystemColors::MenuHighlight().IsSystemColor(), _caller);
-      Assert::AreEqual("MenuHighlight", Drawing::SystemColors::MenuHighlight().Name(), _caller);
-      Assert::AreEqual("Color [MenuHighlight]", Drawing::SystemColors::MenuHighlight().ToString(), _caller);
-    }
-  };
+  TEST(SystemColorTest, ActiveBorder) {
+    //ASSERT_EQ(0xFFB4B4B4u, (unsigned)Drawing::SystemColors::ActiveBorder().ToArgb());
+    ASSERT_FALSE(Drawing::SystemColors::ActiveBorder().IsEmpty());
+    ASSERT_TRUE(Drawing::SystemColors::ActiveBorder().IsKnownColor());
+    ASSERT_TRUE(Drawing::SystemColors::ActiveBorder().IsNamedColor());
+    ASSERT_TRUE(Drawing::SystemColors::ActiveBorder().IsSystemColor());
+    ASSERT_EQ("ActiveBorder", Drawing::SystemColors::ActiveBorder().Name());
+    ASSERT_EQ("Color [ActiveBorder]", Drawing::SystemColors::ActiveBorder().ToString());
+  }
   
-  _AddTest(SystemColors, ActiveBorder)
-  _AddTest(SystemColors, ActiveCaption)
-  _AddTest(SystemColors, ActiveCaptionText)
-  _AddTest(SystemColors, AppWorkspace)
-  _AddTest(SystemColors, Control)
-  _AddTest(SystemColors, ControlDark)
-  _AddTest(SystemColors, ControlDarkDark)
-  _AddTest(SystemColors, ControlLight)
-  _AddTest(SystemColors, ControlLightLight)
-  _AddTest(SystemColors, ControlText)
-  _AddTest(SystemColors, Desktop)
-  _AddTest(SystemColors, GrayText)
-  _AddTest(SystemColors, Highlight)
-  _AddTest(SystemColors, HighlightText)
-  _AddTest(SystemColors, HotTrack)
-  _AddTest(SystemColors, InactiveBorder)
-  _AddTest(SystemColors, InactiveCaption)
-  _AddTest(SystemColors, InactiveCaptionText)
-  _AddTest(SystemColors, Info)
-  _AddTest(SystemColors, InfoText)
-  _AddTest(SystemColors, Menu)
-  _AddTest(SystemColors, MenuText)
-  _AddTest(SystemColors, ScrollBar)
-  _AddTest(SystemColors, Window)
-  _AddTest(SystemColors, WindowFrame)
-  _AddTest(SystemColors, WindowText)
-  _AddTest(SystemColors, ButtonFace)
-  _AddTest(SystemColors, ButtonHighlight)
-  _AddTest(SystemColors, ButtonShadow)
-  _AddTest(SystemColors, GradientActiveCaption)
-  _AddTest(SystemColors, GradientInactiveCaption)
-  _AddTest(SystemColors, MenuBar)
-  _AddTest(SystemColors, MenuHighlight)
+  TEST(SystemColorTest, ActiveCaption) {
+    //ASSERT_EQ(0xFF99B4D1u, (unsigned)Drawing::SystemColors::ActiveCaption().ToArgb());
+    ASSERT_FALSE(Drawing::SystemColors::ActiveCaption().IsEmpty());
+    ASSERT_TRUE(Drawing::SystemColors::ActiveCaption().IsKnownColor());
+    ASSERT_TRUE(Drawing::SystemColors::ActiveCaption().IsNamedColor());
+    ASSERT_TRUE(Drawing::SystemColors::ActiveCaption().IsSystemColor());
+    ASSERT_EQ("ActiveCaption", Drawing::SystemColors::ActiveCaption().Name());
+    ASSERT_EQ("Color [ActiveCaption]", Drawing::SystemColors::ActiveCaption().ToString());
+  }
+  
+  TEST(SystemColorTest, ActiveCaptionText) {
+    //ASSERT_EQ(0xFF000000u, (unsigned)Drawing::SystemColors::ActiveCaptionText().ToArgb());
+    ASSERT_FALSE(Drawing::SystemColors::ActiveCaptionText().IsEmpty());
+    ASSERT_TRUE(Drawing::SystemColors::ActiveCaptionText().IsKnownColor());
+    ASSERT_TRUE(Drawing::SystemColors::ActiveCaptionText().IsNamedColor());
+    ASSERT_TRUE(Drawing::SystemColors::ActiveCaptionText().IsSystemColor());
+    ASSERT_EQ("ActiveCaptionText", Drawing::SystemColors::ActiveCaptionText().Name());
+    ASSERT_EQ("Color [ActiveCaptionText]", Drawing::SystemColors::ActiveCaptionText().ToString());
+  }
+  
+  TEST(SystemColorTest, AppWorkspace) {
+    //ASSERT_EQ(0xFFABABABu, (unsigned)Drawing::SystemColors::AppWorkspace().ToArgb());
+    ASSERT_FALSE(Drawing::SystemColors::AppWorkspace().IsEmpty());
+    ASSERT_TRUE(Drawing::SystemColors::AppWorkspace().IsKnownColor());
+    ASSERT_TRUE(Drawing::SystemColors::AppWorkspace().IsNamedColor());
+    ASSERT_TRUE(Drawing::SystemColors::AppWorkspace().IsSystemColor());
+    ASSERT_EQ("AppWorkspace", Drawing::SystemColors::AppWorkspace().Name());
+    ASSERT_EQ("Color [AppWorkspace]", Drawing::SystemColors::AppWorkspace().ToString());
+  }
+  
+  TEST(SystemColorTest, Control) {
+    //ASSERT_EQ(0xFFF0F0F0u, (unsigned)Drawing::SystemColors::Control().ToArgb());
+    ASSERT_FALSE(Drawing::SystemColors::Control().IsEmpty());
+    ASSERT_TRUE(Drawing::SystemColors::Control().IsKnownColor());
+    ASSERT_TRUE(Drawing::SystemColors::Control().IsNamedColor());
+    ASSERT_TRUE(Drawing::SystemColors::Control().IsSystemColor());
+    ASSERT_EQ("Control", Drawing::SystemColors::Control().Name());
+    ASSERT_EQ("Color [Control]", Drawing::SystemColors::Control().ToString());
+  }
+  
+  TEST(SystemColorTest, ControlDark) {
+    //ASSERT_EQ(0xFFA0A0A0u, (unsigned)Drawing::SystemColors::ControlDark().ToArgb());
+    ASSERT_FALSE(Drawing::SystemColors::ControlDark().IsEmpty());
+    ASSERT_TRUE(Drawing::SystemColors::ControlDark().IsKnownColor());
+    ASSERT_TRUE(Drawing::SystemColors::ControlDark().IsNamedColor());
+    ASSERT_TRUE(Drawing::SystemColors::ControlDark().IsSystemColor());
+    ASSERT_EQ("ControlDark", Drawing::SystemColors::ControlDark().Name());
+    ASSERT_EQ("Color [ControlDark]", Drawing::SystemColors::ControlDark().ToString());
+  }
+  
+  TEST(SystemColorTest, ControlDarkDark) {
+    //ASSERT_EQ(0xFF696969u, (unsigned)Drawing::SystemColors::ControlDarkDark().ToArgb());
+    ASSERT_FALSE(Drawing::SystemColors::ControlDarkDark().IsEmpty());
+    ASSERT_TRUE(Drawing::SystemColors::ControlDarkDark().IsKnownColor());
+    ASSERT_TRUE(Drawing::SystemColors::ControlDarkDark().IsNamedColor());
+    ASSERT_TRUE(Drawing::SystemColors::ControlDarkDark().IsSystemColor());
+    ASSERT_EQ("ControlDarkDark", Drawing::SystemColors::ControlDarkDark().Name());
+    ASSERT_EQ("Color [ControlDarkDark]", Drawing::SystemColors::ControlDarkDark().ToString());
+  }
+  
+  TEST(SystemColorTest, ControlLight) {
+    //ASSERT_EQ(0xFFE3E3E3u, (unsigned)Drawing::SystemColors::ControlLight().ToArgb());
+    ASSERT_FALSE(Drawing::SystemColors::ControlLight().IsEmpty());
+    ASSERT_TRUE(Drawing::SystemColors::ControlLight().IsKnownColor());
+    ASSERT_TRUE(Drawing::SystemColors::ControlLight().IsNamedColor());
+    ASSERT_TRUE(Drawing::SystemColors::ControlLight().IsSystemColor());
+    ASSERT_EQ("ControlLight", Drawing::SystemColors::ControlLight().Name());
+    ASSERT_EQ("Color [ControlLight]", Drawing::SystemColors::ControlLight().ToString());
+  }
+  
+  TEST(SystemColorTest, ControlLightLight) {
+    //ASSERT_EQ(0xFFFFFFFFu, (unsigned)Drawing::SystemColors::ControlLightLight().ToArgb());
+    ASSERT_FALSE(Drawing::SystemColors::ControlLightLight().IsEmpty());
+    ASSERT_TRUE(Drawing::SystemColors::ControlLightLight().IsKnownColor());
+    ASSERT_TRUE(Drawing::SystemColors::ControlLightLight().IsNamedColor());
+    ASSERT_TRUE(Drawing::SystemColors::ControlLightLight().IsSystemColor());
+    ASSERT_EQ("ControlLightLight", Drawing::SystemColors::ControlLightLight().Name());
+    ASSERT_EQ("Color [ControlLightLight]", Drawing::SystemColors::ControlLightLight().ToString());
+  }
+  
+  TEST(SystemColorTest, ControlText) {
+    //ASSERT_EQ(0xFF000000u, (unsigned)Drawing::SystemColors::ControlText().ToArgb());
+    ASSERT_FALSE(Drawing::SystemColors::ControlText().IsEmpty());
+    ASSERT_TRUE(Drawing::SystemColors::ControlText().IsKnownColor());
+    ASSERT_TRUE(Drawing::SystemColors::ControlText().IsNamedColor());
+    ASSERT_TRUE(Drawing::SystemColors::ControlText().IsSystemColor());
+    ASSERT_EQ("ControlText", Drawing::SystemColors::ControlText().Name());
+    ASSERT_EQ("Color [ControlText]", Drawing::SystemColors::ControlText().ToString());
+  }
+  
+  TEST(SystemColorTest, Desktop) {
+    //ASSERT_EQ(0xFF000000u, (unsigned)Drawing::SystemColors::Desktop().ToArgb());
+    ASSERT_FALSE(Drawing::SystemColors::Desktop().IsEmpty());
+    ASSERT_TRUE(Drawing::SystemColors::Desktop().IsKnownColor());
+    ASSERT_TRUE(Drawing::SystemColors::Desktop().IsNamedColor());
+    ASSERT_TRUE(Drawing::SystemColors::Desktop().IsSystemColor());
+    ASSERT_EQ("Desktop", Drawing::SystemColors::Desktop().Name());
+    ASSERT_EQ("Color [Desktop]", Drawing::SystemColors::Desktop().ToString());
+  }
+  
+  TEST(SystemColorTest, GrayText) {
+    //ASSERT_EQ(0xFF6D6D6Du, (unsigned)Drawing::SystemColors::GrayText().ToArgb());
+    ASSERT_FALSE(Drawing::SystemColors::GrayText().IsEmpty());
+    ASSERT_TRUE(Drawing::SystemColors::GrayText().IsKnownColor());
+    ASSERT_TRUE(Drawing::SystemColors::GrayText().IsNamedColor());
+    ASSERT_TRUE(Drawing::SystemColors::GrayText().IsSystemColor());
+    ASSERT_EQ("GrayText", Drawing::SystemColors::GrayText().Name());
+    ASSERT_EQ("Color [GrayText]", Drawing::SystemColors::GrayText().ToString());
+  }
+  
+  TEST(SystemColorTest, Highlight) {
+    //ASSERT_EQ(0xFF3399FFu, (unsigned)Drawing::SystemColors::Highlight().ToArgb());
+    ASSERT_FALSE(Drawing::SystemColors::Highlight().IsEmpty());
+    ASSERT_TRUE(Drawing::SystemColors::Highlight().IsKnownColor());
+    ASSERT_TRUE(Drawing::SystemColors::Highlight().IsNamedColor());
+    ASSERT_TRUE(Drawing::SystemColors::Highlight().IsSystemColor());
+    ASSERT_EQ("Highlight", Drawing::SystemColors::Highlight().Name());
+    ASSERT_EQ("Color [Highlight]", Drawing::SystemColors::Highlight().ToString());
+  }
+  
+  TEST(SystemColorTest, HighlightText) {
+    //ASSERT_EQ(0xFFFFFFFFu, (unsigned)Drawing::SystemColors::HighlightText().ToArgb());
+    ASSERT_FALSE(Drawing::SystemColors::HighlightText().IsEmpty());
+    ASSERT_TRUE(Drawing::SystemColors::HighlightText().IsKnownColor());
+    ASSERT_TRUE(Drawing::SystemColors::HighlightText().IsNamedColor());
+    ASSERT_TRUE(Drawing::SystemColors::HighlightText().IsSystemColor());
+    ASSERT_EQ("HighlightText", Drawing::SystemColors::HighlightText().Name());
+    ASSERT_EQ("Color [HighlightText]", Drawing::SystemColors::HighlightText().ToString());
+  }
+  
+  TEST(SystemColorTest, HotTrack) {
+    //ASSERT_EQ(0xFF0066CCu, (unsigned)Drawing::SystemColors::HotTrack().ToArgb());
+    ASSERT_FALSE(Drawing::SystemColors::HotTrack().IsEmpty());
+    ASSERT_TRUE(Drawing::SystemColors::HotTrack().IsKnownColor());
+    ASSERT_TRUE(Drawing::SystemColors::HotTrack().IsNamedColor());
+    ASSERT_TRUE(Drawing::SystemColors::HotTrack().IsSystemColor());
+    ASSERT_EQ("HotTrack", Drawing::SystemColors::HotTrack().Name());
+    ASSERT_EQ("Color [HotTrack]", Drawing::SystemColors::HotTrack().ToString());
+  }
+  
+  TEST(SystemColorTest, InactiveBorder) {
+    //ASSERT_EQ(0xFFF4F7FCu, (unsigned)Drawing::SystemColors::InactiveBorder().ToArgb());
+    ASSERT_FALSE(Drawing::SystemColors::InactiveBorder().IsEmpty());
+    ASSERT_TRUE(Drawing::SystemColors::InactiveBorder().IsKnownColor());
+    ASSERT_TRUE(Drawing::SystemColors::InactiveBorder().IsNamedColor());
+    ASSERT_TRUE(Drawing::SystemColors::InactiveBorder().IsSystemColor());
+    ASSERT_EQ("InactiveBorder", Drawing::SystemColors::InactiveBorder().Name());
+    ASSERT_EQ("Color [InactiveBorder]", Drawing::SystemColors::InactiveBorder().ToString());
+  }
+  
+  TEST(SystemColorTest, InactiveCaption) {
+    //ASSERT_EQ(0xFFBFCDDBu, (unsigned)Drawing::SystemColors::InactiveCaption().ToArgb());
+    ASSERT_FALSE(Drawing::SystemColors::InactiveCaption().IsEmpty());
+    ASSERT_TRUE(Drawing::SystemColors::InactiveCaption().IsKnownColor());
+    ASSERT_TRUE(Drawing::SystemColors::InactiveCaption().IsNamedColor());
+    ASSERT_TRUE(Drawing::SystemColors::InactiveCaption().IsSystemColor());
+    ASSERT_EQ("InactiveCaption", Drawing::SystemColors::InactiveCaption().Name());
+    ASSERT_EQ("Color [InactiveCaption]", Drawing::SystemColors::InactiveCaption().ToString());
+  }
+  
+  TEST(SystemColorTest, InactiveCaptionText) {
+    //ASSERT_EQ(0xFF000000u, (unsigned)Drawing::SystemColors::InactiveCaptionText().ToArgb());
+    ASSERT_FALSE(Drawing::SystemColors::InactiveCaptionText().IsEmpty());
+    ASSERT_TRUE(Drawing::SystemColors::InactiveCaptionText().IsKnownColor());
+    ASSERT_TRUE(Drawing::SystemColors::InactiveCaptionText().IsNamedColor());
+    ASSERT_TRUE(Drawing::SystemColors::InactiveCaptionText().IsSystemColor());
+    ASSERT_EQ("InactiveCaptionText", Drawing::SystemColors::InactiveCaptionText().Name());
+    ASSERT_EQ("Color [InactiveCaptionText]", Drawing::SystemColors::InactiveCaptionText().ToString());
+  }
+  
+  TEST(SystemColorTest, Info) {
+    //ASSERT_EQ(0xFFFFFFE1u, (unsigned)Drawing::SystemColors::Info().ToArgb());
+    ASSERT_FALSE(Drawing::SystemColors::Info().IsEmpty());
+    ASSERT_TRUE(Drawing::SystemColors::Info().IsKnownColor());
+    ASSERT_TRUE(Drawing::SystemColors::Info().IsNamedColor());
+    ASSERT_TRUE(Drawing::SystemColors::Info().IsSystemColor());
+    ASSERT_EQ("Info", Drawing::SystemColors::Info().Name());
+    ASSERT_EQ("Color [Info]", Drawing::SystemColors::Info().ToString());
+  }
+  
+  TEST(SystemColorTest, InfoText) {
+    //ASSERT_EQ(0xFF000000u, (unsigned)Drawing::SystemColors::InfoText().ToArgb());
+    ASSERT_FALSE(Drawing::SystemColors::InfoText().IsEmpty());
+    ASSERT_TRUE(Drawing::SystemColors::InfoText().IsKnownColor());
+    ASSERT_TRUE(Drawing::SystemColors::InfoText().IsNamedColor());
+    ASSERT_TRUE(Drawing::SystemColors::InfoText().IsSystemColor());
+    ASSERT_EQ("InfoText", Drawing::SystemColors::InfoText().Name());
+    ASSERT_EQ("Color [InfoText]", Drawing::SystemColors::InfoText().ToString());
+  }
+  
+  TEST(SystemColorTest, Menu) {
+    //ASSERT_EQ(0xFFF0F0F0u, (unsigned)Drawing::SystemColors::Menu().ToArgb());
+    ASSERT_FALSE(Drawing::SystemColors::Menu().IsEmpty());
+    ASSERT_TRUE(Drawing::SystemColors::Menu().IsKnownColor());
+    ASSERT_TRUE(Drawing::SystemColors::Menu().IsNamedColor());
+    ASSERT_TRUE(Drawing::SystemColors::Menu().IsSystemColor());
+    ASSERT_EQ("Menu", Drawing::SystemColors::Menu().Name());
+    ASSERT_EQ("Color [Menu]", Drawing::SystemColors::Menu().ToString());
+  }
+  
+  TEST(SystemColorTest, MenuText) {
+    //ASSERT_EQ(0xFF000000u, (unsigned)Drawing::SystemColors::MenuText().ToArgb());
+    ASSERT_FALSE(Drawing::SystemColors::MenuText().IsEmpty());
+    ASSERT_TRUE(Drawing::SystemColors::MenuText().IsKnownColor());
+    ASSERT_TRUE(Drawing::SystemColors::MenuText().IsNamedColor());
+    ASSERT_TRUE(Drawing::SystemColors::MenuText().IsSystemColor());
+    ASSERT_EQ("MenuText", Drawing::SystemColors::MenuText().Name());
+    ASSERT_EQ("Color [MenuText]", Drawing::SystemColors::MenuText().ToString());
+  }
+  
+  TEST(SystemColorTest, ScrollBar) {
+    //ASSERT_EQ(0xFFC8C8C8u, (unsigned)Drawing::SystemColors::ScrollBar().ToArgb());
+    ASSERT_FALSE(Drawing::SystemColors::ScrollBar().IsEmpty());
+    ASSERT_TRUE(Drawing::SystemColors::ScrollBar().IsKnownColor());
+    ASSERT_TRUE(Drawing::SystemColors::ScrollBar().IsNamedColor());
+    ASSERT_TRUE(Drawing::SystemColors::ScrollBar().IsSystemColor());
+    ASSERT_EQ("ScrollBar", Drawing::SystemColors::ScrollBar().Name());
+    ASSERT_EQ("Color [ScrollBar]", Drawing::SystemColors::ScrollBar().ToString());
+  }
+  
+  TEST(SystemColorTest, Window) {
+    //ASSERT_EQ(0xFFFFFFFFu, (unsigned)Drawing::SystemColors::Window().ToArgb());
+    ASSERT_FALSE(Drawing::SystemColors::Window().IsEmpty());
+    ASSERT_TRUE(Drawing::SystemColors::Window().IsKnownColor());
+    ASSERT_TRUE(Drawing::SystemColors::Window().IsNamedColor());
+    ASSERT_TRUE(Drawing::SystemColors::Window().IsSystemColor());
+    ASSERT_EQ("Window", Drawing::SystemColors::Window().Name());
+    ASSERT_EQ("Color [Window]", Drawing::SystemColors::Window().ToString());
+  }
+  
+  TEST(SystemColorTest, WindowFrame) {
+    //ASSERT_EQ(0xFF646464u, (unsigned)Drawing::SystemColors::WindowFrame().ToArgb());
+    ASSERT_FALSE(Drawing::SystemColors::WindowFrame().IsEmpty());
+    ASSERT_TRUE(Drawing::SystemColors::WindowFrame().IsKnownColor());
+    ASSERT_TRUE(Drawing::SystemColors::WindowFrame().IsNamedColor());
+    ASSERT_TRUE(Drawing::SystemColors::WindowFrame().IsSystemColor());
+    ASSERT_EQ("WindowFrame", Drawing::SystemColors::WindowFrame().Name());
+    ASSERT_EQ("Color [WindowFrame]", Drawing::SystemColors::WindowFrame().ToString());
+  }
+  
+  TEST(SystemColorTest, WindowText) {
+    //ASSERT_EQ(0xFF000000u, (unsigned)Drawing::SystemColors::WindowText().ToArgb());
+    ASSERT_FALSE(Drawing::SystemColors::WindowText().IsEmpty());
+    ASSERT_TRUE(Drawing::SystemColors::WindowText().IsKnownColor());
+    ASSERT_TRUE(Drawing::SystemColors::WindowText().IsNamedColor());
+    ASSERT_TRUE(Drawing::SystemColors::WindowText().IsSystemColor());
+    ASSERT_EQ("WindowText", Drawing::SystemColors::WindowText().Name());
+    ASSERT_EQ("Color [WindowText]", Drawing::SystemColors::WindowText().ToString());
+  }
+  
+  TEST(SystemColorTest, ButtonFace) {
+    //ASSERT_EQ(0xFFF0F0F0u, (unsigned)Drawing::SystemColors::ButtonFace().ToArgb());
+    ASSERT_FALSE(Drawing::SystemColors::ButtonFace().IsEmpty());
+    ASSERT_TRUE(Drawing::SystemColors::ButtonFace().IsKnownColor());
+    ASSERT_TRUE(Drawing::SystemColors::ButtonFace().IsNamedColor());
+    ASSERT_TRUE(Drawing::SystemColors::ButtonFace().IsSystemColor());
+    ASSERT_EQ("ButtonFace", Drawing::SystemColors::ButtonFace().Name());
+    ASSERT_EQ("Color [ButtonFace]", Drawing::SystemColors::ButtonFace().ToString());
+  }
+  
+  TEST(SystemColorTest, ButtonHighlight) {
+    //ASSERT_EQ(0xFFFFFFFFu, (unsigned)Drawing::SystemColors::ButtonHighlight().ToArgb());
+    ASSERT_FALSE(Drawing::SystemColors::ButtonHighlight().IsEmpty());
+    ASSERT_TRUE(Drawing::SystemColors::ButtonHighlight().IsKnownColor());
+    ASSERT_TRUE(Drawing::SystemColors::ButtonHighlight().IsNamedColor());
+    ASSERT_TRUE(Drawing::SystemColors::ButtonHighlight().IsSystemColor());
+    ASSERT_EQ("ButtonHighlight", Drawing::SystemColors::ButtonHighlight().Name());
+    ASSERT_EQ("Color [ButtonHighlight]", Drawing::SystemColors::ButtonHighlight().ToString());
+  }
+  
+  TEST(SystemColorTest, ButtonShadow) {
+    //ASSERT_EQ(0xFFF0F0F0u, (unsigned)Drawing::SystemColors::ButtonShadow().ToArgb());
+    ASSERT_FALSE(Drawing::SystemColors::ButtonShadow().IsEmpty());
+    ASSERT_TRUE(Drawing::SystemColors::ButtonShadow().IsKnownColor());
+    ASSERT_TRUE(Drawing::SystemColors::ButtonShadow().IsNamedColor());
+    ASSERT_TRUE(Drawing::SystemColors::ButtonShadow().IsSystemColor());
+    ASSERT_EQ("ButtonShadow", Drawing::SystemColors::ButtonShadow().Name());
+    ASSERT_EQ("Color [ButtonShadow]", Drawing::SystemColors::ButtonShadow().ToString());
+  }
+  
+  TEST(SystemColorTest, GradientActiveCaption) {
+    //ASSERT_EQ(0xFFB9D1EAu, (unsigned)Drawing::SystemColors::GradientActiveCaption().ToArgb());
+    ASSERT_FALSE(Drawing::SystemColors::GradientActiveCaption().IsEmpty());
+    ASSERT_TRUE(Drawing::SystemColors::GradientActiveCaption().IsKnownColor());
+    ASSERT_TRUE(Drawing::SystemColors::GradientActiveCaption().IsNamedColor());
+    ASSERT_TRUE(Drawing::SystemColors::GradientActiveCaption().IsSystemColor());
+    ASSERT_EQ("GradientActiveCaption", Drawing::SystemColors::GradientActiveCaption().Name());
+    ASSERT_EQ("Color [GradientActiveCaption]", Drawing::SystemColors::GradientActiveCaption().ToString());
+  }
+  
+  TEST(SystemColorTest, GradientInactiveCaption) {
+    //ASSERT_EQ(0xFFD7E4F2u, (unsigned)Drawing::SystemColors::GradientInactiveCaption().ToArgb());
+    ASSERT_FALSE(Drawing::SystemColors::GradientInactiveCaption().IsEmpty());
+    ASSERT_TRUE(Drawing::SystemColors::GradientInactiveCaption().IsKnownColor());
+    ASSERT_TRUE(Drawing::SystemColors::GradientInactiveCaption().IsNamedColor());
+    ASSERT_TRUE(Drawing::SystemColors::GradientInactiveCaption().IsSystemColor());
+    ASSERT_EQ("GradientInactiveCaption", Drawing::SystemColors::GradientInactiveCaption().Name());
+    ASSERT_EQ("Color [GradientInactiveCaption]", Drawing::SystemColors::GradientInactiveCaption().ToString());
+  }
+  
+  TEST(SystemColorTest, MenuBar) {
+    //ASSERT_EQ(0xFFF0F0F0u, (unsigned)Drawing::SystemColors::MenuBar().ToArgb());
+    ASSERT_FALSE(Drawing::SystemColors::MenuBar().IsEmpty());
+    ASSERT_TRUE(Drawing::SystemColors::MenuBar().IsKnownColor());
+    ASSERT_TRUE(Drawing::SystemColors::MenuBar().IsNamedColor());
+    ASSERT_TRUE(Drawing::SystemColors::MenuBar().IsSystemColor());
+    ASSERT_EQ("MenuBar", Drawing::SystemColors::MenuBar().Name());
+    ASSERT_EQ("Color [MenuBar]", Drawing::SystemColors::MenuBar().ToString());
+  }
+  
+  TEST(SystemColorTest, MenuHighlight) {
+    //ASSERT_EQ(0xFF3399FFu, (unsigned)Drawing::SystemColors::MenuHighlight().ToArgb());
+    ASSERT_FALSE(Drawing::SystemColors::MenuHighlight().IsEmpty());
+    ASSERT_TRUE(Drawing::SystemColors::MenuHighlight().IsKnownColor());
+    ASSERT_TRUE(Drawing::SystemColors::MenuHighlight().IsNamedColor());
+    ASSERT_TRUE(Drawing::SystemColors::MenuHighlight().IsSystemColor());
+    ASSERT_EQ("MenuHighlight", Drawing::SystemColors::MenuHighlight().Name());
+    ASSERT_EQ("Color [MenuHighlight]", Drawing::SystemColors::MenuHighlight().ToString());
+  }
 }
+

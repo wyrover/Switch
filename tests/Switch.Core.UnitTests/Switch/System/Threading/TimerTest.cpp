@@ -1,25 +1,14 @@
 #include <Switch/System/Threading/Timer.hpp>
 #include <Switch/System/Threading/AutoResetEvent.hpp>
-#include <Switch/TUnit/Assert.hpp>
-#include <Switch/TUnit/TestFixture.hpp>
+#include <gtest/gtest.h>
 
 using namespace System;
 using namespace System::Threading;
-using namespace TUnit;
 
 namespace {
-  class TimerUT : public testing::Test {
+  class TimerCtrlTest : public object {
   public:
-    void SetUp() override {
-    }
-    
-    void TearDown() override {
-    }
-  };
-
-  class TimerTest : public object {
-  public:
-    TimerTest() : Number(0), Event(false), State(null) {}
+    TimerCtrlTest() : Number(0), Event(false), State(null) {}
     
     void Run(object& State) {
       this->State = &State;
@@ -32,9 +21,9 @@ namespace {
     object* State;
   };
 
-  TEST_F(TimerUT, CreateTimerWithoutDueTimeAndWithoutPeriod) {
-    TimerTest test;
-    _using(Timer timer(TimerCallback(test, &TimerTest::Run))) {
+  TEST(TimerTest, CreateTimerWithoutDueTimeAndWithoutPeriod) {
+    TimerCtrlTest test;
+    _using(Timer timer(TimerCallback(test, &TimerCtrlTest::Run))) {
       ASSERT_FALSE(test.Event.WaitOne(10));
       ASSERT_EQ(0, test.Number);
       ASSERT_TRUE(test.State == null);
@@ -44,7 +33,7 @@ namespace {
   }
   
   /*
-  TEST_F(TimerUT, CreateTimerWithoutDueTimeAndWithoutPeriodAndCallChange) {
+  TEST(TimerTest, CreateTimerWithoutDueTimeAndWithoutPeriodAndCallChange) {
     TimerTest test;
     _using(Timer timer(TimerCallback(test, &TimerTest::Run))) {
       ASSERT_NO_THROW(timer.Change(10, -1));

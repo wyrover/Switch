@@ -1,132 +1,104 @@
+#include <Switch/Any.hpp>
 #include <Switch/Boxing.hpp>
-#include <Switch/TUnit/Assert.hpp>
-#include <Switch/TUnit/TestFixture.hpp>
+#include <gtest/gtest.h>
 
 using namespace System;
-using namespace TUnit;
 
 namespace SwitchUnitTests {
-  class BoxTest : public TestFixture {
-  protected:
-    void BoxingBoolean() {
-      Assert::IsInstanceOf<Boolean>(Box(true), _caller);
-    }
-    
-    void BoxingByte() {
-      Assert::IsInstanceOf<Byte>(Box(byte(42)), _caller);
-    }
-    
-    void BoxingChar() {
-      Assert::IsInstanceOf<Char>(Box(char('c')), _caller);
-    }
-    
-    void BoxingWChar() {
-      Assert::IsInstanceOf<Char>(Box(wchar('c')), _caller);
-    }
-    
-    void BoxingChar16() {
-      Assert::IsInstanceOf<Char>(Box(char16('c')), _caller);
-    }
-    
-    void BoxingChar32() {
-      Assert::IsInstanceOf<Char>(Box(char32('c')), _caller);
-    }
-    
-    void BoxingDouble() {
-      Assert::IsInstanceOf<Double>(Box(double(42)), _caller);
-    }
-    
-    void BoxingInt16() {
-      Assert::IsInstanceOf<Int16>(Box(int16(42)), _caller);
-    }
-    
-    void BoxingInt32() {
-      Assert::IsInstanceOf<Int32>(Box(int32(42)), _caller);
-    }
-    
-    void BoxingInt64() {
-      Assert::IsInstanceOf<Int64>(Box(int64(42)), _caller);
-    }
-    
-    void BoxingSByte() {
-      Assert::IsInstanceOf<SByte>(Box(sbyte(42)), _caller);
-    }
-    
-    void BoxingSingle() {
-      Assert::IsInstanceOf<Single>(Box(float(42)), _caller);
-    }
-    
-    void BoxingString() {
-      Assert::IsInstanceOf<string>(Box(string("Forty two")), _caller);
-    }
-    
-    void BoxingUInt16() {
-      Assert::IsInstanceOf<UInt16>(Box(uint16(42)), _caller);
-    }
-    
-    void BoxingUInt32() {
-      Assert::IsInstanceOf<UInt32>(Box(uint32(42)), _caller);
-    }
-    
-    void BoxingUInt64() {
-      Assert::IsInstanceOf<UInt64>(Box(uint64(42)), _caller);
-    }
-    
-    void BoxingVoidPointer() {
-      Assert::IsInstanceOf<IntPtr>(Box((void*)42), _caller);
-    }
-    
-    void BoxingConstCharPointer() {
-      Assert::IsInstanceOf<string>(Box("Forty two"), _caller);
-    }
-    
-    void BoxingConstWCharPointer() {
-      Assert::IsInstanceOf<string>(Box(L"Forty two"), _caller);
-    }
-    
-    void BoxingConstChar16Pointer() {
-      Assert::IsInstanceOf<string>(Box(u"Forty two"), _caller);
-    }
-    
-    void BoxingConstChar32Pointer() {
-      Assert::IsInstanceOf<string>(Box(U"Forty two"), _caller);
-    }
-    
-    void BoxingTimeSpan() {
-      Assert::IsInstanceOf<TimeSpan>(Box(12_h + 24_min + 32_s), _caller);
-    }
-    
-    void BoxingAny() {
-      Assert::IsInstanceOf<Int32>(Box(Any(42)), _caller);
-    }
-    
-    void BoxingMyStruct() {
-      struct MyStruct {};
-      Assert::IsInstanceOf<MyStruct>(Box(MyStruct()), _caller);
-    }
-  };
+  TEST(BoxTest, BoxingBoolean) {
+    ASSERT_TRUE(is<Boolean>(Box(true)));
+  }
   
-  _AddTest(BoxTest, BoxingBoolean)
-  _AddTest(BoxTest, BoxingByte)
-  _AddTest(BoxTest, BoxingChar)
-  _AddTest(BoxTest, BoxingWChar)
-  _AddTest(BoxTest, BoxingChar16)
-  _AddTest(BoxTest, BoxingChar32)
-  _AddTest(BoxTest, BoxingDouble)
-  _AddTest(BoxTest, BoxingInt16)
-  _AddTest(BoxTest, BoxingInt32)
-  _AddTest(BoxTest, BoxingInt64)
-  _AddTest(BoxTest, BoxingSByte)
-  _AddTest(BoxTest, BoxingSingle)
-  _AddTest(BoxTest, BoxingString)
-  _AddTest(BoxTest, BoxingUInt16)
-  _AddTest(BoxTest, BoxingUInt32)
-  _AddTest(BoxTest, BoxingUInt64)
-  _AddTest(BoxTest, BoxingVoidPointer)
-  _AddTest(BoxTest, BoxingConstCharPointer)
-  _AddTest(BoxTest, BoxingConstWCharPointer)
-  _AddTest(BoxTest, BoxingConstChar16Pointer)
-  _AddTest(BoxTest, BoxingConstChar32Pointer)
-  _AddTest(BoxTest, BoxingAny)
-  _AddTest(BoxTest, BoxingMyStruct)
+  TEST(BoxTest, BoxingByte) {
+    ASSERT_TRUE(is<Byte>(Box(byte(42))));
+  }
+  
+  TEST(BoxTest, BoxingChar) {
+    ASSERT_TRUE(is<Char>(Box(char('c'))));
+  }
+  
+  TEST(BoxTest, BoxingWChar) {
+    ASSERT_TRUE(is<Char>(Box(wchar('c'))));
+  }
+  
+  TEST(BoxTest, BoxingChar16) {
+    ASSERT_TRUE(is<Char>(Box(char16('c'))));
+  }
+  
+  TEST(BoxTest, BoxingChar32) {
+    ASSERT_TRUE(is<Char>(Box(char32('c'))));
+  }
+  
+  TEST(BoxTest, BoxingDouble) {
+    ASSERT_TRUE(is<Double>(Box(double(42))));
+  }
+  
+  TEST(BoxTest, BoxingInt16) {
+    ASSERT_TRUE(is<Int16>(Box(int16(42))));
+  }
+  
+  TEST(BoxTest, BoxingInt32) {
+    ASSERT_TRUE(is<Int32>(Box(int32(42))));
+  }
+  
+  TEST(BoxTest, BoxingInt64) {
+    ASSERT_TRUE(is<Int64>(Box(int64(42))));
+  }
+  
+  TEST(BoxTest, BoxingSByte) {
+    ASSERT_TRUE(is<SByte>(Box(sbyte(42))));
+  }
+  
+  TEST(BoxTest, BoxingSingle) {
+    ASSERT_TRUE(is<Single>(Box(float(42))));
+  }
+  
+  TEST(BoxTest, BoxingString) {
+    ASSERT_TRUE(is<string>(Box(string("Forty two"))));
+  }
+  
+  TEST(BoxTest, BoxingUInt16) {
+    ASSERT_TRUE(is<UInt16>(Box(uint16(42))));
+  }
+  
+  TEST(BoxTest, BoxingUInt32) {
+    ASSERT_TRUE(is<UInt32>(Box(uint32(42))));
+  }
+  
+  TEST(BoxTest, BoxingUInt64) {
+    ASSERT_TRUE(is<UInt64>(Box(uint64(42))));
+  }
+  
+  TEST(BoxTest, BoxingVoidPointer) {
+    ASSERT_TRUE(is<IntPtr>(Box((void*)42)));
+  }
+  
+  TEST(BoxTest, BoxingConstCharPointer) {
+    ASSERT_TRUE(is<string>(Box("Forty two")));
+  }
+  
+  TEST(BoxTest, BoxingConstWCharPointer) {
+    ASSERT_TRUE(is<string>(Box(L"Forty two")));
+  }
+  
+  TEST(BoxTest, BoxingConstChar16Pointer) {
+    ASSERT_TRUE(is<string>(Box(u"Forty two")));
+  }
+  
+  TEST(BoxTest, BoxingConstChar32Pointer) {
+    ASSERT_TRUE(is<string>(Box(U"Forty two")));
+  }
+  
+  TEST(BoxTest, BoxingTimeSpan) {
+    ASSERT_TRUE(is<TimeSpan>(Box(12_h + 24_min + 32_s)));
+  }
+  
+  TEST(BoxTest, BoxingAny) {
+    ASSERT_TRUE(is<Int32>(Box(Any(42))));
+  }
+  
+  TEST(BoxTest, BoxingMyStruct) {
+    struct MyStruct {};
+    ASSERT_TRUE(is<MyStruct>(Box(MyStruct())));
+  }
 }

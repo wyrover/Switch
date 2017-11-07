@@ -1,15 +1,11 @@
 #include <Switch/System/Collections/Concurrent/ConcurrentBag.hpp>
-#include <Switch/TUnit/Assert.hpp>
-#include <Switch/TUnit/TestFixture.hpp>
+#include <gtest/gtest.h>
 
 using namespace System;
 using namespace System::Collections::Concurrent;
-using namespace TUnit;
 
 namespace SwitchUnitTests {
-  class ConcurrentBagTest : public TestFixture {
-  protected:
-    void Add() {
+    TEST(ConcurrentBagTest, Add) {
       ConcurrentBag<int> bag;
       int values[] = {0, 1, 2, 3, 4, 5};
       bag.Add(0);
@@ -20,56 +16,49 @@ namespace SwitchUnitTests {
       bag.Add(5);
       int index = 0;
       for (int item : bag)
-        Assert::AreEqual(values[index++], item, _caller);
-      Assert::AreEqual(6, index, _caller);
+        ASSERT_EQ(values[index++], item);
+      ASSERT_EQ(6, index);
     }
 
-    void GetEnumerator() {
+    TEST(ConcurrentBagTest, GetEnumerator) {
       ConcurrentBag<int> bag = {0, 1, 2, 3, 4, 5};
       int values[] = {0, 1, 2, 3, 4, 5};
       auto enumerator = bag.GetEnumerator();
       bag.Add(6);
       int index = 0;
       while (enumerator.MoveNext())
-        Assert::AreEqual(values[index++], enumerator.Current(), _caller);
-      Assert::AreEqual(6, index, _caller);
+        ASSERT_EQ(values[index++], enumerator.Current());
+      ASSERT_EQ(6, index);
     }
     
-    void TryPeek() {
+    TEST(ConcurrentBagTest, TryPeek) {
       ConcurrentBag<int> bag = {0, 1, 2, 3, 4, 5};
       int result;
-      Assert::IsTrue(bag.TryPeek(result), _caller);
-      Assert::AreEqual(5, result, _caller);
+      ASSERT_TRUE(bag.TryPeek(result));
+      ASSERT_EQ(5, result);
     }
     
-    void TryTake() {
+    TEST(ConcurrentBagTest, TryTake) {
       ConcurrentBag<int> bag = {0, 1, 2, 3, 4, 5};
       int result;
-      Assert::IsTrue(bag.TryTake(result), _caller);
-      Assert::AreEqual(5, result, _caller);
-      Assert::AreEqual(5, bag.Count, _caller);
-      Assert::IsTrue(bag.TryTake(result), _caller);
-      Assert::AreEqual(4, result, _caller);
-      Assert::AreEqual(4, bag.Count, _caller);
-      Assert::IsTrue(bag.TryTake(result), _caller);
-      Assert::AreEqual(3, result, _caller);
-      Assert::AreEqual(3, bag.Count, _caller);
-      Assert::IsTrue(bag.TryTake(result), _caller);
-      Assert::AreEqual(2, result, _caller);
-      Assert::AreEqual(2, bag.Count, _caller);
-      Assert::IsTrue(bag.TryTake(result), _caller);
-      Assert::AreEqual(1, result, _caller);
-      Assert::AreEqual(1, bag.Count, _caller);
-      Assert::IsTrue(bag.TryTake(result), _caller);
-      Assert::AreEqual(0, result, _caller);
-      Assert::AreEqual(0, bag.Count, _caller);
-      Assert::IsFalse(bag.TryTake(result), _caller);
+      ASSERT_TRUE(bag.TryTake(result));
+      ASSERT_EQ(5, result);
+      ASSERT_EQ(5, bag.Count);
+      ASSERT_TRUE(bag.TryTake(result));
+      ASSERT_EQ(4, result);
+      ASSERT_EQ(4, bag.Count);
+      ASSERT_TRUE(bag.TryTake(result));
+      ASSERT_EQ(3, result);
+      ASSERT_EQ(3, bag.Count);
+      ASSERT_TRUE(bag.TryTake(result));
+      ASSERT_EQ(2, result);
+      ASSERT_EQ(2, bag.Count);
+      ASSERT_TRUE(bag.TryTake(result));
+      ASSERT_EQ(1, result);
+      ASSERT_EQ(1, bag.Count);
+      ASSERT_TRUE(bag.TryTake(result));
+      ASSERT_EQ(0, result);
+      ASSERT_EQ(0, bag.Count);
+      ASSERT_FALSE(bag.TryTake(result));
     }
-    
-  };
-  
-  _AddTest(ConcurrentBagTest, Add)
-  _AddTest(ConcurrentBagTest, GetEnumerator)
-  _AddTest(ConcurrentBagTest, TryPeek)
-  _AddTest(ConcurrentBagTest, TryTake)
 }

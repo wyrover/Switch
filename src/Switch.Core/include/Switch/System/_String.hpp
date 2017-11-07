@@ -1088,6 +1088,10 @@ namespace Switch {
     };
 
     /// @cond
+    inline bool operator==(const char* valueA, const String& valueB) {return valueB == valueA;}
+    inline bool operator==(const char16* valueA, const String& valueB) {return valueB == valueA;}
+    inline bool operator==(const char32* valueA, const String& valueB) {return valueB == valueA;}
+
     String operator+(const char str[], const Object& obj);
     String operator+(const Object& obj, const char str[]);
     

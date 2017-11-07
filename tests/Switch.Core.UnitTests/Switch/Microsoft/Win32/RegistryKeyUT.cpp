@@ -1,10 +1,8 @@
 #include <Switch/Microsoft/Win32/Registry.hpp>
-#include <Switch/TUnit/Assert.hpp>
-#include <Switch/TUnit/TestFixture.hpp>
+#include <gtest/gtest.h>
 
 using namespace System;
 using namespace Microsoft::Win32;
-using namespace TUnit;
 
 namespace {
   class RegistryKeyUT : public testing::Test {
@@ -171,143 +169,143 @@ namespace {
   
   TEST_F(RegistryKeyUT, GetValuesWithNoKey) {
     Registry::CurrentUser().CreateSubKey("UnitTest");
-    EXPECT_EQ(RegistryKey::Null(), Registry::CurrentUser().OpenSubKey("UnitTest").GetValue("Key1"));
+    ASSERT_EQ(RegistryKey::Null(), Registry::CurrentUser().OpenSubKey("UnitTest").GetValue("Key1"));
   }
   
   TEST_F(RegistryKeyUT, GetValuesWithEmptyKey) {
     Registry::CurrentUser().CreateSubKey("UnitTest");
-    EXPECT_EQ(RegistryKey::Null(), Registry::CurrentUser().OpenSubKey("UnitTest").GetValue(""));
+    ASSERT_EQ(RegistryKey::Null(), Registry::CurrentUser().OpenSubKey("UnitTest").GetValue(""));
   }
   
   //TEST_F(RegistryKeyUT, GetValuesWithInBaseKey) {
   //  Registry::CurrentUser().SetValue("Key1", "Value1");
-  //  EXPECT_EQ("Value1", static_cast<const string&>(Registry::CurrentUser().GetValue("Key1")));
+  //  ASSERT_EQ("Value1", static_cast<const string&>(Registry::CurrentUser().GetValue("Key1")));
   //  Registry::CurrentUser().DeleteValue("Key1");
   //}
   
   TEST_F(RegistryKeyUT, GetValuesWithInSubKey) {
     RegistryKey key = Registry::CurrentUser().CreateSubKey("UnitTest");
     key.SetValue("Key1", "Value1");
-    EXPECT_EQ("Value1", static_cast<const string&>(key.GetValue("Key1", "None")));
+    ASSERT_EQ("Value1", static_cast<const string&>(key.GetValue("Key1", "None")));
   }
   
   TEST_F(RegistryKeyUT, OpenBaseKeyClassesRoot) {
-    EXPECT_EQ("HKEY_CLASSES_ROOT", RegistryKey::OpenBaseKey(RegistryHive::ClassesRoot).Name());
+    ASSERT_EQ("HKEY_CLASSES_ROOT", RegistryKey::OpenBaseKey(RegistryHive::ClassesRoot).Name());
   }
   
   TEST_F(RegistryKeyUT, OpenBaseKeyCurrentConfig) {
-    EXPECT_EQ("HKEY_CURRENT_CONFIG", RegistryKey::OpenBaseKey(RegistryHive::CurrentConfig).Name());
+    ASSERT_EQ("HKEY_CURRENT_CONFIG", RegistryKey::OpenBaseKey(RegistryHive::CurrentConfig).Name());
   }
   
   TEST_F(RegistryKeyUT, OpenBaseKeyCurrentUser) {
-    EXPECT_EQ("HKEY_CURRENT_USER", RegistryKey::OpenBaseKey(RegistryHive::CurrentUser).Name());
+    ASSERT_EQ("HKEY_CURRENT_USER", RegistryKey::OpenBaseKey(RegistryHive::CurrentUser).Name());
   }
   
   TEST_F(RegistryKeyUT, OpenBaseKeyDynData) {
-    EXPECT_EQ("HKEY_DYN_DATA", RegistryKey::OpenBaseKey(RegistryHive::DynData).Name());
+    ASSERT_EQ("HKEY_DYN_DATA", RegistryKey::OpenBaseKey(RegistryHive::DynData).Name());
   }
   
   TEST_F(RegistryKeyUT, OpenBaseKeyLocalMachine) {
-    EXPECT_EQ("HKEY_LOCAL_MACHINE", RegistryKey::OpenBaseKey(RegistryHive::LocalMachine).Name());
+    ASSERT_EQ("HKEY_LOCAL_MACHINE", RegistryKey::OpenBaseKey(RegistryHive::LocalMachine).Name());
   }
   
   TEST_F(RegistryKeyUT, OpenBaseKeyPerformanceData) {
-    EXPECT_EQ("HKEY_PERFORMANCE_DATA", RegistryKey::OpenBaseKey(RegistryHive::PerformanceData).Name());
+    ASSERT_EQ("HKEY_PERFORMANCE_DATA", RegistryKey::OpenBaseKey(RegistryHive::PerformanceData).Name());
   }
   
   TEST_F(RegistryKeyUT, OpenBaseKeyUsers) {
-    EXPECT_EQ("HKEY_USERS", RegistryKey::OpenBaseKey(RegistryHive::Users).Name());
+    ASSERT_EQ("HKEY_USERS", RegistryKey::OpenBaseKey(RegistryHive::Users).Name());
   }
   
   TEST_F(RegistryKeyUT, SetValueString) {
     RegistryKey key = Registry::CurrentUser().CreateSubKey("UnitTest");
     key.SetValue("Key1", "Value1");
-    EXPECT_EQ("Value1", static_cast<const String&>(key.GetValue("Key1")));
+    ASSERT_EQ("Value1", static_cast<const String&>(key.GetValue("Key1")));
   }
   
   TEST_F(RegistryKeyUT, SetValueExpandString) {
     RegistryKey key = Registry::CurrentUser().CreateSubKey("UnitTest");
     key.SetValue("Key1", "Value%1%");
-    EXPECT_EQ("Value%1%", static_cast<const String&>(key.GetValue("Key1")));
+    ASSERT_EQ("Value%1%", static_cast<const String&>(key.GetValue("Key1")));
   }
   
   TEST_F(RegistryKeyUT, SetValueBinary) {
     RegistryKey key = Registry::CurrentUser().CreateSubKey("UnitTest");
     key.SetValue("Key1", Array<byte> {42, 84, 21, 126});
-    EXPECT_EQ(4, static_cast<const Array<byte>&>(key.GetValue("Key1")).Length);
-    EXPECT_EQ(42, static_cast<const Array<byte>&>(key.GetValue("Key1"))[0]);
-    EXPECT_EQ(84, static_cast<const Array<byte>&>(key.GetValue("Key1"))[1]);
-    EXPECT_EQ(21, static_cast<const Array<byte>&>(key.GetValue("Key1"))[2]);
-    EXPECT_EQ(126, static_cast<const Array<byte>&>(key.GetValue("Key1"))[3]);
+    ASSERT_EQ(4, static_cast<const Array<byte>&>(key.GetValue("Key1")).Length);
+    ASSERT_EQ(42, static_cast<const Array<byte>&>(key.GetValue("Key1"))[0]);
+    ASSERT_EQ(84, static_cast<const Array<byte>&>(key.GetValue("Key1"))[1]);
+    ASSERT_EQ(21, static_cast<const Array<byte>&>(key.GetValue("Key1"))[2]);
+    ASSERT_EQ(126, static_cast<const Array<byte>&>(key.GetValue("Key1"))[3]);
   }
   
   TEST_F(RegistryKeyUT, SetAndGetValueDWord) {
     RegistryKey key = Registry::CurrentUser().CreateSubKey("UnitTest");
     key.SetValue("Key1", 42);
-    EXPECT_EQ(42, as<Int32>(key.GetValue("Key1")));
+    ASSERT_EQ(42, as<Int32>(key.GetValue("Key1")));
   }
   
   TEST_F(RegistryKeyUT, SetValueMultiString) {
     RegistryKey key = Registry::CurrentUser().CreateSubKey("UnitTest");
     key.SetValue("Key1", Array<string> {"One", "Two", "Three"});
-    EXPECT_EQ(3, as<Array<String>>(key.GetValue("Key1")).Length);
-    EXPECT_EQ("One", as<Array<String>>(key.GetValue("Key1"))[0]);
-    EXPECT_EQ("Two", as<Array<String>>(key.GetValue("Key1"))[1]);
-    EXPECT_EQ("Three", as<Array<String>>(key.GetValue("Key1"))[2]);
+    ASSERT_EQ(3, as<Array<String>>(key.GetValue("Key1")).Length);
+    ASSERT_EQ("One", as<Array<String>>(key.GetValue("Key1"))[0]);
+    ASSERT_EQ("Two", as<Array<String>>(key.GetValue("Key1"))[1]);
+    ASSERT_EQ("Three", as<Array<String>>(key.GetValue("Key1"))[2]);
   }
   
   TEST_F(RegistryKeyUT, SetAndGetValueAny) {
     RegistryKey key = Registry::CurrentUser().CreateSubKey("UnitTest");
     key.SetValue("Key1", TimeSpan(2, 4, 32));
-    EXPECT_EQ(TimeSpan(2, 4, 32), TimeSpan::Parse(key.GetValue("Key1").ToString()));
+    ASSERT_EQ(TimeSpan(2, 4, 32), TimeSpan::Parse(key.GetValue("Key1").ToString()));
   }
   
   TEST_F(RegistryKeyUT, SetAndGetValueWithRegistryValueKindString) {
     RegistryKey key = Registry::CurrentUser().CreateSubKey("UnitTest");
     key.SetValue("Key1", "Value1", RegistryValueKind::String);
-    EXPECT_EQ("Value1", static_cast<const String&>(key.GetValue("Key1")));
+    ASSERT_EQ("Value1", static_cast<const String&>(key.GetValue("Key1")));
   }
   
   TEST_F(RegistryKeyUT, SetAndGetValueWithRegistryValueKindExpandString) {
     RegistryKey key = Registry::CurrentUser().CreateSubKey("UnitTest");
     key.SetValue("Key1", "Value%1%", RegistryValueKind::ExpandString);
-    EXPECT_EQ("Value%1%", static_cast<const String&>(key.GetValue("Key1")));
+    ASSERT_EQ("Value%1%", static_cast<const String&>(key.GetValue("Key1")));
   }
   
   TEST_F(RegistryKeyUT, SetValueKindBinary) {
     RegistryKey key = Registry::CurrentUser().CreateSubKey("UnitTest");
     key.SetValue("Key1", Array<byte> {42, 84, 21, 126}, RegistryValueKind::Binary);
-    EXPECT_EQ(4, static_cast<const Array<byte>&>(key.GetValue("Key1")).Length);
-    EXPECT_EQ(42, static_cast<const Array<byte>&>(key.GetValue("Key1"))[0]);
-    EXPECT_EQ(84, static_cast<const Array<byte>&>(key.GetValue("Key1"))[1]);
-    EXPECT_EQ(21, static_cast<const Array<byte>&>(key.GetValue("Key1"))[2]);
-    EXPECT_EQ(126, static_cast<const Array<byte>&>(key.GetValue("Key1"))[3]);
+    ASSERT_EQ(4, static_cast<const Array<byte>&>(key.GetValue("Key1")).Length);
+    ASSERT_EQ(42, static_cast<const Array<byte>&>(key.GetValue("Key1"))[0]);
+    ASSERT_EQ(84, static_cast<const Array<byte>&>(key.GetValue("Key1"))[1]);
+    ASSERT_EQ(21, static_cast<const Array<byte>&>(key.GetValue("Key1"))[2]);
+    ASSERT_EQ(126, static_cast<const Array<byte>&>(key.GetValue("Key1"))[3]);
   }
   
   TEST_F(RegistryKeyUT, SetAndGetValueWithRegistryValueKindDWord) {
     RegistryKey key = Registry::CurrentUser().CreateSubKey("UnitTest");
     key.SetValue("Key1", 42, RegistryValueKind::DWord);
-    EXPECT_EQ(42, static_cast<const Int32&>(key.GetValue("Key1")));
+    ASSERT_EQ(42, static_cast<const Int32&>(key.GetValue("Key1")));
   }
   
   TEST_F(RegistryKeyUT, SetValueKindMultiString) {
     RegistryKey key = Registry::CurrentUser().CreateSubKey("UnitTest");
     key.SetValue("Key1", Array<string> {"One", "Two", "Three"}, RegistryValueKind::MultiString);
-    EXPECT_EQ(3, static_cast<const Array<String>&>(key.GetValue("Key1")).Length);
-    EXPECT_EQ("One", static_cast<const Array<String>&>(key.GetValue("Key1"))[0]);
-    EXPECT_EQ("Two", static_cast<const Array<String>&>(key.GetValue("Key1"))[1]);
-    EXPECT_EQ("Three", static_cast<const Array<String>&>(key.GetValue("Key1"))[2]);
+    ASSERT_EQ(3, static_cast<const Array<String>&>(key.GetValue("Key1")).Length);
+    ASSERT_EQ("One", static_cast<const Array<String>&>(key.GetValue("Key1"))[0]);
+    ASSERT_EQ("Two", static_cast<const Array<String>&>(key.GetValue("Key1"))[1]);
+    ASSERT_EQ("Three", static_cast<const Array<String>&>(key.GetValue("Key1"))[2]);
   }
   
   TEST_F(RegistryKeyUT, SetAndGetValueWithRegistryValueKindQWord) {
     RegistryKey key = Registry::CurrentUser().CreateSubKey("UnitTest");
     key.SetValue("Key1", 42, RegistryValueKind::QWord);
-    EXPECT_EQ(42, Int64::Parse(key.GetValue("Key1").ToString()));
+    ASSERT_EQ(42, Int64::Parse(key.GetValue("Key1").ToString()));
   }
   
   TEST_F(RegistryKeyUT, SetAndGetValueWithRegistryValueKindUnknown) {
     RegistryKey key = Registry::CurrentUser().CreateSubKey("UnitTest");
     key.SetValue("Key1", TimeSpan(2, 4, 32), RegistryValueKind::Unknown);
-    EXPECT_EQ(TimeSpan(2, 4, 32), TimeSpan::Parse(key.GetValue("Key1").ToString()));
+    ASSERT_EQ(TimeSpan(2, 4, 32), TimeSpan::Parse(key.GetValue("Key1").ToString()));
   }
 }

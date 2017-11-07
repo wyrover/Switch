@@ -1,14 +1,12 @@
 #include <Switch/System/IO/Directory.hpp>
 #include <Switch/System/IO/Path.hpp>
-#include <Switch/TUnit/Assert.hpp>
-#include <Switch/TUnit/TestFixture.hpp>
+#include <gtest/gtest.h>
 
 using namespace System;
-using namespace TUnit;
 
 namespace SwitchUnitTests {
-  class DirectoryTest : public TestFixture {
-  protected:
+  class DirectoryTest : public testing::Test {
+  public:
     void SetUp() override {
       System::IO::Directory::CreateDirectory(workingDirectory);
     }
@@ -17,37 +15,33 @@ namespace SwitchUnitTests {
       System::IO::Directory::Delete(workingDirectory, true);
     }
     
-    void CreateDirectory() {
-      string testPath = System::IO::Path::Combine(workingDirectory, "TestFolder");
-      TUnit::Assert::IsFalse(System::IO::Directory::Exists(testPath));
-      System::IO::Directory::CreateDirectory(testPath);
-      TUnit::Assert::IsTrue(System::IO::Directory::Exists(testPath));
-    }
-    
-    void CreateAndDeleteAnEmptyDirectory() {
-      string testPath = System::IO::Path::Combine(workingDirectory, "TestFolder");
-      TUnit::Assert::IsFalse(System::IO::Directory::Exists(testPath));
-      System::IO::Directory::CreateDirectory(testPath);
-      TUnit::Assert::IsTrue(System::IO::Directory::Exists(testPath));
-      System::IO::Directory::Delete(testPath);
-      TUnit::Assert::IsFalse(System::IO::Directory::Exists(testPath));
-    }
-    
-    void CreateAndDeleteANonEmptyDirectory() {
-      string testPath = System::IO::Path::Combine(workingDirectory, "TestFolder");
-      TUnit::Assert::IsFalse(System::IO::Directory::Exists(testPath));
-      System::IO::Directory::CreateDirectory(testPath);
-      System::IO::Directory::CreateDirectory(System::IO::Path::Combine(testPath, "Directory 1"));
-      TUnit::Assert::IsTrue(System::IO::Directory::Exists(System::IO::Path::Combine(testPath, "Directory 1")));
-      System::IO::Directory::Delete(testPath, true);
-      TUnit::Assert::IsFalse(System::IO::Directory::Exists(testPath));
-    }
-    
-  private:
     string workingDirectory = System::IO::Path::Combine(System::IO::Directory::GetCurrentDirectory(), "UnitTest");
   };
   
-  _AddTest(DirectoryTest, CreateDirectory)
-  _AddTest(DirectoryTest, CreateAndDeleteAnEmptyDirectory)
-  _AddTest(DirectoryTest, CreateAndDeleteANonEmptyDirectory)
+  TEST_F(DirectoryTest, CreateDirectory) {
+    string testPath = System::IO::Path::Combine(DirectoryTest::workingDirectory, "TestFolder");
+    ASSERT_FALSE(System::IO::Directory::Exists(testPath));
+    System::IO::Directory::CreateDirectory(testPath);
+    ASSERT_TRUE(System::IO::Directory::Exists(testPath));
+  }
+  
+  TEST_F(DirectoryTest, CreateAndDeleteAnEmptyDirectory) {
+    string testPath = System::IO::Path::Combine(DirectoryTest::workingDirectory, "TestFolder");
+    ASSERT_FALSE(System::IO::Directory::Exists(testPath));
+    System::IO::Directory::CreateDirectory(testPath);
+    ASSERT_TRUE(System::IO::Directory::Exists(testPath));
+    System::IO::Directory::Delete(testPath);
+    ASSERT_FALSE(System::IO::Directory::Exists(testPath));
+  }
+  
+  TEST_F(DirectoryTest, CreateAndDeleteANonEmptyDirectory) {
+    string testPath = System::IO::Path::Combine(DirectoryTest::workingDirectory, "TestFolder");
+    ASSERT_FALSE(System::IO::Directory::Exists(testPath));
+    System::IO::Directory::CreateDirectory(testPath);
+    System::IO::Directory::CreateDirectory(System::IO::Path::Combine(testPath, "Directory 1"));
+    ASSERT_TRUE(System::IO::Directory::Exists(System::IO::Path::Combine(testPath, "Directory 1")));
+    System::IO::Directory::Delete(testPath, true);
+    ASSERT_FALSE(System::IO::Directory::Exists(testPath));
+  }
 }
+

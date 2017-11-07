@@ -1,48 +1,40 @@
 #include <Switch/Await.hpp>
-#include <Switch/TUnit/Assert.hpp>
-#include <Switch/TUnit/TestFixture.hpp>
+#include <Switch/System/String.hpp>
+#include <gtest/gtest.h>
 
 using namespace System;
 using namespace System::Threading::Tasks;
-using namespace TUnit;
 
 namespace SwitchUnitTests {
-  class AwaitTest : public TestFixture {
-  protected:
-    void RunningAsyncTaskAndAwait() {
-      static string result;
-      result = "";
-      struct MyStruct {
-        _async(Task<>, AsyncTask, {result = "Forty two";});
-      };
-      
-      MyStruct myStruct;
-      _await myStruct.AsyncTask;
-      Assert::AreEqual("Forty two", result);
-    }
+  TEST(AwaitTest, RunningAsyncTaskAndAwait) {
+    static string result;
+    result = "";
+    struct MyStruct {
+      _async(Task<>, AsyncTask, {result = "Forty two";});
+    };
     
-    void RunningAsyncTaskInt32AndAwait() {
-      struct MyStruct {
-        _async(Task<int32>, AsyncTask, {return 42;});
-      };
-      
-      MyStruct myStruct;
-      int32 result = _await myStruct.AsyncTask;
-      Assert::AreEqual(42, result);
-    }
-    
-    void RunningAsyncTaskStringAndAwait() {
-      struct MyStruct {
-        _async(Task<string>, AsyncTask, {return "Forty two";});
-      };
-      
-      MyStruct myStruct;
-      string result = _await myStruct.AsyncTask;
-      Assert::AreEqual("Forty two", result);
-    }
-  };
+    MyStruct myStruct;
+    _await myStruct.AsyncTask;
+    ASSERT_EQ("Forty two", result);
+  }
   
-  _AddTest(AwaitTest, RunningAsyncTaskAndAwait)
-  _AddTest(AwaitTest, RunningAsyncTaskInt32AndAwait)
-  _AddTest(AwaitTest, RunningAsyncTaskStringAndAwait)
+  TEST(AwaitTest, RunningAsyncTaskInt32AndAwait) {
+    struct MyStruct {
+      _async(Task<int32>, AsyncTask, {return 42;});
+    };
+    
+    MyStruct myStruct;
+    int32 result = _await myStruct.AsyncTask;
+    ASSERT_EQ(42, result);
+  }
+  
+  TEST(AwaitTest, RunningAsyncTaskStringAndAwait) {
+    struct MyStruct {
+      _async(Task<string>, AsyncTask, {return "Forty two";});
+    };
+    
+    MyStruct myStruct;
+    string result = _await myStruct.AsyncTask;
+    ASSERT_EQ("Forty two", result);
+  }
 }

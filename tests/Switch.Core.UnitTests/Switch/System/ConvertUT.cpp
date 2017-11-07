@@ -1,92 +1,89 @@
 #include <Switch/System/Convert.hpp>
-#include <Switch/TUnit/Assert.hpp>
-#include <Switch/TUnit/TestFixture.hpp>
+#include <gtest/gtest.h>
 
 using namespace System;
 using namespace System::Collections::Generic;
-using namespace TUnit;
 
 namespace {
-  
-  TEST(Convert, ToBooleanFromIConvertibleBoolean) {
+  TEST(ConvertTest, ToBooleanFromIConvertibleBoolean) {
     ASSERT_FALSE(Convert::ToBoolean(static_cast<const IConvertible&>(Boolean(false))));
     ASSERT_TRUE(Convert::ToBoolean(static_cast<const IConvertible&>(Boolean(true))));
   }
   
-  TEST(Convert, ToBooleanFromIConvertibleByte) {
+  TEST(ConvertTest, ToBooleanFromIConvertibleByte) {
     ASSERT_FALSE(Convert::ToBoolean(static_cast<const IConvertible&>(Byte(0))));
     ASSERT_TRUE(Convert::ToBoolean(static_cast<const IConvertible&>(Byte(42))));
   }
   
-  TEST(Convert, ToBooleanFromIConvertibleInt16) {
+  TEST(ConvertTest, ToBooleanFromIConvertibleInt16) {
     ASSERT_FALSE(Convert::ToBoolean(static_cast<const IConvertible&>(Int16(0))));
     ASSERT_TRUE(Convert::ToBoolean(static_cast<const IConvertible&>(Int16(42))));
   }
   
-  TEST(Convert, ToBooleanFromIConvertibleInt32) {
+  TEST(ConvertTest, ToBooleanFromIConvertibleInt32) {
     ASSERT_FALSE(Convert::ToBoolean(static_cast<const IConvertible&>(Int32(0))));
     ASSERT_TRUE(Convert::ToBoolean(static_cast<const IConvertible&>(Int32(42))));
   }
   
-  TEST(Convert, ToBooleanFromIConvertibleInt64) {
+  TEST(ConvertTest, ToBooleanFromIConvertibleInt64) {
     ASSERT_FALSE(Convert::ToBoolean(static_cast<const IConvertible&>(Int64(0))));
     ASSERT_TRUE(Convert::ToBoolean(static_cast<const IConvertible&>(Int64(42))));
   }
   
-  TEST(Convert, ToBooleanFromIConvertibleChar) {
+  TEST(ConvertTest, ToBooleanFromIConvertibleChar) {
     ASSERT_THROW(Convert::ToBoolean(static_cast<const IConvertible&>(Char('T'))), InvalidCastException);
   }
   
-  TEST(Convert, ToBooleanFromIConvertibleDateTime) {
+  TEST(ConvertTest, ToBooleanFromIConvertibleDateTime) {
     ASSERT_THROW(Convert::ToBoolean(static_cast<const IConvertible&>(DateTime::Now())), InvalidCastException);
   }
   
-  TEST(Convert, ToBooleanFromIConvertibleDouble) {
+  TEST(ConvertTest, ToBooleanFromIConvertibleDouble) {
     ASSERT_FALSE(Convert::ToBoolean(static_cast<const IConvertible&>(Double(0.0))));
     ASSERT_TRUE(Convert::ToBoolean(static_cast<const IConvertible&>(Double(42.0))));
   }
   
-  TEST(Convert, ToBooleanFromIConvertibleSByte) {
+  TEST(ConvertTest, ToBooleanFromIConvertibleSByte) {
     ASSERT_FALSE(Convert::ToBoolean(static_cast<const IConvertible&>(SByte(0))));
     ASSERT_TRUE(Convert::ToBoolean(static_cast<const IConvertible&>(SByte(42))));
   }
   
-  TEST(Convert, ToBooleanFromIConvertibleSingle) {
+  TEST(ConvertTest, ToBooleanFromIConvertibleSingle) {
     ASSERT_FALSE(Convert::ToBoolean(static_cast<const IConvertible&>(Single(0.0))));
     ASSERT_TRUE(Convert::ToBoolean(static_cast<const IConvertible&>(Single(42.0))));
   }
   
-  TEST(Convert, ToBooleanFromIConvertibleString) {
+  TEST(ConvertTest, ToBooleanFromIConvertibleString) {
     ASSERT_FALSE(Convert::ToBoolean(static_cast<const IConvertible&>(string("False"))));
     ASSERT_TRUE(Convert::ToBoolean(static_cast<const IConvertible&>(string("True"))));
   }
   
-  TEST(Convert, ToBooleanFromIConvertibleUInt16) {
+  TEST(ConvertTest, ToBooleanFromIConvertibleUInt16) {
     ASSERT_FALSE(Convert::ToBoolean(static_cast<const IConvertible&>(UInt16(0))));
     ASSERT_TRUE(Convert::ToBoolean(static_cast<const IConvertible&>(UInt16(42))));
   }
   
-  TEST(Convert, ToBooleanFromIConvertibleUInt32) {
+  TEST(ConvertTest, ToBooleanFromIConvertibleUInt32) {
     ASSERT_FALSE(Convert::ToBoolean(static_cast<const IConvertible&>(UInt32(0))));
     ASSERT_TRUE(Convert::ToBoolean(static_cast<const IConvertible&>(UInt32(42))));
   }
   
-  TEST(Convert, ToBooleanFromIConvertibleUInt64) {
+  TEST(ConvertTest, ToBooleanFromIConvertibleUInt64) {
     ASSERT_FALSE(Convert::ToBoolean(static_cast<const IConvertible&>(UInt64(0))));
     ASSERT_TRUE(Convert::ToBoolean(static_cast<const IConvertible&>(UInt64(42))));
   }
   
-  TEST(Convert, ToBooleanFrom_boolean) {
+  TEST(ConvertTest, ToBooleanFrom_boolean) {
     ASSERT_FALSE(Convert::ToBoolean(false));
     ASSERT_TRUE(Convert::ToBoolean(true));
   }
   
-  TEST(Convert, ToBooleanFromBoolean) {
+  TEST(ConvertTest, ToBooleanFromBoolean) {
     ASSERT_FALSE(Convert::ToBoolean(Boolean(false)));
     ASSERT_TRUE(Convert::ToBoolean(Boolean(true)));
   }
   
-  TEST(Convert, ToBooleanFrom_byte) {
+  TEST(ConvertTest, ToBooleanFrom_byte) {
     ASSERT_FALSE(Convert::ToBoolean(byte(0)));
     ASSERT_TRUE( Convert::ToBoolean(byte(1)));
     ASSERT_TRUE( Convert::ToBoolean(byte(173)));
@@ -94,7 +91,7 @@ namespace {
     ASSERT_TRUE( Convert::ToBoolean(Byte::MaxValue));
   }
   
-  TEST(Convert, ToBooleanFromByte) {
+  TEST(ConvertTest, ToBooleanFromByte) {
     ASSERT_FALSE(Convert::ToBoolean(Byte(0)));
     ASSERT_TRUE( Convert::ToBoolean(Byte(1)));
     ASSERT_TRUE( Convert::ToBoolean(Byte(173)));
@@ -102,19 +99,19 @@ namespace {
     ASSERT_TRUE( Convert::ToBoolean(Byte(Byte::MaxValue)));
   }
   
-  TEST(Convert, ToBooleanFrom_char32) {
+  TEST(ConvertTest, ToBooleanFrom_char32) {
     ASSERT_THROW( Convert::ToBoolean(char32('T')), InvalidCastException);
   }
   
-  TEST(Convert, ToBooleanFromChar) {
+  TEST(ConvertTest, ToBooleanFromChar) {
     ASSERT_THROW(Convert::ToBoolean(Char('T')), InvalidCastException);
   }
   
-  TEST(Convert, ToBooleanFromDateTime) {
+  TEST(ConvertTest, ToBooleanFromDateTime) {
     ASSERT_THROW(Convert::ToBoolean(DateTime::Now), InvalidCastException);
   }
   
-  TEST(Convert, ToBooleanFrom_double) {
+  TEST(ConvertTest, ToBooleanFrom_double) {
     ASSERT_FALSE(Convert::ToBoolean(double(0)));
     ASSERT_TRUE(Convert::ToBoolean(double(1)));
     ASSERT_TRUE(Convert::ToBoolean(double(2364.877964)));
@@ -122,7 +119,7 @@ namespace {
     ASSERT_TRUE(Convert::ToBoolean(Double::MaxValue));
   }
   
-  TEST(Convert, ToBooleanFromDouble) {
+  TEST(ConvertTest, ToBooleanFromDouble) {
     ASSERT_FALSE(Convert::ToBoolean(Double(0)));
     ASSERT_TRUE( Convert::ToBoolean(Double(1)));
     ASSERT_TRUE( Convert::ToBoolean(Double(2364.877964)));
@@ -130,7 +127,7 @@ namespace {
     ASSERT_TRUE( Convert::ToBoolean(Double(Double::MaxValue)));
   }
   
-  TEST(Convert, ToBooleanFrom_int16) {
+  TEST(ConvertTest, ToBooleanFrom_int16) {
     ASSERT_FALSE(Convert::ToBoolean(int16(0)));
     ASSERT_TRUE(Convert::ToBoolean(int16(1)));
     ASSERT_TRUE(Convert::ToBoolean(int16(2364)));
@@ -138,7 +135,7 @@ namespace {
     ASSERT_TRUE(Convert::ToBoolean(Int16::MaxValue));
   }
   
-  TEST(Convert, ToBooleanFromInt16) {
+  TEST(ConvertTest, ToBooleanFromInt16) {
     ASSERT_FALSE(Convert::ToBoolean(Int16(0)));
     ASSERT_TRUE(Convert::ToBoolean(Int16(1)));
     ASSERT_TRUE(Convert::ToBoolean(Int16(2364)));
@@ -146,7 +143,7 @@ namespace {
     ASSERT_TRUE(Convert::ToBoolean(Int16(Int16::MaxValue)));
   }
   
-  TEST(Convert, ToBooleanFrom_int32) {
+  TEST(ConvertTest, ToBooleanFrom_int32) {
     ASSERT_FALSE(Convert::ToBoolean(int32(0)));
     ASSERT_TRUE(Convert::ToBoolean(int32(1)));
     ASSERT_TRUE(Convert::ToBoolean(int32(2364)));
@@ -154,7 +151,7 @@ namespace {
     ASSERT_TRUE(Convert::ToBoolean(Int32::MaxValue));
   }
   
-  TEST(Convert, ToBooleanFromInt32) {
+  TEST(ConvertTest, ToBooleanFromInt32) {
     ASSERT_FALSE(Convert::ToBoolean(Int32(0)));
     ASSERT_TRUE( Convert::ToBoolean(Int32(1)));
     ASSERT_TRUE( Convert::ToBoolean(Int32(2364)));
@@ -162,7 +159,7 @@ namespace {
     ASSERT_TRUE( Convert::ToBoolean(Int32(Int32::MaxValue)));
   }
   
-  TEST(Convert, ToBooleanFrom_int64) {
+  TEST(ConvertTest, ToBooleanFrom_int64) {
     ASSERT_FALSE(Convert::ToBoolean(int64(0)));
     ASSERT_TRUE(Convert::ToBoolean(int64(1)));
     ASSERT_TRUE(Convert::ToBoolean(int64(2364)));
@@ -170,7 +167,7 @@ namespace {
     ASSERT_TRUE(Convert::ToBoolean(Int64::MaxValue));
   }
   
-  TEST(Convert, ToBooleanFromInt64) {
+  TEST(ConvertTest, ToBooleanFromInt64) {
     ASSERT_FALSE(Convert::ToBoolean(Int64(0)));
     ASSERT_TRUE(Convert::ToBoolean(Int64(1)));
     ASSERT_TRUE(Convert::ToBoolean(Int64(2364)));
@@ -178,7 +175,7 @@ namespace {
     ASSERT_TRUE(Convert::ToBoolean(Int64(Int64::MaxValue)));
   }
   
-  TEST(Convert, ToBooleanFrom_sbyte) {
+  TEST(ConvertTest, ToBooleanFrom_sbyte) {
     ASSERT_FALSE(Convert::ToBoolean(sbyte(0)));
     ASSERT_TRUE(Convert::ToBoolean(sbyte(1)));
     ASSERT_TRUE(Convert::ToBoolean(sbyte(112)));
@@ -186,7 +183,7 @@ namespace {
     ASSERT_TRUE(Convert::ToBoolean(SByte::MaxValue));
   }
   
-  TEST(Convert, ToBooleanFromSByte) {
+  TEST(ConvertTest, ToBooleanFromSByte) {
     ASSERT_FALSE(Convert::ToBoolean(SByte(0)));
     ASSERT_TRUE(Convert::ToBoolean(SByte(1)));
     ASSERT_TRUE(Convert::ToBoolean(SByte(112)));
@@ -194,7 +191,7 @@ namespace {
     ASSERT_TRUE(Convert::ToBoolean(SByte(SByte::MaxValue)));
   }
   
-  TEST(Convert, ToBooleanFrom_single) {
+  TEST(ConvertTest, ToBooleanFrom_single) {
     ASSERT_FALSE(Convert::ToBoolean(float(0)));
     ASSERT_TRUE(Convert::ToBoolean(float(1)));
     ASSERT_TRUE(Convert::ToBoolean(float(2364.877964)));
@@ -202,7 +199,7 @@ namespace {
     ASSERT_TRUE(Convert::ToBoolean(Single::MaxValue));
   }
   
-  TEST(Convert, ToBooleanFromSingle) {
+  TEST(ConvertTest, ToBooleanFromSingle) {
     ASSERT_FALSE(Convert::ToBoolean(Single(0)));
     ASSERT_TRUE(Convert::ToBoolean(Single(1)));
     ASSERT_TRUE(Convert::ToBoolean(Single(2364.877964f)));
@@ -210,7 +207,7 @@ namespace {
     ASSERT_TRUE(Convert::ToBoolean(Single(Single::MaxValue)));
   }
   
-  TEST(Convert, ToBooleanFrom_string) {
+  TEST(ConvertTest, ToBooleanFrom_string) {
     ASSERT_FALSE(Convert::ToBoolean("False"));
     ASSERT_FALSE(Convert::ToBoolean("false"));
     ASSERT_FALSE(Convert::ToBoolean("falSe"));
@@ -228,7 +225,7 @@ namespace {
     ASSERT_THROW(Convert::ToBoolean("notfalse"), FormatException);
   }
   
-  TEST(Convert, ToBooleanFromString) {
+  TEST(ConvertTest, ToBooleanFromString) {
     ASSERT_FALSE(Convert::ToBoolean(string("False")));
     ASSERT_FALSE(Convert::ToBoolean(string("false")));
     ASSERT_FALSE(Convert::ToBoolean(string("falSe")));
@@ -246,7 +243,7 @@ namespace {
     ASSERT_THROW(Convert::ToBoolean(string("notfalse")), FormatException);
   }
   
-  TEST(Convert, ToBooleanFrom_uint16) {
+  TEST(ConvertTest, ToBooleanFrom_uint16) {
     ASSERT_FALSE(Convert::ToBoolean(uint16(0)));
     ASSERT_TRUE(Convert::ToBoolean(uint16(1)));
     ASSERT_TRUE(Convert::ToBoolean(uint16(2364)));
@@ -254,7 +251,7 @@ namespace {
     ASSERT_TRUE(Convert::ToBoolean(UInt16::MaxValue));
   }
   
-  TEST(Convert, ToBooleanFromUInt16) {
+  TEST(ConvertTest, ToBooleanFromUInt16) {
     ASSERT_FALSE(Convert::ToBoolean(UInt16(0)));
     ASSERT_TRUE(Convert::ToBoolean(UInt16(1)));
     ASSERT_TRUE(Convert::ToBoolean(UInt16(2364)));
@@ -262,7 +259,7 @@ namespace {
     ASSERT_TRUE(Convert::ToBoolean(UInt16(UInt16::MaxValue)));
   }
   
-  TEST(Convert, ToBooleanFrom_uint32) {
+  TEST(ConvertTest, ToBooleanFrom_uint32) {
     ASSERT_FALSE(Convert::ToBoolean(uint32(0)));
     ASSERT_TRUE(Convert::ToBoolean(uint32(1)));
     ASSERT_TRUE(Convert::ToBoolean(uint32(2364)));
@@ -270,7 +267,7 @@ namespace {
     ASSERT_TRUE(Convert::ToBoolean(UInt32::MaxValue));
   }
   
-  TEST(Convert, ToBooleanFromUInt32) {
+  TEST(ConvertTest, ToBooleanFromUInt32) {
     ASSERT_FALSE(Convert::ToBoolean(UInt32(0)));
     ASSERT_TRUE(Convert::ToBoolean(UInt32(1)));
     ASSERT_TRUE(Convert::ToBoolean(UInt32(2364)));
@@ -278,7 +275,7 @@ namespace {
     ASSERT_TRUE(Convert::ToBoolean(UInt32(UInt32::MaxValue)));
   }
   
-  TEST(Convert, ToBooleanFrom_uint64) {
+  TEST(ConvertTest, ToBooleanFrom_uint64) {
     ASSERT_FALSE(Convert::ToBoolean(uint64(0)));
     ASSERT_TRUE(Convert::ToBoolean(uint64(1)));
     ASSERT_TRUE(Convert::ToBoolean(uint64(2364)));
@@ -286,7 +283,7 @@ namespace {
     ASSERT_TRUE(Convert::ToBoolean(UInt64::MaxValue));
   }
   
-  TEST(Convert, ToBooleanFromUInt64) {
+  TEST(ConvertTest, ToBooleanFromUInt64) {
     ASSERT_FALSE(Convert::ToBoolean(UInt64(0)));
     ASSERT_TRUE(Convert::ToBoolean(UInt64(1)));
     ASSERT_TRUE(Convert::ToBoolean(UInt64(2364)));
@@ -294,42 +291,42 @@ namespace {
     ASSERT_TRUE(Convert::ToBoolean(UInt64(UInt64::MaxValue)));
   }
   
-  TEST(Convert, ToByteFromIConvertibleBoolean) {
+  TEST(ConvertTest, ToByteFromIConvertibleBoolean) {
     ASSERT_EQ(0, Convert::ToByte(static_cast<const IConvertible&>(Boolean(false))));
     ASSERT_EQ(1, Convert::ToByte(static_cast<const IConvertible&>(Boolean(true))));
   }
   
-  TEST(Convert, ToByteFromIConvertibleByte) {
+  TEST(ConvertTest, ToByteFromIConvertibleByte) {
     ASSERT_EQ(0, Convert::ToByte(static_cast<const IConvertible&>(Byte(0))));
     ASSERT_EQ(42, Convert::ToByte(static_cast<const IConvertible&>(Byte(42))));
   }
   
-  TEST(Convert, ToByteFromIConvertibleInt16) {
+  TEST(ConvertTest, ToByteFromIConvertibleInt16) {
     ASSERT_EQ(0, Convert::ToByte(static_cast<const IConvertible&>(Int16(0))));
     ASSERT_EQ(42, Convert::ToByte(static_cast<const IConvertible&>(Int16(42))));
   }
   
-  TEST(Convert, ToByteFromIConvertibleInt32) {
+  TEST(ConvertTest, ToByteFromIConvertibleInt32) {
     ASSERT_EQ(0, Convert::ToByte(static_cast<const IConvertible&>(Int32(0))));
     ASSERT_EQ(42, Convert::ToByte(static_cast<const IConvertible&>(Int32(42))));
   }
   
-  TEST(Convert, ToByteFromIConvertibleInt64) {
+  TEST(ConvertTest, ToByteFromIConvertibleInt64) {
     ASSERT_EQ(0, Convert::ToByte(static_cast<const IConvertible&>(Int64(0))));
     ASSERT_EQ(42, Convert::ToByte(static_cast<const IConvertible&>(Int64(42))));
   }
   
-  TEST(Convert, ToByteFromIConvertibleChar) {
+  TEST(ConvertTest, ToByteFromIConvertibleChar) {
     ASSERT_EQ(0, Convert::ToByte(static_cast<const IConvertible&>(Char(0))));
     ASSERT_EQ(84, Convert::ToByte(static_cast<const IConvertible&>(Char('T'))));
   }
   
-  TEST(Convert, ToByteFromBoolean) {
+  TEST(ConvertTest, ToByteFromBoolean) {
     ASSERT_EQ(0, Convert::ToByte(false));
     ASSERT_EQ(1, Convert::ToByte(true));
   }
   
-  TEST(Convert, ToByteFromByte) {
+  TEST(ConvertTest, ToByteFromByte) {
     ASSERT_EQ(0, Convert::ToByte((byte)0));
     ASSERT_EQ(1, Convert::ToByte((byte)1));
     ASSERT_EQ(173, Convert::ToByte((byte)173));
@@ -337,7 +334,7 @@ namespace {
     ASSERT_EQ(Byte::MaxValue, Convert::ToByte(Byte::MaxValue));
   }
   
-  TEST(Convert, ToByteFromChar) {
+  TEST(ConvertTest, ToByteFromChar) {
     ASSERT_EQ(0, Convert::ToByte((char32)0));
     ASSERT_EQ(1, Convert::ToByte((char32)1));
     ASSERT_EQ(84, Convert::ToByte((char32)'T'));
@@ -345,11 +342,11 @@ namespace {
     ASSERT_THROW(Convert::ToByte(Char::MaxValue), OverflowException);
   }
   
-  TEST(Convert, ToByteFromDateTime) {
+  TEST(ConvertTest, ToByteFromDateTime) {
     ASSERT_THROW(Convert::ToByte(DateTime::Now()), InvalidCastException);
   }
   
-  TEST(Convert, ToByteFromDouble) {
+  TEST(ConvertTest, ToByteFromDouble) {
     ASSERT_EQ(0, Convert::ToByte((double)0));
     ASSERT_EQ(1, Convert::ToByte((double)1));
     ASSERT_EQ(13, (byte)13.7896);
@@ -358,7 +355,7 @@ namespace {
     ASSERT_THROW(Convert::ToByte(Double::MaxValue), OverflowException);
   }
   
-  TEST(Convert, ToByteFromInt16) {
+  TEST(ConvertTest, ToByteFromInt16) {
     ASSERT_EQ(0, Convert::ToByte((int16)0));
     ASSERT_EQ(1, Convert::ToByte((int16)1));
     ASSERT_EQ(167, Convert::ToByte((int16)167));
@@ -366,7 +363,7 @@ namespace {
     ASSERT_THROW(Convert::ToByte(Int16::MaxValue), OverflowException);
   }
   
-  TEST(Convert, ToByteFromInt32) {
+  TEST(ConvertTest, ToByteFromInt32) {
     ASSERT_EQ(0, Convert::ToByte((int32)0));
     ASSERT_EQ(1, Convert::ToByte((int32)1));
     ASSERT_EQ(189, Convert::ToByte((int32)189));
@@ -374,7 +371,7 @@ namespace {
     ASSERT_THROW(Convert::ToByte(Int32::MaxValue), OverflowException);
   }
   
-  TEST(Convert, ToByteFromInt64) {
+  TEST(ConvertTest, ToByteFromInt64) {
     ASSERT_EQ(0, Convert::ToByte((int64)0));
     ASSERT_EQ(1, Convert::ToByte((int64)1));
     ASSERT_EQ(255, Convert::ToByte((int64)255));
@@ -382,7 +379,7 @@ namespace {
     ASSERT_THROW(Convert::ToByte(Int64::MaxValue), OverflowException);
   }
   
-  TEST(Convert, ToByteFromSByte) {
+  TEST(ConvertTest, ToByteFromSByte) {
     ASSERT_EQ(0, Convert::ToByte((sbyte)0));
     ASSERT_EQ(1, Convert::ToByte((sbyte)1));
     ASSERT_EQ(112, Convert::ToByte((sbyte)112));
@@ -390,7 +387,7 @@ namespace {
     ASSERT_EQ(SByte::MaxValue, Convert::ToByte(SByte::MaxValue));
   }
   
-  TEST(Convert, ToByteFromSingle) {
+  TEST(ConvertTest, ToByteFromSingle) {
     ASSERT_EQ(0, Convert::ToByte((float)0));
     ASSERT_EQ(1, Convert::ToByte((float)1));
     ASSERT_EQ(125, (byte)125.8997);
@@ -399,7 +396,7 @@ namespace {
     ASSERT_THROW(Convert::ToByte(Single::MaxValue), OverflowException);
   }
   
-  TEST(Convert, ToByteFromString) {
+  TEST(ConvertTest, ToByteFromString) {
     ASSERT_EQ(0, Convert::ToByte(string("0")));
     ASSERT_EQ(1, Convert::ToByte(string("1")));
     ASSERT_EQ(121, Convert::ToByte(string("121")));
@@ -408,7 +405,7 @@ namespace {
     ASSERT_THROW(Convert::ToByte(string("256")), OverflowException);
   }
   
-  TEST(Convert, ToByteFromConstChar) {
+  TEST(ConvertTest, ToByteFromConstChar) {
     ASSERT_EQ(0, Convert::ToByte("0"));
     ASSERT_EQ(1, Convert::ToByte("1"));
     ASSERT_EQ(121, Convert::ToByte("121"));
@@ -417,7 +414,7 @@ namespace {
     ASSERT_THROW(Convert::ToByte("256"), OverflowException);
   }
   
-  TEST(Convert, ToByteFromUInt16) {
+  TEST(ConvertTest, ToByteFromUInt16) {
     ASSERT_EQ(0, Convert::ToByte((uint16)0));
     ASSERT_EQ(1, Convert::ToByte((uint16)1));
     ASSERT_EQ(167, Convert::ToByte((uint16)167));
@@ -425,7 +422,7 @@ namespace {
     ASSERT_THROW(Convert::ToByte(UInt16::MaxValue), OverflowException);
   }
   
-  TEST(Convert, ToByteFromUInt32) {
+  TEST(ConvertTest, ToByteFromUInt32) {
     ASSERT_EQ(0, Convert::ToByte((uint32)0));
     ASSERT_EQ(1, Convert::ToByte((uint32)1));
     ASSERT_EQ(189, Convert::ToByte((uint32)189));
@@ -433,7 +430,7 @@ namespace {
     ASSERT_THROW(Convert::ToByte(UInt32::MaxValue), OverflowException);
   }
   
-  TEST(Convert, ToByteFromUInt64) {
+  TEST(ConvertTest, ToByteFromUInt64) {
     ASSERT_EQ(0, Convert::ToByte((uint64)0));
     ASSERT_EQ(1, Convert::ToByte((uint64)1));
     ASSERT_EQ(255, Convert::ToByte((uint64)255));
@@ -441,7 +438,7 @@ namespace {
     ASSERT_THROW(Convert::ToByte(UInt64::MaxValue), OverflowException);
   }
   
-  TEST(Convert, ToCharFromIConvertible) {
+  TEST(ConvertTest, ToCharFromIConvertible) {
     ASSERT_EQ(0, Convert::ToChar(static_cast<const IConvertible&>(Int32(0))));
     ASSERT_EQ(1, Convert::ToChar(static_cast<const IConvertible&>(SByte(1))));
     ASSERT_EQ(129, Convert::ToChar(static_cast<const IConvertible&>(UInt64(129))));
@@ -449,12 +446,12 @@ namespace {
     ASSERT_EQ('\n', Convert::ToChar(static_cast<const IConvertible&>(String("\n"))));
   }
   
-  TEST(Convert, ToCharFromBoolean) {
+  TEST(ConvertTest, ToCharFromBoolean) {
     ASSERT_EQ('0', Convert::ToChar(false));
     ASSERT_EQ('1', Convert::ToChar(true));
   }
   
-  TEST(Convert, ToCharFromByte) {
+  TEST(ConvertTest, ToCharFromByte) {
     ASSERT_EQ(0, Convert::ToChar((byte)0));
     ASSERT_EQ(1, Convert::ToChar((byte)1));
     ASSERT_EQ('T', Convert::ToChar((byte)84));
@@ -462,7 +459,7 @@ namespace {
     ASSERT_EQ(Byte::MaxValue, Convert::ToChar(Byte::MaxValue));
   }
   
-  TEST(Convert, ToCharFromChar) {
+  TEST(ConvertTest, ToCharFromChar) {
     ASSERT_EQ(0, Convert::ToChar((char32)0));
     ASSERT_EQ(1, Convert::ToChar((char32)1));
     ASSERT_EQ('T', Convert::ToChar((char32)'T'));
@@ -470,11 +467,11 @@ namespace {
     ASSERT_EQ(Char::MaxValue, Convert::ToChar(Char::MaxValue));
   }
   
-  TEST(Convert, ToCharFromDateTime) {
+  TEST(ConvertTest, ToCharFromDateTime) {
     ASSERT_THROW(Convert::ToChar(DateTime::Now()), InvalidCastException);
   }
   
-  TEST(Convert, ToCharFromDouble) {
+  TEST(ConvertTest, ToCharFromDouble) {
     ASSERT_EQ(0, Convert::ToChar((double)0));
     ASSERT_EQ(1, Convert::ToChar((double)1));
     ASSERT_EQ(14, Convert::ToChar(13.7896));
@@ -482,7 +479,7 @@ namespace {
     ASSERT_THROW(Convert::ToChar(Double::MaxValue), OverflowException);
   }
   
-  TEST(Convert, ToCharFromInt16) {
+  TEST(ConvertTest, ToCharFromInt16) {
     ASSERT_EQ(0, Convert::ToChar((int16)0));
     ASSERT_EQ(1, Convert::ToChar((int16)1));
     ASSERT_EQ(167, Convert::ToChar((int16)167));
@@ -490,7 +487,7 @@ namespace {
     ASSERT_EQ(Int16::MaxValue, Convert::ToInt32(Convert::ToChar(Int16::MaxValue)));
   }
   
-  TEST(Convert, ToCharFromInt32) {
+  TEST(ConvertTest, ToCharFromInt32) {
     ASSERT_EQ(0, Convert::ToChar((int32)0));
     ASSERT_EQ(1, Convert::ToChar((int32)1));
     ASSERT_EQ(189, Convert::ToChar((int32)189));
@@ -499,7 +496,7 @@ namespace {
   }
   
   /*
-   TEST(Convert, ToCharFromInt64)
+   TEST(ConvertTest, ToCharFromInt64)
    {
    ASSERT_EQ(0, Convert::ToChar((int64)0));
    ASSERT_EQ(1, Convert::ToChar((int64)1));
@@ -508,7 +505,7 @@ namespace {
    ASSERT_THROW(Convert::ToChar(Int64::MaxValue), OverflowException);
    }
    
-   TEST(Convert, ToCharFromSByte)
+   TEST(ConvertTest, ToCharFromSByte)
    {
    ASSERT_EQ(0, Convert::ToChar((sbyte)0));
    ASSERT_EQ(1, Convert::ToChar((sbyte)1));
@@ -517,7 +514,7 @@ namespace {
    ASSERT_EQ(SByte::MaxValue(), Convert::ToChar(SByte::MaxValue));
    }
    
-   TEST(Convert, ToCharFromSingle)
+   TEST(ConvertTest, ToCharFromSingle)
    {
    ASSERT_EQ(0, Convert::ToChar((float)0));
    ASSERT_EQ(1, Convert::ToChar((float)1));
@@ -526,7 +523,7 @@ namespace {
    ASSERT_THROW(Convert::ToChar(Single::MaxValue), OverflowException);
    }
    
-   TEST(Convert, ToCharFromString)
+   TEST(ConvertTest, ToCharFromString)
    {
    ASSERT_EQ(0, Convert::ToChar("0"_S));
    ASSERT_EQ(1, Convert::ToChar("1"_S));
@@ -536,7 +533,7 @@ namespace {
    ASSERT_THROW(Convert::ToChar("256"_S), OverflowException);
    }
    
-   TEST(Convert, ToCharFromConstChar)
+   TEST(ConvertTest, ToCharFromConstChar)
    {
    ASSERT_EQ(0, Convert::ToChar("0"));
    ASSERT_EQ(1, Convert::ToChar("1"));
@@ -549,7 +546,7 @@ namespace {
    ASSERT_THROW(Convert::ToChar(nullStr), ArgumentNullException);
    }
    
-   TEST(Convert, ToCharFromUInt16)
+   TEST(ConvertTest, ToCharFromUInt16)
    {
    ASSERT_EQ(0, Convert::ToChar((uint16)0));
    ASSERT_EQ(1, Convert::ToChar((uint16)1));
@@ -558,7 +555,7 @@ namespace {
    ASSERT_THROW(Convert::ToChar(UInt16::MaxValue), OverflowException);
    }
    
-   TEST(Convert, ToCharFromUInt32)
+   TEST(ConvertTest, ToCharFromUInt32)
    {
    ASSERT_EQ(0, Convert::ToChar((uint32)0));
    ASSERT_EQ(1, Convert::ToChar((uint32)1));
@@ -567,7 +564,7 @@ namespace {
    ASSERT_THROW(Convert::ToChar(UInt32::MaxValue), OverflowException);
    }
    
-   TEST(Convert, ToCharFromUInt64)
+   TEST(ConvertTest, ToCharFromUInt64)
    {
    ASSERT_EQ(0, Convert::ToChar((uint64)0));
    ASSERT_EQ(1, Convert::ToChar((uint64)1));
@@ -577,7 +574,7 @@ namespace {
    }
    */
   
-  TEST(Convert, PrimitiveTypes) {
+  TEST(ConvertTest, PrimitiveTypes) {
     
     byte  valueU8 = 123;
     uint16 valueU16 = 12345;

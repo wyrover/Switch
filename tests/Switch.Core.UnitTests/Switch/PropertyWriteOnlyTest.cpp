@@ -1,41 +1,38 @@
 #include <Switch/Property.hpp>
-#include <Switch/TUnit/Assert.hpp>
-#include <Switch/TUnit/TestFixture.hpp>
+#include <Switch/System/String.hpp>
+#include <gtest/gtest.h>
 
 using namespace System;
-using namespace TUnit;
 
 namespace SwitchUnitTests {
-  class PropertyWriteOnlyTest : public TestFixture {
-  protected:
-    void CreatePropertyAndSetItWithEqualOperator() {
+    TEST(PropertyWriteOnlyTest, CreatePropertyAndSetItWithEqualOperator) {
       int32 v = 42;
       _property<int32, _writeonly> Value {
         _set {v = value;}
       };
 
       Value = 24;
-      Assert::AreEqual(24, v, _caller);
+      ASSERT_EQ(24, v);
     }
     
-    void CreatePropertyAndSetItWithSetFunction() {
+    TEST(PropertyWriteOnlyTest, CreatePropertyAndSetItWithSetFunction) {
       int32 v = 42;
       _property<int32, _writeonly> Value {
         _set {v = value;}
       };
       
       Value.Set(24);
-      Assert::AreEqual(24, v, _caller);
+      ASSERT_EQ(24, v);
     }
     
-    void CreatePropertyAndSetItWithFunctor() {
+    TEST(PropertyWriteOnlyTest, CreatePropertyAndSetItWithFunctor) {
       int32 v = 42;
       _property<int32, _writeonly> Value {
         _set {v = value;}
       };
       
       Value(24);
-      Assert::AreEqual(24, v, _caller);
+      ASSERT_EQ(24, v);
     }
     
     class PropertyTestClass {
@@ -51,27 +48,20 @@ namespace SwitchUnitTests {
       string name = "Test property";
     };
     
-    void PropertyCopyConstructor() {
+    TEST(PropertyWriteOnlyTest, PropertyCopyConstructor) {
       refptr<PropertyTestClass> p1 = ref_new<PropertyTestClass>();
       refptr<PropertyTestClass> p2 = ref_new<PropertyTestClass>(*p1);
       p2->Name = "Other Value";
       p1 = null;
-      Assert::AreEqual("Other Value", p2->name, _caller);
+      ASSERT_EQ("Other Value", p2->name);
     }
     
-    void PropertyEqualOperator() {
+    TEST(PropertyWriteOnlyTest, PropertyEqualOperator) {
       refptr<PropertyTestClass> p1 = ref_new<PropertyTestClass>();
       refptr<PropertyTestClass> p2 = ref_new<PropertyTestClass>();
       *p2 = *p1;
       p2->Name = "Other Value";
       p1 = null;
-      Assert::AreEqual("Other Value", p2->name, _caller);
+      ASSERT_EQ("Other Value", p2->name);
     }
-  };
-  
-  _AddTest(PropertyWriteOnlyTest, CreatePropertyAndSetItWithEqualOperator)
-  _AddTest(PropertyWriteOnlyTest, CreatePropertyAndSetItWithSetFunction)
-  _AddTest(PropertyWriteOnlyTest, CreatePropertyAndSetItWithFunctor)
-  _AddTest(PropertyWriteOnlyTest, PropertyCopyConstructor)
-  _AddTest(PropertyWriteOnlyTest, PropertyEqualOperator)
 }

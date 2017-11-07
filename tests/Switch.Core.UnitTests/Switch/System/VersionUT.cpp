@@ -1,79 +1,69 @@
 #include <Switch/System/Version.hpp>
-#include <Switch/TUnit/Assert.hpp>
-#include <Switch/TUnit/TestFixture.hpp>
+#include <Switch/System/String.hpp>
+#include <gtest/gtest.h>
 
 using namespace System;
-using namespace TUnit;
 
 namespace {
-  class VersionTest : public TestFixture {
-  protected:
-    void CreateVersionWithDefaultConstructor() {
-      Version version;
-      
-      Assert::AreEqual(0, version.Major, _caller);
-      Assert::AreEqual(0, version.Minor, _caller);
-      Assert::AreEqual(-1, version.Build, _caller);
-      Assert::AreEqual(-1, version.Revision, _caller);
-    }
+  TEST(VersionTest, CreateVersionWithDefaultConstructor) {
+    Version version;
     
-    void CreateVersionWithSpecifiedMajorAndMinor() {
-      Version version(4, 2);
-      
-      Assert::AreEqual(4, version.Major, _caller);
-      Assert::AreEqual(2, version.Minor, _caller);
-      Assert::AreEqual(-1, version.Build, _caller);
-      Assert::AreEqual(-1, version.Revision, _caller);
-    }
-    
-    void CreateVersionWithSpecifiedMajorMinorAndRevision() {
-      Version version(4, 2, 1);
-      
-      Assert::AreEqual(4, version.Major, _caller);
-      Assert::AreEqual(2, version.Minor, _caller);
-      Assert::AreEqual(1, version.Build, _caller);
-      Assert::AreEqual(-1, version.Revision, _caller);
-    }
-    
-    void CreateVersionWithSpecifiedMajorMinorRevisionAndBuild() {
-      Version version(4, 2, 1, 3);
-      
-      Assert::AreEqual(4, version.Major, _caller);
-      Assert::AreEqual(2, version.Minor, _caller);
-      Assert::AreEqual(1, version.Build, _caller);
-      Assert::AreEqual(3, version.Revision, _caller);
-    }
-    
-    void CreateVersionWithSpecifiedMajorMinorRevisionAndBuildToZero() {
-      Version version(0, 0, 0, 0);
-      
-      Assert::AreEqual(0, version.Major, _caller);
-      Assert::AreEqual(0, version.Minor, _caller);
-      Assert::AreEqual(0, version.Build, _caller);
-      Assert::AreEqual(0, version.Revision, _caller);
-    }
-  };
-
-  _AddTest(VersionTest, CreateVersionWithDefaultConstructor)
-  _AddTest(VersionTest, CreateVersionWithSpecifiedMajorAndMinor)
-  _AddTest(VersionTest, CreateVersionWithSpecifiedMajorMinorAndRevision)
-  _AddTest(VersionTest, CreateVersionWithSpecifiedMajorMinorRevisionAndBuild)
-  _AddTest(VersionTest, CreateVersionWithSpecifiedMajorMinorRevisionAndBuildToZero)
-
-  TEST(Version, Constructor) {
-    EXPECT_EQ(Version().ToString(), "0.0");
-    EXPECT_EQ(Version(1, 0).ToString(), "1.0");
-    EXPECT_EQ(Version(1, 2).ToString(), "1.2");
-    EXPECT_EQ(Version(Int32::MaxValue, 2).ToString(), "2147483647.2");
-    EXPECT_EQ(Version(1, 2, 3).ToString(), "1.2.3");
-    EXPECT_EQ(Version(1, 2, 3, 4).ToString(), "1.2.3.4");
-    EXPECT_THROW(Version(-1, 0), ArgumentOutOfRangeException);
-    EXPECT_THROW(Version(0, -25), ArgumentOutOfRangeException);
+    ASSERT_EQ(0, version.Major);
+    ASSERT_EQ(0, version.Minor);
+    ASSERT_EQ(-1, version.Build);
+    ASSERT_EQ(-1, version.Revision);
   }
-
-  TEST(Version, Parse) {
-    EXPECT_EQ(Version::Parse("11.0.2"), Version(11, 0, 2));
-    EXPECT_EQ(Version::Parse("11.00.02"), Version(11, 0, 2));
+  
+  TEST(VersionTest, CreateVersionWithSpecifiedMajorAndMinor) {
+    Version version(4, 2);
+    
+    ASSERT_EQ(4, version.Major);
+    ASSERT_EQ(2, version.Minor);
+    ASSERT_EQ(-1, version.Build);
+    ASSERT_EQ(-1, version.Revision);
   }
-
+  
+  TEST(VersionTest, CreateVersionWithSpecifiedMajorMinorAndRevision) {
+    Version version(4, 2, 1);
+    
+    ASSERT_EQ(4, version.Major);
+    ASSERT_EQ(2, version.Minor);
+    ASSERT_EQ(1, version.Build);
+    ASSERT_EQ(-1, version.Revision);
+  }
+  
+  TEST(VersionTest, CreateVersionWithSpecifiedMajorMinorRevisionAndBuild) {
+    Version version(4, 2, 1, 3);
+    
+    ASSERT_EQ(4, version.Major);
+    ASSERT_EQ(2, version.Minor);
+    ASSERT_EQ(1, version.Build);
+    ASSERT_EQ(3, version.Revision);
+  }
+  
+  TEST(VersionTest, CreateVersionWithSpecifiedMajorMinorRevisionAndBuildToZero) {
+    Version version(0, 0, 0, 0);
+    
+    ASSERT_EQ(0, version.Major);
+    ASSERT_EQ(0, version.Minor);
+    ASSERT_EQ(0, version.Build);
+    ASSERT_EQ(0, version.Revision);
+  }
+  
+  TEST(VersionTest, Constructor) {
+    ASSERT_EQ(Version().ToString(), "0.0");
+    ASSERT_EQ(Version(1, 0).ToString(), "1.0");
+    ASSERT_EQ(Version(1, 2).ToString(), "1.2");
+    ASSERT_EQ(Version(Int32::MaxValue, 2).ToString(), "2147483647.2");
+    ASSERT_EQ(Version(1, 2, 3).ToString(), "1.2.3");
+    ASSERT_EQ(Version(1, 2, 3, 4).ToString(), "1.2.3.4");
+    ASSERT_THROW(Version(-1, 0), ArgumentOutOfRangeException);
+    ASSERT_THROW(Version(0, -25), ArgumentOutOfRangeException);
+  }
+  
+  TEST(VersionTest, Parse) {
+    ASSERT_EQ(Version::Parse("11.0.2"), Version(11, 0, 2));
+    ASSERT_EQ(Version::Parse("11.00.02"), Version(11, 0, 2));
+  }  
 }
+

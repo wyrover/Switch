@@ -1,169 +1,148 @@
 #include <Switch/System/Drawing/Rectangle.hpp>
-#include <Switch/TUnit/Assert.hpp>
-#include <Switch/TUnit/TestFixture.hpp>
+#include <gtest/gtest.h>
 
 using namespace System;
 using namespace System::Drawing;
-using namespace TUnit;
 
 namespace SwitchUnitTests {
-  class RectangleTest : public TestFixture {
-  public:
-    void Empty() {
-      Assert::AreEqual(0, Rectangle::Empty().X(), _caller);
-      Assert::AreEqual(0, Rectangle::Empty().Y(), _caller);
-      Assert::AreEqual(0, Rectangle::Empty().Width(), _caller);
-      Assert::AreEqual(0, Rectangle::Empty().Height(), _caller);
-    }
-    
-    void CreateEmpty() {
-      Drawing::Rectangle rect;
-      Assert::AreEqual(0, rect.X(), _caller);
-      Assert::AreEqual(0, rect.Y(), _caller);
-      Assert::AreEqual(0, rect.Width(), _caller);
-      Assert::AreEqual(0, rect.Height(), _caller);
-    }
-    
-    void CreateRectangleFromXYWidthHeight() {
-      Drawing::Rectangle rect(12, 346, 244, 578);
-      Assert::AreEqual(12, rect.X(), _caller);
-      Assert::AreEqual(346, rect.Y(), _caller);
-      Assert::AreEqual(244, rect.Width(), _caller);
-      Assert::AreEqual(578, rect.Height(), _caller);
-    }
-    
-    void CreateRectangleFromEmptyRectangle() {
-      Drawing::Rectangle r;
-      Drawing::Rectangle rect(r);
-      Assert::AreEqual(0, rect.X(), _caller);
-      Assert::AreEqual(0, rect.Y(), _caller);
-      Assert::AreEqual(0, rect.Width(), _caller);
-      Assert::AreEqual(0, rect.Height(), _caller);
-    }
-    
-    void CreateRectangleFromRectangle() {
-      Drawing::Rectangle r(123, 456, 244, 578);
-      Drawing::Rectangle rect(r);
-      Assert::AreEqual(123, rect.X(), _caller);
-      Assert::AreEqual(456, rect.Y(), _caller);
-      Assert::AreEqual(244, rect.Width(), _caller);
-      Assert::AreEqual(578, rect.Height(), _caller);
-    }
-    
-    void CreateRectangleFromEmptyPointAndEmtpySize() {
-      Drawing::Point p;
-      Drawing::Size s;
-      Drawing::Rectangle rect(p, s);
-      Assert::AreEqual(0, rect.X(), _caller);
-      Assert::AreEqual(0, rect.Y(), _caller);
-      Assert::AreEqual(0, rect.Width(), _caller);
-      Assert::AreEqual(0, rect.Height(), _caller);
-    }
-    
-    void CreateRectangleFromPointAndSize() {
-      Drawing::Point p(123, 456);
-      Drawing::Point s(244, 578);
-      Drawing::Rectangle rect(p, s);
-      Assert::AreEqual(123, rect.X(), _caller);
-      Assert::AreEqual(456, rect.Y(), _caller);
-      Assert::AreEqual(244, rect.Width(), _caller);
-      Assert::AreEqual(578, rect.Height(), _caller);
-    }
-    
-    void EmptyRectangleIsEmpty() {
-      Assert::IsTrue(Rectangle::Empty().IsEmpty(), _caller);
-    }
-    
-    void RectangleIsEmpty() {
-      Assert::IsFalse(Drawing::Rectangle(125, 679, 244, 567).IsEmpty(), _caller);
-    }
-    
-    void EmptyRectangleToString() {
-      Assert::AreEqual("{X=0,Y=0,Width=0,Height=0}", Rectangle::Empty().ToString(), _caller);
-    }
-    
-    void RectangleToString() {
-      Assert::AreEqual("{X=10,Y=24,Width=54,Height=987}", Drawing::Rectangle(10, 24, 54, 987).ToString(), _caller);
-    }
-    
-    void FromLTRB() {
-      Drawing::Rectangle rect = Rectangle::FromLTRB(10, 20, 100, 50);
-      Assert::AreEqual(10, rect.X(), _caller);
-      Assert::AreEqual(20, rect.Y(), _caller);
-      Assert::AreEqual(90, rect.Width(), _caller);
-      Assert::AreEqual(30, rect.Height(), _caller);
-    }
-    
-    void GetLeftTopRightBottom() {
-      Drawing::Rectangle rect(10, 20, 100, 50);
-
-      Assert::AreEqual(rect.Y(), rect.Top(), _caller);
-      Assert::AreEqual(rect.X(), rect.Left(), _caller);
-      Assert::AreEqual(rect.X() + rect.Width(), rect.Right(), _caller);
-      Assert::AreEqual(rect.Y() + rect.Height(), rect.Bottom(), _caller);
-      
-      Assert::AreEqual(10, rect.X(), _caller);
-      Assert::AreEqual(20, rect.Y(), _caller);
-      Assert::AreEqual(100, rect.Width(), _caller);
-      Assert::AreEqual(50, rect.Height(), _caller);
-      
-      Assert::AreEqual(10, rect.Left(), _caller);
-      Assert::AreEqual(20, rect.Top(), _caller);
-      Assert::AreEqual(110, rect.Right(), _caller);
-      Assert::AreEqual(70, rect.Bottom(), _caller);
-    }
-    
-    void RectangleInflateFromXY() {
-      Drawing::Rectangle rect(100, 100, 300, 200);
-      
-      rect.Inflate(50, 20);
-      
-      Assert::AreEqual(50, rect.X(), _caller);
-      Assert::AreEqual(80, rect.Y(), _caller);
-      Assert::AreEqual(400, rect.Width(), _caller);
-      Assert::AreEqual(240, rect.Height(), _caller);
-
-      Drawing::Rectangle rect2 = Rectangle::Inflate(rect, 50, 20);
-      
-      Assert::AreEqual(0, rect2.X(), _caller);
-      Assert::AreEqual(60, rect2.Y(), _caller);
-      Assert::AreEqual(500, rect2.Width(), _caller);
-      Assert::AreEqual(280, rect2.Height(), _caller);
-    }
-    
-    void RectangleInflateFromSize() {
-      Drawing::Rectangle rect(100, 100, 300, 200);
-      
-      rect.Inflate(Drawing::Size(50, 20));
-      
-      Assert::AreEqual(50, rect.X(), _caller);
-      Assert::AreEqual(80, rect.Y(), _caller);
-      Assert::AreEqual(400, rect.Width(), _caller);
-      Assert::AreEqual(240, rect.Height(), _caller);
-    }
-    
-    void Intersect() {
-      Drawing::Rectangle rectangle1(50, 50, 200, 100);
-      Drawing::Rectangle rectangle2(70, 20, 100, 200);
-      Drawing::Rectangle rectangle3 = Rectangle::Intersect(rectangle1, rectangle2);
-      Assert::IsTrue(rectangle3.IsEmpty());
-    }
-  };
+  TEST(RectangleTest, Empty) {
+    ASSERT_EQ(0, Rectangle::Empty().X());
+    ASSERT_EQ(0, Rectangle::Empty().Y());
+    ASSERT_EQ(0, Rectangle::Empty().Width());
+    ASSERT_EQ(0, Rectangle::Empty().Height());
+  }
   
-  _AddTest(RectangleTest, Empty)
-  _AddTest(RectangleTest, CreateEmpty)
-  _AddTest(RectangleTest, CreateRectangleFromXYWidthHeight)
-  _AddTest(RectangleTest, CreateRectangleFromEmptyRectangle)
-  _AddTest(RectangleTest, CreateRectangleFromRectangle)
-  _AddTest(RectangleTest, CreateRectangleFromEmptyPointAndEmtpySize)
-  _AddTest(RectangleTest, CreateRectangleFromPointAndSize)
-  _AddTest(RectangleTest, EmptyRectangleIsEmpty)
-  _AddTest(RectangleTest, RectangleIsEmpty)
-  _AddTest(RectangleTest, EmptyRectangleToString)
-  _AddTest(RectangleTest, RectangleToString)
-  _AddTest(RectangleTest, FromLTRB)
-  _AddTest(RectangleTest, GetLeftTopRightBottom)
-  _AddTest(RectangleTest, RectangleInflateFromXY)
-  _AddTest(RectangleTest, RectangleInflateFromSize)
-  _AddTest(RectangleTest, Intersect)
+  TEST(RectangleTest, CreateEmpty) {
+    Drawing::Rectangle rect;
+    ASSERT_EQ(0, rect.X());
+    ASSERT_EQ(0, rect.Y());
+    ASSERT_EQ(0, rect.Width());
+    ASSERT_EQ(0, rect.Height());
+  }
+  
+  TEST(RectangleTest, CreateRectangleFromXYWidthHeight) {
+    Drawing::Rectangle rect(12, 346, 244, 578);
+    ASSERT_EQ(12, rect.X());
+    ASSERT_EQ(346, rect.Y());
+    ASSERT_EQ(244, rect.Width());
+    ASSERT_EQ(578, rect.Height());
+  }
+  
+  TEST(RectangleTest, CreateRectangleFromEmptyRectangle) {
+    Drawing::Rectangle r;
+    Drawing::Rectangle rect(r);
+    ASSERT_EQ(0, rect.X());
+    ASSERT_EQ(0, rect.Y());
+    ASSERT_EQ(0, rect.Width());
+    ASSERT_EQ(0, rect.Height());
+  }
+  
+  TEST(RectangleTest, CreateRectangleFromRectangle) {
+    Drawing::Rectangle r(123, 456, 244, 578);
+    Drawing::Rectangle rect(r);
+    ASSERT_EQ(123, rect.X());
+    ASSERT_EQ(456, rect.Y());
+    ASSERT_EQ(244, rect.Width());
+    ASSERT_EQ(578, rect.Height());
+  }
+  
+  TEST(RectangleTest, CreateRectangleFromEmptyPointAndEmtpySize) {
+    Drawing::Point p;
+    Drawing::Size s;
+    Drawing::Rectangle rect(p, s);
+    ASSERT_EQ(0, rect.X());
+    ASSERT_EQ(0, rect.Y());
+    ASSERT_EQ(0, rect.Width());
+    ASSERT_EQ(0, rect.Height());
+  }
+  
+  TEST(RectangleTest, CreateRectangleFromPointAndSize) {
+    Drawing::Point p(123, 456);
+    Drawing::Point s(244, 578);
+    Drawing::Rectangle rect(p, s);
+    ASSERT_EQ(123, rect.X());
+    ASSERT_EQ(456, rect.Y());
+    ASSERT_EQ(244, rect.Width());
+    ASSERT_EQ(578, rect.Height());
+  }
+  
+  TEST(RectangleTest, EmptyRectangleIsEmpty) {
+    ASSERT_TRUE(Rectangle::Empty().IsEmpty());
+  }
+  
+  TEST(RectangleTest, RectangleIsEmpty) {
+    ASSERT_FALSE(Drawing::Rectangle(125, 679, 244, 567).IsEmpty());
+  }
+  
+  TEST(RectangleTest, EmptyRectangleToString) {
+    ASSERT_EQ("{X=0,Y=0,Width=0,Height=0}", Rectangle::Empty().ToString());
+  }
+  
+  TEST(RectangleTest, RectangleToString) {
+    ASSERT_EQ("{X=10,Y=24,Width=54,Height=987}", Drawing::Rectangle(10, 24, 54, 987).ToString());
+  }
+  
+  TEST(RectangleTest, FromLTRB) {
+    Drawing::Rectangle rect = Rectangle::FromLTRB(10, 20, 100, 50);
+    ASSERT_EQ(10, rect.X());
+    ASSERT_EQ(20, rect.Y());
+    ASSERT_EQ(90, rect.Width());
+    ASSERT_EQ(30, rect.Height());
+  }
+  
+  TEST(RectangleTest, GetLeftTopRightBottom) {
+    Drawing::Rectangle rect(10, 20, 100, 50);
+    
+    ASSERT_EQ(rect.Y(), rect.Top());
+    ASSERT_EQ(rect.X(), rect.Left());
+    ASSERT_EQ(rect.X() + rect.Width(), rect.Right());
+    ASSERT_EQ(rect.Y() + rect.Height(), rect.Bottom());
+    
+    ASSERT_EQ(10, rect.X());
+    ASSERT_EQ(20, rect.Y());
+    ASSERT_EQ(100, rect.Width());
+    ASSERT_EQ(50, rect.Height());
+    
+    ASSERT_EQ(10, rect.Left());
+    ASSERT_EQ(20, rect.Top());
+    ASSERT_EQ(110, rect.Right());
+    ASSERT_EQ(70, rect.Bottom());
+  }
+  
+  TEST(RectangleTest, RectangleInflateFromXY) {
+    Drawing::Rectangle rect(100, 100, 300, 200);
+    
+    rect.Inflate(50, 20);
+    
+    ASSERT_EQ(50, rect.X());
+    ASSERT_EQ(80, rect.Y());
+    ASSERT_EQ(400, rect.Width());
+    ASSERT_EQ(240, rect.Height());
+    
+    Drawing::Rectangle rect2 = Rectangle::Inflate(rect, 50, 20);
+    
+    ASSERT_EQ(0, rect2.X());
+    ASSERT_EQ(60, rect2.Y());
+    ASSERT_EQ(500, rect2.Width());
+    ASSERT_EQ(280, rect2.Height());
+  }
+  
+  TEST(RectangleTest, RectangleInflateFromSize) {
+    Drawing::Rectangle rect(100, 100, 300, 200);
+    
+    rect.Inflate(Drawing::Size(50, 20));
+    
+    ASSERT_EQ(50, rect.X());
+    ASSERT_EQ(80, rect.Y());
+    ASSERT_EQ(400, rect.Width());
+    ASSERT_EQ(240, rect.Height());
+  }
+  
+  TEST(RectangleTest, Intersect) {
+    Drawing::Rectangle rectangle1(50, 50, 200, 100);
+    Drawing::Rectangle rectangle2(70, 20, 100, 200);
+    Drawing::Rectangle rectangle3 = Rectangle::Intersect(rectangle1, rectangle2);
+    ASSERT_TRUE(rectangle3.IsEmpty());
+  }
 }
+

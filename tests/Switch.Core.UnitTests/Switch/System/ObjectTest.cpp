@@ -1,172 +1,138 @@
 #include <Switch/System/Object.hpp>
-#include <Switch/TUnit/Assert.hpp>
-#include <Switch/TUnit/TestFixture.hpp>
+#include <Switch/System/Int32.hpp>
+#include <gtest/gtest.h>
 
 using namespace System;
-using namespace TUnit;
 
 namespace SwitchUnitTests {
-  class ObjectTest : public TestFixture {
-  protected:
-    void SetUp() override {}
-    void TearDown() override {}
-    
-    void EqualsWithAnotherObject() {
-      TUnit::Assert::IsFalse(Object().Equals(Object()), _caller);
+    TEST(ObjectTest, EqualsWithAnotherObject) {
+      ASSERT_FALSE(Object().Equals(Object()));
     }
 
-    void EqualsWithSameObject() {
+    TEST(ObjectTest, EqualsWithSameObject) {
       Object object1;
       Object& object2 = object1;
-      TUnit::Assert::IsTrue(object1.Equals(object2), _caller);
+      ASSERT_TRUE(object1.Equals(object2));
     }
     
-    void EqualsWithNullObject() {
-      TUnit::Assert::IsFalse(Object().Equals(ref<Object>::Null()), _caller);
+    TEST(ObjectTest, EqualsWithNullObject) {
+      ASSERT_FALSE(Object().Equals(ref<Object>::Null()));
     }
     
-    void EqualsOnDifferentObjects() {
-      TUnit::Assert::IsFalse(Object::Equals(Object(), Object()), _caller);
+    TEST(ObjectTest, EqualsOnDifferentObjects) {
+      ASSERT_FALSE(Object::Equals(Object(), Object()));
     }
     
-    void EqualsOnSameObjects() {
+    TEST(ObjectTest, EqualsOnSameObjects) {
       Object object1;
-      TUnit::Assert::IsTrue(Object::Equals(object1, object1), _caller);
+      ASSERT_TRUE(Object::Equals(object1, object1));
     }
     
-    void EqualsDifferentStrings() {
-      TUnit::Assert::IsFalse(Object::Equals(string("One"), string("Two")), _caller);
+    TEST(ObjectTest, EqualsDifferentStrings) {
+      ASSERT_FALSE(Object::Equals(string("One"), string("Two")));
     }
     
-    void EqualsSameStrings() {
-      TUnit::Assert::IsTrue(Object::Equals(string("One"), string("One")), _caller);
+    TEST(ObjectTest, EqualsSameStrings) {
+      ASSERT_TRUE(Object::Equals(string("One"), string("One")));
     }
     
-    void EqualityOperatorToAnotherObject() {
-      TUnit::Assert::IsFalse(Object() == Object(), _caller);
+    TEST(ObjectTest, EqualityOperatorToAnotherObject) {
+      ASSERT_FALSE(Object() == Object());
     }
     
-    void EqualityOperatorTheSameObject() {
-      Object object1;
-      Object& object2 = object1;
-      TUnit::Assert::IsTrue(object1 == object2, _caller);
-    }
-    
-    void EqualityOperatorDifferentStrings() {
-      TUnit::Assert::IsFalse(string("One") == string("Two"), _caller);
-    }
-    
-    void EqualityOperatorSameStrings() {
-      TUnit::Assert::IsTrue(string("One") == string("One"), _caller);
-    }
-    
-    void InequalityOperatorToAnotherObject() {
-      TUnit::Assert::IsTrue(Object() != Object(), _caller);
-    }
-    
-    void InequalityOperatorTheSameObject() {
+    TEST(ObjectTest, EqualityOperatorTheSameObject) {
       Object object1;
       Object& object2 = object1;
-      TUnit::Assert::IsFalse(object1 != object2, _caller);
+      ASSERT_TRUE(object1 == object2);
     }
     
-    void InequalityOperatorDifferentStrings() {
-      TUnit::Assert::IsTrue(string("One") != string("Two"), _caller);
+    TEST(ObjectTest, EqualityOperatorDifferentStrings) {
+      ASSERT_FALSE(string("One") == string("Two"));
     }
     
-    void InequalityOperatorSameStrings() {
-      TUnit::Assert::IsFalse(string("One") != string("One"), _caller);
+    TEST(ObjectTest, EqualityOperatorSameStrings) {
+      ASSERT_TRUE(string("One") == string("One"));
     }
     
-    void GetTypeOnObject() {
-      TUnit::Assert::AreEqual("Switch::System::Object", Object().GetType().FullName(), _caller);
+    TEST(ObjectTest, InequalityOperatorToAnotherObject) {
+      ASSERT_TRUE(Object() != Object());
     }
     
-    void GetTypeOnString() {
-      TUnit::Assert::AreEqual("Switch::System::String", String().GetType().FullName(), _caller);
+    TEST(ObjectTest, InequalityOperatorTheSameObject) {
+      Object object1;
+      Object& object2 = object1;
+      ASSERT_FALSE(object1 != object2);
     }
     
-    void MemberwiseCloneOnString() {
+    TEST(ObjectTest, InequalityOperatorDifferentStrings) {
+      ASSERT_TRUE(string("One") != string("Two"));
+    }
+    
+    TEST(ObjectTest, InequalityOperatorSameStrings) {
+      ASSERT_FALSE(string("One") != string("One"));
+    }
+    
+    TEST(ObjectTest, GetTypeOnObject) {
+      ASSERT_EQ("Switch::System::Object", Object().GetType().FullName());
+    }
+    
+    TEST(ObjectTest, GetTypeOnString) {
+      ASSERT_EQ("Switch::System::String", String().GetType().FullName());
+    }
+    
+    TEST(ObjectTest, MemberwiseCloneOnString) {
       refptr<string> str = ref_new<string>("First");
       refptr<object> clonedStr = str->MemberwiseClone<string>();
       *str = "Second";
-      TUnit::Assert::AreEqual("Second", str->ToString(), _caller);
-      TUnit::Assert::AreEqual("First", clonedStr->ToString(), _caller);
+      ASSERT_EQ("Second", str->ToString());
+      ASSERT_EQ("First", clonedStr->ToString());
     }
     
-    void MemberwiseCloneOnStringAsString() {
+    TEST(ObjectTest, MemberwiseCloneOnStringAsString) {
       refptr<string> str = ref_new<string>("First");
       refptr<string> clonedStr = str->MemberwiseClone<string>().As<string>();
       *str = "Second";
-      TUnit::Assert::AreEqual("Second", *str, _caller);
-      TUnit::Assert::AreEqual("First", *clonedStr, _caller);
+      ASSERT_EQ("Second", *str);
+      ASSERT_EQ("First", *clonedStr);
     }
     
-    void ReferenceEqualsOnDifferentObjects() {
+    TEST(ObjectTest, ReferenceEqualsOnDifferentObjects) {
       Object object1;
       Object& object2 = object1;
-      TUnit::Assert::IsFalse(Object::ReferenceEquals(Object(), object2), _caller);
+      ASSERT_FALSE(Object::ReferenceEquals(Object(), object2));
     }
     
-    void ReferenceEqualsOnSameObjects() {
+    TEST(ObjectTest, ReferenceEqualsOnSameObjects) {
       Object object1;
       Object& object2 = object1;
-      TUnit::Assert::IsTrue(Object::ReferenceEquals(object1, object2), _caller);
+      ASSERT_TRUE(Object::ReferenceEquals(object1, object2));
       
     }
     
-    void ReferenceEqualsOnNullAndObject() {
+    TEST(ObjectTest, ReferenceEqualsOnNullAndObject) {
       Object object1;
-      TUnit::Assert::IsFalse(Object::ReferenceEquals(ref<object>::Null(), object1), _caller);
+      ASSERT_FALSE(Object::ReferenceEquals(ref<object>::Null(), object1));
     }
     
-    void ReferenceEqualsOnTwoDifferentObjects() {
+    TEST(ObjectTest, ReferenceEqualsOnTwoDifferentObjects) {
       Object object1;
       Object object4;
-      TUnit::Assert::IsFalse(Object::ReferenceEquals(object1, object4), _caller);
+      ASSERT_FALSE(Object::ReferenceEquals(object1, object4));
     }
     
-    void ObjectToString() {
-      TUnit::Assert::AreEqual("Switch::System::Object", Object().ToString(), _caller);
+    TEST(ObjectTest, ObjectToString) {
+      ASSERT_EQ("Switch::System::Object", Object().ToString());
     }
     
-    void ObjectStringToString() {
+    TEST(ObjectTest, ObjectStringToString) {
       string str = "This is a string";
       Object& obj = str;
-      TUnit::Assert::AreEqual("This is a string", obj.ToString(), _caller);
+      ASSERT_EQ("This is a string", obj.ToString());
     }
     
-    void ObjectInt32ToString() {
+    TEST(ObjectTest, ObjectInt32ToString) {
       Int32 i = 4659;
       Object& obj1 = i;
-      TUnit::Assert::AreEqual("4659", obj1.ToString(), _caller);
+      ASSERT_EQ("4659", obj1.ToString());
     }
-  };
-  
-  _AddTest(ObjectTest, EqualsWithAnotherObject)
-  _AddTest(ObjectTest, EqualsWithSameObject)
-  _AddTest(ObjectTest, EqualsWithNullObject)
-  _AddTest(ObjectTest, EqualsOnDifferentObjects)
-  _AddTest(ObjectTest, EqualsOnSameObjects)
-  _AddTest(ObjectTest, EqualsDifferentStrings)
-  _AddTest(ObjectTest, EqualsSameStrings)
-  _AddTest(ObjectTest, EqualityOperatorToAnotherObject)
-  _AddTest(ObjectTest, EqualityOperatorTheSameObject)
-  _AddTest(ObjectTest, EqualityOperatorDifferentStrings)
-  _AddTest(ObjectTest, EqualityOperatorSameStrings)
-  _AddTest(ObjectTest, InequalityOperatorToAnotherObject)
-  _AddTest(ObjectTest, InequalityOperatorTheSameObject)
-  _AddTest(ObjectTest, InequalityOperatorDifferentStrings)
-  _AddTest(ObjectTest, InequalityOperatorSameStrings)
-  _AddTest(ObjectTest, GetTypeOnObject)
-  _AddTest(ObjectTest, GetTypeOnString)
-  _AddTest(ObjectTest, MemberwiseCloneOnString)
-  _AddTest(ObjectTest, MemberwiseCloneOnStringAsString)
-  _AddTest(ObjectTest, ReferenceEqualsOnDifferentObjects)
-  _AddTest(ObjectTest, ReferenceEqualsOnSameObjects)
-  _AddTest(ObjectTest, ReferenceEqualsOnNullAndObject)
-  _AddTest(ObjectTest, ReferenceEqualsOnTwoDifferentObjects)
-  _AddTest(ObjectTest, ObjectToString)
-  _AddTest(ObjectTest, ObjectStringToString)
-  _AddTest(ObjectTest, ObjectInt32ToString)
 }

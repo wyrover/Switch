@@ -1,31 +1,25 @@
 #include <Switch/System/Environment.hpp>
-#include <Switch/TUnit/Assert.hpp>
-#include <Switch/TUnit/TestFixture.hpp>
+#include <gtest/gtest.h>
 
 using namespace System;
-using namespace TUnit;
 
 namespace SwitchUnitTests {
-  class EnvironmentTest : public TestFixture {
-  protected:
-    void GetEnvironmentVariables() {
-      Assert::Greater(Environment::GetEnvironmentVariables().Count, 0, _caller);
-    }
-    
-    void GetEnvironmentVariable() {
-      Assert::IsFalse(string::IsNullOrEmpty(Environment::GetEnvironmentVariable("PATH")), _caller);
-    }
-    
-    void SetEnvironmentVariable() {
-      Assert::IsTrue(string::IsNullOrEmpty(Environment::GetEnvironmentVariable("TEST_ENVIRONEMENT")), _caller);
-      Assert::DoesNotThrows(_delegate {Environment::SetEnvironmentVariable("TEST_ENVIRONEMENT", "1");}, _caller);
-      Assert::AreEqual("1", Environment::GetEnvironmentVariable("TEST_ENVIRONEMENT"), _caller);
-      Assert::DoesNotThrows(_delegate {Environment::SetEnvironmentVariable("TEST_ENVIRONEMENT", "");}, _caller);
-      Assert::IsTrue(string::IsNullOrEmpty(Environment::GetEnvironmentVariable("TEST_ENVIRONEMENT")), _caller);
-    }
-  };
+  /*
+   TEST(EnvironmentTest, GetEnvironmentVariables) {
+   ASSERT_GT(Environment::GetEnvironmentVariables().Count, 0);
+   } */
   
-  //_AddTest(EnvironmentTest, GetEnvironmentVariables)
-  _AddTest(EnvironmentTest, GetEnvironmentVariable)
-  //_AddTest(EnvironmentTest, SetEnvironmentVariable)
+  TEST(EnvironmentTest, GetEnvironmentVariable) {
+    ASSERT_FALSE(string::IsNullOrEmpty(Environment::GetEnvironmentVariable("PATH")));
+  }
+  
+  /*
+   TEST(EnvironmentTest, SetEnvironmentVariable) {
+   ASSERT_TRUE(string::IsNullOrEmpty(Environment::GetEnvironmentVariable("TEST_ENVIRONEMENT")));
+   ASSERT_NO_THROW(Environment::SetEnvironmentVariable("TEST_ENVIRONEMENT", "1"));
+   ASSERT_EQ("1", Environment::GetEnvironmentVariable("TEST_ENVIRONEMENT"));
+   ASSERT_NO_THROW(_delegate {Environment::SetEnvironmentVariable("TEST_ENVIRONEMENT", "");});
+   ASSERT_TRUE(string::IsNullOrEmpty(Environment::GetEnvironmentVariable("TEST_ENVIRONEMENT")));
+   } */
 }
+

@@ -1,16 +1,10 @@
-#include <Switch/TUnit/Assert.hpp>
-#include <Switch/TUnit/TestFixture.hpp>
 #include <Switch/System/Windows/Forms/Application.hpp>
+#include <gtest/gtest.h>
 
 using namespace System::Windows::Forms;
-using namespace TUnit;
 
 namespace SwitchUnitTests {
-  class ApplicationTest : public TestFixture {
-  protected:
-    void EnableVisualStyles() {
-    }
-  };
-  
-  _AddTest(ApplicationTest, EnableVisualStyles)
+  TEST(ApplicationTest, EnableVisualStyles) {
+  }
 }
+

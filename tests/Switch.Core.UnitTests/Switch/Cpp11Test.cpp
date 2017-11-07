@@ -1,45 +1,38 @@
-#include <Switch/TUnit/Assert.hpp>
-#include <Switch/TUnit/TestFixture.hpp>
+#include <Switch/System/Threading/Thread.hpp>
+#include <gtest/gtest.h>
 
 using namespace System;
-using namespace TUnit;
 
 namespace SwitchUnitTests {
-  class Cpp11Test : public TestFixture {
-  protected:
-    void Auto() {
-      string str = "Test string";
-      const char chars[] = "Test string";
-      
-      int32 index = 0;
-      for (auto c : str)
-        Assert::AreEqual(c, char32_t(chars[index++]), _caller);
-    }
+  TEST(Cpp11Test, Auto) {
+    string str = "Test string";
+    const char chars[] = "Test string";
     
-    void InitializerList() {
-      Array<int> values = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-      const int results[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-      
-      int32 index = 0;
-      for (const auto& value : values)
-        Assert::AreEqual(value, results[index++], _caller);
-      Assert::AreEqual(10, index, _caller);
-    }
-    
-    void Thread() {
-      string result;
-
-      std::thread t([&] {
-        result = "thread launched";
-      });
-      
-      Assert::True(t.joinable(), _caller);
-      t.join();
-      Assert::AreEqual("thread launched", result, _caller);
-    }
-  };
+    int32 index = 0;
+    for (auto c : str)
+      ASSERT_EQ(c, char32_t(chars[index++]));
+  }
   
-  _AddTest(Cpp11Test, Auto)
-  _AddTest(Cpp11Test, InitializerList)
-  _AddTest(Cpp11Test, Thread)
+  TEST(Cpp11Test, InitializerList) {
+    Array<int> values = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    const int results[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    
+    int32 index = 0;
+    for (const auto& value : values)
+      ASSERT_EQ(value, results[index++]);
+    ASSERT_EQ(10, index);
+  }
+  
+  TEST(Cpp11Test, Thread) {
+    string result;
+    
+    std::thread t([&] {
+      result = "thread launched";
+    });
+    
+    ASSERT_TRUE(t.joinable());
+    t.join();
+    ASSERT_EQ("thread launched", result);
+  }
 }
+

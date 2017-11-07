@@ -1,14 +1,12 @@
-﻿#include <Switch/System/Text/ASCIIEncoding.hpp>
+#include <Switch/System/Text/ASCIIEncoding.hpp>
 #include <Switch/System/Text/ANSIEncoding.hpp>
 #include <Switch/System/Text/UnicodeEncoding.hpp>
 #include <Switch/System/Text/UTF8Encoding.hpp>
 #include <Switch/System/Text/UTF32Encoding.hpp>
-#include <Switch/TUnit/Assert.hpp>
-#include <Switch/TUnit/TestFixture.hpp>
+#include <gtest/gtest.h>
 
 using namespace System;
 using namespace System::Text;
-using namespace TUnit;
 
 namespace {
 /*
@@ -33,175 +31,175 @@ char32 fullBlock = 0x2588;
 char32 cjk = 0x597B;
 char32 koala = 0x1F428;
 
-TEST(Encoder,   ASCII) {
+TEST(EncoderTest,   ASCII) {
   ASCIIEncoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
-  EXPECT_EQ("ASCIIEncoder", encoder().ToString());
+  ASSERT_EQ("ASCIIEncoder", encoder().ToString());
 }
 
-TEST(Encoder, CreateEncoder_437) {
+TEST(EncoderTest, CreateEncoder_437) {
   CodePage437Encoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
-  EXPECT_EQ("Code Page 437 Encoder", encoder().ToString());
+  ASSERT_EQ("Code Page 437 Encoder", encoder().ToString());
 }
 
-TEST(Encoder, CreateEncoder_28591) {
+TEST(EncoderTest, CreateEncoder_28591) {
   CodePage28591Encoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
-  EXPECT_EQ("Code Page 28591 Encoder", encoder().ToString());
+  ASSERT_EQ("Code Page 28591 Encoder", encoder().ToString());
 }
 
-TEST(Encoder, CreateEncoder_28592) {
+TEST(EncoderTest, CreateEncoder_28592) {
   CodePage28592Encoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
-  EXPECT_EQ("Code Page 28592 Encoder", encoder().ToString());
+  ASSERT_EQ("Code Page 28592 Encoder", encoder().ToString());
 }
 
-TEST(Encoder, CreateEncoder_UTF8) {
+TEST(EncoderTest, CreateEncoder_UTF8) {
   UTF8Encoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
-  EXPECT_EQ("UTF8Encoder", encoder().ToString());
+  ASSERT_EQ("UTF8Encoder", encoder().ToString());
 }
 
-TEST(Encoder, CreateEncoder_UTF16) {
+TEST(EncoderTest, CreateEncoder_UTF16) {
   UnicodeEncoding encoding(false);
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
-  EXPECT_EQ("UnicodeEncoder", encoder().ToString());
+  ASSERT_EQ("UnicodeEncoder", encoder().ToString());
 }
 
-TEST(Encoder, CreateEncoder_UTF16BE) {
+TEST(EncoderTest, CreateEncoder_UTF16BE) {
   UnicodeEncoding encoding(true);
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
-  EXPECT_EQ("UnicodeEncoder Big Endian", encoder().ToString());
+  ASSERT_EQ("UnicodeEncoder Big Endian", encoder().ToString());
 }
 
-TEST(Encoder, CreateEncoder_UTF32) {
+TEST(EncoderTest, CreateEncoder_UTF32) {
   UTF32Encoding encoding(false);
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
-  EXPECT_EQ("UTF32Encoder", encoder().ToString());
+  ASSERT_EQ("UTF32Encoder", encoder().ToString());
 }
 
-TEST(Encoder, CreateEncoder_UTF32BE) {
+TEST(EncoderTest, CreateEncoder_UTF32BE) {
   UTF32Encoding encoding(true);
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
-  EXPECT_EQ("UTF32Encoder Big Endian", encoder().ToString());
+  ASSERT_EQ("UTF32Encoder Big Endian", encoder().ToString());
 }
 
-TEST(Encoder, GetNbBytes_ASCII) {
+TEST(EncoderTest, GetNbBytes_ASCII) {
   ASCIIEncoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
-  EXPECT_EQ(1, encoder->GetNbBytes(charA));
-  EXPECT_EQ(1, encoder->GetNbBytes(charAE));
-  EXPECT_EQ(1, encoder->GetNbBytes(charSpecialT));
-  EXPECT_EQ(1, encoder->GetNbBytes(sigma));
-  EXPECT_EQ(1, encoder->GetNbBytes(syriacSemkath));
-  EXPECT_EQ(1, encoder->GetNbBytes(fullBlock));
-  EXPECT_EQ(1, encoder->GetNbBytes(cjk));
-  EXPECT_EQ(1, encoder->GetNbBytes(koala));
+  ASSERT_EQ(1, encoder->GetNbBytes(charA));
+  ASSERT_EQ(1, encoder->GetNbBytes(charAE));
+  ASSERT_EQ(1, encoder->GetNbBytes(charSpecialT));
+  ASSERT_EQ(1, encoder->GetNbBytes(sigma));
+  ASSERT_EQ(1, encoder->GetNbBytes(syriacSemkath));
+  ASSERT_EQ(1, encoder->GetNbBytes(fullBlock));
+  ASSERT_EQ(1, encoder->GetNbBytes(cjk));
+  ASSERT_EQ(1, encoder->GetNbBytes(koala));
 }
 
-TEST(Encoder, GetNbBytes_437) {
+TEST(EncoderTest, GetNbBytes_437) {
   CodePage437Encoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
-  EXPECT_EQ(1, encoder->GetNbBytes(charA));
-  EXPECT_EQ(1, encoder->GetNbBytes(charAE));
-  EXPECT_EQ(1, encoder->GetNbBytes(charSpecialT));
-  EXPECT_EQ(1, encoder->GetNbBytes(sigma));
-  EXPECT_EQ(1, encoder->GetNbBytes(syriacSemkath));
-  EXPECT_EQ(1, encoder->GetNbBytes(fullBlock));
-  EXPECT_EQ(1, encoder->GetNbBytes(cjk));
-  EXPECT_EQ(1, encoder->GetNbBytes(koala));
+  ASSERT_EQ(1, encoder->GetNbBytes(charA));
+  ASSERT_EQ(1, encoder->GetNbBytes(charAE));
+  ASSERT_EQ(1, encoder->GetNbBytes(charSpecialT));
+  ASSERT_EQ(1, encoder->GetNbBytes(sigma));
+  ASSERT_EQ(1, encoder->GetNbBytes(syriacSemkath));
+  ASSERT_EQ(1, encoder->GetNbBytes(fullBlock));
+  ASSERT_EQ(1, encoder->GetNbBytes(cjk));
+  ASSERT_EQ(1, encoder->GetNbBytes(koala));
 }
 
-TEST(Encoder, GetNbBytes_88591) {
+TEST(EncoderTest, GetNbBytes_88591) {
   CodePage28591Encoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
-  EXPECT_EQ(1, encoder->GetNbBytes(charA));
-  EXPECT_EQ(1, encoder->GetNbBytes(charAE));
-  EXPECT_EQ(1, encoder->GetNbBytes(charSpecialT));
-  EXPECT_EQ(1, encoder->GetNbBytes(sigma));
-  EXPECT_EQ(1, encoder->GetNbBytes(syriacSemkath));
-  EXPECT_EQ(1, encoder->GetNbBytes(fullBlock));
-  EXPECT_EQ(1, encoder->GetNbBytes(cjk));
-  EXPECT_EQ(1, encoder->GetNbBytes(koala));
+  ASSERT_EQ(1, encoder->GetNbBytes(charA));
+  ASSERT_EQ(1, encoder->GetNbBytes(charAE));
+  ASSERT_EQ(1, encoder->GetNbBytes(charSpecialT));
+  ASSERT_EQ(1, encoder->GetNbBytes(sigma));
+  ASSERT_EQ(1, encoder->GetNbBytes(syriacSemkath));
+  ASSERT_EQ(1, encoder->GetNbBytes(fullBlock));
+  ASSERT_EQ(1, encoder->GetNbBytes(cjk));
+  ASSERT_EQ(1, encoder->GetNbBytes(koala));
 }
 
-TEST(Encoder, GetNbBytes_88592) {
+TEST(EncoderTest, GetNbBytes_88592) {
   CodePage28592Encoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
-  EXPECT_EQ(1, encoder->GetNbBytes(charA));
-  EXPECT_EQ(1, encoder->GetNbBytes(charAE));
-  EXPECT_EQ(1, encoder->GetNbBytes(charSpecialT));
-  EXPECT_EQ(1, encoder->GetNbBytes(sigma));
-  EXPECT_EQ(1, encoder->GetNbBytes(syriacSemkath));
-  EXPECT_EQ(1, encoder->GetNbBytes(fullBlock));
-  EXPECT_EQ(1, encoder->GetNbBytes(cjk));
-  EXPECT_EQ(1, encoder->GetNbBytes(koala));
+  ASSERT_EQ(1, encoder->GetNbBytes(charA));
+  ASSERT_EQ(1, encoder->GetNbBytes(charAE));
+  ASSERT_EQ(1, encoder->GetNbBytes(charSpecialT));
+  ASSERT_EQ(1, encoder->GetNbBytes(sigma));
+  ASSERT_EQ(1, encoder->GetNbBytes(syriacSemkath));
+  ASSERT_EQ(1, encoder->GetNbBytes(fullBlock));
+  ASSERT_EQ(1, encoder->GetNbBytes(cjk));
+  ASSERT_EQ(1, encoder->GetNbBytes(koala));
 }
 
-TEST(Encoder, GetNbBytes_UTF8) {
+TEST(EncoderTest, GetNbBytes_UTF8) {
   UTF8Encoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
-  EXPECT_EQ(1, encoder->GetNbBytes(charA));
-  EXPECT_EQ(2, encoder->GetNbBytes(charAE));
-  EXPECT_EQ(2, encoder->GetNbBytes(charSpecialT));
-  EXPECT_EQ(2, encoder->GetNbBytes(sigma));
-  EXPECT_EQ(2, encoder->GetNbBytes(syriacSemkath));
-  EXPECT_EQ(3, encoder->GetNbBytes(fullBlock));
-  EXPECT_EQ(3, encoder->GetNbBytes(cjk));
-  EXPECT_EQ(4, encoder->GetNbBytes(koala));
+  ASSERT_EQ(1, encoder->GetNbBytes(charA));
+  ASSERT_EQ(2, encoder->GetNbBytes(charAE));
+  ASSERT_EQ(2, encoder->GetNbBytes(charSpecialT));
+  ASSERT_EQ(2, encoder->GetNbBytes(sigma));
+  ASSERT_EQ(2, encoder->GetNbBytes(syriacSemkath));
+  ASSERT_EQ(3, encoder->GetNbBytes(fullBlock));
+  ASSERT_EQ(3, encoder->GetNbBytes(cjk));
+  ASSERT_EQ(4, encoder->GetNbBytes(koala));
 }
 
-TEST(Encoder, GetNbBytes_UTF16) {
+TEST(EncoderTest, GetNbBytes_UTF16) {
   UnicodeEncoding encoding(false);
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
-  EXPECT_EQ(2, encoder->GetNbBytes(charA));
-  EXPECT_EQ(2, encoder->GetNbBytes(charAE));
-  EXPECT_EQ(2, encoder->GetNbBytes(charSpecialT));
-  EXPECT_EQ(2, encoder->GetNbBytes(sigma));
-  EXPECT_EQ(2, encoder->GetNbBytes(syriacSemkath));
-  EXPECT_EQ(2, encoder->GetNbBytes(fullBlock));
-  EXPECT_EQ(2, encoder->GetNbBytes(cjk));
-  EXPECT_EQ(4, encoder->GetNbBytes(koala));
+  ASSERT_EQ(2, encoder->GetNbBytes(charA));
+  ASSERT_EQ(2, encoder->GetNbBytes(charAE));
+  ASSERT_EQ(2, encoder->GetNbBytes(charSpecialT));
+  ASSERT_EQ(2, encoder->GetNbBytes(sigma));
+  ASSERT_EQ(2, encoder->GetNbBytes(syriacSemkath));
+  ASSERT_EQ(2, encoder->GetNbBytes(fullBlock));
+  ASSERT_EQ(2, encoder->GetNbBytes(cjk));
+  ASSERT_EQ(4, encoder->GetNbBytes(koala));
 }
 
-TEST(Encoder, GetNbBytes_UTF16BE) {
+TEST(EncoderTest, GetNbBytes_UTF16BE) {
   UnicodeEncoding encoding(true);
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
-  EXPECT_EQ(2, encoder->GetNbBytes(charA));
-  EXPECT_EQ(2, encoder->GetNbBytes(charAE));
-  EXPECT_EQ(2, encoder->GetNbBytes(charSpecialT));
-  EXPECT_EQ(2, encoder->GetNbBytes(sigma));
-  EXPECT_EQ(2, encoder->GetNbBytes(syriacSemkath));
-  EXPECT_EQ(2, encoder->GetNbBytes(fullBlock));
-  EXPECT_EQ(2, encoder->GetNbBytes(cjk));
-  EXPECT_EQ(4, encoder->GetNbBytes(koala));
+  ASSERT_EQ(2, encoder->GetNbBytes(charA));
+  ASSERT_EQ(2, encoder->GetNbBytes(charAE));
+  ASSERT_EQ(2, encoder->GetNbBytes(charSpecialT));
+  ASSERT_EQ(2, encoder->GetNbBytes(sigma));
+  ASSERT_EQ(2, encoder->GetNbBytes(syriacSemkath));
+  ASSERT_EQ(2, encoder->GetNbBytes(fullBlock));
+  ASSERT_EQ(2, encoder->GetNbBytes(cjk));
+  ASSERT_EQ(4, encoder->GetNbBytes(koala));
 }
 
-TEST(Encoder, GetNbBytes_UTF32) {
+TEST(EncoderTest, GetNbBytes_UTF32) {
   UTF32Encoding encoding(false);
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
-  EXPECT_EQ(4, encoder->GetNbBytes(charA));
-  EXPECT_EQ(4, encoder->GetNbBytes(charAE));
-  EXPECT_EQ(4, encoder->GetNbBytes(charSpecialT));
-  EXPECT_EQ(4, encoder->GetNbBytes(sigma));
-  EXPECT_EQ(4, encoder->GetNbBytes(syriacSemkath));
-  EXPECT_EQ(4, encoder->GetNbBytes(fullBlock));
-  EXPECT_EQ(4, encoder->GetNbBytes(cjk));
-  EXPECT_EQ(4, encoder->GetNbBytes(koala));
+  ASSERT_EQ(4, encoder->GetNbBytes(charA));
+  ASSERT_EQ(4, encoder->GetNbBytes(charAE));
+  ASSERT_EQ(4, encoder->GetNbBytes(charSpecialT));
+  ASSERT_EQ(4, encoder->GetNbBytes(sigma));
+  ASSERT_EQ(4, encoder->GetNbBytes(syriacSemkath));
+  ASSERT_EQ(4, encoder->GetNbBytes(fullBlock));
+  ASSERT_EQ(4, encoder->GetNbBytes(cjk));
+  ASSERT_EQ(4, encoder->GetNbBytes(koala));
 }
 
-TEST(Encoder, GetNbBytes_UTF32BE) {
+TEST(EncoderTest, GetNbBytes_UTF32BE) {
   UTF32Encoding encoding(true);
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
-  EXPECT_EQ(4, encoder->GetNbBytes(charA));
-  EXPECT_EQ(4, encoder->GetNbBytes(charAE));
-  EXPECT_EQ(4, encoder->GetNbBytes(charSpecialT));
-  EXPECT_EQ(4, encoder->GetNbBytes(sigma));
-  EXPECT_EQ(4, encoder->GetNbBytes(syriacSemkath));
-  EXPECT_EQ(4, encoder->GetNbBytes(fullBlock));
-  EXPECT_EQ(4, encoder->GetNbBytes(cjk));
-  EXPECT_EQ(4, encoder->GetNbBytes(koala));
+  ASSERT_EQ(4, encoder->GetNbBytes(charA));
+  ASSERT_EQ(4, encoder->GetNbBytes(charAE));
+  ASSERT_EQ(4, encoder->GetNbBytes(charSpecialT));
+  ASSERT_EQ(4, encoder->GetNbBytes(sigma));
+  ASSERT_EQ(4, encoder->GetNbBytes(syriacSemkath));
+  ASSERT_EQ(4, encoder->GetNbBytes(fullBlock));
+  ASSERT_EQ(4, encoder->GetNbBytes(cjk));
+  ASSERT_EQ(4, encoder->GetNbBytes(koala));
 }
 
 static void ResetBytes(byte bytes[]) {
@@ -211,949 +209,949 @@ static void ResetBytes(byte bytes[]) {
   bytes[3] = 0;
 }
 
-TEST(Encoder, Encode_TestResetBytes) {
+TEST(EncoderTest, Encode_TestResetBytes) {
   byte bytes[4];
   ResetBytes(bytes);
-  EXPECT_EQ(0,bytes[0]);
-  EXPECT_EQ(0,bytes[1]);
-  EXPECT_EQ(0,bytes[2]);
-  EXPECT_EQ(0,bytes[3]);
+  ASSERT_EQ(0,bytes[0]);
+  ASSERT_EQ(0,bytes[1]);
+  ASSERT_EQ(0,bytes[2]);
+  ASSERT_EQ(0,bytes[3]);
 }
 
-TEST(Encoder, Encode_ASCII_charA) {
+TEST(EncoderTest, Encode_ASCII_charA) {
   ASCIIEncoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(charA, bytes);
-  EXPECT_EQ(0x61, bytes[0]);
-  EXPECT_EQ(0, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(0x61, bytes[0]);
+  ASSERT_EQ(0, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_ASCII_charAE) {
+TEST(EncoderTest, Encode_ASCII_charAE) {
   ASCIIEncoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(charAE, bytes);
-  EXPECT_EQ(Text::Encoding::Unknown(), bytes[0]);
-  EXPECT_EQ(0, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(Text::Encoding::Unknown(), bytes[0]);
+  ASSERT_EQ(0, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_ASCII_charSpecialT) {
+TEST(EncoderTest, Encode_ASCII_charSpecialT) {
   ASCIIEncoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(charSpecialT, bytes);
-  EXPECT_EQ(Text::Encoding::Unknown(), bytes[0]);
-  EXPECT_EQ(0, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(Text::Encoding::Unknown(), bytes[0]);
+  ASSERT_EQ(0, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_ASCII_sigma) {
+TEST(EncoderTest, Encode_ASCII_sigma) {
   ASCIIEncoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(sigma, bytes);
-  EXPECT_EQ(Text::Encoding::Unknown(), bytes[0]);
-  EXPECT_EQ(0, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(Text::Encoding::Unknown(), bytes[0]);
+  ASSERT_EQ(0, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_ASCII_syriacSemkath) {
+TEST(EncoderTest, Encode_ASCII_syriacSemkath) {
   ASCIIEncoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(syriacSemkath, bytes);
-  EXPECT_EQ(Text::Encoding::Unknown(), bytes[0]);
-  EXPECT_EQ(0, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(Text::Encoding::Unknown(), bytes[0]);
+  ASSERT_EQ(0, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_ASCII_fullBlock) {
+TEST(EncoderTest, Encode_ASCII_fullBlock) {
   ASCIIEncoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(fullBlock, bytes);
-  EXPECT_EQ(Text::Encoding::Unknown(), bytes[0]);
-  EXPECT_EQ(0, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(Text::Encoding::Unknown(), bytes[0]);
+  ASSERT_EQ(0, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_ASCII_cjk) {
+TEST(EncoderTest, Encode_ASCII_cjk) {
   ASCIIEncoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(cjk, bytes);
-  EXPECT_EQ(Text::Encoding::Unknown(), bytes[0]);
-  EXPECT_EQ(0, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(Text::Encoding::Unknown(), bytes[0]);
+  ASSERT_EQ(0, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_ASCII_koala) {
+TEST(EncoderTest, Encode_ASCII_koala) {
   ASCIIEncoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(koala, bytes);
-  EXPECT_EQ(Text::Encoding::Unknown(), bytes[0]);
-  EXPECT_EQ(0, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(Text::Encoding::Unknown(), bytes[0]);
+  ASSERT_EQ(0, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_437_charA) {
+TEST(EncoderTest, Encode_437_charA) {
   CodePage437Encoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(charA, bytes);
-  EXPECT_EQ(0x61, bytes[0]);
-  EXPECT_EQ(0, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(0x61, bytes[0]);
+  ASSERT_EQ(0, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_437_charAE) {
+TEST(EncoderTest, Encode_437_charAE) {
   CodePage437Encoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(charAE, bytes);
-  EXPECT_EQ(0x91, bytes[0]);
-  EXPECT_EQ(0, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(0x91, bytes[0]);
+  ASSERT_EQ(0, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_437_charSpecialT) {
+TEST(EncoderTest, Encode_437_charSpecialT) {
   CodePage437Encoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(charSpecialT, bytes);
-  EXPECT_EQ(Text::Encoding::Unknown(), bytes[0]);
-  EXPECT_EQ(0, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(Text::Encoding::Unknown(), bytes[0]);
+  ASSERT_EQ(0, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_437_sigma) {
+TEST(EncoderTest, Encode_437_sigma) {
   CodePage437Encoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(sigma, bytes);
-  EXPECT_EQ(0xE4, bytes[0]);
-  EXPECT_EQ(0, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(0xE4, bytes[0]);
+  ASSERT_EQ(0, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_437_syriacSemkath) {
+TEST(EncoderTest, Encode_437_syriacSemkath) {
   CodePage437Encoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(syriacSemkath, bytes);
-  EXPECT_EQ(Text::Encoding::Unknown(), bytes[0]);
-  EXPECT_EQ(0, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(Text::Encoding::Unknown(), bytes[0]);
+  ASSERT_EQ(0, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_437_fullBlock) {
+TEST(EncoderTest, Encode_437_fullBlock) {
   CodePage437Encoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(fullBlock, bytes);
-  EXPECT_EQ(0xDB, bytes[0]);
-  EXPECT_EQ(0, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(0xDB, bytes[0]);
+  ASSERT_EQ(0, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_437_cjk) {
+TEST(EncoderTest, Encode_437_cjk) {
   CodePage437Encoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(cjk, bytes);
-  EXPECT_EQ(Text::Encoding::Unknown(), bytes[0]);
-  EXPECT_EQ(0, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(Text::Encoding::Unknown(), bytes[0]);
+  ASSERT_EQ(0, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_437_koala) {
+TEST(EncoderTest, Encode_437_koala) {
   CodePage437Encoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(koala, bytes);
-  EXPECT_EQ(Text::Encoding::Unknown(), bytes[0]);
-  EXPECT_EQ(0, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(Text::Encoding::Unknown(), bytes[0]);
+  ASSERT_EQ(0, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_88591_charA) {
+TEST(EncoderTest, Encode_88591_charA) {
   CodePage28591Encoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(charA, bytes);
-  EXPECT_EQ(0x61, bytes[0]);
-  EXPECT_EQ(0, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(0x61, bytes[0]);
+  ASSERT_EQ(0, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_88591_charAE) {
+TEST(EncoderTest, Encode_88591_charAE) {
   CodePage28591Encoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(charAE, bytes);
-  EXPECT_EQ(0xE6, bytes[0]);
-  EXPECT_EQ(0, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(0xE6, bytes[0]);
+  ASSERT_EQ(0, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_88591_charSpecialT) {
+TEST(EncoderTest, Encode_88591_charSpecialT) {
   CodePage28591Encoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(charSpecialT, bytes);
-  EXPECT_EQ(Text::Encoding::Unknown(), bytes[0]);
-  EXPECT_EQ(0, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(Text::Encoding::Unknown(), bytes[0]);
+  ASSERT_EQ(0, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_88591_sigma) {
+TEST(EncoderTest, Encode_88591_sigma) {
   CodePage28591Encoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(sigma, bytes);
-  EXPECT_EQ(Text::Encoding::Unknown(), bytes[0]);
-  EXPECT_EQ(0, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(Text::Encoding::Unknown(), bytes[0]);
+  ASSERT_EQ(0, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_88591_syriacSemkath) {
+TEST(EncoderTest, Encode_88591_syriacSemkath) {
   CodePage28591Encoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(syriacSemkath, bytes);
-  EXPECT_EQ(Text::Encoding::Unknown(), bytes[0]);
-  EXPECT_EQ(0, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(Text::Encoding::Unknown(), bytes[0]);
+  ASSERT_EQ(0, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_88591_fullBlock) {
+TEST(EncoderTest, Encode_88591_fullBlock) {
   CodePage28591Encoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(fullBlock, bytes);
-  EXPECT_EQ(Text::Encoding::Unknown(), bytes[0]);
-  EXPECT_EQ(0, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(Text::Encoding::Unknown(), bytes[0]);
+  ASSERT_EQ(0, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_88591_cjk) {
+TEST(EncoderTest, Encode_88591_cjk) {
   CodePage28591Encoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(cjk, bytes);
-  EXPECT_EQ(Text::Encoding::Unknown(), bytes[0]);
-  EXPECT_EQ(0, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(Text::Encoding::Unknown(), bytes[0]);
+  ASSERT_EQ(0, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_88591_koala) {
+TEST(EncoderTest, Encode_88591_koala) {
   CodePage28591Encoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(koala, bytes);
-  EXPECT_EQ(Text::Encoding::Unknown(), bytes[0]);
-  EXPECT_EQ(0, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(Text::Encoding::Unknown(), bytes[0]);
+  ASSERT_EQ(0, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_88592_charA) {
+TEST(EncoderTest, Encode_88592_charA) {
   CodePage28592Encoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(charA, bytes);
-  EXPECT_EQ(0x61, bytes[0]);
-  EXPECT_EQ(0, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(0x61, bytes[0]);
+  ASSERT_EQ(0, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_88592_charAE) {
+TEST(EncoderTest, Encode_88592_charAE) {
   CodePage28592Encoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(charAE, bytes);
-  EXPECT_EQ(Text::Encoding::Unknown(), bytes[0]);
-  EXPECT_EQ(0, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(Text::Encoding::Unknown(), bytes[0]);
+  ASSERT_EQ(0, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_88592_charSpecialT) {
+TEST(EncoderTest, Encode_88592_charSpecialT) {
   CodePage28592Encoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(charSpecialT, bytes);
-  EXPECT_EQ(0xFE, bytes[0]);
-  EXPECT_EQ(0, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(0xFE, bytes[0]);
+  ASSERT_EQ(0, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_88592_sigma) {
+TEST(EncoderTest, Encode_88592_sigma) {
   CodePage28592Encoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(sigma, bytes);
-  EXPECT_EQ(Text::Encoding::Unknown(), bytes[0]);
-  EXPECT_EQ(0, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(Text::Encoding::Unknown(), bytes[0]);
+  ASSERT_EQ(0, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_88592_syriacSemkath) {
+TEST(EncoderTest, Encode_88592_syriacSemkath) {
   CodePage28592Encoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(syriacSemkath, bytes);
-  EXPECT_EQ(Text::Encoding::Unknown(), bytes[0]);
-  EXPECT_EQ(0, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(Text::Encoding::Unknown(), bytes[0]);
+  ASSERT_EQ(0, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_88592_fullBlock) {
+TEST(EncoderTest, Encode_88592_fullBlock) {
   CodePage28592Encoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(fullBlock, bytes);
-  EXPECT_EQ(Text::Encoding::Unknown(), bytes[0]);
-  EXPECT_EQ(0, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(Text::Encoding::Unknown(), bytes[0]);
+  ASSERT_EQ(0, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_88592_cjk) {
+TEST(EncoderTest, Encode_88592_cjk) {
   CodePage28592Encoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(cjk, bytes);
-  EXPECT_EQ(Text::Encoding::Unknown(), bytes[0]);
-  EXPECT_EQ(0, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(Text::Encoding::Unknown(), bytes[0]);
+  ASSERT_EQ(0, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_88592_koala) {
+TEST(EncoderTest, Encode_88592_koala) {
   CodePage28592Encoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(koala, bytes);
-  EXPECT_EQ(Text::Encoding::Unknown(), bytes[0]);
-  EXPECT_EQ(0, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(Text::Encoding::Unknown(), bytes[0]);
+  ASSERT_EQ(0, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_UTF8_charA) {
+TEST(EncoderTest, Encode_UTF8_charA) {
   UTF8Encoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(charA, bytes);
-  EXPECT_EQ(0x61, bytes[0]);
-  EXPECT_EQ(0, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(0x61, bytes[0]);
+  ASSERT_EQ(0, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_UTF8_charAE) {
+TEST(EncoderTest, Encode_UTF8_charAE) {
   UTF8Encoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(charAE, bytes);
-  EXPECT_EQ(0xC3, bytes[0]);
-  EXPECT_EQ(0xA6, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(0xC3, bytes[0]);
+  ASSERT_EQ(0xA6, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_UTF8_charSpecialT) {
+TEST(EncoderTest, Encode_UTF8_charSpecialT) {
   UTF8Encoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(charSpecialT, bytes);
-  EXPECT_EQ(0xC5, bytes[0]);
-  EXPECT_EQ(0xA3, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(0xC5, bytes[0]);
+  ASSERT_EQ(0xA3, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_UTF8_sigma) {
+TEST(EncoderTest, Encode_UTF8_sigma) {
   UTF8Encoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(sigma, bytes);
-  EXPECT_EQ(0xCE, bytes[0]);
-  EXPECT_EQ(0xA3, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(0xCE, bytes[0]);
+  ASSERT_EQ(0xA3, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_UTF8_syriacSemkath) {
+TEST(EncoderTest, Encode_UTF8_syriacSemkath) {
   UTF8Encoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(syriacSemkath, bytes);
-  EXPECT_EQ(0xDC, bytes[0]);
-  EXPECT_EQ(0xA3, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(0xDC, bytes[0]);
+  ASSERT_EQ(0xA3, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_UTF8_fullBlock) {
+TEST(EncoderTest, Encode_UTF8_fullBlock) {
   UTF8Encoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(fullBlock, bytes);
-  EXPECT_EQ(0xE2, bytes[0]);
-  EXPECT_EQ(0x96, bytes[1]);
-  EXPECT_EQ(0x88, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(0xE2, bytes[0]);
+  ASSERT_EQ(0x96, bytes[1]);
+  ASSERT_EQ(0x88, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_UTF8_cjk) {
+TEST(EncoderTest, Encode_UTF8_cjk) {
   UTF8Encoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(cjk, bytes);
-  EXPECT_EQ(0xE5, bytes[0]);
-  EXPECT_EQ(0xA5, bytes[1]);
-  EXPECT_EQ(0xBB, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(0xE5, bytes[0]);
+  ASSERT_EQ(0xA5, bytes[1]);
+  ASSERT_EQ(0xBB, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_UTF8_koala) {
+TEST(EncoderTest, Encode_UTF8_koala) {
   UTF8Encoding encoding;
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(koala, bytes);
-  EXPECT_EQ(0xF0, bytes[0]);
-  EXPECT_EQ(0x9F, bytes[1]);
-  EXPECT_EQ(0x90, bytes[2]);
-  EXPECT_EQ(0xA8, bytes[3]);
+  ASSERT_EQ(0xF0, bytes[0]);
+  ASSERT_EQ(0x9F, bytes[1]);
+  ASSERT_EQ(0x90, bytes[2]);
+  ASSERT_EQ(0xA8, bytes[3]);
 }
 
-TEST(Encoder, Encode_UTF16_charA) {
+TEST(EncoderTest, Encode_UTF16_charA) {
   UnicodeEncoding encoding(false);
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(charA, bytes);
-  EXPECT_EQ(0x61, bytes[0]);
-  EXPECT_EQ(0, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(0x61, bytes[0]);
+  ASSERT_EQ(0, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_UTF16_charAE) {
+TEST(EncoderTest, Encode_UTF16_charAE) {
   UnicodeEncoding encoding(false);
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(charAE, bytes);
-  EXPECT_EQ(0xE6, bytes[0]);
-  EXPECT_EQ(0, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(0xE6, bytes[0]);
+  ASSERT_EQ(0, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_UTF16_charSpecialT) {
+TEST(EncoderTest, Encode_UTF16_charSpecialT) {
   UnicodeEncoding encoding(false);
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(charSpecialT, bytes);
-  EXPECT_EQ(0x63, bytes[0]);
-  EXPECT_EQ(0x1, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(0x63, bytes[0]);
+  ASSERT_EQ(0x1, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_UTF16_sigma) {
+TEST(EncoderTest, Encode_UTF16_sigma) {
   UnicodeEncoding encoding(false);
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(sigma, bytes);
-  EXPECT_EQ(0xA3, bytes[0]);
-  EXPECT_EQ(0x3, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(0xA3, bytes[0]);
+  ASSERT_EQ(0x3, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_UTF16_syriacSemkath) {
+TEST(EncoderTest, Encode_UTF16_syriacSemkath) {
   UnicodeEncoding encoding(false);
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(syriacSemkath, bytes);
-  EXPECT_EQ(0x23, bytes[0]);
-  EXPECT_EQ(0x7, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(0x23, bytes[0]);
+  ASSERT_EQ(0x7, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_UTF16_fullBlock) {
+TEST(EncoderTest, Encode_UTF16_fullBlock) {
   UnicodeEncoding encoding(false);
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(fullBlock, bytes);
-  EXPECT_EQ(0x88, bytes[0]);
-  EXPECT_EQ(0x25, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(0x88, bytes[0]);
+  ASSERT_EQ(0x25, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_UTF16_cjk) {
+TEST(EncoderTest, Encode_UTF16_cjk) {
   UnicodeEncoding encoding(false);
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(cjk, bytes);
-  EXPECT_EQ(0x7B, bytes[0]);
-  EXPECT_EQ(0x59, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(0x7B, bytes[0]);
+  ASSERT_EQ(0x59, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_UTF16_koala) {
+TEST(EncoderTest, Encode_UTF16_koala) {
   UnicodeEncoding encoding(false);
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(koala, bytes);
-  EXPECT_EQ(0x3D, bytes[0]);
-  EXPECT_EQ(0xD8, bytes[1]);
-  EXPECT_EQ(0x28, bytes[2]);
-  EXPECT_EQ(0xDC, bytes[3]);
+  ASSERT_EQ(0x3D, bytes[0]);
+  ASSERT_EQ(0xD8, bytes[1]);
+  ASSERT_EQ(0x28, bytes[2]);
+  ASSERT_EQ(0xDC, bytes[3]);
 }
 
-TEST(Encoder, Encode_UTF16BE_charA) {
+TEST(EncoderTest, Encode_UTF16BE_charA) {
   UnicodeEncoding encoding(true);
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(charA, bytes);
-  EXPECT_EQ(0, bytes[0]);
-  EXPECT_EQ(0x61, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(0, bytes[0]);
+  ASSERT_EQ(0x61, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_UTF16BE_charAE) {
+TEST(EncoderTest, Encode_UTF16BE_charAE) {
   UnicodeEncoding encoding(true);
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(charAE, bytes);
-  EXPECT_EQ(0, bytes[0]);
-  EXPECT_EQ(0xE6, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(0, bytes[0]);
+  ASSERT_EQ(0xE6, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_UTF16BE_charSpecialT) {
+TEST(EncoderTest, Encode_UTF16BE_charSpecialT) {
   UnicodeEncoding encoding(true);
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(charSpecialT, bytes);
-  EXPECT_EQ(0x1, bytes[0]);
-  EXPECT_EQ(0x63, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(0x1, bytes[0]);
+  ASSERT_EQ(0x63, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_UTF16BE_sigma) {
+TEST(EncoderTest, Encode_UTF16BE_sigma) {
   UnicodeEncoding encoding(true);
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(sigma, bytes);
-  EXPECT_EQ(0x3, bytes[0]);
-  EXPECT_EQ(0xA3, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(0x3, bytes[0]);
+  ASSERT_EQ(0xA3, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_UTF16BE_syriacSemkath) {
+TEST(EncoderTest, Encode_UTF16BE_syriacSemkath) {
   UnicodeEncoding encoding(true);
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(syriacSemkath, bytes);
-  EXPECT_EQ(0x7, bytes[0]);
-  EXPECT_EQ(0x23, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(0x7, bytes[0]);
+  ASSERT_EQ(0x23, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_UTF16BE_fullBlock) {
+TEST(EncoderTest, Encode_UTF16BE_fullBlock) {
   UnicodeEncoding encoding(true);
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(fullBlock, bytes);
-  EXPECT_EQ(0x25, bytes[0]);
-  EXPECT_EQ(0x88, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(0x25, bytes[0]);
+  ASSERT_EQ(0x88, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_UTF16BE_cjk) {
+TEST(EncoderTest, Encode_UTF16BE_cjk) {
   UnicodeEncoding encoding(true);
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(cjk, bytes);
-  EXPECT_EQ(0x59, bytes[0]);
-  EXPECT_EQ(0x7B, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(0x59, bytes[0]);
+  ASSERT_EQ(0x7B, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_UTF16BE_koala) {
+TEST(EncoderTest, Encode_UTF16BE_koala) {
   UnicodeEncoding encoding(true);
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(koala, bytes);
-  EXPECT_EQ(0xD8, bytes[0]);
-  EXPECT_EQ(0x3D, bytes[1]);
-  EXPECT_EQ(0xDC, bytes[2]);
-  EXPECT_EQ(0x28, bytes[3]);
+  ASSERT_EQ(0xD8, bytes[0]);
+  ASSERT_EQ(0x3D, bytes[1]);
+  ASSERT_EQ(0xDC, bytes[2]);
+  ASSERT_EQ(0x28, bytes[3]);
 }
 
-TEST(Encoder, Encode_UTF32_charA) {
+TEST(EncoderTest, Encode_UTF32_charA) {
   UTF32Encoding encoding(false);
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(charA, bytes);
-  EXPECT_EQ(0x61, bytes[0]);
-  EXPECT_EQ(0, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(0x61, bytes[0]);
+  ASSERT_EQ(0, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_UTF32_charAE) {
+TEST(EncoderTest, Encode_UTF32_charAE) {
   UTF32Encoding encoding(false);
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(charAE, bytes);
-  EXPECT_EQ(0xE6, bytes[0]);
-  EXPECT_EQ(0, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(0xE6, bytes[0]);
+  ASSERT_EQ(0, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_UTF32_charSpecialT) {
+TEST(EncoderTest, Encode_UTF32_charSpecialT) {
   UTF32Encoding encoding(false);
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(charSpecialT, bytes);
-  EXPECT_EQ(0x63, bytes[0]);
-  EXPECT_EQ(0x1, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(0x63, bytes[0]);
+  ASSERT_EQ(0x1, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_UTF32_sigma) {
+TEST(EncoderTest, Encode_UTF32_sigma) {
   UTF32Encoding encoding(false);
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(sigma, bytes);
-  EXPECT_EQ(0xA3, bytes[0]);
-  EXPECT_EQ(0x3, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(0xA3, bytes[0]);
+  ASSERT_EQ(0x3, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_UTF32_syriacSemkath) {
+TEST(EncoderTest, Encode_UTF32_syriacSemkath) {
   UTF32Encoding encoding(false);
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(syriacSemkath, bytes);
-  EXPECT_EQ(0x23, bytes[0]);
-  EXPECT_EQ(0x7, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(0x23, bytes[0]);
+  ASSERT_EQ(0x7, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_UTF32_fullBlock) {
+TEST(EncoderTest, Encode_UTF32_fullBlock) {
   UTF32Encoding encoding(false);
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(fullBlock, bytes);
-  EXPECT_EQ(0x88, bytes[0]);
-  EXPECT_EQ(0x25, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(0x88, bytes[0]);
+  ASSERT_EQ(0x25, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_UTF32_cjk) {
+TEST(EncoderTest, Encode_UTF32_cjk) {
   UTF32Encoding encoding(false);
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(cjk, bytes);
-  EXPECT_EQ(0x7B, bytes[0]);
-  EXPECT_EQ(0x59, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(0x7B, bytes[0]);
+  ASSERT_EQ(0x59, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_UTF32_koala) {
+TEST(EncoderTest, Encode_UTF32_koala) {
   UTF32Encoding encoding(false);
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(koala, bytes);
-  EXPECT_EQ(0x28, bytes[0]);
-  EXPECT_EQ(0xF4, bytes[1]);
-  EXPECT_EQ(0x1, bytes[2]);
-  EXPECT_EQ(0, bytes[3]);
+  ASSERT_EQ(0x28, bytes[0]);
+  ASSERT_EQ(0xF4, bytes[1]);
+  ASSERT_EQ(0x1, bytes[2]);
+  ASSERT_EQ(0, bytes[3]);
 }
 
-TEST(Encoder, Encode_UTF32BE_charA) {
+TEST(EncoderTest, Encode_UTF32BE_charA) {
   UTF32Encoding encoding(true);
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(charA, bytes);
-  EXPECT_EQ(0, bytes[0]);
-  EXPECT_EQ(0, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0x61, bytes[3]);
+  ASSERT_EQ(0, bytes[0]);
+  ASSERT_EQ(0, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0x61, bytes[3]);
 }
 
-TEST(Encoder, Encode_UTF32BE_charAE) {
+TEST(EncoderTest, Encode_UTF32BE_charAE) {
   UTF32Encoding encoding(true);
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(charAE, bytes);
-  EXPECT_EQ(0, bytes[0]);
-  EXPECT_EQ(0, bytes[1]);
-  EXPECT_EQ(0, bytes[2]);
-  EXPECT_EQ(0xE6, bytes[3]);
+  ASSERT_EQ(0, bytes[0]);
+  ASSERT_EQ(0, bytes[1]);
+  ASSERT_EQ(0, bytes[2]);
+  ASSERT_EQ(0xE6, bytes[3]);
 }
 
-TEST(Encoder, Encode_UTF32BE_charSpecialT) {
+TEST(EncoderTest, Encode_UTF32BE_charSpecialT) {
   UTF32Encoding encoding(true);
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(charSpecialT, bytes);
-  EXPECT_EQ(0, bytes[0]);
-  EXPECT_EQ(0, bytes[1]);
-  EXPECT_EQ(0x1, bytes[2]);
-  EXPECT_EQ(0x63, bytes[3]);
+  ASSERT_EQ(0, bytes[0]);
+  ASSERT_EQ(0, bytes[1]);
+  ASSERT_EQ(0x1, bytes[2]);
+  ASSERT_EQ(0x63, bytes[3]);
 }
 
-TEST(Encoder, Encode_UTF32BE_sigma) {
+TEST(EncoderTest, Encode_UTF32BE_sigma) {
   UTF32Encoding encoding(true);
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(sigma, bytes);
-  EXPECT_EQ(0, bytes[0]);
-  EXPECT_EQ(0, bytes[1]);
-  EXPECT_EQ(0x3, bytes[2]);
-  EXPECT_EQ(0xA3, bytes[3]);
+  ASSERT_EQ(0, bytes[0]);
+  ASSERT_EQ(0, bytes[1]);
+  ASSERT_EQ(0x3, bytes[2]);
+  ASSERT_EQ(0xA3, bytes[3]);
 }
 
-TEST(Encoder, Encode_UTF32BE_syriacSemkath) {
+TEST(EncoderTest, Encode_UTF32BE_syriacSemkath) {
   UTF32Encoding encoding(true);
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(syriacSemkath, bytes);
-  EXPECT_EQ(0, bytes[0]);
-  EXPECT_EQ(0, bytes[1]);
-  EXPECT_EQ(0x7, bytes[2]);
-  EXPECT_EQ(0x23, bytes[3]);
+  ASSERT_EQ(0, bytes[0]);
+  ASSERT_EQ(0, bytes[1]);
+  ASSERT_EQ(0x7, bytes[2]);
+  ASSERT_EQ(0x23, bytes[3]);
 }
 
-TEST(Encoder, Encode_UTF32BE_fullBlock) {
+TEST(EncoderTest, Encode_UTF32BE_fullBlock) {
   UTF32Encoding encoding(true);
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(fullBlock, bytes);
-  EXPECT_EQ(0, bytes[0]);
-  EXPECT_EQ(0, bytes[1]);
-  EXPECT_EQ(0x25, bytes[2]);
-  EXPECT_EQ(0x88, bytes[3]);
+  ASSERT_EQ(0, bytes[0]);
+  ASSERT_EQ(0, bytes[1]);
+  ASSERT_EQ(0x25, bytes[2]);
+  ASSERT_EQ(0x88, bytes[3]);
 }
 
-TEST(Encoder, Encode_UTF32BE_cjk) {
+TEST(EncoderTest, Encode_UTF32BE_cjk) {
   UTF32Encoding encoding(true);
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(cjk, bytes);
-  EXPECT_EQ(0, bytes[0]);
-  EXPECT_EQ(0, bytes[1]);
-  EXPECT_EQ(0x59, bytes[2]);
-  EXPECT_EQ(0x7B, bytes[3]);
+  ASSERT_EQ(0, bytes[0]);
+  ASSERT_EQ(0, bytes[1]);
+  ASSERT_EQ(0x59, bytes[2]);
+  ASSERT_EQ(0x7B, bytes[3]);
 }
 
-TEST(Encoder, Encode_UTF32BE_koala) {
+TEST(EncoderTest, Encode_UTF32BE_koala) {
   UTF32Encoding encoding(true);
   refptr<Encoding::Encoder> encoder = encoding.CreateEncoder();
   byte bytes[4];
 
   ResetBytes(bytes);
   encoder->Encode(koala, bytes);
-  EXPECT_EQ(0, bytes[0]);
-  EXPECT_EQ(0x1, bytes[1]);
-  EXPECT_EQ(0xF4, bytes[2]);
-  EXPECT_EQ(0x28, bytes[3]);
+  ASSERT_EQ(0, bytes[0]);
+  ASSERT_EQ(0x1, bytes[1]);
+  ASSERT_EQ(0xF4, bytes[2]);
+  ASSERT_EQ(0x28, bytes[3]);
 }
 
 }

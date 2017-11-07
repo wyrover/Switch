@@ -1,9 +1,7 @@
 #include <Switch/System/Enum.hpp>
-#include <Switch/TUnit/Assert.hpp>
-#include <Switch/TUnit/TestFixture.hpp>
+#include <gtest/gtest.h>
 
 using namespace System;
-using namespace TUnit;
 
 namespace SwitchUnitTests {
   enum class Pet {
@@ -105,368 +103,349 @@ public:
 /// @endcond
 
 namespace SwitchUnitTests {
-  class EnumTest : public TestFixture {
-  protected:
-    void SetUp() override {}
-    void TearDown() override {}
+  TEST(EnumTest, Constructor) {
+    ASSERT_EQ(0, Enum<Number>::ToInt32(Number::Zero));
+    ASSERT_EQ(1, Enum<Number>::ToInt32(Number::One));
+    ASSERT_EQ(2, Enum<Number>::ToInt32(Number::Two));
+    ASSERT_EQ(3, Enum<Number>::ToInt32((Number)3));
+    ASSERT_EQ(24, Enum<Number>::ToInt32((Number)24));
     
-    void Constructor() {
-      TUnit::Assert::AreEqual(0, Enum<Number>::ToInt32(Number::Zero), _caller);
-      TUnit::Assert::AreEqual(1, Enum<Number>::ToInt32(Number::One), _caller);
-      TUnit::Assert::AreEqual(2, Enum<Number>::ToInt32(Number::Two), _caller);
-      TUnit::Assert::AreEqual(3, Enum<Number>::ToInt32((Number)3), _caller);
-      TUnit::Assert::AreEqual(24, Enum<Number>::ToInt32((Number)24), _caller);
-      
-      Number number0 = Number::Zero;
-      Number number1 = Number::One;
-      Number number2 = (Number)Enum<Number>::Parse("Two");
-      Number number3 = (Number)Enum<Number>::Parse("three", true);
-      Number number4 = (Number)4;
-      Number number5 = Number(Number::Five);
-      Number number6 = (Number)6;
-      Number number7 = Number(Number(7));
-      Number number8 = Number::Zero;
-      Number number9 = Number::Zero;
-      
-      number8 |= Number(8);
-      number9 += Number::Nine;
-      
-      TUnit::Assert::AreEqual(0, Enum<Number>::ToInt32(number0), _caller);
-      TUnit::Assert::AreEqual(1, Enum<Number>::ToInt32(number1), _caller);
-      TUnit::Assert::AreEqual(2, Enum<Number>::ToInt32(number2), _caller);
-      TUnit::Assert::AreEqual(3, Enum<Number>::ToInt32(number3), _caller);
-      TUnit::Assert::AreEqual(4, Enum<Number>::ToInt32(number4), _caller);
-      TUnit::Assert::AreEqual(5, Enum<Number>::ToInt32(number5), _caller);
-      TUnit::Assert::AreEqual(6, Enum<Number>::ToInt32(number6), _caller);
-      TUnit::Assert::AreEqual(7, Enum<Number>::ToInt32(number7), _caller);
-      TUnit::Assert::AreEqual(8, Enum<Number>::ToInt32(number8), _caller);
-      TUnit::Assert::AreEqual(9, Enum<Number>::ToInt32(number9), _caller);
-      
-      TUnit::Assert::AreEqual(0b00000000000000000000000000000000, Enum<Letter>::ToInt32(Letter::None), _caller);
-      TUnit::Assert::AreEqual(0b00000000000000000000000000001000, Enum<Letter>::ToInt32(Letter::D), _caller);
-      TUnit::Assert::AreEqual(0b00000000000000000000000000000111, Enum<Letter>::ToInt32(Letter::A|Letter::B|Letter::C), _caller);
-      TUnit::Assert::AreEqual(0b00000000000000000000100000000000, Enum<Letter>::ToInt32((Letter)0b00000000000000000000100000000000), _caller);
-      TUnit::Assert::AreEqual(0b01100000000000000000000000000000, Enum<Letter>::ToInt32((Letter)0b01100000000000000000000000000000), _caller);
-      
-      Letter letterNone = Letter::None;
-      Letter letterAB = Letter::A|Letter::B;
-      Letter letterBC = (Letter)Enum<Letter>::Parse("B, C");
-      Letter letterCD = (Letter)Enum<Letter>::Parse("c, d", true);
-      
-      TUnit::Assert::AreEqual(0b00000000000000000000000000000000, Enum<Letter>::ToInt32(letterNone), _caller);
-      TUnit::Assert::AreEqual(0b00000000000000000000000000000011, Enum<Letter>::ToInt32(letterAB), _caller);
-      TUnit::Assert::AreEqual(0b00000000000000000000000000000110, Enum<Letter>::ToInt32(letterBC), _caller);
-      TUnit::Assert::AreEqual(0b00000000000000000000000000001100, Enum<Letter>::ToInt32(letterCD), _caller);
-      
-      TUnit::Assert::AreEqual(0, Enum<RGBPixel>::ToInt32(RGBPixel::Red), _caller);
-      TUnit::Assert::AreEqual(1, Enum<RGBPixel>::ToInt32(RGBPixel::Green), _caller);
-      TUnit::Assert::AreEqual(2, Enum<RGBPixel>::ToInt32(RGBPixel::Blue), _caller);
-      TUnit::Assert::AreEqual(1, Enum<RGBPixel>::ToInt32((RGBPixel)1), _caller);
-      TUnit::Assert::AreEqual(5, Enum<RGBPixel>::ToInt32((RGBPixel)5), _caller);
-    }
+    Number number0 = Number::Zero;
+    Number number1 = Number::One;
+    Number number2 = (Number)Enum<Number>::Parse("Two");
+    Number number3 = (Number)Enum<Number>::Parse("three", true);
+    Number number4 = (Number)4;
+    Number number5 = Number(Number::Five);
+    Number number6 = (Number)6;
+    Number number7 = Number(Number(7));
+    Number number8 = Number::Zero;
+    Number number9 = Number::Zero;
     
-    void Equality() {
-      Number number0 = Number::Zero;
-      Number number1 = Number::One;
-      Number number2 = (Number)Enum<Number>::Parse("Two");
-      Number number3 = (Number)Enum<Number>::Parse("three", true);
-      Number number4 = (Number)4;
-      
-      TUnit::Assert::IsTrue(number0 == Number::Zero, _caller);
-      TUnit::Assert::IsTrue(number1 == Number::One, _caller);
-      TUnit::Assert::IsTrue(number2 == Number::Two, _caller);
-      TUnit::Assert::IsTrue(number3 == Number::Three, _caller);
-      TUnit::Assert::IsTrue(number4 == Number::Four, _caller);
-      
-      TUnit::Assert::IsFalse(number0 == Number::Nine, _caller);
-      TUnit::Assert::IsFalse(number1 == Number::Nine, _caller);
-      TUnit::Assert::IsFalse(number2 == Number::Nine, _caller);
-      TUnit::Assert::IsFalse(number3 == Number::Nine, _caller);
-      TUnit::Assert::IsFalse(number4 == Number::Nine, _caller);
-      
-      TUnit::Assert::IsFalse(number0 != Number::Zero, _caller);
-      TUnit::Assert::IsFalse(number1 != Number::One, _caller);
-      TUnit::Assert::IsFalse(number2 != Number::Two, _caller);
-      TUnit::Assert::IsFalse(number3 != Number::Three, _caller);
-      TUnit::Assert::IsFalse(number4 != Number::Four, _caller);
-      
-      TUnit::Assert::IsTrue(number0 != Number::Nine, _caller);
-      TUnit::Assert::IsTrue(number1 != Number::Nine, _caller);
-      TUnit::Assert::IsTrue(number2 != Number::Nine, _caller);
-      TUnit::Assert::IsTrue(number3 != Number::Nine, _caller);
-      TUnit::Assert::IsTrue(number4 != Number::Nine, _caller);
-    }
+    number8 |= Number(8);
+    number9 += Number::Nine;
     
-    void SwitchCase() {
-      Pet PetDog = Pet::Dog;
-      switch (PetDog) {
-        case Pet::Dog : TUnit::Assert::Succeed(_caller); break;
-        case Pet::Cat : TUnit::Assert::Fail(_caller); break;
-        case Pet::Bird : TUnit::Assert::Fail(_caller); break;
-        default: TUnit::Assert::Fail(_caller); break;
-      }
-      
-      Number number8 = Number::Eight;
-      switch (number8) {
-        case Number::Zero : TUnit::Assert::Fail(_caller); break;
-        case Number::One : TUnit::Assert::Fail(_caller); break;
-        case Number::Two : TUnit::Assert::Fail(_caller); break;
-        case Number::Three : TUnit::Assert::Fail(_caller); break;
-        case Number::Four : TUnit::Assert::Fail(_caller); break;
-        case Number::Five : TUnit::Assert::Fail(_caller); break;
-        case Number::Six : TUnit::Assert::Fail(_caller); break;
-        case Number::Seven : TUnit::Assert::Fail(_caller); break;
-        case Number::Eight : TUnit::Assert::Succeed(_caller); break;
-        case Number::Nine : TUnit::Assert::Fail(_caller); break;
-        default: TUnit::Assert::Fail(_caller); break;
-      }
-    }
+    ASSERT_EQ(0, Enum<Number>::ToInt32(number0));
+    ASSERT_EQ(1, Enum<Number>::ToInt32(number1));
+    ASSERT_EQ(2, Enum<Number>::ToInt32(number2));
+    ASSERT_EQ(3, Enum<Number>::ToInt32(number3));
+    ASSERT_EQ(4, Enum<Number>::ToInt32(number4));
+    ASSERT_EQ(5, Enum<Number>::ToInt32(number5));
+    ASSERT_EQ(6, Enum<Number>::ToInt32(number6));
+    ASSERT_EQ(7, Enum<Number>::ToInt32(number7));
+    ASSERT_EQ(8, Enum<Number>::ToInt32(number8));
+    ASSERT_EQ(9, Enum<Number>::ToInt32(number9));
     
-    void GetName() {
-      TUnit::Assert::AreEqual("Zero", Enum<Number>::GetName(Number::Zero), _caller);
-      TUnit::Assert::AreEqual("One", Enum<Number>::GetName(Number::One), _caller);
-      TUnit::Assert::AreEqual("Two", Enum<Number>::GetName(Number::Two), _caller);
-      TUnit::Assert::AreEqual("Three", Enum<Number>::GetName(Number::Three), _caller);
-      TUnit::Assert::AreEqual("Four", Enum<Number>::GetName(Number::Four), _caller);
-      TUnit::Assert::AreEqual("Five", Enum<Number>::GetName(Number::Five), _caller);
-      
-      TUnit::Assert::AreEqual("None", Enum<Letter>::GetName(Letter::None).ToString(), _caller);
-      TUnit::Assert::AreEqual("G", Enum<Letter>::GetName(Letter::G).ToString(), _caller);
-      TUnit::Assert::AreEqual("A, B, C", Enum<Letter>::GetName(Letter::A|Letter::B|Letter::C).ToString(), _caller);
-      
-      TUnit::Assert::AreEqual("0", Enum<RGBPixel>::GetName(RGBPixel::Red), _caller);
-      TUnit::Assert::AreEqual("1", Enum<RGBPixel>::GetName(RGBPixel::Green), _caller);
-      TUnit::Assert::AreEqual("2", Enum<RGBPixel>::GetName(RGBPixel::Blue), _caller);
-    }
+    ASSERT_EQ(0b00000000000000000000000000000000, Enum<Letter>::ToInt32(Letter::None));
+    ASSERT_EQ(0b00000000000000000000000000001000, Enum<Letter>::ToInt32(Letter::D));
+    ASSERT_EQ(0b00000000000000000000000000000111, Enum<Letter>::ToInt32(Letter::A|Letter::B|Letter::C));
+    ASSERT_EQ(0b00000000000000000000100000000000, Enum<Letter>::ToInt32((Letter)0b00000000000000000000100000000000));
+    ASSERT_EQ(0b01100000000000000000000000000000, Enum<Letter>::ToInt32((Letter)0b01100000000000000000000000000000));
     
-    void GetNames() {
-      TUnit::Assert::AreEqual(10, Enum<Number>::GetNames().Count(), _caller);
-      TUnit::Assert::IsTrue(Enum<Number>::GetNames().Contains("Zero"), _caller);
-      TUnit::Assert::IsTrue(Enum<Number>::GetNames().Contains("One"), _caller);
-      TUnit::Assert::IsTrue(Enum<Number>::GetNames().Contains("Two"), _caller);
-      TUnit::Assert::IsTrue(Enum<Number>::GetNames().Contains("Three"), _caller);
-      TUnit::Assert::IsTrue(Enum<Number>::GetNames().Contains("Four"), _caller);
-      TUnit::Assert::IsTrue(Enum<Number>::GetNames().Contains("Five"), _caller);
-      TUnit::Assert::IsTrue(Enum<Number>::GetNames().Contains("Six"), _caller);
-      TUnit::Assert::IsTrue(Enum<Number>::GetNames().Contains("Seven"), _caller);
-      TUnit::Assert::IsTrue(Enum<Number>::GetNames().Contains("Eight"), _caller);
-      TUnit::Assert::IsTrue(Enum<Number>::GetNames().Contains("Nine"), _caller);
-      
-      TUnit::Assert::AreEqual(27, Enum<Letter>::GetNames().Count(), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetNames().Contains("None"), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetNames().Contains("A"), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetNames().Contains("B"), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetNames().Contains("C"), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetNames().Contains("D"), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetNames().Contains("E"), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetNames().Contains("F"), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetNames().Contains("G"), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetNames().Contains("H"), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetNames().Contains("I"), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetNames().Contains("J"), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetNames().Contains("K"), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetNames().Contains("L"), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetNames().Contains("M"), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetNames().Contains("N"), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetNames().Contains("O"), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetNames().Contains("P"), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetNames().Contains("Q"), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetNames().Contains("R"), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetNames().Contains("S"), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetNames().Contains("T"), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetNames().Contains("U"), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetNames().Contains("V"), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetNames().Contains("W"), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetNames().Contains("X"), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetNames().Contains("Y"), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetNames().Contains("Z"), _caller);
-      
-      TUnit::Assert::AreEqual(0, Enum<RGBPixel>::GetNames().Count(), _caller);
-      TUnit::Assert::AreEqual(0, Enum<NoEnum>::GetNames().Count(), _caller);
-    }
+    Letter letterNone = Letter::None;
+    Letter letterAB = Letter::A|Letter::B;
+    Letter letterBC = (Letter)Enum<Letter>::Parse("B, C");
+    Letter letterCD = (Letter)Enum<Letter>::Parse("c, d", true);
     
-    void GetValues() {
-      TUnit::Assert::AreEqual(10, Enum<Number>::GetValues().Count(), _caller);
-      TUnit::Assert::IsTrue(Enum<Number>::GetValues().Contains(Number::Zero), _caller);
-      TUnit::Assert::IsTrue(Enum<Number>::GetValues().Contains(Number::One), _caller);
-      TUnit::Assert::IsTrue(Enum<Number>::GetValues().Contains(Number::Two), _caller);
-      TUnit::Assert::IsTrue(Enum<Number>::GetValues().Contains(Number::Three), _caller);
-      TUnit::Assert::IsTrue(Enum<Number>::GetValues().Contains(Number::Four), _caller);
-      TUnit::Assert::IsTrue(Enum<Number>::GetValues().Contains(Number::Five), _caller);
-      TUnit::Assert::IsTrue(Enum<Number>::GetValues().Contains(Number::Six), _caller);
-      TUnit::Assert::IsTrue(Enum<Number>::GetValues().Contains(Number::Seven), _caller);
-      TUnit::Assert::IsTrue(Enum<Number>::GetValues().Contains(Number::Eight), _caller);
-      TUnit::Assert::IsTrue(Enum<Number>::GetValues().Contains(Number::Nine), _caller);
-      
-      TUnit::Assert::AreEqual(27, Enum<Letter>::GetValues().Count(), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetValues().Contains(Letter::None), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetValues().Contains(Letter::A), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetValues().Contains(Letter::B), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetValues().Contains(Letter::C), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetValues().Contains(Letter::D), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetValues().Contains(Letter::E), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetValues().Contains(Letter::F), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetValues().Contains(Letter::G), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetValues().Contains(Letter::H), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetValues().Contains(Letter::I), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetValues().Contains(Letter::J), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetValues().Contains(Letter::K), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetValues().Contains(Letter::L), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetValues().Contains(Letter::M), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetValues().Contains(Letter::N), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetValues().Contains(Letter::O), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetValues().Contains(Letter::P), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetValues().Contains(Letter::Q), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetValues().Contains(Letter::R), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetValues().Contains(Letter::S), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetValues().Contains(Letter::T), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetValues().Contains(Letter::U), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetValues().Contains(Letter::V), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetValues().Contains(Letter::W), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetValues().Contains(Letter::X), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetValues().Contains(Letter::Y), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::GetValues().Contains(Letter::Z), _caller);
-      
-      TUnit::Assert::AreEqual(0, Enum<RGBPixel>::GetValues().Count(), _caller);
-      TUnit::Assert::AreEqual(0, Enum<NoEnum>::GetValues().Count(), _caller);
-    }
+    ASSERT_EQ(0b00000000000000000000000000000000, Enum<Letter>::ToInt32(letterNone));
+    ASSERT_EQ(0b00000000000000000000000000000011, Enum<Letter>::ToInt32(letterAB));
+    ASSERT_EQ(0b00000000000000000000000000000110, Enum<Letter>::ToInt32(letterBC));
+    ASSERT_EQ(0b00000000000000000000000000001100, Enum<Letter>::ToInt32(letterCD));
     
-    void HasFlag() {
-      TUnit::Assert::IsTrue(Enum<Letter>(Letter::A|Letter::B|Letter::C).HasFlag(Letter::B | Letter::C), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>(Letter::A).HasFlag(0b00000000000000000000000000000001), _caller);
-      TUnit::Assert::IsFalse(Enum<Letter>(Letter::None).HasFlag(Letter::A), _caller);
-      TUnit::Assert::IsFalse(Enum<Letter>(Letter::None).HasFlag(0b10000000000000000000000000000000), _caller);
-    }
-    
-    void IsDefined() {
-      TUnit::Assert::IsTrue(Enum<Number>::IsDefined(Number::Two), _caller);
-      TUnit::Assert::IsTrue(Enum<Number>::IsDefined(5), _caller);
-      TUnit::Assert::IsFalse(Enum<Number>::IsDefined(12), _caller);
-      
-      TUnit::Assert::IsTrue(Enum<Letter>::IsDefined(Letter::B), _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::IsDefined(0x00020000), _caller);
-      TUnit::Assert::IsFalse(Enum<Letter>::IsDefined(0x20000000), _caller);
-      TUnit::Assert::IsFalse(Enum<Letter>::IsDefined(Letter::B|Letter::C|Letter::Z), _caller);
-      
-      TUnit::Assert::IsFalse(Enum<NoEnum>::IsDefined(NoEnum::None), _caller);
-    }
-    
-    void FromInt32() {
-      TUnit::Assert::AreEqual(0, Enum<Number>().FromInt32(0).ToInt32(), _caller);
-      TUnit::Assert::AreEqual(1, Enum<Number>().FromInt32(1).ToInt32(), _caller);
-      TUnit::Assert::AreEqual(2, Enum<Number>().FromInt32(2).ToInt32(), _caller);
-      TUnit::Assert::AreEqual(3, Enum<Number>().FromInt32(3).ToInt32(), _caller);
-      TUnit::Assert::AreEqual(4, Enum<Number>().FromInt32(4).ToInt32(), _caller);
-      TUnit::Assert::AreEqual(5, Enum<Number>().FromInt32(5).ToInt32(), _caller);
-    }
-    
-    void Parse() {
-      TUnit::Assert::AreEqual(0, (int)Enum<Number>::Parse("Zero"), _caller);
-      TUnit::Assert::AreEqual(1, (int)Enum<Number>::Parse("One"), _caller);
-      TUnit::Assert::AreEqual(2, (int)Enum<Number>::Parse("Two"), _caller);
-      TUnit::Assert::AreEqual(3, (int)Enum<Number>::Parse("Three"), _caller);
-      TUnit::Assert::AreEqual(4, (int)Enum<Number>::Parse("Four"), _caller);
-      TUnit::Assert::AreEqual(5, (int)Enum<Number>::Parse("Five"), _caller);
-      TUnit::Assert::Throws<FormatException>(_delegate {Enum<Number>::Parse("BadValue");}, _caller);
-      
-      TUnit::Assert::AreEqual(0b00000000000000000000000000000000, (int)Enum<Letter>::Parse("None"), _caller);
-      TUnit::Assert::AreEqual(0b00000000000000000000000000000111, (int)Enum<Letter>::Parse("A, B, C"), _caller);
-      
-      TUnit::Assert::AreEqual(1, (int)Enum<Number>::Parse("one", true));
-      
-      TUnit::Assert::Throws<FormatException>(_delegate {Enum<RGBPixel>::Parse("Red");}, _caller);
-      TUnit::Assert::Throws<FormatException>(_delegate {Enum<RGBPixel>::Parse("Green");}, _caller);
-      TUnit::Assert::Throws<FormatException>(_delegate {Enum<RGBPixel>::Parse("Blue");}, _caller);
-      TUnit::Assert::Throws<FormatException>(_delegate {Enum<RGBPixel>::Parse("BadValue");}, _caller);
-    }
-    
-    void ToInt32() {
-      TUnit::Assert::AreEqual(0, Enum<Number>::ToInt32(Number::Zero), _caller);
-      TUnit::Assert::AreEqual(1, Enum<Number>::ToInt32(Number::One), _caller);
-      TUnit::Assert::AreEqual(2, Enum<Number>::ToInt32(Number::Two), _caller);
-      TUnit::Assert::AreEqual(3, Enum<Number>::ToInt32(Number::Three), _caller);
-      TUnit::Assert::AreEqual(4, Enum<Number>::ToInt32(Number::Four), _caller);
-      TUnit::Assert::AreEqual(5, Enum<Number>::ToInt32(Number::Five), _caller);
-      
-      TUnit::Assert::AreEqual(0, Enum<RGBPixel>::ToInt32(RGBPixel::Red), _caller);
-      TUnit::Assert::AreEqual(1, Enum<RGBPixel>::ToInt32(RGBPixel::Green), _caller);
-      TUnit::Assert::AreEqual(2, Enum<RGBPixel>::ToInt32(RGBPixel::Blue), _caller);
-      
-      TUnit::Assert::AreEqual(0, Enum<NoEnum>::ToInt32(NoEnum::None), _caller);
-    }
-    
-    void ToString() {
-      TUnit::Assert::AreEqual("Zero", Enum<Number>::ToString(Number::Zero), _caller);
-      TUnit::Assert::AreEqual("One", Enum<Number>::ToString(Number::One), _caller);
-      TUnit::Assert::AreEqual("Two", Enum<Number>::ToString(Number::Two), _caller);
-      TUnit::Assert::AreEqual("Three", Enum<Number>::ToString(Number::Three), _caller);
-      TUnit::Assert::AreEqual("Four", Enum<Number>::ToString(Number::Four), _caller);
-      TUnit::Assert::AreEqual("Five", Enum<Number>::ToString(Number::Five), _caller);
-      TUnit::Assert::AreEqual("52", Enum<Number>::ToString((Number)52), _caller);
-      
-      TUnit::Assert::AreEqual("None", Enum<Letter>::ToString(Letter::None), _caller);
-      TUnit::Assert::AreEqual("A", Enum<Letter>::ToString(Letter::A), _caller);
-      TUnit::Assert::AreEqual("B", Enum<Letter>::ToString(Letter::B), _caller);
-      TUnit::Assert::AreEqual("A, B", Enum<Letter>::ToString(Letter::A|Letter::B), _caller);
-      //TUnit::Assert::AreEqual("D, G, I", Enum<Letter>::ToString(Letter::D|Letter::G|Letter::I), _caller);
-      
-      TUnit::Assert::AreEqual("0", Enum<RGBPixel>::ToString(RGBPixel::Red), _caller);
-      TUnit::Assert::AreEqual("1", Enum<RGBPixel>::ToString(RGBPixel::Green), _caller);
-      TUnit::Assert::AreEqual("2", Enum<RGBPixel>::ToString(RGBPixel::Blue), _caller);
-      
-      TUnit::Assert::AreEqual("0", Enum<NoEnum>::ToString(NoEnum::None), _caller);
-    }
-    
-    void TryParse() {
-      Number numberResult;
-      TUnit::Assert::IsTrue(Enum<Number>::TryParse("Zero", numberResult));
-      TUnit::Assert::AreEqual(0, (int32)numberResult, _caller);
-      TUnit::Assert::IsTrue(Enum<Number>::TryParse("One", numberResult));
-      TUnit::Assert::AreEqual(1, (int32)numberResult, _caller);
-      TUnit::Assert::IsTrue(Enum<Number>::TryParse("Two", numberResult));
-      TUnit::Assert::AreEqual(2, (int32)numberResult, _caller);
-      TUnit::Assert::IsTrue(Enum<Number>::TryParse("Three", numberResult));
-      TUnit::Assert::AreEqual(3, (int32)numberResult, _caller);
-      TUnit::Assert::IsTrue(Enum<Number>::TryParse("Four", numberResult));
-      TUnit::Assert::AreEqual(4, (int32)numberResult, _caller);
-      TUnit::Assert::IsTrue(Enum<Number>::TryParse("Five", numberResult));
-      TUnit::Assert::AreEqual(5, (int32)numberResult, _caller);
-      TUnit::Assert::IsFalse(Enum<Number>::TryParse("BadValue", numberResult));
-      
-      Letter LetterResult;
-      TUnit::Assert::IsTrue(Enum<Letter>::TryParse("None", LetterResult));
-      TUnit::Assert::AreEqual(0x00000000, (int32)LetterResult, _caller);
-      TUnit::Assert::IsTrue(Enum<Letter>::TryParse("A, B, C", LetterResult));
-      TUnit::Assert::AreEqual(0x00000007, (int32)LetterResult, _caller);
-      
-      RGBPixel RGBPixelResult;
-      TUnit::Assert::IsTrue(Enum<RGBPixel>::TryParse("0", RGBPixelResult));
-      TUnit::Assert::AreEqual(0, (int32)RGBPixelResult, _caller);
-      TUnit::Assert::IsTrue(Enum<RGBPixel>::TryParse("1", RGBPixelResult));
-      TUnit::Assert::AreEqual(1, (int32)RGBPixelResult, _caller);
-      TUnit::Assert::IsTrue(Enum<RGBPixel>::TryParse("2", RGBPixelResult));
-      TUnit::Assert::AreEqual(2, (int32)RGBPixelResult, _caller);
-      TUnit::Assert::IsFalse(Enum<RGBPixel>::TryParse("Red", RGBPixelResult));
-      TUnit::Assert::IsFalse(Enum<RGBPixel>::TryParse("Green", RGBPixelResult));
-      TUnit::Assert::IsFalse(Enum<RGBPixel>::TryParse("Blue", RGBPixelResult));
-      TUnit::Assert::IsFalse(Enum<RGBPixel>::TryParse("BadValue", RGBPixelResult));
-      
-      TUnit::Assert::IsTrue(Enum<Number>::TryParse("one", true, numberResult));
-      TUnit::Assert::AreEqual(1, (int32)numberResult, _caller);
-    }
-  };
+    ASSERT_EQ(0, Enum<RGBPixel>::ToInt32(RGBPixel::Red));
+    ASSERT_EQ(1, Enum<RGBPixel>::ToInt32(RGBPixel::Green));
+    ASSERT_EQ(2, Enum<RGBPixel>::ToInt32(RGBPixel::Blue));
+    ASSERT_EQ(1, Enum<RGBPixel>::ToInt32((RGBPixel)1));
+    ASSERT_EQ(5, Enum<RGBPixel>::ToInt32((RGBPixel)5));
+  }
   
-  _AddTest(EnumTest, Constructor)
-  _AddTest(EnumTest, Equality)
-  _AddTest(EnumTest, SwitchCase)
-  _AddTest(EnumTest, GetName)
-  _AddTest(EnumTest, GetNames)
-  _AddTest(EnumTest, GetValues)
-  _AddTest(EnumTest, HasFlag)
-  _AddTest(EnumTest, IsDefined)
-  _AddTest(EnumTest, FromInt32)
-  _AddTest(EnumTest, Parse)
-  _AddTest(EnumTest, ToInt32)
-  _AddTest(EnumTest, ToString)
-  _AddTest(EnumTest, TryParse)
+  TEST(EnumTest, Equality) {
+    Number number0 = Number::Zero;
+    Number number1 = Number::One;
+    Number number2 = (Number)Enum<Number>::Parse("Two");
+    Number number3 = (Number)Enum<Number>::Parse("three", true);
+    Number number4 = (Number)4;
+    
+    ASSERT_TRUE(number0 == Number::Zero);
+    ASSERT_TRUE(number1 == Number::One);
+    ASSERT_TRUE(number2 == Number::Two);
+    ASSERT_TRUE(number3 == Number::Three);
+    ASSERT_TRUE(number4 == Number::Four);
+    
+    ASSERT_FALSE(number0 == Number::Nine);
+    ASSERT_FALSE(number1 == Number::Nine);
+    ASSERT_FALSE(number2 == Number::Nine);
+    ASSERT_FALSE(number3 == Number::Nine);
+    ASSERT_FALSE(number4 == Number::Nine);
+    
+    ASSERT_FALSE(number0 != Number::Zero);
+    ASSERT_FALSE(number1 != Number::One);
+    ASSERT_FALSE(number2 != Number::Two);
+    ASSERT_FALSE(number3 != Number::Three);
+    ASSERT_FALSE(number4 != Number::Four);
+    
+    ASSERT_TRUE(number0 != Number::Nine);
+    ASSERT_TRUE(number1 != Number::Nine);
+    ASSERT_TRUE(number2 != Number::Nine);
+    ASSERT_TRUE(number3 != Number::Nine);
+    ASSERT_TRUE(number4 != Number::Nine);
+  }
+  
+  TEST(EnumTest, SwitchCase) {
+    Pet PetDog = Pet::Dog;
+    switch (PetDog) {
+      case Pet::Dog : SUCCEED(); break;
+      case Pet::Cat : FAIL(); break;
+      case Pet::Bird : FAIL(); break;
+      default: FAIL(); break;
+    }
+    
+    Number number8 = Number::Eight;
+    switch (number8) {
+      case Number::Zero : FAIL(); break;
+      case Number::One : FAIL(); break;
+      case Number::Two : FAIL(); break;
+      case Number::Three : FAIL(); break;
+      case Number::Four : FAIL(); break;
+      case Number::Five : FAIL(); break;
+      case Number::Six : FAIL(); break;
+      case Number::Seven : FAIL(); break;
+      case Number::Eight : SUCCEED(); break;
+      case Number::Nine : FAIL(); break;
+      default: FAIL(); break;
+    }
+  }
+  
+  TEST(EnumTest, GetName) {
+    ASSERT_EQ("Zero", Enum<Number>::GetName(Number::Zero));
+    ASSERT_EQ("One", Enum<Number>::GetName(Number::One));
+    ASSERT_EQ("Two", Enum<Number>::GetName(Number::Two));
+    ASSERT_EQ("Three", Enum<Number>::GetName(Number::Three));
+    ASSERT_EQ("Four", Enum<Number>::GetName(Number::Four));
+    ASSERT_EQ("Five", Enum<Number>::GetName(Number::Five));
+    
+    ASSERT_EQ("None", Enum<Letter>::GetName(Letter::None).ToString());
+    ASSERT_EQ("G", Enum<Letter>::GetName(Letter::G).ToString());
+    ASSERT_EQ("A, B, C", Enum<Letter>::GetName(Letter::A|Letter::B|Letter::C).ToString());
+    
+    ASSERT_EQ("0", Enum<RGBPixel>::GetName(RGBPixel::Red));
+    ASSERT_EQ("1", Enum<RGBPixel>::GetName(RGBPixel::Green));
+    ASSERT_EQ("2", Enum<RGBPixel>::GetName(RGBPixel::Blue));
+  }
+  
+  TEST(EnumTest, GetNames) {
+    ASSERT_EQ(10, Enum<Number>::GetNames().Count());
+    ASSERT_TRUE(Enum<Number>::GetNames().Contains("Zero"));
+    ASSERT_TRUE(Enum<Number>::GetNames().Contains("One"));
+    ASSERT_TRUE(Enum<Number>::GetNames().Contains("Two"));
+    ASSERT_TRUE(Enum<Number>::GetNames().Contains("Three"));
+    ASSERT_TRUE(Enum<Number>::GetNames().Contains("Four"));
+    ASSERT_TRUE(Enum<Number>::GetNames().Contains("Five"));
+    ASSERT_TRUE(Enum<Number>::GetNames().Contains("Six"));
+    ASSERT_TRUE(Enum<Number>::GetNames().Contains("Seven"));
+    ASSERT_TRUE(Enum<Number>::GetNames().Contains("Eight"));
+    ASSERT_TRUE(Enum<Number>::GetNames().Contains("Nine"));
+    
+    ASSERT_EQ(27, Enum<Letter>::GetNames().Count());
+    ASSERT_TRUE(Enum<Letter>::GetNames().Contains("None"));
+    ASSERT_TRUE(Enum<Letter>::GetNames().Contains("A"));
+    ASSERT_TRUE(Enum<Letter>::GetNames().Contains("B"));
+    ASSERT_TRUE(Enum<Letter>::GetNames().Contains("C"));
+    ASSERT_TRUE(Enum<Letter>::GetNames().Contains("D"));
+    ASSERT_TRUE(Enum<Letter>::GetNames().Contains("E"));
+    ASSERT_TRUE(Enum<Letter>::GetNames().Contains("F"));
+    ASSERT_TRUE(Enum<Letter>::GetNames().Contains("G"));
+    ASSERT_TRUE(Enum<Letter>::GetNames().Contains("H"));
+    ASSERT_TRUE(Enum<Letter>::GetNames().Contains("I"));
+    ASSERT_TRUE(Enum<Letter>::GetNames().Contains("J"));
+    ASSERT_TRUE(Enum<Letter>::GetNames().Contains("K"));
+    ASSERT_TRUE(Enum<Letter>::GetNames().Contains("L"));
+    ASSERT_TRUE(Enum<Letter>::GetNames().Contains("M"));
+    ASSERT_TRUE(Enum<Letter>::GetNames().Contains("N"));
+    ASSERT_TRUE(Enum<Letter>::GetNames().Contains("O"));
+    ASSERT_TRUE(Enum<Letter>::GetNames().Contains("P"));
+    ASSERT_TRUE(Enum<Letter>::GetNames().Contains("Q"));
+    ASSERT_TRUE(Enum<Letter>::GetNames().Contains("R"));
+    ASSERT_TRUE(Enum<Letter>::GetNames().Contains("S"));
+    ASSERT_TRUE(Enum<Letter>::GetNames().Contains("T"));
+    ASSERT_TRUE(Enum<Letter>::GetNames().Contains("U"));
+    ASSERT_TRUE(Enum<Letter>::GetNames().Contains("V"));
+    ASSERT_TRUE(Enum<Letter>::GetNames().Contains("W"));
+    ASSERT_TRUE(Enum<Letter>::GetNames().Contains("X"));
+    ASSERT_TRUE(Enum<Letter>::GetNames().Contains("Y"));
+    ASSERT_TRUE(Enum<Letter>::GetNames().Contains("Z"));
+    
+    ASSERT_EQ(0, Enum<RGBPixel>::GetNames().Count());
+    ASSERT_EQ(0, Enum<NoEnum>::GetNames().Count());
+  }
+  
+  TEST(EnumTest, GetValues) {
+    ASSERT_EQ(10, Enum<Number>::GetValues().Count());
+    ASSERT_TRUE(Enum<Number>::GetValues().Contains(Number::Zero));
+    ASSERT_TRUE(Enum<Number>::GetValues().Contains(Number::One));
+    ASSERT_TRUE(Enum<Number>::GetValues().Contains(Number::Two));
+    ASSERT_TRUE(Enum<Number>::GetValues().Contains(Number::Three));
+    ASSERT_TRUE(Enum<Number>::GetValues().Contains(Number::Four));
+    ASSERT_TRUE(Enum<Number>::GetValues().Contains(Number::Five));
+    ASSERT_TRUE(Enum<Number>::GetValues().Contains(Number::Six));
+    ASSERT_TRUE(Enum<Number>::GetValues().Contains(Number::Seven));
+    ASSERT_TRUE(Enum<Number>::GetValues().Contains(Number::Eight));
+    ASSERT_TRUE(Enum<Number>::GetValues().Contains(Number::Nine));
+    
+    ASSERT_EQ(27, Enum<Letter>::GetValues().Count());
+    ASSERT_TRUE(Enum<Letter>::GetValues().Contains(Letter::None));
+    ASSERT_TRUE(Enum<Letter>::GetValues().Contains(Letter::A));
+    ASSERT_TRUE(Enum<Letter>::GetValues().Contains(Letter::B));
+    ASSERT_TRUE(Enum<Letter>::GetValues().Contains(Letter::C));
+    ASSERT_TRUE(Enum<Letter>::GetValues().Contains(Letter::D));
+    ASSERT_TRUE(Enum<Letter>::GetValues().Contains(Letter::E));
+    ASSERT_TRUE(Enum<Letter>::GetValues().Contains(Letter::F));
+    ASSERT_TRUE(Enum<Letter>::GetValues().Contains(Letter::G));
+    ASSERT_TRUE(Enum<Letter>::GetValues().Contains(Letter::H));
+    ASSERT_TRUE(Enum<Letter>::GetValues().Contains(Letter::I));
+    ASSERT_TRUE(Enum<Letter>::GetValues().Contains(Letter::J));
+    ASSERT_TRUE(Enum<Letter>::GetValues().Contains(Letter::K));
+    ASSERT_TRUE(Enum<Letter>::GetValues().Contains(Letter::L));
+    ASSERT_TRUE(Enum<Letter>::GetValues().Contains(Letter::M));
+    ASSERT_TRUE(Enum<Letter>::GetValues().Contains(Letter::N));
+    ASSERT_TRUE(Enum<Letter>::GetValues().Contains(Letter::O));
+    ASSERT_TRUE(Enum<Letter>::GetValues().Contains(Letter::P));
+    ASSERT_TRUE(Enum<Letter>::GetValues().Contains(Letter::Q));
+    ASSERT_TRUE(Enum<Letter>::GetValues().Contains(Letter::R));
+    ASSERT_TRUE(Enum<Letter>::GetValues().Contains(Letter::S));
+    ASSERT_TRUE(Enum<Letter>::GetValues().Contains(Letter::T));
+    ASSERT_TRUE(Enum<Letter>::GetValues().Contains(Letter::U));
+    ASSERT_TRUE(Enum<Letter>::GetValues().Contains(Letter::V));
+    ASSERT_TRUE(Enum<Letter>::GetValues().Contains(Letter::W));
+    ASSERT_TRUE(Enum<Letter>::GetValues().Contains(Letter::X));
+    ASSERT_TRUE(Enum<Letter>::GetValues().Contains(Letter::Y));
+    ASSERT_TRUE(Enum<Letter>::GetValues().Contains(Letter::Z));
+    
+    ASSERT_EQ(0, Enum<RGBPixel>::GetValues().Count());
+    ASSERT_EQ(0, Enum<NoEnum>::GetValues().Count());
+  }
+  
+  TEST(EnumTest, HasFlag) {
+    ASSERT_TRUE(Enum<Letter>(Letter::A|Letter::B|Letter::C).HasFlag(Letter::B | Letter::C));
+    ASSERT_TRUE(Enum<Letter>(Letter::A).HasFlag(0b00000000000000000000000000000001));
+    ASSERT_FALSE(Enum<Letter>(Letter::None).HasFlag(Letter::A));
+    ASSERT_FALSE(Enum<Letter>(Letter::None).HasFlag(0b10000000000000000000000000000000));
+  }
+  
+  TEST(EnumTest, IsDefined) {
+    ASSERT_TRUE(Enum<Number>::IsDefined(Number::Two));
+    ASSERT_TRUE(Enum<Number>::IsDefined(5));
+    ASSERT_FALSE(Enum<Number>::IsDefined(12));
+    
+    ASSERT_TRUE(Enum<Letter>::IsDefined(Letter::B));
+    ASSERT_TRUE(Enum<Letter>::IsDefined(0x00020000));
+    ASSERT_FALSE(Enum<Letter>::IsDefined(0x20000000));
+    ASSERT_FALSE(Enum<Letter>::IsDefined(Letter::B|Letter::C|Letter::Z));
+    
+    ASSERT_FALSE(Enum<NoEnum>::IsDefined(NoEnum::None));
+  }
+  
+  TEST(EnumTest, FromInt32) {
+    ASSERT_EQ(0, Enum<Number>().FromInt32(0).ToInt32());
+    ASSERT_EQ(1, Enum<Number>().FromInt32(1).ToInt32());
+    ASSERT_EQ(2, Enum<Number>().FromInt32(2).ToInt32());
+    ASSERT_EQ(3, Enum<Number>().FromInt32(3).ToInt32());
+    ASSERT_EQ(4, Enum<Number>().FromInt32(4).ToInt32());
+    ASSERT_EQ(5, Enum<Number>().FromInt32(5).ToInt32());
+  }
+  
+  TEST(EnumTest, Parse) {
+    ASSERT_EQ(0, (int)Enum<Number>::Parse("Zero"));
+    ASSERT_EQ(1, (int)Enum<Number>::Parse("One"));
+    ASSERT_EQ(2, (int)Enum<Number>::Parse("Two"));
+    ASSERT_EQ(3, (int)Enum<Number>::Parse("Three"));
+    ASSERT_EQ(4, (int)Enum<Number>::Parse("Four"));
+    ASSERT_EQ(5, (int)Enum<Number>::Parse("Five"));
+    ASSERT_THROW(Enum<Number>::Parse("BadValue"), FormatException);
+    
+    ASSERT_EQ(0b00000000000000000000000000000000, (int)Enum<Letter>::Parse("None"));
+    ASSERT_EQ(0b00000000000000000000000000000111, (int)Enum<Letter>::Parse("A, B, C"));
+    
+    ASSERT_EQ(1, (int)Enum<Number>::Parse("one", true));
+    
+    ASSERT_THROW(Enum<RGBPixel>::Parse("Red"), FormatException);
+    ASSERT_THROW(Enum<RGBPixel>::Parse("Green"), FormatException);
+    ASSERT_THROW(Enum<RGBPixel>::Parse("Blue"), FormatException);
+    ASSERT_THROW(Enum<RGBPixel>::Parse("BadValue"), FormatException);
+  }
+  
+  TEST(EnumTest, ToInt32) {
+    ASSERT_EQ(0, Enum<Number>::ToInt32(Number::Zero));
+    ASSERT_EQ(1, Enum<Number>::ToInt32(Number::One));
+    ASSERT_EQ(2, Enum<Number>::ToInt32(Number::Two));
+    ASSERT_EQ(3, Enum<Number>::ToInt32(Number::Three));
+    ASSERT_EQ(4, Enum<Number>::ToInt32(Number::Four));
+    ASSERT_EQ(5, Enum<Number>::ToInt32(Number::Five));
+    
+    ASSERT_EQ(0, Enum<RGBPixel>::ToInt32(RGBPixel::Red));
+    ASSERT_EQ(1, Enum<RGBPixel>::ToInt32(RGBPixel::Green));
+    ASSERT_EQ(2, Enum<RGBPixel>::ToInt32(RGBPixel::Blue));
+    
+    ASSERT_EQ(0, Enum<NoEnum>::ToInt32(NoEnum::None));
+  }
+  
+  TEST(EnumTest, ToString) {
+    ASSERT_EQ("Zero", Enum<Number>::ToString(Number::Zero));
+    ASSERT_EQ("One", Enum<Number>::ToString(Number::One));
+    ASSERT_EQ("Two", Enum<Number>::ToString(Number::Two));
+    ASSERT_EQ("Three", Enum<Number>::ToString(Number::Three));
+    ASSERT_EQ("Four", Enum<Number>::ToString(Number::Four));
+    ASSERT_EQ("Five", Enum<Number>::ToString(Number::Five));
+    ASSERT_EQ("52", Enum<Number>::ToString((Number)52));
+    
+    ASSERT_EQ("None", Enum<Letter>::ToString(Letter::None));
+    ASSERT_EQ("A", Enum<Letter>::ToString(Letter::A));
+    ASSERT_EQ("B", Enum<Letter>::ToString(Letter::B));
+    ASSERT_EQ("A, B", Enum<Letter>::ToString(Letter::A|Letter::B));
+    //ASSERT_EQ("D, G, I", Enum<Letter>::ToString(Letter::D|Letter::G|Letter::I));
+    
+    ASSERT_EQ("0", Enum<RGBPixel>::ToString(RGBPixel::Red));
+    ASSERT_EQ("1", Enum<RGBPixel>::ToString(RGBPixel::Green));
+    ASSERT_EQ("2", Enum<RGBPixel>::ToString(RGBPixel::Blue));
+    
+    ASSERT_EQ("0", Enum<NoEnum>::ToString(NoEnum::None));
+  }
+  
+  TEST(EnumTest, TryParse) {
+    Number numberResult;
+    ASSERT_TRUE(Enum<Number>::TryParse("Zero", numberResult));
+    ASSERT_EQ(0, (int32)numberResult);
+    ASSERT_TRUE(Enum<Number>::TryParse("One", numberResult));
+    ASSERT_EQ(1, (int32)numberResult);
+    ASSERT_TRUE(Enum<Number>::TryParse("Two", numberResult));
+    ASSERT_EQ(2, (int32)numberResult);
+    ASSERT_TRUE(Enum<Number>::TryParse("Three", numberResult));
+    ASSERT_EQ(3, (int32)numberResult);
+    ASSERT_TRUE(Enum<Number>::TryParse("Four", numberResult));
+    ASSERT_EQ(4, (int32)numberResult);
+    ASSERT_TRUE(Enum<Number>::TryParse("Five", numberResult));
+    ASSERT_EQ(5, (int32)numberResult);
+    ASSERT_FALSE(Enum<Number>::TryParse("BadValue", numberResult));
+    
+    Letter LetterResult;
+    ASSERT_TRUE(Enum<Letter>::TryParse("None", LetterResult));
+    ASSERT_EQ(0x00000000, (int32)LetterResult);
+    ASSERT_TRUE(Enum<Letter>::TryParse("A, B, C", LetterResult));
+    ASSERT_EQ(0x00000007, (int32)LetterResult);
+    
+    RGBPixel RGBPixelResult;
+    ASSERT_TRUE(Enum<RGBPixel>::TryParse("0", RGBPixelResult));
+    ASSERT_EQ(0, (int32)RGBPixelResult);
+    ASSERT_TRUE(Enum<RGBPixel>::TryParse("1", RGBPixelResult));
+    ASSERT_EQ(1, (int32)RGBPixelResult);
+    ASSERT_TRUE(Enum<RGBPixel>::TryParse("2", RGBPixelResult));
+    ASSERT_EQ(2, (int32)RGBPixelResult);
+    ASSERT_FALSE(Enum<RGBPixel>::TryParse("Red", RGBPixelResult));
+    ASSERT_FALSE(Enum<RGBPixel>::TryParse("Green", RGBPixelResult));
+    ASSERT_FALSE(Enum<RGBPixel>::TryParse("Blue", RGBPixelResult));
+    ASSERT_FALSE(Enum<RGBPixel>::TryParse("BadValue", RGBPixelResult));
+    
+    ASSERT_TRUE(Enum<Number>::TryParse("one", true, numberResult));
+    ASSERT_EQ(1, (int32)numberResult);
+  }
 }
+

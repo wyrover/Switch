@@ -1,179 +1,164 @@
-#include <Switch/TUnit/Assert.hpp>
-#include <Switch/TUnit/TestFixture.hpp>
+#include <Switch/System/String.hpp>
+#include <gtest/gtest.h>
 
 using namespace System;
-using namespace TUnit;
 
 namespace SwitchUnitTests {
-  class FunctionPointerTest : public TestFixture {
+  class FunctionPointerTest : public testing::Test {
   protected:
     static string result;
     void SetUp() override {result = string::Empty;}
-    
-    void CreateFunctionPointerEmptyThenInvoke() {
-      __opaque_function_pointer__<> fct;
-      Assert::IsTrue(fct.IsEmpty(), _caller);
-      Assert::Throws<std::exception>(_delegate {fct.Invoke();}, _caller);
-    }
-    
-    void CreateFunctionPointerWithLambdaThenInvoke() {
-      __opaque_function_pointer__<> fct = _delegate {
-        result = "fct called";
-      };
-      Assert::IsFalse(fct.IsEmpty(), _caller);
-      fct.Invoke();
-      Assert::AreEqual("fct called", result, _caller);
-    }
-    
-    void CreateFunctionPointerWithLambdaAndWithArgumentThenInvoke() {
-      __opaque_function_pointer__<void, const string&> fct = _delegate(const string& value) {
-        result = value;
-      };
-      Assert::IsFalse(fct.IsEmpty(), _caller);
-      fct.Invoke("fct called");
-      Assert::AreEqual("fct called", result, _caller);
-    }
-    
-    void CreateFunctionPointerWithLambdaAndWithReturnThenInvoke() {
-      __opaque_function_pointer__<string> fct = _delegate {
-        return "fct called";
-      };
-      Assert::IsFalse(fct.IsEmpty(), _caller);
-      result = fct.Invoke();
-      Assert::AreEqual("fct called", result, _caller);
-    }
-    
-    void CreateFunctionPointerWithStaticMethodThenInvoke() {
-      struct TestStatic {
-        TestStatic() = delete;
-        static void StaticFunc() {
-          result = "fct called";
-        }
-      };
-      __opaque_function_pointer__<> fct = TestStatic::StaticFunc;
-      Assert::IsFalse(fct.IsEmpty(), _caller);
-      fct.Invoke();
-      Assert::AreEqual("fct called", result, _caller);
-    }
-    
-    void CreateFunctionPointerWithStaticMethodAndWithArgumentThenInvoke() {
-      struct TestStatic {
-        TestStatic() = delete;
-        static void StaticFunc(const string& value) {
-          result = value;
-        }
-      };
-      __opaque_function_pointer__<void, const string&> fct = TestStatic::StaticFunc;
-      Assert::IsFalse(fct.IsEmpty(), _caller);
-      fct.Invoke("fct called");
-      Assert::AreEqual("fct called", result, _caller);
-    }
-    
-    void CreateFunctionPointerWithStaticMethodAndWithReturnThenInvoke() {
-      struct TestStatic {
-        TestStatic() = delete;
-        static string StaticFunc() {
-          return "fct called";
-        }
-      };
-      __opaque_function_pointer__<string> fct = TestStatic::StaticFunc;
-      Assert::IsFalse(fct.IsEmpty(), _caller);
-      result = fct.Invoke();
-      Assert::AreEqual("fct called", result, _caller);
-    }
-    
-    void CreateFunctionPointerWithMemberMethodThenInvoke() {
-      struct TestMember {
-        void MemberFunc() {
-          result = "fct called";
-        }
-      };
-      TestMember testMember;
-      __opaque_function_pointer__<> fct = __opaque_function_pointer__<>(testMember, &TestMember::MemberFunc);
-      Assert::IsFalse(fct.IsEmpty(), _caller);
-      fct.Invoke();
-      Assert::AreEqual("fct called", result, _caller);
-    }
-    
-    void CreateFunctionPointerWithMemberMethodAndWithArgumentThenInvoke() {
-      struct TestMember {
-        void MemberFunc(const string& value) {
-          result = value;
-        }
-      };
-      TestMember testMember;
-      __opaque_function_pointer__<void, const string&> fct = __opaque_function_pointer__<void, const string&>(testMember, &TestMember::MemberFunc);
-      Assert::IsFalse(fct.IsEmpty(), _caller);
-      fct.Invoke("fct called");
-      Assert::AreEqual("fct called", result, _caller);
-    }
-    
-    void CreateFunctionPointerWithMemberMethodAndWithReturnThenInvoke() {
-      struct TestMember {
-        string MemberFunc() {
-          return "fct called";
-        }
-      };
-      TestMember testMember;
-      __opaque_function_pointer__<string> fct = __opaque_function_pointer__<string>(testMember, &TestMember::MemberFunc);
-      Assert::IsFalse(fct.IsEmpty(), _caller);
-      result = fct.Invoke();
-      Assert::AreEqual("fct called", result, _caller);
-    }
-    
-    void CreateFunctionPointerWithFunctorThenInvoke() {
-      struct TestFunctor {
-        void operator()() {
-          result = "fct called";
-        }
-      };
-      TestFunctor testFunctor;
-      __opaque_function_pointer__<> fct = testFunctor;
-      Assert::IsFalse(fct.IsEmpty(), _caller);
-      fct.Invoke();
-      Assert::AreEqual("fct called", result, _caller);
-    }
-    
-    void CreateFunctionPointerWithFunctorAndWithArgumentThenInvoke() {
-      struct TestFunctor {
-        void operator()(const string& value) {
-          result = value;
-        }
-      };
-      TestFunctor testFunctor;
-      __opaque_function_pointer__<void, const string&> fct = testFunctor;
-      Assert::IsFalse(fct.IsEmpty(), _caller);
-      fct.Invoke("fct called");
-      Assert::AreEqual("fct called", result, _caller);
-    }
-    
-    void CreateFunctionPointerWithFunctorAndWithReturnThenInvoke() {
-      struct TestFunctor {
-        string operator()() {
-          return "fct called";
-        }
-      };
-      TestFunctor testFunctor;
-      __opaque_function_pointer__<string> fct = testFunctor;
-      Assert::IsFalse(fct.IsEmpty(), _caller);
-      result = fct.Invoke();
-      Assert::AreEqual("fct called", result, _caller);
-    }
   };
   
   string FunctionPointerTest::result;
   
-  _AddTest(FunctionPointerTest, CreateFunctionPointerEmptyThenInvoke)
-  _AddTest(FunctionPointerTest, CreateFunctionPointerWithLambdaThenInvoke)
-  _AddTest(FunctionPointerTest, CreateFunctionPointerWithLambdaAndWithArgumentThenInvoke)
-  _AddTest(FunctionPointerTest, CreateFunctionPointerWithLambdaAndWithReturnThenInvoke)
-  _AddTest(FunctionPointerTest, CreateFunctionPointerWithStaticMethodThenInvoke)
-  _AddTest(FunctionPointerTest, CreateFunctionPointerWithStaticMethodAndWithArgumentThenInvoke)
-  _AddTest(FunctionPointerTest, CreateFunctionPointerWithStaticMethodAndWithReturnThenInvoke)
-  _AddTest(FunctionPointerTest, CreateFunctionPointerWithMemberMethodThenInvoke)
-  _AddTest(FunctionPointerTest, CreateFunctionPointerWithMemberMethodAndWithArgumentThenInvoke)
-  _AddTest(FunctionPointerTest, CreateFunctionPointerWithMemberMethodAndWithReturnThenInvoke)
-  _AddTest(FunctionPointerTest, CreateFunctionPointerWithFunctorThenInvoke)
-  _AddTest(FunctionPointerTest, CreateFunctionPointerWithFunctorAndWithArgumentThenInvoke)
-  _AddTest(FunctionPointerTest, CreateFunctionPointerWithFunctorAndWithReturnThenInvoke)
+  TEST_F(FunctionPointerTest, CreateFunctionPointerEmptyThenInvoke) {
+    __opaque_function_pointer__<> fct;
+    ASSERT_TRUE(fct.IsEmpty());
+    ASSERT_THROW(fct.Invoke(), std::exception);
+  }
+  
+  TEST_F(FunctionPointerTest, CreateFunctionPointerWithLambdaThenInvoke) {
+    __opaque_function_pointer__<> fct = _delegate {
+      result = "fct called";
+    };
+    ASSERT_FALSE(fct.IsEmpty());
+    fct.Invoke();
+    ASSERT_EQ("fct called", result);
+  }
+  
+  TEST_F(FunctionPointerTest, CreateFunctionPointerWithLambdaAndWithArgumentThenInvoke) {
+    __opaque_function_pointer__<void, const string&> fct = _delegate(const string& value) {
+      result = value;
+    };
+    ASSERT_FALSE(fct.IsEmpty());
+    fct.Invoke("fct called");
+    ASSERT_EQ("fct called", result);
+  }
+  
+  TEST_F(FunctionPointerTest, CreateFunctionPointerWithLambdaAndWithReturnThenInvoke) {
+    __opaque_function_pointer__<string> fct = _delegate {
+      return "fct called";
+    };
+    ASSERT_FALSE(fct.IsEmpty());
+    result = fct.Invoke();
+    ASSERT_EQ("fct called", result);
+  }
+  
+  TEST_F(FunctionPointerTest, CreateFunctionPointerWithStaticMethodThenInvoke) {
+    struct TestStatic {
+      TestStatic() = delete;
+      static void StaticFunc() {
+        result = "fct called";
+      }
+    };
+    __opaque_function_pointer__<> fct = TestStatic::StaticFunc;
+    ASSERT_FALSE(fct.IsEmpty());
+    fct.Invoke();
+    ASSERT_EQ("fct called", result);
+  }
+  
+  TEST_F(FunctionPointerTest, CreateFunctionPointerWithStaticMethodAndWithArgumentThenInvoke) {
+    struct TestStatic {
+      TestStatic() = delete;
+      static void StaticFunc(const string& value) {
+        result = value;
+      }
+    };
+    __opaque_function_pointer__<void, const string&> fct = TestStatic::StaticFunc;
+    ASSERT_FALSE(fct.IsEmpty());
+    fct.Invoke("fct called");
+    ASSERT_EQ("fct called", result);
+  }
+  
+  TEST_F(FunctionPointerTest, CreateFunctionPointerWithStaticMethodAndWithReturnThenInvoke) {
+    struct TestStatic {
+      TestStatic() = delete;
+      static string StaticFunc() {
+        return "fct called";
+      }
+    };
+    __opaque_function_pointer__<string> fct = TestStatic::StaticFunc;
+    ASSERT_FALSE(fct.IsEmpty());
+    result = fct.Invoke();
+    ASSERT_EQ("fct called", result);
+  }
+  
+  TEST_F(FunctionPointerTest, CreateFunctionPointerWithMemberMethodThenInvoke) {
+    struct TestMember {
+      void MemberFunc() {
+        result = "fct called";
+      }
+    };
+    TestMember testMember;
+    __opaque_function_pointer__<> fct = __opaque_function_pointer__<>(testMember, &TestMember::MemberFunc);
+    ASSERT_FALSE(fct.IsEmpty());
+    fct.Invoke();
+    ASSERT_EQ("fct called", result);
+  }
+  
+  TEST_F(FunctionPointerTest, CreateFunctionPointerWithMemberMethodAndWithArgumentThenInvoke) {
+    struct TestMember {
+      void MemberFunc(const string& value) {
+        result = value;
+      }
+    };
+    TestMember testMember;
+    __opaque_function_pointer__<void, const string&> fct = __opaque_function_pointer__<void, const string&>(testMember, &TestMember::MemberFunc);
+    ASSERT_FALSE(fct.IsEmpty());
+    fct.Invoke("fct called");
+    ASSERT_EQ("fct called", result);
+  }
+  
+  TEST_F(FunctionPointerTest, CreateFunctionPointerWithMemberMethodAndWithReturnThenInvoke) {
+    struct TestMember {
+      string MemberFunc() {
+        return "fct called";
+      }
+    };
+    TestMember testMember;
+    __opaque_function_pointer__<string> fct = __opaque_function_pointer__<string>(testMember, &TestMember::MemberFunc);
+    ASSERT_FALSE(fct.IsEmpty());
+    result = fct.Invoke();
+    ASSERT_EQ("fct called", result);
+  }
+  
+  TEST_F(FunctionPointerTest, CreateFunctionPointerWithFunctorThenInvoke) {
+    struct TestFunctor {
+      void operator()() {
+        result = "fct called";
+      }
+    };
+    TestFunctor testFunctor;
+    __opaque_function_pointer__<> fct = testFunctor;
+    ASSERT_FALSE(fct.IsEmpty());
+    fct.Invoke();
+    ASSERT_EQ("fct called", result);
+  }
+  
+  TEST_F(FunctionPointerTest, CreateFunctionPointerWithFunctorAndWithArgumentThenInvoke) {
+    struct TestFunctor {
+      void operator()(const string& value) {
+        result = value;
+      }
+    };
+    TestFunctor testFunctor;
+    __opaque_function_pointer__<void, const string&> fct = testFunctor;
+    ASSERT_FALSE(fct.IsEmpty());
+    fct.Invoke("fct called");
+    ASSERT_EQ("fct called", result);
+  }
+  
+  TEST_F(FunctionPointerTest, CreateFunctionPointerWithFunctorAndWithReturnThenInvoke) {
+    struct TestFunctor {
+      string operator()() {
+        return "fct called";
+      }
+    };
+    TestFunctor testFunctor;
+    __opaque_function_pointer__<string> fct = testFunctor;
+    ASSERT_FALSE(fct.IsEmpty());
+    result = fct.Invoke();
+    ASSERT_EQ("fct called", result);
+  }
 }

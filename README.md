@@ -9,8 +9,8 @@ ________________________________________________________________________________
 [![std c++17 ready](https://img.shields.io/badge/std-c++14-004080.svg)](docs/C++17Ready.md) 
 [![os Windows, macOS, linux](https://img.shields.io/badge/os-Windows,%20macOS,%20linux-004080.svg)]()
 [![development status](https://img.shields.io/badge/dev-status-004080.svg)](docs/SwitchStatus.md) 
-[![Download Switch](https://img.shields.io/sourceforge/dt/switchpro.svg)](https://sourceforge.net/projects/switchpro/files/latest/download)
-[![HitCount](http://hits.dwyl.io/gammasoft71/switch.svg)](http://hits.dwyl.io/gammasoft71/switch)
+<!--[![Download Switch](https://img.shields.io/sourceforge/dt/switchpro.svg)](https://sourceforge.net/projects/switchpro/files/latest/download)-->
+<!--[![HitCount](http://hits.dwyl.io/gammasoft71/switch.svg)](http://hits.dwyl.io/gammasoft71/switch)-->
 
 # The Switch framework is...
 * a collection of native C++ classes libraries, similar to the .NET Framework;

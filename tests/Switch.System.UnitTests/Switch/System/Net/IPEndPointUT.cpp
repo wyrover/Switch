@@ -1,43 +1,40 @@
 #include <Switch/System/Net/IPEndPoint.hpp>
-#include <Switch/TUnit/Assert.hpp>
-#include <Switch/TUnit/TestFixture.hpp>
+#include <gtest/gtest.h>
 
 using namespace System;
 using namespace System::Net;
 using namespace System::Net::Sockets;
-using namespace TUnit;
 
-namespace {
-  
+namespace {  
   TEST(IPEndPoint, Constructor) {
-    EXPECT_EQ(IPEndPoint(IPAddress(172, 16, 10, 30), 11000).ToString(), "172.16.10.30:11000");
-    EXPECT_THROW(IPEndPoint(IPAddress(172, 16, 10, 30), IPEndPoint::MinPort - 1), ArgumentOutOfRangeException);
-    EXPECT_THROW(IPEndPoint(IPAddress(172, 16, 10, 30), IPEndPoint::MaxPort + 1), ArgumentOutOfRangeException);
+    ASSERT_EQ(IPEndPoint(IPAddress(172, 16, 10, 30), 11000).ToString(), "172.16.10.30:11000");
+    ASSERT_THROW(IPEndPoint(IPAddress(172, 16, 10, 30), IPEndPoint::MinPort - 1), ArgumentOutOfRangeException);
+    ASSERT_THROW(IPEndPoint(IPAddress(172, 16, 10, 30), IPEndPoint::MaxPort + 1), ArgumentOutOfRangeException);
   }
   
   TEST(IPEndPoint, GetAddress) {
-    EXPECT_EQ(IPEndPoint(IPAddress(172, 16, 10, 30), 11000).Address().ToString(), "172.16.10.30");
-    EXPECT_EQ(IPEndPoint(IPAddress::IPv6Loopback, 8080).Address().ToString(), "[0:0:0:0:0:0:0:1]");
+    ASSERT_EQ(IPEndPoint(IPAddress(172, 16, 10, 30), 11000).Address().ToString(), "172.16.10.30");
+    ASSERT_EQ(IPEndPoint(IPAddress::IPv6Loopback, 8080).Address().ToString(), "[0:0:0:0:0:0:0:1]");
   }
   
   TEST(IPEndPoint, GetAddressFamily) {
-    EXPECT_EQ(Enum<Sockets::AddressFamily>::ToString(IPEndPoint(IPAddress(172, 16, 10, 30), 11000).AddressFamily), "InterNetwork");
-    EXPECT_EQ(Enum<Sockets::AddressFamily>::ToString(IPEndPoint(IPAddress::IPv6Loopback, 8080).AddressFamily), "InterNetworkV6");
+    ASSERT_EQ(Enum<Sockets::AddressFamily>::ToString(IPEndPoint(IPAddress(172, 16, 10, 30), 11000).AddressFamily), "InterNetwork");
+    ASSERT_EQ(Enum<Sockets::AddressFamily>::ToString(IPEndPoint(IPAddress::IPv6Loopback, 8080).AddressFamily), "InterNetworkV6");
   }
   
   TEST(IPEndPoint, GetPort) {
-    EXPECT_EQ(IPEndPoint(IPAddress(172, 16, 10, 30), 11000).Port(), 11000);
-    EXPECT_EQ(IPEndPoint(IPAddress::IPv6Loopback, 8080).Port(), 8080);
+    ASSERT_EQ(IPEndPoint(IPAddress(172, 16, 10, 30), 11000).Port(), 11000);
+    ASSERT_EQ(IPEndPoint(IPAddress::IPv6Loopback, 8080).Port(), 8080);
   }
   
   TEST(IPEndPoint, SerializeIPv4) {
     SocketAddress socketAddress = IPEndPoint(IPAddress(172, 16, 10, 30), 11000).Serialize();
-    EXPECT_EQ("InterNetwork:16:{42,248,172,16,10,30,0,0,0,0,0,0,0,0}", socketAddress.ToString());
+    ASSERT_EQ("InterNetwork:16:{42,248,172,16,10,30,0,0,0,0,0,0,0,0}", socketAddress.ToString());
   }
   
   TEST(IPEndPoint, SerializeIPv6) {
     SocketAddress socketAddress = IPEndPoint(IPAddress::IPv6Loopback, 8080).Serialize();
-    EXPECT_EQ("InterNetworkV6:28:{31,144,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0}", socketAddress.ToString());
+    ASSERT_EQ("InterNetworkV6:28:{31,144,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0}", socketAddress.ToString());
     //                           {31,144,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0}
     //                     30:28:{31,144,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0}
   }
@@ -54,18 +51,18 @@ namespace {
   
   TEST(IPEndPoint, SetAddress) {
     IPEndPoint IPEndPoint(IPAddress(172, 16, 10, 30), 11000);
-    EXPECT_EQ(IPEndPoint.Address().ToString(), "172.16.10.30");
+    ASSERT_EQ(IPEndPoint.Address().ToString(), "172.16.10.30");
     IPEndPoint.Address = IPAddress(192, 168, 0, 1);
-    EXPECT_EQ(IPEndPoint.Address().ToString(), "192.168.0.1");
+    ASSERT_EQ(IPEndPoint.Address().ToString(), "192.168.0.1");
   }
   
   TEST(IPEndPoint, SetPort) {
     IPEndPoint IPEndPoint(IPAddress(172, 16, 10, 30), 11000);
-    EXPECT_EQ(IPEndPoint.Port(), 11000);
+    ASSERT_EQ(IPEndPoint.Port(), 11000);
     IPEndPoint.Port(8080);
-    EXPECT_EQ(IPEndPoint.Port(), 8080);
-    EXPECT_THROW(IPEndPoint.Port(IPEndPoint::MinPort - 1), ArgumentOutOfRangeException);
-    EXPECT_THROW(IPEndPoint.Port(IPEndPoint::MaxPort + 1), ArgumentOutOfRangeException);
+    ASSERT_EQ(IPEndPoint.Port(), 8080);
+    ASSERT_THROW(IPEndPoint.Port(IPEndPoint::MinPort - 1), ArgumentOutOfRangeException);
+    ASSERT_THROW(IPEndPoint.Port(IPEndPoint::MaxPort + 1), ArgumentOutOfRangeException);
   }
   
   TEST(IPEndPoint, OperatorEqual) {

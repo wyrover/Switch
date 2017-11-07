@@ -1,9 +1,8 @@
+#include <Switch/System/Runtime/Serialization/ISerializable.hpp>
 #include <Switch/System/Runtime/Serialization/SerializationInfo.hpp>
-#include <Switch/TUnit/Assert.hpp>
-#include <Switch/TUnit/TestFixture.hpp>
+#include <gtest/gtest.h>
 
 using namespace System;
-using namespace TUnit;
 
 class Role : public object, public System::Runtime::Serialization::ISerializable {
 public:
@@ -83,7 +82,7 @@ public:
   ::Role Role;
 };
 
-TEST(SerializationInfo, Serialize) {
+TEST(SerializationInfoTest, Serialize) {
   Role role;
   role.RoleName = "Photographer";
   role.Flags = 0x22;
@@ -100,39 +99,39 @@ TEST(SerializationInfo, Serialize) {
 
   person.GetObjectData(info);
 
-  EXPECT_EQ("Person", info.GetObjectType());
-  EXPECT_EQ(6, info.GetMemberCount());
+  ASSERT_EQ("Person", info.GetObjectType());
+  ASSERT_EQ(6, info.GetMemberCount());
 
-  EXPECT_EQ("Peter", info.GetString("PrsFirstName"));
-  EXPECT_EQ("Parker" , info.GetString("PrsLastName"));
+  ASSERT_EQ("Peter", info.GetString("PrsFirstName"));
+  ASSERT_EQ("Parker" , info.GetString("PrsLastName"));
   
-  EXPECT_EQ(42, info.GetInt16("PrsAge"));
-  EXPECT_EQ(42, info.GetInt32("PrsAge"));
-  EXPECT_EQ(42, info.GetInt64("PrsAge"));
-  EXPECT_EQ(42u, info.GetUInt16("PrsAge"));
-  EXPECT_EQ(42u, info.GetUInt32("PrsAge"));
-  EXPECT_EQ(42u, info.GetUInt64("PrsAge"));
-  EXPECT_EQ(42, info.GetSingle("PrsAge"));
-  EXPECT_EQ(42, info.GetDouble("PrsAge"));
-  EXPECT_EQ("42", info.GetString("PrsAge"));
+  ASSERT_EQ(42, info.GetInt16("PrsAge"));
+  ASSERT_EQ(42, info.GetInt32("PrsAge"));
+  ASSERT_EQ(42, info.GetInt64("PrsAge"));
+  ASSERT_EQ(42u, info.GetUInt16("PrsAge"));
+  ASSERT_EQ(42u, info.GetUInt32("PrsAge"));
+  ASSERT_EQ(42u, info.GetUInt64("PrsAge"));
+  ASSERT_EQ(42, info.GetSingle("PrsAge"));
+  ASSERT_EQ(42, info.GetDouble("PrsAge"));
+  ASSERT_EQ("42", info.GetString("PrsAge"));
 
-  EXPECT_EQ("42", info.GetString("PrsStrAge"));
-  EXPECT_EQ(42, info.GetInt16("PrsStrAge"));
-  EXPECT_EQ(42, info.GetInt32("PrsStrAge"));
-  EXPECT_EQ(42, info.GetInt64("PrsStrAge"));
-  EXPECT_EQ(42u, info.GetUInt16("PrsStrAge"));
-  EXPECT_EQ(42u, info.GetUInt32("PrsStrAge"));
-  EXPECT_EQ(42u, info.GetUInt64("PrsStrAge"));
-  EXPECT_EQ(42, info.GetSingle("PrsStrAge"));
-  EXPECT_EQ(42, info.GetDouble("PrsStrAge"));
+  ASSERT_EQ("42", info.GetString("PrsStrAge"));
+  ASSERT_EQ(42, info.GetInt16("PrsStrAge"));
+  ASSERT_EQ(42, info.GetInt32("PrsStrAge"));
+  ASSERT_EQ(42, info.GetInt64("PrsStrAge"));
+  ASSERT_EQ(42u, info.GetUInt16("PrsStrAge"));
+  ASSERT_EQ(42u, info.GetUInt32("PrsStrAge"));
+  ASSERT_EQ(42u, info.GetUInt64("PrsStrAge"));
+  ASSERT_EQ(42, info.GetSingle("PrsStrAge"));
+  ASSERT_EQ(42, info.GetDouble("PrsStrAge"));
 
-  EXPECT_EQ(true, info.GetBoolean("PrsMale"));  
+  ASSERT_EQ(true, info.GetBoolean("PrsMale"));  
 
-  EXPECT_THROW(info.GetObject("_Male"), ArgumentException);
-  EXPECT_THROW(info.GetDouble("PrsRole"), System::Runtime::Serialization::SerializationException);
+  ASSERT_THROW(info.GetObject("_Male"), ArgumentException);
+  ASSERT_THROW(info.GetDouble("PrsRole"), System::Runtime::Serialization::SerializationException);
 }
 
-TEST(SerializationInfo, Deserialize) {
+TEST(SerializationInfoTest, Deserialize) {
   Role role;
   role.RoleName = "Photographer";
   role.Flags = 0x22;
@@ -151,11 +150,11 @@ TEST(SerializationInfo, Deserialize) {
 
   refptr<Person> newPerson = Person::Deserialize(serializationInfo);
 
-  EXPECT_EQ(person.Age, newPerson->Age);
-  EXPECT_EQ(person.StrAge, newPerson->StrAge);
-  EXPECT_EQ(person.FirstName, newPerson->FirstName);
-  EXPECT_EQ(person.LastName, newPerson->LastName);
-  EXPECT_EQ(person.Male, newPerson->Male);
-  EXPECT_EQ(person.Role.RoleName, newPerson->Role.RoleName);
-  EXPECT_EQ(person.Role.Flags, newPerson->Role.Flags);
+  ASSERT_EQ(person.Age, newPerson->Age);
+  ASSERT_EQ(person.StrAge, newPerson->StrAge);
+  ASSERT_EQ(person.FirstName, newPerson->FirstName);
+  ASSERT_EQ(person.LastName, newPerson->LastName);
+  ASSERT_EQ(person.Male, newPerson->Male);
+  ASSERT_EQ(person.Role.RoleName, newPerson->Role.RoleName);
+  ASSERT_EQ(person.Role.Flags, newPerson->Role.Flags);
 }

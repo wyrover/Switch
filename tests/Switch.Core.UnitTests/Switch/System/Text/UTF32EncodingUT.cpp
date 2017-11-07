@@ -1,39 +1,37 @@
 #include "EncodingUT.hpp"
 #include <Switch/System/Text/UTF32Encoding.hpp>
-#include <Switch/TUnit/Assert.hpp>
-#include <Switch/TUnit/TestFixture.hpp>
+#include <gtest/gtest.h>
 
 using namespace System;
-using namespace TUnit;
 
 namespace {
 
-TEST(UTF32_Encoding, GetBytes_Exceptions) {
+TEST(UTF32_EncodingTest, GetBytes_Exceptions) {
   Text::UTF32Encoding u32(false);
   EncodingUT::CheckErrorsGetBytes(u32);
 }
 
-TEST(UTF32_Encoding, GetByteCount_Exceptions) {
+TEST(UTF32_EncodingTest, GetByteCount_Exceptions) {
   Text::UTF32Encoding u32(false);
   EncodingUT::CheckErrorsGetByteCount(u32);
 }
 
-TEST(UTF32_Encoding, GetCharCount_Exceptions) {
+TEST(UTF32_EncodingTest, GetCharCount_Exceptions) {
   Text::UTF32Encoding u32(false);
   EncodingUT::CheckErrorsGetCharCount(u32);
 }
 
-TEST(UTF32_Encoding, GetChars_Exceptions) {
+TEST(UTF32_EncodingTest, GetChars_Exceptions) {
   Text::UTF32Encoding u32(false);
   EncodingUT::CheckErrorsGetChars(u32);
 }
 
-TEST(UTF32_Encoding, String_Exceptions) {
+TEST(UTF32_EncodingTest, String_Exceptions) {
   Text::UTF32Encoding u32(false);
   EncodingUT::CheckErrorsString(u32);
 }
 
-TEST(UTF32_Encoding, Ctor) {
+TEST(UTF32_EncodingTest, Ctor) {
   EncodingUT::Bytes preamble;
   refptr<Text::Encoding> def = new Text::UTF32Encoding();
   refptr<Text::Encoding> eFF = new Text::UTF32Encoding(false,false);
@@ -41,41 +39,41 @@ TEST(UTF32_Encoding, Ctor) {
   refptr<Text::Encoding> eTF = new Text::UTF32Encoding(true, false);
   refptr<Text::Encoding> eTT = new Text::UTF32Encoding(true, true);
 
-  EXPECT_EQ(12000, def->GetCodePage());
-  EXPECT_TRUE(def->IsReadOnly());
-  EXPECT_FALSE(def->IsSingleByte());
+  ASSERT_EQ(12000, def->GetCodePage());
+  ASSERT_TRUE(def->IsReadOnly());
+  ASSERT_FALSE(def->IsSingleByte());
   preamble = def->GetPreamble();
-  EXPECT_EQ(4,preamble.Length);
-  EXPECT_EQ(string::Join(", ", preamble), "255, 254, 0, 0");
+  ASSERT_EQ(4,preamble.Length);
+  ASSERT_EQ(string::Join(", ", preamble), "255, 254, 0, 0");
 
-  EXPECT_EQ(12000, eFF->GetCodePage());
-  EXPECT_TRUE(eFF->IsReadOnly());
-  EXPECT_FALSE(eFF->IsSingleByte());
+  ASSERT_EQ(12000, eFF->GetCodePage());
+  ASSERT_TRUE(eFF->IsReadOnly());
+  ASSERT_FALSE(eFF->IsSingleByte());
   preamble = eFF->GetPreamble();
-  EXPECT_EQ(0,preamble.Length);
+  ASSERT_EQ(0,preamble.Length);
 
-  EXPECT_EQ(12000, eFT->GetCodePage());
-  EXPECT_TRUE(eFT->IsReadOnly());
-  EXPECT_FALSE(eFT->IsSingleByte());
+  ASSERT_EQ(12000, eFT->GetCodePage());
+  ASSERT_TRUE(eFT->IsReadOnly());
+  ASSERT_FALSE(eFT->IsSingleByte());
   preamble = eFT->GetPreamble();
-  EXPECT_EQ(4,preamble.Length);
-  EXPECT_EQ(string::Join(", ", preamble), "255, 254, 0, 0");
+  ASSERT_EQ(4,preamble.Length);
+  ASSERT_EQ(string::Join(", ", preamble), "255, 254, 0, 0");
 
-  EXPECT_EQ(12001, eTF->GetCodePage());
-  EXPECT_TRUE(eTF->IsReadOnly());
-  EXPECT_FALSE(eTF->IsSingleByte());
+  ASSERT_EQ(12001, eTF->GetCodePage());
+  ASSERT_TRUE(eTF->IsReadOnly());
+  ASSERT_FALSE(eTF->IsSingleByte());
   preamble = eTF->GetPreamble();
-  EXPECT_EQ(0,preamble.Length);
+  ASSERT_EQ(0,preamble.Length);
 
-  EXPECT_EQ(12001, eTT->GetCodePage());
-  EXPECT_TRUE(eTT->IsReadOnly());
-  EXPECT_FALSE(eTT->IsSingleByte());
+  ASSERT_EQ(12001, eTT->GetCodePage());
+  ASSERT_TRUE(eTT->IsReadOnly());
+  ASSERT_FALSE(eTT->IsSingleByte());
   preamble = eTT->GetPreamble();
-  EXPECT_EQ(4,preamble.Length);
-  EXPECT_EQ(string::Join(", ", preamble), "0, 0, 254, 255");
+  ASSERT_EQ(4,preamble.Length);
+  ASSERT_EQ(string::Join(", ", preamble), "0, 0, 254, 255");
 }
 
-TEST(UTF32_Encoding, Encode) {
+TEST(UTF32_EncodingTest, Encode) {
   // The encoding, utf32 big endian, BOM.
   refptr<Text::UTF32Encoding> unicode = new Text::UTF32Encoding();
 
@@ -111,17 +109,17 @@ TEST(UTF32_Encoding, Encode) {
   EncodingUT::Bytes encodedBytes = unicode->GetBytes(unicodeString);
   int index = 0;
   for (byte b : encodedBytes)
-    EXPECT_EQ(reference[index++],b);
+    ASSERT_EQ(reference[index++],b);
 
-  EXPECT_EQ(unicodeString.Length(), unicode->GetCharCount(encodedBytes.Data, encodedBytes.Length,0,encodedBytes.Length));
+  ASSERT_EQ(unicodeString.Length(), unicode->GetCharCount(encodedBytes.Data, encodedBytes.Length,0,encodedBytes.Length));
 
   // Decode bytes back to string. 
   // Notice Pi and Sigma characters are still present.
   string decodedString = unicode->GetString(encodedBytes.Data, encodedBytes.Length);
-  EXPECT_TRUE(decodedString.Equals(unicodeString));
+  ASSERT_TRUE(decodedString.Equals(unicodeString));
 }
 
-TEST(UTF32_Encoding, EncodeBigEndian) {
+TEST(UTF32_EncodingTest, EncodeBigEndian) {
   // The encoding, utf32 big endian, BOM.
   refptr<Text::UTF32Encoding> unicode = new Text::UTF32Encoding(true);
 
@@ -157,26 +155,26 @@ TEST(UTF32_Encoding, EncodeBigEndian) {
   EncodingUT::Bytes encodedBytes = unicode->GetBytes(unicodeString);
   int index = 0;
   for (byte b : encodedBytes) {
-    EXPECT_EQ(reference[index++],b);
+    ASSERT_EQ(reference[index++],b);
   }
 
-  EXPECT_EQ(unicodeString.Length(), unicode->GetCharCount(encodedBytes.Data, encodedBytes.Length,0,encodedBytes.Length));
+  ASSERT_EQ(unicodeString.Length(), unicode->GetCharCount(encodedBytes.Data, encodedBytes.Length,0,encodedBytes.Length));
 
   // Decode bytes back to string. 
   // Notice Pi and Sigma characters are still present.
   string decodedString = unicode->GetString(encodedBytes.Data, encodedBytes.Length);
-  EXPECT_TRUE(decodedString.Equals(unicodeString));
+  ASSERT_TRUE(decodedString.Equals(unicodeString));
 }
 
-TEST(UTF32_Encoding, GetByteCount) {
+TEST(UTF32_EncodingTest, GetByteCount) {
   EncodingUT::GetByteCountTest(new Text::UTF32Encoding(false),4,4,4,4);
 }
 
-TEST(UTF32_Encoding, GetByteCountBigEndian) {
+TEST(UTF32_EncodingTest, GetByteCountBigEndian) {
   EncodingUT::GetByteCountTest(new Text::UTF32Encoding(true),4,4,4,4);
 }
 
-TEST(UTF32_Encoding, GetBytes) {
+TEST(UTF32_EncodingTest, GetBytes) {
   EncodingUT::GetBytesTest(new Text::UTF32Encoding(false), 4, 4, 4, 4, 
     "80, 0, 0, 0, 105, 0, 0, 0, 32, 0, 0, 0, 160, 3, 0, 0, 32, 0, 0, 0, 83, 0, "
     "0, 0, 105, 0, 0, 0, 103, 0, 0, 0, 109, 0, 0, 0, 97, 0, 0, 0, 32, 0, 0, 0, "
@@ -185,7 +183,7 @@ TEST(UTF32_Encoding, GetBytes) {
     "97, 0, 0, 0", "160, 3, 0, 0", "40, 244, 1, 0");
 }
 
-TEST(UTF32_Encoding, GetBytesBigEndian) {
+TEST(UTF32_EncodingTest, GetBytesBigEndian) {
   EncodingUT::GetBytesTest(new Text::UTF32Encoding(true), 4, 4, 4, 4, 
     "0, 0, 0, 80, 0, 0, 0, 105, 0, 0, 0, 32, 0, 0, 3, 160, 0, 0, 0, 32, 0, 0, "
     "0, 83, 0, 0, 0, 105, 0, 0, 0, 103, 0, 0, 0, 109, 0, 0, 0, 97, 0, 0, 0, 32, "
@@ -194,34 +192,34 @@ TEST(UTF32_Encoding, GetBytesBigEndian) {
     "0, 0, 0, 97", "0, 0, 3, 160", "0, 1, 244, 40");
 }
 
-TEST(UTF32_Encoding, GetCharCount_byte_array_null) {
+TEST(UTF32_EncodingTest, GetCharCount_byte_array_null) {
   Text::UTF32Encoding encoding(false);
-  EXPECT_EQ(0, encoding.GetCharCount(null, 0));
-  EXPECT_THROW(encoding.GetCharCount(null, 1), ArgumentNullException);
+  ASSERT_EQ(0, encoding.GetCharCount(null, 0));
+  ASSERT_THROW(encoding.GetCharCount(null, 1), ArgumentNullException);
 }
 
-TEST(UTF32_Encoding, GetCharCount_byte_array_index_count_null) {
+TEST(UTF32_EncodingTest, GetCharCount_byte_array_index_count_null) {
   Text::UTF32Encoding encoding(false);
-  EXPECT_EQ(0, encoding.GetCharCount(null, 0, 0, 0));
-  EXPECT_THROW(encoding.GetCharCount(null, 0, 0, 1), ArgumentOutOfRangeException);
-  EXPECT_THROW(encoding.GetCharCount(null, 1, 0, 1), ArgumentNullException);
+  ASSERT_EQ(0, encoding.GetCharCount(null, 0, 0, 0));
+  ASSERT_THROW(encoding.GetCharCount(null, 0, 0, 1), ArgumentOutOfRangeException);
+  ASSERT_THROW(encoding.GetCharCount(null, 1, 0, 1), ArgumentNullException);
 }
 
-TEST(UTF32_Encoding, GetCharCount_byte_array_null_BigEndian) {
+TEST(UTF32_EncodingTest, GetCharCount_byte_array_null_BigEndian) {
   Text::UTF32Encoding encoding(true);
-  EXPECT_EQ(0, encoding.GetCharCount(null, 0));
-  EXPECT_THROW(encoding.GetCharCount(null, 1), ArgumentNullException);
+  ASSERT_EQ(0, encoding.GetCharCount(null, 0));
+  ASSERT_THROW(encoding.GetCharCount(null, 1), ArgumentNullException);
 }
 
-TEST(UTF32_Encoding, GetCharCount_byte_array_index_count_null_BigEndian) {
+TEST(UTF32_EncodingTest, GetCharCount_byte_array_index_count_null_BigEndian) {
   Text::UTF32Encoding encoding(true);
-  EXPECT_EQ(0, encoding.GetCharCount(null, 0, 0, 0));
-  EXPECT_THROW(encoding.GetCharCount(null, 0, 0, 1), ArgumentOutOfRangeException);
-  EXPECT_THROW(encoding.GetCharCount(null, 1, 0, 1), ArgumentNullException);
+  ASSERT_EQ(0, encoding.GetCharCount(null, 0, 0, 0));
+  ASSERT_THROW(encoding.GetCharCount(null, 0, 0, 1), ArgumentOutOfRangeException);
+  ASSERT_THROW(encoding.GetCharCount(null, 1, 0, 1), ArgumentNullException);
 }
 
 /*
-TEST(UTF32_Encoding, GetCharCount_and_GetChars) {
+TEST(UTF32_EncodingTest, GetCharCount_and_GetChars) {
   byte unicodeBytesUTF32[] = { 80, 0, 0, 0, 105, 0, 0, 0, 32, 0, 0, 0, 160, 3, 
     0, 0, 32, 0, 0, 0, 83, 0, 0, 0, 105, 0, 0, 0, 103, 0, 0, 0, 109, 0, 0, 0, 
     97, 0, 0, 0, 32, 0, 0, 0, 163, 3, 0, 0, 32, 0, 0, 0, 75, 0, 0, 0, 79, 0, 0,
@@ -235,7 +233,7 @@ TEST(UTF32_Encoding, GetCharCount_and_GetChars) {
   GetCharsTest(e, 4, 4, 4, 4, unicodeBytesUTF32,80);
 }
 
-TEST(UTF32_Encoding, GetCharCount_and_GetChars_BigEndian) {
+TEST(UTF32_EncodingTest, GetCharCount_and_GetChars_BigEndian) {
   byte unicodeBytesUTF32BE[] = { 0, 0, 0, 80, 0, 0, 0, 105, 0, 0, 0, 32, 0, 0, 
     3, 160, 0, 0, 0, 32, 0, 0, 0, 83, 0, 0, 0, 105, 0, 0, 0, 103, 0, 0, 0, 109,
     0, 0, 0, 97, 0, 0, 0, 32, 0, 0, 3, 163, 0, 0, 0, 32, 0, 0, 0, 75, 0, 0, 0,

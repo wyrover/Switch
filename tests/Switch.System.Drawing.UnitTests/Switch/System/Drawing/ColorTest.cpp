@@ -1,1624 +1,1474 @@
 #include <Switch/System/Drawing/Color.hpp>
-#include <Switch/TUnit/Assert.hpp>
-#include <Switch/TUnit/TestFixture.hpp>
+#include <gtest/gtest.h>
 
 using namespace System;
 using namespace System::Drawing;
-using namespace TUnit;
 
 namespace SwitchUnitTests {
-  class Color : public TestFixture {
-  public:
-    void Ctor() {
-      Drawing::Color color;
-      Assert::AreEqual(0x00, color.A(), _caller);
-      Assert::AreEqual(0x00, color.R(), _caller);
-      Assert::AreEqual(0x00, color.G(), _caller);
-      Assert::AreEqual(0x00, color.B(), _caller);
-      Assert::IsTrue(color.IsEmpty(), _caller);
-      Assert::IsFalse(color.IsKnownColor(), _caller);
-      Assert::IsFalse(color.IsNamedColor, _caller);
-      Assert::IsFalse(color.IsSystemColor(), _caller);
-      Assert::AreEqual("0", color.Name(), _caller);
-      Assert::AreEqual("Color [Empty]", color.ToString(), _caller);
-    }
-    
-    void FromKnownColor() {
-      Assert::AreEqual(0xFF, Drawing::Color::FromKnownColor(KnownColor::Black).A(), _caller);
-      Assert::AreEqual(0x00, Drawing::Color::FromKnownColor(KnownColor::Black).R(), _caller);
-      Assert::AreEqual(0x00, Drawing::Color::FromKnownColor(KnownColor::Black).G(), _caller);
-      Assert::AreEqual(0x00, Drawing::Color::FromKnownColor(KnownColor::Black).B(), _caller);
-      Assert::IsFalse(Drawing::Color::FromKnownColor(KnownColor::Black).IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::FromKnownColor(KnownColor::Black).IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::FromKnownColor(KnownColor::Black).IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::FromKnownColor(KnownColor::Black).IsSystemColor(), _caller);
-      Assert::AreEqual("Black", Drawing::Color::FromKnownColor(KnownColor::Black).Name(), _caller);
-      Assert::AreEqual("Color [Black]", Drawing::Color::FromKnownColor(KnownColor::Black).ToString(), _caller);
-      
-      Assert::Throws<ArgumentException>(_delegate {Drawing::Color::FromKnownColor((KnownColor)34544);}, _caller);
-    }
-    
-    void FromArgb() {
-      Assert::AreEqual(0x12, Drawing::Color::FromArgb(0x12345678).A(), _caller);
-      Assert::AreEqual(0x34, Drawing::Color::FromArgb(0x12345678).R(), _caller);
-      Assert::AreEqual(0x56, Drawing::Color::FromArgb(0x12345678).G(), _caller);
-      Assert::AreEqual(0x78, Drawing::Color::FromArgb(0x12345678).B(), _caller);
-      Assert::IsFalse(Drawing::Color::FromArgb(0x12345678).IsEmpty(), _caller);
-      Assert::IsFalse(Drawing::Color::FromArgb(0x12345678).IsKnownColor(), _caller);
-      Assert::IsFalse(Drawing::Color::FromArgb(0x12345678).IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::FromArgb(0x12345678).IsSystemColor(), _caller);
-      Assert::AreEqual("12345678", Drawing::Color::FromArgb(0x12345678).Name(), _caller);
-      Assert::AreEqual("Color [A=18, R=52, G=86, B=120]", Drawing::Color::FromArgb(0x12345678).ToString(), _caller);
-    }
-    
-    void FromName() {
-      Drawing::Color colorAliceBlue = Drawing::Color::FromName("AliceBlue");
-      Assert::AreEqual(0xFF, colorAliceBlue.A(), _caller);
-      Assert::AreEqual(0xF0, colorAliceBlue.R(), _caller);
-      Assert::AreEqual(0xF8, colorAliceBlue.G(), _caller);
-      Assert::AreEqual(0xFF, colorAliceBlue.B(), _caller);
-      Assert::IsFalse(colorAliceBlue.IsEmpty(), _caller);
-      Assert::IsTrue(colorAliceBlue.IsKnownColor(), _caller);
-      Assert::IsTrue(colorAliceBlue.IsNamedColor(), _caller);
-      Assert::IsFalse(colorAliceBlue.IsSystemColor(), _caller);
-      Assert::AreEqual("AliceBlue", colorAliceBlue.Name(), _caller);
-      Assert::AreEqual("Color [AliceBlue]", colorAliceBlue.ToString(), _caller);
-    }
-    
-    void Transparent() {
-      Assert::AreEqual(0x00FFFFFF, Drawing::Color::Transparent().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Transparent().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Transparent().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Transparent().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Transparent().IsSystemColor(), _caller);
-      Assert::AreEqual("Transparent", Drawing::Color::Transparent().Name(), _caller);
-      Assert::AreEqual("Color [Transparent]", Drawing::Color::Transparent().ToString(), _caller);
-    }
-    
-    void AliceBlue() {
-      Assert::AreEqual(0xFFF0F8FFu, (unsigned)Drawing::Color::AliceBlue().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::AliceBlue().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::AliceBlue().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::AliceBlue().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::AliceBlue().IsSystemColor(), _caller);
-      Assert::AreEqual("AliceBlue", Drawing::Color::AliceBlue().Name(), _caller);
-      Assert::AreEqual("Color [AliceBlue]", Drawing::Color::AliceBlue().ToString(), _caller);
-    }
-    
-    void AntiqueWhite() {
-      Assert::AreEqual(0xFFFAEBD7u, (unsigned)Drawing::Color::AntiqueWhite().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::AntiqueWhite().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::AntiqueWhite().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::AntiqueWhite().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::AntiqueWhite().IsSystemColor(), _caller);
-      Assert::AreEqual("AntiqueWhite", Drawing::Color::AntiqueWhite().Name(), _caller);
-      Assert::AreEqual("Color [AntiqueWhite]", Drawing::Color::AntiqueWhite().ToString(), _caller);
-    }
-    
-    void Aqua() {
-      Assert::AreEqual(0xFF00FFFFu, (unsigned)Drawing::Color::Aqua().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Aqua().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Aqua().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Aqua().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Aqua().IsSystemColor(), _caller);
-      Assert::AreEqual("Aqua", Drawing::Color::Aqua().Name(), _caller);
-      Assert::AreEqual("Color [Aqua]", Drawing::Color::Aqua().ToString(), _caller);
-    }
-    
-    void Aquamarine() {
-      Assert::AreEqual(0xFF7FFFD4u, (unsigned)Drawing::Color::Aquamarine().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Aquamarine().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Aquamarine().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Aquamarine().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Aquamarine().IsSystemColor(), _caller);
-      Assert::AreEqual("Aquamarine", Drawing::Color::Aquamarine().Name(), _caller);
-      Assert::AreEqual("Color [Aquamarine]", Drawing::Color::Aquamarine().ToString(), _caller);
-    }
-    
-    void Azure() {
-      Assert::AreEqual(0xFFF0FFFFu, (unsigned)Drawing::Color::Azure().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Azure().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Azure().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Azure().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Azure().IsSystemColor(), _caller);
-      Assert::AreEqual("Azure", Drawing::Color::Azure().Name(), _caller);
-      Assert::AreEqual("Color [Azure]", Drawing::Color::Azure().ToString(), _caller);
-    }
-    
-    void Beige() {
-      Assert::AreEqual(0xFFF5F5DCu, (unsigned)Drawing::Color::Beige().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Beige().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Beige().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Beige().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Beige().IsSystemColor(), _caller);
-      Assert::AreEqual("Beige", Drawing::Color::Beige().Name(), _caller);
-      Assert::AreEqual("Color [Beige]", Drawing::Color::Beige().ToString(), _caller);
-    }
-    
-    void Bisque() {
-      Assert::AreEqual(0xFFFFE4C4u, (unsigned)Drawing::Color::Bisque().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Bisque().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Bisque().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Bisque().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Bisque().IsSystemColor(), _caller);
-      Assert::AreEqual("Bisque", Drawing::Color::Bisque().Name(), _caller);
-      Assert::AreEqual("Color [Bisque]", Drawing::Color::Bisque().ToString(), _caller);
-    }
-    
-    void Black() {
-      Assert::AreEqual(0xFF000000u, (unsigned)Drawing::Color::Black().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Black().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Black().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Black().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Black().IsSystemColor(), _caller);
-      Assert::AreEqual("Black", Drawing::Color::Black().Name(), _caller);
-      Assert::AreEqual("Color [Black]", Drawing::Color::Black().ToString(), _caller);
-    }
-    
-    void BlanchedAlmond() {
-      Assert::AreEqual(0xFFFFEBCDu, (unsigned)Drawing::Color::BlanchedAlmond().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::BlanchedAlmond().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::BlanchedAlmond().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::BlanchedAlmond().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::BlanchedAlmond().IsSystemColor(), _caller);
-      Assert::AreEqual("BlanchedAlmond", Drawing::Color::BlanchedAlmond().Name(), _caller);
-      Assert::AreEqual("Color [BlanchedAlmond]", Drawing::Color::BlanchedAlmond().ToString(), _caller);
-    }
-    
-    void Blue() {
-      Assert::AreEqual(0xFF0000FFu, (unsigned)Drawing::Color::Blue().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Blue().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Blue().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Blue().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Blue().IsSystemColor(), _caller);
-      Assert::AreEqual("Blue", Drawing::Color::Blue().Name(), _caller);
-      Assert::AreEqual("Color [Blue]", Drawing::Color::Blue().ToString(), _caller);
-    }
-    
-    void BlueViolet() {
-      Assert::AreEqual(0xFF8A2BE2u, (unsigned)Drawing::Color::BlueViolet().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::BlueViolet().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::BlueViolet().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::BlueViolet().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::BlueViolet().IsSystemColor(), _caller);
-      Assert::AreEqual("BlueViolet", Drawing::Color::BlueViolet().Name(), _caller);
-      Assert::AreEqual("Color [BlueViolet]", Drawing::Color::BlueViolet().ToString(), _caller);
-    }
-    
-    void Brown() {
-      Assert::AreEqual(0xFFA52A2Au, (unsigned)Drawing::Color::Brown().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Brown().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Brown().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Brown().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Brown().IsSystemColor(), _caller);
-      Assert::AreEqual("Brown", Drawing::Color::Brown().Name(), _caller);
-      Assert::AreEqual("Color [Brown]", Drawing::Color::Brown().ToString(), _caller);
-    }
-    
-    void BurlyWood() {
-      Assert::AreEqual(0xFFDEB887u, (unsigned)Drawing::Color::BurlyWood().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::BurlyWood().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::BurlyWood().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::BurlyWood().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::BurlyWood().IsSystemColor(), _caller);
-      Assert::AreEqual("BurlyWood", Drawing::Color::BurlyWood().Name(), _caller);
-      Assert::AreEqual("Color [BurlyWood]", Drawing::Color::BurlyWood().ToString(), _caller);
-    }
-    
-    void CadetBlue() {
-      Assert::AreEqual(0xFF5F9EA0u, (unsigned)Drawing::Color::CadetBlue().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::CadetBlue().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::CadetBlue().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::CadetBlue().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::CadetBlue().IsSystemColor(), _caller);
-      Assert::AreEqual("CadetBlue", Drawing::Color::CadetBlue().Name(), _caller);
-      Assert::AreEqual("Color [CadetBlue]", Drawing::Color::CadetBlue().ToString(), _caller);
-    }
-    
-    void Chartreuse() {
-      Assert::AreEqual(0xFF7FFF00u, (unsigned)Drawing::Color::Chartreuse().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Chartreuse().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Chartreuse().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Chartreuse().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Chartreuse().IsSystemColor(), _caller);
-      Assert::AreEqual("Chartreuse", Drawing::Color::Chartreuse().Name(), _caller);
-      Assert::AreEqual("Color [Chartreuse]", Drawing::Color::Chartreuse().ToString(), _caller);
-    }
-    
-    void Chocolate() {
-      Assert::AreEqual(0xFFD2691Eu, (unsigned)Drawing::Color::Chocolate().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Chocolate().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Chocolate().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Chocolate().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Chocolate().IsSystemColor(), _caller);
-      Assert::AreEqual("Chocolate", Drawing::Color::Chocolate().Name(), _caller);
-      Assert::AreEqual("Color [Chocolate]", Drawing::Color::Chocolate().ToString(), _caller);
-    }
-    
-    void Coral() {
-      Assert::AreEqual(0xFFFF7F50u, (unsigned)Drawing::Color::Coral().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Coral().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Coral().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Coral().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Coral().IsSystemColor(), _caller);
-      Assert::AreEqual("Coral", Drawing::Color::Coral().Name(), _caller);
-      Assert::AreEqual("Color [Coral]", Drawing::Color::Coral().ToString(), _caller);
-    }
-    
-    void CornflowerBlue() {
-      Assert::AreEqual(0xFF6495EDu, (unsigned)Drawing::Color::CornflowerBlue().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::CornflowerBlue().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::CornflowerBlue().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::CornflowerBlue().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::CornflowerBlue().IsSystemColor(), _caller);
-      Assert::AreEqual("CornflowerBlue", Drawing::Color::CornflowerBlue().Name(), _caller);
-      Assert::AreEqual("Color [CornflowerBlue]", Drawing::Color::CornflowerBlue().ToString(), _caller);
-    }
-    
-    void Cornsilk() {
-      Assert::AreEqual(0xFFFFF8DCu, (unsigned)Drawing::Color::Cornsilk().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Cornsilk().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Cornsilk().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Cornsilk().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Cornsilk().IsSystemColor(), _caller);
-      Assert::AreEqual("Cornsilk", Drawing::Color::Cornsilk().Name(), _caller);
-      Assert::AreEqual("Color [Cornsilk]", Drawing::Color::Cornsilk().ToString(), _caller);
-    }
-    
-    void Crimson() {
-      Assert::AreEqual(0xFFDC143Cu, (unsigned)Drawing::Color::Crimson().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Crimson().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Crimson().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Crimson().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Crimson().IsSystemColor(), _caller);
-      Assert::AreEqual("Crimson", Drawing::Color::Crimson().Name(), _caller);
-      Assert::AreEqual("Color [Crimson]", Drawing::Color::Crimson().ToString(), _caller);
-    }
-    
-    void Cyan() {
-      Assert::AreEqual(0xFF00FFFFu, (unsigned)Drawing::Color::Cyan().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Cyan().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Cyan().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Cyan().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Cyan().IsSystemColor(), _caller);
-      Assert::AreEqual("Cyan", Drawing::Color::Cyan().Name(), _caller);
-      Assert::AreEqual("Color [Cyan]", Drawing::Color::Cyan().ToString(), _caller);
-    }
-    
-    void DarkBlue() {
-      Assert::AreEqual(0xFF00008Bu, (unsigned)Drawing::Color::DarkBlue().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::DarkBlue().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::DarkBlue().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::DarkBlue().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::DarkBlue().IsSystemColor(), _caller);
-      Assert::AreEqual("DarkBlue", Drawing::Color::DarkBlue().Name(), _caller);
-      Assert::AreEqual("Color [DarkBlue]", Drawing::Color::DarkBlue().ToString(), _caller);
-    }
-    
-    void DarkCyan() {
-      Assert::AreEqual(0xFF008B8Bu, (unsigned)Drawing::Color::DarkCyan().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::DarkCyan().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::DarkCyan().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::DarkCyan().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::DarkCyan().IsSystemColor(), _caller);
-      Assert::AreEqual("DarkCyan", Drawing::Color::DarkCyan().Name(), _caller);
-      Assert::AreEqual("Color [DarkCyan]", Drawing::Color::DarkCyan().ToString(), _caller);
-    }
-    
-    void DarkGoldenrod() {
-      Assert::AreEqual(0xFFB8860Bu, (unsigned)Drawing::Color::DarkGoldenrod().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::DarkGoldenrod().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::DarkGoldenrod().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::DarkGoldenrod().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::DarkGoldenrod().IsSystemColor(), _caller);
-      Assert::AreEqual("DarkGoldenrod", Drawing::Color::DarkGoldenrod().Name(), _caller);
-      Assert::AreEqual("Color [DarkGoldenrod]", Drawing::Color::DarkGoldenrod().ToString(), _caller);
-    }
-    
-    void DarkGray() {
-      Assert::AreEqual(0xFFA9A9A9u, (unsigned)Drawing::Color::DarkGray().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::DarkGray().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::DarkGray().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::DarkGray().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::DarkGray().IsSystemColor(), _caller);
-      Assert::AreEqual("DarkGray", Drawing::Color::DarkGray().Name(), _caller);
-      Assert::AreEqual("Color [DarkGray]", Drawing::Color::DarkGray().ToString(), _caller);
-    }
-    
-    void DarkGreen() {
-      Assert::AreEqual(0xFF006400u, (unsigned)Drawing::Color::DarkGreen().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::DarkGreen().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::DarkGreen().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::DarkGreen().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::DarkGreen().IsSystemColor(), _caller);
-      Assert::AreEqual("DarkGreen", Drawing::Color::DarkGreen().Name(), _caller);
-      Assert::AreEqual("Color [DarkGreen]", Drawing::Color::DarkGreen().ToString(), _caller);
-    }
-    
-    void DarkKhaki() {
-      Assert::AreEqual(0xFFBDB76Bu, (unsigned)Drawing::Color::DarkKhaki().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::DarkKhaki().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::DarkKhaki().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::DarkKhaki().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::DarkKhaki().IsSystemColor(), _caller);
-      Assert::AreEqual("DarkKhaki", Drawing::Color::DarkKhaki().Name(), _caller);
-      Assert::AreEqual("Color [DarkKhaki]", Drawing::Color::DarkKhaki().ToString(), _caller);
-    }
-    
-    void DarkMagenta() {
-      Assert::AreEqual(0xFF8B008Bu, (unsigned)Drawing::Color::DarkMagenta().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::DarkMagenta().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::DarkMagenta().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::DarkMagenta().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::DarkMagenta().IsSystemColor(), _caller);
-      Assert::AreEqual("DarkMagenta", Drawing::Color::DarkMagenta().Name(), _caller);
-      Assert::AreEqual("Color [DarkMagenta]", Drawing::Color::DarkMagenta().ToString(), _caller);
-    }
-    
-    void DarkOliveGreen() {
-      Assert::AreEqual(0xFF556B2Fu, (unsigned)Drawing::Color::DarkOliveGreen().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::DarkOliveGreen().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::DarkOliveGreen().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::DarkOliveGreen().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::DarkOliveGreen().IsSystemColor(), _caller);
-      Assert::AreEqual("DarkOliveGreen", Drawing::Color::DarkOliveGreen().Name(), _caller);
-      Assert::AreEqual("Color [DarkOliveGreen]", Drawing::Color::DarkOliveGreen().ToString(), _caller);
-    }
-    
-    void DarkOrange() {
-      Assert::AreEqual(0xFFFF8C00u, (unsigned)Drawing::Color::DarkOrange().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::DarkOrange().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::DarkOrange().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::DarkOrange().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::DarkOrange().IsSystemColor(), _caller);
-      Assert::AreEqual("DarkOrange", Drawing::Color::DarkOrange().Name(), _caller);
-      Assert::AreEqual("Color [DarkOrange]", Drawing::Color::DarkOrange().ToString(), _caller);
-    }
-    
-    void DarkOrchid() {
-      Assert::AreEqual(0xFF9932CCu, (unsigned)Drawing::Color::DarkOrchid().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::DarkOrchid().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::DarkOrchid().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::DarkOrchid().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::DarkOrchid().IsSystemColor(), _caller);
-      Assert::AreEqual("DarkOrchid", Drawing::Color::DarkOrchid().Name(), _caller);
-      Assert::AreEqual("Color [DarkOrchid]", Drawing::Color::DarkOrchid().ToString(), _caller);
-    }
-    
-    void DarkRed() {
-      Assert::AreEqual(0xFF8B0000u, (unsigned)Drawing::Color::DarkRed().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::DarkRed().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::DarkRed().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::DarkRed().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::DarkRed().IsSystemColor(), _caller);
-      Assert::AreEqual("DarkRed", Drawing::Color::DarkRed().Name(), _caller);
-      Assert::AreEqual("Color [DarkRed]", Drawing::Color::DarkRed().ToString(), _caller);
-    }
-    
-    void DarkSalmon() {
-      Assert::AreEqual(0xFFE9967Au, (unsigned)Drawing::Color::DarkSalmon().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::DarkSalmon().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::DarkSalmon().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::DarkSalmon().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::DarkSalmon().IsSystemColor(), _caller);
-      Assert::AreEqual("DarkSalmon", Drawing::Color::DarkSalmon().Name(), _caller);
-      Assert::AreEqual("Color [DarkSalmon]", Drawing::Color::DarkSalmon().ToString(), _caller);
-    }
-    
-    void DarkSeaGreen() {
-      Assert::AreEqual(0xFF8FBC8Bu, (unsigned)Drawing::Color::DarkSeaGreen().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::DarkSeaGreen().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::DarkSeaGreen().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::DarkSeaGreen().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::DarkSeaGreen().IsSystemColor(), _caller);
-      Assert::AreEqual("DarkSeaGreen", Drawing::Color::DarkSeaGreen().Name(), _caller);
-      Assert::AreEqual("Color [DarkSeaGreen]", Drawing::Color::DarkSeaGreen().ToString(), _caller);
-    }
-    
-    void DarkSlateBlue() {
-      Assert::AreEqual(0xFF483D8Bu, (unsigned)Drawing::Color::DarkSlateBlue().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::DarkSlateBlue().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::DarkSlateBlue().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::DarkSlateBlue().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::DarkSlateBlue().IsSystemColor(), _caller);
-      Assert::AreEqual("DarkSlateBlue", Drawing::Color::DarkSlateBlue().Name(), _caller);
-      Assert::AreEqual("Color [DarkSlateBlue]", Drawing::Color::DarkSlateBlue().ToString(), _caller);
-    }
-    
-    void DarkSlateGray() {
-      Assert::AreEqual(0xFF2F4F4Fu, (unsigned)Drawing::Color::DarkSlateGray().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::DarkSlateGray().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::DarkSlateGray().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::DarkSlateGray().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::DarkSlateGray().IsSystemColor(), _caller);
-      Assert::AreEqual("DarkSlateGray", Drawing::Color::DarkSlateGray().Name(), _caller);
-      Assert::AreEqual("Color [DarkSlateGray]", Drawing::Color::DarkSlateGray().ToString(), _caller);
-    }
-    
-    void DarkTurquoise() {
-      Assert::AreEqual(0xFF00CED1u, (unsigned)Drawing::Color::DarkTurquoise().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::DarkTurquoise().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::DarkTurquoise().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::DarkTurquoise().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::DarkTurquoise().IsSystemColor(), _caller);
-      Assert::AreEqual("DarkTurquoise", Drawing::Color::DarkTurquoise().Name(), _caller);
-      Assert::AreEqual("Color [DarkTurquoise]", Drawing::Color::DarkTurquoise().ToString(), _caller);
-    }
-    
-    void DarkViolet() {
-      Assert::AreEqual(0xFF9400D3u, (unsigned)Drawing::Color::DarkViolet().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::DarkViolet().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::DarkViolet().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::DarkViolet().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::DarkViolet().IsSystemColor(), _caller);
-      Assert::AreEqual("DarkViolet", Drawing::Color::DarkViolet().Name(), _caller);
-      Assert::AreEqual("Color [DarkViolet]", Drawing::Color::DarkViolet().ToString(), _caller);
-    }
-    
-    void DeepPink() {
-      Assert::AreEqual(0xFFFF1493u, (unsigned)Drawing::Color::DeepPink().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::DeepPink().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::DeepPink().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::DeepPink().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::DeepPink().IsSystemColor(), _caller);
-      Assert::AreEqual("DeepPink", Drawing::Color::DeepPink().Name(), _caller);
-      Assert::AreEqual("Color [DeepPink]", Drawing::Color::DeepPink().ToString(), _caller);
-    }
-    
-    void DeepSkyBlue() {
-      Assert::AreEqual(0xFF00BFFFu, (unsigned)Drawing::Color::DeepSkyBlue().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::DeepSkyBlue().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::DeepSkyBlue().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::DeepSkyBlue().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::DeepSkyBlue().IsSystemColor(), _caller);
-      Assert::AreEqual("DeepSkyBlue", Drawing::Color::DeepSkyBlue().Name(), _caller);
-      Assert::AreEqual("Color [DeepSkyBlue]", Drawing::Color::DeepSkyBlue().ToString(), _caller);
-    }
-    
-    void DimGray() {
-      Assert::AreEqual(0xFF696969u, (unsigned)Drawing::Color::DimGray().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::DimGray().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::DimGray().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::DimGray().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::DimGray().IsSystemColor(), _caller);
-      Assert::AreEqual("DimGray", Drawing::Color::DimGray().Name(), _caller);
-      Assert::AreEqual("Color [DimGray]", Drawing::Color::DimGray().ToString(), _caller);
-    }
-    
-    void DodgerBlue() {
-      Assert::AreEqual(0xFF1E90FFu, (unsigned)Drawing::Color::DodgerBlue().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::DodgerBlue().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::DodgerBlue().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::DodgerBlue().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::DodgerBlue().IsSystemColor(), _caller);
-      Assert::AreEqual("DodgerBlue", Drawing::Color::DodgerBlue().Name(), _caller);
-      Assert::AreEqual("Color [DodgerBlue]", Drawing::Color::DodgerBlue().ToString(), _caller);
-    }
-    
-    void Firebrick() {
-      Assert::AreEqual(0xFFB22222u, (unsigned)Drawing::Color::Firebrick().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Firebrick().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Firebrick().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Firebrick().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Firebrick().IsSystemColor(), _caller);
-      Assert::AreEqual("Firebrick", Drawing::Color::Firebrick().Name(), _caller);
-      Assert::AreEqual("Color [Firebrick]", Drawing::Color::Firebrick().ToString(), _caller);
-    }
-    
-    void FloralWhite() {
-      Assert::AreEqual(0xFFFFFAF0u, (unsigned)Drawing::Color::FloralWhite().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::FloralWhite().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::FloralWhite().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::FloralWhite().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::FloralWhite().IsSystemColor(), _caller);
-      Assert::AreEqual("FloralWhite", Drawing::Color::FloralWhite().Name(), _caller);
-      Assert::AreEqual("Color [FloralWhite]", Drawing::Color::FloralWhite().ToString(), _caller);
-    }
-    
-    void ForestGreen() {
-      Assert::AreEqual(0xFF228B22u, (unsigned)Drawing::Color::ForestGreen().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::ForestGreen().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::ForestGreen().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::ForestGreen().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::ForestGreen().IsSystemColor(), _caller);
-      Assert::AreEqual("ForestGreen", Drawing::Color::ForestGreen().Name(), _caller);
-      Assert::AreEqual("Color [ForestGreen]", Drawing::Color::ForestGreen().ToString(), _caller);
-    }
-    
-    void Fuchsia() {
-      Assert::AreEqual(0xFFFF00FFu, (unsigned)Drawing::Color::Fuchsia().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Fuchsia().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Fuchsia().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Fuchsia().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Fuchsia().IsSystemColor(), _caller);
-      Assert::AreEqual("Fuchsia", Drawing::Color::Fuchsia().Name(), _caller);
-      Assert::AreEqual("Color [Fuchsia]", Drawing::Color::Fuchsia().ToString(), _caller);
-    }
-    
-    void Gainsboro() {
-      Assert::AreEqual(0xFFDCDCDCu, (unsigned)Drawing::Color::Gainsboro().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Gainsboro().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Gainsboro().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Gainsboro().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Gainsboro().IsSystemColor(), _caller);
-      Assert::AreEqual("Gainsboro", Drawing::Color::Gainsboro().Name(), _caller);
-      Assert::AreEqual("Color [Gainsboro]", Drawing::Color::Gainsboro().ToString(), _caller);
-    }
-    
-    void GhostWhite() {
-      Assert::AreEqual(0xFFF8F8FFu, (unsigned)Drawing::Color::GhostWhite().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::GhostWhite().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::GhostWhite().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::GhostWhite().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::GhostWhite().IsSystemColor(), _caller);
-      Assert::AreEqual("GhostWhite", Drawing::Color::GhostWhite().Name(), _caller);
-      Assert::AreEqual("Color [GhostWhite]", Drawing::Color::GhostWhite().ToString(), _caller);
-    }
-    
-    void Gold() {
-      Assert::AreEqual(0xFFFFD700u, (unsigned)Drawing::Color::Gold().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Gold().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Gold().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Gold().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Gold().IsSystemColor(), _caller);
-      Assert::AreEqual("Gold", Drawing::Color::Gold().Name(), _caller);
-      Assert::AreEqual("Color [Gold]", Drawing::Color::Gold().ToString(), _caller);
-    }
-    
-    void Goldenrod() {
-      Assert::AreEqual(0xFFDAA520u, (unsigned)Drawing::Color::Goldenrod().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Goldenrod().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Goldenrod().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Goldenrod().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Goldenrod().IsSystemColor(), _caller);
-      Assert::AreEqual("Goldenrod", Drawing::Color::Goldenrod().Name(), _caller);
-      Assert::AreEqual("Color [Goldenrod]", Drawing::Color::Goldenrod().ToString(), _caller);
-    }
-    
-    void Gray() {
-      Assert::AreEqual(0xFF808080u, (unsigned)Drawing::Color::Gray().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Gray().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Gray().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Gray().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Gray().IsSystemColor(), _caller);
-      Assert::AreEqual("Gray", Drawing::Color::Gray().Name(), _caller);
-      Assert::AreEqual("Color [Gray]", Drawing::Color::Gray().ToString(), _caller);
-    }
-    
-    void Green() {
-      Assert::AreEqual(0xFF008000u, (unsigned)Drawing::Color::Green().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Green().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Green().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Green().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Green().IsSystemColor(), _caller);
-      Assert::AreEqual("Green", Drawing::Color::Green().Name(), _caller);
-      Assert::AreEqual("Color [Green]", Drawing::Color::Green().ToString(), _caller);
-    }
-    
-    void GreenYellow() {
-      Assert::AreEqual(0xFFADFF2Fu, (unsigned)Drawing::Color::GreenYellow().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::GreenYellow().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::GreenYellow().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::GreenYellow().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::GreenYellow().IsSystemColor(), _caller);
-      Assert::AreEqual("GreenYellow", Drawing::Color::GreenYellow().Name(), _caller);
-      Assert::AreEqual("Color [GreenYellow]", Drawing::Color::GreenYellow().ToString(), _caller);
-    }
-    
-    void Honeydew() {
-      Assert::AreEqual(0xFFF0FFF0u, (unsigned)Drawing::Color::Honeydew().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Honeydew().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Honeydew().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Honeydew().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Honeydew().IsSystemColor(), _caller);
-      Assert::AreEqual("Honeydew", Drawing::Color::Honeydew().Name(), _caller);
-      Assert::AreEqual("Color [Honeydew]", Drawing::Color::Honeydew().ToString(), _caller);
-    }
-    
-    void HotPink() {
-      Assert::AreEqual(0xFFFF69B4u, (unsigned)Drawing::Color::HotPink().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::HotPink().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::HotPink().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::HotPink().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::HotPink().IsSystemColor(), _caller);
-      Assert::AreEqual("HotPink", Drawing::Color::HotPink().Name(), _caller);
-      Assert::AreEqual("Color [HotPink]", Drawing::Color::HotPink().ToString(), _caller);
-    }
-    
-    void IndianRed() {
-      Assert::AreEqual(0xFFCD5C5Cu, (unsigned)Drawing::Color::IndianRed().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::IndianRed().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::IndianRed().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::IndianRed().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::IndianRed().IsSystemColor(), _caller);
-      Assert::AreEqual("IndianRed", Drawing::Color::IndianRed().Name(), _caller);
-      Assert::AreEqual("Color [IndianRed]", Drawing::Color::IndianRed().ToString(), _caller);
-    }
-    
-    void Indigo() {
-      Assert::AreEqual(0xFF4B0082u, (unsigned)Drawing::Color::Indigo().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Indigo().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Indigo().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Indigo().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Indigo().IsSystemColor(), _caller);
-      Assert::AreEqual("Indigo", Drawing::Color::Indigo().Name(), _caller);
-      Assert::AreEqual("Color [Indigo]", Drawing::Color::Indigo().ToString(), _caller);
-    }
-    
-    void Ivory() {
-      Assert::AreEqual(0xFFFFFFF0u, (unsigned)Drawing::Color::Ivory().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Ivory().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Ivory().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Ivory().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Ivory().IsSystemColor(), _caller);
-      Assert::AreEqual("Ivory", Drawing::Color::Ivory().Name(), _caller);
-      Assert::AreEqual("Color [Ivory]", Drawing::Color::Ivory().ToString(), _caller);
-    }
-    
-    void Khaki() {
-      Assert::AreEqual(0xFFF0E68Cu, (unsigned)Drawing::Color::Khaki().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Khaki().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Khaki().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Khaki().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Khaki().IsSystemColor(), _caller);
-      Assert::AreEqual("Khaki", Drawing::Color::Khaki().Name(), _caller);
-      Assert::AreEqual("Color [Khaki]", Drawing::Color::Khaki().ToString(), _caller);
-    }
-    
-    void Lavender() {
-      Assert::AreEqual(0xFFE6E6FAu, (unsigned)Drawing::Color::Lavender().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Lavender().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Lavender().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Lavender().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Lavender().IsSystemColor(), _caller);
-      Assert::AreEqual("Lavender", Drawing::Color::Lavender().Name(), _caller);
-      Assert::AreEqual("Color [Lavender]", Drawing::Color::Lavender().ToString(), _caller);
-    }
-    
-    void LavenderBlush() {
-      Assert::AreEqual(0xFFFFF0F5u, (unsigned)Drawing::Color::LavenderBlush().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::LavenderBlush().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::LavenderBlush().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::LavenderBlush().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::LavenderBlush().IsSystemColor(), _caller);
-      Assert::AreEqual("LavenderBlush", Drawing::Color::LavenderBlush().Name(), _caller);
-      Assert::AreEqual("Color [LavenderBlush]", Drawing::Color::LavenderBlush().ToString(), _caller);
-    }
-    
-    void LawnGreen() {
-      Assert::AreEqual(0xFF7CFC00u, (unsigned)Drawing::Color::LawnGreen().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::LawnGreen().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::LawnGreen().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::LawnGreen().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::LawnGreen().IsSystemColor(), _caller);
-      Assert::AreEqual("LawnGreen", Drawing::Color::LawnGreen().Name(), _caller);
-      Assert::AreEqual("Color [LawnGreen]", Drawing::Color::LawnGreen().ToString(), _caller);
-    }
-    
-    void LemonChiffon() {
-      Assert::AreEqual(0xFFFFFACDu, (unsigned)Drawing::Color::LemonChiffon().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::LemonChiffon().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::LemonChiffon().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::LemonChiffon().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::LemonChiffon().IsSystemColor(), _caller);
-      Assert::AreEqual("LemonChiffon", Drawing::Color::LemonChiffon().Name(), _caller);
-      Assert::AreEqual("Color [LemonChiffon]", Drawing::Color::LemonChiffon().ToString(), _caller);
-    }
-    
-    void LightBlue() {
-      Assert::AreEqual(0xFFADD8E6u, (unsigned)Drawing::Color::LightBlue().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::LightBlue().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::LightBlue().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::LightBlue().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::LightBlue().IsSystemColor(), _caller);
-      Assert::AreEqual("LightBlue", Drawing::Color::LightBlue().Name(), _caller);
-      Assert::AreEqual("Color [LightBlue]", Drawing::Color::LightBlue().ToString(), _caller);
-    }
-    
-    void LightCoral() {
-      Assert::AreEqual(0xFFF08080u, (unsigned)Drawing::Color::LightCoral().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::LightCoral().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::LightCoral().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::LightCoral().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::LightCoral().IsSystemColor(), _caller);
-      Assert::AreEqual("LightCoral", Drawing::Color::LightCoral().Name(), _caller);
-      Assert::AreEqual("Color [LightCoral]", Drawing::Color::LightCoral().ToString(), _caller);
-    }
-    
-    void LightCyan() {
-      Assert::AreEqual(0xFFE0FFFFu, (unsigned)Drawing::Color::LightCyan().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::LightCyan().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::LightCyan().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::LightCyan().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::LightCyan().IsSystemColor(), _caller);
-      Assert::AreEqual("LightCyan", Drawing::Color::LightCyan().Name(), _caller);
-      Assert::AreEqual("Color [LightCyan]", Drawing::Color::LightCyan().ToString(), _caller);
-    }
-    
-    void LightGoldenrodYellow() {
-      Assert::AreEqual(0xFFFAFAD2u, (unsigned)Drawing::Color::LightGoldenrodYellow().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::LightGoldenrodYellow().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::LightGoldenrodYellow().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::LightGoldenrodYellow().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::LightGoldenrodYellow().IsSystemColor(), _caller);
-      Assert::AreEqual("LightGoldenrodYellow", Drawing::Color::LightGoldenrodYellow().Name(), _caller);
-      Assert::AreEqual("Color [LightGoldenrodYellow]", Drawing::Color::LightGoldenrodYellow().ToString(), _caller);
-    }
-    
-    void LightGray() {
-      Assert::AreEqual(0xFFD3D3D3u, (unsigned)Drawing::Color::LightGray().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::LightGray().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::LightGray().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::LightGray().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::LightGray().IsSystemColor(), _caller);
-      Assert::AreEqual("LightGray", Drawing::Color::LightGray().Name(), _caller);
-      Assert::AreEqual("Color [LightGray]", Drawing::Color::LightGray().ToString(), _caller);
-    }
-    
-    void LightGreen() {
-      Assert::AreEqual(0xFF90EE90u, (unsigned)Drawing::Color::LightGreen().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::LightGreen().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::LightGreen().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::LightGreen().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::LightGreen().IsSystemColor(), _caller);
-      Assert::AreEqual("LightGreen", Drawing::Color::LightGreen().Name(), _caller);
-      Assert::AreEqual("Color [LightGreen]", Drawing::Color::LightGreen().ToString(), _caller);
-    }
-    
-    void LightPink() {
-      Assert::AreEqual(0xFFFFB6C1u, (unsigned)Drawing::Color::LightPink().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::LightPink().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::LightPink().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::LightPink().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::LightPink().IsSystemColor(), _caller);
-      Assert::AreEqual("LightPink", Drawing::Color::LightPink().Name(), _caller);
-      Assert::AreEqual("Color [LightPink]", Drawing::Color::LightPink().ToString(), _caller);
-    }
-    
-    void LightSalmon() {
-      Assert::AreEqual(0xFFFFA07Au, (unsigned)Drawing::Color::LightSalmon().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::LightSalmon().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::LightSalmon().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::LightSalmon().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::LightSalmon().IsSystemColor(), _caller);
-      Assert::AreEqual("LightSalmon", Drawing::Color::LightSalmon().Name(), _caller);
-      Assert::AreEqual("Color [LightSalmon]", Drawing::Color::LightSalmon().ToString(), _caller);
-    }
-    
-    void LightSeaGreen() {
-      Assert::AreEqual(0xFF20B2AAu, (unsigned)Drawing::Color::LightSeaGreen().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::LightSeaGreen().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::LightSeaGreen().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::LightSeaGreen().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::LightSeaGreen().IsSystemColor(), _caller);
-      Assert::AreEqual("LightSeaGreen", Drawing::Color::LightSeaGreen().Name(), _caller);
-      Assert::AreEqual("Color [LightSeaGreen]", Drawing::Color::LightSeaGreen().ToString(), _caller);
-    }
-    
-    void LightSkyBlue() {
-      Assert::AreEqual(0xFF87CEFAu, (unsigned)Drawing::Color::LightSkyBlue().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::LightSkyBlue().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::LightSkyBlue().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::LightSkyBlue().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::LightSkyBlue().IsSystemColor(), _caller);
-      Assert::AreEqual("LightSkyBlue", Drawing::Color::LightSkyBlue().Name(), _caller);
-      Assert::AreEqual("Color [LightSkyBlue]", Drawing::Color::LightSkyBlue().ToString(), _caller);
-    }
-    
-    void LightSlateGray() {
-      Assert::AreEqual(0xFF778899u, (unsigned)Drawing::Color::LightSlateGray().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::LightSlateGray().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::LightSlateGray().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::LightSlateGray().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::LightSlateGray().IsSystemColor(), _caller);
-      Assert::AreEqual("LightSlateGray", Drawing::Color::LightSlateGray().Name(), _caller);
-      Assert::AreEqual("Color [LightSlateGray]", Drawing::Color::LightSlateGray().ToString(), _caller);
-    }
-    
-    void LightSteelBlue() {
-      Assert::AreEqual(0xFFB0C4DEu, (unsigned)Drawing::Color::LightSteelBlue().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::LightSteelBlue().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::LightSteelBlue().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::LightSteelBlue().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::LightSteelBlue().IsSystemColor(), _caller);
-      Assert::AreEqual("LightSteelBlue", Drawing::Color::LightSteelBlue().Name(), _caller);
-      Assert::AreEqual("Color [LightSteelBlue]", Drawing::Color::LightSteelBlue().ToString(), _caller);
-    }
-    
-    void LightYellow() {
-      Assert::AreEqual(0xFFFFFFE0u, (unsigned)Drawing::Color::LightYellow().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::LightYellow().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::LightYellow().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::LightYellow().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::LightYellow().IsSystemColor(), _caller);
-      Assert::AreEqual("LightYellow", Drawing::Color::LightYellow().Name(), _caller);
-      Assert::AreEqual("Color [LightYellow]", Drawing::Color::LightYellow().ToString(), _caller);
-    }
-    
-    void Lime() {
-      Assert::AreEqual(0xFF00FF00u, (unsigned)Drawing::Color::Lime().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Lime().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Lime().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Lime().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Lime().IsSystemColor(), _caller);
-      Assert::AreEqual("Lime", Drawing::Color::Lime().Name(), _caller);
-      Assert::AreEqual("Color [Lime]", Drawing::Color::Lime().ToString(), _caller);
-    }
-    
-    void LimeGreen() {
-      Assert::AreEqual(0xFF32CD32u, (unsigned)Drawing::Color::LimeGreen().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::LimeGreen().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::LimeGreen().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::LimeGreen().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::LimeGreen().IsSystemColor(), _caller);
-      Assert::AreEqual("LimeGreen", Drawing::Color::LimeGreen().Name(), _caller);
-      Assert::AreEqual("Color [LimeGreen]", Drawing::Color::LimeGreen().ToString(), _caller);
-    }
-    
-    void Linen() {
-      Assert::AreEqual(0xFFFAF0E6u, (unsigned)Drawing::Color::Linen().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Linen().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Linen().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Linen().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Linen().IsSystemColor(), _caller);
-      Assert::AreEqual("Linen", Drawing::Color::Linen().Name(), _caller);
-      Assert::AreEqual("Color [Linen]", Drawing::Color::Linen().ToString(), _caller);
-    }
-    
-    void Magenta() {
-      Assert::AreEqual(0xFFFF00FFu, (unsigned)Drawing::Color::Magenta().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Magenta().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Magenta().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Magenta().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Magenta().IsSystemColor(), _caller);
-      Assert::AreEqual("Magenta", Drawing::Color::Magenta().Name(), _caller);
-      Assert::AreEqual("Color [Magenta]", Drawing::Color::Magenta().ToString(), _caller);
-    }
-    
-    void Maroon() {
-      Assert::AreEqual(0xFF800000u, (unsigned)Drawing::Color::Maroon().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Maroon().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Maroon().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Maroon().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Maroon().IsSystemColor(), _caller);
-      Assert::AreEqual("Maroon", Drawing::Color::Maroon().Name(), _caller);
-      Assert::AreEqual("Color [Maroon]", Drawing::Color::Maroon().ToString(), _caller);
-    }
-    
-    void MediumAquamarine() {
-      Assert::AreEqual(0xFF66CDAAu, (unsigned)Drawing::Color::MediumAquamarine().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::MediumAquamarine().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::MediumAquamarine().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::MediumAquamarine().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::MediumAquamarine().IsSystemColor(), _caller);
-      Assert::AreEqual("MediumAquamarine", Drawing::Color::MediumAquamarine().Name(), _caller);
-      Assert::AreEqual("Color [MediumAquamarine]", Drawing::Color::MediumAquamarine().ToString(), _caller);
-    }
-    
-    void MediumBlue() {
-      Assert::AreEqual(0xFF0000CDu, (unsigned)Drawing::Color::MediumBlue().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::MediumBlue().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::MediumBlue().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::MediumBlue().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::MediumBlue().IsSystemColor(), _caller);
-      Assert::AreEqual("MediumBlue", Drawing::Color::MediumBlue().Name(), _caller);
-      Assert::AreEqual("Color [MediumBlue]", Drawing::Color::MediumBlue().ToString(), _caller);
-    }
-    
-    void MediumOrchid() {
-      Assert::AreEqual(0xFFBA55D3u, (unsigned)Drawing::Color::MediumOrchid().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::MediumOrchid().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::MediumOrchid().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::MediumOrchid().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::MediumOrchid().IsSystemColor(), _caller);
-      Assert::AreEqual("MediumOrchid", Drawing::Color::MediumOrchid().Name(), _caller);
-      Assert::AreEqual("Color [MediumOrchid]", Drawing::Color::MediumOrchid().ToString(), _caller);
-    }
-    
-    void MediumPurple() {
-      Assert::AreEqual(0xFF9370DBu, (unsigned)Drawing::Color::MediumPurple().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::MediumPurple().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::MediumPurple().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::MediumPurple().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::MediumPurple().IsSystemColor(), _caller);
-      Assert::AreEqual("MediumPurple", Drawing::Color::MediumPurple().Name(), _caller);
-      Assert::AreEqual("Color [MediumPurple]", Drawing::Color::MediumPurple().ToString(), _caller);
-    }
-    
-    void MediumSeaGreen() {
-      Assert::AreEqual(0xFF3CB371u, (unsigned)Drawing::Color::MediumSeaGreen().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::MediumSeaGreen().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::MediumSeaGreen().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::MediumSeaGreen().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::MediumSeaGreen().IsSystemColor(), _caller);
-      Assert::AreEqual("MediumSeaGreen", Drawing::Color::MediumSeaGreen().Name(), _caller);
-      Assert::AreEqual("Color [MediumSeaGreen]", Drawing::Color::MediumSeaGreen().ToString(), _caller);
-    }
-    
-    void MediumSlateBlue() {
-      Assert::AreEqual(0xFF7B68EEu, (unsigned)Drawing::Color::MediumSlateBlue().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::MediumSlateBlue().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::MediumSlateBlue().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::MediumSlateBlue().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::MediumSlateBlue().IsSystemColor(), _caller);
-      Assert::AreEqual("MediumSlateBlue", Drawing::Color::MediumSlateBlue().Name(), _caller);
-      Assert::AreEqual("Color [MediumSlateBlue]", Drawing::Color::MediumSlateBlue().ToString(), _caller);
-    }
-    
-    void MediumSpringGreen() {
-      Assert::AreEqual(0xFF00FA9Au, (unsigned)Drawing::Color::MediumSpringGreen().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::MediumSpringGreen().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::MediumSpringGreen().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::MediumSpringGreen().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::MediumSpringGreen().IsSystemColor(), _caller);
-      Assert::AreEqual("MediumSpringGreen", Drawing::Color::MediumSpringGreen().Name(), _caller);
-      Assert::AreEqual("Color [MediumSpringGreen]", Drawing::Color::MediumSpringGreen().ToString(), _caller);
-    }
-    
-    void MediumTurquoise() {
-      Assert::AreEqual(0xFF48D1CCu, (unsigned)Drawing::Color::MediumTurquoise().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::MediumTurquoise().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::MediumTurquoise().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::MediumTurquoise().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::MediumTurquoise().IsSystemColor(), _caller);
-      Assert::AreEqual("MediumTurquoise", Drawing::Color::MediumTurquoise().Name(), _caller);
-      Assert::AreEqual("Color [MediumTurquoise]", Drawing::Color::MediumTurquoise().ToString(), _caller);
-    }
-    
-    void MediumVioletRed() {
-      Assert::AreEqual(0xFFC71585u, (unsigned)Drawing::Color::MediumVioletRed().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::MediumVioletRed().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::MediumVioletRed().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::MediumVioletRed().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::MediumVioletRed().IsSystemColor(), _caller);
-      Assert::AreEqual("MediumVioletRed", Drawing::Color::MediumVioletRed().Name(), _caller);
-      Assert::AreEqual("Color [MediumVioletRed]", Drawing::Color::MediumVioletRed().ToString(), _caller);
-    }
-    
-    void MidnightBlue() {
-      Assert::AreEqual(0xFF191970u, (unsigned)Drawing::Color::MidnightBlue().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::MidnightBlue().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::MidnightBlue().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::MidnightBlue().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::MidnightBlue().IsSystemColor(), _caller);
-      Assert::AreEqual("MidnightBlue", Drawing::Color::MidnightBlue().Name(), _caller);
-      Assert::AreEqual("Color [MidnightBlue]", Drawing::Color::MidnightBlue().ToString(), _caller);
-    }
-    
-    void MintCream() {
-      Assert::AreEqual(0xFFF5FFFAu, (unsigned)Drawing::Color::MintCream().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::MintCream().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::MintCream().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::MintCream().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::MintCream().IsSystemColor(), _caller);
-      Assert::AreEqual("MintCream", Drawing::Color::MintCream().Name(), _caller);
-      Assert::AreEqual("Color [MintCream]", Drawing::Color::MintCream().ToString(), _caller);
-    }
-    
-    void MistyRose() {
-      Assert::AreEqual(0xFFFFE4E1u, (unsigned)Drawing::Color::MistyRose().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::MistyRose().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::MistyRose().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::MistyRose().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::MistyRose().IsSystemColor(), _caller);
-      Assert::AreEqual("MistyRose", Drawing::Color::MistyRose().Name(), _caller);
-      Assert::AreEqual("Color [MistyRose]", Drawing::Color::MistyRose().ToString(), _caller);
-    }
-    
-    void Moccasin() {
-      Assert::AreEqual(0xFFFFE4B5u, (unsigned)Drawing::Color::Moccasin().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Moccasin().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Moccasin().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Moccasin().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Moccasin().IsSystemColor(), _caller);
-      Assert::AreEqual("Moccasin", Drawing::Color::Moccasin().Name(), _caller);
-      Assert::AreEqual("Color [Moccasin]", Drawing::Color::Moccasin().ToString(), _caller);
-    }
-    
-    void NavajoWhite() {
-      Assert::AreEqual(0xFFFFDEADu, (unsigned)Drawing::Color::NavajoWhite().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::NavajoWhite().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::NavajoWhite().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::NavajoWhite().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::NavajoWhite().IsSystemColor(), _caller);
-      Assert::AreEqual("NavajoWhite", Drawing::Color::NavajoWhite().Name(), _caller);
-      Assert::AreEqual("Color [NavajoWhite]", Drawing::Color::NavajoWhite().ToString(), _caller);
-    }
-    
-    void Navy() {
-      Assert::AreEqual(0xFF000080u, (unsigned)Drawing::Color::Navy().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Navy().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Navy().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Navy().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Navy().IsSystemColor(), _caller);
-      Assert::AreEqual("Navy", Drawing::Color::Navy().Name(), _caller);
-      Assert::AreEqual("Color [Navy]", Drawing::Color::Navy().ToString(), _caller);
-    }
-    
-    void OldLace() {
-      Assert::AreEqual(0xFFFDF5E6u, (unsigned)Drawing::Color::OldLace().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::OldLace().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::OldLace().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::OldLace().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::OldLace().IsSystemColor(), _caller);
-      Assert::AreEqual("OldLace", Drawing::Color::OldLace().Name(), _caller);
-      Assert::AreEqual("Color [OldLace]", Drawing::Color::OldLace().ToString(), _caller);
-    }
-    
-    void Olive() {
-      Assert::AreEqual(0xFF808000u, (unsigned)Drawing::Color::Olive().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Olive().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Olive().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Olive().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Olive().IsSystemColor(), _caller);
-      Assert::AreEqual("Olive", Drawing::Color::Olive().Name(), _caller);
-      Assert::AreEqual("Color [Olive]", Drawing::Color::Olive().ToString(), _caller);
-    }
-    
-    void OliveDrab() {
-      Assert::AreEqual(0xFF6B8E23u, (unsigned)Drawing::Color::OliveDrab().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::OliveDrab().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::OliveDrab().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::OliveDrab().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::OliveDrab().IsSystemColor(), _caller);
-      Assert::AreEqual("OliveDrab", Drawing::Color::OliveDrab().Name(), _caller);
-      Assert::AreEqual("Color [OliveDrab]", Drawing::Color::OliveDrab().ToString(), _caller);
-    }
-    
-    void Orange() {
-      Assert::AreEqual(0xFFFFA500u, (unsigned)Drawing::Color::Orange().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Orange().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Orange().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Orange().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Orange().IsSystemColor(), _caller);
-      Assert::AreEqual("Orange", Drawing::Color::Orange().Name(), _caller);
-      Assert::AreEqual("Color [Orange]", Drawing::Color::Orange().ToString(), _caller);
-    }
-    
-    void OrangeRed() {
-      Assert::AreEqual(0xFFFF4500u, (unsigned)Drawing::Color::OrangeRed().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::OrangeRed().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::OrangeRed().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::OrangeRed().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::OrangeRed().IsSystemColor(), _caller);
-      Assert::AreEqual("OrangeRed", Drawing::Color::OrangeRed().Name(), _caller);
-      Assert::AreEqual("Color [OrangeRed]", Drawing::Color::OrangeRed().ToString(), _caller);
-    }
-    
-    void Orchid() {
-      Assert::AreEqual(0xFFDA70D6u, (unsigned)Drawing::Color::Orchid().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Orchid().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Orchid().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Orchid().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Orchid().IsSystemColor(), _caller);
-      Assert::AreEqual("Orchid", Drawing::Color::Orchid().Name(), _caller);
-      Assert::AreEqual("Color [Orchid]", Drawing::Color::Orchid().ToString(), _caller);
-    }
-    
-    void PaleGoldenrod() {
-      Assert::AreEqual(0xFFEEE8AAu, (unsigned)Drawing::Color::PaleGoldenrod().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::PaleGoldenrod().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::PaleGoldenrod().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::PaleGoldenrod().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::PaleGoldenrod().IsSystemColor(), _caller);
-      Assert::AreEqual("PaleGoldenrod", Drawing::Color::PaleGoldenrod().Name(), _caller);
-      Assert::AreEqual("Color [PaleGoldenrod]", Drawing::Color::PaleGoldenrod().ToString(), _caller);
-    }
-    
-    void PaleGreen() {
-      Assert::AreEqual(0xFF98FB98u, (unsigned)Drawing::Color::PaleGreen().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::PaleGreen().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::PaleGreen().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::PaleGreen().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::PaleGreen().IsSystemColor(), _caller);
-      Assert::AreEqual("PaleGreen", Drawing::Color::PaleGreen().Name(), _caller);
-      Assert::AreEqual("Color [PaleGreen]", Drawing::Color::PaleGreen().ToString(), _caller);
-    }
-    
-    void PaleTurquoise() {
-      Assert::AreEqual(0xFFAFEEEEu, (unsigned)Drawing::Color::PaleTurquoise().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::PaleTurquoise().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::PaleTurquoise().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::PaleTurquoise().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::PaleTurquoise().IsSystemColor(), _caller);
-      Assert::AreEqual("PaleTurquoise", Drawing::Color::PaleTurquoise().Name(), _caller);
-      Assert::AreEqual("Color [PaleTurquoise]", Drawing::Color::PaleTurquoise().ToString(), _caller);
-    }
-    
-    void PaleVioletRed() {
-      Assert::AreEqual(0xFFDB7093u, (unsigned)Drawing::Color::PaleVioletRed().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::PaleVioletRed().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::PaleVioletRed().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::PaleVioletRed().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::PaleVioletRed().IsSystemColor(), _caller);
-      Assert::AreEqual("PaleVioletRed", Drawing::Color::PaleVioletRed().Name(), _caller);
-      Assert::AreEqual("Color [PaleVioletRed]", Drawing::Color::PaleVioletRed().ToString(), _caller);
-    }
-    
-    void PapayaWhip() {
-      Assert::AreEqual(0xFFFFEFD5u, (unsigned)Drawing::Color::PapayaWhip().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::PapayaWhip().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::PapayaWhip().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::PapayaWhip().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::PapayaWhip().IsSystemColor(), _caller);
-      Assert::AreEqual("PapayaWhip", Drawing::Color::PapayaWhip().Name(), _caller);
-      Assert::AreEqual("Color [PapayaWhip]", Drawing::Color::PapayaWhip().ToString(), _caller);
-    }
-    
-    void PeachPuff() {
-      Assert::AreEqual(0xFFFFDAB9u, (unsigned)Drawing::Color::PeachPuff().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::PeachPuff().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::PeachPuff().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::PeachPuff().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::PeachPuff().IsSystemColor(), _caller);
-      Assert::AreEqual("PeachPuff", Drawing::Color::PeachPuff().Name(), _caller);
-      Assert::AreEqual("Color [PeachPuff]", Drawing::Color::PeachPuff().ToString(), _caller);
-    }
-    
-    void Peru() {
-      Assert::AreEqual(0xFFCD853Fu, (unsigned)Drawing::Color::Peru().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Peru().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Peru().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Peru().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Peru().IsSystemColor(), _caller);
-      Assert::AreEqual("Peru", Drawing::Color::Peru().Name(), _caller);
-      Assert::AreEqual("Color [Peru]", Drawing::Color::Peru().ToString(), _caller);
-    }
-    
-    void Pink() {
-      Assert::AreEqual(0xFFFFC0CBu, (unsigned)Drawing::Color::Pink().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Pink().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Pink().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Pink().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Pink().IsSystemColor(), _caller);
-      Assert::AreEqual("Pink", Drawing::Color::Pink().Name(), _caller);
-      Assert::AreEqual("Color [Pink]", Drawing::Color::Pink().ToString(), _caller);
-    }
-    
-    void Plum() {
-      Assert::AreEqual(0xFFDDA0DDu, (unsigned)Drawing::Color::Plum().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Plum().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Plum().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Plum().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Plum().IsSystemColor(), _caller);
-      Assert::AreEqual("Plum", Drawing::Color::Plum().Name(), _caller);
-      Assert::AreEqual("Color [Plum]", Drawing::Color::Plum().ToString(), _caller);
-    }
-    
-    void PowderBlue() {
-      Assert::AreEqual(0xFFB0E0E6u, (unsigned)Drawing::Color::PowderBlue().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::PowderBlue().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::PowderBlue().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::PowderBlue().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::PowderBlue().IsSystemColor(), _caller);
-      Assert::AreEqual("PowderBlue", Drawing::Color::PowderBlue().Name(), _caller);
-      Assert::AreEqual("Color [PowderBlue]", Drawing::Color::PowderBlue().ToString(), _caller);
-    }
-    
-    void Purple() {
-      Assert::AreEqual(0xFF800080u, (unsigned)Drawing::Color::Purple().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Purple().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Purple().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Purple().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Purple().IsSystemColor(), _caller);
-      Assert::AreEqual("Purple", Drawing::Color::Purple().Name(), _caller);
-      Assert::AreEqual("Color [Purple]", Drawing::Color::Purple().ToString(), _caller);
-    }
-    
-    void Red() {
-      Assert::AreEqual(0xFFFF0000u, (unsigned)Drawing::Color::Red().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Red().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Red().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Red().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Red().IsSystemColor(), _caller);
-      Assert::AreEqual("Red", Drawing::Color::Red().Name(), _caller);
-      Assert::AreEqual("Color [Red]", Drawing::Color::Red().ToString(), _caller);
-    }
-    
-    void RosyBrown() {
-      Assert::AreEqual(0xFFBC8F8Fu, (unsigned)Drawing::Color::RosyBrown().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::RosyBrown().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::RosyBrown().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::RosyBrown().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::RosyBrown().IsSystemColor(), _caller);
-      Assert::AreEqual("RosyBrown", Drawing::Color::RosyBrown().Name(), _caller);
-      Assert::AreEqual("Color [RosyBrown]", Drawing::Color::RosyBrown().ToString(), _caller);
-    }
-    
-    void RoyalBlue() {
-      Assert::AreEqual(0xFF4169E1u, (unsigned)Drawing::Color::RoyalBlue().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::RoyalBlue().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::RoyalBlue().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::RoyalBlue().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::RoyalBlue().IsSystemColor(), _caller);
-      Assert::AreEqual("RoyalBlue", Drawing::Color::RoyalBlue().Name(), _caller);
-      Assert::AreEqual("Color [RoyalBlue]", Drawing::Color::RoyalBlue().ToString(), _caller);
-    }
-    
-    void SaddleBrown() {
-      Assert::AreEqual(0xFF8B4513u, (unsigned)Drawing::Color::SaddleBrown().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::SaddleBrown().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::SaddleBrown().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::SaddleBrown().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::SaddleBrown().IsSystemColor(), _caller);
-      Assert::AreEqual("SaddleBrown", Drawing::Color::SaddleBrown().Name(), _caller);
-      Assert::AreEqual("Color [SaddleBrown]", Drawing::Color::SaddleBrown().ToString(), _caller);
-    }
-    
-    void Salmon() {
-      Assert::AreEqual(0xFFFA8072u, (unsigned)Drawing::Color::Salmon().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Salmon().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Salmon().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Salmon().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Salmon().IsSystemColor(), _caller);
-      Assert::AreEqual("Salmon", Drawing::Color::Salmon().Name(), _caller);
-      Assert::AreEqual("Color [Salmon]", Drawing::Color::Salmon().ToString(), _caller);
-    }
-    
-    void SandyBrown() {
-      Assert::AreEqual(0xFFF4A460u, (unsigned)Drawing::Color::SandyBrown().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::SandyBrown().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::SandyBrown().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::SandyBrown().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::SandyBrown().IsSystemColor(), _caller);
-      Assert::AreEqual("SandyBrown", Drawing::Color::SandyBrown().Name(), _caller);
-      Assert::AreEqual("Color [SandyBrown]", Drawing::Color::SandyBrown().ToString(), _caller);
-    }
-    
-    void SeaGreen() {
-      Assert::AreEqual(0xFF2E8B57u, (unsigned)Drawing::Color::SeaGreen().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::SeaGreen().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::SeaGreen().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::SeaGreen().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::SeaGreen().IsSystemColor(), _caller);
-      Assert::AreEqual("SeaGreen", Drawing::Color::SeaGreen().Name(), _caller);
-      Assert::AreEqual("Color [SeaGreen]", Drawing::Color::SeaGreen().ToString(), _caller);
-    }
-    
-    void SeaShell() {
-      Assert::AreEqual(0xFFFFF5EEu, (unsigned)Drawing::Color::SeaShell().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::SeaShell().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::SeaShell().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::SeaShell().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::SeaShell().IsSystemColor(), _caller);
-      Assert::AreEqual("SeaShell", Drawing::Color::SeaShell().Name(), _caller);
-      Assert::AreEqual("Color [SeaShell]", Drawing::Color::SeaShell().ToString(), _caller);
-    }
-    
-    void Sienna() {
-      Assert::AreEqual(0xFFA0522Du, (unsigned)Drawing::Color::Sienna().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Sienna().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Sienna().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Sienna().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Sienna().IsSystemColor(), _caller);
-      Assert::AreEqual("Sienna", Drawing::Color::Sienna().Name(), _caller);
-      Assert::AreEqual("Color [Sienna]", Drawing::Color::Sienna().ToString(), _caller);
-    }
-    
-    void Silver() {
-      Assert::AreEqual(0xFFC0C0C0u, (unsigned)Drawing::Color::Silver().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Silver().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Silver().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Silver().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Silver().IsSystemColor(), _caller);
-      Assert::AreEqual("Silver", Drawing::Color::Silver().Name(), _caller);
-      Assert::AreEqual("Color [Silver]", Drawing::Color::Silver().ToString(), _caller);
-    }
-    
-    void SkyBlue() {
-      Assert::AreEqual(0xFF87CEEBu, (unsigned)Drawing::Color::SkyBlue().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::SkyBlue().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::SkyBlue().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::SkyBlue().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::SkyBlue().IsSystemColor(), _caller);
-      Assert::AreEqual("SkyBlue", Drawing::Color::SkyBlue().Name(), _caller);
-      Assert::AreEqual("Color [SkyBlue]", Drawing::Color::SkyBlue().ToString(), _caller);
-    }
-    
-    void SlateBlue() {
-      Assert::AreEqual(0xFF6A5ACDu, (unsigned)Drawing::Color::SlateBlue().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::SlateBlue().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::SlateBlue().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::SlateBlue().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::SlateBlue().IsSystemColor(), _caller);
-      Assert::AreEqual("SlateBlue", Drawing::Color::SlateBlue().Name(), _caller);
-      Assert::AreEqual("Color [SlateBlue]", Drawing::Color::SlateBlue().ToString(), _caller);
-    }
-    
-    void SlateGray() {
-      Assert::AreEqual(0xFF708090u, (unsigned)Drawing::Color::SlateGray().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::SlateGray().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::SlateGray().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::SlateGray().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::SlateGray().IsSystemColor(), _caller);
-      Assert::AreEqual("SlateGray", Drawing::Color::SlateGray().Name(), _caller);
-      Assert::AreEqual("Color [SlateGray]", Drawing::Color::SlateGray().ToString(), _caller);
-    }
-    
-    void Snow() {
-      Assert::AreEqual(0xFFFFFAFAu, (unsigned)Drawing::Color::Snow().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Snow().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Snow().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Snow().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Snow().IsSystemColor(), _caller);
-      Assert::AreEqual("Snow", Drawing::Color::Snow().Name(), _caller);
-      Assert::AreEqual("Color [Snow]", Drawing::Color::Snow().ToString(), _caller);
-    }
-    
-    void SpringGreen() {
-      Assert::AreEqual(0xFF00FF7Fu, (unsigned)Drawing::Color::SpringGreen().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::SpringGreen().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::SpringGreen().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::SpringGreen().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::SpringGreen().IsSystemColor(), _caller);
-      Assert::AreEqual("SpringGreen", Drawing::Color::SpringGreen().Name(), _caller);
-      Assert::AreEqual("Color [SpringGreen]", Drawing::Color::SpringGreen().ToString(), _caller);
-    }
-    
-    void SteelBlue() {
-      Assert::AreEqual(0xFF4682B4u, (unsigned)Drawing::Color::SteelBlue().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::SteelBlue().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::SteelBlue().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::SteelBlue().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::SteelBlue().IsSystemColor(), _caller);
-      Assert::AreEqual("SteelBlue", Drawing::Color::SteelBlue().Name(), _caller);
-      Assert::AreEqual("Color [SteelBlue]", Drawing::Color::SteelBlue().ToString(), _caller);
-    }
-    
-    void Tan() {
-      Assert::AreEqual(0xFFD2B48Cu, (unsigned)Drawing::Color::Tan().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Tan().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Tan().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Tan().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Tan().IsSystemColor(), _caller);
-      Assert::AreEqual("Tan", Drawing::Color::Tan().Name(), _caller);
-      Assert::AreEqual("Color [Tan]", Drawing::Color::Tan().ToString(), _caller);
-    }
-    
-    void Teal() {
-      Assert::AreEqual(0xFF008080u, (unsigned)Drawing::Color::Teal().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Teal().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Teal().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Teal().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Teal().IsSystemColor(), _caller);
-      Assert::AreEqual("Teal", Drawing::Color::Teal().Name(), _caller);
-      Assert::AreEqual("Color [Teal]", Drawing::Color::Teal().ToString(), _caller);
-    }
-    
-    void Thistle() {
-      Assert::AreEqual(0xFFD8BFD8u, (unsigned)Drawing::Color::Thistle().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Thistle().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Thistle().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Thistle().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Thistle().IsSystemColor(), _caller);
-      Assert::AreEqual("Thistle", Drawing::Color::Thistle().Name(), _caller);
-      Assert::AreEqual("Color [Thistle]", Drawing::Color::Thistle().ToString(), _caller);
-    }
-    
-    void Tomato() {
-      Assert::AreEqual(0xFFFF6347u, (unsigned)Drawing::Color::Tomato().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Tomato().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Tomato().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Tomato().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Tomato().IsSystemColor(), _caller);
-      Assert::AreEqual("Tomato", Drawing::Color::Tomato().Name(), _caller);
-      Assert::AreEqual("Color [Tomato]", Drawing::Color::Tomato().ToString(), _caller);
-    }
-    
-    void Turquoise() {
-      Assert::AreEqual(0xFF40E0D0u, (unsigned)Drawing::Color::Turquoise().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Turquoise().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Turquoise().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Turquoise().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Turquoise().IsSystemColor(), _caller);
-      Assert::AreEqual("Turquoise", Drawing::Color::Turquoise().Name(), _caller);
-      Assert::AreEqual("Color [Turquoise]", Drawing::Color::Turquoise().ToString(), _caller);
-    }
-    
-    void Violet() {
-      Assert::AreEqual(0xFFEE82EEu, (unsigned)Drawing::Color::Violet().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Violet().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Violet().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Violet().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Violet().IsSystemColor(), _caller);
-      Assert::AreEqual("Violet", Drawing::Color::Violet().Name(), _caller);
-      Assert::AreEqual("Color [Violet]", Drawing::Color::Violet().ToString(), _caller);
-    }
-    
-    void Wheat() {
-      Assert::AreEqual(0xFFF5DEB3u, (unsigned)Drawing::Color::Wheat().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Wheat().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Wheat().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Wheat().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Wheat().IsSystemColor(), _caller);
-      Assert::AreEqual("Wheat", Drawing::Color::Wheat().Name(), _caller);
-      Assert::AreEqual("Color [Wheat]", Drawing::Color::Wheat().ToString(), _caller);
-    }
-    
-    void White() {
-      Assert::AreEqual(0xFFFFFFFFu, (unsigned)Drawing::Color::White().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::White().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::White().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::White().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::White().IsSystemColor(), _caller);
-      Assert::AreEqual("White", Drawing::Color::White().Name(), _caller);
-      Assert::AreEqual("Color [White]", Drawing::Color::White().ToString(), _caller);
-    }
-    
-    void WhiteSmoke() {
-      Assert::AreEqual(0xFFF5F5F5u, (unsigned)Drawing::Color::WhiteSmoke().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::WhiteSmoke().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::WhiteSmoke().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::WhiteSmoke().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::WhiteSmoke().IsSystemColor(), _caller);
-      Assert::AreEqual("WhiteSmoke", Drawing::Color::WhiteSmoke().Name(), _caller);
-      Assert::AreEqual("Color [WhiteSmoke]", Drawing::Color::WhiteSmoke().ToString(), _caller);
-    }
-    
-    void Yellow() {
-      Assert::AreEqual(0xFFFFFF00u, (unsigned)Drawing::Color::Yellow().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::Yellow().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::Yellow().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::Yellow().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::Yellow().IsSystemColor(), _caller);
-      Assert::AreEqual("Yellow", Drawing::Color::Yellow().Name(), _caller);
-      Assert::AreEqual("Color [Yellow]", Drawing::Color::Yellow().ToString(), _caller);
-    }
-    
-    void YellowGreen() {
-      Assert::AreEqual(0xFF9ACD32u, (unsigned)Drawing::Color::YellowGreen().ToArgb(), _caller);
-      Assert::IsFalse(Drawing::Color::YellowGreen().IsEmpty(), _caller);
-      Assert::IsTrue(Drawing::Color::YellowGreen().IsKnownColor(), _caller);
-      Assert::IsTrue(Drawing::Color::YellowGreen().IsNamedColor(), _caller);
-      Assert::IsFalse(Drawing::Color::YellowGreen().IsSystemColor(), _caller);
-      Assert::AreEqual("YellowGreen", Drawing::Color::YellowGreen().Name(), _caller);
-      Assert::AreEqual("Color [YellowGreen]", Drawing::Color::YellowGreen().ToString(), _caller);
-    }
-  };
+  TEST(ColorTest, Ctor) {
+    Drawing::Color color;
+    ASSERT_EQ(0x00, color.A());
+    ASSERT_EQ(0x00, color.R());
+    ASSERT_EQ(0x00, color.G());
+    ASSERT_EQ(0x00, color.B());
+    ASSERT_TRUE(color.IsEmpty());
+    ASSERT_FALSE(color.IsKnownColor());
+    ASSERT_FALSE(color.IsNamedColor);
+    ASSERT_FALSE(color.IsSystemColor());
+    ASSERT_EQ("0", color.Name());
+    ASSERT_EQ("Color [Empty]", color.ToString());
+  }
   
-  _AddTest(Color, Ctor)
-  _AddTest(Color, FromKnownColor)
-  _AddTest(Color, FromArgb)
-  _AddTest(Color, FromName)
-  _AddTest(Color, Transparent)
-  _AddTest(Color, AliceBlue)
-  _AddTest(Color, AntiqueWhite)
-  _AddTest(Color, Aqua)
-  _AddTest(Color, Aquamarine)
-  _AddTest(Color, Azure)
-  _AddTest(Color, Beige)
-  _AddTest(Color, Bisque)
-  _AddTest(Color, Black)
-  _AddTest(Color, BlanchedAlmond)
-  _AddTest(Color, Blue)
-  _AddTest(Color, BlueViolet)
-  _AddTest(Color, Brown)
-  _AddTest(Color, BurlyWood)
-  _AddTest(Color, CadetBlue)
-  _AddTest(Color, Chartreuse)
-  _AddTest(Color, Chocolate)
-  _AddTest(Color, Coral)
-  _AddTest(Color, CornflowerBlue)
-  _AddTest(Color, Cornsilk)
-  _AddTest(Color, Crimson)
-  _AddTest(Color, Cyan)
-  _AddTest(Color, DarkBlue)
-  _AddTest(Color, DarkCyan)
-  _AddTest(Color, DarkGoldenrod)
-  _AddTest(Color, DarkGray)
-  _AddTest(Color, DarkGreen)
-  _AddTest(Color, DarkKhaki)
-  _AddTest(Color, DarkMagenta)
-  _AddTest(Color, DarkOliveGreen)
-  _AddTest(Color, DarkOrange)
-  _AddTest(Color, DarkOrchid)
-  _AddTest(Color, DarkRed)
-  _AddTest(Color, DarkSalmon)
-  _AddTest(Color, DarkSeaGreen)
-  _AddTest(Color, DarkSlateBlue)
-  _AddTest(Color, DarkSlateGray)
-  _AddTest(Color, DarkTurquoise)
-  _AddTest(Color, DarkViolet)
-  _AddTest(Color, DeepPink)
-  _AddTest(Color, DeepSkyBlue)
-  _AddTest(Color, DimGray)
-  _AddTest(Color, DodgerBlue)
-  _AddTest(Color, Firebrick)
-  _AddTest(Color, FloralWhite)
-  _AddTest(Color, ForestGreen)
-  _AddTest(Color, Fuchsia)
-  _AddTest(Color, Gainsboro)
-  _AddTest(Color, GhostWhite)
-  _AddTest(Color, Gold)
-  _AddTest(Color, Goldenrod)
-  _AddTest(Color, Gray)
-  _AddTest(Color, Green)
-  _AddTest(Color, GreenYellow)
-  _AddTest(Color, Honeydew)
-  _AddTest(Color, HotPink)
-  _AddTest(Color, IndianRed)
-  _AddTest(Color, Indigo)
-  _AddTest(Color, Ivory)
-  _AddTest(Color, Khaki)
-  _AddTest(Color, Lavender)
-  _AddTest(Color, LavenderBlush)
-  _AddTest(Color, LawnGreen)
-  _AddTest(Color, LemonChiffon)
-  _AddTest(Color, LightBlue)
-  _AddTest(Color, LightCoral)
-  _AddTest(Color, LightCyan)
-  _AddTest(Color, LightGoldenrodYellow)
-  _AddTest(Color, LightGray)
-  _AddTest(Color, LightGreen)
-  _AddTest(Color, LightPink)
-  _AddTest(Color, LightSalmon)
-  _AddTest(Color, LightSeaGreen)
-  _AddTest(Color, LightSkyBlue)
-  _AddTest(Color, LightSlateGray)
-  _AddTest(Color, LightSteelBlue)
-  _AddTest(Color, LightYellow)
-  _AddTest(Color, Lime)
-  _AddTest(Color, LimeGreen)
-  _AddTest(Color, Linen)
-  _AddTest(Color, Magenta)
-  _AddTest(Color, Maroon)
-  _AddTest(Color, MediumAquamarine)
-  _AddTest(Color, MediumBlue)
-  _AddTest(Color, MediumOrchid)
-  _AddTest(Color, MediumPurple)
-  _AddTest(Color, MediumSeaGreen)
-  _AddTest(Color, MediumSlateBlue)
-  _AddTest(Color, MediumSpringGreen)
-  _AddTest(Color, MediumTurquoise)
-  _AddTest(Color, MediumVioletRed)
-  _AddTest(Color, MidnightBlue)
-  _AddTest(Color, MintCream)
-  _AddTest(Color, MistyRose)
-  _AddTest(Color, Moccasin)
-  _AddTest(Color, NavajoWhite)
-  _AddTest(Color, Navy)
-  _AddTest(Color, OldLace)
-  _AddTest(Color, Olive)
-  _AddTest(Color, OliveDrab)
-  _AddTest(Color, Orange)
-  _AddTest(Color, OrangeRed)
-  _AddTest(Color, Orchid)
-  _AddTest(Color, PaleGoldenrod)
-  _AddTest(Color, PaleGreen)
-  _AddTest(Color, PaleTurquoise)
-  _AddTest(Color, PaleVioletRed)
-  _AddTest(Color, PapayaWhip)
-  _AddTest(Color, PeachPuff)
-  _AddTest(Color, Peru)
-  _AddTest(Color, Pink)
-  _AddTest(Color, Plum)
-  _AddTest(Color, PowderBlue)
-  _AddTest(Color, Purple)
-  _AddTest(Color, Red)
-  _AddTest(Color, RosyBrown)
-  _AddTest(Color, RoyalBlue)
-  _AddTest(Color, SaddleBrown)
-  _AddTest(Color, Salmon)
-  _AddTest(Color, SandyBrown)
-  _AddTest(Color, SeaGreen)
-  _AddTest(Color, SeaShell)
-  _AddTest(Color, Sienna)
-  _AddTest(Color, Silver)
-  _AddTest(Color, SkyBlue)
-  _AddTest(Color, SlateBlue)
-  _AddTest(Color, SlateGray)
-  _AddTest(Color, Snow)
-  _AddTest(Color, SpringGreen)
-  _AddTest(Color, SteelBlue)
-  _AddTest(Color, Tan)
-  _AddTest(Color, Teal)
-  _AddTest(Color, Thistle)
-  _AddTest(Color, Tomato)
-  _AddTest(Color, Turquoise)
-  _AddTest(Color, Violet)
-  _AddTest(Color, Wheat)
-  _AddTest(Color, White)
-  _AddTest(Color, WhiteSmoke)
-  _AddTest(Color, Yellow)
-  _AddTest(Color, YellowGreen)
+  TEST(ColorTest, FromKnownColor) {
+    ASSERT_EQ(0xFF, Drawing::Color::FromKnownColor(KnownColor::Black).A());
+    ASSERT_EQ(0x00, Drawing::Color::FromKnownColor(KnownColor::Black).R());
+    ASSERT_EQ(0x00, Drawing::Color::FromKnownColor(KnownColor::Black).G());
+    ASSERT_EQ(0x00, Drawing::Color::FromKnownColor(KnownColor::Black).B());
+    ASSERT_FALSE(Drawing::Color::FromKnownColor(KnownColor::Black).IsEmpty());
+    ASSERT_TRUE(Drawing::Color::FromKnownColor(KnownColor::Black).IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::FromKnownColor(KnownColor::Black).IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::FromKnownColor(KnownColor::Black).IsSystemColor());
+    ASSERT_EQ("Black", Drawing::Color::FromKnownColor(KnownColor::Black).Name());
+    ASSERT_EQ("Color [Black]", Drawing::Color::FromKnownColor(KnownColor::Black).ToString());
+    
+    ASSERT_THROW(Drawing::Color::FromKnownColor((KnownColor)34544), ArgumentException);
+  }
+  
+  TEST(ColorTest, FromArgb) {
+    ASSERT_EQ(0x12, Drawing::Color::FromArgb(0x12345678).A());
+    ASSERT_EQ(0x34, Drawing::Color::FromArgb(0x12345678).R());
+    ASSERT_EQ(0x56, Drawing::Color::FromArgb(0x12345678).G());
+    ASSERT_EQ(0x78, Drawing::Color::FromArgb(0x12345678).B());
+    ASSERT_FALSE(Drawing::Color::FromArgb(0x12345678).IsEmpty());
+    ASSERT_FALSE(Drawing::Color::FromArgb(0x12345678).IsKnownColor());
+    ASSERT_FALSE(Drawing::Color::FromArgb(0x12345678).IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::FromArgb(0x12345678).IsSystemColor());
+    ASSERT_EQ("12345678", Drawing::Color::FromArgb(0x12345678).Name());
+    ASSERT_EQ("Color [A=18, R=52, G=86, B=120]", Drawing::Color::FromArgb(0x12345678).ToString());
+  }
+  
+  TEST(ColorTest, FromName) {
+    Drawing::Color colorAliceBlue = Drawing::Color::FromName("AliceBlue");
+    ASSERT_EQ(0xFF, colorAliceBlue.A());
+    ASSERT_EQ(0xF0, colorAliceBlue.R());
+    ASSERT_EQ(0xF8, colorAliceBlue.G());
+    ASSERT_EQ(0xFF, colorAliceBlue.B());
+    ASSERT_FALSE(colorAliceBlue.IsEmpty());
+    ASSERT_TRUE(colorAliceBlue.IsKnownColor());
+    ASSERT_TRUE(colorAliceBlue.IsNamedColor());
+    ASSERT_FALSE(colorAliceBlue.IsSystemColor());
+    ASSERT_EQ("AliceBlue", colorAliceBlue.Name());
+    ASSERT_EQ("Color [AliceBlue]", colorAliceBlue.ToString());
+  }
+  
+  TEST(ColorTest, Transparent) {
+    ASSERT_EQ(0x00FFFFFF, Drawing::Color::Transparent().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Transparent().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Transparent().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Transparent().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Transparent().IsSystemColor());
+    ASSERT_EQ("Transparent", Drawing::Color::Transparent().Name());
+    ASSERT_EQ("Color [Transparent]", Drawing::Color::Transparent().ToString());
+  }
+  
+  TEST(ColorTest, AliceBlue) {
+    ASSERT_EQ(0xFFF0F8FFu, (unsigned)Drawing::Color::AliceBlue().ToArgb());
+    ASSERT_FALSE(Drawing::Color::AliceBlue().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::AliceBlue().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::AliceBlue().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::AliceBlue().IsSystemColor());
+    ASSERT_EQ("AliceBlue", Drawing::Color::AliceBlue().Name());
+    ASSERT_EQ("Color [AliceBlue]", Drawing::Color::AliceBlue().ToString());
+  }
+  
+  TEST(ColorTest, AntiqueWhite) {
+    ASSERT_EQ(0xFFFAEBD7u, (unsigned)Drawing::Color::AntiqueWhite().ToArgb());
+    ASSERT_FALSE(Drawing::Color::AntiqueWhite().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::AntiqueWhite().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::AntiqueWhite().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::AntiqueWhite().IsSystemColor());
+    ASSERT_EQ("AntiqueWhite", Drawing::Color::AntiqueWhite().Name());
+    ASSERT_EQ("Color [AntiqueWhite]", Drawing::Color::AntiqueWhite().ToString());
+  }
+  
+  TEST(ColorTest, Aqua) {
+    ASSERT_EQ(0xFF00FFFFu, (unsigned)Drawing::Color::Aqua().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Aqua().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Aqua().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Aqua().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Aqua().IsSystemColor());
+    ASSERT_EQ("Aqua", Drawing::Color::Aqua().Name());
+    ASSERT_EQ("Color [Aqua]", Drawing::Color::Aqua().ToString());
+  }
+  
+  TEST(ColorTest, Aquamarine) {
+    ASSERT_EQ(0xFF7FFFD4u, (unsigned)Drawing::Color::Aquamarine().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Aquamarine().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Aquamarine().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Aquamarine().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Aquamarine().IsSystemColor());
+    ASSERT_EQ("Aquamarine", Drawing::Color::Aquamarine().Name());
+    ASSERT_EQ("Color [Aquamarine]", Drawing::Color::Aquamarine().ToString());
+  }
+  
+  TEST(ColorTest, Azure) {
+    ASSERT_EQ(0xFFF0FFFFu, (unsigned)Drawing::Color::Azure().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Azure().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Azure().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Azure().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Azure().IsSystemColor());
+    ASSERT_EQ("Azure", Drawing::Color::Azure().Name());
+    ASSERT_EQ("Color [Azure]", Drawing::Color::Azure().ToString());
+  }
+  
+  TEST(ColorTest, Beige) {
+    ASSERT_EQ(0xFFF5F5DCu, (unsigned)Drawing::Color::Beige().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Beige().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Beige().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Beige().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Beige().IsSystemColor());
+    ASSERT_EQ("Beige", Drawing::Color::Beige().Name());
+    ASSERT_EQ("Color [Beige]", Drawing::Color::Beige().ToString());
+  }
+  
+  TEST(ColorTest, Bisque) {
+    ASSERT_EQ(0xFFFFE4C4u, (unsigned)Drawing::Color::Bisque().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Bisque().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Bisque().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Bisque().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Bisque().IsSystemColor());
+    ASSERT_EQ("Bisque", Drawing::Color::Bisque().Name());
+    ASSERT_EQ("Color [Bisque]", Drawing::Color::Bisque().ToString());
+  }
+  
+  TEST(ColorTest, Black) {
+    ASSERT_EQ(0xFF000000u, (unsigned)Drawing::Color::Black().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Black().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Black().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Black().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Black().IsSystemColor());
+    ASSERT_EQ("Black", Drawing::Color::Black().Name());
+    ASSERT_EQ("Color [Black]", Drawing::Color::Black().ToString());
+  }
+  
+  TEST(ColorTest, BlanchedAlmond) {
+    ASSERT_EQ(0xFFFFEBCDu, (unsigned)Drawing::Color::BlanchedAlmond().ToArgb());
+    ASSERT_FALSE(Drawing::Color::BlanchedAlmond().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::BlanchedAlmond().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::BlanchedAlmond().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::BlanchedAlmond().IsSystemColor());
+    ASSERT_EQ("BlanchedAlmond", Drawing::Color::BlanchedAlmond().Name());
+    ASSERT_EQ("Color [BlanchedAlmond]", Drawing::Color::BlanchedAlmond().ToString());
+  }
+  
+  TEST(ColorTest, Blue) {
+    ASSERT_EQ(0xFF0000FFu, (unsigned)Drawing::Color::Blue().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Blue().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Blue().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Blue().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Blue().IsSystemColor());
+    ASSERT_EQ("Blue", Drawing::Color::Blue().Name());
+    ASSERT_EQ("Color [Blue]", Drawing::Color::Blue().ToString());
+  }
+  
+  TEST(ColorTest, BlueViolet) {
+    ASSERT_EQ(0xFF8A2BE2u, (unsigned)Drawing::Color::BlueViolet().ToArgb());
+    ASSERT_FALSE(Drawing::Color::BlueViolet().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::BlueViolet().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::BlueViolet().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::BlueViolet().IsSystemColor());
+    ASSERT_EQ("BlueViolet", Drawing::Color::BlueViolet().Name());
+    ASSERT_EQ("Color [BlueViolet]", Drawing::Color::BlueViolet().ToString());
+  }
+  
+  TEST(ColorTest, Brown) {
+    ASSERT_EQ(0xFFA52A2Au, (unsigned)Drawing::Color::Brown().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Brown().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Brown().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Brown().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Brown().IsSystemColor());
+    ASSERT_EQ("Brown", Drawing::Color::Brown().Name());
+    ASSERT_EQ("Color [Brown]", Drawing::Color::Brown().ToString());
+  }
+  
+  TEST(ColorTest, BurlyWood) {
+    ASSERT_EQ(0xFFDEB887u, (unsigned)Drawing::Color::BurlyWood().ToArgb());
+    ASSERT_FALSE(Drawing::Color::BurlyWood().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::BurlyWood().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::BurlyWood().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::BurlyWood().IsSystemColor());
+    ASSERT_EQ("BurlyWood", Drawing::Color::BurlyWood().Name());
+    ASSERT_EQ("Color [BurlyWood]", Drawing::Color::BurlyWood().ToString());
+  }
+  
+  TEST(ColorTest, CadetBlue) {
+    ASSERT_EQ(0xFF5F9EA0u, (unsigned)Drawing::Color::CadetBlue().ToArgb());
+    ASSERT_FALSE(Drawing::Color::CadetBlue().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::CadetBlue().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::CadetBlue().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::CadetBlue().IsSystemColor());
+    ASSERT_EQ("CadetBlue", Drawing::Color::CadetBlue().Name());
+    ASSERT_EQ("Color [CadetBlue]", Drawing::Color::CadetBlue().ToString());
+  }
+  
+  TEST(ColorTest, Chartreuse) {
+    ASSERT_EQ(0xFF7FFF00u, (unsigned)Drawing::Color::Chartreuse().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Chartreuse().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Chartreuse().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Chartreuse().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Chartreuse().IsSystemColor());
+    ASSERT_EQ("Chartreuse", Drawing::Color::Chartreuse().Name());
+    ASSERT_EQ("Color [Chartreuse]", Drawing::Color::Chartreuse().ToString());
+  }
+  
+  TEST(ColorTest, Chocolate) {
+    ASSERT_EQ(0xFFD2691Eu, (unsigned)Drawing::Color::Chocolate().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Chocolate().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Chocolate().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Chocolate().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Chocolate().IsSystemColor());
+    ASSERT_EQ("Chocolate", Drawing::Color::Chocolate().Name());
+    ASSERT_EQ("Color [Chocolate]", Drawing::Color::Chocolate().ToString());
+  }
+  
+  TEST(ColorTest, Coral) {
+    ASSERT_EQ(0xFFFF7F50u, (unsigned)Drawing::Color::Coral().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Coral().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Coral().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Coral().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Coral().IsSystemColor());
+    ASSERT_EQ("Coral", Drawing::Color::Coral().Name());
+    ASSERT_EQ("Color [Coral]", Drawing::Color::Coral().ToString());
+  }
+  
+  TEST(ColorTest, CornflowerBlue) {
+    ASSERT_EQ(0xFF6495EDu, (unsigned)Drawing::Color::CornflowerBlue().ToArgb());
+    ASSERT_FALSE(Drawing::Color::CornflowerBlue().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::CornflowerBlue().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::CornflowerBlue().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::CornflowerBlue().IsSystemColor());
+    ASSERT_EQ("CornflowerBlue", Drawing::Color::CornflowerBlue().Name());
+    ASSERT_EQ("Color [CornflowerBlue]", Drawing::Color::CornflowerBlue().ToString());
+  }
+  
+  TEST(ColorTest, Cornsilk) {
+    ASSERT_EQ(0xFFFFF8DCu, (unsigned)Drawing::Color::Cornsilk().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Cornsilk().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Cornsilk().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Cornsilk().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Cornsilk().IsSystemColor());
+    ASSERT_EQ("Cornsilk", Drawing::Color::Cornsilk().Name());
+    ASSERT_EQ("Color [Cornsilk]", Drawing::Color::Cornsilk().ToString());
+  }
+  
+  TEST(ColorTest, Crimson) {
+    ASSERT_EQ(0xFFDC143Cu, (unsigned)Drawing::Color::Crimson().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Crimson().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Crimson().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Crimson().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Crimson().IsSystemColor());
+    ASSERT_EQ("Crimson", Drawing::Color::Crimson().Name());
+    ASSERT_EQ("Color [Crimson]", Drawing::Color::Crimson().ToString());
+  }
+  
+  TEST(ColorTest, Cyan) {
+    ASSERT_EQ(0xFF00FFFFu, (unsigned)Drawing::Color::Cyan().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Cyan().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Cyan().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Cyan().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Cyan().IsSystemColor());
+    ASSERT_EQ("Cyan", Drawing::Color::Cyan().Name());
+    ASSERT_EQ("Color [Cyan]", Drawing::Color::Cyan().ToString());
+  }
+  
+  TEST(ColorTest, DarkBlue) {
+    ASSERT_EQ(0xFF00008Bu, (unsigned)Drawing::Color::DarkBlue().ToArgb());
+    ASSERT_FALSE(Drawing::Color::DarkBlue().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::DarkBlue().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::DarkBlue().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::DarkBlue().IsSystemColor());
+    ASSERT_EQ("DarkBlue", Drawing::Color::DarkBlue().Name());
+    ASSERT_EQ("Color [DarkBlue]", Drawing::Color::DarkBlue().ToString());
+  }
+  
+  TEST(ColorTest, DarkCyan) {
+    ASSERT_EQ(0xFF008B8Bu, (unsigned)Drawing::Color::DarkCyan().ToArgb());
+    ASSERT_FALSE(Drawing::Color::DarkCyan().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::DarkCyan().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::DarkCyan().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::DarkCyan().IsSystemColor());
+    ASSERT_EQ("DarkCyan", Drawing::Color::DarkCyan().Name());
+    ASSERT_EQ("Color [DarkCyan]", Drawing::Color::DarkCyan().ToString());
+  }
+  
+  TEST(ColorTest, DarkGoldenrod) {
+    ASSERT_EQ(0xFFB8860Bu, (unsigned)Drawing::Color::DarkGoldenrod().ToArgb());
+    ASSERT_FALSE(Drawing::Color::DarkGoldenrod().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::DarkGoldenrod().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::DarkGoldenrod().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::DarkGoldenrod().IsSystemColor());
+    ASSERT_EQ("DarkGoldenrod", Drawing::Color::DarkGoldenrod().Name());
+    ASSERT_EQ("Color [DarkGoldenrod]", Drawing::Color::DarkGoldenrod().ToString());
+  }
+  
+  TEST(ColorTest, DarkGray) {
+    ASSERT_EQ(0xFFA9A9A9u, (unsigned)Drawing::Color::DarkGray().ToArgb());
+    ASSERT_FALSE(Drawing::Color::DarkGray().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::DarkGray().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::DarkGray().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::DarkGray().IsSystemColor());
+    ASSERT_EQ("DarkGray", Drawing::Color::DarkGray().Name());
+    ASSERT_EQ("Color [DarkGray]", Drawing::Color::DarkGray().ToString());
+  }
+  
+  TEST(ColorTest, DarkGreen) {
+    ASSERT_EQ(0xFF006400u, (unsigned)Drawing::Color::DarkGreen().ToArgb());
+    ASSERT_FALSE(Drawing::Color::DarkGreen().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::DarkGreen().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::DarkGreen().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::DarkGreen().IsSystemColor());
+    ASSERT_EQ("DarkGreen", Drawing::Color::DarkGreen().Name());
+    ASSERT_EQ("Color [DarkGreen]", Drawing::Color::DarkGreen().ToString());
+  }
+  
+  TEST(ColorTest, DarkKhaki) {
+    ASSERT_EQ(0xFFBDB76Bu, (unsigned)Drawing::Color::DarkKhaki().ToArgb());
+    ASSERT_FALSE(Drawing::Color::DarkKhaki().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::DarkKhaki().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::DarkKhaki().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::DarkKhaki().IsSystemColor());
+    ASSERT_EQ("DarkKhaki", Drawing::Color::DarkKhaki().Name());
+    ASSERT_EQ("Color [DarkKhaki]", Drawing::Color::DarkKhaki().ToString());
+  }
+  
+  TEST(ColorTest, DarkMagenta) {
+    ASSERT_EQ(0xFF8B008Bu, (unsigned)Drawing::Color::DarkMagenta().ToArgb());
+    ASSERT_FALSE(Drawing::Color::DarkMagenta().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::DarkMagenta().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::DarkMagenta().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::DarkMagenta().IsSystemColor());
+    ASSERT_EQ("DarkMagenta", Drawing::Color::DarkMagenta().Name());
+    ASSERT_EQ("Color [DarkMagenta]", Drawing::Color::DarkMagenta().ToString());
+  }
+  
+  TEST(ColorTest, DarkOliveGreen) {
+    ASSERT_EQ(0xFF556B2Fu, (unsigned)Drawing::Color::DarkOliveGreen().ToArgb());
+    ASSERT_FALSE(Drawing::Color::DarkOliveGreen().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::DarkOliveGreen().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::DarkOliveGreen().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::DarkOliveGreen().IsSystemColor());
+    ASSERT_EQ("DarkOliveGreen", Drawing::Color::DarkOliveGreen().Name());
+    ASSERT_EQ("Color [DarkOliveGreen]", Drawing::Color::DarkOliveGreen().ToString());
+  }
+  
+  TEST(ColorTest, DarkOrange) {
+    ASSERT_EQ(0xFFFF8C00u, (unsigned)Drawing::Color::DarkOrange().ToArgb());
+    ASSERT_FALSE(Drawing::Color::DarkOrange().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::DarkOrange().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::DarkOrange().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::DarkOrange().IsSystemColor());
+    ASSERT_EQ("DarkOrange", Drawing::Color::DarkOrange().Name());
+    ASSERT_EQ("Color [DarkOrange]", Drawing::Color::DarkOrange().ToString());
+  }
+  
+  TEST(ColorTest, DarkOrchid) {
+    ASSERT_EQ(0xFF9932CCu, (unsigned)Drawing::Color::DarkOrchid().ToArgb());
+    ASSERT_FALSE(Drawing::Color::DarkOrchid().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::DarkOrchid().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::DarkOrchid().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::DarkOrchid().IsSystemColor());
+    ASSERT_EQ("DarkOrchid", Drawing::Color::DarkOrchid().Name());
+    ASSERT_EQ("Color [DarkOrchid]", Drawing::Color::DarkOrchid().ToString());
+  }
+  
+  TEST(ColorTest, DarkRed) {
+    ASSERT_EQ(0xFF8B0000u, (unsigned)Drawing::Color::DarkRed().ToArgb());
+    ASSERT_FALSE(Drawing::Color::DarkRed().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::DarkRed().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::DarkRed().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::DarkRed().IsSystemColor());
+    ASSERT_EQ("DarkRed", Drawing::Color::DarkRed().Name());
+    ASSERT_EQ("Color [DarkRed]", Drawing::Color::DarkRed().ToString());
+  }
+  
+  TEST(ColorTest, DarkSalmon) {
+    ASSERT_EQ(0xFFE9967Au, (unsigned)Drawing::Color::DarkSalmon().ToArgb());
+    ASSERT_FALSE(Drawing::Color::DarkSalmon().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::DarkSalmon().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::DarkSalmon().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::DarkSalmon().IsSystemColor());
+    ASSERT_EQ("DarkSalmon", Drawing::Color::DarkSalmon().Name());
+    ASSERT_EQ("Color [DarkSalmon]", Drawing::Color::DarkSalmon().ToString());
+  }
+  
+  TEST(ColorTest, DarkSeaGreen) {
+    ASSERT_EQ(0xFF8FBC8Bu, (unsigned)Drawing::Color::DarkSeaGreen().ToArgb());
+    ASSERT_FALSE(Drawing::Color::DarkSeaGreen().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::DarkSeaGreen().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::DarkSeaGreen().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::DarkSeaGreen().IsSystemColor());
+    ASSERT_EQ("DarkSeaGreen", Drawing::Color::DarkSeaGreen().Name());
+    ASSERT_EQ("Color [DarkSeaGreen]", Drawing::Color::DarkSeaGreen().ToString());
+  }
+  
+  TEST(ColorTest, DarkSlateBlue) {
+    ASSERT_EQ(0xFF483D8Bu, (unsigned)Drawing::Color::DarkSlateBlue().ToArgb());
+    ASSERT_FALSE(Drawing::Color::DarkSlateBlue().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::DarkSlateBlue().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::DarkSlateBlue().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::DarkSlateBlue().IsSystemColor());
+    ASSERT_EQ("DarkSlateBlue", Drawing::Color::DarkSlateBlue().Name());
+    ASSERT_EQ("Color [DarkSlateBlue]", Drawing::Color::DarkSlateBlue().ToString());
+  }
+  
+  TEST(ColorTest, DarkSlateGray) {
+    ASSERT_EQ(0xFF2F4F4Fu, (unsigned)Drawing::Color::DarkSlateGray().ToArgb());
+    ASSERT_FALSE(Drawing::Color::DarkSlateGray().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::DarkSlateGray().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::DarkSlateGray().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::DarkSlateGray().IsSystemColor());
+    ASSERT_EQ("DarkSlateGray", Drawing::Color::DarkSlateGray().Name());
+    ASSERT_EQ("Color [DarkSlateGray]", Drawing::Color::DarkSlateGray().ToString());
+  }
+  
+  TEST(ColorTest, DarkTurquoise) {
+    ASSERT_EQ(0xFF00CED1u, (unsigned)Drawing::Color::DarkTurquoise().ToArgb());
+    ASSERT_FALSE(Drawing::Color::DarkTurquoise().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::DarkTurquoise().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::DarkTurquoise().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::DarkTurquoise().IsSystemColor());
+    ASSERT_EQ("DarkTurquoise", Drawing::Color::DarkTurquoise().Name());
+    ASSERT_EQ("Color [DarkTurquoise]", Drawing::Color::DarkTurquoise().ToString());
+  }
+  
+  TEST(ColorTest, DarkViolet) {
+    ASSERT_EQ(0xFF9400D3u, (unsigned)Drawing::Color::DarkViolet().ToArgb());
+    ASSERT_FALSE(Drawing::Color::DarkViolet().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::DarkViolet().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::DarkViolet().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::DarkViolet().IsSystemColor());
+    ASSERT_EQ("DarkViolet", Drawing::Color::DarkViolet().Name());
+    ASSERT_EQ("Color [DarkViolet]", Drawing::Color::DarkViolet().ToString());
+  }
+  
+  TEST(ColorTest, DeepPink) {
+    ASSERT_EQ(0xFFFF1493u, (unsigned)Drawing::Color::DeepPink().ToArgb());
+    ASSERT_FALSE(Drawing::Color::DeepPink().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::DeepPink().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::DeepPink().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::DeepPink().IsSystemColor());
+    ASSERT_EQ("DeepPink", Drawing::Color::DeepPink().Name());
+    ASSERT_EQ("Color [DeepPink]", Drawing::Color::DeepPink().ToString());
+  }
+  
+  TEST(ColorTest, DeepSkyBlue) {
+    ASSERT_EQ(0xFF00BFFFu, (unsigned)Drawing::Color::DeepSkyBlue().ToArgb());
+    ASSERT_FALSE(Drawing::Color::DeepSkyBlue().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::DeepSkyBlue().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::DeepSkyBlue().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::DeepSkyBlue().IsSystemColor());
+    ASSERT_EQ("DeepSkyBlue", Drawing::Color::DeepSkyBlue().Name());
+    ASSERT_EQ("Color [DeepSkyBlue]", Drawing::Color::DeepSkyBlue().ToString());
+  }
+  
+  TEST(ColorTest, DimGray) {
+    ASSERT_EQ(0xFF696969u, (unsigned)Drawing::Color::DimGray().ToArgb());
+    ASSERT_FALSE(Drawing::Color::DimGray().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::DimGray().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::DimGray().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::DimGray().IsSystemColor());
+    ASSERT_EQ("DimGray", Drawing::Color::DimGray().Name());
+    ASSERT_EQ("Color [DimGray]", Drawing::Color::DimGray().ToString());
+  }
+  
+  TEST(ColorTest, DodgerBlue) {
+    ASSERT_EQ(0xFF1E90FFu, (unsigned)Drawing::Color::DodgerBlue().ToArgb());
+    ASSERT_FALSE(Drawing::Color::DodgerBlue().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::DodgerBlue().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::DodgerBlue().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::DodgerBlue().IsSystemColor());
+    ASSERT_EQ("DodgerBlue", Drawing::Color::DodgerBlue().Name());
+    ASSERT_EQ("Color [DodgerBlue]", Drawing::Color::DodgerBlue().ToString());
+  }
+  
+  TEST(ColorTest, Firebrick) {
+    ASSERT_EQ(0xFFB22222u, (unsigned)Drawing::Color::Firebrick().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Firebrick().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Firebrick().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Firebrick().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Firebrick().IsSystemColor());
+    ASSERT_EQ("Firebrick", Drawing::Color::Firebrick().Name());
+    ASSERT_EQ("Color [Firebrick]", Drawing::Color::Firebrick().ToString());
+  }
+  
+  TEST(ColorTest, FloralWhite) {
+    ASSERT_EQ(0xFFFFFAF0u, (unsigned)Drawing::Color::FloralWhite().ToArgb());
+    ASSERT_FALSE(Drawing::Color::FloralWhite().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::FloralWhite().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::FloralWhite().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::FloralWhite().IsSystemColor());
+    ASSERT_EQ("FloralWhite", Drawing::Color::FloralWhite().Name());
+    ASSERT_EQ("Color [FloralWhite]", Drawing::Color::FloralWhite().ToString());
+  }
+  
+  TEST(ColorTest, ForestGreen) {
+    ASSERT_EQ(0xFF228B22u, (unsigned)Drawing::Color::ForestGreen().ToArgb());
+    ASSERT_FALSE(Drawing::Color::ForestGreen().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::ForestGreen().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::ForestGreen().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::ForestGreen().IsSystemColor());
+    ASSERT_EQ("ForestGreen", Drawing::Color::ForestGreen().Name());
+    ASSERT_EQ("Color [ForestGreen]", Drawing::Color::ForestGreen().ToString());
+  }
+  
+  TEST(ColorTest, Fuchsia) {
+    ASSERT_EQ(0xFFFF00FFu, (unsigned)Drawing::Color::Fuchsia().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Fuchsia().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Fuchsia().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Fuchsia().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Fuchsia().IsSystemColor());
+    ASSERT_EQ("Fuchsia", Drawing::Color::Fuchsia().Name());
+    ASSERT_EQ("Color [Fuchsia]", Drawing::Color::Fuchsia().ToString());
+  }
+  
+  TEST(ColorTest, Gainsboro) {
+    ASSERT_EQ(0xFFDCDCDCu, (unsigned)Drawing::Color::Gainsboro().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Gainsboro().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Gainsboro().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Gainsboro().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Gainsboro().IsSystemColor());
+    ASSERT_EQ("Gainsboro", Drawing::Color::Gainsboro().Name());
+    ASSERT_EQ("Color [Gainsboro]", Drawing::Color::Gainsboro().ToString());
+  }
+  
+  TEST(ColorTest, GhostWhite) {
+    ASSERT_EQ(0xFFF8F8FFu, (unsigned)Drawing::Color::GhostWhite().ToArgb());
+    ASSERT_FALSE(Drawing::Color::GhostWhite().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::GhostWhite().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::GhostWhite().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::GhostWhite().IsSystemColor());
+    ASSERT_EQ("GhostWhite", Drawing::Color::GhostWhite().Name());
+    ASSERT_EQ("Color [GhostWhite]", Drawing::Color::GhostWhite().ToString());
+  }
+  
+  TEST(ColorTest, Gold) {
+    ASSERT_EQ(0xFFFFD700u, (unsigned)Drawing::Color::Gold().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Gold().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Gold().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Gold().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Gold().IsSystemColor());
+    ASSERT_EQ("Gold", Drawing::Color::Gold().Name());
+    ASSERT_EQ("Color [Gold]", Drawing::Color::Gold().ToString());
+  }
+  
+  TEST(ColorTest, Goldenrod) {
+    ASSERT_EQ(0xFFDAA520u, (unsigned)Drawing::Color::Goldenrod().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Goldenrod().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Goldenrod().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Goldenrod().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Goldenrod().IsSystemColor());
+    ASSERT_EQ("Goldenrod", Drawing::Color::Goldenrod().Name());
+    ASSERT_EQ("Color [Goldenrod]", Drawing::Color::Goldenrod().ToString());
+  }
+  
+  TEST(ColorTest, Gray) {
+    ASSERT_EQ(0xFF808080u, (unsigned)Drawing::Color::Gray().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Gray().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Gray().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Gray().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Gray().IsSystemColor());
+    ASSERT_EQ("Gray", Drawing::Color::Gray().Name());
+    ASSERT_EQ("Color [Gray]", Drawing::Color::Gray().ToString());
+  }
+  
+  TEST(ColorTest, Green) {
+    ASSERT_EQ(0xFF008000u, (unsigned)Drawing::Color::Green().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Green().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Green().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Green().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Green().IsSystemColor());
+    ASSERT_EQ("Green", Drawing::Color::Green().Name());
+    ASSERT_EQ("Color [Green]", Drawing::Color::Green().ToString());
+  }
+  
+  TEST(ColorTest, GreenYellow) {
+    ASSERT_EQ(0xFFADFF2Fu, (unsigned)Drawing::Color::GreenYellow().ToArgb());
+    ASSERT_FALSE(Drawing::Color::GreenYellow().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::GreenYellow().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::GreenYellow().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::GreenYellow().IsSystemColor());
+    ASSERT_EQ("GreenYellow", Drawing::Color::GreenYellow().Name());
+    ASSERT_EQ("Color [GreenYellow]", Drawing::Color::GreenYellow().ToString());
+  }
+  
+  TEST(ColorTest, Honeydew) {
+    ASSERT_EQ(0xFFF0FFF0u, (unsigned)Drawing::Color::Honeydew().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Honeydew().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Honeydew().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Honeydew().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Honeydew().IsSystemColor());
+    ASSERT_EQ("Honeydew", Drawing::Color::Honeydew().Name());
+    ASSERT_EQ("Color [Honeydew]", Drawing::Color::Honeydew().ToString());
+  }
+  
+  TEST(ColorTest, HotPink) {
+    ASSERT_EQ(0xFFFF69B4u, (unsigned)Drawing::Color::HotPink().ToArgb());
+    ASSERT_FALSE(Drawing::Color::HotPink().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::HotPink().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::HotPink().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::HotPink().IsSystemColor());
+    ASSERT_EQ("HotPink", Drawing::Color::HotPink().Name());
+    ASSERT_EQ("Color [HotPink]", Drawing::Color::HotPink().ToString());
+  }
+  
+  TEST(ColorTest, IndianRed) {
+    ASSERT_EQ(0xFFCD5C5Cu, (unsigned)Drawing::Color::IndianRed().ToArgb());
+    ASSERT_FALSE(Drawing::Color::IndianRed().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::IndianRed().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::IndianRed().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::IndianRed().IsSystemColor());
+    ASSERT_EQ("IndianRed", Drawing::Color::IndianRed().Name());
+    ASSERT_EQ("Color [IndianRed]", Drawing::Color::IndianRed().ToString());
+  }
+  
+  TEST(ColorTest, Indigo) {
+    ASSERT_EQ(0xFF4B0082u, (unsigned)Drawing::Color::Indigo().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Indigo().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Indigo().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Indigo().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Indigo().IsSystemColor());
+    ASSERT_EQ("Indigo", Drawing::Color::Indigo().Name());
+    ASSERT_EQ("Color [Indigo]", Drawing::Color::Indigo().ToString());
+  }
+  
+  TEST(ColorTest, Ivory) {
+    ASSERT_EQ(0xFFFFFFF0u, (unsigned)Drawing::Color::Ivory().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Ivory().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Ivory().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Ivory().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Ivory().IsSystemColor());
+    ASSERT_EQ("Ivory", Drawing::Color::Ivory().Name());
+    ASSERT_EQ("Color [Ivory]", Drawing::Color::Ivory().ToString());
+  }
+  
+  TEST(ColorTest, Khaki) {
+    ASSERT_EQ(0xFFF0E68Cu, (unsigned)Drawing::Color::Khaki().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Khaki().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Khaki().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Khaki().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Khaki().IsSystemColor());
+    ASSERT_EQ("Khaki", Drawing::Color::Khaki().Name());
+    ASSERT_EQ("Color [Khaki]", Drawing::Color::Khaki().ToString());
+  }
+  
+  TEST(ColorTest, Lavender) {
+    ASSERT_EQ(0xFFE6E6FAu, (unsigned)Drawing::Color::Lavender().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Lavender().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Lavender().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Lavender().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Lavender().IsSystemColor());
+    ASSERT_EQ("Lavender", Drawing::Color::Lavender().Name());
+    ASSERT_EQ("Color [Lavender]", Drawing::Color::Lavender().ToString());
+  }
+  
+  TEST(ColorTest, LavenderBlush) {
+    ASSERT_EQ(0xFFFFF0F5u, (unsigned)Drawing::Color::LavenderBlush().ToArgb());
+    ASSERT_FALSE(Drawing::Color::LavenderBlush().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::LavenderBlush().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::LavenderBlush().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::LavenderBlush().IsSystemColor());
+    ASSERT_EQ("LavenderBlush", Drawing::Color::LavenderBlush().Name());
+    ASSERT_EQ("Color [LavenderBlush]", Drawing::Color::LavenderBlush().ToString());
+  }
+  
+  TEST(ColorTest, LawnGreen) {
+    ASSERT_EQ(0xFF7CFC00u, (unsigned)Drawing::Color::LawnGreen().ToArgb());
+    ASSERT_FALSE(Drawing::Color::LawnGreen().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::LawnGreen().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::LawnGreen().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::LawnGreen().IsSystemColor());
+    ASSERT_EQ("LawnGreen", Drawing::Color::LawnGreen().Name());
+    ASSERT_EQ("Color [LawnGreen]", Drawing::Color::LawnGreen().ToString());
+  }
+  
+  TEST(ColorTest, LemonChiffon) {
+    ASSERT_EQ(0xFFFFFACDu, (unsigned)Drawing::Color::LemonChiffon().ToArgb());
+    ASSERT_FALSE(Drawing::Color::LemonChiffon().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::LemonChiffon().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::LemonChiffon().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::LemonChiffon().IsSystemColor());
+    ASSERT_EQ("LemonChiffon", Drawing::Color::LemonChiffon().Name());
+    ASSERT_EQ("Color [LemonChiffon]", Drawing::Color::LemonChiffon().ToString());
+  }
+  
+  TEST(ColorTest, LightBlue) {
+    ASSERT_EQ(0xFFADD8E6u, (unsigned)Drawing::Color::LightBlue().ToArgb());
+    ASSERT_FALSE(Drawing::Color::LightBlue().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::LightBlue().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::LightBlue().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::LightBlue().IsSystemColor());
+    ASSERT_EQ("LightBlue", Drawing::Color::LightBlue().Name());
+    ASSERT_EQ("Color [LightBlue]", Drawing::Color::LightBlue().ToString());
+  }
+  
+  TEST(ColorTest, LightCoral) {
+    ASSERT_EQ(0xFFF08080u, (unsigned)Drawing::Color::LightCoral().ToArgb());
+    ASSERT_FALSE(Drawing::Color::LightCoral().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::LightCoral().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::LightCoral().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::LightCoral().IsSystemColor());
+    ASSERT_EQ("LightCoral", Drawing::Color::LightCoral().Name());
+    ASSERT_EQ("Color [LightCoral]", Drawing::Color::LightCoral().ToString());
+  }
+  
+  TEST(ColorTest, LightCyan) {
+    ASSERT_EQ(0xFFE0FFFFu, (unsigned)Drawing::Color::LightCyan().ToArgb());
+    ASSERT_FALSE(Drawing::Color::LightCyan().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::LightCyan().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::LightCyan().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::LightCyan().IsSystemColor());
+    ASSERT_EQ("LightCyan", Drawing::Color::LightCyan().Name());
+    ASSERT_EQ("Color [LightCyan]", Drawing::Color::LightCyan().ToString());
+  }
+  
+  TEST(ColorTest, LightGoldenrodYellow) {
+    ASSERT_EQ(0xFFFAFAD2u, (unsigned)Drawing::Color::LightGoldenrodYellow().ToArgb());
+    ASSERT_FALSE(Drawing::Color::LightGoldenrodYellow().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::LightGoldenrodYellow().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::LightGoldenrodYellow().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::LightGoldenrodYellow().IsSystemColor());
+    ASSERT_EQ("LightGoldenrodYellow", Drawing::Color::LightGoldenrodYellow().Name());
+    ASSERT_EQ("Color [LightGoldenrodYellow]", Drawing::Color::LightGoldenrodYellow().ToString());
+  }
+  
+  TEST(ColorTest, LightGray) {
+    ASSERT_EQ(0xFFD3D3D3u, (unsigned)Drawing::Color::LightGray().ToArgb());
+    ASSERT_FALSE(Drawing::Color::LightGray().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::LightGray().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::LightGray().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::LightGray().IsSystemColor());
+    ASSERT_EQ("LightGray", Drawing::Color::LightGray().Name());
+    ASSERT_EQ("Color [LightGray]", Drawing::Color::LightGray().ToString());
+  }
+  
+  TEST(ColorTest, LightGreen) {
+    ASSERT_EQ(0xFF90EE90u, (unsigned)Drawing::Color::LightGreen().ToArgb());
+    ASSERT_FALSE(Drawing::Color::LightGreen().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::LightGreen().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::LightGreen().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::LightGreen().IsSystemColor());
+    ASSERT_EQ("LightGreen", Drawing::Color::LightGreen().Name());
+    ASSERT_EQ("Color [LightGreen]", Drawing::Color::LightGreen().ToString());
+  }
+  
+  TEST(ColorTest, LightPink) {
+    ASSERT_EQ(0xFFFFB6C1u, (unsigned)Drawing::Color::LightPink().ToArgb());
+    ASSERT_FALSE(Drawing::Color::LightPink().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::LightPink().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::LightPink().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::LightPink().IsSystemColor());
+    ASSERT_EQ("LightPink", Drawing::Color::LightPink().Name());
+    ASSERT_EQ("Color [LightPink]", Drawing::Color::LightPink().ToString());
+  }
+  
+  TEST(ColorTest, LightSalmon) {
+    ASSERT_EQ(0xFFFFA07Au, (unsigned)Drawing::Color::LightSalmon().ToArgb());
+    ASSERT_FALSE(Drawing::Color::LightSalmon().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::LightSalmon().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::LightSalmon().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::LightSalmon().IsSystemColor());
+    ASSERT_EQ("LightSalmon", Drawing::Color::LightSalmon().Name());
+    ASSERT_EQ("Color [LightSalmon]", Drawing::Color::LightSalmon().ToString());
+  }
+  
+  TEST(ColorTest, LightSeaGreen) {
+    ASSERT_EQ(0xFF20B2AAu, (unsigned)Drawing::Color::LightSeaGreen().ToArgb());
+    ASSERT_FALSE(Drawing::Color::LightSeaGreen().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::LightSeaGreen().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::LightSeaGreen().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::LightSeaGreen().IsSystemColor());
+    ASSERT_EQ("LightSeaGreen", Drawing::Color::LightSeaGreen().Name());
+    ASSERT_EQ("Color [LightSeaGreen]", Drawing::Color::LightSeaGreen().ToString());
+  }
+  
+  TEST(ColorTest, LightSkyBlue) {
+    ASSERT_EQ(0xFF87CEFAu, (unsigned)Drawing::Color::LightSkyBlue().ToArgb());
+    ASSERT_FALSE(Drawing::Color::LightSkyBlue().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::LightSkyBlue().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::LightSkyBlue().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::LightSkyBlue().IsSystemColor());
+    ASSERT_EQ("LightSkyBlue", Drawing::Color::LightSkyBlue().Name());
+    ASSERT_EQ("Color [LightSkyBlue]", Drawing::Color::LightSkyBlue().ToString());
+  }
+  
+  TEST(ColorTest, LightSlateGray) {
+    ASSERT_EQ(0xFF778899u, (unsigned)Drawing::Color::LightSlateGray().ToArgb());
+    ASSERT_FALSE(Drawing::Color::LightSlateGray().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::LightSlateGray().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::LightSlateGray().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::LightSlateGray().IsSystemColor());
+    ASSERT_EQ("LightSlateGray", Drawing::Color::LightSlateGray().Name());
+    ASSERT_EQ("Color [LightSlateGray]", Drawing::Color::LightSlateGray().ToString());
+  }
+  
+  TEST(ColorTest, LightSteelBlue) {
+    ASSERT_EQ(0xFFB0C4DEu, (unsigned)Drawing::Color::LightSteelBlue().ToArgb());
+    ASSERT_FALSE(Drawing::Color::LightSteelBlue().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::LightSteelBlue().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::LightSteelBlue().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::LightSteelBlue().IsSystemColor());
+    ASSERT_EQ("LightSteelBlue", Drawing::Color::LightSteelBlue().Name());
+    ASSERT_EQ("Color [LightSteelBlue]", Drawing::Color::LightSteelBlue().ToString());
+  }
+  
+  TEST(ColorTest, LightYellow) {
+    ASSERT_EQ(0xFFFFFFE0u, (unsigned)Drawing::Color::LightYellow().ToArgb());
+    ASSERT_FALSE(Drawing::Color::LightYellow().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::LightYellow().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::LightYellow().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::LightYellow().IsSystemColor());
+    ASSERT_EQ("LightYellow", Drawing::Color::LightYellow().Name());
+    ASSERT_EQ("Color [LightYellow]", Drawing::Color::LightYellow().ToString());
+  }
+  
+  TEST(ColorTest, Lime) {
+    ASSERT_EQ(0xFF00FF00u, (unsigned)Drawing::Color::Lime().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Lime().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Lime().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Lime().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Lime().IsSystemColor());
+    ASSERT_EQ("Lime", Drawing::Color::Lime().Name());
+    ASSERT_EQ("Color [Lime]", Drawing::Color::Lime().ToString());
+  }
+  
+  TEST(ColorTest, LimeGreen) {
+    ASSERT_EQ(0xFF32CD32u, (unsigned)Drawing::Color::LimeGreen().ToArgb());
+    ASSERT_FALSE(Drawing::Color::LimeGreen().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::LimeGreen().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::LimeGreen().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::LimeGreen().IsSystemColor());
+    ASSERT_EQ("LimeGreen", Drawing::Color::LimeGreen().Name());
+    ASSERT_EQ("Color [LimeGreen]", Drawing::Color::LimeGreen().ToString());
+  }
+  
+  TEST(ColorTest, Linen) {
+    ASSERT_EQ(0xFFFAF0E6u, (unsigned)Drawing::Color::Linen().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Linen().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Linen().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Linen().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Linen().IsSystemColor());
+    ASSERT_EQ("Linen", Drawing::Color::Linen().Name());
+    ASSERT_EQ("Color [Linen]", Drawing::Color::Linen().ToString());
+  }
+  
+  TEST(ColorTest, Magenta) {
+    ASSERT_EQ(0xFFFF00FFu, (unsigned)Drawing::Color::Magenta().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Magenta().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Magenta().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Magenta().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Magenta().IsSystemColor());
+    ASSERT_EQ("Magenta", Drawing::Color::Magenta().Name());
+    ASSERT_EQ("Color [Magenta]", Drawing::Color::Magenta().ToString());
+  }
+  
+  TEST(ColorTest, Maroon) {
+    ASSERT_EQ(0xFF800000u, (unsigned)Drawing::Color::Maroon().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Maroon().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Maroon().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Maroon().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Maroon().IsSystemColor());
+    ASSERT_EQ("Maroon", Drawing::Color::Maroon().Name());
+    ASSERT_EQ("Color [Maroon]", Drawing::Color::Maroon().ToString());
+  }
+  
+  TEST(ColorTest, MediumAquamarine) {
+    ASSERT_EQ(0xFF66CDAAu, (unsigned)Drawing::Color::MediumAquamarine().ToArgb());
+    ASSERT_FALSE(Drawing::Color::MediumAquamarine().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::MediumAquamarine().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::MediumAquamarine().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::MediumAquamarine().IsSystemColor());
+    ASSERT_EQ("MediumAquamarine", Drawing::Color::MediumAquamarine().Name());
+    ASSERT_EQ("Color [MediumAquamarine]", Drawing::Color::MediumAquamarine().ToString());
+  }
+  
+  TEST(ColorTest, MediumBlue) {
+    ASSERT_EQ(0xFF0000CDu, (unsigned)Drawing::Color::MediumBlue().ToArgb());
+    ASSERT_FALSE(Drawing::Color::MediumBlue().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::MediumBlue().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::MediumBlue().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::MediumBlue().IsSystemColor());
+    ASSERT_EQ("MediumBlue", Drawing::Color::MediumBlue().Name());
+    ASSERT_EQ("Color [MediumBlue]", Drawing::Color::MediumBlue().ToString());
+  }
+  
+  TEST(ColorTest, MediumOrchid) {
+    ASSERT_EQ(0xFFBA55D3u, (unsigned)Drawing::Color::MediumOrchid().ToArgb());
+    ASSERT_FALSE(Drawing::Color::MediumOrchid().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::MediumOrchid().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::MediumOrchid().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::MediumOrchid().IsSystemColor());
+    ASSERT_EQ("MediumOrchid", Drawing::Color::MediumOrchid().Name());
+    ASSERT_EQ("Color [MediumOrchid]", Drawing::Color::MediumOrchid().ToString());
+  }
+  
+  TEST(ColorTest, MediumPurple) {
+    ASSERT_EQ(0xFF9370DBu, (unsigned)Drawing::Color::MediumPurple().ToArgb());
+    ASSERT_FALSE(Drawing::Color::MediumPurple().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::MediumPurple().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::MediumPurple().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::MediumPurple().IsSystemColor());
+    ASSERT_EQ("MediumPurple", Drawing::Color::MediumPurple().Name());
+    ASSERT_EQ("Color [MediumPurple]", Drawing::Color::MediumPurple().ToString());
+  }
+  
+  TEST(ColorTest, MediumSeaGreen) {
+    ASSERT_EQ(0xFF3CB371u, (unsigned)Drawing::Color::MediumSeaGreen().ToArgb());
+    ASSERT_FALSE(Drawing::Color::MediumSeaGreen().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::MediumSeaGreen().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::MediumSeaGreen().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::MediumSeaGreen().IsSystemColor());
+    ASSERT_EQ("MediumSeaGreen", Drawing::Color::MediumSeaGreen().Name());
+    ASSERT_EQ("Color [MediumSeaGreen]", Drawing::Color::MediumSeaGreen().ToString());
+  }
+  
+  TEST(ColorTest, MediumSlateBlue) {
+    ASSERT_EQ(0xFF7B68EEu, (unsigned)Drawing::Color::MediumSlateBlue().ToArgb());
+    ASSERT_FALSE(Drawing::Color::MediumSlateBlue().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::MediumSlateBlue().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::MediumSlateBlue().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::MediumSlateBlue().IsSystemColor());
+    ASSERT_EQ("MediumSlateBlue", Drawing::Color::MediumSlateBlue().Name());
+    ASSERT_EQ("Color [MediumSlateBlue]", Drawing::Color::MediumSlateBlue().ToString());
+  }
+  
+  TEST(ColorTest, MediumSpringGreen) {
+    ASSERT_EQ(0xFF00FA9Au, (unsigned)Drawing::Color::MediumSpringGreen().ToArgb());
+    ASSERT_FALSE(Drawing::Color::MediumSpringGreen().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::MediumSpringGreen().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::MediumSpringGreen().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::MediumSpringGreen().IsSystemColor());
+    ASSERT_EQ("MediumSpringGreen", Drawing::Color::MediumSpringGreen().Name());
+    ASSERT_EQ("Color [MediumSpringGreen]", Drawing::Color::MediumSpringGreen().ToString());
+  }
+  
+  TEST(ColorTest, MediumTurquoise) {
+    ASSERT_EQ(0xFF48D1CCu, (unsigned)Drawing::Color::MediumTurquoise().ToArgb());
+    ASSERT_FALSE(Drawing::Color::MediumTurquoise().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::MediumTurquoise().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::MediumTurquoise().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::MediumTurquoise().IsSystemColor());
+    ASSERT_EQ("MediumTurquoise", Drawing::Color::MediumTurquoise().Name());
+    ASSERT_EQ("Color [MediumTurquoise]", Drawing::Color::MediumTurquoise().ToString());
+  }
+  
+  TEST(ColorTest, MediumVioletRed) {
+    ASSERT_EQ(0xFFC71585u, (unsigned)Drawing::Color::MediumVioletRed().ToArgb());
+    ASSERT_FALSE(Drawing::Color::MediumVioletRed().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::MediumVioletRed().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::MediumVioletRed().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::MediumVioletRed().IsSystemColor());
+    ASSERT_EQ("MediumVioletRed", Drawing::Color::MediumVioletRed().Name());
+    ASSERT_EQ("Color [MediumVioletRed]", Drawing::Color::MediumVioletRed().ToString());
+  }
+  
+  TEST(ColorTest, MidnightBlue) {
+    ASSERT_EQ(0xFF191970u, (unsigned)Drawing::Color::MidnightBlue().ToArgb());
+    ASSERT_FALSE(Drawing::Color::MidnightBlue().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::MidnightBlue().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::MidnightBlue().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::MidnightBlue().IsSystemColor());
+    ASSERT_EQ("MidnightBlue", Drawing::Color::MidnightBlue().Name());
+    ASSERT_EQ("Color [MidnightBlue]", Drawing::Color::MidnightBlue().ToString());
+  }
+  
+  TEST(ColorTest, MintCream) {
+    ASSERT_EQ(0xFFF5FFFAu, (unsigned)Drawing::Color::MintCream().ToArgb());
+    ASSERT_FALSE(Drawing::Color::MintCream().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::MintCream().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::MintCream().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::MintCream().IsSystemColor());
+    ASSERT_EQ("MintCream", Drawing::Color::MintCream().Name());
+    ASSERT_EQ("Color [MintCream]", Drawing::Color::MintCream().ToString());
+  }
+  
+  TEST(ColorTest, MistyRose) {
+    ASSERT_EQ(0xFFFFE4E1u, (unsigned)Drawing::Color::MistyRose().ToArgb());
+    ASSERT_FALSE(Drawing::Color::MistyRose().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::MistyRose().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::MistyRose().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::MistyRose().IsSystemColor());
+    ASSERT_EQ("MistyRose", Drawing::Color::MistyRose().Name());
+    ASSERT_EQ("Color [MistyRose]", Drawing::Color::MistyRose().ToString());
+  }
+  
+  TEST(ColorTest, Moccasin) {
+    ASSERT_EQ(0xFFFFE4B5u, (unsigned)Drawing::Color::Moccasin().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Moccasin().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Moccasin().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Moccasin().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Moccasin().IsSystemColor());
+    ASSERT_EQ("Moccasin", Drawing::Color::Moccasin().Name());
+    ASSERT_EQ("Color [Moccasin]", Drawing::Color::Moccasin().ToString());
+  }
+  
+  TEST(ColorTest, NavajoWhite) {
+    ASSERT_EQ(0xFFFFDEADu, (unsigned)Drawing::Color::NavajoWhite().ToArgb());
+    ASSERT_FALSE(Drawing::Color::NavajoWhite().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::NavajoWhite().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::NavajoWhite().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::NavajoWhite().IsSystemColor());
+    ASSERT_EQ("NavajoWhite", Drawing::Color::NavajoWhite().Name());
+    ASSERT_EQ("Color [NavajoWhite]", Drawing::Color::NavajoWhite().ToString());
+  }
+  
+  TEST(ColorTest, Navy) {
+    ASSERT_EQ(0xFF000080u, (unsigned)Drawing::Color::Navy().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Navy().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Navy().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Navy().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Navy().IsSystemColor());
+    ASSERT_EQ("Navy", Drawing::Color::Navy().Name());
+    ASSERT_EQ("Color [Navy]", Drawing::Color::Navy().ToString());
+  }
+  
+  TEST(ColorTest, OldLace) {
+    ASSERT_EQ(0xFFFDF5E6u, (unsigned)Drawing::Color::OldLace().ToArgb());
+    ASSERT_FALSE(Drawing::Color::OldLace().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::OldLace().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::OldLace().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::OldLace().IsSystemColor());
+    ASSERT_EQ("OldLace", Drawing::Color::OldLace().Name());
+    ASSERT_EQ("Color [OldLace]", Drawing::Color::OldLace().ToString());
+  }
+  
+  TEST(ColorTest, Olive) {
+    ASSERT_EQ(0xFF808000u, (unsigned)Drawing::Color::Olive().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Olive().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Olive().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Olive().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Olive().IsSystemColor());
+    ASSERT_EQ("Olive", Drawing::Color::Olive().Name());
+    ASSERT_EQ("Color [Olive]", Drawing::Color::Olive().ToString());
+  }
+  
+  TEST(ColorTest, OliveDrab) {
+    ASSERT_EQ(0xFF6B8E23u, (unsigned)Drawing::Color::OliveDrab().ToArgb());
+    ASSERT_FALSE(Drawing::Color::OliveDrab().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::OliveDrab().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::OliveDrab().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::OliveDrab().IsSystemColor());
+    ASSERT_EQ("OliveDrab", Drawing::Color::OliveDrab().Name());
+    ASSERT_EQ("Color [OliveDrab]", Drawing::Color::OliveDrab().ToString());
+  }
+  
+  TEST(ColorTest, Orange) {
+    ASSERT_EQ(0xFFFFA500u, (unsigned)Drawing::Color::Orange().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Orange().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Orange().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Orange().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Orange().IsSystemColor());
+    ASSERT_EQ("Orange", Drawing::Color::Orange().Name());
+    ASSERT_EQ("Color [Orange]", Drawing::Color::Orange().ToString());
+  }
+  
+  TEST(ColorTest, OrangeRed) {
+    ASSERT_EQ(0xFFFF4500u, (unsigned)Drawing::Color::OrangeRed().ToArgb());
+    ASSERT_FALSE(Drawing::Color::OrangeRed().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::OrangeRed().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::OrangeRed().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::OrangeRed().IsSystemColor());
+    ASSERT_EQ("OrangeRed", Drawing::Color::OrangeRed().Name());
+    ASSERT_EQ("Color [OrangeRed]", Drawing::Color::OrangeRed().ToString());
+  }
+  
+  TEST(ColorTest, Orchid) {
+    ASSERT_EQ(0xFFDA70D6u, (unsigned)Drawing::Color::Orchid().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Orchid().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Orchid().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Orchid().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Orchid().IsSystemColor());
+    ASSERT_EQ("Orchid", Drawing::Color::Orchid().Name());
+    ASSERT_EQ("Color [Orchid]", Drawing::Color::Orchid().ToString());
+  }
+  
+  TEST(ColorTest, PaleGoldenrod) {
+    ASSERT_EQ(0xFFEEE8AAu, (unsigned)Drawing::Color::PaleGoldenrod().ToArgb());
+    ASSERT_FALSE(Drawing::Color::PaleGoldenrod().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::PaleGoldenrod().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::PaleGoldenrod().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::PaleGoldenrod().IsSystemColor());
+    ASSERT_EQ("PaleGoldenrod", Drawing::Color::PaleGoldenrod().Name());
+    ASSERT_EQ("Color [PaleGoldenrod]", Drawing::Color::PaleGoldenrod().ToString());
+  }
+  
+  TEST(ColorTest, PaleGreen) {
+    ASSERT_EQ(0xFF98FB98u, (unsigned)Drawing::Color::PaleGreen().ToArgb());
+    ASSERT_FALSE(Drawing::Color::PaleGreen().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::PaleGreen().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::PaleGreen().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::PaleGreen().IsSystemColor());
+    ASSERT_EQ("PaleGreen", Drawing::Color::PaleGreen().Name());
+    ASSERT_EQ("Color [PaleGreen]", Drawing::Color::PaleGreen().ToString());
+  }
+  
+  TEST(ColorTest, PaleTurquoise) {
+    ASSERT_EQ(0xFFAFEEEEu, (unsigned)Drawing::Color::PaleTurquoise().ToArgb());
+    ASSERT_FALSE(Drawing::Color::PaleTurquoise().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::PaleTurquoise().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::PaleTurquoise().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::PaleTurquoise().IsSystemColor());
+    ASSERT_EQ("PaleTurquoise", Drawing::Color::PaleTurquoise().Name());
+    ASSERT_EQ("Color [PaleTurquoise]", Drawing::Color::PaleTurquoise().ToString());
+  }
+  
+  TEST(ColorTest, PaleVioletRed) {
+    ASSERT_EQ(0xFFDB7093u, (unsigned)Drawing::Color::PaleVioletRed().ToArgb());
+    ASSERT_FALSE(Drawing::Color::PaleVioletRed().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::PaleVioletRed().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::PaleVioletRed().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::PaleVioletRed().IsSystemColor());
+    ASSERT_EQ("PaleVioletRed", Drawing::Color::PaleVioletRed().Name());
+    ASSERT_EQ("Color [PaleVioletRed]", Drawing::Color::PaleVioletRed().ToString());
+  }
+  
+  TEST(ColorTest, PapayaWhip) {
+    ASSERT_EQ(0xFFFFEFD5u, (unsigned)Drawing::Color::PapayaWhip().ToArgb());
+    ASSERT_FALSE(Drawing::Color::PapayaWhip().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::PapayaWhip().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::PapayaWhip().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::PapayaWhip().IsSystemColor());
+    ASSERT_EQ("PapayaWhip", Drawing::Color::PapayaWhip().Name());
+    ASSERT_EQ("Color [PapayaWhip]", Drawing::Color::PapayaWhip().ToString());
+  }
+  
+  TEST(ColorTest, PeachPuff) {
+    ASSERT_EQ(0xFFFFDAB9u, (unsigned)Drawing::Color::PeachPuff().ToArgb());
+    ASSERT_FALSE(Drawing::Color::PeachPuff().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::PeachPuff().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::PeachPuff().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::PeachPuff().IsSystemColor());
+    ASSERT_EQ("PeachPuff", Drawing::Color::PeachPuff().Name());
+    ASSERT_EQ("Color [PeachPuff]", Drawing::Color::PeachPuff().ToString());
+  }
+  
+  TEST(ColorTest, Peru) {
+    ASSERT_EQ(0xFFCD853Fu, (unsigned)Drawing::Color::Peru().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Peru().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Peru().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Peru().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Peru().IsSystemColor());
+    ASSERT_EQ("Peru", Drawing::Color::Peru().Name());
+    ASSERT_EQ("Color [Peru]", Drawing::Color::Peru().ToString());
+  }
+  
+  TEST(ColorTest, Pink) {
+    ASSERT_EQ(0xFFFFC0CBu, (unsigned)Drawing::Color::Pink().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Pink().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Pink().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Pink().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Pink().IsSystemColor());
+    ASSERT_EQ("Pink", Drawing::Color::Pink().Name());
+    ASSERT_EQ("Color [Pink]", Drawing::Color::Pink().ToString());
+  }
+  
+  TEST(ColorTest, Plum) {
+    ASSERT_EQ(0xFFDDA0DDu, (unsigned)Drawing::Color::Plum().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Plum().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Plum().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Plum().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Plum().IsSystemColor());
+    ASSERT_EQ("Plum", Drawing::Color::Plum().Name());
+    ASSERT_EQ("Color [Plum]", Drawing::Color::Plum().ToString());
+  }
+  
+  TEST(ColorTest, PowderBlue) {
+    ASSERT_EQ(0xFFB0E0E6u, (unsigned)Drawing::Color::PowderBlue().ToArgb());
+    ASSERT_FALSE(Drawing::Color::PowderBlue().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::PowderBlue().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::PowderBlue().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::PowderBlue().IsSystemColor());
+    ASSERT_EQ("PowderBlue", Drawing::Color::PowderBlue().Name());
+    ASSERT_EQ("Color [PowderBlue]", Drawing::Color::PowderBlue().ToString());
+  }
+  
+  TEST(ColorTest, Purple) {
+    ASSERT_EQ(0xFF800080u, (unsigned)Drawing::Color::Purple().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Purple().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Purple().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Purple().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Purple().IsSystemColor());
+    ASSERT_EQ("Purple", Drawing::Color::Purple().Name());
+    ASSERT_EQ("Color [Purple]", Drawing::Color::Purple().ToString());
+  }
+  
+  TEST(ColorTest, Red) {
+    ASSERT_EQ(0xFFFF0000u, (unsigned)Drawing::Color::Red().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Red().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Red().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Red().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Red().IsSystemColor());
+    ASSERT_EQ("Red", Drawing::Color::Red().Name());
+    ASSERT_EQ("Color [Red]", Drawing::Color::Red().ToString());
+  }
+  
+  TEST(ColorTest, RosyBrown) {
+    ASSERT_EQ(0xFFBC8F8Fu, (unsigned)Drawing::Color::RosyBrown().ToArgb());
+    ASSERT_FALSE(Drawing::Color::RosyBrown().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::RosyBrown().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::RosyBrown().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::RosyBrown().IsSystemColor());
+    ASSERT_EQ("RosyBrown", Drawing::Color::RosyBrown().Name());
+    ASSERT_EQ("Color [RosyBrown]", Drawing::Color::RosyBrown().ToString());
+  }
+  
+  TEST(ColorTest, RoyalBlue) {
+    ASSERT_EQ(0xFF4169E1u, (unsigned)Drawing::Color::RoyalBlue().ToArgb());
+    ASSERT_FALSE(Drawing::Color::RoyalBlue().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::RoyalBlue().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::RoyalBlue().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::RoyalBlue().IsSystemColor());
+    ASSERT_EQ("RoyalBlue", Drawing::Color::RoyalBlue().Name());
+    ASSERT_EQ("Color [RoyalBlue]", Drawing::Color::RoyalBlue().ToString());
+  }
+  
+  TEST(ColorTest, SaddleBrown) {
+    ASSERT_EQ(0xFF8B4513u, (unsigned)Drawing::Color::SaddleBrown().ToArgb());
+    ASSERT_FALSE(Drawing::Color::SaddleBrown().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::SaddleBrown().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::SaddleBrown().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::SaddleBrown().IsSystemColor());
+    ASSERT_EQ("SaddleBrown", Drawing::Color::SaddleBrown().Name());
+    ASSERT_EQ("Color [SaddleBrown]", Drawing::Color::SaddleBrown().ToString());
+  }
+  
+  TEST(ColorTest, Salmon) {
+    ASSERT_EQ(0xFFFA8072u, (unsigned)Drawing::Color::Salmon().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Salmon().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Salmon().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Salmon().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Salmon().IsSystemColor());
+    ASSERT_EQ("Salmon", Drawing::Color::Salmon().Name());
+    ASSERT_EQ("Color [Salmon]", Drawing::Color::Salmon().ToString());
+  }
+  
+  TEST(ColorTest, SandyBrown) {
+    ASSERT_EQ(0xFFF4A460u, (unsigned)Drawing::Color::SandyBrown().ToArgb());
+    ASSERT_FALSE(Drawing::Color::SandyBrown().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::SandyBrown().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::SandyBrown().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::SandyBrown().IsSystemColor());
+    ASSERT_EQ("SandyBrown", Drawing::Color::SandyBrown().Name());
+    ASSERT_EQ("Color [SandyBrown]", Drawing::Color::SandyBrown().ToString());
+  }
+  
+  TEST(ColorTest, SeaGreen) {
+    ASSERT_EQ(0xFF2E8B57u, (unsigned)Drawing::Color::SeaGreen().ToArgb());
+    ASSERT_FALSE(Drawing::Color::SeaGreen().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::SeaGreen().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::SeaGreen().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::SeaGreen().IsSystemColor());
+    ASSERT_EQ("SeaGreen", Drawing::Color::SeaGreen().Name());
+    ASSERT_EQ("Color [SeaGreen]", Drawing::Color::SeaGreen().ToString());
+  }
+  
+  TEST(ColorTest, SeaShell) {
+    ASSERT_EQ(0xFFFFF5EEu, (unsigned)Drawing::Color::SeaShell().ToArgb());
+    ASSERT_FALSE(Drawing::Color::SeaShell().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::SeaShell().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::SeaShell().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::SeaShell().IsSystemColor());
+    ASSERT_EQ("SeaShell", Drawing::Color::SeaShell().Name());
+    ASSERT_EQ("Color [SeaShell]", Drawing::Color::SeaShell().ToString());
+  }
+  
+  TEST(ColorTest, Sienna) {
+    ASSERT_EQ(0xFFA0522Du, (unsigned)Drawing::Color::Sienna().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Sienna().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Sienna().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Sienna().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Sienna().IsSystemColor());
+    ASSERT_EQ("Sienna", Drawing::Color::Sienna().Name());
+    ASSERT_EQ("Color [Sienna]", Drawing::Color::Sienna().ToString());
+  }
+  
+  TEST(ColorTest, Silver) {
+    ASSERT_EQ(0xFFC0C0C0u, (unsigned)Drawing::Color::Silver().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Silver().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Silver().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Silver().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Silver().IsSystemColor());
+    ASSERT_EQ("Silver", Drawing::Color::Silver().Name());
+    ASSERT_EQ("Color [Silver]", Drawing::Color::Silver().ToString());
+  }
+  
+  TEST(ColorTest, SkyBlue) {
+    ASSERT_EQ(0xFF87CEEBu, (unsigned)Drawing::Color::SkyBlue().ToArgb());
+    ASSERT_FALSE(Drawing::Color::SkyBlue().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::SkyBlue().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::SkyBlue().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::SkyBlue().IsSystemColor());
+    ASSERT_EQ("SkyBlue", Drawing::Color::SkyBlue().Name());
+    ASSERT_EQ("Color [SkyBlue]", Drawing::Color::SkyBlue().ToString());
+  }
+  
+  TEST(ColorTest, SlateBlue) {
+    ASSERT_EQ(0xFF6A5ACDu, (unsigned)Drawing::Color::SlateBlue().ToArgb());
+    ASSERT_FALSE(Drawing::Color::SlateBlue().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::SlateBlue().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::SlateBlue().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::SlateBlue().IsSystemColor());
+    ASSERT_EQ("SlateBlue", Drawing::Color::SlateBlue().Name());
+    ASSERT_EQ("Color [SlateBlue]", Drawing::Color::SlateBlue().ToString());
+  }
+  
+  TEST(ColorTest, SlateGray) {
+    ASSERT_EQ(0xFF708090u, (unsigned)Drawing::Color::SlateGray().ToArgb());
+    ASSERT_FALSE(Drawing::Color::SlateGray().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::SlateGray().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::SlateGray().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::SlateGray().IsSystemColor());
+    ASSERT_EQ("SlateGray", Drawing::Color::SlateGray().Name());
+    ASSERT_EQ("Color [SlateGray]", Drawing::Color::SlateGray().ToString());
+  }
+  
+  TEST(ColorTest, Snow) {
+    ASSERT_EQ(0xFFFFFAFAu, (unsigned)Drawing::Color::Snow().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Snow().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Snow().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Snow().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Snow().IsSystemColor());
+    ASSERT_EQ("Snow", Drawing::Color::Snow().Name());
+    ASSERT_EQ("Color [Snow]", Drawing::Color::Snow().ToString());
+  }
+  
+  TEST(ColorTest, SpringGreen) {
+    ASSERT_EQ(0xFF00FF7Fu, (unsigned)Drawing::Color::SpringGreen().ToArgb());
+    ASSERT_FALSE(Drawing::Color::SpringGreen().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::SpringGreen().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::SpringGreen().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::SpringGreen().IsSystemColor());
+    ASSERT_EQ("SpringGreen", Drawing::Color::SpringGreen().Name());
+    ASSERT_EQ("Color [SpringGreen]", Drawing::Color::SpringGreen().ToString());
+  }
+  
+  TEST(ColorTest, SteelBlue) {
+    ASSERT_EQ(0xFF4682B4u, (unsigned)Drawing::Color::SteelBlue().ToArgb());
+    ASSERT_FALSE(Drawing::Color::SteelBlue().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::SteelBlue().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::SteelBlue().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::SteelBlue().IsSystemColor());
+    ASSERT_EQ("SteelBlue", Drawing::Color::SteelBlue().Name());
+    ASSERT_EQ("Color [SteelBlue]", Drawing::Color::SteelBlue().ToString());
+  }
+  
+  TEST(ColorTest, Tan) {
+    ASSERT_EQ(0xFFD2B48Cu, (unsigned)Drawing::Color::Tan().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Tan().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Tan().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Tan().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Tan().IsSystemColor());
+    ASSERT_EQ("Tan", Drawing::Color::Tan().Name());
+    ASSERT_EQ("Color [Tan]", Drawing::Color::Tan().ToString());
+  }
+  
+  TEST(ColorTest, Teal) {
+    ASSERT_EQ(0xFF008080u, (unsigned)Drawing::Color::Teal().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Teal().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Teal().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Teal().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Teal().IsSystemColor());
+    ASSERT_EQ("Teal", Drawing::Color::Teal().Name());
+    ASSERT_EQ("Color [Teal]", Drawing::Color::Teal().ToString());
+  }
+  
+  TEST(ColorTest, Thistle) {
+    ASSERT_EQ(0xFFD8BFD8u, (unsigned)Drawing::Color::Thistle().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Thistle().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Thistle().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Thistle().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Thistle().IsSystemColor());
+    ASSERT_EQ("Thistle", Drawing::Color::Thistle().Name());
+    ASSERT_EQ("Color [Thistle]", Drawing::Color::Thistle().ToString());
+  }
+  
+  TEST(ColorTest, Tomato) {
+    ASSERT_EQ(0xFFFF6347u, (unsigned)Drawing::Color::Tomato().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Tomato().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Tomato().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Tomato().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Tomato().IsSystemColor());
+    ASSERT_EQ("Tomato", Drawing::Color::Tomato().Name());
+    ASSERT_EQ("Color [Tomato]", Drawing::Color::Tomato().ToString());
+  }
+  
+  TEST(ColorTest, Turquoise) {
+    ASSERT_EQ(0xFF40E0D0u, (unsigned)Drawing::Color::Turquoise().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Turquoise().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Turquoise().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Turquoise().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Turquoise().IsSystemColor());
+    ASSERT_EQ("Turquoise", Drawing::Color::Turquoise().Name());
+    ASSERT_EQ("Color [Turquoise]", Drawing::Color::Turquoise().ToString());
+  }
+  
+  TEST(ColorTest, Violet) {
+    ASSERT_EQ(0xFFEE82EEu, (unsigned)Drawing::Color::Violet().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Violet().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Violet().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Violet().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Violet().IsSystemColor());
+    ASSERT_EQ("Violet", Drawing::Color::Violet().Name());
+    ASSERT_EQ("Color [Violet]", Drawing::Color::Violet().ToString());
+  }
+  
+  TEST(ColorTest, Wheat) {
+    ASSERT_EQ(0xFFF5DEB3u, (unsigned)Drawing::Color::Wheat().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Wheat().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Wheat().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Wheat().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Wheat().IsSystemColor());
+    ASSERT_EQ("Wheat", Drawing::Color::Wheat().Name());
+    ASSERT_EQ("Color [Wheat]", Drawing::Color::Wheat().ToString());
+  }
+  
+  TEST(ColorTest, White) {
+    ASSERT_EQ(0xFFFFFFFFu, (unsigned)Drawing::Color::White().ToArgb());
+    ASSERT_FALSE(Drawing::Color::White().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::White().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::White().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::White().IsSystemColor());
+    ASSERT_EQ("White", Drawing::Color::White().Name());
+    ASSERT_EQ("Color [White]", Drawing::Color::White().ToString());
+  }
+  
+  TEST(ColorTest, WhiteSmoke) {
+    ASSERT_EQ(0xFFF5F5F5u, (unsigned)Drawing::Color::WhiteSmoke().ToArgb());
+    ASSERT_FALSE(Drawing::Color::WhiteSmoke().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::WhiteSmoke().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::WhiteSmoke().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::WhiteSmoke().IsSystemColor());
+    ASSERT_EQ("WhiteSmoke", Drawing::Color::WhiteSmoke().Name());
+    ASSERT_EQ("Color [WhiteSmoke]", Drawing::Color::WhiteSmoke().ToString());
+  }
+  
+  TEST(ColorTest, Yellow) {
+    ASSERT_EQ(0xFFFFFF00u, (unsigned)Drawing::Color::Yellow().ToArgb());
+    ASSERT_FALSE(Drawing::Color::Yellow().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::Yellow().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::Yellow().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::Yellow().IsSystemColor());
+    ASSERT_EQ("Yellow", Drawing::Color::Yellow().Name());
+    ASSERT_EQ("Color [Yellow]", Drawing::Color::Yellow().ToString());
+  }
+  
+  TEST(ColorTest, YellowGreen) {
+    ASSERT_EQ(0xFF9ACD32u, (unsigned)Drawing::Color::YellowGreen().ToArgb());
+    ASSERT_FALSE(Drawing::Color::YellowGreen().IsEmpty());
+    ASSERT_TRUE(Drawing::Color::YellowGreen().IsKnownColor());
+    ASSERT_TRUE(Drawing::Color::YellowGreen().IsNamedColor());
+    ASSERT_FALSE(Drawing::Color::YellowGreen().IsSystemColor());
+    ASSERT_EQ("YellowGreen", Drawing::Color::YellowGreen().Name());
+    ASSERT_EQ("Color [YellowGreen]", Drawing::Color::YellowGreen().ToString());
+  }
 }
+

@@ -2,79 +2,77 @@
 #include <Switch/System/Diagnostics/DefaultTraceListener.hpp>
 #include <Switch/System/Diagnostics/TraceSource.hpp>
 #include <Switch/System/Console.hpp>
-#include <Switch/TUnit/Assert.hpp>
-#include <Switch/TUnit/TestFixture.hpp>
+#include <gtest/gtest.h>
 
 using namespace System;
 using namespace System::Diagnostics;
-using namespace TUnit;
 
 namespace {
   class DefaultTraceUnittestListener : public TraceListener {
   public:
     void Fail(const string& message)  {
-      EXPECT_TRUE(message.Equals("TestFail"));
+      ASSERT_TRUE(message.Equals("TestFail"));
     }
 
     void Fail(const string& message, const string& detailMessage) {
-      EXPECT_TRUE(message.Equals("TestFail"));
-      EXPECT_TRUE(detailMessage.Equals("Detail"));
+      ASSERT_TRUE(message.Equals("TestFail"));
+      ASSERT_TRUE(detailMessage.Equals("Detail"));
     }
 
     void TraceEvent(const TraceEventCache& /*cache*/, const string& src, const TraceEventType& type, int32 id, const string& message) {
-      EXPECT_TRUE(src.Equals(Environment::CommandLine()));
+      ASSERT_TRUE(src.Equals(Environment::CommandLine()));
       switch(type) {
       case TraceEventType::Error:
-        EXPECT_TRUE(message.Equals("TestError"));
+        ASSERT_TRUE(message.Equals("TestError"));
         break;
       case TraceEventType::Information:
-        EXPECT_TRUE(message.Equals("TestInformation"));
+        ASSERT_TRUE(message.Equals("TestInformation"));
         break;
       case TraceEventType::Warning:
-        EXPECT_TRUE(message.Equals("TestWarning"));
+        ASSERT_TRUE(message.Equals("TestWarning"));
         break;
-        default : EXPECT_FALSE(true);
+        default : ASSERT_FALSE(true);
       }
     }
 
     void Write(const Object& obj) {
-      EXPECT_TRUE(obj.ToString().Equals("Data object"));
+      ASSERT_TRUE(obj.ToString().Equals("Data object"));
     }
 
     void Write(const string& message) {
-      EXPECT_TRUE(message.Equals("Data string"));
+      ASSERT_TRUE(message.Equals("Data string"));
     }
 
     void Write(const Object& obj, const string& category) {
-      EXPECT_TRUE(category.Equals("Category"));
-      EXPECT_TRUE(obj.ToString().Equals("Data object"));
+      ASSERT_TRUE(category.Equals("Category"));
+      ASSERT_TRUE(obj.ToString().Equals("Data object"));
     }
 
     void Write(const string& message, const string& category) {
-      EXPECT_TRUE(category.Equals("Category"));
-      EXPECT_TRUE(message.Equals("Data string"));
+      ASSERT_TRUE(category.Equals("Category"));
+      ASSERT_TRUE(message.Equals("Data string"));
     }
 
     void WriteLine(const Object& obj) {
-      EXPECT_TRUE(obj.ToString().Equals("Data object"));
+      ASSERT_TRUE(obj.ToString().Equals("Data object"));
     }
 
     void WriteLine(const string& message) {
-      EXPECT_TRUE(message.Equals("Data string"));
+      ASSERT_TRUE(message.Equals("Data string"));
     }
 
     void WriteLine(const Object& obj, const string& category) {
-      EXPECT_TRUE(category.Equals("Category"));
-      EXPECT_TRUE(obj.ToString().Equals("Data object"));
+      ASSERT_TRUE(category.Equals("Category"));
+      ASSERT_TRUE(obj.ToString().Equals("Data object"));
     }
 
     void WriteLine(const string& message, const string& category) {
-      EXPECT_TRUE(category.Equals("Category"));
-      EXPECT_TRUE(message.Equals("Data string"));
+      ASSERT_TRUE(category.Equals("Category"));
+      ASSERT_TRUE(message.Equals("Data string"));
     }
   };
 
-  TEST(Trace, Default) {
+  TEST(TraceTest, Default) {
     Console::SetOut(System::IO::TextWriter::Null());
 
     string dataString("Data string");
@@ -119,49 +117,49 @@ namespace {
   class TraceSourceUnittestListener : public TraceListener {
   public:
      void TraceData(const TraceEventCache& /*cache*/, const string& src, const TraceEventType& type, int32 id, const System::Object& data) override {
-       EXPECT_TRUE(src.Equals("TraceUnittest"));
-       EXPECT_EQ(1,id);
+       ASSERT_TRUE(src.Equals("TraceUnittest"));
+       ASSERT_EQ(1,id);
        switch(type) {
         case TraceEventType::Error:
-          EXPECT_TRUE(data.ToString().Equals("Data object"));
+          ASSERT_TRUE(data.ToString().Equals("Data object"));
           break;
         default:
-          EXPECT_TRUE(false);
+          ASSERT_TRUE(false);
        }
      }
 
     void TraceData(const TraceEventCache& /*cache*/, const string& src, const TraceEventType& type, int32 id, const System::Collections::ArrayList& data) override {
-      EXPECT_TRUE(src.Equals("TraceUnittest"));
-      EXPECT_EQ(1,id);
+      ASSERT_TRUE(src.Equals("TraceUnittest"));
+      ASSERT_EQ(1,id);
       switch(type) {
        case TraceEventType::Error:
-         EXPECT_TRUE(data[0].ToString().Equals("Object 0"));
-         EXPECT_TRUE(data[1].ToString().Equals("Object 1"));
+         ASSERT_TRUE(data[0].ToString().Equals("Object 0"));
+         ASSERT_TRUE(data[1].ToString().Equals("Object 1"));
          break;
        default:
-         EXPECT_TRUE(false);
+         ASSERT_TRUE(false);
       }
     }
 
     void TraceEvent(const TraceEventCache& /*cache*/, const string& src, const TraceEventType& type, int32 id) override {
-      EXPECT_TRUE(src.Equals("TraceUnittest"));
-      EXPECT_EQ(2,id);
-      EXPECT_EQ(TraceEventType::Error, type);
+      ASSERT_TRUE(src.Equals("TraceUnittest"));
+      ASSERT_EQ(2,id);
+      ASSERT_EQ(TraceEventType::Error, type);
     }
 
     void TraceEvent(const TraceEventCache& /*cache*/, const string& src, const TraceEventType& type, int32 id, const string& message) override {
-      EXPECT_TRUE(src.Equals("TraceUnittest"));
+      ASSERT_TRUE(src.Equals("TraceUnittest"));
       switch(type) {
        case TraceEventType::Error:
-         EXPECT_EQ(2,id);
-         EXPECT_TRUE(message.Equals("ErrorTest"));
+         ASSERT_EQ(2,id);
+         ASSERT_TRUE(message.Equals("ErrorTest"));
          break;
        case TraceEventType::Information:
-         EXPECT_EQ(0,id);
-         EXPECT_TRUE(message.Equals("InformationTest"));
+         ASSERT_EQ(0,id);
+         ASSERT_TRUE(message.Equals("InformationTest"));
          break;
        default:
-         EXPECT_TRUE(false);
+         ASSERT_TRUE(false);
       }
     }
     
@@ -169,7 +167,7 @@ namespace {
     void WriteLine(const string& message) override {}
   };
 
-  TEST(Trace, Source) {
+  TEST(TraceTest, Source) {
     Console::SetOut(System::IO::TextWriter::Null());
 
     string dataString("Data string");

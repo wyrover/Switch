@@ -1,10 +1,8 @@
 #include <Switch/System/IO/IOException.hpp>
 #include <Switch/System/Threading/Thread.hpp>
-#include <Switch/TUnit/Assert.hpp>
-#include <Switch/TUnit/TestFixture.hpp>
+#include <gtest/gtest.h>
 
 using namespace System;
-using namespace TUnit;
 
 namespace {
   /*
@@ -65,7 +63,7 @@ namespace {
     Console::WriteLine("Stop Transmitter...");
   }
 
-  TEST(SerialPort, Test) {
+  TEST(SerialPortTest, Test) {
     Console::WriteLine("Start Test...");
     ReceiverPort = 0;
     TransmitterPort = 2;

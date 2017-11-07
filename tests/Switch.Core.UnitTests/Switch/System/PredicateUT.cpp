@@ -1,43 +1,37 @@
 #include <Switch/System/Predicate.hpp>
-#include <Switch/TUnit/Assert.hpp>
-#include <Switch/TUnit/TestFixture.hpp>
+#include <Switch/System/String.hpp>
+#include <Switch/Using.hpp>
+#include <gtest/gtest.h>
 
 using namespace System;
-using namespace TUnit;
 
 namespace {
-  class PrediacateTest : public TestFixture {
-  protected:
-    class MyClass : public object {
-    public:
-      static bool IsEmpty(const string& str) { return string::IsNullOrEmpty(str); }
-      bool IsNotEmpty(const string& str) { return !string::IsNullOrEmpty(str); }
-    };
-    
-    void Static() {
-      _using(Predicate<const string&> p(&MyClass::IsEmpty)) {
-        Assert::IsFalse(p("Not empty"), _caller);
-        Assert::IsTrue(p(""), _caller);
-      }
-    }
-    
-    void Member() {
-      MyClass m;
-      _using(Predicate<const string&> p(m, &MyClass::IsNotEmpty)) {
-        Assert::IsTrue(p("Not empty"), _caller);
-        Assert::IsFalse(p(""), _caller);
-      }
-    }
-    
-    void Empty() {
-      _using(Predicate<const string&> p) {
-        Assert::DoesNotThrows(_delegate {p("Not empty");}, _caller);
-        Assert::DoesNotThrows(_delegate {p("");}, _caller);
-      }
-    }
+  class MyClass : public object {
+  public:
+    static bool IsEmpty(const string& str) { return string::IsNullOrEmpty(str); }
+    bool IsNotEmpty(const string& str) { return !string::IsNullOrEmpty(str); }
   };
   
-  _AddTest(PrediacateTest, Static)
-  _AddTest(PrediacateTest, Member)
-  _AddTest(PrediacateTest, Empty)
+  TEST(PrediacateTest, Static) {
+    _using(Predicate<const string&> p(&MyClass::IsEmpty)) {
+      ASSERT_FALSE(p("Not empty"));
+      ASSERT_TRUE(p(""));
+    }
+  }
+  
+  TEST(PrediacateTest, Member) {
+    MyClass m;
+    _using(Predicate<const string&> p(m, &MyClass::IsNotEmpty)) {
+      ASSERT_TRUE(p("Not empty"));
+      ASSERT_FALSE(p(""));
+    }
+  }
+  
+  TEST(PrediacateTest, Empty) {
+    _using(Predicate<const string&> p) {
+      ASSERT_NO_THROW(p("Not empty"));
+      ASSERT_NO_THROW(p(""));
+    }
+  }
 }
+

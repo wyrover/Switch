@@ -1,20 +1,17 @@
-﻿#include "EncodingUT.hpp"
+#include "EncodingUT.hpp"
 #include <Switch/System/Text/ASCIIEncoding.hpp>
 #include <Switch/System/Text/ANSIEncoding.hpp>
 #include <Switch/System/Text/UnicodeEncoding.hpp>
 #include <Switch/System/Text/UTF8Encoding.hpp>
 #include <Switch/System/Text/UTF32Encoding.hpp>
-#include <Switch/TUnit/Assert.hpp>
-#include <Switch/TUnit/TestFixture.hpp>
+#include <gtest/gtest.h>
 
 using namespace System;
 using namespace System::Collections;
 using namespace System::Collections::Generic;
 using namespace System::Text;
-using namespace TUnit;
 
 namespace EncodingUT {
-
   UnicodeSequence UnicodeCharacter::operator+(const UnicodeCharacter& info) const {
     return UnicodeSequence(*this) + UnicodeSequence(info);
   }
@@ -72,43 +69,43 @@ namespace EncodingUT {
 
   void CheckErrorsGetByteCount(const Encoding& encoding) {
     char32 chars[] = { 32, 32, 32, 32 };
-    EXPECT_THROW(encoding.GetByteCount(chars, 4, -1,  3), ArgumentOutOfRangeException);
-    EXPECT_THROW(encoding.GetByteCount(chars, 4, 0, -1), ArgumentOutOfRangeException);
-    EXPECT_THROW(encoding.GetByteCount(chars, 4, 0,  5), ArgumentOutOfRangeException);
-    EXPECT_THROW(encoding.GetByteCount(chars, 4, 1,  4), ArgumentOutOfRangeException);
+    ASSERT_THROW(encoding.GetByteCount(chars, 4, -1,  3), ArgumentOutOfRangeException);
+    ASSERT_THROW(encoding.GetByteCount(chars, 4, 0, -1), ArgumentOutOfRangeException);
+    ASSERT_THROW(encoding.GetByteCount(chars, 4, 0,  5), ArgumentOutOfRangeException);
+    ASSERT_THROW(encoding.GetByteCount(chars, 4, 1,  4), ArgumentOutOfRangeException);
   }
 
   void CheckErrorsGetBytes(const Encoding& encoding) {
     byte bytes[4] = { 0x32, 0x32, 0x32, 0x32 };
     char32 chars[4] = { 32, 32, 32, 32 };
 
-    EXPECT_THROW(encoding.GetBytes(null,  0,  0,  4, bytes, 4,  0), ArgumentOutOfRangeException);
-    EXPECT_THROW(encoding.GetBytes(chars, 4,  0,  4, null, 0,  0), ArgumentOutOfRangeException);
-    EXPECT_THROW(encoding.GetBytes(chars, 4, -1,  4, bytes, 4,  0), ArgumentOutOfRangeException);
-    EXPECT_THROW(encoding.GetBytes(chars, 4,  0, -1, bytes, 4,  0), ArgumentOutOfRangeException);
-    EXPECT_THROW(encoding.GetBytes(chars, 4,  0,  4, bytes, 4, -1), ArgumentOutOfRangeException);
-    EXPECT_THROW(encoding.GetBytes(chars, 4,  0,  5, bytes, 4,  0), ArgumentOutOfRangeException);
-    EXPECT_THROW(encoding.GetBytes(chars, 4,  1,  4, bytes, 4,  0), ArgumentOutOfRangeException);
-    EXPECT_THROW(encoding.GetBytes(chars, 4,  0,  4, bytes, 4,  1), ArgumentException);
+    ASSERT_THROW(encoding.GetBytes(null,  0,  0,  4, bytes, 4,  0), ArgumentOutOfRangeException);
+    ASSERT_THROW(encoding.GetBytes(chars, 4,  0,  4, null, 0,  0), ArgumentOutOfRangeException);
+    ASSERT_THROW(encoding.GetBytes(chars, 4, -1,  4, bytes, 4,  0), ArgumentOutOfRangeException);
+    ASSERT_THROW(encoding.GetBytes(chars, 4,  0, -1, bytes, 4,  0), ArgumentOutOfRangeException);
+    ASSERT_THROW(encoding.GetBytes(chars, 4,  0,  4, bytes, 4, -1), ArgumentOutOfRangeException);
+    ASSERT_THROW(encoding.GetBytes(chars, 4,  0,  5, bytes, 4,  0), ArgumentOutOfRangeException);
+    ASSERT_THROW(encoding.GetBytes(chars, 4,  1,  4, bytes, 4,  0), ArgumentOutOfRangeException);
+    ASSERT_THROW(encoding.GetBytes(chars, 4,  0,  4, bytes, 4,  1), ArgumentException);
   }
 
   void CheckErrorsGetCharCount(const Encoding& encoding) {
     byte bytes[] = { 0x32, 0x32, 0x32, 0x32 };
-    EXPECT_THROW(encoding.GetCharCount(bytes, 4, -1, 4), ArgumentOutOfRangeException);
-    EXPECT_THROW(encoding.GetCharCount(bytes, 4, 0,-1), ArgumentOutOfRangeException);
-    EXPECT_THROW(encoding.GetCharCount(bytes, 4, 0, 5), ArgumentOutOfRangeException);
-    EXPECT_THROW(encoding.GetCharCount(bytes, 4, 1, 4), ArgumentOutOfRangeException);
+    ASSERT_THROW(encoding.GetCharCount(bytes, 4, -1, 4), ArgumentOutOfRangeException);
+    ASSERT_THROW(encoding.GetCharCount(bytes, 4, 0,-1), ArgumentOutOfRangeException);
+    ASSERT_THROW(encoding.GetCharCount(bytes, 4, 0, 5), ArgumentOutOfRangeException);
+    ASSERT_THROW(encoding.GetCharCount(bytes, 4, 1, 4), ArgumentOutOfRangeException);
   }
 
   void CheckErrorsGetChars(const Encoding& encoding) {
     byte bytes[4] = { 0x32, 0x32, 0x32, 0x32 };
     char32 chars[4] = { 32, 32, 32, 32 };
 
-    EXPECT_THROW(encoding.GetChars(bytes, 4,-1, 4, chars, 4, 0), ArgumentOutOfRangeException);
-    EXPECT_THROW(encoding.GetChars(bytes, 4, 0,-1, chars, 4, 0), ArgumentOutOfRangeException);
-    EXPECT_THROW(encoding.GetChars(bytes, 4, 0, 4, chars, 4,-1), ArgumentOutOfRangeException);
-    EXPECT_THROW(encoding.GetChars(bytes, 4, 0, 5, chars, 4, 0), ArgumentOutOfRangeException);
-    EXPECT_THROW(encoding.GetChars(bytes, 4, 1, 4, chars, 4, 0), ArgumentOutOfRangeException);
+    ASSERT_THROW(encoding.GetChars(bytes, 4,-1, 4, chars, 4, 0), ArgumentOutOfRangeException);
+    ASSERT_THROW(encoding.GetChars(bytes, 4, 0,-1, chars, 4, 0), ArgumentOutOfRangeException);
+    ASSERT_THROW(encoding.GetChars(bytes, 4, 0, 4, chars, 4,-1), ArgumentOutOfRangeException);
+    ASSERT_THROW(encoding.GetChars(bytes, 4, 0, 5, chars, 4, 0), ArgumentOutOfRangeException);
+    ASSERT_THROW(encoding.GetChars(bytes, 4, 1, 4, chars, 4, 0), ArgumentOutOfRangeException);
   }
 
   void CheckErrorsString(const Encoding& encoding) {
@@ -116,42 +113,42 @@ namespace EncodingUT {
     Chars chars = {32, 32, 32, 32};
 
     Bytes emptyBytes = encoding.GetBytes("");
-    EXPECT_EQ(0, emptyBytes.Length);
+    ASSERT_EQ(0, emptyBytes.Length);
 
     string emptyString = encoding.GetString(null,0);
-    EXPECT_EQ(0, emptyString.Length());
+    ASSERT_EQ(0, emptyString.Length());
   }
 
   void GetByteCountTest(refptr<Encoding> encoding, int charByteSize, int piByteSize, int sigmaByteSize, int koalaByteSize) {
     string unicodeString = "Pi " + Char(928) + " Sigma " + Char(931) + " KOALA " + Char(128040);
     Array<char32> chars = unicodeString.ToCharArray();
 
-    EXPECT_EQ(charByteSize, encoding->GetByteCount(chars.Data, chars.Count, 0, 1));
-    EXPECT_EQ(piByteSize, encoding->GetByteCount(chars.Data, chars.Count, 3, 1));
-    EXPECT_EQ(sigmaByteSize, encoding->GetByteCount(chars.Data, chars.Count, 11, 1));
-    EXPECT_EQ(koalaByteSize, encoding->GetByteCount(chars.Data, chars.Count, 19, 1));
+    ASSERT_EQ(charByteSize, encoding->GetByteCount(chars.Data, chars.Count, 0, 1));
+    ASSERT_EQ(piByteSize, encoding->GetByteCount(chars.Data, chars.Count, 3, 1));
+    ASSERT_EQ(sigmaByteSize, encoding->GetByteCount(chars.Data, chars.Count, 11, 1));
+    ASSERT_EQ(koalaByteSize, encoding->GetByteCount(chars.Data, chars.Count, 19, 1));
 
-    EXPECT_EQ(20, chars.Count);
-    EXPECT_EQ(charByteSize * 17 + piByteSize + sigmaByteSize + koalaByteSize, encoding->GetByteCount(chars.Data, chars.Count));
-    EXPECT_EQ(charByteSize * 17 + piByteSize + sigmaByteSize + koalaByteSize, encoding->GetByteCount(unicodeString));
+    ASSERT_EQ(20, chars.Count);
+    ASSERT_EQ(charByteSize * 17 + piByteSize + sigmaByteSize + koalaByteSize, encoding->GetByteCount(chars.Data, chars.Count));
+    ASSERT_EQ(charByteSize * 17 + piByteSize + sigmaByteSize + koalaByteSize, encoding->GetByteCount(unicodeString));
 
-    EXPECT_EQ(0, encoding->GetByteCount(chars.Data, chars.Count, 0, 0));
-    EXPECT_EQ(0, encoding->GetByteCount(chars.Data, chars.Count, 1, 0));
-    EXPECT_EQ(0, encoding->GetByteCount(chars.Data, chars.Count, 2, 0));
+    ASSERT_EQ(0, encoding->GetByteCount(chars.Data, chars.Count, 0, 0));
+    ASSERT_EQ(0, encoding->GetByteCount(chars.Data, chars.Count, 1, 0));
+    ASSERT_EQ(0, encoding->GetByteCount(chars.Data, chars.Count, 2, 0));
 
-    EXPECT_EQ(0, encoding->GetByteCount(chars.Data, chars.Count, chars.Count - 2, 0));
-    EXPECT_EQ(0, encoding->GetByteCount(chars.Data, chars.Count, chars.Count - 1, 0));
-    EXPECT_EQ(0, encoding->GetByteCount(chars.Data, chars.Count, chars.Count, 0));
-    EXPECT_THROW(encoding->GetByteCount(chars.Data, chars.Count, chars.Count + 1, 0), ArgumentOutOfRangeException);
+    ASSERT_EQ(0, encoding->GetByteCount(chars.Data, chars.Count, chars.Count - 2, 0));
+    ASSERT_EQ(0, encoding->GetByteCount(chars.Data, chars.Count, chars.Count - 1, 0));
+    ASSERT_EQ(0, encoding->GetByteCount(chars.Data, chars.Count, chars.Count, 0));
+    ASSERT_THROW(encoding->GetByteCount(chars.Data, chars.Count, chars.Count + 1, 0), ArgumentOutOfRangeException);
 
-    EXPECT_EQ(charByteSize * 3, encoding->GetByteCount(chars.Data, chars.Count,  0, 3));
-    EXPECT_EQ(charByteSize * 6 + koalaByteSize, encoding->GetByteCount(chars.Data, chars.Count, 13, 7));
-    EXPECT_THROW(encoding->GetByteCount(chars.Data, chars.Count, 13, 8), ArgumentOutOfRangeException);
+    ASSERT_EQ(charByteSize * 3, encoding->GetByteCount(chars.Data, chars.Count,  0, 3));
+    ASSERT_EQ(charByteSize * 6 + koalaByteSize, encoding->GetByteCount(chars.Data, chars.Count, 13, 7));
+    ASSERT_THROW(encoding->GetByteCount(chars.Data, chars.Count, 13, 8), ArgumentOutOfRangeException);
   }
 
   void ExpectBytes(const Bytes& bytes, const string& strBytes) {
     string join = string::Join(", ", bytes);
-    EXPECT_TRUE(join.Equals(strBytes));
+    ASSERT_TRUE(join.Equals(strBytes));
   }
 
   void GetBytesTest(refptr<Encoding> encoding, int charByteSize, int piByteSize, int sigmaByteSize, int koalaByteSize, 
@@ -184,23 +181,23 @@ namespace EncodingUT {
       ExpectBytes(encoding->GetBytes(unicodeString, 1, 0),"");
       ExpectBytes(encoding->GetBytes(unicodeString, 2, 0),"");
       ExpectBytes(encoding->GetBytes(unicodeString, 20, 0),"");
-      EXPECT_THROW(encoding->GetBytes(unicodeString, 21, 0),ArgumentOutOfRangeException);
-      EXPECT_THROW(encoding->GetBytes(unicodeString, 22, 0),ArgumentOutOfRangeException);
+      ASSERT_THROW(encoding->GetBytes(unicodeString, 21, 0),ArgumentOutOfRangeException);
+      ASSERT_THROW(encoding->GetBytes(unicodeString, 22, 0),ArgumentOutOfRangeException);
 
-      EXPECT_THROW(encoding->GetBytes(unicodeChars.Data, unicodeChars.Count, 20, 1), ArgumentOutOfRangeException);
+      ASSERT_THROW(encoding->GetBytes(unicodeChars.Data, unicodeChars.Count, 20, 1), ArgumentOutOfRangeException);
       ExpectBytes(encoding->GetBytes(unicodeChars.Data, unicodeChars.Count, 9, 1),charBytes);
       ExpectBytes(encoding->GetBytes(unicodeChars.Data, unicodeChars.Count, 3, 1),piBytes);
       ExpectBytes(encoding->GetBytes(unicodeChars.Data, unicodeChars.Count, 19, 1),koalaBytes);
 
       Bytes bytes(encoding->GetByteCount(unicodeChars.Data, unicodeChars.Count, 0, 0));
-      EXPECT_EQ(0, encoding->GetBytes(unicodeChars.Data, unicodeChars.Count, 0, 0, (byte*)bytes.Data(), bytes.Length, 0));
+      ASSERT_EQ(0, encoding->GetBytes(unicodeChars.Data, unicodeChars.Count, 0, 0, (byte*)bytes.Data(), bytes.Length, 0));
 
       bytes = Bytes(10 * charByteSize);
-      EXPECT_EQ(0, encoding->GetBytes(unicodeChars.Data, unicodeChars.Count, 0, 0, (byte*)bytes.Data(), bytes.Length, 0)); // ".........."
-      EXPECT_EQ(charByteSize*3, encoding->GetBytes(unicodeChars.Data, unicodeChars.Count, 0, 3, (byte*)bytes.Data(), bytes.Length, 0)); // "Pi ......."
-      EXPECT_EQ(charByteSize*3, encoding->GetBytes(unicodeChars.Data, unicodeChars.Count, 0, 3, (byte*)bytes.Data(), bytes.Length, 3*charByteSize)); // "Pi Pi ...."
-      EXPECT_EQ(charByteSize*3, encoding->GetBytes(unicodeChars.Data, unicodeChars.Count, 0, 3, (byte*)bytes.Data(), bytes.Length, 6*charByteSize)); // "Pi Pi Pi ."
-      EXPECT_EQ(charByteSize, encoding->GetBytes(unicodeChars.Data, unicodeChars.Count, 0, 1, (byte*)bytes.Data(), bytes.Length, 9*charByteSize)); // "Pi Pi Pi P"
+      ASSERT_EQ(0, encoding->GetBytes(unicodeChars.Data, unicodeChars.Count, 0, 0, (byte*)bytes.Data(), bytes.Length, 0)); // ".........."
+      ASSERT_EQ(charByteSize*3, encoding->GetBytes(unicodeChars.Data, unicodeChars.Count, 0, 3, (byte*)bytes.Data(), bytes.Length, 0)); // "Pi ......."
+      ASSERT_EQ(charByteSize*3, encoding->GetBytes(unicodeChars.Data, unicodeChars.Count, 0, 3, (byte*)bytes.Data(), bytes.Length, 3*charByteSize)); // "Pi Pi ...."
+      ASSERT_EQ(charByteSize*3, encoding->GetBytes(unicodeChars.Data, unicodeChars.Count, 0, 3, (byte*)bytes.Data(), bytes.Length, 6*charByteSize)); // "Pi Pi Pi ."
+      ASSERT_EQ(charByteSize, encoding->GetBytes(unicodeChars.Data, unicodeChars.Count, 0, 1, (byte*)bytes.Data(), bytes.Length, 9*charByteSize)); // "Pi Pi Pi P"
 
       Array<string> splits = unicodeBytes.Split(',');
       for (string& s : splits)
@@ -208,37 +205,37 @@ namespace EncodingUT {
       string Pi_ = string::Join(", ", splits, 0, 3 * charByteSize);
       ExpectBytes(bytes, Pi_ + ", " + Pi_ + ", " + Pi_ + ", " + string::Join(", ", splits, 0,charByteSize));
 
-      EXPECT_THROW(encoding->GetBytes(unicodeChars.Data, unicodeChars.Count, 0, 3, (byte*)bytes.Data(), bytes.Length, 9*charByteSize), ArgumentException);
+      ASSERT_THROW(encoding->GetBytes(unicodeChars.Data, unicodeChars.Count, 0, 3, (byte*)bytes.Data(), bytes.Length, 9*charByteSize), ArgumentException);
 
-      EXPECT_EQ(0, encoding->GetBytes(unicodeChars.Data, unicodeChars.Count, 0, 0, (byte*)bytes.Data(), bytes.Length, bytes.Length-1));
-      EXPECT_EQ(0,encoding->GetBytes(unicodeChars.Data, unicodeChars.Count, 0, 0, (byte*)bytes.Data(), bytes.Length, bytes.Length));
-      EXPECT_THROW(encoding->GetBytes(unicodeChars.Data, unicodeChars.Count, 0, 0, (byte*)bytes.Data(), bytes.Length, bytes.Length+1),ArgumentException);
+      ASSERT_EQ(0, encoding->GetBytes(unicodeChars.Data, unicodeChars.Count, 0, 0, (byte*)bytes.Data(), bytes.Length, bytes.Length-1));
+      ASSERT_EQ(0,encoding->GetBytes(unicodeChars.Data, unicodeChars.Count, 0, 0, (byte*)bytes.Data(), bytes.Length, bytes.Length));
+      ASSERT_THROW(encoding->GetBytes(unicodeChars.Data, unicodeChars.Count, 0, 0, (byte*)bytes.Data(), bytes.Length, bytes.Length+1),ArgumentException);
 
       bytes = Bytes(encoding->GetByteCount(unicodeChars.Data, unicodeChars.Count, 0, 3));
-      EXPECT_EQ(3 * charByteSize, encoding->GetBytes(unicodeChars.Data, unicodeChars.Count, 0, 3, (byte*)bytes.Data(), bytes.Length, 0));
+      ASSERT_EQ(3 * charByteSize, encoding->GetBytes(unicodeChars.Data, unicodeChars.Count, 0, 3, (byte*)bytes.Data(), bytes.Length, 0));
 
       bytes = Bytes(10 * charByteSize);
-      EXPECT_EQ(0, encoding->GetBytes(unicodeString, 0, 0, (byte*)bytes.Data(), bytes.Length, 0)); // ".........."
-      EXPECT_EQ(charByteSize*3, encoding->GetBytes(unicodeString, 0, 3, (byte*)bytes.Data(), bytes.Length, 0)); // "Pi ......."
-      EXPECT_EQ(charByteSize*3, encoding->GetBytes(unicodeString, 0, 3, (byte*)bytes.Data(), bytes.Length, 3*charByteSize)); // "Pi Pi ...."
-      EXPECT_EQ(charByteSize*3, encoding->GetBytes(unicodeString, 0, 3, (byte*)bytes.Data(), bytes.Length, 6*charByteSize)); // "Pi Pi Pi ."
-      EXPECT_EQ(charByteSize, encoding->GetBytes(unicodeString, 0, 1, (byte*)bytes.Data(), bytes.Length, 9*charByteSize)); // "Pi Pi Pi P"
+      ASSERT_EQ(0, encoding->GetBytes(unicodeString, 0, 0, (byte*)bytes.Data(), bytes.Length, 0)); // ".........."
+      ASSERT_EQ(charByteSize*3, encoding->GetBytes(unicodeString, 0, 3, (byte*)bytes.Data(), bytes.Length, 0)); // "Pi ......."
+      ASSERT_EQ(charByteSize*3, encoding->GetBytes(unicodeString, 0, 3, (byte*)bytes.Data(), bytes.Length, 3*charByteSize)); // "Pi Pi ...."
+      ASSERT_EQ(charByteSize*3, encoding->GetBytes(unicodeString, 0, 3, (byte*)bytes.Data(), bytes.Length, 6*charByteSize)); // "Pi Pi Pi ."
+      ASSERT_EQ(charByteSize, encoding->GetBytes(unicodeString, 0, 1, (byte*)bytes.Data(), bytes.Length, 9*charByteSize)); // "Pi Pi Pi P"
 
       ExpectBytes(bytes, Pi_ + ", " + Pi_ + ", " + Pi_ + ", " + string::Join(", ", splits, 0,charByteSize));
 
-      EXPECT_THROW(encoding->GetBytes(unicodeString, 0, 3, (byte*)bytes.Data(), bytes.Length, 9*charByteSize), ArgumentException);
+      ASSERT_THROW(encoding->GetBytes(unicodeString, 0, 3, (byte*)bytes.Data(), bytes.Length, 9*charByteSize), ArgumentException);
 
-      EXPECT_EQ(0, encoding->GetBytes(unicodeString, 0, 0, (byte*)bytes.Data(), bytes.Length, bytes.Length-1));
-      EXPECT_EQ(0, encoding->GetBytes(unicodeString, 0, 0, (byte*)bytes.Data(), bytes.Length, bytes.Length));
-      EXPECT_THROW(encoding->GetBytes(unicodeString, 0, 0, (byte*)bytes.Data(), bytes.Length, bytes.Length+1),ArgumentOutOfRangeException);
+      ASSERT_EQ(0, encoding->GetBytes(unicodeString, 0, 0, (byte*)bytes.Data(), bytes.Length, bytes.Length-1));
+      ASSERT_EQ(0, encoding->GetBytes(unicodeString, 0, 0, (byte*)bytes.Data(), bytes.Length, bytes.Length));
+      ASSERT_THROW(encoding->GetBytes(unicodeString, 0, 0, (byte*)bytes.Data(), bytes.Length, bytes.Length+1),ArgumentOutOfRangeException);
 
       bytes = Bytes(piByteSize);
-      EXPECT_EQ(piByteSize, encoding->GetBytes(unicodeString, 3, 1, (byte*)bytes.Data(), bytes.Length, 0));
+      ASSERT_EQ(piByteSize, encoding->GetBytes(unicodeString, 3, 1, (byte*)bytes.Data(), bytes.Length, 0));
       ExpectBytes(bytes, piBytes);
       bytes = Bytes(sigmaByteSize);
-      EXPECT_EQ(sigmaByteSize, encoding->GetBytes(unicodeString, 11, 1, (byte*)bytes.Data(), bytes.Length, 0));
+      ASSERT_EQ(sigmaByteSize, encoding->GetBytes(unicodeString, 11, 1, (byte*)bytes.Data(), bytes.Length, 0));
       bytes = Bytes(koalaByteSize);
-      EXPECT_EQ(koalaByteSize, encoding->GetBytes(unicodeString, 19, 1, (byte*)bytes.Data(), bytes.Length, 0));
+      ASSERT_EQ(koalaByteSize, encoding->GetBytes(unicodeString, 19, 1, (byte*)bytes.Data(), bytes.Length, 0));
       ExpectBytes(bytes, koalaBytes);
   }
   /*
@@ -246,24 +243,24 @@ namespace EncodingUT {
   // 3          pi           7          si          7            ko
   // "Pi " + Char(928) + " Sigma " + Char(931) + " KOALA " + Char(128040);
   Bytes emptyBytes;
-  EXPECT_EQ(0, encoding.GetCharCount(null, 0, 0, 0));
-  EXPECT_THROW(encoding.GetCharCount(null, 0, 0, 1), ArgumentOutOfRangeException);
-  EXPECT_THROW(encoding.GetCharCount(null, 1, 0, 1), ArgumentNullException);
-  EXPECT_EQ(0, encoding.GetCharCount(null, 0));
-  EXPECT_THROW(encoding.GetCharCount(null, 1), ArgumentNullException);
-  EXPECT_EQ(0, encoding.GetCharCount(unicodeBytes, size,0,0));
-  EXPECT_EQ(0, encoding.GetCharCount(unicodeBytes, size,1,0));
-  EXPECT_EQ(0, encoding.GetCharCount(unicodeBytes, size,2,0));
-  EXPECT_EQ(0, encoding.GetCharCount(unicodeBytes, size,3,0));
-  EXPECT_EQ(0, encoding.GetCharCount(unicodeBytes, size,size-1,0));
-  EXPECT_EQ(0, encoding.GetCharCount(unicodeBytes, size,size,0));
-  EXPECT_THROW(encoding.GetCharCount(unicodeBytes, size,size+1,0), ArgumentOutOfRangeException);
+  ASSERT_EQ(0, encoding.GetCharCount(null, 0, 0, 0));
+  ASSERT_THROW(encoding.GetCharCount(null, 0, 0, 1), ArgumentOutOfRangeException);
+  ASSERT_THROW(encoding.GetCharCount(null, 1, 0, 1), ArgumentNullException);
+  ASSERT_EQ(0, encoding.GetCharCount(null, 0));
+  ASSERT_THROW(encoding.GetCharCount(null, 1), ArgumentNullException);
+  ASSERT_EQ(0, encoding.GetCharCount(unicodeBytes, size,0,0));
+  ASSERT_EQ(0, encoding.GetCharCount(unicodeBytes, size,1,0));
+  ASSERT_EQ(0, encoding.GetCharCount(unicodeBytes, size,2,0));
+  ASSERT_EQ(0, encoding.GetCharCount(unicodeBytes, size,3,0));
+  ASSERT_EQ(0, encoding.GetCharCount(unicodeBytes, size,size-1,0));
+  ASSERT_EQ(0, encoding.GetCharCount(unicodeBytes, size,size,0));
+  ASSERT_THROW(encoding.GetCharCount(unicodeBytes, size,size+1,0), ArgumentOutOfRangeException);
 
-  EXPECT_EQ(3,encoding.GetCharCount(unicodeBytes, size, 0, charByteSize * 3));
-  EXPECT_EQ(1,encoding.GetCharCount(unicodeBytes, size, charByteSize * 3, piByteSize));
-  EXPECT_EQ(1,encoding.GetCharCount(unicodeBytes, size, charByteSize * 17 + piByteSize + sigmaByteSize, koalaByteSize));
+  ASSERT_EQ(3,encoding.GetCharCount(unicodeBytes, size, 0, charByteSize * 3));
+  ASSERT_EQ(1,encoding.GetCharCount(unicodeBytes, size, charByteSize * 3, piByteSize));
+  ASSERT_EQ(1,encoding.GetCharCount(unicodeBytes, size, charByteSize * 17 + piByteSize + sigmaByteSize, koalaByteSize));
 
-  EXPECT_THROW(encoding.GetCharCount(unicodeBytes, size, charByteSize * 17 + piByteSize + sigmaByteSize, koalaByteSize+1), ArgumentOutOfRangeException);
+  ASSERT_THROW(encoding.GetCharCount(unicodeBytes, size, charByteSize * 17 + piByteSize + sigmaByteSize, koalaByteSize+1), ArgumentOutOfRangeException);
   }*/
   /*
   void GetCharsTest(const Encoding& encoding, int charByteSize, int piByteSize, int sigmaByteSize, int koalaByteSize, 
@@ -285,53 +282,53 @@ namespace EncodingUT {
   }
 
   //encoding->GetChars(bytes);
-  EXPECT_THROW(encoding->GetChars(null, 1),ArgumentNullException);
+  ASSERT_THROW(encoding->GetChars(null, 1),ArgumentNullException);
   chars = encoding->GetChars(charBytes);
-  EXPECT_TRUE(string(chars().GetData(), chars().Length).Equals(charString));
+  ASSERT_TRUE(string(chars().GetData(), chars().Length).Equals(charString));
   chars = encoding->GetChars(piBytes);
-  EXPECT_TRUE(string(chars().GetData(), chars().Length).Equals(piString));
+  ASSERT_TRUE(string(chars().GetData(), chars().Length).Equals(piString));
   chars = encoding->GetChars(koalaBytes);
-  EXPECT_TRUE(string(chars().GetData(), chars().Length).Equals(koalaString));
+  ASSERT_TRUE(string(chars().GetData(), chars().Length).Equals(koalaString));
 
   //encoding->GetChars(bytes,0,0);
-  EXPECT_THROW(encoding->GetChars(*null_bytes,0,0),ArgumentNullException);
+  ASSERT_THROW(encoding->GetChars(*null_bytes,0,0),ArgumentNullException);
   chars = encoding->GetChars(charBytes,charByteSize,0);
-  EXPECT_EQ(0, chars->Length);
+  ASSERT_EQ(0, chars->Length);
   chars = encoding->GetChars(piBytes,piByteSize,0);
-  EXPECT_EQ(0, chars->Length);
+  ASSERT_EQ(0, chars->Length);
   chars = encoding->GetChars(koalaBytes,koalaByteSize,0);
-  EXPECT_EQ(0, chars->Length);    
-  EXPECT_THROW(encoding->GetChars(charBytes,charByteSize+1,0),ArgumentOutOfRangeException);
+  ASSERT_EQ(0, chars->Length);    
+  ASSERT_THROW(encoding->GetChars(charBytes,charByteSize+1,0),ArgumentOutOfRangeException);
   chars = encoding->GetChars(charBytes,0,charByteSize);
-  EXPECT_TRUE(string(chars().GetData(), chars().Length).Equals(charString));
+  ASSERT_TRUE(string(chars().GetData(), chars().Length).Equals(charString));
   chars = encoding->GetChars(piBytes,0,piByteSize);
-  EXPECT_TRUE(string(chars().GetData(), chars().Length).Equals(piString));
+  ASSERT_TRUE(string(chars().GetData(), chars().Length).Equals(piString));
   chars = encoding->GetChars(koalaBytes,0,koalaByteSize);
-  EXPECT_TRUE(string(chars().GetData(), chars().Length).Equals(koalaString));
+  ASSERT_TRUE(string(chars().GetData(), chars().Length).Equals(koalaString));
   chars = encoding->GetChars(*unicodeBytes,0, 3 * charByteSize);
-  EXPECT_TRUE(string(chars().GetData(), chars().Length).Equals("Pi "));
+  ASSERT_TRUE(string(chars().GetData(), chars().Length).Equals("Pi "));
   chars = encoding->GetChars(*unicodeBytes,3 * charByteSize, piByteSize);
-  EXPECT_TRUE(string(chars().GetData(), chars().Length).Equals(piString));
+  ASSERT_TRUE(string(chars().GetData(), chars().Length).Equals(piString));
   chars = encoding->GetChars(*unicodeBytes,17 * charByteSize + piByteSize + sigmaByteSize, koalaByteSize);
-  EXPECT_TRUE(string(chars().GetData(), chars().Length).Equals(koalaString));
+  ASSERT_TRUE(string(chars().GetData(), chars().Length).Equals(koalaString));
   chars = encoding->GetChars(*unicodeBytes,10 * charByteSize + piByteSize + sigmaByteSize, 7 * charByteSize + koalaByteSize);
-  EXPECT_TRUE(string(chars().GetData(), chars().Length).Equals(" KOALA " + koalaString));
+  ASSERT_TRUE(string(chars().GetData(), chars().Length).Equals(" KOALA " + koalaString));
 
   //encoding->GetChars(bytes,0,0,chars,0);
   chars = new Chars(10);
   bytes = new Bytes(10);
-  EXPECT_THROW(encoding->GetChars(*null_bytes,0,0,*chars,0),ArgumentNullException);
-  EXPECT_THROW(encoding->GetChars(*null_bytes,0,0,*null_chars,0),ArgumentNullException);
-  EXPECT_THROW(encoding->GetChars(*bytes,0,0,*null_chars,0),ArgumentNullException); 
+  ASSERT_THROW(encoding->GetChars(*null_bytes,0,0,*chars,0),ArgumentNullException);
+  ASSERT_THROW(encoding->GetChars(*null_bytes,0,0,*null_chars,0),ArgumentNullException);
+  ASSERT_THROW(encoding->GetChars(*bytes,0,0,*null_chars,0),ArgumentNullException); 
   }
   */
   void ConvertTest(const Encoding& srcEncoding, const Encoding& dstEncoding, const byte bytes[], int32 size, const string& reference) {
     Bytes newBytes = Encoding::Convert(srcEncoding,dstEncoding, bytes, size);
     String decoded = dstEncoding.GetString(newBytes.Data, newBytes.Length);
-    EXPECT_EQ(reference, decoded);
+    ASSERT_EQ(reference, decoded);
   }
 
-  TEST(Encoding, ConvertPi) {
+  TEST(EncodingTest, ConvertPi) {
     string asciiString = "?";
     string unicodeString = String::Format("{u03A0}");
 
@@ -392,7 +389,7 @@ namespace EncodingUT {
     ConvertTest(utf32be, utf32be, unicodeBytesUTF32BE, 4, unicodeString);
   }
 
-  TEST(Encoding, ConvertSigma) {
+  TEST(EncodingTest, ConvertSigma) {
     string asciiString = "?";
     string unicodeString = String::Format("{u03A3}");
 
@@ -453,7 +450,7 @@ namespace EncodingUT {
     ConvertTest(utf32be, utf32be, unicodeBytesUTF32BE, 4, unicodeString);
   }
 
-  TEST(Encoding, ConvertKoala) {
+  TEST(EncodingTest, ConvertKoala) {
     string asciiString = "?";
     string unicodeString = String::Format("{u1F428}");
 
@@ -514,7 +511,7 @@ namespace EncodingUT {
     ConvertTest(utf32be, utf32be, unicodeBytesUTF32BE, 4, unicodeString);
   }
 
-  TEST(Encoding, Convert) {
+  TEST(EncodingTest, Convert) {
     // "Pi " + Char(928) + " Sigma " + Char(931) + " KOALA " + Char(128040);
     string asciiString = "Pi ? Sigma ? KOALA ?";
     string unicodeString = String::Format("Pi {u03A0} Sigma {u03A3} KOALA {u1F428}");
@@ -594,7 +591,7 @@ namespace EncodingUT {
     ConvertTest(utf32be, utf32be, unicodeBytesUTF32BE, 80, unicodeString);
   }
 
-  TEST(Encoding, CodePage437) {
+  TEST(EncodingTest, CodePage437) {
     byte cp437Data[54] = {  0xDA, 0xC4, 0xC4, 0xC4, 0xC4, 0xC4, 0xC4, 0xC4, 0xC4, 0xBF, 10, 
       0xB3, 0x20, 0xDA, 0xC4, 0xC4, 0xC4, 0xC4, 0xBF, 0x20, 0xB3, 10, 
       0xB3, 0x20, 0xB3, 0x20, 0x4F, 0x4B, 0x20, 0xB3, 0x20, 0xB3, 10, 
@@ -613,9 +610,9 @@ namespace EncodingUT {
     string decodedString(chars.Data, chars.Length);
     Bytes codedBytes = encoding.GetBytes(chars.Data, chars.Length);
 
-    EXPECT_EQ(54, codedBytes.Length);
+    ASSERT_EQ(54, codedBytes.Length);
 
-    EXPECT_EQ(rawDataString, decodedString);
+    ASSERT_EQ(rawDataString, decodedString);
     //Console::WriteLine(rawDataString);
   }
 

@@ -2,13 +2,11 @@
 #include <Switch/System/Array.hpp>
 #include <Switch/System/Math.hpp>
 #include <Switch/System/String.hpp>
-#include <Switch/TUnit/Assert.hpp>
-#include <Switch/TUnit/TestFixture.hpp>
+#include <gtest/gtest.h>
 
 using namespace System;
 using namespace System::Collections::Generic;
 using namespace System::Linq;
-using namespace TUnit;
 
 namespace {
   static bool IsApproximatelyEquals(double value1, double value2, double epsilon) {
@@ -73,40 +71,40 @@ namespace {
     bool vaccinated;
   };
 
-  TEST(Enumerable, Agregate1) {
+  TEST(EnumerableTest, Agregate1) {
     ASSERT_EQ("dog lazy the over jumps fox brown quick the" , string("the quick brown fox jumps over the lazy dog").Split(' ').Agregate([](const string& value, const string& next) { return next + " " + value; }));
   }
   
-  TEST(Enumerable, Agregate2) {
+  TEST(EnumerableTest, Agregate2) {
     int32 result = Array<int32> {4, 8, 8, 3, 9, 0, 7, 8, 2}.Agregate<int32>(10, [](const int32& total, const int32& next) { return next % 2 == 0 ? total + 1 : total; });
     ASSERT_EQ(16, result);
   }
   
-  TEST(Enumerable, Agregate3) {
+  TEST(EnumerableTest, Agregate3) {
     string result = Array<string> {"apple", "mango", "orange", "passionfruit", "grape"}.Agregate<string, string>(string("bananas"), [](const string& longest, const string& next) { return next.Length() > longest.Length() ? next : longest; }, [](const string& str) { return str.ToUpper(); });
     ASSERT_EQ("PASSIONFRUIT", result);
     result = Array<string> {"GREEN", "YELLOW", "BLUE", "BROWN", "MAGENTA"}.Agregate<string, string>(string("RED"), [](const string& shortest, const string& next) { return next.Length() < shortest.Length() ? next : shortest; }, [](const string& str) { return str.ToLower(); });
     ASSERT_EQ("red", result);
   }
   
-  TEST(Enumerable, All) {
+  TEST(EnumerableTest, All) {
     ASSERT_FALSE(Array<Pet>({Pet("Barley", 8, true), Pet("Boots", 4, false), Pet("Whiskers", 1, false)}).All([](const Pet& pet) { return pet.Name().StartsWith("B"); }));
   }
   
-  TEST(Enumerable, Any1) {
+  TEST(EnumerableTest, Any1) {
     ASSERT_TRUE(List<int32>({1, 2, 3, 4, 5}).Any());
   }
   
-  TEST(Enumerable, Any2) {
+  TEST(EnumerableTest, Any2) {
     ASSERT_TRUE(Array<Pet>({Pet("Barley", 8, true), Pet("Boots", 4, false), Pet("Whiskers", 1, false)}).Any([](const Pet& pet) { return pet.IsVaccinated() == false && pet.Age() > 1; }));
     ASSERT_FALSE(Array<Pet>({Pet("Barley", 8, true), Pet("Boots", 4, false), Pet("Whiskers", 1, false)}).Any([](const Pet& pet) { return pet.IsVaccinated() == false && pet.Age() > 4; }));
   }
   
-  TEST(Enumerable, AverageInt32) {
+  TEST(EnumerableTest, AverageInt32) {
     ASSERT_TRUE(IsApproximatelyEquals(77.6f, Array<int>({78, 92, 100, 37, 81}).Average(), 0.1f));
   }
   
-  TEST(Enumerable, Cast) {
+  TEST(EnumerableTest, Cast) {
     Collections::ArrayList al;
     al.Add("Barley");
     al.Add("Boots");
@@ -121,7 +119,7 @@ namespace {
     ASSERT_EQ("Whiskers", enumerator.Current());
   }
   
-  TEST(Enumerable, Concat) {
+  TEST(EnumerableTest, Concat) {
     Array<int> a1 = {1, 2};
     Array<int> a2 = {3, 4};
     refptr<IEnumerable<int>> enumerable = a1.Concat(a2);
@@ -136,11 +134,11 @@ namespace {
     ASSERT_EQ(4, enumerator.Current());
   }
   
-  TEST(Enumerable, Max) {
+  TEST(EnumerableTest, Max) {
     ASSERT_EQ("Barley", List<Pet>({Pet("Barley", 8, true), Pet("Boots", 4, false), Pet("Whiskers", 1, false)}).Max().Name());
   }
   
-  TEST(Enumerable, Min) {
+  TEST(EnumerableTest, Min) {
     ASSERT_EQ("Boots",  List<Pet>({Pet("Barley", 8, true), Pet("Boots", 4, false), Pet("Whiskers", 1, false)}).Min().Name());
   }
 }
