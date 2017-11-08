@@ -102,10 +102,15 @@ endif()
 ########################################################################
 #
 # Install rules
-install(TARGETS gtest gtest_main
-  DESTINATION lib)
-install(DIRECTORY ${gtest_SOURCE_DIR}/include/gtest
-  DESTINATION include)
+install(TARGETS gtest gtest_main DESTINATION lib)
+install(DIRECTORY ${gtest_SOURCE_DIR}/include/gtest DESTINATION include)
+
+if (MSVC)
+  target_compile_options(${PROJECT_NAME} PRIVATE "$<$<CONFIG:Debug>:/Fd$<TARGET_FILE_DIR:${PROJECT_NAME}>/${PROJECT_NAME}${CMAKE_DEBUG_POSTFIX}.pdb>")
+  target_compile_options(${PROJECT_NAME} PRIVATE "$<$<CONFIG:Release>:/Fd$<TARGET_FILE_DIR:${PROJECT_NAME}>/${PROJECT_NAME}.pdb>")
+  install(FILES $<TARGET_FILE_DIR:${PROJECT_NAME}>/${PROJECT_NAME}${CMAKE_DEBUG_POSTFIX}.pdb DESTINATION lib CONFIGURATIONS Debug OPTIONAL)
+  install(FILES $<TARGET_FILE_DIR:${PROJECT_NAME}>/${PROJECT_NAME}.pdb DESTINATION lib CONFIGURATIONS Release OPTIONAL)
+endif()
 
 ########################################################################
 #
