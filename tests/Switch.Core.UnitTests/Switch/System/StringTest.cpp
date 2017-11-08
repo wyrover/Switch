@@ -1,4 +1,4 @@
-#include <Switch/System/String.hpp>
+﻿#include <Switch/System/String.hpp>
 #include <gtest/gtest.h>
 #include <Switch/LiteralOperatorConverter.hpp>
 
