@@ -3,7 +3,7 @@
 using namespace TUnit::Framework;
 using namespace System;
 
-namespace UnitTets {
+namespace ManualTests {
   class Test1 : public TestFixture {
     OneTimeSetUpAttribute __OneTimeInitAttribute {"OneTimeInit", *this, &Test1::OneTimeInit};
     void OneTimeInit() {
@@ -93,5 +93,5 @@ namespace UnitTets {
   };
 }
 
-_startup(UnitTets::MainTest)
+_startup(ManualTests::MainTest)
 

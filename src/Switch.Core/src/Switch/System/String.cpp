@@ -1421,7 +1421,7 @@ bool String::ReverseEnumerator::Equals(const Object& obj) const {
 }
 
 std::ostream& operator<<(std::ostream& output, const System::String& value) {
-  output << value.Data();
+  output << value.c_str();
   return output;
 }
 
