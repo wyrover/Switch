@@ -9,7 +9,7 @@
 using namespace System;
 using namespace System::Threading;
 
-namespace Examples {
+namespace ManualTests {
   class Program {
   public:
     // The main entry point for the application.
@@ -18,4 +18,4 @@ namespace Examples {
   };
 }
 
-_startup(Examples::Program)
+_startup(ManualTests::Program)

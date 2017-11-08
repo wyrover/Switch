@@ -5,7 +5,7 @@
 
 using namespace System;
 
-namespace Examples {
+namespace ManualTests {
   struct TestFixture1 : public TUnit::TestFixture {
     void Test1() {
       TUnit::Expect::True(true);
@@ -23,4 +23,4 @@ namespace Examples {
   };
 }
 
-_startup(Examples::Program)
+_startup(ManualTests::Program)

@@ -3245,7 +3245,7 @@ namespace Switch {
         if (base == 8) {
           std::stringstream ss;
           ss << std::oct << value;
-          return ss.str().c_str();
+          return ss.str();
         }
         
         if (base == 10)
