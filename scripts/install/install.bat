@@ -40,6 +40,7 @@ if %ERRORLEVEL%==9009 (
 if "%1" == "/help" (
   call scripts\install\install_windows_usage.bat 
 ) else if "%devenv%" == "" (
+  echo.
   echo Installation failed : Visual Studio not found!
   echo.
   echo Before using this install.bat file, be sure you are in "Developer Command Prompt for 
