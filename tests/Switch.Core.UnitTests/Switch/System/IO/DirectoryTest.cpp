@@ -23,6 +23,8 @@ namespace SwitchUnitTests {
     ASSERT_FALSE(System::IO::Directory::Exists(testPath));
     System::IO::Directory::CreateDirectory(testPath);
     ASSERT_TRUE(System::IO::Directory::Exists(testPath));
+    System::IO::Directory::Delete(testPath);
+    ASSERT_FALSE(System::IO::Directory::Exists(testPath));
   }
   
   TEST_F(DirectoryTest, CreateAndDeleteAnEmptyDirectory) {

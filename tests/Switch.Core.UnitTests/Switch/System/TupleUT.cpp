@@ -10,83 +10,83 @@ using namespace System;
 namespace {
   TEST(TupleTest, Tuple1) {
     Tuple<string> t("Value"_s);
-    ASSERT_EQ("Value", t.Item1);
+    ASSERT_EQ("Value", t.Item1());
   }
   
   TEST(TupleTest, Tuple2) {
     Tuple<string, int> t("Value", 42);
-    ASSERT_EQ("Value", t.Item1);
-    ASSERT_EQ(42, t.Item2);
+    ASSERT_EQ("Value", t.Item1());
+    ASSERT_EQ(42, t.Item2());
   }
   
   TEST(TupleTest, Tuple3) {
     Tuple<string, int, bool> t("Value", 42, true);
-    ASSERT_EQ("Value", t.Item1);
-    ASSERT_EQ(42, t.Item2);
-    ASSERT_EQ(true, t.Item3);
+    ASSERT_EQ("Value", t.Item1());
+    ASSERT_EQ(42, t.Item2());
+    ASSERT_EQ(true, t.Item3());
   }
   
   TEST(TupleTest, Tuple4) {
     Tuple<string, int, bool, DayOfWeek> t("Value", 42, true, DayOfWeek::Wednesday);
-    ASSERT_EQ("Value", t.Item1);
-    ASSERT_EQ(42, t.Item2);
-    ASSERT_EQ(true, t.Item3);
-    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4);
+    ASSERT_EQ("Value", t.Item1());
+    ASSERT_EQ(42, t.Item2());
+    ASSERT_EQ(true, t.Item3());
+    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4());
   }
   
   TEST(TupleTest, Tuple5) {
     Tuple<string, int, bool, DayOfWeek, double> t("Value", 42, true, DayOfWeek::Wednesday, .42);
-    ASSERT_EQ("Value", t.Item1);
-    ASSERT_EQ(42, t.Item2);
-    ASSERT_EQ(true, t.Item3);
-    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4);
-    ASSERT_EQ(.42, t.Item5);
+    ASSERT_EQ("Value", t.Item1());
+    ASSERT_EQ(42, t.Item2());
+    ASSERT_EQ(true, t.Item3());
+    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4());
+    ASSERT_EQ(.42, t.Item5());
   }
   
   TEST(TupleTest, Tuple6) {
     Tuple<string, int, bool, DayOfWeek, double, char32> t("Value", 42, true, DayOfWeek::Wednesday, .42, U'a');
-    ASSERT_EQ("Value", t.Item1);
-    ASSERT_EQ(42, t.Item2);
-    ASSERT_EQ(true, t.Item3);
-    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4);
-    ASSERT_EQ(.42, t.Item5);
-    ASSERT_EQ(U'a', t.Item6);
+    ASSERT_EQ("Value", t.Item1());
+    ASSERT_EQ(42, t.Item2());
+    ASSERT_EQ(true, t.Item3());
+    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4());
+    ASSERT_EQ(.42, t.Item5());
+    ASSERT_EQ(U'a', t.Item6());
   }
   
   TEST(TupleTest, Tuple7) {
     Tuple<string, int, bool, DayOfWeek, double, char32, byte> t("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', 21);
-    ASSERT_EQ("Value", t.Item1);
-    ASSERT_EQ(42, t.Item2);
-    ASSERT_EQ(true, t.Item3);
-    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4);
-    ASSERT_EQ(.42, t.Item5);
-    ASSERT_EQ(U'a', t.Item6);
-    ASSERT_EQ((byte)21, t.Item7);
+    ASSERT_EQ("Value", t.Item1());
+    ASSERT_EQ(42, t.Item2());
+    ASSERT_EQ(true, t.Item3());
+    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4());
+    ASSERT_EQ(.42, t.Item5());
+    ASSERT_EQ(U'a', t.Item6());
+    ASSERT_EQ((byte)21, t.Item7());
   }
   
   TEST(TupleTest, TupleRest) {
     Tuple<string, int, bool, DayOfWeek, double, char32, byte, TimeSpan> t("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', 21, 12_h + 23_min + 2_s);
-    ASSERT_EQ("Value", t.Item1);
-    ASSERT_EQ(42, t.Item2);
-    ASSERT_EQ(true, t.Item3);
-    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4);
-    ASSERT_EQ(.42, t.Item5);
-    ASSERT_EQ(U'a', t.Item6);
-    ASSERT_EQ((byte)21, t.Item7);
-    ASSERT_EQ(12_h + 23_min + 2_s, t.Rest);
+    ASSERT_EQ("Value", t.Item1());
+    ASSERT_EQ(42, t.Item2());
+    ASSERT_EQ(true, t.Item3());
+    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4());
+    ASSERT_EQ(.42, t.Item5());
+    ASSERT_EQ(U'a', t.Item6());
+    ASSERT_EQ((byte)21, t.Item7());
+    ASSERT_EQ(12_h + 23_min + 2_s, t.Rest());
   }
   
   TEST(TupleTest, TupleRestWithTuple) {
     Tuple<string, int, bool, DayOfWeek, double, char32, byte, Tuple<TimeSpan, Version>> t("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', 21, {12_h + 23_min + 2_s, {1, 2, 3}});
-    ASSERT_EQ("Value", t.Item1);
-    ASSERT_EQ(42, t.Item2);
-    ASSERT_EQ(true, t.Item3);
-    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4);
-    ASSERT_EQ(.42, t.Item5);
-    ASSERT_EQ(U'a', t.Item6);
-    ASSERT_EQ((byte)21, t.Item7);
-    ASSERT_EQ(12_h + 23_min + 2_s, t.Rest().Item1);
-    ASSERT_EQ(Version(1, 2, 3), t.Rest().Item2);
+    ASSERT_EQ("Value", t.Item1());
+    ASSERT_EQ(42, t.Item2());
+    ASSERT_EQ(true, t.Item3());
+    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4());
+    ASSERT_EQ(.42, t.Item5());
+    ASSERT_EQ(U'a', t.Item6());
+    ASSERT_EQ((byte)21, t.Item7());
+    ASSERT_EQ(12_h + 23_min + 2_s, t.Rest().Item1());
+    ASSERT_EQ(Version(1, 2, 3), t.Rest().Item2());
   }
   
   TEST(TupleTest, Tuple1ToString) {
@@ -135,475 +135,475 @@ namespace {
   }
   
   TEST(TupleTest, CreateTuple1) {
-    auto t = Tuple<>::Create("Value");
-    ASSERT_EQ("Value", t.Item1);
+    auto t = Tuple<>::Create("Value"_s);
+    ASSERT_EQ("Value", t.Item1());
   }
   
   TEST(TupleTest, CreateTuple2) {
-    auto t = Tuple<>::Create("Value", 42);
-    ASSERT_EQ("Value", t.Item1);
-    ASSERT_EQ(42, t.Item2);
+    auto t = Tuple<>::Create("Value"_s, 42);
+    ASSERT_EQ("Value", t.Item1());
+    ASSERT_EQ(42, t.Item2());
   }
   
   TEST(TupleTest, CreateTuple3) {
-    auto t = Tuple<>::Create("Value", 42, true);
-    ASSERT_EQ("Value", t.Item1);
-    ASSERT_EQ(42, t.Item2);
-    ASSERT_EQ(true, t.Item3);
+    auto t = Tuple<>::Create("Value"_s, 42, true);
+    ASSERT_EQ("Value", t.Item1());
+    ASSERT_EQ(42, t.Item2());
+    ASSERT_EQ(true, t.Item3());
   }
   
   TEST(TupleTest, CreateTuple4) {
-    auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday);
-    ASSERT_EQ("Value", t.Item1);
-    ASSERT_EQ(42, t.Item2);
-    ASSERT_EQ(true, t.Item3);
-    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4);
+    auto t = Tuple<>::Create("Value"_s, 42, true, DayOfWeek::Wednesday);
+    ASSERT_EQ("Value", t.Item1());
+    ASSERT_EQ(42, t.Item2());
+    ASSERT_EQ(true, t.Item3());
+    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4());
   }
   
   TEST(TupleTest, CreateTuple5) {
-    auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42);
-    ASSERT_EQ("Value", t.Item1);
-    ASSERT_EQ(42, t.Item2);
-    ASSERT_EQ(true, t.Item3);
-    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4);
-    ASSERT_EQ(.42, t.Item5);
+    auto t = Tuple<>::Create("Value"_s, 42, true, DayOfWeek::Wednesday, .42);
+    ASSERT_EQ("Value", t.Item1());
+    ASSERT_EQ(42, t.Item2());
+    ASSERT_EQ(true, t.Item3());
+    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4());
+    ASSERT_EQ(.42, t.Item5());
   }
   
   TEST(TupleTest, CreateTuple6) {
-    auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a');
-    ASSERT_EQ("Value", t.Item1);
-    ASSERT_EQ(42, t.Item2);
-    ASSERT_EQ(true, t.Item3);
-    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4);
-    ASSERT_EQ(.42, t.Item5);
-    ASSERT_EQ(U'a', t.Item6);
+    auto t = Tuple<>::Create("Value"_s, 42, true, DayOfWeek::Wednesday, .42, U'a');
+    ASSERT_EQ("Value", t.Item1());
+    ASSERT_EQ(42, t.Item2());
+    ASSERT_EQ(true, t.Item3());
+    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4());
+    ASSERT_EQ(.42, t.Item5());
+    ASSERT_EQ(U'a', t.Item6());
   }
   
   TEST(TupleTest, CreateTuple7) {
-    auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21);
-    ASSERT_EQ("Value", t.Item1);
-    ASSERT_EQ(42, t.Item2);
-    ASSERT_EQ(true, t.Item3);
-    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4);
-    ASSERT_EQ(.42, t.Item5);
-    ASSERT_EQ(U'a', t.Item6);
-    ASSERT_EQ((byte)21, t.Item7);
+    auto t = Tuple<>::Create("Value"_s, 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21);
+    ASSERT_EQ("Value", t.Item1());
+    ASSERT_EQ(42, t.Item2());
+    ASSERT_EQ(true, t.Item3());
+    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4());
+    ASSERT_EQ(.42, t.Item5());
+    ASSERT_EQ(U'a', t.Item6());
+    ASSERT_EQ((byte)21, t.Item7());
   }
   
   TEST(TupleTest, CreateTupleRest) {
-    auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21, 12_h + 23_min + 2_s);
-    ASSERT_EQ("Value", t.Item1);
-    ASSERT_EQ(42, t.Item2);
-    ASSERT_EQ(true, t.Item3);
-    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4);
-    ASSERT_EQ(.42, t.Item5);
-    ASSERT_EQ(U'a', t.Item6);
-    ASSERT_EQ((byte)21, t.Item7);
-    ASSERT_EQ(12_h + 23_min + 2_s, t.Rest);
+    auto t = Tuple<>::Create("Value"_s, 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21, 12_h + 23_min + 2_s);
+    ASSERT_EQ("Value", t.Item1());
+    ASSERT_EQ(42, t.Item2());
+    ASSERT_EQ(true, t.Item3());
+    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4());
+    ASSERT_EQ(.42, t.Item5());
+    ASSERT_EQ(U'a', t.Item6());
+    ASSERT_EQ((byte)21, t.Item7());
+    ASSERT_EQ(12_h + 23_min + 2_s, t.Rest());
   }
   
   TEST(TupleTest, CreateTupleRestWithTuple) {
-    auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21, Tuple<>::Create(12_h + 23_min + 2_s, Version(1, 2, 3)));
-    ASSERT_EQ("Value", t.Item1);
-    ASSERT_EQ(42, t.Item2);
-    ASSERT_EQ(true, t.Item3);
-    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4);
-    ASSERT_EQ(.42, t.Item5);
-    ASSERT_EQ(U'a', t.Item6);
-    ASSERT_EQ((byte)21, t.Item7);
-    ASSERT_EQ(12_h + 23_min + 2_s, t.Rest().Item1);
-    ASSERT_EQ(Version(1, 2, 3), t.Rest().Item2);
+    auto t = Tuple<>::Create("Value"_s, 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21, Tuple<>::Create(12_h + 23_min + 2_s, Version(1, 2, 3)));
+    ASSERT_EQ("Value", t.Item1());
+    ASSERT_EQ(42, t.Item2());
+    ASSERT_EQ(true, t.Item3());
+    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4());
+    ASSERT_EQ(.42, t.Item5());
+    ASSERT_EQ(U'a', t.Item6());
+    ASSERT_EQ((byte)21, t.Item7());
+    ASSERT_EQ(12_h + 23_min + 2_s, t.Rest().Item1());
+    ASSERT_EQ(Version(1, 2, 3), t.Rest().Item2());
   }
   
   TEST(TupleTest, CreateTuple1AndSetItem1) {
-    auto t = Tuple<>::Create("Value");
+    auto t = Tuple<>::Create("Value"_s);
     t.Item1 = "Other";
-    ASSERT_EQ("Other", t.Item1);
+    ASSERT_EQ("Other", t.Item1());
   }
   
   TEST(TupleTest, CreateTuple2AndSetItem1) {
-    auto t = Tuple<>::Create("Value", 42);
+    auto t = Tuple<>::Create("Value"_s, 42);
     t.Item1 = "Other";
-    ASSERT_EQ("Other", t.Item1);
-    ASSERT_EQ(42, t.Item2);
+    ASSERT_EQ("Other", t.Item1());
+    ASSERT_EQ(42, t.Item2());
   }
   
   TEST(TupleTest, CreateTuple2AndSetItem2) {
-    auto t = Tuple<>::Create("Value", 42);
+    auto t = Tuple<>::Create("Value"_s, 42);
     t.Item2 = 84;
-    ASSERT_EQ("Value", t.Item1);
-    ASSERT_EQ(84, t.Item2);
+    ASSERT_EQ("Value", t.Item1());
+    ASSERT_EQ(84, t.Item2());
   }
   
   TEST(TupleTest, CreateTuple3AndSetItem1) {
-    auto t = Tuple<>::Create("Value", 42, true);
+    auto t = Tuple<>::Create("Value"_s, 42, true);
     t.Item1 = "Other";
-    ASSERT_EQ("Other", t.Item1);
-    ASSERT_EQ(42, t.Item2);
-    ASSERT_EQ(true, t.Item3);
+    ASSERT_EQ("Other", t.Item1());
+    ASSERT_EQ(42, t.Item2());
+    ASSERT_EQ(true, t.Item3());
   }
   
   TEST(TupleTest, CreateTuple3AndSetItem2) {
-    auto t = Tuple<>::Create("Value", 42, true);
+    auto t = Tuple<>::Create("Value"_s, 42, true);
     t.Item2 = 84;
-    ASSERT_EQ("Value", t.Item1);
-    ASSERT_EQ(84, t.Item2);
-    ASSERT_EQ(true, t.Item3);
+    ASSERT_EQ("Value", t.Item1());
+    ASSERT_EQ(84, t.Item2());
+    ASSERT_EQ(true, t.Item3());
   }
   
   TEST(TupleTest, CreateTuple3AndSetItem3) {
-    auto t = Tuple<>::Create("Value", 42, true);
+    auto t = Tuple<>::Create("Value"_s, 42, true);
     t.Item3 = false;
-    ASSERT_EQ("Value", t.Item1);
-    ASSERT_EQ(42, t.Item2);
-    ASSERT_EQ(false, t.Item3);
+    ASSERT_EQ("Value", t.Item1());
+    ASSERT_EQ(42, t.Item2());
+    ASSERT_EQ(false, t.Item3());
   }
   
   TEST(TupleTest, CreateTuple4AndSetItem1) {
-    auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday);
+    auto t = Tuple<>::Create("Value"_s, 42, true, DayOfWeek::Wednesday);
     t.Item1 = "Other";
-    ASSERT_EQ("Other", t.Item1);
-    ASSERT_EQ(42, t.Item2);
-    ASSERT_EQ(true, t.Item3);
-    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4);
+    ASSERT_EQ("Other", t.Item1());
+    ASSERT_EQ(42, t.Item2());
+    ASSERT_EQ(true, t.Item3());
+    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4());
   }
   
   TEST(TupleTest, CreateTuple4AndSetItem2) {
-    auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday);
+    auto t = Tuple<>::Create("Value"_s, 42, true, DayOfWeek::Wednesday);
     t.Item2 = 84;
-    ASSERT_EQ("Value", t.Item1);
-    ASSERT_EQ(84, t.Item2);
-    ASSERT_EQ(true, t.Item3);
-    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4);
+    ASSERT_EQ("Value", t.Item1());
+    ASSERT_EQ(84, t.Item2());
+    ASSERT_EQ(true, t.Item3());
+    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4());
   }
   
   TEST(TupleTest, CreateTuple4AndSetItem3) {
-    auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday);
+    auto t = Tuple<>::Create("Value"_s, 42, true, DayOfWeek::Wednesday);
     t.Item3 = false;
-    ASSERT_EQ("Value", t.Item1);
-    ASSERT_EQ(42, t.Item2);
-    ASSERT_EQ(false, t.Item3);
-    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4);
+    ASSERT_EQ("Value", t.Item1());
+    ASSERT_EQ(42, t.Item2());
+    ASSERT_EQ(false, t.Item3());
+    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4());
   }
   
   TEST(TupleTest, CreateTuple4AndSetItem4) {
-    auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday);
+    auto t = Tuple<>::Create("Value"_s, 42, true, DayOfWeek::Wednesday);
     t.Item4 = DayOfWeek::Sunday;
-    ASSERT_EQ("Value", t.Item1);
-    ASSERT_EQ(42, t.Item2);
-    ASSERT_EQ(true, t.Item3);
-    ASSERT_EQ(DayOfWeek::Sunday, t.Item4);
+    ASSERT_EQ("Value", t.Item1());
+    ASSERT_EQ(42, t.Item2());
+    ASSERT_EQ(true, t.Item3());
+    ASSERT_EQ(DayOfWeek::Sunday, t.Item4());
   }
   
   TEST(TupleTest, CreateTuple5AndSetItem1) {
-    auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42);
+    auto t = Tuple<>::Create("Value"_s, 42, true, DayOfWeek::Wednesday, .42);
     t.Item1 = "Other";
-    ASSERT_EQ("Other", t.Item1);
-    ASSERT_EQ(42, t.Item2);
-    ASSERT_EQ(true, t.Item3);
-    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4);
-    ASSERT_EQ(.42, t.Item5);
+    ASSERT_EQ("Other", t.Item1());
+    ASSERT_EQ(42, t.Item2());
+    ASSERT_EQ(true, t.Item3());
+    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4());
+    ASSERT_EQ(.42, t.Item5());
   }
   
   TEST(TupleTest, CreateTuple5AndSetItem2) {
-    auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42);
+    auto t = Tuple<>::Create("Value"_s, 42, true, DayOfWeek::Wednesday, .42);
     t.Item2 = 84;
-    ASSERT_EQ("Value", t.Item1);
-    ASSERT_EQ(84, t.Item2);
-    ASSERT_EQ(true, t.Item3);
-    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4);
-    ASSERT_EQ(.42, t.Item5);
+    ASSERT_EQ("Value", t.Item1());
+    ASSERT_EQ(84, t.Item2());
+    ASSERT_EQ(true, t.Item3());
+    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4());
+    ASSERT_EQ(.42, t.Item5());
   }
   
   TEST(TupleTest, CreateTuple5AndSetItem3) {
-    auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42);
+    auto t = Tuple<>::Create("Value"_s, 42, true, DayOfWeek::Wednesday, .42);
     t.Item3 = false;
-    ASSERT_EQ("Value", t.Item1);
-    ASSERT_EQ(42, t.Item2);
-    ASSERT_EQ(false, t.Item3);
-    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4);
-    ASSERT_EQ(.42, t.Item5);
+    ASSERT_EQ("Value", t.Item1());
+    ASSERT_EQ(42, t.Item2());
+    ASSERT_EQ(false, t.Item3());
+    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4());
+    ASSERT_EQ(.42, t.Item5());
   }
   
   TEST(TupleTest, CreateTuple5AndSetItem4) {
-    auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42);
+    auto t = Tuple<>::Create("Value"_s, 42, true, DayOfWeek::Wednesday, .42);
     t.Item4 = DayOfWeek::Sunday;
-    ASSERT_EQ("Value", t.Item1);
-    ASSERT_EQ(42, t.Item2);
-    ASSERT_EQ(true, t.Item3);
-    ASSERT_EQ(DayOfWeek::Sunday, t.Item4);
-    ASSERT_EQ(.42, t.Item5);
+    ASSERT_EQ("Value", t.Item1());
+    ASSERT_EQ(42, t.Item2());
+    ASSERT_EQ(true, t.Item3());
+    ASSERT_EQ(DayOfWeek::Sunday, t.Item4());
+    ASSERT_EQ(.42, t.Item5());
   }
   
   TEST(TupleTest, CreateTuple5AndSetItem5) {
-    auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42);
+    auto t = Tuple<>::Create("Value"_s, 42, true, DayOfWeek::Wednesday, .42);
     t.Item5 = .21;
-    ASSERT_EQ("Value", t.Item1);
-    ASSERT_EQ(42, t.Item2);
-    ASSERT_EQ(true, t.Item3);
-    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4);
-    ASSERT_EQ(.21, t.Item5);
+    ASSERT_EQ("Value", t.Item1());
+    ASSERT_EQ(42, t.Item2());
+    ASSERT_EQ(true, t.Item3());
+    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4());
+    ASSERT_EQ(.21, t.Item5());
   }
   
   TEST(TupleTest, CreateTuple6AndSetItem1) {
-    auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a');
+    auto t = Tuple<>::Create("Value"_s, 42, true, DayOfWeek::Wednesday, .42, U'a');
     t.Item1 = "Other";
-    ASSERT_EQ("Other", t.Item1);
-    ASSERT_EQ(42, t.Item2);
-    ASSERT_EQ(true, t.Item3);
-    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4);
-    ASSERT_EQ(.42, t.Item5);
-    ASSERT_EQ(U'a', t.Item6);
+    ASSERT_EQ("Other", t.Item1());
+    ASSERT_EQ(42, t.Item2());
+    ASSERT_EQ(true, t.Item3());
+    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4());
+    ASSERT_EQ(.42, t.Item5());
+    ASSERT_EQ(U'a', t.Item6());
   }
   
   TEST(TupleTest, CreateTuple6AndSetItem2) {
-    auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a');
+    auto t = Tuple<>::Create("Value"_s, 42, true, DayOfWeek::Wednesday, .42, U'a');
     t.Item2 = 84;
-    ASSERT_EQ("Value", t.Item1);
-    ASSERT_EQ(84, t.Item2);
-    ASSERT_EQ(true, t.Item3);
-    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4);
-    ASSERT_EQ(.42, t.Item5);
-    ASSERT_EQ(U'a', t.Item6);
+    ASSERT_EQ("Value", t.Item1());
+    ASSERT_EQ(84, t.Item2());
+    ASSERT_EQ(true, t.Item3());
+    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4());
+    ASSERT_EQ(.42, t.Item5());
+    ASSERT_EQ(U'a', t.Item6());
   }
   
   TEST(TupleTest, CreateTuple6AndSetItem3) {
-    auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a');
+    auto t = Tuple<>::Create("Value"_s, 42, true, DayOfWeek::Wednesday, .42, U'a');
     t.Item3 = false;
-    ASSERT_EQ("Value", t.Item1);
-    ASSERT_EQ(42, t.Item2);
-    ASSERT_EQ(false, t.Item3);
-    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4);
-    ASSERT_EQ(.42, t.Item5);
-    ASSERT_EQ(U'a', t.Item6);
+    ASSERT_EQ("Value", t.Item1());
+    ASSERT_EQ(42, t.Item2());
+    ASSERT_EQ(false, t.Item3());
+    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4());
+    ASSERT_EQ(.42, t.Item5());
+    ASSERT_EQ(U'a', t.Item6());
   }
   
   TEST(TupleTest, CreateTuple6AndSetItem4) {
-    auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a');
+    auto t = Tuple<>::Create("Value"_s, 42, true, DayOfWeek::Wednesday, .42, U'a');
     t.Item4 = DayOfWeek::Sunday;
-    ASSERT_EQ("Value", t.Item1);
-    ASSERT_EQ(42, t.Item2);
-    ASSERT_EQ(true, t.Item3);
-    ASSERT_EQ(DayOfWeek::Sunday, t.Item4);
-    ASSERT_EQ(.42, t.Item5);
-    ASSERT_EQ(U'a', t.Item6);
+    ASSERT_EQ("Value", t.Item1());
+    ASSERT_EQ(42, t.Item2());
+    ASSERT_EQ(true, t.Item3());
+    ASSERT_EQ(DayOfWeek::Sunday, t.Item4());
+    ASSERT_EQ(.42, t.Item5());
+    ASSERT_EQ(U'a', t.Item6());
   }
   
   TEST(TupleTest, CreateTuple6AndSetItem5) {
-    auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a');
+    auto t = Tuple<>::Create("Value"_s, 42, true, DayOfWeek::Wednesday, .42, U'a');
     t.Item5 = .21;
-    ASSERT_EQ("Value", t.Item1);
-    ASSERT_EQ(42, t.Item2);
-    ASSERT_EQ(true, t.Item3);
-    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4);
-    ASSERT_EQ(.21, t.Item5);
-    ASSERT_EQ(U'a', t.Item6);
+    ASSERT_EQ("Value", t.Item1());
+    ASSERT_EQ(42, t.Item2());
+    ASSERT_EQ(true, t.Item3());
+    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4());
+    ASSERT_EQ(.21, t.Item5());
+    ASSERT_EQ(U'a', t.Item6());
   }
   
   TEST(TupleTest, CreateTuple6AndSetItem6) {
-    auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a');
+    auto t = Tuple<>::Create("Value"_s, 42, true, DayOfWeek::Wednesday, .42, U'a');
     t.Item6 = U'b';
-    ASSERT_EQ("Value", t.Item1);
-    ASSERT_EQ(42, t.Item2);
-    ASSERT_EQ(true, t.Item3);
-    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4);
-    ASSERT_EQ(.42, t.Item5);
-    ASSERT_EQ(U'b', t.Item6);
+    ASSERT_EQ("Value", t.Item1());
+    ASSERT_EQ(42, t.Item2());
+    ASSERT_EQ(true, t.Item3());
+    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4());
+    ASSERT_EQ(.42, t.Item5());
+    ASSERT_EQ(U'b', t.Item6());
   }
   
   TEST(TupleTest, CreateTuple7AndSetItem1) {
-    auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21);
+    auto t = Tuple<>::Create("Value"_s, 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21);
     t.Item1 = "Other";
-    ASSERT_EQ("Other", t.Item1);
-    ASSERT_EQ(42, t.Item2);
-    ASSERT_EQ(true, t.Item3);
-    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4);
-    ASSERT_EQ(.42, t.Item5);
-    ASSERT_EQ(U'a', t.Item6);
-    ASSERT_EQ((byte)21, t.Item7);
+    ASSERT_EQ("Other", t.Item1());
+    ASSERT_EQ(42, t.Item2());
+    ASSERT_EQ(true, t.Item3());
+    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4());
+    ASSERT_EQ(.42, t.Item5());
+    ASSERT_EQ(U'a', t.Item6());
+    ASSERT_EQ((byte)21, t.Item7());
   }
   
   TEST(TupleTest, CreateTuple7AndSetItem2) {
-    auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21);
+    auto t = Tuple<>::Create("Value"_s, 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21);
     t.Item2 = 84;
-    ASSERT_EQ("Value", t.Item1);
-    ASSERT_EQ(84, t.Item2);
-    ASSERT_EQ(true, t.Item3);
-    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4);
-    ASSERT_EQ(.42, t.Item5);
-    ASSERT_EQ(U'a', t.Item6);
-    ASSERT_EQ((byte)21, t.Item7);
+    ASSERT_EQ("Value", t.Item1());
+    ASSERT_EQ(84, t.Item2());
+    ASSERT_EQ(true, t.Item3());
+    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4());
+    ASSERT_EQ(.42, t.Item5());
+    ASSERT_EQ(U'a', t.Item6());
+    ASSERT_EQ((byte)21, t.Item7());
   }
   
   TEST(TupleTest, CreateTuple7AndSetItem3) {
-    auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21);
+    auto t = Tuple<>::Create("Value"_s, 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21);
     t.Item3 = false;
-    ASSERT_EQ("Value", t.Item1);
-    ASSERT_EQ(42, t.Item2);
-    ASSERT_EQ(false, t.Item3);
-    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4);
-    ASSERT_EQ(.42, t.Item5);
-    ASSERT_EQ(U'a', t.Item6);
-    ASSERT_EQ((byte)21, t.Item7);
+    ASSERT_EQ("Value", t.Item1());
+    ASSERT_EQ(42, t.Item2());
+    ASSERT_EQ(false, t.Item3());
+    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4());
+    ASSERT_EQ(.42, t.Item5());
+    ASSERT_EQ(U'a', t.Item6());
+    ASSERT_EQ((byte)21, t.Item7());
   }
   
   TEST(TupleTest, CreateTuple7AndSetItem4) {
-    auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21);
+    auto t = Tuple<>::Create("Value"_s, 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21);
     t.Item4 = DayOfWeek::Sunday;
-    ASSERT_EQ("Value", t.Item1);
-    ASSERT_EQ(42, t.Item2);
-    ASSERT_EQ(true, t.Item3);
-    ASSERT_EQ(DayOfWeek::Sunday, t.Item4);
-    ASSERT_EQ(.42, t.Item5);
-    ASSERT_EQ(U'a', t.Item6);
-    ASSERT_EQ((byte)21, t.Item7);
+    ASSERT_EQ("Value", t.Item1());
+    ASSERT_EQ(42, t.Item2());
+    ASSERT_EQ(true, t.Item3());
+    ASSERT_EQ(DayOfWeek::Sunday, t.Item4());
+    ASSERT_EQ(.42, t.Item5());
+    ASSERT_EQ(U'a', t.Item6());
+    ASSERT_EQ((byte)21, t.Item7());
   }
   
   TEST(TupleTest, CreateTuple7AndSetItem5) {
-    auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21);
+    auto t = Tuple<>::Create("Value"_s, 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21);
     t.Item5 = .21;
-    ASSERT_EQ("Value", t.Item1);
-    ASSERT_EQ(42, t.Item2);
-    ASSERT_EQ(true, t.Item3);
-    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4);
-    ASSERT_EQ(.21, t.Item5);
-    ASSERT_EQ(U'a', t.Item6);
-    ASSERT_EQ((byte)21, t.Item7);
+    ASSERT_EQ("Value", t.Item1());
+    ASSERT_EQ(42, t.Item2());
+    ASSERT_EQ(true, t.Item3());
+    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4());
+    ASSERT_EQ(.21, t.Item5());
+    ASSERT_EQ(U'a', t.Item6());
+    ASSERT_EQ((byte)21, t.Item7());
   }
   
   TEST(TupleTest, CreateTuple7AndSetItem6) {
-    auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21);
+    auto t = Tuple<>::Create("Value"_s, 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21);
     t.Item6 = U'b';
-    ASSERT_EQ("Value", t.Item1);
-    ASSERT_EQ(42, t.Item2);
-    ASSERT_EQ(true, t.Item3);
-    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4);
-    ASSERT_EQ(.42, t.Item5);
-    ASSERT_EQ(U'b', t.Item6);
-    ASSERT_EQ((byte)21, t.Item7);
+    ASSERT_EQ("Value", t.Item1());
+    ASSERT_EQ(42, t.Item2());
+    ASSERT_EQ(true, t.Item3());
+    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4());
+    ASSERT_EQ(.42, t.Item5());
+    ASSERT_EQ(U'b', t.Item6());
+    ASSERT_EQ((byte)21, t.Item7());
   }
   
   TEST(TupleTest, CreateTuple7AndSetItem7) {
-    auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21);
+    auto t = Tuple<>::Create("Value"_s, 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21);
     t.Item7 = 42;
-    ASSERT_EQ("Value", t.Item1);
-    ASSERT_EQ(42, t.Item2);
-    ASSERT_EQ(true, t.Item3);
-    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4);
-    ASSERT_EQ(.42, t.Item5);
-    ASSERT_EQ(U'a', t.Item6);
-    ASSERT_EQ((byte)42, t.Item7);
+    ASSERT_EQ("Value", t.Item1());
+    ASSERT_EQ(42, t.Item2());
+    ASSERT_EQ(true, t.Item3());
+    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4());
+    ASSERT_EQ(.42, t.Item5());
+    ASSERT_EQ(U'a', t.Item6());
+    ASSERT_EQ((byte)42, t.Item7());
   }
   
   TEST(TupleTest, CreateTupleRestAndSetItem1) {
-    auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21, 12_h + 23_min + 2_s);
+    auto t = Tuple<>::Create("Value"_s, 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21, 12_h + 23_min + 2_s);
     t.Item1 = "Other";
-    ASSERT_EQ("Other", t.Item1);
-    ASSERT_EQ(42, t.Item2);
-    ASSERT_EQ(true, t.Item3);
-    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4);
-    ASSERT_EQ(.42, t.Item5);
-    ASSERT_EQ(U'a', t.Item6);
-    ASSERT_EQ((byte)21, t.Item7);
-    ASSERT_EQ(12_h + 23_min + 2_s, t.Rest);
+    ASSERT_EQ("Other", t.Item1());
+    ASSERT_EQ(42, t.Item2());
+    ASSERT_EQ(true, t.Item3());
+    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4());
+    ASSERT_EQ(.42, t.Item5());
+    ASSERT_EQ(U'a', t.Item6());
+    ASSERT_EQ((byte)21, t.Item7());
+    ASSERT_EQ(12_h + 23_min + 2_s, t.Rest());
   }
   
   TEST(TupleTest, CreateTupleRestAndSetItem2) {
-    auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21, 12_h + 23_min + 2_s);
+    auto t = Tuple<>::Create("Value"_s, 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21, 12_h + 23_min + 2_s);
     t.Item2 = 84;
-    ASSERT_EQ("Value", t.Item1);
-    ASSERT_EQ(84, t.Item2);
-    ASSERT_EQ(true, t.Item3);
-    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4);
-    ASSERT_EQ(.42, t.Item5);
-    ASSERT_EQ(U'a', t.Item6);
-    ASSERT_EQ((byte)21, t.Item7);
-    ASSERT_EQ(12_h + 23_min + 2_s, t.Rest);
+    ASSERT_EQ("Value", t.Item1());
+    ASSERT_EQ(84, t.Item2());
+    ASSERT_EQ(true, t.Item3());
+    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4());
+    ASSERT_EQ(.42, t.Item5());
+    ASSERT_EQ(U'a', t.Item6());
+    ASSERT_EQ((byte)21, t.Item7());
+    ASSERT_EQ(12_h + 23_min + 2_s, t.Rest());
   }
   
   TEST(TupleTest, CreateTupleRestAndSetItem3) {
-    auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21, 12_h + 23_min + 2_s);
+    auto t = Tuple<>::Create("Value"_s, 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21, 12_h + 23_min + 2_s);
     t.Item3 = false;
-    ASSERT_EQ("Value", t.Item1);
-    ASSERT_EQ(42, t.Item2);
-    ASSERT_EQ(false, t.Item3);
-    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4);
-    ASSERT_EQ(.42, t.Item5);
-    ASSERT_EQ(U'a', t.Item6);
-    ASSERT_EQ((byte)21, t.Item7);
-    ASSERT_EQ(12_h + 23_min + 2_s, t.Rest);
+    ASSERT_EQ("Value", t.Item1());
+    ASSERT_EQ(42, t.Item2());
+    ASSERT_EQ(false, t.Item3());
+    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4());
+    ASSERT_EQ(.42, t.Item5());
+    ASSERT_EQ(U'a', t.Item6());
+    ASSERT_EQ((byte)21, t.Item7());
+    ASSERT_EQ(12_h + 23_min + 2_s, t.Rest());
   }
   
   TEST(TupleTest, CreateTupleRestAndSetItem4) {
-    auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21, 12_h + 23_min + 2_s);
+    auto t = Tuple<>::Create("Value"_s, 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21, 12_h + 23_min + 2_s);
     t.Item4 = DayOfWeek::Sunday;
-    ASSERT_EQ("Value", t.Item1);
-    ASSERT_EQ(42, t.Item2);
-    ASSERT_EQ(true, t.Item3);
-    ASSERT_EQ(DayOfWeek::Sunday, t.Item4);
-    ASSERT_EQ(.42, t.Item5);
-    ASSERT_EQ(U'a', t.Item6);
-    ASSERT_EQ((byte)21, t.Item7);
-    ASSERT_EQ(12_h + 23_min + 2_s, t.Rest);
+    ASSERT_EQ("Value", t.Item1());
+    ASSERT_EQ(42, t.Item2());
+    ASSERT_EQ(true, t.Item3());
+    ASSERT_EQ(DayOfWeek::Sunday, t.Item4());
+    ASSERT_EQ(.42, t.Item5());
+    ASSERT_EQ(U'a', t.Item6());
+    ASSERT_EQ((byte)21, t.Item7());
+    ASSERT_EQ(12_h + 23_min + 2_s, t.Rest());
   }
   
   TEST(TupleTest, CreateTupleRestAndSetItem5) {
-    auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21, 12_h + 23_min + 2_s);
+    auto t = Tuple<>::Create("Value"_s, 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21, 12_h + 23_min + 2_s);
     t.Item5 = .21;
-    ASSERT_EQ("Value", t.Item1);
-    ASSERT_EQ(42, t.Item2);
-    ASSERT_EQ(true, t.Item3);
-    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4);
-    ASSERT_EQ(.21, t.Item5);
-    ASSERT_EQ(U'a', t.Item6);
-    ASSERT_EQ((byte)21, t.Item7);
-    ASSERT_EQ(12_h + 23_min + 2_s, t.Rest);
+    ASSERT_EQ("Value", t.Item1());
+    ASSERT_EQ(42, t.Item2());
+    ASSERT_EQ(true, t.Item3());
+    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4());
+    ASSERT_EQ(.21, t.Item5());
+    ASSERT_EQ(U'a', t.Item6());
+    ASSERT_EQ((byte)21, t.Item7());
+    ASSERT_EQ(12_h + 23_min + 2_s, t.Rest());
   }
   
   TEST(TupleTest, CreateTupleRestAndSetItem6) {
-    auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21, 12_h + 23_min + 2_s);
+    auto t = Tuple<>::Create("Value"_s, 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21, 12_h + 23_min + 2_s);
     t.Item6 = U'b';
-    ASSERT_EQ("Value", t.Item1);
-    ASSERT_EQ(42, t.Item2);
-    ASSERT_EQ(true, t.Item3);
-    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4);
-    ASSERT_EQ(.42, t.Item5);
-    ASSERT_EQ(U'b', t.Item6);
-    ASSERT_EQ((byte)21, t.Item7);
-    ASSERT_EQ(12_h + 23_min + 2_s, t.Rest);
+    ASSERT_EQ("Value", t.Item1());
+    ASSERT_EQ(42, t.Item2());
+    ASSERT_EQ(true, t.Item3());
+    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4());
+    ASSERT_EQ(.42, t.Item5());
+    ASSERT_EQ(U'b', t.Item6());
+    ASSERT_EQ((byte)21, t.Item7());
+    ASSERT_EQ(12_h + 23_min + 2_s, t.Rest());
   }
   
   TEST(TupleTest, CreateTupleRestAndSetItem7) {
-    auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21, 12_h + 23_min + 2_s);
+    auto t = Tuple<>::Create("Value"_s, 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21, 12_h + 23_min + 2_s);
     t.Item7 = 42;
-    ASSERT_EQ("Value", t.Item1);
-    ASSERT_EQ(42, t.Item2);
-    ASSERT_EQ(true, t.Item3);
-    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4);
-    ASSERT_EQ(.42, t.Item5);
-    ASSERT_EQ(U'a', t.Item6);
-    ASSERT_EQ((byte)42, t.Item7);
-    ASSERT_EQ(12_h + 23_min + 2_s, t.Rest);
+    ASSERT_EQ("Value", t.Item1());
+    ASSERT_EQ(42, t.Item2());
+    ASSERT_EQ(true, t.Item3());
+    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4());
+    ASSERT_EQ(.42, t.Item5());
+    ASSERT_EQ(U'a', t.Item6());
+    ASSERT_EQ((byte)42, t.Item7());
+    ASSERT_EQ(12_h + 23_min + 2_s, t.Rest());
   }
   
   TEST(TupleTest, CreateTupleRestAndSetRest) {
-    auto t = Tuple<>::Create("Value", 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21, 12_h + 23_min + 2_s);
+    auto t = Tuple<>::Create("Value"_s, 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21, 12_h + 23_min + 2_s);
     t.Rest = TimeSpan(5, 28, 19);
-    ASSERT_EQ("Value", t.Item1);
-    ASSERT_EQ(42, t.Item2);
-    ASSERT_EQ(true, t.Item3);
-    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4);
-    ASSERT_EQ(.42, t.Item5);
-    ASSERT_EQ(U'a', t.Item6);
-    ASSERT_EQ((byte)21, t.Item7);
-    ASSERT_EQ(5_h + 28_min + 19_s, t.Rest);
+    ASSERT_EQ("Value", t.Item1());
+    ASSERT_EQ(42, t.Item2());
+    ASSERT_EQ(true, t.Item3());
+    ASSERT_EQ(DayOfWeek::Wednesday, t.Item4());
+    ASSERT_EQ(.42, t.Item5());
+    ASSERT_EQ(U'a', t.Item6());
+    ASSERT_EQ((byte)21, t.Item7());
+    ASSERT_EQ(5_h + 28_min + 19_s, t.Rest());
   }
   
   TEST(TupleTest, CreateTuple1AndCopyItToOther) {
     auto t1 = Tuple<>::Create("Value"_s);
     Tuple<string> t2;
     t2 = t1;
-    ASSERT_EQ("Value", t2.Item1);
+    ASSERT_EQ("Value", t2.Item1());
     
   }
   
@@ -611,77 +611,77 @@ namespace {
     auto t1 = Tuple<>::Create("Value"_s, 42);
     Tuple<string, int32> t2;
     t2 = t1;
-    ASSERT_EQ("Value", t2.Item1);
-    ASSERT_EQ(42, t2.Item2);
+    ASSERT_EQ("Value", t2.Item1());
+    ASSERT_EQ(42, t2.Item2());
   }
   
   TEST(TupleTest, CreateTuple3AndCopyItToOther) {
     auto t1 = Tuple<>::Create("Value"_s, 42, true);
     Tuple<string, int32, bool> t2;
     t2 = t1;
-    ASSERT_EQ("Value", t2.Item1);
-    ASSERT_EQ(42, t2.Item2);
-    ASSERT_EQ(true, t2.Item3);
+    ASSERT_EQ("Value", t2.Item1());
+    ASSERT_EQ(42, t2.Item2());
+    ASSERT_EQ(true, t2.Item3());
   }
   
   TEST(TupleTest, CreateTuple4AndCopyItToOther) {
     auto t1 = Tuple<>::Create("Value"_s, 42, true, DayOfWeek::Wednesday);
     Tuple<string, int32, bool, DayOfWeek> t2;
     t2 = t1;
-    ASSERT_EQ("Value", t2.Item1);
-    ASSERT_EQ(42, t2.Item2);
-    ASSERT_EQ(true, t2.Item3);
-    ASSERT_EQ(DayOfWeek::Wednesday, t2.Item4);
+    ASSERT_EQ("Value", t2.Item1());
+    ASSERT_EQ(42, t2.Item2());
+    ASSERT_EQ(true, t2.Item3());
+    ASSERT_EQ(DayOfWeek::Wednesday, t2.Item4());
   }
   
   TEST(TupleTest, CreateTuple5AndCopyItToOther) {
     auto t1 = Tuple<>::Create("Value"_s, 42, true, DayOfWeek::Wednesday, .42);
     Tuple<string, int32, bool, DayOfWeek, double> t2;
     t2 = t1;
-    ASSERT_EQ("Value", t2.Item1);
-    ASSERT_EQ(42, t2.Item2);
-    ASSERT_EQ(true, t2.Item3);
-    ASSERT_EQ(DayOfWeek::Wednesday, t2.Item4);
-    ASSERT_EQ(.42, t2.Item5);
+    ASSERT_EQ("Value", t2.Item1());
+    ASSERT_EQ(42, t2.Item2());
+    ASSERT_EQ(true, t2.Item3());
+    ASSERT_EQ(DayOfWeek::Wednesday, t2.Item4());
+    ASSERT_EQ(.42, t2.Item5());
   }
   
   TEST(TupleTest, CreateTuple6AndCopyItToOther) {
     auto t1 = Tuple<>::Create("Value"_s, 42, true, DayOfWeek::Wednesday, .42, U'a');
     Tuple<string, int32, bool, DayOfWeek, double, char32> t2;
     t2 = t1;
-    ASSERT_EQ("Value", t2.Item1);
-    ASSERT_EQ(42, t2.Item2);
-    ASSERT_EQ(true, t2.Item3);
-    ASSERT_EQ(DayOfWeek::Wednesday, t2.Item4);
-    ASSERT_EQ(.42, t2.Item5);
-    ASSERT_EQ(U'a', t2.Item6);
+    ASSERT_EQ("Value", t2.Item1());
+    ASSERT_EQ(42, t2.Item2());
+    ASSERT_EQ(true, t2.Item3());
+    ASSERT_EQ(DayOfWeek::Wednesday, t2.Item4());
+    ASSERT_EQ(.42, t2.Item5());
+    ASSERT_EQ(U'a', t2.Item6());
   }
   
   TEST(TupleTest, CreateTuple7AndCopyItToOther) {
     auto t1 = Tuple<>::Create("Value"_s, 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21);
     Tuple<string, int32, bool, DayOfWeek, double, char32, byte> t2;
     t2 = t1;
-    ASSERT_EQ("Value", t2.Item1);
-    ASSERT_EQ(42, t2.Item2);
-    ASSERT_EQ(true, t2.Item3);
-    ASSERT_EQ(DayOfWeek::Wednesday, t2.Item4);
-    ASSERT_EQ(.42, t2.Item5);
-    ASSERT_EQ(U'a', t2.Item6);
-    ASSERT_EQ((byte)21, t2.Item7);
+    ASSERT_EQ("Value", t2.Item1());
+    ASSERT_EQ(42, t2.Item2());
+    ASSERT_EQ(true, t2.Item3());
+    ASSERT_EQ(DayOfWeek::Wednesday, t2.Item4());
+    ASSERT_EQ(.42, t2.Item5());
+    ASSERT_EQ(U'a', t2.Item6());
+    ASSERT_EQ((byte)21, t2.Item7());
   }
   
   TEST(TupleTest, CreateTupleRestAndCopyItToOther) {
     auto t1 = Tuple<>::Create("Value"_s, 42, true, DayOfWeek::Wednesday, .42, U'a', (byte)21, 12_h + 23_min + 2_s);
     Tuple<string, int32, bool, DayOfWeek, double, char32, byte, TimeSpan> t2;
     t2 = t1;
-    ASSERT_EQ("Value", t2.Item1);
-    ASSERT_EQ(42, t2.Item2);
-    ASSERT_EQ(true, t2.Item3);
-    ASSERT_EQ(DayOfWeek::Wednesday, t2.Item4);
-    ASSERT_EQ(.42, t2.Item5);
-    ASSERT_EQ(U'a', t2.Item6);
-    ASSERT_EQ((byte)21, t2.Item7);
-    ASSERT_EQ(TimeSpan(12, 23, 2), t2.Rest);
+    ASSERT_EQ("Value", t2.Item1());
+    ASSERT_EQ(42, t2.Item2());
+    ASSERT_EQ(true, t2.Item3());
+    ASSERT_EQ(DayOfWeek::Wednesday, t2.Item4());
+    ASSERT_EQ(.42, t2.Item5());
+    ASSERT_EQ(U'a', t2.Item6());
+    ASSERT_EQ((byte)21, t2.Item7());
+    ASSERT_EQ(TimeSpan(12, 23, 2), t2.Rest());
   }
   
   TEST(TupleTest, Create2SameTuple1AndCheckEquals) {
@@ -952,25 +952,25 @@ namespace {
     using MyTuple = Tuple<Int32, string>;
     MyTuple tuple1(Int32(2), string("Cats"));
     ASSERT_EQ(2, tuple1.Item1());
-    ASSERT_EQ("Cats", tuple1.Item2);
+    ASSERT_EQ("Cats", tuple1.Item2());
     ASSERT_EQ("(2, Cats)", tuple1.ToString());
   }
   
   TEST(TupleTest, CreateArrayOfTuples) {
     Array<Tuple<string, int32>> tuples {Tuple<string, int32>("Value 1", 42), Tuple<string, int32>("Value 2", 21)};
     
-    ASSERT_EQ("Value 1", tuples[0].Item1);
-    ASSERT_EQ(42, tuples[0].Item2);
-    ASSERT_EQ("Value 2", tuples[1].Item1);
-    ASSERT_EQ(21, tuples[1].Item2);
+    ASSERT_EQ("Value 1", tuples[0].Item1());
+    ASSERT_EQ(42, tuples[0].Item2());
+    ASSERT_EQ("Value 2", tuples[1].Item1());
+    ASSERT_EQ(21, tuples[1].Item2());
   }
   
   TEST(TupleTest, CreateListOfTuples) {
     System::Collections::Generic::List<Tuple<string, int32>> tuples {Tuple<string, int32>("Value 1", 42), Tuple<string, int32>("Value 2", 21)};
-    ASSERT_EQ("Value 1", tuples[0].Item1);
-    ASSERT_EQ(42, tuples[0].Item2);
-    ASSERT_EQ("Value 2", tuples[1].Item1);
-    ASSERT_EQ(21, tuples[1].Item2);
+    ASSERT_EQ("Value 1", tuples[0].Item1());
+    ASSERT_EQ(42, tuples[0].Item2());
+    ASSERT_EQ("Value 2", tuples[1].Item1());
+    ASSERT_EQ(21, tuples[1].Item2());
   }
   
   TEST(TupleTest, CreateDictionaryOfTuples) {

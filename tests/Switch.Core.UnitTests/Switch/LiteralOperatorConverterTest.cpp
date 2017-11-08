@@ -256,17 +256,17 @@ namespace {
   
   TEST(LiteralOperatorConverterTest, DoubleToDouble) {
     ASSERT_TRUE(is<Double>(1.6_D));
-    ASSERT_EQ(1.6, 1.6_D);
+    ASSERT_DOUBLE_EQ(1.6, 1.6_D);
   }
-  
+
   TEST(LiteralOperatorConverterTest, UInt64ToDouble) {
     ASSERT_TRUE(is<Double>(42_D));
-    ASSERT_EQ(42.0, 42_D);
+    ASSERT_DOUBLE_EQ(42.0, 42_D);
   }
   
   TEST(LiteralOperatorConverterTest, StringToDouble) {
     ASSERT_TRUE(is<Double>("1.6"_D));
-    ASSERT_EQ(1.6, "1.6"_D);
+    ASSERT_DOUBLE_EQ(1.6, "1.6"_D);
   }
   
   TEST(LiteralOperatorConverterTest, CharPointerToString) {
@@ -359,17 +359,17 @@ namespace {
   
   TEST(LiteralOperatorConverterTest, DoubleToSingle) {
     ASSERT_TRUE(is<Single>(1.6_F));
-    ASSERT_EQ(1.6f, 1.6_F);
+    ASSERT_FLOAT_EQ(1.6f, 1.6_F);
   }
   
   TEST(LiteralOperatorConverterTest, UInt64ToSingle) {
     ASSERT_TRUE(is<Single>(42_F));
-    ASSERT_EQ(42.0f, 42_F);
+    ASSERT_FLOAT_EQ(42.0f, 42_F);
   }
   
   TEST(LiteralOperatorConverterTest, StringToSingle) {
     ASSERT_TRUE(is<Single>("1.6"_F));
-    ASSERT_EQ(1.6f, "1.6"_F);
+    ASSERT_FLOAT_EQ(1.6f, "1.6"_F);
   }
   
   TEST(LiteralOperatorConverterTest, DoubleToUInt16) {

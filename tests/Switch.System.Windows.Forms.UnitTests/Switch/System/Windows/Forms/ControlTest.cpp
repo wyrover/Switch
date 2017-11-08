@@ -10,16 +10,16 @@ namespace SwitchUnitTests {
     Control control;
     ASSERT_EQ(Control::DefaultBackColor, control.BackColor);
     ASSERT_EQ(0, control.Bottom);
-    ASSERT_EQ(Rectangle(0, 0, 0, 0), control.Bounds);
-    ASSERT_EQ(Size(0, 0), control.ClientSize);
-    ASSERT_EQ(0, control.Controls().Count);
-    ASSERT_EQ(Control::DefaultForeColor, control.ForeColor);
-    ASSERT_EQ(0, control.Height);
-    ASSERT_EQ(0, control.Left);
+    ASSERT_EQ(Rectangle(0, 0, 0, 0), control.Bounds());
+    ASSERT_EQ(Size(0, 0), control.ClientSize());
+    ASSERT_EQ(0, control.Controls().Count());
+    ASSERT_EQ(Control::DefaultForeColor, control.ForeColor());
+    ASSERT_EQ(0, control.Height());
+    ASSERT_EQ(0, control.Left());
     ASSERT_TRUE(control.Parent == null);
-    ASSERT_EQ(string::Empty, control.Text);
-    ASSERT_EQ(0, control.Top);
-    ASSERT_EQ(0, control.Width);
+    ASSERT_EQ(string::Empty, control.Text());
+    ASSERT_EQ(0, control.Top());
+    ASSERT_EQ(0, control.Width());
   }
   
   TEST(ControlTest, SetBackColorToAColor) {
@@ -30,7 +30,7 @@ namespace SwitchUnitTests {
     };
     
     control.BackColor = Color::SpringGreen;
-    ASSERT_EQ(Color::SpringGreen(), control.BackColor);
+    ASSERT_EQ(Color::SpringGreen(), control.BackColor());
     
     ASSERT_EQ(Color::SpringGreen(), newBackColor);
   }
@@ -43,7 +43,7 @@ namespace SwitchUnitTests {
     };
     
     control.ForeColor = Color::White;
-    ASSERT_EQ(Color::White, control.ForeColor);
+    ASSERT_EQ(Color::White(), control.ForeColor());
     ASSERT_EQ(Color::White(), newForeColor);
   }
   
