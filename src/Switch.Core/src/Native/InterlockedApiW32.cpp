@@ -27,11 +27,16 @@ llong Native::InterlockedApi::CompareExchange(llong& location, llong value, llon
   return InterlockedCompareExchange((llong*)&location, value, comparand);
 }
 
+#pragma warning(push)
+#pragma warning(disable:4302)
+#pragma warning(disable:4311)
+#pragma warning(disable:4312)
 void* Native::InterlockedApi::CompareExchange(void*& location, void* value, void* comparand) {
   if (sizeof(void*) == 4)
     return (void*)InterlockedCompareExchange((long*)&location, (long)value, (long)comparand);
   return (void*)InterlockedCompareExchange64((long long*)&location, (long long)value, (long long)comparand);
 }
+#pragma warning(pop)
 
 int32 Native::InterlockedApi::Decrement(int32& location) {
   return InterlockedDecrement((long*)&location);
@@ -53,11 +58,16 @@ llong Native::InterlockedApi::Exchange(llong& location, llong value) {
   return InterlockedExchange((llong*)&location, value);
 }
 
+#pragma warning(push)
+#pragma warning(disable:4302)
+#pragma warning(disable:4311)
+#pragma warning(disable:4312)
 void* Native::InterlockedApi::Exchange(void*& location, void* value) {
   if (sizeof(void*) == 4)
     return (void*)InterlockedExchange((long*)&location, (long)value);
   return (void*)InterlockedExchange64((long long*)&location, (long long)value);
 }
+#pragma warning(pop)
 
 int32 Native::InterlockedApi::Increment(int32& location) {
   return InterlockedIncrement((long*)&location);

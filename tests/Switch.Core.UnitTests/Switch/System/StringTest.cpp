@@ -143,11 +143,18 @@ namespace SwitchUnitTests {
     ASSERT_EQ("ABCDE", s);
   }
   
+#if defined(_WIN32)
+#pragma warning(push)
+#pragma warning(disable:4566)
+#endif
   TEST(StringTest, StringCreatedByAssignmentWithUnicodeStringLiteral) {
     string s = U"こんにちは世界!";
     ASSERT_EQ(U"こんにちは世界!", s);
   }
-  
+#if defined(_WIN32)
+#pragma warning(pop)
+#endif
+
   TEST(StringTest, SubscriptOperatorWithChar) {
     Array<char> chars = {'T', 'e', 's', 't'};
     string s = "Test";
