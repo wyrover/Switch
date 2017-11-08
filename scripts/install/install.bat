@@ -31,8 +31,15 @@ if "%1" == "" (
 
 if "%switch_install_cmake_install_prefix_path%" == "" set switch_install_cmake_install_prefix_path=C:/usr/local
 
-devenv /?  2> NUL
+set devenv=devenv
+devenv /? >nul
 if %ERRORLEVEL%==9009 (
+  set devenv=
+)
+
+if "%1" == "/help" (
+  call scripts\install\install_windows_usage.bat 
+) else if "%devenv%" == "" (
   echo Installation failed : Visual Studio not found!
   echo.
   echo Before using this install.bat file, be sure you are in "Developer Command Prompt for 
@@ -58,6 +65,7 @@ if %ERRORLEVEL%==9009 (
   call scripts\install\install_windows_usage.bat 
 ) 
 
+set devenv=
 set switch_install_option=
 set switch_install_vcpkg_path=
 set switch_install_cmake_install_prefix_path=
