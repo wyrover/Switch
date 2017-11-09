@@ -9,12 +9,12 @@ matrix:
     #  dist: trusty
     - os: osx
       compiler: clang
-      osx_image: xcode8.3
+      osx_image: xcode9.1
 
 addons:
   apt:
     sources:
-      - llvm-toolchain-precise
+      - llvm-toolchain-xenial-3.9
       - ubuntu-toolchain-r-test
 
 before_install: source ./scripts/travis/before_install.sh

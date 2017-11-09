@@ -31,24 +31,8 @@ if "%1" == "" (
 
 if "%switch_install_cmake_install_prefix_path%" == "" set switch_install_cmake_install_prefix_path=C:/usr/local
 
-set devenv=devenv
-devenv /? >nul 2>&1
-if %ERRORLEVEL%==9009 (
-  set devenv=
-)
-
 if "%1" == "/help" (
   call scripts\install\install_windows_usage.bat 
-) else if "%devenv%" == "" (
-  echo Installation failed : Visual Studio not found!
-  echo.
-  echo Before using this install.bat file, be sure you are in "Developer Command Prompt for 
-  echo VS 2017" or "Developer Command Prompt for VS 2015" command box or be sure your path
-  echo environment variable contains the folder path containing "devenv.exe" program 
-  echo ^(if you do not change the default directory when installing it is 
-  echo "C:\Program Files\Visual Studio 15\Common7\IDE"; otherwise is your specified path + 
-  echo "\Common7\IDE" to terminate^).
-  echo.
 ) else if "%switch_install_option%" == "/VCPKG" (
   "%switch_install_vcpkg_path%\vcpkg" install curl gtest libjpeg-turbo zlib libpng
   "%switch_install_vcpkg_path%\vcpkg" integrate install
@@ -65,7 +49,6 @@ if "%1" == "/help" (
   call scripts\install\install_windows_usage.bat 
 ) 
 
-set devenv=
 set switch_install_option=
 set switch_install_vcpkg_path=
 set switch_install_cmake_install_prefix_path=
