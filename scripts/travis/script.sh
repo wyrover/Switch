@@ -20,4 +20,4 @@ cd ../..
 # run unittests
 cd build
 ctest --output-on-failure --build-config Release
-cd..
+cd ..
