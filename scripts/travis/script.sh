@@ -33,7 +33,7 @@ elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
 fi
 cd ../..
 
-# run unittests
+# run registered unit tests
 cd build
 ctest --output-on-failure --build-config Release
 cd ..
