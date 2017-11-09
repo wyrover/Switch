@@ -2,13 +2,6 @@
 REM Read this first :
 REM =================
 REM
-REM Before using this install.bat file, be sure you are in "Developer Command Prompt for 
-REM VS 2017" or "Developer Command Prompt for VS 2015" command box or be sure your path
-REM environment variable contains the folder path containing "devenv.exe" program 
-REM (if you do not change the default directory when installing it is 
-REM "C:\Program Files\Visual Studio 15\Common7\IDE"; otherwise is your specified path + 
-REM "\Common7\IDE" to terminate). In other case the installation will failed.
-REM
 REM The install.bat file run with all version of Visual Studio 2015 (expect 
 REM "Express Edition") and all version of Visual Studio 2017.
 REM
