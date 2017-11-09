@@ -1,3 +1,5 @@
+#pragma once
+
 #include <Switch/System/Object.hpp>
 #include <Switch/System/IO//BinaryReader.hpp>
 

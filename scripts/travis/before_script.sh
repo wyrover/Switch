@@ -3,7 +3,7 @@
 # set clang as drfault cmake compiler
 if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
   export CC=clang-3.9
-  export CXX=clang-3.9++
+  export CXX=clang++-3.9
 fi
 
 # create missing install folders

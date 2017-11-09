@@ -1,5 +1,7 @@
-#include <zlib.h>
+#pragma once
+
 #include <png.h>
+#include <zlib.h>
 #include <Switch/System/Object.hpp>
 #include <Switch/System/IO//BinaryReader.hpp>
 
