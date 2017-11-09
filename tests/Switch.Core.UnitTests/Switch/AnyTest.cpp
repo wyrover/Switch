@@ -24,17 +24,19 @@ namespace SwitchUnitTests {
     any a;
     ASSERT_THROW(a.As<string>(), InvalidOperationException);
   }
-  
+
+  /*
   TEST(AnyTest, EqualsOnEmpty) {
     any a;
     ASSERT_EQ(any(), a);
   }
-  
+  */
+
   TEST(AnyTest, GetHashCodeOnEmpty) {
     any a;
     ASSERT_EQ(0, a.GetHashCode());
   }
-  
+
   TEST(AnyTest, IsInt32OnEmpty) {
     any a;
     ASSERT_FALSE(a.Is<Int32>());
@@ -80,11 +82,13 @@ namespace SwitchUnitTests {
     ASSERT_THROW(a.As<string>(), InvalidCastException);
   }
   
+  /*
   TEST(AnyTest, EqualsOnInt32) {
     any a = 42;
     ASSERT_EQ(any(42), a);
     ASSERT_NE(any(43), a);
   }
+  */
   
   TEST(AnyTest, GetHashCodeOnInt32) {
     any a = 42;
@@ -138,11 +142,13 @@ namespace SwitchUnitTests {
     ASSERT_NO_THROW(a.As<string>(););
   }
   
+  /*
   TEST(AnyTest, EqualsOnString) {
     any a = "Forty two";
     ASSERT_EQ(any("Forty two"), a);
     ASSERT_NE(any("Forty three"), a);
   }
+  */
   
   TEST(AnyTest, GetHashCodeOnString) {
     any a = "Forty two";
