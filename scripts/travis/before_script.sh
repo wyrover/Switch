@@ -14,3 +14,8 @@ sudo chown -R $(whoami) /usr/local/bin
 sudo chown -R $(whoami) /usr/local/cmake
 sudo chown -R $(whoami) /usr/local/include
 sudo chown -R $(whoami) /usr/local/lib
+
+if [ -d ./build ]; then rm -r -f build; fi
+
+mkdir -p build/3rdparty
+mkdir -p build/examples

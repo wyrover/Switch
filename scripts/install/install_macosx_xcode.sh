@@ -13,22 +13,26 @@ sudo chown -R $(whoami) /usr/local/cmake
 sudo chown -R $(whoami) /usr/local/include
 sudo chown -R $(whoami) /usr/local/lib
 
-if [ -d ./build ]; then
-  rm -r -f build
-fi
+if [ -d ./build ]; then rm -r -f build; fi
 
 mkdir -p build/3rdparty
+mkdir -p build/examples
+
+# generate, build and install 3rdparty
 cd build/3rdparty
 cmake -G "Xcode" ../../3rdparty
-xcodebuild -target install -configuration Release
+cmake --build . --target install --config Release
+cd ../..
 
-cd ..
+# generate, build and install Switch
+cd build
 cmake -G "Xcode" ..
-xcodebuild -target install -configuration Debug
-xcodebuild -target install -configuration Release
+cmake --build . --target install --config Debug
+cmake --build . --target install --config Release
+cd ..
 
-mkdir examples
-cd examples
+# generate examples
+cd build/examples
 cmake -G "Xcode" ../../examples
 open Examples.xcodeproj
 cd ../..

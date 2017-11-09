@@ -17,6 +17,7 @@ addons:
       - llvm-toolchain-precise
       - ubuntu-toolchain-r-test
 
+before_install: source ./scripts/travis/before_install.sh
 install: source ./scripts/travis/install.sh
 before_script: source ./scripts/travis/before_script.sh
 script: ./scripts/travis/script.sh
