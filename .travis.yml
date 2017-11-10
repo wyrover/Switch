@@ -16,6 +16,9 @@ addons:
     sources:
       - llvm-toolchain-xenial-3.9
       - ubuntu-toolchain-r-test
+    packages:
+      - g++-6
+      - gcc-6
 
 before_install: source ./scripts/travis/before_install.sh
 install: source ./scripts/travis/install.sh
