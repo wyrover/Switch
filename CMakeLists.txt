@@ -11,7 +11,7 @@ option(BUILD_SWITCH_SYSTEM_WINDOWS_FORMS "Build Switch.System.Windows.Forms libr
 option(BUILD_SWITCH_TUNIT_CORE "Build Switch.TUnit.Core library" OFF)
 option(BUILD_SWITCH_TUNIT_FRAMEWORK "Build Switch.TUnit.Framework library" ON)
 option(BUILD_SWITCH_TUNIT_MAIN "Build Switch.TUnit.Main library" OFF)
-option(BUILD_TESTS "Build tests" OFF)
+option(BUILD_SWITCH_TESTS "Build Switch tests" OFF)
 
 enable_testing()
 
@@ -81,7 +81,7 @@ else()
   message(STATUS "  [ ] libpng")
 endif()
 
-if (BUILD_TESTS)
+if (BUILD_SWITCH_TESTS)
   message(STATUS "  [X] googletest")
   option(BUILD_GMOCK "Build the google mock subproject" OFF)
   option(BUILD_GTEST "Build the google test subproject" ON)
@@ -165,7 +165,7 @@ else()
   message(STATUS "  [ ] Switch.TUnit.Main")
 endif()
 
-if (BUILD_TESTS)
+if (BUILD_SWITCH_TESTS)
   message(STATUS "Generating Tests")
 
   if (BUILD_SWITCH_CORE)

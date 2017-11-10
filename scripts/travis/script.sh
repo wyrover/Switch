@@ -7,7 +7,7 @@ if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
   cmake --build . --target install -- -j8
 elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
   cmake -G "Xcode" -DBUILD_TESTS=ON .. 
-  cmake --build . --target install --Config Release
+  cmake --build . --target install --config Release
 fi
 cd ..
 
@@ -18,7 +18,7 @@ if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
   cmake --build . --target install -- -j8
 elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
   cmake -G "Xcode" ../../examples 
-  cmake --build . --target install --Config Release
+  cmake --build . --target install --config Release
 fi
 cd ../..
 
