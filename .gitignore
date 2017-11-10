@@ -6,7 +6,7 @@ build
 lib
 
 #git files
-3dparty/googletest/.git
+3dparty/googletest/.git/
 
 # QT files
 CMakeLists.txt.user
