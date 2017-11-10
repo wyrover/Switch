@@ -15,14 +15,7 @@ sudo chown -R $(whoami) /usr/local/lib
 
 if [ -d ./build ]; then rm -r -f build; fi
 
-mkdir -p build/3rdparty
 mkdir -p build/examples
-
-# generate, build and install 3rdparty
-cd build/3rdparty
-cmake -G "Xcode" ../../3rdparty
-cmake --build . --target install --config Release
-cd ../..
 
 # generate, build and install Switch
 cd build

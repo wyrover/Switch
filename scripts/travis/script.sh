@@ -1,16 +1,5 @@
 #!/usr/bin/env bash
 
-# generate, build and install 3rdparty
-cd build/3rdparty
-if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-  cmake -DCMAKE_BUILD_TYPE=Release ../../3rdparty 
-  cmake --build . --target install -- -j8
-elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-  cmake -G "Xcode" ../../3rdparty 
-  cmake --build . --target install --Config Release
-fi
-cd ../..
-
 # generate, build and install Switch
 cd build
 if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
