@@ -5,5 +5,8 @@
 build
 lib
 
+#git files
+.git
+
 # QT files
 CMakeLists.txt.user
