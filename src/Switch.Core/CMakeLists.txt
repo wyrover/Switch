@@ -1,3 +1,7 @@
 project(Switch.Core)
 set(LINK_LIBRARIES call_stack easywsclient Rs232 zlib Threads::Threads ${STANDARD_CORE_LINK_LIBRARIES})
 MakeLibraryProject()
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:call_stack> ${CMAKE_HOME_DIRECTORY}/lib/$<TARGET_FILE_NAME:call_stack>)
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:easywsclient> ${CMAKE_HOME_DIRECTORY}/lib/$<TARGET_FILE_NAME:easywsclient>)
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:Rs232> ${CMAKE_HOME_DIRECTORY}/lib/$<TARGET_FILE_NAME:Rs232>)
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:zlib> ${CMAKE_HOME_DIRECTORY}/lib/$<TARGET_FILE_NAME:zlib>)
