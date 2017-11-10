@@ -38,6 +38,7 @@ file(WRITE install.bat "@echo off\nREM Read this first :\nREM =================\
 file(WRITE src/Switch/include/Switch/Switch.hpp "#pragma once\n\n")
 
 message(STATUS "Generating 3rdparty")  
+
 if (BUILD_SWITCH_CORE)
   message(STATUS "  [X] call_stack")
   add_subdirectory(3rdparty/call_stack)
@@ -166,6 +167,7 @@ endif()
 
 if (BUILD_TESTS)
   message(STATUS "Generating Tests")
+
   if (BUILD_SWITCH_CORE)
     message(STATUS "  [X] Switch.Core.ManualTests")
     add_subdirectory("tests/Switch.Core.ManualTests")
