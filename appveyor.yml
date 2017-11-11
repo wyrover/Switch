@@ -2,7 +2,7 @@ version: 0.4.1.{build}
 image: Visual Studio 2017
 
 build_script:
-  - cmake -G "Visual Studio 15 2017 Win64" .. -DBUILD_SWITCH_TESTS=ON
+  - cmake -G "Visual Studio 15 2017 Win64" . -DBUILD_SWITCH_TESTS=ON
   - cmake --build . --config Release
 
 test_script:
