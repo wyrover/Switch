@@ -18,7 +18,7 @@ addons:
       - gcc-6
       - clang-3.9
       - lldb-3.9
-      #- libgtkmm-3.0-dev
+      - libgtkmm-3.0-dev
       - uuid-dev
 
 script:
