@@ -1,6 +1,8 @@
 #pragma once
 
+#define PNG_SKIP_SETJMP_CHECK
 #include <png.h>
+#undef PNG_SKIP_SETJMP_CHECK
 #include <zlib.h>
 #include <Switch/System/Object.hpp>
 #include <Switch/System/IO//BinaryReader.hpp>
