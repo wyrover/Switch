@@ -1,0 +1,14 @@
+version: 0.4.1.{build}
+image: Visual Studio 2017
+
+build_script:
+  - mkdir build
+  - cd build
+  - cmake -G "Visual Studio 15 2017 Win64" .. -DBUILD_SWITCH_TESTS=ON
+  - cmake --build . --config Release
+  - cd ..
+
+test_script:
+  - cd build
+  - ctest --output-on-failure --build-config Release
+  - cd .. 
