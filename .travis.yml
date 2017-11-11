@@ -6,7 +6,6 @@ matrix:
       compiler: clang-3.9
       dist: trusty
     - os: osx
-      compiler: clang
       osx_image: xcode9.1
 
 addons:
@@ -15,13 +14,10 @@ addons:
       - llvm-toolchain-xenial-3.9
       - ubuntu-toolchain-r-test
     packages:
-      #- g++-6
-      - gcc-6
+      - gcc++-6
       - clang-3.9
       - lldb-3.9
       - libgtkmm-3.0-dev
-      #- libssl-dev
-      #- libx11-dev
       - uuid-dev
 
 script:
