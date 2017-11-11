@@ -8,5 +8,5 @@ endif()
 
 add_subdirectory(zlib)
 
-install(EXPORT zlib DESTINATION cmake)  
+#install(EXPORT zlib DESTINATION cmake)  
 install(FILES zlibConfig.cmake DESTINATION cmake)
