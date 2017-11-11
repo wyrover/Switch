@@ -22,10 +22,7 @@ addons:
       - uuid-dev
 
 script:
-  - mkdir build
-  - cd build
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export SWITCH_OPTIONS="-DBUILD_SWITCH_SYSTEM_DRAWING=OFF -DBUILD_SWITCH_SYSTEM_WINDOWS_FORMS=OFF"; fi
   - cmake .. -DCMAKE_BUILD_TYPE=Release -DBUILD_SWITCH_TESTS=ON $SWITCH_OPTIONS 
   - cmake --build . -- -j8
   - ctest --output-on-failure --build-config Release
-  - cd ..
