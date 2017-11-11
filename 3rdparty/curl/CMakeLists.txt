@@ -72,8 +72,8 @@ set(OS "\"${CMAKE_SYSTEM_NAME}\"")
 include_directories(${PROJECT_BINARY_DIR}/include/curl)
 include_directories( ${CURL_SOURCE_DIR}/include )
 
-option(BUILD_CURL_EXE "Set to ON to build curl executable." ON)
-option(CURL_STATICLIB "Set to ON to build libcurl with static linking." OFF)
+option(BUILD_CURL_EXE "Set to ON to build curl executable." OFF)
+option(CURL_STATICLIB "Set to ON to build libcurl with static linking." ON)
 option(ENABLE_ARES "Set to ON to enable c-ares support" OFF)
 if(WIN32)
   CMAKE_DEPENDENT_OPTION(ENABLE_THREADED_RESOLVER
@@ -194,7 +194,7 @@ if(ENABLE_IPV6 AND NOT WIN32)
   endif()
 endif()
 
-option(ENABLE_MANUAL "to provide the built-in manual" ON)
+option(ENABLE_MANUAL "to provide the built-in manual" OFF)
 unset(USE_MANUAL CACHE) # TODO: cache NROFF/NROFF_MANOPT/USE_MANUAL vars?
 if(ENABLE_MANUAL)
   find_program(NROFF NAMES gnroff nroff)

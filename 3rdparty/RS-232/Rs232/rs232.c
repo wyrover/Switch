@@ -34,6 +34,8 @@
 /* For more info and how to use this library, visit: http://www.teuniz.net/RS-232/ */
 
 
+#define _CRT_SECURE_NO_WARNINGS
+
 #include "rs232.h"
 
 
