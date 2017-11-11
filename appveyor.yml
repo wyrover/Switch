@@ -11,4 +11,3 @@ build_script:
 test_script:
   - cd build
   - ctest --output-on-failure --build-config Release
-  - cd .. 
