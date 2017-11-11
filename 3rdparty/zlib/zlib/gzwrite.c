@@ -4,6 +4,9 @@
  */
 
 #include "gzguts.h"
+#if defined(__APPLE__)
+#include <unistd.h>
+#endif
 
 /* Local functions */
 local int gz_init OF((gz_statep));
