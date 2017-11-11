@@ -3,8 +3,7 @@ language: cpp
 matrix:
   include:
     - os: linux
-      compiler: clang
-      #sudo: require
+      compiler: clang-3.9
       dist: trusty
     - os: osx
       compiler: clang
@@ -25,23 +24,13 @@ addons:
       - libx11-dev
       - uuid-dev
 
-befire_script:
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-  -  export CC=clang-3.9
-  -  export CXX=clang++-3.9
-  - fi
-
 script:
   - mkdir build
   - cd build
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export SWITCH_OPTIONS= -DBUILD_SWITCH_SYSTEM_WINDOWS_FORMS=OFF; fi
+  #- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export CC=clang-3.9; fi
+  #- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export CXX=clang++-3.9; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export SWITCH_OPTIONS=-DBUILD_SWITCH_SYSTEM_WINDOWS_FORMS=OFF; fi
   - cmake  .. -DCMAKE_BUILD_TYPE=Release -DBUILD_SWITCH_TESTS=ON $SWITCH_OPTIONS 
   - cmake --build . -- -j8
   - ctest --output-on-failure --build-config Release
   - cd ..
-
-#before_install: source ./scripts/travis/before_install.sh
-#install: source ./scripts/travis/install.sh
-#before_script: source ./scripts/travis/before_script.sh
-#script: ./scripts/travis/script.sh
-#after_success: ./scripts/travis/after_success.sh
