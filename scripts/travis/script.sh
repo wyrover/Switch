@@ -3,7 +3,7 @@
 # generate, build and install Switch
 cd build
 if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-  cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_SWITCH_TESTS=ON -BUILD_SWITCH_SYSTEM_WINDOWS_FORMS=OFF .. 
+  cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_SWITCH_TESTS=ON -DBUILD_SWITCH_SYSTEM_WINDOWS_FORMS=OFF .. 
   cmake --build . --target install -- -j8
 elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
   cmake -G "Xcode" -DBUILD_SWITCH_TESTS=ON .. 
