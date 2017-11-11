@@ -15,10 +15,10 @@ cd ..
 cd build/examples
 if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
   cmake -DCMAKE_BUILD_TYPE=Release ../../examples 
-  cmake --build . --target install -- -j8
+  cmake --build . -- -j8
 elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
   cmake -G "Xcode" ../../examples 
-  cmake --build . --target install --config Release
+  cmake --build . --config Release
 fi
 cd ../..
 
