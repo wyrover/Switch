@@ -4,7 +4,7 @@
 #include <Switch/System/IntPtr.hpp>
 
 #define  CURL_STATICLIB
-#include <curl/curl.h>
+#include <curl.h>
 
 int32 Native::CurlApi::Cleanup(intptr request) {
   curl_easy_cleanup((CURL*)request);
