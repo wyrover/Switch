@@ -11,9 +11,9 @@ HelloWorld.cpp:
 
 ```c++
 #include <Switch/Switch>
-​
+
 using namespace System;
-​
+
 namespace HelloWorld {
   class Program {
   public:
@@ -22,7 +22,7 @@ namespace HelloWorld {
     }
   };
 }
-​
+
 _startup (HelloWorld::Program)
 ```
 
@@ -30,11 +30,21 @@ CMakeLists.txt:
 
 ```cmake
 cmake_minimum_required(VERSION 3.2)
- 
+
 Project(HelloWorld)
 find_package(Switch REQUIRED)
 add_executable(HelloWorld HelloWorld.cpp)
 target_link_libraries(HelloWorld Switch.System)
+```
+
+Terminal or "Command prompt"
+
+``` bash
+mkdir build
+cd build
+cmake ..
+cmake --build .
+./HelloWorld
 ```
 
 Console output:
@@ -49,11 +59,11 @@ HelloWorldForm.cpp:
 
 ```c++
 #include <Switch/Switch>
- 
+
 using namespace System;
 using namespace System::Drawing;
 using namespace System::Windows::Forms;
-​
+
 namespace HelloWorld {
   class Program {
   public:
@@ -75,15 +85,25 @@ namespace HelloWorld {
     }
   };
 }
- 
+
 _startup (HelloWorld::Program)
+```
+
+Terminal or "Command prompt"
+
+``` bash
+mkdir build
+cd build
+cmake ..
+cmake --build .
+./HelloWorldForm
 ```
 
 CMakeLists.txt:
 
 ```cmake
 cmake_minimum_required(VERSION 3.2)
- 
+
 Project(HelloWorldForm)
 find_package(Switch REQUIRED)
 add_executable(HelloWorldForm ${SWITCH_GUI} HelloWorldForm.cpp)
@@ -107,10 +127,10 @@ HelloWorldTest.cpp:
 
 ```c++
 #include <Switch/Switch>
- 
+
 using namespace System;
 using namespace TUnit;
- 
+
 namespace UnitTests {
   class HelloWorldTest : public TestFixture {
   protected:
@@ -124,7 +144,7 @@ namespace UnitTests {
       Assert::AreEqual("Hello, World!", s);
     }
   };
- 
+  
   _test (HelloWorldTest, CreateStringFromLiteral)
   _test (HelloWorldTest, CreateStringFromChar32Array)
 }
@@ -134,12 +154,23 @@ CMakeLists.txt:
 
 ```cmake
 cmake_minimum_required(VERSION 3.2)
-​
+
 Project(HelloWorldTest)
 find_package(Switch REQUIRED)
 add_executable(HelloWorldTest HelloWorldTest.cpp)
 target_link_libraries(HelloWorldTest Switch.TUnit.Main)
 ```
+
+Terminal or "Command prompt"
+
+``` bash
+mkdir build
+cd build
+cmake ..
+cmake --build .
+./HelloWorldTest
+```
+
 Console output:
 
 ```

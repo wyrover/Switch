@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 
-# create new build folders
+# create build folders
 mkdir -p build/3rdparty

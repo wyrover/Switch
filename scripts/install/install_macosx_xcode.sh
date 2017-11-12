@@ -1,10 +1,13 @@
+# change packages manager owner
 sudo chown -R $(whoami) /usr/local/var/homebrew
+
+# update packages manager
 brew update
-brew upgrade
-brew install cmake curl doxygen jpeg libpng zlib
 
-if [ -d ./build ]; then rm -r -f build; fi
+# install needed packages and libraries
+brew install cmake doxygen curl jpeg libpng zlib
 
+# create build folders
 mkdir -p build/3rdparty
 mkdir -p build/examples
 
@@ -27,5 +30,7 @@ cd ..
 # generate examples
 cd build/examples
 cmake -G "Xcode" ../../examples
-open Examples.xcodeproj
 cd ../..
+
+# launch examples
+open build/examples/Examples.xcodeproj

@@ -1,6 +1,7 @@
 echo Install Switch libraries version %switch_version%, copyright GAMMA Soft, 2017
 echo.
 
+rem analyse parameters
 if "%1" == "" (
   set switch_install_option=/VS:2017:WIN64
 ) else if "%1" == "/VCPKG" (
@@ -29,8 +30,10 @@ if "%1" == "" (
   set switch_install_cmake_install_prefix_path=%1
 )
 
+rem if cmake  install prefix path is empty set default value (C:/usr/local)
 if "%switch_install_cmake_install_prefix_path%" == "" set switch_install_cmake_install_prefix_path=C:/usr/local
 
+rem call Switch intaller with parameters
 if "%1" == "/help" (
   call scripts\install\install_windows_usage.bat 
 ) else if "%switch_install_option%" == "/VCPKG" (
@@ -49,7 +52,7 @@ if "%1" == "/help" (
   call scripts\install\install_windows_usage.bat 
 ) 
 
+rem clear variables
 set switch_install_option=
 set switch_install_vcpkg_path=
 set switch_install_cmake_install_prefix_path=
-

@@ -5,9 +5,9 @@ ________________________________________________________________________________
 [![Build status](https://ci.appveyor.com/api/projects/status/kjfq2sl5bc99kut6?svg=true)](https://ci.appveyor.com/project/gammasoft71/switch)
 [![license GPL v3](https://img.shields.io/badge/license-GPL%20v3-004080.svg)](docs/License.md) 
 [![© GAMMA Soft](https://img.shields.io/badge/©-GAMMA%20Soft-004080.svg)](https://gammasoft71.wixsite.com/gammasoft) 
-[![language c++](https://img.shields.io/badge/language-c++-004080.svg)](docs/C++17Ready.md) 
+[![language c++](https://img.shields.io/badge/language-c++-004080.svg)](https://gammasoft71.github.io/Switch-doc) 
 [![std c++17 ready](https://img.shields.io/badge/std-c++14-004080.svg)](docs/C++17Ready.md) 
-[![os Windows, macOS, linux](https://img.shields.io/badge/os-Windows,%20macOS,%20linux-004080.svg)]()
+[![os Windows, macOS, linux](https://img.shields.io/badge/os-Windows,%20macOS,%20linux-004080.svg)](docs/Examples.md)
 [![development status](https://img.shields.io/badge/dev-status-004080.svg)](docs/SwitchStatus.md) 
 <!--[![Download Switch](https://img.shields.io/sourceforge/dt/switchpro.svg)](https://sourceforge.net/projects/switchpro/files/latest/download)-->
 <!--[![HitCount](http://hits.dwyl.io/gammasoft71/switch.svg)](http://hits.dwyl.io/gammasoft71/switch)-->
@@ -17,7 +17,7 @@ ________________________________________________________________________________
 * written in efficient, modern C++14;
 * and highly portable and available on many different platforms (Windows, macOS, Linux);
 
-For more information see [Switch website](https://gammasoft71.github.io/Switch) (or [markdown Documentations](./docs/Home.md)) and [Reference Guide](https://gammasoft71.github.io/Switch-doc)
+For more information see [Switch website](https://gammasoft71.wixsite.com/switch) (or [markdown Documentations](./docs/Home.md)) and [Reference Guide](https://gammasoft71.github.io/Switch-doc)
 
 
 # Examples
