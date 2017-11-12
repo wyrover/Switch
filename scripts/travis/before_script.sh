@@ -22,4 +22,5 @@ sudo chown -R $(whoami) /usr/local/lib
 if [ -d ./build ]; then rm -r -f build; fi
 
 # create new build folders
+mkdir -p build/3rdparty
 mkdir -p build/examples

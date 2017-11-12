@@ -3,12 +3,7 @@
  * For conditions of distribution and use, see copyright notice in zlib.h
  */
 
-#define _CRT_SECURE_NO_WARNINGS
-
 #include "gzguts.h"
-#if defined(__APPLE__)
-#include <unistd.h>
-#endif
 
 /* Local functions */
 local int gz_init OF((gz_statep));

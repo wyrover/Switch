@@ -1,12 +1,6 @@
-# macOS files
 .DS_Store
-
-# build files
+build-*
 build
-lib
-
-#git files
-3dparty/googletest/.git/
-
-# QT files
 CMakeLists.txt.user
+lib
+x64

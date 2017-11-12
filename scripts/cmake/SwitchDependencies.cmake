@@ -1,7 +1,15 @@
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+find_package(call_stack REQUIRED)
+find_package(CURL REQUIRED)
+find_package(easywsclient REQUIRED)
+find_package(GTest REQUIRED)
+find_package(JPEG REQUIRED)
+find_package(PNG REQUIRED)
+find_package(Rs232 REQUIRED)
 find_package(Threads REQUIRED)
+find_package(ZLIB REQUIRED)
 
 if(MSVC)
   set(SWITCH_GUI WIN32)

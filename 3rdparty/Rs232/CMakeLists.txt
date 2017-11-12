@@ -1,0 +1,22 @@
+cmake_minimum_required(VERSION 3.2)
+
+project(Rs232)
+
+if(NOT CMAKE_DEBUG_POSTFIX)
+  set(CMAKE_DEBUG_POSTFIX d)
+endif()
+
+add_library(Rs232 STATIC Rs232/rs232.h Rs232/rs232.c) 
+target_include_directories(Rs232 PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}> $<INSTALL_INTERFACE:include>)
+add_custom_command(TARGET Rs232 POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:Rs232> ${CMAKE_HOME_DIRECTORY}/../lib/$<TARGET_FILE_NAME:Rs232>)
+
+install(EXPORT Rs232 DESTINATION cmake)  
+install(FILES Rs232Config.cmake DESTINATION cmake)
+install(TARGETS Rs232 EXPORT Rs232 DESTINATION lib)
+install (FILES Rs232/rs232.h DESTINATION include/Rs232)
+if(MSVC)
+  target_compile_options(Rs232 PRIVATE "$<$<CONFIG:Debug>:/Fd$<TARGET_FILE_DIR:Rs232>/Rs232${CMAKE_DEBUG_POSTFIX}.pdb>")
+  target_compile_options(Rs232 PRIVATE "$<$<CONFIG:Release>:/Fd$<TARGET_FILE_DIR:Rs232>/Rs232.pdb>")
+  install(FILES "$<TARGET_FILE_DIR:Rs232>/Rs232${CMAKE_DEBUG_POSTFIX}.pdb" DESTINATION lib CONFIGURATIONS Debug OPTIONAL)
+  install(FILES "$<TARGET_FILE_DIR:Rs232>/Rs232.pdb" DESTINATION lib CONFIGURATIONS Release OPTIONAL)
+endif()

@@ -58,15 +58,16 @@ GTEST_API_ GTEST_DEFINE_STATIC_MUTEX_(g_gmock_mutex);
 // Logs a message including file and line number information.
 GTEST_API_ void LogWithLocation(testing::internal::LogSeverity severity,
                                 const char* file, int line,
-                                const std::string& message) {
+                                const string& message) {
   ::std::ostringstream s;
   s << file << ":" << line << ": " << message << ::std::endl;
   Log(severity, s.str(), 0);
 }
 
 // Constructs an ExpectationBase object.
-ExpectationBase::ExpectationBase(const char* a_file, int a_line,
-                                 const std::string& a_source_text)
+ExpectationBase::ExpectationBase(const char* a_file,
+                                 int a_line,
+                                 const string& a_source_text)
     : file_(a_file),
       line_(a_line),
       source_text_(a_source_text),
@@ -243,7 +244,7 @@ GTEST_API_ ThreadLocal<Sequence*> g_gmock_implicit_sequence;
 
 // Reports an uninteresting call (whose description is in msg) in the
 // manner specified by 'reaction'.
-void ReportUninterestingCall(CallReaction reaction, const std::string& msg) {
+void ReportUninterestingCall(CallReaction reaction, const string& msg) {
   // Include a stack trace only if --gmock_verbose=info is specified.
   const int stack_frames_to_skip =
       GMOCK_FLAG(verbose) == kInfoVerbosity ? 3 : -1;
@@ -353,10 +354,10 @@ UntypedFunctionMockerBase::UntypedInvokeWith(const void* const untyped_args)
     // the behavior of ReportUninterestingCall().
     const bool need_to_report_uninteresting_call =
         // If the user allows this uninteresting call, we print it
-        // only when they want informational messages.
+        // only when he wants informational messages.
         reaction == kAllow ? LogIsVisible(kInfo) :
         // If the user wants this to be a warning, we print it only
-        // when they want to see warnings.
+        // when he wants to see warnings.
         reaction == kWarn ? LogIsVisible(kWarning) :
         // Otherwise, the user wants this to be an error, and we
         // should always print detailed information in the error.
@@ -364,7 +365,7 @@ UntypedFunctionMockerBase::UntypedInvokeWith(const void* const untyped_args)
 
     if (!need_to_report_uninteresting_call) {
       // Perform the action without printing the call information.
-      return this->UntypedPerformDefaultAction(untyped_args, "Function call: " + std::string(Name()));
+      return this->UntypedPerformDefaultAction(untyped_args, "");
     }
 
     // Warns about the uninteresting call.
@@ -508,13 +509,6 @@ bool UntypedFunctionMockerBase::VerifyAndClearExpectationsLocked()
   return expectations_met;
 }
 
-CallReaction intToCallReaction(int mock_behavior) {
-  if (mock_behavior >= kAllow && mock_behavior <= kFail) {
-    return static_cast<internal::CallReaction>(mock_behavior);
-  }
-  return kWarn;
-}
-
 }  // namespace internal
 
 // Class Mock.
@@ -655,8 +649,7 @@ internal::CallReaction Mock::GetReactionOnUninterestingCalls(
         GTEST_LOCK_EXCLUDED_(internal::g_gmock_mutex) {
   internal::MutexLock l(&internal::g_gmock_mutex);
   return (g_uninteresting_call_reaction.count(mock_obj) == 0) ?
-      internal::intToCallReaction(GMOCK_FLAG(default_mock_behavior)) :
-      g_uninteresting_call_reaction[mock_obj];
+      internal::kDefault : g_uninteresting_call_reaction[mock_obj];
 }
 
 // Tells Google Mock to ignore mock_obj when checking for leaked mock
