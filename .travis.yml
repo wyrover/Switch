@@ -36,7 +36,7 @@ script:
   - cd build/3rdparty
   - cmake -DCMAKE_BUILD_TYPE=Release ../../3rdparty 
   - cmake --build . -- -j8
-  - sudo cmake --build . --target install
+  - sudo cmake --build . --target install -- -j8
   - cd ..
   - cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=ON ..
   - cmake --build . -- -j8
