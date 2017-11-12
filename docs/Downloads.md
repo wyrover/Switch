@@ -160,8 +160,8 @@ To build this wonderful application, open "Command Prompt" and type following li
 
 ```shell
 cd C:\Users\YourName\Projects\SwitchConsole
-mkdir bin
-cd bin
+mkdir build
+cd build
 cmake -G "Visual Studio 15 2017 Win64" -D CMAKE_INSTALL_PREFIX:STRING="C:/usr/local" ..
 ```
 The SwitchConsle.sln file was generate, open it with VisualStudio 2017. Select SwitchConsole project and type Ctrl+F5 to build and run your first application.
@@ -172,8 +172,8 @@ To build this wonderful application, open "Terminal" and type following lines:
 
 ```shell
 cd /Users/YourName/Projects/SwitchConsole
-mkdir bin
-cd bin
+mkdir build
+cd build
 cmake -G "Xcode" ..
 ```
 The SwitchConsle.xcodeproj file was generate, open it with Xcode. Select SwitchConsole project and type Cmd+R to build and run your first application.
@@ -184,8 +184,8 @@ To build this wonderful application, open "Terminal" and type following lines:
 
 ```shell
 cd /home/YourName/Projects/SwitchConsole
-mkdir bin
-cd bin
+mkdir build
+cd build
 cmake -G ..
 ```
 The makefile was generate, in the same "Terminal" type following lines to build and run your first application:
