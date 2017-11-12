@@ -7,8 +7,8 @@ build_script:
   - cmake -G "Visual Studio 15 2017 Win64" ../../3rdparty -DCMAKE_INSTALL_PREFIX=C:/usr/local
   - cmake --build . --target install --config Release
   - cd ..
-  - cmake -G "Visual Studio 15 2017 Win64" .. -DBUILD_SWITCH_TESTS=ON -DCMAKE_INSTALL_PREFIX:C:/usr/local
-  - cmake --build . --config Release
+  - cmake -G "Visual Studio 15 2017 Win64" .. -DBUILD_SWITCH_TESTS=ON -DCMAKE_INSTALL_PREFIX=C:/usr/local
+  - cmake --build . --config Releaseo
   - cd ..
 
 test_script:
