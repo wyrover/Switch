@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 # update packages manager
 if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; fi

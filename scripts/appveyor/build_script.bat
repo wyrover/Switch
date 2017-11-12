@@ -1,4 +1,3 @@
-echo@
 mkdir build\3rdparty
 cd build\3rdparty
 cmake -G "Visual Studio 15 2017 Win64" ../../3rdparty -DCMAKE_INSTALL_PREFIX:STRING=C:/usr/local

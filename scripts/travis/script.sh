@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 # generate, build and install 3rdparty
 cd build/3rdparty
