@@ -32,26 +32,28 @@ git clone https://github.com/gammasoft71/Switch .
    After CMake, to generate Switch documentation, you need to install the latest version Doxygen from http://www.stack.nl/~dimitri/doxygen/download.html
    *Remarks: Verify if you can execute doxygen --version in "Developer Command Prompt for VS 2017", if it's no, add doxygen install directory to your path.*
 
-4. After installing Microsoft Visual Studio, Cmake and Doxygen, do the following in "Developer Command Prompt for VS 2017" to Build and install Switch :
+4. After installing Microsoft Visual Studio, Cmake and Doxygen, do the following in "Command Prompt" to Build and install Switch :
+
 ```shell
 cd C:\Users\YourName\Switch\
 install.bat
 ```
+
    *Remarks, this operation depand of your hardware and can be very long*
 
 5. Enjoy and be creative with Switch ;-)
 
 ### Remarks
 
-* Switch installer set cmake variable CMAKE_INSTALL_PREFIX to "C:/usr/local" for generate, build and install Switch.
-* When install is complete you can find installed Switch files in folder "C:/usr/local".
-* To build your own project using Switch, don't miss to set cmake variable CMAKE_INSTALL_PREFIX to "C:/usr/local"; otherwise cmake don't find Switch libraries and include files. See cmake documentation (http://cmake.org/documentation) for more information.
-* type install /? to view usage help page.
+* Switch installer set cmake variable CMAKE_INSTALL_PREFIX to "/usr/local" for generate, build and install Switch.
+* When install is complete you can find installed Switch files in folder "/usr/local".
+* To build your own project using Switch, don't miss to set cmake variable CMAKE_INSTALL_PREFIX to "/usr/local"; otherwise cmake don't find Switch libraries and include files. See cmake documentation (http://cmake.org/documentation) for more information.
 
 ## macOS 10.12 or later
 
 1. Install Xcode
    In order to build Switch, you first need download and install Xcode from App Store and install "Commands line tools".
+
    *Remarks: Verify if you can execute clang --version in terminal.*
 
 2. Install Homebrew
@@ -64,6 +66,7 @@ install.bat
 cd /Users/YourName/Switch
 ./install.sh
 ```
+
    *Remarks, this operation depand of your hardware and can be very long*
 
 4. Enjoy and be creative with Switch ;-)
@@ -76,6 +79,7 @@ cd /Users/YourName/Switch
 cd /home/YourName/Switch
 ./install.sh
 ```
+
 *Remarks, this operation depend of your hardware and can be very long*
 
 2. Enjoy and be creative with Switch ;-)
@@ -88,6 +92,7 @@ cd /home/YourName/Switch
 cd /home/YourName/Switch
 ./install.sh
 ```
+
 *Remarks, this operation depand of your hardware and can be very long*
   
 2. Enjoy and be creative with Switch ;-)
@@ -96,10 +101,12 @@ cd /home/YourName/Switch
 
 1. Install clang 4.0.0 or later
    In order to build Switch, you first need download and install clang 4.0.0 or later.
+
    *Remarks: Verify if you can execute clang --version in terminal.*
 
 2. Install CMake 
    After clang, to build Switch, you need to install the latest version cmake from https://cmake.org/download/
+
    *Remarks: Verify if you can execute cmake --version in terminal.*
 
 3. Install Doxygen
@@ -114,6 +121,7 @@ cd /home/YourName/Switch
 cd /home/YourName/Switch
 ./install.sh
 ```
+
    *Remarks, this operation depand of your hardware and can be very long*
   
 5. Enjoy and be creative with Switch ;-)
@@ -162,7 +170,7 @@ To build this wonderful application, open "Command Prompt" and type following li
 cd C:\Users\YourName\Projects\SwitchConsole
 mkdir build
 cd build
-cmake -G "Visual Studio 15 2017 Win64" -D CMAKE_INSTALL_PREFIX:STRING="C:/usr/local" ..
+cmake .. -D CMAKE_INSTALL_PREFIX:STRING="/usr/local"
 ```
 The SwitchConsle.sln file was generate, open it with VisualStudio 2017. Select SwitchConsole project and type Ctrl+F5 to build and run your first application.
 
@@ -174,7 +182,7 @@ To build this wonderful application, open "Terminal" and type following lines:
 cd /Users/YourName/Projects/SwitchConsole
 mkdir build
 cd build
-cmake -G "Xcode" ..
+cmake .. -G "Xcode"
 ```
 The SwitchConsle.xcodeproj file was generate, open it with Xcode. Select SwitchConsole project and type Cmd+R to build and run your first application.
 
@@ -186,12 +194,12 @@ To build this wonderful application, open "Terminal" and type following lines:
 cd /home/YourName/Projects/SwitchConsole
 mkdir build
 cd build
-cmake -G ..
+cmake ..
 ```
 The makefile was generate, in the same "Terminal" type following lines to build and run your first application:
 
 ```shell
-make
+cmake --build . --config Release
 ./SwitchConsole
 ```
 

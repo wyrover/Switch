@@ -37,16 +37,6 @@ add_executable(HelloWorld HelloWorld.cpp)
 target_link_libraries(HelloWorld Switch.System)
 ```
 
-Terminal or "Command prompt":
-
-``` bash
-mkdir build
-cd build
-cmake ..
-cmake --build .
-./HelloWorld
-```
-
 Console output:
 
 ```
@@ -100,16 +90,6 @@ add_executable(HelloWorldForm ${SWITCH_GUI} HelloWorldForm.cpp)
 target_link_libraries(HelloWorldForm Switch.System.Windows.Forms)
 ```
 
-Terminal or "Command prompt":
-
-``` bash
-mkdir build
-cd build
-cmake ..
-cmake --build .
-./HelloWorldForm
-```
-
 Running application on Windows:
 
 ![HelloWorldForms](Pictures/Examples/Forms/HelloWorldFormW.png)
@@ -160,16 +140,6 @@ Project(HelloWorldTest)
 find_package(Switch REQUIRED)
 add_executable(HelloWorldTest HelloWorldTest.cpp)
 target_link_libraries(HelloWorldTest Switch.TUnit.Main)
-```
-
-Terminal or "Command prompt":
-
-``` bash
-mkdir build
-cd build
-cmake ..
-cmake --build .
-./HelloWorldTest
 ```
 
 Console output:
