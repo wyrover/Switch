@@ -89,16 +89,6 @@ namespace HelloWorld {
 _startup (HelloWorld::Program)
 ```
 
-Terminal or "Command prompt"
-
-``` bash
-mkdir build
-cd build
-cmake ..
-cmake --build .
-./HelloWorldForm
-```
-
 CMakeLists.txt:
 
 ```cmake
@@ -109,6 +99,17 @@ find_package(Switch REQUIRED)
 add_executable(HelloWorldForm ${SWITCH_GUI} HelloWorldForm.cpp)
 target_link_libraries(HelloWorldForm Switch.System.Windows.Forms)
 ```
+
+Terminal or "Command prompt"
+
+``` bash
+mkdir build
+cd build
+cmake ..
+cmake --build .
+./HelloWorldForm
+```
+
 Running application on Windows:
 
 ![HelloWorldForms](Pictures/Examples/Forms/HelloWorldFormW.png)
