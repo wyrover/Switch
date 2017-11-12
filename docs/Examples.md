@@ -37,7 +37,7 @@ add_executable(HelloWorld HelloWorld.cpp)
 target_link_libraries(HelloWorld Switch.System)
 ```
 
-Terminal or "Command prompt"
+Terminal or "Command prompt":
 
 ``` bash
 mkdir build
@@ -100,7 +100,7 @@ add_executable(HelloWorldForm ${SWITCH_GUI} HelloWorldForm.cpp)
 target_link_libraries(HelloWorldForm Switch.System.Windows.Forms)
 ```
 
-Terminal or "Command prompt"
+Terminal or "Command prompt":
 
 ``` bash
 mkdir build
@@ -162,7 +162,7 @@ add_executable(HelloWorldTest HelloWorldTest.cpp)
 target_link_libraries(HelloWorldTest Switch.TUnit.Main)
 ```
 
-Terminal or "Command prompt"
+Terminal or "Command prompt":
 
 ``` bash
 mkdir build
