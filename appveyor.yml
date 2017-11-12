@@ -2,8 +2,16 @@ version: 0.4.1.{build}
 image: Visual Studio 2017
 
 build_script:
-  - cmake -G "Visual Studio 15 2017 Win64" . -DBUILD_SWITCH_TESTS=ON
+  - mkdir build/3rdparty
+  - cd build/3rdparty
+  - cmake -G "Visual Studio 15 2017 Win64" ../../3rdparty
+  - cmake --build . --target install --config Release
+  - cd ..
+  - cmake -G "Visual Studio 15 2017 Win64" .. -DBUILD_SWITCH_TESTS=ON
   - cmake --build . --config Release
+  - cd ..
 
 test_script:
+  - cd build
   - ctest --output-on-failure --build-config Release
+  - cd ..
