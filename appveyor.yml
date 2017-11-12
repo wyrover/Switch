@@ -2,8 +2,8 @@ version: 0.4.1.{build}
 image: Visual Studio 2017
 
 build_script:
-  - mkdir build/3rdparty
-  - cd build/3rdparty
+  - mkdir build\3rdparty
+  - cd build\3rdparty
   - cmake -G "Visual Studio 15 2017 Win64" ../../3rdparty -DCMAKE_INSTALL_PREFIX:C:/usr/local
   - cmake --build . --target install --config Release
   - cd ..
