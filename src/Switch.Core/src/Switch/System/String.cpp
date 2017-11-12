@@ -73,7 +73,9 @@ String::String(const sbyte* str) {
 String::String(const Array<sbyte>& str) : string(reinterpret_cast<const char*>(str.Data())) {
 }
 
-String::String(const Array<char>& chars) : string(chars.Data, 0, chars.Length) {
+String::String(const Array<char>& chars) {
+  for (auto c : chars)
+    this->string.append(c);
 }
 
 String::String(const Array<char32>& chars) : string(chars.Data, 0, chars.Length) {
