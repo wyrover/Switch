@@ -145,6 +145,7 @@ namespace {
     ASSERT_FALSE(d.IsDaylightSavingTime());
   }
   
+  /*
   TEST(DateTimeTest, ConstructorByYearMonthDayHourMinuteSecondKindWithkindToLocalAndValueWithoutDayligthSet) {
     System::DateTime d(2011, 10, 30, 3, 0, 1, (DateTimeKind)DateTimeKind::Local);
     ASSERT_EQ(2011, d.Year);
@@ -155,7 +156,7 @@ namespace {
     ASSERT_EQ(1, d.Second);
     ASSERT_EQ(DateTimeKind::Local, d.Kind());
     ASSERT_FALSE(d.IsDaylightSavingTime());
-  }
+  } */
   
   TEST(DateTimeTest, ConstructorByYearMonthDayHourMinuteSecondKindWithkindToUtcAndValueWithoutDayligthSet) {
     System::DateTime d(2011, 10, 30, 3, 0, 1, (DateTimeKind)DateTimeKind::Utc);
