@@ -4,10 +4,10 @@ image: Visual Studio 2017
 build_script:
   - mkdir build/3rdparty
   - cd build/3rdparty
-  - cmake -G "Visual Studio 15 2017 Win64" ../../3rdparty
+  - cmake -G "Visual Studio 15 2017 Win64" ../../3rdparty -DCMAKE_INSTALL_PREFIX:C:/usr/local
   - cmake --build . --target install --config Release
   - cd ..
-  - cmake -G "Visual Studio 15 2017 Win64" .. -DBUILD_SWITCH_TESTS=ON
+  - cmake -G "Visual Studio 15 2017 Win64" .. -DBUILD_SWITCH_TESTS=ON -DCMAKE_INSTALL_PREFIX:C:/usr/local
   - cmake --build . --config Release
   - cd ..
 
