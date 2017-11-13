@@ -9,12 +9,12 @@ if [[ "$OSTYPE" != *"Darwin"* ]]; then OSTYPE=`lsb_release -si`; fi
 case "$OSTYPE" in
   *"CentOS"*) sudo yum update; sudo yum install clang cmake3 doxygen gtkmm30-devel uuid-devel -y;;
   *"Darwin"*) sudo chown -R $(whoami) /usr/local/share; brew update; brew install cmake doxygen;;
-  *"Debian"*) sudo apt update; sudo apt install clang cmake doxygen libgtkmm-3.0-dev uuid-dev -y;;
-  *"elementary"*) sudo apt update; sudo apt install clang cmake doxygen libgtkmm-3.0-dev uuid-dev -y;;
+  *"Debian"*) sudo apt update; sudo apt install clang cmake doxygen libgtkmm-3.0-dev uuid-dev libssl-dev -y;;
+  *"elementary"*) sudo apt update; sudo apt install clang cmake doxygen libgtkmm-3.0-dev uuid-dev libssl-dev -y;;
   *"Fedora"*) sudo yum update; sudo yum install clang cmake doxygen gtkmm30-devel libuuid-devel uuid-devel -y;;
-  *"LinuxMint"*) sudo apt update; sudo apt install clang cmake doxygen libgtkmm-3.0-dev uuid-dev -y;;
+  *"LinuxMint"*) sudo apt update; sudo apt install clang cmake doxygen libgtkmm-3.0-dev uuid-dev libssl-dev -y;;
   *"RedHat"*) sudo yum update; sudo yum install clang cmake doxygen gtkmm30-devel libuuid-devel uuid-devel -y;;
-  *"Ubuntu"*) sudo apt update; sudo apt install clang cmake doxygen libgtkmm-3.0-dev uuid-dev -y;;
+  *"Ubuntu"*) sudo apt update; sudo apt install clang cmake doxygen libgtkmm-3.0-dev uuid-dev libssl-dev -y;;
 esac
 
 # set clang as default compiler
