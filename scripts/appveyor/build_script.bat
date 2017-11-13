@@ -1,3 +1,4 @@
+rem create build folders
 mkdir build\3rdparty
 
 rem generate, build and install 3rdparty
