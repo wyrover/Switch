@@ -7,7 +7,7 @@ option(BUILD_SWITCH_SYSTEM_EXAMPLES "Build Switch.System examples" ON)
 option(BUILD_SWITCH_SYSTEM_DRAWING_EXAMPLES "Build Switch.System.Drawing examples" ON)
 option(BUILD_SWITCH_SYSTEM_WINDOWS_FORMS_EXAMPLES "Build SwitchSystem.Windows.Forms examples" ON)
 option(BUILD_SWITCH_TUNIT_EXAMPLES "Build Switch.TUnit examples" ON)
-option(BUILD_SWITCH_TUNIT_FRAMEWORK_EXAMPLES "Build Switch.TUnit.Framework examples" ON)
+option(BUILD_SWITCH_TUNIT_FRAMEWORK_EXAMPLES "Build Switch.TUnit.Framework examples" OFF)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
