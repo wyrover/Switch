@@ -1,0 +1,35 @@
+# when travis CI will used xenial or later
+language: cpp
+
+matrix:
+  include:
+    #- os: linux
+    #  compiler: clang-3.9
+    #  sudo: require
+    #  dist: trusty
+    - os: osx
+      osx_image: xcode9.1
+
+addons:
+  apt:
+    sources:
+      - llvm-toolchain-xenial-3.9
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-6
+      - gcc-6
+      - clang-3.9
+      - lldb-3.9
+      - libcurlpp-dev
+      - libgtkmm-3.0-dev
+      - libjpeg8-dev
+      - libssl-dev
+      - libx11-dev
+      - uuid-dev
+      - zlibc
+
+before_install: ./scripts/travis/before_install.sh
+install: ./scripts/travis/install.sh
+before_script: ./scripts/travis/before_script.sh
+script: ./scripts/travis/script.sh
+after_success: ./scripts/travis/after_success.sh
