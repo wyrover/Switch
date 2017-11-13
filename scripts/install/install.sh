@@ -5,7 +5,7 @@ echo ""
 OSTYPE=`uname -a`
 if [[ "$OSTYPE" != *"Darwin"* ]]; then OSTYPE=`lsb_release -si`; fi
 
-# install needed packages and libraries by known distribution
+# install needed packages and libraries for known distribution
 case "$OSTYPE" in
   *"CentOS"*) sudo yum update; sudo yum install clang cmake3 doxygen libcurl-devel libjpeg-devel zlib-devel libpng-devel libX11-devel uuid-devel gtkmm30-devel -y;;
   *"Darwin"*) sudo chown -R $(whoami) /usr/local/share; brew update; brew install cmake doxygen curl jpeg libpng zlib;;
