@@ -1,6 +1,12 @@
+# macOS files
 .DS_Store
-build-*
+
+# build files
 build
-CMakeLists.txt.user
 lib
-x64
+
+# QT files
+CMakeLists.txt.user
+
+# QT build files
+build-*
