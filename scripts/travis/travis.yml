@@ -20,13 +20,8 @@ addons:
       - gcc-6
       - clang-3.9
       - lldb-3.9
-      - libcurlpp-dev
       - libgtkmm-3.0-dev
-      - libjpeg8-dev
-      - libssl-dev
-      - libx11-dev
       - uuid-dev
-      - zlibc
 
 before_install: ./scripts/travis/before_install.sh
 install: ./scripts/travis/install.sh

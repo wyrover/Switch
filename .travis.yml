@@ -2,8 +2,5 @@ language: cpp
 os: osx
 osx_image: xcode9.1
 
-before_install: ./scripts/travis/before_install.sh
-install: ./scripts/travis/install.sh
-before_script: ./scripts/travis/before_script.sh
 script: ./scripts/travis/script.sh
 after_success: ./scripts/travis/after_success.sh
