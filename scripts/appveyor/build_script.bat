@@ -1,6 +1,3 @@
-rem create build folders
-mkdir build\3rdparty
-
 rem generate, build and install 3rdparty
 cd build\3rdparty
 cmake ../../3rdparty -DCMAKE_INSTALL_PREFIX=/usr/local
