@@ -210,6 +210,8 @@ To build this wonderful application, open "Terminal" and type following lines:
 cd /home/YourName/Projects/SwitchConsole
 mkdir build
 cd build
+export CC=clang
+export CXX=clang++
 cmake ..
 ```
 
