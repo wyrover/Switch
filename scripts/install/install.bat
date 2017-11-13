@@ -20,7 +20,7 @@ cmake --build . --target install --config Debug
 cmake --build . --target install --config Release
 cd ..
 
-rem generate examples
+rem generate and launch examples
 cd build\examples
 cmake -DCMAKE_INSTALL_PREFIX:STRING=/usr/local ../../examples
 start Examples.sln
