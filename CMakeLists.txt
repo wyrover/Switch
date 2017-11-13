@@ -34,7 +34,7 @@ include(scripts/cmake/SwitchDependencies.cmake)
 file(WRITE src/Switch.Core/src/Native/EnvironmentVersionApi.cpp "#include \"Api.hpp\"\n\nSystem::Version Native::EnvironmentApi::GetVersion() {\n  return System::Version::Parse(\"${Switch_VERSION}\");\n}\n")
 file(WRITE appveyor.yml "version: ${Switch_VERSION}.{build}\nimage: Visual Studio 2017\n\nbuild_script: scripts/appveyor/build_script.bat\ntest_script: scripts/appveyor/test_script.bat\n")
 file(WRITE install.sh "export switch_version=${Switch_VERSION}\nscripts/install/install.sh \"$@\"\n")
-file(WRITE install.bat "@echo off\nset switch_version=${Switch_VERSION}\ncall scripts\\install\\install.bat %*\n")
+file(WRITE install.bat "@set switch_version=${Switch_VERSION}\n@call scripts\\install\\install.bat %*\n")
 file(WRITE src/Switch/include/Switch/Switch.hpp "#pragma once\n\n")
 
 message(STATUS "Generating Switch ${Switch_VERSION}")
