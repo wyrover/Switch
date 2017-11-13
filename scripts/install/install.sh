@@ -7,14 +7,14 @@ if [[ "$OSTYPE" != *"Darwin"* ]]; then OSTYPE=`lsb_release -si`; fi
 
 # install needed packages and libraries for known distribution
 case "$OSTYPE" in
-  *"CentOS"*) sudo yum update; sudo yum install clang cmake3 doxygen libcurl-devel libjpeg-devel zlib-devel libpng-devel libX11-devel uuid-devel gtkmm30-devel -y;;
-  *"Darwin"*) sudo chown -R $(whoami) /usr/local/share; brew update; brew install cmake doxygen curl jpeg libpng zlib;;
-  *"Debian"*) sudo apt update; sudo apt install clang cmake doxygen libcurlpp-dev libgtkmm-3.0-dev libjpeg8-dev libpng-dev libssl-dev libx11-dev uuid-dev zlibc -y;;
-  *"elementary"*) sudo apt update; sudo apt install clang cmake doxygen libcurlpp-dev libgtkmm-3.0-dev libjpeg8-dev libssl-dev libx11-dev uuid-dev zlibc -y;;
-  *"Fedora"*) sudo yum update; sudo yum install clang cmake doxygen libcurl-devel libjpeg-devel zlib-devel libpng-devel libX11-devel libuuid-devel uuid-devel gtkmm30-devel -y;;
-  *"LinuxMint"*) sudo apt update; sudo apt install clang cmake doxygen libcurlpp-dev libgtkmm-3.0-dev libjpeg8-dev libpng-dev libssl-dev libx11-dev uuid-dev zlibc -y;;
-  *"RedHat"*) sudo yum update; sudo yum install clang cmake doxygen libcurl-devel libjpeg-devel zlib-devel libpng-devel libX11-devel libuuid-devel uuid-devel gtkmm30-devel -y;;
-  *"Ubuntu"*) sudo apt update; sudo apt install clang cmake doxygen libcurlpp-dev libgtkmm-3.0-dev libjpeg8-dev libpng-dev libssl-dev libx11-dev uuid-dev zlibc -y;;
+  *"CentOS"*) sudo yum update; sudo yum install clang cmake3 doxygen gtkmm30-devel uuid-devel -y;;
+  *"Darwin"*) sudo chown -R $(whoami) /usr/local/share; brew update; brew install cmake doxygen;;
+  *"Debian"*) sudo apt update; sudo apt install clang cmake doxygen libgtkmm-3.0-dev uuid-dev -y;;
+  *"elementary"*) sudo apt update; sudo apt install clang cmake doxygen libgtkmm-3.0-dev uuid-dev -y;;
+  *"Fedora"*) sudo yum update; sudo yum install clang cmake doxygen gtkmm30-devel libuuid-devel uuid-devel -y;;
+  *"LinuxMint"*) sudo apt update; sudo apt install clang cmake doxygen libgtkmm-3.0-dev uuid-dev -y;;
+  *"RedHat"*) sudo yum update; sudo yum install clang cmake doxygen gtkmm30-devel libuuid-devel uuid-devel -y;;
+  *"Ubuntu"*) sudo apt update; sudo apt install clang cmake doxygen libgtkmm-3.0-dev uuid-dev -y;;
 esac
 
 # set clang as default compiler
