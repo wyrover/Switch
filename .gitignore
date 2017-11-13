@@ -10,3 +10,7 @@ CMakeLists.txt.user
 
 # QT build files
 build-*
+
+# CLion files
+.idea
+
