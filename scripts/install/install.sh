@@ -18,10 +18,8 @@ case "$OSTYPE" in
 esac
 
 # set clang as default compiler
-if [[ "$OSTYPE" != *"Darwin"* ]]; then 
-  export CC=/usr/bin/clang
-  export CXX=/usr/bin/clang++
-fi
+export CC=clang
+export CXX=clang++
 
 # create build folders
 mkdir -p build/3rdparty
@@ -49,7 +47,6 @@ cd build/examples
 if [[ "$OSTYPE" == *"Darwin"* ]]; then 
   cmake ../../examples -G "Xcode"
   open build/examples/Examples.xcodeproj
-cd ../..
 else
   cmake ../../examples -DCMAKE_BUILD_TYPE=Debug
   cd build/examples
@@ -57,6 +54,7 @@ else
   echo You can now build and execute examples.
   echo 
   echo Type following commands to build and execute HelloWorld :
+  echo cd build/examples
   echo cmake --build . --target HelloWorld
   echo Debug/HelloWorld
   echo 
@@ -64,3 +62,4 @@ else
   echo Hello, World!
   echo
 fi
+cd ../..
