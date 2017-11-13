@@ -148,9 +148,9 @@ A source file SwitchConsole.cpp :
 
 ```c++
 #include <Switch/Switch>
- 
+
 using namespace System;
- 
+
 namespace SwitchConsole {
   class Program {
   public:
@@ -160,7 +160,7 @@ namespace SwitchConsole {
     }
   };
 }
- 
+
 _startup (SwitchConsole::Program)
 ```
 
@@ -168,9 +168,9 @@ A cmake file CMakeLists.txt :
 
 ```cmake
 cmake_minimum_required(VERSION 3.2)
- 
+
 Project(SwitchConsole)
- 
+
 find_package(Switch REQUIRED)
 add_executable(SwitchConsole SwitchConsole.cpp)
 target_link_libraries(SwitchConsole Switch.System)
@@ -184,7 +184,7 @@ To build this wonderful application, open "Command Prompt" and type following li
 cd C:\Users\YourName\Projects\SwitchConsole
 mkdir build
 cd build
-cmake .. -D CMAKE_INSTALL_PREFIX:STRING="/usr/local"
+cmake .. -DCMAKE_INSTALL_PREFIX=/usr/local
 ```
 
 The SwitchConsle.sln file was generate, open it with VisualStudio 2017. Select SwitchConsole project and type Ctrl+F5 to build and run your first application.
