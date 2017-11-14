@@ -41,4 +41,4 @@ namespace Examples {
   };
 }
 
-_startup(Examples::Program)
+_startup(Examples::Program);

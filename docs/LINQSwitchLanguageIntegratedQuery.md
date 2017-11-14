@@ -49,7 +49,7 @@ namespace Examples {
   };
 }
 ​
-_startup (Examples::Program)
+_startup(Examples::Program);
 ```
 
 If you were to compile and run this program, you'd see this as output:

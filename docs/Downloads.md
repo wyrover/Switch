@@ -156,7 +156,7 @@ namespace SwitchConsole {
   };
 }
 
-_startup (SwitchConsole::Program)
+_startup(SwitchConsole::Program);
 ```
 
 A cmake file CMakeLists.txt :

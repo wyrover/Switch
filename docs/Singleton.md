@@ -62,7 +62,7 @@ namespace DesignPatterns {
 }
  
 // Specify the Main entry point to System
-_startup (DesignPatterns::Creational::MainApp)
+_startup(DesignPatterns::Creational::MainApp);
 ```
 
 # Output

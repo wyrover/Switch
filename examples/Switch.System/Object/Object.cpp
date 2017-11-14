@@ -30,35 +30,35 @@ namespace ObjectTest {
     int x;
     int y;
   };
+
+  class App _static {
+  public:
+    static void Main() {
+      // Construct a Point object.
+      refptr<Point> p1 = ref_new<Point>(1, 2);
+
+      // Make another Point object that is a copy of the first.
+      refptr<Point> p2 = p1->Copy();
+
+      // Make another variable that references the first Point object.
+      refptr<Point> p3 = p1;
+
+      // The line below displays false because point1 and point2 refer to two different objects.
+      Console::WriteLine(Object::ReferenceEquals(*p1, *p2));
+
+      // The line below displays true because point1 and point2 refer to two different objects that have the same value.
+      Console::WriteLine(Object::Equals(*p1, *p2));
+
+      // The line below displays true because point1 and point3 refer to one object.
+      Console::WriteLine(Object::ReferenceEquals(*p1, *p3));
+
+      // The line below displays: p1's value is: (1, 2)
+      Console::WriteLine("p1's value is: {0}", *p1);
+    }
+  };
 }
 
-class App final {
-public:
-  static void Main() {
-    // Construct a Point object.
-    refptr<ObjectTest::Point> p1 = ref_new<ObjectTest::Point>(1, 2);
-    
-    // Make another Point object that is a copy of the first.
-    refptr<ObjectTest::Point> p2 = p1->Copy();
-    
-    // Make another variable that references the first Point object.
-    refptr<ObjectTest::Point> p3 = p1;
-    
-    // The line below displays false because point1 and point2 refer to two different objects.
-    Console::WriteLine(Object::ReferenceEquals(*p1, *p2));
-    
-    // The line below displays true because point1 and point2 refer to two different objects that have the same value.
-    Console::WriteLine(Object::Equals(*p1, *p2));
-    
-    // The line below displays true because point1 and point3 refer to one object.
-    Console::WriteLine(Object::ReferenceEquals(*p1, *p3));
-    
-    // The line below displays: p1's value is: (1, 2)
-    Console::WriteLine("p1's value is: {0}", *p1);
-  }
-};
-
-_startup(App)
+_startup(ObjectTest::App);
 
 // This code produces the following output:
 //

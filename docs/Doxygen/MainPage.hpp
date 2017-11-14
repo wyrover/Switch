@@ -28,7 +28,7 @@
 ///   };
 /// }
 ///
-/// _startup (HelloWorld::Program)
+/// _startup(HelloWorld::Program);
 /// @endcode
 ///
 /// CMakeLists.txt:
@@ -73,7 +73,7 @@
 ///   };
 /// }
 ///
-/// _startup (HelloWorld::Program)
+/// _startup(HelloWorld::Program);
 /// @endcode
 ///
 /// CMakeLists.txt:

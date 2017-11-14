@@ -86,7 +86,7 @@ public:
   }
 };
 ​
-_startup (DeclareArraySample)
+_startup(DeclareArraySample);
 ```
 
 **Output**

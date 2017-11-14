@@ -57,4 +57,4 @@ namespace ProgressBarExample {
   };
 }
 
-_startup(ProgressBarExample::Form1)
+_startup(ProgressBarExample::Form1);

@@ -1,5 +1,6 @@
 #include <Switch/System/Version.hpp>
 #include <Switch/System/String.hpp>
+
 #include <gtest/gtest.h>
 
 using namespace System;
@@ -51,19 +52,18 @@ namespace {
   }
   
   TEST(VersionTest, Constructor) {
-    ASSERT_EQ(Version().ToString(), "0.0");
-    ASSERT_EQ(Version(1, 0).ToString(), "1.0");
-    ASSERT_EQ(Version(1, 2).ToString(), "1.2");
-    ASSERT_EQ(Version(Int32::MaxValue, 2).ToString(), "2147483647.2");
-    ASSERT_EQ(Version(1, 2, 3).ToString(), "1.2.3");
-    ASSERT_EQ(Version(1, 2, 3, 4).ToString(), "1.2.3.4");
+    ASSERT_EQ("0.0", Version().ToString());
+    ASSERT_EQ("1.2", Version(1, 2).ToString());
+    ASSERT_EQ("2147483647.2", Version(Int32::MaxValue, 2).ToString());
+    ASSERT_EQ("1.2.3", Version(1, 2, 3).ToString());
+    ASSERT_EQ("1.2.3.4", Version(1, 2, 3, 4).ToString());
     ASSERT_THROW(Version(-1, 0), ArgumentOutOfRangeException);
     ASSERT_THROW(Version(0, -25), ArgumentOutOfRangeException);
   }
-  
+
   TEST(VersionTest, Parse) {
-    ASSERT_EQ(Version::Parse("11.0.2"), Version(11, 0, 2));
-    ASSERT_EQ(Version::Parse("11.00.02"), Version(11, 0, 2));
-  }  
+    ASSERT_EQ(Version(11, 0, 2), Version::Parse("11.0.2"));
+    ASSERT_EQ(Version(11, 0, 2), Version::Parse("11.00.02"));
+  }
 }
 

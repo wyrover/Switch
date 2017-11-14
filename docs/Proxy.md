@@ -64,7 +64,7 @@ namespace DesignPatterns {
 }
  
 // Specify the Main entry point to System
-_startup (DesignPatterns::Structural::MainApp)
+_startup(DesignPatterns::Structural::MainApp);
 ```
 
 # Output

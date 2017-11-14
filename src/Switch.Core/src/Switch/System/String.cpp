@@ -1422,11 +1422,6 @@ bool String::ReverseEnumerator::Equals(const Object& obj) const {
   return this->iterator == other->iterator;
 }
 
-std::ostream& operator<<(std::ostream& output, const System::String& value) {
-  output << value.c_str();
-  return output;
-}
-
 std::wstring string::w_str() const {
   return std::wstring_convert<std::codecvt_utf8<wchar>, wchar>().from_bytes(this->string.c_str());
 }

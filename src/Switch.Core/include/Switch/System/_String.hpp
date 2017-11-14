@@ -171,6 +171,8 @@ namespace Switch {
         for (auto c : il)
           this->string.append(c);
       }
+
+      friend std::ostream& operator<<(std::ostream& output, const String& value) {return output << value.c_str();}
       /// @endcond
 
       /// @brief Return the length of String
@@ -1128,7 +1130,5 @@ namespace Switch {
   /// @ingroup Types
   using string = System::String;
 }
-
-std::ostream& operator<<(std::ostream& os, const System::String& value);
 
 using namespace Switch;

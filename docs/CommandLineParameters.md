@@ -32,7 +32,7 @@ public:
   }
 };
  
-_startup (CommandLine)
+_startup(CommandLine);
 ```
 
 **Output** Run the program using some arguments like this: cmdline1 A B C.
@@ -67,7 +67,7 @@ public:
    }
 };
 ​
-_startup (CommandLine2)
+_startup(CommandLine2);
 ```
 
 **Output** Run the program using some arguments like this: cmdline2 John Paul Mary.

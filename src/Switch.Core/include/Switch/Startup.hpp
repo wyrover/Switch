@@ -30,5 +30,6 @@ namespace Switch {
       int operator()(System::Delegate<int, const System::Array<System::String>&>::FunctionPointer startup, const System::Array<System::String>& args) {return startup(args);}\
     };\
     return Startup()(mainClass::Main, System::Environment::SetCommandLineArgs(argv, argc));\
-  }
+  } \
+  int __unused_main_argc__
 }

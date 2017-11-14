@@ -60,4 +60,4 @@ namespace SystemSoundExample {
   };
 }
 
-_startup(SystemSoundExample::Form1)
+_startup(SystemSoundExample::Form1);

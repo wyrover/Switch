@@ -80,6 +80,8 @@ namespace Switch {
         this->revision = version.revision;
         return *this;
       }
+
+      friend std::ostream& operator<<(std::ostream& output, const Version& value) {return output << value.ToString();}
       /// @endcond
 
       /// @brief Gets the value of the build component of the version number for the current Version object.
@@ -238,7 +240,7 @@ namespace Switch {
         info.AddValue("Build", this->build);
         info.AddValue("Revision", this->revision);
       }
-      
+
     private :
       int32 major = 0;
       int32 minor = 0;

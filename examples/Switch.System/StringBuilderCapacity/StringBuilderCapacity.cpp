@@ -42,7 +42,7 @@ namespace Examples {
   };
 }
 
-_startup(Examples::Program)
+_startup(Examples::Program);
 
 // The example displays the following output:
 //

@@ -38,4 +38,4 @@ namespace FormExample {
   };
 }
 
-_startup(FormExample::Form1)
+_startup(FormExample::Form1);

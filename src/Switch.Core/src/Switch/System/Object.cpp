@@ -12,6 +12,6 @@ String Object::ToString() const {
   return GetType().ToString();
 }
 
-std::ostream& operator<<(std::ostream& output, const Object& value) {
+std::ostream& System::operator<<(std::ostream& output, const Object& value) {
   return output << value.ToString();
 }

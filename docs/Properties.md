@@ -65,7 +65,7 @@ private:
   int age = 0;
 };
  
-_startup (Person)
+_startup(Person);
 ```
 
 **Output**
