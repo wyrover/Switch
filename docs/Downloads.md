@@ -33,7 +33,7 @@ git clone https://github.com/gammasoft71/Switch .
 
 3. Install Doxygen
    
-   After CMake, to generate Switch documentation, you need to install the latest version Doxygen from http://www.stack.nl/~dimitri/doxygen/download.html
+   After CMake, to generate Switch documentation, you need to install the latest version Doxygen from [xhttp://www.stack.nl/~dimitri/doxygen/download.html](http://www.stack.nl/~dimitri/doxygen/download.html)
    
    *Remarks: Verify if you can execute doxygen --version in "Command Prompt", if it's no, add doxygen install directory to your path.*
 
@@ -52,7 +52,7 @@ install.bat
 
 * Switch installer set cmake variable CMAKE_INSTALL_PREFIX to "/usr/local" for generate, build and install Switch.
 * When install is complete you can find installed Switch files in folder "/usr/local".
-* To build your own project using Switch, don't miss to set cmake variable CMAKE_INSTALL_PREFIX to "/usr/local"; otherwise cmake don't find Switch libraries and include files. See cmake documentation (http://cmake.org/documentation) for more information.
+* To build your own project using Switch, don't miss to set cmake variable CMAKE_INSTALL_PREFIX to "/usr/local"; otherwise cmake don't find Switch libraries and include files. See cmake documentation ([http://cmake.org/documentation](http://cmake.org/documentation)) for more information.
 
 ## macOS 10.12 or later
 
@@ -66,7 +66,7 @@ install.bat
    
    After Xcode, to build Switch, you need to install the latest version cmake, curl, doxygen, jpeg, pnglib and zlib, ... 
    
-   The easiest way to get this is from Homebrew (http://brew.sh/).
+   The easiest way to get this is from Homebrew ([http://brew.sh](http://brew.sh)).
 
 3. After installing brew, do the following in "Terminal" to Build and install Switch :
 
@@ -79,7 +79,7 @@ cd /Users/YourName/Switch
 
 4. Enjoy and be creative with Switch ;-)
 
-## Ubuntu 16.04 or later
+## CentOS 7, Debian 9.2.1, Elementary OS 0.4, Fedora 26, LinuxMint 18.2, RedHat 7.4 and Ubuntu 16.04 (or later)
 
 1. Do the following in "Terminal" to Build and install Switch :
 
@@ -88,21 +88,8 @@ cd /home/YourName/Switch
 ./install.sh
 ```
 
-*Remarks, this operation depend of your hardware and can be very long*
+   *Remarks, this operation depend of your hardware and can be very long*
 
-2. Enjoy and be creative with Switch ;-)
-
-## CentOS 7 or later
-
-1. Do the following in "Terminal" to Build and install Switch :
-  
-```shell
-cd /home/YourName/Switch
-./install.sh
-```
-
-*Remarks, this operation depand of your hardware and can be very long*
-  
 2. Enjoy and be creative with Switch ;-)
 
 ## Other linux Distribution
@@ -115,20 +102,20 @@ cd /home/YourName/Switch
 
 2. Install CMake 
    
-   After clang, to build Switch, you need to install the latest version cmake from https://cmake.org/download/
+   After clang, to build Switch, you need to install the latest version cmake from [https://cmake.org/download](https://cmake.org/download/)
 
    *Remarks: Verify if you can execute cmake --version in terminal.*
 
 3. Install Doxygen
    
-   After CMake, to generate Switch documentation, you need to install the latest version Doxygen from http://www.stack.nl/~dimitri/doxygen/download.html
+   After CMake, to generate Switch documentation, you need to install the latest version Doxygen from [http://www.stack.nl/~dimitri/doxygen/download.html](http://www.stack.nl/~dimitri/doxygen/download.html)
    
    *Remarks: Verify if you can execute doxygen --version in terminal.*
 
-4. After installing Doxygen, you need to install gtkmm 3 on your system. See https://developer.gnome.org/gtkmm-tutorial/stable/chapter-installation.html for more information.
+4. After installing Doxygen, you need to install gtkmm 3 on your system. See [https://developer.gnome.org/gtkmm-tutorial/stable/chapter-installation.html(https://developer.gnome.org/gtkmm-tutorial/stable/chapter-installation.html) for more information.
   
 5. After installing gtkmm, do the following in "Terminal" to Build and install Switch :
-  
+
 ```shell
 cd /home/YourName/Switch
 ./install.sh
