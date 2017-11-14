@@ -15,7 +15,7 @@ namespace Examples {
       Console::WriteLine("{0,16}{1,10}{2,17}", "-------", "------", "----------" );
       for (auto value : values) {
         Array<byte> byteArray = BitConverter::GetBytes(value);
-        Console::WriteLine("{0,16}{1,10}{2,17}", value, BitConverter::IsLittleEndian ? "Little" : " Big", BitConverter::ToString(byteArray));
+        Console::WriteLine("{0,16}{1,10}{2,17}", value, BitConverter::IsLittleEndian() ? "Little" : " Big", BitConverter::ToString(byteArray));
       }
     }
   };

@@ -17,7 +17,7 @@ namespace Examples {
         // Convert each Int64 value to a byte array.
         Array<byte> byteArray = BitConverter::GetBytes(value);
         // Display the result.
-        Console::WriteLine("{0,22}{1,10}{2,30}", value, BitConverter::IsLittleEndian ? "Little" : "Big", BitConverter::ToString(byteArray));
+        Console::WriteLine("{0,22}{1,10}{2,30}", value, BitConverter::IsLittleEndian() ? "Little" : "Big", BitConverter::ToString(byteArray));
       }
     }
   };
