@@ -19,25 +19,25 @@ git clone https://github.com/gammasoft71/Switch .
 
 # Installation
 
-## Windows 10 or later
+## Windows 7 SP1 or later
 
 1. Install Microsoft Visual Studio 2017 Community
    
    In order to build Switch, you first need download and install Microsoft Visual Studio 2017 community from [https://www.visualstudio.com](https://www.visualstudio.com).
 
-2. Install CMake
+2. Install CMake 3.2 or later
    
    After Microsoft Visual Studio, to build Switch, you need to install the latest version cmake from [https://cmake.org/download/](https://cmake.org/download/)
    
    *Remarks: Verify if you can execute cmake --version in "Command Prompt", if it's no, add cmake install directory to your path.*
 
-3. Install Doxygen
+3. Install Doxygen 1.8.13 or later
    
    After CMake, to generate Switch documentation, you need to install the latest version Doxygen from [xhttp://www.stack.nl/~dimitri/doxygen/download.html](http://www.stack.nl/~dimitri/doxygen/download.html)
    
    *Remarks: Verify if you can execute doxygen --version in "Command Prompt", if it's no, add doxygen install directory to your path.*
 
-4. After installing Microsoft Visual Studio, Cmake and Doxygen, do the following in "Command Prompt" to Build and install Switch :
+4. After installing Microsoft Visual Studio, CMake and Doxygen, do the following in "Command Prompt" to Build and install Switch :
 
 ```shell
 cd C:\Users\YourName\Switch\
@@ -54,9 +54,9 @@ install.bat
 * When install is complete you can find installed Switch files in folder "/usr/local".
 * To build your own project using Switch, don't miss to set cmake variable CMAKE_INSTALL_PREFIX to "/usr/local"; otherwise cmake don't find Switch libraries and include files. See cmake documentation ([http://cmake.org/documentation](http://cmake.org/documentation)) for more information.
 
-## macOS 10.12 or later
+## macOS 10.11.5 (OS X El Capitan) or later
 
-1. Install Xcode
+1. Install Xcode 8.2 or later
    
    In order to build Switch, you first need download and install Xcode from App Store and install "Commands line tools".
 
@@ -64,11 +64,13 @@ install.bat
 
 2. Install Homebrew
    
-   After Xcode, to build Switch, you need to install the latest version cmake, curl, doxygen, jpeg, pnglib and zlib, ... 
+   After Xcode, to build Switch, you need to install package manager Homebrew ([http://brew.sh](http://brew.sh)).
    
-   The easiest way to get this is from Homebrew ([http://brew.sh](http://brew.sh)).
+```shell
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
 
-3. After installing brew, do the following in "Terminal" to Build and install Switch :
+3. After installing Xcode and Homebrew, do the following in "Terminal" to Build and install Switch :
 
 ```shell
 cd /Users/YourName/Switch
@@ -94,27 +96,33 @@ cd /home/YourName/Switch
 
 ## Other linux Distribution
 
-1. Install clang 4.0.0 or later
+1. Install clang 3.9 or later
    
    In order to build Switch, you first need download and install clang 4.0.0 or later.
 
    *Remarks: Verify if you can execute clang --version in terminal.*
 
-2. Install CMake 
+2. Install CMake 3.2 or later
    
    After clang, to build Switch, you need to install the latest version cmake from [https://cmake.org/download](https://cmake.org/download/)
 
    *Remarks: Verify if you can execute cmake --version in terminal.*
 
-3. Install Doxygen
+3. Install Doxygen 1.8.13 or later (optional)
    
    After CMake, to generate Switch documentation, you need to install the latest version Doxygen from [http://www.stack.nl/~dimitri/doxygen/download.html](http://www.stack.nl/~dimitri/doxygen/download.html)
    
    *Remarks: Verify if you can execute doxygen --version in terminal.*
 
-4. After installing Doxygen, you need to install gtkmm 3 on your system. See [https://developer.gnome.org/gtkmm-tutorial/stable/chapter-installation.html(https://developer.gnome.org/gtkmm-tutorial/stable/chapter-installation.html) for more information.
+4. Install gtkmm 3.0
+   
+   After installing Doxygen, you need to install gtkmm 3 on your system. See [https://developer.gnome.org/gtkmm-tutorial/stable/chapter-installation.html](https://developer.gnome.org/gtkmm-tutorial/stable/chapter-installation.html) for more information. The easy way is install from your linux distribution package manager like apt, yum or other.
   
-5. After installing gtkmm, do the following in "Terminal" to Build and install Switch :
+5. Install libuuid
+   
+   After installing gtkmm 3.0, you need to install libuuid lib on your system. The easy way is install from your linux distribution package manager like apt, yum or other.
+  
+6. After installing clang, CMake, Doxygen, gtkmm and libuuid, do the following in "Terminal" to Build and install Switch :
 
 ```shell
 cd /home/YourName/Switch
@@ -163,7 +171,7 @@ add_executable(SwitchConsole SwitchConsole.cpp)
 target_link_libraries(SwitchConsole Switch.System)
 ```
 
-## Build and Run on Windows
+## Build and run on Windows
 
 To build this wonderful application, open "Command Prompt" and type following lines:
 
@@ -176,7 +184,7 @@ cmake .. -DCMAKE_INSTALL_PREFIX=/usr/local
 
 The SwitchConsle.sln file was generate, open it with VisualStudio 2017. Select SwitchConsole project and type Ctrl+F5 to build and run your first application.
 
-## Build and Run on macOS
+## Build and run on macOS
 
 To build this wonderful application, open "Terminal" and type following lines:
 
@@ -189,7 +197,7 @@ cmake .. -G "Xcode"
 
 The SwitchConsle.xcodeproj file was generate, open it with Xcode. Select SwitchConsole project and type Cmd+R to build and run your first application.
 
-## Build and Run on Linux
+## Build and run on Linux
 
 To build this wonderful application, open "Terminal" and type following lines:
 
