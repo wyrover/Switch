@@ -33,7 +33,7 @@ git clone https://github.com/gammasoft71/Switch .
 
 3. Install Doxygen 1.8.13 or later
    
-   After CMake, to generate Switch documentation, you need to install the latest version Doxygen from [xhttp://www.stack.nl/~dimitri/doxygen/download.html](http://www.stack.nl/~dimitri/doxygen/download.html)
+   After CMake, to generate Switch documentation, you need to install the latest version Doxygen from [http://www.stack.nl/~dimitri/doxygen/download.html](http://www.stack.nl/~dimitri/doxygen/download.html)
    
    *Remarks: Verify if you can execute doxygen --version in "Command Prompt", if it's no, add doxygen install directory to your path.*
 
