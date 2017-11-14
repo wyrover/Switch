@@ -1,18 +1,15 @@
-# macOS files
-.DS_Store
-
 # build files
 build
 lib
+
+# macOS files
+.DS_Store
+
+# CLion files
+.idea
 
 # QT files
 CMakeLists.txt.user
 
 # QT build files
 build-*
-
-# CLion files
-.idea
-cmake-build-debug
-cmake-build-release
-

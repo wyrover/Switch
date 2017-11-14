@@ -37,7 +37,7 @@ git clone https://github.com/gammasoft71/Switch .
    
    *Remarks: Verify if you can execute doxygen --version in "Command Prompt", if it's no, add doxygen install directory to your path.*
 
-4. After installing Microsoft Visual Studio, CMake and Doxygen, do the following in "Command Prompt" to Build and install Switch :
+4. After installing Microsoft Visual Studio, CMake and Doxygen, do the following in "Command Prompt" to build and install Switch :
 
 ```shell
 cd C:\Users\YourName\Switch\
@@ -114,13 +114,13 @@ cd /home/YourName/Switch
    
    *Remarks: Verify if you can execute doxygen --version in terminal.*
 
-4. Install gtkmm 3.0
+4. Install gtkmm 3.0 or later
    
    After installing Doxygen, you need to install gtkmm 3 on your system. See [https://developer.gnome.org/gtkmm-tutorial/stable/chapter-installation.html](https://developer.gnome.org/gtkmm-tutorial/stable/chapter-installation.html) for more information. The easy way is install from your linux distribution package manager like apt, yum or other.
   
 5. Install libuuid
    
-   After installing gtkmm 3.0, you need to install libuuid lib on your system. The easy way is install from your linux distribution package manager like apt, yum or other.
+   After installing gtkmm, you need to install libuuid lib on your system. The easy way is install from your linux distribution package manager like apt, yum or other.
   
 6. After installing clang, CMake, Doxygen, gtkmm and libuuid, do the following in "Terminal" to Build and install Switch :
 
@@ -131,7 +131,7 @@ cd /home/YourName/Switch
 
    *Remarks, this operation depand of your hardware and can be very long*
   
-5. Enjoy and be creative with Switch ;-)
+7. Enjoy and be creative with Switch ;-)
 
 # Build and run your first Switch application
 

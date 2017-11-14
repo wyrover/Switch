@@ -40,7 +40,7 @@ namespace HelloWorld {
   };
 }
 
-_startup(HelloWorld::Program)
+_startup(HelloWorld::Program);
 ```
 
 CMakeLists.txt:
@@ -86,7 +86,7 @@ namespace HelloWorld {
   };
 }
 
-_startup(HelloWorld::Program)
+_startup(HelloWorld::Program);
 ```
 
 CMakeLists.txt:
