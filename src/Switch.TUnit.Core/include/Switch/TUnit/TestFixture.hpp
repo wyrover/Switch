@@ -46,7 +46,7 @@ namespace Switch {
     
     #define _TearDown(name) \
     TearDown() override {name();} \
-    void name
+    void name()
     
     #define _Test(name) \
     name()
