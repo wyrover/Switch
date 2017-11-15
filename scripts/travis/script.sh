@@ -20,3 +20,4 @@ cd ..
 cd build
 ctest --output-on-failure --build-config Release
 cd ..
+bash <(curl -s https://codecov.io/bash)
