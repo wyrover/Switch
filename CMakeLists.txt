@@ -12,8 +12,7 @@ option(BUILD_SWITCH_TUNIT_CORE "Build Switch.TUnit.Core library" ON)
 option(BUILD_SWITCH_TUNIT_FRAMEWORK "Build Switch.TUnit.Framework library" OFF)
 option(BUILD_SWITCH_TUNIT_MAIN "Build Switch.TUnit.Main library" ON)
 option(BUILD_TESTS "Build tests" OFF)
-
-enable_testing()
+option(ENABLE_COVERAGE "Enable code coverage" OFF)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
@@ -25,6 +24,11 @@ if ("${CMAKE_BUILD_TYPE}" STREQUAL "")
   set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR})
 else()
   set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/${CMAKE_BUILD_TYPE})
+endif()
+
+if (ENABLE_COVERAGE AND UNIX)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage")
+  set(CMAKE_LINKER_FLAGS "${CMAKE_LINKER_FLAGS} --coverage")
 endif()
 
 include(scripts/cmake/MakeLibraryProject.cmake)
@@ -112,6 +116,8 @@ endif()
 
 if (BUILD_TESTS)
   message(STATUS "Building Switch Tests")
+  enable_testing()
+
   if (BUILD_SWITCH_CORE)
     message(STATUS "  [X] Switch.Core.ManualTests")
     add_subdirectory("tests/Switch.Core.ManualTests")
@@ -178,6 +184,11 @@ if (NOT CMAKE_BUILD_TYPE)
   message(STATUS "Build type [{null}]")
 else()
   message(STATUS "Build type [${CMAKE_BUILD_TYPE}]")
+endif()
+if (UNIX)
+  message(STATUS "Code coverage [${ENABLE_COVERAGE}]")
+else()
+  message(STATUS "Code coverage [NOT AVAIBLE]")
 endif()
 message(STATUS "Install prefix [${CMAKE_INSTALL_PREFIX}]")
 
