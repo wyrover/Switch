@@ -39,7 +39,11 @@ namespace Switch {
       /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
       ArithmeticException(const System::String& message, const System::Exception& innerException, const System::Runtime::CompilerServices::Caller& information) : SystemException(message, innerException, information) {}
-      
+
+      /// @cond
+      friend std::ostream& operator<<(std::ostream& output, const ArithmeticException& value) {return output << value.ToString();}
+      /// @endcond
+
     private:
       System::String GetDefaultMessage() const override {return "Overflow or underflow in the arithmetic operation."; }
     };

@@ -3,6 +3,7 @@
 #pragma once
 
 #include "../Property.hpp"
+#include "../Static.hpp"
 #include "../Types.hpp"
 #include "Array.hpp"
 #include "Boolean.hpp"
@@ -45,7 +46,7 @@ namespace Switch {
     /// @par Example
     /// The following code example illustrates the use of several BitConverter class methods.
     /// @include BitConverter.cpp
-    class _export BitConverter {
+    class _export BitConverter _static {
     public:
       /// @brief Indicates the byte order ("endianness") in which data is stored in this computer architecture.
       /// @return Returns true if the architecture is little-endian; false if it is big-endian.
@@ -362,10 +363,6 @@ namespace Switch {
           str.Append(Byte(value[index]).ToString("X2")).Append(index < startIndex + length-1 ? "-" : "");
         return str.ToString();
       }
-      
-      /// @cond
-       BitConverter() = delete;
-      /// @endcond
     };
   }
 }

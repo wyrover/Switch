@@ -43,3 +43,7 @@ DateTime Boolean::ToDateTime(const IFormatProvider& provider) const {
 String Boolean::ToString(const IFormatProvider& provider) const {
   return ToString();
 }
+
+std::ostream& System::operator<<(std::ostream& output, const Boolean& value) {
+  return output << value.ToString();
+}

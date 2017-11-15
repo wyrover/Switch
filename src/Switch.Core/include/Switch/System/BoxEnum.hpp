@@ -21,7 +21,11 @@ namespace Switch {
       BoxEnum() {}
       BoxEnum(T value) : value(value) {}
       BoxEnum(int64 value) : value((T)value) {}
-      
+
+      /// @cond
+      friend std::ostream& operator<<(std::ostream& output, const BoxEnum& value) {return output << value.ToString();}
+      /// @endcond
+
       String GetName() const {return !Values().ContainsKey((int64)this->value) ? String("") : Values()[(int64)this->value];}
       
       T Value() const {return this->value;}

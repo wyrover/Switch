@@ -35,3 +35,7 @@ String Byte::ToString(const String& format, const IFormatProvider&) const {
 DateTime Byte::ToDateTime(const IFormatProvider& provider) const {
   return this->value;
 }
+
+std::ostream& System::operator<<(std::ostream& output, const Byte& value) {
+  return output << value.ToString();
+}

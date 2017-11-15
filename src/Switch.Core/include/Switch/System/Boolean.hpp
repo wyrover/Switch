@@ -59,6 +59,8 @@ namespace Switch {
       virtual Boolean& operator =(const Boolean& value) {this->value= value; return *this;}
       virtual Boolean& operator =(int32 value) {this->value= value!=0; return *this;}
       operator bool() const { return this->value; }
+
+      friend std::ostream& operator<<(std::ostream& output, const Boolean& value);
       /// @endcond
       
       /// @brief Represent false bool value

@@ -69,7 +69,16 @@ namespace Switch {
         this->upperBound = array.upperBound;
         return *this;
       }
-      
+
+      friend std::ostream& operator<<(std::ostream& output, const GenericArrayObject& value) {
+        if (value.Length == 0)
+          return output << "{empty}";
+
+        output << "{";
+        for (int index = 0; index < value.Length; index++)
+          output << (index != 0 ? ", " : "") << value[index];
+        return output << "}";
+      }
       /// @endcond
       
       /// @brief Get access to raw data of the Array.
@@ -456,6 +465,16 @@ namespace Switch {
         this->GenericArrayObject<T, TAllocator>::operator=(array);
         return *this;
       }
+
+      friend std::ostream& operator<<(std::ostream& output, const Array& value) {
+        if (value.Length == 0)
+          return output << "{empty}";
+
+        output << "{";
+        for (int index = 0; index < value.Length; index++)
+          output << (index != 0 ? ", " : "") << value(index);
+        return output << "}";
+      }
       /// @endcond
       
       /// @brief Get access to raw data of the Array.
@@ -577,10 +596,20 @@ namespace Switch {
       Array(const Array&& array) : GenericArrayObject<T, TAllocator>(Move((GenericArrayObject<T, TAllocator>&&)array)) {}
       explicit Array(const std::vector<T>& array) : GenericArrayObject<T, TAllocator>(array) {}
       Array(InitializerList<T> il) : GenericArrayObject<T, TAllocator>(il) {}
-    public:
+
       Array& operator=(const Array& array) {
         this->GenericArrayObject<T, TAllocator>::operator=(array);
         return *this;
+      }
+
+      friend std::ostream& operator<<(std::ostream& output, const Array& value) {
+        if (value.Length == 0)
+          return output << "{empty}";
+
+        output << "{";
+        for (int index = 0; index < value.Length; index++)
+          output << (index != 0 ? ", " : "") << value(index);
+        return output << "}";
       }
       /// @endcond
       
@@ -733,6 +762,21 @@ namespace Switch {
         this->GenericArrayObject<T, TAllocator>::operator=(array);
         return *this;
       }
+
+      friend std::ostream& operator<<(std::ostream& output, const Array& value) {
+        if (value.Length == 0)
+          return output << "{empty}";
+
+        output << "{";
+        for (int index1 = 0; index1 < value.GetLength(0); index1++) {
+          output << (index1 == 0 ? "{" : ", {");
+          for (int index2 = 0; index2 < value.GetLength(1); index2++) {
+            output << (index2 != 0 ? ", " : "") << value(index1, index2);
+          }
+          output << "}";
+        }
+        return output << "}";
+      }
       /// @endcond
       
       /// @brief Sets the element at in multidimension array the specified index.
@@ -839,6 +883,25 @@ namespace Switch {
       Array& operator=(const Array& array) {
         this->GenericArrayObject<T, TAllocator>::operator=(array);
         return *this;
+      }
+
+      friend std::ostream& operator<<(std::ostream& output, const Array& value) {
+        if (value.Length == 0)
+          return output << "{empty}";
+
+        output << "{";
+        for (int index1 = 0; index1 < value.GetLength(0); index1++) {
+          output << (index1 == 0 ? "{" : ", {");
+          for (int index2 = 0; index2 < value.GetLength(1); index2++) {
+            output << (index2 == 0 ? "{" : ", {");
+            for (int index3 = 0; index3 < value.GetLength(2); index3++) {
+              output << (index3 != 0 ? ", " : "") << value(index1, index2, index3);
+            }
+            output << "}";
+          }
+          output << "}";
+        }
+        return output << "}";
       }
       /// @endcond
       

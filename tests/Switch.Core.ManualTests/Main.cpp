@@ -1,4 +1,5 @@
 #include <Switch/Startup.hpp>
+#include <Switch/System/Boolean.hpp>
 #include <Switch/System/Console.hpp>
 #include <Switch/System/Guid.hpp>
 
@@ -9,7 +10,7 @@ namespace Examples {
   public:
     // The main entry point for the application.
     static void Main() {
-      std::cout << Guid::NewGuid() << std::endl;
+      std::cout << Boolean {true} << std::endl;
     }
   };
 }

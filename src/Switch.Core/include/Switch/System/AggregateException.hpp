@@ -222,6 +222,10 @@ namespace Switch {
         return result;
       }
 
+      /// @cond
+      friend std::ostream& operator<<(std::ostream& output, const AggregateException& value) {return output << value.ToString();}
+      /// @endcond
+
     private:
       String GetDefaultMessage() const override {return "One or more errors occured."; }
       Array<excptr> innerExceptions;

@@ -4,6 +4,7 @@
 
 #include <cstring>
 
+#include "../Static.hpp"
 #include "../Types.hpp"
 #include "Array.hpp"
 #include "Convert.hpp"
@@ -18,14 +19,8 @@ namespace Switch {
     /// Buffer only affects arrays of primitive types; this class does ! apply to objects. Each primitive type is treated as a series of bytes without regard to any behavior or limitation associated with the primitive type.
     /// Buffer provides methods to copy bytes from one array of primitive types to another array of primitive types, get a byte from an array, set a byte in an array, and obtain the length of an array. This class provides better performance for manipulating primitive types than similar methods in the System::Array class.
     /// Buffer is applicable to the following primitive types: #bool, #char, #char32, #sbyte, #byte, #int16, #uint16, #int32, #uint32, #int64, #uint64, #void*, #uintptr, #float, and #double.
-    class _export Buffer final {
+    class _export Buffer _static {
     public:
-      /// @cond
-      Buffer() = delete;
-      Buffer(const Buffer&) = delete;
-      Buffer& operator=(const Buffer&) = delete;
-      /// @endcond
-
       /// @brief Compare a specified number of bytes from a first buffer starting at a particular offset to a second buffer starting at a particular offset.
       /// @param blk1 First buffer
       /// @param blk1Offset The zero-based byte offset into blk1.
