@@ -1,11 +1,5 @@
 #!/usr/bin/env sh
 
-# install curl on macOS
-if [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
-  brew update
-  brew install curl
-fi
-
 # create build folders
 mkdir -p build/3rdparty
 
@@ -26,5 +20,3 @@ cd ..
 cd build
 ctest --output-on-failure --build-config Release
 cd ..
-export CODECOV_TOKEN="6f14306e-b89d-4ee1-a370-4549f15a14b6"
-bash <(curl -s https://codecov.io/bash)
