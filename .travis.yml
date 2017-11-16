@@ -1,7 +1,40 @@
+# configuration
 language: cpp
-os: osx
-osx_image: xcode9.1
 cache: ccache
+dist: trusty
 
-script: ./scripts/travis/script.sh
-after_success: ./scripts/travis/after_success.sh
+# build matrix
+matrix:
+  include:
+  
+    # build Switch on macOS
+    - os: osx
+      osx_image: xcode9.1
+      script: scripts/travis/script.sh
+      after_success: scripts/travis/after_success.sh
+
+    # build Switch on linux`
+    #- os: linux
+    #  compiler: clang-3.9
+    #  sudo: require
+    #  addons:
+    #    apt:
+    #      sources:
+    #        - llvm-toolchain-xenial-3.9
+    #        - ubuntu-toolchain-r-test
+    #      packages:
+    #        - g++-6
+    #        - gcc-6
+    #        - clang-3.9
+    #        - lldb-3.9
+    #        - libgtkmm-3.0-dev
+    #        - uuid-dev
+    #  script: scripts/travis/script.sh
+    #  after_success: scripts/travis/after_success.sh
+
+    # generate Reference Guide
+    - os: linux
+      before_script: scripts/reference_guide/clone.sh
+      script: scripts/reference_guide/generate.sh
+      after_success: scripts/reference_guide/publish_with_token.sh
+      
