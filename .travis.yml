@@ -23,7 +23,7 @@ matrix:
   
     # build Switch on macOS
     - os: osx
-      env: TEST="macOS Switch build"
+      env: TEST="Switch build"
       cache: ccache
       osx_image: xcode9.1
       before_script: scripts/travis/build_3rdparty.sh
@@ -32,7 +32,7 @@ matrix:
 
     # build Switch on linux`
     #- os: linux
-    #  env: TEST="Ubuntu Switch build"
+    #  env: TEST="Switch build"
     #  cache: ccache
     #  compiler: clang-3.9
     #  before_script: scripts/travis/build_3rdparty.sh
