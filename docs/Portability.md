@@ -7,46 +7,102 @@ The Portability section provide informations about Operating System suported, Co
 
 # Operating System Supported
 
-Switch is portable on the Operating systems listed below :
+Actualy Switch run on Windows, macOS and Linux Operating System.
 
-* Microsoft Windows XP, Vista, 7, 8, 8.1 and 10.
-* Linux
-* Mac OS X 10.8, 10.9, 10.10, 10.11 and macOS 10.12
+## Windows 7 - 32 and 64 bits or later
 
-# Operating System Tested
+![Windows](Pictures/OS/Windows.png)
 
-Switch is every day tested on :
+## macOS 10.11.5 (OS X El Capitan) or later
 
-* Microsoft Windows 10 (64 bits)
-* Ubuntu 17.04 (64 bits)
-* macOS 10.12 (64 bits)
+![macOS](Pictures/OS/macOS.jpg)
 
-# Processors
+## Linux - 32 and 64 bits
 
-The processors listed below are supported with Switch :
+### CentOS 7 or later
 
-* Intel series
-* Arm series
+![CentOS](Pictures/OS/CentOS.png)
 
-# Development Environment Tools
+### Debian 9.2.1 or later
 
-With cmake, Switch support Development Environment Tools listed below :
+![Debuan](Pictures/OS/Debian.png)
 
-* Microsoft Visual C++ 2015, ...
-* Eclipse CDT 4.0, ...
-* XCode 5.x.
-* CodeLite
-* KDevelop 3
-* CodeBlocks
-* Standard Unix makefile
+### Elementary OS 0.4 or later
+
+![Elementary OS](Pictures/OS/ElementaryOS.png)
+
+### Fedora 26 or later
+
+![Fedora](Pictures/OS/Fedora.png)
+
+### LinuxMint 18.2 or later
+
+![LinuxMint](Pictures/OS/LinuxMint.png)
+
+### Redhat 7.4 or later
+
+![Redhat](Pictures/OS/Redhat.png)
+
+### Ubuntu 16.04 or later
+
+![Ubuntu](Pictures/OS/Ubuntu.png)
+
+## Other distribution (manually installation)
+
+![Linux](Pictures/OS/Linux.png)
+
+# Tests and coverage
+
+Switch is every time tested with Continuous Integration tools.
+
+## AppVeyor
+
+![AppVeyor](Pictures/CI/AppVeyor.png)
+
+## Travis CI
+
+![TravisCI](Pictures/CI/TravisCI.png)
+
+## Codecov
+
+![Codecov](Pictures/CI/Codecov.png)
 
 # Compilers
 
 The compilers listed below are supported with Switch :
 
-* MSVC 2015,...
-* GCC 5.x, ...
-* clang 7.x 
+* MSVC 2015 or later
+* clang 3.9 or later 
+<!--* GCC 6 or later-->
+
+# Development Environment Tools
+
+With CMake, Switch support Development Environment Tools listed below :
+
+* Microsoft Visual C++ 2015 or later
+* XCode 8.3 or later
+* CLion 2017.2 or later
+* Eclipse CDT 4.0 or later
+* CodeLite 11 or later
+* KDevelop 3 or later
+* CodeBlocks 13.12 or later
+* Standard Unix makefile
+
+# Native
+
+Switch has a thin layer by library if needed to abstract operating system. This layer is called naturally **Native**.
+
+For add a new Operating System, you juste have to implement Native api for the new target Operating System.
+
+## Native API by library
+
+[Switch.Core](../src/Switch.Core/src/Native/Api.hpp)
+
+[Switch.System](../src/Switch.System/src/Native/Api.hpp)
+
+[Switch.System.Drawing](../src/Switch.System.Drawing/src/Native/Api.hpp)
+
+[Switch.System.Windows.Forms](../src/Switch.System.Windows.Forms/src/Native/Api.hpp)
 
 ______________________________________________________________________________________________
 

@@ -7,7 +7,7 @@ ________________________________________________________________________________
 [![license GPL v3](https://img.shields.io/badge/license-GPL%20v3-004080.svg)](docs/License.md) 
 [![© GAMMA Soft](https://img.shields.io/badge/©-GAMMA%20Soft-004080.svg)](https://gammasoft71.wixsite.com/gammasoft) 
 [![std c++17 ready](https://img.shields.io/badge/std-c++14-004080.svg)](docs/C++17Ready.md) 
-[![os Windows, macOS, linux](https://img.shields.io/badge/os-Windows,%20macOS,%20linux-004080.svg)](docs/OS.md)
+[![os Windows, macOS, linux](https://img.shields.io/badge/os-Windows,%20macOS,%20linux-004080.svg)](docs/Portability.md)
 [![development status](https://img.shields.io/badge/dev-status-004080.svg)](docs/SwitchStatus.md) 
 <!--[![Coverage Status](https://coveralls.io/repos/github/gammasoft71/Switch/badge.svg?branch=master)](https://coveralls.io/github/gammasoft71/Switch?branch=master)-->
 <!--[![language c++](https://img.shields.io/badge/language-c++-004080.svg)](https://gammasoft71.github.io/Switch-doc)-->
