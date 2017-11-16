@@ -11,21 +11,21 @@ Actualy Switch run on Windows, macOS and Linux Operating System.
 
 ## Windows 7 - 32 and 64 bits or later
 
-![Windows](Pictures/OS/Windows.png)
+[![Windows](Pictures/OS/Windows.png)](https://www.microsoft.com/windows)
 
 ## macOS 10.11.5 (OS X El Capitan) or later
 
-![macOS](Pictures/OS/macOS.jpg)
+[![macOS](Pictures/OS/macOS.jpg)](https://www.apple.com/macos/)
 
 ## Linux - 32 and 64 bits
 
 ### CentOS 7 or later
 
-![CentOS](Pictures/OS/CentOS.png)
+[![CentOS](Pictures/OS/CentOS.png)](https://www.centos.org)
 
 ### Debian 9.2.1 or later
 
-![Debuan](Pictures/OS/Debian.png)
+[![Debuan](Pictures/OS/Debian.png)](https://www.debian.org)
 
 ### Elementary OS 0.4 or later
 
@@ -67,6 +67,46 @@ Switch is every time tested with Continuous Integration tools.
 
 ![Codecov](Pictures/CI/Codecov.png)
 
+# Development Environment Tools
+
+With CMake, Switch support many Development Environment Tools.
+
+## Microsoft Visual C++ 2015 or later
+
+![VisualStudio](Pictures/DevTools/VisualStudio.png)
+
+## XCode 8.3 or later
+
+![Xcode](Pictures/DevTools/Xcode.png)
+
+## CLion 2017.2 or later
+
+![CLion](Pictures/DevTools/CLion.png)
+
+## Eclipse CDT 4.0 or later
+
+![EclipseCDT](Pictures/DevTools/EclipseCDT.png)
+
+## Code::Blocks 13.12 or later
+
+![CodeBlocks](Pictures/DevTools/CodeBlocks.png)
+
+## KDevelop 3 or later
+
+![KDevelop](Pictures/DevTools/KDevelop.png)
+
+## CodeLite 11 or later
+
+![CodeLite](Pictures/DevTools/CodeLite.png)
+
+## Qt Editor
+
+![Qt](Pictures/DevTools/Qt.png)
+
+## Standard Unix makefile
+
+![LinuxMakefile](Pictures/DevTools/LinuxMakefile.png)
+
 # Compilers
 
 The compilers listed below are supported with Switch :
@@ -74,19 +114,6 @@ The compilers listed below are supported with Switch :
 * MSVC 2015 or later
 * clang 3.9 or later 
 <!--* GCC 6 or later-->
-
-# Development Environment Tools
-
-With CMake, Switch support Development Environment Tools listed below :
-
-* Microsoft Visual C++ 2015 or later
-* XCode 8.3 or later
-* CLion 2017.2 or later
-* Eclipse CDT 4.0 or later
-* CodeLite 11 or later
-* KDevelop 3 or later
-* CodeBlocks 13.12 or later
-* Standard Unix makefile
 
 # Native
 
