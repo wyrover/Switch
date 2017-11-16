@@ -35,5 +35,5 @@ matrix:
 
     # generate Reference Guide
     - os: linux
-      script: script/travis/generate_reference_guide.sh
+      script: scripts/travis/generate_reference_guide.sh
       
