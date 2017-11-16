@@ -1,6 +1,7 @@
 language: cpp
 os: osx
 osx_image: xcode9.1
+cache: ccache
 
 script: ./scripts/travis/script.sh
 after_success: ./scripts/travis/after_success.sh
