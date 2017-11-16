@@ -1,4 +1,4 @@
- Switch, Copyright (C) GAMMA Soft.
+ Switch, Copyright (C) [GAMMA Soft](https://gammasoft71.wixsite.com/gammasoft).
 
                        GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
