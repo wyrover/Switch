@@ -2,6 +2,8 @@
 language: cpp
 dist: trusty
 
+before_script: scripts/travis/build_3rdparty.sh
+
 # build matrix
 matrix:
   include:
