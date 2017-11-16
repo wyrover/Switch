@@ -2,8 +2,6 @@
 language: cpp
 dist: trusty
 
-before_script: scripts/travis/build_3rdparty.sh
-
 # build matrix
 matrix:
   include:
@@ -12,6 +10,7 @@ matrix:
     - os: osx
       cache: ccache
       osx_image: xcode9.1
+      before_script: scripts/travis/build_3rdparty.sh
       script: scripts/travis/build.sh
       after_success: scripts/travis/coverage.sh
 
@@ -32,10 +31,12 @@ matrix:
     #        - lldb-3.9
     #        - libgtkmm-3.0-dev
     #        - uuid-dev
+    #  before_script: scripts/travis/build_3rdparty.sh
     #  script: scripts/travis/build.sh
     #  after_success: scripts/travis/after_success.sh
 
     # generate Reference Guide
     - os: linux
+      before_script: scripts/travis/build_3rdparty.sh
       script: scripts/travis/generate_reference_guide.sh
       
