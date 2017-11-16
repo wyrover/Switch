@@ -11,45 +11,45 @@ Actualy Switch run on Windows, macOS and Linux Operating System.
 
 ## Windows 7 - 32 and 64 bits or later
 
-[![Windows](Pictures/OS/Windows.png)](https://www.microsoft.com/windows)
+[![Windows](Pictures/OS/Windows.png)](https://microsoft.com/windows)
 
 ## macOS 10.11.5 (OS X El Capitan) or later
 
-[![macOS](Pictures/OS/macOS.jpg)](https://www.apple.com/macos/)
+[![macOS](Pictures/OS/macOS.jpg)](https://apple.com/macos/)
 
 ## Linux - 32 and 64 bits
 
 ### CentOS 7 or later
 
-[![CentOS](Pictures/OS/CentOS.png)](https://www.centos.org)
+[![CentOS](Pictures/OS/CentOS.png)](https://centos.org)
 
 ### Debian 9.2.1 or later
 
-[![Debuan](Pictures/OS/Debian.png)](https://www.debian.org)
+[![Debuan](Pictures/OS/Debian.png)](https://debian.org)
 
 ### Elementary OS 0.4 or later
 
-![Elementary OS](Pictures/OS/ElementaryOS.png)
+[![Elementary OS](Pictures/OS/ElementaryOS.png)](https://elementary.io)
 
 ### Fedora 26 or later
 
-![Fedora](Pictures/OS/Fedora.png)
+[![Fedora](Pictures/OS/Fedora.png)](https://getfedora.org)
 
 ### LinuxMint 18.2 or later
 
-![LinuxMint](Pictures/OS/LinuxMint.png)
+[![LinuxMint](Pictures/OS/LinuxMint.png)](https://linuxmint.com)
 
 ### Redhat 7.4 or later
 
-![Redhat](Pictures/OS/Redhat.png)
+[![Redhat](Pictures/OS/Redhat.png)](https://redhat.com)
 
 ### Ubuntu 16.04 or later
 
-![Ubuntu](Pictures/OS/Ubuntu.png)
+[![Ubuntu](Pictures/OS/Ubuntu.png)](https://ubuntu.com)
 
 ## Other distribution (manually installation)
 
-![Linux](Pictures/OS/Linux.png)
+[![Linux](Pictures/OS/Linux.png)](https://linux.org)
 
 # Tests and coverage
 
@@ -57,15 +57,15 @@ Switch is every time tested with Continuous Integration tools.
 
 ## AppVeyor
 
-![AppVeyor](Pictures/CI/AppVeyor.png)
+[![AppVeyor](Pictures/CI/AppVeyor.png)](https:://ci.appveyor.com)
 
 ## Travis CI
 
-![TravisCI](Pictures/CI/TravisCI.png)
+[![TravisCI](Pictures/CI/TravisCI.png)](https://travis-ci.org)
 
 ## Codecov
 
-![Codecov](Pictures/CI/Codecov.png)
+[![Codecov](Pictures/CI/Codecov.png)](https://codecov.io)
 
 # Development Environment Tools
 
@@ -73,35 +73,35 @@ With CMake, Switch support many Development Environment Tools.
 
 ## Microsoft Visual C++ 2015 or later
 
-![VisualStudio](Pictures/DevTools/VisualStudio.png)
+[![VisualStudio](Pictures/DevTools/VisualStudio.png)](https://visualstudio.com)
 
 ## XCode 8.3 or later
 
-![Xcode](Pictures/DevTools/Xcode.png)
+[![Xcode](Pictures/DevTools/Xcode.png)](https://developer.apple.com/xcode)
 
 ## CLion 2017.2 or later
 
-![CLion](Pictures/DevTools/CLion.png)
+[![CLion](Pictures/DevTools/CLion.png)](https://jetbrains.com/clion)
 
-## Eclipse CDT 4.0 or later
+## Eclipse CDT 8.0 or later
 
-![EclipseCDT](Pictures/DevTools/EclipseCDT.png)
+[![EclipseCDT](Pictures/DevTools/EclipseCDT.png)](https://eclipse.org/cdt)
 
 ## Code::Blocks 13.12 or later
 
-![CodeBlocks](Pictures/DevTools/CodeBlocks.png)
+[![CodeBlocks](Pictures/DevTools/CodeBlocks.png)](http://codeblocks.org)
 
 ## KDevelop 3 or later
 
-![KDevelop](Pictures/DevTools/KDevelop.png)
+[![KDevelop](Pictures/DevTools/KDevelop.png)](https://kdevelop.org)
 
 ## CodeLite 11 or later
 
-![CodeLite](Pictures/DevTools/CodeLite.png)
+[![CodeLite](Pictures/DevTools/CodeLite.png)](https://codelite.org)
 
-## Qt Editor
+## Qt Creator
 
-![Qt](Pictures/DevTools/Qt.png)
+[![Qt](Pictures/DevTools/QtCreator.png)](https://qt.io)
 
 ## Standard Unix makefile
 
