@@ -2,6 +2,19 @@
 language: cpp
 dist: trusty
 
+addons:
+  apt:
+    sources:
+      - llvm-toolchain-xenial-3.9
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-6
+      - gcc-6
+      - clang-3.9
+      - lldb-3.9
+      - libgtkmm-3.0-dev
+      - uuid-dev
+
 # build matrix
 matrix:
   include:
