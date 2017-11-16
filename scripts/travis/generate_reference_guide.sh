@@ -1,11 +1,8 @@
 #!/usr/bin/env sh
 
-# create build folders
-mkdir build
-
 # generate Switch
 cd build
-cmake .. -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=ON -DENABLE_COVERAGE=ON
+cmake .. -DCMAKE_BUILD_TYPE=Release
 cd ..
 
 # setup git
