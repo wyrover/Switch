@@ -10,8 +10,8 @@ matrix:
     - os: osx
       cache: ccache
       osx_image: xcode9.1
-      script: scripts/travis/script.sh
-      after_success: scripts/travis/after_success.sh
+      script: scripts/travis/build.sh
+      after_success: scripts/travis/coverage.sh
 
     # build Switch on linux`
     #- os: linux
@@ -30,12 +30,10 @@ matrix:
     #        - lldb-3.9
     #        - libgtkmm-3.0-dev
     #        - uuid-dev
-    #  script: scripts/travis/script.sh
+    #  script: scripts/travis/build.sh
     #  after_success: scripts/travis/after_success.sh
 
     # generate Reference Guide
     - os: linux
-      before_script: scripts/reference_guide/clone.sh
-      script: scripts/reference_guide/generate.sh
-      after_success: scripts/reference_guide/publish_with_token.sh
+      script: script/travis/generate_reference_guide.sh
       
