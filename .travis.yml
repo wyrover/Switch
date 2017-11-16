@@ -1,6 +1,5 @@
 # configuration
 language: cpp
-cache: ccache
 dist: trusty
 
 # build matrix
@@ -9,12 +8,14 @@ matrix:
   
     # build Switch on macOS
     - os: osx
+      cache: ccache
       osx_image: xcode9.1
       script: scripts/travis/script.sh
       after_success: scripts/travis/after_success.sh
 
     # build Switch on linux`
     #- os: linux
+    #  cache: ccache
     #  compiler: clang-3.9
     #  sudo: require
     #  addons:
