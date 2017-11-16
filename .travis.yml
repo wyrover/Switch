@@ -37,6 +37,7 @@ matrix:
 
     # generate Reference Guide
     - os: linux
+      sudo: require
       before_script: scripts/travis/build_3rdparty.sh
       script: scripts/travis/generate_reference_guide.sh
       
