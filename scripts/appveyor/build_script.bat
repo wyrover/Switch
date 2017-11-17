@@ -1,3 +1,6 @@
+echo SWITCH_BUILD_WIN32 = %SWITCH_BUILD_WIN32%
+echo SWITCH_BUILD_WIN64 = %SWITCH_BUILD_WIN64%
+
 rem Switch build 32 bits
 if "%SWITCH_BUILD_WIN32%" == "true" (
   rem create build folders
