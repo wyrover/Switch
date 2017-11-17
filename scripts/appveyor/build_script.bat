@@ -5,7 +5,7 @@ rem generate, build and install 3rdparty
 cd build32\3rdparty
 cmake ../../3rdparty -DCMAKE_INSTALL_PREFIX=/usr/local/32
 cmake --build . --target install --config Release
-cd ../..
+cd ..\..
 
 rem generate, build and install Switch
 cd build32
@@ -20,7 +20,7 @@ rem generate, build and install 3rdparty
 cd build64\3rdparty
 cmake -G "Visual Studio 15 2017 Win64" ../../3rdparty -DCMAKE_INSTALL_PREFIX=/usr/local/64
 cmake --build . --target install --config Release
-cd ../..
+cd ..\..
 
 rem generate, build and install Switch
 cd build54
