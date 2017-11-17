@@ -1,5 +1,8 @@
 version: 0.4.1.{build}
 image: Visual Studio 2017
+environment:
+  SWITCH_BUILD_WIN32: false
+  SWITCH_BUILD_WIN64: true
 
 build_script: scripts\appveyor\build_script.bat
 test_script: scripts\appveyor\test_script.bat
