@@ -28,7 +28,7 @@ if DEFINED SWITCH_BUILD_WIN64 (
   cd ..\..
 
   rem generate, build and install Switch
-  cd build54
+  cd build64
   cmake -G "Visual Studio 15 2017 Win64" .. -DCMAKE_INSTALL_PREFIX=/usr/local/64 -DBUILD_TESTS=ON
   cmake --build . --config Release
   cd ..

@@ -57,11 +57,21 @@ Switch is every time tested with Continuous Integration tools.
 
 ## AppVeyor
 
-[![AppVeyor](Pictures/CI/AppVeyor.png)](https:://ci.appveyor.com)
+[![AppVeyor](Pictures/CI/AppVeyor.png)](https://ci.appveyor.com)
+
+Configurations :
+
+* Visual Studio 2017 Win32
+* Visual Studio 2017 Win64
 
 ## Travis CI
 
 [![TravisCI](Pictures/CI/TravisCI.png)](https://travis-ci.org)
+
+Configurations :
+* macOS Xcode 9.1
+* linux clang 3.9
+* Reference Guide generation
 
 ## Codecov
 
