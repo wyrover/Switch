@@ -11,7 +11,7 @@ git config --global user.name "Travis CI"
 
 # Clone switch-doc
 if [ -d "build/ReferenceGuide" ]; then rm -r -f build/ReferenceGuide; fi
-git clone https://github.com/gammasoft71/switch-doc build/ReferenceGuide
+git clone https://github.com/gammasoft71/Switch-doc build/ReferenceGuide
 
 # Generating documentation
 cd build
@@ -25,5 +25,5 @@ cd build/ReferenceGuide
 git add --all
 git commit -m "Generate Reference Guide:  $TRAVIS_BUILD_NUMBER"
 
-git remote add origin-pages https://${GH_TOKEN}@github.com/gammasoft71/switch-doc.git > /dev/null 2>&1
-git push --quiet --set-upstream origin-pages gh-pages
+git remote add origin-master https://${GH_TOKEN}@github.com/gammasoft71/Switch-doc.git > /dev/null 2>&1
+git push --quiet 
