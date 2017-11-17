@@ -1,3 +1,6 @@
+set SWITCH_BUILD_WIN32=%1
+set SWITCH_BUILD_WIN64=%2
+
 rem run registered unit tests 32 bits
 if "%SWITCH_BUILD_WIN32%" == "true" (
   cd build32
