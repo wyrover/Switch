@@ -6,8 +6,8 @@ cmake .. -DCMAKE_BUILD_TYPE=Release
 cd ..
 
 # setup git
-git config --global user.email "travis@travis-ci.org"
-git config --global user.name "Travis CI"
+git config --global user.email "gammasoft71@gmail.com"
+git config --global user.name "gammasoft71"
 
 # Clone switch-doc
 if [ -d "build/ReferenceGuide" ]; then rm -r -f build/ReferenceGuide; fi
