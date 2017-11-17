@@ -1,5 +1,5 @@
-set SWITCH_BUILD_WIN32=%1
-set SWITCH_BUILD_WIN64=%2
+set SWITCH_BUILD_WIN32=false
+set SWITCH_BUILD_WIN64=true
 
 rem run registered unit tests 32 bits
 if "%SWITCH_BUILD_WIN32%" == "true" (
