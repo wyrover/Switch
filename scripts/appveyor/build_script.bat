@@ -1,11 +1,5 @@
-set SWITCH_BUILD_WIN32=false
-set SWITCH_BUILD_WIN64=true
-
-echo SWITCH_BUILD_WIN32 = %SWITCH_BUILD_WIN32%
-echo SWITCH_BUILD_WIN64 = %SWITCH_BUILD_WIN64%
-
 rem Switch build 32 bits
-if "%SWITCH_BUILD_WIN32%" == "true" (
+if DEFINED SWITCH_BUILD_WIN32 (
   rem create build folders
   mkdir build32\3rdparty
 
@@ -23,7 +17,7 @@ if "%SWITCH_BUILD_WIN32%" == "true" (
 )
 
 rem Switch build 64 bits
-if "%SWITCH_BUILD_WIN64%" == "true" (
+if DEFINED SWITCH_BUILD_WIN64 (
   rem create build folders
   mkdir build64\3rdparty
 

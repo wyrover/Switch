@@ -1,6 +1,0 @@
-version: 0.4.1.{build}
-image: Visual Studio 2017
-
-build_script: scripts\appveyor\build_script.bat
-test_script: scripts\appveyor\test_script.bat
-on_success: scripts\appveyor\on_success.bat
