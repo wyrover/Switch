@@ -26,4 +26,4 @@ git add --all
 git commit -m "Generate Reference Guide:  $TRAVIS_BUILD_NUMBER"
 
 git remote add origin-master https://${GH_TOKEN}@github.com/gammasoft71/Switch-doc.git > /dev/null 2>&1
-git push --quiet 
+git push 
