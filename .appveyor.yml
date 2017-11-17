@@ -4,6 +4,6 @@ environment:
   SWITCH_BUILD_WIN32: false
   SWITCH_BUILD_WIN64: true
 
-build_script: scripts\appveyor\build_script.bat %SWITCH_BUILD_WIN32% %SWITCH_BUILD_WIN64%
-test_script: scripts\appveyor\test_script.bat %SWITCH_BUILD_WIN32% %SWITCH_BUILD_WIN64%
-on_success: scripts\appveyor\on_success.bat %SWITCH_BUILD_WIN32% %SWITCH_BUILD_WIN64%
+build_script: scripts\appveyor\build_script.bat false true
+test_script: scripts\appveyor\test_script.bat false true
+on_success: scripts\appveyor\on_success.bat false true
