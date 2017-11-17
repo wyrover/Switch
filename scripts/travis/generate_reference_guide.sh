@@ -25,5 +25,5 @@ cd build/ReferenceGuide
 git add --all
 git commit -m "Generate Reference Guide:  $TRAVIS_BUILD_NUMBER"
 
-git remote add origin-pages https://${GITHUB_TOKEN}@github.com/gammasoft71/switch-doc.git > /dev/null 2>&1
+git remote add origin-pages https://${GH_TOKEN}@github.com/gammasoft71/switch-doc.git > /dev/null 2>&1
 git push --quiet --set-upstream origin-pages gh-pages
