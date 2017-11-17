@@ -1,6 +1,12 @@
 version: 0.4.1.{build}
 image: Visual Studio 2017
-
-build_script: scripts\appveyor\build_script.bat
-test_script: scripts\appveyor\test_script.bat
-on_success: scripts\appveyor\on_success.bat
+environment:
+  matrix:
+  - SWITCH_BUILD_WIN32: true
+  - SWITCH_BUILD_WIN64: true
+build_script:
+- cmd: scripts\appveyor\build_script.bat
+test_script:
+- cmd: scripts\appveyor\test_script.bat
+on_success:
+- cmd: scripts\appveyor\on_success.bat
