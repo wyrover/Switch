@@ -1,5 +1,5 @@
 rem Switch build 32 bits
-if %SWITCH_BUILD_WIN32% == true (
+if %SWITCH_BUILD_WIN32% equ true (
   rem create build folders
   mkdir build32\3rdparty
 
@@ -17,7 +17,7 @@ if %SWITCH_BUILD_WIN32% == true (
 )
 
 rem Switch build 64 bits
-if %SWITCH_BUILD_WIN64% == true (
+if %SWITCH_BUILD_WIN64% equ true (
   rem create build folders
   mkdir build64\3rdparty
 
