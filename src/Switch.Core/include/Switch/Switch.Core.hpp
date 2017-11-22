@@ -6,7 +6,7 @@
 /// @brief Keywords are predefined, reserved identifiers that have special meanings to the compiler. They cannot be used as identifiers in your program unless they include @ as a prefix. For example, @if is a valid identifier, but if is not because if is a keyword.
 
 /// @defgroup Types Types
-/// @brief Types defiitions
+/// @brief Types definitions
 
 /// @defgroup Switch Switch
 /// @brief The base module of the Portable C++ Framework wich aim to be independant from the OS.
