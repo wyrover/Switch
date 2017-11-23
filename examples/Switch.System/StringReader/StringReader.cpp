@@ -37,12 +37,11 @@ namespace Examples {
       Console::WriteLine("Modified text:\n\n{0}", paragraph);
       
       // Re-create textReaderText from paragraph.
-      int intCharacter;
       char32 convertedCharacter;
       StringWriter strWriter;
       strReader = StringReader(paragraph);
       while (true) {
-        intCharacter = strReader.Read();
+        int intCharacter = strReader.Read();
         
         // Check for the end of the string
         // before converting to a character.

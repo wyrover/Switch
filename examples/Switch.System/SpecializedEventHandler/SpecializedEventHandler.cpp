@@ -8,7 +8,12 @@ namespace Examples {
   public:
     explicit SpecializedEventArgs(const string& message) : EventArgs(), message(message) { }
     SpecializedEventArgs(const SpecializedEventArgs& e) : EventArgs(e), message(e.message) { }
-    
+    SpecializedEventArgs& operator=(const SpecializedEventArgs& e) {
+      this->EventArgs::operator=(e);
+      this->message = e.message;
+      return *this;
+    }
+
     const string& GetMessage() const { return this->message; }
     
   private:

@@ -29,7 +29,7 @@ namespace Examples {
   class FireworkStart : public Firework {
   public:
     FireworkStart(int x, int y, ConsoleColor color, int speed) : Firework(x, y, color, speed) {}
-    FireworkStart(const Firework& firework) : Firework(firework) {}
+    explicit  FireworkStart(const Firework& firework) : Firework(firework) {}
     
     void Paint() const override {
       System::Console::ForegroundColor = this->color;
@@ -40,7 +40,7 @@ namespace Examples {
   class FireworkExploded : public Firework {
   public:
     FireworkExploded(int x, int y, ConsoleColor color, int speed) : Firework(x, y, color, speed) {}
-    FireworkExploded(const Firework& firework) : Firework(firework) {}
+    explicit  FireworkExploded(const Firework& firework) : Firework(firework) {}
     
     void Paint() const override {
       System::Console::ForegroundColor = this->color;
@@ -53,7 +53,7 @@ namespace Examples {
   class FireworkStartExpanded1 : public Firework {
   public:
     FireworkStartExpanded1(int x, int y, ConsoleColor color, int speed) : Firework(x, y, color, speed) {}
-    FireworkStartExpanded1(const Firework& firework) : Firework(firework) {}
+    explicit  FireworkStartExpanded1(const Firework& firework) : Firework(firework) {}
     
     void Paint() const override {
       System::Console::ForegroundColor = this->color;
@@ -68,7 +68,7 @@ namespace Examples {
   class FireworkStartExpanded2 : public Firework {
   public:
     FireworkStartExpanded2(int x, int y, ConsoleColor color, int speed) : Firework(x, y, color, speed) {}
-    FireworkStartExpanded2(const Firework& firework) : Firework(firework) {}
+    explicit  FireworkStartExpanded2(const Firework& firework) : Firework(firework) {}
     
     void Paint() const override {
       System::Console::ForegroundColor = this->color;
@@ -83,7 +83,7 @@ namespace Examples {
   class FireworkStartExpanded3 : public Firework {
   public:
     FireworkStartExpanded3(int x, int y, ConsoleColor color, int speed) : Firework(x, y, color, speed) {}
-    FireworkStartExpanded3(const Firework& firework) : Firework(firework) {}
+    explicit  FireworkStartExpanded3(const Firework& firework) : Firework(firework) {}
     
     void Paint() const override {
       System::Console::ForegroundColor = this->color;
@@ -98,7 +98,7 @@ namespace Examples {
   class FireworkStartExpanded4 : public Firework {
   public:
     FireworkStartExpanded4(int x, int y, ConsoleColor color, int speed) : Firework(x, y, color, speed) {}
-    FireworkStartExpanded4(const Firework& firework) : Firework(firework) {}
+    explicit  FireworkStartExpanded4(const Firework& firework) : Firework(firework) {}
     
     void Paint() const override {
       System::Console::ForegroundColor = this->color;
@@ -113,7 +113,7 @@ namespace Examples {
   class FireworkEnd : public Firework {
   public:
     FireworkEnd(int x, int y, ConsoleColor color, int speed) : Firework(x, y, color, speed) {}
-    FireworkEnd(const Firework& firework) : Firework(firework) {}
+    explicit  FireworkEnd(const Firework& firework) : Firework(firework) {}
     
     void Paint() const override {
       System::Console::ForegroundColor = this->color;

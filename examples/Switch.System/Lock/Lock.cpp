@@ -6,7 +6,7 @@ using namespace System::Threading;
 namespace Examples {
   class Account : public object {
   public:
-    Account(int initial) : balance(initial) {}
+    explicit Account(int initial) : balance(initial) {}
     
     int Withdraw(int amount) {
       // This condition never is true unless the lock statement is commented out.

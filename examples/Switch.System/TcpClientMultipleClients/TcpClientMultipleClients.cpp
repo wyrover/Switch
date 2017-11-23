@@ -12,7 +12,7 @@ namespace Examples {
   public:
     class Reader : public object {
     public:
-      Reader(const NetworkStream& stream) : stream(stream) {this->readThread.Start();}
+      explicit Reader(const NetworkStream& stream) : stream(stream) {this->readThread.Start();}
       
     private:
       Reader() = delete;

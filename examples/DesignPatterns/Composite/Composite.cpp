@@ -25,7 +25,7 @@ namespace DesignPatterns {
     class Composite : public Component {
     public:
       // Constructor
-      Composite(string name) : Component(name) {}
+      explicit Composite(string name) : Component(name) {}
       
       void Add(refptr<Component> component) override {this->children.Add(component);}
       
@@ -47,7 +47,7 @@ namespace DesignPatterns {
     class Leaf : public Component {
     public:
       // Constructor
-      Leaf(const string& name) : Component(name) {}
+      explicit Leaf(const string& name) : Component(name) {}
       
       void Display(int depth) const override {Console::WriteLine(string('-', depth) + name);}
       

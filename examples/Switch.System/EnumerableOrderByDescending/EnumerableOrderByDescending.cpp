@@ -11,7 +11,12 @@ namespace Examples {
       Pet() : age(0) {}
       Pet(const string& name, int age) : name(name), age(age) {}
       Pet(const Pet& pet) : name(pet.name), age(pet.age) {}
-      
+      Pet& operator=(const Pet& pet) {
+        this->name = pet.name;
+        this->age = pet.age;
+        return *this;
+      }
+
       _property<int, _readonly> Age {
         _get {return this->age;}
       };

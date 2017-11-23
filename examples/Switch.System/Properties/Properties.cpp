@@ -7,6 +7,11 @@ public:
   Person() {}
   // Must be specified because the copycontructor of Property class is deleted. The implicit or default copy constructor is not suffisant.
   Person(const Person& person) : name(person.name), age(person.age) {}
+  Person& operator=(const Person& person) {
+    this->name = person.name;
+    this->age = person.age;
+    return *this;
+  }
 
   // Declare a Name property of type string:
   _property<string> Name {

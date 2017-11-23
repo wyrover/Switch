@@ -11,8 +11,12 @@ namespace DesignPatterns {
     public:
       // Constructor
       Memento() {}
-      Memento(const string& state) : state(state) {}
+      explicit Memento(const string& state) : state(state) {}
       Memento(const Memento& memento) : state(memento.state) {}
+      Memento& operator=(const Memento& memento) {
+        this->state = memento.state;
+        return *this;
+      }
       
       // Gets or sets state
       _property<string, _readonly> State {

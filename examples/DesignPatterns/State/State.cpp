@@ -17,7 +17,7 @@ namespace DesignPatterns {
     class Context : public object {
     public:
       // Constructor
-      Context(refptr<DesignPatterns::Behavioral::State> state) {
+      explicit Context(refptr<DesignPatterns::Behavioral::State> state) {
         this->State = state;
       }
       

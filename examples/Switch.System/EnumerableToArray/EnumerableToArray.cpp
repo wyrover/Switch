@@ -11,7 +11,12 @@ namespace Examples {
       Package() {}
       Package(const string& company, double weight) : company(company), weight(weight) {}
       Package(const Package& package) : company(package.company), weight(package.weight) {}
-      
+      Package& operator=(const Package& package) {
+        this->company = package.company;
+        this->weight = package.weight;
+        return *this;
+      }
+
       _property<string, _readonly> Company {
         [&] { return this->company; }
       };

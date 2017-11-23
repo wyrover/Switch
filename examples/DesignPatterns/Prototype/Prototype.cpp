@@ -28,7 +28,7 @@ namespace DesignPatterns {
     class ConcretePrototype1 : public Prototype {
     public:
       // Constructor
-      ConcretePrototype1(const string& id) : Prototype(id) {}
+      explicit ConcretePrototype1(const string& id) : Prototype(id) {}
       
       // Returns a shallow copy
       refptr<Prototype> Clone() const override {return as<Prototype>(this->MemberwiseClone<ConcretePrototype1>());}
@@ -38,7 +38,7 @@ namespace DesignPatterns {
     class ConcretePrototype2 : public Prototype {
     public:
       // Constructor
-      ConcretePrototype2(const string& id) : Prototype(id) {}
+      explicit ConcretePrototype2(const string& id) : Prototype(id) {}
       
       // Returns a shallow copy
       refptr<Prototype> Clone() const override {return as<Prototype>(this->MemberwiseClone<ConcretePrototype2>());}

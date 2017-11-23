@@ -28,7 +28,7 @@ namespace DesignPatterns {
     class ConcreteCommand : public Command {
     public:
       // Constructor
-      ConcreteCommand(refptr<Receiver> receiver) : Command(receiver) {}
+      explicit ConcreteCommand(refptr<Receiver> receiver) : Command(receiver) {}
       
       void Execute() const override {
         receiver->Action();

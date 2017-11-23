@@ -65,7 +65,7 @@ namespace DesignPatterns {
     class Client : public object {
     public:
       // Constructor
-      Client(const AbstractFactory& factory) {
+      explicit Client(const AbstractFactory& factory) {
         this->abstractProductB = factory.CreateProductB();
         this->abstractProductA = factory.CreateProductA();
       }

@@ -11,15 +11,19 @@ option(BUILD_SWITCH_TUNIT_FRAMEWORK_EXAMPLES "Build Switch.TUnit.Framework examp
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
-if(NOT CMAKE_DEBUG_POSTFIX)
-  set(CMAKE_DEBUG_POSTFIX d)
-endif()
-
 if ("${CMAKE_BUILD_TYPE}" STREQUAL "")
   set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR})
 else ()
   set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/${CMAKE_BUILD_TYPE})
 endif ()
+
+message(STATUS "Informations")
+message(STATUS "  CMake version [${CMAKE_VERSION}]")
+message(STATUS "  System [${CMAKE_SYSTEM}]")
+message(STATUS "  Compiler [${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION}]")
+message(STATUS "  Build type [${CMAKE_BUILD_TYPE}]")
+message(STATUS "  Install prefix [${CMAKE_INSTALL_PREFIX}]")
+message(STATUS "  Output path [${EXECUTABLE_OUTPUT_PATH}]")
 
 macro(subdirlist RESULT CURRENT_DIR)
   file(GLOB children RELATIVE ${CURRENT_DIR} ${CURRENT_DIR}/*)

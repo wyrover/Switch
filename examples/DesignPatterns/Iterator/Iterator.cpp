@@ -28,7 +28,7 @@ namespace DesignPatterns {
     class ConcreteIterator : public Iterator {
     public:
       // Constructor
-      ConcreteIterator(const ConcreteAggregate& aggregate) : aggregate(aggregate) {}
+      explicit ConcreteIterator(const ConcreteAggregate& aggregate) : aggregate(aggregate) {}
       
       // Gets first iteration item
       any First() const override;

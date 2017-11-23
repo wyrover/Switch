@@ -28,7 +28,7 @@ namespace DesignPatterns {
     class ConcreteColleague1 : public Colleague {
     public:
       // Constructor
-      ConcreteColleague1(Mediator& mediator) : Colleague(mediator) {}
+      explicit ConcreteColleague1(Mediator& mediator) : Colleague(mediator) {}
       
       void Send(const string& message) {
         mediator().Send(message, *this);
@@ -43,7 +43,7 @@ namespace DesignPatterns {
     class ConcreteColleague2 : public Colleague {
     public:
       // Constructor
-      ConcreteColleague2(Mediator& mediator) : Colleague(mediator) {}
+      explicit ConcreteColleague2(Mediator& mediator) : Colleague(mediator) {}
       
       void Send(const string& message) {
         mediator().Send(message, *this);

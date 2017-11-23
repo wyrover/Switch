@@ -23,17 +23,15 @@ public:
   
   // return the inverse of x mod y
   static int inv_mod(int x, int y) {
-    int q = 0;
     int u = x;
     int v = y;
     int a = 0;
     int c = 1;
-    int t = 0;
-    
+
     do {
-      q = v / u;
-      
-      t = c;
+      int q = v / u;
+
+      int t = c;
       c = a - q * c;
       a = t;
       
@@ -85,30 +83,22 @@ public:
   }
   
   static int StartingAt(int n) {
-    int av = 0;
-    int vmax = 0;
     int N = (int)((n + 20) * Math::Log(10) / Math::Log(2));
-    int num = 0;
-    int den = 0;
-    int kq = 0;
-    int kq2 = 0;
     int t = 0;
-    int v = 0;
-    int s = 0;
     double sum = 0.0;
     
     for (int a = 3; a <= (2 * N); a = next_prime(a)) {
-      vmax = (int)(Math::Log(2 * N) / Math::Log(a));
-      av = 1;
+      int vmax = (int)(Math::Log(2 * N) / Math::Log(a));
+      int av = 1;
       
       for (int i = 0; i < vmax; ++i) av = av * a;
       
-      s = 0;
-      num = 1;
-      den = 1;
-      v = 0;
-      kq = 1;
-      kq2 = 1;
+      int s = 0;
+      int num = 1;
+      int den = 1;
+      int v = 0;
+      int kq = 1;
+      int kq2 = 1;
       
       for (int k = 1; k <= N; ++k) {
         t = k;

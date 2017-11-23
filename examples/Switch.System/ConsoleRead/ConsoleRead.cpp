@@ -12,11 +12,10 @@ namespace Examples {
       string m2 = "Character '{0}' is hexadecimal 0x{1:x4}.";
       string m3 = "Character     is hexadecimal 0x{0:x4}.";
       char32 ch;
-      int x;
       //
       Console::WriteLine(m1);
       do {
-        x = Console::Read();
+        int x = Console::Read();
         try {
           ch = Convert::ToChar(x);
           if (Char::IsWhiteSpace(ch)) {

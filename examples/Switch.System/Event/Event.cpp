@@ -8,8 +8,12 @@ namespace SwitchEvents {
   /// @include Event.cpp
   class CustomEventArgs : public EventArgs {
   public:
-    CustomEventArgs(const string& s) : message(s) {}
+    explicit CustomEventArgs(const string& s) : message(s) {}
     CustomEventArgs(const CustomEventArgs& cea) : message(cea.message) {}
+    CustomEventArgs& operator=(const CustomEventArgs& cea) {
+      this->message = cea.message;
+      return *this;
+    }
     
     _property<string> Message {
       _get { return this->message; },

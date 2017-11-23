@@ -44,10 +44,15 @@ namespace Examples {
         toneVal = frequency;
         durVal  = time;
       };
-      
-      Note(const Note& note) : toneVal(note.toneVal), durVal(note.durVal) {}
+
       Note() : toneVal((Tone)0), durVal((Duration)0) {}
-      
+      Note(const Note& note) : toneVal(note.toneVal), durVal(note.durVal) {}
+      Note& operator=(const Note& note) {
+        this->toneVal = note.toneVal;
+        this->durVal = note.durVal;
+        return *this;
+      }
+
       // Define properties to return the note's tone and duration.
       _property<Tone, _readonly> NoteTone { _get{ return toneVal; } };
       _property<Duration, _readonly> NoteDuration { _get{ return durVal; } };

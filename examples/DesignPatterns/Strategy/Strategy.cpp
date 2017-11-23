@@ -41,9 +41,13 @@ namespace DesignPatterns {
     public:
       // Constructors
       Context() {}
-      Context(refptr<Strategy> strategy) : strategy(strategy) {}
+      explicit Context(refptr<Strategy> strategy) : strategy(strategy) {}
       Context(const Context& context) : strategy(context.strategy) {}
-      
+      Context& operator=(const Context& context) {
+        this->strategy = context.strategy;
+        return *this;
+      }
+
       void ContextInterface() {
         this->strategy->AlgorithmInterface();
       }
