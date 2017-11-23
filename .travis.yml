@@ -47,6 +47,7 @@ matrix:
     - env: TEST="Xcode build, run unittests and publish to codecov"
       os: osx
       cache: ccache
+      osx_image: xcode8.3
       script: scripts/travis/build_xcode.sh
       #after_success: scripts/travis/publish_to_codecov.sh
 
