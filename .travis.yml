@@ -56,6 +56,10 @@ matrix:
       cache: ccache
       script: scripts/travis/build_clang.sh
 
+    - env: TEST="Git check"
+      os: linux
+      script: scripts/travis/git_check.sh
+
     - env: TEST="cppcheck analyse"
       os: linux
       script: scripts/travis/cppcheck_analyse.sh
