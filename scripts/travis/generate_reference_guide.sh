@@ -22,8 +22,17 @@ cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=~/usr/local -DCMAKE_C
 cmake --build . --target Switch.ReferenceGuide
 cd ..
 
+# check doxygen results and display error
+#if [[ -s build/reference_guide/doxygen_warnings.txt ]]; then
+#  echo "You must fix doxygen before submitting a pull request"
+#  echo ""
+#  cat build/reference_guide/doxygen_warnings.txt
+#  exit -1
+#fi
+
 # Publishing documentation
 cd build/ReferenceGuide
+if [[ -e doxygen_warnings.txt ]]; then rm doxygen_warnings.txt; fi
 git add --all
 git commit -m "Generate Reference Guide [$TRAVIS_BUILD_NUMBER]"
 git push "https://${GH_TOKEN}@github.com/gammasoft71/Switch-doc.git" master > /dev/null 2>&1 
