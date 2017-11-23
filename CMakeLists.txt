@@ -1,7 +1,9 @@
 cmake_minimum_required(VERSION 3.2)
 
 project(Switch VERSION 0.4.1)
+set(PROJECT_DESCRIPTION "Native C++ port of .Net Framework on Windows, macOS and Linux.")
 
+# options default value
 option(BUILD_SWITCH_CORE "Build Switch.Core library" ON)
 option(BUILD_SWITCH_SYSTEM "Build Switch.System library" ON)
 option(BUILD_SWITCH_SYSTEM_CORE "Build Switch.System.Core library" ON)
@@ -14,32 +16,152 @@ option(BUILD_SWITCH_TUNIT_MAIN "Build Switch.TUnit.Main library" ON)
 option(BUILD_TESTS "Build tests" OFF)
 option(ENABLE_COVERAGE "Enable code coverage" OFF)
 
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
+# set CMAKE_DEBUG_POSTFIX if not set
 if(NOT CMAKE_DEBUG_POSTFIX)
   set(CMAKE_DEBUG_POSTFIX d)
 endif()
 
+# set executable output path
 if ("${CMAKE_BUILD_TYPE}" STREQUAL "")
   set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR})
 else()
   set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/${CMAKE_BUILD_TYPE})
 endif()
 
+# set coverage flags
 if (ENABLE_COVERAGE AND UNIX)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage")
   set(CMAKE_LINKER_FLAGS "${CMAKE_LINKER_FLAGS} --coverage")
 endif()
 
+list(APPEND ASTYLE_ARGS
+  --style=java
+  --indent=spaces=2
+  --attach-namespaces
+  --attach-classes
+  --attach-inlines
+  --attach-extern-c
+  --attach-closing-while
+  --indent-namespaces
+  --indent-after-parens
+  --indent-preproc-define
+  --indent-preproc-cond
+  --indent-col1-comments
+  --pad-oper
+  --pad-comma
+  --unpad-paren
+  --fill-empty-lines
+  --align-pointer=type
+  --align-reference=type
+  --remove-braces
+  --keep-one-line-blocks
+  --keep-one-line-statements
+  --convert-tabs
+  --close-templates
+  --suffix=none
+  --recursive
+  ${CMAKE_SOURCE_DIR}/src/Switch/include/*.hpp
+  ${CMAKE_SOURCE_DIR}/src/Switch/src/*.cpp
+  ${CMAKE_SOURCE_DIR}/src/Switch.Core/include/*.hpp
+  ${CMAKE_SOURCE_DIR}/src/Switch.Core/src/*.cpp
+  ${CMAKE_SOURCE_DIR}/src/Switch.System/include/*.hpp
+  ${CMAKE_SOURCE_DIR}/src/Switch.System/src/*.cpp
+  ${CMAKE_SOURCE_DIR}/src/Switch.System.Core/include/*.hpp
+  ${CMAKE_SOURCE_DIR}/src/Switch.System.Core/src/*.cpp
+  ${CMAKE_SOURCE_DIR}/src/Switch.System.Drawing/include/*.hpp
+  ${CMAKE_SOURCE_DIR}/src/Switch.System.Drawing/src/*.cpp
+  ${CMAKE_SOURCE_DIR}/src/Switch.System.ServiceModel/include/*.hpp
+  ${CMAKE_SOURCE_DIR}/src/Switch.System.ServiceModel/src/*.cpp
+  ${CMAKE_SOURCE_DIR}/src/Switch.System.Windows.Forms/include/*.hpp
+  ${CMAKE_SOURCE_DIR}/src/Switch.System.Windows.Forms/src/*.cpp
+  ${CMAKE_SOURCE_DIR}/src/Switch.TUnit.Core/include/*.hpp
+  ${CMAKE_SOURCE_DIR}/src/Switch.TUnit.Core/src/*.cpp
+  ${CMAKE_SOURCE_DIR}/src/Switch.TUnit.Framework/include/*.hpp
+  ${CMAKE_SOURCE_DIR}/src/Switch.TUnit.Framework/src/*.cpp
+  ${CMAKE_SOURCE_DIR}/src/Switch.TUnit.Main/src/*.cpp
+  ${CMAKE_SOURCE_DIR}/tests/*.cpp
+  )
+
+list(APPEND CPPCHECK_ARGS
+  --enable=warning,style,performance,portability,unusedFunction
+  --std=c++14
+  --verbose
+  --error-exitcode=1
+  --language=c++
+  --suppressions-list=${CMAKE_CURRENT_BINARY_DIR}/cppcheck_false_positive.txt
+  --template='[{file}:{line}]: ({severity}) {{id}} {message}'
+  -DMAIN=main
+  -I ${CMAKE_SOURCE_DIR}/include
+  ${CMAKE_SOURCE_DIR}/examples
+  ${CMAKE_SOURCE_DIR}/include
+  ${CMAKE_SOURCE_DIR}/tests
+  )
+
+if (WIN32 STREQUAL "1")
+  set(EXECUTABLE_EXTENSION .exe)
+endif()
+
+# include modules
+include(ExternalProject)
 include(scripts/cmake/MakeLibraryProject.cmake)
 include(scripts/cmake/MakeTestProject.cmake)
 include(scripts/cmake/SwitchDependencies.cmake)
+
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/.cppcheck_false_positive.txt ${CMAKE_CURRENT_BINARY_DIR}/cppcheck_false_positive.txt @ONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/.doxygen.txt ${CMAKE_CURRENT_BINARY_DIR}/doxygen.txt @ONLY)
 
 file(WRITE src/Switch.Core/src/Native/EnvironmentVersionApi.cpp "#include \"Api.hpp\"\n\nSystem::Version Native::EnvironmentApi::GetVersion() {\n  return System::Version::Parse(\"${Switch_VERSION}\");\n}\n")
 file(WRITE .appveyor.yml "version: ${Switch_VERSION}.{build}\nimage: Visual Studio 2017\nenvironment:\n  matrix:\n  - SWITCH_BUILD_WIN32: true\n  - SWITCH_BUILD_WIN64: true\nbuild_script:\n- cmd: scripts\\appveyor\\build_script.bat\ntest_script:\n- cmd: scripts\\appveyor\\test_script.bat\non_success:\n- cmd: scripts\\appveyor\\on_success.bat\n")
 file(WRITE install.sh "export switch_version=${Switch_VERSION}\nscripts/install/install.sh \"$@\"\n")
 file(WRITE install.bat "@set switch_version=${Switch_VERSION}\n@call scripts\\install\\install.bat %*\n")
 file(WRITE src/Switch/include/Switch/Switch.hpp "#pragma once\n\n")
+
+message(STATUS "Informations")
+message(STATUS "  CMake version [${CMAKE_VERSION}]")
+message(STATUS "  System [${CMAKE_SYSTEM}]")
+message(STATUS "  Compiler [${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION}]")
+message(STATUS "  Build type [${CMAKE_BUILD_TYPE}]")
+message(STATUS "  Debug postfix [${CMAKE_DEBUG_POSTFIX}]")
+if (UNIX)
+  message(STATUS "  Code coverage [${ENABLE_COVERAGE}]")
+else()
+  message(STATUS "  Code coverage [NOT AVAIBLE]")
+endif()
+message(STATUS "  Install prefix [${CMAKE_INSTALL_PREFIX}]")
+message(STATUS "  Output path [${EXECUTABLE_OUTPUT_PATH}]")
+message(STATUS "  Executable extension [${EXECUTABLE_EXTENSION}]")
+
+
+message(STATUS "Find packages")
+find_package(Git REQUIRED QUIET)
+if (Git_FOUND)
+  message(STATUS "  [X] Git ${GIT_VERSION_STRING}")
+else()
+  message(STATUS "  [ ] Git")
+endif()
+find_package(Subversion REQUIRED QUIET)
+if (Subversion_FOUND)
+  message(STATUS "  [X] Subversion ${Subversion_VERSION_SVN}")
+else()
+  message(STATUS "  [ ] Subversion")
+endif()
+find_package(DOXYGEN QUIET)
+if (Doxygen_FOUND)
+  message(STATUS "  [X] Doxygen ${DOXYGEN_VERSION}")
+else()
+  message(STATUS "  [ ] Doxygen")
+endif()
+
+message(STATUS "External projeccts")
+ExternalProject_Add(astyle GIT_REPOSITORY https://github.com/Bareflank/astyle.git GIT_TAG v1.2 GIT_SHALLOW 1 CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX})
+message(STATUS "  [X] astyle v1.2")
+ExternalProject_Add(cppcheck GIT_REPOSITORY https://github.com/danmar/cppcheck.git GIT_TAG 1.81 GIT_SHALLOW 1 CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX})
+message(STATUS "  [X] cppcheck 1.81")
 
 message(STATUS "Generating Switch ${Switch_VERSION}")
 
@@ -178,39 +300,41 @@ endif()
 
 add_subdirectory("src/Switch")
 
-message(STATUS "Compiler [${CMAKE_CXX_COMPILER_ID}]")
-message(STATUS "System [${CMAKE_SYSTEM}]")
-if (NOT CMAKE_BUILD_TYPE)
-  message(STATUS "Build type [{null}]")
-else()
-  message(STATUS "Build type [${CMAKE_BUILD_TYPE}]")
-endif()
-if (UNIX)
-  message(STATUS "Code coverage [${ENABLE_COVERAGE}]")
-else()
-  message(STATUS "Code coverage [NOT AVAIBLE]")
-endif()
-message(STATUS "Install prefix [${CMAKE_INSTALL_PREFIX}]")
-
 install(EXPORT Switch DESTINATION cmake)
 install(FILES scripts/cmake/SwitchConfig.cmake scripts/cmake/SwitchDependencies.cmake DESTINATION cmake)
 
 if (CMAKE_BUILD_TYPE)
-  set(TEST_TYPE ${CMAKE_BUILD_TYPE})
+  set(SWITCH_BUILD_TYPE ${CMAKE_BUILD_TYPE})
 else()
-  set(TEST_TYPE Debug)
+  set(SWITCH_BUILD_TYPE Debug)
 endif()
-if (APPLE)
-  #add_custom_target(${PROJECT_NAME}.Tests COMMAND ctest --output-on-failure -C ${TEST_TYPE} DEPENDS install)
-  add_custom_target(${PROJECT_NAME}.Install "${CMAKE_COMMAND}" --build "${CMAKE_BINARY_DIR}" --target install -- -j8 DEPENDS ${PROJECT_NAME} COMMENT "Installing ${PROJECT_NAME}")
-  add_custom_target(${PROJECT_NAME}.Tests COMMAND ctest --output-on-failure -C ${TEST_TYPE} DEPENDS ${PROJECT_NAME}.Install)
+
+message(STATUS "Custom targets")
+
+message(STATUS "  [X] ${PROJECT_NAME}.Check")
+add_custom_target(${PROJECT_NAME}.Check COMMAND ${CMAKE_BINARY_DIR}/bin/cppcheck${EXECUTABLE_EXTENSION} ${CPPCHECK_ARGS} COMMENT "running cppcheck")
+
+message(STATUS "  [X] ${PROJECT_NAME}.Format")
+add_custom_target(${PROJECT_NAME}.Format COMMAND ${CMAKE_BINARY_DIR}/bin/astyle${EXECUTABLE_EXTENSION} ${ASTYLE_ARGS} COMMENT "running astyle")
+
+message(STATUS "  [X] ${PROJECT_NAME}.GitCheck")
+add_custom_target(${PROJECT_NAME}.GitCheck COMMAND git diff --check HEAD^ COMMENT "running git check")
+
+# add custom target ${PROJECT_NAME}.Install to install project.
+message(STATUS "  [X] ${PROJECT_NAME}.Install")
+if (WIN32)
+  add_custom_target(${PROJECT_NAME}.Install "${CMAKE_COMMAND}" --build "${CMAKE_BINARY_DIR}" --target --config ${SWITCH_BUILD_TYPE} install DEPENDS ${PROJECT_NAME} COMMENT "Installing ${PROJECT_NAME}")
 else(UNIX)
   add_custom_target(${PROJECT_NAME}.Install "${CMAKE_COMMAND}" --build "${CMAKE_BINARY_DIR}" --target install -- -j8 DEPENDS ${PROJECT_NAME} COMMENT "Installing ${PROJECT_NAME}")
-  add_custom_target(${PROJECT_NAME}.Tests COMMAND ctest --output-on-failure -C ${TEST_TYPE} DEPENDS ${PROJECT_NAME}.Install)
 endif()
 
 find_package(Doxygen)
 if(DOXYGEN_FOUND)
-  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/.doxygen.txt ${CMAKE_CURRENT_BINARY_DIR}/doxygen.txt @ONLY)
+  message(STATUS "  [X] ${PROJECT_NAME}.ReferenceGuide")
   add_custom_target(${PROJECT_NAME}.ReferenceGuide ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/doxygen.txt WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/ReferenceGuide COMMENT "Doxygen Reference Guide generation" VERBATIM)
+else()
+  message(STATUS "  [ ] ${PROJECT_NAME}.ReferenceGuide")
 endif(DOXYGEN_FOUND)
+
+message(STATUS "  [X] ${PROJECT_NAME}.Tests")
+add_custom_target(${PROJECT_NAME}.Tests COMMAND ctest --output-on-failure -C ${SWITCH_BUILD_TYPE} DEPENDS ${PROJECT_NAME}.Install)
