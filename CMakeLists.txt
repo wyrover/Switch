@@ -41,6 +41,7 @@ endif()
 
 list(APPEND ASTYLE_ARGS
   --style=java
+  --lineend=linux
   --indent=spaces=2
   --attach-namespaces
   --attach-classes
