@@ -39,7 +39,7 @@ namespace Switch {
   /// };
   /// @endcode
   /// @ingroup Keywords
-#define _interface\
+#define _interface \
 : public Interface
 }
 
