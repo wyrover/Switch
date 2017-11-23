@@ -44,12 +44,11 @@ before_script:
 
 matrix:
   include:  
-    - env: TEST="Xcode 8.3 build, run unittests and publish to codecov"
+    - env: TEST="Xcode build, run unittests and publish to codecov"
       os: osx
       cache: ccache
-      osx_image: xcode8.3
       script: scripts/travis/build_xcode.sh
-      after_success: scripts/travis/publish_to_codecov.sh
+      #after_success: scripts/travis/publish_to_codecov.sh
 
     - env: TEST="clang build and run unittests"
       os: linux
